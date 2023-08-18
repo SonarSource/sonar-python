@@ -30,10 +30,10 @@ import static org.sonar.python.PythonTestUtils.getFirstDescendant;
 import static org.sonar.python.PythonTestUtils.getLastDescendant;
 import static org.sonar.python.PythonTestUtils.parse;
 
-public class MemberResolutionTest {
+class MemberResolutionTest {
 
   @Test
-  public void basic_method_resolution() {
+  void basic_method_resolution() {
     FileInput fileInput = parse(
       "class A():",
       "  def foo(self): pass",
@@ -47,7 +47,7 @@ public class MemberResolutionTest {
   }
 
   @Test
-  public void super_method_resolution() {
+  void super_method_resolution() {
     FileInput fileInput = parse(
       "class Base:",
       "  def __reduce__(self, p1, p2): pass",

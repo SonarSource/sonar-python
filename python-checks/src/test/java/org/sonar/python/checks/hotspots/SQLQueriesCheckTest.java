@@ -22,9 +22,9 @@ package org.sonar.python.checks.hotspots;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-public class SQLQueriesCheckTest {
+class SQLQueriesCheckTest {
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/hotspots/sqlQuery.py", new SQLQueriesCheck());
     PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/hotspots/sqlQueryNoDjango.py", new SQLQueriesCheck());
   }

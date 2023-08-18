@@ -24,10 +24,10 @@ import org.sonar.api.server.rule.RulesDefinition;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class PylintRulesDefinitionTest {
+class PylintRulesDefinitionTest {
 
   @Test
-  public void pylint_external_repository() {
+  void pylint_external_repository() {
     RulesDefinition.Context context = new RulesDefinition.Context();
     PylintRulesDefinition rulesDefinition = new PylintRulesDefinition();
     rulesDefinition.define(context);

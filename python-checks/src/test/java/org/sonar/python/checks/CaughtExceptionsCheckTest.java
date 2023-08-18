@@ -23,15 +23,15 @@ import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.quickfix.PythonQuickFixVerifier;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-public class CaughtExceptionsCheckTest {
+class CaughtExceptionsCheckTest {
 
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/caughtExceptions.py", new CaughtExceptionsCheck());
   }
 
   @Test
-  public void quickFixTest() {
+  void quickFixTest() {
     var check = new CaughtExceptionsCheck();
     var before = "class CustomException:\n" +
       "  ...\n" +
@@ -58,7 +58,7 @@ public class CaughtExceptionsCheckTest {
   }
 
   @Test
-  public void quickFixIPythonTest() {
+  void quickFixIPythonTest() {
     var check = new CaughtExceptionsCheck();
     var before = "#SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER\n" +
       "class CustomException:\n" +
@@ -89,7 +89,7 @@ public class CaughtExceptionsCheckTest {
   }
 
   @Test
-  public void exceptionWithEmptyParenthesisQuickFixTest() {
+  void exceptionWithEmptyParenthesisQuickFixTest() {
     var check = new CaughtExceptionsCheck();
     var before = "class CustomException():\n" +
       "  ...\n" +
@@ -116,7 +116,7 @@ public class CaughtExceptionsCheckTest {
   }
 
   @Test
-  public void exceptionWithNotEmptyParenthesisQuickFixTest() {
+  void exceptionWithNotEmptyParenthesisQuickFixTest() {
     var check = new CaughtExceptionsCheck();
     var before = "class AbcEx:\n" +
       "    ...\n" +

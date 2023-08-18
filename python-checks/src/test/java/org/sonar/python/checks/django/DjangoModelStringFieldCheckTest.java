@@ -23,15 +23,15 @@ import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.quickfix.PythonQuickFixVerifier;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-public class DjangoModelStringFieldCheckTest {
+class DjangoModelStringFieldCheckTest {
 
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/django/djangoModelStringFieldCheck.py", new DjangoModelStringFieldCheck());
   }
 
   @Test
-  public void replaceQuickFixTest() {
+  void replaceQuickFixTest() {
     var check = new DjangoModelStringFieldCheck();
     var before = "from django.db import models\n" +
       "class NullFieldsModel(models.Model):\n" +
@@ -45,7 +45,7 @@ public class DjangoModelStringFieldCheckTest {
   }
 
   @Test
-  public void removeQuickFixTest() {
+  void removeQuickFixTest() {
     var check = new DjangoModelStringFieldCheck();
     var before = "from django.db import models\n" +
       "class NullFieldsModel(models.Model):\n" +

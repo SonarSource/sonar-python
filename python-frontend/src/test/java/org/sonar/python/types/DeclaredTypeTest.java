@@ -49,14 +49,14 @@ import static org.sonar.python.types.InferredTypes.STR;
 import static org.sonar.python.types.InferredTypes.anyType;
 import static org.sonar.python.types.InferredTypes.or;
 
-public class DeclaredTypeTest {
+class DeclaredTypeTest {
 
   private final ClassSymbolImpl a = new ClassSymbolImpl("a", "a");
   private final ClassSymbolImpl b = new ClassSymbolImpl("b", "b");
   private final ClassSymbolImpl c = new ClassSymbolImpl("c", "c");
 
   @Test
-  public void isIdentityComparableWith() {
+  void isIdentityComparableWith() {
     DeclaredType aType = new DeclaredType(a);
     DeclaredType bType = new DeclaredType(b);
     DeclaredType cType = new DeclaredType(c);
@@ -72,7 +72,7 @@ public class DeclaredTypeTest {
   }
 
   @Test
-  public void member() {
+  void member() {
     ClassSymbolImpl x = new ClassSymbolImpl("x", "x");
     SymbolImpl foo = new SymbolImpl("foo", null);
     x.addMembers(singletonList(foo));
@@ -107,27 +107,27 @@ public class DeclaredTypeTest {
   }
 
   @Test
-  public void test_toString() {
+  void test_toString() {
     assertThat(new DeclaredType(a)).hasToString("DeclaredType(a)");
     assertThat(new DeclaredType(a, Collections.singletonList(new DeclaredType(b)))).hasToString("DeclaredType(a[b])");
     assertThat(new DeclaredType(a, Arrays.asList(new DeclaredType(b), new DeclaredType(c)))).hasToString("DeclaredType(a[b, c])");
   }
 
   @Test
-  public void test_canOnlyBe() {
+  void test_canOnlyBe() {
     assertThat(new DeclaredType(a).canOnlyBe("a")).isFalse();
     assertThat(new DeclaredType(b).canOnlyBe("a")).isFalse();
   }
 
   @Test
-  public void test_canBeOrExtend() {
+  void test_canBeOrExtend() {
     ClassSymbolImpl x = new ClassSymbolImpl("x", "x");
     assertThat(new DeclaredType(x).canBeOrExtend("x")).isTrue();
     assertThat(new DeclaredType(x).canBeOrExtend("y")).isTrue();
   }
 
   @Test
-  public void test_isCompatibleWith() {
+  void test_isCompatibleWith() {
     ClassSymbol x1 = lastClassSymbol(
       "class X1:",
       "  def foo(): ..."
@@ -147,7 +147,7 @@ public class DeclaredTypeTest {
   }
 
   @Test
-  public void test_mustBeOrExtend() {
+  void test_mustBeOrExtend() {
     ClassSymbolImpl x1 = new ClassSymbolImpl("x1", "x1");
     ClassSymbolImpl x2 = new ClassSymbolImpl("x2", "x2");
     x2.addSuperClass(x1);
@@ -175,13 +175,13 @@ public class DeclaredTypeTest {
   }
 
   @Test
-  public void test_getClass() {
+  void test_getClass() {
     ClassSymbolImpl x1 = new ClassSymbolImpl("x1", "x1");
     assertThat(new DeclaredType(x1).getTypeClass()).isEqualTo(x1);
   }
 
   @Test
-  public void test_equals() {
+  void test_equals() {
     DeclaredType aType = new DeclaredType(a);
     assertThat(aType)
       .isEqualTo(aType)
@@ -199,7 +199,7 @@ public class DeclaredTypeTest {
   }
 
   @Test
-  public void test_hashCode() {
+  void test_hashCode() {
     DeclaredType aType = new DeclaredType(a);
     assertThat(aType.hashCode()).isEqualTo(new DeclaredType(a).hashCode());
     assertThat(aType.hashCode()).isNotEqualTo(new DeclaredType(b).hashCode());
@@ -211,7 +211,7 @@ public class DeclaredTypeTest {
   }
 
   @Test
-  public void test_fromInferredType() {
+  void test_fromInferredType() {
     assertThat(fromInferredType(anyType())).isEqualTo(anyType());
     assertThat(fromInferredType(INT)).isEqualTo(DECL_INT);
     assertThat(fromInferredType(DECL_INT)).isEqualTo(DECL_INT);
@@ -219,7 +219,7 @@ public class DeclaredTypeTest {
   }
 
   @Test
-  public void test_resolveDeclaredMember() {
+  void test_resolveDeclaredMember() {
     ClassSymbolImpl typeClassX = new ClassSymbolImpl("x", "x");
     SymbolImpl fooX = new SymbolImpl("foo", "x.foo");
     typeClassX.addMembers(Collections.singletonList(fooX));
@@ -241,7 +241,7 @@ public class DeclaredTypeTest {
   }
 
   @Test
-  public void test_hasUnresolvedHierarchy() {
+  void test_hasUnresolvedHierarchy() {
     ClassSymbolImpl typeClassX = new ClassSymbolImpl("x", "x");
     DeclaredType declaredTypeX = new DeclaredType(typeClassX);
     assertThat(declaredTypeX.hasUnresolvedHierarchy()).isFalse();
@@ -253,7 +253,7 @@ public class DeclaredTypeTest {
   }
 
   @Test
-  public void test_generic_collections() {
+  void test_generic_collections() {
     assertThat(lastExpression(
       "def f(x: list):",
       "  x"

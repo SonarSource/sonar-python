@@ -22,20 +22,20 @@ package org.sonar.python.checks;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-public class UnusedFunctionParameterCheckTest {
+class UnusedFunctionParameterCheckTest {
 
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/unusedFunctionParameter/unusedFunctionParameter.py", new UnusedFunctionParameterCheck());
   }
 
   @Test
-  public void test_conftest() {
+  void test_conftest() {
     PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/unusedFunctionParameter/conftest.py", new UnusedFunctionParameterCheck());
   }
 
   @Test
-  public void test_test_file() {
+  void test_test_file() {
     PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/unusedFunctionParameter/test_something.py", new UnusedFunctionParameterCheck());
   }
 

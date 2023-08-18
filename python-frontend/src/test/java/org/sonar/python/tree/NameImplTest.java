@@ -29,10 +29,10 @@ import org.sonar.python.types.InferredTypes;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 
-public class NameImplTest {
+class NameImplTest {
 
   @Test
-  public void type() {
+  void type() {
     Token token = new TokenImpl(mock(com.sonar.sslr.api.Token.class));
     NameImpl name = new NameImpl(token, true);
     assertThat(name.type()).isEqualTo(InferredTypes.anyType());
@@ -44,7 +44,7 @@ public class NameImplTest {
   }
 
   @Test
-  public void type_of_boolean() {
+  void type_of_boolean() {
     assertThat(PythonTestUtils.lastExpressionInFunction("True").type()).isEqualTo(InferredTypes.BOOL);
     assertThat(PythonTestUtils.lastExpressionInFunction("False").type()).isEqualTo(InferredTypes.BOOL);
 

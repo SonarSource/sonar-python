@@ -25,17 +25,17 @@ import org.sonar.python.parser.RuleTest;
 
 import static org.sonar.python.parser.PythonParserAssert.assertThat;
 
-public class PythonV3Test extends RuleTest {
+class PythonV3Test extends RuleTest {
 
   @Test
-  public void ellipsis(){
+  void ellipsis(){
     setRootRule(PythonGrammar.TEST);
     assertThat(p).matches("...");
     assertThat(p).matches("x[...]");
   }
 
   @Test
-  public void matrix_multiplication(){
+  void matrix_multiplication(){
     setRootRule(PythonGrammar.STATEMENT);
     assertThat(p)
       .matches("a = b @ c")
@@ -45,7 +45,7 @@ public class PythonV3Test extends RuleTest {
   }
 
   @Test
-  public void function_declaration(){
+  void function_declaration(){
     setRootRule(PythonGrammar.FUNCDEF);
     assertThat(p).matches("def fun()->'Returns some value': pass");
     assertThat(p).matches("def fun(count:'Number of smth'=1, value:'Value of smth', type:Type): pass");
@@ -56,7 +56,7 @@ public class PythonV3Test extends RuleTest {
   }
 
   @Test
-  public void asyncAndAwait() {
+  void asyncAndAwait() {
     setRootRule(PythonGrammar.FUNCDEF);
     assertThat(p).matches("async def fun(): pass");
     assertThat(p).matches("@someAnnotation\nasync def fun(): pass");
@@ -78,7 +78,7 @@ public class PythonV3Test extends RuleTest {
   }
 
   @Test
-  public void yield_from(){
+  void yield_from(){
     setRootRule(PythonGrammar.YIELD_EXPR);
     assertThat(p).matches("yield");
     assertThat(p).matches("yield from foo");
@@ -87,7 +87,7 @@ public class PythonV3Test extends RuleTest {
   }
 
   @Test
-  public void function_star_parameters(){
+  void function_star_parameters(){
     setRootRule(PythonGrammar.TYPEDARGSLIST);
 
     assertThat(p)
@@ -155,7 +155,7 @@ public class PythonV3Test extends RuleTest {
   }
 
   @Test
-  public void unpacking_operations() {
+  void unpacking_operations() {
     setRootRule(PythonGrammar.ARGLIST);
 
     assertThat(p)

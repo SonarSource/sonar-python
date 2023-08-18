@@ -19,29 +19,37 @@
  */
 package org.sonar.plugins.python.parser;
 
+import java.io.InputStream;
 import javax.xml.stream.XMLStreamException;
 import org.codehaus.staxmate.in.SMHierarchicCursor;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.parser.StaxParser.XmlStreamHandler;
 
-public class StaxParserTest {
+class StaxParserTest {
 
   @Test
-  public void test_XML_with_DTD() throws XMLStreamException {
+  void test_XML_with_DTD() throws XMLStreamException {
     StaxParser parser = new StaxParser(getTestHandler());
-    parser.parse(getClass().getClassLoader().getResourceAsStream("org/sonar/plugins/python/parser/dtd-test.xml"));
+    InputStream stream = getClass().getClassLoader().getResourceAsStream("org/sonar/plugins/python/parser/dtd-test.xml");
+    Assertions.assertNotNull(stream);
+    Assertions.assertDoesNotThrow(() -> parser.parse(stream));
   }
 
   @Test
-  public void test_XML_with_XSD() throws XMLStreamException {
+  void test_XML_with_XSD() throws XMLStreamException {
     StaxParser parser = new StaxParser(getTestHandler());
-    parser.parse(getClass().getClassLoader().getResourceAsStream("org/sonar/plugins/python/parser/xsd-test.xml"));
+    InputStream stream = getClass().getClassLoader().getResourceAsStream("org/sonar/plugins/python/parser/xsd-test.xml");
+    Assertions.assertNotNull(stream);
+    Assertions.assertDoesNotThrow(() -> parser.parse(stream));
   }
 
   @Test
-  public void test_XML_with_XSD_and_ampersand() throws XMLStreamException {
+  void test_XML_with_XSD_and_ampersand() throws XMLStreamException {
     StaxParser parser = new StaxParser(getTestHandler());
-    parser.parse(getClass().getClassLoader().getResourceAsStream("org/sonar/plugins/python/parser/xsd-test-with-entity.xml"));
+    InputStream stream = getClass().getClassLoader().getResourceAsStream("org/sonar/plugins/python/parser/xsd-test-with-entity.xml");
+    Assertions.assertNotNull(stream);
+    Assertions.assertDoesNotThrow(() -> parser.parse(stream));
   }
 
   private static XmlStreamHandler getTestHandler() {

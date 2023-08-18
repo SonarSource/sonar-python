@@ -121,12 +121,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.Assertions.fail;
 
-public class PythonTreeMakerTest extends RuleTest {
+class PythonTreeMakerTest extends RuleTest {
 
   private final PythonTreeMaker treeMaker = new PythonTreeMaker();
 
   @Test
-  public void file_input() {
+  void file_input() {
     FileInput fileInput = parse("", treeMaker::fileInput);
     assertThat(fileInput.statements()).isNull();
     assertThat(fileInput.docstring()).isNull();
@@ -148,7 +148,7 @@ public class PythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void variadic_is_kind() {
+  void variadic_is_kind() {
     FileInput fileInput = parse("def foo(): pass", treeMaker::fileInput);
     assertThat(fileInput.is(Tree.Kind.FILE_INPUT, Tree.Kind.STATEMENT_LIST)).isTrue();
     FunctionDef functionDef = (FunctionDef) fileInput.statements().statements().get(0);
@@ -157,7 +157,7 @@ public class PythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void unexpected_expression_should_throw_an_exception() {
+  void unexpected_expression_should_throw_an_exception() {
     try {
       parse("", treeMaker::expression);
       fail("unexpected ASTNode type for expression should not succeed to be translated to Strongly typed AST");
@@ -167,7 +167,7 @@ public class PythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void verify_expected_statement() {
+  void verify_expected_statement() {
     Map<String, Class<? extends Tree>> testData = new HashMap<>();
     testData.put("pass", PassStatement.class);
     testData.put("print 'foo'", PrintStatement.class);
@@ -210,7 +210,7 @@ public class PythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void IfStatement() {
+  void IfStatement() {
     setRootRule(PythonGrammar.IF_STMT);
     IfStatement pyIfStatementTree = parse("if x: pass", treeMaker::ifStatement);
     assertThat(pyIfStatementTree.keyword().value()).isEqualTo("if");
@@ -266,7 +266,7 @@ public class PythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void printStatement() {
+  void printStatement() {
     setRootRule(PythonGrammar.PRINT_STMT);
     AstNode astNode = p.parse("print 'foo'");
     StatementWithSeparator statementWithSeparator = new StatementWithSeparator(astNode, null);
@@ -293,7 +293,7 @@ public class PythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void execStatement() {
+  void execStatement() {
     setRootRule(PythonGrammar.EXEC_STMT);
     AstNode astNode = p.parse("exec 'foo'");
     StatementWithSeparator statementWithSeparator = new StatementWithSeparator(astNode, null);
@@ -331,7 +331,7 @@ public class PythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void assertStatement() {
+  void assertStatement() {
     setRootRule(PythonGrammar.ASSERT_STMT);
     AstNode astNode = p.parse("assert x");
     StatementWithSeparator statementWithSeparator = new StatementWithSeparator(astNode, null);
@@ -353,7 +353,7 @@ public class PythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void passStatement() {
+  void passStatement() {
     setRootRule(PythonGrammar.PASS_STMT);
     AstNode astNode = p.parse("pass");
     StatementWithSeparator statementWithSeparator = new StatementWithSeparator(astNode, null);
@@ -364,7 +364,7 @@ public class PythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void delStatement() {
+  void delStatement() {
     setRootRule(PythonGrammar.DEL_STMT);
     AstNode astNode = p.parse("del foo");
     StatementWithSeparator statementWithSeparator = new StatementWithSeparator(astNode, null);
@@ -393,7 +393,7 @@ public class PythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void returnStatement() {
+  void returnStatement() {
     setRootRule(PythonGrammar.RETURN_STMT);
     AstNode astNode = p.parse("return foo");
     StatementWithSeparator statementWithSeparator = new StatementWithSeparator(astNode, null);
@@ -441,7 +441,7 @@ public class PythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void yieldStatement() {
+  void yieldStatement() {
     setRootRule(PythonGrammar.YIELD_STMT);
     AstNode astNode = p.parse("yield foo");
     StatementWithSeparator statementWithSeparator = new StatementWithSeparator(astNode, null);
@@ -490,7 +490,7 @@ public class PythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void raiseStatement() {
+  void raiseStatement() {
     setRootRule(PythonGrammar.RAISE_STMT);
     AstNode astNode = p.parse("raise foo");
     StatementWithSeparator statementWithSeparator = new StatementWithSeparator(astNode, null);
@@ -534,7 +534,7 @@ public class PythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void breakStatement() {
+  void breakStatement() {
     setRootRule(PythonGrammar.BREAK_STMT);
     AstNode astNode = p.parse("break");
     StatementWithSeparator statementWithSeparator = new StatementWithSeparator(astNode, null);
@@ -545,7 +545,7 @@ public class PythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void continueStatement() {
+  void continueStatement() {
     setRootRule(PythonGrammar.CONTINUE_STMT);
     AstNode astNode = p.parse("continue");
     StatementWithSeparator statementWithSeparator = new StatementWithSeparator(astNode, null);
@@ -556,7 +556,7 @@ public class PythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void importStatement() {
+  void importStatement() {
     setRootRule(PythonGrammar.IMPORT_STMT);
     AstNode astNode = p.parse("import foo");
     StatementWithSeparator statementWithSeparator = new StatementWithSeparator(astNode, null);
@@ -616,7 +616,7 @@ public class PythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void importFromStatement() {
+  void importFromStatement() {
     setRootRule(PythonGrammar.IMPORT_STMT);
     AstNode astNode = p.parse("from foo import f");
     StatementWithSeparator statementWithSeparator = new StatementWithSeparator(astNode, null);
@@ -706,7 +706,7 @@ public class PythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void globalStatement() {
+  void globalStatement() {
     setRootRule(PythonGrammar.GLOBAL_STMT);
     AstNode astNode = p.parse("global foo");
     StatementWithSeparator statementWithSeparator = new StatementWithSeparator(astNode, null);
@@ -727,7 +727,7 @@ public class PythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void nonlocalStatement() {
+  void nonlocalStatement() {
     setRootRule(PythonGrammar.NONLOCAL_STMT);
     AstNode astNode = p.parse("nonlocal foo");
     StatementWithSeparator statementWithSeparator = new StatementWithSeparator(astNode, null);
@@ -748,7 +748,7 @@ public class PythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void funcdef_statement() {
+  void funcdef_statement() {
     setRootRule(PythonGrammar.FUNCDEF);
     AstNode astNode = p.parse("def func(): pass");
     FunctionDef functionDef = treeMaker.funcDefStatement(astNode);
@@ -877,7 +877,7 @@ public class PythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void decorators() {
+  void decorators() {
     FunctionDef functionDef = funcDef("@foo()\n@bar(1)\ndef func(x): pass");
     List<Decorator> decorators = functionDef.decorators();
     assertThat(decorators).hasSize(2);
@@ -924,7 +924,7 @@ public class PythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void classdef_statement() {
+  void classdef_statement() {
     setRootRule(PythonGrammar.CLASSDEF);
     AstNode astNode = p.parse("class clazz(Parent): pass");
     ClassDef classDef = treeMaker.classDefStatement(astNode);
@@ -977,7 +977,7 @@ public class PythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void for_statement() {
+  void for_statement() {
     setRootRule(PythonGrammar.FOR_STMT);
     AstNode astNode = p.parse("for foo in bar: pass");
     ForStatement forStatement = treeMaker.forStatement(astNode);
@@ -1039,7 +1039,7 @@ public class PythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void while_statement() {
+  void while_statement() {
     setRootRule(PythonGrammar.WHILE_STMT);
     AstNode astNode = p.parse("while foo : pass");
     WhileStatementImpl whileStatement = treeMaker.whileStatement(astNode);
@@ -1090,7 +1090,7 @@ public class PythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void expression_statement() {
+  void expression_statement() {
     setRootRule(PythonGrammar.EXPRESSION_STMT);
     AstNode astNode = p.parse("'foo'");
     StatementWithSeparator statementWithSeparator = new StatementWithSeparator(astNode, null);
@@ -1106,7 +1106,7 @@ public class PythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void assignement_statement() {
+  void assignement_statement() {
     setRootRule(PythonGrammar.EXPRESSION_STMT);
     AstNode astNode = p.parse("x = y");
     StatementWithSeparator statementWithSeparator = new StatementWithSeparator(astNode, null);
@@ -1185,7 +1185,7 @@ public class PythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void annotated_assignment() {
+  void annotated_assignment() {
     setRootRule(PythonGrammar.EXPRESSION_STMT);
     AstNode astNode = p.parse("x : string = 1");
     StatementWithSeparator statementWithSeparator = new StatementWithSeparator(astNode, null);
@@ -1233,7 +1233,7 @@ public class PythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void assignement_expression() {
+  void assignement_expression() {
     setRootRule(PythonGrammar.NAMED_EXPR_TEST);
     AstNode astNode = p.parse("b := 12");
     Expression expression = treeMaker.expression(astNode);
@@ -1293,7 +1293,7 @@ public class PythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void compound_assignement_statement() {
+  void compound_assignement_statement() {
     setRootRule(PythonGrammar.EXPRESSION_STMT);
     AstNode astNode = p.parse("x += y");
     StatementWithSeparator statementWithSeparator = new StatementWithSeparator(astNode, null);
@@ -1334,7 +1334,7 @@ public class PythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void try_statement() {
+  void try_statement() {
     setRootRule(PythonGrammar.TRY_STMT);
     AstNode astNode = p.parse("try: pass\nexcept Error: pass");
     TryStatement tryStatement = treeMaker.tryStatement(astNode);
@@ -1416,7 +1416,7 @@ public class PythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void async_statement() {
+  void async_statement() {
     setRootRule(PythonGrammar.ASYNC_STMT);
     AstNode astNode = p.parse("async for foo in bar: pass");
     ForStatement pyForStatementTree = new PythonTreeMaker().forStatement(astNode);
@@ -1442,7 +1442,7 @@ public class PythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void with_statement() {
+  void with_statement() {
     setRootRule(PythonGrammar.WITH_STMT);
     WithStatement withStatement = parse("with foo : pass", treeMaker::withStatement);
     assertThat(withStatement.firstToken().value()).isEqualTo("with");
@@ -1479,7 +1479,7 @@ public class PythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void with_stmt_parenthesized_context_manager() {
+  void with_stmt_parenthesized_context_manager() {
     setRootRule(PythonGrammar.WITH_STMT);
     WithStatement withStatement = parse(
       "with (open(\"a_really_long_foo\") as foo,\n" +
@@ -1491,7 +1491,7 @@ public class PythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void verify_expected_expression() {
+  void verify_expected_expression() {
     Map<String, Class<? extends Tree>> testData = new HashMap<>();
     testData.put("foo", Name.class);
     testData.put("foo.bar", QualifiedExpression.class);
@@ -1508,7 +1508,7 @@ public class PythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void call_expression() {
+  void call_expression() {
     setRootRule(PythonGrammar.EXPR);
     CallExpression callExpression = (CallExpression) parse("foo()", treeMaker::expression);
     ArgList argList = callExpression.argumentList();
@@ -1564,7 +1564,7 @@ public class PythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void combinations_with_call_expressions() {
+  void combinations_with_call_expressions() {
     setRootRule(PythonGrammar.TEST);
 
     CallExpression nestingCall = (CallExpression) parse("foo('a').bar(42)", treeMaker::expression);
@@ -1586,7 +1586,7 @@ public class PythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void attributeRef_expression() {
+  void attributeRef_expression() {
     setRootRule(PythonGrammar.TEST);
     QualifiedExpression qualifiedExpression = (QualifiedExpression) parse("foo.bar", treeMaker::expression);
     assertThat(qualifiedExpression.name().name()).isEqualTo("bar");
@@ -1614,7 +1614,7 @@ public class PythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void argument() {
+  void argument() {
     setRootRule(PythonGrammar.ARGUMENT);
     RegularArgument argumentTree = (RegularArgument) parse("foo", treeMaker::argument);
     assertThat(argumentTree.equalToken()).isNull();
@@ -1644,7 +1644,7 @@ public class PythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void binary_expressions() {
+  void binary_expressions() {
     setRootRule(PythonGrammar.TEST);
 
     BinaryExpression simplePlus = binaryExpression("a + b");
@@ -1693,7 +1693,7 @@ public class PythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void in_expressions() {
+  void in_expressions() {
     setRootRule(PythonGrammar.TEST);
 
     InExpression in = (InExpression) binaryExpression("1 in [a]");
@@ -1711,7 +1711,7 @@ public class PythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void is_expressions() {
+  void is_expressions() {
     setRootRule(PythonGrammar.TEST);
 
     IsExpression is = (IsExpression) binaryExpression("a is 1");
@@ -1729,7 +1729,7 @@ public class PythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void starred_expression() {
+  void starred_expression() {
     setRootRule(PythonGrammar.STAR_EXPR);
     UnpackingExpression starred = (UnpackingExpression) parse("*a", treeMaker::expression);
     assertThat(starred.getKind()).isEqualTo(Tree.Kind.UNPACKING_EXPR);
@@ -1739,7 +1739,7 @@ public class PythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void await_expression() {
+  void await_expression() {
     setRootRule(PythonGrammar.TEST);
     AwaitExpression expr = (AwaitExpression) parse("await x", treeMaker::expression);
     assertThat(expr.getKind()).isEqualTo(Tree.Kind.AWAIT);
@@ -1754,7 +1754,7 @@ public class PythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void subscription_expressions() {
+  void subscription_expressions() {
     setRootRule(PythonGrammar.TEST);
 
     SubscriptionExpression expr = (SubscriptionExpression) parse("x[a]", treeMaker::expression);
@@ -1780,7 +1780,7 @@ public class PythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void slice_expressions() {
+  void slice_expressions() {
     setRootRule(PythonGrammar.TEST);
 
     SliceExpression expr = (SliceExpression) parse("x[a:b:c]", treeMaker::expression);
@@ -1800,14 +1800,14 @@ public class PythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void qualified_with_slice() {
+  void qualified_with_slice() {
     setRootRule(PythonGrammar.TEST);
     QualifiedExpression qualifiedWithSlice = (QualifiedExpression) parse("x[a:b].foo", treeMaker::expression);
     assertThat(qualifiedWithSlice.qualifier().getKind()).isEqualTo(Tree.Kind.SLICE_EXPR);
   }
 
   @Test
-  public void slice() {
+  void slice() {
     setRootRule(PythonGrammar.SUBSCRIPT);
 
     SliceItem slice = parse("a:b:c", treeMaker::sliceItem);
@@ -1849,7 +1849,7 @@ public class PythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void lambda_expr() {
+  void lambda_expr() {
     setRootRule(PythonGrammar.LAMBDEF);
     LambdaExpression lambdaExpressionTree = parse("lambda x: x", treeMaker::lambdaExpression);
     assertThat(lambdaExpressionTree.expression()).isInstanceOf(Name.class);
@@ -1921,7 +1921,7 @@ public class PythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void numeric_literal_expression() {
+  void numeric_literal_expression() {
     testNumericLiteral("0", 0L);
     testNumericLiteral("12", 12L);
     testNumericLiteral("12L", 12L);
@@ -1946,7 +1946,7 @@ public class PythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void string_literal_expression() {
+  void string_literal_expression() {
     setRootRule(PythonGrammar.ATOM);
     assertStringLiteral("''", "");
     assertStringLiteral("'\"'", "\"");
@@ -1964,7 +1964,7 @@ public class PythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void string_interpolation() {
+  void string_interpolation() {
     setRootRule(PythonGrammar.ATOM);
     Expression expr = parseInterpolated("{x}").expression();
     assertThat(expr.is(Tree.Kind.NAME)).isTrue();
@@ -2022,7 +2022,7 @@ public class PythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void string_interpolation_equal_specifier() {
+  void string_interpolation_equal_specifier() {
     setRootRule(PythonGrammar.ATOM);
     Expression exp = parse("F'{bar=}'", treeMaker::expression);
     StringLiteral stringLiteral = (StringLiteral) exp;
@@ -2055,7 +2055,7 @@ public class PythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void string_interpolation_nested_expressions_in_format_specifier() {
+  void string_interpolation_nested_expressions_in_format_specifier() {
     setRootRule(PythonGrammar.ATOM);
     Expression exp = parse("f'{3.1416:{width}.{prec * 5}}'", treeMaker::expression);
     StringLiteral stringLiteral = (StringLiteral) exp;
@@ -2075,7 +2075,7 @@ public class PythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void string_tuple() {
+  void string_tuple() {
     setRootRule(PythonGrammar.ATOM);
     var stringLiteral = (StringLiteral) parse("f\"a = {h,w,a == 100,foo(),(asd, asadas)}\"", treeMaker::expression);
     assertThat(stringLiteral.stringElements()).hasSize(1);
@@ -2144,7 +2144,7 @@ public class PythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void multiline_string_literal_expression() {
+  void multiline_string_literal_expression() {
     setRootRule(PythonGrammar.ATOM);
     Expression parse = parse("('Hello \\ ' #Noncompliant\n            'world')", treeMaker::expression);
     assertThat(parse.is(Tree.Kind.PARENTHESIZED)).isTrue();
@@ -2162,7 +2162,7 @@ public class PythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void list_literal() {
+  void list_literal() {
     setRootRule(PythonGrammar.ATOM);
     Expression parse = parse("[1, \"foo\"]", treeMaker::expression);
     assertThat(parse.is(Tree.Kind.LIST_LITERAL)).isTrue();
@@ -2182,7 +2182,7 @@ public class PythonTreeMakerTest extends RuleTest {
 
 
   @Test
-  public void list_comprehension() {
+  void list_comprehension() {
     setRootRule(PythonGrammar.TEST);
     ComprehensionExpression comprehension =
       (ComprehensionExpression) parse("[x+y for x,y in [(42, 43)]]", treeMaker::expression);
@@ -2206,7 +2206,7 @@ public class PythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void async_list_comprehension() {
+  void async_list_comprehension() {
     setRootRule(PythonGrammar.TEST);
     ComprehensionExpression comprehension =
       (ComprehensionExpression) parse("[i async for i in aiter() if i % 2]", treeMaker::expression);
@@ -2217,7 +2217,7 @@ public class PythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void list_comprehension_with_if() {
+  void list_comprehension_with_if() {
     setRootRule(PythonGrammar.TEST);
     ComprehensionExpression comprehension =
       (ComprehensionExpression) parse("[x+1 for x in [42, 43] if x%2==0]", treeMaker::expression);
@@ -2232,7 +2232,7 @@ public class PythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void list_comprehension_with_nested_for() {
+  void list_comprehension_with_nested_for() {
     setRootRule(PythonGrammar.TEST);
     ComprehensionExpression comprehension =
       (ComprehensionExpression) parse("[x+y for x in [42, 43] for y in ('a', 0)]", treeMaker::expression);
@@ -2243,7 +2243,7 @@ public class PythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void parenthesized_expression() {
+  void parenthesized_expression() {
     setRootRule(PythonGrammar.TEST);
     ParenthesizedExpression parenthesized = (ParenthesizedExpression) parse("(42)", treeMaker::expression);
     assertThat(parenthesized.getKind()).isEqualTo(Tree.Kind.PARENTHESIZED);
@@ -2258,7 +2258,7 @@ public class PythonTreeMakerTest extends RuleTest {
 
 
   @Test
-  public void generator_expression() {
+  void generator_expression() {
     setRootRule(PythonGrammar.TEST);
     ComprehensionExpression generator = (ComprehensionExpression) parse("(x*x for x in range(10))", treeMaker::expression);
     assertThat(generator.getKind()).isEqualTo(Tree.Kind.GENERATOR_EXPR);
@@ -2289,7 +2289,7 @@ public class PythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void tuples() {
+  void tuples() {
     Tuple empty = parseTuple("()");
     assertThat(empty.getKind()).isEqualTo(Tree.Kind.TUPLE);
     assertThat(empty.firstToken().value()).isEqualTo("(");
@@ -2332,14 +2332,14 @@ public class PythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void unary_expression() {
+  void unary_expression() {
     assertUnaryExpression("-", Tree.Kind.UNARY_MINUS);
     assertUnaryExpression("+", Tree.Kind.UNARY_PLUS);
     assertUnaryExpression("~", Tree.Kind.BITWISE_COMPLEMENT);
   }
 
   @Test
-  public void not() {
+  void not() {
     setRootRule(PythonGrammar.TEST);
     Expression exp = parse("not 1", treeMaker::expression);
     assertThat(exp).isInstanceOf(UnaryExpression.class);
@@ -2348,7 +2348,7 @@ public class PythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void conditional_expression() {
+  void conditional_expression() {
     setRootRule(PythonGrammar.TEST);
     ConditionalExpression tree = (ConditionalExpression) parse("1 if condition else 2", treeMaker::expression);
     assertThat(tree.firstToken().value()).isEqualTo("1");
@@ -2371,7 +2371,7 @@ public class PythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void dictionary_literal() {
+  void dictionary_literal() {
     setRootRule(PythonGrammar.ATOM);
     DictionaryLiteral tree = (DictionaryLiteral) parse("{'key': 'value'}", treeMaker::expression);
     assertThat(tree.firstToken().value()).isEqualTo("{");
@@ -2400,7 +2400,7 @@ public class PythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void dict_comprehension() {
+  void dict_comprehension() {
     setRootRule(PythonGrammar.TEST);
     DictCompExpression comprehension =
       (DictCompExpression) parse("{x-1:y+1 for x,y in [(42,43)]}", treeMaker::expression);
@@ -2417,7 +2417,7 @@ public class PythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void set_literal() {
+  void set_literal() {
     setRootRule(PythonGrammar.ATOM);
     SetLiteral tree = (SetLiteral) parse("{ x }", treeMaker::expression);
     assertThat(tree.firstToken().value()).isEqualTo("{");
@@ -2443,7 +2443,7 @@ public class PythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void set_comprehension() {
+  void set_comprehension() {
     setRootRule(PythonGrammar.TEST);
     ComprehensionExpression comprehension =
       (ComprehensionExpression) parse("{x-1 for x in [42, 43]}", treeMaker::expression);
@@ -2459,7 +2459,7 @@ public class PythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void repr_expression() {
+  void repr_expression() {
     setRootRule(PythonGrammar.ATOM);
     ReprExpression reprExpressionTree = (ReprExpression) parse("`1`", treeMaker::expression);
     assertThat(reprExpressionTree.getKind()).isEqualTo(Tree.Kind.REPR);
@@ -2500,7 +2500,7 @@ public class PythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void ellipsis_expression() {
+  void ellipsis_expression() {
     setRootRule(PythonGrammar.ATOM);
     EllipsisExpression ellipsisExpressionTree = (EllipsisExpression) parse("...", treeMaker::expression);
     assertThat(ellipsisExpressionTree.getKind()).isEqualTo(Tree.Kind.ELLIPSIS);
@@ -2509,7 +2509,7 @@ public class PythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void none_expression() {
+  void none_expression() {
     setRootRule(PythonGrammar.ATOM);
     NoneExpression noneExpressionTree = (NoneExpression) parse("None", treeMaker::expression);
     assertThat(noneExpressionTree.getKind()).isEqualTo(Tree.Kind.NONE);
@@ -2518,7 +2518,7 @@ public class PythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void variables() {
+  void variables() {
     setRootRule(PythonGrammar.EXPR);
     Name name = (Name) parse("foo", treeMaker::expression);
     assertThat(name.isVariable()).isTrue();
@@ -2533,7 +2533,7 @@ public class PythonTreeMakerTest extends RuleTest {
 
 
   @Test
-  public void test_trivia() {
+  void test_trivia() {
     FileInput fileInput = parse("#A comment\npass", treeMaker::fileInput);
 
     assertThat(fileInput.firstToken().value()).isEqualTo("pass");
@@ -2550,7 +2550,7 @@ public class PythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void statements_separators() {
+  void statements_separators() {
     FileInput tree = parse("foo(); bar()\ntoto()", treeMaker::fileInput);
     List<Statement> statements = tree.statements().statements();
 
@@ -2593,7 +2593,7 @@ public class PythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void separators() {
+  void separators() {
     List<Tree.Kind> compoundStatements = Arrays.asList(Tree.Kind.FOR_STMT, Tree.Kind.WHILE_STMT, Tree.Kind.IF_STMT, Tree.Kind.ELSE_CLAUSE, Tree.Kind.CLASSDEF, Tree.Kind.FUNCDEF,
       Tree.Kind.TRY_STMT, Tree.Kind.EXCEPT_CLAUSE);
     File file = new File("src/test/resources/separator.py");
@@ -2620,7 +2620,7 @@ public class PythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void except_group() {
+  void except_group() {
     FileInput tree = parse("try:pass\nexcept* OSError:pass", treeMaker::fileInput);
     TryStatement tryStatement = (TryStatement) tree.statements().statements().get(0);
     assertThat(tryStatement.exceptClauses()).hasSize(1);
@@ -2643,7 +2643,7 @@ public class PythonTreeMakerTest extends RuleTest {
    * except* body cannot contain continue, break or return instruction
    */
   @Test
-  public void except_group_invalid_instruction() {
+  void except_group_invalid_instruction() {
     String code1 = "try:pass\n" +
       "except* OSError:\n" +
       "  continue";
@@ -2706,7 +2706,7 @@ public class PythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void except_group_multiple() {
+  void except_group_multiple() {
     FileInput tree = parse("try:pass\nexcept* OSError:pass\nexcept* ValueError:pass", treeMaker::fileInput);
     TryStatement tryStatement = (TryStatement) tree.statements().statements().get(0);
     assertThat(tryStatement.exceptClauses()).hasSize(2);

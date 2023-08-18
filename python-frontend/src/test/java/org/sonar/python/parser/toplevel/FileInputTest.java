@@ -19,22 +19,22 @@
  */
 package org.sonar.python.parser.toplevel;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.parser.RuleTest;
 
 import static org.sonar.python.parser.PythonParserAssert.assertThat;
 
-public class FileInputTest extends RuleTest {
+class FileInputTest extends RuleTest {
 
-  @Before
-  public void init() {
+  @BeforeEach
+  void init() {
     setRootRule(PythonGrammar.FILE_INPUT);
   }
 
   @Test
-  public void ok() {
+  void ok() {
     assertThat(p)
       .matches("print foo")
       .matches("print foo; print toto")

@@ -36,24 +36,24 @@ import static org.sonar.python.PythonTestUtils.lastExpression;
 import static org.sonar.python.PythonTestUtils.lastExpressionInFunction;
 import static org.sonar.python.PythonTestUtils.parse;
 
-public class ReachingDefinitionsAnalysisTest {
+class ReachingDefinitionsAnalysisTest {
   private final PythonFile file = Mockito.mock(PythonFile.class, "file1.py");
   ReachingDefinitionsAnalysis analysis = new ReachingDefinitionsAnalysis(file);
 
   @Test
-  public void valuesAtLocation_single_assignment() {
+  void valuesAtLocation_single_assignment() {
     Name x = (Name) lastExpressionInFunction("x = 42; x");
     assertThat(analysis.valuesAtLocation(x)).extracting(ReachingDefinitionsAnalysisTest::getValueAsString).containsExactly("42");
   }
 
   @Test
-  public void valuesAtLocation_multiple_assignments() {
+  void valuesAtLocation_multiple_assignments() {
     Name x = (Name) lastExpressionInFunction("x = 1; x = 2; x");
     assertThat(analysis.valuesAtLocation(x)).extracting(ReachingDefinitionsAnalysisTest::getValueAsString).containsExactly("2");
   }
 
   @Test
-  public void valuesAtLocation_branches() {
+  void valuesAtLocation_branches() {
     Name x = (Name) lastExpressionInFunction(
       "if p:",
       "  x = 1",
@@ -65,31 +65,31 @@ public class ReachingDefinitionsAnalysisTest {
   }
 
   @Test
-  public void valuesAtLocation_outside_function() {
+  void valuesAtLocation_outside_function() {
     Name x = (Name) lastExpression("x = 42; x");
     assertThat(analysis.valuesAtLocation(x)).isEmpty();
   }
 
   @Test
-  public void valuesAtLocation_invalid_cfg() {
+  void valuesAtLocation_invalid_cfg() {
     Name x = (Name) lastExpressionInFunction("x = 42", "break", "x");
     assertThat(analysis.valuesAtLocation(x)).isEmpty();
   }
 
   @Test
-  public void valuesAtLocation_no_name_assignment() {
+  void valuesAtLocation_no_name_assignment() {
     Name x = (Name) lastExpressionInFunction("x.foo = 42", "x");
     assertThat(analysis.valuesAtLocation(x)).isEmpty();
   }
 
   @Test
-  public void valuesAtLocation_assignment_lhs() {
+  void valuesAtLocation_assignment_lhs() {
     Name x = (Name) lastExpressionInFunction("x = y = 42", "x");
     assertThat(analysis.valuesAtLocation(x)).isEmpty();
   }
 
   @Test
-  public void loop_with_conditions() {
+  void loop_with_conditions() {
     FileInput fileInput = parse(
       "def f():",
       "  for i in range(3):",
@@ -120,7 +120,7 @@ public class ReachingDefinitionsAnalysisTest {
   }
 
   @Test
-  public void ignore_outer_scope() {
+  void ignore_outer_scope() {
     FileInput fileInput = parse(
       "def f():",
       "  x = 42",
@@ -132,13 +132,13 @@ public class ReachingDefinitionsAnalysisTest {
   }
 
   @Test
-  public void compound_assignments() {
+  void compound_assignments() {
     Name x = (Name) lastExpressionInFunction("x = 42; x += 1; x");
     assertThat(analysis.valuesAtLocation(x)).isEmpty();
   }
 
   @Test
-  public void try_stmt() {
+  void try_stmt() {
     Name x = (Name) lastExpressionInFunction(
       "x = 1",
       "try:",

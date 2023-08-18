@@ -23,12 +23,12 @@ import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-public class UnrestrictedOutboundCommunicationsCheckTest {
+class UnrestrictedOutboundCommunicationsCheckTest {
 
   final PythonCheck check = new UnrestrictedOutboundCommunicationsCheck();
 
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/cdk/unrestrictedOutboundCommunicationsCheck.py", check);
   }
 }

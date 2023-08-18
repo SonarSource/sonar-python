@@ -20,12 +20,12 @@
 package org.sonar.samples.python;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-public class CustomPythonVisitorCheckTest {
+class CustomPythonVisitorCheckTest {
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/customPythonVisitorCheck.py", new CustomPythonVisitorCheck());
   }
 }

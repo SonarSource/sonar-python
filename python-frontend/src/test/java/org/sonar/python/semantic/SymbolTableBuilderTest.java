@@ -51,7 +51,7 @@ import org.sonar.python.tree.TreeUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class SymbolTableBuilderTest {
+class SymbolTableBuilderTest {
   private static Map<String, FunctionDef> functionTreesByName = new HashMap<>();
   private static FileInput fileInput;
 
@@ -61,14 +61,14 @@ public class SymbolTableBuilderTest {
   }
 
   @BeforeAll
-  public static void init() {
+  static void init() {
     PythonVisitorContext context = TestPythonVisitorRunner.createContext(new File("src/test/resources/semantic/symbols2.py"));
     fileInput = context.rootTree();
     fileInput.accept(new TestVisitor());
   }
 
   @Test
-  public void global_variable() {
+  void global_variable() {
     Set<Symbol> moduleSymbols = fileInput.globalVariables();
     List<String> topLevelFunctions = Arrays.asList("function_with_local", "function_with_free_variable", "function_with_rebound_variable",
       "ref_in_interpolated", "print_var", "function_with_global_var", "func_wrapping_class", "function_with_unused_import",
@@ -94,7 +94,7 @@ public class SymbolTableBuilderTest {
   }
 
   @Test
-  public void local_variable() {
+  void local_variable() {
     FunctionDef functionTree = functionTreesByName.get("function_with_local");
     Map<String, Symbol> symbolByName = getSymbolByName(functionTree);
     assertThat(symbolByName.keySet()).containsOnly("a", "t2");
@@ -113,27 +113,27 @@ public class SymbolTableBuilderTest {
   }
 
   @Test
-  public void free_variable() {
+  void free_variable() {
     FunctionDef functionTree = functionTreesByName.get("function_with_free_variable");
     assertThat(functionTree.localVariables()).isEmpty();
   }
 
   @Test
-  public void rebound_variable() {
+  void rebound_variable() {
     FunctionDef functionTree = functionTreesByName.get("function_with_rebound_variable");
     Map<String, Symbol> symbolByName = getSymbolByName(functionTree);
     assertThat(symbolByName.keySet()).containsOnly("global_x");
   }
 
   @Test
-  public void simple_parameter() {
+  void simple_parameter() {
     FunctionDef functionTree = functionTreesByName.get("simple_parameter");
     Map<String, Symbol> symbolByName = getSymbolByName(functionTree);
     assertThat(symbolByName.keySet()).containsOnly("a");
   }
 
   @Test
-  public void multiple_assignment() {
+  void multiple_assignment() {
     FunctionDef functionTree = functionTreesByName.get("multiple_assignment");
     Map<String, Symbol> symbolByName = getSymbolByName(functionTree);
     assertThat(symbolByName.keySet()).containsOnly("x", "y");
@@ -147,7 +147,7 @@ public class SymbolTableBuilderTest {
   }
 
   @Test
-  public void tuple_assignment() {
+  void tuple_assignment() {
     FunctionDef functionTree = functionTreesByName.get("tuple_assignment");
     Map<String, Symbol> symbolByName = getSymbolByName(functionTree);
     assertThat(symbolByName.keySet()).containsOnly("x", "y");
@@ -161,19 +161,19 @@ public class SymbolTableBuilderTest {
   }
 
   @Test
-  public void function_with_global_var() {
+  void function_with_global_var() {
     FunctionDef functionTree = functionTreesByName.get("function_with_global_var");
     assertThat(functionTree.localVariables()).isEmpty();
   }
 
   @Test
-  public void function_with_nonlocal_var() {
+  void function_with_nonlocal_var() {
     FunctionDef functionTree = functionTreesByName.get("function_with_nonlocal_var");
     assertThat(functionTree.localVariables()).isEmpty();
   }
 
   @Test
-  public void function_with_nested_nonlocal_var() {
+  void function_with_nested_nonlocal_var() {
     FunctionDef functionTree = functionTreesByName.get("function_with_nested_nonlocal_var");
     Map<String, Symbol> symbolByName = getSymbolByName(functionTree);
     assertThat(symbolByName.keySet()).containsExactly("x", "innerFn");
@@ -185,7 +185,7 @@ public class SymbolTableBuilderTest {
   }
 
   @Test
-  public void lambdas() {
+  void lambdas() {
     FunctionDef functionTree = functionTreesByName.get("function_with_lambdas");
     Map<String, Symbol> symbolByName = getSymbolByName(functionTree);
 
@@ -209,7 +209,7 @@ public class SymbolTableBuilderTest {
   }
 
   @Test
-  public void for_stmt() {
+  void for_stmt() {
     FunctionDef functionTree = functionTreesByName.get("function_with_loops");
     Map<String, Symbol> symbolByName = getSymbolByName(functionTree);
 
@@ -225,7 +225,7 @@ public class SymbolTableBuilderTest {
   }
 
   @Test
-  public void comprehension() {
+  void comprehension() {
     FunctionDef functionTree = functionTreesByName.get("function_with_comprehension");
     Map<String, Symbol> symbolByName = getSymbolByName(functionTree);
     assertThat(symbolByName).isEmpty();
@@ -236,13 +236,13 @@ public class SymbolTableBuilderTest {
   }
 
   @Test
-  public void func_wrapping_class() {
+  void func_wrapping_class() {
     FunctionDef functionTree = functionTreesByName.get("func_wrapping_class");
     assertThat(functionTree.localVariables()).extracting(Symbol::name).containsExactly("A");
   }
 
   @Test
-  public void var_with_usages_in_decorator() {
+  void var_with_usages_in_decorator() {
     FunctionDef functionTree = functionTreesByName.get("var_with_usages_in_decorator");
     Map<String, Symbol> symbolByName = getSymbolByName(functionTree);
 
@@ -256,7 +256,7 @@ public class SymbolTableBuilderTest {
   }
 
   @Test
-  public void function_with_unused_import() {
+  void function_with_unused_import() {
     FunctionDef functionTree = functionTreesByName.get("function_with_unused_import");
     Map<String, Symbol> symbolByName = getSymbolByName(functionTree);
 
@@ -269,7 +269,7 @@ public class SymbolTableBuilderTest {
   }
 
   @Test
-  public void importing_stdlib() {
+  void importing_stdlib() {
     FunctionDef functionDef = functionTreesByName.get("importing_stdlib");
     Map<String, Symbol> symbolByName = getSymbolByName(functionDef);
 
@@ -286,7 +286,7 @@ public class SymbolTableBuilderTest {
   }
 
   @Test
-  public void importing_submodule() {
+  void importing_submodule() {
     FunctionDef functionDef = functionTreesByName.get("importing_submodule");
     Map<String, Symbol> symbolByName = getSymbolByName(functionDef);
 
@@ -305,7 +305,7 @@ public class SymbolTableBuilderTest {
   }
 
   @Test
-  public void importing_submodule_as() {
+  void importing_submodule_as() {
     FunctionDef functionDef = functionTreesByName.get("importing_submodule_as");
     Map<String, Symbol> symbolByName = getSymbolByName(functionDef);
 
@@ -324,7 +324,7 @@ public class SymbolTableBuilderTest {
   }
 
   @Test
-  public void importing_submodule_after_parent() {
+  void importing_submodule_after_parent() {
     FunctionDef functionDef = functionTreesByName.get("importing_submodule_after_parent");
     Map<String, Symbol> symbolByName = getSymbolByName(functionDef);
 
@@ -343,7 +343,7 @@ public class SymbolTableBuilderTest {
   }
 
   @Test
-  public void importing_submodule_after_parent_nested() {
+  void importing_submodule_after_parent_nested() {
     FunctionDef functionDef = functionTreesByName.get("importing_submodule_after_parent_nested");
     Map<String, Symbol> symbolByName = getSymbolByName(functionDef);
 
@@ -362,7 +362,7 @@ public class SymbolTableBuilderTest {
   }
 
   @Test
-  public void importing_parent_after_submodule() {
+  void importing_parent_after_submodule() {
     FunctionDef functionDef = functionTreesByName.get("importing_parent_after_submodule");
     Map<String, Symbol> symbolByName = getSymbolByName(functionDef);
 
@@ -382,7 +382,7 @@ public class SymbolTableBuilderTest {
   }
 
   @Test
-  public void importing_parent_after_submodule_2() {
+  void importing_parent_after_submodule_2() {
     FunctionDef functionDef = functionTreesByName.get("importing_parent_after_submodule_2");
     Map<String, Symbol> symbolByName = getSymbolByName(functionDef);
 
@@ -406,7 +406,7 @@ public class SymbolTableBuilderTest {
   }
 
   @Test
-  public void importing_submodule_twice() {
+  void importing_submodule_twice() {
     FunctionDef functionDef = functionTreesByName.get("importing_submodule_twice");
     Map<String, Symbol> symbolByName = getSymbolByName(functionDef);
 
@@ -425,7 +425,7 @@ public class SymbolTableBuilderTest {
   }
 
   @Test
-  public void importing_unknown_submodule() {
+  void importing_unknown_submodule() {
     FunctionDef functionDef = functionTreesByName.get("importing_unknown_submodule");
     Map<String, Symbol> symbolByName = getSymbolByName(functionDef);
 
@@ -444,14 +444,14 @@ public class SymbolTableBuilderTest {
   }
 
   @Test
-  public void function_with_tuple_param() {
+  void function_with_tuple_param() {
     FunctionDef functionTree = functionTreesByName.get("func_with_tuple_param");
     Map<String, Symbol> symbolByName = getSymbolByName(functionTree);
     assertThat(symbolByName).hasSize(4);
   }
 
   @Test
-  public void function_with_star_param() {
+  void function_with_star_param() {
     FunctionDef functionTree = functionTreesByName.get("func_with_star_param");
     Map<String, Symbol> symbolByName = getSymbolByName(functionTree);
     assertThat(symbolByName).hasSize(2);
@@ -462,14 +462,14 @@ public class SymbolTableBuilderTest {
   }
 
   @Test
-  public void print_local_var() {
+  void print_local_var() {
     FunctionDef functionTree = functionTreesByName.get("print_var");
     Map<String, Symbol> symbolByName = getSymbolByName(functionTree);
     assertThat(symbolByName).hasSize(1).containsOnlyKeys("print");
   }
 
   @Test
-  public void tuples_in_comp() {
+  void tuples_in_comp() {
     FunctionDef functionTree = functionTreesByName.get("symbols_in_comp");
     Map<String, Symbol> symbolByName = getSymbolByName(functionTree);
     assertThat(symbolByName).isEmpty();
@@ -481,7 +481,7 @@ public class SymbolTableBuilderTest {
   }
 
   @Test
-  public void comprehension_scope() {
+  void comprehension_scope() {
     FunctionDef functionTree = functionTreesByName.get("scope_of_comprehension");
     Map<String, Symbol> symbolByName = getSymbolByName(functionTree);
     assertThat(symbolByName).containsOnlyKeys("x");
@@ -491,7 +491,7 @@ public class SymbolTableBuilderTest {
   }
 
   @Test
-  public void comprehension_shadowing_names() {
+  void comprehension_shadowing_names() {
     FunctionDef functionTree = functionTreesByName.get("comprehension_reusing_name");
     Map<String, Symbol> symbolByName = getSymbolByName(functionTree);
     assertThat(symbolByName).hasSize(1);
@@ -502,7 +502,7 @@ public class SymbolTableBuilderTest {
   }
 
   @Test
-  public void interpolated_string() {
+  void interpolated_string() {
     FunctionDef functionTree = functionTreesByName.get("ref_in_interpolated");
     Map<String, Symbol> symbolByName = getSymbolByName(functionTree);
     assertThat(symbolByName).hasSize(1);
@@ -510,7 +510,7 @@ public class SymbolTableBuilderTest {
   }
 
   @Test
-  public void fn_inside_comprehension_same_name() {
+  void fn_inside_comprehension_same_name() {
     FunctionDef functionTree = functionTreesByName.get("fn_inside_comprehension_same_name");
     Map<String, Symbol> symbolByName = getSymbolByName(functionTree);
     assertThat(symbolByName).hasSize(1);
@@ -518,7 +518,7 @@ public class SymbolTableBuilderTest {
   }
 
   @Test
-  public void exception_instance() {
+  void exception_instance() {
     FunctionDef functionTree = functionTreesByName.get("exception_instance");
     Map<String, Symbol> symbolByName = getSymbolByName(functionTree);
     assertThat(symbolByName).hasSize(6);
@@ -526,7 +526,7 @@ public class SymbolTableBuilderTest {
   }
 
   @Test
-  public void with_instance() {
+  void with_instance() {
     FunctionDef functionTree = functionTreesByName.get("with_instance");
     Map<String, Symbol> symbolByName = getSymbolByName(functionTree);
     assertThat(symbolByName).hasSize(3);
@@ -534,7 +534,7 @@ public class SymbolTableBuilderTest {
   }
 
   @Test
-  public void unpacking() {
+  void unpacking() {
     FunctionDef functionTree = functionTreesByName.get("unpacking");
     Map<String, Symbol> symbolByName = getSymbolByName(functionTree);
     assertThat(symbolByName).hasSize(1);
@@ -542,7 +542,7 @@ public class SymbolTableBuilderTest {
   }
 
   @Test
-  public void using_builtin_symbol() {
+  void using_builtin_symbol() {
     FunctionDef functionTree = functionTreesByName.get("using_builtin_symbol");
     CallExpression callExpression = (CallExpression) ((ExpressionStatement) functionTree.body().statements().get(0)).expressions().get(0);
     Name print = (Name) callExpression.callee();
@@ -553,7 +553,7 @@ public class SymbolTableBuilderTest {
   }
 
   @Test
-  public void keyword_usage() {
+  void keyword_usage() {
     FunctionDef functionTree = functionTreesByName.get("keyword_usage");
     Map<String, Symbol> symbolByName = getSymbolByName(functionTree);
     assertThat(symbolByName).hasSize(1);
@@ -562,7 +562,7 @@ public class SymbolTableBuilderTest {
   }
 
   @Test
-  public void parameter_default_value() {
+  void parameter_default_value() {
     FunctionDef functionTree = functionTreesByName.get("parameter_default_value");
     Map<String, Symbol> symbolByName = getSymbolByName(functionTree);
     assertThat(symbolByName).hasSize(2);
@@ -587,7 +587,7 @@ public class SymbolTableBuilderTest {
   }
 
   @Test
-  public void comprehension_vars() {
+  void comprehension_vars() {
     FunctionDef functionTree = functionTreesByName.get("comprehension_vars");
     ComprehensionExpression comprehensionExpression = ((ComprehensionExpression) ((ExpressionStatement) functionTree.body().statements().get(0)).expressions().get(0));
     assertThat(comprehensionExpression.localVariables()).hasSize(1);
@@ -597,7 +597,7 @@ public class SymbolTableBuilderTest {
   }
 
   @Test
-  public void assignment_expression() {
+  void assignment_expression() {
     FunctionDef functionDef = functionTreesByName.get("assignment_expression");
     assertThat(functionDef.localVariables()).hasSize(1);
     Symbol b = functionDef.localVariables().iterator().next();

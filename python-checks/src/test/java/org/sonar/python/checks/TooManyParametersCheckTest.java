@@ -22,15 +22,15 @@ package org.sonar.python.checks;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-public class TooManyParametersCheckTest {
+class TooManyParametersCheckTest {
 
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/tooManyParameters.py", new TooManyParametersCheck());
   }
 
   @Test
-  public void custom() {
+  void custom() {
     TooManyParametersCheck check = new TooManyParametersCheck();
     check.max = 3;
     PythonCheckVerifier.verify("src/test/resources/checks/tooManyParametersCustom.py", check);

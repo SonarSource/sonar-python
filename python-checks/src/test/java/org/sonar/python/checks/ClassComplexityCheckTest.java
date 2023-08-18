@@ -22,10 +22,10 @@ package org.sonar.python.checks;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-public class ClassComplexityCheckTest {
+class ClassComplexityCheckTest {
 
   @Test
-  public void test() {
+  void test() {
     ClassComplexityCheck check = new ClassComplexityCheck();
     check.maximumClassComplexityThreshold = 2;
     PythonCheckVerifier.verify("src/test/resources/checks/classComplexity.py", check);

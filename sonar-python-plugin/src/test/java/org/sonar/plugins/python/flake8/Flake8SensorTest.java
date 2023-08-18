@@ -48,7 +48,7 @@ import org.sonar.api.utils.Version;
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class Flake8SensorTest {
+class Flake8SensorTest {
 
   private static final String FLAKE8_FILE = "python-project:flake8/file1.py";
   private static final String FLAKE8_F401 = "external_flake8:F401";
@@ -64,7 +64,7 @@ public class Flake8SensorTest {
   public LogTesterJUnit5 logTester = new LogTesterJUnit5().setLevel(Level.DEBUG);
 
   @Test
-  public void test_descriptor() {
+  void test_descriptor() {
     DefaultSensorDescriptor sensorDescriptor = new DefaultSensorDescriptor();
     flake8Sensor.describe(sensorDescriptor);
     assertThat(sensorDescriptor.name()).isEqualTo("Import of Flake8 issues");
@@ -84,7 +84,7 @@ public class Flake8SensorTest {
   }
 
   @Test
-  public void issues_with_sonarqube_79() throws IOException {
+  void issues_with_sonarqube_79() throws IOException {
     List<ExternalIssue> externalIssues = executeSensorImporting(7, 9, FLAKE_8_REPORT);
     assertThat(externalIssues).hasSize(3);
 
@@ -129,7 +129,7 @@ public class Flake8SensorTest {
   }
 
   @Test
-  public void issues_with_sonarqube_79_unknown_files() throws IOException {
+  void issues_with_sonarqube_79_unknown_files() throws IOException {
     List<ExternalIssue> externalIssues = executeSensorImporting(7, 9, FLAKE_8_REPORT_UNKNOWN_FILES);
     assertThat(externalIssues).hasSize(2);
 
@@ -138,14 +138,14 @@ public class Flake8SensorTest {
   }
 
   @Test
-  public void no_issues_without_report_paths_property() throws IOException {
+  void no_issues_without_report_paths_property() throws IOException {
     List<ExternalIssue> externalIssues = executeSensorImporting(7, 9, null);
     assertThat(externalIssues).isEmpty();
     assertNoErrorWarnDebugLogs(logTester);
   }
 
   @Test
-  public void no_issues_with_invalid_report_path() throws IOException {
+  void no_issues_with_invalid_report_path() throws IOException {
     List<ExternalIssue> externalIssues = executeSensorImporting(7, 9, "invalid-path.txt");
     assertThat(externalIssues).isEmpty();
     assertThat(onlyOneLogElement(logTester.logs(Level.ERROR)))
@@ -154,7 +154,7 @@ public class Flake8SensorTest {
   }
 
   @Test
-  public void no_issues_with_empty_or_invalid_flake8_file() throws IOException {
+  void no_issues_with_empty_or_invalid_flake8_file() throws IOException {
     List<ExternalIssue> externalIssues = executeSensorImporting(7, 9, "empty-file.txt");
     assertThat(externalIssues).isEmpty();
     assertNoErrorWarnDebugLogs(logTester);
@@ -165,7 +165,7 @@ public class Flake8SensorTest {
   }
 
   @Test
-  public void issues_with_pylint_format() throws IOException {
+  void issues_with_pylint_format() throws IOException {
     List<ExternalIssue> externalIssues = executeSensorImporting(7, 9, "flake8-pylint-format.txt");
     assertThat(externalIssues).hasSize(2);
 

@@ -22,10 +22,10 @@ package org.sonar.python.checks.cdk;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-public class DisabledRDSEncryptionCheckTest {
+class DisabledRDSEncryptionCheckTest {
 
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/cdk/disabledRDSEncryptionCheck.py", new DisabledRDSEncryptionCheck());
   }
 }

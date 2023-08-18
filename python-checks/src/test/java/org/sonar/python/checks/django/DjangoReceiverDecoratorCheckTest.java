@@ -23,26 +23,26 @@ import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.quickfix.PythonQuickFixVerifier;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-public class DjangoReceiverDecoratorCheckTest {
+class DjangoReceiverDecoratorCheckTest {
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/django/djangoReceiverDecoratorCheck.py", new DjangoReceiverDecoratorCheck());
   }
 
   @Test
-  public void testRenamedImport() {
+  void testRenamedImport() {
     PythonCheckVerifier.verify("src/test/resources/checks/django/djangoReceiverDecoratorCheck_renamed_import.py",
       new DjangoReceiverDecoratorCheck());
   }
 
   @Test
-  public void testWrongImport() {
+  void testWrongImport() {
     PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/django/djangoReceiverDecoratorCheck_wrong_import.py",
       new DjangoReceiverDecoratorCheck());
   }
 
   @Test
-  public void quickFixTest() {
+  void quickFixTest() {
     var check = new DjangoReceiverDecoratorCheck();
     var before = "from django.dispatch import receiver\n" +
       "@csrf_exempt\n" +

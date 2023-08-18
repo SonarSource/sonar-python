@@ -23,15 +23,15 @@ import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.quickfix.PythonQuickFixVerifier;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-public class NeedlessPassCheckTest {
+class NeedlessPassCheckTest {
 
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/needlessPass.py", new NeedlessPassCheck());
   }
 
   @Test
-  public void quick_fix_test() {
+  void quick_fix_test() {
     var expected = "def my_method():\n" +
       "    print('foo')\n" +
       "    print('foo')\n";

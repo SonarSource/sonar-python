@@ -51,7 +51,7 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
-public class PythonCoverageSensorTest {
+class PythonCoverageSensorTest {
 
   private static final String ABSOLUTE_PATH_PLACEHOLDER = "{ABSOLUTE_PATH_PLACEHOLDER}";
   private static final String FILE1_KEY = "moduleKey:sources/file1.py";
@@ -72,7 +72,7 @@ public class PythonCoverageSensorTest {
   public Path tmpDir;
 
   @BeforeEach
-  public void init() {
+  void init() {
     analysisWarnings = spy(AnalysisWarningsWrapper.class);
     coverageSensor = new PythonCoverageSensor(analysisWarnings);
     settings = new MapSettings();
@@ -103,7 +103,7 @@ public class PythonCoverageSensorTest {
   }
 
   @Test
-  public void report_not_found() {
+  void report_not_found() {
     settings.setProperty(PythonCoverageSensor.REPORT_PATHS_KEY, "/fake/path/report.xml");
 
     coverageSensor.execute(context);
@@ -113,7 +113,7 @@ public class PythonCoverageSensorTest {
   }
 
   @Test
-  public void absolute_path() {
+  void absolute_path() {
     settings.setProperty(PythonCoverageSensor.REPORT_PATHS_KEY, new File(moduleBaseDir, "coverage.xml").getAbsolutePath());
 
     coverageSensor.execute(context);
@@ -122,7 +122,7 @@ public class PythonCoverageSensorTest {
   }
 
   @Test
-  public void test_coverage() {
+  void test_coverage() {
     coverageSensor.execute(context);
     Integer[] file1Expected = {1, null, null, 0, null, 0};
     Integer[] file2Expected = {1, 3, 1, 0, 1, 1};
@@ -140,7 +140,7 @@ public class PythonCoverageSensorTest {
   }
 
   @Test
-  public void test_coverage_4_4_2() {
+  void test_coverage_4_4_2() {
     settings.setProperty(PythonCoverageSensor.REPORT_PATHS_KEY, "coverage.4.4.2.xml");
     coverageSensor.execute(context);
     List<Integer> actual = IntStream.range(1, 18).mapToObj(line -> context.lineHits(FILE4_KEY, line)).collect(Collectors.toList());
@@ -181,7 +181,7 @@ public class PythonCoverageSensorTest {
   }
 
   @Test
-  public void test_coverage_4_4_2_multi_source() {
+  void test_coverage_4_4_2_multi_source() {
     settings.setProperty(PythonCoverageSensor.REPORT_PATHS_KEY, "coverage.4.4.2-multi-sources.xml");
     coverageSensor.execute(context);
 
@@ -192,7 +192,7 @@ public class PythonCoverageSensorTest {
   }
 
   @Test
-  public void test_unique_report() {
+  void test_unique_report() {
     settings.setProperty(PythonCoverageSensor.REPORT_PATHS_KEY, "*coverage.4.4.2*.xml");
     settings.setProperty(PythonCoverageSensor.REPORT_PATH_KEY, "*coverage.4.4.2*.xml");
     coverageSensor.execute(context);
@@ -203,7 +203,7 @@ public class PythonCoverageSensorTest {
   }
 
   @Test
-  public void test_report_with_absolute_path() throws Exception {
+  void test_report_with_absolute_path() throws Exception {
     String reportPath = createReportWithAbsolutePaths();
     settings.setProperty(PythonCoverageSensor.REPORT_PATHS_KEY, reportPath);
 
@@ -218,7 +218,7 @@ public class PythonCoverageSensorTest {
   }
 
   @Test
-  public void test_unresolved_path() {
+  void test_unresolved_path() {
     logTester.clear();
     settings.setProperty(PythonCoverageSensor.REPORT_PATH_KEY, "coverage_with_unresolved_path.xml");
     settings.setProperty(PythonCoverageSensor.REPORT_PATHS_KEY, "");
@@ -248,7 +248,7 @@ public class PythonCoverageSensorTest {
   }
 
   @Test
-  public void test_comma_separated_paths() {
+  void test_comma_separated_paths() {
     settings.setProperty(PythonCoverageSensor.REPORT_PATHS_KEY, "coverage.xml,coverage.4.4.2*.xml");
     coverageSensor.execute(context);
 
@@ -264,7 +264,7 @@ public class PythonCoverageSensorTest {
   }
 
   @Test
-  public void test_comma_separated_paths_with_deprecated_property() {
+  void test_comma_separated_paths_with_deprecated_property() {
     settings.setProperty(PythonCoverageSensor.REPORT_PATHS_KEY, "");
     settings.setProperty(PythonCoverageSensor.REPORT_PATH_KEY, "coverage.xml,coverage.4.4.2*.xml");
     coverageSensor.execute(context);
@@ -282,19 +282,19 @@ public class PythonCoverageSensorTest {
   }
 
   @Test
-  public void should_fail_on_invalid_report() {
+  void should_fail_on_invalid_report() {
     settings.setProperty(PythonCoverageSensor.REPORT_PATHS_KEY, "invalid-coverage-result.xml");
     assertThatThrownBy(() -> coverageSensor.execute(context)).isInstanceOf(IllegalStateException.class);
   }
 
   @Test
-  public void should_fail_on_unexpected_eof() {
+  void should_fail_on_unexpected_eof() {
     settings.setProperty(PythonCoverageSensor.REPORT_PATHS_KEY, "coverage_with_eof_error.xml");
     assertThatThrownBy(() -> coverageSensor.execute(context)).isInstanceOf(IllegalStateException.class);
   }
 
   @Test
-  public void should_do_nothing_on_empty_report() {
+  void should_do_nothing_on_empty_report() {
     settings.setProperty(PythonCoverageSensor.REPORT_PATHS_KEY, "empty-coverage-result.xml");
     coverageSensor.execute(context);
 
@@ -302,7 +302,7 @@ public class PythonCoverageSensorTest {
   }
 
   @Test
-  public void should_warn_if_source_is_not_directory() {
+  void should_warn_if_source_is_not_directory() {
     settings.setProperty(PythonCoverageSensor.REPORT_PATHS_KEY, "coverage_source_invalid_directory.xml");
     coverageSensor.execute(context);
     File file = new File("src/test/resources/org/sonar/plugins/python/coverage-reports/sources/file1.py");
@@ -312,7 +312,7 @@ public class PythonCoverageSensorTest {
   }
 
   @Test
-  public void no_default_report_log() {
+  void no_default_report_log() {
     settings.clear();
     PythonCoverageSensor sensor = new PythonCoverageSensor(analysisWarnings);
     sensor.execute(context);
@@ -320,7 +320,7 @@ public class PythonCoverageSensorTest {
   }
 
   @Test
-  public void sensor_descriptor() {
+  void sensor_descriptor() {
     DefaultSensorDescriptor descriptor = new DefaultSensorDescriptor();
     new PythonCoverageSensor(analysisWarnings).describe(descriptor);
     assertThat(descriptor.name()).isEqualTo("Cobertura Sensor for Python coverage");

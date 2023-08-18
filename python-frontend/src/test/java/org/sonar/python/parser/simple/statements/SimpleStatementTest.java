@@ -19,22 +19,22 @@
  */
 package org.sonar.python.parser.simple.statements;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.parser.RuleTest;
 
 import static org.sonar.python.parser.PythonParserAssert.assertThat;
 
-public class SimpleStatementTest extends RuleTest {
+class SimpleStatementTest extends RuleTest {
 
-  @Before
-  public void init() {
+  @BeforeEach
+  void init() {
     setRootRule(PythonGrammar.SIMPLE_STMT);
   }
 
   @Test
-  public void ok() {
+  void ok() {
     assertThat(p).matches("PRINT_STMT");
     assertThat(p).matches("EXEC_STMT");
     assertThat(p).matches("EXPRESSION_STMT");
@@ -52,7 +52,7 @@ public class SimpleStatementTest extends RuleTest {
   }
 
   @Test
-  public void realLife() {
+  void realLife() {
     assertThat(p).matches("print 'Hello world'");
     assertThat(p).matches("print = 12");
     assertThat(p).matches("exec 'print 1'");

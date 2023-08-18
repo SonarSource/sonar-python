@@ -22,15 +22,15 @@ package org.sonar.python.checks.hotspots;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-public class HashingDataCheckTest {
+class HashingDataCheckTest {
 
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/hotspots/hashing/hashingData.py", new HashingDataCheck());
   }
 
   @Test
-  public void test_globalSettings() {
+  void test_globalSettings() {
     PythonCheckVerifier.verify("src/test/resources/checks/hotspots/hashing/global_settings.py", new HashingDataCheck());
   }
 

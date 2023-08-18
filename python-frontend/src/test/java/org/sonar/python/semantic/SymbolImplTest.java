@@ -36,10 +36,10 @@ import static org.sonar.python.PythonTestUtils.lastExpressionInFunction;
 import static org.sonar.python.PythonTestUtils.parse;
 
 
-public class SymbolImplTest {
+class SymbolImplTest {
 
   @Test
-  public void assert_is() {
+  void assert_is() {
     Symbol x = symbols("x = 42").get("x");
     assertThat(x.is(Symbol.Kind.OTHER)).isTrue();
 
@@ -50,7 +50,7 @@ public class SymbolImplTest {
   }
 
   @Test
-  public void removeUsages() {
+  void removeUsages() {
     Symbol x = symbols("x = 42").get("x");
     assertThat(x.usages()).isNotEmpty();
     ((SymbolImpl) x).removeUsages();
@@ -68,7 +68,7 @@ public class SymbolImplTest {
   }
 
   @Test
-  public void inferred_type_after_copy() {
+  void inferred_type_after_copy() {
     SymbolImpl symbol = (SymbolImpl) ((HasSymbol) lastExpressionInFunction(
       "e = OSError()",
       "e.errno"

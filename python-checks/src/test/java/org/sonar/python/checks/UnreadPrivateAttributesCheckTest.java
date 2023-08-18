@@ -22,15 +22,15 @@ package org.sonar.python.checks;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-public class UnreadPrivateAttributesCheckTest {
+class UnreadPrivateAttributesCheckTest {
 
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/unreadPrivateAttributes.py", new UnreadPrivateAttributesCheck());
   }
 
   @Test
-  public void test_single_underscore() {
+  void test_single_underscore() {
     UnreadPrivateAttributesCheck check = new UnreadPrivateAttributesCheck();
     check.enableSingleUnderscoreIssues = true;
     PythonCheckVerifier.verify("src/test/resources/checks/unreadPrivateAttributes_singleUnderscore.py", check);

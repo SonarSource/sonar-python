@@ -22,10 +22,10 @@ package org.sonar.python.checks.hotspots;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-public class DynamicCodeExecutionCheckTest {
+class DynamicCodeExecutionCheckTest {
 
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/hotspots/dynamicCodeExecution.py", new DynamicCodeExecutionCheck());
   }
 

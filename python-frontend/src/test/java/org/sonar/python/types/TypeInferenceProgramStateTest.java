@@ -29,7 +29,7 @@ import org.sonar.python.semantic.SymbolImpl;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class TypeInferenceProgramStateTest {
+class TypeInferenceProgramStateTest {
 
   private final SymbolImpl a = new SymbolImpl("a", "foo.a");
   private final SymbolImpl b = new SymbolImpl("b", "foo.b");
@@ -46,7 +46,7 @@ public class TypeInferenceProgramStateTest {
   };
 
   @Test
-  public void test_equals() {
+  void test_equals() {
     TypeInferenceProgramState typeInferenceProgramState = new TypeInferenceProgramState();
     assertThat(typeInferenceProgramState)
       .isEqualTo(typeInferenceProgramState)
@@ -68,7 +68,7 @@ public class TypeInferenceProgramStateTest {
   }
 
   @Test
-  public void test_hashcode() {
+  void test_hashcode() {
     TypeInferenceProgramState typeInferenceProgramState = new TypeInferenceProgramState();
     typeInferenceProgramState.setTypes(a, Collections.singleton(InferredTypes.INT));
     typeInferenceProgramState.setTypes(b,  new HashSet<>(Arrays.asList(InferredTypes.BOOL, InferredTypes.STR)));
@@ -82,7 +82,7 @@ public class TypeInferenceProgramStateTest {
   }
 
   @Test
-  public void test_toString() {
+  void test_toString() {
     TypeInferenceProgramState typeInferenceProgramState = new TypeInferenceProgramState();
     typeInferenceProgramState.setTypes(a, Collections.singleton(InferredTypes.INT));
     typeInferenceProgramState.setTypes(b, new LinkedHashSet<>(Arrays.asList(InferredTypes.BOOL, InferredTypes.STR)));

@@ -26,17 +26,17 @@ import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 import static org.sonar.python.checks.utils.CodeTestUtils.code;
 
-public class ImplicitStringConcatenationCheckTest {
+class ImplicitStringConcatenationCheckTest {
 
   private static final PythonCheck check = new ImplicitStringConcatenationCheck();
 
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/implicitStringConcatenation.py", check);
   }
 
   @Test
-  public void simple_expression_quickfix() {
+  void simple_expression_quickfix() {
     String codeWithIssue = "a = '1' '2'";
     String codeFixed1 = "a = '1' + '2'";
     PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed1);
@@ -52,7 +52,7 @@ public class ImplicitStringConcatenationCheckTest {
   }
 
   @Test
-  public void function_statement_quickfix() {
+  void function_statement_quickfix() {
     String codeWithIssue = code(
       "def a():",
       "    b = ['1' '2']",
@@ -70,7 +70,7 @@ public class ImplicitStringConcatenationCheckTest {
   }
 
   @Test
-  public void concat_expression() {
+  void concat_expression() {
     String codeWithIssue = "['1'+'2' '3'+'4']";
     String codeFixed1 = "['1'+'2', '3'+'4']";
     String codeFixed2 = "['1'+'2' + '3'+'4']";
@@ -78,7 +78,7 @@ public class ImplicitStringConcatenationCheckTest {
   }
 
   @Test
-  public void sets() {
+  void sets() {
     String codeWithIssue = "{'1' '2', '3'}";
     String codeFixed1 = "{'1', '2', '3'}";
     String codeFixed2 = "{'1' + '2', '3'}";
@@ -86,7 +86,7 @@ public class ImplicitStringConcatenationCheckTest {
   }
 
   @Test
-  public void parameters() {
+  void parameters() {
     String codeWithIssue = "print('1' '2', '3')";
     String codeFixed1 = "print('1', '2', '3')";
     String codeFixed2 = "print('1' + '2', '3')";
@@ -94,7 +94,7 @@ public class ImplicitStringConcatenationCheckTest {
   }
 
   @Test
-  public void parameters2() {
+  void parameters2() {
     String codeWithIssue = "foo('1' '2', '3')";
     String codeFixed1 = "foo('1', '2', '3')";
     String codeFixed2 = "foo('1' + '2', '3')";
@@ -102,7 +102,7 @@ public class ImplicitStringConcatenationCheckTest {
   }
 
   @Test
-  public void multiline_list() {
+  void multiline_list() {
     String codeWithIssue = code("a = [",
       "  '1'",
       "  '2'",
@@ -118,7 +118,7 @@ public class ImplicitStringConcatenationCheckTest {
   }
 
   @Test
-  public void multiline_list_with_comment() {
+  void multiline_list_with_comment() {
     String codeWithIssue = code("a = [",
       "  'a',",
       "  'b',",

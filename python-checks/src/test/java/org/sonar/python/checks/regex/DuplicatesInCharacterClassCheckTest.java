@@ -24,10 +24,10 @@ import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 import static org.junit.Assert.*;
 
-public class DuplicatesInCharacterClassCheckTest {
+class DuplicatesInCharacterClassCheckTest {
 
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/regex/duplicatesInCharacterClassCheck.py", new DuplicatesInCharacterClassCheck());
   }
 }

@@ -23,10 +23,10 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class TestSuiteTest {
+class TestSuiteTest {
 
   @Test
-  public void test() {
+  void test() {
     TestSuite suite = new TestSuite("key");
     assertThat(suite.getKey()).isEqualTo("key");
     assertThat(suite.getTestCases()).isEmpty();

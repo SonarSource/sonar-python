@@ -22,10 +22,10 @@ package org.sonar.python.checks.cdk;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-public class S3BucketServerEncryptionCheckTest {
+class S3BucketServerEncryptionCheckTest {
 
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/cdk/s3BucketServerEncryption.py", new S3BucketServerEncryptionCheck());
   }
 

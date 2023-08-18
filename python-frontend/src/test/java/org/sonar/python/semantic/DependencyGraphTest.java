@@ -27,10 +27,10 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class DependencyGraphTest {
+class DependencyGraphTest {
 
   @Test
-  public void testDependentModules() {
+  void testDependentModules() {
     Map<String, Set<String>> importsByModule = new HashMap<>();
     importsByModule.put("mod1", Set.of("A", "B"));
     importsByModule.put("mod2", Set.of("B", "C"));
@@ -51,7 +51,7 @@ public class DependencyGraphTest {
   }
 
   @Test
-  public void testModulesToUpdate() {
+  void testModulesToUpdate() {
     Map<String, Set<String>> importsByModule = new HashMap<>();
     importsByModule.put("mod1", Set.of("A", "B", "mod4"));
     importsByModule.put("mod2", Set.of("B", "C"));
@@ -65,7 +65,7 @@ public class DependencyGraphTest {
   }
 
   @Test
-  public void cyclic_dependencies() {
+  void cyclic_dependencies() {
     Map<String, Set<String>> importsByModule = new HashMap<>();
     importsByModule.put("mod1", Set.of("mod2"));
     importsByModule.put("mod2", Set.of("mod1"));

@@ -28,15 +28,15 @@ import org.sonar.python.parser.RuleTest;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.parser.PythonParserAssert.assertThat;
 
-public class ExpressionTest extends RuleTest {
+class ExpressionTest extends RuleTest {
 
   @BeforeEach
-  public void init() {
+  void init() {
     setRootRule(PythonGrammar.TEST);
   }
 
   @Test
-  public void realLife() {
+  void realLife() {
     assertThat(p).matches("1 + 2 * 3");
     assertThat(p).matches("(1 + 1) * 2");
 
@@ -66,7 +66,7 @@ public class ExpressionTest extends RuleTest {
   }
 
   @Test
-  public void call_expression() {
+  void call_expression() {
     AstNode powerNode = p.parse("f()**g()").getFirstChild(PythonGrammar.POWER);
     assertThat(powerNode).isNotNull();
   }

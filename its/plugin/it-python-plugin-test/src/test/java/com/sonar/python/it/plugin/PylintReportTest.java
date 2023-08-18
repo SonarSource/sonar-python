@@ -29,7 +29,7 @@ import org.junit.jupiter.api.extension.RegisterExtension;
 import static com.sonar.python.it.plugin.Tests.issues;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class PylintReportTest {
+class PylintReportTest {
 
   private static final String DEFAULT_PROPERTY = "sonar.python.pylint.reportPaths";
   private static final String LEGACY_PROPERTY = "sonar.python.pylint.reportPath";
@@ -38,28 +38,28 @@ public class PylintReportTest {
   public static final OrchestratorExtension ORCHESTRATOR = Tests.ORCHESTRATOR;
 
   @Test
-  public void import_report() {
+  void import_report() {
     final String projectKey = "pylint_project";
     analyseProjectWithReport(projectKey, DEFAULT_PROPERTY, "pylint-report.txt");
     assertThat(issues(projectKey)).hasSize(4);
   }
 
   @Test
-  public void import_report_legacy_key() {
+  void import_report_legacy_key() {
     final String projectKey = "pylint_project_legacy_key";
     analyseProjectWithReport(projectKey, LEGACY_PROPERTY, "pylint-report.txt");
     assertThat(issues(projectKey)).hasSize(4);
   }
 
   @Test
-  public void missing_report() {
+  void missing_report() {
     final String projectKey = "pylint_project_missing_report";
     analyseProjectWithReport(projectKey, DEFAULT_PROPERTY, "missing");
     assertThat(issues(projectKey)).isEmpty();
   }
 
   @Test
-  public void invalid_report() {
+  void invalid_report() {
     final String projectKey = "pylint_project_invalid_report";
     BuildResult result = analyseProjectWithReport(projectKey, DEFAULT_PROPERTY, "invalid.txt");
     assertThat(result.getLogs()).contains("Cannot parse the line: trash");
@@ -67,14 +67,14 @@ public class PylintReportTest {
   }
 
   @Test
-  public void unknown_rule() {
+  void unknown_rule() {
     final String projectKey = "pylint_project_unknown_rule";
     analyseProjectWithReport(projectKey, DEFAULT_PROPERTY, "rule-unknown.txt");
     assertThat(issues(projectKey)).hasSize(4);
   }
 
   @Test
-  public void multiple_reports() {
+  void multiple_reports() {
     final String projectKey = "pylint_project_multiple_reports";
     analyseProjectWithReport(projectKey, DEFAULT_PROPERTY, "pylint-report.txt, rule-unknown.txt");
     assertThat(issues(projectKey)).hasSize(8);

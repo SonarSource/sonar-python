@@ -31,10 +31,10 @@ import org.sonar.python.semantic.SymbolTableBuilder;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.PythonTestUtils.pythonFile;
 
-public class UnittestUtilsTest  {
+class UnittestUtilsTest  {
 
   @Test
-  public void test_isWithinUnittestTestCase() {
+  void test_isWithinUnittestTestCase() {
     String code = "import unittest\nclass A(unittest.TestCase):  ...";
     FileInput fileInput = PythonTestUtils.parse(new SymbolTableBuilder("", pythonFile("mod1.py")), code);
     Tree tree = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Tree.Kind.ELLIPSIS));
@@ -67,12 +67,12 @@ public class UnittestUtilsTest  {
   }
 
   @Test
-  public void all_methods() {
+  void all_methods() {
     assertThat(UnittestUtils.allMethods()).hasSize(59);
   }
 
   @Test
-  public void all_assert_methods() {
+  void all_assert_methods() {
     assertThat(UnittestUtils.allAssertMethods()).hasSize(38);
   }
 }

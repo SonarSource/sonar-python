@@ -24,10 +24,10 @@ import org.sonar.api.server.rule.RulesDefinition;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class BanditRulesDefinitionTest {
+class BanditRulesDefinitionTest {
 
   @Test
-  public void bandit_lint_external_repository() {
+  void bandit_lint_external_repository() {
     RulesDefinition.Context context = new RulesDefinition.Context();
     BanditRulesDefinition rulesDefinition = new BanditRulesDefinition();
     rulesDefinition.define(context);

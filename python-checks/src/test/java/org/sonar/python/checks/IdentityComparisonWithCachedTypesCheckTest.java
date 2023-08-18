@@ -23,17 +23,17 @@ import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.quickfix.PythonQuickFixVerifier;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-public class IdentityComparisonWithCachedTypesCheckTest {
+class IdentityComparisonWithCachedTypesCheckTest {
 
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify(
       "src/test/resources/checks/identityComparisonWithCachedTypes.py",
       new IdentityComparisonWithCachedTypesCheck());
   }
 
   @Test
-  public void testIsReplacementQuickfix() {
+  void testIsReplacementQuickfix() {
     var check = new IdentityComparisonWithCachedTypesCheck();
     String codeWithIssue = "def literal_comparison(param):\n" +
       "    3000 is param";
@@ -44,7 +44,7 @@ public class IdentityComparisonWithCachedTypesCheckTest {
   }
 
   @Test
-  public void testIsNotReplacementQuickfix() {
+  void testIsNotReplacementQuickfix() {
     var check = new IdentityComparisonWithCachedTypesCheck();
     String codeWithIssue = "def literal_comparison(param):\n" +
       "    3000 is not param";

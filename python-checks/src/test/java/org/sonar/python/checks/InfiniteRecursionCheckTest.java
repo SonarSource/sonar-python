@@ -24,10 +24,10 @@ import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 import static org.junit.Assert.*;
 
-public class InfiniteRecursionCheckTest {
+class InfiniteRecursionCheckTest {
 
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/infiniteRecursion.py", new InfiniteRecursionCheck());
   }
 

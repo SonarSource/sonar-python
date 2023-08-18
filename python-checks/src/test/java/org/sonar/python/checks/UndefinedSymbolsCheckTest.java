@@ -23,34 +23,34 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-public class UndefinedSymbolsCheckTest {
+class UndefinedSymbolsCheckTest {
 
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/undefinedSymbols/undefinedSymbols.py", new UndefinedSymbolsCheck());
   }
 
   @Test
-  public void test_wildcard_import() {
+  void test_wildcard_import() {
     PythonCheckVerifier.verifyNoIssue(
             Arrays.asList("src/test/resources/checks/undefinedSymbols/withWildcardImport.py","src/test/resources/checks/undefinedSymbols/mod.py" ),
             new UndefinedSymbolsCheck());
   }
 
   @Test
-  public void test_wildcard_import_all_property() {
+  void test_wildcard_import_all_property() {
     PythonCheckVerifier.verifyNoIssue(
             Arrays.asList("src/test/resources/checks/undefinedSymbols/importWithAll.py", "src/test/resources/checks/undefinedSymbols/packageUsingAll/__init__.py"),
             new UndefinedSymbolsCheck());
   }
 
   @Test
-  public void test_unresolved_wildcard_import() {
+  void test_unresolved_wildcard_import() {
     PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/undefinedSymbols/withUnresolvedWildcardImport.py", new UndefinedSymbolsCheck());
   }
 
   @Test
-  public void test_dynamic_globals() {
+  void test_dynamic_globals() {
     PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/undefinedSymbols/withGlobals.py", new UndefinedSymbolsCheck());
   }
 

@@ -22,10 +22,10 @@ package org.sonar.python.checks;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-public class ExceptionSuperClassDeclarationCheckTest {
+class ExceptionSuperClassDeclarationCheckTest {
 
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/exceptionSuperClassDeclaration.py", new ExceptionSuperClassDeclarationCheck());
   }
 

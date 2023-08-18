@@ -22,15 +22,15 @@ package org.sonar.python.checks;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-public class InstanceMethodSelfAsFirstCheckTest {
+class InstanceMethodSelfAsFirstCheckTest {
 
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/instanceMethodSelfAsFirst.py", new InstanceMethodSelfAsFirstCheck());
   }
 
   @Test
-  public void testIgnoredDecorators() {
+  void testIgnoredDecorators() {
     InstanceMethodSelfAsFirstCheck check = new InstanceMethodSelfAsFirstCheck();
     check.ignoredDecorators = "ignore_me,ignore_me_as_well";
     PythonCheckVerifier.verify("src/test/resources/checks/instanceMethodSelfAsFirst_decorators.py", check);

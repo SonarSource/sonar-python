@@ -22,15 +22,15 @@ package org.sonar.python.checks.cdk;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-public class S3BucketGrantedAccessCheckTest {
+class S3BucketGrantedAccessCheckTest {
 
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/cdk/s3BucketGrantedAccess.py", new S3BucketGrantedAccessCheck());
   }
 
   @Test
-  public void noImport() {
+  void noImport() {
     PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/cdk/s3BucketGrantedAccess_noImport.py", new S3BucketGrantedAccessCheck());
   }
 

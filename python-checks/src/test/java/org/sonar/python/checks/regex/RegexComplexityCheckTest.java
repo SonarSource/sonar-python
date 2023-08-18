@@ -22,15 +22,15 @@ package org.sonar.python.checks.regex;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-public class RegexComplexityCheckTest {
+class RegexComplexityCheckTest {
 
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/regex/regexComplexityCheck.py", new RegexComplexityCheck());
   }
 
   @Test
-  public void test_max_parameter() {
+  void test_max_parameter() {
     RegexComplexityCheck check = new RegexComplexityCheck();
     check.max = 21;
     PythonCheckVerifier.verify("src/test/resources/checks/regex/regexComplexityCheck-21.py", check);

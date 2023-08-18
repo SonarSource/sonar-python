@@ -29,9 +29,9 @@ import org.sonar.python.types.InferredTypes;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 
-public class ComprehensionExpressionImplTest {
+class ComprehensionExpressionImplTest {
   @Test
-  public void type() {
+  void type() {
     Token token = mock(Token.class);
     Expression resultExpression = mock(Expression.class);
     ComprehensionFor compFor = mock(ComprehensionFor.class);

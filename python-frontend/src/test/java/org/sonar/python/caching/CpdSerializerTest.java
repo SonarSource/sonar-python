@@ -30,10 +30,10 @@ import org.sonar.python.tree.TokenImpl;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
 
-public class CpdSerializerTest {
+class CpdSerializerTest {
 
   @Test
-  public void to_bytes_from_bytes() throws IOException {
+  void to_bytes_from_bytes() throws IOException {
     var sslrToken = com.sonar.sslr.api.Token.builder()
       .setLine(1)
       .setColumn(0)
@@ -54,7 +54,7 @@ public class CpdSerializerTest {
   }
 
   @Test
-  public void corrupted_string_table_format() {
+  void corrupted_string_table_format() {
     // A string table with zero elements and an invalid terminator
     byte[] stringTable = new byte[] {0, 1, 2, 3};
     byte[] data = new byte[] {0};
@@ -65,7 +65,7 @@ public class CpdSerializerTest {
   }
 
   @Test
-  public void corrupted_data_format() {
+  void corrupted_data_format() {
     // A string table with zero elements and a valid terminator string
     byte[] stringTable = new byte[] {0, 3, 'E', 'N', 'D'};
     byte[] data = new byte[] {0, 1, 2, 3};

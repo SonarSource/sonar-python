@@ -22,24 +22,24 @@ package org.sonar.python.checks;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-public class TooManyLinesInFileCheckTest {
+class TooManyLinesInFileCheckTest {
 
   private TooManyLinesInFileCheck check = new TooManyLinesInFileCheck();
 
   @Test
-  public void test_negative() {
+  void test_negative() {
     check.maximum = 3;
     PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/tooManyLinesInFile-3.py", check);
   }
 
   @Test
-  public void test_positive() {
+  void test_positive() {
     check.maximum = 2;
     PythonCheckVerifier.verify("src/test/resources/checks/tooManyLinesInFile-2.py", check);
   }
 
   @Test
-  public void test_empty_file() {
+  void test_empty_file() {
     check.maximum = 2;
     PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/tooManyLinesInFile-empty.py", check);
   }

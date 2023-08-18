@@ -65,7 +65,7 @@ import static org.sonar.plugins.python.caching.Caching.projectSymbolTableCacheKe
 import static org.sonar.plugins.python.indexer.FileHashingUtils.inputFileContentHash;
 import static org.sonar.python.index.DescriptorsToProtobuf.toProtobufModuleDescriptor;
 
-public class SonarQubePythonIndexerTest {
+class SonarQubePythonIndexerTest {
 
   private final File baseDir = new File("src/test/resources/org/sonar/plugins/python/indexer").getAbsoluteFile();
   private SensorContextTester context;
@@ -82,7 +82,7 @@ public class SonarQubePythonIndexerTest {
   private String cacheVersion;
 
   @BeforeEach
-  public void init() throws IOException {
+  void init() throws IOException {
     TypeShed.resetBuiltinSymbols();
     context = SensorContextTester.create(baseDir);
     Path workDir = Files.createTempDirectory("workDir");
@@ -100,7 +100,7 @@ public class SonarQubePythonIndexerTest {
   }
 
   @Test
-  public void test_single_file_modified() throws IOException, NoSuchAlgorithmException {
+  void test_single_file_modified() throws IOException, NoSuchAlgorithmException {
     file1 = createInputFile(baseDir, "main.py", InputFile.Status.CHANGED, InputFile.Type.MAIN);
     file2 = createInputFile(baseDir, "mod.py", InputFile.Status.SAME, InputFile.Type.MAIN);
 
@@ -130,7 +130,7 @@ public class SonarQubePythonIndexerTest {
   }
 
   @Test
-  public void test_modified_dependency() throws IOException, NoSuchAlgorithmException {
+  void test_modified_dependency() throws IOException, NoSuchAlgorithmException {
     file1 = createInputFile(baseDir, "main.py", InputFile.Status.SAME, InputFile.Type.MAIN);
     file2 = createInputFile(baseDir, "mod.py", InputFile.Status.CHANGED, InputFile.Type.MAIN);
 
@@ -158,7 +158,7 @@ public class SonarQubePythonIndexerTest {
   }
 
   @Test
-  public void test_deleted_dependency() throws IOException, NoSuchAlgorithmException {
+  void test_deleted_dependency() throws IOException, NoSuchAlgorithmException {
     file1 = createInputFile(baseDir, "main.py", InputFile.Status.SAME, InputFile.Type.MAIN);
 
     List<InputFile> inputFiles = new ArrayList<>(List.of(file1));
@@ -187,7 +187,7 @@ public class SonarQubePythonIndexerTest {
   }
 
   @Test
-  public void test_deleted_unrelated_file() throws IOException, NoSuchAlgorithmException {
+  void test_deleted_unrelated_file() throws IOException, NoSuchAlgorithmException {
     file1 = createInputFile(baseDir, "mod.py", InputFile.Status.SAME, InputFile.Type.MAIN);
 
     List<InputFile> inputFiles = new ArrayList<>(List.of(file1));
@@ -214,7 +214,7 @@ public class SonarQubePythonIndexerTest {
   }
 
   @Test
-  public void test_no_file_modified_missing_entry() throws IOException, NoSuchAlgorithmException {
+  void test_no_file_modified_missing_entry() throws IOException, NoSuchAlgorithmException {
     file1 = createInputFile(baseDir, "main.py", InputFile.Status.SAME, InputFile.Type.MAIN);
     file2 = createInputFile(baseDir, "mod.py", InputFile.Status.SAME, InputFile.Type.MAIN);
 
@@ -234,7 +234,7 @@ public class SonarQubePythonIndexerTest {
   }
 
   @Test
-  public void test_no_file_modified_missing_imports() throws IOException, NoSuchAlgorithmException {
+  void test_no_file_modified_missing_imports() throws IOException, NoSuchAlgorithmException {
     file1 = createInputFile(baseDir, "main.py", InputFile.Status.SAME, InputFile.Type.MAIN);
     file2 = createInputFile(baseDir, "mod.py", InputFile.Status.SAME, InputFile.Type.MAIN);
 
@@ -259,7 +259,7 @@ public class SonarQubePythonIndexerTest {
   }
 
   @Test
-  public void test_no_file_modified_missing_descriptors() throws IOException, NoSuchAlgorithmException {
+  void test_no_file_modified_missing_descriptors() throws IOException, NoSuchAlgorithmException {
     file1 = createInputFile(baseDir, "main.py", InputFile.Status.SAME, InputFile.Type.MAIN);
     file2 = createInputFile(baseDir, "mod.py", InputFile.Status.SAME, InputFile.Type.MAIN);
 
@@ -282,7 +282,7 @@ public class SonarQubePythonIndexerTest {
   }
 
   @Test
-  public void test_no_file_modified_invalid_cache_version() throws IOException, NoSuchAlgorithmException {
+  void test_no_file_modified_invalid_cache_version() throws IOException, NoSuchAlgorithmException {
     file1 = createInputFile(baseDir, "main.py", InputFile.Status.SAME, InputFile.Type.MAIN);
     file2 = createInputFile(baseDir, "mod.py", InputFile.Status.SAME, InputFile.Type.MAIN);
 
@@ -312,7 +312,7 @@ public class SonarQubePythonIndexerTest {
 
 
   @Test
-  public void test_no_file_modified_invalid_cache_version_due_to_changed_python_version() throws IOException, NoSuchAlgorithmException {
+  void test_no_file_modified_invalid_cache_version_due_to_changed_python_version() throws IOException, NoSuchAlgorithmException {
     file1 = createInputFile(baseDir, "main.py", InputFile.Status.SAME, InputFile.Type.MAIN);
     file2 = createInputFile(baseDir, "mod.py", InputFile.Status.SAME, InputFile.Type.MAIN);
 
@@ -341,7 +341,7 @@ public class SonarQubePythonIndexerTest {
   }
 
   @Test
-  public void test_test_files_not_using_cache() throws IOException, NoSuchAlgorithmException {
+  void test_test_files_not_using_cache() throws IOException, NoSuchAlgorithmException {
     file1 = createInputFile(baseDir, "main.py", InputFile.Status.SAME, InputFile.Type.TEST);
     file2 = createInputFile(baseDir, "mod.py", InputFile.Status.CHANGED, InputFile.Type.TEST);
     readCache.put(fileContentHashCacheKey("moduleKey:main.py"), inputFileContentHash(file1));
@@ -359,7 +359,7 @@ public class SonarQubePythonIndexerTest {
   }
 
   @Test
-  public void test_pr_analysis_disabled() {
+  void test_pr_analysis_disabled() {
     file1 = createInputFile(baseDir, "main.py", InputFile.Status.CHANGED, InputFile.Type.MAIN);
     file2 = createInputFile(baseDir, "mod.py", InputFile.Status.SAME, InputFile.Type.MAIN);
 
@@ -375,7 +375,7 @@ public class SonarQubePythonIndexerTest {
   }
 
   @Test
-  public void test_pr_analysis_enabled() {
+  void test_pr_analysis_enabled() {
     file1 = createInputFile(baseDir, "main.py", InputFile.Status.CHANGED, InputFile.Type.MAIN);
     file2 = createInputFile(baseDir, "mod.py", InputFile.Status.SAME, InputFile.Type.MAIN);
 
@@ -393,7 +393,7 @@ public class SonarQubePythonIndexerTest {
   }
 
   @Test
-  public void test_disabled_cache() {
+  void test_disabled_cache() {
     file1 = createInputFile(baseDir, "main.py", InputFile.Status.CHANGED, InputFile.Type.MAIN);
     file2 = createInputFile(baseDir, "mod.py", InputFile.Status.SAME, InputFile.Type.MAIN);
 
@@ -409,7 +409,7 @@ public class SonarQubePythonIndexerTest {
   }
 
   @Test
-  public void test_typeshed_modules_cached() {
+  void test_typeshed_modules_cached() {
     file1 = createInputFile(baseDir, "uses_typeshed.py", InputFile.Status.CHANGED, InputFile.Type.MAIN);
 
     List<InputFile> inputFiles = new ArrayList<>(List.of(file1));
@@ -425,7 +425,7 @@ public class SonarQubePythonIndexerTest {
   }
 
   @Test
-  public void test_typeshed_modules_not_cached_if_empty() {
+  void test_typeshed_modules_not_cached_if_empty() {
     file1 = createInputFile(baseDir, "main.py", InputFile.Status.CHANGED, InputFile.Type.MAIN);
 
     List<InputFile> inputFiles = new ArrayList<>(List.of(file1));
@@ -438,7 +438,7 @@ public class SonarQubePythonIndexerTest {
   }
 
   @Test
-  public void test_regular_scan_when_scan_without_parsing_fails() {
+  void test_regular_scan_when_scan_without_parsing_fails() {
     List<InputFile> files = List.of(createInputFile(baseDir, "main.py", InputFile.Status.SAME, InputFile.Type.MAIN));
     PythonIndexer.GlobalSymbolsScanner globalSymbolsScanner = spy(
       new SonarQubePythonIndexer(files, cacheContext, context).new GlobalSymbolsScanner(context)
@@ -450,7 +450,7 @@ public class SonarQubePythonIndexerTest {
   }
 
   @Test
-  public void test_no_data_in_cache_for_parse_error() {
+  void test_no_data_in_cache_for_parse_error() {
     file1 = createInputFile(baseDir, "parse_error.py", InputFile.Status.ADDED, InputFile.Type.MAIN);
 
     List<InputFile> inputFiles = new ArrayList<>(List.of(file1));
@@ -461,7 +461,7 @@ public class SonarQubePythonIndexerTest {
   }
 
   @Test
-  public void test_file_content_hash_changed() throws IOException, NoSuchAlgorithmException {
+  void test_file_content_hash_changed() throws IOException, NoSuchAlgorithmException {
     file1 = createInputFile(baseDir, "mod.py", InputFile.Status.SAME, InputFile.Type.MAIN);
     file2 = createInputFile(baseDir, "main.py", InputFile.Status.SAME, InputFile.Type.MAIN);
 
@@ -478,7 +478,7 @@ public class SonarQubePythonIndexerTest {
   }
 
   @Test
-  public void hash_exception_when_trying_to_save_hash() {
+  void hash_exception_when_trying_to_save_hash() {
     file1 = createInputFile(baseDir, "main.py", InputFile.Status.CHANGED, InputFile.Type.MAIN);
 
     List<InputFile> inputFiles = new ArrayList<>(List.of(file1));
@@ -494,7 +494,7 @@ public class SonarQubePythonIndexerTest {
   }
 
   @Test
-  public void hash_exception_when_trying_to_compare_hash() throws IOException, NoSuchAlgorithmException {
+  void hash_exception_when_trying_to_compare_hash() throws IOException, NoSuchAlgorithmException {
     file1 = createInputFile(baseDir, "mod.py", InputFile.Status.SAME, InputFile.Type.MAIN);
 
     List<InputFile> inputFiles = new ArrayList<>(List.of(file1));

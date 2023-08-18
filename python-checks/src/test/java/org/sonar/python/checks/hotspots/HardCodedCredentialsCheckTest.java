@@ -22,15 +22,15 @@ package org.sonar.python.checks.hotspots;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-public class HardCodedCredentialsCheckTest {
+class HardCodedCredentialsCheckTest {
 
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/hardCodedCredentials.py", new HardCodedCredentialsCheck());
   }
 
   @Test
-  public void custom() {
+  void custom() {
     HardCodedCredentialsCheck check = new HardCodedCredentialsCheck();
     check.credentialWords = "watermelon,pomelo";
     PythonCheckVerifier.verify("src/test/resources/checks/hardCodedCredentialsCustom.py", check);

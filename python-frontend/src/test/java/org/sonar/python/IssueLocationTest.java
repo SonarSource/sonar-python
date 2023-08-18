@@ -30,14 +30,14 @@ import org.sonar.python.tree.TokenImpl;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class IssueLocationTest {
+class IssueLocationTest {
 
   private static final String MESSAGE = "message";
 
   private PythonParser parser = PythonParser.create();
 
   @Test
-  public void file_level() {
+  void file_level() {
     IssueLocation issueLocation = IssueLocation.atFileLevel(MESSAGE);
     assertThat(issueLocation.message()).isEqualTo(MESSAGE);
     assertThat(issueLocation.startLine()).isEqualTo(IssueLocation.UNDEFINED_LINE);
@@ -48,7 +48,7 @@ public class IssueLocationTest {
   }
 
   @Test
-  public void line_level() {
+  void line_level() {
     IssueLocation issueLocation = IssueLocation.atLineLevel(MESSAGE, 42);
     assertThat(issueLocation.message()).isEqualTo(MESSAGE);
     assertThat(issueLocation.startLine()).isEqualTo(42);
@@ -59,7 +59,7 @@ public class IssueLocationTest {
   }
 
   @Test
-  public void precise_issue_location() {
+  void precise_issue_location() {
     LocationInFile locationInFile = new LocationInFile("foo.py", 1, 1, 1, 10);
     IssueLocation issueLocation = IssueLocation.preciseLocation(locationInFile, "foo");
     assertThat(issueLocation.fileId()).isEqualTo("foo.py");
@@ -70,7 +70,7 @@ public class IssueLocationTest {
   }
 
   @Test
-  public void tokens() {
+  void tokens() {
     AstNode root = parser.parse("\n\nfoo(42 + y) + 2");
     AstNode firstNode = root.getFirstDescendant(PythonTokenType.NUMBER);
     AstNode lastNode = root.getFirstDescendant(PythonPunctuator.RPARENTHESIS);

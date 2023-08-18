@@ -19,7 +19,7 @@
  */
 package org.sonar.python.parser.compound.statements;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.PythonTestUtils;
 import org.sonar.python.api.PythonGrammar;
@@ -27,15 +27,15 @@ import org.sonar.python.parser.RuleTest;
 
 import static org.sonar.python.parser.PythonParserAssert.assertThat;
 
-public class ForStatementTest extends RuleTest {
+class ForStatementTest extends RuleTest {
 
-  @Before
-  public void init() {
+  @BeforeEach
+  void init() {
     setRootRule(PythonGrammar.FOR_STMT);
   }
 
   @Test
-  public void ok() {
+  void ok() {
     assertThat(p).matches("for EXPRLIST in [] : pass;")
       .matches(PythonTestUtils.appendNewLine("for i in [0,2] : pass"))
       .matches(PythonTestUtils.appendNewLine("for x in [0,10] : print(x)"))

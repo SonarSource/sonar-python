@@ -38,12 +38,12 @@ import org.sonar.python.cfg.PythonCfgSimpleBlock;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ControlFlowGraphTest {
+class ControlFlowGraphTest {
 
   private PythonFile file = Mockito.mock(PythonFile.class, "file1.py");
 
   @Test
-  public void empty_file() {
+  void empty_file() {
     ControlFlowGraph cfg = fileCfg("");
     CfgBlock start = cfg.start();
     assertThat(start).isEqualTo(cfg.end());
@@ -55,7 +55,7 @@ public class ControlFlowGraphTest {
   }
 
   @Test
-  public void pass_statement() {
+  void pass_statement() {
     ControlFlowGraph cfg = cfg("pass");
     CfgBlock start = cfg.start();
     assertThat(start.elements()).extracting(Tree::getKind).containsExactly(Kind.PASS_STMT);
@@ -66,19 +66,19 @@ public class ControlFlowGraphTest {
   }
 
   @Test
-  public void single_element() {
+  void single_element() {
     ControlFlowGraph cfg = verifyCfg("b1(succ = [END], pred = [])");
     assertThat(cfg.blocks()).containsExactlyInAnyOrder(cfg.start(), cfg.end());
   }
 
   @Test
-  public void element_order() {
+  void element_order() {
     ControlFlowGraph cfg = verifyCfg("b1(succ = [END], pred = []); pass");
     assertThat(cfg.start().elements()).extracting(Tree::getKind).containsExactly(Kind.EXPRESSION_STMT, Kind.PASS_STMT);
   }
 
   @Test
-  public void return_statement() {
+  void return_statement() {
     verifyCfg(
       "b1(succ = [END], syntSucc = END, pred = [])",
       "return");
@@ -90,7 +90,7 @@ public class ControlFlowGraphTest {
   }
 
   @Test
-  public void if_statement() {
+  void if_statement() {
     verifyCfg(
       "before(succ = [if_body, END], elem = 2)",
       "if cond:",
@@ -106,7 +106,7 @@ public class ControlFlowGraphTest {
   }
 
   @Test
-  public void if_statement_with_return() {
+  void if_statement_with_return() {
     verifyCfg(
       "before(succ = [if_body, END])",
       "if cond:",
@@ -124,7 +124,7 @@ public class ControlFlowGraphTest {
   }
 
   @Test
-  public void if_else_statement() {
+  void if_else_statement() {
     verifyCfg(
       "before(succ = [if_body, else_body], elem = 2)",
       "if cond:",
@@ -144,7 +144,7 @@ public class ControlFlowGraphTest {
   }
 
   @Test
-  public void if_else_statement_with_return() {
+  void if_else_statement_with_return() {
     verifyCfg(
       "before(succ = [if_body, else_body], elem = 2)",
       "if cond:",
@@ -166,7 +166,7 @@ public class ControlFlowGraphTest {
   }
 
   @Test
-  public void if_elif_statement() {
+  void if_elif_statement() {
     verifyCfg(
       "before(succ = [if_body, before_elif_body], elem = 2)",
       "if cond1:",
@@ -196,7 +196,7 @@ public class ControlFlowGraphTest {
   }
 
   @Test
-  public void if_elif_else_statement() {
+  void if_elif_else_statement() {
     verifyCfg(
       "before(succ = [if_body, before_elif_body_1], elem = 2)",
       "if cond1:",
@@ -209,7 +209,7 @@ public class ControlFlowGraphTest {
   }
 
   @Test
-  public void while_statement() {
+  void while_statement() {
     ControlFlowGraph cfg = verifyCfg(
       "before(succ = [cond_block], elem = 1)",
       "while cond_block(succ = [while_body, END], elem = 1):",
@@ -220,7 +220,7 @@ public class ControlFlowGraphTest {
   }
 
   @Test
-  public void continue_statement() {
+  void continue_statement() {
     verifyCfg(
       "before(succ = [cond_block], elem = 1)",
       "while cond_block(succ = [while_body, END], elem = 1):",
@@ -231,12 +231,12 @@ public class ControlFlowGraphTest {
   }
 
   @Test
-  public void continue_outside_loop() {
+  void continue_outside_loop() {
     assertThat(cfg("continue")).isNull();
   }
 
   @Test
-  public void return_outside_function() {
+  void return_outside_function() {
     assertThat(ControlFlowGraph.build(PythonTestUtils.parse("return"), file)).isNull();
     assertThat(cfg(
       "class Foo:",
@@ -245,7 +245,7 @@ public class ControlFlowGraphTest {
   }
 
   @Test
-  public void continue_nested_while() {
+  void continue_nested_while() {
     verifyCfg(
       "while cond_block(succ = [cond_block_inner, END]):",
       "  while cond_block_inner(succ = [inner_while_block, cond_block]):",
@@ -256,7 +256,7 @@ public class ControlFlowGraphTest {
   }
 
   @Test
-  public void break_statement() {
+  void break_statement() {
     verifyCfg(
       "while cond(succ = [while_body, after_while], elem = 1):",
       "  while_body(succ = [if_body, after_break], elem = 2)",
@@ -269,7 +269,7 @@ public class ControlFlowGraphTest {
   }
 
   @Test
-  public void for_statement() {
+  void for_statement() {
     verifyCfg(
       "before(succ = [cond_block], elem = 2)",
       "for cond_block(succ = [for_body, END], elem = 1) in collection:",
@@ -278,7 +278,7 @@ public class ControlFlowGraphTest {
   }
 
   @Test
-  public void for_statement_else() {
+  void for_statement_else() {
     verifyCfg(
       "before(succ = [cond_block], elem = 2)",
       "for cond_block(succ = [for_body, else_body], elem = 1) in collection:",
@@ -289,7 +289,7 @@ public class ControlFlowGraphTest {
   }
 
   @Test
-  public void for_statement_else_break() {
+  void for_statement_else_break() {
     verifyCfg(
       "before(succ = [cond_block])",
       "for cond_block(succ = [for_body, else_body]) in collection:",
@@ -302,7 +302,7 @@ public class ControlFlowGraphTest {
   }
 
   @Test
-  public void continue_statement_in_for() {
+  void continue_statement_in_for() {
     verifyCfg(
       "before(succ = [cond_block], elem = 2)",
       "for cond_block(succ = [for_body, END], elem = 1) in collection:",
@@ -313,7 +313,7 @@ public class ControlFlowGraphTest {
   }
 
   @Test
-  public void continue_nested_for() {
+  void continue_nested_for() {
     verifyCfg(
       "before(succ = [cond_block])",
       "for cond_block(succ = [outer_for_block, END]) in collection1:",
@@ -326,7 +326,7 @@ public class ControlFlowGraphTest {
   }
 
   @Test
-  public void simple_try_except() {
+  void simple_try_except() {
     verifyCfg(
       "before(succ = [try_block])",
       "try:",
@@ -338,7 +338,7 @@ public class ControlFlowGraphTest {
   }
 
   @Test
-  public void simple_try_except_finally() {
+  void simple_try_except_finally() {
     verifyCfg(
       "before(succ = [try_block])",
       "try:",
@@ -352,7 +352,7 @@ public class ControlFlowGraphTest {
   }
 
   @Test
-  public void simple_try_except_finally_else() {
+  void simple_try_except_finally_else() {
     verifyCfg(
       "before(succ = [try_block])",
       "try:",
@@ -369,7 +369,7 @@ public class ControlFlowGraphTest {
   }
 
   @Test
-  public void simple_try_except_value_error() {
+  void simple_try_except_value_error() {
     ControlFlowGraph cfg = cfg(
       "try:",
       "  foo()",
@@ -386,7 +386,7 @@ public class ControlFlowGraphTest {
   }
 
   @Test
-  public void simple_try_except_all_exceptions() {
+  void simple_try_except_all_exceptions() {
     ControlFlowGraph cfg = cfg(
       "try:",
       "  foo()",
@@ -405,7 +405,7 @@ public class ControlFlowGraphTest {
   //TODO nested try
 
   @Test
-  public void raise_without_try() {
+  void raise_without_try() {
     verifyCfg(
       "before(succ = [END], elem = 2, syntSucc = after)",
       "raise my_error",
@@ -413,7 +413,7 @@ public class ControlFlowGraphTest {
   }
 
   @Test
-  public void raise_in_try() {
+  void raise_in_try() {
     verifyCfg(
       "before_try(succ = [try_body], elem = 1)",
       "try:",
@@ -426,7 +426,7 @@ public class ControlFlowGraphTest {
   }
 
   @Test
-  public void return_in_try() {
+  void return_in_try() {
     ControlFlowGraph cfg = cfg(
       "before_try(succ = [try_body])",
       "try:",
@@ -448,7 +448,7 @@ public class ControlFlowGraphTest {
   }
 
   @Test
-  public void break_in_try() {
+  void break_in_try() {
     verifyCfg(
       "before_while(succ = [cond])",
       "while cond(succ = [try_body, after_while]):",
@@ -463,7 +463,7 @@ public class ControlFlowGraphTest {
   }
 
   @Test
-  public void continue_in_try() {
+  void continue_in_try() {
     ControlFlowGraph cfg = cfg(
       "before_while(succ = [cond])",
       "while cond(succ = [try_body, after_while]):",
@@ -487,7 +487,7 @@ public class ControlFlowGraphTest {
   }
 
   @Test
-  public void return_in_except() {
+  void return_in_except() {
     verifyCfg(
       "before_try(succ = [try_body])",
       "try:",
@@ -502,7 +502,7 @@ public class ControlFlowGraphTest {
   }
 
   @Test
-  public void return_in_else() {
+  void return_in_else() {
     verifyCfg(
       "before_try(succ = [try_body])",
       "try:",
@@ -520,7 +520,7 @@ public class ControlFlowGraphTest {
 
 
   @Test
-  public void continue_in_except() {
+  void continue_in_except() {
     verifyCfg(
       "before_while(succ = [cond])",
       "while cond(succ = [try_body, after_while]):",
@@ -536,7 +536,7 @@ public class ControlFlowGraphTest {
   }
 
   @Test
-  public void continue_in_else() {
+  void continue_in_else() {
     verifyCfg(
       "before_while(succ = [cond])",
       "while cond(succ = [try_body, after_while]):",
@@ -554,7 +554,7 @@ public class ControlFlowGraphTest {
   }
 
   @Test
-  public void break_in_except() {
+  void break_in_except() {
     verifyCfg(
       "before_while(succ = [cond])",
       "while cond(succ = [try_body, after_while]):",
@@ -570,7 +570,7 @@ public class ControlFlowGraphTest {
   }
 
   @Test
-  public void break_in_else() {
+  void break_in_else() {
     verifyCfg(
       "before_while(succ = [cond])",
       "while cond(succ = [try_body, after_while]):",
@@ -588,7 +588,7 @@ public class ControlFlowGraphTest {
   }
 
   @Test
-  public void with_statement() {
+  void with_statement() {
     verifyCfg(
       "before(succ = [with_block, END])",
       "with A() as a:",
@@ -598,7 +598,7 @@ public class ControlFlowGraphTest {
   }
 
   @Test
-  public void match_statement() {
+  void match_statement() {
     ControlFlowGraph cfg = cfg("" +
       "foo()   ",
       "match x:",
@@ -635,7 +635,7 @@ public class ControlFlowGraphTest {
   }
 
   @Test
-  public void CFGBlock_toString() {
+  void CFGBlock_toString() {
     PythonCfgEndBlock endBlock = new PythonCfgEndBlock();
     assertThat(endBlock.toString()).isEqualTo("END");
     PythonCfgBlock pythonCfgBlock = new PythonCfgSimpleBlock(endBlock);
@@ -648,7 +648,7 @@ public class ControlFlowGraphTest {
   }
 
   @Test
-  public void CFG_matchStatement() {
+  void CFG_matchStatement() {
     ControlFlowGraph cfg = cfg("" +
       "foo()   ",
       "match x:",
@@ -667,7 +667,7 @@ public class ControlFlowGraphTest {
   }
 
   @Test
-  public void CFG_toString() {
+  void CFG_toString() {
     ControlFlowGraph cfg = cfg("" +
       "if x:",
       "    return 1",
@@ -684,7 +684,7 @@ public class ControlFlowGraphTest {
   }
 
   @Test
-  public void class_def() {
+  void class_def() {
     verifyCfg(
       "before(succ = [if_body, END], elem = 3)",
       "class A:",
@@ -697,7 +697,7 @@ public class ControlFlowGraphTest {
    * Because the predecessors are constructed based on the successors, there is no need to have assertions on predecessors on all other CFG tests
    */
   @Test
-  public void if_stmt_test_predecessors() {
+  void if_stmt_test_predecessors() {
     verifyCfg("" +
       "before(succ = [if_body, after_if], pred = [])",
       "foo()",
@@ -707,7 +707,7 @@ public class ControlFlowGraphTest {
   }
 
   @Test
-  public void parameters() {
+  void parameters() {
     FileInput fileInput = PythonTestUtils.parse("def f(p1, p2): pass");
     FunctionDef fun = (FunctionDef) fileInput.statements().statements().get(0);
     ControlFlowGraph cfg = ControlFlowGraph.build(fun, file);
@@ -720,7 +720,7 @@ public class ControlFlowGraphTest {
   }
 
   @Test
-  public void successors_predecessors_order() {
+  void successors_predecessors_order() {
     ControlFlowGraph cfg = cfg(
       "if p:",
       "  print('True')"

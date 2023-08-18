@@ -22,20 +22,20 @@ package org.sonar.python.checks.cdk;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-public class UnrestrictedAdministrationCheckTest {
+class UnrestrictedAdministrationCheckTest {
 
   @Test
-  public void test_CfnSecurityGroup() {
+  void test_CfnSecurityGroup() {
     PythonCheckVerifier.verify("src/test/resources/checks/cdk/unrestrictedAdministration_CfnSecurityGroup.py", new UnrestrictedAdministrationCheck());
   }
 
   @Test
-  public void test_CfnSecurityGroupIngress() {
+  void test_CfnSecurityGroupIngress() {
     PythonCheckVerifier.verify("src/test/resources/checks/cdk/unrestrictedAdministration_CfnSecurityGroupIngress.py", new UnrestrictedAdministrationCheck());
   }
 
   @Test
-  public void test_Connections() {
+  void test_Connections() {
     PythonCheckVerifier.verify("src/test/resources/checks/cdk/unrestrictedAdministration_Connections.py", new UnrestrictedAdministrationCheck());
   }
 }

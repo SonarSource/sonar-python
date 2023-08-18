@@ -23,15 +23,15 @@ import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.quickfix.PythonQuickFixVerifier;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-public class ChildAndParentExceptionCaughtCheckTest {
+class ChildAndParentExceptionCaughtCheckTest {
 
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/childAndParentExceptionCaughtCheck.py", new ChildAndParentExceptionCaughtCheck());
   }
 
   @Test
-  public void childWithParentQuickFixTest() {
+  void childWithParentQuickFixTest() {
     ChildAndParentExceptionCaughtCheck check = new ChildAndParentExceptionCaughtCheck();
 
     String before = "def child_with_parent():\n" +
@@ -49,7 +49,7 @@ public class ChildAndParentExceptionCaughtCheckTest {
   }
 
   @Test
-  public void parentWithChildQuickFixTest() {
+  void parentWithChildQuickFixTest() {
     ChildAndParentExceptionCaughtCheck check = new ChildAndParentExceptionCaughtCheck();
 
     String before = "def parent_with_child():\n" +
@@ -67,7 +67,7 @@ public class ChildAndParentExceptionCaughtCheckTest {
   }
 
   @Test
-  public void duplicateExceptionQuickFixTest() {
+  void duplicateExceptionQuickFixTest() {
     ChildAndParentExceptionCaughtCheck check = new ChildAndParentExceptionCaughtCheck();
 
     String before = "def duplicate_exception_caught():\n" +
@@ -85,7 +85,7 @@ public class ChildAndParentExceptionCaughtCheckTest {
   }
 
   @Test
-  public void threeExceptionsFirstQuickFixTest() {
+  void threeExceptionsFirstQuickFixTest() {
     ChildAndParentExceptionCaughtCheck check = new ChildAndParentExceptionCaughtCheck();
 
     String before = "def child_with_parent():\n" +
@@ -103,7 +103,7 @@ public class ChildAndParentExceptionCaughtCheckTest {
   }
 
   @Test
-  public void threeExceptionsSecondQuickFixTest() {
+  void threeExceptionsSecondQuickFixTest() {
     ChildAndParentExceptionCaughtCheck check = new ChildAndParentExceptionCaughtCheck();
 
     String before = "def child_with_parent():\n" +
@@ -121,7 +121,7 @@ public class ChildAndParentExceptionCaughtCheckTest {
   }
 
   @Test
-  public void threeExceptionsThirdQuickFixTest() {
+  void threeExceptionsThirdQuickFixTest() {
     ChildAndParentExceptionCaughtCheck check = new ChildAndParentExceptionCaughtCheck();
 
     String before = "def child_with_parent():\n" +
@@ -139,7 +139,7 @@ public class ChildAndParentExceptionCaughtCheckTest {
   }
 
   @Test
-  public void threeExceptionsThirdWithCommaInTheEndQuickFixTest() {
+  void threeExceptionsThirdWithCommaInTheEndQuickFixTest() {
     ChildAndParentExceptionCaughtCheck check = new ChildAndParentExceptionCaughtCheck();
 
     String before = "def child_with_parent():\n" +
@@ -157,7 +157,7 @@ public class ChildAndParentExceptionCaughtCheckTest {
   }
 
   @Test
-  public void multiLineQuickFixTest() {
+  void multiLineQuickFixTest() {
     ChildAndParentExceptionCaughtCheck check = new ChildAndParentExceptionCaughtCheck();
 
     String before = "def milty_line():\n" +
@@ -176,7 +176,7 @@ public class ChildAndParentExceptionCaughtCheckTest {
   }
 
   @Test
-  public void multiLineTwoQuickFixTest() {
+  void multiLineTwoQuickFixTest() {
     ChildAndParentExceptionCaughtCheck check = new ChildAndParentExceptionCaughtCheck();
 
     String before = "def milty_line():\n" +
@@ -195,7 +195,7 @@ public class ChildAndParentExceptionCaughtCheckTest {
   }
 
   @Test
-  public void qualifiedExpressionExpressionFixTest() {
+  void qualifiedExpressionExpressionFixTest() {
     ChildAndParentExceptionCaughtCheck check = new ChildAndParentExceptionCaughtCheck();
 
     String before = "def child_with_parent():\n" +
@@ -214,7 +214,7 @@ public class ChildAndParentExceptionCaughtCheckTest {
 
 
   @Test
-  public void functionCallExpressionFixTest() {
+  void functionCallExpressionFixTest() {
     ChildAndParentExceptionCaughtCheck check = new ChildAndParentExceptionCaughtCheck();
 
     String before = "def child_with_parent():\n" +

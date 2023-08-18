@@ -22,10 +22,10 @@ package org.sonar.python.checks.regex;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-public class RedundantRegexAlternativesCheckTest {
+class RedundantRegexAlternativesCheckTest {
 
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/regex/redundantRegexAlternativesCheckTest.py", new RedundantRegexAlternativesCheck());
   }
 }

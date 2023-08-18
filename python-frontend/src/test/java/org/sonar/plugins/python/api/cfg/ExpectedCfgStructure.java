@@ -48,7 +48,7 @@ import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.cfg.PythonCfgEndBlock;
 
-public class ExpectedCfgStructure {
+class ExpectedCfgStructure {
 
   static final String EMPTY = "_empty";
   // The string value is the CfgBlock test id

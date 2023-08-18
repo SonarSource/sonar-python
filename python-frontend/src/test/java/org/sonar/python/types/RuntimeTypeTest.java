@@ -37,14 +37,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.types.InferredTypes.or;
 import static org.sonar.python.types.InferredTypes.runtimeBuiltinType;
 
-public class RuntimeTypeTest {
+class RuntimeTypeTest {
 
   private final ClassSymbolImpl a = new ClassSymbolImpl("a", "a");
   private final ClassSymbolImpl b = new ClassSymbolImpl("b", "b");
   private final ClassSymbolImpl c = new ClassSymbolImpl("c", "c");
 
   @Test
-  public void isIdentityComparableWith() {
+  void isIdentityComparableWith() {
     RuntimeType aType = new RuntimeType(a);
     RuntimeType bType = new RuntimeType(b);
     RuntimeType cType = new RuntimeType(c);
@@ -63,7 +63,7 @@ public class RuntimeTypeTest {
   }
 
   @Test
-  public void member() {
+  void member() {
     ClassSymbolImpl x = new ClassSymbolImpl("x", "x");
     SymbolImpl foo = new SymbolImpl("foo", null);
     x.addMembers(singletonList(foo));
@@ -86,7 +86,7 @@ public class RuntimeTypeTest {
   }
 
   @Test
-  public void overridden_symbol() {
+  void overridden_symbol() {
     ClassSymbolImpl x = new ClassSymbolImpl("x", "x");
     SymbolImpl fooX = new SymbolImpl("foo", null);
     x.addMembers(singletonList(fooX));
@@ -108,7 +108,7 @@ public class RuntimeTypeTest {
   }
 
   @Test
-  public void cycle_between_super_types() {
+  void cycle_between_super_types() {
     ClassSymbolImpl x = new ClassSymbolImpl("x", "x");
     ClassSymbolImpl y = new ClassSymbolImpl("y", "y");
     ClassSymbolImpl z = new ClassSymbolImpl("z", "z");
@@ -119,7 +119,7 @@ public class RuntimeTypeTest {
   }
 
   @Test
-  public void unresolved_type_hierarchy() {
+  void unresolved_type_hierarchy() {
     ClassSymbolImpl x = new ClassSymbolImpl("x", "x");
     x.setHasSuperClassWithoutSymbol();
     assertThat(new RuntimeType(x).canHaveMember("foo")).isTrue();
@@ -130,7 +130,7 @@ public class RuntimeTypeTest {
   }
 
   @Test
-  public void test_equals() {
+  void test_equals() {
     RuntimeType aType = new RuntimeType(a);
     assertThat(aType.equals(aType)).isTrue();
     assertThat(aType.equals(new RuntimeType(a))).isTrue();
@@ -162,7 +162,7 @@ public class RuntimeTypeTest {
   }
 
   @Test
-  public void test_hashCode() {
+  void test_hashCode() {
     RuntimeType aType = new RuntimeType(a);
     assertThat(aType.hashCode()).isEqualTo(new RuntimeType(a).hashCode());
     assertThat(aType.hashCode()).isNotEqualTo(new RuntimeType(b).hashCode());
@@ -173,18 +173,18 @@ public class RuntimeTypeTest {
   }
 
   @Test
-  public void test_toString() {
+  void test_toString() {
     assertThat(new RuntimeType(a).toString()).isEqualTo("RuntimeType(a)");
   }
 
   @Test
-  public void test_canOnlyBe() {
+  void test_canOnlyBe() {
     assertThat(new RuntimeType(a).canOnlyBe("a")).isTrue();
     assertThat(new RuntimeType(b).canOnlyBe("a")).isFalse();
   }
 
   @Test
-  public void test_canBeOrExtend() {
+  void test_canBeOrExtend() {
     ClassSymbolImpl x = new ClassSymbolImpl("x", "x");
     assertThat(new RuntimeType(x).canBeOrExtend("x")).isTrue();
     assertThat(new RuntimeType(x).canBeOrExtend("y")).isFalse();
@@ -200,7 +200,7 @@ public class RuntimeTypeTest {
   }
 
   @Test
-  public void test_isCompatibleWith() {
+  void test_isCompatibleWith() {
     ClassSymbolImpl x1 = new ClassSymbolImpl("x1", "x1");
     ClassSymbolImpl x2 = new ClassSymbolImpl("x2", "x2");
     x2.addSuperClass(x1);
@@ -241,7 +241,7 @@ public class RuntimeTypeTest {
   }
 
   @Test
-  public void test_isCompatibleWith_numbers() {
+  void test_isCompatibleWith_numbers() {
     assertThat(InferredTypes.INT.isCompatibleWith(InferredTypes.INT)).isTrue();
     assertThat(InferredTypes.INT.isCompatibleWith(InferredTypes.FLOAT)).isTrue();
     assertThat(InferredTypes.FLOAT.isCompatibleWith(InferredTypes.INT)).isFalse();
@@ -254,7 +254,7 @@ public class RuntimeTypeTest {
   }
 
   @Test
-  public void test_isCompatibleWith_str() {
+  void test_isCompatibleWith_str() {
     InferredType memoryView = runtimeBuiltinType("memoryview");
     assertThat(memoryView.isCompatibleWith(InferredTypes.STR)).isTrue();
     assertThat(InferredTypes.STR.isCompatibleWith(InferredTypes.STR)).isTrue();
@@ -262,7 +262,7 @@ public class RuntimeTypeTest {
   }
 
   @Test
-  public void test_isCompatibleWith_NoneType() {
+  void test_isCompatibleWith_NoneType() {
     ClassSymbolImpl x1 = new ClassSymbolImpl("x1", "x1");
     x1.addMembers(Collections.singletonList(new SymbolImpl("foo", null)));
     ClassSymbolImpl none = new ClassSymbolImpl("NoneType", "NoneType");
@@ -273,14 +273,14 @@ public class RuntimeTypeTest {
   }
 
   @Test
-  public void test_isCompatibleWith_declared_union_with_missing_symbols() {
+  void test_isCompatibleWith_declared_union_with_missing_symbols() {
     ClassSymbolImpl x = new ClassSymbolImpl("x", "x");
     ClassSymbolImpl union = new ClassSymbolImpl("union", "typing.Union");
     assertThat(new RuntimeType(x).isCompatibleWith(new DeclaredType(union))).isTrue();
   }
 
   @Test
-  public void test_mustBeOrExtend() {
+  void test_mustBeOrExtend() {
     ClassSymbolImpl x1 = new ClassSymbolImpl("x1", "x1");
     ClassSymbolImpl x2 = new ClassSymbolImpl("x2", "x2");
     x2.addSuperClass(x1);
@@ -296,7 +296,7 @@ public class RuntimeTypeTest {
   }
 
   @Test
-  public void test_resolveDeclaredMember() {
+  void test_resolveDeclaredMember() {
     ClassSymbolImpl typeClass = new ClassSymbolImpl("x", "x");
     SymbolImpl foo = new SymbolImpl("foo", "foo");
     typeClass.addMembers(Collections.singletonList(foo));

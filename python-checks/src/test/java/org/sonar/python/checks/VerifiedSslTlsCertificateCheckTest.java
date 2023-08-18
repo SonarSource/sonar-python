@@ -22,9 +22,9 @@ package org.sonar.python.checks;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-public class VerifiedSslTlsCertificateCheckTest {
+class VerifiedSslTlsCertificateCheckTest {
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify(
       "src/test/resources/checks/verifiedSslTlsCertificateCheck.py",
       new VerifiedSslTlsCertificateCheck());

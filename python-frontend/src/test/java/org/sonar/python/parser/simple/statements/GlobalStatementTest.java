@@ -19,22 +19,22 @@
  */
 package org.sonar.python.parser.simple.statements;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.parser.RuleTest;
 
 import static org.sonar.python.parser.PythonParserAssert.assertThat;
 
-public class GlobalStatementTest extends RuleTest {
+class GlobalStatementTest extends RuleTest {
 
-  @Before
-  public void init() {
+  @BeforeEach
+  void init() {
     setRootRule(PythonGrammar.GLOBAL_STMT);
   }
 
   @Test
-  public void ok() {
+  void ok() {
     assertThat(p).matches("global IDENTIFIER");
     assertThat(p).matches("global IDENTIFIER , IDENTIFIER");
   }

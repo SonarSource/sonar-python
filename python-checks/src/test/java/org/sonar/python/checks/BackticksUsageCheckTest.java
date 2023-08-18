@@ -23,15 +23,15 @@ import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.quickfix.PythonQuickFixVerifier;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-public class BackticksUsageCheckTest {
+class BackticksUsageCheckTest {
 
   @Test
-  public void testCheck() {
+  void testCheck() {
     PythonCheckVerifier.verify("src/test/resources/checks/backticksUsage.py", new BackticksUsageCheck());
   }
 
   @Test
-  public void testQuickFix() {
+  void testQuickFix() {
     String codeWithIssue = "def foo():\n" +
             "    `num`\n" +
             "    foo()";
@@ -42,7 +42,7 @@ public class BackticksUsageCheckTest {
   }
 
   @Test
-  public void testQuickFixMultiline() {
+  void testQuickFixMultiline() {
     String codeWithIssue = "def bar():\n" +
             "    print(`1\n" +
             "    + 2`)";

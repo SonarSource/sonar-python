@@ -38,10 +38,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.sonar.python.PythonTestUtils.parse;
 
-public class ClassSymbolImplTest {
+class ClassSymbolImplTest {
 
   @Test
-  public void hasUnresolvedTypeHierarchy() {
+  void hasUnresolvedTypeHierarchy() {
     ClassSymbolImpl a = new ClassSymbolImpl("x", null);
     assertThat(a.hasUnresolvedTypeHierarchy()).isFalse();
 
@@ -68,7 +68,7 @@ public class ClassSymbolImplTest {
   }
 
   @Test
-  public void cycle_between_super_classes() {
+  void cycle_between_super_classes() {
     ClassSymbolImpl x = new ClassSymbolImpl("x", "x");
     ClassSymbolImpl y = new ClassSymbolImpl("y", "y");
     ClassSymbolImpl z = new ClassSymbolImpl("z", "z");
@@ -81,7 +81,7 @@ public class ClassSymbolImplTest {
   }
 
   @Test
-  public void should_throw_when_adding_super_class_after_super_classes_were_read() {
+  void should_throw_when_adding_super_class_after_super_classes_were_read() {
     ClassSymbolImpl a = new ClassSymbolImpl("a", null);
     ClassSymbolImpl b = new ClassSymbolImpl("b", null);
     ClassSymbolImpl c = new ClassSymbolImpl("c", null);
@@ -91,7 +91,7 @@ public class ClassSymbolImplTest {
   }
 
   @Test
-  public void should_throw_when_adding_super_class_after_checking_hierarchy() {
+  void should_throw_when_adding_super_class_after_checking_hierarchy() {
     ClassSymbolImpl a = new ClassSymbolImpl("a", null);
     ClassSymbolImpl b = new ClassSymbolImpl("b", null);
     ClassSymbolImpl c = new ClassSymbolImpl("c", null);
@@ -101,7 +101,7 @@ public class ClassSymbolImplTest {
   }
 
   @Test
-  public void resolveMember() {
+  void resolveMember() {
     assertThat(new ClassSymbolImpl("a", null).resolveMember("foo")).isEmpty();
 
     ClassSymbolImpl a = new ClassSymbolImpl("a", null);
@@ -116,7 +116,7 @@ public class ClassSymbolImplTest {
   }
 
   @Test
-  public void resolve_inherited_member() {
+  void resolve_inherited_member() {
     ClassSymbolImpl a = new ClassSymbolImpl("a", null);
     ClassSymbolImpl b = new ClassSymbolImpl("b", null);
     Symbol fooB = new SymbolImpl("foo", "b.foo");
@@ -126,7 +126,7 @@ public class ClassSymbolImplTest {
   }
 
   @Test
-  public void resolve_overridden_member() {
+  void resolve_overridden_member() {
     ClassSymbolImpl a = new ClassSymbolImpl("a", null);
     Symbol fooA = new SymbolImpl("foo", "a.foo");
     a.addMembers(Collections.singleton(fooA));
@@ -138,7 +138,7 @@ public class ClassSymbolImplTest {
   }
 
   @Test
-  public void should_throw_when_adding_member_after_call_to_resolveMember() {
+  void should_throw_when_adding_member_after_call_to_resolveMember() {
     ClassSymbolImpl a = new ClassSymbolImpl("a", null);
     a.addMembers(Collections.singleton(new SymbolImpl("m1", null)));
     assertThat(a.resolveMember("m1")).isNotEmpty();
@@ -146,7 +146,7 @@ public class ClassSymbolImplTest {
   }
 
   @Test
-  public void isOrExtends() {
+  void isOrExtends() {
     ClassSymbolImpl a = new ClassSymbolImpl("a", "mod1.a");
     ClassSymbolImpl b = new ClassSymbolImpl("b", "mod2.b");
     a.addSuperClass(b);
@@ -166,7 +166,7 @@ public class ClassSymbolImplTest {
   }
 
   @Test
-  public void isOrExtends_non_class_symbol() {
+  void isOrExtends_non_class_symbol() {
     ClassSymbolImpl a = new ClassSymbolImpl("a", "mod1.a");
     SymbolImpl b = new SymbolImpl("b", "mod2.b");
     a.addSuperClass(b);
@@ -182,7 +182,7 @@ public class ClassSymbolImplTest {
   }
 
   @Test
-  public void canBeOrExtend() {
+  void canBeOrExtend() {
     ClassSymbolImpl a = new ClassSymbolImpl("a", "mod1.a");
     ClassSymbolImpl b = new ClassSymbolImpl("b", "mod2.b");
     a.addSuperClass(b);
@@ -214,7 +214,7 @@ public class ClassSymbolImplTest {
   }
 
   @Test
-  public void removeUsages() {
+  void removeUsages() {
     FileInput fileInput = parse(
       "class Base: ...",
       "class A(Base):",
@@ -230,7 +230,7 @@ public class ClassSymbolImplTest {
   }
 
   @Test
-  public void from_protobuf() throws TextFormat.ParseException {
+  void from_protobuf() throws TextFormat.ParseException {
     String protobuf =
       "name: \"A\"\n" +
       "fully_qualified_name: \"mod.A\"\n" +
@@ -248,7 +248,7 @@ public class ClassSymbolImplTest {
   }
 
   @Test
-  public void from_protobuf_instance_method() throws TextFormat.ParseException {
+  void from_protobuf_instance_method() throws TextFormat.ParseException {
     String protobuf =
       "name: \"A\"\n" +
         "fully_qualified_name: \"mod.A\"\n" +
@@ -268,7 +268,7 @@ public class ClassSymbolImplTest {
   }
 
   @Test
-  public void from_protobuf_class_method() throws TextFormat.ParseException {
+  void from_protobuf_class_method() throws TextFormat.ParseException {
     String protobuf =
       "name: \"A\"\n" +
       "fully_qualified_name: \"mod.A\"\n" +
@@ -289,7 +289,7 @@ public class ClassSymbolImplTest {
   }
 
   @Test
-  public void from_protobuf_static_method() throws TextFormat.ParseException {
+  void from_protobuf_static_method() throws TextFormat.ParseException {
     String protobuf =
       "name: \"A\"\n" +
         "fully_qualified_name: \"mod.A\"\n" +
@@ -310,7 +310,7 @@ public class ClassSymbolImplTest {
   }
 
   @Test
-  public void overloaded_methods() throws TextFormat.ParseException {
+  void overloaded_methods() throws TextFormat.ParseException {
     String protobuf =
         "name: \"A\"\n" +
         "fully_qualified_name: \"mod.A\"\n" +

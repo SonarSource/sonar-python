@@ -25,14 +25,14 @@ import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 import static org.sonar.python.checks.utils.CodeTestUtils.code;
 
-public class MandatoryFunctionReturnTypeHintCheckTest {
+class MandatoryFunctionReturnTypeHintCheckTest {
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/mandatoryFunctionReturnType.py", new MandatoryFunctionReturnTypeHintCheck());
   }
 
   @Test
-  public void quick_fix_none_return_type_for_init() {
+  void quick_fix_none_return_type_for_init() {
     String codeWithIssue = code(
       "class A():",
       "    def __init__(self):",
@@ -47,7 +47,7 @@ public class MandatoryFunctionReturnTypeHintCheckTest {
   }
 
   @Test
-  public void quick_fix_none_return_type_for_init_weird_format() {
+  void quick_fix_none_return_type_for_init_weird_format() {
     String codeWithIssue = code(
       "class A():",
       "    def __init__(self)   : ",
@@ -62,7 +62,7 @@ public class MandatoryFunctionReturnTypeHintCheckTest {
   }
 
   @Test
-  public void quick_fix_none_return_type_for_init_multiline() {
+  void quick_fix_none_return_type_for_init_multiline() {
     String codeWithIssue = code(
       "class A():",
       "    def __init__(self,",
@@ -79,7 +79,7 @@ public class MandatoryFunctionReturnTypeHintCheckTest {
   }
 
   @Test
-  public void quick_fix_add_return_type_literal() {
+  void quick_fix_add_return_type_literal() {
     String codeWithIssue = code(
       "def foo():",
       "    return \"bar\"");
@@ -92,7 +92,7 @@ public class MandatoryFunctionReturnTypeHintCheckTest {
   }
 
   @Test
-  public void quick_fix_return_expression() {
+  void quick_fix_return_expression() {
     String codeWithIssue = code(
       "def foo(alice: str):",
       "    return  alice + \"bar\"");
@@ -105,7 +105,7 @@ public class MandatoryFunctionReturnTypeHintCheckTest {
   }
 
   @Test
-  public void quick_fix_no_return_keyword() {
+  void quick_fix_no_return_keyword() {
     String codeWithIssue = code(
       "def foo(bob):",
       "    print(bob) ");
@@ -118,7 +118,7 @@ public class MandatoryFunctionReturnTypeHintCheckTest {
   }
 
   @Test
-  public void quick_fix_nested_return_type() {
+  void quick_fix_nested_return_type() {
     String codeWithIssue = code(
       "def foo(bob: bool):",
       "    if bob:",
@@ -137,7 +137,7 @@ public class MandatoryFunctionReturnTypeHintCheckTest {
   }
 
   @Test
-  public void quick_fix_for_nested_function() {
+  void quick_fix_for_nested_function() {
     String codeWithIssue = code(
       "def foo() -> int:",
       "    def bar():",
@@ -154,7 +154,7 @@ public class MandatoryFunctionReturnTypeHintCheckTest {
   }
 
   @Test
-  public void quick_fix_for_return_with_yield() {
+  void quick_fix_for_return_with_yield() {
     String codeWithIssue = code(
       "def foo(alice: dict[str, int]):",
       "    bar = 0",
@@ -173,7 +173,7 @@ public class MandatoryFunctionReturnTypeHintCheckTest {
   }
 
   @Test
-  public void quick_fix_for_complex() {
+  void quick_fix_for_complex() {
     String codeWithIssue = code(
       "def foo():",
       "    return complex(1,2)");
@@ -186,7 +186,7 @@ public class MandatoryFunctionReturnTypeHintCheckTest {
   }
 
   @Test
-  public void quick_fix_for_float() {
+  void quick_fix_for_float() {
     String codeWithIssue = code(
       "def foo():",
       "    return 3.14");
@@ -199,7 +199,7 @@ public class MandatoryFunctionReturnTypeHintCheckTest {
   }
 
   @Test
-  public void quick_fix_for_return_none() {
+  void quick_fix_for_return_none() {
     String codeWithIssue = code(
       "def foo():",
       "    return None");
@@ -212,7 +212,7 @@ public class MandatoryFunctionReturnTypeHintCheckTest {
   }
 
   @Test
-  public void no_quick_fix_collections() {
+  void no_quick_fix_collections() {
     String codeWithIssue = code(
       "from typing import Dict",
       "def foo(alice: Dict[str, int]):",
@@ -225,7 +225,7 @@ public class MandatoryFunctionReturnTypeHintCheckTest {
   }
 
   @Test
-  public void no_quick_fix_tuples() {
+  void no_quick_fix_tuples() {
     String codeWithIssue = code(
       "def foo():",
       "    return (\"bar\", 1)");
@@ -234,7 +234,7 @@ public class MandatoryFunctionReturnTypeHintCheckTest {
   }
 
   @Test
-  public void no_quick_fix_generic_types() {
+  void no_quick_fix_generic_types() {
     String codeWithIssue = code(
       "def foo(alice: dict[str, int]):",
       "    bob = {}",
@@ -246,7 +246,7 @@ public class MandatoryFunctionReturnTypeHintCheckTest {
   }
 
   @Test
-  public void no_quick_fix_ambiguous_type() {
+  void no_quick_fix_ambiguous_type() {
     String codeWithIssue = code(
       "def foo(alice: str, bob: int):",
       "    return alice + bob");
@@ -255,7 +255,7 @@ public class MandatoryFunctionReturnTypeHintCheckTest {
   }
 
   @Test
-  public void no_quick_fix_any_type() {
+  void no_quick_fix_any_type() {
     String codeWithIssue = code(
       "def foo(alice: Any):",
       "    return alice");
@@ -264,7 +264,7 @@ public class MandatoryFunctionReturnTypeHintCheckTest {
   }
 
   @Test
-  public void no_quick_fix_too_many_types() {
+  void no_quick_fix_too_many_types() {
     String codeWithIssue = code(
       "def foo(bob: str):",
       "    if bob == \"foo\":",
@@ -278,7 +278,7 @@ public class MandatoryFunctionReturnTypeHintCheckTest {
   }
 
   @Test
-  public void no_quick_fix_for_yield() {
+  void no_quick_fix_for_yield() {
     String codeWithIssue = code(
       "def foo(alice: dict[str, int]):",
       "    for k, v in alice.items():",

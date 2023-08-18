@@ -25,10 +25,10 @@ import org.sonar.plugins.python.api.quickfix.PythonTextEdit;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class PythonQuickFixTest {
+class PythonQuickFixTest {
 
   @Test
-  public void test_newQuickFix_builder() {
+  void test_newQuickFix_builder() {
     PythonTextEdit textEdit = new PythonTextEdit("This is a replacement text", 1, 2, 3, 4);
 
     PythonQuickFix quickFix = PythonQuickFix.newQuickFix("New quickfix").addTextEdit(textEdit).build();
@@ -38,7 +38,7 @@ public class PythonQuickFixTest {
   }
 
   @Test
-  public void test_newQuickFix() {
+  void test_newQuickFix() {
     PythonTextEdit textEdit = new PythonTextEdit("This is a replacement text", 1, 2, 3, 4);
 
     PythonQuickFix quickFix = PythonQuickFix.newQuickFix("New quickfix", textEdit);

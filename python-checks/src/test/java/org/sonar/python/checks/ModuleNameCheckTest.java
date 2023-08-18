@@ -22,22 +22,22 @@ package org.sonar.python.checks;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-public class ModuleNameCheckTest {
+class ModuleNameCheckTest {
 
   private ModuleNameCheck check = new ModuleNameCheck();
 
   @Test
-  public void bad_name() {
+  void bad_name() {
     PythonCheckVerifier.verify("src/test/resources/checks/badModule_name.py", check);
   }
 
   @Test
-  public void good_name_camel_case() {
+  void good_name_camel_case() {
     PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/ModuleName.py", check);
   }
 
   @Test
-  public void good_name_snake_case() {
+  void good_name_snake_case() {
     PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/module_name.py", check);
   }
 

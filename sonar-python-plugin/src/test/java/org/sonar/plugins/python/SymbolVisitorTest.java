@@ -36,13 +36,13 @@ import org.sonar.python.TestPythonVisitorRunner;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class SymbolVisitorTest {
+class SymbolVisitorTest {
 
   private static SensorContextTester context;
   private static String componentKey;
 
   @BeforeAll
-  public static void scanFile() {
+  static void scanFile() {
     File file = new File("src/test/resources/org/sonar/plugins/python/sensor", "/symbolVisitor.py");
     DefaultInputFile inputFile = TestInputFileBuilder.create("moduleKey", file.getName())
       .initMetadata(TestUtils.fileContent(file, StandardCharsets.UTF_8))
@@ -59,7 +59,7 @@ public class SymbolVisitorTest {
   }
 
   @Test
-  public void symbol_visitor() {
+  void symbol_visitor() {
     assertThat(context.referencesForSymbolAt(componentKey, 1, 10)).isNull();
     verifyUsages(1, 0, reference(29, 14, 29, 15), reference(30, 18, 30, 19));
     verifyUsages(2, 0, reference(3, 6, 3, 7), reference(10, 4, 10, 5), reference(32, 1, 32, 2));

@@ -23,15 +23,15 @@ import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.quickfix.PythonQuickFixVerifier;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-public class UselessParenthesisCheckTest {
+class UselessParenthesisCheckTest {
 
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/uselessParenthesis.py", new UselessParenthesisCheck());
   }
 
   @Test
-  public void quickFixTest() {
+  void quickFixTest() {
     PythonQuickFixVerifier.verify(new UselessParenthesisCheck(), "assert ((x < 2))", "assert (x < 2)");
     PythonQuickFixVerifier.verify(new UselessParenthesisCheck(),
       "for (x) in ((range(0, 3))):\n  pass",

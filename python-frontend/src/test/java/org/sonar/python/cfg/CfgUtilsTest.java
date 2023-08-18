@@ -35,12 +35,12 @@ import org.sonar.python.PythonTestUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class CfgUtilsTest {
+class CfgUtilsTest {
 
   private PythonFile file = Mockito.mock(PythonFile.class, "file1.py");
 
   @Test
-  public void unreachableBlocks_empty() {
+  void unreachableBlocks_empty() {
     ControlFlowGraph cfg = cfg(
       "x = 10"
     );
@@ -48,7 +48,7 @@ public class CfgUtilsTest {
   }
 
   @Test
-  public void unreachableBlocks_one() {
+  void unreachableBlocks_one() {
     ControlFlowGraph cfg = cfg(
       "x = 10",
       "return",
@@ -58,7 +58,7 @@ public class CfgUtilsTest {
   }
 
   @Test
-  public void unreachableBlocks_conditional() {
+  void unreachableBlocks_conditional() {
     ControlFlowGraph cfg = cfg(
       "x = 10",
       "return",

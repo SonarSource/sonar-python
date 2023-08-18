@@ -22,10 +22,10 @@ package org.sonar.python.checks;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-public class BreakContinueOutsideLoopCheckTest {
+class BreakContinueOutsideLoopCheckTest {
 
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/breakContinueOutsideLoop.py", new BreakContinueOutsideLoopCheck());
   }
 

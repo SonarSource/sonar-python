@@ -23,10 +23,10 @@ import java.util.Collections;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-public class UnverifiedHostnameCheckTest {
+class UnverifiedHostnameCheckTest {
 
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify(Collections.singletonList("src/test/resources/checks/hotspots/unverifiedHostname.py"), new UnverifiedHostnameCheck());
   }
 

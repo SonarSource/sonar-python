@@ -24,15 +24,15 @@ import org.sonar.python.checks.quickfix.PythonQuickFixVerifier;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 
-public class MultipleWhitespaceCheckTest {
+class MultipleWhitespaceCheckTest {
 
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/regex/multipleWhitespaceCheck.py", new MultipleWhitespaceCheck());
   }
 
   @Test
-  public void quickFixTest() {
+  void quickFixTest() {
     var before = "import re\n" +
       "changed = re.match(r\"Hello,   world!\", input)";
     var after = "import re\n" +

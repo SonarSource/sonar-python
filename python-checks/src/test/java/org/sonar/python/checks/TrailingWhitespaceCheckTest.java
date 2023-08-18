@@ -26,17 +26,17 @@ import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 import static org.sonar.python.checks.utils.CodeTestUtils.code;
 
-public class TrailingWhitespaceCheckTest {
+class TrailingWhitespaceCheckTest {
 
   final PythonCheck check = new TrailingWhitespaceCheck();
 
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/trailingWhitespace.py", check);
   }
 
   @Test
-  public void single_whitespace_at_end_of_line() {
+  void single_whitespace_at_end_of_line() {
     String codeWithIssue = code(
       "print(1) ",
       "print(2)");
@@ -48,7 +48,7 @@ public class TrailingWhitespaceCheckTest {
   }
 
   @Test
-  public void multiple_whitespace_at_end_of_line() {
+  void multiple_whitespace_at_end_of_line() {
     String codeWithIssue = code(
       "print(1)   ",
       "print(2)");
@@ -60,7 +60,7 @@ public class TrailingWhitespaceCheckTest {
   }
 
   @Test
-  public void single_whitespace_as_line() {
+  void single_whitespace_as_line() {
     String codeWithIssue = code(
       " ",
       "print(1)");
@@ -72,7 +72,7 @@ public class TrailingWhitespaceCheckTest {
   }
 
   @Test
-  public void multiple_whitespace_as_line() {
+  void multiple_whitespace_as_line() {
     String codeWithIssue = code(
       "   ",
       "print(1)");
@@ -84,7 +84,7 @@ public class TrailingWhitespaceCheckTest {
   }
 
   @Test
-  public void single_whitespace_at_end_of_file() {
+  void single_whitespace_at_end_of_file() {
     String codeWithIssue = code(
       "print(1) ");
     String fixedCode = code(

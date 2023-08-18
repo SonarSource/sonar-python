@@ -25,15 +25,15 @@ import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class DedicatedAssertionCheckTest {
+class DedicatedAssertionCheckTest {
 
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/tests/dedicatedAssertion.py", new DedicatedAssertionCheck());
   }
 
   @Test
-  public void test_scope() {
+  void test_scope() {
     assertThat(new DedicatedAssertionCheck().scope()).isEqualTo(PythonCheck.CheckScope.ALL);
   }
 }

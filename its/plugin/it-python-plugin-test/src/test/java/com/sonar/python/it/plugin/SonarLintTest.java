@@ -54,7 +54,7 @@ import org.sonarsource.sonarlint.core.commons.log.ClientLogOutput;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.tuple;
 
-public class SonarLintTest {
+class SonarLintTest {
 
   @TempDir
   public static Path TEMP;
@@ -64,7 +64,7 @@ public class SonarLintTest {
   private static File baseDir;
 
   @BeforeAll
-  public static void prepare() throws Exception {
+  static void prepare() throws Exception {
     StandaloneGlobalConfiguration sonarLintConfig = StandaloneGlobalConfiguration.builder()
       .addPlugin(Tests.PLUGIN_LOCATION.getFile().toPath())
       .setSonarLintUserHome(TEMP)
@@ -78,12 +78,12 @@ public class SonarLintTest {
   }
 
   @AfterAll
-  public static void stop() {
+  static void stop() {
     sonarlintEngine.stop();
   }
 
   @Test
-  public void should_raise_issues() throws IOException {
+  void should_raise_issues() throws IOException {
     ClientInputFile inputFile = prepareInputFile("foo.py",
       "def fooBar():\n"
         + "  `1` \n"

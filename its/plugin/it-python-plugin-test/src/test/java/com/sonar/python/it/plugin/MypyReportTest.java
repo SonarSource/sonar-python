@@ -31,7 +31,7 @@ import org.sonarqube.ws.Issues;
 import static com.sonar.python.it.plugin.Tests.issues;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class MypyReportTest {
+class MypyReportTest {
 
   private static final String PROJECT = "mypy_project";
 
@@ -39,7 +39,7 @@ public class MypyReportTest {
   public static final OrchestratorExtension ORCHESTRATOR = Tests.ORCHESTRATOR;
 
   @Test
-  public void import_report() {
+  void import_report() {
     ORCHESTRATOR.getServer().provisionProject(PROJECT, PROJECT);
     ORCHESTRATOR.getServer().associateProjectToQualityProfile(PROJECT, "py", "no_rule");
     ORCHESTRATOR.executeBuild(

@@ -23,15 +23,15 @@ import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.quickfix.PythonQuickFixVerifier;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-public class IgnoredSystemExitCheckTest {
+class IgnoredSystemExitCheckTest {
 
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/ignoredSystemExit.py", new IgnoredSystemExitCheck());
   }
 
   @Test
-  public void quickFixTest() {
+  void quickFixTest() {
     var before = "try:\n" +
       "    open(\"foo.txt\", \"r\")\n" +
       "except SystemExit:\n" +
@@ -46,7 +46,7 @@ public class IgnoredSystemExitCheckTest {
   }
 
   @Test
-  public void addRaiseQuickFixTest() {
+  void addRaiseQuickFixTest() {
     var before = "def bar():\n" +
       "    try:\n" +
       "        foo()\n" +
@@ -68,7 +68,7 @@ public class IgnoredSystemExitCheckTest {
   }
 
   @Test
-  public void replacePassWithRaiseQuickFixTest() {
+  void replacePassWithRaiseQuickFixTest() {
     var before = "def bar():\n" +
       "    try:\n" +
       "        foo()\n" +
@@ -89,7 +89,7 @@ public class IgnoredSystemExitCheckTest {
   }
 
   @Test
-  public void replaceEllipsisWithRaiseQuickFixTest() {
+  void replaceEllipsisWithRaiseQuickFixTest() {
     var before = "def bar():\n" +
       "    try:\n" +
       "        foo()\n" +
@@ -110,7 +110,7 @@ public class IgnoredSystemExitCheckTest {
   }
 
   @Test
-  public void baseExceptionQuickFixTest() {
+  void baseExceptionQuickFixTest() {
     var before = "def bar():\n" +
       "    try:\n" +
       "        foo()\n" +
@@ -131,7 +131,7 @@ public class IgnoredSystemExitCheckTest {
   }
 
   @Test
-  public void bareExceptionQuickFixTest() {
+  void bareExceptionQuickFixTest() {
     var before = "def bar():\n" +
       "    try:\n" +
       "        foo()\n" +

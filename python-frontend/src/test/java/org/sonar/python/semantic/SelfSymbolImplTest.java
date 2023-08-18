@@ -32,10 +32,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.PythonTestUtils.parse;
 
 
-public class SelfSymbolImplTest {
+class SelfSymbolImplTest {
 
   @Test
-  public void removeUsages() {
+  void removeUsages() {
     FileInput fileInput = parse(
       "class A:",
       "  def foo(self):",

@@ -23,10 +23,10 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class IPynbTest {
+class IPynbTest {
 
   @Test
-  public void test() {
+  void test() {
     IPynb language = new IPynb();
     assertThat(language.getKey()).isEqualTo("ipynb");
     assertThat(language.getName()).isEqualTo("IPython Notebooks");

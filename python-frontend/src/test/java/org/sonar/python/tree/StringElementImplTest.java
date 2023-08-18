@@ -26,10 +26,10 @@ import org.sonar.python.PythonTestUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class StringElementImplTest {
+class StringElementImplTest {
 
   @Test
-  public void isInterpolated() {
+  void isInterpolated() {
     assertThat(stringElement("'abc'").isInterpolated()).isFalse();
     assertThat(stringElement("f'abc'").isInterpolated()).isTrue();
     assertThat(stringElement("F'abc'").isInterpolated()).isTrue();

@@ -50,11 +50,11 @@ import org.sonar.python.PythonTestUtils;
  * <p>
  * 3. the name of the function is the identifier of the basic block
  */
-public class DefinedVariablesAnalysisTest {
+class DefinedVariablesAnalysisTest {
   private PythonFile file = Mockito.mock(PythonFile.class, "file1.py");
 
   @Test
-  public void test_simple_def() {
+  void test_simple_def() {
     verifyDefVariableAnalysis(
       "block( succ = [END], defIn= [], defOut = [_foo, _bar, _qix])",
       "foo = 1",
@@ -63,7 +63,7 @@ public class DefinedVariablesAnalysisTest {
   }
 
   @Test
-  public void test_fn() {
+  void test_fn() {
     verifyDefVariableAnalysis(
       "block( succ = [END], defIn= [], defOut = [_foo, _fn])",
       "foo = 1",
@@ -71,7 +71,7 @@ public class DefinedVariablesAnalysisTest {
   }
 
   @Test
-  public void test_not_def() {
+  void test_not_def() {
     verifyDefVariableAnalysis(
       "block( succ = [END], defOut = [], defIn = [])",
       "read(a)",
@@ -79,7 +79,7 @@ public class DefinedVariablesAnalysisTest {
   }
 
   @Test
-  public void test_write_before_read() {
+  void test_write_before_read() {
     verifyDefVariableAnalysis(
       "condition( succ = [body, END], defIn = [], defOut = [_a])",
       "a = 1",
@@ -90,7 +90,7 @@ public class DefinedVariablesAnalysisTest {
   }
 
   @Test
-  public void test_while() {
+  void test_while() {
     verifyDefVariableAnalysis(
       "before_loop( succ = [cond], defIn = [], defOut = [_a])",
       "a = 1",

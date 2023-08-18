@@ -24,16 +24,16 @@ import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.python.checks.quickfix.PythonQuickFixVerifier;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-public class InstanceAndClassMethodsAtLeastOnePositionalCheckTest {
+class InstanceAndClassMethodsAtLeastOnePositionalCheckTest {
 
   private final PythonCheck check = new InstanceAndClassMethodsAtLeastOnePositionalCheck();
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/instanceAndClassMethodAtLeastOnePositional.py", check);
   }
 
   @Test
-  public void class_method_quickfix() {
+  void class_method_quickfix() {
     String codeWithIssue = "" +
       "class Foo():\n" +
       "    @classmethod\n" +
@@ -48,7 +48,7 @@ public class InstanceAndClassMethodsAtLeastOnePositionalCheckTest {
   }
 
   @Test
-  public void regular_method_quickfix() {
+  void regular_method_quickfix() {
     String codeWithIssue = "" +
       "class Foo():\n" +
       "    def bar(): pass";
@@ -70,7 +70,7 @@ public class InstanceAndClassMethodsAtLeastOnePositionalCheckTest {
   }
 
   @Test
-  public void no_pos_args_quickfix() {
+  void no_pos_args_quickfix() {
     String codeWithIssue = "" +
       "class Foo():\n" +
       "    @classmethod\n" +

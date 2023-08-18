@@ -35,7 +35,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class CacheContextImplTest {
+class CacheContextImplTest {
 
   private static final Version VERSION_WITH_CACHING = Version.create(9, 7);
   private static final Version VERSION_WITHOUT_CACHING = Version.create(9, 6);
@@ -45,7 +45,7 @@ public class CacheContextImplTest {
   public LogTesterJUnit5 logTester = new LogTesterJUnit5().setLevel(Level.DEBUG);
 
   @Test
-  public void cache_context_of_enabled_cache() {
+  void cache_context_of_enabled_cache() {
     SensorContext sensorContext = sensorContext(SonarProduct.SONARQUBE, VERSION_WITH_CACHING, true);
 
     CacheContext cacheContext = CacheContextImpl.of(sensorContext);
@@ -53,7 +53,7 @@ public class CacheContextImplTest {
   }
 
   @Test
-  public void cache_context_of_disabled_cache() {
+  void cache_context_of_disabled_cache() {
     SensorContext sensorContext = sensorContext(SonarProduct.SONARQUBE, VERSION_WITH_CACHING, false);
 
     CacheContext cacheContext = CacheContextImpl.of(sensorContext);
@@ -61,7 +61,7 @@ public class CacheContextImplTest {
   }
 
   @Test
-  public void cache_context_on_sonarlint() {
+  void cache_context_on_sonarlint() {
     SensorContext sensorContext = sensorContext(SonarProduct.SONARLINT, VERSION_WITH_CACHING, true);
 
     CacheContext cacheContext = CacheContextImpl.of(sensorContext);
@@ -69,7 +69,7 @@ public class CacheContextImplTest {
   }
 
   @Test
-  public void cache_context_on_old_version() {
+  void cache_context_on_old_version() {
     SensorContext sensorContext = sensorContext(SonarProduct.SONARQUBE, VERSION_WITHOUT_CACHING, true);
 
     CacheContext cacheContext = CacheContextImpl.of(sensorContext);
@@ -77,7 +77,7 @@ public class CacheContextImplTest {
   }
 
   @Test
-  public void cache_context_with_sonar_modules_property() {
+  void cache_context_with_sonar_modules_property() {
     SensorContext sensorContext = sensorContext(SonarProduct.SONARQUBE, VERSION_WITH_CACHING, true);
     Configuration configuration = mock(Configuration.class);
     when(configuration.get("sonar.modules")).thenReturn(Optional.of("module1, module2"));
@@ -89,7 +89,7 @@ public class CacheContextImplTest {
   }
 
   @Test
-  public void cache_context_when_cache_disabled_no_sonar_module_logs() {
+  void cache_context_when_cache_disabled_no_sonar_module_logs() {
     SensorContext sensorContext = sensorContext(SonarProduct.SONARQUBE, VERSION_WITH_CACHING, false);
     Configuration configuration = mock(Configuration.class);
     when(configuration.get("sonar.modules")).thenReturn(Optional.of("module1, module2"));
@@ -101,7 +101,7 @@ public class CacheContextImplTest {
   }
 
   @Test
-  public void dummy_cache() {
+  void dummy_cache() {
     CacheContext dummyCache = CacheContextImpl.dummyCache();
     assertThat(dummyCache.isCacheEnabled()).isFalse();
   }

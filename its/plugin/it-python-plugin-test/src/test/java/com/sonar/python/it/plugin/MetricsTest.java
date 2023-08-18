@@ -34,7 +34,7 @@ import static com.sonar.python.it.plugin.Tests.getMeasureAsDouble;
 import static com.sonar.python.it.plugin.Tests.getMeasureAsInt;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class MetricsTest {
+class MetricsTest {
 
   private static final String PROJECT_KEY = "metrics";
 
@@ -70,7 +70,7 @@ public class MetricsTest {
   private static BuildResult buildResult;
 
   @BeforeAll
-  public static void startServer() {
+  static void startServer() {
     orchestrator.getServer().provisionProject(PROJECT_KEY, PROJECT_KEY);
     orchestrator.getServer().associateProjectToQualityProfile(PROJECT_KEY, "py", "no_rule");
     SonarScanner build = SonarScanner.create()
@@ -84,7 +84,7 @@ public class MetricsTest {
   }
 
   @Test
-  public void project_level() {
+  void project_level() {
     // Size
     assertThat(getProjectMeasureAsInt(NCLOC)).isEqualTo(6);
     assertThat(getProjectMeasureAsInt(LINES)).isEqualTo(13);
@@ -113,7 +113,7 @@ public class MetricsTest {
   }
 
   @Test
-  public void directory_level() {
+  void directory_level() {
     // Size
     assertThat(getDirectoryMeasureAsInt(NCLOC)).isEqualTo(6);
     assertThat(getDirectoryMeasureAsInt(LINES)).isEqualTo(13);
@@ -139,7 +139,7 @@ public class MetricsTest {
   }
 
   @Test
-  public void file_level() {
+  void file_level() {
     // Size
     assertThat(getFileMeasureAsInt(NCLOC)).isEqualTo(1);
     assertThat(getFileMeasureAsInt(LINES)).isEqualTo(6);
@@ -168,7 +168,7 @@ public class MetricsTest {
    * SONARPLUGINS-2184
    */
   @Test
-  public void should_be_compatible_with_DevCockpit() {
+  void should_be_compatible_with_DevCockpit() {
     // TODO probably bug in Sonar: order might depend on JVM
     assertThat(getFileMeasure(NCLOC_DATA).getValue())
       .doesNotContain("1=1")

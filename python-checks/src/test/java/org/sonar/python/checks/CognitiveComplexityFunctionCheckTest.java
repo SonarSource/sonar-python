@@ -22,18 +22,18 @@ package org.sonar.python.checks;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-public class CognitiveComplexityFunctionCheckTest {
+class CognitiveComplexityFunctionCheckTest {
 
   private final CognitiveComplexityFunctionCheck check = new CognitiveComplexityFunctionCheck();
 
   @Test
-  public void test() {
+  void test() {
     check.setThreshold(0);
     PythonCheckVerifier.verify("src/test/resources/checks/cognitiveComplexityFunction.py", check);
   }
 
   @Test
-  public void default_threshold() {
+  void default_threshold() {
     PythonCheckVerifier.verify("src/test/resources/checks/cognitiveComplexityFunctionDefault.py", check);
   }
 }

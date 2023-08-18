@@ -47,10 +47,10 @@ import static org.sonar.python.PythonTestUtils.pythonFile;
 import static org.sonar.python.semantic.SymbolUtils.pathOf;
 import static org.sonar.python.semantic.SymbolUtils.pythonPackageName;
 
-public class SymbolUtilsTest {
+class SymbolUtilsTest {
 
   @Test
-  public void package_name_by_file() {
+  void package_name_by_file() {
     String baseDir = new File("src/test/resources").getAbsoluteFile().getAbsolutePath();
     assertThat(pythonPackageName(new File(baseDir, "packages/sound/__init__.py"), baseDir)).isEqualTo("sound");
     assertThat(pythonPackageName(new File(baseDir, "packages/sound/formats/__init__.py"), baseDir)).isEqualTo("sound.formats");
@@ -58,7 +58,7 @@ public class SymbolUtilsTest {
   }
 
   @Test
-  public void fqn_by_package_with_subpackage() {
+  void fqn_by_package_with_subpackage() {
     assertThat(SymbolUtils.fullyQualifiedModuleName("", "foo.py")).isEqualTo("foo");
     assertThat(SymbolUtils.fullyQualifiedModuleName("foo", "__init__.py")).isEqualTo("foo");
     assertThat(SymbolUtils.fullyQualifiedModuleName("foo", "foo.py")).isEqualTo("foo.foo");
@@ -67,7 +67,7 @@ public class SymbolUtilsTest {
   }
 
   @Test
-  public void path_of() throws IOException, URISyntaxException {
+  void path_of() throws IOException, URISyntaxException {
     PythonFile pythonFile = Mockito.mock(PythonFile.class);
     URI uri = Files.createTempFile("foo.py", "py").toUri();
     Mockito.when(pythonFile.uri()).thenReturn(uri);
@@ -83,7 +83,7 @@ public class SymbolUtilsTest {
   }
 
   @Test
-  public void first_parameter_offset() {
+  void first_parameter_offset() {
     FunctionSymbol functionSymbol = functionSymbol("class A:\n  def method(self, *args): pass");
     assertThat(SymbolUtils.firstParameterOffset(functionSymbol, true)).isEqualTo(0);
     assertThat(SymbolUtils.firstParameterOffset(functionSymbol, false)).isEqualTo(1);
@@ -118,7 +118,7 @@ public class SymbolUtilsTest {
 
 
   @Test
-  public void get_overridden_method() {
+  void get_overridden_method() {
     FileInput file = PythonTestUtils.parse( new SymbolTableBuilder("my_package", pythonFile("my_module.py")),
       "def foo(): pass",
       "def foo2():",

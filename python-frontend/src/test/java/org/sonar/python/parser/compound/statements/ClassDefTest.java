@@ -19,7 +19,7 @@
  */
 package org.sonar.python.parser.compound.statements;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.PythonTestUtils;
@@ -27,15 +27,15 @@ import org.sonar.python.parser.RuleTest;
 
 import static org.sonar.python.parser.PythonParserAssert.assertThat;
 
-public class ClassDefTest extends RuleTest {
+class ClassDefTest extends RuleTest {
 
-  @Before
-  public void init() {
+  @BeforeEach
+  void init() {
     setRootRule(PythonGrammar.CLASSDEF);
   }
 
   @Test
-  public void realLife() {
+  void realLife() {
     assertThat(p).matches(PythonTestUtils.appendNewLine("class Foo: pass"));
     assertThat(p).matches(PythonTestUtils.appendNewLine("class Foo(argument): pass"));
     assertThat(p).matches(PythonTestUtils.appendNewLine("class Foo(argument=value): pass"));

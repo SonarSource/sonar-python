@@ -64,10 +64,10 @@ import static org.sonar.python.types.InferredTypes.typeName;
 import static org.sonar.python.types.InferredTypes.typeSymbols;
 import static org.sonar.python.types.TypeShed.typeShedClass;
 
-public class InferredTypesTest {
+class InferredTypesTest {
 
   @Test
-  public void test_runtimeType() {
+  void test_runtimeType() {
     assertThat(runtimeType(null)).isEqualTo(anyType());
     assertThat(runtimeType(new SymbolImpl("b", "a.b"))).isEqualTo(anyType());
     ClassSymbol typeClass = new ClassSymbolImpl("b", "a.b");
@@ -75,7 +75,7 @@ public class InferredTypesTest {
   }
 
   @Test
-  public void test_declaredType() {
+  void test_declaredType() {
     assertThat(InferredTypes.typeName(declaredType(new SymbolImpl("b", "a.b")))).isEqualTo("b");
     ClassSymbol typeClass = new ClassSymbolImpl("b", "a.b");
     assertThat(declaredType(typeClass).canOnlyBe("a.b")).isFalse();
@@ -92,7 +92,7 @@ public class InferredTypesTest {
   }
 
   @Test
-  public void test_or() {
+  void test_or() {
     ClassSymbol a = new ClassSymbolImpl("a", "a");
     ClassSymbol b = new ClassSymbolImpl("b", "b");
     assertThat(or(anyType(), anyType())).isEqualTo(anyType());
@@ -104,7 +104,7 @@ public class InferredTypesTest {
   }
 
   @Test
-  public void ambiguous_class_symbol() {
+  void ambiguous_class_symbol() {
     ClassSymbol a1 = new ClassSymbolImpl("a", "mod1.a");
     ClassSymbol a2 = new ClassSymbolImpl("a", "mod2.a");
     Symbol ambiguous = AmbiguousSymbolImpl.create(new HashSet<>(Arrays.asList(a1, a2)));
@@ -112,7 +112,7 @@ public class InferredTypesTest {
   }
 
   @Test
-  public void test_aliased_type_annotations() {
+  void test_aliased_type_annotations() {
     assertAliasedTypeAnnotation(BuiltinTypes.LIST,
       "from typing import List",
       "l : List[int]");
@@ -172,7 +172,7 @@ public class InferredTypesTest {
   }
 
   @Test
-  public void test_union_type_annotations() {
+  void test_union_type_annotations() {
     TypeAnnotation typeAnnotation = typeAnnotation(
       "from typing import Union",
       "l : Union[int, str]"
@@ -215,7 +215,7 @@ public class InferredTypesTest {
   }
 
   @Test
-  public void test_annotated_type_annotation() {
+  void test_annotated_type_annotation() {
     TypeAnnotation typeAnnotation = typeAnnotation(
       "from typing import Annotated",
       "x : Annotated[str, y]"
@@ -225,7 +225,7 @@ public class InferredTypesTest {
   }
 
   @Test
-  public void test_text_annotation() {
+  void test_text_annotation() {
     TypeAnnotation typeAnnotation = typeAnnotation(
       "from typing import Text",
       "l : Text"
@@ -238,7 +238,7 @@ public class InferredTypesTest {
   }
 
   @Test
-  public void test_none_annotation() {
+  void test_none_annotation() {
     TypeAnnotation typeAnnotation = typeAnnotation(
       "l : None"
     );
@@ -250,7 +250,7 @@ public class InferredTypesTest {
   }
 
   @Test
-  public void test_optional_type_annotations() {
+  void test_optional_type_annotations() {
     TypeAnnotation typeAnnotation = typeAnnotation(
       "from typing import Optional",
       "l : Optional[int]"
@@ -283,7 +283,7 @@ public class InferredTypesTest {
   }
 
   @Test
-  public void test_typeSymbol() {
+  void test_typeSymbol() {
     ClassSymbol str = typeShedClass("str");
     assertThat(InferredTypes.typeSymbols(STR)).containsExactly(str);
 
@@ -298,7 +298,7 @@ public class InferredTypesTest {
   }
 
   @Test
-  public void test_typeName() {
+  void test_typeName() {
     assertThat(InferredTypes.typeName(STR)).isEqualTo("str");
 
     ClassSymbol a = new ClassSymbolImpl("A", "mod.A");
@@ -309,7 +309,7 @@ public class InferredTypesTest {
   }
 
   @Test
-  public void test_fullyQualifiedTypeName() {
+  void test_fullyQualifiedTypeName() {
     assertThat(InferredTypes.fullyQualifiedTypeName(STR)).isEqualTo("str");
 
     ClassSymbol a = new ClassSymbolImpl("A", "mod.A");
@@ -322,7 +322,7 @@ public class InferredTypesTest {
   }
 
   @Test
-  public void test_typeLocation() {
+  void test_typeLocation() {
     assertThat(InferredTypes.typeClassLocation(STR)).isNull();
 
     LocationInFile locationA = new LocationInFile("foo.py", 1, 1, 1, 1);
@@ -336,7 +336,7 @@ public class InferredTypesTest {
   }
 
   @Test
-  public void test_isDeclaredTypeWithTypeClass() {
+  void test_isDeclaredTypeWithTypeClass() {
     assertThat(isDeclaredTypeWithTypeClass(DECL_INT, "int")).isTrue();
     assertThat(isDeclaredTypeWithTypeClass(INT, "int")).isFalse();
     assertThat(isDeclaredTypeWithTypeClass(lastExpression(
@@ -346,7 +346,7 @@ public class InferredTypesTest {
   }
 
   @Test
-  public void test_containsDeclaredType() {
+  void test_containsDeclaredType() {
     assertThat(containsDeclaredType(INT)).isFalse();
     DeclaredType declaredType = new DeclaredType(new SymbolImpl("foo", "foo"));
     assertThat(containsDeclaredType(declaredType)).isTrue();
@@ -355,7 +355,7 @@ public class InferredTypesTest {
   }
 
   @Test
-  public void test_type_from_protobuf() throws TextFormat.ParseException {
+  void test_type_from_protobuf() throws TextFormat.ParseException {
     assertThat(protobufType("")).isEqualTo(anyType());
     assertThat(protobufType(
       "pretty_printed_name: \"None\"\n" +
@@ -383,7 +383,7 @@ public class InferredTypesTest {
   }
 
   @Test
-  public void test_builtin_category() {
+  void test_builtin_category() {
     assertThat(getBuiltinCategory(STR)).isEqualTo(BuiltinTypes.STR);
     assertThat(getBuiltinCategory(INT)).isEqualTo("number");
     assertThat(getBuiltinCategory(COMPLEX)).isEqualTo("number");
@@ -397,7 +397,7 @@ public class InferredTypesTest {
   }
 
   @Test
-  public void special_form_should_be_treated_as_any() {
+  void special_form_should_be_treated_as_any() {
     assertThat(lastExpression(
       "import collections.abc as collections_abc",
       "collections_abc.Callable" // has type typing._SpecialForm
@@ -405,7 +405,7 @@ public class InferredTypesTest {
   }
 
   @Test
-  public void runtime_type_symbol() {
+  void runtime_type_symbol() {
     assertThat(INT.runtimeTypeSymbol()).isEqualTo(typeShedClass("int"));
     assertThat(InferredTypes.or(INT, STR).runtimeTypeSymbol()).isNull();
     assertThat(DECL_INT.runtimeTypeSymbol()).isNull();
@@ -413,7 +413,7 @@ public class InferredTypesTest {
   }
 
   @Test
-  public void adding_a_negative_number() {
+  void adding_a_negative_number() {
     assertThat(lastExpressionInFunction(
       "x = -1",
       "x + 1"

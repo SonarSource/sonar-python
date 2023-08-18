@@ -32,13 +32,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class PythonReadCacheImplTest {
+class PythonReadCacheImplTest {
 
   @RegisterExtension
   public LogTesterJUnit5 logTester = new LogTesterJUnit5().setLevel(Level.DEBUG);
 
   @Test
-  public void read_bytes() {
+  void read_bytes() {
     byte[] bytes = "hello".getBytes();
     ByteArrayInputStream inputStream = new ByteArrayInputStream(bytes);
 
@@ -53,7 +53,7 @@ public class PythonReadCacheImplTest {
   }
 
   @Test
-  public void read_bytes_no_such_key() {
+  void read_bytes_no_such_key() {
     ReadCache readCache = mock(ReadCache.class);
     when(readCache.contains("key")).thenReturn(false);
 
@@ -64,7 +64,7 @@ public class PythonReadCacheImplTest {
   }
 
   @Test
-  public void read_bytes_io_exception() throws IOException {
+  void read_bytes_io_exception() throws IOException {
     InputStream inputStream = mock(InputStream.class);
     when(inputStream.readAllBytes()).thenThrow(IOException.class);
 
@@ -83,7 +83,7 @@ public class PythonReadCacheImplTest {
   }
 
   @Test
-  public void contains() {
+  void contains() {
     ReadCache readCache = mock(ReadCache.class);
     when(readCache.contains("exists")).thenReturn(true);
     when(readCache.contains("doesNotExist")).thenReturn(false);

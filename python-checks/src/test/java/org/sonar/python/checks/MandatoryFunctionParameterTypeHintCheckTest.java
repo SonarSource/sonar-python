@@ -22,10 +22,10 @@ package org.sonar.python.checks;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-public class MandatoryFunctionParameterTypeHintCheckTest {
+class MandatoryFunctionParameterTypeHintCheckTest {
 
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/mandatoryFunctionParameterTypeHint.py", new MandatoryFunctionParameterTypeHintCheck());
   }
 }

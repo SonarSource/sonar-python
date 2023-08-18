@@ -41,10 +41,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.PythonTestUtils.parse;
 import static org.sonar.python.semantic.SymbolUtils.pathOf;
 
-public class FunctionSymbolTest {
+class FunctionSymbolTest {
 
   @Test
-  public void arity() {
+  void arity() {
     FunctionSymbol functionSymbol = PythonTestUtils.functionSymbol("def fn(): pass");
     assertThat(functionSymbol.isAsynchronous()).isFalse();
     assertThat(functionSymbol.parameters()).isEmpty();
@@ -149,7 +149,7 @@ public class FunctionSymbolTest {
   }
 
   @Test
-  public void reassigned_symbol() {
+  void reassigned_symbol() {
     FileInput tree = parse(
       "def fn(): pass",
       "fn = 42"
@@ -176,7 +176,7 @@ public class FunctionSymbolTest {
   }
 
   @Test
-  public void owner() {
+  void owner() {
     FileInput fileInput = PythonTestUtils.parse(
       "class A:",
       "  def foo(self): pass"
@@ -195,7 +195,7 @@ public class FunctionSymbolTest {
   }
 
   @Test
-  public void instance_method() {
+  void instance_method() {
     FileInput fileInput = PythonTestUtils.parse(
       "class A:",
       "  def foo(self): pass",
@@ -220,7 +220,7 @@ public class FunctionSymbolTest {
   }
 
   @Test
-  public void locations() {
+  void locations() {
     PythonFile foo = PythonTestUtils.pythonFile("foo");
 
     FunctionSymbol functionSymbol = PythonTestUtils.functionSymbol(foo, "def foo(param1, param2): ...");
@@ -242,7 +242,7 @@ public class FunctionSymbolTest {
   }
 
   @Test
-  public void declared_return_type() {
+  void declared_return_type() {
     FunctionSymbolImpl functionSymbol = (FunctionSymbolImpl) PythonTestUtils.functionSymbol("def foo() -> int: ...");
     assertThat(functionSymbol.declaredReturnType().canBeOrExtend("int")).isTrue();
     assertThat(InferredTypes.typeName(functionSymbol.declaredReturnType())).isEqualTo("int");
@@ -256,7 +256,7 @@ public class FunctionSymbolTest {
   }
 
   @Test
-  public void from_protobuf() throws TextFormat.ParseException {
+  void from_protobuf() throws TextFormat.ParseException {
     String protobuf =
       "name: \"fn\"\n" +
       "fully_qualified_name: \"mod.fn\"\n" +
@@ -330,7 +330,7 @@ public class FunctionSymbolTest {
   }
 
   @Test
-  public void from_protobuf_no_return_type() throws TextFormat.ParseException {
+  void from_protobuf_no_return_type() throws TextFormat.ParseException {
     String protobuf =
       "name: \"fn\"\n" +
       "fully_qualified_name: \"mod.fn\"\n";

@@ -33,14 +33,14 @@ import org.sonar.plugins.python.api.tree.Tree;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class DocstringExtractorTest {
+class DocstringExtractorTest {
 
   private static final File BASE_DIR = new File("src/test/resources");
 
   private Map<Tree, StringLiteral> docstrings = new HashMap<>();
 
   @Test
-  public void test() {
+  void test() {
     File file = new File(BASE_DIR, "docstring.py");
     TestPythonVisitorRunner.scanFile(file, new DocstringVisitor());
 

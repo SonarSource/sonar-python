@@ -31,11 +31,11 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.not;
 
 
-public class IPythonLexerTest {
+class IPythonLexerTest {
   private static TestLexer lexer;
 
   @BeforeAll
-  public static void init() {
+  static void init() {
     lexer = new IPythonLexerTest.TestLexer();
   }
 
@@ -50,7 +50,7 @@ public class IPythonLexerTest {
   }
 
   @Test
-  public void cellDelimiterTest() {
+  void cellDelimiterTest() {
     assertThat(lexer.lex("foo\n#SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER"), hasToken(PythonTokenType.IPYNB_CELL_DELIMITER));
     assertThat(lexer.lex("foo #SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER"), not(hasToken(PythonTokenType.IPYNB_CELL_DELIMITER)));
     assertThat(lexer.lex("if cond:\n  foo()\n#SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER"), hasToken(PythonTokenType.DEDENT));

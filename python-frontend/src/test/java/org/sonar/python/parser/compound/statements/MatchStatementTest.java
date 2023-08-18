@@ -19,22 +19,22 @@
  */
 package org.sonar.python.parser.compound.statements;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.parser.RuleTest;
 
 import static org.sonar.python.parser.PythonParserAssert.assertThat;
 
-public class MatchStatementTest extends RuleTest {
+class MatchStatementTest extends RuleTest {
 
-  @Before
-  public void init() {
+  @BeforeEach
+  void init() {
     setRootRule(PythonGrammar.MATCH_STMT);
   }
 
   @Test
-  public void basic_match_statement() {
+  void basic_match_statement() {
     assertThat(p).matches(
       "match command:\n" +
         "    case \"quit\":\n" +
@@ -44,7 +44,7 @@ public class MatchStatementTest extends RuleTest {
   }
 
   @Test
-  public void match_with_guards() {
+  void match_with_guards() {
     assertThat(p).matches(
       "match command:\n" +
         "    case \"quit\" if True:\n" +
@@ -54,7 +54,7 @@ public class MatchStatementTest extends RuleTest {
   }
 
   @Test
-  public void subject_expr() {
+  void subject_expr() {
     setRootRule(PythonGrammar.SUBJECT_EXPR);
     assertThat(p).matches("x := command")
       .matches("x, y")

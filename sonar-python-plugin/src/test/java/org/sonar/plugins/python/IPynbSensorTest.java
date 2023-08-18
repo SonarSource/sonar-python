@@ -54,7 +54,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class IPynbSensorTest {
+class IPynbSensorTest {
 
   private static final Version SONARLINT_DETECTABLE_VERSION = Version.create(9, 9);
 
@@ -72,12 +72,12 @@ public class IPynbSensorTest {
   public LogTesterJUnit5 logTester = new LogTesterJUnit5().setLevel(Level.DEBUG);
 
   @BeforeEach
-  public void init() {
+  void init() {
     context = SensorContextTester.create(baseDir);
   }
 
   @Test
-  public void sensor_descriptor() {
+  void sensor_descriptor() {
     activeRules = new ActiveRulesBuilder().build();
     DefaultSensorDescriptor descriptor = new DefaultSensorDescriptor();
     sensor().describe(descriptor);
@@ -88,7 +88,7 @@ public class IPynbSensorTest {
   }
 
   @Test
-  public void test_execute_on_sonarlint() {
+  void test_execute_on_sonarlint() {
     context.setRuntime(SONARLINT_RUNTIME);
 
     activeRules = new ActiveRulesBuilder()

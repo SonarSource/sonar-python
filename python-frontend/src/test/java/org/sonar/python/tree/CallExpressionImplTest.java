@@ -49,10 +49,10 @@ import static org.sonar.python.types.InferredTypes.TUPLE;
 import static org.sonar.python.types.InferredTypes.anyType;
 import static org.sonar.python.types.InferredTypes.typeName;
 
-public class CallExpressionImplTest {
+class CallExpressionImplTest {
 
   @Test
-  public void constructor_type() {
+  void constructor_type() {
     FileInput fileInput = parse(
       "class A: ...",
       "A()");
@@ -64,12 +64,12 @@ public class CallExpressionImplTest {
   }
 
   @Test
-  public void function_call_type() {
+  void function_call_type() {
     assertThat(lastExpression("len()").type()).isEqualTo(InferredTypes.INT);
   }
 
   @Test
-  public void ambiguous_callee_symbol_type() {
+  void ambiguous_callee_symbol_type() {
     FileInput fileInput = parse(
       "class A: ...",
       "class A: ...",
@@ -105,7 +105,7 @@ public class CallExpressionImplTest {
   }
 
   @Test
-  public void not_callable_callee_symbol_type() {
+  void not_callable_callee_symbol_type() {
     assertThat(lastExpression(
       "x = 42",
       "x()"
@@ -113,12 +113,12 @@ public class CallExpressionImplTest {
   }
 
   @Test
-  public void null_callee_symbol_type() {
+  void null_callee_symbol_type() {
     assertThat(lastExpression("x()").type()).isEqualTo(InferredTypes.anyType());
   }
 
   @Test
-  public void method_call_with_declared_type() {
+  void method_call_with_declared_type() {
     assertThat(lastExpression(
       "def foo(param: str):",
       "  x = param.capitalize()",
@@ -154,7 +154,7 @@ public class CallExpressionImplTest {
   }
 
   @Test
-  public void method_call_with_declared_type_union_and_optional() {
+  void method_call_with_declared_type_union_and_optional() {
     ClassSymbolImpl union = new ClassSymbolImpl("Union", "typing.Union");
     List<DeclaredType> typeArgs = Stream.of(DECL_INT, DECL_STR).map(DeclaredType.class::cast).collect(Collectors.toList());
     assertThat(lastExpression(
@@ -196,7 +196,7 @@ public class CallExpressionImplTest {
   }
 
   @Test
-  public void inner_class_constructor_declared_type() {
+  void inner_class_constructor_declared_type() {
     InferredType type = lastExpression(
       "class A:",
       "  class B: ...",
@@ -209,7 +209,7 @@ public class CallExpressionImplTest {
   }
 
   @Test
-  public void test_generic_collections() {
+  void test_generic_collections() {
     assertThat(lastExpressionInFunction("list[int]()").type()).isEqualTo(LIST);
     assertThat(lastExpressionInFunction("tuple[int]()").type()).isEqualTo(TUPLE);
     assertThat(lastExpressionInFunction("dict[str, int]()").type()).isEqualTo(DICT);

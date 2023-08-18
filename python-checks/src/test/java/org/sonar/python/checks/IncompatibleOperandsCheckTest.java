@@ -22,15 +22,15 @@ package org.sonar.python.checks;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-public class IncompatibleOperandsCheckTest {
+class IncompatibleOperandsCheckTest {
 
   @Test
-  public void test_comparison() {
+  void test_comparison() {
     PythonCheckVerifier.verify("src/test/resources/checks/incompatibleOperands/comparison.py", new IncompatibleOperandsCheck());
   }
 
   @Test
-  public void test_arithmetic() {
+  void test_arithmetic() {
     PythonCheckVerifier.verify("src/test/resources/checks/incompatibleOperands/arithmetic.py", new IncompatibleOperandsCheck());
   }
 

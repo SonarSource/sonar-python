@@ -26,10 +26,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.PythonTestUtils.lastExpression;
 import static org.sonar.python.types.InferredTypes.BOOL;
 
-public class UnaryExpressionImplTest {
+class UnaryExpressionImplTest {
 
   @Test
-  public void type() {
+  void type() {
     assertThat(lastExpression("not 42").type()).isEqualTo(BOOL);
     assertThat(lastExpression("-42").type()).isEqualTo(InferredTypes.INT);
     assertThat(lastExpression("+42").type()).isEqualTo(InferredTypes.INT);

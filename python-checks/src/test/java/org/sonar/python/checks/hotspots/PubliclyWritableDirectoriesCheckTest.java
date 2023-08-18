@@ -22,9 +22,9 @@ package org.sonar.python.checks.hotspots;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-public class PubliclyWritableDirectoriesCheckTest {
+class PubliclyWritableDirectoriesCheckTest {
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/hotspots/publiclyWritableDirectories.py", new PubliclyWritableDirectoriesCheck());
   }
 }

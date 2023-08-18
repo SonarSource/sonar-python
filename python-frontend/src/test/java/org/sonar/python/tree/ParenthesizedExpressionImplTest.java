@@ -27,17 +27,17 @@ import static org.sonar.python.PythonTestUtils.lastExpression;
 import static org.sonar.python.types.InferredTypes.INT;
 import static org.sonar.python.types.InferredTypes.STR;
 
-public class ParenthesizedExpressionImplTest {
+class ParenthesizedExpressionImplTest {
 
   @Test
-  public void type() {
+  void type() {
     assertThat(lastExpression("(42)").type()).isEqualTo(INT);
     assertThat(lastExpression("('hello')").type()).isEqualTo(STR);
     assertThat(lastExpression("(xxx)").type()).isEqualTo(InferredTypes.anyType());
   }
 
   @Test
-  public void typeDependencies() {
+  void typeDependencies() {
     ParenthesizedExpressionImpl parenthesizedExpr = ((ParenthesizedExpressionImpl) lastExpression("(42)"));
     assertThat(parenthesizedExpr.typeDependencies()).containsExactly(parenthesizedExpr.expression());
   }

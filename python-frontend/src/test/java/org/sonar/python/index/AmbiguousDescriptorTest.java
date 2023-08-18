@@ -36,10 +36,10 @@ import static org.sonar.python.index.DescriptorUtils.descriptor;
 import static org.sonar.python.index.DescriptorsToProtobuf.toProtobufModuleDescriptor;
 import static org.sonar.python.index.FunctionDescriptorTest.lastFunctionDescriptor;
 
-public class AmbiguousDescriptorTest {
+class AmbiguousDescriptorTest {
 
   @Test
-  public void test_basic_ambiguous_descriptor() {
+  void test_basic_ambiguous_descriptor() {
     AmbiguousDescriptor ambiguousDescriptor = lastAmbiguousDescriptor(
       "class A: ...",
       "class A: ...");
@@ -49,7 +49,7 @@ public class AmbiguousDescriptorTest {
   }
 
   @Test
-  public void test_ambiguous_descriptor_different_kinds() {
+  void test_ambiguous_descriptor_different_kinds() {
     AmbiguousDescriptor ambiguousDescriptor = lastAmbiguousDescriptor(
       "class A: ...",
       "A: int = 42",
@@ -60,7 +60,7 @@ public class AmbiguousDescriptorTest {
   }
 
   @Test
-  public void test_flattened_ambiguous_descriptor() {
+  void test_flattened_ambiguous_descriptor() {
     AmbiguousDescriptor firstAmbiguousSymbol = lastAmbiguousDescriptor(
       "class A: ...",
       "class A: ...");
@@ -72,27 +72,27 @@ public class AmbiguousDescriptorTest {
   }
 
   @Test
-  public void test_single_descriptor_illegal_argument() {
+  void test_single_descriptor_illegal_argument() {
     FunctionDescriptor functionDescriptor = lastFunctionDescriptor("def func(): ...");
     assertThatThrownBy(() -> AmbiguousDescriptor.create(functionDescriptor)).isInstanceOf(IllegalArgumentException.class);
   }
 
   @Test
-  public void test_nested_ambiguous_descriptors_illegal_argument() {
+  void test_nested_ambiguous_descriptors_illegal_argument() {
     AmbiguousDescriptor ambiguousDescriptor = new AmbiguousDescriptor("foo", "foo", Collections.emptySet());
       Set<Descriptor> descriptors = Set.of(ambiguousDescriptor);
     assertThatThrownBy(() -> new AmbiguousDescriptor("foo", "foo", descriptors)).isInstanceOf(IllegalArgumentException.class);
   }
 
   @Test
-  public void test_different_names_illegal_argument() {
+  void test_different_names_illegal_argument() {
     FunctionDescriptor functionDescriptorA = lastFunctionDescriptor("def a(): ...");
     FunctionDescriptor functionDescriptorB = lastFunctionDescriptor("def b(): ...");
     assertThatThrownBy(() -> AmbiguousDescriptor.create(functionDescriptorA, functionDescriptorB)).isInstanceOf(IllegalArgumentException.class);
   }
 
   @Test
-  public void ambiguous_descriptor_creation_different_name_same_fqn() {
+  void ambiguous_descriptor_creation_different_name_same_fqn() {
     SymbolImpl foo = new SymbolImpl("foo", "mod.bar");
     SymbolImpl bar = new SymbolImpl("bar", "mod.bar");
     Descriptor fooDesc = descriptor(foo);

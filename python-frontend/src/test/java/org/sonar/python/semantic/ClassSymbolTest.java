@@ -38,10 +38,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.groups.Tuple.tuple;
 import static org.sonar.python.PythonTestUtils.parse;
 
-public class ClassSymbolTest {
+class ClassSymbolTest {
 
   @Test
-  public void no_parents() {
+  void no_parents() {
     FileInput fileInput = parse(
       "class C: ",
       "  pass");
@@ -56,7 +56,7 @@ public class ClassSymbolTest {
   }
 
   @Test
-  public void local_parent() {
+  void local_parent() {
     FileInput fileInput = parse(
       "class C: ",
       "  pass",
@@ -77,7 +77,7 @@ public class ClassSymbolTest {
   }
 
   @Test
-  public void multiple_local_parents() {
+  void multiple_local_parents() {
     FileInput fileInput = parse(
       "class C: ",
       "  pass",
@@ -102,7 +102,7 @@ public class ClassSymbolTest {
   }
 
   @Test
-  public void unknown_parent() {
+  void unknown_parent() {
     FileInput fileInput = parse(
       "class B(C): ",
       "  pass");
@@ -116,7 +116,7 @@ public class ClassSymbolTest {
   }
 
   @Test
-  public void builtin_parent() {
+  void builtin_parent() {
     FileInput fileInput = parse(
       "class C: ",
       "  pass",
@@ -132,7 +132,7 @@ public class ClassSymbolTest {
   }
 
   @Test
-  public void builtin_parent_with_unknown() {
+  void builtin_parent_with_unknown() {
     FileInput fileInput = parse(
       "class C: ",
       "  pass",
@@ -148,7 +148,7 @@ public class ClassSymbolTest {
   }
 
   @Test
-  public void multiple_bindings() {
+  void multiple_bindings() {
     FileInput fileInput = parse(
       "class C: ",
       "  pass",
@@ -160,7 +160,7 @@ public class ClassSymbolTest {
   }
 
   @Test
-  public void multiple_bindings_2() {
+  void multiple_bindings_2() {
     FileInput fileInput = parse(
       "C = \"hello\"",
       "class C: ",
@@ -172,7 +172,7 @@ public class ClassSymbolTest {
   }
 
   @Test
-  public void call_expression_argument() {
+  void call_expression_argument() {
     FileInput fileInput = parse(
       "def foo():",
       "  pass",
@@ -188,7 +188,7 @@ public class ClassSymbolTest {
   }
 
   @Test
-  public void parent_is_not_a_class() {
+  void parent_is_not_a_class() {
     FileInput fileInput = parse(
       "def foo():",
       "  pass",
@@ -205,7 +205,7 @@ public class ClassSymbolTest {
   }
 
   @Test
-  public void unpacking_expression_as_parent() {
+  void unpacking_expression_as_parent() {
     FileInput fileInput = parse(
       "foo = (Something, SomethingElse)",
       "class C(*foo): ",
@@ -220,7 +220,7 @@ public class ClassSymbolTest {
   }
 
   @Test
-  public void parent_has_multiple_bindings() {
+  void parent_has_multiple_bindings() {
     FileInput fileInput = parse(
       "class C: ",
       "  pass",
@@ -236,7 +236,7 @@ public class ClassSymbolTest {
   }
 
   @Test
-  public void defines_metaclass() {
+  void defines_metaclass() {
     FileInput fileInput = parse(
       "class A: ",
       "  pass",
@@ -285,7 +285,7 @@ public class ClassSymbolTest {
   }
 
   @Test
-  public void defines_metaclass_python_2() {
+  void defines_metaclass_python_2() {
     FileInput fileInput = parse(
       "class A: ",
       "  pass",
@@ -303,7 +303,7 @@ public class ClassSymbolTest {
   }
 
   @Test
-  public void defines_attrs() {
+  void defines_attrs() {
     FileInput fileInput = parse(
       "class A: ",
       "  pass",
@@ -322,7 +322,7 @@ public class ClassSymbolTest {
   }
 
   @Test
-  public void class_with_global_statement() {
+  void class_with_global_statement() {
     FileInput fileInput = parse(
       "global B",
       "class B(): ",
@@ -334,7 +334,7 @@ public class ClassSymbolTest {
   }
 
   @Test
-  public void class_with_nonlocal_statement() {
+  void class_with_nonlocal_statement() {
     FileInput fileInput = parse(
       "nonlocal B",
       "class B(): ",
@@ -346,7 +346,7 @@ public class ClassSymbolTest {
   }
 
   @Test
-  public void class_members_empty() {
+  void class_members_empty() {
     ClassSymbol symbol = lastClassSymbol(
       "class C: ",
       "  pass");
@@ -354,7 +354,7 @@ public class ClassSymbolTest {
   }
 
   @Test
-  public void class_members() {
+  void class_members() {
     ClassSymbol symbol = lastClassSymbol(
       "class C: ",
       "  def foo(): pass");
@@ -367,7 +367,7 @@ public class ClassSymbolTest {
   }
 
   @Test
-  public void duplicated_class_member_self() {
+  void duplicated_class_member_self() {
     ClassSymbol symbol = lastClassSymbol(
       "class C:",
       "  def f(self): ...",
@@ -387,7 +387,7 @@ public class ClassSymbolTest {
   }
 
   @Test
-  public void class_members_with_inheritance() {
+  void class_members_with_inheritance() {
     ClassSymbol symbol = lastClassSymbol(
       "class A:",
       "  def meth(): pass",
@@ -400,7 +400,7 @@ public class ClassSymbolTest {
   }
 
   @Test
-  public void copy_without_usages() {
+  void copy_without_usages() {
     ClassSymbolImpl classSymbol = ((ClassSymbolImpl) lastClassSymbol(
       "class A(foo):",
       "  def meth(): pass"));
@@ -423,7 +423,7 @@ public class ClassSymbolTest {
   }
 
   @Test
-  public void static_member_usages() {
+  void static_member_usages() {
     ClassSymbol classSymbol = lastClassSymbol(
             "class A:",
             "  foo = 42",
@@ -438,7 +438,7 @@ public class ClassSymbolTest {
   }
 
   @Test
-  public void inherited_static_member() {
+  void inherited_static_member() {
     ClassSymbol classSymbol = firstClassSymbol(
             "class A:",
             "  foo = 42",
@@ -452,7 +452,7 @@ public class ClassSymbolTest {
   }
 
   @Test
-  public void inherits_from_ambiguous_symbol() {
+  void inherits_from_ambiguous_symbol() {
     ClassSymbol classSymbol = lastClassSymbol(
       "if x:",
       "  class A: ...",
@@ -467,7 +467,7 @@ public class ClassSymbolTest {
   }
 
   @Test
-  public void inherits_from_function_call() {
+  void inherits_from_function_call() {
     ClassSymbol classSymbol = lastClassSymbol(
       "class A:",
       "  def foo(): ...",
@@ -480,7 +480,7 @@ public class ClassSymbolTest {
   }
 
   @Test
-  public void has_decorators() {
+  void has_decorators() {
     ClassSymbol classSymbol = firstClassSymbol(
       "@foo",
       "class A: ..."
@@ -494,7 +494,7 @@ public class ClassSymbolTest {
   }
 
   @Test
-  public void type_annotations_scope() {
+  void type_annotations_scope() {
     FileInput fileInput = PythonTestUtils.parse(
       "class Foo:",
       "    class Inner: ...",

@@ -38,10 +38,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 import static org.sonar.python.PythonTestUtils.parse;
 
-public class TextEditUtilsTest {
+class TextEditUtilsTest {
 
   @Test
-  public void insertBefore() {
+  void insertBefore() {
     String textToInsert = "This is a replacement text";
     Token token = mockToken("token", 1, 7);
 
@@ -51,7 +51,7 @@ public class TextEditUtilsTest {
   }
 
   @Test
-  public void insertAfter() {
+  void insertAfter() {
     String textToInsert = "This is a replacement text";
     Token token = mockToken("token", 1, 7);
 
@@ -61,7 +61,7 @@ public class TextEditUtilsTest {
   }
 
   @Test
-  public void replace() {
+  void replace() {
     String replacementText = "This is a replacement text";
     Token token = mockToken("token", 1, 7);
 
@@ -71,7 +71,7 @@ public class TextEditUtilsTest {
   }
 
   @Test
-  public void remove() {
+  void remove() {
     Token token = mockToken("token", 1, 7);
 
     PythonTextEdit textEdit = TextEditUtils.remove(token);
@@ -80,7 +80,7 @@ public class TextEditUtilsTest {
   }
 
   @Test
-  public void replaceRange() {
+  void replaceRange() {
     // Parsing 'a = (b and c)'
     Token token1 = mockToken("(", 1, 4);
     Token token2 = mockToken(")", 1, 12);
@@ -91,7 +91,7 @@ public class TextEditUtilsTest {
   }
 
   @Test
-  public void insertLineBefore() {
+  void insertLineBefore() {
     Token token = mockToken("tree", 1, 4);
 
     PythonTextEdit textEdit = TextEditUtils.insertLineBefore(token, "firstLine\n    secondLineWithIndent");
@@ -100,7 +100,7 @@ public class TextEditUtilsTest {
   }
 
   @Test
-  public void shiftLeft() {
+  void shiftLeft() {
     FileInput file = parse(
       "def foo():",
       "    a = 1; b = 2",
@@ -119,7 +119,7 @@ public class TextEditUtilsTest {
   }
 
   @Test
-  public void removeUntil() {
+  void removeUntil() {
     FileInput file = parse(
       "def foo():",
       "    a = 1",
@@ -136,7 +136,7 @@ public class TextEditUtilsTest {
   }
 
   @Test
-  public void testRenameAllUsages() {
+  void testRenameAllUsages() {
     FileInput file = parse(
       "def foo(bar):",
       "    print(bar)",
@@ -154,7 +154,7 @@ public class TextEditUtilsTest {
   }
 
   @Test
-  public void test_insertLineAfter_without_indent() {
+  void test_insertLineAfter_without_indent() {
     FileInput file = parse("foo()");
     CallExpression call = PythonTestUtils.getFirstDescendant(file, descendant -> descendant.is(Tree.Kind.CALL_EXPR));
 
@@ -163,7 +163,7 @@ public class TextEditUtilsTest {
   }
 
   @Test
-  public void test_insertLineAfter_with_indent() {
+  void test_insertLineAfter_with_indent() {
     FileInput file = parse(
       "def foo():",
       "    pass"
@@ -176,7 +176,7 @@ public class TextEditUtilsTest {
   }
 
   @Test
-  public void removeStatement_with_single_statement_will_replace_with_pass() {
+  void removeStatement_with_single_statement_will_replace_with_pass() {
     FileInput file = parse("def foo():",
       "    a = 1");
     StatementList functionBody = getFunctionBody(file);
@@ -186,7 +186,7 @@ public class TextEditUtilsTest {
   }
 
   @Test
-  public void removeStatement_with_two_statement_will_remove_indent_and_line_breaks() {
+  void removeStatement_with_two_statement_will_remove_indent_and_line_breaks() {
     FileInput file = parse("def foo():",
       "    a = 1",
       "    b = 2");
@@ -200,7 +200,7 @@ public class TextEditUtilsTest {
   }
 
   @Test
-  public void removeStatement_with_statement_with_separator_will_remove_all() {
+  void removeStatement_with_statement_with_separator_will_remove_all() {
     FileInput file = parse("def foo():",
       "    a = 1;",
       "    b = 2");
@@ -211,7 +211,7 @@ public class TextEditUtilsTest {
   }
 
   @Test
-  public void removeStatement_with_tree_statement_on_same_line_will_not_remove_indent_nor_line_breaks() {
+  void removeStatement_with_tree_statement_on_same_line_will_not_remove_indent_nor_line_breaks() {
     FileInput file = parse("def foo():",
       "    a = 1; b = 2; c = 3;");
     StatementList functionBody = getFunctionBody(file);

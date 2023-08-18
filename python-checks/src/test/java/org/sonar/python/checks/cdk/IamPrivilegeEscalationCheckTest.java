@@ -23,21 +23,21 @@ import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-public class IamPrivilegeEscalationCheckTest {
+class IamPrivilegeEscalationCheckTest {
 
   PythonCheck check = new IamPrivilegeEscalationCheck();
   @Test
-  public void policyStatement() {
+  void policyStatement() {
     PythonCheckVerifier.verify("src/test/resources/checks/cdk/iamPrivilegeEscalation/policyStatement.py", check);
   }
 
   @Test
-  public void fromJson() {
+  void fromJson() {
     PythonCheckVerifier.verify("src/test/resources/checks/cdk/iamPrivilegeEscalation/fromJson.py", check);
   }
 
   @Test
-  public void policyDocument() {
+  void policyDocument() {
     PythonCheckVerifier.verify("src/test/resources/checks/cdk/iamPrivilegeEscalation/policyDocument.py", check);
   }
 

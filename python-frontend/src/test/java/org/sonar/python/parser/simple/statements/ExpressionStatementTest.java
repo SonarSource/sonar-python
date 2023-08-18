@@ -26,15 +26,15 @@ import org.sonar.python.parser.RuleTest;
 
 import static org.sonar.python.parser.PythonParserAssert.assertThat;
 
-public class ExpressionStatementTest extends RuleTest {
+class ExpressionStatementTest extends RuleTest {
 
   @BeforeEach
-  public void init() {
+  void init() {
     setRootRule(PythonGrammar.EXPRESSION_STMT);
   }
 
   @Test
-  public void realLife() {
+  void realLife() {
     assertThat(p)
       .matches("i = 10")
       .matches("list[1] = 10")

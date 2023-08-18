@@ -33,7 +33,7 @@ import static com.sonar.python.it.plugin.Tests.newWsClient;
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class TestRulesTest {
+class TestRulesTest {
 
   @RegisterExtension
   public static final OrchestratorExtension orchestrator = Tests.ORCHESTRATOR;
@@ -43,7 +43,7 @@ public class TestRulesTest {
   private static SonarScanner BUILD;
 
   @BeforeAll
-  public static void prepare() {
+  static void prepare() {
     orchestrator.getServer().provisionProject(PROJECT_KEY, PROJECT_NAME);
     orchestrator.getServer().associateProjectToQualityProfile(PROJECT_KEY, "py", "python-test-rules-profile");
     BUILD = SonarScanner.create()
@@ -54,7 +54,7 @@ public class TestRulesTest {
   }
 
   @Test
-  public void test_rules_run_on_test_files() {
+  void test_rules_run_on_test_files() {
     BUILD.setSourceDirs("src")
       .setTestDirs("tests");
     orchestrator.executeBuild(BUILD);
@@ -69,7 +69,7 @@ public class TestRulesTest {
   }
 
   @Test
-  public void declare_all_files_as_test_files() {
+  void declare_all_files_as_test_files() {
     BUILD.setTestDirs(".");
     orchestrator.executeBuild(BUILD);
 

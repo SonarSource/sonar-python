@@ -25,15 +25,15 @@ import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 import static org.sonar.python.checks.utils.CodeTestUtils.code;
 
-public class ClassMethodFirstArgumentNameCheckTest {
+class ClassMethodFirstArgumentNameCheckTest {
 
   @Test
-  public void testRule() {
+  void testRule() {
     PythonCheckVerifier.verify("src/test/resources/checks/classMethodFirstArgumentNameCheck.py", new ClassMethodFirstArgumentNameCheck());
   }
 
   @Test
-  public void testQuickFix() {
+  void testQuickFix() {
     String codeWithIssue = code(
       "class A():",
       "    @classmethod",
@@ -54,7 +54,7 @@ public class ClassMethodFirstArgumentNameCheckTest {
   }
 
   @Test
-  public void testQuickFixMultiline() {
+  void testQuickFixMultiline() {
     String codeWithIssue = code(
       "class A():",
       "    @classmethod",
@@ -79,7 +79,7 @@ public class ClassMethodFirstArgumentNameCheckTest {
   }
 
   @Test
-  public void testQuickFixMultiline2() {
+  void testQuickFixMultiline2() {
     String codeWithIssue = code(
       "class A():",
       "    @classmethod",
@@ -107,7 +107,7 @@ public class ClassMethodFirstArgumentNameCheckTest {
   }
 
   @Test
-  public void testQuickFixMultiline3() {
+  void testQuickFixMultiline3() {
     String codeWithIssue = code(
       "class A():",
       "    @classmethod",
@@ -134,7 +134,7 @@ public class ClassMethodFirstArgumentNameCheckTest {
   }
 
   @Test
-  public void testQuickFixMultiline4() {
+  void testQuickFixMultiline4() {
     String codeWithIssue = code(
       "class A():",
       "    @classmethod",
@@ -161,7 +161,7 @@ public class ClassMethodFirstArgumentNameCheckTest {
   }
 
   @Test
-  public void testQuickFixMultilineCustomClassParameterNames() {
+  void testQuickFixMultilineCustomClassParameterNames() {
     ClassMethodFirstArgumentNameCheck check = new ClassMethodFirstArgumentNameCheck();
     check.classParameterNames = "xxx";
     String codeWithIssue = code(
@@ -190,7 +190,7 @@ public class ClassMethodFirstArgumentNameCheckTest {
   }
 
   @Test
-  public void testQuickFixMultilineEmptyClassParameterNames() {
+  void testQuickFixMultilineEmptyClassParameterNames() {
     ClassMethodFirstArgumentNameCheck check = new ClassMethodFirstArgumentNameCheck();
     check.classParameterNames = "";
     String codeWithIssue = code(
@@ -219,7 +219,7 @@ public class ClassMethodFirstArgumentNameCheckTest {
   }
 
   @Test
-  public void testQuickFixDescriptions() {
+  void testQuickFixDescriptions() {
     ClassMethodFirstArgumentNameCheck check = new ClassMethodFirstArgumentNameCheck();
     check.classParameterNames = "xxx";
     String codeWithIssue = code(

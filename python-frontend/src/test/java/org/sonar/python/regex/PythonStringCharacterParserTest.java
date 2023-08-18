@@ -31,22 +31,22 @@ import org.sonarsource.analyzer.commons.regex.CharacterParser;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class PythonStringCharacterParserTest {
+class PythonStringCharacterParserTest {
 
   @Test
-  public void test_first_character_on_init() {
+  void test_first_character_on_init() {
     assertThat(getCharacterParser("'abcde'").getCurrent().getCharacter()).isEqualTo('a');
   }
 
   @Test
-  public void test_move_next() {
+  void test_move_next() {
     CharacterParser characterParser = getCharacterParser("'abcde'");
     characterParser.moveNext();
     assertThat(characterParser.getCurrent().getCharacter()).isEqualTo('b');
   }
 
   @Test
-  public void test_move_next_to_the_end() {
+  void test_move_next_to_the_end() {
     CharacterParser characterParser = getCharacterParser("'ab'");
     characterParser.moveNext();
     assertThat(characterParser.isAtEnd()).isFalse();
@@ -56,7 +56,7 @@ public class PythonStringCharacterParserTest {
   }
 
   @Test
-  public void test_reset_to() {
+  void test_reset_to() {
     CharacterParser characterParser = getCharacterParser("'abcde'");
     characterParser.moveNext();
     characterParser.resetTo(0);
@@ -64,12 +64,12 @@ public class PythonStringCharacterParserTest {
   }
 
   @Test
-  public void test_escaping_has_no_meaning_in_raw_string() {
+  void test_escaping_has_no_meaning_in_raw_string() {
     assertThat(chars("r'\\n'")).containsExactly('\\', 'n');
   }
 
   @Test
-  public void test_different_escape_sequences() {
+  void test_different_escape_sequences() {
     assertThat(chars("'a\\\nb'")).containsExactly('a', 'b');
     assertThat(chars("'a\\\n'")).containsExactly('a');
     assertThat(chars("'\\\\'")).containsExactly('\\');
@@ -91,7 +91,7 @@ public class PythonStringCharacterParserTest {
   }
 
   @Test
-  public void invalid_escape_sequences() {
+  void invalid_escape_sequences() {
     assertThat(chars("'\\x4'")).containsExactly('\\', 'x', '4');
     assertThat(chars("'\\u4'")).containsExactly('\\', 'u', '4');
     assertThat(chars("'\\U4'")).containsExactly('\\', 'U', '4');

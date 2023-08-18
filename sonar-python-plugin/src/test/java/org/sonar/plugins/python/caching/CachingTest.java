@@ -53,7 +53,7 @@ import static org.sonar.plugins.python.caching.Caching.IMPORTS_MAP_CACHE_KEY_PRE
 import static org.sonar.plugins.python.caching.Caching.PROJECT_SYMBOL_TABLE_CACHE_KEY_PREFIX;
 import static org.sonar.python.index.DescriptorsToProtobuf.fromProtobuf;
 
-public class CachingTest {
+class CachingTest {
 
   @RegisterExtension
   public LogTesterJUnit5 logTester = new LogTesterJUnit5().setLevel(Level.DEBUG);
@@ -62,7 +62,7 @@ public class CachingTest {
 
 
   @Test
-  public void writeProjectLevelSymbolTableEntry() throws InvalidProtocolBufferException {
+  void writeProjectLevelSymbolTableEntry() throws InvalidProtocolBufferException {
     TestWriteCache writeCache = new TestWriteCache();
     PythonWriteCache pythonWriteCache = new PythonWriteCacheImpl(writeCache);
     TestReadCache readCache = new TestReadCache();
@@ -85,7 +85,7 @@ public class CachingTest {
 
 
   @Test
-  public void readProjectLevelSymbolTableEntry() {
+  void readProjectLevelSymbolTableEntry() {
     TestWriteCache writeCache = new TestWriteCache();
     PythonWriteCache pythonWriteCache = new PythonWriteCacheImpl(writeCache);
     TestReadCache readCache = new TestReadCache();
@@ -105,7 +105,7 @@ public class CachingTest {
   }
 
   @Test
-  public void readProjectLevelSymbolTableMissingEntry() {
+  void readProjectLevelSymbolTableMissingEntry() {
     TestWriteCache writeCache = new TestWriteCache();
     TestReadCache readCache = new TestReadCache();
     CacheContextImpl cacheContext = new CacheContextImpl(true, new PythonWriteCacheImpl(writeCache), new PythonReadCacheImpl(readCache));
@@ -115,7 +115,7 @@ public class CachingTest {
   }
 
   @Test
-  public void readProjectLevelSymbolTableIOException() throws IOException {
+  void readProjectLevelSymbolTableIOException() throws IOException {
     TestWriteCache writeCache = new TestWriteCache();
     TestReadCache readCache = new TestReadCache();
     InputStream inputStream = mock(InputStream.class);
@@ -132,7 +132,7 @@ public class CachingTest {
   }
 
   @Test
-  public void writeImportsMapEntry() {
+  void writeImportsMapEntry() {
     TestWriteCache writeCache = new TestWriteCache();
     PythonWriteCache pythonWriteCache = new PythonWriteCacheImpl(writeCache);
     PythonReadCache pythonReadCache = new PythonReadCacheImpl(new TestReadCache());
@@ -149,7 +149,7 @@ public class CachingTest {
   }
 
   @Test
-  public void readImportsMapEntry() {
+  void readImportsMapEntry() {
     TestWriteCache writeCache = new TestWriteCache();
     TestReadCache readCache = new TestReadCache();
     writeCache.bind(readCache);
@@ -165,7 +165,7 @@ public class CachingTest {
   }
 
   @Test
-  public void readImportsMissingEntry() {
+  void readImportsMissingEntry() {
     TestWriteCache writeCache = new TestWriteCache();
     TestReadCache readCache = new TestReadCache();
     CacheContextImpl cacheContext = new CacheContextImpl(true, new PythonWriteCacheImpl(writeCache), new PythonReadCacheImpl(readCache));
@@ -175,7 +175,7 @@ public class CachingTest {
   }
 
   @Test
-  public void corruptedDataInCache() {
+  void corruptedDataInCache() {
     TestWriteCache writeCache = new TestWriteCache();
     PythonWriteCache pythonWriteCache = new PythonWriteCacheImpl(writeCache);
     TestReadCache readCache = new TestReadCache();

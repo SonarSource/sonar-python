@@ -32,9 +32,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.tuple;
 
 
-public class ClassLocalSymbolsTest {
+class ClassLocalSymbolsTest {
   @Test
-  public void no_field() {
+  void no_field() {
     ClassDef empty = parseClass(
       "class C: ",
       "  pass");
@@ -43,7 +43,7 @@ public class ClassLocalSymbolsTest {
   }
 
   @Test
-  public void only_methods() {
+  void only_methods() {
     ClassDef empty2 = parseClass(
       "class C:",
       "  def f(): pass");
@@ -52,7 +52,7 @@ public class ClassLocalSymbolsTest {
   }
 
   @Test
-  public void class_fields() {
+  void class_fields() {
     ClassDef c = parseClass(
       "class C: ",
       "  f1 = 1",
@@ -63,7 +63,7 @@ public class ClassLocalSymbolsTest {
   }
 
   @Test
-  public void instance_fields() {
+  void instance_fields() {
     ClassDef c1 = parseClass(
       "class C: ",
       "  def f(self):",
@@ -93,7 +93,7 @@ public class ClassLocalSymbolsTest {
   }
 
   @Test
-  public void same_name() {
+  void same_name() {
     ClassDef c = parseClass(
       "class C: ",
       "  f1 = 1",
@@ -104,7 +104,7 @@ public class ClassLocalSymbolsTest {
   }
 
   @Test
-  public void same_name_method_fn() {
+  void same_name_method_fn() {
     FileInput fileInput = PythonTestUtils.parse(
       "def fn(): pass",
       "class C: ",

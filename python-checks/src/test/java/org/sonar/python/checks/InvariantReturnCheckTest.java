@@ -25,10 +25,10 @@ import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 import static org.junit.Assert.*;
 
-public class InvariantReturnCheckTest {
+class InvariantReturnCheckTest {
 
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/invariantReturn.py", new InvariantReturnCheck());
   }
 

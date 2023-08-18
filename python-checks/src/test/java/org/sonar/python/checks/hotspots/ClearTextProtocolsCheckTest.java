@@ -23,10 +23,10 @@ import java.util.Collections;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-public class ClearTextProtocolsCheckTest {
+class ClearTextProtocolsCheckTest {
 
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify(Collections.singletonList("src/test/resources/checks/hotspots/clearTextProtocols.py"), new ClearTextProtocolsCheck());
   }
 

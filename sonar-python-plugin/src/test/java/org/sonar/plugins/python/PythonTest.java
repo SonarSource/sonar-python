@@ -25,10 +25,10 @@ import org.sonar.api.config.internal.MapSettings;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class PythonTest {
+class PythonTest {
 
   @Test
-  public void test() {
+  void test() {
     Python language = new Python(new ConfigurationBridge(new MapSettings()));
     assertThat(language.getKey()).isEqualTo("py");
     assertThat(language.getName()).isEqualTo("Python");
@@ -36,7 +36,7 @@ public class PythonTest {
   }
 
   @Test
-  public void custom_file_suffixes() {
+  void custom_file_suffixes() {
     MapSettings settings = new MapSettings();
     settings.setProperty(PythonPlugin.FILE_SUFFIXES_KEY, "py,python");
 

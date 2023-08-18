@@ -19,22 +19,22 @@
  */
 package org.sonar.python.parser.compound.statements;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.parser.RuleTest;
 
 import static org.sonar.python.parser.PythonParserAssert.assertThat;
 
-public class TryStatementTest extends RuleTest {
+class TryStatementTest extends RuleTest {
 
-  @Before
-  public void init() {
+  @BeforeEach
+  void init() {
     setRootRule(PythonGrammar.TRY_STMT);
   }
 
   @Test
-  public void ok() {
+  void ok() {
 
     assertThat(p).matches("try : pass\nexcept e : pass")
       .matches("try : pass\nexcept e : pass\nexcept f : pass")

@@ -25,12 +25,12 @@ import org.sonar.python.metrics.FileLinesVisitor;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class FileLinesVisitorTest {
+class FileLinesVisitorTest {
 
   private static final File BASE_DIR = new File("src/test/resources/metrics");
 
   @Test
-  public void test() {
+  void test() {
     FileLinesVisitor visitor = new FileLinesVisitor();
 
     TestPythonVisitorRunner.scanFile(new File(BASE_DIR, "file_lines.py"), visitor);
@@ -44,7 +44,7 @@ public class FileLinesVisitorTest {
   }
 
   @Test
-  public void test_ignoreHeaderComments() {
+  void test_ignoreHeaderComments() {
     FileLinesVisitor visitor = new FileLinesVisitor();
 
     TestPythonVisitorRunner.scanFile(new File(BASE_DIR, "file_lines_header_comments.py"), visitor);
@@ -54,14 +54,14 @@ public class FileLinesVisitorTest {
   }
 
   @Test
-  public void executable_lines() {
+  void executable_lines() {
     FileLinesVisitor visitor = new FileLinesVisitor();
     TestPythonVisitorRunner.scanFile(new File(BASE_DIR, "executable_lines.py"), visitor);
     assertThat(visitor.getExecutableLines()).containsOnly(1, 2, 4, 7, 11, 13, 14, 15, 16, 18, 20, 21, 22, 23, 25, 27, 28, 29);
   }
 
   @Test
-  public void empty_file() {
+  void empty_file() {
     FileLinesVisitor visitor = new FileLinesVisitor();
     TestPythonVisitorRunner.scanFile(new File(BASE_DIR, "empty.py"), visitor);
     assertThat(visitor.getExecutableLines()).isEmpty();

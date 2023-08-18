@@ -23,10 +23,10 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.sonar.api.batch.sensor.cache.WriteCache;
 
-public class PythonWriteCacheImplTest {
+class PythonWriteCacheImplTest {
 
   @Test
-  public void write() {
+  void write() {
     byte[] bytes = "hello".getBytes();
     WriteCache writeCache = Mockito.spy(WriteCache.class);
 
@@ -38,7 +38,7 @@ public class PythonWriteCacheImplTest {
   }
 
   @Test
-  public void copy_from_previous() {
+  void copy_from_previous() {
     WriteCache writeCache = Mockito.spy(WriteCache.class);
 
     PythonWriteCacheImpl pythonWriteCache = new PythonWriteCacheImpl(writeCache);

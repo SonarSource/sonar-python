@@ -19,22 +19,22 @@
  */
 package org.sonar.python.parser.compound.statements;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.parser.RuleTest;
 
 import static org.sonar.python.parser.PythonParserAssert.assertThat;
 
-public class IfStatementTest extends RuleTest {
+class IfStatementTest extends RuleTest {
 
-  @Before
-  public void init() {
+  @BeforeEach
+  void init() {
     setRootRule(PythonGrammar.IF_STMT);
   }
 
   @Test
-  public void ok() {
+  void ok() {
 
     assertThat(p).matches("if TEST : pass")
       .matches("if TEST : pass\nelif TEST : pass")

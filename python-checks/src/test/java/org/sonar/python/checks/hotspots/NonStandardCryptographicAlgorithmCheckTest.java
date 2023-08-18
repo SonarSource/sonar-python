@@ -23,15 +23,15 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-public class NonStandardCryptographicAlgorithmCheckTest {
+class NonStandardCryptographicAlgorithmCheckTest {
 
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/hotspots/nonStandardCryptographicAlgorithm/nonStandardCryptographicAlgorithm.py", new NonStandardCryptographicAlgorithmCheck());
   }
 
   @Test
-  public void test_avoid_fp_django_namespace() {
+  void test_avoid_fp_django_namespace() {
     PythonCheckVerifier.verifyNoIssue(
       Arrays.asList(
         "src/test/resources/checks/hotspots/nonStandardCryptographicAlgorithm/__init__.py",

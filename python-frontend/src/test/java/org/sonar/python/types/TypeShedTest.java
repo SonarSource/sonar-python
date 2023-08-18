@@ -26,7 +26,7 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
 import org.slf4j.event.Level;
@@ -48,13 +48,13 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.Assertions.tuple;
 import static org.sonar.python.types.TypeShed.symbolsForModule;
 
-public class TypeShedTest {
+class TypeShedTest {
 
   @RegisterExtension
   public LogTesterJUnit5 logTester = new LogTesterJUnit5().setLevel(Level.DEBUG);
 
-  @Before
-  public void setPythonVersions() {
+  @BeforeEach
+  void setPythonVersions() {
     ProjectPythonVersion.setCurrentVersions(PythonVersionUtils.allVersions());
     TypeShed.resetBuiltinSymbols();
   }
@@ -65,7 +65,7 @@ public class TypeShedTest {
   }
 
   @Test
-  public void classes() {
+  void classes() {
     ClassSymbol intClass = TypeShed.typeShedClass("int");
     assertThat(intClass.superClasses()).extracting(Symbol::name).containsExactly("object");
     assertThat(intClass.hasUnresolvedTypeHierarchy()).isFalse();
@@ -75,7 +75,7 @@ public class TypeShedTest {
   }
 
   @Test
-  public void str() {
+  void str() {
     ClassSymbol strClass = TypeShed.typeShedClass("str");
     assertThat(strClass.hasUnresolvedTypeHierarchy()).isFalse();
     assertThat(strClass.superClasses()).extracting(Symbol::kind, Symbol::name).containsExactlyInAnyOrder(tuple(Kind.CLASS, "Sequence"));
@@ -93,23 +93,23 @@ public class TypeShedTest {
   }
 
   @Test
-  public void not_a_class() {
+  void not_a_class() {
     assertThatThrownBy(() -> TypeShed.typeShedClass("repr")).isInstanceOf(IllegalArgumentException.class);
   }
 
   @Test
-  public void unknown_name() {
+  void unknown_name() {
     assertThatThrownBy(() -> TypeShed.typeShedClass("xxx")).isInstanceOf(IllegalArgumentException.class);
   }
 
   @Test
-  public void none_type() {
+  void none_type() {
     ClassSymbol noneType = TypeShed.typeShedClass("NoneType");
     assertThat(noneType.superClasses()).isEmpty();
   }
 
   @Test
-  public void typing_module() {
+  void typing_module() {
     Map<String, Symbol> symbols = symbolsForModule("typing");
     assertThat(symbols.values()).allMatch(symbol -> symbol.usages().isEmpty());
     // python3 specific
@@ -119,7 +119,7 @@ public class TypeShedTest {
   }
 
   @Test
-  public void stdlib_symbols() {
+  void stdlib_symbols() {
     Map<String, Symbol> mathSymbols = symbolsForModule("math");
     Symbol symbol = mathSymbols.get("acos");
     assertThat(symbol.kind()).isEqualTo(Symbol.Kind.AMBIGUOUS);
@@ -140,7 +140,7 @@ public class TypeShedTest {
   }
 
   @Test
-  public void third_party_symbols() {
+  void third_party_symbols() {
     Map<String, Symbol> flaskLoggingSymbols = symbolsForModule("flask.helpers");
     Symbol flaskSymbol = flaskLoggingSymbols.get("get_root_path");
     assertThat(flaskSymbol.kind()).isEqualTo(Kind.FUNCTION);
@@ -149,7 +149,7 @@ public class TypeShedTest {
   }
 
   @Test
-  public void should_resolve_packages() {
+  void should_resolve_packages() {
     assertThat(symbolsForModule("urllib")).isNotEmpty();
     assertThat(symbolsForModule("ctypes")).isNotEmpty();
     assertThat(symbolsForModule("email")).isNotEmpty();
@@ -163,7 +163,7 @@ public class TypeShedTest {
   }
 
   @Test
-  public void package_symbols() {
+  void package_symbols() {
     Map<String, Symbol> cursesSymbols = symbolsForModule("curses");
     Symbol wrapperSymbol = cursesSymbols.get("wrapper");
     assertThat(wrapperSymbol.kind()).isEqualTo(Kind.FUNCTION);
@@ -172,7 +172,7 @@ public class TypeShedTest {
   }
 
   @Test
-  public void package_submodules_symbols() {
+  void package_submodules_symbols() {
     Map<String, Symbol> asciiSymbols = symbolsForModule("curses.ascii");
     Symbol isalnumSymbol = asciiSymbols.get("isalnum");
     assertThat(isalnumSymbol.kind()).isEqualTo(Kind.FUNCTION);
@@ -181,7 +181,7 @@ public class TypeShedTest {
   }
 
   @Test
-  public void package_inner_submodules_symbols() {
+  void package_inner_submodules_symbols() {
     Map<String, Symbol> driverSymbols = symbolsForModule("lib2to3.pgen2.driver");
     Symbol loadGrammarSymbol = driverSymbols.get("load_grammar");
     // There is a small difference between Python 2 and Python 3 symbols: Python 2 uses Text instead of str
@@ -190,7 +190,7 @@ public class TypeShedTest {
   }
 
   @Test
-  public void package_relative_import() {
+  void package_relative_import() {
     Map<String, Symbol> osSymbols = symbolsForModule("os");
     // The "import sys" is not part of the exported API (private import) in Typeshed
     // See: https://github.com/python/typeshed/blob/master/CONTRIBUTING.md#conventions
@@ -212,7 +212,7 @@ public class TypeShedTest {
   }
 
   @Test
-  public void package_member_fqn_points_to_original_fqn() {
+  void package_member_fqn_points_to_original_fqn() {
     Map<String, Symbol> symbols = symbolsForModule("flask");
     Symbol targetSymbol = symbols.get("Response");
     assertThat(targetSymbol.fullyQualifiedName()).isEqualTo("flask.wrappers.Response");
@@ -221,7 +221,7 @@ public class TypeShedTest {
 
 
   @Test
-  public void package_member_ambigous_symbol_common_fqn() {
+  void package_member_ambigous_symbol_common_fqn() {
     Map<String, Symbol> symbols = symbolsForModule("io");
     Symbol targetSymbol = symbols.get("FileIO");
     assertThat(targetSymbol.fullyQualifiedName()).isEqualTo("io.FileIO");
@@ -229,7 +229,7 @@ public class TypeShedTest {
   }
 
   @Test
-  public void two_exported_symbols_with_same_local_names() {
+  void two_exported_symbols_with_same_local_names() {
     Map<String, Symbol> osSymbols = symbolsForModule("os");
     Map<String, Symbol> posixSymbols = symbolsForModule("posix");
     Symbol setupSymbolFromPosix = posixSymbols.get("stat_result");
@@ -241,7 +241,7 @@ public class TypeShedTest {
   }
 
   @Test
-  public void package_django() {
+  void package_django() {
     Map<String, Symbol> djangoSymbols = symbolsForModule("django.http");
     Symbol responseSymbol = djangoSymbols.get("HttpResponse");
     assertThat(responseSymbol.kind()).isEqualTo(Kind.CLASS);
@@ -249,7 +249,7 @@ public class TypeShedTest {
   }
 
   @Test
-  public void return_type_hints() {
+  void return_type_hints() {
     Map<String, Symbol> symbols = symbolsForModule("typing");
     assertThat(((FunctionSymbolImpl) symbols.get("get_args")).annotatedReturnTypeName()).isEqualTo("tuple");
     symbols = symbolsForModule("flask_mail");
@@ -258,7 +258,7 @@ public class TypeShedTest {
   }
 
   @Test
-  public void package_django_class_property_type() {
+  void package_django_class_property_type() {
     Map<String, Symbol> djangoSymbols = symbolsForModule("django.http.request");
     Symbol requestSymbol = djangoSymbols.get("HttpRequest");
     assertThat(requestSymbol.kind()).isEqualTo(Kind.CLASS);
@@ -266,7 +266,7 @@ public class TypeShedTest {
   }
 
   @Test
-  public void package_lxml_reexported_symbol_fqn() {
+  void package_lxml_reexported_symbol_fqn() {
     Map<String, Symbol> lxmlEtreeSymbols = symbolsForModule("lxml.etree");
     Symbol elementTreeSymbol = lxmlEtreeSymbols.get("ElementTree");
     assertThat(elementTreeSymbol.kind()).isEqualTo(Kind.CLASS);
@@ -275,7 +275,7 @@ public class TypeShedTest {
   }
 
   @Test
-  public void package_sqlite3_connect_type_in_ambiguous_symbol() {
+  void package_sqlite3_connect_type_in_ambiguous_symbol() {
     Map<String, Symbol> sqlite3Symbols = symbolsForModule("sqlite3");
     ClassSymbol connectionSymbol =  (ClassSymbol) sqlite3Symbols.get("Connection");
     AmbiguousSymbol cursorFunction = connectionSymbol.declaredMembers().stream().filter(m -> "cursor".equals(m.name())).findFirst().map(AmbiguousSymbol.class::cast).get();
@@ -286,7 +286,7 @@ public class TypeShedTest {
   }
 
   @Test
-  public void stub_files_symbols() {
+  void stub_files_symbols() {
     Collection<Symbol> mathSymbols = symbolsForModule("math").values();
     Collection<Symbol> djangoHttpSymbols = symbolsForModule("django.http").values();
 
@@ -297,7 +297,7 @@ public class TypeShedTest {
   }
 
   @Test
-  public void deserialize_annoy_protobuf() {
+  void deserialize_annoy_protobuf() {
     Map<String, Symbol> deserializedAnnoySymbols = symbolsForModule("annoy").values().stream()
       .collect(Collectors.toMap(Symbol::fullyQualifiedName, s -> s));
     assertThat(deserializedAnnoySymbols.values()).extracting(Symbol::kind, Symbol::fullyQualifiedName)
@@ -330,7 +330,7 @@ public class TypeShedTest {
   }
 
   @Test
-  public void deserialize_nonexistent_or_incorrect_protobuf() {
+  void deserialize_nonexistent_or_incorrect_protobuf() {
     assertThat(symbolsForModule("NOT_EXISTENT")).isEmpty();
     assertThat(TypeShed.getSymbolsFromProtobufModule(null)).isEmpty();
     InputStream targetStream = new ByteArrayInputStream("foo".getBytes());
@@ -339,7 +339,7 @@ public class TypeShedTest {
   }
 
   @Test
-  public void class_symbols_from_protobuf() throws TextFormat.ParseException {
+  void class_symbols_from_protobuf() throws TextFormat.ParseException {
     SymbolsProtos.ModuleSymbol moduleSymbol = moduleSymbol(
       "fully_qualified_name: \"mod\"\n" +
       "classes {\n" +
@@ -369,7 +369,7 @@ public class TypeShedTest {
   }
 
   @Test
-  public void function_symbols_from_protobuf() throws TextFormat.ParseException {
+  void function_symbols_from_protobuf() throws TextFormat.ParseException {
     SymbolsProtos.ModuleSymbol moduleSymbol = moduleSymbol(
       "fully_qualified_name: \"mod\"\n" +
       "functions {\n" +
@@ -419,7 +419,7 @@ public class TypeShedTest {
   }
 
   @Test
-  public void pythonVersions() {
+  void pythonVersions() {
     Symbol range = TypeShed.builtinSymbols().get("range");
     assertThat(((SymbolImpl) range).validForPythonVersions()).containsExactlyInAnyOrder(  "36", "37", "38", "39", "310", "311");
     assertThat(range.kind()).isEqualTo(Kind.CLASS);
@@ -444,7 +444,7 @@ public class TypeShedTest {
   }
 
   @Test
-  public void symbolWithFQN_should_be_consistent() {
+  void symbolWithFQN_should_be_consistent() {
     // smtplib imports typing.Sequence only in Python3, hence typing.Sequence has kind CLASS
     symbolsForModule("smtplib");
     Symbol sequence = TypeShed.symbolWithFQN("typing.Sequence");
@@ -454,7 +454,7 @@ public class TypeShedTest {
   }
 
   @Test
-  public void stubModules() {
+  void stubModules() {
     TypeShed.symbolsForModule("doesnotexist");
     TypeShed.symbolsForModule("math");
     assertThat(TypeShed.stubModules()).containsExactly("math");
@@ -467,7 +467,7 @@ public class TypeShedTest {
   }
 
   @Test
-  public void variables_from_protobuf() throws TextFormat.ParseException {
+  void variables_from_protobuf() throws TextFormat.ParseException {
     SymbolsProtos.ModuleSymbol moduleSymbol = moduleSymbol(
         "fully_qualified_name: \"mod\"\n" +
         "vars {\n" +
@@ -488,7 +488,7 @@ public class TypeShedTest {
   }
 
   @Test
-  public void stubFilesSymbols_should_not_contain_ambiguous_symbols_of_classes() {
+  void stubFilesSymbols_should_not_contain_ambiguous_symbols_of_classes() {
     // populate typeshed symbols cache by importing socket module
     symbolsForModule("socket");
     Collection<Symbol> symbols = TypeShed.stubFilesSymbols();
@@ -496,7 +496,7 @@ public class TypeShedTest {
   }
 
   @Test
-  public void symbol_from_submodule_access() {
+  void symbol_from_submodule_access() {
     Map<String, Symbol> os = symbolsForModule("os");
     SymbolImpl path = (SymbolImpl) os.get("path");
     Symbol samefile = path.getChildrenSymbolByName().get("samefile");
@@ -509,7 +509,7 @@ public class TypeShedTest {
   }
 
   @Test
-  public void typeshed_private_modules_should_not_affect_fqn()  {
+  void typeshed_private_modules_should_not_affect_fqn()  {
     Map<String, Symbol> socketModule = symbolsForModule("socket");
     ClassSymbol socket = (ClassSymbol) socketModule.get("socket");
     assertThat(socket.declaredMembers()).extracting(Symbol::name, Symbol::fullyQualifiedName).contains(tuple("connect", "socket.socket.connect"));
@@ -517,7 +517,7 @@ public class TypeShedTest {
   }
 
   @Test
-  public void overloaded_function_alias_has_function_annotated_type()  {
+  void overloaded_function_alias_has_function_annotated_type()  {
     Map<String, Symbol> gettextModule = symbolsForModule("gettext");
     Symbol translation = gettextModule.get("translation");
     Symbol catalog = gettextModule.get("Catalog");
@@ -526,7 +526,7 @@ public class TypeShedTest {
   }
 
   @Test
-  public void stubFilesSymbols_third_party_symbols_should_not_be_null() {
+  void stubFilesSymbols_third_party_symbols_should_not_be_null() {
     // six modules contain ambiguous symbols that only contain class symbols
     // however third party symbols don't have validForPythonVersions field set
     symbolsForModule("six");

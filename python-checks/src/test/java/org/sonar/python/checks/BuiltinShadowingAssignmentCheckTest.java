@@ -23,15 +23,15 @@ import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.quickfix.PythonQuickFixVerifier;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-public class BuiltinShadowingAssignmentCheckTest {
+class BuiltinShadowingAssignmentCheckTest {
 
   @Test
-  public void testVariableShadowing() {
+  void testVariableShadowing() {
     PythonCheckVerifier.verify("src/test/resources/checks/builtinShadowing.py", new BuiltinShadowingAssignmentCheck());
   }
 
   @Test
-  public void quickFixTest() {
+  void quickFixTest() {
     var before = "def my_function():\n" +
       "  int = 42\n" +
       "  print(int)\n" +
@@ -47,7 +47,7 @@ public class BuiltinShadowingAssignmentCheckTest {
   }
 
   @Test
-  public void noQuickFixTest() {
+  void noQuickFixTest() {
     var check = new BuiltinShadowingAssignmentCheck();
 
     var before = "def my_function():\n" +

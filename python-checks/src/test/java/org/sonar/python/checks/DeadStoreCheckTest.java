@@ -26,22 +26,22 @@ import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 import static org.sonar.python.checks.utils.CodeTestUtils.code;
 
-public class DeadStoreCheckTest {
+class DeadStoreCheckTest {
 
   private final PythonCheck check = new DeadStoreCheck();
 
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/deadStore.py", check);
   }
 
   @Test
-  public void iPythonTest() {
+  void iPythonTest() {
     PythonCheckVerifier.verify("src/test/resources/checks/deadStore.ipynb", check);
   }
 
   @Test
-  public void assignment_on_single_line() {
+  void assignment_on_single_line() {
     String codeWithIssue = code(
       "def foo():",
       "    x = 42",
@@ -56,7 +56,7 @@ public class DeadStoreCheckTest {
   }
 
   @Test
-  public void assignment_with_semicolon_on_single_line() {
+  void assignment_with_semicolon_on_single_line() {
     String codeWithIssue = code(
       "def foo():",
       "    x = 42 ;",
@@ -70,7 +70,7 @@ public class DeadStoreCheckTest {
   }
 
   @Test
-  public void assignment_between_two_siblings() {
+  void assignment_between_two_siblings() {
     String codeWithIssue = code(
       "def foo():",
       "    y = 0; x = 42; x = 0",
@@ -83,7 +83,7 @@ public class DeadStoreCheckTest {
   }
 
   @Test
-  public void assignment_with_previous_element_on_line() {
+  void assignment_with_previous_element_on_line() {
     String codeWithIssue = code(
       "def foo():",
       "    y = 0; x = 42",
@@ -98,7 +98,7 @@ public class DeadStoreCheckTest {
   }
 
   @Test
-  public void assignment_with_trailing_whitespace() {
+  void assignment_with_trailing_whitespace() {
     String codeWithIssue = code(
       "def foo():",
       "    x = 42 ",
@@ -112,7 +112,7 @@ public class DeadStoreCheckTest {
   }
 
   @Test
-  public void assignment_wrapped_by_elements_on_different_lines() {
+  void assignment_wrapped_by_elements_on_different_lines() {
     String codeWithIssue = code(
       "def foo():",
       "    a = 1",
@@ -128,14 +128,14 @@ public class DeadStoreCheckTest {
   }
 
   @Test
-  public void all_statements_on_single_line() {
+  void all_statements_on_single_line() {
     String codeWithIssue = "def dead_store(): unused = 24; unused = 42; print(unused)";
     String codeFixed = "def dead_store(): unused = 42; print(unused)";
     PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
   }
 
   @Test
-  public void assignment_before_condition() {
+  void assignment_before_condition() {
     String codeWithIssue = code(
       "def simple_conditional():",
       "    x = 10",
@@ -151,7 +151,7 @@ public class DeadStoreCheckTest {
   }
 
   @Test
-  public void function_call_as_assigned_value() {
+  void function_call_as_assigned_value() {
     String codeWithIssue = code(
       "def function_assign():",
       "    c = foo()",
@@ -162,7 +162,7 @@ public class DeadStoreCheckTest {
   }
 
   @Test
-  public void assignment_expression_in_function_call() {
+  void assignment_expression_in_function_call() {
     String codeWithIssue = code(
       "def assignment_expression():",
       "    foo(a:=3) # Comment 1",
@@ -174,7 +174,7 @@ public class DeadStoreCheckTest {
 
 
   @Test
-  public void comment_after_should_not_be_removed(){
+  void comment_after_should_not_be_removed(){
     String codeWithIssue = code(
       "def ab():",
       "    a = 42",
@@ -190,7 +190,7 @@ public class DeadStoreCheckTest {
   }
 
   @Test
-  public void new_line_after_assignment_should_not_be_removed(){
+  void new_line_after_assignment_should_not_be_removed(){
     String codeWithIssue = code(
       "def ab():",
       "    b = 1",
@@ -210,7 +210,7 @@ public class DeadStoreCheckTest {
   }
 
   @Test
-  public void assignment_on_branch(){
+  void assignment_on_branch(){
     String codeWithIssue = code(
       "def a():",
       "    x = 42",
@@ -227,7 +227,7 @@ public class DeadStoreCheckTest {
   }
 
   @Test
-  public void assignment_on_branch_with_multiple_elements(){
+  void assignment_on_branch_with_multiple_elements(){
     String codeWithIssue = code(
       "def a():",
       "    x = 42",
@@ -245,7 +245,7 @@ public class DeadStoreCheckTest {
   }
 
   @Test
-  public void assignment_on_branch_with_multiple_elements_on_same_line(){
+  void assignment_on_branch_with_multiple_elements_on_same_line(){
     String codeWithIssue = code(
       "def a():",
       "    x = 42",
@@ -262,7 +262,7 @@ public class DeadStoreCheckTest {
   }
 
   @Test
-  public void side_effect_in_binary_op(){
+  void side_effect_in_binary_op(){
     String codeWithIssue = code(
       "def ab():",
       "    a = 1 + foo()",
@@ -272,7 +272,7 @@ public class DeadStoreCheckTest {
   }
 
   @Test
-  public void chain_assignment() {
+  void chain_assignment() {
     var codeWithIssue = code(
       "def chain_assign():",
         "    a = b = 42",

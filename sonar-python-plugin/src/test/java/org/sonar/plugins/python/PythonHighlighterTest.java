@@ -33,14 +33,14 @@ import org.sonar.python.TestPythonVisitorRunner;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class PythonHighlighterTest {
+class PythonHighlighterTest {
 
   private SensorContextTester context;
 
   private File file;
 
   @BeforeEach
-  public void scanFile() {
+  void scanFile() {
     String dir = "src/test/resources/org/sonar/plugins/python";
 
     file = new File(dir, "/pythonHighlighter.py");
@@ -56,7 +56,7 @@ public class PythonHighlighterTest {
   }
 
   @Test
-  public void keyword() {
+  void keyword() {
     // def
     checkOnRange(8, 0, 3, TypeOfText.KEYWORD);
 
@@ -89,7 +89,7 @@ public class PythonHighlighterTest {
   }
 
   @Test
-  public void stringLiteral() {
+  void stringLiteral() {
     // "some string"
     checkOnRange(4, 4, 13, TypeOfText.STRING);
 
@@ -148,13 +148,13 @@ public class PythonHighlighterTest {
   }
 
   @Test
-  public void comment() {
+  void comment() {
     checkOnRange(6, 0, 19, TypeOfText.COMMENT);
     checkOnRange(9, 10, 15, TypeOfText.COMMENT);
   }
 
   @Test
-  public void number() {
+  void number() {
     // 34
     checkOnRange(29, 0, 2, TypeOfText.CONSTANT);
 

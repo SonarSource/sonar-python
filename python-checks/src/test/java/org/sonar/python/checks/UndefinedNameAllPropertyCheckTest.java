@@ -22,35 +22,35 @@ package org.sonar.python.checks;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-public class UndefinedNameAllPropertyCheckTest {
+class UndefinedNameAllPropertyCheckTest {
 
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/undefinedNameAllProperty/undefinedNameAllProperty.py", new UndefinedNameAllPropertyCheck());
   }
 
   @Test
-  public void test_wildcard_import() {
+  void test_wildcard_import() {
     PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/undefinedNameAllProperty/with_wildcard_import.py", new UndefinedNameAllPropertyCheck());
   }
 
   @Test
-  public void test_init_exports_module() {
+  void test_init_exports_module() {
     PythonCheckVerifier.verify("src/test/resources/checks/undefinedNameAllProperty/__init__.py", new UndefinedNameAllPropertyCheck());
   }
 
   @Test
-  public void test_uses_getattr() {
+  void test_uses_getattr() {
     PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/undefinedNameAllProperty/defines_getattr.py", new UndefinedNameAllPropertyCheck());
   }
 
   @Test
-  public void test_manipulates_globals() {
+  void test_manipulates_globals() {
     PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/undefinedNameAllProperty/manipulates_globals.py", new UndefinedNameAllPropertyCheck());
   }
 
   @Test
-  public void test_manipulates_sys_modules() {
+  void test_manipulates_sys_modules() {
     PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/undefinedNameAllProperty/manipulates_sys_modules.py", new UndefinedNameAllPropertyCheck());
   }
 

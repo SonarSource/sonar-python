@@ -19,22 +19,22 @@
  */
 package org.sonar.python.parser.compound.statements;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.parser.RuleTest;
 
 import static org.sonar.python.parser.PythonParserAssert.assertThat;
 
-public class WhileStatementTest extends RuleTest {
+class WhileStatementTest extends RuleTest {
 
-  @Before
-  public void init() {
+  @BeforeEach
+  void init() {
     setRootRule(PythonGrammar.WHILE_STMT);
   }
 
   @Test
-  public void ok() {
+  void ok() {
     assertThat(p).matches("while TEST : pass")
       .matches("while TEST : pass\nelse : pass");
   }

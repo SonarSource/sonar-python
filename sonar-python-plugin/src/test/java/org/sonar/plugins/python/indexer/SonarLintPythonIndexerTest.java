@@ -49,7 +49,7 @@ import static org.assertj.core.api.Assertions.fail;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class SonarLintPythonIndexerTest {
+class SonarLintPythonIndexerTest {
 
   private final File baseDir = new File("src/test/resources/org/sonar/plugins/python/indexer").getAbsoluteFile();
   private SensorContextTester context;
@@ -64,7 +64,7 @@ public class SonarLintPythonIndexerTest {
   ProjectLevelSymbolTable projectLevelSymbolTable;
 
   @BeforeEach
-  public void init() throws IOException {
+  void init() throws IOException {
     context = SensorContextTester.create(baseDir);
     Path workDir = Files.createTempDirectory("workDir");
     context.fileSystem().setWorkDir(workDir);
@@ -79,7 +79,7 @@ public class SonarLintPythonIndexerTest {
   }
 
   @Test
-  public void test_indexer() {
+  void test_indexer() {
     assertThat(projectLevelSymbolTable.getSymbolsFromModule("main")).hasSize(1);
     assertThat(projectLevelSymbolTable.getSymbolsFromModule("mod")).hasSize(1);
     Symbol modAddSymbol = projectLevelSymbolTable.getSymbol("mod.add");
@@ -90,7 +90,7 @@ public class SonarLintPythonIndexerTest {
   }
 
   @Test
-  public void build_once_should_build_once() {
+  void build_once_should_build_once() {
     InputFile file3 = inputFile("added.py");
     moduleFileSystem.addFile(file3);
     pythonIndexer.buildOnce(context);
@@ -100,7 +100,7 @@ public class SonarLintPythonIndexerTest {
   }
 
   @Test
-  public void test_indexer_removed_file() {
+  void test_indexer_removed_file() {
     ModuleFileEvent moduleFileEvent = mock(ModuleFileEvent.class);
     when(moduleFileEvent.getType()).thenReturn(ModuleFileEvent.Type.DELETED);
     when(moduleFileEvent.getTarget()).thenReturn(file2);
@@ -113,7 +113,7 @@ public class SonarLintPythonIndexerTest {
   }
 
   @Test
-  public void test_indexer_file_removed_twice() {
+  void test_indexer_file_removed_twice() {
     ModuleFileEvent moduleFileEvent = mock(ModuleFileEvent.class);
     when(moduleFileEvent.getType()).thenReturn(ModuleFileEvent.Type.DELETED);
     when(moduleFileEvent.getTarget()).thenReturn(file2);
@@ -126,7 +126,7 @@ public class SonarLintPythonIndexerTest {
   }
 
   @Test
-  public void test_indexer_added_file() throws IOException {
+  void test_indexer_added_file() throws IOException {
     InputFile file3 = createInputFile("added.py");
     ModuleFileEvent moduleFileEvent = mock(ModuleFileEvent.class);
     when(moduleFileEvent.getType()).thenReturn(ModuleFileEvent.Type.CREATED);
@@ -141,7 +141,7 @@ public class SonarLintPythonIndexerTest {
   }
 
   @Test
-  public void test_indexer_added_nonexistent_file() throws IOException {
+  void test_indexer_added_nonexistent_file() throws IOException {
     InputFile nonExistentFile = TestInputFileBuilder.create("moduleKey", "nonexistent.py")
       .setModuleBaseDir(baseDir.toPath())
       .setCharset(StandardCharsets.UTF_8)
@@ -159,7 +159,7 @@ public class SonarLintPythonIndexerTest {
   }
 
   @Test
-  public void test_indexer_modified_file() throws IOException {
+  void test_indexer_modified_file() throws IOException {
     ModuleFileEvent moduleFileEvent = mock(ModuleFileEvent.class);
     when(moduleFileEvent.getType()).thenReturn(ModuleFileEvent.Type.MODIFIED);
     when(moduleFileEvent.getTarget()).thenReturn(file2);
@@ -172,7 +172,7 @@ public class SonarLintPythonIndexerTest {
   }
 
   @Test
-  public void test_indexer_non_python_file() {
+  void test_indexer_non_python_file() {
     testNonPythonFile("txt");
     testNonPythonFile(null);
   }

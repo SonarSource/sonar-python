@@ -22,10 +22,10 @@ package org.sonar.python.checks;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-public class DuplicatedMethodFieldNamesCheckTest {
+class DuplicatedMethodFieldNamesCheckTest {
 
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/duplicatedMethodFieldNames.py", new DuplicatedMethodFieldNamesCheck());
   }
 

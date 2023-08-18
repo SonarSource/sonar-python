@@ -24,10 +24,10 @@ import org.sonar.plugins.python.api.quickfix.PythonTextEdit;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class PythonTextEditTest {
+class PythonTextEditTest {
 
   @Test
-  public void equals() {
+  void equals() {
     PythonTextEdit edit = new PythonTextEdit("", 0, 0, 1, 1);
     assertThat(edit.equals(edit)).isTrue();
     assertThat(edit.equals(null)).isFalse();
@@ -42,7 +42,7 @@ public class PythonTextEditTest {
   }
 
   @Test
-  public void test_hashCode() {
+  void test_hashCode() {
     PythonTextEdit edit = new PythonTextEdit("", 0, 0, 1, 1);
     assertThat(edit)
       .hasSameHashCodeAs(edit)

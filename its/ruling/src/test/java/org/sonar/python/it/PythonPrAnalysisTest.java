@@ -45,7 +45,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.it.RulingHelper.getMeasure;
 import static org.sonar.python.it.RulingHelper.getOrchestrator;
 
-public class PythonPrAnalysisTest {
+class PythonPrAnalysisTest {
 
   @RegisterExtension
   public static final OrchestratorExtension ORCHESTRATOR = getOrchestrator(Edition.DEVELOPER);
@@ -85,7 +85,7 @@ public class PythonPrAnalysisTest {
   }
 
   @BeforeAll
-  public static void prepare_quality_profile() throws IOException {
+  static void prepare_quality_profile() throws IOException {
     ORCHESTRATOR.getServer().provisionProject(PR_ANALYSIS_PROJECT_KEY, PR_ANALYSIS_PROJECT_KEY);
 
     // Create and load quality profile

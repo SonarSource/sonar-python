@@ -22,10 +22,10 @@ package org.sonar.python.checks;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-public class FieldNameCheckTest {
+class FieldNameCheckTest {
 
   @Test
-  public void test() {
+  void test() {
     FieldNameCheck check = new FieldNameCheck();
     check.format = "^[_a-z][a-z0-9_]+$";
     PythonCheckVerifier.verify("src/test/resources/checks/fieldName.py", check);

@@ -22,10 +22,10 @@ package org.sonar.python.checks.django;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-public class DjangoModelFormFieldsCheckTest {
+class DjangoModelFormFieldsCheckTest {
 
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/django/djangoModelFormFieldsCheck.py", new DjangoModelFormFieldsCheck());
   }
 

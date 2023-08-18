@@ -33,7 +33,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
-public class BaseTreeVisitorTest extends RuleTest {
+class BaseTreeVisitorTest extends RuleTest {
   private final PythonTreeMaker treeMaker = new PythonTreeMaker();
 
   private static class FirstLastTokenVerifierVisitor extends BaseTreeVisitor {
@@ -50,7 +50,7 @@ public class BaseTreeVisitorTest extends RuleTest {
   }
 
   @Test
-  public void if_statement() {
+  void if_statement() {
     setRootRule(PythonGrammar.IF_STMT);
     IfStatement tree = parse("if p1: print 'a'\nelif p2: return\nelse: yield", treeMaker::ifStatement);
     FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
@@ -63,7 +63,7 @@ public class BaseTreeVisitorTest extends RuleTest {
   }
 
   @Test
-  public void exec_statement() {
+  void exec_statement() {
     setRootRule(PythonGrammar.EXEC_STMT);
     AstNode astNode = p.parse("exec 'foo' in globals, locals");
     StatementWithSeparator statementWithSeparator = new StatementWithSeparator(astNode, null);
@@ -76,7 +76,7 @@ public class BaseTreeVisitorTest extends RuleTest {
   }
 
   @Test
-  public void assert_statement() {
+  void assert_statement() {
     setRootRule(PythonGrammar.ASSERT_STMT);
     AstNode astNode = p.parse("assert x, y");
     StatementWithSeparator statementWithSeparator = new StatementWithSeparator(astNode, null);
@@ -88,7 +88,7 @@ public class BaseTreeVisitorTest extends RuleTest {
   }
 
   @Test
-  public void delete_statement() {
+  void delete_statement() {
     setRootRule(PythonGrammar.DEL_STMT);
     AstNode astNode = p.parse("del x");
     StatementWithSeparator statementWithSeparator = new StatementWithSeparator(astNode, null);
@@ -99,7 +99,7 @@ public class BaseTreeVisitorTest extends RuleTest {
   }
 
   @Test
-  public void fundef_statement() {
+  void fundef_statement() {
     setRootRule(PythonGrammar.FUNCDEF);
     FunctionDef pyFunctionDefTree = parse("def foo(x:int): pass", treeMaker::funcDefStatement);
     Parameter parameter = pyFunctionDefTree.parameters().nonTuple().get(0);
@@ -112,7 +112,7 @@ public class BaseTreeVisitorTest extends RuleTest {
   }
 
   @Test
-  public void fundef_with_tuple_param() {
+  void fundef_with_tuple_param() {
     setRootRule(PythonGrammar.FUNCDEF);
     FunctionDef pyFunctionDefTree = parse("def foo(x, (y, z)): pass", treeMaker::funcDefStatement);
     FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
@@ -127,7 +127,7 @@ public class BaseTreeVisitorTest extends RuleTest {
   }
 
   @Test
-  public void import_statement() {
+  void import_statement() {
     setRootRule(PythonGrammar.IMPORT_STMT);
     AstNode astNode = p.parse("from foo import f as g");
     StatementWithSeparator statementWithSeparator = new StatementWithSeparator(astNode, null);
@@ -146,7 +146,7 @@ public class BaseTreeVisitorTest extends RuleTest {
   }
 
   @Test
-  public void for_statement() {
+  void for_statement() {
     setRootRule(PythonGrammar.FOR_STMT);
     ForStatement tree = parse("for foo in bar:pass\nelse: pass", treeMaker::forStatement);
     FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
@@ -156,7 +156,7 @@ public class BaseTreeVisitorTest extends RuleTest {
   }
 
   @Test
-  public void while_statement() {
+  void while_statement() {
     setRootRule(PythonGrammar.WHILE_STMT);
     WhileStatementImpl tree = parse("while foo:\n  pass\nelse:\n  pass", treeMaker::whileStatement);
     FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
@@ -166,7 +166,7 @@ public class BaseTreeVisitorTest extends RuleTest {
   }
 
   @Test
-  public void try_statement() {
+  void try_statement() {
     setRootRule(PythonGrammar.TRY_STMT);
     TryStatement tree = parse("try: pass\nexcept Error: pass\nfinally: pass", treeMaker::tryStatement);
     FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
@@ -177,7 +177,7 @@ public class BaseTreeVisitorTest extends RuleTest {
   }
 
   @Test
-  public void with_statement() {
+  void with_statement() {
     setRootRule(PythonGrammar.WITH_STMT);
     WithStatement tree = parse("with foo as bar, qix : pass", treeMaker::withStatement);
     FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
@@ -187,7 +187,7 @@ public class BaseTreeVisitorTest extends RuleTest {
   }
 
   @Test
-  public void class_statement() {
+  void class_statement() {
     setRootRule(PythonGrammar.CLASSDEF);
     ClassDef tree = parse("@A\nclass clazz(Parent): pass", treeMaker::classDefStatement);
     FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
@@ -199,7 +199,7 @@ public class BaseTreeVisitorTest extends RuleTest {
   }
 
   @Test
-  public void qualified_expr() {
+  void qualified_expr() {
     setRootRule(PythonGrammar.TEST);
     QualifiedExpression tree = (QualifiedExpression) parse("a.b", treeMaker::expression);
     FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
@@ -208,7 +208,7 @@ public class BaseTreeVisitorTest extends RuleTest {
   }
 
   @Test
-  public void assignement_stmt() {
+  void assignement_stmt() {
     setRootRule(PythonGrammar.EXPRESSION_STMT);
     AstNode astNode = p.parse("a = b");
     StatementWithSeparator statementWithSeparator = new StatementWithSeparator(astNode, null);
@@ -219,7 +219,7 @@ public class BaseTreeVisitorTest extends RuleTest {
   }
 
   @Test
-  public void assignment_expr() {
+  void assignment_expr() {
     setRootRule(PythonGrammar.NAMED_EXPR_TEST);
     AstNode astNode = p.parse("b := 42");
     AssignmentExpression assignmentExpression = (AssignmentExpression) treeMaker.expression(astNode);
@@ -229,7 +229,7 @@ public class BaseTreeVisitorTest extends RuleTest {
   }
 
   @Test
-  public void annotated_assignment() {
+  void annotated_assignment() {
     setRootRule(PythonGrammar.EXPRESSION_STMT);
     AstNode astNode = p.parse("a : int = b");
     StatementWithSeparator statementWithSeparator = new StatementWithSeparator(astNode, null);
@@ -242,7 +242,7 @@ public class BaseTreeVisitorTest extends RuleTest {
   }
 
   @Test
-  public void lambda() {
+  void lambda() {
     setRootRule(PythonGrammar.LAMBDEF);
     LambdaExpression tree = parse("lambda x : x", treeMaker::lambdaExpression);
     FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
@@ -252,7 +252,7 @@ public class BaseTreeVisitorTest extends RuleTest {
   }
 
   @Test
-  public void starred_expr() {
+  void starred_expr() {
     setRootRule(PythonGrammar.STAR_EXPR);
     UnpackingExpression tree = (UnpackingExpression) parse("*a", treeMaker::expression);
     FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
@@ -261,7 +261,7 @@ public class BaseTreeVisitorTest extends RuleTest {
   }
 
   @Test
-  public void await_expr() {
+  void await_expr() {
     setRootRule(PythonGrammar.EXPR);
     AwaitExpression tree = (AwaitExpression) parse("await x", treeMaker::expression);
     FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
@@ -270,7 +270,7 @@ public class BaseTreeVisitorTest extends RuleTest {
   }
 
   @Test
-  public void slice_expr() {
+  void slice_expr() {
     setRootRule(PythonGrammar.EXPR);
     SliceExpression expr = (SliceExpression) parse("a[b:c:d]", treeMaker::expression);
     FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
@@ -285,7 +285,7 @@ public class BaseTreeVisitorTest extends RuleTest {
   }
 
   @Test
-  public void subscription_expr() {
+  void subscription_expr() {
     setRootRule(PythonGrammar.EXPR);
     SubscriptionExpression expr = (SubscriptionExpression) parse("a[b]", treeMaker::expression);
     FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
@@ -295,7 +295,7 @@ public class BaseTreeVisitorTest extends RuleTest {
   }
 
   @Test
-  public void parenthesized_expr() {
+  void parenthesized_expr() {
     setRootRule(PythonGrammar.EXPR);
     ParenthesizedExpression expr = (ParenthesizedExpression) parse("(a)", treeMaker::expression);
     FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
@@ -304,7 +304,7 @@ public class BaseTreeVisitorTest extends RuleTest {
   }
 
   @Test
-  public void tuple() {
+  void tuple() {
     setRootRule(PythonGrammar.EXPR);
     Tuple expr = (Tuple) parse("(a,)", treeMaker::expression);
     FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
@@ -313,7 +313,7 @@ public class BaseTreeVisitorTest extends RuleTest {
   }
 
   @Test
-  public void cond_expression() {
+  void cond_expression() {
     setRootRule(PythonGrammar.TEST);
     ConditionalExpression expr = (ConditionalExpression) parse("1 if p else 2", treeMaker::expression);
     FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
@@ -324,7 +324,7 @@ public class BaseTreeVisitorTest extends RuleTest {
   }
 
   @Test
-  public void list_or_set_comprehension() {
+  void list_or_set_comprehension() {
     setRootRule(PythonGrammar.EXPR);
     ComprehensionExpression expr = (ComprehensionExpression) parse("[x+1 for x in [42, 43] if cond(x)]", treeMaker::expression);
     FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
@@ -342,7 +342,7 @@ public class BaseTreeVisitorTest extends RuleTest {
   }
 
   @Test
-  public void dict_comprehension() {
+  void dict_comprehension() {
     setRootRule(PythonGrammar.TEST);
     DictCompExpression expr = (DictCompExpression) parse("{x+1:y-1 for x,y in map}", treeMaker::expression);
     FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
@@ -354,7 +354,7 @@ public class BaseTreeVisitorTest extends RuleTest {
   }
 
   @Test
-  public void repr_expression() {
+  void repr_expression() {
     setRootRule(PythonGrammar.ATOM);
     ReprExpression expr = (ReprExpression) parse("`1`", treeMaker::expression);
     FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
@@ -364,7 +364,7 @@ public class BaseTreeVisitorTest extends RuleTest {
   }
 
   @Test
-  public void match_stmt() {
+  void match_stmt() {
     setRootRule(PythonGrammar.MATCH_STMT);
     MatchStatement matchStatement = parse("match command:\n" +
       "    case \"quit\" if True:\n" +
@@ -380,7 +380,7 @@ public class BaseTreeVisitorTest extends RuleTest {
   }
 
   @Test
-  public void case_block() {
+  void case_block() {
     setRootRule(PythonGrammar.CASE_BLOCK);
     CaseBlock caseBlock = parse("case 'quit' if True: ...", treeMaker::caseBlock);
     FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
@@ -392,7 +392,7 @@ public class BaseTreeVisitorTest extends RuleTest {
   }
 
   @Test
-  public void guard() {
+  void guard() {
     setRootRule(PythonGrammar.GUARD);
     Guard guard = parse("if x > 10", treeMaker::guard);
     FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
@@ -402,7 +402,7 @@ public class BaseTreeVisitorTest extends RuleTest {
   }
 
   @Test
-  public void as_pattern() {
+  void as_pattern() {
     setRootRule(PythonGrammar.AS_PATTERN);
     AsPattern pattern = ((AsPattern) parse("'foo' as x", PythonTreeMaker::pattern));
     FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
@@ -413,7 +413,7 @@ public class BaseTreeVisitorTest extends RuleTest {
   }
 
   @Test
-  public void or_pattern() {
+  void or_pattern() {
     setRootRule(PythonGrammar.OR_PATTERN);
     OrPattern pattern = ((OrPattern) parse("'foo' | 'bar'", PythonTreeMaker::pattern));
     FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
@@ -424,7 +424,7 @@ public class BaseTreeVisitorTest extends RuleTest {
   }
 
   @Test
-  public void capture_pattern() {
+  void capture_pattern() {
     setRootRule(PythonGrammar.CLOSED_PATTERN);
     CapturePattern pattern = ((CapturePattern) parse("x", PythonTreeMaker::closedPattern));
     FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
@@ -434,7 +434,7 @@ public class BaseTreeVisitorTest extends RuleTest {
   }
 
   @Test
-  public void sequence_pattern() {
+  void sequence_pattern() {
     setRootRule(PythonGrammar.CLOSED_PATTERN);
     SequencePattern pattern = ((SequencePattern) parse("[x, y]", PythonTreeMaker::closedPattern));
     FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
@@ -445,7 +445,7 @@ public class BaseTreeVisitorTest extends RuleTest {
   }
 
   @Test
-  public void star_pattern() {
+  void star_pattern() {
     setRootRule(PythonGrammar.CLOSED_PATTERN);
     SequencePattern pattern = ((SequencePattern) parse("[x, *rest]", PythonTreeMaker::closedPattern));
     FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
@@ -458,7 +458,7 @@ public class BaseTreeVisitorTest extends RuleTest {
   }
 
   @Test
-  public void group_pattern() {
+  void group_pattern() {
     setRootRule(PythonGrammar.CLOSED_PATTERN);
     GroupPattern pattern = ((GroupPattern) parse("(x)", PythonTreeMaker::closedPattern));
     FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
@@ -468,7 +468,7 @@ public class BaseTreeVisitorTest extends RuleTest {
   }
 
   @Test
-  public void class_pattern() {
+  void class_pattern() {
     setRootRule(PythonGrammar.CLOSED_PATTERN);
     ClassPattern pattern = ((ClassPattern) parse("A(x=42)", PythonTreeMaker::closedPattern));
     FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);

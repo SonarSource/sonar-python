@@ -28,15 +28,15 @@ import org.sonar.python.parser.RuleTest;
 import static org.sonar.python.parser.PythonParserAssert.assertThat;
 
 
-public class DecoratorTest extends RuleTest {
+class DecoratorTest extends RuleTest {
 
   @BeforeEach
-  public void init() {
+  void init() {
     setRootRule(PythonGrammar.DECORATOR);
   }
 
   @Test
-  public void realLife() {
+  void realLife() {
     assertThat(p).matches(PythonTestUtils.appendNewLine("@register.filter(is_safe=False)"));
   }
 

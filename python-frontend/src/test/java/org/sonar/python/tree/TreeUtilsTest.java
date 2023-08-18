@@ -56,10 +56,10 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.sonar.python.PythonTestUtils.lastExpression;
 import static org.sonar.python.PythonTestUtils.pythonFile;
 
-public class TreeUtilsTest {
+class TreeUtilsTest {
 
   @Test
-  public void first_ancestor_of_kind() {
+  void first_ancestor_of_kind() {
     String code = "" +
       "class A:\n" +
       "  def foo(): pass";
@@ -82,7 +82,7 @@ public class TreeUtilsTest {
   }
 
   @Test
-  public void first_ancestor() {
+  void first_ancestor() {
     String code = "" +
       "def outer():\n" +
       "  def inner():\n" +
@@ -95,7 +95,7 @@ public class TreeUtilsTest {
   }
 
   @Test
-  public void tokens() {
+  void tokens() {
     // simple statement parsed so that we easily get all tokens from children or first token.
     FileInput parsed = parse("if foo:\n  pass");
     IfStatement ifStmt = (IfStatement) parsed.statements().statements().get(0);
@@ -108,7 +108,7 @@ public class TreeUtilsTest {
   }
 
   @Test
-  public void non_whitespace_tokens() {
+  void non_whitespace_tokens() {
     FileInput parsed = parse("if foo:\n  pass");
     IfStatement ifStmt = (IfStatement) parsed.statements().statements().get(0);
     List<Token> nonWhitespaceTokens = TreeUtils.nonWhitespaceTokens(ifStmt);
@@ -118,7 +118,7 @@ public class TreeUtilsTest {
   }
 
   @Test
-  public void hasDescendants() {
+  void hasDescendants() {
     FileInput fileInput = parse("class A:\n  def foo(): pass");
     assertThat(TreeUtils.hasDescendant(fileInput, t -> t.is(Kind.PASS_STMT))).isTrue();
     assertThat(TreeUtils.hasDescendant(fileInput, t -> (t.is(Kind.NAME) && ((Name) t).name().equals("foo")))).isTrue();
@@ -127,7 +127,7 @@ public class TreeUtilsTest {
   }
 
   @Test
-  public void getSymbolFromTree() {
+  void getSymbolFromTree() {
     assertThat(TreeUtils.getSymbolFromTree(null)).isEmpty();
 
     Expression expression = lastExpression(
@@ -140,7 +140,7 @@ public class TreeUtilsTest {
   }
 
   @Test
-  public void getClassSymbolFromDef() {
+  void getClassSymbolFromDef() {
     FileInput fileInput = PythonTestUtils.parse("class A:\n  def foo(): pass");
     ClassDef classDef = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Kind.CLASSDEF));
 
@@ -158,7 +158,7 @@ public class TreeUtilsTest {
   }
 
   @Test
-  public void test_getParentClassesFQN() {
+  void test_getParentClassesFQN() {
     String code = "class A:\n  def foo(): pass";
     FileInput fileInput = PythonTestUtils.parse(new SymbolTableBuilder("", pythonFile("mod1.py")), code);
     ClassDef classDef = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Kind.CLASSDEF));
@@ -191,7 +191,7 @@ public class TreeUtilsTest {
   }
 
   @Test
-  public void getClassSymbolFromDef_illegalSymbol() {
+  void getClassSymbolFromDef_illegalSymbol() {
     FileInput fileInput = PythonTestUtils.parseWithoutSymbols("class A:\n  def foo(): pass");
     ClassDef classDef = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Kind.CLASSDEF));
 
@@ -199,7 +199,7 @@ public class TreeUtilsTest {
   }
 
   @Test
-  public void getFunctionSymbolFromDef() {
+  void getFunctionSymbolFromDef() {
     FileInput fileInput = PythonTestUtils.parse("def foo(): pass");
     FunctionDef functionDef = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Kind.FUNCDEF));
 
@@ -217,7 +217,7 @@ public class TreeUtilsTest {
   }
 
   @Test
-  public void getFunctionSymbolFromDef_illegalSymbol() {
+  void getFunctionSymbolFromDef_illegalSymbol() {
     FileInput fileInput = PythonTestUtils.parseWithoutSymbols("def foo(): pass");
     FunctionDef functionDef = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Kind.FUNCDEF));
 
@@ -225,7 +225,7 @@ public class TreeUtilsTest {
   }
 
   @Test
-  public void nonTupleParameters() {
+  void nonTupleParameters() {
     FileInput fileInput = PythonTestUtils.parse("def foo(): pass");
     FunctionDef functionDef = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Kind.FUNCDEF));
     assertThat(TreeUtils.nonTupleParameters(functionDef)).isEmpty();
@@ -236,7 +236,7 @@ public class TreeUtilsTest {
   }
 
   @Test
-  public void positionalParameters() {
+  void positionalParameters() {
     FileInput fileInput = PythonTestUtils.parse("def foo(): pass");
     FunctionDef functionDef = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Kind.FUNCDEF));
     assertThat(TreeUtils.positionalParameters(functionDef)).isEmpty();
@@ -266,7 +266,7 @@ public class TreeUtilsTest {
   }
 
   @Test
-  public void topLevelFunctionDefs() {
+  void topLevelFunctionDefs() {
     FileInput fileInput = PythonTestUtils.parse(
       "class A:",
       "    x = True",
@@ -298,7 +298,7 @@ public class TreeUtilsTest {
   }
 
   @Test
-  public void test_nthArgumentOrKeyword() {
+  void test_nthArgumentOrKeyword() {
     FileInput fileInput = PythonTestUtils.parse(
       "def foo(p0, p1, p2): ...",
       "foo(1, 2, p2 = 3)"
@@ -314,7 +314,7 @@ public class TreeUtilsTest {
   }
 
   @Test
-  public void test_nthArgumentOrKeyword_unpacking() {
+  void test_nthArgumentOrKeyword_unpacking() {
     FileInput fileInput = PythonTestUtils.parse(
       "def foo(p0, p1, p2): ...",
       "args = [1, 2, 3]",
@@ -327,7 +327,7 @@ public class TreeUtilsTest {
   }
 
   @Test
-  public void test_nthArgumentOrKeyword_no_positional() {
+  void test_nthArgumentOrKeyword_no_positional() {
     FileInput fileInput = PythonTestUtils.parse(
       "def foo(p0, p1 = 2, p2 = 3): ...",
       "foo(0, p2 = 4)"
@@ -339,7 +339,7 @@ public class TreeUtilsTest {
   }
 
   @Test
-  public void test_argumentByKeyword() {
+  void test_argumentByKeyword() {
     FileInput fileInput = PythonTestUtils.parse(
       "def foo(p0, p1, p2): ...",
       "foo(p1 = 1, p2 = 2)"
@@ -358,7 +358,7 @@ public class TreeUtilsTest {
   }
 
   @Test
-  public void test_isBooleanLiteral() {
+  void test_isBooleanLiteral() {
     assertThat(TreeUtils.isBooleanLiteral(lastExpression("True"))).isTrue();
     assertThat(TreeUtils.isBooleanLiteral(lastExpression("False"))).isTrue();
     assertThat(TreeUtils.isBooleanLiteral(lastExpression("x"))).isFalse();
@@ -366,7 +366,7 @@ public class TreeUtilsTest {
   }
 
   @Test
-  public void test_nameFromExpression() {
+  void test_nameFromExpression() {
     assertThat(TreeUtils.nameFromExpression(lastExpression("my_var"))).isEqualTo("my_var");
     assertThat(TreeUtils.nameFromExpression(lastExpression("self.my_var"))).isNullOrEmpty();
     assertThat(TreeUtils.nameFromExpression(lastExpression("my_call()"))).isNullOrEmpty();
@@ -374,7 +374,7 @@ public class TreeUtilsTest {
   }
 
   @Test
-  public void test_fullyQualifiedNameFromQualifiedExpression() {
+  void test_fullyQualifiedNameFromQualifiedExpression() {
     FileInput fileInput = PythonTestUtils.parse(
       "from third_party_lib import (element as alias)",
       "a = alias.attribute"
@@ -398,7 +398,7 @@ public class TreeUtilsTest {
   }
 
   @Test
-  public void test_getTreeSeparatorOrLastToken() {
+  void test_getTreeSeparatorOrLastToken() {
     FileInput fileInput = PythonTestUtils.parse("a = 1");
     Token lastToken = TreeUtils.getTreeSeparatorOrLastToken(fileInput.statements().statements().get(0));
     assertThat(lastToken.type().getName()).isEqualTo("NUMBER");
@@ -413,7 +413,7 @@ public class TreeUtilsTest {
   }
 
   @Test
-  public void test_groupAssignmentByParentStatementList() {
+  void test_groupAssignmentByParentStatementList() {
     FileInput fileInput = PythonTestUtils.parse("def foo(a):\n" +
       "    b = a\n" +
       "    if a > 10:\n" +
@@ -429,7 +429,7 @@ public class TreeUtilsTest {
   }
 
   @Test
-  public void test_getTreeByPositionComparator() {
+  void test_getTreeByPositionComparator() {
     FileInput fileInput = PythonTestUtils.parse("def foo(a):\n" +
       "    b = a\n" +
       "    if a > 10:\n" +
@@ -444,7 +444,7 @@ public class TreeUtilsTest {
   }
 
   @Test
-  public void test_toOptionalInstanceOf() {
+  void test_toOptionalInstanceOf() {
     var fileInput = PythonTestUtils.parse(
       "class A:",
       "    x = True",
@@ -468,7 +468,7 @@ public class TreeUtilsTest {
   }
 
   @Test
-  public void test_toOptionalInstanceOfMapper() {
+  void test_toOptionalInstanceOfMapper() {
     var fileInput = PythonTestUtils.parse(
       "class A:",
       "    x = True",
@@ -494,7 +494,7 @@ public class TreeUtilsTest {
   }
 
   @Test
-  public void test_toInstanceOfMapper() {
+  void test_toInstanceOfMapper() {
     var fileInput = PythonTestUtils.parse(
       "class A:",
       "    x = True",
@@ -520,7 +520,7 @@ public class TreeUtilsTest {
   }
 
   @Test
-  public void test_findIndentationSize() {
+  void test_findIndentationSize() {
     var fileInput = PythonTestUtils.parse("def foo():\n" +
       "    if a < 3: pass\n");
 
@@ -541,7 +541,7 @@ public class TreeUtilsTest {
   }
 
   @Test
-  public void test_findIndentationSizeDownTree() {
+  void test_findIndentationSizeDownTree() {
     var fileInput = PythonTestUtils.parse("if a < 3: pass\n" +
       "\n" +
       "def foo(a):\n" +
@@ -565,7 +565,7 @@ public class TreeUtilsTest {
   }
 
   @Test
-  public void test_findIndentationSizeZero() {
+  void test_findIndentationSizeZero() {
     var fileInput = PythonTestUtils.parse("if a < 3: pass\n" +
       "\n" +
       "def foo(a): pass");
@@ -577,14 +577,14 @@ public class TreeUtilsTest {
   }
 
   @Test
-  public void test_findIndentationSizeEmpty() {
+  void test_findIndentationSizeEmpty() {
     var fileInput = PythonTestUtils.parse("");
     var indent = TreeUtils.findIndentationSize(fileInput);
     assertThat(indent).isZero();
   }
 
   @Test
-  public void  test_firstChild() {
+  void  test_firstChild() {
     var fileInput = PythonTestUtils.parse(
       "class A:",
       "    x = True",
@@ -602,7 +602,7 @@ public class TreeUtilsTest {
   }
 
   @Test
-  public void treeToStringTest() {
+  void treeToStringTest() {
     var input = "a = 1\n" +
       "b = 2";
     var fileInput = PythonTestUtils.parse(input);

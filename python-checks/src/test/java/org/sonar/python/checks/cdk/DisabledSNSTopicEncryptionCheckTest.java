@@ -22,9 +22,9 @@ package org.sonar.python.checks.cdk;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-public class DisabledSNSTopicEncryptionCheckTest {
+class DisabledSNSTopicEncryptionCheckTest {
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/cdk/disabledSNSTopicEncryptionCheck.py", new DisabledSNSTopicEncryptionCheck());
   }
 }

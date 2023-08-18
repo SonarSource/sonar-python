@@ -23,15 +23,15 @@ import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.quickfix.PythonQuickFixVerifier;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-public class SingleCharCharacterClassCheckTest {
+class SingleCharCharacterClassCheckTest {
 
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/regex/singleCharCharacterClassCheck.py", new SingleCharCharacterClassCheck());
   }
 
   @Test
-  public void quickFixTest() {
+  void quickFixTest() {
     var before = "import re\n" +
       "changed = re.match(r\"[B]\", input)";
     var after = "import re\n" +

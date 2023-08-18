@@ -19,7 +19,7 @@
  */
 package org.sonar.python.parser.compound.statements;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.PythonTestUtils;
 import org.sonar.python.api.PythonGrammar;
@@ -27,22 +27,22 @@ import org.sonar.python.parser.RuleTest;
 
 import static org.sonar.python.parser.PythonParserAssert.assertThat;
 
-public class WithStatementTest extends RuleTest {
+class WithStatementTest extends RuleTest {
 
-  @Before
-  public void init() {
+  @BeforeEach
+  void init() {
     setRootRule(PythonGrammar.WITH_STMT);
   }
 
 
   @Test
-  public void realLife() {
+  void realLife() {
     assertThat(p).matches(PythonTestUtils.appendNewLine("with A() as a : pass"))
       .matches(PythonTestUtils.appendNewLine("with A() as a, B() as b : pass"));
   }
 
   @Test
-  public void parenthesized_context_managers() {
+  void parenthesized_context_managers() {
     assertThat(p).matches(
       "with (open(\"a_really_long_foo\") as foo,\n" +
       "      open(\"a_really_long_bar\") as bar):\n" +

@@ -22,10 +22,10 @@ package org.sonar.python.checks;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-public class CommentRegularExpressionCheckTest {
+class CommentRegularExpressionCheckTest {
 
   @Test
-  public void test() {
+  void test() {
     CommentRegularExpressionCheck check = new CommentRegularExpressionCheck();
 
     check.regularExpression = "(?i).*TODO.*";

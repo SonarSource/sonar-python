@@ -26,15 +26,15 @@ import org.sonar.python.parser.RuleTest;
 
 import static org.sonar.python.parser.PythonParserAssert.assertThat;
 
-public class ExceptClauseTest extends RuleTest {
+class ExceptClauseTest extends RuleTest {
 
   @BeforeEach
-  public void init() {
+  void init() {
     setRootRule(PythonGrammar.EXCEPT_CLAUSE);
   }
 
   @Test
-  public void ok() {
+  void ok() {
     assertThat(p).matches("except")
       .matches("except TEST")
       .matches("except* TEST")

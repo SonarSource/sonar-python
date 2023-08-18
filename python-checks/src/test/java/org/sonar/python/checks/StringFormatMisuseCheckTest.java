@@ -22,15 +22,15 @@ package org.sonar.python.checks;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-public class StringFormatMisuseCheckTest {
+class StringFormatMisuseCheckTest {
 
   @Test
-  public void test_printf_style() {
+  void test_printf_style() {
     PythonCheckVerifier.verify("src/test/resources/checks/stringFormatMisusePrintf.py", new StringFormatMisuseCheck());
   }
 
   @Test
-  public void test_str_format_style() {
+  void test_str_format_style() {
     PythonCheckVerifier.verify("src/test/resources/checks/stringFormatMisuseStrFormat.py", new StringFormatMisuseCheck());
   }
 }

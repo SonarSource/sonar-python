@@ -25,48 +25,48 @@ import org.sonar.python.semantic.ClassSymbolImpl;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.types.AnyType.ANY;
 
-public class AnyTypeTest {
+class AnyTypeTest {
 
   @Test
-  public void isIdentityComparableWith() {
+  void isIdentityComparableWith() {
     assertThat(ANY.isIdentityComparableWith(ANY)).isTrue();
     assertThat(ANY.isIdentityComparableWith(new RuntimeType(new ClassSymbolImpl("a", "a")))).isTrue();
   }
 
   @Test
-  public void canHaveMember() {
+  void canHaveMember() {
     assertThat(ANY.canHaveMember("xxx")).isTrue();
   }
 
   @Test
-  public void resolveMember() {
+  void resolveMember() {
     assertThat(ANY.resolveMember("xxx")).isEmpty();
   }
 
   @Test
-  public void test_resolveDeclaredMember() {
+  void test_resolveDeclaredMember() {
     assertThat(ANY.resolveDeclaredMember("xxx")).isEmpty();
   }
 
   @Test
-  public void test_canOnlyBe() {
+  void test_canOnlyBe() {
     assertThat(ANY.canOnlyBe("a")).isFalse();
   }
 
   @Test
-  public void test_canBeOrExtend() {
+  void test_canBeOrExtend() {
     assertThat(ANY.canBeOrExtend("a")).isTrue();
     assertThat(InferredTypes.INT.isCompatibleWith(ANY)).isTrue();
     assertThat(ANY.isCompatibleWith(InferredTypes.INT)).isTrue();
   }
 
   @Test
-  public void test_mustBeOrExtend() {
+  void test_mustBeOrExtend() {
     assertThat(ANY.mustBeOrExtend("a")).isFalse();
   }
 
   @Test
-  public void test_declaresMember() {
+  void test_declaresMember() {
     assertThat(ANY.declaresMember("foo")).isTrue();
   }
 }

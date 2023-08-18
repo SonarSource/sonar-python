@@ -42,7 +42,7 @@ import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.it.RulingHelper.getOrchestrator;
 
-public class PythonRulingTest {
+class PythonRulingTest {
 
   public static final String PROJECT_KEY = "project";
 
@@ -50,7 +50,7 @@ public class PythonRulingTest {
   public static final OrchestratorExtension ORCHESTRATOR = getOrchestrator();
 
   @BeforeAll
-  public static void prepare_quality_profile() {
+  static void prepare_quality_profile() {
     ProfileGenerator.RulesConfiguration parameters = new ProfileGenerator.RulesConfiguration()
       .add("CommentRegularExpression", "message", "The regular expression matches this comment")
       .add("S1451", "headerFormat", "# Copyright 2004 by Harry Zuzan. All rights reserved.");
@@ -60,7 +60,7 @@ public class PythonRulingTest {
   }
 
   @Test
-  public void test() throws Exception {
+  void test() throws Exception {
     ORCHESTRATOR.getServer().provisionProject(PROJECT_KEY, PROJECT_KEY);
     ORCHESTRATOR.getServer().associateProjectToQualityProfile(PROJECT_KEY, "py", "rules");
     File litsDifferencesFile = FileLocation.of("target/differences").getFile();

@@ -29,12 +29,12 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class SonarQubePythonFileTest {
+class SonarQubePythonFileTest {
 
   private InputFile inputFile = mock(InputFile.class, "file1.py");
 
   @Test
-  public void known_file() throws Exception {
+  void known_file() throws Exception {
     when(inputFile.contents()).thenReturn("Hello 6.2!");
     PythonFile pythonFile = SonarQubePythonFile.create(inputFile);
     assertThat(pythonFile.content()).isEqualTo("Hello 6.2!");
@@ -44,7 +44,7 @@ public class SonarQubePythonFileTest {
   }
 
   @Test
-  public void unknown_file() throws Exception {
+  void unknown_file() throws Exception {
     when(inputFile.contents()).thenThrow(new FileNotFoundException());
     PythonFile pythonFile = SonarQubePythonFile.create(inputFile);
     assertThatThrownBy(pythonFile::content).isInstanceOf(IllegalStateException.class);
