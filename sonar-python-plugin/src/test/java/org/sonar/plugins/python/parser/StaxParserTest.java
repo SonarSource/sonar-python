@@ -20,29 +20,28 @@
 package org.sonar.plugins.python.parser;
 
 import java.io.InputStream;
+import java.util.stream.Stream;
 import javax.xml.stream.XMLStreamException;
 import org.codehaus.staxmate.in.SMHierarchicCursor;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.sonar.plugins.python.parser.StaxParser.XmlStreamHandler;
 
 class StaxParserTest {
 
-  @Test
-  void test_XML_with_DTD() throws XMLStreamException {
-    String resource = "org/sonar/plugins/python/parser/dtd-test.xml";
-    parse(resource);
+  public static Stream<Arguments> data() {
+    return Stream.of(
+      Arguments.of("org/sonar/plugins/python/parser/dtd-test.xml"),
+      Arguments.of("org/sonar/plugins/python/parser/xsd-test.xml"),
+      Arguments.of("org/sonar/plugins/python/parser/xsd-test-with-entity.xml")
+    );
   }
   
-  @Test
-  void test_XML_with_XSD() throws XMLStreamException {
-    String resource = "org/sonar/plugins/python/parser/xsd-test.xml";
-    parse(resource);
-  }
-
-  @Test
-  void test_XML_with_XSD_and_ampersand() throws XMLStreamException {
-    String resource = "org/sonar/plugins/python/parser/xsd-test-with-entity.xml";
+  @ParameterizedTest
+  @MethodSource("data")
+  void testParser(String resource) throws XMLStreamException {
     parse(resource);
   }
 
