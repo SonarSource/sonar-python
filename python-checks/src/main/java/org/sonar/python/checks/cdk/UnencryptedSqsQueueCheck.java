@@ -40,8 +40,5 @@ public class UnencryptedSqsQueueCheck extends AbstractCdkResourceCheck {
   protected void checkCfnQueue(SubscriptionContext ctx, CallExpression resourceConstructor) {
     getArgument(ctx, resourceConstructor, "sqs_managed_sse_enabled")
         .ifPresent(flow -> flow.addIssueIf(isFalse(), SQS_MANAGED_DISABLED_MESSAGE));
-
-    getArgument(ctx, resourceConstructor, "kms_master_key_id")
-      .ifPresent(flow -> flow.addIssueIf(isNone(), CFN_NONE_MESSAGE));
   }
 }
