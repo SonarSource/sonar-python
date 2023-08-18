@@ -48,7 +48,7 @@ public class UnrestrictedOutboundCommunicationsCheck extends AbstractCdkResource
     );
   }
 
-  private void raiseIssue(SubscriptionContext subscriptionContext, CallExpression callExpression) {
+  private static void raiseIssue(SubscriptionContext subscriptionContext, CallExpression callExpression) {
     Optional.ofNullable(callExpression.calleeSymbol())
       .map(Symbol::fullyQualifiedName)
       .filter(fqn -> fqn.equals(SECURITY_GROUP_FQN))
