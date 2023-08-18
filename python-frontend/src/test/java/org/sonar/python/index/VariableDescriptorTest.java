@@ -31,7 +31,7 @@ import static org.sonar.python.index.DescriptorsToProtobuf.fromProtobuf;
 import static org.sonar.python.index.DescriptorsToProtobuf.toProtobuf;
 import static org.sonar.python.index.DescriptorUtils.descriptor;
 
-public class VariableDescriptorTest {
+class VariableDescriptorTest {
 
   @Test
   void variableDescriptor() {

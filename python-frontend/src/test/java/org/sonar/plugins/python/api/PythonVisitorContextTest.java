@@ -40,7 +40,7 @@ import org.sonar.python.tree.PythonTreeMaker;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 import static org.sonar.python.PythonTestUtils.pythonFile;
 
-public class PythonVisitorContextTest {
+class PythonVisitorContextTest {
   @Test
   void fullyQualifiedModuleName() {
     FileInput fileInput = PythonTestUtils.parse("def foo(): pass");

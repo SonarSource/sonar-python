@@ -56,7 +56,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.sonar.python.PythonTestUtils.lastExpression;
 import static org.sonar.python.PythonTestUtils.pythonFile;
 
-public class TreeUtilsTest {
+class TreeUtilsTest {
 
   @Test
   void first_ancestor_of_kind() {

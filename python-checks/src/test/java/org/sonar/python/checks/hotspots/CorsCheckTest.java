@@ -23,7 +23,7 @@ import java.util.Collections;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-public class CorsCheckTest {
+class CorsCheckTest {
 
   @Test
   void test() {

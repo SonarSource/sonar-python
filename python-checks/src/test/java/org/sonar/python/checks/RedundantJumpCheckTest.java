@@ -23,7 +23,7 @@ import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.quickfix.PythonQuickFixVerifier;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-public class RedundantJumpCheckTest {
+class RedundantJumpCheckTest {
 
   @Test
   void test() {

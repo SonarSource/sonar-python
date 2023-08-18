@@ -54,7 +54,7 @@ import org.sonar.python.parser.RuleTest;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.fail;
 
-public class PythonTreeMakerMatchStatementTest extends RuleTest {
+class PythonTreeMakerMatchStatementTest extends RuleTest {
 
   private final PythonTreeMaker treeMaker = new PythonTreeMaker();
 

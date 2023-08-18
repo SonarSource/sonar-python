@@ -121,7 +121,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.Assertions.fail;
 
-public class PythonTreeMakerTest extends RuleTest {
+class PythonTreeMakerTest extends RuleTest {
 
   private final PythonTreeMaker treeMaker = new PythonTreeMaker();
 

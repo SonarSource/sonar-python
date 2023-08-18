@@ -31,7 +31,7 @@ import org.sonarsource.analyzer.commons.regex.CharacterParser;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class PythonStringCharacterParserTest {
+class PythonStringCharacterParserTest {
 
   @Test
   void test_first_character_on_init() {

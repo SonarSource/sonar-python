@@ -25,7 +25,7 @@ import org.sonar.python.TestPythonVisitorRunner;
 
 import static org.fest.assertions.Assertions.assertThat;
 
-public class FileMetricsTest {
+class FileMetricsTest {
 
   @Test
   void statements() {

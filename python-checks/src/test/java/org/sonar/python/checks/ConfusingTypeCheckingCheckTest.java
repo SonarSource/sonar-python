@@ -29,7 +29,7 @@ import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ConfusingTypeCheckingCheckTest {
+class ConfusingTypeCheckingCheckTest {
 
   private final ConfusingTypeCheckingCheck check = new ConfusingTypeCheckingCheck();
 

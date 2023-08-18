@@ -30,7 +30,7 @@ import org.junit.jupiter.api.extension.RegisterExtension;
 import static com.sonar.python.it.plugin.Tests.getMeasureAsDouble;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class CPDTest {
+class CPDTest {
 
   private static final String PROJECT_KEY = "cpd";
 

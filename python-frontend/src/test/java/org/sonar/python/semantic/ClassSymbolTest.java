@@ -38,7 +38,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.groups.Tuple.tuple;
 import static org.sonar.python.PythonTestUtils.parse;
 
-public class ClassSymbolTest {
+class ClassSymbolTest {
 
   @Test
   void no_parents() {

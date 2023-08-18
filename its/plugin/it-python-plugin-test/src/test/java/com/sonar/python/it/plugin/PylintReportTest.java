@@ -29,7 +29,7 @@ import org.junit.jupiter.api.extension.RegisterExtension;
 import static com.sonar.python.it.plugin.Tests.issues;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class PylintReportTest {
+class PylintReportTest {
 
   private static final String DEFAULT_PROPERTY = "sonar.python.pylint.reportPaths";
   private static final String LEGACY_PROPERTY = "sonar.python.pylint.reportPath";

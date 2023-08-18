@@ -38,7 +38,7 @@ import org.sonarsource.analyzer.commons.regex.ast.FlagSet;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class SubscriptionVisitorTest {
+class SubscriptionVisitorTest {
 
   @Test
   void test_regex_cache() {

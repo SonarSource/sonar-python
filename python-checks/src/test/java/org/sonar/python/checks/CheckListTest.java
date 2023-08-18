@@ -46,7 +46,7 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.fail;
 
-public class CheckListTest {
+class CheckListTest {
 
   private static final Path METADATA_DIR = Paths.get("src/main/resources/org/sonar/l10n/py/rules/python");
 

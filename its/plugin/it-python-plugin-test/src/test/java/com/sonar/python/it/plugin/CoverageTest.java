@@ -32,7 +32,7 @@ import org.junit.jupiter.api.extension.RegisterExtension;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class CoverageTest {
+class CoverageTest {
 
   private static final String COVERAGE_PROJECT = "projects/coverage_project";
   @RegisterExtension

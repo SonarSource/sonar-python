@@ -48,7 +48,7 @@ import static org.sonar.plugins.python.api.tree.Tree.Kind.CASE_BLOCK;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.NAME;
 import static org.sonar.python.PythonTestUtils.getLastDescendant;
 
-public class MatchStatementSymbolsTest {
+class MatchStatementSymbolsTest {
 
   @Test
   void capture_pattern() {

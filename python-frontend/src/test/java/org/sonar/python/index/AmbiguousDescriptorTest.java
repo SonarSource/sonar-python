@@ -36,7 +36,7 @@ import static org.sonar.python.index.DescriptorUtils.descriptor;
 import static org.sonar.python.index.DescriptorsToProtobuf.toProtobufModuleDescriptor;
 import static org.sonar.python.index.FunctionDescriptorTest.lastFunctionDescriptor;
 
-public class AmbiguousDescriptorTest {
+class AmbiguousDescriptorTest {
 
   @Test
   void test_basic_ambiguous_descriptor() {

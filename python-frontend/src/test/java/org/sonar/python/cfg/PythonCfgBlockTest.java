@@ -25,7 +25,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class PythonCfgBlockTest {
+class PythonCfgBlockTest {
 
   @Test
   void loop_of_empty_block() {

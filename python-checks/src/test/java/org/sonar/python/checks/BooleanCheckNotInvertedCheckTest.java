@@ -27,7 +27,7 @@ import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class BooleanCheckNotInvertedCheckTest {
+class BooleanCheckNotInvertedCheckTest {
 
   private final PythonCheck check = new BooleanCheckNotInvertedCheck();
 

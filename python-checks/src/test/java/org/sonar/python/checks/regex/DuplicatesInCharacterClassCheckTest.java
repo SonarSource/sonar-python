@@ -24,7 +24,7 @@ import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 import static org.junit.Assert.*;
 
-public class DuplicatesInCharacterClassCheckTest {
+class DuplicatesInCharacterClassCheckTest {
 
   @Test
   void test() {

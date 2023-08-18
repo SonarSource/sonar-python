@@ -46,7 +46,7 @@ import static org.sonar.python.PythonTestUtils.getFirstChild;
 import static org.sonar.python.PythonTestUtils.parse;
 import static org.sonar.python.PythonTestUtils.pythonFile;
 
-public class FullyQualifiedNameTest {
+class FullyQualifiedNameTest {
 
   @Test
   void callee_qualified_expression() {

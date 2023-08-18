@@ -26,7 +26,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.PythonTestUtils.lastExpression;
 import static org.sonar.python.types.InferredTypes.BOOL;
 
-public class UnaryExpressionImplTest {
+class UnaryExpressionImplTest {
 
   @Test
   void type() {

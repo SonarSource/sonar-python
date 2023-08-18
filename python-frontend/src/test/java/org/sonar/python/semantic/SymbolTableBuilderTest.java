@@ -51,7 +51,7 @@ import org.sonar.python.tree.TreeUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class SymbolTableBuilderTest {
+class SymbolTableBuilderTest {
   private static Map<String, FunctionDef> functionTreesByName = new HashMap<>();
   private static FileInput fileInput;
 

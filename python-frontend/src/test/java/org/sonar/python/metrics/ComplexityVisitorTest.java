@@ -28,7 +28,7 @@ import org.sonar.python.tree.PythonTreeMaker;
 
 import static org.fest.assertions.Assertions.assertThat;
 
-public class ComplexityVisitorTest {
+class ComplexityVisitorTest {
 
   private ComplexityVisitor visitor = new ComplexityVisitor();
 

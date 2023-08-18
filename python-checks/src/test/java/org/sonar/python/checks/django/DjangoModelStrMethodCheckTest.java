@@ -22,7 +22,7 @@ package org.sonar.python.checks.django;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-public class DjangoModelStrMethodCheckTest {
+class DjangoModelStrMethodCheckTest {
 
   @Test
   void test() {

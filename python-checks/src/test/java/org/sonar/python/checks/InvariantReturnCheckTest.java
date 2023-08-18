@@ -25,7 +25,7 @@ import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 import static org.junit.Assert.*;
 
-public class InvariantReturnCheckTest {
+class InvariantReturnCheckTest {
 
   @Test
   void test() {

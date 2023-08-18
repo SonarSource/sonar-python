@@ -27,7 +27,7 @@ import static org.sonar.python.PythonTestUtils.lastExpression;
 import static org.sonar.python.types.InferredTypes.INT;
 import static org.sonar.python.types.InferredTypes.STR;
 
-public class ParenthesizedExpressionImplTest {
+class ParenthesizedExpressionImplTest {
 
   @Test
   void type() {

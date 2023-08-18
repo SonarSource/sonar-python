@@ -33,7 +33,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.regex.RegexParserTestUtils.assertKind;
 import static org.sonar.python.regex.RegexParserTestUtils.assertSuccessfulParse;
 
-public class PythonRegexIssueLocationTest {
+class PythonRegexIssueLocationTest {
 
   @Test
   void test_regex_locations_to_issue_locations() {

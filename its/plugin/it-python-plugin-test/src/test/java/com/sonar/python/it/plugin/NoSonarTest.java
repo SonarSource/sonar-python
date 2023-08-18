@@ -31,7 +31,7 @@ import org.sonarqube.ws.Issues;
 import static com.sonar.python.it.plugin.Tests.issues;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class NoSonarTest {
+class NoSonarTest {
 
   private static final String PROJECT_KEY = "nosonar";
   private static final String PROFILE_NAME = "nosonar";

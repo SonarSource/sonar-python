@@ -37,7 +37,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.types.InferredTypes.or;
 import static org.sonar.python.types.InferredTypes.runtimeBuiltinType;
 
-public class RuntimeTypeTest {
+class RuntimeTypeTest {
 
   private final ClassSymbolImpl a = new ClassSymbolImpl("a", "a");
   private final ClassSymbolImpl b = new ClassSymbolImpl("b", "b");

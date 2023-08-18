@@ -30,7 +30,7 @@ import static org.sonar.python.types.InferredTypes.TUPLE;
 import static org.sonar.python.types.InferredTypes.anyType;
 import static org.sonar.python.types.InferredTypes.isDeclaredTypeWithTypeClass;
 
-public class SliceExpressionImplTest {
+class SliceExpressionImplTest {
 
   @Test
   void type() {

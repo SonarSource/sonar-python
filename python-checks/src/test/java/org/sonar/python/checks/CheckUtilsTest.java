@@ -43,7 +43,7 @@ import org.sonar.python.tree.TreeUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class CheckUtilsTest {
+class CheckUtilsTest {
 
   @Test
   void private_constructor() throws Exception {

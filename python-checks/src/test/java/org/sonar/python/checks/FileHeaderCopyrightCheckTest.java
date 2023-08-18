@@ -31,7 +31,7 @@ import org.sonar.python.SubscriptionVisitor;
 import org.sonar.python.TestPythonVisitorRunner;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-public class FileHeaderCopyrightCheckTest {
+class FileHeaderCopyrightCheckTest {
 
   @Test
   void test_copyright() {

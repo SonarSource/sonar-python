@@ -22,7 +22,7 @@ package org.sonar.python.checks;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-public class UseOfAnyAsTypeHintCheckTest {
+class UseOfAnyAsTypeHintCheckTest {
   @Test
   void useOfAny() {
     PythonCheckVerifier.verify("src/test/resources/checks/useOfAnyAsTypeHint.py", new UseOfAnyAsTypeHintCheck());

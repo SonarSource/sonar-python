@@ -36,7 +36,7 @@ import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 
 import static org.fest.assertions.Assertions.assertThat;
 
-public class CognitiveComplexityVisitorTest {
+class CognitiveComplexityVisitorTest {
 
   @Test
   void file() {

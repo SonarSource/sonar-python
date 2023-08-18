@@ -34,7 +34,7 @@ import static org.sonar.python.types.InferredTypes.STR;
 import static org.sonar.python.types.InferredTypes.anyType;
 import static org.sonar.python.types.InferredTypes.or;
 
-public class BinaryExpressionImplTest {
+class BinaryExpressionImplTest {
 
   @Test
   void type() {

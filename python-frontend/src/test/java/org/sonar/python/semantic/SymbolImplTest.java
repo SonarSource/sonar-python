@@ -36,7 +36,7 @@ import static org.sonar.python.PythonTestUtils.lastExpressionInFunction;
 import static org.sonar.python.PythonTestUtils.parse;
 
 
-public class SymbolImplTest {
+class SymbolImplTest {
 
   @Test
   void assert_is() {

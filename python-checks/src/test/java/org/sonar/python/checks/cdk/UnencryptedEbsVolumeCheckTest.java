@@ -23,7 +23,7 @@ import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 
-public class UnencryptedEbsVolumeCheckTest {
+class UnencryptedEbsVolumeCheckTest {
 
   @Test
   void test() {

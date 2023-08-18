@@ -22,7 +22,7 @@ package org.sonar.python.checks.regex;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-public class UnusedGroupNamesCheckTest {
+class UnusedGroupNamesCheckTest {
   @Test
   void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/regex/unusedGroupNamesCheck.py", new UnusedGroupNamesCheck());

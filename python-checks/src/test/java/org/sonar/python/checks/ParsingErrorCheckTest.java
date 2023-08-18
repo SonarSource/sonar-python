@@ -31,7 +31,7 @@ import org.sonar.python.parser.PythonParser;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ParsingErrorCheckTest {
+class ParsingErrorCheckTest {
 
   @Test
   void test() throws Exception {

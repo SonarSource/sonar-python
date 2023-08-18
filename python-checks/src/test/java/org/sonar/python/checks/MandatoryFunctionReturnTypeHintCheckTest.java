@@ -25,7 +25,7 @@ import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 import static org.sonar.python.checks.utils.CodeTestUtils.code;
 
-public class MandatoryFunctionReturnTypeHintCheckTest {
+class MandatoryFunctionReturnTypeHintCheckTest {
   @Test
   void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/mandatoryFunctionReturnType.py", new MandatoryFunctionReturnTypeHintCheck());

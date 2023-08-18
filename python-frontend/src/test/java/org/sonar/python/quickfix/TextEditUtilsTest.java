@@ -38,7 +38,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 import static org.sonar.python.PythonTestUtils.parse;
 
-public class TextEditUtilsTest {
+class TextEditUtilsTest {
 
   @Test
   void insertBefore() {

@@ -35,7 +35,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class CacheContextImplTest {
+class CacheContextImplTest {
 
   private static final Version VERSION_WITH_CACHING = Version.create(9, 7);
   private static final Version VERSION_WITHOUT_CACHING = Version.create(9, 6);

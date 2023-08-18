@@ -22,7 +22,7 @@ package org.sonar.python.checks.cdk;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-public class UnrestrictedAdministrationCheckTest {
+class UnrestrictedAdministrationCheckTest {
 
   @Test
   void test_CfnSecurityGroup() {

@@ -54,7 +54,7 @@ import org.sonarsource.sonarlint.core.commons.log.ClientLogOutput;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.tuple;
 
-public class SonarLintTest {
+class SonarLintTest {
 
   @TempDir
   public static Path TEMP;

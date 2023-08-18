@@ -26,7 +26,7 @@ import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 import static org.sonar.python.checks.utils.CodeTestUtils.code;
 
-public class ImplicitStringConcatenationCheckTest {
+class ImplicitStringConcatenationCheckTest {
 
   private static final PythonCheck check = new ImplicitStringConcatenationCheck();
 

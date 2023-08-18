@@ -36,7 +36,7 @@ import static org.sonar.python.PythonTestUtils.lastExpression;
 import static org.sonar.python.PythonTestUtils.lastExpressionInFunction;
 import static org.sonar.python.PythonTestUtils.parse;
 
-public class ReachingDefinitionsAnalysisTest {
+class ReachingDefinitionsAnalysisTest {
   private final PythonFile file = Mockito.mock(PythonFile.class, "file1.py");
   ReachingDefinitionsAnalysis analysis = new ReachingDefinitionsAnalysis(file);
 

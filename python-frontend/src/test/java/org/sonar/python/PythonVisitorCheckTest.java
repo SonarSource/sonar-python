@@ -49,7 +49,7 @@ import org.sonar.python.types.TypeShed;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 
-public class PythonVisitorCheckTest {
+class PythonVisitorCheckTest {
 
   private static final File FILE = new File("src/test/resources/file.py");
   public static final String MESSAGE = "message";

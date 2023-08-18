@@ -23,7 +23,7 @@ import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.quickfix.PythonQuickFixVerifier;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-public class NotImplementedErrorInOperatorMethodsCheckTest {
+class NotImplementedErrorInOperatorMethodsCheckTest {
   @Test
   void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/notImplementedErrorInOperatorMethods.py", new NotImplementedErrorInOperatorMethodsCheck());

@@ -38,7 +38,7 @@ import org.sonar.python.cfg.PythonCfgSimpleBlock;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ControlFlowGraphTest {
+class ControlFlowGraphTest {
 
   private PythonFile file = Mockito.mock(PythonFile.class, "file1.py");
 

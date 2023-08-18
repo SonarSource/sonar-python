@@ -22,7 +22,7 @@ package org.sonar.python.checks;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-public class CognitiveComplexityFunctionCheckTest {
+class CognitiveComplexityFunctionCheckTest {
 
   private final CognitiveComplexityFunctionCheck check = new CognitiveComplexityFunctionCheck();
 

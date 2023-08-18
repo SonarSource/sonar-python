@@ -31,7 +31,7 @@ import org.sonarqube.ws.Issues;
 import static com.sonar.python.it.plugin.Tests.issues;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class Flake8ReportTest {
+class Flake8ReportTest {
 
   private static final String PROJECT = "flake8_project";
 

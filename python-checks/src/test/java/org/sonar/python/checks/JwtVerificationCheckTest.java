@@ -23,7 +23,7 @@ import java.util.Collections;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-public class JwtVerificationCheckTest {
+class JwtVerificationCheckTest {
   @Test
   void test() {
     PythonCheckVerifier.verify(Collections.singletonList("src/test/resources/checks/jwtVerification.py"), new JwtVerificationCheck());

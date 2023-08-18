@@ -41,7 +41,7 @@ import static org.sonar.python.checks.Expressions.removeParentheses;
 import static org.sonar.python.checks.Expressions.unescape;
 import static org.sonar.python.checks.Expressions.unescapeString;
 
-public class ExpressionsTest {
+class ExpressionsTest {
 
   private PythonParser parser = PythonParser.create();
 

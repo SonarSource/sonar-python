@@ -23,7 +23,7 @@ import java.util.Collections;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-public class SecureCookieCheckTest {
+class SecureCookieCheckTest {
   @Test
   void test() {
     PythonCheckVerifier.verify(Collections.singletonList("src/test/resources/checks/hotspots/secureCookie.py"), new SecureCookieCheck());

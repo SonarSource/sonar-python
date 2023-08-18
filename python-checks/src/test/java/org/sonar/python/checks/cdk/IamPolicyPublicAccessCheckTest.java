@@ -22,7 +22,7 @@ package org.sonar.python.checks.cdk;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-public class IamPolicyPublicAccessCheckTest {
+class IamPolicyPublicAccessCheckTest {
   @Test
   void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/cdk/iamPolicyPublicAccessCheck.py", new IamPolicyPublicAccessCheck());

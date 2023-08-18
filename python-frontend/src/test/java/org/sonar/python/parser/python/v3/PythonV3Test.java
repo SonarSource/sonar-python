@@ -25,7 +25,7 @@ import org.sonar.python.parser.RuleTest;
 
 import static org.sonar.python.parser.PythonParserAssert.assertThat;
 
-public class PythonV3Test extends RuleTest {
+class PythonV3Test extends RuleTest {
 
   @Test
   void ellipsis(){

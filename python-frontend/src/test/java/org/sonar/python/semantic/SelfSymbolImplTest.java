@@ -32,7 +32,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.PythonTestUtils.parse;
 
 
-public class SelfSymbolImplTest {
+class SelfSymbolImplTest {
 
   @Test
   void removeUsages() {

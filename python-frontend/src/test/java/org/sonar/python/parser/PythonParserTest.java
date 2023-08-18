@@ -27,7 +27,7 @@ import org.junit.jupiter.api.Test;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
-public class PythonParserTest {
+class PythonParserTest {
 
   private final PythonParser parser = PythonParser.create();
 

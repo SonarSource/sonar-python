@@ -33,7 +33,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
-public class BaseTreeVisitorTest extends RuleTest {
+class BaseTreeVisitorTest extends RuleTest {
   private final PythonTreeMaker treeMaker = new PythonTreeMaker();
 
   private static class FirstLastTokenVerifierVisitor extends BaseTreeVisitor {

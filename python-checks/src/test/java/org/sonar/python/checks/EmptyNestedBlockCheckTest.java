@@ -23,7 +23,7 @@ import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.quickfix.PythonQuickFixVerifier;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-public class EmptyNestedBlockCheckTest {
+class EmptyNestedBlockCheckTest {
 
   @Test
   void test() {

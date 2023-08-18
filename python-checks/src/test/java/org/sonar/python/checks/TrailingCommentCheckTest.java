@@ -25,7 +25,7 @@ import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 import static org.sonar.python.checks.utils.CodeTestUtils.code;
 
-public class TrailingCommentCheckTest {
+class TrailingCommentCheckTest {
 
   @Test
   void test() {

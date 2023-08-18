@@ -49,7 +49,7 @@ import static org.sonar.python.types.InferredTypes.TUPLE;
 import static org.sonar.python.types.InferredTypes.anyType;
 import static org.sonar.python.types.InferredTypes.typeName;
 
-public class CallExpressionImplTest {
+class CallExpressionImplTest {
 
   @Test
   void constructor_type() {

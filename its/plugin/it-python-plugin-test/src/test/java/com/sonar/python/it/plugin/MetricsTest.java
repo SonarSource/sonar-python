@@ -34,7 +34,7 @@ import static com.sonar.python.it.plugin.Tests.getMeasureAsDouble;
 import static com.sonar.python.it.plugin.Tests.getMeasureAsInt;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class MetricsTest {
+class MetricsTest {
 
   private static final String PROJECT_KEY = "metrics";
 

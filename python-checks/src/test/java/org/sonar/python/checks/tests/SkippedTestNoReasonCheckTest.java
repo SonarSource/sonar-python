@@ -25,7 +25,7 @@ import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class SkippedTestNoReasonCheckTest {
+class SkippedTestNoReasonCheckTest {
 
   @Test
   void test() {

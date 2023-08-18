@@ -49,7 +49,7 @@ import static org.sonar.python.types.InferredTypes.STR;
 import static org.sonar.python.types.InferredTypes.anyType;
 import static org.sonar.python.types.InferredTypes.or;
 
-public class DeclaredTypeTest {
+class DeclaredTypeTest {
 
   private final ClassSymbolImpl a = new ClassSymbolImpl("a", "a");
   private final ClassSymbolImpl b = new ClassSymbolImpl("b", "b");

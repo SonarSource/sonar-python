@@ -22,7 +22,7 @@ package org.sonar.python.checks.hotspots;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-public class CsrfDisabledCheckTest {
+class CsrfDisabledCheckTest {
 
   private static void testFile(String relPath) {
     String path = "src/test/resources/checks/hotspots/csrfDisabledCheck/" + relPath;

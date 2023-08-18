@@ -22,7 +22,7 @@ package org.sonar.python.checks;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-public class ModuleNameCheckTest {
+class ModuleNameCheckTest {
 
   private ModuleNameCheck check = new ModuleNameCheck();
 

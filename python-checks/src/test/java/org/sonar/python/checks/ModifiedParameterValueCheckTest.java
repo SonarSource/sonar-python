@@ -24,7 +24,7 @@ import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.python.checks.quickfix.PythonQuickFixVerifier;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-public class ModifiedParameterValueCheckTest {
+class ModifiedParameterValueCheckTest {
 
   private final PythonCheck check = new ModifiedParameterValueCheck();
   @Test

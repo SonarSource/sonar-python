@@ -25,7 +25,7 @@ import org.sonar.python.metrics.FileLinesVisitor;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class FileLinesVisitorTest {
+class FileLinesVisitorTest {
 
   private static final File BASE_DIR = new File("src/test/resources/metrics");
 

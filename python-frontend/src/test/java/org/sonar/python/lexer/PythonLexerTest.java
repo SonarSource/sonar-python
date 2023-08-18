@@ -38,7 +38,7 @@ import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertThat;
 
-public class PythonLexerTest {
+class PythonLexerTest {
 
   private static TestLexer lexer;
 

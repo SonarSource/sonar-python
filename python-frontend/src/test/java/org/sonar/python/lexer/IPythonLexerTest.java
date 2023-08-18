@@ -31,7 +31,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.not;
 
 
-public class IPythonLexerTest {
+class IPythonLexerTest {
   private static TestLexer lexer;
 
   @BeforeAll

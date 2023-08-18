@@ -35,7 +35,7 @@ import org.junit.jupiter.api.extension.RegisterExtension;
 import static com.sonar.python.it.plugin.Tests.assertProjectMeasures;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class TestReportTest {
+class TestReportTest {
 
   public static final String TESTS = "tests";
   public static final String TEST_FAILURES = "test_failures";

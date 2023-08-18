@@ -22,7 +22,7 @@ package org.sonar.python.checks;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-public class FieldDuplicatesClassNameCheckTest {
+class FieldDuplicatesClassNameCheckTest {
 
   @Test
   void test() {

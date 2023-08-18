@@ -35,7 +35,7 @@ import static org.sonar.python.index.DescriptorsToProtobuf.toProtobuf;
 import static org.sonar.python.index.DescriptorUtils.descriptor;
 import static org.sonar.python.index.DescriptorsToProtobuf.toProtobufModuleDescriptor;
 
-public class FunctionDescriptorTest {
+class FunctionDescriptorTest {
 
   @Test
   void functionDescriptor() {

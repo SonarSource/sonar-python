@@ -23,7 +23,7 @@ import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.quickfix.PythonQuickFixVerifier;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-public class DjangoReceiverDecoratorCheckTest {
+class DjangoReceiverDecoratorCheckTest {
   @Test
   void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/django/djangoReceiverDecoratorCheck.py", new DjangoReceiverDecoratorCheck());

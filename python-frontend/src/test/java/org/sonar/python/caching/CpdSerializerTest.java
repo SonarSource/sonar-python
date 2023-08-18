@@ -30,7 +30,7 @@ import org.sonar.python.tree.TokenImpl;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
 
-public class CpdSerializerTest {
+class CpdSerializerTest {
 
   @Test
   void to_bytes_from_bytes() throws IOException {

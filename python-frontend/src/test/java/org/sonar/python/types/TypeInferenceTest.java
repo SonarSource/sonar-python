@@ -55,7 +55,7 @@ import static org.sonar.python.types.InferredTypes.or;
 import static org.sonar.python.types.InferredTypes.runtimeType;
 import static org.sonar.python.types.InferredTypes.typeName;
 
-public class TypeInferenceTest {
+class TypeInferenceTest {
 
   @Test
   void unknown_expression_type() {

@@ -50,7 +50,7 @@ import org.sonar.python.PythonTestUtils;
  * <p>
  * 3. the name of the function is the identifier of the basic block
  */
-public class DefinedVariablesAnalysisTest {
+class DefinedVariablesAnalysisTest {
   private PythonFile file = Mockito.mock(PythonFile.class, "file1.py");
 
   @Test

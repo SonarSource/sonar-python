@@ -37,7 +37,7 @@ import org.sonar.python.parser.RuleTest;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class IPythonTreeMakerTest extends RuleTest {
+class IPythonTreeMakerTest extends RuleTest {
 
   private final IPythonTreeMaker treeMaker = new IPythonTreeMaker();
 

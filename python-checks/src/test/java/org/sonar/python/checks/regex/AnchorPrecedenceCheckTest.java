@@ -22,7 +22,7 @@ package org.sonar.python.checks.regex;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-public class AnchorPrecedenceCheckTest {
+class AnchorPrecedenceCheckTest {
 
   @Test
   void test() {

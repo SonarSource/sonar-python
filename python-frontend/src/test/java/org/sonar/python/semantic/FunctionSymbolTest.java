@@ -41,7 +41,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.PythonTestUtils.parse;
 import static org.sonar.python.semantic.SymbolUtils.pathOf;
 
-public class FunctionSymbolTest {
+class FunctionSymbolTest {
 
   @Test
   void arity() {

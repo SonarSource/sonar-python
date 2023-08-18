@@ -26,7 +26,7 @@ import org.sonar.plugins.python.api.tree.FileInput;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class ParserTest {
+class ParserTest {
 
   @Test
   void test() {

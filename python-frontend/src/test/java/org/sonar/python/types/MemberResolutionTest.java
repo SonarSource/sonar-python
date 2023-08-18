@@ -30,7 +30,7 @@ import static org.sonar.python.PythonTestUtils.getFirstDescendant;
 import static org.sonar.python.PythonTestUtils.getLastDescendant;
 import static org.sonar.python.PythonTestUtils.parse;
 
-public class MemberResolutionTest {
+class MemberResolutionTest {
 
   @Test
   void basic_method_resolution() {

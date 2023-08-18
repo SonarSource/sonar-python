@@ -47,7 +47,7 @@ import static org.sonar.python.PythonTestUtils.pythonFile;
 import static org.sonar.python.semantic.SymbolUtils.pathOf;
 import static org.sonar.python.semantic.SymbolUtils.pythonPackageName;
 
-public class SymbolUtilsTest {
+class SymbolUtilsTest {
 
   @Test
   void package_name_by_file() {

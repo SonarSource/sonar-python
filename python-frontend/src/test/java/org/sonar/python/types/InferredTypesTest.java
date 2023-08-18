@@ -64,7 +64,7 @@ import static org.sonar.python.types.InferredTypes.typeName;
 import static org.sonar.python.types.InferredTypes.typeSymbols;
 import static org.sonar.python.types.TypeShed.typeShedClass;
 
-public class InferredTypesTest {
+class InferredTypesTest {
 
   @Test
   void test_runtimeType() {

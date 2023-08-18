@@ -32,7 +32,7 @@ import static org.sonar.plugins.python.api.PythonVersionUtils.Version.V_37;
 import static org.sonar.plugins.python.api.PythonVersionUtils.Version.V_38;
 import static org.sonar.plugins.python.api.PythonVersionUtils.Version.V_39;
 
-public class PythonVersionUtilsTest {
+class PythonVersionUtilsTest {
 
   @RegisterExtension
   public LogTesterJUnit5 logTester = new LogTesterJUnit5().setLevel(Level.DEBUG);

@@ -26,7 +26,7 @@ import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 import static org.sonar.python.checks.utils.CodeTestUtils.code;
 
-public class TrailingWhitespaceCheckTest {
+class TrailingWhitespaceCheckTest {
 
   final PythonCheck check = new TrailingWhitespaceCheck();
 

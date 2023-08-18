@@ -30,7 +30,7 @@ import org.sonar.python.tree.TokenImpl;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class TokenLocationTest {
+class TokenLocationTest {
 
   @Test
   void test_multiline() {

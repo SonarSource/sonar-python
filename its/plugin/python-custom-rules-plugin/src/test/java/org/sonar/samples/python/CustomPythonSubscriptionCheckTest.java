@@ -19,10 +19,10 @@
  */
 package org.sonar.samples.python;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-public class CustomPythonSubscriptionCheckTest {
+class CustomPythonSubscriptionCheckTest {
   @Test
   void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/customPythonSubscriptionCheck.py", new CustomPythonSubscriptionCheck());

@@ -38,7 +38,7 @@ import org.sonar.plugins.python.api.quickfix.PythonTextEdit;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 
-public class PythonCheckTest {
+class PythonCheckTest {
 
   private static final File FILE = new File("src/test/resources/file.py");
   private static final String MESSAGE = "message";

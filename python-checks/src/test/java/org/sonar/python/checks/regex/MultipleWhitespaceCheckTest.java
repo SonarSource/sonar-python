@@ -24,7 +24,7 @@ import org.sonar.python.checks.quickfix.PythonQuickFixVerifier;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 
-public class MultipleWhitespaceCheckTest {
+class MultipleWhitespaceCheckTest {
 
   @Test
   void test() {

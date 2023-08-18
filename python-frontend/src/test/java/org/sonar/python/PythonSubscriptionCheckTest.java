@@ -36,7 +36,7 @@ import org.sonar.plugins.python.api.tree.Trivia;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class PythonSubscriptionCheckTest {
+class PythonSubscriptionCheckTest {
 
   private static final File FILE = new File("src/test/resources/file.py");
   public static final String MESSAGE = "message";

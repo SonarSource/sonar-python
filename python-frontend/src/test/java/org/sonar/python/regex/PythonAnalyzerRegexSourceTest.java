@@ -41,7 +41,7 @@ import static org.sonar.python.regex.RegexParserTestUtils.assertSuccessfulParse;
 import static org.sonar.python.regex.RegexParserTestUtils.makeSource;
 import static org.sonar.python.regex.RegexParserTestUtils.parseRegex;
 
-public class PythonAnalyzerRegexSourceTest {
+class PythonAnalyzerRegexSourceTest {
 
   @Test
   // TODO: Extend test with exact syntax error location check

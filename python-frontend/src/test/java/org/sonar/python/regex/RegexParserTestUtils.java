@@ -33,7 +33,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.PythonTestUtils.getFirstDescendant;
 import static org.sonar.python.PythonTestUtils.parse;
 
-public class RegexParserTestUtils {
+class RegexParserTestUtils {
 
   private static final String PYTHON_CODE = "import re\nre.match(%s, 'input')";
 

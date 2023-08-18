@@ -31,7 +31,7 @@ import org.sonar.python.quickfix.TextEditUtils;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class PythonQuickFixVerifierTest {
+class PythonQuickFixVerifierTest {
 
   @Test
   void no_issue_found() {

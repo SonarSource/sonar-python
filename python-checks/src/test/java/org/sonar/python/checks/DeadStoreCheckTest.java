@@ -26,7 +26,7 @@ import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 import static org.sonar.python.checks.utils.CodeTestUtils.code;
 
-public class DeadStoreCheckTest {
+class DeadStoreCheckTest {
 
   private final PythonCheck check = new DeadStoreCheck();
 

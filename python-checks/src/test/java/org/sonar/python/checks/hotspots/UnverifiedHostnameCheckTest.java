@@ -23,7 +23,7 @@ import java.util.Collections;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-public class UnverifiedHostnameCheckTest {
+class UnverifiedHostnameCheckTest {
 
   @Test
   void test() {

@@ -25,7 +25,7 @@ import org.sonar.plugins.python.api.quickfix.PythonTextEdit;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class PythonQuickFixTest {
+class PythonQuickFixTest {
 
   @Test
   void test_newQuickFix_builder() {

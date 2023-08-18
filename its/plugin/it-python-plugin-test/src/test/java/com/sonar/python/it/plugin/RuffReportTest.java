@@ -33,7 +33,7 @@ import org.sonarqube.ws.Issues;
 import static com.sonar.python.it.plugin.Tests.issues;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class RuffReportTest {
+class RuffReportTest {
 
   private final String PROJECT = "ruff_project";
 

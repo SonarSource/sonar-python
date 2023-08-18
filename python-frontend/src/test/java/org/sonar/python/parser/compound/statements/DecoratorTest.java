@@ -28,7 +28,7 @@ import org.sonar.python.parser.RuleTest;
 import static org.sonar.python.parser.PythonParserAssert.assertThat;
 
 
-public class DecoratorTest extends RuleTest {
+class DecoratorTest extends RuleTest {
 
   @BeforeEach
   void init() {

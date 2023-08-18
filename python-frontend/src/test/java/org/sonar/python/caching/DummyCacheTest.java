@@ -26,7 +26,7 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class DummyCacheTest {
+class DummyCacheTest {
 
   @Test
   void read_always_throws_an_IllegalArgumentException() {

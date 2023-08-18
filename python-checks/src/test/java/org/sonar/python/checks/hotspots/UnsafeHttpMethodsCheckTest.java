@@ -23,7 +23,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-public class UnsafeHttpMethodsCheckTest {
+class UnsafeHttpMethodsCheckTest {
 
   @Test
   void test_django() {

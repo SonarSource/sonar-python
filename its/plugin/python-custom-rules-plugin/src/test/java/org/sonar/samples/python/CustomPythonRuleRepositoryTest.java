@@ -19,12 +19,12 @@
  */
 package org.sonar.samples.python;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.sonar.api.server.rule.RulesDefinition;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class CustomPythonRuleRepositoryTest {
+class CustomPythonRuleRepositoryTest {
 
   @Test
   void test_rule_repository() {

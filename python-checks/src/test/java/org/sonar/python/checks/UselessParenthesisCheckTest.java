@@ -23,7 +23,7 @@ import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.quickfix.PythonQuickFixVerifier;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-public class UselessParenthesisCheckTest {
+class UselessParenthesisCheckTest {
 
   @Test
   void test() {

@@ -33,7 +33,7 @@ import static com.sonar.python.it.plugin.Tests.newWsClient;
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class CustomRulesTest {
+class CustomRulesTest {
 
   @RegisterExtension
   public static final OrchestratorExtension orchestrator = Tests.ORCHESTRATOR;

@@ -26,7 +26,7 @@ import org.sonar.python.PythonTestUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class StringElementImplTest {
+class StringElementImplTest {
 
   @Test
   void isInterpolated() {

@@ -38,7 +38,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.sonar.python.PythonTestUtils.parse;
 
-public class ClassSymbolImplTest {
+class ClassSymbolImplTest {
 
   @Test
   void hasUnresolvedTypeHierarchy() {

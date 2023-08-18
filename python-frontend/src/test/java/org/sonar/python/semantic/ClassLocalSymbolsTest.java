@@ -32,7 +32,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.tuple;
 
 
-public class ClassLocalSymbolsTest {
+class ClassLocalSymbolsTest {
   @Test
   void no_field() {
     ClassDef empty = parseClass(

@@ -23,7 +23,7 @@ import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-public class ClearTextProtocolsCheckPartTest {
+class ClearTextProtocolsCheckPartTest {
 
   final PythonCheck check = new ClearTextProtocolsCheckPart();
 

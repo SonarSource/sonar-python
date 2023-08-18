@@ -23,7 +23,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.sonar.api.batch.sensor.cache.WriteCache;
 
-public class PythonWriteCacheImplTest {
+class PythonWriteCacheImplTest {
 
   @Test
   void write() {

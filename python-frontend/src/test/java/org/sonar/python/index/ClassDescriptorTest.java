@@ -31,7 +31,7 @@ import static org.sonar.python.PythonTestUtils.lastClassSymbolWithName;
 import static org.sonar.python.index.DescriptorToProtobufTestUtils.assertDescriptorToProtobuf;
 import static org.sonar.python.index.DescriptorUtils.descriptor;
 
-public class ClassDescriptorTest {
+class ClassDescriptorTest {
 
   @Test
   void classDescriptor() {

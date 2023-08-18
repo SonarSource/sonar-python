@@ -36,7 +36,7 @@ import static org.sonar.python.it.RulingHelper.bugRuleKeys;
 import static org.sonar.python.it.RulingHelper.getOrchestrator;
 
 // Ruling test for bug rules, to ensure they are properly tested without slowing down the CI
-public class PythonExtendedRulingTest {
+class PythonExtendedRulingTest {
 
 
   @RegisterExtension

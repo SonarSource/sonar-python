@@ -29,7 +29,7 @@ import org.sonar.python.api.PythonTokenType;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class FStringParserTest {
+class FStringParserTest {
 
   private final FStringParser parser = new FStringParser();
 

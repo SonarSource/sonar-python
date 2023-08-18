@@ -61,7 +61,7 @@ import static org.sonar.python.PythonTestUtils.pythonFile;
 import static org.sonar.python.semantic.ProjectLevelSymbolTable.empty;
 import static org.sonar.python.semantic.ProjectLevelSymbolTable.from;
 
-public class ProjectLevelSymbolTableTest {
+class ProjectLevelSymbolTableTest {
 
   private Map<String, Symbol> getSymbolByName(FileInput fileInput) {
     return fileInput.globalVariables().stream().collect(Collectors.toMap(Symbol::name, Functions.identity()));

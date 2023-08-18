@@ -35,7 +35,7 @@ import org.sonar.python.PythonTestUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class CfgUtilsTest {
+class CfgUtilsTest {
 
   private PythonFile file = Mockito.mock(PythonFile.class, "file1.py");
 

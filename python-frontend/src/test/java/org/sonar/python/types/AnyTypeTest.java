@@ -25,7 +25,7 @@ import org.sonar.python.semantic.ClassSymbolImpl;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.types.AnyType.ANY;
 
-public class AnyTypeTest {
+class AnyTypeTest {
 
   @Test
   void isIdentityComparableWith() {

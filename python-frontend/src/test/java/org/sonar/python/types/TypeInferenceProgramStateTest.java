@@ -29,7 +29,7 @@ import org.sonar.python.semantic.SymbolImpl;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class TypeInferenceProgramStateTest {
+class TypeInferenceProgramStateTest {
 
   private final SymbolImpl a = new SymbolImpl("a", "foo.a");
   private final SymbolImpl b = new SymbolImpl("b", "foo.b");

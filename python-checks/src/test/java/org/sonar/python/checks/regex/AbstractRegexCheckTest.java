@@ -35,7 +35,7 @@ import org.sonarsource.analyzer.commons.regex.ast.FlagSet;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class AbstractRegexCheckTest {
+class AbstractRegexCheckTest {
 
   private static final File FILE = new File("src/test/resources/checks/regex/abstractRegexCheck.py");
 

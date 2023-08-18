@@ -55,7 +55,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * <p>
  * 3. the name of the function is the identifier of the basic block
  */
-public class LiveVariablesAnalysisTest {
+class LiveVariablesAnalysisTest {
   private PythonFile file = Mockito.mock(PythonFile.class, "file1.py");
 
   @Test

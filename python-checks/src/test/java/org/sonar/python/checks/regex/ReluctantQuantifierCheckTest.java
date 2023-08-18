@@ -23,7 +23,7 @@ import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 
-public class ReluctantQuantifierCheckTest {
+class ReluctantQuantifierCheckTest {
 
   @Test
   void test() {

@@ -31,7 +31,7 @@ import org.sonar.python.semantic.SymbolTableBuilder;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.PythonTestUtils.pythonFile;
 
-public class UnittestUtilsTest  {
+class UnittestUtilsTest  {
 
   @Test
   void test_isWithinUnittestTestCase() {

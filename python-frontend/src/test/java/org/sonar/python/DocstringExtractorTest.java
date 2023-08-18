@@ -33,7 +33,7 @@ import org.sonar.plugins.python.api.tree.Tree;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class DocstringExtractorTest {
+class DocstringExtractorTest {
 
   private static final File BASE_DIR = new File("src/test/resources");
 

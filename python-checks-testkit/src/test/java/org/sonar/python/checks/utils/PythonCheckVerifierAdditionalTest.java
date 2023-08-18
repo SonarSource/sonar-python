@@ -27,7 +27,7 @@ import org.sonar.plugins.python.api.tree.Tree;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class PythonCheckVerifierAdditionalTest {
+class PythonCheckVerifierAdditionalTest {
 
   private static final String BASE_DIR = "src/test/resources/";
 

@@ -27,7 +27,7 @@ import org.sonar.plugins.python.api.tree.Tree;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
-public class UsageImplTest {
+class UsageImplTest {
 
   @Test
   void binding_usages() {

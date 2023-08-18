@@ -45,7 +45,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.it.RulingHelper.getMeasure;
 import static org.sonar.python.it.RulingHelper.getOrchestrator;
 
-public class PythonPrAnalysisTest {
+class PythonPrAnalysisTest {
 
   @RegisterExtension
   public static final OrchestratorExtension ORCHESTRATOR = getOrchestrator(Edition.DEVELOPER);

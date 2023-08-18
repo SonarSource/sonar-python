@@ -33,7 +33,7 @@ import org.sonar.plugins.python.api.tree.Tree;
 
 import static org.assertj.core.api.Assertions.fail;
 
-public class PythonCheckVerifierTest {
+class PythonCheckVerifierTest {
 
   private static final String BASE_DIR = "src/test/resources/";
   private static final FuncdefVisitor baseTreeCheck = new FuncdefVisitor();

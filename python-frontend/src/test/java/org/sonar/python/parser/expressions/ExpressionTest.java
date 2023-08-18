@@ -28,7 +28,7 @@ import org.sonar.python.parser.RuleTest;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.parser.PythonParserAssert.assertThat;
 
-public class ExpressionTest extends RuleTest {
+class ExpressionTest extends RuleTest {
 
   @BeforeEach
   void init() {

@@ -26,7 +26,7 @@ import org.sonar.python.checks.utils.PythonCheckVerifier;
 import static org.sonar.python.checks.BuiltinGenericsOverTypingModuleCheck.MESSAGE;
 import static org.sonar.python.checks.utils.CodeTestUtils.code;
 
-public class BuiltinGenericsOverTypingModuleCheckTest {
+class BuiltinGenericsOverTypingModuleCheckTest {
 
   @Test
   void checkBuiltins() {

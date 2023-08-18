@@ -33,7 +33,7 @@ import static org.sonar.python.types.InferredTypes.anyType;
 import static org.sonar.python.types.InferredTypes.runtimeType;
 import static org.sonar.python.types.UnionType.or;
 
-public class UnionTypeTest {
+class UnionTypeTest {
 
   private final InferredType a = InferredTypes.runtimeType(new ClassSymbolImpl("a", "a"));
   private final InferredType b = InferredTypes.runtimeType(new ClassSymbolImpl("b", "b"));

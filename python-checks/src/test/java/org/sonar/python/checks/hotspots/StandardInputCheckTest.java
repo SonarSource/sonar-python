@@ -22,7 +22,7 @@ package org.sonar.python.checks.hotspots;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-public class StandardInputCheckTest {
+class StandardInputCheckTest {
   @Test
   void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/hotspots/standardInput.py", new StandardInputCheck());

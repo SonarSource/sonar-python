@@ -53,7 +53,7 @@ import org.sonarsource.sonarlint.core.commons.log.ClientLogOutput;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.tuple;
 
-public class IPythonTest {
+class IPythonTest {
 
   @TempDir
   public static Path TEMP;
