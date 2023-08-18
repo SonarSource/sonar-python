@@ -158,3 +158,9 @@ def meta_classes():
 
   del MetaclassedWithoutDelete[0]  # FN
   del MetaclassedWithoutDelete()[0]  # FN
+
+
+def import_path():
+    from importlib import import_module
+
+    del import_module('importlib').__path__[0]  # OK ref: SONARPY-1339

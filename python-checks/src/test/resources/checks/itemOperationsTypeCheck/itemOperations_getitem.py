@@ -192,3 +192,9 @@ def python3_9():
 
 def python3_10():
   type_alias = type[Exception]
+
+
+def import_path():
+    from importlib import import_module
+
+    path = import_module('importlib').__path__[0]  # OK ref: SONARPY-1339
