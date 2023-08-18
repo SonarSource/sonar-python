@@ -30,7 +30,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Timeout;
 import org.sonar.plugins.python.api.tree.AliasedName;
 import org.sonar.plugins.python.api.tree.AnnotatedAssignment;
 import org.sonar.plugins.python.api.tree.ArgList;
@@ -2481,7 +2482,8 @@ public class PythonTreeMakerTest extends RuleTest {
 
   }
 
-  @Test(timeout = 2000L)
+  @Test
+  @Timeout(2)
   public void should_not_require_exponential_time() {
     try {
       p.parse("((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((");

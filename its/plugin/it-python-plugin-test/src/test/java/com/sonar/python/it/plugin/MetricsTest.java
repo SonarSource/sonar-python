@@ -21,12 +21,12 @@ package com.sonar.python.it.plugin;
 
 import com.sonar.orchestrator.build.BuildResult;
 import com.sonar.orchestrator.build.SonarScanner;
-import com.sonar.orchestrator.junit4.OrchestratorRule;
+import com.sonar.orchestrator.junit5.OrchestratorExtension;
 import java.io.File;
 import org.assertj.core.data.Offset;
-import org.junit.BeforeClass;
-import org.junit.ClassRule;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.RegisterExtension;
 import org.sonarqube.ws.Measures.Measure;
 
 import static com.sonar.python.it.plugin.Tests.getMeasure;
@@ -64,12 +64,12 @@ public class MetricsTest {
 
   private static final Offset<Double> OFFSET = Offset.offset(0.01d);
 
-  @ClassRule
-  public static final OrchestratorRule orchestrator = Tests.ORCHESTRATOR;
+  @RegisterExtension
+  public static final OrchestratorExtension orchestrator = Tests.ORCHESTRATOR;
 
   private static BuildResult buildResult;
 
-  @BeforeClass
+  @BeforeAll
   public static void startServer() {
     orchestrator.getServer().provisionProject(PROJECT_KEY, PROJECT_KEY);
     orchestrator.getServer().associateProjectToQualityProfile(PROJECT_KEY, "py", "no_rule");

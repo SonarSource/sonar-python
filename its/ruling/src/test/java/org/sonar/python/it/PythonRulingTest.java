@@ -19,18 +19,17 @@
  */
 package org.sonar.python.it;
 
-import com.sonar.orchestrator.Orchestrator;
 import com.sonar.orchestrator.build.SonarScanner;
-import com.sonar.orchestrator.junit4.OrchestratorRule;
+import com.sonar.orchestrator.junit5.OrchestratorExtension;
 import com.sonar.orchestrator.locator.FileLocation;
 import java.io.File;
 import java.nio.file.Files;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
-import org.junit.BeforeClass;
-import org.junit.ClassRule;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.RegisterExtension;
 import org.sonarqube.ws.Issues;
 import org.sonarqube.ws.client.HttpConnector;
 import org.sonarqube.ws.client.WsClient;
@@ -47,10 +46,10 @@ public class PythonRulingTest {
 
   public static final String PROJECT_KEY = "project";
 
-  @ClassRule
-  public static final OrchestratorRule ORCHESTRATOR = getOrchestrator();
+  @RegisterExtension
+  public static final OrchestratorExtension ORCHESTRATOR = getOrchestrator();
 
-  @BeforeClass
+  @BeforeAll
   public static void prepare_quality_profile() {
     ProfileGenerator.RulesConfiguration parameters = new ProfileGenerator.RulesConfiguration()
       .add("CommentRegularExpression", "message", "The regular expression matches this comment")

@@ -20,7 +20,7 @@
 package org.sonar.python.metrics;
 
 import java.io.File;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.sonar.python.TestPythonVisitorRunner;
 
 import static org.fest.assertions.Assertions.assertThat;

@@ -24,13 +24,13 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Maps;
 import com.sonar.orchestrator.build.BuildResult;
 import com.sonar.orchestrator.build.SonarScanner;
-import com.sonar.orchestrator.junit4.OrchestratorRule;
+import com.sonar.orchestrator.junit5.OrchestratorExtension;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-import org.junit.ClassRule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.RegisterExtension;
 
 import static com.sonar.python.it.plugin.Tests.assertProjectMeasures;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -44,8 +44,8 @@ public class TestReportTest {
   public static final String TEST_SUCCESS_DENSITY = "test_success_density";
   public static final String TEST_EXECUTION_TIME = "test_execution_time";
 
-  @ClassRule
-  public static final OrchestratorRule ORCHESTRATOR = Tests.ORCHESTRATOR;
+  @RegisterExtension
+  public static final OrchestratorExtension ORCHESTRATOR = Tests.ORCHESTRATOR;
 
   private static SonarScanner createBuild(String projectKey, String testReportPath) {
     return SonarScanner.create()

@@ -20,7 +20,7 @@
 package org.sonar.python.checks;
 
 import java.util.Arrays;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 public class IncorrectExceptionTypeCheckTest {

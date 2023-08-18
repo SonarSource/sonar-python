@@ -23,7 +23,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.sonar.python.cfg.fixpoint.ProgramState;
 import org.sonar.python.semantic.SymbolImpl;
 

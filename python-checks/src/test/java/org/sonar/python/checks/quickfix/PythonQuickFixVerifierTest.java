@@ -19,13 +19,14 @@
  */
 package org.sonar.python.checks.quickfix;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.opentest4j.AssertionFailedError;
 import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
-import org.sonar.plugins.python.api.tree.AssignmentStatement;
-import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
 import org.sonar.plugins.python.api.quickfix.PythonTextEdit;
+import org.sonar.plugins.python.api.tree.AssignmentStatement;
+import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.quickfix.TextEditUtils;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -59,14 +60,20 @@ public class PythonQuickFixVerifierTest {
 
   @Test
   public void one_issue_one_qf_wrong_fix() {
+    var expectedMsg = ("[The code with the quickfix applied is not the expected result.\n" +
+      "\"Applied QuickFixes are:\n" +
+      "[a!=10]\n" +
+      "Expected result:\n" +
+      "[a==10]] \n" +
+      "expected: [\"a==10\"]\n" +
+      " but was: [\"a!=10\"]").replaceAll("\\s+", "");
+
     SimpleCheck simpleCheck = new SimpleCheck();
     assertThatThrownBy(() -> PythonQuickFixVerifier.verify(simpleCheck, "a=10", "a==10"))
-      .isInstanceOf(AssertionError.class)
-      .hasMessageContaining("[The code with the quickfix applied is not the expected result.\n" +
-        "\"Applied QuickFixes are:\n" +
-        "[a!=10]\n" +
-        "Expected result:\n" +
-        "[a==10]] expected:<[\"a[=]=10\"]> but was:<[\"a[!]=10\"]>");
+      .isInstanceOf(AssertionFailedError.class)
+      .extracting(Throwable::getMessage)
+      .extracting(s -> s.replaceAll("\\s+", ""))
+      .isEqualTo(expectedMsg);
   }
 
   @Test

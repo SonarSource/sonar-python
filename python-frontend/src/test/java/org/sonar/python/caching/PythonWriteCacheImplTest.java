@@ -19,7 +19,7 @@
  */
 package org.sonar.python.caching;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.sonar.api.batch.sensor.cache.WriteCache;
 

@@ -24,6 +24,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Set;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.rule.Severity;
 import org.sonar.api.batch.sensor.SensorContext;
@@ -31,8 +33,6 @@ import org.sonar.api.batch.sensor.issue.NewExternalIssue;
 import org.sonar.api.batch.sensor.issue.NewIssueLocation;
 import org.sonar.api.config.Configuration;
 import org.sonar.api.rules.RuleType;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
 import org.sonar.plugins.python.ExternalIssuesSensor;
 import org.sonarsource.analyzer.commons.internal.json.simple.parser.ParseException;
 
@@ -40,7 +40,7 @@ import static org.apache.commons.lang.StringUtils.isEmpty;
 
 public class RuffSensor extends ExternalIssuesSensor {
 
-  private static final Logger LOG = Loggers.get(RuffSensor.class);
+  private static final Logger LOG = LoggerFactory.getLogger(RuffSensor.class);
 
   public static final String LINTER_NAME = "Ruff";
   public static final String LINTER_KEY = "ruff";

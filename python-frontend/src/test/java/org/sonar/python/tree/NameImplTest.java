@@ -19,7 +19,7 @@
  */
 package org.sonar.python.tree;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.PythonTestUtils;

@@ -20,17 +20,17 @@
 package org.sonar.python.parser.expressions;
 
 import com.sonar.sslr.api.AstNode;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.parser.RuleTest;
 
-import static org.sonar.python.parser.PythonParserAssert.assertThat;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.sonar.python.parser.PythonParserAssert.assertThat;
 
 public class ExpressionTest extends RuleTest {
 
-  @Before
+  @BeforeEach
   public void init() {
     setRootRule(PythonGrammar.TEST);
   }

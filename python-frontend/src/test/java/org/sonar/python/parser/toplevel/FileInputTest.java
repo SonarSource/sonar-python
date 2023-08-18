@@ -20,7 +20,7 @@
 package org.sonar.python.parser.toplevel;
 
 import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.parser.RuleTest;
 

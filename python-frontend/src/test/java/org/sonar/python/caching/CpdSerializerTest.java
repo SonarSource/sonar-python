@@ -22,7 +22,7 @@ package org.sonar.python.caching;
 import java.io.IOException;
 import java.net.URI;
 import java.util.List;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.python.api.PythonKeyword;
 import org.sonar.python.tree.TokenImpl;

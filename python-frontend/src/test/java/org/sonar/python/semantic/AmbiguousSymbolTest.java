@@ -26,7 +26,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.symbols.AmbiguousSymbol;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
@@ -34,13 +34,14 @@ import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.python.PythonTestUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.Assertions.tuple;
 import static org.sonar.python.PythonTestUtils.parse;
 
-public class AmbiguousSymbolTest {
+class AmbiguousSymbolTest {
 
   @Test
-  public void overloaded_functions() {
+  void overloaded_functions() {
     Symbol fn = symbols(
       "from typing import overload",
       "@overload",
@@ -57,7 +58,7 @@ public class AmbiguousSymbolTest {
   }
 
   @Test
-  public void remove_usages() {
+  void remove_usages() {
     Symbol fn = symbols(
       "from typing import overload",
       "@overload",
@@ -71,7 +72,7 @@ public class AmbiguousSymbolTest {
   }
 
   @Test
-  public void redefined_class() {
+  void redefined_class() {
     Symbol a = symbols(
       "class A:",
       "  def meth(self): ...",
@@ -89,7 +90,7 @@ public class AmbiguousSymbolTest {
   }
 
   @Test
-  public void redefined_class_member() {
+  void redefined_class_member() {
     ClassSymbol a = ((ClassSymbol) symbols(
       "class A:",
       "  _foo = 42",
@@ -102,7 +103,7 @@ public class AmbiguousSymbolTest {
   }
 
   @Test
-  public void global_ambiguous_symbol() {
+  void global_ambiguous_symbol() {
     Symbol x = symbols(
       "def x(): ...",
       "def foo():",
@@ -114,7 +115,7 @@ public class AmbiguousSymbolTest {
   }
 
   @Test
-  public void not_ambiguous_symbols() {
+  void not_ambiguous_symbols() {
     Symbol x = symbols(
       "x = 42",
       "x = 43"
@@ -122,25 +123,29 @@ public class AmbiguousSymbolTest {
     assertThat(x.kind()).isEqualTo(Symbol.Kind.OTHER);
   }
 
-  @Test(expected = IllegalArgumentException.class)
-  public void empty_ambiguous_symbol_creation() {
-    AmbiguousSymbolImpl.create(Collections.emptySet());
-  }
-
-  @Test(expected = IllegalArgumentException.class)
-  public void singleton_ambiguous_symbol_creation() {
-    AmbiguousSymbolImpl.create(Collections.singleton(new SymbolImpl("foo", null)));
-  }
-
-  @Test(expected = IllegalArgumentException.class)
-  public void ambiguous_symbol_creation_different_name_different_fqn() {
-    SymbolImpl foo = new SymbolImpl("foo", "mod.foo");
-    SymbolImpl bar = new SymbolImpl("bar", "mod.bar");
-    AmbiguousSymbolImpl.create(new HashSet<>(Arrays.asList(foo, bar)));
+  @Test
+  void empty_ambiguous_symbol_creation() {
+    var symbols = Collections.<Symbol>emptySet();
+    assertThatThrownBy(() -> AmbiguousSymbolImpl.create(symbols)).isInstanceOf(IllegalArgumentException.class);
   }
 
   @Test
-  public void ambiguous_symbol_creation_different_name_same_fqn() {
+  void singleton_ambiguous_symbol_creation() {
+    var symbols = Collections.<Symbol>singleton(new SymbolImpl("foo", null));
+    assertThatThrownBy(() -> AmbiguousSymbolImpl.create(symbols))
+      .isInstanceOf(IllegalArgumentException.class);
+  }
+
+  @Test
+  void ambiguous_symbol_creation_different_name_different_fqn() {
+    SymbolImpl foo = new SymbolImpl("foo", "mod.foo");
+    SymbolImpl bar = new SymbolImpl("bar", "mod.bar");
+    var symbols = Set.<Symbol>of(foo, bar);
+    assertThatThrownBy(() -> AmbiguousSymbolImpl.create(symbols)).isInstanceOf(IllegalArgumentException.class);
+  }
+
+  @Test
+  void ambiguous_symbol_creation_different_name_same_fqn() {
     SymbolImpl foo = new SymbolImpl("foo", "mod.bar");
     SymbolImpl bar = new SymbolImpl("bar", "mod.bar");
     AmbiguousSymbol ambiguousSymbol = AmbiguousSymbolImpl.create(new HashSet<>(Arrays.asList(foo, bar)));
@@ -149,7 +154,7 @@ public class AmbiguousSymbolTest {
   }
 
   @Test
-  public void ambiguous_symbol_creation_different_fqn() {
+  void ambiguous_symbol_creation_different_fqn() {
     SymbolImpl foo = new SymbolImpl("foo", "mod1.foo");
     SymbolImpl otherFoo = new SymbolImpl("foo", "mod2.foo");
     AmbiguousSymbol ambiguousSymbol = AmbiguousSymbolImpl.create(new HashSet<>(Arrays.asList(foo, otherFoo)));
@@ -159,7 +164,7 @@ public class AmbiguousSymbolTest {
   }
 
   @Test
-  public void aliased_import() {
+  void aliased_import() {
     Symbol symbol = symbols(
       "try:",
       "  from gettext import gettext as _",
@@ -172,7 +177,7 @@ public class AmbiguousSymbolTest {
   }
 
   @Test
-  public void copy_without_usages() {
+  void copy_without_usages() {
     SymbolImpl foo = new SymbolImpl("foo", "mod1.foo");
     SymbolImpl otherFoo = new SymbolImpl("foo", "mod2.foo");
     AmbiguousSymbol ambiguousSymbol = AmbiguousSymbolImpl.create(new HashSet<>(Arrays.asList(foo, otherFoo)));
@@ -190,7 +195,7 @@ public class AmbiguousSymbolTest {
   }
 
   @Test
-  public void nested_ambiguous_symbols_should_be_flattened() {
+  void nested_ambiguous_symbols_should_be_flattened() {
     SymbolImpl foo1 = new SymbolImpl("foo", "mod.foo");
     ClassSymbolImpl classSymbol1 = new ClassSymbolImpl("foo", "mod.foo");
     AmbiguousSymbol ambiguousSymbol1 = AmbiguousSymbolImpl.create(foo1, classSymbol1);

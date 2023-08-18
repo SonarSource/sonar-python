@@ -22,7 +22,7 @@ package org.sonar.python.index;
 
 import java.util.Collections;
 import javax.annotation.Nullable;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 
 import static org.assertj.core.api.Assertions.assertThat;

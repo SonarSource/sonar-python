@@ -21,7 +21,7 @@ package org.sonar.plugins.python.api.cfg;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.tree.ExpressionStatement;

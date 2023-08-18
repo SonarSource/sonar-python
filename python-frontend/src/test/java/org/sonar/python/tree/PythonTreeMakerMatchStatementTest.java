@@ -21,7 +21,7 @@ package org.sonar.python.tree;
 
 import com.sonar.sslr.api.RecognitionException;
 import java.util.List;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.tree.AsPattern;
 import org.sonar.plugins.python.api.tree.CapturePattern;
 import org.sonar.plugins.python.api.tree.CaseBlock;

@@ -27,9 +27,10 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.RegisterExtension;
 import org.slf4j.event.Level;
-import org.sonar.api.testfixtures.log.LogTester;
+import org.sonar.api.testfixtures.log.LogTesterJUnit5;
 import org.sonar.plugins.python.api.ProjectPythonVersion;
 import org.sonar.plugins.python.api.PythonVersionUtils;
 import org.sonar.plugins.python.api.symbols.AmbiguousSymbol;
@@ -43,13 +44,14 @@ import org.sonar.python.semantic.SymbolImpl;
 import org.sonar.python.types.protobuf.SymbolsProtos;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.Assertions.tuple;
 import static org.sonar.python.types.TypeShed.symbolsForModule;
 
 public class TypeShedTest {
 
-  @org.junit.Rule
-  public LogTester logTester = new LogTester().setLevel(Level.DEBUG);
+  @RegisterExtension
+  public LogTesterJUnit5 logTester = new LogTesterJUnit5().setLevel(Level.DEBUG);
 
   @Before
   public void setPythonVersions() {
@@ -90,14 +92,14 @@ public class TypeShedTest {
     setPythonVersions(PythonVersionUtils.allVersions());
   }
 
-  @Test(expected = IllegalArgumentException.class)
+  @Test
   public void not_a_class() {
-    TypeShed.typeShedClass("repr");
+    assertThatThrownBy(() -> TypeShed.typeShedClass("repr")).isInstanceOf(IllegalArgumentException.class);
   }
 
-  @Test(expected = IllegalArgumentException.class)
+  @Test
   public void unknown_name() {
-    TypeShed.typeShedClass("xxx");
+    assertThatThrownBy(() -> TypeShed.typeShedClass("xxx")).isInstanceOf(IllegalArgumentException.class);
   }
 
   @Test

@@ -20,12 +20,12 @@
 package com.sonar.python.it.plugin;
 
 import com.sonar.orchestrator.build.SonarScanner;
-import com.sonar.orchestrator.junit4.OrchestratorRule;
+import com.sonar.orchestrator.junit5.OrchestratorExtension;
 import java.io.File;
 import java.util.List;
-import org.junit.BeforeClass;
-import org.junit.ClassRule;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.RegisterExtension;
 import org.sonarqube.ws.Issues;
 
 import static com.sonar.python.it.plugin.Tests.issues;
@@ -36,10 +36,10 @@ public class NoSonarTest {
   private static final String PROJECT_KEY = "nosonar";
   private static final String PROFILE_NAME = "nosonar";
 
-  @ClassRule
-  public static final OrchestratorRule ORCHESTRATOR = Tests.ORCHESTRATOR;
+  @RegisterExtension
+  public static final OrchestratorExtension ORCHESTRATOR = Tests.ORCHESTRATOR;
 
-  @BeforeClass
+  @BeforeAll
   public static void startServer() {
     ORCHESTRATOR.getServer().provisionProject(PROJECT_KEY, PROJECT_KEY);
     ORCHESTRATOR.getServer().associateProjectToQualityProfile(PROJECT_KEY, "py", PROFILE_NAME);

@@ -29,10 +29,11 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.RegisterExtension;
 import org.mockito.Mockito;
-import org.sonar.api.testfixtures.log.LogTester;
 import org.slf4j.event.Level;
+import org.sonar.api.testfixtures.log.LogTesterJUnit5;
 import org.sonar.plugins.python.api.caching.PythonReadCache;
 import org.sonar.plugins.python.api.caching.PythonWriteCache;
 import org.sonar.python.caching.CacheContextImpl;
@@ -54,8 +55,8 @@ import static org.sonar.python.index.DescriptorsToProtobuf.fromProtobuf;
 
 public class CachingTest {
 
-  @org.junit.Rule
-  public LogTester logTester = new LogTester().setLevel(Level.DEBUG);
+  @RegisterExtension
+  public LogTesterJUnit5 logTester = new LogTesterJUnit5().setLevel(Level.DEBUG);
 
   private final static String CACHE_VERSION = "dummyVersion";
 

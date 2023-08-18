@@ -19,7 +19,7 @@
  */
 package com.sonar.python.it.plugin;
 
-import com.sonar.orchestrator.junit4.OrchestratorRule;
+import com.sonar.orchestrator.junit5.OrchestratorExtension;
 import com.sonar.orchestrator.locator.FileLocation;
 import java.io.File;
 import java.util.ArrayList;
@@ -28,9 +28,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-import org.junit.ClassRule;
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
 import org.sonarqube.ws.Issues;
 import org.sonarqube.ws.Measures.ComponentWsResponse;
 import org.sonarqube.ws.Measures.Measure;
@@ -44,18 +41,7 @@ import static java.lang.Double.parseDouble;
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(Suite.class)
-@Suite.SuiteClasses({
-  BanditReportTest.class,
-  PylintReportTest.class,
-  Flake8ReportTest.class,
-  MetricsTest.class,
-  CPDTest.class,
-  CoverageTest.class,
-  TestReportTest.class,
-  NoSonarTest.class,
-  SonarLintTest.class
-})
+
 public final class Tests {
 
   private static final String SQ_VERSION_PROPERTY = "sonar.runtimeVersion";
@@ -63,8 +49,7 @@ public final class Tests {
 
   public static final FileLocation PLUGIN_LOCATION = FileLocation.byWildcardMavenFilename(new File("../../../sonar-python-plugin/target"), "sonar-python-plugin-*.jar");
 
-  @ClassRule
-  public static final OrchestratorRule ORCHESTRATOR = OrchestratorRule.builderEnv()
+  public static final OrchestratorExtension ORCHESTRATOR = OrchestratorExtension.builderEnv()
     .useDefaultAdminCredentialsForBuilds(true)
     .setSonarVersion(System.getProperty(SQ_VERSION_PROPERTY, DEFAULT_SQ_VERSION))
     .addPlugin(PLUGIN_LOCATION)

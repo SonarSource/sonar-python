@@ -19,8 +19,9 @@
  */
 package org.sonar.python.it;
 
+import com.sonar.orchestrator.Orchestrator;
 import com.sonar.orchestrator.container.Edition;
-import com.sonar.orchestrator.junit4.OrchestratorRule;
+import com.sonar.orchestrator.junit5.OrchestratorExtension;
 import com.sonar.orchestrator.locator.FileLocation;
 import com.sonar.orchestrator.locator.MavenLocation;
 import java.io.File;
@@ -41,8 +42,8 @@ public class RulingHelper {
   private static final String SQ_VERSION_PROPERTY = "sonar.runtimeVersion";
   private static final String DEFAULT_SQ_VERSION = "LATEST_RELEASE";
 
-  static OrchestratorRule getOrchestrator(Edition sonarEdition) {
-    var builder = OrchestratorRule.builderEnv()
+  static OrchestratorExtension getOrchestrator(Edition sonarEdition) {
+    var builder = OrchestratorExtension.builderEnv()
       .useDefaultAdminCredentialsForBuilds(true)
       .setSonarVersion(System.getProperty(SQ_VERSION_PROPERTY, DEFAULT_SQ_VERSION))
       .setEdition(sonarEdition)
@@ -56,7 +57,7 @@ public class RulingHelper {
     return builder.build();
   }
 
-  static OrchestratorRule getOrchestrator() {
+  static OrchestratorExtension getOrchestrator() {
     return getOrchestrator(Edition.COMMUNITY);
   }
 
@@ -80,7 +81,7 @@ public class RulingHelper {
       .toString();
   }
 
-  static void loadProfile(OrchestratorRule orchestrator, String profile) throws IOException {
+  static void loadProfile(Orchestrator orchestrator, String profile) throws IOException {
     File file = File.createTempFile("profile", ".xml");
     Files.write(file.toPath(), profile.getBytes());
     orchestrator.getServer().restoreProfile(FileLocation.of(file));
@@ -149,12 +150,12 @@ public class RulingHelper {
       "S930");
   }
 
-  static Measures.Measure getMeasure(OrchestratorRule orchestrator, String branch, String componentKey, String metricKey) {
+  static Measures.Measure getMeasure(Orchestrator orchestrator, String branch, String componentKey, String metricKey) {
     List<Measures.Measure> measures = getMeasures(orchestrator, branch, componentKey, singletonList(metricKey));
     return measures != null && measures.size() == 1 ? measures.get(0) : null;
   }
 
-  private static List<Measures.Measure> getMeasures(OrchestratorRule orchestrator, String prKey, String componentKey, List<String> metricKeys) {
+  private static List<Measures.Measure> getMeasures(Orchestrator orchestrator, String prKey, String componentKey, List<String> metricKeys) {
     Measures.ComponentWsResponse response = newWsClient(orchestrator).measures().component(new ComponentRequest()
       .setComponent(componentKey)
       .setPullRequest(prKey)
@@ -162,7 +163,7 @@ public class RulingHelper {
     return response.getComponent().getMeasuresList();
   }
 
-  static WsClient newWsClient(OrchestratorRule orchestrator) {
+  static WsClient newWsClient(Orchestrator orchestrator) {
     return WsClientFactories.getDefault().newClient(HttpConnector.newBuilder()
       .url(orchestrator.getServer().getUrl())
       .credentials(null, null)

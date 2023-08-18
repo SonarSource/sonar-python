@@ -19,8 +19,8 @@
  */
 package org.sonar.plugins.python.xunit;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
@@ -30,7 +30,7 @@ public class TestResultTest {
 
   TestResult testResult;
 
-  @Before
+  @BeforeEach
   public void setUp() {
     testResult = new TestResult();
   }

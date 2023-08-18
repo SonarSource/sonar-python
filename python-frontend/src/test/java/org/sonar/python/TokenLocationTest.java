@@ -22,7 +22,7 @@ package org.sonar.python;
 import com.sonar.sslr.impl.Lexer;
 import java.util.List;
 import java.util.stream.Collectors;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.python.lexer.LexerState;
 import org.sonar.python.lexer.PythonLexer;

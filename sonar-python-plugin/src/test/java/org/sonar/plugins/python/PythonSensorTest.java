@@ -36,8 +36,9 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Function;
 import javax.annotation.Nullable;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.RegisterExtension;
 import org.mockito.Mockito;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -72,7 +73,7 @@ import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.FileLinesContext;
 import org.sonar.api.measures.FileLinesContextFactory;
 import org.sonar.api.rule.RuleKey;
-import org.sonar.api.testfixtures.log.LogTester;
+import org.sonar.api.testfixtures.log.LogTesterJUnit5;
 import org.sonar.api.utils.Version;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
@@ -208,12 +209,12 @@ public class PythonSensorTest {
 
   private final AnalysisWarningsWrapper analysisWarning = mock(AnalysisWarningsWrapper.class);
 
-  @org.junit.Rule
-  public LogTester logTester = new LogTester().setLevel(Level.DEBUG);
-  @org.junit.Rule
-  public LogTester traceLogTester = new LogTester().setLevel(Level.TRACE);
+  @RegisterExtension
+  public LogTesterJUnit5 logTester = new LogTesterJUnit5().setLevel(Level.DEBUG);
+  @RegisterExtension
+  public LogTesterJUnit5 traceLogTester = new LogTesterJUnit5().setLevel(Level.TRACE);
 
-  @Before
+  @BeforeEach
   public void init() throws IOException {
     context = SensorContextTester.create(baseDir);
     workDir = Files.createTempDirectory("workDir");
@@ -266,7 +267,8 @@ public class PythonSensorTest {
 
     assertThat(context.allIssues()).hasSize(1);
 
-    Issue issue = context.allIssues().iterator().next();
+    Collection<Issue> issues = context.allIssues();
+    Issue issue = issues.iterator().next();
 
     var quickFixes = ((MockSonarLintIssue) issue).quickFixes();
 
@@ -463,7 +465,7 @@ public class PythonSensorTest {
       .build();
     sensor().execute(context);
 
-    assertThat(logTester.logs(Level.TRACE)).containsExactly("End of analysis called!");
+    assertThat(traceLogTester.logs(Level.TRACE)).containsExactly("End of analysis called!");
   }
 
   @Test

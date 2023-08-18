@@ -25,8 +25,8 @@ import java.io.File;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
-import org.junit.ClassRule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.RegisterExtension;
 import org.sonarqube.ws.Common;
 import org.sonarqube.ws.Issues;
 
@@ -37,11 +37,11 @@ public class RuffReportTest {
 
   private final String PROJECT = "ruff_project";
 
-  @ClassRule
+  @RegisterExtension
   public static final Orchestrator ORCHESTRATOR = Tests.ORCHESTRATOR;
 
   @Test
-  public void import_report() {
+  void import_report() {
     ORCHESTRATOR.getServer().provisionProject(PROJECT, PROJECT);
     ORCHESTRATOR.getServer().associateProjectToQualityProfile(PROJECT, "py", "no_rule");
     ORCHESTRATOR.executeBuild(

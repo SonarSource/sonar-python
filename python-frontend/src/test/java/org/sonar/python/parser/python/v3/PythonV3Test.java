@@ -19,7 +19,7 @@
  */
 package org.sonar.python.parser.python.v3;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.parser.RuleTest;
 

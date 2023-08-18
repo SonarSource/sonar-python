@@ -29,14 +29,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import javax.annotation.Nullable;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.RegisterExtension;
+import org.slf4j.event.Level;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
 import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
-import org.sonar.api.testfixtures.log.LogTester;
-import org.slf4j.event.Level;
+import org.sonar.api.testfixtures.log.LogTesterJUnit5;
 import org.sonar.plugins.python.Python;
 import org.sonar.plugins.python.TestUtils;
 import org.sonar.plugins.python.api.symbols.Symbol;
@@ -53,8 +54,8 @@ public class SonarLintPythonIndexerTest {
   private final File baseDir = new File("src/test/resources/org/sonar/plugins/python/indexer").getAbsoluteFile();
   private SensorContextTester context;
 
-  @org.junit.Rule
-  public LogTester logTester = new LogTester().setLevel(Level.DEBUG);
+  @RegisterExtension
+  public LogTesterJUnit5 logTester = new LogTesterJUnit5().setLevel(Level.DEBUG);
 
   InputFile file1;
   InputFile file2;
@@ -62,7 +63,7 @@ public class SonarLintPythonIndexerTest {
   SonarLintPythonIndexer pythonIndexer;
   ProjectLevelSymbolTable projectLevelSymbolTable;
 
-  @Before
+  @BeforeEach
   public void init() throws IOException {
     context = SensorContextTester.create(baseDir);
     Path workDir = Files.createTempDirectory("workDir");

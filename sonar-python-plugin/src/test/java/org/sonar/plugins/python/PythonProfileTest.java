@@ -20,7 +20,7 @@
 package org.sonar.plugins.python;
 
 import com.sonar.plugins.security.api.PythonRules;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.sonar.api.rule.RuleKey;
 import org.sonar.api.server.profile.BuiltInQualityProfilesDefinition;
 import org.sonar.api.server.profile.BuiltInQualityProfilesDefinition.BuiltInActiveRule;

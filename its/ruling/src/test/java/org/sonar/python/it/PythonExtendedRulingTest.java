@@ -19,17 +19,16 @@
  */
 package org.sonar.python.it;
 
-import com.sonar.orchestrator.Orchestrator;
 import com.sonar.orchestrator.build.SonarScanner;
-import com.sonar.orchestrator.junit4.OrchestratorRule;
+import com.sonar.orchestrator.junit5.OrchestratorExtension;
 import com.sonar.orchestrator.locator.FileLocation;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.List;
-import org.junit.BeforeClass;
-import org.junit.ClassRule;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.RegisterExtension;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -39,10 +38,11 @@ import static org.sonar.python.it.RulingHelper.getOrchestrator;
 // Ruling test for bug rules, to ensure they are properly tested without slowing down the CI
 public class PythonExtendedRulingTest {
 
-  @ClassRule
-  public static final OrchestratorRule ORCHESTRATOR = getOrchestrator();
 
-  @BeforeClass
+  @RegisterExtension
+  public static final OrchestratorExtension ORCHESTRATOR = getOrchestrator();
+
+  @BeforeAll
   public static void prepare_quality_profile() throws IOException {
     List<String> ruleKeys = bugRuleKeys();
     String pythonProfile = RulingHelper.profile("customProfile", "py", "python", ruleKeys);

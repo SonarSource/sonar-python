@@ -20,11 +20,11 @@
 package com.sonar.python.it.plugin;
 
 import com.sonar.orchestrator.build.SonarScanner;
-import com.sonar.orchestrator.junit4.OrchestratorRule;
+import com.sonar.orchestrator.junit5.OrchestratorExtension;
 import java.io.File;
 import java.util.List;
-import org.junit.ClassRule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.RegisterExtension;
 import org.sonarqube.ws.Common;
 import org.sonarqube.ws.Issues;
 
@@ -35,8 +35,8 @@ public class MypyReportTest {
 
   private static final String PROJECT = "mypy_project";
 
-  @ClassRule
-  public static final OrchestratorRule ORCHESTRATOR = Tests.ORCHESTRATOR;
+  @RegisterExtension
+  public static final OrchestratorExtension ORCHESTRATOR = Tests.ORCHESTRATOR;
 
   @Test
   public void import_report() {
