@@ -29,9 +29,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
 import org.sonarqube.ws.Measures.Measure;
 
-import static com.sonar.python.it.plugin.Tests.getMeasure;
-import static com.sonar.python.it.plugin.Tests.getMeasureAsDouble;
-import static com.sonar.python.it.plugin.Tests.getMeasureAsInt;
+import static com.sonar.python.it.plugin.TestsUtils.getMeasure;
+import static com.sonar.python.it.plugin.TestsUtils.getMeasureAsDouble;
+import static com.sonar.python.it.plugin.TestsUtils.getMeasureAsInt;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class MetricsTest {
@@ -65,7 +65,7 @@ class MetricsTest {
   private static final Offset<Double> OFFSET = Offset.offset(0.01d);
 
   @RegisterExtension
-  public static final OrchestratorExtension orchestrator = Tests.ORCHESTRATOR;
+  public static final OrchestratorExtension orchestrator = TestsUtils.ORCHESTRATOR;
 
   private static BuildResult buildResult;
 

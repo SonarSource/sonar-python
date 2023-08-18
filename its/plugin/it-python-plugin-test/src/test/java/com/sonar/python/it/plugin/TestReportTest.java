@@ -32,7 +32,7 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
 
-import static com.sonar.python.it.plugin.Tests.assertProjectMeasures;
+import static com.sonar.python.it.plugin.TestsUtils.assertProjectMeasures;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class TestReportTest {
@@ -45,7 +45,7 @@ class TestReportTest {
   public static final String TEST_EXECUTION_TIME = "test_execution_time";
 
   @RegisterExtension
-  public static final OrchestratorExtension ORCHESTRATOR = Tests.ORCHESTRATOR;
+  public static final OrchestratorExtension ORCHESTRATOR = TestsUtils.ORCHESTRATOR;
 
   private static SonarScanner createBuild(String projectKey, String testReportPath) {
     return SonarScanner.create()

@@ -30,7 +30,7 @@ import org.junit.jupiter.api.extension.RegisterExtension;
 import org.sonarqube.ws.Common;
 import org.sonarqube.ws.Issues;
 
-import static com.sonar.python.it.plugin.Tests.issues;
+import static com.sonar.python.it.plugin.TestsUtils.issues;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class RuffReportTest {
@@ -38,7 +38,7 @@ class RuffReportTest {
   private final String PROJECT = "ruff_project";
 
   @RegisterExtension
-  public static final Orchestrator ORCHESTRATOR = Tests.ORCHESTRATOR;
+  public static final Orchestrator ORCHESTRATOR = TestsUtils.ORCHESTRATOR;
 
   @Test
   void import_report() {

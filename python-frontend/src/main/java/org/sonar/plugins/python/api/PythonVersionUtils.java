@@ -20,7 +20,6 @@
 package org.sonar.plugins.python.api;
 
 import java.util.EnumSet;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import org.slf4j.Logger;
@@ -166,17 +165,17 @@ public class PythonVersionUtils {
   }
 
   private static void logErrorMessage(String propertyValue) {
-    String prefix = "Error while parsing value of parameter '%s' (%s). Versions must be specified as MAJOR_VERSION.MIN.VERSION (e.g. \"3.7, 3.8\")";
-    LOG.warn(String.format(Locale.ROOT, prefix, PYTHON_VERSION_KEY, propertyValue));
+    LOG.warn(
+      "Error while parsing value of parameter '{}' ({}). Versions must be specified as MAJOR_VERSION.MIN.VERSION (e.g. \"3.7, 3.8\")",
+      PYTHON_VERSION_KEY,
+      propertyValue);
   }
 
   private static void logWarningGuessVersion(String propertyValue, Version guessedVersion) {
-    String prefix = "No explicit support for version %s. Python version has been set to %s.";
-    LOG.warn(String.format(Locale.ROOT, prefix, propertyValue, guessedVersion));
+    LOG.warn("No explicit support for version {}. Python version has been set to {}.", propertyValue, guessedVersion);
   }
 
   private static void logWarningPython2(String propertyValue) {
-    String prefix = "No explicit support for version %s. Support for Python versions prior to 3 is deprecated.";
-    LOG.warn(String.format(Locale.ROOT, prefix, propertyValue));
+    LOG.warn("No explicit support for version {}. Support for Python versions prior to 3 is deprecated.", propertyValue);
   }
 }

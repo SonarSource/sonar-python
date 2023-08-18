@@ -45,7 +45,7 @@ class PythonAnalyzerRegexSourceTest {
 
   @Test
   // TODO: Extend test with exact syntax error location check
-  public void invalidRegex() {
+  void invalidRegex() {
     RegexSource source = makeSource("r'+'");
     RegexParseResult result = new RegexParser(source, new FlagSet()).parse();
 

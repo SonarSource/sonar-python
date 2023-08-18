@@ -36,7 +36,7 @@ class CoverageTest {
 
   private static final String COVERAGE_PROJECT = "projects/coverage_project";
   @RegisterExtension
-  public static final OrchestratorExtension ORCHESTRATOR = Tests.ORCHESTRATOR;
+  public static final OrchestratorExtension ORCHESTRATOR = TestsUtils.ORCHESTRATOR;
 
   private static final String PROJECT_KEY = "coverage_project";
   private static final String LINES_TO_COVER = "lines_to_cover";
@@ -72,7 +72,7 @@ class CoverageTest {
         .put(BRANCH_COVERAGE, 100)
         .build();
 
-    Tests.assertProjectMeasures(PROJECT_KEY, values);
+    TestsUtils.assertProjectMeasures(PROJECT_KEY, values);
     assertThat(result.getLogs()).contains("Property 'sonar.python.coverage.reportPath' has been removed. Please use 'sonar.python.coverage.reportPaths' instead.");
   }
 
@@ -88,7 +88,7 @@ class CoverageTest {
       .put(LINE_COVERAGE, 28)
       .put(BRANCH_COVERAGE, 0)
       .build();
-    Tests.assertProjectMeasures(PROJECT_KEY, values);
+    TestsUtils.assertProjectMeasures(PROJECT_KEY, values);
   }
 
   @Test
@@ -104,7 +104,7 @@ class CoverageTest {
     expected.put(COVERAGE, 0);
     expected.put(LINE_COVERAGE, 0);
     expected.put(BRANCH_COVERAGE, null);
-    Tests.assertProjectMeasures(PROJECT_KEY, expected);
+    TestsUtils.assertProjectMeasures(PROJECT_KEY, expected);
   }
 
   @Test
@@ -122,7 +122,7 @@ class CoverageTest {
       }
     }
     assertThat(nbLog).isEqualTo(1);
-    assertThat(Tests.getMeasureAsDouble(PROJECT_KEY, COVERAGE)).isZero();
+    assertThat(TestsUtils.getMeasureAsDouble(PROJECT_KEY, COVERAGE)).isZero();
   }
 
 }

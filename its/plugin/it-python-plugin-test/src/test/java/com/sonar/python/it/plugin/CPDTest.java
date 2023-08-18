@@ -27,7 +27,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
 
-import static com.sonar.python.it.plugin.Tests.getMeasureAsDouble;
+import static com.sonar.python.it.plugin.TestsUtils.getMeasureAsDouble;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class CPDTest {
@@ -44,7 +44,7 @@ class CPDTest {
   private static final String DUPLICATED_LINES_DENSITY = "duplicated_lines_density";
 
   @RegisterExtension
-  public static final OrchestratorExtension ORCHESTRATOR = Tests.ORCHESTRATOR;
+  public static final OrchestratorExtension ORCHESTRATOR = TestsUtils.ORCHESTRATOR;
 
   @BeforeAll
   static void startServer() {

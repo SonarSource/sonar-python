@@ -40,7 +40,8 @@ public abstract class Scanner {
 
   public void execute(List<InputFile> files, SensorContext context) {
     ProgressReport progressReport = new ProgressReport(this.name() + " progress", TimeUnit.SECONDS.toMillis(10));
-    LOG.info("Starting " + this.name());
+    String name = this.name();
+    LOG.info("Starting {}", name);
     List<String> filenames = files.stream().map(InputFile::toString).collect(Collectors.toList());
 
     int numScannedWithoutParsing = 0;

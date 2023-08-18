@@ -28,7 +28,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
 import org.sonarqube.ws.Issues;
 
-import static com.sonar.python.it.plugin.Tests.issues;
+import static com.sonar.python.it.plugin.TestsUtils.issues;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class NoSonarTest {
@@ -37,7 +37,7 @@ class NoSonarTest {
   private static final String PROFILE_NAME = "nosonar";
 
   @RegisterExtension
-  public static final OrchestratorExtension ORCHESTRATOR = Tests.ORCHESTRATOR;
+  public static final OrchestratorExtension ORCHESTRATOR = TestsUtils.ORCHESTRATOR;
 
   @BeforeAll
   static void startServer() {

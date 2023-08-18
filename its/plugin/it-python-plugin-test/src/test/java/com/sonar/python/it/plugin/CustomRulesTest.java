@@ -29,14 +29,14 @@ import org.junit.jupiter.api.extension.RegisterExtension;
 import org.sonarqube.ws.Issues;
 import org.sonarqube.ws.client.issues.SearchRequest;
 
-import static com.sonar.python.it.plugin.Tests.newWsClient;
+import static com.sonar.python.it.plugin.TestsUtils.newWsClient;
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class CustomRulesTest {
 
   @RegisterExtension
-  public static final OrchestratorExtension orchestrator = Tests.ORCHESTRATOR;
+  public static final OrchestratorExtension orchestrator = TestsUtils.ORCHESTRATOR;
 
   private static final String PROJECT_KEY = "custom-rules";
   private static final String PROJECT_NAME = "Custom Rules";
