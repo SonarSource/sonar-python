@@ -41,7 +41,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class SubscriptionVisitorTest {
 
   @Test
-  public void test_regex_cache() {
+  void test_regex_cache() {
     PythonSubscriptionCheck check = new PythonSubscriptionCheck() {
       @Override
       public void initialize(Context context) {
@@ -65,7 +65,7 @@ public class SubscriptionVisitorTest {
   }
 
   @Test
-  public void exposed_visitor_data() {
+  void exposed_visitor_data() {
     FileInput fileInput = PythonTestUtils.parse("def foo(): ...");
     var cache = Mockito.mock(CacheContext.class);
 

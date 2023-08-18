@@ -26,19 +26,19 @@ import org.sonar.python.checks.utils.PythonCheckVerifier;
 public class IncorrectExceptionTypeCheckTest {
 
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/incorrectExceptionType/incorrectExceptionType.py", new IncorrectExceptionTypeCheck());
   }
 
   @Test
-  public void test_wildcard_import() {
+  void test_wildcard_import() {
     PythonCheckVerifier.verify(
       Arrays.asList("src/test/resources/checks/incorrectExceptionType/incorrectExceptionTypeWithWildcardImport.py","src/test/resources/checks/incorrectExceptionType/incorrectExceptionTypeImported.py" ),
       new IncorrectExceptionTypeCheck());
   }
 
   @Test
-  public void test_regular_import() {
+  void test_regular_import() {
     PythonCheckVerifier.verify(
       Arrays.asList("src/test/resources/checks/incorrectExceptionType/incorrectExceptionTypeWithRegularImport.py","src/test/resources/checks/incorrectExceptionType/incorrectExceptionTypeImported2.py",
         "src/test/resources/checks/incorrectExceptionType/incorrectExceptionTypeImported3.py", "src/test/resources/checks/incorrectExceptionType/incorrectExceptionTypeImported4.py"),

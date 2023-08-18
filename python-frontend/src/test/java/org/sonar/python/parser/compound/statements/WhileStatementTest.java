@@ -29,12 +29,12 @@ import static org.sonar.python.parser.PythonParserAssert.assertThat;
 public class WhileStatementTest extends RuleTest {
 
   @BeforeEach
-  public void init() {
+  void init() {
     setRootRule(PythonGrammar.WHILE_STMT);
   }
 
   @Test
-  public void ok() {
+  void ok() {
     assertThat(p).matches("while TEST : pass")
       .matches("while TEST : pass\nelse : pass");
   }

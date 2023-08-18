@@ -40,7 +40,7 @@ public class DocstringExtractorTest {
   private Map<Tree, StringLiteral> docstrings = new HashMap<>();
 
   @Test
-  public void test() {
+  void test() {
     File file = new File(BASE_DIR, "docstring.py");
     TestPythonVisitorRunner.scanFile(file, new DocstringVisitor());
 

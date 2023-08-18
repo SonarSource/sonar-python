@@ -30,12 +30,12 @@ import static org.sonar.python.parser.PythonParserAssert.assertThat;
 public class SuiteTest extends RuleTest {
 
   @BeforeEach
-  public void init() {
+  void init() {
     setRootRule(PythonGrammar.SUITE);
   }
 
   @Test
-  public void realLife() {
+  void realLife() {
     assertThat(p).matches(PythonTestUtils.appendNewLine("pass"))
      .matches(PythonTestUtils.appendNewLine("x = 1"))
      .matches(PythonTestUtils.appendNewLine("print(x)"));

@@ -25,7 +25,7 @@ import org.sonar.python.checks.utils.PythonCheckVerifier;
 public class GroupReplacementCheckTest {
 
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/regex/groupReplacementCheck.py", new GroupReplacementCheck());
   }
 

@@ -33,7 +33,7 @@ public class IPynbProfileTest {
   }
 
   @Test
-  public void profile() {
+  void profile() {
     BuiltInQualityProfilesDefinition.BuiltInQualityProfile profile = getProfile();
     assertThat(profile.rules()).extracting("repoKey").containsOnly("ipython");
     assertThat(profile.rules()).hasSizeGreaterThan(25);

@@ -26,15 +26,15 @@ import org.sonar.python.parser.RuleTest;
 
 import static org.sonar.python.parser.PythonParserAssert.assertThat;
 
-public class NonlocalStatementTest extends RuleTest {
+class NonlocalStatementTest extends RuleTest {
 
   @BeforeEach
-  public void init() {
+  void init() {
     setRootRule(PythonGrammar.NONLOCAL_STMT);
   }
 
   @Test
-  public void ok() {
+  void ok() {
     assertThat(p).matches("nonlocal IDENTIFIER");
     assertThat(p).matches("nonlocal IDENTIFIER , IDENTIFIER");
   }

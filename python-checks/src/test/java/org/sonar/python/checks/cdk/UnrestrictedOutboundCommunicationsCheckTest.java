@@ -28,7 +28,7 @@ public class UnrestrictedOutboundCommunicationsCheckTest {
   final PythonCheck check = new UnrestrictedOutboundCommunicationsCheck();
 
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/cdk/unrestrictedOutboundCommunicationsCheck.py", check);
   }
 }

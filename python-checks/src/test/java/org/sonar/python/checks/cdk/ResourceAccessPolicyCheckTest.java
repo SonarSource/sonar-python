@@ -28,22 +28,22 @@ public class ResourceAccessPolicyCheckTest {
   ResourceAccessPolicyCheck check = new ResourceAccessPolicyCheck();
 
   @Test
-  public void policyStatement() {
+  void policyStatement() {
     PythonCheckVerifier.verify("src/test/resources/checks/cdk/resourceAccessPolicy/policyStatement.py", check);
   }
 
   @Test
-  public void fromJson() {
+  void fromJson() {
     PythonCheckVerifier.verify("src/test/resources/checks/cdk/resourceAccessPolicy/fromJson.py", check);
   }
 
   @Test
-  public void policyDocument() {
+  void policyDocument() {
     PythonCheckVerifier.verify("src/test/resources/checks/cdk/resourceAccessPolicy/policyDocument.py", check);
   }
 
   @Test
-  public void resourceFileNotFound() {
+  void resourceFileNotFound() {
     check.resourceNameSensitiveAwsActions = "random";
     PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/cdk/resourceAccessPolicy/issueNotDetected.py", check);
   }

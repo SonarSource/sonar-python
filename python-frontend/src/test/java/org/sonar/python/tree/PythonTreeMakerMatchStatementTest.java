@@ -59,7 +59,7 @@ public class PythonTreeMakerMatchStatementTest extends RuleTest {
   private final PythonTreeMaker treeMaker = new PythonTreeMaker();
 
   @Test
-  public void match_statement() {
+  void match_statement() {
     setRootRule(PythonGrammar.MATCH_STMT);
     MatchStatement matchStatement = parse("match command:\n  case 42:...\n", treeMaker::matchStatement);
     assertThat(matchStatement.getKind()).isEqualTo(Kind.MATCH_STMT);
@@ -86,7 +86,7 @@ public class PythonTreeMakerMatchStatementTest extends RuleTest {
   }
 
   @Test
-  public void match_statement_tuple_subject() {
+  void match_statement_tuple_subject() {
     setRootRule(PythonGrammar.MATCH_STMT);
     MatchStatement matchStatement = parse("match (x, y):\n  case 42:...\n", treeMaker::matchStatement);
     Expression subjectExpression = matchStatement.subjectExpression();
@@ -109,7 +109,7 @@ public class PythonTreeMakerMatchStatementTest extends RuleTest {
   }
 
   @Test
-  public void match_statement_list_subject() {
+  void match_statement_list_subject() {
     setRootRule(PythonGrammar.MATCH_STMT);
     MatchStatement matchStatement = parse("match [x, y]:\n  case 42:...\n", treeMaker::matchStatement);
     Expression subjectExpression = matchStatement.subjectExpression();
@@ -118,7 +118,7 @@ public class PythonTreeMakerMatchStatementTest extends RuleTest {
   }
 
   @Test
-  public void case_block_with_guard() {
+  void case_block_with_guard() {
     setRootRule(PythonGrammar.CASE_BLOCK);
     CaseBlock caseBlock = parse("case 42 if x is None: ...", treeMaker::caseBlock);
     Guard guard = caseBlock.guard();
@@ -130,7 +130,7 @@ public class PythonTreeMakerMatchStatementTest extends RuleTest {
   }
 
   @Test
-  public void literal_patterns() {
+  void literal_patterns() {
     assertLiteralPattern(pattern("case \"foo\": ..."), Kind.STRING_LITERAL_PATTERN, "\"foo\"");
     assertLiteralPattern(pattern("case \"foo\" \"bar\": ..."), Kind.STRING_LITERAL_PATTERN, "\"foo\"\"bar\"");
     assertLiteralPattern(pattern("case -42: ..."), Kind.NUMERIC_LITERAL_PATTERN, "-42");
@@ -141,7 +141,7 @@ public class PythonTreeMakerMatchStatementTest extends RuleTest {
   }
 
   @Test
-  public void or_pattern() {
+  void or_pattern() {
     OrPattern pattern = pattern("case 42 | None | True: ...");
     assertThat(pattern.patterns()).extracting(p -> ((LiteralPattern) p).valueAsString()).containsExactly("42", "None", "True");
     assertThat(pattern.separators()).extracting(Token::value).containsExactly("|", "|");
@@ -151,7 +151,7 @@ public class PythonTreeMakerMatchStatementTest extends RuleTest {
   }
 
   @Test
-  public void as_pattern() {
+  void as_pattern() {
     AsPattern asPattern = pattern("case \"foo\" as x: ...");
     assertThat(asPattern.pattern()).isInstanceOf(LiteralPattern.class);
     assertThat(asPattern.asKeyword().value()).isEqualTo("as");
@@ -163,7 +163,7 @@ public class PythonTreeMakerMatchStatementTest extends RuleTest {
   }
 
   @Test
-  public void mapping_pattern() {
+  void mapping_pattern() {
     MappingPattern mappingPattern = pattern("case {'x': 'foo', 'y': 'bar'}: ...");
     List<Pattern> keyValuePatternList = mappingPattern.elements();
     assertThat(keyValuePatternList).hasSize(2);
@@ -216,7 +216,7 @@ public class PythonTreeMakerMatchStatementTest extends RuleTest {
   }
 
   @Test
-  public void capture_pattern() {
+  void capture_pattern() {
     setRootRule(PythonGrammar.CASE_BLOCK);
     CaseBlock caseBlock = parse("case x: ...", treeMaker::caseBlock);
     CapturePattern capturePattern = (CapturePattern) caseBlock.pattern();
@@ -225,7 +225,7 @@ public class PythonTreeMakerMatchStatementTest extends RuleTest {
   }
 
   @Test
-  public void value_pattern() {
+  void value_pattern() {
     ValuePattern valuePattern = pattern("case a.b: ...");
     QualifiedExpression qualifiedExpression = valuePattern.qualifiedExpression();
     assertThat(((Name) qualifiedExpression.qualifier()).isVariable()).isTrue();
@@ -240,7 +240,7 @@ public class PythonTreeMakerMatchStatementTest extends RuleTest {
   }
 
   @Test
-  public void sequence_pattern() {
+  void sequence_pattern() {
     assertSequenceElements(pattern("case [x, y]: ..."), "x", "y");
     assertSequenceElements(pattern("case (x, y): ..."), "x", "y");
     assertSequenceElements(pattern("case [x]: ..."), "x");
@@ -253,7 +253,7 @@ public class PythonTreeMakerMatchStatementTest extends RuleTest {
   }
 
   @Test
-  public void sequence_pattern_delimiters() {
+  void sequence_pattern_delimiters() {
     SequencePattern pattern = pattern("case [x, y]: ...");
     assertThat(pattern.lDelimiter().value()).isEqualTo("[");
     assertThat(pattern.rDelimiter().value()).isEqualTo("]");
@@ -269,7 +269,7 @@ public class PythonTreeMakerMatchStatementTest extends RuleTest {
   }
 
   @Test
-  public void group_pattern() {
+  void group_pattern() {
     GroupPattern groupPattern = pattern("case (x): ...");
     assertThat(groupPattern.leftPar().value()).isEqualTo("(");
     assertThat(((CapturePattern) groupPattern.pattern()).name().name()).isEqualTo("x");
@@ -277,13 +277,13 @@ public class PythonTreeMakerMatchStatementTest extends RuleTest {
   }
 
   @Test
-  public void wildcard_pattern() {
+  void wildcard_pattern() {
     WildcardPattern wildcardPattern = pattern("case _: ...");
     assertThat(wildcardPattern.wildcard().value()).isEqualTo("_");
   }
 
   @Test
-  public void sequence_pattern_with_star_pattern() {
+  void sequence_pattern_with_star_pattern() {
     SequencePattern sequencePattern = pattern("case [head, *tail]: ...");
     assertSequenceElements(sequencePattern, Kind.CAPTURE_PATTERN, Kind.STAR_PATTERN);
 
@@ -297,13 +297,13 @@ public class PythonTreeMakerMatchStatementTest extends RuleTest {
   }
 
   @Test
-  public void sequence_pattern_without_parens() {
+  void sequence_pattern_without_parens() {
     assertSequenceElements(pattern("case x, y: ..."), "x", "y");
     assertSequenceElements(pattern("case x,: ..."), "x");
   }
 
   @Test
-  public void class_pattern() {
+  void class_pattern() {
     ClassPattern classPattern = pattern("case A(x, y, z,): ...");
     Name className = (Name) classPattern.targetClass();
     assertThat(className.name()).isEqualTo("A");
@@ -333,7 +333,7 @@ public class PythonTreeMakerMatchStatementTest extends RuleTest {
   }
 
   @Test
-  public void class_pattern_positional_after_keyword() {
+  void class_pattern_positional_after_keyword() {
     try {
       pattern("case A(foo=42, x, y): ...");
       fail("Position patterns cannot follow keyword patterns");

@@ -45,7 +45,7 @@ public class PythonCpdAnalyzerTest {
   private PythonCpdAnalyzer cpdAnalyzer = new PythonCpdAnalyzer(context);
 
   @Test
-  public void code_chunks_2() {
+  void code_chunks_2() {
     DefaultInputFile inputFile = inputFile("code_chunks_2.py");
     PythonVisitorContext visitorContext = TestPythonVisitorRunner.createContext(inputFile.path().toFile());
     cpdAnalyzer.pushCpdTokens(inputFile, visitorContext);
@@ -94,7 +94,7 @@ public class PythonCpdAnalyzerTest {
   }
 
   @Test
-  public void dedent_with_cpd() {
+  void dedent_with_cpd() {
     DefaultInputFile inputFile = inputFile("cpd_dedent.py");
     PythonVisitorContext visitorContext = TestPythonVisitorRunner.createContext(inputFile.path().toFile());
     cpdAnalyzer.pushCpdTokens(inputFile, visitorContext);

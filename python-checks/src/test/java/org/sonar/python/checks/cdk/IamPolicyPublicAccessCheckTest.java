@@ -24,7 +24,7 @@ import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 public class IamPolicyPublicAccessCheckTest {
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/cdk/iamPolicyPublicAccessCheck.py", new IamPolicyPublicAccessCheck());
   }
 }

@@ -25,17 +25,17 @@ import org.sonar.python.checks.utils.PythonCheckVerifier;
 public class ItemOperationsTypeCheckTest {
 
   @Test
-  public void test_delitem() {
+  void test_delitem() {
     PythonCheckVerifier.verify("src/test/resources/checks/itemOperationsTypeCheck/itemOperations_delitem.py", new ItemOperationsTypeCheck());
   }
 
   @Test
-  public void test_getitem() {
+  void test_getitem() {
     PythonCheckVerifier.verify("src/test/resources/checks/itemOperationsTypeCheck/itemOperations_getitem.py", new ItemOperationsTypeCheck());
   }
 
   @Test
-  public void test_setitem() {
+  void test_setitem() {
     PythonCheckVerifier.verify("src/test/resources/checks/itemOperationsTypeCheck/itemOperations_setitem.py", new ItemOperationsTypeCheck());
   }
 

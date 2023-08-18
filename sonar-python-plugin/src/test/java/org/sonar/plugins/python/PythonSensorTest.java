@@ -215,14 +215,14 @@ public class PythonSensorTest {
   public LogTesterJUnit5 traceLogTester = new LogTesterJUnit5().setLevel(Level.TRACE);
 
   @BeforeEach
-  public void init() throws IOException {
+  void init() throws IOException {
     context = SensorContextTester.create(baseDir);
     workDir = Files.createTempDirectory("workDir");
     context.fileSystem().setWorkDir(workDir);
   }
 
   @Test
-  public void sensor_descriptor() {
+  void sensor_descriptor() {
     activeRules = new ActiveRulesBuilder().build();
     DefaultSensorDescriptor descriptor = new DefaultSensorDescriptor();
     sensor().describe(descriptor);
@@ -233,7 +233,7 @@ public class PythonSensorTest {
   }
 
   @Test
-  public void test_execute_on_sonarlint() {
+  void test_execute_on_sonarlint() {
     context.setRuntime(SONARLINT_RUNTIME);
 
     activeRules = new ActiveRulesBuilder()
@@ -257,7 +257,7 @@ public class PythonSensorTest {
   }
 
   @Test
-  public void test_execute_on_sonarlint_quickfix() throws IOException {
+  void test_execute_on_sonarlint_quickfix() throws IOException {
     context.setRuntime(SONARLINT_RUNTIME);
     context = Mockito.spy(context);
     when(context.newIssue()).thenReturn(new MockSonarLintIssue(context));
@@ -290,7 +290,7 @@ public class PythonSensorTest {
   }
 
   @Test
-  public void test_execute_on_sonarlint_quickfix_broken() throws IOException {
+  void test_execute_on_sonarlint_quickfix_broken() throws IOException {
     context.setRuntime(SONARLINT_RUNTIME);
     context = Mockito.spy(context);
     when(context.newIssue()).thenReturn(new MockSonarLintIssue(context) {
@@ -314,7 +314,7 @@ public class PythonSensorTest {
   }
 
   @Test
-  public void test_symbol_visitor() {
+  void test_symbol_visitor() {
     activeRules = new ActiveRulesBuilder().build();
     inputFile(FILE_2);
     inputFile("symbolVisitor.py");
@@ -336,7 +336,7 @@ public class PythonSensorTest {
   }
 
   @Test
-  public void test_issues() {
+  void test_issues() {
     activeRules = new ActiveRulesBuilder()
       .addRule(new NewActiveRule.Builder()
         .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, ONE_STATEMENT_PER_LINE_RULE_KEY))
@@ -399,7 +399,7 @@ public class PythonSensorTest {
   }
 
   @Test
-  public void cross_files_secondary_locations() {
+  void cross_files_secondary_locations() {
     activeRules = new ActiveRulesBuilder()
       .addRule(new NewActiveRule.Builder()
         .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, "S930"))
@@ -420,7 +420,7 @@ public class PythonSensorTest {
   }
 
   @Test
-  public void no_cross_file_issues_only_one_file() {
+  void no_cross_file_issues_only_one_file() {
     activeRules = new ActiveRulesBuilder()
       .addRule(new NewActiveRule.Builder()
         .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, "S930"))
@@ -433,7 +433,7 @@ public class PythonSensorTest {
   }
 
   @Test
-  public void cross_files_issues_only_one_file_analyzed() {
+  void cross_files_issues_only_one_file_analyzed() {
     activeRules = new ActiveRulesBuilder()
       .addRule(new NewActiveRule.Builder()
         .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, "S930"))
@@ -456,7 +456,7 @@ public class PythonSensorTest {
   }
 
   @Test
-  public void end_of_analysis_called() {
+  void end_of_analysis_called() {
     inputFile(FILE_2);
     activeRules = new ActiveRulesBuilder()
       .addRule(new NewActiveRule.Builder()
@@ -469,7 +469,7 @@ public class PythonSensorTest {
   }
 
   @Test
-  public void no_indexer_when_project_too_large_sonarlint() {
+  void no_indexer_when_project_too_large_sonarlint() {
     activeRules = new ActiveRulesBuilder()
       .addRule(new NewActiveRule.Builder()
         .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, "S930"))
@@ -486,7 +486,7 @@ public class PythonSensorTest {
   }
 
   @Test
-  public void loop_in_class_hierarchy() {
+  void loop_in_class_hierarchy() {
     activeRules = new ActiveRulesBuilder()
       .addRule(new NewActiveRule.Builder()
         .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, "S2710"))
@@ -503,7 +503,7 @@ public class PythonSensorTest {
 
 
   @Test
-  public void test_issues_on_test_files() {
+  void test_issues_on_test_files() {
     activeRules = new ActiveRulesBuilder()
       .addRule(new NewActiveRule.Builder()
         .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, "S5905"))
@@ -523,7 +523,7 @@ public class PythonSensorTest {
   }
 
   @Test
-  public void test_test_file_highlighting() throws IOException {
+  void test_test_file_highlighting() throws IOException {
     activeRules = new ActiveRulesBuilder().build();
 
     DefaultInputFile inputFile1 = spy(TestInputFileBuilder.create("moduleKey", FILE_1)
@@ -558,7 +558,7 @@ public class PythonSensorTest {
   }
 
   @Test
-  public void test_exception_does_not_fail_analysis() throws IOException {
+  void test_exception_does_not_fail_analysis() throws IOException {
     activeRules = new ActiveRulesBuilder()
       .addRule(new NewActiveRule.Builder()
         .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, ONE_STATEMENT_PER_LINE_RULE_KEY))
@@ -588,7 +588,7 @@ public class PythonSensorTest {
   }
 
   @Test
-  public void test_exception_should_fail_analysis_if_configured_so() throws IOException {
+  void test_exception_should_fail_analysis_if_configured_so() throws IOException {
     DefaultInputFile inputFile = spy(createInputFile(FILE_1));
     when(inputFile.contents()).thenThrow(FileNotFoundException.class);
     context.fileSystem().add(inputFile);
@@ -603,7 +603,7 @@ public class PythonSensorTest {
   }
 
   @Test
-  public void test_python_version_parameter_warning() {
+  void test_python_version_parameter_warning() {
     context.fileSystem().add(inputFile(FILE_1));
 
     activeRules = new ActiveRulesBuilder().build();
@@ -614,7 +614,7 @@ public class PythonSensorTest {
   }
 
   @Test
-  public void test_python_version_parameter_no_warning() {
+  void test_python_version_parameter_no_warning() {
     context.fileSystem().add(inputFile(FILE_1));
 
     activeRules = new ActiveRulesBuilder().build();
@@ -627,7 +627,7 @@ public class PythonSensorTest {
   }
 
   @Test
-  public void parse_error() {
+  void parse_error() {
     inputFile("parse_error.py");
     activeRules = new ActiveRulesBuilder()
       .addRule(new NewActiveRule.Builder()
@@ -649,7 +649,7 @@ public class PythonSensorTest {
   }
 
   @Test
-  public void cancelled_analysis() {
+  void cancelled_analysis() {
     InputFile inputFile = inputFile(FILE_1);
     activeRules = (new ActiveRulesBuilder()).build();
     context.setCancelled(true);
@@ -659,7 +659,7 @@ public class PythonSensorTest {
   }
 
   @Test
-  public void saving_performance_measure_not_activated_by_default() throws IOException {
+  void saving_performance_measure_not_activated_by_default() throws IOException {
     activeRules = (new ActiveRulesBuilder()).build();
 
     inputFile("main.py");
@@ -671,7 +671,7 @@ public class PythonSensorTest {
   }
 
   @Test
-  public void saving_performance_measure() throws IOException {
+  void saving_performance_measure() throws IOException {
     context.setSettings(new MapSettings().setProperty("sonar.python.performance.measure", "true"));
     activeRules = (new ActiveRulesBuilder()).build();
 
@@ -684,7 +684,7 @@ public class PythonSensorTest {
   }
 
   @Test
-  public void saving_performance_measure_custom_path() throws IOException {
+  void saving_performance_measure_custom_path() throws IOException {
     Path customPerformanceFile = workDir.resolve("custom.performance.measure.json");
     MapSettings mapSettings = new MapSettings();
     mapSettings.setProperty("sonar.python.performance.measure", "true");
@@ -702,7 +702,7 @@ public class PythonSensorTest {
   }
 
   @Test
-  public void saving_performance_measure_empty_path() throws IOException {
+  void saving_performance_measure_empty_path() throws IOException {
     MapSettings mapSettings = new MapSettings();
     mapSettings.setProperty("sonar.python.performance.measure", "true");
     mapSettings.setProperty("sonar.python.performance.measure.path", "");
@@ -719,7 +719,7 @@ public class PythonSensorTest {
 
 
   @Test
-  public void test_using_cache() throws IOException, NoSuchAlgorithmException {
+  void test_using_cache() throws IOException, NoSuchAlgorithmException {
     activeRules = new ActiveRulesBuilder()
       .addRule(new NewActiveRule.Builder()
         .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, ONE_STATEMENT_PER_LINE_RULE_KEY))
@@ -757,7 +757,7 @@ public class PythonSensorTest {
   }
 
   @Test
-  public void test_scan_without_parsing_test_file() throws IOException, NoSuchAlgorithmException {
+  void test_scan_without_parsing_test_file() throws IOException, NoSuchAlgorithmException {
     activeRules = new ActiveRulesBuilder()
       .addRule(new NewActiveRule.Builder()
         .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, "S5905"))
@@ -783,7 +783,7 @@ public class PythonSensorTest {
   }
 
   @Test
-  public void test_scan_without_parsing_fails_does_not_reexecute_successful_checks() throws IOException, NoSuchAlgorithmException {
+  void test_scan_without_parsing_fails_does_not_reexecute_successful_checks() throws IOException, NoSuchAlgorithmException {
     activeRules = new ActiveRulesBuilder()
       .addRule(new NewActiveRule.Builder()
         .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, ONE_STATEMENT_PER_LINE_RULE_KEY))
@@ -814,7 +814,7 @@ public class PythonSensorTest {
   }
 
   @Test
-  public void test_partial_scan_without_parsing() throws IOException, NoSuchAlgorithmException {
+  void test_partial_scan_without_parsing() throws IOException, NoSuchAlgorithmException {
     activeRules = new ActiveRulesBuilder()
       .addRule(new NewActiveRule.Builder()
         .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, ONE_STATEMENT_PER_LINE_RULE_KEY))
@@ -846,7 +846,7 @@ public class PythonSensorTest {
   }
 
   @Test
-  public void cache_not_enabled_for_older_api_version() {
+  void cache_not_enabled_for_older_api_version() {
     SensorContextTester contextMock = spy(context);
     SonarRuntime runtime = mock(SonarRuntime.class);
     when(contextMock.runtime()).thenReturn(runtime);
@@ -874,7 +874,7 @@ public class PythonSensorTest {
   }
 
   @Test
-  public void write_cpd_tokens_to_cache() throws IOException, ClassNotFoundException {
+  void write_cpd_tokens_to_cache() throws IOException, ClassNotFoundException {
     activeRules = new ActiveRulesBuilder()
       .addRule(new NewActiveRule.Builder()
         .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, "S5905"))
@@ -909,7 +909,7 @@ public class PythonSensorTest {
   }
 
   @Test
-  public void write_cpd_tokens_to_cache_failure() {
+  void write_cpd_tokens_to_cache_failure() {
     activeRules = new ActiveRulesBuilder()
       .addRule(new NewActiveRule.Builder()
         .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, "S5905"))
@@ -934,7 +934,7 @@ public class PythonSensorTest {
   }
 
   @Test
-  public void write_cpd_tokens_multiple_files() throws IOException, ClassNotFoundException {
+  void write_cpd_tokens_multiple_files() throws IOException, ClassNotFoundException {
     activeRules = new ActiveRulesBuilder()
       .addRule(new NewActiveRule.Builder()
         .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, "S5905"))
@@ -967,7 +967,7 @@ public class PythonSensorTest {
   }
 
   @Test
-  public void read_cpd_tokens_from_cache() throws IOException, NoSuchAlgorithmException {
+  void read_cpd_tokens_from_cache() throws IOException, NoSuchAlgorithmException {
     activeRules = new ActiveRulesBuilder()
       .addRule(new NewActiveRule.Builder()
         .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, "S5905"))
@@ -1012,7 +1012,7 @@ public class PythonSensorTest {
   }
 
   @Test
-  public void read_cpd_tokens_from_cache_not_in_cache() throws IOException {
+  void read_cpd_tokens_from_cache_not_in_cache() throws IOException {
     activeRules = new ActiveRulesBuilder()
       .addRule(new NewActiveRule.Builder()
         .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, "S5905"))
@@ -1054,7 +1054,7 @@ public class PythonSensorTest {
   }
 
   @Test
-  public void read_cpd_tokens_from_cache_corrupted_format() throws IOException, NoSuchAlgorithmException {
+  void read_cpd_tokens_from_cache_corrupted_format() throws IOException, NoSuchAlgorithmException {
     activeRules = new ActiveRulesBuilder()
       .addRule(new NewActiveRule.Builder()
         .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, "S5905"))
@@ -1106,7 +1106,7 @@ public class PythonSensorTest {
   }
 
   @Test
-  public void read_cpd_tokens_cache_disabled() {
+  void read_cpd_tokens_cache_disabled() {
     activeRules = new ActiveRulesBuilder()
       .addRule(new NewActiveRule.Builder()
         .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, "S5905"))
@@ -1133,7 +1133,7 @@ public class PythonSensorTest {
   }
 
   @Test
-  public void cpd_tokens_failure_does_not_execute_checks_multiple_times() throws IOException, NoSuchAlgorithmException {
+  void cpd_tokens_failure_does_not_execute_checks_multiple_times() throws IOException, NoSuchAlgorithmException {
     activeRules = new ActiveRulesBuilder()
       .addRule(new NewActiveRule.Builder()
         .setRuleKey(RuleKey.of(CUSTOM_REPOSITORY_KEY, RULE_CRASHING_ON_SCAN_KEY))

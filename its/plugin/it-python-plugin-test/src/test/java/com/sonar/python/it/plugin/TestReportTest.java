@@ -56,7 +56,7 @@ public class TestReportTest {
   }
 
   @Test
-  public void import_report() {
+  void import_report() {
     final String projectKey = "nosetests_project";
     // sonar.python.xunit.skipDetails=false by default
     ORCHESTRATOR.executeBuild(createBuild(projectKey, "nosetests.xml"));
@@ -71,7 +71,7 @@ public class TestReportTest {
   }
 
   @Test
-  public void import_pytest_report() {
+  void import_pytest_report() {
     final String projectKey = "pytest";
     ORCHESTRATOR.executeBuild(createBuild(projectKey, "pytest.xml"));
     assertProjectMeasures(projectKey, new ImmutableMap.Builder<String, Integer>()
@@ -85,7 +85,7 @@ public class TestReportTest {
   }
 
   @Test
-  public void simple_mode() {
+  void simple_mode() {
     final String projectKey = "nosetests_simple";
     ORCHESTRATOR.executeBuild(createBuild(projectKey, "nosetests.xml").setProperty("sonar.python.xunit.skipDetails", "true"));
     Map<String, Integer> values = new HashMap<>();
@@ -100,21 +100,21 @@ public class TestReportTest {
   }
 
   @Test
-  public void missing_test_report() {
+  void missing_test_report() {
     final String projectKey = "nosetests_missing";
     ORCHESTRATOR.executeBuild(createBuild(projectKey, "missing.xml"));
     assertProjectMeasures(projectKey, nullMeasures());
   }
 
   @Test
-  public void missing_test_report_with_simple_mode() {
+  void missing_test_report_with_simple_mode() {
     final String projectKey = "nosetests_missing_simple";
     ORCHESTRATOR.executeBuild(createBuild(projectKey, "missing.xml").setProperty("sonar.python.xunit.skipDetails", "true"));
     assertProjectMeasures(projectKey, nullMeasures());
   }
 
   @Test
-  public void invalid_test_report() {
+  void invalid_test_report() {
     final String projectKey = "nosetests_invalid";
     BuildResult result = ORCHESTRATOR.executeBuildQuietly(createBuild(projectKey, "invalid_report.xml"));
     assertThat(result.isSuccess()).isTrue();

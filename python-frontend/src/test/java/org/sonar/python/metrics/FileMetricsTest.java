@@ -28,33 +28,33 @@ import static org.fest.assertions.Assertions.assertThat;
 public class FileMetricsTest {
 
   @Test
-  public void statements() {
+  void statements() {
     assertThat(metrics("statements.py").numberOfStatements()).isEqualTo(1);
   }
 
   @Test
-  public void functions() {
+  void functions() {
     assertThat(metrics("functions.py").numberOfFunctions()).isEqualTo(1);
   }
 
   @Test
-  public void classes() {
+  void classes() {
     assertThat(metrics("classes.py").numberOfClasses()).isEqualTo(1);
   }
 
   @Test
-  public void complexity() {
+  void complexity() {
     assertThat(metrics("complexity.py").complexity()).isEqualTo(8);
   }
 
   @Test
-  public void cognitive_complexity() {
+  void cognitive_complexity() {
     assertThat(metrics("classes.py").cognitiveComplexity()).isEqualTo(0);
     assertThat(metrics("cognitive-complexities.py").cognitiveComplexity()).isEqualTo(91);
   }
 
   @Test
-  public void function_complexities() {
+  void function_complexities() {
     assertThat(metrics("function-complexities.py").functionComplexities()).containsExactly(3, 1);
   }
 

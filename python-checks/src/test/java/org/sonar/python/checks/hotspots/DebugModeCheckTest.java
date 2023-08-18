@@ -25,17 +25,17 @@ import org.sonar.python.checks.utils.PythonCheckVerifier;
 public class DebugModeCheckTest {
 
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/hotspots/debugMode/debugModeActivated.py", new DebugModeCheck());
   }
 
   @Test
-  public void test_globalSettings_file() {
+  void test_globalSettings_file() {
     PythonCheckVerifier.verify("src/test/resources/checks/hotspots/debugMode/global_settings.py", new DebugModeCheck());
   }
 
   @Test
-  public void test_settings_file() {
+  void test_settings_file() {
     PythonCheckVerifier.verify("src/test/resources/checks/hotspots/debugMode/settings.py", new DebugModeCheck());
   }
 }

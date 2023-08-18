@@ -25,14 +25,14 @@ import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 public class IdentityComparisonWithNewObjectCheckTest {
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify(
       "src/test/resources/checks/identityComparisonWithNewObjects.py",
       new IdentityComparisonWithNewObjectCheck());
   }
 
   @Test
-  public void testIsReplacementQuickfix() {
+  void testIsReplacementQuickfix() {
     var check = new IdentityComparisonWithNewObjectCheck();
     String codeWithIssue = "def comprehensions(p):\n" +
       "  p is { x: x for x in range(10) }";
@@ -43,7 +43,7 @@ public class IdentityComparisonWithNewObjectCheckTest {
   }
 
   @Test
-  public void testIsNotReplacementQuickfix() {
+  void testIsNotReplacementQuickfix() {
     var check = new IdentityComparisonWithNewObjectCheck();
     String codeWithIssue = "def comprehensions(p):\n" +
       "  p is not { x: x for x in range(10) }";

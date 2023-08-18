@@ -25,7 +25,7 @@ import org.sonar.python.checks.utils.PythonCheckVerifier;
 public class ProcessSignallingCheckTest {
 
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/hotspots/processSignalling.py", new ProcessSignallingCheck());
   }
 

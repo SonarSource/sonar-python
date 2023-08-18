@@ -32,7 +32,7 @@ public class PythonCheckVerifierAdditionalTest {
   private static final String BASE_DIR = "src/test/resources/";
 
   @Test
-  public void file_level_issue() {
+  void file_level_issue() {
     PythonCheckVerifier.verify(BASE_DIR + "file_issue.py", new PythonSubscriptionCheck() {
       @Override
       public void initialize(Context context) {
@@ -42,7 +42,7 @@ public class PythonCheckVerifierAdditionalTest {
   }
 
   @Test
-  public void line_level_issue() {
+  void line_level_issue() {
     PythonCheckVerifier.verify(BASE_DIR + "line_issue.py", new PythonSubscriptionCheck() {
       @Override
       public void initialize(Context context) {
@@ -52,7 +52,7 @@ public class PythonCheckVerifierAdditionalTest {
   }
 
   @Test
-  public void no_issue() {
+  void no_issue() {
     PythonSubscriptionCheck check = new PythonSubscriptionCheck() {
       @Override
       public void initialize(Context context) {
@@ -71,7 +71,7 @@ public class PythonCheckVerifierAdditionalTest {
   }
 
   @Test
-  public void issues_with_issue() {
+  void issues_with_issue() {
     var issues = PythonCheckVerifier.issues(BASE_DIR + "line_issue.py", new PythonSubscriptionCheck() {
       @Override
       public void initialize(Context context) {
@@ -83,7 +83,7 @@ public class PythonCheckVerifierAdditionalTest {
   }
 
   @Test
-  public void issues_without_issue() {
+  void issues_without_issue() {
     var issues = PythonCheckVerifier.issues(BASE_DIR + "no_issue.py", new PythonSubscriptionCheck() {
       @Override
       public void initialize(Context context) {

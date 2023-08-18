@@ -29,12 +29,12 @@ import static org.sonar.python.parser.PythonParserAssert.assertThat;
 public class TryStatementTest extends RuleTest {
 
   @BeforeEach
-  public void init() {
+  void init() {
     setRootRule(PythonGrammar.TRY_STMT);
   }
 
   @Test
-  public void ok() {
+  void ok() {
 
     assertThat(p).matches("try : pass\nexcept e : pass")
       .matches("try : pass\nexcept e : pass\nexcept f : pass")

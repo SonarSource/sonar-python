@@ -42,7 +42,7 @@ public class CustomRulesTest {
   private static final String PROJECT_NAME = "Custom Rules";
 
   @BeforeAll
-  public static void prepare() {
+  static void prepare() {
     orchestrator.getServer().provisionProject(PROJECT_KEY, PROJECT_NAME);
     orchestrator.getServer().associateProjectToQualityProfile(PROJECT_KEY, "py", "python-custom-rules-profile");
     SonarScanner build = SonarScanner.create()
@@ -55,13 +55,13 @@ public class CustomRulesTest {
   }
 
   @Test
-  public void base_tree_visitor_check() {
+  void base_tree_visitor_check() {
     List<Issues.Issue> issues = issues("python-custom-rules:visitor");
     assertSingleIssue(issues, 4, "Function def.", "5min");
   }
 
   @Test
-  public void subscription_base_visitor_check() {
+  void subscription_base_visitor_check() {
     List<Issues.Issue> issues = issues("python-custom-rules:subscription");
     assertSingleIssue(issues, 7, "For statement.", "10min");
   }

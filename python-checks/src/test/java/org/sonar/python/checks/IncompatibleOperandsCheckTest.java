@@ -30,7 +30,7 @@ public class IncompatibleOperandsCheckTest {
   }
 
   @Test
-  public void test_arithmetic() {
+  void test_arithmetic() {
     PythonCheckVerifier.verify("src/test/resources/checks/incompatibleOperands/arithmetic.py", new IncompatibleOperandsCheck());
   }
 

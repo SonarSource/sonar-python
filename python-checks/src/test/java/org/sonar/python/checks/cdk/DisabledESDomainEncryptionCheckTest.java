@@ -24,7 +24,7 @@ import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 public class DisabledESDomainEncryptionCheckTest {
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/cdk/disabledESDomainEncryptionCheck.py", new DisabledESDomainEncryptionCheck());
   }
 }

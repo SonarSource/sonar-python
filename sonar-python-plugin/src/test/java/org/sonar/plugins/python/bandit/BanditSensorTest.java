@@ -63,7 +63,7 @@ public class BanditSensorTest {
   public LogTesterJUnit5 logTester = new LogTesterJUnit5().setLevel(Level.DEBUG);
 
   @Test
-  public void test_descriptor() {
+  void test_descriptor() {
     DefaultSensorDescriptor sensorDescriptor = new DefaultSensorDescriptor();
     banditSensor.describe(sensorDescriptor);
     assertThat(sensorDescriptor.name()).isEqualTo("Import of Bandit issues");
@@ -84,7 +84,7 @@ public class BanditSensorTest {
 
 
   @Test
-  public void issues_with_sonarqube_72() throws IOException {
+  void issues_with_sonarqube_72() throws IOException {
     List<ExternalIssue> externalIssues = executeSensorImporting(7, 9, BANDIT_REPORT_JSON);
     assertThat(externalIssues).hasSize(4);
 
@@ -138,14 +138,14 @@ public class BanditSensorTest {
 
 
   @Test
-  public void no_issues_without_report_paths_property() throws IOException {
+  void no_issues_without_report_paths_property() throws IOException {
     List<ExternalIssue> externalIssues = executeSensorImporting(7, 9, null);
     assertThat(externalIssues).isEmpty();
     assertNoErrorWarnDebugLogs(logTester);
   }
 
   @Test
-  public void no_issues_with_invalid_report_path() throws IOException {
+  void no_issues_with_invalid_report_path() throws IOException {
     List<ExternalIssue> externalIssues = executeSensorImporting(7, 9, "invalid-path.txt");
     assertThat(externalIssues).isEmpty();
     assertThat(onlyOneLogElement(logTester.logs(Level.ERROR)))
@@ -154,7 +154,7 @@ public class BanditSensorTest {
   }
 
   @Test
-  public void no_issues_with_invalid_bandit_file() throws IOException {
+  void no_issues_with_invalid_bandit_file() throws IOException {
     List<ExternalIssue> externalIssues = executeSensorImporting(7, 9, "not-bandit-file.json");
     assertThat(externalIssues).isEmpty();
     assertThat(onlyOneLogElement(logTester.logs(Level.ERROR)))
@@ -163,14 +163,14 @@ public class BanditSensorTest {
   }
 
   @Test
-  public void no_issues_with_empty_bandit_file() throws IOException {
+  void no_issues_with_empty_bandit_file() throws IOException {
     List<ExternalIssue> externalIssues = executeSensorImporting(7, 9, "bandit-report-empty.json");
     assertThat(externalIssues).isEmpty();
     assertNoErrorWarnDebugLogs(logTester);
   }
 
   @Test
-  public void issues_when_bandit_file_has_errors() throws IOException {
+  void issues_when_bandit_file_has_errors() throws IOException {
     List<ExternalIssue> externalIssues = executeSensorImporting(7, 9, "bandit-report-with-errors.json");
     assertThat(externalIssues).hasSize(1);
 
@@ -198,7 +198,7 @@ public class BanditSensorTest {
   }
 
   @Test
-  public void issues_when_bandit_file_and_line_errors() throws IOException {
+  void issues_when_bandit_file_and_line_errors() throws IOException {
     List<ExternalIssue> externalIssues = executeSensorImporting(7, 9, "bandit-report-with-file-and-line-errors.json");
     assertThat(externalIssues).hasSize(0);
 

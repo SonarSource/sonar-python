@@ -61,7 +61,7 @@ public class IPythonTest {
   private static StandaloneSonarLintEngine sonarlintEngine;
 
   @BeforeAll
-  public static void prepare() throws Exception {
+  static void prepare() throws Exception {
     StandaloneGlobalConfiguration sonarLintConfig = StandaloneGlobalConfiguration.builder()
       .addPlugin(Tests.PLUGIN_LOCATION.getFile().toPath())
       .setSonarLintUserHome(TEMP)
@@ -74,12 +74,12 @@ public class IPythonTest {
   }
 
   @AfterAll
-  public static void stop() {
+  static void stop() {
     sonarlintEngine.stop();
   }
 
   @Test
-  public void shouldRaiseIssues() {
+  void shouldRaiseIssues() {
     var inputFile = createInputFile(Path.of("projects/ipynb_project/file1.ipynb"), "file1.ipynb", false);
     var issues = new ArrayList<Issue>();
 

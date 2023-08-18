@@ -29,24 +29,24 @@ import static org.sonar.python.parser.PythonParserAssert.assertThat;
 public class CasePatternsTest extends RuleTest {
 
   @BeforeEach
-  public void init() {
+  void init() {
     setRootRule(PythonGrammar.PATTERN);
   }
 
   @Test
-  public void strings() {
+  void strings() {
     assertThat(p)
       .matches("\"foo\"")
       .matches("\"foo\" \"bar\"");
   }
 
   @Test
-  public void none() {
+  void none() {
     assertThat(p).matches("None");
   }
 
   @Test
-  public void booleans() {
+  void booleans() {
     setRootRule(PythonGrammar.LITERAL_PATTERN);
     assertThat(p)
       .matches("True")
@@ -55,21 +55,21 @@ public class CasePatternsTest extends RuleTest {
   }
 
   @Test
-  public void signed_numbers() {
+  void signed_numbers() {
     assertThat(p)
       .matches("-3")
       .notMatches("+3");
   }
 
   @Test
-  public void complex_numbers() {
+  void complex_numbers() {
     assertThat(p)
       .matches("3 + 4j")
       .matches("42j");
   }
 
   @Test
-  public void as_patterns() {
+  void as_patterns() {
     assertThat(p)
       .matches("'foo' as x")
       .matches("x as y")
@@ -77,7 +77,7 @@ public class CasePatternsTest extends RuleTest {
   }
 
   @Test
-  public void capture() {
+  void capture() {
     assertThat(p)
       .matches("x");
   }

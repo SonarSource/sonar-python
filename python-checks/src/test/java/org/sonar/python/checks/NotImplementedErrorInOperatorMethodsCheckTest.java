@@ -25,12 +25,12 @@ import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 public class NotImplementedErrorInOperatorMethodsCheckTest {
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/notImplementedErrorInOperatorMethods.py", new NotImplementedErrorInOperatorMethodsCheck());
   }
 
   @Test
-  public void quickFixTest() {
+  void quickFixTest() {
     var check = new NotImplementedErrorInOperatorMethodsCheck();
     String codeWithIssue = "class MyClass:\n" +
       "    def __lt__(self, other):\n" +
@@ -43,7 +43,7 @@ public class NotImplementedErrorInOperatorMethodsCheckTest {
   }
 
   @Test
-  public void quickFixOfExceptionAsVariableTest() {
+  void quickFixOfExceptionAsVariableTest() {
     var check = new NotImplementedErrorInOperatorMethodsCheck();
     String codeWithIssue = "class MyClass:\n" +
       "    def __lt__(self, other):\n" +

@@ -25,7 +25,7 @@ import org.sonar.python.checks.utils.PythonCheckVerifier;
 public class FileComplexityCheckTest {
 
   @Test
-  public void test() {
+  void test() {
     FileComplexityCheck check = new FileComplexityCheck();
     check.maximumFileComplexityThreshold = 2;
 
@@ -33,7 +33,7 @@ public class FileComplexityCheckTest {
   }
 
   @Test
-  public void defaults() {
+  void defaults() {
     PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/fileComplexityDefaults.py", new FileComplexityCheck());
   }
 

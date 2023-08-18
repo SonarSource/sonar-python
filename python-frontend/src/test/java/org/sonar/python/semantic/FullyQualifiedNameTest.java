@@ -49,7 +49,7 @@ import static org.sonar.python.PythonTestUtils.pythonFile;
 public class FullyQualifiedNameTest {
 
   @Test
-  public void callee_qualified_expression() {
+  void callee_qualified_expression() {
     FileInput tree = parse(
       "import mod",
       "mod.fn()"
@@ -58,7 +58,7 @@ public class FullyQualifiedNameTest {
   }
 
   @Test
-  public void callee_qualified_expression_alias() {
+  void callee_qualified_expression_alias() {
     FileInput tree = parse(
       "import mod as alias",
       "alias.fn()"
@@ -67,7 +67,7 @@ public class FullyQualifiedNameTest {
   }
 
   @Test
-  public void submodule_alias() {
+  void submodule_alias() {
     FileInput tree = parse(
       "import mod.submod as alias",
       "alias.fn()"
@@ -76,7 +76,7 @@ public class FullyQualifiedNameTest {
   }
 
   @Test
-  public void alias_import_preserves_fqn() {
+  void alias_import_preserves_fqn() {
     // see org/sonar/python/types/typeshed/third_party/2and3/flask/__init__.pyi
     FileInput tree = parse(
       "from flask import redirect as flask_redirect",
@@ -86,7 +86,7 @@ public class FullyQualifiedNameTest {
   }
 
   @Test
-  public void django_submodule_import_preserves_fqn() {
+  void django_submodule_import_preserves_fqn() {
     // see python-frontend/src/main/resources/org/sonar/python/types/custom/django/__init__.pyi
     FileInput tree = parse(
       "import django.http",
@@ -96,7 +96,7 @@ public class FullyQualifiedNameTest {
   }
 
   @Test
-  public void import_alias_reassigned() {
+  void import_alias_reassigned() {
     FileInput tree = parse(
       "if x:",
       "  import mod1 as alias",
@@ -108,7 +108,7 @@ public class FullyQualifiedNameTest {
   }
 
   @Test
-  public void callee_qualified_expression_without_import() {
+  void callee_qualified_expression_without_import() {
     FileInput tree = parse(
       "mod.fn()"
     );
@@ -117,7 +117,7 @@ public class FullyQualifiedNameTest {
   }
 
   @Test
-  public void callee_name_without_import() {
+  void callee_name_without_import() {
     FileInput tree = parse(
       "fn()"
     );
@@ -126,7 +126,7 @@ public class FullyQualifiedNameTest {
   }
 
   @Test
-  public void callee_subscription() {
+  void callee_subscription() {
     FileInput tree = parse(
       "foo['a']()"
     );
@@ -135,7 +135,7 @@ public class FullyQualifiedNameTest {
   }
 
   @Test
-  public void callee_qualified_expression_submodule() {
+  void callee_qualified_expression_submodule() {
     FileInput tree = parse(
       "import mod.submod",
       "mod.submod.fn()"
@@ -144,7 +144,7 @@ public class FullyQualifiedNameTest {
   }
 
   @Test
-  public void var_callee_same_name_different_symbol() {
+  void var_callee_same_name_different_symbol() {
     FileInput tree = parse(
       "import mod",
       "fn = 2",
@@ -156,7 +156,7 @@ public class FullyQualifiedNameTest {
   }
 
   @Test
-  public void function_definition_callee_symbol() {
+  void function_definition_callee_symbol() {
     FileInput tree = parse(
       new SymbolTableBuilder("my_package", pythonFile("my_module.py")),
       "def fn(): pass",
@@ -166,7 +166,7 @@ public class FullyQualifiedNameTest {
   }
 
   @Test
-  public void class_definition_callee_symbol() {
+  void class_definition_callee_symbol() {
     FileInput tree = parse(
       new SymbolTableBuilder("my_package", pythonFile("my_module.py")),
       "class A: pass",
@@ -176,7 +176,7 @@ public class FullyQualifiedNameTest {
   }
 
   @Test
-  public void method_definition_symbol() {
+  void method_definition_symbol() {
     FileInput tree = parse(
       new SymbolTableBuilder("my_package", pythonFile("my_module.py")),
       "class A:",
@@ -189,7 +189,7 @@ public class FullyQualifiedNameTest {
   }
 
   @Test
-  public void method_definition_subclass_symbol() {
+  void method_definition_subclass_symbol() {
     FileInput tree = parse(
       new SymbolTableBuilder("my_package", pythonFile("my_module.py")),
       "class A:",
@@ -203,7 +203,7 @@ public class FullyQualifiedNameTest {
   }
 
   @Test
-  public void subfunction_definition() {
+  void subfunction_definition() {
     FileInput tree = parse(
       new SymbolTableBuilder("my_package", pythonFile("my_module.py")),
       "def fn():",
@@ -214,7 +214,7 @@ public class FullyQualifiedNameTest {
   }
 
   @Test
-  public void relative_import_symbols() {
+  void relative_import_symbols() {
     FileInput tree = parse(
       new SymbolTableBuilder("my_package", pythonFile("my_module.py")),
       "from . import b"
@@ -292,7 +292,7 @@ public class FullyQualifiedNameTest {
   }
 
   @Test
-  public void imported_symbol() {
+  void imported_symbol() {
     FileInput tree = parse(
       "import mod"
     );
@@ -311,7 +311,7 @@ public class FullyQualifiedNameTest {
   }
 
   @Test
-  public void from_imported_symbol() {
+  void from_imported_symbol() {
     FileInput tree = parse(
       "from mod import fn"
     );
@@ -323,7 +323,7 @@ public class FullyQualifiedNameTest {
   }
 
   @Test
-  public void two_usages_callee_symbol() {
+  void two_usages_callee_symbol() {
     FileInput tree = parse(
       "import mod",
       "mod.fn()",
@@ -346,7 +346,7 @@ public class FullyQualifiedNameTest {
   }
 
   @Test
-  public void qualified_expression_symbol() {
+  void qualified_expression_symbol() {
     FileInput tree = parse(
       "import mod",
       "mod.prop"
@@ -360,7 +360,7 @@ public class FullyQualifiedNameTest {
   }
 
   @Test
-  public void from_import() {
+  void from_import() {
     FileInput tree = parse(
       "from mod import fn",
       "fn('foo')"
@@ -369,7 +369,7 @@ public class FullyQualifiedNameTest {
   }
 
   @Test
-  public void from_import_multiple_names() {
+  void from_import_multiple_names() {
     FileInput tree = parse(
       "from mod import f, g, h",
       "f('foo')",
@@ -392,7 +392,7 @@ public class FullyQualifiedNameTest {
   }
 
   @Test
-  public void from_import_reassigned() {
+  void from_import_reassigned() {
     FileInput tree = parse(
       "fn = 42",
       "from mod import fn",
@@ -409,7 +409,7 @@ public class FullyQualifiedNameTest {
   }
 
   @Test
-  public void import_reassigned_exceptions() {
+  void import_reassigned_exceptions() {
     FileInput tree = parse(
       "import mod",
       "import mod",
@@ -419,7 +419,7 @@ public class FullyQualifiedNameTest {
   }
 
   @Test
-  public void from_import_alias() {
+  void from_import_alias() {
     FileInput tree = parse(
       "from mod import fn as g",
       "g('foo')"
@@ -428,7 +428,7 @@ public class FullyQualifiedNameTest {
   }
 
   @Test
-  public void from_import_submodule_alias() {
+  void from_import_submodule_alias() {
     FileInput tree = parse(
       "from mod.submod import fn as g",
       "g('foo')"
@@ -437,7 +437,7 @@ public class FullyQualifiedNameTest {
   }
 
   @Test
-  public void from_import_relative() {
+  void from_import_relative() {
     FileInput tree = parse(
       "from . import fn",
       "fn('foo')"
@@ -452,7 +452,7 @@ public class FullyQualifiedNameTest {
   }
 
   @Test
-  public void from_import_submodule() {
+  void from_import_submodule() {
     FileInput tree = parse(
       "from mod.submod import fn",
       "fn('foo')"
@@ -467,7 +467,7 @@ public class FullyQualifiedNameTest {
   }
 
   @Test
-  public void init_module_relative_import() {
+  void init_module_relative_import() {
     String code = String.join(System.getProperty("line.separator"), "from .. import fn", "fn()", "class A: pass");
     FileInput fileInput = new PythonTreeMaker().fileInput(PythonParser.create().parse(code));
     PythonFile pythonFile = Mockito.mock(PythonFile.class, "__init__.py");
@@ -482,7 +482,7 @@ public class FullyQualifiedNameTest {
   }
 
   @Test
-  public void virtual_call_having_instance_as_qualifier() {
+  void virtual_call_having_instance_as_qualifier() {
     FileInput tree = parse(
       new SymbolTableBuilder("my_package", pythonFile("my_module.py")),
       "class A:",
@@ -497,7 +497,7 @@ public class FullyQualifiedNameTest {
   }
 
   @Test
-  public void virtual_call_qualifier_unknown_type() {
+  void virtual_call_qualifier_unknown_type() {
     FileInput tree = parse(
       new SymbolTableBuilder("my_package", pythonFile("my_module.py")),
       "from mod import A",
@@ -509,7 +509,7 @@ public class FullyQualifiedNameTest {
   }
 
   @Test
-  public void subclass_type() {
+  void subclass_type() {
     FileInput tree = parse(
       new SymbolTableBuilder("my_package", pythonFile("my_module.py")),
       "class A:",
@@ -523,7 +523,7 @@ public class FullyQualifiedNameTest {
   }
 
   @Test
-  public void type_symbol_different_than_class() {
+  void type_symbol_different_than_class() {
     FileInput tree = parse(
       new SymbolTableBuilder("my_package", pythonFile("my_module.py")),
       "def bar(): pass",
@@ -535,7 +535,7 @@ public class FullyQualifiedNameTest {
   }
 
   @Test
-  public void type_symbol_null() {
+  void type_symbol_null() {
     FileInput tree = parse(
       new SymbolTableBuilder("my_package", pythonFile("my_module.py")),
       "a = bar()",
@@ -546,7 +546,7 @@ public class FullyQualifiedNameTest {
   }
 
   @Test
-  public void type_with_global_symbol() {
+  void type_with_global_symbol() {
     FileInput tree = parse(
       new SymbolTableBuilder("my_package", pythonFile("my_module.py")),
       "global a",
@@ -568,7 +568,7 @@ public class FullyQualifiedNameTest {
   }
 
   @Test
-  public void add_type_more_than_one_binding_usage() {
+  void add_type_more_than_one_binding_usage() {
     FileInput tree = parse(
       new SymbolTableBuilder("my_package", pythonFile("my_module.py")),
       "if True:",
@@ -584,7 +584,7 @@ public class FullyQualifiedNameTest {
   }
 
   @Test
-  public void fqn_of_inherited_method() {
+  void fqn_of_inherited_method() {
     FileInput tree = parse(
       new SymbolTableBuilder("my_package", pythonFile("my_module.py")),
       "class A():",
@@ -598,7 +598,7 @@ public class FullyQualifiedNameTest {
   }
 
   @Test
-  public void fqn_of_inherited_method_with_import() {
+  void fqn_of_inherited_method_with_import() {
     FileInput tree = parse(
       new SymbolTableBuilder("my_package", pythonFile("my_module.py")),
       "from external_module import A",
@@ -611,7 +611,7 @@ public class FullyQualifiedNameTest {
   }
 
   @Test
-  public void fqn_resolution_works_with_double_import() {
+  void fqn_resolution_works_with_double_import() {
     FileInput tree = parse(
             "from flask import request, request",
             "request.cookies.get('a')"

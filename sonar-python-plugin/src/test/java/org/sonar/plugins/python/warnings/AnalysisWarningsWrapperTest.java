@@ -30,7 +30,7 @@ import static org.mockito.Mockito.verify;
 public class AnalysisWarningsWrapperTest {
 
   @Test
-  public void test() {
+  void test() {
     AnalysisWarnings analysisWarnings = spy(AnalysisWarnings.class);
     AnalysisWarningsWrapper defaultAnalysisWarningsWrapper = new AnalysisWarningsWrapper(analysisWarnings);
     defaultAnalysisWarningsWrapper.addUnique("abcd");

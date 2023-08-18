@@ -35,7 +35,7 @@ import static org.sonar.python.PythonTestUtils.parse;
 public class SelfSymbolImplTest {
 
   @Test
-  public void removeUsages() {
+  void removeUsages() {
     FileInput fileInput = parse(
       "class A:",
       "  def foo(self):",

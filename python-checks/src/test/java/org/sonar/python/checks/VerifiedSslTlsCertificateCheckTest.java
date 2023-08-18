@@ -24,7 +24,7 @@ import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 public class VerifiedSslTlsCertificateCheckTest {
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify(
       "src/test/resources/checks/verifiedSslTlsCertificateCheck.py",
       new VerifiedSslTlsCertificateCheck());

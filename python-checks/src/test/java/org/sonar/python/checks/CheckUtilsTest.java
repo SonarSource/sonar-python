@@ -46,7 +46,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class CheckUtilsTest {
 
   @Test
-  public void private_constructor() throws Exception {
+  void private_constructor() throws Exception {
     Constructor constructor = CheckUtils.class.getDeclaredConstructor();
     assertThat(constructor.isAccessible()).isFalse();
     constructor.setAccessible(true);
@@ -54,7 +54,7 @@ public class CheckUtilsTest {
   }
 
   @Test
-  public void statement_equivalence() {
+  void statement_equivalence() {
     assertThat(CheckUtils.areEquivalent(parse("x = x + 1"), parse("x = x + 1"))).isTrue();
     assertThat(CheckUtils.areEquivalent(parse("x = x + 1"), parse("x = x + 1"))).isTrue();
     assertThat(CheckUtils.areEquivalent(parse("x = x + 1"), parse("x = x + 1"))).isTrue();
@@ -65,7 +65,7 @@ public class CheckUtilsTest {
   }
 
   @Test
-  public void comparison_equivalence() {
+  void comparison_equivalence() {
     assertThat(CheckUtils.areEquivalent(parse("foo is None"), parse("foo is not None"))).isFalse();
     assertThat(CheckUtils.areEquivalent(parse("x < 2"), parse("x > 2"))).isFalse();
     assertThat(CheckUtils.areEquivalent(parse("foo is None"), parse("foo is  None"))).isTrue();
@@ -73,20 +73,20 @@ public class CheckUtilsTest {
   }
 
   @Test
-  public void tree_equivalence() {
+  void tree_equivalence() {
     assertThat(CheckUtils.areEquivalent(new ArgListImpl(Collections.emptyList(), Collections.emptyList()),
       new ArgListImpl(Collections.emptyList(), Collections.emptyList()))).isTrue();
   }
 
   @Test
-  public void null_equivalence() {
+  void null_equivalence() {
     assertThat(CheckUtils.areEquivalent(null, null)).isTrue();
     assertThat(CheckUtils.areEquivalent(null, parse("class clazz(): \n pass"))).isFalse();
     assertThat(CheckUtils.areEquivalent(parse("class clazz(): \n pass"), null)).isFalse();
   }
 
   @Test
-  public void statement_list_equivalence() {
+  void statement_list_equivalence() {
     assertThat(CheckUtils.areEquivalent(parse("foo()\nbar()"), parse("foo()\nbar()"))).isTrue();
     assertThat(CheckUtils.areEquivalent(parse("foo()\n  "), parse("foo()\n"))).isTrue();
     assertThat(CheckUtils.areEquivalent(parse("foo()\n"), parse("foo()\n  "))).isTrue();
@@ -96,13 +96,13 @@ public class CheckUtilsTest {
   }
 
   @Test
-  public void lambda_equivalence() {
+  void lambda_equivalence() {
     assertThat(CheckUtils.areEquivalent(parse("x = lambda a : a + 10"), parse("x = lambda a : a + 10"))).isTrue();
     assertThat(CheckUtils.areEquivalent(parse("x = lambda a : a + 10"), parse("x = lambda a : a + 5"))).isFalse();
   }
 
   @Test
-  public void no_parent_class() {
+  void no_parent_class() {
     FileInput file = (FileInput) parse("" +
       "def f():\n" +
       "    pass\n");
@@ -112,7 +112,7 @@ public class CheckUtilsTest {
   }
 
   @Test
-  public void parent_class() {
+  void parent_class() {
     FileInput file = (FileInput) parse("" +
       "class A:\n" +
       "    def f():\n" +
@@ -143,7 +143,7 @@ public class CheckUtilsTest {
   }
 
   @Test
-  public void mustBeAProtocolLikeTest() throws IOException {
+  void mustBeAProtocolLikeTest() throws IOException {
     var fileInput = parseFileWithSymbols("src/test/resources/checks/checkUtils/mustBeAProtocolLikeTest.py");
 
     var statementList = fileInput.statements();
@@ -163,7 +163,7 @@ public class CheckUtilsTest {
   }
 
   @Test
-  public void isAbstractTest() throws IOException {
+  void isAbstractTest() throws IOException {
     var fileInput = parseFile("src/test/resources/checks/checkUtils/isAbstractTest.py");
 
     var abstractMethodNames = List.of("standard_usage", "qualified_usage", "usage_with_other_decorator", "incorrect_calling_usage", "usage_with_unknown_other_decorator");
@@ -182,7 +182,7 @@ public class CheckUtilsTest {
   }
 
   @Test
-  public void isSelfTest() throws IOException {
+  void isSelfTest() throws IOException {
     var fileInput = parseFile("src/test/resources/checks/checkUtils/isSelfTest.py");
     var functionDefs = descendantFunctions(fileInput);
 
@@ -200,7 +200,7 @@ public class CheckUtilsTest {
   }
 
   @Test
-  public void findFirstParameterSymbolTest() throws IOException {
+  void findFirstParameterSymbolTest() throws IOException {
     var fileInput = parseFileWithSymbols("src/test/resources/checks/checkUtils/findFirstParameterSymbolTest.py");
     var functionDefs = descendantFunctions(fileInput);
 

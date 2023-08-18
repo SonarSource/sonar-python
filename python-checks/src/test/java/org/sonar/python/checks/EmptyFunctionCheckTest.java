@@ -31,12 +31,12 @@ public class EmptyFunctionCheckTest {
   final PythonCheck check = new EmptyFunctionCheck();
 
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/emptyFunction.py", check);
   }
 
   @Test
-  public void quick_fixes_for_function() {
+  void quick_fixes_for_function() {
     String codeWithIssue = code("def my_function():",
       "  pass");
     String addComment = code("def my_function():",
@@ -55,7 +55,7 @@ public class EmptyFunctionCheckTest {
   }
 
   @Test
-  public void quick_fixes_for_method() {
+  void quick_fixes_for_method() {
     String codeWithIssue = code("class my_class:",
       "  def my_method():",
       "    pass");
@@ -71,7 +71,7 @@ public class EmptyFunctionCheckTest {
   }
 
   @Test
-  public void quick_fixes_for_magic_binary_method() {
+  void quick_fixes_for_magic_binary_method() {
     String codeWithIssue = code("class my_class:",
       "  def __add__():",
       "    pass");

@@ -27,19 +27,19 @@ import org.sonar.plugins.python.parser.StaxParser.XmlStreamHandler;
 public class StaxParserTest {
 
   @Test
-  public void test_XML_with_DTD() throws XMLStreamException {
+  void test_XML_with_DTD() throws XMLStreamException {
     StaxParser parser = new StaxParser(getTestHandler());
     parser.parse(getClass().getClassLoader().getResourceAsStream("org/sonar/plugins/python/parser/dtd-test.xml"));
   }
 
   @Test
-  public void test_XML_with_XSD() throws XMLStreamException {
+  void test_XML_with_XSD() throws XMLStreamException {
     StaxParser parser = new StaxParser(getTestHandler());
     parser.parse(getClass().getClassLoader().getResourceAsStream("org/sonar/plugins/python/parser/xsd-test.xml"));
   }
 
   @Test
-  public void test_XML_with_XSD_and_ampersand() throws XMLStreamException {
+  void test_XML_with_XSD_and_ampersand() throws XMLStreamException {
     StaxParser parser = new StaxParser(getTestHandler());
     parser.parse(getClass().getClassLoader().getResourceAsStream("org/sonar/plugins/python/parser/xsd-test-with-entity.xml"));
   }

@@ -27,7 +27,7 @@ import static org.junit.Assert.*;
 public class InfiniteRecursionCheckTest {
 
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/infiniteRecursion.py", new InfiniteRecursionCheck());
   }
 

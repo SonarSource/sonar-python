@@ -29,12 +29,12 @@ import static org.sonar.python.parser.PythonParserAssert.assertThat;
 public class GlobalStatementTest extends RuleTest {
 
   @BeforeEach
-  public void init() {
+  void init() {
     setRootRule(PythonGrammar.GLOBAL_STMT);
   }
 
   @Test
-  public void ok() {
+  void ok() {
     assertThat(p).matches("global IDENTIFIER");
     assertThat(p).matches("global IDENTIFIER , IDENTIFIER");
   }

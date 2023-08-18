@@ -29,12 +29,12 @@ import static org.sonar.python.parser.PythonParserAssert.assertThat;
 public class DelStatementTest extends RuleTest {
 
   @BeforeEach
-  public void init() {
+  void init() {
     setRootRule(PythonGrammar.DEL_STMT);
   }
 
   @Test
-  public void ok() {
+  void ok() {
     assertThat(p).matches("del exprlist");
   }
 

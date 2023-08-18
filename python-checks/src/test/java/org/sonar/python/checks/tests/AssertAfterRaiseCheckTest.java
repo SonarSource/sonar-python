@@ -25,27 +25,27 @@ import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 public class AssertAfterRaiseCheckTest {
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/tests/assertAfterRaise.py", new AssertAfterRaiseCheck());
   }
 
   @Test
-  public void testWithWrapper() {
+  void testWithWrapper() {
     PythonCheckVerifier.verify("src/test/resources/checks/tests/assertAfterRaiseWithWrapper.py", new AssertAfterRaiseCheck());
   }
 
   @Test
-  public void testWithAnotherLibraryUnittest() {
+  void testWithAnotherLibraryUnittest() {
     PythonCheckVerifier.verify("src/test/resources/checks/tests/assertAfterRaiseAnotherLibraryUnittest.py", new AssertAfterRaiseCheck());
   }
 
   @Test
-  public void testImportPytestAs() {
+  void testImportPytestAs() {
     PythonCheckVerifier.verify("src/test/resources/checks/tests/assertAfterRaiseImportPytestAs.py", new AssertAfterRaiseCheck());
   }
 
   @Test
-  public void quickFixTest() {
+  void quickFixTest() {
     var before = "import pytest\n" +
       "def test_base_case_multiple_statement():\n" +
       "    with pytest.raises(ZeroDivisionError):\n" +
@@ -63,7 +63,7 @@ public class AssertAfterRaiseCheckTest {
   }
 
   @Test
-  public void inlineQuickFixTest() {
+  void inlineQuickFixTest() {
     var before = "import pytest\n" +
       "def test_base_case_multiple_statement():\n" +
       "    with pytest.raises(ZeroDivisionError): foo(); assert bar() == 42 ";
@@ -78,7 +78,7 @@ public class AssertAfterRaiseCheckTest {
   }
 
   @Test
-  public void noQuickFixTest() {
+  void noQuickFixTest() {
     var before = "import pytest\n" +
       "def test_base_case_multiple_statement():\n" +
       "    with pytest.raises(ZeroDivisionError):\n" +
@@ -88,7 +88,7 @@ public class AssertAfterRaiseCheckTest {
   }
 
   @Test
-  public void inlineNoQuickFixTest() {
+  void inlineNoQuickFixTest() {
     var before = "import pytest\n" +
       "def test_base_case_multiple_statement():\n" +
       "    with pytest.raises(ZeroDivisionError): assert bar() == 42 ";

@@ -26,12 +26,12 @@ import org.sonar.python.checks.utils.PythonCheckVerifier;
 public class CorsCheckTest {
 
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify(Collections.singletonList("src/test/resources/checks/hotspots/cors/cors.py"), new CorsCheck());
   }
 
   @Test
-  public void test_django_settings() {
+  void test_django_settings() {
     PythonCheckVerifier.verify(Collections.singletonList("src/test/resources/checks/hotspots/cors/settings.py"), new CorsCheck());
   }
 

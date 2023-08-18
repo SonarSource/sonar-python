@@ -25,12 +25,12 @@ import org.sonar.python.checks.utils.PythonCheckVerifier;
 public class AfterJumpStatementCheckTest {
 
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/afterJumpStatement.py", new AfterJumpStatementCheck());
   }
 
   @Test
-  public void test_empty_file() {
+  void test_empty_file() {
     PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/afterJumpStatement_emptyFile.py", new AfterJumpStatementCheck());
   }
 }

@@ -35,7 +35,7 @@ public class FileHashingUtilsTest {
   private final File baseDir = new File("src/test/resources/org/sonar/plugins/python/indexer").getAbsoluteFile();
 
   @Test
-  public void hashing() throws IOException, NoSuchAlgorithmException {
+  void hashing() throws IOException, NoSuchAlgorithmException {
     InputFile file1 = createInputFile(baseDir, "main.py", InputFile.Status.CHANGED, InputFile.Type.MAIN);
     InputFile file2 = createInputFile(baseDir, "mod.py", InputFile.Status.SAME, InputFile.Type.MAIN);
     assertThat(MessageDigest.isEqual(FileHashingUtils.inputFileContentHash(file1), FileHashingUtils.inputFileContentHash(file1))).isTrue();

@@ -27,18 +27,18 @@ public class CommentedCodeCheckTest {
   private final CommentedCodeCheck check = new CommentedCodeCheck();
 
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/commentedCode.py", check);
   }
 
   @Test
-  public void custom() {
+  void custom() {
     check.exception = "\\w+(fmt|py\\w+):.*";
     PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/commentedCodeCustom.py", check);
   }
 
   @Test
-  public void test_encoding() {
+  void test_encoding() {
     PythonCheckVerifier.verify("src/test/resources/checks/commentedCodeEncoding.py", check);
   }
 

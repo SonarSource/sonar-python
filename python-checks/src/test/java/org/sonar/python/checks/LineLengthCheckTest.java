@@ -25,7 +25,7 @@ import org.sonar.python.checks.utils.PythonCheckVerifier;
 public class LineLengthCheckTest {
 
   @Test
-  public void test() {
+  void test() {
     LineLengthCheck check = new LineLengthCheck();
     check.maximumLineLength = 30;
     PythonCheckVerifier.verify("src/test/resources/checks/lineLength.py", check);

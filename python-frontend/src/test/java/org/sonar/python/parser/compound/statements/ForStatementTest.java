@@ -30,12 +30,12 @@ import static org.sonar.python.parser.PythonParserAssert.assertThat;
 public class ForStatementTest extends RuleTest {
 
   @BeforeEach
-  public void init() {
+  void init() {
     setRootRule(PythonGrammar.FOR_STMT);
   }
 
   @Test
-  public void ok() {
+  void ok() {
     assertThat(p).matches("for EXPRLIST in [] : pass;")
       .matches(PythonTestUtils.appendNewLine("for i in [0,2] : pass"))
       .matches(PythonTestUtils.appendNewLine("for x in [0,10] : print(x)"))

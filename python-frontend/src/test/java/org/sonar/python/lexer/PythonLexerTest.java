@@ -43,7 +43,7 @@ public class PythonLexerTest {
   private static TestLexer lexer;
 
   @BeforeAll
-  public static void init() {
+  static void init() {
     lexer = new TestLexer();
   }
 
@@ -61,7 +61,7 @@ public class PythonLexerTest {
    * http://docs.python.org/reference/lexical_analysis.html#comments
    */
   @Test
-  public void comments() {
+  void comments() {
     assertThat(lexer.lex("# My comment \n new line"), hasComment("# My comment "));
   }
 
@@ -69,7 +69,7 @@ public class PythonLexerTest {
    * http://docs.python.org/reference/lexical_analysis.html#string-literals
    */
   @Test
-  public void shortstring_literals() {
+  void shortstring_literals() {
     assertThat("empty", lexer.lex("''"), hasToken("''", PythonTokenType.STRING));
     assertThat("empty", lexer.lex("\"\""), hasToken("\"\"", PythonTokenType.STRING));
 
@@ -94,7 +94,7 @@ public class PythonLexerTest {
    * http://docs.python.org/reference/lexical_analysis.html#string-literals
    */
   @Test
-  public void longstring_literals() {
+  void longstring_literals() {
     assertThat("empty", lexer.lex("''''''"), hasToken("''''''", PythonTokenType.STRING));
     assertThat("empty", lexer.lex("\"\"\"\"\"\""), hasToken("\"\"\"\"\"\"", PythonTokenType.STRING));
 
@@ -120,7 +120,7 @@ public class PythonLexerTest {
    * http://docs.python.org/reference/lexical_analysis.html#string-literals
    */
   @Test
-  public void bytes_literal() {
+  void bytes_literal() {
     assertThat(lexer.lex("br'hello world'"), hasToken("br'hello world'", PythonTokenType.STRING));
     assertThat(lexer.lex("rb'hello world'"), hasToken("rb'hello world'", PythonTokenType.STRING));
     assertThat(lexer.lex("br\"hello world\""), hasToken("br\"hello world\"", PythonTokenType.STRING));
@@ -131,7 +131,7 @@ public class PythonLexerTest {
    * http://docs.python.org/reference/lexical_analysis.html#string-literals
    */
   @Test
-  public void longbytes_literal() {
+  void longbytes_literal() {
     assertThat(lexer.lex("b'''\n'''"), hasToken("b'''\n'''", PythonTokenType.STRING));
     assertThat(lexer.lex("b\"\"\"\n\"\"\""), hasToken("b\"\"\"\n\"\"\"", PythonTokenType.STRING));
 
@@ -145,7 +145,7 @@ public class PythonLexerTest {
    * https://docs.python.org/3.6/reference/lexical_analysis.html#formatted-string-literals
    */
   @Test
-  public void formatted_string_literal() {
+  void formatted_string_literal() {
     Set<String> formattedStringLiterals = ImmutableSet.of(
       "F'foo'",
       "f\"foo\"",
@@ -172,7 +172,7 @@ public class PythonLexerTest {
    * http://docs.python.org/reference/lexical_analysis.html#integer-and-long-integer-literals
    */
   @Test
-  public void integer_literals() {
+  void integer_literals() {
     assertThat(lexer.lex("0"), hasToken("0", PythonTokenType.NUMBER));
     assertThat(lexer.lex("00_000000_0"), hasToken("00_000000_0", PythonTokenType.NUMBER));
     assertThat(lexer.lex("7"), hasToken("7", PythonTokenType.NUMBER));
@@ -196,7 +196,7 @@ public class PythonLexerTest {
    * http://docs.python.org/reference/lexical_analysis.html#floating-point-literals
    */
   @Test
-  public void floating_point_literals() {
+  void floating_point_literals() {
     assertThat(lexer.lex("3.14"), hasToken("3.14", PythonTokenType.NUMBER));
     assertThat(lexer.lex("3_0.1_4"), hasToken("3_0.1_4", PythonTokenType.NUMBER));
     assertThat(lexer.lex("10."), hasToken("10.", PythonTokenType.NUMBER));
@@ -213,7 +213,7 @@ public class PythonLexerTest {
    * http://docs.python.org/reference/lexical_analysis.html#imaginary-literals
    */
   @Test
-  public void imaginary_literals() {
+  void imaginary_literals() {
     assertThat(lexer.lex("3.14j"), hasToken("3.14j", PythonTokenType.NUMBER));
     assertThat(lexer.lex("10.j"), hasToken("10.j", PythonTokenType.NUMBER));
     assertThat(lexer.lex("10j"), hasToken("10j", PythonTokenType.NUMBER));
@@ -229,7 +229,7 @@ public class PythonLexerTest {
    * http://docs.python.org/reference/lexical_analysis.html#identifiers
    */
   @Test
-  public void identifiers_and_keywords() {
+  void identifiers_and_keywords() {
     assertThat(lexer.lex("class"), hasToken("class", PythonKeyword.CLASS));
     assertThat(lexer.lex("identifier"), hasToken("identifier", GenericTokenType.IDENTIFIER));
   }
@@ -239,7 +239,7 @@ public class PythonLexerTest {
    * http://docs.python.org/reference/lexical_analysis.html#delimiters
    */
   @Test
-  public void operators_and_delimiters() {
+  void operators_and_delimiters() {
     assertThat(lexer.lex("<<"), hasToken("<<", PythonPunctuator.LEFT_OP));
     assertThat(lexer.lex("+="), hasToken("+=", PythonPunctuator.PLUS_ASSIGN));
     assertThat(lexer.lex("@="), hasToken("@=", PythonPunctuator.MATRIX_MULT_ASSIGN));
@@ -249,7 +249,7 @@ public class PythonLexerTest {
    * http://docs.python.org/reference/lexical_analysis.html#blank-lines
    */
   @Test
-  public void blank_lines() {
+  void blank_lines() {
     assertThat(lexer.lex("    # comment\n")).hasSize(1);
     assertThat(lexer.lex("    \n")).hasSize(1);
     assertThat(lexer.lex("    ")).hasSize(1);
@@ -260,7 +260,7 @@ public class PythonLexerTest {
    * http://docs.python.org/reference/lexical_analysis.html#indentation
    */
   @Test
-  public void indent_dedent() {
+  void indent_dedent() {
     assertThat(lexer.lex("    STATEMENT\n  STATEMENT"), allOf(hasToken("    ", PythonTokenType.INDENT), hasToken("  ", PythonTokenType.DEDENT)));
   }
 
@@ -268,7 +268,7 @@ public class PythonLexerTest {
    * http://docs.python.org/reference/lexical_analysis.html#implicit-line-joining
    */
   @Test
-  public void implicit_line_joining() {
+  void implicit_line_joining() {
     assertThat(lexer.lex("month_names = ['January', \n 'December']"), not(hasToken("\n", PythonTokenType.NEWLINE)));
   }
 
@@ -276,7 +276,7 @@ public class PythonLexerTest {
    * http://docs.python.org/reference/lexical_analysis.html#explicit-line-joining
    */
   @Test
-  public void explicit_line_joining() {
+  void explicit_line_joining() {
     assertThat(lexer.lex("line\r\nline"), hasToken(PythonTokenType.NEWLINE));
     assertThat(lexer.lex("line\rline"), hasToken(PythonTokenType.NEWLINE));
     assertThat(lexer.lex("line\nline"), hasToken(PythonTokenType.NEWLINE));
@@ -295,7 +295,7 @@ public class PythonLexerTest {
   }
 
   @Test
-  public void mixed_tabs_spaces() {
+  void mixed_tabs_spaces() {
     List<Token> tokens = lexer.lex("def fun():\n" +
       "   if True:\n" +
       "\tpass");
@@ -309,7 +309,7 @@ public class PythonLexerTest {
   }
 
   @Test
-  public void non_ascii_characters() {
+  void non_ascii_characters() {
     assertThat(lexer.lex("_hello123"), hasToken(GenericTokenType.IDENTIFIER));
     assertThat(lexer.lex("こんにちは"), hasToken(GenericTokenType.IDENTIFIER));
     assertThat(lexer.lex("_你好"), hasToken(GenericTokenType.IDENTIFIER));

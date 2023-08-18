@@ -24,16 +24,16 @@ import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 public class UseOfAnyAsTypeHintCheckTest {
   @Test
-  public void useOfAny() {
+  void useOfAny() {
     PythonCheckVerifier.verify("src/test/resources/checks/useOfAnyAsTypeHint.py", new UseOfAnyAsTypeHintCheck());
   }
   @Test
-  public void useOfTypingAny() {
+  void useOfTypingAny() {
     PythonCheckVerifier.verify("src/test/resources/checks/useOftypingAnyAsTypeHint.py", new UseOfAnyAsTypeHintCheck());
   }
 
   @Test
-  public void useOfUserDefinedTypeCalledAny() {
+  void useOfUserDefinedTypeCalledAny() {
     PythonCheckVerifier.verify("src/test/resources/checks/useOfUserDefinedTypeAnyAsTypeHint.py", new UseOfAnyAsTypeHintCheck());
   }
 }

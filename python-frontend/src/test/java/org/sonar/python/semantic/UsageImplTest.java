@@ -30,7 +30,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class UsageImplTest {
 
   @Test
-  public void binding_usages() {
+  void binding_usages() {
     assertBindingUsage(Usage.Kind.ASSIGNMENT_LHS, true);
     assertBindingUsage(Usage.Kind.COMPOUND_ASSIGNMENT_LHS, true);
     assertBindingUsage(Usage.Kind.IMPORT, true);

@@ -38,7 +38,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class IPynbRuleRepositoryTest {
 
   @Test
-  public void createRulesTest() throws IOException {
+  void createRulesTest() throws IOException {
     RulesDefinition.Repository repository = buildRepository();
 
     assertThat(repository).isNotNull();

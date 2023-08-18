@@ -28,12 +28,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class NotDiscoverableTestMethodCheckTest {
 
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/tests/notDiscoverableTestMethod.py", new NotDiscoverableTestMethodCheck());
   }
 
   @Test
-  public void test_scope() {
+  void test_scope() {
     assertThat(new NotDiscoverableTestMethodCheck().scope()).isEqualTo(PythonCheck.CheckScope.ALL);
   }
 }

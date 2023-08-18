@@ -30,12 +30,12 @@ import static org.sonar.python.parser.PythonParserAssert.assertThat;
 public class ClassDefTest extends RuleTest {
 
   @BeforeEach
-  public void init() {
+  void init() {
     setRootRule(PythonGrammar.CLASSDEF);
   }
 
   @Test
-  public void realLife() {
+  void realLife() {
     assertThat(p).matches(PythonTestUtils.appendNewLine("class Foo: pass"));
     assertThat(p).matches(PythonTestUtils.appendNewLine("class Foo(argument): pass"));
     assertThat(p).matches(PythonTestUtils.appendNewLine("class Foo(argument=value): pass"));

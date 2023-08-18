@@ -50,7 +50,7 @@ public class PythonCheckTest {
   }
 
   @Test
-  public void test() {
+  void test() {
     PythonVisitorCheck check = new PythonVisitorCheck() {
       @Override
       public void visitFunctionDef(FunctionDef pyFunctionDefTree) {
@@ -89,7 +89,7 @@ public class PythonCheckTest {
   }
 
   @Test
-  public void test_cost() {
+  void test_cost() {
     PythonVisitorCheck check = new PythonVisitorCheck() {
       @Override
       public void visitFunctionDef(FunctionDef pyFunctionDefTree) {
@@ -104,7 +104,7 @@ public class PythonCheckTest {
   }
 
   @Test
-  public void test_secondary_location() {
+  void test_secondary_location() {
     PythonVisitorCheck check = new PythonVisitorCheck() {
 
       private PreciseIssue preciseIssue;
@@ -144,13 +144,13 @@ public class PythonCheckTest {
 
 
   @Test
-  public void test_scope() {
+  void test_scope() {
     PythonVisitorCheck check = new PythonVisitorCheck() {};
     assertThat(check.scope()).isEqualTo(PythonCheck.CheckScope.MAIN);
   }
 
   @Test
-  public void test_scanWithoutParsing() {
+  void test_scanWithoutParsing() {
     PythonVisitorCheck check = new PythonVisitorCheck() {};
     assertThat(check.scanWithoutParsing(mock(PythonInputFileContext.class))).isTrue();
   }

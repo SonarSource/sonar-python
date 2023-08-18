@@ -40,7 +40,7 @@ public class NoSonarTest {
   public static final OrchestratorExtension ORCHESTRATOR = Tests.ORCHESTRATOR;
 
   @BeforeAll
-  public static void startServer() {
+  static void startServer() {
     ORCHESTRATOR.getServer().provisionProject(PROJECT_KEY, PROJECT_KEY);
     ORCHESTRATOR.getServer().associateProjectToQualityProfile(PROJECT_KEY, "py", PROFILE_NAME);
     SonarScanner build = SonarScanner.create()
@@ -53,7 +53,7 @@ public class NoSonarTest {
   }
 
   @Test
-  public void test_nosonar() {
+  void test_nosonar() {
     List<Issues.Issue> issues = issues(PROJECT_KEY);
     assertThat(issues).hasSize(2);
     assertThat(issues.get(0).getRule()).isEqualTo("python:PrintStatementUsage");

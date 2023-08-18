@@ -38,7 +38,7 @@ import static org.sonar.python.index.DescriptorsToProtobuf.toProtobufModuleDescr
 public class FunctionDescriptorTest {
 
   @Test
-  public void functionDescriptor() {
+  void functionDescriptor() {
     FunctionDescriptor functionDescriptor = lastFunctionDescriptor("def foo(x): ...");
     assertThat(functionDescriptor.decorators()).isEmpty();
     assertThat(functionDescriptor.hasDecorators()).isFalse();
@@ -50,7 +50,7 @@ public class FunctionDescriptorTest {
   }
 
   @Test
-  public void parameters() {
+  void parameters() {
     FunctionDescriptor functionDescriptor = lastFunctionDescriptor("def foo(x): ...");
     FunctionDescriptor.Parameter x = functionDescriptor.parameters().get(0);
     assertThat(x.name()).isEqualTo("x");
@@ -62,7 +62,7 @@ public class FunctionDescriptorTest {
   }
 
   @Test
-  public void parameterWithDefaultValue() {
+  void parameterWithDefaultValue() {
     FunctionDescriptor functionDescriptor = lastFunctionDescriptor("def foo(x=42): ...");
     FunctionDescriptor.Parameter x = functionDescriptor.parameters().get(0);
     assertThat(x.hasDefaultValue()).isTrue();
@@ -70,7 +70,7 @@ public class FunctionDescriptorTest {
   }
 
   @Test
-  public void parameterWithType() {
+  void parameterWithType() {
     FunctionDescriptor functionDescriptor = lastFunctionDescriptor("def foo(x: str): ...");
     FunctionDescriptor.Parameter parameter = functionDescriptor.parameters().get(0);
     assertThat(parameter.annotatedType()).isEqualTo("str");
@@ -78,7 +78,7 @@ public class FunctionDescriptorTest {
   }
 
   @Test
-  public void parameterWithPositionOnly() {
+  void parameterWithPositionOnly() {
     FunctionDescriptor functionDescriptor = lastFunctionDescriptor("def foo(x, /, y): ...");
     FunctionDescriptor.Parameter parameter = functionDescriptor.parameters().get(0);
     assertThat(parameter.isPositionalOnly()).isTrue();
@@ -86,7 +86,7 @@ public class FunctionDescriptorTest {
   }
 
   @Test
-  public void parameterWithKeywordOnly() {
+  void parameterWithKeywordOnly() {
     FunctionDescriptor functionDescriptor = lastFunctionDescriptor("def foo(x, *, y): ...");
     FunctionDescriptor.Parameter parameter = functionDescriptor.parameters().get(1);
     assertThat(parameter.isKeywordOnly()).isTrue();
@@ -94,7 +94,7 @@ public class FunctionDescriptorTest {
   }
 
   @Test
-  public void parameterWithPositional() {
+  void parameterWithPositional() {
     FunctionDescriptor functionDescriptor = lastFunctionDescriptor("def foo(x: str): ...");
     FunctionDescriptor.Parameter parameter = functionDescriptor.parameters().get(0);
     assertThat(parameter.annotatedType()).isEqualTo("str");
@@ -102,7 +102,7 @@ public class FunctionDescriptorTest {
   }
 
   @Test
-  public void variadicParameter() {
+  void variadicParameter() {
     FunctionDescriptor functionDescriptor = lastFunctionDescriptor("def foo(*x, **y): ...");
     FunctionDescriptor.Parameter parameter1 = functionDescriptor.parameters().get(0);
     FunctionDescriptor.Parameter parameter2 = functionDescriptor.parameters().get(1);
@@ -112,7 +112,7 @@ public class FunctionDescriptorTest {
   }
 
   @Test
-  public void decorators() {
+  void decorators() {
     FunctionDescriptor functionDescriptor = lastFunctionDescriptor(
       "@bar",
       "def foo(x): ...");
@@ -122,14 +122,14 @@ public class FunctionDescriptorTest {
   }
 
   @Test
-  public void asyncFunctions() {
+  void asyncFunctions() {
     FunctionDescriptor functionDescriptor = lastFunctionDescriptor("async def foo(): ...");
     assertThat(functionDescriptor.isAsynchronous()).isTrue();
     assertDescriptorToProtobuf(functionDescriptor);
   }
 
   @Test
-  public void method() {
+  void method() {
     FunctionDescriptor functionDescriptor = lastFunctionDescriptor(
       "class A:",
       "  def foo(self): ...");
@@ -138,7 +138,7 @@ public class FunctionDescriptorTest {
   }
 
   @Test
-  public void protobufSerializationWithoutLocationAndWithAnnotatedReturnType() {
+  void protobufSerializationWithoutLocationAndWithAnnotatedReturnType() {
     // FIXME: Annotated type name is never set for regular project decorators (only Typeshed) - SONARPY-1202
     List<FunctionDescriptor.Parameter> parameters = new ArrayList<>();
     parameters.add(new FunctionDescriptor.Parameter(null, "str", false, false, false, false, false, null));

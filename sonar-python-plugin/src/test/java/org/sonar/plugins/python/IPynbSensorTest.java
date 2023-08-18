@@ -72,12 +72,12 @@ public class IPynbSensorTest {
   public LogTesterJUnit5 logTester = new LogTesterJUnit5().setLevel(Level.DEBUG);
 
   @BeforeEach
-  public void init() {
+  void init() {
     context = SensorContextTester.create(baseDir);
   }
 
   @Test
-  public void sensor_descriptor() {
+  void sensor_descriptor() {
     activeRules = new ActiveRulesBuilder().build();
     DefaultSensorDescriptor descriptor = new DefaultSensorDescriptor();
     sensor().describe(descriptor);
@@ -88,7 +88,7 @@ public class IPynbSensorTest {
   }
 
   @Test
-  public void test_execute_on_sonarlint() {
+  void test_execute_on_sonarlint() {
     context.setRuntime(SONARLINT_RUNTIME);
 
     activeRules = new ActiveRulesBuilder()

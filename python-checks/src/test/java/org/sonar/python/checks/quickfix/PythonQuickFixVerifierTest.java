@@ -34,7 +34,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class PythonQuickFixVerifierTest {
 
   @Test
-  public void no_issue_found() {
+  void no_issue_found() {
     PythonCheck check = new SimpleCheck();
     assertThatThrownBy(() -> PythonQuickFixVerifier.verify(check, "a,b,c", ""))
       .isInstanceOf(AssertionError.class)
@@ -42,7 +42,7 @@ public class PythonQuickFixVerifierTest {
   }
 
   @Test
-  public void more_than_one_issue_raised() {
+  void more_than_one_issue_raised() {
     PythonCheck check = new SimpleCheck();
     assertThatThrownBy(() -> PythonQuickFixVerifier.verify(check, "a=10;b=3", ""))
       .isInstanceOf(AssertionError.class)
@@ -50,7 +50,7 @@ public class PythonQuickFixVerifierTest {
   }
 
   @Test
-  public void one_issue_raised_no_quickfix() {
+  void one_issue_raised_no_quickfix() {
     PythonCheck check = new SimpleCheckNoQuickFix();
 
     assertThatThrownBy(() -> PythonQuickFixVerifier.verify(check, "a=10", ""))
@@ -59,7 +59,7 @@ public class PythonQuickFixVerifierTest {
   }
 
   @Test
-  public void one_issue_one_qf_wrong_fix() {
+  void one_issue_one_qf_wrong_fix() {
     var expectedMsg = ("[The code with the quickfix applied is not the expected result.\n" +
       "\"Applied QuickFixes are:\n" +
       "[a!=10]\n" +
@@ -77,18 +77,18 @@ public class PythonQuickFixVerifierTest {
   }
 
   @Test
-  public void test_verify() {
+  void test_verify() {
     PythonQuickFixVerifier.verify(new SimpleCheck(), "a=10", "a!=10");
   }
 
   @Test
-  public void verifyIPython() {
+  void verifyIPython() {
     PythonQuickFixVerifier.verifyIPython(new SimpleCheck(), "a=10\n?a", "a!=10\n?a");
     PythonQuickFixVerifier.verifyIPythonQuickFixMessages(new SimpleCheck(), "a=10\n?a", "Add '!' here.");
   }
   
   @Test
-  public void test_multiple_lines() {
+  void test_multiple_lines() {
     PythonQuickFixVerifier.verify(new SimpleCheck(), "b \na=10", "b \na!=10");
   }
 

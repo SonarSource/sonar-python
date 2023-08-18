@@ -36,7 +36,7 @@ import static org.sonar.python.regex.RegexParserTestUtils.assertSuccessfulParse;
 public class PythonRegexIssueLocationTest {
 
   @Test
-  public void test_regex_locations_to_issue_locations() {
+  void test_regex_locations_to_issue_locations() {
     // force a separation
     RegexTree regex = assertSuccessfulParse("r'ab'");
     assertKind(RegexTree.Kind.SEQUENCE, regex);
@@ -53,7 +53,7 @@ public class PythonRegexIssueLocationTest {
   }
 
   @Test
-  public void test_location_of_multiple_regex_syntax_element() {
+  void test_location_of_multiple_regex_syntax_element() {
     // force a separation
     RegexTree regex = assertSuccessfulParse("r'ABC'");
     assertKind(RegexTree.Kind.SEQUENCE, regex);
@@ -71,7 +71,7 @@ public class PythonRegexIssueLocationTest {
   }
 
   @Test
-  public void test_location_of_regex_issue_location() {
+  void test_location_of_regex_issue_location() {
     // force a separation
     RegexTree regex = assertSuccessfulParse("r'A'");
     RegexIssueLocation location = new RegexIssueLocation(regex, "message");

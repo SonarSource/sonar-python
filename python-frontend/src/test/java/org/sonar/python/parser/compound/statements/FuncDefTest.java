@@ -30,22 +30,22 @@ import static org.sonar.python.parser.PythonParserAssert.assertThat;
 public class FuncDefTest extends RuleTest {
 
   @BeforeEach
-  public void init() {
+  void init() {
     setRootRule(PythonGrammar.FUNCDEF);
   }
 
   @Test
-  public void realLife() {
+  void realLife() {
     assertThat(p).matches(PythonTestUtils.appendNewLine("def func(): pass"));
   }
 
   @Test
-  public void trueAsParameter() {
+  void trueAsParameter() {
     assertThat(p).matches(PythonTestUtils.appendNewLine("def func(True): pass"));
   }
 
   @Test
-  public void trailingComa() {
+  void trailingComa() {
     assertThat(p).matches(PythonTestUtils.appendNewLine("def func(self, arg1, arg2, arg3, arg4, arg5, arg6, *args, **kwargs,): pass"));
   }
 

@@ -28,12 +28,12 @@ public class AllBranchesAreIdenticalCheckTest {
 
   private final PythonCheck check = new AllBranchesAreIdenticalCheck();
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/allBranchesAreIdentical.py", check);
   }
 
   @Test
-  public void quickfix_one_statement() {
+  void quickfix_one_statement() {
     String noncompliant =
       "def func():\n" +
       "    if b == 0:\n" +
@@ -47,7 +47,7 @@ public class AllBranchesAreIdenticalCheckTest {
   }
 
   @Test
-  public void quickfix_semicolons() {
+  void quickfix_semicolons() {
     String noncompliant =
       "def func():\n" +
       "    if b == 0:\n" +
@@ -61,7 +61,7 @@ public class AllBranchesAreIdenticalCheckTest {
   }
 
   @Test
-  public void if_enclosed() {
+  void if_enclosed() {
     String noncompliant =
       "def func():\n" +
       "    if b == 0:\n" +
@@ -79,14 +79,14 @@ public class AllBranchesAreIdenticalCheckTest {
 
 
   @Test
-  public void oneline() {
+  void oneline() {
     String noncompliant = "a = 1 if x else 1";
     String fixed = "a = 1";
     PythonQuickFixVerifier.verify(check, noncompliant, fixed);
   }
 
   @Test
-  public void no_quick_fix_with_side_effect_in_first_condition() {
+  void no_quick_fix_with_side_effect_in_first_condition() {
     PythonQuickFixVerifier.verifyNoQuickFixes(check,
       "if foo():\n" +
         "    doSomething()\n" +
@@ -96,7 +96,7 @@ public class AllBranchesAreIdenticalCheckTest {
   }
 
   @Test
-  public void no_quick_fix_with_side_effect_within_operator_right_hand() {
+  void no_quick_fix_with_side_effect_within_operator_right_hand() {
     PythonQuickFixVerifier.verifyNoQuickFixes(check,
       "if 1 == 2 and foo():\n" +
         "    doSomething()\n" +
@@ -106,7 +106,7 @@ public class AllBranchesAreIdenticalCheckTest {
   }
 
   @Test
-  public void no_quick_fix_with_side_effect_within_operator_left_hand() {
+  void no_quick_fix_with_side_effect_within_operator_left_hand() {
     PythonQuickFixVerifier.verifyNoQuickFixes(check,
       "if foo() and 1 == 2:\n" +
         "    doSomething()\n" +
@@ -116,7 +116,7 @@ public class AllBranchesAreIdenticalCheckTest {
   }
 
   @Test
-  public void no_quick_fix_with_side_effect_within_operator_parenthesis() {
+  void no_quick_fix_with_side_effect_within_operator_parenthesis() {
     PythonQuickFixVerifier.verifyNoQuickFixes(check,
       "if 1 == 3 or (foo() and 1 == 2):\n" +
         "    doSomething()\n" +
@@ -126,7 +126,7 @@ public class AllBranchesAreIdenticalCheckTest {
   }
 
   @Test
-  public void no_quick_fix_with_side_effect_in_elif_condition() {
+  void no_quick_fix_with_side_effect_in_elif_condition() {
     PythonQuickFixVerifier.verifyNoQuickFixes(check,
       "if b == 0:\n" +
         "    doSomething()\n" +
@@ -138,7 +138,7 @@ public class AllBranchesAreIdenticalCheckTest {
   }
 
   @Test
-  public void test_multiple_statement(){
+  void test_multiple_statement(){
     String noncompliant ="def func():\n" +
       "    if b == 0:\n" +
       "        doSomething()\n" +
@@ -153,7 +153,7 @@ public class AllBranchesAreIdenticalCheckTest {
   }
 
   @Test
-  public void comments() {
+  void comments() {
     String noncompliant = "if a == 0:\n" +
       "    # true branch comment1\n" +
       "    doSomething()  # true branch comment2\n" +
@@ -171,7 +171,7 @@ public class AllBranchesAreIdenticalCheckTest {
   }
 
   @Test
-  public void lambda(){
+  void lambda(){
     String noncompliant = "a = (lambda x: x+1\n" +
       "     if x > 0 # Noncompliant\n" +
       "     else x+1)";
@@ -180,7 +180,7 @@ public class AllBranchesAreIdenticalCheckTest {
   }
 
   @Test
-  public void multiple_conditional_statements(){
+  void multiple_conditional_statements(){
     String noncompliant = "a = 1 if x else 1 if y else 1 if z else 1";
     String fixed = "a = 1";
     PythonQuickFixVerifier.verify(check, noncompliant, fixed);
@@ -191,7 +191,7 @@ public class AllBranchesAreIdenticalCheckTest {
   }
 
   @Test
-  public void wrapped_conditional_expression(){
+  void wrapped_conditional_expression(){
     PythonQuickFixVerifier.verify(check,
       "a = (1 if x else 1)",
       "a = (1)"
@@ -199,7 +199,7 @@ public class AllBranchesAreIdenticalCheckTest {
   }
 
   @Test
-  public void test_elseif(){
+  void test_elseif(){
     String noncompliant ="def func():\n" +
       "    if b == 0:\n" +
       "        doSomething()\n" +
@@ -213,7 +213,7 @@ public class AllBranchesAreIdenticalCheckTest {
   }
 
   @Test
-  public void test_elseif_multiple(){
+  void test_elseif_multiple(){
     String noncompliant ="def func():\n" +
       "    if b == 0:\n" +
       "        doSomething()\n" +
@@ -231,7 +231,7 @@ public class AllBranchesAreIdenticalCheckTest {
   }
 
   @Test
-  public void test_elseif_more(){
+  void test_elseif_more(){
     String noncompliant ="def func():\n" +
       "    if b == 0:\n" +
       "        doSomething()\n" +
@@ -253,14 +253,14 @@ public class AllBranchesAreIdenticalCheckTest {
   }
 
   @Test
-  public void test_complex_condition(){
+  void test_complex_condition(){
     String noncompliant = "a = do_something(a, b, c, do_something_else(d)) if x else do_something(a, b, c, do_something_else(d))";
     String fixed = "a = do_something(a, b, c, do_something_else(d))";
     PythonQuickFixVerifier.verify(check, noncompliant, fixed);
   }
 
   @Test
-  public void test_remove(){
+  void test_remove(){
     String noncompliant = ""+
       "if b == 0:\n" +
       "    doSomething()\n" +

@@ -28,17 +28,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class AssertOnDissimilarTypesCheckTest {
 
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/tests/assertOnDissimilarTypes.py", new AssertOnDissimilarTypesCheck());
   }
 
   @Test
-  public void testAnotherLibrary() {
+  void testAnotherLibrary() {
     PythonCheckVerifier.verify("src/test/resources/checks/tests/assertOnDissimilarTypesAnotherLibrary.py", new AssertOnDissimilarTypesCheck());
   }
 
   @Test
-  public void test_scope() {
+  void test_scope() {
     assertThat(new AssertOnDissimilarTypesCheck().scope()).isEqualTo(PythonCheck.CheckScope.ALL);
   }
 }

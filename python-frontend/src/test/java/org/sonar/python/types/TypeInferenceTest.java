@@ -58,13 +58,13 @@ import static org.sonar.python.types.InferredTypes.typeName;
 public class TypeInferenceTest {
 
   @Test
-  public void unknown_expression_type() {
+  void unknown_expression_type() {
     assertThat(lastExpression("a.b").type()).isEqualTo(anyType());
     assertThat(lastExpression("a[0]").type()).isEqualTo(anyType());
   }
 
   @Test
-  public void unpacking_assignment() {
+  void unpacking_assignment() {
     assertThat(lastExpressionInFunction(
       "x, = 42,",
       "x"
@@ -72,7 +72,7 @@ public class TypeInferenceTest {
   }
 
   @Test
-  public void call_expression() {
+  void call_expression() {
     assertThat(lastExpression(
       "f()").type()).isEqualTo(anyType());
     assertThat(lastExpression(
@@ -87,12 +87,12 @@ public class TypeInferenceTest {
   }
 
   @Test
-  public void variable_outside_function() {
+  void variable_outside_function() {
     assertThat(lastExpression("a = 42; a").type()).isEqualTo(anyType());
   }
 
   @Test
-  public void parameter() {
+  void parameter() {
     assertThat(lastExpression(
       "def f(p):",
       "  p = 42",
@@ -107,7 +107,7 @@ public class TypeInferenceTest {
   }
 
   @Test
-  public void parameter_with_annotation() {
+  void parameter_with_annotation() {
     assertThat(lastExpression("def f(p: int): p").type()).isEqualTo(DECL_INT);
     assertThat(lastExpression("def f(p: str): p").type()).isEqualTo(DECL_STR);
     InferredType typeA = lastExpression("class A: ...\ndef f(p: A): p").type();
@@ -132,14 +132,14 @@ public class TypeInferenceTest {
   }
 
   @Test
-  public void local_variable() {
+  void local_variable() {
     assertThat(lastExpressionInFunction(
       "a = 42",
       "a").type()).isEqualTo(INT);
   }
 
   @Test
-  public void global_variable() {
+  void global_variable() {
     assertThat(lastExpressionInFunction(
       "global a",
       "a = 42",
@@ -147,7 +147,7 @@ public class TypeInferenceTest {
   }
 
   @Test
-  public void simple_propagation_between_variables() {
+  void simple_propagation_between_variables() {
     assertThat(lastExpressionInFunction(
       "a = ''",
       "b = a",
@@ -156,7 +156,7 @@ public class TypeInferenceTest {
   }
 
   @Test
-  public void variable_read_appearing_before_initialization() {
+  void variable_read_appearing_before_initialization() {
     assertThat(lastExpressionInFunction(
       "for i in range(3):",
       "  if i > 0: a = b",
@@ -165,7 +165,7 @@ public class TypeInferenceTest {
   }
 
   @Test
-  public void cycle_between_variables_with_initialization() {
+  void cycle_between_variables_with_initialization() {
     assertThat(lastExpressionInFunction(
       "for i in range(3):",
       "  if i > 1:  b = a",
@@ -175,7 +175,7 @@ public class TypeInferenceTest {
   }
 
   @Test
-  public void unresolvable_cycle_between_variables() {
+  void unresolvable_cycle_between_variables() {
     assertThat(lastExpressionInFunction(
       "if cond: a = b",
       "else:    b = a",
@@ -184,7 +184,7 @@ public class TypeInferenceTest {
   }
 
   @Test
-  public void unsupported_assignment() {
+  void unsupported_assignment() {
     assertThat(lastExpressionInFunction(
       "(a, b) = foo()",
       "a").type()).isEqualTo(anyType());
@@ -209,7 +209,7 @@ public class TypeInferenceTest {
   }
 
   @Test
-  public void returned_value_type() {
+  void returned_value_type() {
     assertThat(((ReturnStatement) lastStatement("return")).returnValueType()).isEqualTo(NONE);
     assertThat(((ReturnStatement) lastStatement("return None")).returnValueType()).isEqualTo(NONE);
     assertThat(((ReturnStatement) lastStatement("return 42")).returnValueType()).isEqualTo(INT);
@@ -218,7 +218,7 @@ public class TypeInferenceTest {
   }
 
   @Test
-  public void propagate_return_type_to_variable() {
+  void propagate_return_type_to_variable() {
     assertThat(lastExpressionInFunction(
       "a = 'abc'.capitalize()",
       "a").type()).isEqualTo(STR);
@@ -250,7 +250,7 @@ public class TypeInferenceTest {
   }
 
   @Test
-  public void multiple_types() {
+  void multiple_types() {
     assertThat(lastExpressionInFunction(
       "if cond: a = ''",
       "else:    a = 42",
@@ -258,7 +258,7 @@ public class TypeInferenceTest {
   }
 
   @Test
-  public void numeric_literals() {
+  void numeric_literals() {
     assertThat(lastExpression("42").type()).isEqualTo(INT);
     assertThat(lastExpression("42_3").type()).isEqualTo(INT);
     assertThat(lastExpression("0b101").type()).isEqualTo(INT);
@@ -271,7 +271,7 @@ public class TypeInferenceTest {
   }
 
   @Test
-  public void string_literals() {
+  void string_literals() {
     assertThat(lastExpression("'hello world'").type()).isEqualTo(STR);
     assertThat(lastExpression("f'hello world'").type()).isEqualTo(STR);
     assertThat(lastExpression("'hello' 'world'").type()).isEqualTo(STR);
@@ -284,7 +284,7 @@ public class TypeInferenceTest {
   }
 
   @Test
-  public void list_literals() {
+  void list_literals() {
     assertThat(lastExpression("[]").type()).isEqualTo(LIST);
     assertThat(lastExpression("[42]").type()).isEqualTo(LIST);
 
@@ -292,7 +292,7 @@ public class TypeInferenceTest {
   }
 
   @Test
-  public void dict_literals() {
+  void dict_literals() {
     assertThat(lastExpression("{}").type()).isEqualTo(DICT);
     assertThat(lastExpression("{'x' : 1, 'y' : 2}").type()).isEqualTo(DICT);
 
@@ -300,36 +300,36 @@ public class TypeInferenceTest {
   }
 
   @Test
-  public void set_literals() {
+  void set_literals() {
     assertThat(lastExpression("{1, 2, 3}").type()).isEqualTo(SET);
 
     assertThat(lastExpression("{ v for v in foo }").type()).isEqualTo(SET);
   }
 
   @Test
-  public void generator_literal() {
+  void generator_literal() {
     assertThat(lastExpression("(v for v in foo)").type()).isEqualTo(anyType());
   }
 
   @Test
-  public void tuple_literal() {
+  void tuple_literal() {
     assertThat(lastExpression("()").type()).isEqualTo(TUPLE);
     assertThat(lastExpression("(1, 2)").type()).isEqualTo(TUPLE);
   }
 
   @Test
-  public void none_type() {
+  void none_type() {
     assertThat(lastExpression("None").type()).isEqualTo(NONE);
   }
 
   @Test
-  public void true_false_literal() {
+  void true_false_literal() {
     assertThat(lastExpression("True").type()).isEqualTo(BOOL);
     assertThat(lastExpression("False").type()).isEqualTo(BOOL);
   }
 
   @Test
-  public void builtin_function_types() {
+  void builtin_function_types() {
     assertThat(lastExpression("all([1, 2, 3])").type()).isEqualTo(BOOL);
     assertThat(lastExpression("round(42)").type()).isEqualTo(AnyType.ANY);
     ClassSymbol classSymbolRange = ((ClassSymbol) TypeShed.builtinSymbols().get("range"));
@@ -338,13 +338,13 @@ public class TypeInferenceTest {
   }
 
   @Test
-  public void builtin_method_types() {
+  void builtin_method_types() {
     assertThat(lastExpression("'abc'.capitalize()").type()).isEqualTo(STR);
     assertThat(lastExpression("list().copy()").type()).isEqualTo(LIST);
   }
 
   @Test
-  public void conditional_expressions() {
+  void conditional_expressions() {
     assertThat(lastExpression("42 if '' else 43").type()).isEqualTo(INT);
     assertThat(lastExpression("42 if cond else ''").type()).isEqualTo(or(INT, STR));
     assertThat(lastExpression("42 if '' else xxx").type()).isEqualTo(anyType());
@@ -363,7 +363,7 @@ public class TypeInferenceTest {
   }
 
   @Test
-  public void flow_sensitive_type_inference() {
+  void flow_sensitive_type_inference() {
     assertThat(lastExpressionInFunction(
       "x = 42",
       "x = '42'",
@@ -391,7 +391,7 @@ public class TypeInferenceTest {
   }
 
   @Test
-  public void flow_insensitive_when_try_except() {
+  void flow_insensitive_when_try_except() {
     FileInput fileInput = parse(
       "def f(p):",
       "  try:",
@@ -414,7 +414,7 @@ public class TypeInferenceTest {
   }
 
   @Test
-  public void nested_try_except() {
+  void nested_try_except() {
     FileInput fileInput = parse(
       "def func(cond):",
       "  def f(p):",
@@ -467,7 +467,7 @@ public class TypeInferenceTest {
   }
 
   @Test
-  public void nested_try_except_2() {
+  void nested_try_except_2() {
     FileInput fileInput = parse(
       "def func(cond):",
       "  try:",
@@ -519,7 +519,7 @@ public class TypeInferenceTest {
   }
 
   @Test
-  public void execution_order_assignment_statement() {
+  void execution_order_assignment_statement() {
     FileInput fileInput = parse(
       "def foo():",
       "  x = 42",
@@ -535,7 +535,7 @@ public class TypeInferenceTest {
   }
 
   @Test
-  public void isinstance_flow_sensitive() {
+  void isinstance_flow_sensitive() {
     assertThat(lastExpression(
       "def f(x: int):",
       "  if isinstance(x, Foo):",
@@ -596,7 +596,7 @@ public class TypeInferenceTest {
   }
 
   @Test
-  public void isinstance_flow_insensitive() {
+  void isinstance_flow_insensitive() {
     assertThat(lastExpression(
       "def f(x: int):",
       "  try:",
@@ -607,7 +607,7 @@ public class TypeInferenceTest {
   }
 
   @Test
-  public void typeshed_attributes() {
+  void typeshed_attributes() {
     assertThat(lastExpression(
       "def f():",
       "  e = OSError()",
@@ -616,7 +616,7 @@ public class TypeInferenceTest {
   }
 
   @Test
-  public void user_defined_attributes() {
+  void user_defined_attributes() {
     assertThat(lastExpression(
       "class Foo:",
       "  attr: int",

@@ -34,46 +34,46 @@ public class FStringParserTest {
   private final FStringParser parser = new FStringParser();
 
   @Test
-  public void empty_f_string() {
+  void empty_f_string() {
     assertThat(parse("f''")).isEmpty();
     assertThat(parse("f\"\"")).isEmpty();
     assertThat(parse("f''''''")).isEmpty();
   }
 
   @Test
-  public void no_formatted_expression() {
+  void no_formatted_expression() {
     assertThat(parse("f'a'")).isEmpty();
     assertThat(parse("f\"a\"")).isEmpty();
     assertThat(parse("f'''a'''")).isEmpty();
   }
 
   @Test
-  public void name_expression() {
+  void name_expression() {
     List<AstNode> nodes = parse("f'hello {var}!'");
     assertThat(nodes).hasSize(1);
     assertThat(nodes.get(0).getTokens()).extracting(Token::getValue).containsExactly("{", "var", "}");
   }
 
   @Test
-  public void triple_quoted() {
+  void triple_quoted() {
     List<AstNode> nodes = parse("f'''hello '{var}'!'''");
     assertThat(nodes).hasSize(1);
     assertThat(nodes.get(0).getTokens()).extracting(Token::getValue).containsExactly("{", "var", "}");
   }
 
   @Test
-  public void escaped_curly_brace() {
+  void escaped_curly_brace() {
     assertThat(parse("f'{{abc}}'")).isEmpty();
     assertThat(parse("f'{{abc}}{xyz}'").get(0).getTokens()).extracting(Token::getValue).containsExactly("{", "xyz", "}");
   }
 
   @Test
-  public void expressions_should_not_be_merged() {
+  void expressions_should_not_be_merged() {
     assertThat(parse("f'{x} {+y}!'")).hasSize(2);
   }
 
   @Test
-  public void token_line_and_column() {
+  void token_line_and_column() {
     Token varToken = parse("f'hello {var}!'", 42, 5).get(0).getTokens().get(1);
     assertThat(varToken.getValue()).isEqualTo("var");
     assertThat(varToken.getLine()).isEqualTo(42);
@@ -81,7 +81,7 @@ public class FStringParserTest {
   }
 
   @Test
-  public void token_line_and_column_in_multiline_f_string() {
+  void token_line_and_column_in_multiline_f_string() {
     Token varToken = parse("f'''hello\n {var}'''", 42, 5).get(0).getTokens().get(1);
     assertThat(varToken.getValue()).isEqualTo("var");
     assertThat(varToken.getLine()).isEqualTo(43);
@@ -89,14 +89,14 @@ public class FStringParserTest {
   }
 
   @Test
-  public void conversions() {
+  void conversions() {
     assertThat(parse("f'{x!a}'")).hasSize(1);
     assertThat(parse("f'{foo(\"!a\")!a}'")).hasSize(1);
     assertThat(parse("f'{user=!s}'")).hasSize(1);
   }
 
   @Test
-  public void format_specifiers() {
+  void format_specifiers() {
     assertThat(parse("f'{today:%B %d, %Y}'")).hasSize(1);
     assertThat(parse("f'{number:#0x}'")).hasSize(1);
     assertThat(parse("f'result: {value:{width}.{precision}}'")).hasSize(1);

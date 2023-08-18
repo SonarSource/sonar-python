@@ -25,12 +25,12 @@ import org.sonar.python.checks.utils.PythonCheckVerifier;
 public class DbNoPasswordCheckTest {
 
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/dbNoPassword.py", new DbNoPasswordCheck());
   }
 
   @Test
-  public void test_django() {
+  void test_django() {
     PythonCheckVerifier.verify("src/test/resources/checks/dbNoPassword/settings.py", new DbNoPasswordCheck());
   }
 

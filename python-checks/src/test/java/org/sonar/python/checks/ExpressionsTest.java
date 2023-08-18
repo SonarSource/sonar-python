@@ -46,7 +46,7 @@ public class ExpressionsTest {
   private PythonParser parser = PythonParser.create();
 
   @Test
-  public void falsy() {
+  void falsy() {
     assertThat(isFalsy(null)).isFalse();
 
     assertThat(isFalsy(exp("True"))).isFalse();
@@ -81,7 +81,7 @@ public class ExpressionsTest {
   }
 
   @Test
-  public void truthy() {
+  void truthy() {
     assertThat(isTruthy(null)).isFalse();
 
     assertThat(isTruthy(exp("True"))).isTrue();
@@ -106,7 +106,7 @@ public class ExpressionsTest {
   }
 
   @Test
-  public void remove_parentheses() {
+  void remove_parentheses() {
     assertThat(removeParentheses(exp("42")).getKind()).isEqualTo(Kind.NUMERIC_LITERAL);
     assertThat(removeParentheses(exp("(42)")).getKind()).isEqualTo(Kind.NUMERIC_LITERAL);
     assertThat(removeParentheses(exp("((42))")).getKind()).isEqualTo(Kind.NUMERIC_LITERAL);
@@ -115,7 +115,7 @@ public class ExpressionsTest {
   }
 
   @Test
-  public void unescape_string_literal() {
+  void unescape_string_literal() {
     assertThat(unescape(stringLiteral("''"))).isEqualTo("");
     assertThat(unescape(stringLiteral("'' ''"))).isEqualTo("");
     assertThat(unescape(stringLiteral("'abc' 'def'"))).isEqualTo("abcdef");
@@ -123,7 +123,7 @@ public class ExpressionsTest {
   }
 
   @Test
-  public void unescape_string_element_using_different_prefix() {
+  void unescape_string_element_using_different_prefix() {
     assertThat(unescape(stringElement("''"))).isEqualTo("");
     assertThat(unescape(stringElement("b''"))).isEqualTo("");
     assertThat(unescape(stringElement("'a'"))).isEqualTo("a");
@@ -139,7 +139,7 @@ public class ExpressionsTest {
   }
 
   @Test
-  public void unescape_string_element_containing_ignored_line_beak() {
+  void unescape_string_element_containing_ignored_line_beak() {
     // linux
     assertThat(unescape(stringElement("'a\\\nb'"))).isEqualTo("ab");
     // windows
@@ -150,7 +150,7 @@ public class ExpressionsTest {
   }
 
   @Test
-  public void unescape_string_element_backslash_and_quotes() {
+  void unescape_string_element_backslash_and_quotes() {
     assertThat(unescape(stringElement("'\\\\'"))).isEqualTo("\\");
     assertThat(unescape(stringElement("'0\\\\'"))).isEqualTo("0\\");
     assertThat(unescape(stringElement("'\\\\0'"))).isEqualTo("\\0");
@@ -158,7 +158,7 @@ public class ExpressionsTest {
   }
 
   @Test
-  public void unescape_string_element_named_escape_sequences() {
+  void unescape_string_element_named_escape_sequences() {
     assertThat(unescape(stringElement("'\\a'"))).isEqualTo("\u0007");
     assertThat(unescape(stringElement("'\\b'"))).isEqualTo("\u0008");
     assertThat(unescape(stringElement("'\\f'"))).isEqualTo("\u000C");
@@ -169,18 +169,18 @@ public class ExpressionsTest {
   }
 
   @Test
-  public void unescape_string_element_python_string_with_x_u_U_escape_sequences() {
+  void unescape_string_element_python_string_with_x_u_U_escape_sequences() {
     assertThat(unescape(stringElement("'\\x48\\u0065\\U0000006c\\x6c\\x6f\\x20\\x57\\x6f\\x72\\x6c\\x64\\x21'")))
       .isEqualTo("Hello World!");
   }
 
   @Test
-  public void unescape_string_element_python_bytes_with_x_u_U_escape_sequences() {
+  void unescape_string_element_python_bytes_with_x_u_U_escape_sequences() {
     assertThat(unescape(stringElement("b'\\x48\\u0065\\U0000006c\\x6c'"))).isEqualTo("H\\u0065\\U0000006cl");
   }
 
   @Test
-  public void unescape_string_element_various_octal_length() {
+  void unescape_string_element_various_octal_length() {
     assertThat(unescape(stringElement("'\\0'"))).isEqualTo("\u0000");
     assertThat(unescape(stringElement("'\\1'"))).isEqualTo("\u0001");
     assertThat(unescape(stringElement("'\\7'"))).isEqualTo("\u0007");
@@ -193,12 +193,12 @@ public class ExpressionsTest {
   }
 
   @Test
-  public void unescape_string_element_unsupported() {
+  void unescape_string_element_unsupported() {
     assertThat(unescape(stringElement("'\\N{LATIN CAPITAL LETTER A}'"))).isEqualTo("\\N{LATIN CAPITAL LETTER A}");
   }
 
   @Test
-  public void unescape_string_element_invalid_escape_sequences() {
+  void unescape_string_element_invalid_escape_sequences() {
     assertThat(unescapeString("\\", true)).isEqualTo("\\");
     assertThat(unescape(stringElement("'\\o'"))).isEqualTo("\\o");
     assertThat(unescape(stringElement("'\\z'"))).isEqualTo("\\z");
@@ -242,7 +242,7 @@ public class ExpressionsTest {
   }
 
   @Test
-  public void singleAssignedValue() {
+  void singleAssignedValue() {
     assertThat(lastNameValue("x = 42; x").getKind()).isEqualTo(Kind.NUMERIC_LITERAL);
     assertThat(lastNameValue("x = ''; x").getKind()).isEqualTo(Kind.STRING_LITERAL);
     assertThat(lastNameValue("(x, y) = (42, 43); x")).isNull();

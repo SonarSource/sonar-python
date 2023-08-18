@@ -26,12 +26,12 @@ import org.sonar.python.checks.utils.PythonCheckVerifier;
 public class ArgumentNumberCheckTest {
 
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/argumentNumber.py", new ArgumentNumberCheck());
   }
 
   @Test
-  public void test_multiple_files() {
+  void test_multiple_files() {
     PythonCheckVerifier.verify(
       Arrays.asList("src/test/resources/checks/argumentNumberWithImport.py", "src/test/resources/checks/argumentNumberImported.py"),
       new ArgumentNumberCheck());

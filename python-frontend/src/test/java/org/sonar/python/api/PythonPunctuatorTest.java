@@ -28,7 +28,7 @@ import static org.mockito.Mockito.mock;
 public class PythonPunctuatorTest {
 
   @Test
-  public void test() {
+  void test() {
     assertThat(PythonPunctuator.values()).hasSize(47);
 
     AstNode astNode = mock(AstNode.class);

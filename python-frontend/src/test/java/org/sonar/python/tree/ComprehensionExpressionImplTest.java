@@ -31,7 +31,7 @@ import static org.mockito.Mockito.mock;
 
 public class ComprehensionExpressionImplTest {
   @Test
-  public void type() {
+  void type() {
     Token token = mock(Token.class);
     Expression resultExpression = mock(Expression.class);
     ComprehensionFor compFor = mock(ComprehensionFor.class);

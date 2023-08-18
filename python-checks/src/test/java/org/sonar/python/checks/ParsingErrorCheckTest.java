@@ -34,7 +34,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class ParsingErrorCheckTest {
 
   @Test
-  public void test() throws Exception {
+  void test() throws Exception {
     File file = new File("src/test/resources/checks/parsingError.py");
 
     PythonParser parser = PythonParser.create();

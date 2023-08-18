@@ -28,7 +28,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class PythonCfgBlockTest {
 
   @Test
-  public void loop_of_empty_block() {
+  void loop_of_empty_block() {
     PythonCfgEndBlock end = new PythonCfgEndBlock();
     PythonCfgSimpleBlock succ = new PythonCfgSimpleBlock(end);
     PythonCfgSimpleBlock block = new PythonCfgSimpleBlock(succ);

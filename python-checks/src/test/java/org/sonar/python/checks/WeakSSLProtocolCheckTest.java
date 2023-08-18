@@ -25,22 +25,22 @@ import org.sonar.python.checks.utils.PythonCheckVerifier;
 public class WeakSSLProtocolCheckTest {
 
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/weakSSLProtocol.py", new WeakSSLProtocolCheck());
   }
 
   @Test
-  public void test_fallback_import() {
+  void test_fallback_import() {
     PythonCheckVerifier.verify("src/test/resources/checks/weakSSLProtocol_fallback_import.py", new WeakSSLProtocolCheck());
   }
 
   @Test
-  public void test_apigateway() {
+  void test_apigateway() {
     PythonCheckVerifier.verify("src/test/resources/checks/weakSSLProtocol_apigateway.py", new WeakSSLProtocolCheck());
   }
 
   @Test
-  public void test_elasticopensearch() {
+  void test_elasticopensearch() {
     PythonCheckVerifier.verify("src/test/resources/checks/weakSSLProtocol_elastic_and_open_search.py", new WeakSSLProtocolCheck());
   }
 }

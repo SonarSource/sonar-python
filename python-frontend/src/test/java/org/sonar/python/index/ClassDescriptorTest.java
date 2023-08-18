@@ -34,7 +34,7 @@ import static org.sonar.python.index.DescriptorUtils.descriptor;
 public class ClassDescriptorTest {
 
   @Test
-  public void classDescriptor() {
+  void classDescriptor() {
     ClassDescriptor classDescriptor = lastClassDescriptor(
       "class A:",
       "  def foo(): ...");
@@ -51,7 +51,7 @@ public class ClassDescriptorTest {
   }
 
   @Test
-  public void classDescriptorWithSuperClass() {
+  void classDescriptorWithSuperClass() {
     ClassDescriptor classDescriptor = lastClassDescriptor(
       "class B: ...",
       "class A(B): ...");
@@ -60,7 +60,7 @@ public class ClassDescriptorTest {
   }
 
   @Test
-  public void classDescriptorWithSuperClassWithoutSymbol() {
+  void classDescriptorWithSuperClassWithoutSymbol() {
     ClassDescriptor classDescriptor = lastClassDescriptor(
       "def foo(): ...",
       "class A(foo()): ...");
@@ -70,7 +70,7 @@ public class ClassDescriptorTest {
   }
 
   @Test
-  public void classDescriptorWithMetaclass() {
+  void classDescriptorWithMetaclass() {
     ClassDescriptor classDescriptor = lastClassDescriptor(
       "class B(type): ...",
       "class A(metaclass=B): ...");
@@ -80,7 +80,7 @@ public class ClassDescriptorTest {
   }
 
   @Test
-  public void classDescriptorDecorator() {
+  void classDescriptorDecorator() {
     ClassDescriptor classDescriptor = lastClassDescriptor(
       "@foo",
       "class A: ...");
@@ -89,7 +89,7 @@ public class ClassDescriptorTest {
   }
 
   @Test
-  public void classDescriptorGenerics() {
+  void classDescriptorGenerics() {
     ClassDescriptor classDescriptor = lastClassDescriptor(
       "from typing import Generic",
       "class A(Generic[str]): ...");
@@ -98,7 +98,7 @@ public class ClassDescriptorTest {
   }
 
   @Test
-  public void classDescriptorWithVariousMembers() {
+  void classDescriptorWithVariousMembers() {
     ClassDescriptor classDescriptor = lastClassDescriptorWithName("A",
       "class A:",
       "  def foo(): ...",
@@ -112,7 +112,7 @@ public class ClassDescriptorTest {
   }
 
   @Test
-  public void protobufSerializationWithoutLocationNorFQN() {
+  void protobufSerializationWithoutLocationNorFQN() {
     ClassDescriptor classDescriptor = new ClassDescriptor(
       "foo",
       null,

@@ -29,12 +29,12 @@ import static org.sonar.python.parser.PythonParserAssert.assertThat;
 public class ArgumentListTest extends RuleTest {
 
   @BeforeEach
-  public void init() {
+  void init() {
     setRootRule(PythonGrammar.ARGLIST);
   }
 
   @Test
-  public void arg_list() {
+  void arg_list() {
     assertThat(p).matches("1");
     assertThat(p).matches("a, b");
     assertThat(p).notMatches("");

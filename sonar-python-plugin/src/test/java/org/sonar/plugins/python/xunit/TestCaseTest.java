@@ -27,7 +27,7 @@ import static org.junit.Assert.assertEquals;
 
 public class TestCaseTest {
   @Test
-  public void rendersRightDetails() {
+  void rendersRightDetails() {
     Map<String, TestCase> ioMap = new HashMap<>();
 
     ioMap.put("<testcase status=\"ok\" time=\"1\" name=\"name\"/>",

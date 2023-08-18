@@ -62,7 +62,7 @@ public class MypySensorTest {
   public LogTesterJUnit5 logTester = new LogTesterJUnit5().setLevel(Level.DEBUG);
 
   @Test
-  public void descriptor() {
+  void descriptor() {
     DefaultSensorDescriptor sensorDescriptor = new DefaultSensorDescriptor();
     mypySensor.describe(sensorDescriptor);
     assertThat(sensorDescriptor.name()).isEqualTo("Import of Mypy issues");
@@ -77,7 +77,7 @@ public class MypySensorTest {
   }
 
   @Test
-  public void issues_with_sonarqube_79() throws IOException {
+  void issues_with_sonarqube_79() throws IOException {
     List<ExternalIssue> externalIssues = executeSensorImporting("mypy_output.txt");
     assertThat(externalIssues).hasSize(5);
 
@@ -104,7 +104,7 @@ public class MypySensorTest {
   }
 
   @Test
-  public void issues_with_sonarqube_79_column_numbers() throws IOException {
+  void issues_with_sonarqube_79_column_numbers() throws IOException {
     List<ExternalIssue> externalIssues = executeSensorImporting("mypy_output_show_column_numbers.txt");
     assertThat(externalIssues).hasSize(5);
 
@@ -131,7 +131,7 @@ public class MypySensorTest {
   }
 
   @Test
-  public void issues_with_sonarqube_79_error_end() throws IOException {
+  void issues_with_sonarqube_79_error_end() throws IOException {
     List<ExternalIssue> externalIssues = executeSensorImporting("mypy_output_show_error_end.txt");
     assertThat(externalIssues).hasSize(5);
 
@@ -158,7 +158,7 @@ public class MypySensorTest {
   }
 
   @Test
-  public void unknown_file_in_report() throws IOException {
+  void unknown_file_in_report() throws IOException {
     List<ExternalIssue> externalIssues = executeSensorImporting(UNKNOWN_FILE_REPORT);
     assertThat(externalIssues).hasSize(5);
 
@@ -167,14 +167,14 @@ public class MypySensorTest {
   }
 
   @Test
-  public void no_issues_without_report_paths_property() throws IOException {
+  void no_issues_without_report_paths_property() throws IOException {
     List<ExternalIssue> externalIssues = executeSensorImporting(null);
     assertThat(externalIssues).isEmpty();
     assertNoErrorWarnDebugLogs(logTester);
   }
 
   @Test
-  public void no_issues_with_invalid_report_path() throws IOException {
+  void no_issues_with_invalid_report_path() throws IOException {
     List<ExternalIssue> externalIssues = executeSensorImporting("invalid-path.txt");
     assertThat(externalIssues).isEmpty();
     assertThat(onlyOneLogElement(logTester.logs(Level.ERROR)))
@@ -183,14 +183,14 @@ public class MypySensorTest {
   }
 
   @Test
-  public void empty_mypy_file() throws IOException {
+  void empty_mypy_file() throws IOException {
     List<ExternalIssue> externalIssues = executeSensorImporting("empty.txt");
     assertThat(externalIssues).isEmpty();
     assertNoErrorWarnDebugLogs(logTester);
   }
 
   @Test
-  public void invalid_mypy_file() throws IOException {
+  void invalid_mypy_file() throws IOException {
     List<ExternalIssue> externalIssues = executeSensorImporting("invalid_format.txt");
     assertThat(externalIssues).isEmpty();
     assertThat(onlyOneLogElement(logTester.logs(Level.DEBUG))).isEqualTo("Cannot parse the line: this is not a mypy output");

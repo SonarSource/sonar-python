@@ -61,7 +61,7 @@ public class PythonVisitorCheckTest {
   }
 
   @Test
-  public void test() {
+  void test() {
     TestPythonCheck check = new TestPythonCheck (){
       @Override
       public void visitFunctionDef(FunctionDef pyFunctionDefTree) {
@@ -89,7 +89,7 @@ public class PythonVisitorCheckTest {
   }
 
   @Test
-  public void test_cost() {
+  void test_cost() {
     TestPythonCheck check = new TestPythonCheck (){
       @Override
       public void visitFunctionDef(FunctionDef pyFunctionDefTree) {
@@ -105,7 +105,7 @@ public class PythonVisitorCheckTest {
   }
 
   @Test
-  public void working_directory() throws IOException {
+  void working_directory() throws IOException {
     Path workDir = Files.createTempDirectory("workDir");
     PythonSubscriptionCheck check = new PythonSubscriptionCheck() {
       @Override
@@ -122,7 +122,7 @@ public class PythonVisitorCheckTest {
   }
 
   @Test
-  public void working_directory_null() throws IOException {
+  void working_directory_null() throws IOException {
     PythonSubscriptionCheck check = new PythonSubscriptionCheck() {
       @Override
       public void initialize(SubscriptionCheck.Context context) {
@@ -138,7 +138,7 @@ public class PythonVisitorCheckTest {
   }
 
   @Test
-  public void cache_context() throws IOException {
+  void cache_context() throws IOException {
     PythonSubscriptionCheck check = new PythonSubscriptionCheck() {
       @Override
       public void initialize(SubscriptionCheck.Context context) {
@@ -160,7 +160,7 @@ public class PythonVisitorCheckTest {
   }
 
   @Test
-  public void stubFilesSymbols() {
+  void stubFilesSymbols() {
     PythonVisitorContext context = TestPythonVisitorRunner.createContext(FILE);
 
     SymbolsRecordingCheck check = new SymbolsRecordingCheck();

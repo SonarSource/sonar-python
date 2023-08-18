@@ -29,12 +29,12 @@ import static org.sonar.python.parser.PythonParserAssert.assertThat;
 public class ImportStatementTest extends RuleTest {
 
   @BeforeEach
-  public void init() {
+  void init() {
     setRootRule(PythonGrammar.IMPORT_STMT);
   }
 
   @Test
-  public void realLife() {
+  void realLife() {
     assertThat(p).matches("from boto.s3.connection import S3Connection");
     assertThat(p).matches("import sys");
   }

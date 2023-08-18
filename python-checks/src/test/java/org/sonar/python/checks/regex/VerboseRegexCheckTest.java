@@ -26,12 +26,12 @@ import org.sonar.python.checks.utils.PythonCheckVerifier;
 public class VerboseRegexCheckTest {
 
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/regex/verboseRegexCheck.py", new VerboseRegexCheck());
   }
 
   @Test
-  public void dotReplacementQuickFixTest() {
+  void dotReplacementQuickFixTest() {
     var before = "import re\n" +
       "re.match(r\"[\\s\\S]\", input, re.DOTALL)";
     var after = "import re\n" +
@@ -42,7 +42,7 @@ public class VerboseRegexCheckTest {
   }
 
   @Test
-  public void digitReplacementQuickFixTest() {
+  void digitReplacementQuickFixTest() {
     var before = "import re\n" +
       "re.match(r\"foo[0-9]barr\", input)";
     var after = "import re\n" +
@@ -53,7 +53,7 @@ public class VerboseRegexCheckTest {
   }
 
   @Test
-  public void plusReplacementQuickFixTest() {
+  void plusReplacementQuickFixTest() {
     var before = "import re\n" +
       "re.match(r\"x{1,}\", input)";
     var after = "import re\n" +
@@ -64,7 +64,7 @@ public class VerboseRegexCheckTest {
   }
 
   @Test
-  public void redundantRange() {
+  void redundantRange() {
     var before = "import re\n" +
       "re.match(r\"[ah-hz]\", input)";
     var after = "import re\n" +
@@ -75,7 +75,7 @@ public class VerboseRegexCheckTest {
   }
 
   @Test
-  public void repetition() {
+  void repetition() {
     var before = "import re\n" +
       "re.match(r\"xx*\", input)";
     var after = "import re\n" +

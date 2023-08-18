@@ -49,7 +49,7 @@ public class PythonSubscriptionCheckTest {
   }
 
   @Test
-  public void test() {
+  void test() {
     TestPythonCheck check = new TestPythonCheck() {
       @Override
       public void initialize(Context context) {
@@ -78,7 +78,7 @@ public class PythonSubscriptionCheckTest {
   }
 
   @Test
-  public void test_cost() {
+  void test_cost() {
     TestPythonCheck check = new TestPythonCheck() {
       @Override
       public void initialize(Context context) {
@@ -96,7 +96,7 @@ public class PythonSubscriptionCheckTest {
   }
 
   @Test
-  public void test_tokens() {
+  void test_tokens() {
     TestPythonCheck check = new TestPythonCheck() {
       @Override
       public void initialize(Context context) {
@@ -115,7 +115,7 @@ public class PythonSubscriptionCheckTest {
   }
 
   @Test
-  public void test_trivia() {
+  void test_trivia() {
     TestPythonCheck check = new TestPythonCheck() {
       @Override
       public void initialize(Context context) {
@@ -137,7 +137,7 @@ public class PythonSubscriptionCheckTest {
   }
 
   @Test
-  public void test_file_line() {
+  void test_file_line() {
     TestPythonCheck check = new TestPythonCheck() {
       @Override
       public void initialize(Context context) {

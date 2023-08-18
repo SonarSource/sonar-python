@@ -26,11 +26,11 @@ import org.sonar.python.checks.utils.PythonCheckVerifier;
 public class BooleanExpressionInExceptCheckTest {
 
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/booleanExpressionInExcept.py", new BooleanExpressionInExceptCheck());
   }
   @Test
-  public void quickFixTest() {
+  void quickFixTest() {
     var before = "try:\n" +
       "    foo()\n" +
       "except ValueError or TypeError and SomeError:\n" +
@@ -44,7 +44,7 @@ public class BooleanExpressionInExceptCheckTest {
   }
 
   @Test
-  public void wrappedInParenthesisQuickFixTest() {
+  void wrappedInParenthesisQuickFixTest() {
     var before = "try:\n" +
       "    foo()\n" +
       "except (ValueError or TypeError and SomeError):\n" +
@@ -58,7 +58,7 @@ public class BooleanExpressionInExceptCheckTest {
   }
 
   @Test
-  public void nestedQuickFixTest() {
+  void nestedQuickFixTest() {
     var before = "try:\n" +
       "    foo()\n" +
       "except ((ValueError or TypeError) and pkg.cstm.SomeError):\n" +
@@ -72,7 +72,7 @@ public class BooleanExpressionInExceptCheckTest {
   }
 
   @Test
-  public void noQuickFixTest() {
+  void noQuickFixTest() {
     var before = "try:\n" +
       "    foo()\n" +
       "except (ValueError or pkg.cstm.SomeError()):\n" +

@@ -29,19 +29,19 @@ import static org.sonar.python.parser.PythonParserAssert.assertThat;
 public class ExecStatementTest extends RuleTest {
 
   @BeforeEach
-  public void init() {
+  void init() {
     setRootRule(PythonGrammar.EXEC_STMT);
   }
 
   @Test
-  public void ok() {
+  void ok() {
     assertThat(p).matches("exec expr");
     assertThat(p).matches("exec expr in test");
     assertThat(p).matches("exec expr in test, test");
   }
 
   @Test
-  public void realLife() {
+  void realLife() {
     assertThat(p).matches("exec '1'");
     assertThat(p).notMatches("exec('')");
   }

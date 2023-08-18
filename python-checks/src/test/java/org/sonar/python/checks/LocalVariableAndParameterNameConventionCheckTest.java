@@ -25,7 +25,7 @@ import org.sonar.python.checks.utils.PythonCheckVerifier;
 public class LocalVariableAndParameterNameConventionCheckTest {
 
   @Test
-  public void test() {
+  void test() {
     LocalVariableAndParameterNameConventionCheck check = new LocalVariableAndParameterNameConventionCheck();
     check.format = "^[_a-z][a-z0-9_]+$";
     PythonCheckVerifier.verify("src/test/resources/checks/localVariableAndParameterNameIncompatibility.py", check);

@@ -25,7 +25,7 @@ import org.sonar.python.checks.utils.PythonCheckVerifier;
 public class S3BucketVersioningCheckTest {
 
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/cdk/s3BucketVersioning.py", new S3BucketVersioningCheck());
   }
 

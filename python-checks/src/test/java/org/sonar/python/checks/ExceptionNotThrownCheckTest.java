@@ -26,14 +26,14 @@ import org.sonar.python.checks.utils.PythonCheckVerifier;
 public class ExceptionNotThrownCheckTest {
 
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify(
       "src/test/resources/checks/exceptionNotThrownCheck.py",
       new ExceptionNotThrownCheck());
   }
 
   @Test
-  public void quick_fix_test() {
+  void quick_fix_test() {
     var input = "def func():\n" +
       "  NotImplementedError()\n";
     var expected = "def func():\n" +

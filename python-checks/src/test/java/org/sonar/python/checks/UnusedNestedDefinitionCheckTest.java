@@ -25,7 +25,7 @@ import org.sonar.python.checks.utils.PythonCheckVerifier;
 public class UnusedNestedDefinitionCheckTest {
 
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/unusedNestedDefinition.py", new UnusedNestedDefinitionCheck());
   }
 }

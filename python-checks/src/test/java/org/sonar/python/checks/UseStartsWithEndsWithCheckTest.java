@@ -25,7 +25,7 @@ import org.sonar.python.checks.utils.PythonCheckVerifier;
 public class UseStartsWithEndsWithCheckTest {
 
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/useStartsWithEndsWithCheck.py", new UseStartsWithEndsWithCheck());
   }
 

@@ -28,7 +28,7 @@ import static org.mockito.Mockito.mock;
 public class PythonTokenTypeTest {
 
   @Test
-  public void test() {
+  void test() {
     assertThat(PythonTokenType.values()).hasSize(6);
 
     AstNode astNode = mock(AstNode.class);

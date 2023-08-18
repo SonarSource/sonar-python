@@ -26,7 +26,7 @@ import org.sonar.python.checks.utils.PythonCheckVerifier;
 public class SingleCharacterAlternationCheckTest {
 
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/regex/singleCharacterAlternationCheck.py", new SingleCharacterAlternationCheck());
   }
 

@@ -42,14 +42,14 @@ public class IPythonTreeMakerTest extends RuleTest {
   private final IPythonTreeMaker treeMaker = new IPythonTreeMaker();
 
   @Test
-  public void emptyFile() {
+  void emptyFile() {
     var parse = parseIPython("", treeMaker::fileInput);
     assertThat(parse).isNotNull();
     assertThat(parse.statements()).isNull();
   }
 
   @Test
-  public void cellDelimiter() {
+  void cellDelimiter() {
     var parse = parseIPython("print(b)\n" +
       "#SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER\nprint(c)", treeMaker::fileInput);
     assertThat(parse).isNotNull();
@@ -60,7 +60,7 @@ public class IPythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void cellDelimiterAtBeginningOfFile() {
+  void cellDelimiterAtBeginningOfFile() {
     var parse = parseIPython("#SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER\nprint(b)\n" +
       "print(c)", treeMaker::fileInput);
     assertThat(parse).isNotNull();
@@ -71,7 +71,7 @@ public class IPythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void cellDelimiterAtEndOfFile() {
+  void cellDelimiterAtEndOfFile() {
     var parse = parseIPython("print(a)\n" +
       "print(b)\n#SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER\n", treeMaker::fileInput);
     List<Statement> statements = parse.statements().statements();
@@ -81,7 +81,7 @@ public class IPythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void cellDelimiterAfterCompoundStatement() {
+  void cellDelimiterAfterCompoundStatement() {
     var parse = parseIPython("if(b):\n" +
       "  print(x)\n" +
       "#SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER\nprint(c)", treeMaker::fileInput);
@@ -92,7 +92,7 @@ public class IPythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void cellDelimiterInCompoundStatementShouldFail() {
+  void cellDelimiterInCompoundStatementShouldFail() {
     assertThatThrownBy(() -> parseIPython("if(b):\n" +
       "  print(x)\n" +
       "#SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER\n" +
@@ -100,7 +100,7 @@ public class IPythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void regularCellFollowedByMagicCell() {
+  void regularCellFollowedByMagicCell() {
     var parse = parseIPython("print(b)\n#SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER\n" +
       "%%hello\n#SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER\nprint(c)", treeMaker::fileInput);
     List<Statement> statements = parse.statements().statements();
@@ -111,7 +111,7 @@ public class IPythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void cellMagicWithMissingDelimiterStillParsed() {
+  void cellMagicWithMissingDelimiterStillParsed() {
     var parse = parseIPython("print(b)\n" +
       "%%hello\n#SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER\nprint(c)", treeMaker::fileInput);
     List<Statement> statements = parse.statements().statements();
@@ -122,7 +122,7 @@ public class IPythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void cellMagicUntilEndOfFile() {
+  void cellMagicUntilEndOfFile() {
     setRootRule(PythonGrammar.FILE_INPUT);
     var parse = parseIPython("%%hello\n" +
       "print(b)\n", treeMaker::fileInput);
@@ -132,7 +132,7 @@ public class IPythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void dynamicObjectInfo() {
+  void dynamicObjectInfo() {
     var file = parseIPython("a = A()\n" +
       "??a.foo\n" +
       "?a.foo\n" +
@@ -179,7 +179,7 @@ public class IPythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void lineMagic() {
+  void lineMagic() {
     var statements = parseIPython("print(b)\n" +
       "a = %alias showPath pwd && ls -a\n", treeMaker::fileInput).statements().statements();
     assertThat(statements).hasSize(2);
@@ -214,7 +214,7 @@ public class IPythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void lineMagicStatement() {
+  void lineMagicStatement() {
     var statements = parseIPython("print(b)\n" +
       "%alias showPath pwd && ls -a\n", treeMaker::fileInput).statements().statements();
     assertThat(statements).hasSize(2);
@@ -252,7 +252,7 @@ public class IPythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void systemShellAccess() {
+  void systemShellAccess() {
     var statements = parseIPython("print(b)\n" +
       "!pwd \\\n" +
       "  && ls -a | sed 's/^/\\    /'\n" +
@@ -273,7 +273,7 @@ public class IPythonTreeMakerTest extends RuleTest {
   }
 
   @Test
-  public void assignmentRhs() {
+  void assignmentRhs() {
     var statementList = parseIPython("print(b)\n" +
       "a = yield foo(b)\n" +
       "c = bar(a) + b\n" +

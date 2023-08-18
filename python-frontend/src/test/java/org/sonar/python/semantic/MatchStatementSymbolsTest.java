@@ -51,7 +51,7 @@ import static org.sonar.python.PythonTestUtils.getLastDescendant;
 public class MatchStatementSymbolsTest {
 
   @Test
-  public void capture_pattern() {
+  void capture_pattern() {
     CapturePattern capturePattern = patternFromCase("case others: print(others)");
     Symbol others = capturePattern.name().symbol();
     assertThat(others.name()).isEqualTo("others");
@@ -60,7 +60,7 @@ public class MatchStatementSymbolsTest {
   }
 
   @Test
-  public void wildcard_pattern() {
+  void wildcard_pattern() {
     Name wildcard = getLastDescendant(PythonTestUtils.parse(
       "def foo(value):",
       "  match(value):",
@@ -70,7 +70,7 @@ public class MatchStatementSymbolsTest {
   }
 
   @Test
-  public void class_pattern() {
+  void class_pattern() {
     ClassPattern classPattern = pattern(
       "class A:",
       "  foo = 42",
@@ -95,7 +95,7 @@ public class MatchStatementSymbolsTest {
   }
 
   @Test
-  public void value_pattern() {
+  void value_pattern() {
     ValuePattern valuePattern = pattern(
       "import command",
       "def foo(value):",
@@ -106,7 +106,7 @@ public class MatchStatementSymbolsTest {
   }
 
   @Test
-  public void as_pattern() {
+  void as_pattern() {
     AsPattern asPattern = patternFromCase("case 42 as x: ...");
     Symbol symbol = asPattern.alias().name().symbol();
     assertThat(symbol.name()).isEqualTo("x");
@@ -123,7 +123,7 @@ public class MatchStatementSymbolsTest {
   }
 
   @Test
-  public void or_pattern() {
+  void or_pattern() {
     OrPattern orPattern = pattern(
       "class A: ...",
       "class B: ...",
@@ -137,7 +137,7 @@ public class MatchStatementSymbolsTest {
   }
 
   @Test
-  public void sequence_pattern() {
+  void sequence_pattern() {
     SequencePattern sequencePattern = patternFromCase("case [42, x, *others]: ...");
     CapturePattern capturePattern = (CapturePattern) sequencePattern.elements().get(1);
     StarPattern starPattern = (StarPattern) sequencePattern.elements().get(2);
@@ -146,7 +146,7 @@ public class MatchStatementSymbolsTest {
   }
 
   @Test
-  public void mapping_pattern() {
+  void mapping_pattern() {
     MappingPattern mappingPattern = patternFromCase("case {'x': 'foo', 'y': val, **others}: ...");
     KeyValuePattern keyValuePattern = (KeyValuePattern) mappingPattern.elements().get(1);
     CapturePattern capturePattern = (CapturePattern) keyValuePattern.value();
@@ -156,14 +156,14 @@ public class MatchStatementSymbolsTest {
   }
 
   @Test
-  public void group_pattern() {
+  void group_pattern() {
     GroupPattern groupPattern = patternFromCase("case (x): ...");
     CapturePattern capturePattern = (CapturePattern) groupPattern.pattern();
     assertThat(capturePattern.name().symbol()).isNotNull();
   }
 
   @Test
-  public void guard() {
+  void guard() {
     CapturePattern capturePattern = patternFromCase("case x if x > 42: ...");
     assertThat(capturePattern.name().symbol().usages()).extracting(Usage::kind).containsExactly(PATTERN_DECLARATION, OTHER);
   }

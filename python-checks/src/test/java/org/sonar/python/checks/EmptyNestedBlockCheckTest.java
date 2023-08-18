@@ -26,12 +26,12 @@ import org.sonar.python.checks.utils.PythonCheckVerifier;
 public class EmptyNestedBlockCheckTest {
 
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/emptyNestedBlock.py", new EmptyNestedBlockCheck());
   }
 
   @Test
-  public void quickFixTest() {
+  void quickFixTest() {
     var check = new EmptyNestedBlockCheck();
 
     var before = "def foo():\n" +
@@ -47,7 +47,7 @@ public class EmptyNestedBlockCheckTest {
   }
 
   @Test
-  public void inlineQuickFixTest() {
+  void inlineQuickFixTest() {
     var check = new EmptyNestedBlockCheck();
 
     var before = "def foo():\n" +
@@ -62,7 +62,7 @@ public class EmptyNestedBlockCheckTest {
   }
 
   @Test
-  public void rootInlineQuickFixTest() {
+  void rootInlineQuickFixTest() {
     var check = new EmptyNestedBlockCheck();
 
     var before = "if a < 3: pass\n" +

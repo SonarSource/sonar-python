@@ -40,13 +40,13 @@ public class AbstractRegexCheckTest {
   private static final File FILE = new File("src/test/resources/checks/regex/abstractRegexCheck.py");
 
   @Test
-  public void test_regex_is_visited() {
+  void test_regex_is_visited() {
     Check check = new Check();
     PythonCheckVerifier.verify(FILE.getAbsolutePath(), check);
   }
 
   @Test
-  public void test_regex_element_is_only_reported_once() {
+  void test_regex_element_is_only_reported_once() {
     Check check = new Check() {
       @Override
       public void checkRegex(RegexParseResult regexParseResult, CallExpression regexFunctionCall) {
@@ -62,7 +62,7 @@ public class AbstractRegexCheckTest {
   }
 
   @Test
-  public void test_flags() {
+  void test_flags() {
     Check check = new Check(true);
     PythonCheckVerifier.verify("src/test/resources/checks/regex/abstractRegexCheckFlags.py", check);
   }

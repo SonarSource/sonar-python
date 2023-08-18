@@ -43,7 +43,7 @@ public class PythonProfileTest {
   }
 
   @Test
-  public void profile() {
+  void profile() {
     BuiltInQualityProfilesDefinition.BuiltInQualityProfile profile = getProfile();
     assertThat(profile.rules()).extracting("repoKey").containsOnly("python", "pythonsecurity");
     assertThat(profile.rules().size()).isGreaterThan(25);
@@ -51,7 +51,7 @@ public class PythonProfileTest {
   }
 
   @Test
-  public void should_contains_security_rules_if_available() {
+  void should_contains_security_rules_if_available() {
     // no security rule available
     PythonRules.getRuleKeys().clear();
     assertThat(getSecurityRuleKeys())
@@ -69,7 +69,7 @@ public class PythonProfileTest {
   }
 
   @Test
-  public void should_contains_dataflow_bug_detection_rules_if_available() {
+  void should_contains_dataflow_bug_detection_rules_if_available() {
     // no dataflow bug detection rules available
     com.sonarsource.plugins.dbd.api.PythonRules.getDataflowBugDetectionRuleKeys().clear();
     assertThat(getDataflowBugDetectionRuleKeys()).isEmpty();
@@ -85,7 +85,7 @@ public class PythonProfileTest {
   }
 
   @Test
-  public void test_get_external_rule_keys() {
+  void test_get_external_rule_keys() {
     // invalid class name
     assertThat(getExternalRuleKeys("xxx", SECURITY_RULE_KEYS_METHOD_NAME, GET_REPOSITORY_KEY)).isEmpty();
 

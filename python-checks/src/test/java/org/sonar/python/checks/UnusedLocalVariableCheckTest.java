@@ -26,19 +26,19 @@ import org.sonar.python.checks.utils.PythonCheckVerifier;
 public class UnusedLocalVariableCheckTest {
 
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/unusedLocalVariable.py", new UnusedLocalVariableCheck());
   }
 
   @Test
-  public void custom() {
+  void custom() {
     UnusedLocalVariableCheck check = new UnusedLocalVariableCheck();
     check.format = "(_|myignore)";
     PythonCheckVerifier.verify("src/test/resources/checks/unusedLocalVariableCustom.py", check);
   }
 
   @Test
-  public void tupleQuickFixTest() {
+  void tupleQuickFixTest() {
     var check = new UnusedLocalVariableCheck();
 
     var before = "def using_tuples():\n" +
@@ -65,7 +65,7 @@ public class UnusedLocalVariableCheckTest {
   }
 
   @Test
-  public void exceptClauseQuickFixTest() {
+  void exceptClauseQuickFixTest() {
     var check = new UnusedLocalVariableCheck();
 
     var before = "def foo():\n" +

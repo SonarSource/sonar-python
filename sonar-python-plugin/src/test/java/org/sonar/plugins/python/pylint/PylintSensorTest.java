@@ -64,7 +64,7 @@ public class PylintSensorTest {
   public LogTesterJUnit5 logTester = new LogTesterJUnit5().setLevel(Level.DEBUG);
 
   @Test
-  public void test_descriptor() {
+  void test_descriptor() {
     DefaultSensorDescriptor sensorDescriptor = new DefaultSensorDescriptor();
     pylintSensor.describe(sensorDescriptor);
     assertThat(sensorDescriptor.name()).isEqualTo("Import of Pylint issues");
@@ -88,7 +88,7 @@ public class PylintSensorTest {
   }
 
   @Test
-  public void issues_default_format() throws IOException {
+  void issues_default_format() throws IOException {
     List<ExternalIssue> externalIssues = executeSensorImporting(7, 9, PYLINT_REPORT_DEFAULT_FORMAT, false);
     assertThat(externalIssues).hasSize(10);
 
@@ -121,7 +121,7 @@ public class PylintSensorTest {
   }
 
   @Test
-  public void issues_no_column_info() throws IOException {
+  void issues_no_column_info() throws IOException {
     List<ExternalIssue> externalIssues = executeSensorImporting(7, 9, PYLINT_REPORT_NO_COLUMN, false);
     assertThat(externalIssues).hasSize(3);
 
@@ -168,7 +168,7 @@ public class PylintSensorTest {
   }
 
   @Test
-  public void issues_other_formats() throws IOException {
+  void issues_other_formats() throws IOException {
     List<ExternalIssue> externalIssues = executeSensorImporting(7, 9, "pylint_brackets.txt", false);
     assertThat(externalIssues).hasSize(10);
     ExternalIssue first = externalIssues.get(0);
@@ -193,7 +193,7 @@ public class PylintSensorTest {
   }
 
   @Test
-  public void no_issues_unknown_files() throws IOException {
+  void no_issues_unknown_files() throws IOException {
     List<ExternalIssue> externalIssues = executeSensorImporting(7, 9, "pylint_report_unknown_files.txt", false);
     assertThat(externalIssues).isEmpty();
     assertThat(onlyOneLogElement(logTester.logs(Level.WARN))).hasToString("Failed to resolve 1 file path(s) in Pylint report. " +
@@ -201,7 +201,7 @@ public class PylintSensorTest {
   }
 
   @Test
-  public void no_issues_with_invalid_report_path() throws IOException {
+  void no_issues_with_invalid_report_path() throws IOException {
     List<ExternalIssue> externalIssues = executeSensorImporting(7, 9, "invalid-path.txt", false);
     assertThat(externalIssues).isEmpty();
     assertThat(onlyOneLogElement(logTester.logs(Level.ERROR)))
@@ -210,7 +210,7 @@ public class PylintSensorTest {
   }
 
   @Test
-  public void import_with_legacy_property() throws IOException {
+  void import_with_legacy_property() throws IOException {
     List<ExternalIssue> externalIssues = executeSensorImporting(7, 9, "pylint_brackets.txt", true);
     assertThat(externalIssues).hasSize(10);
     assertThat(onlyOneLogElement(logTester.logs())).hasToString("The use of 'sonar.python.pylint.reportPath' is deprecated." +

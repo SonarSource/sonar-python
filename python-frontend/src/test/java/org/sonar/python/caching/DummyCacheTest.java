@@ -29,7 +29,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class DummyCacheTest {
 
   @Test
-  public void read_always_throws_an_IllegalArgumentException() {
+  void read_always_throws_an_IllegalArgumentException() {
     String key = "key";
 
     DummyCache cache = new DummyCache();
@@ -39,13 +39,13 @@ public class DummyCacheTest {
   }
 
   @Test
-  public void contains_always_returns_false() {
+  void contains_always_returns_false() {
     DummyCache cache = new DummyCache();
     assertThat(cache.contains("key")).isFalse();
   }
 
   @Test
-  public void write_bytes_throws_an_exception_on_the_second_write_to_the_same_key() {
+  void write_bytes_throws_an_exception_on_the_second_write_to_the_same_key() {
     String key = "key";
     byte[] data = "data".getBytes(StandardCharsets.UTF_8);
     DummyCache cache = new DummyCache();
@@ -56,7 +56,7 @@ public class DummyCacheTest {
   }
 
   @Test
-  public void copyFromPrevious_always_throws_an_IllegalArgumentException() {
+  void copyFromPrevious_always_throws_an_IllegalArgumentException() {
     String key = "key";
     DummyCache cache = new DummyCache();
 
@@ -66,7 +66,7 @@ public class DummyCacheTest {
   }
 
   @Test
-  public void readBytes_returns_null() {
+  void readBytes_returns_null() {
     assertThat(new DummyCache().readBytes("foo")).isNull();
   }
 }

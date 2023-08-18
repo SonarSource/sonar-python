@@ -42,7 +42,7 @@ import static org.sonar.python.PythonTestUtils.pythonFile;
 
 public class PythonVisitorContextTest {
   @Test
-  public void fullyQualifiedModuleName() {
+  void fullyQualifiedModuleName() {
     FileInput fileInput = PythonTestUtils.parse("def foo(): pass");
 
     PythonFile pythonFile = pythonFile("my_module.py");
@@ -62,7 +62,7 @@ public class PythonVisitorContextTest {
   }
 
   @Test
-  public void initModuleFullyQualifiedName() {
+  void initModuleFullyQualifiedName() {
     FileInput fileInput = PythonTestUtils.parse("def fn(): pass");
     PythonFile pythonFile = pythonFile("__init__.py");
     new PythonVisitorContext(fileInput, pythonFile, null, "foo.bar");
@@ -75,7 +75,7 @@ public class PythonVisitorContextTest {
   }
 
   @Test
-  public void globalSymbols() {
+  void globalSymbols() {
     String code = "from mod import a, b";
     FileInput fileInput = new PythonTreeMaker().fileInput(PythonParser.create().parse(code));
     PythonFile pythonFile = Mockito.mock(PythonFile.class, "my_module.py");

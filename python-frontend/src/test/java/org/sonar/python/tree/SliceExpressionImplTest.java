@@ -33,7 +33,7 @@ import static org.sonar.python.types.InferredTypes.isDeclaredTypeWithTypeClass;
 public class SliceExpressionImplTest {
 
   @Test
-  public void type() {
+  void type() {
     assertThat(lastExpression("[42, 43][1:2]").type()).isEqualTo(LIST);
     assertThat(lastExpression("(42, 43)[1:2]").type()).isEqualTo(TUPLE);
     assertThat(lastExpression("foo()[1:2]").type()).isEqualTo(InferredTypes.anyType());
@@ -55,7 +55,7 @@ public class SliceExpressionImplTest {
   }
 
   @Test
-  public void type_dependencies() {
+  void type_dependencies() {
     SliceExpressionImpl sliceExpression = (SliceExpressionImpl) lastExpression("[42, 43][1:2]");
     assertThat(sliceExpression.typeDependencies()).containsExactly(sliceExpression.object());
   }

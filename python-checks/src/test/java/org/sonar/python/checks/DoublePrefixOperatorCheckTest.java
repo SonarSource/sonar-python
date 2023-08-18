@@ -25,7 +25,7 @@ import org.sonar.python.checks.utils.PythonCheckVerifier;
 public class DoublePrefixOperatorCheckTest {
 
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/doublePrefixOperator.py", new DoublePrefixOperatorCheck());
   }
 

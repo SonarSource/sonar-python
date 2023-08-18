@@ -26,12 +26,12 @@ import org.sonar.python.checks.utils.PythonCheckVerifier;
 public class RedundantJumpCheckTest {
 
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/redundantJump.py", new RedundantJumpCheck());
   }
 
   @Test
-  public void quickFixTest() {
+  void quickFixTest() {
     String input = "def redundant_jump(x):\n" +
       "  if x == 1:\n" +
       "    print(True)\n" +

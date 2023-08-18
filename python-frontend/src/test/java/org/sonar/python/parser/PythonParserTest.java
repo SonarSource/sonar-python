@@ -32,7 +32,7 @@ public class PythonParserTest {
   private final PythonParser parser = PythonParser.create();
 
   @Test
-  public void test() throws Exception {
+  void test() throws Exception {
     Collection<File> files = listFiles();
     for (File file : files) {
       String fileContent = new String(Files.readAllBytes(file.toPath()), UTF_8);

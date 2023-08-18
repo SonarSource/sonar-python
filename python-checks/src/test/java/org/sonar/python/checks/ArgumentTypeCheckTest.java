@@ -25,12 +25,12 @@ import org.sonar.python.checks.utils.PythonCheckVerifier;
 public class ArgumentTypeCheckTest {
 
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/argumentType.py", new ArgumentTypeCheck());
   }
 
   @Test
-  public void test_overloaded_functions() {
+  void test_overloaded_functions() {
     PythonCheckVerifier.verify("src/test/resources/checks/argumentType_overloaded_functions.py", new ArgumentTypeCheck());
   }
 }

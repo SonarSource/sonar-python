@@ -25,14 +25,14 @@ import org.sonar.python.checks.utils.PythonCheckVerifier;
 public class FunctionComplexityCheckTest {
 
   @Test
-  public void test() {
+  void test() {
     FunctionComplexityCheck check = new FunctionComplexityCheck();
     check.maximumFunctionComplexityThreshold = 2;
     PythonCheckVerifier.verify("src/test/resources/checks/functionComplexity.py", check);
   }
 
   @Test
-  public void test_with_default_threshold() {
+  void test_with_default_threshold() {
     FunctionComplexityCheck check = new FunctionComplexityCheck();
     PythonCheckVerifier.verify("src/test/resources/checks/functionComplexityWithDefaultThreshold.py", check);
   }

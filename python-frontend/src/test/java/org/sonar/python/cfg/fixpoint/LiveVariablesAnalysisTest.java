@@ -59,7 +59,7 @@ public class LiveVariablesAnalysisTest {
   private PythonFile file = Mockito.mock(PythonFile.class, "file1.py");
 
   @Test
-  public void test_simple_kill() {
+  void test_simple_kill() {
     verifyLiveVariableAnalysis(
       "block( succ = [END], liveIn = [], liveOut = [], gen = [], kill = [_foo, _bar, _qix])",
       "foo = 1",
@@ -68,7 +68,7 @@ public class LiveVariablesAnalysisTest {
   }
 
   @Test
-  public void test_simple_gen() {
+  void test_simple_gen() {
     verifyLiveVariableAnalysisWithArgs(
       "foo, bar",
       "block( succ = [END], liveIn = [_foo, _bar], liveOut = [], gen = [_foo, _bar])",
@@ -76,7 +76,7 @@ public class LiveVariablesAnalysisTest {
   }
 
   @Test
-  public void test_complex_reads_and_writes() {
+  void test_complex_reads_and_writes() {
     verifyLiveVariableAnalysisWithArgs(
       "a,b",
       "block( succ = [END], liveIn = [_a,_b], liveOut = [], gen = [_a,_b], kill = [])",
@@ -142,7 +142,7 @@ public class LiveVariablesAnalysisTest {
   }
 
   @Test
-  public void test_write_before_read() {
+  void test_write_before_read() {
     verifyLiveVariableAnalysis("" +
       "condition( succ = [body, END], liveIn = [], liveOut = [], gen = [], kill = [_a])",
       "a = 1",
@@ -154,7 +154,7 @@ public class LiveVariablesAnalysisTest {
   }
 
   @Test
-  public void test_while() {
+  void test_while() {
     verifyLiveVariableAnalysis(
       "before_loop( succ = [cond], liveIn = [], liveOut = [_a], gen = [], kill = [_a])",
       "a = 1",
@@ -168,7 +168,7 @@ public class LiveVariablesAnalysisTest {
   }
 
   @Test
-  public void test_foreach() {
+  void test_foreach() {
     verifyLiveVariableAnalysis(
       "before_loop( succ = [cond], liveIn = [], liveOut = [_a], gen = [], kill = [_a])",
       "a = 1",
@@ -182,7 +182,7 @@ public class LiveVariablesAnalysisTest {
   }
 
   @Test
-  public void read_symbols() {
+  void read_symbols() {
     List<String> lines = Arrays.asList(
       "foo = 1",
       "bar = f()",
@@ -199,7 +199,7 @@ public class LiveVariablesAnalysisTest {
   }
 
   @Test
-  public void is_symbol_used_in_block() {
+  void is_symbol_used_in_block() {
     List<String> lines = Arrays.asList(
       "a = 10",
       "b = 42",

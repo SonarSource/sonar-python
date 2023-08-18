@@ -56,7 +56,7 @@ public class CheckListTest {
    * Enforces that each check declared in list.
    */
   @Test
-  public void count() {
+  void count() {
     int count = 0;
     List<File> files = (List<File>) FileUtils.listFiles(new File("src/main/java/org/sonar/python/checks/"), new String[]{"java"}, true);
     for (File file : files) {
@@ -71,7 +71,7 @@ public class CheckListTest {
    * Enforces that each check has test, name and description.
    */
   @Test
-  public void test() {
+  void test() {
     Iterable<Class> checks = CheckList.getChecks();
 
     for (Class cls : checks) {
@@ -83,7 +83,7 @@ public class CheckListTest {
   }
 
   @Test
-  public void validate_sqKey_field_in_json() throws IOException {
+  void validate_sqKey_field_in_json() throws IOException {
     try (Stream<Path> fileStream = Files.find(METADATA_DIR, 1, (path, attr) -> path.toString().endsWith(".json"))) {
       List<Path> jsonList = fileStream
         .filter(path -> !path.toString().endsWith("Sonar_way_profile.json"))
@@ -105,7 +105,7 @@ public class CheckListTest {
   }
 
   @Test
-  public void test_no_deprecated_rule_in_default_profile() throws IOException, ParseException {
+  void test_no_deprecated_rule_in_default_profile() throws IOException, ParseException {
     try (Stream<Path> fileStream = Files.find(METADATA_DIR, 1, (path, attr) -> path.toString().endsWith(".json"))) {
       List<Path> jsonList = fileStream.collect(Collectors.toList());
 
@@ -134,7 +134,7 @@ public class CheckListTest {
   }
 
   @Test
-  public void test_locally_deprecated_rules_stay_deprecated() throws IOException, ParseException {
+  void test_locally_deprecated_rules_stay_deprecated() throws IOException, ParseException {
     // Some rules have been deprecated only for Python. When executed, rule-api reverts those rule to "ready" status, which is incorrect.
     // This test is here to ensure it doesn't happen.
     List<String> locallyDeprecatedRules = Arrays.asList("S1523", "S4721");

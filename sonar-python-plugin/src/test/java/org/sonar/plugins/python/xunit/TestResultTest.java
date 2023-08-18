@@ -31,12 +31,12 @@ public class TestResultTest {
   TestResult testResult;
 
   @BeforeEach
-  public void setUp() {
+  void setUp() {
     testResult = new TestResult();
   }
 
   @Test
-  public void newBornSuiteShouldHaveVirginStatistics() {
+  void newBornSuiteShouldHaveVirginStatistics() {
     assertThat(testResult.getTests()).isEqualTo(0);
     assertThat(testResult.getExecutedTests()).isEqualTo(0);
     assertThat(testResult.getErrors()).isEqualTo(0);
@@ -46,7 +46,7 @@ public class TestResultTest {
   }
 
   @Test
-  public void addingTestCaseShouldIncrementStatistics() {
+  void addingTestCaseShouldIncrementStatistics() {
     int testBefore = testResult.getTests();
     int timeBefore = testResult.getTime();
 
@@ -58,7 +58,7 @@ public class TestResultTest {
   }
 
   @Test
-  public void executedTestsValue() {
+  void executedTestsValue() {
     testResult.addTestCase(createTestCase(1, "ok"));
     testResult.addTestCase(createTestCase(2, "skipped"));
     testResult.addTestCase(createTestCase(3, "ok"));
@@ -78,7 +78,7 @@ public class TestResultTest {
   }
 
   @Test
-  public void addingAnErroneousTestCaseShouldIncrementErrorStatistic() {
+  void addingAnErroneousTestCaseShouldIncrementErrorStatistic() {
     int errorsBefore = testResult.getErrors();
     TestCase error = mock(TestCase.class);
     when(error.isError()).thenReturn(true);
@@ -89,7 +89,7 @@ public class TestResultTest {
   }
 
   @Test
-  public void addingAFailedestCaseShouldIncrementFailedStatistic() {
+  void addingAFailedestCaseShouldIncrementFailedStatistic() {
     int failedBefore = testResult.getFailures();
     TestCase failedTC = mock(TestCase.class);
     when(failedTC.isFailure()).thenReturn(true);
@@ -100,7 +100,7 @@ public class TestResultTest {
   }
 
   @Test
-  public void addingASkippedTestCaseShouldIncrementSkippedStatistic() {
+  void addingASkippedTestCaseShouldIncrementSkippedStatistic() {
     int skippedBefore = testResult.getSkipped();
     TestCase skippedTC = mock(TestCase.class);
     when(skippedTC.isSkipped()).thenReturn(true);

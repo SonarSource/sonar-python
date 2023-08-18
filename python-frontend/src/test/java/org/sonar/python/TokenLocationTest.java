@@ -33,7 +33,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class TokenLocationTest {
 
   @Test
-  public void test_multiline() {
+  void test_multiline() {
     TokenLocation tokenLocation = new TokenLocation(lex("'''first line\nsecond'''").get(0));
     assertOffsets(tokenLocation, 1, 0, 2, 9);
 
@@ -45,13 +45,13 @@ public class TokenLocationTest {
   }
 
   @Test
-  public void test_newline_token() {
+  void test_newline_token() {
     TokenLocation tokenLocation = new TokenLocation(lex("foo\n").get(1));
     assertOffsets(tokenLocation, 1, 3, 2, 0);
   }
 
   @Test
-  public void test_one_line() {
+  void test_one_line() {
     TokenLocation tokenLocation = new TokenLocation(lex("  '''first line'''").get(1));
     assertOffsets(tokenLocation, 1, 2, 1, 18);
 
@@ -60,7 +60,7 @@ public class TokenLocationTest {
   }
 
   @Test
-  public void test_comment() {
+  void test_comment() {
     TokenLocation commentLocation = new TokenLocation(lex("#comment\n").get(0).trivia().get(0).token());
     assertOffsets(commentLocation, 1, 0, 1, 8);
   }

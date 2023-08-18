@@ -29,12 +29,12 @@ import static org.sonar.python.parser.PythonParserAssert.assertThat;
 public class PrintStatementTest extends RuleTest {
 
   @BeforeEach
-  public void init() {
+  void init() {
     setRootRule(PythonGrammar.PRINT_STMT);
   }
 
   @Test
-  public void ok() {
+  void ok() {
     assertThat(p).matches("print")
 
       .matches("print >> test")

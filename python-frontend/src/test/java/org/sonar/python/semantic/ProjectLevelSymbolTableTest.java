@@ -68,7 +68,7 @@ public class ProjectLevelSymbolTableTest {
   }
 
   @Test
-  public void wildcard_import() {
+  void wildcard_import() {
     SymbolImpl exportedA = new SymbolImpl("a", "mod.a");
     SymbolImpl exportedB = new SymbolImpl("b", "mod.b");
     SymbolImpl exportedC = new ClassSymbolImpl("C", "mod.C");
@@ -100,7 +100,7 @@ public class ProjectLevelSymbolTableTest {
   }
 
   @Test
-  public void unresolved_wildcard_import() {
+  void unresolved_wildcard_import() {
     FileInput tree = parse(
       new SymbolTableBuilder("my_package", pythonFile("my_module.py"), empty()),
       "from external import *",
@@ -111,7 +111,7 @@ public class ProjectLevelSymbolTableTest {
   }
 
   @Test
-  public void function_symbol() {
+  void function_symbol() {
     FunctionDef functionDef = (FunctionDef) parse("def fn(p1, p2): pass").statements().statements().get(0);
     FunctionSymbolImpl fnSymbol = new FunctionSymbolImpl(functionDef, "mod.fn", pythonFile("mod.py"));
     List<Symbol> modSymbols = Collections.singletonList(fnSymbol);
@@ -153,7 +153,7 @@ public class ProjectLevelSymbolTableTest {
   }
 
   @Test
-  public void submodule_import() {
+  void submodule_import() {
     FunctionDef functionDef = (FunctionDef) parse("def fn(p1, p2): pass").statements().statements().get(0);
     FunctionDef subModFunctionDef = (FunctionDef) parse("def fn2(p1, p2): pass").statements().statements().get(0);
     FunctionSymbolImpl fnSymbol = new FunctionSymbolImpl(functionDef, "mod.fn", pythonFile("mod.py"));
@@ -177,7 +177,7 @@ public class ProjectLevelSymbolTableTest {
   }
 
   @Test
-  public void import_already_existing_symbol() {
+  void import_already_existing_symbol() {
     FunctionDef functionDef = (FunctionDef) parse("def fn(p1, p2): pass").statements().statements().get(0);
     FunctionSymbolImpl fnSymbol = new FunctionSymbolImpl(functionDef, "mod.fn", pythonFile("mod.py"));
     List<Symbol> modSymbols = Collections.singletonList(fnSymbol);
@@ -206,7 +206,7 @@ public class ProjectLevelSymbolTableTest {
   }
 
   @Test
-  public void other_imported_symbol() {
+  void other_imported_symbol() {
     SymbolImpl xSymbol = new SymbolImpl("x", "mod.x");
     List<Symbol> modSymbols = Collections.singletonList(xSymbol);
     Map<String, Set<Symbol>> globalSymbols = Collections.singletonMap("mod", new HashSet<>(modSymbols));
@@ -224,7 +224,7 @@ public class ProjectLevelSymbolTableTest {
   }
 
   @Test
-  public void aliased_imported_symbols() {
+  void aliased_imported_symbols() {
     SymbolImpl xSymbol = new SymbolImpl("x", "mod.x");
     List<Symbol> modSymbols = Collections.singletonList(xSymbol);
     Map<String, Set<Symbol>> globalSymbols = Collections.singletonMap("mod", new HashSet<>(modSymbols));
@@ -244,7 +244,7 @@ public class ProjectLevelSymbolTableTest {
   }
 
   @Test
-  public void type_hierarchy() {
+  void type_hierarchy() {
     ClassSymbolImpl classASymbol = new ClassSymbolImpl("A", "mod1.A");
     classASymbol.addSuperClass(new SymbolImpl("B", "mod2.B"));
     Set<Symbol> mod1Symbols = Collections.singleton(classASymbol);
@@ -284,7 +284,7 @@ public class ProjectLevelSymbolTableTest {
   }
 
   @Test
-  public void not_class_symbol_in_super_class() {
+  void not_class_symbol_in_super_class() {
     ClassSymbolImpl classASymbol = new ClassSymbolImpl("A", "mod1.A");
     classASymbol.addSuperClass(new SymbolImpl("foo", "mod1.foo"));
     FileInput tree = parse(
@@ -301,7 +301,7 @@ public class ProjectLevelSymbolTableTest {
   }
 
   @Test
-  public void metaclass_in_imported_symbol() {
+  void metaclass_in_imported_symbol() {
     Set<Symbol> globalsMod = parse(
       new SymbolTableBuilder("", pythonFile("mod1")),
       "from abc import ABCMeta",
@@ -320,7 +320,7 @@ public class ProjectLevelSymbolTableTest {
   }
 
   @Test
-  public void builtin_symbol_in_super_class() {
+  void builtin_symbol_in_super_class() {
     ClassSymbolImpl classASymbol = new ClassSymbolImpl("A", "mod1.A");
     classASymbol.addSuperClass(new SymbolImpl("BaseException", "BaseException"));
     FileInput tree = parse(
@@ -337,7 +337,7 @@ public class ProjectLevelSymbolTableTest {
   }
 
   @Test
-  public void multi_level_type_hierarchy() {
+  void multi_level_type_hierarchy() {
     ClassSymbolImpl classASymbol = new ClassSymbolImpl("A", "mod1.A");
     classASymbol.addSuperClass(new SymbolImpl("B", "mod2.B"));
     Set<Symbol> mod1Symbols = Collections.singleton(classASymbol);
@@ -388,7 +388,7 @@ public class ProjectLevelSymbolTableTest {
   }
 
   @Test
-  public void ambiguous_imported_symbol() {
+  void ambiguous_imported_symbol() {
     Set<Symbol> modSymbols = parse(
       new SymbolTableBuilder("", pythonFile("mod")),
       "@overload",
@@ -410,7 +410,7 @@ public class ProjectLevelSymbolTableTest {
   }
 
   @Test
-  public void imported_class_hasSuperClassWithoutSymbol() {
+  void imported_class_hasSuperClassWithoutSymbol() {
     Set<Symbol> modSymbols = parse(
       new SymbolTableBuilder("", pythonFile("mod")),
       "def foo(): ...",
@@ -436,7 +436,7 @@ public class ProjectLevelSymbolTableTest {
   }
 
   @Test
-  public void test_remove_module() {
+  void test_remove_module() {
     FileInput tree = parseWithoutSymbols(
       "class A: pass"
     );
@@ -448,7 +448,7 @@ public class ProjectLevelSymbolTableTest {
   }
 
   @Test
-  public void test_insert_entry() {
+  void test_insert_entry() {
     ProjectLevelSymbolTable projectLevelSymbolTable = new ProjectLevelSymbolTable();
     VariableDescriptor variableDescriptor = new VariableDescriptor("x", "mod.x", null);
     projectLevelSymbolTable.insertEntry("mod", Set.of(variableDescriptor));
@@ -457,7 +457,7 @@ public class ProjectLevelSymbolTableTest {
   }
 
   @Test
-  public void test_add_module_after_creation() {
+  void test_add_module_after_creation() {
     FileInput tree = parseWithoutSymbols(
       "class A: pass"
     );
@@ -478,7 +478,7 @@ public class ProjectLevelSymbolTableTest {
   }
 
   @Test
-  public void test_imported_modules() {
+  void test_imported_modules() {
     FileInput tree = parseWithoutSymbols(
       "import A"
     );
@@ -546,7 +546,7 @@ public class ProjectLevelSymbolTableTest {
   }
 
   @Test
-  public void global_symbols() {
+  void global_symbols() {
     FileInput tree = parseWithoutSymbols(
       "obj1 = 42",
       "obj2: int = 42",
@@ -560,7 +560,7 @@ public class ProjectLevelSymbolTableTest {
   }
 
   @Test
-  public void global_symbols_private_by_convention() {
+  void global_symbols_private_by_convention() {
     // although being private by convention, it's considered as exported
     FileInput tree = parseWithoutSymbols(
       "def _private_fn(): pass"
@@ -571,7 +571,7 @@ public class ProjectLevelSymbolTableTest {
   }
 
   @Test
-  public void local_symbols_not_exported() {
+  void local_symbols_not_exported() {
     FileInput tree = parseWithoutSymbols(
       "def fn():",
       "  def inner(): pass",
@@ -585,7 +585,7 @@ public class ProjectLevelSymbolTableTest {
   }
 
   @Test
-  public void redefined_symbols() {
+  void redefined_symbols() {
     FileInput tree = parseWithoutSymbols(
       "def fn(): pass",
       "def fn(): ...",
@@ -600,7 +600,7 @@ public class ProjectLevelSymbolTableTest {
   }
 
   @Test
-  public void function_symbols() {
+  void function_symbols() {
     FileInput tree = parseWithoutSymbols(
       "def fn(): pass"
     );
@@ -616,7 +616,7 @@ public class ProjectLevelSymbolTableTest {
   }
 
   @Test
-  public void redefined_class_symbol() {
+  void redefined_class_symbol() {
     FileInput fileInput = parseWithoutSymbols(
       "C = \"hello\"",
       "class C: ",
@@ -627,7 +627,7 @@ public class ProjectLevelSymbolTableTest {
   }
 
   @Test
-  public void classdef_with_missing_symbol() {
+  void classdef_with_missing_symbol() {
     FileInput fileInput = parseWithoutSymbols(
       "class C: ",
       "  pass",
@@ -640,7 +640,7 @@ public class ProjectLevelSymbolTableTest {
   }
 
   @Test
-  public void class_symbol() {
+  void class_symbol() {
     FileInput fileInput = parseWithoutSymbols(
       "class C: ",
       "  pass");
@@ -677,7 +677,7 @@ public class ProjectLevelSymbolTableTest {
   }
 
   @Test
-  public void class_inheriting_from_imported_symbol() {
+  void class_inheriting_from_imported_symbol() {
     FileInput fileInput = parseWithoutSymbols(
       "from mod import A",
       "import mod2",
@@ -701,7 +701,7 @@ public class ProjectLevelSymbolTableTest {
   }
 
   @Test
-  public void symbol_duplicated_by_wildcard_import() {
+  void symbol_duplicated_by_wildcard_import() {
     FileInput tree = parseWithoutSymbols(
       "def nlargest(n, iterable): ...",
       "from _heapq import *",
@@ -720,7 +720,7 @@ public class ProjectLevelSymbolTableTest {
   }
 
   @Test
-  public void class_having_itself_as_superclass_should_not_trigger_error() {
+  void class_having_itself_as_superclass_should_not_trigger_error() {
     FileInput fileInput = parseWithoutSymbols("class A(A): pass");
     Set<Symbol> globalSymbols = globalSymbols(fileInput, "mod");
     ClassSymbol a = (ClassSymbol) globalSymbols.iterator().next();
@@ -732,7 +732,7 @@ public class ProjectLevelSymbolTableTest {
 
 
   @Test
-  public void class_having_another_class_with_same_name_should_not_trigger_error() {
+  void class_having_another_class_with_same_name_should_not_trigger_error() {
     FileInput fileInput = parseWithoutSymbols(
       "from external import B",
       "class A:",
@@ -746,7 +746,7 @@ public class ProjectLevelSymbolTableTest {
   }
 
   @Test
-  public void global_symbols_stdlib_imports() {
+  void global_symbols_stdlib_imports() {
     FileInput tree = parseWithoutSymbols(
       "from time import time",
       "from threading import Thread",
@@ -759,7 +759,7 @@ public class ProjectLevelSymbolTableTest {
   }
 
   @Test
-  public void module_importing_itself() {
+  void module_importing_itself() {
     FileInput tree = parseWithoutSymbols(
       "from mod import *",
       "from mod import smth"
@@ -769,7 +769,7 @@ public class ProjectLevelSymbolTableTest {
   }
 
   @Test
-  public void imports_wont_trigger_typeshed_lookup() {
+  void imports_wont_trigger_typeshed_lookup() {
     // Imports from the file with the same name and with null name won't trigger TypeShed.symbolWithFQN
     FileInput tree = parse(
       new SymbolTableBuilder("", pythonFile("os.py"), empty()),
@@ -781,7 +781,7 @@ public class ProjectLevelSymbolTableTest {
   }
 
   @Test
-  public void loop_in_class_inheritance() {
+  void loop_in_class_inheritance() {
     String[] foo = {
       "from bar import B",
       "class A(B): ..."
@@ -815,7 +815,7 @@ public class ProjectLevelSymbolTableTest {
   }
 
   @Test
-  public void annotated_parameter_is_translated_correctly() {
+  void annotated_parameter_is_translated_correctly() {
     FileInput tree = parseWithoutSymbols(
       "def fn(param: str, *my_tuple, **my_dict): ..."
     );
@@ -827,7 +827,7 @@ public class ProjectLevelSymbolTableTest {
   }
 
   @Test
-  public void symbols_from_module_should_be_the_same() {
+  void symbols_from_module_should_be_the_same() {
     FileInput tree = parseWithoutSymbols(
       "class A: ...",
              "class B(A): ..."
@@ -843,7 +843,7 @@ public class ProjectLevelSymbolTableTest {
   }
 
   @Test
-  public void imported_typeshed_symbols_are_not_exported() {
+  void imported_typeshed_symbols_are_not_exported() {
     FileInput tree = parseWithoutSymbols(
       "from html import escape"
     );
@@ -852,7 +852,7 @@ public class ProjectLevelSymbolTableTest {
   }
 
   @Test
-  public void class_with_method_parameter_of_same_type() {
+  void class_with_method_parameter_of_same_type() {
     FileInput tree = parseWithoutSymbols(
       "class Document:",
              "  def my_method(param: Document): ..."
@@ -869,7 +869,7 @@ public class ProjectLevelSymbolTableTest {
   }
 
   @Test
-  public void no_stackoverflow_for_ambiguous_descriptor() {
+  void no_stackoverflow_for_ambiguous_descriptor() {
     String[] foo = {
     "if cond:",
     "  Ambiguous = ...",
@@ -905,7 +905,7 @@ public class ProjectLevelSymbolTableTest {
   }
 
   @Test
-  public void loop_in_inheritance_with_method_paraneters_of_same_type() {
+  void loop_in_inheritance_with_method_paraneters_of_same_type() {
     String[] foo = {
       "from bar import B",
       "class A(B):",
@@ -939,7 +939,7 @@ public class ProjectLevelSymbolTableTest {
   }
 
   @Test
-  public void django_views() {
+  void django_views() {
     String[] urls = {
       "from django.urls import path, other",
       "import views",
@@ -969,7 +969,7 @@ public class ProjectLevelSymbolTableTest {
    * The variable `foo` which is assigned in the decorator of the function should belong to the global scope not the function scope
    */
   @Test
-  public void function_decorator_symbol() {
+  void function_decorator_symbol() {
     FileInput fileInput = PythonTestUtils.parse(
       "@foo := bar",
       "def function(): pass"
@@ -982,7 +982,7 @@ public class ProjectLevelSymbolTableTest {
   }
 
   @Test
-  public void descriptorsForModule() {
+  void descriptorsForModule() {
     FileInput tree = PythonTestUtils.parseWithoutSymbols(
       "class A: ...",
       "class B(A): ...",

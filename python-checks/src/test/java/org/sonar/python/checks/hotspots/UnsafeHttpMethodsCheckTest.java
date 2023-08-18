@@ -26,7 +26,7 @@ import org.sonar.python.checks.utils.PythonCheckVerifier;
 public class UnsafeHttpMethodsCheckTest {
 
   @Test
-  public void test_django() {
+  void test_django() {
     PythonCheckVerifier.verify(Arrays.asList(
       "src/test/resources/checks/hotspots/unsafeHttpMethods/django/urls.py",
       "src/test/resources/checks/hotspots/unsafeHttpMethods/django/views.py",
@@ -36,7 +36,7 @@ public class UnsafeHttpMethodsCheckTest {
   }
 
   @Test
-  public void test_flask() {
+  void test_flask() {
     PythonCheckVerifier.verify(Arrays.asList(
       "src/test/resources/checks/hotspots/unsafeHttpMethods/flask/views.py",
       "src/test/resources/checks/hotspots/unsafeHttpMethods/flask/otherDecorator.py"

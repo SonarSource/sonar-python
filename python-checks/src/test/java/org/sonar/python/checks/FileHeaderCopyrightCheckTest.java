@@ -34,7 +34,7 @@ import org.sonar.python.checks.utils.PythonCheckVerifier;
 public class FileHeaderCopyrightCheckTest {
 
   @Test
-  public void test_copyright() {
+  void test_copyright() {
     FileHeaderCopyrightCheck fileHeaderCopyrightCheck = new FileHeaderCopyrightCheck();
     fileHeaderCopyrightCheck.headerFormat = "# Copyright FOO\n";
     PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/fileHeaderCopyright/copyright.py", fileHeaderCopyrightCheck);
@@ -43,7 +43,7 @@ public class FileHeaderCopyrightCheckTest {
   }
 
   @Test
-  public void test_noncompliant() {
+  void test_noncompliant() {
     FileHeaderCopyrightCheck fileHeaderCopyrightCheck = new FileHeaderCopyrightCheck();
     fileHeaderCopyrightCheck.headerFormat = "# Copyright FOO";
     PythonCheckVerifier.verify("src/test/resources/checks/fileHeaderCopyright/copyrightNonCompliant.py", fileHeaderCopyrightCheck);
@@ -52,14 +52,14 @@ public class FileHeaderCopyrightCheckTest {
   }
 
   @Test
-  public void test_NoCopyright() {
+  void test_NoCopyright() {
     PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/fileHeaderCopyright/headerNoCopyright.py", new FileHeaderCopyrightCheck());
     PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/fileHeaderCopyright/emptyFileNoCopyright.py", new FileHeaderCopyrightCheck());
   }
 
 
   @Test
-  public void test_copyright_docstring() {
+  void test_copyright_docstring() {
     FileHeaderCopyrightCheck fileHeaderCopyrightCheck = new FileHeaderCopyrightCheck();
     fileHeaderCopyrightCheck.headerFormat = "\"\"\"\n" +
       " SonarQube, open source software quality management tool.\n" +
@@ -84,7 +84,7 @@ public class FileHeaderCopyrightCheckTest {
   }
 
   @Test
-  public void test_copyright_docstring_noncompliant() {
+  void test_copyright_docstring_noncompliant() {
     FileHeaderCopyrightCheck fileHeaderCopyrightCheck = new FileHeaderCopyrightCheck();
     fileHeaderCopyrightCheck.headerFormat = "\"\"\"\n" +
       " SonarQube, open source software quality management tool.\n" +
@@ -109,7 +109,7 @@ public class FileHeaderCopyrightCheckTest {
   }
 
   @Test
-  public void test_searchPattern() {
+  void test_searchPattern() {
     FileHeaderCopyrightCheck fileHeaderCopyrightCheck = new FileHeaderCopyrightCheck();
     fileHeaderCopyrightCheck.headerFormat = "^#\\sCopyright[ ]20[0-9]{2}\\n#\\sAll rights reserved\\.\\n";
     fileHeaderCopyrightCheck.isRegularExpression = true;
@@ -121,7 +121,7 @@ public class FileHeaderCopyrightCheckTest {
   }
 
   @Test
-  public void test_misplaced_copyright_searchPattern() {
+  void test_misplaced_copyright_searchPattern() {
     FileHeaderCopyrightCheck fileHeaderCopyrightCheck = new FileHeaderCopyrightCheck();
     fileHeaderCopyrightCheck.isRegularExpression = true;
     fileHeaderCopyrightCheck.headerFormat = "Copyright[ ]20[0-9]{2}";
@@ -129,7 +129,7 @@ public class FileHeaderCopyrightCheckTest {
   }
 
   @Test
-  public void test_searchPattern_exception() {
+  void test_searchPattern_exception() {
     FileHeaderCopyrightCheck fileHeaderCopyrightCheck = new FileHeaderCopyrightCheck();
     fileHeaderCopyrightCheck.headerFormat = "**";
     fileHeaderCopyrightCheck.isRegularExpression = true;
@@ -143,14 +143,14 @@ public class FileHeaderCopyrightCheckTest {
   }
 
   @Test
-  public void shebangTest() {
+  void shebangTest() {
     var fileHeaderCopyrightCheck = new FileHeaderCopyrightCheck();
     fileHeaderCopyrightCheck.headerFormat = "# Copyright FOO\n";
     PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/fileHeaderCopyright/shebangCopyright.py", fileHeaderCopyrightCheck);
   }
 
   @Test
-  public void shebangPatternTest() {
+  void shebangPatternTest() {
     var fileHeaderCopyrightCheck = new FileHeaderCopyrightCheck();
     fileHeaderCopyrightCheck.isRegularExpression = true;
     fileHeaderCopyrightCheck.headerFormat = "# Copyright[ ]20[0-9]{2}";

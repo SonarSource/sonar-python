@@ -29,12 +29,12 @@ import static org.sonar.python.parser.PythonParserAssert.assertThat;
 public class IfStatementTest extends RuleTest {
 
   @BeforeEach
-  public void init() {
+  void init() {
     setRootRule(PythonGrammar.IF_STMT);
   }
 
   @Test
-  public void ok() {
+  void ok() {
 
     assertThat(p).matches("if TEST : pass")
       .matches("if TEST : pass\nelif TEST : pass")

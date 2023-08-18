@@ -53,7 +53,7 @@ public class PythonAnalyzerRegexSourceTest {
   }
 
   @Test
-  public void testStringLiteral() {
+  void testStringLiteral() {
     RegexTree regex = assertSuccessfulParse("r'a\\nb'");
     assertKind(RegexTree.Kind.SEQUENCE, regex);
     List<RegexTree> items = ((SequenceTree) regex).getItems();
@@ -69,7 +69,7 @@ public class PythonAnalyzerRegexSourceTest {
   }
 
   @Test
-  public void testTripleQuoteLiteral() {
+  void testTripleQuoteLiteral() {
     RegexTree regex = assertSuccessfulParse("r'''a\\nb'''");
     assertKind(RegexTree.Kind.SEQUENCE, regex);
     List<RegexTree> items = ((SequenceTree) regex).getItems();
@@ -85,7 +85,7 @@ public class PythonAnalyzerRegexSourceTest {
   }
 
   @Test
-  public void possessiveQuantifiers() {
+  void possessiveQuantifiers() {
     var regex = assertSuccessfulParse("r\"a++\"");
     assertKind(RegexTree.Kind.REPETITION, regex);
     assertThat(regex)
@@ -98,7 +98,7 @@ public class PythonAnalyzerRegexSourceTest {
   }
   
   @Test
-  public void atomicGroups() {
+  void atomicGroups() {
     var regex = assertSuccessfulParse("r\"(?>bc|b)\"");
     assertKind(RegexTree.Kind.ATOMIC_GROUP, regex);
     assertThat(regex)
@@ -106,7 +106,7 @@ public class PythonAnalyzerRegexSourceTest {
   }
 
   @Test
-  public void multilineStringLiteral() {
+  void multilineStringLiteral() {
     RegexTree regex = assertSuccessfulParse("r'a\nbc\r\nde'");
     assertKind(RegexTree.Kind.SEQUENCE, regex);
     List<RegexTree> items = ((SequenceTree) regex).getItems();
@@ -118,7 +118,7 @@ public class PythonAnalyzerRegexSourceTest {
   }
 
   @Test
-  public void testLocationOnRegexOpener() {
+  void testLocationOnRegexOpener() {
     RegexParseResult regex = parseRegex("r'/(?(1|2)ab|cd|ef)/'");
     RegexSyntaxElement openingQuote = regex.openingQuote();
     LocationInFile locationInFile = ((PythonAnalyzerRegexSource) openingQuote.getSource()).locationInFileFor(openingQuote.getRange());

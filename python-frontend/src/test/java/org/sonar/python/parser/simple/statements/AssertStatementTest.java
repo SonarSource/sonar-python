@@ -29,18 +29,18 @@ import static org.sonar.python.parser.PythonParserAssert.assertThat;
 public class AssertStatementTest extends RuleTest {
 
   @BeforeEach
-  public void init() {
+  void init() {
     setRootRule(PythonGrammar.ASSERT_STMT);
   }
 
   @Test
-  public void ok() {
+  void ok() {
     assertThat(p).matches("assert test");
     assertThat(p).matches("assert test , test");
   }
 
   @Test
-  public void realLife() {
+  void realLife() {
     assertThat(p).matches("assert id > 0");
     assertThat(p).matches("assert id > 0, 'id should be positive'");
   }

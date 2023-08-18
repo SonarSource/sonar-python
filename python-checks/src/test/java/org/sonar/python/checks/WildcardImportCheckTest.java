@@ -25,42 +25,42 @@ import org.sonar.python.checks.utils.PythonCheckVerifier;
 public class WildcardImportCheckTest {
 
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/wildcardImport.py", new WildcardImportCheck());
   }
 
   @Test
-  public void test_assignment() {
+  void test_assignment() {
     PythonCheckVerifier.verify("src/test/resources/checks/wildcardImport/wildcardImport_assignment.py", new WildcardImportCheck());
   }
 
   @Test
-  public void test_invalid_assignment() {
+  void test_invalid_assignment() {
     PythonCheckVerifier.verify("src/test/resources/checks/wildcardImport/wildcardImport_invalid_assignment.py", new WildcardImportCheck());
   }
 
   @Test
-  public void test_call() {
+  void test_call() {
     PythonCheckVerifier.verify("src/test/resources/checks/wildcardImport/wildcardImport_call.py", new WildcardImportCheck());
   }
 
   @Test
-  public void test_invalid_call() {
+  void test_invalid_call() {
     PythonCheckVerifier.verify("src/test/resources/checks/wildcardImport/wildcardImport_invalid_call.py", new WildcardImportCheck());
   }
 
   @Test
-  public void test_init_py() {
+  void test_init_py() {
     PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/wildcardImport/__init__.py", new WildcardImportCheck());
   }
 
   @Test
-  public void test_allowed() {
+  void test_allowed() {
     PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/wildcardImport/wildcardImport_allowed.py", new WildcardImportCheck());
   }
 
   @Test
-  public void test_empty() {
+  void test_empty() {
     PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/wildcardImport/wildcardImport_empty.py", new WildcardImportCheck());
   }
 

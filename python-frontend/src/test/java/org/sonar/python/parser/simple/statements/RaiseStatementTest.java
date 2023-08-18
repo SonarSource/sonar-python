@@ -29,12 +29,12 @@ import static org.sonar.python.parser.PythonParserAssert.assertThat;
 public class RaiseStatementTest extends RuleTest {
 
   @BeforeEach
-  public void init() {
+  void init() {
     setRootRule(PythonGrammar.RAISE_STMT);
   }
 
   @Test
-  public void ok() {
+  void ok() {
     assertThat(p).matches("raise");
     assertThat(p).matches("raise test");
 
@@ -45,7 +45,7 @@ public class RaiseStatementTest extends RuleTest {
   }
 
   @Test
-  public void realLife() {
+  void realLife() {
     assertThat(p).matches("raise");
     assertThat(p).matches("raise exc_info[1], None, exc_info[2]");
   }

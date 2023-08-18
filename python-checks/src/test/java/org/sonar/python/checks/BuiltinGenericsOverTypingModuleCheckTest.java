@@ -29,19 +29,19 @@ import static org.sonar.python.checks.utils.CodeTestUtils.code;
 public class BuiltinGenericsOverTypingModuleCheckTest {
 
   @Test
-  public void checkBuiltins() {
+  void checkBuiltins() {
     PythonCheckVerifier.verify("src/test/resources/checks/builtinGenericsOverTypingModule.py",
       new BuiltinGenericsOverTypingModuleCheck());
   }
 
   @Test
-  public void checkCollections() {
+  void checkCollections() {
     PythonCheckVerifier.verify("src/test/resources/checks/builtinCollectionsOverTypingModule.py",
       new BuiltinGenericsOverTypingModuleCheck());
   }
 
   @Test
-  public void quick_fix_generics_in_param() {
+  void quick_fix_generics_in_param() {
     String codeWithIssue = code(
       "from typing import List",
       "def foo(test: List[int]) -> str:",
@@ -57,7 +57,7 @@ public class BuiltinGenericsOverTypingModuleCheckTest {
   }
 
   @Test
-  public void quick_fix_generics_in_return_type() {
+  void quick_fix_generics_in_return_type() {
     String codeWithIssue = code(
       "from typing import Dict",
       "def foo(test: list[int]) -> Dict[str, int]:",
@@ -73,7 +73,7 @@ public class BuiltinGenericsOverTypingModuleCheckTest {
   }
 
   @Test
-  public void quick_fix_in_return_type_multiline() {
+  void quick_fix_in_return_type_multiline() {
     String codeWithIssue = code(
       "from typing import Dict",
       "def foo(test: list[int]) -> Dict[str,",
@@ -91,7 +91,7 @@ public class BuiltinGenericsOverTypingModuleCheckTest {
   }
 
   @Test
-  public void quick_fix_generics_in_variable() {
+  void quick_fix_generics_in_variable() {
     String codeWithIssue = code(
       "from typing import Set",
       "def foo():",
@@ -109,7 +109,7 @@ public class BuiltinGenericsOverTypingModuleCheckTest {
   }
 
   @Test
-  public void quick_fix_fully_qualified() {
+  void quick_fix_fully_qualified() {
     String codeWithIssue = code(
       "import typing",
       "def foo():",
@@ -127,7 +127,7 @@ public class BuiltinGenericsOverTypingModuleCheckTest {
   }
 
   @Test
-  public void no_quick_fix_for_change_requiring_import() {
+  void no_quick_fix_for_change_requiring_import() {
     String codeWithIssue = code(
       "from typing import Iterable",
       "def foo(test: Iterable[int]) -> dict[str, int]:",
@@ -137,7 +137,7 @@ public class BuiltinGenericsOverTypingModuleCheckTest {
   }
 
   @Test
-  public void quick_fix_nested_types() {
+  void quick_fix_nested_types() {
     String codeWithIssue = code(
       "from typing import Dict",
       "def foo() -> tuple[str, Dict[int]]:",
@@ -153,7 +153,7 @@ public class BuiltinGenericsOverTypingModuleCheckTest {
   }
 
   @Test
-  public void quick_fix_nested_function() {
+  void quick_fix_nested_function() {
     String codeWithIssue = code(
       "from typing import Tuple",
       "def foo() -> tuple[str, int]:",

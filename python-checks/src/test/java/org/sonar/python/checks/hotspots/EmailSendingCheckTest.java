@@ -25,7 +25,7 @@ import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 public class EmailSendingCheckTest {
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify(Collections.singletonList("src/test/resources/checks/hotspots/emailSending.py"), new EmailSendingCheck());
   }
 }

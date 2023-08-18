@@ -32,12 +32,12 @@ public class BooleanCheckNotInvertedCheckTest {
   private final PythonCheck check = new BooleanCheckNotInvertedCheck();
 
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/booleanCheckNotInverted.py", check);
   }
 
   @Test
-  public void operatorStringTest() {
+  void operatorStringTest() {
     assertThat(BooleanCheckNotInvertedCheck.oppositeOperatorString("==")).isEqualTo("!=");
     assertThat(BooleanCheckNotInvertedCheck.oppositeOperatorString("!=")).isEqualTo("==");
     assertThat(BooleanCheckNotInvertedCheck.oppositeOperatorString("<")).isEqualTo(">=");
@@ -54,7 +54,7 @@ public class BooleanCheckNotInvertedCheckTest {
   }
 
   @Test
-  public void test_quickfix() {
+  void test_quickfix() {
     String codeWithIssue = "a = not(b == c)";
     String codeFixed = "a = b != c";
     PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
@@ -89,7 +89,7 @@ public class BooleanCheckNotInvertedCheckTest {
   }
 
   @Test
-  public void not_in_if() {
+  void not_in_if() {
     String codeWithIssue = "" +
       "def func():\n" +
       "    if not a == 2:\n" +
@@ -128,7 +128,7 @@ public class BooleanCheckNotInvertedCheckTest {
   }
 
   @Test
-  public void not_parentheses() {
+  void not_parentheses() {
     String codeWithIssue = "a = not ((((((b > c))))))";
     String codeFixed = "a = b <= c";
     PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
@@ -159,7 +159,7 @@ public class BooleanCheckNotInvertedCheckTest {
   }
 
   @Test
-  public void expression_list() {
+  void expression_list() {
     String codeWithIssue = "a = not [] < (c,\n" +
       "  d)";
     String codeFixed = "a = [] >= (c,\n" +
@@ -192,21 +192,21 @@ public class BooleanCheckNotInvertedCheckTest {
   }
 
   @Test
-  public void fstring() {
+  void fstring() {
     String codeWithIssue = "x = not (a == f'foo${b}')";
     String codeFixed = "x = a != f'foo${b}'";
     PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
 
   }
   @Test
-  public void brackets(){
+  void brackets(){
     String codeWithIssue = "x = not ( ham[1] in a)";
     String codeFixed = "x = ham[1] not in a";
     PythonQuickFixVerifier.verify(check, codeWithIssue, codeFixed);
   }
 
   @Test
-  public void notInQuickFix(){
+  void notInQuickFix(){
     String codeWithIssue = "def foo(key, mapping):\n" +
       "    if not key in mapping.keys():\n" +
       "        pass";

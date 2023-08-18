@@ -25,7 +25,7 @@ import org.sonar.python.checks.utils.PythonCheckVerifier;
 public class TooManyReturnsCheckTest {
 
   @Test
-  public void test() {
+  void test() {
     TooManyReturnsCheck check = new TooManyReturnsCheck();
     check.max = 2;
     PythonCheckVerifier.verify("src/test/resources/checks/tooManyReturns.py", check);

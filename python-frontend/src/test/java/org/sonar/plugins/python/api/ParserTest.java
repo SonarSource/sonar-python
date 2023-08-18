@@ -29,7 +29,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class ParserTest {
 
   @Test
-  public void test() {
+  void test() {
     Parser parser = new Parser();
 
     FileInput result = parser.parse("");
@@ -40,7 +40,7 @@ public class ParserTest {
   }
 
   @Test
-  public void parsing_error() {
+  void parsing_error() {
     Parser parser = new Parser();
     assertThatThrownBy(() -> parser.parse("foo(")).isInstanceOf(RecognitionException.class);
   }

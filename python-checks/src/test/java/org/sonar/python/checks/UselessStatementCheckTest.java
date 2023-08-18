@@ -25,12 +25,12 @@ import org.sonar.python.checks.utils.PythonCheckVerifier;
 public class UselessStatementCheckTest {
 
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/uselessStatement.py", new UselessStatementCheck());
   }
 
   @Test
-  public void custom() {
+  void custom() {
     UselessStatementCheck check = new UselessStatementCheck();
     check.reportOnStrings = true;
     check.ignoredOperators = "<<,+";

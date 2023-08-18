@@ -30,45 +30,45 @@ public class CsrfDisabledCheckTest {
   }
 
   @Test
-  public void testMiddlewareArray() {
+  void testMiddlewareArray() {
     testFile("django/settings.py");
   }
 
   @Test
-  public void testCsrfExempt() {
+  void testCsrfExempt() {
     testFile("django/views.py");
   }
 
   @Test
-  public void testWtfCsrfEnabledFalse() {
+  void testWtfCsrfEnabledFalse() {
     testFile("flask/wtfCsrfEnabledFalse.py");
   }
 
   @Test
-  public void testThreeWaysToDeactivateCsrfInFlaskForm() {
+  void testThreeWaysToDeactivateCsrfInFlaskForm() {
     testFile("flask/flaskform1.py");
   }
 
   @Test
-  public void testGloballyMissingCSRFProtect(){
+  void testGloballyMissingCSRFProtect(){
     testFile("flask/global.py");
   }
 
   @Test
-  public void testExemptDecorators() {
+  void testExemptDecorators() {
     testFile("flask/flaskExempt.py");
     testFile("django/djangoExempt.py");
   }
 
   @Test
-  public void testExemptAsFunction() {
+  void testExemptAsFunction() {
     testFile("flask/exemptAsFunction.py");
   }
 
   @Test
-  public void fixupTestsMoreRobustCSRFProtect() { testFile("flask/fixupTestsMoreRobustCSRFProtect.py"); }
+  void fixupTestsMoreRobustCSRFProtect() { testFile("flask/fixupTestsMoreRobustCSRFProtect.py"); }
 
   @Test
-  public void fixupCsrfInGlobalScope() { testFile("flask/fixupCsrfInGlobalScope.py"); }
+  void fixupCsrfInGlobalScope() { testFile("flask/fixupCsrfInGlobalScope.py"); }
 
 }

@@ -25,7 +25,7 @@ import org.sonar.python.checks.utils.PythonCheckVerifier;
 public class DjangoNonDictSerializationCheckTest {
 
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/djangoNonDictSerialization.py", new DjangoNonDictSerializationCheck());
   }
 }

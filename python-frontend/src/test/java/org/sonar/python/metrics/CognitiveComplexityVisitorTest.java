@@ -39,7 +39,7 @@ import static org.fest.assertions.Assertions.assertThat;
 public class CognitiveComplexityVisitorTest {
 
   @Test
-  public void file() {
+  void file() {
     Map<Integer, String> complexityByLine = new TreeMap<>();
     CognitiveComplexityVisitor fileComplexityVisitor = new CognitiveComplexityVisitor((token, message) -> complexityByLine.merge(token.line(), message, (a, b) -> a + " " + b));
 

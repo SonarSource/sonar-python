@@ -26,12 +26,12 @@ import org.sonar.python.checks.utils.PythonCheckVerifier;
 public class UnquantifiedNonCapturingGroupCheckTest {
 
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/regex/unquantifiedNonCapturingGroupCheck.py", new UnquantifiedNonCapturingGroupCheck());
   }
 
   @Test
-  public void quickFixTest() {
+  void quickFixTest() {
     var before = "import re\n" +
       "re.match(r\"(?:number)abc\", input)";
     var after = "import re\n" +

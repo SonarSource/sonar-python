@@ -29,12 +29,12 @@ import static org.sonar.python.parser.PythonParserAssert.assertThat;
 public class YieldStatementTest extends RuleTest {
 
   @BeforeEach
-  public void init() {
+  void init() {
     setRootRule(PythonGrammar.YIELD_STMT);
   }
 
   @Test
-  public void ok() {
+  void ok() {
     assertThat(p).matches("yield from foo");
   }
 

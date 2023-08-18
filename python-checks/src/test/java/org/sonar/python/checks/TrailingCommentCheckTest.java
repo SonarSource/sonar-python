@@ -28,12 +28,12 @@ import static org.sonar.python.checks.utils.CodeTestUtils.code;
 public class TrailingCommentCheckTest {
 
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/trailingComment.py", new TrailingCommentCheck());
   }
 
   @Test
-  public void testQuickFixSimple() {
+  void testQuickFixSimple() {
     String code = "print(1) # More than one word";
     String fixedCode = code(
       "# More than one word",
@@ -43,7 +43,7 @@ public class TrailingCommentCheckTest {
   }
 
   @Test
-  public void testQuickFixMoreCodeAfter() {
+  void testQuickFixMoreCodeAfter() {
     String code = code(
       "print(1) # More Words",
       "print(\"aaa\")"
@@ -57,7 +57,7 @@ public class TrailingCommentCheckTest {
   }
 
   @Test
-  public void testQuickFixInIfCondition() {
+  void testQuickFixInIfCondition() {
     String code = code(
       "def func(self):",
         "    if a==b: #Some comment",
@@ -75,7 +75,7 @@ public class TrailingCommentCheckTest {
   }
 
   @Test
-  public void testQuickFixInIfReturn() {
+  void testQuickFixInIfReturn() {
     String code = code(
       "def func(self):",
         "    if a==b:",
@@ -93,7 +93,7 @@ public class TrailingCommentCheckTest {
   }
 
   @Test
-  public void testQuickFixInArray() {
+  void testQuickFixInArray() {
     String code = code(
       "SOMEVAR = [",
         "  'asd', 'asd', # comment more than one word",
@@ -111,7 +111,7 @@ public class TrailingCommentCheckTest {
   }
 
   @Test
-  public void testQuickFixArgumentsMultiline() {
+  void testQuickFixArgumentsMultiline() {
     String code = code(
       "changes = sa.Table('foo', bar,",
         "    sa.Column('id', sa.Integer), # yet another comment",
@@ -131,7 +131,7 @@ public class TrailingCommentCheckTest {
   }
 
   @Test
-  public void testQuickFixInTuple() {
+  void testQuickFixInTuple() {
     String code = code(
       "toto = (state, None, # a comment",
         "        [foo(b) for b in bar])"
@@ -145,7 +145,7 @@ public class TrailingCommentCheckTest {
   }
 
   @Test
-  public void testQuickFixInKeyWordArguments() {
+  void testQuickFixInKeyWordArguments() {
     String code = code(
       "foo.bar(",
         "         SomeClass(workdir='wkdir',",
@@ -173,7 +173,7 @@ public class TrailingCommentCheckTest {
   }
   
   @Test
-  public void testQuickFixInIfAsArgument() {
+  void testQuickFixInIfAsArgument() {
     String code = code(
       "var = (some.method(arg1, arg2)",
         "        if hasattr(umath, 'nextafter')  # Missing on some platforms?",
@@ -188,7 +188,7 @@ public class TrailingCommentCheckTest {
     PythonQuickFixVerifier.verify(new TrailingCommentCheck(), code, fixedCode);
   }
   @Test
-  public void testQuickFixInWithStatement() {
+  void testQuickFixInWithStatement() {
     String code = code(
       "with errstate(over='ignore'): #some comment",
         "    if bar:",

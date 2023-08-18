@@ -28,17 +28,17 @@ public class PrivilegePolicyCheckTest {
   PythonCheck check = new PrivilegePolicyCheck();
 
   @Test
-  public void policyStatement() {
+  void policyStatement() {
     PythonCheckVerifier.verify("src/test/resources/checks/cdk/privilegePolicyCheck/policyStatement.py", check);
   }
 
   @Test
-  public void fromJson() {
+  void fromJson() {
     PythonCheckVerifier.verify("src/test/resources/checks/cdk/privilegePolicyCheck/fromJson.py", check);
   }
 
   @Test
-  public void policyDocument() {
+  void policyDocument() {
     PythonCheckVerifier.verify("src/test/resources/checks/cdk/privilegePolicyCheck/policyDocument.py", check);
   }
 

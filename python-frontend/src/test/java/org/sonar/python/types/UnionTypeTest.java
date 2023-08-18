@@ -41,7 +41,7 @@ public class UnionTypeTest {
   private final InferredType d = InferredTypes.runtimeType(new ClassSymbolImpl("d", "d"));
 
   @Test
-  public void construction() {
+  void construction() {
     assertThat(or(anyType(), anyType())).isEqualTo(anyType());
     assertThat(or(anyType(), a)).isEqualTo(anyType());
     assertThat(or(a, anyType())).isEqualTo(anyType());
@@ -51,7 +51,7 @@ public class UnionTypeTest {
   }
 
   @Test
-  public void isIdentityComparableWith() {
+  void isIdentityComparableWith() {
     assertThat(or(a, b).isIdentityComparableWith(anyType())).isTrue();
     assertThat(or(a, b).isIdentityComparableWith(a)).isTrue();
     assertThat(or(a, b).isIdentityComparableWith(b)).isTrue();
@@ -61,7 +61,7 @@ public class UnionTypeTest {
   }
 
   @Test
-  public void canHaveMember() {
+  void canHaveMember() {
     ClassSymbolImpl x = new ClassSymbolImpl("x", "x");
     x.addMembers(Collections.singleton(new SymbolImpl("xxx", null)));
     ClassSymbolImpl y = new ClassSymbolImpl("y", "y");
@@ -72,7 +72,7 @@ public class UnionTypeTest {
   }
 
   @Test
-  public void declareMember() {
+  void declareMember() {
     ClassSymbolImpl x = new ClassSymbolImpl("x", "x");
     x.addMembers(Collections.singleton(new SymbolImpl("xxx", null)));
     ClassSymbolImpl y = new ClassSymbolImpl("y", "y");
@@ -85,7 +85,7 @@ public class UnionTypeTest {
   }
 
   @Test
-  public void resolveMember() {
+  void resolveMember() {
     ClassSymbolImpl x = new ClassSymbolImpl("x", "x");
     SymbolImpl foo = new SymbolImpl("foo", null);
     x.addMembers(Arrays.asList(foo, new SymbolImpl("bar", null)));
@@ -102,7 +102,7 @@ public class UnionTypeTest {
   }
 
   @Test
-  public void test_equals() {
+  void test_equals() {
     assertThat(or(a, b).equals(or(a, b))).isTrue();
     assertThat(or(a, b).equals(or(b, a))).isTrue();
     assertThat(or(a, b).equals(or(a, c))).isFalse();
@@ -113,25 +113,25 @@ public class UnionTypeTest {
   }
 
   @Test
-  public void test_hashCode() {
+  void test_hashCode() {
     assertThat(or(a, b).hashCode()).isEqualTo(or(a, b).hashCode());
     assertThat(or(a, b).hashCode()).isNotEqualTo(or(a, c).hashCode());
   }
 
   @Test
-  public void test_toString() {
+  void test_toString() {
     assertThat(or(a, b).toString()).isIn("UnionType[RuntimeType(a), RuntimeType(b)]", "UnionType[RuntimeType(b), RuntimeType(a)]");
   }
 
   @Test
-  public void test_canOnlyBe() {
+  void test_canOnlyBe() {
     assertThat(or(a, b).canOnlyBe("a")).isFalse();
     assertThat(or(a, a).canOnlyBe("a")).isTrue();
     assertThat(or(a, a).canOnlyBe("b")).isFalse();
   }
 
   @Test
-  public void test_canBeOrExtend() {
+  void test_canBeOrExtend() {
     assertThat(or(a, b).canBeOrExtend("a")).isTrue();
     assertThat(or(a, b).canBeOrExtend("c")).isFalse();
 
@@ -142,7 +142,7 @@ public class UnionTypeTest {
   }
 
   @Test
-  public void test_isCompatibleWith() {
+  void test_isCompatibleWith() {
     assertThat(a.isCompatibleWith(or(a, b))).isTrue();
     assertThat(or(a, b).isCompatibleWith(a)).isTrue();
     assertThat(c.isCompatibleWith(or(a, b))).isTrue();
@@ -158,7 +158,7 @@ public class UnionTypeTest {
   }
 
   @Test
-  public void test_isCompatibleWith_NoneType() {
+  void test_isCompatibleWith_NoneType() {
     ClassSymbolImpl x1 = new ClassSymbolImpl("x1", "x1");
     x1.addMembers(Collections.singletonList(new SymbolImpl("foo", null)));
     ClassSymbolImpl x2 = new ClassSymbolImpl("x2", "x2");
@@ -172,7 +172,7 @@ public class UnionTypeTest {
   }
 
   @Test
-  public void test_mustBeOrExtend() {
+  void test_mustBeOrExtend() {
     ClassSymbolImpl x1 = new ClassSymbolImpl("x1", "x1");
     ClassSymbolImpl x2 = new ClassSymbolImpl("x2", "x2");
     x2.addSuperClass(x1);
@@ -184,7 +184,7 @@ public class UnionTypeTest {
   }
 
   @Test
-  public void test_resolveDeclaredMember() {
+  void test_resolveDeclaredMember() {
     ClassSymbolImpl typeClassX = new ClassSymbolImpl("x", "x");
     SymbolImpl fooX = new SymbolImpl("foo", "x.foo");
     typeClassX.addMembers(Collections.singletonList(fooX));

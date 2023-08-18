@@ -47,7 +47,7 @@ public class CPDTest {
   public static final OrchestratorExtension ORCHESTRATOR = Tests.ORCHESTRATOR;
 
   @BeforeAll
-  public static void startServer() {
+  static void startServer() {
     ORCHESTRATOR.getServer().provisionProject(PROJECT_KEY, PROJECT_KEY);
     ORCHESTRATOR.getServer().associateProjectToQualityProfile(PROJECT_KEY, "py", "no_rule");
     SonarScanner build = SonarScanner.create()
@@ -61,7 +61,7 @@ public class CPDTest {
   }
 
   @Test
-  public void test_cpd() {
+  void test_cpd() {
     Offset<Double> offset = Offset.offset(0.01d);
 
     assertThat(getMeasureAsDouble(FILE_1_KEY, DUPLICATED_LINES)).isEqualTo(27.0d, offset);

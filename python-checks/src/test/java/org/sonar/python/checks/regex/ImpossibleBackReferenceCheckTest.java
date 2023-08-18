@@ -25,7 +25,7 @@ import org.sonar.python.checks.utils.PythonCheckVerifier;
 public class ImpossibleBackReferenceCheckTest {
 
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/regex/impossibleBackReferenceCheck.py", new ImpossibleBackReferenceCheck());
   }
 

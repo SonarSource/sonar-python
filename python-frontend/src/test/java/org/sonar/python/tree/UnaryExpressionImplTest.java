@@ -29,7 +29,7 @@ import static org.sonar.python.types.InferredTypes.BOOL;
 public class UnaryExpressionImplTest {
 
   @Test
-  public void type() {
+  void type() {
     assertThat(lastExpression("not 42").type()).isEqualTo(BOOL);
     assertThat(lastExpression("-42").type()).isEqualTo(InferredTypes.INT);
     assertThat(lastExpression("+42").type()).isEqualTo(InferredTypes.INT);

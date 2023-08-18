@@ -27,7 +27,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class CustomPythonRuleRepositoryTest {
 
   @Test
-  public void test_rule_repository() {
+  void test_rule_repository() {
     CustomPythonRuleRepository customPythonRuleRepository = new CustomPythonRuleRepository();
     RulesDefinition.Context context = new RulesDefinition.Context();
     customPythonRuleRepository.define(context);

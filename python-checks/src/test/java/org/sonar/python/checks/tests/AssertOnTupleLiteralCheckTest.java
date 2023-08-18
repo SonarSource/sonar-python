@@ -29,12 +29,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class AssertOnTupleLiteralCheckTest {
   
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/tests/assertOnTupleLiteral.py", new AssertOnTupleLiteralCheck());
   }
 
   @Test
-  public void quickFixTest() {
+  void quickFixTest() {
     var before = "def foo():\n" +
       "    assert (a, b)";
     var after = "def foo():\n" +
@@ -44,7 +44,7 @@ public class AssertOnTupleLiteralCheckTest {
   }
 
   @Test
-  public void test_scope() {
+  void test_scope() {
     assertThat(new AssertOnTupleLiteralCheck().scope()).isEqualTo(PythonCheck.CheckScope.ALL);
   }
 }

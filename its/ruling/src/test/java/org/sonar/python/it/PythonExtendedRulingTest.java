@@ -43,14 +43,14 @@ public class PythonExtendedRulingTest {
   public static final OrchestratorExtension ORCHESTRATOR = getOrchestrator();
 
   @BeforeAll
-  public static void prepare_quality_profile() throws IOException {
+  static void prepare_quality_profile() throws IOException {
     List<String> ruleKeys = bugRuleKeys();
     String pythonProfile = RulingHelper.profile("customProfile", "py", "python", ruleKeys);
     RulingHelper.loadProfile(ORCHESTRATOR, pythonProfile);
   }
 
   @Test
-  public void test_airflow() throws IOException {
+  void test_airflow() throws IOException {
     SonarScanner build = buildWithCommonProperties("airflow");
     build.setProperty("sonar.sources", "airflow");
     build.setProperty("sonar.tests", "tests");
@@ -58,17 +58,17 @@ public class PythonExtendedRulingTest {
   }
 
   @Test
-  public void test_archery() throws IOException {
+  void test_archery() throws IOException {
     executeBuild(buildWithCommonProperties("Archery"));
   }
 
   @Test
-  public void test_autokeras() throws IOException {
+  void test_autokeras() throws IOException {
     executeBuild(buildWithCommonProperties("autokeras"));
   }
 
   @Test
-  public void test_black() throws IOException {
+  void test_black() throws IOException {
     SonarScanner build = buildWithCommonProperties("black");
     build.setProperty("sonar.sources", "src");
     build.setProperty("sonar.tests", "tests");
@@ -77,14 +77,14 @@ public class PythonExtendedRulingTest {
   }
 
   @Test
-  public void test_calibre() throws IOException {
+  void test_calibre() throws IOException {
     SonarScanner build = buildWithCommonProperties("calibre");
     build.setProperty("sonar.sources", "src");
     executeBuild(build);
   }
 
   @Test
-  public void test_chalice() throws IOException {
+  void test_chalice() throws IOException {
     SonarScanner build = buildWithCommonProperties("chalice");
     build.setProperty("sonar.sources", "chalice");
     build.setProperty("sonar.tests", "tests");
@@ -92,7 +92,7 @@ public class PythonExtendedRulingTest {
   }
 
   @Test
-  public void test_django_shop() throws IOException {
+  void test_django_shop() throws IOException {
     SonarScanner build = buildWithCommonProperties("django-shop");
     build.setProperty("sonar.sources", "shop");
     build.setProperty("sonar.tests", "tests");
@@ -100,14 +100,14 @@ public class PythonExtendedRulingTest {
   }
 
   @Test
-  public void test_indico() throws IOException {
+  void test_indico() throws IOException {
     SonarScanner build = buildWithCommonProperties("indico");
     build.setProperty("sonar.sources", "indico");
     executeBuild(build);
   }
 
   @Test
-  public void test_LibCST() throws IOException {
+  void test_LibCST() throws IOException {
     SonarScanner build = buildWithCommonProperties("LibCST");
     build.setProperty("sonar.sources", "libcst");
     build.setProperty("sonar.tests", "libcst/tests");
@@ -116,7 +116,7 @@ public class PythonExtendedRulingTest {
   }
 
   @Test
-  public void test_nltk() throws IOException {
+  void test_nltk() throws IOException {
     SonarScanner build = buildWithCommonProperties("nltk");
     build.setProperty("sonar.sources", ".");
     build.setProperty("sonar.exclusions", "**/test/**/*");
@@ -124,14 +124,14 @@ public class PythonExtendedRulingTest {
   }
 
   @Test
-  public void test_saleor() throws IOException {
+  void test_saleor() throws IOException {
     SonarScanner build = buildWithCommonProperties("saleor");
     build.setProperty("sonar.sources", "saleor");
     executeBuild(build);
   }
 
   @Test
-  public void test_salt() throws IOException {
+  void test_salt() throws IOException {
     SonarScanner build = buildWithCommonProperties("salt");
     build.setProperty("sonar.sources", "salt");
     build.setProperty("sonar.tests", "tests");
@@ -139,14 +139,14 @@ public class PythonExtendedRulingTest {
   }
 
   @Test
-  public void test_scikit_learn() throws IOException {
+  void test_scikit_learn() throws IOException {
     SonarScanner build = buildWithCommonProperties("scikit-learn");
     build.setProperty("sonar.sources", "sklearn");
     executeBuild(build);
   }
 
   @Test
-  public void test_timesketch() throws IOException {
+  void test_timesketch() throws IOException {
     SonarScanner build = buildWithCommonProperties("timesketch");
     build.setProperty("sonar.sources", "timesketch");
     build.setProperty("sonar.test.inclusions", "**/*_test.py");

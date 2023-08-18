@@ -25,12 +25,12 @@ import org.sonar.python.checks.utils.PythonCheckVerifier;
 public class UnusedImportCheckTest {
 
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/unusedImport/unusedImport.py", new UnusedImportCheck());
   }
 
   @Test
-  public void test_init_file() {
+  void test_init_file() {
     PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/unusedImport/__init__.py", new UnusedImportCheck());
   }
 }

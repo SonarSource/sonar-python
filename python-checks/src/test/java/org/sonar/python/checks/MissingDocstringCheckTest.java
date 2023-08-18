@@ -30,35 +30,35 @@ public class MissingDocstringCheckTest {
   final PythonCheck check = new MissingDocstringCheck();
 
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/missing_docstring/missingDocstring.py", check);
   }
 
   @Test
-  public void testMissingDocStringAtModuleLevel() {
+  void testMissingDocStringAtModuleLevel() {
     PythonCheckVerifier.verify("src/test/resources/checks/missing_docstring/missingDocstringAtModuleLevel.py", check);
   }
 
   @Test
-  public void testEmptyModule() {
+  void testEmptyModule() {
     PythonCheckVerifier.verify("src/test/resources/checks/missing_docstring/emptyModule.py", check);
   }
 
   @Test
-  public void __init__without_docstring() {
+  void __init__without_docstring() {
     PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/missing_docstring/empty_init/__init__.py", check);
     PythonCheckVerifier.verify("src/test/resources/checks/missing_docstring/nonempty_init/__init__.py", check);
   }
 
   @Test
-  public void quick_fix_add_docstring_to_module() {
+  void quick_fix_add_docstring_to_module() {
     String codeWithIssue = "";
     String fixedCode ="\"\"\" doc \"\"\"";
     PythonQuickFixVerifier.verify(check, codeWithIssue, fixedCode);
   }
 
   @Test
-  public void quick_fix_add_docstring_for_class() {
+  void quick_fix_add_docstring_for_class() {
     String codeWithIssue = module("class MyClass:",
       "  pass");
     String fixedCode = module("class MyClass:",
@@ -69,7 +69,7 @@ public class MissingDocstringCheckTest {
   }
 
   @Test
-  public void quick_fix_add_docstring_for_class_with_new_line() {
+  void quick_fix_add_docstring_for_class_with_new_line() {
     String codeWithIssue = module("class MyClass:",
       "",
       "  pass");
@@ -81,7 +81,7 @@ public class MissingDocstringCheckTest {
   }
 
   @Test
-  public void quick_fix_add_docstring_for_class_with_method() {
+  void quick_fix_add_docstring_for_class_with_method() {
     String codeWithIssue = module("class MyClass:",
       "  def my_method():",
       "    \"\"\"This is a test method\"\"\"",
@@ -95,7 +95,7 @@ public class MissingDocstringCheckTest {
   }
 
   @Test
-  public void quick_fix_add_docstring_for_function() {
+  void quick_fix_add_docstring_for_function() {
     String codeWithIssue = module("def my_function():",
       "  pass");
     String fixedCode = module("def my_function():",

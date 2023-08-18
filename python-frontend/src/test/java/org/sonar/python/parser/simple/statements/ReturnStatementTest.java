@@ -29,18 +29,18 @@ import static org.sonar.python.parser.PythonParserAssert.assertThat;
 public class ReturnStatementTest extends RuleTest {
 
   @BeforeEach
-  public void init() {
+  void init() {
     setRootRule(PythonGrammar.RETURN_STMT);
   }
 
   @Test
-  public void ok() {
+  void ok() {
     assertThat(p).matches("return");
     assertThat(p).matches("return testlist");
   }
 
   @Test
-  public void realLife() {
+  void realLife() {
     assertThat(p).matches("return");
   }
 

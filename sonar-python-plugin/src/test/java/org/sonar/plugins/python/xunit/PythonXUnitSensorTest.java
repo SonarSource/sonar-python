@@ -58,7 +58,7 @@ public class PythonXUnitSensorTest {
   public LogTesterJUnit5 logTester = new LogTesterJUnit5().setLevel(Level.DEBUG);
 
   @BeforeEach
-  public void setUp() {
+  void setUp() {
     settings = new MapSettings();
     context = SensorContextTester.create(baseDir);
     settings.clear();
@@ -67,7 +67,7 @@ public class PythonXUnitSensorTest {
   }
 
   @Test
-  public void shouldSaveCorrectMeasures() {
+  void shouldSaveCorrectMeasures() {
     DefaultInputFile testFile1 = TestInputFileBuilder.create("", FILE_SAMPLE1).build();
     DefaultInputFile testFile2 = TestInputFileBuilder.create("", FILE_SAMPLE2).build();
     fs.add(testFile1);
@@ -88,7 +88,7 @@ public class PythonXUnitSensorTest {
   }
 
   @Test
-  public void shouldSaveCorrectMeasuresSimpleMode() {
+  void shouldSaveCorrectMeasuresSimpleMode() {
     settings.setProperty(PythonXUnitSensor.SKIP_DETAILS, true);
     fs.add(TestInputFileBuilder.create("", "test_sample.py").build());
     fs.add(TestInputFileBuilder.create("", "tests/dir/test_sample.py").build());
@@ -102,7 +102,7 @@ public class PythonXUnitSensorTest {
   }
 
   @Test
-  public void shouldReportNothingWhenNoReportFound() {
+  void shouldReportNothingWhenNoReportFound() {
     DefaultInputFile testFile1 = TestInputFileBuilder.create("", FILE_SAMPLE1).build();
     fs.add(testFile1);
 
@@ -114,7 +114,7 @@ public class PythonXUnitSensorTest {
   }
 
   @Test
-  public void shouldLogWarningWhenGivenInvalidTime() {
+  void shouldLogWarningWhenGivenInvalidTime() {
     settings.setProperty(PythonXUnitSensor.REPORT_PATH_KEY, "xunit-reports/invalid-time-xunit-report.xml");
     sensor.execute(context);
 
@@ -125,7 +125,7 @@ public class PythonXUnitSensorTest {
   }
 
   @Test
-  public void shouldSaveCorrectMeasuresWithPyTestFormat() {
+  void shouldSaveCorrectMeasuresWithPyTestFormat() {
     DefaultInputFile testFile1 = TestInputFileBuilder.create("", FILE_SAMPLE1).build();
     DefaultInputFile testFile2 = TestInputFileBuilder.create("", FILE_SAMPLE2).build();
     fs.add(testFile1);
@@ -147,7 +147,7 @@ public class PythonXUnitSensorTest {
   }
 
   @Test
-  public void testNoTestReport() {
+  void testNoTestReport() {
     DefaultInputFile testFile2 = TestInputFileBuilder.create("", FILE_SAMPLE2).build();
     fs.add(testFile2);
     settings.setProperty(PythonXUnitSensor.REPORT_PATH_KEY, "xunit-reports/empty-xunit-result.xml");
@@ -158,7 +158,7 @@ public class PythonXUnitSensorTest {
   }
 
   @Test
-  public void fallbackToTestsuiteName() {
+  void fallbackToTestsuiteName() {
     DefaultInputFile testFile1 = TestInputFileBuilder.create("", FILE_SAMPLE1).build();
     fs.add(testFile1);
     settings.setProperty(PythonXUnitSensor.REPORT_PATH_KEY, "xunit-reports/no-classname-xunit-result.xml");
@@ -171,7 +171,7 @@ public class PythonXUnitSensorTest {
   }
 
   @Test
-  public void malformedReport() {
+  void malformedReport() {
     DefaultInputFile testFile1 = TestInputFileBuilder.create("", FILE_SAMPLE1).build();
     fs.add(testFile1);
     settings.setProperty(PythonXUnitSensor.REPORT_PATH_KEY, "xunit-reports/malformed-xunit-result.xml");
@@ -184,7 +184,7 @@ public class PythonXUnitSensorTest {
   }
 
   @Test
-  public void missingAttributes() {
+  void missingAttributes() {
     settings.setProperty(PythonXUnitSensor.REPORT_PATH_KEY, "xunit-reports/missing-attribute-xunit-report.xml");
     sensor.execute(context);
     assertThat(logTester.logs(Level.WARN)).contains("Cannot read report 'xunit-reports/missing-attribute-xunit-report.xml', the following exception occurred: Missing attribute 'time' at line 3");

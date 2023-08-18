@@ -37,7 +37,7 @@ import static org.sonar.python.types.InferredTypes.or;
 public class BinaryExpressionImplTest {
 
   @Test
-  public void type() {
+  void type() {
     assertThat(lastExpression("42 + 43").type()).isEqualTo(INT);
     assertThat(lastExpression("42 + 0xABC").type()).isEqualTo(INT);
     assertThat(lastExpression("'foo' + 'bar'").type()).isEqualTo(STR);
@@ -58,7 +58,7 @@ public class BinaryExpressionImplTest {
   }
 
   @Test
-  public void logical_expressions() {
+  void logical_expressions() {
     assertThat(lastExpression("42 or 43").type()).isEqualTo(INT);
     assertThat(lastExpression("42 and 43").type()).isEqualTo(INT);
     assertThat(lastExpression("42 or ''").type()).isEqualTo(or(INT, STR));
@@ -73,7 +73,7 @@ public class BinaryExpressionImplTest {
   }
 
   @Test
-  public void type_dependencies() {
+  void type_dependencies() {
     BinaryExpressionImpl binary = ((BinaryExpressionImpl) lastExpression("42 or ''"));
     assertThat(binary.typeDependencies()).containsExactly(binary.leftOperand(), binary.rightOperand());
 
@@ -82,7 +82,7 @@ public class BinaryExpressionImplTest {
   }
 
   @Test
-  public void long_sequence_binary_expressions() {
+  void long_sequence_binary_expressions() {
     InferredType type = lastExpression(
       "'a' + 'b' + 'c' + 'd' + 'e' + 'f' + 'g' + 'a' + 'b' + 'c' + 'd' + 'e' + 'f' + 'g' + 'a' + 'b' + 'c' + 'd' + 'e' +" +
       " 'f' + 'g' + 'a' + 'b' + 'c' + 'd' + 'e' + 'f' + 'g' + 'a' + 'b' + 'c' + 'd' + 'e' + 'f' + 'g' + 'a' + 'b' + 'c' + 'd' + 'e' + 'f' + 'g'"

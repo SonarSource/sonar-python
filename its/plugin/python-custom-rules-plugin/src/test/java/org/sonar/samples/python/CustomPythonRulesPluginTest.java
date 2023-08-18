@@ -32,7 +32,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class CustomPythonRulesPluginTest {
   @Test
-  public void test() {
+  void test() {
     SonarRuntime sonarRuntime = SonarRuntimeImpl.forSonarQube(Version.create(7, 9), SonarQubeSide.SCANNER, SonarEdition.DEVELOPER);
     Plugin.Context context = new PluginContextImpl.Builder().setSonarRuntime(sonarRuntime).build();
     new CustomPythonRulesPlugin().define(context);

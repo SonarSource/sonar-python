@@ -28,22 +28,22 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class ImplicitlySkippedTestCheckTest {
 
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/tests/implicitlySkippedTest.py", new ImplicitlySkippedTestCheck());
   }
 
   @Test
-  public void testWithWrapper() {
+  void testWithWrapper() {
     PythonCheckVerifier.verify("src/test/resources/checks/tests/implicitlySkippedTestWithWrapper.py", new ImplicitlySkippedTestCheck());
   }
 
   @Test
-  public void testAnotherLibrary() {
+  void testAnotherLibrary() {
     PythonCheckVerifier.verify("src/test/resources/checks/tests/implicitlySkippedTestAnotherLibrary.py", new ImplicitlySkippedTestCheck());
   }
 
   @Test
-  public void test_scope() {
+  void test_scope() {
     assertThat(new ImplicitlySkippedTestCheck().scope()).isEqualTo(PythonCheck.CheckScope.ALL);
   }
 

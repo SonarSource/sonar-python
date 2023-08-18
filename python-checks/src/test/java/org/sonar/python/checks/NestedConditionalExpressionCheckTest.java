@@ -25,7 +25,7 @@ import org.sonar.python.checks.utils.PythonCheckVerifier;
 public class NestedConditionalExpressionCheckTest {
 
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/nestedConditionalExpression.py", new NestedConditionalExpressionCheck());
   }
 

@@ -25,22 +25,22 @@ import org.sonar.python.checks.utils.PythonCheckVerifier;
 public class MissingNewlineAtEndOfFileCheckTest {
 
   @Test
-  public void missing_new_line() {
+  void missing_new_line() {
     PythonCheckVerifier.verify("src/test/resources/checks/missingNewlineAtEndOfFile1.py", new MissingNewlineAtEndOfFileCheck());
   }
 
   @Test
-  public void missing_new_line_comment() {
+  void missing_new_line_comment() {
     PythonCheckVerifier.verify("src/test/resources/checks/missingNewlineAtEndOfFile2.py", new MissingNewlineAtEndOfFileCheck());
   }
 
   @Test
-  public void file_with_new_line() {
+  void file_with_new_line() {
     PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/missingNewlineAtEndOfFile3.py", new MissingNewlineAtEndOfFileCheck());
   }
 
   @Test
-  public void empty_file() {
+  void empty_file() {
     PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/missingNewlineAtEndOfFile4.py", new MissingNewlineAtEndOfFileCheck());
   }
 

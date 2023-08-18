@@ -27,7 +27,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class MypyRulesDefinitionTest {
 
   @Test
-  public void mypy_external_repository() {
+  void mypy_external_repository() {
     RulesDefinition.Context context = new RulesDefinition.Context();
     MypyRulesDefinition rulesDefinition = new MypyRulesDefinition();
     rulesDefinition.define(context);

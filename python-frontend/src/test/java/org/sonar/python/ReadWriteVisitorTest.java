@@ -35,7 +35,7 @@ import static org.sonar.python.PythonTestUtils.parse;
 public class ReadWriteVisitorTest {
 
   @Test
-  public void test_usages() {
+  void test_usages() {
     FileInput tree = parse("x = 1; print(x); x += 3\ndef fun(): print(x)\n");
     StatementList statementList = tree.statements();
     Symbol x = ((Name) ((AssignmentStatement) statementList.statements().get(0)).lhsExpressions().get(0).expressions().get(0)).symbol();

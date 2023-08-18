@@ -34,7 +34,7 @@ import static org.sonar.python.index.DescriptorUtils.descriptor;
 public class VariableDescriptorTest {
 
   @Test
-  public void variableDescriptor() {
+  void variableDescriptor() {
     VariableDescriptor x = lastVariableDescriptor(
       "x: int = 42",
       "x");
@@ -44,7 +44,7 @@ public class VariableDescriptorTest {
   }
 
   @Test
-  public void protobufSerializationWithAnnotatedReturnType() {
+  void protobufSerializationWithAnnotatedReturnType() {
     VariableDescriptor variableDescriptor = new VariableDescriptor("x", "mod.x", "str");
     assertVariableDescriptors(variableDescriptor, fromProtobuf(toProtobuf(variableDescriptor)));
   }

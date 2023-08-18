@@ -28,17 +28,17 @@ public class PublicNetworkAccessToCloudResourcesCheckTest {
   final PythonCheck check = new PublicNetworkAccessToCloudResourcesCheck();
 
   @Test
-  public void testCfnMethod() {
+  void testCfnMethod() {
     PythonCheckVerifier.verify("src/test/resources/checks/cdk/publicNetworkAccessDatabaseMigration.py", check);
   }
 
   @Test
-  public void testDatabaseInstance() {
+  void testDatabaseInstance() {
     PythonCheckVerifier.verify("src/test/resources/checks/cdk/publicNetworkAccessDatabaseInstance.py", check);
   }
 
   @Test
-  public void testInstance() {
+  void testInstance() {
     PythonCheckVerifier.verify("src/test/resources/checks/cdk/publicNetworkAccessDatabaseMigration_Instance.py", check);
   }
 }

@@ -25,7 +25,7 @@ import org.sonar.python.checks.utils.PythonCheckVerifier;
 public class DisabledHtmlAutoEscapeCheckTest {
 
   @Test
-  public void test() {
+  void test() {
     DisabledHtmlAutoEscapeCheck check = new DisabledHtmlAutoEscapeCheck();
     PythonCheckVerifier.verify("src/test/resources/checks/hotspots/disabledHtmlAutoEscape/jinja2.py", check);
     PythonCheckVerifier.verify("src/test/resources/checks/hotspots/disabledHtmlAutoEscape/settings.py", check);

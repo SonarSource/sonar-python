@@ -29,12 +29,12 @@ import static org.sonar.python.parser.PythonParserAssert.assertThat;
 public class SimpleStatementTest extends RuleTest {
 
   @BeforeEach
-  public void init() {
+  void init() {
     setRootRule(PythonGrammar.SIMPLE_STMT);
   }
 
   @Test
-  public void ok() {
+  void ok() {
     assertThat(p).matches("PRINT_STMT");
     assertThat(p).matches("EXEC_STMT");
     assertThat(p).matches("EXPRESSION_STMT");
@@ -52,7 +52,7 @@ public class SimpleStatementTest extends RuleTest {
   }
 
   @Test
-  public void realLife() {
+  void realLife() {
     assertThat(p).matches("print 'Hello world'");
     assertThat(p).matches("print = 12");
     assertThat(p).matches("exec 'print 1'");

@@ -48,12 +48,12 @@ public class CoverageTest {
   private static final String COVERAGE_REPORT_PATHS = "sonar.python.coverage.reportPaths";
 
   @Test
-  public void basic_coverage_reports_with_unix_paths() {
+  void basic_coverage_reports_with_unix_paths() {
     basicCoverageReports("ut-coverage.xml");
   }
 
   @Test
-  public void basic_coverage_reports_with_windows_paths() {
+  void basic_coverage_reports_with_windows_paths() {
     basicCoverageReports("ut-coverage-windowspaths.xml");
   }
 
@@ -77,7 +77,7 @@ public class CoverageTest {
   }
 
   @Test
-  public void default_values() {
+  void default_values() {
     SonarScanner build = SonarScanner.create()
       .setProjectDir(new File(COVERAGE_PROJECT));
     ORCHESTRATOR.executeBuild(build);
@@ -92,7 +92,7 @@ public class CoverageTest {
   }
 
   @Test
-  public void empty_property() {
+  void empty_property() {
     SonarScanner build = SonarScanner.create()
       .setProjectDir(new File(COVERAGE_PROJECT))
       .setProperty(DEPRECATED_COVERAGE_REPORT_PATH, "")
@@ -108,7 +108,7 @@ public class CoverageTest {
   }
 
   @Test
-  public void empty_coverage_report() {
+  void empty_coverage_report() {
     SonarScanner build = SonarScanner.create()
       .setProjectDir(new File(COVERAGE_PROJECT))
       .setProperty(DEPRECATED_COVERAGE_REPORT_PATH, EMPTY_XML)

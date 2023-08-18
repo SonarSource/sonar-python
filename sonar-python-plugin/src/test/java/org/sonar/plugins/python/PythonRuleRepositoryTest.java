@@ -39,7 +39,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class PythonRuleRepositoryTest {
 
   @Test
-  public void createRulesTest() throws IOException {
+  void createRulesTest() throws IOException {
     RulesDefinition.Repository repository = buildRepository();
 
     assertThat(repository).isNotNull();
@@ -64,7 +64,7 @@ public class PythonRuleRepositoryTest {
   }
 
   @Test
-  public void owaspSecurityStandard() {
+  void owaspSecurityStandard() {
     RulesDefinition.Repository repository_9_3 = buildRepository(9, 3);
     RulesDefinition.Rule s4721_9_3 = repository_9_3.rule("S4721");
     assertThat(s4721_9_3).isNotNull();
@@ -77,7 +77,7 @@ public class PythonRuleRepositoryTest {
   }
 
   @Test
-  public void psiDssSecurityStandard() {
+  void psiDssSecurityStandard() {
     RulesDefinition.Repository repository_9_5 = buildRepository(9, 5);
     RulesDefinition.Rule s4792_9_5 = repository_9_5.rule("S4792");
     assertThat(s4792_9_5).isNotNull();
@@ -99,7 +99,7 @@ public class PythonRuleRepositoryTest {
   }
 
   @Test
-  public void ruleTemplates() {
+  void ruleTemplates() {
     RulesDefinition.Repository repository = buildRepository();
     assertThat(repository).isNotNull();
 
@@ -122,7 +122,7 @@ public class PythonRuleRepositoryTest {
   }
 
   @Test
-  public void hotspotRules() {
+  void hotspotRules() {
     RulesDefinition.Repository repository = buildRepository();
     RulesDefinition.Rule hardcodedIp = repository.rule("S1313");
     assertThat(hardcodedIp.type()).isEqualTo(RuleType.SECURITY_HOTSPOT);

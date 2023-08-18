@@ -25,12 +25,12 @@ import org.sonar.python.checks.utils.PythonCheckVerifier;
 public class TooManyLinesInFunctionCheckTest {
 
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/tooManyLinesInFunction.py", new TooManyLinesInFunctionCheck());
   }
 
   @Test
-  public void custom() {
+  void custom() {
     TooManyLinesInFunctionCheck check = new TooManyLinesInFunctionCheck();
     check.max = 5;
     PythonCheckVerifier.verify("src/test/resources/checks/tooManyLinesInFunctionCustom.py", check);

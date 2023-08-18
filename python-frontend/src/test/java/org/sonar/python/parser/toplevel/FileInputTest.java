@@ -29,12 +29,12 @@ import static org.sonar.python.parser.PythonParserAssert.assertThat;
 public class FileInputTest extends RuleTest {
 
   @BeforeEach
-  public void init() {
+  void init() {
     setRootRule(PythonGrammar.FILE_INPUT);
   }
 
   @Test
-  public void ok() {
+  void ok() {
     assertThat(p)
       .matches("print foo")
       .matches("print foo; print toto")
