@@ -25,7 +25,7 @@ import org.sonar.api.config.internal.MapSettings;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class PythonTest {
+class PythonTest {
 
   @Test
   void test() {

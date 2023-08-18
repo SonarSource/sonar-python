@@ -24,7 +24,7 @@ import org.sonar.api.server.profile.BuiltInQualityProfilesDefinition;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class IPynbProfileTest {
+class IPynbProfileTest {
 
   public BuiltInQualityProfilesDefinition.BuiltInQualityProfile getProfile() {
     BuiltInQualityProfilesDefinition.Context context = new BuiltInQualityProfilesDefinition.Context();

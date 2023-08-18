@@ -36,7 +36,7 @@ import org.sonar.python.TestPythonVisitorRunner;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class SymbolVisitorTest {
+class SymbolVisitorTest {
 
   private static SensorContextTester context;
   private static String componentKey;

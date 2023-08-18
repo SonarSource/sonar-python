@@ -42,7 +42,7 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
-public class PythonXUnitSensorTest {
+class PythonXUnitSensorTest {
 
   private static final String FILE_SAMPLE1 = "test_sample1.py";
   private static final String FILE_SAMPLE2 = "tests/dir/test_sample2.py";

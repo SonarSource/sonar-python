@@ -30,7 +30,7 @@ import org.sonar.api.batch.fs.InputFile;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.plugins.python.TestUtils.createInputFile;
 
-public class FileHashingUtilsTest {
+class FileHashingUtilsTest {
 
   private final File baseDir = new File("src/test/resources/org/sonar/plugins/python/indexer").getAbsoluteFile();
 

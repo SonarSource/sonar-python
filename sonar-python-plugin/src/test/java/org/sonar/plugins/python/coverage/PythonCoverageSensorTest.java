@@ -51,7 +51,7 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
-public class PythonCoverageSensorTest {
+class PythonCoverageSensorTest {
 
   private static final String ABSOLUTE_PATH_PLACEHOLDER = "{ABSOLUTE_PATH_PLACEHOLDER}";
   private static final String FILE1_KEY = "moduleKey:sources/file1.py";

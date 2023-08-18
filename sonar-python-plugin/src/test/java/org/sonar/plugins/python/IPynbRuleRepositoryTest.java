@@ -35,7 +35,7 @@ import org.sonar.python.checks.CheckList;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class IPynbRuleRepositoryTest {
+class IPynbRuleRepositoryTest {
 
   @Test
   void createRulesTest() throws IOException {

@@ -24,7 +24,7 @@ import org.sonar.api.server.rule.RulesDefinition;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class PylintRulesDefinitionTest {
+class PylintRulesDefinitionTest {
 
   @Test
   void pylint_external_repository() {

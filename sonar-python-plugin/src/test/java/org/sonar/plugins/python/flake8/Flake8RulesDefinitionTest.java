@@ -24,7 +24,7 @@ import org.sonar.api.server.rule.RulesDefinition;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class Flake8RulesDefinitionTest {
+class Flake8RulesDefinitionTest {
 
   @Test
   void flake8_external_repository() {

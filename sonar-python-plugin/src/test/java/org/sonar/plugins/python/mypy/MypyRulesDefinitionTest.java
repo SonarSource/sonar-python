@@ -24,7 +24,7 @@ import org.sonar.api.server.rule.RulesDefinition;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class MypyRulesDefinitionTest {
+class MypyRulesDefinitionTest {
 
   @Test
   void mypy_external_repository() {

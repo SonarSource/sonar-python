@@ -48,7 +48,7 @@ import org.sonar.api.utils.Version;
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class Flake8SensorTest {
+class Flake8SensorTest {
 
   private static final String FLAKE8_FILE = "python-project:flake8/file1.py";
   private static final String FLAKE8_F401 = "external_flake8:F401";

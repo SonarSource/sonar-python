@@ -24,7 +24,7 @@ import org.sonar.api.server.rule.RulesDefinition;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class BanditRulesDefinitionTest {
+class BanditRulesDefinitionTest {
 
   @Test
   void bandit_lint_external_repository() {

@@ -48,7 +48,7 @@ import org.sonar.api.utils.Version;
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class PylintSensorTest {
+class PylintSensorTest {
 
   private static final String PYLINT_FILE = "python-project:pylint/file1.py";
   private static final String PYLINT_REPORT_DEFAULT_FORMAT = "pylint_report_default_format.txt";

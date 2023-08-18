@@ -53,7 +53,7 @@ import static org.sonar.plugins.python.caching.Caching.IMPORTS_MAP_CACHE_KEY_PRE
 import static org.sonar.plugins.python.caching.Caching.PROJECT_SYMBOL_TABLE_CACHE_KEY_PREFIX;
 import static org.sonar.python.index.DescriptorsToProtobuf.fromProtobuf;
 
-public class CachingTest {
+class CachingTest {
 
   @RegisterExtension
   public LogTesterJUnit5 logTester = new LogTesterJUnit5().setLevel(Level.DEBUG);

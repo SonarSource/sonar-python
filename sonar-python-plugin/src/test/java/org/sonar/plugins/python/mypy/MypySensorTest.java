@@ -49,7 +49,7 @@ import org.sonar.api.utils.Version;
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class MypySensorTest {
+class MypySensorTest {
 
   private static final Path PROJECT_DIR = Paths.get("src", "test", "resources", "org", "sonar", "plugins", "python", "mypy");
   private static final String MYPY_FILE = "python-project:mypy/type_hints_noncompliant.py";

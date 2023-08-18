@@ -38,7 +38,7 @@ import org.sonar.python.TestPythonVisitorRunner;
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class PythonCpdAnalyzerTest {
+class PythonCpdAnalyzerTest {
 
   private static final String BASE_DIR = "src/test/resources/org/sonar/plugins/python";
   private SensorContextTester context = SensorContextTester.create(new File(BASE_DIR));

@@ -29,7 +29,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class SonarQubePythonFileTest {
+class SonarQubePythonFileTest {
 
   private InputFile inputFile = mock(InputFile.class, "file1.py");
 

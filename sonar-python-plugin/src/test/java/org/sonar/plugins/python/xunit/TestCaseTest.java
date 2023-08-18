@@ -25,7 +25,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class TestCaseTest {
+class TestCaseTest {
   @Test
   void rendersRightDetails() {
     Map<String, TestCase> ioMap = new HashMap<>();

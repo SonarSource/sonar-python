@@ -38,7 +38,7 @@ import org.sonar.api.rule.RuleKey;
 import org.sonarsource.sonarlint.core.analysis.sonarapi.DefaultSonarLintIssue;
 
 // This class was copied from sonar-java
-public class MockSonarLintIssue implements NewIssue, Issue {
+class MockSonarLintIssue implements NewIssue, Issue {
   private final DefaultSonarLintIssue parent = new DefaultSonarLintIssue(null, null, null);
   private final SensorContextTester context;
   private boolean isQuickFixAvailable = false;

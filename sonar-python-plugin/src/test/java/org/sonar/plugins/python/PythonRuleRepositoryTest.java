@@ -36,7 +36,7 @@ import org.sonar.python.checks.CheckList;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class PythonRuleRepositoryTest {
+class PythonRuleRepositoryTest {
 
   @Test
   void createRulesTest() throws IOException {

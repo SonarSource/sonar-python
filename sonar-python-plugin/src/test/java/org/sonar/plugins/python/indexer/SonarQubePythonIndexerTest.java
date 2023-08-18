@@ -65,7 +65,7 @@ import static org.sonar.plugins.python.caching.Caching.projectSymbolTableCacheKe
 import static org.sonar.plugins.python.indexer.FileHashingUtils.inputFileContentHash;
 import static org.sonar.python.index.DescriptorsToProtobuf.toProtobufModuleDescriptor;
 
-public class SonarQubePythonIndexerTest {
+class SonarQubePythonIndexerTest {
 
   private final File baseDir = new File("src/test/resources/org/sonar/plugins/python/indexer").getAbsoluteFile();
   private SensorContextTester context;

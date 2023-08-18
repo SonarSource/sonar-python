@@ -123,7 +123,7 @@ import static org.sonar.plugins.python.caching.Caching.projectSymbolTableCacheKe
 import static org.sonar.plugins.python.indexer.FileHashingUtils.inputFileContentHash;
 import static org.sonar.python.index.DescriptorsToProtobuf.toProtobufModuleDescriptor;
 
-public class PythonSensorTest {
+class PythonSensorTest {
 
   private static final String FILE_1 = "file1.py";
   private static final String FILE_2 = "file2.py";

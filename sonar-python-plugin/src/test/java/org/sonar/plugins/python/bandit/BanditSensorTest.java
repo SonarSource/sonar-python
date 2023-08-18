@@ -48,7 +48,7 @@ import org.sonar.api.utils.Version;
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class BanditSensorTest {
+class BanditSensorTest {
 
   private static final String BANDIT_FILE = "python-project:bandit/file1.py";
   private static final String BANDIT_B413 = "external_bandit:B413";

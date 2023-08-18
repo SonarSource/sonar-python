@@ -33,7 +33,7 @@ import org.sonar.python.TestPythonVisitorRunner;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class PythonHighlighterTest {
+class PythonHighlighterTest {
 
   private SensorContextTester context;
 

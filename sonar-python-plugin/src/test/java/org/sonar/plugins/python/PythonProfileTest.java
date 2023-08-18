@@ -33,7 +33,7 @@ import static org.sonar.plugins.python.PythonProfile.getDataflowBugDetectionRule
 import static org.sonar.plugins.python.PythonProfile.getExternalRuleKeys;
 import static org.sonar.plugins.python.PythonProfile.getSecurityRuleKeys;
 
-public class PythonProfileTest {
+class PythonProfileTest {
 
 
   public BuiltInQualityProfilesDefinition.BuiltInQualityProfile getProfile() {

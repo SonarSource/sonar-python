@@ -24,7 +24,7 @@ import org.codehaus.staxmate.in.SMHierarchicCursor;
 import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.parser.StaxParser.XmlStreamHandler;
 
-public class StaxParserTest {
+class StaxParserTest {
 
   @Test
   void test_XML_with_DTD() throws XMLStreamException {
