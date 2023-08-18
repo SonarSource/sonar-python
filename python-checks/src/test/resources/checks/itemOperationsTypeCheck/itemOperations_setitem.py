@@ -157,3 +157,9 @@ def meta_classes():
 
   MetaclassedWithoutSet[0] = 42  # FN
   MetaclassedWithoutSet()[0] = 42  # FN
+
+
+def import_path():
+    from importlib import import_module
+
+    import_module('importlib').__path__[0] = "test"  # OK ref: SONARPY-1339
