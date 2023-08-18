@@ -42,7 +42,7 @@ import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
-public final class Tests {
+public final class TestsUtils {
 
   private static final String SQ_VERSION_PROPERTY = "sonar.runtimeVersion";
   private static final String DEFAULT_SQ_VERSION = "LATEST_RELEASE";
@@ -62,7 +62,7 @@ public final class Tests {
     .restoreProfileAtStartup(FileLocation.of("profiles/nosonar.xml"))
     .build();
 
-  private Tests() {
+  private TestsUtils() {
     // utility class
   }
 

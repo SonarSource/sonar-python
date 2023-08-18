@@ -60,12 +60,13 @@ public abstract class PythonIndexer {
 
   void removeFile(InputFile inputFile) {
     String packageName = packageNames.get(inputFile.uri());
+    String filename = inputFile.filename();
     if (packageName == null) {
-      LOG.debug("Failed to remove file \"{}\" from project-level symbol table (file not indexed)", inputFile.filename());
+      LOG.debug("Failed to remove file \"{}\" from project-level symbol table (file not indexed)", filename);
       return;
     }
     packageNames.remove(inputFile.uri());
-    projectLevelSymbolTable.removeModule(packageName, inputFile.filename());
+    projectLevelSymbolTable.removeModule(packageName, filename);
   }
 
   void addFile(InputFile inputFile) throws IOException {
@@ -122,7 +123,7 @@ public abstract class PythonIndexer {
 
     @Override
     protected void processException(Exception e, InputFile file) {
-      LOG.debug("Unable to construct project-level symbol table for file: " + file);
+      LOG.debug("Unable to construct project-level symbol table for file: {}", file);
       LOG.debug(e.getMessage());
     }
   }

@@ -67,7 +67,7 @@ public class SonarLintPythonIndexer extends PythonIndexer implements ModuleFileL
       LOG.debug("Update \"sonar.python.sonarlint.indexing.maxlines\" to set a different limit.");
       return;
     }
-    LOG.debug("Input files for indexing: " + files);
+    LOG.debug("Input files for indexing: {}", files);
     // computes "globalSymbolsByModuleName"
     GlobalSymbolsScanner globalSymbolsStep = new GlobalSymbolsScanner(context);
     globalSymbolsStep.execute(files, context);
@@ -107,7 +107,7 @@ public class SonarLintPythonIndexer extends PythonIndexer implements ModuleFileL
     InputFile target = moduleFileEvent.getTarget();
     String language = target.language();
     if (language == null || !language.equals(Python.KEY)) {
-      LOG.debug("Module file event for " + target + " has been ignored because it's not a Python file.");
+      LOG.debug("Module file event for {} has been ignored because it's not a Python file.", target);
       return;
     }
     ModuleFileEvent.Type type = moduleFileEvent.getType();

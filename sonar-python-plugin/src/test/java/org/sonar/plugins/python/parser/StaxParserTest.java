@@ -30,24 +30,25 @@ class StaxParserTest {
 
   @Test
   void test_XML_with_DTD() throws XMLStreamException {
-    StaxParser parser = new StaxParser(getTestHandler());
-    InputStream stream = getClass().getClassLoader().getResourceAsStream("org/sonar/plugins/python/parser/dtd-test.xml");
-    Assertions.assertNotNull(stream);
-    Assertions.assertDoesNotThrow(() -> parser.parse(stream));
+    String resource = "org/sonar/plugins/python/parser/dtd-test.xml";
+    parse(resource);
   }
-
+  
   @Test
   void test_XML_with_XSD() throws XMLStreamException {
-    StaxParser parser = new StaxParser(getTestHandler());
-    InputStream stream = getClass().getClassLoader().getResourceAsStream("org/sonar/plugins/python/parser/xsd-test.xml");
-    Assertions.assertNotNull(stream);
-    Assertions.assertDoesNotThrow(() -> parser.parse(stream));
+    String resource = "org/sonar/plugins/python/parser/xsd-test.xml";
+    parse(resource);
   }
 
   @Test
   void test_XML_with_XSD_and_ampersand() throws XMLStreamException {
+    String resource = "org/sonar/plugins/python/parser/xsd-test-with-entity.xml";
+    parse(resource);
+  }
+
+  private void parse(String resource) {
     StaxParser parser = new StaxParser(getTestHandler());
-    InputStream stream = getClass().getClassLoader().getResourceAsStream("org/sonar/plugins/python/parser/xsd-test-with-entity.xml");
+    InputStream stream = getClass().getClassLoader().getResourceAsStream(resource);
     Assertions.assertNotNull(stream);
     Assertions.assertDoesNotThrow(() -> parser.parse(stream));
   }

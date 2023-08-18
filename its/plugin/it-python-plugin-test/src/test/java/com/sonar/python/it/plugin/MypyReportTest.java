@@ -28,7 +28,7 @@ import org.junit.jupiter.api.extension.RegisterExtension;
 import org.sonarqube.ws.Common;
 import org.sonarqube.ws.Issues;
 
-import static com.sonar.python.it.plugin.Tests.issues;
+import static com.sonar.python.it.plugin.TestsUtils.issues;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class MypyReportTest {
@@ -36,7 +36,7 @@ class MypyReportTest {
   private static final String PROJECT = "mypy_project";
 
   @RegisterExtension
-  public static final OrchestratorExtension ORCHESTRATOR = Tests.ORCHESTRATOR;
+  public static final OrchestratorExtension ORCHESTRATOR = TestsUtils.ORCHESTRATOR;
 
   @Test
   void import_report() {

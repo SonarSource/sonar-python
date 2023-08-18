@@ -66,7 +66,7 @@ class SonarLintTest {
   @BeforeAll
   static void prepare() throws Exception {
     StandaloneGlobalConfiguration sonarLintConfig = StandaloneGlobalConfiguration.builder()
-      .addPlugin(Tests.PLUGIN_LOCATION.getFile().toPath())
+      .addPlugin(TestsUtils.PLUGIN_LOCATION.getFile().toPath())
       .setSonarLintUserHome(TEMP)
       .addEnabledLanguage(Language.PYTHON)
       .setLogOutput((formattedMessage, level) -> {

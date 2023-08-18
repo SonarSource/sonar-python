@@ -110,7 +110,7 @@ public class PythonXUnitSensor extends PythonReportSensor {
     for (Map.Entry<InputFile, TestResult> entry : locatedResources.entrySet()) {
       InputFile inputFile = entry.getKey();
       TestResult fileTestResult = entry.getValue();
-      LOG.debug("Saving test execution measures for '{}'", inputFile.toString());
+      LOG.debug("Saving test execution measures for '{}'", inputFile);
 
       saveMeasure(context, inputFile, CoreMetrics.SKIPPED_TESTS, fileTestResult.getSkipped());
       saveMeasure(context, inputFile, CoreMetrics.TESTS, fileTestResult.getExecutedTests());
