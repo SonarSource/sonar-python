@@ -25,7 +25,7 @@ import org.sonar.python.checks.utils.PythonCheckVerifier;
 public class IncompatibleOperandsCheckTest {
 
   @Test
-  public void test_comparison() {
+  void test_comparison() {
     PythonCheckVerifier.verify("src/test/resources/checks/incompatibleOperands/comparison.py", new IncompatibleOperandsCheck());
   }
 

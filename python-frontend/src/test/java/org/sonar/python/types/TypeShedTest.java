@@ -26,7 +26,7 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
 import org.slf4j.event.Level;
@@ -53,7 +53,7 @@ public class TypeShedTest {
   @RegisterExtension
   public LogTesterJUnit5 logTester = new LogTesterJUnit5().setLevel(Level.DEBUG);
 
-  @Before
+  @BeforeEach
   public void setPythonVersions() {
     ProjectPythonVersion.setCurrentVersions(PythonVersionUtils.allVersions());
     TypeShed.resetBuiltinSymbols();

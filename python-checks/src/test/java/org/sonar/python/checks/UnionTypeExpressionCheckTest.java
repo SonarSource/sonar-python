@@ -20,7 +20,7 @@
 package org.sonar.python.checks;
 
 import java.util.EnumSet;
-import org.junit.After;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.ProjectPythonVersion;
 import org.sonar.plugins.python.api.PythonVersionUtils;
@@ -30,7 +30,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class UnionTypeExpressionCheckTest {
 
-  @After
+  @AfterEach
   public void reset_python_version() {
     ProjectPythonVersion.setCurrentVersions(PythonVersionUtils.allVersions());
   }
