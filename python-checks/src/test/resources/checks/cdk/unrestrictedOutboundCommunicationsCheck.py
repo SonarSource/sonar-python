@@ -21,8 +21,15 @@ class UnrestrictedOutbound:
             "sg-1234",
             allow_all_outbound=True  # NonCompliant{{Make sure that allowing unrestricted outbound communications is safe here.}}
         )
+ 
+        ec2.SecurityGroup.from_security_group_id(
+            self,
+            "SensitiveExplicit",
+            "sg-1234",
+            allow_all_outbound=False
+        )
 
-        ec2.SecurityGroup.from_security_group_id(  # NonCompliant{{Omitting "allow_all_outbound" enables unrestricted outbound communications. Make sure it is safe here.}}
+        ec2.SecurityGroup.from_security_group_id(  # Compliant ref: SONARPY-1159 and SONARPY-1419
             self,
             "SensitiveDefault",
             vpc=vpc
