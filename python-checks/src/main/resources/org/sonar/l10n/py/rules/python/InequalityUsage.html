@@ -1,11 +1,19 @@
+<p>This rule raises an issue when the inequality operator <code>&lt;&gt;</code> is used.</p>
 <h2>Why is this an issue?</h2>
-<p>The forms <code>&lt;&gt;</code> and <code>!=</code> are equivalent. But in Python 2.7.3 the <code>&lt;&gt;</code> form is considered obsolete.</p>
-<h3>Noncompliant code example</h3>
-<pre>
-return a &lt;&gt; b # Noncompliant
+<p>The operators <code>&lt;&gt;</code> and <code>!=</code> are equivalent. However, the <code>&lt;&gt;</code> operator is considered obsolete in
+Python 2.7 and has been removed from Python 3. Therefore, it is recommended to use <code>!=</code> instead.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+return a &lt;&gt; b # Noncompliant: the operator "&lt;&gt;" is deprecated.
 </pre>
-<h3>Compliant solution</h3>
-<pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
 return a != b
 </pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Python Documentation: <a href="https://docs.python.org/2.7/reference/lexical_analysis.html#operators">Python 2.7 - Operators</a> </li>
+</ul>
 

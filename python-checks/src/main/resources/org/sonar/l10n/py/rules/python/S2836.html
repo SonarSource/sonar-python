@@ -1,44 +1,53 @@
+<p>This rule raises an issue when a loop with an <code>else</code> clause doesn’t contain any <code>break</code> statement in its body.</p>
 <h2>Why is this an issue?</h2>
 <p>The <code>else</code> clause of a loop is skipped when a <code>break</code> is executed in this loop. In other words, a loop with an
 <code>else</code> but no <code>break</code> statement will always execute the <code>else</code> part (unless of course an exception is raised or
 <code>return</code> is used). If this is what the developer intended, it would be much simpler to have the <code>else</code> statement removed and its
 body unindented. Thus having a loop with an <code>else</code> and no <code>break</code> is most likely an error.</p>
-<h3>Noncompliant code example</h3>
-<pre>
+<h2>How to fix it</h2>
+<p>Add a <code>break</code> statement to the loop body containing an <code>else</code> clause or remove the <code>else</code> clause.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 from typing import List
 
-def search_first_number_without_break(elements: List[str]):
+def foo(elements: List[str]):
     for elt in elements:
         if elt.isnumeric():
             return elt
-    else:  # Noncompliant. This will be executed every time
+    else:  # Noncompliant: no break in the loop
+        raise ValueError("List does not contain any number")
+
+def bar(elements: List[str]):
+    for elt in elements:
+        if elt.isnumeric():
+            return elt
+    else:  # Noncompliant: no break in the loop
         raise ValueError("List does not contain any number")
 </pre>
-<h3>Compliant solution</h3>
-<pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
 from typing import List
 
-def search_first_number_with_break(elements: List[str]):
+def foo(elements: List[str]):
     for elt in elements:
         if elt.isnumeric():
             break
     else:
         raise ValueError("List does not contain any number")
     return elt
-</pre>
-<p>or</p>
-<pre>
-from typing import List
 
-def search_first_number_without_else(elements: List[str]):
+def bar(elements: List[str]):
     for elt in elements:
         if elt.isnumeric():
             return elt
     raise ValueError("List does not contain any number")
 </pre>
 <h2>Resources</h2>
+<h3>Documentation</h3>
 <ul>
-  <li> <a href="https://docs.python.org/3/tutorial/controlflow.html#break-and-continue-statements-and-else-clauses-on-loops">Python documentation -
-  break and continue Statements, and else Clauses on Loops</a> </li>
+  <li> Python documentation - <a
+  href="https://docs.python.org/3/tutorial/controlflow.html#break-and-continue-statements-and-else-clauses-on-loops">Break and continue Statements,
+  and else Clauses on Loops</a> </li>
 </ul>
 

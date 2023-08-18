@@ -1,50 +1,86 @@
-<h2>Why is this an issue?</h2>
-<p>The special method <a
-href="https://docs.python.org/3/reference/datamodel.html?highlight=__exit__%20special#object.__exit__"><code>__exit__</code></a> should only raise an
-exception when it fails. It should never raise the provided exception, it is the caller’s responsibility.</p>
-<p>Raising this exception will make the stack trace difficult to understand.</p>
-<p>The <code>__exit__</code> method can filter passed-in exceptions by simply returning True or False.</p>
 <p>This rule raises an issue when:</p>
 <ul>
   <li> an <code>__exit__</code> method has a bare <code>raise</code> outside of an <code>except</code> block. </li>
   <li> an <code>__exit__</code> method raises the exception provided as parameter. </li>
 </ul>
-<h3>Noncompliant code example</h3>
+<h2>Why is this an issue?</h2>
+<p>Methods <code>__enter__</code> and <code>__exit__</code> make it possible to implement objects which can be used as the expression of a
+<code>with</code> statement:</p>
 <pre>
+with MyContextManager() as c :
+    ... # do something with c
+</pre>
+<p>This statement can be rewritten as a <code>try...finally</code> and an explicit call to the <code>__enter__</code> and <code>__exit__</code>
+methods:</p>
+<pre>
+c = MyContextManager()
+c.__enter__()
+try:
+    ... # do something with c
+finally:
+    c.__exit__()
+</pre>
+<p>The <code>__exit__</code> is the method of a statement context manager which is called when exiting the runtime context related to this object.</p>
+<p>If an exception is supplied as an argument, its propagation can be suppressed by having the method return a truthy value. Otherwise, the exception
+will be processed normally upon exit from the method.</p>
+<p>The special method <a
+href="https://docs.python.org/3/reference/datamodel.html?highlight=__exit__%20special#object.__exit__"><code>__exit__</code></a> should only raise an
+exception when it fails. It should never raise the provided exception, it is the caller’s responsibility. The <code>__exit__</code> method can filter
+provided exceptions by simply returning True or False. Raising this exception will make the stack trace difficult to understand.</p>
+<h2>How to fix it</h2>
+<p>To fix this issue, make sure to avoid raising the exception provided to an <code>__exit__</code> method.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 class MyContextManager:
     def __enter__(self):
         return self
+
     def __exit__(self, *args):
-        raise  # Noncompliant
-        raise args[2]  # Noncompliant
+        raise  # Noncompliant: __exit__ method has a bare raise outside of an except block.
 
 class MyContextManager:
     def __enter__(self):
         return self
-    def __exit__(self, exc_type, exc_value, traceback):
-        raise exc_value # Noncompliant
-</pre>
-<h3>Compliant solution</h3>
-<pre>
+
+    def __exit__(self, *args):
+        raise args[2]  # Noncompliant: __exit__() methods should not reraise the provided exception; this is the caller’s responsibility.
+
 class MyContextManager:
     def __enter__(self):
         return self
+
     def __exit__(self, exc_type, exc_value, traceback):
-        # by default the function will return None, which is always False, and the exc_value will naturally raise.
-        pass
+        raise exc_value # Noncompliant: __exit__() methods should not reraise the provided exception; this is the caller’s responsibility.
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+class MyContextManager:
+    def __enter__(self, stop_exceptions):
+        return self
+
+    def __exit__(self, *args):
+        try:
+            ...
+        except:
+            raise  # No issue when raising another exception. The __exit__ method can fail and raise an exception
+
+class MyContextManager:
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        pass # by default the function will return None, which is always False, and the exc_value will naturally raise.
 
 class MyContextManager:
     def __enter__(self, stop_exceptions):
         return self
+
     def __exit__(self, *args):
-        try:
-            print("42")
-        except:
-            print("exception")
-            raise  # No issue when raising another exception. The __exit__ method can fail and raise an exception
         raise MemoryError("No more memory")  # This is ok too.
 </pre>
 <h2>Resources</h2>
+<h3>Documentation</h3>
 <ul>
   <li> Python documentation – <a href="https://docs.python.org/3/reference/datamodel.html?highlight=__exit__%20special#object.__exit__">The
   <code>__exit__</code> special method</a> </li>

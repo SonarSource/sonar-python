@@ -1,35 +1,26 @@
+<p>This rule raises an issue when a comparison to <code>None</code> is invariant.</p>
 <h2>Why is this an issue?</h2>
 <p>Checking if a variable or parameter is <code>None</code> should only be done when you expect that it can be <code>None</code>. Doing so when the
-variable is always None or never None is confusing at best. At worse, there is a bug and the variable is not updated properly.</p>
+variable is always <code>None</code> or never <code>None</code> is confusing at best. At worse, there is a bug and the variable is not updated
+properly.</p>
 <p>This rule raises an issue when expressions <code>X is None</code>, <code>X is not None</code>, <code>X == None</code> or <code>X != None</code> are
 constant, i.e. <code>X</code> is always None or never None.</p>
-<h3>Noncompliant code example</h3>
-<pre>
-mynone = None
-result = mynone is None: # Noncompliant. Always True.
-
-if mynone == None: # Noncompliant. Always True.
-    pass
-
-if mynone is not None:  # Noncompliant. Always False.
-    pass
-
-if mynone == None:  # Noncompliant. Always False.
-    pass
-
-myint = 42
-result = myint is None: # Noncompliant. Always False.
-
-if myint == None: # Noncompliant. Always False.
-    pass
-
-if myint is not None:  # Noncompliant. Always True.
-    pass
-
-if myint == None:  # Noncompliant. Always True.
-    pass
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+def foo():
+    my_var = None
+    if my_var == None:  # Noncompliant: always True.
+        ...
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+def foo(my_var):
+    if my_var == None:
+        ...
 </pre>
 <h2>Resources</h2>
+<h3>Documentation</h3>
 <ul>
   <li> Python documentation - <a href="https://docs.python.org/3/reference/expressions.html#is-not">Identity comparisons</a> </li>
   <li> Python documentation - <a href="https://docs.python.org/3/reference/datamodel.html#object.__eq__"><code>__eq__</code> operator</a> </li>

@@ -1,24 +1,36 @@
+<p>This rule raises an issue when the default value of a function parameter is mutated.</p>
 <h2>Why is this an issue?</h2>
-<p>In Python function parameters can have default values. These default values are expressions which are executed when the function is defined, i.e.
-only once. The same default value will be used every time the function is called, thus modifying it will have an effect on every subsequent call. This
-can create some very confusing bugs.</p>
-<p>It is also a bad idea to store mutable default value in another object (ex: as an attribute). Multiple instances will then share the same value and
-modifying one objet will modify all of them.</p>
+<p>In Python, function parameters can have default values.</p>
+<p>These default values are expressions which are evalutated when the function is defined, i.e. only once. The same default value will be used every
+time the function is called. Therefore, modifying it will have an effect on every subsequent call. This can lead to confusing bugs.</p>
+<pre>
+def myfunction(param=foo()):  # foo is called only once, when the function is defined.
+    ...
+</pre>
+<p>For the same reason, it is also a bad idea to store mutable default values in another object (ex: as an attribute). Multiple instances will then
+share the same value and modifying one object will modify all of them.</p>
 <p>This rule raises an issue when:</p>
 <ul>
-  <li> a default value is either modified in the function or assigned to anything else than a variable and it has one of the following types:
+  <li> a default value is either modified in the function or assigned to anything other than a variable and it has one of the following types:
     <ul>
-      <li> builtins: set, dict, list. </li>
       <li> <a href="https://docs.python.org/3/library/collections.html">collections</a> module: deque, UserList, ChainMap, Counter, OrderedDict,
       defaultdict, UserDict. </li>
     </ul>  </li>
-  <li> or when an attribute of a default value is assigned. </li>
+  <li> an attribute of a default value is assigned. </li>
 </ul>
-<h3>Noncompliant code example</h3>
+<h3>Exceptions</h3>
+<p>In some rare cases, modifying a default value is intentional. For example, default values can be used as a cache.</p>
+<p>No issue will be raised when the parameter’s name contains "cache" or "memo" (as in memoization).</p>
+<h2>How to fix it</h2>
+<p>When a parameter default value is meant to be a mutable object, it is best to keep the parameter optional and instantiate the mutable object in the
+function’s body directly.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
 <p>In the following example, the parameter "param" has <code>list()</code> as a default value. This list is created only once and then reused in every
-call. Thus when it appends <code>'a'</code> to this list, the next call will have <code>['a']</code> as a default value.</p>
-<pre>
-def myfunction(param=list()):  # Noncompliant.
+call. Thus when appending <code>'a'</code> to this list in the body of the function, the next call will have <code>['a']</code> as a default
+value.</p>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+def myfunction(param=list()):  # Noncompliant: param is a list that gets mutated
     param.append('a')  # modification of the default value.
     return param
 
@@ -26,22 +38,8 @@ print(myfunction()) # returns ['a']
 print(myfunction()) # returns ['a', 'a']
 print(myfunction()) # returns ['a', 'a', 'a']
 </pre>
-<p>In the following example the same list is used for multiple instances of MyClass.param.</p>
-<pre>
-class MyClass:
-    def __init__(self, param=list()):  # Noncompliant.
-        self.param = param  # The same list is used for every instance of MyClass
-
-    def process(self, value):
-        self.param.append(value)  # modifying the same list
-
-a1, a2 = (MyClass(), MyClass())
-a1.process("value")
-print(a1.param)  # ['value']
-print(a2.param)  # ['value']
-</pre>
-<h3>Compliant solution</h3>
-<pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
 def myfunction(param=None):
     if param is None:
         param = list()
@@ -52,28 +50,13 @@ print(myfunction()) # returns ['a']
 print(myfunction()) # returns ['a']
 print(myfunction()) # returns ['a']
 </pre>
-<pre>
-class MyClass:
-    def __init__(self, param=None):
-        if param is None:
-            self.param = list()
-        else:
-            self.param = param
-
-    def process(self, value):
-        self.param.append(value)
-
-a1, a2 = (MyClass(), MyClass())
-a1.process("value")
-print(a1.param)  # ['value']
-print(a2.param)  # []
-</pre>
-<h3>Exceptions</h3>
-<p>In some very rare cases modifying a default value is ok. For example, default values can be used as a cache.</p>
-<p>No issue will be raised when the parameter’s name contains "cache" or "memo" (as in memoization).</p>
 <h2>Resources</h2>
+<h3>Documentation</h3>
 <ul>
-  <li> <a href="https://docs.python-guide.org/writing/gotchas/#mutable-default-arguments">The Hitchhiker’s Guide to Python - Common Gotchas</a> </li>
-  <li> <a href="https://docs.python.org/3/reference/compound_stmts.html#function-definitions">Python documentation - Function definitions</a> </li>
+  <li> Python documentation - <a href="https://docs.python.org/3/reference/compound_stmts.html#function-definitions">Function definitions</a> </li>
+</ul>
+<h3>External coding guidelines</h3>
+<ul>
+  <li> The Hitchhiker’s Guide to Python - <a href="https://docs.python-guide.org/writing/gotchas/#mutable-default-arguments">Common Gotchas</a> </li>
 </ul>
 

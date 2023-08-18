@@ -1,12 +1,24 @@
+<p>This rule raises an issue when the exec statement is used.</p>
 <h2>Why is this an issue?</h2>
 <p>Use of the <code>exec</code> statement could be dangerous, and should be avoided. Moreover, the <code>exec</code> statement was removed in Python
 3.0. Instead, the built-in <code>exec()</code> function can be used.</p>
-<h3>Noncompliant code example</h3>
-<pre>
+<p>Use of the <code>exec</code> statement is strongly discouraged for several reasons such as:</p>
+<ul>
+  <li> <strong>Security Risks:</strong> Executing code from a string opens up the possibility of code injection attacks. </li>
+  <li> <strong>Readability and Maintainability:</strong> Code executed with <code>exec</code> statement is often harder to read and understand since
+  it is not explicitly written in the source code. </li>
+  <li> <strong>Performance Implications:</strong> The use of <code>exec</code> statement can have performance implications since the code is compiled
+  and executed at runtime. </li>
+  <li> <strong>Limited Static Analysis:</strong> Since the code executed with <code>exec</code> statement is only known at runtime, static code
+  analysis tools may not be able to catch certain errors or issues, leading to potential bugs. </li>
+</ul>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 exec 'print 1' # Noncompliant
 </pre>
-<h3>Compliant solution</h3>
-<pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
 exec('print 1')
 </pre>
 

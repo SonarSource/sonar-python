@@ -1,65 +1,66 @@
+<p>This rule raises an issue when a bare <code>except:</code>, an <code>except BaseException</code> or an <code>except SystemExit</code> block does
+not re-raise the exception caught.</p>
 <h2>Why is this an issue?</h2>
-<p><a href="https://docs.python.org/3/library/exceptions.html#SystemExit"><code>SystemExit</code></a>&nbsp;is raised when <a
-href="https://docs.python.org/3/library/sys.html#sys.exit"><code>sys.exit()</code></a> is called. This exception is expected to propagate up until the
-application stops. It is ok to catch it when a clean-up is necessary but it should be raised again immediately.</p>
+<p>A <a href="https://docs.python.org/3/library/exceptions.html#SystemExit"><code>SystemExit</code></a> exception&nbsp;is raised when <a
+href="https://docs.python.org/3/library/sys.html#sys.exit"><code>sys.exit()</code></a> is called. This exception is used to signal the interpreter to
+exit. The exception is expected to propagate up until the program stops. It is possible to catch this exception in order to perform, for example,
+clean-up tasks. It should, however, be raised again to allow the interpreter to exit as expected. Not re-raising such exception could lead to
+undesired behaviour.</p>
 <p>A <a href="https://docs.python.org/3/reference/compound_stmts.html#the-try-statement">bare <code>except:</code> statement</a>, i.e. an
-<code>except</code> without any exception class, is equivalent to <a
+<code>except</code> block without any exception class, is equivalent to <a
 href="https://docs.python.org/3/library/exceptions.html#BaseException"><code>except BaseException</code></a>. Both statements will catch every
-exception, including <code>SystemExit</code>. It is recommended to catch instead a specific exception. If it is not possible, the exception should be
-raised again.</p>
-<p>Note that it is also a good idea to reraise the <a
-href="https://docs.python.org/3/library/exceptions.html#KeyboardInterrupt"><code>KeyboardInterrupt</code></a> exception.</p>
-<p>This rule raises an issue when a bare <code>except:</code>, an <code>except BaseException</code> or an <code>except SystemExit</code> don’t reraise
-the exception caught.</p>
-<h3>Noncompliant code example</h3>
-<pre>
+exceptions, including <code>SystemExit</code>. It is recommended to catch instead a more specific exception. If it is not possible, the exception
+should be raised again.</p>
+<p>It is also a good idea to re-raise the <a
+href="https://docs.python.org/3/library/exceptions.html#KeyboardInterrupt"><code>KeyboardInterrupt</code></a> exception. Similarly to
+<code>SystemExit</code>,<code>KeyboardInterrupt</code> is used to signal the interpreter to exit. Not re-raising such exception could also lead to
+undesired behaviour.</p>
+<h2>How to fix it</h2>
+<p>Re-raise <code>SystemExit</code>, <code>BaseException</code> and any exceptions caught in a bare <code>except</code> clause.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 try:
-    open("foo.txt", "r")
-except SystemExit:  # Noncompliant
-    pass
-except KeyboardInterrupt:  # No issue raised but be careful when you do this
+    ...
+except SystemExit:  # Noncompliant: the SystemExit exception is not re-raised.
     pass
 
 try:
-    open("bar.txt", "r")
-except BaseException:  # Noncompliant
+    ...
+except BaseException:  # Noncompliant: BaseExceptions encompass SystemExit exceptions and should be re-raised.
     pass
-except:  # Noncompliant
+
+try:
+    ...
+except:  # Noncompliant: exceptions caught by this statement should be re-raised or a more specific exception should be caught.
     pass
 </pre>
-<h3>Compliant solution</h3>
-<pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
 try:
-    open("foo.txt", "r")
-except SystemExit:
-    # clean-up
-    raise
-except KeyboardInterrupt:
-    # clean-up
-    raise
-
-try:
-    open("bar.txt", "r")
-except BaseException as e:
-    # clean-up
+    ...
+except SystemExit as e:
+    ...
     raise e
-except: # Noncompliant
-    # clean-up
-    raise
-
-# or use a more specific exception
 
 try:
-    open("bar.txt", "r")
+    ...
+except BaseException as e:
+    ...
+    raise e
+
+try:
+    ...
 except FileNotFoundError:
-    # process the exception
+    ... # Handle a more specific exception
 </pre>
 <h2>Resources</h2>
+<h3>Documentation</h3>
 <ul>
   <li> PEP 352 - <a href="https://www.python.org/dev/peps/pep-0352/#id5">Required Superclass for Exceptions</a> </li>
   <li> Python Documentation - <a href="https://docs.python.org/3/library/exceptions.html">Built-in exceptions</a> </li>
   <li> Python Documentation - <a href="https://docs.python.org/3/reference/compound_stmts.html#the-try-statement">The <code>try</code> statement</a>
   </li>
-  <li> <a href="https://cwe.mitre.org/data/definitions/391">MITRE, CWE-391</a> - Unchecked Error Condition </li>
+  <li> CWE - <a href="https://cwe.mitre.org/data/definitions/391">MITRE, CWE-391, Unchecked Error Condition</a> </li>
 </ul>
 

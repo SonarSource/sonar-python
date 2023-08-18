@@ -1,25 +1,42 @@
+<p>This rule raises an issue when the first parameter of an instance method is not called "self".</p>
 <h2>Why is this an issue?</h2>
 <p>Instance methods, i.e. methods not annotated with <code>@classmethod</code> or <code>@staticmethod</code>, are expected to have at least one
 parameter. This parameter will reference the object instance on which the method is called. By convention, this first parameter is named "self".</p>
-<p>Naming the "self" parameter differently is confusing. It might also indicate that the "self" parameter was forgotten, in which case calling the
-method will most probably fail.</p>
-<p>Note also that creating methods which are used as static methods without the <code>@staticmethod</code> decorator is a bad practice because calling
-these methods on an instance will raise a <code>TypeError</code>. Either move the method out of the class or decorate it with
+<p>Naming the first parameter something different from "self" is not recommended as it could lead to confusion. It might indicate that the "self"
+parameter was forgotten, in which case calling the method will most probably fail.</p>
+<p>Note also that creating methods which are used as static methods without the <code>@staticmethod</code> decorator is a bad practice. Calling these
+methods on an instance will raise a <code>TypeError</code>. Either move the method out of the class or decorate it with
 <code>@staticmethod</code>.</p>
-<p>This rule raises an issue when the first parameter of an instance method is not called "self".</p>
-<h3>Noncompliant code example</h3>
+<h3>Exceptions</h3>
+<p>This rule will accept "cls" or "mcs" as first parameter’s name for class and metaclasses methods.</p>
+<p>No issue will be raised for the following methods: <code>__init_subclass__</code>, <code>__class_getitem__</code> and <code>__new__</code>, as
+these methods' first parameter is a class.</p>
+<p>This rule may be parameterized to prevent raising issues on methods decorated with specific decorators. These decorators can be added to this
+rule’s <code>ignoredDecorators</code> parameter.</p>
+<p>For example, with <code>ignoredDecorators</code> set to "myDecorator".</p>
 <pre>
+class MyClass(ABC):
+    @myDecorator
+    def method(arg):  # No issue will be raised.
+        pass
+</pre>
+<h2>How to fix it</h2>
+<p>Make sure to have a "self" parameter on instance methods and annotate static methods with the <code>@staticmethod</code> decorator.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 class MyClass:
-    def send_request(request):  # Noncompliant. "self" was probably forgotten
+    def send_request(request):  # Noncompliant: the "self" parameter is missing.
         print("send_request")
 
 class ClassWithStaticMethod:
-    def static_method(param):  # Noncompliant
+    def static_method(param):  # Noncompliant: the "@staticmethod" decorator is missing.
         print(param)
-ClassWithStaticMethod().static_method(42)  # Method is available on the instance but calling it will raise a TypeError
+
+ClassWithStaticMethod().static_method(42)  # The method is available on the instance but calling it will raise a TypeError.
 </pre>
-<h3>Compliant solution</h3>
-<pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
 class MyClass:
     def send_request(self, request):
         print("send_request")
@@ -28,25 +45,16 @@ class ClassWithStaticMethod:
     @staticmethod
     def static_method(param):
         print(param)
+
 ClassWithStaticMethod().static_method(42)
 </pre>
-<h3>Exceptions</h3>
-<p>This rule will also accept "cls" or "mcs" as first parameter’s name for metaclasses' methods.</p>
-<p>No issue will be raised for methods called <code>__init_subclass__</code>, <code>__class_getitem__</code> or <code>__new__</code> as these methods'
-first parameter is a class.</p>
-<p>You can also disable issues on methods decorated with a specific decorator. Add these decorators to this rule’s "ignoreDecorators" parameter.</p>
-<p>With "ignoredDecorators" set to "abstractmethod"</p>
-<pre>
-from abc import abstractmethod, ABC
-
-class MyClass(ABC):
-    @abstractmethod
-    def method():  # No issue, even if it is better in this case to also decorate with @staticmethod
-        pass
-</pre>
 <h2>Resources</h2>
+<h3>Documentation</h3>
 <ul>
-  <li> Python documentation - <a href="https://docs.python.org/3.8/tutorial/classes.html#method-objects">Method Objects</a> </li>
+  <li> Python Documentation - <a href="https://docs.python.org/3.8/tutorial/classes.html#method-objects">Method Objects</a> </li>
+</ul>
+<h3>Standards</h3>
+<ul>
   <li> PEP8 - <a href="https://www.python.org/dev/peps/pep-0008/#function-and-method-arguments">Function and Method Arguments</a> </li>
 </ul>
 

@@ -1,5 +1,7 @@
+<p>This rule raises an issue when backticks are used instead of <code>repr</code>.</p>
 <h2>Why is this an issue?</h2>
-<p>Backticks are a deprecated alias for <code>repr()</code>. Don’t use them any more, the syntax was removed in Python 3.0.</p>
+<p>In Python 2, backticks are a deprecated alias for <code>repr()</code>. The syntax was removed in Python 3. To make the transition to Python 3
+easier, they should not be used anymore.</p>
 <h3>Noncompliant code example</h3>
 <pre>
 return `num`  # Noncompliant

@@ -1,26 +1,23 @@
+<p>This rule raises an issue when a <code>pass</code> statement is redundant.</p>
 <h2>Why is this an issue?</h2>
-<p>The use of a <code>pass</code> statement where it’s not required by the syntax is pure cruft and should be removed.</p>
-<h3>Noncompliant code example</h3>
-<pre>
-    def __init__(self, log="", who="", date=0, files=[]):
-        self.log = log
-        self.files = files
-        self.who = who
-        self.date = date
-        pass    # Noncompliant
-
-    def lookup():
-        pass    # Compliant; method can't be empty
+<p>The use of a <code>pass</code> statement where it is not required by the syntax is redundant. It makes the code less readable and its intent
+confusing.</p>
+<p>To fix this issue, remove <code>pass</code> statements that do not affect the behaviour of the program.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+def foo(arg):
+    print(arg)
+    pass # Noncompliant: the `pass` statement is not needed as it does not change the behaviour of the program.
 </pre>
-<h3>Compliant solution</h3>
-<pre>
-    def __init__(self, log="", who="", date=0, files=[]):
-        self.log = log
-        self.files = files
-        self.who = who
-        self.date = date
-
-    def lookup():
-        pass
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+def foo(arg):
+    print(arg)
 </pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Python Documentation - <a href="https://docs.python.org/3/reference/simple_stmts.html#the-pass-statement">The pass statement</a> </li>
+</ul>
 

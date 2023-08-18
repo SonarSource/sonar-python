@@ -1,3 +1,4 @@
+<p>This rule raises an issue when a private nested class is never used.</p>
 <h2>Why is this an issue?</h2>
 <p>"Private" nested classes that are never used inside the enclosing class are usually dead code: unnecessary, inoperative code that should be
 removed. Cleaning out dead code decreases the size of the maintained codebase, making it easier to understand the program and preventing bugs from
@@ -14,29 +15,21 @@ being introduced.</p>
   leading underscore(s). Class-Private classes shouldn’t be used outside of their enclosing class. </li>
 </ul>
 <p>This rule raises an issue when a private nested class (either with one or two leading underscores) is never used inside its parent class.</p>
-<h3>Noncompliant code example</h3>
-<pre>
-class Noncompliant:
-    class __MyClass1():  # Noncompliant
-        pass
-
-    class _MyClass2():  # Noncompliant
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+class TopLevel:
+    class __Nested():  # Noncompliant: __Nested is never used
         pass
 </pre>
-<h3>Compliant solution</h3>
-<pre>
-class Compliant:
-    class __MyClass1():
-        pass
-
-    class _MyClass2():
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+class TopLevel:
+    class __Nested():
         pass
 
     def process(self):
-        return Compliant.__MyClass1()
-
-    def process(self):
-        return Compliant._MyClass2()
+        return TopLevel.__Nested()
 </pre>
 <h2>Resources</h2>
 <ul>

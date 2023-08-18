@@ -1,6 +1,12 @@
 {
   "title": "The \"safe\" flag should be set to \"False\" when serializing non-dictionary objects in Django JSON-encoded responses.",
   "type": "BUG",
+  "code": {
+    "impacts": {
+      "RELIABILITY": "MEDIUM"
+    },
+    "attribute": "LOGICAL"
+  },
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",

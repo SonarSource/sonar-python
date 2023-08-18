@@ -1,23 +1,30 @@
+<p>This rule raises an issue when the same value is used multiple times when instantiating a set literal.</p>
 <h2>Why is this an issue?</h2>
-<p>A set cannot have two identical values. When a value is repeated in a set literal, only the last occurence will remain. Thus duplicate values
-should be either modified or removed.</p>
-<p>This rule raises an issue when the same value is used multiple times as a value in a set literal.</p>
-<h3>Noncompliant code example</h3>
-<pre>
-{"one", "two", "one"}  # Noncompliant
+<p>By definition, a set cannot hold the same value multiple times. When instantiating a set literal with the same value repeated multiple times, only
+the last occurrence of the duplicated value will remain.</p>
+<p>Creating a set with redundant elements is prone to errors and confusion. A duplicated value in a set literal should be either:</p>
+<ul>
+  <li> modified, as it was mistakenly put in the set instead an actual value which would lead to bugs and errors further in the program. </li>
+  <li> removed, as it was a simple duplication, making the code confusing and difficult to maintain. </li>
+</ul>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+{"one", "two", "one"}  # Noncompliant: the value "one" is duplicated.
 
 def func(a1, a2, a3):
-    {a1, a2, a1}  # Noncompliant.
+    {a1, a2, a1}  # Noncompliant: the value a1 is duplicated.
 </pre>
-<h3>Compliant solution</h3>
-<pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
 {"one", "two", "three"}
 
 def func(a1, a2, a3):
     {a1, a2, a3}
 </pre>
 <h2>Resources</h2>
+<h3>Documentation</h3>
 <ul>
-  <li> <a href="https://docs.python.org/3/reference/expressions.html#set-displays">Python documentation - Set displays</a> </li>
+  <li> Python Documentation - <a href="https://docs.python.org/3/reference/expressions.html#set-displays">Set displays</a> </li>
 </ul>
 

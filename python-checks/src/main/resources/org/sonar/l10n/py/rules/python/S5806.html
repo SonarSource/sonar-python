@@ -1,24 +1,28 @@
-<h2>Why is this an issue?</h2>
-<p>Shadowing a builtin makes your code more difficult to read and maintain. It may also be a source of bugs as you can reference the builtin by
-mistake.</p>
-<p>It is sometimes ok to shadow a builtin to improve the readability of a public API or to support multiple versions of a library. In these cases the
-value is higher than the maintainability cost. Just be careful when you do it.</p>
-<p>It is not ok to shadow builtins with variables which are local to a function or method. These variables are not public and can be easily renamed,
-thus reducing the confusion and making the code less error-prone.</p>
 <p>This rule raises an issue when the name of a local variable matches the name of a builtin.</p>
-<h3>Noncompliant code example</h3>
-<pre>
+<h2>Why is this an issue?</h2>
+<p>Defining a variable with the same name as a built-in symbol will "shadow" it. That means that the builtin will no longer be accessible through its
+original name, having locally been replaced by the variable.</p>
+<p>Shadowing a builtin makes the code more difficult to read and maintain. It may also be a source of bugs as you can reference the builtin by
+mistake.</p>
+<p>It is sometimes acceptable to shadow a builtin to improve the readability of a public API or to support multiple versions of a library. In these
+cases, benefits are greater than the maintainability cost. This should, however, be done with care.</p>
+<p>It is generally not a good practice to shadow builtins with variables which are local to a function or method. These variables are not public and
+can easily be renamed, thus reducing the confusion and making the code less error-prone.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 def a_function():
     int = 42  # Noncompliant; int is a builtin
 </pre>
-<h3>Compliant solution</h3>
-<pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
 def a_function():
     value = 42
 </pre>
 <h2>Resources</h2>
+<h3>Documentation</h3>
 <ul>
-  <li> <a href="https://docs.python.org/3.8/library/stdtypes.html">Python documentation - Built-in Types</a> </li>
-  <li> <a href="https://docs.python.org/3/library/functions.html">Python documentation - Built-in Functions</a> </li>
+  <li> Python documentation - <a href="https://docs.python.org/3.8/library/stdtypes.html">Built-in Types</a> </li>
+  <li> Python documentation - <a href="https://docs.python.org/3/library/functions.html">Built-in Functions</a> </li>
 </ul>
 

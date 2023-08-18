@@ -1,23 +1,30 @@
+<p>This rule raises an issue when the same key is used multiple times when instantiating a dictionary literal.</p>
 <h2>Why is this an issue?</h2>
-<p>A dictionary cannot have two values with the same key. When a key is repeated in a dictionary literal, only the last occurence will remain. Thus
-duplicate keys should be either modified or removed.</p>
-<p>This rule raises an issue when the same value is used multiple times as a key in a dictionary literal.</p>
-<h3>Noncompliant code example</h3>
-<pre>
-{"one": 1, "two": 2, "one": 3}  # Noncompliant
+<p>By definition, a dictionary cannot hold the same key multiple times. When instantiating a dictionary literal, if a key is repeated, only the last
+occurrence of the key will be retained.</p>
+<p>This can lead to errors and confusion, as it is not clear which value belongs to which key. This can be remedied by either:</p>
+<ul>
+  <li> replacing the duplicated key with the correct key to prevent bugs and errors from occurring later in the program. </li>
+  <li> removing the duplicated key to make the code more concise and easier to maintain. </li>
+</ul>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+{"one": 1, "two": 2, "one": 3}  # Noncompliant: the key "one" is duplicated.
 
-def func(a1, a2, a3):
-    {a1: 1, a2: 2, a1: 3}  # Noncompliant.
+def func(a1, a2):
+    {a1: 1, a2: 2, a1: 3}  # Noncompliant: the key a1 is duplicated.
 </pre>
-<h3>Compliant solution</h3>
-<pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
 {"one": 1, "two": 2, "three": 3}
 
-def func(a1, a2, a3):
-    {a1: 1, a2: 2, a3: 3}
+def func(a1, a2):
+    {a1: 1, a2: 2}
 </pre>
 <h2>Resources</h2>
+<h3>Documentation</h3>
 <ul>
-  <li> <a href="https://docs.python.org/3/reference/expressions.html#dictionary-displays">Python documentation - Dictionary displays</a> </li>
+  <li> Python Documentation - <a href="https://docs.python.org/3/reference/expressions.html#dictionary-displays">Dictionary displays</a> </li>
 </ul>
 

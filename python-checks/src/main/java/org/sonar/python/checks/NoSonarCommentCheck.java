@@ -28,8 +28,11 @@ import org.sonar.plugins.python.api.tree.Trivia;
 import static org.sonar.python.metrics.FileLinesVisitor.containsNoSonarComment;
 
 
+/*
+ * When updating this rule through the rule-api the sqKey present in the NoSonar.json file
+ * should be kept to `NoSonar` instead of `S1291`
+ */
 @Rule(key = "NoSonar")
-
 public class NoSonarCommentCheck extends PythonSubscriptionCheck {
 
   private static final String MESSAGE = "Is #NOSONAR used to exclude false-positive or to hide real quality flaw?";
