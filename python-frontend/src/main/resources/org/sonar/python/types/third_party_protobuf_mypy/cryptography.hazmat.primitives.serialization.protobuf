@@ -1,19 +1,361 @@
 
-,cryptography.hazmat.primitives.serializationò
+,cryptography.hazmat.primitives.serialization◊]
+SSHCertificate?cryptography.hazmat.primitives.serialization.ssh.SSHCertificate"builtins.object*ÿ
+__init__Hcryptography.hazmat.primitives.serialization.ssh.SSHCertificate.__init__"
+None*ç
+selfÇ
+?cryptography.hazmat.primitives.serialization.ssh.SSHCertificate"?cryptography.hazmat.primitives.serialization.ssh.SSHCertificate*6
+_nonce*
+builtins.memoryview"builtins.memoryview*Ä	
+_public_keyÓ
+éTypeAlias[Union[cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey,cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey,cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey]]î
+ÉUnion[cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey,cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey,cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey]ä
+Ccryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey"Ccryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKeyx
+:cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey":cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKeyx
+:cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey":cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKeyà
+Bcryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey"Bcryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey"Bcryptography.hazmat.primitives.serialization.ssh.SSHPublicKeyTypes*)
+_serial
+builtins.int"builtins.int*)
+_cctype
+builtins.int"builtins.int*7
+_key_id*
+builtins.memoryview"builtins.memoryview*g
+_valid_principalsP
+builtins.list[builtins.bytes] 
+builtins.bytes"builtins.bytes"builtins.list*.
+_valid_after
+builtins.int"builtins.int*/
+_valid_before
+builtins.int"builtins.int*ô
+_critical_optionsÅ
+,builtins.dict[builtins.bytes,builtins.bytes] 
+builtins.bytes"builtins.bytes 
+builtins.bytes"builtins.bytes"builtins.dict*ì
+_extensionsÅ
+,builtins.dict[builtins.bytes,builtins.bytes] 
+builtins.bytes"builtins.bytes 
+builtins.bytes"builtins.bytes"builtins.dict*9
+	_sig_type*
+builtins.memoryview"builtins.memoryview*8
+_sig_key*
+builtins.memoryview"builtins.memoryview*?
+_inner_sig_type*
+builtins.memoryview"builtins.memoryview*:
+
+_signature*
+builtins.memoryview"builtins.memoryview*>
+_tbs_cert_body*
+builtins.memoryview"builtins.memoryview*4
+_cert_key_type 
+builtins.bytes"builtins.bytes*:
+
+_cert_body*
+builtins.memoryview"builtins.memoryview*é
+nonceEcryptography.hazmat.primitives.serialization.ssh.SSHCertificate.nonce" 
+builtins.bytes"builtins.bytes*ç
+selfÇ
+?cryptography.hazmat.primitives.serialization.ssh.SSHCertificate"?cryptography.hazmat.primitives.serialization.ssh.SSHCertificate0:property`*Ì
+
+public_keyJcryptography.hazmat.primitives.serialization.ssh.SSHCertificate.public_key"Ç
+”TypeAlias[Union[cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey,cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey]]ﬂ
+»Union[cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey,cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey]ä
+Ccryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey"Ccryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKeyx
+:cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey":cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKeyà
+Bcryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey"Bcryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey"Fcryptography.hazmat.primitives.serialization.ssh.SSHCertPublicKeyTypes*ç
+selfÇ
+?cryptography.hazmat.primitives.serialization.ssh.SSHCertificate"?cryptography.hazmat.primitives.serialization.ssh.SSHCertificate*å
+serialFcryptography.hazmat.primitives.serialization.ssh.SSHCertificate.serial"
+builtins.int"builtins.int*ç
+selfÇ
+?cryptography.hazmat.primitives.serialization.ssh.SSHCertificate"?cryptography.hazmat.primitives.serialization.ssh.SSHCertificate0:property`*˜
+typeDcryptography.hazmat.primitives.serialization.ssh.SSHCertificate.type"ä
+Ccryptography.hazmat.primitives.serialization.ssh.SSHCertificateType"Ccryptography.hazmat.primitives.serialization.ssh.SSHCertificateType*ç
+selfÇ
+?cryptography.hazmat.primitives.serialization.ssh.SSHCertificate"?cryptography.hazmat.primitives.serialization.ssh.SSHCertificate0:property`*ê
+key_idFcryptography.hazmat.primitives.serialization.ssh.SSHCertificate.key_id" 
+builtins.bytes"builtins.bytes*ç
+selfÇ
+?cryptography.hazmat.primitives.serialization.ssh.SSHCertificate"?cryptography.hazmat.primitives.serialization.ssh.SSHCertificate0:property`*‘
+valid_principalsPcryptography.hazmat.primitives.serialization.ssh.SSHCertificate.valid_principals"P
+builtins.list[builtins.bytes] 
+builtins.bytes"builtins.bytes"builtins.list*ç
+selfÇ
+?cryptography.hazmat.primitives.serialization.ssh.SSHCertificate"?cryptography.hazmat.primitives.serialization.ssh.SSHCertificate0:property`*ò
+valid_beforeLcryptography.hazmat.primitives.serialization.ssh.SSHCertificate.valid_before"
+builtins.int"builtins.int*ç
+selfÇ
+?cryptography.hazmat.primitives.serialization.ssh.SSHCertificate"?cryptography.hazmat.primitives.serialization.ssh.SSHCertificate0:property`*ñ
+valid_afterKcryptography.hazmat.primitives.serialization.ssh.SSHCertificate.valid_after"
+builtins.int"builtins.int*ç
+selfÇ
+?cryptography.hazmat.primitives.serialization.ssh.SSHCertificate"?cryptography.hazmat.primitives.serialization.ssh.SSHCertificate0:property`*Ü
+critical_optionsPcryptography.hazmat.primitives.serialization.ssh.SSHCertificate.critical_options"Å
+,builtins.dict[builtins.bytes,builtins.bytes] 
+builtins.bytes"builtins.bytes 
+builtins.bytes"builtins.bytes"builtins.dict*ç
+selfÇ
+?cryptography.hazmat.primitives.serialization.ssh.SSHCertificate"?cryptography.hazmat.primitives.serialization.ssh.SSHCertificate0:property`*˙
+
+extensionsJcryptography.hazmat.primitives.serialization.ssh.SSHCertificate.extensions"Å
+,builtins.dict[builtins.bytes,builtins.bytes] 
+builtins.bytes"builtins.bytes 
+builtins.bytes"builtins.bytes"builtins.dict*ç
+selfÇ
+?cryptography.hazmat.primitives.serialization.ssh.SSHCertificate"?cryptography.hazmat.primitives.serialization.ssh.SSHCertificate0:property`*Û
+signature_keyMcryptography.hazmat.primitives.serialization.ssh.SSHCertificate.signature_key"Ç
+”TypeAlias[Union[cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey,cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey]]ﬂ
+»Union[cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey,cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey]ä
+Ccryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey"Ccryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKeyx
+:cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey":cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKeyà
+Bcryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey"Bcryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey"Fcryptography.hazmat.primitives.serialization.ssh.SSHCertPublicKeyTypes*ç
+selfÇ
+?cryptography.hazmat.primitives.serialization.ssh.SSHCertificate"?cryptography.hazmat.primitives.serialization.ssh.SSHCertificate*é
+public_bytesLcryptography.hazmat.primitives.serialization.ssh.SSHCertificate.public_bytes" 
+builtins.bytes"builtins.bytes*ç
+selfÇ
+?cryptography.hazmat.primitives.serialization.ssh.SSHCertificate"?cryptography.hazmat.primitives.serialization.ssh.SSHCertificate*à
+verify_cert_signatureUcryptography.hazmat.primitives.serialization.ssh.SSHCertificate.verify_cert_signature"
+None*ç
+selfÇ
+?cryptography.hazmat.primitives.serialization.ssh.SSHCertificate"?cryptography.hazmat.primitives.serialization.ssh.SSHCertificater|
+_nonceFcryptography.hazmat.primitives.serialization.ssh.SSHCertificate._nonce*
+builtins.memoryview"builtins.memoryviewrÀ	
+_public_keyKcryptography.hazmat.primitives.serialization.ssh.SSHCertificate._public_keyÓ
+éTypeAlias[Union[cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey,cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey,cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey]]î
+ÉUnion[cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey,cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey,cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey]ä
+Ccryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey"Ccryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKeyx
+:cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey":cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKeyx
+:cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey":cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKeyà
+Bcryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey"Bcryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey"Bcryptography.hazmat.primitives.serialization.ssh.SSHPublicKeyTypesrp
+_serialGcryptography.hazmat.primitives.serialization.ssh.SSHCertificate._serial
+builtins.int"builtins.intr€
+_typeEcryptography.hazmat.primitives.serialization.ssh.SSHCertificate._typeä
+Ccryptography.hazmat.primitives.serialization.ssh.SSHCertificateType"Ccryptography.hazmat.primitives.serialization.ssh.SSHCertificateTyper~
+_key_idGcryptography.hazmat.primitives.serialization.ssh.SSHCertificate._key_id*
+builtins.memoryview"builtins.memoryviewr∏
+_valid_principalsQcryptography.hazmat.primitives.serialization.ssh.SSHCertificate._valid_principalsP
+builtins.list[builtins.bytes] 
+builtins.bytes"builtins.bytes"builtins.listrz
+_valid_afterLcryptography.hazmat.primitives.serialization.ssh.SSHCertificate._valid_after
+builtins.int"builtins.intr|
+_valid_beforeMcryptography.hazmat.primitives.serialization.ssh.SSHCertificate._valid_before
+builtins.int"builtins.intrÍ
+_critical_optionsQcryptography.hazmat.primitives.serialization.ssh.SSHCertificate._critical_optionsÅ
+,builtins.dict[builtins.bytes,builtins.bytes] 
+builtins.bytes"builtins.bytes 
+builtins.bytes"builtins.bytes"builtins.dictrﬁ
+_extensionsKcryptography.hazmat.primitives.serialization.ssh.SSHCertificate._extensionsÅ
+,builtins.dict[builtins.bytes,builtins.bytes] 
+builtins.bytes"builtins.bytes 
+builtins.bytes"builtins.bytes"builtins.dictrÇ
+	_sig_typeIcryptography.hazmat.primitives.serialization.ssh.SSHCertificate._sig_type*
+builtins.memoryview"builtins.memoryviewrÄ
+_sig_keyHcryptography.hazmat.primitives.serialization.ssh.SSHCertificate._sig_key*
+builtins.memoryview"builtins.memoryviewré
+_inner_sig_typeOcryptography.hazmat.primitives.serialization.ssh.SSHCertificate._inner_sig_type*
+builtins.memoryview"builtins.memoryviewrÑ
+
+_signatureJcryptography.hazmat.primitives.serialization.ssh.SSHCertificate._signature*
+builtins.memoryview"builtins.memoryviewrÇ
+_cert_key_typeNcryptography.hazmat.primitives.serialization.ssh.SSHCertificate._cert_key_type 
+builtins.bytes"builtins.bytesrÑ
+
+_cert_bodyJcryptography.hazmat.primitives.serialization.ssh.SSHCertificate._cert_body*
+builtins.memoryview"builtins.memoryviewrå
+_tbs_cert_bodyNcryptography.hazmat.primitives.serialization.ssh.SSHCertificate._tbs_cert_body*
+builtins.memoryview"builtins.memoryviewÓZ
+SSHCertificateBuilderFcryptography.hazmat.primitives.serialization.ssh.SSHCertificateBuilder"builtins.object*¨
+__init__Ocryptography.hazmat.primitives.serialization.ssh.SSHCertificateBuilder.__init__"
+None*õ
+selfê
+Fcryptography.hazmat.primitives.serialization.ssh.SSHCertificateBuilder"Fcryptography.hazmat.primitives.serialization.ssh.SSHCertificateBuilder*Ç
+_public_keyÓ
+ÕUnion[cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey,cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey,None]ä
+Ccryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey"Ccryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKeyx
+:cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey":cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKeyà
+Bcryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey"Bcryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey
+None *S
+_serialD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *¯
+_typeÍ
+OUnion[cryptography.hazmat.primitives.serialization.ssh.SSHCertificateType,None]ä
+Ccryptography.hazmat.primitives.serialization.ssh.SSHCertificateType"Ccryptography.hazmat.primitives.serialization.ssh.SSHCertificateType
+None *Y
+_key_idJ
+Union[builtins.bytes,None] 
+builtins.bytes"builtins.bytes
+None *i
+_valid_principalsP
+builtins.list[builtins.bytes] 
+builtins.bytes"builtins.bytes"builtins.list *?
+_valid_for_all_principals
+builtins.bool"builtins.bool *Y
+_valid_beforeD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *X
+_valid_afterD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *Ã
+_critical_options≤
+3builtins.list[Tuple[builtins.bytes,builtins.bytes]]l
+$Tuple[builtins.bytes,builtins.bytes] 
+builtins.bytes"builtins.bytes 
+builtins.bytes"builtins.bytes"builtins.list *∆
+_extensions≤
+3builtins.list[Tuple[builtins.bytes,builtins.bytes]]l
+$Tuple[builtins.bytes,builtins.bytes] 
+builtins.bytes"builtins.bytes 
+builtins.bytes"builtins.bytes"builtins.list *¶
+
+
+public_keyQcryptography.hazmat.primitives.serialization.ssh.SSHCertificateBuilder.public_key"ê
+Fcryptography.hazmat.primitives.serialization.ssh.SSHCertificateBuilder"Fcryptography.hazmat.primitives.serialization.ssh.SSHCertificateBuilder*õ
+selfê
+Fcryptography.hazmat.primitives.serialization.ssh.SSHCertificateBuilder"Fcryptography.hazmat.primitives.serialization.ssh.SSHCertificateBuilder*ì
+
+public_keyÇ
+”TypeAlias[Union[cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey,cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey]]ﬂ
+»Union[cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey,cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey]ä
+Ccryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey"Ccryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKeyx
+:cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey":cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKeyà
+Bcryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey"Bcryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey"Fcryptography.hazmat.primitives.serialization.ssh.SSHCertPublicKeyTypes*≤
+serialMcryptography.hazmat.primitives.serialization.ssh.SSHCertificateBuilder.serial"ê
+Fcryptography.hazmat.primitives.serialization.ssh.SSHCertificateBuilder"Fcryptography.hazmat.primitives.serialization.ssh.SSHCertificateBuilder*õ
+selfê
+Fcryptography.hazmat.primitives.serialization.ssh.SSHCertificateBuilder"Fcryptography.hazmat.primitives.serialization.ssh.SSHCertificateBuilder*(
+serial
+builtins.int"builtins.int*ú
+typeKcryptography.hazmat.primitives.serialization.ssh.SSHCertificateBuilder.type"ê
+Fcryptography.hazmat.primitives.serialization.ssh.SSHCertificateBuilder"Fcryptography.hazmat.primitives.serialization.ssh.SSHCertificateBuilder*õ
+selfê
+Fcryptography.hazmat.primitives.serialization.ssh.SSHCertificateBuilder"Fcryptography.hazmat.primitives.serialization.ssh.SSHCertificateBuilder*ï
+typeä
+Ccryptography.hazmat.primitives.serialization.ssh.SSHCertificateType"Ccryptography.hazmat.primitives.serialization.ssh.SSHCertificateType*∂
+key_idMcryptography.hazmat.primitives.serialization.ssh.SSHCertificateBuilder.key_id"ê
+Fcryptography.hazmat.primitives.serialization.ssh.SSHCertificateBuilder"Fcryptography.hazmat.primitives.serialization.ssh.SSHCertificateBuilder*õ
+selfê
+Fcryptography.hazmat.primitives.serialization.ssh.SSHCertificateBuilder"Fcryptography.hazmat.primitives.serialization.ssh.SSHCertificateBuilder*,
+key_id 
+builtins.bytes"builtins.bytes*Ñ
+valid_principalsWcryptography.hazmat.primitives.serialization.ssh.SSHCertificateBuilder.valid_principals"ê
+Fcryptography.hazmat.primitives.serialization.ssh.SSHCertificateBuilder"Fcryptography.hazmat.primitives.serialization.ssh.SSHCertificateBuilder*õ
+selfê
+Fcryptography.hazmat.primitives.serialization.ssh.SSHCertificateBuilder"Fcryptography.hazmat.primitives.serialization.ssh.SSHCertificateBuilder*f
+valid_principalsP
+builtins.list[builtins.bytes] 
+builtins.bytes"builtins.bytes"builtins.list*Ö
+valid_for_all_principals_cryptography.hazmat.primitives.serialization.ssh.SSHCertificateBuilder.valid_for_all_principals*
+self*é
+valid_beforeScryptography.hazmat.primitives.serialization.ssh.SSHCertificateBuilder.valid_before"ê
+Fcryptography.hazmat.primitives.serialization.ssh.SSHCertificateBuilder"Fcryptography.hazmat.primitives.serialization.ssh.SSHCertificateBuilder*õ
+selfê
+Fcryptography.hazmat.primitives.serialization.ssh.SSHCertificateBuilder"Fcryptography.hazmat.primitives.serialization.ssh.SSHCertificateBuilder*x
+valid_beforef
+"Union[builtins.int,builtins.float]
+builtins.int"builtins.int 
+builtins.float"builtins.float*ã
+valid_afterRcryptography.hazmat.primitives.serialization.ssh.SSHCertificateBuilder.valid_after"ê
+Fcryptography.hazmat.primitives.serialization.ssh.SSHCertificateBuilder"Fcryptography.hazmat.primitives.serialization.ssh.SSHCertificateBuilder*õ
+selfê
+Fcryptography.hazmat.primitives.serialization.ssh.SSHCertificateBuilder"Fcryptography.hazmat.primitives.serialization.ssh.SSHCertificateBuilder*w
+valid_afterf
+"Union[builtins.int,builtins.float]
+builtins.int"builtins.int 
+builtins.float"builtins.float*˚
+add_critical_optionZcryptography.hazmat.primitives.serialization.ssh.SSHCertificateBuilder.add_critical_option"ê
+Fcryptography.hazmat.primitives.serialization.ssh.SSHCertificateBuilder"Fcryptography.hazmat.primitives.serialization.ssh.SSHCertificateBuilder*õ
+selfê
+Fcryptography.hazmat.primitives.serialization.ssh.SSHCertificateBuilder"Fcryptography.hazmat.primitives.serialization.ssh.SSHCertificateBuilder**
+name 
+builtins.bytes"builtins.bytes*+
+value 
+builtins.bytes"builtins.bytes*Ô
+add_extensionTcryptography.hazmat.primitives.serialization.ssh.SSHCertificateBuilder.add_extension"ê
+Fcryptography.hazmat.primitives.serialization.ssh.SSHCertificateBuilder"Fcryptography.hazmat.primitives.serialization.ssh.SSHCertificateBuilder*õ
+selfê
+Fcryptography.hazmat.primitives.serialization.ssh.SSHCertificateBuilder"Fcryptography.hazmat.primitives.serialization.ssh.SSHCertificateBuilder**
+name 
+builtins.bytes"builtins.bytes*+
+value 
+builtins.bytes"builtins.bytes*ö
+
+signKcryptography.hazmat.primitives.serialization.ssh.SSHCertificateBuilder.sign"Ç
+?cryptography.hazmat.primitives.serialization.ssh.SSHCertificate"?cryptography.hazmat.primitives.serialization.ssh.SSHCertificate*õ
+selfê
+Fcryptography.hazmat.primitives.serialization.ssh.SSHCertificateBuilder"Fcryptography.hazmat.primitives.serialization.ssh.SSHCertificateBuilder*°
+private_keyè
+÷TypeAlias[Union[cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey,cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey]]Ë
+ÀUnion[cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey,cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey]å
+Dcryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey"Dcryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKeyz
+;cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey";cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKeyä
+Ccryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey"Ccryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey"Gcryptography.hazmat.primitives.serialization.ssh.SSHCertPrivateKeyTypesr“
+_public_keyRcryptography.hazmat.primitives.serialization.ssh.SSHCertificateBuilder._public_keyÓ
+ÕUnion[cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey,cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey,None]ä
+Ccryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey"Ccryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKeyx
+:cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey":cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKeyà
+Bcryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey"Bcryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey
+Nonerü
+_serialNcryptography.hazmat.primitives.serialization.ssh.SSHCertificateBuilder._serialD
+Union[builtins.int,None]
+builtins.int"builtins.int
+Noner¬
+_typeLcryptography.hazmat.primitives.serialization.ssh.SSHCertificateBuilder._typeÍ
+OUnion[cryptography.hazmat.primitives.serialization.ssh.SSHCertificateType,None]ä
+Ccryptography.hazmat.primitives.serialization.ssh.SSHCertificateType"Ccryptography.hazmat.primitives.serialization.ssh.SSHCertificateType
+Noner•
+_key_idNcryptography.hazmat.primitives.serialization.ssh.SSHCertificateBuilder._key_idJ
+Union[builtins.bytes,None] 
+builtins.bytes"builtins.bytes
+Nonerø
+_valid_principalsXcryptography.hazmat.primitives.serialization.ssh.SSHCertificateBuilder._valid_principalsP
+builtins.list[builtins.bytes] 
+builtins.bytes"builtins.bytes"builtins.listrù
+_valid_for_all_principals`cryptography.hazmat.primitives.serialization.ssh.SSHCertificateBuilder._valid_for_all_principals
+builtins.bool"builtins.boolr´
+_valid_beforeTcryptography.hazmat.primitives.serialization.ssh.SSHCertificateBuilder._valid_beforeD
+Union[builtins.int,None]
+builtins.int"builtins.int
+Noner©
+_valid_afterScryptography.hazmat.primitives.serialization.ssh.SSHCertificateBuilder._valid_afterD
+Union[builtins.int,None]
+builtins.int"builtins.int
+Noner¢
+_critical_optionsXcryptography.hazmat.primitives.serialization.ssh.SSHCertificateBuilder._critical_options≤
+3builtins.list[Tuple[builtins.bytes,builtins.bytes]]l
+$Tuple[builtins.bytes,builtins.bytes] 
+builtins.bytes"builtins.bytes 
+builtins.bytes"builtins.bytes"builtins.listrñ
+_extensionsRcryptography.hazmat.primitives.serialization.ssh.SSHCertificateBuilder._extensions≤
+3builtins.list[Tuple[builtins.bytes,builtins.bytes]]l
+$Tuple[builtins.bytes,builtins.bytes] 
+builtins.bytes"builtins.bytes 
+builtins.bytes"builtins.bytes"builtins.list∆
+SSHCertificateTypeCcryptography.hazmat.primitives.serialization.ssh.SSHCertificateType"	enum.EnumHrn
+USERHcryptography.hazmat.primitives.serialization.ssh.SSHCertificateType.USER
+builtins.int"builtins.intrn
+HOSTHcryptography.hazmat.primitives.serialization.ssh.SSHCertificateType.HOST
+builtins.int"builtins.intò
 load_der_parametersEcryptography.hazmat.primitives.serialization.base.load_der_parameters"v
 9cryptography.hazmat.primitives.asymmetric.dh.DHParameters"9cryptography.hazmat.primitives.asymmetric.dh.DHParameters**
 data 
 builtins.bytes"builtins.bytes*
 backend
-Any Å
-load_der_private_keyFcryptography.hazmat.primitives.serialization.base.load_der_private_key"Ç
-“TypeAlias[Union[cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey,cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey,cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey,cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey]]Â
-«Union[cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey,cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey,cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey,cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey]ä
+Any ∫
+load_der_private_keyFcryptography.hazmat.primitives.serialization.base.load_der_private_key"ı
+åTypeAlias[Union[cryptography.hazmat.primitives.asymmetric.dh.DHPrivateKey,cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey,cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey,cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey,cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey,cryptography.hazmat.primitives.asymmetric.x25519.X25519PrivateKey,cryptography.hazmat.primitives.asymmetric.x448.X448PrivateKey]]†
+ÅUnion[cryptography.hazmat.primitives.asymmetric.dh.DHPrivateKey,cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey,cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey,cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey,cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey,cryptography.hazmat.primitives.asymmetric.x25519.X25519PrivateKey,cryptography.hazmat.primitives.asymmetric.x448.X448PrivateKey]v
+9cryptography.hazmat.primitives.asymmetric.dh.DHPrivateKey"9cryptography.hazmat.primitives.asymmetric.dh.DHPrivateKeyä
 Ccryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey"Ccryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKeyÇ
 ?cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKey"?cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKeyz
 ;cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey";cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKeyz
 ;cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey";cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKeyå
-Dcryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey"Dcryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey"Acryptography.hazmat.primitives.asymmetric.types.PRIVATE_KEY_TYPES**
+Dcryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey"Dcryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKeyÜ
+Acryptography.hazmat.primitives.asymmetric.x25519.X25519PrivateKey"Acryptography.hazmat.primitives.asymmetric.x25519.X25519PrivateKey~
+=cryptography.hazmat.primitives.asymmetric.x448.X448PrivateKey"=cryptography.hazmat.primitives.asymmetric.x448.X448PrivateKey"?cryptography.hazmat.primitives.asymmetric.types.PrivateKeyTypes**
 data 
 builtins.bytes"builtins.bytes*X
 passwordJ
@@ -21,16 +363,20 @@ Dcryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey"Dcryptogra
 builtins.bytes"builtins.bytes
 None*
 backend
-Any ê
-load_der_public_keyEcryptography.hazmat.primitives.serialization.base.load_der_public_key"Ì
-
-ÕTypeAlias[Union[cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey,cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey,cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey,cryptography.hazmat.primitives.asymmetric.ed448.Ed448PublicKey]]÷
-¬Union[cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey,cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey,cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey,cryptography.hazmat.primitives.asymmetric.ed448.Ed448PublicKey]x
+Any *D
+unsafe_skip_rsa_key_validation
+builtins.bool"builtins.bool ˜
+load_der_public_keyEcryptography.hazmat.primitives.serialization.base.load_der_public_key"‘
+ÑTypeAlias[Union[cryptography.hazmat.primitives.asymmetric.dh.DHPublicKey,cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey,cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey,cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey,cryptography.hazmat.primitives.asymmetric.ed448.Ed448PublicKey,cryptography.hazmat.primitives.asymmetric.x25519.X25519PublicKey,cryptography.hazmat.primitives.asymmetric.x448.X448PublicKey]]à
+˘Union[cryptography.hazmat.primitives.asymmetric.dh.DHPublicKey,cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey,cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey,cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey,cryptography.hazmat.primitives.asymmetric.ed448.Ed448PublicKey,cryptography.hazmat.primitives.asymmetric.x25519.X25519PublicKey,cryptography.hazmat.primitives.asymmetric.x448.X448PublicKey]t
+8cryptography.hazmat.primitives.asymmetric.dh.DHPublicKey"8cryptography.hazmat.primitives.asymmetric.dh.DHPublicKeyx
 :cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey":cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKeyx
 :cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey":cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKeyä
 Ccryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey"Ccryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKeyà
 Bcryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey"Bcryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKeyÄ
->cryptography.hazmat.primitives.asymmetric.ed448.Ed448PublicKey">cryptography.hazmat.primitives.asymmetric.ed448.Ed448PublicKey"@cryptography.hazmat.primitives.asymmetric.types.PUBLIC_KEY_TYPES**
+>cryptography.hazmat.primitives.asymmetric.ed448.Ed448PublicKey">cryptography.hazmat.primitives.asymmetric.ed448.Ed448PublicKeyÑ
+@cryptography.hazmat.primitives.asymmetric.x25519.X25519PublicKey"@cryptography.hazmat.primitives.asymmetric.x25519.X25519PublicKey|
+<cryptography.hazmat.primitives.asymmetric.x448.X448PublicKey"<cryptography.hazmat.primitives.asymmetric.x448.X448PublicKey">cryptography.hazmat.primitives.asymmetric.types.PublicKeyTypes**
 data 
 builtins.bytes"builtins.bytes*
 backend
@@ -40,15 +386,18 @@ Bcryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey"Bcryptograph
 data 
 builtins.bytes"builtins.bytes*
 backend
-Any Å
-load_pem_private_keyFcryptography.hazmat.primitives.serialization.base.load_pem_private_key"Ç
-“TypeAlias[Union[cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey,cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey,cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey,cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey]]Â
-«Union[cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey,cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey,cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey,cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey]ä
+Any ∫
+load_pem_private_keyFcryptography.hazmat.primitives.serialization.base.load_pem_private_key"ı
+åTypeAlias[Union[cryptography.hazmat.primitives.asymmetric.dh.DHPrivateKey,cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey,cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey,cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey,cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey,cryptography.hazmat.primitives.asymmetric.x25519.X25519PrivateKey,cryptography.hazmat.primitives.asymmetric.x448.X448PrivateKey]]†
+ÅUnion[cryptography.hazmat.primitives.asymmetric.dh.DHPrivateKey,cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey,cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey,cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey,cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey,cryptography.hazmat.primitives.asymmetric.x25519.X25519PrivateKey,cryptography.hazmat.primitives.asymmetric.x448.X448PrivateKey]v
+9cryptography.hazmat.primitives.asymmetric.dh.DHPrivateKey"9cryptography.hazmat.primitives.asymmetric.dh.DHPrivateKeyä
 Ccryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey"Ccryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKeyÇ
 ?cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKey"?cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKeyz
 ;cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey";cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKeyz
 ;cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey";cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKeyå
-Dcryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey"Dcryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey"Acryptography.hazmat.primitives.asymmetric.types.PRIVATE_KEY_TYPES**
+Dcryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey"Dcryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKeyÜ
+Acryptography.hazmat.primitives.asymmetric.x25519.X25519PrivateKey"Acryptography.hazmat.primitives.asymmetric.x25519.X25519PrivateKey~
+=cryptography.hazmat.primitives.asymmetric.x448.X448PrivateKey"=cryptography.hazmat.primitives.asymmetric.x448.X448PrivateKey"?cryptography.hazmat.primitives.asymmetric.types.PrivateKeyTypes**
 data 
 builtins.bytes"builtins.bytes*X
 passwordJ
@@ -56,27 +405,32 @@ Dcryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey"Dcryptogra
 builtins.bytes"builtins.bytes
 None*
 backend
-Any ê
-load_pem_public_keyEcryptography.hazmat.primitives.serialization.base.load_pem_public_key"Ì
-
-ÕTypeAlias[Union[cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey,cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey,cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey,cryptography.hazmat.primitives.asymmetric.ed448.Ed448PublicKey]]÷
-¬Union[cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey,cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey,cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey,cryptography.hazmat.primitives.asymmetric.ed448.Ed448PublicKey]x
+Any *D
+unsafe_skip_rsa_key_validation
+builtins.bool"builtins.bool ˜
+load_pem_public_keyEcryptography.hazmat.primitives.serialization.base.load_pem_public_key"‘
+ÑTypeAlias[Union[cryptography.hazmat.primitives.asymmetric.dh.DHPublicKey,cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey,cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey,cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey,cryptography.hazmat.primitives.asymmetric.ed448.Ed448PublicKey,cryptography.hazmat.primitives.asymmetric.x25519.X25519PublicKey,cryptography.hazmat.primitives.asymmetric.x448.X448PublicKey]]à
+˘Union[cryptography.hazmat.primitives.asymmetric.dh.DHPublicKey,cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey,cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey,cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey,cryptography.hazmat.primitives.asymmetric.ed448.Ed448PublicKey,cryptography.hazmat.primitives.asymmetric.x25519.X25519PublicKey,cryptography.hazmat.primitives.asymmetric.x448.X448PublicKey]t
+8cryptography.hazmat.primitives.asymmetric.dh.DHPublicKey"8cryptography.hazmat.primitives.asymmetric.dh.DHPublicKeyx
 :cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey":cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKeyx
 :cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey":cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKeyä
 Ccryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey"Ccryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKeyà
 Bcryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey"Bcryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKeyÄ
->cryptography.hazmat.primitives.asymmetric.ed448.Ed448PublicKey">cryptography.hazmat.primitives.asymmetric.ed448.Ed448PublicKey"@cryptography.hazmat.primitives.asymmetric.types.PUBLIC_KEY_TYPES**
+>cryptography.hazmat.primitives.asymmetric.ed448.Ed448PublicKey">cryptography.hazmat.primitives.asymmetric.ed448.Ed448PublicKeyÑ
+@cryptography.hazmat.primitives.asymmetric.x25519.X25519PublicKey"@cryptography.hazmat.primitives.asymmetric.x25519.X25519PublicKey|
+<cryptography.hazmat.primitives.asymmetric.x448.X448PublicKey"<cryptography.hazmat.primitives.asymmetric.x448.X448PublicKey">cryptography.hazmat.primitives.asymmetric.types.PublicKeyTypes**
 data 
 builtins.bytes"builtins.bytes*
 backend
-Any Å
-load_ssh_private_keyEcryptography.hazmat.primitives.serialization.ssh.load_ssh_private_key"É	
+Any ˝
+
+load_ssh_private_keyEcryptography.hazmat.primitives.serialization.ssh.load_ssh_private_key"ˇ
 íTypeAlias[Union[cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey,cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey,cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey]]†
 áUnion[cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey,cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey,cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey]å
 Dcryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey"Dcryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKeyz
 ;cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey";cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKeyz
 ;cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey";cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKeyä
-Ccryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey"Ccryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey"Gcryptography.hazmat.primitives.serialization.ssh._SSH_PRIVATE_KEY_TYPES**
+Ccryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey"Ccryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey"Ccryptography.hazmat.primitives.serialization.ssh.SSHPrivateKeyTypes**
 data 
 builtins.bytes"builtins.bytes*X
 passwordJ
@@ -84,15 +438,26 @@ Ccryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey"Ccryptograp
 builtins.bytes"builtins.bytes
 None*
 backend
-Any î
-
-load_ssh_public_keyDcryptography.hazmat.primitives.serialization.ssh.load_ssh_public_key"Ú
+Any ‰
+load_ssh_public_identityIcryptography.hazmat.primitives.serialization.ssh.load_ssh_public_identity"–
+’Union[cryptography.hazmat.primitives.serialization.ssh.SSHCertificate,TypeAlias[Union[cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey,cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey,cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey]]]Ç
+?cryptography.hazmat.primitives.serialization.ssh.SSHCertificate"?cryptography.hazmat.primitives.serialization.ssh.SSHCertificateÓ
 éTypeAlias[Union[cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey,cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey,cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey]]î
 ÉUnion[cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey,cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey,cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey]ä
 Ccryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey"Ccryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKeyx
 :cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey":cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKeyx
 :cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey":cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKeyà
-Bcryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey"Bcryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey"Fcryptography.hazmat.primitives.serialization.ssh._SSH_PUBLIC_KEY_TYPES**
+Bcryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey"Bcryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey"Bcryptography.hazmat.primitives.serialization.ssh.SSHPublicKeyTypes**
+data 
+builtins.bytes"builtins.bytesê
+
+load_ssh_public_keyDcryptography.hazmat.primitives.serialization.ssh.load_ssh_public_key"Ó
+éTypeAlias[Union[cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey,cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey,cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey]]î
+ÉUnion[cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey,cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey,cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey]ä
+Ccryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKey"Ccryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePublicKeyx
+:cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey":cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKeyx
+:cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey":cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKeyà
+Bcryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey"Bcryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey"Bcryptography.hazmat.primitives.serialization.ssh.SSHPublicKeyTypes**
 data 
 builtins.bytes"builtins.bytes*
 backend

@@ -8,12 +8,12 @@
 parameter_numbersMcryptography.hazmat.primitives.asymmetric.dsa.DSAParameters.parameter_numbers"†
 Acryptography.hazmat.primitives.asymmetric.dsa.DSAParameterNumbers"Acryptography.hazmat.primitives.asymmetric.dsa.DSAParameterNumbers*„
 selfz
-;cryptography.hazmat.primitives.asymmetric.dsa.DSAParameters";cryptography.hazmat.primitives.asymmetric.dsa.DSAParameters0:abc.abstractmethod@@babc.ABCMetaê
-DSAPrivateKey;cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey"builtins.object*‘
+;cryptography.hazmat.primitives.asymmetric.dsa.DSAParameters";cryptography.hazmat.primitives.asymmetric.dsa.DSAParameters0:abc.abstractmethod@@babc.ABCMetaï
+DSAPrivateKey;cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey"builtins.object*™
 key_sizeDcryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey.key_size"
 builtins.int"builtins.int*„
 selfz
-;cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey";cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey0:abc.abstractproperty@`*í
+;cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey";cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey0:property:abc.abstractmethod@`*í
 
 public_keyFcryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey.public_key"x
 :cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey":cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey*„
@@ -23,13 +23,7 @@ public_keyFcryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey.public_k
 parametersFcryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey.parameters"z
 ;cryptography.hazmat.primitives.asymmetric.dsa.DSAParameters";cryptography.hazmat.primitives.asymmetric.dsa.DSAParameters*„
 selfz
-;cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey";cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey0:abc.abstractmethod@*€
-signerBcryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey.signer"Œ
-Dcryptography.hazmat.primitives.asymmetric.AsymmetricSignatureContext"Dcryptography.hazmat.primitives.asymmetric.AsymmetricSignatureContext*„
-selfz
-;cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey";cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey*ƒ
-signature_algorithmj
-3cryptography.hazmat.primitives.hashes.HashAlgorithm"3cryptography.hazmat.primitives.hashes.HashAlgorithm0:abc.abstractmethod@*¤
+;cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey";cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey0:abc.abstractmethod@*¤
 sign@cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey.sign" 
 builtins.bytes"builtins.bytes*„
 selfz
@@ -53,25 +47,17 @@ tUnion[cryptography.hazmat.primitives.asymmetric.utils.Prehashed,cryptography.ha
 formatz
 ;cryptography.hazmat.primitives._serialization.PrivateFormat";cryptography.hazmat.primitives._serialization.PrivateFormat*¯
 encryption_algorithm”
-Hcryptography.hazmat.primitives._serialization.KeySerializationEncryption"Hcryptography.hazmat.primitives._serialization.KeySerializationEncryption0:abc.abstractmethod@@babc.ABCMeta„
-DSAPublicKey:cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey"builtins.object*Ž
+Hcryptography.hazmat.primitives._serialization.KeySerializationEncryption"Hcryptography.hazmat.primitives._serialization.KeySerializationEncryption0:abc.abstractmethod@@babc.ABCMetaù
+DSAPublicKey:cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey"builtins.object*–
 key_sizeCcryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey.key_size"
 builtins.int"builtins.int*‚
 selfx
-:cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey":cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey0:abc.abstractproperty@`*ì
+:cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey":cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey0:property:abc.abstractmethod@`*ì
 
 parametersEcryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey.parameters"z
 ;cryptography.hazmat.primitives.asymmetric.dsa.DSAParameters";cryptography.hazmat.primitives.asymmetric.dsa.DSAParameters*‚
 selfx
-:cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey":cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey0:abc.abstractmethod@*¸
-verifierCcryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey.verifier"’
-Gcryptography.hazmat.primitives.asymmetric.AsymmetricVerificationContext"Gcryptography.hazmat.primitives.asymmetric.AsymmetricVerificationContext*‚
-selfx
-:cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey":cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey*/
-	signature 
-builtins.bytes"builtins.bytes*ƒ
-signature_algorithmj
-3cryptography.hazmat.primitives.hashes.HashAlgorithm"3cryptography.hazmat.primitives.hashes.HashAlgorithm0:abc.abstractmethod@*û
+:cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey":cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey0:abc.abstractmethod@*û
 public_numbersIcryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey.public_numbers"€
 >cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicNumbers">cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicNumbers*‚
 selfx
@@ -95,7 +81,11 @@ Gcryptography.hazmat.primitives.asymmetric.AsymmetricVerificationContext"Gcrypto
 	algorithmÜ
 tUnion[cryptography.hazmat.primitives.asymmetric.utils.Prehashed,cryptography.hazmat.primitives.hashes.HashAlgorithm]v
 9cryptography.hazmat.primitives.asymmetric.utils.Prehashed"9cryptography.hazmat.primitives.asymmetric.utils.Prehashedj
-3cryptography.hazmat.primitives.hashes.HashAlgorithm"3cryptography.hazmat.primitives.hashes.HashAlgorithm0:abc.abstractmethod@@babc.ABCMetaò
+3cryptography.hazmat.primitives.hashes.HashAlgorithm"3cryptography.hazmat.primitives.hashes.HashAlgorithm0:abc.abstractmethod@*¥
+__eq__Acryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey.__eq__"
+builtins.bool"builtins.bool*zx
+:cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey":cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey*$"
+builtins.object"builtins.object0:abc.abstractmethod@@babc.ABCMetaÝ
 DSAParameterNumbersAcryptography.hazmat.primitives.asymmetric.dsa.DSAParameterNumbers"builtins.object*ã
 __init__Jcryptography.hazmat.primitives.asymmetric.dsa.DSAParameterNumbers.__init__"
 None*‘
@@ -106,29 +96,39 @@ Acryptography.hazmat.primitives.asymmetric.dsa.DSAParameterNumbers"Acryptography
 q
 builtins.int"builtins.int*#
 g
-builtins.int"builtins.int*‚
+builtins.int"builtins.int*ˆ
+pCcryptography.hazmat.primitives.asymmetric.dsa.DSAParameterNumbers.p"
+builtins.int"builtins.int*‘
+self†
+Acryptography.hazmat.primitives.asymmetric.dsa.DSAParameterNumbers"Acryptography.hazmat.primitives.asymmetric.dsa.DSAParameterNumbers0:property`*ˆ
+qCcryptography.hazmat.primitives.asymmetric.dsa.DSAParameterNumbers.q"
+builtins.int"builtins.int*‘
+self†
+Acryptography.hazmat.primitives.asymmetric.dsa.DSAParameterNumbers"Acryptography.hazmat.primitives.asymmetric.dsa.DSAParameterNumbers0:property`*ˆ
+gCcryptography.hazmat.primitives.asymmetric.dsa.DSAParameterNumbers.g"
+builtins.int"builtins.int*‘
+self†
+Acryptography.hazmat.primitives.asymmetric.dsa.DSAParameterNumbers"Acryptography.hazmat.primitives.asymmetric.dsa.DSAParameterNumbers0:property`*‚
 
 parametersLcryptography.hazmat.primitives.asymmetric.dsa.DSAParameterNumbers.parameters"z
 ;cryptography.hazmat.primitives.asymmetric.dsa.DSAParameters";cryptography.hazmat.primitives.asymmetric.dsa.DSAParameters*‘
 self†
 Acryptography.hazmat.primitives.asymmetric.dsa.DSAParameterNumbers"Acryptography.hazmat.primitives.asymmetric.dsa.DSAParameterNumbers*
 backend
-Any *V
-__eq__Hcryptography.hazmat.primitives.asymmetric.dsa.DSAParameterNumbers.__eq__* * *V
-__ne__Hcryptography.hazmat.primitives.asymmetric.dsa.DSAParameterNumbers.__ne__* * *X
-__repr__Jcryptography.hazmat.primitives.asymmetric.dsa.DSAParameterNumbers.__repr__* rp
-pCcryptography.hazmat.primitives.asymmetric.dsa.DSAParameterNumbers.p&
-builtins.property"builtins.propertyrp
-qCcryptography.hazmat.primitives.asymmetric.dsa.DSAParameterNumbers.q&
-builtins.property"builtins.propertyrp
-gCcryptography.hazmat.primitives.asymmetric.dsa.DSAParameterNumbers.g&
-builtins.property"builtins.propertyrh
+Any *¤
+__eq__Hcryptography.hazmat.primitives.asymmetric.dsa.DSAParameterNumbers.__eq__"
+builtins.bool"builtins.bool*‰†
+Acryptography.hazmat.primitives.asymmetric.dsa.DSAParameterNumbers"Acryptography.hazmat.primitives.asymmetric.dsa.DSAParameterNumbers*$"
+builtins.object"builtins.object*€
+__repr__Jcryptography.hazmat.primitives.asymmetric.dsa.DSAParameterNumbers.__repr__"
+builtins.str"builtins.str*‰†
+Acryptography.hazmat.primitives.asymmetric.dsa.DSAParameterNumbers"Acryptography.hazmat.primitives.asymmetric.dsa.DSAParameterNumbersrh
 _pDcryptography.hazmat.primitives.asymmetric.dsa.DSAParameterNumbers._p
 builtins.int"builtins.intrh
 _qDcryptography.hazmat.primitives.asymmetric.dsa.DSAParameterNumbers._q
 builtins.int"builtins.intrh
 _gDcryptography.hazmat.primitives.asymmetric.dsa.DSAParameterNumbers._g
-builtins.int"builtins.intë
+builtins.int"builtins.int’
 DSAPublicNumbers>cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicNumbers"builtins.object*±
 __init__Gcryptography.hazmat.primitives.asymmetric.dsa.DSAPublicNumbers.__init__"
 None*‹
@@ -137,25 +137,33 @@ Acryptography.hazmat.primitives.asymmetric.dsa.DSAParameterNumbers"Acryptography
 y
 builtins.int"builtins.int*ž
 parameter_numbers†
-Acryptography.hazmat.primitives.asymmetric.dsa.DSAParameterNumbers"Acryptography.hazmat.primitives.asymmetric.dsa.DSAParameterNumbers*÷
+Acryptography.hazmat.primitives.asymmetric.dsa.DSAParameterNumbers"Acryptography.hazmat.primitives.asymmetric.dsa.DSAParameterNumbers*ÿ
+y@cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicNumbers.y"
+builtins.int"builtins.int*‹
+self€
+>cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicNumbers">cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicNumbers0:property`*Š
+parameter_numbersPcryptography.hazmat.primitives.asymmetric.dsa.DSAPublicNumbers.parameter_numbers"†
+Acryptography.hazmat.primitives.asymmetric.dsa.DSAParameterNumbers"Acryptography.hazmat.primitives.asymmetric.dsa.DSAParameterNumbers*‹
+self€
+>cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicNumbers">cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicNumbers0:property`*÷
 
 public_keyIcryptography.hazmat.primitives.asymmetric.dsa.DSAPublicNumbers.public_key"x
 :cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey":cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicKey*‹
 self€
 >cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicNumbers">cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicNumbers*
 backend
-Any *S
-__eq__Ecryptography.hazmat.primitives.asymmetric.dsa.DSAPublicNumbers.__eq__* * *S
-__ne__Ecryptography.hazmat.primitives.asymmetric.dsa.DSAPublicNumbers.__ne__* * *U
-__repr__Gcryptography.hazmat.primitives.asymmetric.dsa.DSAPublicNumbers.__repr__* rm
-y@cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicNumbers.y&
-builtins.property"builtins.propertyr
-parameter_numbersPcryptography.hazmat.primitives.asymmetric.dsa.DSAPublicNumbers.parameter_numbers&
-builtins.property"builtins.propertyre
+Any *›
+__eq__Ecryptography.hazmat.primitives.asymmetric.dsa.DSAPublicNumbers.__eq__"
+builtins.bool"builtins.bool*ƒ€
+>cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicNumbers">cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicNumbers*$"
+builtins.object"builtins.object*÷
+__repr__Gcryptography.hazmat.primitives.asymmetric.dsa.DSAPublicNumbers.__repr__"
+builtins.str"builtins.str*ƒ€
+>cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicNumbers">cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicNumbersre
 _yAcryptography.hazmat.primitives.asymmetric.dsa.DSAPublicNumbers._y
 builtins.int"builtins.intrð
 _parameter_numbersQcryptography.hazmat.primitives.asymmetric.dsa.DSAPublicNumbers._parameter_numbers†
-Acryptography.hazmat.primitives.asymmetric.dsa.DSAParameterNumbers"Acryptography.hazmat.primitives.asymmetric.dsa.DSAParameterNumbers‹
+Acryptography.hazmat.primitives.asymmetric.dsa.DSAParameterNumbers"Acryptography.hazmat.primitives.asymmetric.dsa.DSAParameterNumbersŽ
 DSAPrivateNumbers?cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateNumbers"builtins.object*«
 __init__Hcryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateNumbers.__init__"
 None*
@@ -164,19 +172,25 @@ Acryptography.hazmat.primitives.asymmetric.dsa.DSAParameterNumbers"Acryptography
 x
 builtins.int"builtins.int*•
 public_numbers€
->cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicNumbers">cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicNumbers*þ
+>cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicNumbers">cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicNumbers*‚
+xAcryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateNumbers.x"
+builtins.int"builtins.int*
+self‚
+?cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateNumbers"?cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateNumbers0:property`*
+public_numbersNcryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateNumbers.public_numbers"€
+>cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicNumbers">cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicNumbers*
+self‚
+?cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateNumbers"?cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateNumbers0:property`*þ
 private_keyKcryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateNumbers.private_key"z
 ;cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey";cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey*
 self‚
 ?cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateNumbers"?cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateNumbers*
 backend
-Any *T
-__eq__Fcryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateNumbers.__eq__* * *T
-__ne__Fcryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateNumbers.__ne__* * rn
-xAcryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateNumbers.x&
-builtins.property"builtins.propertyrˆ
-public_numbersNcryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateNumbers.public_numbers&
-builtins.property"builtins.propertyrå
+Any *ž
+__eq__Fcryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateNumbers.__eq__"
+builtins.bool"builtins.bool*…‚
+?cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateNumbers"?cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateNumbers*$"
+builtins.object"builtins.objectrå
 _public_numbersOcryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateNumbers._public_numbers€
 >cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicNumbers">cryptography.hazmat.primitives.asymmetric.dsa.DSAPublicNumbersrf
 _xBcryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateNumbers._x
@@ -205,6 +219,7 @@ Acryptography.hazmat.primitives.asymmetric.dsa.DSAParameterNumbers"Acryptography
 __annotations__=cryptography.hazmat.primitives.asymmetric.dsa.__annotations__W
 builtins.dict[builtins.str,Any]
 builtins.str"builtins.str
-Any"builtins.dict*?
+Any"builtins.dict*<
+rust_openssl*cryptography.hazmat.bindings._rust.openssl *?
 
 asym_utils/cryptography.hazmat.primitives.asymmetric.utils 

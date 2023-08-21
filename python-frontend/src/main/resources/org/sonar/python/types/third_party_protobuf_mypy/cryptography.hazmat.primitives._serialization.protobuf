@@ -1,5 +1,10 @@
 
--cryptography.hazmat.primitives._serialization±
+-cryptography.hazmat.primitives._serializationÔ
+PBES2cryptography.hazmat.primitives._serialization.PBES"cryptography.utils.EnumHrè
+PBESv1SHA1And3KeyTripleDESCBCPcryptography.hazmat.primitives._serialization.PBES.PBESv1SHA1And3KeyTripleDESCBC
+builtins.str"builtins.strrÖ
+PBESv2SHA256AndAES256CBCKcryptography.hazmat.primitives._serialization.PBES.PBESv2SHA256AndAES256CBC
+builtins.str"builtins.str±
 Encoding6cryptography.hazmat.primitives._serialization.Encoding"cryptography.utils.EnumHr_
 PEM:cryptography.hazmat.primitives._serialization.Encoding.PEM
 builtins.str"builtins.strr_
@@ -12,8 +17,12 @@
 X962;cryptography.hazmat.primitives._serialization.Encoding.X962
 builtins.str"builtins.strrc
 SMIME<cryptography.hazmat.primitives._serialization.Encoding.SMIME
-builtins.str"builtins.str™
-PrivateFormat;cryptography.hazmat.primitives._serialization.PrivateFormat"cryptography.utils.EnumHrh
+builtins.str"builtins.str©
+PrivateFormat;cryptography.hazmat.primitives._serialization.PrivateFormat"cryptography.utils.Enum*ê
+encryption_builderNcryptography.hazmat.primitives._serialization.PrivateFormat.encryption_builder"¢
+Ocryptography.hazmat.primitives._serialization.KeySerializationEncryptionBuilder"Ocryptography.hazmat.primitives._serialization.KeySerializationEncryptionBuilder*Ñ
+selfz
+;cryptography.hazmat.primitives._serialization.PrivateFormat";cryptography.hazmat.primitives._serialization.PrivateFormatHrh
 PKCS8Acryptography.hazmat.primitives._serialization.PrivateFormat.PKCS8
 builtins.str"builtins.strrÇ
 TraditionalOpenSSLNcryptography.hazmat.primitives._serialization.PrivateFormat.TraditionalOpenSSL
@@ -21,6 +30,8 @@
 Raw?cryptography.hazmat.primitives._serialization.PrivateFormat.Raw
 builtins.str"builtins.strrl
 OpenSSHCcryptography.hazmat.primitives._serialization.PrivateFormat.OpenSSH
+builtins.str"builtins.strrj
+PKCS12Bcryptography.hazmat.primitives._serialization.PrivateFormat.PKCS12
 builtins.str"builtins.str¶
 PublicFormat:cryptography.hazmat.primitives._serialization.PublicFormat"cryptography.utils.EnumHrÖ
 SubjectPublicKeyInfoOcryptography.hazmat.primitives._serialization.PublicFormat.SubjectPublicKeyInfo
@@ -48,7 +59,106 @@ Ecryptography.hazmat.primitives._serialization.BestAvailableEncryption"Ecryptogr
 builtins.bytes"builtins.bytesr|
 passwordNcryptography.hazmat.primitives._serialization.BestAvailableEncryption.password 
 builtins.bytes"builtins.bytesî
-NoEncryption:cryptography.hazmat.primitives._serialization.NoEncryption"Hcryptography.hazmat.primitives._serialization.KeySerializationEncryption*©
+NoEncryption:cryptography.hazmat.primitives._serialization.NoEncryption"Hcryptography.hazmat.primitives._serialization.KeySerializationEncryption· 
+!KeySerializationEncryptionBuilderOcryptography.hazmat.primitives._serialization.KeySerializationEncryptionBuilder"builtins.object*§
+__init__Xcryptography.hazmat.primitives._serialization.KeySerializationEncryptionBuilder.__init__"
+None*≠
+self¢
+Ocryptography.hazmat.primitives._serialization.KeySerializationEncryptionBuilder"Ocryptography.hazmat.primitives._serialization.KeySerializationEncryptionBuilder*Ü
+formatz
+;cryptography.hazmat.primitives._serialization.PrivateFormat";cryptography.hazmat.primitives._serialization.PrivateFormat*W
+_kdf_roundsD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *Ã
+
+_hmac_hashπ
+?Union[cryptography.hazmat.primitives.hashes.HashAlgorithm,None]j
+3cryptography.hazmat.primitives.hashes.HashAlgorithm"3cryptography.hazmat.primitives.hashes.HashAlgorithm
+None *“
+_key_cert_algorithm∂
+>Union[cryptography.hazmat.primitives._serialization.PBES,None]h
+2cryptography.hazmat.primitives._serialization.PBES"2cryptography.hazmat.primitives._serialization.PBES
+None *Á
+
+kdf_roundsZcryptography.hazmat.primitives._serialization.KeySerializationEncryptionBuilder.kdf_rounds"¢
+Ocryptography.hazmat.primitives._serialization.KeySerializationEncryptionBuilder"Ocryptography.hazmat.primitives._serialization.KeySerializationEncryptionBuilder*≠
+self¢
+Ocryptography.hazmat.primitives._serialization.KeySerializationEncryptionBuilder"Ocryptography.hazmat.primitives._serialization.KeySerializationEncryptionBuilder*(
+rounds
+builtins.int"builtins.int*∂
+	hmac_hashYcryptography.hazmat.primitives._serialization.KeySerializationEncryptionBuilder.hmac_hash"¢
+Ocryptography.hazmat.primitives._serialization.KeySerializationEncryptionBuilder"Ocryptography.hazmat.primitives._serialization.KeySerializationEncryptionBuilder*≠
+self¢
+Ocryptography.hazmat.primitives._serialization.KeySerializationEncryptionBuilder"Ocryptography.hazmat.primitives._serialization.KeySerializationEncryptionBuilder*y
+	algorithmj
+3cryptography.hazmat.primitives.hashes.HashAlgorithm"3cryptography.hazmat.primitives.hashes.HashAlgorithm*∆
+key_cert_algorithmbcryptography.hazmat.primitives._serialization.KeySerializationEncryptionBuilder.key_cert_algorithm"¢
+Ocryptography.hazmat.primitives._serialization.KeySerializationEncryptionBuilder"Ocryptography.hazmat.primitives._serialization.KeySerializationEncryptionBuilder*≠
+self¢
+Ocryptography.hazmat.primitives._serialization.KeySerializationEncryptionBuilder"Ocryptography.hazmat.primitives._serialization.KeySerializationEncryptionBuilder*w
+	algorithmh
+2cryptography.hazmat.primitives._serialization.PBES"2cryptography.hazmat.primitives._serialization.PBES*’
+buildUcryptography.hazmat.primitives._serialization.KeySerializationEncryptionBuilder.build"î
+Hcryptography.hazmat.primitives._serialization.KeySerializationEncryption"Hcryptography.hazmat.primitives._serialization.KeySerializationEncryption*≠
+self¢
+Ocryptography.hazmat.primitives._serialization.KeySerializationEncryptionBuilder"Ocryptography.hazmat.primitives._serialization.KeySerializationEncryptionBuilder*.
+password 
+builtins.bytes"builtins.bytesrﬁ
+_formatWcryptography.hazmat.primitives._serialization.KeySerializationEncryptionBuilder._formatz
+;cryptography.hazmat.primitives._serialization.PrivateFormat";cryptography.hazmat.primitives._serialization.PrivateFormatr∞
+_kdf_rounds[cryptography.hazmat.primitives._serialization.KeySerializationEncryptionBuilder._kdf_roundsD
+Union[builtins.int,None]
+builtins.int"builtins.int
+Noner§
+
+_hmac_hashZcryptography.hazmat.primitives._serialization.KeySerializationEncryptionBuilder._hmac_hashπ
+?Union[cryptography.hazmat.primitives.hashes.HashAlgorithm,None]j
+3cryptography.hazmat.primitives.hashes.HashAlgorithm"3cryptography.hazmat.primitives.hashes.HashAlgorithm
+Noner≥
+_key_cert_algorithmccryptography.hazmat.primitives._serialization.KeySerializationEncryptionBuilder._key_cert_algorithm∂
+>Union[cryptography.hazmat.primitives._serialization.PBES,None]h
+2cryptography.hazmat.primitives._serialization.PBES"2cryptography.hazmat.primitives._serialization.PBES
+None 
+_KeySerializationEncryptionIcryptography.hazmat.primitives._serialization._KeySerializationEncryption"Hcryptography.hazmat.primitives._serialization.KeySerializationEncryption*π
+__init__Rcryptography.hazmat.primitives._serialization._KeySerializationEncryption.__init__"
+None*°
+selfñ
+Icryptography.hazmat.primitives._serialization._KeySerializationEncryption"Icryptography.hazmat.primitives._serialization._KeySerializationEncryption*Ü
+formatz
+;cryptography.hazmat.primitives._serialization.PrivateFormat";cryptography.hazmat.primitives._serialization.PrivateFormat*.
+password 
+builtins.bytes"builtins.bytes*T
+
+kdf_roundsD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None*…
+	hmac_hashπ
+?Union[cryptography.hazmat.primitives.hashes.HashAlgorithm,None]j
+3cryptography.hazmat.primitives.hashes.HashAlgorithm"3cryptography.hazmat.primitives.hashes.HashAlgorithm
+None*œ
+key_cert_algorithm∂
+>Union[cryptography.hazmat.primitives._serialization.PBES,None]h
+2cryptography.hazmat.primitives._serialization.PBES"2cryptography.hazmat.primitives._serialization.PBES
+Nonerÿ
+_formatQcryptography.hazmat.primitives._serialization._KeySerializationEncryption._formatz
+;cryptography.hazmat.primitives._serialization.PrivateFormat";cryptography.hazmat.primitives._serialization.PrivateFormatrÄ
+passwordRcryptography.hazmat.primitives._serialization._KeySerializationEncryption.password 
+builtins.bytes"builtins.bytesr™
+_kdf_roundsUcryptography.hazmat.primitives._serialization._KeySerializationEncryption._kdf_roundsD
+Union[builtins.int,None]
+builtins.int"builtins.int
+Nonerû
+
+_hmac_hashTcryptography.hazmat.primitives._serialization._KeySerializationEncryption._hmac_hashπ
+?Union[cryptography.hazmat.primitives.hashes.HashAlgorithm,None]j
+3cryptography.hazmat.primitives.hashes.HashAlgorithm"3cryptography.hazmat.primitives.hashes.HashAlgorithm
+Noner≠
+_key_cert_algorithm]cryptography.hazmat.primitives._serialization._KeySerializationEncryption._key_cert_algorithm∂
+>Union[cryptography.hazmat.primitives._serialization.PBES,None]h
+2cryptography.hazmat.primitives._serialization.PBES"2cryptography.hazmat.primitives._serialization.PBES
+None*©
 __annotations__=cryptography.hazmat.primitives._serialization.__annotations__W
 builtins.dict[builtins.str,Any]
 builtins.str"builtins.str

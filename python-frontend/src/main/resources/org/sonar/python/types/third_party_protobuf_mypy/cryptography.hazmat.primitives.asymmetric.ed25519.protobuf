@@ -1,5 +1,5 @@
 
-1cryptography.hazmat.primitives.asymmetric.ed25519²
+1cryptography.hazmat.primitives.asymmetric.ed25519®
 Ed25519PublicKeyBcryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey"builtins.object*•
 from_public_bytesTcryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey.from_public_bytes"ˆ
 Bcryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey"Bcryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey*á
@@ -15,7 +15,11 @@ Bcryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey"Bcryptograph
 encodingp
 6cryptography.hazmat.primitives._serialization.Encoding"6cryptography.hazmat.primitives._serialization.Encoding*„
 formatx
-:cryptography.hazmat.primitives._serialization.PublicFormat":cryptography.hazmat.primitives._serialization.PublicFormat0:abc.abstractmethod@*è
+:cryptography.hazmat.primitives._serialization.PublicFormat":cryptography.hazmat.primitives._serialization.PublicFormat0:abc.abstractmethod@*·
+public_bytes_rawScryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey.public_bytes_raw" 
+builtins.bytes"builtins.bytes*“
+selfˆ
+Bcryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey"Bcryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey0:abc.abstractmethod@*è
 verifyIcryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey.verify"
 None*“
 selfˆ
@@ -23,7 +27,11 @@ Bcryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey"Bcryptograph
 	signature 
 builtins.bytes"builtins.bytes**
 data 
-builtins.bytes"builtins.bytes0:abc.abstractmethod@@babc.ABCMetaÕ
+builtins.bytes"builtins.bytes0:abc.abstractmethod@*¿
+__eq__Icryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey.__eq__"
+builtins.bool"builtins.bool*‹ˆ
+Bcryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey"Bcryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PublicKey*$"
+builtins.object"builtins.object0:abc.abstractmethod@@babc.ABCMeta”
 Ed25519PrivateKeyCcryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey"builtins.object*Ý
 generateLcryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey.generate"Š
 Ccryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey"Ccryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey*ä
@@ -51,7 +59,11 @@ Ccryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey"Ccryptograp
 formatz
 ;cryptography.hazmat.primitives._serialization.PrivateFormat";cryptography.hazmat.primitives._serialization.PrivateFormat*¯
 encryption_algorithm”
-Hcryptography.hazmat.primitives._serialization.KeySerializationEncryption"Hcryptography.hazmat.primitives._serialization.KeySerializationEncryption0:abc.abstractmethod@*Î
+Hcryptography.hazmat.primitives._serialization.KeySerializationEncryption"Hcryptography.hazmat.primitives._serialization.KeySerializationEncryption0:abc.abstractmethod@*¼
+private_bytes_rawUcryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey.private_bytes_raw" 
+builtins.bytes"builtins.bytes*•
+selfŠ
+Ccryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey"Ccryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey0:abc.abstractmethod@*Î
 signHcryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey.sign" 
 builtins.bytes"builtins.bytes*•
 selfŠ
@@ -61,8 +73,5 @@ Ccryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey"Ccryptograp
 __annotations__Acryptography.hazmat.primitives.asymmetric.ed25519.__annotations__W
 builtins.dict[builtins.str,Any]
 builtins.str"builtins.str
-Any"builtins.dict*v
-_ED25519_KEY_SIZECcryptography.hazmat.primitives.asymmetric.ed25519._ED25519_KEY_SIZE
-builtins.int"builtins.int*v
-_ED25519_SIG_SIZECcryptography.hazmat.primitives.asymmetric.ed25519._ED25519_SIG_SIZE
-builtins.int"builtins.int
+Any"builtins.dict*<
+rust_openssl*cryptography.hazmat.bindings._rust.openssl 
