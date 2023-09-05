@@ -1,0 +1,33 @@
+<p>This rule raises an issue when an equality check is made against <code>numpy.nan</code>.</p>
+<h2>Why is this an issue?</h2>
+<p>The <code>numpy.nan</code> is a floating point representation of Not a Number (NaN) used as a placeholder for undefined or missing values in
+numerical computations.</p>
+<p>Equality checks of variables against <code>numpy.nan</code> in NumPy will always be <code>False</code> due to the special nature of
+<code>numpy.nan</code>. This can lead to unexpected and incorrect results.</p>
+<p>Instead of standard comparison the <code>numpy.isnan()</code> function should be used.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+import numpy as np
+
+x = np.nan
+
+if x == np.nan: # Noncompliant: always False
+    ...
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+import numpy as np
+
+x = np.nan
+
+if np.isnan(x):
+   ...
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> NumPy API Reference - <a href="https://numpy.org/doc/stable/reference/constants.html#numpy.nan">numpy.nan</a> </li>
+  <li> NumPy API Reference - <a href="https://numpy.org/doc/stable/reference/generated/numpy.isnan.html">numpy.isnan()</a> </li>
+</ul>
+
