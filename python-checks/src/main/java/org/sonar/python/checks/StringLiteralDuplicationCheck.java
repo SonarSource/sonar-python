@@ -24,6 +24,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
+import java.util.regex.PatternSyntaxException;
 import java.util.stream.Collectors;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
@@ -96,7 +97,11 @@ public class StringLiteralDuplicationCheck extends PythonVisitorCheck {
   public void visitStringLiteral(StringLiteral literal) {
     String value = Expressions.unescape(literal);
     boolean hasInterpolation = literal.stringElements().stream().anyMatch(StringElement::isInterpolated);
-    Pattern exclusionPattern = Pattern.compile(exclusionRegex);
+    try  {
+      Pattern exclusionPattern = Pattern.compile(exclusionRegex);
+    } catch (PatternSyntaxException e){
+      throw new IllegalStateException("Unable to compile regular expression: " + exclusionRegex, e);
+    }
     boolean isExcluded = hasInterpolation
       || value.length() < MINIMUM_LITERAL_LENGTH
       || exclusionPattern.matcher(value).matches()
