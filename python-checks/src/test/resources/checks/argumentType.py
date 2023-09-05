@@ -57,7 +57,7 @@ def functions_defined_locally():
 
 def stdlib_functions():
   A = UnexpectedClass()
-  acos(A) # FN Noncompliant
+  acos(A) # Noncompliant
   B = datetime.tzinfo()
   B.tzname(42) # Noncompliant {{Change this argument; Function "tzname" expects a different type}}
 #          ^^
@@ -70,7 +70,7 @@ def stdlib_functions():
   genericpath.isfile("some/path")
   genericpath.isfile(42) # FN Noncompliant
   my_list = [1,2,3]
-  _heapq.heapify(42) # FN Noncompliant {{Change this argument; Function "heapify" expects a different type}}
+  _heapq.heapify(42) # Noncompliant {{Change this argument; Function "heapify" expects a different type}}
   _heapq.heapify(my_list)
   imap4 = imaplib.IMAP4()
   imap4.setannotation(42) # FN, we do not handle variadic parameters
@@ -83,12 +83,12 @@ def builtin_functions():
   round("42.3")  # FN, ambiguous symbol: no parameters defined yet | missing type hierarchy
   unexpected = UnexpectedClass()
   number = 42
-  number.__add__("27") # FN Noncompliant
-  number.__add__(unexpected) # FN Noncompliant
+  number.__add__("27") # Noncompliant
+  number.__add__(unexpected) # Noncompliant
   number.__add__(x = unexpected) # FN Noncompliant {{Change this argument; Function "__add__" expects a different type}}
 ##                ^^^^^^^^^^^^^^
   float.fromhex(42) # Noncompliant
-  eval(42) # FN Noncompliant
+  eval(42) # Noncompliant
   "Some string literal".format(1, 2)
   exit(1)
   repr(A)
@@ -241,5 +241,5 @@ def win32_no_support(machine, object, instance, inum, counter):
     f = win32pipe.popen(cmd) #FN
 
 def fn_len():
-    len(len([1,2,3]))  # FN
-    len(42)  # FN
+    len(len([1,2,3]))  # Noncompliant
+    len(42)  # Noncompliant

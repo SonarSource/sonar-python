@@ -32,6 +32,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
@@ -56,6 +57,7 @@ import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.plugins.python.api.tree.Tuple;
 import org.sonar.plugins.python.api.tree.UnpackingExpression;
 import org.sonar.python.tree.TreeUtils;
+import org.sonar.python.types.InferredTypes;
 import org.sonar.python.types.TypeShed;
 
 import static org.sonar.plugins.python.api.symbols.Symbol.Kind.CLASS;
@@ -201,8 +203,17 @@ public class SymbolUtils {
     if (parameters.isEmpty()) {
       return 0;
     }
-    String firstParamName = parameters.get(0).name();
-    if (firstParamName == null) {
+
+    var hasUnknownFirstParameter = parameters.stream()
+      .findFirst()
+      .filter(p -> Optional.ofNullable(p.declaredType())
+        .filter(Predicate.not(InferredTypes.anyType()::equals))
+        .isEmpty()
+      )
+      .filter(p -> p.name() == null)
+      .isPresent();
+
+    if (hasUnknownFirstParameter) {
       // First parameter is defined as a tuple
       return -1;
     }
