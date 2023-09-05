@@ -43,7 +43,7 @@ public class StringLiteralDuplicationCheck extends PythonVisitorCheck {
 
   private static final Integer MINIMUM_LITERAL_LENGTH = 5;
   private static final int DEFAULT_THRESHOLD = 3;
-  private static final Pattern BASIC_EXCLUSION_PATTERN = Pattern.compile("[_\\-a-zA-Z0-9]+");
+  private static final String DEFAULT_EXCLUSION_REGEX = "[_\\-a-zA-Z0-9]+"
   private static final Pattern FORMATTING_PATTERN = Pattern.compile("[0-9{} .-_%:dfrsymhYMHS]+");
   private static final Pattern COLOR_PATTERN = Pattern.compile("#[0-9a-fA-F]{6}");
 
@@ -52,6 +52,12 @@ public class StringLiteralDuplicationCheck extends PythonVisitorCheck {
     description = "Number of times a literal must be duplicated to trigger an issue",
     defaultValue = "" + DEFAULT_THRESHOLD)
   public int threshold = DEFAULT_THRESHOLD;
+
+  @RuleProperty(
+    key = "exclusionRegex",
+    description = "RegEx matching literals to exclude from triggering an issue",
+    defaultValue = DEFAULT_EXCLUSION_REGEX)
+  public String exclusionRegex = DEFAULT_EXCLUSION_REGEX;
 
   private Map<String, List<StringLiteral>> literalsByValue = new HashMap<>();
 
@@ -90,9 +96,10 @@ public class StringLiteralDuplicationCheck extends PythonVisitorCheck {
   public void visitStringLiteral(StringLiteral literal) {
     String value = Expressions.unescape(literal);
     boolean hasInterpolation = literal.stringElements().stream().anyMatch(StringElement::isInterpolated);
+    Pattern exclusionPattern = Pattern.compile(exclusionRegex);
     boolean isExcluded = hasInterpolation
       || value.length() < MINIMUM_LITERAL_LENGTH
-      || BASIC_EXCLUSION_PATTERN.matcher(value).matches()
+      || exclusionPattern.matcher(value).matches()
       || FORMATTING_PATTERN.matcher(value).matches()
       || COLOR_PATTERN.matcher(value).matches();
     if (!isExcluded) {
