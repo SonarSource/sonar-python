@@ -22,6 +22,7 @@ package org.sonar.python.checks;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
+import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.BinaryExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
@@ -48,8 +49,8 @@ public class NumpyIsNanCheck extends PythonSubscriptionCheck {
   private static void checkOperand(SubscriptionContext ctx, Expression operand, BinaryExpression be) {
     if (operand.is(Tree.Kind.QUALIFIED_EXPR)) {
       QualifiedExpression expression = (QualifiedExpression) operand;
-      String fqn = expression.symbol().fullyQualifiedName();
-      if (fqn != null && fqn.equals("numpy.nan")) {
+      Symbol symbol = expression.symbol();
+      if (symbol != null && "numpy.nan".equals(symbol.fullyQualifiedName())) {
         ctx.addIssue(be, "Equality checks should not be made against \"numpy.nan\". Use numpy.isnan() instead.");
       }
     }
