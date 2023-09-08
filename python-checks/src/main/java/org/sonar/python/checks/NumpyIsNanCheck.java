@@ -50,7 +50,6 @@ public class NumpyIsNanCheck extends PythonSubscriptionCheck {
     if (operand.is(Tree.Kind.QUALIFIED_EXPR)) {
       QualifiedExpression expression = (QualifiedExpression) operand;
       Symbol symbol = expression.symbol();
-      System.out.println(symbol);
       if (symbol != null && "numpy.nan".equals(symbol.fullyQualifiedName())) {
         ctx.addIssue(be, "Equality checks should not be made against \"numpy.nan\". Use numpy.isnan() instead.");
       }
