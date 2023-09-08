@@ -48,7 +48,8 @@ public class NumpyIsNanCheck extends PythonSubscriptionCheck {
   private static void checkOperand(SubscriptionContext ctx, Expression operand, BinaryExpression be) {
     if (operand.is(Tree.Kind.QUALIFIED_EXPR)) {
       QualifiedExpression expression = (QualifiedExpression) operand;
-      if (expression.symbol().fullyQualifiedName() != null && expression.symbol().fullyQualifiedName().equals("numpy.nan")) {
+      String fqn = expression.symbol().fullyQualifiedName();
+      if (fqn != null && fqn.equals("numpy.nan")) {
         ctx.addIssue(be, "Equality checks should not be made against \"numpy.nan\". Use numpy.isnan() instead.");
       }
     }
