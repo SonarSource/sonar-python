@@ -38,7 +38,7 @@ public class NumpyIsNanCheck extends PythonSubscriptionCheck {
   private static void checkForIsNan(SubscriptionContext ctx) {
     BinaryExpression be = (BinaryExpression) ctx.syntaxNode();
     String value = be.operator().value();
-    if (!(value.equals("==") || value.equals("!="))) {
+    if (!("==".equals(value) || "!=".equals(value))) {
       return;
     }
     // What if we have expressions that evaluate to numpy.nan?
