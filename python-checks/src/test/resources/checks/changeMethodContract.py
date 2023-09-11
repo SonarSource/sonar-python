@@ -111,7 +111,10 @@ class ChildClassReorderingAndExtra(ParentClass):
 class ChildClassOneExtraDefault(ParentClass):
     def my_method(self, foo, other=42): ... # OK
 
-from io import BytesIO
+from io import BytesIO, TextIOWrapper
 
 class StreamingBuffer(BytesIO):
-  def read(self): ... # Noncompliant {{Add missing parameters null. This method overrides io.BufferedIOBase.read.}}
+  def read(self): ... # Noncompliant {{Add missing parameter. This method overrides io.BufferedIOBase.read.}}
+
+class MyTextIOWrapper(TextIOWrapper):
+  def seek(self): ... # Noncompliant {{Add missing 2 parameters. This method overrides io.TextIOWrapper.seek.}}

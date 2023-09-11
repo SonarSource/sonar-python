@@ -89,13 +89,22 @@ public class ChangeMethodContractCheck extends PythonSubscriptionCheck {
   private static void reportOnMissingParameters(SubscriptionContext ctx, FunctionSymbol method, FunctionSymbol overriddenMethod) {
     int indexFirstMissingParam = method.parameters().size();
     List<FunctionSymbol.Parameter> overriddenParams = overriddenMethod.parameters();
-    String missingParameters = overriddenParams.subList(indexFirstMissingParam, overriddenParams.size())
+    var missingParameters = overriddenParams.subList(indexFirstMissingParam, overriddenParams.size())
       .stream()
       .map(FunctionSymbol.Parameter::name)
-      .collect(Collectors.joining(" "));
+      .collect(Collectors.toList());
     if (!missingParameters.isEmpty()) {
-      reportIssue(ctx, "Add missing parameters " + missingParameters.trim() + ".", method.definitionLocation(), overriddenMethod);
+//      If at least one parameter missing name - set message as "Add missing N parameters" where N is amount of missing parameters
+      reportIssue(ctx, getMissingParametersMessage(missingParameters), method.definitionLocation(), overriddenMethod);
     }
+  }
+
+  private static String getMissingParametersMessage(List<String> missingParameters) {
+    if (missingParameters.contains(null)) {
+      return missingParameters.size() == 1 ?
+        "Add missing parameter." : "Add missing " + missingParameters.size()  + " parameters.";
+    }
+    return "Add missing parameters " + String.join(" ", missingParameters).trim() + ".";
   }
 
   private static void reportIssue(SubscriptionContext ctx, String message, @Nullable LocationInFile location, FunctionSymbol overriddenMethod) {
