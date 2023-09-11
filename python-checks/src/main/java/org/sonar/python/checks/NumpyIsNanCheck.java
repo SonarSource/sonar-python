@@ -41,7 +41,6 @@ public class NumpyIsNanCheck extends PythonSubscriptionCheck {
     if (!("==".equals(value) || "!=".equals(value))) {
       return;
     }
-    // What if we have expressions that evaluate to numpy.nan?
     checkOperand(ctx, be.leftOperand(), be);
     checkOperand(ctx, be.rightOperand(), be);
   }
