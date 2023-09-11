@@ -76,20 +76,23 @@ public class ArgumentNumberCheck extends PythonSubscriptionCheck {
     if (calleeSymbol.is(Symbol.Kind.AMBIGUOUS)) {
       var ambiguousSymbol = (AmbiguousSymbol) calleeSymbol;
 
-      var functionSymbols = ambiguousSymbol.alternatives()
+      var functionSymbols = ambiguousSymbol
+        .alternatives()
         .stream()
         .filter(symbol -> symbol.is(Symbol.Kind.FUNCTION))
         .map(FunctionSymbol.class::cast)
         .collect(Collectors.toList());
 
-      var isEqualAmountOfArguments = functionSymbols.stream()
+      var isEqualArguments = functionSymbols.stream()
         .map(FunctionSymbol::parameters)
         .filter(Objects::nonNull)
-        .map(List::size)
-        .distinct()
+        .map(parameters -> parameters.stream()
+          .map(parameter -> List.of(Objects.requireNonNullElse(parameter.name(), ""), parameter.isKeywordOnly(), parameter.isPositionalOnly()))
+          .collect(Collectors.toSet())
+        ).distinct()
         .count() == 1;
 
-      if (isEqualAmountOfArguments) {
+      if (isEqualArguments) {
         return functionSymbols.stream()
           .findFirst();
       }
