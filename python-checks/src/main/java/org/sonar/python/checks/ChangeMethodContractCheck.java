@@ -102,7 +102,7 @@ public class ChangeMethodContractCheck extends PythonSubscriptionCheck {
   private static String getMissingParametersMessage(List<String> missingParameters) {
     if (missingParameters.contains(null)) {
       return missingParameters.size() == 1 ?
-        "Add missing parameter." : ("Add missing " + missingParameters.size()  + " parameters.");
+        "Add 1 missing parameter." : ("Add " + missingParameters.size() + " missing parameters.");
     }
     return "Add missing parameters " + String.join(" ", missingParameters).trim() + ".";
   }

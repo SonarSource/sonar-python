@@ -114,7 +114,7 @@ class ChildClassOneExtraDefault(ParentClass):
 from io import BytesIO, TextIOWrapper
 
 class StreamingBuffer(BytesIO):
-  def read(self): ... # Noncompliant {{Add missing parameter. This method overrides io.BufferedIOBase.read.}}
+  def read(self): ... # Noncompliant {{Add 1 missing parameter. This method overrides io.BufferedIOBase.read.}}
 
 class MyTextIOWrapper(TextIOWrapper):
-  def seek(self): ... # Noncompliant {{Add missing 2 parameters. This method overrides io.TextIOWrapper.seek.}}
+  def seek(self): ... # Noncompliant {{Add 2 missing parameters. This method overrides io.TextIOWrapper.seek.}}
