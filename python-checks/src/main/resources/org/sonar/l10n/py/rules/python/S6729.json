@@ -1,0 +1,25 @@
+{
+  "title": "np.nonzero should be preferred over np.where when only the condition parameter is set",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "numpy",
+    "data-science"
+  ],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-6729",
+  "sqKey": "S6729",
+  "scope": "All",
+  "quickfix": "unknown",
+  "code": {
+    "impacts": {
+      "MAINTAINABILITY": "HIGH",
+      "RELIABILITY": "HIGH"
+    },
+    "attribute": "CONVENTIONAL"
+  }
+}
