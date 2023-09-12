@@ -41,8 +41,8 @@ import org.sonar.python.tree.TreeUtils;
 public class IsCloseAbsTolCheck extends PythonSubscriptionCheck {
 
   private static final String MESSAGE = "Provide the abs_tol parameter when using math.isclose to compare a value to 0.";
-  private static final String SECOND_LOCATION = "This argument evaluates to zero.";
-  private static final String QUICK_FIX_MESSAGE = "Add the abs_tol parameter";
+  private static final String SECONDARY_LOCATION_MESSAGE = "This argument evaluates to zero.";
+  private static final String QUICK_FIX_MESSAGE = "Add the abs_tol parameter.";
 
   @Override
   public void initialize(Context context) {
@@ -71,7 +71,7 @@ public class IsCloseAbsTolCheck extends PythonSubscriptionCheck {
 
   private static void addIssueAndQuickFix(RegularArgument arg, SubscriptionContext ctx, CallExpression call) {
     PreciseIssue issue = ctx.addIssue(call.callee(), MESSAGE);
-    issue.secondary(arg, SECOND_LOCATION);
+    issue.secondary(arg, SECONDARY_LOCATION_MESSAGE);
 
     PythonQuickFix quickFix = PythonQuickFix.newQuickFix(QUICK_FIX_MESSAGE)
         .addTextEdit(TextEditUtils.insertBefore(call.rightPar(), ", abs_tol=1e-9"))
