@@ -2,7 +2,7 @@ import numpy as np
 
 
 def foo(x):
-    if x == np.nan: print(1)  # Noncompliant
+    if x == xx.nan: print(1)  # Noncompliant {{Equality checks should not be made against \"numpy.nan\". Use numpy.isnan() instead.}}
     #  ^^^^^^^^^^^
     if np.nan == x: print(1)  # Noncompliant
     if x != np.nan: print(1)  # Noncompliant
