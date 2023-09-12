@@ -1,0 +1,70 @@
+<p>This rule raises an issue when <code>math.isclose</code> is used to compare values against 0 without providing the <code>abs_tol</code>
+parameter.</p>
+<h2>Why is this an issue?</h2>
+<p>Comparing float values for equality directly is not reliable and should be avoided, due to the inherent imprecision in the binary representation of
+floating point numbers. Such comparison is reported by {rule:python:S1244}.</p>
+<p>One common solution to this problem is to use the <code>math.isclose</code> function to perform the comparison. Behind the scenes, the
+<code>math.isclose</code> function uses a tolerance value (also called epsilon) to define an acceptable range of difference between two floats. A
+tolerance value may be relative (based on the magnitude of the numbers being compared) or absolute.</p>
+<p>Using a relative tolerance would be equivalent to:</p>
+<pre>
+def isclose_relative(a, b, rel_tol=1e-09):
+    diff = abs(a - b)
+    max_diff = rel_tol * max(abs(a), abs(b))
+    return diff &lt;= max_diff
+</pre>
+<p>Using an absolute tolerance is equivalent to:</p>
+<pre>
+def isclose_absolute(a, b, abs_tol=1e-09):
+    diff = abs(a - b)
+    return diff &lt;= abs_tol
+</pre>
+<p>The <code>math.isclose</code> method uses both relative and absolute tolerances and can be approximated as:</p>
+<pre>
+def is_close(a, b, rel_tol=1e-09, abs_tol=0.0):
+    diff = abs(a - b)
+    max_diff = max(rel_tol * max(abs(a), abs(b)), abs_tol)
+    return diff &lt;= max_diff
+</pre>
+<p>Whenever comparing values that are close to 0, the value of the relative tolerance may be too small to overcome the imprecision introduced by
+floating-point arithmetic. It is therefore important to rely on an absolute tolerance in this case.</p>
+<p>When using <code>math.isclose</code>, the absolute tolerance is defined through the parameter <code>abs_tol</code>. By default, the value of this
+parameter is <code>0.0</code>. Therefore, using <code>math.isclose</code> to compare values against zero without providing this parameter is
+equivalent to a strict equality check, which is likely not intended.</p>
+<h3>Exceptions</h3>
+<p>Note that similar methods from different libraries may behave differently. Notably, <code>numpy.isclose</code> has a default absolute tolerance of
+<code>1e-08</code>. No issue will be reported in this case. However, to ensure consistency and intentionality, it is recommended to always set the
+tolerance values.</p>
+<h2>How to fix it</h2>
+<p>To fix this issue, make sure to provide the <code>abs_tol</code> argument to the <code>math.isclose</code> function whenever comparing values
+against zero. If a strict equality check is intended, consider using the equality operator or providing <code>0</code> as the <code>abs_tol</code>
+parameter to make the intention clear.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+import math
+def foo(a):
+    return math.isclose(a, 0)  # Noncompliant: the default absolute tolerance is 0.0
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+import math
+def foo(a):
+    return math.isclose(a, 0, abs_tol=1e-09)  # Compliant
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Python Documentation - <a
+  href="https://docs.python.org/3/tutorial/floatingpoint.html#floating-point-arithmetic-issues-and-limitations">Floating Point Arithmetic: Issues and
+  Limitations</a> </li>
+  <li> Python Documentation - <a href="https://docs.python.org/3/library/decimal.html#module-decimal">Decimal fixed point and floating point
+  arithmetic</a> </li>
+  <li> NumPy Documentation - <a href="https://numpy.org/doc/stable/reference/generated/numpy.isclose.html">numpy.isclose</a> </li>
+  <li> PyTorch Documentation - <a href="https://pytorch.org/docs/stable/generated/torch.isclose.html">torch.isclose</a> </li>
+</ul>
+<h3>Related rules</h3>
+<ul>
+  <li> {rule:python:S1244}: Floating point numbers should not be tested for equality </li>
+</ul>
+
