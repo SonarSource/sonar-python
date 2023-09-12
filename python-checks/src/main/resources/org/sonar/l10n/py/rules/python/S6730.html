@@ -1,0 +1,74 @@
+<p>This rule raises an issue when a deprecated Numpy alias of a built-in type is used.</p>
+<h2>Why is this an issue?</h2>
+<p>In NumPy, some built-in types such as <code>int</code> have aliases in the form of <code>numpy.int</code>. However, these aliases have been
+deprecated and should not be used anymore.</p>
+<p>The following deprecated aliases should be replaced with their built-in alternatives:</p>
+<table>
+  <colgroup>
+    <col style="width: 50%;">
+    <col style="width: 50%;">
+  </colgroup>
+  <thead>
+    <tr>
+      <th>Deprecated name</th>
+      <th>Equivalent built-in type</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><p>numpy.bool</p></td>
+      <td><p>bool</p></td>
+    </tr>
+    <tr>
+      <td><p>numpy.int</p></td>
+      <td><p>int</p></td>
+    </tr>
+    <tr>
+      <td><p>numpy.float</p></td>
+      <td><p>float</p></td>
+    </tr>
+    <tr>
+      <td><p>numpy.complex</p></td>
+      <td><p>complex</p></td>
+    </tr>
+    <tr>
+      <td><p>numpy.object</p></td>
+      <td><p>object</p></td>
+    </tr>
+    <tr>
+      <td><p>numpy.str</p></td>
+      <td><p>str</p></td>
+    </tr>
+    <tr>
+      <td><p>numpy.long</p></td>
+      <td><p>int</p></td>
+    </tr>
+    <tr>
+      <td><p>numpy.unicode</p></td>
+      <td><p>str</p></td>
+    </tr>
+  </tbody>
+</table>
+<h2>How to fix it</h2>
+<p>To fix this issue, make sure to replace deprecated NumPy type aliases with their corresponding built-in types.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+import numpy as np
+def foo():
+    x = np.int(42)  # Noncompliant: deprecated type alias
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+import numpy as np
+def foo():
+    x = 42  # Compliant
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> NumPy Documentation - <a href="https://numpy.org/devdocs/user/basics.types.html#basics-types">Data types</a> </li>
+  <li> NumPy Documentation - <a href="https://numpy.org/devdocs/release/1.20.0-notes.html#deprecations">Deprecation of aliases of builtin types</a>
+  </li>
+</ul>
+
