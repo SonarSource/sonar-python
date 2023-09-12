@@ -24,7 +24,17 @@ import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 class NumpyIsNanCheckTest {
   @Test
-  void test() {
-    PythonCheckVerifier.verify("src/test/resources/checks/numpyIsNan.py", new NumpyIsNanCheck());
+  void test1() {
+    PythonCheckVerifier.verify("src/test/resources/checks/numpyIsNan1.py", new NumpyIsNanCheck());
+  }
+
+  @Test
+  void test2() {
+    PythonCheckVerifier.verify("src/test/resources/checks/numpyIsNan2.py", new NumpyIsNanCheck());
+  }
+
+  @Test
+  void test3() {
+    PythonCheckVerifier.verify("src/test/resources/checks/numpyIsNan3.py", new NumpyIsNanCheck());
   }
 }
