@@ -150,7 +150,7 @@ def builtin_method():
     l = list[int](42, 43)
     l.append(1, 2) # Noncompliant
     import math
-    math.acos(0, 1) # FN Noncompliant
+    math.acos(0, 1) # Noncompliant
 
 def builtin_method_different_for_python_2_and_3():
     myList = list(42, 43)
