@@ -1,0 +1,24 @@
+{
+  "title": "Equality checks should not be made against \"numpy.nan\"",
+  "type": "BUG",
+  "code": {
+    "impacts": {
+      "MAINTAINABILITY": "HIGH"
+    },
+    "attribute": "LOGICAL"
+  },
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "2min"
+  },
+  "tags": [
+    "python3",
+    "numpy"
+  ],
+  "defaultSeverity": "Blocker",
+  "ruleSpecification": "RSPEC-6725",
+  "sqKey": "S6725",
+  "scope": "Main",
+  "quickfix": "unknown"
+}

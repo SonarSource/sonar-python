@@ -268,6 +268,7 @@ public final class CheckList {
       NoSonarCommentCheck.class,
       NotDiscoverableTestMethodCheck.class,
       NotImplementedErrorInOperatorMethodsCheck.class,
+      NumpyIsNanCheck.class,
       UnusedGroupNamesCheck.class,
       OctalEscapeCheck.class,
       OneStatementPerLineCheck.class,
