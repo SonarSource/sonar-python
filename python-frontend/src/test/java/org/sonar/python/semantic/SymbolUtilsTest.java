@@ -31,6 +31,7 @@ import javax.annotation.Nullable;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.sonar.plugins.python.api.PythonFile;
+import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
@@ -135,7 +136,9 @@ class SymbolUtilsTest {
       "class D(object):",
       "  def foo7(): pass",
       "class E(foo2):",
-      "  def foo8(): pass"
+      "  def foo8(): pass",
+      "class MyStr(str):",
+      "  def capitalize(self): pass"
     );
 
     FunctionSymbol foo = (FunctionSymbol) descendantFunction(file, "foo").name().symbol();
@@ -148,6 +151,7 @@ class SymbolUtilsTest {
     FunctionSymbol foo7 = (FunctionSymbol) descendantFunction(file, "foo7").name().symbol();
     FunctionSymbol foo8 = (FunctionSymbol) descendantFunction(file, "foo8").name().symbol();
     FunctionSymbol foo_int = (FunctionSymbol) descendantFunction(file, "foo_int").name().symbol();
+    FunctionSymbol capitalize = (FunctionSymbol) descendantFunction(file, "capitalize").name().symbol();
     assertThat(SymbolUtils.getOverriddenMethod(foo)).isEmpty();
     assertThat(SymbolUtils.canBeAnOverridingMethod(foo)).isFalse();
     assertThat(SymbolUtils.getOverriddenMethod(foo2)).isEmpty();
@@ -168,6 +172,7 @@ class SymbolUtilsTest {
     assertThat(SymbolUtils.canBeAnOverridingMethod(foo8)).isTrue();
     assertThat(SymbolUtils.getOverriddenMethod(foo_int)).isEmpty();
     assertThat(SymbolUtils.canBeAnOverridingMethod(foo_int)).isTrue();
+    assertThat(SymbolUtils.getOverriddenMethod(capitalize)).isNotEmpty();
 
     assertThat(SymbolUtils.canBeAnOverridingMethod(null)).isTrue();
     String[] strings = {
@@ -192,9 +197,28 @@ class SymbolUtilsTest {
     FunctionSymbolImpl foo10 = new FunctionSymbolImpl(functionDef, "mod.foo", pythonFile("mod.py"));
     foo10.setOwner(new SymbolImpl("some", "some"));
     assertThat(SymbolUtils.canBeAnOverridingMethod(foo10)).isFalse();
+  }
 
+  @Test
+  void getFunctionSymbolTest() {
+    assertThat(SymbolUtils.getFunctionSymbol(null)).isEmpty();
+
+    var file = PythonTestUtils.parse( new SymbolTableBuilder("my_package", pythonFile("my_module.py")),
+      "class MyStr(str):",
+      "  def capitalize(self): pass"
+    );
+    var capitalize = (FunctionSymbolImpl) descendantFunction(file, "capitalize").name().symbol();
+    assertThat(capitalize).isNotNull();
+    assertThat(SymbolUtils.getFunctionSymbol(capitalize)).isNotEmpty().contains(capitalize);
+
+
+    var owner = (ClassSymbol) capitalize.owner();
+    assertThat(SymbolUtils.getFunctionSymbol(owner)).isEmpty();
+    var capitalizeParentSymbol = ((ClassSymbol) owner.superClasses().get(0)).resolveMember("capitalize").orElse(null);
+    assertThat(SymbolUtils.getFunctionSymbol(capitalizeParentSymbol)).isNotEmpty();
 
   }
+
 
   @Nullable
   private static FunctionDef descendantFunction(Tree tree, String name) {

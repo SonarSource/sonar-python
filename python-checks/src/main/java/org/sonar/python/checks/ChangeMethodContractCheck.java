@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import javax.annotation.Nullable;
 import org.sonar.check.Rule;
@@ -64,7 +65,7 @@ public class ChangeMethodContractCheck extends PythonSubscriptionCheck {
 
   private static void checkMethodContract(SubscriptionContext ctx, FunctionSymbol method) {
     SymbolUtils.getOverriddenMethod(method).ifPresent(overriddenMethod -> {
-      if (overriddenMethod.hasVariadicParameter() || overriddenMethod.hasDecorators()) {
+      if (overriddenMethod.hasVariadicParameter() || hasDecorators(overriddenMethod)) {
         // ignore function declarations with packed params
         return;
       }
@@ -84,6 +85,10 @@ public class ChangeMethodContractCheck extends PythonSubscriptionCheck {
         checkDefaultValuesAndParamNames(ctx, method, overriddenMethod);
       }
     });
+  }
+
+  private static boolean hasDecorators(FunctionSymbol symbol) {
+    return symbol.hasDecorators() && symbol.decorators().stream().anyMatch(Predicate.not("overload"::equals));
   }
 
   private static void reportOnMissingParameters(SubscriptionContext ctx, FunctionSymbol method, FunctionSymbol overriddenMethod) {

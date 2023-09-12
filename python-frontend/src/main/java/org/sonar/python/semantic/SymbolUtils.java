@@ -30,6 +30,7 @@ import java.util.Deque;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
@@ -61,7 +62,6 @@ import org.sonar.python.types.InferredTypes;
 import org.sonar.python.types.TypeShed;
 
 import static org.sonar.plugins.python.api.symbols.Symbol.Kind.CLASS;
-import static org.sonar.plugins.python.api.symbols.Symbol.Kind.FUNCTION;
 import static org.sonar.python.tree.TreeUtils.getSymbolFromTree;
 
 public class SymbolUtils {
@@ -253,11 +253,46 @@ public class SymbolUtils {
     for (Symbol superClass : classSymbol.superClasses()) {
       if (superClass.kind() == CLASS) {
         Optional<FunctionSymbol> overriddenSymbol = ((ClassSymbol) superClass).resolveMember(functionSymbol.name())
-          .filter(symbol -> symbol.kind() == FUNCTION)
-          .map(FunctionSymbol.class::cast);
+          .flatMap(SymbolUtils::getFunctionSymbol);
         if (overriddenSymbol.isPresent()) {
           return overriddenSymbol;
         }
+      }
+    }
+    return Optional.empty();
+  }
+
+  public static Optional<FunctionSymbol> getFunctionSymbol(@Nullable Symbol symbol) {
+    if (symbol == null) {
+      return Optional.empty();
+    }
+
+    if (symbol.is(Symbol.Kind.FUNCTION)) {
+      return Optional.of(symbol).map(FunctionSymbol.class::cast);
+    }
+
+    if (symbol.is(Symbol.Kind.AMBIGUOUS)) {
+      var ambiguousSymbol = (AmbiguousSymbol) symbol;
+
+      var functionSymbols = ambiguousSymbol
+        .alternatives()
+        .stream()
+        .filter(alternative -> alternative.is(Symbol.Kind.FUNCTION))
+        .map(FunctionSymbol.class::cast)
+        .collect(Collectors.toList());
+
+      var isEqualArguments = functionSymbols.stream()
+        .map(FunctionSymbol::parameters)
+        .filter(Objects::nonNull)
+        .map(parameters -> parameters.stream()
+          .map(parameter -> List.of(Objects.requireNonNullElse(parameter.name(), ""), parameter.isKeywordOnly(), parameter.isPositionalOnly()))
+          .collect(Collectors.toSet())
+        ).distinct()
+        .count() == 1;
+
+      if (isEqualArguments) {
+        return functionSymbols.stream()
+          .findFirst();
       }
     }
     return Optional.empty();
