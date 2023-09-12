@@ -132,7 +132,7 @@ public class PythonGrammarBuilder {
     b.rule(SUBSCRIPTLIST).is(SUBSCRIPT, b.zeroOrMore(",", SUBSCRIPT), b.optional(","));
     b.rule(SUBSCRIPT).is(b.firstOf(
       b.sequence(b.optional(TEST), ":", b.optional(TEST), b.optional(SLICEOP)),
-      NAMED_EXPR_TEST));
+      b.firstOf(NAMED_EXPR_TEST, STAR_EXPR)));
     b.rule(SLICEOP).is(":", b.optional(TEST));
     b.rule(EXPRLIST).is(b.firstOf(EXPR, STAR_EXPR), b.zeroOrMore(",", b.firstOf(EXPR, STAR_EXPR)), b.optional(","));
     b.rule(TESTLIST).is(TEST, b.zeroOrMore(",", TEST), b.optional(","));

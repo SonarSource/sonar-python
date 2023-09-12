@@ -1373,7 +1373,12 @@ public class PythonTreeMaker {
     for (AstNode subscript : subscriptList.getChildren(PythonGrammar.SUBSCRIPT)) {
       AstNode colon = subscript.getFirstChild(PythonPunctuator.COLON);
       if (colon == null) {
-        slices.add(expression(subscript.getFirstChild(PythonGrammar.NAMED_EXPR_TEST)));
+        AstNode namedExprTest = subscript.getFirstChild(PythonGrammar.NAMED_EXPR_TEST);
+        if (namedExprTest != null) {
+          slices.add(expression(namedExprTest));
+        } else {
+          slices.add(expression(subscript.getFirstChild(PythonGrammar.STAR_EXPR)));
+        }
       } else {
         slices.add(sliceItem(subscript));
       }
