@@ -19,14 +19,19 @@
  */
 package org.sonar.python.checks;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
+import org.sonar.plugins.python.api.quickfix.PythonQuickFix.Builder;
+import org.sonar.plugins.python.api.tree.AliasedName;
 import org.sonar.plugins.python.api.tree.BinaryExpression;
 import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.ImportName;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.cfg.fixpoint.ReachingDefinitionsAnalysis;
@@ -38,19 +43,28 @@ import org.sonar.python.types.InferredTypes;
 public class FloatingPointEqualityCheck extends PythonSubscriptionCheck {
 
   private static final String MESSAGE = "Do not perform equality checks with floating point values.";
-  private static final String QUICK_FIX_MESSAGE = "Replace with %smath.isclose().";
+  private static final String QUICK_FIX_MESSAGE = "Replace with %s%s.isclose().";
 
-  private static final String QUICK_FIX_REPLACE = "%smath.isclose(%s, %s, rel_tol=1e-09, abs_tol=1e-09)";
+  private static final String QUICK_FIX_MATH = "%s%s.isclose(%s, %s, rel_tol=1e-09, abs_tol=1e-09)";
+
+  private static final String QUICK_FIX_IMPORTED_MODULE = "%s%s.isclose(%s, %s, rtol=1e-09, atol=1e-09)";
 
   private static final Tree.Kind[] BINARY_OPERATION_KINDS = { Tree.Kind.PLUS, Tree.Kind.MINUS, Tree.Kind.MULTIPLICATION,
       Tree.Kind.DIVISION };
 
   private ReachingDefinitionsAnalysis reachingDefinitionsAnalysis;
+  private static final List<String> SUPPORTED_IS_CLOSE_MODULES = Arrays.asList("math", "numpy", "torch");
+
+  private String importedModuleForIsClose;
+  private Name importedAlias;
 
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT,
         ctx -> reachingDefinitionsAnalysis = new ReachingDefinitionsAnalysis(ctx.pythonFile()));
+
+    context.registerSyntaxNodeConsumer(Tree.Kind.IMPORT_NAME,
+        ctx -> ((ImportName) ctx.syntaxNode()).modules().forEach(this::addImportedName));
 
     context.registerSyntaxNodeConsumer(Tree.Kind.COMPARISON, this::checkFloatingPointEquality);
   }
@@ -80,7 +94,7 @@ public class FloatingPointEqualityCheck extends PythonSubscriptionCheck {
   private boolean isAssignedFloat(Expression expression) {
     if (expression.is(Tree.Kind.NAME)) {
       Set<Expression> values = reachingDefinitionsAnalysis.valuesAtLocation((Name) expression);
-      if(!values.isEmpty()){
+      if (!values.isEmpty()) {
         return values.stream().allMatch(value -> isFloat(value));
       }
     }
@@ -94,15 +108,41 @@ public class FloatingPointEqualityCheck extends PythonSubscriptionCheck {
     return false;
   }
 
-  private static PythonQuickFix createQuickFix(BinaryExpression binaryExpression, String operator) {
+  private PythonQuickFix createQuickFix(BinaryExpression binaryExpression, String operator) {
     String notToken = "!=".equals(operator) ? "!" : "";
-    String message = String.format(QUICK_FIX_MESSAGE, notToken);
-    String mathIsCloseText = String.format(QUICK_FIX_REPLACE, notToken,
+    String isCloseModuleName = getModuleNameOrAliasForIsClose();
+    String message = String.format(QUICK_FIX_MESSAGE, notToken, isCloseModuleName);
+    Builder quickFix = PythonQuickFix.newQuickFix(message);
+    
+    String quickFixText = "math".equals(isCloseModuleName) ? QUICK_FIX_MATH : QUICK_FIX_IMPORTED_MODULE;
+    String quickFixTextWithModuleName = String.format(quickFixText, notToken, isCloseModuleName,
         TreeUtils.treeToString(binaryExpression.leftOperand(), false),
         TreeUtils.treeToString(binaryExpression.rightOperand(), false));
 
-    return PythonQuickFix.newQuickFix(message)
-        .addTextEdit(TextEditUtils.replace(binaryExpression, mathIsCloseText))
-        .build();
+    quickFix.addTextEdit(TextEditUtils.replace(binaryExpression, quickFixTextWithModuleName));
+
+    if (importedModuleForIsClose == null) {
+      quickFix.addTextEdit(TextEditUtils.insertAtPosition(0,0, "import math\n"));
+    }
+
+    return quickFix.build();
+  }
+
+  private String getModuleNameOrAliasForIsClose() {
+    if(importedAlias != null){
+      return importedAlias.name();
+    }
+    if(importedModuleForIsClose != null){
+      return importedModuleForIsClose;
+    }
+    return "math";
+  }
+
+  private void addImportedName(AliasedName aliasedName) {
+    List<Name> importNames = aliasedName.dottedName().names();
+    if (importedModuleForIsClose == null && importNames.size() == 1 && SUPPORTED_IS_CLOSE_MODULES.contains(importNames.get(0).name())) {
+      importedModuleForIsClose = importNames.get(0).name();
+      importedAlias = aliasedName.alias();
+    }
   }
 }
