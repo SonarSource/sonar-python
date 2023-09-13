@@ -58,7 +58,7 @@ public class NumpyIsNanCheck extends PythonSubscriptionCheck {
     }
     Symbol symbol = cast.symbol();
     if (symbol != null && "numpy.nan".equals(symbol.fullyQualifiedName())) {
-      ctx.addIssue(be, "Equality checks should not be made against \"numpy.nan\". Use numpy.isnan() instead.");
+      ctx.addIssue(be, "Don't perform an equality check against \"numpy.nan\".");
     }
   }
 }
