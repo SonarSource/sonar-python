@@ -34,7 +34,7 @@ import org.sonar.plugins.python.api.tree.Tree;
 public class NumpyIsNanCheck extends PythonSubscriptionCheck {
   @Override
   public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(Tree.Kind.COMPARISON, ctx -> checkForIsNan(ctx));
+    context.registerSyntaxNodeConsumer(Tree.Kind.COMPARISON, NumpyIsNanCheck::checkForIsNan);
   }
 
   private static void checkForIsNan(SubscriptionContext ctx) {
