@@ -34,7 +34,7 @@ import org.sonar.plugins.python.api.tree.Tree;
 public class NumpyIsNanCheck extends PythonSubscriptionCheck {
   @Override
   public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(Tree.Kind.COMPARISON, ctx -> checkForIsNan(ctx));
+    context.registerSyntaxNodeConsumer(Tree.Kind.COMPARISON, NumpyIsNanCheck::checkForIsNan);
   }
 
   private static void checkForIsNan(SubscriptionContext ctx) {
@@ -58,7 +58,7 @@ public class NumpyIsNanCheck extends PythonSubscriptionCheck {
     }
     Symbol symbol = cast.symbol();
     if (symbol != null && "numpy.nan".equals(symbol.fullyQualifiedName())) {
-      ctx.addIssue(be, "Equality checks should not be made against \"numpy.nan\". Use numpy.isnan() instead.");
+      ctx.addIssue(be, "Don't perform an equality check against \"numpy.nan\".");
     }
   }
 }
