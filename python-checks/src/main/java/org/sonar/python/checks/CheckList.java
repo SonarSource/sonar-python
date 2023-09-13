@@ -270,6 +270,7 @@ public final class CheckList {
       NotDiscoverableTestMethodCheck.class,
       NotImplementedErrorInOperatorMethodsCheck.class,
       NumpyIsNanCheck.class,
+      NumpyWhereOneConditionCheck.class,
       UnusedGroupNamesCheck.class,
       OctalEscapeCheck.class,
       OneStatementPerLineCheck.class,

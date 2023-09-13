@@ -21,11 +21,17 @@ package org.sonar.python.checks;
 
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
+import org.sonar.plugins.python.api.SubscriptionContext;
+import org.sonar.plugins.python.api.tree.Tree;
 
 @Rule(key = "S6729")
 public class NumpyWhereOneConditionCheck extends PythonSubscriptionCheck {
   @Override
   public void initialize(Context context) {
+    context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, NumpyWhereOneConditionCheck::checkNumpyWhereCall);
+  }
+
+  private static void checkNumpyWhereCall(SubscriptionContext cxt) {
     // To be implemented.
   }
 }
