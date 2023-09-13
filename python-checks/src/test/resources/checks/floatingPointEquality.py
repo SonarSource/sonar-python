@@ -1,26 +1,26 @@
 
 def failure(a, b):
-    if a == b - 0.1:  # Noncompliant {{Equality tests should not be made with floating point values.}}
+    if a == b - 0.1:  # Noncompliant {{Do not perform equality checks with floating point values.}}
 #      ^^^^^^^^^^^^
         ...
 
-    if a * .2 == b:  # Noncompliant {{Equality tests should not be made with floating point values.}}
+    if a * .2 == b:  # Noncompliant {{Do not perform equality checks with floating point values.}}
 #      ^^^^^^^^^^^
         ...
 
-    if a == b / 0.35:  # Noncompliant {{Equality tests should not be made with floating point values.}}
+    if a == b / 0.35:  # Noncompliant {{Do not perform equality checks with floating point values.}}
 #      ^^^^^^^^^^^^^
         ...
 
-    if a - .2 == b:  # Noncompliant {{Equality tests should not be made with floating point values.}}
+    if a - .2 == b:  # Noncompliant {{Do not perform equality checks with floating point values.}}
 #      ^^^^^^^^^^^
         ...
 
-    if a == 0.1:  # Noncompliant {{Equality tests should not be made with floating point values.}}
+    if a == 0.1:  # Noncompliant {{Do not perform equality checks with floating point values.}}
 #      ^^^^^^^^
         ...
 
-    if 0.1 != b:  # Noncompliant {{Equality tests should not be made with floating point values.}}
+    if 0.1 != b:  # Noncompliant {{Do not perform equality checks with floating point values.}}
 #      ^^^^^^^^
         ...
 
@@ -33,7 +33,13 @@ def failure(a, b):
 #      ^^^^^^
         ...
 
-    if c == b:  # Noncompliant
+    m = 23.4
+    if b > 2:
+        m = 2.4
+    else:
+        m = 4.2
+
+    if c == m:  # Noncompliant
 #      ^^^^^^
         ...
 
@@ -52,7 +58,13 @@ def success(a, b):
     if a != c:  # Compliant
         ...
 
-    if c == b:  # Compliant
+    m = 23.4
+    if b > 2:
+        m = 4
+    else:
+        m = 4.2
+
+    if c == m:  # Compliant
         ...
 
     if c > 0.2:  # Compliant

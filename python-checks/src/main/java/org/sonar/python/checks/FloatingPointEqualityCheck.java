@@ -37,7 +37,7 @@ import org.sonar.python.types.InferredTypes;
 @Rule(key = "S1244")
 public class FloatingPointEqualityCheck extends PythonSubscriptionCheck {
 
-  private static final String MESSAGE = "Equality tests should not be made with floating point values.";
+  private static final String MESSAGE = "Do not perform equality checks with floating point values.";
   private static final String QUICK_FIX_MESSAGE = "Replace with %smath.isclose().";
 
   private static final String QUICK_FIX_REPLACE = "%smath.isclose(%s, %s, rel_tol=1e-09, abs_tol=1e-09)";
@@ -80,8 +80,8 @@ public class FloatingPointEqualityCheck extends PythonSubscriptionCheck {
   private boolean isAssignedFloat(Expression expression) {
     if (expression.is(Tree.Kind.NAME)) {
       Set<Expression> values = reachingDefinitionsAnalysis.valuesAtLocation((Name) expression);
-      if (values.size() == 1) {
-        return isFloat(values.iterator().next());
+      if(!values.isEmpty()){
+        return values.stream().allMatch(value -> isFloat(value));
       }
     }
     return false;
