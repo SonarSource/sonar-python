@@ -53,15 +53,13 @@ def nested(param1: str):
         pass
     print("the end")
 
-def dynamic_param_list(param1, param2, *args, **kwargs): # Noncompliant 4
+def dynamic_param_list(param1, param2, *args, **kwargs): # Noncompliant 2
     pass
 
-def dynamic_args(param:str, *args): # Noncompliant {{Add a type hint to this function parameter.}}
-                           #^^^^^
+def dynamic_args(param:str, *args): # OK
     pass
 
-def dynamic_kwargs(param:int, **kwargs): # Noncompliant {{Add a type hint to this function parameter.}}
-                             #^^^^^^^^
+def dynamic_kwargs(param:int, **kwargs): # OK
     pass
 
 def default_params(param=None): # Noncompliant {{Add a type hint to this function parameter.}}

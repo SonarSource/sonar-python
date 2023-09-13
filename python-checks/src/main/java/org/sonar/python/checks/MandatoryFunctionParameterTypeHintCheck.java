@@ -64,6 +64,7 @@ public class MandatoryFunctionParameterTypeHintCheck extends PythonSubscriptionC
       !isFirstParamOfClassAnnotatedMethod(functionSymbol, isFirstParameter) &&
       !isFirstParamOfNewMethod(functionSymbol, isFirstParameter) &&
       !isSpecialCharParameter(parameter) &&
+      parameter.starToken() == null &&
       parameter.typeAnnotation() == null;
   }
 
