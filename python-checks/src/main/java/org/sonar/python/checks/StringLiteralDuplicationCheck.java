@@ -23,8 +23,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.regex.Pattern;
-import java.util.regex.PatternSyntaxException;
 import java.util.stream.Collectors;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
@@ -44,9 +44,14 @@ public class StringLiteralDuplicationCheck extends PythonVisitorCheck {
 
   private static final Integer MINIMUM_LITERAL_LENGTH = 5;
   private static final int DEFAULT_THRESHOLD = 3;
-  private static final String DEFAULT_EXCLUSION_REGEX = "[_\\-a-zA-Z0-9]+"
+  private static final Pattern BASIC_EXCLUSION_PATTERN = Pattern.compile("[_\\-a-zA-Z0-9]+");
+
   private static final Pattern FORMATTING_PATTERN = Pattern.compile("[0-9{} .-_%:dfrsymhYMHS]+");
   private static final Pattern COLOR_PATTERN = Pattern.compile("#[0-9a-fA-F]{6}");
+
+  private static final String DEFAULT_CUSTOM_EXCLUSION_PATTERN = "";
+
+  private Pattern customPattern = null;
 
   @RuleProperty(
     key = "threshold",
@@ -57,10 +62,26 @@ public class StringLiteralDuplicationCheck extends PythonVisitorCheck {
   @RuleProperty(
     key = "exclusionRegex",
     description = "RegEx matching literals to exclude from triggering an issue",
-    defaultValue = DEFAULT_EXCLUSION_REGEX)
-  public String exclusionRegex = DEFAULT_EXCLUSION_REGEX;
+    defaultValue = "")
+  public String customExclusionRegex = DEFAULT_CUSTOM_EXCLUSION_PATTERN;
 
   private Map<String, List<StringLiteral>> literalsByValue = new HashMap<>();
+
+  private boolean isCustomPatternInitialized = false;
+
+  private Optional<Pattern> customExclusionPattern() {
+    if (!isCustomPatternInitialized) {
+      if (customExclusionRegex != null && !customExclusionRegex.isEmpty()) {
+        try {
+          customPattern = Pattern.compile(customExclusionRegex, Pattern.DOTALL);
+        } catch (RuntimeException e) {
+          throw new IllegalStateException("Unable to compile regular expression: " + customExclusionRegex, e);
+        }
+      }
+      isCustomPatternInitialized = true;
+    }
+    return Optional.ofNullable(customPattern);
+  }
 
   @Override
   public void visitFileInput(FileInput fileInput) {
@@ -97,20 +118,20 @@ public class StringLiteralDuplicationCheck extends PythonVisitorCheck {
   public void visitStringLiteral(StringLiteral literal) {
     String value = Expressions.unescape(literal);
     boolean hasInterpolation = literal.stringElements().stream().anyMatch(StringElement::isInterpolated);
-    try  {
-      Pattern exclusionPattern = Pattern.compile(exclusionRegex);
-    } catch (PatternSyntaxException e){
-      throw new IllegalStateException("Unable to compile regular expression: " + exclusionRegex, e);
-    }
     boolean isExcluded = hasInterpolation
       || value.length() < MINIMUM_LITERAL_LENGTH
-      || exclusionPattern.matcher(value).matches()
+      || BASIC_EXCLUSION_PATTERN.matcher(value).matches()
       || FORMATTING_PATTERN.matcher(value).matches()
-      || COLOR_PATTERN.matcher(value).matches();
+      || COLOR_PATTERN.matcher(value).matches()
+      || matchesCustomExclusionPattern(value);
     if (!isExcluded) {
       String valueWithQuotes = TreeUtils.tokens(literal).stream().map(Token::value).collect(Collectors.joining());
       literalsByValue.computeIfAbsent(valueWithQuotes, key -> new ArrayList<>()).add(literal);
     }
+  }
+
+  private boolean matchesCustomExclusionPattern(String value) {
+    return customExclusionPattern().map(p -> p.matcher(value).matches()).orElse(false);
   }
 
   @Override
