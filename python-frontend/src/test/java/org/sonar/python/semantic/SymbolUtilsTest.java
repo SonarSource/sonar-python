@@ -26,6 +26,7 @@ import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.Objects;
 import javax.annotation.Nullable;
 import org.junit.jupiter.api.Test;
@@ -104,7 +105,7 @@ class SymbolUtilsTest {
     functionSymbol = functionSymbol("class A:\n  @abstractmethod\n  def method(self, b): pass");
     assertThat(SymbolUtils.firstParameterOffset(functionSymbol, true)).isZero();
     assertThat(SymbolUtils.firstParameterOffset(functionSymbol, false)).isEqualTo(1);
-    
+
     functionSymbol = functionSymbol("class A:\n  @unknown_decorator\n  def method(self, *args): pass");
     assertThat(SymbolUtils.firstParameterOffset(functionSymbol, false)).isEqualTo(-1);
     assertThat(SymbolUtils.firstParameterOffset(functionSymbol, true)).isEqualTo(-1);
@@ -152,27 +153,27 @@ class SymbolUtilsTest {
     FunctionSymbol foo8 = (FunctionSymbol) descendantFunction(file, "foo8").name().symbol();
     FunctionSymbol foo_int = (FunctionSymbol) descendantFunction(file, "foo_int").name().symbol();
     FunctionSymbol capitalize = (FunctionSymbol) descendantFunction(file, "capitalize").name().symbol();
-    assertThat(SymbolUtils.getOverriddenMethod(foo)).isEmpty();
+    assertThat(SymbolUtils.getOverriddenMethods(foo)).isEmpty();
     assertThat(SymbolUtils.canBeAnOverridingMethod(foo)).isFalse();
-    assertThat(SymbolUtils.getOverriddenMethod(foo2)).isEmpty();
+    assertThat(SymbolUtils.getOverriddenMethods(foo2)).isEmpty();
     assertThat(SymbolUtils.canBeAnOverridingMethod(foo2)).isFalse();
-    assertThat(SymbolUtils.getOverriddenMethod(foo3)).isEmpty();
+    assertThat(SymbolUtils.getOverriddenMethods(foo3)).isEmpty();
     assertThat(SymbolUtils.canBeAnOverridingMethod(foo3)).isFalse();
-    assertThat(SymbolUtils.getOverriddenMethod(foo4)).isEmpty();
+    assertThat(SymbolUtils.getOverriddenMethods(foo4)).isEmpty();
     assertThat(SymbolUtils.canBeAnOverridingMethod(foo4)).isFalse();
-    assertThat(SymbolUtils.getOverriddenMethod(foo5)).isEmpty();
+    assertThat(SymbolUtils.getOverriddenMethods(foo5)).isEmpty();
     assertThat(SymbolUtils.canBeAnOverridingMethod(foo5)).isFalse();
-    assertThat(SymbolUtils.getOverriddenMethod(foo5_override).get()).isEqualTo(foo5);
+    assertThat(SymbolUtils.getOverriddenMethods(foo5_override).get(0)).isEqualTo(foo5);
     assertThat(SymbolUtils.canBeAnOverridingMethod(foo5_override)).isTrue();
-    assertThat(SymbolUtils.getOverriddenMethod(foo6)).isEmpty();
+    assertThat(SymbolUtils.getOverriddenMethods(foo6)).isEmpty();
     assertThat(SymbolUtils.canBeAnOverridingMethod(foo6)).isFalse();
-    assertThat(SymbolUtils.getOverriddenMethod(foo7)).isEmpty();
+    assertThat(SymbolUtils.getOverriddenMethods(foo7)).isEmpty();
     assertThat(SymbolUtils.canBeAnOverridingMethod(foo7)).isFalse();
-    assertThat(SymbolUtils.getOverriddenMethod(foo8)).isEmpty();
+    assertThat(SymbolUtils.getOverriddenMethods(foo8)).isEmpty();
     assertThat(SymbolUtils.canBeAnOverridingMethod(foo8)).isTrue();
-    assertThat(SymbolUtils.getOverriddenMethod(foo_int)).isEmpty();
+    assertThat(SymbolUtils.getOverriddenMethods(foo_int)).isEmpty();
     assertThat(SymbolUtils.canBeAnOverridingMethod(foo_int)).isTrue();
-    assertThat(SymbolUtils.getOverriddenMethod(capitalize)).isNotEmpty();
+    assertThat(SymbolUtils.getOverriddenMethods(capitalize)).isNotEmpty();
 
     assertThat(SymbolUtils.canBeAnOverridingMethod(null)).isTrue();
     String[] strings = {
@@ -201,7 +202,7 @@ class SymbolUtilsTest {
 
   @Test
   void getFunctionSymbolTest() {
-    assertThat(SymbolUtils.getFunctionSymbol(null)).isEmpty();
+    assertThat(SymbolUtils.getFunctionSymbols(null)).isEmpty();
 
     var file = PythonTestUtils.parse( new SymbolTableBuilder("my_package", pythonFile("my_module.py")),
       "class MyStr(str):",
@@ -209,14 +210,38 @@ class SymbolUtilsTest {
     );
     var capitalize = (FunctionSymbolImpl) descendantFunction(file, "capitalize").name().symbol();
     assertThat(capitalize).isNotNull();
-    assertThat(SymbolUtils.getFunctionSymbol(capitalize)).isNotEmpty().contains(capitalize);
+    assertThat(SymbolUtils.getFunctionSymbols(capitalize)).isNotEmpty().contains(capitalize);
 
 
     var owner = (ClassSymbol) capitalize.owner();
-    assertThat(SymbolUtils.getFunctionSymbol(owner)).isEmpty();
+    assertThat(SymbolUtils.getFunctionSymbols(owner)).isEmpty();
     var capitalizeParentSymbol = ((ClassSymbol) owner.superClasses().get(0)).resolveMember("capitalize").orElse(null);
-    assertThat(SymbolUtils.getFunctionSymbol(capitalizeParentSymbol)).isNotEmpty();
+    assertThat(SymbolUtils.getFunctionSymbols(capitalizeParentSymbol)).isNotEmpty();
+  }
 
+  @Test
+  void isEqualArgumentNamesTest() {
+    var file = PythonTestUtils.parse( new SymbolTableBuilder("my_package", pythonFile("my_module.py")),
+      "class A:",
+      "  def foo1(self, a):",
+      "    ...",
+      "class B:",
+      "  def foo2(self, a):",
+      "    ...",
+      "class C:",
+      "  def foo3(self, b):",
+      "    ..."
+    );
+
+    FunctionSymbol foo1 = (FunctionSymbol) descendantFunction(file, "foo1").name().symbol();
+    FunctionSymbol foo2 = (FunctionSymbol) descendantFunction(file, "foo2").name().symbol();
+    FunctionSymbol foo3 = (FunctionSymbol) descendantFunction(file, "foo3").name().symbol();
+
+    assertThat(foo1).isNotNull();
+    assertThat(foo2).isNotNull();
+    assertThat(foo3).isNotNull();
+    assertThat(SymbolUtils.isEqualArgumentNames(List.of(foo1, foo2))).isTrue();
+    assertThat(SymbolUtils.isEqualArgumentNames(List.of(foo1, foo3))).isFalse();
   }
 
 

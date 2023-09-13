@@ -64,7 +64,10 @@ public class ChangeMethodContractCheck extends PythonSubscriptionCheck {
   }
 
   private static void checkMethodContract(SubscriptionContext ctx, FunctionSymbol method) {
-    SymbolUtils.getOverriddenMethod(method).ifPresent(overriddenMethod -> {
+    var overriddenMethods = SymbolUtils.getOverriddenMethods(method);
+    if (SymbolUtils.isEqualArgumentNames(overriddenMethods)) {
+      var overriddenMethod = overriddenMethods.get(0);
+
       if (overriddenMethod.hasVariadicParameter() || hasDecorators(overriddenMethod)) {
         // ignore function declarations with packed params
         return;
@@ -84,7 +87,7 @@ public class ChangeMethodContractCheck extends PythonSubscriptionCheck {
       } else {
         checkDefaultValuesAndParamNames(ctx, method, overriddenMethod);
       }
-    });
+    }
   }
 
   private static boolean hasDecorators(FunctionSymbol symbol) {

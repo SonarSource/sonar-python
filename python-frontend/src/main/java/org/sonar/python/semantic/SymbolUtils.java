@@ -31,7 +31,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -241,34 +240,32 @@ public class SymbolUtils {
     return 0;
   }
 
-  public static Optional<FunctionSymbol> getOverriddenMethod(FunctionSymbol functionSymbol) {
+  public static List<FunctionSymbol> getOverriddenMethods(FunctionSymbol functionSymbol) {
     Symbol owner = ((FunctionSymbolImpl) functionSymbol).owner();
     if (owner == null || owner.kind() != CLASS) {
-      return Optional.empty();
+      return List.of();
     }
     ClassSymbol classSymbol = (ClassSymbol) owner;
-    if (classSymbol.superClasses().isEmpty()) {
-      return Optional.empty();
-    }
-    for (Symbol superClass : classSymbol.superClasses()) {
-      if (superClass.kind() == CLASS) {
-        Optional<FunctionSymbol> overriddenSymbol = ((ClassSymbol) superClass).resolveMember(functionSymbol.name())
-          .flatMap(SymbolUtils::getFunctionSymbol);
-        if (overriddenSymbol.isPresent()) {
-          return overriddenSymbol;
-        }
-      }
-    }
-    return Optional.empty();
+
+    return classSymbol.superClasses()
+      .stream()
+      .filter(ClassSymbol.class::isInstance)
+      .map(ClassSymbol.class::cast)
+      .map(c -> c.resolveMember(functionSymbol.name())
+        .map(SymbolUtils::getFunctionSymbols)
+        .orElseGet(List::of))
+      .filter(Predicate.not(List::isEmpty))
+      .findFirst()
+      .orElseGet(List::of);
   }
 
-  public static Optional<FunctionSymbol> getFunctionSymbol(@Nullable Symbol symbol) {
+  public static List<FunctionSymbol> getFunctionSymbols(@Nullable Symbol symbol) {
     if (symbol == null) {
-      return Optional.empty();
+      return List.of();
     }
 
     if (symbol.is(Symbol.Kind.FUNCTION)) {
-      return Optional.of(symbol).map(FunctionSymbol.class::cast);
+      return List.of((FunctionSymbol) symbol);
     }
 
     if (symbol.is(Symbol.Kind.AMBIGUOUS)) {
@@ -281,22 +278,26 @@ public class SymbolUtils {
         .map(FunctionSymbol.class::cast)
         .collect(Collectors.toList());
 
-      var isEqualArguments = functionSymbols.stream()
-        .map(FunctionSymbol::parameters)
-        .filter(Objects::nonNull)
-        .map(parameters -> parameters.stream()
-          .map(parameter -> List.of(Objects.requireNonNullElse(parameter.name(), ""), parameter.isKeywordOnly(), parameter.isPositionalOnly()))
-          .collect(Collectors.toSet())
-        ).distinct()
-        .count() == 1;
-
-      if (isEqualArguments) {
-        return functionSymbols.stream()
-          .findFirst();
+      if (functionSymbols.size() != ambiguousSymbol.alternatives().size()) {
+        return List.of();
       }
+
+      return functionSymbols;
     }
-    return Optional.empty();
+    return List.of();
   }
+
+  public static boolean isEqualArgumentNames(List<FunctionSymbol> alternatives) {
+    return alternatives.stream()
+      .map(FunctionSymbol::parameters)
+      .filter(Objects::nonNull)
+      .map(parameters -> parameters.stream()
+        .map(parameter -> List.of(Objects.requireNonNullElse(parameter.name(), ""), parameter.isKeywordOnly(), parameter.isPositionalOnly()))
+        .collect(Collectors.toSet())
+      ).distinct()
+      .count() == 1;
+  }
+
 
   public static boolean canBeAnOverridingMethod(@Nullable FunctionSymbol functionSymbol) {
     if (functionSymbol == null) return true;
