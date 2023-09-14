@@ -22,6 +22,8 @@ package org.sonar.python.checks;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
+import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Tree;
 
 @Rule(key = "S6729")
@@ -31,7 +33,12 @@ public class NumpyWhereOneConditionCheck extends PythonSubscriptionCheck {
     context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, NumpyWhereOneConditionCheck::checkNumpyWhereCall);
   }
 
-  private static void checkNumpyWhereCall(SubscriptionContext cxt) {
+  private static void checkNumpyWhereCall(SubscriptionContext ctx) {
     // To be implemented.
+    CallExpression ce = (CallExpression) ctx.syntaxNode();
+    Symbol symbol = ce.calleeSymbol();
+    if (symbol != null && "numpy.where".equals(symbol.fullyQualifiedName()) && ce.arguments().size() == 1) {
+      ctx.addIssue(ce, "Use \"np.nonzero\" when only the condition parameter is provided to \"np.where\".");
+    }
   }
 }

@@ -26,17 +26,7 @@ class NumpyWhereOneConditionCheckTest {
 
   @Test
   void test1() {
-    PythonCheckVerifier.verify("src/test/resources/checks/numpyWhereOneCondition1.py", new NumpyWhereOneConditionCheck());
-  }
-
-  @Test
-  void test2() {
-    PythonCheckVerifier.verify("src/test/resources/checks/numpyWhereOneCondition2.py", new NumpyWhereOneConditionCheck());
-  }
-
-  @Test
-  void test3() {
-    PythonCheckVerifier.verify("src/test/resources/checks/numpyWhereOneCondition3.py", new NumpyWhereOneConditionCheck());
+    PythonCheckVerifier.verify("src/test/resources/checks/numpyWhereOneCondition.py", new NumpyWhereOneConditionCheck());
   }
 
 }
