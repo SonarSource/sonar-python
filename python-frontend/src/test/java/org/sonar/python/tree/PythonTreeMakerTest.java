@@ -1780,6 +1780,19 @@ class PythonTreeMakerTest extends RuleTest {
   }
 
   @Test
+  void subscription_expressions_with_unpacking_expr_subscript() {
+    setRootRule(PythonGrammar.TEST);
+
+    SubscriptionExpression expr = (SubscriptionExpression) parse("x[*a]", treeMaker::expression);
+    assertThat(expr.getKind()).isEqualTo(Tree.Kind.SUBSCRIPTION);
+    assertThat(((Name) expr.object()).name()).isEqualTo("x");
+    assertThat(((Name) ((UnpackingExpression) expr.subscripts().expressions().get(0)).expression()).name()).isEqualTo("a");
+    assertThat(expr.leftBracket().value()).isEqualTo("[");
+    assertThat(expr.rightBracket().value()).isEqualTo("]");
+    assertThat(expr.children()).hasSize(4);
+  }
+
+  @Test
   void slice_expressions() {
     setRootRule(PythonGrammar.TEST);
 
