@@ -160,6 +160,7 @@ public final class CheckList {
       DeadStoreCheck.class,
       DebugModeCheck.class,
       DedicatedAssertionCheck.class,
+      DeprecatedNumpyTypesCheck.class,
       DictionaryDuplicateKeyCheck.class,
       DirectTypeComparisonCheck.class,
       DisabledEFSEncryptionCheck.class,
