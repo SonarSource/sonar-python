@@ -1,0 +1,37 @@
+<p>This rule raises an issue when legacy <code>numpy.random.RandomState</code> is used.</p>
+<h2>Why is this an issue?</h2>
+<p>Using a predictable seed is a common best practice when using NumPy to create reproducible results. To that end, using
+<code>np.random.seed(number)</code> to set the seed of the global <code>numpy.random.RandomState</code> has been the privileged solution for a long
+time.</p>
+<p><code>numpy.random.RandomState</code> and its associated methods rely on a global state, which may be problematic when threads or other forms of
+concurrency are involved. The global state may be altered and the global seed may be reset at various points in the program (for instance, through an
+imported package or script), which would lead to irreproducible results.</p>
+<p>Instead, the preferred best practice to generate reproducible pseudorandom numbers is to instantiate a <code>numpy.random.Generator</code> object
+with a seed and reuse it in different parts of the code. This avoids the reliance on a global state. Whenever a new seed is needed, a new generator
+may be created instead of mutating a global state.</p>
+<h2>How to fix it</h2>
+<p>To fix this issue, replace usages of <code>numpy.random.RandomState</code> to <code>numpy.random.Generator</code>.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+import numpy as np
+def foo():
+    np.random.seed(42)
+    x = np.random.randn()  # Noncompliant: this relies on numpy.random.RandomState, which is deprecated
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+import numpy as np
+def foo():
+    generator = np.random.default_rng(42)
+    x = generator.standard_normal()
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> NumPy Documentation - <a href="https://numpy.org/doc/stable/reference/random/generator.html#random-generator">Random Generator</a> </li>
+  <li> NumPy Documentation - <a href="https://numpy.org/doc/stable/reference/random/legacy.html#legacy-random-generation">Legacy Random Generation</a>
+  </li>
+  <li> NumPy Documentation - <a href="https://numpy.org/neps/nep-0019-rng-policy.html">NEP19 RNG Policy</a> </li>
+</ul>
+
