@@ -51,10 +51,11 @@ public class DeprecatedNumpyTypesCheck extends PythonSubscriptionCheck {
 
   @Override
   public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(Tree.Kind.QUALIFIED_EXPR, this::checkForDeprecatedTypesNames);
+    context.registerSyntaxNodeConsumer(Tree.Kind.QUALIFIED_EXPR,
+        DeprecatedNumpyTypesCheck::checkForDeprecatedTypesNames);
   }
 
-  private void checkForDeprecatedTypesNames(SubscriptionContext ctx) {
+  private static void checkForDeprecatedTypesNames(SubscriptionContext ctx) {
     QualifiedExpression expression = (QualifiedExpression) ctx.syntaxNode();
     Symbol symbol = expression.symbol();
     checkForNumpyType(symbol, expression, ctx);
@@ -63,7 +64,7 @@ public class DeprecatedNumpyTypesCheck extends PythonSubscriptionCheck {
   private static void checkForNumpyType(@Nullable Symbol symbol, Tree expression, SubscriptionContext ctx) {
     Optional.ofNullable(symbol)
         .map(Symbol::fullyQualifiedName)
-        .map(fqn -> typesToCheck.get(fqn))
+        .map(typesToCheck::get)
         .ifPresent(type -> raiseIssue(expression, type, ctx));
   }
 
