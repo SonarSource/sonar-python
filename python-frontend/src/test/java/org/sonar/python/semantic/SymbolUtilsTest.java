@@ -201,7 +201,7 @@ class SymbolUtilsTest {
   }
 
   @Test
-  void getFunctionSymbolTest() {
+  void getFunctionSymbolsTest() {
     assertThat(SymbolUtils.getFunctionSymbols(null)).isEmpty();
 
     var file = PythonTestUtils.parse( new SymbolTableBuilder("my_package", pythonFile("my_module.py")),
