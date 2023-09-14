@@ -129,7 +129,7 @@ public class FloatingPointEqualityCheck extends PythonSubscriptionCheck {
 
     quickFix.addTextEdit(TextEditUtils.replace(binaryExpression, quickFixTextWithModuleName));
 
-    if (importedModuleForIsClose == null) {
+    if (MATH_MODULE.equals(isCloseModuleName) && !isMathImported) {
       quickFix.addTextEdit(TextEditUtils.insertAtPosition(0, 0, "import math\n"));
     }
 
@@ -152,7 +152,7 @@ public class FloatingPointEqualityCheck extends PythonSubscriptionCheck {
       importNames.stream()
           .filter(name -> SUPPORTED_IS_CLOSE_MODULES.contains(name.name()))
           .findFirst()
-          .map(n -> n.name())
+          .map(Name::name)
           .ifPresent(name -> {
             if(MATH_MODULE.equals(name)){
               isMathImported = true;
