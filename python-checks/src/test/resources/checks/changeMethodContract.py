@@ -66,7 +66,7 @@ class UnresolvedParent(OtherClass):
   def my_method(self): ... # OK
 
 class MyString(str):
-  def capitalize(self, p1): ... # FN Noncompliant {{Remove parameter p1 or provide default value. This method overrides str.capitalize.}}
+  def capitalize(self, p1): ... # Noncompliant {{Remove parameter p1 or provide default value. This method overrides str.capitalize.}}
 
 
 class Intermediate(ParentClass): ...
