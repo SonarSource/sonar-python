@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import javax.annotation.Nullable;
@@ -41,6 +42,12 @@ import static org.sonar.plugins.python.api.tree.Tree.Kind.FUNCDEF;
 
 @Rule(key = "S2638")
 public class ChangeMethodContractCheck extends PythonSubscriptionCheck {
+
+  private static final Set<String> IGNORING_DECORATORS = Set.of(
+    "abstractmethod",
+    "overload"
+  );
+
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(FUNCDEF, ctx -> {
@@ -89,7 +96,7 @@ public class ChangeMethodContractCheck extends PythonSubscriptionCheck {
   }
 
   private static boolean hasDecorators(FunctionSymbol symbol) {
-    return symbol.hasDecorators() && symbol.decorators().stream().anyMatch(Predicate.not("overload"::equals));
+    return symbol.hasDecorators() && symbol.decorators().stream().anyMatch(Predicate.not(IGNORING_DECORATORS::contains));
   }
 
   private static void reportOnMissingParameters(SubscriptionContext ctx, FunctionSymbol method, FunctionSymbol overriddenMethod) {
