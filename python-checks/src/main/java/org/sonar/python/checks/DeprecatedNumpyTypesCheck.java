@@ -22,8 +22,6 @@ package org.sonar.python.checks;
 import java.util.Map;
 import java.util.Optional;
 
-import javax.annotation.Nullable;
-
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
@@ -38,8 +36,7 @@ public class DeprecatedNumpyTypesCheck extends PythonSubscriptionCheck {
 
   private static final String MESSAGE = "Replace this deprecated numpy type alias with the builtin type %s.";
   private static final String QUICK_FIX_MESSAGE = "Replace with %s.";
-
-  private static final Map<String, String> typesToCheck = Map.of(
+  private static final Map<String, String> TYPE_TO_CHECK = Map.of(
       "numpy.bool", "bool",
       "numpy.int", "int",
       "numpy.float", "float",
@@ -57,14 +54,9 @@ public class DeprecatedNumpyTypesCheck extends PythonSubscriptionCheck {
 
   private static void checkForDeprecatedTypesNames(SubscriptionContext ctx) {
     QualifiedExpression expression = (QualifiedExpression) ctx.syntaxNode();
-    Symbol symbol = expression.symbol();
-    checkForNumpyType(symbol, expression, ctx);
-  }
-
-  private static void checkForNumpyType(@Nullable Symbol symbol, Tree expression, SubscriptionContext ctx) {
-    Optional.ofNullable(symbol)
+    Optional.ofNullable(expression.symbol())
         .map(Symbol::fullyQualifiedName)
-        .map(typesToCheck::get)
+        .map(TYPE_TO_CHECK::get)
         .ifPresent(type -> raiseIssue(expression, type, ctx));
   }
 
