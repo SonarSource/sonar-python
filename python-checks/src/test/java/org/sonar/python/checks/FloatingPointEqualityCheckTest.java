@@ -141,6 +141,40 @@ class FloatingPointEqualityCheckTest {
   }
 
   @Test
+  void quickfixPrioritizeNumpyOverMath(){
+    String noncompliant =
+      "import math\n" + 
+      "import numpy as np\n" +
+      "def foo(a,b):\n" +
+      "    if a - 0.1 == b:\n" +
+      "        ...";
+    String compliant =
+      "import math\n" + 
+      "import numpy as np\n" +
+      "def foo(a,b):\n" +
+      "    if np.isclose(a - 0.1, b, rtol=1e-09, atol=1e-09):\n" +
+      "        ...";
+    PythonQuickFixVerifier.verify(check, noncompliant, compliant);
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, noncompliant, "Replace with np.isclose().");
+  }
+
+  @Test
+  void quickfixPrioritizeTorchOverMath(){
+    String noncompliant =
+      "import math, torch\n" +
+      "def foo(a,b):\n" +
+      "    if a - 0.1 == b:\n" +
+      "        ...";
+    String compliant =
+      "import math, torch\n" +
+      "def foo(a,b):\n" +
+      "    if torch.isclose(a - 0.1, b, rtol=1e-09, atol=1e-09):\n" +
+      "        ...";
+    PythonQuickFixVerifier.verify(check, noncompliant, compliant);
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, noncompliant, "Replace with torch.isclose().");
+  }
+
+  @Test
   void quickfixNumpyImportAlias(){
     String noncompliant =
       "import numpy as np\n" +

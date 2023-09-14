@@ -52,21 +52,29 @@ public class FloatingPointEqualityCheck extends PythonSubscriptionCheck {
   private static final Tree.Kind[] BINARY_OPERATION_KINDS = { Tree.Kind.PLUS, Tree.Kind.MINUS, Tree.Kind.MULTIPLICATION,
       Tree.Kind.DIVISION };
 
+  private static final String MATH_MODULE = "math";
+
   private ReachingDefinitionsAnalysis reachingDefinitionsAnalysis;
-  private static final List<String> SUPPORTED_IS_CLOSE_MODULES = Arrays.asList("math", "numpy", "torch");
+  private static final List<String> SUPPORTED_IS_CLOSE_MODULES = Arrays.asList("numpy", "torch", MATH_MODULE);
 
   private String importedModuleForIsClose;
   private Name importedAlias;
+  private boolean isMathImported = false;
 
   @Override
   public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT,
-        ctx -> reachingDefinitionsAnalysis = new ReachingDefinitionsAnalysis(ctx.pythonFile()));
+    context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, this::initializeAnalysis);
 
     context.registerSyntaxNodeConsumer(Tree.Kind.IMPORT_NAME,
         ctx -> ((ImportName) ctx.syntaxNode()).modules().forEach(this::addImportedName));
 
     context.registerSyntaxNodeConsumer(Tree.Kind.COMPARISON, this::checkFloatingPointEquality);
+  }
+
+  private void initializeAnalysis(SubscriptionContext ctx) {
+    reachingDefinitionsAnalysis = new ReachingDefinitionsAnalysis(ctx.pythonFile());
+    importedModuleForIsClose = null;
+    importedAlias = null;
   }
 
   private void checkFloatingPointEquality(SubscriptionContext ctx) {
@@ -113,8 +121,8 @@ public class FloatingPointEqualityCheck extends PythonSubscriptionCheck {
     String isCloseModuleName = getModuleNameOrAliasForIsClose();
     String message = String.format(QUICK_FIX_MESSAGE, notToken, isCloseModuleName);
     Builder quickFix = PythonQuickFix.newQuickFix(message);
-    
-    String quickFixText = "math".equals(isCloseModuleName) ? QUICK_FIX_MATH : QUICK_FIX_IMPORTED_MODULE;
+
+    String quickFixText = MATH_MODULE.equals(isCloseModuleName) ? QUICK_FIX_MATH : QUICK_FIX_IMPORTED_MODULE;
     String quickFixTextWithModuleName = String.format(quickFixText, notToken, isCloseModuleName,
         TreeUtils.treeToString(binaryExpression.leftOperand(), false),
         TreeUtils.treeToString(binaryExpression.rightOperand(), false));
@@ -122,27 +130,36 @@ public class FloatingPointEqualityCheck extends PythonSubscriptionCheck {
     quickFix.addTextEdit(TextEditUtils.replace(binaryExpression, quickFixTextWithModuleName));
 
     if (importedModuleForIsClose == null) {
-      quickFix.addTextEdit(TextEditUtils.insertAtPosition(0,0, "import math\n"));
+      quickFix.addTextEdit(TextEditUtils.insertAtPosition(0, 0, "import math\n"));
     }
 
     return quickFix.build();
   }
 
   private String getModuleNameOrAliasForIsClose() {
-    if(importedAlias != null){
+    if (importedAlias != null) {
       return importedAlias.name();
     }
-    if(importedModuleForIsClose != null){
+    if (importedModuleForIsClose != null) {
       return importedModuleForIsClose;
     }
-    return "math";
+    return MATH_MODULE;
   }
 
   private void addImportedName(AliasedName aliasedName) {
     List<Name> importNames = aliasedName.dottedName().names();
-    if (importedModuleForIsClose == null && importNames.size() == 1 && SUPPORTED_IS_CLOSE_MODULES.contains(importNames.get(0).name())) {
-      importedModuleForIsClose = importNames.get(0).name();
-      importedAlias = aliasedName.alias();
+    if (importedModuleForIsClose == null || MATH_MODULE.equals(importedModuleForIsClose)) {
+      importNames.stream()
+          .filter(name -> SUPPORTED_IS_CLOSE_MODULES.contains(name.name()))
+          .findFirst()
+          .map(n -> n.name())
+          .ifPresent(name -> {
+            if(MATH_MODULE.equals(name)){
+              isMathImported = true;
+            }
+            importedModuleForIsClose = name;
+            importedAlias = aliasedName.alias();
+          });
     }
   }
 }
