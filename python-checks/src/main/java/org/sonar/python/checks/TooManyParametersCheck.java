@@ -87,7 +87,7 @@ public class TooManyParametersCheck extends PythonSubscriptionCheck {
 
   private boolean isAlreadyReportedInParent(FunctionSymbol functionSymbol) {
     // If the rule would already raise an issue on a parent class, don't raise the issue twice
-    return SymbolUtils.getOverriddenMethod(functionSymbol).map(f -> {
+    return SymbolUtils.getOverriddenMethods(functionSymbol).stream().findFirst().map(f -> {
       int nbParameters = f.parameters().size();
       if (f.decorators().stream().anyMatch(d -> d.contains("staticmethod"))) {
         nbParameters -= 1;

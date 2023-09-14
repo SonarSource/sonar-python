@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import javax.annotation.Nullable;
 import org.sonar.check.Rule;
@@ -63,27 +64,32 @@ public class ChangeMethodContractCheck extends PythonSubscriptionCheck {
   }
 
   private static void checkMethodContract(SubscriptionContext ctx, FunctionSymbol method) {
-    SymbolUtils.getOverriddenMethod(method).ifPresent(overriddenMethod -> {
-      if (overriddenMethod.hasVariadicParameter() || overriddenMethod.hasDecorators()) {
-        // ignore function declarations with packed params
-        return;
-      }
+    SymbolUtils.getOverriddenMethod(method, SymbolUtils::getFirstAlternativeIfEqualArgumentNames)
+      .ifPresent(overriddenMethod -> {
+        if (overriddenMethod.hasVariadicParameter() || hasDecorators(overriddenMethod)) {
+          // ignore function declarations with packed params
+          return;
+        }
 
-      int paramsDiff = method.parameters().size() - overriddenMethod.parameters().size();
+        int paramsDiff = method.parameters().size() - overriddenMethod.parameters().size();
 
-      if (paramsDiff != 0 && overriddenMethod.parameters().stream().anyMatch(FunctionSymbol.Parameter::isKeywordOnly)) {
-        reportIssue(ctx, "Change this method signature to accept the same arguments as the method it overrides.", method.definitionLocation(), overriddenMethod);
-        return;
-      }
+        if (paramsDiff != 0 && overriddenMethod.parameters().stream().anyMatch(FunctionSymbol.Parameter::isKeywordOnly)) {
+          reportIssue(ctx, "Change this method signature to accept the same arguments as the method it overrides.", method.definitionLocation(), overriddenMethod);
+          return;
+        }
 
-      if (paramsDiff > 0) {
-        reportOnExtraParameters(ctx, method, overriddenMethod);
-      } else if (paramsDiff < 0) {
-        reportOnMissingParameters(ctx, method, overriddenMethod);
-      } else {
-        checkDefaultValuesAndParamNames(ctx, method, overriddenMethod);
-      }
-    });
+        if (paramsDiff > 0) {
+          reportOnExtraParameters(ctx, method, overriddenMethod);
+        } else if (paramsDiff < 0) {
+          reportOnMissingParameters(ctx, method, overriddenMethod);
+        } else {
+          checkDefaultValuesAndParamNames(ctx, method, overriddenMethod);
+        }
+      });
+  }
+
+  private static boolean hasDecorators(FunctionSymbol symbol) {
+    return symbol.hasDecorators() && symbol.decorators().stream().anyMatch(Predicate.not("overload"::equals));
   }
 
   private static void reportOnMissingParameters(SubscriptionContext ctx, FunctionSymbol method, FunctionSymbol overriddenMethod) {

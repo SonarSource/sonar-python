@@ -19,19 +19,19 @@
  */
 package org.sonar.python.checks;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.LocationInFile;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
-import org.sonar.plugins.python.api.symbols.AmbiguousSymbol;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
@@ -44,6 +44,7 @@ import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.semantic.FunctionSymbolImpl;
+import org.sonar.python.semantic.SymbolUtils;
 import org.sonar.python.tree.TreeUtils;
 
 import static org.sonar.plugins.python.api.symbols.Usage.Kind.PARAMETER;
@@ -58,46 +59,14 @@ public class ArgumentNumberCheck extends PythonSubscriptionCheck {
     context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, ctx -> {
       CallExpression callExpression = (CallExpression) ctx.syntaxNode();
 
-      getFunctionSymbol(callExpression)
+      Optional.of(callExpression)
+        .map(CallExpression::calleeSymbol)
+        .map(SymbolUtils::getFunctionSymbols)
+        .filter(SymbolUtils::isEqualArgumentNames)
+        .map(Collection::stream)
+        .flatMap(Stream::findFirst)
         .ifPresent(functionSymbol -> checkFunctionSymbol(ctx, callExpression, functionSymbol));
     });
-  }
-
-  private static Optional<FunctionSymbol> getFunctionSymbol(CallExpression callExpression) {
-    Symbol calleeSymbol = callExpression.calleeSymbol();
-    if (calleeSymbol == null) {
-      return Optional.empty();
-    }
-
-    if (calleeSymbol.is(Symbol.Kind.FUNCTION)) {
-      return Optional.of(calleeSymbol).map(FunctionSymbol.class::cast);
-    }
-
-    if (calleeSymbol.is(Symbol.Kind.AMBIGUOUS)) {
-      var ambiguousSymbol = (AmbiguousSymbol) calleeSymbol;
-
-      var functionSymbols = ambiguousSymbol
-        .alternatives()
-        .stream()
-        .filter(symbol -> symbol.is(Symbol.Kind.FUNCTION))
-        .map(FunctionSymbol.class::cast)
-        .collect(Collectors.toList());
-
-      var isEqualArguments = functionSymbols.stream()
-        .map(FunctionSymbol::parameters)
-        .filter(Objects::nonNull)
-        .map(parameters -> parameters.stream()
-          .map(parameter -> List.of(Objects.requireNonNullElse(parameter.name(), ""), parameter.isKeywordOnly(), parameter.isPositionalOnly()))
-          .collect(Collectors.toSet())
-        ).distinct()
-        .count() == 1;
-
-      if (isEqualArguments) {
-        return functionSymbols.stream()
-          .findFirst();
-      }
-    }
-    return Optional.empty();
   }
 
   private static void checkFunctionSymbol(SubscriptionContext ctx, CallExpression callExpression, FunctionSymbol functionSymbol) {
