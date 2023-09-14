@@ -26,14 +26,18 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Deque;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
+import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.PythonFile;
@@ -240,6 +244,19 @@ public class SymbolUtils {
     return 0;
   }
 
+  public static Optional<FunctionSymbol> getOverriddenMethod(FunctionSymbol functionSymbol) {
+    return getOverriddenMethod(functionSymbol, symbols -> Optional.of(symbols)
+      .filter(s -> s.size() == 1)
+      .map(Collection::stream)
+      .flatMap(Stream::findFirst)
+    );
+  }
+
+  public static Optional<FunctionSymbol> getOverriddenMethod(FunctionSymbol functionSymbol,
+    Function<List<FunctionSymbol>, Optional<FunctionSymbol>> symbolPicker) {
+    return symbolPicker.apply(getOverriddenMethods(functionSymbol));
+  }
+
   public static List<FunctionSymbol> getOverriddenMethods(FunctionSymbol functionSymbol) {
     Symbol owner = ((FunctionSymbolImpl) functionSymbol).owner();
     if (owner == null || owner.kind() != CLASS) {
@@ -285,6 +302,13 @@ public class SymbolUtils {
       return functionSymbols;
     }
     return List.of();
+  }
+
+  public static Optional<FunctionSymbol> getFirstAlternativeIfEqualArgumentNames(List<FunctionSymbol> alternatives) {
+    return Optional.of(alternatives)
+      .filter(SymbolUtils::isEqualArgumentNames)
+      .map(Collection::stream)
+      .flatMap(Stream::findFirst);
   }
 
   public static boolean isEqualArgumentNames(List<FunctionSymbol> alternatives) {

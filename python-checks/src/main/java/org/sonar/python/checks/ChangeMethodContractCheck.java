@@ -64,30 +64,28 @@ public class ChangeMethodContractCheck extends PythonSubscriptionCheck {
   }
 
   private static void checkMethodContract(SubscriptionContext ctx, FunctionSymbol method) {
-    var overriddenMethods = SymbolUtils.getOverriddenMethods(method);
-    if (SymbolUtils.isEqualArgumentNames(overriddenMethods)) {
-      var overriddenMethod = overriddenMethods.get(0);
+    SymbolUtils.getOverriddenMethod(method, SymbolUtils::getFirstAlternativeIfEqualArgumentNames)
+      .ifPresent(overriddenMethod -> {
+        if (overriddenMethod.hasVariadicParameter() || hasDecorators(overriddenMethod)) {
+          // ignore function declarations with packed params
+          return;
+        }
 
-      if (overriddenMethod.hasVariadicParameter() || hasDecorators(overriddenMethod)) {
-        // ignore function declarations with packed params
-        return;
-      }
+        int paramsDiff = method.parameters().size() - overriddenMethod.parameters().size();
 
-      int paramsDiff = method.parameters().size() - overriddenMethod.parameters().size();
+        if (paramsDiff != 0 && overriddenMethod.parameters().stream().anyMatch(FunctionSymbol.Parameter::isKeywordOnly)) {
+          reportIssue(ctx, "Change this method signature to accept the same arguments as the method it overrides.", method.definitionLocation(), overriddenMethod);
+          return;
+        }
 
-      if (paramsDiff != 0 && overriddenMethod.parameters().stream().anyMatch(FunctionSymbol.Parameter::isKeywordOnly)) {
-        reportIssue(ctx, "Change this method signature to accept the same arguments as the method it overrides.", method.definitionLocation(), overriddenMethod);
-        return;
-      }
-
-      if (paramsDiff > 0) {
-        reportOnExtraParameters(ctx, method, overriddenMethod);
-      } else if (paramsDiff < 0) {
-        reportOnMissingParameters(ctx, method, overriddenMethod);
-      } else {
-        checkDefaultValuesAndParamNames(ctx, method, overriddenMethod);
-      }
-    }
+        if (paramsDiff > 0) {
+          reportOnExtraParameters(ctx, method, overriddenMethod);
+        } else if (paramsDiff < 0) {
+          reportOnMissingParameters(ctx, method, overriddenMethod);
+        } else {
+          checkDefaultValuesAndParamNames(ctx, method, overriddenMethod);
+        }
+      });
   }
 
   private static boolean hasDecorators(FunctionSymbol symbol) {

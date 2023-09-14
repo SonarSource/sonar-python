@@ -153,27 +153,27 @@ class SymbolUtilsTest {
     FunctionSymbol foo8 = (FunctionSymbol) descendantFunction(file, "foo8").name().symbol();
     FunctionSymbol foo_int = (FunctionSymbol) descendantFunction(file, "foo_int").name().symbol();
     FunctionSymbol capitalize = (FunctionSymbol) descendantFunction(file, "capitalize").name().symbol();
-    assertThat(SymbolUtils.getOverriddenMethods(foo)).isEmpty();
+    assertThat(SymbolUtils.getOverriddenMethod(foo)).isEmpty();
     assertThat(SymbolUtils.canBeAnOverridingMethod(foo)).isFalse();
-    assertThat(SymbolUtils.getOverriddenMethods(foo2)).isEmpty();
+    assertThat(SymbolUtils.getOverriddenMethod(foo2)).isEmpty();
     assertThat(SymbolUtils.canBeAnOverridingMethod(foo2)).isFalse();
-    assertThat(SymbolUtils.getOverriddenMethods(foo3)).isEmpty();
+    assertThat(SymbolUtils.getOverriddenMethod(foo3)).isEmpty();
     assertThat(SymbolUtils.canBeAnOverridingMethod(foo3)).isFalse();
-    assertThat(SymbolUtils.getOverriddenMethods(foo4)).isEmpty();
+    assertThat(SymbolUtils.getOverriddenMethod(foo4)).isEmpty();
     assertThat(SymbolUtils.canBeAnOverridingMethod(foo4)).isFalse();
-    assertThat(SymbolUtils.getOverriddenMethods(foo5)).isEmpty();
+    assertThat(SymbolUtils.getOverriddenMethod(foo5)).isEmpty();
     assertThat(SymbolUtils.canBeAnOverridingMethod(foo5)).isFalse();
-    assertThat(SymbolUtils.getOverriddenMethods(foo5_override).get(0)).isEqualTo(foo5);
+    assertThat(SymbolUtils.getOverriddenMethod(foo5_override).get()).isEqualTo(foo5);
     assertThat(SymbolUtils.canBeAnOverridingMethod(foo5_override)).isTrue();
-    assertThat(SymbolUtils.getOverriddenMethods(foo6)).isEmpty();
+    assertThat(SymbolUtils.getOverriddenMethod(foo6)).isEmpty();
     assertThat(SymbolUtils.canBeAnOverridingMethod(foo6)).isFalse();
-    assertThat(SymbolUtils.getOverriddenMethods(foo7)).isEmpty();
+    assertThat(SymbolUtils.getOverriddenMethod(foo7)).isEmpty();
     assertThat(SymbolUtils.canBeAnOverridingMethod(foo7)).isFalse();
-    assertThat(SymbolUtils.getOverriddenMethods(foo8)).isEmpty();
+    assertThat(SymbolUtils.getOverriddenMethod(foo8)).isEmpty();
     assertThat(SymbolUtils.canBeAnOverridingMethod(foo8)).isTrue();
-    assertThat(SymbolUtils.getOverriddenMethods(foo_int)).isEmpty();
+    assertThat(SymbolUtils.getOverriddenMethod(foo_int)).isEmpty();
     assertThat(SymbolUtils.canBeAnOverridingMethod(foo_int)).isTrue();
-    assertThat(SymbolUtils.getOverriddenMethods(capitalize)).isNotEmpty();
+    assertThat(SymbolUtils.getOverriddenMethod(capitalize, SymbolUtils::getFirstAlternativeIfEqualArgumentNames)).isNotEmpty();
 
     assertThat(SymbolUtils.canBeAnOverridingMethod(null)).isTrue();
     String[] strings = {
