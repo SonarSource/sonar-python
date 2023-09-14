@@ -1372,11 +1372,10 @@ public class PythonTreeMaker {
     List<Tree> slices = new ArrayList<>();
     for (AstNode subscript : subscriptList.getChildren(PythonGrammar.SUBSCRIPT)) {
       AstNode colon = subscript.getFirstChild(PythonPunctuator.COLON);
-      if (colon == null) {
-        slices.add(expression(subscript.getFirstChild(PythonGrammar.NAMED_EXPR_TEST)));
-      } else {
-        slices.add(sliceItem(subscript));
-      }
+      var slice = colon == null ?
+        expression(subscript.getFirstChild(PythonGrammar.NAMED_EXPR_TEST, PythonGrammar.STAR_EXPR))
+        : sliceItem(subscript);
+      slices.add(slice);
     }
 
     // https://docs.python.org/3/reference/expressions.html#slicings
