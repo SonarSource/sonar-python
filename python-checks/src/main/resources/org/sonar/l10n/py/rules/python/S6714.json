@@ -1,0 +1,25 @@
+{
+  "title": "Passing a list to np.array should be preferred over passing a generator",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "numpy",
+    "data-science"
+  ],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-6714",
+  "sqKey": "S6714",
+  "scope": "All",
+  "quickfix": "unknown",
+  "code": {
+    "impacts": {
+      "MAINTAINABILITY": "MEDIUM",
+      "RELIABILITY": "LOW"
+    },
+    "attribute": "LOGICAL"
+  }
+}
