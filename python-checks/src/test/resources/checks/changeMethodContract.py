@@ -118,3 +118,9 @@ class StreamingBuffer(BytesIO):
 
 class MyTextIOWrapper(TextIOWrapper):
   def seek(self): ... # Noncompliant {{Add 2 missing parameters. This method overrides io.TextIOWrapper.seek.}}
+
+import datetime
+
+class MyTZInfo(datetime.tzinfo):
+  def tzname(self): # Noncompliant
+    ...
