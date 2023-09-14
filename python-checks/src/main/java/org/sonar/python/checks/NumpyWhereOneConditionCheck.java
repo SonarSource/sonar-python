@@ -23,6 +23,7 @@ import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.tree.ArgList;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Tree;
 
@@ -37,8 +38,17 @@ public class NumpyWhereOneConditionCheck extends PythonSubscriptionCheck {
     // To be implemented.
     CallExpression ce = (CallExpression) ctx.syntaxNode();
     Symbol symbol = ce.calleeSymbol();
-    if (symbol != null && "numpy.where".equals(symbol.fullyQualifiedName()) && ce.arguments().size() == 1) {
+    if (symbol != null && hasOneParameter(symbol, ce)) {
       ctx.addIssue(ce, "Use \"np.nonzero\" when only the condition parameter is provided to \"np.where\".");
     }
+  }
+
+  private static boolean hasOneParameter(Symbol symbol, CallExpression ce) {
+    ArgList argList = ce.argumentList();
+    if (argList == null || !"numpy.where".equals(symbol.fullyQualifiedName()) || ce.arguments().size() != 1) {
+      return false;
+    }
+    // At this point the argList is of size 1, and we are concerned with a call to np.where.
+    return !argList.children().get(0).is(Tree.Kind.UNPACKING_EXPR);
   }
 }
