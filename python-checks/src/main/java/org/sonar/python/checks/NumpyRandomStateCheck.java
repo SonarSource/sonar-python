@@ -90,11 +90,10 @@ public class NumpyRandomStateCheck extends PythonSubscriptionCheck {
 
   @Override
   public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, this::checkNumpyRandomState);
+    context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, NumpyRandomStateCheck::checkNumpyRandomState);
   }
 
-  private void checkNumpyRandomState(SubscriptionContext ctx) {
-
+  private static void checkNumpyRandomState(SubscriptionContext ctx) {
     CallExpression call = (CallExpression) ctx.syntaxNode();
     Optional.ofNullable(call.calleeSymbol())
         .map(Symbol::fullyQualifiedName)
