@@ -1,0 +1,64 @@
+<p>This rule raises an issue when direct and indirect equality/inequality checks are made on floats.</p>
+<h2>Why is this an issue?</h2>
+<p>Floating point math is imprecise because of the challenges of storing such values in a binary representation.</p>
+<p>In base 10, the fraction <code>1/3</code> is represented as <code>0.333…​</code> which, for a given number of significant digit, will never exactly
+be <code>1/3</code>. The same problem happens when trying to represent <code>1/10</code> in base 2, with leads to the infinitely repeating fraction
+<code>0.0001100110011…​</code>. This makes floating point representations inherently imprecise.</p>
+<p>Even worse, floating point math is not associative; push a <code>float</code> through a series of simple mathematical operations and the answer
+will be different based on the order of those operation because of the rounding that takes place at each step.</p>
+<p>Even simple floating point assignments are not simple, as can be vizualized using the <code>format</code> function to check for significant
+digits:</p>
+<pre>
+&gt;&gt;&gt; format(0.1, ".17g")
+'0.10000000000000001'
+</pre>
+<p>This can also be vizualized as a fraction using the <code>as_integer_ratio</code> method:</p>
+<pre>
+&gt;&gt;&gt; my_float = 0.1
+&gt;&gt;&gt; numerator, denominator = my_float.as_integer_ratio()
+&gt;&gt;&gt; f"{numerator} / {denominator}"
+'3602879701896397 / 36028797018963968'
+</pre>
+<p>Therefore, the use of the equality (<code>==</code>) and inequality (<code>!=</code>) operators on <code>float</code> values is almost always
+erroneous.</p>
+<h2>How to fix it</h2>
+<p>Whenever attempting to compare float values, it is important to consider the inherent imprecision of floating-point arithmetic.</p>
+<p>One common solution to this problem is to use a tolerance value (also called epsilon) to define an acceptable range of difference between two
+floats. A tolerance value may be relative (based on the magnitude of the numbers being compared) or absolute. Note that comparing a value to 0 is a
+special case: as it has no magnitude, it is important to use an absolute tolerance value.</p>
+<p>The <code>math.isclose</code> function allows to compare floats with a relative and absolute tolerance. One should however be careful when
+comparing values to 0, as by default, the absolute tolerance of <code>math.isclose</code> is <code>0.0</code> (this case is covered by rule
+{rule:python:S6727}) . Depending on the library you’re using, equivalent functions exist, with possibly different default tolerances (e.g
+<code>numpy.isclose</code> or <code>torch.isclose</code> which are respectively designed to work with <code>numpy</code> arrays and
+<code>pytorch</code> tensors).</p>
+<p>If precise decimal arithmetic is needed, another option is to use the <code>Decimal</code> class of the <code>decimal</code> module, which allows
+for exact decimal arithmetic.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+def foo(a, b):
+    return a == b - 0.1
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+import math
+def foo(a, b):
+    return math.isclose(a, b - 0.1, rel_tol=1e-09, abs_tol=1e-09)
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Python Documentation - <a
+  href="https://docs.python.org/3/tutorial/floatingpoint.html#floating-point-arithmetic-issues-and-limitations">Floating Point Arithmetic: Issues and
+  Limitations</a> </li>
+  <li> Python Documentation - <a href="https://docs.python.org/3/library/decimal.html#module-decimal">Decimal fixed point and floating point
+  arithmetic</a> </li>
+  <li> NumPy Documentation - <a href="https://numpy.org/doc/stable/reference/generated/numpy.isclose.html">numpy.isclose</a> </li>
+  <li> PyTorch Documentation - <a href="https://pytorch.org/docs/stable/generated/torch.isclose.html">torch.isclose</a> </li>
+</ul>
+<h3>Related rules</h3>
+<ul>
+  <li> {rule:python:S6727} - The <code>abs_tol</code> parameter should be provided when using <code>math.isclose</code> to compare values to
+  <code>0</code> </li>
+</ul>
+

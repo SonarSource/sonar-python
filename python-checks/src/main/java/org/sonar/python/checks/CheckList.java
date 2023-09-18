@@ -198,6 +198,7 @@ public final class CheckList {
       FilePermissionsCheck.class,
       FileHeaderCopyrightCheck.class,
       FixmeCommentCheck.class,
+      FloatingPointEqualityCheck.class,
       FunctionComplexityCheck.class,
       FunctionNameCheck.class,
       FunctionReturnTypeCheck.class,
