@@ -63,7 +63,6 @@ public class NumpyWhereOneConditionCheck extends PythonSubscriptionCheck {
     if (keywordArgument == null) {
       return true;
     }
-    Optional<String> optName = Optional.ofNullable(keywordArgument.name()).filter(name -> "condition".equals(keywordArgument.name()));
-    return optName.isPresent();
+    return Optional.ofNullable(keywordArgument.name()).filter(name -> "condition".equals(keywordArgument.name())).isPresent();
   }
 }
