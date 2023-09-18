@@ -32,7 +32,7 @@ import org.sonar.plugins.python.api.tree.Tree;
 @Rule(key = "S6711")
 public class NumpyRandomStateCheck extends PythonSubscriptionCheck {
 
-  private static final String MESSAGE = "Do not use legacy functions that relies on \"numpy.random.RandomState\", use their \"numpy.random.Generator\" counterpart instead.";
+  private static final String MESSAGE = "Use a \"numpy.random.Generator\" here instead of this legacy function.";
 
   private static final String LEGACY_MODULE_NAME = "numpy.random.RandomState";
   private static final List<String> LEGACY_RANDOM_FUNCTIONS = List.of(
@@ -72,7 +72,6 @@ public class NumpyRandomStateCheck extends PythonSubscriptionCheck {
       "numpy.random.ranf",
       "numpy.random.rayleigh",
       "numpy.random.sample",
-      "numpy.random.seed",
       "numpy.random.set_state",
       "numpy.random.shuffle",
       "numpy.random.standard_cauchy",

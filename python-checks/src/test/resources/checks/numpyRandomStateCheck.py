@@ -2,8 +2,6 @@
 def noncompliant(a, b):
     import numpy as np
 
-    np.random.seed(42)  # Noncompliant {{Do not use legacy functions that relies on "numpy.random.RandomState", use their "numpy.random.Generator" counterpart instead.}}
-#   ^^^^^^^^^^^^^^
     np.random.randn()  # Noncompliant
 #   ^^^^^^^^^^^^^^^
     np.random.beta(a, b)  # Noncompliant
@@ -27,6 +25,9 @@ def noncompliant(a, b):
 
 def compliant(a, b):
     import numpy as np
+
+    np.random.seed(42)  # Compliant: even though this is a legacy function, it is still widely used, raising an issue here would be too noisy.
+
     generator = np.random.default_rng(42)
     generator.standard_normal()
 
