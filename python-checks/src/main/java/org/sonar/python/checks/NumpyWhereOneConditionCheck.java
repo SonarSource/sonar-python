@@ -41,13 +41,7 @@ public class NumpyWhereOneConditionCheck extends PythonSubscriptionCheck {
   private static void checkNumpyWhereCall(SubscriptionContext ctx) {
     CallExpression ce = (CallExpression) ctx.syntaxNode();
     Symbol symbol = ce.calleeSymbol();
-    if (symbol == null) {
-      return;
-    }
-    if (!"numpy.where".equals(symbol.fullyQualifiedName())) {
-      return;
-    }
-    if (hasOneParameter(ce)) {
+    if (symbol != null && "numpy.where".equals(symbol.fullyQualifiedName()) && hasOneParameter(ce)) {
       ctx.addIssue(ce, "Use \"np.nonzero\" when only the condition parameter is provided to \"np.where\".");
     }
   }
@@ -57,7 +51,6 @@ public class NumpyWhereOneConditionCheck extends PythonSubscriptionCheck {
     if (argList.size() != 1 || argList.get(0).is(Tree.Kind.UNPACKING_EXPR)) {
       return false;
     }
-
     RegularArgument regArg = (RegularArgument) argList.get(0);
     Name keywordArgument = regArg.keywordArgument();
     if (keywordArgument == null) {
