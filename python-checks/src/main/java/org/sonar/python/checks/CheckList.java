@@ -271,6 +271,7 @@ public final class CheckList {
       NotDiscoverableTestMethodCheck.class,
       NotImplementedErrorInOperatorMethodsCheck.class,
       NumpyIsNanCheck.class,
+      NumpyRandomSeedCheck.class,
       NumpyRandomStateCheck.class,
       NumpyWhereOneConditionCheck.class,
       UnusedGroupNamesCheck.class,
