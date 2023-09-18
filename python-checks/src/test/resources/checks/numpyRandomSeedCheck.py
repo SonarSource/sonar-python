@@ -23,8 +23,9 @@ def failure():
 
     gen = PCG64DXSM()  # Noncompliant
     #     ^^^^^^^^^^^
-    gen = Philox()  # Noncompliant
-    #     ^^^^^^^^
+    a = None
+    gen = Philox(a)  # Noncompliant
+    #     ^^^^^^^^^
 
     gen = np.random.seed()  # Noncompliant
     #     ^^^^^^^^^^^^^^^^
@@ -45,7 +46,8 @@ def success():
     gen = PCG64(0)
 
     gen = PCG64DXSM(2)
-    gen = Philox(8)
+    a = 8
+    gen = Philox(a)
 
     gen = np.random.seed(13)
     gen = np.seed(seed=9)
