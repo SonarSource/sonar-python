@@ -98,7 +98,7 @@ public class NumpyRandomStateCheck extends PythonSubscriptionCheck {
     Optional.ofNullable(call.calleeSymbol())
         .map(Symbol::fullyQualifiedName)
         .filter(fqn -> fqn.startsWith(LEGACY_MODULE_NAME) || LEGACY_RANDOM_FUNCTIONS.contains(fqn))
-        .ifPresent(symbol -> ctx.addIssue(call.callee(), MESSAGE));
+        .ifPresent(fqn -> ctx.addIssue(call.callee(), MESSAGE));
   }
 
 }
