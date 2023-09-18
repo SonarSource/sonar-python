@@ -29,12 +29,9 @@ import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.CallExpression;
-import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.python.tree.RegularArgumentImpl;
 import org.sonar.python.tree.TreeUtils;
-import org.sonar.python.types.InferredTypes;
 
 @Rule(key = "S6709")
 public class NumpyRandomSeedCheck extends PythonSubscriptionCheck {
@@ -47,7 +44,7 @@ public class NumpyRandomSeedCheck extends PythonSubscriptionCheck {
       "numpy.random.default_rng", SEED_ARG_NAME,
       "numpy.random.SeedSequence", "entropy",
       "numpy.random.PCG64", SEED_ARG_NAME,
-      "numpy.random.PCG64DXSM",SEED_ARG_NAME,
+      "numpy.random.PCG64DXSM", SEED_ARG_NAME,
       "numpy.random.MT19937", SEED_ARG_NAME,
       "numpy.random.SFC64", SEED_ARG_NAME,
       "numpy.random.Philox", SEED_ARG_NAME);
@@ -59,18 +56,17 @@ public class NumpyRandomSeedCheck extends PythonSubscriptionCheck {
     context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, NumpyRandomSeedCheck::checkEmptySeedCall);
   }
 
-  private static void checkEmptySeedCall(SubscriptionContext ctx){
-  CallExpression call = (CallExpression) ctx.syntaxNode();
-  Optional.ofNullable(call.calleeSymbol()).map(Symbol::fullyQualifiedName)
-    .map(SEED_METHODS_TO_CHECK::get)
-    .filter(argName -> !isSeedArgumentPresent(argName, call.arguments()))
-    .ifPresent(fqn -> ctx.addIssue(call, MESSAGE));
+  private static void checkEmptySeedCall(SubscriptionContext ctx) {
+    CallExpression call = (CallExpression) ctx.syntaxNode();
+    Optional.ofNullable(call.calleeSymbol()).map(Symbol::fullyQualifiedName)
+        .map(SEED_METHODS_TO_CHECK::get)
+        .filter(argName -> !isSeedArgumentPresent(argName, call.arguments()))
+        .ifPresent(fqn -> ctx.addIssue(call, MESSAGE));
   }
-  
-  private static boolean isSeedArgumentPresent(String argName, List<Argument> args){
-    RegularArgument arg = TreeUtils.nthArgumentOrKeyword(0, argName, args);
-    return Optional.ofNullable(arg)
-      .map(RegularArgument::expression)
-      .filter(exp -> !exp.is(Tree.Kind.NONE)).isPresent();
+
+  private static boolean isSeedArgumentPresent(String argName, List<Argument> args) {
+    return Optional.ofNullable(TreeUtils.nthArgumentOrKeyword(0, argName, args))
+        .map(RegularArgument::expression)
+        .filter(exp -> !exp.is(Tree.Kind.NONE)).isPresent();
   }
 }
