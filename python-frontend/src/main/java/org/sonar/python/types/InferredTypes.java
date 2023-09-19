@@ -196,15 +196,23 @@ public class InferredTypes {
         return InferredTypes.DICT;
       case TYPE_VAR:
         return Optional.of(type)
+          .filter(InferredTypes::filterTypeVar)
           .map(SymbolsProtos.Type::getFullyQualifiedName)
-          .filter(Predicate.not(String::isEmpty))
-          .filter(Predicate.not("builtins.object"::equals))
           .map(TypeShed::symbolWithFQN)
           .map(InferredTypes::runtimeType)
           .orElseGet(InferredTypes::anyType);
       default:
         return anyType();
     }
+  }
+
+  private static boolean filterTypeVar(SymbolsProtos.Type type) {
+    return Optional.of(type)
+      .filter(Predicate.not(t -> t.getPrettyPrintedName().endsWith(".Self")))
+      .map(SymbolsProtos.Type::getFullyQualifiedName)
+      .filter(Predicate.not(String::isEmpty))
+      .filter(Predicate.not("builtins.object"::equals))
+      .isPresent();
   }
 
   @CheckForNull
