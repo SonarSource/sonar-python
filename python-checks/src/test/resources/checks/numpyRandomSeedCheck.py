@@ -32,12 +32,20 @@ def failure():
     gen = np.seed(None)  # Noncompliant
     #     ^^^^^^^^^^^^^
 
+
 def success():
     gen = np.random.default_rng(42)
 
     gen = np.random.SeedSequence(42)
     gen = np.random.SeedSequence(entropy=[123])
     gen = np.random.SeedSequence(123, spawn_key=[123])
+
+    def test_default_value(seed=None):
+        np.random.SeedSequence(seed)
+
+
+    def test_seed(seed):
+        np.random.SeedSequence(seed)
 
     from numpy.random import SFC64, MT199937, PCG64, PCG64DXSM, Philox
 

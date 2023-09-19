@@ -78,7 +78,7 @@ public class NumpyRandomSeedCheck extends PythonSubscriptionCheck {
   private boolean isAssignedNone(Expression exp) {
     if(exp.is(Tree.Kind.NAME)){
       Set<Expression> values = this.reachingDefinitionsAnalysis.valuesAtLocation((Name)exp);
-      return values.stream().allMatch(value -> value.is(Tree.Kind.NONE));
+      return !values.isEmpty() && values.stream().allMatch(value -> value.is(Tree.Kind.NONE));
     }
     return false;
   }
