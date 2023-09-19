@@ -29,6 +29,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
@@ -193,6 +194,14 @@ public class InferredTypes {
         return InferredTypes.NONE;
       case TYPED_DICT:
         return InferredTypes.DICT;
+      case TYPE_VAR:
+        return Optional.of(type)
+          .map(SymbolsProtos.Type::getFullyQualifiedName)
+          .filter(Predicate.not(String::isEmpty))
+          .filter(Predicate.not("builtins.object"::equals))
+          .map(TypeShed::symbolWithFQN)
+          .map(InferredTypes::runtimeType)
+          .orElseGet(InferredTypes::anyType);
       default:
         return anyType();
     }

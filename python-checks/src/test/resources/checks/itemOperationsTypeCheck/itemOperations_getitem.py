@@ -29,7 +29,7 @@ def builtins_not_supporting_getitem():
   mydict.items()[0] # Noncompliant
 
   # iterators
-  iter(mylist)[0]  # FN Noncompliant
+  iter(mylist)[0]  # Noncompliant
 
   # Numeric types
   from fractions import Fraction

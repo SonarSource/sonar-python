@@ -21,7 +21,7 @@ def builtin_types_not_supporting_delitem():
   del mydict.items()[0]  # Noncompliant
 
   # iterators
-  del iter(mylist)[0]  # FN Noncompliant
+  del iter(mylist)[0]  # Noncompliant
 
   # Numeric types
   from fractions import Fraction

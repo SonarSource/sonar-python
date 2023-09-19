@@ -24,7 +24,7 @@ def builtin_types_not_supporting_setitem():
   mydict.items()[0] = 42  # Noncompliant
 
   # iterators
-  iter(mylist)[0] = 42  # FN Noncompliant
+  iter(mylist)[0] = 42  # Noncompliant
 
   # Numeric types
   from fractions import Fraction
