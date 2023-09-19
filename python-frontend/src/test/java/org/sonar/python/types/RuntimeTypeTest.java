@@ -280,6 +280,14 @@ class RuntimeTypeTest {
   }
 
   @Test
+  void test_list_and_tuple_are_not_compatible() {
+    ClassSymbolImpl listType = new ClassSymbolImpl("list", "list");
+    ClassSymbolImpl tupleType = new ClassSymbolImpl("tuple", "tuple");
+    assertThat(new RuntimeType(listType).isCompatibleWith(new RuntimeType(tupleType))).isFalse();
+    assertThat(new RuntimeType(tupleType).isCompatibleWith(new RuntimeType(listType))).isFalse();
+  }
+
+  @Test
   void test_mustBeOrExtend() {
     ClassSymbolImpl x1 = new ClassSymbolImpl("x1", "x1");
     ClassSymbolImpl x2 = new ClassSymbolImpl("x2", "x2");

@@ -92,6 +92,8 @@ public class InferredTypes {
   // https://github.com/python/mypy/blob/e97377c454a1d5c019e9c56871d5f229db6b47b2/mypy/semanal_classprop.py#L16-L46
   private static final Map<String, Set<String>> HARDCODED_COMPATIBLE_TYPES = new HashMap<>();
 
+  private static final Set<Set<String>> HARDCODED_INCOMPATIBLE_TYPES = Set.of(Set.of("tuple", "list"));
+
   static {
     HARDCODED_COMPATIBLE_TYPES.put(BuiltinTypes.INT, new HashSet<>(Arrays.asList(BuiltinTypes.FLOAT, BuiltinTypes.COMPLEX)));
     HARDCODED_COMPATIBLE_TYPES.put(BuiltinTypes.FLOAT, new HashSet<>(Collections.singletonList(BuiltinTypes.COMPLEX)));
@@ -364,12 +366,22 @@ public class InferredTypes {
     boolean isDuckTypeCompatible = !"NoneType".equals(otherFullyQualifiedName) &&
       expectedTypeClass.declaredMembers().stream().allMatch(m -> actualTypeClass.resolveMember(m.name()).isPresent());
     boolean canBeOrExtend = otherFullyQualifiedName == null || actualTypeClass.canBeOrExtend(otherFullyQualifiedName);
-    return areHardcodedCompatible || isDuckTypeCompatible || canBeOrExtend;
+    boolean areHardcodedIncompatible = areHardCodedIncompatible(actualTypeClass, expectedTypeClass);
+    return (areHardcodedCompatible || isDuckTypeCompatible || canBeOrExtend) && !areHardcodedIncompatible;
   }
 
   private static boolean areHardcodedCompatible(ClassSymbol actual, ClassSymbol expected) {
     Set<String> compatibleTypes = HARDCODED_COMPATIBLE_TYPES.getOrDefault(actual.fullyQualifiedName(), Collections.emptySet());
     return compatibleTypes.stream().anyMatch(expected::canBeOrExtend);
+  }
+
+  private static boolean areHardCodedIncompatible(ClassSymbol actual, ClassSymbol expected) {
+    return HARDCODED_INCOMPATIBLE_TYPES.contains(
+      Stream.of(actual, expected)
+        .map(ClassSymbol::fullyQualifiedName)
+        .filter(Objects::nonNull)
+        .collect(Collectors.toSet())
+    );
   }
 
   public static boolean containsDeclaredType(InferredType type) {
