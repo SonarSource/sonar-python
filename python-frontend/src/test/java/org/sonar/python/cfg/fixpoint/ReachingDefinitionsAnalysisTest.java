@@ -19,16 +19,6 @@
  */
 package org.sonar.python.cfg.fixpoint;
 
-import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
-import org.sonar.plugins.python.api.PythonFile;
-import org.sonar.plugins.python.api.tree.AnnotatedAssignment;
-import org.sonar.plugins.python.api.tree.Expression;
-import org.sonar.plugins.python.api.tree.ExpressionStatement;
-import org.sonar.plugins.python.api.tree.FileInput;
-import org.sonar.plugins.python.api.tree.Name;
-import org.sonar.plugins.python.api.tree.NumericLiteral;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.EXPRESSION_STMT;
 import static org.sonar.python.PythonTestUtils.getFirstDescendant;
@@ -36,6 +26,15 @@ import static org.sonar.python.PythonTestUtils.getLastDescendant;
 import static org.sonar.python.PythonTestUtils.lastExpression;
 import static org.sonar.python.PythonTestUtils.lastExpressionInFunction;
 import static org.sonar.python.PythonTestUtils.parse;
+
+import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
+import org.sonar.plugins.python.api.PythonFile;
+import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.ExpressionStatement;
+import org.sonar.plugins.python.api.tree.FileInput;
+import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.tree.NumericLiteral;
 
 class ReachingDefinitionsAnalysisTest {
   private final PythonFile file = Mockito.mock(PythonFile.class, "file1.py");
@@ -53,6 +52,11 @@ class ReachingDefinitionsAnalysisTest {
     assertThat(analysis.valuesAtLocation(x)).extracting(ReachingDefinitionsAnalysisTest::getValueAsString).containsExactly("42");
   }
 
+  @Test
+  void valuesAtLocation_single_annotation_only() {
+    Name x = (Name) lastExpressionInFunction("x: int; x");
+    assertThat(analysis.valuesAtLocation(x)).extracting(ReachingDefinitionsAnalysisTest::getValueAsString).isEmpty();
+  }
 
   @Test
   void valuesAtLocation_multiple_assignments() {
