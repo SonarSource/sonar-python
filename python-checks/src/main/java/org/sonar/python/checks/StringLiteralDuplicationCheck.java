@@ -46,7 +46,7 @@ public class StringLiteralDuplicationCheck extends PythonVisitorCheck {
   private static final int DEFAULT_THRESHOLD = 3;
   private static final Pattern BASIC_EXCLUSION_PATTERN = Pattern.compile("[_\\-a-zA-Z0-9]+");
 
-  private static final Pattern FORMATTING_PATTERN = Pattern.compile("[0-9{} .-_%:dfrsymhYMHS]+");
+  private static final Pattern FORMATTING_PATTERN = Pattern.compile("[0-9{} .\\-_%:dfrsymhYMHS<>]+");
   private static final Pattern COLOR_PATTERN = Pattern.compile("#[0-9a-fA-F]{6}");
 
   private static final String DEFAULT_CUSTOM_EXCLUSION_PATTERN = "";
