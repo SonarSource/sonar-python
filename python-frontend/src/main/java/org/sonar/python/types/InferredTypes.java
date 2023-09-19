@@ -91,7 +91,8 @@ public class InferredTypes {
   private static final String BYTES = "bytes";
   // https://github.com/python/mypy/blob/e97377c454a1d5c019e9c56871d5f229db6b47b2/mypy/semanal_classprop.py#L16-L46
   private static final Map<String, Set<String>> HARDCODED_COMPATIBLE_TYPES = new HashMap<>();
-  private static final Set<String> HARDCODED_INCOMPATIBLE_TYPES = Set.of("tuple", "list");
+
+  private static final Set<Set<String>> HARDCODED_INCOMPATIBLE_TYPES = Set.of(Set.of("tuple", "list"));
 
   static {
     HARDCODED_COMPATIBLE_TYPES.put(BuiltinTypes.INT, new HashSet<>(Arrays.asList(BuiltinTypes.FLOAT, BuiltinTypes.COMPLEX)));
@@ -375,14 +376,12 @@ public class InferredTypes {
   }
 
   private static boolean areHardCodedIncompatible(ClassSymbol actual, ClassSymbol expected) {
-    String expectedFqn = expected.fullyQualifiedName();
-    String actualFqn = actual.fullyQualifiedName();
-    if (expectedFqn == null || actualFqn == null) {
-      return false;
-    }
-    return HARDCODED_INCOMPATIBLE_TYPES.contains(actualFqn)
-      && HARDCODED_INCOMPATIBLE_TYPES.contains(expectedFqn)
-      && !expectedFqn.equals(actualFqn);
+    return HARDCODED_INCOMPATIBLE_TYPES.contains(
+      Stream.of(actual, expected)
+        .map(ClassSymbol::fullyQualifiedName)
+        .filter(Objects::nonNull)
+        .collect(Collectors.toSet())
+    );
   }
 
   public static boolean containsDeclaredType(InferredType type) {
