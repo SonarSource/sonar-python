@@ -35,6 +35,7 @@ public class NumpyRandomStateCheck extends PythonSubscriptionCheck {
   private static final String MESSAGE = "Use a \"numpy.random.Generator\" here instead of this legacy function.";
 
   private static final String LEGACY_MODULE_NAME = "numpy.random.RandomState";
+  private static final String LEGACY_FUNCTION_EXCEPTION = "numpy.random.RandomState.seed";
   private static final List<String> LEGACY_RANDOM_FUNCTIONS = List.of(
       "numpy.random.beta",
       "numpy.random.binomial",
@@ -84,8 +85,7 @@ public class NumpyRandomStateCheck extends PythonSubscriptionCheck {
       "numpy.random.vonmises",
       "numpy.random.wald",
       "numpy.random.weibull",
-      "numpy.random.zipf"
-  );
+      "numpy.random.zipf");
 
   @Override
   public void initialize(Context context) {
@@ -96,7 +96,8 @@ public class NumpyRandomStateCheck extends PythonSubscriptionCheck {
     CallExpression call = (CallExpression) ctx.syntaxNode();
     Optional.ofNullable(call.calleeSymbol())
         .map(Symbol::fullyQualifiedName)
-        .filter(fqn -> fqn.startsWith(LEGACY_MODULE_NAME) || LEGACY_RANDOM_FUNCTIONS.contains(fqn))
+        .filter(fqn -> !LEGACY_FUNCTION_EXCEPTION.equals(fqn) &&
+            (fqn.startsWith(LEGACY_MODULE_NAME) || LEGACY_RANDOM_FUNCTIONS.contains(fqn)))
         .ifPresent(fqn -> ctx.addIssue(call.callee(), MESSAGE));
   }
 

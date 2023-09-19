@@ -26,7 +26,8 @@ def noncompliant(a, b):
 def compliant(a, b):
     import numpy as np
 
-    np.random.seed(42)  # Compliant: even though this is a legacy function, it is still widely used, raising an issue here would be too noisy.
+    np.random.RandomState.seed(42)
+    np.random.seed(42)  # Compliant: even though seed is a legacy function, it is still widely used, raising an issue here would be too noisy.
 
     generator = np.random.default_rng(42)
     generator.standard_normal()
