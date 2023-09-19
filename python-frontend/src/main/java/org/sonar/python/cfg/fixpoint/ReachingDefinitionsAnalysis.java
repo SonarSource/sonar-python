@@ -36,7 +36,6 @@ import java.util.stream.Collectors;
 
 import javax.annotation.CheckForNull;
 
-import org.jetbrains.annotations.Nullable;
 import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.cfg.CfgBlock;
 import org.sonar.plugins.python.api.cfg.ControlFlowGraph;
@@ -49,7 +48,6 @@ import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.python.tree.AnnotatedAssignmentImpl;
 import org.sonar.python.tree.TreeUtils;
 
 /**
