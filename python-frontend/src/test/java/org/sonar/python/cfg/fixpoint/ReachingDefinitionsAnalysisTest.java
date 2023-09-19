@@ -22,6 +22,7 @@ package org.sonar.python.cfg.fixpoint;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.sonar.plugins.python.api.PythonFile;
+import org.sonar.plugins.python.api.tree.AnnotatedAssignment;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.ExpressionStatement;
 import org.sonar.plugins.python.api.tree.FileInput;
@@ -47,8 +48,21 @@ class ReachingDefinitionsAnalysisTest {
   }
 
   @Test
+  void valuesAtLocation_single_annotated_assignment() {
+    Name x = (Name) lastExpressionInFunction("x: int = 42; x");
+    assertThat(analysis.valuesAtLocation(x)).extracting(ReachingDefinitionsAnalysisTest::getValueAsString).containsExactly("42");
+  }
+
+
+  @Test
   void valuesAtLocation_multiple_assignments() {
     Name x = (Name) lastExpressionInFunction("x = 1; x = 2; x");
+    assertThat(analysis.valuesAtLocation(x)).extracting(ReachingDefinitionsAnalysisTest::getValueAsString).containsExactly("2");
+  }
+
+  @Test
+  void valuesAtLocation_multiple_annotated_assignments() {
+    Name x = (Name) lastExpressionInFunction("x:str = \"1\"; x: int = 2; x");
     assertThat(analysis.valuesAtLocation(x)).extracting(ReachingDefinitionsAnalysisTest::getValueAsString).containsExactly("2");
   }
 
@@ -67,6 +81,12 @@ class ReachingDefinitionsAnalysisTest {
   @Test
   void valuesAtLocation_outside_function() {
     Name x = (Name) lastExpression("x = 42; x");
+    assertThat(analysis.valuesAtLocation(x)).isEmpty();
+  }
+
+  @Test
+  void valuesAtLocation_outside_function_annotated() {
+    Name x = (Name) lastExpression("x: int = 42; x");
     assertThat(analysis.valuesAtLocation(x)).isEmpty();
   }
 
