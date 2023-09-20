@@ -34,8 +34,6 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import javax.annotation.CheckForNull;
-
 import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.cfg.CfgBlock;
 import org.sonar.plugins.python.api.cfg.ControlFlowGraph;
@@ -49,8 +47,6 @@ import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.tree.TreeUtils;
-
-import com.google.protobuf.Option;
 
 /**
  * https://en.wikipedia.org/wiki/Reaching_definition
@@ -204,7 +200,7 @@ public class ReachingDefinitionsAnalysis {
   }
 
   private void updateStateForAssignment(AssignmentStatement element, Map<Symbol, Set<Expression>> programState) {
-    List<Expression> lhsExpressions = ((AssignmentStatement) element).lhsExpressions().stream()
+    List<Expression> lhsExpressions = element.lhsExpressions().stream()
         .flatMap(exprList -> exprList.expressions().stream())
         .collect(Collectors.toList());
     Expression lhsExpression = getLhsExpression(lhsExpressions);
@@ -239,7 +235,7 @@ public class ReachingDefinitionsAnalysis {
     programState.put(symbol, assignedValues);
   }
 
-  private Expression getLhsExpression(List<Expression> lhsExpressions) {
+  private static Expression getLhsExpression(List<Expression> lhsExpressions) {
     if (lhsExpressions.size() == 1 && lhsExpressions.get(0).is(Tree.Kind.NAME)) {
       return lhsExpressions.get(0);
     }
