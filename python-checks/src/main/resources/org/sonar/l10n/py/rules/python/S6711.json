@@ -1,0 +1,26 @@
+{
+  "title": "numpy.random.Generator should be preferred to numpy.random.RandomState",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "numpy",
+    "data-science"
+  ],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-6711",
+  "sqKey": "S6711",
+  "scope": "All",
+  "quickfix": "unknown",
+  "code": {
+    "impacts": {
+      "MAINTAINABILITY": "MEDIUM",
+      "RELIABILITY": "MEDIUM",
+      "SECURITY": "LOW"
+    },
+    "attribute": "CONVENTIONAL"
+  }
+}
