@@ -34,6 +34,7 @@ import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
+import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.cfg.fixpoint.ForwardAnalysis;
@@ -43,17 +44,18 @@ import org.sonar.python.types.TypeInference.Assignment;
 import org.sonar.python.types.TypeInference.MemberAccess;
 
 import static org.sonar.plugins.python.api.tree.Tree.Kind.ASSIGNMENT_STMT;
+import static org.sonar.plugins.python.api.tree.Tree.Kind.COMPOUND_ASSIGNMENT;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.NAME;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.REGULAR_ARGUMENT;
 
 class FlowSensitiveTypeInference extends ForwardAnalysis {
   private final Set<Symbol> trackedVars;
   private final Map<QualifiedExpression, MemberAccess> memberAccessesByQualifiedExpr;
-  private final Map<AssignmentStatement, Assignment> assignmentsByAssignmentStatement;
+  private final Map<Statement, Assignment> assignmentsByAssignmentStatement;
   private final Map<String, InferredType> parameterTypesByName;
 
   public FlowSensitiveTypeInference(Set<Symbol> trackedVars, Map<QualifiedExpression, MemberAccess> memberAccessesByQualifiedExpr,
-                                    Map<AssignmentStatement, Assignment> assignmentsByAssignmentStatement, Map<String, InferredType> parameterTypesByName) {
+                                    Map<Statement, Assignment> assignmentsByAssignmentStatement, Map<String, InferredType> parameterTypesByName) {
     this.trackedVars = trackedVars;
     this.memberAccessesByQualifiedExpr = memberAccessesByQualifiedExpr;
     this.assignmentsByAssignmentStatement = assignmentsByAssignmentStatement;
@@ -80,6 +82,9 @@ class FlowSensitiveTypeInference extends ForwardAnalysis {
       handleAssignment(assignment, state);
       // update lhs
       assignment.lhsExpressions().forEach(lhs -> updateTree(lhs, state));
+    } else if (element.is(COMPOUND_ASSIGNMENT)) {
+      // Assumption: compound assignments don't change types
+      updateTree(element, state);
     } else {
       element.accept(new IsInstanceVisitor(state));
       updateTree(element, state);

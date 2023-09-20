@@ -156,6 +156,40 @@ class TypeInferenceTest {
   }
 
   @Test
+  void compound_statement_str() {
+    assertThat(lastExpressionInFunction(
+      "a = 'hello '",
+      "b = 'world'",
+      "a += b",
+      "a").type()).isEqualTo(STR);
+  }
+
+  @Test
+  void compound_statement_list() {
+    assertThat(lastExpressionInFunction(
+      "a = []",
+      "b = 'world'",
+      "a += b",
+      "a").type()).isEqualTo(LIST);
+  }
+
+  @Test
+  void compound_assignment_no_symbol() {
+    assertThat(lastExpressionInFunction(
+      "nonlocal x",
+      "x += 10",
+      "x").type()).isEqualTo(anyType());
+  }
+
+  @Test
+  void reassignment() {
+    assertThat(lastExpressionInFunction(
+      "a = 'hello'",
+      "a = 42",
+      "a").type()).isEqualTo(INT);
+  }
+
+  @Test
   void variable_read_appearing_before_initialization() {
     assertThat(lastExpressionInFunction(
       "for i in range(3):",

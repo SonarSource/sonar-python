@@ -155,5 +155,5 @@ class MyTest(unittest.TestCase):
     self.assertEqual()
     self.assertEqual(*a, 5)
     self.assertEqual(5, *a)
-    self.assertEqual("5", b)
+    self.assertEqual("5", b)  # Noncompliant
     a.assertEqual("string", True)
