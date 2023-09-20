@@ -87,7 +87,7 @@ public class NumpyListOverGeneratorCheck extends PythonSubscriptionCheck {
       .filter(expr -> expr.is(Tree.Kind.NAME))
       .map(Name.class::cast)
       .map(name -> this.reachingDefinitionsAnalysis.valuesAtLocation(name))
-      .filter(this::checkSetProperties)
+      .filter(NumpyListOverGeneratorCheck::checkSetProperties)
       .isPresent();
   }
 
