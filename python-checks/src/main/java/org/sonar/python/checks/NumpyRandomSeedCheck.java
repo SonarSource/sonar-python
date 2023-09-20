@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Predicate;
 
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
@@ -56,9 +57,11 @@ public class NumpyRandomSeedCheck extends PythonSubscriptionCheck {
   private static final String MESSAGE = "Provide a seed for this random generator.";
 
   private ReachingDefinitionsAnalysis reachingDefinitionsAnalysis;
+
   @Override
   public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, ctx -> this.reachingDefinitionsAnalysis = new ReachingDefinitionsAnalysis(ctx.pythonFile()));
+    context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT,
+        ctx -> this.reachingDefinitionsAnalysis = new ReachingDefinitionsAnalysis(ctx.pythonFile()));
     context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, this::checkEmptySeedCall);
   }
 
@@ -76,10 +79,10 @@ public class NumpyRandomSeedCheck extends PythonSubscriptionCheck {
   }
 
   private boolean isAssignedNone(Expression exp) {
-    if(exp.is(Tree.Kind.NAME)){
-      Set<Expression> values = this.reachingDefinitionsAnalysis.valuesAtLocation((Name)exp);
-      return !values.isEmpty() && values.stream().allMatch(value -> value.is(Tree.Kind.NONE));
-    }
-    return false;
+    return Optional.of(exp)
+        .flatMap(TreeUtils.toOptionalInstanceOfMapper(Name.class))
+        .map(reachingDefinitionsAnalysis::valuesAtLocation)
+        .filter(Predicate.not(Set::isEmpty))
+        .filter(values -> values.stream().allMatch(value -> value.is(Tree.Kind.NONE))).isPresent();
   }
 }
