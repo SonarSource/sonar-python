@@ -212,5 +212,5 @@ def logging_api():
     logging.basicConfig(format="42", force=True)  # OK
 
 def foo(day, tz):
-    b = datetime.date.fromordinal(day).replace(tzinfo=tz) # FN
+    b = datetime.date.fromordinal(day).replace(tzinfo=tz) # FN SONARPY-1472
     a = datetime.datetime.fromordinal(day).replace(tzinfo=tz) # OK
