@@ -24,15 +24,21 @@ import java.util.Optional;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
+import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.quickfix.TextEditUtils;
 
 @Rule(key = "S6729")
 public class NumpyWhereOneConditionCheck extends PythonSubscriptionCheck {
+
+  private static final String MESSAGE = "Use \"np.nonzero\" when only the condition parameter is provided to \"np.where\".";
+
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, NumpyWhereOneConditionCheck::checkNumpyWhereCall);
@@ -41,9 +47,29 @@ public class NumpyWhereOneConditionCheck extends PythonSubscriptionCheck {
   private static void checkNumpyWhereCall(SubscriptionContext ctx) {
     CallExpression ce = (CallExpression) ctx.syntaxNode();
     Symbol symbol = ce.calleeSymbol();
-    if (symbol != null && "numpy.where".equals(symbol.fullyQualifiedName()) && hasOneParameter(ce)) {
-      ctx.addIssue(ce, "Use \"np.nonzero\" when only the condition parameter is provided to \"np.where\".");
-    }
+    Optional.ofNullable(symbol)
+      .map(Symbol::fullyQualifiedName)
+      .filter("numpy.where"::equals)
+      .filter(fqn -> hasOneParameter(ce))
+      .ifPresent(fqn -> {
+        PreciseIssue issue = ctx.addIssue(ce, MESSAGE);
+        addQuickFix(ce, issue);
+      });
+  }
+
+  private static void addQuickFix(CallExpression ce, PreciseIssue issue) {
+    Optional.of(ce.callee())
+      .filter(exp -> exp.is(Tree.Kind.QUALIFIED_EXPR))
+      .map(QualifiedExpression.class::cast)
+      .map(QualifiedExpression::name)
+      .map(NumpyWhereOneConditionCheck::getQuickFix)
+      .ifPresent(issue::addQuickFix);
+  }
+
+  private static PythonQuickFix getQuickFix(Name qe) {
+    return PythonQuickFix.newQuickFix("Replace numpy.where with numpy.nonzero")
+      .addTextEdit((TextEditUtils.replace(qe, "nonzero")))
+      .build();
   }
 
   private static boolean hasOneParameter(CallExpression ce) {
