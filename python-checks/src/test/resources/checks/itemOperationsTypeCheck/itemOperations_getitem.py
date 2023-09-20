@@ -203,4 +203,4 @@ from ctypes import cast
 
 def ctypes_cast(buf, sal):
   addrList = cast(buf, POINTER(sal))
-  addrCount = addrList[0].iAddressCount # FN
+  addrCount = addrList[0].iAddressCount # FN ref: SONARPY-1477

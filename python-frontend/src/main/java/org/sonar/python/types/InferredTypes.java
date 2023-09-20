@@ -208,7 +208,7 @@ public class InferredTypes {
 
   private static final Set<String> EXCLUDING_TYPE_VAR_FQN_PATTERNS = Set.of(
     "^builtins\\.object$",
-    "^_ctypes\\._CanCastTo$");
+    "^_ctypes\\._CanCastTo$"); // ref: SONARPY-1477
 
   private static boolean filterTypeVar(SymbolsProtos.Type type) {
     return Optional.of(type)
