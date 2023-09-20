@@ -35,7 +35,11 @@ public class NumpyRandomStateCheck extends PythonSubscriptionCheck {
   private static final String MESSAGE = "Use a \"numpy.random.Generator\" here instead of this legacy function.";
 
   private static final String LEGACY_MODULE_NAME = "numpy.random.RandomState";
-  private static final String LEGACY_FUNCTION_EXCEPTION = "numpy.random.RandomState.seed";
+  private static final List<String> LEGACY_FUNCTION_EXCEPTIONS = List.of(
+      "numpy.random.RandomState.get_state",
+      "numpy.random.RandomState.set_state",
+      "numpy.random.RandomState.seed");
+
   private static final List<String> LEGACY_RANDOM_FUNCTIONS = List.of(
       "numpy.random.beta",
       "numpy.random.binomial",
@@ -47,7 +51,6 @@ public class NumpyRandomStateCheck extends PythonSubscriptionCheck {
       "numpy.random.f",
       "numpy.random.gamma",
       "numpy.random.geometric",
-      "numpy.random.get_state",
       "numpy.random.gumbel",
       "numpy.random.hypergeometric",
       "numpy.random.laplace",
@@ -73,7 +76,6 @@ public class NumpyRandomStateCheck extends PythonSubscriptionCheck {
       "numpy.random.ranf",
       "numpy.random.rayleigh",
       "numpy.random.sample",
-      "numpy.random.set_state",
       "numpy.random.shuffle",
       "numpy.random.standard_cauchy",
       "numpy.random.standard_exponential",
@@ -96,7 +98,7 @@ public class NumpyRandomStateCheck extends PythonSubscriptionCheck {
     CallExpression call = (CallExpression) ctx.syntaxNode();
     Optional.ofNullable(call.calleeSymbol())
         .map(Symbol::fullyQualifiedName)
-        .filter(fqn -> !LEGACY_FUNCTION_EXCEPTION.equals(fqn) &&
+        .filter(fqn -> !LEGACY_FUNCTION_EXCEPTIONS.contains(fqn) &&
             (fqn.startsWith(LEGACY_MODULE_NAME) || LEGACY_RANDOM_FUNCTIONS.contains(fqn)))
         .ifPresent(fqn -> ctx.addIssue(call.callee(), MESSAGE));
   }

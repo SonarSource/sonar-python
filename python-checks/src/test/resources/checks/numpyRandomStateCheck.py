@@ -28,6 +28,10 @@ def compliant(a, b):
 
     np.random.RandomState.seed(42)
     np.random.seed(42)  # Compliant: even though seed is a legacy function, it is still widely used, raising an issue here would be too noisy.
+    np.random.RandomState.set_state() # Compliant: even though seed is a legacy function, we can not provide a direct alternative.
+    np.random.set_state()
+    np.random.RandomState.get_state()
+    np.random.get_state()
 
     generator = np.random.default_rng(42)
     generator.standard_normal()
