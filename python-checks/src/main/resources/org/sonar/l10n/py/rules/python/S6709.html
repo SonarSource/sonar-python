@@ -1,0 +1,71 @@
+<p>This rule raises an issue when random number generators do not specify a seed parameter.</p>
+<h2>Why is this an issue?</h2>
+<p>Data science and machine learning tasks make extensive use of random number generation. It may, for example, be used for:</p>
+<ul>
+  <li> Model initialization
+    <ul>
+      <li> Randomness is used to initialize the parameters of machine learning models. Initializing parameters with random values helps to break
+      symmetry and prevents models from getting stuck in local optima during training. By providing a random starting point, the model can explore
+      different regions of the parameter space and potentially find better solutions. </li>
+    </ul>  </li>
+  <li> Regularization techniques
+    <ul>
+      <li> Randomness is used to introduce noise into the learning process. Techniques like dropout and data augmentation use random numbers to
+      randomly drop or modify features or samples during training. This helps to regularize the model, reduce overfitting, and improve generalization
+      performance. </li>
+    </ul>  </li>
+  <li> Cross-validation and bootstrapping
+    <ul>
+      <li> Randomness is often used in techniques like cross-validation, where data is split into multiple subsets. By using a predictable seed, the
+      same data splits can be generated, allowing for fair and consistent model evaluation. </li>
+    </ul>  </li>
+  <li> Hyperparameter tuning
+    <ul>
+      <li> Many machine learning algorithms have hyperparameters that need to be tuned for optimal performance. Randomness is often used in techniques
+      like random search or Bayesian optimization to explore the hyperparameter space. By using a fixed seed, the same set of hyperparameters can be
+      explored, making the tuning process more controlled and reproducible. </li>
+    </ul>  </li>
+  <li> Simulation and synthetic data generation
+    <ul>
+      <li> Randomness is often used in techniques such as data augmentation and synthetic data generation to generate diverse and realistic datasets.
+      </li>
+    </ul>  </li>
+</ul>
+<p>To ensure that results are reproducible, it is important to use a predictable seed in this context.</p>
+<p>The preferred way to do this in <code>numpy</code> is by instantiating a <code>Generator</code> object, typically through
+<code>numpy.random.default_rng</code>, which should be provided with a seed parameter.</p>
+<p>Note that a global seed for <code>RandomState</code> can be set using <code>numpy.random.seed</code> or <code>numpy.seed</code>, this will set the
+seed for <code>RandomState</code> methods such as <code>numpy.random.randn</code>. This approach is, however, deprecated and <code>Generator</code>
+should be used instead. This is reported by rule {rule:python:S6711}.</p>
+<h3>Exception</h3>
+<p>In contexts that are not related to data science and machine learning, having a predictable seed may not be the desired behavior. Therefore, this
+rule will only raise issues if machine learning and data science libraries are being used.</p>
+<h2>How to fix it</h2>
+<p>To fix this issue, provide a predictable seed to the random number generator.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+import numpy as np
+
+def foo():
+    generator = np.random.default_rng()  # Noncompliant: no seed parameter is provided
+    x = generator.uniform()
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+import numpy as np
+
+def foo():
+    generator = np.random.default_rng(42)  # Compliant
+    x = generator.uniform()
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> NumPy documentation - <a href="https://numpy.org/neps/nep-0019-rng-policy.html">NEP 19 RNG Policy</a> </li>
+</ul>
+<h3>Related rules</h3>
+<ul>
+  <li> {rule:python:S6711} - <code>numpy.random.Generator</code> should be preferred to <code>numpy.random.RandomState</code> </li>
+</ul>
+

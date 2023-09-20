@@ -1,0 +1,26 @@
+{
+  "title": "Results that depend on random number generation should be reproducible",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "numpy",
+    "data-science"
+  ],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-6709",
+  "sqKey": "S6709",
+  "scope": "All",
+  "quickfix": "unknown",
+  "code": {
+    "impacts": {
+      "MAINTAINABILITY": "HIGH",
+      "RELIABILITY": "MEDIUM",
+      "SECURITY": "LOW"
+    },
+    "attribute": "CONVENTIONAL"
+  }
+}
