@@ -9,12 +9,15 @@ def import_1():
     arr = np.array(gen_1)  # Noncompliant {{Pass a list to "np.array" instead of passing a generator.}}
     #     ^^^^^^^^^^^^^^^
 
-    gen_2: Any = (x * 2 for x in range(5))  # This is a false negative. ReachingDefinitionsAnalysis does not find the variable when it has
-    # been type annotated. Let's construct a ticket for this.
+    gen_2: Any = (x * 2 for x in range(5))
     arr = np.array(gen_2)
 
-    gen_3 = 42
-    np.array(gen_3)
+    gen_3: str = "Hello World"
+    gen_3 = (x * 2 for x in range(5))
+    arr = np.array(gen_3)  # This is a FN due to the limitations of ReachingDefinitionAnalysis. See SONARPY-1470.
+
+    gen_4 = 42
+    np.array(gen_4)
 
     def test(xx):
         np.array(xx)
