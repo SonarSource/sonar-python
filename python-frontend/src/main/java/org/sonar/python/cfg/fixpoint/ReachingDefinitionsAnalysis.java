@@ -50,6 +50,8 @@ import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.tree.TreeUtils;
 
+import com.google.protobuf.Option;
+
 /**
  * https://en.wikipedia.org/wiki/Reaching_definition
  * Data flow analysis to determinate what definitions may reach a given point in the code.
@@ -192,46 +194,54 @@ public class ReachingDefinitionsAnalysis {
     return result;
   }
 
-  private void updateProgramState(Tree element, Map<Symbol, Set<Expression>> programState) {
-    List<Expression> lhsExpressions = getLhsExpressions(element);
-    if (lhsExpressions.size() != 1) {
-      return;
+  private void updateProgramState(Tree element, Map<Symbol, Set<Expression>> out) {
+    if (element.is(ASSIGNMENT_STMT)) {
+      updateStateForAssignment((AssignmentStatement) element, out);
     }
-    Expression lhsExpression = lhsExpressions.get(0);
-    if (!lhsExpression.is(Tree.Kind.NAME)) {
-      return;
+    if (element.is(Tree.Kind.ANNOTATED_ASSIGNMENT)) {
+      updateStateForAnnotatedAssignement((AnnotatedAssignment) element, out);
     }
-    TreeUtils.getSymbolFromTree(lhsExpression).ifPresent(symbol -> {
-      assignedNamesBySymbol.computeIfAbsent(symbol, s -> new HashSet<>()).add(((Name) lhsExpression));
-      Set<Expression> assignedValues = new HashSet<>();
-      Expression assignedValue = getAssignedValue(element);
+  }
+
+  private void updateStateForAssignment(AssignmentStatement element, Map<Symbol, Set<Expression>> programState) {
+    List<Expression> lhsExpressions = ((AssignmentStatement) element).lhsExpressions().stream()
+        .flatMap(exprList -> exprList.expressions().stream())
+        .collect(Collectors.toList());
+    Expression lhsExpression = getLhsExpression(lhsExpressions);
+    Optional.ofNullable(lhsExpression)
+      .flatMap(TreeUtils::getSymbolFromTree)
+      .ifPresent(symbol -> {
+      Expression assignedValue = element.assignedValue();
+      performUpdate(symbol, assignedValue, lhsExpression, programState);
+    });
+  }
+
+  private void updateStateForAnnotatedAssignement(AnnotatedAssignment element,
+      Map<Symbol, Set<Expression>> programState) {
+    List<Expression> lhsExpressions = List.of(element.variable());
+    Expression lhsExpression = getLhsExpression(lhsExpressions);
+    Optional.ofNullable(lhsExpression)
+      .flatMap(TreeUtils::getSymbolFromTree)
+      .ifPresent(symbol -> {
+      Expression assignedValue = element.assignedValue();
       if (assignedValue != null) {
-        assignedValues.add(assignedValue);
-        // performing a strong update
-        programState.put(symbol, assignedValues);
+        performUpdate(symbol, assignedValue, lhsExpression, programState);
       }
     });
   }
 
-  private static List<Expression> getLhsExpressions(Tree element) {
-    if (element.is(ASSIGNMENT_STMT)) {
-      return ((AssignmentStatement) element).lhsExpressions().stream()
-          .flatMap(exprList -> exprList.expressions().stream())
-          .collect(Collectors.toList());
-    }
-    if (element.is(Tree.Kind.ANNOTATED_ASSIGNMENT)) {
-      return List.of(((AnnotatedAssignment) element).variable());
-    }
-    return List.of();
+  private void performUpdate(Symbol symbol, Expression assignedValue, Expression lhsExpression,
+      Map<Symbol, Set<Expression>> programState) {
+    assignedNamesBySymbol.computeIfAbsent(symbol, s -> new HashSet<>()).add(((Name) lhsExpression));
+    Set<Expression> assignedValues = new HashSet<>();
+    assignedValues.add(assignedValue);
+    // performing a strong update
+    programState.put(symbol, assignedValues);
   }
 
-  @CheckForNull
-  private static Expression getAssignedValue(Tree element) {
-    if (element.is(ASSIGNMENT_STMT)) {
-      return ((AssignmentStatement) element).assignedValue();
-    }
-    if (element.is(Tree.Kind.ANNOTATED_ASSIGNMENT)) {
-      return ((AnnotatedAssignment) element).assignedValue();
+  private Expression getLhsExpression(List<Expression> lhsExpressions) {
+    if (lhsExpressions.size() == 1 && lhsExpressions.get(0).is(Tree.Kind.NAME)) {
+      return lhsExpressions.get(0);
     }
     return null;
   }
