@@ -91,7 +91,7 @@ public class NumpyListOverGeneratorCheck extends PythonSubscriptionCheck {
       .isPresent();
   }
 
-  private boolean checkSetProperties(Set<Expression> set) {
+  private static boolean checkSetProperties(Set<Expression> set) {
     return !set.isEmpty() && set.stream().allMatch(expression -> expression.is(Tree.Kind.GENERATOR_EXPR));
   }
 }
