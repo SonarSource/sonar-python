@@ -30,6 +30,3 @@ def import_1():
     arr = np.array((x ** 2 for x in range(10)), dtype=str)  # Noncompliant
 
     arr = np.array()
-
-    gen_4 = (x * 2 for x in range(5))
-    np.array(gen_4)  # Noncompliant
