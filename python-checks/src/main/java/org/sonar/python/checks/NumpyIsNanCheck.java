@@ -19,19 +19,27 @@
  */
 package org.sonar.python.checks;
 
+import java.util.Optional;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
+import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.BinaryExpression;
 import org.sonar.plugins.python.api.tree.Expression;
-import org.sonar.plugins.python.api.tree.HasSymbol;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.quickfix.TextEditUtils;
+import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S6725")
 public class NumpyIsNanCheck extends PythonSubscriptionCheck {
+
+  private static final String MESSAGE = "Don't perform an equality check against \"numpy.nan\".";
+  private static final String QUICK_FIX_MESSAGE_EQUALITY = "Replace this equality check with numpy.isnan().";
+  private static final String QUICK_FIX_MESSAGE_INEQUALITY = "Replace this inequality check with !numpy.isnan().";
+
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.COMPARISON, NumpyIsNanCheck::checkForIsNan);
@@ -43,22 +51,47 @@ public class NumpyIsNanCheck extends PythonSubscriptionCheck {
     if (!("==".equals(value) || "!=".equals(value))) {
       return;
     }
-    checkOperand(ctx, be.leftOperand(), be);
-    checkOperand(ctx, be.rightOperand(), be);
+    checkOperand(ctx, be.leftOperand(), be.rightOperand(), be);
+    checkOperand(ctx, be.rightOperand(), be.leftOperand(), be);
   }
 
-  private static void checkOperand(SubscriptionContext ctx, Expression operand, BinaryExpression be) {
-    HasSymbol cast;
-    if (operand.is(Tree.Kind.QUALIFIED_EXPR)) {
-      cast = (QualifiedExpression) operand;
-    } else if (operand.is(Tree.Kind.NAME)) {
-      cast = (Name) operand;
+  private static void checkOperand(SubscriptionContext ctx, Expression operand, Expression otherOperand, BinaryExpression be) {
+    TreeUtils.getSymbolFromTree(operand)
+      .map(Symbol::fullyQualifiedName)
+      .filter("numpy.nan"::equals)
+      .ifPresent(fqn -> {
+        PreciseIssue issue = ctx.addIssue(be, MESSAGE);
+        addQuickFix(issue, operand, otherOperand, be);
+      });
+  }
+
+  private static void addQuickFix(PreciseIssue issue, Expression nanOperand, Expression otherOperand, BinaryExpression be) {
+    Optional.of(nanOperand)
+      .flatMap(TreeUtils.toOptionalInstanceOfMapper(QualifiedExpression.class))
+      .map(QualifiedExpression::qualifier)
+      .flatMap(TreeUtils.toOptionalInstanceOfMapper(Name.class))
+      .map(Name::name)
+      .map(symbName -> addPrefix(be) + symbName + ".isnan(" + TreeUtils.treeToString(otherOperand, true) + ")")
+      .ifPresent(replacement -> issue
+        .addQuickFix(PythonQuickFix
+          .newQuickFix(operatorToMessage(be))
+          .addTextEdit(TextEditUtils.replace(be, replacement))
+          .build()));
+  }
+
+  private static String addPrefix(BinaryExpression be) {
+    if ("==".equals(be.operator().value())) {
+      return "";
     } else {
-      return;
+      return "!";
     }
-    Symbol symbol = cast.symbol();
-    if (symbol != null && "numpy.nan".equals(symbol.fullyQualifiedName())) {
-      ctx.addIssue(be, "Don't perform an equality check against \"numpy.nan\".");
+  }
+
+  private static String operatorToMessage(BinaryExpression be) {
+    if ("==".equals(be.operator().value())) {
+      return QUICK_FIX_MESSAGE_EQUALITY;
+    } else {
+      return QUICK_FIX_MESSAGE_INEQUALITY;
     }
   }
 }
