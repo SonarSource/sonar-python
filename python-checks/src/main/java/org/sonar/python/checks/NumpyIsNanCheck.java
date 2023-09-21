@@ -51,26 +51,18 @@ public class NumpyIsNanCheck extends PythonSubscriptionCheck {
     if (!("==".equals(value) || "!=".equals(value))) {
       return;
     }
-    checkOperand(ctx, be.leftOperand(), be);
-    checkOperand(ctx, be.rightOperand(), be);
+    checkOperand(ctx, be.leftOperand(), be.rightOperand(), be);
+    checkOperand(ctx, be.rightOperand(), be.leftOperand(), be);
   }
 
-  private static void checkOperand(SubscriptionContext ctx, Expression operand, BinaryExpression be) {
+  private static void checkOperand(SubscriptionContext ctx, Expression operand, Expression otherOperand, BinaryExpression be) {
     TreeUtils.getSymbolFromTree(operand)
       .map(Symbol::fullyQualifiedName)
       .filter("numpy.nan"::equals)
       .ifPresent(fqn -> {
         PreciseIssue issue = ctx.addIssue(be, MESSAGE);
-        addQuickFix(issue, operand, be);
+        addQuickFix(issue, operand, otherOperand, be);
       });
-  }
-
-  private static void addQuickFix(PreciseIssue issue, Expression operand, BinaryExpression be) {
-    if (be.leftOperand().equals(operand)) {
-      addQuickFix(issue, operand, be.rightOperand(), be);
-    } else {
-      addQuickFix(issue, operand, be.leftOperand(), be);
-    }
   }
 
   private static void addQuickFix(PreciseIssue issue, Expression nanOperand, Expression otherOperand, BinaryExpression be) {
