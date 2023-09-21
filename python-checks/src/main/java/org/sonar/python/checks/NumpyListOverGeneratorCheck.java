@@ -84,14 +84,17 @@ public class NumpyListOverGeneratorCheck extends PythonSubscriptionCheck {
 
   private boolean isNamedGeneratorExpression(Expression expression) {
     return Optional.of(expression)
-      .filter(expr -> expr.is(Tree.Kind.NAME))
-      .map(Name.class::cast)
+      .flatMap(TreeUtils.toOptionalInstanceOfMapper(Name.class))
       .map(name -> this.reachingDefinitionsAnalysis.valuesAtLocation(name))
       .filter(NumpyListOverGeneratorCheck::checkSetProperties)
       .isPresent();
   }
 
   private static boolean checkSetProperties(Set<Expression> set) {
-    return !set.isEmpty() && set.stream().allMatch(expression -> expression.is(Tree.Kind.GENERATOR_EXPR));
+    return !set.isEmpty() && set.stream().allMatch(NumpyListOverGeneratorCheck::getSetCondition);
+  }
+
+  private static boolean getSetCondition(Expression expression) {
+    return expression.is(Tree.Kind.GENERATOR_EXPR) && !expression.parent().is(Tree.Kind.ANNOTATED_ASSIGNMENT);
   }
 }

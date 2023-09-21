@@ -8,16 +8,18 @@ def import_1():
     gen_1 = (x * 2 for x in range(5))
     arr = np.array(gen_1)  # Noncompliant {{Pass a list to "np.array" instead of passing a generator.}}
     #     ^^^^^^^^^^^^^^^
-
     gen_2: Any = (x * 2 for x in range(5))
     arr = np.array(gen_2)
 
     gen_3: str = "Hello World"
     gen_3 = (x * 2 for x in range(5))
-    arr = np.array(gen_3)  # This is a FN due to the limitations of ReachingDefinitionAnalysis. See SONARPY-1470.
+    arr = np.array(gen_3)  # Noncompliant
 
     gen_4 = 42
     np.array(gen_4)
+
+    gen_5: MyClass = (x * 2 for x in range(5))
+    np.array(gen_5)
 
     def test(xx):
         np.array(xx)
