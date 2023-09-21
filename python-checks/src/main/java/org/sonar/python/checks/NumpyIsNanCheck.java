@@ -20,7 +20,6 @@
 package org.sonar.python.checks;
 
 import java.util.Optional;
-import javax.annotation.CheckForNull;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
@@ -57,24 +56,13 @@ public class NumpyIsNanCheck extends PythonSubscriptionCheck {
   }
 
   private static void checkOperand(SubscriptionContext ctx, Expression operand, BinaryExpression be) {
-    Optional.ofNullable(getSymbolFromExpression(operand))
+    TreeUtils.getSymbolFromTree(operand)
       .map(Symbol::fullyQualifiedName)
       .filter("numpy.nan"::equals)
       .ifPresent(fqn -> {
         PreciseIssue issue = ctx.addIssue(be, MESSAGE);
         addQuickFix(issue, operand, be);
       });
-  }
-
-  @CheckForNull
-  private static Symbol getSymbolFromExpression(Expression symbol) {
-    if (symbol.is(Tree.Kind.QUALIFIED_EXPR)) {
-      return ((QualifiedExpression) symbol).symbol();
-    } else if (symbol.is(Tree.Kind.NAME)) {
-      return ((Name) symbol).symbol();
-    } else {
-      return null;
-    }
   }
 
   private static void addQuickFix(PreciseIssue issue, Expression operand, BinaryExpression be) {
