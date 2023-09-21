@@ -91,10 +91,10 @@ public class NumpyListOverGeneratorCheck extends PythonSubscriptionCheck {
   }
 
   private static boolean checkSetProperties(Set<Expression> set) {
-    return !set.isEmpty() && set.stream().allMatch(NumpyListOverGeneratorCheck::getSetCondition);
+    return !set.isEmpty() && set.stream().allMatch(NumpyListOverGeneratorCheck::isGeneratorAndParentHasType);
   }
 
-  private static boolean getSetCondition(Expression expression) {
+  private static boolean isGeneratorAndParentHasType(Expression expression) {
     return expression.is(Tree.Kind.GENERATOR_EXPR) && !expression.parent().is(Tree.Kind.ANNOTATED_ASSIGNMENT);
   }
 }
