@@ -29,7 +29,7 @@ def builtins_not_supporting_getitem():
   mydict.items()[0] # Noncompliant
 
   # iterators
-  iter(mylist)[0]  # FN Noncompliant
+  iter(mylist)[0]  # Noncompliant
 
   # Numeric types
   from fractions import Fraction
@@ -198,3 +198,9 @@ def import_path():
     from importlib import import_module
 
     path = import_module('importlib').__path__[0]  # OK ref: SONARPY-1339
+
+from ctypes import cast
+
+def ctypes_cast(buf, sal):
+  addrList = cast(buf, POINTER(sal))
+  addrCount = addrList[0].iAddressCount # FN ref: SONARPY-1477

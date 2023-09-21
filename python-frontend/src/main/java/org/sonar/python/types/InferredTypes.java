@@ -29,6 +29,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
@@ -193,9 +194,30 @@ public class InferredTypes {
         return InferredTypes.NONE;
       case TYPED_DICT:
         return InferredTypes.DICT;
+      case TYPE_VAR:
+        return Optional.of(type)
+          .filter(InferredTypes::filterTypeVar)
+          .map(SymbolsProtos.Type::getFullyQualifiedName)
+          .map(TypeShed::symbolWithFQN)
+          .map(InferredTypes::runtimeType)
+          .orElseGet(InferredTypes::anyType);
       default:
         return anyType();
     }
+  }
+
+  private static final Set<String> EXCLUDING_TYPE_VAR_FQN_PATTERNS = Set.of(
+    "^builtins\\.object$",
+    "^_ctypes\\._CanCastTo$"); // ref: SONARPY-1477
+
+  private static boolean filterTypeVar(SymbolsProtos.Type type) {
+    return Optional.of(type)
+      // Filtering self returning methods until the SONARPY-1472 will be solved
+      .filter(Predicate.not(t -> t.getPrettyPrintedName().endsWith(".Self")))
+      .map(SymbolsProtos.Type::getFullyQualifiedName)
+      .filter(Predicate.not(String::isEmpty))
+      .filter(fqn -> EXCLUDING_TYPE_VAR_FQN_PATTERNS.stream().noneMatch(fqn::matches))
+      .isPresent();
   }
 
   @CheckForNull
