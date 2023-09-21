@@ -23,7 +23,6 @@ import static org.sonar.plugins.python.api.tree.Tree.Kind.ASSIGNMENT_STMT;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.FUNCDEF;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.TRY_STMT;
 
-import java.text.Collator;
 import java.util.ArrayDeque;
 import java.util.Collection;
 import java.util.Collections;
@@ -219,12 +218,8 @@ public class ReachingDefinitionsAnalysis {
   private void performUpdate(Map<Symbol, Set<Expression>> programState, List<Expression> lhsExpressions,
       Supplier<Expression> assignedValueSupplier) {
     getLhsExpression(lhsExpressions)
-        .ifPresent(name -> {
-          TreeUtils.getSymbolFromTree(name)
-              .ifPresent(symbol -> {
-                performUpdate(symbol, assignedValueSupplier, name, programState);
-              });
-        });
+        .ifPresent(name -> TreeUtils.getSymbolFromTree(name)
+            .ifPresent(symbol -> performUpdate(symbol, assignedValueSupplier, name, programState)));
   }
 
   private void performUpdate(Symbol symbol, Supplier<Expression> assignedValueSupplier, Expression lhsExpression,
