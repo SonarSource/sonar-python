@@ -38,12 +38,14 @@ import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.ClassDef;
+import org.sonar.plugins.python.api.tree.CompoundAssignmentStatement;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
+import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TryStatement;
 import org.sonar.plugins.python.api.types.InferredType;
@@ -61,7 +63,7 @@ public class TypeInference extends BaseTreeVisitor {
 
   private final Map<Symbol, Set<Assignment>> assignmentsByLhs = new HashMap<>();
   private final Map<QualifiedExpression, MemberAccess> memberAccessesByQualifiedExpr = new HashMap<>();
-  private final Map<AssignmentStatement, Assignment> assignmentsByAssignmentStatement = new HashMap<>();
+  private final Map<Statement, Assignment> assignmentsByAssignmentStatement = new HashMap<>();
   private Map<String, InferredType> parameterTypesByName = new HashMap<>();
 
   public static void inferTypes(FileInput fileInput, PythonFile pythonFile) {
@@ -188,6 +190,25 @@ public class TypeInference extends BaseTreeVisitor {
     Expression rhs = assignmentStatement.assignedValue();
     Assignment assignment = new Assignment(symbol, lhs, rhs);
     assignmentsByAssignmentStatement.put(assignmentStatement, assignment);
+    assignmentsByLhs.computeIfAbsent(symbol, s -> new HashSet<>()).add(assignment);
+  }
+
+  @Override
+  public void visitCompoundAssignment(CompoundAssignmentStatement compoundAssignment) {
+    super.visitCompoundAssignment(compoundAssignment);
+    Expression lhsExpression = compoundAssignment.lhsExpression();
+    if (!lhsExpression.is(Tree.Kind.NAME)) {
+      return;
+    }
+    Name lhs = (Name) lhsExpression;
+    SymbolImpl symbol = (SymbolImpl) lhs.symbol();
+    if (symbol == null) {
+      return;
+    }
+
+    Expression rhs = compoundAssignment.rhsExpression();
+    Assignment assignment = new Assignment(symbol, lhs, rhs);
+    assignmentsByAssignmentStatement.put(compoundAssignment, assignment);
     assignmentsByLhs.computeIfAbsent(symbol, s -> new HashSet<>()).add(assignment);
   }
 
