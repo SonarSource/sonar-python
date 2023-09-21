@@ -87,11 +87,9 @@ public class NumpyIsNanCheck extends PythonSubscriptionCheck {
 
   private static void addQuickFix(PreciseIssue issue, Expression nanOperand, Expression otherOperand, BinaryExpression be) {
     Optional.of(nanOperand)
-      .filter(op -> op.is(Tree.Kind.QUALIFIED_EXPR))
-      .map(QualifiedExpression.class::cast)
+      .flatMap(TreeUtils.toOptionalInstanceOfMapper(QualifiedExpression.class))
       .map(QualifiedExpression::qualifier)
-      .filter(quali -> quali.is(Tree.Kind.NAME))
-      .map(Name.class::cast)
+      .flatMap(TreeUtils.toOptionalInstanceOfMapper(Name.class))
       .map(Name::name)
       .map(symbName -> addPrefix(be) + symbName + ".isnan(" + TreeUtils.treeToString(otherOperand, true) + ")")
       .ifPresent(replacement -> issue
