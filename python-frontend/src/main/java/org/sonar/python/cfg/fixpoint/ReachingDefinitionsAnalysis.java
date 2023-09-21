@@ -19,7 +19,12 @@
  */
 package org.sonar.python.cfg.fixpoint;
 
+import static org.sonar.plugins.python.api.tree.Tree.Kind.ASSIGNMENT_STMT;
+import static org.sonar.plugins.python.api.tree.Tree.Kind.FUNCDEF;
+import static org.sonar.plugins.python.api.tree.Tree.Kind.TRY_STMT;
+
 import java.util.ArrayDeque;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Deque;
 import java.util.HashMap;
@@ -28,12 +33,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.cfg.CfgBlock;
 import org.sonar.plugins.python.api.cfg.ControlFlowGraph;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
+import org.sonar.plugins.python.api.tree.AnnotatedAssignment;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.Expression;
@@ -41,10 +50,6 @@ import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.tree.TreeUtils;
-
-import static org.sonar.plugins.python.api.tree.Tree.Kind.ASSIGNMENT_STMT;
-import static org.sonar.plugins.python.api.tree.Tree.Kind.FUNCDEF;
-import static org.sonar.plugins.python.api.tree.Tree.Kind.TRY_STMT;
 
 /**
  * https://en.wikipedia.org/wiki/Reaching_definition
@@ -91,13 +96,13 @@ public class ReachingDefinitionsAnalysis {
       return Collections.emptySet();
     }
     boolean hasMissingBindingUsage = symbol.usages().stream()
-      .filter(Usage::isBindingUsage)
-      .anyMatch(u -> !assignedNamesBySymbol.getOrDefault(symbol, Collections.emptySet()).contains(u.tree()));
+        .filter(Usage::isBindingUsage)
+        .anyMatch(u -> !assignedNamesBySymbol.getOrDefault(symbol, Collections.emptySet()).contains(u.tree()));
     if (hasMissingBindingUsage) {
       return Collections.emptySet();
     }
     return Optional.ofNullable(programStateAtElement.out.get(symbol))
-      .orElse(Collections.emptySet());
+        .orElse(Collections.emptySet());
   }
 
   private void compute(ControlFlowGraph cfg, Set<Symbol> localVariables) {
@@ -129,6 +134,7 @@ public class ReachingDefinitionsAnalysis {
           public void visitFunctionDef(FunctionDef pyFunctionDefTree) {
             // skip inner functions
           }
+
           @Override
           public void visitName(Name name) {
             assignedExpressionByName.put(name, getAssignedExpressions(name, programStateAtElement));
@@ -173,7 +179,8 @@ public class ReachingDefinitionsAnalysis {
     }
   }
 
-  private static Map<Symbol, Set<Expression>> join(Map<Symbol, Set<Expression>> programState1, Map<Symbol, Set<Expression>> programState2) {
+  private static Map<Symbol, Set<Expression>> join(Map<Symbol, Set<Expression>> programState1,
+      Map<Symbol, Set<Expression>> programState2) {
     Map<Symbol, Set<Expression>> result = new HashMap<>();
     Set<Symbol> allKeys = new HashSet<>(programState1.keySet());
     allKeys.addAll(programState2.keySet());
@@ -186,26 +193,53 @@ public class ReachingDefinitionsAnalysis {
     return result;
   }
 
-  private void updateProgramState(Tree element, Map<Symbol, Set<Expression>> programState) {
+  private void updateProgramState(Tree element, Map<Symbol, Set<Expression>> out) {
     if (element.is(ASSIGNMENT_STMT)) {
-      AssignmentStatement assignmentStatement = (AssignmentStatement) element;
-      List<Expression> lhsExpressions = assignmentStatement.lhsExpressions().stream()
+      updateStateForAssignment((AssignmentStatement) element, out);
+    }
+    if (element.is(Tree.Kind.ANNOTATED_ASSIGNMENT)) {
+      updateStateForAnnotatedAssignement((AnnotatedAssignment) element, out);
+    }
+  }
+
+  private void updateStateForAssignment(AssignmentStatement element, Map<Symbol, Set<Expression>> programState) {
+    List<Expression> lhsExpressions = element.lhsExpressions().stream()
         .flatMap(exprList -> exprList.expressions().stream())
         .collect(Collectors.toList());
-      if (lhsExpressions.size() != 1) {
-        return;
-      }
-      Expression lhsExpression = lhsExpressions.get(0);
-      if (!lhsExpression.is(Tree.Kind.NAME)) {
-        return;
-      }
-      TreeUtils.getSymbolFromTree(lhsExpression).ifPresent(symbol -> {
-        assignedNamesBySymbol.computeIfAbsent(symbol, s -> new HashSet<>()).add(((Name) lhsExpression));
-        Set<Expression> assignedValues = new HashSet<>();
-        assignedValues.add(assignmentStatement.assignedValue());
-        // performing a strong update
-        programState.put(symbol, assignedValues);
-      });
+    performUpdate(programState, lhsExpressions, element::assignedValue);
+  }
+
+  private void updateStateForAnnotatedAssignement(AnnotatedAssignment element,
+      Map<Symbol, Set<Expression>> programState) {
+    List<Expression> lhsExpressions = List.of(element.variable());
+    performUpdate(programState, lhsExpressions, element::assignedValue);
+  }
+
+  private void performUpdate(Map<Symbol, Set<Expression>> programState, List<Expression> lhsExpressions,
+      Supplier<Expression> assignedValueSupplier) {
+    getLhsExpression(lhsExpressions)
+        .ifPresent(name -> TreeUtils.getSymbolFromTree(name)
+            .ifPresent(symbol -> performUpdate(symbol, assignedValueSupplier, name, programState)));
+  }
+
+  private void performUpdate(Symbol symbol, Supplier<Expression> assignedValueSupplier, Expression lhsExpression,
+      Map<Symbol, Set<Expression>> programState) {
+    assignedNamesBySymbol.computeIfAbsent(symbol, s -> new HashSet<>()).add(((Name) lhsExpression));
+    Set<Expression> assignedValues = new HashSet<>();
+    var assignedValue = assignedValueSupplier.get();
+    if (assignedValue != null) {
+      assignedValues.add(assignedValue);
+      // performing a strong update
+      programState.put(symbol, assignedValues);
     }
+  }
+
+  private static Optional<Name> getLhsExpression(List<Expression> lhsExpressions) {
+    return Stream.of(lhsExpressions)
+        .filter(l -> l.size() == 1)
+        .flatMap(Collection::stream)
+        .findFirst()
+        .flatMap(TreeUtils.toOptionalInstanceOfMapper(Name.class));
+
   }
 }
