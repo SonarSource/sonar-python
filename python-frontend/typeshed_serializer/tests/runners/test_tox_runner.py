@@ -235,3 +235,27 @@ class ToxRunnerTest(unittest.TestCase):
             mocked_previous_checksum.assert_called_with(tox_runner.CHECKSUM_FILE)
             mocked_checksum.assert_called_with(self.FILE_NAMES, tox_runner.normalize_text_files)
             mocked_subprocess.run.assert_called_with(['tox'], check=True)
+
+    def test_skip_tests(self):
+        checksum = ('123', '456')
+        computed_checksum = ['123', '456']
+
+        def feed_checksum(_fn, _f):
+            return computed_checksum.pop(0)
+
+        with mock.patch(self.READ_PREVIOUS_CHECKSUM_FUNCTION) as mocked_previous_checksum, \
+                mock.patch(self.COMPUTE_CHECKSUM_FUNCTION) as mocked_checksum, \
+                mock.patch(f'{self.MODULE_NAME}.fetch_source_file_names') as mock_files, \
+                mock.patch(f'{self.MODULE_NAME}.fetch_binary_file_names') as mock_binary_files, \
+                mock.patch(self.SUBPROCESS_CALL) as mocked_subprocess:
+            mocked_previous_checksum.return_value = checksum
+            mock_binary_files.return_value = self.FILE_NAMES
+            mock_files.return_value = self.FILE_NAMES
+            mocked_checksum.side_effect = feed_checksum
+            tox_runner.main(skip_tests=True)
+            mock_files.assert_called_once()
+            mock_binary_files.assert_called_once()
+            mocked_previous_checksum.assert_any_call(tox_runner.CHECKSUM_FILE)
+            mocked_checksum.assert_any_call(self.FILE_NAMES, tox_runner.normalize_text_files)
+            mocked_checksum.assert_any_call(self.FILE_NAMES, tox_runner.read_file)
+            mocked_subprocess.run.assert_not_called()
