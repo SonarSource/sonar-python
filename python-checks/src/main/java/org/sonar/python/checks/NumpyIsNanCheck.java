@@ -79,13 +79,13 @@ public class NumpyIsNanCheck extends PythonSubscriptionCheck {
 
   private static void addQuickFix(PreciseIssue issue, Expression operand, BinaryExpression be) {
     if (be.leftOperand().equals(operand)) {
-      getQuickFix(issue, operand, be.rightOperand(), be);
+      addQuickFix(issue, operand, be.rightOperand(), be);
     } else {
-      getQuickFix(issue, operand, be.leftOperand(), be);
+      addQuickFix(issue, operand, be.leftOperand(), be);
     }
   }
 
-  private static void getQuickFix(PreciseIssue issue, Expression nanOperand, Expression otherOperand, BinaryExpression be) {
+  private static void addQuickFix(PreciseIssue issue, Expression nanOperand, Expression otherOperand, BinaryExpression be) {
     Optional.of(nanOperand)
       .filter(op -> op.is(Tree.Kind.QUALIFIED_EXPR))
       .map(QualifiedExpression.class::cast)
