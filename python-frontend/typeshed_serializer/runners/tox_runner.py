@@ -28,6 +28,7 @@ from pathlib import Path
 from typing import Optional, Tuple
 from collections.abc import Callable
 import logging
+import argparse
 
 CURRENT_PATH = os.path.dirname(__file__)
 CHECKSUM_FILE = os.path.join(CURRENT_PATH, '../checksum')
@@ -117,7 +118,7 @@ def update_checksum():
         file.writelines([f"{source_checksum}\n", binary_checksum])
 
 
-def main():
+def main(skip_tests=False):
     source_files = fetch_source_file_names(SERIALIZER_PATH)
     (previous_sources_checksum, previous_binaries_checksum) = read_previous_checksum(CHECKSUM_FILE)
     current_sources_checksum = compute_checksum(source_files, normalize_text_files)
@@ -140,8 +141,15 @@ def main():
         logger.info("SKIPPING TYPESHED SERIALIZATION")
         # At the moment we need to run the tests in order to not break the quality gate.
         # If the tests are skipped this could potentially result in missing coverage.
+        if skip_tests:
+            logger.info("SKIPPING TYPESHED SERIALIZER TESTS")
+            return
         subprocess.run(['tox', '-e', 'py39'], check=True)
 
 
 if __name__ == '__main__':
-    main()
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--skip_tests')
+    args = parser.parse_args()
+    skip_tests = args.skip_tests == "true"
+    main(skip_tests)
