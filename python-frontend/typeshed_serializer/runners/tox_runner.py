@@ -151,7 +151,5 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--skip_tests')
     args = parser.parse_args()
-    skip_tests = False
-    if args.skip_tests == "true":
-        skip_tests = True
+    skip_tests = args.skip_tests == "true"
     main(skip_tests)
