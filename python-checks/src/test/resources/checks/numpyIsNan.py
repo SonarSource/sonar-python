@@ -1,6 +1,6 @@
 def foo1(x):
     import numpy as np
-    if x == np.nan: print(1)  # Noncompliant {{Don't perform an equality check against "numpy.nan".}}
+    if x == np.nan: print(1)  # Noncompliant {{Don't perform an equality/inequality check against "numpy.nan".}}
     #  ^^^^^^^^^^^
     if np.nan == x: print(1)  # Noncompliant
     if x != np.nan: print(1)  # Noncompliant
