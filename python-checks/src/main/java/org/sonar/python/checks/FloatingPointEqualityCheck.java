@@ -43,7 +43,7 @@ import org.sonar.python.types.InferredTypes;
 public class FloatingPointEqualityCheck extends PythonSubscriptionCheck {
 
   private static final String MESSAGE = "Do not perform equality checks with floating point values.";
-  private static final String QUICK_FIX_MESSAGE = "Replace with %s%s.isclose().";
+  private static final String QUICK_FIX_MESSAGE = "Replace with \"%s%s.isclose()\".";
 
   private static final String QUICK_FIX_MATH = "%s%s.isclose(%s, %s, rel_tol=1e-09, abs_tol=1e-09)";
 
