@@ -72,10 +72,10 @@ class FloatingPointEqualityCheckTest {
     String compliant =
       "import math\n" +
       "def foo(a,b):\n" +
-      "    if !math.isclose(a - 0.1, b, rel_tol=1e-09, abs_tol=1e-09):\n" +
+      "    if not math.isclose(a - 0.1, b, rel_tol=1e-09, abs_tol=1e-09):\n" +
       "        ...";
     PythonQuickFixVerifier.verify(check, noncompliant, compliant);
-    PythonQuickFixVerifier.verifyQuickFixMessages(check, noncompliant, "Replace with !math.isclose().");
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, noncompliant, "Replace with not math.isclose().");
   }
 
   @Test

@@ -117,7 +117,7 @@ public class FloatingPointEqualityCheck extends PythonSubscriptionCheck {
   }
 
   private PythonQuickFix createQuickFix(BinaryExpression binaryExpression, String operator) {
-    String notToken = "!=".equals(operator) ? "!" : "";
+    String notToken = "!=".equals(operator) ? "not " : "";
     String isCloseModuleName = getModuleNameOrAliasForIsClose();
     String message = String.format(QUICK_FIX_MESSAGE, notToken, isCloseModuleName);
     Builder quickFix = PythonQuickFix.newQuickFix(message);
