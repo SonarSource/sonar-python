@@ -44,7 +44,7 @@ class FloatingPointEqualityCheckTest {
       "    if math.isclose(a - 0.1, b, rel_tol=1e-09, abs_tol=1e-09):\n" +
       "        ...";
     PythonQuickFixVerifier.verify(check, noncompliant, compliant);
-    PythonQuickFixVerifier.verifyQuickFixMessages(check, noncompliant, "Replace with math.isclose().");
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, noncompliant, "Replace with \"math.isclose()\".");
   }
 
   @Test
@@ -72,10 +72,10 @@ class FloatingPointEqualityCheckTest {
     String compliant =
       "import math\n" +
       "def foo(a,b):\n" +
-      "    if !math.isclose(a - 0.1, b, rel_tol=1e-09, abs_tol=1e-09):\n" +
+      "    if not math.isclose(a - 0.1, b, rel_tol=1e-09, abs_tol=1e-09):\n" +
       "        ...";
     PythonQuickFixVerifier.verify(check, noncompliant, compliant);
-    PythonQuickFixVerifier.verifyQuickFixMessages(check, noncompliant, "Replace with !math.isclose().");
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, noncompliant, "Replace with \"not math.isclose()\".");
   }
 
   @Test
@@ -121,7 +121,7 @@ class FloatingPointEqualityCheckTest {
       "    if numpy.isclose(a - 0.1, b, rtol=1e-09, atol=1e-09):\n" +
       "        ...";
     PythonQuickFixVerifier.verify(check, noncompliant, compliant);
-    PythonQuickFixVerifier.verifyQuickFixMessages(check, noncompliant, "Replace with numpy.isclose().");
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, noncompliant, "Replace with \"numpy.isclose()\".");
   }
 
   @Test
@@ -137,7 +137,7 @@ class FloatingPointEqualityCheckTest {
       "    if math.isclose(a - 0.1, b, rel_tol=1e-09, abs_tol=1e-09):\n" +
       "        ...";
     PythonQuickFixVerifier.verify(check, noncompliant, compliant);
-    PythonQuickFixVerifier.verifyQuickFixMessages(check, noncompliant, "Replace with math.isclose().");
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, noncompliant, "Replace with \"math.isclose()\".");
   }
 
   @Test
@@ -155,7 +155,7 @@ class FloatingPointEqualityCheckTest {
       "    if np.isclose(a - 0.1, b, rtol=1e-09, atol=1e-09):\n" +
       "        ...";
     PythonQuickFixVerifier.verify(check, noncompliant, compliant);
-    PythonQuickFixVerifier.verifyQuickFixMessages(check, noncompliant, "Replace with np.isclose().");
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, noncompliant, "Replace with \"np.isclose()\".");
   }
 
   @Test
@@ -171,7 +171,7 @@ class FloatingPointEqualityCheckTest {
       "    if torch.isclose(a - 0.1, b, rtol=1e-09, atol=1e-09):\n" +
       "        ...";
     PythonQuickFixVerifier.verify(check, noncompliant, compliant);
-    PythonQuickFixVerifier.verifyQuickFixMessages(check, noncompliant, "Replace with torch.isclose().");
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, noncompliant, "Replace with \"torch.isclose()\".");
   }
 
   @Test
@@ -187,7 +187,7 @@ class FloatingPointEqualityCheckTest {
       "    if np.isclose(a - 0.1, b, rtol=1e-09, atol=1e-09):\n" +
       "        ...";
     PythonQuickFixVerifier.verify(check, noncompliant, compliant);
-    PythonQuickFixVerifier.verifyQuickFixMessages(check, noncompliant, "Replace with np.isclose().");
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, noncompliant, "Replace with \"np.isclose()\".");
   }
 
   @Test
@@ -203,7 +203,7 @@ class FloatingPointEqualityCheckTest {
       "    if torch.isclose(a - 0.1, b, rtol=1e-09, atol=1e-09):\n" +
       "        ...";
     PythonQuickFixVerifier.verify(check, noncompliant, compliant);
-    PythonQuickFixVerifier.verifyQuickFixMessages(check, noncompliant, "Replace with torch.isclose().");
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, noncompliant, "Replace with \"torch.isclose()\".");
   }
 
   @Test
@@ -221,6 +221,6 @@ class FloatingPointEqualityCheckTest {
       "    if torch.isclose(a - 0.1, b, rtol=1e-09, atol=1e-09):\n" +
       "        ...";
     PythonQuickFixVerifier.verify(check, noncompliant, compliant);
-    PythonQuickFixVerifier.verifyQuickFixMessages(check, noncompliant, "Replace with torch.isclose().");
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, noncompliant, "Replace with \"torch.isclose()\".");
   }
 }
