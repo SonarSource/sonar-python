@@ -26,8 +26,8 @@ import org.sonar.python.checks.utils.PythonCheckVerifier;
 class NumpyIsNanCheckTest {
 
   NumpyIsNanCheck check = new NumpyIsNanCheck();
-  private static final String QUICK_FIX_MESSAGE_EQUALITY = "Replace this equality check with numpy.isnan().";
-  private static final String QUICK_FIX_MESSAGE_INEQUALITY = "Replace this inequality check with !numpy.isnan().";
+  private static final String QUICK_FIX_MESSAGE_EQUALITY = "Replace this equality check with \"numpy.isnan()\".";
+  private static final String QUICK_FIX_MESSAGE_INEQUALITY = "Replace this inequality check with \"not numpy.isnan()\".";
 
   @Test
   void test() {
@@ -66,7 +66,7 @@ class NumpyIsNanCheckTest {
 
     final String compliant = "import numpy as np\n" +
       "def foo(x):\n" +
-      "    if !np.isnan(x): print(1)";
+      "    if not np.isnan(x): print(1)";
 
     performVerification(nonCompliant1, compliant, QUICK_FIX_MESSAGE_INEQUALITY);
     performVerification(nonCompliant2, compliant, QUICK_FIX_MESSAGE_INEQUALITY);

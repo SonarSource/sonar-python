@@ -36,9 +36,9 @@ import org.sonar.python.tree.TreeUtils;
 @Rule(key = "S6725")
 public class NumpyIsNanCheck extends PythonSubscriptionCheck {
 
-  private static final String MESSAGE = "Don't perform an equality check against \"numpy.nan\".";
-  private static final String QUICK_FIX_MESSAGE_EQUALITY = "Replace this equality check with numpy.isnan().";
-  private static final String QUICK_FIX_MESSAGE_INEQUALITY = "Replace this inequality check with !numpy.isnan().";
+  private static final String MESSAGE = "Don't perform an equality/inequality check against \"numpy.nan\".";
+  private static final String QUICK_FIX_MESSAGE_EQUALITY = "Replace this equality check with \"numpy.isnan()\".";
+  private static final String QUICK_FIX_MESSAGE_INEQUALITY = "Replace this inequality check with \"not numpy.isnan()\".";
 
   @Override
   public void initialize(Context context) {
@@ -83,7 +83,7 @@ public class NumpyIsNanCheck extends PythonSubscriptionCheck {
     if ("==".equals(be.operator().value())) {
       return "";
     } else {
-      return "!";
+      return "not ";
     }
   }
 
