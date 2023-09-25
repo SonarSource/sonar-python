@@ -24,7 +24,7 @@ system.</p>
 <p>Certificate validation is not enabled by default when <code>_create_unverified_context</code> is used. It is recommended to use
 <code>_create_default_https_context</code> instead to create a secure context that validates certificates.</p>
 <h4>Noncompliant code example</h4>
-<pre data-diff-id="1" data-diff-type="noncompliant">
+<pre data-diff-id="21" data-diff-type="noncompliant">
 import ssl
 
 ctx1 = ssl._create_unverified_context() # Noncompliant
@@ -34,7 +34,7 @@ ctx3 = ssl.create_default_context()
 ctx3.verify_mode = ssl.CERT_NONE # Noncompliant
 </pre>
 <h4>Compliant solution</h4>
-<pre data-diff-id="1" data-diff-type="compliant">
+<pre data-diff-id="21" data-diff-type="compliant">
 import ssl
 
 ctx = ssl.create_default_context()
@@ -67,7 +67,7 @@ ctx2 = SSL.Context(SSL.TLSv1_2_METHOD)
 ctx2.set_verify(SSL.VERIFY_NONE, verify_callback) # Noncompliant
 </pre>
 <h4>Compliant solution</h4>
-<pre data-diff-id="1" data-diff-type="noncompliant">
+<pre data-diff-id="1" data-diff-type="compliant">
 from OpenSSL import SSL
 
 ctx = SSL.Context(SSL.TLSv1_2_METHOD)
@@ -91,13 +91,13 @@ roots. Rather than disabling certificate validation in your code, you can add th
 <p>The certificate validation gets disabled by setting <code>verify</code> to <code>False</code>. To enable validation set the value to
 <code>True</code> or do not set <code>verify</code> at all to use the secure default value.</p>
 <h4>Noncompliant code example</h4>
-<pre data-diff-id="1" data-diff-type="noncompliant">
+<pre data-diff-id="11" data-diff-type="noncompliant">
 import requests
 
 requests.request('GET', 'https://example.com', verify=False) # Noncompliant
 </pre>
 <h4>Compliant solution</h4>
-<pre data-diff-id="1" data-diff-type="noncompliant">
+<pre data-diff-id="11" data-diff-type="compliant">
 import requests
 
 # By default, certificate validation is enabled

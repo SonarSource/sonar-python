@@ -30,13 +30,13 @@ values are often considered trusted, since under normal circumstances it would n
 <h3>Code examples</h3>
 <h4>Noncompliant code example</h4>
 <p>Example with a symmetric cipher, AES:</p>
-<pre data-diff-id="1" data-diff-type="noncompliant">
+<pre data-diff-id="11" data-diff-type="noncompliant">
 from Crypto.Cipher import AES
 
 AES.new(key, AES.MODE_ECB) # Noncompliant
 </pre>
 <p>Example with an asymmetric cipher, RSA:</p>
-<pre data-diff-id="2" data-diff-type="noncompliant">
+<pre data-diff-id="12" data-diff-type="noncompliant">
 from Crypto.Cipher import PKCS1_v1_5
 
 PKCS1_v1_5.new(key) # Noncompliant
@@ -44,13 +44,13 @@ PKCS1_v1_5.new(key) # Noncompliant
 <h4>Compliant solution</h4>
 <p>Since PyCrypto is not supported anymore, another library should be used. In the current context, Cryptodome uses a similar API.</p>
 <p>For the AES symmetric cipher, use the GCM mode:</p>
-<pre data-diff-id="1" data-diff-type="compliant">
+<pre data-diff-id="11" data-diff-type="compliant">
 from Crypto.Cipher import AES
 
 AES.new(key, AES.MODE_GCM)
 </pre>
 <p>For the RSA asymmetric cipher, use the Optimal Asymmetric Encryption Padding (OAEP):</p>
-<pre data-diff-id="2" data-diff-type="compliant">
+<pre data-diff-id="12" data-diff-type="compliant">
 from Crypto.Cipher import PKCS1_OAEP
 
 PKCS1_OAEP.new(key)
@@ -167,14 +167,14 @@ RSA.</p>
 <h3>Code examples</h3>
 <h4>Noncompliant code example</h4>
 <p>Example with a symmetric cipher, AES:</p>
-<pre data-diff-id="1" data-diff-type="noncompliant">
+<pre data-diff-id="21" data-diff-type="noncompliant">
 from Crypto.Cipher import AES     # pycryptodome
 from Cryptodome.Cipher import AES # pycryptodomex
 
 AES.new(key, AES.MODE_ECB)  # Noncompliant
 </pre>
 <p>Example with an asymmetric cipher, RSA:</p>
-<pre data-diff-id="2" data-diff-type="noncompliant">
+<pre data-diff-id="22" data-diff-type="noncompliant">
 from Crypto.Cipher import PKCS1_V1_5     # pycryptodome
 from Cryptodome.Cipher import PKCS1_V1_5 # pycryptodomex
 
@@ -182,14 +182,14 @@ PKCS1_v1_5.new(key) # Noncompliant
 </pre>
 <h4>Compliant solution</h4>
 <p>For the AES symmetric cipher, use the GCM mode:</p>
-<pre data-diff-id="1" data-diff-type="compliant">
+<pre data-diff-id="21" data-diff-type="compliant">
 from Crypto.Cipher import AES     # pycryptodome
 from Cryptodome.Cipher import AES # pycryptodomex
 
 AES.new(key, AES.MODE_GCM)
 </pre>
 <p>For the RSA asymmetric cipher, use the Optimal Asymmetric Encryption Padding (OAEP):</p>
-<pre data-diff-id="2" data-diff-type="compliant">
+<pre data-diff-id="22" data-diff-type="compliant">
 from Crypto.Cipher import PKCS1_V1_5     # pycryptodome
 from Cryptodome.Cipher import PKCS1_V1_5 # pycryptodomex
 
@@ -217,14 +217,14 @@ RSA.</p>
 <h2>How to fix it in pyDes</h2>
 <h3>Code examples</h3>
 <h4>Noncompliant code example</h4>
-<pre data-diff-id="1" data-diff-type="noncompliant">
+<pre data-diff-id="31" data-diff-type="noncompliant">
 import pyDes
 
 pyDes.des(key) # Noncompliant
 </pre>
 <h4>Compliant solution</h4>
 <p>Since pyDes only provides DES, it is recommended to use another library like pyca.</p>
-<pre data-diff-id="1" data-diff-type="compliant">
+<pre data-diff-id="31" data-diff-type="compliant">
 from cryptography.hazmat.primitives.ciphers import (
     Cipher,
     algorithms,
