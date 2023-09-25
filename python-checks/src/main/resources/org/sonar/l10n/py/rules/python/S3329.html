@@ -67,14 +67,18 @@ cipher.encryptor()
 </pre>
 <h3>How does this work?</h3>
 <h4>Use unique IVs</h4>
-<p>To ensure strong security, the initialization vectors for each encryption operation must be unique and random but they do not have to be
-secret.</p>
+<p>To ensure high security, initialization vectors must meet two important criteria:</p>
+<ul>
+  <li> IVs must be unique for each encryption operation. </li>
+  <li> For CBC and CFB modes, a secure FIPS-compliant random number generator should be used to generate unpredictable IVs. </li>
+</ul>
+<p>The IV does not need be secret, so the IV or information sufficient to determine the IV may be transmitted along with the ciphertext.</p>
 <p>In the previous non-compliant example, the problem is not that the IV is hard-coded.<br> It is that the same IV is used for multiple encryption
 attempts.</p>
 <h2>How to fix it in Cryptodome</h2>
 <h3>Code examples</h3>
 <h4>Noncompliant code example</h4>
-<pre data-diff-id="1" data-diff-type="noncompliant">
+<pre data-diff-id="11" data-diff-type="noncompliant">
 from Crypto.Cipher import AES
 from Crypto.Random import get_random_bytes
 from Crypto.Util.Padding import pad
@@ -85,7 +89,7 @@ cipher.encrypt(pad(data, AES.block_size))  # Noncompliant
 </pre>
 <h4>Compliant solution</h4>
 <p>In this example, the code explicitly uses a number generator that is considered <strong>strong</strong>.</p>
-<pre data-diff-id="1" data-diff-type="compliant">
+<pre data-diff-id="11" data-diff-type="compliant">
 from Crypto.Cipher import AES
 from Crypto.Random import get_random_bytes
 from Crypto.Util.Padding import pad
@@ -96,8 +100,12 @@ cipher.encrypt(pad(data, AES.block_size))
 </pre>
 <h3>How does this work?</h3>
 <h4>Use unique IVs</h4>
-<p>To ensure strong security, the initialization vectors for each encryption operation must be unique and random but they do not have to be
-secret.</p>
+<p>To ensure high security, initialization vectors must meet two important criteria:</p>
+<ul>
+  <li> IVs must be unique for each encryption operation. </li>
+  <li> For CBC and CFB modes, a secure FIPS-compliant random number generator should be used to generate unpredictable IVs. </li>
+</ul>
+<p>The IV does not need be secret, so the IV or information sufficient to determine the IV may be transmitted along with the ciphertext.</p>
 <p>In the previous non-compliant example, the problem is not that the IV is hard-coded.<br> It is that the same IV is used for multiple encryption
 attempts.</p>
 <h2>Resources</h2>

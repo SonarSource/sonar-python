@@ -22,7 +22,7 @@ including unauthorized data access, system compromise, or even further exploitat
 <p>The following code contains examples of XML parsers that have external entity processing enabled. As a result, the parsers are vulnerable to XXE
 attacks if an attacker can control the XML file that is processed.</p>
 <h4>Noncompliant code example</h4>
-<pre data-diff-id="1" data-diff-type="noncompliant">
+<pre data-diff-id="11" data-diff-type="noncompliant">
 import xml.sax
 
 parser = xml.sax.make_parser()
@@ -33,7 +33,7 @@ parser.parse('xxe.xml')
 </pre>
 <h4>Compliant solution</h4>
 <p>The SAX parser does not process general external entities by default since version 3.7.1.</p>
-<pre data-diff-id="1" data-diff-type="compliant">
+<pre data-diff-id="11" data-diff-type="compliant">
 import xml.sax
 
 parser = xml.sax.make_parser()

@@ -62,13 +62,13 @@ sure to allow a grace period where tokens signed with the old key are still acce
 <h3>Code examples</h3>
 <p>The following code contains an example of JWT decoding without verification of the signature.</p>
 <h4>Noncompliant code example</h4>
-<pre data-diff-id="1" data-diff-type="noncompliant">
+<pre data-diff-id="11" data-diff-type="noncompliant">
 import python_jwt as jwt
 
 jwt.process_jwt(token) # Noncompliant
 </pre>
 <h4>Compliant solution</h4>
-<pre data-diff-id="1" data-diff-type="compliant">
+<pre data-diff-id="11" data-diff-type="compliant">
 import python_jwt as jwt
 
 jwt.process_jwt(token)

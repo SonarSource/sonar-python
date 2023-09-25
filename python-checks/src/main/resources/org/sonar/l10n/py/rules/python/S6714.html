@@ -5,7 +5,7 @@ would be to pass a generator to the <code>np.array</code> function, but doing so
 goal. This NumPy array will have a have a data type (dtype) of <code>object</code> and could hold any Python objects.</p>
 <p>One of the characteristics of NumPy arrays is homogeneity, meaning all its elements are of the same type. Creating an array of objects allows the
 user to create heterogeneous array without raising any errors and creating such an array can lead to bugs further in the program.</p>
-<pre data-diff-id="1" data-diff-type="noncompliant">
+<pre>
 arr = np.array(x**2 for x in range(10))
 
 arr.reshape(1)
