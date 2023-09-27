@@ -1,0 +1,25 @@
+{
+  "title": "The \"pandas.DataFrame.to_numpy()\" method should be preferred to the \"pandas.DataFrame.values\" attribute",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "data-science",
+    "pandas"
+  ],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-6741",
+  "sqKey": "S6741",
+  "scope": "All",
+  "quickfix": "unknown",
+  "code": {
+    "impacts": {
+      "MAINTAINABILITY": "MEDIUM",
+      "RELIABILITY": "MEDIUM"
+    },
+    "attribute": "CONVENTIONAL"
+  }
+}
