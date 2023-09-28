@@ -63,7 +63,7 @@ public class StringLiteralDuplicationCheck extends PythonVisitorCheck {
     key = "exclusionRegex",
     description = "RegEx matching literals to exclude from triggering an issue",
     defaultValue = "")
-  public String customExclusionRegex = DEFAULT_CUSTOM_EXCLUSION_PATTERN;
+  public String exclusionRegex = DEFAULT_CUSTOM_EXCLUSION_PATTERN;
 
   private Map<String, List<StringLiteral>> literalsByValue = new HashMap<>();
 
@@ -71,11 +71,11 @@ public class StringLiteralDuplicationCheck extends PythonVisitorCheck {
 
   private Optional<Pattern> customExclusionPattern() {
     if (!isCustomPatternInitialized) {
-      if (customExclusionRegex != null && !customExclusionRegex.isEmpty()) {
+      if (exclusionRegex != null && !exclusionRegex.isEmpty()) {
         try {
-          customPattern = Pattern.compile(customExclusionRegex, Pattern.DOTALL);
+          customPattern = Pattern.compile(exclusionRegex, Pattern.DOTALL);
         } catch (RuntimeException e) {
-          throw new IllegalStateException("Unable to compile regular expression: " + customExclusionRegex, e);
+          throw new IllegalStateException("Unable to compile regular expression: " + exclusionRegex, e);
         }
       }
       isCustomPatternInitialized = true;
