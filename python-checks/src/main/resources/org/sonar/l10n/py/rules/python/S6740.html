@@ -1,0 +1,47 @@
+<p>This rule raises an error when the <code>dtype</code> parameter is not provided when using <code>pandas.read_csv</code> or
+<code>pandas.read_table</code>.</p>
+<h2>Why is this an issue?</h2>
+<p>The pandas library provides an easy way to load data from documents hosted locally or remotely, for example with the <code>pandas.read_csv</code>
+or <code>pandas.read_table</code> functions:</p>
+<pre>
+import pandas as pd
+
+df = pd.read_csv("my_file.csv")
+</pre>
+<p>Pandas will infer the type of each columns of the CSV file and specify the datatype accordingly, making this code perfectly valid. However this
+snippet of code does not convey the proper intent of the user, and can raise questions such as:</p>
+<ul>
+  <li> What information can I access in <code>df</code>? </li>
+  <li> What are the names of the columns available in <code>df</code>? </li>
+</ul>
+<p>These questions arise as there are no descriptions of what kind of data is loaded into the data frame, making the code less understandable and
+harder to maintain.</p>
+<p>A straightforward way to fix these issues is by providing the schema of the data through the usage of the <code>dtype</code> parameter.</p>
+<h2>How to fix it</h2>
+<p>To fix this issue provide the <code>dtype</code> parameter to the <code>read_csv</code> or <code>read_table</code> function.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+import pandas as pd
+
+def foo():
+  return pd.read_csv("my_file.csv") # Noncompliant: it is unclear which type of data the data frame holds.
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+import pandas as pd
+
+def foo():
+  return pd.read_csv(
+          "my_file.csv",
+          dtype={'name': 'str', 'age': 'int'}) # Compliant
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Pandas Documentation - <a href="https://pandas.pydata.org/docs/reference/api/pandas.read_csv.html#pandas-read-csv">pandas.read_csv</a> </li>
+  <li> Pandas Documentation - <a href="https://pandas.pydata.org/docs/reference/api/pandas.read_table.html#pandas-read-table">pandas.read_table</a>
+  </li>
+  <li> Pandas Documentation - <a href="https://pandas.pydata.org/docs/user_guide/basics.html#dtypes">dtypes</a> </li>
+</ul>
+
