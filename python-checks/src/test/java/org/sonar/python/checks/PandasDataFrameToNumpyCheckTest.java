@@ -24,11 +24,9 @@ import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 class PandasDataFrameToNumpyCheckTest {
 
-  PandasDataFrameToNumpyCheck check = new PandasDataFrameToNumpyCheck();
-
   @Test
   void test() {
-    PythonCheckVerifier.verify("src/test/resources/checks/pandasDataFrameToNumpy.py", check);
+    PythonCheckVerifier.verify("src/test/resources/checks/pandasDataFrameToNumpy.py", new PandasDataFrameToNumpyCheck());
   }
 
 }
