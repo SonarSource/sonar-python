@@ -42,9 +42,9 @@ public class PandasReadNoDataTypeCheck extends PythonSubscriptionCheck {
     CallExpression callExpression = (CallExpression) subscriptionContext.syntaxNode();
     Optional.of(callExpression)
       .filter(PandasReadNoDataTypeCheck::isReadCall)
-      .map(CallExpression::arguments)
-      .filter(args -> TreeUtils.nthArgumentOrKeyword(1, "dtype", args) == null)
-      .ifPresent(args -> subscriptionContext.addIssue(callExpression.callee().lastToken(), getMessage(callExpression)));
+      .filter(ce -> TreeUtils.nthArgumentOrKeyword(1, "dtype", ce.arguments()) == null)
+      .map(PandasReadNoDataTypeCheck::getMessage)
+      .ifPresent(message -> subscriptionContext.addIssue(callExpression.callee().lastToken(), message));
   }
 
   private static boolean isReadCall(CallExpression callExpression) {
