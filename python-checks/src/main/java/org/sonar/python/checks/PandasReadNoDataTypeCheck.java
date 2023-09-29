@@ -25,6 +25,8 @@ import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.CallExpression;
+import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.tree.TreeUtils;
 
@@ -43,8 +45,8 @@ public class PandasReadNoDataTypeCheck extends PythonSubscriptionCheck {
     Optional.of(callExpression)
       .filter(PandasReadNoDataTypeCheck::isReadCall)
       .filter(ce -> TreeUtils.nthArgumentOrKeyword(1, "dtype", ce.arguments()) == null)
-      .map(PandasReadNoDataTypeCheck::getMessage)
-      .ifPresent(message -> subscriptionContext.addIssue(callExpression.callee().lastToken(), message));
+      .map(PandasReadNoDataTypeCheck::getNameTree)
+      .ifPresent(name -> subscriptionContext.addIssue(name, getMessage(callExpression)));
   }
 
   private static boolean isReadCall(CallExpression callExpression) {
@@ -54,6 +56,15 @@ public class PandasReadNoDataTypeCheck extends PythonSubscriptionCheck {
       .map(Symbol::fullyQualifiedName)
       .filter(PandasReadNoDataTypeCheck::isPandasReadCall)
       .isPresent();
+  }
+
+  private static Tree getNameTree(CallExpression expression) {
+    return Optional.of(expression.callee())
+      .flatMap(TreeUtils.toOptionalInstanceOfMapper(QualifiedExpression.class))
+      .map(QualifiedExpression::name)
+      .orElse(Optional.of(expression.callee())
+        .flatMap(TreeUtils.toOptionalInstanceOfMapper(Name.class))
+        .orElse(null));
   }
 
   private static boolean isPandasReadCall(String fqn) {
