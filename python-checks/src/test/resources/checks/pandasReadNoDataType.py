@@ -1,22 +1,22 @@
 def non_compliant_1(xx):
     import pandas as pd
 
-    _ = pd.read_csv("my_file.csv")  # Noncompliant {{The 'dtype' parameter should be used in calls to 'pandas.read_csv'.}}
+    _ = pd.read_csv("my_file.csv")  # Noncompliant {{Provide the 'dtype' parameter when calling 'pandas.read_csv'.}}
     #      ^^^^^^^^
 
-    _ = pd.read_table("my_file.csv")  # Noncompliant {{The 'dtype' parameter should be used in calls to 'pandas.read_table'.}}
+    _ = pd.read_table("my_file.csv")  # Noncompliant {{Provide the 'dtype' parameter when calling 'pandas.read_table'.}}
     #      ^^^^^^^^^^
 
-    _ = pd.read_csv(xx)  # Noncompliant {{The 'dtype' parameter should be used in calls to 'pandas.read_csv'.}}
+    _ = pd.read_csv(xx)  # Noncompliant {{Provide the 'dtype' parameter when calling 'pandas.read_csv'.}}
     #      ^^^^^^^^
 
 
 def non_compliant_2():
     from pandas import read_csv, read_table
 
-    _ = read_csv("my_file.csv")  # Noncompliant {{The 'dtype' parameter should be used in calls to 'pandas.read_csv'.}}
+    _ = read_csv("my_file.csv")  # Noncompliant {{Provide the 'dtype' parameter when calling 'pandas.read_csv'.}}
     #   ^^^^^^^^
-    _ = read_table("my_file.csv")  # Noncompliant {{The 'dtype' parameter should be used in calls to 'pandas.read_table'.}}
+    _ = read_table("my_file.csv")  # Noncompliant {{Provide the 'dtype' parameter when calling 'pandas.read_table'.}}
     #   ^^^^^^^^^^
 
 
@@ -33,7 +33,7 @@ def compliant_1(xx):
         dtype={'name': 'str', 'age': 'int'})
 
     _ = xx.read_csv("my_file.csv")
-    
+
     _ = xx.read_table("my_file.csv")
 
     _ = np.array([1, 2, 3])
