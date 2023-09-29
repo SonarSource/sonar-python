@@ -51,7 +51,6 @@ public class PandasReadNoDataTypeCheck extends PythonSubscriptionCheck {
 
   private static boolean isReadCall(CallExpression callExpression) {
     return Optional.of(callExpression)
-      .filter(ce -> !getMessage(ce).isEmpty())
       .map(CallExpression::calleeSymbol)
       .map(Symbol::fullyQualifiedName)
       .filter(PandasReadNoDataTypeCheck::isPandasReadCall)
