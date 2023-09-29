@@ -1,0 +1,565 @@
+
+pandas.core.reshape.pivot‚!
+pivotpandas.core.reshape.pivot.pivot":
+pandas.core.frame.DataFrame"pandas.core.frame.DataFrame*D
+data:
+pandas.core.frame.DataFrame"pandas.core.frame.DataFrame*‰
+
+index÷
+
+éUnion[TypeAlias[Union[builtins.str,datetime.date,datetime.datetime,datetime.timedelta,builtins.bool,builtins.int,builtins.float,builtins.complex,pandas._libs.tslibs.timestamps.Timestamp,pandas._libs.tslibs.timedeltas.Timedelta]],builtins.list[pandas._typing.HashableT1]]∞
+ﬁTypeAlias[Union[builtins.str,datetime.date,datetime.datetime,datetime.timedelta,builtins.bool,builtins.int,builtins.float,builtins.complex,pandas._libs.tslibs.timestamps.Timestamp,pandas._libs.tslibs.timedeltas.Timedelta]]ö
+”Union[builtins.str,datetime.date,datetime.datetime,datetime.timedelta,builtins.bool,builtins.int,builtins.float,builtins.complex,pandas._libs.tslibs.timestamps.Timestamp,pandas._libs.tslibs.timedeltas.Timedelta]
+builtins.str"builtins.str
+datetime.date"datetime.date&
+datetime.datetime"datetime.datetime(
+datetime.timedelta"datetime.timedelta
+builtins.bool"builtins.bool
+builtins.int"builtins.int 
+builtins.float"builtins.float$
+builtins.complex"builtins.complexT
+(pandas._libs.tslibs.timestamps.Timestamp"(pandas._libs.tslibs.timestamps.TimestampT
+(pandas._libs.tslibs.timedeltas.Timedelta"(pandas._libs.tslibs.timedeltas.Timedelta".pandas.core.reshape.pivot._NonIterableHashableç
+(builtins.list[pandas._typing.HashableT1]R
+pandas._typing.HashableT1"
+typing.Hashable"typing.Hashable"typing.Hashable"builtins.list *Ê
+
+columns÷
+
+éUnion[TypeAlias[Union[builtins.str,datetime.date,datetime.datetime,datetime.timedelta,builtins.bool,builtins.int,builtins.float,builtins.complex,pandas._libs.tslibs.timestamps.Timestamp,pandas._libs.tslibs.timedeltas.Timedelta]],builtins.list[pandas._typing.HashableT2]]∞
+ﬁTypeAlias[Union[builtins.str,datetime.date,datetime.datetime,datetime.timedelta,builtins.bool,builtins.int,builtins.float,builtins.complex,pandas._libs.tslibs.timestamps.Timestamp,pandas._libs.tslibs.timedeltas.Timedelta]]ö
+”Union[builtins.str,datetime.date,datetime.datetime,datetime.timedelta,builtins.bool,builtins.int,builtins.float,builtins.complex,pandas._libs.tslibs.timestamps.Timestamp,pandas._libs.tslibs.timedeltas.Timedelta]
+builtins.str"builtins.str
+datetime.date"datetime.date&
+datetime.datetime"datetime.datetime(
+datetime.timedelta"datetime.timedelta
+builtins.bool"builtins.bool
+builtins.int"builtins.int 
+builtins.float"builtins.float$
+builtins.complex"builtins.complexT
+(pandas._libs.tslibs.timestamps.Timestamp"(pandas._libs.tslibs.timestamps.TimestampT
+(pandas._libs.tslibs.timedeltas.Timedelta"(pandas._libs.tslibs.timedeltas.Timedelta".pandas.core.reshape.pivot._NonIterableHashableç
+(builtins.list[pandas._typing.HashableT2]R
+pandas._typing.HashableT2"
+typing.Hashable"typing.Hashable"typing.Hashable"builtins.list *Â
+
+values÷
+
+éUnion[TypeAlias[Union[builtins.str,datetime.date,datetime.datetime,datetime.timedelta,builtins.bool,builtins.int,builtins.float,builtins.complex,pandas._libs.tslibs.timestamps.Timestamp,pandas._libs.tslibs.timedeltas.Timedelta]],builtins.list[pandas._typing.HashableT3]]∞
+ﬁTypeAlias[Union[builtins.str,datetime.date,datetime.datetime,datetime.timedelta,builtins.bool,builtins.int,builtins.float,builtins.complex,pandas._libs.tslibs.timestamps.Timestamp,pandas._libs.tslibs.timedeltas.Timedelta]]ö
+”Union[builtins.str,datetime.date,datetime.datetime,datetime.timedelta,builtins.bool,builtins.int,builtins.float,builtins.complex,pandas._libs.tslibs.timestamps.Timestamp,pandas._libs.tslibs.timedeltas.Timedelta]
+builtins.str"builtins.str
+datetime.date"datetime.date&
+datetime.datetime"datetime.datetime(
+datetime.timedelta"datetime.timedelta
+builtins.bool"builtins.bool
+builtins.int"builtins.int 
+builtins.float"builtins.float$
+builtins.complex"builtins.complexT
+(pandas._libs.tslibs.timestamps.Timestamp"(pandas._libs.tslibs.timestamps.TimestampT
+(pandas._libs.tslibs.timedeltas.Timedelta"(pandas._libs.tslibs.timedeltas.Timedelta".pandas.core.reshape.pivot._NonIterableHashableç
+(builtins.list[pandas._typing.HashableT3]R
+pandas._typing.HashableT3"
+typing.Hashable"typing.Hashable"typing.Hashable"builtins.list "˙ì
+pivot_table%pandas.core.reshape.pivot.pivot_tableè1
+pivot_table%pandas.core.reshape.pivot.pivot_table":
+pandas.core.frame.DataFrame"pandas.core.frame.DataFrame*D
+data:
+pandas.core.frame.DataFrame"pandas.core.frame.DataFrame*ö
+valuesã
+[Union[TypeAlias[Union[typing.Hashable,None]],builtins.list[pandas._typing.HashableT3],None]è
+&TypeAlias[Union[typing.Hashable,None]]M
+Union[typing.Hashable,None]"
+typing.Hashable"typing.Hashable
+None"pandas._typing.Labelç
+(builtins.list[pandas._typing.HashableT3]R
+pandas._typing.HashableT3"
+typing.Hashable"typing.Hashable"typing.Hashable"builtins.list
+None *—
+index√
+©TypeAlias[Union[TypeAlias[Union[typing.Hashable,None]],builtins.list[pandas._typing.HashableT1],pandas.core.series.Series[Any],pandas.core.groupby.grouper.Grouper,None]]·
+ûUnion[TypeAlias[Union[typing.Hashable,None]],builtins.list[pandas._typing.HashableT1],pandas.core.series.Series[Any],pandas.core.groupby.grouper.Grouper,None]è
+&TypeAlias[Union[typing.Hashable,None]]M
+Union[typing.Hashable,None]"
+typing.Hashable"typing.Hashable
+None"pandas._typing.Labelç
+(builtins.list[pandas._typing.HashableT1]R
+pandas._typing.HashableT1"
+typing.Hashable"typing.Hashable"typing.Hashable"builtins.listD
+pandas.core.series.Series[Any]
+Any"pandas.core.series.SeriesJ
+#pandas.core.groupby.grouper.Grouper"#pandas.core.groupby.grouper.Grouper
+None"/pandas.core.reshape.pivot._PivotTableIndexTypes *’
+columns≈
+©TypeAlias[Union[TypeAlias[Union[typing.Hashable,None]],builtins.list[pandas._typing.HashableT2],pandas.core.series.Series[Any],pandas.core.groupby.grouper.Grouper,None]]·
+ûUnion[TypeAlias[Union[typing.Hashable,None]],builtins.list[pandas._typing.HashableT2],pandas.core.series.Series[Any],pandas.core.groupby.grouper.Grouper,None]è
+&TypeAlias[Union[typing.Hashable,None]]M
+Union[typing.Hashable,None]"
+typing.Hashable"typing.Hashable
+None"pandas._typing.Labelç
+(builtins.list[pandas._typing.HashableT2]R
+pandas._typing.HashableT2"
+typing.Hashable"typing.Hashable"typing.Hashable"builtins.listD
+pandas.core.series.Series[Any]
+Any"pandas.core.series.SeriesJ
+#pandas.core.groupby.grouper.Grouper"#pandas.core.groupby.grouper.Grouper
+None"1pandas.core.reshape.pivot._PivotTableColumnsTypes *å
+aggfunc¸
+æUnion[TypeAlias[Union[TypeAlias[CallableType[builtins.function]],numpy.ufunc,Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]],builtins.list[Unknown],typing.Mapping[typing.Hashable,Unknown]]™	
+¯TypeAlias[Union[TypeAlias[CallableType[builtins.function]],numpy.ufunc,Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]Å
+ÌUnion[TypeAlias[CallableType[builtins.function]],numpy.ufunc,Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]®
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"+pandas.core.reshape.pivot._PivotAggCallable
+numpy.ufunc"numpy.ufunc7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str"'pandas.core.reshape.pivot._PivotAggFunc)
+builtins.list[Unknown] "builtins.list_
+'typing.Mapping[typing.Hashable,Unknown]"
+typing.Hashable"typing.Hashable "typing.Mapping *Ö
+
+fill_valueÚ
+ÆUnion[TypeAlias[Union[TypeAlias[Union[builtins.str,builtins.bytes,datetime.date,datetime.datetime,datetime.timedelta,numpy.datetime64,numpy.timedelta64,builtins.bool,builtins.int,builtins.float,pandas._libs.tslibs.timestamps.Timestamp,pandas._libs.tslibs.timedeltas.Timedelta]],builtins.complex]],None]≤
+¢TypeAlias[Union[TypeAlias[Union[builtins.str,builtins.bytes,datetime.date,datetime.datetime,datetime.timedelta,numpy.datetime64,numpy.timedelta64,builtins.bool,builtins.int,builtins.float,pandas._libs.tslibs.timestamps.Timestamp,pandas._libs.tslibs.timedeltas.Timedelta]],builtins.complex]]Ò
+
+óUnion[TypeAlias[Union[builtins.str,builtins.bytes,datetime.date,datetime.datetime,datetime.timedelta,numpy.datetime64,numpy.timedelta64,builtins.bool,builtins.int,builtins.float,pandas._libs.tslibs.timestamps.Timestamp,pandas._libs.tslibs.timedeltas.Timedelta]],builtins.complex]¨
+ˇTypeAlias[Union[builtins.str,builtins.bytes,datetime.date,datetime.datetime,datetime.timedelta,numpy.datetime64,numpy.timedelta64,builtins.bool,builtins.int,builtins.float,pandas._libs.tslibs.timestamps.Timestamp,pandas._libs.tslibs.timedeltas.Timedelta]]Ö
+ÙUnion[builtins.str,builtins.bytes,datetime.date,datetime.datetime,datetime.timedelta,numpy.datetime64,numpy.timedelta64,builtins.bool,builtins.int,builtins.float,pandas._libs.tslibs.timestamps.Timestamp,pandas._libs.tslibs.timedeltas.Timedelta]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytes
+datetime.date"datetime.date&
+datetime.datetime"datetime.datetime(
+datetime.timedelta"datetime.timedelta$
+numpy.datetime64"numpy.datetime64&
+numpy.timedelta64"numpy.timedelta64
+builtins.bool"builtins.bool
+builtins.int"builtins.int 
+builtins.float"builtins.floatT
+(pandas._libs.tslibs.timestamps.Timestamp"(pandas._libs.tslibs.timestamps.TimestampT
+(pandas._libs.tslibs.timedeltas.Timedelta"(pandas._libs.tslibs.timedeltas.Timedelta"pandas._typing.IndexIterScalar$
+builtins.complex"builtins.complex"pandas._typing.Scalar
+None *-
+margins
+builtins.bool"builtins.bool *,
+dropna
+builtins.bool"builtins.bool *0
+margins_name
+builtins.str"builtins.str *.
+observed
+builtins.bool"builtins.bool **
+sort
+builtins.bool"builtins.bool 0:overloadXò1
+pivot_table%pandas.core.reshape.pivot.pivot_table":
+pandas.core.frame.DataFrame"pandas.core.frame.DataFrame*D
+data:
+pandas.core.frame.DataFrame"pandas.core.frame.DataFrame*ö
+valuesã
+[Union[TypeAlias[Union[typing.Hashable,None]],builtins.list[pandas._typing.HashableT3],None]è
+&TypeAlias[Union[typing.Hashable,None]]M
+Union[typing.Hashable,None]"
+typing.Hashable"typing.Hashable
+None"pandas._typing.Labelç
+(builtins.list[pandas._typing.HashableT3]R
+pandas._typing.HashableT3"
+typing.Hashable"typing.Hashable"typing.Hashable"builtins.list
+None *U
+indexJ
+#pandas.core.groupby.grouper.Grouper"#pandas.core.groupby.grouper.Grouper*€
+columnsÀ
+®Union[TypeAlias[Union[TypeAlias[Union[typing.Hashable,None]],builtins.list[pandas._typing.HashableT2],pandas.core.series.Series[Any],pandas.core.groupby.grouper.Grouper,None]],pandas.core.indexes.base.Index[Any],TypeAlias[numpy.ndarray[Any,numpy.dtype[numpy._typing._array_like._ScalarType_co]]]]≈
+©TypeAlias[Union[TypeAlias[Union[typing.Hashable,None]],builtins.list[pandas._typing.HashableT2],pandas.core.series.Series[Any],pandas.core.groupby.grouper.Grouper,None]]·
+ûUnion[TypeAlias[Union[typing.Hashable,None]],builtins.list[pandas._typing.HashableT2],pandas.core.series.Series[Any],pandas.core.groupby.grouper.Grouper,None]è
+&TypeAlias[Union[typing.Hashable,None]]M
+Union[typing.Hashable,None]"
+typing.Hashable"typing.Hashable
+None"pandas._typing.Labelç
+(builtins.list[pandas._typing.HashableT2]R
+pandas._typing.HashableT2"
+typing.Hashable"typing.Hashable"typing.Hashable"builtins.listD
+pandas.core.series.Series[Any]
+Any"pandas.core.series.SeriesJ
+#pandas.core.groupby.grouper.Grouper"#pandas.core.groupby.grouper.Grouper
+None"1pandas.core.reshape.pivot._PivotTableColumnsTypesN
+#pandas.core.indexes.base.Index[Any]
+Any"pandas.core.indexes.base.IndexÉ
+STypeAlias[numpy.ndarray[Any,numpy.dtype[numpy._typing._array_like._ScalarType_co]]]Ü
+Hnumpy.ndarray[Any,numpy.dtype[numpy._typing._array_like._ScalarType_co]]
+Any°
+5numpy.dtype[numpy._typing._array_like._ScalarType_co][
+(numpy._typing._array_like._ScalarType_co
+numpy.generic"numpy.generic"numpy.generic"numpy.dtype"numpy.ndarray"!numpy._typing._array_like.NDArray *å
+aggfunc¸
+æUnion[TypeAlias[Union[TypeAlias[CallableType[builtins.function]],numpy.ufunc,Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]],builtins.list[Unknown],typing.Mapping[typing.Hashable,Unknown]]™	
+¯TypeAlias[Union[TypeAlias[CallableType[builtins.function]],numpy.ufunc,Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]Å
+ÌUnion[TypeAlias[CallableType[builtins.function]],numpy.ufunc,Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]®
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"+pandas.core.reshape.pivot._PivotAggCallable
+numpy.ufunc"numpy.ufunc7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str"'pandas.core.reshape.pivot._PivotAggFunc)
+builtins.list[Unknown] "builtins.list_
+'typing.Mapping[typing.Hashable,Unknown]"
+typing.Hashable"typing.Hashable "typing.Mapping *Ö
+
+fill_valueÚ
+ÆUnion[TypeAlias[Union[TypeAlias[Union[builtins.str,builtins.bytes,datetime.date,datetime.datetime,datetime.timedelta,numpy.datetime64,numpy.timedelta64,builtins.bool,builtins.int,builtins.float,pandas._libs.tslibs.timestamps.Timestamp,pandas._libs.tslibs.timedeltas.Timedelta]],builtins.complex]],None]≤
+¢TypeAlias[Union[TypeAlias[Union[builtins.str,builtins.bytes,datetime.date,datetime.datetime,datetime.timedelta,numpy.datetime64,numpy.timedelta64,builtins.bool,builtins.int,builtins.float,pandas._libs.tslibs.timestamps.Timestamp,pandas._libs.tslibs.timedeltas.Timedelta]],builtins.complex]]Ò
+
+óUnion[TypeAlias[Union[builtins.str,builtins.bytes,datetime.date,datetime.datetime,datetime.timedelta,numpy.datetime64,numpy.timedelta64,builtins.bool,builtins.int,builtins.float,pandas._libs.tslibs.timestamps.Timestamp,pandas._libs.tslibs.timedeltas.Timedelta]],builtins.complex]¨
+ˇTypeAlias[Union[builtins.str,builtins.bytes,datetime.date,datetime.datetime,datetime.timedelta,numpy.datetime64,numpy.timedelta64,builtins.bool,builtins.int,builtins.float,pandas._libs.tslibs.timestamps.Timestamp,pandas._libs.tslibs.timedeltas.Timedelta]]Ö
+ÙUnion[builtins.str,builtins.bytes,datetime.date,datetime.datetime,datetime.timedelta,numpy.datetime64,numpy.timedelta64,builtins.bool,builtins.int,builtins.float,pandas._libs.tslibs.timestamps.Timestamp,pandas._libs.tslibs.timedeltas.Timedelta]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytes
+datetime.date"datetime.date&
+datetime.datetime"datetime.datetime(
+datetime.timedelta"datetime.timedelta$
+numpy.datetime64"numpy.datetime64&
+numpy.timedelta64"numpy.timedelta64
+builtins.bool"builtins.bool
+builtins.int"builtins.int 
+builtins.float"builtins.floatT
+(pandas._libs.tslibs.timestamps.Timestamp"(pandas._libs.tslibs.timestamps.TimestampT
+(pandas._libs.tslibs.timedeltas.Timedelta"(pandas._libs.tslibs.timedeltas.Timedelta"pandas._typing.IndexIterScalar$
+builtins.complex"builtins.complex"pandas._typing.Scalar
+None *-
+margins
+builtins.bool"builtins.bool *,
+dropna
+builtins.bool"builtins.bool *0
+margins_name
+builtins.str"builtins.str *.
+observed
+builtins.bool"builtins.bool **
+sort
+builtins.bool"builtins.bool 0:overloadXñ1
+pivot_table%pandas.core.reshape.pivot.pivot_table":
+pandas.core.frame.DataFrame"pandas.core.frame.DataFrame*D
+data:
+pandas.core.frame.DataFrame"pandas.core.frame.DataFrame*ö
+valuesã
+[Union[TypeAlias[Union[typing.Hashable,None]],builtins.list[pandas._typing.HashableT3],None]è
+&TypeAlias[Union[typing.Hashable,None]]M
+Union[typing.Hashable,None]"
+typing.Hashable"typing.Hashable
+None"pandas._typing.Labelç
+(builtins.list[pandas._typing.HashableT3]R
+pandas._typing.HashableT3"
+typing.Hashable"typing.Hashable"typing.Hashable"builtins.list
+None *◊
+index…
+®Union[TypeAlias[Union[TypeAlias[Union[typing.Hashable,None]],builtins.list[pandas._typing.HashableT1],pandas.core.series.Series[Any],pandas.core.groupby.grouper.Grouper,None]],pandas.core.indexes.base.Index[Any],TypeAlias[numpy.ndarray[Any,numpy.dtype[numpy._typing._array_like._ScalarType_co]]]]√
+©TypeAlias[Union[TypeAlias[Union[typing.Hashable,None]],builtins.list[pandas._typing.HashableT1],pandas.core.series.Series[Any],pandas.core.groupby.grouper.Grouper,None]]·
+ûUnion[TypeAlias[Union[typing.Hashable,None]],builtins.list[pandas._typing.HashableT1],pandas.core.series.Series[Any],pandas.core.groupby.grouper.Grouper,None]è
+&TypeAlias[Union[typing.Hashable,None]]M
+Union[typing.Hashable,None]"
+typing.Hashable"typing.Hashable
+None"pandas._typing.Labelç
+(builtins.list[pandas._typing.HashableT1]R
+pandas._typing.HashableT1"
+typing.Hashable"typing.Hashable"typing.Hashable"builtins.listD
+pandas.core.series.Series[Any]
+Any"pandas.core.series.SeriesJ
+#pandas.core.groupby.grouper.Grouper"#pandas.core.groupby.grouper.Grouper
+None"/pandas.core.reshape.pivot._PivotTableIndexTypesN
+#pandas.core.indexes.base.Index[Any]
+Any"pandas.core.indexes.base.IndexÉ
+STypeAlias[numpy.ndarray[Any,numpy.dtype[numpy._typing._array_like._ScalarType_co]]]Ü
+Hnumpy.ndarray[Any,numpy.dtype[numpy._typing._array_like._ScalarType_co]]
+Any°
+5numpy.dtype[numpy._typing._array_like._ScalarType_co][
+(numpy._typing._array_like._ScalarType_co
+numpy.generic"numpy.generic"numpy.generic"numpy.dtype"numpy.ndarray"!numpy._typing._array_like.NDArray *W
+columnsJ
+#pandas.core.groupby.grouper.Grouper"#pandas.core.groupby.grouper.Grouper*å
+aggfunc¸
+æUnion[TypeAlias[Union[TypeAlias[CallableType[builtins.function]],numpy.ufunc,Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]],builtins.list[Unknown],typing.Mapping[typing.Hashable,Unknown]]™	
+¯TypeAlias[Union[TypeAlias[CallableType[builtins.function]],numpy.ufunc,Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]Å
+ÌUnion[TypeAlias[CallableType[builtins.function]],numpy.ufunc,Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]®
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"+pandas.core.reshape.pivot._PivotAggCallable
+numpy.ufunc"numpy.ufunc7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str"'pandas.core.reshape.pivot._PivotAggFunc)
+builtins.list[Unknown] "builtins.list_
+'typing.Mapping[typing.Hashable,Unknown]"
+typing.Hashable"typing.Hashable "typing.Mapping *Ö
+
+fill_valueÚ
+ÆUnion[TypeAlias[Union[TypeAlias[Union[builtins.str,builtins.bytes,datetime.date,datetime.datetime,datetime.timedelta,numpy.datetime64,numpy.timedelta64,builtins.bool,builtins.int,builtins.float,pandas._libs.tslibs.timestamps.Timestamp,pandas._libs.tslibs.timedeltas.Timedelta]],builtins.complex]],None]≤
+¢TypeAlias[Union[TypeAlias[Union[builtins.str,builtins.bytes,datetime.date,datetime.datetime,datetime.timedelta,numpy.datetime64,numpy.timedelta64,builtins.bool,builtins.int,builtins.float,pandas._libs.tslibs.timestamps.Timestamp,pandas._libs.tslibs.timedeltas.Timedelta]],builtins.complex]]Ò
+
+óUnion[TypeAlias[Union[builtins.str,builtins.bytes,datetime.date,datetime.datetime,datetime.timedelta,numpy.datetime64,numpy.timedelta64,builtins.bool,builtins.int,builtins.float,pandas._libs.tslibs.timestamps.Timestamp,pandas._libs.tslibs.timedeltas.Timedelta]],builtins.complex]¨
+ˇTypeAlias[Union[builtins.str,builtins.bytes,datetime.date,datetime.datetime,datetime.timedelta,numpy.datetime64,numpy.timedelta64,builtins.bool,builtins.int,builtins.float,pandas._libs.tslibs.timestamps.Timestamp,pandas._libs.tslibs.timedeltas.Timedelta]]Ö
+ÙUnion[builtins.str,builtins.bytes,datetime.date,datetime.datetime,datetime.timedelta,numpy.datetime64,numpy.timedelta64,builtins.bool,builtins.int,builtins.float,pandas._libs.tslibs.timestamps.Timestamp,pandas._libs.tslibs.timedeltas.Timedelta]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytes
+datetime.date"datetime.date&
+datetime.datetime"datetime.datetime(
+datetime.timedelta"datetime.timedelta$
+numpy.datetime64"numpy.datetime64&
+numpy.timedelta64"numpy.timedelta64
+builtins.bool"builtins.bool
+builtins.int"builtins.int 
+builtins.float"builtins.floatT
+(pandas._libs.tslibs.timestamps.Timestamp"(pandas._libs.tslibs.timestamps.TimestampT
+(pandas._libs.tslibs.timedeltas.Timedelta"(pandas._libs.tslibs.timedeltas.Timedelta"pandas._typing.IndexIterScalar$
+builtins.complex"builtins.complex"pandas._typing.Scalar
+None *-
+margins
+builtins.bool"builtins.bool *,
+dropna
+builtins.bool"builtins.bool *0
+margins_name
+builtins.str"builtins.str *.
+observed
+builtins.bool"builtins.bool **
+sort
+builtins.bool"builtins.bool 0:overloadX"ùX
+crosstab"pandas.core.reshape.pivot.crosstabŒ2
+crosstab"pandas.core.reshape.pivot.crosstab":
+pandas.core.frame.DataFrame"pandas.core.frame.DataFrame*€
+indexœ
+öUnion[builtins.list[Any],TypeAlias[Union[TypeAlias[Union[pandas.core.indexes.base.Index[Any],pandas.core.series.Series[Any],numpy.ndarray[Any,Any]]],TypeAlias[Union[pandas.core.arrays.base.ExtensionArray,numpy.ndarray[Any,Any]]]]],builtins.list[Union[typing.Sequence[Any],Unknown]]],
+builtins.list[Any]
+Any"builtins.list‹	
+ÕTypeAlias[Union[TypeAlias[Union[pandas.core.indexes.base.Index[Any],pandas.core.series.Series[Any],numpy.ndarray[Any,Any]]],TypeAlias[Union[pandas.core.arrays.base.ExtensionArray,numpy.ndarray[Any,Any]]]]]÷
+¬Union[TypeAlias[Union[pandas.core.indexes.base.Index[Any],pandas.core.series.Series[Any],numpy.ndarray[Any,Any]]],TypeAlias[Union[pandas.core.arrays.base.ExtensionArray,numpy.ndarray[Any,Any]]]]ƒ
+kTypeAlias[Union[pandas.core.indexes.base.Index[Any],pandas.core.series.Series[Any],numpy.ndarray[Any,Any]]]µ
+`Union[pandas.core.indexes.base.Index[Any],pandas.core.series.Series[Any],numpy.ndarray[Any,Any]]N
+#pandas.core.indexes.base.Index[Any]
+Any"pandas.core.indexes.base.IndexD
+pandas.core.series.Series[Any]
+Any"pandas.core.series.Series9
+numpy.ndarray[Any,Any]
+Any
+Any"numpy.ndarray"pandas._typing.AnyArrayLike≈
+OTypeAlias[Union[pandas.core.arrays.base.ExtensionArray,numpy.ndarray[Any,Any]]]’
+DUnion[pandas.core.arrays.base.ExtensionArray,numpy.ndarray[Any,Any]]P
+&pandas.core.arrays.base.ExtensionArray"&pandas.core.arrays.base.ExtensionArray9
+numpy.ndarray[Any,Any]
+Any
+Any"numpy.ndarray"pandas._typing.ArrayLike"/pandas.core.reshape.pivot._ExtendedAnyArrayLike†
+2builtins.list[Union[typing.Sequence[Any],Unknown]][
+#Union[typing.Sequence[Any],Unknown]0
+typing.Sequence[Any]
+Any"typing.Sequence "builtins.list*›
+columnsœ
+öUnion[builtins.list[Any],TypeAlias[Union[TypeAlias[Union[pandas.core.indexes.base.Index[Any],pandas.core.series.Series[Any],numpy.ndarray[Any,Any]]],TypeAlias[Union[pandas.core.arrays.base.ExtensionArray,numpy.ndarray[Any,Any]]]]],builtins.list[Union[typing.Sequence[Any],Unknown]]],
+builtins.list[Any]
+Any"builtins.list‹	
+ÕTypeAlias[Union[TypeAlias[Union[pandas.core.indexes.base.Index[Any],pandas.core.series.Series[Any],numpy.ndarray[Any,Any]]],TypeAlias[Union[pandas.core.arrays.base.ExtensionArray,numpy.ndarray[Any,Any]]]]]÷
+¬Union[TypeAlias[Union[pandas.core.indexes.base.Index[Any],pandas.core.series.Series[Any],numpy.ndarray[Any,Any]]],TypeAlias[Union[pandas.core.arrays.base.ExtensionArray,numpy.ndarray[Any,Any]]]]ƒ
+kTypeAlias[Union[pandas.core.indexes.base.Index[Any],pandas.core.series.Series[Any],numpy.ndarray[Any,Any]]]µ
+`Union[pandas.core.indexes.base.Index[Any],pandas.core.series.Series[Any],numpy.ndarray[Any,Any]]N
+#pandas.core.indexes.base.Index[Any]
+Any"pandas.core.indexes.base.IndexD
+pandas.core.series.Series[Any]
+Any"pandas.core.series.Series9
+numpy.ndarray[Any,Any]
+Any
+Any"numpy.ndarray"pandas._typing.AnyArrayLike≈
+OTypeAlias[Union[pandas.core.arrays.base.ExtensionArray,numpy.ndarray[Any,Any]]]’
+DUnion[pandas.core.arrays.base.ExtensionArray,numpy.ndarray[Any,Any]]P
+&pandas.core.arrays.base.ExtensionArray"&pandas.core.arrays.base.ExtensionArray9
+numpy.ndarray[Any,Any]
+Any
+Any"numpy.ndarray"pandas._typing.ArrayLike"/pandas.core.reshape.pivot._ExtendedAnyArrayLike†
+2builtins.list[Union[typing.Sequence[Any],Unknown]][
+#Union[typing.Sequence[Any],Unknown]0
+typing.Sequence[Any]
+Any"typing.Sequence "builtins.list*Ü
+values˘
+ÁUnion[builtins.list[Any],TypeAlias[Union[TypeAlias[Union[pandas.core.indexes.base.Index[Any],pandas.core.series.Series[Any],numpy.ndarray[Any,Any]]],TypeAlias[Union[pandas.core.arrays.base.ExtensionArray,numpy.ndarray[Any,Any]]]]]],
+builtins.list[Any]
+Any"builtins.list‹	
+ÕTypeAlias[Union[TypeAlias[Union[pandas.core.indexes.base.Index[Any],pandas.core.series.Series[Any],numpy.ndarray[Any,Any]]],TypeAlias[Union[pandas.core.arrays.base.ExtensionArray,numpy.ndarray[Any,Any]]]]]÷
+¬Union[TypeAlias[Union[pandas.core.indexes.base.Index[Any],pandas.core.series.Series[Any],numpy.ndarray[Any,Any]]],TypeAlias[Union[pandas.core.arrays.base.ExtensionArray,numpy.ndarray[Any,Any]]]]ƒ
+kTypeAlias[Union[pandas.core.indexes.base.Index[Any],pandas.core.series.Series[Any],numpy.ndarray[Any,Any]]]µ
+`Union[pandas.core.indexes.base.Index[Any],pandas.core.series.Series[Any],numpy.ndarray[Any,Any]]N
+#pandas.core.indexes.base.Index[Any]
+Any"pandas.core.indexes.base.IndexD
+pandas.core.series.Series[Any]
+Any"pandas.core.series.Series9
+numpy.ndarray[Any,Any]
+Any
+Any"numpy.ndarray"pandas._typing.AnyArrayLike≈
+OTypeAlias[Union[pandas.core.arrays.base.ExtensionArray,numpy.ndarray[Any,Any]]]’
+DUnion[pandas.core.arrays.base.ExtensionArray,numpy.ndarray[Any,Any]]P
+&pandas.core.arrays.base.ExtensionArray"&pandas.core.arrays.base.ExtensionArray9
+numpy.ndarray[Any,Any]
+Any
+Any"numpy.ndarray"pandas._typing.ArrayLike"/pandas.core.reshape.pivot._ExtendedAnyArrayLike*„
+rownames“
+4Union[builtins.list[pandas._typing.HashableT1],None]ç
+(builtins.list[pandas._typing.HashableT1]R
+pandas._typing.HashableT1"
+typing.Hashable"typing.Hashable"typing.Hashable"builtins.list
+None *„
+colnames“
+4Union[builtins.list[pandas._typing.HashableT2],None]ç
+(builtins.list[pandas._typing.HashableT2]R
+pandas._typing.HashableT2"
+typing.Hashable"typing.Hashable"typing.Hashable"builtins.list
+None *ÿ
+aggfunc 
+?Union[builtins.str,numpy.ufunc,CallableType[builtins.function]]
+builtins.str"builtins.str
+numpy.ufunc"numpy.ufuncK
+CallableType[builtins.function]&
+builtins.function"builtins.function*-
+margins
+builtins.bool"builtins.bool *0
+margins_name
+builtins.str"builtins.str *,
+dropna
+builtins.bool"builtins.bool *÷
+	normalizeƒ
+ÇUnion[builtins.bool,Literal[builtins.int],Literal[builtins.int],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]
+builtins.bool"builtins.bool7
+Literal[builtins.int]	
+builtins.int"builtins.int7
+Literal[builtins.int]	
+builtins.int"builtins.int7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str 0:overloadXõ%
+crosstab"pandas.core.reshape.pivot.crosstab":
+pandas.core.frame.DataFrame"pandas.core.frame.DataFrame*€
+indexœ
+öUnion[builtins.list[Any],TypeAlias[Union[TypeAlias[Union[pandas.core.indexes.base.Index[Any],pandas.core.series.Series[Any],numpy.ndarray[Any,Any]]],TypeAlias[Union[pandas.core.arrays.base.ExtensionArray,numpy.ndarray[Any,Any]]]]],builtins.list[Union[typing.Sequence[Any],Unknown]]],
+builtins.list[Any]
+Any"builtins.list‹	
+ÕTypeAlias[Union[TypeAlias[Union[pandas.core.indexes.base.Index[Any],pandas.core.series.Series[Any],numpy.ndarray[Any,Any]]],TypeAlias[Union[pandas.core.arrays.base.ExtensionArray,numpy.ndarray[Any,Any]]]]]÷
+¬Union[TypeAlias[Union[pandas.core.indexes.base.Index[Any],pandas.core.series.Series[Any],numpy.ndarray[Any,Any]]],TypeAlias[Union[pandas.core.arrays.base.ExtensionArray,numpy.ndarray[Any,Any]]]]ƒ
+kTypeAlias[Union[pandas.core.indexes.base.Index[Any],pandas.core.series.Series[Any],numpy.ndarray[Any,Any]]]µ
+`Union[pandas.core.indexes.base.Index[Any],pandas.core.series.Series[Any],numpy.ndarray[Any,Any]]N
+#pandas.core.indexes.base.Index[Any]
+Any"pandas.core.indexes.base.IndexD
+pandas.core.series.Series[Any]
+Any"pandas.core.series.Series9
+numpy.ndarray[Any,Any]
+Any
+Any"numpy.ndarray"pandas._typing.AnyArrayLike≈
+OTypeAlias[Union[pandas.core.arrays.base.ExtensionArray,numpy.ndarray[Any,Any]]]’
+DUnion[pandas.core.arrays.base.ExtensionArray,numpy.ndarray[Any,Any]]P
+&pandas.core.arrays.base.ExtensionArray"&pandas.core.arrays.base.ExtensionArray9
+numpy.ndarray[Any,Any]
+Any
+Any"numpy.ndarray"pandas._typing.ArrayLike"/pandas.core.reshape.pivot._ExtendedAnyArrayLike†
+2builtins.list[Union[typing.Sequence[Any],Unknown]][
+#Union[typing.Sequence[Any],Unknown]0
+typing.Sequence[Any]
+Any"typing.Sequence "builtins.list*›
+columnsœ
+öUnion[builtins.list[Any],TypeAlias[Union[TypeAlias[Union[pandas.core.indexes.base.Index[Any],pandas.core.series.Series[Any],numpy.ndarray[Any,Any]]],TypeAlias[Union[pandas.core.arrays.base.ExtensionArray,numpy.ndarray[Any,Any]]]]],builtins.list[Union[typing.Sequence[Any],Unknown]]],
+builtins.list[Any]
+Any"builtins.list‹	
+ÕTypeAlias[Union[TypeAlias[Union[pandas.core.indexes.base.Index[Any],pandas.core.series.Series[Any],numpy.ndarray[Any,Any]]],TypeAlias[Union[pandas.core.arrays.base.ExtensionArray,numpy.ndarray[Any,Any]]]]]÷
+¬Union[TypeAlias[Union[pandas.core.indexes.base.Index[Any],pandas.core.series.Series[Any],numpy.ndarray[Any,Any]]],TypeAlias[Union[pandas.core.arrays.base.ExtensionArray,numpy.ndarray[Any,Any]]]]ƒ
+kTypeAlias[Union[pandas.core.indexes.base.Index[Any],pandas.core.series.Series[Any],numpy.ndarray[Any,Any]]]µ
+`Union[pandas.core.indexes.base.Index[Any],pandas.core.series.Series[Any],numpy.ndarray[Any,Any]]N
+#pandas.core.indexes.base.Index[Any]
+Any"pandas.core.indexes.base.IndexD
+pandas.core.series.Series[Any]
+Any"pandas.core.series.Series9
+numpy.ndarray[Any,Any]
+Any
+Any"numpy.ndarray"pandas._typing.AnyArrayLike≈
+OTypeAlias[Union[pandas.core.arrays.base.ExtensionArray,numpy.ndarray[Any,Any]]]’
+DUnion[pandas.core.arrays.base.ExtensionArray,numpy.ndarray[Any,Any]]P
+&pandas.core.arrays.base.ExtensionArray"&pandas.core.arrays.base.ExtensionArray9
+numpy.ndarray[Any,Any]
+Any
+Any"numpy.ndarray"pandas._typing.ArrayLike"/pandas.core.reshape.pivot._ExtendedAnyArrayLike†
+2builtins.list[Union[typing.Sequence[Any],Unknown]][
+#Union[typing.Sequence[Any],Unknown]0
+typing.Sequence[Any]
+Any"typing.Sequence "builtins.list*
+values
+None *„
+rownames“
+4Union[builtins.list[pandas._typing.HashableT1],None]ç
+(builtins.list[pandas._typing.HashableT1]R
+pandas._typing.HashableT1"
+typing.Hashable"typing.Hashable"typing.Hashable"builtins.list
+None *„
+colnames“
+4Union[builtins.list[pandas._typing.HashableT2],None]ç
+(builtins.list[pandas._typing.HashableT2]R
+pandas._typing.HashableT2"
+typing.Hashable"typing.Hashable"typing.Hashable"builtins.list
+None *
+aggfunc
+None *-
+margins
+builtins.bool"builtins.bool *0
+margins_name
+builtins.str"builtins.str *,
+dropna
+builtins.bool"builtins.bool *÷
+	normalizeƒ
+ÇUnion[builtins.bool,Literal[builtins.int],Literal[builtins.int],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]
+builtins.bool"builtins.bool7
+Literal[builtins.int]	
+builtins.int"builtins.int7
+Literal[builtins.int]	
+builtins.int"builtins.int7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str 0:overloadX*ï
+__annotations__)pandas.core.reshape.pivot.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*
+npnumpy *
+pdpandas 
