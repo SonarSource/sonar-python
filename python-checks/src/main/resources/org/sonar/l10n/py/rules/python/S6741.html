@@ -1,0 +1,52 @@
+<p>This rule raises an issue when the <code>pandas.DataFrame.values</code> is used instead of the <code>pandas.DataFrame.to_numpy()</code> method.</p>
+<h2>Why is this an issue?</h2>
+<p>The <code>values</code> attribute and the <code>to_numpy()</code> method in pandas both provide a way to return a NumPy representation of the
+<code>DataFrame</code>. However, there are some reasons why the <code>to_numpy()</code> method is recommended over the <code>values</code>
+attribute:</p>
+<ul>
+  <li> <strong>Future Compatibility:</strong> The <code>values</code> attribute is considered a legacy feature, while the <code>to_numpy()</code> is
+  the recommended method to extract data and is considered more future-proof. </li>
+  <li> <strong>Data type consistency:</strong> If the <code>DataFrame</code> has columns with different data types, NumPy will choose a common data
+  type that can hold all the data. This may lead to loss of information, unexpected type conversions, or increased memory usage. The
+  <code>to_numpy()</code> allows you to select the common type manually, passing the <code>dtype</code> argument. </li>
+  <li> <strong>View vs Copy:</strong> The <code>values</code> attribute can return a view or a copy of the data depending on whether the data needs to
+  be transposed. This can lead to confusion when modifying the extracted data. On the other hand, <code>to_numpy()</code> has <code>copy</code>
+  argument allowing to force it always to return a new NumPy array, ensuring that any changes you make won’t affect the original
+  <code>DataFrame</code>. </li>
+  <li> <strong>Missing values control:</strong> The <code>to_numpy()</code> allows to specify the default value used for missing values in the
+  <code>DataFrame</code>, while the <code>values</code> will always use <code>numpy.nan</code> for missing values. </li>
+</ul>
+<h2>How to fix it</h2>
+<p>Use the <code>to_numpy()</code> method instead of the <code>values</code> attribute to get a NumPy representation of the
+<code>DataFrame</code>.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+import pandas as pd
+
+df = pd.DataFrame({
+        'X': ['A', 'B', 'A', 'C'],
+        'Y': [10, 7, 12, 5]
+    })
+
+arr = df.values # Noncompliant: using the 'values' attribute is not recommended
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+import pandas as pd
+
+df = pd.DataFrame({
+        'X': ['A', 'B', 'A', 'C'],
+        'Y': [10, 7, 12, 5]
+    })
+
+arr = df.to_numpy() # Compliant
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Pandas Documentation - <a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.to_numpy.html">pandas.DataFrame.to_numpy()</a>
+  </li>
+  <li> Pandas Documentation - <a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.values.html">pandas.DataFrame.values</a> </li>
+</ul>
+

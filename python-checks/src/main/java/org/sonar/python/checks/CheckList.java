@@ -280,6 +280,7 @@ public final class CheckList {
       OneStatementPerLineCheck.class,
       OsExecCheck.class,
       OverwrittenCollectionEntryCheck.class,
+      PandasDataFrameToNumpyCheck.class,
       ParsingErrorCheck.class,
       PredictableSaltCheck.class,
       PreIncrementDecrementCheck.class,
