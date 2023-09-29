@@ -31,7 +31,7 @@ import org.sonar.python.tree.TreeUtils;
 @Rule(key = "S6740")
 public class PandasReadNoDataTypeCheck extends PythonSubscriptionCheck {
 
-  private static final String MESSAGE = "The 'dtype' parameter should be used in calls to ";
+  private static final String MESSAGE = "The 'dtype' parameter should be used in calls to";
 
   @Override
   public void initialize(Context context) {
@@ -63,7 +63,7 @@ public class PandasReadNoDataTypeCheck extends PythonSubscriptionCheck {
   private static String getMessage(CallExpression ce) {
     return Optional.ofNullable(ce.calleeSymbol())
       .map(Symbol::fullyQualifiedName)
-      .map(name -> MESSAGE + "'" + name + "'.")
+      .map(name -> String.format("%s '%s'.", MESSAGE, name))
       .orElse("");
   }
 }
