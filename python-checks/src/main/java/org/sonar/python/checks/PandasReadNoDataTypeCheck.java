@@ -45,7 +45,7 @@ public class PandasReadNoDataTypeCheck extends PythonSubscriptionCheck {
     Optional.of(callExpression)
       .filter(PandasReadNoDataTypeCheck::isReadCall)
       .filter(ce -> TreeUtils.nthArgumentOrKeyword(1, "dtype", ce.arguments()) == null)
-      .map(PandasReadNoDataTypeCheck::getNameTree)
+      .flatMap(PandasReadNoDataTypeCheck::getNameTree)
       .ifPresent(name -> subscriptionContext.addIssue(name, getMessage(callExpression)));
   }
 
@@ -58,13 +58,12 @@ public class PandasReadNoDataTypeCheck extends PythonSubscriptionCheck {
       .isPresent();
   }
 
-  private static Tree getNameTree(CallExpression expression) {
+  private static Optional<Name> getNameTree(CallExpression expression) {
     return Optional.of(expression.callee())
       .flatMap(TreeUtils.toOptionalInstanceOfMapper(QualifiedExpression.class))
       .map(QualifiedExpression::name)
-      .orElse(Optional.of(expression.callee())
-        .flatMap(TreeUtils.toOptionalInstanceOfMapper(Name.class))
-        .orElse(null));
+      .or(() -> Optional.of(expression.callee())
+        .flatMap(TreeUtils.toOptionalInstanceOfMapper(Name.class)));
   }
 
   private static boolean isPandasReadCall(String fqn) {
