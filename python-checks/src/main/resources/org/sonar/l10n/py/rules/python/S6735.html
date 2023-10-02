@@ -1,0 +1,168 @@
+<p>This rule raises an issue when the parameters <code>how</code>, <code>on</code> and <code>validate</code> are not provided when using
+<code>pandas.merge</code> or <code>pandas.join</code>.</p>
+<h2>Why is this an issue?</h2>
+<p>The Pandas library provides a user-friendly API to concatenate two data frames together with the methods <code>merge</code> and
+<code>join</code>.</p>
+<p>When using these methods, it is possible to specify how the merge will be performed:</p>
+<ul>
+  <li> The parameter <code>how</code> specifies the type of merge (<code>left</code>, <code>inner</code>, <code>outer</code>, etc..). </li>
+  <li> The parameter <code>on</code> specifies the column(s) on which the merge will be performed. </li>
+  <li> The parameter <code>validate</code> specifies a way to verify if the merge result is what was expected. </li>
+</ul>
+<pre>
+import pandas as pd
+
+age_df = pd.DataFrame({"user_id":[1,2,4], "age":[42,45, 35]})
+name_df = pd.DataFrame({"user_id":[1,2,3,4], "name":["a","b","c","d"]})
+
+result = age_df.merge(name_df, on="user_id", how="right", validate="1:1")
+</pre>
+<p>In the example above, both data frames will be merged together based on the column <code>user_id</code>, specified by the parameter
+<code>on</code>.</p>
+<p>The parameter <code>how</code> set to <code>right</code> states that the resulting data frame will contain all the <code>user_id</code>s present in
+the data frame <code>name_df</code> (including <code>3</code>, which is absent from <code>age_df</code> and will therefore be assigned a
+<code>NaN</code> value for the <code>age</code> column).</p>
+<p>Lastly, setting the <code>validate</code> parameter to <code>1:1</code> means a check will be performed to verify that the column used for the
+merge only contains unique keys in both data frames. If this check fails a <code>MergeError</code> will be raised.</p>
+<p>Here is the resulting data frame:</p>
+<table>
+  <colgroup>
+    <col style="width: 25%;">
+    <col style="width: 25%;">
+    <col style="width: 25%;">
+    <col style="width: 25%;">
+  </colgroup>
+  <tbody>
+    <tr>
+      <td><p>row</p></td>
+      <td><p>user_id</p></td>
+      <td><p>age</p></td>
+      <td><p>name</p></td>
+    </tr>
+    <tr>
+      <td><p>0</p></td>
+      <td><p>1</p></td>
+      <td><p>42</p></td>
+      <td><p>a</p></td>
+    </tr>
+    <tr>
+      <td><p>1</p></td>
+      <td><p>2</p></td>
+      <td><p>45</p></td>
+      <td><p>b</p></td>
+    </tr>
+    <tr>
+      <td><p>2</p></td>
+      <td><p>3</p></td>
+      <td><p>NaN</p></td>
+      <td><p>c</p></td>
+    </tr>
+    <tr>
+      <td><p>3</p></td>
+      <td><p>4</p></td>
+      <td><p>35</p></td>
+      <td><p>d</p></td>
+    </tr>
+  </tbody>
+</table>
+<p>More information about these methods and their parameters can be found in the pandas documentation: <a
+href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.merge.html#pandas-dataframe-merge">merge</a> and <a
+href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.join.html#pandas-dataframe-join">join</a>.</p>
+<p>The <code>how</code>, <code>on</code> and <code>validate</code> parameters are optional and pandas provides sensible default values.</p>
+<p>This means <code>merge</code> could be used as follow:</p>
+<pre>
+import pandas as pd
+
+age_df = pd.DataFrame({"user_id":[1,2,4], "age":[42,45, 35]})
+name_df = pd.DataFrame({"user_id":[1,2,3,4], "name":["a","b","c","d"]})
+
+result = age_df.merge(name_df)
+</pre>
+<p>In this example:</p>
+<ul>
+  <li> The <code>how</code> parameter defaults to <code>inner</code>. </li>
+  <li> The <code>on</code> parameter defaults to the columns which have a similar name, in our case <code>user_id</code> . </li>
+  <li> The <code>validate</code> parameter will be set to <code>many_to_many</code>, meaning no validation will be performed. </li>
+</ul>
+<p>Here is the resulting data frame:</p>
+<table>
+  <colgroup>
+    <col style="width: 25%;">
+    <col style="width: 25%;">
+    <col style="width: 25%;">
+    <col style="width: 25%;">
+  </colgroup>
+  <tbody>
+    <tr>
+      <td><p>row</p></td>
+      <td><p>user_id</p></td>
+      <td><p>age</p></td>
+      <td><p>name</p></td>
+    </tr>
+    <tr>
+      <td><p>0</p></td>
+      <td><p>1</p></td>
+      <td><p>42</p></td>
+      <td><p>a</p></td>
+    </tr>
+    <tr>
+      <td><p>1</p></td>
+      <td><p>2</p></td>
+      <td><p>45</p></td>
+      <td><p>b</p></td>
+    </tr>
+    <tr>
+      <td><p>2</p></td>
+      <td><p>4</p></td>
+      <td><p>35</p></td>
+      <td><p>d</p></td>
+    </tr>
+  </tbody>
+</table>
+<p>While the example above is perfectly valid, using the <code>merge</code> and <code>join</code> methods without providing the <code>how</code>,
+<code>on</code> and <code>validate</code> arguments has two main drawbacks:</p>
+<ul>
+  <li> It makes the code intention unclear: without the <code>how</code> parameter set, it is unclear if the developer noticed that a
+  <code>user_id</code> (<code>3</code>) will be missing from the resulting data frame, or if it is done on purpose. </li>
+  <li> It makes the code harder to maintain: if one of the data frame would change its <code>user_id</code> column name to <code>id</code>, the code
+  would still run but the result would be entirely different. </li>
+</ul>
+<p>In order to mitigate these drawbacks, setting the <code>how</code> parameter to <code>inner</code> would better convey that the intention is to
+only keep <code>user_id</code>s present in both data frame. Setting the <code>on</code> parameter to <code>user_id</code> could also avoid issues in
+the future, for example if the input data frames came to change.</p>
+<p>The information provided by these parameters is extremely valuable, especially when another developer is in charge of refactoring or debugging this
+particular piece of code.</p>
+<p>This is why it is a good practice to provide the parameters <code>how</code>, <code>on</code> (or <code>left_on</code> and <code>right_on</code>)
+and <code>validate</code> to the pandas' <code>merge</code> and <code>join</code>.</p>
+<h2>How to fix it</h2>
+<p>To fix this issue provide the parameters <code>how</code>, <code>on</code> (or <code>left_on</code> and <code>right_on</code>) and
+<code>validate</code> to the <code>pd.merge</code> or <code>pd.join</code> methods.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+import pandas as pd
+
+def merge_dfs(age_df:pd.DataFrame, name_df:pd.DataFrame):
+  return age_df.merge(name_df) # Noncompliant: it is unclear on which column the merge should happen, as well as what is the expected result.
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+import pandas as pd
+
+def merge_dfs(age_df:pd.DataFrame, name_df:pd.DataFrame):
+  return age_df.merge(
+          name_df,
+          on="user_id",
+          how="inner",
+          validate="1:1"
+         ) # Compliant
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Pandas Documentation - <a
+  href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.merge.html#pandas-dataframe-merge">pandas.DataFrame.merge</a> </li>
+  <li> Pandas Documentation - <a
+  href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.join.html#pandas-dataframe-join">pandas.DataFrame.join</a> </li>
+</ul>
+
