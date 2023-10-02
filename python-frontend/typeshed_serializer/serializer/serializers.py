@@ -183,7 +183,9 @@ class ImporterSerializer(Serializer):
         return build_result, {path}
 
     def is_exception(self, file, build_result, source_paths):
-        return file == "sonar_third_party_libs"
+        # SONARPY-1499: Numpy information is transitively gathered from Pandas (SONARPY-1487)
+        # It is currently filtered out to avoid the risk of false positives
+        return file == "sonar_third_party_libs" or file.startswith("numpy")
 
 
 class CustomStubsSerializer(Serializer):
