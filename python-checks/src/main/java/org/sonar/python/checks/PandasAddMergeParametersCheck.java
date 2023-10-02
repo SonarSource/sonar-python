@@ -19,6 +19,8 @@
  */
 package org.sonar.python.checks;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
@@ -31,7 +33,10 @@ import org.sonar.python.tree.TreeUtils;
 @Rule(key = "S6735")
 public class PandasAddMergeParametersCheck extends PythonSubscriptionCheck {
 
-  private static final String MESSAGE = "The %s of the merge should be specified.";
+  private static final List<String> messages = List.of(
+    "The '%s' parameter of the merge should be specified.",
+    "The '%s' and '%s' parameters of the merge should be specified.",
+    "The '%s', '%s' and '%s' parameters of the merge should be specified.");
 
   @Override
   public void initialize(Context context) {
@@ -47,39 +52,19 @@ public class PandasAddMergeParametersCheck extends PythonSubscriptionCheck {
   }
 
   private static void missingArguments(SubscriptionContext ctx, CallExpression callExpression) {
-    int identifier = 0;
-    if (TreeUtils.argumentByKeyword("how", callExpression.arguments()) != null) {
-      identifier = identifier + 4;
+    List<String> parameters = new ArrayList<>();
+    if (TreeUtils.argumentByKeyword("how", callExpression.arguments()) == null) {
+      parameters.add("how");
     }
-    if (TreeUtils.argumentByKeyword("on", callExpression.arguments()) != null) {
-      identifier = identifier + 2;
+    if (TreeUtils.argumentByKeyword("on", callExpression.arguments()) == null) {
+      parameters.add("on");
     }
-    if (TreeUtils.argumentByKeyword("validate", callExpression.arguments()) != null) {
-      identifier = identifier + 1;
+    if (TreeUtils.argumentByKeyword("validate", callExpression.arguments()) == null) {
+      parameters.add("validate");
     }
-    switch (identifier) {
-      case 0:
-        ctx.addIssue(callExpression, String.format(MESSAGE, "'how', 'on' and 'validate' parameters"));
-        return;
-      case 1:
-        ctx.addIssue(callExpression, String.format(MESSAGE, "'how' and 'on' parameters"));
-        return;
-      case 2:
-        ctx.addIssue(callExpression, String.format(MESSAGE, "'how' and 'validate' parameters"));
-        return;
-      case 3:
-        ctx.addIssue(callExpression, String.format(MESSAGE, "'how' parameter"));
-        return;
-      case 4:
-        ctx.addIssue(callExpression, String.format(MESSAGE, "'on' and 'validate' parameters"));
-        return;
-      case 5:
-        ctx.addIssue(callExpression, String.format(MESSAGE, "'on' parameter"));
-        return;
-      case 6:
-        ctx.addIssue(callExpression, String.format(MESSAGE, "'validate' parameter"));
-        return;
-      default:
+    if (!parameters.isEmpty()) {
+      ctx.addIssue(callExpression, String.format(messages.get(parameters.size() - 1), parameters.toArray()));
     }
+
   }
 }
