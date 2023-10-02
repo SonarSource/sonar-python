@@ -30,10 +30,12 @@ def non_compliant_merge_1():
 
     _ = age_df.merge(name_df, on="user_id", validate="1:1")  # FN Noncompliant {{The 'how' parameter of the merge should be specified.}}
 
-    _ = age_df.merge(name_df, how="cross", validate="1:1")  # FN Noncompliant {{The 'validate' parameter of the merge should be specified.}}
+    _ = age_df.merge(name_df, how="right", validate="1:1")  # FN Noncompliant {{The 'on' parameter of the merge should be specified.}}
+
+    _ = age_df.join(name_df)  # FN Noncompliant {{The 'how', 'on' and 'validate' parameters of the merge should be specified.}}
 
 
-def non_compliant_2(xx):
+def non_compliant_2():
     from pandas import DataFrame, merge
     age_df = DataFrame({"user_id": [1, 2, 4], "age": [42, 45, 35]})
     name_df = DataFrame({"user_id": [1, 2, 3, 4], "name": ["a", "b", "c", "d"]})
@@ -64,3 +66,13 @@ def compliant_1(xx):
     _ = pd.merge(name_df, on="user_id", how="right", validate="1:1")
 
     _ = age_df.merge(name_df, on="user_id", how="right", validate="1:1")
+
+    _ = xx.merge(age_df, name_df)
+
+    _ = xx.merge(name_df, on="user_id", how="right", validate="1:1")
+
+    # This is a FP.
+    _ = pd.merge(age_df, name_df, "inner", "user_id", None, None, False, False, False, ('_x', '_y'), None, False, "1:1")  # Noncompliant
+
+    # This is a true negative, but for the wrong reason. We simply don't check for 'DataFrame.join' in the Test at thin point.
+    _ = age_df.join(name_df, on=None, how='left', lsuffix='', rsuffix='', sort=False, validate=None)
