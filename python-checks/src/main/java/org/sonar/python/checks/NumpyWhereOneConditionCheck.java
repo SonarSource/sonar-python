@@ -49,7 +49,7 @@ public class NumpyWhereOneConditionCheck extends PythonSubscriptionCheck {
     Symbol symbol = ce.calleeSymbol();
     Optional.ofNullable(symbol)
       .map(Symbol::fullyQualifiedName)
-      .filter("numpy.where"::equals)
+      .filter("numpy.core.multiarray.where"::equals)
       .filter(fqn -> hasOneParameter(ce))
       .ifPresent(fqn -> {
         PreciseIssue issue = ctx.addIssue(ce, MESSAGE);

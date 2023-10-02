@@ -52,7 +52,7 @@ public class NumpyListOverGeneratorCheck extends PythonSubscriptionCheck {
     CallExpression call = (CallExpression) ctx.syntaxNode();
     Optional.ofNullable(call.calleeSymbol())
       .map(Symbol::fullyQualifiedName)
-      .filter("numpy.array"::equals)
+      .filter("numpy.core.multiarray.array"::equals)
       .ifPresent(fqn -> checkGeneratorCallee(call, ctx));
   }
 

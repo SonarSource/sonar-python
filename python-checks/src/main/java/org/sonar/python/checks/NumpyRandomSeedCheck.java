@@ -45,14 +45,14 @@ public class NumpyRandomSeedCheck extends PythonSubscriptionCheck {
 
   private static final Map<String, String> SEED_METHODS_TO_CHECK = Map.of(
       "numpy.seed", SEED_ARG_NAME,
-      "numpy.random.seed", SEED_ARG_NAME,
-      "numpy.random.default_rng", SEED_ARG_NAME,
-      "numpy.random.SeedSequence", "entropy",
-      "numpy.random.PCG64", SEED_ARG_NAME,
-      "numpy.random.PCG64DXSM", SEED_ARG_NAME,
-      "numpy.random.MT19937", SEED_ARG_NAME,
-      "numpy.random.SFC64", SEED_ARG_NAME,
-      "numpy.random.Philox", SEED_ARG_NAME);
+      "numpy.random.mtrand.seed", SEED_ARG_NAME,
+      "numpy.random._generator.default_rng", SEED_ARG_NAME,
+      "numpy.random.bit_generator.SeedSequence", "entropy",
+      "numpy.random._pcg64.PCG64", SEED_ARG_NAME,
+      "numpy.random._pcg64.PCG64DXSM", SEED_ARG_NAME,
+      "numpy.random._mt19937.MT19937", SEED_ARG_NAME,
+      "numpy.random._sfc64.SFC64", SEED_ARG_NAME,
+      "numpy.random._philox.Philox", SEED_ARG_NAME);
 
   private static final String MESSAGE = "Provide a seed for this random generator.";
 
