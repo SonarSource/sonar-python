@@ -74,3 +74,17 @@ def compliant_2():
     })
 
     _ = df.to_numpy()
+
+
+def dataframe_from_read_csv():
+    import pandas as pd
+
+    my_df = pd.read_csv("some_csv.csv")
+    my_df.values # Noncompliant
+
+
+def fn_on_parameter_type_hint():
+    import pandas as pd
+
+    def dataframe_param(df : pd.DataFrame):
+        df.values # FN

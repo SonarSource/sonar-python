@@ -24,21 +24,15 @@ import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.Symbol;
-import org.sonar.plugins.python.api.tree.CallExpression;
-import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.python.cfg.fixpoint.ReachingDefinitionsAnalysis;
 
 @Rule(key = "S6741")
 public class PandasDataFrameToNumpyCheck extends PythonSubscriptionCheck {
 
   private static final String MESSAGE = "Do not use \"DataFrame.values\".";
-  private ReachingDefinitionsAnalysis reachingDefinitionsAnalysis;
-
   @Override
   public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, ctx -> reachingDefinitionsAnalysis = new ReachingDefinitionsAnalysis(ctx.pythonFile()));
     context.registerSyntaxNodeConsumer(Tree.Kind.QUALIFIED_EXPR, this::checkForDataFrameValues);
   }
 
@@ -49,36 +43,10 @@ public class PandasDataFrameToNumpyCheck extends PythonSubscriptionCheck {
       return;
     }
 
-    if (expr.qualifier().is(Tree.Kind.NAME)) {
-      this.reachingDefinitionsAnalysis.valuesAtLocation((Name) expr.qualifier())
-        .stream()
-        .filter(exp -> exp.is(Tree.Kind.CALL_EXPR))
-        .map(CallExpression.class::cast)
-        .filter(ce -> ce.callee().is(Tree.Kind.NAME, Tree.Kind.QUALIFIED_EXPR))
-        .map(PandasDataFrameToNumpyCheck::getFullyQualifiedName)
-        .filter(Optional::isPresent)
-        .map(Optional::get)
-        .filter("pandas.DataFrame"::equals).findAny()
-        .ifPresent(str -> ctx.addIssue(expr.name(), MESSAGE));
-    } else if (expr.qualifier().is(Tree.Kind.CALL_EXPR)) {
-      Optional.of((CallExpression) expr.qualifier())
-        .map(CallExpression::calleeSymbol)
-        .map(Symbol::fullyQualifiedName)
-        .filter("pandas.DataFrame"::equals)
-        .ifPresent(str -> ctx.addIssue(expr.name(), MESSAGE));
-    }
-  }
-
-  private static Optional<String> getFullyQualifiedName(CallExpression callExpression) {
-    if (callExpression.callee().is(Tree.Kind.QUALIFIED_EXPR)) {
-      return Optional.of((QualifiedExpression) callExpression.callee())
-        .map(QualifiedExpression::name)
-        .map(Name::symbol)
-        .map(Symbol::fullyQualifiedName);
-    } else {
-      return Optional.of((Name) callExpression.callee())
-        .map(Name::symbol)
-        .map(Symbol::fullyQualifiedName);
-    }
+    expr.qualifier().type()
+      .resolveMember("values")
+      .map(Symbol::fullyQualifiedName)
+      .filter("pandas.core.frame.DataFrame.values"::equals)
+      .ifPresent(str -> ctx.addIssue(expr.name(), MESSAGE));
   }
 }
