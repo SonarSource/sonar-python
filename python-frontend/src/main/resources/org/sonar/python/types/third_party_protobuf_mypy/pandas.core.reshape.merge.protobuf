@@ -1,0 +1,474 @@
+
+pandas.core.reshape.mergeã/
+mergepandas.core.reshape.merge.merge":
+pandas.core.frame.DataFrame"pandas.core.frame.DataFrame*“
+left«
+AUnion[pandas.core.frame.DataFrame,pandas.core.series.Series[Any]]:
+pandas.core.frame.DataFrame"pandas.core.frame.DataFrameD
+pandas.core.series.Series[Any]
+Any"pandas.core.series.Series*”
+right«
+AUnion[pandas.core.frame.DataFrame,pandas.core.series.Series[Any]]:
+pandas.core.frame.DataFrame"pandas.core.frame.DataFrameD
+pandas.core.series.Series[Any]
+Any"pandas.core.series.Series*”
+how«
+ëTypeAlias[Union[TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]],Literal[builtins.str]]]ï
+ÜUnion[TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]],Literal[builtins.str]]Œ
+iTypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]∆
+^Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str"pandas._typing.JoinHow7
+Literal[builtins.str]	
+builtins.str"builtins.str"pandas._typing.MergeHow *«
+onº
+∆Union[TypeAlias[Union[typing.Hashable,None]],builtins.list[pandas._typing.HashableT],TypeAlias[Union[pandas.core.indexes.base.Index[Any],pandas.core.series.Series[Any],numpy.ndarray[Any,Any]]],None]è
+&TypeAlias[Union[typing.Hashable,None]]M
+Union[typing.Hashable,None]"
+typing.Hashable"typing.Hashable
+None"pandas._typing.Labelã
+'builtins.list[pandas._typing.HashableT]Q
+pandas._typing.HashableT"
+typing.Hashable"typing.Hashable"typing.Hashable"builtins.listƒ
+kTypeAlias[Union[pandas.core.indexes.base.Index[Any],pandas.core.series.Series[Any],numpy.ndarray[Any,Any]]]µ
+`Union[pandas.core.indexes.base.Index[Any],pandas.core.series.Series[Any],numpy.ndarray[Any,Any]]N
+#pandas.core.indexes.base.Index[Any]
+Any"pandas.core.indexes.base.IndexD
+pandas.core.series.Series[Any]
+Any"pandas.core.series.Series9
+numpy.ndarray[Any,Any]
+Any
+Any"numpy.ndarray"pandas._typing.AnyArrayLike
+None *Ã
+left_onº
+∆Union[TypeAlias[Union[typing.Hashable,None]],builtins.list[pandas._typing.HashableT],TypeAlias[Union[pandas.core.indexes.base.Index[Any],pandas.core.series.Series[Any],numpy.ndarray[Any,Any]]],None]è
+&TypeAlias[Union[typing.Hashable,None]]M
+Union[typing.Hashable,None]"
+typing.Hashable"typing.Hashable
+None"pandas._typing.Labelã
+'builtins.list[pandas._typing.HashableT]Q
+pandas._typing.HashableT"
+typing.Hashable"typing.Hashable"typing.Hashable"builtins.listƒ
+kTypeAlias[Union[pandas.core.indexes.base.Index[Any],pandas.core.series.Series[Any],numpy.ndarray[Any,Any]]]µ
+`Union[pandas.core.indexes.base.Index[Any],pandas.core.series.Series[Any],numpy.ndarray[Any,Any]]N
+#pandas.core.indexes.base.Index[Any]
+Any"pandas.core.indexes.base.IndexD
+pandas.core.series.Series[Any]
+Any"pandas.core.series.Series9
+numpy.ndarray[Any,Any]
+Any
+Any"numpy.ndarray"pandas._typing.AnyArrayLike
+None *Õ
+right_onº
+∆Union[TypeAlias[Union[typing.Hashable,None]],builtins.list[pandas._typing.HashableT],TypeAlias[Union[pandas.core.indexes.base.Index[Any],pandas.core.series.Series[Any],numpy.ndarray[Any,Any]]],None]è
+&TypeAlias[Union[typing.Hashable,None]]M
+Union[typing.Hashable,None]"
+typing.Hashable"typing.Hashable
+None"pandas._typing.Labelã
+'builtins.list[pandas._typing.HashableT]Q
+pandas._typing.HashableT"
+typing.Hashable"typing.Hashable"typing.Hashable"builtins.listƒ
+kTypeAlias[Union[pandas.core.indexes.base.Index[Any],pandas.core.series.Series[Any],numpy.ndarray[Any,Any]]]µ
+`Union[pandas.core.indexes.base.Index[Any],pandas.core.series.Series[Any],numpy.ndarray[Any,Any]]N
+#pandas.core.indexes.base.Index[Any]
+Any"pandas.core.indexes.base.IndexD
+pandas.core.series.Series[Any]
+Any"pandas.core.series.Series9
+numpy.ndarray[Any,Any]
+Any
+Any"numpy.ndarray"pandas._typing.AnyArrayLike
+None *0
+
+left_index
+builtins.bool"builtins.bool *1
+right_index
+builtins.bool"builtins.bool **
+sort
+builtins.bool"builtins.bool *Ö
+suffixesÙ
+ÅUnion[builtins.list[Union[builtins.str,None]],Tuple[builtins.str,builtins.str],Tuple[None,builtins.str],Tuple[builtins.str,None]]~
+'builtins.list[Union[builtins.str,None]]D
+Union[builtins.str,None]
+builtins.str"builtins.str
+None"builtins.list`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.strD
+Tuple[None,builtins.str]
+None
+builtins.str"builtins.strD
+Tuple[builtins.str,None]
+builtins.str"builtins.str
+None **
+copy
+builtins.bool"builtins.bool *t
+	indicatorc
+!Union[builtins.bool,builtins.str]
+builtins.bool"builtins.bool
+builtins.str"builtins.str *ˇ
+validateÓ
+¡TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]É
+∂Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str" pandas._typing.ValidationOptions ù
+
+merge_asof$pandas.core.reshape.merge.merge_asof":
+pandas.core.frame.DataFrame"pandas.core.frame.DataFrame*“
+left«
+AUnion[pandas.core.frame.DataFrame,pandas.core.series.Series[Any]]:
+pandas.core.frame.DataFrame"pandas.core.frame.DataFrameD
+pandas.core.series.Series[Any]
+Any"pandas.core.series.Series*”
+right«
+AUnion[pandas.core.frame.DataFrame,pandas.core.series.Series[Any]]:
+pandas.core.frame.DataFrame"pandas.core.frame.DataFrameD
+pandas.core.series.Series[Any]
+Any"pandas.core.series.Series*›
+on“
+2Union[TypeAlias[Union[typing.Hashable,None]],None]è
+&TypeAlias[Union[typing.Hashable,None]]M
+Union[typing.Hashable,None]"
+typing.Hashable"typing.Hashable
+None"pandas._typing.Label
+None *‚
+left_on“
+2Union[TypeAlias[Union[typing.Hashable,None]],None]è
+&TypeAlias[Union[typing.Hashable,None]]M
+Union[typing.Hashable,None]"
+typing.Hashable"typing.Hashable
+None"pandas._typing.Label
+None *„
+right_on“
+2Union[TypeAlias[Union[typing.Hashable,None]],None]è
+&TypeAlias[Union[typing.Hashable,None]]M
+Union[typing.Hashable,None]"
+typing.Hashable"typing.Hashable
+None"pandas._typing.Label
+None *0
+
+left_index
+builtins.bool"builtins.bool *1
+right_index
+builtins.bool"builtins.bool *ì
+byà
+ZUnion[TypeAlias[Union[typing.Hashable,None]],builtins.list[pandas._typing.HashableT],None]è
+&TypeAlias[Union[typing.Hashable,None]]M
+Union[typing.Hashable,None]"
+typing.Hashable"typing.Hashable
+None"pandas._typing.Labelã
+'builtins.list[pandas._typing.HashableT]Q
+pandas._typing.HashableT"
+typing.Hashable"typing.Hashable"typing.Hashable"builtins.list
+None *ò
+left_byà
+ZUnion[TypeAlias[Union[typing.Hashable,None]],builtins.list[pandas._typing.HashableT],None]è
+&TypeAlias[Union[typing.Hashable,None]]M
+Union[typing.Hashable,None]"
+typing.Hashable"typing.Hashable
+None"pandas._typing.Labelã
+'builtins.list[pandas._typing.HashableT]Q
+pandas._typing.HashableT"
+typing.Hashable"typing.Hashable"typing.Hashable"builtins.list
+None *ô
+right_byà
+ZUnion[TypeAlias[Union[typing.Hashable,None]],builtins.list[pandas._typing.HashableT],None]è
+&TypeAlias[Union[typing.Hashable,None]]M
+Union[typing.Hashable,None]"
+typing.Hashable"typing.Hashable
+None"pandas._typing.Labelã
+'builtins.list[pandas._typing.HashableT]Q
+pandas._typing.HashableT"
+typing.Hashable"typing.Hashable"typing.Hashable"builtins.list
+None *Ö
+suffixesÙ
+ÅUnion[builtins.list[Union[builtins.str,None]],Tuple[builtins.str,builtins.str],Tuple[None,builtins.str],Tuple[builtins.str,None]]~
+'builtins.list[Union[builtins.str,None]]D
+Union[builtins.str,None]
+builtins.str"builtins.str
+None"builtins.list`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.strD
+Tuple[None,builtins.str]
+None
+builtins.str"builtins.strD
+Tuple[builtins.str,None]
+builtins.str"builtins.str
+None *’
+	tolerance√
+AUnion[builtins.int,pandas._libs.tslibs.timedeltas.Timedelta,None]
+builtins.int"builtins.intT
+(pandas._libs.tslibs.timedeltas.Timedelta"(pandas._libs.tslibs.timedeltas.Timedelta
+None *9
+allow_exact_matches
+builtins.bool"builtins.bool *â
+	direction˜
+HUnion[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str " G
+merge_ordered'pandas.core.reshape.merge.merge_orderedı
+merge_ordered'pandas.core.reshape.merge.merge_ordered":
+pandas.core.frame.DataFrame"pandas.core.frame.DataFrame*D
+left:
+pandas.core.frame.DataFrame"pandas.core.frame.DataFrame*E
+right:
+pandas.core.frame.DataFrame"pandas.core.frame.DataFrame*ì
+onà
+ZUnion[TypeAlias[Union[typing.Hashable,None]],builtins.list[pandas._typing.HashableT],None]è
+&TypeAlias[Union[typing.Hashable,None]]M
+Union[typing.Hashable,None]"
+typing.Hashable"typing.Hashable
+None"pandas._typing.Labelã
+'builtins.list[pandas._typing.HashableT]Q
+pandas._typing.HashableT"
+typing.Hashable"typing.Hashable"typing.Hashable"builtins.list
+None *ò
+left_onà
+ZUnion[TypeAlias[Union[typing.Hashable,None]],builtins.list[pandas._typing.HashableT],None]è
+&TypeAlias[Union[typing.Hashable,None]]M
+Union[typing.Hashable,None]"
+typing.Hashable"typing.Hashable
+None"pandas._typing.Labelã
+'builtins.list[pandas._typing.HashableT]Q
+pandas._typing.HashableT"
+typing.Hashable"typing.Hashable"typing.Hashable"builtins.list
+None *ô
+right_onà
+ZUnion[TypeAlias[Union[typing.Hashable,None]],builtins.list[pandas._typing.HashableT],None]è
+&TypeAlias[Union[typing.Hashable,None]]M
+Union[typing.Hashable,None]"
+typing.Hashable"typing.Hashable
+None"pandas._typing.Labelã
+'builtins.list[pandas._typing.HashableT]Q
+pandas._typing.HashableT"
+typing.Hashable"typing.Hashable"typing.Hashable"builtins.list
+None *ò
+left_byà
+ZUnion[TypeAlias[Union[typing.Hashable,None]],builtins.list[pandas._typing.HashableT],None]è
+&TypeAlias[Union[typing.Hashable,None]]M
+Union[typing.Hashable,None]"
+typing.Hashable"typing.Hashable
+None"pandas._typing.Labelã
+'builtins.list[pandas._typing.HashableT]Q
+pandas._typing.HashableT"
+typing.Hashable"typing.Hashable"typing.Hashable"builtins.list
+None *ô
+right_byà
+ZUnion[TypeAlias[Union[typing.Hashable,None]],builtins.list[pandas._typing.HashableT],None]è
+&TypeAlias[Union[typing.Hashable,None]]M
+Union[typing.Hashable,None]"
+typing.Hashable"typing.Hashable
+None"pandas._typing.Labelã
+'builtins.list[pandas._typing.HashableT]Q
+pandas._typing.HashableT"
+typing.Hashable"typing.Hashable"typing.Hashable"builtins.list
+None *{
+fill_methodh
+!Union[Literal[builtins.str],None]7
+Literal[builtins.str]	
+builtins.str"builtins.str
+None *Ö
+suffixesÙ
+ÅUnion[builtins.list[Union[builtins.str,None]],Tuple[builtins.str,builtins.str],Tuple[None,builtins.str],Tuple[builtins.str,None]]~
+'builtins.list[Union[builtins.str,None]]D
+Union[builtins.str,None]
+builtins.str"builtins.str
+None"builtins.list`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.strD
+Tuple[None,builtins.str]
+None
+builtins.str"builtins.strD
+Tuple[builtins.str,None]
+builtins.str"builtins.str
+None *⁄
+howŒ
+iTypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]∆
+^Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str"pandas._typing.JoinHow 0:overloadXä
+merge_ordered'pandas.core.reshape.merge.merge_ordered":
+pandas.core.frame.DataFrame"pandas.core.frame.DataFrame*N
+leftD
+pandas.core.series.Series[Any]
+Any"pandas.core.series.Series*”
+right«
+AUnion[pandas.core.frame.DataFrame,pandas.core.series.Series[Any]]:
+pandas.core.frame.DataFrame"pandas.core.frame.DataFrameD
+pandas.core.series.Series[Any]
+Any"pandas.core.series.Series*ì
+onà
+ZUnion[TypeAlias[Union[typing.Hashable,None]],builtins.list[pandas._typing.HashableT],None]è
+&TypeAlias[Union[typing.Hashable,None]]M
+Union[typing.Hashable,None]"
+typing.Hashable"typing.Hashable
+None"pandas._typing.Labelã
+'builtins.list[pandas._typing.HashableT]Q
+pandas._typing.HashableT"
+typing.Hashable"typing.Hashable"typing.Hashable"builtins.list
+None *ò
+left_onà
+ZUnion[TypeAlias[Union[typing.Hashable,None]],builtins.list[pandas._typing.HashableT],None]è
+&TypeAlias[Union[typing.Hashable,None]]M
+Union[typing.Hashable,None]"
+typing.Hashable"typing.Hashable
+None"pandas._typing.Labelã
+'builtins.list[pandas._typing.HashableT]Q
+pandas._typing.HashableT"
+typing.Hashable"typing.Hashable"typing.Hashable"builtins.list
+None *ô
+right_onà
+ZUnion[TypeAlias[Union[typing.Hashable,None]],builtins.list[pandas._typing.HashableT],None]è
+&TypeAlias[Union[typing.Hashable,None]]M
+Union[typing.Hashable,None]"
+typing.Hashable"typing.Hashable
+None"pandas._typing.Labelã
+'builtins.list[pandas._typing.HashableT]Q
+pandas._typing.HashableT"
+typing.Hashable"typing.Hashable"typing.Hashable"builtins.list
+None *
+left_by
+None *
+right_by
+None *{
+fill_methodh
+!Union[Literal[builtins.str],None]7
+Literal[builtins.str]	
+builtins.str"builtins.str
+None *Ö
+suffixesÙ
+ÅUnion[builtins.list[Union[builtins.str,None]],Tuple[builtins.str,builtins.str],Tuple[None,builtins.str],Tuple[builtins.str,None]]~
+'builtins.list[Union[builtins.str,None]]D
+Union[builtins.str,None]
+builtins.str"builtins.str
+None"builtins.list`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.strD
+Tuple[None,builtins.str]
+None
+builtins.str"builtins.strD
+Tuple[builtins.str,None]
+builtins.str"builtins.str
+None *⁄
+howŒ
+iTypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]∆
+^Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str"pandas._typing.JoinHow 0:overloadXä
+merge_ordered'pandas.core.reshape.merge.merge_ordered":
+pandas.core.frame.DataFrame"pandas.core.frame.DataFrame*“
+left«
+AUnion[pandas.core.frame.DataFrame,pandas.core.series.Series[Any]]:
+pandas.core.frame.DataFrame"pandas.core.frame.DataFrameD
+pandas.core.series.Series[Any]
+Any"pandas.core.series.Series*O
+rightD
+pandas.core.series.Series[Any]
+Any"pandas.core.series.Series*ì
+onà
+ZUnion[TypeAlias[Union[typing.Hashable,None]],builtins.list[pandas._typing.HashableT],None]è
+&TypeAlias[Union[typing.Hashable,None]]M
+Union[typing.Hashable,None]"
+typing.Hashable"typing.Hashable
+None"pandas._typing.Labelã
+'builtins.list[pandas._typing.HashableT]Q
+pandas._typing.HashableT"
+typing.Hashable"typing.Hashable"typing.Hashable"builtins.list
+None *ò
+left_onà
+ZUnion[TypeAlias[Union[typing.Hashable,None]],builtins.list[pandas._typing.HashableT],None]è
+&TypeAlias[Union[typing.Hashable,None]]M
+Union[typing.Hashable,None]"
+typing.Hashable"typing.Hashable
+None"pandas._typing.Labelã
+'builtins.list[pandas._typing.HashableT]Q
+pandas._typing.HashableT"
+typing.Hashable"typing.Hashable"typing.Hashable"builtins.list
+None *ô
+right_onà
+ZUnion[TypeAlias[Union[typing.Hashable,None]],builtins.list[pandas._typing.HashableT],None]è
+&TypeAlias[Union[typing.Hashable,None]]M
+Union[typing.Hashable,None]"
+typing.Hashable"typing.Hashable
+None"pandas._typing.Labelã
+'builtins.list[pandas._typing.HashableT]Q
+pandas._typing.HashableT"
+typing.Hashable"typing.Hashable"typing.Hashable"builtins.list
+None *
+left_by
+None *
+right_by
+None *{
+fill_methodh
+!Union[Literal[builtins.str],None]7
+Literal[builtins.str]	
+builtins.str"builtins.str
+None *Ö
+suffixesÙ
+ÅUnion[builtins.list[Union[builtins.str,None]],Tuple[builtins.str,builtins.str],Tuple[None,builtins.str],Tuple[builtins.str,None]]~
+'builtins.list[Union[builtins.str,None]]D
+Union[builtins.str,None]
+builtins.str"builtins.str
+None"builtins.list`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.strD
+Tuple[None,builtins.str]
+None
+builtins.str"builtins.strD
+Tuple[builtins.str,None]
+builtins.str"builtins.str
+None *⁄
+howŒ
+iTypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]∆
+^Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str"pandas._typing.JoinHow 0:overloadX*ï
+__annotations__)pandas.core.reshape.merge.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict

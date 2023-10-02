@@ -1,0 +1,370 @@
+
+pandas.core.computation.exprã
+Term pandas.core.computation.ops.Term"builtins.object*k
+__new__(pandas.core.computation.ops.Term.__new__*
+cls*
+name*
+env*
+
+side *
+encoding *â
+__init__)pandas.core.computation.ops.Term.__init__"
+None*N
+selfD
+ pandas.core.computation.ops.Term" pandas.core.computation.ops.Term*
+name
+Any*
+env
+Any*
+side
+Any *
+encoding
+Any *µ
+
+local_name+pandas.core.computation.ops.Term.local_name"
+builtins.str"builtins.str*N
+selfD
+ pandas.core.computation.ops.Term" pandas.core.computation.ops.Term0:property`*U
+__call__)pandas.core.computation.ops.Term.__call__*
+self*
+args*
+
+kwargs*U
+evaluate)pandas.core.computation.ops.Term.evaluate*
+self*
+args*
+
+kwargs*Ÿ
+update'pandas.core.computation.ops.Term.update"
+None*N
+selfD
+ pandas.core.computation.ops.Term" pandas.core.computation.ops.Term*
+value
+Any*µ
+	is_scalar*pandas.core.computation.ops.Term.is_scalar"
+builtins.bool"builtins.bool*N
+selfD
+ pandas.core.computation.ops.Term" pandas.core.computation.ops.Term0:property`*E
+type%pandas.core.computation.ops.Term.type*
+self0:property`*§
+raw$pandas.core.computation.ops.Term.raw"
+builtins.str"builtins.str*N
+selfD
+ pandas.core.computation.ops.Term" pandas.core.computation.ops.Term0:property`*¹
+is_datetime,pandas.core.computation.ops.Term.is_datetime"
+builtins.bool"builtins.bool*N
+selfD
+ pandas.core.computation.ops.Term" pandas.core.computation.ops.Term0:property`*E
+name%pandas.core.computation.ops.Term.name*
+self0:property`*©
+ndim%pandas.core.computation.ops.Term.ndim"
+builtins.int"builtins.int*N
+selfD
+ pandas.core.computation.ops.Term" pandas.core.computation.ops.Term0:property`2®
+value&pandas.core.computation.ops.Term.valueI
+value&pandas.core.computation.ops.Term.value*
+self0:propertyX`±
+value&pandas.core.computation.ops.Term.value"
+None*N
+selfD
+ pandas.core.computation.ops.Term" pandas.core.computation.ops.Term*
+	new_value
+Any0:value.setterrU
+is_local)pandas.core.computation.ops.Term.is_local
+builtins.bool"builtins.boolrS
+env$pandas.core.computation.ops.Term.env&
+builtins.ellipsis"builtins.ellipsisrU
+side%pandas.core.computation.ops.Term.side&
+builtins.ellipsis"builtins.ellipsisr]
+encoding)pandas.core.computation.ops.Term.encoding&
+builtins.ellipsis"builtins.ellipsisrc
+return_type,pandas.core.computation.ops.Term.return_type&
+builtins.ellipsis"builtins.ellipsis¸
+Scope#pandas.core.computation.scope.Scope"builtins.object*”
+__init__,pandas.core.computation.scope.Scope.__init__"
+None*T
+selfJ
+#pandas.core.computation.scope.Scope"#pandas.core.computation.scope.Scope*
+level
+Any*
+global_dict
+Any *
+
+local_dict
+Any *
+	resolvers
+Any *
+target
+Any *Æ
+has_resolvers1pandas.core.computation.scope.Scope.has_resolvers"
+builtins.bool"builtins.bool*T
+selfJ
+#pandas.core.computation.scope.Scope"#pandas.core.computation.scope.Scope0:property`*ê
+resolve+pandas.core.computation.scope.Scope.resolve"
+Any*T
+selfJ
+#pandas.core.computation.scope.Scope"#pandas.core.computation.scope.Scope*%
+key
+builtins.str"builtins.str*,
+is_local
+builtins.bool"builtins.bool*…
+swapkey+pandas.core.computation.scope.Scope.swapkey"
+Any*T
+selfJ
+#pandas.core.computation.scope.Scope"#pandas.core.computation.scope.Scope*)
+old_key
+builtins.str"builtins.str*)
+new_key
+builtins.str"builtins.str*
+	new_value
+Any *¾
+add_tmp+pandas.core.computation.scope.Scope.add_tmp"
+builtins.str"builtins.str*T
+selfJ
+#pandas.core.computation.scope.Scope"#pandas.core.computation.scope.Scope*
+value
+Any*¶
+ntemps*pandas.core.computation.scope.Scope.ntemps"
+builtins.int"builtins.int*T
+selfJ
+#pandas.core.computation.scope.Scope"#pandas.core.computation.scope.Scope0:property`*T
+
+full_scope.pandas.core.computation.scope.Scope.full_scope*
+self0:property`rZ
+level)pandas.core.computation.scope.Scope.level&
+builtins.ellipsis"builtins.ellipsisrZ
+scope)pandas.core.computation.scope.Scope.scope&
+builtins.ellipsis"builtins.ellipsisr\
+target*pandas.core.computation.scope.Scope.target&
+builtins.ellipsis"builtins.ellipsisrb
+	resolvers-pandas.core.computation.scope.Scope.resolvers&
+builtins.ellipsis"builtins.ellipsisrZ
+temps)pandas.core.computation.scope.Scope.temps&
+builtins.ellipsis"builtins.ellipsis« 
+BaseExprVisitor,pandas.core.computation.expr.BaseExprVisitor"ast.NodeVisitor*‰
+__init__5pandas.core.computation.expr.BaseExprVisitor.__init__"
+None*f
+self\
+,pandas.core.computation.expr.BaseExprVisitor",pandas.core.computation.expr.BaseExprVisitor*
+env
+Any*
+engine
+Any*
+parser
+Any*
+	preparser
+Any *[
+visit2pandas.core.computation.expr.BaseExprVisitor.visit*
+self*
+node*
+
+kwargs*i
+visit_Module9pandas.core.computation.expr.BaseExprVisitor.visit_Module*
+self*
+node*
+
+kwargs*e
+
+visit_Expr7pandas.core.computation.expr.BaseExprVisitor.visit_Expr*
+self*
+node*
+
+kwargs*g
+visit_BinOp8pandas.core.computation.expr.BaseExprVisitor.visit_BinOp*
+self*
+node*
+
+kwargs*c
+	visit_Div6pandas.core.computation.expr.BaseExprVisitor.visit_Div*
+self*
+node*
+
+kwargs*k
+visit_UnaryOp:pandas.core.computation.expr.BaseExprVisitor.visit_UnaryOp*
+self*
+node*
+
+kwargs*e
+
+visit_Name7pandas.core.computation.expr.BaseExprVisitor.visit_Name*
+self*
+node*
+
+kwargs*u
+visit_NameConstant?pandas.core.computation.expr.BaseExprVisitor.visit_NameConstant*
+self*
+node*
+
+kwargs*c
+	visit_Num6pandas.core.computation.expr.BaseExprVisitor.visit_Num*
+self*
+node*
+
+kwargs*m
+visit_Constant;pandas.core.computation.expr.BaseExprVisitor.visit_Constant*
+self*
+node*
+
+kwargs*c
+	visit_Str6pandas.core.computation.expr.BaseExprVisitor.visit_Str*
+self*
+node*
+
+kwargs*e
+
+visit_List7pandas.core.computation.expr.BaseExprVisitor.visit_List*
+self*
+node*
+
+kwargs*g
+visit_Index8pandas.core.computation.expr.BaseExprVisitor.visit_Index*
+self*
+node*
+
+kwargs*o
+visit_Subscript<pandas.core.computation.expr.BaseExprVisitor.visit_Subscript*
+self*
+node*
+
+kwargs*g
+visit_Slice8pandas.core.computation.expr.BaseExprVisitor.visit_Slice*
+self*
+node*
+
+kwargs*i
+visit_Assign9pandas.core.computation.expr.BaseExprVisitor.visit_Assign*
+self*
+node*
+
+kwargs*o
+visit_Attribute<pandas.core.computation.expr.BaseExprVisitor.visit_Attribute*
+self*
+node*
+
+kwargs*q
+
+visit_Call7pandas.core.computation.expr.BaseExprVisitor.visit_Call*
+self*
+node*
+
+side *
+
+kwargs*[
+translate_In9pandas.core.computation.expr.BaseExprVisitor.translate_In*
+self*
+op*k
+visit_Compare:pandas.core.computation.expr.BaseExprVisitor.visit_Compare*
+self*
+node*
+
+kwargs*i
+visit_BoolOp9pandas.core.computation.expr.BaseExprVisitor.visit_BoolOp*
+self*
+node*
+
+kwargsrm
+
+const_type7pandas.core.computation.expr.BaseExprVisitor.const_type&
+builtins.ellipsis"builtins.ellipsisrk
+	term_type6pandas.core.computation.expr.BaseExprVisitor.term_type&
+builtins.ellipsis"builtins.ellipsisrm
+
+binary_ops7pandas.core.computation.expr.BaseExprVisitor.binary_ops&
+builtins.ellipsis"builtins.ellipsisrw
+binary_op_nodes<pandas.core.computation.expr.BaseExprVisitor.binary_op_nodes&
+builtins.ellipsis"builtins.ellipsisr
+binary_op_nodes_map@pandas.core.computation.expr.BaseExprVisitor.binary_op_nodes_map&
+builtins.ellipsis"builtins.ellipsisrk
+	unary_ops6pandas.core.computation.expr.BaseExprVisitor.unary_ops&
+builtins.ellipsis"builtins.ellipsisru
+unary_op_nodes;pandas.core.computation.expr.BaseExprVisitor.unary_op_nodes&
+builtins.ellipsis"builtins.ellipsisr}
+unary_op_nodes_map?pandas.core.computation.expr.BaseExprVisitor.unary_op_nodes_map&
+builtins.ellipsis"builtins.ellipsisro
+rewrite_map8pandas.core.computation.expr.BaseExprVisitor.rewrite_map&
+builtins.ellipsis"builtins.ellipsisr_
+env0pandas.core.computation.expr.BaseExprVisitor.env&
+builtins.ellipsis"builtins.ellipsisre
+engine3pandas.core.computation.expr.BaseExprVisitor.engine&
+builtins.ellipsis"builtins.ellipsisre
+parser3pandas.core.computation.expr.BaseExprVisitor.parser&
+builtins.ellipsis"builtins.ellipsisrk
+	preparser6pandas.core.computation.expr.BaseExprVisitor.preparser&
+builtins.ellipsis"builtins.ellipsisri
+assigner5pandas.core.computation.expr.BaseExprVisitor.assigner&
+builtins.ellipsis"builtins.ellipsisƒ
+PandasExprVisitor.pandas.core.computation.expr.PandasExprVisitor",pandas.core.computation.expr.BaseExprVisitor*
+__init__7pandas.core.computation.expr.PandasExprVisitor.__init__"
+None*j
+self`
+.pandas.core.computation.expr.PandasExprVisitor".pandas.core.computation.expr.PandasExprVisitor*
+env
+Any*
+engine
+Any*
+parser
+Any*
+	preparser
+Any ƒ
+PythonExprVisitor.pandas.core.computation.expr.PythonExprVisitor",pandas.core.computation.expr.BaseExprVisitor*
+__init__7pandas.core.computation.expr.PythonExprVisitor.__init__"
+None*j
+self`
+.pandas.core.computation.expr.PythonExprVisitor".pandas.core.computation.expr.PythonExprVisitor*
+env
+Any*
+engine
+Any*
+parser
+Any*
+	preparser
+Any „
+Expr!pandas.core.computation.expr.Expr"builtins.object*À
+__init__*pandas.core.computation.expr.Expr.__init__"
+None*P
+selfF
+!pandas.core.computation.expr.Expr"!pandas.core.computation.expr.Expr*
+expr
+Any**
+engine
+builtins.str"builtins.str **
+parser
+builtins.str"builtins.str *•
+env‰
+/Union[pandas.core.computation.scope.Scope,None]J
+#pandas.core.computation.scope.Scope"#pandas.core.computation.scope.Scope
+None *)
+level
+builtins.int"builtins.int *N
+assigner*pandas.core.computation.expr.Expr.assigner*
+self0:property`*@
+__call__*pandas.core.computation.expr.Expr.__call__*
+self*œ
+__len__)pandas.core.computation.expr.Expr.__len__"
+builtins.int"builtins.int*HF
+!pandas.core.computation.expr.Expr"!pandas.core.computation.expr.Expr*:
+parse'pandas.core.computation.expr.Expr.parse*
+self*H
+names'pandas.core.computation.expr.Expr.names*
+self0:property`rx
+env%pandas.core.computation.expr.Expr.envJ
+#pandas.core.computation.scope.Scope"#pandas.core.computation.scope.ScoperP
+engine(pandas.core.computation.expr.Expr.engine
+builtins.str"builtins.strrP
+parser(pandas.core.computation.expr.Expr.parser
+builtins.str"builtins.strrV
+expr&pandas.core.computation.expr.Expr.expr&
+builtins.ellipsis"builtins.ellipsisrX
+terms'pandas.core.computation.expr.Expr.terms&
+builtins.ellipsis"builtins.ellipsis<
+disallow%pandas.core.computation.expr.disallow*	
+nodes?
+add_ops$pandas.core.computation.expr.add_ops*
+
+op_classes*˜
+__annotations__,pandas.core.computation.expr.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*a
+intersection)pandas.core.computation.expr.intersection&
+builtins.ellipsis"builtins.ellipsis

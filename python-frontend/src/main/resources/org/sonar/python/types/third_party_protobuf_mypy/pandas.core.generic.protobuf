@@ -1,0 +1,1753 @@
+
+pandas.core.generic≤˚
+NDFramepandas.core.generic.NDFrame""pandas.core.indexing.IndexingMixin*º
+	set_flags%pandas.core.generic.NDFrame.set_flags"t
+pandas._typing.NDFrameT:
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*~
+selft
+pandas._typing.NDFrameT:
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame"pandas.core.generic.NDFrame**
+copy
+builtins.bool"builtins.bool *f
+allows_duplicate_labelsG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *Ã
+shape!pandas.core.generic.NDFrame.shape"L
+builtins.tuple[builtins.int]
+builtins.int"builtins.int"builtins.tuple*D
+self:
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame0:property`*í
+axes pandas.core.generic.NDFrame.axes"ì
+2builtins.list[pandas.core.indexes.base.Index[Any]]N
+#pandas.core.indexes.base.Index[Any]
+Any"pandas.core.indexes.base.Index"builtins.list*D
+self:
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame0:property`*ö
+ndim pandas.core.generic.NDFrame.ndim"
+builtins.int"builtins.int*D
+self:
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame0:property`*ö
+size pandas.core.generic.NDFrame.size"
+builtins.int"builtins.int*D
+self:
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame0:property`*à
+swapaxes$pandas.core.generic.NDFrame.swapaxes":
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*D
+self:
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*í
+axis1Ü
+=TypeAlias[Union[Literal[builtins.str],Literal[builtins.int]]]®
+2Union[Literal[builtins.str],Literal[builtins.int]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.int]	
+builtins.int"builtins.int"pandas._typing.AxisIndex*í
+axis2Ü
+=TypeAlias[Union[Literal[builtins.str],Literal[builtins.int]]]®
+2Union[Literal[builtins.str],Literal[builtins.int]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.int]	
+builtins.int"builtins.int"pandas._typing.AxisIndex**
+copy
+builtins.bool"builtins.bool *å
+	droplevel%pandas.core.generic.NDFrame.droplevel":
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*D
+self:
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*ø
+level≥
+.TypeAlias[Union[typing.Hashable,builtins.int]]i
+#Union[typing.Hashable,builtins.int]"
+typing.Hashable"typing.Hashable
+builtins.int"builtins.int"pandas._typing.Level*ì
+axisÜ
+=TypeAlias[Union[Literal[builtins.str],Literal[builtins.int]]]®
+2Union[Literal[builtins.str],Literal[builtins.int]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.int]	
+builtins.int"builtins.int"pandas._typing.AxisIndex *D
+squeeze#pandas.core.generic.NDFrame.squeeze*
+self*
+
+axis *ı
+equals"pandas.core.generic.NDFrame.equals"
+builtins.bool"builtins.bool*D
+self:
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*‡
+other‘
+,pandas.core.series.Series[pandas._typing.S1]à
+pandas._typing.S1
+«Union[builtins.str,builtins.bytes,datetime.date,datetime.time,builtins.bool,builtins.int,builtins.float,builtins.complex,TypeAlias[Union[pandas.core.dtypes.base.ExtensionDtype,TypeAlias[Union[builtins.str,numpy.dtype[numpy.generic],Type[builtins.str],Type[builtins.complex],Type[builtins.bool],Type[builtins.object]]]]],datetime.datetime,datetime.timedelta,pandas._libs.tslibs.period.Period,pandas._libs.interval.Interval[Union[builtins.int,builtins.float,pandas._libs.tslibs.timestamps.Timestamp,pandas._libs.tslibs.timedeltas.Timedelta]],pandas.core.dtypes.dtypes.CategoricalDtype]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytes
+datetime.date"datetime.date
+datetime.time"datetime.time
+builtins.bool"builtins.bool
+builtins.int"builtins.int 
+builtins.float"builtins.float$
+builtins.complex"builtins.complexÜ	
+∆TypeAlias[Union[pandas.core.dtypes.base.ExtensionDtype,TypeAlias[Union[builtins.str,numpy.dtype[numpy.generic],Type[builtins.str],Type[builtins.complex],Type[builtins.bool],Type[builtins.object]]]]]¢
+ªUnion[pandas.core.dtypes.base.ExtensionDtype,TypeAlias[Union[builtins.str,numpy.dtype[numpy.generic],Type[builtins.str],Type[builtins.complex],Type[builtins.bool],Type[builtins.object]]]]P
+&pandas.core.dtypes.base.ExtensionDtype"&pandas.core.dtypes.base.ExtensionDtypeç
+çTypeAlias[Union[builtins.str,numpy.dtype[numpy.generic],Type[builtins.str],Type[builtins.complex],Type[builtins.bool],Type[builtins.object]]]‡
+ÇUnion[builtins.str,numpy.dtype[numpy.generic],Type[builtins.str],Type[builtins.complex],Type[builtins.bool],Type[builtins.object]]
+builtins.str"builtins.strI
+numpy.dtype[numpy.generic]
+numpy.generic"numpy.generic"numpy.dtype4
+Type[builtins.str]
+builtins.str"builtins.str@
+Type[builtins.complex]$
+builtins.complex"builtins.complex7
+Type[builtins.bool]
+builtins.bool"builtins.bool=
+Type[builtins.object]"
+builtins.object"builtins.object"pandas._typing.NpDtype"pandas._typing.Dtype&
+datetime.datetime"datetime.datetime(
+datetime.timedelta"datetime.timedeltaF
+!pandas._libs.tslibs.period.Period"!pandas._libs.tslibs.period.Periodû
+îpandas._libs.interval.Interval[Union[builtins.int,builtins.float,pandas._libs.tslibs.timestamps.Timestamp,pandas._libs.tslibs.timedeltas.Timedelta]]‰
+tUnion[builtins.int,builtins.float,pandas._libs.tslibs.timestamps.Timestamp,pandas._libs.tslibs.timedeltas.Timedelta]
+builtins.int"builtins.int 
+builtins.float"builtins.floatT
+(pandas._libs.tslibs.timestamps.Timestamp"(pandas._libs.tslibs.timestamps.TimestampT
+(pandas._libs.tslibs.timedeltas.Timedelta"(pandas._libs.tslibs.timedeltas.Timedelta"pandas._libs.interval.IntervalX
+*pandas.core.dtypes.dtypes.CategoricalDtype"*pandas.core.dtypes.dtypes.CategoricalDtype"pandas.core.series.Series*ú
+__neg__#pandas.core.generic.NDFrame.__neg__"t
+pandas._typing.NDFrameT:
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*vt
+pandas._typing.NDFrameT:
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*ú
+__pos__#pandas.core.generic.NDFrame.__pos__"t
+pandas._typing.NDFrameT:
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*vt
+pandas._typing.NDFrameT:
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*Ü
+__nonzero__'pandas.core.generic.NDFrame.__nonzero__"
+None*D
+self:
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*ô
+bool pandas.core.generic.NDFrame.bool"
+builtins.bool"builtins.bool*D
+self:
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame0:finalP*®
+__abs__#pandas.core.generic.NDFrame.__abs__":
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*<:
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*‚
+	__round__%pandas.core.generic.NDFrame.__round__":
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*D
+self:
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*,
+decimals
+builtins.int"builtins.int *2
+keys pandas.core.generic.NDFrame.keys*
+self*ä
+__len__#pandas.core.generic.NDFrame.__len__"
+builtins.int"builtins.int*<:
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*°
+__contains__(pandas.core.generic.NDFrame.__contains__"
+builtins.bool"builtins.bool*<:
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*	
+Any*û
+empty!pandas.core.generic.NDFrame.empty"
+builtins.bool"builtins.bool*D
+self:
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame0:property`*…
+	__array__%pandas.core.generic.NDFrame.__array__"9
+numpy.ndarray[Any,Any]
+Any
+Any"numpy.ndarray*D
+self:
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*
+dtype
+Any *Ç
+to_excel$pandas.core.generic.NDFrame.to_excel"
+None*D
+self:
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*
+excel_writer
+Any*.
+
+sheet_name
+builtins.str"builtins.str **
+na_rep
+builtins.str"builtins.str *X
+float_formatD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *¬
+columns≤
+6Union[builtins.str,typing.Sequence[builtins.str],None]
+builtins.str"builtins.strN
+typing.Sequence[builtins.str]
+builtins.str"builtins.str"typing.Sequence
+None *Ø
+header†
+0Union[builtins.bool,builtins.list[builtins.str]]
+builtins.bool"builtins.boolJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list *+
+index
+builtins.bool"builtins.bool *∆
+index_label≤
+6Union[builtins.str,typing.Sequence[builtins.str],None]
+builtins.str"builtins.strN
+typing.Sequence[builtins.str]
+builtins.str"builtins.str"typing.Sequence
+None *,
+startrow
+builtins.int"builtins.int *,
+startcol
+builtins.int"builtins.int *R
+engineD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *1
+merge_cells
+builtins.bool"builtins.bool *+
+inf_rep
+builtins.str"builtins.str *±
+freeze_panesú
+,Union[Tuple[builtins.int,builtins.int],None]`
+ Tuple[builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int
+None *˘
+to_hdf"pandas.core.generic.NDFrame.to_hdf"
+None*D
+self:
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*ü
+path_or_bufç
+[Union[TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]],pandas.io.pytables.HDFStore]Ô
+8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]ó
+-Union[builtins.str,os.PathLike[builtins.str]]
+builtins.str"builtins.strF
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLike"pandas._typing.FilePath:
+pandas.io.pytables.HDFStore"pandas.io.pytables.HDFStore*%
+key
+builtins.str"builtins.str*Ñ
+mode˜
+HUnion[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str *U
+	complevelD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *Á
+complib◊
+uUnion[TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]],None]—
+iTypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]∆
+^Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str"pandas._typing.HDFCompLib
+None *,
+append
+builtins.bool"builtins.bool *‰
+format’
+cUnion[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],None]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str
+None *+
+index
+builtins.bool"builtins.bool * 
+min_itemsizeµ
+NUnion[builtins.int,builtins.dict[pandas._typing.HashableT1,builtins.int],None]
+builtins.int"builtins.int∏
+5builtins.dict[pandas._typing.HashableT1,builtins.int]R
+pandas._typing.HashableT1"
+typing.Hashable"typing.Hashable"typing.Hashable
+builtins.int"builtins.int"builtins.dict
+None *S
+nan_repD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *U
+dropnaG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *∫
+data_columns•
+KUnion[Literal[builtins.bool],builtins.list[pandas._typing.HashableT2],None]:
+Literal[builtins.bool]	
+builtins.bool"builtins.boolç
+(builtins.list[pandas._typing.HashableT2]R
+pandas._typing.HashableT2"
+typing.Hashable"typing.Hashable"typing.Hashable"builtins.list
+None *√
+errors¥
+†Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str *,
+encoding
+builtins.str"builtins.str *Ë
+to_sql"pandas.core.generic.NDFrame.to_sql"D
+Union[builtins.int,None]
+builtins.int"builtins.int
+None*D
+self:
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*&
+name
+builtins.str"builtins.str*û
+conî
+1Union[builtins.str,Any,sqlite3.dbapi2.Connection]
+builtins.str"builtins.str
+Any6
+sqlite3.dbapi2.Connection"sqlite3.dbapi2.Connection*R
+schemaD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *â
+	if_exists˜
+HUnion[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str *+
+index
+builtins.bool"builtins.bool *∞
+index_labelú
+BTypeAlias[Union[typing.Hashable,typing.Sequence[typing.Hashable]]]∏
+7Union[typing.Hashable,typing.Sequence[typing.Hashable]]"
+typing.Hashable"typing.HashableW
+ typing.Sequence[typing.Hashable]"
+typing.Hashable"typing.Hashable"typing.Sequence"pandas._typing.IndexLabel *U
+	chunksizeD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *Ê
+dtypeÿ
+ÄUnion[TypeAlias[Union[TypeAlias[Union[pandas.core.dtypes.base.ExtensionDtype,TypeAlias[Union[builtins.str,numpy.dtype[numpy.generic],Type[builtins.str],Type[builtins.complex],Type[builtins.bool],Type[builtins.object]]]]],typing.Mapping[Any,Unknown]]],None]∆
+ÙTypeAlias[Union[TypeAlias[Union[pandas.core.dtypes.base.ExtensionDtype,TypeAlias[Union[builtins.str,numpy.dtype[numpy.generic],Type[builtins.str],Type[builtins.complex],Type[builtins.bool],Type[builtins.object]]]]],typing.Mapping[Any,Unknown]]]±
+ÈUnion[TypeAlias[Union[pandas.core.dtypes.base.ExtensionDtype,TypeAlias[Union[builtins.str,numpy.dtype[numpy.generic],Type[builtins.str],Type[builtins.complex],Type[builtins.bool],Type[builtins.object]]]]],typing.Mapping[Any,Unknown]]Ü	
+∆TypeAlias[Union[pandas.core.dtypes.base.ExtensionDtype,TypeAlias[Union[builtins.str,numpy.dtype[numpy.generic],Type[builtins.str],Type[builtins.complex],Type[builtins.bool],Type[builtins.object]]]]]¢
+ªUnion[pandas.core.dtypes.base.ExtensionDtype,TypeAlias[Union[builtins.str,numpy.dtype[numpy.generic],Type[builtins.str],Type[builtins.complex],Type[builtins.bool],Type[builtins.object]]]]P
+&pandas.core.dtypes.base.ExtensionDtype"&pandas.core.dtypes.base.ExtensionDtypeç
+çTypeAlias[Union[builtins.str,numpy.dtype[numpy.generic],Type[builtins.str],Type[builtins.complex],Type[builtins.bool],Type[builtins.object]]]‡
+ÇUnion[builtins.str,numpy.dtype[numpy.generic],Type[builtins.str],Type[builtins.complex],Type[builtins.bool],Type[builtins.object]]
+builtins.str"builtins.strI
+numpy.dtype[numpy.generic]
+numpy.generic"numpy.generic"numpy.dtype4
+Type[builtins.str]
+builtins.str"builtins.str@
+Type[builtins.complex]$
+builtins.complex"builtins.complex7
+Type[builtins.bool]
+builtins.bool"builtins.bool=
+Type[builtins.object]"
+builtins.object"builtins.object"pandas._typing.NpDtype"pandas._typing.Dtype8
+typing.Mapping[Any,Unknown]
+Any "typing.Mapping"pandas._typing.DtypeArg
+None *‰
+method’
+AUnion[Literal[builtins.str],CallableType[builtins.function],None]7
+Literal[builtins.str]	
+builtins.str"builtins.strK
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *„
+	to_pickle%pandas.core.generic.NDFrame.to_pickle"
+None*D
+self:
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*◊
+pathÃ
+jUnion[TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]],pandas._typing.WriteBuffer[builtins.bytes]]Ô
+8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]ó
+-Union[builtins.str,os.PathLike[builtins.str]]
+builtins.str"builtins.strF
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLike"pandas._typing.FilePathj
+*pandas._typing.WriteBuffer[builtins.bytes] 
+builtins.bytes"builtins.bytes"pandas._typing.WriteBuffer*Õ
+compressionπ
+≈TypeAlias[Union[None,Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],TypeAlias[builtins.dict[builtins.str,Any]]]]…
+∫Union[None,Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],TypeAlias[builtins.dict[builtins.str,Any]]]
+None7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.strß
+*TypeAlias[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"pandas._typing.CompressionDict"!pandas._typing.CompressionOptions *,
+protocol
+builtins.int"builtins.int *Ü
+storage_optionsÓ
+6TypeAlias[Union[builtins.dict[builtins.str,Any],None]]í
++Union[builtins.dict[builtins.str,Any],None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None"pandas._typing.StorageOptions *õ
+to_clipboard(pandas.core.generic.NDFrame.to_clipboard"
+None*D
+self:
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*+
+excel
+builtins.bool"builtins.bool *O
+sepD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *
+kwargs
+Any*¬
+take pandas.core.generic.NDFrame.take":
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*D
+self:
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*
+indices
+Any*
+axis
+Any *V
+is_copyG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *
+kwargs
+Any*§
+__delitem__'pandas.core.generic.NDFrame.__delitem__"
+None*<:
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*$"
+typing.Hashable"typing.Hashable*ü
+getpandas.core.generic.NDFrame.get"Ü	
+∆TypeAlias[Union[pandas.core.dtypes.base.ExtensionDtype,TypeAlias[Union[builtins.str,numpy.dtype[numpy.generic],Type[builtins.str],Type[builtins.complex],Type[builtins.bool],Type[builtins.object]]]]]¢
+ªUnion[pandas.core.dtypes.base.ExtensionDtype,TypeAlias[Union[builtins.str,numpy.dtype[numpy.generic],Type[builtins.str],Type[builtins.complex],Type[builtins.bool],Type[builtins.object]]]]P
+&pandas.core.dtypes.base.ExtensionDtype"&pandas.core.dtypes.base.ExtensionDtypeç
+çTypeAlias[Union[builtins.str,numpy.dtype[numpy.generic],Type[builtins.str],Type[builtins.complex],Type[builtins.bool],Type[builtins.object]]]‡
+ÇUnion[builtins.str,numpy.dtype[numpy.generic],Type[builtins.str],Type[builtins.complex],Type[builtins.bool],Type[builtins.object]]
+builtins.str"builtins.strI
+numpy.dtype[numpy.generic]
+numpy.generic"numpy.generic"numpy.dtype4
+Type[builtins.str]
+builtins.str"builtins.str@
+Type[builtins.complex]$
+builtins.complex"builtins.complex7
+Type[builtins.bool]
+builtins.bool"builtins.bool=
+Type[builtins.object]"
+builtins.object"builtins.object"pandas._typing.NpDtype"pandas._typing.Dtype*D
+self:
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*+
+key"
+builtins.object"builtins.object*˙
+
+defaultÍ
+
+“Union[TypeAlias[Union[pandas.core.dtypes.base.ExtensionDtype,TypeAlias[Union[builtins.str,numpy.dtype[numpy.generic],Type[builtins.str],Type[builtins.complex],Type[builtins.bool],Type[builtins.object]]]]],None]Ü	
+∆TypeAlias[Union[pandas.core.dtypes.base.ExtensionDtype,TypeAlias[Union[builtins.str,numpy.dtype[numpy.generic],Type[builtins.str],Type[builtins.complex],Type[builtins.bool],Type[builtins.object]]]]]¢
+ªUnion[pandas.core.dtypes.base.ExtensionDtype,TypeAlias[Union[builtins.str,numpy.dtype[numpy.generic],Type[builtins.str],Type[builtins.complex],Type[builtins.bool],Type[builtins.object]]]]P
+&pandas.core.dtypes.base.ExtensionDtype"&pandas.core.dtypes.base.ExtensionDtypeç
+çTypeAlias[Union[builtins.str,numpy.dtype[numpy.generic],Type[builtins.str],Type[builtins.complex],Type[builtins.bool],Type[builtins.object]]]‡
+ÇUnion[builtins.str,numpy.dtype[numpy.generic],Type[builtins.str],Type[builtins.complex],Type[builtins.bool],Type[builtins.object]]
+builtins.str"builtins.strI
+numpy.dtype[numpy.generic]
+numpy.generic"numpy.generic"numpy.dtype4
+Type[builtins.str]
+builtins.str"builtins.str@
+Type[builtins.complex]$
+builtins.complex"builtins.complex7
+Type[builtins.bool]
+builtins.bool"builtins.bool=
+Type[builtins.object]"
+builtins.object"builtins.object"pandas._typing.NpDtype"pandas._typing.Dtype
+None *˛
+reindex_like(pandas.core.generic.NDFrame.reindex_like":
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*D
+self:
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*
+other
+Any*R
+methodD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None **
+copy
+builtins.bool"builtins.bool *
+limit
+Any *
+	tolerance
+Any *‡
+
+add_prefix&pandas.core.generic.NDFrame.add_prefix":
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*D
+self:
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*(
+prefix
+builtins.str"builtins.str*‡
+
+add_suffix&pandas.core.generic.NDFrame.add_suffix":
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*D
+self:
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*(
+suffix
+builtins.str"builtins.str*’
+
+sort_index&pandas.core.generic.NDFrame.sort_index"
+Any*D
+self:
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*—
+axisƒ
+çTypeAlias[Union[TypeAlias[Union[Literal[builtins.str],Literal[builtins.int]]],TypeAlias[Union[Literal[builtins.str],Literal[builtins.int]]]]]ö
+ÇUnion[TypeAlias[Union[Literal[builtins.str],Literal[builtins.int]]],TypeAlias[Union[Literal[builtins.str],Literal[builtins.int]]]]Ü
+=TypeAlias[Union[Literal[builtins.str],Literal[builtins.int]]]®
+2Union[Literal[builtins.str],Literal[builtins.int]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.int]	
+builtins.int"builtins.int"pandas._typing.AxisIndexá
+=TypeAlias[Union[Literal[builtins.str],Literal[builtins.int]]]®
+2Union[Literal[builtins.str],Literal[builtins.int]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.int]	
+builtins.int"builtins.int"pandas._typing.AxisColumn"pandas._typing.Axis *
+level
+Any */
+	ascending
+builtins.bool"builtins.bool *-
+inplace
+builtins.bool"builtins.bool *‹
+kindœ
+iTypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]∆
+^Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str"pandas._typing.SortKind *º
+na_position®
+2Union[Literal[builtins.str],Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str *4
+sort_remaining
+builtins.bool"builtins.bool *2
+ignore_index
+builtins.bool"builtins.bool *˛
+filter"pandas.core.generic.NDFrame.filter":
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*D
+self:
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*
+items
+Any *P
+likeD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *Q
+regexD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *
+axis
+Any *≈
+head pandas.core.generic.NDFrame.head"t
+pandas._typing.NDFrameT:
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*~
+selft
+pandas._typing.NDFrameT:
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*%
+n
+builtins.int"builtins.int *≈
+tail pandas.core.generic.NDFrame.tail"t
+pandas._typing.NDFrameT:
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*~
+selft
+pandas._typing.NDFrameT:
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*%
+n
+builtins.int"builtins.int *ø
+pipe pandas.core.generic.NDFrame.pipe"I
+pandas._typing.T"
+builtins.object"builtins.object"builtins.object*D
+self:
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*€
+func–
+ZUnion[CallableType[builtins.function],Tuple[CallableType[builtins.function],builtins.str]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function¢
+3Tuple[CallableType[builtins.function],builtins.str]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+builtins.str"builtins.str*
+args
+Any*
+kwargs
+Any*˙
+__finalize__(pandas.core.generic.NDFrame.__finalize__":
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*D
+self:
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*
+other
+Any*
+method
+Any *
+kwargs
+Any*¬
+__setattr__'pandas.core.generic.NDFrame.__setattr__"
+None*D
+self:
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*&
+name
+builtins.str"builtins.str*
+value
+Any*»
+values"pandas.core.generic.NDFrame.values"≈
+OTypeAlias[Union[pandas.core.arrays.base.ExtensionArray,numpy.ndarray[Any,Any]]]’
+DUnion[pandas.core.arrays.base.ExtensionArray,numpy.ndarray[Any,Any]]P
+&pandas.core.arrays.base.ExtensionArray"&pandas.core.arrays.base.ExtensionArray9
+numpy.ndarray[Any,Any]
+Any
+Any"numpy.ndarray"pandas._typing.ArrayLike*D
+self:
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame0:property`*D
+dtypes"pandas.core.generic.NDFrame.dtypes*
+self0:property`* 
+copy pandas.core.generic.NDFrame.copy"t
+pandas._typing.NDFrameT:
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*~
+selft
+pandas._typing.NDFrameT:
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame"pandas.core.generic.NDFrame**
+deep
+builtins.bool"builtins.bool *ﬁ
+__copy__$pandas.core.generic.NDFrame.__copy__":
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*D
+self:
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame**
+deep
+builtins.bool"builtins.bool *œ
+__deepcopy__(pandas.core.generic.NDFrame.__deepcopy__":
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*D
+self:
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*
+memo
+Any *º
+infer_objects)pandas.core.generic.NDFrame.infer_objects":
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*D
+self:
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*≠
+convert_dtypes*pandas.core.generic.NDFrame.convert_dtypes"t
+pandas._typing.NDFrameT:
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*~
+selft
+pandas._typing.NDFrameT:
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*3
+infer_objects
+builtins.bool"builtins.bool *4
+convert_string
+builtins.bool"builtins.bool *5
+convert_integer
+builtins.bool"builtins.bool *5
+convert_boolean
+builtins.bool"builtins.bool *ü
+dtype_backendâ
+=TypeAlias[Union[Literal[builtins.str],Literal[builtins.str]]]®
+2Union[Literal[builtins.str],Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str"pandas._typing.DtypeBackend *Ö
+fillna"pandas.core.generic.NDFrame.fillna"q
+'Union[pandas.core.generic.NDFrame,None]:
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame
+None*D
+self:
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*
+value
+Any *
+method
+Any *
+axis
+Any *-
+inplace
+builtins.bool"builtins.bool *
+limit
+Any *
+downcast
+Any *°
+replace#pandas.core.generic.NDFrame.replace"
+Any*D
+self:
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*
+
+to_replace
+Any *
+value
+Any *-
+inplace
+builtins.bool"builtins.bool *
+limit
+Any *+
+regex
+builtins.bool"builtins.bool *˛
+methodÔ
+STypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]˜
+HUnion[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str"pandas._typing.ReplaceMethod *K
+asof pandas.core.generic.NDFrame.asof*
+self*	
+where*
+subset *™
+isna pandas.core.generic.NDFrame.isna":
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*D
+self:
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*Æ
+isnull"pandas.core.generic.NDFrame.isnull":
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*D
+self:
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*¨
+notna!pandas.core.generic.NDFrame.notna":
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*D
+self:
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*∞
+notnull#pandas.core.generic.NDFrame.notnull":
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*D
+self:
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*Ø
+clip pandas.core.generic.NDFrame.clip":
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*D
+self:
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*
+lower
+Any *
+upper
+Any *
+axis
+Any *-
+inplace
+builtins.bool"builtins.bool *
+kwargs
+Any*ø
+asfreq"pandas.core.generic.NDFrame.asfreq":
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*D
+self:
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*
+freq
+Any*È
+method⁄
+uUnion[TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]],None]‘
+iTypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]∆
+^Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str"pandas._typing.FillnaOptions
+None *√
+how∑
+7Union[Literal[builtins.str],Literal[builtins.str],None]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str
+None */
+	normalize
+builtins.bool"builtins.bool *
+
+fill_value
+Any *Ñ
+at_time#pandas.core.generic.NDFrame.at_time":
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*D
+self:
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*
+time
+Any**
+asof
+builtins.bool"builtins.bool *
+axis
+Any *ˇ
+between_time(pandas.core.generic.NDFrame.between_time":
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*D
+self:
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*
+
+start_time
+Any*
+end_time
+Any*
+axis
+Any *¡
+first!pandas.core.generic.NDFrame.first":
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*D
+self:
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*
+offset
+Any*ø
+last pandas.core.generic.NDFrame.last":
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*D
+self:
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*
+offset
+Any*Ç
+rank pandas.core.generic.NDFrame.rank":
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*D
+self:
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*
+axis
+Any *§
+methodï
+tUnion[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str *2
+numeric_only
+builtins.bool"builtins.bool *â
+	na_option˜
+HUnion[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str */
+	ascending
+builtins.bool"builtins.bool *)
+pct
+builtins.bool"builtins.bool *¨
+where!pandas.core.generic.NDFrame.where"
+Any*D
+self:
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*
+cond
+Any*
+other
+Any *-
+inplace
+builtins.bool"builtins.bool *
+axis
+Any *
+level
+Any *.
+try_cast
+builtins.bool"builtins.bool *™
+mask pandas.core.generic.NDFrame.mask"
+Any*D
+self:
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*
+cond
+Any*
+other
+Any *-
+inplace
+builtins.bool"builtins.bool *
+axis
+Any *
+level
+Any *.
+try_cast
+builtins.bool"builtins.bool *â
+shift!pandas.core.generic.NDFrame.shift":
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*D
+self:
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*
+periods
+Any *
+freq
+Any *
+axis
+Any *
+
+fill_value
+Any *˙
+slice_shift'pandas.core.generic.NDFrame.slice_shift":
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*D
+self:
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*+
+periods
+builtins.int"builtins.int *
+axis
+Any *Ö
+tshift"pandas.core.generic.NDFrame.tshift":
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*D
+self:
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*+
+periods
+builtins.int"builtins.int *
+freq
+Any *
+axis
+Any *†
+truncate$pandas.core.generic.NDFrame.truncate":
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*D
+self:
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*
+before
+Any *
+after
+Any *
+axis
+Any **
+copy
+builtins.bool"builtins.bool *û
+
+tz_convert&pandas.core.generic.NDFrame.tz_convert":
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*D
+self:
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*
+tz
+Any*
+axis
+Any *
+level
+Any **
+copy
+builtins.bool"builtins.bool *Î
+tz_localize'pandas.core.generic.NDFrame.tz_localize":
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*D
+self:
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*
+tz
+Any*
+axis
+Any *
+level
+Any **
+copy
+builtins.bool"builtins.bool *
+	ambiguous
+Any */
+nonexistent
+builtins.str"builtins.str *®
+abspandas.core.generic.NDFrame.abs":
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*D
+self:
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*‚
+describe$pandas.core.generic.NDFrame.describe":
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*D
+self:
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*
+percentiles
+Any *
+include
+Any *
+exclude
+Any *b
+datetime_is_numericG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *™
+
+pct_change&pandas.core.generic.NDFrame.pct_change":
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*D
+self:
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*
+periods
+Any *
+fill_method
+Any *
+limit
+Any *
+freq
+Any *
+kwargs
+Any*L
+first_valid_index-pandas.core.generic.NDFrame.first_valid_index*
+self*J
+last_valid_index,pandas.core.generic.NDFrame.last_valid_index*
+self2¸
+attrs!pandas.core.generic.NDFrame.attrsö
+attrs!pandas.core.generic.NDFrame.attrs"ó
+.builtins.dict[Union[typing.Hashable,None],Any]M
+Union[typing.Hashable,None]"
+typing.Hashable"typing.Hashable
+None
+Any"builtins.dict*D
+self:
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame0:propertyX`≤
+attrs!pandas.core.generic.NDFrame.attrs"
+None*D
+self:
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*•
+valueô
+/typing.Mapping[Union[typing.Hashable,None],Any]M
+Union[typing.Hashable,None]"
+typing.Hashable"typing.Hashable
+None
+Any"typing.Mapping0:attrs.setter2Ù&
+to_markdown'pandas.core.generic.NDFrame.to_markdown
+to_markdown'pandas.core.generic.NDFrame.to_markdown"
+None*D
+self:
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*Œ
+bufƒ
+hUnion[TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]],pandas._typing.WriteBuffer[builtins.str]]Ô
+8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]ó
+-Union[builtins.str,os.PathLike[builtins.str]]
+builtins.str"builtins.strF
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLike"pandas._typing.FilePathd
+(pandas._typing.WriteBuffer[builtins.str]
+builtins.str"builtins.str"pandas._typing.WriteBuffer*Ω
+mode∞
+ªUnion[TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]],None]„
+
+ØTypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]é
+§Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str"pandas._typing.FileWriteMode
+None *+
+index
+builtins.bool"builtins.bool *Ü
+storage_optionsÓ
+6TypeAlias[Union[builtins.dict[builtins.str,Any],None]]í
++Union[builtins.dict[builtins.str,Any],None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None"pandas._typing.StorageOptions *
+kwargs
+Any0:overloadX»
+to_markdown'pandas.core.generic.NDFrame.to_markdown"
+builtins.str"builtins.str*D
+self:
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*
+buf
+None *Ω
+mode∞
+ªUnion[TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]],None]„
+
+ØTypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]é
+§Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str"pandas._typing.FileWriteMode
+None *+
+index
+builtins.bool"builtins.bool *Ü
+storage_optionsÓ
+6TypeAlias[Union[builtins.dict[builtins.str,Any],None]]í
++Union[builtins.dict[builtins.str,Any],None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None"pandas._typing.StorageOptions *
+kwargs
+Any0:overloadX2"
+to_latex$pandas.core.generic.NDFrame.to_latexÒ
+to_latex$pandas.core.generic.NDFrame.to_latex"
+None*D
+self:
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*Œ
+bufƒ
+hUnion[TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]],pandas._typing.WriteBuffer[builtins.str]]Ô
+8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]ó
+-Union[builtins.str,os.PathLike[builtins.str]]
+builtins.str"builtins.strF
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLike"pandas._typing.FilePathd
+(pandas._typing.WriteBuffer[builtins.str]
+builtins.str"builtins.str"pandas._typing.WriteBuffer*ë
+columnsÅ
+'Union[builtins.list[builtins.str],None]J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list
+None *U
+	col_spaceD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *Ø
+header†
+0Union[builtins.bool,builtins.list[builtins.str]]
+builtins.bool"builtins.boolJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list *+
+index
+builtins.bool"builtins.bool **
+na_rep
+builtins.str"builtins.str *
+
+formatters
+Any *
+float_format
+Any *W
+sparsifyG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *1
+index_names
+builtins.bool"builtins.bool */
+	bold_rows
+builtins.bool"builtins.bool *Y
+column_formatD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *X
+	longtableG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *U
+escapeG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *T
+encodingD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *+
+decimal
+builtins.str"builtins.str *Z
+multicolumnG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *^
+multicolumn_formatD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *W
+multirowG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *◊
+caption«
+9Union[builtins.str,Tuple[builtins.str,builtins.str],None]
+builtins.str"builtins.str`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str
+None *Q
+labelD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *T
+positionD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None 0:overloadX…
+to_latex$pandas.core.generic.NDFrame.to_latex"
+builtins.str"builtins.str*D
+self:
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*
+buf
+None *ë
+columnsÅ
+'Union[builtins.list[builtins.str],None]J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list
+None *U
+	col_spaceD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *Ø
+header†
+0Union[builtins.bool,builtins.list[builtins.str]]
+builtins.bool"builtins.boolJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list *+
+index
+builtins.bool"builtins.bool **
+na_rep
+builtins.str"builtins.str *
+
+formatters
+Any *
+float_format
+Any *W
+sparsifyG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *1
+index_names
+builtins.bool"builtins.bool */
+	bold_rows
+builtins.bool"builtins.bool *Y
+column_formatD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *X
+	longtableG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *U
+escapeG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *T
+encodingD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *+
+decimal
+builtins.str"builtins.str *Z
+multicolumnG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *^
+multicolumn_formatD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *W
+multirowG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *◊
+caption«
+9Union[builtins.str,Tuple[builtins.str,builtins.str],None]
+builtins.str"builtins.str`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str
+None *Q
+labelD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *T
+positionD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None 0:overloadX2ƒS
+to_csv"pandas.core.generic.NDFrame.to_csvÈ+
+to_csv"pandas.core.generic.NDFrame.to_csv"
+None*D
+self:
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*Ó
+path_or_buf‹
+ìUnion[TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]],pandas._typing.WriteBuffer[builtins.bytes],pandas._typing.WriteBuffer[builtins.str]]Ô
+8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]ó
+-Union[builtins.str,os.PathLike[builtins.str]]
+builtins.str"builtins.strF
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLike"pandas._typing.FilePathj
+*pandas._typing.WriteBuffer[builtins.bytes] 
+builtins.bytes"builtins.bytes"pandas._typing.WriteBufferd
+(pandas._typing.WriteBuffer[builtins.str]
+builtins.str"builtins.str"pandas._typing.WriteBuffer*'
+sep
+builtins.str"builtins.str **
+na_rep
+builtins.str"builtins.str *∆
+float_format±
+8Union[builtins.str,CallableType[builtins.function],None]
+builtins.str"builtins.strK
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *‚
+columns“
+4Union[builtins.list[pandas._typing.HashableT1],None]ç
+(builtins.list[pandas._typing.HashableT1]R
+pandas._typing.HashableT1"
+typing.Hashable"typing.Hashable"typing.Hashable"builtins.list
+None *Ø
+header†
+0Union[builtins.bool,builtins.list[builtins.str]]
+builtins.bool"builtins.boolJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list *+
+index
+builtins.bool"builtins.bool *‰
+index_label–
+XUnion[Literal[builtins.bool],builtins.str,builtins.list[pandas._typing.HashableT2],None]:
+Literal[builtins.bool]	
+builtins.bool"builtins.bool
+builtins.str"builtins.strç
+(builtins.list[pandas._typing.HashableT2]R
+pandas._typing.HashableT2"
+typing.Hashable"typing.Hashable"typing.Hashable"builtins.list
+None *
+
+mode„
+
+ØTypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]é
+§Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str"pandas._typing.FileWriteMode *T
+encodingD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *Õ
+compressionπ
+≈TypeAlias[Union[None,Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],TypeAlias[builtins.dict[builtins.str,Any]]]]…
+∫Union[None,Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],TypeAlias[builtins.dict[builtins.str,Any]]]
+None7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.strß
+*TypeAlias[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"pandas._typing.CompressionDict"!pandas._typing.CompressionOptions *·
+quoting—
+iTypeAlias[Union[Literal[builtins.int],Literal[builtins.int],Literal[builtins.int],Literal[builtins.int]]]∆
+^Union[Literal[builtins.int],Literal[builtins.int],Literal[builtins.int],Literal[builtins.int]]7
+Literal[builtins.int]	
+builtins.int"builtins.int7
+Literal[builtins.int]	
+builtins.int"builtins.int7
+Literal[builtins.int]	
+builtins.int"builtins.int7
+Literal[builtins.int]	
+builtins.int"builtins.int"pandas._typing.CSVQuoting *-
+	quotechar
+builtins.str"builtins.str *Z
+lineterminatorD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *U
+	chunksizeD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *W
+date_formatD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *1
+doublequote
+builtins.bool"builtins.bool *V
+
+escapecharD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *+
+decimal
+builtins.str"builtins.str **
+errors
+builtins.str"builtins.str *Ü
+storage_optionsÓ
+6TypeAlias[Union[builtins.dict[builtins.str,Any],None]]í
++Union[builtins.dict[builtins.str,Any],None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None"pandas._typing.StorageOptions 0:overloadX©'
+to_csv"pandas.core.generic.NDFrame.to_csv"
+builtins.str"builtins.str*D
+self:
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*
+path_or_buf
+None *'
+sep
+builtins.str"builtins.str **
+na_rep
+builtins.str"builtins.str *∆
+float_format±
+8Union[builtins.str,CallableType[builtins.function],None]
+builtins.str"builtins.strK
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *‚
+columns“
+4Union[builtins.list[pandas._typing.HashableT1],None]ç
+(builtins.list[pandas._typing.HashableT1]R
+pandas._typing.HashableT1"
+typing.Hashable"typing.Hashable"typing.Hashable"builtins.list
+None *Ø
+header†
+0Union[builtins.bool,builtins.list[builtins.str]]
+builtins.bool"builtins.boolJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list *+
+index
+builtins.bool"builtins.bool *‰
+index_label–
+XUnion[Literal[builtins.bool],builtins.str,builtins.list[pandas._typing.HashableT2],None]:
+Literal[builtins.bool]	
+builtins.bool"builtins.bool
+builtins.str"builtins.strç
+(builtins.list[pandas._typing.HashableT2]R
+pandas._typing.HashableT2"
+typing.Hashable"typing.Hashable"typing.Hashable"builtins.list
+None *
+
+mode„
+
+ØTypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]é
+§Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str"pandas._typing.FileWriteMode *T
+encodingD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *Õ
+compressionπ
+≈TypeAlias[Union[None,Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],TypeAlias[builtins.dict[builtins.str,Any]]]]…
+∫Union[None,Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],TypeAlias[builtins.dict[builtins.str,Any]]]
+None7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.strß
+*TypeAlias[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"pandas._typing.CompressionDict"!pandas._typing.CompressionOptions *·
+quoting—
+iTypeAlias[Union[Literal[builtins.int],Literal[builtins.int],Literal[builtins.int],Literal[builtins.int]]]∆
+^Union[Literal[builtins.int],Literal[builtins.int],Literal[builtins.int],Literal[builtins.int]]7
+Literal[builtins.int]	
+builtins.int"builtins.int7
+Literal[builtins.int]	
+builtins.int"builtins.int7
+Literal[builtins.int]	
+builtins.int"builtins.int7
+Literal[builtins.int]	
+builtins.int"builtins.int"pandas._typing.CSVQuoting *-
+	quotechar
+builtins.str"builtins.str *Z
+lineterminatorD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *U
+	chunksizeD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *W
+date_formatD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *1
+doublequote
+builtins.bool"builtins.bool *V
+
+escapecharD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *+
+decimal
+builtins.str"builtins.str **
+errors
+builtins.str"builtins.str *Ü
+storage_optionsÓ
+6TypeAlias[Union[builtins.dict[builtins.str,Any],None]]í
++Union[builtins.dict[builtins.str,Any],None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None"pandas._typing.StorageOptions 0:overloadX2≤5
+drop pandas.core.generic.NDFrame.drop™
+drop pandas.core.generic.NDFrame.drop"
+None*D
+self:
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*«
+labels∏
+7Union[typing.Hashable,typing.Sequence[typing.Hashable]]"
+typing.Hashable"typing.HashableW
+ typing.Sequence[typing.Hashable]"
+typing.Hashable"typing.Hashable"typing.Sequence *—
+axisƒ
+çTypeAlias[Union[TypeAlias[Union[Literal[builtins.str],Literal[builtins.int]]],TypeAlias[Union[Literal[builtins.str],Literal[builtins.int]]]]]ö
+ÇUnion[TypeAlias[Union[Literal[builtins.str],Literal[builtins.int]]],TypeAlias[Union[Literal[builtins.str],Literal[builtins.int]]]]Ü
+=TypeAlias[Union[Literal[builtins.str],Literal[builtins.int]]]®
+2Union[Literal[builtins.str],Literal[builtins.int]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.int]	
+builtins.int"builtins.int"pandas._typing.AxisIndexá
+=TypeAlias[Union[Literal[builtins.str],Literal[builtins.int]]]®
+2Union[Literal[builtins.str],Literal[builtins.int]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.int]	
+builtins.int"builtins.int"pandas._typing.AxisColumn"pandas._typing.Axis *∆
+index∏
+7Union[typing.Hashable,typing.Sequence[typing.Hashable]]"
+typing.Hashable"typing.HashableW
+ typing.Sequence[typing.Hashable]"
+typing.Hashable"typing.Hashable"typing.Sequence *»
+columns∏
+7Union[typing.Hashable,typing.Sequence[typing.Hashable]]"
+typing.Hashable"typing.HashableW
+ typing.Sequence[typing.Hashable]"
+typing.Hashable"typing.Hashable"typing.Sequence *å
+level˛
+:Union[TypeAlias[Union[typing.Hashable,builtins.int]],None]≥
+.TypeAlias[Union[typing.Hashable,builtins.int]]i
+#Union[typing.Hashable,builtins.int]"
+typing.Hashable"typing.Hashable
+builtins.int"builtins.int"pandas._typing.Level
+None *G
+inplace:
+Literal[builtins.bool]	
+builtins.bool"builtins.bool*ó
+errorsà
+=TypeAlias[Union[Literal[builtins.str],Literal[builtins.str]]]®
+2Union[Literal[builtins.str],Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str"pandas._typing.IgnoreRaise 0:overloadXﬁ
+drop pandas.core.generic.NDFrame.drop":
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*D
+self:
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*«
+labels∏
+7Union[typing.Hashable,typing.Sequence[typing.Hashable]]"
+typing.Hashable"typing.HashableW
+ typing.Sequence[typing.Hashable]"
+typing.Hashable"typing.Hashable"typing.Sequence *—
+axisƒ
+çTypeAlias[Union[TypeAlias[Union[Literal[builtins.str],Literal[builtins.int]]],TypeAlias[Union[Literal[builtins.str],Literal[builtins.int]]]]]ö
+ÇUnion[TypeAlias[Union[Literal[builtins.str],Literal[builtins.int]]],TypeAlias[Union[Literal[builtins.str],Literal[builtins.int]]]]Ü
+=TypeAlias[Union[Literal[builtins.str],Literal[builtins.int]]]®
+2Union[Literal[builtins.str],Literal[builtins.int]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.int]	
+builtins.int"builtins.int"pandas._typing.AxisIndexá
+=TypeAlias[Union[Literal[builtins.str],Literal[builtins.int]]]®
+2Union[Literal[builtins.str],Literal[builtins.int]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.int]	
+builtins.int"builtins.int"pandas._typing.AxisColumn"pandas._typing.Axis *∆
+index∏
+7Union[typing.Hashable,typing.Sequence[typing.Hashable]]"
+typing.Hashable"typing.HashableW
+ typing.Sequence[typing.Hashable]"
+typing.Hashable"typing.Hashable"typing.Sequence *»
+columns∏
+7Union[typing.Hashable,typing.Sequence[typing.Hashable]]"
+typing.Hashable"typing.HashableW
+ typing.Sequence[typing.Hashable]"
+typing.Hashable"typing.Hashable"typing.Sequence *å
+level˛
+:Union[TypeAlias[Union[typing.Hashable,builtins.int]],None]≥
+.TypeAlias[Union[typing.Hashable,builtins.int]]i
+#Union[typing.Hashable,builtins.int]"
+typing.Hashable"typing.Hashable
+builtins.int"builtins.int"pandas._typing.Level
+None *I
+inplace:
+Literal[builtins.bool]	
+builtins.bool"builtins.bool *ó
+errorsà
+=TypeAlias[Union[Literal[builtins.str],Literal[builtins.str]]]®
+2Union[Literal[builtins.str],Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str"pandas._typing.IgnoreRaise 0:overloadX˘
+drop pandas.core.generic.NDFrame.drop"q
+'Union[pandas.core.generic.NDFrame,None]:
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame
+None*D
+self:
+pandas.core.generic.NDFrame"pandas.core.generic.NDFrame*«
+labels∏
+7Union[typing.Hashable,typing.Sequence[typing.Hashable]]"
+typing.Hashable"typing.HashableW
+ typing.Sequence[typing.Hashable]"
+typing.Hashable"typing.Hashable"typing.Sequence *—
+axisƒ
+çTypeAlias[Union[TypeAlias[Union[Literal[builtins.str],Literal[builtins.int]]],TypeAlias[Union[Literal[builtins.str],Literal[builtins.int]]]]]ö
+ÇUnion[TypeAlias[Union[Literal[builtins.str],Literal[builtins.int]]],TypeAlias[Union[Literal[builtins.str],Literal[builtins.int]]]]Ü
+=TypeAlias[Union[Literal[builtins.str],Literal[builtins.int]]]®
+2Union[Literal[builtins.str],Literal[builtins.int]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.int]	
+builtins.int"builtins.int"pandas._typing.AxisIndexá
+=TypeAlias[Union[Literal[builtins.str],Literal[builtins.int]]]®
+2Union[Literal[builtins.str],Literal[builtins.int]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.int]	
+builtins.int"builtins.int"pandas._typing.AxisColumn"pandas._typing.Axis *∆
+index∏
+7Union[typing.Hashable,typing.Sequence[typing.Hashable]]"
+typing.Hashable"typing.HashableW
+ typing.Sequence[typing.Hashable]"
+typing.Hashable"typing.Hashable"typing.Sequence *»
+columns∏
+7Union[typing.Hashable,typing.Sequence[typing.Hashable]]"
+typing.Hashable"typing.HashableW
+ typing.Sequence[typing.Hashable]"
+typing.Hashable"typing.Hashable"typing.Sequence *å
+level˛
+:Union[TypeAlias[Union[typing.Hashable,builtins.int]],None]≥
+.TypeAlias[Union[typing.Hashable,builtins.int]]i
+#Union[typing.Hashable,builtins.int]"
+typing.Hashable"typing.Hashable
+builtins.int"builtins.int"pandas._typing.Level
+None *-
+inplace
+builtins.bool"builtins.bool *ó
+errorsà
+=TypeAlias[Union[Literal[builtins.str],Literal[builtins.str]]]®
+2Union[Literal[builtins.str],Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str"pandas._typing.IgnoreRaise 0:overloadXr:
+__hash__$pandas.core.generic.NDFrame.__hash__
+Nonerb
+__array_priority__.pandas.core.generic.NDFrame.__array_priority__
+builtins.int"builtins.int*è
+__annotations__#pandas.core.generic.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*
+npnumpy *"
+indexingpandas.core.indexing *5
+
+sqlalchemypandas.core.generic.sqlalchemy
+Any
