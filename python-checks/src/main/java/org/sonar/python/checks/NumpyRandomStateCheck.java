@@ -19,9 +19,11 @@
  */
 package org.sonar.python.checks;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 
+import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
@@ -34,60 +36,70 @@ public class NumpyRandomStateCheck extends PythonSubscriptionCheck {
 
   private static final String MESSAGE = "Use a \"numpy.random.Generator\" here instead of this legacy function.";
 
-  private static final String LEGACY_MODULE_NAME = "numpy.random.mtrand.RandomState";
-  private static final List<String> LEGACY_FUNCTION_EXCEPTIONS = List.of(
-      "numpy.random.mtrand.RandomState.get_state",
-      "numpy.random.mtrand.RandomState.set_state",
-      "numpy.random.mtrand.RandomState.seed");
+  private static final List<String> LEGACY_MODULE_NAME = List.of("numpy.random.RandomState", "numpy.random.mtrand.RandomState");
 
-  private static final List<String> LEGACY_RANDOM_FUNCTIONS = List.of(
-      "numpy.random.mtrand.beta",
-      "numpy.random.mtrand.binomial",
-      "numpy.random.mtrand.bytes",
-      "numpy.random.mtrand.chisquare",
-      "numpy.random.mtrand.choice",
-      "numpy.random.mtrand.dirichlet",
-      "numpy.random.mtrand.exponential",
-      "numpy.random.mtrand.f",
-      "numpy.random.mtrand.gamma",
-      "numpy.random.mtrand.geometric",
-      "numpy.random.mtrand.gumbel",
-      "numpy.random.mtrand.hypergeometric",
-      "numpy.random.mtrand.laplace",
-      "numpy.random.mtrand.logistic",
-      "numpy.random.mtrand.lognormal",
-      "numpy.random.mtrand.logseries",
-      "numpy.random.mtrand.multinomial",
-      "numpy.random.mtrand.multivariate_normal",
-      "numpy.random.mtrand.negative_binomial",
-      "numpy.random.mtrand.noncentral_chisquare",
-      "numpy.random.mtrand.noncentral_f",
-      "numpy.random.mtrand.normal",
-      "numpy.random.mtrand.pareto",
-      "numpy.random.mtrand.permutation",
-      "numpy.random.mtrand.poisson",
-      "numpy.random.mtrand.power",
-      "numpy.random.mtrand.rand",
-      "numpy.random.mtrand.randint",
-      "numpy.random.mtrand.randn",
-      "numpy.random.mtrand.random",
-      "numpy.random.mtrand.random_integers",
-      "numpy.random.mtrand.random_sample",
-      "numpy.random.mtrand.ranf",
-      "numpy.random.mtrand.rayleigh",
-      "numpy.random.mtrand.sample",
-      "numpy.random.mtrand.shuffle",
-      "numpy.random.mtrand.standard_cauchy",
-      "numpy.random.mtrand.standard_exponential",
-      "numpy.random.mtrand.standard_gamma",
-      "numpy.random.mtrand.standard_normal",
-      "numpy.random.mtrand.standard_t",
-      "numpy.random.mtrand.triangular",
-      "numpy.random.mtrand.uniform",
-      "numpy.random.mtrand.vonmises",
-      "numpy.random.mtrand.wald",
-      "numpy.random.mtrand.weibull",
-      "numpy.random.mtrand.zipf");
+  private static final List<String> MODULE_PREFIXES = List.of("numpy.random.%s", "numpy.random.mtrand.%s");
+
+  private static final Set<String> LEGACY_FUNCTION_EXCEPTIONS = new HashSet<>();
+  private static final Set<String> LEGACY_RANDOM_FUNCTIONS = new HashSet<>();
+
+  static {
+    MODULE_PREFIXES.forEach(m -> {
+      LEGACY_FUNCTION_EXCEPTIONS.add(String.format(m, "RandomState.get_state"));
+      LEGACY_FUNCTION_EXCEPTIONS.add(String.format(m, "RandomState.set_state"));
+      LEGACY_FUNCTION_EXCEPTIONS.add(String.format(m, "RandomState.seed"));
+    });
+
+    MODULE_PREFIXES.forEach(m -> {
+      LEGACY_RANDOM_FUNCTIONS.add(String.format(m, "beta"));
+      LEGACY_RANDOM_FUNCTIONS.add(String.format(m, "binomial"));
+      LEGACY_RANDOM_FUNCTIONS.add(String.format(m, "bytes"));
+      LEGACY_RANDOM_FUNCTIONS.add(String.format(m, "chisquare"));
+      LEGACY_RANDOM_FUNCTIONS.add(String.format(m, "choice"));
+      LEGACY_RANDOM_FUNCTIONS.add(String.format(m, "dirichlet"));
+      LEGACY_RANDOM_FUNCTIONS.add(String.format(m, "exponential"));
+      LEGACY_RANDOM_FUNCTIONS.add(String.format(m, "f"));
+      LEGACY_RANDOM_FUNCTIONS.add(String.format(m, "gamma"));
+      LEGACY_RANDOM_FUNCTIONS.add(String.format(m, "geometric"));
+      LEGACY_RANDOM_FUNCTIONS.add(String.format(m, "gumbel"));
+      LEGACY_RANDOM_FUNCTIONS.add(String.format(m, "hypergeometric"));
+      LEGACY_RANDOM_FUNCTIONS.add(String.format(m, "laplace"));
+      LEGACY_RANDOM_FUNCTIONS.add(String.format(m, "logistic"));
+      LEGACY_RANDOM_FUNCTIONS.add(String.format(m, "lognormal"));
+      LEGACY_RANDOM_FUNCTIONS.add(String.format(m, "logseries"));
+      LEGACY_RANDOM_FUNCTIONS.add(String.format(m, "multinomial"));
+      LEGACY_RANDOM_FUNCTIONS.add(String.format(m, "multivariate_normal"));
+      LEGACY_RANDOM_FUNCTIONS.add(String.format(m, "negative_binomial"));
+      LEGACY_RANDOM_FUNCTIONS.add(String.format(m, "noncentral_chisquare"));
+      LEGACY_RANDOM_FUNCTIONS.add(String.format(m, "noncentral_f"));
+      LEGACY_RANDOM_FUNCTIONS.add(String.format(m, "normal"));
+      LEGACY_RANDOM_FUNCTIONS.add(String.format(m, "pareto"));
+      LEGACY_RANDOM_FUNCTIONS.add(String.format(m, "permutation"));
+      LEGACY_RANDOM_FUNCTIONS.add(String.format(m, "poisson"));
+      LEGACY_RANDOM_FUNCTIONS.add(String.format(m, "power"));
+      LEGACY_RANDOM_FUNCTIONS.add(String.format(m, "rand"));
+      LEGACY_RANDOM_FUNCTIONS.add(String.format(m, "randint"));
+      LEGACY_RANDOM_FUNCTIONS.add(String.format(m, "randn"));
+      LEGACY_RANDOM_FUNCTIONS.add(String.format(m, "random"));
+      LEGACY_RANDOM_FUNCTIONS.add(String.format(m, "random_integers"));
+      LEGACY_RANDOM_FUNCTIONS.add(String.format(m, "random_sample"));
+      LEGACY_RANDOM_FUNCTIONS.add(String.format(m, "ranf"));
+      LEGACY_RANDOM_FUNCTIONS.add(String.format(m, "rayleigh"));
+      LEGACY_RANDOM_FUNCTIONS.add(String.format(m, "sample"));
+      LEGACY_RANDOM_FUNCTIONS.add(String.format(m, "shuffle"));
+      LEGACY_RANDOM_FUNCTIONS.add(String.format(m, "standard_cauchy"));
+      LEGACY_RANDOM_FUNCTIONS.add(String.format(m, "standard_exponential"));
+      LEGACY_RANDOM_FUNCTIONS.add(String.format(m, "standard_gamma"));
+      LEGACY_RANDOM_FUNCTIONS.add(String.format(m, "standard_normal"));
+      LEGACY_RANDOM_FUNCTIONS.add(String.format(m, "standard_t"));
+      LEGACY_RANDOM_FUNCTIONS.add(String.format(m, "triangular"));
+      LEGACY_RANDOM_FUNCTIONS.add(String.format(m, "uniform"));
+      LEGACY_RANDOM_FUNCTIONS.add(String.format(m, "vonmises"));
+      LEGACY_RANDOM_FUNCTIONS.add(String.format(m, "wald"));
+      LEGACY_RANDOM_FUNCTIONS.add(String.format(m, "weibull"));
+      LEGACY_RANDOM_FUNCTIONS.add(String.format(m, "zipf"));
+    });
+  }
 
   @Override
   public void initialize(Context context) {
@@ -99,7 +111,7 @@ public class NumpyRandomStateCheck extends PythonSubscriptionCheck {
     Optional.ofNullable(call.calleeSymbol())
         .map(Symbol::fullyQualifiedName)
         .filter(fqn -> !LEGACY_FUNCTION_EXCEPTIONS.contains(fqn) &&
-            (fqn.startsWith(LEGACY_MODULE_NAME) || LEGACY_RANDOM_FUNCTIONS.contains(fqn)))
+            (LEGACY_MODULE_NAME.stream().anyMatch(fqn::startsWith) || LEGACY_RANDOM_FUNCTIONS.contains(fqn)))
         .ifPresent(fqn -> ctx.addIssue(call.callee(), MESSAGE));
   }
 

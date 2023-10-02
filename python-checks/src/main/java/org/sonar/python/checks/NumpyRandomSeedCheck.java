@@ -19,6 +19,7 @@
  */
 package org.sonar.python.checks;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -43,16 +44,23 @@ public class NumpyRandomSeedCheck extends PythonSubscriptionCheck {
 
   private static final String SEED_ARG_NAME = "seed";
 
-  private static final Map<String, String> SEED_METHODS_TO_CHECK = Map.of(
-      "numpy.seed", SEED_ARG_NAME,
-      "numpy.random.mtrand.seed", SEED_ARG_NAME,
-      "numpy.random._generator.default_rng", SEED_ARG_NAME,
-      "numpy.random.bit_generator.SeedSequence", "entropy",
-      "numpy.random._pcg64.PCG64", SEED_ARG_NAME,
-      "numpy.random._pcg64.PCG64DXSM", SEED_ARG_NAME,
-      "numpy.random._mt19937.MT19937", SEED_ARG_NAME,
-      "numpy.random._sfc64.SFC64", SEED_ARG_NAME,
-      "numpy.random._philox.Philox", SEED_ARG_NAME);
+  private static final Map<String, String> SEED_METHODS_TO_CHECK = new HashMap<>();
+
+  private static final List<String> MODULE_PREFIXES = List.of("numpy.random.%s", "numpy.random.mtrand.%s");
+
+  static {
+    SEED_METHODS_TO_CHECK.put("numpy.seed", SEED_ARG_NAME);
+    MODULE_PREFIXES.forEach(m -> {
+      SEED_METHODS_TO_CHECK.put(String.format(m, "seed"), SEED_ARG_NAME);
+      SEED_METHODS_TO_CHECK.put(String.format(m, "_generator.default_rng"), SEED_ARG_NAME);
+      SEED_METHODS_TO_CHECK.put(String.format(m, "bit_generator.SeedSequence"), "entropy");
+      SEED_METHODS_TO_CHECK.put(String.format(m, "_pcg64.PCG64"), SEED_ARG_NAME);
+      SEED_METHODS_TO_CHECK.put(String.format(m, "_pcg64.PCG64DXSM"), SEED_ARG_NAME);
+      SEED_METHODS_TO_CHECK.put(String.format(m, "_mt19937.MT19937"), SEED_ARG_NAME);
+      SEED_METHODS_TO_CHECK.put(String.format(m, "_sfc64.SFC64"), SEED_ARG_NAME);
+      SEED_METHODS_TO_CHECK.put(String.format(m, "_philox.Philox"), SEED_ARG_NAME);
+    });
+  }
 
   private static final String MESSAGE = "Provide a seed for this random generator.";
 

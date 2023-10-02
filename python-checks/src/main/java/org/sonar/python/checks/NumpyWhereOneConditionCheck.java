@@ -21,6 +21,7 @@ package org.sonar.python.checks;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
@@ -38,6 +39,7 @@ import org.sonar.python.quickfix.TextEditUtils;
 public class NumpyWhereOneConditionCheck extends PythonSubscriptionCheck {
 
   private static final String MESSAGE = "Use \"np.nonzero\" when only the condition parameter is provided to \"np.where\".";
+  private static final Set<String> numpyWhereNames = Set.of("numpy.where", "numpy.core.multiarray.where");
 
   @Override
   public void initialize(Context context) {
@@ -49,7 +51,7 @@ public class NumpyWhereOneConditionCheck extends PythonSubscriptionCheck {
     Symbol symbol = ce.calleeSymbol();
     Optional.ofNullable(symbol)
       .map(Symbol::fullyQualifiedName)
-      .filter("numpy.core.multiarray.where"::equals)
+      .filter(numpyWhereNames::contains)
       .filter(fqn -> hasOneParameter(ce))
       .ifPresent(fqn -> {
         PreciseIssue issue = ctx.addIssue(ce, MESSAGE);
