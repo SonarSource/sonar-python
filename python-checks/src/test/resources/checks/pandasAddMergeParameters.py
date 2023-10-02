@@ -34,8 +34,10 @@ def non_compliant_merge_1():
 
     _ = age_df.join(name_df)  # FN Noncompliant {{The 'how', 'on' and 'validate' parameters of the merge should be specified.}}
 
+    _ = age_df.merge(name_df, how="cross", validate="1:1")  # FN Noncompliant {{The 'validate' parameter of the merge should be specified.}}
 
-def non_compliant_2():
+
+def non_compliant_2(xx):
     from pandas import DataFrame, merge
     age_df = DataFrame({"user_id": [1, 2, 4], "age": [42, 45, 35]})
     name_df = DataFrame({"user_id": [1, 2, 3, 4], "name": ["a", "b", "c", "d"]})
