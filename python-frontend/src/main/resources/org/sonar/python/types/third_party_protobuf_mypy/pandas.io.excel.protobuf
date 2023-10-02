@@ -1,0 +1,958 @@
+
+pandas.io.excelÀÄ
+	ExcelFilepandas.io.excel._base.ExcelFile"builtins.object*Ç
+
+__init__(pandas.io.excel._base.ExcelFile.__init__"
+None*L
+selfB
+pandas.io.excel._base.ExcelFile"pandas.io.excel._base.ExcelFile*É
+io˙
+xUnion[TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]],pandas._typing.ReadBuffer[builtins.bytes],builtins.bytes]Ô
+8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]ó
+-Union[builtins.str,os.PathLike[builtins.str]]
+builtins.str"builtins.strF
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLike"pandas._typing.FilePathh
+)pandas._typing.ReadBuffer[builtins.bytes] 
+builtins.bytes"builtins.bytes"pandas._typing.ReadBuffer 
+builtins.bytes"builtins.bytes*‰
+engine’
+cUnion[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],None]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str
+None *Ü
+storage_optionsÓ
+6TypeAlias[Union[builtins.dict[builtins.str,Any],None]]í
++Union[builtins.dict[builtins.str,Any],None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None"pandas._typing.StorageOptions *B
+
+__fspath__*pandas.io.excel._base.ExcelFile.__fspath__*
+self*»
+book$pandas.io.excel._base.ExcelFile.book">
+Union[Any,Any,Any,Any]
+Any
+Any
+Any
+Any*L
+selfB
+pandas.io.excel._base.ExcelFile"pandas.io.excel._base.ExcelFile0:property`*ª
+sheet_names+pandas.io.excel._base.ExcelFile.sheet_names"¢
+/builtins.list[Union[builtins.int,builtins.str]]`
+ Union[builtins.int,builtins.str]
+builtins.int"builtins.int
+builtins.str"builtins.str"builtins.list*L
+selfB
+pandas.io.excel._base.ExcelFile"pandas.io.excel._base.ExcelFile0:property`*Ü
+close%pandas.io.excel._base.ExcelFile.close"
+None*L
+selfB
+pandas.io.excel._base.ExcelFile"pandas.io.excel._base.ExcelFile*Ÿ
+	__enter__)pandas.io.excel._base.ExcelFile.__enter__"ç
+$pandas.io.excel._base.ExcelFile.SelfB
+pandas.io.excel._base.ExcelFile"pandas.io.excel._base.ExcelFile"pandas.io.excel._base.ExcelFile*êç
+$pandas.io.excel._base.ExcelFile.SelfB
+pandas.io.excel._base.ExcelFile"pandas.io.excel._base.ExcelFile"pandas.io.excel._base.ExcelFile*◊
+__exit__(pandas.io.excel._base.ExcelFile.__exit__"
+None*DB
+pandas.io.excel._base.ExcelFile"pandas.io.excel._base.ExcelFile*çä
+(Union[Type[builtins.BaseException],None]R
+Type[builtins.BaseException]0
+builtins.BaseException"builtins.BaseException
+None*db
+"Union[builtins.BaseException,None]0
+builtins.BaseException"builtins.BaseException
+None*[Y
+Union[types.TracebackType,None]*
+types.TracebackType"types.TracebackType
+None*Ç
+__del__'pandas.io.excel._base.ExcelFile.__del__"
+None*DB
+pandas.io.excel._base.ExcelFile"pandas.io.excel._base.ExcelFile2Ûc
+parse%pandas.io.excel._base.ExcelFile.parseà3
+parse%pandas.io.excel._base.ExcelFile.parse"˙
+Kbuiltins.dict[Union[builtins.int,builtins.str],pandas.core.frame.DataFrame]`
+ Union[builtins.int,builtins.str]
+builtins.int"builtins.int
+builtins.str"builtins.str:
+pandas.core.frame.DataFrame"pandas.core.frame.DataFrame"builtins.dict*L
+selfB
+pandas.io.excel._base.ExcelFile"pandas.io.excel._base.ExcelFile*ˇ
+
+sheet_nameÓ
+;Union[builtins.list[Union[builtins.int,builtins.str]],None]¢
+/builtins.list[Union[builtins.int,builtins.str]]`
+ Union[builtins.int,builtins.str]
+builtins.int"builtins.int
+builtins.str"builtins.str"builtins.list
+None*¡
+header≤
+6Union[builtins.int,typing.Sequence[builtins.int],None]
+builtins.int"builtins.intN
+typing.Sequence[builtins.int]
+builtins.int"builtins.int"typing.Sequence
+None *è
+namesÅ
+ùUnion[TypeAlias[Union[typing.MutableSequence[pandas._typing.HashableT],numpy.ndarray[Any,Any],builtins.tuple[pandas._typing.HashableT],builtins.range]],None]“
+ëTypeAlias[Union[typing.MutableSequence[pandas._typing.HashableT],numpy.ndarray[Any,Any],builtins.tuple[pandas._typing.HashableT],builtins.range]]ò
+ÜUnion[typing.MutableSequence[pandas._typing.HashableT],numpy.ndarray[Any,Any],builtins.tuple[pandas._typing.HashableT],builtins.range]ù
+0typing.MutableSequence[pandas._typing.HashableT]Q
+pandas._typing.HashableT"
+typing.Hashable"typing.Hashable"typing.Hashable"typing.MutableSequence9
+numpy.ndarray[Any,Any]
+Any
+Any"numpy.ndarrayç
+(builtins.tuple[pandas._typing.HashableT]Q
+pandas._typing.HashableT"
+typing.Hashable"typing.Hashable"typing.Hashable"builtins.tuple 
+builtins.range"builtins.range"pandas._typing.ListLikeHashable
+None *ƒ
+	index_col≤
+6Union[builtins.int,typing.Sequence[builtins.int],None]
+builtins.int"builtins.intN
+typing.Sequence[builtins.int]
+builtins.int"builtins.int"typing.Sequence
+None *ﬂ
+
+usecolsœ
+
+ÑUnion[builtins.str,TypeAlias[Union[typing.MutableSequence[builtins.str],builtins.tuple[builtins.str],typing.Sequence[builtins.int],pandas.core.series.Series[Any],pandas.core.indexes.base.Index[Any],numpy.ndarray[Any,Any],CallableType[builtins.function],None]]]
+builtins.str"builtins.str•
+TypeAlias[Union[typing.MutableSequence[builtins.str],builtins.tuple[builtins.str],typing.Sequence[builtins.int],pandas.core.series.Series[Any],pandas.core.indexes.base.Index[Any],numpy.ndarray[Any,Any],CallableType[builtins.function],None]]é
+ÂUnion[typing.MutableSequence[builtins.str],builtins.tuple[builtins.str],typing.Sequence[builtins.int],pandas.core.series.Series[Any],pandas.core.indexes.base.Index[Any],numpy.ndarray[Any,Any],CallableType[builtins.function],None]\
+$typing.MutableSequence[builtins.str]
+builtins.str"builtins.str"typing.MutableSequenceL
+builtins.tuple[builtins.str]
+builtins.str"builtins.str"builtins.tupleN
+typing.Sequence[builtins.int]
+builtins.int"builtins.int"typing.SequenceD
+pandas.core.series.Series[Any]
+Any"pandas.core.series.SeriesN
+#pandas.core.indexes.base.Index[Any]
+Any"pandas.core.indexes.base.Index9
+numpy.ndarray[Any,Any]
+Any
+Any"numpy.ndarrayK
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None"pandas._typing.UsecolsArgType *é
+
+converters˚
+[Union[builtins.dict[Union[builtins.int,builtins.str],CallableType[builtins.function]],None]è
+Obuiltins.dict[Union[builtins.int,builtins.str],CallableType[builtins.function]]`
+ Union[builtins.int,builtins.str]
+builtins.int"builtins.int
+builtins.str"builtins.strK
+CallableType[builtins.function]&
+builtins.function"builtins.function"builtins.dict
+None *ß
+true_valuesì
+,Union[typing.Iterable[typing.Hashable],None]W
+ typing.Iterable[typing.Hashable]"
+typing.Hashable"typing.Hashable"typing.Iterable
+None *®
+false_valuesì
+,Union[typing.Iterable[typing.Hashable],None]W
+ typing.Iterable[typing.Hashable]"
+typing.Hashable"typing.Hashable"typing.Iterable
+None *∞
+skiprowsü
+VUnion[builtins.int,typing.Sequence[builtins.int],CallableType[builtins.function],None]
+builtins.int"builtins.intN
+typing.Sequence[builtins.int]
+builtins.int"builtins.int"typing.SequenceK
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *Q
+nrowsD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *Î
+	na_valuesŸ
+rUnion[typing.Sequence[builtins.str],builtins.dict[Union[builtins.str,builtins.int],typing.Sequence[builtins.str]]]N
+typing.Sequence[builtins.str]
+builtins.str"builtins.str"typing.Sequenceê
+Mbuiltins.dict[Union[builtins.str,builtins.int],typing.Sequence[builtins.str]]`
+ Union[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.intN
+typing.Sequence[builtins.str]
+builtins.str"builtins.str"typing.Sequence"builtins.dict *Ø
+parse_datesõ
+„Union[builtins.bool,typing.Sequence[builtins.int],typing.Sequence[Union[typing.Sequence[builtins.str],typing.Sequence[builtins.int]]],builtins.dict[builtins.str,Union[typing.Sequence[builtins.int],builtins.list[builtins.str]]]]
+builtins.bool"builtins.boolN
+typing.Sequence[builtins.int]
+builtins.int"builtins.int"typing.Sequenceœ
+Styping.Sequence[Union[typing.Sequence[builtins.str],typing.Sequence[builtins.int]]]Ê
+BUnion[typing.Sequence[builtins.str],typing.Sequence[builtins.int]]N
+typing.Sequence[builtins.str]
+builtins.str"builtins.str"typing.SequenceN
+typing.Sequence[builtins.int]
+builtins.int"builtins.int"typing.Sequence"typing.SequenceÓ
+\builtins.dict[builtins.str,Union[typing.Sequence[builtins.int],builtins.list[builtins.str]]]
+builtins.str"builtins.str‡
+@Union[typing.Sequence[builtins.int],builtins.list[builtins.str]]N
+typing.Sequence[builtins.int]
+builtins.int"builtins.int"typing.SequenceJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list"builtins.dict *ö
+date_parserÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *U
+	thousandsD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *S
+commentD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *.
+
+skipfooter
+builtins.int"builtins.int *5
+keep_default_na
+builtins.bool"builtins.bool */
+	na_filter
+builtins.bool"builtins.bool *
+kwds
+Any0:overloadX∑0
+parse%pandas.io.excel._base.ExcelFile.parse":
+pandas.core.frame.DataFrame"pandas.core.frame.DataFrame*L
+selfB
+pandas.io.excel._base.ExcelFile"pandas.io.excel._base.ExcelFile*p
+
+sheet_name`
+ Union[builtins.int,builtins.str]
+builtins.int"builtins.int
+builtins.str"builtins.str*¡
+header≤
+6Union[builtins.int,typing.Sequence[builtins.int],None]
+builtins.int"builtins.intN
+typing.Sequence[builtins.int]
+builtins.int"builtins.int"typing.Sequence
+None *è
+namesÅ
+ùUnion[TypeAlias[Union[typing.MutableSequence[pandas._typing.HashableT],numpy.ndarray[Any,Any],builtins.tuple[pandas._typing.HashableT],builtins.range]],None]“
+ëTypeAlias[Union[typing.MutableSequence[pandas._typing.HashableT],numpy.ndarray[Any,Any],builtins.tuple[pandas._typing.HashableT],builtins.range]]ò
+ÜUnion[typing.MutableSequence[pandas._typing.HashableT],numpy.ndarray[Any,Any],builtins.tuple[pandas._typing.HashableT],builtins.range]ù
+0typing.MutableSequence[pandas._typing.HashableT]Q
+pandas._typing.HashableT"
+typing.Hashable"typing.Hashable"typing.Hashable"typing.MutableSequence9
+numpy.ndarray[Any,Any]
+Any
+Any"numpy.ndarrayç
+(builtins.tuple[pandas._typing.HashableT]Q
+pandas._typing.HashableT"
+typing.Hashable"typing.Hashable"typing.Hashable"builtins.tuple 
+builtins.range"builtins.range"pandas._typing.ListLikeHashable
+None *ƒ
+	index_col≤
+6Union[builtins.int,typing.Sequence[builtins.int],None]
+builtins.int"builtins.intN
+typing.Sequence[builtins.int]
+builtins.int"builtins.int"typing.Sequence
+None *ﬂ
+
+usecolsœ
+
+ÑUnion[builtins.str,TypeAlias[Union[typing.MutableSequence[builtins.str],builtins.tuple[builtins.str],typing.Sequence[builtins.int],pandas.core.series.Series[Any],pandas.core.indexes.base.Index[Any],numpy.ndarray[Any,Any],CallableType[builtins.function],None]]]
+builtins.str"builtins.str•
+TypeAlias[Union[typing.MutableSequence[builtins.str],builtins.tuple[builtins.str],typing.Sequence[builtins.int],pandas.core.series.Series[Any],pandas.core.indexes.base.Index[Any],numpy.ndarray[Any,Any],CallableType[builtins.function],None]]é
+ÂUnion[typing.MutableSequence[builtins.str],builtins.tuple[builtins.str],typing.Sequence[builtins.int],pandas.core.series.Series[Any],pandas.core.indexes.base.Index[Any],numpy.ndarray[Any,Any],CallableType[builtins.function],None]\
+$typing.MutableSequence[builtins.str]
+builtins.str"builtins.str"typing.MutableSequenceL
+builtins.tuple[builtins.str]
+builtins.str"builtins.str"builtins.tupleN
+typing.Sequence[builtins.int]
+builtins.int"builtins.int"typing.SequenceD
+pandas.core.series.Series[Any]
+Any"pandas.core.series.SeriesN
+#pandas.core.indexes.base.Index[Any]
+Any"pandas.core.indexes.base.Index9
+numpy.ndarray[Any,Any]
+Any
+Any"numpy.ndarrayK
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None"pandas._typing.UsecolsArgType *é
+
+converters˚
+[Union[builtins.dict[Union[builtins.int,builtins.str],CallableType[builtins.function]],None]è
+Obuiltins.dict[Union[builtins.int,builtins.str],CallableType[builtins.function]]`
+ Union[builtins.int,builtins.str]
+builtins.int"builtins.int
+builtins.str"builtins.strK
+CallableType[builtins.function]&
+builtins.function"builtins.function"builtins.dict
+None *ß
+true_valuesì
+,Union[typing.Iterable[typing.Hashable],None]W
+ typing.Iterable[typing.Hashable]"
+typing.Hashable"typing.Hashable"typing.Iterable
+None *®
+false_valuesì
+,Union[typing.Iterable[typing.Hashable],None]W
+ typing.Iterable[typing.Hashable]"
+typing.Hashable"typing.Hashable"typing.Iterable
+None *∞
+skiprowsü
+VUnion[builtins.int,typing.Sequence[builtins.int],CallableType[builtins.function],None]
+builtins.int"builtins.intN
+typing.Sequence[builtins.int]
+builtins.int"builtins.int"typing.SequenceK
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *Q
+nrowsD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *Î
+	na_valuesŸ
+rUnion[typing.Sequence[builtins.str],builtins.dict[Union[builtins.str,builtins.int],typing.Sequence[builtins.str]]]N
+typing.Sequence[builtins.str]
+builtins.str"builtins.str"typing.Sequenceê
+Mbuiltins.dict[Union[builtins.str,builtins.int],typing.Sequence[builtins.str]]`
+ Union[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.intN
+typing.Sequence[builtins.str]
+builtins.str"builtins.str"typing.Sequence"builtins.dict *Ø
+parse_datesõ
+„Union[builtins.bool,typing.Sequence[builtins.int],typing.Sequence[Union[typing.Sequence[builtins.str],typing.Sequence[builtins.int]]],builtins.dict[builtins.str,Union[typing.Sequence[builtins.int],builtins.list[builtins.str]]]]
+builtins.bool"builtins.boolN
+typing.Sequence[builtins.int]
+builtins.int"builtins.int"typing.Sequenceœ
+Styping.Sequence[Union[typing.Sequence[builtins.str],typing.Sequence[builtins.int]]]Ê
+BUnion[typing.Sequence[builtins.str],typing.Sequence[builtins.int]]N
+typing.Sequence[builtins.str]
+builtins.str"builtins.str"typing.SequenceN
+typing.Sequence[builtins.int]
+builtins.int"builtins.int"typing.Sequence"typing.SequenceÓ
+\builtins.dict[builtins.str,Union[typing.Sequence[builtins.int],builtins.list[builtins.str]]]
+builtins.str"builtins.str‡
+@Union[typing.Sequence[builtins.int],builtins.list[builtins.str]]N
+typing.Sequence[builtins.int]
+builtins.int"builtins.int"typing.SequenceJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list"builtins.dict *ö
+date_parserÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *U
+	thousandsD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *S
+commentD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *.
+
+skipfooter
+builtins.int"builtins.int *5
+keep_default_na
+builtins.bool"builtins.bool */
+	na_filter
+builtins.bool"builtins.bool *
+kwds
+Any0:overloadXrX
+engine&pandas.io.excel._base.ExcelFile.engine&
+builtins.ellipsis"builtins.ellipsisr•
+io"pandas.io.excel._base.ExcelFile.io˙
+xUnion[TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]],pandas._typing.ReadBuffer[builtins.bytes],builtins.bytes]Ô
+8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]ó
+-Union[builtins.str,os.PathLike[builtins.str]]
+builtins.str"builtins.strF
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLike"pandas._typing.FilePathh
+)pandas._typing.ReadBuffer[builtins.bytes] 
+builtins.bytes"builtins.bytes"pandas._typing.ReadBuffer 
+builtins.bytes"builtins.bytesê*
+ExcelWriter!pandas.io.excel._base.ExcelWriter"builtins.object*ù
+__init__*pandas.io.excel._base.ExcelWriter.__init__"
+None*P
+selfF
+!pandas.io.excel._base.ExcelWriter"!pandas.io.excel._base.ExcelWriter*è
+pathÑ
+ÅUnion[TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]],pandas._typing.WriteExcelBuffer,pandas.io.excel._base.ExcelWriter]Ô
+8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]ó
+-Union[builtins.str,os.PathLike[builtins.str]]
+builtins.str"builtins.strF
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLike"pandas._typing.FilePathB
+pandas._typing.WriteExcelBuffer"pandas._typing.WriteExcelBufferF
+!pandas.io.excel._base.ExcelWriter"!pandas.io.excel._base.ExcelWriter*‰
+engine’
+cUnion[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],None]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str
+None *W
+date_formatD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *[
+datetime_formatD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *µ
+mode®
+2Union[Literal[builtins.str],Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str *Ü
+storage_optionsÓ
+6TypeAlias[Union[builtins.dict[builtins.str,Any],None]]í
++Union[builtins.dict[builtins.str,Any],None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None"pandas._typing.StorageOptions *Ì
+if_sheet_exists’
+cUnion[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],None]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str
+None *®
+engine_kwargsí
++Union[builtins.dict[builtins.str,Any],None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None *¸
+supported_extensions6pandas.io.excel._base.ExcelWriter.supported_extensions"L
+builtins.tuple[builtins.str]
+builtins.str"builtins.str"builtins.tuple*P
+selfF
+!pandas.io.excel._base.ExcelWriter"!pandas.io.excel._base.ExcelWriter0:property`*å
+engine(pandas.io.excel._base.ExcelWriter.engine"˜
+HUnion[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str*P
+selfF
+!pandas.io.excel._base.ExcelWriter"!pandas.io.excel._base.ExcelWriter0:property`*Î
+sheets(pandas.io.excel._base.ExcelWriter.sheets"W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*P
+selfF
+!pandas.io.excel._base.ExcelWriter"!pandas.io.excel._base.ExcelWriter0:property`*¥
+book&pandas.io.excel._base.ExcelWriter.book"$
+Union[Any,Any]
+Any
+Any*P
+selfF
+!pandas.io.excel._base.ExcelWriter"!pandas.io.excel._base.ExcelWriter0:property`*∫
+date_format-pandas.io.excel._base.ExcelWriter.date_format"
+builtins.str"builtins.str*P
+selfF
+!pandas.io.excel._base.ExcelWriter"!pandas.io.excel._base.ExcelWriter0:property`*¬
+datetime_format1pandas.io.excel._base.ExcelWriter.datetime_format"
+builtins.str"builtins.str*P
+selfF
+!pandas.io.excel._base.ExcelWriter"!pandas.io.excel._base.ExcelWriter0:property`*Ì
+if_sheet_exists1pandas.io.excel._base.ExcelWriter.if_sheet_exists"∆
+^Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str*P
+selfF
+!pandas.io.excel._base.ExcelWriter"!pandas.io.excel._base.ExcelWriter0:property`*™
+
+__fspath__,pandas.io.excel._base.ExcelWriter.__fspath__"
+builtins.str"builtins.str*P
+selfF
+!pandas.io.excel._base.ExcelWriter"!pandas.io.excel._base.ExcelWriter*Î
+	__enter__+pandas.io.excel._base.ExcelWriter.__enter__"ï
+&pandas.io.excel._base.ExcelWriter.SelfF
+!pandas.io.excel._base.ExcelWriter"!pandas.io.excel._base.ExcelWriter"!pandas.io.excel._base.ExcelWriter*òï
+&pandas.io.excel._base.ExcelWriter.SelfF
+!pandas.io.excel._base.ExcelWriter"!pandas.io.excel._base.ExcelWriter"!pandas.io.excel._base.ExcelWriter*›
+__exit__*pandas.io.excel._base.ExcelWriter.__exit__"
+None*HF
+!pandas.io.excel._base.ExcelWriter"!pandas.io.excel._base.ExcelWriter*çä
+(Union[Type[builtins.BaseException],None]R
+Type[builtins.BaseException]0
+builtins.BaseException"builtins.BaseException
+None*db
+"Union[builtins.BaseException,None]0
+builtins.BaseException"builtins.BaseException
+None*[Y
+Union[types.TracebackType,None]*
+types.TracebackType"types.TracebackType
+None*å
+close'pandas.io.excel._base.ExcelWriter.close"
+None*P
+selfF
+!pandas.io.excel._base.ExcelWriter"!pandas.io.excel._base.ExcelWriter"£ù
+
+read_excel pandas.io.excel._base.read_excelﬂO
+
+read_excel pandas.io.excel._base.read_excel"˙
+Kbuiltins.dict[Union[builtins.int,builtins.str],pandas.core.frame.DataFrame]`
+ Union[builtins.int,builtins.str]
+builtins.int"builtins.int
+builtins.str"builtins.str:
+pandas.core.frame.DataFrame"pandas.core.frame.DataFrame"builtins.dict*ú
+ioì
+®Union[TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]],pandas._typing.ReadBuffer[builtins.bytes],builtins.bytes,pandas.io.excel._base.ExcelFile,Any,Any,Any,Any]Ô
+8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]ó
+-Union[builtins.str,os.PathLike[builtins.str]]
+builtins.str"builtins.strF
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLike"pandas._typing.FilePathh
+)pandas._typing.ReadBuffer[builtins.bytes] 
+builtins.bytes"builtins.bytes"pandas._typing.ReadBuffer 
+builtins.bytes"builtins.bytesB
+pandas.io.excel._base.ExcelFile"pandas.io.excel._base.ExcelFile
+Any
+Any
+Any
+Any*ˇ
+
+sheet_nameÓ
+;Union[builtins.list[Union[builtins.int,builtins.str]],None]¢
+/builtins.list[Union[builtins.int,builtins.str]]`
+ Union[builtins.int,builtins.str]
+builtins.int"builtins.int
+builtins.str"builtins.str"builtins.list
+None*¡
+header≤
+6Union[builtins.int,typing.Sequence[builtins.int],None]
+builtins.int"builtins.intN
+typing.Sequence[builtins.int]
+builtins.int"builtins.int"typing.Sequence
+None *è
+namesÅ
+ùUnion[TypeAlias[Union[typing.MutableSequence[pandas._typing.HashableT],numpy.ndarray[Any,Any],builtins.tuple[pandas._typing.HashableT],builtins.range]],None]“
+ëTypeAlias[Union[typing.MutableSequence[pandas._typing.HashableT],numpy.ndarray[Any,Any],builtins.tuple[pandas._typing.HashableT],builtins.range]]ò
+ÜUnion[typing.MutableSequence[pandas._typing.HashableT],numpy.ndarray[Any,Any],builtins.tuple[pandas._typing.HashableT],builtins.range]ù
+0typing.MutableSequence[pandas._typing.HashableT]Q
+pandas._typing.HashableT"
+typing.Hashable"typing.Hashable"typing.Hashable"typing.MutableSequence9
+numpy.ndarray[Any,Any]
+Any
+Any"numpy.ndarrayç
+(builtins.tuple[pandas._typing.HashableT]Q
+pandas._typing.HashableT"
+typing.Hashable"typing.Hashable"typing.Hashable"builtins.tuple 
+builtins.range"builtins.range"pandas._typing.ListLikeHashable
+None *ƒ
+	index_col≤
+6Union[builtins.int,typing.Sequence[builtins.int],None]
+builtins.int"builtins.intN
+typing.Sequence[builtins.int]
+builtins.int"builtins.int"typing.Sequence
+None *ﬂ
+
+usecolsœ
+
+ÑUnion[builtins.str,TypeAlias[Union[typing.MutableSequence[builtins.str],builtins.tuple[builtins.str],typing.Sequence[builtins.int],pandas.core.series.Series[Any],pandas.core.indexes.base.Index[Any],numpy.ndarray[Any,Any],CallableType[builtins.function],None]]]
+builtins.str"builtins.str•
+TypeAlias[Union[typing.MutableSequence[builtins.str],builtins.tuple[builtins.str],typing.Sequence[builtins.int],pandas.core.series.Series[Any],pandas.core.indexes.base.Index[Any],numpy.ndarray[Any,Any],CallableType[builtins.function],None]]é
+ÂUnion[typing.MutableSequence[builtins.str],builtins.tuple[builtins.str],typing.Sequence[builtins.int],pandas.core.series.Series[Any],pandas.core.indexes.base.Index[Any],numpy.ndarray[Any,Any],CallableType[builtins.function],None]\
+$typing.MutableSequence[builtins.str]
+builtins.str"builtins.str"typing.MutableSequenceL
+builtins.tuple[builtins.str]
+builtins.str"builtins.str"builtins.tupleN
+typing.Sequence[builtins.int]
+builtins.int"builtins.int"typing.SequenceD
+pandas.core.series.Series[Any]
+Any"pandas.core.series.SeriesN
+#pandas.core.indexes.base.Index[Any]
+Any"pandas.core.indexes.base.Index9
+numpy.ndarray[Any,Any]
+Any
+Any"numpy.ndarrayK
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None"pandas._typing.UsecolsArgType *à
+dtype˙
+òUnion[builtins.str,TypeAlias[Union[pandas.core.dtypes.base.ExtensionDtype,TypeAlias[Union[builtins.str,numpy.dtype[numpy.generic],Type[builtins.str],Type[builtins.complex],Type[builtins.bool],Type[builtins.object]]]]],typing.Mapping[builtins.str,Union[builtins.str,Unknown]],None]
+builtins.str"builtins.strÜ	
+∆TypeAlias[Union[pandas.core.dtypes.base.ExtensionDtype,TypeAlias[Union[builtins.str,numpy.dtype[numpy.generic],Type[builtins.str],Type[builtins.complex],Type[builtins.bool],Type[builtins.object]]]]]¢
+ªUnion[pandas.core.dtypes.base.ExtensionDtype,TypeAlias[Union[builtins.str,numpy.dtype[numpy.generic],Type[builtins.str],Type[builtins.complex],Type[builtins.bool],Type[builtins.object]]]]P
+&pandas.core.dtypes.base.ExtensionDtype"&pandas.core.dtypes.base.ExtensionDtypeç
+çTypeAlias[Union[builtins.str,numpy.dtype[numpy.generic],Type[builtins.str],Type[builtins.complex],Type[builtins.bool],Type[builtins.object]]]‡
+ÇUnion[builtins.str,numpy.dtype[numpy.generic],Type[builtins.str],Type[builtins.complex],Type[builtins.bool],Type[builtins.object]]
+builtins.str"builtins.strI
+numpy.dtype[numpy.generic]
+numpy.generic"numpy.generic"numpy.dtype4
+Type[builtins.str]
+builtins.str"builtins.str@
+Type[builtins.complex]$
+builtins.complex"builtins.complex7
+Type[builtins.bool]
+builtins.bool"builtins.bool=
+Type[builtins.object]"
+builtins.object"builtins.object"pandas._typing.NpDtype"pandas._typing.Dtype©
+8typing.Mapping[builtins.str,Union[builtins.str,Unknown]]
+builtins.str"builtins.str?
+Union[builtins.str,Unknown]
+builtins.str"builtins.str "typing.Mapping
+None *‰
+engine’
+cUnion[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],None]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str
+None *ë
+
+converters˛
+\Union[typing.Mapping[Union[builtins.int,builtins.str],CallableType[builtins.function]],None]ë
+Ptyping.Mapping[Union[builtins.int,builtins.str],CallableType[builtins.function]]`
+ Union[builtins.int,builtins.str]
+builtins.int"builtins.int
+builtins.str"builtins.strK
+CallableType[builtins.function]&
+builtins.function"builtins.function"typing.Mapping
+None *ß
+true_valuesì
+,Union[typing.Iterable[typing.Hashable],None]W
+ typing.Iterable[typing.Hashable]"
+typing.Hashable"typing.Hashable"typing.Iterable
+None *®
+false_valuesì
+,Union[typing.Iterable[typing.Hashable],None]W
+ typing.Iterable[typing.Hashable]"
+typing.Hashable"typing.Hashable"typing.Iterable
+None *∞
+skiprowsü
+VUnion[builtins.int,typing.Sequence[builtins.int],CallableType[builtins.function],None]
+builtins.int"builtins.intN
+typing.Sequence[builtins.int]
+builtins.int"builtins.int"typing.SequenceK
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *Q
+nrowsD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *Î
+	na_valuesŸ
+rUnion[typing.Sequence[builtins.str],builtins.dict[Union[builtins.str,builtins.int],typing.Sequence[builtins.str]]]N
+typing.Sequence[builtins.str]
+builtins.str"builtins.str"typing.Sequenceê
+Mbuiltins.dict[Union[builtins.str,builtins.int],typing.Sequence[builtins.str]]`
+ Union[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.intN
+typing.Sequence[builtins.str]
+builtins.str"builtins.str"typing.Sequence"builtins.dict *5
+keep_default_na
+builtins.bool"builtins.bool */
+	na_filter
+builtins.bool"builtins.bool *-
+verbose
+builtins.bool"builtins.bool *Ø
+parse_datesõ
+„Union[builtins.bool,typing.Sequence[builtins.int],typing.Sequence[Union[typing.Sequence[builtins.str],typing.Sequence[builtins.int]]],builtins.dict[builtins.str,Union[typing.Sequence[builtins.int],builtins.list[builtins.str]]]]
+builtins.bool"builtins.boolN
+typing.Sequence[builtins.int]
+builtins.int"builtins.int"typing.Sequenceœ
+Styping.Sequence[Union[typing.Sequence[builtins.str],typing.Sequence[builtins.int]]]Ê
+BUnion[typing.Sequence[builtins.str],typing.Sequence[builtins.int]]N
+typing.Sequence[builtins.str]
+builtins.str"builtins.str"typing.SequenceN
+typing.Sequence[builtins.int]
+builtins.int"builtins.int"typing.Sequence"typing.SequenceÓ
+\builtins.dict[builtins.str,Union[typing.Sequence[builtins.int],builtins.list[builtins.str]]]
+builtins.str"builtins.str‡
+@Union[typing.Sequence[builtins.int],builtins.list[builtins.str]]N
+typing.Sequence[builtins.int]
+builtins.int"builtins.int"typing.SequenceJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list"builtins.dict *Ñ
+date_format
+DUnion[builtins.dict[typing.Hashable,builtins.str],builtins.str,None]~
++builtins.dict[typing.Hashable,builtins.str]"
+typing.Hashable"typing.Hashable
+builtins.str"builtins.str"builtins.dict
+builtins.str"builtins.str
+None *U
+	thousandsD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *+
+decimal
+builtins.str"builtins.str *S
+commentD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *.
+
+skipfooter
+builtins.int"builtins.int *Ü
+storage_optionsÓ
+6TypeAlias[Union[builtins.dict[builtins.str,Any],None]]í
++Union[builtins.dict[builtins.str,Any],None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None"pandas._typing.StorageOptions *“
+dtype_backendº
+tUnion[TypeAlias[Union[Literal[builtins.str],Literal[builtins.str]]],TypeAlias[Literal[pandas._libs.lib._NoDefault]]]â
+=TypeAlias[Union[Literal[builtins.str],Literal[builtins.str]]]®
+2Union[Literal[builtins.str],Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str"pandas._typing.DtypeBackendµ
+/TypeAlias[Literal[pandas._libs.lib._NoDefault]]d
+$Literal[pandas._libs.lib._NoDefault]	:
+pandas._libs.lib._NoDefault"pandas._libs.lib._NoDefault"pandas._libs.lib.NoDefault 0:overloadXêM
+
+read_excel pandas.io.excel._base.read_excel":
+pandas.core.frame.DataFrame"pandas.core.frame.DataFrame*ú
+ioì
+®Union[TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]],pandas._typing.ReadBuffer[builtins.bytes],builtins.bytes,pandas.io.excel._base.ExcelFile,Any,Any,Any,Any]Ô
+8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]ó
+-Union[builtins.str,os.PathLike[builtins.str]]
+builtins.str"builtins.strF
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLike"pandas._typing.FilePathh
+)pandas._typing.ReadBuffer[builtins.bytes] 
+builtins.bytes"builtins.bytes"pandas._typing.ReadBuffer 
+builtins.bytes"builtins.bytesB
+pandas.io.excel._base.ExcelFile"pandas.io.excel._base.ExcelFile
+Any
+Any
+Any
+Any*r
+
+sheet_name`
+ Union[builtins.int,builtins.str]
+builtins.int"builtins.int
+builtins.str"builtins.str *¡
+header≤
+6Union[builtins.int,typing.Sequence[builtins.int],None]
+builtins.int"builtins.intN
+typing.Sequence[builtins.int]
+builtins.int"builtins.int"typing.Sequence
+None *è
+namesÅ
+ùUnion[TypeAlias[Union[typing.MutableSequence[pandas._typing.HashableT],numpy.ndarray[Any,Any],builtins.tuple[pandas._typing.HashableT],builtins.range]],None]“
+ëTypeAlias[Union[typing.MutableSequence[pandas._typing.HashableT],numpy.ndarray[Any,Any],builtins.tuple[pandas._typing.HashableT],builtins.range]]ò
+ÜUnion[typing.MutableSequence[pandas._typing.HashableT],numpy.ndarray[Any,Any],builtins.tuple[pandas._typing.HashableT],builtins.range]ù
+0typing.MutableSequence[pandas._typing.HashableT]Q
+pandas._typing.HashableT"
+typing.Hashable"typing.Hashable"typing.Hashable"typing.MutableSequence9
+numpy.ndarray[Any,Any]
+Any
+Any"numpy.ndarrayç
+(builtins.tuple[pandas._typing.HashableT]Q
+pandas._typing.HashableT"
+typing.Hashable"typing.Hashable"typing.Hashable"builtins.tuple 
+builtins.range"builtins.range"pandas._typing.ListLikeHashable
+None *ƒ
+	index_col≤
+6Union[builtins.int,typing.Sequence[builtins.int],None]
+builtins.int"builtins.intN
+typing.Sequence[builtins.int]
+builtins.int"builtins.int"typing.Sequence
+None *ﬂ
+
+usecolsœ
+
+ÑUnion[builtins.str,TypeAlias[Union[typing.MutableSequence[builtins.str],builtins.tuple[builtins.str],typing.Sequence[builtins.int],pandas.core.series.Series[Any],pandas.core.indexes.base.Index[Any],numpy.ndarray[Any,Any],CallableType[builtins.function],None]]]
+builtins.str"builtins.str•
+TypeAlias[Union[typing.MutableSequence[builtins.str],builtins.tuple[builtins.str],typing.Sequence[builtins.int],pandas.core.series.Series[Any],pandas.core.indexes.base.Index[Any],numpy.ndarray[Any,Any],CallableType[builtins.function],None]]é
+ÂUnion[typing.MutableSequence[builtins.str],builtins.tuple[builtins.str],typing.Sequence[builtins.int],pandas.core.series.Series[Any],pandas.core.indexes.base.Index[Any],numpy.ndarray[Any,Any],CallableType[builtins.function],None]\
+$typing.MutableSequence[builtins.str]
+builtins.str"builtins.str"typing.MutableSequenceL
+builtins.tuple[builtins.str]
+builtins.str"builtins.str"builtins.tupleN
+typing.Sequence[builtins.int]
+builtins.int"builtins.int"typing.SequenceD
+pandas.core.series.Series[Any]
+Any"pandas.core.series.SeriesN
+#pandas.core.indexes.base.Index[Any]
+Any"pandas.core.indexes.base.Index9
+numpy.ndarray[Any,Any]
+Any
+Any"numpy.ndarrayK
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None"pandas._typing.UsecolsArgType *à
+dtype˙
+òUnion[builtins.str,TypeAlias[Union[pandas.core.dtypes.base.ExtensionDtype,TypeAlias[Union[builtins.str,numpy.dtype[numpy.generic],Type[builtins.str],Type[builtins.complex],Type[builtins.bool],Type[builtins.object]]]]],typing.Mapping[builtins.str,Union[builtins.str,Unknown]],None]
+builtins.str"builtins.strÜ	
+∆TypeAlias[Union[pandas.core.dtypes.base.ExtensionDtype,TypeAlias[Union[builtins.str,numpy.dtype[numpy.generic],Type[builtins.str],Type[builtins.complex],Type[builtins.bool],Type[builtins.object]]]]]¢
+ªUnion[pandas.core.dtypes.base.ExtensionDtype,TypeAlias[Union[builtins.str,numpy.dtype[numpy.generic],Type[builtins.str],Type[builtins.complex],Type[builtins.bool],Type[builtins.object]]]]P
+&pandas.core.dtypes.base.ExtensionDtype"&pandas.core.dtypes.base.ExtensionDtypeç
+çTypeAlias[Union[builtins.str,numpy.dtype[numpy.generic],Type[builtins.str],Type[builtins.complex],Type[builtins.bool],Type[builtins.object]]]‡
+ÇUnion[builtins.str,numpy.dtype[numpy.generic],Type[builtins.str],Type[builtins.complex],Type[builtins.bool],Type[builtins.object]]
+builtins.str"builtins.strI
+numpy.dtype[numpy.generic]
+numpy.generic"numpy.generic"numpy.dtype4
+Type[builtins.str]
+builtins.str"builtins.str@
+Type[builtins.complex]$
+builtins.complex"builtins.complex7
+Type[builtins.bool]
+builtins.bool"builtins.bool=
+Type[builtins.object]"
+builtins.object"builtins.object"pandas._typing.NpDtype"pandas._typing.Dtype©
+8typing.Mapping[builtins.str,Union[builtins.str,Unknown]]
+builtins.str"builtins.str?
+Union[builtins.str,Unknown]
+builtins.str"builtins.str "typing.Mapping
+None *‰
+engine’
+cUnion[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],None]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str
+None *ë
+
+converters˛
+\Union[typing.Mapping[Union[builtins.int,builtins.str],CallableType[builtins.function]],None]ë
+Ptyping.Mapping[Union[builtins.int,builtins.str],CallableType[builtins.function]]`
+ Union[builtins.int,builtins.str]
+builtins.int"builtins.int
+builtins.str"builtins.strK
+CallableType[builtins.function]&
+builtins.function"builtins.function"typing.Mapping
+None *ß
+true_valuesì
+,Union[typing.Iterable[typing.Hashable],None]W
+ typing.Iterable[typing.Hashable]"
+typing.Hashable"typing.Hashable"typing.Iterable
+None *®
+false_valuesì
+,Union[typing.Iterable[typing.Hashable],None]W
+ typing.Iterable[typing.Hashable]"
+typing.Hashable"typing.Hashable"typing.Iterable
+None *∞
+skiprowsü
+VUnion[builtins.int,typing.Sequence[builtins.int],CallableType[builtins.function],None]
+builtins.int"builtins.intN
+typing.Sequence[builtins.int]
+builtins.int"builtins.int"typing.SequenceK
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *Q
+nrowsD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *Î
+	na_valuesŸ
+rUnion[typing.Sequence[builtins.str],builtins.dict[Union[builtins.str,builtins.int],typing.Sequence[builtins.str]]]N
+typing.Sequence[builtins.str]
+builtins.str"builtins.str"typing.Sequenceê
+Mbuiltins.dict[Union[builtins.str,builtins.int],typing.Sequence[builtins.str]]`
+ Union[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.intN
+typing.Sequence[builtins.str]
+builtins.str"builtins.str"typing.Sequence"builtins.dict *5
+keep_default_na
+builtins.bool"builtins.bool */
+	na_filter
+builtins.bool"builtins.bool *-
+verbose
+builtins.bool"builtins.bool *Ø
+parse_datesõ
+„Union[builtins.bool,typing.Sequence[builtins.int],typing.Sequence[Union[typing.Sequence[builtins.str],typing.Sequence[builtins.int]]],builtins.dict[builtins.str,Union[typing.Sequence[builtins.int],builtins.list[builtins.str]]]]
+builtins.bool"builtins.boolN
+typing.Sequence[builtins.int]
+builtins.int"builtins.int"typing.Sequenceœ
+Styping.Sequence[Union[typing.Sequence[builtins.str],typing.Sequence[builtins.int]]]Ê
+BUnion[typing.Sequence[builtins.str],typing.Sequence[builtins.int]]N
+typing.Sequence[builtins.str]
+builtins.str"builtins.str"typing.SequenceN
+typing.Sequence[builtins.int]
+builtins.int"builtins.int"typing.Sequence"typing.SequenceÓ
+\builtins.dict[builtins.str,Union[typing.Sequence[builtins.int],builtins.list[builtins.str]]]
+builtins.str"builtins.str‡
+@Union[typing.Sequence[builtins.int],builtins.list[builtins.str]]N
+typing.Sequence[builtins.int]
+builtins.int"builtins.int"typing.SequenceJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list"builtins.dict *Ñ
+date_format
+DUnion[builtins.dict[typing.Hashable,builtins.str],builtins.str,None]~
++builtins.dict[typing.Hashable,builtins.str]"
+typing.Hashable"typing.Hashable
+builtins.str"builtins.str"builtins.dict
+builtins.str"builtins.str
+None *U
+	thousandsD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *+
+decimal
+builtins.str"builtins.str *S
+commentD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *.
+
+skipfooter
+builtins.int"builtins.int *Ü
+storage_optionsÓ
+6TypeAlias[Union[builtins.dict[builtins.str,Any],None]]í
++Union[builtins.dict[builtins.str,Any],None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None"pandas._typing.StorageOptions *“
+dtype_backendº
+tUnion[TypeAlias[Union[Literal[builtins.str],Literal[builtins.str]]],TypeAlias[Literal[pandas._libs.lib._NoDefault]]]â
+=TypeAlias[Union[Literal[builtins.str],Literal[builtins.str]]]®
+2Union[Literal[builtins.str],Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str"pandas._typing.DtypeBackendµ
+/TypeAlias[Literal[pandas._libs.lib._NoDefault]]d
+$Literal[pandas._libs.lib._NoDefault]	:
+pandas._libs.lib._NoDefault"pandas._libs.lib._NoDefault"pandas._libs.lib.NoDefault 0:overloadX*p
+__path__pandas.io.excel.__path__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*ã
+__annotations__pandas.io.excel.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
