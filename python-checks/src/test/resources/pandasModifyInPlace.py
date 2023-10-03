@@ -42,7 +42,7 @@ def compliant(xx):
 
     df.drop(columns='A')
 
-    df.dropna()
+    df.dropna(inplace=False)
 
     df.drop_duplicates()
 
@@ -52,7 +52,7 @@ def compliant(xx):
 
     df.query('A > B')
 
-    df.transpose()
+    df.transpose(inplace=False)
 
     df.swapaxes()
 

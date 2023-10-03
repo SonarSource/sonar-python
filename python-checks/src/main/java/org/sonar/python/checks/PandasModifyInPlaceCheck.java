@@ -6,6 +6,8 @@ import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.CallExpression;
+import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.tree.TreeUtils;
 
@@ -36,7 +38,11 @@ public class PandasModifyInPlaceCheck extends PythonSubscriptionCheck {
     Optional.ofNullable(callExpression.calleeSymbol())
       .map(Symbol::fullyQualifiedName)
       .filter(FULLY_QUALIFIED_EXPRESSIONS::contains)
-      .filter(fqn -> TreeUtils.argumentByKeyword("inplace", callExpression.arguments()) != null)
+      .map(fqn -> TreeUtils.argumentByKeyword("inplace", callExpression.arguments()))
+      .map(RegularArgument::expression)
+      .flatMap(TreeUtils.toOptionalInstanceOfMapper(Name.class))
+      .map(Name::name)
+      .filter("True"::equals)
       .ifPresent(fqn -> ctx.addIssue(callExpression, MESSAGE));
   }
 }
