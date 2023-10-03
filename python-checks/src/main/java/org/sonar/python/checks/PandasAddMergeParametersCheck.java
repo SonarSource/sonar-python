@@ -34,12 +34,16 @@ import org.sonar.python.tree.TreeUtils;
 @Rule(key = "S6735")
 public class PandasAddMergeParametersCheck extends PythonSubscriptionCheck {
 
-  private static final List<String> messages = List.of(
-    "The '%s' parameter of the merge should be specified.",
-    "The '%s' and '%s' parameters of the merge should be specified.",
-    "The '%s', '%s' and '%s' parameters of the merge should be specified.");
+  private static final Set<String> MERGE_METHODS = Set.of(
+    "pandas.core.frame.DataFrame.merge",
+    "pandas.core.reshape.merge.merge",
+    "pandas.core.frame.DataFrame.join",
+    "pandas.join");
 
-  private static final Set<String> MERGE_METHODS = Set.of("pandas.merge", "pandas.core.reshape.merge.merge");
+  private static final List<String> messages = List.of(
+    "The '%s' parameter of the %s should be specified.",
+    "The '%s' and '%s' parameters of the %s should be specified.",
+    "The '%s', '%s' and '%s' parameters of the %s should be specified.");
 
   @Override
   public void initialize(Context context) {
@@ -51,10 +55,10 @@ public class PandasAddMergeParametersCheck extends PythonSubscriptionCheck {
     Optional.ofNullable(callExpression.calleeSymbol())
       .map(Symbol::fullyQualifiedName)
       .filter(MERGE_METHODS::contains)
-      .ifPresent(fqn -> missingArguments(ctx, callExpression));
+      .ifPresent(fqn -> missingArguments(fqn, ctx, callExpression));
   }
 
-  private static void missingArguments(SubscriptionContext ctx, CallExpression callExpression) {
+  private static void missingArguments(String fullyQualifiedName, SubscriptionContext ctx, CallExpression callExpression) {
     List<String> parameters = new ArrayList<>();
     if (TreeUtils.argumentByKeyword("how", callExpression.arguments()) == null) {
       parameters.add("how");
@@ -66,8 +70,8 @@ public class PandasAddMergeParametersCheck extends PythonSubscriptionCheck {
       parameters.add("validate");
     }
     if (!parameters.isEmpty()) {
-      ctx.addIssue(callExpression, String.format(messages.get(parameters.size() - 1), parameters.toArray()));
+      parameters.add(fullyQualifiedName.substring(fullyQualifiedName.lastIndexOf('.') + 1));
+      ctx.addIssue(callExpression, String.format(messages.get(parameters.size() - 2), parameters.toArray()));
     }
-
   }
 }
