@@ -1,0 +1,25 @@
+{
+  "title": "inplace\u003dTrue should not be used when modifying a Pandas DataFrame",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "pandas",
+    "data-science"
+  ],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-6734",
+  "sqKey": "S6734",
+  "scope": "All",
+  "quickfix": "unknown",
+  "code": {
+    "impacts": {
+      "MAINTAINABILITY": "HIGH",
+      "RELIABILITY": "MEDIUM"
+    },
+    "attribute": "CONVENTIONAL"
+  }
+}

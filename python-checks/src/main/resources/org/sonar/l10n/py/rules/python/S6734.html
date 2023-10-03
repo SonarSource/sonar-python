@@ -1,0 +1,76 @@
+<p>This rule raises an issue when the <code>inplace</code> parameter is set to <code>True</code> when modifying a Pandas DataFrame.</p>
+<h2>Why is this an issue?</h2>
+<p>Using <code>inplace=True</code> when modifying a Pandas DataFrame means that the method will modify the DataFrame in place, rather than returning a
+new object:</p>
+<pre>
+df.an_operation(inplace=True)
+</pre>
+<p>When <code>inplace</code> is <code>False</code> (which is the default behavior), a new object is returned instead:</p>
+<pre>
+df2 = df.an_operation(inplace=False)
+</pre>
+<p>Generally speaking, the motivation for modifying an object in place is to improve efficiency by avoiding the creation of a copy of the original
+object. Unfortunately, many methods supporting the inplace keyword either cannot actually be done inplace, or make a copy as a consequence of the
+operations they perform, regardless of whether <code>inplace</code> is <code>True</code> or not. For example, the following methods can never operate
+in place:</p>
+<ul>
+  <li> drop (dropping rows) </li>
+  <li> dropna </li>
+  <li> drop_duplicates </li>
+  <li> sort_values </li>
+  <li> sort_index </li>
+  <li> query </li>
+  <li> transpose </li>
+  <li> swapaxes </li>
+  <li> align </li>
+  <li> reindex </li>
+  <li> reindex_like </li>
+  <li> truncate </li>
+</ul>
+<p>Because of this, expecting efficiency gains through the use of <code>inplace=True</code> is not reliable.</p>
+<p>Additionally, using <code>inplace=True</code> may trigger a <code>SettingWithCopyWarning</code> and make the overall intention of the code unclear.
+In the following example, modifying <code>df2</code> will not modify the original <code>df</code> dataframe, and a warning will be raised:</p>
+<pre>
+df = pd.DataFrame({'a': [3, 2, 1], 'b': ['x', 'y', 'z']})
+
+df2 = df[df['a'] &gt; 1]
+df2['b'].replace({'x': 'abc'}, inplace=True)
+# SettingWithCopyWarning:
+# A value is trying to be set on a copy of a slice from a DataFrame
+</pre>
+<p>In general, side effects such as object mutation may be the source of subtle bugs and explicit reassignment is considered safer.</p>
+<p>When intermediate results are not needed, method chaining is a more explicit alternative to the <code>inplace</code> parameter. For instance, one
+may write:</p>
+<pre>
+df.drop('City', axis=1, inplace=True)
+df.sort_values('Name', inplace=True)
+df.reset_index(drop=True, inplace=True)
+</pre>
+<p>Through method chaining, this previous example may be rewritten as:</p>
+<pre>
+result = df.drop('City', axis=1).sort_values('Name').reset_index(drop=True)
+</pre>
+<p>For these reasons, it is therefore recommended to avoid using <code>inplace=True</code> in favor of more explicit and less error-prone
+alternatives.</p>
+<h2>How to fix it</h2>
+<p>To fix this issue, avoid using the <code>inplace=True</code> parameter. Either opt for method chaining when intermediary results are not needed, or
+for explicit reassignment when the intention is to perform a simple operation.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+import pandas as pd
+def foo():
+    df.drop(columns='A', inplace=True)  # Noncompliant: Using inplace=True is error-prone and should be avoided
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+import pandas as pd
+def foo():
+    df = df.drop(columns='A')  # OK: explicit reassignment
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Pandas Enhancement Proposal - <a href="https://github.com/pandas-dev/pandas/pull/51466">PDEP-8: In-place methods in pandas</a> </li>
+</ul>
+
