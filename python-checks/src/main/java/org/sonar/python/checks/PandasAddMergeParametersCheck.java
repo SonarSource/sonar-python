@@ -22,6 +22,7 @@ package org.sonar.python.checks;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
@@ -38,6 +39,8 @@ public class PandasAddMergeParametersCheck extends PythonSubscriptionCheck {
     "The '%s' and '%s' parameters of the merge should be specified.",
     "The '%s', '%s' and '%s' parameters of the merge should be specified.");
 
+  private static final Set<String> MERGE_METHODS = Set.of("pandas.merge", "pandas.core.reshape.merge.merge");
+
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, PandasAddMergeParametersCheck::verifyMergeCallParameters);
@@ -47,7 +50,7 @@ public class PandasAddMergeParametersCheck extends PythonSubscriptionCheck {
     CallExpression callExpression = (CallExpression) ctx.syntaxNode();
     Optional.ofNullable(callExpression.calleeSymbol())
       .map(Symbol::fullyQualifiedName)
-      .filter("pandas.merge"::equals)
+      .filter(MERGE_METHODS::contains)
       .ifPresent(fqn -> missingArguments(ctx, callExpression));
   }
 
