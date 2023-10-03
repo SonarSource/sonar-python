@@ -8,6 +8,11 @@
 load_pem_x509_certificateAcryptography.hazmat.bindings._rust.x509.load_pem_x509_certificate"H
 "cryptography.x509.base.Certificate""cryptography.x509.base.Certificate**
 data 
+builtins.bytes"builtins.bytesõ
+load_pem_x509_certificatesBcryptography.hazmat.bindings._rust.x509.load_pem_x509_certificates"å
+1builtins.list[cryptography.x509.base.Certificate]H
+"cryptography.x509.base.Certificate""cryptography.x509.base.Certificate"builtins.list**
+data 
 builtins.bytes"builtins.bytes‘
 load_der_x509_certificateAcryptography.hazmat.bindings._rust.x509.load_der_x509_certificate"H
 "cryptography.x509.base.Certificate""cryptography.x509.base.Certificate**
@@ -36,51 +41,65 @@
 encode_extension_value>cryptography.hazmat.bindings._rust.x509.encode_extension_value" 
 builtins.bytes"builtins.bytes*g
 	extensionX
-*cryptography.x509.extensions.ExtensionType"*cryptography.x509.extensions.ExtensionTypeÒ
+*cryptography.x509.extensions.ExtensionType"*cryptography.x509.extensions.ExtensionTypeÈ
 create_x509_certificate?cryptography.hazmat.bindings._rust.x509.create_x509_certificate"H
 "cryptography.x509.base.Certificate""cryptography.x509.base.Certificate*c
 builderV
-)cryptography.x509.base.CertificateBuilder")cryptography.x509.base.CertificateBuilder*î
-private_keyÇ
-“TypeAlias[Union[cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey,cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey,cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey,cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey]]Â
-«Union[cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey,cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey,cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey,cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey]ä
+)cryptography.x509.base.CertificateBuilder")cryptography.x509.base.CertificateBuilder*á
+private_keyı
+åTypeAlias[Union[cryptography.hazmat.primitives.asymmetric.dh.DHPrivateKey,cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey,cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey,cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey,cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey,cryptography.hazmat.primitives.asymmetric.x25519.X25519PrivateKey,cryptography.hazmat.primitives.asymmetric.x448.X448PrivateKey]]†
+ÅUnion[cryptography.hazmat.primitives.asymmetric.dh.DHPrivateKey,cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey,cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey,cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey,cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey,cryptography.hazmat.primitives.asymmetric.x25519.X25519PrivateKey,cryptography.hazmat.primitives.asymmetric.x448.X448PrivateKey]v
+9cryptography.hazmat.primitives.asymmetric.dh.DHPrivateKey"9cryptography.hazmat.primitives.asymmetric.dh.DHPrivateKeyä
 Ccryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey"Ccryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKeyÇ
 ?cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKey"?cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKeyz
 ;cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey";cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKeyz
 ;cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey";cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKeyå
-Dcryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey"Dcryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey"Acryptography.hazmat.primitives.asymmetric.types.PRIVATE_KEY_TYPES*Œ
+Dcryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey"Dcryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKeyÜ
+Acryptography.hazmat.primitives.asymmetric.x25519.X25519PrivateKey"Acryptography.hazmat.primitives.asymmetric.x25519.X25519PrivateKey~
+=cryptography.hazmat.primitives.asymmetric.x448.X448PrivateKey"=cryptography.hazmat.primitives.asymmetric.x448.X448PrivateKey"?cryptography.hazmat.primitives.asymmetric.types.PrivateKeyTypes*Œ
 hash_algorithmπ
 ?Union[cryptography.hazmat.primitives.hashes.HashAlgorithm,None]j
 3cryptography.hazmat.primitives.hashes.HashAlgorithm"3cryptography.hazmat.primitives.hashes.HashAlgorithm
-Noneô
+None*Ç
+paddingÙ
+|Union[cryptography.hazmat.primitives.asymmetric.padding.PKCS1v15,cryptography.hazmat.primitives.asymmetric.padding.PSS,None]x
+:cryptography.hazmat.primitives.asymmetric.padding.PKCS1v15":cryptography.hazmat.primitives.asymmetric.padding.PKCS1v15n
+5cryptography.hazmat.primitives.asymmetric.padding.PSS"5cryptography.hazmat.primitives.asymmetric.padding.PSS
+Noneå
 create_x509_csr7cryptography.hazmat.bindings._rust.x509.create_x509_csr"d
 0cryptography.x509.base.CertificateSigningRequest"0cryptography.x509.base.CertificateSigningRequest*
 builderr
-7cryptography.x509.base.CertificateSigningRequestBuilder"7cryptography.x509.base.CertificateSigningRequestBuilder*î
-private_keyÇ
-“TypeAlias[Union[cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey,cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey,cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey,cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey]]Â
-«Union[cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey,cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey,cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey,cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey]ä
+7cryptography.x509.base.CertificateSigningRequestBuilder"7cryptography.x509.base.CertificateSigningRequestBuilder*á
+private_keyı
+åTypeAlias[Union[cryptography.hazmat.primitives.asymmetric.dh.DHPrivateKey,cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey,cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey,cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey,cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey,cryptography.hazmat.primitives.asymmetric.x25519.X25519PrivateKey,cryptography.hazmat.primitives.asymmetric.x448.X448PrivateKey]]†
+ÅUnion[cryptography.hazmat.primitives.asymmetric.dh.DHPrivateKey,cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey,cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey,cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey,cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey,cryptography.hazmat.primitives.asymmetric.x25519.X25519PrivateKey,cryptography.hazmat.primitives.asymmetric.x448.X448PrivateKey]v
+9cryptography.hazmat.primitives.asymmetric.dh.DHPrivateKey"9cryptography.hazmat.primitives.asymmetric.dh.DHPrivateKeyä
 Ccryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey"Ccryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKeyÇ
 ?cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKey"?cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKeyz
 ;cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey";cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKeyz
 ;cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey";cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKeyå
-Dcryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey"Dcryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey"Acryptography.hazmat.primitives.asymmetric.types.PRIVATE_KEY_TYPES*Œ
+Dcryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey"Dcryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKeyÜ
+Acryptography.hazmat.primitives.asymmetric.x25519.X25519PrivateKey"Acryptography.hazmat.primitives.asymmetric.x25519.X25519PrivateKey~
+=cryptography.hazmat.primitives.asymmetric.x448.X448PrivateKey"=cryptography.hazmat.primitives.asymmetric.x448.X448PrivateKey"?cryptography.hazmat.primitives.asymmetric.types.PrivateKeyTypes*Œ
 hash_algorithmπ
 ?Union[cryptography.hazmat.primitives.hashes.HashAlgorithm,None]j
 3cryptography.hazmat.primitives.hashes.HashAlgorithm"3cryptography.hazmat.primitives.hashes.HashAlgorithm
-Noneô
+Noneå
 create_x509_crl7cryptography.hazmat.bindings._rust.x509.create_x509_crl"d
 0cryptography.x509.base.CertificateRevocationList"0cryptography.x509.base.CertificateRevocationList*
 builderr
-7cryptography.x509.base.CertificateRevocationListBuilder"7cryptography.x509.base.CertificateRevocationListBuilder*î
-private_keyÇ
-“TypeAlias[Union[cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey,cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey,cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey,cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey]]Â
-«Union[cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey,cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey,cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey,cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey]ä
+7cryptography.x509.base.CertificateRevocationListBuilder"7cryptography.x509.base.CertificateRevocationListBuilder*á
+private_keyı
+åTypeAlias[Union[cryptography.hazmat.primitives.asymmetric.dh.DHPrivateKey,cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey,cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey,cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey,cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey,cryptography.hazmat.primitives.asymmetric.x25519.X25519PrivateKey,cryptography.hazmat.primitives.asymmetric.x448.X448PrivateKey]]†
+ÅUnion[cryptography.hazmat.primitives.asymmetric.dh.DHPrivateKey,cryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey,cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKey,cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey,cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey,cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey,cryptography.hazmat.primitives.asymmetric.x25519.X25519PrivateKey,cryptography.hazmat.primitives.asymmetric.x448.X448PrivateKey]v
+9cryptography.hazmat.primitives.asymmetric.dh.DHPrivateKey"9cryptography.hazmat.primitives.asymmetric.dh.DHPrivateKeyä
 Ccryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKey"Ccryptography.hazmat.primitives.asymmetric.ed25519.Ed25519PrivateKeyÇ
 ?cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKey"?cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKeyz
 ;cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey";cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKeyz
 ;cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKey";cryptography.hazmat.primitives.asymmetric.dsa.DSAPrivateKeyå
-Dcryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey"Dcryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey"Acryptography.hazmat.primitives.asymmetric.types.PRIVATE_KEY_TYPES*Œ
+Dcryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey"Dcryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKeyÜ
+Acryptography.hazmat.primitives.asymmetric.x25519.X25519PrivateKey"Acryptography.hazmat.primitives.asymmetric.x25519.X25519PrivateKey~
+=cryptography.hazmat.primitives.asymmetric.x448.X448PrivateKey"=cryptography.hazmat.primitives.asymmetric.x448.X448PrivateKey"?cryptography.hazmat.primitives.asymmetric.types.PrivateKeyTypes*Œ
 hash_algorithmπ
 ?Union[cryptography.hazmat.primitives.hashes.HashAlgorithm,None]j
 3cryptography.hazmat.primitives.hashes.HashAlgorithm"3cryptography.hazmat.primitives.hashes.HashAlgorithm

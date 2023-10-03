@@ -1,5 +1,5 @@
 
-/cryptography.hazmat.primitives.asymmetric.ed448¸
+/cryptography.hazmat.primitives.asymmetric.ed448‡
 Ed448PublicKey>cryptography.hazmat.primitives.asymmetric.ed448.Ed448PublicKey"builtins.object*˝
 from_public_bytesPcryptography.hazmat.primitives.asymmetric.ed448.Ed448PublicKey.from_public_bytes"Ä
 >cryptography.hazmat.primitives.asymmetric.ed448.Ed448PublicKey">cryptography.hazmat.primitives.asymmetric.ed448.Ed448PublicKey*’
@@ -15,7 +15,11 @@ DType[cryptography.hazmat.primitives.asymmetric.ed448.Ed448PublicKey]Ä
 encodingp
 6cryptography.hazmat.primitives._serialization.Encoding"6cryptography.hazmat.primitives._serialization.Encoding*Ñ
 formatx
-:cryptography.hazmat.primitives._serialization.PublicFormat":cryptography.hazmat.primitives._serialization.PublicFormat0:abc.abstractmethod@*‹
+:cryptography.hazmat.primitives._serialization.PublicFormat":cryptography.hazmat.primitives._serialization.PublicFormat0:abc.abstractmethod@*´
+public_bytes_rawOcryptography.hazmat.primitives.asymmetric.ed448.Ed448PublicKey.public_bytes_raw" 
+builtins.bytes"builtins.bytes*ã
+selfÄ
+>cryptography.hazmat.primitives.asymmetric.ed448.Ed448PublicKey">cryptography.hazmat.primitives.asymmetric.ed448.Ed448PublicKey0:abc.abstractmethod@*‹
 verifyEcryptography.hazmat.primitives.asymmetric.ed448.Ed448PublicKey.verify"
 None*ã
 selfÄ
@@ -23,7 +27,11 @@ DType[cryptography.hazmat.primitives.asymmetric.ed448.Ed448PublicKey]Ä
 	signature 
 builtins.bytes"builtins.bytes**
 data 
-builtins.bytes"builtins.bytes0:abc.abstractmethod@@babc.ABCMetaÛ
+builtins.bytes"builtins.bytes0:abc.abstractmethod@*≥
+__eq__Ecryptography.hazmat.primitives.asymmetric.ed448.Ed448PublicKey.__eq__"
+builtins.bool"builtins.bool*ÉÄ
+>cryptography.hazmat.primitives.asymmetric.ed448.Ed448PublicKey">cryptography.hazmat.primitives.asymmetric.ed448.Ed448PublicKey*$"
+builtins.object"builtins.object0:abc.abstractmethod@@babc.ABCMeta¶
 Ed448PrivateKey?cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKey"builtins.object*≈
 generateHcryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKey.generate"Ç
 ?cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKey"?cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKey*ÿ
@@ -57,8 +65,13 @@ public_keyJcryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKey.publ
 formatz
 ;cryptography.hazmat.primitives._serialization.PrivateFormat";cryptography.hazmat.primitives._serialization.PrivateFormat*Ø
 encryption_algorithmî
-Hcryptography.hazmat.primitives._serialization.KeySerializationEncryption"Hcryptography.hazmat.primitives._serialization.KeySerializationEncryption0:abc.abstractmethod@@babc.ABCMeta*´
+Hcryptography.hazmat.primitives._serialization.KeySerializationEncryption"Hcryptography.hazmat.primitives._serialization.KeySerializationEncryption0:abc.abstractmethod@*∞
+private_bytes_rawQcryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKey.private_bytes_raw" 
+builtins.bytes"builtins.bytes*ç
+selfÇ
+?cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKey"?cryptography.hazmat.primitives.asymmetric.ed448.Ed448PrivateKey0:abc.abstractmethod@@babc.ABCMeta*´
 __annotations__?cryptography.hazmat.primitives.asymmetric.ed448.__annotations__W
 builtins.dict[builtins.str,Any]
 builtins.str"builtins.str
-Any"builtins.dict
+Any"builtins.dict*<
+rust_openssl*cryptography.hazmat.bindings._rust.openssl 

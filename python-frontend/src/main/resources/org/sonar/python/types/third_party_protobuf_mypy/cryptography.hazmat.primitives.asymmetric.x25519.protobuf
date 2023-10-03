@@ -1,5 +1,5 @@
 
-0cryptography.hazmat.primitives.asymmetric.x25519≤	
+0cryptography.hazmat.primitives.asymmetric.x25519¢
 X25519PublicKey@cryptography.hazmat.primitives.asymmetric.x25519.X25519PublicKey"builtins.object*â
 from_public_bytesRcryptography.hazmat.primitives.asymmetric.x25519.X25519PublicKey.from_public_bytes"Ñ
 @cryptography.hazmat.primitives.asymmetric.x25519.X25519PublicKey"@cryptography.hazmat.primitives.asymmetric.x25519.X25519PublicKey*€
@@ -15,7 +15,15 @@ FType[cryptography.hazmat.primitives.asymmetric.x25519.X25519PublicKey]Ñ
 encodingp
 6cryptography.hazmat.primitives._serialization.Encoding"6cryptography.hazmat.primitives._serialization.Encoding*Ñ
 formatx
-:cryptography.hazmat.primitives._serialization.PublicFormat":cryptography.hazmat.primitives._serialization.PublicFormat0:abc.abstractmethod@@babc.ABCMetaù
+:cryptography.hazmat.primitives._serialization.PublicFormat":cryptography.hazmat.primitives._serialization.PublicFormat0:abc.abstractmethod@*±
+public_bytes_rawQcryptography.hazmat.primitives.asymmetric.x25519.X25519PublicKey.public_bytes_raw" 
+builtins.bytes"builtins.bytes*è
+selfÑ
+@cryptography.hazmat.primitives.asymmetric.x25519.X25519PublicKey"@cryptography.hazmat.primitives.asymmetric.x25519.X25519PublicKey0:abc.abstractmethod@*π
+__eq__Gcryptography.hazmat.primitives.asymmetric.x25519.X25519PublicKey.__eq__"
+builtins.bool"builtins.bool*áÑ
+@cryptography.hazmat.primitives.asymmetric.x25519.X25519PublicKey"@cryptography.hazmat.primitives.asymmetric.x25519.X25519PublicKey*$"
+builtins.object"builtins.object0:abc.abstractmethod@@babc.ABCMeta÷
 X25519PrivateKeyAcryptography.hazmat.primitives.asymmetric.x25519.X25519PrivateKey"builtins.object*—
 generateJcryptography.hazmat.primitives.asymmetric.x25519.X25519PrivateKey.generate"Ü
 Acryptography.hazmat.primitives.asymmetric.x25519.X25519PrivateKey"Acryptography.hazmat.primitives.asymmetric.x25519.X25519PrivateKey*ﬁ
@@ -43,7 +51,11 @@ Acryptography.hazmat.primitives.asymmetric.x25519.X25519PrivateKey"Acryptography
 formatz
 ;cryptography.hazmat.primitives._serialization.PrivateFormat";cryptography.hazmat.primitives._serialization.PrivateFormat*Ø
 encryption_algorithmî
-Hcryptography.hazmat.primitives._serialization.KeySerializationEncryption"Hcryptography.hazmat.primitives._serialization.KeySerializationEncryption0:abc.abstractmethod@*¡
+Hcryptography.hazmat.primitives._serialization.KeySerializationEncryption"Hcryptography.hazmat.primitives._serialization.KeySerializationEncryption0:abc.abstractmethod@*∂
+private_bytes_rawScryptography.hazmat.primitives.asymmetric.x25519.X25519PrivateKey.private_bytes_raw" 
+builtins.bytes"builtins.bytes*ë
+selfÜ
+Acryptography.hazmat.primitives.asymmetric.x25519.X25519PrivateKey"Acryptography.hazmat.primitives.asymmetric.x25519.X25519PrivateKey0:abc.abstractmethod@*¡
 exchangeJcryptography.hazmat.primitives.asymmetric.x25519.X25519PrivateKey.exchange" 
 builtins.bytes"builtins.bytes*ë
 selfÜ
@@ -53,4 +65,5 @@ Acryptography.hazmat.primitives.asymmetric.x25519.X25519PrivateKey"Acryptography
 __annotations__@cryptography.hazmat.primitives.asymmetric.x25519.__annotations__W
 builtins.dict[builtins.str,Any]
 builtins.str"builtins.str
-Any"builtins.dict
+Any"builtins.dict*<
+rust_openssl*cryptography.hazmat.bindings._rust.openssl 

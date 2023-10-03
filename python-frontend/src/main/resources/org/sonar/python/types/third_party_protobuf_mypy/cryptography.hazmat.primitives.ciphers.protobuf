@@ -1,67 +1,110 @@
 
-&cryptography.hazmat.primitives.ciphersÈ
-AEADCipherContext=cryptography.hazmat.primitives.ciphers.base.AEADCipherContext"builtins.object*Ó
+&cryptography.hazmat.primitives.ciphersò
+AEADCipherContext=cryptography.hazmat.primitives.ciphers.base.AEADCipherContext"9cryptography.hazmat.primitives.ciphers.base.CipherContext*Ó
 authenticate_additional_dataZcryptography.hazmat.primitives.ciphers.base.AEADCipherContext.authenticate_additional_data"
 None*ˆ
 self~
 =cryptography.hazmat.primitives.ciphers.base.AEADCipherContext"=cryptography.hazmat.primitives.ciphers.base.AEADCipherContext**
 data 
-builtins.bytes"builtins.bytes0:abc.abstractmethod@@babc.ABCMetaÞ
-AEADDecryptionContextAcryptography.hazmat.primitives.ciphers.base.AEADDecryptionContext"builtins.object*á
+builtins.bytes"builtins.bytes0:abc.abstractmethod@@babc.ABCMetaŒ
+AEADDecryptionContextAcryptography.hazmat.primitives.ciphers.base.AEADDecryptionContext"=cryptography.hazmat.primitives.ciphers.base.AEADCipherContext*á
 finalize_with_tagScryptography.hazmat.primitives.ciphers.base.AEADDecryptionContext.finalize_with_tag" 
 builtins.bytes"builtins.bytes*‘
 self†
 Acryptography.hazmat.primitives.ciphers.base.AEADDecryptionContext"Acryptography.hazmat.primitives.ciphers.base.AEADDecryptionContext*)
 tag 
-builtins.bytes"builtins.bytes0:abc.abstractmethod@@babc.ABCMeta›
-AEADEncryptionContextAcryptography.hazmat.primitives.ciphers.base.AEADEncryptionContext"builtins.object*ž
+builtins.bytes"builtins.bytes0:abc.abstractmethod@@babc.ABCMetaÑ
+AEADEncryptionContextAcryptography.hazmat.primitives.ciphers.base.AEADEncryptionContext"=cryptography.hazmat.primitives.ciphers.base.AEADCipherContext*¦
 tagEcryptography.hazmat.primitives.ciphers.base.AEADEncryptionContext.tag" 
 builtins.bytes"builtins.bytes*‘
 self†
-Acryptography.hazmat.primitives.ciphers.base.AEADEncryptionContext"Acryptography.hazmat.primitives.ciphers.base.AEADEncryptionContext0:abc.abstractproperty@`@babc.ABCMetaá
-
-Cipher2cryptography.hazmat.primitives.ciphers.base.Cipher"builtins.object*³
+Acryptography.hazmat.primitives.ciphers.base.AEADEncryptionContext"Acryptography.hazmat.primitives.ciphers.base.AEADEncryptionContext0:property:abc.abstractmethod@`@babc.ABCMetaè9
+Cipher2cryptography.hazmat.primitives.ciphers.base.Cipher"builtins.object*‹
 __init__;cryptography.hazmat.primitives.ciphers.base.Cipher.__init__"
-None*r
-selfh
-2cryptography.hazmat.primitives.ciphers.base.Cipher"2cryptography.hazmat.primitives.ciphers.base.Cipher*’
+None*’
+self‡
+dcryptography.hazmat.primitives.ciphers.base.Cipher[cryptography.hazmat.primitives.ciphers.base.Mode]ê
+0cryptography.hazmat.primitives.ciphers.base.Mode³
+=Union[cryptography.hazmat.primitives.ciphers.modes.Mode,None]f
+1cryptography.hazmat.primitives.ciphers.modes.Mode"1cryptography.hazmat.primitives.ciphers.modes.Mode
+None"2cryptography.hazmat.primitives.ciphers.base.Cipher*’
 	algorithm‚
-?cryptography.hazmat.primitives._cipheralgorithm.CipherAlgorithm"?cryptography.hazmat.primitives._cipheralgorithm.CipherAlgorithm*¾
-mode³
+?cryptography.hazmat.primitives._cipheralgorithm.CipherAlgorithm"?cryptography.hazmat.primitives._cipheralgorithm.CipherAlgorithm*õ
+modeê
+0cryptography.hazmat.primitives.ciphers.base.Mode³
 =Union[cryptography.hazmat.primitives.ciphers.modes.Mode,None]f
 1cryptography.hazmat.primitives.ciphers.modes.Mode"1cryptography.hazmat.primitives.ciphers.modes.Mode
 None*
 backend
-Any *S
-	encryptor<cryptography.hazmat.primitives.ciphers.base.Cipher.encryptor*
-self*S
-	decryptor<cryptography.hazmat.primitives.ciphers.base.Cipher.decryptor*
-self*i
-	_wrap_ctx<cryptography.hazmat.primitives.ciphers.base.Cipher._wrap_ctx*
-self*
-ctx*
-encryptrÎ
-	algorithm<cryptography.hazmat.primitives.ciphers.base.Cipher.algorithm‚
-?cryptography.hazmat.primitives._cipheralgorithm.CipherAlgorithm"?cryptography.hazmat.primitives._cipheralgorithm.CipherAlgorithmrõ
-mode7cryptography.hazmat.primitives.ciphers.base.Cipher.mode³
+Any *ç	
+	_wrap_ctx<cryptography.hazmat.primitives.ciphers.base.Cipher._wrap_ctx"Ó
+ÄUnion[cryptography.hazmat.primitives.ciphers.base.AEADEncryptionContext,cryptography.hazmat.primitives.ciphers.base.AEADDecryptionContext,cryptography.hazmat.primitives.ciphers.base.CipherContext]†
+Acryptography.hazmat.primitives.ciphers.base.AEADEncryptionContext"Acryptography.hazmat.primitives.ciphers.base.AEADEncryptionContext†
+Acryptography.hazmat.primitives.ciphers.base.AEADDecryptionContext"Acryptography.hazmat.primitives.ciphers.base.AEADDecryptionContextv
+9cryptography.hazmat.primitives.ciphers.base.CipherContext"9cryptography.hazmat.primitives.ciphers.base.CipherContext*’
+self‡
+dcryptography.hazmat.primitives.ciphers.base.Cipher[cryptography.hazmat.primitives.ciphers.base.Mode]ê
+0cryptography.hazmat.primitives.ciphers.base.Mode³
 =Union[cryptography.hazmat.primitives.ciphers.modes.Mode,None]f
 1cryptography.hazmat.primitives.ciphers.modes.Mode"1cryptography.hazmat.primitives.ciphers.modes.Mode
-Noneü
+None"2cryptography.hazmat.primitives.ciphers.base.Cipher*ƒ
+ctxz
+;cryptography.hazmat.backends.openssl.ciphers._CipherContext";cryptography.hazmat.backends.openssl.ciphers._CipherContext*+
+encrypt
+builtins.bool"builtins.bool2Ð
+	encryptor<cryptography.hazmat.primitives.ciphers.base.Cipher.encryptor¸
+	encryptor<cryptography.hazmat.primitives.ciphers.base.Cipher.encryptor"†
+Acryptography.hazmat.primitives.ciphers.base.AEADEncryptionContext"Acryptography.hazmat.primitives.ciphers.base.AEADEncryptionContext*Î
+selfÃ
+zcryptography.hazmat.primitives.ciphers.base.Cipher[cryptography.hazmat.primitives.ciphers.modes.ModeWithAuthenticationTag]
+Fcryptography.hazmat.primitives.ciphers.modes.ModeWithAuthenticationTag"Fcryptography.hazmat.primitives.ciphers.modes.ModeWithAuthenticationTag"2cryptography.hazmat.primitives.ciphers.base.Cipher0:typing.overloadXÉ
+	encryptor<cryptography.hazmat.primitives.ciphers.base.Cipher.encryptor"v
+9cryptography.hazmat.primitives.ciphers.base.CipherContext"9cryptography.hazmat.primitives.ciphers.base.CipherContext*ð
+selfå
+»TypeAlias[cryptography.hazmat.primitives.ciphers.base.Cipher[Union[cryptography.hazmat.primitives.ciphers.modes.ModeWithNonce,cryptography.hazmat.primitives.ciphers.modes.ModeWithTweak,None,cryptography.hazmat.primitives.ciphers.modes.ECB,cryptography.hazmat.primitives.ciphers.modes.ModeWithInitializationVector]]]è
+°cryptography.hazmat.primitives.ciphers.base.Cipher[Union[cryptography.hazmat.primitives.ciphers.modes.ModeWithNonce,cryptography.hazmat.primitives.ciphers.modes.ModeWithTweak,None,cryptography.hazmat.primitives.ciphers.modes.ECB,cryptography.hazmat.primitives.ciphers.modes.ModeWithInitializationVector]]þ
+üUnion[cryptography.hazmat.primitives.ciphers.modes.ModeWithNonce,cryptography.hazmat.primitives.ciphers.modes.ModeWithTweak,None,cryptography.hazmat.primitives.ciphers.modes.ECB,cryptography.hazmat.primitives.ciphers.modes.ModeWithInitializationVector]x
+:cryptography.hazmat.primitives.ciphers.modes.ModeWithNonce":cryptography.hazmat.primitives.ciphers.modes.ModeWithNoncex
+:cryptography.hazmat.primitives.ciphers.modes.ModeWithTweak":cryptography.hazmat.primitives.ciphers.modes.ModeWithTweak
+Noned
+0cryptography.hazmat.primitives.ciphers.modes.ECB"0cryptography.hazmat.primitives.ciphers.modes.ECB–
+Icryptography.hazmat.primitives.ciphers.modes.ModeWithInitializationVector"Icryptography.hazmat.primitives.ciphers.modes.ModeWithInitializationVector"2cryptography.hazmat.primitives.ciphers.base.Cipher"8cryptography.hazmat.primitives.ciphers.base._CIPHER_TYPE0:typing.overloadX2Ð
+	decryptor<cryptography.hazmat.primitives.ciphers.base.Cipher.decryptor¸
+	decryptor<cryptography.hazmat.primitives.ciphers.base.Cipher.decryptor"†
+Acryptography.hazmat.primitives.ciphers.base.AEADDecryptionContext"Acryptography.hazmat.primitives.ciphers.base.AEADDecryptionContext*Î
+selfÃ
+zcryptography.hazmat.primitives.ciphers.base.Cipher[cryptography.hazmat.primitives.ciphers.modes.ModeWithAuthenticationTag]
+Fcryptography.hazmat.primitives.ciphers.modes.ModeWithAuthenticationTag"Fcryptography.hazmat.primitives.ciphers.modes.ModeWithAuthenticationTag"2cryptography.hazmat.primitives.ciphers.base.Cipher0:typing.overloadXÉ
+	decryptor<cryptography.hazmat.primitives.ciphers.base.Cipher.decryptor"v
+9cryptography.hazmat.primitives.ciphers.base.CipherContext"9cryptography.hazmat.primitives.ciphers.base.CipherContext*ð
+selfå
+»TypeAlias[cryptography.hazmat.primitives.ciphers.base.Cipher[Union[cryptography.hazmat.primitives.ciphers.modes.ModeWithNonce,cryptography.hazmat.primitives.ciphers.modes.ModeWithTweak,None,cryptography.hazmat.primitives.ciphers.modes.ECB,cryptography.hazmat.primitives.ciphers.modes.ModeWithInitializationVector]]]è
+°cryptography.hazmat.primitives.ciphers.base.Cipher[Union[cryptography.hazmat.primitives.ciphers.modes.ModeWithNonce,cryptography.hazmat.primitives.ciphers.modes.ModeWithTweak,None,cryptography.hazmat.primitives.ciphers.modes.ECB,cryptography.hazmat.primitives.ciphers.modes.ModeWithInitializationVector]]þ
+üUnion[cryptography.hazmat.primitives.ciphers.modes.ModeWithNonce,cryptography.hazmat.primitives.ciphers.modes.ModeWithTweak,None,cryptography.hazmat.primitives.ciphers.modes.ECB,cryptography.hazmat.primitives.ciphers.modes.ModeWithInitializationVector]x
+:cryptography.hazmat.primitives.ciphers.modes.ModeWithNonce":cryptography.hazmat.primitives.ciphers.modes.ModeWithNoncex
+:cryptography.hazmat.primitives.ciphers.modes.ModeWithTweak":cryptography.hazmat.primitives.ciphers.modes.ModeWithTweak
+Noned
+0cryptography.hazmat.primitives.ciphers.modes.ECB"0cryptography.hazmat.primitives.ciphers.modes.ECB–
+Icryptography.hazmat.primitives.ciphers.modes.ModeWithInitializationVector"Icryptography.hazmat.primitives.ciphers.modes.ModeWithInitializationVector"2cryptography.hazmat.primitives.ciphers.base.Cipher"8cryptography.hazmat.primitives.ciphers.base._CIPHER_TYPE0:typing.overloadXPrÎ
+	algorithm<cryptography.hazmat.primitives.ciphers.base.Cipher.algorithm‚
+?cryptography.hazmat.primitives._cipheralgorithm.CipherAlgorithm"?cryptography.hazmat.primitives._cipheralgorithm.CipherAlgorithmr§
+mode7cryptography.hazmat.primitives.ciphers.base.Cipher.modef
+1cryptography.hazmat.primitives.ciphers.modes.Mode"1cryptography.hazmat.primitives.ciphers.modes.Mode•
 CipherContext9cryptography.hazmat.primitives.ciphers.base.CipherContext"builtins.object*³
 update@cryptography.hazmat.primitives.ciphers.base.CipherContext.update" 
 builtins.bytes"builtins.bytes*€
 selfv
 9cryptography.hazmat.primitives.ciphers.base.CipherContext"9cryptography.hazmat.primitives.ciphers.base.CipherContext**
 data 
-builtins.bytes"builtins.bytes0:abc.abstractmethod@*Ë
+builtins.bytes"builtins.bytes0:abc.abstractmethod@*ä
 update_intoEcryptography.hazmat.primitives.ciphers.base.CipherContext.update_into"
 builtins.int"builtins.int*€
 selfv
 9cryptography.hazmat.primitives.ciphers.base.CipherContext"9cryptography.hazmat.primitives.ciphers.base.CipherContext**
 data 
-builtins.bytes"builtins.bytes*
-buf
-Any0:abc.abstractmethod@*‹
+builtins.bytes"builtins.bytes*)
+buf 
+builtins.bytes"builtins.bytes0:abc.abstractmethod@*‹
 finalizeBcryptography.hazmat.primitives.ciphers.base.CipherContext.finalize" 
 builtins.bytes"builtins.bytes*€
 selfv

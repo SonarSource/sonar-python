@@ -1,5 +1,5 @@
 
-+cryptography.hazmat.primitives.ciphers.aead¢
++cryptography.hazmat.primitives.ciphers.aead½
 ChaCha20Poly1305<cryptography.hazmat.primitives.ciphers.aead.ChaCha20Poly1305"builtins.object*
 __init__Ecryptography.hazmat.primitives.ciphers.aead.ChaCha20Poly1305.__init__"
 None*†
@@ -11,7 +11,10 @@
 builtins.bytes"builtins.bytes*Î
 clsÄ
 BType[cryptography.hazmat.primitives.ciphers.aead.ChaCha20Poly1305]|
-<cryptography.hazmat.primitives.ciphers.aead.ChaCha20Poly1305"<cryptography.hazmat.primitives.ciphers.aead.ChaCha20Poly13050:classmethodp*´
+<cryptography.hazmat.primitives.ciphers.aead.ChaCha20Poly1305"<cryptography.hazmat.primitives.ciphers.aead.ChaCha20Poly13050:classmethodp*_
+
+_create_fnGcryptography.hazmat.primitives.ciphers.aead.ChaCha20Poly1305._create_fn*
+self*´
 encryptDcryptography.hazmat.primitives.ciphers.aead.ChaCha20Poly1305.encrypt" 
 builtins.bytes"builtins.bytes*†
 self|
@@ -49,7 +52,10 @@ BType[cryptography.hazmat.primitives.ciphers.aead.ChaCha20Poly1305]|
 	_MAX_SIZEFcryptography.hazmat.primitives.ciphers.aead.ChaCha20Poly1305._MAX_SIZE
 builtins.int"builtins.intrk
 _keyAcryptography.hazmat.primitives.ciphers.aead.ChaCha20Poly1305._key 
-builtins.bytes"builtins.bytesÔ
+builtins.bytes"builtins.bytesr·
+_poolBcryptography.hazmat.primitives.ciphers.aead.ChaCha20Poly1305._poolj
+1cryptography.hazmat.bindings._rust.FixedPool[Any]
+Any",cryptography.hazmat.bindings._rust.FixedPoolÔ
 AESCCM2cryptography.hazmat.primitives.ciphers.aead.AESCCM"builtins.object* 
 __init__;cryptography.hazmat.primitives.ciphers.aead.AESCCM.__init__"
 None*r
@@ -221,6 +227,56 @@ bit_length
 	_MAX_SIZE=cryptography.hazmat.primitives.ciphers.aead.AESOCB3._MAX_SIZE
 builtins.int"builtins.intrb
 _key8cryptography.hazmat.primitives.ciphers.aead.AESOCB3._key 
+builtins.bytes"builtins.bytes¯
+AESSIV2cryptography.hazmat.primitives.ciphers.aead.AESSIV"builtins.object*ð
+__init__;cryptography.hazmat.primitives.ciphers.aead.AESSIV.__init__"
+None*r
+selfh
+2cryptography.hazmat.primitives.ciphers.aead.AESSIV"2cryptography.hazmat.primitives.ciphers.aead.AESSIV*)
+key 
+builtins.bytes"builtins.bytes*ã
+generate_key?cryptography.hazmat.primitives.ciphers.aead.AESSIV.generate_key" 
+builtins.bytes"builtins.bytes*°
+cls¦
+8Type[cryptography.hazmat.primitives.ciphers.aead.AESSIV]h
+2cryptography.hazmat.primitives.ciphers.aead.AESSIV"2cryptography.hazmat.primitives.ciphers.aead.AESSIV*,
+
+bit_length
+builtins.int"builtins.int0:classmethodp*©
+encrypt:cryptography.hazmat.primitives.ciphers.aead.AESSIV.encrypt" 
+builtins.bytes"builtins.bytes*r
+selfh
+2cryptography.hazmat.primitives.ciphers.aead.AESSIV"2cryptography.hazmat.primitives.ciphers.aead.AESSIV**
+data 
+builtins.bytes"builtins.bytes*Ÿ
+associated_data‰
+)Union[builtins.list[builtins.bytes],None]P
+builtins.list[builtins.bytes] 
+builtins.bytes"builtins.bytes"builtins.list
+None*©
+decrypt:cryptography.hazmat.primitives.ciphers.aead.AESSIV.decrypt" 
+builtins.bytes"builtins.bytes*r
+selfh
+2cryptography.hazmat.primitives.ciphers.aead.AESSIV"2cryptography.hazmat.primitives.ciphers.aead.AESSIV**
+data 
+builtins.bytes"builtins.bytes*Ÿ
+associated_data‰
+)Union[builtins.list[builtins.bytes],None]P
+builtins.list[builtins.bytes] 
+builtins.bytes"builtins.bytes"builtins.list
+None*â
+_check_params@cryptography.hazmat.primitives.ciphers.aead.AESSIV._check_params"
+None*r
+selfh
+2cryptography.hazmat.primitives.ciphers.aead.AESSIV"2cryptography.hazmat.primitives.ciphers.aead.AESSIV**
+data 
+builtins.bytes"builtins.bytes*e
+associated_dataP
+builtins.list[builtins.bytes] 
+builtins.bytes"builtins.bytes"builtins.listrg
+	_MAX_SIZE<cryptography.hazmat.primitives.ciphers.aead.AESSIV._MAX_SIZE
+builtins.int"builtins.intra
+_key7cryptography.hazmat.primitives.ciphers.aead.AESSIV._key 
 builtins.bytes"builtins.bytes*§
 __annotations__;cryptography.hazmat.primitives.ciphers.aead.__annotations__W
 builtins.dict[builtins.str,Any]

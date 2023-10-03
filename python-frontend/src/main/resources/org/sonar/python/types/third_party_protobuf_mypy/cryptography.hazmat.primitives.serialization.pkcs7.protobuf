@@ -1,85 +1,0 @@
-
-2cryptography.hazmat.primitives.serialization.pkcs7»
-PKCS7Options?cryptography.hazmat.primitives.serialization.pkcs7.PKCS7Options"cryptography.utils.EnumHrj
-TextDcryptography.hazmat.primitives.serialization.pkcs7.PKCS7Options.Text
-builtins.str"builtins.strrn
-BinaryFcryptography.hazmat.primitives.serialization.pkcs7.PKCS7Options.Binary
-builtins.str"builtins.strr„
-DetachedSignatureQcryptography.hazmat.primitives.serialization.pkcs7.PKCS7Options.DetachedSignature
-builtins.str"builtins.strr~
-NoCapabilitiesNcryptography.hazmat.primitives.serialization.pkcs7.PKCS7Options.NoCapabilities
-builtins.str"builtins.strrz
-NoAttributesLcryptography.hazmat.primitives.serialization.pkcs7.PKCS7Options.NoAttributes
-builtins.str"builtins.strrp
-NoCertsGcryptography.hazmat.primitives.serialization.pkcs7.PKCS7Options.NoCerts
-builtins.str"builtins.strî"
-PKCS7SignatureBuilderHcryptography.hazmat.primitives.serialization.pkcs7.PKCS7SignatureBuilder"builtins.object*š
-__init__Qcryptography.hazmat.primitives.serialization.pkcs7.PKCS7SignatureBuilder.__init__*
-self*
-
-data *
-signers *
-additional_certs *Â
-set_dataQcryptography.hazmat.primitives.serialization.pkcs7.PKCS7SignatureBuilder.set_data"”
-Hcryptography.hazmat.primitives.serialization.pkcs7.PKCS7SignatureBuilder"Hcryptography.hazmat.primitives.serialization.pkcs7.PKCS7SignatureBuilder*Ÿ
-self”
-Hcryptography.hazmat.primitives.serialization.pkcs7.PKCS7SignatureBuilder"Hcryptography.hazmat.primitives.serialization.pkcs7.PKCS7SignatureBuilder**
-data 
-builtins.bytes"builtins.bytes*¤
-
-add_signerScryptography.hazmat.primitives.serialization.pkcs7.PKCS7SignatureBuilder.add_signer"”
-Hcryptography.hazmat.primitives.serialization.pkcs7.PKCS7SignatureBuilder"Hcryptography.hazmat.primitives.serialization.pkcs7.PKCS7SignatureBuilder*Ÿ
-self”
-Hcryptography.hazmat.primitives.serialization.pkcs7.PKCS7SignatureBuilder"Hcryptography.hazmat.primitives.serialization.pkcs7.PKCS7SignatureBuilder*Y
-certificateH
-"cryptography.x509.base.Certificate""cryptography.x509.base.Certificate*’
-private_key€
-’TypeAlias[Union[cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey,cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey]]—
-‡Union[cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey,cryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey]z
-;cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey";cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKeyŒ
-Dcryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey"Dcryptography.hazmat.primitives.asymmetric.ec.EllipticCurvePrivateKey"Mcryptography.hazmat.primitives.serialization.pkcs7._ALLOWED_PRIVATE_KEY_TYPES*—
-hash_algorithm‚
-ðTypeAlias[Union[cryptography.hazmat.primitives.hashes.SHA1,cryptography.hazmat.primitives.hashes.SHA224,cryptography.hazmat.primitives.hashes.SHA256,cryptography.hazmat.primitives.hashes.SHA384,cryptography.hazmat.primitives.hashes.SHA512]]¼
-åUnion[cryptography.hazmat.primitives.hashes.SHA1,cryptography.hazmat.primitives.hashes.SHA224,cryptography.hazmat.primitives.hashes.SHA256,cryptography.hazmat.primitives.hashes.SHA384,cryptography.hazmat.primitives.hashes.SHA512]X
-*cryptography.hazmat.primitives.hashes.SHA1"*cryptography.hazmat.primitives.hashes.SHA1\
-,cryptography.hazmat.primitives.hashes.SHA224",cryptography.hazmat.primitives.hashes.SHA224\
-,cryptography.hazmat.primitives.hashes.SHA256",cryptography.hazmat.primitives.hashes.SHA256\
-,cryptography.hazmat.primitives.hashes.SHA384",cryptography.hazmat.primitives.hashes.SHA384\
-,cryptography.hazmat.primitives.hashes.SHA512",cryptography.hazmat.primitives.hashes.SHA512"Lcryptography.hazmat.primitives.serialization.pkcs7._ALLOWED_PKCS7_HASH_TYPES*ÿ
-add_certificateXcryptography.hazmat.primitives.serialization.pkcs7.PKCS7SignatureBuilder.add_certificate"”
-Hcryptography.hazmat.primitives.serialization.pkcs7.PKCS7SignatureBuilder"Hcryptography.hazmat.primitives.serialization.pkcs7.PKCS7SignatureBuilder*Ÿ
-self”
-Hcryptography.hazmat.primitives.serialization.pkcs7.PKCS7SignatureBuilder"Hcryptography.hazmat.primitives.serialization.pkcs7.PKCS7SignatureBuilder*Y
-certificateH
-"cryptography.x509.base.Certificate""cryptography.x509.base.Certificate*ª
-signMcryptography.hazmat.primitives.serialization.pkcs7.PKCS7SignatureBuilder.sign" 
-builtins.bytes"builtins.bytes*Ÿ
-self”
-Hcryptography.hazmat.primitives.serialization.pkcs7.PKCS7SignatureBuilder"Hcryptography.hazmat.primitives.serialization.pkcs7.PKCS7SignatureBuilder*~
-encodingp
-6cryptography.hazmat.primitives._serialization.Encoding"6cryptography.hazmat.primitives._serialization.Encoding*ö
-optionsè
-Ptyping.Iterable[cryptography.hazmat.primitives.serialization.pkcs7.PKCS7Options]‚
-?cryptography.hazmat.primitives.serialization.pkcs7.PKCS7Options"?cryptography.hazmat.primitives.serialization.pkcs7.PKCS7Options"typing.Iterable*
-backend
-Any r`
-_dataNcryptography.hazmat.primitives.serialization.pkcs7.PKCS7SignatureBuilder._data
-Anyrf
-_signersQcryptography.hazmat.primitives.serialization.pkcs7.PKCS7SignatureBuilder._signers
-Anyrx
-_additional_certsZcryptography.hazmat.primitives.serialization.pkcs7.PKCS7SignatureBuilder._additional_certs
-Any¨
-load_pem_pkcs7_certificatesNcryptography.hazmat.primitives.serialization.pkcs7.load_pem_pkcs7_certificates"Œ
-1builtins.list[cryptography.x509.base.Certificate]H
-"cryptography.x509.base.Certificate""cryptography.x509.base.Certificate"builtins.list**
-data 
-builtins.bytes"builtins.bytes¨
-load_der_pkcs7_certificatesNcryptography.hazmat.primitives.serialization.pkcs7.load_der_pkcs7_certificates"Œ
-1builtins.list[cryptography.x509.base.Certificate]H
-"cryptography.x509.base.Certificate""cryptography.x509.base.Certificate"builtins.list**
-data 
-builtins.bytes"builtins.bytes*®
-__annotations__Bcryptography.hazmat.primitives.serialization.pkcs7.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict
