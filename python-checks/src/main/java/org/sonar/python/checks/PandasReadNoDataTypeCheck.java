@@ -19,6 +19,7 @@
  */
 package org.sonar.python.checks;
 
+import java.util.Map;
 import java.util.Optional;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
@@ -34,6 +35,16 @@ import org.sonar.python.tree.TreeUtils;
 public class PandasReadNoDataTypeCheck extends PythonSubscriptionCheck {
 
   private static final String MESSAGE = "Provide the 'dtype' parameter when calling";
+
+  private static final String READ_CSV = "pandas.read_csv";
+  private static final String READ_TABLE = "pandas.read_table";
+
+  private static final Map<String, String> READ_METHODS = Map.of(
+    READ_CSV, READ_CSV,
+    READ_TABLE, READ_TABLE,
+    "pandas.io.parsers.readers.read_csv", READ_CSV,
+    "pandas.io.parsers.readers.read_table", READ_TABLE
+  );
 
   @Override
   public void initialize(Context context) {
@@ -66,12 +77,13 @@ public class PandasReadNoDataTypeCheck extends PythonSubscriptionCheck {
   }
 
   private static boolean isPandasReadCall(String fqn) {
-    return "pandas.read_csv".equals(fqn) || "pandas.read_table".equals(fqn);
+    return READ_METHODS.containsKey(fqn);
   }
 
   private static String getMessage(CallExpression ce) {
     return Optional.ofNullable(ce.calleeSymbol())
       .map(Symbol::fullyQualifiedName)
+      .map(READ_METHODS::get)
       .map(name -> String.format("%s '%s'.", MESSAGE, name))
       .orElse("");
   }
