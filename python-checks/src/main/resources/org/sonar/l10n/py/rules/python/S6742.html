@@ -1,0 +1,45 @@
+<p>This rule raises an issue when 5 or more commands are applied on a data frame.</p>
+<h2>Why is this an issue?</h2>
+<p>The pandas library provides many ways to filter, select, reshape and modify a data frame. Pandas supports as well method chaining, which means that
+many <code>DataFrame</code> methods return a modified <code>DataFrame</code>. This allows the user to chain multiple operations together, making it
+effortless perform several of them in one line of code:</p>
+<pre>
+import pandas as pd
+
+joe = pd.read_csv("data.csv", dtype={'user_id':'str', 'name':'str'}).set_index("name").filter(like='jo', axis=0).head()
+</pre>
+<p>While this code is correct and concise, it can be challenging to follow its logic and flow, making it harder to debug or modify in the future.</p>
+<p>To improve code readability, debugging, and maintainability, it is recommended to break down long chains of pandas instructions into smaller, more
+modular steps. This can be done with the help of the pandas <code>pipe</code> method, which takes a function as a parameter. This function takes the
+data frame as a parameter, operates on it and returns it for further processing. Grouping complex transformations of a data frame inside a function
+with a meaningful name can further enhance the readability and maintainability of the code.</p>
+<h2>How to fix it</h2>
+<p>To fix this issue refactor chains of instruction into a function that can be consumed by the <code>pandas.pipe</code> method.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+import pandas as pd
+
+def foo(df: pd.DataFrame):
+  return df.set_index("name").filter(like='joe', axis=0).groupby("team")["salary"].mean().head() # Noncompliant: too many operations happen on this data frame.
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+import pandas as pd
+
+def select_joes(df):
+  return df.set_index("name").filter(like='joe', axis=0)
+
+def compute_mean_salary_per_team(df):
+  return df.groupby("team")["salary"].mean()
+
+def foo(df: pd.DataFrame):
+  return df.pipe(select_joes).pipe(compute_mean_salary_per_team).head() # Compliant
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Pandas Documentation - <a
+  href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.pipe.html#pandas-dataframe-pipe">pandas.DataFrame.pipe</a> </li>
+</ul>
+
