@@ -35,7 +35,7 @@ import org.sonar.python.tree.TreeUtils;
 @Rule(key = "S6735")
 public class PandasAddMergeParametersCheck extends PythonSubscriptionCheck {
 
-  enum Parameters {
+  enum Keywords {
     HOW("how", 2, 1, 2),
     ON("on", 1, 2, 3),
     VALIDATE("validate", 6, 11, 12);
@@ -61,7 +61,7 @@ public class PandasAddMergeParametersCheck extends PythonSubscriptionCheck {
     final int dataFrameMergePosition;
     final int pandasMergePosition;
 
-    Parameters(String keyword, int joinPosition, int dataFrameMergePosition, int pandasMergePosition) {
+    Keywords(String keyword, int joinPosition, int dataFrameMergePosition, int pandasMergePosition) {
       this.keyword = keyword;
       this.joinPosition = joinPosition;
       this.dataFrameMergePosition = dataFrameMergePosition;
@@ -69,12 +69,12 @@ public class PandasAddMergeParametersCheck extends PythonSubscriptionCheck {
     }
   }
 
-  private static final Set<String> MERGE_METHODS = Set.of(
+  private static final Set<String> METHODS = Set.of(
     "pandas.core.frame.DataFrame.merge",
     "pandas.core.reshape.merge.merge",
     "pandas.core.frame.DataFrame.join");
 
-  private static final List<String> messages = List.of(
+  private static final List<String> MESSAGES = List.of(
     "The '%s' parameter of the %s should be specified.",
     "The '%s' and '%s' parameters of the %s should be specified.",
     "The '%s', '%s' and '%s' parameters of the %s should be specified.");
@@ -88,39 +88,34 @@ public class PandasAddMergeParametersCheck extends PythonSubscriptionCheck {
     CallExpression callExpression = (CallExpression) ctx.syntaxNode();
     Optional.ofNullable(callExpression.calleeSymbol())
       .map(Symbol::fullyQualifiedName)
-      .filter(MERGE_METHODS::contains)
+      .filter(METHODS::contains)
       .ifPresent(fqn -> missingArguments(fqn, ctx, callExpression));
   }
 
   private static void missingArguments(String fullyQualifiedName, SubscriptionContext ctx, CallExpression callExpression) {
     List<String> parameters = new ArrayList<>();
-    if (argumentIsMissing(fullyQualifiedName, Parameters.HOW, callExpression.arguments())) {
-      parameters.add(Parameters.HOW.getKeyword());
+    if (argumentIsMissing(fullyQualifiedName, Keywords.HOW, callExpression.arguments())) {
+      parameters.add(Keywords.HOW.getKeyword());
     }
-    if (argumentIsMissing(fullyQualifiedName, Parameters.ON, callExpression.arguments())) {
-      parameters.add(Parameters.ON.getKeyword());
+    if (argumentIsMissing(fullyQualifiedName, Keywords.ON, callExpression.arguments())) {
+      parameters.add(Keywords.ON.getKeyword());
     }
-    if (argumentIsMissing(fullyQualifiedName, Parameters.VALIDATE, callExpression.arguments())) {
-      parameters.add(Parameters.VALIDATE.getKeyword());
+    if (argumentIsMissing(fullyQualifiedName, Keywords.VALIDATE, callExpression.arguments())) {
+      parameters.add(Keywords.VALIDATE.getKeyword());
     }
     if (!parameters.isEmpty()) {
       parameters.add(fullyQualifiedName.substring(fullyQualifiedName.lastIndexOf('.') + 1));
-      ctx.addIssue(callExpression, String.format(messages.get(parameters.size() - 2), parameters.toArray()));
+      ctx.addIssue(callExpression, String.format(MESSAGES.get(parameters.size() - 2), parameters.toArray()));
     }
   }
 
-  private static boolean argumentIsMissing(String fullyQualfiedName, Parameters keyword, List<Argument> arguments) {
-    switch (keyword) {
-      case HOW:
-        return TreeUtils.nthArgumentOrKeyword(getPosition(fullyQualfiedName, Parameters.HOW), Parameters.HOW.getKeyword(), arguments) == null;
-      case ON:
-        return TreeUtils.nthArgumentOrKeyword(getPosition(fullyQualfiedName, Parameters.ON), Parameters.ON.getKeyword(), arguments) == null;
-      default: // case VALIDATE
-        return TreeUtils.nthArgumentOrKeyword(getPosition(fullyQualfiedName, Parameters.VALIDATE), Parameters.VALIDATE.getKeyword(), arguments) == null;
-    }
+  private static boolean argumentIsMissing(String fullyQualfiedName, Keywords keyword, List<Argument> arguments) {
+    return Optional.of(keyword)
+      .map(kw -> TreeUtils.nthArgumentOrKeyword(getPosition(fullyQualfiedName, kw), kw.getKeyword(), arguments))
+      .isEmpty();
   }
 
-  private static int getPosition(String fullyQualifiedName, Parameters parameter) {
+  private static int getPosition(String fullyQualifiedName, Keywords parameter) {
     if ("pandas.core.frame.DataFrame.join".equals(fullyQualifiedName)) {
       return parameter.getJoinPosition();
     } else if ("pandas.core.frame.DataFrame.merge".equals(fullyQualifiedName)) {
