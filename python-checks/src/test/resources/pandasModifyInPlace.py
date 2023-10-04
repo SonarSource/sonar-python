@@ -1,4 +1,4 @@
-def non_compliant():
+def non_compliant_1():
     import pandas as pd
 
     df = pd.DataFrame({'A': [3, 2, 1], 'B': ['x', 'y', 'z']})
@@ -6,30 +6,56 @@ def non_compliant():
 
     new_index = ['Firefox', 'Chrome', 'Safari']
 
-    df.drop(columns='A', inplace=True)  # Noncompliant
+    _ = df.drop(columns='A', inplace=True)  # Noncompliant
+    #                        ^^^^^^^^^^^^
 
-    df.dropna(inplace=True)  # Noncompliant
+    _ = df.dropna(inplace=True)  # Noncompliant
+    #             ^^^^^^^^^^^^
 
-    df.drop_duplicates(inplace=True)  # Noncompliant
+    _ = df.drop_duplicates(inplace=True)  # Noncompliant
+    #                      ^^^^^^^^^^^^
 
-    df.sort_values(by=['A'], inplace=True)  # Noncompliant
+    _ = df.sort_values(by=['A'], inplace=True)  # Noncompliant
+    #                            ^^^^^^^^^^^^
 
-    df.sort_index(inplace=True)  # Noncompliant
+    _ = df.sort_index(inplace=True)  # Noncompliant
+    #                 ^^^^^^^^^^^^
 
-    df.query('A > B', inplace=True)  # Noncompliant
+    _ = df.eval("C = str(A) + B", inplace=True)  # Noncompliant
+    #                             ^^^^^^^^^^^^
 
-    # 'transpose' actually doesn't have an 'inplace' keyword argument.
-    df.transpose(inplace=True)  # Noncompliant
+    _ = df.query('A > B', inplace=True)  # Noncompliant
+    #                     ^^^^^^^^^^^^
 
-    df.swapaxes(inplace=True)  # Noncompliant
 
-    df.reindex(new_index, inplace=True)  # Noncompliant
+def non_compliant_2():
+    from pandas import DataFrame
 
-    # 'reindex_like' actually doesn't have an 'inplace' keyword argument.
-    df.reindex_like(df2, inplace=True)  # Noncompliant
+    df = DataFrame({'A': [3, 2, 1], 'B': ['x', 'y', 'z']})
+    df2 = DataFrame({'A': [6, 5, 4], 'C': ['a', 'b', 'c']})
 
-    # 'truncate' actually doesn't have an 'inplace' keyword argument.
-    df.truncate(before="2", after="1", axis="A", inplace=True)  # Noncompliant
+    new_index = ['Firefox', 'Chrome', 'Safari']
+
+    _ = df.drop(columns='A', inplace=True)  # Noncompliant
+    #                        ^^^^^^^^^^^^
+
+    _ = df.dropna(inplace=True)  # Noncompliant
+    #             ^^^^^^^^^^^^
+
+    _ = df.drop_duplicates(inplace=True)  # Noncompliant
+    #                      ^^^^^^^^^^^^
+
+    _ = df.sort_values(by=['A'], inplace=True)  # Noncompliant
+    #                            ^^^^^^^^^^^^
+
+    _ = df.sort_index(inplace=True)  # Noncompliant
+    #                 ^^^^^^^^^^^^
+
+    _ = df.eval("C = str(A) + B", inplace=True)  # Noncompliant
+    #                             ^^^^^^^^^^^^
+
+    _ = df.query('A > B', inplace=True)  # Noncompliant
+    #                     ^^^^^^^^^^^^
 
 
 def compliant(xx):
@@ -40,26 +66,30 @@ def compliant(xx):
 
     new_index = ['Firefox', 'Chrome', 'Safari']
 
-    df.drop(columns='A')
+    _ = df.drop(columns='A')
 
-    df.dropna(inplace=False)
+    _ = df.dropna(inplace=False)
 
-    df.drop_duplicates()
+    _ = df.drop_duplicates()
 
-    df.sort_values(by=['A'])
+    _ = df.sort_values(by=['A'])
 
-    df.sort_index()
+    _ = df.sort_index()
 
-    df.query('A > B')
+    _ = df.eval("C = str(A) + B")
 
-    df.transpose(inplace=False)
+    _ = df.query('A > B')
 
-    df.swapaxes()
+    _ = xx.drop(columns='A', inplace=True)
 
-    df.reindex(new_index)
+    _ = xx.dropna(inplace=False)
 
-    df.reindex_like(df2)
+    _ = xx.drop_duplicates()
 
-    df.truncate(before="2", after="1", axis="A")
+    _ = xx.sort_values(by=['A'])
 
-    xx.drop(columns='A', inplace=True)
+    _ = xx.sort_index()
+
+    _ = xx.eval("C = str(A) + B")
+
+    _ = xx.query('A > B')

@@ -42,12 +42,8 @@ public class PandasModifyInPlaceCheck extends PythonSubscriptionCheck {
     "pandas.core.frame.DataFrame.drop_duplicates",
     "pandas.core.frame.DataFrame.sort_values",
     "pandas.core.frame.DataFrame.sort_index",
-    "pandas.core.frame.DataFrame.query",
-    "pandas.core.frame.DataFrame.transpose",
-    "pandas.core.frame.DataFrame.swapaxes",
-    "pandas.core.frame.DataFrame.reindex",
-    "pandas.core.frame.DataFrame.reindex_like",
-    "pandas.core.frame.DataFrame.truncate");
+    "pandas.core.frame.DataFrame.eval",
+    "pandas.core.frame.DataFrame.query");
 
   @Override
   public void initialize(Context context) {
@@ -64,6 +60,7 @@ public class PandasModifyInPlaceCheck extends PythonSubscriptionCheck {
       .flatMap(TreeUtils.toOptionalInstanceOfMapper(Name.class))
       .map(Name::name)
       .filter("True"::equals)
-      .ifPresent(fqn -> ctx.addIssue(callExpression, MESSAGE));
+      .flatMap(fqn -> Optional.ofNullable(TreeUtils.argumentByKeyword("inplace", callExpression.arguments())))
+      .ifPresent(regularArgument -> ctx.addIssue(regularArgument, MESSAGE));
   }
 }
