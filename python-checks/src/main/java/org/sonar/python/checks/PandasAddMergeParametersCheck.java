@@ -40,6 +40,22 @@ public class PandasAddMergeParametersCheck extends PythonSubscriptionCheck {
     ON("on", 1, 2, 3),
     VALIDATE("validate", 6, 11, 12);
 
+    public String getKeyword() {
+      return keyword;
+    }
+
+    public int getJoinPosition() {
+      return joinPosition;
+    }
+
+    public int getDataFrameMergePosition() {
+      return dataFrameMergePosition;
+    }
+
+    public int getPandasMergePosition() {
+      return pandasMergePosition;
+    }
+
     final String keyword;
     final int joinPosition;
     final int dataFrameMergePosition;
@@ -56,8 +72,7 @@ public class PandasAddMergeParametersCheck extends PythonSubscriptionCheck {
   private static final Set<String> MERGE_METHODS = Set.of(
     "pandas.core.frame.DataFrame.merge",
     "pandas.core.reshape.merge.merge",
-    "pandas.core.frame.DataFrame.join",
-    "pandas.join");
+    "pandas.core.frame.DataFrame.join");
 
   private static final List<String> messages = List.of(
     "The '%s' parameter of the %s should be specified.",
@@ -80,13 +95,13 @@ public class PandasAddMergeParametersCheck extends PythonSubscriptionCheck {
   private static void missingArguments(String fullyQualifiedName, SubscriptionContext ctx, CallExpression callExpression) {
     List<String> parameters = new ArrayList<>();
     if (argumentIsMissing(fullyQualifiedName, Parameters.HOW, callExpression.arguments())) {
-      parameters.add(Parameters.HOW.keyword);
+      parameters.add(Parameters.HOW.getKeyword());
     }
     if (argumentIsMissing(fullyQualifiedName, Parameters.ON, callExpression.arguments())) {
-      parameters.add(Parameters.ON.keyword);
+      parameters.add(Parameters.ON.getKeyword());
     }
     if (argumentIsMissing(fullyQualifiedName, Parameters.VALIDATE, callExpression.arguments())) {
-      parameters.add(Parameters.VALIDATE.keyword);
+      parameters.add(Parameters.VALIDATE.getKeyword());
     }
     if (!parameters.isEmpty()) {
       parameters.add(fullyQualifiedName.substring(fullyQualifiedName.lastIndexOf('.') + 1));
@@ -97,20 +112,20 @@ public class PandasAddMergeParametersCheck extends PythonSubscriptionCheck {
   private static boolean argumentIsMissing(String fullyQualfiedName, Parameters keyword, List<Argument> arguments) {
     switch (keyword) {
       case HOW:
-        return TreeUtils.nthArgumentOrKeyword(getPosition(fullyQualfiedName, Parameters.HOW), Parameters.HOW.keyword, arguments) == null;
+        return TreeUtils.nthArgumentOrKeyword(getPosition(fullyQualfiedName, Parameters.HOW), Parameters.HOW.getKeyword(), arguments) == null;
       case ON:
-        return TreeUtils.nthArgumentOrKeyword(getPosition(fullyQualfiedName, Parameters.ON), Parameters.ON.keyword, arguments) == null;
+        return TreeUtils.nthArgumentOrKeyword(getPosition(fullyQualfiedName, Parameters.ON), Parameters.ON.getKeyword(), arguments) == null;
       default: // case VALIDATE
-        return TreeUtils.nthArgumentOrKeyword(getPosition(fullyQualfiedName, Parameters.VALIDATE), Parameters.VALIDATE.keyword, arguments) == null;
+        return TreeUtils.nthArgumentOrKeyword(getPosition(fullyQualfiedName, Parameters.VALIDATE), Parameters.VALIDATE.getKeyword(), arguments) == null;
     }
   }
 
   private static int getPosition(String fullyQualifiedName, Parameters parameter) {
     if ("pandas.core.frame.DataFrame.join".equals(fullyQualifiedName)) {
-      return parameter.joinPosition;
+      return parameter.getJoinPosition();
     } else if ("pandas.core.frame.DataFrame.merge".equals(fullyQualifiedName)) {
-      return parameter.dataFrameMergePosition;
+      return parameter.getDataFrameMergePosition();
     }
-    return parameter.pandasMergePosition;
+    return parameter.getPandasMergePosition();
   }
 }

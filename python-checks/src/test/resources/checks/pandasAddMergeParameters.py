@@ -1,8 +1,8 @@
 def non_compliant_merge_1():
     import pandas as pd
 
-    age_df = pd.DataFrame({"user_id": [1, 2, 4], "age": [42, 45, 35]})
-    name_df = pd.DataFrame({"user_id": [1, 2, 3, 4], "name": ["a", "b", "c", "d"]})
+    age_df = pd.read_csv("age_csv.csv")
+    name_df = pd.read_csv("name_csv.csv")
 
     _ = age_df.merge(name_df)  # Noncompliant {{The 'how', 'on' and 'validate' parameters of the merge should be specified.}}
 
@@ -49,7 +49,7 @@ def non_compliant_merge_1():
 
 
 def non_compliant_2():
-    from pandas import DataFrame, merge, join
+    from pandas import DataFrame, merge
     age_df = DataFrame({"user_id": [1, 2, 4], "age": [42, 45, 35]})
     name_df = DataFrame({"user_id": [1, 2, 3, 4], "name": ["a", "b", "c", "d"]})
 
@@ -84,7 +84,6 @@ def compliant_1(xx):
 
     _ = xx.merge(name_df, on="user_id", how="right", validate="1:1")
 
-    # This is a FP.
     _ = pd.merge(age_df, name_df, "inner", "user_id", None, None, False, False, False, ('_x', '_y'), None, False, "1:1")
 
     _ = age_df.merge(name_df, "inner", "user_id", None, None, False, False, False, ('_x', '_y'), None, False, "1:1")
