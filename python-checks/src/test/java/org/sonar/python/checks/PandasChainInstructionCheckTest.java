@@ -25,7 +25,7 @@ import org.sonar.python.checks.utils.PythonCheckVerifier;
 class PandasChainInstructionCheckTest {
 
   @Test
-  void test() {
+  void test() { 
     PythonCheckVerifier.verify("src/test/resources/checks/pandasChainInstructionCheck.py", new PandasChainInstructionCheck());
   }
 

@@ -55,16 +55,15 @@ public class PandasChainInstructionCheck extends PythonSubscriptionCheck {
     context.registerSyntaxNodeConsumer(Tree.Kind.QUALIFIED_EXPR, this::checkChainedInstructions);
   }
 
-
   private void checkChainedInstructions(SubscriptionContext ctx) {
     QualifiedExpression expr = (QualifiedExpression) ctx.syntaxNode();
-    List<QualifiedExpression> chain = visitParent(expr, new ArrayList<>());
+    List<QualifiedExpression> chain = visitQualifier(expr, new ArrayList<>());
     if (chain.size() >= MAX_CHAIN_LENGTH && isValidPandasCall(chain)) {
       ctx.addIssue(chain.iterator().next(), MESSAGE);
     }
   }
 
-  private List<QualifiedExpression> visitParent(QualifiedExpression expr, List<QualifiedExpression> chain) {
+  private List<QualifiedExpression> visitQualifier(QualifiedExpression expr, List<QualifiedExpression> chain) {
     if (visited.contains(expr)) {
       return chain;
     }
@@ -72,20 +71,21 @@ public class PandasChainInstructionCheck extends PythonSubscriptionCheck {
     chain.add(expr);
 
     if (expr.qualifier().is(Tree.Kind.CALL_EXPR)) {
-      return visitCalleeParent((CallExpression) expr.qualifier(), chain);
+      return visitCalleeQualifier((CallExpression) expr.qualifier(), chain);
+    } else if (expr.qualifier().is(Tree.Kind.QUALIFIED_EXPR)) {
+      return visitQualifier((QualifiedExpression) expr.qualifier(), chain);
     } else if (expr.qualifier().is(Tree.Kind.SUBSCRIPTION)) {
       return ignoreSubscriptionAndGetCallExpr((SubscriptionExpression) expr.qualifier())
-        .map(callExpr -> visitCalleeParent(callExpr, chain))
+        .map(callExpr -> visitCalleeQualifier(callExpr, chain))
         .orElse(chain);
     }
     return chain;
   }
 
-
-  private List<QualifiedExpression> visitCalleeParent(CallExpression call, List<QualifiedExpression> chain) {
+  private List<QualifiedExpression> visitCalleeQualifier(CallExpression call, List<QualifiedExpression> chain) {
     return Optional.of(call.callee())
       .flatMap(TreeUtils.toOptionalInstanceOfMapper(QualifiedExpression.class))
-      .map(qe -> visitParent(qe, chain))
+      .map(qe -> visitQualifier(qe, chain))
       .orElse(chain);
   }
 
@@ -126,11 +126,17 @@ public class PandasChainInstructionCheck extends PythonSubscriptionCheck {
     return Optional.of(symbol)
       .filter(s -> s.is(Symbol.Kind.AMBIGUOUS))
       .map(AmbiguousSymbol.class::cast)
-      .map(s -> s.alternatives().stream().filter(a -> a.is(Symbol.Kind.FUNCTION))
+      .map(s -> s.alternatives().stream()
+        .filter(a -> a.is(Symbol.Kind.FUNCTION))
         .map(FunctionSymbol.class::cast)
         .map(FunctionSymbol::annotatedReturnTypeName)
-        .anyMatch(DATAFRAME_FQN::equals)
-      );
+        .anyMatch(DATAFRAME_FQN::equals))
+      .or(() -> Optional.of(symbol)
+        .filter(s -> s.is(Symbol.Kind.FUNCTION))
+        .map(FunctionSymbol.class::cast)
+        .map(FunctionSymbol.class::cast)
+        .map(FunctionSymbol::annotatedReturnTypeName)
+        .map(DATAFRAME_FQN::equals));
   }
 
 }
