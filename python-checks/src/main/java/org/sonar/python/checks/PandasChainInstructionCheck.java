@@ -45,6 +45,7 @@ public class PandasChainInstructionCheck extends PythonSubscriptionCheck {
   private static final int MAX_CHAIN_LENGTH = 5;
 
   private static final String DATAFRAME_FQN = "pandas.core.frame.DataFrame";
+
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.QUALIFIED_EXPR, this::checkChainedInstructions);
@@ -77,14 +78,6 @@ public class PandasChainInstructionCheck extends PythonSubscriptionCheck {
     return chain;
   }
 
-  private Optional<CallExpression> ignoreSubscriptionAndGetCallExpr(SubscriptionExpression qualifier) {
-    if (qualifier.object().is(Tree.Kind.CALL_EXPR)) {
-      return Optional.of((CallExpression) qualifier.object());
-    } else if (qualifier.object().is(Tree.Kind.SUBSCRIPTION)) {
-      return ignoreSubscriptionAndGetCallExpr((SubscriptionExpression) qualifier.object());
-    }
-    return Optional.empty();
-  }
 
   private List<QualifiedExpression> visitCalleeParent(CallExpression call, List<QualifiedExpression> chain) {
     return Optional.of(call.callee())
@@ -93,15 +86,24 @@ public class PandasChainInstructionCheck extends PythonSubscriptionCheck {
       .orElse(chain);
   }
 
-  private static boolean isValidPandasCall(List<QualifiedExpression> chain) {
-    QualifiedExpression qualifiedExpression = chain.get(chain.size() - 1);
+  private static Optional<CallExpression> ignoreSubscriptionAndGetCallExpr(SubscriptionExpression qualifier) {
+    if (qualifier.object().is(Tree.Kind.CALL_EXPR)) {
+      return Optional.of((CallExpression) qualifier.object());
+    } else if (qualifier.object().is(Tree.Kind.SUBSCRIPTION)) {
+      return ignoreSubscriptionAndGetCallExpr((SubscriptionExpression) qualifier.object());
+    }
+    return Optional.empty();
+  }
 
-    boolean isADataFrameMethodCall = Optional.ofNullable(qualifiedExpression.symbol())
+  private static boolean isValidPandasCall(List<QualifiedExpression> chain) {
+    QualifiedExpression firstQualifiedExpression = chain.get(chain.size() - 1);
+
+    boolean isADataFrameMethodCall = Optional.ofNullable(firstQualifiedExpression.symbol())
       .map(Symbol::fullyQualifiedName)
       .filter(fqn -> fqn.startsWith(DATAFRAME_FQN))
       .isPresent();
 
-    boolean isAFunctionReturningADataFrame = Optional.ofNullable(qualifiedExpression.symbol())
+    boolean isAFunctionReturningADataFrame = Optional.ofNullable(firstQualifiedExpression.symbol())
       .flatMap(PandasChainInstructionCheck::isReturnTypeADataFrame)
       .orElse(false);
 
@@ -112,12 +114,12 @@ public class PandasChainInstructionCheck extends PythonSubscriptionCheck {
       .filter(Objects::nonNull)
       .noneMatch((DATAFRAME_FQN + ".pipe")::equals);
 
-    boolean isADataFrame = "DataFrame".equals(InferredTypes.typeName(qualifiedExpression.qualifier().type()));
+    boolean isADataFrame = "DataFrame".equals(InferredTypes.typeName(firstQualifiedExpression.qualifier().type()));
 
     return (isADataFrameMethodCall || isAFunctionReturningADataFrame || isADataFrame) && doesNotContainACallToPipe;
   }
 
-  private static Optional<Boolean> isReturnTypeADataFrame(Symbol symbol){
+  private static Optional<Boolean> isReturnTypeADataFrame(Symbol symbol) {
     return Optional.of(symbol)
       .filter(s -> s.is(Symbol.Kind.AMBIGUOUS))
       .map(AmbiguousSymbol.class::cast)
