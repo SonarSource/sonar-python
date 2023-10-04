@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
@@ -46,12 +47,14 @@ public class PandasChainInstructionCheck extends PythonSubscriptionCheck {
 
   private static final String DATAFRAME_FQN = "pandas.core.frame.DataFrame";
 
+  private final Set<QualifiedExpression> visited = new HashSet<>();
+
   @Override
   public void initialize(Context context) {
+    context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, ctx -> visited.clear());
     context.registerSyntaxNodeConsumer(Tree.Kind.QUALIFIED_EXPR, this::checkChainedInstructions);
   }
 
-  private final Set<QualifiedExpression> visited = new HashSet<>();
 
   private void checkChainedInstructions(SubscriptionContext ctx) {
     QualifiedExpression expr = (QualifiedExpression) ctx.syntaxNode();
