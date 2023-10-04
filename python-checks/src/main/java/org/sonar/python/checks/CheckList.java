@@ -282,6 +282,7 @@ public final class CheckList {
       OverwrittenCollectionEntryCheck.class,
       PandasAddMergeParametersCheck.class,
       PandasDataFrameToNumpyCheck.class,
+      PandasModifyInPlaceCheck.class,
       PandasReadNoDataTypeCheck.class,
       ParsingErrorCheck.class,
       PredictableSaltCheck.class,
