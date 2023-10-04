@@ -19,21 +19,24 @@
  */
 package org.sonar.python.checks;
 
-import java.lang.management.OperatingSystemMXBean;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
-import javax.swing.text.html.Option;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
+import org.sonar.plugins.python.api.symbols.AmbiguousSymbol;
+import org.sonar.plugins.python.api.symbols.FunctionSymbol;
+import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.SubscriptionExpression;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.tree.TreeUtils;
+import org.sonar.python.types.InferredTypes;
 
 @Rule(key = "S6742")
 public class PandasChainInstructionCheck extends PythonSubscriptionCheck {
@@ -41,6 +44,7 @@ public class PandasChainInstructionCheck extends PythonSubscriptionCheck {
   private static final String MESSAGE = "Refactor this long chain of instructions with pandas.pipe";
   private static final int MAX_CHAIN_LENGTH = 5;
 
+  private static final String DATAFRAME_FQN = "pandas.core.frame.DataFrame";
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.QUALIFIED_EXPR, this::checkChainedInstructions);
@@ -51,7 +55,7 @@ public class PandasChainInstructionCheck extends PythonSubscriptionCheck {
   private void checkChainedInstructions(SubscriptionContext ctx) {
     QualifiedExpression expr = (QualifiedExpression) ctx.syntaxNode();
     List<QualifiedExpression> chain = visitParent(expr, new ArrayList<>());
-    if (chain.size() >= MAX_CHAIN_LENGTH && isPandasCall(chain)) {
+    if (chain.size() >= MAX_CHAIN_LENGTH && isValidPandasCall(chain)) {
       ctx.addIssue(chain.iterator().next(), MESSAGE);
     }
   }
@@ -89,12 +93,39 @@ public class PandasChainInstructionCheck extends PythonSubscriptionCheck {
       .orElse(chain);
   }
 
-  private static boolean isPandasCall(List<QualifiedExpression> chain) {
+  private static boolean isValidPandasCall(List<QualifiedExpression> chain) {
     QualifiedExpression qualifiedExpression = chain.get(chain.size() - 1);
 
-    return chain.stream().noneMatch(qe -> "pipe".equals(qe.name().name()));
-    //return qualifiedExpression.qualifier().type().mustBeOrExtend("pandas.core.frame.Dataframe");
-    //return Optional.ofNullable(qualifiedExpression.symbol()).map(Symbol::fullyQualifiedName).filter(fqn -> fqn.startsWith("pandas")).isPresent()
+    boolean isADataFrameMethodCall = Optional.ofNullable(qualifiedExpression.symbol())
+      .map(Symbol::fullyQualifiedName)
+      .filter(fqn -> fqn.startsWith(DATAFRAME_FQN))
+      .isPresent();
+
+    boolean isAFunctionReturningADataFrame = Optional.ofNullable(qualifiedExpression.symbol())
+      .flatMap(PandasChainInstructionCheck::isReturnTypeADataFrame)
+      .orElse(false);
+
+    boolean doesNotContainACallToPipe = chain.stream()
+      .map(QualifiedExpression::symbol)
+      .filter(Objects::nonNull)
+      .map(Symbol::fullyQualifiedName)
+      .filter(Objects::nonNull)
+      .noneMatch((DATAFRAME_FQN + ".pipe")::equals);
+
+    boolean isADataFrame = "DataFrame".equals(InferredTypes.typeName(qualifiedExpression.qualifier().type()));
+
+    return (isADataFrameMethodCall || isAFunctionReturningADataFrame || isADataFrame) && doesNotContainACallToPipe;
+  }
+
+  private static Optional<Boolean> isReturnTypeADataFrame(Symbol symbol){
+    return Optional.of(symbol)
+      .filter(s -> s.is(Symbol.Kind.AMBIGUOUS))
+      .map(AmbiguousSymbol.class::cast)
+      .map(s -> s.alternatives().stream().filter(a -> a.is(Symbol.Kind.FUNCTION))
+        .map(FunctionSymbol.class::cast)
+        .map(FunctionSymbol::annotatedReturnTypeName)
+        .anyMatch(DATAFRAME_FQN::equals)
+      );
   }
 
 }
