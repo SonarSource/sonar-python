@@ -21,6 +21,7 @@ package org.sonar.python.checks;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import org.sonar.check.Rule;
@@ -74,10 +75,14 @@ public class PandasAddMergeParametersCheck extends PythonSubscriptionCheck {
     "pandas.core.reshape.merge.merge",
     "pandas.core.frame.DataFrame.join");
 
-  private static final List<String> MESSAGES = List.of(
-    "Specify the \"%s\" parameter of this %s.",
-    "Specify the \"%s\" and \"%s\" parameters of this %s.",
-    "Specify the \"%s\", \"%s\" and \"%s\" parameters of this %s.");
+  private static final Map<Integer, String> MESSAGES = Map.of(
+    1, "Specify the \"%s\" parameter of this %s.",
+    2, "Specify the \"%s\" and \"%s\" parameters of this %s.",
+    3, "Specify the \"%s\", \"%s\" and \"%s\" parameters of this %s.");
+  // private static final List<String> MESSAGES = List.of(
+  // "Specify the \"%s\" parameter of this %s.",
+  // "Specify the \"%s\" and \"%s\" parameters of this %s.",
+  // "Specify the \"%s\", \"%s\" and \"%s\" parameters of this %s.");
 
   @Override
   public void initialize(Context context) {
@@ -104,8 +109,7 @@ public class PandasAddMergeParametersCheck extends PythonSubscriptionCheck {
       parameters.add(Keywords.VALIDATE.getKeyword());
     }
     if (!parameters.isEmpty()) {
-      parameters.add(fullyQualifiedName.substring(fullyQualifiedName.lastIndexOf('.') + 1));
-      ctx.addIssue(callExpression, String.format(MESSAGES.get(parameters.size() - 2), parameters.toArray()));
+      ctx.addIssue(callExpression, generateMessage(MESSAGES.get(numberOfMissingArguments(parameters)), parameters, fullyQualifiedName));
     }
   }
 
@@ -122,5 +126,14 @@ public class PandasAddMergeParametersCheck extends PythonSubscriptionCheck {
       return parameter.getDataFrameMergePosition();
     }
     return parameter.getPandasMergePosition();
+  }
+
+  private static String generateMessage(String message, List<String> missingKeywords, String functionName) {
+    missingKeywords.add(functionName.substring(functionName.lastIndexOf('.') + 1));
+    return String.format(message, missingKeywords.toArray());
+  }
+
+  private static int numberOfMissingArguments(List<String> keywords) {
+    return keywords.size();
   }
 }
