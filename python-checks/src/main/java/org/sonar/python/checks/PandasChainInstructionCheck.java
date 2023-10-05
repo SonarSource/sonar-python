@@ -134,7 +134,6 @@ public class PandasChainInstructionCheck extends PythonSubscriptionCheck {
       .or(() -> Optional.of(symbol)
         .filter(s -> s.is(Symbol.Kind.FUNCTION))
         .map(FunctionSymbol.class::cast)
-        .map(FunctionSymbol.class::cast)
         .map(FunctionSymbol::annotatedReturnTypeName)
         .map(DATAFRAME_FQN::equals));
   }
