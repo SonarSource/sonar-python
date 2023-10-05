@@ -75,9 +75,9 @@ public class PandasAddMergeParametersCheck extends PythonSubscriptionCheck {
     "pandas.core.frame.DataFrame.join");
 
   private static final List<String> MESSAGES = List.of(
-    "The '%s' parameter of the %s should be specified.",
-    "The '%s' and '%s' parameters of the %s should be specified.",
-    "The '%s', '%s' and '%s' parameters of the %s should be specified.");
+    "Specify the \"%s\" parameter of this %s.",
+    "Specify the \"%s\" and \"%s\" parameters of this %s.",
+    "Specify the \"%s\", \"%s\" and \"%s\" parameters of this %s.");
 
   @Override
   public void initialize(Context context) {
