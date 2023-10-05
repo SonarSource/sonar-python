@@ -115,11 +115,11 @@ public class PandasAddMergeParametersCheck extends PythonSubscriptionCheck {
 
   private static boolean argumentIsMissing(String fullyQualfiedName, Keywords keyword, List<Argument> arguments) {
     return Optional.of(keyword)
-      .map(kw -> TreeUtils.nthArgumentOrKeyword(getPosition(fullyQualfiedName, kw), kw.getKeyword(), arguments))
+      .map(kw -> TreeUtils.nthArgumentOrKeyword(getArgumentPosition(fullyQualfiedName, kw), kw.getKeyword(), arguments))
       .isEmpty();
   }
 
-  private static int getPosition(String fullyQualifiedName, Keywords parameter) {
+  private static int getArgumentPosition(String fullyQualifiedName, Keywords parameter) {
     if ("pandas.core.frame.DataFrame.join".equals(fullyQualifiedName)) {
       return parameter.getJoinPosition();
     } else if ("pandas.core.frame.DataFrame.merge".equals(fullyQualifiedName)) {
