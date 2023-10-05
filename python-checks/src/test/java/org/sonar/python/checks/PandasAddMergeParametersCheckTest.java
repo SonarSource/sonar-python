@@ -20,11 +20,57 @@
 package org.sonar.python.checks;
 
 import org.junit.jupiter.api.Test;
+import org.sonar.python.checks.quickfix.PythonQuickFixVerifier;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 class PandasAddMergeParametersCheckTest {
+  public static final PandasAddMergeParametersCheck CHECK = new PandasAddMergeParametersCheck();
+
   @Test
   void test() {
-    PythonCheckVerifier.verify("src/test/resources/checks/pandasAddMergeParameters.py", new PandasAddMergeParametersCheck());
+    PythonCheckVerifier.verify("src/test/resources/checks/pandasAddMergeParameters.py", CHECK);
   }
+
+  @Test
+  void quickfix_test_1() {
+    final String non_compliant = "def non_compliant_merge_1():\n" +
+      "    import pandas as pd\n" +
+      "\n" +
+      "    age_df = pd.read_csv(\"age_csv.csv\")\n" +
+      "    name_df = pd.read_csv(\"name_csv.csv\")\n" +
+      "\n" +
+      "    _ = age_df.merge(name_df)";
+
+    final String compliant = "def non_compliant_merge_1():\n" +
+      "    import pandas as pd\n" +
+      "\n" +
+      "    age_df = pd.read_csv(\"age_csv.csv\")\n" +
+      "    name_df = pd.read_csv(\"name_csv.csv\")\n" +
+      "\n" +
+      "    _ = age_df.merge(name_df, how=\"left\", on=None, validate=None)";
+    PythonQuickFixVerifier.verify(CHECK, non_compliant, compliant);
+
+  }
+
+  @Test
+  void quickfix_test_2() {
+    final String non_compliant = "def non_compliant_merge_1():\n" +
+      "    import pandas as pd\n" +
+      "\n" +
+      "    age_df = pd.read_csv(\"age_csv.csv\")\n" +
+      "    name_df = pd.read_csv(\"name_csv.csv\")\n" +
+      "\n" +
+      "    _ = age_df.merge(name_df, on=\"user_id\")";
+
+    final String compliant = "def non_compliant_merge_1():\n" +
+      "    import pandas as pd\n" +
+      "\n" +
+      "    age_df = pd.read_csv(\"age_csv.csv\")\n" +
+      "    name_df = pd.read_csv(\"name_csv.csv\")\n" +
+      "\n" +
+      "    _ = age_df.merge(name_df, on=\"user_id\", how=\"left\", validate=None)";
+
+    PythonQuickFixVerifier.verify(CHECK, non_compliant, compliant);
+  }
+
 }
