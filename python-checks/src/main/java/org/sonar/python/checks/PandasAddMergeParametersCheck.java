@@ -45,28 +45,28 @@ public class PandasAddMergeParametersCheck extends PythonSubscriptionCheck {
       return keyword;
     }
 
-    public int getJoinPosition() {
-      return joinPosition;
+    public int getPositionInJoin() {
+      return positionInJoin;
     }
 
-    public int getDataFrameMergePosition() {
-      return dataFrameMergePosition;
+    public int getPositionInDataFrameMerge() {
+      return positionInDataFrameMerge;
     }
 
-    public int getPandasMergePosition() {
-      return pandasMergePosition;
+    public int getPositionInPandasMerge() {
+      return positionInPandasMerge;
     }
 
     final String keyword;
-    final int joinPosition;
-    final int dataFrameMergePosition;
-    final int pandasMergePosition;
+    final int positionInJoin;
+    final int positionInDataFrameMerge;
+    final int positionInPandasMerge;
 
-    Keywords(String keyword, int joinPosition, int dataFrameMergePosition, int pandasMergePosition) {
+    Keywords(String keyword, int positionInJoin, int positionInDataFrameMerge, int positionInPandasMerge) {
       this.keyword = keyword;
-      this.joinPosition = joinPosition;
-      this.dataFrameMergePosition = dataFrameMergePosition;
-      this.pandasMergePosition = pandasMergePosition;
+      this.positionInJoin = positionInJoin;
+      this.positionInDataFrameMerge = positionInDataFrameMerge;
+      this.positionInPandasMerge = positionInPandasMerge;
     }
   }
 
@@ -121,11 +121,11 @@ public class PandasAddMergeParametersCheck extends PythonSubscriptionCheck {
 
   private static int getArgumentPosition(String fullyQualifiedName, Keywords parameter) {
     if ("pandas.core.frame.DataFrame.join".equals(fullyQualifiedName)) {
-      return parameter.getJoinPosition();
+      return parameter.getPositionInJoin();
     } else if ("pandas.core.frame.DataFrame.merge".equals(fullyQualifiedName)) {
-      return parameter.getDataFrameMergePosition();
+      return parameter.getPositionInDataFrameMerge();
     }
-    return parameter.getPandasMergePosition();
+    return parameter.getPositionInPandasMerge();
   }
 
   private static String generateMessage(String message, List<String> missingKeywords, String functionName) {
