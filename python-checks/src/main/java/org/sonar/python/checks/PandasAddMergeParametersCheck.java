@@ -99,13 +99,13 @@ public class PandasAddMergeParametersCheck extends PythonSubscriptionCheck {
 
   private static void missingArguments(String fullyQualifiedName, SubscriptionContext ctx, CallExpression callExpression) {
     List<String> parameters = new ArrayList<>();
-    if (argumentIsMissing(fullyQualifiedName, Keywords.HOW, callExpression.arguments())) {
+    if (isArgumentMissing(fullyQualifiedName, Keywords.HOW, callExpression.arguments())) {
       parameters.add(Keywords.HOW.getKeyword());
     }
-    if (argumentIsMissing(fullyQualifiedName, Keywords.ON, callExpression.arguments())) {
+    if (isArgumentMissing(fullyQualifiedName, Keywords.ON, callExpression.arguments())) {
       parameters.add(Keywords.ON.getKeyword());
     }
-    if (argumentIsMissing(fullyQualifiedName, Keywords.VALIDATE, callExpression.arguments())) {
+    if (isArgumentMissing(fullyQualifiedName, Keywords.VALIDATE, callExpression.arguments())) {
       parameters.add(Keywords.VALIDATE.getKeyword());
     }
     if (!parameters.isEmpty()) {
@@ -113,7 +113,7 @@ public class PandasAddMergeParametersCheck extends PythonSubscriptionCheck {
     }
   }
 
-  private static boolean argumentIsMissing(String fullyQualfiedName, Keywords keyword, List<Argument> arguments) {
+  private static boolean isArgumentMissing(String fullyQualfiedName, Keywords keyword, List<Argument> arguments) {
     return Optional.of(keyword)
       .map(kw -> TreeUtils.nthArgumentOrKeyword(getArgumentPosition(fullyQualfiedName, kw), kw.getKeyword(), arguments))
       .isEmpty();
