@@ -23,14 +23,19 @@ import java.util.Optional;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
+import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.quickfix.TextEditUtils;
 
 @Rule(key = "S6741")
 public class PandasDataFrameToNumpyCheck extends PythonSubscriptionCheck {
 
+  private static final String DATAFRAME_VALUES_FQN = "pandas.core.frame.DataFrame.values";
   private static final String MESSAGE = "Do not use \"DataFrame.values\".";
+  private static final String QUICK_FIX_MESSAGE = "Replace this with a call to DataFrame.to_numpy()";
+
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.QUALIFIED_EXPR, this::checkForDataFrameValues);
@@ -46,7 +51,12 @@ public class PandasDataFrameToNumpyCheck extends PythonSubscriptionCheck {
     expr.qualifier().type()
       .resolveMember("values")
       .map(Symbol::fullyQualifiedName)
-      .filter("pandas.core.frame.DataFrame.values"::equals)
-      .ifPresent(str -> ctx.addIssue(expr.name(), MESSAGE));
+      .filter(DATAFRAME_VALUES_FQN::equals)
+      .ifPresent(str -> {
+        PreciseIssue issue = ctx.addIssue(expr.name(), MESSAGE);
+        issue.addQuickFix(PythonQuickFix.newQuickFix(QUICK_FIX_MESSAGE)
+          .addTextEdit(TextEditUtils.replace(expr.name(), "to_numpy()"))
+          .build());
+      });
   }
 }
