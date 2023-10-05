@@ -21,12 +21,14 @@ package org.sonar.python.checks;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.tree.TreeUtils;
@@ -34,12 +36,49 @@ import org.sonar.python.tree.TreeUtils;
 @Rule(key = "S6735")
 public class PandasAddMergeParametersCheck extends PythonSubscriptionCheck {
 
-  private static final List<String> messages = List.of(
-    "The '%s' parameter of the merge should be specified.",
-    "The '%s' and '%s' parameters of the merge should be specified.",
-    "The '%s', '%s' and '%s' parameters of the merge should be specified.");
+  enum Keywords {
+    HOW("how", 2, 1, 2),
+    ON("on", 1, 2, 3),
+    VALIDATE("validate", 6, 11, 12);
 
-  private static final Set<String> MERGE_METHODS = Set.of("pandas.merge", "pandas.core.reshape.merge.merge");
+    public String getKeyword() {
+      return keyword;
+    }
+
+    public int getPositionInJoin() {
+      return positionInJoin;
+    }
+
+    public int getPositionInDataFrameMerge() {
+      return positionInDataFrameMerge;
+    }
+
+    public int getPositionInPandasMerge() {
+      return positionInPandasMerge;
+    }
+
+    final String keyword;
+    final int positionInJoin;
+    final int positionInDataFrameMerge;
+    final int positionInPandasMerge;
+
+    Keywords(String keyword, int positionInJoin, int positionInDataFrameMerge, int positionInPandasMerge) {
+      this.keyword = keyword;
+      this.positionInJoin = positionInJoin;
+      this.positionInDataFrameMerge = positionInDataFrameMerge;
+      this.positionInPandasMerge = positionInPandasMerge;
+    }
+  }
+
+  private static final Set<String> METHODS = Set.of(
+    "pandas.core.frame.DataFrame.merge",
+    "pandas.core.reshape.merge.merge",
+    "pandas.core.frame.DataFrame.join");
+
+  private static final Map<Integer, String> MESSAGES = Map.of(
+    1, "Specify the \"%s\" parameter of this %s.",
+    2, "Specify the \"%s\" and \"%s\" parameters of this %s.",
+    3, "Specify the \"%s\", \"%s\" and \"%s\" parameters of this %s.");
 
   @Override
   public void initialize(Context context) {
@@ -50,24 +89,47 @@ public class PandasAddMergeParametersCheck extends PythonSubscriptionCheck {
     CallExpression callExpression = (CallExpression) ctx.syntaxNode();
     Optional.ofNullable(callExpression.calleeSymbol())
       .map(Symbol::fullyQualifiedName)
-      .filter(MERGE_METHODS::contains)
-      .ifPresent(fqn -> missingArguments(ctx, callExpression));
+      .filter(METHODS::contains)
+      .ifPresent(fqn -> missingArguments(fqn, ctx, callExpression));
   }
 
-  private static void missingArguments(SubscriptionContext ctx, CallExpression callExpression) {
+  private static void missingArguments(String fullyQualifiedName, SubscriptionContext ctx, CallExpression callExpression) {
     List<String> parameters = new ArrayList<>();
-    if (TreeUtils.argumentByKeyword("how", callExpression.arguments()) == null) {
-      parameters.add("how");
+    if (isArgumentMissing(fullyQualifiedName, Keywords.HOW, callExpression.arguments())) {
+      parameters.add(Keywords.HOW.getKeyword());
     }
-    if (TreeUtils.argumentByKeyword("on", callExpression.arguments()) == null) {
-      parameters.add("on");
+    if (isArgumentMissing(fullyQualifiedName, Keywords.ON, callExpression.arguments())) {
+      parameters.add(Keywords.ON.getKeyword());
     }
-    if (TreeUtils.argumentByKeyword("validate", callExpression.arguments()) == null) {
-      parameters.add("validate");
+    if (isArgumentMissing(fullyQualifiedName, Keywords.VALIDATE, callExpression.arguments())) {
+      parameters.add(Keywords.VALIDATE.getKeyword());
     }
     if (!parameters.isEmpty()) {
-      ctx.addIssue(callExpression, String.format(messages.get(parameters.size() - 1), parameters.toArray()));
+      ctx.addIssue(callExpression, generateMessage(MESSAGES.get(numberOfMissingArguments(parameters)), parameters, fullyQualifiedName));
     }
+  }
 
+  private static boolean isArgumentMissing(String fullyQualfiedName, Keywords keyword, List<Argument> arguments) {
+    return Optional.of(keyword)
+      .map(kw -> TreeUtils.nthArgumentOrKeyword(getArgumentPosition(fullyQualfiedName, kw), kw.getKeyword(), arguments))
+      .isEmpty();
+  }
+
+  private static int getArgumentPosition(String fullyQualifiedName, Keywords parameter) {
+    if ("pandas.core.frame.DataFrame.join".equals(fullyQualifiedName)) {
+      return parameter.getPositionInJoin();
+    } else if ("pandas.core.frame.DataFrame.merge".equals(fullyQualifiedName)) {
+      return parameter.getPositionInDataFrameMerge();
+    }
+    return parameter.getPositionInPandasMerge();
+  }
+
+  private static String generateMessage(String message, List<String> missingKeywords, String functionName) {
+    missingKeywords.add(functionName.substring(functionName.lastIndexOf('.') + 1));
+    return String.format(message, missingKeywords.toArray());
+  }
+
+  private static int numberOfMissingArguments(List<String> keywords) {
+    return keywords.size();
   }
 }
