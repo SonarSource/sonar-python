@@ -79,10 +79,6 @@ public class PandasAddMergeParametersCheck extends PythonSubscriptionCheck {
     1, "Specify the \"%s\" parameter of this %s.",
     2, "Specify the \"%s\" and \"%s\" parameters of this %s.",
     3, "Specify the \"%s\", \"%s\" and \"%s\" parameters of this %s.");
-  // private static final List<String> MESSAGES = List.of(
-  // "Specify the \"%s\" parameter of this %s.",
-  // "Specify the \"%s\" and \"%s\" parameters of this %s.",
-  // "Specify the \"%s\", \"%s\" and \"%s\" parameters of this %s.");
 
   @Override
   public void initialize(Context context) {
