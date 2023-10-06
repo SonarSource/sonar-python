@@ -47,9 +47,9 @@ class PandasAddMergeParametersCheckTest {
       "    age_df = pd.read_csv(\"age_csv.csv\")\n" +
       "    name_df = pd.read_csv(\"name_csv.csv\")\n" +
       "\n" +
-      "    _ = age_df.merge(name_df, how=\"left\", on=None, validate=None)";
+      "    _ = age_df.merge(name_df, how=\"left\", on=None, validate=\"many_to_many\")";
     PythonQuickFixVerifier.verify(CHECK, non_compliant, compliant);
-
+    PythonQuickFixVerifier.verifyQuickFixMessages(CHECK, non_compliant, "Add the missing parameters");
   }
 
   @Test
@@ -68,9 +68,39 @@ class PandasAddMergeParametersCheckTest {
       "    age_df = pd.read_csv(\"age_csv.csv\")\n" +
       "    name_df = pd.read_csv(\"name_csv.csv\")\n" +
       "\n" +
-      "    _ = age_df.merge(name_df, on=\"user_id\", how=\"left\", validate=None)";
+      "    _ = age_df.merge(name_df, on=\"user_id\", how=\"left\", validate=\"many_to_many\")";
 
     PythonQuickFixVerifier.verify(CHECK, non_compliant, compliant);
+    PythonQuickFixVerifier.verifyQuickFixMessages(CHECK, non_compliant, "Add the missing parameters");
+  }
+
+
+  @Test
+  void quickfix_test_3() {
+    final String non_compliant = "def non_compliant_merge_1():\n" +
+      "    import pandas as pd\n" +
+      "\n" +
+      "    age_df = pd.read_csv(\"age_csv.csv\")\n" +
+      "    name_df = pd.read_csv(\"name_csv.csv\")\n" +
+      "\n" +
+      "    _ = pd.merge(\n" +
+      "          age_df, \n" +
+      "          name_df, \n" +
+      "          on=\"user_id\")";
+
+    final String compliant = "def non_compliant_merge_1():\n" +
+      "    import pandas as pd\n" +
+      "\n" +
+      "    age_df = pd.read_csv(\"age_csv.csv\")\n" +
+      "    name_df = pd.read_csv(\"name_csv.csv\")\n" +
+      "\n" +
+      "    _ = pd.merge(\n" +
+      "          age_df, \n" +
+      "          name_df, \n" +
+      "          on=\"user_id\", how=\"inner\", validate=\"many_to_many\")";
+
+    PythonQuickFixVerifier.verify(CHECK, non_compliant, compliant);
+    PythonQuickFixVerifier.verifyQuickFixMessages(CHECK, non_compliant, "Add the missing parameters");
   }
 
 }

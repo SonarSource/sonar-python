@@ -42,7 +42,7 @@ public class PandasAddMergeParametersCheck extends PythonSubscriptionCheck {
   enum Keywords {
     HOW("how", 2, 1, 2, "\"inner\"", "\"left\""),
     ON("on", 1, 2, 3, "None", "None"),
-    VALIDATE("validate", 6, 11, 12, "None", "None");
+    VALIDATE("validate", 6, 11, 12, "\"many_to_many\"", "\"many_to_many\"");
 
     public String getKeyword() {
       return keyword;
@@ -109,7 +109,7 @@ public class PandasAddMergeParametersCheck extends PythonSubscriptionCheck {
     2, "Specify the \"%s\" and \"%s\" parameters of this %s.",
     3, "Specify the \"%s\", \"%s\" and \"%s\" parameters of this %s.");
 
-  private static final String QUICKFIX_MESSAGE = "Insert default values for the missing parameters.";
+  private static final String QUICKFIX_MESSAGE = "Add the missing parameters";
 
   @Override
   public void initialize(Context context) {
