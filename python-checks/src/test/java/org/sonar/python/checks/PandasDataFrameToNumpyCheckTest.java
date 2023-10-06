@@ -84,17 +84,17 @@ class PandasDataFrameToNumpyCheckTest {
       "    import pandas as pd\n" +
       "\n" +
       "    my_df = pd.read_csv(\"some_csv.csv\")\n" +
-      "    my_df.values";
+      "    my_df.values.astype(str)";
     final String compliant = "def dataframe_from_read_csv():\n" +
       "    import pandas as pd\n" +
       "\n" +
       "    my_df = pd.read_csv(\"some_csv.csv\")\n" +
-      "    my_df.to_numpy()";
+      "    my_df.to_numpy().astype(str)";
     performVerification(non_compliant, compliant);
   }
 
   private void performVerification(String non_compliant, String compliant) {
     PythonQuickFixVerifier.verify(check, non_compliant, compliant);
-    PythonQuickFixVerifier.verifyQuickFixMessages(check, non_compliant, QUICK_FIX_MESSAGE);
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, non_compliant, "Replace with DataFrame.to_numpy()");
   }
 }
