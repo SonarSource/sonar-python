@@ -47,13 +47,34 @@ class PandasAddMergeParametersCheckTest {
       "    age_df = pd.read_csv(\"age_csv.csv\")\n" +
       "    name_df = pd.read_csv(\"name_csv.csv\")\n" +
       "\n" +
-      "    _ = age_df.merge(name_df, how=\"left\", on=None, validate=\"many_to_many\")";
+      "    _ = age_df.merge(name_df, how=\"inner\", on=None, validate=\"many_to_many\")";
     PythonQuickFixVerifier.verify(CHECK, non_compliant, compliant);
     PythonQuickFixVerifier.verifyQuickFixMessages(CHECK, non_compliant, "Add the missing parameters");
   }
 
   @Test
   void quickfix_test_2() {
+    final String non_compliant = "def non_compliant_merge_1():\n" +
+      "    import pandas as pd\n" +
+      "\n" +
+      "    age_df = pd.read_csv(\"age_csv.csv\")\n" +
+      "    name_df = pd.read_csv(\"name_csv.csv\")\n" +
+      "\n" +
+      "    _ = age_df.join(name_df)";
+
+    final String compliant = "def non_compliant_merge_1():\n" +
+      "    import pandas as pd\n" +
+      "\n" +
+      "    age_df = pd.read_csv(\"age_csv.csv\")\n" +
+      "    name_df = pd.read_csv(\"name_csv.csv\")\n" +
+      "\n" +
+      "    _ = age_df.join(name_df, how=\"left\", on=None, validate=\"many_to_many\")";
+    PythonQuickFixVerifier.verify(CHECK, non_compliant, compliant);
+    PythonQuickFixVerifier.verifyQuickFixMessages(CHECK, non_compliant, "Add the missing parameters");
+  }
+
+  @Test
+  void quickfix_test_3() {
     final String non_compliant = "def non_compliant_merge_1():\n" +
       "    import pandas as pd\n" +
       "\n" +
@@ -68,7 +89,7 @@ class PandasAddMergeParametersCheckTest {
       "    age_df = pd.read_csv(\"age_csv.csv\")\n" +
       "    name_df = pd.read_csv(\"name_csv.csv\")\n" +
       "\n" +
-      "    _ = age_df.merge(name_df, on=\"user_id\", how=\"left\", validate=\"many_to_many\")";
+      "    _ = age_df.merge(name_df, on=\"user_id\", how=\"inner\", validate=\"many_to_many\")";
 
     PythonQuickFixVerifier.verify(CHECK, non_compliant, compliant);
     PythonQuickFixVerifier.verifyQuickFixMessages(CHECK, non_compliant, "Add the missing parameters");
@@ -76,7 +97,7 @@ class PandasAddMergeParametersCheckTest {
 
 
   @Test
-  void quickfix_test_3() {
+  void quickfix_test_4() {
     final String non_compliant = "def non_compliant_merge_1():\n" +
       "    import pandas as pd\n" +
       "\n" +

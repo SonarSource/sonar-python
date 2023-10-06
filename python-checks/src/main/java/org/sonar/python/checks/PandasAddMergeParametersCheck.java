@@ -95,8 +95,8 @@ public class PandasAddMergeParametersCheck extends PythonSubscriptionCheck {
     }
   }
 
-  private static final String DATAFRAME_JOIN_FQN = "pandas.core.frame.DataFrame.merge";
-  private static final String DATAFRAME_MERGE_FQN = "pandas.core.frame.DataFrame.join";
+  private static final String DATAFRAME_JOIN_FQN = "pandas.core.frame.DataFrame.join";
+  private static final String DATAFRAME_MERGE_FQN = "pandas.core.frame.DataFrame.merge";
   private static final String PANDAS_MERGE_FQN = "pandas.core.reshape.merge.merge";
 
   private static final Set<String> METHODS = Set.of(
