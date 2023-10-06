@@ -27,8 +27,6 @@ class PandasDataFrameToNumpyCheckTest {
 
   PandasDataFrameToNumpyCheck check = new PandasDataFrameToNumpyCheck();
 
-  private static final String QUICK_FIX_MESSAGE = "Replace this with a call to DataFrame.to_numpy()";
-
   @Test
   void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/pandasDataFrameToNumpy.py", check);

@@ -24,22 +24,25 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
+import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.quickfix.TextEditUtils;
 import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S6735")
 public class PandasAddMergeParametersCheck extends PythonSubscriptionCheck {
 
   enum Keywords {
-    HOW("how", 2, 1, 2),
-    ON("on", 1, 2, 3),
-    VALIDATE("validate", 6, 11, 12);
+    HOW("how", 2, 1, 2, "\"inner\"", "\"left\""),
+    ON("on", 1, 2, 3, "None", "None"),
+    VALIDATE("validate", 6, 11, 12, "\"many_to_many\"", "\"many_to_many\"");
 
     public String getKeyword() {
       return keyword;
@@ -62,23 +65,51 @@ public class PandasAddMergeParametersCheck extends PythonSubscriptionCheck {
     final int positionInDataFrameMerge;
     final int positionInPandasMerge;
 
-    Keywords(String keyword, int positionInJoin, int positionInDataFrameMerge, int positionInPandasMerge) {
+    final String defaultValueMerge;
+    final String defaultValueJoin;
+
+    String getReplacementText(String fullyQualifiedName) {
+      if (DATAFRAME_JOIN_FQN.equals(fullyQualifiedName)) {
+        return String.format("%s=%s", this.keyword, this.defaultValueJoin);
+      } else {
+        return String.format("%s=%s", this.keyword, this.defaultValueMerge);
+      }
+    }
+
+    int getArgumentPosition(String fullyQualifiedName) {
+      if (DATAFRAME_JOIN_FQN.equals(fullyQualifiedName)) {
+        return this.getPositionInJoin();
+      } else if (DATAFRAME_MERGE_FQN.equals(fullyQualifiedName)) {
+        return this.getPositionInDataFrameMerge();
+      }
+      return this.getPositionInPandasMerge();
+    }
+
+    Keywords(String keyword, int positionInJoin, int positionInDataFrameMerge, int positionInPandasMerge, String defaultValueMerge, String defaultValueJoin) {
       this.keyword = keyword;
       this.positionInJoin = positionInJoin;
       this.positionInDataFrameMerge = positionInDataFrameMerge;
       this.positionInPandasMerge = positionInPandasMerge;
+      this.defaultValueMerge = defaultValueMerge;
+      this.defaultValueJoin = defaultValueJoin;
     }
   }
 
+  private static final String DATAFRAME_JOIN_FQN = "pandas.core.frame.DataFrame.merge";
+  private static final String DATAFRAME_MERGE_FQN = "pandas.core.frame.DataFrame.join";
+  private static final String PANDAS_MERGE_FQN = "pandas.core.reshape.merge.merge";
+
   private static final Set<String> METHODS = Set.of(
-    "pandas.core.frame.DataFrame.merge",
-    "pandas.core.reshape.merge.merge",
-    "pandas.core.frame.DataFrame.join");
+    DATAFRAME_JOIN_FQN,
+    DATAFRAME_MERGE_FQN,
+    PANDAS_MERGE_FQN);
 
   private static final Map<Integer, String> MESSAGES = Map.of(
     1, "Specify the \"%s\" parameter of this %s.",
     2, "Specify the \"%s\" and \"%s\" parameters of this %s.",
     3, "Specify the \"%s\", \"%s\" and \"%s\" parameters of this %s.");
+
+  private static final String QUICKFIX_MESSAGE = "Add the missing parameters";
 
   @Override
   public void initialize(Context context) {
@@ -94,42 +125,44 @@ public class PandasAddMergeParametersCheck extends PythonSubscriptionCheck {
   }
 
   private static void missingArguments(String fullyQualifiedName, SubscriptionContext ctx, CallExpression callExpression) {
-    List<String> parameters = new ArrayList<>();
+    List<Keywords> missingKeywords = new ArrayList<>();
     if (isArgumentMissing(fullyQualifiedName, Keywords.HOW, callExpression.arguments())) {
-      parameters.add(Keywords.HOW.getKeyword());
+      missingKeywords.add(Keywords.HOW);
     }
     if (isArgumentMissing(fullyQualifiedName, Keywords.ON, callExpression.arguments())) {
-      parameters.add(Keywords.ON.getKeyword());
+      missingKeywords.add(Keywords.ON);
     }
     if (isArgumentMissing(fullyQualifiedName, Keywords.VALIDATE, callExpression.arguments())) {
-      parameters.add(Keywords.VALIDATE.getKeyword());
+      missingKeywords.add(Keywords.VALIDATE);
     }
-    if (!parameters.isEmpty()) {
-      ctx.addIssue(callExpression, generateMessage(MESSAGES.get(numberOfMissingArguments(parameters)), parameters, fullyQualifiedName));
+    if (!missingKeywords.isEmpty()) {
+      PreciseIssue issue = ctx.addIssue(callExpression, generateMessage(MESSAGES.get(numberOfMissingArguments(missingKeywords)), missingKeywords, fullyQualifiedName));
+      issue.addQuickFix(PythonQuickFix
+        .newQuickFix(QUICKFIX_MESSAGE)
+        .addTextEdit(
+          TextEditUtils.insertBefore(callExpression.rightPar(), getReplacementText(fullyQualifiedName, missingKeywords)))
+        .build());
     }
   }
 
   private static boolean isArgumentMissing(String fullyQualfiedName, Keywords keyword, List<Argument> arguments) {
     return Optional.of(keyword)
-      .map(kw -> TreeUtils.nthArgumentOrKeyword(getArgumentPosition(fullyQualfiedName, kw), kw.getKeyword(), arguments))
+      .map(kw -> TreeUtils.nthArgumentOrKeyword(kw.getArgumentPosition(fullyQualfiedName), kw.getKeyword(), arguments))
       .isEmpty();
   }
 
-  private static int getArgumentPosition(String fullyQualifiedName, Keywords parameter) {
-    if ("pandas.core.frame.DataFrame.join".equals(fullyQualifiedName)) {
-      return parameter.getPositionInJoin();
-    } else if ("pandas.core.frame.DataFrame.merge".equals(fullyQualifiedName)) {
-      return parameter.getPositionInDataFrameMerge();
-    }
-    return parameter.getPositionInPandasMerge();
+  private static String generateMessage(String message, List<Keywords> missingKeywords, String functionName) {
+    List<String> missingKeywordsList = missingKeywords.stream().map(Keywords::getKeyword).collect(Collectors.toList());
+    missingKeywordsList.add(functionName.substring(functionName.lastIndexOf('.') + 1));
+    return String.format(message, missingKeywordsList.toArray());
   }
 
-  private static String generateMessage(String message, List<String> missingKeywords, String functionName) {
-    missingKeywords.add(functionName.substring(functionName.lastIndexOf('.') + 1));
-    return String.format(message, missingKeywords.toArray());
+  private static int numberOfMissingArguments(List<Keywords> missingKeywords) {
+    return missingKeywords.size();
   }
 
-  private static int numberOfMissingArguments(List<String> keywords) {
-    return keywords.size();
+  private static String getReplacementText(String fullyQualifiedName, List<Keywords> missingKeywords) {
+    return String.format(", %s", missingKeywords.stream().map(keyword -> keyword.getReplacementText(fullyQualifiedName))
+      .collect(Collectors.joining(", ")));
   }
 }
