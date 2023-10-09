@@ -43,7 +43,7 @@ import org.sonar.python.types.InferredTypes;
 public class PandasChainInstructionCheck extends PythonSubscriptionCheck {
 
   private static final String MESSAGE = "Refactor this long chain of instructions with pandas.pipe";
-  private static final int MAX_CHAIN_LENGTH = 5;
+  private static final int MAX_CHAIN_LENGTH = 7;
 
   private static final String DATAFRAME_FQN = "pandas.core.frame.DataFrame";
 
