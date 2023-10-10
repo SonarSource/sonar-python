@@ -1,4 +1,4 @@
-<p>This rule raises an issue when 5 or more commands are applied on a data frame.</p>
+<p>This rule raises an issue when 7 or more commands are applied on a data frame.</p>
 <h2>Why is this an issue?</h2>
 <p>The pandas library provides many ways to filter, select, reshape and modify a data frame. Pandas supports as well method chaining, which means that
 many <code>DataFrame</code> methods return a modified <code>DataFrame</code>. This allows the user to chain multiple operations together, making it
@@ -6,7 +6,8 @@ effortless perform several of them in one line of code:</p>
 <pre>
 import pandas as pd
 
-joe = pd.read_csv("data.csv", dtype={'user_id':'str', 'name':'str'}).set_index("name").filter(like='jo', axis=0).head()
+schema = {'name':str, 'domain': str, 'revenue': 'Int64'}
+joe = pd.read_csv("data.csv", dtype=schema).set_index('name').filter(like='joe', axis=0).groupby('domain').mean().round().sample()
 </pre>
 <p>While this code is correct and concise, it can be challenging to follow its logic and flow, making it harder to debug or modify in the future.</p>
 <p>To improve code readability, debugging, and maintainability, it is recommended to break down long chains of pandas instructions into smaller, more
@@ -21,20 +22,20 @@ with a meaningful name can further enhance the readability and maintainability o
 import pandas as pd
 
 def foo(df: pd.DataFrame):
-  return df.set_index("name").filter(like='joe', axis=0).groupby("team")["salary"].mean().head() # Noncompliant: too many operations happen on this data frame.
+  return df.set_index('name').filter(like='joe', axis=0).groupby('team').mean().round().sort_values('salary').take([0]) # Noncompliant: too many operations happen on this data frame.
 </pre>
 <h4>Compliant solution</h4>
 <pre data-diff-id="1" data-diff-type="compliant">
 import pandas as pd
 
 def select_joes(df):
-  return df.set_index("name").filter(like='joe', axis=0)
+  return df.set_index('name').filter(like='joe', axis=0)
 
 def compute_mean_salary_per_team(df):
-  return df.groupby("team")["salary"].mean()
+  return df.groupby('team').mean().round()
 
 def foo(df: pd.DataFrame):
-  return df.pipe(select_joes).pipe(compute_mean_salary_per_team).head() # Compliant
+  return df.pipe(select_joes).pipe(compute_mean_salary_per_team).sort_values('salary').take([0]) # Compliant
 </pre>
 <h2>Resources</h2>
 <h3>Documentation</h3>
