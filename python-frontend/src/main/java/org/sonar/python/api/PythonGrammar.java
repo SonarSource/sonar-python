@@ -180,6 +180,8 @@ public enum PythonGrammar implements GrammarRuleKey {
   ATTR,
   FUNCNAME,
   FUN_RETURN_ANNOTATION,
+  TYPE_PARAMS,
+  TYPE_PARAM,
 
   CLASSDEF,
   CLASSNAME,

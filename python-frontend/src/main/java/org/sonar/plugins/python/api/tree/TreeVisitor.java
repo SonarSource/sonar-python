@@ -206,4 +206,8 @@ public interface TreeVisitor {
   void visitKeywordPattern(KeywordPattern keywordPattern);
 
   void visitValuePattern(ValuePattern valuePattern);
+
+  void visitTypeParams(TypeParams typeParams);
+
+  void visitTypeParam(TypeParam typeParam);
 }

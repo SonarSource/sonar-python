@@ -385,8 +385,18 @@ public class PythonGrammarBuilder {
     b.rule(WILDCARD_PATTERN).is("_");
     b.rule(GROUP_PATTERN).is("(", PATTERN, ")");
 
-    b.rule(FUNCDEF).is(b.optional(DECORATORS), b.optional(ASYNC), "def", FUNCNAME, "(", b.optional(TYPEDARGSLIST), ")", b.optional(FUN_RETURN_ANNOTATION), ":", SUITE);
+    b.rule(FUNCDEF).is(b.optional(DECORATORS),
+      b.optional(ASYNC),
+      "def",
+      FUNCNAME,
+      b.optional(TYPE_PARAMS),
+      "(", b.optional(TYPEDARGSLIST), ")",
+      b.optional(FUN_RETURN_ANNOTATION),
+      ":",
+      SUITE);
+
     b.rule(FUNCNAME).is(NAME);
+    b.rule(TYPE_PARAMS).is("[", TYPEDARGSLIST, "]");
     b.rule(FUN_RETURN_ANNOTATION).is("-", ">", TEST);
 
     b.rule(DECORATORS).is(b.oneOrMore(DECORATOR));

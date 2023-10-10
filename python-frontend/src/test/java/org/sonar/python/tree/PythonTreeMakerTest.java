@@ -748,6 +748,29 @@ class PythonTreeMakerTest extends RuleTest {
   }
 
   @Test
+  void funcdef_statement_type_params() {
+    setRootRule(PythonGrammar.FUNCDEF);
+    var astNode = p.parse("def overly_generic[\n" +
+      "   SimpleTypeVar,\n" +
+      "   TypeVarWithBound: int,\n" +
+      "   TypeVarWithConstraints: (str, bytes),\n" +
+      "   *SimpleTypeVarTuple,\n" +
+      "   **SimpleParamSpec\n" +
+      "](\n" +
+      "   a: SimpleTypeVar,\n" +
+      "   b: TypeVarWithBound,\n" +
+      "   c: Callable[SimpleParamSpec, TypeVarWithConstraints],\n" +
+      "   *d: SimpleTypeVarTuple,\n" +
+      "): pass");
+    var functionDef = treeMaker.funcDefStatement(astNode);
+    assertThat(functionDef.name()).isNotNull();
+    var typeParams = functionDef.typeParams();
+    assertThat(typeParams).isNotNull();
+    var typeParamsList = typeParams.typeParams();
+    assertThat(typeParamsList).isNotNull().hasSize(5);
+  }
+
+  @Test
   void funcdef_statement() {
     setRootRule(PythonGrammar.FUNCDEF);
     AstNode astNode = p.parse("def func(): pass");

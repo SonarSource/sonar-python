@@ -40,6 +40,7 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TreeVisitor;
 import org.sonar.plugins.python.api.tree.TypeAnnotation;
 import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.tree.TypeParams;
 
 public class FunctionDefImpl extends PyTree implements FunctionDef {
 
@@ -47,6 +48,7 @@ public class FunctionDefImpl extends PyTree implements FunctionDef {
   private final Token asyncKeyword;
   private final Token defKeyword;
   private final Name name;
+  private final TypeParams typeParams;
   private final Token leftPar;
   private final ParameterList parameters;
   private final Token rightPar;
@@ -62,7 +64,7 @@ public class FunctionDefImpl extends PyTree implements FunctionDef {
   private Set<Symbol> symbols = new HashSet<>();
   private FunctionSymbol functionSymbol;
 
-  public FunctionDefImpl(List<Decorator> decorators, @Nullable Token asyncKeyword, Token defKeyword, Name name,
+  public FunctionDefImpl(List<Decorator> decorators, @Nullable Token asyncKeyword, Token defKeyword, Name name, TypeParams typeParams,
                          Token leftPar, @Nullable ParameterList parameters, Token rightPar, @Nullable TypeAnnotation returnType,
                          Token colon, @Nullable Token newLine, @Nullable Token indent, StatementList body, @Nullable Token dedent,
                          boolean isMethodDefinition, @Nullable StringLiteral docstring) {
@@ -70,6 +72,7 @@ public class FunctionDefImpl extends PyTree implements FunctionDef {
     this.asyncKeyword = asyncKeyword;
     this.defKeyword = defKeyword;
     this.name = name;
+    this.typeParams = typeParams;
     this.leftPar = leftPar;
     this.parameters = parameters;
     this.rightPar = rightPar;
@@ -102,6 +105,12 @@ public class FunctionDefImpl extends PyTree implements FunctionDef {
   @Override
   public Name name() {
     return name;
+  }
+
+  @CheckForNull
+  @Override
+  public TypeParams typeParams() {
+    return typeParams;
   }
 
   @Override
@@ -168,7 +177,7 @@ public class FunctionDefImpl extends PyTree implements FunctionDef {
 
   @Override
   public List<Tree> computeChildren() {
-    return Stream.of(decorators, Arrays.asList(asyncKeyword, defKeyword, name, leftPar, parameters, rightPar, returnType, colon, newLine, indent, body, dedent))
+    return Stream.of(decorators, Arrays.asList(asyncKeyword, defKeyword, name, typeParams, leftPar, parameters, rightPar, returnType, colon, newLine, indent, body, dedent))
       .flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
   }
 

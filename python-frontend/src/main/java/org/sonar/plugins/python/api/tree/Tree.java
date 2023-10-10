@@ -179,7 +179,10 @@ public interface Tree {
 
     VARIABLE_TYPE_ANNOTATION(TypeAnnotation.class),
     PARAMETER_TYPE_ANNOTATION(TypeAnnotation.class),
+    TYPE_PARAM_TYPE_ANNOTATION(TypeAnnotation.class),
     RETURN_TYPE_ANNOTATION(TypeAnnotation.class),
+    TYPE_PARAMS(TypeParams.class),
+    TYPE_PARAM(TypeParam.class),
 
     PARAMETER_LIST(ParameterList.class),
     VALUE_PATTERN(ValuePattern.class),
