@@ -790,15 +790,11 @@ class PythonTreeMakerTest extends RuleTest {
     assertThat(simpleTypeVarTuple.starToken()).isNotNull();
     assertThat(simpleTypeVarTuple.typeAnnotation()).isNull();
 
-    var visitor = Mockito.mock(BaseTreeVisitor.class);
-    Mockito.doCallRealMethod().when(visitor).visitTypeParams(Mockito.any());
-    Mockito.doCallRealMethod().when(visitor).visitTypeParam(Mockito.any());
+    var visitor = Mockito.spy(new BaseTreeVisitor());
 
-    typeParams.accept(visitor);
+    functionDef.accept(visitor);
     Mockito.verify(visitor, Mockito.times(1)).visitTypeParams(Mockito.any());
-
-    simpleTypeVar.accept(visitor);
-    Mockito.verify(visitor, Mockito.times(1)).visitTypeParam(Mockito.any());
+    Mockito.verify(visitor, Mockito.times(5)).visitTypeParam(Mockito.any());
   }
 
   @Test
