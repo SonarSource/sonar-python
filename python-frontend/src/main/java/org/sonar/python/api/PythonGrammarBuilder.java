@@ -403,7 +403,9 @@ public class PythonGrammarBuilder {
     b.rule(DECORATOR).is("@", NAMED_EXPR_TEST, NEWLINE);
     b.rule(DOTTED_NAME).is(NAME, b.zeroOrMore(".", NAME));
 
-    b.rule(CLASSDEF).is(b.optional(DECORATORS), "class", CLASSNAME, b.optional("(", b.optional(ARGLIST), ")"), ":", SUITE);
+    b.rule(CLASSDEF).is(b.optional(DECORATORS), "class", CLASSNAME,
+      b.optional(TYPE_PARAMS), b.optional("(", b.optional(ARGLIST), ")"), ":", SUITE);
+    
     b.rule(CLASSNAME).is(NAME);
 
     b.rule(ASYNC_STMT).is(ASYNC, b.firstOf(WITH_STMT, FOR_STMT));

@@ -38,11 +38,13 @@ import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TreeVisitor;
 import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.tree.TypeParams;
 
 public class ClassDefImpl extends PyTree implements ClassDef {
   private final List<Decorator> decorators;
   private final Token classKeyword;
   private final Name name;
+  private final TypeParams typeParams;
   private final Token leftPar;
   private final ArgList args;
   private final Token rightPar;
@@ -56,11 +58,12 @@ public class ClassDefImpl extends PyTree implements ClassDef {
   private final Set<Symbol> instanceFields = new HashSet<>();
 
   public ClassDefImpl(List<Decorator> decorators, Token classKeyword, Name name,
-                            @Nullable Token leftPar, @Nullable ArgList args, @Nullable Token rightPar,
+                            @Nullable TypeParams typeParams, @Nullable Token leftPar, @Nullable ArgList args, @Nullable Token rightPar,
                             Token colon, @Nullable Token newLine, @Nullable Token indent, StatementList body, @Nullable Token dedent, StringLiteral docstring) {
     this.decorators = decorators;
     this.classKeyword = classKeyword;
     this.name = name;
+    this.typeParams = typeParams;
     this.leftPar = leftPar;
     this.args = args;
     this.rightPar = rightPar;
@@ -95,6 +98,12 @@ public class ClassDefImpl extends PyTree implements ClassDef {
   @Override
   public Name name() {
     return name;
+  }
+
+  @CheckForNull
+  @Override
+  public TypeParams typeParams() {
+    return typeParams;
   }
 
   @CheckForNull
