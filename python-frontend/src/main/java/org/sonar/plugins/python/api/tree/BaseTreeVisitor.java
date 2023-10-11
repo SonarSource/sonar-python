@@ -564,11 +564,12 @@ public class BaseTreeVisitor implements TreeVisitor {
 
   @Override
   public void visitTypeParams(TypeParams typeParams) {
-    // noop
+    scan(typeParams.typeParams());
   }
 
   @Override
   public void visitTypeParam(TypeParam typeParam) {
-    // noop
+    scan(typeParam.name());
+    scan(typeParam.typeAnnotation());
   }
 }
