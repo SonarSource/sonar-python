@@ -32,6 +32,7 @@ import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Timeout;
+import org.mockito.Mockito;
 import org.sonar.plugins.python.api.tree.AliasedName;
 import org.sonar.plugins.python.api.tree.AnnotatedAssignment;
 import org.sonar.plugins.python.api.tree.ArgList;
@@ -39,6 +40,7 @@ import org.sonar.plugins.python.api.tree.AssertStatement;
 import org.sonar.plugins.python.api.tree.AssignmentExpression;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.AwaitExpression;
+import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.BinaryExpression;
 import org.sonar.plugins.python.api.tree.BreakStatement;
 import org.sonar.plugins.python.api.tree.CallExpression;
@@ -787,6 +789,16 @@ class PythonTreeMakerTest extends RuleTest {
     assertThat(simpleTypeVarTuple.name().name()).isEqualTo("SimpleTypeVarTuple");
     assertThat(simpleTypeVarTuple.starToken()).isNotNull();
     assertThat(simpleTypeVarTuple.typeAnnotation()).isNull();
+
+    var visitor = Mockito.mock(BaseTreeVisitor.class);
+    Mockito.doCallRealMethod().when(visitor).visitTypeParams(Mockito.any());
+    Mockito.doCallRealMethod().when(visitor).visitTypeParam(Mockito.any());
+
+    typeParams.accept(visitor);
+    Mockito.verify(visitor, Mockito.times(1)).visitTypeParams(Mockito.any());
+
+    simpleTypeVar.accept(visitor);
+    Mockito.verify(visitor, Mockito.times(1)).visitTypeParam(Mockito.any());
   }
 
   @Test
