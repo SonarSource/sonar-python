@@ -632,12 +632,16 @@ public class PythonTreeMaker {
 
     Name name = name(parameter.getFirstChild(PythonGrammar.NAME));
 
-    TypeAnnotation typeAnnotation = null;
-    AstNode testNode = parameter.getFirstChild(PythonGrammar.TEST);
-    if (testNode != null) {
-      Token colonToken = toPyToken(parameter.getFirstChild(PythonPunctuator.COLON).getToken());
-      typeAnnotation = new TypeAnnotationImpl(colonToken, expression(testNode), Tree.Kind.TYPE_PARAM_TYPE_ANNOTATION);
-    }
+    var typeAnnotation = Optional.of(parameter)
+      .filter(p -> Objects.nonNull(p.getFirstChild(PythonPunctuator.COLON)))
+      .filter(p -> Objects.nonNull(p.getFirstChild(PythonGrammar.TEST)))
+      .map(p -> {
+        var colonNode = parameter.getFirstChild(PythonPunctuator.COLON);
+        var testNode = parameter.getFirstChild(PythonGrammar.TEST);
+        var colonToken = toPyToken(colonNode.getToken());
+        var testExpression = expression(testNode);
+        return new TypeAnnotationImpl(colonToken, testExpression, Tree.Kind.TYPE_PARAM_TYPE_ANNOTATION);
+      }).orElse(null);
 
     return new TypeParamImpl(starOrStarStar, name, typeAnnotation);
   }
