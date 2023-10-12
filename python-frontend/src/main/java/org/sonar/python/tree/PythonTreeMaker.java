@@ -670,6 +670,8 @@ public class PythonTreeMaker {
         .collect(Collectors.toList());
     }
     Name name = name(astNode.getFirstChild(PythonGrammar.CLASSNAME).getFirstChild(PythonGrammar.NAME));
+    var typeParams = typeParams(astNode);
+
     ArgList args = null;
     AstNode leftPar = astNode.getFirstChild(PythonPunctuator.LPARENTHESIS);
     if (leftPar != null) {
@@ -680,7 +682,7 @@ public class PythonTreeMaker {
     Token classToken = toPyToken(astNode.getFirstChild(PythonKeyword.CLASS).getToken());
     AstNode rightPar = astNode.getFirstChild(PythonPunctuator.RPARENTHESIS);
     Token colon = toPyToken(astNode.getFirstChild(PythonPunctuator.COLON).getToken());
-    return new ClassDefImpl(decorators, classToken, name,
+    return new ClassDefImpl(decorators, classToken, name, typeParams,
       leftPar != null ? toPyToken(leftPar.getToken()) : null, args, rightPar != null ? toPyToken(rightPar.getToken()) : null,
       colon, suiteNewLine(suite), suiteIndent(suite), body, suiteDedent(suite), DocstringExtractor.extractDocstring(body));
   }

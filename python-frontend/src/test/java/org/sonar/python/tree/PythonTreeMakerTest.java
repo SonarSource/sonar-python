@@ -1032,6 +1032,21 @@ class PythonTreeMakerTest extends RuleTest {
   }
 
   @Test
+  void classdef_statement_type_params() {
+    setRootRule(PythonGrammar.CLASSDEF);
+    var classDef = parse("class generic_class[\n" +
+      "   SimpleTypeVar,\n" +
+      "   TypeVarWithBound: int,\n" +
+      "   TypeVarWithConstraints: (str, bytes),\n" +
+      "   *SimpleTypeVarTuple,\n" +
+      "   **SimpleParamSpec\n" +
+      "]: pass", treeMaker::classDefStatement);
+    assertThat(classDef.name()).isNotNull();
+    var typeParams = classDef.typeParams();
+    validateTypeParams(typeParams, classDef);
+  }
+
+  @Test
   void for_statement() {
     setRootRule(PythonGrammar.FOR_STMT);
     AstNode astNode = p.parse("for foo in bar: pass");

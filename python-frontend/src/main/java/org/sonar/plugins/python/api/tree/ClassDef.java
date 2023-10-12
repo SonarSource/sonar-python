@@ -43,6 +43,9 @@ public interface ClassDef extends Statement {
   Name name();
 
   @CheckForNull
+  TypeParams typeParams();
+
+  @CheckForNull
   Token leftPar();
 
   /**
