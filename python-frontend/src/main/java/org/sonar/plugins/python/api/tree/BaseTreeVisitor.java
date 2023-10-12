@@ -133,6 +133,7 @@ public class BaseTreeVisitor implements TreeVisitor {
   public void visitFunctionDef(FunctionDef pyFunctionDefTree) {
     scan(pyFunctionDefTree.decorators());
     scan(pyFunctionDefTree.name());
+    scan(pyFunctionDefTree.typeParams());
     scan(pyFunctionDefTree.parameters());
     scan(pyFunctionDefTree.returnTypeAnnotation());
     scan(pyFunctionDefTree.body());
@@ -560,5 +561,16 @@ public class BaseTreeVisitor implements TreeVisitor {
 
   public void visitValuePattern(ValuePattern valuePattern) {
     scan(valuePattern.qualifiedExpression());
+  }
+
+  @Override
+  public void visitTypeParams(TypeParams typeParams) {
+    scan(typeParams.typeParamsList());
+  }
+
+  @Override
+  public void visitTypeParam(TypeParam typeParam) {
+    scan(typeParam.name());
+    scan(typeParam.typeAnnotation());
   }
 }

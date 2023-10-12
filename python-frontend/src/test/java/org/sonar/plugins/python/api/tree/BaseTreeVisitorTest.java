@@ -21,6 +21,7 @@ package org.sonar.plugins.python.api.tree;
 
 import com.sonar.sslr.api.AstNode;
 import java.util.List;
+import java.util.Objects;
 import javax.annotation.Nullable;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.api.PythonGrammar;
@@ -30,7 +31,9 @@ import org.sonar.python.tree.StatementWithSeparator;
 import org.sonar.python.tree.WhileStatementImpl;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 class BaseTreeVisitorTest extends RuleTest {
@@ -109,6 +112,18 @@ class BaseTreeVisitorTest extends RuleTest {
     verify(visitor).visitParameter(parameter);
     verify(visitor).visitTypeAnnotation(parameter.typeAnnotation());
     verify(visitor).visitPassStatement((PassStatement) pyFunctionDefTree.body().statements().get(0));
+  }
+
+  @Test
+  void fundef_with_type_params() {
+    setRootRule(PythonGrammar.FUNCDEF);
+    var pyFunctionDefTree = parse("def foo[A,B](): pass", treeMaker::funcDefStatement);
+    var visitor = spy(FirstLastTokenVerifierVisitor.class);
+
+    pyFunctionDefTree.accept(visitor);
+    var typeParams = Objects.requireNonNull(pyFunctionDefTree.typeParams());
+    verify(visitor, times(1)).visitTypeParams(typeParams);
+    verify(visitor, times(2)).visitTypeParam(any());
   }
 
   @Test

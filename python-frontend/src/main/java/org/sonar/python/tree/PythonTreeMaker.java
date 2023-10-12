@@ -23,9 +23,11 @@ import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.GenericTokenType;
 import com.sonar.sslr.api.RecognitionException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
@@ -98,6 +100,8 @@ import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TryStatement;
 import org.sonar.plugins.python.api.tree.TypeAnnotation;
+import org.sonar.plugins.python.api.tree.TypeParam;
+import org.sonar.plugins.python.api.tree.TypeParams;
 import org.sonar.plugins.python.api.tree.WithItem;
 import org.sonar.plugins.python.api.tree.WithStatement;
 import org.sonar.plugins.python.api.tree.YieldExpression;
@@ -554,14 +558,10 @@ public class PythonTreeMaker {
         .collect(Collectors.toList());
     }
     Name name = name(astNode.getFirstChild(PythonGrammar.FUNCNAME).getFirstChild(PythonGrammar.NAME));
-    ParameterList parameterList = null;
-    AstNode typedArgListNode = astNode.getFirstChild(PythonGrammar.TYPEDARGSLIST);
-    if (typedArgListNode != null) {
-      List<AnyParameter> arguments = typedArgListNode.getChildren(PythonGrammar.TFPDEF, PythonPunctuator.MUL, PythonPunctuator.DIV).stream()
-        .map(this::parameter).filter(Objects::nonNull).collect(Collectors.toList());
-      List<Token> commas = punctuators(typedArgListNode, PythonPunctuator.COMMA);
-      parameterList = new ParameterListImpl(arguments, commas);
-    }
+
+    var typeParams = typeParams(astNode);
+
+    var parameterList = parameterList(astNode);
 
     AstNode suite = astNode.getFirstChild(PythonGrammar.SUITE);
     StatementList body = getStatementListFromSuite(suite);
@@ -582,9 +582,68 @@ public class PythonTreeMaker {
     }
 
     Token colon = toPyToken(astNode.getFirstChild(PythonPunctuator.COLON).getToken());
-    return new FunctionDefImpl(decorators, asyncToken, toPyToken(defNode.getToken()), name, lPar, parameterList, rPar,
+    return new FunctionDefImpl(decorators, asyncToken, toPyToken(defNode.getToken()), name, typeParams, lPar, parameterList, rPar,
       returnType, colon, suiteNewLine(suite), suiteIndent(suite), body, suiteDedent(suite),
       isMethodDefinition(astNode), DocstringExtractor.extractDocstring(body));
+  }
+
+  private ParameterList parameterList(AstNode parent) {
+    return Optional.of(parent)
+      .map(n -> n.getFirstChild(PythonGrammar.TYPEDARGSLIST))
+      .map(n -> {
+        List<AnyParameter> arguments = n.getChildren(PythonGrammar.TFPDEF, PythonPunctuator.MUL, PythonPunctuator.DIV).stream()
+          .map(this::parameter).filter(Objects::nonNull).collect(Collectors.toList());
+        List<Token> commas = punctuators(n, PythonPunctuator.COMMA);
+        return new ParameterListImpl(arguments, commas);
+      }).orElse(null);
+  }
+
+  private TypeParams typeParams(AstNode parent) {
+    return Optional.of(parent)
+      .map(n -> n.getFirstChild(PythonGrammar.TYPE_PARAMS))
+      .map(n -> {
+        var lBracket = toPyToken(n.getFirstChild(PythonPunctuator.LBRACKET).getToken());
+
+        var parameters = Optional.of(n.getFirstChild(PythonGrammar.TYPEDARGSLIST))
+          .map(argList -> argList.getChildren(PythonGrammar.TFPDEF))
+          .stream()
+          .flatMap(Collection::stream)
+          .map(this::typeParam)
+          .collect(Collectors.toList());
+
+        var commas = Optional.of(n.getFirstChild(PythonGrammar.TYPEDARGSLIST))
+          .map(argList -> punctuators(argList, PythonPunctuator.COMMA))
+          .stream()
+          .flatMap(Collection::stream)
+          .collect(Collectors.toList());
+
+        var rBracket = toPyToken(n.getFirstChild(PythonPunctuator.RBRACKET).getToken());
+
+        return new TypeParamsImpl(lBracket, parameters, commas, rBracket);
+      }).orElse(null);
+  }
+
+  private TypeParam typeParam(AstNode parameter) {
+    var starOrStarStar = Optional.of(parameter)
+      .map(AstNode::getPreviousSibling)
+      .filter(ps -> ps.is(PythonPunctuator.MUL, PythonPunctuator.MUL_MUL))
+      .map(ps -> toPyToken(ps.getToken()))
+      .orElse(null);
+
+    Name name = name(parameter.getFirstChild(PythonGrammar.NAME));
+
+    var typeAnnotation = Optional.of(parameter)
+      .filter(p -> Objects.nonNull(p.getFirstChild(PythonPunctuator.COLON)))
+      .filter(p -> Objects.nonNull(p.getFirstChild(PythonGrammar.TEST)))
+      .map(p -> {
+        var colonNode = parameter.getFirstChild(PythonPunctuator.COLON);
+        var testNode = parameter.getFirstChild(PythonGrammar.TEST);
+        var colonToken = toPyToken(colonNode.getToken());
+        var testExpression = expression(testNode);
+        return new TypeAnnotationImpl(colonToken, testExpression, Tree.Kind.TYPE_PARAM_TYPE_ANNOTATION);
+      }).orElse(null);
+
+    return new TypeParamImpl(starOrStarStar, name, typeAnnotation);
   }
 
   private Decorator decorator(AstNode astNode) {
