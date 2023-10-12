@@ -214,6 +214,18 @@ class BaseTreeVisitorTest extends RuleTest {
   }
 
   @Test
+  void class_with_type_params() {
+    setRootRule(PythonGrammar.CLASSDEF);
+    var classDef = parse("class clazz[A,B](): pass", treeMaker::classDefStatement);
+    var visitor = spy(FirstLastTokenVerifierVisitor.class);
+
+    classDef.accept(visitor);
+    var typeParams = Objects.requireNonNull(classDef.typeParams());
+    verify(visitor, times(1)).visitTypeParams(typeParams);
+    verify(visitor, times(2)).visitTypeParam(any());
+  }
+
+  @Test
   void qualified_expr() {
     setRootRule(PythonGrammar.TEST);
     QualifiedExpression tree = (QualifiedExpression) parse("a.b", treeMaker::expression);
