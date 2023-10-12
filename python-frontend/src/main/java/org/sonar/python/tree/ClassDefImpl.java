@@ -160,7 +160,7 @@ public class ClassDefImpl extends PyTree implements ClassDef {
 
   @Override
   public List<Tree> computeChildren() {
-    return Stream.of(decorators, Arrays.asList(classKeyword, name, leftPar, args, rightPar, colon, newLine, indent, body, dedent))
+    return Stream.of(decorators, Arrays.asList(classKeyword, name, typeParams, leftPar, args, rightPar, colon, newLine, indent, body, dedent))
       .flatMap(List::stream).filter(Objects::nonNull).collect(Collectors.toList());
   }
 }

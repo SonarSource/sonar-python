@@ -1034,44 +1034,16 @@ class PythonTreeMakerTest extends RuleTest {
   @Test
   void classdef_statement_type_params() {
     setRootRule(PythonGrammar.CLASSDEF);
-    var astNode = p.parse("class generic_class[\n" +
+    var classDef = parse("class generic_class[\n" +
       "   SimpleTypeVar,\n" +
       "   TypeVarWithBound: int,\n" +
       "   TypeVarWithConstraints: (str, bytes),\n" +
       "   *SimpleTypeVarTuple,\n" +
       "   **SimpleParamSpec\n" +
-      "]: pass");
-    var classDef = treeMaker.classDefStatement(astNode);
+      "]: pass", treeMaker::classDefStatement);
     assertThat(classDef.name()).isNotNull();
     var typeParams = classDef.typeParams();
-    assertThat(typeParams).isNotNull();
-    assertThat(typeParams.getKind()).isEqualTo(Kind.TYPE_PARAMS);
-    assertThat(typeParams.leftBracket()).isNotNull();
-    assertThat(typeParams.rightBracket()).isNotNull();
-    assertThat(typeParams.children()).hasSize(11);
-    var typeParamsList = typeParams.typeParams();
-    assertThat(typeParamsList).isNotNull().hasSize(5);
-
-    var simpleTypeVar = typeParamsList.get(0);
-    assertThat(simpleTypeVar.name().name()).isEqualTo("SimpleTypeVar");
-    assertThat(simpleTypeVar.starToken()).isNull();
-    assertThat(simpleTypeVar.typeAnnotation()).isNull();
-
-    var typeWithBound = typeParamsList.get(1);
-    assertThat(typeWithBound.name().name()).isEqualTo("TypeVarWithBound");
-    assertThat(typeWithBound.starToken()).isNull();
-    assertThat(typeWithBound.typeAnnotation()).isNotNull();
-
-    var simpleTypeVarTuple = typeParamsList.get(3);
-    assertThat(simpleTypeVarTuple.name().name()).isEqualTo("SimpleTypeVarTuple");
-    assertThat(simpleTypeVarTuple.starToken()).isNotNull();
-    assertThat(simpleTypeVarTuple.typeAnnotation()).isNull();
-
-    var visitor = Mockito.spy(new BaseTreeVisitor());
-
-    classDef.accept(visitor);
-    Mockito.verify(visitor, Mockito.times(1)).visitTypeParams(Mockito.any());
-    Mockito.verify(visitor, Mockito.times(5)).visitTypeParam(Mockito.any());
+    validateTypeParams(typeParams, classDef);
   }
 
   @Test
