@@ -23,6 +23,6 @@ import java.util.List;
 
 public interface TypeParams extends Tree {
   Token leftBracket();
-  List<TypeParam> typeParams();
+  List<TypeParam> typeParamsList();
   Token rightBracket();
 }

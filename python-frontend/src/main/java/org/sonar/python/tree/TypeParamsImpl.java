@@ -33,13 +33,13 @@ import org.sonar.plugins.python.api.tree.TypeParams;
 public class TypeParamsImpl extends PyTree implements TypeParams {
 
   private final Token leftPar;
-  private final List<TypeParam> typeParams;
+  private final List<TypeParam> typeParamsList;
   private final List<Token> commas;
   private final Token rightPar;
 
-  public TypeParamsImpl(Token leftPar, List<TypeParam> typeParams, List<Token> commas, Token rightPar) {
+  public TypeParamsImpl(Token leftPar, List<TypeParam> typeParamsList, List<Token> commas, Token rightPar) {
     this.leftPar = leftPar;
-    this.typeParams = typeParams;
+    this.typeParamsList = typeParamsList;
     this.commas = commas;
     this.rightPar = rightPar;
   }
@@ -60,8 +60,8 @@ public class TypeParamsImpl extends PyTree implements TypeParams {
   }
 
   @Override
-  public List<TypeParam> typeParams() {
-    return typeParams;
+  public List<TypeParam> typeParamsList() {
+    return typeParamsList;
   }
 
   @Override
@@ -73,7 +73,7 @@ public class TypeParamsImpl extends PyTree implements TypeParams {
   List<Tree> computeChildren() {
     var builder = Stream.<Tree>builder();
     builder.add(leftPar);
-    typeParams.forEach(builder::add);
+    typeParamsList.forEach(builder::add);
     commas.forEach(builder::add);
     builder.add(rightPar);
 

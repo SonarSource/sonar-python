@@ -30,6 +30,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.annotation.Nullable;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Timeout;
 import org.mockito.Mockito;
@@ -107,6 +108,7 @@ import org.sonar.plugins.python.api.tree.TryStatement;
 import org.sonar.plugins.python.api.tree.Tuple;
 import org.sonar.plugins.python.api.tree.TupleParameter;
 import org.sonar.plugins.python.api.tree.TypeAnnotation;
+import org.sonar.plugins.python.api.tree.TypeParams;
 import org.sonar.plugins.python.api.tree.UnaryExpression;
 import org.sonar.plugins.python.api.tree.UnpackingExpression;
 import org.sonar.plugins.python.api.tree.WhileStatement;
@@ -752,7 +754,7 @@ class PythonTreeMakerTest extends RuleTest {
   @Test
   void funcdef_statement_type_params() {
     setRootRule(PythonGrammar.FUNCDEF);
-    var astNode = p.parse("def overly_generic[\n" +
+    var functionDef = parse("def overly_generic[\n" +
       "   SimpleTypeVar,\n" +
       "   TypeVarWithBound: int,\n" +
       "   TypeVarWithConstraints: (str, bytes),\n" +
@@ -763,17 +765,20 @@ class PythonTreeMakerTest extends RuleTest {
       "   b: TypeVarWithBound,\n" +
       "   c: Callable[SimpleParamSpec, TypeVarWithConstraints],\n" +
       "   *d: SimpleTypeVarTuple,\n" +
-      "): pass");
-    var functionDef = treeMaker.funcDefStatement(astNode);
+      "): pass", treeMaker::funcDefStatement);
     assertThat(functionDef.name()).isNotNull();
     var typeParams = functionDef.typeParams();
+    validateTypeParams(typeParams, functionDef);
+  }
+
+  private static void validateTypeParams(@Nullable TypeParams typeParams, Tree parent) {
     assertThat(typeParams).isNotNull();
     assertThat(typeParams.getKind()).isEqualTo(Kind.TYPE_PARAMS);
     assertThat(typeParams.leftBracket()).isNotNull();
     assertThat(typeParams.rightBracket()).isNotNull();
     assertThat(typeParams.children()).hasSize(11);
-    var typeParamsList = typeParams.typeParams();
-    assertThat(typeParamsList).isNotNull().hasSize(5);
+    var typeParamsList = typeParams.typeParamsList();
+    assertThat(typeParamsList).isNotNull().hasSize(5).allMatch(p -> p.is(Kind.TYPE_PARAM));
 
     var simpleTypeVar = typeParamsList.get(0);
     assertThat(simpleTypeVar.name().name()).isEqualTo("SimpleTypeVar");
@@ -783,7 +788,15 @@ class PythonTreeMakerTest extends RuleTest {
     var typeWithBound = typeParamsList.get(1);
     assertThat(typeWithBound.name().name()).isEqualTo("TypeVarWithBound");
     assertThat(typeWithBound.starToken()).isNull();
-    assertThat(typeWithBound.typeAnnotation()).isNotNull();
+    var typeAnnotation = typeWithBound.typeAnnotation();
+    assertThat(typeAnnotation).isNotNull();
+    assertThat(typeAnnotation.getKind()).isNotNull().isEqualTo(Kind.TYPE_PARAM_TYPE_ANNOTATION);
+    assertThat(typeAnnotation.expression())
+      .isNotNull()
+      .matches(e -> e.is(Kind.NAME))
+      .extracting(Name.class::cast)
+      .extracting(Name::name)
+      .isEqualTo("int");
 
     var simpleTypeVarTuple = typeParamsList.get(3);
     assertThat(simpleTypeVarTuple.name().name()).isEqualTo("SimpleTypeVarTuple");
@@ -792,7 +805,7 @@ class PythonTreeMakerTest extends RuleTest {
 
     var visitor = Mockito.spy(new BaseTreeVisitor());
 
-    functionDef.accept(visitor);
+    parent.accept(visitor);
     Mockito.verify(visitor, Mockito.times(1)).visitTypeParams(Mockito.any());
     Mockito.verify(visitor, Mockito.times(5)).visitTypeParam(Mockito.any());
   }

@@ -565,7 +565,7 @@ public class BaseTreeVisitor implements TreeVisitor {
 
   @Override
   public void visitTypeParams(TypeParams typeParams) {
-    scan(typeParams.typeParams());
+    scan(typeParams.typeParamsList());
   }
 
   @Override
