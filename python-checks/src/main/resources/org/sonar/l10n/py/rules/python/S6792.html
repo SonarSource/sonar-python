@@ -1,0 +1,55 @@
+<p>This rule raises an issue when a generic class is defined through explicit inheritance of <code>typing.Generic</code> instead of using the type
+parameter syntax.</p>
+<h2>Why is this an issue?</h2>
+<p>Through <a href="https://peps.python.org/pep-0695/">PEP 695</a>, Python 3.12 introduces the type parameter syntax to allow for a more compact and
+explicit way to define generic classes and functions.</p>
+<p>Prior to Python 3.12, defining a generic class would be done through the following syntax:</p>
+<pre>
+from typing import Generic, TypeVar
+
+_T_co = TypeVar("_T_co", covariant=True, bound=str)
+
+class ClassA(Generic[_T_co]):
+    def method1(self) -&gt; _T_co:
+        ...
+</pre>
+<p>Since Python 3.12, it can be done with the following syntax:</p>
+<pre>
+class ClassA[T: str]:
+    def method1(self) -&gt; T:
+        ...
+</pre>
+<p>Using the former syntax requires importing <code>TypeVar</code> and <code>Generic</code> symbols from the <code>typing</code> module. It also
+requires the explicit definition of a type variable in the global scope, with a redundant name provided in quotes (<code>T = TypeVar("T")</code>).
+This makes the definition of generic classes verbose and confusing.</p>
+<p>It is therefore recommended to use the type parameter syntax when working with Python 3.12 and later.</p>
+<h3>Exceptions</h3>
+<p>This rule will only raise an issue when the Python version of the analyzed project is set to 3.12 or higher.</p>
+<h2>How to fix it</h2>
+<p>To fix this issue, make sure to use the type parameter syntax whenever defining a generic class.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+from typing import Generic, TypeVar
+
+_T_co = TypeVar("_T_co", covariant=True, bound=str)
+
+class ClassA(Generic[_T_co]):  # Noncompliant: Explicit definition of a TypeVar and inheritance from typing.Generic is verbose
+    def method1(self) -&gt; _T_co:
+        ...
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+class ClassA[T: str]:  # Compliant: Concise syntax for type parameter is used
+    def method1(self) -&gt; T:
+        ...
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Python Documentation - <a href="https://docs.python.org/3.12/reference/compound_stmts.html#generic-classes">Generic classes</a> </li>
+  <li> Python 3.12 Release Notes - <a href="https://docs.python.org/3.12/whatsnew/3.12.html#pep-695-type-parameter-syntax">PEP 695: Type Parameter
+  Syntax</a> </li>
+  <li> PEP 695 - <a href="https://peps.python.org/pep-0695/">Type Parameter Syntax</a> </li>
+</ul>
+

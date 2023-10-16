@@ -203,6 +203,7 @@ public final class CheckList {
       FunctionNameCheck.class,
       FunctionReturnTypeCheck.class,
       FunctionUsingLoopVariableCheck.class,
+      GenericClassTypeParameterCheck.class,
       GenericExceptionRaisedCheck.class,
       GenericTypeWithoutArgumentCheck.class,
       GraphemeClustersInClassesCheck.class,
