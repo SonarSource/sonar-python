@@ -62,7 +62,7 @@ public class FStringChannel312 extends Channel<Lexer> {
     FStringState currentState = lexerState.fStringStateStack.peek();
 
     if (canConsumeFStringPrefix(sb, code)) {
-      char quote = (char) code.charAt(0);
+      char quote = code.charAt(0);
       StringBuilder quotes = consumeFStringQuotes(code, quote);
       FStringState newState = new FStringState(Mode.FSTRING_MODE);
       newState.setQuote(quote);
@@ -95,13 +95,6 @@ public class FStringChannel312 extends Channel<Lexer> {
         lexerState.fStringStateStack.push(newState);
         return consumeFStringMiddle(tokens, sb, newState, code, output);
       }
-    } else {
-      if (c == currentState.getQuote()) {
-        StringBuilder quotes = consumeFStringQuotes(code, currentState.getQuote());
-        lexerState.fStringStateStack.pop();
-        addToken(PythonTokenType.FSTRING_END, quotes.toString(), output, line, column);
-        return true;
-      }
     }
     return false;
   }
@@ -127,7 +120,7 @@ public class FStringChannel312 extends Channel<Lexer> {
         return true;
       } else if (currentMode == Mode.FSTRING_MODE && areClosingQuotes(code, state)) {
         addFStringMiddleToTokens(tokens, sb, output, line, column);
-        addFStringEndToTokens(code, state.getQuote(), tokens, sb, output);
+        addFStringEndToTokens(code, state.getQuote(), tokens, output);
         addTokens(tokens, output);
         return true;
       } else {
@@ -137,7 +130,7 @@ public class FStringChannel312 extends Channel<Lexer> {
     return false;
   }
 
-  private boolean canConsumeFStringPrefix(StringBuilder sb, CodeReader code) {
+  private static boolean canConsumeFStringPrefix(StringBuilder sb, CodeReader code) {
     if (PREFIXES.contains(Character.toUpperCase(code.charAt(0)))) {
       if (QUOTES.contains(code.charAt(1))) {
         sb.append((char) code.pop());
@@ -151,16 +144,16 @@ public class FStringChannel312 extends Channel<Lexer> {
     return false;
   }
 
-  private boolean isEscapedCurlyBrace(CodeReader code) {
+  private static boolean isEscapedCurlyBrace(CodeReader code) {
     return (code.charAt(0) == '{' && code.charAt(1) == '{') || (code.charAt(0) == '}' && code.charAt(1) == '}');
   }
 
-  private boolean areClosingQuotes(CodeReader code, FStringState state) {
+  private static boolean areClosingQuotes(CodeReader code, FStringState state) {
     char[] quotes = code.peek(state.getNumberOfQuotes());
-    return IntStream.range(0, quotes.length).mapToObj(i -> quotes[i]).allMatch(c -> c == state.getQuote());
+    return IntStream.range(0, quotes.length).mapToObj(i -> quotes[i]).allMatch(state.getQuote()::equals);
   }
 
-  private void addFStringMiddleToTokens(List<Token> tokens, StringBuilder sb, Lexer output, int line, int column) {
+  private static void addFStringMiddleToTokens(List<Token> tokens, StringBuilder sb, Lexer output, int line, int column) {
     if (sb.length() != 0) {
       Token fStringMiddleToken = buildToken(PythonTokenType.FSTRING_MIDDLE, sb.toString(), output, line, column);
       sb.setLength(0);
@@ -168,7 +161,7 @@ public class FStringChannel312 extends Channel<Lexer> {
     }
   }
 
-  private void addFStringEndToTokens(CodeReader code, char quote, List<Token> tokens, StringBuilder sb, Lexer output) {
+  private void addFStringEndToTokens(CodeReader code, char quote, List<Token> tokens, Lexer output) {
     StringBuilder endQuotes = consumeFStringQuotes(code, quote);
     lexerState.fStringStateStack.pop();
     Token fStringEndToken = buildToken(PythonTokenType.FSTRING_END, endQuotes.toString(), output, code.getLinePosition(), code.getColumnPosition());
@@ -183,7 +176,7 @@ public class FStringChannel312 extends Channel<Lexer> {
     tokens.add(curlyBraceToken);
   }
 
-  private StringBuilder consumeFStringQuotes(CodeReader code, char quote) {
+  private static StringBuilder consumeFStringQuotes(CodeReader code, char quote) {
     StringBuilder quotes = new StringBuilder();
     if (code.charAt(1) == quote && code.charAt(2) == quote) {
       quotes.append((char) code.pop());
@@ -195,11 +188,8 @@ public class FStringChannel312 extends Channel<Lexer> {
     return quotes;
   }
 
-  private static void addToken(TokenType tokenType, String value, Lexer output, int line, int column) {
-    output.addToken(buildToken(tokenType, value, output, line, column));
-  }
 
-  private void addTokens(List<Token> tokens, Lexer output) {
+  private static void addTokens(List<Token> tokens, Lexer output) {
     output.addToken(tokens.toArray(Token[]::new));
   }
 

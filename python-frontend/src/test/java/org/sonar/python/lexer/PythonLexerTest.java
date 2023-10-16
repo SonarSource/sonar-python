@@ -232,6 +232,16 @@ class PythonLexerTest {
   }
 
   @Test
+  void fstring_dict_access() {
+    assertThat(fStringLexer.lex("f\"{mydict[\"a\"]}\""), allOf(
+      hasToken("f\"", PythonTokenType.FSTRING_START),
+      hasToken("{", PythonPunctuator.LCURLYBRACE),
+      hasToken("mydict", GenericTokenType.IDENTIFIER),
+      hasToken("}", PythonPunctuator.RCURLYBRACE),
+      hasToken("\"", PythonTokenType.FSTRING_END)));
+  }
+
+  @Test
   void fstring_single_quote() {
     assertThat(fStringLexer.lex("f'{a} foo'"), allOf(
       hasToken("f'", PythonTokenType.FSTRING_START),
