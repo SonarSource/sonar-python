@@ -19,32 +19,23 @@
  */
 package org.sonar.python.lexer;
 
-
 public class FStringState {
 
   Character quote;
-  int nestingLevel;
   int numberOfQuotes;
-  boolean isInFString = true;
 
-  public enum Mode{
+  public enum Mode {
     REGULAR_MODE,
     FSTRING_MODE,
     FORMAT_SPECIFIER_MODE
   }
-  
+
   private Mode tokenizerMode;
 
-  public FStringState(Mode mode, int nestingLevel) {
+  public FStringState(Mode mode) {
     this.tokenizerMode = mode;
-    this.nestingLevel = nestingLevel;
   }
 
-  public FStringState(Mode mode, int nestingLevel, boolean isInFString) {
-    this.tokenizerMode = mode;
-    this.nestingLevel = nestingLevel;
-    this.isInFString = isInFString;
-  }
   public Character getQuote() {
     return quote;
   }
@@ -55,10 +46,6 @@ public class FStringState {
 
   public Mode getTokenizerMode() {
     return tokenizerMode;
-  }
-
-  public int getNestingLevel() {
-    return nestingLevel;
   }
 
   public int getNumberOfQuotes() {

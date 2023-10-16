@@ -34,8 +34,7 @@ public class LexerState {
   boolean joined;
   int initialLine = 1;
   int initialColumn = 0;
-  boolean isInFString = false;
-  
+
   public void reset() {
     indentationStack.clear();
     indentationStack.push(0);
@@ -43,13 +42,13 @@ public class LexerState {
     brackets = 0;
     joined = false;
     fStringStateStack.clear();
-    fStringStateStack.push(new FStringState(Mode.REGULAR_MODE, 0, false));
+    fStringStateStack.push(new FStringState(Mode.REGULAR_MODE));
   }
 
   public void reset(int initialLine, int initialColumn) {
     reset();
     this.initialLine = initialLine;
     this.initialColumn = initialColumn;
-  }  
+  }
 
 }

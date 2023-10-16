@@ -281,6 +281,21 @@ class PythonLexerTest {
   }
 
   @Test
+  void fstring_nested_mixed_number_of_quotes() {
+    assertThat(fStringLexer.lex("f\"{f\"\"\"{1+1}\"\"\"}\""), allOf(
+      hasToken("f\"", PythonTokenType.FSTRING_START),
+      hasToken("{", PythonPunctuator.LCURLYBRACE),
+      hasToken("f\"\"\"", PythonTokenType.FSTRING_START),
+      hasToken("{", PythonPunctuator.LCURLYBRACE),
+      hasToken("1", PythonTokenType.NUMBER),
+      hasToken("+", PythonPunctuator.PLUS),
+      hasToken("1", PythonTokenType.NUMBER),
+      hasToken("}", PythonPunctuator.RCURLYBRACE),
+      hasToken("\"\"\"", PythonTokenType.FSTRING_END),
+      hasToken("}", PythonPunctuator.RCURLYBRACE),
+      hasToken("\"", PythonTokenType.FSTRING_END)));
+  }
+  @Test
   void fstring_nested_different_quotes() {
     assertThat(fStringLexer.lex("f\"{f'{1+1}'}\""), allOf(
       hasToken("f\"", PythonTokenType.FSTRING_START),

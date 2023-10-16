@@ -21,6 +21,7 @@ package org.sonar.python.lexer;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
 
 import org.sonar.python.api.PythonPunctuator;
 import org.sonar.python.api.PythonTokenType;
@@ -63,7 +64,7 @@ public class FStringChannel312 extends Channel<Lexer> {
     if (canConsumeFStringPrefix(sb, code)) {
       char quote = (char) code.charAt(0);
       StringBuilder quotes = consumeFStringQuotes(code, quote);
-      FStringState newState = new FStringState(Mode.FSTRING_MODE, currentState.getNestingLevel() + 1);
+      FStringState newState = new FStringState(Mode.FSTRING_MODE);
       newState.setQuote(quote);
       newState.setNumberOfQuotes(quotes.length());
       lexerState.fStringStateStack.push(newState);
@@ -74,12 +75,9 @@ public class FStringChannel312 extends Channel<Lexer> {
       return consumeFStringMiddle(tokens, sb, newState, code, output);
     }
 
-    FStringState.Mode currentMode =  currentState.getTokenizerMode();
-    if(!currentState.isInFString){
-      return false;
-    }
+    FStringState.Mode currentMode = currentState.getTokenizerMode();
 
-    if (currentMode == Mode.REGULAR_MODE) {
+    if (currentMode == Mode.REGULAR_MODE && lexerState.fStringStateStack.size() > 1) {
       if (c == '}') {
         Token rCurlyBraceToken = buildToken(PythonPunctuator.RCURLYBRACE, "}", output, line, column);
         code.pop();
@@ -89,13 +87,11 @@ public class FStringChannel312 extends Channel<Lexer> {
         FStringState previousState = lexerState.fStringStateStack.peek();
         return consumeFStringMiddle(tokens, sb, previousState, code, output);
       } else if (c == ':') {
-        // TODO check nesting level
         Token formatSpecifier = buildToken(PythonPunctuator.COLON, ":", output, line, column);
         code.pop();
         List<Token> tokens = new ArrayList<>();
         tokens.add(formatSpecifier);
-        int nestingLevel = currentState == null ? 0 : currentState.getNestingLevel();
-        FStringState newState = new FStringState(Mode.FORMAT_SPECIFIER_MODE, nestingLevel + 1);
+        FStringState newState = new FStringState(Mode.FORMAT_SPECIFIER_MODE);
         lexerState.fStringStateStack.push(newState);
         return consumeFStringMiddle(tokens, sb, newState, code, output);
       }
@@ -129,9 +125,7 @@ public class FStringChannel312 extends Channel<Lexer> {
     int column = code.getColumnPosition();
     FStringState.Mode currentMode = state.getTokenizerMode();
     while (code.charAt(0) != EOF) {
-      if (currentMode == Mode.FSTRING_MODE &&
-        ((code.charAt(0) == '{' && code.charAt(1) == '{') ||
-          (code.charAt(0) == '}' && code.charAt(1) == '}'))) {
+      if (currentMode == Mode.FSTRING_MODE && isEscapedCurlyBrace(code)) {
         code.pop();
         sb.append((char) code.pop());
       } else if (code.charAt(0) == '{') {
@@ -144,8 +138,7 @@ public class FStringChannel312 extends Channel<Lexer> {
         lexerState.fStringStateStack.pop();
         addTokens(tokens, output);
         return true;
-        //TODO Add check for number of quotes
-      } else if (currentMode == Mode.FSTRING_MODE && code.charAt(0) == state.getQuote()) {
+      } else if (currentMode == Mode.FSTRING_MODE && areClosingQuotes(code, state)) {
         addFStringMiddleToTokens(tokens, sb, output, line, column);
         addFStringEndToTokens(code, state.getQuote(), tokens, sb, output);
         addTokens(tokens, output);
@@ -153,6 +146,18 @@ public class FStringChannel312 extends Channel<Lexer> {
       } else {
         sb.append((char) code.pop());
       }
+    }
+    return false;
+  }
+
+  private boolean isEscapedCurlyBrace(CodeReader code) {
+    return (code.charAt(0) == '{' && code.charAt(1) == '{') || (code.charAt(0) == '}' && code.charAt(1) == '}');
+  }
+
+  private boolean areClosingQuotes(CodeReader code, FStringState state) {
+    if (code.charAt(0) == state.getQuote()) {
+      char[] quotes = code.peek(state.getNumberOfQuotes());
+      return IntStream.range(0, quotes.length).mapToObj(i -> quotes[i]).allMatch(c -> c == state.getQuote());
     }
     return false;
   }
@@ -175,8 +180,7 @@ public class FStringChannel312 extends Channel<Lexer> {
   private void addFStringLCurlyBraceToTokens(List<Token> tokens, CodeReader code, Lexer output) {
     Token curlyBraceToken = buildToken(PythonPunctuator.LCURLYBRACE, "{", output, code.getLinePosition(), code.getColumnPosition());
     code.pop();
-    FStringState currentState = lexerState.fStringStateStack.peek();
-    FStringState updatedState = new FStringState(FStringState.Mode.REGULAR_MODE, currentState.getNestingLevel() + 1);
+    FStringState updatedState = new FStringState(FStringState.Mode.REGULAR_MODE);
     lexerState.fStringStateStack.push(updatedState);
     tokens.add(curlyBraceToken);
   }
