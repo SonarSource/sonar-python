@@ -295,6 +295,7 @@ class PythonLexerTest {
       hasToken("}", PythonPunctuator.RCURLYBRACE),
       hasToken("\"", PythonTokenType.FSTRING_END)));
   }
+
   @Test
   void fstring_nested_different_quotes() {
     assertThat(fStringLexer.lex("f\"{f'{1+1}'}\""), allOf(
@@ -356,6 +357,52 @@ class PythonLexerTest {
       hasToken("\"", PythonTokenType.FSTRING_END)));
   }
 
+  @Test
+  void fstring_nested_fields_format_specifier() {
+    assertThat(fStringLexer.lex("f\"abc {a + b:{width}.{length}}\""), allOf(
+      hasToken("f\"", PythonTokenType.FSTRING_START),
+      hasToken("abc ", PythonTokenType.FSTRING_MIDDLE),
+      hasToken("{", PythonPunctuator.LCURLYBRACE),
+      hasToken("a", GenericTokenType.IDENTIFIER),
+      hasToken("+", PythonPunctuator.PLUS),
+      hasToken("b", GenericTokenType.IDENTIFIER),
+      hasToken(":", PythonPunctuator.COLON),
+      hasToken("{", PythonPunctuator.LCURLYBRACE),
+      hasToken("width", GenericTokenType.IDENTIFIER),
+      hasToken("}", PythonPunctuator.RCURLYBRACE),
+      hasToken("{", PythonPunctuator.LCURLYBRACE),
+      hasToken("length", GenericTokenType.IDENTIFIER),
+      hasToken("}", PythonPunctuator.RCURLYBRACE),
+      hasToken("}", PythonPunctuator.RCURLYBRACE),
+      hasToken("\"", PythonTokenType.FSTRING_END)));
+  }
+
+  @Test
+  void fstring_date_format_specifier() {
+    assertThat(fStringLexer.lex("f\"{date:%B %d, %Y}\""), allOf(
+      hasToken("f\"", PythonTokenType.FSTRING_START),
+      hasToken("{", PythonPunctuator.LCURLYBRACE),
+      hasToken("date", GenericTokenType.IDENTIFIER),
+      hasToken(":", PythonPunctuator.COLON),
+      hasToken("%B %d, %Y", PythonTokenType.FSTRING_MIDDLE),
+      hasToken("}", PythonPunctuator.RCURLYBRACE),
+      hasToken("\"", PythonTokenType.FSTRING_END)));
+  }
+
+  @Test
+  void fstring_complex_format_specifier() {
+    assertThat(fStringLexer.lex("f\"{line = !r:20}\""), allOf(
+      hasToken("f\"", PythonTokenType.FSTRING_START),
+      hasToken("{", PythonPunctuator.LCURLYBRACE),
+      hasToken("line", GenericTokenType.IDENTIFIER),
+      hasToken("=", PythonPunctuator.ASSIGN),
+      hasToken("!", GenericTokenType.UNKNOWN_CHAR),
+      hasToken("r", GenericTokenType.IDENTIFIER),
+      hasToken(":", PythonPunctuator.COLON),
+      hasToken("20", PythonTokenType.FSTRING_MIDDLE),
+      hasToken("}", PythonPunctuator.RCURLYBRACE),
+      hasToken("\"", PythonTokenType.FSTRING_END)));
+  }
   /**
    * http://docs.python.org/reference/lexical_analysis.html#integer-and-long-integer-literals
    */
