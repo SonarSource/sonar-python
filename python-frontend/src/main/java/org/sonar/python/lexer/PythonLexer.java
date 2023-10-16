@@ -33,6 +33,8 @@ import static com.sonar.sslr.impl.channel.RegexpChannelBuilder.commentRegexp;
 import static com.sonar.sslr.impl.channel.RegexpChannelBuilder.o2n;
 import static com.sonar.sslr.impl.channel.RegexpChannelBuilder.regexp;
 
+import java.util.Arrays;
+
 public final class PythonLexer {
 
   private static final String EXP = "([Ee][+-]?+[0-9_]++)";
@@ -68,49 +70,98 @@ public final class PythonLexer {
 
   private static void addCommonChannels(Lexer.Builder builder, LexerState lexerState) {
     builder
-        .withChannel(new NewLineChannel(lexerState))
+      .withChannel(new NewLineChannel(lexerState))
 
-        .withChannel(new IndentationChannel(lexerState))
+      .withChannel(new IndentationChannel(lexerState))
 
-        .withChannel(new BlackHoleChannel("\\s"))
+      .withChannel(new BlackHoleChannel("\\s"))
 
-        // http://docs.python.org/reference/lexical_analysis.html#comments
-        .withChannel(commentRegexp("#[^\\n\\r]*+"))
+      // http://docs.python.org/reference/lexical_analysis.html#comments
+      .withChannel(commentRegexp("#[^\\n\\r]*+"))
 
-        // http://docs.python.org/reference/lexical_analysis.html#string-literals
-        .withChannel(new StringLiteralsChannel())
+      // http://docs.python.org/reference/lexical_analysis.html#string-literals
+      .withChannel(new StringLiteralsChannel())
 
-        // http://docs.python.org/release/3.2/reference/lexical_analysis.html#string-and-bytes-literals
-        .withChannel(regexp(PythonTokenType.STRING, BYTES_PREFIX + "\'([^\'\\\\]*+(\\\\[\\s\\S])?+)*+\'"))
-        .withChannel(regexp(PythonTokenType.STRING, BYTES_PREFIX + "\"([^\"\\\\]*+(\\\\[\\s\\S])?+)*+\""))
+      // http://docs.python.org/release/3.2/reference/lexical_analysis.html#string-and-bytes-literals
+      .withChannel(regexp(PythonTokenType.STRING, BYTES_PREFIX + "\'([^\'\\\\]*+(\\\\[\\s\\S])?+)*+\'"))
+      .withChannel(regexp(PythonTokenType.STRING, BYTES_PREFIX + "\"([^\"\\\\]*+(\\\\[\\s\\S])?+)*+\""))
 
-        //https://docs.python.org/3.6/reference/lexical_analysis.html#formatted-string-literals
+      //https://docs.python.org/3.6/reference/lexical_analysis.html#formatted-string-literals
       .withChannel(regexp(PythonTokenType.STRING, FORMATTED_STRING_PREFIX + "\'([^\'\\\\]*+(\\\\[\\s\\S])?+)*+\'"))
       .withChannel(regexp(PythonTokenType.STRING, FORMATTED_STRING_PREFIX + "\"([^\"\\\\]*+(\\\\[\\s\\S])?+)*+\""))
 
-        // http://docs.python.org/reference/lexical_analysis.html#floating-point-literals
-        // http://docs.python.org/reference/lexical_analysis.html#imaginary-literals
-        // https://www.python.org/dev/peps/pep-0515/
-        .withChannel(regexp(PythonTokenType.NUMBER, "[0-9]++(_?[0-9])*+\\.[0-9]*+(_?[0-9])*+" + EXP + "?+" + IMAGINARY_SUFFIX + "?+"))
-        .withChannel(regexp(PythonTokenType.NUMBER, "\\.[0-9]++(_?[0-9])*+" + EXP + "?+" + IMAGINARY_SUFFIX + "?+"))
-        .withChannel(regexp(PythonTokenType.NUMBER, "[0-9]++(_?[0-9])*+" + EXP + IMAGINARY_SUFFIX + "?+"))
-        .withChannel(regexp(PythonTokenType.NUMBER, "[0-9]++(_?[0-9])*+" + IMAGINARY_SUFFIX))
+      // http://docs.python.org/reference/lexical_analysis.html#floating-point-literals
+      // http://docs.python.org/reference/lexical_analysis.html#imaginary-literals
+      // https://www.python.org/dev/peps/pep-0515/
+      .withChannel(regexp(PythonTokenType.NUMBER, "[0-9]++(_?[0-9])*+\\.[0-9]*+(_?[0-9])*+" + EXP + "?+" + IMAGINARY_SUFFIX + "?+"))
+      .withChannel(regexp(PythonTokenType.NUMBER, "\\.[0-9]++(_?[0-9])*+" + EXP + "?+" + IMAGINARY_SUFFIX + "?+"))
+      .withChannel(regexp(PythonTokenType.NUMBER, "[0-9]++(_?[0-9])*+" + EXP + IMAGINARY_SUFFIX + "?+"))
+      .withChannel(regexp(PythonTokenType.NUMBER, "[0-9]++(_?[0-9])*+" + IMAGINARY_SUFFIX))
 
-        // http://docs.python.org/reference/lexical_analysis.html#integer-and-long-integer-literals
-        // https://www.python.org/dev/peps/pep-0515/
-        .withChannel(regexp(PythonTokenType.NUMBER, "0[oO]?+(_?[0-7])++" + LONG_INTEGER_SUFFIX + "?+"))
-        .withChannel(regexp(PythonTokenType.NUMBER, "0[xX](_?[0-9a-fA-F])++" + LONG_INTEGER_SUFFIX + "?+"))
-        .withChannel(regexp(PythonTokenType.NUMBER, "0[bB](_?[01])++" + LONG_INTEGER_SUFFIX + "?+"))
-        .withChannel(regexp(PythonTokenType.NUMBER, "[1-9](_?[0-9])*+" + LONG_INTEGER_SUFFIX + "?+"))
-        .withChannel(regexp(PythonTokenType.NUMBER, "0(_?0)*+" + LONG_INTEGER_SUFFIX + "?+"))
+      // http://docs.python.org/reference/lexical_analysis.html#integer-and-long-integer-literals
+      // https://www.python.org/dev/peps/pep-0515/
+      .withChannel(regexp(PythonTokenType.NUMBER, "0[oO]?+(_?[0-7])++" + LONG_INTEGER_SUFFIX + "?+"))
+      .withChannel(regexp(PythonTokenType.NUMBER, "0[xX](_?[0-9a-fA-F])++" + LONG_INTEGER_SUFFIX + "?+"))
+      .withChannel(regexp(PythonTokenType.NUMBER, "0[bB](_?[01])++" + LONG_INTEGER_SUFFIX + "?+"))
+      .withChannel(regexp(PythonTokenType.NUMBER, "[1-9](_?[0-9])*+" + LONG_INTEGER_SUFFIX + "?+"))
+      .withChannel(regexp(PythonTokenType.NUMBER, "0(_?0)*+" + LONG_INTEGER_SUFFIX + "?+"))
 
-        // http://docs.python.org/reference/lexical_analysis.html#identifiers
-        .withChannel(new IdentifierAndKeywordChannel(and(IDENTIFIER_START, o2n(IDENTIFIER_CONTINUE)), true, PythonKeyword.values()))
+      // http://docs.python.org/reference/lexical_analysis.html#identifiers
+      .withChannel(new IdentifierAndKeywordChannel(and(IDENTIFIER_START, o2n(IDENTIFIER_CONTINUE)), true, PythonKeyword.values()))
 
-        // http://docs.python.org/reference/lexical_analysis.html#operators
-        // http://docs.python.org/reference/lexical_analysis.html#delimiters
-        .withChannel(new PunctuatorChannel(PythonPunctuator.values()))
+      // http://docs.python.org/reference/lexical_analysis.html#operators
+      // http://docs.python.org/reference/lexical_analysis.html#delimiters
+      .withChannel(new PunctuatorChannel(PythonPunctuator.values()))
 
-        .withChannel(new UnknownCharacterChannel());
+      .withChannel(new UnknownCharacterChannel());
+  }
+
+  public static Lexer lexerPython312(LexerState lexerState) {
+    return Lexer.builder().withFailIfNoChannelToConsumeOneCharacter(true)
+      .withChannel(new NewLineChannel(lexerState))
+
+      .withChannel(new IndentationChannel(lexerState))
+
+      .withChannel(new BlackHoleChannel("\\s"))
+
+      // http://docs.python.org/reference/lexical_analysis.html#comments
+      .withChannel(commentRegexp("#[^\\n\\r]*+"))
+
+      //https://docs.python.org/3.12/reference/lexical_analysis.html#formatted-string-literals
+      .withChannel(new FStringChannel312(lexerState))
+
+      // http://docs.python.org/reference/lexical_analysis.html#string-literals
+      .withChannel(new StringLiteralsChannel())
+
+      // http://docs.python.org/release/3.2/reference/lexical_analysis.html#string-and-bytes-literals
+      .withChannel(regexp(PythonTokenType.STRING, BYTES_PREFIX + "\'([^\'\\\\]*+(\\\\[\\s\\S])?+)*+\'"))
+      .withChannel(regexp(PythonTokenType.STRING, BYTES_PREFIX + "\"([^\"\\\\]*+(\\\\[\\s\\S])?+)*+\""))
+
+
+      // http://docs.python.org/reference/lexical_analysis.html#floating-point-literals
+      // http://docs.python.org/reference/lexical_analysis.html#imaginary-literals
+      // https://www.python.org/dev/peps/pep-0515/
+      .withChannel(regexp(PythonTokenType.NUMBER, "[0-9]++(_?[0-9])*+\\.[0-9]*+(_?[0-9])*+" + EXP + "?+" + IMAGINARY_SUFFIX + "?+"))
+      .withChannel(regexp(PythonTokenType.NUMBER, "\\.[0-9]++(_?[0-9])*+" + EXP + "?+" + IMAGINARY_SUFFIX + "?+"))
+      .withChannel(regexp(PythonTokenType.NUMBER, "[0-9]++(_?[0-9])*+" + EXP + IMAGINARY_SUFFIX + "?+"))
+      .withChannel(regexp(PythonTokenType.NUMBER, "[0-9]++(_?[0-9])*+" + IMAGINARY_SUFFIX))
+
+      // http://docs.python.org/reference/lexical_analysis.html#integer-and-long-integer-literals
+      // https://www.python.org/dev/peps/pep-0515/
+      .withChannel(regexp(PythonTokenType.NUMBER, "0[oO]?+(_?[0-7])++" + LONG_INTEGER_SUFFIX + "?+"))
+      .withChannel(regexp(PythonTokenType.NUMBER, "0[xX](_?[0-9a-fA-F])++" + LONG_INTEGER_SUFFIX + "?+"))
+      .withChannel(regexp(PythonTokenType.NUMBER, "0[bB](_?[01])++" + LONG_INTEGER_SUFFIX + "?+"))
+      .withChannel(regexp(PythonTokenType.NUMBER, "[1-9](_?[0-9])*+" + LONG_INTEGER_SUFFIX + "?+"))
+      .withChannel(regexp(PythonTokenType.NUMBER, "0(_?0)*+" + LONG_INTEGER_SUFFIX + "?+"))
+
+      // http://docs.python.org/reference/lexical_analysis.html#identifiers
+      .withChannel(new IdentifierAndKeywordChannel(and(IDENTIFIER_START, o2n(IDENTIFIER_CONTINUE)), true, PythonKeyword.values()))
+
+      // http://docs.python.org/reference/lexical_analysis.html#operators
+      // http://docs.python.org/reference/lexical_analysis.html#delimiters
+      .withChannel(new PunctuatorChannel(PythonPunctuator.values()))
+
+      .withChannel(new UnknownCharacterChannel())
+      .build();
   }
 }

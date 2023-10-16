@@ -29,7 +29,7 @@ class PythonTokenTypeTest {
 
   @Test
   void test() {
-    assertThat(PythonTokenType.values()).hasSize(6);
+    assertThat(PythonTokenType.values()).hasSize(9);
 
     AstNode astNode = mock(AstNode.class);
     for (PythonTokenType tokenType : PythonTokenType.values()) {

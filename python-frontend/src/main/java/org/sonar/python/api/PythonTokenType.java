@@ -25,6 +25,10 @@ import com.sonar.sslr.api.TokenType;
 public enum PythonTokenType implements TokenType {
   NUMBER,
   STRING,
+  
+  FSTRING_START,
+  FSTRING_MIDDLE,
+  FSTRING_END,
 
   INDENT,
   DEDENT,
