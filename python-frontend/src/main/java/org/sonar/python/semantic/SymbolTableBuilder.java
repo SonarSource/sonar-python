@@ -21,6 +21,7 @@ package org.sonar.python.semantic;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Deque;
 import java.util.HashMap;
@@ -74,6 +75,7 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.plugins.python.api.tree.TupleParameter;
 import org.sonar.plugins.python.api.tree.TypeAnnotation;
+import org.sonar.plugins.python.api.tree.TypeParams;
 import org.sonar.plugins.python.api.tree.WithItem;
 import org.sonar.python.tree.ClassDefImpl;
 import org.sonar.python.tree.ComprehensionExpressionImpl;
@@ -326,9 +328,18 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
       currentScope().addFunctionSymbol(pyFunctionDefTree, fullyQualifiedName);
       createScope(pyFunctionDefTree, currentScope());
       enterScope(pyFunctionDefTree);
+      createTypeParameters(pyFunctionDefTree.typeParams());
       createParameters(pyFunctionDefTree);
       super.visitFunctionDef(pyFunctionDefTree);
       leaveScope();
+    }
+
+    private void createTypeParameters(@Nullable TypeParams typeParams) {
+      Optional.ofNullable(typeParams)
+        .map(TypeParams::typeParamsList)
+        .stream()
+        .flatMap(Collection::stream)
+        .forEach(typeParam -> addBindingUsage(typeParam.name(), Usage.Kind.TYPE_PARAM_DECLARATION));
     }
 
     @Override
@@ -338,6 +349,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
       currentScope().addClassSymbol(pyClassDefTree, fullyQualifiedName);
       createScope(pyClassDefTree, currentScope());
       enterScope(pyClassDefTree);
+      createTypeParameters(pyClassDefTree.typeParams());
       super.visitClassDef(pyClassDefTree);
       leaveScope();
     }
