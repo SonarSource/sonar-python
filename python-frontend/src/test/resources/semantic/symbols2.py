@@ -220,3 +220,7 @@ def importing_unknown_submodule():
     import werkzeug.datastructures.unknown
     import werkzeug.datastructures.unknown
     werkzeug.datastructures.Headers()
+
+def type_params[T: str]():
+    a : T = "abc"
+    return a
