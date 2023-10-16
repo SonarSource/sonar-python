@@ -35,7 +35,7 @@ import com.sonar.sslr.impl.Lexer;
 
 /**
  * A channel to handle f-strings.
- * See https://docs.python.org/3/reference/lexical_analysis.html#f-strings
+ * See https://docs.python.org/3.12/reference/lexical_analysis.html#formatted-string-literals
  */
 public class FStringChannel312 extends Channel<Lexer> {
 
@@ -106,19 +106,6 @@ public class FStringChannel312 extends Channel<Lexer> {
     return false;
   }
 
-  private boolean canConsumeFStringPrefix(StringBuilder sb, CodeReader code) {
-    if (PREFIXES.contains(Character.toUpperCase(code.charAt(0)))) {
-      if (QUOTES.contains(code.charAt(1))) {
-        sb.append((char) code.pop());
-        return true;
-      } else if ((PREFIXES.contains(Character.toUpperCase(code.charAt(1)))) && QUOTES.contains(code.charAt(2))) {
-        sb.append((char) code.pop());
-        sb.append((char) code.pop());
-        return true;
-      }
-    }
-    return false;
-  }
 
   private boolean consumeFStringMiddle(List<Token> tokens, StringBuilder sb, FStringState state, CodeReader code, Lexer output) {
     int line = code.getLinePosition();
@@ -130,7 +117,7 @@ public class FStringChannel312 extends Channel<Lexer> {
         sb.append((char) code.pop());
       } else if (code.charAt(0) == '{') {
         addFStringMiddleToTokens(tokens, sb, output, line, column);
-        addFStringLCurlyBraceToTokens(tokens, code, output);
+        addLCurlBraceAndSwitchToRegularMode(tokens, code, output);
         addTokens(tokens, output);
         return true;
       } else if (currentMode == Mode.FORMAT_SPECIFIER_MODE && code.charAt(0) == '}') {
@@ -150,16 +137,27 @@ public class FStringChannel312 extends Channel<Lexer> {
     return false;
   }
 
+  private boolean canConsumeFStringPrefix(StringBuilder sb, CodeReader code) {
+    if (PREFIXES.contains(Character.toUpperCase(code.charAt(0)))) {
+      if (QUOTES.contains(code.charAt(1))) {
+        sb.append((char) code.pop());
+        return true;
+      } else if ((PREFIXES.contains(Character.toUpperCase(code.charAt(1)))) && QUOTES.contains(code.charAt(2))) {
+        sb.append((char) code.pop());
+        sb.append((char) code.pop());
+        return true;
+      }
+    }
+    return false;
+  }
+
   private boolean isEscapedCurlyBrace(CodeReader code) {
     return (code.charAt(0) == '{' && code.charAt(1) == '{') || (code.charAt(0) == '}' && code.charAt(1) == '}');
   }
 
   private boolean areClosingQuotes(CodeReader code, FStringState state) {
-    if (code.charAt(0) == state.getQuote()) {
-      char[] quotes = code.peek(state.getNumberOfQuotes());
-      return IntStream.range(0, quotes.length).mapToObj(i -> quotes[i]).allMatch(c -> c == state.getQuote());
-    }
-    return false;
+    char[] quotes = code.peek(state.getNumberOfQuotes());
+    return IntStream.range(0, quotes.length).mapToObj(i -> quotes[i]).allMatch(c -> c == state.getQuote());
   }
 
   private void addFStringMiddleToTokens(List<Token> tokens, StringBuilder sb, Lexer output, int line, int column) {
@@ -177,7 +175,7 @@ public class FStringChannel312 extends Channel<Lexer> {
     tokens.add(fStringEndToken);
   }
 
-  private void addFStringLCurlyBraceToTokens(List<Token> tokens, CodeReader code, Lexer output) {
+  private void addLCurlBraceAndSwitchToRegularMode(List<Token> tokens, CodeReader code, Lexer output) {
     Token curlyBraceToken = buildToken(PythonPunctuator.LCURLYBRACE, "{", output, code.getLinePosition(), code.getColumnPosition());
     code.pop();
     FStringState updatedState = new FStringState(FStringState.Mode.REGULAR_MODE);
