@@ -440,7 +440,12 @@ class TypeShedTest {
     ClassSymbol intSymbol = TypeShed.typeShedClass("int");
     assertThat(intSymbol.resolveMember("bit_count")).isNotEmpty();
 
+    setPythonVersions(PythonVersionUtils.fromString("3.12"));
+    intSymbol = TypeShed.typeShedClass("int");
+    assertThat(intSymbol.resolveMember("bit_count")).isNotEmpty();
+
     setPythonVersions(PythonVersionUtils.allVersions());
+
   }
 
   @Test

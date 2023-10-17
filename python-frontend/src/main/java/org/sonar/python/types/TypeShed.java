@@ -214,6 +214,9 @@ public class TypeShed {
     if (validForPythonVersions.isEmpty()) {
       return true;
     }
+    if (supportedPythonVersions.stream().allMatch("312"::equals) && validForPythonVersions.contains("311")) {
+      return true;
+    }
     HashSet<String> intersection = new HashSet<>(validForPythonVersions);
     intersection.retainAll(supportedPythonVersions);
     return !intersection.isEmpty();
