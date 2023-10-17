@@ -101,3 +101,14 @@ def used_collection(list1):
 
     list[3] = 42
     list[3] = list[1] # FN
+
+def same_key_multiple_collections(bar_list, foo_entry, bar_entry, foo_value, bar_value):
+    import pandas as pd
+    foo_matrix = pd.DataFrame(index=bar_list, columns=bar_list)
+    bar_matrix = pd.DataFrame(index=bar_list, columns=bar_list)
+
+    foo_matrix.loc[foo_entry, bar_entry] = foo_value
+    foo_matrix.loc[foo_entry, bar_entry] = foo_value # Noncompliant
+    bar_matrix.loc[foo_entry, bar_entry] = bar_value
+
+

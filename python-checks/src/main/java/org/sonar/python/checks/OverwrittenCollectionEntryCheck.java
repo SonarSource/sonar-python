@@ -21,9 +21,11 @@ package org.sonar.python.checks;
 
 import java.util.AbstractMap;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
@@ -90,7 +92,7 @@ public class OverwrittenCollectionEntryCheck extends PythonSubscriptionCheck {
 
     } else if (expression.is(Kind.SUBSCRIPTION)) {
       SubscriptionExpression subscription = (SubscriptionExpression) expression;
-      String key = key(subscription.subscripts().children());
+      String key = key(subscription);
       return collectionWrite(assignment, subscription.object(), key, subscription.leftBracket(), subscription.rightBracket());
 
     } else {
@@ -119,6 +121,25 @@ public class OverwrittenCollectionEntryCheck extends PythonSubscriptionCheck {
     }
 
     return null;
+  }
+
+  @CheckForNull
+  private static String key(SubscriptionExpression subscriptionExpression) {
+    var subscriptsKey = key(subscriptionExpression.subscripts().children());
+
+    if (subscriptsKey == null) {
+      return null;
+    }
+
+    var objectKey = Optional.of(subscriptionExpression)
+      .map(SubscriptionExpression::object)
+      .map(TreeUtils::tokens)
+      .stream()
+      .flatMap(Collection::stream)
+      .map(Token::value)
+      .collect(Collectors.joining());
+
+    return objectKey + subscriptsKey;
   }
 
   @CheckForNull
