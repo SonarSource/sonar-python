@@ -19,3 +19,8 @@ def builtins(x: int, y: str):
   if 42 == y: ... # Noncompliant
   if x == None: ... # OK
   if None == y: ... # OK
+
+type T = str
+def foo(a: T):
+  if a == 42: # FN
+    ...

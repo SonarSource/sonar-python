@@ -182,6 +182,7 @@ public enum PythonGrammar implements GrammarRuleKey {
   FUN_RETURN_ANNOTATION,
   TYPE_PARAMS,
   TYPE_PARAM,
+  TYPE_ALIAS_STMT,
 
   CLASSDEF,
   CLASSNAME,

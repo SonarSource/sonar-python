@@ -2809,6 +2809,18 @@ class PythonTreeMakerTest extends RuleTest {
     assertThat(((Name) exceptClause2.exception()).name()).isEqualTo("ValueError");
   }
 
+  @Test
+  void typeAliasStatement() {
+    setRootRule(PythonGrammar.TYPE_ALIAS_STMT);
+    var typeAlias = parse("type A[B] = str", treeMaker::typeAliasStatement);
+    assertThat(typeAlias).isNotNull();
+    assertThat(typeAlias.typeKeyword()).isNotNull();
+    assertThat(typeAlias.name()).isNotNull();
+    assertThat(typeAlias.typeParams()).isNotNull();
+    assertThat(typeAlias.equalToken()).isNotNull();
+    assertThat(typeAlias.expression()).isNotNull();
+  }
+
   public String fileContent(File file) {
     try {
       return new String(Files.readAllBytes(file.toPath()), StandardCharsets.UTF_8);

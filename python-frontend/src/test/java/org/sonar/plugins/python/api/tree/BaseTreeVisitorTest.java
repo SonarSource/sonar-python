@@ -507,4 +507,16 @@ class BaseTreeVisitorTest extends RuleTest {
     verify(visitor).visitName(keywordPattern.attributeName());
     verify(visitor).visitLiteralPattern(((LiteralPattern) keywordPattern.pattern()));
   }
+
+  @Test
+  void type_alias_statement() {
+    setRootRule(PythonGrammar.TYPE_ALIAS_STMT);
+    var typeAliasStatement = parse("type A[B] = str", treeMaker::typeAliasStatement);
+    FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
+    typeAliasStatement.accept(visitor);
+
+    verify(visitor).visitTypeAliasStatement(typeAliasStatement);
+    verify(visitor).visitName(typeAliasStatement.name());
+    verify(visitor).visitName((Name) typeAliasStatement.expression());
+  }
 }

@@ -74,6 +74,7 @@ import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.plugins.python.api.tree.TupleParameter;
+import org.sonar.plugins.python.api.tree.TypeAliasStatement;
 import org.sonar.plugins.python.api.tree.TypeAnnotation;
 import org.sonar.plugins.python.api.tree.TypeParams;
 import org.sonar.plugins.python.api.tree.WithItem;
@@ -340,6 +341,12 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
         .stream()
         .flatMap(Collection::stream)
         .forEach(typeParam -> addBindingUsage(typeParam.name(), Usage.Kind.TYPE_PARAM_DECLARATION));
+    }
+
+    @Override
+    public void visitTypeAliasStatement(TypeAliasStatement typeAliasStatement) {
+      addBindingUsage(typeAliasStatement.name(), Usage.Kind.TYPE_ALIAS_DECLARATION);
+      super.visitTypeAliasStatement(typeAliasStatement);
     }
 
     @Override
