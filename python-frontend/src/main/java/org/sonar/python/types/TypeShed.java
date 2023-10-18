@@ -214,7 +214,9 @@ public class TypeShed {
     if (validForPythonVersions.isEmpty()) {
       return true;
     }
-    if (supportedPythonVersions.stream().allMatch("312"::equals) && validForPythonVersions.contains("311")) {
+    // TODO: SONARPY-1522 - remove this workaround when we will have all the stubs for Python 3.12.
+    if (supportedPythonVersions.stream().allMatch(PythonVersionUtils.Version.V_312.serializedValue()::equals)
+      && validForPythonVersions.contains(PythonVersionUtils.Version.V_312.serializedValue())) {
       return true;
     }
     HashSet<String> intersection = new HashSet<>(validForPythonVersions);

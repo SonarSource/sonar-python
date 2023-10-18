@@ -445,7 +445,6 @@ class TypeShedTest {
     assertThat(intSymbol.resolveMember("bit_count")).isNotEmpty();
 
     setPythonVersions(PythonVersionUtils.allVersions());
-
   }
 
   @Test
