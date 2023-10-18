@@ -1,5 +1,7 @@
 # Code Quality and Security for Python [![Build Status](https://api.cirrus-ci.com/github/SonarSource/sonar-python.svg?branch=master)](https://cirrus-ci.com/github/SonarSource/sonar-python)  [![Quality Gate](https://next.sonarqube.com/sonarqube/api/project_badges/measure?project=org.sonarsource.python%3Apython&metric=alert_status)](https://next.sonarqube.com/sonarqube/dashboard?id=https://next.sonarqube.com/sonarqube/dashboard?id=org.sonarsource.python%3Apython)
-#### Python analyzer for SonarQube, SonarCloud and SonarLint
+#### Python analyzer for SonarQube, SonarCloud, and SonarLint
+
+Sonar's [Clean Code solutions](https://www.sonarsource.com/solutions/clean-code/?utm_medium=referral&utm_source=github&utm_campaign=clean-code&utm_content=sonar-python) help developers deliver high-quality, efficient code standards that benefit the entire team or organization. 
 
 ## Useful links
 
@@ -20,7 +22,7 @@ The easiest way to build the Project is by running:
 
 `mvn clean install -DskipTypeshed`
 
-It builds only Java Maven modules, run tests, and install jar locally.
+It builds only Java Maven modules, runs tests, and installs jar locally.
 The Python interpreter is not required in that case.
 
 ### Full build
@@ -32,16 +34,16 @@ The Python interpreter is not required in that case.
 - [tox](https://tox.readthedocs.io/en/latest/) - `pip install tox`
 - Run `git submodule update --init` to retrieve [Typeshed](https://github.com/python/typeshed) as a Git submodule
 
-All above should be available in PATH.
+All the above should be available in PATH.
 
-To execute full build just run:
+To execute the full build just run:
 
 `mvn clean install`
 
 The full build executes [Typeshed](https://github.com/python/typeshed) serializer script. 
 It generates protobuf messages for Typeshed symbols (for standard Python API) and our customs symbols 
 (for Python libraries, e.g. [AWS CDK](https://docs.aws.amazon.com/cdk/v2/guide/work-with-cdk-python.html)).
-This helps in type inference and providing better rules.  
+This helps with type inference and providing better rules.  
 
 ## How to contribute
 
@@ -59,15 +61,15 @@ and needs to be unique in the whole project.
 
 ### Expectations:
 - Commit message should be prefixed with the ticket number.
-- Working on separate branch and creating PR when it's finished.
-- Clean coded, well tested solution, quality gate should pass.
+- Working on a separate branch and creating PR when it's finished.
+- Clean coded, well-tested solution, quality gate should pass.
 - Fix all issues reported by [SonarQube Next](https://next.sonarqube.com/sonarqube/dashboard?id=org.sonarsource.python%3Apython) instance.
-- 95% or more code coverage for new changes (if possible). It can be checked on CI build.
+- 95% or more code coverage for new changes (if possible). It can be checked on the CI build.
 
 ### Before push
 
 Please check if all files have a license header.
-If not, the `mvn install` will fail with `Some files do not have the expected license header` message.
+If not, the `mvn install` will fail with the `Some files do not have the expected license header` message.
 To fix that please execute: `mvn license:format`.
 
 ## License
