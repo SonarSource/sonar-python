@@ -23,6 +23,8 @@ public class FStringState {
 
   Character quote;
   int numberOfQuotes;
+  int brackets;
+
 
   public enum Mode {
     REGULAR_MODE,
@@ -32,8 +34,9 @@ public class FStringState {
 
   private Mode tokenizerMode;
 
-  public FStringState(Mode mode) {
+  public FStringState(Mode mode, int brackets) {
     this.tokenizerMode = mode;
+    this.brackets = brackets;
   }
 
   public Character getQuote() {
@@ -54,5 +57,9 @@ public class FStringState {
 
   public void setNumberOfQuotes(int numberOfQuotes) {
     this.numberOfQuotes = numberOfQuotes;
+  }
+
+  public int getBrackets() {
+    return brackets;
   }
 }

@@ -274,6 +274,20 @@ class PythonLexerTest {
       hasToken("\"\"\"", PythonTokenType.FSTRING_END)));
   }
 
+  // Lambdas and walrus operators should be surrounded by parenthesis in an FString
+  @Test
+  void fstring_incorrect_format_specifier() {
+    assertThat(fStringLexer.lex("f'{lambda a: a+42}'"), allOf(
+      hasToken("f'", PythonTokenType.FSTRING_START),
+      hasToken("{", PythonPunctuator.LCURLYBRACE),
+      hasToken("lambda"),
+      hasToken("a", GenericTokenType.IDENTIFIER),
+      hasToken(":", PythonPunctuator.COLON),
+      hasToken(" a+42", PythonTokenType.FSTRING_MIDDLE),
+      hasToken("}", PythonPunctuator.RCURLYBRACE),
+      hasToken("'", PythonTokenType.FSTRING_END)));
+  }
+
   @Test
   void fstring_walrus_operator() {
     assertThat(fStringLexer.lex("f'{(a:=42)}'"), allOf(

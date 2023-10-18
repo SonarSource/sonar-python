@@ -62,7 +62,7 @@ public class FStringChannel312 extends Channel<Lexer> {
     if (canConsumeFStringPrefix(sb, code)) {
       char quote = code.charAt(0);
       StringBuilder quotes = consumeFStringQuotes(code, quote);
-      FStringState newState = new FStringState(Mode.FSTRING_MODE);
+      FStringState newState = new FStringState(Mode.FSTRING_MODE, lexerState.brackets);
       newState.setQuote(quote);
       newState.setNumberOfQuotes(quotes.length());
       lexerState.fStringStateStack.push(newState);
@@ -84,13 +84,13 @@ public class FStringChannel312 extends Channel<Lexer> {
         lexerState.fStringStateStack.pop();
         FStringState previousState = lexerState.fStringStateStack.peek();
         return consumeFStringMiddle(tokens, sb, previousState, code, output);
-        // do not mistake the walrus operator for a format specifier
-      } else if (c == ':' && code.charAt(1) != '=') {
+        // do not lexer colon if the nesting level is different from the open curly brace
+      } else if (c == ':' && lexerState.brackets == currentState.getBrackets()) {
         Token formatSpecifier = buildToken(PythonPunctuator.COLON, ":", output, line, column);
         code.pop();
         List<Token> tokens = new ArrayList<>();
         tokens.add(formatSpecifier);
-        FStringState newState = new FStringState(Mode.FORMAT_SPECIFIER_MODE);
+        FStringState newState = new FStringState(Mode.FORMAT_SPECIFIER_MODE, lexerState.brackets);
         lexerState.fStringStateStack.push(newState);
         return consumeFStringMiddle(tokens, sb, newState, code, output);
       }
@@ -170,7 +170,7 @@ public class FStringChannel312 extends Channel<Lexer> {
   private void addLCurlBraceAndSwitchToRegularMode(List<Token> tokens, CodeReader code, Lexer output) {
     Token curlyBraceToken = buildToken(PythonPunctuator.LCURLYBRACE, "{", output, code.getLinePosition(), code.getColumnPosition());
     code.pop();
-    FStringState updatedState = new FStringState(FStringState.Mode.REGULAR_MODE);
+    FStringState updatedState = new FStringState(FStringState.Mode.REGULAR_MODE, lexerState.brackets);
     lexerState.fStringStateStack.push(updatedState);
     tokens.add(curlyBraceToken);
   }
