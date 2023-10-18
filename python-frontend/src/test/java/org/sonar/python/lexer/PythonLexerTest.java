@@ -275,6 +275,20 @@ class PythonLexerTest {
   }
 
   @Test
+  void fstring_walrus_operator() {
+    assertThat(fStringLexer.lex("f'{(a:=42)}'"), allOf(
+      hasToken("f'", PythonTokenType.FSTRING_START),
+      hasToken("{", PythonPunctuator.LCURLYBRACE),
+      hasToken("(", PythonPunctuator.LPARENTHESIS),
+      hasToken("a", GenericTokenType.IDENTIFIER),
+      hasToken(":=", PythonPunctuator.WALRUS_OPERATOR),
+      hasToken("42", PythonTokenType.NUMBER),
+      hasToken(")", PythonPunctuator.RPARENTHESIS),
+      hasToken("}", PythonPunctuator.RCURLYBRACE),
+      hasToken("'", PythonTokenType.FSTRING_END)));
+  }
+
+  @Test
   void fstring_nested() {
     assertThat(fStringLexer.lex("f\"{f\"{1+1}\"}\""), allOf(
       hasToken("f\"", PythonTokenType.FSTRING_START),

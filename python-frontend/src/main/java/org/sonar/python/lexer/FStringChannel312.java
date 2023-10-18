@@ -53,8 +53,6 @@ public class FStringChannel312 extends Channel<Lexer> {
 
   @Override
   public boolean consume(CodeReader code, Lexer output) {
-    setInitialLineAndColumn(code);
-
     char c = code.charAt(0);
     int line = code.getLinePosition();
     int column = code.getColumnPosition();
@@ -86,7 +84,8 @@ public class FStringChannel312 extends Channel<Lexer> {
         lexerState.fStringStateStack.pop();
         FStringState previousState = lexerState.fStringStateStack.peek();
         return consumeFStringMiddle(tokens, sb, previousState, code, output);
-      } else if (c == ':') {
+        // do not mistake the walrus operator for a format specifier
+      } else if (c == ':' && code.charAt(1) != '=') {
         Token formatSpecifier = buildToken(PythonPunctuator.COLON, ":", output, line, column);
         code.pop();
         List<Token> tokens = new ArrayList<>();
@@ -98,7 +97,6 @@ public class FStringChannel312 extends Channel<Lexer> {
     }
     return false;
   }
-
 
   private boolean consumeFStringMiddle(List<Token> tokens, StringBuilder sb, FStringState state, CodeReader code, Lexer output) {
     int line = code.getLinePosition();
@@ -131,15 +129,16 @@ public class FStringChannel312 extends Channel<Lexer> {
   }
 
   private static boolean canConsumeFStringPrefix(StringBuilder sb, CodeReader code) {
-    if (PREFIXES.contains(Character.toUpperCase(code.charAt(0)))) {
-      if (QUOTES.contains(code.charAt(1))) {
-        sb.append((char) code.pop());
-        return true;
-      } else if ((PREFIXES.contains(Character.toUpperCase(code.charAt(1)))) && QUOTES.contains(code.charAt(2))) {
-        sb.append((char) code.pop());
-        sb.append((char) code.pop());
-        return true;
-      }
+    Character firstChar = Character.toUpperCase(code.charAt(0));
+    Character secondChar = Character.toUpperCase(code.charAt(1));
+    if (firstChar == 'F' && QUOTES.contains(code.charAt(1))) {
+      sb.append((char) code.pop());
+      return true;
+    } else if (PREFIXES.contains(firstChar) && PREFIXES.contains(secondChar) &&
+      !firstChar.equals(secondChar) && QUOTES.contains(code.charAt(2))) {
+      sb.append((char) code.pop());
+      sb.append((char) code.pop());
+      return true;
     }
     return false;
   }
@@ -188,7 +187,6 @@ public class FStringChannel312 extends Channel<Lexer> {
     return quotes;
   }
 
-
   private static void addTokens(List<Token> tokens, Lexer output) {
     output.addToken(tokens.toArray(Token[]::new));
   }
@@ -201,12 +199,5 @@ public class FStringChannel312 extends Channel<Lexer> {
       .setLine(line)
       .setColumn(column)
       .build();
-  }
-
-  private void setInitialLineAndColumn(CodeReader code) {
-    if (code.getLinePosition() == 1 && code.getColumnPosition() == 0) {
-      code.setLinePosition(lexerState.initialLine);
-      code.setColumnPosition(lexerState.initialColumn);
-    }
   }
 }
