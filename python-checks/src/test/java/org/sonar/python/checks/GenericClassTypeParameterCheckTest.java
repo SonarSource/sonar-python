@@ -19,12 +19,26 @@
  */
 package org.sonar.python.checks;
 
+import java.util.EnumSet;
 import org.junit.jupiter.api.Test;
+import org.sonar.plugins.python.api.ProjectPythonVersion;
+import org.sonar.plugins.python.api.PythonVersionUtils;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 class GenericClassTypeParameterCheckTest {
   @Test
-  void test1() {
+  void test_python_3_12_only() {
+    ProjectPythonVersion.setCurrentVersions(EnumSet.of(PythonVersionUtils.Version.V_312));
     PythonCheckVerifier.verify("src/test/resources/checks/genericClassTypeParameter.py", new GenericClassTypeParameterCheck());
+  }
+
+  @Test
+  void test_python_3_12_and_older() {
+    ProjectPythonVersion.setCurrentVersions(EnumSet.of(PythonVersionUtils.Version.V_311, PythonVersionUtils.Version.V_312));
+    var issues = PythonCheckVerifier.issues("src/test/resources/checks/genericClassTypeParameter.py", new GenericClassTypeParameterCheck());
+    assertThat(issues)
+      .isEmpty();
   }
 }

@@ -25,6 +25,7 @@ import java.util.Optional;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.IssueLocation;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
+import org.sonar.plugins.python.api.PythonVersionUtils;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.ArgList;
@@ -48,6 +49,9 @@ public class GenericClassTypeParameterCheck extends PythonSubscriptionCheck {
   }
 
   private static void checkGenericInheritance(SubscriptionContext ctx) {
+    if (!supportsTypeParameterSyntax(ctx)) {
+      return;
+    }
     ClassDef classDef = (ClassDef) ctx.syntaxNode();
 
     ArgList args = classDef.args();
@@ -97,5 +101,13 @@ public class GenericClassTypeParameterCheck extends PythonSubscriptionCheck {
       .filter("typing.Generic"::equals)
       .isPresent();
 
+  }
+
+  private static boolean supportsTypeParameterSyntax(SubscriptionContext ctx) {
+    PythonVersionUtils.Version required = PythonVersionUtils.Version.V_312;
+
+    // All versions must be greater than or equal to the required version.
+    return ctx.sourcePythonVersions().stream()
+      .allMatch(version -> version.compare(required.major(), required.minor()) >= 0);
   }
 }
