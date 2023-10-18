@@ -23,10 +23,10 @@ import javax.annotation.CheckForNull;
 
 /**
  * <pre>
- *   return {@link #expressions()}
+ *   type {@link #name()} {@link #typeParams()} = {@link #expression()}
  * </pre>
  *
- * See https://docs.python.org/3/reference/simple_stmts.html#grammar-token-return-stmt
+ * See https://docs.python.org/3/reference/simple_stmts.html#the-type-statement
  */
 public interface TypeAliasStatement extends Statement {
   Token typeKeyword();

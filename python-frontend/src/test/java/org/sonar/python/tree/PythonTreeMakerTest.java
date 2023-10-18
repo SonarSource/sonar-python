@@ -2815,10 +2815,14 @@ class PythonTreeMakerTest extends RuleTest {
     var typeAlias = parse("type A[B] = str", treeMaker::typeAliasStatement);
     assertThat(typeAlias).isNotNull();
     assertThat(typeAlias.typeKeyword()).isNotNull();
+    assertThat(typeAlias.typeKeyword().value()).isEqualTo("type");
     assertThat(typeAlias.name()).isNotNull();
+    assertThat(typeAlias.name().name()).isEqualTo("A");
     assertThat(typeAlias.typeParams()).isNotNull();
     assertThat(typeAlias.equalToken()).isNotNull();
     assertThat(typeAlias.expression()).isNotNull();
+    assertThat(typeAlias.expression().is(Kind.NAME)).isTrue();
+    assertThat(((Name) typeAlias.expression()).name()).isEqualTo("str");
   }
 
   public String fileContent(File file) {
