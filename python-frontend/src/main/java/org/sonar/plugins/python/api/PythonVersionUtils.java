@@ -27,6 +27,7 @@ import org.slf4j.LoggerFactory;
 
 import static org.sonar.plugins.python.api.PythonVersionUtils.Version.V_310;
 import static org.sonar.plugins.python.api.PythonVersionUtils.Version.V_311;
+import static org.sonar.plugins.python.api.PythonVersionUtils.Version.V_312;
 import static org.sonar.plugins.python.api.PythonVersionUtils.Version.V_36;
 import static org.sonar.plugins.python.api.PythonVersionUtils.Version.V_37;
 import static org.sonar.plugins.python.api.PythonVersionUtils.Version.V_38;
@@ -40,7 +41,8 @@ public class PythonVersionUtils {
     V_38(3, 8, "38"),
     V_39(3, 9, "39"),
     V_310(3, 10, "310"),
-    V_311(3, 11, "311");
+    V_311(3, 11, "311"),
+    V_312(3, 12, "312");
 
     private final int major;
     private final int minor;
@@ -93,10 +95,10 @@ public class PythonVersionUtils {
     Map.entry("3.8", V_38),
     Map.entry("3.9", V_39),
     Map.entry("3.10", V_310),
-    Map.entry("3.11", V_311)
-  );
+    Map.entry("3.11", V_311),
+    Map.entry("3.12", V_312));
   private static final Version MIN_SUPPORTED_VERSION = V_36;
-  private static final Version MAX_SUPPORTED_VERSION = V_311;
+  private static final Version MAX_SUPPORTED_VERSION = V_312;
   private static final Logger LOG = LoggerFactory.getLogger(PythonVersionUtils.class);
   public static final String PYTHON_VERSION_KEY = "sonar.python.version";
 
@@ -166,7 +168,7 @@ public class PythonVersionUtils {
 
   private static void logErrorMessage(String propertyValue) {
     LOG.warn(
-      "Error while parsing value of parameter '{}' ({}). Versions must be specified as MAJOR_VERSION.MIN.VERSION (e.g. \"3.7, 3.8\")",
+      "Error while parsing value of parameter '{}' ({}). Versions must be specified as MAJOR_VERSION.MINOR_VERSION (e.g. \"3.7, 3.8\")",
       PYTHON_VERSION_KEY,
       propertyValue);
   }
