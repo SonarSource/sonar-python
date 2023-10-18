@@ -20,6 +20,7 @@
 package org.sonar.python.lexer;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.IntStream;
 
@@ -144,7 +145,7 @@ public class FStringChannel312 extends Channel<Lexer> {
   }
 
   private static boolean isEscapedCurlyBrace(CodeReader code) {
-    return (code.charAt(0) == '{' && code.charAt(1) == '{') || (code.charAt(0) == '}' && code.charAt(1) == '}');
+    return Arrays.equals(code.peek(2), "{{".toCharArray()) || Arrays.equals(code.peek(2), "}}".toCharArray());
   }
 
   private static boolean areClosingQuotes(CodeReader code, FStringState state) {

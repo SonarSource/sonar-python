@@ -50,5 +50,4 @@ public class LexerState {
     this.initialLine = initialLine;
     this.initialColumn = initialColumn;
   }
-
 }
