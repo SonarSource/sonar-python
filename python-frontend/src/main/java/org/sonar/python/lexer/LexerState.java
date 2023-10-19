@@ -22,9 +22,13 @@ package org.sonar.python.lexer;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
+import org.sonar.python.lexer.FStringState.Mode;
+
 public class LexerState {
 
   public final Deque<Integer> indentationStack = new ArrayDeque<>();
+
+  public final Deque<FStringState> fStringStateStack = new ArrayDeque<>();
 
   int brackets;
   boolean joined;
@@ -37,6 +41,8 @@ public class LexerState {
 
     brackets = 0;
     joined = false;
+    fStringStateStack.clear();
+    fStringStateStack.push(new FStringState(Mode.REGULAR_MODE, brackets));
   }
 
   public void reset(int initialLine, int initialColumn) {

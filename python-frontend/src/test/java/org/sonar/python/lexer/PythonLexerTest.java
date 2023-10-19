@@ -25,6 +25,8 @@ import com.sonar.sslr.api.Token;
 import com.sonar.sslr.impl.Lexer;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Function;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.api.PythonKeyword;
@@ -41,15 +43,22 @@ import static org.junit.Assert.assertThat;
 class PythonLexerTest {
 
   private static TestLexer lexer;
+  private static TestLexer fStringLexer;
 
   @BeforeAll
   static void init() {
-    lexer = new TestLexer();
+    lexer = new TestLexer(PythonLexer::create);
+    fStringLexer = new TestLexer(PythonLexer::lexerPython312);
   }
 
   private static class TestLexer {
-    private LexerState lexerState = new LexerState();
-    private Lexer lexer = PythonLexer.create(lexerState);
+    private LexerState lexerState;
+    private Lexer lexer;
+
+    public TestLexer(Function<LexerState, Lexer> lexerSupplier) {
+      this.lexerState = new LexerState();
+      this.lexer = lexerSupplier.apply(this.lexerState);
+    }
 
     List<Token> lex(String code) {
       lexerState.reset();
@@ -146,28 +155,321 @@ class PythonLexerTest {
    */
   @Test
   void formatted_string_literal() {
-    Set<String> formattedStringLiterals = ImmutableSet.of(
-      "F'foo'",
-      "f\"foo\"",
-      "f'foo{name}'",
-      "fr'foo'",
-      "Fr'foo'",
-      "fR'foo'",
-      "FR'foo'",
-      "rf'foo'",
-      "rF'foo'",
-      "Rf'foo'",
-      "RF'foo'",
-      "RF'foo\\n'",
-
-      "F'''foo'''",
-      "rF'''foo'''",
-      "fR\"\"\"foo\"\"\"");
-    for (String formattedStringLiteral : formattedStringLiterals) {
-      assertThat(lexer.lex(formattedStringLiteral), hasToken(formattedStringLiteral, PythonTokenType.STRING));
+    Set<String> fstringPrefixes = ImmutableSet.of(
+      "F",
+      "f",
+      "fr",
+      "Fr",
+      "fR",
+      "FR",
+      "rf",
+      "rF",
+      "Rf",
+      "RF");
+    for (String formattedStringLiteral : fstringPrefixes) {
+      assertThat(fStringLexer.lex(formattedStringLiteral + "''"), allOf(
+        hasToken(formattedStringLiteral + "'", PythonTokenType.FSTRING_START),
+        hasToken("'", PythonTokenType.FSTRING_END)));
     }
   }
 
+  /**
+   * https://docs.python.org/3.12/reference/lexical_analysis.html#formatted-string-literals
+   */
+  @Test
+  void fstring_empty() {
+    assertThat(fStringLexer.lex("f\"\""), allOf(
+      hasToken("f\"", PythonTokenType.FSTRING_START),
+      hasToken("\"", PythonTokenType.FSTRING_END)));
+  }
+
+  @Test
+  void fstring_no_code() {
+    assertThat(fStringLexer.lex("f\" te st \""), allOf(
+      hasToken("f\"", PythonTokenType.FSTRING_START),
+      hasToken(" te st ", PythonTokenType.FSTRING_MIDDLE),
+      hasToken("\"", PythonTokenType.FSTRING_END)));
+  }
+
+  @Test
+  void fstring_code_only() {
+    assertThat(fStringLexer.lex("f\"{a + b}\""), allOf(
+      hasToken("f\"", PythonTokenType.FSTRING_START),
+      hasToken("{", PythonPunctuator.LCURLYBRACE),
+      hasToken("a", GenericTokenType.IDENTIFIER),
+      hasToken("+", PythonPunctuator.PLUS),
+      hasToken("b", GenericTokenType.IDENTIFIER),
+      hasToken("}", PythonPunctuator.RCURLYBRACE),
+      hasToken("\"", PythonTokenType.FSTRING_END)));
+  }
+
+  @Test
+  void fstring() {
+    assertThat(fStringLexer.lex("f\"test {a + b} foo\""), allOf(
+      hasToken("f\"", PythonTokenType.FSTRING_START),
+      hasToken("test ", PythonTokenType.FSTRING_MIDDLE),
+      hasToken("{", PythonPunctuator.LCURLYBRACE),
+      hasToken("a", GenericTokenType.IDENTIFIER),
+      hasToken("+", PythonPunctuator.PLUS),
+      hasToken("b", GenericTokenType.IDENTIFIER),
+      hasToken("}", PythonPunctuator.RCURLYBRACE),
+      hasToken(" foo", PythonTokenType.FSTRING_MIDDLE),
+      hasToken("\"", PythonTokenType.FSTRING_END)));
+  }
+
+  @Test
+  void fstring_multiple_code() {
+    assertThat(fStringLexer.lex("f\"{a } + { b }\""), allOf(
+      hasToken("f\"", PythonTokenType.FSTRING_START),
+      hasToken("{", PythonPunctuator.LCURLYBRACE),
+      hasToken("a", GenericTokenType.IDENTIFIER),
+      hasToken("}", PythonPunctuator.RCURLYBRACE),
+      hasToken(" + ", PythonTokenType.FSTRING_MIDDLE),
+      hasToken("{", PythonPunctuator.LCURLYBRACE),
+      hasToken("b", GenericTokenType.IDENTIFIER),
+      hasToken("}", PythonPunctuator.RCURLYBRACE),
+      hasToken("\"", PythonTokenType.FSTRING_END)));
+  }
+
+  @Test
+  void fstring_dict_access() {
+    assertThat(fStringLexer.lex("f\"{mydict[\"a\"]}\""), allOf(
+      hasToken("f\"", PythonTokenType.FSTRING_START),
+      hasToken("{", PythonPunctuator.LCURLYBRACE),
+      hasToken("mydict", GenericTokenType.IDENTIFIER),
+      hasToken("}", PythonPunctuator.RCURLYBRACE),
+      hasToken("\"", PythonTokenType.FSTRING_END)));
+  }
+
+  @Test
+  void fstring_single_quote() {
+    assertThat(fStringLexer.lex("f'{a} foo'"), allOf(
+      hasToken("f'", PythonTokenType.FSTRING_START),
+      hasToken("{", PythonPunctuator.LCURLYBRACE),
+      hasToken("a", GenericTokenType.IDENTIFIER),
+      hasToken("}", PythonPunctuator.RCURLYBRACE),
+      hasToken(" foo", PythonTokenType.FSTRING_MIDDLE),
+      hasToken("'", PythonTokenType.FSTRING_END)));
+  }
+
+  @Test
+  void fstring_triple_single_quote() {
+    assertThat(fStringLexer.lex("f'''{a} foo'''"), allOf(
+      hasToken("f'''", PythonTokenType.FSTRING_START),
+      hasToken("{", PythonPunctuator.LCURLYBRACE),
+      hasToken("a", GenericTokenType.IDENTIFIER),
+      hasToken("}", PythonPunctuator.RCURLYBRACE),
+      hasToken(" foo", PythonTokenType.FSTRING_MIDDLE),
+      hasToken("'''", PythonTokenType.FSTRING_END)));
+  }
+
+  @Test
+  void fstring_triple_double_quote() {
+    assertThat(fStringLexer.lex("f\"\"\"{a} foo\"\"\""), allOf(
+      hasToken("f\"\"\"", PythonTokenType.FSTRING_START),
+      hasToken("{", PythonPunctuator.LCURLYBRACE),
+      hasToken("a", GenericTokenType.IDENTIFIER),
+      hasToken("}", PythonPunctuator.RCURLYBRACE),
+      hasToken(" foo", PythonTokenType.FSTRING_MIDDLE),
+      hasToken("\"\"\"", PythonTokenType.FSTRING_END)));
+  }
+
+  // Lambdas and walrus operators should be surrounded by parenthesis in an FString
+  @Test
+  void fstring_incorrect_lambda_format_specifier() {
+    assertThat(fStringLexer.lex("f'{lambda a: a+42}'"), allOf(
+      hasToken("f'", PythonTokenType.FSTRING_START),
+      hasToken("{", PythonPunctuator.LCURLYBRACE),
+      hasToken("lambda"),
+      hasToken("a", GenericTokenType.IDENTIFIER),
+      hasToken(":", PythonPunctuator.COLON),
+      hasToken(" a+42", PythonTokenType.FSTRING_MIDDLE),
+      hasToken("}", PythonPunctuator.RCURLYBRACE),
+      hasToken("'", PythonTokenType.FSTRING_END)));
+  }
+
+
+  @Test
+  void fstring_incorrect_walrus_operator() {
+    assertThat(fStringLexer.lex("f'{a:=42}'"), allOf(
+      hasToken("f'", PythonTokenType.FSTRING_START),
+      hasToken("{", PythonPunctuator.LCURLYBRACE),
+      hasToken("a", GenericTokenType.IDENTIFIER),
+      hasToken(":", PythonPunctuator.COLON),
+      hasToken("=42", PythonTokenType.FSTRING_MIDDLE),
+      hasToken("}", PythonPunctuator.RCURLYBRACE),
+      hasToken("'", PythonTokenType.FSTRING_END)));
+  }
+  @Test
+  void fstring_lambda() {
+    assertThat(fStringLexer.lex("f'{(lambda a: a+42)}'"), allOf(
+      hasToken("f'", PythonTokenType.FSTRING_START),
+      hasToken("{", PythonPunctuator.LCURLYBRACE),
+      hasToken("(", PythonPunctuator.LPARENTHESIS),
+      hasToken("lambda"),
+      hasToken("a", GenericTokenType.IDENTIFIER),
+      hasToken(":", PythonPunctuator.COLON),
+      hasToken("a", GenericTokenType.IDENTIFIER),
+      hasToken("+", PythonPunctuator.PLUS),
+      hasToken("42", PythonTokenType.NUMBER),
+      hasToken(")", PythonPunctuator.RPARENTHESIS),
+      hasToken("}", PythonPunctuator.RCURLYBRACE),
+      hasToken("'", PythonTokenType.FSTRING_END)));
+  }
+
+  @Test
+  void fstring_walrus_operator() {
+    assertThat(fStringLexer.lex("f'{(a:=42)}'"), allOf(
+      hasToken("f'", PythonTokenType.FSTRING_START),
+      hasToken("{", PythonPunctuator.LCURLYBRACE),
+      hasToken("(", PythonPunctuator.LPARENTHESIS),
+      hasToken("a", GenericTokenType.IDENTIFIER),
+      hasToken(":=", PythonPunctuator.WALRUS_OPERATOR),
+      hasToken("42", PythonTokenType.NUMBER),
+      hasToken(")", PythonPunctuator.RPARENTHESIS),
+      hasToken("}", PythonPunctuator.RCURLYBRACE),
+      hasToken("'", PythonTokenType.FSTRING_END)));
+  }
+
+  @Test
+  void fstring_nested() {
+    assertThat(fStringLexer.lex("f\"{f\"{1+1}\"}\""), allOf(
+      hasToken("f\"", PythonTokenType.FSTRING_START),
+      hasToken("{", PythonPunctuator.LCURLYBRACE),
+      hasToken("f\"", PythonTokenType.FSTRING_START),
+      hasToken("{", PythonPunctuator.LCURLYBRACE),
+      hasToken("1", PythonTokenType.NUMBER),
+      hasToken("+", PythonPunctuator.PLUS),
+      hasToken("1", PythonTokenType.NUMBER),
+      hasToken("}", PythonPunctuator.RCURLYBRACE),
+      hasToken("\"", PythonTokenType.FSTRING_END),
+      hasToken("}", PythonPunctuator.RCURLYBRACE),
+      hasToken("\"", PythonTokenType.FSTRING_END)));
+  }
+
+  @Test
+  void fstring_nested_mixed_number_of_quotes() {
+    assertThat(fStringLexer.lex("f\"{f\"\"\"{1+1}\"\"\"}\""), allOf(
+      hasToken("f\"", PythonTokenType.FSTRING_START),
+      hasToken("{", PythonPunctuator.LCURLYBRACE),
+      hasToken("f\"\"\"", PythonTokenType.FSTRING_START),
+      hasToken("{", PythonPunctuator.LCURLYBRACE),
+      hasToken("1", PythonTokenType.NUMBER),
+      hasToken("+", PythonPunctuator.PLUS),
+      hasToken("1", PythonTokenType.NUMBER),
+      hasToken("}", PythonPunctuator.RCURLYBRACE),
+      hasToken("\"\"\"", PythonTokenType.FSTRING_END),
+      hasToken("}", PythonPunctuator.RCURLYBRACE),
+      hasToken("\"", PythonTokenType.FSTRING_END)));
+  }
+
+  @Test
+  void fstring_nested_different_quotes() {
+    assertThat(fStringLexer.lex("f\"{f'{1+1}'}\""), allOf(
+      hasToken("f\"", PythonTokenType.FSTRING_START),
+      hasToken("{", PythonPunctuator.LCURLYBRACE),
+      hasToken("f'", PythonTokenType.FSTRING_START),
+      hasToken("{", PythonPunctuator.LCURLYBRACE),
+      hasToken("1", PythonTokenType.NUMBER),
+      hasToken("+", PythonPunctuator.PLUS),
+      hasToken("1", PythonTokenType.NUMBER),
+      hasToken("}", PythonPunctuator.RCURLYBRACE),
+      hasToken("'", PythonTokenType.FSTRING_END),
+      hasToken("}", PythonPunctuator.RCURLYBRACE),
+      hasToken("\"", PythonTokenType.FSTRING_END)));
+  }
+
+  @Test
+  void fstring_with_comment() {
+    assertThat(fStringLexer.lex("f\"abc{a # comment }\"\n + 3}\""), allOf(
+      hasToken("f\"", PythonTokenType.FSTRING_START),
+      hasToken("abc", PythonTokenType.FSTRING_MIDDLE),
+      hasToken("{", PythonPunctuator.LCURLYBRACE),
+      hasToken("a", GenericTokenType.IDENTIFIER),
+      hasToken("{", PythonPunctuator.LCURLYBRACE),
+      hasComment("# comment }\""),
+      hasToken("\n", PythonTokenType.NEWLINE),
+      hasToken(" ", PythonTokenType.INDENT),
+      hasToken("+", PythonPunctuator.PLUS),
+      hasToken("3", PythonTokenType.NUMBER),
+      hasToken("}", PythonPunctuator.RCURLYBRACE),
+      hasToken("\"", PythonTokenType.FSTRING_END)));
+  }
+
+  @Test
+  void fstring_with_escaped_braces() {
+    assertThat(fStringLexer.lex("f\"abc{{a}} { b + 3}\""), allOf(
+      hasToken("f\"", PythonTokenType.FSTRING_START),
+      hasToken("abc{{a}} ", PythonTokenType.FSTRING_MIDDLE),
+      hasToken("{", PythonPunctuator.LCURLYBRACE),
+      hasToken("b", GenericTokenType.IDENTIFIER),
+      hasToken("+", PythonPunctuator.PLUS),
+      hasToken("3", PythonTokenType.NUMBER),
+      hasToken("}", PythonPunctuator.RCURLYBRACE),
+      hasToken("\"", PythonTokenType.FSTRING_END)));
+  }
+
+  @Test
+  void fstring_format_specifier() {
+    assertThat(fStringLexer.lex("f\"abc {a + b:.3f}\""), allOf(
+      hasToken("f\"", PythonTokenType.FSTRING_START),
+      hasToken("abc ", PythonTokenType.FSTRING_MIDDLE),
+      hasToken("{", PythonPunctuator.LCURLYBRACE),
+      hasToken("a", GenericTokenType.IDENTIFIER),
+      hasToken("+", PythonPunctuator.PLUS),
+      hasToken("b", GenericTokenType.IDENTIFIER),
+      hasToken(":", PythonPunctuator.COLON),
+      hasToken(".3f", PythonTokenType.FSTRING_MIDDLE),
+      hasToken("}", PythonPunctuator.RCURLYBRACE),
+      hasToken("\"", PythonTokenType.FSTRING_END)));
+  }
+
+  @Test
+  void fstring_nested_fields_format_specifier() {
+    assertThat(fStringLexer.lex("f\"abc {a + b:{width}.{length}}\""), allOf(
+      hasToken("f\"", PythonTokenType.FSTRING_START),
+      hasToken("abc ", PythonTokenType.FSTRING_MIDDLE),
+      hasToken("{", PythonPunctuator.LCURLYBRACE),
+      hasToken("a", GenericTokenType.IDENTIFIER),
+      hasToken("+", PythonPunctuator.PLUS),
+      hasToken("b", GenericTokenType.IDENTIFIER),
+      hasToken(":", PythonPunctuator.COLON),
+      hasToken("{", PythonPunctuator.LCURLYBRACE),
+      hasToken("width", GenericTokenType.IDENTIFIER),
+      hasToken("}", PythonPunctuator.RCURLYBRACE),
+      hasToken("{", PythonPunctuator.LCURLYBRACE),
+      hasToken("length", GenericTokenType.IDENTIFIER),
+      hasToken("}", PythonPunctuator.RCURLYBRACE),
+      hasToken("}", PythonPunctuator.RCURLYBRACE),
+      hasToken("\"", PythonTokenType.FSTRING_END)));
+  }
+
+  @Test
+  void fstring_date_format_specifier() {
+    assertThat(fStringLexer.lex("f\"{date:%B %d, %Y}\""), allOf(
+      hasToken("f\"", PythonTokenType.FSTRING_START),
+      hasToken("{", PythonPunctuator.LCURLYBRACE),
+      hasToken("date", GenericTokenType.IDENTIFIER),
+      hasToken(":", PythonPunctuator.COLON),
+      hasToken("%B %d, %Y", PythonTokenType.FSTRING_MIDDLE),
+      hasToken("}", PythonPunctuator.RCURLYBRACE),
+      hasToken("\"", PythonTokenType.FSTRING_END)));
+  }
+
+  @Test
+  void fstring_complex_format_specifier() {
+    assertThat(fStringLexer.lex("f\"{line = !r:20}\""), allOf(
+      hasToken("f\"", PythonTokenType.FSTRING_START),
+      hasToken("{", PythonPunctuator.LCURLYBRACE),
+      hasToken("line", GenericTokenType.IDENTIFIER),
+      hasToken("=", PythonPunctuator.ASSIGN),
+      hasToken("!", GenericTokenType.UNKNOWN_CHAR),
+      hasToken("r", GenericTokenType.IDENTIFIER),
+      hasToken(":", PythonPunctuator.COLON),
+      hasToken("20", PythonTokenType.FSTRING_MIDDLE),
+      hasToken("}", PythonPunctuator.RCURLYBRACE),
+      hasToken("\"", PythonTokenType.FSTRING_END)));
+  }
   /**
    * http://docs.python.org/reference/lexical_analysis.html#integer-and-long-integer-literals
    */

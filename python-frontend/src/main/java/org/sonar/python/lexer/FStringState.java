@@ -17,37 +17,49 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.api;
+package org.sonar.python.lexer;
 
-import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.TokenType;
+public class FStringState {
 
-public enum PythonTokenType implements TokenType {
-  NUMBER,
-  STRING,
-  
-  FSTRING_START,
-  FSTRING_MIDDLE,
-  FSTRING_END,
+  Character quote;
+  int numberOfQuotes;
+  int brackets;
 
-  INDENT,
-  DEDENT,
-  NEWLINE,
-  IPYNB_CELL_DELIMITER;
 
-  @Override
-  public String getName() {
-    return name();
+  public enum Mode {
+    REGULAR_MODE,
+    FSTRING_MODE,
+    FORMAT_SPECIFIER_MODE
   }
 
-  @Override
-  public String getValue() {
-    return name();
+  private Mode tokenizerMode;
+
+  public FStringState(Mode mode, int brackets) {
+    this.tokenizerMode = mode;
+    this.brackets = brackets;
   }
 
-  @Override
-  public boolean hasToBeSkippedFromAst(AstNode node) {
-    return false;
+  public Character getQuote() {
+    return quote;
   }
 
+  public void setQuote(Character quote) {
+    this.quote = quote;
+  }
+
+  public Mode getTokenizerMode() {
+    return tokenizerMode;
+  }
+
+  public int getNumberOfQuotes() {
+    return numberOfQuotes;
+  }
+
+  public void setNumberOfQuotes(int numberOfQuotes) {
+    this.numberOfQuotes = numberOfQuotes;
+  }
+
+  public int getBrackets() {
+    return brackets;
+  }
 }
