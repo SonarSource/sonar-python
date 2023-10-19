@@ -69,7 +69,10 @@ public class ReferencedBeforeAssignmentCheck extends PythonSubscriptionCheck {
           currentState.put(symbol, DefinedVariablesAnalysis.VariableDefinition.DEFINED);
         }
         DefinedVariablesAnalysis.VariableDefinition varDef = currentState.getOrDefault(symbol, DefinedVariablesAnalysis.VariableDefinition.DEFINED);
-        if (symbolReadWrite.isRead() && isUndefined(varDef) && !isSymbolUsedInUnreachableBlocks(analysis, unreachableBlocks, symbol) && !isParameter(element)
+        if (symbolReadWrite.isRead() && isUndefined(varDef)
+          && !isSymbolUsedInUnreachableBlocks(analysis, unreachableBlocks, symbol)
+          && !isParameter(element)
+          && !isTypeAliasStatement(element)
           && !ignoredSymbols.contains(symbol)) {
           ignoredSymbols.add(symbol);
           Usage suspectUsage = symbolReadWrite.usages().get(0);
@@ -82,6 +85,10 @@ public class ReferencedBeforeAssignmentCheck extends PythonSubscriptionCheck {
 
   private static boolean isParameter(Tree element) {
     return element.is(Tree.Kind.PARAMETER);
+  }
+
+  private static boolean isTypeAliasStatement(Tree element) {
+    return element.is(Tree.Kind.TYPE_ALIAS_STMT);
   }
 
   private static boolean isSymbolUsedInUnreachableBlocks(DefinedVariablesAnalysis analysis, Set<CfgBlock> unreachableBlocks, Symbol symbol) {
