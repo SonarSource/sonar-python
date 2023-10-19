@@ -39,13 +39,16 @@ public class TypeAliasStatementImpl extends SimpleStatement implements TypeAlias
   private final TypeParams typeParams;
   private final Token equalToken;
   private final Expression expression;
+  private final Separators separator;
 
-  public TypeAliasStatementImpl(Token typeKeyword, Name name, @Nullable TypeParams typeParams, Token equalToken, Expression expression) {
+  public TypeAliasStatementImpl(Token typeKeyword, Name name, @Nullable TypeParams typeParams,
+    Token equalToken, Expression expression, Separators separator) {
     this.typeKeyword = typeKeyword;
     this.name = name;
     this.typeParams = typeParams;
     this.equalToken = equalToken;
     this.expression = expression;
+    this.separator = separator;
   }
 
   @Override
@@ -86,8 +89,18 @@ public class TypeAliasStatementImpl extends SimpleStatement implements TypeAlias
 
   @Override
   List<Tree> computeChildren() {
-    return Stream.of(typeKeyword(), name(), typeParams(), equalToken(), expression())
-      .filter(Objects::nonNull)
-      .collect(Collectors.toList());
+    var builder = Stream.<Tree>builder()
+      .add(typeKeyword())
+      .add(name())
+      .add(typeParams())
+      .add(equalToken()).add(expression());
+
+    separator.elements().forEach(builder::add);
+    return builder.build().filter(Objects::nonNull).collect(Collectors.toList());
+  }
+
+  @Override
+  public Token separator() {
+    return separator.last();
   }
 }

@@ -2812,7 +2812,11 @@ class PythonTreeMakerTest extends RuleTest {
   @Test
   void typeAliasStatement() {
     setRootRule(PythonGrammar.TYPE_ALIAS_STMT);
-    var typeAlias = parse("type A[B] = str", treeMaker::typeAliasStatement);
+
+    var astNode = p.parse("type A[B] = str");
+    var statementWithSeparator = new StatementWithSeparator(astNode, null);
+    var typeAlias = treeMaker.typeAliasStatement(statementWithSeparator);
+
     assertThat(typeAlias).isNotNull();
     assertThat(typeAlias.typeKeyword()).isNotNull();
     assertThat(typeAlias.typeKeyword().value()).isEqualTo("type");

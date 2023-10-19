@@ -511,8 +511,11 @@ class BaseTreeVisitorTest extends RuleTest {
   @Test
   void type_alias_statement() {
     setRootRule(PythonGrammar.TYPE_ALIAS_STMT);
-    var typeAliasStatement = parse("type A[B] = str", treeMaker::typeAliasStatement);
-    FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
+    var node = p.parse("type A[B] = str");
+    var statementWithSeparator = new StatementWithSeparator(node, null);
+    var typeAliasStatement = treeMaker.typeAliasStatement(statementWithSeparator);
+
+    var visitor = spy(FirstLastTokenVerifierVisitor.class);
     typeAliasStatement.accept(visitor);
 
     verify(visitor).visitTypeAliasStatement(typeAliasStatement);

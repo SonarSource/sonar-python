@@ -191,9 +191,8 @@ def match_statement_no_fp_reassignment(value):
     case x:  # OK, though should be raised by S1854 (dead store)
       x = 42
 
-
-def type_aliases_statement_fp():
-    # To be fixed in https://sonarsource.atlassian.net/browse/SONARPY-1524 ticket
+# To be fixed in https://sonarsource.atlassian.net/browse/SONARPY-1524 ticket
+def type_aliases_statement_fp_reference():
     type A = B # Noncompliant
     type B = getType() # Noncompliant
 

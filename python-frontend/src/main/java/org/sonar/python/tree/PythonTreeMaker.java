@@ -238,18 +238,20 @@ public class PythonTreeMaker {
       return matchStatement(astNode);
     }
     if (astNode.is(PythonGrammar.TYPE_ALIAS_STMT)) {
-      return typeAliasStatement(astNode);
+      return typeAliasStatement(statementWithSeparator);
     }
     throw new IllegalStateException("Statement " + astNode.getType() + " not correctly translated to strongly typed AST");
   }
 
-  public TypeAliasStatement typeAliasStatement(AstNode astNode) {
+  public TypeAliasStatement typeAliasStatement(StatementWithSeparator statementWithSeparator) {
+    var astNode = statementWithSeparator.statement();
+    var separator = statementWithSeparator.separator();
     var typeDef = toPyToken(astNode.getChildren().get(0).getToken());
     var name = name(astNode.getFirstChild(PythonGrammar.NAME));
     var typeParams = typeParams(astNode);
     var equalToken = toPyToken(astNode.getFirstChild(PythonPunctuator.ASSIGN).getToken());
     var expression = expression(astNode.getFirstChild(PythonGrammar.TEST));
-    return new TypeAliasStatementImpl(typeDef, name, typeParams, equalToken, expression);
+    return new TypeAliasStatementImpl(typeDef, name, typeParams, equalToken, expression, separator);
   }
 
   public AnnotatedAssignment annotatedAssignment(StatementWithSeparator statementWithSeparator) {
