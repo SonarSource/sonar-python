@@ -140,3 +140,14 @@ class InnerClassFp:
 
         def nested_function() -> ClassInFunction:
             pass
+
+
+def type_aliases():
+    type A = B
+    type B = getType()
+
+    def getType():
+        return str
+
+    class C[A]():
+        ...
