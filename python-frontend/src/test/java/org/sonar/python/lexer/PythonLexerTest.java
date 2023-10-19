@@ -276,7 +276,7 @@ class PythonLexerTest {
 
   // Lambdas and walrus operators should be surrounded by parenthesis in an FString
   @Test
-  void fstring_incorrect_format_specifier() {
+  void fstring_incorrect_lambda_format_specifier() {
     assertThat(fStringLexer.lex("f'{lambda a: a+42}'"), allOf(
       hasToken("f'", PythonTokenType.FSTRING_START),
       hasToken("{", PythonPunctuator.LCURLYBRACE),
@@ -284,6 +284,35 @@ class PythonLexerTest {
       hasToken("a", GenericTokenType.IDENTIFIER),
       hasToken(":", PythonPunctuator.COLON),
       hasToken(" a+42", PythonTokenType.FSTRING_MIDDLE),
+      hasToken("}", PythonPunctuator.RCURLYBRACE),
+      hasToken("'", PythonTokenType.FSTRING_END)));
+  }
+
+
+  @Test
+  void fstring_incorrect_walrus_operator() {
+    assertThat(fStringLexer.lex("f'{a:=42}'"), allOf(
+      hasToken("f'", PythonTokenType.FSTRING_START),
+      hasToken("{", PythonPunctuator.LCURLYBRACE),
+      hasToken("a", GenericTokenType.IDENTIFIER),
+      hasToken(":", PythonPunctuator.COLON),
+      hasToken("=42", PythonTokenType.FSTRING_MIDDLE),
+      hasToken("}", PythonPunctuator.RCURLYBRACE),
+      hasToken("'", PythonTokenType.FSTRING_END)));
+  }
+  @Test
+  void fstring_lambda() {
+    assertThat(fStringLexer.lex("f'{(lambda a: a+42)}'"), allOf(
+      hasToken("f'", PythonTokenType.FSTRING_START),
+      hasToken("{", PythonPunctuator.LCURLYBRACE),
+      hasToken("(", PythonPunctuator.LPARENTHESIS),
+      hasToken("lambda"),
+      hasToken("a", GenericTokenType.IDENTIFIER),
+      hasToken(":", PythonPunctuator.COLON),
+      hasToken("a", GenericTokenType.IDENTIFIER),
+      hasToken("+", PythonPunctuator.PLUS),
+      hasToken("42", PythonTokenType.NUMBER),
+      hasToken(")", PythonPunctuator.RPARENTHESIS),
       hasToken("}", PythonPunctuator.RCURLYBRACE),
       hasToken("'", PythonTokenType.FSTRING_END)));
   }
@@ -371,7 +400,7 @@ class PythonLexerTest {
   void fstring_with_escaped_braces() {
     assertThat(fStringLexer.lex("f\"abc{{a}} { b + 3}\""), allOf(
       hasToken("f\"", PythonTokenType.FSTRING_START),
-      hasToken("abc{a} ", PythonTokenType.FSTRING_MIDDLE),
+      hasToken("abc{{a}} ", PythonTokenType.FSTRING_MIDDLE),
       hasToken("{", PythonPunctuator.LCURLYBRACE),
       hasToken("b", GenericTokenType.IDENTIFIER),
       hasToken("+", PythonPunctuator.PLUS),

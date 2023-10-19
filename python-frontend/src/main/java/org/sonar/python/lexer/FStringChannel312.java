@@ -105,7 +105,7 @@ public class FStringChannel312 extends Channel<Lexer> {
     FStringState.Mode currentMode = state.getTokenizerMode();
     while (code.charAt(0) != EOF) {
       if (currentMode == Mode.FSTRING_MODE && isEscapedCurlyBrace(code)) {
-        code.pop();
+        sb.append((char) code.pop());
         sb.append((char) code.pop());
       } else if (code.charAt(0) == '{') {
         addFStringMiddleToTokens(tokens, sb, output, line, column);
