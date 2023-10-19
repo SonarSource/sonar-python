@@ -53,12 +53,11 @@ public class GenericClassTypeParameterCheck extends PythonSubscriptionCheck {
       return;
     }
     ClassDef classDef = (ClassDef) ctx.syntaxNode();
-
-    ArgList args = classDef.args();
-    if (args == null) {
-      return;
-    }
-    args.arguments().stream()
+    Optional.of(classDef)
+      .map(ClassDef::args)
+      .map(ArgList::arguments)
+      .stream()
+      .flatMap(List::stream)
       .map(GenericClassTypeParameterCheck::checkGenericValue)
       .filter(lst -> !lst.isEmpty())
       .findFirst()
