@@ -22,3 +22,4 @@ for i in j:
 while i < 10:
     i+=1
     pass
+type a = str

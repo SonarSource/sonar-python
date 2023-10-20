@@ -199,6 +199,8 @@ public interface Tree {
 
     YIELD_STMT(YieldStatement.class),
 
+    TYPE_ALIAS_STMT(TypeAliasStatement.class),
+
     PARENTHESIZED(ParenthesizedExpression.class),
 
     UNPACKING_EXPR(UnpackingExpression.class),

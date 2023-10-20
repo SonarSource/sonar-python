@@ -78,7 +78,7 @@ class SymbolTableBuilderTest {
       "function_with_lambdas", "var_with_usages_in_decorator", "fn_inside_comprehension_same_name", "with_instance", "exception_instance", "unpacking",
       "using_builtin_symbol", "keyword_usage", "comprehension_vars", "parameter_default_value", "assignment_expression", "importing_stdlib", "importing_submodule",
       "importing_submodule_as", "importing_submodule_after_parent", "importing_submodule_after_parent_nested", "importing_parent_after_submodule",
-      "importing_parent_after_submodule_2", "importing_submodule_twice", "importing_unknown_submodule", "type_params");
+      "importing_parent_after_submodule_2", "importing_submodule_twice", "importing_unknown_submodule", "type_params", "type_alias");
 
     List<String> globalSymbols = new ArrayList<>(topLevelFunctions);
     globalSymbols.addAll(Arrays.asList("a", "global_x", "global_var"));
@@ -614,6 +614,15 @@ class SymbolTableBuilderTest {
     assertThat(symbolByName).hasSize(2).containsKey("T");
     assertThat(symbolByName.get("T").usages()).hasSize(2);
     assertThat(symbolByName.get("T").usages().get(0).kind()).isEqualTo(Usage.Kind.TYPE_PARAM_DECLARATION);
+  }
+
+  @Test
+  void type_alias_declaration() {
+    FunctionDef functionDef = functionTreesByName.get("type_alias");
+    Map<String, Symbol> symbolByName = getSymbolByName(functionDef);
+    assertThat(symbolByName).hasSize(1).containsKey("M");
+    assertThat(symbolByName.get("M").usages()).hasSize(2);
+    assertThat(symbolByName.get("M").usages().get(0).kind()).isEqualTo(Usage.Kind.TYPE_ALIAS_DECLARATION);
   }
 
   private static class TestVisitor extends BaseTreeVisitor {

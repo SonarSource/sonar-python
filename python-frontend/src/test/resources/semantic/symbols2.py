@@ -224,3 +224,7 @@ def importing_unknown_submodule():
 def type_params[T: str]():
     a : T = "abc"
     return a
+
+def type_alias():
+    type M = str
+    return list[M]

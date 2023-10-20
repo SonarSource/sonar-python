@@ -210,4 +210,6 @@ public interface TreeVisitor {
   void visitTypeParams(TypeParams typeParams);
 
   void visitTypeParam(TypeParam typeParam);
+
+  void visitTypeAliasStatement(TypeAliasStatement typeAliasStatement);
 }

@@ -574,4 +574,11 @@ public class BaseTreeVisitor implements TreeVisitor {
     scan(typeParam.name());
     scan(typeParam.typeAnnotation());
   }
+
+  @Override
+  public void visitTypeAliasStatement(TypeAliasStatement typeAliasStatement) {
+    scan(typeAliasStatement.name());
+    scan(typeAliasStatement.typeParams());
+    scan(typeAliasStatement.expression());
+  }
 }

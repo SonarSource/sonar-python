@@ -17,35 +17,27 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.plugins.python.api.symbols;
+package org.sonar.plugins.python.api.tree;
 
-import org.sonar.plugins.python.api.tree.Tree;
+import javax.annotation.CheckForNull;
 
-public interface Usage {
+/**
+ * <pre>
+ *   type {@link #name()} {@link #typeParams()} = {@link #expression()}
+ * </pre>
+ *
+ * See https://docs.python.org/3/reference/simple_stmts.html#the-type-statement
+ */
+public interface TypeAliasStatement extends Statement {
+  Token typeKeyword();
 
-  default boolean isBindingUsage() {
-    return kind() != Kind.OTHER && kind() != Kind.GLOBAL_DECLARATION;
-  }
+  Name name();
 
-  Tree tree();
+  @CheckForNull
+  TypeParams typeParams();
 
-  Kind kind();
+  Token equalToken();
 
-  enum Kind {
-    ASSIGNMENT_LHS,
-    COMPOUND_ASSIGNMENT_LHS,
-    IMPORT,
-    LOOP_DECLARATION,
-    COMP_DECLARATION,
-    OTHER,
-    PARAMETER,
-    FUNC_DECLARATION,
-    CLASS_DECLARATION,
-    EXCEPTION_INSTANCE,
-    WITH_INSTANCE,
-    GLOBAL_DECLARATION,
-    PATTERN_DECLARATION,
-    TYPE_PARAM_DECLARATION,
-    TYPE_ALIAS_DECLARATION,
-  }
+  Expression expression();
+
 }

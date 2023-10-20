@@ -233,6 +233,7 @@ public class PythonGrammarBuilder {
   protected void simpleStatements(LexerfulGrammarBuilder b) {
     simpleStatement(b);
 
+    b.rule(TYPE_ALIAS_STMT).is("type", NAME, b.optional(TYPE_PARAMS), "=", TEST);
     b.rule(PRINT_STMT).is("print", b.nextNot("="), b.nextNot("("), b.firstOf(
       b.sequence(">>", TEST, b.optional(b.oneOrMore(",", TEST), b.optional(","))),
       b.optional(TEST, b.zeroOrMore(",", TEST), b.optional(","))));
@@ -269,6 +270,7 @@ public class PythonGrammarBuilder {
 
   protected void simpleStatement(LexerfulGrammarBuilder b) {
     b.rule(SIMPLE_STMT).is(b.firstOf(
+      TYPE_ALIAS_STMT,
       PRINT_STMT,
       EXEC_STMT,
       EXPRESSION_STMT,
@@ -282,7 +284,8 @@ public class PythonGrammarBuilder {
       CONTINUE_STMT,
       IMPORT_STMT,
       GLOBAL_STMT,
-      NONLOCAL_STMT));
+      NONLOCAL_STMT
+      ));
   }
 
   /**
