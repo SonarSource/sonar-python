@@ -222,6 +222,9 @@ public class PythonTreeMaker {
     if (astNode.is(PythonGrammar.EXPRESSION_STMT)) {
       return expressionStatement(statementWithSeparator);
     }
+    if (astNode.is(PythonGrammar.TYPE_ALIAS_STMT)) {
+      return typeAliasStatement(statementWithSeparator);
+    }
     if (astNode.is(PythonGrammar.TRY_STMT)) {
       return tryStatement(astNode);
     }
@@ -237,21 +240,7 @@ public class PythonTreeMaker {
     if (astNode.is(PythonGrammar.MATCH_STMT)) {
       return matchStatement(astNode);
     }
-    if (astNode.is(PythonGrammar.TYPE_ALIAS_STMT)) {
-      return typeAliasStatement(statementWithSeparator);
-    }
     throw new IllegalStateException("Statement " + astNode.getType() + " not correctly translated to strongly typed AST");
-  }
-
-  public TypeAliasStatement typeAliasStatement(StatementWithSeparator statementWithSeparator) {
-    var astNode = statementWithSeparator.statement();
-    var separator = statementWithSeparator.separator();
-    var typeDef = toPyToken(astNode.getChildren().get(0).getToken());
-    var name = name(astNode.getFirstChild(PythonGrammar.NAME));
-    var typeParams = typeParams(astNode);
-    var equalToken = toPyToken(astNode.getFirstChild(PythonPunctuator.ASSIGN).getToken());
-    var expression = expression(astNode.getFirstChild(PythonGrammar.TEST));
-    return new TypeAliasStatementImpl(typeDef, name, typeParams, equalToken, expression, separator);
   }
 
   public AnnotatedAssignment annotatedAssignment(StatementWithSeparator statementWithSeparator) {
@@ -758,6 +747,17 @@ public class PythonTreeMaker {
       .map(this::expression)
       .collect(Collectors.toList());
     return new ExpressionStatementImpl(expressions, separators);
+  }
+
+  public TypeAliasStatement typeAliasStatement(StatementWithSeparator statementWithSeparator) {
+    var astNode = statementWithSeparator.statement();
+    var separator = statementWithSeparator.separator();
+    var typeDef = toPyToken(astNode.getChildren().get(0).getToken());
+    var name = name(astNode.getFirstChild(PythonGrammar.NAME));
+    var typeParams = typeParams(astNode);
+    var equalToken = toPyToken(astNode.getFirstChild(PythonPunctuator.ASSIGN).getToken());
+    var expression = expression(astNode.getFirstChild(PythonGrammar.TEST));
+    return new TypeAliasStatementImpl(typeDef, name, typeParams, equalToken, expression, separator);
   }
 
   public AssignmentStatement assignment(StatementWithSeparator statementWithSeparator) {

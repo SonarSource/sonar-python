@@ -105,6 +105,7 @@ import org.sonar.plugins.python.api.tree.Trivia;
 import org.sonar.plugins.python.api.tree.TryStatement;
 import org.sonar.plugins.python.api.tree.Tuple;
 import org.sonar.plugins.python.api.tree.TupleParameter;
+import org.sonar.plugins.python.api.tree.TypeAliasStatement;
 import org.sonar.plugins.python.api.tree.TypeAnnotation;
 import org.sonar.plugins.python.api.tree.TypeParams;
 import org.sonar.plugins.python.api.tree.UnaryExpression;
@@ -200,6 +201,7 @@ class PythonTreeMakerTest extends RuleTest {
     testData.put("x = y", AssignmentStatement.class);
     testData.put("x += y", CompoundAssignmentStatement.class);
     testData.put("match command:\n  case 42:...\n", MatchStatement.class);
+    testData.put("type A[B] = str", TypeAliasStatement.class);
 
     testData.forEach((c, clazz) -> {
       FileInput pyTree = parse(c, treeMaker::fileInput);
