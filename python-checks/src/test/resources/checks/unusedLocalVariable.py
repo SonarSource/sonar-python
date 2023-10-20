@@ -138,7 +138,7 @@ def multiple_values_assignment():
 
 
 def generic_type_overrides_defined():
-    T = "abc" # FN
+    T = "abc" # FN https://sonarsource.atlassian.net/browse/SONARPY-1527
 
     def foo[T](a: T) -> T:
         ...
