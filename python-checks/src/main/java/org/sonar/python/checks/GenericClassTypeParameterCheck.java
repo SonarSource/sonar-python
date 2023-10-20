@@ -41,7 +41,9 @@ import org.sonar.plugins.python.api.tree.Tree;
 @Rule(key = "S6792")
 public class GenericClassTypeParameterCheck extends PythonSubscriptionCheck {
 
-  private static final String MESSAGE = "Use the type parameter syntax to declare this generic class.";
+  private static final String MESSAGE = "Use the \"type\" parameter syntax to declare this generic class.";
+  private static final String SECONDARY_MESSAGE_PARENT = "\"Generic\" parent.";
+  private static final String SECONDARY_MESSAGE_ASSIGNMENT = "\"Generic\" is assigned here.";
 
   @Override
   public void initialize(Context context) {
@@ -74,15 +76,15 @@ public class GenericClassTypeParameterCheck extends PythonSubscriptionCheck {
     Expression expression = ((RegularArgument) argument).expression();
 
     if (isTypingGeneric(expression)) {
-      return List.of(IssueLocation.preciseLocation(argument, "TODO"));
+      return List.of(IssueLocation.preciseLocation(argument, SECONDARY_MESSAGE_PARENT));
     }
     if (expression.is(Tree.Kind.NAME)) {
       Name name = (Name) expression;
       Expression assignedValue = Expressions.singleAssignedValue(name);
       if (assignedValue != null && isTypingGeneric(assignedValue)) {
         return List.of(
-          IssueLocation.preciseLocation(argument, "TODO"),
-          IssueLocation.preciseLocation(assignedValue, "TODO"));
+          IssueLocation.preciseLocation(argument, SECONDARY_MESSAGE_PARENT),
+          IssueLocation.preciseLocation(assignedValue, SECONDARY_MESSAGE_ASSIGNMENT));
       }
     }
     return Collections.emptyList();
