@@ -29,6 +29,13 @@ def non_compliant_3():
     #                         ^^@-2<              {{Use of "TypeVar" here.}}
         ...
 
+def non_compliant_4():
+    from typing import TypeVar as TV
+    _T = TV("_T", bound=str)
+    #    ^^^^^^^^^^^^^^^^^^^>  {{"TypeVar" is assigned here.}}
+    def func(a: _T, b: int) -> str:  # Noncompliant {{Use a generic type parameter for this function instead of a "TypeVar".}}
+    #   ^^^^    ^^<                                 {{Use of "TypeVar" here.}}
+        ...
 
 def FN_non_compliant():
     _T = TypeVar("_T", bound=str)
@@ -41,3 +48,4 @@ def compliant_1[T: str](a: T, b: int) -> T: # OK.
 
 def compliant_2[T,R](a: R, b: int) -> tuple(T,R): # OK.
     ...
+
