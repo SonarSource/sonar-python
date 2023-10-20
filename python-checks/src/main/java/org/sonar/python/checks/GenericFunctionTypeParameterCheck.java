@@ -34,7 +34,7 @@ import org.sonar.python.tree.TreeUtils;
 @Rule(key = "S6796")
 public class GenericFunctionTypeParameterCheck extends PythonSubscriptionCheck {
 
-  private static String MESSAGE = "Use a generic type parameter for this function instead of a TypeVar.";
+  private static final String MESSAGE = "Use a generic type parameter for this function instead of a TypeVar.";
 
   @Override
   public void initialize(Context context) {
