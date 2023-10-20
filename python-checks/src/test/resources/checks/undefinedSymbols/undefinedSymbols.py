@@ -151,3 +151,8 @@ def type_aliases():
 
     class C[A]():
         ...
+
+def undefined_generic_type[T: T](a: T) -> T:
+    x: T = a
+    a.foo()
+

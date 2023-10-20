@@ -625,6 +625,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
       scan(pyFunctionDefTree.decorators());
       enterScope(pyFunctionDefTree);
       scan(pyFunctionDefTree.name());
+      scan(pyFunctionDefTree.typeParams());
       scan(pyFunctionDefTree.parameters());
       scan(pyFunctionDefTree.returnTypeAnnotation());
       scan(pyFunctionDefTree.body());
@@ -684,6 +685,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
         Tree currentScopeTree = leaveScope();
         super.visitTypeAnnotation(tree);
         enterScope(currentScopeTree);
+        super.visitTypeAnnotation(tree);
       } else {
         super.visitTypeAnnotation(tree);
       }
