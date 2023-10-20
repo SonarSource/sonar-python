@@ -135,3 +135,12 @@ def multiple_values_assignment():
 #         ^
     print(a)
     print(b)
+
+
+def generic_type_overrides_defined():
+    T = "abc" # FN
+
+    def foo[T](a: T) -> T:
+        ...
+
+    return foo
