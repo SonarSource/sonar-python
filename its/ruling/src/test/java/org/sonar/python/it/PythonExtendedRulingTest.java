@@ -133,6 +133,8 @@ class PythonExtendedRulingTest {
   @Test
   void test_salt() throws IOException {
     SonarScanner build = buildWithCommonProperties("salt");
+    // salt is not actually a Python 3.12 project. This is to ensure analysis is performed correctly when the parameter is set.
+    build.setProperty("sonar.python.version", "3.12");
     build.setProperty("sonar.sources", "salt");
     build.setProperty("sonar.tests", "tests");
     executeBuild(build);
