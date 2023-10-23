@@ -25,6 +25,6 @@ import org.sonar.python.checks.utils.PythonCheckVerifier;
 class PandasModifyInPlaceCheckTest {
   @Test
   void test() {
-    PythonCheckVerifier.verify("src/test/resources/pandasModifyInPlace.py", new PandasModifyInPlaceCheck());
+    PythonCheckVerifier.verify("src/test/resources/checks/pandasModifyInPlace.py", new PandasModifyInPlaceCheck());
   }
 }

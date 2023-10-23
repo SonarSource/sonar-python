@@ -34,7 +34,7 @@ import org.sonar.python.tree.TreeUtils;
 @Rule(key = "S6734")
 public class PandasModifyInPlaceCheck extends PythonSubscriptionCheck {
 
-  private static final String MESSAGE = "Do not use 'inplace=True' when modifying a dataframe.";
+  private static final String MESSAGE = "Do not use \"inplace=True\" when modifying a dataframe.";
 
   private static final Set<String> FULLY_QUALIFIED_EXPRESSIONS = Set.of(
     "pandas.core.frame.DataFrame.drop",
