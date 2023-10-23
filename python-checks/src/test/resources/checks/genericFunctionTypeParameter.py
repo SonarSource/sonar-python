@@ -40,7 +40,7 @@ def non_compliant_4():
 def FN_non_compliant():
     _T = TypeVar("_T", bound=str)
 
-    def func(a: list[_T]) -> set[_T]:  # FN
+    def func(a: list[_T]) -> set[_T]:  # FN: To be expanded in SONARPY-1526: https://sonarsource.atlassian.net/browse/SONARPY-1526
         ...
 
 def compliant_1[T: str](a: T, b: int) -> T: # OK.
