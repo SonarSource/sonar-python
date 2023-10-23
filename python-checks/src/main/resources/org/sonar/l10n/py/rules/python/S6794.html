@@ -1,0 +1,43 @@
+<p>This rule raises an issue when a type alias is declared outside of a <code>type</code> statement.</p>
+<h2>Why is this an issue?</h2>
+<p>Since Python 3.12 the keyword <code>type</code> is used to defined type aliases. It replaces the following construct:</p>
+<pre>
+from typing import TypeAlias, TypeVar
+
+_T = TypeVar("_T")
+
+MyTypeAlias: TypeAlias = set[_T]
+</pre>
+<p>Using the <code>type</code> statement to define type aliases allows for a more concise code and thus better readability. This also makes it
+possible to declutter the code, as imports from the <code>typing</code> module (<code>TypeAlias</code> and <code>TyperVar</code>) can be removed.</p>
+<pre>
+type MyTypeAlias[T] = set[T]
+</pre>
+<h3>Exceptions</h3>
+<p>This rule will only raise an issue when the Python version of the analyzed project is set to 3.12 or higher.</p>
+<h2>How to fix it</h2>
+<p>Use a <code>type</code> statement to declare the <code>TypeAlias</code> instead of using a regular assignment.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+from typing import TypeAlias
+
+MyStringAlias: TypeAlias = str # Noncompliant: this TypeAlias can be more concise with the help of the type statement.
+
+_T = TypeVar("_T")
+MyGenericAlias: TypeAlias = list[_T]  # Noncompliant: the type statement can help replace both the TypeVar and the TypeAlias statements.
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+type MyStringAlias = str # Compliant
+
+type MyGenericAlias[T] = list[T]  # Compliant
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Python Documentation - <a href="https://docs.python.org/3.12/reference/simple_stmts.html#type">The type statement</a> </li>
+  <li> Python 3.12 Release Notes - <a href="https://docs.python.org/3.12/whatsnew/3.12.html#pep-695-type-parameter-syntax">PEP 695: Type Parameter
+  Syntax</a> </li>
+</ul>
+
