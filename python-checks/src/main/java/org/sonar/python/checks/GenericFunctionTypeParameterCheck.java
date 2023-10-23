@@ -32,6 +32,7 @@ import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FunctionDef;
+import org.sonar.plugins.python.api.tree.HasSymbol;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.ParameterList;
@@ -91,8 +92,9 @@ public class GenericFunctionTypeParameterCheck extends PythonSubscriptionCheck {
       .map(Expressions::singleAssignedValue)
       .flatMap(TreeUtils.toOptionalInstanceOfMapper(CallExpression.class))
       .map(CallExpression::callee)
-      .flatMap(TreeUtils.toOptionalInstanceOfMapper(Name.class))
-      .map(Name::symbol)
+      .filter(HasSymbol.class::isInstance)
+      .map(HasSymbol.class::cast)
+      .map(HasSymbol::symbol)
       .map(Symbol::fullyQualifiedName)
       .filter(TYPE_VAR_FQN::equals)
       .isPresent();

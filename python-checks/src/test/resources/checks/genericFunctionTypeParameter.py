@@ -49,3 +49,11 @@ def compliant_1[T: str](a: T, b: int) -> T: # OK.
 def compliant_2[T,R](a: R, b: int) -> tuple(T,R): # OK.
     ...
 
+def non_compliant():
+    import typing as tp
+    _T = tp.TypeVar("_T", bound=str)
+    #    ^^^^^^^^^^^^^^^^^^^^^^^^^^^>  {{"TypeVar" is assigned here.}}
+    def func(a: _T, b: int) -> str:  # Noncompliant {{Use a generic type parameter for this function instead of a "TypeVar".}}
+    #   ^^^^    ^^<                                 {{Use of "TypeVar" here.}}
+        ...
+
