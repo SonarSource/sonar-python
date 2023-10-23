@@ -135,3 +135,12 @@ def multiple_values_assignment():
 #         ^
     print(a)
     print(b)
+
+
+def generic_type_overrides_defined():
+    T = "abc" # FN https://sonarsource.atlassian.net/browse/SONARPY-1527
+
+    def foo[T](a: T) -> T:
+        ...
+
+    return foo
