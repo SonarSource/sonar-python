@@ -93,6 +93,6 @@ class PandasDataFrameToNumpyCheckTest {
 
   private void performVerification(String non_compliant, String compliant) {
     PythonQuickFixVerifier.verify(check, non_compliant, compliant);
-    PythonQuickFixVerifier.verifyQuickFixMessages(check, non_compliant, "Replace with DataFrame.to_numpy()");
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, non_compliant, "Replace with \"DataFrame.to_numpy()\"");
   }
 }

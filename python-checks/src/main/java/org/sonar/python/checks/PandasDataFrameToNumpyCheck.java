@@ -34,7 +34,7 @@ public class PandasDataFrameToNumpyCheck extends PythonSubscriptionCheck {
 
   private static final String DATAFRAME_VALUES_FQN = "pandas.core.frame.DataFrame.values";
   private static final String MESSAGE = "Do not use \"DataFrame.values\".";
-  private static final String QUICK_FIX_MESSAGE = "Replace with DataFrame.to_numpy()";
+  private static final String QUICK_FIX_MESSAGE = "Replace with \"DataFrame.to_numpy()\"";
 
   @Override
   public void initialize(Context context) {
