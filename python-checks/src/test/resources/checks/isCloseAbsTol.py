@@ -2,7 +2,7 @@ import math
 
 
 def math_failure(a):
-    math.isclose(a, 0)  # Noncompliant {{Provide the abs_tol parameter when using math.isclose to compare a value to 0.}}
+    math.isclose(a, 0)  # Noncompliant {{Provide the "abs_tol" parameter when using "math.isclose" to compare a value to 0.}}
 #   ^^^^^^^^^^^^    ^< {{This argument evaluates to zero.}}
     math.isclose(0, a)  # Noncompliant
 #   ^^^^^^^^^^^^ ^<
@@ -13,10 +13,10 @@ def math_failure(a):
 #   ^^^^^^^^^^^^ ^<
 
     from math import isclose
-    isclose(a, 0)  # Noncompliant {{Provide the abs_tol parameter when using math.isclose to compare a value to 0.}}
+    isclose(a, 0)  # Noncompliant {{Provide the "abs_tol" parameter when using "math.isclose" to compare a value to 0.}}
 #   ^^^^^^^    ^<
 
-    # this raises an issues as the call is not legitimate (abs_tol is a named parameter only)
+    # this raises an issues as the call is not legitimate ("abs_tol" is a named parameter only)
     math.isclose(0, a, 1, 2)  # Noncompliant
 #   ^^^^^^^^^^^^ ^<
 

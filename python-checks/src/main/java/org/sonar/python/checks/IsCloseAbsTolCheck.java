@@ -20,9 +20,7 @@
 package org.sonar.python.checks;
 
 import java.util.Optional;
-
 import javax.annotation.Nullable;
-
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
@@ -40,33 +38,33 @@ import org.sonar.python.tree.TreeUtils;
 @Rule(key = "S6727")
 public class IsCloseAbsTolCheck extends PythonSubscriptionCheck {
 
-  private static final String MESSAGE = "Provide the abs_tol parameter when using math.isclose to compare a value to 0.";
+  private static final String MESSAGE = "Provide the \"abs_tol\" parameter when using \"math.isclose\" to compare a value to 0.";
   private static final String SECONDARY_LOCATION_MESSAGE = "This argument evaluates to zero.";
-  private static final String QUICK_FIX_MESSAGE = "Add the abs_tol parameter.";
+  private static final String QUICK_FIX_MESSAGE = "Add the \"abs_tol\" parameter.";
 
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR,
-        ctx -> checkForIsCloseAbsTolArgument(ctx, (CallExpression) ctx.syntaxNode()));
+      ctx -> checkForIsCloseAbsTolArgument(ctx, (CallExpression) ctx.syntaxNode()));
   }
 
   private static void checkForIsCloseAbsTolArgument(SubscriptionContext ctx, CallExpression call) {
     Symbol symbol = call.calleeSymbol();
     if (symbol != null && "math.isclose".equals(symbol.fullyQualifiedName())
-        && TreeUtils.argumentByKeyword("abs_tol", call.arguments()) == null) {
+      && TreeUtils.argumentByKeyword("abs_tol", call.arguments()) == null) {
       RegularArgument firstArg = TreeUtils.nthArgumentOrKeyword(0, "a", call.arguments());
       RegularArgument secondArg = TreeUtils.nthArgumentOrKeyword(1, "b", call.arguments());
       checkArgumentExistsAndIsZero(firstArg)
-          .ifPresentOrElse(
-              argA -> addIssueAndQuickFix(argA, ctx, call),
-              () -> checkArgumentExistsAndIsZero(secondArg).ifPresent(argB -> addIssueAndQuickFix(argB, ctx, call)));
+        .ifPresentOrElse(
+          argA -> addIssueAndQuickFix(argA, ctx, call),
+          () -> checkArgumentExistsAndIsZero(secondArg).ifPresent(argB -> addIssueAndQuickFix(argB, ctx, call)));
     }
   }
 
   private static Optional<RegularArgument> checkArgumentExistsAndIsZero(@Nullable RegularArgument argument) {
     return Optional
-        .ofNullable(argument)
-        .filter(arg -> isLiteralZeroOrAssignedZero(arg.expression()));
+      .ofNullable(argument)
+      .filter(arg -> isLiteralZeroOrAssignedZero(arg.expression()));
   }
 
   private static void addIssueAndQuickFix(RegularArgument arg, SubscriptionContext ctx, CallExpression call) {
@@ -74,8 +72,8 @@ public class IsCloseAbsTolCheck extends PythonSubscriptionCheck {
     issue.secondary(arg, SECONDARY_LOCATION_MESSAGE);
 
     PythonQuickFix quickFix = PythonQuickFix.newQuickFix(QUICK_FIX_MESSAGE)
-        .addTextEdit(TextEditUtils.insertBefore(call.rightPar(), ", abs_tol=1e-9"))
-        .build();
+      .addTextEdit(TextEditUtils.insertBefore(call.rightPar(), ", abs_tol=1e-9"))
+      .build();
     issue.addQuickFix(quickFix);
   }
 
