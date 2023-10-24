@@ -185,7 +185,8 @@ public class BuiltinShadowingAssignmentCheck extends PythonSubscriptionCheck {
   }
 
   private boolean isBuiltInName(Name name) {
-    if (ELLIPSIS.equals(name.name())) { // Workaround to fix the FP raised. A definite fix should be implemented as part of SONARPY-1531.
+    // Workaround to fix the FP raised. A definite fix should be implemented as part of SONARPY-1531.
+    if (ELLIPSIS.equals(name.name())) {
       return false;
     }
     return TypeShed.builtinSymbols().containsKey(name.name());
