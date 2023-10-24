@@ -30,13 +30,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 class TypeAliasAnnotationCheckTest {
 
   @Test
-  void test_1() {
+  void verify_python_312_issues() {
     ProjectPythonVersion.setCurrentVersions(EnumSet.of(PythonVersionUtils.Version.V_312));
     PythonCheckVerifier.verify("src/test/resources/checks/typeAliasAnnotation.py", new TypeAliasAnnotationCheck());
   }
 
   @Test
-  void test_2() {
+  void verify_python_312_no_issues() {
     ProjectPythonVersion.setCurrentVersions(EnumSet.of(PythonVersionUtils.Version.V_311, PythonVersionUtils.Version.V_312));
     var issues = PythonCheckVerifier.issues("src/test/resources/checks/typeAliasAnnotation.py", new TypeAliasAnnotationCheck());
     assertThat(issues)
