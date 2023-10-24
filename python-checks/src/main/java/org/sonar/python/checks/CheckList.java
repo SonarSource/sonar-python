@@ -344,6 +344,7 @@ public final class CheckList {
       TooManyReturnsCheck.class,
       TrailingCommentCheck.class,
       TrailingWhitespaceCheck.class,
+      TypeAliasAnnotationCheck.class,
       ReferencedBeforeAssignmentCheck.class,
       RegexComplexityCheck.class,
       RegexLookaheadCheck.class,
