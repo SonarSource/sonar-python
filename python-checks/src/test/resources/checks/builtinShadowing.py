@@ -34,3 +34,7 @@ def redefine():
 def iPython():
     display = 42
 
+def ellipsis_test():
+    ellipsis = "" # OK
+    Ellipsis = 42 # Noncompliant {{Rename this variable; it shadows a builtin.}}
+    ellipsis = "..." # OK
