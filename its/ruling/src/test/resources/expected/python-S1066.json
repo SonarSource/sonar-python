@@ -1,575 +1,668 @@
 {
-'project:biopython/Bio/Align/substitution_matrices/__init__.py':[
-153,
-171,
-],
-'project:biopython/Bio/AlignIO/StockholmIO.py':[
-244,
-],
-'project:biopython/Bio/AlignIO/__init__.py':[
-449,
-],
-'project:biopython/Bio/ExPASy/Prodoc.py':[
-171,
-],
-'project:biopython/Bio/GenBank/__init__.py':[
-790,
-],
-'project:biopython/Bio/KEGG/KGML/KGML_pathway.py':[
-316,
-],
-'project:biopython/Bio/Nexus/Nexus.py':[
-2046,
-],
-'project:biopython/Bio/PDB/StructureBuilder.py':[
-119,
-124,
-],
-'project:biopython/Bio/PDB/ic_rebuild.py':[
-173,
-],
-'project:biopython/Bio/PDB/internal_coords.py':[
-939,
-2485,
-],
-'project:biopython/Bio/PDB/parse_pdb_header.py':[
-310,
-],
-'project:biopython/Bio/Phylo/PAML/_paml.py':[
-32,
-],
-'project:biopython/Bio/Phylo/PAML/_parse_baseml.py':[
-51,
-],
-'project:biopython/Bio/Phylo/PAML/_parse_yn00.py':[
-128,
-],
-'project:biopython/Bio/Phylo/PAML/baseml.py':[
-35,
-],
-'project:biopython/Bio/Phylo/PAML/codeml.py':[
-37,
-],
-'project:biopython/Bio/PopGen/GenePop/Controller.py':[
-634,
-],
-'project:biopython/Bio/SearchIO/HmmerIO/hmmer2_text.py':[
-59,
-100,
-],
-'project:biopython/Bio/SearchIO/_legacy/ParserSupport.py':[
-315,
-318,
-321,
-331,
-],
-'project:biopython/Bio/SearchIO/_model/hsp.py':[
-894,
-],
-'project:biopython/Bio/SeqIO/FastaIO.py':[
-299,
-],
-'project:biopython/Bio/SeqIO/InsdcIO.py':[
-720,
-],
-'project:biopython/Bio/SeqIO/PhdIO.py':[
-119,
-],
-'project:biopython/Bio/SeqIO/PirIO.py':[
-241,
-],
-'project:biopython/Bio/SeqIO/QualityIO.py':[
-1605,
-],
-'project:biopython/Bio/UniGene/__init__.py':[
-127,
-],
-'project:biopython/Bio/motifs/jaspar/db.py':[
-274,
-],
-'project:biopython/Bio/motifs/transfac.py':[
-105,
-113,
-138,
-],
-'project:buildbot-0.8.6p1/buildbot/changes/hgbuildbot.py':[
-84,
-],
-'project:buildbot-0.8.6p1/buildbot/changes/svnpoller.py':[
-286,
-],
-'project:buildbot-0.8.6p1/buildbot/process/buildstep.py':[
-551,
-],
-'project:buildbot-0.8.6p1/buildbot/schedulers/manager.py':[
-56,
-],
-'project:buildbot-0.8.6p1/buildbot/scripts/runner.py':[
-1206,
-1353,
-],
-'project:buildbot-0.8.6p1/buildbot/sourcestamp.py':[
+"project:biopython/Bio/Align/substitution_matrices/__init__.py": [
 160,
+178
 ],
-'project:buildbot-0.8.6p1/buildbot/status/builder.py':[
+"project:biopython/Bio/Align/tabular.py": [
+252
+],
+"project:biopython/Bio/AlignIO/StockholmIO.py": [
+224
+],
+"project:biopython/Bio/AlignIO/__init__.py": [
+392
+],
+"project:biopython/Bio/ExPASy/Prodoc.py": [
+171
+],
+"project:biopython/Bio/GenBank/__init__.py": [
+414
+],
+"project:biopython/Bio/KEGG/KGML/KGML_pathway.py": [
+314
+],
+"project:biopython/Bio/Nexus/Nexus.py": [
+2041
+],
+"project:biopython/Bio/PDB/PICIO.py": [
+191
+],
+"project:biopython/Bio/PDB/StructureBuilder.py": [
+119,
+124
+],
+"project:biopython/Bio/PDB/ic_rebuild.py": [
+182
+],
+"project:biopython/Bio/PDB/internal_coords.py": [
+1810,
+3535
+],
+"project:biopython/Bio/PDB/parse_pdb_header.py": [
+310
+],
+"project:biopython/Bio/Phylo/PAML/_paml.py": [
+32
+],
+"project:biopython/Bio/Phylo/PAML/_parse_baseml.py": [
+51
+],
+"project:biopython/Bio/Phylo/PAML/_parse_yn00.py": [
+128
+],
+"project:biopython/Bio/Phylo/PAML/baseml.py": [
+35
+],
+"project:biopython/Bio/Phylo/PAML/codeml.py": [
+37
+],
+"project:biopython/Bio/PopGen/GenePop/Controller.py": [
+631
+],
+"project:biopython/Bio/SearchIO/HmmerIO/hmmer2_text.py": [
+58,
+99
+],
+"project:biopython/Bio/SearchIO/_legacy/ParserSupport.py": [
+320,
+323,
+326,
+336
+],
+"project:biopython/Bio/SearchIO/_model/hsp.py": [
+898
+],
+"project:biopython/Bio/SeqIO/FastaIO.py": [
+337
+],
+"project:biopython/Bio/SeqIO/InsdcIO.py": [
+721
+],
+"project:biopython/Bio/SeqIO/PhdIO.py": [
+122
+],
+"project:biopython/Bio/SeqIO/PirIO.py": [
+230
+],
+"project:biopython/Bio/UniGene/__init__.py": [
+127
+],
+"project:biopython/Bio/motifs/jaspar/db.py": [
+274
+],
+"project:biopython/Bio/motifs/transfac.py": [
+112,
+120,
+145
+],
+"project:buildbot-0.8.6p1/buildbot/changes/hgbuildbot.py": [
+84
+],
+"project:buildbot-0.8.6p1/buildbot/changes/svnpoller.py": [
+286
+],
+"project:buildbot-0.8.6p1/buildbot/process/buildstep.py": [
+551
+],
+"project:buildbot-0.8.6p1/buildbot/schedulers/manager.py": [
+56
+],
+"project:buildbot-0.8.6p1/buildbot/scripts/runner.py": [
+1206,
+1353
+],
+"project:buildbot-0.8.6p1/buildbot/sourcestamp.py": [
+160
+],
+"project:buildbot-0.8.6p1/buildbot/status/builder.py": [
 335,
 344,
-349,
+349
 ],
-'project:buildbot-0.8.6p1/buildbot/status/mail.py':[
+"project:buildbot-0.8.6p1/buildbot/status/mail.py": [
 332,
-413,
+413
 ],
-'project:buildbot-0.8.6p1/buildbot/status/master.py':[
-290,
+"project:buildbot-0.8.6p1/buildbot/status/master.py": [
+290
 ],
-'project:buildbot-0.8.6p1/buildbot/status/web/auth.py':[
-141,
+"project:buildbot-0.8.6p1/buildbot/status/web/auth.py": [
+141
 ],
-'project:buildbot-0.8.6p1/buildbot/status/web/authz.py':[
+"project:buildbot-0.8.6p1/buildbot/status/web/authz.py": [
 118,
-128,
+128
 ],
-'project:buildbot-0.8.6p1/buildbot/test/fake/fakedb.py':[
+"project:buildbot-0.8.6p1/buildbot/test/fake/fakedb.py": [
 59,
-903,
+903
 ],
-'project:buildbot-0.8.6p1/contrib/buildbot_json.py':[
-73,
+"project:buildbot-0.8.6p1/contrib/buildbot_json.py": [
+73
 ],
-'project:buildbot-slave-0.8.6p1/buildslave/scripts/runner.py':[
+"project:buildbot-slave-0.8.6p1/buildslave/scripts/runner.py": [
 77,
-237,
+237
 ],
-'project:django-2.2.3/django/contrib/admin/templatetags/log.py':[
-56,
+"project:django-4.2.5/django/contrib/admin/options.py": [
+1982
 ],
-'project:django-2.2.3/django/contrib/auth/forms.py':[
-327,
-402,
+"project:django-4.2.5/django/contrib/admin/templatetags/log.py": [
+61
 ],
-'project:django-2.2.3/django/contrib/gis/geos/mutable_list.py':[
-307,
+"project:django-4.2.5/django/contrib/gis/db/backends/oracle/adapter.py": [
+22
 ],
-'project:django-2.2.3/django/contrib/postgres/search.py':[
-210,
+"project:django-4.2.5/django/contrib/gis/geos/mutable_list.py": [
+311
 ],
-'project:django-2.2.3/django/core/mail/message.py':[
-315,
+"project:django-4.2.5/django/core/mail/message.py": [
+330
 ],
-'project:django-2.2.3/django/core/management/commands/makemessages.py':[
-185,
+"project:django-4.2.5/django/core/management/commands/makemessages.py": [
+195
 ],
-'project:django-2.2.3/django/db/backends/sqlite3/operations.py':[
-266,
-272,
+"project:django-4.2.5/django/core/serializers/base.py": [
+163
 ],
-'project:django-2.2.3/django/db/migrations/autodetector.py':[
-1307,
+"project:django-4.2.5/django/db/backends/mysql/operations.py": [
+409
 ],
-'project:django-2.2.3/django/db/models/fields/related.py':[
-56,
+"project:django-4.2.5/django/db/backends/sqlite3/operations.py": [
+321,
+327
 ],
-'project:django-2.2.3/django/db/models/functions/text.py':[
-110,
-246,
+"project:django-4.2.5/django/db/migrations/autodetector.py": [
+540
 ],
-'project:django-2.2.3/django/db/models/query_utils.py':[
-248,
+"project:django-4.2.5/django/db/migrations/loader.py": [
+323
 ],
-'project:django-2.2.3/django/test/html.py':[
-23,
-40,
-79,
+"project:django-4.2.5/django/db/models/base.py": [
+2418
 ],
-'project:django-2.2.3/django/utils/feedgenerator.py':[
-172,
+"project:django-4.2.5/django/db/models/fields/related.py": [
+62
 ],
-'project:django-cms-3.7.1/cms/tests/test_permmod.py':[
-363,
-385,
-396,
+"project:django-4.2.5/django/db/models/functions/text.py": [
+157,
+344
 ],
-'project:django-cms-3.7.1/cms/utils/__init__.py':[
-36,
+"project:django-4.2.5/django/db/models/sql/compiler.py": [
+966
 ],
-'project:django-cms-3.7.1/menus/templatetags/menu_tags.py':[
-53,
-237,
+"project:django-4.2.5/django/utils/feedgenerator.py": [
+209
 ],
-'project:django-cms-3.7.1/menus/utils.py':[
-26,
-],
-'project:mypy-0.782/misc/fix_annotate.py':[
-58,
-],
-'project:mypy-0.782/mypy/checker.py':[
-3088,
-3519,
-5354,
-5355,
-5378,
-],
-'project:mypy-0.782/mypy/checkexpr.py':[
-405,
-2930,
-],
-'project:mypy-0.782/mypy/config_parser.py':[
-260,
-],
-'project:mypy-0.782/mypy/fastparse.py':[
-276,
-],
-'project:mypy-0.782/mypy/fastparse2.py':[
-136,
-],
-'project:mypy-0.782/mypy/reachability.py':[
-73,
-217,
-],
-'project:mypy-0.782/mypy/semanal.py':[
-856,
-2628,
-],
-'project:mypy-0.782/mypy/semanal_newtype.py':[
-67,
-],
-'project:mypy-0.782/mypy/stats.py':[
-311,
-],
-'project:mypy-0.782/mypy/suggestions.py':[
-485,
-],
-'project:mypy-0.782/mypy/test/helpers.py':[
-343,
-],
-'project:mypy-0.782/mypy/test/testdaemon.py':[
-63,
-],
-'project:mypy-0.782/mypy/test/testfinegrained.py':[
-105,
-],
-'project:mypy-0.782/mypy/typeops.py':[
-282,
-],
-'project:mypy-0.782/test-data/stdlib-samples/3.2/random.py':[
-121,
-],
-'project:numpy-1.16.4/numpy/core/records.py':[
-82,
-],
-'project:numpy-1.16.4/numpy/distutils/fcompiler/absoft.py':[
-112,
-139,
-],
-'project:numpy-1.16.4/numpy/distutils/fcompiler/environment.py':[
-76,
-],
-'project:numpy-1.16.4/numpy/distutils/mingw32ccompiler.py':[
-623,
-647,
-],
-'project:numpy-1.16.4/numpy/distutils/system_info.py':[
-568,
-641,
-670,
-],
-'project:numpy-1.16.4/numpy/f2py/auxfuncs.py':[
-783,
-],
-'project:numpy-1.16.4/numpy/f2py/capi_maps.py':[
-590,
-],
-'project:numpy-1.16.4/numpy/f2py/cb_rules.py':[
-507,
-],
-'project:numpy-1.16.4/numpy/f2py/crackfortran.py':[
-407,
-2450,
-2458,
-2584,
-2593,
-2690,
-2991,
-],
-'project:numpy-1.16.4/numpy/lib/arraypad.py':[
-354,
-399,
-447,
-493,
-542,
-588,
-638,
-683,
-],
-'project:numpy-1.16.4/numpy/lib/npyio.py':[
-1784,
-],
-'project:numpy-1.16.4/numpy/lib/tests/test_format.py':[
-600,
-],
-'project:numpy-1.16.4/numpy/ma/core.py':[
-4776,
-4806,
-],
-'project:numpy-1.16.4/numpy/ma/extras.py':[
-1267,
-],
-'project:numpy-1.16.4/numpy/testing/_private/parameterized.py':[
-329,
-],
-'project:numpy-1.16.4/numpy/testing/tests/test_utils.py':[
-1185,
-],
-'project:numpy-1.16.4/tools/npy_tempita/__init__.py':[
-472,
-],
-'project:pecos/pecos/distributed/xmc/xtransformer/model.py':[
-271,
-],
-'project:pecos/pecos/xmc/base.py':[
-1413,
-1423,
-],
-'project:tensorflow/python/autograph/pyct/cfg.py':[
-215,
-],
-'project:tensorflow/python/autograph/pyct/parser.py':[
-257,
-],
-'project:tensorflow/python/debug/cli/curses_ui.py':[
-834,
-],
-'project:tensorflow/python/debug/cli/profile_analyzer_cli.py':[
-177,
-],
-'project:tensorflow/python/debug/lib/grpc_debug_test_server.py':[
-99,
-],
-'project:tensorflow/python/distribute/cluster_resolver/gce_cluster_resolver.py':[
-116,
-],
-'project:tensorflow/python/distribute/cross_device_utils.py':[
-358,
-],
-'project:tensorflow/python/distribute/mirrored_strategy.py':[
-76,
-],
-'project:tensorflow/python/distribute/values.py':[
-1364,
-1371,
-],
-'project:tensorflow/python/eager/gradient_input_output_exclusions.py':[
-166,
-],
-'project:tensorflow/python/framework/op_def_library.py':[
-498,
-649,
-677,
-],
-'project:tensorflow/python/keras/applications/imagenet_utils.py':[
-342,
-381,
-],
-'project:tensorflow/python/keras/backend.py':[
-1186,
-2484,
-],
-'project:tensorflow/python/keras/callbacks.py':[
-883,
-],
-'project:tensorflow/python/keras/distribute/distributed_training_utils.py':[
-639,
-],
-'project:tensorflow/python/keras/engine/compile_utils.py':[
-611,
-],
-'project:tensorflow/python/keras/engine/input_spec.py':[
-166,
-199,
-223,
-],
-'project:tensorflow/python/keras/engine/training.py':[
-2304,
-],
-'project:tensorflow/python/keras/engine/training_generator.py':[
-457,
-],
-'project:tensorflow/python/keras/engine/training_utils.py':[
-782,
-1811,
-],
-'project:tensorflow/python/keras/engine/training_v1.py':[
-2137,
-],
-'project:tensorflow/python/keras/layers/ops/core.py':[
-45,
-],
-'project:tensorflow/python/keras/layers/preprocessing/integer_lookup.py':[
-192,
-],
-'project:tensorflow/python/keras/layers/preprocessing/string_lookup.py':[
-186,
-],
-'project:tensorflow/python/keras/layers/recurrent.py':[
-443,
-],
-'project:tensorflow/python/keras/models.py':[
-511,
-],
-'project:tensorflow/python/keras/optimizer_v2/optimizer_v2.py':[
-899,
-],
-'project:tensorflow/python/keras/preprocessing/image.py':[
-116,
-],
-'project:tensorflow/python/keras/saving/hdf5_format.py':[
-361,
-369,
-381,
-],
-'project:tensorflow/python/keras/saving/saving_utils.py':[
-114,
-],
-'project:tensorflow/python/keras/testing_utils.py':[
-260,
-],
-'project:tensorflow/python/keras/utils/generic_utils.py':[
-645,
-],
-'project:tensorflow/python/kernel_tests/conv_ops_test.py':[
-916,
-],
-'project:tensorflow/python/ops/array_ops.py':[
-1468,
-],
-'project:tensorflow/python/ops/control_flow_ops.py':[
+"project:django-cms-3.11.4/cms/tests/test_permmod.py": [
 362,
+384,
+395
 ],
-'project:tensorflow/python/ops/data_flow_ops.py':[
-85,
+"project:django-cms-3.11.4/cms/utils/__init__.py": [
+33
 ],
-'project:tensorflow/python/ops/gradients_util.py':[
-951,
+"project:django-cms-3.11.4/menus/templatetags/menu_tags.py": [
+50,
+232
 ],
-'project:tensorflow/python/ops/image_ops_impl.py':[
-292,
+"project:django-cms-3.11.4/menus/utils.py": [
+25
 ],
-'project:tensorflow/python/ops/linalg/linear_operator_low_rank_update.py':[
-188,
+"project:mypy-1.5.1/misc/fix_annotate.py": [
+56
 ],
-'project:tensorflow/python/ops/linalg/linear_operator_util.py':[
-435,
+"project:mypy-1.5.1/misc/sync-typeshed.py": [
+148
 ],
-'project:tensorflow/python/ops/ragged/ragged_factory_ops.py':[
-192,
+"project:mypy-1.5.1/mypy/checker.py": [
+4190,
+4728,
+7279,
+7280
 ],
-'project:tensorflow/python/ops/ragged/ragged_tensor.py':[
-2157,
+"project:mypy-1.5.1/mypy/checkexpr.py": [
+630,
+1122,
+1675,
+3988
 ],
-'project:tensorflow/python/ops/rnn.py':[
-629,
-1096,
-1322,
+"project:mypy-1.5.1/mypy/checkmember.py": [
+348
 ],
-'project:tensorflow/python/ops/transpose_benchmark.py':[
-135,
+"project:mypy-1.5.1/mypy/constant_fold.py": [
+143,
+168
 ],
-'project:tensorflow/python/saved_model/model_utils/export_utils.py':[
-348,
+"project:mypy-1.5.1/mypy/fastparse.py": [
+342
 ],
-'project:tensorflow/python/tpu/tensor_tracer.py':[
-1134,
+"project:mypy-1.5.1/mypy/fixup.py": [
+289
 ],
-'project:tensorflow/python/tpu/tpu_system_metadata.py':[
-227,
+"project:mypy-1.5.1/mypy/inspections.py": [
+150
 ],
-'project:tensorflow/python/training/basic_session_run_hooks.py':[
-836,
+"project:mypy-1.5.1/mypy/modulefinder.py": [
+341,
+510
 ],
-'project:tensorflow/python/util/deprecation.py':[
-314,
+"project:mypy-1.5.1/mypy/plugins/enums.py": [
+187
 ],
-'project:tensorflow/python/util/module_wrapper.py':[
-170,
+"project:mypy-1.5.1/mypy/reachability.py": [
+123,
+281
 ],
-'project:tensorflow/python/util/tf_export.py':[
-354,
+"project:mypy-1.5.1/mypy/semanal.py": [
+2424,
+2764,
+3047,
+3261,
+3372,
+3790
 ],
-'project:tensorflow/tools/compatibility/ast_edits.py':[
-567,
+"project:mypy-1.5.1/mypy/semanal_classprop.py": [
+166
 ],
-'project:tensorflow/tools/compatibility/tf_upgrade_v2.py':[
-1999,
+"project:mypy-1.5.1/mypy/semanal_main.py": [
+439
 ],
-'project:tensorflow/tools/docs/doc_generator_visitor.py':[
-189,
+"project:mypy-1.5.1/mypy/semanal_newtype.py": [
+87
 ],
-'project:tensorflow/tools/tensorflow_builder/compat_checker/compat_checker.py':[
-823,
-833,
-844,
+"project:mypy-1.5.1/mypy/semanal_typeargs.py": [
+190
 ],
-'project:tensorflow/tools/tensorflow_builder/config_detector/config_detector.py':[
-493,
+"project:mypy-1.5.1/mypy/server/update.py": [
+1274
 ],
-'project:tornado-2.3/tornado/iostream.py':[
-483,
+"project:mypy-1.5.1/mypy/stats.py": [
+339
 ],
-'project:tornado-2.3/tornado/options.py':[
-433,
+"project:mypy-1.5.1/mypy/stubgenc.py": [
+53
 ],
-'project:twisted-12.1.0/twisted/internet/process.py':[
-807,
+"project:mypy-1.5.1/mypy/suggestions.py": [
+524
 ],
-'project:twisted-12.1.0/twisted/lore/lint.py':[
-156,
+"project:mypy-1.5.1/mypy/test/helpers.py": [
+290
 ],
-'project:twisted-12.1.0/twisted/names/client.py':[
-485,
+"project:mypy-1.5.1/mypy/test/testdaemon.py": [
+69
 ],
-'project:twisted-12.1.0/twisted/names/root.py':[
-349,
+"project:mypy-1.5.1/mypy/test/testfinegrained.py": [
+105
 ],
-'project:twisted-12.1.0/twisted/protocols/dict.py':[
-44,
+"project:mypy-1.5.1/mypy/typeops.py": [
+364
 ],
-'project:twisted-12.1.0/twisted/protocols/ftp.py':[
-1595,
+"project:mypy-1.5.1/mypy/typevartuples.py": [
+179
 ],
-'project:twisted-12.1.0/twisted/protocols/shoutcast.py':[
-40,
+"project:mypy-1.5.1/mypyc/analysis/attrdefined.py": [
+217
 ],
-'project:twisted-12.1.0/twisted/python/failure.py':[
-232,
+"project:mypy-1.5.1/mypyc/codegen/emitfunc.py": [
+382,
+580
 ],
-'project:twisted-12.1.0/twisted/python/rebuild.py':[
-171,
+"project:mypy-1.5.1/mypyc/irbuild/ll_builder.py": [
+1122
 ],
-'project:twisted-12.1.0/twisted/python/reflect.py':[
-270,
+"project:mypy-1.5.1/mypyc/subtype.py": [
+68
+],
+"project:numpy-1.26.0/numpy/distutils/ccompiler_opt.py": [
+818
+],
+"project:numpy-1.26.0/numpy/distutils/fcompiler/absoft.py": [
+110,
+137
+],
+"project:numpy-1.26.0/numpy/distutils/fcompiler/environment.py": [
+72
+],
+"project:numpy-1.26.0/numpy/distutils/mingw32ccompiler.py": [
+560,
+584
+],
+"project:numpy-1.26.0/numpy/distutils/system_info.py": [
 750,
+855,
+884
 ],
-'project:twisted-12.1.0/twisted/python/release.py':[
-49,
+"project:numpy-1.26.0/numpy/distutils/tests/test_ccompiler_opt.py": [
+269
 ],
-'project:twisted-12.1.0/twisted/python/text.py':[
-158,
+"project:numpy-1.26.0/numpy/f2py/auxfuncs.py": [
+829
 ],
-'project:twisted-12.1.0/twisted/spread/jelly.py':[
-268,
+"project:numpy-1.26.0/numpy/f2py/capi_maps.py": [
+589
 ],
-'project:twisted-12.1.0/twisted/spread/pb.py':[
-356,
+"project:numpy-1.26.0/numpy/f2py/cb_rules.py": [
+578
 ],
-'project:twisted-12.1.0/twisted/web/microdom.py':[
-898,
-899,
+"project:numpy-1.26.0/numpy/f2py/crackfortran.py": [
+458,
+2495,
+2503,
+2635,
+2644,
+2853,
+3077
 ],
-'project:twisted-12.1.0/twisted/words/im/ircsupport.py':[
-213,
+"project:numpy-1.26.0/numpy/f2py/symbolic.py": [
+951,
+962,
+1075,
+1098,
+1341,
+1472
 ],
-'project:twisted-12.1.0/twisted/words/protocols/irc.py':[
-253,
+"project:numpy-1.26.0/numpy/lib/function_base.py": [
+3801,
+3819
 ],
+"project:numpy-1.26.0/numpy/lib/npyio.py": [
+1079,
+2025
+],
+"project:numpy-1.26.0/numpy/ma/core.py": [
+4944,
+4974
+],
+"project:numpy-1.26.0/numpy/ma/extras.py": [
+1431
+],
+"project:numpy-1.26.0/tools/refguide_check.py": [
+495
+],
+"project:numpy-1.26.0/tools/travis-sorter.py": [
+140
+],
+"project:numpy-1.26.0/vendored-meson/meson-python/tests/test_wheel.py": [
+28
+],
+"project:numpy-1.26.0/vendored-meson/meson/mesonbuild/cargo/cfg.py": [
+181
+],
+"project:numpy-1.26.0/vendored-meson/meson/mesonbuild/compilers/mixins/emscripten.py": [
+92
+],
+"project:numpy-1.26.0/vendored-meson/meson/mesonbuild/dependencies/configtool.py": [
+156
+],
+"project:numpy-1.26.0/vendored-meson/meson/mesonbuild/dependencies/detect.py": [
+224
+],
+"project:numpy-1.26.0/vendored-meson/meson/mesonbuild/dependencies/qt.py": [
+90,
+93
+],
+"project:numpy-1.26.0/vendored-meson/meson/mesonbuild/interpreter/interpreter.py": [
+755,
+759,
+2465
+],
+"project:numpy-1.26.0/vendored-meson/meson/mesonbuild/minstall.py": [
+717
+],
+"project:numpy-1.26.0/vendored-meson/meson/mesonbuild/modules/dlang.py": [
+55
+],
+"project:numpy-1.26.0/vendored-meson/meson/mesonbuild/programs.py": [
+167
+],
+"project:numpy-1.26.0/vendored-meson/meson/mesonbuild/rewriter.py": [
+443,
+690,
+780
+],
+"project:numpy-1.26.0/vendored-meson/meson/mesonbuild/scripts/depfixer.py": [
+342
+],
+"project:numpy-1.26.0/vendored-meson/meson/run_project_tests.py": [
+1051
+],
+"project:numpy-1.26.0/vendored-meson/meson/test cases/common/179 escape and unicode/find.py": [
+8
+],
+"project:numpy-1.26.0/vendored-meson/meson/unittests/allplatformstests.py": [
+1333
+],
+"project:pecos/pecos/distributed/xmc/xtransformer/model.py": [
+271
+],
+"project:pecos/pecos/xmc/base.py": [
+1471,
+1481
+],
+"project:tensorflow/python/autograph/pyct/parser.py": [
+359
+],
+"project:tensorflow/python/autograph/tests/cond_basic_test.py": [
+231
+],
+"project:tensorflow/python/autograph/tests/early_return_test.py": [
+60
+],
+"project:tensorflow/python/autograph/tests/nested_control_flow_test.py": [
+31,
+50,
+80
+],
+"project:tensorflow/python/compiler/tensorrt/model_tests/result_analyzer.py": [
+217
+],
+"project:tensorflow/python/data/kernel_tests/random_test.py": [
+66
+],
+"project:tensorflow/python/debug/cli/curses_ui.py": [
+829
+],
+"project:tensorflow/python/debug/cli/profile_analyzer_cli.py": [
+173
+],
+"project:tensorflow/python/debug/lib/grpc_debug_test_server.py": [
+95
+],
+"project:tensorflow/python/distribute/cluster_resolver/gce_cluster_resolver.py": [
+112
+],
+"project:tensorflow/python/distribute/coordinator/cluster_coordinator.py": [
+1777
+],
+"project:tensorflow/python/distribute/mirrored_strategy.py": [
+86
+],
+"project:tensorflow/python/eager/gradient_input_output_exclusions.py": [
+160
+],
+"project:tensorflow/python/framework/op_def_library.py": [
+583,
+830
+],
+"project:tensorflow/python/keras/backend.py": [
+1324,
+2686
+],
+"project:tensorflow/python/keras/distribute/distributed_training_utils_v1.py": [
+617
+],
+"project:tensorflow/python/keras/engine/compile_utils.py": [
+677
+],
+"project:tensorflow/python/keras/engine/input_spec.py": [
+238,
+266
+],
+"project:tensorflow/python/keras/engine/training.py": [
+2462
+],
+"project:tensorflow/python/keras/engine/training_generator_v1.py": [
+458
+],
+"project:tensorflow/python/keras/engine/training_utils_v1.py": [
+806,
+1700
+],
+"project:tensorflow/python/keras/engine/training_v1.py": [
+2158
+],
+"project:tensorflow/python/keras/layers/recurrent.py": [
+440
+],
+"project:tensorflow/python/keras/models.py": [
+535
+],
+"project:tensorflow/python/keras/optimizer_v2/optimizer_v2.py": [
+1058
+],
+"project:tensorflow/python/keras/saving/hdf5_format.py": [
+367,
+375,
+387
+],
+"project:tensorflow/python/keras/saving/saved_model/save.py": [
+73
+],
+"project:tensorflow/python/keras/saving/saving_utils.py": [
+112
+],
+"project:tensorflow/python/keras/saving/utils_v1/export_utils.py": [
+350
+],
+"project:tensorflow/python/keras/testing_utils.py": [
+282
+],
+"project:tensorflow/python/keras/utils/generic_utils.py": [
+976
+],
+"project:tensorflow/python/kernel_tests/nn_ops/conv_ops_test.py": [
+927
+],
+"project:tensorflow/python/ops/array_ops.py": [
+1513
+],
+"project:tensorflow/python/ops/control_flow_ops.py": [
+273
+],
+"project:tensorflow/python/ops/data_flow_ops.py": [
+83
+],
+"project:tensorflow/python/ops/image_ops_impl.py": [
+297,
+2786
+],
+"project:tensorflow/python/ops/linalg/linear_operator_low_rank_update.py": [
+198
+],
+"project:tensorflow/python/ops/linalg/linear_operator_util.py": [
+446
+],
+"project:tensorflow/python/ops/ragged/ragged_tensor.py": [
+2457
+],
+"project:tensorflow/python/ops/rnn.py": [
+692,
+1165,
+1391
+],
+"project:tensorflow/python/ops/transpose_benchmark.py": [
+131
+],
+"project:tensorflow/python/ops/while_loop.py": [
+517
+],
+"project:tensorflow/python/saved_model/model_utils/export_utils.py": [
+404
+],
+"project:tensorflow/python/tpu/tpu_system_metadata.py": [
+223
+],
+"project:tensorflow/python/training/basic_session_run_hooks.py": [
+850
+],
+"project:tensorflow/python/util/tf_export.py": [
+363
+],
+"project:tensorflow/tools/compatibility/ast_edits.py": [
+559
+],
+"project:tensorflow/tools/compatibility/tf_upgrade_v2.py": [
+2012
+],
+"project:tensorflow/tools/tensorflow_builder/compat_checker/compat_checker.py": [
+817,
+827,
+838
+],
+"project:tensorflow/tools/tensorflow_builder/config_detector/config_detector.py": [
+487
+],
+"project:tornado-6.3.3/tornado/http1connection.py": [
+519
+],
+"project:tornado-6.3.3/tornado/iostream.py": [
+931,
+1008
+],
+"project:tornado-6.3.3/tornado/log.py": [
+203
+],
+"project:tornado-6.3.3/tornado/options.py": [
+423
+],
+"project:twisted-23.8.0/src/twisted/conch/client/default.py": [
+147
+],
+"project:twisted-23.8.0/src/twisted/internet/process.py": [
+992
+],
+"project:twisted-23.8.0/src/twisted/mail/imap4.py": [
+669
+],
+"project:twisted-23.8.0/src/twisted/names/client.py": [
+485
+],
+"project:twisted-23.8.0/src/twisted/protocols/ftp.py": [
+1827
+],
+"project:twisted-23.8.0/src/twisted/protocols/shoutcast.py": [
+40
+],
+"project:twisted-23.8.0/src/twisted/python/rebuild.py": [
+159
+],
+"project:twisted-23.8.0/src/twisted/python/reflect.py": [
+603
+],
+"project:twisted-23.8.0/src/twisted/python/release.py": [
+50
+],
+"project:twisted-23.8.0/src/twisted/python/text.py": [
+163
+],
+"project:twisted-23.8.0/src/twisted/scripts/trial.py": [
+501
+],
+"project:twisted-23.8.0/src/twisted/spread/pb.py": [
+382
+],
+"project:twisted-23.8.0/src/twisted/test/test_lockfile.py": [
+22
+],
+"project:twisted-23.8.0/src/twisted/web/microdom.py": [
+1063,
+1064
+],
+"project:twisted-23.8.0/src/twisted/words/im/ircsupport.py": [
+217
+],
+"project:twisted-23.8.0/src/twisted/words/test/test_irc.py": [
+36
+]
 }
