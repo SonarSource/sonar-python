@@ -58,6 +58,7 @@ public class BuiltinShadowingAssignmentCheck extends PythonSubscriptionCheck {
   public static final String RENAME_PREFIX = "_";
   public static final String QUICK_FIX_MESSAGE_FORMAT = "Rename to " + RENAME_PREFIX+ " %s";
   private final Map<Symbol, PreciseIssue> variableIssuesRaised = new HashMap<>();
+  public static final String ELLIPSIS = "ellipsis";
 
   @Override
   public void initialize(Context context) {
@@ -184,6 +185,10 @@ public class BuiltinShadowingAssignmentCheck extends PythonSubscriptionCheck {
   }
 
   private boolean isBuiltInName(Name name) {
+    // Workaround to fix the FP raised. A definite fix should be implemented as part of SONARPY-1531.
+    if (ELLIPSIS.equals(name.name())) {
+      return false;
+    }
     return TypeShed.builtinSymbols().containsKey(name.name());
   }
 }
