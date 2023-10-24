@@ -35,29 +35,25 @@ class IsCloseAbsTolCheckTest {
 
   @Test
   void quickfix() {
-    String noncompliant =
-      "import math\n" +
+    String noncompliant = "import math\n" +
       "def foo(a):\n" +
       "   math.isclose(a, 0)";
 
-    String fixed =
-      "import math\n" +
+    String fixed = "import math\n" +
       "def foo(a):\n" +
       "   math.isclose(a, 0, abs_tol=1e-9)";
     PythonQuickFixVerifier.verify(check, noncompliant, fixed);
-    PythonQuickFixVerifier.verifyQuickFixMessages(check, noncompliant, "Add the abs_tol parameter.");
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, noncompliant, "Add the \"abs_tol\" parameter.");
   }
 
   @Test
   void quickfix_with_assignement() {
-    String noncompliant =
-      "import math\n" +
+    String noncompliant = "import math\n" +
       "def foo(a):\n" +
       "   b = 0\n" +
       "   math.isclose(a, b)";
 
-    String fixed =
-      "import math\n" +
+    String fixed = "import math\n" +
       "def foo(a):\n" +
       "   b = 0\n" +
       "   math.isclose(a, b, abs_tol=1e-9)";
@@ -66,13 +62,11 @@ class IsCloseAbsTolCheckTest {
 
   @Test
   void quickfix_with_rel_tol() {
-    String noncompliant =
-      "import math\n" +
+    String noncompliant = "import math\n" +
       "def foo(a):\n" +
       "   math.isclose(0, a, rel_tol=1e-8)";
 
-    String fixed =
-      "import math\n" +
+    String fixed = "import math\n" +
       "def foo(a):\n" +
       "   math.isclose(0, a, rel_tol=1e-8, abs_tol=1e-9)";
     PythonQuickFixVerifier.verify(check, noncompliant, fixed);

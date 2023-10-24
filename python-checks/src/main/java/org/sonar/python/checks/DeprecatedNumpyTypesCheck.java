@@ -21,7 +21,6 @@ package org.sonar.python.checks;
 
 import java.util.Map;
 import java.util.Optional;
-
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
@@ -34,7 +33,7 @@ import org.sonar.python.quickfix.TextEditUtils;
 @Rule(key = "S6730")
 public class DeprecatedNumpyTypesCheck extends PythonSubscriptionCheck {
 
-  private static final String MESSAGE = "Replace this deprecated numpy type alias with the builtin type %s.";
+  private static final String MESSAGE = "Replace this deprecated \"numpy\" type alias with the builtin type \"%s\".";
   private static final String QUICK_FIX_MESSAGE = "Replace with %s.";
   private static final Map<String, String> TYPE_TO_CHECK = Map.of(
       "numpy.bool", "bool",

@@ -34,7 +34,7 @@ import org.sonar.python.tree.TreeUtils;
 @Rule(key = "S6740")
 public class PandasReadNoDataTypeCheck extends PythonSubscriptionCheck {
 
-  private static final String MESSAGE = "Provide the 'dtype' parameter when calling";
+  private static final String MESSAGE = "Provide the \"dtype\" parameter when calling";
 
   private static final String READ_CSV = "pandas.read_csv";
   private static final String READ_TABLE = "pandas.read_table";
@@ -84,7 +84,7 @@ public class PandasReadNoDataTypeCheck extends PythonSubscriptionCheck {
     return Optional.ofNullable(ce.calleeSymbol())
       .map(Symbol::fullyQualifiedName)
       .map(READ_METHODS::get)
-      .map(name -> String.format("%s '%s'.", MESSAGE, name))
+      .map(name -> String.format("%s \"%s\".", MESSAGE, name))
       .orElse("");
   }
 }

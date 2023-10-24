@@ -4,7 +4,7 @@ def non_compliant_1():
     df = pd.DataFrame({'A': [3, 2, 1], 'B': ['x', 'y', 'z']})
     df2 = pd.read_csv("some_csv.csv")
 
-    _ = df.drop(columns='A', inplace=True)  # Noncompliant
+    _ = df.drop(columns='A', inplace=True)  # Noncompliant  {{Do not use "inplace=True" when modifying a dataframe.}}
     #                        ^^^^^^^^^^^^
     _ = df2.drop(columns='A', inplace=True)  # Noncompliant
     #                         ^^^^^^^^^^^^

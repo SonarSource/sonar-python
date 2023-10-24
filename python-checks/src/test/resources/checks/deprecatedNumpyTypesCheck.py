@@ -2,21 +2,21 @@ import numpy as np
 
 
 def failure():
-    b = np.bool(True)  # Noncompliant {{Replace this deprecated numpy type alias with the builtin type bool.}}
+    b = np.bool(True)  # Noncompliant {{Replace this deprecated "numpy" type alias with the builtin type "bool".}}
     #   ^^^^^^^
-    i = np.int(42)  # Noncompliant {{Replace this deprecated numpy type alias with the builtin type int.}}
+    i = np.int(42)  # Noncompliant {{Replace this deprecated "numpy" type alias with the builtin type "int".}}
     #   ^^^^^^
-    f = np.float(4.2)  # Noncompliant {{Replace this deprecated numpy type alias with the builtin type float.}}
+    f = np.float(4.2)  # Noncompliant {{Replace this deprecated "numpy" type alias with the builtin type "float".}}
     #   ^^^^^^^^
-    c = np.complex(-2.0, 0.0)  # Noncompliant {{Replace this deprecated numpy type alias with the builtin type complex.}}
+    c = np.complex(-2.0, 0.0)  # Noncompliant {{Replace this deprecated "numpy" type alias with the builtin type "complex".}}
     #   ^^^^^^^^^^
-    o = np.object  # Noncompliant {{Replace this deprecated numpy type alias with the builtin type object.}}
+    o = np.object  # Noncompliant {{Replace this deprecated "numpy" type alias with the builtin type "object".}}
     #   ^^^^^^^^^
-    s = np.str("foo")  # Noncompliant {{Replace this deprecated numpy type alias with the builtin type str.}}
+    s = np.str("foo")  # Noncompliant {{Replace this deprecated "numpy" type alias with the builtin type "str".}}
     #   ^^^^^^
-    l = np.long(123)  # Noncompliant {{Replace this deprecated numpy type alias with the builtin type int.}}
+    l = np.long(123)  # Noncompliant {{Replace this deprecated "numpy" type alias with the builtin type "int".}}
     #   ^^^^^^^
-    u = np.unicode("bar")  # Noncompliant {{Replace this deprecated numpy type alias with the builtin type str.}}
+    u = np.unicode("bar")  # Noncompliant {{Replace this deprecated "numpy" type alias with the builtin type "str".}}
     #   ^^^^^^^^^^
 
 def failure_import_as_z():

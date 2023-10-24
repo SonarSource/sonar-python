@@ -6,11 +6,11 @@ def non_compliant(df: pd.DataFrame, df2: DataFrame):
 
     df2.set_index("name").T.filter(like='joe', axis=0)[1].add(10).mean().round().to_parquet()  # Noncompliant
 #   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    DataFrame().set_index("name").filter(like='joe', axis=0).groupby("team")["salary"].add(10).mean().round().to_parquet()  # Noncompliant {{Refactor this long chain of instructions with pandas.pipe}}
+    DataFrame().set_index("name").filter(like='joe', axis=0).groupby("team")["salary"].add(10).mean().round().to_parquet()  # Noncompliant {{Refactor this long chain of instructions with "pandas.pipe"}}
 #   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     df.set_index("name").filter(like='joe', axis=0).groupby("team")["salary"].add(10).mean().round().to_parquet()  # FN see SONARPY-1503
 
-    df2.set_index("name").filter(like='joe', axis=0).groupby("team")["salary"]["test"].add(10).mean().round().to_parquet()  # Noncompliant {{Refactor this long chain of instructions with pandas.pipe}}
+    df2.set_index("name").filter(like='joe', axis=0).groupby("team")["salary"]["test"].add(10).mean().round().to_parquet()  # Noncompliant {{Refactor this long chain of instructions with "pandas.pipe"}}
 #   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     pd.read_csv("some_csv.csv").filter(like='joe', axis=0).groupby("team")["salary"]["test"].add(10).mean().round().to_parquet()  # Noncompliant
 #   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
