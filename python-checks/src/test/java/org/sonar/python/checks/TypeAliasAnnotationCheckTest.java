@@ -36,7 +36,7 @@ class TypeAliasAnnotationCheckTest {
   }
 
   @Test
-  void verify_python_312_no_issues() {
+  void verify_earlier_version_no_issues() {
     ProjectPythonVersion.setCurrentVersions(EnumSet.of(PythonVersionUtils.Version.V_311, PythonVersionUtils.Version.V_312));
     var issues = PythonCheckVerifier.issues("src/test/resources/checks/typeAliasAnnotation.py", new TypeAliasAnnotationCheck());
     assertThat(issues)
