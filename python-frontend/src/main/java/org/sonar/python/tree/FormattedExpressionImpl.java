@@ -24,6 +24,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.annotation.Nullable;
+
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FormatSpecifier;
 import org.sonar.plugins.python.api.tree.FormattedExpression;
@@ -37,10 +38,22 @@ public class FormattedExpressionImpl extends PyTree implements FormattedExpressi
   private final Token equalToken;
   private final FormatSpecifier formatSpecifier;
 
-  public FormattedExpressionImpl(Expression expression, @Nullable Token equalToken, @Nullable FormatSpecifier formatSpecifier) {
+  private final Token lCurlyBrace;
+  private final Token rCurlyBrace;
+  private final Token fstringConversionToken;
+  private final Token fstringConversionName;
+
+  public FormattedExpressionImpl(Expression expression, @Nullable Token lCurlyBrace, @Nullable Token rCurlyBrace,
+    @Nullable Token equalToken, @Nullable FormatSpecifier formatSpecifier,
+    @Nullable Token fstringConversionToken, @Nullable Token fstringConversionName) {
+
     this.expression = expression;
     this.equalToken = equalToken;
     this.formatSpecifier = formatSpecifier;
+    this.lCurlyBrace = lCurlyBrace;
+    this.rCurlyBrace = rCurlyBrace;
+    this.fstringConversionToken = fstringConversionToken;
+    this.fstringConversionName = fstringConversionName;
   }
 
   @Override
@@ -60,7 +73,8 @@ public class FormattedExpressionImpl extends PyTree implements FormattedExpressi
 
   @Override
   List<Tree> computeChildren() {
-    return Stream.of(expression, equalToken).filter(Objects::nonNull).collect(Collectors.toList());
+    return Stream.of(lCurlyBrace, expression, equalToken, fstringConversionToken, fstringConversionName, formatSpecifier, rCurlyBrace)
+      .filter(Objects::nonNull).collect(Collectors.toList());
   }
 
   @Override

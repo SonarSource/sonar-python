@@ -63,7 +63,7 @@ public abstract class RuleTest {
     List<Token> tokenList = TreeUtils.tokens(tree);
 
     String tokens = tokenList.stream().filter(t -> !ptt.contains(t.type())).map(token -> {
-      if(token.type() == PythonTokenType.STRING) {
+      if((token.type() == PythonTokenType.STRING) || (token.type() == PythonTokenType.FSTRING_MIDDLE)) {
         return token.value().replaceAll("\n", "").replaceAll(" ", "");
       }
       return token.value();

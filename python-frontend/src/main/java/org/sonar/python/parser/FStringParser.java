@@ -41,7 +41,7 @@ public class FStringParser {
   public FStringParser() {
     this.lexerState = new LexerState();
     this.lexer = PythonLexer.fStringLexer(lexerState);
-    this.internalParser.setRootRule(internalParser.getGrammar().rule(PythonGrammar.F_STRING_CONTENT));
+    this.internalParser.setRootRule(internalParser.getGrammar().rule(PythonGrammar.FSTRING));
   }
 
   public List<AstNode> fStringExpressions(Token fStringToken) {

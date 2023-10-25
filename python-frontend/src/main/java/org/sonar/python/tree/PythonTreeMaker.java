@@ -65,7 +65,6 @@ import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FinallyClause;
 import org.sonar.plugins.python.api.tree.ForStatement;
 import org.sonar.plugins.python.api.tree.FormatSpecifier;
-import org.sonar.plugins.python.api.tree.FormattedExpression;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.GlobalStatement;
 import org.sonar.plugins.python.api.tree.GroupPattern;
@@ -111,12 +110,8 @@ import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.api.PythonKeyword;
 import org.sonar.python.api.PythonPunctuator;
 import org.sonar.python.api.PythonTokenType;
-import org.sonar.python.parser.FStringParser;
 
 public class PythonTreeMaker {
-
-  private static final FStringParser F_STRING_PARSER = new FStringParser();
-
 
   public FileInput fileInput(AstNode astNode) {
     List<Statement> statements = getStatements(astNode).stream().map(this::statement).collect(Collectors.toList());
@@ -734,7 +729,6 @@ public class PythonTreeMaker {
       body, suiteDedent(firstSuite), elseClause);
   }
 
-
   public ExpressionStatement expressionStatement(StatementWithSeparator statementWithSeparator) {
     AstNode astNode = statementWithSeparator.statement();
     Separators separators = statementWithSeparator.separator();
@@ -825,7 +819,8 @@ public class PythonTreeMaker {
   }
 
   public void checkExceptClauses(List<ExceptClause> excepts) {
-    if (excepts.isEmpty()) return;
+    if (excepts.isEmpty())
+      return;
 
     Tree.Kind firstExceptKind = excepts.get(0).getKind();
     for (ExceptClause except : excepts) {
@@ -897,7 +892,6 @@ public class PythonTreeMaker {
     }
     return new ExceptClauseImpl(exceptKeyword, star, colon, newLine, indent, body, dedent, expression(exceptionNode));
   }
-
 
   public MatchStatement matchStatement(AstNode matchStmt) {
     Token matchKeyword = toPyToken(matchStmt.getTokens().get(0));
@@ -1039,7 +1033,7 @@ public class PythonTreeMaker {
 
     for (int i = 1; i < names.size(); i++) {
       Name name = name(names.get(i));
-      qualifier = new QualifiedExpressionImpl(name, qualifier, dots.get(i-1));
+      qualifier = new QualifiedExpressionImpl(name, qualifier, dots.get(i - 1));
     }
     return qualifier;
   }
@@ -1074,7 +1068,7 @@ public class PythonTreeMaker {
     addPatternsAndCommasFromMaybeSequencePattern(sequencePattern.getFirstChild(PythonGrammar.MAYBE_SEQUENCE_PATTERN), patterns, commas);
   }
 
-  private static void addPatternsAndCommasFromMaybeSequencePattern(@Nullable AstNode maybeSequencePattern,List<Pattern> patterns, List<Token> commas) {
+  private static void addPatternsAndCommasFromMaybeSequencePattern(@Nullable AstNode maybeSequencePattern, List<Pattern> patterns, List<Token> commas) {
     if (maybeSequencePattern == null) {
       return;
     }
@@ -1146,7 +1140,7 @@ public class PythonTreeMaker {
     Tree.Kind literalKind;
     if (literalPattern.hasDirectChildren(PythonGrammar.COMPLEX_NUMBER, PythonGrammar.SIGNED_NUMBER)) {
       literalKind = Tree.Kind.NUMERIC_LITERAL_PATTERN;
-    } else if (literalPattern.hasDirectChildren(PythonTokenType.STRING)) {
+    } else if (literalPattern.hasDirectChildren(PythonGrammar.STRINGS)) {
       literalKind = Tree.Kind.STRING_LITERAL_PATTERN;
     } else if (literalPattern.hasDirectChildren(PythonKeyword.NONE)) {
       literalKind = Tree.Kind.NONE_LITERAL_PATTERN;
@@ -1156,7 +1150,6 @@ public class PythonTreeMaker {
     List<Token> tokens = literalPattern.getTokens().stream().map(PythonTreeMaker::toPyToken).collect(Collectors.toList());
     return new LiteralPatternImpl(tokens, literalKind);
   }
-
 
   // expressions
 
@@ -1202,8 +1195,8 @@ public class PythonTreeMaker {
     if (astNode.is(PythonGrammar.ATOM) && astNode.getFirstChild().is(PythonPunctuator.BACKTICK)) {
       return repr(astNode);
     }
-    if (astNode.is(PythonGrammar.ATOM) && astNode.getFirstChild().is(PythonTokenType.STRING)) {
-      return stringLiteral(astNode);
+    if (astNode.is(PythonGrammar.ATOM) && astNode.getFirstChild().is(PythonGrammar.STRINGS)) {
+      return stringLiterals(astNode.getFirstChild());
     }
     if (astNode.is(PythonGrammar.ATOM) && astNode.getChildren().size() == 1) {
       return expression(astNode.getFirstChild());
@@ -1433,8 +1426,7 @@ public class PythonTreeMaker {
     List<Tree> slices = new ArrayList<>();
     for (AstNode subscript : subscriptList.getChildren(PythonGrammar.SUBSCRIPT)) {
       AstNode colon = subscript.getFirstChild(PythonPunctuator.COLON);
-      var slice = colon == null ?
-        expression(subscript.getFirstChild(PythonGrammar.NAMED_EXPR_TEST, PythonGrammar.STAR_EXPR))
+      var slice = colon == null ? expression(subscript.getFirstChild(PythonGrammar.NAMED_EXPR_TEST, PythonGrammar.STAR_EXPR))
         : sliceItem(subscript);
       slices.add(slice);
     }
@@ -1559,8 +1551,7 @@ public class PythonTreeMaker {
     AstNode compFor = astNode.getFirstChild(PythonGrammar.COMP_FOR);
     if (compFor != null) {
       Expression expression = expression(astNode.getFirstChild());
-      ComprehensionExpression comprehension =
-        new ComprehensionExpressionImpl(Tree.Kind.GENERATOR_EXPR, null, expression, compFor(compFor), null);
+      ComprehensionExpression comprehension = new ComprehensionExpressionImpl(Tree.Kind.GENERATOR_EXPR, null, expression, compFor(compFor), null);
       return new RegularArgumentImpl(comprehension);
     }
     AstNode walrusOperator = astNode.getFirstChild(PythonPunctuator.WALRUS_OPERATOR);
@@ -1676,19 +1667,39 @@ public class PythonTreeMaker {
     return new NumericLiteralImpl(toPyToken(astNode.getToken()));
   }
 
-  private Expression stringLiteral(AstNode astNode) {
-    List<StringElement> elements = new ArrayList<>();
-    for (AstNode elementNode : astNode.getChildren(PythonTokenType.STRING)) {
-      com.sonar.sslr.api.Token token = elementNode.getToken();
-      StringElementImpl element = new StringElementImpl(toPyToken(token));
-      if (element.isInterpolated()) {
-        F_STRING_PARSER.fStringExpressions(token).forEach(
-          expressionNode -> element.addFormattedExpression(formattedExpression(expressionNode))
-        );
-      }
-      elements.add(element);
-    }
+  private Expression stringLiterals(AstNode astNode) {
+    List<StringElement> elements = astNode.getChildren(PythonTokenType.STRING, PythonGrammar.FSTRING).stream()
+      .map(this::stringLiteral)
+      .filter(Objects::nonNull)
+      .collect(Collectors.toList());
     return new StringLiteralImpl(elements);
+  }
+
+  private StringElementImpl stringLiteral(AstNode elementNode) {
+    Token token = toPyToken(elementNode.getToken());
+    if (token == null) {
+      return null;
+    }
+    if (elementNode.is(PythonGrammar.FSTRING)) {
+      Token fstringEnd = toPyToken(elementNode.getFirstChild(PythonTokenType.FSTRING_END).getToken());
+      List<Tree> fStringMiddles = getFStringMiddles(elementNode);
+      return new StringElementImpl(token, fStringMiddles, fstringEnd);
+    }
+    return new StringElementImpl(token, List.of(), null);
+  }
+
+  private List<Tree> getFStringMiddles(AstNode expressionNode) {
+    return expressionNode
+      .getChildren(PythonGrammar.FSTRING_REPLACEMENT_FIELD, PythonTokenType.FSTRING_MIDDLE)
+      .stream()
+      .map(fStringMiddle -> {
+        if (fStringMiddle.is(PythonGrammar.FSTRING_REPLACEMENT_FIELD)) {
+          return formattedExpression(fStringMiddle);
+        }
+        return stringLiteral(fStringMiddle);
+      })
+      .filter(Objects::nonNull)
+      .collect(Collectors.toList());
   }
 
   private FormatSpecifier formatSpecifier(AstNode expressionNode) {
@@ -1698,26 +1709,24 @@ public class PythonTreeMaker {
     }
 
     Token columnToken = toPyToken(formatSpecifierNode.getFirstChild(PythonPunctuator.COLON).getToken());
-    List<FormattedExpression> nestedExpressions = formatSpecifierNode.getChildren(PythonGrammar.FORMATTED_EXPR)
-      .stream()
-      .map(this::formattedExpression)
-      .collect(Collectors.toList());
-
-    return new FormatSpecifierImpl(columnToken, nestedExpressions);
+    if (columnToken == null) {
+      return null;
+    }
+    List<Tree> fStringMiddles = getFStringMiddles(formatSpecifierNode);
+    return new FormatSpecifierImpl(columnToken, fStringMiddles);
   }
 
-  private FormattedExpression formattedExpression(AstNode expressionNode) {
-    var expressionsList = expressionNode.getFirstChild(PythonGrammar.TESTLIST);
-    var expressions = expressionsList
-      .getChildren(PythonGrammar.TEST)
-      .stream()
-      .map(this::expression)
-      .collect(Collectors.toList());
-
+  private FormattedExpressionImpl formattedExpression(AstNode expressionNode) {
     Expression exp;
-    if (expressionsList.getChildren().size() == 1) {
-      exp = expressions.get(0);
+    if (expressionNode.hasDirectChildren(PythonGrammar.YIELD_EXPR)) {
+      var yieldExpression = expressionNode.getFirstChild(PythonGrammar.YIELD_EXPR);
+      exp = expression(yieldExpression);
     } else {
+      var expressionsList = expressionNode.getFirstChild(PythonGrammar.TESTLIST_STAR_EXPR);
+      var expressions = expressionsList.getChildren(PythonGrammar.TEST, PythonGrammar.STAR_EXPR)
+        .stream()
+        .map(this::expression)
+        .collect(Collectors.toList());
       var commas = expressionsList
         .getChildren(PythonPunctuator.COMMA)
         .stream()
@@ -1725,13 +1734,26 @@ public class PythonTreeMaker {
         .map(PythonTreeMaker::toPyToken)
         .collect(Collectors.toList());
 
-      exp = new TupleImpl(null, expressions, commas, null);
+      if (expressions.size() == 1 && commas.isEmpty()) {
+        exp = expressions.get(0);
+      } else {
+        exp = new TupleImpl(null, expressions, commas, null);
+      }
     }
     AstNode equalNode = expressionNode.getFirstChild(PythonPunctuator.ASSIGN);
     Token equalToken = equalNode == null ? null : toPyToken(equalNode.getToken());
     FormatSpecifier formatSpecifier = formatSpecifier(expressionNode);
-
-    return new FormattedExpressionImpl(exp, equalToken, formatSpecifier);
+    Token lCurlyBrace = toPyToken(expressionNode.getFirstChild(PythonPunctuator.LCURLYBRACE).getToken());
+    Token rCurlyBrace = toPyToken(expressionNode.getFirstChild(PythonPunctuator.RCURLYBRACE).getToken());
+    Optional<AstNode> conversionNode = Optional.ofNullable(expressionNode.getFirstChild(GenericTokenType.UNKNOWN_CHAR))
+      .filter(node -> "!".equals(node.getTokenValue()));
+    Token conversionNameToken = conversionNode
+      .map(AstNode::getNextSibling)
+      .filter(node -> node.is(GenericTokenType.IDENTIFIER) && List.of("r", "s", "a").contains(node.getTokenValue()))
+      .map(n -> toPyToken(n.getToken()))
+      .orElse(null);
+    Token conversionToken = conversionNameToken != null ? conversionNode.map(node -> toPyToken(node.getToken())).orElse(null) : null;
+    return new FormattedExpressionImpl(exp, lCurlyBrace, rCurlyBrace, equalToken, formatSpecifier, conversionToken, conversionNameToken);
   }
 
   private static Token suiteIndent(AstNode suite) {
@@ -1745,6 +1767,5 @@ public class PythonTreeMaker {
   private static Token suiteDedent(AstNode suite) {
     return suite.getFirstChild(PythonTokenType.DEDENT) == null ? null : toPyToken(suite.getFirstChild(PythonTokenType.DEDENT).getToken());
   }
-
 
 }

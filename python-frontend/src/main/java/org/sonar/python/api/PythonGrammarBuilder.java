@@ -19,7 +19,6 @@
  */
 package org.sonar.python.api;
 
-import com.sonar.sslr.api.GenericTokenType;
 import com.sonar.sslr.api.Grammar;
 import org.sonar.sslr.grammar.LexerfulGrammarBuilder;
 
@@ -91,19 +90,25 @@ public class PythonGrammarBuilder {
     b.rule(STAR_EXPR).is("*", EXPR);
     b.rule(EXPR).is(XOR_EXPR, b.zeroOrMore("|", XOR_EXPR));
 
-    // https://docs.python.org/3/reference/lexical_analysis.html#formatted-string-literals
-    b.rule(F_STRING_CONTENT).is(b.zeroOrMore(b.firstOf(GenericTokenType.UNKNOWN_CHAR, FORMATTED_EXPR)));
-    b.rule(FORMATTED_EXPR).is(
+    // https://docs.python.org/3.12/reference/lexical_analysis.html#formatted-string-literals
+    b.rule(FSTRING).is(
+        PythonTokenType.FSTRING_START,
+        b.zeroOrMore(b.firstOf(FSTRING_REPLACEMENT_FIELD, PythonTokenType.FSTRING_MIDDLE)), 
+        PythonTokenType.FSTRING_END
+    );
+    b.rule(FSTRING_REPLACEMENT_FIELD).is(
       PythonPunctuator.LCURLYBRACE,
-      TESTLIST,
+      b.firstOf(YIELD_EXPR, TESTLIST_STAR_EXPR),
       b.optional(PythonPunctuator.ASSIGN),
       b.optional("!", b.firstOf("s", "r", "a")),
       b.optional(FORMAT_SPECIFIER),
       PythonPunctuator.RCURLYBRACE);
     b.rule(FORMAT_SPECIFIER).is(
       ":",
-      b.oneOrMore(b.firstOf(FORMATTED_EXPR, b.anyTokenButNot(PythonPunctuator.RCURLYBRACE)))
+      b.zeroOrMore(b.firstOf(PythonTokenType.FSTRING_MIDDLE, FSTRING_REPLACEMENT_FIELD))
     );
+
+    b.rule(STRINGS).is(b.oneOrMore(b.firstOf(FSTRING, PythonTokenType.STRING)));
 
     b.rule(FACTOR).is(b.firstOf(
       b.sequence(b.firstOf("+", "-", "~"), FACTOR),
@@ -120,7 +125,7 @@ public class PythonGrammarBuilder {
       b.sequence("`", TEST, b.zeroOrMore(",", TEST), "`"),
       NAME,
       PythonTokenType.NUMBER,
-      b.oneOrMore(PythonTokenType.STRING),
+      STRINGS,
       ELLIPSIS,
       PythonKeyword.NONE));
     b.rule(ELLIPSIS).is(b.sequence(".", ".", "."));
@@ -366,7 +371,7 @@ public class PythonGrammarBuilder {
     b.rule(LITERAL_PATTERN).is(b.firstOf(
       COMPLEX_NUMBER,
       SIGNED_NUMBER,
-      b.oneOrMore(PythonTokenType.STRING),
+      STRINGS,
       PythonKeyword.NONE,
       "True",
       "False"
