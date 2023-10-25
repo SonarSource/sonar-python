@@ -19,20 +19,6 @@
  */
 package org.sonar.python.lexer;
 
-import com.google.common.collect.ImmutableSet;
-import com.sonar.sslr.api.GenericTokenType;
-import com.sonar.sslr.api.Token;
-import com.sonar.sslr.impl.Lexer;
-import java.util.List;
-import java.util.Set;
-import java.util.function.Function;
-
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import org.sonar.python.api.PythonKeyword;
-import org.sonar.python.api.PythonPunctuator;
-import org.sonar.python.api.PythonTokenType;
-
 import static com.sonar.sslr.test.lexer.LexerMatchers.hasComment;
 import static com.sonar.sslr.test.lexer.LexerMatchers.hasToken;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -40,25 +26,32 @@ import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertThat;
 
+import java.util.List;
+import java.util.Set;
+
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.sonar.python.api.PythonKeyword;
+import org.sonar.python.api.PythonPunctuator;
+import org.sonar.python.api.PythonTokenType;
+
+import com.google.common.collect.ImmutableSet;
+import com.sonar.sslr.api.GenericTokenType;
+import com.sonar.sslr.api.Token;
+import com.sonar.sslr.impl.Lexer;
+
 class PythonLexerTest {
 
   private static TestLexer lexer;
-  private static TestLexer fStringLexer;
 
   @BeforeAll
   static void init() {
-    lexer = new TestLexer(PythonLexer::create);
-    fStringLexer = new TestLexer(PythonLexer::lexerPython312);
+    lexer = new TestLexer();
   }
 
   private static class TestLexer {
-    private LexerState lexerState;
-    private Lexer lexer;
-
-    public TestLexer(Function<LexerState, Lexer> lexerSupplier) {
-      this.lexerState = new LexerState();
-      this.lexer = lexerSupplier.apply(this.lexerState);
-    }
+    private LexerState lexerState= new LexerState();
+    private Lexer lexer = PythonLexer.create(lexerState);
 
     List<Token> lex(String code) {
       lexerState.reset();
@@ -167,7 +160,7 @@ class PythonLexerTest {
       "Rf",
       "RF");
     for (String formattedStringLiteral : fstringPrefixes) {
-      assertThat(fStringLexer.lex(formattedStringLiteral + "''"), allOf(
+      assertThat(lexer.lex(formattedStringLiteral + "''"), allOf(
         hasToken(formattedStringLiteral + "'", PythonTokenType.FSTRING_START),
         hasToken("'", PythonTokenType.FSTRING_END)));
     }
@@ -178,14 +171,14 @@ class PythonLexerTest {
    */
   @Test
   void fstring_empty() {
-    assertThat(fStringLexer.lex("f\"\""), allOf(
+    assertThat(lexer.lex("f\"\""), allOf(
       hasToken("f\"", PythonTokenType.FSTRING_START),
       hasToken("\"", PythonTokenType.FSTRING_END)));
   }
 
   @Test
   void fstring_no_code() {
-    assertThat(fStringLexer.lex("f\" te st \""), allOf(
+    assertThat(lexer.lex("f\" te st \""), allOf(
       hasToken("f\"", PythonTokenType.FSTRING_START),
       hasToken(" te st ", PythonTokenType.FSTRING_MIDDLE),
       hasToken("\"", PythonTokenType.FSTRING_END)));
@@ -193,7 +186,7 @@ class PythonLexerTest {
 
   @Test
   void fstring_code_only() {
-    assertThat(fStringLexer.lex("f\"{a + b}\""), allOf(
+    assertThat(lexer.lex("f\"{a + b}\""), allOf(
       hasToken("f\"", PythonTokenType.FSTRING_START),
       hasToken("{", PythonPunctuator.LCURLYBRACE),
       hasToken("a", GenericTokenType.IDENTIFIER),
@@ -205,7 +198,7 @@ class PythonLexerTest {
 
   @Test
   void fstring() {
-    assertThat(fStringLexer.lex("f\"test {a + b} foo\""), allOf(
+    assertThat(lexer.lex("f\"test {a + b} foo\""), allOf(
       hasToken("f\"", PythonTokenType.FSTRING_START),
       hasToken("test ", PythonTokenType.FSTRING_MIDDLE),
       hasToken("{", PythonPunctuator.LCURLYBRACE),
@@ -219,7 +212,7 @@ class PythonLexerTest {
 
   @Test
   void fstring_multiple_code() {
-    assertThat(fStringLexer.lex("f\"{a } + { b }\""), allOf(
+    assertThat(lexer.lex("f\"{a } + { b }\""), allOf(
       hasToken("f\"", PythonTokenType.FSTRING_START),
       hasToken("{", PythonPunctuator.LCURLYBRACE),
       hasToken("a", GenericTokenType.IDENTIFIER),
@@ -233,7 +226,7 @@ class PythonLexerTest {
 
   @Test
   void fstring_dict_access() {
-    assertThat(fStringLexer.lex("f\"{mydict[\"a\"]}\""), allOf(
+    assertThat(lexer.lex("f\"{mydict[\"a\"]}\""), allOf(
       hasToken("f\"", PythonTokenType.FSTRING_START),
       hasToken("{", PythonPunctuator.LCURLYBRACE),
       hasToken("mydict", GenericTokenType.IDENTIFIER),
@@ -243,7 +236,7 @@ class PythonLexerTest {
 
   @Test
   void fstring_single_quote() {
-    assertThat(fStringLexer.lex("f'{a} foo'"), allOf(
+    assertThat(lexer.lex("f'{a} foo'"), allOf(
       hasToken("f'", PythonTokenType.FSTRING_START),
       hasToken("{", PythonPunctuator.LCURLYBRACE),
       hasToken("a", GenericTokenType.IDENTIFIER),
@@ -254,7 +247,7 @@ class PythonLexerTest {
 
   @Test
   void fstring_triple_single_quote() {
-    assertThat(fStringLexer.lex("f'''{a} foo'''"), allOf(
+    assertThat(lexer.lex("f'''{a} foo'''"), allOf(
       hasToken("f'''", PythonTokenType.FSTRING_START),
       hasToken("{", PythonPunctuator.LCURLYBRACE),
       hasToken("a", GenericTokenType.IDENTIFIER),
@@ -265,7 +258,7 @@ class PythonLexerTest {
 
   @Test
   void fstring_triple_double_quote() {
-    assertThat(fStringLexer.lex("f\"\"\"{a} foo\"\"\""), allOf(
+    assertThat(lexer.lex("f\"\"\"{a} foo\"\"\""), allOf(
       hasToken("f\"\"\"", PythonTokenType.FSTRING_START),
       hasToken("{", PythonPunctuator.LCURLYBRACE),
       hasToken("a", GenericTokenType.IDENTIFIER),
@@ -274,10 +267,43 @@ class PythonLexerTest {
       hasToken("\"\"\"", PythonTokenType.FSTRING_END)));
   }
 
+
+  @Test
+  void fstring_with_escaped_quotes() {
+    assertThat(lexer.lex("f\"\\\"{a}\\\" foo\""), allOf(
+      hasToken("f\"", PythonTokenType.FSTRING_START),
+      hasToken("\\\"", PythonTokenType.FSTRING_MIDDLE),
+      hasToken("{", PythonPunctuator.LCURLYBRACE),
+      hasToken("a", GenericTokenType.IDENTIFIER),
+      hasToken("}", PythonPunctuator.RCURLYBRACE),
+      hasToken("\\\" foo", PythonTokenType.FSTRING_MIDDLE),
+      hasToken("\"", PythonTokenType.FSTRING_END)));
+  }
+
+  @Test
+  void fstring_with_escaped_unicode() {
+    assertThat(lexer.lex("f\"\\N{RIGHTWARDS ARROW} foo\""), allOf(
+      hasToken("f\"", PythonTokenType.FSTRING_START),
+      hasToken("\\N{RIGHTWARDS ARROW} foo", PythonTokenType.FSTRING_MIDDLE),
+      hasToken("\"", PythonTokenType.FSTRING_END)));
+  }
+
+  @Test
+  void fstring_with_incorrect_unicode() {
+    assertThat(lexer.lex("f\"\\N {RIGHTWARDS ARROW} foo\""), allOf(
+      hasToken("f\"", PythonTokenType.FSTRING_START),
+      hasToken("{", PythonPunctuator.LCURLYBRACE),
+      hasToken("RIGHTWARDS", GenericTokenType.IDENTIFIER),
+      hasToken("ARROW", GenericTokenType.IDENTIFIER),
+      hasToken("}", PythonPunctuator.RCURLYBRACE),
+      hasToken(" foo", PythonTokenType.FSTRING_MIDDLE),
+      hasToken("\"", PythonTokenType.FSTRING_END)));
+  }
+
   // Lambdas and walrus operators should be surrounded by parenthesis in an FString
   @Test
   void fstring_incorrect_lambda_format_specifier() {
-    assertThat(fStringLexer.lex("f'{lambda a: a+42}'"), allOf(
+    assertThat(lexer.lex("f'{lambda a: a+42}'"), allOf(
       hasToken("f'", PythonTokenType.FSTRING_START),
       hasToken("{", PythonPunctuator.LCURLYBRACE),
       hasToken("lambda"),
@@ -291,7 +317,7 @@ class PythonLexerTest {
 
   @Test
   void fstring_incorrect_walrus_operator() {
-    assertThat(fStringLexer.lex("f'{a:=42}'"), allOf(
+    assertThat(lexer.lex("f'{a:=42}'"), allOf(
       hasToken("f'", PythonTokenType.FSTRING_START),
       hasToken("{", PythonPunctuator.LCURLYBRACE),
       hasToken("a", GenericTokenType.IDENTIFIER),
@@ -302,7 +328,7 @@ class PythonLexerTest {
   }
   @Test
   void fstring_lambda() {
-    assertThat(fStringLexer.lex("f'{(lambda a: a+42)}'"), allOf(
+    assertThat(lexer.lex("f'{(lambda a: a+42)}'"), allOf(
       hasToken("f'", PythonTokenType.FSTRING_START),
       hasToken("{", PythonPunctuator.LCURLYBRACE),
       hasToken("(", PythonPunctuator.LPARENTHESIS),
@@ -319,7 +345,7 @@ class PythonLexerTest {
 
   @Test
   void fstring_walrus_operator() {
-    assertThat(fStringLexer.lex("f'{(a:=42)}'"), allOf(
+    assertThat(lexer.lex("f'{(a:=42)}'"), allOf(
       hasToken("f'", PythonTokenType.FSTRING_START),
       hasToken("{", PythonPunctuator.LCURLYBRACE),
       hasToken("(", PythonPunctuator.LPARENTHESIS),
@@ -333,7 +359,7 @@ class PythonLexerTest {
 
   @Test
   void fstring_nested() {
-    assertThat(fStringLexer.lex("f\"{f\"{1+1}\"}\""), allOf(
+    assertThat(lexer.lex("f\"{f\"{1+1}\"}\""), allOf(
       hasToken("f\"", PythonTokenType.FSTRING_START),
       hasToken("{", PythonPunctuator.LCURLYBRACE),
       hasToken("f\"", PythonTokenType.FSTRING_START),
@@ -349,7 +375,7 @@ class PythonLexerTest {
 
   @Test
   void fstring_nested_mixed_number_of_quotes() {
-    assertThat(fStringLexer.lex("f\"{f\"\"\"{1+1}\"\"\"}\""), allOf(
+    assertThat(lexer.lex("f\"{f\"\"\"{1+1}\"\"\"}\""), allOf(
       hasToken("f\"", PythonTokenType.FSTRING_START),
       hasToken("{", PythonPunctuator.LCURLYBRACE),
       hasToken("f\"\"\"", PythonTokenType.FSTRING_START),
@@ -365,7 +391,7 @@ class PythonLexerTest {
 
   @Test
   void fstring_nested_different_quotes() {
-    assertThat(fStringLexer.lex("f\"{f'{1+1}'}\""), allOf(
+    assertThat(lexer.lex("f\"{f'{1+1}'}\""), allOf(
       hasToken("f\"", PythonTokenType.FSTRING_START),
       hasToken("{", PythonPunctuator.LCURLYBRACE),
       hasToken("f'", PythonTokenType.FSTRING_START),
@@ -381,15 +407,12 @@ class PythonLexerTest {
 
   @Test
   void fstring_with_comment() {
-    assertThat(fStringLexer.lex("f\"abc{a # comment }\"\n + 3}\""), allOf(
+    assertThat(lexer.lex("f\"abc{a # comment }\"\n + 3}\""), allOf(
       hasToken("f\"", PythonTokenType.FSTRING_START),
       hasToken("abc", PythonTokenType.FSTRING_MIDDLE),
       hasToken("{", PythonPunctuator.LCURLYBRACE),
       hasToken("a", GenericTokenType.IDENTIFIER),
-      hasToken("{", PythonPunctuator.LCURLYBRACE),
       hasComment("# comment }\""),
-      hasToken("\n", PythonTokenType.NEWLINE),
-      hasToken(" ", PythonTokenType.INDENT),
       hasToken("+", PythonPunctuator.PLUS),
       hasToken("3", PythonTokenType.NUMBER),
       hasToken("}", PythonPunctuator.RCURLYBRACE),
@@ -398,7 +421,7 @@ class PythonLexerTest {
 
   @Test
   void fstring_with_escaped_braces() {
-    assertThat(fStringLexer.lex("f\"abc{{a}} { b + 3}\""), allOf(
+    assertThat(lexer.lex("f\"abc{{a}} { b + 3}\""), allOf(
       hasToken("f\"", PythonTokenType.FSTRING_START),
       hasToken("abc{{a}} ", PythonTokenType.FSTRING_MIDDLE),
       hasToken("{", PythonPunctuator.LCURLYBRACE),
@@ -410,8 +433,41 @@ class PythonLexerTest {
   }
 
   @Test
+  void fstring_with_newline_removed() {
+    assertThat(lexer.lex("f\"abc{{a}} { b + 3}\""), allOf(
+      hasToken("f\"", PythonTokenType.FSTRING_START),
+      hasToken("abc{{a}} ", PythonTokenType.FSTRING_MIDDLE),
+      hasToken("{", PythonPunctuator.LCURLYBRACE),
+      hasToken("b", GenericTokenType.IDENTIFIER),
+      hasToken("+", PythonPunctuator.PLUS),
+      hasToken("3", PythonTokenType.NUMBER),
+      hasToken("}", PythonPunctuator.RCURLYBRACE),
+      hasToken("\"", PythonTokenType.FSTRING_END)));
+  }
+
+  @Test
+  void fstring_with_dict_generator() {
+    assertThat(lexer.lex("f\"{ {a for a in [1,2]} }\""), allOf(
+      hasToken("f\"", PythonTokenType.FSTRING_START),
+      hasToken("{", PythonPunctuator.LCURLYBRACE),
+      hasToken("{", PythonPunctuator.LCURLYBRACE),
+      hasToken("a", GenericTokenType.IDENTIFIER),
+      hasToken("for"),
+      hasToken("a", GenericTokenType.IDENTIFIER),
+      hasToken("in"),
+      hasToken("[", PythonPunctuator.LBRACKET),
+      hasToken("1", PythonTokenType.NUMBER),
+      hasToken(",", PythonPunctuator.COMMA),
+      hasToken("2", PythonTokenType.NUMBER),
+      hasToken("]", PythonPunctuator.RBRACKET),
+      hasToken("}", PythonPunctuator.RCURLYBRACE),
+      hasToken("}", PythonPunctuator.RCURLYBRACE),
+      hasToken("\"", PythonTokenType.FSTRING_END)));
+  }
+
+  @Test
   void fstring_format_specifier() {
-    assertThat(fStringLexer.lex("f\"abc {a + b:.3f}\""), allOf(
+    assertThat(lexer.lex("f\"abc {a + b:.3f}\""), allOf(
       hasToken("f\"", PythonTokenType.FSTRING_START),
       hasToken("abc ", PythonTokenType.FSTRING_MIDDLE),
       hasToken("{", PythonPunctuator.LCURLYBRACE),
@@ -426,7 +482,7 @@ class PythonLexerTest {
 
   @Test
   void fstring_nested_fields_format_specifier() {
-    assertThat(fStringLexer.lex("f\"abc {a + b:{width}.{length}}\""), allOf(
+    assertThat(lexer.lex("f\"abc {a + b:{width}.{length}}\""), allOf(
       hasToken("f\"", PythonTokenType.FSTRING_START),
       hasToken("abc ", PythonTokenType.FSTRING_MIDDLE),
       hasToken("{", PythonPunctuator.LCURLYBRACE),
@@ -437,6 +493,7 @@ class PythonLexerTest {
       hasToken("{", PythonPunctuator.LCURLYBRACE),
       hasToken("width", GenericTokenType.IDENTIFIER),
       hasToken("}", PythonPunctuator.RCURLYBRACE),
+      hasToken(".", PythonTokenType.FSTRING_MIDDLE),
       hasToken("{", PythonPunctuator.LCURLYBRACE),
       hasToken("length", GenericTokenType.IDENTIFIER),
       hasToken("}", PythonPunctuator.RCURLYBRACE),
@@ -446,7 +503,7 @@ class PythonLexerTest {
 
   @Test
   void fstring_date_format_specifier() {
-    assertThat(fStringLexer.lex("f\"{date:%B %d, %Y}\""), allOf(
+    assertThat(lexer.lex("f\"{date:%B %d, %Y}\""), allOf(
       hasToken("f\"", PythonTokenType.FSTRING_START),
       hasToken("{", PythonPunctuator.LCURLYBRACE),
       hasToken("date", GenericTokenType.IDENTIFIER),
@@ -458,7 +515,7 @@ class PythonLexerTest {
 
   @Test
   void fstring_complex_format_specifier() {
-    assertThat(fStringLexer.lex("f\"{line = !r:20}\""), allOf(
+    assertThat(lexer.lex("f\"{line = !r:20}\""), allOf(
       hasToken("f\"", PythonTokenType.FSTRING_START),
       hasToken("{", PythonPunctuator.LCURLYBRACE),
       hasToken("line", GenericTokenType.IDENTIFIER),

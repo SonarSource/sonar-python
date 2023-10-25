@@ -35,7 +35,7 @@ import org.sonar.sslr.channel.CodeReader;
 public class StringLiteralsChannel extends Channel<Lexer> {
 
   private static final char EOF = (char) -1;
-  private static final Set<Character> PREFIX_CHARS = Collections.unmodifiableSet(new HashSet<>(Arrays.asList('R', 'F', 'U', 'B')));
+  private static final Set<Character> PREFIX_CHARS = Collections.unmodifiableSet(new HashSet<>(Arrays.asList('R', 'U', 'B')));
 
   private final StringBuilder sb = new StringBuilder();
 
