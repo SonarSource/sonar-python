@@ -37,6 +37,21 @@ def f_same_string(x): # Noncompliant {{Refactor this method to not always return
         return "ab"
 #       ^^^^^^^^^^^<
 
+def f_same_fstring(x): # Noncompliant {{Refactor this method to not always return the same value.}}
+#   ^^^^^^^^^^^^^^
+    if x:
+        return f"{x.foo()}('{str(x.bar)}')"
+#       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^<
+    else:
+        return f"{x.foo()}('{str(x.bar)}')"
+#       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^<
+
+def f_different_fstring(x): # Compliant
+    if x:
+        return f"{x.foo()}('{str(x.bar)}')"
+    else:
+        return f"{x.foo()}('{str(x.bar)}...{str(x.foobar)}')"
+
 def f_same_number(x): # Noncompliant
     if x:
         return 42

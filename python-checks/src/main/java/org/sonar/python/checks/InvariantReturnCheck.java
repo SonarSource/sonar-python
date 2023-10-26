@@ -40,6 +40,7 @@ import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.ParenthesizedExpression;
 import org.sonar.plugins.python.api.tree.Pattern;
 import org.sonar.plugins.python.api.tree.ReturnStatement;
+import org.sonar.plugins.python.api.tree.StringElement;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.plugins.python.api.tree.TryStatement;
@@ -156,7 +157,9 @@ public class InvariantReturnCheck extends PythonSubscriptionCheck {
       return binaryExpressionsHaveTheSameValue(leftBlock, (BinaryExpression) left, rightBlock, (BinaryExpression) right);
     } else if (left.is(Kind.STRING_LITERAL)) {
       return haveTheSameValue(leftBlock, left.children(), rightBlock, right.children());
-    } else if (left.is(Kind.NUMERIC_LITERAL, Kind.STRING_ELEMENT)) {
+    } else if (left.is(Kind.STRING_ELEMENT)) {
+      return ((StringElement) left).value().equals(((StringElement) right).value());
+    } else if (left.is(Kind.NUMERIC_LITERAL)) {
       return left.firstToken().value().equals(right.firstToken().value());
     } else if (left.is(Kind.NAME)) {
       return identifierHaveTheSameValue(leftBlock, (Name) left, rightBlock, (Name) right);

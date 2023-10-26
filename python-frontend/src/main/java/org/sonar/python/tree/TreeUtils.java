@@ -103,9 +103,7 @@ public class TreeUtils {
   public static List<Token> tokens(Tree tree) {
     if (tree.is(Kind.TOKEN)) {
       return Collections.singletonList((Token) tree);
-    } else if (tree.is(Kind.STRING_ELEMENT)) {
-      return Collections.singletonList(tree.firstToken());
-    }
+    } 
     List<Token> tokens = new ArrayList<>();
     for (Tree child : tree.children()) {
       if (child.is(Kind.TOKEN)) {

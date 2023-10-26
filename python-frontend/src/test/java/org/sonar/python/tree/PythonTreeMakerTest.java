@@ -1548,7 +1548,7 @@ class PythonTreeMakerTest extends RuleTest {
     assertThat(withStatement.statements().statements()).hasSize(1);
     assertThat(withStatement.statements().statements().get(0).is(Tree.Kind.PASS_STMT)).isTrue();
     assertThat(withStatement.children()).hasSize(9);
-  }
+  };
 
   @Test
   void with_stmt_parenthesized_context_manager() {
@@ -2089,7 +2089,6 @@ class PythonTreeMakerTest extends RuleTest {
     assertThat(((Name) nestedInterpolation).name()).isEqualTo("x");
     assertThat(nestedInterpolation.firstToken().line()).isEqualTo(2);
     assertThat(nestedInterpolation.firstToken().column()).isEqualTo(15);
-
     // interpolated expression contains curly braces
     stringLiteral = (StringLiteral) parse("f'{ {element for element in [1, 2]} }'", treeMaker::expression);
     assertThat(stringLiteral.stringElements()).hasSize(1);
@@ -2104,6 +2103,44 @@ class PythonTreeMakerTest extends RuleTest {
     assertThat(elmt.isInterpolated()).isTrue();
     assertThat(elmt.formattedExpressions()).hasSize(1);
     assertThat(elmt.formattedExpressions().get(0).expression().is(Kind.CONDITIONAL_EXPR)).isTrue();
+
+    stringLiteral = (StringLiteral) parse("f\"{x # a comment\"\n}\"", treeMaker::expression);
+    assertThat(stringLiteral.stringElements()).hasSize(1);
+    elmt = stringLiteral.stringElements().get(0);
+    assertThat(elmt.isInterpolated()).isTrue();
+    assertThat(elmt.formattedExpressions()).hasSize(1);
+    assertThat(elmt.formattedExpressions().get(0).expression().is(Kind.NAME)).isTrue();
+
+    Token passToken = elmt.formattedExpressions().get(0).lastToken(); // TODO shouldn't it be the first token?
+    assertThat(passToken.trivia()).hasSize(1);
+    Trivia trivia = passToken.trivia().get(0);
+    assertThat(trivia.token().value()).isEqualTo("# a comment\"");
+    assertThat(trivia.value()).isEqualTo("# a comment\"");
+    assertThat(elmt.formattedExpressions().get(0).expression().is(Kind.NAME)).isTrue();
+
+
+    stringLiteral = (StringLiteral) parse("f\"\"\"foo\"\"\"", treeMaker::expression);
+    assertThat(stringLiteral.stringElements()).hasSize(1);
+    StringElementImpl fString = (StringElementImpl) stringLiteral.stringElements().get(0);
+    assertThat(fString.isInterpolated()).isTrue();
+    assertThat(fString.isTripleQuoted()).isTrue();
+    assertThat(fString.formattedExpressions()).isEmpty();
+    assertThat(fString.contentStartIndex()).isEqualTo(4);
+    assertThat(fString.children()).hasSize(3);
+    StringElementImpl fStringMiddle = (StringElementImpl) fString.children().get(1);
+    assertThat(fStringMiddle.isTripleQuoted()).isFalse();
+    assertThat(fStringMiddle.trimmedQuotesValue()).isEqualTo("foo");
+    assertThat(fStringMiddle.contentStartIndex()).isZero();
+
+    stringLiteral = (StringLiteral) parse("f\"foo\"", treeMaker::expression);
+    assertThat(stringLiteral.stringElements()).hasSize(1);
+    fString = (StringElementImpl) stringLiteral.stringElements().get(0);
+    assertThat(fString.isInterpolated()).isTrue();
+    assertThat(fString.isTripleQuoted()).isFalse();
+    assertThat(fString.contentStartIndex()).isEqualTo(2);
+    
+    // Python error: f-string expression part cannot include a backslash
+    assertThatThrownBy( () -> parse("f'name:\\n{na\\\nme}'", treeMaker::expression)).isInstanceOf(RecognitionException.class);
   }
 
   @Test
@@ -2153,10 +2190,25 @@ class PythonTreeMakerTest extends RuleTest {
     FormatSpecifier formatSpecifier = formattedExpression.formatSpecifier();
     assertThat(formatSpecifier).isNotNull();
     assertThat(formatSpecifier.getKind()).isEqualTo(Kind.FORMAT_SPECIFIER);
-    assertThat(formatSpecifier.children()).hasSize(3);
+    assertThat(formatSpecifier.children()).hasSize(4);
     assertThat(formatSpecifier.formatExpressions()).hasSize(2);
     assertThat(formatSpecifier.formatExpressions().get(0).expression().is(Tree.Kind.NAME)).isTrue();
     assertThat(formatSpecifier.formatExpressions().get(1).expression().is(Kind.MULTIPLICATION)).isTrue();
+  }
+
+  @Test
+  void string_interpolation_yield_expression() {
+    setRootRule(PythonGrammar.ATOM);
+    Expression exp = parse("f'{ yield 2 }'", treeMaker::expression);
+    StringLiteral stringLiteral = (StringLiteral) exp;
+    assertThat(stringLiteral.stringElements()).hasSize(1);
+    StringElement elmt = stringLiteral.stringElements().get(0);
+
+    assertThat(elmt.isInterpolated()).isTrue();
+    assertThat(elmt.formattedExpressions()).hasSize(1);
+    FormattedExpression formattedExpression = elmt.formattedExpressions().get(0);
+
+    assertThat(formattedExpression.expression().is(Kind.YIELD_EXPR)).isTrue();
   }
 
   @Test

@@ -21,6 +21,8 @@ package org.sonar.python.tree;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+
 import org.sonar.plugins.python.api.tree.FormatSpecifier;
 import org.sonar.plugins.python.api.tree.FormattedExpression;
 import org.sonar.plugins.python.api.tree.Token;
@@ -30,11 +32,11 @@ import org.sonar.plugins.python.api.tree.TreeVisitor;
 public class FormatSpecifierImpl extends PyTree implements FormatSpecifier {
 
   private Token columnToken;
-  private List<FormattedExpression> formatExpressions;
+  private List<Tree> fStringMiddles;
 
-  public FormatSpecifierImpl(Token columnToken, List<FormattedExpression> formatExpressions) {
+  public FormatSpecifierImpl(Token columnToken, List<Tree> fStringMiddles) {
     this.columnToken = columnToken;
-    this.formatExpressions = formatExpressions;
+    this.fStringMiddles = fStringMiddles;
   }
 
   @Override
@@ -44,14 +46,17 @@ public class FormatSpecifierImpl extends PyTree implements FormatSpecifier {
 
   @Override
   public List<FormattedExpression> formatExpressions() {
-    return formatExpressions;
+    return fStringMiddles.stream()
+      .filter(FormattedExpression.class::isInstance)
+      .map(FormattedExpression.class::cast)
+      .collect(Collectors.toList());
   }
 
   @Override
   List<Tree> computeChildren() {
     List<Tree> children = new ArrayList<>();
     children.add(columnToken);
-    children.addAll(formatExpressions);
+    children.addAll(fStringMiddles);
     return children;
   }
 

@@ -21,23 +21,31 @@ package org.sonar.python.tree;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
+
+import javax.annotation.Nullable;
+
 import org.sonar.plugins.python.api.tree.FormattedExpression;
 import org.sonar.plugins.python.api.tree.StringElement;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TreeVisitor;
+import org.sonar.python.api.PythonTokenType;
 
 public class StringElementImpl extends PyTree implements StringElement {
 
   private final String value;
   private final Token token;
-  private List<FormattedExpression> formattedExpressions = new ArrayList<>();
+  private List<Tree> fStringMiddles = new ArrayList<>();
 
-  public StringElementImpl(Token token) {
-    value = token.value();
+  private final Token fstringEnd;
+
+  public StringElementImpl(Token token, List<Tree> fStringMiddles, @Nullable Token fstringEnd) {
     this.token = token;
+    this.fstringEnd = fstringEnd;
+    this.fStringMiddles = fStringMiddles;
+    value = computeValue(token, fstringEnd, fStringMiddles);
   }
 
   @Override
@@ -47,7 +55,7 @@ public class StringElementImpl extends PyTree implements StringElement {
 
   @Override
   public Token lastToken() {
-    return token;
+    return fstringEnd != null ? fstringEnd : token;
   }
 
   @Override
@@ -65,7 +73,13 @@ public class StringElementImpl extends PyTree implements StringElement {
     // Warning: in the case of f-strings, there's a kind of overlap between `token` and `formattedExpressions`: they
     // are different representations of the same analyzed code.
     // TreeUtils.tokens() doesn't contain the tokens of the formattedExpressions.
-    return Stream.concat(Stream.of(token), formattedExpressions.stream()).collect(Collectors.toList());
+    List<Tree> children = new ArrayList<>();
+    children.add(token);
+    children.addAll(fStringMiddles);
+    children.add(fstringEnd);
+    return children.stream()
+      .filter(Objects::nonNull)
+      .collect(Collectors.toList());
   }
 
   @Override
@@ -75,6 +89,9 @@ public class StringElementImpl extends PyTree implements StringElement {
 
   @Override
   public String trimmedQuotesValue() {
+    if (token.type() == PythonTokenType.FSTRING_MIDDLE) {
+      return value;
+    }
     String trimmed = removePrefix(value);
     // determine if string is using long string or short string format
     int startIndex = 1;
@@ -102,13 +119,8 @@ public class StringElementImpl extends PyTree implements StringElement {
 
   @Override
   public List<FormattedExpression> formattedExpressions() {
-    return formattedExpressions;
+    return fStringMiddles.stream().filter(FormattedExpression.class::isInstance).map(FormattedExpression.class::cast).collect(Collectors.toList());
   }
-
-  void addFormattedExpression(FormattedExpression formattedExpression) {
-    formattedExpressions.add(formattedExpression);
-  }
-
 
   private static boolean isTripleQuote(String trimmed) {
     if (trimmed.length() >= 6) {
@@ -118,7 +130,7 @@ public class StringElementImpl extends PyTree implements StringElement {
     return false;
   }
 
-  private static String removePrefix(String value) {
+  private String removePrefix(String value) {
     return value.substring(prefixLength(value));
   }
 
@@ -126,8 +138,11 @@ public class StringElementImpl extends PyTree implements StringElement {
     return character == '\'' || character == '\"';
   }
 
-  private static int prefixLength(String value) {
+  private int prefixLength(String value) {
     int prefixLength = 0;
+    if (token.type() == PythonTokenType.FSTRING_MIDDLE) {
+      return 0;
+    }
     while (!isCharQuote(value.charAt(prefixLength))) {
       prefixLength++;
     }
@@ -136,9 +151,21 @@ public class StringElementImpl extends PyTree implements StringElement {
 
   public int contentStartIndex() {
     int prefixLength = prefixLength(value);
+    if (token.type() == PythonTokenType.FSTRING_MIDDLE) {
+      return 0;
+    }
     if (isTripleQuote(value.substring(prefixLength))) {
       return prefixLength + 3;
     }
     return prefixLength + 1;
+  }
+
+  private static final String computeValue(Token token, @Nullable Token fstringEnd, List<Tree> fStringMiddles) {
+    String stringContent = fStringMiddles.stream()
+      .map(exp -> TreeUtils.treeToString(exp, false))
+      .filter(Objects::nonNull)
+      .collect(Collectors.joining());
+    String end = fstringEnd == null ? "" : fstringEnd.value();
+    return String.join("", token.value(), stringContent, end);
   }
 }
