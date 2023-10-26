@@ -819,8 +819,9 @@ public class PythonTreeMaker {
   }
 
   public void checkExceptClauses(List<ExceptClause> excepts) {
-    if (excepts.isEmpty())
+    if (excepts.isEmpty()){
       return;
+    }
 
     Tree.Kind firstExceptKind = excepts.get(0).getKind();
     for (ExceptClause except : excepts) {

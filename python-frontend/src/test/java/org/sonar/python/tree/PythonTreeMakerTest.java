@@ -2122,13 +2122,13 @@ class PythonTreeMakerTest extends RuleTest {
     StringElementImpl fString = (StringElementImpl) stringLiteral.stringElements().get(0);
     assertThat(fString.isInterpolated()).isTrue();
     assertThat(fString.isTripleQuoted()).isTrue();
-    assertThat(fString.formattedExpressions()).hasSize(0);
+    assertThat(fString.formattedExpressions()).isEmpty();
     assertThat(fString.contentStartIndex()).isEqualTo(4);
     assertThat(fString.children()).hasSize(3);
     StringElementImpl fStringMiddle = (StringElementImpl) fString.children().get(1);
     assertThat(fStringMiddle.isTripleQuoted()).isFalse();
     assertThat(fStringMiddle.trimmedQuotesValue()).isEqualTo("foo");
-    assertThat(fStringMiddle.contentStartIndex()).isEqualTo(0);
+    assertThat(fStringMiddle.contentStartIndex()).isZero();
 
     stringLiteral = (StringLiteral) parse("f\"foo\"", treeMaker::expression);
     assertThat(stringLiteral.stringElements()).hasSize(1);
