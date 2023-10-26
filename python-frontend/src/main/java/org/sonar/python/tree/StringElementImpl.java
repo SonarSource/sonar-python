@@ -22,9 +22,7 @@ package org.sonar.python.tree;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import javax.annotation.Nullable;
 
@@ -75,8 +73,13 @@ public class StringElementImpl extends PyTree implements StringElement {
     // Warning: in the case of f-strings, there's a kind of overlap between `token` and `formattedExpressions`: they
     // are different representations of the same analyzed code.
     // TreeUtils.tokens() doesn't contain the tokens of the formattedExpressions.
-    return Stream.concat(Stream.of(token), Stream.concat(fStringMiddles.stream(), Stream.of(fstringEnd)))
-      .filter(Predicate.not(Objects::isNull)).collect(Collectors.toList());
+    List<Tree> children = new ArrayList<>();
+    children.add(token);
+    children.addAll(fStringMiddles);
+    children.add(fstringEnd);
+    return children.stream()
+      .filter(Objects::nonNull)
+      .collect(Collectors.toList());
   }
 
   @Override
@@ -86,7 +89,7 @@ public class StringElementImpl extends PyTree implements StringElement {
 
   @Override
   public String trimmedQuotesValue() {
-    if(token.type() == PythonTokenType.FSTRING_MIDDLE){
+    if (token.type() == PythonTokenType.FSTRING_MIDDLE) {
       return value;
     }
     String trimmed = removePrefix(value);
@@ -148,7 +151,7 @@ public class StringElementImpl extends PyTree implements StringElement {
 
   public int contentStartIndex() {
     int prefixLength = prefixLength(value);
-    if(token.type() == PythonTokenType.FSTRING_MIDDLE){
+    if (token.type() == PythonTokenType.FSTRING_MIDDLE) {
       return 0;
     }
     if (isTripleQuote(value.substring(prefixLength))) {
@@ -161,8 +164,8 @@ public class StringElementImpl extends PyTree implements StringElement {
     String stringContent = fStringMiddles.stream()
       .map(exp -> TreeUtils.treeToString(exp, false))
       .filter(Objects::nonNull)
-      .reduce("", String::concat);
+      .collect(Collectors.joining());
     String end = fstringEnd == null ? "" : fstringEnd.value();
-    return String.format("%s%s%s", token.value(), stringContent, end);
+    return String.join("", token.value(), stringContent, end);
   }
 }

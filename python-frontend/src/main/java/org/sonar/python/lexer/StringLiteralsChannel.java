@@ -19,15 +19,14 @@
  */
 package org.sonar.python.lexer;
 
-import com.sonar.sslr.api.Token;
-import com.sonar.sslr.impl.Lexer;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.Set;
+
 import org.sonar.python.api.PythonTokenType;
 import org.sonar.sslr.channel.Channel;
 import org.sonar.sslr.channel.CodeReader;
+
+import com.sonar.sslr.api.Token;
+import com.sonar.sslr.impl.Lexer;
 
 /**
  * http://docs.python.org/reference/lexical_analysis.html#string-literals
@@ -35,7 +34,7 @@ import org.sonar.sslr.channel.CodeReader;
 public class StringLiteralsChannel extends Channel<Lexer> {
 
   private static final char EOF = (char) -1;
-  private static final Set<Character> PREFIX_CHARS = Collections.unmodifiableSet(new HashSet<>(Arrays.asList('R', 'U', 'B')));
+  private static final Set<Character> PREFIX_CHARS = Set.of('R', 'U', 'B');
 
   private final StringBuilder sb = new StringBuilder();
 

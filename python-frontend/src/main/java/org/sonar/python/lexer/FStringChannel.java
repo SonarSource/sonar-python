@@ -21,6 +21,7 @@ package org.sonar.python.lexer;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.IntStream;
 
 import org.sonar.python.api.PythonPunctuator;
@@ -44,8 +45,9 @@ public class FStringChannel extends Channel<Lexer> {
   private final LexerState lexerState;
   private final StringBuilder sb = new StringBuilder();
 
-  private static final List<Character> QUOTES = List.of('\"', '\'');
-  private static final List<Character> PREFIXES = List.of('F', 'R');
+  private static final Set<Character> QUOTES = Set.of('\"', '\'');
+  private static final Set<Character> PREFIXES = Set.of('F', 'R');
+  private static final Set<String> ESCAPED_CHARS = Set.of("{{", "}}","\\\"","\\\'");
 
   public FStringChannel(LexerState lexerState) {
     this.lexerState = lexerState;
@@ -151,7 +153,7 @@ public class FStringChannel extends Channel<Lexer> {
   }
 
   private static boolean isEscapedChar(CodeReader code) {
-    return List.of("{{", "}}","\\\"","\\\'").contains(String.valueOf(code.peek(2)));
+    return ESCAPED_CHARS.contains(String.valueOf(code.peek(2)));
   }
 
   private static boolean areClosingQuotes(CodeReader code, FStringState state) {

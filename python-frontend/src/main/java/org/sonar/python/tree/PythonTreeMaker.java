@@ -819,7 +819,7 @@ public class PythonTreeMaker {
   }
 
   public void checkExceptClauses(List<ExceptClause> excepts) {
-    if (excepts.isEmpty()){
+    if (excepts.isEmpty()) {
       return;
     }
 
@@ -1708,12 +1708,12 @@ public class PythonTreeMaker {
     if (formatSpecifierNode == null) {
       return null;
     }
+    List<Tree> fStringMiddles = getFStringMiddles(formatSpecifierNode);
 
     Token columnToken = toPyToken(formatSpecifierNode.getFirstChild(PythonPunctuator.COLON).getToken());
     if (columnToken == null) {
       return null;
     }
-    List<Tree> fStringMiddles = getFStringMiddles(formatSpecifierNode);
     return new FormatSpecifierImpl(columnToken, fStringMiddles);
   }
 
@@ -1724,37 +1724,38 @@ public class PythonTreeMaker {
       exp = expression(yieldExpression);
     } else {
       var expressionsList = expressionNode.getFirstChild(PythonGrammar.TESTLIST_STAR_EXPR);
-      var expressions = expressionsList.getChildren(PythonGrammar.TEST, PythonGrammar.STAR_EXPR)
-        .stream()
-        .map(this::expression)
-        .collect(Collectors.toList());
-      var commas = expressionsList
-        .getChildren(PythonPunctuator.COMMA)
-        .stream()
-        .map(AstNode::getToken)
-        .map(PythonTreeMaker::toPyToken)
-        .collect(Collectors.toList());
-
-      if (expressions.size() == 1 && commas.isEmpty()) {
-        exp = expressions.get(0);
-      } else {
-        exp = new TupleImpl(null, expressions, commas, null);
-      }
+      exp = exprListOrTestList(expressionsList);
     }
     AstNode equalNode = expressionNode.getFirstChild(PythonPunctuator.ASSIGN);
     Token equalToken = equalNode == null ? null : toPyToken(equalNode.getToken());
     FormatSpecifier formatSpecifier = formatSpecifier(expressionNode);
     Token lCurlyBrace = toPyToken(expressionNode.getFirstChild(PythonPunctuator.LCURLYBRACE).getToken());
     Token rCurlyBrace = toPyToken(expressionNode.getFirstChild(PythonPunctuator.RCURLYBRACE).getToken());
-    Optional<AstNode> conversionNode = Optional.ofNullable(expressionNode.getFirstChild(GenericTokenType.UNKNOWN_CHAR))
+
+    return getConversionNode(expressionNode)
+      .map(conversionNode -> formattedExpressionWithConversion(exp, lCurlyBrace, rCurlyBrace, equalToken, formatSpecifier, conversionNode))
+      .orElseGet(() -> new FormattedExpressionImpl(exp, lCurlyBrace, rCurlyBrace, equalToken, formatSpecifier, null, null));
+  }
+
+  private static FormattedExpressionImpl formattedExpressionWithConversion(Expression exp, Token lCurlyBrace, Token rCurlyBrace, Token equalToken, FormatSpecifier formatSpecifier,
+    AstNode conversionNode) {
+    Optional<Token> maybeConversionNameToken = getConversionNameToken(conversionNode);
+    Token conversionToken = toPyToken(conversionNode.getToken());
+    return maybeConversionNameToken
+      .map(conversionNameToken -> new FormattedExpressionImpl(exp, lCurlyBrace, rCurlyBrace, equalToken, formatSpecifier, conversionToken, conversionNameToken))
+      .orElseGet(() -> new FormattedExpressionImpl(exp, lCurlyBrace, rCurlyBrace, equalToken, formatSpecifier, null, null));
+  }
+
+  private static Optional<AstNode> getConversionNode(AstNode expressionNode) {
+    return Optional.ofNullable(expressionNode.getFirstChild(GenericTokenType.UNKNOWN_CHAR))
       .filter(node -> "!".equals(node.getTokenValue()));
-    Token conversionNameToken = conversionNode
+  }
+
+  private static Optional<Token> getConversionNameToken(AstNode conversionNode) {
+    return Optional.of(conversionNode)
       .map(AstNode::getNextSibling)
       .filter(node -> node.is(GenericTokenType.IDENTIFIER) && List.of("r", "s", "a").contains(node.getTokenValue()))
-      .map(n -> toPyToken(n.getToken()))
-      .orElse(null);
-    Token conversionToken = conversionNameToken != null ? conversionNode.map(node -> toPyToken(node.getToken())).orElse(null) : null;
-    return new FormattedExpressionImpl(exp, lCurlyBrace, rCurlyBrace, equalToken, formatSpecifier, conversionToken, conversionNameToken);
+      .map(n -> toPyToken(n.getToken()));
   }
 
   private static Token suiteIndent(AstNode suite) {
