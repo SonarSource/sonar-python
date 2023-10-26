@@ -70,17 +70,17 @@ public class RuffSensor extends ExternalIssuesSensor {
 
   @Override
   protected void importReport(File reportPath, SensorContext context, Set<String> unresolvedInputFiles)
-      throws IOException, ParseException {
+    throws IOException, ParseException {
     InputStream in = new FileInputStream(reportPath);
     LOG.info("Importing {}", reportPath);
     RuffJsonReportReader.read(in, issue -> saveIssue(context, issue, unresolvedInputFiles));
   }
 
   private static void saveIssue(SensorContext context, RuffJsonReportReader.Issue issue,
-      Set<String> unresolvedInputFiles) {
+    Set<String> unresolvedInputFiles) {
     if (isEmpty(issue.ruleKey) || isEmpty(issue.filePath) || isEmpty(issue.message)) {
       LOG.debug("Missing information for ruleKey:'{}', filePath:'{}', message:'{}'", issue.ruleKey, issue.filePath,
-          issue.message);
+        issue.message);
       return;
     }
 
@@ -92,18 +92,18 @@ public class RuffSensor extends ExternalIssuesSensor {
 
     NewExternalIssue newExternalIssue = context.newExternalIssue();
     newExternalIssue
-        .type(RuleType.CODE_SMELL)
-        .severity(Severity.MAJOR)
-        .remediationEffortMinutes(DEFAULT_CONSTANT_DEBT_MINUTES);
+      .type(RuleType.CODE_SMELL)
+      .severity(Severity.MAJOR)
+      .remediationEffortMinutes(DEFAULT_CONSTANT_DEBT_MINUTES);
 
     NewIssueLocation primaryLocation = newExternalIssue.newLocation()
-        .message(issue.message)
-        .on(inputFile);
+      .message(issue.message)
+      .on(inputFile);
 
     if (issue.startLocationRow != null) {
       if (isValidEndLocation(issue, inputFile)) {
         primaryLocation.at(inputFile.newRange(issue.startLocationRow, issue.startLocationCol, issue.endLocationRow,
-            issue.endLocationCol));
+          issue.endLocationCol));
       } else {
         primaryLocation.at(inputFile.selectLine(issue.startLocationRow));
       }
@@ -119,10 +119,12 @@ public class RuffSensor extends ExternalIssuesSensor {
    */
   private static boolean isValidEndLocation(RuffJsonReportReader.Issue issue, InputFile inputFile) {
     return issue.startLocationCol != null &&
-        issue.endLocationRow != null &&
-        issue.endLocationCol != null &&
-        isColInBounds(issue.startLocationRow, issue.startLocationCol, inputFile) &&
-        (!issue.endLocationRow.equals(issue.startLocationRow) || !issue.endLocationCol.equals(issue.startLocationCol));
+      issue.endLocationRow != null &&
+      issue.endLocationCol != null &&
+      isColInBounds(issue.startLocationRow, issue.startLocationCol, inputFile) &&
+      ((issue.endLocationRow.equals(issue.startLocationRow) && issue.endLocationCol > issue.startLocationCol) ||
+        !issue.endLocationRow.equals(issue.startLocationRow));
+
   }
 
   private static boolean isColInBounds(int lineNumber, int columnNumber, InputFile inputFile) {

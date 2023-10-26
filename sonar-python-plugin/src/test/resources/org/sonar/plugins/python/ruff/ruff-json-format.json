@@ -158,5 +158,21 @@
     "message": "`try`-`except`-`pass` detected, consider logging the exception",
     "noqa_row": 21,
     "url": "https://beta.ruff.rs/docs/rules/try-except-pass"
+  },
+  {
+    "code": "C417",
+    "end_location": {
+      "column": 6,
+      "row": 27
+    },
+    "filename": "ruff/file1.py",
+    "fix": null,
+    "location": {
+      "column": 33,
+      "row": 25
+    },
+    "message": "Unnecessary `map` usage (rewrite using a `list` comprehension)",
+    "noqa_row": 5,
+    "url": "https://docs.astral.sh/ruff/rules/unnecessary-map"
   }
 ]

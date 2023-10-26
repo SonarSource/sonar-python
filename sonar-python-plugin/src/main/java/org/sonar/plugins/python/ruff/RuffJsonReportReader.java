@@ -81,8 +81,8 @@ public class RuffJsonReportReader {
     issue.startLocationCol = toInteger(location.get("column"));
     issue.startLocationRow = toInteger(location.get("row"));
     JSONObject endLocation = (JSONObject) result.get("end_location");
-    issue.endLocationCol = correctEndLocationCol(endLocation.get("column"), issue.startLocationCol);
     issue.endLocationRow = toInteger(endLocation.get("row"));
+    issue.endLocationCol = correctEndLocationCol(endLocation.get("column"), issue.startLocationCol, issue.startLocationRow, issue.endLocationRow);
     consumer.accept(issue);
   }
 
@@ -90,13 +90,13 @@ public class RuffJsonReportReader {
     Ruff returns the col number of the last char + 1.
     In order to properly read the col number we need to return the number of the last char.
    */
-  private static Integer correctEndLocationCol(Object value, int startLocationCol) {
+  private static Integer correctEndLocationCol(Object value, int startLocationCol, int startLocationRow, int endLocationRow) {
     Integer endLocationCol = toInteger(value);
     if (endLocationCol != null) {
-      if (endLocationCol > startLocationCol) {
-        return endLocationCol - 1;
-      } else {
+      if (endLocationRow == startLocationRow && endLocationCol <= startLocationCol) {
         return startLocationCol;
+      } else {
+        return endLocationCol -1 ;
       }
     }
     return null;
