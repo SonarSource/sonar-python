@@ -21,10 +21,11 @@ package org.sonar.python.checks;
 
 import java.util.AbstractMap;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
@@ -39,7 +40,6 @@ import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.HasSymbol;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.NumericLiteral;
-import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.SliceExpression;
 import org.sonar.plugins.python.api.tree.SliceItem;
 import org.sonar.plugins.python.api.tree.Statement;
@@ -111,21 +111,37 @@ public class OverwrittenCollectionEntryCheck extends PythonSubscriptionCheck {
     }
 
 
-    return getCollectionSymbol(collection)
-      .map(symbol -> new CollectionKey(symbol, key))
-      .map(collectionKey -> new CollectionWrite(collectionKey, lBracket, rBracket, assignment, collection))
-      .orElse(null);
+    var collectionSymbols = getCollectionSymbol(collection);
+    if (!collectionSymbols.isEmpty()) {
+      var collectionKey = new CollectionKey(collectionSymbols, key);
+      return new CollectionWrite(collectionKey, lBracket, rBracket, assignment, collection);
+    } else {
+      return null;
+    }
   }
 
-  private static Optional<Symbol> getCollectionSymbol(Expression collection) {
-    return Optional.of(collection)
-      .filter(QualifiedExpression.class::isInstance)
-      .map(QualifiedExpression.class::cast)
-      .map(QualifiedExpression::qualifier)
-      .or(() -> Optional.of(collection))
-      .filter(HasSymbol.class::isInstance)
-      .map(HasSymbol.class::cast)
-      .map(HasSymbol::symbol);
+  private static List<Symbol> getCollectionSymbol(Expression collection) {
+    if (collection.is(Kind.CALL_EXPR)
+      || TreeUtils.hasDescendant(collection, t -> t.is(Kind.CALL_EXPR, Kind.SUBSCRIPTION, Kind.SLICE_EXPR))) {
+      return List.of();
+    }
+    var names = findNames(collection);
+    return names.stream()
+      .map(HasSymbol::symbol)
+      .filter(Objects::nonNull)
+      .collect(Collectors.toList());
+  }
+
+  private static List<Name> findNames(Tree tree) {
+    if (tree.is(Kind.NAME)) {
+      return List.of((Name) tree);
+    } else {
+      return tree.children()
+        .stream()
+        .map(OverwrittenCollectionEntryCheck::findNames)
+        .flatMap(Collection::stream)
+        .collect(Collectors.toList());
+    }
   }
 
   @CheckForNull
@@ -182,9 +198,9 @@ public class OverwrittenCollectionEntryCheck extends PythonSubscriptionCheck {
     });
   }
 
-  private static class CollectionKey extends AbstractMap.SimpleImmutableEntry<Symbol, String> {
+  private static class CollectionKey extends AbstractMap.SimpleImmutableEntry<List<Symbol>, String> {
 
-    private CollectionKey(Symbol collection, String key) {
+    private CollectionKey(List<Symbol> collection, String key) {
       super(collection, key);
     }
 

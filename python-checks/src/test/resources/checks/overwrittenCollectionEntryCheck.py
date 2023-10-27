@@ -104,11 +104,33 @@ def used_collection(list1):
 
 def same_key_multiple_collections(bar_list, foo_entry, bar_entry, foo_value, bar_value):
     import pandas as pd
-    foo_matrix = pd.DataFrame(index=bar_list, columns=bar_list)
-    bar_matrix = pd.DataFrame(index=bar_list, columns=bar_list)
+    a = {}
+    a.foo_matrix = pd.DataFrame(index=bar_list, columns=bar_list)
+    a.bar_matrix = pd.DataFrame(index=bar_list, columns=bar_list)
 
-    foo_matrix.loc[foo_entry, bar_entry] = foo_value
-    foo_matrix.loc[foo_entry, bar_entry] = foo_value # Noncompliant
-    bar_matrix.loc[foo_entry, bar_entry] = bar_value
+    a.foo_matrix.loc[foo_entry, bar_entry] = foo_value
+    a.foo_matrix.loc[foo_entry, bar_entry] = foo_value # Noncompliant
+    a.foo_matrix.at[foo_entry, bar_entry] = foo_value
 
+class Record:
+    def __init__(self, names):
+        """Initialize class."""
+        self._names = names
+        self._count_info = {}
+        self._label_info = {}
+        for name in self._names:
+            self._count_info[name] = 0
+            self._count_info[name] = 2 # Noncompliant
+            self._label_info[name] = None
+
+def sub_collection():
+    defs = anno.getanno(symbol_a, anno.Static.ORIG_DEFINITIONS)
+    defs[0].directives[directive_key] = {
+        'test_arg': parser.parse_expression('foo'),
+        'other_arg': parser.parse_expression('bar'),
+    }
+    defs[1].directives[directive_key] = { # Noncompliant
+        'test_arg': parser.parse_expression('foo'),
+        'other_arg': parser.parse_expression('baz'),
+    }
 
