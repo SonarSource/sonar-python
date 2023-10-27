@@ -129,7 +129,7 @@ def sub_collection():
         'test_arg': parser.parse_expression('foo'),
         'other_arg': parser.parse_expression('bar'),
     }
-    defs[1].directives[directive_key] = { # Noncompliant
+    defs[1].directives[directive_key] = {
         'test_arg': parser.parse_expression('foo'),
         'other_arg': parser.parse_expression('baz'),
     }
