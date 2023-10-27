@@ -19,6 +19,9 @@
  */
 package org.sonar.plugins.python.ruff;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -26,7 +29,9 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
+
 import javax.annotation.Nullable;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
 import org.slf4j.event.Level;
@@ -46,9 +51,6 @@ import org.sonar.api.testfixtures.log.LogTesterJUnit5;
 import org.sonar.api.utils.Version;
 import org.sonar.api.utils.log.LoggerLevel;
 
-import static java.nio.charset.StandardCharsets.UTF_8;
-import static org.assertj.core.api.Assertions.assertThat;
-
 class RuffSensorTest {
 
   private static final String RUFF_FILE = "python-project:ruff/file1.py";
@@ -57,7 +59,7 @@ class RuffSensorTest {
   private static final String RUFF_REPORT_UNKNOWN_FILES = "unknown-file-path.json";
 
   private static final Path PROJECT_DIR = Paths.get("src", "test", "resources", "org", "sonar", "plugins", "python",
-      "ruff");
+    "ruff");
 
   private static RuffSensor ruffSensor = new RuffSensor();
 
@@ -87,7 +89,7 @@ class RuffSensorTest {
   @Test
   void issues_with_json_format() throws IOException {
     List<ExternalIssue> externalIssues = executeSensorImporting(7, 9, RUFF_JSON_REPORT);
-    assertThat(externalIssues).hasSize(9);
+    assertThat(externalIssues).hasSize(10);
 
     ExternalIssue first = externalIssues.get(0);
     assertThat(first.ruleKey()).hasToString("external_ruff:S107");
@@ -96,7 +98,7 @@ class RuffSensorTest {
     IssueLocation firstPrimaryLoc = first.primaryLocation();
     assertThat(firstPrimaryLoc.inputComponent().key()).isEqualTo(RUFF_FILE);
     assertThat(firstPrimaryLoc.message())
-        .isEqualTo("Possible hardcoded password assigned to function default: \"secret\"");
+      .isEqualTo("Possible hardcoded password assigned to function default: \"secret\"");
     TextRange firstTextRange = firstPrimaryLoc.textRange();
     assertThat(firstTextRange).isNotNull();
     assertThat(firstTextRange.start().line()).isEqualTo(5);
@@ -118,6 +120,16 @@ class RuffSensorTest {
     assertThat(secondTextRange.end().line()).isEqualTo(6);
     assertThat(secondTextRange.end().lineOffset()).isEqualTo(42);
 
+    assertNoErrorWarnLogs(logTester);
+    assertThat(logTester.logs(LoggerLevel.DEBUG)).isEmpty();
+
+  }
+
+  @Test
+  void issues_primary_location_check() throws IOException {
+    List<ExternalIssue> externalIssues = executeSensorImporting(7, 9, RUFF_JSON_REPORT);
+    assertThat(externalIssues).hasSize(10);
+
     ExternalIssue fourth = externalIssues.get(3);
     assertThat(fourth.ruleKey()).hasToString("external_ruff:F821");
     assertThat(fourth.type()).isEqualTo(RuleType.CODE_SMELL);
@@ -126,13 +138,38 @@ class RuffSensorTest {
     assertThat(fourthPrimaryLoc.inputComponent().key()).isEqualTo(RUFF_FILE);
     assertThat(fourthPrimaryLoc.message()).isEqualTo("Undefined name `random`");
 
-    ExternalIssue last = externalIssues.get(8);
-    assertThat(last.ruleKey()).hasToString("external_ruff:S110");
+    ExternalIssue secondToLast = externalIssues.get(8);
+    assertThat(secondToLast.ruleKey()).hasToString("external_ruff:S110");
+    assertThat(secondToLast.type()).isEqualTo(RuleType.CODE_SMELL);
+    assertThat(secondToLast.severity()).isEqualTo(Severity.MAJOR);
+    IssueLocation secondToLastPrimaryLoc = secondToLast.primaryLocation();
+    assertThat(secondToLastPrimaryLoc.inputComponent().key()).isEqualTo(RUFF_FILE);
+    assertThat(secondToLastPrimaryLoc.message()).isEqualTo("`try`-`except`-`pass` detected, consider logging the exception");
+
+    assertNoErrorWarnLogs(logTester);
+    assertThat(logTester.logs(LoggerLevel.DEBUG)).isEmpty();
+
+  }
+
+  @Test
+  void issues_multiline_check() throws IOException {
+    List<ExternalIssue> externalIssues = executeSensorImporting(7, 9, RUFF_JSON_REPORT);
+    assertThat(externalIssues).hasSize(10);
+
+    ExternalIssue last = externalIssues.get(9);
+    assertThat(last.ruleKey()).hasToString("external_ruff:C417");
     assertThat(last.type()).isEqualTo(RuleType.CODE_SMELL);
     assertThat(last.severity()).isEqualTo(Severity.MAJOR);
     IssueLocation lastPrimaryLoc = last.primaryLocation();
     assertThat(lastPrimaryLoc.inputComponent().key()).isEqualTo(RUFF_FILE);
-    assertThat(lastPrimaryLoc.message()).isEqualTo("`try`-`except`-`pass` detected, consider logging the exception");
+    assertThat(lastPrimaryLoc.message()).isEqualTo("Unnecessary `map` usage (rewrite using a `list` comprehension)");
+
+    TextRange lastTextRange = lastPrimaryLoc.textRange();
+    assertThat(lastTextRange).isNotNull();
+    assertThat(lastTextRange.start().line()).isEqualTo(25);
+    assertThat(lastTextRange.start().lineOffset()).isEqualTo(33);
+    assertThat(lastTextRange.end().line()).isEqualTo(27);
+    assertThat(lastTextRange.end().lineOffset()).isEqualTo(5);
 
     assertNoErrorWarnLogs(logTester);
     assertThat(logTester.logs(LoggerLevel.DEBUG)).isEmpty();
@@ -151,7 +188,7 @@ class RuffSensorTest {
     IssueLocation firstPrimaryLoc = first.primaryLocation();
     assertThat(firstPrimaryLoc.inputComponent().key()).isEqualTo("python-project:ruff/file1.py");
     assertThat(firstPrimaryLoc.message())
-        .isEqualTo("Missing docstring in public module");
+      .isEqualTo("Missing docstring in public module");
     TextRange firstTextRange = firstPrimaryLoc.textRange();
     assertThat(firstTextRange).isNotNull();
     assertThat(firstTextRange.start().line()).isEqualTo(1);
@@ -172,7 +209,7 @@ class RuffSensorTest {
     IssueLocation firstPrimaryLoc = first.primaryLocation();
     assertThat(firstPrimaryLoc.inputComponent().key()).isEqualTo("python-project:ruff/__init__.py");
     assertThat(firstPrimaryLoc.message())
-        .isEqualTo("Missing docstring in public package");
+      .isEqualTo("Missing docstring in public package");
     TextRange firstTextRange = firstPrimaryLoc.textRange();
     assertThat(firstTextRange).isNotNull();
     assertThat(firstTextRange.start().line()).isEqualTo(1);
@@ -187,8 +224,8 @@ class RuffSensorTest {
     assertThat(externalIssues).hasSize(1);
 
     assertThat(onlyOneLogElement(logTester.logs(LoggerLevel.WARN)))
-        .isEqualTo(
-            "Failed to resolve 1 file path(s) in Ruff report. No issues imported related to file(s): unknown/file.py");
+      .isEqualTo(
+        "Failed to resolve 1 file path(s) in Ruff report. No issues imported related to file(s): unknown/file.py");
   }
 
   @Test
@@ -205,11 +242,11 @@ class RuffSensorTest {
 
     assertThat(logTester.logs(LoggerLevel.DEBUG)).hasSize(3);
     assertThat(logTester.logs(LoggerLevel.DEBUG).get(0))
-        .startsWith("Missing information for ruleKey:'null',");
+      .startsWith("Missing information for ruleKey:'null',");
     assertThat(logTester.logs(LoggerLevel.DEBUG).get(1))
-        .contains("filePath:'null'");
+      .contains("filePath:'null'");
     assertThat(logTester.logs(LoggerLevel.DEBUG).get(2))
-        .contains("message:'null'");
+      .contains("message:'null'");
   }
 
   @Test
@@ -218,8 +255,8 @@ class RuffSensorTest {
     assertThat(externalIssues).isEmpty();
 
     assertThat(onlyOneLogElement(logTester.logs(LoggerLevel.ERROR)))
-        .startsWith("No issues information will be saved as the report file '")
-        .contains("invalid-path.json' can't be read.");
+      .startsWith("No issues information will be saved as the report file '")
+      .contains("invalid-path.json' can't be read.");
   }
 
   @Test
@@ -231,8 +268,8 @@ class RuffSensorTest {
     externalIssues = executeSensorImporting(7, 9, "ruff-invalid-file.json");
     assertThat(externalIssues).isEmpty();
     assertThat(onlyOneLogElement(logTester.logs(LoggerLevel.ERROR)))
-        .startsWith("No issues information will be saved as the report file '")
-        .contains("ruff-invalid-file.json' can't be read.");
+      .startsWith("No issues information will be saved as the report file '")
+      .contains("ruff-invalid-file.json' can't be read.");
   }
 
   @Test
@@ -244,7 +281,7 @@ class RuffSensorTest {
     assertThat(first.ruleKey()).hasToString("external_ruff:ZZZ999");
     assertThat(first.type()).isEqualTo(RuleType.CODE_SMELL);
     assertThat(first.severity()).isEqualTo(Severity.MAJOR);
-    
+
     assertNoErrorWarnLogs(logTester);
 
   }
@@ -262,7 +299,7 @@ class RuffSensorTest {
     IssueLocation firstPrimaryLoc = first.primaryLocation();
     assertThat(firstPrimaryLoc.inputComponent().key()).isEqualTo(RUFF_FILE);
     assertThat(firstPrimaryLoc.message())
-        .isEqualTo("Possible hardcoded password assigned to function default: \"secret\"");
+      .isEqualTo("Possible hardcoded password assigned to function default: \"secret\"");
     TextRange firstTextRange = firstPrimaryLoc.textRange();
     assertThat(firstTextRange).isNotNull();
     assertThat(firstTextRange.start().line()).isEqualTo(5);
@@ -273,13 +310,13 @@ class RuffSensorTest {
   }
 
   private static List<ExternalIssue> executeSensorImporting(int majorVersion, int minorVersion,
-      @Nullable String fileName) throws IOException {
+    @Nullable String fileName) throws IOException {
     Path baseDir = PROJECT_DIR.getParent();
     SensorContextTester context = SensorContextTester.create(baseDir);
     try (Stream<Path> fileStream = Files.list(PROJECT_DIR)) {
       fileStream.forEach(file -> addFileToContext(context, baseDir, file));
       context.setRuntime(SonarRuntimeImpl.forSonarQube(Version.create(majorVersion, minorVersion), SonarQubeSide.SERVER,
-          SonarEdition.DEVELOPER));
+        SonarEdition.DEVELOPER));
       if (fileName != null) {
         String path = PROJECT_DIR.resolve(fileName).toAbsolutePath().toString();
         context.settings().setProperty("sonar.python.ruff.reportPaths", path);
@@ -293,11 +330,11 @@ class RuffSensorTest {
     try {
       String projectId = projectDir.getFileName().toString() + "-project";
       context.fileSystem().add(TestInputFileBuilder.create(projectId, projectDir.toFile(), file.toFile())
-          .setCharset(UTF_8)
-          .setLanguage(language(file))
-          .setContents(new String(Files.readAllBytes(file), UTF_8))
-          .setType(InputFile.Type.MAIN)
-          .build());
+        .setCharset(UTF_8)
+        .setLanguage(language(file))
+        .setContents(new String(Files.readAllBytes(file), UTF_8))
+        .setType(InputFile.Type.MAIN)
+        .build());
     } catch (IOException e) {
       throw new IllegalStateException(e);
     }

@@ -20,3 +20,9 @@ def baz():
         print("42")
     except:
         pass
+
+def process(data):
+    engaged_ratio_values_list = list(
+        map(lambda data_point: data_point["engaged_ratio"], data)
+    )
+    return engaged_ratio_values_list
