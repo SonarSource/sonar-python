@@ -88,7 +88,7 @@ public class RuffJsonReportReader {
 
   /*
     Ruff returns the col number of the last char + 1.
-    In order to properly read the col number we need to return the number of the last char.
+    In order to properly read the col number we need to return the col number of the last char.
    */
   private static Integer correctEndLocationCol(Object value, int startLocationCol, int startLocationRow, int endLocationRow) {
     Integer endLocationCol = toInteger(value);
@@ -96,7 +96,7 @@ public class RuffJsonReportReader {
       if (endLocationRow == startLocationRow && endLocationCol <= startLocationCol) {
         return startLocationCol;
       } else {
-        return endLocationCol -1 ;
+        return endLocationCol - 1;
       }
     }
     return null;
