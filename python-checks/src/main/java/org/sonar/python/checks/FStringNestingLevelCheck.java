@@ -19,6 +19,7 @@
  */
 package org.sonar.python.checks;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -77,8 +78,8 @@ public class FStringNestingLevelCheck extends PythonSubscriptionCheck {
 
   private static boolean areFormattedExpressionsNestedTooDeep(List<FormattedExpression> formattedExpressions, int updatedCount) {
     for (FormattedExpression formattedExpression : formattedExpressions) {
-      if (isTheNestingTooDeepInExpression(formattedExpression.expression(), updatedCount) || 
-          isTheNestingTooDeepInFormatSpecifier(formattedExpression.formatSpecifier(), updatedCount)) {
+      if (isTheNestingTooDeepInExpression(formattedExpression.expression(), updatedCount) ||
+        isTheNestingTooDeepInFormatSpecifier(formattedExpression.formatSpecifier(), updatedCount)) {
         return true;
       }
     }
@@ -89,7 +90,9 @@ public class FStringNestingLevelCheck extends PythonSubscriptionCheck {
     return Optional.of(expression)
       .flatMap(TreeUtils.toOptionalInstanceOfMapper(StringLiteral.class))
       .map(StringLiteral::stringElements)
-      .map(elements -> elements.stream().anyMatch(sElement -> isFStringNestedTooDeep(sElement, updatedCount)))
+      .map(Collection::stream)
+      .map(elements -> elements
+        .anyMatch(sElement -> isFStringNestedTooDeep(sElement, updatedCount)))
       .orElse(false);
   }
 
