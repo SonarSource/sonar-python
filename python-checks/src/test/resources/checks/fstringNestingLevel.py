@@ -13,3 +13,5 @@ def non_compliant(hello, name):
 def compliant(hello, name):
     greeting = f"{f"{hello}"},"
     my_string = f"{greeting} {name}!" # Compliant
+
+    my_string = f"{greeting} {name : { f"1" }.{2}}!" 
