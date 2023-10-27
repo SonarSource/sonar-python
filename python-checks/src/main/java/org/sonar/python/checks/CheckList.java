@@ -199,6 +199,7 @@ public final class CheckList {
       FileHeaderCopyrightCheck.class,
       FixmeCommentCheck.class,
       FloatingPointEqualityCheck.class,
+      FStringNestingLevelCheck.class,
       FunctionComplexityCheck.class,
       FunctionNameCheck.class,
       FunctionReturnTypeCheck.class,
