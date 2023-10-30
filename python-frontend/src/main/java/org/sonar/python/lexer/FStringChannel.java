@@ -47,7 +47,7 @@ public class FStringChannel extends Channel<Lexer> {
 
   private static final Set<Character> QUOTES = Set.of('\"', '\'');
   private static final Set<Character> PREFIXES = Set.of('F', 'R');
-  private static final Set<String> ESCAPED_CHARS = Set.of("{{", "}}","\\\"","\\\'");
+  private static final Set<String> ESCAPED_CHARS = Set.of("{{", "}}");
 
   public FStringChannel(LexerState lexerState) {
     this.lexerState = lexerState;
@@ -153,7 +153,7 @@ public class FStringChannel extends Channel<Lexer> {
   }
 
   private static boolean isEscapedChar(CodeReader code) {
-    return ESCAPED_CHARS.contains(String.valueOf(code.peek(2)));
+    return ESCAPED_CHARS.contains(String.valueOf(code.peek(2))) || code.peek() == '\\';
   }
 
   private static boolean areClosingQuotes(CodeReader code, FStringState state) {
