@@ -20,13 +20,15 @@
 package org.sonar.python.checks;
 
 import java.util.HashSet;
-import static java.util.Arrays.asList;
-
+import java.util.Optional;
+import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Tree;
+
+import static java.util.Arrays.asList;
 
 // https://jira.sonarsource.com/browse/RSPEC-5547 (general)
 // https://jira.sonarsource.com/browse/RSPEC-5552 (python-specific)
@@ -35,6 +37,16 @@ public class RobustCipherAlgorithmCheck extends PythonSubscriptionCheck {
 
   private static final String MESSAGE = "Use a strong cipher algorithm.";
   private static final HashSet<String> sensitiveCalleeFqns = new HashSet<>();
+
+  private static final Set<String> unsafeAlgorithms = Set.of(
+    "NULL",
+    "RC2",
+    "RC4",
+    "DES",
+    "3DES",
+    "MD5",
+    "SHA"
+  );
 
   static {
     // `pycryptodomex`, `pycryptodome`, and `pycrypto` all share the same names of the algorithms,
@@ -57,19 +69,18 @@ public class RobustCipherAlgorithmCheck extends PythonSubscriptionCheck {
     // pydes
     sensitiveCalleeFqns.add("pyDes.des");
     sensitiveCalleeFqns.add("pyDes.triple_des");
+    sensitiveCalleeFqns.add("ssl.SSLContext.set_ciphers");
   }
 
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, subscriptionContext -> {
       CallExpression callExpr = (CallExpression) subscriptionContext.syntaxNode();
-      Symbol calleeSymbol = callExpr.calleeSymbol();
-      if (calleeSymbol != null) {
-        String fqn = calleeSymbol.fullyQualifiedName();
-        if (fqn != null && sensitiveCalleeFqns.contains(fqn)) {
-          subscriptionContext.addIssue(callExpr.callee(), MESSAGE);
-        }
-      }
+      Optional.ofNullable(callExpr)
+        .map(CallExpression::calleeSymbol)
+        .map(Symbol::fullyQualifiedName)
+        .filter(sensitiveCalleeFqns::contains)
+        .ifPresent(str -> subscriptionContext.addIssue(callExpr.callee(), MESSAGE));
     });
   }
 
