@@ -96,3 +96,15 @@ def compliant_1(xx):
 
     _ = age_df.merge(name_df, left_on=col, right_on='cat', how='left', validate='m:m')
 
+    _ = pd.merge(age_df, name_df, right_on='cat', how='left', validate='m:m')
+
+    _ = age_df.merge(name_df, right_on='cat', how='left', validate='m:m')
+
+    _ = age_df.merge(name_df, right_on='cat', how='left', validate='m:m')
+
+    _ = pd.merge(age_df, name_df, left_on=col, how='left', validate='m:m')
+
+    _ = age_df.merge(name_df, left_on=col, how='left', validate='m:m')
+
+    _ = age_df.merge(name_df, left_on=col, how='left', validate='m:m')
+
