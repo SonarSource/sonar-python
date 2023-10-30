@@ -1,0 +1,37 @@
+<p>This rule raises an issue f-strings are deeply nested.</p>
+<h2>Why is this an issue?</h2>
+<p>Through <a href="https://peps.python.org/pep-0701/">PEP 701</a>, Python 3.12 lifts restrictions on how to construct f-strings.</p>
+<p>Prior to Python 3.12, it was not possible to reuse string quotes when nesting f-strings. Therefore, the maximum level of nesting was:</p>
+<pre>
+f"""{f'''{f'{f"{1+1}"}'}'''}"""
+</pre>
+<p>It is now possible to arbitrarily nest f-strings by reusing string quotes. The following snippet is therefore valid:</p>
+<pre>
+f"{f"{f"{f"{f"{f"{1+1}"}"}"}"}"}"
+</pre>
+<p>It is, however, not recommended to nest f-strings too deeply as this would make the code confusing and hard to maintain.</p>
+<p>This rule will raise an issue if f-strings literals are nested more than 3 times.</p>
+<h2>How to fix it</h2>
+<p>To fix this issue, refactor the code to avoid nesting f-string literals too deeply. This may be done by introducing new variables to store
+intermediate results.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+hello = "Hello"
+name = "John"
+my_string = f"{f"{f"{hello}"},"} {name}!" # Noncompliant: deep nesting of f-strings is confusing
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+hello = "Hello"
+name = "John"
+greeting = f"{f"{hello}"},"
+my_string = f"{greeting} {name}!" # Compliant
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> PEP 701 <a href="https://peps.python.org/pep-0701/">Syntactic formalization of f-strings</a> </li>
+  <li> Python Release Notes <a href="https://docs.python.org/3/whatsnew/3.12.html#what-s-new-in-python-3-12">What’s New In Python 3.12</a> </li>
+</ul>
+
