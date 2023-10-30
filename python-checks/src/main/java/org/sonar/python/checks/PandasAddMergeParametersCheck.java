@@ -20,6 +20,7 @@
 package org.sonar.python.checks;
 
 import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -101,7 +102,7 @@ public class PandasAddMergeParametersCheck extends PythonSubscriptionCheck {
   private static final String DATAFRAME_MERGE_FQN = "pandas.core.frame.DataFrame.merge";
   private static final String PANDAS_MERGE_FQN = "pandas.core.reshape.merge.merge";
 
-  private static final Set<Keywords> ON_KEYWORDS = Set.of(Keywords.ON, Keywords.LEFT_ON, Keywords.RIGHT_ON);
+  private static final Set<Keywords> ON_KEYWORDS = EnumSet.of(Keywords.ON, Keywords.LEFT_ON, Keywords.RIGHT_ON);
   private static final Set<String> METHODS = Set.of(
     DATAFRAME_JOIN_FQN,
     DATAFRAME_MERGE_FQN,
