@@ -89,3 +89,10 @@ def compliant_1(xx):
     _ = age_df.merge(name_df, "inner", "user_id", None, None, False, False, False, ('_x', '_y'), None, False, "1:1")
 
     _ = age_df.join(name_df, on=None, how='left', lsuffix='', rsuffix='', sort=False, validate=None)
+
+    _ = pd.merge(age_df, name_df, left_on=col, right_on='cat', how='left', validate='m:m')
+
+    _ = age_df.merge(name_df, left_on=col, right_on='cat', how='left', validate='m:m')
+
+    _ = age_df.merge(name_df, left_on=col, right_on='cat', how='left', validate='m:m')
+

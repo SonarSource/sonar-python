@@ -42,7 +42,9 @@ public class PandasAddMergeParametersCheck extends PythonSubscriptionCheck {
   enum Keywords {
     HOW("how", 2, 1, 2, "\"inner\"", "\"left\""),
     ON("on", 1, 2, 3, "None", "None"),
-    VALIDATE("validate", 6, 11, 12, "\"many_to_many\"", "\"many_to_many\"");
+    VALIDATE("validate", 6, 11, 12, "\"many_to_many\"", "\"many_to_many\""),
+    LEFT_ON("left_on", -1, 3, 4, "None", "None"),
+    RIGHT_ON("right_on", -1, 4, 5, "None", "None");
 
     public String getKeyword() {
       return keyword;
@@ -99,6 +101,7 @@ public class PandasAddMergeParametersCheck extends PythonSubscriptionCheck {
   private static final String DATAFRAME_MERGE_FQN = "pandas.core.frame.DataFrame.merge";
   private static final String PANDAS_MERGE_FQN = "pandas.core.reshape.merge.merge";
 
+  private static final Set<Keywords> ON_KEYWORDS = Set.of(Keywords.ON, Keywords.LEFT_ON, Keywords.RIGHT_ON);
   private static final Set<String> METHODS = Set.of(
     DATAFRAME_JOIN_FQN,
     DATAFRAME_MERGE_FQN,
@@ -129,7 +132,7 @@ public class PandasAddMergeParametersCheck extends PythonSubscriptionCheck {
     if (isArgumentMissing(fullyQualifiedName, Keywords.HOW, callExpression.arguments())) {
       missingKeywords.add(Keywords.HOW);
     }
-    if (isArgumentMissing(fullyQualifiedName, Keywords.ON, callExpression.arguments())) {
+    if (ON_KEYWORDS.stream().allMatch(keyword -> isArgumentMissing(fullyQualifiedName, keyword, callExpression.arguments()))) {
       missingKeywords.add(Keywords.ON);
     }
     if (isArgumentMissing(fullyQualifiedName, Keywords.VALIDATE, callExpression.arguments())) {
