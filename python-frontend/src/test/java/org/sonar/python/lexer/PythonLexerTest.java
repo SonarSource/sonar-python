@@ -527,6 +527,17 @@ class PythonLexerTest {
       hasToken("}", PythonPunctuator.RCURLYBRACE),
       hasToken("\"", PythonTokenType.FSTRING_END)));
   }
+
+  @Test
+  void fstring_double_backslash() {
+    assertThat(lexer.lex("f\"{a}\\\\\""), allOf(
+      hasToken("f\"", PythonTokenType.FSTRING_START),
+      hasToken("{", PythonPunctuator.LCURLYBRACE),
+      hasToken("a", GenericTokenType.IDENTIFIER),
+      hasToken("}", PythonPunctuator.RCURLYBRACE),
+      hasToken("\\\\", PythonTokenType.FSTRING_MIDDLE),
+      hasToken("\"", PythonTokenType.FSTRING_END)));
+  }
   /**
    * http://docs.python.org/reference/lexical_analysis.html#integer-and-long-integer-literals
    */
