@@ -95,7 +95,7 @@ public class FStringChannel extends Channel<Lexer> {
         code.pop();
         List<Token> tokens = new ArrayList<>();
         tokens.add(formatSpecifier);
-        FStringState newState = new FStringState(Mode.FORMAT_SPECIFIER_MODE, lexerState.brackets, false);
+        FStringState newState = new FStringState(Mode.FORMAT_SPECIFIER_MODE, lexerState.brackets, currentState.isRawString);
         lexerState.fStringStateStack.push(newState);
         return consumeFStringMiddle(tokens, sb, newState, code, output);
       }
@@ -115,7 +115,7 @@ public class FStringChannel extends Channel<Lexer> {
         sb.append((char) code.pop());
       } else if (code.charAt(0) == '{' && !isUnicodeChar(sb)) {
         addFStringMiddleToTokens(tokens, sb, output, line, column);
-        addLCurlBraceAndSwitchToRegularMode(tokens, code, output);
+        addLCurlBraceAndSwitchToRegularMode(tokens, code, output, state);
         addTokens(tokens, output);
         return true;
       } else if (currentMode == Mode.FORMAT_SPECIFIER_MODE && code.charAt(0) == '}') {
@@ -181,11 +181,11 @@ public class FStringChannel extends Channel<Lexer> {
     tokens.add(fStringEndToken);
   }
 
-  private void addLCurlBraceAndSwitchToRegularMode(List<Token> tokens, CodeReader code, Lexer output) {
+  private void addLCurlBraceAndSwitchToRegularMode(List<Token> tokens, CodeReader code, Lexer output, FStringState currentState) {
     Token curlyBraceToken = buildToken(PythonPunctuator.LCURLYBRACE, "{", output, code.getLinePosition(), code.getColumnPosition());
     code.pop();
     lexerState.brackets++;
-    FStringState updatedState = new FStringState(FStringState.Mode.REGULAR_MODE, lexerState.brackets, false);
+    FStringState updatedState = new FStringState(FStringState.Mode.REGULAR_MODE, lexerState.brackets, currentState.isRawString);
     lexerState.fStringStateStack.push(updatedState);
     tokens.add(curlyBraceToken);
   }
