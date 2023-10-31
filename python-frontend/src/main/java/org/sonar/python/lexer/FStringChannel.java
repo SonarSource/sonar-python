@@ -64,7 +64,8 @@ public class FStringChannel extends Channel<Lexer> {
     if (canConsumeFStringPrefix(sb, code)) {
       char quote = code.charAt(0);
       StringBuilder quotes = consumeFStringQuotes(code, quote);
-      FStringState newState = new FStringState(Mode.FSTRING_MODE, lexerState.brackets);
+      boolean isRawString = sb.indexOf("r") >= 0 || sb.indexOf("R") >= 0;
+      FStringState newState = new FStringState(Mode.FSTRING_MODE, lexerState.brackets, isRawString);
       newState.setQuote(quote);
       newState.setNumberOfQuotes(quotes.length());
       lexerState.fStringStateStack.push(newState);
@@ -78,9 +79,9 @@ public class FStringChannel extends Channel<Lexer> {
     FStringState.Mode currentMode = currentState.getTokenizerMode();
 
     if (currentMode == Mode.REGULAR_MODE && lexerState.fStringStateStack.size() > 1) {
-        // because the lexerState removes one to the count of brackets before entering this channel 
-        // we need to adjust the comparison
-      if (c == '}' && currentState.getBrackets() -1 == lexerState.brackets) {
+      // because the lexerState removes one to the count of brackets before entering this channel 
+      // we need to adjust the comparison
+      if (c == '}' && currentState.getBrackets() - 1 == lexerState.brackets) {
         Token rCurlyBraceToken = buildToken(PythonPunctuator.RCURLYBRACE, "}", output, line, column);
         code.pop();
         List<Token> tokens = new ArrayList<>();
@@ -94,7 +95,7 @@ public class FStringChannel extends Channel<Lexer> {
         code.pop();
         List<Token> tokens = new ArrayList<>();
         tokens.add(formatSpecifier);
-        FStringState newState = new FStringState(Mode.FORMAT_SPECIFIER_MODE, lexerState.brackets);
+        FStringState newState = new FStringState(Mode.FORMAT_SPECIFIER_MODE, lexerState.brackets, currentState.isRawString);
         lexerState.fStringStateStack.push(newState);
         return consumeFStringMiddle(tokens, sb, newState, code, output);
       }
@@ -107,12 +108,16 @@ public class FStringChannel extends Channel<Lexer> {
     int column = code.getColumnPosition();
     FStringState.Mode currentMode = state.getTokenizerMode();
     while (code.charAt(0) != EOF) {
-      if (currentMode == Mode.FSTRING_MODE && isEscapedChar(code) ) {
+      // In a raw string we consider \ as a character not as escape so we consume it as is
+      if (currentMode == Mode.FSTRING_MODE && state.isRawString && code.charAt(0) == '\\') {
+        sb.append((char) code.pop());
+      // If we encounter an escaped char we can consume the next two chars directly
+      } else if (currentMode == Mode.FSTRING_MODE && isEscapedChar(code)) {
         sb.append((char) code.pop());
         sb.append((char) code.pop());
       } else if (code.charAt(0) == '{' && !isUnicodeChar(sb)) {
         addFStringMiddleToTokens(tokens, sb, output, line, column);
-        addLCurlBraceAndSwitchToRegularMode(tokens, code, output);
+        addLCurlBraceAndSwitchToRegularMode(tokens, code, output, state);
         addTokens(tokens, output);
         return true;
       } else if (currentMode == Mode.FORMAT_SPECIFIER_MODE && code.charAt(0) == '}') {
@@ -140,15 +145,15 @@ public class FStringChannel extends Channel<Lexer> {
       return true;
     } else if (PREFIXES.contains(firstChar) && PREFIXES.contains(secondChar) &&
       !firstChar.equals(secondChar) && QUOTES.contains(code.charAt(2))) {
-      sb.append((char) code.pop());
-      sb.append((char) code.pop());
-      return true;
-    }
+        sb.append((char) code.pop());
+        sb.append((char) code.pop());
+        return true;
+      }
     return false;
   }
 
-  private static boolean isUnicodeChar(StringBuilder sb ){
-    int lastIndexOfUnicodeChar =  sb.lastIndexOf("\\N");
+  private static boolean isUnicodeChar(StringBuilder sb) {
+    int lastIndexOfUnicodeChar = sb.lastIndexOf("\\N");
     return lastIndexOfUnicodeChar >= 0 && lastIndexOfUnicodeChar == sb.length() - 2;
   }
 
@@ -178,11 +183,11 @@ public class FStringChannel extends Channel<Lexer> {
     tokens.add(fStringEndToken);
   }
 
-  private void addLCurlBraceAndSwitchToRegularMode(List<Token> tokens, CodeReader code, Lexer output) {
+  private void addLCurlBraceAndSwitchToRegularMode(List<Token> tokens, CodeReader code, Lexer output, FStringState currentState) {
     Token curlyBraceToken = buildToken(PythonPunctuator.LCURLYBRACE, "{", output, code.getLinePosition(), code.getColumnPosition());
     code.pop();
     lexerState.brackets++;
-    FStringState updatedState = new FStringState(FStringState.Mode.REGULAR_MODE, lexerState.brackets);
+    FStringState updatedState = new FStringState(FStringState.Mode.REGULAR_MODE, lexerState.brackets, currentState.isRawString);
     lexerState.fStringStateStack.push(updatedState);
     tokens.add(curlyBraceToken);
   }

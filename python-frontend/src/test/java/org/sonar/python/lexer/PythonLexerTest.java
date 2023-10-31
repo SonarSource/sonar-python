@@ -529,6 +529,14 @@ class PythonLexerTest {
   }
 
   @Test
+  void fstring_escaped_regex_pattern() {
+    assertThat(lexer.lex("rf\"\\{{\\n\\}}\""), allOf(
+      hasToken("rf\"", PythonTokenType.FSTRING_START),
+      hasToken("\\{{\\n\\}}", PythonTokenType.FSTRING_MIDDLE),
+      hasToken("\"", PythonTokenType.FSTRING_END)));
+  }
+
+  @Test
   void fstring_double_backslash() {
     assertThat(lexer.lex("f\"{a}\\\\\""), allOf(
       hasToken("f\"", PythonTokenType.FSTRING_START),
