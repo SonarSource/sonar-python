@@ -25,8 +25,6 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
@@ -45,8 +43,6 @@ import static java.util.Arrays.asList;
 // https://jira.sonarsource.com/browse/RSPEC-5552 (python-specific)
 @Rule(key = "S5547")
 public class RobustCipherAlgorithmCheck extends PythonSubscriptionCheck {
-
-  private static final Logger LOG = LoggerFactory.getLogger(RobustCipherAlgorithmCheck.class);
 
   private static final String MESSAGE = "Use a strong cipher algorithm.";
   private static final HashSet<String> sensitiveCalleeFqns = new HashSet<>();
@@ -84,7 +80,6 @@ public class RobustCipherAlgorithmCheck extends PythonSubscriptionCheck {
     // pydes
     sensitiveCalleeFqns.add("pyDes.des");
     sensitiveCalleeFqns.add("pyDes.triple_des");
-//    sensitiveCalleeFqns.add(SSL_SET_CIPHERS_FQN);
   }
 
   @Override
@@ -125,7 +120,6 @@ public class RobustCipherAlgorithmCheck extends PythonSubscriptionCheck {
     if (expression == null) {
       return null;
     } else if (expression.is(Tree.Kind.STRING_LITERAL)) {
-      LOG.info(((StringLiteralImpl) expression).trimmedQuotesValue());
       return ((StringLiteralImpl) expression).trimmedQuotesValue();
     } else if (expression.is(Tree.Kind.NAME)) {
       return unpackArgument(Expressions.singleAssignedValue((Name) expression));
