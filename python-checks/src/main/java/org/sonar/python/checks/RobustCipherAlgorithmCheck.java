@@ -19,14 +19,25 @@
  */
 package org.sonar.python.checks;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Stream;
+import javax.annotation.CheckForNull;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
+import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.CallExpression;
+import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.tree.StringLiteralImpl;
+import org.sonar.python.tree.TreeUtils;
 
 import static java.util.Arrays.asList;
 
@@ -35,10 +46,12 @@ import static java.util.Arrays.asList;
 @Rule(key = "S5547")
 public class RobustCipherAlgorithmCheck extends PythonSubscriptionCheck {
 
+  private static final Logger LOG = LoggerFactory.getLogger(RobustCipherAlgorithmCheck.class);
+
   private static final String MESSAGE = "Use a strong cipher algorithm.";
   private static final HashSet<String> sensitiveCalleeFqns = new HashSet<>();
 
-  private static final Set<String> unsafeAlgorithms = Set.of(
+  private static final Set<String> INSECURE_CIPHERS = Set.of(
     "NULL",
     "RC2",
     "RC4",
@@ -47,6 +60,8 @@ public class RobustCipherAlgorithmCheck extends PythonSubscriptionCheck {
     "MD5",
     "SHA"
   );
+
+  public static final String SSL_SET_CIPHERS_FQN = "ssl.SSLContext.set_ciphers";
 
   static {
     // `pycryptodomex`, `pycryptodome`, and `pycrypto` all share the same names of the algorithms,
@@ -69,7 +84,7 @@ public class RobustCipherAlgorithmCheck extends PythonSubscriptionCheck {
     // pydes
     sensitiveCalleeFqns.add("pyDes.des");
     sensitiveCalleeFqns.add("pyDes.triple_des");
-    sensitiveCalleeFqns.add("ssl.SSLContext.set_ciphers");
+//    sensitiveCalleeFqns.add(SSL_SET_CIPHERS_FQN);
   }
 
   @Override
@@ -79,9 +94,52 @@ public class RobustCipherAlgorithmCheck extends PythonSubscriptionCheck {
       Optional.ofNullable(callExpr)
         .map(CallExpression::calleeSymbol)
         .map(Symbol::fullyQualifiedName)
-        .filter(sensitiveCalleeFqns::contains)
-        .ifPresent(str -> subscriptionContext.addIssue(callExpr.callee(), MESSAGE));
+        .filter(fqn -> sensitiveCalleeFqns.contains(fqn) || SSL_SET_CIPHERS_FQN.equals(fqn))
+        .ifPresent(str -> addMethodSpecificIssue(subscriptionContext, callExpr, str));
     });
   }
+
+  private static void addMethodSpecificIssue(
+    SubscriptionContext subscriptionContext,
+    CallExpression callExpression,
+    String fullyQualifiedName
+  ) {
+    if (!SSL_SET_CIPHERS_FQN.equals(fullyQualifiedName) || argumentSpecifiesRiskyAlgorithm(callExpression)) {
+      subscriptionContext.addIssue(callExpression.callee(), MESSAGE);
+    }
+  }
+
+  private static boolean argumentSpecifiesRiskyAlgorithm(CallExpression callExpression) {
+    return Optional.of(callExpression.arguments())
+      .filter(list -> list.size() == 1)
+      .map(list -> list.get(0))
+      .flatMap(TreeUtils.toOptionalInstanceOfMapper(RegularArgument.class))
+      .map(RegularArgument::expression)
+      .map(RobustCipherAlgorithmCheck::unpackArgument)
+      .filter(RobustCipherAlgorithmCheck::containsInsecureCipher)
+      .isPresent();
+  }
+
+  @CheckForNull
+  private static String unpackArgument(@CheckForNull Expression expression) {
+    if (expression == null) {
+      return null;
+    } else if (expression.is(Tree.Kind.STRING_LITERAL)) {
+      LOG.info(((StringLiteralImpl) expression).trimmedQuotesValue());
+      return ((StringLiteralImpl) expression).trimmedQuotesValue();
+    } else if (expression.is(Tree.Kind.NAME)) {
+      return unpackArgument(Expressions.singleAssignedValue((Name) expression));
+    } else {
+      return null;
+    }
+  }
+
+  private static boolean containsInsecureCipher(String ciphers) {
+    return Stream.of(ciphers)
+      .flatMap(str -> Arrays.stream(str.split(":")))
+      .flatMap(str -> Arrays.stream(str.split("-")))
+      .anyMatch(INSECURE_CIPHERS::contains);
+  }
+
 
 }
