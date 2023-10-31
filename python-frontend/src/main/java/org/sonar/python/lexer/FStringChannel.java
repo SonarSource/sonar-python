@@ -108,8 +108,10 @@ public class FStringChannel extends Channel<Lexer> {
     int column = code.getColumnPosition();
     FStringState.Mode currentMode = state.getTokenizerMode();
     while (code.charAt(0) != EOF) {
+      // In a raw string we consider \ as a character not as escape so we consume it as is
       if (currentMode == Mode.FSTRING_MODE && state.isRawString && code.charAt(0) == '\\') {
         sb.append((char) code.pop());
+      // If we encounter an escaped char we can consume the next two chars directly
       } else if (currentMode == Mode.FSTRING_MODE && isEscapedChar(code)) {
         sb.append((char) code.pop());
         sb.append((char) code.pop());

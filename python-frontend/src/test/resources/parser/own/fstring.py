@@ -26,4 +26,5 @@ f"Current value: \"{value}\" (type: {type(value)}). "
 f'\N{RIGHTWARDS ARROW}'
 f" \\"
 F"\\ \"{a}\":\\"
-rf'^add_example\(\s*"[^"]*",\s*{re.escape(json.dumps(function))},\s*\d+,\s*async \(client, console\) => \{{\n(.*?)^(?:\}}| *\}},\n)\);$'
+fr"""\s*\{{(.+)\}}"""
+rf'^add_example\(\s*"[^"]*",\s*{foo()},\s*\d+,\s*async \(client, console\) => \{{\n(.*?)^(?:\}}| *\}},\n)\);$'
