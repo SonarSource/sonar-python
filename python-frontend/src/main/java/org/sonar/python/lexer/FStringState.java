@@ -24,6 +24,7 @@ public class FStringState {
   Character quote;
   int numberOfQuotes;
   int brackets;
+  boolean isRawString;
 
 
   public enum Mode {
@@ -34,9 +35,10 @@ public class FStringState {
 
   private Mode tokenizerMode;
 
-  public FStringState(Mode mode, int brackets) {
+  public FStringState(Mode mode, int brackets, boolean isRawString) {
     this.tokenizerMode = mode;
     this.brackets = brackets;
+    this.isRawString = isRawString;
   }
 
   public Character getQuote() {

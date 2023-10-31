@@ -64,7 +64,8 @@ public class FStringChannel extends Channel<Lexer> {
     if (canConsumeFStringPrefix(sb, code)) {
       char quote = code.charAt(0);
       StringBuilder quotes = consumeFStringQuotes(code, quote);
-      FStringState newState = new FStringState(Mode.FSTRING_MODE, lexerState.brackets);
+      boolean isRawString = sb.indexOf("r") >= 0 || sb.indexOf("R") >= 0;
+      FStringState newState = new FStringState(Mode.FSTRING_MODE, lexerState.brackets, isRawString);
       newState.setQuote(quote);
       newState.setNumberOfQuotes(quotes.length());
       lexerState.fStringStateStack.push(newState);
@@ -94,7 +95,7 @@ public class FStringChannel extends Channel<Lexer> {
         code.pop();
         List<Token> tokens = new ArrayList<>();
         tokens.add(formatSpecifier);
-        FStringState newState = new FStringState(Mode.FORMAT_SPECIFIER_MODE, lexerState.brackets);
+        FStringState newState = new FStringState(Mode.FORMAT_SPECIFIER_MODE, lexerState.brackets, false);
         lexerState.fStringStateStack.push(newState);
         return consumeFStringMiddle(tokens, sb, newState, code, output);
       }
@@ -107,7 +108,16 @@ public class FStringChannel extends Channel<Lexer> {
     int column = code.getColumnPosition();
     FStringState.Mode currentMode = state.getTokenizerMode();
     while (code.charAt(0) != EOF) {
-      if (currentMode == Mode.FSTRING_MODE && isEscapedChar(code) ) {
+      if (currentMode == Mode.FSTRING_MODE && code.charAt(0) == '\\' ) {
+        if(state.isRawString){
+          sb.append((char) code.pop());
+        }else {
+          // escaped
+          sb.append((char) code.pop());
+          sb.append((char) code.pop());
+        }
+      }
+      else if (currentMode == Mode.FSTRING_MODE && isEscapedChar(code) ) {
         sb.append((char) code.pop());
         sb.append((char) code.pop());
       } else if (code.charAt(0) == '{' && !isUnicodeChar(sb)) {
@@ -152,8 +162,8 @@ public class FStringChannel extends Channel<Lexer> {
     return lastIndexOfUnicodeChar >= 0 && lastIndexOfUnicodeChar == sb.length() - 2;
   }
 
-  private static boolean isEscapedChar(CodeReader code) {
-    return ESCAPED_CHARS.contains(String.valueOf(code.peek(2))) || code.peek() == '\\';
+  private boolean isEscapedChar(CodeReader code) {
+    return ESCAPED_CHARS.contains(String.valueOf(code.peek(2)));
   }
 
   private static boolean areClosingQuotes(CodeReader code, FStringState state) {
@@ -182,7 +192,7 @@ public class FStringChannel extends Channel<Lexer> {
     Token curlyBraceToken = buildToken(PythonPunctuator.LCURLYBRACE, "{", output, code.getLinePosition(), code.getColumnPosition());
     code.pop();
     lexerState.brackets++;
-    FStringState updatedState = new FStringState(FStringState.Mode.REGULAR_MODE, lexerState.brackets);
+    FStringState updatedState = new FStringState(FStringState.Mode.REGULAR_MODE, lexerState.brackets, false);
     lexerState.fStringStateStack.push(updatedState);
     tokens.add(curlyBraceToken);
   }

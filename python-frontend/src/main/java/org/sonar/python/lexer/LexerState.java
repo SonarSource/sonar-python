@@ -42,7 +42,7 @@ public class LexerState {
     brackets = 0;
     joined = false;
     fStringStateStack.clear();
-    fStringStateStack.push(new FStringState(Mode.REGULAR_MODE, brackets));
+    fStringStateStack.push(new FStringState(Mode.REGULAR_MODE, brackets, false));
   }
 
   public void reset(int initialLine, int initialColumn) {
