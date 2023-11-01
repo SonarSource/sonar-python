@@ -21,23 +21,33 @@ package org.sonar.python.checks.hotspots;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import javax.annotation.CheckForNull;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
+import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.Argument;
-import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.CallExpression;
-import org.sonar.plugins.python.api.tree.ExpressionList;
 import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.ExpressionList;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
+import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
-import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = DebugModeCheck.CHECK_KEY)
 public class DebugModeCheck extends PythonSubscriptionCheck {
   public static final String CHECK_KEY = "S4507";
+  private static final Logger LOG = LoggerFactory.getLogger(DebugModeCheck.class);
+  public static final String DJANGO_CONFIGURE_FQN = "django.conf.settings.configure";
+
+  public static final String TRUE_KEYWORD = "True";
+
+  private static final String FLASK_RUN_FQN = "flask.app.Flask.run";
   private static final String MESSAGE = "Make sure this debug feature is deactivated before delivering the code in production.";
   private static final List<String> debugProperties = Arrays.asList("DEBUG", "DEBUG_PROPAGATE_EXCEPTIONS");
   private static final List<String> settingFiles = Arrays.asList("global_settings.py", "settings.py");
@@ -50,8 +60,20 @@ public class DebugModeCheck extends PythonSubscriptionCheck {
       if (!(callExpression.callee() instanceof QualifiedExpression)) {
         return;
       }
-      if ("django.conf.settings.configure".equals(getQualifiedName(callExpression)) && !arguments.isEmpty()) {
+
+//      LOG.info(getQualifiedName(callExpression));
+      if (DJANGO_CONFIGURE_FQN.equals(getQualifiedName(callExpression)) && !arguments.isEmpty()) {
         arguments.stream().filter(DebugModeCheck::isDebugArgument).forEach(arg -> ctx.addIssue(arg, MESSAGE));
+      }
+
+      if (FLASK_RUN_FQN.equals(getQualifiedName(callExpression)) && !arguments.isEmpty()) {
+        Optional.of(arguments)
+          .map(args -> TreeUtils.nthArgumentOrKeyword(2, "debug", args))
+          .map(RegularArgument::expression)
+          .flatMap(TreeUtils.toOptionalInstanceOfMapper(Name.class))
+          .map(Name::name)
+          .filter(TRUE_KEYWORD::equals)
+          .ifPresent(str -> ctx.addIssue(arguments.get(0), MESSAGE));
       }
     });
 
