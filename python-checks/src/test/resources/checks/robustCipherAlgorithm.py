@@ -115,7 +115,7 @@ def pycrypto_compliant():
   from Crypto.Cipher import *
   aes1 = AES.new('This is a key123', AES.MODE_CBC, 'This is an IV456') # Compliant
 
-def pyssl_compliant():
+def pyssl_compliant(unknown_cipher):
   import ssl
   ciphers = 'ECDHE-RSA-AES256-GCM-SHA384'
   ctx = ssl.SSLContext(ssl.PROTOCOL_SSLv23)
@@ -127,7 +127,7 @@ def pyssl_compliant():
 
   ciphers4 = 1
   ctx.set_ciphers(ciphers4)
-  ctx.set_ciphers(null_value)
+  ctx.set_ciphers(unknown_cipher)
   ctx.set_ciphers(ciphers, ciphers2)
 
 
