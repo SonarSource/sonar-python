@@ -36,6 +36,8 @@ import org.sonar.plugins.python.api.tree.ExpressionList;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
+import org.sonar.plugins.python.api.tree.StringLiteral;
+import org.sonar.plugins.python.api.tree.SubscriptionExpression;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.python.tree.TreeUtils;
 
@@ -43,11 +45,13 @@ import org.sonar.python.tree.TreeUtils;
 public class DebugModeCheck extends PythonSubscriptionCheck {
   public static final String CHECK_KEY = "S4507";
   private static final Logger LOG = LoggerFactory.getLogger(DebugModeCheck.class);
-  public static final String DJANGO_CONFIGURE_FQN = "django.conf.settings.configure";
 
+  public static final String DJANGO_CONFIGURE_FQN = "django.conf.settings.configure";
+  private static final String FLASK_RUN_FQN = "flask.app.Flask.run";
+  private static final String FLASK_APP_CONFIG_FQN = "flask.app.Flask.config";
+  public static final String FLASK_APP_DEBUG_FQN = "flask.app.Flask.debug";
   public static final String TRUE_KEYWORD = "True";
 
-  private static final String FLASK_RUN_FQN = "flask.app.Flask.run";
   private static final String MESSAGE = "Make sure this debug feature is deactivated before delivering the code in production.";
   private static final List<String> debugProperties = Arrays.asList("DEBUG", "DEBUG_PROPAGATE_EXCEPTIONS");
   private static final List<String> settingFiles = Arrays.asList("global_settings.py", "settings.py");
@@ -67,13 +71,13 @@ public class DebugModeCheck extends PythonSubscriptionCheck {
       }
 
       if (FLASK_RUN_FQN.equals(getQualifiedName(callExpression)) && !arguments.isEmpty()) {
-        Optional.of(arguments)
-          .map(args -> TreeUtils.nthArgumentOrKeyword(2, "debug", args))
+        RegularArgument debugArgument = TreeUtils.nthArgumentOrKeyword(2, "debug", arguments);
+        Optional.ofNullable(debugArgument)
           .map(RegularArgument::expression)
           .flatMap(TreeUtils.toOptionalInstanceOfMapper(Name.class))
           .map(Name::name)
           .filter(TRUE_KEYWORD::equals)
-          .ifPresent(str -> ctx.addIssue(arguments.get(0), MESSAGE));
+          .ifPresent(str -> ctx.addIssue(debugArgument, MESSAGE));
       }
     });
 
@@ -89,6 +93,44 @@ public class DebugModeCheck extends PythonSubscriptionCheck {
         }
       }
     });
+
+    context.registerSyntaxNodeConsumer(Kind.ASSIGNMENT_STMT, ctx -> {
+      AssignmentStatement assignmentStatementTree = (AssignmentStatement) ctx.syntaxNode();
+      for (ExpressionList lhsExpression : assignmentStatementTree.lhsExpressions()) {
+        boolean isDebugProperties = lhsExpression.expressions().stream().anyMatch(DebugModeCheck::isModifyingFlaskDebugProperty);
+        if (isDebugProperties && isTrueLiteral(assignmentStatementTree.assignedValue())) {
+          ctx.addIssue(assignmentStatementTree, MESSAGE);
+        }
+      }
+    });
+
+  }
+
+  private static boolean isModifyingFlaskDebugProperty(Expression expression) {
+    if (expression.is(Kind.QUALIFIED_EXPR)) {
+      return Optional.of((QualifiedExpression) expression)
+        .map(QualifiedExpression::symbol)
+        .map(Symbol::fullyQualifiedName)
+        .filter(FLASK_APP_DEBUG_FQN::equals)
+        .isPresent();
+    } else if (expression.is(Kind.SUBSCRIPTION)) {
+      SubscriptionExpression subscriptionExpression = (SubscriptionExpression) expression;
+      return Optional.of(subscriptionExpression)
+        .map(SubscriptionExpression::object)
+        .flatMap(TreeUtils.toOptionalInstanceOfMapper(QualifiedExpression.class))
+        .map(QualifiedExpression::symbol)
+        .map(Symbol::fullyQualifiedName)
+        .filter(FLASK_APP_CONFIG_FQN::equals)
+        .isPresent() && Optional.of(subscriptionExpression.subscripts())
+        .map(ExpressionList::expressions)
+        .filter(list -> list.size() == 1)
+        .map(list -> list.get(0))
+        .flatMap(TreeUtils.toOptionalInstanceOfMapper(StringLiteral.class))
+        .map(StringLiteral::trimmedQuotesValue)
+        .filter("DEBUG"::equals)
+        .isPresent();
+    }
+    return false;
   }
 
   private static boolean isDebugIdentifier(Expression expr) {

@@ -33,6 +33,20 @@ def flask_test():
     app.config['DEBUG'] = True  # Noncompliant
     app.config.update({'DEBUG': True})  # FN This should be fixed as part of https://sonarsource.atlassian.net/browse/SONARPY-1541
 
-    app.run(debug=True)  # Noncompliant
-    app.run('0.0.0.0', 8080, True)  # Noncompliant
+    app.config['DEBUG'] = app.debug = True  # Noncompliant 2
 
+    app.conf['DEBUG'] = app.debug = True  # Noncompliant
+
+
+    app.run(debug=True)  # Noncompliant
+#           ^^^^^^^^^^
+    app.run('0.0.0.0', 8080, True)  # Noncompliant
+#                            ^^^^
+
+    app.config['DEBUG', 'debug'] = True
+
+    app.config['DEBUG'] = False
+    app.run(debug=False)
+    app.run()
+
+    app_not_defined.run(debug=True)
