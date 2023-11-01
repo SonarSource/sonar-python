@@ -127,7 +127,7 @@ def pysslCompliant():
 
   ciphers4 = 1
   ctx.set_ciphers(ciphers4)
-  ctx.set_ciphers(ciphers5)
+  ctx.set_ciphers(null_value)
   ctx.set_ciphers(ciphers, ciphers2)
 
 
