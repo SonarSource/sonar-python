@@ -25,6 +25,7 @@ import java.util.Optional;
 import javax.annotation.CheckForNull;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
+import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
@@ -47,58 +48,56 @@ public class DebugModeCheck extends PythonSubscriptionCheck {
   private static final String FLASK_APP_CONFIG_FQN = "flask.app.Flask.config";
   public static final String FLASK_APP_DEBUG_FQN = "flask.app.Flask.debug";
   public static final String TRUE_KEYWORD = "True";
-
   private static final String MESSAGE = "Make sure this debug feature is deactivated before delivering the code in production.";
   private static final List<String> debugProperties = Arrays.asList("DEBUG", "DEBUG_PROPAGATE_EXCEPTIONS");
   private static final List<String> settingFiles = Arrays.asList("global_settings.py", "settings.py");
 
   @Override
   public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(Kind.CALL_EXPR, ctx -> {
-      CallExpression callExpression = (CallExpression) ctx.syntaxNode();
-      List<Argument> arguments = callExpression.arguments();
-      if (!(callExpression.callee() instanceof QualifiedExpression)) {
-        return;
-      }
+    context.registerSyntaxNodeConsumer(Kind.CALL_EXPR, DebugModeCheck::callExpressionConsumer);
+    context.registerSyntaxNodeConsumer(Kind.ASSIGNMENT_STMT, DebugModeCheck::assignmentStatementConsumer);
+  }
 
-//      LOG.info(getQualifiedName(callExpression));
-      if (DJANGO_CONFIGURE_FQN.equals(getQualifiedName(callExpression)) && !arguments.isEmpty()) {
-        arguments.stream().filter(DebugModeCheck::isDebugArgument).forEach(arg -> ctx.addIssue(arg, MESSAGE));
-      }
+  private static void callExpressionConsumer(SubscriptionContext ctx) {
+    CallExpression callExpression = (CallExpression) ctx.syntaxNode();
+    List<Argument> arguments = callExpression.arguments();
+    if (!(callExpression.callee() instanceof QualifiedExpression) || arguments.isEmpty()) {
+      return;
+    }
 
-      if (FLASK_RUN_FQN.equals(getQualifiedName(callExpression)) && !arguments.isEmpty()) {
-        RegularArgument debugArgument = TreeUtils.nthArgumentOrKeyword(2, "debug", arguments);
-        Optional.ofNullable(debugArgument)
-          .map(RegularArgument::expression)
-          .flatMap(TreeUtils.toOptionalInstanceOfMapper(Name.class))
-          .map(Name::name)
-          .filter(TRUE_KEYWORD::equals)
-          .ifPresent(str -> ctx.addIssue(debugArgument, MESSAGE));
-      }
-    });
+    if (DJANGO_CONFIGURE_FQN.equals(getQualifiedName(callExpression))) {
+      arguments.stream().filter(DebugModeCheck::isDebugArgument).forEach(arg -> ctx.addIssue(arg, MESSAGE));
+    }
 
-    context.registerSyntaxNodeConsumer(Kind.ASSIGNMENT_STMT, ctx -> {
-      if (!settingFiles.contains(ctx.pythonFile().fileName())) {
-        return;
-      }
-      AssignmentStatement assignmentStatementTree = (AssignmentStatement) ctx.syntaxNode();
-      for (ExpressionList lhsExpression : assignmentStatementTree.lhsExpressions()) {
-        boolean isDebugProperties = lhsExpression.expressions().stream().anyMatch(DebugModeCheck::isDebugIdentifier);
-        if (isDebugProperties && isTrueLiteral(assignmentStatementTree.assignedValue())) {
-          ctx.addIssue(assignmentStatementTree, MESSAGE);
-        }
-      }
-    });
+    if (FLASK_RUN_FQN.equals(getQualifiedName(callExpression))) {
+      RegularArgument debugArgument = TreeUtils.nthArgumentOrKeyword(2, "debug", arguments);
+      Optional.ofNullable(debugArgument)
+        .map(RegularArgument::expression)
+        .flatMap(TreeUtils.toOptionalInstanceOfMapper(Name.class))
+        .map(Name::name)
+        .filter(TRUE_KEYWORD::equals)
+        .ifPresent(str -> ctx.addIssue(debugArgument, MESSAGE));
+    }
+  }
 
-    context.registerSyntaxNodeConsumer(Kind.ASSIGNMENT_STMT, ctx -> {
-      AssignmentStatement assignmentStatementTree = (AssignmentStatement) ctx.syntaxNode();
-      for (ExpressionList lhsExpression : assignmentStatementTree.lhsExpressions()) {
-        boolean isDebugProperties = lhsExpression.expressions().stream().anyMatch(DebugModeCheck::isModifyingFlaskDebugProperty);
-        if (isDebugProperties && isTrueLiteral(assignmentStatementTree.assignedValue())) {
-          ctx.addIssue(assignmentStatementTree, MESSAGE);
-        }
+  private static void assignmentStatementConsumer(SubscriptionContext ctx) {
+    AssignmentStatement assignmentStatementTree = (AssignmentStatement) ctx.syntaxNode();
+    for (ExpressionList lhsExpression : assignmentStatementTree.lhsExpressions()) {
+      boolean isModifyingDebugProperty = isFlaskDebugProperties(lhsExpression)
+        || isGlobalDebugProperties(lhsExpression, ctx);
+      if (isModifyingDebugProperty && isTrueLiteral(assignmentStatementTree.assignedValue())) {
+        ctx.addIssue(assignmentStatementTree, MESSAGE);
       }
-    });
+    }
+  }
+
+  private static boolean isGlobalDebugProperties(ExpressionList expressionList, SubscriptionContext ctx) {
+    return expressionList.expressions().stream().anyMatch(DebugModeCheck::isDebugIdentifier)
+      && settingFiles.contains(ctx.pythonFile().fileName());
+  }
+
+  private static boolean isFlaskDebugProperties(ExpressionList expressionList) {
+    return expressionList.expressions().stream().anyMatch(DebugModeCheck::isModifyingFlaskDebugProperty);
 
   }
 
