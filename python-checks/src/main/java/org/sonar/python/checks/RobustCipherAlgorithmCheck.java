@@ -19,14 +19,25 @@
  */
 package org.sonar.python.checks;
 
+import java.util.Arrays;
 import java.util.HashSet;
-import static java.util.Arrays.asList;
-
+import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Stream;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.CallExpression;
+import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.tree.StringLiteralImpl;
+import org.sonar.python.tree.TreeUtils;
+
+import static java.util.Arrays.asList;
 
 // https://jira.sonarsource.com/browse/RSPEC-5547 (general)
 // https://jira.sonarsource.com/browse/RSPEC-5552 (python-specific)
@@ -35,6 +46,18 @@ public class RobustCipherAlgorithmCheck extends PythonSubscriptionCheck {
 
   private static final String MESSAGE = "Use a strong cipher algorithm.";
   private static final HashSet<String> sensitiveCalleeFqns = new HashSet<>();
+
+  private static final Set<String> INSECURE_CIPHERS = Set.of(
+    "NULL",
+    "RC2",
+    "RC4",
+    "DES",
+    "3DES",
+    "MD5",
+    "SHA"
+  );
+
+  public static final String SSL_SET_CIPHERS_FQN = "ssl.SSLContext.set_ciphers";
 
   static {
     // `pycryptodomex`, `pycryptodome`, and `pycrypto` all share the same names of the algorithms,
@@ -63,14 +86,46 @@ public class RobustCipherAlgorithmCheck extends PythonSubscriptionCheck {
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, subscriptionContext -> {
       CallExpression callExpr = (CallExpression) subscriptionContext.syntaxNode();
-      Symbol calleeSymbol = callExpr.calleeSymbol();
-      if (calleeSymbol != null) {
-        String fqn = calleeSymbol.fullyQualifiedName();
-        if (fqn != null && sensitiveCalleeFqns.contains(fqn)) {
-          subscriptionContext.addIssue(callExpr.callee(), MESSAGE);
-        }
-      }
-    });
+      Optional.ofNullable(callExpr)
+        .map(CallExpression::calleeSymbol)
+        .map(Symbol::fullyQualifiedName)
+        .filter(fqn -> sensitiveCalleeFqns.contains(fqn) ||
+          (SSL_SET_CIPHERS_FQN.equals(fqn) && hasArgumentWithSensitiveAlgorithm(callExpr)))
+        .ifPresent(fqn -> subscriptionContext.addIssue(callExpr.callee(), MESSAGE));
+        });
   }
+
+
+  private static boolean hasArgumentWithSensitiveAlgorithm(CallExpression callExpression) {
+    return Optional.of(callExpression.arguments())
+      .filter(list -> list.size() == 1)
+      .map(list -> list.get(0))
+      .flatMap(TreeUtils.toOptionalInstanceOfMapper(RegularArgument.class))
+      .map(RegularArgument::expression)
+      .map(RobustCipherAlgorithmCheck::unpackArgument)
+      .filter(RobustCipherAlgorithmCheck::containsInsecureCipher)
+      .isPresent();
+  }
+
+  @CheckForNull
+  private static String unpackArgument(@Nullable Expression expression) {
+    if (expression == null) {
+      return null;
+    } else if (expression.is(Tree.Kind.STRING_LITERAL)) {
+      return ((StringLiteralImpl) expression).trimmedQuotesValue();
+    } else if (expression.is(Tree.Kind.NAME)) {
+      return unpackArgument(Expressions.singleAssignedValue((Name) expression));
+    } else {
+      return null;
+    }
+  }
+
+  private static boolean containsInsecureCipher(String ciphers) {
+    return Stream.of(ciphers)
+      .flatMap(str -> Arrays.stream(str.split(":")))
+      .flatMap(str -> Arrays.stream(str.split("-")))
+      .anyMatch(INSECURE_CIPHERS::contains);
+  }
+
 
 }
