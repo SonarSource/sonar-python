@@ -89,13 +89,13 @@ public class RobustCipherAlgorithmCheck extends PythonSubscriptionCheck {
         .map(CallExpression::calleeSymbol)
         .map(Symbol::fullyQualifiedName)
         .filter(fqn -> sensitiveCalleeFqns.contains(fqn) ||
-          (SSL_SET_CIPHERS_FQN.equals(fqn) && argumentSpecifiesRiskyAlgorithm(callExpr)))
+          (SSL_SET_CIPHERS_FQN.equals(fqn) && hasArgumentWithSensitiveAlgorithm(callExpr)))
         .ifPresent(fqn -> subscriptionContext.addIssue(callExpr.callee(), MESSAGE));
         });
   }
 
 
-  private static boolean argumentSpecifiesRiskyAlgorithm(CallExpression callExpression) {
+  private static boolean hasArgumentWithSensitiveAlgorithm(CallExpression callExpression) {
     return Optional.of(callExpression.arguments())
       .filter(list -> list.size() == 1)
       .map(list -> list.get(0))
