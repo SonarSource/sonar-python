@@ -5,7 +5,19 @@
   <li> It reduces code readability as developers will have a hard time knowing where names come from. </li>
   <li> It clutters the local namespace, which makes debugging more difficult. </li>
 </ul>
-<p>Remember that imported names can change when you update your dependencies. A wildcard import which works today might be broken tomorrow.</p>
+<p>Remember that imported names can change when you update your dependencies. A wildcard import that works today might be broken tomorrow.</p>
+<h3>Exceptions</h3>
+<p>No issue will be raised in <code>__init__.py</code> files. Wildcard imports are a common way of populating these modules.</p>
+<p>No issue will be raised in modules doing only imports. Local modules are sometimes created as a proxy for third-party modules.</p>
+<pre>
+# file: mylibrary/pyplot.py
+try:
+    from guiqwt.pyplot import *  # Ok
+except Exception:
+    from matplotlib.pyplot import *  # Ok
+</pre>
+<p>Just keep in mind that wildcard imports might still create issues in these cases. It’s always better to import only what you need.</p>
+<h2>How to fix it</h2>
 <p>There are two ways to avoid a wildcard import:</p>
 <ul>
   <li> Replace it with <code>import mymodule</code> and access module members as <code>mymodule.myfunction</code>. If the module name is too long,
@@ -13,14 +25,15 @@
   <li> List every imported name. If necessary import statements can be split on multiple lines using parentheses (preferred solution) or backslashes.
   </li>
 </ul>
-<h3>Noncompliant code example</h3>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
 <pre>
 from math import *  # Noncompliant
 def exp(x):
     pass
 print(exp(0))   # "None" will be printed
 </pre>
-<h3>Compliant solution</h3>
+<h4>Compliant solution</h4>
 <pre>
 import math
 def exp(x):
@@ -34,17 +47,6 @@ def exp(x):
     pass
 print(m_exp(0))   # "1.0" will be printed
 </pre>
-<h3>Exceptions</h3>
-<p>No issue will be raised in <code>__init__.py</code> files. Wildcard imports are a common way of populating these modules.</p>
-<p>No issue will be raised in modules doing only imports. Local modules are sometimes created as a proxy for third-party modules.</p>
-<pre>
-# file: mylibrary/pyplot.py
-try:
-    from guiqwt.pyplot import *  # Ok
-except Exception:
-    from matplotlib.pyplot import *  # Ok
-</pre>
-<p>Just keep in mind that wildcard imports might still create issues in these cases. It’s always better to import only what you need.</p>
 <h2>Resources</h2>
 <ul>
   <li> <a href="https://docs.python.org/3.8/reference/simple_stmts.html#import">Python documentation - The import statement</a> </li>

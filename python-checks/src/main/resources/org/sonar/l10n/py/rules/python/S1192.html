@@ -1,23 +1,6 @@
 <h2>Why is this an issue?</h2>
-<p>Duplicated string literals make the process of refactoring error-prone, since you must be sure to update all occurrences.</p>
-<p>On the other hand, constants can be referenced from many places, but only need to be updated in a single place.</p>
-<h3>Noncompliant code example</h3>
-<p>With the default threshold of 3:</p>
-<pre>
-def run():
-    prepare("this is a duplicate")  # Noncompliant - "this is a duplicate" is duplicated 3 times
-    execute("this is a duplicate")
-    release("this is a duplicate")
-</pre>
-<h3>Compliant solution</h3>
-<pre>
-ACTION_1 = "action1"
-
-def run():
-    prepare(ACTION_1)
-    execute(ACTION_1)
-    release(ACTION_1)
-</pre>
+<p>Duplicated string literals make the process of refactoring complex and error-prone, as any change would need to be propagated on all
+occurrences.</p>
 <h3>Exceptions</h3>
 <p>No issue will be raised on:</p>
 <ul>
@@ -25,13 +8,33 @@ def run():
   <li> strings with less than 5 characters </li>
   <li> strings with only letters, numbers and underscores </li>
 </ul>
-<pre>
+<h2>How to fix it</h2>
+<p>Instead, use constants to replace the duplicated string literals. Constants can be referenced from many places, but only need to be updated in a
+single place.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<p>With the default threshold of 3:</p>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+def run():
+    prepare("action1")  # Noncompliant - "action1" is duplicated 3 times
+    execute("action1")
+    release("action1")
+
 @app.route("/api/users/", methods=['GET', 'POST', 'PUT'])
 def users():
     pass
 
-@app.route("/api/projects/", methods=['GET', 'POST', 'PUT'])  # Compliant
+@app.route("/api/projects/", methods=['GET', 'POST', 'PUT'])  # Compliant - strings inside decorators are ignored
 def projects():
     pass
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+ACTION_1 = "action1"
+
+def run():
+    prepare(ACTION_1)
+    execute(ACTION_1)
+    release(ACTION_1)
 </pre>
 

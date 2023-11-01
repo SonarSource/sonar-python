@@ -1,92 +1,40 @@
+<p>This rule raises an issue when a generic exception (such as <code>Exception</code> or <code>BaseException</code>) is raised.</p>
 <h2>Why is this an issue?</h2>
 <p>Raising instances of <a href="https://docs.python.org/3/library/exceptions.html#Exception"><code>Exception</code></a> and <a
 href="https://docs.python.org/3/library/exceptions.html#BaseException"><code>BaseException</code></a> will have a negative impact on any code trying
 to catch these exceptions.</p>
-<p>First, the only way to handle differently multiple Exceptions is to check their message, which is error-prone and difficult to maintain.</p>
-<p>What’s more, it becomes difficult to catch only your exception. The best practice is to catch only exceptions which require a specific handling.
-When you raise <code>Exception</code> or <code>BaseException</code> in a function the caller will have to add an <code>except Exception</code> or
-<code>except BaseException</code> and re-raise all exceptions which were unintentionally caught. This can create tricky bugs when the caller forgets
-to re-raise exceptions such as <code>SystemExit</code> and the software cannot be stopped.</p>
-<p>It is recommended to either:</p>
+<p>From a consumer perspective, it is generally a best practice to only catch exceptions you intend to handle. Other exceptions should ideally not be
+caught and let to propagate up the stack trace so that they can be dealt with appropriately. When a generic exception is thrown, it forces consumers
+to catch exceptions they do not intend to handle, which they then have to re-raise.</p>
+<p>Besides, when working with a generic type of exception, the only way to distinguish between multiple exceptions is to check their message, which is
+error-prone and difficult to maintain. Legitimate exceptions may be unintentionally silenced and errors may be hidden.</p>
+<p>For instance, if an exception such as <code>SystemExit</code> is caught and not re-raised, it will prevent the program from stopping.</p>
+<p>When raising an exception, it is therefore recommended to raising the most specific exception possible so that it can be handled intentionally by
+consumers.</p>
+<h2>How to fix it</h2>
+<p>To fix this issue, make sure to throw specific exceptions that are relevant to the context in which they arise. It is recommended to either:</p>
 <ul>
-  <li> raise a more specific <a href="https://docs.python.org/3/library/exceptions.html">Built-in exception</a> when one matches. For example
+  <li> Raise a specific <a href="https://docs.python.org/3/library/exceptions.html">Built-in exception</a> when one matches. For example
   <code>TypeError</code> should be raised when the type of a parameter is not the one expected. </li>
-  <li> create a custom exception class deriving from <code>Exception</code> or one of its subclasses. A common practice for libraries is to have one
-  custom root exception class from which every other custom exception class inherits. It enables other projects using this library to catch all errors
-  coming from the library with a single "except" statement </li>
+  <li> Create a custom exception class deriving from <code>Exception</code> or one of its subclasses. </li>
 </ul>
-<p>This rule raises an issue when <code>Exception</code> or <code>BaseException</code> are raised.</p>
-<h3>Noncompliant code example</h3>
-<pre>
-def process1():
-    raise BaseException("Wrong user input for field X")  # Noncompliant
-
-def process2():
-    raise BaseException("Wrong configuration")  # Noncompliant
-
-def process3(param):
-    if not isinstance(param, int):
-        raise Exception("param should be an integer")  # Noncompliant
-
-def caller():
-    try:
-         process1()
-         process2()
-         process3()
-    except BaseException as e:
-        if e.args[0] == "Wrong user input for field X":
-            # process error
-            pass
-        elif e.args[0] == "Wrong configuration":
-            # process error
-            pass
-        else:
-            # re-raise other exceptions
-            raise
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+def check_value(value):
+    if value &lt; 0:
+        raise BaseException("Value cannot be negative") # Noncompliant: this will be difficult for consumers to handle
 </pre>
-<h3>Compliant solution</h3>
-<pre>
-class MyProjectError(Exception):
-    """Exception class from which every exception in this library will derive.
-         It enables other projects using this library to catch all errors coming
-         from the library with a single "except" statement
-    """
-    pass
-
-class BadUserInputError(MyProjectError):
-    """A specific error"""
-    pass
-
-class ConfigurationError(MyProjectError):
-    """A specific error"""
-    pass
-
-def process1():
-    raise BadUserInputError("Wrong user input for field X")
-
-def process2():
-    raise ConfigurationError("Wrong configuration")
-
-def process3(param):
-    if not isinstance(param, int):
-        raise TypeError("param should be an integer")
-
-def caller():
-    try:
-         process1()
-         process2()
-         process3()
-    except BadUserInputError as e:
-        # process error
-        pass
-    except ConfigurationError as e:
-        # process error
-        pass
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+def check_value(value):
+    if value &lt; 0:
+        raise ValueError("Value cannot be negative") # Compliant
 </pre>
 <h2>Resources</h2>
+<h3>Documentation</h3>
 <ul>
-  <li> PEP 352 - <a href="https://www.python.org/dev/peps/pep-0352/#exception-hierarchy-changes">Required Superclass for Exceptions</a> </li>
   <li> Python Documentation - <a href="https://docs.python.org/3/library/exceptions.html#BaseException">Built-in exceptions</a> </li>
-  <li> <a href="https://cwe.mitre.org/data/definitions/397">MITRE, CWE-397</a> - Declaration of Throws for Generic Exception </li>
+  <li> PEP 352 - <a href="https://www.python.org/dev/peps/pep-0352/#exception-hierarchy-changes">Required Superclass for Exceptions</a> </li>
 </ul>
 

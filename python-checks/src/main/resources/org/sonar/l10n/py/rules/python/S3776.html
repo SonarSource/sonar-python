@@ -1,14 +1,130 @@
+<p>This rule raises an issue when the code cognitive complexity of a function is above a certain threshold.</p>
 <h2>Why is this an issue?</h2>
-<p><a href="https://www.sonarsource.com/docs/CognitiveComplexity.pdf">Cognitive Complexity</a> is a measure of how hard the control flow of a function
-is to understand. Functions with high Cognitive Complexity will be difficult to maintain.</p>
+<p>Cognitive Complexity is a measure of how hard it is to understand the control flow of a unit of code. Code with high cognitive complexity is hard
+to read, understand, test, and modify.</p>
+<p>As a rule of thumb, high cognitive complexity is a sign that the code should be refactored into smaller, easier-to-manage pieces.</p>
+<h3>Which syntax in code does impact cognitive complexity score?</h3>
+<p>Here are the core concepts:</p>
+<ul>
+  <li> <strong>Cognitive complexity is incremented each time the code breaks the normal linear reading flow.</strong><br> This concerns, for example:
+  Loop structures, Conditionals, Catches, Switches, Jumps to label and mixed operators in condition. </li>
+  <li> <strong>Each nesting level adds a malus to the breaking call.</strong><br> During code reading, the deeper you go through nested layers, the
+  harder it becomes to keep the context in mind. </li>
+  <li> <strong>Method calls are free</strong><br> A well-picked method name is a summary of multiple lines of code. A reader can first explore a
+  high-level view of what the code is performing then go deeper and deeper by looking at called functions content.<br> <em>Note:</em> This does not
+  apply to recursive calls, those will increment cognitive score. </li>
+</ul>
+<p>The method of computation is fully detailed in the pdf linked in the resources.</p>
+<h3>What is the potential impact?</h3>
+<p>Developers spend more time reading and understanding code than writing it. High cognitive complexity slows down changes and increases the cost of
+maintenance.</p>
+<h2>How to fix it</h2>
+<p>Reducing cognitive complexity can be challenging.<br> Here are a few suggestions:</p>
+<ul>
+  <li> <strong>Extract complex conditions in a new function.</strong><br> Mixed operators in condition will increase complexity. Extracting the
+  condition in a new function with an appropriate name will reduce cognitive load. </li>
+  <li> <strong>Break down large functions.</strong><br> Large functions can be hard to understand and maintain. If a function is doing too many
+  things, consider breaking it down into smaller, more manageable functions. Each function should have a single responsibility. </li>
+  <li> <strong>Avoid deep nesting by returning early.</strong><br> To avoid the nesting of conditions, process exceptional cases first and return
+  early. </li>
+</ul>
+<h3>Code examples</h3>
+<p><strong>Extraction of a complex condition in a new function.</strong></p>
+<h4>Noncompliant code example</h4>
+<p>The code is using a complex condition and has a cognitive cost of 5.</p>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+def process_eligible_users(users):
+    for user in users:             # +1 (for)
+        if ((user.is_active and    # +1 (if) +1 (nested) +1 (multiple conditions)
+            user.has_profile) or   # +1 (mixed operator)
+            user.age &gt; 18 ):
+            user.process()
+</pre>
+<h4>Compliant solution</h4>
+<p>Even if the cognitive complexity of the whole program did not change, it is easier for a reader to understand the code of the
+<code>process_eligible_users</code> function, which now only has a cognitive cost of 3.</p>
+<pre data-diff-id="1" data-diff-type="compliant">
+def process_eligible_users(users):
+    for user in users:             # +1 (for)
+        if is_eligible_user(user): # +1 (if) +1 (nested)
+            user.process()
+
+def is_eligible_user(user):
+    return ((user.is_active and user.has_profile) or user.age &gt; 18) # +1 (multiple conditions) +1 (mixed operators)
+</pre>
+<p><strong>Break down large functions.</strong></p>
+<h4>Noncompliant code example</h4>
+<p><em>Note:</em> The code is simplified here, to illustrate the purpose. Please imagine there is more happening in the process.<br></p>
+<p>The bellow code has a cognitive complexity score of 8.</p>
+<pre data-diff-id="3" data-diff-type="noncompliant">
+def process_user(user):
+    if user.is_active():             # +1 (if)
+        if user.has_profile():       # +1 (if) +1 (nested)
+            ... # process active user with profile
+        else:                        # +1 (else)
+            ... # process active user without profile
+    else:                            # +1 (else)
+        if user.has_profile():       # +1 (if) +1 (nested)
+            ... # process inactive user with profile
+        else:                        # +1 (else)
+            ... # process inactive user without profile
+</pre>
+<p>This function could be refactored into smaller functions: The complexity is spread over multiple functions and the breaks in flow are no more
+nested.<br> The <code>process_user</code> has now a complexity score of two.</p>
+<h4>Compliant solution</h4>
+<pre data-diff-id="3" data-diff-type="compliant">
+def process_user(user):
+    if user.is_active():             # +1 (if)
+        process_active_user(user)
+    else:                            # +1 (else)
+        process_inactive_user(user)
+
+def process_active_user(user):
+    if user.has_profile():           # +1 (if) +1 (nested)
+        ... # process active user with profile
+    else:                            # +1 (else)
+        ... # process active user without profile
+
+def process_inactive_user(user):
+    if user.has_profile():           # +1 (if) +1 (nested)
+        ... # process inactive user with profile
+    else:                            # +1 (else)
+        ... # process inactive user without profile
+</pre>
+<p><strong>Avoid deep nesting by returning early.</strong></p>
+<h4>Noncompliant code example</h4>
+<p>The below code has a cognitive complexity of 6.</p>
+<pre data-diff-id="4" data-diff-type="noncompliant">
+def calculate(data):
+    if data is not None:  # +1 (if)
+        total = 0
+        for item in data: # +1 (for) +1 (nested)
+            if item &gt; 0:  # +1 (if)  +2 (nested)
+                total += item * 2
+        return total
+</pre>
+<h4>Compliant solution</h4>
+<p>Checking for the edge case first flattens the <code>if</code> statements and reduces the cognitive complexity to 4.</p>
+<pre data-diff-id="4" data-diff-type="compliant">
+def calculate(data):
+    if data is None:      # +1 (if)
+        return None
+    total = 0
+    for item in data:     # +1 (for)
+        if item &gt; 0:      # +1 (if) +1 (nested)
+            total += item * 2
+    return total
+</pre>
+<h3>Pitfalls</h3>
+<p>As this code is complex, ensure that you have unit tests that cover the code before refactoring.</p>
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> <a href="https://www.sonarsource.com/docs/CognitiveComplexity.pdf">Cognitive Complexity</a> </li>
+  <li> Sonar - <a href="https://www.sonarsource.com/docs/CognitiveComplexity.pdf">Cognitive Complexity</a> </li>
 </ul>
 <h3>Articles &amp; blog posts</h3>
 <ul>
-  <li> <a href="https://www.sonarsource.com/blog/5-clean-code-tips-for-reducing-cognitive-complexity/">5 Clean Code Tips for Reducing Cognitive
-  Complexity</a> </li>
+  <li> Sonar Blog - <a href="https://www.sonarsource.com/blog/5-clean-code-tips-for-reducing-cognitive-complexity/">5 Clean Code Tips for Reducing
+  Cognitive Complexity</a> </li>
 </ul>
 

@@ -1,26 +1,38 @@
 <h2>Why is this an issue?</h2>
-<p>A dead store happens when a local variable is assigned a value that is not read by any subsequent instruction. Calculating or retrieving a value
-only to then overwrite it or throw it away, could indicate a serious error in the code. Even if it’s not an error, it is at best a waste of resources.
-Therefore all calculated values should be used.</p>
-<h3>Noncompliant code example</h3>
-<pre>
+<p>Dead stores refer to assignments made to local variables that are subsequently never used or immediately overwritten. Such assignments are
+unnecessary and don’t contribute to the functionality or clarity of the code. They may even negatively impact performance. Removing them enhances code
+cleanliness and readability. Even if the unnecessary operations do not do any harm in terms of the program’s correctness, they are - at best - a waste
+of computing resources.</p>
+<h3>Exceptions</h3>
+<p>This rule ignores initializations to <code>-1</code>, <code>0</code>, <code>1</code>, <code>None</code>, <code>True</code>, <code>False</code> and
+<code>""</code>. No issue will be raised on unpacked variables.</p>
+<h2>How to fix it</h2>
+<p>Remove the unnecesarry assignment, then test the code to make sure that the right-hand side of a given assignment had no side effects (e.g. a
+method that writes certain data to a file and returns the number of written bytes).</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 def func(a, b, compute):
     i = a + b  # Noncompliant; calculation result not used before value is overwritten
     i = compute()
     return i
 </pre>
-<h3>Compliant solution</h3>
-<pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
 def func(a, b, compute):
     i = a + b
     i += compute()
     return i
 </pre>
-<h3>Exceptions</h3>
-<p>This rule ignores initializations to -1, 0, 1, <code>None</code>, <code>True</code>, <code>False</code> and <code>""</code>.</p>
-<p>No issue will be raised on unpacked variables.</p>
 <h2>Resources</h2>
+<h3>Standards</h3>
 <ul>
-  <li> <a href="https://cwe.mitre.org/data/definitions/563">MITRE, CWE-563</a> - Assignment to Variable without Use ('Unused Variable') </li>
+  <li> CWE - <a href="https://cwe.mitre.org/data/definitions/563">563 - Assignment to Variable without Use ('Unused Variable')</a> </li>
+</ul>
+<h3>Related rules</h3>
+<ul>
+  <li> {rule:python:S1763} - All code should be reachable </li>
+  <li> {rule:python:S3516} - Functions returns should not be invariant </li>
+  <li> {rule:python:S3626} - Jump statements should not be redundant </li>
 </ul>
 

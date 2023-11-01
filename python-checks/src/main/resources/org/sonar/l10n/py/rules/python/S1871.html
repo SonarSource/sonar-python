@@ -1,8 +1,8 @@
 <h2>Why is this an issue?</h2>
-<p>Having two branches in the same <code>if</code> structure with the same implementation is at best duplicate code, and at worst a coding error. If
-the same logic is truly needed for both instances, then they should be combined.</p>
-<h3>Noncompliant code example</h3>
-<pre>
+<p>When the same code is duplicated in two or more separate branches of a conditional, it can make the code harder to understand, maintain, and can
+potentially introduce bugs if one instance of the code is changed but others are not.</p>
+<p>Having two branches in the same <code>if</code> structure with the same implementation is at best duplicate code, and at worst a coding error.</p>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 if 0 &lt;= a &lt; 10:
     do_first()
     do_second()
@@ -11,6 +11,14 @@ elif 10 &lt;= a &lt; 20:
 elif 20 &lt;= a &lt; 50:
     do_first()         # Noncompliant; duplicates first condition
     do_second()
+</pre>
+<p>If the same logic is needed for both instances, then the conditions should be combined.</p>
+<pre data-diff-id="1" data-diff-type="compliant">
+if (0 &lt;= a &lt; 10) or (20 &lt;= a &lt; 50):
+    do_first()
+    do_second()
+elif 10 &lt;= a &lt; 20:
+    do_the_other_thing()
 </pre>
 <h3>Exceptions</h3>
 <p>Blocks in an <code>if</code> chain that contain a single line of code are ignored.</p>
@@ -22,7 +30,7 @@ elif 10 &lt;= a &lt; 20:
 elif 20 &lt;= a &lt; 50:
     do_first()         # no issue, usually this is done on purpose to increase the readability
 </pre>
-<p>But this exception does not apply to <code>if</code> chains without <code>else</code>-s when all branches have the same single line of code. In
+<p>But this exception does not apply to <code>if</code> chains without <code>else</code>-s when all branches have the same single line of code. In the
 case of <code>if</code> chains with <code>else</code>-s rule {rule:python:S3923} raises a bug.</p>
 <pre>
 if 0 &lt;= a &lt; 10:
@@ -30,4 +38,9 @@ if 0 &lt;= a &lt; 10:
 elif 20 &lt;= a &lt; 50:
     do_first()         # Noncompliant, this might have been done on purpose but probably not
 </pre>
+<h2>Resources</h2>
+<h3>Related rules</h3>
+<ul>
+  <li> {rule:python:S3923} - All branches in a conditional structure should not have exactly the same implementation </li>
+</ul>
 
