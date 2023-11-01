@@ -23,8 +23,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import javax.annotation.CheckForNull;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.symbols.Symbol;
@@ -44,8 +42,6 @@ import org.sonar.python.tree.TreeUtils;
 @Rule(key = DebugModeCheck.CHECK_KEY)
 public class DebugModeCheck extends PythonSubscriptionCheck {
   public static final String CHECK_KEY = "S4507";
-  private static final Logger LOG = LoggerFactory.getLogger(DebugModeCheck.class);
-
   public static final String DJANGO_CONFIGURE_FQN = "django.conf.settings.configure";
   private static final String FLASK_RUN_FQN = "flask.app.Flask.run";
   private static final String FLASK_APP_CONFIG_FQN = "flask.app.Flask.config";
