@@ -108,10 +108,11 @@ public class FStringChannel extends Channel<Lexer> {
     int column = code.getColumnPosition();
     FStringState.Mode currentMode = state.getTokenizerMode();
     while (code.charAt(0) != EOF) {
-      // In a raw string we consider \ as a character not as escape so we consume it as is
-      if (currentMode == Mode.FSTRING_MODE && state.isRawString && code.charAt(0) == '\\') {
+      // In a raw string we consider \ as a character not as escape so we consume it as is. 
+      // Except for quotes which will be consumed as an escaped char
+      if (currentMode == Mode.FSTRING_MODE && isRawStringBackSlash(code, state)) {
         sb.append((char) code.pop());
-      // If we encounter an escaped char we can consume the next two chars directly
+        // If we encounter an escaped char we can consume the next two chars directly
       } else if (currentMode == Mode.FSTRING_MODE && isEscapedChar(code)) {
         sb.append((char) code.pop());
         sb.append((char) code.pop());
@@ -150,6 +151,10 @@ public class FStringChannel extends Channel<Lexer> {
         return true;
       }
     return false;
+  }
+
+  private static boolean isRawStringBackSlash(CodeReader code, FStringState state) {
+    return state.isRawString && code.charAt(0) == '\\' && !QUOTES.contains(code.charAt(1));
   }
 
   private static boolean isUnicodeChar(StringBuilder sb) {
