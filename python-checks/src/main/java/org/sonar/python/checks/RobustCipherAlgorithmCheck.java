@@ -25,6 +25,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
+import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.symbols.Symbol;
@@ -107,7 +108,7 @@ public class RobustCipherAlgorithmCheck extends PythonSubscriptionCheck {
   }
 
   @CheckForNull
-  private static String unpackArgument(@CheckForNull Expression expression) {
+  private static String unpackArgument(@Nullable Expression expression) {
     if (expression == null) {
       return null;
     } else if (expression.is(Tree.Kind.STRING_LITERAL)) {
