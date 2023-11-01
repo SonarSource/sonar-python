@@ -113,6 +113,67 @@ additional code or configuration.</p>
 <h4>Working with self-signed certificates or non-standard CAs</h4>
 <p>In some cases, you might need to work with a server using a self-signed certificate, or a certificate issued by a CA not included in your trusted
 roots. Rather than disabling certificate validation in your code, you can add the necessary certificates to your trust store.</p>
+<h2>How to fix it in HTTPX</h2>
+<h3>Code examples</h3>
+<p>The following code contains examples of disabled certificate validation.</p>
+<p>The certificate validation gets disabled by setting <code>verify</code> to <code>False</code>. To enable validation set the value to
+<code>True</code> or do not set <code>verify</code> at all to use the secure default value.</p>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="31" data-diff-type="noncompliant">
+import httpx
+
+httpx.get('https://example.com', verify=False)  # Noncompliant
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="31" data-diff-type="compliant">
+import httpx
+
+# By default, certificate validation is enabled
+httpx.get('https://example.com')
+</pre>
+<h3>How does this work?</h3>
+<p>Addressing the vulnerability of disabled TLS certificate validation primarily involves re-enabling the default validation.</p>
+<p>To avoid running into problems with invalid certificates, consider the following sections.</p>
+<h4>Using trusted certificates</h4>
+<p>If possible, always use a certificate issued by a well-known, trusted CA for your server. Most programming environments come with a predefined list
+of trusted root CAs, and certificates issued by these authorities are validated automatically. This is the best practice, and it requires no
+additional code or configuration.</p>
+<h4>Working with self-signed certificates or non-standard CAs</h4>
+<p>In some cases, you might need to work with a server using a self-signed certificate, or a certificate issued by a CA not included in your trusted
+roots. Rather than disabling certificate validation in your code, you can add the necessary certificates to your trust store.</p>
+<h2>How to fix it in aiohttp</h2>
+<h3>Code examples</h3>
+<p>The following code contains examples of disabled certificate validation.</p>
+<p>The certificate validation gets disabled by setting <code>verify_ssl</code> to <code>False</code>. To enable validation set the value to
+<code>True</code> or do not set <code>verify_ssl</code> at all to use the secure default value.</p>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="41" data-diff-type="noncompliant">
+import aiohttp
+
+async def example():
+  async with aiohttp.ClientSession() as session:
+    session.get("https://example.com", verify_ssl=False) # Noncompliant
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="41" data-diff-type="compliant">
+import aiohttp
+
+# By default, certificate validation is enabled
+
+async def example():
+  async with aiohttp.ClientSession() as session:
+    session.get("https://example.com")
+</pre>
+<h3>How does this work?</h3>
+<p>Addressing the vulnerability of disabled TLS certificate validation primarily involves re-enabling the default validation.</p>
+<p>To avoid running into problems with invalid certificates, consider the following sections.</p>
+<h4>Using trusted certificates</h4>
+<p>If possible, always use a certificate issued by a well-known, trusted CA for your server. Most programming environments come with a predefined list
+of trusted root CAs, and certificates issued by these authorities are validated automatically. This is the best practice, and it requires no
+additional code or configuration.</p>
+<h4>Working with self-signed certificates or non-standard CAs</h4>
+<p>In some cases, you might need to work with a server using a self-signed certificate, or a certificate issued by a CA not included in your trusted
+roots. Rather than disabling certificate validation in your code, you can add the necessary certificates to your trust store.</p>
 <h2>Resources</h2>
 <h3>Standards</h3>
 <ul>

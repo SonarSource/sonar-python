@@ -1,15 +1,22 @@
 <h2>Why is this an issue?</h2>
-<p>Sharing some naming conventions is a key point to make it possible for a team to efficiently collaborate. This rule allows to check that field
-names match a provided regular expression.</p>
-<h3>Noncompliant code example</h3>
-<p>With the default regular expression <code>^[_a-z][_a-z0-9]*$</code>:</p>
-<pre>
+<p>A naming convention in software development is a set of guidelines for naming code elements like variables, functions, and classes.</p>
+<p>The goal of a naming convention is to make the code more readable and understandable, which makes it easier to maintain and debug. It also ensures
+consistency in the code, especially when multiple developers are working on the same project.</p>
+<p>This rule checks that field names match a provided regular expression.</p>
+<p>Using the regular expression <code>^[_a-z][_a-z0-9]*$</code>, the noncompliant code below:</p>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 class MyClass:
   myField = 1
 </pre>
-<h3>Compliant solution</h3>
-<pre>
+<p>Should be replaced with:</p>
+<pre data-diff-id="1" data-diff-type="compliant">
 class MyClass:
   my_field = 1
 </pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Python Enhancement Proposals - <a href="https://peps.python.org/pep-0008/#naming-conventions">PEP8 - Naming Conventions</a> </li>
+  <li> Wikipedia - <a href="https://en.wikipedia.org/wiki/Naming_convention_(programming)">Naming Convention (programming)</a> </li>
+</ul>
 

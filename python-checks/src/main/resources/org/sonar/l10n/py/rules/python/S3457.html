@@ -1,20 +1,28 @@
 <h2>Why is this an issue?</h2>
-<p>Formatting strings, either with the <code>%</code> operator or <code>str.format</code> method, requires a valid string and arguments matching this
-string’s replacement fields.</p>
-<p>This also applies to loggers from the <code>logging</code> module. Internally they use <code>%-formatting</code>. The only difference is that they
-will log an error instead of raising an exception when provided arguments are invalid.</p>
-<p>Formatted string literals, also called "f-strings", are generally simpler to use, and any syntax mistake will fail at compile time. However it is
-easy to forget curly braces and it won’t raise any error.</p>
+<p>A format string is a string that contains placeholders, usually represented by special characters such as "%s" or "{}", depending on the technology
+in use. These placeholders are replaced by values when the string is printed or logged. Thus, it is required that a string is valid and arguments
+match replacement fields in this string.</p>
+<p>This applies to <a href="https://docs.python.org/3/tutorial/inputoutput.html#old-string-formatting">the % operator</a>, the <a
+href="https://docs.python.org/3/tutorial/inputoutput.html#the-string-format-method">str.format</a> method, and loggers from the <a
+href="https://docs.python.org/3/library/logging.html">logging</a> module. Internally, the latter use the <code>%-formatting</code>. The only
+difference is that they will log an error instead of raising an exception when the provided arguments are invalid.</p>
+<p>Formatted string literals (also called "f-strings"; available since Python 3.6) are generally simpler to use, and any syntax mistake will cause a
+failure at compile time. However, it is easy to forget curly braces, which will not lead to any detectable errors.</p>
 <p>This rule raises an issue when:</p>
 <ul>
-  <li> A string formatted with <code>%</code> will not return the expected string because some arguments are not used. </li>
-  <li> A string formatted with <code>str.format</code> will not return the expected string because some arguments are not used. </li>
-  <li> An "f-string" doesn’t contain any replacement field, which probably means that some curly braces are missing. </li>
+  <li> A string formatted with <code>%</code> will not return the expected text because some arguments are unused. </li>
+  <li> A string formatted with <code>str.format</code> will not return the expected string because some arguments are unused. </li>
+  <li> An "f-string" doesn’t contain any replacement field, which probably means some curly braces are missing. </li>
   <li> Loggers will log an error because their message is not formatted properly. </li>
 </ul>
 <p>Rule {rule:python:S2275} covers cases where formatting a string will raise an exception.</p>
-<h3>Noncompliant code example</h3>
-<pre>
+<h2>How to fix it</h2>
+<p>A <code>printf-</code>-style format string is a string that contains placeholders, which are replaced by values when the string is printed or
+logged. Mismatch in the format specifiers and the arguments provided can lead to incorrect strings being created.</p>
+<p>To avoid issues, a developer should ensure that the provided arguments match format specifiers.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 "Error %(message)s" % {"message": "something failed", "extra": "some dead code"}  # Noncompliant. Remove the unused argument "extra" or add a replacement field.
 
 "Error: User {} has not been able to access []".format("Alice", "MyFile")  # Noncompliant. Remove 1 unexpected argument or add a replacement field.
@@ -26,8 +34,8 @@ message = f"Error: User [user] has not been able to access [resource]"  # Noncom
 import logging
 logging.error("Error: User %s has not been able to access %s", "Alice")  # Noncompliant. Add 1 missing argument.
 </pre>
-<h3>Compliant solution</h3>
-<pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
 "Error %(message)s" % {"message": "something failed"}
 
 "Error: User {} has not been able to access {}".format("Alice", "MyFile")

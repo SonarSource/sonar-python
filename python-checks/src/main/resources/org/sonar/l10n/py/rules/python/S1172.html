@@ -1,26 +1,33 @@
 <h2>Why is this an issue?</h2>
-<p>Unused parameters are misleading. Whatever the value passed to such parameters is, the behavior will be the same.</p>
-<h3>Noncompliant code example</h3>
-<pre>
-def do_something(a, b): # "b" is unused
-  return compute(a)
-</pre>
-<h3>Compliant solution</h3>
-<pre>
-def do_something(a):
-  return compute(a)
-</pre>
+<p>A typical code smell known as unused function parameters refers to parameters declared in a function but not used anywhere within the function’s
+body. While this might seem harmless at first glance, it can lead to confusion and potential errors in your code. Disregarding the values passed to
+such parameters, the function’s behavior will be the same, but the programmer’s intention won’t be clearly expressed anymore. Therefore, removing
+function parameters that are not being utilized is considered best practice.</p>
 <h3>Exceptions</h3>
-<p>Overriding methods are ignored.</p>
+<p>This rule ignores overriding methods.</p>
 <pre>
 class C(B):
   def do_something(self, a, b): # no issue reported on b
     return self.compute(a)
-}
 </pre>
-<p>Throwaway variables <code>_</code>.</p>
+<p>This rule also ignores variables named with a single underscore <code>_</code>. Such naming is a common practice for indicating that the variable
+is insignificant.</p>
 <pre>
 def do_something(a, _): # no issue reported on _
+  return compute(a)
+</pre>
+<h2>How to fix it</h2>
+<p>Having unused function parameters in your code can lead to confusion and misunderstanding of a developer’s intention. They reduce code readability
+and introduce the potential for errors. To avoid these problems, developers should remove unused parameters from function declarations.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+def do_something(a, b): # "b" is unused
+  return compute(a)
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+def do_something(a):
   return compute(a)
 </pre>
 

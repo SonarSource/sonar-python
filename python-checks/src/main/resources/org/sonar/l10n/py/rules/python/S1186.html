@@ -1,47 +1,14 @@
 <h2>Why is this an issue?</h2>
-<p>There are several reasons for a function or a method not to have a body:</p>
+<p>An empty method is generally considered bad practice and can lead to confusion, readability, and maintenance issues. Empty methods bring no
+functionality and are misleading to others as they might think the method implementation fulfills a specific and identified requirement.</p>
+<p>There are several reasons for a method not to have a body:</p>
 <ul>
   <li> It is an unintentional omission, and should be fixed to prevent an unexpected behavior in production. </li>
   <li> It is not yet, or never will be, supported. In this case an exception should be thrown. </li>
   <li> The method is an intentionally-blank override. In this case a nested comment should explain the reason for the blank override. </li>
 </ul>
-<h3>Noncompliant code example</h3>
-<pre>
-def myfunc1(foo="Noncompliant"):
-    pass
-
-class MyClass:
-    def mymethod1(self, foo="Noncompliant"):
-        pass
-</pre>
-<h3>Compliant solution</h3>
-<pre>
-def myfunc1():
-    pass  # comment explaining why this function is empty
-
-def myfunc2():
-    raise NotImplementedError()
-
-def myfunc3():
-    """
-    Docstring explaining why this function is empty.
-    """
-
-class MyClass:
-    def mymethod1(self):
-        pass  # comment explaining why this function is empty
-
-    def mymethod2(self):
-        raise NotImplementedError()
-
-    def mymethod3(self):
-        """
-        Docstring explaining why this method is empty. Note that this is not recommended for classes
-        which are meant to be subclassed.
-        """
-</pre>
 <h3>Exceptions</h3>
-<p>No issue will be raised when the empty method is abstract and meant to be overriden in a subclass, i.e. it is decorated with
+<p>No issue will be raised when the empty method is abstract and meant to be overridden in a subclass, i.e. it is decorated with
 <code>abc.abstractmethod</code>, <code>abc.abstractstaticmethod</code>, <code>abc.abstractclassmethod</code> or <code>abc.abstractproperty</code>.
 Note however that these methods should normally have a docstring explaining how subclasses should implement these methods.</p>
 <pre>
@@ -63,5 +30,34 @@ class MyAbstractClass(abc.ABC):
     @abc.abstractstaticmethod
     def mystaticmethod():
         pass
+</pre>
+<h2>How to fix it</h2>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+def shouldNotBeEmpty():  # Noncompliant - method is empty
+    pass
+
+def notImplemented():  # Noncompliant - method is empty
+    pass
+
+def emptyOnPurpose():  # Noncompliant - method is empty
+    pass
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+def shouldNotBeEmpty():
+    doSomething()
+
+def notImplemented():
+    raise NotImplementedError("notImplemented() cannot be performed because ...")
+
+def emptyOnPurpose():
+    pass  # comment explaining why the method is empty
+
+def emptyOnPurposeBis():
+    """
+    Docstring explaining why this function is empty.
+    """
 </pre>
 
