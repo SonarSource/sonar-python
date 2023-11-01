@@ -27,7 +27,6 @@ import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
-import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
@@ -89,20 +88,12 @@ public class RobustCipherAlgorithmCheck extends PythonSubscriptionCheck {
       Optional.ofNullable(callExpr)
         .map(CallExpression::calleeSymbol)
         .map(Symbol::fullyQualifiedName)
-        .filter(fqn -> sensitiveCalleeFqns.contains(fqn) || SSL_SET_CIPHERS_FQN.equals(fqn))
-        .ifPresent(str -> addMethodSpecificIssue(subscriptionContext, callExpr, str));
-    });
+        .filter(fqn -> sensitiveCalleeFqns.contains(fqn) ||
+          (SSL_SET_CIPHERS_FQN.equals(fqn) && argumentSpecifiesRiskyAlgorithm(callExpr)))
+        .ifPresent(fqn -> subscriptionContext.addIssue(callExpr.callee(), MESSAGE));
+        });
   }
 
-  private static void addMethodSpecificIssue(
-    SubscriptionContext subscriptionContext,
-    CallExpression callExpression,
-    String fullyQualifiedName
-  ) {
-    if (!SSL_SET_CIPHERS_FQN.equals(fullyQualifiedName) || argumentSpecifiesRiskyAlgorithm(callExpression)) {
-      subscriptionContext.addIssue(callExpression.callee(), MESSAGE);
-    }
-  }
 
   private static boolean argumentSpecifiesRiskyAlgorithm(CallExpression callExpression) {
     return Optional.of(callExpression.arguments())
