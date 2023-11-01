@@ -12,6 +12,9 @@ def django_test():
     settings.otherFn(DEBUG=True)  # OK
     settings.configure()
 
+    args = {'DEBUG': True}
+    settings.configure(**args) # FN No implementation is done currently for the unpacking expression.
+
     configure(DEBUG=True) # OK
     configure() # OK
     foo.configure(DEBUG=True) # OK
@@ -34,9 +37,10 @@ def flask_test():
     app.config.update({'DEBUG': True})  # FN This should be fixed as part of https://sonarsource.atlassian.net/browse/SONARPY-1541
 
     app.config['DEBUG'] = app.debug = True  # Noncompliant 2
+#   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
     app.conf['DEBUG'] = app.debug = True  # Noncompliant
-
+#   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
     app.run(debug=True)  # Noncompliant
 #           ^^^^^^^^^^
