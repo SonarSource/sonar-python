@@ -92,7 +92,7 @@ public class RobustCipherAlgorithmCheck extends PythonSubscriptionCheck {
         .filter(fqn -> sensitiveCalleeFqns.contains(fqn) ||
           (SSL_SET_CIPHERS_FQN.equals(fqn) && hasArgumentWithSensitiveAlgorithm(callExpr)))
         .ifPresent(fqn -> subscriptionContext.addIssue(callExpr.callee(), MESSAGE));
-        });
+    });
   }
 
 
