@@ -207,6 +207,7 @@ public final class CheckList {
       GenericClassTypeParameterCheck.class,
       GenericExceptionRaisedCheck.class,
       GenericFunctionTypeParameterCheck.class,
+      GenericTypeStatementCheck.class,
       GenericTypeWithoutArgumentCheck.class,
       GraphemeClustersInClassesCheck.class,
       GroupReplacementCheck.class,
