@@ -81,14 +81,14 @@ public class DebugModeCheck extends PythonSubscriptionCheck {
     AssignmentStatement assignmentStatementTree = (AssignmentStatement) ctx.syntaxNode();
     for (ExpressionList lhsExpression : assignmentStatementTree.lhsExpressions()) {
       boolean isModifyingDebugProperty = isFlaskDebugProperties(lhsExpression)
-        || isGlobalDebugProperties(lhsExpression, ctx);
+        || isDjangoDebugProperties(lhsExpression, ctx);
       if (isModifyingDebugProperty && isTrueLiteral(assignmentStatementTree.assignedValue())) {
         ctx.addIssue(assignmentStatementTree, MESSAGE);
       }
     }
   }
 
-  private static boolean isGlobalDebugProperties(ExpressionList expressionList, SubscriptionContext ctx) {
+  private static boolean isDjangoDebugProperties(ExpressionList expressionList, SubscriptionContext ctx) {
     return expressionList.expressions().stream().anyMatch(DebugModeCheck::isDebugIdentifier)
       && settingFiles.contains(ctx.pythonFile().fileName());
   }
