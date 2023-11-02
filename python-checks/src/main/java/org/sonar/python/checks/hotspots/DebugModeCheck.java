@@ -47,7 +47,6 @@ public class DebugModeCheck extends PythonSubscriptionCheck {
   private static final String FLASK_RUN_FQN = "flask.app.Flask.run";
   private static final String FLASK_APP_CONFIG_FQN = "flask.app.Flask.config";
   public static final String FLASK_APP_DEBUG_FQN = "flask.app.Flask.debug";
-  public static final String TRUE_KEYWORD = "True";
   private static final String MESSAGE = "Make sure this debug feature is deactivated before delivering the code in production.";
   private static final List<String> debugProperties = Arrays.asList("DEBUG", "DEBUG_PROPAGATE_EXCEPTIONS");
   private static final List<String> settingFiles = Arrays.asList("global_settings.py", "settings.py");
@@ -73,10 +72,8 @@ public class DebugModeCheck extends PythonSubscriptionCheck {
       RegularArgument debugArgument = TreeUtils.nthArgumentOrKeyword(2, "debug", arguments);
       Optional.ofNullable(debugArgument)
         .map(RegularArgument::expression)
-        .flatMap(TreeUtils.toOptionalInstanceOfMapper(Name.class))
-        .map(Name::name)
-        .filter(TRUE_KEYWORD::equals)
-        .ifPresent(str -> ctx.addIssue(debugArgument, MESSAGE));
+        .filter(DebugModeCheck::isTrueLiteral)
+        .ifPresent(name -> ctx.addIssue(debugArgument, MESSAGE));
     }
   }
 
