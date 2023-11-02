@@ -107,22 +107,31 @@ public class DebugModeCheck extends PythonSubscriptionCheck {
         .isPresent();
     } else if (expression.is(Kind.SUBSCRIPTION)) {
       SubscriptionExpression subscriptionExpression = (SubscriptionExpression) expression;
-      return Optional.of(subscriptionExpression)
-        .map(SubscriptionExpression::object)
-        .flatMap(TreeUtils.toOptionalInstanceOfMapper(QualifiedExpression.class))
-        .map(QualifiedExpression::symbol)
-        .map(Symbol::fullyQualifiedName)
-        .filter(FLASK_APP_CONFIG_FQN::equals)
-        .isPresent() && Optional.of(subscriptionExpression.subscripts())
-        .map(ExpressionList::expressions)
-        .filter(list -> list.size() == 1)
-        .map(list -> list.get(0))
-        .flatMap(TreeUtils.toOptionalInstanceOfMapper(StringLiteral.class))
-        .map(StringLiteral::trimmedQuotesValue)
-        .filter("DEBUG"::equals)
-        .isPresent();
+      return isModifyingFlaskAppConfiguration(subscriptionExpression)
+        && isMakingDebugParameterTrue(subscriptionExpression);
     }
     return false;
+  }
+
+  private static boolean isMakingDebugParameterTrue(SubscriptionExpression subscriptionExpression) {
+    return Optional.of(subscriptionExpression.subscripts())
+      .map(ExpressionList::expressions)
+      .filter(list -> list.size() == 1)
+      .map(list -> list.get(0))
+      .flatMap(TreeUtils.toOptionalInstanceOfMapper(StringLiteral.class))
+      .map(StringLiteral::trimmedQuotesValue)
+      .filter("DEBUG"::equals)
+      .isPresent();
+  }
+
+  private static boolean isModifyingFlaskAppConfiguration(SubscriptionExpression subscriptionExpression) {
+    return Optional.of(subscriptionExpression)
+      .map(SubscriptionExpression::object)
+      .flatMap(TreeUtils.toOptionalInstanceOfMapper(QualifiedExpression.class))
+      .map(QualifiedExpression::symbol)
+      .map(Symbol::fullyQualifiedName)
+      .filter(FLASK_APP_CONFIG_FQN::equals)
+      .isPresent();
   }
 
   private static boolean isDebugIdentifier(Expression expr) {
