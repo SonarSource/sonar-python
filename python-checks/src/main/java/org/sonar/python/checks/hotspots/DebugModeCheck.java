@@ -107,7 +107,7 @@ public class DebugModeCheck extends PythonSubscriptionCheck {
         .isPresent();
     } else if (expression.is(Kind.SUBSCRIPTION)) {
       SubscriptionExpression subscriptionExpression = (SubscriptionExpression) expression;
-      return isModifyingFlaskAppConfiguration(subscriptionExpression)
+      return isFlaskAppConfiguration(subscriptionExpression)
         && isMakingDebugParameterTrue(subscriptionExpression);
     }
     return false;
@@ -124,7 +124,7 @@ public class DebugModeCheck extends PythonSubscriptionCheck {
       .isPresent();
   }
 
-  private static boolean isModifyingFlaskAppConfiguration(SubscriptionExpression subscriptionExpression) {
+  private static boolean isFlaskAppConfiguration(SubscriptionExpression subscriptionExpression) {
     return Optional.of(subscriptionExpression)
       .map(SubscriptionExpression::object)
       .flatMap(TreeUtils.toOptionalInstanceOfMapper(QualifiedExpression.class))
