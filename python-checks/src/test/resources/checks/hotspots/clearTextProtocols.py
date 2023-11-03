@@ -142,3 +142,43 @@ def FP_starttls_in_different_method():
 
 def start_tls(x):
   x.starttls(context=context)
+
+
+def python_web_server_noncompliant():
+    from http.server import SimpleHTTPRequestHandler, HTTPServer, ThreadingHTTPServer
+
+    http_server = HTTPServer(('0.0.0.0', 8080), SimpleHTTPRequestHandler)
+    http_server.serve_forever()  # Noncompliant
+#   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    threading_server = ThreadingHTTPServer(('0.0.0.0', 8080), SimpleHTTPRequestHandler)
+    threading_server.serve_forever()  # Noncompliant
+
+    class MyServer(HTTPServer):
+        def run(self):
+            super(self).serve_forever()  # Noncompliant
+        #   ^^^^^^^^^^^^^^^^^^^^^^^^^
+    server = MyServer(('0.0.0.0', 8080), SimpleHTTPRequestHandler)
+    server.serve_forever()  # Noncompliant
+#   ^^^^^^^^^^^^^^^^^^^^^^
+
+    class MyThreadedServer(ThreadingHTTPServer):
+        def foo(self):
+            super(self).serve_forever()  # Noncompliant
+        #   ^^^^^^^^^^^^^^^^^^^^^^^^^
+
+    server = MyThreadedServer(('0.0.0.0', 8080), SimpleHTTPRequestHandler)
+    server.serve_forever()  # Noncompliant
+
+
+def python_web_server_compliant(ok_server):
+
+    ok_server.serve_forever()  # Compliant
+
+    class SomeServer():
+        def serve_forever(self):
+            pass
+
+    class MyServer(SomeServer):
+        def run(self):
+            super(self).serve_forever()  # Compliant
+
