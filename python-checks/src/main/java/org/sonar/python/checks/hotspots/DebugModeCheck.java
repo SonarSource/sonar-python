@@ -22,6 +22,7 @@ package org.sonar.python.checks.hotspots;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Predicate;
 import javax.annotation.CheckForNull;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
@@ -78,22 +79,27 @@ public class DebugModeCheck extends PythonSubscriptionCheck {
   }
 
   private static void assignmentStatementConsumer(SubscriptionContext ctx) {
+    Optional.of(ctx.pythonFile().fileName())
+      .filter((settingFiles::contains))
+      .ifPresentOrElse(
+        fileName -> assignmentStatementCheck(ctx, DebugModeCheck::hasDjangoOrFlaskDebugProperties),
+        () -> assignmentStatementCheck(ctx, DebugModeCheck::hasFlaskDebugProperties));
+  }
+
+  private static void assignmentStatementCheck(SubscriptionContext ctx, Predicate<ExpressionList> isDebugProperty) {
     AssignmentStatement assignmentStatementTree = (AssignmentStatement) ctx.syntaxNode();
     for (ExpressionList lhsExpression : assignmentStatementTree.lhsExpressions()) {
-      boolean isModifyingDebugProperty = isFlaskDebugProperties(lhsExpression)
-        || isDjangoDebugProperties(lhsExpression, ctx);
-      if (isModifyingDebugProperty && isTrueLiteral(assignmentStatementTree.assignedValue())) {
+      if (isDebugProperty.test(lhsExpression) && isTrueLiteral(assignmentStatementTree.assignedValue())) {
         ctx.addIssue(assignmentStatementTree, MESSAGE);
       }
     }
   }
 
-  private static boolean isDjangoDebugProperties(ExpressionList expressionList, SubscriptionContext ctx) {
-    return expressionList.expressions().stream().anyMatch(DebugModeCheck::isDebugIdentifier)
-      && settingFiles.contains(ctx.pythonFile().fileName());
+  private static boolean hasDjangoOrFlaskDebugProperties(ExpressionList expressionList) {
+    return expressionList.expressions().stream().anyMatch(DebugModeCheck::isDebugIdentifier) || hasFlaskDebugProperties(expressionList);
   }
 
-  private static boolean isFlaskDebugProperties(ExpressionList expressionList) {
+  private static boolean hasFlaskDebugProperties(ExpressionList expressionList) {
     return expressionList.expressions().stream().anyMatch(DebugModeCheck::isModifyingFlaskDebugProperty);
 
   }

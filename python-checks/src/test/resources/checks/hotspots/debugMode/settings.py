@@ -6,8 +6,11 @@ DEBUG = print()  # OK
 DEBUG_PROPAGATE_EXCEPTIONS = False  # OK
 Other = True
 
-class MyClass:
-    def __init__(self):
-        self.boolean_property = True
-my_object = MyClass()
-my_object.boolean_property = True
+def my_method(hello):
+    hello.errors = True
+
+def flask_test():
+    from flask import Flask
+    app = Flask()
+
+    app.debug = True  # Noncompliant
