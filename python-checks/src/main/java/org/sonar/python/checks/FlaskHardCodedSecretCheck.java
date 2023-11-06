@@ -1,11 +1,27 @@
+/*
+ * SonarQube Python Plugin
+ * Copyright (C) 2011-2023 SonarSource SA
+ * mailto:info AT sonarsource DOT com
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ */
 package org.sonar.python.checks;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import javax.annotation.Nullable;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
@@ -15,7 +31,6 @@ import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.DictionaryLiteral;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.ExpressionList;
-import org.sonar.plugins.python.api.tree.HasSymbol;
 import org.sonar.plugins.python.api.tree.KeyValuePair;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
@@ -28,29 +43,26 @@ import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S6779")
 public class FlaskHardCodedSecretCheck extends PythonSubscriptionCheck {
-  private static final Logger LOG = LoggerFactory.getLogger(FlaskHardCodedSecretCheck.class);
-
-
   private static final String MESSAGE = "Don't disclose \"Flask\" secret keys.";
   private static final String SECRET_KEY_KEYWORD = "SECRET_KEY";
-  private static final Set<String> FLASK_APP_CONFIG_UPDATE_CALLEE_QUALIFIER_FQNS = Set.of(
-    "flask.globals.current_app.config",
-    "flask.app.Flask.config"
+  private static final Set<String> FLASK_APP_CONFIG_QUALIFIER_FQNS = Set.of(
+    "flask.app.Flask.config",
+    "flask.globals.current_app.config"
+  );
+
+  private static final Set<String> FLASK_SECRET_KEY_FQNS = Set.of(
+    "flask.app.Flask.secret_key",
+    "flask.globals.current_app.secret_key"
   );
 
   @Override
   public void initialize(Context context) {
-
-
     context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, FlaskHardCodedSecretCheck::verifyCallExpression);
-//    context.registerSyntaxNodeConsumer(Tree.Kind.ASSIGNMENT_STMT, FlaskHardCodedSecretCheck::verifyAssignmentStatement);
-//    context.registerSyntaxNodeConsumer(Tree.Kind.QUALIFIED_EXPR, FlaskHardCodedSecretCheck::verifyQualifiedExpression);
+    context.registerSyntaxNodeConsumer(Tree.Kind.ASSIGNMENT_STMT, FlaskHardCodedSecretCheck::verifyAssignmentStatement);
   }
-
 
   private static void verifyCallExpression(SubscriptionContext ctx) {
     CallExpression callExpression = (CallExpression) ctx.syntaxNode();
-    LOG.info("Consuming Call Expression:");
     Optional.of(callExpression)
       .map(CallExpression::callee)
       .flatMap(TreeUtils.toOptionalInstanceOfMapper(QualifiedExpression.class))
@@ -60,15 +72,8 @@ public class FlaskHardCodedSecretCheck extends PythonSubscriptionCheck {
       .map(QualifiedExpression::name)
       .map(Name::symbol)
       .map(Symbol::fullyQualifiedName)
-      .filter(FLASK_APP_CONFIG_UPDATE_CALLEE_QUALIFIER_FQNS::contains)
-      .ifPresent(fqn -> {
-          verifyUpdateCallArgument(ctx, callExpression);
-          LOG.info(String.format("Qualifer fqn=%s, at line %d", fqn, TreeUtils.locationInFile(callExpression,
-            ctx.pythonFile().fileName()).startLine()));
-        }
-      );
-
-    LOG.info("");
+      .filter(FLASK_APP_CONFIG_QUALIFIER_FQNS::contains)
+      .ifPresent(fqn -> verifyUpdateCallArgument(ctx, callExpression));
   }
 
   private static void verifyUpdateCallArgument(SubscriptionContext ctx, CallExpression callExpression) {
@@ -99,7 +104,6 @@ public class FlaskHardCodedSecretCheck extends PythonSubscriptionCheck {
     return false;
   }
 
-
   private static boolean isCallToDictConstructor(CallExpression callExpression) {
     return Optional.of(callExpression)
       .map(CallExpression::callee)
@@ -109,7 +113,6 @@ public class FlaskHardCodedSecretCheck extends PythonSubscriptionCheck {
       .filter("dict"::equals)
       .isPresent();
   }
-
 
   private static boolean hasIllegalKeyValuePair(DictionaryLiteral dictionaryLiteral) {
     return dictionaryLiteral.elements().stream()
@@ -129,45 +132,41 @@ public class FlaskHardCodedSecretCheck extends PythonSubscriptionCheck {
       .isPresent();
   }
 
-
   private static void verifyAssignmentStatement(SubscriptionContext ctx) {
     AssignmentStatement assignmentStatementTree = (AssignmentStatement) ctx.syntaxNode();
-    boolean isAssigningDebugProperties = assignmentStatementTree.lhsExpressions()
-      .stream()
-      .map(ExpressionList::expressions)
-      .flatMap(List::stream)
+    for (ExpressionList lhsExpression : assignmentStatementTree.lhsExpressions()) {
+      boolean isModifyingSensitiveProperty = lhsExpression.expressions().stream()
       .anyMatch(FlaskHardCodedSecretCheck::isSensitiveProperty);
+      if (isModifyingSensitiveProperty) {
+        ctx.addIssue(lhsExpression, MESSAGE);
+      }
+    }
   }
 
   private static boolean isSensitiveProperty(Expression expression) {
-    return true;
-  }
-
-  private static void verifyQualifiedExpression(SubscriptionContext ctx) {
-    QualifiedExpression callExpression = (QualifiedExpression) ctx.syntaxNode();
-    LOG.info("Consuming Qualified Expression:");
-    Optional.of(callExpression)
-      .map(QualifiedExpression::symbol)
-      .map(Symbol::fullyQualifiedName)
-      .map("QUALIFIED EXPRESSION: "::concat)
-      .ifPresentOrElse(LOG::info, () -> LOG.info("No fully Qualified name"));
-    LOG.info("");
-  }
-
-  private static void verifySubscriptionExpression(SubscriptionContext ctx) {
-    SubscriptionExpression subscriptionExpression = (SubscriptionExpression) ctx.syntaxNode();
-    LOG.info("Consuming Subscription Expression:");
-    Optional.of(subscriptionExpression)
-      .map(SubscriptionExpression::object)
-      .filter(HasSymbol.class::isInstance)
-      .map(HasSymbol.class::cast)
-      .map(HasSymbol::symbol)
-      .map(Symbol::fullyQualifiedName)
-//      .filter(CURR_APP_CONFIG_SUBSCRIPTION_FQN::equals)
-      .map("SUBSCRIPTION EXPRESSION: "::concat)
-      .ifPresentOrElse(LOG::info, () -> LOG.info("No fully Qualified name"));
-//      .ifPresent(LOG::info);
-    LOG.info("");
+    if (expression.is(Tree.Kind.SUBSCRIPTION)) {
+      return Optional.of((SubscriptionExpression) expression)
+        .map(SubscriptionExpression::object)
+        .flatMap(TreeUtils.toOptionalInstanceOfMapper(QualifiedExpression.class))
+        .map(QualifiedExpression::symbol)
+        .map(Symbol::fullyQualifiedName)
+        .filter(FLASK_APP_CONFIG_QUALIFIER_FQNS::contains)
+        .map(fqn -> ((SubscriptionExpression) expression).subscripts())
+        .map(ExpressionList::expressions)
+        .filter(list -> list.size() == 1)
+        .map(list -> list.get(0))
+        .map(FlaskHardCodedSecretCheck::getAssignedValue)
+        .flatMap(TreeUtils.toOptionalInstanceOfMapper(StringLiteral.class))
+        .map(StringLiteral::trimmedQuotesValue)
+        .filter(SECRET_KEY_KEYWORD::equals)
+        .isPresent();
+    } else if (expression.is(Tree.Kind.QUALIFIED_EXPR))
+      return Optional.of((QualifiedExpression) expression)
+        .map(QualifiedExpression::symbol)
+        .map(Symbol::fullyQualifiedName)
+        .filter(FLASK_SECRET_KEY_FQNS::contains)
+        .isPresent();
+    return false;
   }
 
   private static boolean isStringLiteral(@Nullable Expression expr) {

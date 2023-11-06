@@ -1,4 +1,39 @@
 from flask import Flask, current_app
+def test_non_compliant_assignment_expressions(x):
+    app = Flask(__name__)
+    assigned_secret = 'hardcoded_secret'
+
+    # Tests for "flask.app.Flask.config"
+    app.config['SECRET_KEY'] = 'secret'  # Noncompliant
+    app.config['SECRET_KEY'] = assigned_secret  # Noncompliant
+    x = app.config['SECRET_KEY'] = 'secret'  # Noncompliant
+    app.config['SECRET_KEY'] = x = 'secret'  # Noncompliant
+    app.config['SECRET_KEY'], _ = 'mysecret', x # Noncompliant
+    app.config['SECRET_KEY'], _ = _, app.config['SECRET_KEY'] = 'secret', x # Noncompliant
+
+
+    # Tests for "flask.app.Flask.secret_key"
+    app.secret_key = 'mysecret'  # Noncompliant
+    app.secret_key = assigned_secret  # Noncompliant
+    _ = app.secret_key = 'mysecret'  # Noncompliant
+    app.secret_key = _ = 'mysecret'  # Noncompliant
+
+    # Tests for "flask.globals.current_app.config"
+    current_app.config['SECRET_KEY'] = 'secret'  # Noncompliant
+    current_app.config['SECRET_KEY'] = assigned_secret  # Noncompliant
+    x = current_app.config['SECRET_KEY'] = 'secret'  # Noncompliant
+    current_app.config['SECRET_KEY'] = x = 'secret'  # Noncompliant
+    current_app.config['SECRET_KEY'], _ = 'mysecret', x # Noncompliant
+    current_app.config['SECRET_KEY'], _ = _, current_app.config['SECRET_KEY'] = 'secret', x # Noncompliant
+
+    # Tests for "flask.globals.current_app.secret_key"
+    current_app.secret_key = 'mysecret'  # Noncompliant
+    current_app.secret_key = assigned_secret  # Noncompliant
+    _ = current_app.secret_key = 'mysecret'  # Noncompliant
+    current_app.secret_key = _ = 'mysecret'  # Noncompliant
+
+    current_app.secret_key, _ = assigned_secret, x # Noncompliant
+    current_app.secret_key, _ = _, current_app.secret_key = 'secret', x # Noncompliant
 def test_non_compliant_call_expressions():
     app = Flask(__name__)
 
@@ -22,43 +57,30 @@ def test_non_compliant_call_expressions():
         SECRET_KEY="woopie"
     ))
 
+    current_app.config.update({"SECRET_KEY": "woopie"}) # Noncompliant
+
+    current_app.config.update(d)            # Noncompliant
+    current_app.config.update(d1)           # Noncompliant
 
 
-def test_non_compliant_assignment_expressions():
+def test_compliant(x):
     app = Flask(__name__)
-
     assigned_secret = 'hardcoded_secret'
-    # Tests for "flask.app.Flask.config"
-    app.config['SECRET_KEY'] = 'secret'  # Noncompliant
 
-    # Tests for "flask.app.Flask.secret_key"
-    app.secret_key = 'mysecret'  # Noncompliant
-
-    # Tests for "flask.globals.current_app.config"
-    current_app.config['SECRET_KEY'] = 'secret'  # Noncompliant
-    current_app.config['SECRET_KEY'] = assigned_secret  # Noncompliant
-    x = current_app.config['SECRET_KEY'] = 'secret'  # Noncompliant
-    current_app.config['SECRET_KEY'] = x = 'secret'  # Noncompliant
-    current_app.config['SECRET_KEY'], _ = 'mysecret', x # Noncompliant
-    current_app.config['SECRET_KEY'], _ = _, current_app.config['SECRET_KEY'] = 'secret', x # Noncompliant
-
-    # Tests for "flask.globals.current_app.secret_key"
-    current_app.secret_key = 'mysecret'  # Noncompliant
-    current_app.secret_key = assigned_secret  # Noncompliant
-    _ = current_app.secret_key = 'mysecret'  # Noncompliant
-    current_app.secret_key = _ = 'mysecret'  # Noncompliant
-
-    current_app.secret_key, _ = assigned_secret, x # Noncompliant
-    current_app.secret_key, _ = _, current_app.secret_key = 'secret', x # Noncompliant
-
-def test_compliant(x, args):
+    app.config['SECRET'] = 'secret'  # OK
+    app.config['SECRET'] = assigned_secret  # OK
+    x = app.config['SECRET'] = 'secret'  # OK
+    app.config['SECRET'] = x = 'secret'  # OK
+    app.config['SECRET'], _ = 'mysecret', x # OK
+    app.config['SECRET'], _ = _, app.config['SECRET_KEY'] = 'secret', x # OK
 
     current_app.config.update(dict(
-        SECRET_KEY=x  # OK, but would like to double check about this.
+        SECRET_KEY=x  # OK, but not sure if it should be.
     ))
 
     assigned_secret = 'hardcoded_secret'
 
+    current_app.config[x] = 'secret'  # OK
     current_app.config['SECRET'] = 'secret'  # OK
     current_app.config['SECRET'] = assigned_secret  # OK
     x = current_app.config['SECRET'] = 'secret'  # OK

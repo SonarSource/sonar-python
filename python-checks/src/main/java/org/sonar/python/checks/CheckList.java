@@ -198,6 +198,7 @@ public final class CheckList {
       FilePermissionsCheck.class,
       FileHeaderCopyrightCheck.class,
       FixmeCommentCheck.class,
+      FlaskHardCodedSecretCheck.class,
       FloatingPointEqualityCheck.class,
       FStringNestingLevelCheck.class,
       FunctionComplexityCheck.class,
