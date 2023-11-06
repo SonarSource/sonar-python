@@ -157,6 +157,11 @@ def python_web_server_noncompliant():
         def run(self):
             super(self).serve_forever()  # Noncompliant
         #   ^^^^^^^^^^^^^^^^^^^^^^^^^
+
+        def server_bind(self):  # Noncompliant
+#       ^^^^^^^^^^^^^^^^^^^^^
+            pass
+
     server = MyServer(('0.0.0.0', 8080), SimpleHTTPRequestHandler)
     server.serve_forever()  # Noncompliant
 #   ^^^^^^^^^^^^^^^^^^^^^^
@@ -166,6 +171,10 @@ def python_web_server_noncompliant():
             super(self).serve_forever()  # Noncompliant
         #   ^^^^^^^^^^^^^^^^^^^^^^^^^
 
+        def server_bind(self):  # Noncompliant
+#       ^^^^^^^^^^^^^^^^^^^^^
+            pass
+
     server = MyThreadedServer(('0.0.0.0', 8080), SimpleHTTPRequestHandler)
     server.serve_forever()  # Noncompliant
 
@@ -173,12 +182,22 @@ def python_web_server_noncompliant():
 def python_web_server_compliant(ok_server):
 
     ok_server.serve_forever()  # Compliant
+    ok_server.server_bind()
 
-    class SomeServer():
+    class HTTPServer():
         def serve_forever(self):
             pass
 
-    class MyServer(SomeServer):
+        def server_bind(self):
+            pass
+
+    class MyServer(HTTPServer):
         def run(self):
             super(self).serve_forever()  # Compliant
 
+        def server_bind(self):
+            pass
+
+    my_server = MyServer()
+    my_server.serve_forever()
+    my_server.server_bind()
