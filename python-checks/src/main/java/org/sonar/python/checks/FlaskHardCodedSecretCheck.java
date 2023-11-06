@@ -160,22 +160,23 @@ public class FlaskHardCodedSecretCheck extends PythonSubscriptionCheck {
         .map(StringLiteral::trimmedQuotesValue)
         .filter(SECRET_KEY_KEYWORD::equals)
         .isPresent();
-    } else if (expression.is(Tree.Kind.QUALIFIED_EXPR))
+    } else if (expression.is(Tree.Kind.QUALIFIED_EXPR)) {
       return Optional.of((QualifiedExpression) expression)
         .map(QualifiedExpression::symbol)
         .map(Symbol::fullyQualifiedName)
         .filter(FLASK_SECRET_KEY_FQNS::contains)
         .isPresent();
+    }
     return false;
   }
 
   private static boolean isStringLiteral(@Nullable Expression expr) {
     if (expr == null) {
       return false;
-    } else if (expr.is(Tree.Kind.STRING_LITERAL)) {
-      return true;
     } else if (expr.is(Tree.Kind.NAME)) {
       return isStringLiteral(Expressions.singleAssignedValue((Name) expr));
+    } else if (expr.is(Tree.Kind.STRING_LITERAL)) {
+      return true;
     }
     return false;
   }

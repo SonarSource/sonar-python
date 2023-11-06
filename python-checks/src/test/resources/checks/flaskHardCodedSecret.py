@@ -77,11 +77,25 @@ def test_compliant(x):
     current_app.config.update(dict(
         SECRET_KEY=x  # OK, but not sure if it should be.
     ))
+    def hello(SECRET_KEY):
+        ...
+
+    current_app.config.update(dict(
+        SECRET_KEY=hello('something')  # OK, but not sure if it should be.
+    ))
+
+
+    current_app.config.update(hello(
+        SECRET_KEY='SECRET'  # OK, but not sure if it should be.
+    ))
+    current_app.config.update()
+    current_app.config.update('secret')
 
     assigned_secret = 'hardcoded_secret'
 
     current_app.config[x] = 'secret'  # OK
     current_app.config['SECRET'] = 'secret'  # OK
+    current_app.config['SECRET', x] = 'secret'  # OK
     current_app.config['SECRET'] = assigned_secret  # OK
     x = current_app.config['SECRET'] = 'secret'  # OK
     current_app.config['SECRET'] = x = 'secret'  # OK
