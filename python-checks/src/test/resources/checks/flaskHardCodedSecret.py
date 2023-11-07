@@ -45,7 +45,7 @@ def test_non_compliant_assignment_expressions(x):
     current_app.secret_key, _ = assigned_secret, x # FN
     current_app.secret_key, _ = _, current_app.secret_key = 'secret', x # FN
 
-    current_app.config['SECRET_KEY'] = app.config['SECRET_KEY'] = 'secret'  # Noncompliant
+    current_app.config['SECRET_KEY'] = app.config['SECRET_KEY'] = 'secret'  # Noncompliant 2
 #   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^>                             ^^^^^^^^
 
 
@@ -116,7 +116,7 @@ def test_compliant(x):
         A_KEY='something'  # OK
     ))
 
-    current_app.config['SECRET_KEY'] = x  # Noncompliant
+    current_app.config['SECRET_KEY'] = x
 
     current_app.config.update(hello(
         SECRET_KEY='SECRET'  # OK
