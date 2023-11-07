@@ -94,6 +94,14 @@ def test_compliant(x):
     app.config['SECRET'], _ = 'mysecret', x # OK
     app.config['SECRET'], _ = _, app.config['SECRET_KEY'] = 'secret', x # OK
 
+    d = dict(
+        A_KEY="woopie"
+    )
+    d1 = {"A_KEY": "woopie"}
+
+    app.config.update(d)
+    app.config.update(d1)
+
     current_app.config.update(dict(
         SECRET_KEY=x  # OK
     ))
@@ -108,14 +116,7 @@ def test_compliant(x):
         A_KEY='something'  # OK
     ))
 
-    d = dict(
-        A_KEY="woopie"
-    )
-    d1 = {"A_KEY": "woopie"}
-
-    app.config.update(d)
-    app.config.update(d1)
-
+    current_app.config['SECRET_KEY'] = x  # Noncompliant
 
     current_app.config.update(hello(
         SECRET_KEY='SECRET'  # OK
