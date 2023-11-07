@@ -19,6 +19,7 @@
  */
 package org.sonar.python.checks;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import javax.annotation.Nullable;
@@ -44,6 +45,7 @@ import org.sonar.python.tree.TreeUtils;
 @Rule(key = "S6779")
 public class FlaskHardCodedSecretCheck extends PythonSubscriptionCheck {
   private static final String MESSAGE = "Don't disclose \"Flask\" secret keys.";
+  private static final String SECONDARY_MESSAGE = "Assignment to sensitive property.";
   private static final String SECRET_KEY_KEYWORD = "SECRET_KEY";
   private static final Set<String> FLASK_APP_CONFIG_QUALIFIER_FQNS = Set.of(
     "flask.app.Flask.config",
@@ -134,13 +136,16 @@ public class FlaskHardCodedSecretCheck extends PythonSubscriptionCheck {
 
   private static void verifyAssignmentStatement(SubscriptionContext ctx) {
     AssignmentStatement assignmentStatementTree = (AssignmentStatement) ctx.syntaxNode();
-    for (ExpressionList lhsExpression : assignmentStatementTree.lhsExpressions()) {
-      boolean isModifyingSensitiveProperty = lhsExpression.expressions().stream()
-      .anyMatch(FlaskHardCodedSecretCheck::isSensitiveProperty);
-      if (isModifyingSensitiveProperty) {
-        ctx.addIssue(lhsExpression, MESSAGE);
-      }
-    }
+    assignmentStatementTree.lhsExpressions().stream()
+      .map(ExpressionList::expressions)
+      .filter(list -> list.size() == 1)
+      .flatMap(List::stream)
+      .filter(FlaskHardCodedSecretCheck::isSensitiveProperty)
+      .filter(expression -> isStringLiteral(assignmentStatementTree.assignedValue()))
+      .forEach(expression -> {
+        PreciseIssue issue = ctx.addIssue(assignmentStatementTree.assignedValue(), MESSAGE);
+        issue.secondary(expression, SECONDARY_MESSAGE);
+      });
   }
 
   private static boolean isSensitiveProperty(Expression expression) {
