@@ -142,3 +142,67 @@ def FP_starttls_in_different_method():
 
 def start_tls(x):
   x.starttls(context=context)
+
+
+def python_web_server_noncompliant():
+    from http.server import SimpleHTTPRequestHandler, HTTPServer, ThreadingHTTPServer
+
+    http_server = HTTPServer(('0.0.0.0', 8080), SimpleHTTPRequestHandler)
+    http_server.serve_forever()  # Noncompliant
+#   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    threading_http_server = ThreadingHTTPServer(('0.0.0.0', 8080), SimpleHTTPRequestHandler)
+    threading_http_server.serve_forever()  # Noncompliant
+#   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+    class MyServer(HTTPServer):
+        def run(self):
+            super(self).serve_forever()  # Noncompliant
+        #   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+        def server_bind(self):  # Noncompliant
+#       ^^^^^^^^^^^^^^^^^^^^^
+            pass
+
+    my_server = MyServer(('0.0.0.0', 8080), SimpleHTTPRequestHandler)
+    my_server.serve_forever()  # Noncompliant
+#   ^^^^^^^^^^^^^^^^^^^^^^^^^
+
+    class MyThreadingServer(ThreadingHTTPServer):
+        def run(self):
+            super(self).serve_forever()  # Noncompliant
+        #   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+        def server_bind(self):  # Noncompliant
+#       ^^^^^^^^^^^^^^^^^^^^^
+            pass
+
+    my_threading_server = MyThreadingServer(('0.0.0.0', 8080), SimpleHTTPRequestHandler)
+    my_threading_server.serve_forever()  # Noncompliant
+
+
+def python_web_server_compliant(ok_server):
+
+    ok_server.serve_forever()  # Compliant
+    ok_server.server_bind()
+
+    class HTTPServer():
+        def serve_forever(self):
+            pass
+
+        def server_bind(self):
+            pass
+
+    class MyServer(HTTPServer):
+        def run(self):
+            super(self).serve_forever()  # Compliant
+
+        def server_bind(self):
+            pass
+
+    my_server = MyServer()
+    my_server.serve_forever()
+    my_server.server_bind()
+
+    my_server = HTTPServer()
+    my_server.serve_forever()
+    my_server.server_bind()
