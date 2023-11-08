@@ -150,8 +150,8 @@ def python_web_server_noncompliant():
     http_server = HTTPServer(('0.0.0.0', 8080), SimpleHTTPRequestHandler)
     http_server.serve_forever()  # Noncompliant
 #   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    threading_server = ThreadingHTTPServer(('0.0.0.0', 8080), SimpleHTTPRequestHandler)
-    threading_server.serve_forever()  # Noncompliant
+    threading_http_server = ThreadingHTTPServer(('0.0.0.0', 8080), SimpleHTTPRequestHandler)
+    threading_http_server.serve_forever()  # Noncompliant
 
     class MyServer(HTTPServer):
         def run(self):
@@ -162,12 +162,12 @@ def python_web_server_noncompliant():
 #       ^^^^^^^^^^^^^^^^^^^^^
             pass
 
-    server = MyServer(('0.0.0.0', 8080), SimpleHTTPRequestHandler)
-    server.serve_forever()  # Noncompliant
+    my_server = MyServer(('0.0.0.0', 8080), SimpleHTTPRequestHandler)
+    my_server.serve_forever()  # Noncompliant
 #   ^^^^^^^^^^^^^^^^^^^^^^
 
-    class MyThreadedServer(ThreadingHTTPServer):
-        def foo(self):
+    class MyThreadingServer(ThreadingHTTPServer):
+        def run(self):
             super(self).serve_forever()  # Noncompliant
         #   ^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -175,8 +175,8 @@ def python_web_server_noncompliant():
 #       ^^^^^^^^^^^^^^^^^^^^^
             pass
 
-    server = MyThreadedServer(('0.0.0.0', 8080), SimpleHTTPRequestHandler)
-    server.serve_forever()  # Noncompliant
+    my_threading_server = MyThreadingServer(('0.0.0.0', 8080), SimpleHTTPRequestHandler)
+    my_threading_server.serve_forever()  # Noncompliant
 
 
 def python_web_server_compliant(ok_server):
