@@ -97,7 +97,9 @@ public class ClearTextProtocolsCheck extends PythonSubscriptionCheck {
     QualifiedExpression qualifiedExpression = (QualifiedExpression) ctx.syntaxNode();
     Optional.of(qualifiedExpression)
       .filter(qe -> isName("serve_forever", qe.name()) && isCallToSensitiveSuperClass(qe))
-      .ifPresent(qe -> ctx.addIssue(qe, message("http")));
+      .map(qe -> TreeUtils.firstAncestorOfKind(qe, Tree.Kind.CALL_EXPR))
+      .flatMap(TreeUtils.toOptionalInstanceOfMapper(CallExpression.class))
+      .ifPresent(ce -> ctx.addIssue(ce, message("http")));
   }
 
   private static void checkServerBindOverrides(SubscriptionContext ctx) {
