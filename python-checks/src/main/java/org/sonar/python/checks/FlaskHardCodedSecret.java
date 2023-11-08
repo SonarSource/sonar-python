@@ -24,7 +24,6 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import javax.annotation.Nullable;
-import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.Symbol;
@@ -43,28 +42,27 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.tree.TreeUtils;
 
 
-@Rule(key = "S6779")
-public class FlaskHardCodedSecretCheck extends PythonSubscriptionCheck {
-  private static final String MESSAGE = "Don't disclose \"Flask\" secret keys.";
+public abstract class FlaskHardCodedSecret extends PythonSubscriptionCheck {
+  private static final String MESSAGE = "Don't disclose \"%s\" secret keys.";
   private static final String SECONDARY_MESSAGE = "Assignment to sensitive property.";
-  private static final String SECRET_KEY_KEYWORD = "SECRET_KEY";
   private static final Set<String> FLASK_APP_CONFIG_QUALIFIER_FQNS = Set.of(
     "flask.app.Flask.config",
     "flask.globals.current_app.config"
   );
 
-  private static final Set<String> FLASK_SECRET_KEY_FQNS = Set.of(
-    "flask.app.Flask.secret_key",
-    "flask.globals.current_app.secret_key"
-  );
+  protected abstract String getSecretKeyKeyword();
+
+  protected abstract String getSecretKeyType();
+
+  protected abstract Set<String> getFlaskAppConfigQualifierFqns();
 
   @Override
   public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, FlaskHardCodedSecretCheck::verifyCallExpression);
-    context.registerSyntaxNodeConsumer(Tree.Kind.ASSIGNMENT_STMT, FlaskHardCodedSecretCheck::verifyAssignmentStatement);
+    context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, this::verifyCallExpression);
+    context.registerSyntaxNodeConsumer(Tree.Kind.ASSIGNMENT_STMT, this::verifyAssignmentStatement);
   }
 
-  private static void verifyCallExpression(SubscriptionContext ctx) {
+  private void verifyCallExpression(SubscriptionContext ctx) {
     CallExpression callExpression = (CallExpression) ctx.syntaxNode();
     Optional.of(callExpression)
       .map(CallExpression::callee)
@@ -79,15 +77,15 @@ public class FlaskHardCodedSecretCheck extends PythonSubscriptionCheck {
       .ifPresent(fqn -> verifyUpdateCallArgument(ctx, callExpression));
   }
 
-  private static void verifyUpdateCallArgument(SubscriptionContext ctx, CallExpression callExpression) {
+  private void verifyUpdateCallArgument(SubscriptionContext ctx, CallExpression callExpression) {
     Optional.of(callExpression.arguments())
       .filter(arguments -> arguments.size() == 1)
       .map(arguments -> arguments.get(0))
       .flatMap(TreeUtils.toOptionalInstanceOfMapper(RegularArgument.class))
       .map(RegularArgument::expression)
-      .map(FlaskHardCodedSecretCheck::getAssignedValue)
-      .filter(FlaskHardCodedSecretCheck::isIllegalDictArgument)
-      .ifPresent(expr -> ctx.addIssue(callExpression, MESSAGE));
+      .map(FlaskHardCodedSecret::getAssignedValue)
+      .filter(this::isIllegalDictArgument)
+      .ifPresent(expr -> ctx.addIssue(callExpression, String.format(MESSAGE, this.getSecretKeyType())));
 
   }
 
@@ -98,7 +96,7 @@ public class FlaskHardCodedSecretCheck extends PythonSubscriptionCheck {
     return expression;
   }
 
-  private static boolean isIllegalDictArgument(Expression expression) {
+  private boolean isIllegalDictArgument(Expression expression) {
     if (expression.is(Tree.Kind.CALL_EXPR)) {
       return isCallToDictConstructor((CallExpression) expression) && hasIllegalKeywordArgument((CallExpression) expression);
     } else if (expression.is(Tree.Kind.DICTIONARY_LITERAL)) {
@@ -117,7 +115,7 @@ public class FlaskHardCodedSecretCheck extends PythonSubscriptionCheck {
       .isPresent();
   }
 
-  private static boolean hasIllegalKeyValuePair(DictionaryLiteral dictionaryLiteral) {
+  private boolean hasIllegalKeyValuePair(DictionaryLiteral dictionaryLiteral) {
     return dictionaryLiteral.elements().stream()
       .filter(KeyValuePair.class::isInstance)
       .map(KeyValuePair.class::cast)
@@ -125,32 +123,32 @@ public class FlaskHardCodedSecretCheck extends PythonSubscriptionCheck {
       .filter(StringLiteral.class::isInstance)
       .map(StringLiteral.class::cast)
       .map(StringLiteral::trimmedQuotesValue)
-      .anyMatch(SECRET_KEY_KEYWORD::equals);
+      .anyMatch(key -> this.getSecretKeyKeyword().equals(key));
   }
 
-  private static boolean hasIllegalKeywordArgument(CallExpression callExpression) {
-    return Optional.ofNullable(TreeUtils.argumentByKeyword(SECRET_KEY_KEYWORD, callExpression.arguments()))
+  private boolean hasIllegalKeywordArgument(CallExpression callExpression) {
+    return Optional.ofNullable(TreeUtils.argumentByKeyword(this.getSecretKeyKeyword(), callExpression.arguments()))
       .map(RegularArgument::expression)
-      .filter(FlaskHardCodedSecretCheck::isStringLiteral)
+      .filter(FlaskHardCodedSecret::isStringLiteral)
       .isPresent();
   }
 
-  private static void verifyAssignmentStatement(SubscriptionContext ctx) {
+  private void verifyAssignmentStatement(SubscriptionContext ctx) {
     AssignmentStatement assignmentStatementTree = (AssignmentStatement) ctx.syntaxNode();
     List<Expression> expressionList = assignmentStatementTree.lhsExpressions().stream()
       .map(ExpressionList::expressions)
       .filter(list -> list.size() == 1)
       .flatMap(List::stream)
-      .filter(FlaskHardCodedSecretCheck::isSensitiveProperty)
+      .filter(this::isSensitiveProperty)
       .filter(expression -> isStringLiteral(assignmentStatementTree.assignedValue()))
       .collect(Collectors.toList());
     if (!expressionList.isEmpty()) {
-      PreciseIssue issue = ctx.addIssue(assignmentStatementTree.assignedValue(), MESSAGE);
+      PreciseIssue issue = ctx.addIssue(assignmentStatementTree.assignedValue(), String.format(MESSAGE, this.getSecretKeyType()));
       expressionList.forEach(expr -> issue.secondary(expr, SECONDARY_MESSAGE));
     }
   }
 
-  private static boolean isSensitiveProperty(Expression expression) {
+  private boolean isSensitiveProperty(Expression expression) {
     if (expression.is(Tree.Kind.SUBSCRIPTION)) {
       return Optional.of((SubscriptionExpression) expression)
         .map(SubscriptionExpression::object)
@@ -162,16 +160,16 @@ public class FlaskHardCodedSecretCheck extends PythonSubscriptionCheck {
         .map(ExpressionList::expressions)
         .filter(list -> list.size() == 1)
         .map(list -> list.get(0))
-        .map(FlaskHardCodedSecretCheck::getAssignedValue)
+        .map(FlaskHardCodedSecret::getAssignedValue)
         .flatMap(TreeUtils.toOptionalInstanceOfMapper(StringLiteral.class))
         .map(StringLiteral::trimmedQuotesValue)
-        .filter(SECRET_KEY_KEYWORD::equals)
+        .filter(key -> this.getSecretKeyKeyword().equals(key))
         .isPresent();
     } else if (expression.is(Tree.Kind.QUALIFIED_EXPR)) {
       return Optional.of((QualifiedExpression) expression)
         .map(QualifiedExpression::symbol)
         .map(Symbol::fullyQualifiedName)
-        .filter(FLASK_SECRET_KEY_FQNS::contains)
+        .filter(this.getFlaskAppConfigQualifierFqns()::contains)
         .isPresent();
     }
     return false;
@@ -182,9 +180,6 @@ public class FlaskHardCodedSecretCheck extends PythonSubscriptionCheck {
       return false;
     } else if (expr.is(Tree.Kind.NAME)) {
       return isStringLiteral(Expressions.singleAssignedValue((Name) expr));
-    } else if (expr.is(Tree.Kind.STRING_LITERAL)) {
-      return true;
-    }
-    return false;
+    } else return expr.is(Tree.Kind.STRING_LITERAL);
   }
 }
