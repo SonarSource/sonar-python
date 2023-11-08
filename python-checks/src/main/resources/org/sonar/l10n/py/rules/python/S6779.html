@@ -1,0 +1,51 @@
+<p>Secret leaks often occur when a sensitive piece of authentication data is stored with the source code of an application. Considering the source
+code is intended to be deployed across multiple assets, including source code repositories or application hosting servers, the secrets might get
+exposed to an unintended audience.</p>
+<h2>Why is this an issue?</h2>
+<p>In most cases, trust boundaries are violated when a secret is exposed in a source code repository or an uncontrolled deployment environment.
+Unintended people who don’t need to know the secret might get access to it. They might then be able to use it to gain unwanted access to associated
+services or resources.</p>
+<p>The trust issue can be more or less severe depending on the people’s role and entitlement.</p>
+<h3>What is the potential impact?</h3>
+<p>If a Flask secret key leaks to an unintended audience, it can have serious security implications for the corresponding application. The secret key
+is used to sign cookies and other sensitive data so that an attacker could potentially use it to perform malicious actions.</p>
+<p>For example, an attacker could use the secret key to create their own cookies that appear to be legitimate, allowing them to bypass authentication
+and gain access to sensitive data or functionality.</p>
+<p>In the worst-case scenario, an attacker could be able to execute arbitrary code on the application and take over its hosting server.</p>
+<h2>How to fix it</h2>
+<p><strong>Revoke the secret</strong></p>
+<p>Revoke any leaked secrets and remove them from the application source code.</p>
+<p>Before revoking the secret, ensure that no other applications or processes are using it. Other usages of the secret will also be impacted when the
+secret is revoked.</p>
+<p>In Flask, changing the secret value is sufficient to invalidate any data that it protected.</p>
+<p><strong>Use a secret vault</strong></p>
+<p>A secret vault should be used to generate and store the new secret. This will ensure the secret’s security and prevent any further unexpected
+disclosure.</p>
+<p>Depending on the development platform and the leaked secret type, multiple solutions are currently available.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+from flask import Flask
+
+app = Flask(__name__)
+app.config['SECRET_KEY'] = "secret"  # Noncompliant
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+from flask import Flask
+import os
+
+app = Flask(__name__)
+app.config['SECRET_KEY'] = os.environ["SECRET_KEY"]
+</pre>
+<h2>Resources</h2>
+<h3>Standards</h3>
+<ul>
+  <li> MITRE - <a href="https://cwe.mitre.org/data/definitions/798">CWE-798 - Use of Hard-coded Credentials</a> </li>
+  <li> MITRE - <a href="https://cwe.mitre.org/data/definitions/259">CWE-259 - Use of Hard-coded Password</a> </li>
+</ul>
+<h3>Documentation</h3>
+<ul>
+  <li> Flask documentation - <a href="https://flask.palletsprojects.com/en/2.3.x/config/#SECRET_KEY">Config - SECRET_KEY</a> </li>
+</ul>
+
