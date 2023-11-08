@@ -9,44 +9,52 @@ def test_non_compliant_assignment_expressions(x):
 #                              ^^^^^^^^@-1
     app.config['SECRET_KEY'] = assigned_secret  # Noncompliant
 #   ^^^^^^^^^^^^^^^^^^^^^^^^>  ^^^^^^^^^^^^^^^
-    x = app.config['SECRET_KEY'] = 'secret'  # Noncompliant
+    _ = app.config['SECRET_KEY'] = 'secret'  # Noncompliant
 #       ^^^^^^^^^^^^^^^^^^^^^^^^>  ^^^^^^^^
-    app.config['SECRET_KEY'] = x = 'secret'  # Noncompliant
-#   ^^^^^^^^^^^^^^^^^^^^^^^^>      ^^^^^^^^
+
     #   False negatives.
-    app.config['SECRET_KEY'], _ = 'mysecret', x # FN: Should be extended to ExpressionList in the lhs containing more than one expression
+    app.config['SECRET_KEY'], _ = 'secret', x # FN: Should be extended to ExpressionList in the lhs containing more than one expression
     app.config['SECRET_KEY'], _ = _, app.config['SECRET_KEY'] = 'secret', x # FN: Same as above
 
 
     # Tests for "flask.app.Flask.secret_key"
-    app.secret_key = 'mysecret'  # Noncompliant
+    app.secret_key = 'secret'         # Noncompliant {{Don't disclose "Flask" secret keys.}}
+#   ^^^^^^^^^^^^^^>                                    {{Assignment to sensitive property.}}
+#                    ^^^^^^^^@-1
     app.secret_key = assigned_secret  # Noncompliant
     _ = app.secret_key = 'mysecret'  # Noncompliant
-    app.secret_key = _ = 'mysecret'  # Noncompliant
+
+    #   False negatives.
+    app.secret_key, _ = 'secret', x # FN: Should be extended to ExpressionList in the lhs containing more than one expression
+    app.secret_key, _ = _, app.secret_key = 'secret', x # FN: Same as above
 
 
     # Tests for "flask.globals.current_app.config"
-    current_app.config['SECRET_KEY'] = 'secret'  # Noncompliant
+    current_app.config['SECRET_KEY'] = 'secret'  # Noncompliant {{Don't disclose "Flask" secret keys.}}
+#   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^>                                    {{Assignment to sensitive property.}}
+#                                      ^^^^^^^^@-1
     current_app.config['SECRET_KEY'] = assigned_secret  # Noncompliant
-    x = current_app.config['SECRET_KEY'] = 'secret'  # Noncompliant
-    current_app.config['SECRET_KEY'] = x = 'secret'  # Noncompliant
+    _ = current_app.config['SECRET_KEY'] = 'secret'  # Noncompliant
+
     #    False negatives.
     current_app.config['SECRET_KEY'], _ = 'mysecret', x # FN
     current_app.config['SECRET_KEY'], _ = _, current_app.config['SECRET_KEY'] = 'secret', x # FN
 
 
     # Tests for "flask.globals.current_app.secret_key"
-    current_app.secret_key = 'mysecret'  # Noncompliant
+    current_app.secret_key = 'secret'   # Noncompliant {{Don't disclose "Flask" secret keys.}}
+#   ^^^^^^^^^^^^^^^^^^^^^^>                            {{Assignment to sensitive property.}}
+#                            ^^^^^^^^@-1
     current_app.secret_key = assigned_secret  # Noncompliant
     _ = current_app.secret_key = 'mysecret'  # Noncompliant
-    current_app.secret_key = _ = 'mysecret'  # Noncompliant
 
     #   False negatives.
     current_app.secret_key, _ = assigned_secret, x # FN
     current_app.secret_key, _ = _, current_app.secret_key = 'secret', x # FN
 
-    current_app.config['SECRET_KEY'] = app.config['SECRET_KEY'] = 'secret'  # Noncompliant 2
-#   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^>                             ^^^^^^^^
+    current_app.config['SECRET_KEY'] = app.config['SECRET_KEY'] = 'secret'      # Noncompliant
+#   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^>  ^^^^^^^^^^^^^^^^^^^^^^^^>  ^^^^^^^^
+
 
 
 def test_non_compliant_call_expressions():
@@ -87,12 +95,11 @@ def test_compliant(x):
     app = Flask(__name__)
     assigned_secret = 'hardcoded_secret'
 
-    app.config['SECRET'] = 'secret'  # OK
-    app.config['SECRET'] = assigned_secret  # OK
-    x = app.config['SECRET'] = 'secret'  # OK
-    app.config['SECRET'] = x = 'secret'  # OK
-    app.config['SECRET'], _ = 'mysecret', x # OK
-    app.config['SECRET'], _ = _, app.config['SECRET_KEY'] = 'secret', x # OK
+    app.config['A_KEY'] = 'secret'  # OK
+    app.config['A_KEY'] = assigned_secret  # OK
+    x = app.config['A_KEY'] = 'secret'  # OK
+    app.config['A_KEY'], _ = 'mysecret', x # OK
+    app.config['A_KEY'], _ = _, app.config['SECRET_KEY'] = 'secret', x # OK
 
     d = dict(
         A_KEY="woopie"
@@ -127,11 +134,9 @@ def test_compliant(x):
     current_app.config[x] = 'secret'  # OK
     current_app.config['A_KEY'] = 'secret'  # OK
     current_app.config['A_KEY', x] = 'secret'  # OK
-    current_app.config['A_KEY'] = assigned_secret  # OK
     x = current_app.config['A_KEY'] = 'secret'  # OK
-    current_app.config['A_KEY'] = x = 'secret'  # OK
     current_app.config['A_KEY'], _ = 'mysecret', x # OK
-    current_app.config['A_KEY'], _ = _, current_app.config['SECRET'] = 'secret', x # OK
+    current_app.config['A_KEY'], _ = _, current_app.config['SECRET_KEY'] = 'secret', x # OK
 
     current_app.config['A_KEY'] = x  # OK
     y, current_app.config['A_KEY'] = 'some_random_string', x

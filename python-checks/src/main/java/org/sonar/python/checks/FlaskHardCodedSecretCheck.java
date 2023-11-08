@@ -22,6 +22,8 @@ package org.sonar.python.checks;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.BiFunction;
+import java.util.stream.Collectors;
 import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
@@ -136,17 +138,24 @@ public class FlaskHardCodedSecretCheck extends PythonSubscriptionCheck {
 
   private static void verifyAssignmentStatement(SubscriptionContext ctx) {
     AssignmentStatement assignmentStatementTree = (AssignmentStatement) ctx.syntaxNode();
-    assignmentStatementTree.lhsExpressions().stream()
+    List<Expression> expressionList = assignmentStatementTree.lhsExpressions().stream()
       .map(ExpressionList::expressions)
       .filter(list -> list.size() == 1)
       .flatMap(List::stream)
       .filter(FlaskHardCodedSecretCheck::isSensitiveProperty)
       .filter(expression -> isStringLiteral(assignmentStatementTree.assignedValue()))
-      .forEach(expression -> {
-        PreciseIssue issue = ctx.addIssue(assignmentStatementTree.assignedValue(), MESSAGE);
-        issue.secondary(expression, SECONDARY_MESSAGE);
-      });
+      .collect(Collectors.toList());
+    if (!expressionList.isEmpty()) {
+      PreciseIssue issue = ctx.addIssue(assignmentStatementTree.assignedValue(), MESSAGE);
+      expressionList.forEach(expr -> issue.secondary(expr, SECONDARY_MESSAGE));
+    }
   }
+
+  private static BiFunction<PreciseIssue, Expression, PreciseIssue> myBiFunction =
+    (issue, expression) -> {
+      issue.secondary(expression, SECONDARY_MESSAGE);
+      return issue;
+    };
 
   private static boolean isSensitiveProperty(Expression expression) {
     if (expression.is(Tree.Kind.SUBSCRIPTION)) {
