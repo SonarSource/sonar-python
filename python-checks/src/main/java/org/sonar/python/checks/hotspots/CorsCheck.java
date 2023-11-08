@@ -84,8 +84,7 @@ public class CorsCheck extends PythonSubscriptionCheck {
     ".+$",
     "^.*",
     "^.+",
-    STAR
-  );
+    STAR);
 
   private static final String ALLOW_ORIGIN = "Access-Control-Allow-Origin";
   private static final String ORIGINS = "origins";
@@ -94,8 +93,7 @@ public class CorsCheck extends PythonSubscriptionCheck {
     "django.http.HttpResponse",
     "django.http.response.HttpResponse",
     "werkzeug.datastructures.Headers",
-    "werkzeug.datastructures.headers.Headers"
-  );
+    "werkzeug.datastructures.headers.Headers");
 
   private static final List<String> REQUEST_SET_HEADER_QUALIFIER = Arrays.asList("headers", "add");
 
@@ -241,7 +239,8 @@ public class CorsCheck extends PythonSubscriptionCheck {
       expression = ((CallExpression) expression).callee();
     }
     TreeUtils.getSymbolFromTree(expression).ifPresent(symbol -> {
-      if (isSymbol(symbol, "flask_cors.decorator.cross_origin")) {
+      if (isSymbol(symbol, "flask_cors.decorator.cross_origin") ||
+        isSymbol(symbol, "flask.ext.cors.cross_origin")) {
         ArgList arguments = decorator.arguments();
         if (arguments == null) {
           ctx.addIssue(decorator, MESSAGE);
@@ -306,7 +305,8 @@ public class CorsCheck extends PythonSubscriptionCheck {
   private static void checkFlaskCorsCall(SubscriptionContext ctx) {
     CallExpression callExpression = (CallExpression) ctx.syntaxNode();
     Symbol calleeSymbol = callExpression.calleeSymbol();
-    if (!isSymbol(calleeSymbol, "flask_cors.extension.CORS")) {
+    if (!isSymbol(calleeSymbol, "flask_cors.extension.CORS") &&
+      !isSymbol(calleeSymbol, "flask.ext.cors.CORS")) {
       return;
     }
 
