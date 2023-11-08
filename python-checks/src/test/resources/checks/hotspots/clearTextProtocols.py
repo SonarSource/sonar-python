@@ -202,3 +202,7 @@ def python_web_server_compliant(ok_server):
     my_server = MyServer()
     my_server.serve_forever()
     my_server.server_bind()
+
+    my_server = HTTPServer()
+    my_server.serve_forever()
+    my_server.server_bind()
