@@ -22,15 +22,12 @@ package org.sonar.python.checks;
 import java.util.Set;
 import org.sonar.check.Rule;
 
-@Rule(key = "S6779")
-public class FlaskHardCodedSecretKeyCheck extends FlaskHardCodedSecret {
+@Rule(key = "S6781")
+public class FlaskHardCodedJWTSecretKeyCheck extends FlaskHardCodedSecret {
 
-  private static final String SECRET_KEY_KEYWORD = "SECRET_KEY";
-  private static final String SECRET_KEY_TYPE = "\"Flask\"";
-  private static final Set<String> FLASK_SECRET_KEY_FQNS = Set.of(
-    "flask.app.Flask.secret_key",
-    "flask.globals.current_app.secret_key"
-  );
+  private static final String SECRET_KEY_KEYWORD = "JWT_SECRET_KEY";
+  private static final String SECRET_KEY_TYPE = "\"Flask\" JWT";
+  private static final Set<String> FLASK_SECRET_KEY_FQNS = Set.of();
 
   @Override
   protected String getSecretKeyKeyword() {

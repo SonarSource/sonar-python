@@ -43,7 +43,7 @@ import org.sonar.python.tree.TreeUtils;
 
 
 public abstract class FlaskHardCodedSecret extends PythonSubscriptionCheck {
-  private static final String MESSAGE = "Don't disclose \"%s\" secret keys.";
+  private static final String MESSAGE = "Don't disclose %s secret keys.";
   private static final String SECONDARY_MESSAGE = "Assignment to sensitive property.";
   private static final Set<String> FLASK_APP_CONFIG_QUALIFIER_FQNS = Set.of(
     "flask.app.Flask.config",
