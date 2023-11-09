@@ -19,11 +19,14 @@
  */
 package org.sonar.python.checks;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import javax.annotation.Nullable;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.Symbol;
@@ -43,6 +46,7 @@ import org.sonar.python.tree.TreeUtils;
 
 
 public abstract class FlaskHardCodedSecret extends PythonSubscriptionCheck {
+  private static final Logger LOG = LoggerFactory.getLogger(FlaskHardCodedSecret.class);
   private static final String MESSAGE = "Don't disclose %s secret keys.";
   private static final String SECONDARY_MESSAGE = "Assignment to sensitive property.";
   private static final Set<String> FLASK_APP_CONFIG_QUALIFIER_FQNS = Set.of(
@@ -126,19 +130,19 @@ public abstract class FlaskHardCodedSecret extends PythonSubscriptionCheck {
       .map(StringLiteral.class::cast)
       .map(StringLiteral::trimmedQuotesValue)
       .filter(this.getSecretKeyKeyword()::equals)
-      .isPresent() && isStringLiteral(keyValuePair.value());
+      .isPresent() && isStringValue(keyValuePair.value());
   }
 
   private boolean hasIllegalKeywordArgument(CallExpression callExpression) {
     return Optional.ofNullable(TreeUtils.argumentByKeyword(this.getSecretKeyKeyword(), callExpression.arguments()))
       .map(RegularArgument::expression)
-      .filter(FlaskHardCodedSecret::isStringLiteral)
+      .filter(FlaskHardCodedSecret::isStringValue)
       .isPresent();
   }
 
   private void verifyAssignmentStatement(SubscriptionContext ctx) {
     AssignmentStatement assignmentStatementTree = (AssignmentStatement) ctx.syntaxNode();
-    if (!isStringLiteral(assignmentStatementTree.assignedValue())) {
+    if (!isStringValue(assignmentStatementTree.assignedValue())) {
       return;
     }
     List<Expression> expressionList = assignmentStatementTree.lhsExpressions().stream()
@@ -173,11 +177,22 @@ public abstract class FlaskHardCodedSecret extends PythonSubscriptionCheck {
       .isPresent();
   }
 
-  private static boolean isStringLiteral(@Nullable Expression expr) {
+  private static boolean isStringValue(@Nullable Expression expr) {
+    return isStringValue(expr, new HashSet<>());
+  }
+
+
+  private static boolean isStringValue(@Nullable Expression expr, Set<String> visited) {
     if (expr == null) {
       return false;
-    } else if (expr.is(Tree.Kind.NAME)) {
-      return isStringLiteral(Expressions.singleAssignedValue((Name) expr));
+    }
+    if (expr.is(Tree.Kind.NAME)) {
+      if (visited.contains(((Name) expr).name())) {
+        return false;
+      }
+      visited.add(((Name) expr).name());
+      Expression assignmentValueExpression = Expressions.singleAssignedValue((Name) expr);
+      return isStringValue(assignmentValueExpression, visited);
     } else {
       return expr.is(Tree.Kind.STRING_LITERAL);
     }

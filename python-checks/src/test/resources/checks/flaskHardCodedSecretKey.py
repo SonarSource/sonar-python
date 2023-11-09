@@ -54,6 +54,15 @@ def test_non_compliant_assignment_expressions(x):
 
     current_app.config['SECRET_KEY'] = app.config['SECRET_KEY'] = 'secret'      # Noncompliant
 #   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^>  ^^^^^^^^^^^^^^^^^^^^^^^^>  ^^^^^^^^
+    some_secret = assigned_secret
+    some_secret1 = some_secret
+    some_secret2 = some_secret1
+    some_secret3 = some_secret2
+    some_secret4 = some_secret3
+    some_secret5 = some_secret4
+    y = some_secret5
+    app.secret_key = y  # Noncompliant
+
 
 
 
@@ -151,4 +160,22 @@ def test_compliant(x):
     secret = get_secret_from_vault()
 
     current_app.secret_key = secret # Compliant
+
+    some_secret = x
+    some_secret1 = some_secret
+    some_secret2 = some_secret1
+    some_secret3 = some_secret2
+    some_secret4 = some_secret3
+    some_secret5 = some_secret4
+    x = some_secret5
+    app.secret_key = x # OK: x doesn't have a single assigned value.
+
+    some_secret = x
+    some_secret1 = some_secret
+    some_secret1 = some_secret1
+    some_secret2 = some_secret1
+    z = k
+    k = z
+    app.secret_key = k # OK: x doesn't have a single assigned value.
+
 
