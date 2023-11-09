@@ -170,12 +170,7 @@ def test_compliant(x):
     x = some_secret5
     app.secret_key = x # OK: x doesn't have a single assigned value.
 
-    some_secret = x
-    some_secret1 = some_secret
-    some_secret1 = some_secret1
-    some_secret2 = some_secret1
-    z = k
-    k = z
-    app.secret_key = k # OK: x doesn't have a single assigned value.
-
-
+x = []
+class TestInfiniteRecursion():
+    x = x
+    current_app.secret_key = x  # Coverage: no more infinite recursion.
