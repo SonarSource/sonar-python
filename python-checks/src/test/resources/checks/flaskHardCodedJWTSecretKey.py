@@ -111,6 +111,7 @@ def test_compliant(x):
     current_app.config.update('secret')
 
     current_app.config[x] = 'secret'  # OK
+    current_app.config['A_KEY'] = x  # OK
     current_app.config['A_KEY'] = 'secret'  # OK
     current_app.config['A_KEY', x] = 'secret'  # OK
     x = current_app.config['A_KEY'] = 'secret'  # OK

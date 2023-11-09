@@ -140,12 +140,13 @@ public abstract class FlaskHardCodedSecret extends PythonSubscriptionCheck {
 
   private void verifyAssignmentStatement(SubscriptionContext ctx) {
     AssignmentStatement assignmentStatementTree = (AssignmentStatement) ctx.syntaxNode();
+    if (!isStringLiteral(assignmentStatementTree.assignedValue())) {
+      return;
+    }
     List<Expression> expressionList = assignmentStatementTree.lhsExpressions().stream()
       .map(ExpressionList::expressions)
-      .filter(list -> list.size() == 1)
       .flatMap(List::stream)
       .filter(this::isSensitiveProperty)
-      .filter(expression -> isStringLiteral(assignmentStatementTree.assignedValue()))
       .collect(Collectors.toList());
     if (!expressionList.isEmpty()) {
       PreciseIssue issue = ctx.addIssue(assignmentStatementTree.assignedValue(), String.format(MESSAGE, this.getSecretKeyType()));
