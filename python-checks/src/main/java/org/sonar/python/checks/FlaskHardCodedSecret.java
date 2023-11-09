@@ -180,6 +180,8 @@ public abstract class FlaskHardCodedSecret extends PythonSubscriptionCheck {
       return false;
     } else if (expr.is(Tree.Kind.NAME)) {
       return isStringLiteral(Expressions.singleAssignedValue((Name) expr));
-    } else return expr.is(Tree.Kind.STRING_LITERAL);
+    } else {
+      return expr.is(Tree.Kind.STRING_LITERAL);
+    }
   }
 }
