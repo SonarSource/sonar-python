@@ -54,8 +54,6 @@ public abstract class FlaskHardCodedSecret extends PythonSubscriptionCheck {
 
   protected abstract String getSecretKeyType();
 
-  protected abstract Set<String> getFlaskAppConfigQualifierFqns();
-
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, this::verifyCallExpression);
@@ -154,31 +152,25 @@ public abstract class FlaskHardCodedSecret extends PythonSubscriptionCheck {
     }
   }
 
-  private boolean isSensitiveProperty(Expression expression) {
-    if (expression.is(Tree.Kind.SUBSCRIPTION)) {
-      return Optional.of((SubscriptionExpression) expression)
-        .map(SubscriptionExpression::object)
-        .flatMap(TreeUtils.toOptionalInstanceOfMapper(QualifiedExpression.class))
-        .map(QualifiedExpression::symbol)
-        .map(Symbol::fullyQualifiedName)
-        .filter(FLASK_APP_CONFIG_QUALIFIER_FQNS::contains)
-        .map(fqn -> ((SubscriptionExpression) expression).subscripts())
-        .map(ExpressionList::expressions)
-        .filter(list -> list.size() == 1)
-        .map(list -> list.get(0))
-        .map(FlaskHardCodedSecret::getAssignedValue)
-        .flatMap(TreeUtils.toOptionalInstanceOfMapper(StringLiteral.class))
-        .map(StringLiteral::trimmedQuotesValue)
-        .filter(this.getSecretKeyKeyword()::equals)
-        .isPresent();
-    } else if (expression.is(Tree.Kind.QUALIFIED_EXPR)) {
-      return Optional.of((QualifiedExpression) expression)
-        .map(QualifiedExpression::symbol)
-        .map(Symbol::fullyQualifiedName)
-        .filter(this.getFlaskAppConfigQualifierFqns()::contains)
-        .isPresent();
+  protected boolean isSensitiveProperty(Expression expression) {
+    if (!expression.is(Tree.Kind.SUBSCRIPTION)) {
+      return false;
     }
-    return false;
+    return Optional.of((SubscriptionExpression) expression)
+      .map(SubscriptionExpression::object)
+      .flatMap(TreeUtils.toOptionalInstanceOfMapper(QualifiedExpression.class))
+      .map(QualifiedExpression::symbol)
+      .map(Symbol::fullyQualifiedName)
+      .filter(FLASK_APP_CONFIG_QUALIFIER_FQNS::contains)
+      .map(fqn -> ((SubscriptionExpression) expression).subscripts())
+      .map(ExpressionList::expressions)
+      .filter(list -> list.size() == 1)
+      .map(list -> list.get(0))
+      .map(FlaskHardCodedSecret::getAssignedValue)
+      .flatMap(TreeUtils.toOptionalInstanceOfMapper(StringLiteral.class))
+      .map(StringLiteral::trimmedQuotesValue)
+      .filter(this.getSecretKeyKeyword()::equals)
+      .isPresent();
   }
 
   private static boolean isStringLiteral(@Nullable Expression expr) {

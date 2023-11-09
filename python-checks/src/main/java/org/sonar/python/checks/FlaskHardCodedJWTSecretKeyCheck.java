@@ -19,7 +19,6 @@
  */
 package org.sonar.python.checks;
 
-import java.util.Set;
 import org.sonar.check.Rule;
 
 @Rule(key = "S6781")
@@ -27,7 +26,6 @@ public class FlaskHardCodedJWTSecretKeyCheck extends FlaskHardCodedSecret {
 
   private static final String SECRET_KEY_KEYWORD = "JWT_SECRET_KEY";
   private static final String SECRET_KEY_TYPE = "\"Flask\" JWT";
-  private static final Set<String> FLASK_SECRET_KEY_FQNS = Set.of();
 
   @Override
   protected String getSecretKeyKeyword() {
@@ -39,8 +37,4 @@ public class FlaskHardCodedJWTSecretKeyCheck extends FlaskHardCodedSecret {
     return SECRET_KEY_TYPE;
   }
 
-  @Override
-  protected Set<String> getFlaskAppConfigQualifierFqns() {
-    return FLASK_SECRET_KEY_FQNS;
-  }
 }

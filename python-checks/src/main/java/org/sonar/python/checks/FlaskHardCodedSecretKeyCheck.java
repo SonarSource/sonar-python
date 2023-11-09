@@ -19,8 +19,13 @@
  */
 package org.sonar.python.checks;
 
+import java.util.Optional;
 import java.util.Set;
 import org.sonar.check.Rule;
+import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.QualifiedExpression;
+import org.sonar.plugins.python.api.tree.Tree;
 
 @Rule(key = "S6779")
 public class FlaskHardCodedSecretKeyCheck extends FlaskHardCodedSecret {
@@ -43,7 +48,15 @@ public class FlaskHardCodedSecretKeyCheck extends FlaskHardCodedSecret {
   }
 
   @Override
-  protected Set<String> getFlaskAppConfigQualifierFqns() {
-    return FLASK_SECRET_KEY_FQNS;
+  protected boolean isSensitiveProperty(Expression expression) {
+    if (expression.is(Tree.Kind.QUALIFIED_EXPR)) {
+      return Optional.of((QualifiedExpression) expression)
+        .map(QualifiedExpression::symbol)
+        .map(Symbol::fullyQualifiedName)
+        .filter(FLASK_SECRET_KEY_FQNS::contains)
+        .isPresent();
+    }
+    return super.isSensitiveProperty(expression);
   }
+
 }
