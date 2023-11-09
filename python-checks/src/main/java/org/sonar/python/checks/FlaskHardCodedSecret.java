@@ -25,8 +25,6 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import javax.annotation.Nullable;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.Symbol;
@@ -46,7 +44,6 @@ import org.sonar.python.tree.TreeUtils;
 
 
 public abstract class FlaskHardCodedSecret extends PythonSubscriptionCheck {
-  private static final Logger LOG = LoggerFactory.getLogger(FlaskHardCodedSecret.class);
   private static final String MESSAGE = "Don't disclose %s secret keys.";
   private static final String SECONDARY_MESSAGE = "Assignment to sensitive property.";
   private static final Set<String> FLASK_APP_CONFIG_QUALIFIER_FQNS = Set.of(
