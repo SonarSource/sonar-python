@@ -119,11 +119,16 @@ public abstract class FlaskHardCodedSecret extends PythonSubscriptionCheck {
     return dictionaryLiteral.elements().stream()
       .filter(KeyValuePair.class::isInstance)
       .map(KeyValuePair.class::cast)
-      .map(KeyValuePair::key)
+      .anyMatch(this::isIllegalKeyValuePair);
+  }
+
+  private boolean isIllegalKeyValuePair(KeyValuePair keyValuePair) {
+    return Optional.of(keyValuePair.key())
       .filter(StringLiteral.class::isInstance)
       .map(StringLiteral.class::cast)
       .map(StringLiteral::trimmedQuotesValue)
-      .anyMatch(key -> this.getSecretKeyKeyword().equals(key));
+      .filter(this.getSecretKeyKeyword()::equals)
+      .isPresent() && isStringLiteral(keyValuePair.value());
   }
 
   private boolean hasIllegalKeywordArgument(CallExpression callExpression) {
