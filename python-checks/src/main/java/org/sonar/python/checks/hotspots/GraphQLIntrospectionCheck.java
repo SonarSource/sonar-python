@@ -19,6 +19,7 @@
  */
 package org.sonar.python.checks.hotspots;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -67,29 +68,36 @@ public class GraphQLIntrospectionCheck extends PythonSubscriptionCheck {
   }
 
   private static boolean hasSensitiveMiddlewares(List<Argument> arguments) {
-    return areArgumentsUnsafe("middleware", expressionsNameContainIntrospection, arguments);
-  }
-
-  private static boolean hasSensitiveValidationRules(List<Argument> arguments) {
-    return areArgumentsUnsafe("validation_rules",
-      expressionsNameContainIntrospection.or(expressionsContainsSensitiveRuleFQN),
-      arguments);
-  }
-
-  private static boolean areArgumentsUnsafe(String argumentName, Predicate<List<Expression>> check, List<Argument> arguments) {
-    var middlewareArgument = TreeUtils.argumentByKeyword(argumentName, arguments);
-    if (middlewareArgument == null) {
+    RegularArgument argument = TreeUtils.argumentByKeyword("middleware", arguments);
+    if (argument == null) {
       return true;
     }
-    return Optional.of(middlewareArgument)
-      .map(RegularArgument::expression)
-      .flatMap(GraphQLIntrospectionCheck::expressionsFromListOrTuple)
-      .map(expressions -> expressions.isEmpty() || check.test(expressions))
+    return extractArgumentValues(argument)
+      .map(values -> values.isEmpty() || expressionsNameContainIntrospection(values))
       .orElse(false);
   }
 
+  private static boolean hasSensitiveValidationRules(List<Argument> arguments) {
+    RegularArgument argument = TreeUtils.argumentByKeyword("validation_rules", arguments);
+    if (argument == null) {
+      return true;
+    }
+    return extractArgumentValues(argument)
+      .map(values -> values.isEmpty() ||
+        expressionsNameContainIntrospection(values) ||
+        expressionsContainsSensitiveRuleFQN(values))
+      .orElse(false);
+  }
+
+  private static Optional<List<Expression>> extractArgumentValues(RegularArgument argument) {
+    return Optional.of(argument)
+      .map(RegularArgument::expression)
+      .flatMap(GraphQLIntrospectionCheck::expressionsFromListOrTuple);
+  }
+
   private static Optional<List<Expression>> expressionsFromListOrTuple(Expression expression) {
-    return TreeUtils.toOptionalInstanceOfMapper(ListLiteral.class).apply(expression)
+    return TreeUtils.toOptionalInstanceOfMapper(ListLiteral.class)
+      .apply(expression)
       .map(ListLiteral::elements)
       .map(ExpressionList::expressions)
       .or(() -> TreeUtils.toOptionalInstanceOfMapper(Tuple.class)
@@ -97,20 +105,24 @@ public class GraphQLIntrospectionCheck extends PythonSubscriptionCheck {
         .map(Tuple::elements));
   }
 
-  private static Predicate<List<Expression>> expressionsNameContainIntrospection = expressions -> expressions.stream()
-    .map(GraphQLIntrospectionCheck::nameFromIndentifierOrCallExpression)
-    .filter(Optional::isPresent)
-    .map(Optional::get)
-    .map(String::toUpperCase)
-    .anyMatch(name -> name.contains("INTROSPECTION"));
+  private static boolean expressionsNameContainIntrospection(List<Expression> expressions) {
+    return expressions.stream()
+      .map(GraphQLIntrospectionCheck::nameFromIndentifierOrCallExpression)
+      .filter(Optional::isPresent)
+      .map(Optional::get)
+      .map(String::toUpperCase)
+      .anyMatch(name -> name.contains("INTROSPECTION"));
+  }
 
-  private static Predicate<List<Expression>> expressionsContainsSensitiveRuleFQN = expressions -> expressions.stream()
-    .map(TreeUtils::getSymbolFromTree)
-    .filter(Optional::isPresent)
-    .map(Optional::get)
-    .map(Symbol::fullyQualifiedName)
-    .filter(Objects::nonNull)
-    .anyMatch(SENSITIVE_VALIDATION_RULE_FQNS::contains);
+  private static boolean expressionsContainsSensitiveRuleFQN(List<Expression> expressions) {
+    return expressions.stream()
+      .map(TreeUtils::getSymbolFromTree)
+      .filter(Optional::isPresent)
+      .map(Optional::get)
+      .map(Symbol::fullyQualifiedName)
+      .filter(Objects::nonNull)
+      .anyMatch(SENSITIVE_VALIDATION_RULE_FQNS::contains);
+  }
 
   private static Optional<String> nameFromIndentifierOrCallExpression(Expression expression) {
     return Optional.ofNullable(TreeUtils.nameFromExpression(expression))
