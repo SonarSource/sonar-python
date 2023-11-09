@@ -60,7 +60,7 @@ public class GraphQLIntrospectionCheck extends PythonSubscriptionCheck {
     CallExpression callExpression = (CallExpression) ctx.syntaxNode();
     Optional.ofNullable(callExpression.calleeSymbol())
       .map(Symbol::fullyQualifiedName)
-      .filter(fqn -> GRAPHQL_VIEWS_FQNS.contains(fqn))
+      .filter(GRAPHQL_VIEWS_FQNS::contains)
       .filter(fqn -> hasSensitiveMiddlewares(callExpression.arguments()) ||
         hasSensitiveValidationRules(callExpression.arguments()))
       .ifPresent(fqn -> ctx.addIssue(callExpression, MESSAGE));
