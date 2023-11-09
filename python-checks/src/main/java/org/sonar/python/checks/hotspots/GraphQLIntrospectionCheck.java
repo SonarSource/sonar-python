@@ -60,8 +60,9 @@ public class GraphQLIntrospectionCheck extends PythonSubscriptionCheck {
     CallExpression callExpression = (CallExpression) ctx.syntaxNode();
     Optional.ofNullable(callExpression.calleeSymbol())
       .map(Symbol::fullyQualifiedName)
-      .filter(fqn -> GRAPHQL_VIEWS_FQNS.contains(fqn) &&
-        (hasSensitiveMiddlewares(callExpression.arguments()) || hasSensitiveValidationRules(callExpression.arguments())))
+      .filter(fqn -> GRAPHQL_VIEWS_FQNS.contains(fqn))
+      .filter(fqn -> hasSensitiveMiddlewares(callExpression.arguments()) ||
+        hasSensitiveValidationRules(callExpression.arguments()))
       .ifPresent(fqn -> ctx.addIssue(callExpression, MESSAGE));
   }
 
@@ -94,12 +95,10 @@ public class GraphQLIntrospectionCheck extends PythonSubscriptionCheck {
   }
 
   private static Optional<List<Expression>> expressionsFromListOrTuple(Expression expression) {
-    return TreeUtils.toOptionalInstanceOfMapper(ListLiteral.class)
-      .apply(expression)
+    return TreeUtils.toOptionalInstanceOf(ListLiteral.class, expression)
       .map(ListLiteral::elements)
       .map(ExpressionList::expressions)
-      .or(() -> TreeUtils.toOptionalInstanceOfMapper(Tuple.class)
-        .apply(expression)
+      .or(() -> TreeUtils.toOptionalInstanceOf(Tuple.class, expression)
         .map(Tuple::elements));
   }
 
@@ -124,8 +123,7 @@ public class GraphQLIntrospectionCheck extends PythonSubscriptionCheck {
 
   private static Optional<String> nameFromIndentifierOrCallExpression(Expression expression) {
     return Optional.ofNullable(TreeUtils.nameFromExpression(expression))
-      .or(() -> TreeUtils.toOptionalInstanceOfMapper(CallExpression.class)
-        .apply(expression)
+      .or(() -> TreeUtils.toOptionalInstanceOf(CallExpression.class, expression)
         .map(CallExpression::callee)
         .map(TreeUtils::nameFromExpression))
       .filter(Objects::nonNull);
