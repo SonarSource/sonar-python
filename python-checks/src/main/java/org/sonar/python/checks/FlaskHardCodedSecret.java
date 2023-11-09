@@ -169,7 +169,7 @@ public abstract class FlaskHardCodedSecret extends PythonSubscriptionCheck {
         .map(FlaskHardCodedSecret::getAssignedValue)
         .flatMap(TreeUtils.toOptionalInstanceOfMapper(StringLiteral.class))
         .map(StringLiteral::trimmedQuotesValue)
-        .filter(key -> this.getSecretKeyKeyword().equals(key))
+        .filter(this.getSecretKeyKeyword()::equals)
         .isPresent();
     } else if (expression.is(Tree.Kind.QUALIFIED_EXPR)) {
       return Optional.of((QualifiedExpression) expression)
