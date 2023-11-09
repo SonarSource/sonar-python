@@ -156,12 +156,10 @@ def python_web_server_noncompliant():
 
     class MyServer(HTTPServer):
         def run(self):
+            HTTPServer.server_bind(self)  # Noncompliant
+        #   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
             super(self).serve_forever()  # Noncompliant
         #   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-        def server_bind(self):  # Noncompliant
-#       ^^^^^^^^^^^^^^^^^^^^^
-            pass
 
     my_server = MyServer(('0.0.0.0', 8080), SimpleHTTPRequestHandler)
     my_server.serve_forever()  # Noncompliant
@@ -169,18 +167,26 @@ def python_web_server_noncompliant():
 
     class MyThreadingServer(ThreadingHTTPServer):
         def run(self):
+            super().server_bind()  # Noncompliant
+        #   ^^^^^^^^^^^^^^^^^^^^^
             super(self).serve_forever()  # Noncompliant
         #   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-        def server_bind(self):  # Noncompliant
-#       ^^^^^^^^^^^^^^^^^^^^^
-            pass
 
     my_threading_server = MyThreadingServer(('0.0.0.0', 8080), SimpleHTTPRequestHandler)
     my_threading_server.serve_forever()  # Noncompliant
 
 
 def python_web_server_compliant(ok_server):
+
+    from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
+    from http.server import HTTPServer as PythonServer
+
+    http_server = PythonServer(('0.0.0.0', 8080), SimpleHTTPRequestHandler)
+    http_server.server_bind()  # Compliant we do not raise here as the call to server bind was done already in the constructor
+
+    class MyThreadingServer(ThreadingHTTPServer):
+        def server_bind(self):  # Compliant
+            pass
 
     ok_server.serve_forever()  # Compliant
     ok_server.server_bind()
@@ -197,7 +203,7 @@ def python_web_server_compliant(ok_server):
             super(self).serve_forever()  # Compliant
 
         def server_bind(self):
-            pass
+            HTTPServer.server_bind(self)
 
     my_server = MyServer()
     my_server.serve_forever()
