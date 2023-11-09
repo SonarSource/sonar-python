@@ -46,6 +46,7 @@ import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.Statement;
+import org.sonar.plugins.python.api.tree.StatementList;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TryStatement;
 import org.sonar.plugins.python.api.types.InferredType;
@@ -71,7 +72,7 @@ public class TypeInference extends BaseTreeVisitor {
       @Override
       public void visitFunctionDef(FunctionDef funcDef) {
         super.visitFunctionDef(funcDef);
-        inferTypesAndMemberAccessSymbols(funcDef, pythonFile);
+        inferTypesAndMemberAccessSymbolsForFunction(funcDef, pythonFile);
       }
     });
     fileInput.accept(new BaseTreeVisitor() {
@@ -86,6 +87,7 @@ public class TypeInference extends BaseTreeVisitor {
         }
       }
     });
+    inferTypesAndMemberAccessSymbolsForFile(fileInput, pythonFile);
   }
 
   private static Set<Symbol> getTrackedVars(Set<Symbol> localVariables, Set<Name> assignedNames) {
@@ -102,7 +104,34 @@ public class TypeInference extends BaseTreeVisitor {
     return trackedVars;
   }
 
-  private static void inferTypesAndMemberAccessSymbols(FunctionDef functionDef, PythonFile pythonFile) {
+  private static void inferTypesAndMemberAccessSymbolsForFile(FileInput fileInput, PythonFile pythonFile) {
+    StatementList statements = fileInput.statements();
+    if (statements == null) {
+      return;
+    }
+    TypeInference visitor = new TypeInference();
+    fileInput.accept(visitor);
+    Set<Name> assignedNames = visitor.assignmentsByLhs.values().stream()
+      .flatMap(Collection::stream)
+      .map(a -> a.lhsName)
+      .collect(Collectors.toSet());
+
+    TryStatementVisitor tryStatementVisitor = new TryStatementVisitor();
+    statements.accept(tryStatementVisitor);
+    if (tryStatementVisitor.hasTryStatement) {
+      // CFG doesn't model precisely try-except statements. Hence we fallback to AST based type inference
+      visitor.processPropagations(getTrackedVars(fileInput.globalVariables(), assignedNames));
+      statements.accept(new NameVisitor());
+    } else {
+      ControlFlowGraph cfg = ControlFlowGraph.build(fileInput, pythonFile);
+      if (cfg == null) {
+        return;
+      }
+      visitor.flowSensitiveTypeInference(cfg, getTrackedVars(fileInput.globalVariables(), assignedNames), fileInput);
+    }
+  }
+
+  private static void inferTypesAndMemberAccessSymbolsForFunction(FunctionDef functionDef, PythonFile pythonFile) {
     TypeInference visitor = new TypeInference();
     functionDef.accept(visitor);
     Set<Name> assignedNames = visitor.assignmentsByLhs.values().stream()
@@ -110,24 +139,12 @@ public class TypeInference extends BaseTreeVisitor {
       .map(a -> a.lhsName)
       .collect(Collectors.toSet());
 
-    TryStatementVisitor tryStatementVisitor = new TryStatementVisitor(functionDef);
+    TryStatementVisitor tryStatementVisitor = new TryStatementVisitor();
     functionDef.body().accept(tryStatementVisitor);
     if (tryStatementVisitor.hasTryStatement) {
       // CFG doesn't model precisely try-except statements. Hence we fallback to AST based type inference
       visitor.processPropagations(getTrackedVars(functionDef.localVariables(), assignedNames));
-      functionDef.body().accept(new BaseTreeVisitor() {
-        @Override
-        public void visitFunctionDef(FunctionDef visited) {
-          // Don't visit nested functions
-        }
-
-        @Override
-        public void visitName(Name name) {
-          Optional.ofNullable(name.symbol()).ifPresent(symbol ->
-            ((NameImpl) name).setInferredType(((SymbolImpl) symbol).inferredType()));
-          super.visitName(name);
-        }
-      });
+      functionDef.body().accept(new NameVisitor());
     } else {
       ControlFlowGraph cfg = ControlFlowGraph.build(functionDef, pythonFile);
       if (cfg == null) {
@@ -142,13 +159,22 @@ public class TypeInference extends BaseTreeVisitor {
     }
   }
 
-  private static class TryStatementVisitor extends BaseTreeVisitor {
-    FunctionDef functionDef;
-    boolean hasTryStatement = false;
-
-    TryStatementVisitor(FunctionDef functionDef) {
-      this.functionDef = functionDef;
+  private static class NameVisitor extends BaseTreeVisitor {
+    @Override
+    public void visitFunctionDef(FunctionDef visited) {
+      // Don't visit nested functions
     }
+
+    @Override
+    public void visitName(Name name) {
+      Optional.ofNullable(name.symbol()).ifPresent(symbol ->
+        ((NameImpl) name).setInferredType(((SymbolImpl) symbol).inferredType()));
+      super.visitName(name);
+    }
+  }
+
+  private static class TryStatementVisitor extends BaseTreeVisitor {
+    boolean hasTryStatement = false;
 
     @Override
     public void visitClassDef(ClassDef classDef) {
@@ -233,12 +259,14 @@ public class TypeInference extends BaseTreeVisitor {
    *     if i > 0: b = a.capitalize() # at the end of second execution, type of b is inferred to be "STR"
    *     else:     a = 'abc'
    */
-  private void flowSensitiveTypeInference(ControlFlowGraph cfg, Set<Symbol> trackedVars, FunctionDef functionDef) {
-    Optional.ofNullable(((FunctionDefImpl) functionDef).functionSymbol()).ifPresent(functionSymbol ->
-      parameterTypesByName = functionSymbol.parameters()
-        .stream()
-        .filter(parameter -> parameter.name() != null)
-        .collect(Collectors.toMap(FunctionSymbol.Parameter::name, FunctionSymbol.Parameter::declaredType)));
+  private void flowSensitiveTypeInference(ControlFlowGraph cfg, Set<Symbol> trackedVars, Tree scopeTree) {
+    if (scopeTree instanceof FunctionDefImpl) {
+      Optional.ofNullable(((FunctionDefImpl) scopeTree).functionSymbol()).ifPresent(functionSymbol ->
+        parameterTypesByName = functionSymbol.parameters()
+          .stream()
+          .filter(parameter -> parameter.name() != null)
+          .collect(Collectors.toMap(FunctionSymbol.Parameter::name, FunctionSymbol.Parameter::declaredType)));
+    }
 
     FlowSensitiveTypeInference flowSensitiveTypeInference =
       new FlowSensitiveTypeInference(trackedVars, memberAccessesByQualifiedExpr, assignmentsByAssignmentStatement, parameterTypesByName);

@@ -142,3 +142,10 @@ def call_properties():
     myvar.prop()  # FN
     myvar.custom_prop()  # FN
     myvar.callable_prop(1, 2)  # OK
+
+
+class CalledAtModuleLevel:
+  ...
+
+module_level_object = CalledAtModuleLevel()
+module_level_object() # Noncompliant
