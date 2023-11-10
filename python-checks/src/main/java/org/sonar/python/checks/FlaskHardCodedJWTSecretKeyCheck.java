@@ -19,13 +19,22 @@
  */
 package org.sonar.python.checks;
 
-import org.junit.jupiter.api.Test;
-import org.sonar.python.checks.utils.PythonCheckVerifier;
+import org.sonar.check.Rule;
 
-class FlaskHardCodedSecretCheckTest {
+@Rule(key = "S6781")
+public class FlaskHardCodedJWTSecretKeyCheck extends FlaskHardCodedSecret {
 
-  @Test
-  void test() {
-    PythonCheckVerifier.verify("src/test/resources/checks/flaskHardCodedSecret.py", new FlaskHardCodedSecretCheck());
+  private static final String SECRET_KEY_KEYWORD = "JWT_SECRET_KEY";
+  private static final String SECRET_KEY_TYPE = "\"Flask\" JWT";
+
+  @Override
+  protected String getSecretKeyKeyword() {
+    return SECRET_KEY_KEYWORD;
   }
+
+  @Override
+  protected String getSecretKeyType() {
+    return SECRET_KEY_TYPE;
+  }
+
 }

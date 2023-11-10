@@ -54,6 +54,15 @@ def test_non_compliant_assignment_expressions(x):
 
     current_app.config['SECRET_KEY'] = app.config['SECRET_KEY'] = 'secret'      # Noncompliant
 #   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^>  ^^^^^^^^^^^^^^^^^^^^^^^^>  ^^^^^^^^
+    some_secret = assigned_secret
+    some_secret1 = some_secret
+    some_secret2 = some_secret1
+    some_secret3 = some_secret2
+    some_secret4 = some_secret3
+    some_secret5 = some_secret4
+    y = some_secret5
+    app.secret_key = y  # Noncompliant
+
 
 
 
@@ -97,7 +106,7 @@ def test_compliant(x):
 
     app.config['A_KEY'] = 'secret'  # OK
     app.config['A_KEY'] = assigned_secret  # OK
-    x = app.config['A_KEY'] = 'secret'  # OK
+    _ = app.config['A_KEY'] = 'secret'  # OK
     app.config['A_KEY'], _ = 'mysecret', x # OK
     app.config['A_KEY'], _ = _, app.config['SECRET_KEY'] = 'secret', x # OK
 
@@ -105,9 +114,11 @@ def test_compliant(x):
         A_KEY="woopie"
     )
     d1 = {"A_KEY": "woopie"}
+    d2 = {"SECRET_KEY": x}
 
     app.config.update(d)
     app.config.update(d1)
+    app.config.update(d2)
 
     current_app.config.update(dict(
         SECRET_KEY=x  # OK
@@ -150,3 +161,16 @@ def test_compliant(x):
 
     current_app.secret_key = secret # Compliant
 
+    some_secret = x
+    some_secret1 = some_secret
+    some_secret2 = some_secret1
+    some_secret3 = some_secret2
+    some_secret4 = some_secret3
+    some_secret5 = some_secret4
+    x = some_secret5
+    app.secret_key = x # OK: x doesn't have a single assigned value.
+
+x = []
+class TestInfiniteRecursion():
+    x = x
+    current_app.secret_key = x  # Coverage: no more infinite recursion.
