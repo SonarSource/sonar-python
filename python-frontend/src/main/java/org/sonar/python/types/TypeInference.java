@@ -30,6 +30,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.cfg.ControlFlowGraph;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
@@ -68,7 +69,6 @@ public class TypeInference extends BaseTreeVisitor {
   private Map<String, InferredType> parameterTypesByName = new HashMap<>();
 
   public static void inferTypes(FileInput fileInput, PythonFile pythonFile) {
-    inferTypesAndMemberAccessSymbolsForFile(fileInput, pythonFile);
     fileInput.accept(new BaseTreeVisitor() {
       @Override
       public void visitFunctionDef(FunctionDef funcDef) {
@@ -88,6 +88,7 @@ public class TypeInference extends BaseTreeVisitor {
         }
       }
     });
+    inferTypesAndMemberAccessSymbolsForFile(fileInput, pythonFile);
   }
 
   private static Set<Symbol> getTrackedVars(Set<Symbol> localVariables, Set<Name> assignedNames) {
@@ -111,7 +112,7 @@ public class TypeInference extends BaseTreeVisitor {
       .map(a -> a.lhsName)
       .collect(Collectors.toSet());
 
-    TryStatementVisitor tryStatementVisitor = new TryStatementVisitor(fileInput);
+    TryStatementVisitor tryStatementVisitor = new TryStatementVisitor();
     StatementList statements = fileInput.statements();
     if (statements != null) {
       statements.accept(tryStatementVisitor);
@@ -149,7 +150,7 @@ public class TypeInference extends BaseTreeVisitor {
       .map(a -> a.lhsName)
       .collect(Collectors.toSet());
 
-    TryStatementVisitor tryStatementVisitor = new TryStatementVisitor(functionDef);
+    TryStatementVisitor tryStatementVisitor = new TryStatementVisitor();
     functionDef.body().accept(tryStatementVisitor);
     if (tryStatementVisitor.hasTryStatement) {
       // CFG doesn't model precisely try-except statements. Hence we fallback to AST based type inference
@@ -182,12 +183,7 @@ public class TypeInference extends BaseTreeVisitor {
   }
 
   private static class TryStatementVisitor extends BaseTreeVisitor {
-    //FunctionDef functionDef;
     boolean hasTryStatement = false;
-
-    TryStatementVisitor(Tree functionDef) {
-      //this.functionDef = functionDef;
-    }
 
     @Override
     public void visitClassDef(ClassDef classDef) {
@@ -272,21 +268,15 @@ public class TypeInference extends BaseTreeVisitor {
    *     if i > 0: b = a.capitalize() # at the end of second execution, type of b is inferred to be "STR"
    *     else:     a = 'abc'
    */
-  private void flowSensitiveTypeInference(ControlFlowGraph cfg, Set<Symbol> trackedVars, FunctionDef functionDef) {
-    Optional.ofNullable(((FunctionDefImpl) functionDef).functionSymbol()).ifPresent(functionSymbol ->
-      parameterTypesByName = functionSymbol.parameters()
-        .stream()
-        .filter(parameter -> parameter.name() != null)
-        .collect(Collectors.toMap(FunctionSymbol.Parameter::name, FunctionSymbol.Parameter::declaredType)));
+  private void flowSensitiveTypeInference(ControlFlowGraph cfg, Set<Symbol> trackedVars, Tree scopeTree) {
+    if (scopeTree instanceof FunctionDefImpl) {
+      Optional.ofNullable(((FunctionDefImpl) scopeTree).functionSymbol()).ifPresent(functionSymbol ->
+        parameterTypesByName = functionSymbol.parameters()
+          .stream()
+          .filter(parameter -> parameter.name() != null)
+          .collect(Collectors.toMap(FunctionSymbol.Parameter::name, FunctionSymbol.Parameter::declaredType)));
+    }
 
-    FlowSensitiveTypeInference flowSensitiveTypeInference =
-      new FlowSensitiveTypeInference(trackedVars, memberAccessesByQualifiedExpr, assignmentsByAssignmentStatement, parameterTypesByName);
-
-    flowSensitiveTypeInference.compute(cfg);
-    flowSensitiveTypeInference.compute(cfg);
-  }
-
-  private void flowSensitiveTypeInference(ControlFlowGraph cfg, Set<Symbol> trackedVars, FileInput fileInput) {
     FlowSensitiveTypeInference flowSensitiveTypeInference =
       new FlowSensitiveTypeInference(trackedVars, memberAccessesByQualifiedExpr, assignmentsByAssignmentStatement, parameterTypesByName);
 

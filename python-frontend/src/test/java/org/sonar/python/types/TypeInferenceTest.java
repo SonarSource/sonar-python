@@ -90,6 +90,30 @@ class TypeInferenceTest {
   void variable_outside_function() {
     assertThat(lastExpression("a = 42; a").type()).isEqualTo(INT);
   }
+  @Test
+  void variable_outside_function_2() {
+    assertThat(lastExpression(
+      "a = 42",
+      "def foo():",
+      "  a").type()).isEqualTo(anyType());
+  }
+
+  @Test
+  void variable_outside_function_3() {
+    assertThat(lastExpression(
+      "def foo():",
+      "  a = 42",
+      "a").type()).isEqualTo(anyType());
+  }
+
+  @Test
+  void variable_outside_function_4() {
+    assertThat(lastExpression(
+      "a = 42",
+      "def foo():",
+      "  a = 'hello'",
+      "a").type()).isEqualTo(INT);
+  }
 
   @Test
   void parameter() {
