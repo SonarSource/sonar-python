@@ -45,11 +45,11 @@ public class GraphQLIntrospectionCheck extends PythonSubscriptionCheck {
     "flask_graphql.GraphQLView.as_view",
     "graphql_server.flask.GraphQLView.as_view");
 
-  private static final Set<String> SENSITIVE_VALIDATION_RULE_FQNS = Set.of(
+  private static final Set<String> SAFE_VALIDATION_RULE_FQNS = Set.of(
     "graphene.validation.DisableIntrospection",
     "graphql.validation.NoSchemaIntrospectionCustomRule");
 
-  private static final String MESSAGE = "Disable introspection on this GraphQL server endpoint.";
+  private static final String MESSAGE = "Disable introspection on this \"GraphQL\" server endpoint.";
 
   @Override
   public void initialize(Context context) {
@@ -61,31 +61,32 @@ public class GraphQLIntrospectionCheck extends PythonSubscriptionCheck {
     Optional.ofNullable(callExpression.calleeSymbol())
       .map(Symbol::fullyQualifiedName)
       .filter(GRAPHQL_VIEWS_FQNS::contains)
-      .filter(fqn -> hasSensitiveMiddlewares(callExpression.arguments()) ||
-        hasSensitiveValidationRules(callExpression.arguments()))
-      .ifPresent(fqn -> ctx.addIssue(callExpression, MESSAGE));
+      .filter(fqn -> !hasSafeMiddlewares(callExpression.arguments()))
+      .filter(fqn -> !hasSafeValidationRules(callExpression.arguments()))
+      .ifPresent(fqn -> ctx.addIssue(callExpression.callee(), MESSAGE));
   }
 
-  private static boolean hasSensitiveMiddlewares(List<Argument> arguments) {
+  private static boolean hasSafeMiddlewares(List<Argument> arguments) {
     RegularArgument argument = TreeUtils.argumentByKeyword("middleware", arguments);
     if (argument == null) {
-      return true;
+      return false;
     }
+
     return extractArgumentValues(argument)
-      .map(values -> values.isEmpty() || expressionsNameContainIntrospection(values))
-      .orElse(false);
+      .map(values -> !values.isEmpty() && expressionsNameContainIntrospection(values))
+      .orElse(true);
   }
 
-  private static boolean hasSensitiveValidationRules(List<Argument> arguments) {
+  private static boolean hasSafeValidationRules(List<Argument> arguments) {
     RegularArgument argument = TreeUtils.argumentByKeyword("validation_rules", arguments);
     if (argument == null) {
-      return true;
+      return false;
     }
+
     return extractArgumentValues(argument)
-      .map(values -> values.isEmpty() ||
-        expressionsNameContainIntrospection(values) ||
-        expressionsContainsSensitiveRuleFQN(values))
-      .orElse(false);
+      .map(values -> !values.isEmpty() &&
+        (expressionsNameContainIntrospection(values) || expressionsContainsSafeRuleFQN(values)))
+      .orElse(true);
   }
 
   private static Optional<List<Expression>> extractArgumentValues(RegularArgument argument) {
@@ -104,28 +105,27 @@ public class GraphQLIntrospectionCheck extends PythonSubscriptionCheck {
 
   private static boolean expressionsNameContainIntrospection(List<Expression> expressions) {
     return expressions.stream()
-      .map(GraphQLIntrospectionCheck::nameFromIndentifierOrCallExpression)
+      .map(GraphQLIntrospectionCheck::nameFromIdentifierOrCallExpression)
       .filter(Optional::isPresent)
       .map(Optional::get)
       .map(String::toUpperCase)
       .anyMatch(name -> name.contains("INTROSPECTION"));
   }
 
-  private static boolean expressionsContainsSensitiveRuleFQN(List<Expression> expressions) {
+  private static boolean expressionsContainsSafeRuleFQN(List<Expression> expressions) {
     return expressions.stream()
       .map(TreeUtils::getSymbolFromTree)
       .filter(Optional::isPresent)
       .map(Optional::get)
       .map(Symbol::fullyQualifiedName)
       .filter(Objects::nonNull)
-      .anyMatch(SENSITIVE_VALIDATION_RULE_FQNS::contains);
+      .anyMatch(SAFE_VALIDATION_RULE_FQNS::contains);
   }
 
-  private static Optional<String> nameFromIndentifierOrCallExpression(Expression expression) {
+  private static Optional<String> nameFromIdentifierOrCallExpression(Expression expression) {
     return Optional.ofNullable(TreeUtils.nameFromExpression(expression))
       .or(() -> TreeUtils.toOptionalInstanceOf(CallExpression.class, expression)
         .map(CallExpression::callee)
-        .map(TreeUtils::nameFromExpression))
-      .filter(Objects::nonNull);
+        .map(TreeUtils::nameFromExpression));
   }
 }

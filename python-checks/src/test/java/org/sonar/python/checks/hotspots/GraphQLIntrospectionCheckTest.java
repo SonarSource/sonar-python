@@ -19,7 +19,8 @@
  */
 package org.sonar.python.checks.hotspots;
 
-import java.util.Collections;
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
@@ -27,7 +28,7 @@ class GraphQLIntrospectionCheckTest {
 
   @Test
   void test() {
-    PythonCheckVerifier.verify(Collections.singletonList("src/test/resources/checks/hotspots/graphQLIntrospection.py"), new GraphQLIntrospectionCheck());
+    PythonCheckVerifier.verify(List.of("src/test/resources/checks/hotspots/graphQLIntrospection.py"), new GraphQLIntrospectionCheck());
   }
 
 }
