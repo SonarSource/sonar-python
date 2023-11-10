@@ -93,7 +93,8 @@ public class ClearTextProtocolsCheck extends PythonSubscriptionCheck {
   private static void checkServerCallFromSuper(SubscriptionContext ctx) {
     QualifiedExpression qualifiedExpression = (QualifiedExpression) ctx.syntaxNode();
     Optional.of(qualifiedExpression)
-      .filter(qe -> SENSITIVE_HTTP_SERVER_METHOD_NAMES.contains(qe.name().name()) && isCallToSensitiveSuperClass(qe))
+      .filter(qe -> SENSITIVE_HTTP_SERVER_METHOD_NAMES.contains(qe.name().name()))
+      .filter(ClearTextProtocolsCheck::isCallToSensitiveSuperClass)
       .map(qe -> TreeUtils.firstAncestorOfKind(qe, Tree.Kind.CALL_EXPR))
       .flatMap(TreeUtils.toOptionalInstanceOfMapper(CallExpression.class))
       .ifPresent(ce -> ctx.addIssue(ce, message("http")));
