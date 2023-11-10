@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Stream;
 
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
@@ -36,6 +37,8 @@ import org.sonar.plugins.python.api.tree.ListLiteral;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tuple;
+import org.sonar.plugins.python.api.types.InferredType;
+import org.sonar.python.tree.NameImpl;
 import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S6786")
@@ -104,8 +107,11 @@ public class GraphQLIntrospectionCheck extends PythonSubscriptionCheck {
   }
 
   private static boolean expressionsNameContainIntrospection(List<Expression> expressions) {
-    return expressions.stream()
-      .map(GraphQLIntrospectionCheck::nameFromIdentifierOrCallExpression)
+    Stream<Optional<String>> expressionsNameAndType = Stream.concat(expressions.stream()
+      .map(GraphQLIntrospectionCheck::nameFromIdentifierOrCallExpression), 
+      expressions.stream().map(GraphQLIntrospectionCheck::nameOfType) );
+
+    return expressionsNameAndType
       .filter(Optional::isPresent)
       .map(Optional::get)
       .map(String::toUpperCase)
@@ -122,6 +128,12 @@ public class GraphQLIntrospectionCheck extends PythonSubscriptionCheck {
       .anyMatch(SAFE_VALIDATION_RULE_FQNS::contains);
   }
 
+  private static Optional<String> nameOfType(Expression expression) {
+    return TreeUtils.toOptionalInstanceOf(NameImpl.class, expression)
+      .map(NameImpl::type)
+      .map(InferredType::runtimeTypeSymbol)
+      .map(Symbol::name);
+  }
   private static Optional<String> nameFromIdentifierOrCallExpression(Expression expression) {
     return Optional.ofNullable(TreeUtils.nameFromExpression(expression))
       .or(() -> TreeUtils.toOptionalInstanceOf(CallExpression.class, expression)

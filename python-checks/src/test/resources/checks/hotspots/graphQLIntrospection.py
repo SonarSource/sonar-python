@@ -87,6 +87,28 @@ def flask_graphql_middleware_compliant(schema, some_middleware, introspection_mi
         middleware=some_middleware, # if it is not a list or a tuple we should not raise an issue
     )
 
+    class IntrospectionCustomMiddleware:
+            ...
+    my_custom_middleware = IntrospectionCustomMiddleware()
+
+    GraphQLView.as_view(
+            name="introspection",
+            schema=schema,
+            graphiql=True,
+            middleware=[my_custom_middleware]
+        )
+
+    def create_middleware():
+        return IntrospectionCustomMiddleware()
+
+    # FP this should be fixed with SONARPY-1554
+    GraphQLView.as_view( # Noncompliant 
+            name="introspection",
+            schema=schema,
+            graphiql=True,
+            middleware=[create_middleware()]
+        )
+
 def flask_graphql_validation_rules_non_compliant(schema, some_rule):
     from flask_graphql import GraphQLView
 
@@ -122,14 +144,25 @@ def flask_graphql_validation_rules_non_compliant(schema, some_rule):
         validation_rules=[some_rule]
     )
 
+    class UnsafeCustomMiddleware:
+            ...
+    my_custom_middleware = UnsafeCustomMiddleware()
 
-def flask_graphql_validation_rules_compliant(schema, some_rule, introspection_rule):
+    GraphQLView.as_view(  # Noncompliant 
+#   ^^^^^^^^^^^^^^^^^^^
+            name="introspection",
+            schema=schema,
+            graphiql=True,
+            middleware=[my_custom_middleware]
+        )
+
+def flask_graphql_validation_rules_compliant(schema, some_rule, some_middleware, introspection_rule):
     from flask_graphql import GraphQLView
     import graphene
     from graphene.validation import DisableIntrospection
     from graphene.validation import DisableIntrospection as SafeRule
     from graphql.validation import NoSchemaIntrospectionCustomRule
-    from graphql.validation import NoSchemaIntrospectionCustomRule as OtherSensitiveRule
+    from graphql.validation import NoSchemaIntrospectionCustomRule as OtherSafeRule
 
     GraphQLView.as_view(
         name="introspection",
@@ -156,13 +189,15 @@ def flask_graphql_validation_rules_compliant(schema, some_rule, introspection_ru
         name="introspection",
         schema=schema,
         graphiql=True,
-        validation_rules=[OtherSensitiveRule, some_rule]
+        middleware=[some_middleware],
+        validation_rules=[OtherSafeRule, some_rule]
     )
 
     GraphQLView.as_view( 
         name="introspection",
         schema=schema,
         graphiql=True,
+        middleware=[],
         validation_rules=[introspection_rule]
     )
 
