@@ -108,8 +108,8 @@ public class GraphQLIntrospectionCheck extends PythonSubscriptionCheck {
 
   private static boolean expressionsNameContainIntrospection(List<Expression> expressions) {
     Stream<Optional<String>> expressionsNameAndType = Stream.concat(expressions.stream()
-      .map(GraphQLIntrospectionCheck::nameFromIdentifierOrCallExpression), 
-      expressions.stream().map(GraphQLIntrospectionCheck::nameOfType) );
+      .map(GraphQLIntrospectionCheck::nameFromIdentifierOrCallExpression),
+      expressions.stream().map(GraphQLIntrospectionCheck::nameOfType));
 
     return expressionsNameAndType
       .filter(Optional::isPresent)
@@ -134,6 +134,7 @@ public class GraphQLIntrospectionCheck extends PythonSubscriptionCheck {
       .map(InferredType::runtimeTypeSymbol)
       .map(Symbol::name);
   }
+
   private static Optional<String> nameFromIdentifierOrCallExpression(Expression expression) {
     return Optional.ofNullable(TreeUtils.nameFromExpression(expression))
       .or(() -> TreeUtils.toOptionalInstanceOf(CallExpression.class, expression)

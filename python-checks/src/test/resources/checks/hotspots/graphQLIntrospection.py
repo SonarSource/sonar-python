@@ -101,7 +101,7 @@ def flask_graphql_middleware_compliant(schema, some_middleware, introspection_mi
     def create_middleware():
         return IntrospectionCustomMiddleware()
 
-    # FP this should be fixed with SONARPY-1554
+    # FP this case is hard to detect and is more in the DBD territory
     GraphQLView.as_view( # Noncompliant 
             name="introspection",
             schema=schema,
