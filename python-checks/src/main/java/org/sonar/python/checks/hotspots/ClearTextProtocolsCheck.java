@@ -22,7 +22,6 @@ package org.sonar.python.checks.hotspots;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -55,16 +54,14 @@ import org.sonar.python.tree.TreeUtils;
 public class ClearTextProtocolsCheck extends PythonSubscriptionCheck {
   private static final List<String> SENSITIVE_PROTOCOLS = Arrays.asList("http://", "ftp://", "telnet://");
   private static final Pattern LOOPBACK = Pattern.compile("localhost|127(?:\\.[0-9]+){0,2}\\.[0-9]+$|^(?:0*\\:)*?:?0*1", Pattern.CASE_INSENSITIVE);
-  private static final Map<String, String> ALTERNATIVES = new HashMap<>();
+  private static final Map<String, String> ALTERNATIVES = Map.of(
+    "http", "https",
+    "ftp", "sftp, scp or ftps",
+    "telnet", "ssh");
   private static final String SENSITIVE_HTTP_SERVER_START_FQN = "socketserver.BaseServer.serve_forever";
   private static final String SENSITIVE_HTTP_SERVER_BIND_FQN = "socketserver.BaseServer.server_bind";
+  private static final Set<String> SENSITIVE_HTTP_SERVER_METHOD_NAMES = Set.of("serve_forever", "server_bind");
   private static final Set<String> SENSITIVE_HTTP_SERVER_CLASSES = Set.of("http.server.HTTPServer", "http.server.ThreadingHTTPServer");
-
-  static {
-    ALTERNATIVES.put("http", "https");
-    ALTERNATIVES.put("ftp", "sftp, scp or ftps");
-    ALTERNATIVES.put("telnet", "ssh");
-  }
 
   @Override
   public void initialize(Context context) {
@@ -96,7 +93,7 @@ public class ClearTextProtocolsCheck extends PythonSubscriptionCheck {
   private static void checkServerCallFromSuper(SubscriptionContext ctx) {
     QualifiedExpression qualifiedExpression = (QualifiedExpression) ctx.syntaxNode();
     Optional.of(qualifiedExpression)
-      .filter(qe -> (isName("serve_forever", qe.name()) || isName("server_bind", qe.name())) && isCallToSensitiveSuperClass(qe))
+      .filter(qe -> SENSITIVE_HTTP_SERVER_METHOD_NAMES.contains(qe.name().name()) && isCallToSensitiveSuperClass(qe))
       .map(qe -> TreeUtils.firstAncestorOfKind(qe, Tree.Kind.CALL_EXPR))
       .flatMap(TreeUtils.toOptionalInstanceOfMapper(CallExpression.class))
       .ifPresent(ce -> ctx.addIssue(ce, message("http")));
@@ -108,10 +105,6 @@ public class ClearTextProtocolsCheck extends PythonSubscriptionCheck {
       .map(Symbol::fullyQualifiedName)
       .filter(fqn -> SENSITIVE_HTTP_SERVER_BIND_FQN.equals(fqn) && isParentClassExtendingSensitiveClass(callExpression))
       .ifPresent(fqn -> ctx.addIssue(callExpression, message("http")));
-  }
-
-  private static boolean isName(String nameToCheck, Name name) {
-    return nameToCheck.equals(name.name());
   }
 
   private static boolean isCallToSensitiveSuperClass(QualifiedExpression expression) {
