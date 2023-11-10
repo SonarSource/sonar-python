@@ -56,6 +56,7 @@ import org.sonar.python.checks.hotspots.DisabledHtmlAutoEscapeLegacyCheck;
 import org.sonar.python.checks.hotspots.DynamicCodeExecutionCheck;
 import org.sonar.python.checks.hotspots.EmailSendingCheck;
 import org.sonar.python.checks.hotspots.ExpandingArchiveCheck;
+import org.sonar.python.checks.hotspots.GraphQLIntrospectionCheck;
 import org.sonar.python.checks.hotspots.HardCodedCredentialsCheck;
 import org.sonar.python.checks.hotspots.HashingDataCheck;
 import org.sonar.python.checks.hotspots.HttpOnlyCookieCheck;
@@ -211,6 +212,7 @@ public final class CheckList {
       GenericFunctionTypeParameterCheck.class,
       GenericTypeWithoutArgumentCheck.class,
       GraphemeClustersInClassesCheck.class,
+      GraphQLIntrospectionCheck.class,
       GroupReplacementCheck.class,
       HardCodedCredentialsCheck.class,
       HardcodedIPCheck.class,
