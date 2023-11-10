@@ -96,7 +96,7 @@ l1.error("Foo %s", "Bar", "too many")  # Noncompliant
 l2 = logging.getLogger('l2')
 l2 = logging.getLogger('l3')
 l2.error("Foo %s", "Bar")
-l2.error("Foo %s", "Bar", "too many")  # FN
+l2.error("Foo %s", "Bar", "too many")  # Noncompliant
 
 l3 = 'hello'
 l3.error("Foo %s", "Bar", "too many")

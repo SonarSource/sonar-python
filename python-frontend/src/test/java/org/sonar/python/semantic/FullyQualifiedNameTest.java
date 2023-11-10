@@ -519,7 +519,7 @@ class FullyQualifiedNameTest {
       "b.foo()"
     );
     QualifiedExpression qualifiedExpression = (QualifiedExpression) getAllDescendant(tree, t -> t.is(Tree.Kind.QUALIFIED_EXPR)).get(1);
-    assertThat(qualifiedExpression.symbol().fullyQualifiedName()).isNull();
+    assertThat(qualifiedExpression.symbol().fullyQualifiedName()).isEqualTo("my_package.my_module.A.B.foo");
   }
 
   @Test
@@ -564,7 +564,7 @@ class FullyQualifiedNameTest {
     assertThat(qualifiedExpression.symbol()).isNotNull();
     assertThat(qualifiedExpression.symbol().name()).isEqualTo("foo");
     // a may be modified by other modules
-    assertThat(qualifiedExpression.symbol().fullyQualifiedName()).isNull();
+    assertThat(qualifiedExpression.symbol().fullyQualifiedName()).isEqualTo("my_package.my_module.A.foo");
   }
 
   @Test
@@ -580,7 +580,7 @@ class FullyQualifiedNameTest {
       "a.foo()"
     );
     QualifiedExpression qualifiedExpression = getFirstChild(tree, t -> t.is(Tree.Kind.QUALIFIED_EXPR));
-    assertThat(qualifiedExpression.symbol().fullyQualifiedName()).isNull();
+    assertThat(qualifiedExpression.symbol().fullyQualifiedName()).isEqualTo("my_package.my_module.A.foo");
   }
 
   @Test
@@ -594,7 +594,7 @@ class FullyQualifiedNameTest {
       "b.method()"
     );
     QualifiedExpression qualifiedExpression = getFirstChild(tree, t -> t.is(Tree.Kind.QUALIFIED_EXPR));
-    assertThat(qualifiedExpression.symbol().fullyQualifiedName()).isNull();
+    assertThat(qualifiedExpression.symbol().fullyQualifiedName()).isEqualTo("my_package.my_module.A.method");
   }
 
   @Test

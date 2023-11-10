@@ -46,6 +46,7 @@ import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.Statement;
+import org.sonar.plugins.python.api.tree.StatementList;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TryStatement;
 import org.sonar.plugins.python.api.types.InferredType;
@@ -67,6 +68,7 @@ public class TypeInference extends BaseTreeVisitor {
   private Map<String, InferredType> parameterTypesByName = new HashMap<>();
 
   public static void inferTypes(FileInput fileInput, PythonFile pythonFile) {
+    inferTypesAndMemberAccessSymbolsForFile(fileInput, pythonFile);
     fileInput.accept(new BaseTreeVisitor() {
       @Override
       public void visitFunctionDef(FunctionDef funcDef) {
@@ -110,11 +112,14 @@ public class TypeInference extends BaseTreeVisitor {
       .collect(Collectors.toSet());
 
     TryStatementVisitor tryStatementVisitor = new TryStatementVisitor(fileInput);
-    fileInput.statements().accept(tryStatementVisitor);
+    StatementList statements = fileInput.statements();
+    if (statements != null) {
+      statements.accept(tryStatementVisitor);
+    }
     if (tryStatementVisitor.hasTryStatement) {
       // CFG doesn't model precisely try-except statements. Hence we fallback to AST based type inference
       visitor.processPropagations(getTrackedVars(fileInput.globalVariables(), assignedNames));
-      fileInput.statements().accept(new BaseTreeVisitor() {
+      statements.accept(new BaseTreeVisitor() {
         @Override
         public void visitFunctionDef(FunctionDef visited) {
           // Don't visit nested functions
@@ -282,12 +287,6 @@ public class TypeInference extends BaseTreeVisitor {
   }
 
   private void flowSensitiveTypeInference(ControlFlowGraph cfg, Set<Symbol> trackedVars, FileInput fileInput) {
-    Optional.ofNullable(((FunctionDefImpl) functionDef).functionSymbol()).ifPresent(functionSymbol ->
-      parameterTypesByName = functionSymbol.parameters()
-        .stream()
-        .filter(parameter -> parameter.name() != null)
-        .collect(Collectors.toMap(FunctionSymbol.Parameter::name, FunctionSymbol.Parameter::declaredType)));
-
     FlowSensitiveTypeInference flowSensitiveTypeInference =
       new FlowSensitiveTypeInference(trackedVars, memberAccessesByQualifiedExpr, assignmentsByAssignmentStatement, parameterTypesByName);
 

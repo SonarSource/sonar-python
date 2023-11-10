@@ -88,7 +88,7 @@ class TypeInferenceTest {
 
   @Test
   void variable_outside_function() {
-    assertThat(lastExpression("a = 42; a").type()).isEqualTo(anyType());
+    assertThat(lastExpression("a = 42; a").type()).isEqualTo(INT);
   }
 
   @Test
