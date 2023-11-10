@@ -84,7 +84,7 @@ public abstract class FlaskHardCodedSecret extends PythonSubscriptionCheck {
       .map(RegularArgument::expression)
       .map(FlaskHardCodedSecret::getAssignedValue)
       .filter(this::isIllegalDictArgument)
-      .ifPresent(expr -> ctx.addIssue(callExpression, String.format(MESSAGE, this.getSecretKeyType())));
+      .ifPresent(expr -> ctx.addIssue(callExpression, String.format(MESSAGE, getSecretKeyType())));
 
   }
 
@@ -126,12 +126,12 @@ public abstract class FlaskHardCodedSecret extends PythonSubscriptionCheck {
       .filter(StringLiteral.class::isInstance)
       .map(StringLiteral.class::cast)
       .map(StringLiteral::trimmedQuotesValue)
-      .filter(this.getSecretKeyKeyword()::equals)
+      .filter(getSecretKeyKeyword()::equals)
       .isPresent() && isStringValue(keyValuePair.value());
   }
 
   private boolean hasIllegalKeywordArgument(CallExpression callExpression) {
-    return Optional.ofNullable(TreeUtils.argumentByKeyword(this.getSecretKeyKeyword(), callExpression.arguments()))
+    return Optional.ofNullable(TreeUtils.argumentByKeyword(getSecretKeyKeyword(), callExpression.arguments()))
       .map(RegularArgument::expression)
       .filter(FlaskHardCodedSecret::isStringValue)
       .isPresent();
@@ -148,7 +148,7 @@ public abstract class FlaskHardCodedSecret extends PythonSubscriptionCheck {
       .filter(this::isSensitiveProperty)
       .collect(Collectors.toList());
     if (!expressionList.isEmpty()) {
-      PreciseIssue issue = ctx.addIssue(assignmentStatementTree.assignedValue(), String.format(MESSAGE, this.getSecretKeyType()));
+      PreciseIssue issue = ctx.addIssue(assignmentStatementTree.assignedValue(), String.format(MESSAGE, getSecretKeyType()));
       expressionList.forEach(expr -> issue.secondary(expr, SECONDARY_MESSAGE));
     }
   }
@@ -170,7 +170,7 @@ public abstract class FlaskHardCodedSecret extends PythonSubscriptionCheck {
       .map(FlaskHardCodedSecret::getAssignedValue)
       .flatMap(TreeUtils.toOptionalInstanceOfMapper(StringLiteral.class))
       .map(StringLiteral::trimmedQuotesValue)
-      .filter(this.getSecretKeyKeyword()::equals)
+      .filter(getSecretKeyKeyword()::equals)
       .isPresent();
   }
 
