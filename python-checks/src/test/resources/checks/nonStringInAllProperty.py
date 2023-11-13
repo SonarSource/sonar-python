@@ -58,8 +58,7 @@ __all__ = [
     var,  # Noncompliant
     reassigned_var, # Noncompliant
     reassigned_class, # Noncompliant
-    # FP here?
-    my_global_var, # Noncompliant
+    my_global_var, # OK
     another_string, # OK
     reassigned_string, # OK
     abs, # Noncompliant

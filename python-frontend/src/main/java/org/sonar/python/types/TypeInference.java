@@ -97,7 +97,8 @@ public class TypeInference extends BaseTreeVisitor {
       boolean hasMissingBindingUsage = variable.usages().stream()
         .filter(Usage::isBindingUsage)
         .anyMatch(u -> !assignedNames.contains(u.tree()));
-      if (!hasMissingBindingUsage) {
+      boolean isGlobal = variable.usages().stream().anyMatch(v -> v.kind().equals(Usage.Kind.GLOBAL_DECLARATION));
+      if (!hasMissingBindingUsage && !isGlobal) {
         trackedVars.add(variable);
       }
     }

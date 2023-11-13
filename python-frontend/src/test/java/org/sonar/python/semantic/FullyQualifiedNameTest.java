@@ -564,7 +564,7 @@ class FullyQualifiedNameTest {
     assertThat(qualifiedExpression.symbol()).isNotNull();
     assertThat(qualifiedExpression.symbol().name()).isEqualTo("foo");
     // a may be modified by other modules
-    assertThat(qualifiedExpression.symbol().fullyQualifiedName()).isEqualTo("my_package.my_module.A.foo");
+    assertThat(qualifiedExpression.symbol().fullyQualifiedName()).isNull();
   }
 
   @Test
