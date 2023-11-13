@@ -10,7 +10,8 @@ about the system, like the application’s path or file names.</p>
 <h2>Recommended Secure Coding Practices</h2>
 <p>Do not enable debugging features on production servers or applications distributed to end users.</p>
 <h2>Sensitive Code Example</h2>
-<pre>
+<p>Django application startup:</p>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 from django.conf import settings
 
 settings.configure(DEBUG=True)  # Sensitive when set to True
@@ -19,13 +20,39 @@ settings.configure(DEBUG_PROPAGATE_EXCEPTIONS=True)  # Sensitive when set to Tru
 def custom_config(config):
     settings.configure(default_settings=config, DEBUG=True)  # Sensitive
 </pre>
-<p>Django’s "settings.py" or "global_settings.py" configuration file:</p>
-<pre>
-# NOTE: The following code raises issues only if the file is named "settings.py" or "global_settings.py". This is the default
-# name of Django configuration file
-
+<p>Inside <code>settings.py</code> or <code>global_settings.py</code>, which are the default configuration files for a Django application:</p>
+<pre data-diff-id="2" data-diff-type="noncompliant">
 DEBUG = True  # Sensitive
 DEBUG_PROPAGATE_EXCEPTIONS = True  # Sensitive
+</pre>
+<p>Flask application startup:</p>
+<pre data-diff-id="3" data-diff-type="noncompliant">
+from flask import Flask
+
+app = Flask()
+app.debug = True  # Sensitive
+app.run(debug=True)  # Sensitive
+</pre>
+<h2>Compliant Solution</h2>
+<pre data-diff-id="1" data-diff-type="compliant">
+from django.conf import settings
+
+settings.configure(DEBUG=False)
+settings.configure(DEBUG_PROPAGATE_EXCEPTIONS=False)
+
+def custom_config(config):
+    settings.configure(default_settings=config, DEBUG=False)
+</pre>
+<pre data-diff-id="2" data-diff-type="compliant">
+DEBUG = False
+DEBUG_PROPAGATE_EXCEPTIONS = False
+</pre>
+<pre data-diff-id="3" data-diff-type="compliant">
+from flask import Flask
+
+app = Flask()
+app.debug = False
+app.run(debug=False)
 </pre>
 <h2>See</h2>
 <ul>

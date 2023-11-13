@@ -101,6 +101,49 @@ system. Instead, consider using environment variables, secure key management sys
 <p>Even with the strongest cipher algorithms, there is a risk that your secret keys may be compromised. Therefore, it is a good practice to
 periodically rotate your secret keys. By doing so, you limit the amount of time that an attacker can misuse a stolen key. When you rotate keys, be
 sure to allow a grace period where tokens signed with the old key are still accepted to prevent service disruptions.</p>
+<h2>How to fix it in python-jose</h2>
+<h3>Code examples</h3>
+<p>The following code contains an example of JWT decoding without verification of the signature.</p>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="111" data-diff-type="noncompliant">
+from jose import jwt
+
+jwt.decode(token, None, options={"verify_signature": False}) # Noncompliant
+</pre>
+<h4>Compliant solution</h4>
+<p>By default, verification is enabled for the methods <code>decode</code> and <code>verify</code>.</p>
+<pre data-diff-id="111" data-diff-type="compliant">
+from jose import jwt
+
+jwt.decode(token, key, algorithms=["HS256"])
+</pre>
+<h3>How does this work?</h3>
+<h4>Verify the signature of your tokens</h4>
+<p>Resolving a vulnerability concerning the validation of JWT token signatures is mainly about incorporating a critical step into your process:
+validating the signature every time a token is decoded. Just having a signed token using a secure algorithm is not enough. If you are not validating
+signatures, they are not serving their purpose.</p>
+<p>Every time your application receives a JWT, it needs to decode the token to extract the information contained within. It is during this decoding
+process that the signature of the JWT should also be checked.</p>
+<p>To resolve the issue follow these instructions:</p>
+<ol>
+  <li> Use framework-specific functions for signature verification: Most programming frameworks that support JWTs provide specific functions to not
+  only decode a token but also validate its signature simultaneously. Make sure to use these functions when handling incoming tokens. </li>
+  <li> Handle invalid signatures appropriately: If a JWT’s signature does not validate correctly, it means the token is not trustworthy, indicating
+  potential tampering. The action to take on encountering an invalid token should be denying the request carrying it and logging the event for further
+  investigation. </li>
+  <li> Incorporate signature validation in your tests: When you are writing tests for your application, include tests that check the signature
+  validation functionality. This can help you catch any instances where signature verification might be unintentionally skipped or bypassed. </li>
+</ol>
+<p>By following these practices, you can ensure the security of your application’s JWT handling process, making it resistant to attacks that rely on
+tampering with tokens. Validation of the signature needs to be an integral and non-negotiable part of your token handling process.</p>
+<h3>Going the extra mile</h3>
+<h4>Securely store your secret keys</h4>
+<p>Ensure that your secret keys are stored securely. They should not be hard-coded into your application code or checked into your version control
+system. Instead, consider using environment variables, secure key management systems, or vault services.</p>
+<h4>Rotate your secret keys</h4>
+<p>Even with the strongest cipher algorithms, there is a risk that your secret keys may be compromised. Therefore, it is a good practice to
+periodically rotate your secret keys. By doing so, you limit the amount of time that an attacker can misuse a stolen key. When you rotate keys, be
+sure to allow a grace period where tokens signed with the old key are still accepted to prevent service disruptions.</p>
 <h2>Resources</h2>
 <h3>Standards</h3>
 <ul>

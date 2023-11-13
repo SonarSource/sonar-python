@@ -111,6 +111,25 @@ cipher = Cipher(algorithms.AES(key), modes.CBC(iv), backend=default_backend())
 <p>It is highly recommended to use an algorithm that is currently considered secure by the cryptographic community. A common choice for such an
 algorithm is the Advanced Encryption Standard (AES).</p>
 <p>For block ciphers, it is not recommended to use algorithms with a block size that is smaller than 128 bits.</p>
+<h2>How to fix it in ssl</h2>
+<h3>Code examples</h3>
+<p>The following code contains examples of algorithms that are not considered highly resistant to cryptanalysis and thus should be avoided.</p>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="41" data-diff-type="noncompliant">
+import ssl
+
+ciphers = 'RC4-SHA:RC4-MD5'
+ctx = ssl.create_default_context()
+ctx.set_ciphers(ciphers)  # Noncompliant
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="41" data-diff-type="compliant">
+import ssl
+
+ctx = ssl.create_default_context()
+</pre>
+<h3>How does this work?</h3>
+<p>It is recommended to not override the ciphers but instead, use the secure default ciphers of the module, as they might change over time.</p>
 <h2>Resources</h2>
 <h3>Standards</h3>
 <ul>
