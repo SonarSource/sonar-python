@@ -99,6 +99,7 @@ import org.sonar.python.caching.CpdSerializer;
 import org.sonar.python.checks.CheckList;
 import org.sonar.python.index.VariableDescriptor;
 import org.sonar.python.tree.TokenImpl;
+import org.sonar.python.types.TypeShed;
 import org.sonarsource.sonarlint.core.analysis.api.ClientInputFile;
 import org.sonarsource.sonarlint.core.analysis.container.analysis.filesystem.FileMetadata;
 import org.sonarsource.sonarlint.core.analysis.container.analysis.filesystem.SonarLintInputFile;
@@ -219,6 +220,8 @@ class PythonSensorTest {
     context = SensorContextTester.create(baseDir);
     workDir = Files.createTempDirectory("workDir");
     context.fileSystem().setWorkDir(workDir);
+    ProjectPythonVersion.setCurrentVersions(PythonVersionUtils.allVersions());
+    TypeShed.resetBuiltinSymbols();
   }
 
   @Test
