@@ -236,3 +236,12 @@ def call_expression_in_arguments():
     import ssl
     conn = httplib.client.HTTPSConnection("123.123.21.21", context=ssl._create_unverified_context()) # Noncompliant {{Enable server certificate validation on this SSL/TLS connection.}}
 #                                                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^ 0
+
+def httpx_verify():
+    import httpx
+
+    httpx.get("https://expired.badssl.com/", verify=False)  # Noncompliant
+    httpx.get("https://expired.badssl.com/")  # Compliant
+
+    insecure_client = httpx.AsyncClient(verify=False)  # Noncompliant
+    secure_client = httpx.AsyncClient(verify=True)  # Compliant
