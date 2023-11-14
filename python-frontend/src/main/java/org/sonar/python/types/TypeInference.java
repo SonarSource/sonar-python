@@ -30,7 +30,6 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.cfg.ControlFlowGraph;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
@@ -73,7 +72,7 @@ public class TypeInference extends BaseTreeVisitor {
       @Override
       public void visitFunctionDef(FunctionDef funcDef) {
         super.visitFunctionDef(funcDef);
-        inferTypesAndMemberAccessSymbols(funcDef, pythonFile);
+        inferTypesAndMemberAccessSymbolsForFunction(funcDef, pythonFile);
       }
     });
     fileInput.accept(new BaseTreeVisitor() {
@@ -121,19 +120,7 @@ public class TypeInference extends BaseTreeVisitor {
     if (tryStatementVisitor.hasTryStatement) {
       // CFG doesn't model precisely try-except statements. Hence we fallback to AST based type inference
       visitor.processPropagations(getTrackedVars(fileInput.globalVariables(), assignedNames));
-      statements.accept(new BaseTreeVisitor() {
-        @Override
-        public void visitFunctionDef(FunctionDef visited) {
-          // Don't visit nested functions
-        }
-
-        @Override
-        public void visitName(Name name) {
-          Optional.ofNullable(name.symbol()).ifPresent(symbol ->
-            ((NameImpl) name).setInferredType(((SymbolImpl) symbol).inferredType()));
-          super.visitName(name);
-        }
-      });
+      statements.accept(new NameVisitor());
     } else {
       ControlFlowGraph cfg = ControlFlowGraph.build(fileInput, pythonFile);
       if (cfg == null) {
@@ -143,7 +130,7 @@ public class TypeInference extends BaseTreeVisitor {
     }
   }
 
-  private static void inferTypesAndMemberAccessSymbols(FunctionDef functionDef, PythonFile pythonFile) {
+  private static void inferTypesAndMemberAccessSymbolsForFunction(FunctionDef functionDef, PythonFile pythonFile) {
     TypeInference visitor = new TypeInference();
     functionDef.accept(visitor);
     Set<Name> assignedNames = visitor.assignmentsByLhs.values().stream()
@@ -156,19 +143,7 @@ public class TypeInference extends BaseTreeVisitor {
     if (tryStatementVisitor.hasTryStatement) {
       // CFG doesn't model precisely try-except statements. Hence we fallback to AST based type inference
       visitor.processPropagations(getTrackedVars(functionDef.localVariables(), assignedNames));
-      functionDef.body().accept(new BaseTreeVisitor() {
-        @Override
-        public void visitFunctionDef(FunctionDef visited) {
-          // Don't visit nested functions
-        }
-
-        @Override
-        public void visitName(Name name) {
-          Optional.ofNullable(name.symbol()).ifPresent(symbol ->
-            ((NameImpl) name).setInferredType(((SymbolImpl) symbol).inferredType()));
-          super.visitName(name);
-        }
-      });
+      functionDef.body().accept(new NameVisitor());
     } else {
       ControlFlowGraph cfg = ControlFlowGraph.build(functionDef, pythonFile);
       if (cfg == null) {
@@ -180,6 +155,20 @@ public class TypeInference extends BaseTreeVisitor {
         .collect(Collectors.toSet());
       assignedNames.addAll(annotatedParamNames);
       visitor.flowSensitiveTypeInference(cfg, getTrackedVars(functionDef.localVariables(), assignedNames), functionDef);
+    }
+  }
+
+  private static class NameVisitor extends BaseTreeVisitor {
+    @Override
+    public void visitFunctionDef(FunctionDef visited) {
+      // Don't visit nested functions
+    }
+
+    @Override
+    public void visitName(Name name) {
+      Optional.ofNullable(name.symbol()).ifPresent(symbol ->
+        ((NameImpl) name).setInferredType(((SymbolImpl) symbol).inferredType()));
+      super.visitName(name);
     }
   }
 
