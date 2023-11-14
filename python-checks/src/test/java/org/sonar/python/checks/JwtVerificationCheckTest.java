@@ -25,7 +25,13 @@ import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 class JwtVerificationCheckTest {
   @Test
-  void test() {
+  void jwt_test() {
     PythonCheckVerifier.verify(Collections.singletonList("src/test/resources/checks/jwtVerification.py"), new JwtVerificationCheck());
+  }
+
+  @Test
+  void python_jose_test() {
+    PythonCheckVerifier.verify(Collections.singletonList("src/test/resources/checks/pythonJoseVerification.py"),
+      new JwtVerificationCheck());
   }
 }
