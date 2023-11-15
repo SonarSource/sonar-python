@@ -163,42 +163,42 @@ public class VerifiedSslTlsCertificateCheck extends PythonSubscriptionCheck {
   }
 
   public static final Set<String> VERIFY_ARG_NAME = Set.of("verify");
+  public static final Set<String> VERIFY_SSL_ARG_NAMES = Set.of("verify_ssl", "ssl");
   /**
    * Set of FQNs of methods in <code>requests</code>-module that have the vulnerable <code>verify</code>-option.
    */
-  private static final Map<String, Set<String>> FALSE_ARGUMENT_METHODS = Map.ofEntries(
-    Map.entry("requests.api.request", VERIFY_ARG_NAME),
-    Map.entry("requests.api.get", VERIFY_ARG_NAME),
-    Map.entry("requests.api.head", VERIFY_ARG_NAME),
-    Map.entry("requests.api.post", VERIFY_ARG_NAME),
-    Map.entry("requests.api.put", VERIFY_ARG_NAME),
-    Map.entry("requests.api.delete", VERIFY_ARG_NAME),
-    Map.entry("requests.api.patch", VERIFY_ARG_NAME),
-    Map.entry("requests.api.options", VERIFY_ARG_NAME),
-    Map.entry("httpx.request", VERIFY_ARG_NAME),
-    Map.entry("httpx.stream", VERIFY_ARG_NAME),
-    Map.entry("httpx.get", VERIFY_ARG_NAME),
-    Map.entry("httpx.options", VERIFY_ARG_NAME),
-    Map.entry("httpx.head", VERIFY_ARG_NAME),
-    Map.entry("httpx.post", VERIFY_ARG_NAME),
-    Map.entry("httpx.put", VERIFY_ARG_NAME),
-    Map.entry("httpx.patch", VERIFY_ARG_NAME),
-    Map.entry("httpx.delete", VERIFY_ARG_NAME),
-    Map.entry("httpx.Client", VERIFY_ARG_NAME),
-    Map.entry("httpx.AsyncClient", VERIFY_ARG_NAME)
+  private static final Set<String> CALLS_WHERE_TO_ENFORCE_TRUE_ARGUMENT = Set.of(
+    "requests.api.request",
+    "requests.api.get",
+    "requests.api.head",
+    "requests.api.post",
+    "requests.api.put",
+    "requests.api.delete",
+    "requests.api.patch",
+    "requests.api.options",
+    "httpx.request",
+    "httpx.stream",
+    "httpx.get",
+    "httpx.options",
+    "httpx.head",
+    "httpx.post",
+    "httpx.put",
+    "httpx.patch",
+    "httpx.delete",
+    "httpx.Client",
+    "httpx.AsyncClient"
   );
 
   private static void requestsCheck(SubscriptionContext subscriptionContext) {
     var callExpr = (CallExpression) subscriptionContext.syntaxNode();
-    var argumentNames = ofNullable(callExpr.calleeSymbol())
+    var isVulnerableMethod = ofNullable(callExpr.calleeSymbol())
       .map(Symbol::fullyQualifiedName)
-      .filter(FALSE_ARGUMENT_METHODS::containsKey)
-      .map(FALSE_ARGUMENT_METHODS::get)
-      .orElseGet(Set::of);
+      .filter(CALLS_WHERE_TO_ENFORCE_TRUE_ARGUMENT::contains)
+      .isPresent();
 
-    if (!argumentNames.isEmpty()) {
-      Optional<List<Expression>> verifyRhs = searchVerifyAssignment(callExpr, argumentNames)
-        .or(() -> searchVerifyInKwargs(callExpr, argumentNames));
+    if (isVulnerableMethod) {
+      Optional<List<Expression>> verifyRhs = searchVerifyAssignment(callExpr, VERIFY_ARG_NAME)
+        .or(() -> searchVerifyInKwargs(callExpr, VERIFY_ARG_NAME));
 
       verifyRhs.ifPresent(sensitiveSettingExpressions -> {
         // The setting expression always comes last (`get` is safe: there can be only 1 or 2 elements)
@@ -221,9 +221,9 @@ public class VerifiedSslTlsCertificateCheck extends PythonSubscriptionCheck {
    * @return The <code>expr</code> part on the right hand side of the assignment.
    */
   private static Optional<List<Expression>> searchVerifyAssignment(CallExpression callExpr, Set<String> argumentNames) {
-    for (Argument a : callExpr.arguments()) {
-      if (a.is(Tree.Kind.REGULAR_ARGUMENT)) {
-        RegularArgument regArg = (RegularArgument) a;
+    for (Argument argument : callExpr.arguments()) {
+      if (argument.is(Tree.Kind.REGULAR_ARGUMENT)) {
+        RegularArgument regArg = (RegularArgument) argument;
         Name keywordArgument = regArg.keywordArgument();
         if (keywordArgument != null && argumentNames.contains(keywordArgument.name())) {
           return Optional.of(Collections.singletonList(regArg.expression()));

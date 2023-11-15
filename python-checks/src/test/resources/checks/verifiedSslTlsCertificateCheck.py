@@ -243,5 +243,30 @@ def httpx_verify():
     httpx.get("https://expired.badssl.com/", verify=False)  # Noncompliant
     httpx.get("https://expired.badssl.com/")  # Compliant
 
+    httpx.stream(method, url, verify=False) # Noncompliant
+    httpx.stream(method, url)
+
+    httpx.get(url, verify=False)    # Noncompliant
+    httpx.get(url)
+
+    httpx.options(url, verify=False)    # Noncompliant
+    httpx.options(url)
+
+    httpx.head(url, verify=False)   # Noncompliant
+    httpx.head(url)
+
+    httpx.post(url, verify=False)   # Noncompliant
+    httpx.post(url)
+
+    httpx.put(url, verify=False)    # Noncompliant
+    httpx.put(url)
+
+    httpx.patch(url, verify=False)  # Noncompliant
+    httpx.patch(url)
+
+    httpx.delete(url, verify=False) # Noncompliant
+    httpx.delete(url)
+
     insecure_client = httpx.AsyncClient(verify=False)  # Noncompliant
     secure_client = httpx.AsyncClient(verify=True)  # Compliant
+
