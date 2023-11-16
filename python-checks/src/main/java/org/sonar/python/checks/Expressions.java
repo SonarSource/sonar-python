@@ -26,6 +26,8 @@ import java.util.Locale;
 import java.util.Set;
 import java.util.stream.Collectors;
 import javax.annotation.Nullable;
+import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.DictionaryLiteral;
 import org.sonar.plugins.python.api.tree.Expression;
@@ -39,8 +41,6 @@ import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.plugins.python.api.tree.Tuple;
-import org.sonar.plugins.python.api.symbols.Symbol;
-import org.sonar.plugins.python.api.symbols.Usage;
 
 public class Expressions {
 
@@ -95,6 +95,14 @@ public class Expressions {
   }
 
   public static Expression singleAssignedValue(Name name) {
+    return singleAssignedValue(name, new HashSet<>());
+  }
+
+  public static Expression singleAssignedValue(Name name, Set<Name> visited) {
+    if (visited.contains(name)) {
+      return null;
+    }
+    visited.add(name);
     Symbol symbol = name.symbol();
     if (symbol == null) {
       return null;
@@ -117,6 +125,15 @@ public class Expressions {
       } else if (usage.isBindingUsage()) {
         return null;
       }
+    }
+    return result;
+  }
+
+  public static Expression singleAssignedNonNameValue(Name name) {
+    Set<Name> visited = new HashSet<>();
+    Expression result = singleAssignedValue(name, visited);
+    while (result != null && result.is(Kind.NAME)) {
+      result = singleAssignedValue((Name) result, visited);
     }
     return result;
   }

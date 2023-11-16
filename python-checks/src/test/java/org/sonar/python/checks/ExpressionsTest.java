@@ -19,7 +19,6 @@
  */
 package org.sonar.python.checks;
 
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Test;
@@ -35,10 +34,7 @@ import org.sonar.python.parser.PythonParser;
 import org.sonar.python.semantic.SymbolTableBuilder;
 import org.sonar.python.tree.PythonTreeMaker;
 
-import com.sonar.sslr.api.RecognitionException;
-
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.sonar.python.checks.Expressions.isFalsy;
 import static org.sonar.python.checks.Expressions.isTruthy;
 import static org.sonar.python.checks.Expressions.removeParentheses;
@@ -260,6 +256,27 @@ class ExpressionsTest {
     root.accept(nameVisitor);
     List<Name> names = nameVisitor.names;
     return Expressions.singleAssignedValue(names.get(names.size() - 1));
+  }
+
+  @Test
+  void singleAssignedNonNameValue() {
+    assertThat(lastNameNonNameValue("x = 42; y = x; y").getKind()).isEqualTo(Kind.NUMERIC_LITERAL);
+    assertThat(lastNameNonNameValue("x = y; y = x; y")).isNull();
+    assertThat(lastNameNonNameValue("x = 42; x").getKind()).isEqualTo(Kind.NUMERIC_LITERAL);
+    assertThat(lastNameNonNameValue("x = ''; x").getKind()).isEqualTo(Kind.STRING_LITERAL);
+    assertThat(lastNameNonNameValue("(x, y) = (42, 43); x")).isNull();
+    assertThat(lastNameNonNameValue("x = 42; import x; x")).isNull();
+    assertThat(lastNameNonNameValue("x = 42; x = 43; x")).isNull();
+    assertThat(lastNameNonNameValue("x = 42; y")).isNull();
+  }
+
+  private Expression lastNameNonNameValue(String code) {
+    FileInput root = parse(code);
+    new SymbolTableBuilder(null).visitFileInput(root);
+    NameVisitor nameVisitor = new NameVisitor();
+    root.accept(nameVisitor);
+    List<Name> names = nameVisitor.names;
+    return Expressions.singleAssignedNonNameValue(names.get(names.size() - 1));
   }
 
   private static class NameVisitor extends BaseTreeVisitor {
