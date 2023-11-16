@@ -23,14 +23,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
@@ -165,29 +162,43 @@ public class VerifiedSslTlsCertificateCheck extends PythonSubscriptionCheck {
     }
   }
 
+  public static final Set<String> VERIFY_ARG_NAME = Set.of("verify");
+  public static final Set<String> VERIFY_SSL_ARG_NAMES = Set.of("verify_ssl", "ssl");
   /**
    * Set of FQNs of methods in <code>requests</code>-module that have the vulnerable <code>verify</code>-option.
    */
-  private static Set<String> requestsMethods = Stream
-    .of("request", "get", "head", "post", "put", "delete", "patch", "options")
-    .map(method -> "requests.api." + method)
-    .collect(Collectors.toSet());
+  private static final Set<String> CALLS_WHERE_TO_ENFORCE_TRUE_ARGUMENT = Set.of(
+    "requests.api.request",
+    "requests.api.get",
+    "requests.api.head",
+    "requests.api.post",
+    "requests.api.put",
+    "requests.api.delete",
+    "requests.api.patch",
+    "requests.api.options",
+    "httpx.request",
+    "httpx.stream",
+    "httpx.get",
+    "httpx.options",
+    "httpx.head",
+    "httpx.post",
+    "httpx.put",
+    "httpx.patch",
+    "httpx.delete",
+    "httpx.Client",
+    "httpx.AsyncClient"
+  );
 
   private static void requestsCheck(SubscriptionContext subscriptionContext) {
-    CallExpression callExpr = (CallExpression) subscriptionContext.syntaxNode();
-    boolean isVulnerableMethod = ofNullable(callExpr.calleeSymbol())
+    var callExpr = (CallExpression) subscriptionContext.syntaxNode();
+    var isVulnerableMethod = ofNullable(callExpr.calleeSymbol())
       .map(Symbol::fullyQualifiedName)
-      .filter(requestsMethods::contains)
+      .filter(CALLS_WHERE_TO_ENFORCE_TRUE_ARGUMENT::contains)
       .isPresent();
 
     if (isVulnerableMethod) {
-      // Apparently, this is as close as one can get to short-circuiting `opt1.or(opt2)` before Java 9.
-      // https://stackoverflow.com/a/24600021/2707792
-      // All it does is first attempting to get `verify = rhs` from named parameter, and then `verify: rhs` from kwargs.
-      // In any case, we want the `rhs`, so we can check later whether it's a falsy value.
-      Optional<List<Expression>> verifyRhs = searchVerifyAssignment(callExpr)
-        .map(Optional::of)
-        .orElseGet(() -> searchVerifyInKwargs(callExpr));
+      Optional<List<Expression>> verifyRhs = searchVerifyAssignment(callExpr, VERIFY_ARG_NAME)
+        .or(() -> searchVerifyInKwargs(callExpr, VERIFY_ARG_NAME));
 
       verifyRhs.ifPresent(sensitiveSettingExpressions -> {
         // The setting expression always comes last (`get` is safe: there can be only 1 or 2 elements)
@@ -209,12 +220,12 @@ public class VerifiedSslTlsCertificateCheck extends PythonSubscriptionCheck {
    *
    * @return The <code>expr</code> part on the right hand side of the assignment.
    */
-  private static Optional<List<Expression>> searchVerifyAssignment(CallExpression callExpr) {
-    for (Argument a : callExpr.arguments()) {
-      if (a.is(Tree.Kind.REGULAR_ARGUMENT)) {
-        RegularArgument regArg = (RegularArgument) a;
+  private static Optional<List<Expression>> searchVerifyAssignment(CallExpression callExpr, Set<String> argumentNames) {
+    for (Argument argument : callExpr.arguments()) {
+      if (argument.is(Tree.Kind.REGULAR_ARGUMENT)) {
+        RegularArgument regArg = (RegularArgument) argument;
         Name keywordArgument = regArg.keywordArgument();
-        if (keywordArgument != null && "verify".equals(keywordArgument.name())) {
+        if (keywordArgument != null && argumentNames.contains(keywordArgument.name())) {
           return Optional.of(Collections.singletonList(regArg.expression()));
         }
       }
@@ -229,7 +240,7 @@ public class VerifiedSslTlsCertificateCheck extends PythonSubscriptionCheck {
    * Returns list of problematic expressions in the reverse order of importance (the <code>kwargs</code>-argument comes
    * first, the setting in the dictionary comes last).
    */
-  private static Optional<List<Expression>> searchVerifyInKwargs(CallExpression callExpression) {
+  private static Optional<List<Expression>> searchVerifyInKwargs(CallExpression callExpression, Set<String> argumentNames) {
     // Finds first unpacking argument (**kwargs),
     // attempts to find the definition with the dictionary,
     // then attempts to find a bad setting in the dictionary,
@@ -241,19 +252,20 @@ public class VerifiedSslTlsCertificateCheck extends PythonSubscriptionCheck {
       .findFirst()
       .flatMap(name -> Optional.ofNullable(Expressions.singleAssignedValue((Name) name))
         .filter(DictionaryLiteral.class::isInstance)
-        .flatMap(dict -> searchDangerousVerifySettingInDictionary((DictionaryLiteral) dict)
+        .flatMap(dict -> searchDangerousVerifySettingInDictionary((DictionaryLiteral) dict, argumentNames)
           .map(settingInDict -> Arrays.asList(name, settingInDict))));
   }
 
   /** Searches for a dangerous falsy <code>verify: False</code> in a dictionary literal. */
-  private static Optional<Expression> searchDangerousVerifySettingInDictionary(DictionaryLiteral dict) {
+  private static Optional<Expression> searchDangerousVerifySettingInDictionary(DictionaryLiteral dict, Set<String> argumentNames) {
     return dict.elements().stream()
       .filter(KeyValuePair.class::isInstance)
       .map(KeyValuePair.class::cast)
       .filter(kvp -> Optional.of(kvp.key())
         .filter(StringLiteral.class::isInstance)
         .map(StringLiteral.class::cast)
-        .filter(strLit -> "verify".equals(strLit.trimmedQuotesValue()))
+        .map(StringLiteral::trimmedQuotesValue)
+        .filter(argumentNames::contains)
         .isPresent())
       .findFirst()
       .map(KeyValuePair::value);
@@ -361,13 +373,11 @@ public class VerifiedSslTlsCertificateCheck extends PythonSubscriptionCheck {
   /**
    * Map from FQNs of sensitive context factories to the boolean that determines whether default settings are dangerous.
    */
-  private static final Map<String, Boolean> VULNERABLE_CONTEXT_FACTORIES = new HashMap<>();
-  static {
-    VULNERABLE_CONTEXT_FACTORIES.put("ssl._create_unverified_context", true);
-    VULNERABLE_CONTEXT_FACTORIES.put("ssl._create_stdlib_context", true);
-    VULNERABLE_CONTEXT_FACTORIES.put("ssl.create_default_context", false);
-    VULNERABLE_CONTEXT_FACTORIES.put("ssl._create_default_https_context", false);
-  }
+  private static final Map<String, Boolean> VULNERABLE_CONTEXT_FACTORIES = Map.of(
+    "ssl._create_unverified_context", true,
+    "ssl._create_stdlib_context", true,
+    "ssl.create_default_context", false,
+    "ssl._create_default_https_context", false);
 
   /** Pair and a mutable cell for combining all updates to <code>verify_mode</code>. */
   private static class VulnerabilityAndProblematicToken {
