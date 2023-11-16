@@ -76,8 +76,8 @@ __all__ = [
     3 + 4, # Noncompliant
     ("some", "string"), # Noncompliant
     a.my_name, # OK
-    a.my_staticmethod, # FN (no type inference at module level)
-    a.my_overloaded_stub, # FN (no type inference at module level)
+    a.my_staticmethod, # Noncompliant
+    a.my_overloaded_stub, # Noncompliant
     unknown_symbol, # FN
     unknown_imported,
     my_cyclic_def

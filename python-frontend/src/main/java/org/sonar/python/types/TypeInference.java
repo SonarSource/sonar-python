@@ -21,6 +21,7 @@ package org.sonar.python.types;
 
 import java.util.ArrayDeque;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Deque;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -29,6 +30,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.cfg.ControlFlowGraph;
@@ -46,6 +48,7 @@ import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.Statement;
+import org.sonar.plugins.python.api.tree.StatementList;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TryStatement;
 import org.sonar.plugins.python.api.types.InferredType;
@@ -86,6 +89,7 @@ public class TypeInference extends BaseTreeVisitor {
         }
       }
     });
+    inferTypesAndMemberAccessSymbols(fileInput, pythonFile);
   }
 
   private static Set<Symbol> getTrackedVars(Set<Symbol> localVariables, Set<Name> assignedNames) {
@@ -94,60 +98,87 @@ public class TypeInference extends BaseTreeVisitor {
       boolean hasMissingBindingUsage = variable.usages().stream()
         .filter(Usage::isBindingUsage)
         .anyMatch(u -> !assignedNames.contains(u.tree()));
-      if (!hasMissingBindingUsage) {
+      boolean isGlobal = variable.usages().stream().anyMatch(v -> v.kind().equals(Usage.Kind.GLOBAL_DECLARATION));
+      if (!hasMissingBindingUsage && !isGlobal) {
         trackedVars.add(variable);
       }
     }
     return trackedVars;
   }
 
+  private static void inferTypesAndMemberAccessSymbols(FileInput fileInput, PythonFile pythonFile) {
+    StatementList statements = fileInput.statements();
+    if (statements == null) {
+      return;
+    }
+    inferTypesAndMemberAccessSymbols(
+      fileInput,
+      statements,
+      fileInput.globalVariables(),
+      Collections.emptySet(),
+      () -> ControlFlowGraph.build(fileInput, pythonFile)
+    );
+  }
+
   private static void inferTypesAndMemberAccessSymbols(FunctionDef functionDef, PythonFile pythonFile) {
+    Set<Name> annotatedParamNames = TreeUtils.nonTupleParameters(functionDef).stream()
+      .filter(parameter -> parameter.typeAnnotation() != null)
+      .map(Parameter::name)
+      .collect(Collectors.toSet());
+    inferTypesAndMemberAccessSymbols(
+      functionDef,
+      functionDef.body(),
+      functionDef.localVariables(),
+      annotatedParamNames,
+      () -> ControlFlowGraph.build(functionDef, pythonFile)
+    );
+  }
+
+  private static void inferTypesAndMemberAccessSymbols(Tree scopeTree,
+    StatementList statements,
+    Set<Symbol> declaredVariables,
+    Set<Name> annotatedParameterNames,
+    Supplier<ControlFlowGraph> controlFlowGraphSupplier
+  ) {
     TypeInference visitor = new TypeInference();
-    functionDef.accept(visitor);
+    scopeTree.accept(visitor);
     Set<Name> assignedNames = visitor.assignmentsByLhs.values().stream()
       .flatMap(Collection::stream)
       .map(a -> a.lhsName)
       .collect(Collectors.toSet());
 
-    TryStatementVisitor tryStatementVisitor = new TryStatementVisitor(functionDef);
-    functionDef.body().accept(tryStatementVisitor);
+    TryStatementVisitor tryStatementVisitor = new TryStatementVisitor();
+    statements.accept(tryStatementVisitor);
     if (tryStatementVisitor.hasTryStatement) {
       // CFG doesn't model precisely try-except statements. Hence we fallback to AST based type inference
-      visitor.processPropagations(getTrackedVars(functionDef.localVariables(), assignedNames));
-      functionDef.body().accept(new BaseTreeVisitor() {
-        @Override
-        public void visitFunctionDef(FunctionDef visited) {
-          // Don't visit nested functions
-        }
-
-        @Override
-        public void visitName(Name name) {
-          Optional.ofNullable(name.symbol()).ifPresent(symbol ->
-            ((NameImpl) name).setInferredType(((SymbolImpl) symbol).inferredType()));
-          super.visitName(name);
-        }
-      });
+      visitor.processPropagations(getTrackedVars(declaredVariables, assignedNames));
+      statements.accept(new NameVisitor());
     } else {
-      ControlFlowGraph cfg = ControlFlowGraph.build(functionDef, pythonFile);
+      ControlFlowGraph cfg = controlFlowGraphSupplier.get();
       if (cfg == null) {
         return;
       }
-      Set<Name> annotatedParamNames = TreeUtils.nonTupleParameters(functionDef).stream()
-        .filter(parameter -> parameter.typeAnnotation() != null)
-        .map(Parameter::name)
-        .collect(Collectors.toSet());
-      assignedNames.addAll(annotatedParamNames);
-      visitor.flowSensitiveTypeInference(cfg, getTrackedVars(functionDef.localVariables(), assignedNames), functionDef);
+      assignedNames.addAll(annotatedParameterNames);
+      visitor.flowSensitiveTypeInference(cfg, getTrackedVars(declaredVariables, assignedNames), scopeTree);
+    }
+  }
+
+  private static class NameVisitor extends BaseTreeVisitor {
+    @Override
+    public void visitFunctionDef(FunctionDef visited) {
+      // Don't visit nested functions
+    }
+
+    @Override
+    public void visitName(Name name) {
+      Optional.ofNullable(name.symbol()).ifPresent(symbol ->
+        ((NameImpl) name).setInferredType(((SymbolImpl) symbol).inferredType()));
+      super.visitName(name);
     }
   }
 
   private static class TryStatementVisitor extends BaseTreeVisitor {
-    FunctionDef functionDef;
     boolean hasTryStatement = false;
-
-    TryStatementVisitor(FunctionDef functionDef) {
-      this.functionDef = functionDef;
-    }
 
     @Override
     public void visitClassDef(ClassDef classDef) {
@@ -232,12 +263,15 @@ public class TypeInference extends BaseTreeVisitor {
    *     if i > 0: b = a.capitalize() # at the end of second execution, type of b is inferred to be "STR"
    *     else:     a = 'abc'
    */
-  private void flowSensitiveTypeInference(ControlFlowGraph cfg, Set<Symbol> trackedVars, FunctionDef functionDef) {
-    Optional.ofNullable(((FunctionDefImpl) functionDef).functionSymbol()).ifPresent(functionSymbol ->
-      parameterTypesByName = functionSymbol.parameters()
+  private void flowSensitiveTypeInference(ControlFlowGraph cfg, Set<Symbol> trackedVars, Tree scopeTree) {
+    parameterTypesByName = TreeUtils.toOptionalInstanceOf(FunctionDefImpl.class, scopeTree)
+      .map(FunctionDefImpl::functionSymbol)
+      .map(FunctionSymbol::parameters)
+      .map(parameters -> parameters
         .stream()
         .filter(parameter -> parameter.name() != null)
-        .collect(Collectors.toMap(FunctionSymbol.Parameter::name, FunctionSymbol.Parameter::declaredType)));
+        .collect(Collectors.toMap(FunctionSymbol.Parameter::name, FunctionSymbol.Parameter::declaredType)))
+      .orElse(Collections.emptyMap());
 
     FlowSensitiveTypeInference flowSensitiveTypeInference =
       new FlowSensitiveTypeInference(trackedVars, memberAccessesByQualifiedExpr, assignmentsByAssignmentStatement, parameterTypesByName);

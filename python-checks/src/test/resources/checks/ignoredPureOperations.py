@@ -66,3 +66,8 @@ def exceptions_in_try_blocks():
 def edge_case():
     round = 1
     round(1.3)
+
+
+s = "hello"
+s.replace('o', 'x') # Noncompliant
+print(s)

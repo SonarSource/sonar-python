@@ -22,7 +22,7 @@ def passed_as_argument():
 
 
 ls = [1, 2, 3]
-result = ls.append(42)  # FN - no type inference outside of functions
+result = ls.append(42)  # Noncompliant
 
 
 def win32():
