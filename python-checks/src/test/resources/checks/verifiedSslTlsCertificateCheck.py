@@ -270,3 +270,9 @@ def httpx_verify():
     insecure_client = httpx.AsyncClient(verify=False)  # Noncompliant
     secure_client = httpx.AsyncClient(verify=True)  # Compliant
 
+async def aiohttp_test():
+    import aiohttp
+    async with aiohttp.ClientSession() as session:
+        session.request('GET', "https://expired.badssl.com/", verify_ssl=False) # Noncompliant
+        session.request('GET', "https://expired.badssl.com/", ssl=False) # Noncompliant
+        session.request('GET', "https://expired.badssl.com/") # Compliant
