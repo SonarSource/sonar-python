@@ -21,23 +21,30 @@ package org.sonar.python.checks.hotspots;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Deque;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import javax.annotation.CheckForNull;
+import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
+import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.Symbol;
-import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.ExpressionList;
-import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.SubscriptionExpression;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
+import org.sonar.python.tree.TreeUtils;
 
 import static org.sonar.python.checks.Expressions.isFalsy;
 
@@ -57,44 +64,66 @@ public abstract class AbstractCookieFlagCheck extends PythonSubscriptionCheck {
 
     context.registerSyntaxNodeConsumer(Kind.CALL_EXPR, ctx -> {
       CallExpression callExpression = (CallExpression) ctx.syntaxNode();
-      Symbol calleeSymbol = callExpression.calleeSymbol();
-      if (calleeSymbol != null && sensitiveArgumentByFQN().containsKey(calleeSymbol.fullyQualifiedName())) {
-        if (callExpression.arguments().stream().anyMatch(argument -> argument.is(Kind.UNPACKING_EXPR))) {
-          return;
-        }
-        RegularArgument flagArgument = getArgument(callExpression.arguments(), sensitiveArgumentByFQN().get(calleeSymbol.fullyQualifiedName()), flagName());
-        if (flagArgument == null || isFalsy(flagArgument.expression())) {
-          ctx.addIssue(callExpression.callee(), message());
-        }
-      }
+      verifyCallExpression(ctx, callExpression);
     });
   }
 
-  @CheckForNull
-  private static RegularArgument getArgument(List<Argument> arguments, int nArg, String argumentName) {
-    return arguments.stream()
-      // in call site of this function, argument will always be of type RegularArgument because we check no argument is unpacking
-      .map(RegularArgument.class::cast)
-      .filter(argument -> {
-        Name keywordArgument = argument.keywordArgument();
-        return keywordArgument != null && keywordArgument.name().equals(argumentName);
-      })
-      .findFirst().orElseGet(() -> checkSensitivePositionalArgument(arguments, nArg));
+  private void verifyCallExpression(SubscriptionContext ctx, CallExpression callExpression) {
+    if (callExpression.arguments().stream().anyMatch(argument -> argument.is(Kind.UNPACKING_EXPR))) {
+      return;
+    }
+    var registry = methodArgumentsToCheckRegistry();
+
+    var methodName = getCallExpressionMethodName(callExpression);
+    var methodFqn = getCallExpressionMethodFqn(callExpression);
+    if ((methodName != null && registry.hasMethodName(methodName)) || (methodFqn != null && registry.hasMethodFqn(methodFqn))) {
+      findMethodArgumentToCheck(callExpression)
+        .ifPresent(methodArgumentsToCheck -> {
+          RegularArgument argument = TreeUtils.nthArgumentOrKeyword(methodArgumentsToCheck.argumentPosition(), methodArgumentsToCheck.argumentName(), callExpression.arguments());
+          if ((methodArgumentsToCheck.complainIfMissing() && argument == null)
+            || methodArgumentsToCheck.invalidArgumentPredicate().test(argument)) {
+            ctx.addIssue(callExpression.callee(), message());
+          }
+        });
+    }
   }
 
-  private static RegularArgument checkSensitivePositionalArgument(List<Argument> arguments, int nArg) {
-    for (int i = 0; i < arguments.size(); i++) {
-      // in call site of this function, argument will always be of type RegularArgument because we check no argument is unpacking
-      RegularArgument arg = (RegularArgument) arguments.get(i);
-      if (i == nArg) {
-        return arg;
-      }
-      if (arg.keywordArgument() != null) {
-        // not positional anymore
-        return null;
-      }
-    }
-    return null;
+  private Optional<MethodArgumentsToCheck> findMethodArgumentToCheck(CallExpression callExpression) {
+    return Optional.of(callExpression)
+      .map(AbstractCookieFlagCheck::getCallExpressionMethodFqn)
+      .map(methodArgumentsToCheckRegistry()::getByMethodFqn)
+      .or(() -> Optional.of(callExpression)
+          .map(AbstractCookieFlagCheck::getCallExpressionMethodName)
+          .map(methodArgumentsToCheckRegistry()::getByMethodName)
+          .stream()
+          .flatMap(Collection::stream)
+          .filter(methodArgumentsToCheck -> canBeOrExtendMatches(callExpression, methodArgumentsToCheck))
+          .findFirst()
+      );
+  }
+
+  private static Boolean canBeOrExtendMatches(CallExpression callExpression, MethodArgumentsToCheck methodArgumentsToCheck) {
+    return Optional.of(callExpression)
+      .map(CallExpression::callee)
+      .flatMap(TreeUtils.toOptionalInstanceOfMapper(QualifiedExpression.class))
+      .map(QualifiedExpression::qualifier)
+      .map(Expression::type)
+      .map(t -> t.mustBeOrExtend(methodArgumentsToCheck.calleeFqn()))
+      .orElse(false);
+  }
+
+  private static String getCallExpressionMethodName(CallExpression callExpression) {
+    return Optional.of(callExpression)
+      .map(CallExpression::calleeSymbol)
+      .map(Symbol::name)
+      .orElse(null);
+  }
+
+  private static String getCallExpressionMethodFqn(CallExpression callExpression) {
+    return Optional.of(callExpression)
+      .map(CallExpression::calleeSymbol)
+      .map(Symbol::fullyQualifiedName)
+      .orElse(null);
   }
 
   private static Stream<SubscriptionExpression> getSubscriptionToCookies(List<ExpressionList> lhsExpressions) {
@@ -143,6 +172,99 @@ public abstract class AbstractCookieFlagCheck extends PythonSubscriptionCheck {
   }
 
   abstract String flagName();
+
   abstract String message();
-  abstract Map<String, Integer> sensitiveArgumentByFQN();
+
+  abstract MethodArgumentsToCheckRegistry methodArgumentsToCheckRegistry();
+
+  static class MethodArgumentsToCheckRegistry {
+    private final Map<String, List<MethodArgumentsToCheck>> byMethodName;
+    private final Map<String, MethodArgumentsToCheck> byMethodFqn;
+
+    public MethodArgumentsToCheckRegistry(MethodArgumentsToCheck... arguments) {
+      byMethodName = Stream.of(arguments)
+        .filter(argument -> Objects.nonNull(argument.methodName))
+        .collect(Collectors.groupingBy(MethodArgumentsToCheck::methodName));
+
+      byMethodFqn = Stream.of(arguments)
+        .collect(Collectors.toMap(MethodArgumentsToCheck::methodFqn, Function.identity(), (v1, v2) -> v2));
+    }
+
+    List<MethodArgumentsToCheck> getByMethodName(String methodName) {
+      return byMethodName.get(methodName);
+    }
+
+    MethodArgumentsToCheck getByMethodFqn(String methodFqn) {
+      return byMethodFqn.get(methodFqn);
+    }
+
+    boolean hasMethodName(String methodName) {
+      return byMethodName.containsKey(methodName);
+    }
+
+    boolean hasMethodFqn(String methodFqn) {
+      return byMethodFqn.containsKey(methodFqn);
+    }
+  }
+
+  static class MethodArgumentsToCheck {
+    private final String calleeFqn;
+    private final String methodName;
+    private final String methodFqn;
+    private final String argumentName;
+    private final int argumentPosition;
+    private final boolean complainIfMissing;
+    private final Predicate<RegularArgument> invalidArgumentPredicate;
+
+
+    public MethodArgumentsToCheck(String calleeFqn, String argumentName, int argumentPosition, boolean complainIfMissing,
+      Predicate<RegularArgument> invalidArgumentPredicate) {
+      this(calleeFqn, null, argumentName, argumentPosition, complainIfMissing, invalidArgumentPredicate);
+    }
+
+    public MethodArgumentsToCheck(String calleeFqn, String methodName, String argumentName, int argumentPosition, boolean complainIfMissing) {
+      this(calleeFqn, methodName, argumentName, argumentPosition, complainIfMissing, arg -> isFalsy(arg.expression()));
+    }
+
+    public MethodArgumentsToCheck(String calleeFqn, @Nullable String methodName, String argumentName, int argumentPosition,
+      boolean complainIfMissing, Predicate<RegularArgument> invalidArgumentPredicate) {
+      this.calleeFqn = calleeFqn;
+      this.methodName = methodName;
+      this.invalidArgumentPredicate = invalidArgumentPredicate;
+      methodFqn = Optional.ofNullable(methodName)
+        .map(mn -> calleeFqn + "." + mn)
+        .orElse(calleeFqn);
+      this.argumentName = argumentName;
+      this.argumentPosition = argumentPosition;
+      this.complainIfMissing = complainIfMissing;
+    }
+
+    public String calleeFqn() {
+      return calleeFqn;
+    }
+
+    public String methodName() {
+      return methodName;
+    }
+
+    public String argumentName() {
+      return argumentName;
+    }
+
+    public int argumentPosition() {
+      return argumentPosition;
+    }
+
+    public boolean complainIfMissing() {
+      return complainIfMissing;
+    }
+
+    public String methodFqn() {
+      return methodFqn;
+    }
+
+    public Predicate<RegularArgument> invalidArgumentPredicate() {
+      return invalidArgumentPredicate;
+    }
+  }
 }

@@ -433,8 +433,8 @@ public class TreeUtils {
     return tree -> toOptionalInstanceOf(castToClass, tree);
   }
 
-  public static <T extends Tree> Optional<T> toOptionalInstanceOf(Class<T> castToClass, Tree tree) {
-    return Optional.of(tree).filter(castToClass::isInstance).map(castToClass::cast);
+  public static <T extends Tree> Optional<T> toOptionalInstanceOf(Class<T> castToClass, @Nullable Tree tree) {
+    return Optional.ofNullable(tree).filter(castToClass::isInstance).map(castToClass::cast);
   }
 
   public static Optional<Tree> firstChild(Tree tree, Predicate<Tree> filter) {

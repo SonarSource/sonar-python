@@ -19,9 +19,6 @@
  */
 package org.sonar.python.checks.hotspots;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Optional;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.SubscriptionContext;
@@ -42,21 +39,12 @@ import org.sonar.python.checks.Expressions;
 @Rule(key = "S3330")
 public class HttpOnlyCookieCheck extends AbstractCookieFlagCheck {
 
-  private static Map<String, Integer> sensitiveArgumentByFQN;
+  public static final String HTTPONLY_ARGUMENT_NAME = "httponly";
+  public static final String SET_COOKIE_METHOD_NAME = "set_cookie";
+
   @Override
   String flagName() {
-    return "httponly";
-  }
-
-  static {
-    sensitiveArgumentByFQN = new HashMap<>();
-    sensitiveArgumentByFQN.put("django.http.response.HttpResponseBase.set_cookie", 7);
-    sensitiveArgumentByFQN.put("django.http.response.HttpResponseBase.set_signed_cookie", 8);
-    sensitiveArgumentByFQN.put("flask.wrappers.Response.set_cookie", 7);
-    sensitiveArgumentByFQN.put("werkzeug.wrappers.BaseResponse.set_cookie", 7);
-    // SONARPY-1357: It should be possible to report on flask.Response.set_cookie without setting the original fully qualified name of the method
-    sensitiveArgumentByFQN.put("werkzeug.sansio.response.Response.set_cookie", 7);
-    sensitiveArgumentByFQN = Collections.unmodifiableMap(sensitiveArgumentByFQN);
+    return HTTPONLY_ARGUMENT_NAME;
   }
 
   @Override
@@ -65,9 +53,16 @@ public class HttpOnlyCookieCheck extends AbstractCookieFlagCheck {
   }
 
   @Override
-  Map<String, Integer> sensitiveArgumentByFQN() {
-    return sensitiveArgumentByFQN;
+  MethodArgumentsToCheckRegistry methodArgumentsToCheckRegistry() {
+    return new MethodArgumentsToCheckRegistry(
+      new MethodArgumentsToCheck("django.http.response.HttpResponseBase", SET_COOKIE_METHOD_NAME, HTTPONLY_ARGUMENT_NAME, 7, true),
+      new MethodArgumentsToCheck("django.http.response.HttpResponseBase", "set_signed_cookie" , HTTPONLY_ARGUMENT_NAME, 8, true),
+      new MethodArgumentsToCheck("flask.wrappers.Response", SET_COOKIE_METHOD_NAME, HTTPONLY_ARGUMENT_NAME, 7, true),
+      new MethodArgumentsToCheck("werkzeug.wrappers.BaseResponse", SET_COOKIE_METHOD_NAME, HTTPONLY_ARGUMENT_NAME, 7, true),
+      new MethodArgumentsToCheck("werkzeug.sansio.response.Response", SET_COOKIE_METHOD_NAME, HTTPONLY_ARGUMENT_NAME, 7, true)
+    );
   }
+
 
   @Override
   public void initialize(Context context) {
