@@ -275,4 +275,6 @@ async def aiohttp_test():
     async with aiohttp.ClientSession() as session:
         session.request('GET', "https://expired.badssl.com/", verify_ssl=False) # Noncompliant
         session.request('GET', "https://expired.badssl.com/", ssl=False) # Noncompliant
+        session.request('GET', "https://expired.badssl.com/", verify_ssl=False, ssl=True) # Noncompliant
+        session.request('GET', "https://expired.badssl.com/", verify_ssl=True, ssl=False) # Noncompliant
         session.request('GET', "https://expired.badssl.com/") # Compliant

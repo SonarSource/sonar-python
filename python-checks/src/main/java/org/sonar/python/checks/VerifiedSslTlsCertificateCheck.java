@@ -29,6 +29,8 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
@@ -243,16 +245,17 @@ public class VerifiedSslTlsCertificateCheck extends PythonSubscriptionCheck {
       .or(() -> searchVerifyInKwargs(callExpr, argumentNames));
 
     verifyRhs.ifPresent(sensitiveSettingExpressions -> {
-      // The setting expression always comes last (`get` is safe: there can be only 1 or 2 elements)
-      Expression rhs = sensitiveSettingExpressions.get(sensitiveSettingExpressions.size() - 1);
-      if (Expressions.isFalsy(rhs) || isFalsyCollection(rhs)) {
-        PreciseIssue issue = subscriptionContext.addIssue(rhs, MESSAGE);
-
-        // report everything except the last one as secondary locations.
-        for (int i = 0; i < sensitiveSettingExpressions.size() - 1; i++) {
-          issue.secondary(sensitiveSettingExpressions.get(i), "Dictionary is passed here as **kwargs.");
-        }
-      }
+      sensitiveSettingExpressions
+        .stream()
+        .filter(rhs -> Expressions.isFalsy(rhs) || isFalsyCollection(rhs))
+        .findFirst()
+        .ifPresent(rhs -> {
+          var issue = subscriptionContext.addIssue(rhs, MESSAGE);
+          // report everything except the last one as secondary locations.
+          sensitiveSettingExpressions.stream()
+            .filter(v -> v != rhs)
+            .forEach(v -> issue.secondary(v, "Dictionary is passed here as **kwargs."));
+      });
     });
   }
 
@@ -262,16 +265,18 @@ public class VerifiedSslTlsCertificateCheck extends PythonSubscriptionCheck {
    * @return The <code>expr</code> part on the right hand side of the assignment.
    */
   private static Optional<List<Expression>> searchVerifyAssignment(CallExpression callExpr, Set<String> argumentNames) {
-    for (Argument argument : callExpr.arguments()) {
-      if (argument.is(Tree.Kind.REGULAR_ARGUMENT)) {
-        RegularArgument regArg = (RegularArgument) argument;
-        Name keywordArgument = regArg.keywordArgument();
-        if (keywordArgument != null && argumentNames.contains(keywordArgument.name())) {
-          return Optional.of(Collections.singletonList(regArg.expression()));
-        }
-      }
-    }
-    return Optional.empty();
+    var args = callExpr.arguments()
+      .stream()
+      .filter(RegularArgument.class::isInstance)
+      .map(RegularArgument.class::cast)
+      .filter(regArg -> Optional.of(regArg)
+          .map(RegularArgument::keywordArgument)
+          .map(Name::name)
+          .filter(argumentNames::contains)
+          .isPresent())
+      .map(RegularArgument::expression)
+      .collect(Collectors.toList());
+    return Optional.of(args).filter(Predicate.not(List::isEmpty));
   }
 
   /**
