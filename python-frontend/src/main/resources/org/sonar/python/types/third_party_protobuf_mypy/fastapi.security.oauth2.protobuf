@@ -1,0 +1,223 @@
+
+fastapi.security.oauth2Œ
+OAuth2Modelfastapi.openapi.models.OAuth2"#fastapi.openapi.models.SecurityBaserÑ
+type_#fastapi.openapi.models.OAuth2.type_V
+)fastapi.openapi.models.SecuritySchemeType")fastapi.openapi.models.SecuritySchemeTypert
+flows#fastapi.openapi.models.OAuth2.flowsF
+!fastapi.openapi.models.OAuthFlows"!fastapi.openapi.models.OAuthFlows˜
+OAuthFlowsModel!fastapi.openapi.models.OAuthFlows"pydantic.main.BaseModelr—
+implicit*fastapi.openapi.models.OAuthFlows.implicitò
+4Union[fastapi.openapi.models.OAuthFlowImplicit,None]T
+(fastapi.openapi.models.OAuthFlowImplicit"(fastapi.openapi.models.OAuthFlowImplicit
+Noner—
+password*fastapi.openapi.models.OAuthFlows.passwordò
+4Union[fastapi.openapi.models.OAuthFlowPassword,None]T
+(fastapi.openapi.models.OAuthFlowPassword"(fastapi.openapi.models.OAuthFlowPassword
+Noner˛
+clientCredentials3fastapi.openapi.models.OAuthFlows.clientCredentials≥
+=Union[fastapi.openapi.models.OAuthFlowClientCredentials,None]f
+1fastapi.openapi.models.OAuthFlowClientCredentials"1fastapi.openapi.models.OAuthFlowClientCredentials
+Noner˛
+authorizationCode3fastapi.openapi.models.OAuthFlows.authorizationCode≥
+=Union[fastapi.openapi.models.OAuthFlowAuthorizationCode,None]f
+1fastapi.openapi.models.OAuthFlowAuthorizationCode"1fastapi.openapi.models.OAuthFlowAuthorizationCode
+None˛
+
+OAuth2PasswordRequestForm1fastapi.security.oauth2.OAuth2PasswordRequestForm"builtins.object*´
+__init__:fastapi.security.oauth2.OAuth2PasswordRequestForm.__init__"
+None*p
+selff
+1fastapi.security.oauth2.OAuth2PasswordRequestForm"1fastapi.security.oauth2.OAuth2PasswordRequestForm*.
+
+grant_type
+builtins.str"builtins.str *,
+username
+builtins.str"builtins.str *,
+password
+builtins.str"builtins.str *)
+scope
+builtins.str"builtins.str *U
+	client_idD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *Y
+client_secretD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None rh
+
+grant_type<fastapi.security.oauth2.OAuth2PasswordRequestForm.grant_type
+builtins.str"builtins.strrd
+username:fastapi.security.oauth2.OAuth2PasswordRequestForm.username
+builtins.str"builtins.strrd
+password:fastapi.security.oauth2.OAuth2PasswordRequestForm.password
+builtins.str"builtins.strré
+scopes8fastapi.security.oauth2.OAuth2PasswordRequestForm.scopesJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.listré
+	client_id;fastapi.security.oauth2.OAuth2PasswordRequestForm.client_idD
+Union[builtins.str,None]
+builtins.str"builtins.str
+Nonerñ
+client_secret?fastapi.security.oauth2.OAuth2PasswordRequestForm.client_secretD
+Union[builtins.str,None]
+builtins.str"builtins.str
+NoneÕ
+OAuth2PasswordRequestFormStrict7fastapi.security.oauth2.OAuth2PasswordRequestFormStrict"1fastapi.security.oauth2.OAuth2PasswordRequestForm*Ω
+__init__@fastapi.security.oauth2.OAuth2PasswordRequestFormStrict.__init__"
+None*|
+selfr
+7fastapi.security.oauth2.OAuth2PasswordRequestFormStrict"7fastapi.security.oauth2.OAuth2PasswordRequestFormStrict*.
+
+grant_type
+builtins.str"builtins.str *,
+username
+builtins.str"builtins.str *,
+password
+builtins.str"builtins.str *)
+scope
+builtins.str"builtins.str *U
+	client_idD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *Y
+client_secretD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None à
+
+OAuth2fastapi.security.oauth2.OAuth2""fastapi.security.base.SecurityBase*Ù
+__init__'fastapi.security.oauth2.OAuth2.__init__"
+None*J
+self@
+fastapi.security.oauth2.OAuth2"fastapi.security.oauth2.OAuth2*Ñ
+flowsˆ
+dUnion[fastapi.openapi.models.OAuthFlows,builtins.dict[builtins.str,builtins.dict[builtins.str,Any]]]F
+!fastapi.openapi.models.OAuthFlows"!fastapi.openapi.models.OAuthFlows√
+;builtins.dict[builtins.str,builtins.dict[builtins.str,Any]]
+builtins.str"builtins.strW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"builtins.dict *W
+scheme_nameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *W
+descriptionD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *0
+
+auto_error
+builtins.bool"builtins.bool *È
+__call__'fastapi.security.oauth2.OAuth2.__call__"û
+2typing.Coroutine[Any,Any,Union[builtins.str,None]]
+Any
+AnyD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None"typing.Coroutine*J
+self@
+fastapi.security.oauth2.OAuth2"fastapi.security.oauth2.OAuth2*E
+request8
+starlette.requests.Request"starlette.requests.RequestHrW
+
+auto_error)fastapi.security.oauth2.OAuth2.auto_error
+builtins.bool"builtins.boolã	
+OAuth2PasswordBearer,fastapi.security.oauth2.OAuth2PasswordBearer"fastapi.security.oauth2.OAuth2*é
+__init__5fastapi.security.oauth2.OAuth2PasswordBearer.__init__"
+None*f
+self\
+,fastapi.security.oauth2.OAuth2PasswordBearer",fastapi.security.oauth2.OAuth2PasswordBearer**
+tokenUrl
+builtins.str"builtins.str*W
+scheme_nameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *»
+scopesπ
+4Union[builtins.dict[builtins.str,builtins.str],None]u
+(builtins.dict[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.dict
+None *W
+descriptionD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *0
+
+auto_error
+builtins.bool"builtins.bool *ì
+__call__5fastapi.security.oauth2.OAuth2PasswordBearer.__call__"û
+2typing.Coroutine[Any,Any,Union[builtins.str,None]]
+Any
+AnyD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None"typing.Coroutine*f
+self\
+,fastapi.security.oauth2.OAuth2PasswordBearer",fastapi.security.oauth2.OAuth2PasswordBearer*E
+request8
+starlette.requests.Request"starlette.requests.RequestHﬂ
+
+OAuth2AuthorizationCodeBearer5fastapi.security.oauth2.OAuth2AuthorizationCodeBearer"fastapi.security.oauth2.OAuth2*µ
+__init__>fastapi.security.oauth2.OAuth2AuthorizationCodeBearer.__init__"
+None*x
+selfn
+5fastapi.security.oauth2.OAuth2AuthorizationCodeBearer"5fastapi.security.oauth2.OAuth2AuthorizationCodeBearer*2
+authorizationUrl
+builtins.str"builtins.str**
+tokenUrl
+builtins.str"builtins.str*V
+
+refreshUrlD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *W
+scheme_nameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *»
+scopesπ
+4Union[builtins.dict[builtins.str,builtins.str],None]u
+(builtins.dict[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.dict
+None *W
+descriptionD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *0
+
+auto_error
+builtins.bool"builtins.bool *Æ
+__call__>fastapi.security.oauth2.OAuth2AuthorizationCodeBearer.__call__"û
+2typing.Coroutine[Any,Any,Union[builtins.str,None]]
+Any
+AnyD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None"typing.Coroutine*x
+selfn
+5fastapi.security.oauth2.OAuth2AuthorizationCodeBearer"5fastapi.security.oauth2.OAuth2AuthorizationCodeBearer*E
+request8
+starlette.requests.Request"starlette.requests.RequestH„
+SecurityScopes&fastapi.security.oauth2.SecurityScopes"builtins.object*¥
+__init__/fastapi.security.oauth2.SecurityScopes.__init__"
+None*Z
+selfP
+&fastapi.security.oauth2.SecurityScopes"&fastapi.security.oauth2.SecurityScopes*ê
+scopesÅ
+'Union[builtins.list[builtins.str],None]J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list
+None rÉ
+scopes-fastapi.security.oauth2.SecurityScopes.scopesJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.listr[
+	scope_str0fastapi.security.oauth2.SecurityScopes.scope_str
+builtins.str"builtins.str*ì
+__annotations__'fastapi.security.oauth2.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict

@@ -1,0 +1,158 @@
+
+anyio.abc._socketsù
+_NullAsyncContextManager+anyio.abc._sockets._NullAsyncContextManager"builtins.object*¸
+
+__aenter__6anyio.abc._sockets._NullAsyncContextManager.__aenter__"N
+typing.Coroutine[Any,Any,None]
+Any
+Any
+None"typing.Coroutine*d
+selfZ
++anyio.abc._sockets._NullAsyncContextManager"+anyio.abc._sockets._NullAsyncContextManagerH*√
+	__aexit__5anyio.abc._sockets._NullAsyncContextManager.__aexit__"¢
+3typing.Coroutine[Any,Any,Union[builtins.bool,None]]
+Any
+AnyG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None"typing.Coroutine*d
+selfZ
++anyio.abc._sockets._NullAsyncContextManager"+anyio.abc._sockets._NullAsyncContextManager*ô
+exc_typeä
+(Union[Type[builtins.BaseException],None]R
+Type[builtins.BaseException]0
+builtins.BaseException"builtins.BaseException
+None*o
+exc_valb
+"Union[builtins.BaseException,None]0
+builtins.BaseException"builtins.BaseException
+None*e
+exc_tbY
+Union[types.TracebackType,None]*
+types.TracebackType"types.TracebackType
+NoneH˚
+
+SocketAttribute"anyio.abc._sockets.SocketAttribute"(anyio._core._typedattr.TypedAttributeSetra
+family)anyio.abc._sockets.SocketAttribute.family,
+socket.AddressFamily"socket.AddressFamilyrŒ
+local_address0anyio.abc._sockets.SocketAttribute.local_addressä
+JTypeAlias[Union[TypeAlias[Tuple[builtins.str,builtins.int]],builtins.str]]ò
+?Union[TypeAlias[Tuple[builtins.str,builtins.int]],builtins.str]¥
++TypeAlias[Tuple[builtins.str,builtins.int]]`
+ Tuple[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int"!anyio.abc._sockets.IPSockAddrType
+builtins.str"builtins.str"anyio.abc._sockets.SockAddrTyperY
+
+local_port-anyio.abc._sockets.SocketAttribute.local_port
+builtins.int"builtins.intr[
+
+raw_socket-anyio.abc._sockets.SocketAttribute.raw_socket
+socket.socket"socket.socketr–
+remote_address1anyio.abc._sockets.SocketAttribute.remote_addressä
+JTypeAlias[Union[TypeAlias[Tuple[builtins.str,builtins.int]],builtins.str]]ò
+?Union[TypeAlias[Tuple[builtins.str,builtins.int]],builtins.str]¥
++TypeAlias[Tuple[builtins.str,builtins.int]]`
+ Tuple[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int"!anyio.abc._sockets.IPSockAddrType
+builtins.str"builtins.str"anyio.abc._sockets.SockAddrTyper[
+remote_port.anyio.abc._sockets.SocketAttribute.remote_port
+builtins.int"builtins.intÇ
+_SocketProvider"anyio.abc._sockets._SocketProvider"-anyio._core._typedattr.TypedAttributeProvider*«
+extra_attributes3anyio.abc._sockets._SocketProvider.extra_attributes"õ
+3typing.Mapping[Any,CallableType[builtins.function]]
+AnyK
+CallableType[builtins.function]&
+builtins.function"builtins.function"typing.Mapping*R
+selfH
+"anyio.abc._sockets._SocketProvider""anyio.abc._sockets._SocketProvider0:property`*—
+_raw_socket.anyio.abc._sockets._SocketProvider._raw_socket"
+socket.socket"socket.socket*R
+selfH
+"anyio.abc._sockets._SocketProvider""anyio.abc._sockets._SocketProvider0:property:abstractmethod@`r
+SocketStreamanyio.abc._sockets.SocketStream"anyio.abc._streams.ByteStream""anyio.abc._sockets._SocketProviderƒ
+UNIXSocketStream#anyio.abc._sockets.UNIXSocketStream"anyio.abc._sockets.SocketStream*Œ
+send_fds,anyio.abc._sockets.UNIXSocketStream.send_fds"N
+typing.Coroutine[Any,Any,None]
+Any
+Any
+None"typing.Coroutine*T
+selfJ
+#anyio.abc._sockets.UNIXSocketStream"#anyio.abc._sockets.UNIXSocketStream*-
+message 
+builtins.bytes"builtins.bytes*®
+fdsû
+0typing.Collection[Union[builtins.int,io.IOBase]]W
+Union[builtins.int,io.IOBase]
+builtins.int"builtins.int
+	io.IOBase"	io.IOBase"typing.Collection0:abstractmethod@H*ò
+receive_fds/anyio.abc._sockets.UNIXSocketStream.receive_fds"ó
+Ktyping.Coroutine[Any,Any,Tuple[builtins.bytes,builtins.list[builtins.int]]]
+Any
+Any£
+1Tuple[builtins.bytes,builtins.list[builtins.int]] 
+builtins.bytes"builtins.bytesJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list"typing.Coroutine*T
+selfJ
+#anyio.abc._sockets.UNIXSocketStream"#anyio.abc._sockets.UNIXSocketStream*(
+msglen
+builtins.int"builtins.int*(
+maxfds
+builtins.int"builtins.int0:abstractmethod@HÎ
+SocketListener!anyio.abc._sockets.SocketListener"anyio.abc._streams.Listener""anyio.abc._sockets._SocketProvider*¿
+accept(anyio.abc._sockets.SocketListener.accept"£
+9typing.Coroutine[Any,Any,anyio.abc._sockets.SocketStream]
+Any
+AnyB
+anyio.abc._sockets.SocketStream"anyio.abc._sockets.SocketStream"typing.Coroutine*P
+selfF
+!anyio.abc._sockets.SocketListener"!anyio.abc._sockets.SocketListener0:abstractmethod@H*±
+serve'anyio.abc._sockets.SocketListener.serve"N
+typing.Coroutine[Any,Any,None]
+Any
+Any
+None"typing.Coroutine*P
+selfF
+!anyio.abc._sockets.SocketListener"!anyio.abc._sockets.SocketListener*X
+handlerK
+CallableType[builtins.function]&
+builtins.function"builtins.function*Ä
+
+task_groupn
+&Union[anyio.abc._tasks.TaskGroup,None]8
+anyio.abc._tasks.TaskGroup"anyio.abc._tasks.TaskGroup
+None Hæ
+	UDPSocketanyio.abc._sockets.UDPSocket")anyio.abc._streams.UnreliableObjectStream""anyio.abc._sockets._SocketProvider*√
+sendto#anyio.abc._sockets.UDPSocket.sendto"N
+typing.Coroutine[Any,Any,None]
+Any
+Any
+None"typing.Coroutine*F
+self<
+anyio.abc._sockets.UDPSocket"anyio.abc._sockets.UDPSocket**
+data 
+builtins.bytes"builtins.bytes*&
+host
+builtins.str"builtins.str*&
+port
+builtins.int"builtins.intHä
+ConnectedUDPSocket%anyio.abc._sockets.ConnectedUDPSocket")anyio.abc._streams.UnreliableObjectStream""anyio.abc._sockets._SocketProvider√
+UNIXDatagramSocket%anyio.abc._sockets.UNIXDatagramSocket")anyio.abc._streams.UnreliableObjectStream""anyio.abc._sockets._SocketProvider*∂
+sendto,anyio.abc._sockets.UNIXDatagramSocket.sendto"N
+typing.Coroutine[Any,Any,None]
+Any
+Any
+None"typing.Coroutine*X
+selfN
+%anyio.abc._sockets.UNIXDatagramSocket"%anyio.abc._sockets.UNIXDatagramSocket**
+data 
+builtins.bytes"builtins.bytes*&
+path
+builtins.str"builtins.strHú
+ConnectedUNIXDatagramSocket.anyio.abc._sockets.ConnectedUNIXDatagramSocket")anyio.abc._streams.UnreliableObjectStream""anyio.abc._sockets._SocketProvider*é
+__annotations__"anyio.abc._sockets.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict

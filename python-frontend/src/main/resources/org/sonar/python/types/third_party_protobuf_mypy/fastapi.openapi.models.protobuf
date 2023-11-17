@@ -1,0 +1,847 @@
+
+fastapi.openapi.models›
+EmailStr-redefinitionfastapi.openapi.models.EmailStr"builtins.str*ä
+__get_validators__2fastapi.openapi.models.EmailStr.__get_validators__"
+0typing.Iterable[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"typing.Iterable*v
+clsm
+%Type[fastapi.openapi.models.EmailStr]B
+fastapi.openapi.models.EmailStr"fastapi.openapi.models.EmailStr0:classmethodp*ë
+validate(fastapi.openapi.models.EmailStr.validate"
+builtins.str"builtins.str*v
+clsm
+%Type[fastapi.openapi.models.EmailStr]B
+fastapi.openapi.models.EmailStr"fastapi.openapi.models.EmailStr*
+v
+Any0:classmethodpë
+Contactfastapi.openapi.models.Contact"pydantic.main.BaseModelrq
+name#fastapi.openapi.models.Contact.nameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+Noner“
+url"fastapi.openapi.models.Contact.urlh
+$Union[pydantic.networks.AnyUrl,None]4
+pydantic.networks.AnyUrl"pydantic.networks.AnyUrl
+Noner
+email$fastapi.openapi.models.Contact.emailn
+&Union[pydantic.networks.EmailStr,None]8
+pydantic.networks.EmailStr"pydantic.networks.EmailStr
+None£
+Licensefastapi.openapi.models.License"pydantic.main.BaseModelrI
+name#fastapi.openapi.models.License.name
+builtins.str"builtins.strr“
+url"fastapi.openapi.models.License.urlh
+$Union[pydantic.networks.AnyUrl,None]4
+pydantic.networks.AnyUrl"pydantic.networks.AnyUrl
+None±
+Infofastapi.openapi.models.Info"pydantic.main.BaseModelrH
+title!fastapi.openapi.models.Info.title
+builtins.str"builtins.strr|
+description'fastapi.openapi.models.Info.descriptionD
+Union[builtins.str,None]
+builtins.str"builtins.str
+Noner‚
+termsOfService*fastapi.openapi.models.Info.termsOfServiceD
+Union[builtins.str,None]
+builtins.str"builtins.str
+Nonerª
+contact#fastapi.openapi.models.Info.contactz
+*Union[fastapi.openapi.models.Contact,None]@
+fastapi.openapi.models.Contact"fastapi.openapi.models.Contact
+Nonerª
+license#fastapi.openapi.models.Info.licensez
+*Union[fastapi.openapi.models.License,None]@
+fastapi.openapi.models.License"fastapi.openapi.models.License
+NonerL
+version#fastapi.openapi.models.Info.version
+builtins.str"builtins.strê
+ServerVariable%fastapi.openapi.models.ServerVariable"pydantic.main.BaseModelr¶
+enum*fastapi.openapi.models.ServerVariable.enum
+'Union[builtins.list[builtins.str],None]J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list
+NonerV
+default-fastapi.openapi.models.ServerVariable.default
+builtins.str"builtins.strr†
+description1fastapi.openapi.models.ServerVariable.descriptionD
+Union[builtins.str,None]
+builtins.str"builtins.str
+NoneÊ
+Serverfastapi.openapi.models.Server"pydantic.main.BaseModelr¯
+url!fastapi.openapi.models.Server.url„
+,Union[pydantic.networks.AnyUrl,builtins.str]4
+pydantic.networks.AnyUrl"pydantic.networks.AnyUrl
+builtins.str"builtins.strr~
+description)fastapi.openapi.models.Server.descriptionD
+Union[builtins.str,None]
+builtins.str"builtins.str
+NonerÕ
+	variables'fastapi.openapi.models.Server.variablesž
+MUnion[builtins.dict[builtins.str,fastapi.openapi.models.ServerVariable],None]À
+Abuiltins.dict[builtins.str,fastapi.openapi.models.ServerVariable]
+builtins.str"builtins.strN
+%fastapi.openapi.models.ServerVariable"%fastapi.openapi.models.ServerVariable"builtins.dict
+None‘
+	Reference fastapi.openapi.models.Reference"pydantic.main.BaseModelrI
+ref$fastapi.openapi.models.Reference.ref
+builtins.str"builtins.str¥
+Discriminator$fastapi.openapi.models.Discriminator"pydantic.main.BaseModelr_
+propertyName1fastapi.openapi.models.Discriminator.propertyName
+builtins.str"builtins.strró
+mapping,fastapi.openapi.models.Discriminator.mapping¹
+4Union[builtins.dict[builtins.str,builtins.str],None]u
+(builtins.dict[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.dict
+None‰
+XMLfastapi.openapi.models.XML"pydantic.main.BaseModelrm
+namefastapi.openapi.models.XML.nameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+Nonerw
+	namespace$fastapi.openapi.models.XML.namespaceD
+Union[builtins.str,None]
+builtins.str"builtins.str
+Nonerq
+prefix!fastapi.openapi.models.XML.prefixD
+Union[builtins.str,None]
+builtins.str"builtins.str
+Nonerz
+	attribute$fastapi.openapi.models.XML.attributeG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+Nonerv
+wrapped"fastapi.openapi.models.XML.wrappedG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+NoneÝ
+ExternalDocumentation,fastapi.openapi.models.ExternalDocumentation"pydantic.main.BaseModelr
+description8fastapi.openapi.models.ExternalDocumentation.descriptionD
+Union[builtins.str,None]
+builtins.str"builtins.str
+Nonerm
+url0fastapi.openapi.models.ExternalDocumentation.url4
+pydantic.networks.AnyUrl"pydantic.networks.AnyUrlÔ-
+Schemafastapi.openapi.models.Schema"pydantic.main.BaseModelrn
+ref!fastapi.openapi.models.Schema.refD
+Union[builtins.str,None]
+builtins.str"builtins.str
+Nonerr
+title#fastapi.openapi.models.Schema.titleD
+Union[builtins.str,None]
+builtins.str"builtins.str
+Noner‚
+
+multipleOf(fastapi.openapi.models.Schema.multipleOfJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+Noner|
+maximum%fastapi.openapi.models.Schema.maximumJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+NonerŽ
+exclusiveMaximum.fastapi.openapi.models.Schema.exclusiveMaximumJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+Noner|
+minimum%fastapi.openapi.models.Schema.minimumJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+NonerŽ
+exclusiveMinimum.fastapi.openapi.models.Schema.exclusiveMinimumJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+Nonerz
+	maxLength'fastapi.openapi.models.Schema.maxLengthD
+Union[builtins.int,None]
+builtins.int"builtins.int
+Nonerz
+	minLength'fastapi.openapi.models.Schema.minLengthD
+Union[builtins.int,None]
+builtins.int"builtins.int
+Nonerv
+pattern%fastapi.openapi.models.Schema.patternD
+Union[builtins.str,None]
+builtins.str"builtins.str
+Nonerx
+maxItems&fastapi.openapi.models.Schema.maxItemsD
+Union[builtins.int,None]
+builtins.int"builtins.int
+Nonerx
+minItems&fastapi.openapi.models.Schema.minItemsD
+Union[builtins.int,None]
+builtins.int"builtins.int
+Noner
+uniqueItems)fastapi.openapi.models.Schema.uniqueItemsG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+Noner‚
+maxProperties+fastapi.openapi.models.Schema.maxPropertiesD
+Union[builtins.int,None]
+builtins.int"builtins.int
+Noner‚
+minProperties+fastapi.openapi.models.Schema.minPropertiesD
+Union[builtins.int,None]
+builtins.int"builtins.int
+Noner¶
+required&fastapi.openapi.models.Schema.required
+'Union[builtins.list[builtins.str],None]J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list
+Noner†
+enum"fastapi.openapi.models.Schema.enumZ
+Union[builtins.list[Any],None],
+builtins.list[Any]
+Any"builtins.list
+Nonerp
+type"fastapi.openapi.models.Schema.typeD
+Union[builtins.str,None]
+builtins.str"builtins.str
+Nonerô
+allOf#fastapi.openapi.models.Schema.allOfÅ
+8Union[builtins.list[fastapi.openapi.models.Schema],None]}
+,builtins.list[fastapi.openapi.models.Schema]>
+fastapi.openapi.models.Schema"fastapi.openapi.models.Schema"builtins.list
+Nonerô
+oneOf#fastapi.openapi.models.Schema.oneOfÅ
+8Union[builtins.list[fastapi.openapi.models.Schema],None]}
+,builtins.list[fastapi.openapi.models.Schema]>
+fastapi.openapi.models.Schema"fastapi.openapi.models.Schema"builtins.list
+Nonerô
+anyOf#fastapi.openapi.models.Schema.anyOfÅ
+8Union[builtins.list[fastapi.openapi.models.Schema],None]}
+,builtins.list[fastapi.openapi.models.Schema]>
+fastapi.openapi.models.Schema"fastapi.openapi.models.Schema"builtins.list
+Noner£
+not_"fastapi.openapi.models.Schema.not_w
+)Union[fastapi.openapi.models.Schema,None]>
+fastapi.openapi.models.Schema"fastapi.openapi.models.Schema
+NonerÒ
+items#fastapi.openapi.models.Schema.items£
+VUnion[fastapi.openapi.models.Schema,builtins.list[fastapi.openapi.models.Schema],None]>
+fastapi.openapi.models.Schema"fastapi.openapi.models.Schema}
+,builtins.list[fastapi.openapi.models.Schema]>
+fastapi.openapi.models.Schema"fastapi.openapi.models.Schema"builtins.list
+Noner·
+
+properties(fastapi.openapi.models.Schema.propertiesþ
+EUnion[builtins.dict[builtins.str,fastapi.openapi.models.Schema],None]¨
+9builtins.dict[builtins.str,fastapi.openapi.models.Schema]
+builtins.str"builtins.str>
+fastapi.openapi.models.Schema"fastapi.openapi.models.Schema"builtins.dict
+NonerÙ
+additionalProperties2fastapi.openapi.models.Schema.additionalPropertiesŒ
+XUnion[fastapi.openapi.models.Schema,fastapi.openapi.models.Reference,builtins.bool,None]>
+fastapi.openapi.models.Schema"fastapi.openapi.models.SchemaD
+ fastapi.openapi.models.Reference" fastapi.openapi.models.Reference
+builtins.bool"builtins.bool
+Noner~
+description)fastapi.openapi.models.Schema.descriptionD
+Union[builtins.str,None]
+builtins.str"builtins.str
+Nonert
+format$fastapi.openapi.models.Schema.formatD
+Union[builtins.str,None]
+builtins.str"builtins.str
+NonerX
+default%fastapi.openapi.models.Schema.default&
+Union[Any,None]
+Any
+Noner{
+nullable&fastapi.openapi.models.Schema.nullableG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+NonerË
+discriminator+fastapi.openapi.models.Schema.discriminatorŒ
+0Union[fastapi.openapi.models.Discriminator,None]L
+$fastapi.openapi.models.Discriminator"$fastapi.openapi.models.Discriminator
+Noner{
+readOnly&fastapi.openapi.models.Schema.readOnlyG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+Noner}
+	writeOnly'fastapi.openapi.models.Schema.writeOnlyG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+Noner˜
+xml!fastapi.openapi.models.Schema.xmln
+&Union[fastapi.openapi.models.XML,None]8
+fastapi.openapi.models.XML"fastapi.openapi.models.XML
+Nonerá
+externalDocs*fastapi.openapi.models.Schema.externalDocs¤
+8Union[fastapi.openapi.models.ExternalDocumentation,None]\
+,fastapi.openapi.models.ExternalDocumentation",fastapi.openapi.models.ExternalDocumentation
+NonerX
+example%fastapi.openapi.models.Schema.example&
+Union[Any,None]
+Any
+Noner
+
+deprecated(fastapi.openapi.models.Schema.deprecatedG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None½
+Examplefastapi.openapi.models.Example"pydantic.main.BaseModelrw
+summary&fastapi.openapi.models.Example.summaryD
+Union[builtins.str,None]
+builtins.str"builtins.str
+Noner
+description*fastapi.openapi.models.Example.descriptionD
+Union[builtins.str,None]
+builtins.str"builtins.str
+NonerU
+value$fastapi.openapi.models.Example.value&
+Union[Any,None]
+Any
+Noner§
+externalValue,fastapi.openapi.models.Example.externalValueh
+$Union[pydantic.networks.AnyUrl,None]4
+pydantic.networks.AnyUrl"pydantic.networks.AnyUrl
+Noneœ
+ParameterInType&fastapi.openapi.models.ParameterInType"	enum.EnumHrS
+query,fastapi.openapi.models.ParameterInType.query
+builtins.str"builtins.strrU
+header-fastapi.openapi.models.ParameterInType.header
+builtins.str"builtins.strrQ
+path+fastapi.openapi.models.ParameterInType.path
+builtins.str"builtins.strrU
+cookie-fastapi.openapi.models.ParameterInType.cookie
+builtins.str"builtins.strÜ
+Encodingfastapi.openapi.models.Encoding"pydantic.main.BaseModelr€
+contentType+fastapi.openapi.models.Encoding.contentTypeD
+Union[builtins.str,None]
+builtins.str"builtins.str
+Noner•
+headers'fastapi.openapi.models.Encoding.headersà
+mUnion[builtins.dict[builtins.str,Union[fastapi.openapi.models.Header,fastapi.openapi.models.Reference]],None]â
+abuiltins.dict[builtins.str,Union[fastapi.openapi.models.Header,fastapi.openapi.models.Reference]]
+builtins.str"builtins.strÏ
+EUnion[fastapi.openapi.models.Header,fastapi.openapi.models.Reference]>
+fastapi.openapi.models.Header"fastapi.openapi.models.HeaderD
+ fastapi.openapi.models.Reference" fastapi.openapi.models.Reference"builtins.dict
+Nonert
+style%fastapi.openapi.models.Encoding.styleD
+Union[builtins.str,None]
+builtins.str"builtins.str
+Noner{
+explode'fastapi.openapi.models.Encoding.explodeG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+Noner‡
+allowReserved-fastapi.openapi.models.Encoding.allowReservedG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None›
+
+	MediaType fastapi.openapi.models.MediaType"pydantic.main.BaseModelr”
+schema_(fastapi.openapi.models.MediaType.schema_Þ
+JUnion[fastapi.openapi.models.Schema,fastapi.openapi.models.Reference,None]>
+fastapi.openapi.models.Schema"fastapi.openapi.models.SchemaD
+ fastapi.openapi.models.Reference" fastapi.openapi.models.Reference
+Noner[
+example(fastapi.openapi.models.MediaType.example&
+Union[Any,None]
+Any
+Noner
+examples)fastapi.openapi.models.MediaType.exampleså
+nUnion[builtins.dict[builtins.str,Union[fastapi.openapi.models.Example,fastapi.openapi.models.Reference]],None]æ
+bbuiltins.dict[builtins.str,Union[fastapi.openapi.models.Example,fastapi.openapi.models.Reference]]
+builtins.str"builtins.strÒ
+FUnion[fastapi.openapi.models.Example,fastapi.openapi.models.Reference]@
+fastapi.openapi.models.Example"fastapi.openapi.models.ExampleD
+ fastapi.openapi.models.Reference" fastapi.openapi.models.Reference"builtins.dict
+Noner¾
+encoding)fastapi.openapi.models.MediaType.encoding†
+GUnion[builtins.dict[builtins.str,fastapi.openapi.models.Encoding],None]®
+;builtins.dict[builtins.str,fastapi.openapi.models.Encoding]
+builtins.str"builtins.strB
+fastapi.openapi.models.Encoding"fastapi.openapi.models.Encoding"builtins.dict
+NoneØ
+ParameterBase$fastapi.openapi.models.ParameterBase"pydantic.main.BaseModelr…
+description0fastapi.openapi.models.ParameterBase.descriptionD
+Union[builtins.str,None]
+builtins.str"builtins.str
+Noner‚
+required-fastapi.openapi.models.ParameterBase.requiredG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+Noner†
+
+deprecated/fastapi.openapi.models.ParameterBase.deprecatedG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+Nonery
+style*fastapi.openapi.models.ParameterBase.styleD
+Union[builtins.str,None]
+builtins.str"builtins.str
+Noner€
+explode,fastapi.openapi.models.ParameterBase.explodeG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+NonerŒ
+allowReserved2fastapi.openapi.models.ParameterBase.allowReservedG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+Noner˜
+schema_,fastapi.openapi.models.ParameterBase.schema_Þ
+JUnion[fastapi.openapi.models.Schema,fastapi.openapi.models.Reference,None]>
+fastapi.openapi.models.Schema"fastapi.openapi.models.SchemaD
+ fastapi.openapi.models.Reference" fastapi.openapi.models.Reference
+Noner_
+example,fastapi.openapi.models.ParameterBase.example&
+Union[Any,None]
+Any
+Noner¡
+examples-fastapi.openapi.models.ParameterBase.exampleså
+nUnion[builtins.dict[builtins.str,Union[fastapi.openapi.models.Example,fastapi.openapi.models.Reference]],None]æ
+bbuiltins.dict[builtins.str,Union[fastapi.openapi.models.Example,fastapi.openapi.models.Reference]]
+builtins.str"builtins.strÒ
+FUnion[fastapi.openapi.models.Example,fastapi.openapi.models.Reference]@
+fastapi.openapi.models.Example"fastapi.openapi.models.ExampleD
+ fastapi.openapi.models.Reference" fastapi.openapi.models.Reference"builtins.dict
+NonerÄ
+content,fastapi.openapi.models.ParameterBase.contentŠ
+HUnion[builtins.dict[builtins.str,fastapi.openapi.models.MediaType],None]±
+<builtins.dict[builtins.str,fastapi.openapi.models.MediaType]
+builtins.str"builtins.strD
+ fastapi.openapi.models.MediaType" fastapi.openapi.models.MediaType"builtins.dict
+NoneŸ
+	Parameter fastapi.openapi.models.Parameter"$fastapi.openapi.models.ParameterBaserK
+name%fastapi.openapi.models.Parameter.name
+builtins.str"builtins.strr}
+in_$fastapi.openapi.models.Parameter.in_P
+&fastapi.openapi.models.ParameterInType"&fastapi.openapi.models.ParameterInTypeM
+Headerfastapi.openapi.models.Header"$fastapi.openapi.models.ParameterBase¿
+RequestBody"fastapi.openapi.models.RequestBody"pydantic.main.BaseModelrƒ
+description.fastapi.openapi.models.RequestBody.descriptionD
+Union[builtins.str,None]
+builtins.str"builtins.str
+Noneré
+content*fastapi.openapi.models.RequestBody.content±
+<builtins.dict[builtins.str,fastapi.openapi.models.MediaType]
+builtins.str"builtins.strD
+ fastapi.openapi.models.MediaType" fastapi.openapi.models.MediaType"builtins.dictr€
+required+fastapi.openapi.models.RequestBody.requiredG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+Noneœ
+Linkfastapi.openapi.models.Link"pydantic.main.BaseModelr~
+operationRef(fastapi.openapi.models.Link.operationRefD
+Union[builtins.str,None]
+builtins.str"builtins.str
+Noner|
+operationId'fastapi.openapi.models.Link.operationIdD
+Union[builtins.str,None]
+builtins.str"builtins.str
+Noner­
+
+parameters&fastapi.openapi.models.Link.parametersö
+?Union[builtins.dict[builtins.str,Union[Any,builtins.str]],None]¦
+3builtins.dict[builtins.str,Union[Any,builtins.str]]
+builtins.str"builtins.strB
+Union[Any,builtins.str]
+Any
+builtins.str"builtins.str"builtins.dict
+Noner‰
+requestBody'fastapi.openapi.models.Link.requestBodyQ
+Union[Any,builtins.str,None]
+Any
+builtins.str"builtins.str
+Noner|
+description'fastapi.openapi.models.Link.descriptionD
+Union[builtins.str,None]
+builtins.str"builtins.str
+Noner¥
+server"fastapi.openapi.models.Link.serverw
+)Union[fastapi.openapi.models.Server,None]>
+fastapi.openapi.models.Server"fastapi.openapi.models.Server
+None‚
+Responsefastapi.openapi.models.Response"pydantic.main.BaseModelrX
+description+fastapi.openapi.models.Response.description
+builtins.str"builtins.strr•
+headers'fastapi.openapi.models.Response.headersà
+mUnion[builtins.dict[builtins.str,Union[fastapi.openapi.models.Header,fastapi.openapi.models.Reference]],None]â
+abuiltins.dict[builtins.str,Union[fastapi.openapi.models.Header,fastapi.openapi.models.Reference]]
+builtins.str"builtins.strÏ
+EUnion[fastapi.openapi.models.Header,fastapi.openapi.models.Reference]>
+fastapi.openapi.models.Header"fastapi.openapi.models.HeaderD
+ fastapi.openapi.models.Reference" fastapi.openapi.models.Reference"builtins.dict
+Noner¿
+content'fastapi.openapi.models.Response.contentŠ
+HUnion[builtins.dict[builtins.str,fastapi.openapi.models.MediaType],None]±
+<builtins.dict[builtins.str,fastapi.openapi.models.MediaType]
+builtins.str"builtins.strD
+ fastapi.openapi.models.MediaType" fastapi.openapi.models.MediaType"builtins.dict
+Noner‡
+links%fastapi.openapi.models.Response.linksÖ
+kUnion[builtins.dict[builtins.str,Union[fastapi.openapi.models.Link,fastapi.openapi.models.Reference]],None]Ú
+_builtins.dict[builtins.str,Union[fastapi.openapi.models.Link,fastapi.openapi.models.Reference]]
+builtins.str"builtins.strÉ
+CUnion[fastapi.openapi.models.Link,fastapi.openapi.models.Reference]:
+fastapi.openapi.models.Link"fastapi.openapi.models.LinkD
+ fastapi.openapi.models.Reference" fastapi.openapi.models.Reference"builtins.dict
+NoneÍ
+	Operation fastapi.openapi.models.Operation"pydantic.main.BaseModelr±
+tags%fastapi.openapi.models.Operation.tags
+'Union[builtins.list[builtins.str],None]J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list
+Nonery
+summary(fastapi.openapi.models.Operation.summaryD
+Union[builtins.str,None]
+builtins.str"builtins.str
+Noner
+description,fastapi.openapi.models.Operation.descriptionD
+Union[builtins.str,None]
+builtins.str"builtins.str
+Nonerä
+externalDocs-fastapi.openapi.models.Operation.externalDocs¤
+8Union[fastapi.openapi.models.ExternalDocumentation,None]\
+,fastapi.openapi.models.ExternalDocumentation",fastapi.openapi.models.ExternalDocumentation
+Noner
+operationId,fastapi.openapi.models.Operation.operationIdD
+Union[builtins.str,None]
+builtins.str"builtins.str
+Noneró
+
+parameters+fastapi.openapi.models.Operation.parameters·
+cUnion[builtins.list[Union[fastapi.openapi.models.Parameter,fastapi.openapi.models.Reference]],None]Ã
+Wbuiltins.list[Union[fastapi.openapi.models.Parameter,fastapi.openapi.models.Reference]]Ø
+HUnion[fastapi.openapi.models.Parameter,fastapi.openapi.models.Reference]D
+ fastapi.openapi.models.Parameter" fastapi.openapi.models.ParameterD
+ fastapi.openapi.models.Reference" fastapi.openapi.models.Reference"builtins.list
+Noner«
+requestBody,fastapi.openapi.models.Operation.requestBodyí
+OUnion[fastapi.openapi.models.RequestBody,fastapi.openapi.models.Reference,None]H
+"fastapi.openapi.models.RequestBody""fastapi.openapi.models.RequestBodyD
+ fastapi.openapi.models.Reference" fastapi.openapi.models.Reference
+Noner¬
+	responses*fastapi.openapi.models.Operation.responsesò
+Fbuiltins.dict[builtins.str,Union[fastapi.openapi.models.Response,Any]]
+builtins.str"builtins.str{
+*Union[fastapi.openapi.models.Response,Any]B
+fastapi.openapi.models.Response"fastapi.openapi.models.Response
+Any"builtins.dictræ
+	callbacks*fastapi.openapi.models.Operation.callbacks¬
+‹Union[builtins.dict[builtins.str,Union[builtins.dict[builtins.str,fastapi.openapi.models.PathItem],fastapi.openapi.models.Reference]],None]
+builtins.dict[builtins.str,Union[builtins.dict[builtins.str,fastapi.openapi.models.PathItem],fastapi.openapi.models.Reference]]
+builtins.str"builtins.strÞ
+cUnion[builtins.dict[builtins.str,fastapi.openapi.models.PathItem],fastapi.openapi.models.Reference]®
+;builtins.dict[builtins.str,fastapi.openapi.models.PathItem]
+builtins.str"builtins.strB
+fastapi.openapi.models.PathItem"fastapi.openapi.models.PathItem"builtins.dictD
+ fastapi.openapi.models.Reference" fastapi.openapi.models.Reference"builtins.dict
+Noner‚
+
+deprecated+fastapi.openapi.models.Operation.deprecatedG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+Noner§
+security)fastapi.openapi.models.Operation.securityï
+RUnion[builtins.list[builtins.dict[builtins.str,builtins.list[builtins.str]]],None]Œ
+Fbuiltins.list[builtins.dict[builtins.str,builtins.list[builtins.str]]]²
+7builtins.dict[builtins.str,builtins.list[builtins.str]]
+builtins.str"builtins.strJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list"builtins.dict"builtins.list
+Nonerû
+servers(fastapi.openapi.models.Operation.serversÅ
+8Union[builtins.list[fastapi.openapi.models.Server],None]}
+,builtins.list[fastapi.openapi.models.Server]>
+fastapi.openapi.models.Server"fastapi.openapi.models.Server"builtins.list
+None¿
+PathItemfastapi.openapi.models.PathItem"pydantic.main.BaseModelrp
+ref#fastapi.openapi.models.PathItem.refD
+Union[builtins.str,None]
+builtins.str"builtins.str
+Nonerx
+summary'fastapi.openapi.models.PathItem.summaryD
+Union[builtins.str,None]
+builtins.str"builtins.str
+Noner€
+description+fastapi.openapi.models.PathItem.descriptionD
+Union[builtins.str,None]
+builtins.str"builtins.str
+Noner­
+get#fastapi.openapi.models.PathItem.get€
+,Union[fastapi.openapi.models.Operation,None]D
+ fastapi.openapi.models.Operation" fastapi.openapi.models.Operation
+Noner­
+put#fastapi.openapi.models.PathItem.put€
+,Union[fastapi.openapi.models.Operation,None]D
+ fastapi.openapi.models.Operation" fastapi.openapi.models.Operation
+Noner¯
+post$fastapi.openapi.models.PathItem.post€
+,Union[fastapi.openapi.models.Operation,None]D
+ fastapi.openapi.models.Operation" fastapi.openapi.models.Operation
+Noner³
+delete&fastapi.openapi.models.PathItem.delete€
+,Union[fastapi.openapi.models.Operation,None]D
+ fastapi.openapi.models.Operation" fastapi.openapi.models.Operation
+Nonerµ
+options'fastapi.openapi.models.PathItem.options€
+,Union[fastapi.openapi.models.Operation,None]D
+ fastapi.openapi.models.Operation" fastapi.openapi.models.Operation
+Noner¯
+head$fastapi.openapi.models.PathItem.head€
+,Union[fastapi.openapi.models.Operation,None]D
+ fastapi.openapi.models.Operation" fastapi.openapi.models.Operation
+Noner±
+patch%fastapi.openapi.models.PathItem.patch€
+,Union[fastapi.openapi.models.Operation,None]D
+ fastapi.openapi.models.Operation" fastapi.openapi.models.Operation
+Noner±
+trace%fastapi.openapi.models.PathItem.trace€
+,Union[fastapi.openapi.models.Operation,None]D
+ fastapi.openapi.models.Operation" fastapi.openapi.models.Operation
+Nonerú
+servers'fastapi.openapi.models.PathItem.serversÅ
+8Union[builtins.list[fastapi.openapi.models.Server],None]}
+,builtins.list[fastapi.openapi.models.Server]>
+fastapi.openapi.models.Server"fastapi.openapi.models.Server"builtins.list
+Nonerò
+
+parameters*fastapi.openapi.models.PathItem.parameters·
+cUnion[builtins.list[Union[fastapi.openapi.models.Parameter,fastapi.openapi.models.Reference]],None]Ã
+Wbuiltins.list[Union[fastapi.openapi.models.Parameter,fastapi.openapi.models.Reference]]Ø
+HUnion[fastapi.openapi.models.Parameter,fastapi.openapi.models.Reference]D
+ fastapi.openapi.models.Parameter" fastapi.openapi.models.ParameterD
+ fastapi.openapi.models.Reference" fastapi.openapi.models.Reference"builtins.list
+None¾
+SecuritySchemeType)fastapi.openapi.models.SecuritySchemeType"	enum.EnumHrX
+apiKey0fastapi.openapi.models.SecuritySchemeType.apiKey
+builtins.str"builtins.strrT
+http.fastapi.openapi.models.SecuritySchemeType.http
+builtins.str"builtins.strrX
+oauth20fastapi.openapi.models.SecuritySchemeType.oauth2
+builtins.str"builtins.strrf
+openIdConnect7fastapi.openapi.models.SecuritySchemeType.openIdConnect
+builtins.str"builtins.strà
+SecurityBase#fastapi.openapi.models.SecurityBase"pydantic.main.BaseModelrŠ
+type_)fastapi.openapi.models.SecurityBase.type_V
+)fastapi.openapi.models.SecuritySchemeType")fastapi.openapi.models.SecuritySchemeTyper„
+description/fastapi.openapi.models.SecurityBase.descriptionD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None¦
+APIKeyInfastapi.openapi.models.APIKeyIn"	enum.EnumHrL
+query%fastapi.openapi.models.APIKeyIn.query
+builtins.str"builtins.strrN
+header&fastapi.openapi.models.APIKeyIn.header
+builtins.str"builtins.strrN
+cookie&fastapi.openapi.models.APIKeyIn.cookie
+builtins.str"builtins.str‹
+APIKeyfastapi.openapi.models.APIKey"#fastapi.openapi.models.SecurityBaser„
+type_#fastapi.openapi.models.APIKey.type_V
+)fastapi.openapi.models.SecuritySchemeType")fastapi.openapi.models.SecuritySchemeTyperl
+in_!fastapi.openapi.models.APIKey.in_B
+fastapi.openapi.models.APIKeyIn"fastapi.openapi.models.APIKeyInrH
+name"fastapi.openapi.models.APIKey.name
+builtins.str"builtins.str©
+HTTPBasefastapi.openapi.models.HTTPBase"#fastapi.openapi.models.SecurityBaser†
+type_%fastapi.openapi.models.HTTPBase.type_V
+)fastapi.openapi.models.SecuritySchemeType")fastapi.openapi.models.SecuritySchemeTyperN
+scheme&fastapi.openapi.models.HTTPBase.scheme
+builtins.str"builtins.strÄ
+
+HTTPBearer!fastapi.openapi.models.HTTPBearer"fastapi.openapi.models.HTTPBaserk
+scheme(fastapi.openapi.models.HTTPBearer.scheme7
+Literal[builtins.str]	
+builtins.str"builtins.strr„
+bearerFormat.fastapi.openapi.models.HTTPBearer.bearerFormatD
+Union[builtins.str,None]
+builtins.str"builtins.str
+Noneò
+	OAuthFlow fastapi.openapi.models.OAuthFlow"pydantic.main.BaseModelr
+
+refreshUrl+fastapi.openapi.models.OAuthFlow.refreshUrlD
+Union[builtins.str,None]
+builtins.str"builtins.str
+Noner¨
+scopes'fastapi.openapi.models.OAuthFlow.scopesu
+(builtins.dict[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.dictÌ
+OAuthFlowImplicit(fastapi.openapi.models.OAuthFlowImplicit" fastapi.openapi.models.OAuthFlowrk
+authorizationUrl9fastapi.openapi.models.OAuthFlowImplicit.authorizationUrl
+builtins.str"builtins.str¼
+OAuthFlowPassword(fastapi.openapi.models.OAuthFlowPassword" fastapi.openapi.models.OAuthFlowr[
+tokenUrl1fastapi.openapi.models.OAuthFlowPassword.tokenUrl
+builtins.str"builtins.str×
+OAuthFlowClientCredentials1fastapi.openapi.models.OAuthFlowClientCredentials" fastapi.openapi.models.OAuthFlowrd
+tokenUrl:fastapi.openapi.models.OAuthFlowClientCredentials.tokenUrl
+builtins.str"builtins.strÍ
+OAuthFlowAuthorizationCode1fastapi.openapi.models.OAuthFlowAuthorizationCode" fastapi.openapi.models.OAuthFlowrt
+authorizationUrlBfastapi.openapi.models.OAuthFlowAuthorizationCode.authorizationUrl
+builtins.str"builtins.strrd
+tokenUrl:fastapi.openapi.models.OAuthFlowAuthorizationCode.tokenUrl
+builtins.str"builtins.strò
+
+OAuthFlows!fastapi.openapi.models.OAuthFlows"pydantic.main.BaseModelrÑ
+implicit*fastapi.openapi.models.OAuthFlows.implicit˜
+4Union[fastapi.openapi.models.OAuthFlowImplicit,None]T
+(fastapi.openapi.models.OAuthFlowImplicit"(fastapi.openapi.models.OAuthFlowImplicit
+NonerÑ
+password*fastapi.openapi.models.OAuthFlows.password˜
+4Union[fastapi.openapi.models.OAuthFlowPassword,None]T
+(fastapi.openapi.models.OAuthFlowPassword"(fastapi.openapi.models.OAuthFlowPassword
+Nonerþ
+clientCredentials3fastapi.openapi.models.OAuthFlows.clientCredentials³
+=Union[fastapi.openapi.models.OAuthFlowClientCredentials,None]f
+1fastapi.openapi.models.OAuthFlowClientCredentials"1fastapi.openapi.models.OAuthFlowClientCredentials
+Nonerþ
+authorizationCode3fastapi.openapi.models.OAuthFlows.authorizationCode³
+=Union[fastapi.openapi.models.OAuthFlowAuthorizationCode,None]f
+1fastapi.openapi.models.OAuthFlowAuthorizationCode"1fastapi.openapi.models.OAuthFlowAuthorizationCode
+NoneÉ
+OAuth2fastapi.openapi.models.OAuth2"#fastapi.openapi.models.SecurityBaser„
+type_#fastapi.openapi.models.OAuth2.type_V
+)fastapi.openapi.models.SecuritySchemeType")fastapi.openapi.models.SecuritySchemeTypert
+flows#fastapi.openapi.models.OAuth2.flowsF
+!fastapi.openapi.models.OAuthFlows"!fastapi.openapi.models.OAuthFlowsÑ
+OpenIdConnect$fastapi.openapi.models.OpenIdConnect"#fastapi.openapi.models.SecurityBaser‹
+type_*fastapi.openapi.models.OpenIdConnect.type_V
+)fastapi.openapi.models.SecuritySchemeType")fastapi.openapi.models.SecuritySchemeTyperg
+openIdConnectUrl5fastapi.openapi.models.OpenIdConnect.openIdConnectUrl
+builtins.str"builtins.strß1
+
+Components!fastapi.openapi.models.Components"pydantic.main.BaseModelr—
+schemas)fastapi.openapi.models.Components.schemasà
+mUnion[builtins.dict[builtins.str,Union[fastapi.openapi.models.Schema,fastapi.openapi.models.Reference]],None]â
+abuiltins.dict[builtins.str,Union[fastapi.openapi.models.Schema,fastapi.openapi.models.Reference]]
+builtins.str"builtins.strÏ
+EUnion[fastapi.openapi.models.Schema,fastapi.openapi.models.Reference]>
+fastapi.openapi.models.Schema"fastapi.openapi.models.SchemaD
+ fastapi.openapi.models.Reference" fastapi.openapi.models.Reference"builtins.dict
+Noner¥
+	responses+fastapi.openapi.models.Components.responsesê
+oUnion[builtins.dict[builtins.str,Union[fastapi.openapi.models.Response,fastapi.openapi.models.Reference]],None]ê
+cbuiltins.dict[builtins.str,Union[fastapi.openapi.models.Response,fastapi.openapi.models.Reference]]
+builtins.str"builtins.strÕ
+GUnion[fastapi.openapi.models.Response,fastapi.openapi.models.Reference]B
+fastapi.openapi.models.Response"fastapi.openapi.models.ResponseD
+ fastapi.openapi.models.Reference" fastapi.openapi.models.Reference"builtins.dict
+Noner¬
+
+parameters,fastapi.openapi.models.Components.parametersï
+pUnion[builtins.dict[builtins.str,Union[fastapi.openapi.models.Parameter,fastapi.openapi.models.Reference]],None]î
+dbuiltins.dict[builtins.str,Union[fastapi.openapi.models.Parameter,fastapi.openapi.models.Reference]]
+builtins.str"builtins.strØ
+HUnion[fastapi.openapi.models.Parameter,fastapi.openapi.models.Reference]D
+ fastapi.openapi.models.Parameter" fastapi.openapi.models.ParameterD
+ fastapi.openapi.models.Reference" fastapi.openapi.models.Reference"builtins.dict
+Nonerž
+examples*fastapi.openapi.models.Components.exampleså
+nUnion[builtins.dict[builtins.str,Union[fastapi.openapi.models.Example,fastapi.openapi.models.Reference]],None]æ
+bbuiltins.dict[builtins.str,Union[fastapi.openapi.models.Example,fastapi.openapi.models.Reference]]
+builtins.str"builtins.strÒ
+FUnion[fastapi.openapi.models.Example,fastapi.openapi.models.Reference]@
+fastapi.openapi.models.Example"fastapi.openapi.models.ExampleD
+ fastapi.openapi.models.Reference" fastapi.openapi.models.Reference"builtins.dict
+Noner¼
+requestBodies/fastapi.openapi.models.Components.requestBodiesù
+rUnion[builtins.dict[builtins.str,Union[fastapi.openapi.models.RequestBody,fastapi.openapi.models.Reference]],None]ö
+fbuiltins.dict[builtins.str,Union[fastapi.openapi.models.RequestBody,fastapi.openapi.models.Reference]]
+builtins.str"builtins.strÞ
+JUnion[fastapi.openapi.models.RequestBody,fastapi.openapi.models.Reference]H
+"fastapi.openapi.models.RequestBody""fastapi.openapi.models.RequestBodyD
+ fastapi.openapi.models.Reference" fastapi.openapi.models.Reference"builtins.dict
+Noner—
+headers)fastapi.openapi.models.Components.headersà
+mUnion[builtins.dict[builtins.str,Union[fastapi.openapi.models.Header,fastapi.openapi.models.Reference]],None]â
+abuiltins.dict[builtins.str,Union[fastapi.openapi.models.Header,fastapi.openapi.models.Reference]]
+builtins.str"builtins.strÏ
+EUnion[fastapi.openapi.models.Header,fastapi.openapi.models.Reference]>
+fastapi.openapi.models.Header"fastapi.openapi.models.HeaderD
+ fastapi.openapi.models.Reference" fastapi.openapi.models.Reference"builtins.dict
+Noner
+securitySchemes1fastapi.openapi.models.Components.securitySchemesÖ
+„Union[builtins.dict[builtins.str,Union[TypeAlias[Union[fastapi.openapi.models.APIKey,fastapi.openapi.models.HTTPBase,fastapi.openapi.models.OAuth2,fastapi.openapi.models.OpenIdConnect,fastapi.openapi.models.HTTPBearer]],fastapi.openapi.models.Reference]],None]À
+
+øbuiltins.dict[builtins.str,Union[TypeAlias[Union[fastapi.openapi.models.APIKey,fastapi.openapi.models.HTTPBase,fastapi.openapi.models.OAuth2,fastapi.openapi.models.OpenIdConnect,fastapi.openapi.models.HTTPBearer]],fastapi.openapi.models.Reference]]
+builtins.str"builtins.str•
+ÜUnion[TypeAlias[Union[fastapi.openapi.models.APIKey,fastapi.openapi.models.HTTPBase,fastapi.openapi.models.OAuth2,fastapi.openapi.models.OpenIdConnect,fastapi.openapi.models.HTTPBearer]],fastapi.openapi.models.Reference]ë
+´TypeAlias[Union[fastapi.openapi.models.APIKey,fastapi.openapi.models.HTTPBase,fastapi.openapi.models.OAuth2,fastapi.openapi.models.OpenIdConnect,fastapi.openapi.models.HTTPBearer]]ˆ
+©Union[fastapi.openapi.models.APIKey,fastapi.openapi.models.HTTPBase,fastapi.openapi.models.OAuth2,fastapi.openapi.models.OpenIdConnect,fastapi.openapi.models.HTTPBearer]>
+fastapi.openapi.models.APIKey"fastapi.openapi.models.APIKeyB
+fastapi.openapi.models.HTTPBase"fastapi.openapi.models.HTTPBase>
+fastapi.openapi.models.OAuth2"fastapi.openapi.models.OAuth2L
+$fastapi.openapi.models.OpenIdConnect"$fastapi.openapi.models.OpenIdConnectF
+!fastapi.openapi.models.HTTPBearer"!fastapi.openapi.models.HTTPBearer"%fastapi.openapi.models.SecuritySchemeD
+ fastapi.openapi.models.Reference" fastapi.openapi.models.Reference"builtins.dict
+Noner‰
+links'fastapi.openapi.models.Components.linksÖ
+kUnion[builtins.dict[builtins.str,Union[fastapi.openapi.models.Link,fastapi.openapi.models.Reference]],None]Ú
+_builtins.dict[builtins.str,Union[fastapi.openapi.models.Link,fastapi.openapi.models.Reference]]
+builtins.str"builtins.strÉ
+CUnion[fastapi.openapi.models.Link,fastapi.openapi.models.Reference]:
+fastapi.openapi.models.Link"fastapi.openapi.models.LinkD
+ fastapi.openapi.models.Reference" fastapi.openapi.models.Reference"builtins.dict
+Nonerý
+	callbacks+fastapi.openapi.models.Components.callbacksÂ
+Union[builtins.dict[builtins.str,Union[builtins.dict[builtins.str,fastapi.openapi.models.PathItem],fastapi.openapi.models.Reference,Any]],None]¡
+ƒbuiltins.dict[builtins.str,Union[builtins.dict[builtins.str,fastapi.openapi.models.PathItem],fastapi.openapi.models.Reference,Any]]
+builtins.str"builtins.strë
+gUnion[builtins.dict[builtins.str,fastapi.openapi.models.PathItem],fastapi.openapi.models.Reference,Any]®
+;builtins.dict[builtins.str,fastapi.openapi.models.PathItem]
+builtins.str"builtins.strB
+fastapi.openapi.models.PathItem"fastapi.openapi.models.PathItem"builtins.dictD
+ fastapi.openapi.models.Reference" fastapi.openapi.models.Reference
+Any"builtins.dict
+Noneß
+Tagfastapi.openapi.models.Tag"pydantic.main.BaseModelrE
+namefastapi.openapi.models.Tag.name
+builtins.str"builtins.strr{
+description&fastapi.openapi.models.Tag.descriptionD
+Union[builtins.str,None]
+builtins.str"builtins.str
+NonerÞ
+externalDocs'fastapi.openapi.models.Tag.externalDocs¤
+8Union[fastapi.openapi.models.ExternalDocumentation,None]\
+,fastapi.openapi.models.ExternalDocumentation",fastapi.openapi.models.ExternalDocumentation
+NoneÔ
+OpenAPIfastapi.openapi.models.OpenAPI"pydantic.main.BaseModelrO
+openapi&fastapi.openapi.models.OpenAPI.openapi
+builtins.str"builtins.strrg
+info#fastapi.openapi.models.OpenAPI.info:
+fastapi.openapi.models.Info"fastapi.openapi.models.Inforù
+servers&fastapi.openapi.models.OpenAPI.serversÅ
+8Union[builtins.list[fastapi.openapi.models.Server],None]}
+,builtins.list[fastapi.openapi.models.Server]>
+fastapi.openapi.models.Server"fastapi.openapi.models.Server"builtins.list
+Noner¢
+paths$fastapi.openapi.models.OpenAPI.pathsò
+Fbuiltins.dict[builtins.str,Union[fastapi.openapi.models.PathItem,Any]]
+builtins.str"builtins.str{
+*Union[fastapi.openapi.models.PathItem,Any]B
+fastapi.openapi.models.PathItem"fastapi.openapi.models.PathItem
+Any"builtins.dictr½
+
+components)fastapi.openapi.models.OpenAPI.componentsƒ
+-Union[fastapi.openapi.models.Components,None]F
+!fastapi.openapi.models.Components"!fastapi.openapi.models.Components
+Noner¥
+security'fastapi.openapi.models.OpenAPI.securityï
+RUnion[builtins.list[builtins.dict[builtins.str,builtins.list[builtins.str]]],None]Œ
+Fbuiltins.list[builtins.dict[builtins.str,builtins.list[builtins.str]]]²
+7builtins.dict[builtins.str,builtins.list[builtins.str]]
+builtins.str"builtins.strJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list"builtins.dict"builtins.list
+Nonerç
+tags#fastapi.openapi.models.OpenAPI.tags¹
+5Union[builtins.list[fastapi.openapi.models.Tag],None]t
+)builtins.list[fastapi.openapi.models.Tag]8
+fastapi.openapi.models.Tag"fastapi.openapi.models.Tag"builtins.list
+Nonerâ
+externalDocs+fastapi.openapi.models.OpenAPI.externalDocs¤
+8Union[fastapi.openapi.models.ExternalDocumentation,None]\
+,fastapi.openapi.models.ExternalDocumentation",fastapi.openapi.models.ExternalDocumentation
+None*’
+__annotations__&fastapi.openapi.models.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*B
+email_validator&fastapi.openapi.models.email_validator
+Any

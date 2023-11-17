@@ -1,0 +1,100 @@
+
+starlette.middleware.exceptionsù 
+ExceptionMiddleware3starlette.middleware.exceptions.ExceptionMiddleware"builtins.object*•
+__init__<starlette.middleware.exceptions.ExceptionMiddleware.__init__"
+None*t
+selfj
+3starlette.middleware.exceptions.ExceptionMiddleware"3starlette.middleware.exceptions.ExceptionMiddleware*ž
+app”
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"starlette.types.ASGIApp*ü
+handlersë
+?Union[typing.Mapping[Any,CallableType[builtins.function]],None]›
+3typing.Mapping[Any,CallableType[builtins.function]]
+AnyK
+CallableType[builtins.function]&
+builtins.function"builtins.function"typing.Mapping
+None *+
+debug
+builtins.bool"builtins.bool *ô
+add_exception_handlerIstarlette.middleware.exceptions.ExceptionMiddleware.add_exception_handler"
+None*t
+selfj
+3starlette.middleware.exceptions.ExceptionMiddleware"3starlette.middleware.exceptions.ExceptionMiddleware*µ
+exc_class_or_status_code–
+,Union[builtins.int,Type[builtins.Exception]]
+builtins.int"builtins.intF
+Type[builtins.Exception](
+builtins.Exception"builtins.Exception*X
+handlerK
+CallableType[builtins.function]&
+builtins.function"builtins.function*œ
+_lookup_exception_handlerMstarlette.middleware.exceptions.ExceptionMiddleware._lookup_exception_handler"†
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None*t
+selfj
+3starlette.middleware.exceptions.ExceptionMiddleware"3starlette.middleware.exceptions.ExceptionMiddleware*1
+exc(
+builtins.Exception"builtins.Exception*™
+__call__<starlette.middleware.exceptions.ExceptionMiddleware.__call__"N
+typing.Coroutine[Any,Any,None]
+Any
+Any
+None"typing.Coroutine*t
+selfj
+3starlette.middleware.exceptions.ExceptionMiddleware"3starlette.middleware.exceptions.ExceptionMiddleware*Â
+scope¶
+2TypeAlias[typing.MutableMapping[builtins.str,Any]]g
+'typing.MutableMapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.MutableMapping"starlette.types.Scope*¢
+receive”
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"starlette.types.Receive*œ
+send‘
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"starlette.types.SendH*¢
+http_exceptionBstarlette.middleware.exceptions.ExceptionMiddleware.http_exception"<
+starlette.responses.Response"starlette.responses.Response*t
+selfj
+3starlette.middleware.exceptions.ExceptionMiddleware"3starlette.middleware.exceptions.ExceptionMiddleware*E
+request8
+starlette.requests.Request"starlette.requests.Request*Q
+excH
+"starlette.exceptions.HTTPException""starlette.exceptions.HTTPException*Ô
+websocket_exceptionGstarlette.middleware.exceptions.ExceptionMiddleware.websocket_exception"N
+typing.Coroutine[Any,Any,None]
+Any
+Any
+None"typing.Coroutine*t
+selfj
+3starlette.middleware.exceptions.ExceptionMiddleware"3starlette.middleware.exceptions.ExceptionMiddleware*O
+	websocket@
+starlette.websockets.WebSocket"starlette.websockets.WebSocket*[
+excR
+'starlette.exceptions.WebSocketException"'starlette.exceptions.WebSocketExceptionHr‹
+app7starlette.middleware.exceptions.ExceptionMiddleware.appK
+CallableType[builtins.function]&
+builtins.function"builtins.functionrb
+debug9starlette.middleware.exceptions.ExceptionMiddleware.debug
+builtins.bool"builtins.boolr’
+_status_handlersDstarlette.middleware.exceptions.ExceptionMiddleware._status_handlers·
+;builtins.dict[builtins.int,CallableType[builtins.function]]
+builtins.int"builtins.intK
+CallableType[builtins.function]&
+builtins.function"builtins.function"builtins.dictrÎ
+_exception_handlersGstarlette.middleware.exceptions.ExceptionMiddleware._exception_handlersí
+Gbuiltins.dict[Type[builtins.Exception],CallableType[builtins.function]]F
+Type[builtins.Exception](
+builtins.Exception"builtins.ExceptionK
+CallableType[builtins.function]&
+builtins.function"builtins.function"builtins.dict*›
+__annotations__/starlette.middleware.exceptions.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
