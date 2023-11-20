@@ -134,3 +134,8 @@ async def test5():
 async def test6():
     response = StreamingResponse(iter("test"), headers={"Set-Cookie": "key=value; Secure"})  # OK
     return response
+
+@app.get("/test7")
+async def test7():
+    response = StreamingResponse(iter("test"))  # OK
+    return response

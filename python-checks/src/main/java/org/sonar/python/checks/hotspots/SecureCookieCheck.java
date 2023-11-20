@@ -19,6 +19,7 @@
  */
 package org.sonar.python.checks.hotspots;
 
+import java.util.Optional;
 import java.util.function.Predicate;
 import javax.annotation.Nullable;
 import org.sonar.check.Rule;
@@ -39,41 +40,41 @@ public class SecureCookieCheck extends AbstractCookieFlagCheck {
   public static final String HEADERS_ARGUMENT_NAME = "headers";
   private static final MethodArgumentsToCheckRegistry METHOD_ARGUMENTS_TO_CHECK_REGISTRY = new MethodArgumentsToCheckRegistry(
     // Check for falsy secure argument
-    new MethodArgumentsToCheck("django.http.response.HttpResponseBase", SET_COOKIE_METHOD_NAME, SECURE_ARGUMENT_NAME, 6, true),
-    new MethodArgumentsToCheck("flask.wrappers.Response", SET_COOKIE_METHOD_NAME, SECURE_ARGUMENT_NAME, 6, true),
-    new MethodArgumentsToCheck("werkzeug.wrappers.BaseResponse", SET_COOKIE_METHOD_NAME, SECURE_ARGUMENT_NAME, 6, true),
-    new MethodArgumentsToCheck("werkzeug.sansio.response.Response", SET_COOKIE_METHOD_NAME, SECURE_ARGUMENT_NAME, 7, true),
-    new MethodArgumentsToCheck("django.http.response.HttpResponseBase", "set_signed_cookie", SECURE_ARGUMENT_NAME, 7, true),
-    new MethodArgumentsToCheck("fastapi.Response", SET_COOKIE_METHOD_NAME, SECURE_ARGUMENT_NAME, -1, true),
-    new MethodArgumentsToCheck("fastapi.responses.Response", SET_COOKIE_METHOD_NAME, SECURE_ARGUMENT_NAME, -1, true),
-    new MethodArgumentsToCheck("starlette.responses.Response", SET_COOKIE_METHOD_NAME, SECURE_ARGUMENT_NAME, -1, true),
-    new MethodArgumentsToCheck("fastapi.responses.HTMLResponse", SET_COOKIE_METHOD_NAME, SECURE_ARGUMENT_NAME, -1, true),
-    new MethodArgumentsToCheck("starlette.responses.HTMLResponse", SET_COOKIE_METHOD_NAME, SECURE_ARGUMENT_NAME, -1, true),
-    new MethodArgumentsToCheck("fastapi.responses.JSONResponse", SET_COOKIE_METHOD_NAME, SECURE_ARGUMENT_NAME, -1, true),
-    new MethodArgumentsToCheck("starlette.responses.JSONResponse", SET_COOKIE_METHOD_NAME, SECURE_ARGUMENT_NAME, -1, true),
-    new MethodArgumentsToCheck("fastapi.responses.ORJSONResponse", SET_COOKIE_METHOD_NAME, SECURE_ARGUMENT_NAME, -1, true),
-    new MethodArgumentsToCheck("fastapi.responses.PlainTextResponse", SET_COOKIE_METHOD_NAME, SECURE_ARGUMENT_NAME, -1, true),
-    new MethodArgumentsToCheck("starlette.responses.PlainTextResponse", SET_COOKIE_METHOD_NAME, SECURE_ARGUMENT_NAME, -1, true),
-    new MethodArgumentsToCheck("fastapi.responses.StreamingResponse", SET_COOKIE_METHOD_NAME, SECURE_ARGUMENT_NAME, -1, true),
-    new MethodArgumentsToCheck("starlette.responses.StreamingResponse", SET_COOKIE_METHOD_NAME, SECURE_ARGUMENT_NAME, -1, true),
-    new MethodArgumentsToCheck("fastapi.responses.UJSONResponse", SET_COOKIE_METHOD_NAME, SECURE_ARGUMENT_NAME, -1, true),
-    new MethodArgumentsToCheck("fastapi.responses.FileResponse", SET_COOKIE_METHOD_NAME, SECURE_ARGUMENT_NAME, -1, true),
-    new MethodArgumentsToCheck("starlette.responses.FileResponse", SET_COOKIE_METHOD_NAME, SECURE_ARGUMENT_NAME, -1, true),
+    new MethodArgumentsToCheck("django.http.response.HttpResponseBase", SET_COOKIE_METHOD_NAME, SECURE_ARGUMENT_NAME, 6),
+    new MethodArgumentsToCheck("flask.wrappers.Response", SET_COOKIE_METHOD_NAME, SECURE_ARGUMENT_NAME, 6),
+    new MethodArgumentsToCheck("werkzeug.wrappers.BaseResponse", SET_COOKIE_METHOD_NAME, SECURE_ARGUMENT_NAME, 6),
+    new MethodArgumentsToCheck("werkzeug.sansio.response.Response", SET_COOKIE_METHOD_NAME, SECURE_ARGUMENT_NAME, 7),
+    new MethodArgumentsToCheck("django.http.response.HttpResponseBase", "set_signed_cookie", SECURE_ARGUMENT_NAME, 7),
+    new MethodArgumentsToCheck("fastapi.Response", SET_COOKIE_METHOD_NAME, SECURE_ARGUMENT_NAME, -1),
+    new MethodArgumentsToCheck("fastapi.responses.Response", SET_COOKIE_METHOD_NAME, SECURE_ARGUMENT_NAME, -1),
+    new MethodArgumentsToCheck("starlette.responses.Response", SET_COOKIE_METHOD_NAME, SECURE_ARGUMENT_NAME, -1),
+    new MethodArgumentsToCheck("fastapi.responses.HTMLResponse", SET_COOKIE_METHOD_NAME, SECURE_ARGUMENT_NAME, -1),
+    new MethodArgumentsToCheck("starlette.responses.HTMLResponse", SET_COOKIE_METHOD_NAME, SECURE_ARGUMENT_NAME, -1),
+    new MethodArgumentsToCheck("fastapi.responses.JSONResponse", SET_COOKIE_METHOD_NAME, SECURE_ARGUMENT_NAME, -1),
+    new MethodArgumentsToCheck("starlette.responses.JSONResponse", SET_COOKIE_METHOD_NAME, SECURE_ARGUMENT_NAME, -1),
+    new MethodArgumentsToCheck("fastapi.responses.ORJSONResponse", SET_COOKIE_METHOD_NAME, SECURE_ARGUMENT_NAME, -1),
+    new MethodArgumentsToCheck("fastapi.responses.PlainTextResponse", SET_COOKIE_METHOD_NAME, SECURE_ARGUMENT_NAME, -1),
+    new MethodArgumentsToCheck("starlette.responses.PlainTextResponse", SET_COOKIE_METHOD_NAME, SECURE_ARGUMENT_NAME, -1),
+    new MethodArgumentsToCheck("fastapi.responses.StreamingResponse", SET_COOKIE_METHOD_NAME, SECURE_ARGUMENT_NAME, -1),
+    new MethodArgumentsToCheck("starlette.responses.StreamingResponse", SET_COOKIE_METHOD_NAME, SECURE_ARGUMENT_NAME, -1),
+    new MethodArgumentsToCheck("fastapi.responses.UJSONResponse", SET_COOKIE_METHOD_NAME, SECURE_ARGUMENT_NAME, -1),
+    new MethodArgumentsToCheck("fastapi.responses.FileResponse", SET_COOKIE_METHOD_NAME, SECURE_ARGUMENT_NAME, -1),
+    new MethodArgumentsToCheck("starlette.responses.FileResponse", SET_COOKIE_METHOD_NAME, SECURE_ARGUMENT_NAME, -1),
     // check for insecure set-cookie header
-    new MethodArgumentsToCheck("fastapi.responses.Response",  HEADERS_ARGUMENT_NAME, -1, true, SecureCookieCheck::isInvalidHeaderArgument),
-    new MethodArgumentsToCheck("starlette.responses.Response",  HEADERS_ARGUMENT_NAME, -1, true, SecureCookieCheck::isInvalidHeaderArgument),
-    new MethodArgumentsToCheck("fastapi.responses.HTMLResponse",  HEADERS_ARGUMENT_NAME, -1, true, SecureCookieCheck::isInvalidHeaderArgument),
-    new MethodArgumentsToCheck("starlette.responses.HTMLResponse",  HEADERS_ARGUMENT_NAME, -1, true, SecureCookieCheck::isInvalidHeaderArgument),
-    new MethodArgumentsToCheck("fastapi.responses.JSONResponse",  HEADERS_ARGUMENT_NAME, -1, true, SecureCookieCheck::isInvalidHeaderArgument),
-    new MethodArgumentsToCheck("starlette.responses.JSONResponse",  HEADERS_ARGUMENT_NAME, -1, true, SecureCookieCheck::isInvalidHeaderArgument),
-    new MethodArgumentsToCheck("fastapi.responses.ORJSONResponse",  HEADERS_ARGUMENT_NAME, -1, true, SecureCookieCheck::isInvalidHeaderArgument),
-    new MethodArgumentsToCheck("fastapi.responses.PlainTextResponse",  HEADERS_ARGUMENT_NAME, -1, true, SecureCookieCheck::isInvalidHeaderArgument),
-    new MethodArgumentsToCheck("starlette.responses.PlainTextResponse",  HEADERS_ARGUMENT_NAME, -1, true, SecureCookieCheck::isInvalidHeaderArgument),
-    new MethodArgumentsToCheck("fastapi.responses.StreamingResponse",  HEADERS_ARGUMENT_NAME, -1, true, SecureCookieCheck::isInvalidHeaderArgument),
-    new MethodArgumentsToCheck("starlette.responses.StreamingResponse",  HEADERS_ARGUMENT_NAME, -1, true, SecureCookieCheck::isInvalidHeaderArgument),
-    new MethodArgumentsToCheck("fastapi.responses.UJSONResponse",  HEADERS_ARGUMENT_NAME, -1, true, SecureCookieCheck::isInvalidHeaderArgument),
-    new MethodArgumentsToCheck("fastapi.responses.FileResponse",  HEADERS_ARGUMENT_NAME, -1, true, SecureCookieCheck::isInvalidHeaderArgument),
-    new MethodArgumentsToCheck("starlette.responses.FileResponse",  HEADERS_ARGUMENT_NAME, -1, true, SecureCookieCheck::isInvalidHeaderArgument)
+    new MethodArgumentsToCheck("fastapi.responses.Response",  HEADERS_ARGUMENT_NAME, -1, SecureCookieCheck::isInvalidHeaderArgument),
+    new MethodArgumentsToCheck("starlette.responses.Response",  HEADERS_ARGUMENT_NAME, -1, SecureCookieCheck::isInvalidHeaderArgument),
+    new MethodArgumentsToCheck("fastapi.responses.HTMLResponse",  HEADERS_ARGUMENT_NAME, -1, SecureCookieCheck::isInvalidHeaderArgument),
+    new MethodArgumentsToCheck("starlette.responses.HTMLResponse",  HEADERS_ARGUMENT_NAME, -1, SecureCookieCheck::isInvalidHeaderArgument),
+    new MethodArgumentsToCheck("fastapi.responses.JSONResponse",  HEADERS_ARGUMENT_NAME, -1, SecureCookieCheck::isInvalidHeaderArgument),
+    new MethodArgumentsToCheck("starlette.responses.JSONResponse",  HEADERS_ARGUMENT_NAME, -1, SecureCookieCheck::isInvalidHeaderArgument),
+    new MethodArgumentsToCheck("fastapi.responses.ORJSONResponse",  HEADERS_ARGUMENT_NAME, -1, SecureCookieCheck::isInvalidHeaderArgument),
+    new MethodArgumentsToCheck("fastapi.responses.PlainTextResponse",  HEADERS_ARGUMENT_NAME, -1, SecureCookieCheck::isInvalidHeaderArgument),
+    new MethodArgumentsToCheck("starlette.responses.PlainTextResponse",  HEADERS_ARGUMENT_NAME, -1, SecureCookieCheck::isInvalidHeaderArgument),
+    new MethodArgumentsToCheck("fastapi.responses.StreamingResponse",  HEADERS_ARGUMENT_NAME, -1, SecureCookieCheck::isInvalidHeaderArgument),
+    new MethodArgumentsToCheck("starlette.responses.StreamingResponse",  HEADERS_ARGUMENT_NAME, -1, SecureCookieCheck::isInvalidHeaderArgument),
+    new MethodArgumentsToCheck("fastapi.responses.UJSONResponse",  HEADERS_ARGUMENT_NAME, -1, SecureCookieCheck::isInvalidHeaderArgument),
+    new MethodArgumentsToCheck("fastapi.responses.FileResponse",  HEADERS_ARGUMENT_NAME, -1, SecureCookieCheck::isInvalidHeaderArgument),
+    new MethodArgumentsToCheck("starlette.responses.FileResponse",  HEADERS_ARGUMENT_NAME, -1, SecureCookieCheck::isInvalidHeaderArgument)
   );
 
   @Override
@@ -91,11 +92,14 @@ public class SecureCookieCheck extends AbstractCookieFlagCheck {
     return METHOD_ARGUMENTS_TO_CHECK_REGISTRY;
   }
 
-  private static boolean isInvalidHeaderArgument(RegularArgument argument) {
-    return isDictWithSensitiveEntry(argument.expression());
+  private static boolean isInvalidHeaderArgument(@Nullable RegularArgument argument) {
+    return Optional.ofNullable(argument)
+      .map(RegularArgument::expression)
+      .map(SecureCookieCheck::isDictWithSensitiveEntry)
+      .orElse(false);
   }
 
-  private static boolean isDictWithSensitiveEntry(@Nullable Expression expression) {
+  private static boolean isDictWithSensitiveEntry(Expression expression) {
     return TreeUtils.toOptionalInstanceOf(Name.class, expression)
       .map(Expressions::singleAssignedNonNameValue)
       .map(SecureCookieCheck::isDictWithSensitiveEntry)

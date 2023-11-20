@@ -77,23 +77,20 @@ public abstract class AbstractCookieFlagCheck extends PythonSubscriptionCheck {
     var methodName = getCallExpressionMethodName(callExpression);
     var methodFqn = getCallExpressionMethodFqn(callExpression);
     if ((methodName != null && registry.hasMethodName(methodName)) || (methodFqn != null && registry.hasMethodFqn(methodFqn))) {
-      findMethodArgumentToCheck(callExpression)
+      findMethodArgumentToCheck(callExpression, methodFqn, methodName)
         .ifPresent(methodArgumentsToCheck -> {
-          RegularArgument argument = TreeUtils.nthArgumentOrKeyword(methodArgumentsToCheck.argumentPosition(), methodArgumentsToCheck.argumentName(), callExpression.arguments());
-          if ((methodArgumentsToCheck.complainIfMissing() && argument == null)
-            || methodArgumentsToCheck.invalidArgumentPredicate().test(argument)) {
+          var argument = TreeUtils.nthArgumentOrKeyword(methodArgumentsToCheck.argumentPosition(), methodArgumentsToCheck.argumentName(), callExpression.arguments());
+          if (methodArgumentsToCheck.invalidArgumentPredicate().test(argument)) {
             ctx.addIssue(callExpression.callee(), message());
           }
         });
     }
   }
 
-  private Optional<MethodArgumentsToCheck> findMethodArgumentToCheck(CallExpression callExpression) {
-    return Optional.of(callExpression)
-      .map(AbstractCookieFlagCheck::getCallExpressionMethodFqn)
+  private Optional<MethodArgumentsToCheck> findMethodArgumentToCheck(CallExpression callExpression, @Nullable String methodFqn, @Nullable String methodName) {
+    return Optional.ofNullable(methodFqn)
       .map(methodArgumentsToCheckRegistry()::getByMethodFqn)
-      .or(() -> Optional.of(callExpression)
-          .map(AbstractCookieFlagCheck::getCallExpressionMethodName)
+      .or(() -> Optional.ofNullable(methodName)
           .map(methodArgumentsToCheckRegistry()::getByMethodName)
           .stream()
           .flatMap(Collection::stream)
@@ -213,21 +210,18 @@ public abstract class AbstractCookieFlagCheck extends PythonSubscriptionCheck {
     private final String methodFqn;
     private final String argumentName;
     private final int argumentPosition;
-    private final boolean complainIfMissing;
     private final Predicate<RegularArgument> invalidArgumentPredicate;
 
 
-    public MethodArgumentsToCheck(String calleeFqn, String argumentName, int argumentPosition, boolean complainIfMissing,
-      Predicate<RegularArgument> invalidArgumentPredicate) {
-      this(calleeFqn, null, argumentName, argumentPosition, complainIfMissing, invalidArgumentPredicate);
+    public MethodArgumentsToCheck(String calleeFqn, String argumentName, int argumentPosition, Predicate<RegularArgument> invalidArgumentPredicate) {
+      this(calleeFqn, null, argumentName, argumentPosition, invalidArgumentPredicate);
     }
 
-    public MethodArgumentsToCheck(String calleeFqn, String methodName, String argumentName, int argumentPosition, boolean complainIfMissing) {
-      this(calleeFqn, methodName, argumentName, argumentPosition, complainIfMissing, arg -> isFalsy(arg.expression()));
+    public MethodArgumentsToCheck(String calleeFqn, String methodName, String argumentName, int argumentPosition) {
+      this(calleeFqn, methodName, argumentName, argumentPosition, (@Nullable RegularArgument arg) -> (arg == null || isFalsy(arg.expression())));
     }
 
-    public MethodArgumentsToCheck(String calleeFqn, @Nullable String methodName, String argumentName, int argumentPosition,
-      boolean complainIfMissing, Predicate<RegularArgument> invalidArgumentPredicate) {
+    public MethodArgumentsToCheck(String calleeFqn, @Nullable String methodName, String argumentName, int argumentPosition, Predicate<RegularArgument> invalidArgumentPredicate) {
       this.calleeFqn = calleeFqn;
       this.methodName = methodName;
       this.invalidArgumentPredicate = invalidArgumentPredicate;
@@ -236,7 +230,6 @@ public abstract class AbstractCookieFlagCheck extends PythonSubscriptionCheck {
         .orElse(calleeFqn);
       this.argumentName = argumentName;
       this.argumentPosition = argumentPosition;
-      this.complainIfMissing = complainIfMissing;
     }
 
     public String calleeFqn() {
@@ -253,10 +246,6 @@ public abstract class AbstractCookieFlagCheck extends PythonSubscriptionCheck {
 
     public int argumentPosition() {
       return argumentPosition;
-    }
-
-    public boolean complainIfMissing() {
-      return complainIfMissing;
     }
 
     public String methodFqn() {

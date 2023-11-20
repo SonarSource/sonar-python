@@ -55,11 +55,11 @@ public class HttpOnlyCookieCheck extends AbstractCookieFlagCheck {
   @Override
   MethodArgumentsToCheckRegistry methodArgumentsToCheckRegistry() {
     return new MethodArgumentsToCheckRegistry(
-      new MethodArgumentsToCheck("django.http.response.HttpResponseBase", SET_COOKIE_METHOD_NAME, HTTPONLY_ARGUMENT_NAME, 7, true),
-      new MethodArgumentsToCheck("django.http.response.HttpResponseBase", "set_signed_cookie" , HTTPONLY_ARGUMENT_NAME, 8, true),
-      new MethodArgumentsToCheck("flask.wrappers.Response", SET_COOKIE_METHOD_NAME, HTTPONLY_ARGUMENT_NAME, 7, true),
-      new MethodArgumentsToCheck("werkzeug.wrappers.BaseResponse", SET_COOKIE_METHOD_NAME, HTTPONLY_ARGUMENT_NAME, 7, true),
-      new MethodArgumentsToCheck("werkzeug.sansio.response.Response", SET_COOKIE_METHOD_NAME, HTTPONLY_ARGUMENT_NAME, 7, true)
+      new MethodArgumentsToCheck("django.http.response.HttpResponseBase", SET_COOKIE_METHOD_NAME, HTTPONLY_ARGUMENT_NAME, 7),
+      new MethodArgumentsToCheck("django.http.response.HttpResponseBase", "set_signed_cookie" , HTTPONLY_ARGUMENT_NAME, 8),
+      new MethodArgumentsToCheck("flask.wrappers.Response", SET_COOKIE_METHOD_NAME, HTTPONLY_ARGUMENT_NAME, 7),
+      new MethodArgumentsToCheck("werkzeug.wrappers.BaseResponse", SET_COOKIE_METHOD_NAME, HTTPONLY_ARGUMENT_NAME, 7),
+      new MethodArgumentsToCheck("werkzeug.sansio.response.Response", SET_COOKIE_METHOD_NAME, HTTPONLY_ARGUMENT_NAME, 7)
     );
   }
 
