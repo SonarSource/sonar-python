@@ -26,8 +26,11 @@ import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
@@ -39,6 +42,7 @@ import org.sonar.plugins.python.api.tree.BinaryExpression;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.DictionaryLiteral;
 import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.HasSymbol;
 import org.sonar.plugins.python.api.tree.KeyValuePair;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.NumericLiteral;
@@ -48,7 +52,10 @@ import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.UnpackingExpression;
+import org.sonar.plugins.python.api.tree.WithItem;
+import org.sonar.plugins.python.api.tree.WithStatement;
 import org.sonar.python.tree.RegularArgumentImpl;
+import org.sonar.python.tree.TreeUtils;
 
 import static java.util.Optional.ofNullable;
 
@@ -63,10 +70,43 @@ public class VerifiedSslTlsCertificateCheck extends PythonSubscriptionCheck {
 
   @Override
   public void initialize(Context context) {
+    context.registerSyntaxNodeConsumer(Tree.Kind.WITH_STMT, VerifiedSslTlsCertificateCheck::verifyAioHttpWithSession);
     context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, VerifiedSslTlsCertificateCheck::sslSetVerifyCheck);
     context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, VerifiedSslTlsCertificateCheck::requestsCheck);
     context.registerSyntaxNodeConsumer(Tree.Kind.REGULAR_ARGUMENT, VerifiedSslTlsCertificateCheck::standardSslCheckForRegularArgument);
     context.registerSyntaxNodeConsumer(Tree.Kind.ASSIGNMENT_STMT, VerifiedSslTlsCertificateCheck::standardSslCheckForAssignmentStatement);
+  }
+
+  private static void verifyAioHttpWithSession(SubscriptionContext ctx) {
+    var withStatement = (WithStatement) ctx.syntaxNode();
+    withStatement.withItems()
+      .stream()
+      .filter(item -> Optional.of(item)
+        .map(WithItem::test)
+        .flatMap(TreeUtils.toOptionalInstanceOfMapper(CallExpression.class))
+        .map(CallExpression::calleeSymbol)
+        .map(Symbol::fullyQualifiedName)
+        .filter("aiohttp.ClientSession"::equals)
+        .isPresent())
+      .map(WithItem::expression)
+      .map(TreeUtils.toOptionalInstanceOfMapper(Name.class))
+      .filter(Optional::isPresent)
+      .map(Optional::get)
+      .map(HasSymbol::symbol)
+      .filter(Objects::nonNull)
+      .forEach(symbol -> verifyAioHttpSessionSymbolUsages(ctx, symbol));
+  }
+
+  private static void verifyAioHttpSessionSymbolUsages(SubscriptionContext ctx, Symbol sessionSymbol) {
+    sessionSymbol.usages()
+      .stream()
+      .filter(usage -> usage.kind() == Usage.Kind.OTHER)
+      .map(Usage::tree)
+      .map(t -> TreeUtils.firstAncestorOfKind(t, Tree.Kind.CALL_EXPR))
+      .map(TreeUtils.toOptionalInstanceOfMapper(CallExpression.class))
+      .filter(Optional::isPresent)
+      .map(Optional::get)
+      .forEach(sessionCallExpr -> verifyVulnerableMethods(ctx, sessionCallExpr, VERIFY_SSL_ARG_NAMES));
   }
 
   /** Fully qualified name of the <code>set_verify</code> used in <code>sslSetVerifyCheck</code>. */
@@ -186,8 +226,7 @@ public class VerifiedSslTlsCertificateCheck extends PythonSubscriptionCheck {
     "httpx.patch",
     "httpx.delete",
     "httpx.Client",
-    "httpx.AsyncClient"
-  );
+    "httpx.AsyncClient");
 
   private static void requestsCheck(SubscriptionContext subscriptionContext) {
     var callExpr = (CallExpression) subscriptionContext.syntaxNode();
@@ -197,22 +236,28 @@ public class VerifiedSslTlsCertificateCheck extends PythonSubscriptionCheck {
       .isPresent();
 
     if (isVulnerableMethod) {
-      Optional<List<Expression>> verifyRhs = searchVerifyAssignment(callExpr, VERIFY_ARG_NAME)
-        .or(() -> searchVerifyInKwargs(callExpr, VERIFY_ARG_NAME));
-
-      verifyRhs.ifPresent(sensitiveSettingExpressions -> {
-        // The setting expression always comes last (`get` is safe: there can be only 1 or 2 elements)
-        Expression rhs = sensitiveSettingExpressions.get(sensitiveSettingExpressions.size() - 1);
-        if (Expressions.isFalsy(rhs) || isFalsyCollection(rhs)) {
-          PreciseIssue issue = subscriptionContext.addIssue(rhs, MESSAGE);
-
-          // report everything except the last one as secondary locations.
-          for (int i = 0; i < sensitiveSettingExpressions.size() - 1; i++) {
-            issue.secondary(sensitiveSettingExpressions.get(i), "Dictionary is passed here as **kwargs.");
-          }
-        }
-      });
+      verifyVulnerableMethods(subscriptionContext, callExpr, VERIFY_ARG_NAME);
     }
+  }
+
+  private static void verifyVulnerableMethods(SubscriptionContext ctx, CallExpression callExpr, Set<String> argumentNames) {
+    var verifyRhs = searchVerifyAssignment(callExpr, argumentNames)
+      .or(() -> searchVerifyInKwargs(callExpr, argumentNames));
+
+    verifyRhs.ifPresent(sensitiveSettingExpressions -> sensitiveSettingExpressions
+      .stream()
+      .filter(rhs -> Expressions.isFalsy(rhs) || isFalsyCollection(rhs))
+      .findFirst()
+      .ifPresent(rhs -> addIssue(ctx, sensitiveSettingExpressions, rhs))
+    );
+  }
+
+  private static void addIssue(SubscriptionContext ctx, List<Expression> sensitiveSettingExpressions, Expression rhs) {
+    var issue = ctx.addIssue(rhs, MESSAGE);
+    // report everything except the last one as secondary locations.
+    sensitiveSettingExpressions.stream()
+      .filter(v -> v != rhs)
+      .forEach(v -> issue.secondary(v, "Dictionary is passed here as **kwargs."));
   }
 
   /**
@@ -221,16 +266,18 @@ public class VerifiedSslTlsCertificateCheck extends PythonSubscriptionCheck {
    * @return The <code>expr</code> part on the right hand side of the assignment.
    */
   private static Optional<List<Expression>> searchVerifyAssignment(CallExpression callExpr, Set<String> argumentNames) {
-    for (Argument argument : callExpr.arguments()) {
-      if (argument.is(Tree.Kind.REGULAR_ARGUMENT)) {
-        RegularArgument regArg = (RegularArgument) argument;
-        Name keywordArgument = regArg.keywordArgument();
-        if (keywordArgument != null && argumentNames.contains(keywordArgument.name())) {
-          return Optional.of(Collections.singletonList(regArg.expression()));
-        }
-      }
-    }
-    return Optional.empty();
+    var args = callExpr.arguments()
+      .stream()
+      .filter(RegularArgument.class::isInstance)
+      .map(RegularArgument.class::cast)
+      .filter(regArg -> Optional.of(regArg)
+        .map(RegularArgument::keywordArgument)
+        .map(Name::name)
+        .filter(argumentNames::contains)
+        .isPresent())
+      .map(RegularArgument::expression)
+      .collect(Collectors.toList());
+    return Optional.of(args).filter(Predicate.not(List::isEmpty));
   }
 
   /**
@@ -341,7 +388,7 @@ public class VerifiedSslTlsCertificateCheck extends PythonSubscriptionCheck {
   /** Finds the next higher line where a binding usage occurs. */
   private static int findNextAssignmentLine(List<Usage> usages, int firstAssignmentLine) {
     int closestHigher = Integer.MAX_VALUE;
-    for (Usage u: usages) {
+    for (Usage u : usages) {
       if (u.isBindingUsage()) {
         int line = u.tree().firstToken().line();
         if (line > firstAssignmentLine && line <= closestHigher) {
