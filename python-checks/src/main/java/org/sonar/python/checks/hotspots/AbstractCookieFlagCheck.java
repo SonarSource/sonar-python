@@ -37,13 +37,17 @@ import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.CallExpression;
+import org.sonar.plugins.python.api.tree.DictionaryLiteral;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.ExpressionList;
+import org.sonar.plugins.python.api.tree.KeyValuePair;
+import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.SubscriptionExpression;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
+import org.sonar.python.checks.Expressions;
 import org.sonar.python.tree.TreeUtils;
 
 import static org.sonar.python.checks.Expressions.isFalsy;
@@ -167,6 +171,47 @@ public abstract class AbstractCookieFlagCheck extends PythonSubscriptionCheck {
     }
     return object;
   }
+
+  protected boolean isInvalidHeaderArgument(@Nullable RegularArgument argument) {
+    return Optional.ofNullable(argument)
+      .map(RegularArgument::expression)
+      .map(this::isDictWithSensitiveEntry)
+      .orElse(false);
+  }
+
+  private boolean isDictWithSensitiveEntry(Expression expression) {
+    return TreeUtils.toOptionalInstanceOf(Name.class, expression)
+      .map(Expressions::singleAssignedNonNameValue)
+      .map(this::isDictWithSensitiveEntry)
+      .or(() -> TreeUtils.toOptionalInstanceOf(DictionaryLiteral.class, expression)
+        .map(this::hasInvalidEntry)
+      ).orElse(false);
+  }
+
+  private boolean hasInvalidEntry(DictionaryLiteral dictionaryLiteral) {
+    return dictionaryLiteral.elements().stream()
+      .filter(KeyValuePair.class::isInstance)
+      .map(KeyValuePair.class::cast)
+      .filter(keyValuePair -> isSensitiveKey(keyValuePair.key()))
+      .map(KeyValuePair::value)
+      .anyMatch(this::invalidValue);
+  }
+
+  private static boolean isSensitiveKey(Expression key) {
+    return TreeUtils.toOptionalInstanceOf(StringLiteral.class, key)
+      .map(StringLiteral::trimmedQuotesValue)
+      .filter("set-cookie"::equalsIgnoreCase)
+      .isPresent();
+  }
+
+  private boolean invalidValue(Expression value) {
+    return TreeUtils.toOptionalInstanceOf(StringLiteral.class, value)
+      .map(StringLiteral::trimmedQuotesValue)
+      .filter(Predicate.not(val -> val.matches(headerValueRegex())))
+      .isPresent();
+  }
+
+  protected abstract String headerValueRegex();
 
   abstract String flagName();
 
