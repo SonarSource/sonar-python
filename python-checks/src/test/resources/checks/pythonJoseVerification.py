@@ -10,7 +10,8 @@ router = APIRouter()
 @router.get('/noncompliant_jwt_get_unverified_header')
 async def noncompliant_jwt_get_unverified_header(token: str | None = None):
     try:
-        return jwt.get_unverified_header(token)  # Noncompliant
+        return jwt.get_unverified_header(token)  # Noncompliant {{Don't use a JWT token without verifying its signature.}}
+    #                                    ^^^^^
     finally:
         ...
 
@@ -19,6 +20,7 @@ async def noncompliant_jwt_get_unverified_header(token: str | None = None):
 async def noncompliant_jwt_get_unverified_headers(token: str | None = None):
     try:
         return jwt.get_unverified_headers(token)  # Noncompliant
+    #                                     ^^^^^
     finally:
         ...
 
@@ -27,6 +29,7 @@ async def noncompliant_jwt_get_unverified_headers(token: str | None = None):
 async def noncompliant_jws_get_unverified_header(token: str | None = None):
     try:
         return jws.get_unverified_header(token)  # Noncompliant
+    #                                    ^^^^^
     finally:
         ...
 
@@ -35,6 +38,7 @@ async def noncompliant_jws_get_unverified_header(token: str | None = None):
 async def noncompliant_jws_get_unverified_headers(token: str | None = None):
     try:
         return jws.get_unverified_headers(token)  # Noncompliant
+    #                                     ^^^^^
     finally:
         ...
 
@@ -43,6 +47,7 @@ async def noncompliant_jws_get_unverified_headers(token: str | None = None):
 async def noncompliant_jwt_get_unverified_claims(token: str | None = None):
     try:
         return jwt.get_unverified_claims(token)  # Noncompliant
+    #                                    ^^^^^
     finally:
         ...
 
@@ -51,6 +56,7 @@ async def noncompliant_jwt_get_unverified_claims(token: str | None = None):
 async def noncompliant_jws_get_unverified_claims(token: str | None = None):
     try:
         payload = jws.get_unverified_claims(token)  # Noncompliant
+    #                                       ^^^^^
         ...
     finally:
         ...
@@ -59,7 +65,8 @@ async def noncompliant_jws_get_unverified_claims(token: str | None = None):
 @router.get('/noncompliant_decode_dict_1')
 async def noncompliant_decode_dict_1(token: str | None = None):
     try:
-        return jwt.decode(token, None, options={"verify_signature": False})  # Noncompliant
+        return jwt.decode(token, None, options={"verify_signature": False})  # Noncompliant {{Don't use a JWT token without verifying its signature.}}
+    #                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
     finally:
         ...
 
@@ -69,6 +76,7 @@ async def noncompliant_decode_dict_2(token: str | None = None):
     options = {"verify_signature": False}
     try:
         return jwt.decode(token, None, options=options)  # Noncompliant
+    #                                          ^^^^^^^
     finally:
         ...
 
@@ -78,6 +86,7 @@ async def noncompliant_decode_dict_3(token: str | None = None):
     options = dict(verify_signature=False)
     try:
         return jwt.decode(token, None, options=options)  # Noncompliant
+    #                                          ^^^^^^^
     finally:
         ...
 
@@ -86,6 +95,7 @@ async def noncompliant_decode_dict_3(token: str | None = None):
 async def noncompliant_list_1(token: str | None = None):
     try:
         return jwt.decode(token, None, options=[("leeway", 10), ("verify_signature", False)])  # Noncompliant
+    #                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     finally:
         ...
 
@@ -95,6 +105,7 @@ async def noncompliant_list_2(token: str | None = None):
     options = [("leeway", 10), ("verify_signature", False)]
     try:
         return jwt.decode(token, None, options=options)  # Noncompliant
+    #                                          ^^^^^^^
     finally:
         ...
 
@@ -104,6 +115,7 @@ async def noncompliant_list_2(token: str | None = None):
 async def noncompliant_verify(token: str | None = None):
     try:
         payload = jws.verify(token, None, None, verify=False)  # Noncompliant
+    #                                           ^^^^^^^^^^^^
         ...
     finally:
         ...
