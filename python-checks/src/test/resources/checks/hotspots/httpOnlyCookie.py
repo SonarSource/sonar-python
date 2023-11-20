@@ -118,3 +118,44 @@ def flask_SessionCookieHttpOnlyFalse():
         SECRET_KEY = "woopie",
         SESSION_COOKIE_HTTPONLY = True # Ok
     ))
+
+from fastapi import FastAPI, Response
+from fastapi.responses import HTMLResponse, PlainTextResponse
+
+app = FastAPI()
+
+
+@app.get("/")
+async def root():
+    return {"message": "Hello World"}
+
+
+@app.get("/test1")
+async def test1(response: Response):
+    response.set_cookie("key", "value", httponly=False)  # Noncompliant
+    return {"message": "test"}
+
+
+@app.get("/test2")
+async def test2(response: Response):
+    response.set_cookie("key", "value")  # Noncompliant
+    return {"message": "test"}
+
+
+@app.get("/test3")
+async def test3(response: Response):
+    response.set_cookie("key", "value", httponly=True)  # OK
+    return {"message": "test"}
+
+
+@app.get("/test4")
+async def test4():
+    response = HTMLResponse("<html>test</html>")
+    response.set_cookie("key", "value")  # Noncompliant
+    return response
+
+
+@app.get("/test5")
+async def test5():
+    response = PlainTextResponse("test", headers={"set-cookie": "key=value"})  # Noncompliant
+    return response
