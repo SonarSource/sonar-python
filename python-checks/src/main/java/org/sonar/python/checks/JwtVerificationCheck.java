@@ -88,17 +88,20 @@ public class JwtVerificationCheck extends PythonSubscriptionCheck {
         ctx.addIssue(verifyArg, MESSAGE);
       }
     } else if (PROCESS_JWT_FQNS.contains(calleeSymbol.fullyQualifiedName())) {
-      Tree scriptOrFunction = TreeUtils.firstAncestorOfKind(call, Kind.FILE_INPUT, Kind.FUNCDEF);
-      if (!TreeUtils.hasDescendant(scriptOrFunction, JwtVerificationCheck::isCallToVerifyJwt)) {
-        ctx.addIssue(call, MESSAGE);
-      }
+      Optional.ofNullable(TreeUtils.firstAncestorOfKind(call, Kind.FILE_INPUT, Kind.FUNCDEF))
+        .filter(scriptOrFunction -> !TreeUtils.hasDescendant(scriptOrFunction, JwtVerificationCheck::isCallToVerifyJwt))
+        .ifPresent(scriptOrFunction -> ctx.addIssue(call, MESSAGE));
     } else if (UNVERIFIED_FQNS.contains(calleeSymbol.fullyQualifiedName())) {
-      ctx.addIssue(call, MESSAGE);
+      Optional.ofNullable(TreeUtils.nthArgumentOrKeyword(0, "", call.arguments()))
+        .flatMap(TreeUtils.toOptionalInstanceOfMapper(RegularArgument.class))
+        .map(RegularArgument::expression)
+        .ifPresent(argument -> ctx.addIssue(argument, MESSAGE));
+
     } else if (JOSE_JWT_DECODE_FQN.equals(calleeSymbol.fullyQualifiedName())) {
-      RegularArgument optionsArg = TreeUtils.argumentByKeyword("options", call.arguments());
-      if (optionsArg != null && isListOrDictWithSensitiveEntry(optionsArg.expression())) {
-        ctx.addIssue(optionsArg, MESSAGE);
-      }
+      Optional.ofNullable(TreeUtils.argumentByKeyword("options", call.arguments()))
+        .map(RegularArgument::expression)
+        .filter(JwtVerificationCheck::isListOrDictWithSensitiveEntry)
+        .ifPresent(expression -> ctx.addIssue(expression, MESSAGE));
     }
   }
 
