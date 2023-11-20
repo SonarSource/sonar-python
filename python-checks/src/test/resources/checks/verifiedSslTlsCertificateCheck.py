@@ -278,3 +278,11 @@ async def aiohttp_test():
         session.request('GET', "https://expired.badssl.com/", verify_ssl=False, ssl=True) # Noncompliant
         session.request('GET', "https://expired.badssl.com/", verify_ssl=True, ssl=False) # Noncompliant
         session.request('GET', "https://expired.badssl.com/") # Compliant
+        session.get("https://expired.badssl.com/", verify_ssl=False) # Noncompliant
+        session.post("https://expired.badssl.com/", verify_ssl=False) # Noncompliant
+        session.put("https://expired.badssl.com/", verify_ssl=False) # Noncompliant
+        session.delete("https://expired.badssl.com/", verify_ssl=False) # Noncompliant
+        session.patch("https://expired.badssl.com/", verify_ssl=False) # Noncompliant
+        session.head("https://expired.badssl.com/", verify_ssl=False) # Noncompliant
+        session.options("https://expired.badssl.com/", verify_ssl=False) # Noncompliant
+        session.ws_connect("https://expired.badssl.com/", verify_ssl=False) # Noncompliant
