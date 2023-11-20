@@ -1,0 +1,223 @@
+
+starlette.websocketsÿ
+WebSocketState#starlette.websockets.WebSocketState"	enum.EnumHrZ
+
+CONNECTING.starlette.websockets.WebSocketState.CONNECTING
+builtins.int"builtins.intrX
+	CONNECTED-starlette.websockets.WebSocketState.CONNECTED
+builtins.int"builtins.intr^
+DISCONNECTED0starlette.websockets.WebSocketState.DISCONNECTED
+builtins.int"builtins.int©
+WebSocketDisconnect(starlette.websockets.WebSocketDisconnect"builtins.Exception*•
+__init__1starlette.websockets.WebSocketDisconnect.__init__"
+None*^
+selfT
+(starlette.websockets.WebSocketDisconnect"(starlette.websockets.WebSocketDisconnect*(
+code
+builtins.int"builtins.int *R
+reasonD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None rS
+code-starlette.websockets.WebSocketDisconnect.code
+builtins.int"builtins.intrW
+reason/starlette.websockets.WebSocketDisconnect.reason
+builtins.str"builtins.strﬂ+
+	WebSocketstarlette.websockets.WebSocket"!starlette.requests.HTTPConnection*í
+__init__'starlette.websockets.WebSocket.__init__"
+None*J
+self@
+starlette.websockets.WebSocket"starlette.websockets.WebSocket*¬
+scope∂
+2TypeAlias[typing.MutableMapping[builtins.str,Any]]g
+'typing.MutableMapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.MutableMapping"starlette.types.Scope*¢
+receiveî
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"starlette.types.Receive*ú
+sendë
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"starlette.types.Send*Ø
+receive&starlette.websockets.WebSocket.receive"≠
+Ltyping.Coroutine[Any,Any,TypeAlias[typing.MutableMapping[builtins.str,Any]]]
+Any
+Any∏
+2TypeAlias[typing.MutableMapping[builtins.str,Any]]g
+'typing.MutableMapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.MutableMapping"starlette.types.Message"typing.Coroutine*J
+self@
+starlette.websockets.WebSocket"starlette.websockets.WebSocketH*í
+send#starlette.websockets.WebSocket.send"N
+typing.Coroutine[Any,Any,None]
+Any
+Any
+None"typing.Coroutine*J
+self@
+starlette.websockets.WebSocket"starlette.websockets.WebSocket*∆
+message∏
+2TypeAlias[typing.MutableMapping[builtins.str,Any]]g
+'typing.MutableMapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.MutableMapping"starlette.types.MessageH*¡
+accept%starlette.websockets.WebSocket.accept"N
+typing.Coroutine[Any,Any,None]
+Any
+Any
+None"typing.Coroutine*J
+self@
+starlette.websockets.WebSocket"starlette.websockets.WebSocket*W
+subprotocolD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *ò
+headersà
+AUnion[typing.Iterable[Tuple[builtins.bytes,builtins.bytes]],None]∂
+5typing.Iterable[Tuple[builtins.bytes,builtins.bytes]]l
+$Tuple[builtins.bytes,builtins.bytes] 
+builtins.bytes"builtins.bytes 
+builtins.bytes"builtins.bytes"typing.Iterable
+None H*Í
+_raise_on_disconnect3starlette.websockets.WebSocket._raise_on_disconnect"
+None*J
+self@
+starlette.websockets.WebSocket"starlette.websockets.WebSocket*∆
+message∏
+2TypeAlias[typing.MutableMapping[builtins.str,Any]]g
+'typing.MutableMapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.MutableMapping"starlette.types.Message*ı
+receive_text+starlette.websockets.WebSocket.receive_text"j
+&typing.Coroutine[Any,Any,builtins.str]
+Any
+Any
+builtins.str"builtins.str"typing.Coroutine*J
+self@
+starlette.websockets.WebSocket"starlette.websockets.WebSocketH*˝
+receive_bytes,starlette.websockets.WebSocket.receive_bytes"p
+(typing.Coroutine[Any,Any,builtins.bytes]
+Any
+Any 
+builtins.bytes"builtins.bytes"typing.Coroutine*J
+self@
+starlette.websockets.WebSocket"starlette.websockets.WebSocketH*Å
+receive_json+starlette.websockets.WebSocket.receive_json"L
+typing.Coroutine[Any,Any,Any]
+Any
+Any
+Any"typing.Coroutine*J
+self@
+starlette.websockets.WebSocket"starlette.websockets.WebSocket*(
+mode
+builtins.str"builtins.str H*›
+	iter_text(starlette.websockets.WebSocket.iter_text"X
+"typing.AsyncIterator[builtins.str]
+builtins.str"builtins.str"typing.AsyncIterator*J
+self@
+starlette.websockets.WebSocket"starlette.websockets.WebSocketH*Â
+
+iter_bytes)starlette.websockets.WebSocket.iter_bytes"^
+$typing.AsyncIterator[builtins.bytes] 
+builtins.bytes"builtins.bytes"typing.AsyncIterator*J
+self@
+starlette.websockets.WebSocket"starlette.websockets.WebSocketH*ø
+	iter_json(starlette.websockets.WebSocket.iter_json":
+typing.AsyncIterator[Any]
+Any"typing.AsyncIterator*J
+self@
+starlette.websockets.WebSocket"starlette.websockets.WebSocketH*˚
+	send_text(starlette.websockets.WebSocket.send_text"N
+typing.Coroutine[Any,Any,None]
+Any
+Any
+None"typing.Coroutine*J
+self@
+starlette.websockets.WebSocket"starlette.websockets.WebSocket*&
+data
+builtins.str"builtins.strH*Å
+
+send_bytes)starlette.websockets.WebSocket.send_bytes"N
+typing.Coroutine[Any,Any,None]
+Any
+Any
+None"typing.Coroutine*J
+self@
+starlette.websockets.WebSocket"starlette.websockets.WebSocket**
+data 
+builtins.bytes"builtins.bytesH*ê
+	send_json(starlette.websockets.WebSocket.send_json"N
+typing.Coroutine[Any,Any,None]
+Any
+Any
+None"typing.Coroutine*J
+self@
+starlette.websockets.WebSocket"starlette.websockets.WebSocket*
+data
+Any*(
+mode
+builtins.str"builtins.str H*…
+close$starlette.websockets.WebSocket.close"N
+typing.Coroutine[Any,Any,None]
+Any
+Any
+None"typing.Coroutine*J
+self@
+starlette.websockets.WebSocket"starlette.websockets.WebSocket*(
+code
+builtins.int"builtins.int *R
+reasonD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None HrÄ
+_receive'starlette.websockets.WebSocket._receiveK
+CallableType[builtins.function]&
+builtins.function"builtins.functionrz
+_send$starlette.websockets.WebSocket._sendK
+CallableType[builtins.function]&
+builtins.function"builtins.functionrá
+client_state+starlette.websockets.WebSocket.client_stateJ
+#starlette.websockets.WebSocketState"#starlette.websockets.WebSocketStaterë
+application_state0starlette.websockets.WebSocket.application_stateJ
+#starlette.websockets.WebSocketState"#starlette.websockets.WebSocketStateÔ	
+WebSocketClose#starlette.websockets.WebSocketClose"builtins.object*ñ
+__init__,starlette.websockets.WebSocketClose.__init__"
+None*T
+selfJ
+#starlette.websockets.WebSocketClose"#starlette.websockets.WebSocketClose*(
+code
+builtins.int"builtins.int *R
+reasonD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *È
+__call__,starlette.websockets.WebSocketClose.__call__"N
+typing.Coroutine[Any,Any,None]
+Any
+Any
+None"typing.Coroutine*T
+selfJ
+#starlette.websockets.WebSocketClose"#starlette.websockets.WebSocketClose*¬
+scope∂
+2TypeAlias[typing.MutableMapping[builtins.str,Any]]g
+'typing.MutableMapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.MutableMapping"starlette.types.Scope*¢
+receiveî
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"starlette.types.Receive*ú
+sendë
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"starlette.types.SendHrN
+code(starlette.websockets.WebSocketClose.code
+builtins.int"builtins.intrR
+reason*starlette.websockets.WebSocketClose.reason
+builtins.str"builtins.str*ê
+__annotations__$starlette.websockets.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict

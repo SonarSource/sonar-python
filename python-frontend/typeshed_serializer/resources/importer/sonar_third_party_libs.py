@@ -57,3 +57,4 @@ import tornado
 import WerkZeug
 import xxhash
 import yaml
+import fastapi

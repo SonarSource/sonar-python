@@ -1,0 +1,868 @@
+
+starlette.routing‡
+NoMatchFoundstarlette.routing.NoMatchFound"builtins.Exception*õ
+__init__'starlette.routing.NoMatchFound.__init__"
+None*J
+self@
+starlette.routing.NoMatchFound"starlette.routing.NoMatchFound*&
+name
+builtins.str"builtins.str*h
+path_paramsW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dictˇ
+Matchstarlette.routing.Match"	enum.EnumHrB
+NONEstarlette.routing.Match.NONE
+builtins.int"builtins.intrH
+PARTIALstarlette.routing.Match.PARTIAL
+builtins.int"builtins.intrB
+FULLstarlette.routing.Match.FULL
+builtins.int"builtins.intﬂ
+	BaseRoutestarlette.routing.BaseRoute"builtins.object*˛
+matches#starlette.routing.BaseRoute.matches"¬
+QTuple[starlette.routing.Match,TypeAlias[typing.MutableMapping[builtins.str,Any]]]2
+starlette.routing.Match"starlette.routing.Match∂
+2TypeAlias[typing.MutableMapping[builtins.str,Any]]g
+'typing.MutableMapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.MutableMapping"starlette.types.Scope*D
+self:
+starlette.routing.BaseRoute"starlette.routing.BaseRoute*¬
+scope∂
+2TypeAlias[typing.MutableMapping[builtins.str,Any]]g
+'typing.MutableMapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.MutableMapping"starlette.types.Scope*˛
+url_path_for(starlette.routing.BaseRoute.url_path_for"D
+ starlette.datastructures.URLPath" starlette.datastructures.URLPath*D
+self:
+starlette.routing.BaseRoute"starlette.routing.BaseRoute*
+builtins.str"builtins.str*
+path_params
+Any*Õ
+handle"starlette.routing.BaseRoute.handle"N
+typing.Coroutine[Any,Any,None]
+Any
+Any
+None"typing.Coroutine*D
+self:
+starlette.routing.BaseRoute"starlette.routing.BaseRoute*¬
+scope∂
+2TypeAlias[typing.MutableMapping[builtins.str,Any]]g
+'typing.MutableMapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.MutableMapping"starlette.types.Scope*¢
+receiveî
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"starlette.types.Receive*ú
+sendë
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"starlette.types.SendH*—
+__call__$starlette.routing.BaseRoute.__call__"N
+typing.Coroutine[Any,Any,None]
+Any
+Any
+None"typing.Coroutine*D
+self:
+starlette.routing.BaseRoute"starlette.routing.BaseRoute*¬
+scope∂
+2TypeAlias[typing.MutableMapping[builtins.str,Any]]g
+'typing.MutableMapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.MutableMapping"starlette.types.Scope*¢
+receiveî
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"starlette.types.Receive*ú
+sendë
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"starlette.types.SendH¿
+Routestarlette.routing.Route"starlette.routing.BaseRoute*ñ
+__init__ starlette.routing.Route.__init__"
+None*<
+self2
+starlette.routing.Route"starlette.routing.Route*&
+path
+builtins.str"builtins.str*Y
+endpointK
+CallableType[builtins.function]&
+builtins.function"builtins.function*ë
+methodsÅ
+'Union[builtins.list[builtins.str],None]J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list
+None *P
+nameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *7
+include_in_schema
+builtins.bool"builtins.bool *Ú
+matchesstarlette.routing.Route.matches"¬
+QTuple[starlette.routing.Match,TypeAlias[typing.MutableMapping[builtins.str,Any]]]2
+starlette.routing.Match"starlette.routing.Match∂
+2TypeAlias[typing.MutableMapping[builtins.str,Any]]g
+'typing.MutableMapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.MutableMapping"starlette.types.Scope*<
+self2
+starlette.routing.Route"starlette.routing.Route*¬
+scope∂
+2TypeAlias[typing.MutableMapping[builtins.str,Any]]g
+'typing.MutableMapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.MutableMapping"starlette.types.Scope*Ú
+url_path_for$starlette.routing.Route.url_path_for"D
+ starlette.datastructures.URLPath" starlette.datastructures.URLPath*<
+self2
+starlette.routing.Route"starlette.routing.Route*
+builtins.str"builtins.str*
+path_params
+Any*¡
+handlestarlette.routing.Route.handle"N
+typing.Coroutine[Any,Any,None]
+Any
+Any
+None"typing.Coroutine*<
+self2
+starlette.routing.Route"starlette.routing.Route*¬
+scope∂
+2TypeAlias[typing.MutableMapping[builtins.str,Any]]g
+'typing.MutableMapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.MutableMapping"starlette.types.Scope*¢
+receiveî
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"starlette.types.Receive*ú
+sendë
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"starlette.types.SendH*â
+__eq__starlette.routing.Route.__eq__"
+builtins.bool"builtins.bool*42
+starlette.routing.Route"starlette.routing.Route*	
+Any*Ä
+__repr__ starlette.routing.Route.__repr__"
+builtins.str"builtins.str*42
+starlette.routing.Route"starlette.routing.RouterB
+pathstarlette.routing.Route.path
+builtins.str"builtins.strry
+endpoint starlette.routing.Route.endpointK
+CallableType[builtins.function]&
+builtins.function"builtins.functionrB
+namestarlette.routing.Route.name
+builtins.str"builtins.strr^
+include_in_schema)starlette.routing.Route.include_in_schema
+builtins.bool"builtins.boolro
+appstarlette.routing.Route.appK
+CallableType[builtins.function]&
+builtins.function"builtins.functionr™
+methodsstarlette.routing.Route.methods~
+&Union[builtins.set[builtins.str],None]H
+builtins.set[builtins.str]
+builtins.str"builtins.str"builtins.set
+NonerX
+
+path_regex"starlette.routing.Route.path_regex&
+re.Pattern[Any]
+Any"
+re.PatternrP
+path_format#starlette.routing.Route.path_format
+builtins.str"builtins.strr˝
+param_convertors(starlette.routing.Route.param_convertorsæ
+?builtins.dict[builtins.str,starlette.convertors.Convertor[Any]]
+builtins.str"builtins.strN
+#starlette.convertors.Convertor[Any]
+Any"starlette.convertors.Convertor"builtins.dict⁄
+WebSocketRoute starlette.routing.WebSocketRoute"starlette.routing.BaseRoute*‰
+__init__)starlette.routing.WebSocketRoute.__init__"
+None*N
+selfD
+ starlette.routing.WebSocketRoute" starlette.routing.WebSocketRoute*&
+path
+builtins.str"builtins.str*Y
+endpointK
+CallableType[builtins.function]&
+builtins.function"builtins.function*P
+nameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *ç
+matches(starlette.routing.WebSocketRoute.matches"¬
+QTuple[starlette.routing.Match,TypeAlias[typing.MutableMapping[builtins.str,Any]]]2
+starlette.routing.Match"starlette.routing.Match∂
+2TypeAlias[typing.MutableMapping[builtins.str,Any]]g
+'typing.MutableMapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.MutableMapping"starlette.types.Scope*N
+selfD
+ starlette.routing.WebSocketRoute" starlette.routing.WebSocketRoute*¬
+scope∂
+2TypeAlias[typing.MutableMapping[builtins.str,Any]]g
+'typing.MutableMapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.MutableMapping"starlette.types.Scope*ç
+url_path_for-starlette.routing.WebSocketRoute.url_path_for"D
+ starlette.datastructures.URLPath" starlette.datastructures.URLPath*N
+selfD
+ starlette.routing.WebSocketRoute" starlette.routing.WebSocketRoute*
+builtins.str"builtins.str*
+path_params
+Any*‹
+handle'starlette.routing.WebSocketRoute.handle"N
+typing.Coroutine[Any,Any,None]
+Any
+Any
+None"typing.Coroutine*N
+selfD
+ starlette.routing.WebSocketRoute" starlette.routing.WebSocketRoute*¬
+scope∂
+2TypeAlias[typing.MutableMapping[builtins.str,Any]]g
+'typing.MutableMapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.MutableMapping"starlette.types.Scope*¢
+receiveî
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"starlette.types.Receive*ú
+sendë
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"starlette.types.SendH*§
+__eq__'starlette.routing.WebSocketRoute.__eq__"
+builtins.bool"builtins.bool*FD
+ starlette.routing.WebSocketRoute" starlette.routing.WebSocketRoute*	
+Any*õ
+__repr__)starlette.routing.WebSocketRoute.__repr__"
+builtins.str"builtins.str*FD
+ starlette.routing.WebSocketRoute" starlette.routing.WebSocketRouterK
+path%starlette.routing.WebSocketRoute.path
+builtins.str"builtins.strrÇ
+endpoint)starlette.routing.WebSocketRoute.endpointK
+CallableType[builtins.function]&
+builtins.function"builtins.functionrK
+name%starlette.routing.WebSocketRoute.name
+builtins.str"builtins.strrx
+app$starlette.routing.WebSocketRoute.appK
+CallableType[builtins.function]&
+builtins.function"builtins.functionra
+
+path_regex+starlette.routing.WebSocketRoute.path_regex&
+re.Pattern[Any]
+Any"
+re.PatternrY
+path_format,starlette.routing.WebSocketRoute.path_format
+builtins.str"builtins.strrÜ
+param_convertors1starlette.routing.WebSocketRoute.param_convertorsæ
+?builtins.dict[builtins.str,starlette.convertors.Convertor[Any]]
+builtins.str"builtins.strN
+#starlette.convertors.Convertor[Any]
+Any"starlette.convertors.Convertor"builtins.dictô
+Mountstarlette.routing.Mount"starlette.routing.BaseRoute*ó
+__init__ starlette.routing.Mount.__init__"
+None*<
+self2
+starlette.routing.Mount"starlette.routing.Mount*&
+path
+builtins.str"builtins.str*Á
+app€
+6Union[TypeAlias[CallableType[builtins.function]],None]î
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"starlette.types.ASGIApp
+None *“
+routes√
+8Union[typing.Sequence[starlette.routing.BaseRoute],None]{
+,typing.Sequence[starlette.routing.BaseRoute]:
+starlette.routing.BaseRoute"starlette.routing.BaseRoute"typing.Sequence
+None *P
+nameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *Á
+
+middleware‘
+<Union[typing.Sequence[starlette.middleware.Middleware],None]á
+0typing.Sequence[starlette.middleware.Middleware]B
+starlette.middleware.Middleware"starlette.middleware.Middleware"typing.Sequence
+None *Ì
+routesstarlette.routing.Mount.routes"w
+*builtins.list[starlette.routing.BaseRoute]:
+starlette.routing.BaseRoute"starlette.routing.BaseRoute"builtins.list*<
+self2
+starlette.routing.Mount"starlette.routing.Mount0:property`*Ú
+matchesstarlette.routing.Mount.matches"¬
+QTuple[starlette.routing.Match,TypeAlias[typing.MutableMapping[builtins.str,Any]]]2
+starlette.routing.Match"starlette.routing.Match∂
+2TypeAlias[typing.MutableMapping[builtins.str,Any]]g
+'typing.MutableMapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.MutableMapping"starlette.types.Scope*<
+self2
+starlette.routing.Mount"starlette.routing.Mount*¬
+scope∂
+2TypeAlias[typing.MutableMapping[builtins.str,Any]]g
+'typing.MutableMapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.MutableMapping"starlette.types.Scope*Ú
+url_path_for$starlette.routing.Mount.url_path_for"D
+ starlette.datastructures.URLPath" starlette.datastructures.URLPath*<
+self2
+starlette.routing.Mount"starlette.routing.Mount*
+builtins.str"builtins.str*
+path_params
+Any*¡
+handlestarlette.routing.Mount.handle"N
+typing.Coroutine[Any,Any,None]
+Any
+Any
+None"typing.Coroutine*<
+self2
+starlette.routing.Mount"starlette.routing.Mount*¬
+scope∂
+2TypeAlias[typing.MutableMapping[builtins.str,Any]]g
+'typing.MutableMapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.MutableMapping"starlette.types.Scope*¢
+receiveî
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"starlette.types.Receive*ú
+sendë
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"starlette.types.SendH*â
+__eq__starlette.routing.Mount.__eq__"
+builtins.bool"builtins.bool*42
+starlette.routing.Mount"starlette.routing.Mount*	
+Any*Ä
+__repr__ starlette.routing.Mount.__repr__"
+builtins.str"builtins.str*42
+starlette.routing.Mount"starlette.routing.MountrB
+pathstarlette.routing.Mount.path
+builtins.str"builtins.strr≈
+	_base_app!starlette.routing.Mount._base_appî
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"starlette.types.ASGIAppro
+appstarlette.routing.Mount.appK
+CallableType[builtins.function]&
+builtins.function"builtins.functionrj
+namestarlette.routing.Mount.nameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+NonerX
+
+path_regex"starlette.routing.Mount.path_regex&
+re.Pattern[Any]
+Any"
+re.PatternrP
+path_format#starlette.routing.Mount.path_format
+builtins.str"builtins.strr˝
+param_convertors(starlette.routing.Mount.param_convertorsæ
+?builtins.dict[builtins.str,starlette.convertors.Convertor[Any]]
+builtins.str"builtins.strN
+#starlette.convertors.Convertor[Any]
+Any"starlette.convertors.Convertor"builtins.dict´
+Hoststarlette.routing.Host"starlette.routing.BaseRoute*å
+__init__starlette.routing.Host.__init__"
+None*:
+self0
+starlette.routing.Host"starlette.routing.Host*&
+host
+builtins.str"builtins.str*û
+appî
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"starlette.types.ASGIApp*P
+nameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *Í
+routesstarlette.routing.Host.routes"w
+*builtins.list[starlette.routing.BaseRoute]:
+starlette.routing.BaseRoute"starlette.routing.BaseRoute"builtins.list*:
+self0
+starlette.routing.Host"starlette.routing.Host0:property`*Ô
+matchesstarlette.routing.Host.matches"¬
+QTuple[starlette.routing.Match,TypeAlias[typing.MutableMapping[builtins.str,Any]]]2
+starlette.routing.Match"starlette.routing.Match∂
+2TypeAlias[typing.MutableMapping[builtins.str,Any]]g
+'typing.MutableMapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.MutableMapping"starlette.types.Scope*:
+self0
+starlette.routing.Host"starlette.routing.Host*¬
+scope∂
+2TypeAlias[typing.MutableMapping[builtins.str,Any]]g
+'typing.MutableMapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.MutableMapping"starlette.types.Scope*Ô
+url_path_for#starlette.routing.Host.url_path_for"D
+ starlette.datastructures.URLPath" starlette.datastructures.URLPath*:
+self0
+starlette.routing.Host"starlette.routing.Host*
+builtins.str"builtins.str*
+path_params
+Any*æ
+handlestarlette.routing.Host.handle"N
+typing.Coroutine[Any,Any,None]
+Any
+Any
+None"typing.Coroutine*:
+self0
+starlette.routing.Host"starlette.routing.Host*¬
+scope∂
+2TypeAlias[typing.MutableMapping[builtins.str,Any]]g
+'typing.MutableMapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.MutableMapping"starlette.types.Scope*¢
+receiveî
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"starlette.types.Receive*ú
+sendë
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"starlette.types.SendH*Ü
+__eq__starlette.routing.Host.__eq__"
+builtins.bool"builtins.bool*20
+starlette.routing.Host"starlette.routing.Host*	
+Any*}
+__repr__starlette.routing.Host.__repr__"
+builtins.str"builtins.str*20
+starlette.routing.Host"starlette.routing.HostrA
+hoststarlette.routing.Host.host
+builtins.str"builtins.strrn
+appstarlette.routing.Host.appK
+CallableType[builtins.function]&
+builtins.function"builtins.functionri
+namestarlette.routing.Host.nameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+NonerW
+
+host_regex!starlette.routing.Host.host_regex&
+re.Pattern[Any]
+Any"
+re.PatternrO
+host_format"starlette.routing.Host.host_format
+builtins.str"builtins.strr¸
+param_convertors'starlette.routing.Host.param_convertorsæ
+?builtins.dict[builtins.str,starlette.convertors.Convertor[Any]]
+builtins.str"builtins.strN
+#starlette.convertors.Convertor[Any]
+Any"starlette.convertors.Convertor"builtins.dictå
+_AsyncLiftContextManager*starlette.routing._AsyncLiftContextManager"&contextlib.AbstractAsyncContextManager*À
+__init__3starlette.routing._AsyncLiftContextManager.__init__"
+None*»
+selfΩ
+@starlette.routing._AsyncLiftContextManager[starlette.routing._T]M
+starlette.routing._T"
+builtins.object"builtins.object"builtins.object"*starlette.routing._AsyncLiftContextManager*¥
+cm´
+7contextlib.AbstractContextManager[starlette.routing._T]M
+starlette.routing._T"
+builtins.object"builtins.object"builtins.object"!contextlib.AbstractContextManager*∂
+
+__aenter__5starlette.routing._AsyncLiftContextManager.__aenter__"£
+.typing.Coroutine[Any,Any,starlette.routing._T]
+Any
+AnyM
+starlette.routing._T"
+builtins.object"builtins.object"builtins.object"typing.Coroutine*»
+selfΩ
+@starlette.routing._AsyncLiftContextManager[starlette.routing._T]M
+starlette.routing._T"
+builtins.object"builtins.object"builtins.object"*starlette.routing._AsyncLiftContextManagerH*¨
+	__aexit__4starlette.routing._AsyncLiftContextManager.__aexit__"¢
+3typing.Coroutine[Any,Any,Union[builtins.bool,None]]
+Any
+AnyG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None"typing.Coroutine*»
+selfΩ
+@starlette.routing._AsyncLiftContextManager[starlette.routing._T]M
+starlette.routing._T"
+builtins.object"builtins.object"builtins.object"*starlette.routing._AsyncLiftContextManager*ô
+exc_typeä
+(Union[Type[builtins.BaseException],None]R
+Type[builtins.BaseException]0
+builtins.BaseException"builtins.BaseException
+None*q
+	exc_valueb
+"Union[builtins.BaseException,None]0
+builtins.BaseException"builtins.BaseException
+None*h
+	tracebackY
+Union[types.TracebackType,None]*
+types.TracebackType"types.TracebackType
+NoneHPr„
+_cm.starlette.routing._AsyncLiftContextManager._cm´
+7contextlib.AbstractContextManager[starlette.routing._T]M
+starlette.routing._T"
+builtins.object"builtins.object"builtins.object"!contextlib.AbstractContextManagerï	
+_DefaultLifespan"starlette.routing._DefaultLifespan"builtins.object*◊
+__init__+starlette.routing._DefaultLifespan.__init__"
+None*R
+selfH
+"starlette.routing._DefaultLifespan""starlette.routing._DefaultLifespan*@
+router4
+starlette.routing.Router"starlette.routing.Router*·
+
+__aenter__-starlette.routing._DefaultLifespan.__aenter__"N
+typing.Coroutine[Any,Any,None]
+Any
+Any
+None"typing.Coroutine*R
+selfH
+"starlette.routing._DefaultLifespan""starlette.routing._DefaultLifespanH*ë
+	__aexit__,starlette.routing._DefaultLifespan.__aexit__"N
+typing.Coroutine[Any,Any,None]
+Any
+Any
+None"typing.Coroutine*R
+selfH
+"starlette.routing._DefaultLifespan""starlette.routing._DefaultLifespan*0
+exc_info"
+builtins.object"builtins.objectH*å
+__call__+starlette.routing._DefaultLifespan.__call__"M
+starlette.routing._T"
+builtins.object"builtins.object"builtins.object*W
+selfM
+starlette.routing._T"
+builtins.object"builtins.object"builtins.object*+
+app"
+builtins.object"builtins.objectrk
+_router*starlette.routing._DefaultLifespan._router4
+starlette.routing.Router"starlette.routing.RouterèF
+Routerstarlette.routing.Router"builtins.object*ù
+__init__!starlette.routing.Router.__init__"
+None*>
+self4
+starlette.routing.Router"starlette.routing.Router*“
+routes√
+8Union[typing.Sequence[starlette.routing.BaseRoute],None]{
+,typing.Sequence[starlette.routing.BaseRoute]:
+starlette.routing.BaseRoute"starlette.routing.BaseRoute"typing.Sequence
+None *6
+redirect_slashes
+builtins.bool"builtins.bool *Î
+default€
+6Union[TypeAlias[CallableType[builtins.function]],None]î
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"starlette.types.ASGIApp
+None *
+
+on_startup›
+<Union[typing.Sequence[CallableType[builtins.function]],None]ê
+0typing.Sequence[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"typing.Sequence
+None *Ò
+on_shutdown›
+<Union[typing.Sequence[CallableType[builtins.function]],None]ê
+0typing.Sequence[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"typing.Sequence
+None *¡
+lifespan∞
+aUnion[TypeAlias[CallableType[builtins.function]],TypeAlias[CallableType[builtins.function]],None]û
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"!starlette.types.StatelessLifespanù
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function" starlette.types.StatefulLifespan
+None * 
+	not_found"starlette.routing.Router.not_found"N
+typing.Coroutine[Any,Any,None]
+Any
+Any
+None"typing.Coroutine*>
+self4
+starlette.routing.Router"starlette.routing.Router*¬
+scope∂
+2TypeAlias[typing.MutableMapping[builtins.str,Any]]g
+'typing.MutableMapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.MutableMapping"starlette.types.Scope*¢
+receiveî
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"starlette.types.Receive*ú
+sendë
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"starlette.types.SendH*ı
+url_path_for%starlette.routing.Router.url_path_for"D
+ starlette.datastructures.URLPath" starlette.datastructures.URLPath*>
+self4
+starlette.routing.Router"starlette.routing.Router*
+builtins.str"builtins.str*
+path_params
+Any*Ω
+startup starlette.routing.Router.startup"N
+typing.Coroutine[Any,Any,None]
+Any
+Any
+None"typing.Coroutine*>
+self4
+starlette.routing.Router"starlette.routing.RouterH*ø
+shutdown!starlette.routing.Router.shutdown"N
+typing.Coroutine[Any,Any,None]
+Any
+Any
+None"typing.Coroutine*>
+self4
+starlette.routing.Router"starlette.routing.RouterH*»
+lifespan!starlette.routing.Router.lifespan"N
+typing.Coroutine[Any,Any,None]
+Any
+Any
+None"typing.Coroutine*>
+self4
+starlette.routing.Router"starlette.routing.Router*¬
+scope∂
+2TypeAlias[typing.MutableMapping[builtins.str,Any]]g
+'typing.MutableMapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.MutableMapping"starlette.types.Scope*¢
+receiveî
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"starlette.types.Receive*ú
+sendë
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"starlette.types.SendH*»
+__call__!starlette.routing.Router.__call__"N
+typing.Coroutine[Any,Any,None]
+Any
+Any
+None"typing.Coroutine*>
+self4
+starlette.routing.Router"starlette.routing.Router*¬
+scope∂
+2TypeAlias[typing.MutableMapping[builtins.str,Any]]g
+'typing.MutableMapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.MutableMapping"starlette.types.Scope*¢
+receiveî
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"starlette.types.Receive*ú
+sendë
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"starlette.types.SendH*å
+__eq__starlette.routing.Router.__eq__"
+builtins.bool"builtins.bool*64
+starlette.routing.Router"starlette.routing.Router*	
+Any*å
+mountstarlette.routing.Router.mount"
+None*>
+self4
+starlette.routing.Router"starlette.routing.Router*&
+path
+builtins.str"builtins.str*û
+appî
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"starlette.types.ASGIApp*P
+nameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *ä
+hoststarlette.routing.Router.host"
+None*>
+self4
+starlette.routing.Router"starlette.routing.Router*&
+host
+builtins.str"builtins.str*û
+appî
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"starlette.types.ASGIApp*P
+nameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *õ
+	add_route"starlette.routing.Router.add_route"
+None*>
+self4
+starlette.routing.Router"starlette.routing.Router*&
+path
+builtins.str"builtins.str*Y
+endpointK
+CallableType[builtins.function]&
+builtins.function"builtins.function*ë
+methodsÅ
+'Union[builtins.list[builtins.str],None]J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list
+None *P
+nameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *7
+include_in_schema
+builtins.bool"builtins.bool *‚
+add_websocket_route,starlette.routing.Router.add_websocket_route"
+None*>
+self4
+starlette.routing.Router"starlette.routing.Router*&
+path
+builtins.str"builtins.str*Y
+endpointK
+CallableType[builtins.function]&
+builtins.function"builtins.function*P
+nameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *˚
+routestarlette.routing.Router.route"K
+CallableType[builtins.function]&
+builtins.function"builtins.function*>
+self4
+starlette.routing.Router"starlette.routing.Router*&
+path
+builtins.str"builtins.str*ë
+methodsÅ
+'Union[builtins.list[builtins.str],None]J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list
+None *P
+nameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *7
+include_in_schema
+builtins.bool"builtins.bool *¬
+websocket_route(starlette.routing.Router.websocket_route"K
+CallableType[builtins.function]&
+builtins.function"builtins.function*>
+self4
+starlette.routing.Router"starlette.routing.Router*&
+path
+builtins.str"builtins.str*P
+nameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *é
+add_event_handler*starlette.routing.Router.add_event_handler"
+None*>
+self4
+starlette.routing.Router"starlette.routing.Router*,
+
+event_type
+builtins.str"builtins.str*U
+funcK
+CallableType[builtins.function]&
+builtins.function"builtins.function*Ë
+on_event!starlette.routing.Router.on_event"K
+CallableType[builtins.function]&
+builtins.function"builtins.function*>
+self4
+starlette.routing.Router"starlette.routing.Router*,
+
+event_type
+builtins.str"builtins.strr¢
+routesstarlette.routing.Router.routesw
+*builtins.list[starlette.routing.BaseRoute]:
+starlette.routing.BaseRoute"starlette.routing.BaseRoute"builtins.listr]
+redirect_slashes)starlette.routing.Router.redirect_slashes
+builtins.bool"builtins.boolrx
+default starlette.routing.Router.defaultK
+CallableType[builtins.function]&
+builtins.function"builtins.functionr¿
+
+on_startup#starlette.routing.Router.on_startupå
+.builtins.list[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"builtins.listr¬
+on_shutdown$starlette.routing.Router.on_shutdownå
+.builtins.list[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"builtins.listrÈ
+lifespan_context)starlette.routing.Router.lifespan_context©
+gTypeAlias[Union[TypeAlias[CallableType[builtins.function]],TypeAlias[CallableType[builtins.function]]]]°
+\Union[TypeAlias[CallableType[builtins.function]],TypeAlias[CallableType[builtins.function]]]û
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"!starlette.types.StatelessLifespanù
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function" starlette.types.StatefulLifespan"starlette.types.LifespanÑ
+iscoroutinefunction_or_partial0starlette.routing.iscoroutinefunction_or_partial"
+builtins.bool"builtins.bool*
+obj
+Any§
+request_response"starlette.routing.request_response"î
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"starlette.types.ASGIApp*U
+funcK
+CallableType[builtins.function]&
+builtins.function"builtins.function¶
+websocket_session#starlette.routing.websocket_session"î
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"starlette.types.ASGIApp*U
+funcK
+CallableType[builtins.function]&
+builtins.function"builtins.functionü
+get_namestarlette.routing.get_name"
+builtins.str"builtins.str*Y
+endpointK
+CallableType[builtins.function]&
+builtins.function"builtins.function≈
+replace_params starlette.routing.replace_params"á
+*Tuple[builtins.str,builtins.dict[Any,Any]]
+builtins.str"builtins.str9
+builtins.dict[Any,Any]
+Any
+Any"builtins.dict*&
+path
+builtins.str"builtins.str*’
+param_convertorsæ
+?builtins.dict[builtins.str,starlette.convertors.Convertor[Any]]
+builtins.str"builtins.strN
+#starlette.convertors.Convertor[Any]
+Any"starlette.convertors.Convertor"builtins.dict*Ü
+path_paramsu
+(builtins.dict[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.dict«
+compile_pathstarlette.routing.compile_path"Ó
+cTuple[re.Pattern[Any],builtins.str,builtins.dict[builtins.str,starlette.convertors.Convertor[Any]]]&
+re.Pattern[Any]
+Any"
+re.Pattern
+builtins.str"builtins.stræ
+?builtins.dict[builtins.str,starlette.convertors.Convertor[Any]]
+builtins.str"builtins.strN
+#starlette.convertors.Convertor[Any]
+Any"starlette.convertors.Convertor"builtins.dict*&
+path
+builtins.str"builtins.str˙
+_wrap_gen_lifespan_context,starlette.routing._wrap_gen_lifespan_context"K
+CallableType[builtins.function]&
+builtins.function"builtins.function*a
+lifespan_contextK
+CallableType[builtins.function]&
+builtins.function"builtins.function*ç
+__annotations__!starlette.routing.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*r
+PARAM_REGEXstarlette.routing.PARAM_REGEXD
+re.Pattern[builtins.str]
+builtins.str"builtins.str"
+re.Pattern

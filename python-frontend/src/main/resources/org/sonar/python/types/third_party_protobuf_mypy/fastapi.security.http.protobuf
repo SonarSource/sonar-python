@@ -1,0 +1,156 @@
+
+fastapi.security.http®
+HTTPBaseModelfastapi.openapi.models.HTTPBase"#fastapi.openapi.models.SecurityBaser†
+type_%fastapi.openapi.models.HTTPBase.type_V
+)fastapi.openapi.models.SecuritySchemeType")fastapi.openapi.models.SecuritySchemeTyperN
+scheme&fastapi.openapi.models.HTTPBase.scheme
+builtins.str"builtins.strÉ
+HTTPBearerModel!fastapi.openapi.models.HTTPBearer"fastapi.openapi.models.HTTPBaserk
+scheme(fastapi.openapi.models.HTTPBearer.scheme7
+Literal[builtins.str]	
+builtins.str"builtins.strr„
+bearerFormat.fastapi.openapi.models.HTTPBearer.bearerFormatD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None™
+HTTPBasicCredentials*fastapi.security.http.HTTPBasicCredentials"pydantic.main.BaseModelr]
+username3fastapi.security.http.HTTPBasicCredentials.username
+builtins.str"builtins.strr]
+password3fastapi.security.http.HTTPBasicCredentials.password
+builtins.str"builtins.str»
+HTTPAuthorizationCredentials2fastapi.security.http.HTTPAuthorizationCredentials"pydantic.main.BaseModelra
+scheme9fastapi.security.http.HTTPAuthorizationCredentials.scheme
+builtins.str"builtins.strrk
+credentials>fastapi.security.http.HTTPAuthorizationCredentials.credentials
+builtins.str"builtins.strÆ
+HTTPBasefastapi.security.http.HTTPBase""fastapi.security.base.SecurityBase*—
+__init__'fastapi.security.http.HTTPBase.__init__"
+None*J
+self@
+fastapi.security.http.HTTPBase"fastapi.security.http.HTTPBase*(
+scheme
+builtins.str"builtins.str*W
+scheme_nameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *W
+descriptionD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *0
+
+auto_error
+builtins.bool"builtins.bool *‚
+__call__'fastapi.security.http.HTTPBase.__call__"·
+Xtyping.Coroutine[Any,Any,Union[fastapi.security.http.HTTPAuthorizationCredentials,None]]
+Any
+Any¶
+>Union[fastapi.security.http.HTTPAuthorizationCredentials,None]h
+2fastapi.security.http.HTTPAuthorizationCredentials"2fastapi.security.http.HTTPAuthorizationCredentials
+None"typing.Coroutine*J
+self@
+fastapi.security.http.HTTPBase"fastapi.security.http.HTTPBase*E
+request8
+starlette.requests.Request"starlette.requests.RequestHrW
+
+auto_error)fastapi.security.http.HTTPBase.auto_error
+builtins.bool"builtins.boolð
+	HTTPBasicfastapi.security.http.HTTPBasic"fastapi.security.http.HTTPBase*Ã
+__init__(fastapi.security.http.HTTPBasic.__init__"
+None*L
+selfB
+fastapi.security.http.HTTPBasic"fastapi.security.http.HTTPBasic*W
+scheme_nameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *Q
+realmD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *W
+descriptionD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *0
+
+auto_error
+builtins.bool"builtins.bool *å
+__call__(fastapi.security.http.HTTPBasic.__call__"—
+Ptyping.Coroutine[Any,Any,Union[fastapi.security.http.HTTPBasicCredentials,None]]
+Any
+Anyž
+6Union[fastapi.security.http.HTTPBasicCredentials,None]X
+*fastapi.security.http.HTTPBasicCredentials"*fastapi.security.http.HTTPBasicCredentials
+None"typing.Coroutine*L
+selfB
+fastapi.security.http.HTTPBasic"fastapi.security.http.HTTPBasic*E
+request8
+starlette.requests.Request"starlette.requests.RequestHrt
+realm%fastapi.security.http.HTTPBasic.realmD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None©
+
+HTTPBearer fastapi.security.http.HTTPBearer"fastapi.security.http.HTTPBase*Í
+__init__)fastapi.security.http.HTTPBearer.__init__"
+None*N
+selfD
+ fastapi.security.http.HTTPBearer" fastapi.security.http.HTTPBearer*X
+bearerFormatD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *W
+scheme_nameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *W
+descriptionD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *0
+
+auto_error
+builtins.bool"builtins.bool *ˆ
+__call__)fastapi.security.http.HTTPBearer.__call__"·
+Xtyping.Coroutine[Any,Any,Union[fastapi.security.http.HTTPAuthorizationCredentials,None]]
+Any
+Any¶
+>Union[fastapi.security.http.HTTPAuthorizationCredentials,None]h
+2fastapi.security.http.HTTPAuthorizationCredentials"2fastapi.security.http.HTTPAuthorizationCredentials
+None"typing.Coroutine*N
+selfD
+ fastapi.security.http.HTTPBearer" fastapi.security.http.HTTPBearer*E
+request8
+starlette.requests.Request"starlette.requests.RequestHÏ
+
+HTTPDigest fastapi.security.http.HTTPDigest"fastapi.security.http.HTTPBase*ó
+__init__)fastapi.security.http.HTTPDigest.__init__"
+None*N
+selfD
+ fastapi.security.http.HTTPDigest" fastapi.security.http.HTTPDigest*W
+scheme_nameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *W
+descriptionD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *0
+
+auto_error
+builtins.bool"builtins.bool *ˆ
+__call__)fastapi.security.http.HTTPDigest.__call__"·
+Xtyping.Coroutine[Any,Any,Union[fastapi.security.http.HTTPAuthorizationCredentials,None]]
+Any
+Any¶
+>Union[fastapi.security.http.HTTPAuthorizationCredentials,None]h
+2fastapi.security.http.HTTPAuthorizationCredentials"2fastapi.security.http.HTTPAuthorizationCredentials
+None"typing.Coroutine*N
+selfD
+ fastapi.security.http.HTTPDigest" fastapi.security.http.HTTPDigest*E
+request8
+starlette.requests.Request"starlette.requests.RequestH*‘
+__annotations__%fastapi.security.http.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict

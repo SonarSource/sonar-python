@@ -83,3 +83,59 @@ def flask_tests():
 
     response4 = redirect()
     response4.set_cookie('c', 'value') # Noncompliant
+
+
+from fastapi import FastAPI, Response
+from fastapi.responses import StreamingResponse
+
+app = FastAPI()
+
+
+@app.get("/")
+async def root():
+    return {"message": "Hello World"}
+
+
+@app.get("/test1")
+async def test1(response: Response):
+    response.set_cookie("key", "value", secure=False)  # Noncompliant
+    return {"message": "test"}
+
+
+@app.get("/test2")
+async def test2(response: Response):
+    response.set_cookie("key", "value")  # Noncompliant
+    return {"message": "test"}
+
+
+@app.get("/test3")
+async def test3(response: Response):
+    response.set_cookie("key", "value", secure=True)  # Compliant
+    return {"message": "test"}
+
+
+@app.get("/test4")
+async def test4():
+    response = Response("test")
+    response.set_cookie("key", "value")  # Noncompliant
+    return response
+
+
+@app.get("/test5")
+async def test5():
+    response = StreamingResponse(iter("test"), headers={"set-cookie": "key=value"})  # Noncompliant
+    response = StreamingResponse(iter("test"), headers={"Set-Cookie": "key=value"})  # Noncompliant
+    headers = {"Set-Cookie": "key=value"}
+    response = StreamingResponse(iter("test"), headers=headers)  # Noncompliant
+    response = StreamingResponse(iter("test"), headers=foo())
+    return response
+
+@app.get("/test6")
+async def test6():
+    response = StreamingResponse(iter("test"), headers={"Set-Cookie": "key=value; Secure"})  # OK
+    return response
+
+@app.get("/test7")
+async def test7():
+    response = StreamingResponse(iter("test"))  # OK
+    return response
