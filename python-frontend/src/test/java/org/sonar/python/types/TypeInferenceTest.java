@@ -681,7 +681,19 @@ class TypeInferenceTest {
       "def f():",
       "  e = Foo()",
       "  e.attr.bit_length()"
-    ).type()).isEqualTo(anyType());
+    ).type()).isEqualTo(DECL_INT);
+  }
+
+  @Test
+  void user_defined_attributes_reassigned() {
+    assertThat(lastExpression(
+      "class Foo:",
+      "  attr: int",
+      "def f():",
+      "  e = Foo()",
+      "  e.attr = 'hello'",
+      "  e.attr"
+    ).type()).isEqualTo(DECL_INT);
   }
 
 }
