@@ -240,23 +240,24 @@ public class VerifiedSslTlsCertificateCheck extends PythonSubscriptionCheck {
     }
   }
 
-  private static void verifyVulnerableMethods(SubscriptionContext subscriptionContext, CallExpression callExpr, Set<String> argumentNames) {
-    Optional<List<Expression>> verifyRhs = searchVerifyAssignment(callExpr, argumentNames)
+  private static void verifyVulnerableMethods(SubscriptionContext ctx, CallExpression callExpr, Set<String> argumentNames) {
+    var verifyRhs = searchVerifyAssignment(callExpr, argumentNames)
       .or(() -> searchVerifyInKwargs(callExpr, argumentNames));
 
-    verifyRhs.ifPresent(sensitiveSettingExpressions -> {
-      sensitiveSettingExpressions
-        .stream()
-        .filter(rhs -> Expressions.isFalsy(rhs) || isFalsyCollection(rhs))
-        .findFirst()
-        .ifPresent(rhs -> {
-          var issue = subscriptionContext.addIssue(rhs, MESSAGE);
-          // report everything except the last one as secondary locations.
-          sensitiveSettingExpressions.stream()
-            .filter(v -> v != rhs)
-            .forEach(v -> issue.secondary(v, "Dictionary is passed here as **kwargs."));
-      });
-    });
+    verifyRhs.ifPresent(sensitiveSettingExpressions -> sensitiveSettingExpressions
+      .stream()
+      .filter(rhs -> Expressions.isFalsy(rhs) || isFalsyCollection(rhs))
+      .findFirst()
+      .ifPresent(rhs -> addIssue(ctx, sensitiveSettingExpressions, rhs))
+    );
+  }
+
+  private static void addIssue(SubscriptionContext ctx, List<Expression> sensitiveSettingExpressions, Expression rhs) {
+    var issue = ctx.addIssue(rhs, MESSAGE);
+    // report everything except the last one as secondary locations.
+    sensitiveSettingExpressions.stream()
+      .filter(v -> v != rhs)
+      .forEach(v -> issue.secondary(v, "Dictionary is passed here as **kwargs."));
   }
 
   /**
@@ -270,10 +271,10 @@ public class VerifiedSslTlsCertificateCheck extends PythonSubscriptionCheck {
       .filter(RegularArgument.class::isInstance)
       .map(RegularArgument.class::cast)
       .filter(regArg -> Optional.of(regArg)
-          .map(RegularArgument::keywordArgument)
-          .map(Name::name)
-          .filter(argumentNames::contains)
-          .isPresent())
+        .map(RegularArgument::keywordArgument)
+        .map(Name::name)
+        .filter(argumentNames::contains)
+        .isPresent())
       .map(RegularArgument::expression)
       .collect(Collectors.toList());
     return Optional.of(args).filter(Predicate.not(List::isEmpty));
