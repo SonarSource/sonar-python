@@ -8,8 +8,8 @@ def f_strings(x):
 #   ^^^^^^^^ 0
     a = f"Hello" + f"{var}" # Noncompliant {{Add replacement fields or use a normal string instead of an f-string.}}
 #       ^^^^^^^^ 0
-    f"{x:=<42}"
-    f"{(x:=42)}" # Noncompliant
+    f"{x:=<42}"  # OK
+    f"{(x:=42)}" # OK
 
 def printf_style():
     "%(key)s" % {"key": "str", "other": "key"}  # Noncompliant {{Remove this unused argument or add a replacement field.}}
