@@ -250,6 +250,28 @@ class InferredTypesTest {
     assertThat(((DeclaredType) declaredType).alternativeTypeSymbols()).extracting(Symbol::fullyQualifiedName)
       .containsExactlyInAnyOrder("NoneType");
   }
+ 
+  @Test
+  void test_any_annotation() {
+    TypeAnnotation typeAnnotation = typeAnnotation(
+      "from typing import Any",
+      "l : Any"
+    );
+    assertThat(fromTypeshedTypeAnnotation(typeAnnotation)).isEqualTo(anyType());
+    InferredType declaredType = fromTypeAnnotation(typeAnnotation);
+    assertThat(declaredType).isInstanceOf(AnyType.class);
+  }
+
+  @Test
+  void test_unknown_annotation() {
+    TypeAnnotation typeAnnotation = typeAnnotation(
+      "l : MyType"
+    );
+    assertThat(fromTypeshedTypeAnnotation(typeAnnotation)).isEqualTo(anyType());
+    InferredType declaredType = fromTypeAnnotation(typeAnnotation);
+    assertThat(declaredType).isInstanceOf(AnyType.class);
+  }
+ 
 
   @Test
   void test_optional_type_annotations() {
@@ -437,6 +459,10 @@ class InferredTypesTest {
       "fully_qualified_name: \"mod.t\""
       ))
       .isEqualTo(InferredTypes.or(STR, INT));
+    assertThat(protobufType(
+      "kind: INSTANCE\n" +
+      "fully_qualified_name: \"typing._SpecialForm\""
+      )).isEqualTo(anyType());
     assertThat(protobufType("kind: CALLABLE")).isEqualTo(anyType());
   }
 
