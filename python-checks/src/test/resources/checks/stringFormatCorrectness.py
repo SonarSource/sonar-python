@@ -1,5 +1,5 @@
 # Due to parsing errors with formatted expressions, the rule is disabled for f-strings: see SONARPY-726
-def f_strings():
+def f_strings(x):
     var = 42
     f"{var}" # Ok
     f"{var,}" # Ok
@@ -8,6 +8,8 @@ def f_strings():
 #   ^^^^^^^^ 0
     a = f"Hello" + f"{var}" # Noncompliant {{Add replacement fields or use a normal string instead of an f-string.}}
 #       ^^^^^^^^ 0
+    f"{x:=<42}"
+    f"{(x:=42)}" # Noncompliant
 
 def printf_style():
     "%(key)s" % {"key": "str", "other": "key"}  # Noncompliant {{Remove this unused argument or add a replacement field.}}

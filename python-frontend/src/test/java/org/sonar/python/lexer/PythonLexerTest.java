@@ -324,18 +324,7 @@ class PythonLexerTest {
       hasToken("}", PythonPunctuator.RCURLYBRACE),
       hasToken("'", PythonTokenType.FSTRING_END)));
   }
-
-  @Test
-  void fstring_walrus_looking_format_specifier() {
-    assertThat(lexer.lex("f'{a:=<42}'"), allOf(
-      hasToken("f'", PythonTokenType.FSTRING_START),
-      hasToken("{", PythonPunctuator.LCURLYBRACE),
-      hasToken("a", GenericTokenType.IDENTIFIER),
-      hasToken(":", PythonPunctuator.COLON),
-      hasToken("=<42", PythonTokenType.FSTRING_MIDDLE),
-      hasToken("}", PythonPunctuator.RCURLYBRACE),
-      hasToken("'", PythonTokenType.FSTRING_END)));
-  }
+  
   @Test
   void fstring_lambda() {
     assertThat(lexer.lex("f'{(lambda a: a+42)}'"), allOf(
