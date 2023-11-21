@@ -19,26 +19,24 @@
  */
 package org.sonar.python.lexer;
 
-import static com.sonar.sslr.test.lexer.LexerMatchers.hasComment;
-import static com.sonar.sslr.test.lexer.LexerMatchers.hasToken;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.Matchers.allOf;
-import static org.hamcrest.Matchers.not;
-import static org.junit.Assert.assertThat;
-
+import com.google.common.collect.ImmutableSet;
+import com.sonar.sslr.api.GenericTokenType;
+import com.sonar.sslr.api.Token;
+import com.sonar.sslr.impl.Lexer;
 import java.util.List;
 import java.util.Set;
-
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.api.PythonKeyword;
 import org.sonar.python.api.PythonPunctuator;
 import org.sonar.python.api.PythonTokenType;
 
-import com.google.common.collect.ImmutableSet;
-import com.sonar.sslr.api.GenericTokenType;
-import com.sonar.sslr.api.Token;
-import com.sonar.sslr.impl.Lexer;
+import static com.sonar.sslr.test.lexer.LexerMatchers.hasComment;
+import static com.sonar.sslr.test.lexer.LexerMatchers.hasToken;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.not;
+import static org.junit.Assert.assertThat;
 
 class PythonLexerTest {
 
@@ -326,6 +324,7 @@ class PythonLexerTest {
       hasToken("}", PythonPunctuator.RCURLYBRACE),
       hasToken("'", PythonTokenType.FSTRING_END)));
   }
+  
   @Test
   void fstring_lambda() {
     assertThat(lexer.lex("f'{(lambda a: a+42)}'"), allOf(
