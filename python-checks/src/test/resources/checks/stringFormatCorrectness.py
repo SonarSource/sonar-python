@@ -1,4 +1,3 @@
-# Due to parsing errors with formatted expressions, the rule is disabled for f-strings: see SONARPY-726
 def f_strings(x):
     var = 42
     f"{var}" # Ok
