@@ -22,6 +22,8 @@ package org.sonar.python.types;
 import com.google.protobuf.TextFormat;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.LocationInFile;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
@@ -248,6 +250,28 @@ class InferredTypesTest {
     assertThat(((DeclaredType) declaredType).alternativeTypeSymbols()).extracting(Symbol::fullyQualifiedName)
       .containsExactlyInAnyOrder("NoneType");
   }
+ 
+  @Test
+  void test_any_annotation() {
+    TypeAnnotation typeAnnotation = typeAnnotation(
+      "from typing import Any",
+      "l : Any"
+    );
+    assertThat(fromTypeshedTypeAnnotation(typeAnnotation)).isEqualTo(anyType());
+    InferredType declaredType = fromTypeAnnotation(typeAnnotation);
+    assertThat(declaredType).isInstanceOf(AnyType.class);
+  }
+
+  @Test
+  void test_unknown_annotation() {
+    TypeAnnotation typeAnnotation = typeAnnotation(
+      "l : MyType"
+    );
+    assertThat(fromTypeshedTypeAnnotation(typeAnnotation)).isEqualTo(anyType());
+    InferredType declaredType = fromTypeAnnotation(typeAnnotation);
+    assertThat(declaredType).isInstanceOf(AnyType.class);
+  }
+ 
 
   @Test
   void test_optional_type_annotations() {
@@ -282,6 +306,63 @@ class InferredTypesTest {
       .containsExactlyInAnyOrder("typing.Optional");
   }
 
+  @Test
+  void test_type_annotation_with_any_type() {
+    assertThat(lastExpression(
+      "from typing import Any",
+      "def f(x: Any):",
+      "  x").type()).isEqualTo(anyType());
+  }
+
+  @Test
+  void test_union_type_annotation_with_builtins() {
+    DeclaredType union = new DeclaredType(new SymbolImpl("Union", "typing.Union"), List.of(new DeclaredType(BuiltinTypes.INT), new DeclaredType(BuiltinTypes.STR)));
+    assertThat(lastExpression(
+      "def f(x: int | str):",
+      "  x").type()).isEqualTo(union);
+  }
+
+  @Test
+  void test_union_type_annotation_inside_generics() {
+    DeclaredType union = new DeclaredType(new SymbolImpl("Union", "typing.Union"), List.of(new DeclaredType(BuiltinTypes.INT), new DeclaredType(BuiltinTypes.STR)));
+    DeclaredType listOfUnion = new DeclaredType(new SymbolImpl(BuiltinTypes.LIST, BuiltinTypes.LIST), List.of(union));
+    assertThat(lastExpression(
+      "def f(x: list[int | str]):",
+      "  x").type()).isEqualTo(listOfUnion);
+  }
+
+  @Test
+  void test_union_type_annotation_with_unknown_types() {
+    assertThat(lastExpression(
+      "def f(x: int | A):",
+      "  x").type()).isEqualTo(anyType());
+
+    assertThat(lastExpression(
+      "def f(x: B | int):",
+      "  x").type()).isEqualTo(anyType());
+  }
+
+
+  @Test
+  void test_union_type_annotation_with_class() {
+    assertThat(((DeclaredType) lastExpression(
+      "class A:",
+      "    pass",
+      "def f(x: int | A):",
+      "  x").type()).alternativeTypeSymbols()).extracting(Symbol::fullyQualifiedName).containsExactlyInAnyOrder("mod1.A", "int");
+  }
+
+  @Test
+  void test_optional_type_annotation() {
+    DeclaredType optional = new DeclaredType(new SymbolImpl("Optional", "typing.Optional"), List.of(new DeclaredType(BuiltinTypes.INT)));
+    assertThat(lastExpression(
+      "def f(x: int | None):",
+      "  x").type()).isEqualTo(optional);
+
+    assertThat(lastExpression(
+      "def f(x: None | int):",
+      "  x").type()).isEqualTo(optional);
+  }
   @Test
   void test_typeSymbol() {
     ClassSymbol str = typeShedClass("str");
@@ -379,6 +460,10 @@ class InferredTypesTest {
       "fully_qualified_name: \"mod.t\""
       ))
       .isEqualTo(InferredTypes.or(STR, INT));
+    assertThat(protobufType(
+      "kind: INSTANCE\n" +
+      "fully_qualified_name: \"typing._SpecialForm\""
+      )).isEqualTo(anyType());
     assertThat(protobufType("kind: CALLABLE")).isEqualTo(anyType());
   }
 

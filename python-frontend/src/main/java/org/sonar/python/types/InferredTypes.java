@@ -38,6 +38,7 @@ import org.sonar.plugins.python.api.LocationInFile;
 import org.sonar.plugins.python.api.symbols.AmbiguousSymbol;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.tree.BinaryExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.SubscriptionExpression;
@@ -45,6 +46,7 @@ import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.plugins.python.api.tree.TypeAnnotation;
 import org.sonar.plugins.python.api.types.BuiltinTypes;
 import org.sonar.plugins.python.api.types.InferredType;
+import org.sonar.python.semantic.SymbolImpl;
 import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.types.protobuf.SymbolsProtos;
 
@@ -124,6 +126,8 @@ public class InferredTypes {
     BUILTINS_TYPE_CATEGORY.put(BuiltinTypes.TUPLE, BuiltinTypes.TUPLE);
   }
 
+  private static final SymbolImpl OPTIONAL_SYMBOL = new SymbolImpl("Optional", "typing.Optional");
+
   private InferredTypes() {
   }
 
@@ -179,7 +183,9 @@ public class InferredTypes {
         // It comes from CPython impl: https://github.com/python/cpython/blob/e39ae6bef2c357a88e232dcab2e4b4c0f367544b/Lib/typing.py#L439
         // This doesn't seem to be very precisely specified in typeshed, because it has special semantic.
         // To avoid FPs, we treat it as ANY
-        if ("typing._SpecialForm".equals(typeName)) return anyType();
+        if ("typing._SpecialForm".equals(typeName)) {
+          return anyType();
+        }
         return typeName.isEmpty() ? anyType() : runtimeType(TypeShed.symbolWithFQN(typeName));
       case TYPE_ALIAS:
         return fromTypeshedProtobuf(type.getArgs(0));
@@ -235,7 +241,27 @@ public class InferredTypes {
     if (expression.is(Kind.NONE)) {
       return new DeclaredType(builtinSymbols.get(BuiltinTypes.NONE_TYPE));
     }
+    if (expression.is(Kind.BITWISE_OR)) {
+      var binaryExpression = (BinaryExpression) expression;
+      return declaredUnionType(binaryExpression.leftOperand(), binaryExpression.rightOperand(), builtinSymbols);
+    }
     return null;
+  }
+
+  @CheckForNull
+  public static DeclaredType declaredUnionType(Expression leftOperand, Expression rightOperand, Map<String, Symbol> builtinSymbols) {
+    DeclaredType leftType = declaredTypeFromTypeAnnotation(leftOperand, builtinSymbols);
+    DeclaredType rightType = declaredTypeFromTypeAnnotation(rightOperand, builtinSymbols);
+    if (leftType == null || rightType == null) {
+      return null;
+    }
+    if (leftType.mustBeOrExtend(BuiltinTypes.NONE_TYPE)) {
+      return new DeclaredType(OPTIONAL_SYMBOL, Arrays.asList(rightType));
+    }
+    if (rightType.mustBeOrExtend(BuiltinTypes.NONE_TYPE)) {
+      return new DeclaredType(OPTIONAL_SYMBOL, Arrays.asList(leftType));
+    }
+    return new DeclaredType(new SymbolImpl("Union", "typing.Union"), Arrays.asList(leftType, rightType));
   }
 
   @CheckForNull
@@ -402,8 +428,7 @@ public class InferredTypes {
       Stream.of(actual, expected)
         .map(ClassSymbol::fullyQualifiedName)
         .filter(Objects::nonNull)
-        .collect(Collectors.toSet())
-    );
+        .collect(Collectors.toSet()));
   }
 
   public static boolean containsDeclaredType(InferredType type) {
