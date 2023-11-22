@@ -86,7 +86,6 @@ import org.sonar.python.tree.FunctionDefImpl;
 import org.sonar.python.tree.ImportFromImpl;
 import org.sonar.python.tree.LambdaExpressionImpl;
 import org.sonar.python.tree.TreeUtils;
-import org.sonar.python.types.DeclaredType;
 import org.sonar.python.types.InferredTypes;
 import org.sonar.python.types.TypeInference;
 import org.sonar.python.types.TypeShed;
@@ -761,15 +760,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
         TypeAnnotation annotation = annotatedAssignment.annotation();
         Symbol symbol = variable.symbol();
         Optional.ofNullable(symbol)
-          .ifPresent(s -> {
-            Expression expression = annotation.expression();
-            if (expression instanceof HasSymbol) {
-              Symbol typeSymbol = ((HasSymbol) expression).symbol();
-              if (typeSymbol != null) {
-                ((SymbolImpl) symbol).setInferredType(new DeclaredType(typeSymbol, Collections.emptyList()));
-              }
-            }
-          });
+          .ifPresent(s -> ((SymbolImpl) symbol).setInferredType(InferredTypes.fromTypeAnnotation(annotation)));
       }
       super.visitAnnotatedAssignment(annotatedAssignment);
     }
