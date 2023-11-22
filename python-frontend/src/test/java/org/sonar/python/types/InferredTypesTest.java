@@ -307,6 +307,14 @@ class InferredTypesTest {
   }
 
   @Test
+  void test_type_annotation_with_any_type() {
+    assertThat(lastExpression(
+      "from typing import Any",
+      "def f(x: Any):",
+      "  x").type()).isEqualTo(anyType());
+  }
+
+  @Test
   void test_union_type_annotation_with_builtins() {
     DeclaredType union = new DeclaredType(new SymbolImpl("Union", "typing.Union"), List.of(new DeclaredType(BuiltinTypes.INT), new DeclaredType(BuiltinTypes.STR)));
     assertThat(lastExpression(
@@ -334,13 +342,6 @@ class InferredTypesTest {
       "  x").type()).isEqualTo(anyType());
   }
 
-  @Test
-  void test_union_type_annotation_with_any_type() {
-    assertThat(lastExpression(
-      "from typing import Any",
-      "def f(x: Any):",
-      "  x").type()).isEqualTo(anyType());
-  }
 
   @Test
   void test_union_type_annotation_with_class() {
