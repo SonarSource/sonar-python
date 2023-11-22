@@ -19,8 +19,6 @@
  */
 package org.sonar.python.types;
 
-import static org.sonar.plugins.python.api.symbols.Symbol.Kind.CLASS;
-
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -34,10 +32,8 @@ import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
-
 import org.sonar.plugins.python.api.LocationInFile;
 import org.sonar.plugins.python.api.symbols.AmbiguousSymbol;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
@@ -53,6 +49,8 @@ import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.semantic.SymbolImpl;
 import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.types.protobuf.SymbolsProtos;
+
+import static org.sonar.plugins.python.api.symbols.Symbol.Kind.CLASS;
 
 public class InferredTypes {
 
@@ -245,10 +243,7 @@ public class InferredTypes {
     }
     if (expression.is(Kind.BITWISE_OR)) {
       var binaryExpression = (BinaryExpression) expression;
-      var unionType = declaredUnionType(binaryExpression.leftOperand(), binaryExpression.rightOperand(), builtinSymbols);
-      if (unionType != null) {
-        return unionType;
-      }
+      return declaredUnionType(binaryExpression.leftOperand(), binaryExpression.rightOperand(), builtinSymbols);
     }
     return null;
   }
@@ -433,8 +428,7 @@ public class InferredTypes {
       Stream.of(actual, expected)
         .map(ClassSymbol::fullyQualifiedName)
         .filter(Objects::nonNull)
-        .collect(Collectors.toSet())
-    );
+        .collect(Collectors.toSet()));
   }
 
   public static boolean containsDeclaredType(InferredType type) {
