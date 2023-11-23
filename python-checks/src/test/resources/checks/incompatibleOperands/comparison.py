@@ -1,3 +1,4 @@
+
 def builtin_noncompliant(p):
   1 < "1"  # Noncompliant {{Fix this invalid "<" operation between incompatible types (int and str).}}
 #   ^
@@ -90,3 +91,12 @@ def classes_with_decorators():
   class A: pass
   a = A()
   a < 1 # OK
+
+
+# We should not raise any issues on mocks as they could be monkey patched to fit the comparison type
+def mocks():
+    from unittest.mock import Mock, MagicMock
+    mock = Mock()
+    mock < 3 # Ok
+    mock = MagicMock()
+    3 > mock # Ok
