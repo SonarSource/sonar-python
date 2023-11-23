@@ -28,4 +28,9 @@ class FunctionReturnTypeCheckTest {
   void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/functionReturnType.py", new FunctionReturnTypeCheck());
   }
+
+  @Test
+  void conditionalImportTest() {
+    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/functionReturnTypeWithConditionalImport.py", new FunctionReturnTypeCheck());
+  }
 }

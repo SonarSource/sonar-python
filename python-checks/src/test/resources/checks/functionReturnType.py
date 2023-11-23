@@ -334,3 +334,12 @@ def echo_round() -> Generator[int, float, str]:
 @contextlib.contextmanager
 def test() -> contextlib.AbstractContextManager[str]:
   yield "this is an example"
+
+from collections.abc import Iterable
+
+def foo() -> Iterable[str]:
+  yield ""
+
+def some_method(param) -> collections.abc.Iterator[SomeClass]:
+  for entry in param:
+    yield entry
