@@ -753,6 +753,18 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
       super.visitFunctionDef(functionDef);
     }
 
+    @Override
+    public void visitAnnotatedAssignment(AnnotatedAssignment annotatedAssignment) {
+      if (annotatedAssignment.variable().is(Kind.NAME)) {
+        Name variable = (Name) annotatedAssignment.variable();
+        TypeAnnotation annotation = annotatedAssignment.annotation();
+        Symbol symbol = variable.symbol();
+        Optional.ofNullable(symbol)
+          .ifPresent(s -> ((SymbolImpl) symbol).setInferredType(InferredTypes.fromTypeAnnotation(annotation)));
+      }
+      super.visitAnnotatedAssignment(annotatedAssignment);
+    }
+
     /**
      * Handle class member usages like the following:
      * <pre>

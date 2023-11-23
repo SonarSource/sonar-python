@@ -85,7 +85,11 @@ public class TypeInference extends BaseTreeVisitor {
         InferredType type = qualifiedExpression.qualifier().type();
         if (!type.equals(TYPE_OF_SUPER)) {
           Optional<Symbol> resolvedMember = type.resolveMember(name.name());
-          resolvedMember.ifPresent(((NameImpl) name)::setSymbol);
+          resolvedMember.ifPresent(m -> {
+            NameImpl nameImpl = ((NameImpl) name);
+            nameImpl.setSymbol(m);
+            nameImpl.setInferredType(((SymbolImpl) m).inferredType());
+          });
         }
       }
     });

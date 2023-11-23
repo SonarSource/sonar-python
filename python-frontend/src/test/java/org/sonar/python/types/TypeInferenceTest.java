@@ -30,8 +30,10 @@ import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.ReturnStatement;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.types.BuiltinTypes;
 import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.PythonTestUtils;
+import org.sonar.python.semantic.SymbolImpl;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.PythonTestUtils.getLastDescendant;
@@ -41,6 +43,7 @@ import static org.sonar.python.PythonTestUtils.lastStatement;import static org.s
 import static org.sonar.python.types.InferredTypes.BOOL;
 import static org.sonar.python.types.InferredTypes.COMPLEX;
 import static org.sonar.python.types.InferredTypes.DECL_INT;
+import static org.sonar.python.types.InferredTypes.DECL_LIST;
 import static org.sonar.python.types.InferredTypes.DECL_STR;
 import static org.sonar.python.types.InferredTypes.DICT;
 import static org.sonar.python.types.InferredTypes.FLOAT;
@@ -681,7 +684,43 @@ class TypeInferenceTest {
       "def f():",
       "  e = Foo()",
       "  e.attr.bit_length()"
-    ).type()).isEqualTo(anyType());
+    ).type()).isEqualTo(DECL_INT);
+  }
+
+  @Test
+  void user_defined_attributes_list() {
+    DeclaredType listOfStr = new DeclaredType(new SymbolImpl(BuiltinTypes.LIST, BuiltinTypes.LIST), List.of((DeclaredType) DECL_STR));
+    assertThat(lastExpression(
+      "class Foo:",
+      "  attr: list[str]",
+      "def f():",
+      "  e = Foo()",
+      "  e.attr"
+    ).type()).isEqualTo(listOfStr);
+  }
+
+  @Test
+  void user_defined_attributes_union() {
+    DeclaredType union = new DeclaredType(new SymbolImpl("Union", "typing.Union"), List.of(new DeclaredType(BuiltinTypes.INT), new DeclaredType(BuiltinTypes.STR)));
+    assertThat(lastExpression(
+      "class Foo:",
+      "  attr: int | str",
+      "def f():",
+      "  e = Foo()",
+      "  e.attr"
+    ).type()).isEqualTo(union);
+  }
+
+  @Test
+  void user_defined_attributes_reassigned() {
+    assertThat(lastExpression(
+      "class Foo:",
+      "  attr: int",
+      "def f():",
+      "  e = Foo()",
+      "  e.attr = 'hello'",
+      "  e.attr"
+    ).type()).isEqualTo(DECL_INT);
   }
 
 }
