@@ -24,3 +24,11 @@ type T = str
 def foo(a: T):
   if a == 42: # FN
     ...
+
+
+from unittest.mock import Mock, MagicMock
+# We should not raise any issues on mocks as they could be monkey patched to fit the comparison type
+def mocks(mock: Mock, magic_mock:MagicMock):
+    mock == 3 # Ok
+    mock != 42
+    3 == magic_mock # Ok
