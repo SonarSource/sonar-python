@@ -164,3 +164,12 @@ def import_path():
     from importlib import import_module
 
     del import_module('importlib').__path__[0]  # OK ref: SONARPY-1339
+
+
+# We should not raise any issues on mocks as they could be monkey patched to be anything
+def mocks():
+    from unittest.mock import Mock, MagicMock
+    mock = Mock()
+    del mock[42]
+    mock = MagicMock()
+    del mock[0]

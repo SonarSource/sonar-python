@@ -34,3 +34,13 @@ def checked_with_not_in(obj: object, prop):
     return
   obj[prop]
 
+
+from unittest.mock import Mock, MagicMock
+
+
+# We should not raise any issues on mocks as they could be monkey patched to fit any types
+def mocks(mock:Mock, magic_mock: MagicMock):
+    del mock[42]
+    mock[42] = 42
+    a = mock[42]
+    magic_mock[42] = 42
