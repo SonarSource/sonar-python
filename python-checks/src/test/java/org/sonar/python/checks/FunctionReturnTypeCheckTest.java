@@ -33,4 +33,9 @@ class FunctionReturnTypeCheckTest {
   void conditionalImportTest() {
     PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/functionReturnTypeWithConditionalImport.py", new FunctionReturnTypeCheck());
   }
+
+  @Test
+  void collectionsAbcTest() {
+    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/functionReturnTypeCollectionsAbc.py", new FunctionReturnTypeCheck());
+  }
 }

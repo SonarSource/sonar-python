@@ -50,7 +50,8 @@ import static org.sonar.python.types.InferredTypes.containsDeclaredType;
 public class FunctionReturnTypeCheck extends PythonSubscriptionCheck {
 
   private static final String MESSAGE = "Return a value of type \"%s\" instead of \"%s\" or update function \"%s\" type hint.";
-  private static final Set<String> ITERABLE_TYPES = Set.of("typing.Generator", "typing.Iterator", "typing.Iterable", "collections.abc.Iterator", "collections.abc.Iterable");
+  private static final Set<String> ITERABLE_TYPES = Set.of("typing.Generator", "typing.Iterator", "typing.Iterable",
+    "collections.abc.Generator" ,"collections.abc.Iterator", "collections.abc.Iterable");
   private static final Set<String> ASYNC_ITERABLE_TYPES = Set.of("typing.AsyncGenerator", "typing.AsyncIterator", "typing.AsyncIterable");
   private static final String CONTEXT_MANAGER_DECORATOR_FQN = "contextlib.contextmanager";
 
@@ -133,7 +134,9 @@ public class FunctionReturnTypeCheck extends PythonSubscriptionCheck {
       .anyMatch(typeName -> canBeOrExtend(inferredType, typeName));
   }
 
-  private static Boolean canBeOrExtend(InferredType inferredType, String typeName) {
+  private static boolean canBeOrExtend(InferredType inferredType, String typeName) {
+    // The reason of the implementation of the method instead of using already having DeclaredType.canBeOrExtend
+    // is that we consider the declared type of the type annotation to be as trustworthy as if it were a runtime type.
     return Optional.of(inferredType)
       .filter(DeclaredType.class::isInstance)
       .map(DeclaredType.class::cast)
