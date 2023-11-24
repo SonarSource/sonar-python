@@ -24,7 +24,6 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Stream;
-
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
@@ -34,10 +33,13 @@ import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.ExpressionList;
 import org.sonar.plugins.python.api.tree.ListLiteral;
+import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tuple;
 import org.sonar.plugins.python.api.types.InferredType;
+import org.sonar.python.checks.Expressions;
 import org.sonar.python.tree.NameImpl;
 import org.sonar.python.tree.TreeUtils;
 
@@ -95,7 +97,15 @@ public class GraphQLIntrospectionCheck extends PythonSubscriptionCheck {
   private static Optional<List<Expression>> extractArgumentValues(RegularArgument argument) {
     return Optional.of(argument)
       .map(RegularArgument::expression)
+      .map(GraphQLIntrospectionCheck::ifNameGetSingleAssignedNonNameValue)
       .flatMap(GraphQLIntrospectionCheck::expressionsFromListOrTuple);
+  }
+
+  private static Expression ifNameGetSingleAssignedNonNameValue(Expression expression) {
+    if (expression.is(Tree.Kind.NAME)) {
+      return Expressions.singleAssignedNonNameValue((Name) expression);
+    }
+    return expression;
   }
 
   private static Optional<List<Expression>> expressionsFromListOrTuple(Expression expression) {
@@ -137,8 +147,16 @@ public class GraphQLIntrospectionCheck extends PythonSubscriptionCheck {
 
   private static Optional<String> nameFromIdentifierOrCallExpression(Expression expression) {
     return Optional.ofNullable(TreeUtils.nameFromExpression(expression))
+      .or(() -> TreeUtils.toOptionalInstanceOf(QualifiedExpression.class, expression)
+        .map(TreeUtils::nameFromQualifiedExpression))
       .or(() -> TreeUtils.toOptionalInstanceOf(CallExpression.class, expression)
         .map(CallExpression::callee)
-        .map(TreeUtils::nameFromExpression));
+        .flatMap(GraphQLIntrospectionCheck::nameFromExpressionOrQualifiedExpression));
+  }
+
+  private static Optional<String> nameFromExpressionOrQualifiedExpression(Expression expression) {
+    return TreeUtils.toOptionalInstanceOf(QualifiedExpression.class, expression)
+      .map(TreeUtils::nameFromQualifiedExpression)
+      .or(() -> Optional.ofNullable(TreeUtils.nameFromExpression(expression)));
   }
 }
