@@ -304,7 +304,7 @@ def graphql_server_validation_rules_compliant(schema, some_rule, introspection_r
     )
 
 
-def flask_graphql_middleware_list_as_variable(middleware, schema, CustomBackend, format_custom_error):
+def flask_graphql_middleware_list_as_variable(middleware, schema, CustomBackend, format_custom_error, some_module):
     from graphql_server.flask import GraphQLView
     gql_middlew = [
         middleware.CostProtectionMiddleware(),
@@ -312,6 +312,11 @@ def flask_graphql_middleware_list_as_variable(middleware, schema, CustomBackend,
         middleware.IntrospectionMiddleware(),
         middleware.processMiddleware(),
     ]
+
+    gql_middlew_qualified_expression = [
+        middleware.IntrospectionMiddleware,
+    ]
+
 
     igql_middlew = [
         middleware.IGQLProtectionMiddleware()
@@ -332,6 +337,22 @@ def flask_graphql_middleware_list_as_variable(middleware, schema, CustomBackend,
         graphiql=True,
         middleware = igql_middlew,
         format_error=format_custom_error
+    )
+
+    GraphQLView.as_view( # OK
+        'graphql',
+        schema=schema,
+        middleware=gql_middlew_qualified_expression,
+        backend=CustomBackend(),
+        batch=True
+    )
+
+    GraphQLView.as_view( # Noncompliant
+        'graphql',
+        schema=schema,
+        middleware=(some_module.unsafemiddleware,),
+        backend=CustomBackend(),
+        batch=True
     )
 
     from a_module import some_function

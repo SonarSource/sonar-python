@@ -147,6 +147,8 @@ public class GraphQLIntrospectionCheck extends PythonSubscriptionCheck {
 
   private static Optional<String> nameFromIdentifierOrCallExpression(Expression expression) {
     return Optional.ofNullable(TreeUtils.nameFromExpression(expression))
+      .or(() -> TreeUtils.toOptionalInstanceOf(QualifiedExpression.class, expression)
+        .map(TreeUtils::nameFromQualifiedExpression))
       .or(() -> TreeUtils.toOptionalInstanceOf(CallExpression.class, expression)
         .map(CallExpression::callee)
         .flatMap(GraphQLIntrospectionCheck::nameFromExpressionOrQualifiedExpression));
