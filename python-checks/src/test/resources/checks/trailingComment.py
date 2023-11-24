@@ -57,3 +57,6 @@ my_dict = {
 
 import frobnicate  # type: ignore
 frobnicate.start()
+
+# Flake8 pragma comments, such as the following are ok.
+example = lambda: 'example' # noqa: E731
