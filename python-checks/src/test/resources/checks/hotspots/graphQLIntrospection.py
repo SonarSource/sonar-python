@@ -1,4 +1,4 @@
-def flask_graphql_non_compliant(schema, some_middleware, another_middleware, get_middlewares):
+def flask_graphql_middleware_non_compliant(schema, some_middleware, another_middleware, get_middlewares):
     from flask_graphql import GraphQLView
 
     GraphQLView.as_view(  # Noncompliant {{Disable introspection on this "GraphQL" server endpoint.}}
@@ -201,8 +201,7 @@ def flask_graphql_validation_rules_compliant(schema, some_rule, some_middleware,
         validation_rules=[introspection_rule]
     )
 
-
-def graphql_server_middleware_non_compliant(schema, some_middleware):
+def graphql_server_middleware_non_compliant(schema, some_middleware, CustomBackend, format_custom_error, some_module):
     from graphql_server.flask import GraphQLView
 
     GraphQLView.as_view(  # Noncompliant {{Disable introspection on this "GraphQL" server endpoint.}}
@@ -228,8 +227,28 @@ def graphql_server_middleware_non_compliant(schema, some_middleware):
         middleware=[some_middleware]
     )
 
+    igql_middlew = [
+        some_middleware.IGQLProtectionMiddleware()
+    ]
 
-def graphql_server_middleware_compliant(schema, introspection_middleware, get_introspection_middlewares):
+    GraphQLView.as_view( # Noncompliant
+        'graphiql',
+        schema=schema,
+        backend=CustomBackend(),
+        graphiql=True,
+        middleware = igql_middlew,
+        format_error=format_custom_error
+    )
+
+    GraphQLView.as_view( # Noncompliant
+        'graphql',
+        schema=schema,
+        middleware=(some_module.unsafemiddleware,),
+        backend=CustomBackend(),
+        batch=True
+    )
+
+def graphql_server_middleware_compliant(schema, introspection_middleware, get_introspection_middlewares, CustomBackend, format_custom_error):
     from graphql_server.flask import GraphQLView
 
     GraphQLView.as_view(
@@ -246,6 +265,43 @@ def graphql_server_middleware_compliant(schema, introspection_middleware, get_in
         middleware=get_introspection_middlewares(),
     )
 
+    gql_middlew = [
+        middleware.CostProtectionMiddleware(),
+        middleware.DepthProtectionMiddleware(),
+        middleware.IntrospectionMiddleware(),
+        middleware.processMiddleware(),
+    ]
+
+    gql_middlew_qualified_expression = [
+        middleware.IntrospectionMiddleware,
+    ]
+
+    GraphQLView.as_view( # OK
+        'graphql',
+        schema=schema,
+        middleware=gql_middlew,
+        backend=CustomBackend(),
+        batch=True
+    )
+
+    GraphQLView.as_view( # OK
+        'graphql',
+        schema=schema,
+        middleware=gql_middlew_qualified_expression,
+        backend=CustomBackend(),
+        batch=True
+    )
+
+    from a_module import some_function
+    some_var = some_function()
+    GraphQLView.as_view( # OK
+        'graphiql',
+        schema=schema,
+        backend=CustomBackend(),
+        graphiql=True,
+        middleware=some_var,
+        format_error=format_custom_error
+    )
 
 def graphql_server_validation_rules_non_compliant(schema, some_rule):
     from graphql_server.flask import GraphQLView
@@ -266,7 +322,6 @@ def graphql_server_validation_rules_non_compliant(schema, some_rule):
         graphiql=True,
         validation_rules=[some_rule]
     )
-
 
 def graphql_server_validation_rules_compliant(schema, some_rule, introspection_rule):
     from graphql_server.flask import GraphQLView
@@ -301,67 +356,4 @@ def graphql_server_validation_rules_compliant(schema, some_rule, introspection_r
         schema=schema,
         graphiql=True,
         validation_rules=[introspection_rule]
-    )
-
-
-def flask_graphql_middleware_list_as_variable(middleware, schema, CustomBackend, format_custom_error, some_module):
-    from graphql_server.flask import GraphQLView
-    gql_middlew = [
-        middleware.CostProtectionMiddleware(),
-        middleware.DepthProtectionMiddleware(),
-        middleware.IntrospectionMiddleware(),
-        middleware.processMiddleware(),
-    ]
-
-    gql_middlew_qualified_expression = [
-        middleware.IntrospectionMiddleware,
-    ]
-
-
-    igql_middlew = [
-        middleware.IGQLProtectionMiddleware()
-    ]
-
-    GraphQLView.as_view( # OK
-        'graphql',
-        schema=schema,
-        middleware=gql_middlew,
-        backend=CustomBackend(),
-        batch=True
-    )
-
-    GraphQLView.as_view( # Noncompliant
-        'graphiql',
-        schema=schema,
-        backend=CustomBackend(),
-        graphiql=True,
-        middleware = igql_middlew,
-        format_error=format_custom_error
-    )
-
-    GraphQLView.as_view( # OK
-        'graphql',
-        schema=schema,
-        middleware=gql_middlew_qualified_expression,
-        backend=CustomBackend(),
-        batch=True
-    )
-
-    GraphQLView.as_view( # Noncompliant
-        'graphql',
-        schema=schema,
-        middleware=(some_module.unsafemiddleware,),
-        backend=CustomBackend(),
-        batch=True
-    )
-
-    from a_module import some_function
-    some_var = some_function()
-    GraphQLView.as_view( # OK
-        'graphiql',
-        schema=schema,
-        backend=CustomBackend(),
-        graphiql=True,
-        middleware=some_var,
-        format_error=format_custom_error
     )
