@@ -30,12 +30,7 @@ class FunctionReturnTypeCheckTest {
   }
 
   @Test
-  void conditionalImportTest() {
-    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/functionReturnTypeWithConditionalImport.py", new FunctionReturnTypeCheck());
-  }
-
-  @Test
-  void collectionsAbcTest() {
-    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/functionReturnTypeCollectionsAbc.py", new FunctionReturnTypeCheck());
+  void additionalTest() {
+    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/functionReturnTypeAdditionalTests.py", new FunctionReturnTypeCheck());
   }
 }
