@@ -23,3 +23,13 @@ def conditional_import():
 
   async def my_iterator() -> Iterator[str]:
     yield "hello"
+
+
+def type_aliases():
+  from typing import Generator
+  from typing import TypeAlias
+
+  StepGenerator: TypeAlias = Generator[str, None, None]
+  def ordered_steps() -> StepGenerator:
+    for i in range(10):
+      yield str(i)
