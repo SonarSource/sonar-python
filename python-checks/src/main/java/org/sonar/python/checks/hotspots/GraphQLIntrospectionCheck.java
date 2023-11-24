@@ -153,8 +153,7 @@ public class GraphQLIntrospectionCheck extends PythonSubscriptionCheck {
   }
 
   private static Optional<String> nameFromExpressionOrQualifiedExpression(Expression expression) {
-    return Optional.of(expression)
-      .flatMap(TreeUtils.toOptionalInstanceOfMapper(QualifiedExpression.class))
+    return TreeUtils.toOptionalInstanceOf(QualifiedExpression.class, expression)
       .map(TreeUtils::nameFromQualifiedExpression)
       .or(() -> Optional.ofNullable(TreeUtils.nameFromExpression(expression)));
   }
