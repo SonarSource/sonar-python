@@ -28,4 +28,9 @@ class FunctionReturnTypeCheckTest {
   void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/functionReturnType.py", new FunctionReturnTypeCheck());
   }
+
+  @Test
+  void additionalTest() {
+    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/functionReturnTypeAdditionalTests.py", new FunctionReturnTypeCheck());
+  }
 }

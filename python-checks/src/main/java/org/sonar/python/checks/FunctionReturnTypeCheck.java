@@ -20,12 +20,15 @@
 package org.sonar.python.checks;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Stream;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
+import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.Decorator;
@@ -38,6 +41,7 @@ import org.sonar.plugins.python.api.tree.TypeAnnotation;
 import org.sonar.plugins.python.api.tree.YieldExpression;
 import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.semantic.FunctionSymbolImpl;
+import org.sonar.python.types.DeclaredType;
 import org.sonar.python.types.InferredTypes;
 
 import static org.sonar.python.types.InferredTypes.containsDeclaredType;
@@ -46,8 +50,9 @@ import static org.sonar.python.types.InferredTypes.containsDeclaredType;
 public class FunctionReturnTypeCheck extends PythonSubscriptionCheck {
 
   private static final String MESSAGE = "Return a value of type \"%s\" instead of \"%s\" or update function \"%s\" type hint.";
-  private static final List<String> ITERABLE_TYPES = Arrays.asList("typing.Generator", "typing.Iterator", "typing.Iterable");
-  private static final List<String> ASYNC_ITERABLE_TYPES = Arrays.asList("typing.AsyncGenerator", "typing.AsyncIterator", "typing.AsyncIterable");
+  private static final Set<String> ITERABLE_TYPES = Set.of("typing.Generator", "typing.Iterator", "typing.Iterable",
+    "collections.abc.Generator" ,"collections.abc.Iterator", "collections.abc.Iterable");
+  private static final Set<String> ASYNC_ITERABLE_TYPES = Set.of("typing.AsyncGenerator", "typing.AsyncIterator", "typing.AsyncIterable");
   private static final String CONTEXT_MANAGER_DECORATOR_FQN = "contextlib.contextmanager";
 
   @Override
@@ -93,7 +98,7 @@ public class FunctionReturnTypeCheck extends PythonSubscriptionCheck {
       boolean isAsyncFunction = functionDef.asyncKeyword() != null;
       String recommendedSuperType = isAsyncFunction ? "typing.AsyncGenerator" : "typing.Generator";
       // Here we should probably use an equivalent of "canBeOrExtend" (accepting uncertainty) instead of "mustBeOrExtend"
-      if (ITERABLE_TYPES.stream().anyMatch(declaredReturnType::mustBeOrExtend) || ASYNC_ITERABLE_TYPES.stream().anyMatch(declaredReturnType::mustBeOrExtend)) {
+      if (canBeOrExtendIterableType(declaredReturnType)) {
         if (isMixedUpAnnotation(isAsyncFunction, declaredReturnType)) {
           returnTypeVisitor.yieldExpressions
             .forEach(y -> {
@@ -122,6 +127,24 @@ public class FunctionReturnTypeCheck extends PythonSubscriptionCheck {
       }
       addSecondaries(issue, functionDef);
     });
+  }
+
+  private static boolean canBeOrExtendIterableType(InferredType inferredType) {
+    return Stream.concat(ITERABLE_TYPES.stream(), ASYNC_ITERABLE_TYPES.stream())
+      .anyMatch(typeName -> canBeOrExtend(inferredType, typeName));
+  }
+
+  private static boolean canBeOrExtend(InferredType inferredType, String typeName) {
+    // The reason of the implementation of the method instead of using already having DeclaredType.canBeOrExtend
+    // is that we consider the declared type of the type annotation to be as trustworthy as if it were a runtime type.
+    return Optional.of(inferredType)
+      .filter(DeclaredType.class::isInstance)
+      .map(DeclaredType.class::cast)
+      .map(DeclaredType::getTypeClass)
+      .filter(ClassSymbol.class::isInstance)
+      .map(ClassSymbol.class::cast)
+      .map(s -> s.canBeOrExtend(typeName))
+      .orElseGet(() -> inferredType.canBeOrExtend(typeName));
   }
 
   private static boolean isMixedUpAnnotation(boolean isAsyncFunction, InferredType declaredReturnType) {
