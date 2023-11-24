@@ -104,6 +104,34 @@ class DeclaredTypeTest {
     assertThat(declaredType.declaresMember("other")).isFalse();
 
     assertThat(new DeclaredType(new SymbolImpl("x", "foo.x")).declaresMember("member")).isTrue();
+
+    ClassSymbolImpl noFullyQualifiedName = new ClassSymbolImpl("unknown", null);
+    noFullyQualifiedName.addMembers(singletonList(foo));
+    assertThat(new DeclaredType(noFullyQualifiedName).canHaveMember("foo")).isTrue();
+    assertThat(new DeclaredType(noFullyQualifiedName).canHaveMember("bar")).isTrue();
+    assertThat(new DeclaredType(noFullyQualifiedName).declaresMember("foo")).isTrue();
+    assertThat(new DeclaredType(noFullyQualifiedName).declaresMember("bar")).isFalse();
+    assertThat(new DeclaredType(noFullyQualifiedName).resolveMember("foo")).isEmpty();
+    assertThat(new DeclaredType(noFullyQualifiedName).resolveMember("bar")).isEmpty();
+  }
+
+  @Test
+  void mocks_can_have_and_declare_any_members() {
+    ClassSymbolImpl x = new ClassSymbolImpl("Mock", "unittest.mock.Mock");
+    DeclaredType declaredType = new DeclaredType(x);
+    assertThat(declaredType.canHaveMember("foo")).isTrue();
+    assertThat(declaredType.canHaveMember("bar")).isTrue();
+    assertThat(declaredType.declaresMember("foo")).isTrue();
+    assertThat(declaredType.declaresMember("bar")).isTrue();
+    assertThat(declaredType.resolveMember("foo")).isEmpty();
+    assertThat(declaredType.resolveMember("bar")).isEmpty();
+
+    ClassSymbolImpl magicMock = new ClassSymbolImpl("MagicMock", "unittest.mock.MagicMock");
+    DeclaredType declaredTypeMagicMock = new DeclaredType(magicMock);
+    assertThat(declaredTypeMagicMock.canHaveMember("bar")).isTrue();
+    assertThat(declaredTypeMagicMock.declaresMember("foo")).isTrue();
+    assertThat(declaredTypeMagicMock.resolveMember("foo")).isEmpty();
+    assertThat(declaredTypeMagicMock.resolveMember("bar")).isEmpty();
   }
 
   @Test

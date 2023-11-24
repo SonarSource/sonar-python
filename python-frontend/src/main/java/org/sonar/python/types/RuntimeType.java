@@ -57,7 +57,12 @@ class RuntimeType implements InferredType {
 
   @Override
   public boolean canHaveMember(String memberName) {
-    return getTypeClass().canHaveMember(memberName);
+    ClassSymbol fetchedTypedClass = getTypeClass();
+    if (fetchedTypedClass.fullyQualifiedName() != null && 
+        EXCLUDED_FQNS.contains(fetchedTypedClass.fullyQualifiedName())){
+      return true;  
+    }
+    return fetchedTypedClass.canHaveMember(memberName);
   }
 
   @Override

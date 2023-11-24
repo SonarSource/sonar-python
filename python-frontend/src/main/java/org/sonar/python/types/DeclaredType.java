@@ -81,7 +81,10 @@ public class DeclaredType implements InferredType {
 
   @Override
   public boolean declaresMember(String memberName) {
-    if (hasUnresolvedHierarchy()) {
+    Symbol fetchedTypeClass = getTypeClass();
+    if (hasUnresolvedHierarchy() ||
+      (fetchedTypeClass.fullyQualifiedName() != null &&
+        EXCLUDED_FQNS.contains(fetchedTypeClass.fullyQualifiedName()))) {
       return true;
     }
     return alternativeTypeSymbols().stream().anyMatch(symbol -> !symbol.is(CLASS) || ((ClassSymbol) symbol).canHaveMember(memberName));

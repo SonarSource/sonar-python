@@ -83,6 +83,30 @@ class RuntimeTypeTest {
 
     ClassSymbolImpl y = new ClassSymbolImpl("y", "y");
     assertThat(new RuntimeType(y).canHaveMember("foo")).isFalse();
+
+    ClassSymbolImpl noFullyQualifiedName = new ClassSymbolImpl("unknown", null);
+    noFullyQualifiedName.addMembers(singletonList(foo));
+    assertThat(new RuntimeType(noFullyQualifiedName).canHaveMember("foo")).isTrue();
+    assertThat(new RuntimeType(noFullyQualifiedName).canHaveMember("bar")).isFalse();
+    assertThat(new RuntimeType(noFullyQualifiedName).declaresMember("foo")).isTrue();
+    assertThat(new RuntimeType(noFullyQualifiedName).resolveMember("foo")).contains(foo);
+  }
+
+  @Test
+  void mocks_should_have_and_declare_any_members() {
+    ClassSymbolImpl x = new ClassSymbolImpl("Mock", "unittest.mock.Mock");
+    assertThat(new RuntimeType(x).canHaveMember("foo")).isTrue();
+    assertThat(new RuntimeType(x).canHaveMember("bar")).isTrue();
+    assertThat(new RuntimeType(x).declaresMember("foo")).isTrue();
+    assertThat(new RuntimeType(x).declaresMember("bar")).isTrue();
+    assertThat(new RuntimeType(x).resolveMember("foo")).isEmpty();
+    assertThat(new RuntimeType(x).resolveMember("bar")).isEmpty();
+
+    ClassSymbolImpl x1 = new ClassSymbolImpl("MagicMock", "unittest.mock.MagicMock");
+    assertThat(new RuntimeType(x1).canHaveMember("bar")).isTrue();
+    assertThat(new RuntimeType(x1).declaresMember("foo")).isTrue();
+    assertThat(new RuntimeType(x1).resolveMember("foo")).isEmpty();
+
   }
 
   @Test
