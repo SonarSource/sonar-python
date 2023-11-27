@@ -129,7 +129,7 @@ public class ClearTextProtocolsCheck extends PythonSubscriptionCheck {
       .orElse(false);
   }
 
-  public static Stream<String> getClassFQNFromArgument(List<Argument> arguments) {
+  private static Stream<String> getClassFQNFromArgument(List<Argument> arguments) {
     return arguments.stream()
       .map(TreeUtils.toInstanceOfMapper(RegularArgument.class))
       .filter(Objects::nonNull)
