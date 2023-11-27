@@ -207,7 +207,8 @@ def python_web_server_compliant(ok_server):
         def run(self):
             super(self).serve_forever()  # Compliant
 
-    HTTPServer.server_bind(self)
+        def server_bind(self):
+            HTTPServer.server_bind(self)
 
     my_server = MyServer()
     my_server.serve_forever()
