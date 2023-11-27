@@ -18,3 +18,12 @@ from unittest.mock import Mock, MagicMock
 def mocks(mock: Mock, magic_mock:MagicMock):
     mock + 3 # Ok
     -magic_mock # Ok
+
+
+class MockExtention(Mock):
+    ...
+
+
+def custom_mock(extended_mock: MockExtention):
+  extended_mock + 3  # Ok
+  -extended_mock

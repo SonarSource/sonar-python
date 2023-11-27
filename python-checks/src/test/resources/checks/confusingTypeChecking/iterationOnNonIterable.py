@@ -47,7 +47,17 @@ from unittest.mock import Mock, MagicMock
 
 
 # We should not raise any issues on mocks as they could be monkey patched to fit any type
-def mocks_no_issue(mock: Mock,magic_mock:MagicMock):
+def mocks_no_issue(mock: Mock,magic_mock: MagicMock):
   a, *rest = mock
   iter(mock)
   for elem in magic_mock: ... # OK
+
+
+class MockExtention(Mock):
+    ...
+
+
+def custom_mock(extended_mock: MockExtention):
+  a, *rest = extended_mock
+  iter(extended_mock)
+  for elem in extended_mock: ... # OK

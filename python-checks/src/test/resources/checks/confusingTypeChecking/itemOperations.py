@@ -44,3 +44,13 @@ def mocks(mock:Mock, magic_mock: MagicMock):
     mock[42] = 42
     a = mock[42]
     magic_mock[42] = 42
+
+
+class MockExtention(Mock):
+    ...
+
+
+def custom_mock(extended_mock: MockExtention):
+  del extended_mock[42]
+  extended_mock[42] = 42
+  a = extended_mock[42]
