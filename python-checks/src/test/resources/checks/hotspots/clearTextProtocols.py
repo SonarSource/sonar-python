@@ -181,9 +181,39 @@ def python_web_server_compliant(ok_server):
     from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
     from http.server import HTTPServer as PythonServer
 
+    http_server = PythonServer(('0.0.0.0', 8080), SimpleHTTPRequestHandler)
+    http_server.server_bind()  # Compliant we do not raise here as the call to server bind was done already in the constructor
+
+    class MyThreadingServer(ThreadingHTTPServer):
+        def server_bind(self):  # Compliant
+            pass
+
+    ok_server.serve_forever()  # Compliant
+    ok_server.server_bind()
+
+    class HTTPServer():
+        def serve_forever(self):
+            pass
+
+        def server_bind(self):
+            pass
+
+    class MyServer(HTTPServer):
+        def run(self):
+            super(self).serve_forever()  # Compliant
+
+    HTTPServer.server_bind(self)
+
+    my_server = MyServer()
+    my_server.serve_forever()
+    my_server.server_bind()
+
+    my_server = HTTPServer()
+    my_server.serve_forever()
+    my_server.server_bind()
+
 def moved_first():
     import http.server, socket, socketserver
     class ThreadingServer(socketserver.ThreadingMixIn, http.server.HTTPServer):
         def server_bind(self):
-            self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
             http.server.HTTPServer.server_bind(self) # Noncompliant
