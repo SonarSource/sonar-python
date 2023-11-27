@@ -59,12 +59,15 @@ class TestRulesTest {
       .setTestDirs("tests");
     orchestrator.executeBuild(BUILD);
 
-    List<Issues.Issue> testRuleIssues = issues("python:S5905");
+    List<Issues.Issue> assertOnTupleIssues = issues("python:S5905");
+    List<Issues.Issue> dedicatedAssertionIssues = issues("python:S5906");
     List<Issues.Issue> mainRuleIssues = issues("python:S3923");
-    assertThat(testRuleIssues).hasSize(2);
+    assertThat(assertOnTupleIssues).hasSize(2);
+    assertThat(dedicatedAssertionIssues).hasSize(1);
     assertThat(mainRuleIssues).hasSize(1);
-    assertIssue(testRuleIssues.get(0), 2, "Fix this assertion on a tuple literal.", "test-rules:src/some_code.py");
-    assertIssue(testRuleIssues.get(1), 3, "Fix this assertion on a tuple literal.", "test-rules:tests/test_my_code.py");
+    assertIssue(assertOnTupleIssues.get(0), 2, "Fix this assertion on a tuple literal.", "test-rules:src/some_code.py");
+    assertIssue(assertOnTupleIssues.get(1), 3, "Fix this assertion on a tuple literal.", "test-rules:tests/test_my_code.py");
+    assertIssue(dedicatedAssertionIssues.get(0), 14, "Consider using \"assertEqual\" instead.", "test-rules:tests/test_my_code.py");
     assertIssue(mainRuleIssues.get(0), 3, "Remove this if statement or edit its code blocks so that they're not all the same.", "test-rules:src/some_code.py");
   }
 

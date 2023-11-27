@@ -341,7 +341,7 @@ class SonarQubePythonIndexerTest {
   }
 
   @Test
-  void test_test_files_not_using_cache() throws IOException, NoSuchAlgorithmException {
+  void test_test_files_use_cache() throws IOException, NoSuchAlgorithmException {
     file1 = createInputFile(baseDir, "main.py", InputFile.Status.SAME, InputFile.Type.TEST);
     file2 = createInputFile(baseDir, "mod.py", InputFile.Status.CHANGED, InputFile.Type.TEST);
     readCache.put(fileContentHashCacheKey("moduleKey:main.py"), inputFileContentHash(file1));
@@ -351,11 +351,11 @@ class SonarQubePythonIndexerTest {
     pythonIndexer = new SonarQubePythonIndexer(inputFiles, cacheContext, context);
     pythonIndexer.buildOnce(context);
 
-    assertThat(pythonIndexer.canBePartiallyScannedWithoutParsing(file1)).isTrue();
+    assertThat(pythonIndexer.canBePartiallyScannedWithoutParsing(file1)).isFalse();
     assertThat(pythonIndexer.canBePartiallyScannedWithoutParsing(file2)).isFalse();
     assertThat(logTester.logs(Level.INFO))
-      .contains("Fully optimized analysis can be performed for 1 out of 2 files.")
-      .contains("Partially optimized analysis can be performed for 1 out of 2 files.");
+      .contains("Fully optimized analysis can be performed for 0 out of 2 files.")
+      .contains("Partially optimized analysis can be performed for 0 out of 2 files.");
   }
 
   @Test

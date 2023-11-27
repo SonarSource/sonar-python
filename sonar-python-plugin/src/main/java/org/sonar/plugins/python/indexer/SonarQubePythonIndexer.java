@@ -57,35 +57,27 @@ public class SonarQubePythonIndexer extends PythonIndexer {
   private final Caching caching;
   private final Set<InputFile> fullySkippableFiles = new HashSet<>();
   private final Set<InputFile> partiallySkippableFiles = new HashSet<>();
-  private final List<InputFile> mainFiles = new ArrayList<>();
-  private final List<InputFile> testFiles = new ArrayList<>();
+  private final List<InputFile> inputFiles = new ArrayList<>();
   private final Map<InputFile, String> inputFileToFQN = new HashMap<>();
 
   public SonarQubePythonIndexer(List<InputFile> inputFiles, CacheContext cacheContext, SensorContext context) {
     this.projectBaseDirAbsolutePath = context.fileSystem().baseDir().getAbsolutePath();
     this.caching = new Caching(cacheContext, getCacheVersion(context));
     inputFiles.forEach(f -> {
-      if (f.type().equals(InputFile.Type.MAIN)) {
-        mainFiles.add(f);
-        inputFileToFQN.put(f, SymbolUtils.fullyQualifiedModuleName(packageName(f), f.filename()));
-      } else {
-        testFiles.add(f);
-      }
+      this.inputFiles.add(f);
+      inputFileToFQN.put(f, SymbolUtils.fullyQualifiedModuleName(packageName(f), f.filename()));
     });
   }
 
   @Override
   public void buildOnce(SensorContext context) {
-    LOG.debug("Input files for indexing: {}", mainFiles);
+    LOG.debug("Input files for indexing: {}", inputFiles);
     if (shouldOptimizeAnalysis(context)) {
       computeGlobalSymbolsUsingCache(context);
       return;
     }
     PerformanceMeasure.Duration duration = PerformanceMeasure.start("ProjectLevelSymbolTable");
-    computeGlobalSymbols(mainFiles, context);
-    if (caching.isCacheEnabled()) {
-      testFiles.forEach(this::writeContentHashToCache);
-    }
+    computeGlobalSymbols(inputFiles, context);
     duration.stop();
   }
 
@@ -106,7 +98,7 @@ public class SonarQubePythonIndexer extends PythonIndexer {
     // Deleted files are considered impactful to their dependents but will not be re-analyzed.
     List<InputFile> impactfulFiles = new ArrayList<>();
     List<String> impactfulModulesFQNs = new ArrayList<>(deletedModulesFQNs);
-    for (InputFile inputFile : mainFiles) {
+    for (InputFile inputFile : inputFiles) {
       String currFQN = inputFileToFQN.get(inputFile);
       boolean isUnimpacted = tryToUseCache(importsByModule, inputFile, currFQN);
       if (!isUnimpacted) {
@@ -119,22 +111,16 @@ public class SonarQubePythonIndexer extends PythonIndexer {
     }
     // Impacted modules are computed from both modified files and deleted ones.
     Set<String> impactedModulesFQN = DependencyGraph.from(importsByModule, allProjectFilesFQNs).impactedModules(impactfulModulesFQNs);
-    mainFiles.stream().filter(f -> !impactedModulesFQN.contains(inputFileToFQN.get(f))).forEach(fullySkippableFiles::add);
-    // No project level information is stored for test files. It is therefore impossible for a change in a test file to impact other files.
-    testFiles.stream().filter(this::fileIsUnchanged).forEach(f -> {
-      fullySkippableFiles.add(f);
-      partiallySkippableFiles.add(f);
-    });
+    inputFiles.stream().filter(f -> !impactedModulesFQN.contains(inputFileToFQN.get(f))).forEach(fullySkippableFiles::add);
     LOG.info(
       "Cached information of global symbols will be used for {} out of {} main files. Global symbols will be recomputed for the remaining files.",
-      mainFiles.size() - impactfulFiles.size(),
-      mainFiles.size()
+      inputFiles.size() - impactfulFiles.size(),
+      inputFiles.size()
     );
-    LOG.info("Fully optimized analysis can be performed for {} out of {} files.", fullySkippableFiles.size(), mainFiles.size() + testFiles.size());
-    LOG.info("Partially optimized analysis can be performed for {} out of {} files.", partiallySkippableFiles.size(), mainFiles.size() + testFiles.size());
+    LOG.info("Fully optimized analysis can be performed for {} out of {} files.", fullySkippableFiles.size(), inputFiles.size());
+    LOG.info("Partially optimized analysis can be performed for {} out of {} files.", partiallySkippableFiles.size(), inputFiles.size());
     // Although we need to analyze all impacted files, we only need to recompute global symbols for modified files (no cross-file dependencies in the project symbol table)
     computeGlobalSymbols(impactfulFiles, context);
-    testFiles.forEach(this::writeContentHashToCache);
   }
 
   /*

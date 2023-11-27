@@ -771,8 +771,11 @@ class PythonSensorTest {
       .build();
 
     InputFile inputFile = inputFile(FILE_TEST_FILE, Type.TEST, InputFile.Status.SAME);
+    byte[] serializedSymbolTable = toProtobufModuleDescriptor(Set.of(new VariableDescriptor("test_func", "test_file.test_func", null))).toByteArray();
     TestReadCache readCache = getValidReadCache();
     readCache.put(fileContentHashCacheKey(inputFile.key()), inputFileContentHash(inputFile));
+    readCache.put(importsMapCacheKey(inputFile.key()), String.join(";", Collections.emptyList()).getBytes(StandardCharsets.UTF_8));
+    readCache.put(projectSymbolTableCacheKey(inputFile.key()), serializedSymbolTable);
     TestWriteCache writeCache = new TestWriteCache();
     writeCache.bind(readCache);
 
