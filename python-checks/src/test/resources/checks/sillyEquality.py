@@ -82,3 +82,13 @@ def mocks():
     mock != 42
     mock = MagicMock()
     3 == mock # Ok
+
+
+    class ExtendedMock(MagicMock):
+        ...
+
+    def custom_mock():
+        extended_mock = ExtendedMock()
+        extended_mock == 3 # Ok
+        extended_mock != 42
+

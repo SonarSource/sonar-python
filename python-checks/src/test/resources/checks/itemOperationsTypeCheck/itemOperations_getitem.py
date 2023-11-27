@@ -210,3 +210,9 @@ def mocks():
     from unittest.mock import Mock
     mock = Mock()
     a = mock[42]
+
+    class ExtendedMock(Mock):
+      ...
+
+    def custom_mock():
+        a = ExtendedMock()[42]

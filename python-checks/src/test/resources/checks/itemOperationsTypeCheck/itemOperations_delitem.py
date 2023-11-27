@@ -173,3 +173,10 @@ def mocks():
     del mock[42]
     mock = MagicMock()
     del mock[0]
+
+ 
+    class ExtendedMock(MagicMock):
+        ...
+
+    def custom_mock():
+        del ExtendedMock()[42]

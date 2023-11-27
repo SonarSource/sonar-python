@@ -172,3 +172,11 @@ def mocks():
     mock[42] = 42
     mock = MagicMock()
     mock[0] = "foo"
+
+
+    class ExtendedMock(MagicMock):
+        ...
+
+    def custom_mock():
+        extended_mock = ExtendedMock()
+        extended_mock[42] = 42

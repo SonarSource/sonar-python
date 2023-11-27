@@ -95,8 +95,16 @@ def classes_with_decorators():
 
 # We should not raise any issues on mocks as they could be monkey patched to fit the comparison type
 def mocks():
-    from unittest.mock import Mock, MagicMock
-    mock = Mock()
-    mock < 3 # Ok
-    mock = MagicMock()
-    3 > mock # Ok
+  from unittest.mock import Mock, MagicMock
+  mock = Mock()
+  mock < 3 # Ok
+  mock = MagicMock()
+  3 > mock # Ok
+
+  class ExtendedMock(MagicMock):
+      ...
+
+  def custom_mock():
+    ExtendedMock() < 3 
+    extended_mock = ExtendedMock()
+    42 > extended_mock

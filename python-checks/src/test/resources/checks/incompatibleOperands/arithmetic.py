@@ -98,3 +98,11 @@ def mocks():
   myvar = -mock
   mock = MagicMock()
   mock += 1
+
+
+  class ExtendedMock(MagicMock):
+      ...
+
+  def custom_mock():
+    ExtendedMock() + 1
+    -ExtendedMock()
