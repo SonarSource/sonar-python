@@ -57,6 +57,9 @@ class RuntimeType implements InferredType {
 
   @Override
   public boolean canHaveMember(String memberName) {
+    if (MOCK_FQNS.stream().anyMatch(this::mustBeOrExtend)){
+      return true;  
+    }
     return getTypeClass().canHaveMember(memberName);
   }
 

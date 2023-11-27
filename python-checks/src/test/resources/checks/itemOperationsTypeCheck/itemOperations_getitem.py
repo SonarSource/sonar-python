@@ -204,3 +204,15 @@ from ctypes import cast
 def ctypes_cast(buf, sal):
   addrList = cast(buf, POINTER(sal))
   addrCount = addrList[0].iAddressCount # FN ref: SONARPY-1477
+
+# We should not raise any issues on mocks as they could be monkey patched to be anything
+def mocks():
+    from unittest.mock import Mock
+    mock = Mock()
+    a = mock[42]
+
+    class ExtendedMock(Mock):
+      ...
+
+    def custom_mock():
+        a = ExtendedMock()[42]

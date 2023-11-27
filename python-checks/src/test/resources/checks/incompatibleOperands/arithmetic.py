@@ -86,3 +86,23 @@ def builtin_compliant():
 
 def type_annotations():
   mode: "OpenBinaryMode" | "OpenTextMode"
+
+#################################################
+# Mocks could be monkey patched to possess any special methods
+# No issues should be raised on them
+#################################################
+def mocks():
+  from unittest.mock import Mock, MagicMock 
+  mock = Mock()
+  myvar = Mock() + 1
+  myvar = -mock
+  mock = MagicMock()
+  mock += 1
+
+
+  class ExtendedMock(MagicMock):
+      ...
+
+  def custom_mock():
+    ExtendedMock() + 1
+    -ExtendedMock()

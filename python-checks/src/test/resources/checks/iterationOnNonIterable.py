@@ -254,3 +254,25 @@ def enum_unresolved_type_hierarchy():
     second = 1
 
   for elem in MyEnumFoo: ... # OK
+
+
+# We should not raise any issues on mocks as they could be monkey patched to fit any type
+def mocks_no_issue():
+  from unittest.mock import Mock, MagicMock
+
+  mock = Mock()
+  a, *rest = mock
+  iter(mock)
+  mock = MagicMock()
+  for elem in mock: ... # OK
+
+ 
+
+  class ExtendedMock(MagicMock):
+    ...
+
+  def custom_mock():
+    extended_mock = ExtendedMock()
+    a, *rest = extended_mock
+    iter(extended_mock)
+    for elem in extended_mock: ... # OK

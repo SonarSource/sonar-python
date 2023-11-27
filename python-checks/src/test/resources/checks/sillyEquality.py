@@ -5,6 +5,7 @@ import pwd
 from emoji import emojize
 import platform
 
+
 class A:
     pass
 
@@ -70,4 +71,24 @@ def stdlib():
     if platform.architecture() == '32bit': ... # Noncompliant
 
 def third_party():
-  if emojize("Python is :thumbs_up:") == 42: ... # Noncompliant
+    if emojize("Python is :thumbs_up:") == 42: ... # Noncompliant
+
+
+# We should not raise any issues on mocks as they could be monkey patched to fit the comparison type
+def mocks():
+    from unittest.mock import Mock, MagicMock
+    mock = Mock()
+    mock == 3 # Ok
+    mock != 42
+    mock = MagicMock()
+    3 == mock # Ok
+
+
+    class ExtendedMock(MagicMock):
+        ...
+
+    def custom_mock():
+        extended_mock = ExtendedMock()
+        extended_mock == 3 # Ok
+        extended_mock != 42
+

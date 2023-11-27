@@ -81,7 +81,7 @@ public class DeclaredType implements InferredType {
 
   @Override
   public boolean declaresMember(String memberName) {
-    if (hasUnresolvedHierarchy()) {
+    if (hasUnresolvedHierarchy() || MOCK_FQNS.stream().anyMatch(this::mustBeOrExtend)) {
       return true;
     }
     return alternativeTypeSymbols().stream().anyMatch(symbol -> !symbol.is(CLASS) || ((ClassSymbol) symbol).canHaveMember(memberName));

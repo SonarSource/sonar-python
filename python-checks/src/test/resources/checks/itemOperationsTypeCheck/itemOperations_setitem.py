@@ -163,3 +163,20 @@ def import_path():
     from importlib import import_module
 
     import_module('importlib').__path__[0] = "test"  # OK ref: SONARPY-1339
+
+
+# We should not raise any issues on mocks as they could be monkey patched to be anything
+def mocks():
+    from unittest.mock import Mock, MagicMock
+    mock = Mock()
+    mock[42] = 42
+    mock = MagicMock()
+    mock[0] = "foo"
+
+
+    class ExtendedMock(MagicMock):
+        ...
+
+    def custom_mock():
+        extended_mock = ExtendedMock()
+        extended_mock[42] = 42

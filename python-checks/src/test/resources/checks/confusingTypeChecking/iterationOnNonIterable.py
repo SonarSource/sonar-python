@@ -42,3 +42,22 @@ def union_types(param1: Union[int, float], param2: Union["unknown", "unknown2"])
 def async_iterable(param1: MyAsyncIterable):
   for x in param1:  # Noncompliant {{Add "async" before "for"; Previous type checks suggest that "param1" has type "MyAsyncIterable" and is an async generator.}}
     ...
+
+from unittest.mock import Mock, MagicMock
+
+
+# We should not raise any issues on mocks as they could be monkey patched to fit any type
+def mocks_no_issue(mock: Mock,magic_mock: MagicMock):
+  a, *rest = mock
+  iter(mock)
+  for elem in magic_mock: ... # OK
+
+
+class MockExtention(Mock):
+    ...
+
+
+def custom_mock(extended_mock: MockExtention):
+  a, *rest = extended_mock
+  iter(extended_mock)
+  for elem in extended_mock: ... # OK
