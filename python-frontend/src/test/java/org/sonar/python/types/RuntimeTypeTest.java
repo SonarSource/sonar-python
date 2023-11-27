@@ -107,6 +107,17 @@ class RuntimeTypeTest {
     assertThat(new RuntimeType(x1).declaresMember("foo")).isTrue();
     assertThat(new RuntimeType(x1).resolveMember("foo")).isEmpty();
 
+    ClassSymbolImpl extendedMock = new ClassSymbolImpl("x1", "x1");
+    extendedMock.addSuperClass(x);
+    assertThat(new RuntimeType(extendedMock).canHaveMember("foo")).isTrue();
+    assertThat(new RuntimeType(extendedMock).canHaveMember("bar")).isTrue();
+    assertThat(new RuntimeType(extendedMock).canHaveMember("foobar")).isTrue();
+    assertThat(new RuntimeType(extendedMock).declaresMember("foo")).isTrue();
+    assertThat(new RuntimeType(extendedMock).declaresMember("bar")).isTrue();
+    assertThat(new RuntimeType(extendedMock).declaresMember("foobar")).isTrue();
+    assertThat(new RuntimeType(extendedMock).resolveMember("foo")).isEmpty();
+    assertThat(new RuntimeType(extendedMock).resolveMember("bar")).isEmpty();
+    assertThat(new RuntimeType(extendedMock).resolveMember("foobar")).isEmpty();
   }
 
   @Test

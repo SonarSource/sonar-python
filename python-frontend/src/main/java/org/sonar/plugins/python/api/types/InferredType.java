@@ -30,7 +30,7 @@ import org.sonar.plugins.python.api.symbols.Symbol;
 @Beta
 public interface InferredType {
 
-  Set<String> EXCLUDED_FQNS = Set.of("unittest.mock.Mock", "unittest.mock.MagicMock");
+  Set<String> MOCK_FQNS = Set.of("unittest.mock.Mock", "unittest.mock.MagicMock");
 
   @Beta
   boolean isIdentityComparableWith(InferredType other);

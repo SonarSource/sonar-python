@@ -132,6 +132,19 @@ class DeclaredTypeTest {
     assertThat(declaredTypeMagicMock.declaresMember("foo")).isTrue();
     assertThat(declaredTypeMagicMock.resolveMember("foo")).isEmpty();
     assertThat(declaredTypeMagicMock.resolveMember("bar")).isEmpty();
+
+    ClassSymbolImpl extendedMock = new ClassSymbolImpl("Extended", "Extended");
+    extendedMock.addSuperClass(x);
+    DeclaredType extendedType = new DeclaredType(extendedMock);
+    assertThat(extendedType.canHaveMember("foo")).isTrue();
+    assertThat(extendedType.canHaveMember("bar")).isTrue();
+    assertThat(extendedType.canHaveMember("foobar")).isTrue();
+    assertThat(extendedType.declaresMember("foo")).isTrue();
+    assertThat(extendedType.declaresMember("bar")).isTrue();
+    assertThat(extendedType.declaresMember("foobar")).isTrue();
+    assertThat(extendedType.resolveMember("foo")).isEmpty();
+    assertThat(extendedType.resolveMember("bar")).isEmpty();
+    assertThat(extendedType.resolveMember("foobar")).isEmpty();
   }
 
   @Test
