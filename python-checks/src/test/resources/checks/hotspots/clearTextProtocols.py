@@ -175,7 +175,8 @@ def python_web_server_noncompliant():
     my_threading_server = MyThreadingServer(('0.0.0.0', 8080), SimpleHTTPRequestHandler)
     my_threading_server.serve_forever()  # Noncompliant
 
-    class ThreadingServer(socketserver.ThreadingMixIn, HTTPServer):
+    import http.server
+    class ThreadingServer(socketserver.ThreadingMixIn, http.server.HTTPServer):
         def server_bind(self):
             HTTPServer.server_bind(self) # Noncompliant
 
