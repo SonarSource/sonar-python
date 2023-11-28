@@ -32,6 +32,7 @@ import org.sonar.plugins.python.api.tree.StringElement;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tuple;
+import org.sonar.python.checks.utils.CheckUtils;
 
 public abstract class AbstractDuplicateKeyCheck extends PythonSubscriptionCheck {
 

@@ -43,6 +43,7 @@ import org.sonar.plugins.python.api.tree.StringElement;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.checks.utils.Expressions;
 
 @Rule(key = "S3457")
 public class StringFormatCorrectnessCheck extends AbstractStringFormatCheck {

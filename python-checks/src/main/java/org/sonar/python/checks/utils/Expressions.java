@@ -17,7 +17,7 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.checks;
+package org.sonar.python.checks.utils;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -189,7 +189,7 @@ public class Expressions {
    * @return unescaped value
    */
   // Visible for testing
-  static String unescapeString(String value, boolean isBytesLiteral) {
+  public static String unescapeString(String value, boolean isBytesLiteral) {
     if (value.indexOf('\\') == -1) {
       return value;
     }

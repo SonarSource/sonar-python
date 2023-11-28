@@ -43,8 +43,8 @@ import static org.sonar.plugins.python.api.tree.Tree.Kind.NAME;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.NOT;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.OR;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.QUALIFIED_EXPR;
-import static org.sonar.python.checks.CheckUtils.isConstant;
-import static org.sonar.python.checks.CheckUtils.isImmutableConstant;
+import static org.sonar.python.checks.utils.CheckUtils.isConstant;
+import static org.sonar.python.checks.utils.CheckUtils.isImmutableConstant;
 
 @Rule(key = "S5797")
 public class ConstantConditionCheck extends PythonVisitorCheck {

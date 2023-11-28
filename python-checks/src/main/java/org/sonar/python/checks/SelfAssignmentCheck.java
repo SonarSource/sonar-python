@@ -38,6 +38,7 @@ import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
+import org.sonar.python.checks.utils.CheckUtils;
 import org.sonar.python.semantic.BuiltinSymbols;
 
 @Rule(key = SelfAssignmentCheck.CHECK_KEY)

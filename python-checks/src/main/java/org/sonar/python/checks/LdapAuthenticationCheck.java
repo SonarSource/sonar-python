@@ -34,6 +34,7 @@ import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.types.BuiltinTypes;
+import org.sonar.python.checks.utils.Expressions;
 
 import static org.sonar.plugins.python.api.tree.Tree.Kind.CALL_EXPR;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.NAME;

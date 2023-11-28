@@ -50,6 +50,7 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.UnpackingExpression;
 import org.sonar.python.TokenLocation;
 import org.sonar.python.api.PythonPunctuator;
+import org.sonar.python.checks.utils.Expressions;
 import org.sonar.python.semantic.FunctionSymbolImpl;
 import org.sonar.python.semantic.SymbolUtils;
 import org.sonar.python.tree.TreeUtils;

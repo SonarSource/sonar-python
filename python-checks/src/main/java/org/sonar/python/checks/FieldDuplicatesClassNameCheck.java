@@ -27,6 +27,7 @@ import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
+import org.sonar.python.checks.utils.CheckUtils;
 
 @Rule(key = "S1700")
 public class FieldDuplicatesClassNameCheck extends PythonSubscriptionCheck {

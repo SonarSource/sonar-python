@@ -37,6 +37,7 @@ import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.SubscriptionExpression;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.checks.utils.Expressions;
 
 @Rule(key = "S6792")
 public class GenericClassTypeParameterCheck extends PythonSubscriptionCheck {

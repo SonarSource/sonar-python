@@ -35,6 +35,7 @@ import org.sonar.plugins.python.api.tree.StatementList;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
 import org.sonar.plugins.python.api.quickfix.PythonTextEdit;
+import org.sonar.python.checks.utils.CheckUtils;
 import org.sonar.python.quickfix.TextEditUtils;
 import org.sonar.python.tree.NameImpl;
 import org.sonar.python.tree.TreeUtils;

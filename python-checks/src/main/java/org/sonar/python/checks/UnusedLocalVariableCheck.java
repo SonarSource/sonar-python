@@ -41,6 +41,7 @@ import org.sonar.plugins.python.api.tree.ForStatement;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
+import org.sonar.python.checks.utils.CheckUtils;
 import org.sonar.python.checks.utils.ImportedNamesCollector;
 import org.sonar.python.checks.utils.StringLiteralValuesCollector;
 import org.sonar.python.quickfix.TextEditUtils;

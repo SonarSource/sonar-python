@@ -29,7 +29,7 @@ import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.plugins.python.api.types.BuiltinTypes;
 import org.sonar.plugins.python.api.types.InferredType;
 
-import static org.sonar.python.checks.CheckUtils.isNone;
+import static org.sonar.python.checks.utils.CheckUtils.isNone;
 
 @Rule(key = "S5727")
 public class ComparisonToNoneCheck extends PythonSubscriptionCheck {

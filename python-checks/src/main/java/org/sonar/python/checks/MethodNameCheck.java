@@ -22,8 +22,8 @@ package org.sonar.python.checks;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 
-import static org.sonar.python.checks.CheckUtils.classHasInheritance;
-import static org.sonar.python.checks.CheckUtils.getParentClassDef;
+import static org.sonar.python.checks.utils.CheckUtils.classHasInheritance;
+import static org.sonar.python.checks.utils.CheckUtils.getParentClassDef;
 
 @Rule(key = MethodNameCheck.CHECK_KEY)
 public class MethodNameCheck extends AbstractFunctionNameCheck {

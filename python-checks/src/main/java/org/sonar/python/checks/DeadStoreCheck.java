@@ -45,12 +45,14 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.UnaryExpression;
 import org.sonar.python.cfg.fixpoint.LiveVariablesAnalysis;
 import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
+import org.sonar.python.checks.utils.DeadStoreUtils;
+import org.sonar.python.checks.utils.Expressions;
 import org.sonar.python.checks.utils.ImportedNamesCollector;
 import org.sonar.python.checks.utils.StringLiteralValuesCollector;
 import org.sonar.python.quickfix.TextEditUtils;
 import org.sonar.python.tree.TreeUtils;
 
-import static org.sonar.python.checks.DeadStoreUtils.isUsedInSubFunction;
+import static org.sonar.python.checks.utils.DeadStoreUtils.isUsedInSubFunction;
 
 @Rule(key = "S1854")
 public class DeadStoreCheck extends PythonSubscriptionCheck {

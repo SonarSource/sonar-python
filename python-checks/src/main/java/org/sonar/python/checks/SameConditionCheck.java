@@ -31,6 +31,7 @@ import org.sonar.plugins.python.api.tree.IfStatement;
 import org.sonar.plugins.python.api.tree.StatementList;
 import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.checks.utils.CheckUtils;
 
 @Rule(key = SameConditionCheck.CHECK_KEY)
 public class SameConditionCheck extends PythonSubscriptionCheck {

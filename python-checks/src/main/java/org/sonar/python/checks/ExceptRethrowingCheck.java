@@ -27,8 +27,9 @@ import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.RaiseStatement;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TryStatement;
+import org.sonar.python.checks.utils.CheckUtils;
 
-import static org.sonar.python.checks.Expressions.removeParentheses;
+import static org.sonar.python.checks.utils.Expressions.removeParentheses;
 
 @Rule(key = "S2737")
 public class ExceptRethrowingCheck extends PythonSubscriptionCheck {

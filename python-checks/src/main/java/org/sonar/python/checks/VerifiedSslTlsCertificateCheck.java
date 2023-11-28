@@ -54,6 +54,7 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.UnpackingExpression;
 import org.sonar.plugins.python.api.tree.WithItem;
 import org.sonar.plugins.python.api.tree.WithStatement;
+import org.sonar.python.checks.utils.Expressions;
 import org.sonar.python.tree.RegularArgumentImpl;
 import org.sonar.python.tree.TreeUtils;
 

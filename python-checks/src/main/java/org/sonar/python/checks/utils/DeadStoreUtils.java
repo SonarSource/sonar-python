@@ -17,7 +17,7 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.checks;
+package org.sonar.python.checks.utils;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -42,7 +42,7 @@ public class DeadStoreUtils {
   /**
    * Bottom-up approach, keeping track of which variables will be read by successor elements.
    */
-  static List<UnnecessaryAssignment> findUnnecessaryAssignments(CfgBlock block, LiveVariables blockLiveVariables, FunctionDef functionDef) {
+  public static List<UnnecessaryAssignment> findUnnecessaryAssignments(CfgBlock block, LiveVariables blockLiveVariables, FunctionDef functionDef) {
     List<UnnecessaryAssignment> unnecessaryAssignments = new ArrayList<>();
     Set<Symbol> willBeRead = new HashSet<>(blockLiveVariables.getOut());
     ListIterator<Tree> elementsReverseIterator = block.elements().listIterator(block.elements().size());
@@ -62,18 +62,18 @@ public class DeadStoreUtils {
     return unnecessaryAssignments;
   }
 
-  static boolean isParameter(Tree element) {
+  public static boolean isParameter(Tree element) {
     return element.is(Tree.Kind.PARAMETER) || TreeUtils.firstAncestorOfKind(element, Tree.Kind.PARAMETER) != null;
   }
 
-  static boolean isUsedInSubFunction(Symbol symbol, FunctionDef functionDef) {
+  public static boolean isUsedInSubFunction(Symbol symbol, FunctionDef functionDef) {
     return symbol.usages().stream()
       .anyMatch(usage -> TreeUtils.firstAncestorOfKind(usage.tree(), Tree.Kind.FUNCDEF, Tree.Kind.LAMBDA) != functionDef);
   }
 
-  static class UnnecessaryAssignment {
-    final Symbol symbol;
-    final Tree element;
+  public static class UnnecessaryAssignment {
+    public final Symbol symbol;
+    public final Tree element;
 
     private UnnecessaryAssignment(Symbol symbol, Tree element) {
       this.symbol = symbol;

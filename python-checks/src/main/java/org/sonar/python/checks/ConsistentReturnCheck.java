@@ -32,6 +32,7 @@ import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.plugins.python.api.tree.WhileStatement;
+import org.sonar.python.checks.utils.Expressions;
 
 @Rule(key = "S3801")
 public class ConsistentReturnCheck extends PythonSubscriptionCheck {

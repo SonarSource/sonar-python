@@ -30,10 +30,11 @@ import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.cfg.CfgUtils;
 import org.sonar.python.cfg.fixpoint.LiveVariablesAnalysis;
+import org.sonar.python.checks.utils.DeadStoreUtils;
 import org.sonar.python.tree.TreeUtils;
 
-import static org.sonar.python.checks.DeadStoreUtils.isParameter;
-import static org.sonar.python.checks.DeadStoreUtils.isUsedInSubFunction;
+import static org.sonar.python.checks.utils.DeadStoreUtils.isParameter;
+import static org.sonar.python.checks.utils.DeadStoreUtils.isUsedInSubFunction;
 
 @Rule(key = "S1226")
 public class IgnoredParameterCheck extends PythonSubscriptionCheck {
