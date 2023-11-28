@@ -45,6 +45,8 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.UnaryExpression;
 import org.sonar.python.cfg.fixpoint.LiveVariablesAnalysis;
 import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
+import org.sonar.python.checks.utils.ImportedNamesCollector;
+import org.sonar.python.checks.utils.StringLiteralValuesCollector;
 import org.sonar.python.quickfix.TextEditUtils;
 import org.sonar.python.tree.TreeUtils;
 
@@ -58,8 +60,11 @@ public class DeadStoreCheck extends PythonSubscriptionCheck {
   private static final String SECONDARY_MESSAGE_TEMPLATE = "'%s' is reassigned here.";
   public static final String QUICK_FIX_MESSAGE = "Remove the unused assignment";
 
+  private boolean isTemplateVariablesAccessEnabled = false;
+
   @Override
   public void initialize(Context context) {
+    context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, this::checkTemplateVariablesAccessEnabled);
     context.registerSyntaxNodeConsumer(Tree.Kind.FUNCDEF, ctx -> {
       FunctionDef functionDef = (FunctionDef) ctx.syntaxNode();
       if (TreeUtils.hasDescendant(functionDef, tree -> tree.is(Tree.Kind.TRY_STMT))) {
@@ -74,17 +79,30 @@ public class DeadStoreCheck extends PythonSubscriptionCheck {
     });
   }
 
+  private void checkTemplateVariablesAccessEnabled(SubscriptionContext ctx) {
+    var importedNamesCollector = new ImportedNamesCollector();
+    importedNamesCollector.collect(ctx.syntaxNode());
+    isTemplateVariablesAccessEnabled = importedNamesCollector.anyMatches("pandas"::equals);
+  }
+
   /**
    * Bottom-up approach, keeping track of which variables will be read by successor elements.
    */
-  private static void verifyBlock(SubscriptionContext ctx, CfgBlock block, LiveVariablesAnalysis.LiveVariables blockLiveVariables,
+  private void verifyBlock(SubscriptionContext ctx, CfgBlock block, LiveVariablesAnalysis.LiveVariables blockLiveVariables,
     Set<Symbol> readSymbols, FunctionDef functionDef) {
 
+    var stringLiteralValuesCollector = new StringLiteralValuesCollector();
+    if (isTemplateVariablesAccessEnabled) {
+      stringLiteralValuesCollector.collect(functionDef);
+    } else {
+      stringLiteralValuesCollector.clear();
+    }
     DeadStoreUtils.findUnnecessaryAssignments(block, blockLiveVariables, functionDef)
       .stream()
       // symbols should have at least one read usage (otherwise will be reported by S1481)
       .filter(unnecessaryAssignment -> readSymbols.contains(unnecessaryAssignment.symbol))
-      .filter((unnecessaryAssignment -> !isException(unnecessaryAssignment.symbol, unnecessaryAssignment.element, functionDef)))
+      .filter((unnecessaryAssignment -> !isException(unnecessaryAssignment.symbol, unnecessaryAssignment.element, functionDef,
+        stringLiteralValuesCollector)))
       .forEach(unnecessaryAssignment -> raiseIssue(ctx, unnecessaryAssignment));
   }
 
@@ -162,7 +180,8 @@ public class DeadStoreCheck extends PythonSubscriptionCheck {
       ((AssignmentStatement) element).lhsExpressions().stream().anyMatch(lhsExpression -> lhsExpression.expressions().size() > 1);
   }
 
-  private static boolean isException(Symbol symbol, Tree element, FunctionDef functionDef) {
+  private static boolean isException(Symbol symbol, Tree element, FunctionDef functionDef,
+    StringLiteralValuesCollector stringLiteralValuesCollector) {
     return isUnderscoreVariable(symbol)
       || isAssignmentToFalsyOrTrueLiteral(element)
       || isFunctionDeclarationSymbol(symbol)
@@ -171,7 +190,12 @@ public class DeadStoreCheck extends PythonSubscriptionCheck {
       || isUsedInSubFunction(symbol, functionDef)
       || DeadStoreUtils.isParameter(element)
       || isMultipleAssignement(element)
-      || isAnnotatedAssignmentWithoutRhs(element);
+      || isAnnotatedAssignmentWithoutRhs(element)
+      || isVariableAccessedInStringTemplate(symbol, stringLiteralValuesCollector);
+  }
+
+  private static boolean isVariableAccessedInStringTemplate(Symbol symbol, StringLiteralValuesCollector stringLiteralsCollector) {
+    return stringLiteralsCollector.anyMatches(s -> s.matches(".*@" + symbol.name() + "((\\s+.*)|$)"));
   }
 
   private static boolean isAnnotatedAssignmentWithoutRhs(Tree element) {

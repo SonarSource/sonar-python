@@ -41,6 +41,8 @@ import org.sonar.plugins.python.api.tree.ForStatement;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
+import org.sonar.python.checks.utils.ImportedNamesCollector;
+import org.sonar.python.checks.utils.StringLiteralValuesCollector;
 import org.sonar.python.quickfix.TextEditUtils;
 import org.sonar.python.tree.TreeUtils;
 
@@ -60,10 +62,12 @@ public class UnusedLocalVariableCheck extends PythonSubscriptionCheck {
     defaultValue = DEFAULT)
   public String format = DEFAULT;
   private Pattern pattern;
+  private boolean isTemplateVariablesAccessEnabled = false;
 
   @Override
   public void initialize(Context context) {
     pattern = Pattern.compile(format);
+    context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, this::checkTemplateVariablesAccessEnabled);
     context.registerSyntaxNodeConsumer(Kind.FUNCDEF, ctx -> checkLocalVars(ctx, ctx.syntaxNode(), ((FunctionDef) ctx.syntaxNode()).localVariables()));
     context.registerSyntaxNodeConsumer(Kind.DICT_COMPREHENSION, ctx -> checkLocalVars(ctx, ctx.syntaxNode(), ((DictCompExpression) ctx.syntaxNode()).localVariables()));
     context.registerSyntaxNodeConsumer(Kind.LIST_COMPREHENSION, ctx -> checkLocalVars(ctx, ctx.syntaxNode(), ((ComprehensionExpression) ctx.syntaxNode()).localVariables()));
@@ -71,7 +75,18 @@ public class UnusedLocalVariableCheck extends PythonSubscriptionCheck {
     context.registerSyntaxNodeConsumer(Kind.GENERATOR_EXPR, ctx -> checkLocalVars(ctx, ctx.syntaxNode(), ((ComprehensionExpression) ctx.syntaxNode()).localVariables()));
   }
 
+  private void checkTemplateVariablesAccessEnabled(SubscriptionContext ctx) {
+    var importedNamesCollector = new ImportedNamesCollector();
+    importedNamesCollector.collect(ctx.syntaxNode());
+    isTemplateVariablesAccessEnabled = importedNamesCollector.anyMatches("pandas"::equals);
+  }
+
   private void checkLocalVars(SubscriptionContext ctx, Tree functionTree, Set<Symbol> symbols) {
+    var stringLiteralValuesCollector = new StringLiteralValuesCollector();
+    if (isTemplateVariablesAccessEnabled) {
+      stringLiteralValuesCollector.collect(functionTree);
+    }
+
     // https://docs.python.org/3/library/functions.html#locals
     if (CheckUtils.containsCallToLocalsFunction(functionTree)) {
       return;
@@ -79,6 +94,7 @@ public class UnusedLocalVariableCheck extends PythonSubscriptionCheck {
     symbols.stream()
       .filter(s -> !pattern.matcher(s.name()).matches())
       .filter(UnusedLocalVariableCheck::hasOnlyBindingUsages)
+      .filter(symbol -> !isVariableAccessedInStringTemplate(symbol, stringLiteralValuesCollector))
       .forEach(symbol -> {
         var usages = symbol.usages().stream()
           .filter(usage -> usage.tree().parent() == null || !usage.tree().parent().is(Kind.PARAMETER))
@@ -95,6 +111,10 @@ public class UnusedLocalVariableCheck extends PythonSubscriptionCheck {
             .forEach(usage -> issue.secondary(usage.tree(), String.format(SECONDARY_MESSAGE, symbol.name())));
         }
       });
+  }
+
+  private static boolean isVariableAccessedInStringTemplate(Symbol symbol, StringLiteralValuesCollector stringLiteralsCollector) {
+    return stringLiteralsCollector.anyMatches(s -> s.matches(".*@" + symbol.name() + "((\\s+.*)|$)"));
   }
 
   public PreciseIssue createIssue(SubscriptionContext ctx, Symbol symbol, Usage usage) {
