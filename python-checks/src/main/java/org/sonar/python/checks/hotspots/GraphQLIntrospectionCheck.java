@@ -27,11 +27,13 @@ import java.util.stream.Stream;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
+import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.ExpressionList;
+import org.sonar.plugins.python.api.tree.HasSymbol;
 import org.sonar.plugins.python.api.tree.ListLiteral;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
@@ -47,8 +49,10 @@ import org.sonar.python.tree.TreeUtils;
 public class GraphQLIntrospectionCheck extends PythonSubscriptionCheck {
 
   private static final Set<String> GRAPHQL_VIEWS_FQNS = Set.of(
-    "flask_graphql.GraphQLView.as_view",
-    "graphql_server.flask.GraphQLView.as_view");
+    "flask_graphql.GraphQLView",
+    "graphql_server.flask.GraphQLView");
+
+  private static final String AS_VIEW_CALLEE_NAME = "as_view";
 
   private static final Set<String> SAFE_VALIDATION_RULE_FQNS = Set.of(
     "graphene.validation.DisableIntrospection",
@@ -63,12 +67,36 @@ public class GraphQLIntrospectionCheck extends PythonSubscriptionCheck {
 
   private static void checkGraphQLIntrospection(SubscriptionContext ctx) {
     CallExpression callExpression = (CallExpression) ctx.syntaxNode();
-    Optional.ofNullable(callExpression.calleeSymbol())
-      .map(Symbol::fullyQualifiedName)
-      .filter(GRAPHQL_VIEWS_FQNS::contains)
+    Optional.of(callExpression)
+      .map(CallExpression::callee)
+      .flatMap(TreeUtils.toOptionalInstanceOfMapper(QualifiedExpression.class))
+      .filter(GraphQLIntrospectionCheck::isCallToAsView)
+      .map(QualifiedExpression::qualifier)
+      .filter(HasSymbol.class::isInstance)
+      .map(HasSymbol.class::cast)
+      .map(HasSymbol::symbol)
+      .filter(GraphQLIntrospectionCheck::isOrExtendsRelevantFqn)
       .filter(fqn -> !hasSafeMiddlewares(callExpression.arguments()))
       .filter(fqn -> !hasSafeValidationRules(callExpression.arguments()))
       .ifPresent(fqn -> ctx.addIssue(callExpression.callee(), MESSAGE));
+  }
+
+  private static boolean isOrExtendsRelevantFqn(Symbol symbol) {
+    if (symbol.is(Symbol.Kind.CLASS)) {
+      return GRAPHQL_VIEWS_FQNS.stream().anyMatch(((ClassSymbol) symbol)::isOrExtends);
+    }
+    return Optional.of(symbol)
+      .map(Symbol::fullyQualifiedName)
+      .filter(GRAPHQL_VIEWS_FQNS::contains)
+      .isPresent();
+  }
+
+  private static boolean isCallToAsView(QualifiedExpression qualifiedExpression) {
+    return Optional.of(qualifiedExpression)
+      .map(QualifiedExpression::name)
+      .map(Name::name)
+      .filter(AS_VIEW_CALLEE_NAME::equals)
+      .isPresent();
   }
 
   private static boolean hasSafeMiddlewares(List<Argument> arguments) {
