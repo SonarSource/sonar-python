@@ -29,7 +29,6 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
-
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
@@ -104,7 +103,8 @@ public class ClearTextProtocolsCheck extends PythonSubscriptionCheck {
     CallExpression callExpression = (CallExpression) ctx.syntaxNode();
     Optional.ofNullable(callExpression.calleeSymbol())
       .map(Symbol::fullyQualifiedName)
-      .filter(fqn -> SENSITIVE_HTTP_SERVER_BIND_FQN.equals(fqn) && isParentClassExtendingSensitiveClass(callExpression))
+      .filter(SENSITIVE_HTTP_SERVER_BIND_FQN::equals)
+      .filter(fqn -> isParentClassExtendingSensitiveClass(callExpression))
       .ifPresent(fqn -> ctx.addIssue(callExpression, message("http")));
   }
 
@@ -129,14 +129,14 @@ public class ClearTextProtocolsCheck extends PythonSubscriptionCheck {
       .orElse(false);
   }
 
-  public static Stream<String> getClassFQNFromArgument(List<Argument> arguments) {
+  private static Stream<String> getClassFQNFromArgument(List<Argument> arguments) {
     return arguments.stream()
       .map(TreeUtils.toInstanceOfMapper(RegularArgument.class))
       .filter(Objects::nonNull)
       .map(RegularArgument::expression)
-      .map(TreeUtils.toInstanceOfMapper(Name.class))
-      .filter(Objects::nonNull)
-      .map(Name::symbol)
+      .filter(HasSymbol.class::isInstance)
+      .map(HasSymbol.class::cast)
+      .map(HasSymbol::symbol)
       .filter(Objects::nonNull)
       .map(Symbol::fullyQualifiedName);
   }

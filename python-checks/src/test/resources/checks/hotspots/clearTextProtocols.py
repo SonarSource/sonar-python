@@ -145,7 +145,7 @@ def start_tls(x):
 
 
 def python_web_server_noncompliant():
-    from http.server import SimpleHTTPRequestHandler, HTTPServer, ThreadingHTTPServer
+    from http.server import SimpleHTTPRequestHandler, HTTPServer, ThreadingHTTPServer, socketserver
 
     http_server = HTTPServer(('0.0.0.0', 8080), SimpleHTTPRequestHandler)
     http_server.serve_forever()  # Noncompliant
@@ -174,6 +174,11 @@ def python_web_server_noncompliant():
 
     my_threading_server = MyThreadingServer(('0.0.0.0', 8080), SimpleHTTPRequestHandler)
     my_threading_server.serve_forever()  # Noncompliant
+
+    import http.server
+    class ThreadingServer(socketserver.ThreadingMixIn, http.server.HTTPServer):
+        def server_bind(self):
+            HTTPServer.server_bind(self) # Noncompliant
 
 
 def python_web_server_compliant(ok_server):
