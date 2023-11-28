@@ -72,7 +72,8 @@ class PythonExtendedRulingTest {
     SonarScanner build = buildWithCommonProperties("black");
     build.setProperty("sonar.sources", "src");
     build.setProperty("sonar.tests", "tests");
-    build.setProperty("sonar.test.exclusions", "tests/data/async_as_identifier.py");
+    build.setProperty("sonar.test.exclusions", "tests/data/async_as_identifier.py, tests/data/tricky_unicode_symbols.py," +
+      "tests/data/pattern_matching_extras.py,tests/data/pep_572_py39.py,tests/data/pattern_matching_invalid.py");
     executeBuild(build);
   }
 
