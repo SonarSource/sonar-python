@@ -40,6 +40,28 @@ def flask_graphql_middleware_non_compliant(schema, some_middleware, another_midd
         middleware=[get_middlewares()]
     )
 
+    class OverriddenView(GraphQLView):
+        pass
+
+    OverriddenView.as_view(  # Noncompliant
+        name="introspection",
+        schema=schema,
+        graphiql=True,
+        middleware=[]
+    )
+
+def overridden_graphql_server_noncompliant():
+    from graphql_server.flask import GraphQLView
+    class OverriddenView(GraphQLView):
+        pass
+
+    OverriddenView.as_view(  # Noncompliant
+        name="introspection",
+        schema=schema,
+        graphiql=True,
+        middleware=[]
+    )
+
 
 def flask_graphql_middleware_compliant(schema, some_middleware, introspection_middleware, get_introspection_middlewares):
     def compliant_import():
