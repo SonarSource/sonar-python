@@ -68,3 +68,23 @@ def func2():
 #                 ^^^^^^^^^^
         b = 10
     return "item1" "item2"
+
+def set_comparison_test():
+    from typing import Set
+    def validate(a: Set[str], b: Set[str]) -> None:
+        if not (a <= b): # OK
+            ...
+
+    ingredients: Set[str] = {'beef', 'potatos'}
+    consumable_by_vegans: Set[str] = {'nut', 'apple', 'potatos'}
+    # The example below is a FP. The type of both sets is inferred as ANY. Should be fixed as part of:
+    # https://sonarsource.atlassian.net/browse/SONARPY-1574
+    if not (ingredients <= consumable_by_vegans): # Noncompliant
+        ...
+
+    ingredients_not_annotated = {'beef', 'potato'}
+    consumable_by_vegans_not_annotated = {'nut', 'apple', 'potato'}
+    if not (ingredients_not_annotated < consumable_by_vegans_not_annotated):       # OK
+        ...
+
+    validate(ingredients, consumable_by_vegans)

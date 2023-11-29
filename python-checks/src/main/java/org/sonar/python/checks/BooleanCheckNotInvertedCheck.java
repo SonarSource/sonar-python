@@ -19,9 +19,12 @@
  */
 package org.sonar.python.checks;
 
+import java.util.List;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
+import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
+import org.sonar.plugins.python.api.quickfix.PythonTextEdit;
 import org.sonar.plugins.python.api.tree.BinaryExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.InExpression;
@@ -31,8 +34,8 @@ import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.plugins.python.api.tree.UnaryExpression;
-import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
-import org.sonar.plugins.python.api.quickfix.PythonTextEdit;
+import org.sonar.plugins.python.api.types.BuiltinTypes;
+import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.quickfix.TextEditUtils;
 import org.sonar.python.tree.TreeUtils;
 
@@ -55,6 +58,9 @@ public class BooleanCheckNotInvertedCheck extends PythonSubscriptionCheck {
       BinaryExpression binaryExp = (BinaryExpression) negatedExpr;
       // Don't raise warning with "not a == b == c" because a == b != c is not equivalent
       if (!binaryExp.leftOperand().is(Kind.COMPARISON)) {
+        if (isSetComparison(binaryExp)) {
+          return;
+        }
         String oppositeOperator = oppositeOperator(binaryExp.operator());
 
         PreciseIssue issue = (ctx.addIssue(original, String.format(MESSAGE, oppositeOperator)));
@@ -144,5 +150,13 @@ public class BooleanCheckNotInvertedCheck extends PythonSubscriptionCheck {
       valueBuilder.append(token.value());
     }
     return valueBuilder.toString();
+  }
+
+  private static boolean isSetComparison(BinaryExpression binaryExpression) {
+    List<InferredType> inferredTypeSet = List.of(
+      binaryExpression.leftOperand().type(),
+      binaryExpression.rightOperand().type()
+    );
+    return inferredTypeSet.stream().anyMatch(inferredType -> inferredType.mustBeOrExtend(BuiltinTypes.SET));
   }
 }
