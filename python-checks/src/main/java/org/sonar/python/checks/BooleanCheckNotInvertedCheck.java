@@ -20,6 +20,7 @@
 package org.sonar.python.checks;
 
 import java.util.List;
+import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
@@ -44,6 +45,8 @@ public class BooleanCheckNotInvertedCheck extends PythonSubscriptionCheck {
 
   private static final String MESSAGE = "Use the opposite operator (\"%s\") instead.";
 
+  private static final Set<String> EQUALITY_COMPARATORS = Set.of("==", "!=");
+
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Kind.NOT, ctx -> checkNotExpression(ctx, (UnaryExpression) ctx.syntaxNode()));
@@ -58,7 +61,7 @@ public class BooleanCheckNotInvertedCheck extends PythonSubscriptionCheck {
       BinaryExpression binaryExp = (BinaryExpression) negatedExpr;
       // Don't raise warning with "not a == b == c" because a == b != c is not equivalent
       if (!binaryExp.leftOperand().is(Kind.COMPARISON)) {
-        if (isSetComparison(binaryExp)) {
+        if (isSetComparison(binaryExp) && !EQUALITY_COMPARATORS.contains(binaryExp.operator().value())) {
           return;
         }
         String oppositeOperator = oppositeOperator(binaryExp.operator());

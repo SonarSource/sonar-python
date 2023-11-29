@@ -75,6 +75,9 @@ def set_comparison_test():
         if not (a <= b): # OK
             ...
 
+        if not (a == b): # Noncompliant
+            ...
+
     ingredients: Set[str] = {'beef', 'potatos'}
     consumable_by_vegans: Set[str] = {'nut', 'apple', 'potatos'}
     # The example below is a FP. The type of both sets is inferred as ANY. Should be fixed as part of:
