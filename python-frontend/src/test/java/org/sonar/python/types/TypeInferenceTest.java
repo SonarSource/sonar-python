@@ -24,9 +24,13 @@ import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.CallExpression;
+import org.sonar.plugins.python.api.tree.Decorator;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.ExpressionStatement;
 import org.sonar.plugins.python.api.tree.FileInput;
+import org.sonar.plugins.python.api.tree.FunctionDef;
+import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.ReturnStatement;
 import org.sonar.plugins.python.api.tree.Tree;
@@ -34,16 +38,18 @@ import org.sonar.plugins.python.api.types.BuiltinTypes;
 import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.PythonTestUtils;
 import org.sonar.python.semantic.SymbolImpl;
+import org.sonar.python.semantic.SymbolTableBuilder;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.PythonTestUtils.getLastDescendant;
 import static org.sonar.python.PythonTestUtils.lastExpression;
 import static org.sonar.python.PythonTestUtils.lastExpressionInFunction;
-import static org.sonar.python.PythonTestUtils.lastStatement;import static org.sonar.python.PythonTestUtils.parse;
+import static org.sonar.python.PythonTestUtils.lastStatement;
+import static org.sonar.python.PythonTestUtils.parse;
+import static org.sonar.python.PythonTestUtils.pythonFile;
 import static org.sonar.python.types.InferredTypes.BOOL;
 import static org.sonar.python.types.InferredTypes.COMPLEX;
 import static org.sonar.python.types.InferredTypes.DECL_INT;
-import static org.sonar.python.types.InferredTypes.DECL_LIST;
 import static org.sonar.python.types.InferredTypes.DECL_STR;
 import static org.sonar.python.types.InferredTypes.DICT;
 import static org.sonar.python.types.InferredTypes.FLOAT;
@@ -723,4 +729,36 @@ class TypeInferenceTest {
     ).type()).isEqualTo(DECL_INT);
   }
 
+  @Test
+  void decorators() {
+    Decorator decorator = lastDecorator(
+      "class A:",
+      "  def dec_method():",
+      "    ...",
+      "my_dec = A()",
+      "@my_dec.dec_method()",
+      "def a_function():",
+      "  ...");
+    CallExpression ce = (CallExpression) decorator.expression();
+    QualifiedExpression qe = (QualifiedExpression) ce.callee();
+    assertThat(typeName(qe.qualifier().type())).isEqualTo("A");
+    assertThat(qe.name().symbol().fullyQualifiedName()).isEqualTo("package.mod.A.dec_method");
+    assertThat(ce.calleeSymbol().fullyQualifiedName()).isEqualTo("package.mod.A.dec_method");
+
+    decorator = lastDecorator(
+      "class A:",
+      "  def __call__():",
+      "    ...",
+      "@A",
+      "class OtherClass:",
+      "  ...");
+    Name name = (Name) decorator.expression();
+    assertThat(name.type()).isEqualTo(anyType());
+    assertThat(name.symbol().fullyQualifiedName()).isEqualTo("package.mod.A");
+  }
+
+  private static Decorator lastDecorator(String... code) {
+    FileInput fileInput = parse(new SymbolTableBuilder("package", pythonFile("mod")), code);
+    return PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Tree.Kind.DECORATOR));
+  }
 }
