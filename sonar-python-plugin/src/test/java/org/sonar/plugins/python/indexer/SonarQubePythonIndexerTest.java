@@ -349,13 +349,17 @@ class SonarQubePythonIndexerTest {
     List<InputFile> inputFiles = new ArrayList<>(Arrays.asList(file1, file2));
 
     pythonIndexer = new SonarQubePythonIndexer(inputFiles, cacheContext, context);
+    byte[] serializedSymbolTable = toProtobufModuleDescriptor(Set.of(new VariableDescriptor("x", "main.x", null))).toByteArray();
+    readCache.put(importsMapCacheKey("moduleKey:main.py"), importsAsByteArray(List.of("mod")));
+    readCache.put(projectSymbolTableCacheKey("moduleKey:main.py"), serializedSymbolTable);
+
     pythonIndexer.buildOnce(context);
 
-    assertThat(pythonIndexer.canBePartiallyScannedWithoutParsing(file1)).isFalse();
+    assertThat(pythonIndexer.canBePartiallyScannedWithoutParsing(file1)).isTrue();
     assertThat(pythonIndexer.canBePartiallyScannedWithoutParsing(file2)).isFalse();
     assertThat(logTester.logs(Level.INFO))
       .contains("Fully optimized analysis can be performed for 0 out of 2 files.")
-      .contains("Partially optimized analysis can be performed for 0 out of 2 files.");
+      .contains("Partially optimized analysis can be performed for 1 out of 2 files.");
   }
 
   @Test
