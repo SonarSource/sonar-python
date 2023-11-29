@@ -89,5 +89,3 @@ def set_comparison_test():
     consumable_by_vegans_not_annotated = {'nut', 'apple', 'potato'}
     if not (ingredients_not_annotated < consumable_by_vegans_not_annotated):       # OK
         ...
-
-    validate(ingredients, consumable_by_vegans)
