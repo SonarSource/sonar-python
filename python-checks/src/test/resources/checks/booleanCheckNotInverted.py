@@ -1,3 +1,5 @@
+from typing import Set
+
 a = 1
 b = 2
 c = not (a == b)  # Noncompliant {{Use the opposite operator ("!=") instead.}}
@@ -51,11 +53,13 @@ z = not (1 not in list_)  # Noncompliant
 ## x = not(not 1) # Noncompliant
 ## t = a is not(not b) # Noncompliant
 
+
 def func():
     if not a == 2:     #Noncompliant
 #      ^^^^^^^^^^
         b = 10
     return "item1" "item2"
+
 
 def func1():
     if not a == 2 and b == 9:   # Noncompliant
@@ -63,29 +67,63 @@ def func1():
         b = 10
     return "item1" "item2"
 
+
 def func2():
     if a != 2 and not b == 9:   # Noncompliant
 #                 ^^^^^^^^^^
         b = 10
     return "item1" "item2"
 
-def set_comparison_test():
-    from typing import Set
-    def validate(a: Set[str], b: Set[str]) -> None:
-        if not (a <= b): # OK
-            ...
 
-        if not (a == b): # Noncompliant
-            ...
+type A = set[str]
+
+
+def check_set_as_declared_type(a: Set[str], b: Set[str]) -> None:
+    c: Set[str] = {'set_element'} # c will have type ANY
+    if not (a <= b): # OK: comparing two sets.
+        ...
+    if not (a == b): # Noncompliant
+        ...
+    if not (a <= c): # OK: comparing type Set with type ANY.
+        ...
+
+
+class CustomSet(set):
+    ...
+
+
+def check_set_as_custom_subclass(a: CustomSet, b: CustomSet) -> None:
+    if not (a <= b): # OK
+        ...
+
+
+def check_set_as_type_alias(a: A, b: A) -> None:
+    # FP: We do not interpret A as being of type set.
+    if not (a <= b): # Noncompliant
+        ...
+
+
+def set_comparison_test(a, b):
+    if not a < b: # Noncompliant
+        ...
 
     ingredients: Set[str] = {'beef', 'potatos'}
     consumable_by_vegans: Set[str] = {'nut', 'apple', 'potatos'}
-    # The example below is a FP. The type of both sets is inferred as ANY. Should be fixed as part of:
-    # https://sonarsource.atlassian.net/browse/SONARPY-1574
+    # FP: The type of both sets is inferred as ANY. Should be fixed as part of SONARPY-1574
     if not (ingredients <= consumable_by_vegans): # Noncompliant
         ...
 
     ingredients_not_annotated = {'beef', 'potato'}
     consumable_by_vegans_not_annotated = {'nut', 'apple', 'potato'}
     if not (ingredients_not_annotated < consumable_by_vegans_not_annotated):       # OK
+        ...
+
+
+def check_conditional_set_comparison(a, cond):
+    if cond:
+        b = {'nut', 'apple', 'potatos'}
+    else:
+        b = "hello"
+    # FP: We don't know whether b is of type set in this case. An issue shouldn't be raised.
+    if not (a <= b): # Noncompliant
         ...
