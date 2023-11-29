@@ -14,8 +14,8 @@ class SomeCustomTestCase(MyTestClass):
             self.assertTrue(1 + 2 == 3)  # Issue here (S5906)
 
 
-from yest_another_test_file import MyOtherTestClass
+from yet_another_test_file import MyOtherTestClass
 
-class SomeOtherCustomTestCase(MyTestClass):
+class SomeOtherCustomTestCase(MyOtherTestClass):
         def test_addition_2(self):
-            self.assertTrue(1 + 2 == 3)  # Issue here (S5906)
+            self.assertTrue(1 + 2 == 3)  # FN here (S5906)
