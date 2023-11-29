@@ -6,3 +6,4 @@ def foo():
 
     area_of_interest = 'fictional_city' # OK
     pop = sample_df.query('area == @area_of_interest').population # Noncompliant
+#   ^^^

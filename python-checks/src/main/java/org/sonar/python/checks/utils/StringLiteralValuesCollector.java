@@ -34,10 +34,6 @@ public class StringLiteralValuesCollector extends BaseTreeVisitor {
     tree.accept(this);
   }
 
-  public void clear() {
-    stringLiteralValues.clear();
-  }
-
   @Override
   public void visitStringLiteral(StringLiteral pyStringLiteralTree) {
     stringLiteralValues.add(pyStringLiteralTree.trimmedQuotesValue());

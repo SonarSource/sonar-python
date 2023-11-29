@@ -96,8 +96,6 @@ public class DeadStoreCheck extends PythonSubscriptionCheck {
     var stringLiteralValuesCollector = new StringLiteralValuesCollector();
     if (isTemplateVariablesAccessEnabled) {
       stringLiteralValuesCollector.collect(functionDef);
-    } else {
-      stringLiteralValuesCollector.clear();
     }
     DeadStoreUtils.findUnnecessaryAssignments(block, blockLiveVariables, functionDef)
       .stream()
