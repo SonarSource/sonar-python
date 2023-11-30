@@ -27,7 +27,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
+import org.sonar.api.SonarProduct;
 import org.sonar.plugins.python.api.IssueLocation;
 import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.PythonCheck.PreciseIssue;
@@ -169,7 +169,7 @@ class PythonVisitorCheckTest {
 
     assertThat(check.symbols).isEqualTo(TypeShed.stubFilesSymbols());
 
-    PythonInputFileContext inputFileContext = new PythonInputFileContext(mock(PythonFile.class), null, CacheContextImpl.dummyCache());
+    PythonInputFileContext inputFileContext = new PythonInputFileContext(mock(PythonFile.class), null, CacheContextImpl.dummyCache(), SonarProduct.SONARQUBE);
     assertThat(inputFileContext.stubFilesSymbols()).isEqualTo(TypeShed.stubFilesSymbols());
   }
 

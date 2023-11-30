@@ -19,14 +19,14 @@
  */
 package org.sonar.plugins.python;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sonar.api.Plugin;
 import org.sonar.api.PropertyType;
 import org.sonar.api.SonarProduct;
 import org.sonar.api.SonarRuntime;
 import org.sonar.api.config.PropertyDefinition;
 import org.sonar.api.resources.Qualifiers;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.sonar.plugins.python.bandit.BanditRulesDefinition;
 import org.sonar.plugins.python.bandit.BanditSensor;
 import org.sonar.plugins.python.coverage.PythonCoverageSensor;
@@ -41,6 +41,7 @@ import org.sonar.plugins.python.ruff.RuffRulesDefinition;
 import org.sonar.plugins.python.ruff.RuffSensor;
 import org.sonar.plugins.python.warnings.AnalysisWarningsWrapper;
 import org.sonar.plugins.python.xunit.PythonXUnitSensor;
+import org.sonar.plugins.python.indexer.SonarLintCacheImpl;
 
 public class PythonPlugin implements Plugin {
 
@@ -220,6 +221,7 @@ public class PythonPlugin implements Plugin {
 
     public void addSonarlintPythonIndexer(Context context, SonarLintPluginAPIVersion sonarLintPluginAPIVersion) {
       if (sonarLintPluginAPIVersion.isDependencyAvailable()) {
+        context.addExtension(SonarLintCacheImpl.class);
         context.addExtension(SonarLintPythonIndexer.class);
       } else {
         LOG.debug("Error while trying to inject SonarLintPythonIndexer");

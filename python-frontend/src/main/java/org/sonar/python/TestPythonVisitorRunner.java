@@ -26,6 +26,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.List;
 import javax.annotation.Nullable;
+import org.sonar.api.SonarProduct;
 import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.PythonVisitorContext;
@@ -64,7 +65,7 @@ public class TestPythonVisitorRunner {
     ProjectLevelSymbolTable projectLevelSymbolTable, CacheContext cacheContext) {
     TestPythonFile pythonFile = new TestPythonFile(file);
     FileInput rootTree = parseFile(pythonFile);
-    return new PythonVisitorContext(rootTree, pythonFile, workingDirectory, packageName, projectLevelSymbolTable, cacheContext);
+    return new PythonVisitorContext(rootTree, pythonFile, workingDirectory, packageName, projectLevelSymbolTable, cacheContext, SonarProduct.SONARQUBE);
   }
 
   public static ProjectLevelSymbolTable globalSymbols(List<File> files, File baseDir) {

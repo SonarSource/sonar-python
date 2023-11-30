@@ -43,6 +43,7 @@ import org.sonar.plugins.python.api.caching.CacheContext;
 import org.sonar.plugins.python.indexer.PythonIndexer;
 import org.sonar.plugins.python.indexer.SonarQubePythonIndexer;
 import org.sonar.plugins.python.warnings.AnalysisWarningsWrapper;
+import org.sonar.python.api.SonarLintCache;
 import org.sonar.python.caching.CacheContextImpl;
 import org.sonar.python.checks.CheckList;
 import org.sonar.python.parser.PythonParser;
@@ -60,6 +61,8 @@ public final class PythonSensor implements Sensor {
   private final FileLinesContextFactory fileLinesContextFactory;
   private final NoSonarFilter noSonarFilter;
   private final PythonIndexer indexer;
+
+  private final SonarLintCache sonarLintCache;
   private final AnalysisWarningsWrapper analysisWarnings;
   private static final Logger LOG = LoggerFactory.getLogger(PythonSensor.class);
   static final String UNSET_VERSION_WARNING =
@@ -71,27 +74,29 @@ public final class PythonSensor implements Sensor {
    */
   public PythonSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory,
                       NoSonarFilter noSonarFilter, AnalysisWarningsWrapper analysisWarnings) {
-    this(fileLinesContextFactory, checkFactory, noSonarFilter, null, null, analysisWarnings);
+    this(fileLinesContextFactory, checkFactory, noSonarFilter, null, null, null, analysisWarnings);
   }
 
   public PythonSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory, NoSonarFilter noSonarFilter,
                       PythonCustomRuleRepository[] customRuleRepositories, AnalysisWarningsWrapper analysisWarnings) {
-    this(fileLinesContextFactory, checkFactory, noSonarFilter, customRuleRepositories, null, analysisWarnings);
+    this(fileLinesContextFactory, checkFactory, noSonarFilter, customRuleRepositories, null, null, analysisWarnings);
   }
 
   public PythonSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory, NoSonarFilter noSonarFilter,
-                      PythonIndexer indexer, AnalysisWarningsWrapper analysisWarnings) {
-    this(fileLinesContextFactory, checkFactory, noSonarFilter, null, indexer, analysisWarnings);
+                      PythonIndexer indexer, SonarLintCache sonarLintCache, AnalysisWarningsWrapper analysisWarnings) {
+    this(fileLinesContextFactory, checkFactory, noSonarFilter, null, indexer, sonarLintCache, analysisWarnings);
   }
 
   public PythonSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory, NoSonarFilter noSonarFilter,
-                      @Nullable PythonCustomRuleRepository[] customRuleRepositories, @Nullable PythonIndexer indexer, AnalysisWarningsWrapper analysisWarnings) {
+                      @Nullable PythonCustomRuleRepository[] customRuleRepositories, @Nullable PythonIndexer indexer,
+                      @Nullable SonarLintCache sonarLintCache, AnalysisWarningsWrapper analysisWarnings) {
     this.checks = new PythonChecks(checkFactory)
       .addChecks(CheckList.REPOSITORY_KEY, CheckList.getChecks())
       .addCustomChecks(customRuleRepositories);
     this.fileLinesContextFactory = fileLinesContextFactory;
     this.noSonarFilter = noSonarFilter;
     this.indexer = indexer;
+    this.sonarLintCache = sonarLintCache;
     this.analysisWarnings = analysisWarnings;
   }
 
@@ -114,6 +119,7 @@ public final class PythonSensor implements Sensor {
     pythonVersionParameter.ifPresent(value -> ProjectPythonVersion.setCurrentVersions(PythonVersionUtils.fromString(value)));
     CacheContext cacheContext = CacheContextImpl.of(context);
     PythonIndexer pythonIndexer = this.indexer != null ? this.indexer : new SonarQubePythonIndexer(pythonFiles, cacheContext, context);
+    pythonIndexer.setSonarLintCache(sonarLintCache);
     PythonScanner scanner = new PythonScanner(context, checks, fileLinesContextFactory, noSonarFilter, PythonParser.create(), pythonIndexer);
     scanner.execute(pythonFiles, context);
     durationReport.stop();

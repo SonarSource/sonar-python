@@ -27,6 +27,7 @@ import java.util.Map;
 import java.util.Set;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import org.sonar.api.SonarProduct;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
@@ -46,17 +47,17 @@ class PythonVisitorContextTest {
     FileInput fileInput = PythonTestUtils.parse("def foo(): pass");
 
     PythonFile pythonFile = pythonFile("my_module.py");
-    new PythonVisitorContext(fileInput, pythonFile, null, "my_package");
+    new PythonVisitorContext(fileInput, pythonFile, null, "my_package", SonarProduct.SONARQUBE);
     FunctionDef functionDef = (FunctionDef) PythonTestUtils.getAllDescendant(fileInput, t -> t.is(Tree.Kind.FUNCDEF)).get(0);
     assertThat(functionDef.name().symbol().fullyQualifiedName()).isEqualTo("my_package.my_module.foo");
 
     // no package
-    new PythonVisitorContext(fileInput, pythonFile, null, "");
+    new PythonVisitorContext(fileInput, pythonFile, null, "", SonarProduct.SONARQUBE);
     assertThat(functionDef.name().symbol().fullyQualifiedName()).isEqualTo("my_module.foo");
 
     // file without extension
     Mockito.when(pythonFile.fileName()).thenReturn("my_module");
-    new PythonVisitorContext(fileInput, pythonFile, null, "my_package");
+    new PythonVisitorContext(fileInput, pythonFile, null, "my_package", SonarProduct.SONARQUBE);
     functionDef = (FunctionDef) PythonTestUtils.getAllDescendant(fileInput, t -> t.is(Tree.Kind.FUNCDEF)).get(0);
     assertThat(functionDef.name().symbol().fullyQualifiedName()).isEqualTo("my_package.my_module.foo");
   }
@@ -65,12 +66,12 @@ class PythonVisitorContextTest {
   void initModuleFullyQualifiedName() {
     FileInput fileInput = PythonTestUtils.parse("def fn(): pass");
     PythonFile pythonFile = pythonFile("__init__.py");
-    new PythonVisitorContext(fileInput, pythonFile, null, "foo.bar");
+    new PythonVisitorContext(fileInput, pythonFile, null, "foo.bar", SonarProduct.SONARQUBE);
     FunctionDef functionDef = (FunctionDef) PythonTestUtils.getAllDescendant(fileInput, t -> t.is(Tree.Kind.FUNCDEF)).get(0);
     assertThat(functionDef.name().symbol().fullyQualifiedName()).isEqualTo("foo.bar.fn");
 
     // no package
-    new PythonVisitorContext(fileInput, pythonFile, null, "");
+    new PythonVisitorContext(fileInput, pythonFile, null, "", SonarProduct.SONARQUBE);
     assertThat(functionDef.name().symbol().fullyQualifiedName()).isEqualTo("fn");
   }
 
@@ -82,7 +83,7 @@ class PythonVisitorContextTest {
     Mockito.when(pythonFile.fileName()).thenReturn("my_module.py");
     List<Symbol> modSymbols = Arrays.asList(new SymbolImpl("a", null), new SymbolImpl("b", null));
     Map<String, Set<Symbol>> globalSymbols = Collections.singletonMap("mod", new HashSet<>(modSymbols));
-    new PythonVisitorContext(fileInput, pythonFile, null, "my_package", ProjectLevelSymbolTable.from(globalSymbols), null);
+    new PythonVisitorContext(fileInput, pythonFile, null, "my_package", ProjectLevelSymbolTable.from(globalSymbols), null, SonarProduct.SONARQUBE);
     assertThat(fileInput.globalVariables()).extracting(Symbol::name).containsExactlyInAnyOrder("a", "b");
   }
 }

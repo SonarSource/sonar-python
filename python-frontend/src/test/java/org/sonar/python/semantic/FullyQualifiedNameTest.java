@@ -23,6 +23,7 @@ import java.net.URI;
 import javax.annotation.Nullable;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import org.sonar.api.SonarProduct;
 import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.PythonVisitorContext;
 import org.sonar.plugins.python.api.symbols.Symbol;
@@ -473,7 +474,7 @@ class FullyQualifiedNameTest {
     PythonFile pythonFile = Mockito.mock(PythonFile.class, "__init__.py");
     when(pythonFile.fileName()).thenReturn("__init__.py");
     when(pythonFile.uri()).thenReturn(URI.create("mod/__init__.py"));
-    PythonVisitorContext context = new PythonVisitorContext(fileInput, pythonFile, null, "foo.bar");
+    PythonVisitorContext context = new PythonVisitorContext(fileInput, pythonFile, null, "foo.bar", SonarProduct.SONARQUBE);
     fileInput = context.rootTree();
     CallExpression callExpression = (CallExpression) getAllDescendant(fileInput, tree -> tree.is(Tree.Kind.CALL_EXPR)).get(0);
     assertThat(callExpression.calleeSymbol().fullyQualifiedName()).isEqualTo("foo.fn");

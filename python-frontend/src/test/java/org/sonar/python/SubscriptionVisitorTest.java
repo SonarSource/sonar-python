@@ -23,6 +23,7 @@ import java.util.Collections;
 import java.util.regex.Pattern;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import org.sonar.api.SonarProduct;
 import org.sonar.plugins.python.api.ProjectPythonVersion;
 import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
@@ -60,7 +61,7 @@ class SubscriptionVisitorTest {
     };
 
     FileInput fileInput = PythonTestUtils.parse("'.*'");
-    PythonVisitorContext context = new PythonVisitorContext(fileInput, PythonTestUtils.pythonFile("file"), null, null);
+    PythonVisitorContext context = new PythonVisitorContext(fileInput, PythonTestUtils.pythonFile("file"), null, null, SonarProduct.SONARQUBE);
     SubscriptionVisitor.analyze(Collections.singleton(check), context);
   }
 
@@ -70,7 +71,7 @@ class SubscriptionVisitorTest {
     var cache = Mockito.mock(CacheContext.class);
 
     PythonFile pythonFile = PythonTestUtils.pythonFile("file");
-    PythonVisitorContext context = new PythonVisitorContext(fileInput, pythonFile, null, "", ProjectLevelSymbolTable.empty(), cache);
+    PythonVisitorContext context = new PythonVisitorContext(fileInput, pythonFile, null, "", ProjectLevelSymbolTable.empty(), cache, SonarProduct.SONARQUBE);
 
     PythonSubscriptionCheck check = new PythonSubscriptionCheck() {
       @Override
