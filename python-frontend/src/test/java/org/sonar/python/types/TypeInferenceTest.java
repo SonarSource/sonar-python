@@ -159,6 +159,26 @@ class TypeInferenceTest {
   }
 
   @Test
+  void assignement_with_annotation() {
+    assertThat(lastExpression(
+      "a: str = \"foo\"",
+      "a").type()).isEqualTo(STR);
+
+    // We do not trust the type annotation
+    assertThat(lastExpression(
+      "a: int = {'foo', 'bar'}",
+      "a").type()).isEqualTo(SET);
+  }
+
+  @Test
+  void annotation_without_assignement() {
+    // We do not trust the type annotation
+    assertThat(lastExpression(
+      "a: str",
+      "a").type()).isEqualTo(anyType());
+  }
+
+  @Test
   void local_variable() {
     assertThat(lastExpressionInFunction(
       "a = 42",

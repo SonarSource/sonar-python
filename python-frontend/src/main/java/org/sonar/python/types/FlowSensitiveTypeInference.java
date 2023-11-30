@@ -25,6 +25,7 @@ import java.util.Optional;
 import java.util.Set;
 import javax.annotation.CheckForNull;
 import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.tree.AnnotatedAssignment;
 import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
@@ -43,6 +44,7 @@ import org.sonar.python.tree.NameImpl;
 import org.sonar.python.types.TypeInference.Assignment;
 import org.sonar.python.types.TypeInference.MemberAccess;
 
+import static org.sonar.plugins.python.api.tree.Tree.Kind.ANNOTATED_ASSIGNMENT;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.ASSIGNMENT_STMT;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.COMPOUND_ASSIGNMENT;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.NAME;
@@ -85,6 +87,16 @@ class FlowSensitiveTypeInference extends ForwardAnalysis {
     } else if (element.is(COMPOUND_ASSIGNMENT)) {
       // Assumption: compound assignments don't change types
       updateTree(element, state);
+    } else if (element.is(ANNOTATED_ASSIGNMENT)) {
+      AnnotatedAssignment assignment = (AnnotatedAssignment) element;
+      Expression assigneValue = assignment.assignedValue();
+      if (assigneValue != null) {
+        // update rhs
+        updateTree(assigneValue, state);
+        handleAssignment(assignment, state);
+        // update lhs
+        updateTree(assignment.variable(), state);
+      }
     } else {
       element.accept(new IsInstanceVisitor(state));
       updateTree(element, state);
@@ -150,7 +162,7 @@ class FlowSensitiveTypeInference extends ForwardAnalysis {
     });
   }
 
-  private void handleAssignment(AssignmentStatement assignmentStatement, TypeInferenceProgramState programState) {
+  private void handleAssignment(Statement assignmentStatement, TypeInferenceProgramState programState) {
     Optional.ofNullable(assignmentsByAssignmentStatement.get(assignmentStatement)).ifPresent(assignment -> {
       if (trackedVars.contains(assignment.lhs)) {
         Expression rhs = assignment.rhs;
