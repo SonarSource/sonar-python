@@ -1,4 +1,4 @@
-from typing import Set
+from typing import Set, Any
 
 a = 1
 b = 2
@@ -76,7 +76,7 @@ def func2():
 
 
 def check_set_as_declared_type(a: Set[str], b: Set[str]) -> None:
-    c: Set[str] = {'set_element'} # c will have type ANY
+    c: Any = "something" # c will have type ANY
     if not (a <= b): # OK: comparing two sets.
         ...
     if not (a == b): # Noncompliant
