@@ -75,9 +75,6 @@ def func2():
     return "item1" "item2"
 
 
-type A = set[str]
-
-
 def check_set_as_declared_type(a: Set[str], b: Set[str]) -> None:
     c: Set[str] = {'set_element'} # c will have type ANY
     if not (a <= b): # OK: comparing two sets.
@@ -95,6 +92,9 @@ class CustomSet(set):
 def check_set_as_custom_subclass(a: CustomSet, b: CustomSet) -> None:
     if not (a <= b): # OK
         ...
+
+
+type A = set[str]
 
 
 def check_set_as_type_alias(a: A, b: A) -> None:
