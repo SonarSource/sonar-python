@@ -17,7 +17,7 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.checks;
+package org.sonar.python.checks.utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,11 +35,11 @@ import org.sonar.python.semantic.SymbolTableBuilder;
 import org.sonar.python.tree.PythonTreeMaker;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.sonar.python.checks.Expressions.isFalsy;
-import static org.sonar.python.checks.Expressions.isTruthy;
-import static org.sonar.python.checks.Expressions.removeParentheses;
-import static org.sonar.python.checks.Expressions.unescape;
-import static org.sonar.python.checks.Expressions.unescapeString;
+import static org.sonar.python.checks.utils.Expressions.isFalsy;
+import static org.sonar.python.checks.utils.Expressions.isTruthy;
+import static org.sonar.python.checks.utils.Expressions.removeParentheses;
+import static org.sonar.python.checks.utils.Expressions.unescape;
+import static org.sonar.python.checks.utils.Expressions.unescapeString;
 
 class ExpressionsTest {
 

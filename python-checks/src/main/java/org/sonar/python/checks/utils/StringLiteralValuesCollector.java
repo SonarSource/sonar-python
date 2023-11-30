@@ -17,25 +17,29 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.checks;
+package org.sonar.python.checks.utils;
 
-import org.sonar.check.Rule;
-import org.sonar.plugins.python.api.tree.FunctionDef;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.function.Predicate;
+import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
+import org.sonar.plugins.python.api.tree.StringLiteral;
+import org.sonar.plugins.python.api.tree.Tree;
 
-import static org.sonar.python.checks.utils.CheckUtils.classHasInheritance;
-import static org.sonar.python.checks.utils.CheckUtils.getParentClassDef;
+public class StringLiteralValuesCollector extends BaseTreeVisitor {
+  private final Set<String> stringLiteralValues = new HashSet<>();
 
-@Rule(key = MethodNameCheck.CHECK_KEY)
-public class MethodNameCheck extends AbstractFunctionNameCheck {
-  public static final String CHECK_KEY = "S100";
-
-  @Override
-  public String typeName() {
-    return "method";
+  public void collect(Tree tree) {
+    stringLiteralValues.clear();
+    tree.accept(this);
   }
 
   @Override
-  public boolean shouldCheckFunctionDeclaration(FunctionDef pyFunctionDefTree) {
-    return pyFunctionDefTree.isMethodDefinition() && !classHasInheritance(getParentClassDef(pyFunctionDefTree));
+  public void visitStringLiteral(StringLiteral pyStringLiteralTree) {
+    stringLiteralValues.add(pyStringLiteralTree.trimmedQuotesValue());
+  }
+
+  public boolean anyMatches(Predicate<String> predicate) {
+    return stringLiteralValues.stream().anyMatch(predicate);
   }
 }

@@ -41,7 +41,7 @@ import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.StringElement;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.python.checks.Expressions;
+import org.sonar.python.checks.utils.Expressions;
 import org.sonar.plugins.python.api.symbols.Symbol;
 
 @Rule(key = SQLQueriesCheck.CHECK_KEY)

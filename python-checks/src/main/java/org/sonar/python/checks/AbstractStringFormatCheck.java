@@ -42,6 +42,7 @@ import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.types.BuiltinTypes;
+import org.sonar.python.checks.utils.Expressions;
 
 public abstract class AbstractStringFormatCheck extends PythonSubscriptionCheck {
 

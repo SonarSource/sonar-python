@@ -42,13 +42,13 @@ import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.checks.AbstractCallExpressionCheck;
-import org.sonar.python.checks.Expressions;
+import org.sonar.python.checks.utils.Expressions;
 import org.sonar.python.tree.TreeUtils;
 
 import static org.sonar.plugins.python.api.tree.Tree.Kind.LIST_LITERAL;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.NAME;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.STRING_LITERAL;
-import static org.sonar.python.checks.Expressions.singleAssignedValue;
+import static org.sonar.python.checks.utils.Expressions.singleAssignedValue;
 
 @Rule(key = HashingDataCheck.CHECK_KEY)
 public class HashingDataCheck extends AbstractCallExpressionCheck {

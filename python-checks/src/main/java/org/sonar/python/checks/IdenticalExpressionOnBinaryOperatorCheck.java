@@ -28,6 +28,7 @@ import org.sonar.plugins.python.api.tree.BinaryExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.checks.utils.CheckUtils;
 import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S1764")

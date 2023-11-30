@@ -31,7 +31,7 @@ import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.python.api.PythonPunctuator;
 import org.sonar.plugins.python.api.symbols.Symbol;
 
-import static org.sonar.python.checks.Expressions.removeParentheses;
+import static org.sonar.python.checks.utils.Expressions.removeParentheses;
 
 @Rule(key = "S3981")
 public class CollectionLengthComparisonCheck extends PythonSubscriptionCheck {

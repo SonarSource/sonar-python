@@ -34,7 +34,7 @@ import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.SubscriptionExpression;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.python.checks.Expressions;
+import org.sonar.python.checks.utils.Expressions;
 
 @Rule(key = "S3330")
 public class HttpOnlyCookieCheck extends AbstractCookieFlagCheck {

@@ -34,8 +34,8 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.python.tree.TreeUtils;
 
-import static org.sonar.python.checks.CheckUtils.classHasInheritance;
-import static org.sonar.python.checks.CheckUtils.getParentClassDef;
+import static org.sonar.python.checks.utils.CheckUtils.classHasInheritance;
+import static org.sonar.python.checks.utils.CheckUtils.getParentClassDef;
 
 @Rule(key = "S2325")
 public class MethodShouldBeStaticCheck extends PythonSubscriptionCheck {

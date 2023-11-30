@@ -40,6 +40,12 @@ class DeadStoreCheckTest {
     PythonCheckVerifier.verify("src/test/resources/checks/deadStore.ipynb", check);
   }
 
+
+  @Test
+  void pandasTest() {
+    PythonCheckVerifier.verify("src/test/resources/checks/deadStorePandas.py", check);
+  }
+
   @Test
   void assignment_on_single_line() {
     String codeWithIssue = code(

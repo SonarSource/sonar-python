@@ -38,13 +38,13 @@ import org.sonar.plugins.python.api.tree.NumericLiteral;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.cfg.fixpoint.ReachingDefinitionsAnalysis;
-import org.sonar.python.checks.CheckUtils;
+import org.sonar.python.checks.utils.CheckUtils;
 import org.sonar.python.tree.TreeUtils;
 
 import static org.sonar.plugins.python.api.tree.Tree.Kind.NAME;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.NUMERIC_LITERAL;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.QUALIFIED_EXPR;
-import static org.sonar.python.checks.CheckUtils.isConstant;
+import static org.sonar.python.checks.utils.CheckUtils.isConstant;
 
 @Rule(key = "S5914")
 public class UnconditionalAssertionCheck extends PythonSubscriptionCheck {

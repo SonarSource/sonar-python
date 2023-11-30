@@ -28,6 +28,7 @@ import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.checks.utils.Expressions;
 
 @Rule(key = "S1313")
 public class HardcodedIPCheck extends PythonSubscriptionCheck {

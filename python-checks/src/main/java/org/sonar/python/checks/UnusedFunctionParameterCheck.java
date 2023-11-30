@@ -37,6 +37,7 @@ import org.sonar.plugins.python.api.tree.ReturnStatement;
 import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
+import org.sonar.python.checks.utils.CheckUtils;
 import org.sonar.python.semantic.SymbolUtils;
 import org.sonar.python.tree.FunctionDefImpl;
 import org.sonar.python.tree.TreeUtils;

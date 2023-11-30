@@ -31,6 +31,11 @@ class UnusedLocalVariableCheckTest {
   }
 
   @Test
+  void pandasTest() {
+    PythonCheckVerifier.verify("src/test/resources/checks/unusedLocalVariablePandas.py", new UnusedLocalVariableCheck());
+  }
+
+  @Test
   void custom() {
     UnusedLocalVariableCheck check = new UnusedLocalVariableCheck();
     check.format = "(_|myignore)";

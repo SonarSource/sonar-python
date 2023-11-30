@@ -35,7 +35,7 @@ import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.python.checks.Expressions;
+import org.sonar.python.checks.utils.Expressions;
 import org.sonar.python.tests.UnittestUtils;
 import org.sonar.python.tree.TreeUtils;
 
