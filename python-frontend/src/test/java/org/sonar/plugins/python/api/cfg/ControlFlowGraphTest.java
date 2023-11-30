@@ -709,7 +709,7 @@ class ControlFlowGraphTest {
 
   @Test
   void decorators() {
-    ControlFlowGraph cfg = cfg("" +
+    ControlFlowGraph cfg = cfg(
       "class Dec:",
       "    def a():",
       "        ...",
@@ -722,7 +722,7 @@ class ControlFlowGraphTest {
     assertThat(elements).hasSize(5);
     assertThat(elements).extracting(Tree::getKind).containsExactly(Kind.NAME, Kind.FUNCDEF, Kind.ASSIGNMENT_STMT, Kind.CALL_EXPR, Kind.FUNCDEF);
 
-    cfg = cfg("" +
+    cfg = cfg(
       "class Dec:",
       "    def __call__(self):",
       "        ...",

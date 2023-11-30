@@ -28,7 +28,6 @@ import org.sonar.plugins.python.api.tree.Decorator;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.ExpressionStatement;
 import org.sonar.plugins.python.api.tree.FileInput;
-import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
@@ -742,8 +741,8 @@ class TypeInferenceTest {
     CallExpression ce = (CallExpression) decorator.expression();
     QualifiedExpression qe = (QualifiedExpression) ce.callee();
     assertThat(typeName(qe.qualifier().type())).isEqualTo("A");
-    assertThat(qe.name().symbol().fullyQualifiedName()).isEqualTo("package.mod.A.dec_method");
-    assertThat(ce.calleeSymbol().fullyQualifiedName()).isEqualTo("package.mod.A.dec_method");
+    assertThat(qe.name().symbol().fullyQualifiedName()).isEqualTo("some_package.some_module.A.dec_method");
+    assertThat(ce.calleeSymbol().fullyQualifiedName()).isEqualTo("some_package.some_module.A.dec_method");
 
     decorator = lastDecorator(
       "class A:",
@@ -754,11 +753,11 @@ class TypeInferenceTest {
       "  ...");
     Name name = (Name) decorator.expression();
     assertThat(name.type()).isEqualTo(anyType());
-    assertThat(name.symbol().fullyQualifiedName()).isEqualTo("package.mod.A");
+    assertThat(name.symbol().fullyQualifiedName()).isEqualTo("some_package.some_module.A");
   }
 
   private static Decorator lastDecorator(String... code) {
-    FileInput fileInput = parse(new SymbolTableBuilder("package", pythonFile("mod")), code);
+    FileInput fileInput = parse(new SymbolTableBuilder("some_package", pythonFile("some_module")), code);
     return PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Tree.Kind.DECORATOR));
   }
 }
