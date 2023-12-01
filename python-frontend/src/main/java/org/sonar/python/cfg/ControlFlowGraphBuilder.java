@@ -195,13 +195,13 @@ public class ControlFlowGraphBuilder {
   private PythonCfgBlock buildClassDefStatement(ClassDef classDef, PythonCfgBlock currentBlock) {
     PythonCfgBlock block = build(classDef.body().statements(), currentBlock);
     block.addElement(classDef.name()); // represents binding to class name
-    classDef.decorators().stream().forEach(decorator -> currentBlock.addElement(decorator));
+    classDef.decorators().stream().forEach(currentBlock::addElement);
     return block;
   }
 
   private static PythonCfgBlock buildFuncDefStatement(FunctionDef functionDef, PythonCfgBlock currentBlock) {
     currentBlock.addElement(functionDef);
-    functionDef.decorators().stream().forEach(decorator -> currentBlock.addElement(decorator));
+    functionDef.decorators().stream().forEach(currentBlock::addElement);
     return currentBlock;
   }
 
