@@ -171,6 +171,22 @@ class TypeInferenceTest {
   }
 
   @Test
+  void annotation_with_unknown_type() {
+    assertThat(lastExpression(
+      "def foo(unknown):",
+      "  a: str = unknown()",
+      "  a").type()).isEqualTo(anyType());
+  }
+
+  @Test
+  void annotation_with_reassignment() {
+    assertThat(lastExpression(
+      "a = \"foo\"",
+      "b: int = a",
+      "b").type()).isEqualTo(STR);
+  }
+
+  @Test
   void annotation_without_assignement() {
     // We do not trust the type annotation
     assertThat(lastExpression(

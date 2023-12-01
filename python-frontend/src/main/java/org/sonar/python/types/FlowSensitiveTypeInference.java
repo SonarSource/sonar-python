@@ -89,10 +89,10 @@ class FlowSensitiveTypeInference extends ForwardAnalysis {
       updateTree(element, state);
     } else if (element.is(ANNOTATED_ASSIGNMENT)) {
       AnnotatedAssignment assignment = (AnnotatedAssignment) element;
-      Expression assigneValue = assignment.assignedValue();
-      if (assigneValue != null) {
+      Expression assignedValue = assignment.assignedValue();
+      if (assignedValue != null) {
         // update rhs
-        updateTree(assigneValue, state);
+        updateTree(assignedValue, state);
         handleAssignment(assignment, state);
         // update lhs
         updateTree(assignment.variable(), state);

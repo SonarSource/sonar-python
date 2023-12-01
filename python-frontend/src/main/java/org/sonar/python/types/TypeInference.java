@@ -213,13 +213,13 @@ public class TypeInference extends BaseTreeVisitor {
     if (lhsExpressions.size() != 1) {
       return;
     }
-    processAssignmentStatement(assignmentStatement, lhsExpressions.get(0), assignmentStatement.assignedValue());
+    processAssignment(assignmentStatement, lhsExpressions.get(0), assignmentStatement.assignedValue());
   }
 
   @Override
   public void visitCompoundAssignment(CompoundAssignmentStatement compoundAssignment) {
     super.visitCompoundAssignment(compoundAssignment);
-    processAssignmentStatement(compoundAssignment, compoundAssignment.lhsExpression(), compoundAssignment.rhsExpression());
+    processAssignment(compoundAssignment, compoundAssignment.lhsExpression(), compoundAssignment.rhsExpression());
   }
 
   @Override
@@ -227,11 +227,11 @@ public class TypeInference extends BaseTreeVisitor {
     super.visitAnnotatedAssignment(annotatedAssignment); 
     Expression assignedValue = annotatedAssignment.assignedValue();
     if (assignedValue != null) {
-      processAssignmentStatement(annotatedAssignment, annotatedAssignment.variable(), assignedValue);
+      processAssignment(annotatedAssignment, annotatedAssignment.variable(), assignedValue);
     }
   }
 
-  private void processAssignmentStatement(Statement assignmentStatement, Expression lhsExpression, Expression rhsExpression){
+  private void processAssignment(Statement assignmentStatement, Expression lhsExpression, Expression rhsExpression){
     if (!lhsExpression.is(Tree.Kind.NAME)) {
       return;
     }
