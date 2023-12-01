@@ -1,4 +1,6 @@
-def f1(a):  # Noncompliant {{Remove the unused function parameter "a".}}
+# Noncompliant@+2 {{Remove the unused function parameter "a".}}
+'Issues are not raised when the variable is mentioned in a comment related to the function'
+def f1(a):
 #      ^
     print("foo")
 
@@ -25,7 +27,9 @@ class MyInterface:
         raise NotImplementedError("This object should be subclassed")
 
 class Parent:
-    def do_something(self, a, b):  # Noncompliant {{Remove the unused function parameter "a".}}
+    # Noncompliant@+2 {{Remove the unused function parameter "a".}}
+    'Issues are not raised when the variable is mentioned in a comment related to the function'
+    def do_something(self, a, b):
         #                  ^
         return compute(b)
 
@@ -130,3 +134,22 @@ def test_using_fixture(my_fixture):
 def lambda_handler(_event, _context):
     print("foo")
 
+
+def no_issue_aws_lambda_parameters(event, context):  # OK, may be required in AWS Lambda context
+    print("foo")
+
+
+class MyClass:
+    def param_referenced_in_docstring_no_issue(unused_param):  # OK
+       '''
+       Overrides may use unused_param to do something
+       '''
+       print("hello")
+
+    def param_referenced_in_comment_no_issue(unused_param_2):
+        # Overrides may use unused_param_2 to do something
+        print("hello")
+
+    def param_accessed_through_pandas_no_issue(sample_df, area_of_interest): # OK
+        sample_df.query('area == @area_of_interest').population
+        print("hello")
