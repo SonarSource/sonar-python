@@ -19,6 +19,7 @@
  */
 package org.sonar.plugins.python;
 
+import com.sonar.sslr.api.RecognitionException;
 import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -63,7 +64,7 @@ public abstract class Scanner {
         }
       } catch (Exception e) {
         this.processException(e, file);
-        if (context.config().getBoolean(FAIL_FAST_PROPERTY_NAME).orElse(false)) {
+        if (context.config().getBoolean(FAIL_FAST_PROPERTY_NAME).orElse(false) && !isParseErrorOnTestFile(file, e)) {
           throw new IllegalStateException("Exception when analyzing " + file, e);
         }
       } finally {
@@ -95,5 +96,10 @@ public abstract class Scanner {
 
   public boolean canBeScannedWithoutParsing(InputFile inputFile) {
     return false;
+  }
+
+  private static boolean isParseErrorOnTestFile(InputFile file, Exception e) {
+    // As test files may contain invalid syntax on purpose, we avoid failing the analysis when encountering parse errors on them
+    return e instanceof RecognitionException && file.type() == InputFile.Type.TEST;
   }
 }
