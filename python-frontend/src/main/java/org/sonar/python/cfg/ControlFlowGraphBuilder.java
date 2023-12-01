@@ -192,17 +192,17 @@ public class ControlFlowGraphBuilder {
     return currentBlock;
   }
 
-  private PythonCfgBlock buildClassDefStatement(ClassDef classDef, PythonCfgBlock successor) {
-    PythonCfgBlock block = build(classDef.body().statements(), successor);
+  private PythonCfgBlock buildClassDefStatement(ClassDef classDef, PythonCfgBlock currentBlock) {
+    PythonCfgBlock block = build(classDef.body().statements(), currentBlock);
     block.addElement(classDef.name()); // represents binding to class name
-    classDef.decorators().stream().forEach(decorator -> successor.addElement(decorator.expression()));
+    classDef.decorators().stream().forEach(decorator -> currentBlock.addElement(decorator));
     return block;
   }
 
-  private static PythonCfgBlock buildFuncDefStatement(FunctionDef functionDef, PythonCfgBlock successor) {
-    successor.addElement(functionDef);
-    functionDef.decorators().stream().forEach(decorator -> successor.addElement(decorator.expression()));
-    return successor;
+  private static PythonCfgBlock buildFuncDefStatement(FunctionDef functionDef, PythonCfgBlock currentBlock) {
+    currentBlock.addElement(functionDef);
+    functionDef.decorators().stream().forEach(decorator -> currentBlock.addElement(decorator));
+    return currentBlock;
   }
 
   private PythonCfgBlock buildMatchStatement(MatchStatement statement, PythonCfgBlock successor) {

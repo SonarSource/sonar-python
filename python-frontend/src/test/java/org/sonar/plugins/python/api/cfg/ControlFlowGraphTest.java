@@ -720,7 +720,7 @@ class ControlFlowGraphTest {
     );
     List<Tree> elements = cfg.start().elements();
     assertThat(elements).hasSize(5);
-    assertThat(elements).extracting(Tree::getKind).containsExactly(Kind.NAME, Kind.FUNCDEF, Kind.ASSIGNMENT_STMT, Kind.CALL_EXPR, Kind.FUNCDEF);
+    assertThat(elements).extracting(Tree::getKind).containsExactly(Kind.NAME, Kind.FUNCDEF, Kind.ASSIGNMENT_STMT, Kind.DECORATOR, Kind.FUNCDEF);
 
     cfg = cfg(
       "class Dec:",
@@ -732,7 +732,7 @@ class ControlFlowGraphTest {
     );
     elements = cfg.start().elements();
     assertThat(elements).hasSize(5);
-    assertThat(elements).extracting(Tree::getKind).containsExactly(Kind.NAME, Kind.FUNCDEF, Kind.NAME, Kind.NAME, Kind.EXPRESSION_STMT);
+    assertThat(elements).extracting(Tree::getKind).containsExactly(Kind.NAME, Kind.FUNCDEF, Kind.DECORATOR, Kind.NAME, Kind.EXPRESSION_STMT);
   }
 
   @Test

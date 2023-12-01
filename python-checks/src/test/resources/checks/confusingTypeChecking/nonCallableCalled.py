@@ -1,4 +1,4 @@
-from typing import Set, FrozenSet, Union, Coroutine
+from typing import Set, FrozenSet, Union, Coroutine, Callable
 import asyncio
 
 def empty_union(x: Union['A', 'B']):
@@ -37,3 +37,15 @@ async def bar(func: Coroutine):
   await asyncio.gather(
     func()
   )
+
+
+def decorators(decorator: Callable, non_callable: str):
+
+    @non_callable()  # Noncompliant
+    def foo():
+        ...
+
+    @decorator()
+    def bar():
+        ...
+
