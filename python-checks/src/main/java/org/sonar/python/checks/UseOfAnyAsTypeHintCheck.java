@@ -20,20 +20,23 @@
 package org.sonar.python.checks;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 import java.util.function.Predicate;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
+import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.Decorator;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TypeAnnotation;
 import org.sonar.python.tree.TreeUtils;
@@ -42,21 +45,29 @@ import org.sonar.python.tree.TreeUtils;
 public class UseOfAnyAsTypeHintCheck extends PythonSubscriptionCheck {
 
   private static final String MESSAGE = "Use a more specific type than `Any` for this type hint.";
+  private static final Set<String> OVERRIDE_FQNS = Set.of("typing.override", "typing.overload");
 
   @Override
   public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(Tree.Kind.RETURN_TYPE_ANNOTATION, UseOfAnyAsTypeHintCheck::checkForAnyInTypeHint);
-    context.registerSyntaxNodeConsumer(Tree.Kind.PARAMETER_TYPE_ANNOTATION, UseOfAnyAsTypeHintCheck::checkForAnyInTypeHint);
+    context.registerSyntaxNodeConsumer(Tree.Kind.RETURN_TYPE_ANNOTATION, UseOfAnyAsTypeHintCheck::checkForAnyInReturnTypeAndParameters);
+    context.registerSyntaxNodeConsumer(Tree.Kind.PARAMETER_TYPE_ANNOTATION, UseOfAnyAsTypeHintCheck::checkForAnyInReturnTypeAndParameters);
     context.registerSyntaxNodeConsumer(Tree.Kind.VARIABLE_TYPE_ANNOTATION, UseOfAnyAsTypeHintCheck::checkForAnyInTypeHint);
   }
 
   private static void checkForAnyInTypeHint(SubscriptionContext ctx) {
+    Optional.of((TypeAnnotation) ctx.syntaxNode())
+      .filter(UseOfAnyAsTypeHintCheck::isTypeAny)
+      .ifPresent(typeAnnotation -> ctx.addIssue(typeAnnotation.expression(), MESSAGE));
+  }
+
+  private static void checkForAnyInReturnTypeAndParameters(SubscriptionContext ctx) {
     TypeAnnotation typeAnnotation = (TypeAnnotation) ctx.syntaxNode();
     Optional.of(typeAnnotation)
       .filter(UseOfAnyAsTypeHintCheck::isTypeAny)
-      .filter(Predicate.not(UseOfAnyAsTypeHintCheck::isAnnotatingArgumentToChildMethod))
-      .filter(Predicate.not(UseOfAnyAsTypeHintCheck::isUnannotatedOverride))
-      .ifPresent(typeAnno -> ctx.addIssue(typeAnnotation.expression(), MESSAGE));
+      .map(annotation -> (FunctionDef) TreeUtils.firstAncestorOfKind(annotation, Tree.Kind.FUNCDEF))
+      .filter(Predicate.not(UseOfAnyAsTypeHintCheck::hasFunctionOverrideOrOverloadDecorator))
+      .filter(Predicate.not(UseOfAnyAsTypeHintCheck::isParentFunctionAnOverrideWithoutDecorators))
+      .ifPresent(functionDef -> ctx.addIssue(typeAnnotation.expression(), MESSAGE));
   }
 
   private static boolean isTypeAny(@Nullable TypeAnnotation typeAnnotation) {
@@ -65,39 +76,50 @@ public class UseOfAnyAsTypeHintCheck extends PythonSubscriptionCheck {
       .orElse(false);
   }
 
-  private static boolean isAnnotatingArgumentToChildMethod(TypeAnnotation typeAnnotation) {
-    FunctionDef parentFunctionDef = (FunctionDef) TreeUtils.firstAncestorOfKind(typeAnnotation, Tree.Kind.FUNCDEF);
-    if (parentFunctionDef == null) {
-      return false;
-    }
-    return parentFunctionDef.decorators().stream()
+  private static boolean hasFunctionOverrideOrOverloadDecorator(FunctionDef currentFunctionDef) {
+    return currentFunctionDef.decorators().stream()
       .map(Decorator::expression)
-      .map(exp -> TreeUtils.toOptionalInstanceOf(Name.class, exp))
-      .filter(Optional::isPresent)
-      .map(Optional::get)
-      .map(Name::name)
-      .map(Pattern.compile("over(ride|load)")::matcher)
-      .anyMatch(Matcher::matches);
+      .map(TreeUtils::fullyQualifiedNameFromExpression)
+      .anyMatch(OVERRIDE_FQNS::contains);
   }
 
-  private static boolean isUnannotatedOverride(TypeAnnotation typeAnnotation) {
-    FunctionDef parentFunctionDef = (FunctionDef) TreeUtils.firstAncestorOfKind(typeAnnotation, Tree.Kind.FUNCDEF);
-    if (parentFunctionDef == null) {
-      return false;
-    }
-    String name = parentFunctionDef.name().name();
-    return Optional.of(parentFunctionDef)
-      .map(functionDef -> TreeUtils.firstAncestorOfKind(functionDef, Tree.Kind.CLASSDEF))
+  private static boolean isParentFunctionAnOverrideWithoutDecorators(FunctionDef currentMethodDef) {
+    return Optional.ofNullable(TreeUtils.firstAncestorOfKind(currentMethodDef, Tree.Kind.CLASSDEF))
       .map(ClassDef.class::cast)
       .map(TreeUtils::getClassSymbolFromDef)
-      .map(ClassSymbol::superClasses)
-      .filter(list -> hasMemberOfName(name, list))
-      .isPresent();
+      .map(classSymbol -> UseOfAnyAsTypeHintCheck.isMethodAnOverride(classSymbol, currentMethodDef))
+      .orElse(false);
   }
 
-  private static boolean hasMemberOfName(String name, List<Symbol> symbolList) {
-    return symbolList.stream().filter(ClassSymbol.class::isInstance)
-      .map(ClassSymbol.class::cast)
-      .anyMatch(classSymbol -> classSymbol.canHaveMember(name));
+  private static boolean isMethodAnOverride(ClassSymbol classSymbol, FunctionDef currentMethodDef) {
+    List<String> currentMethodParametersName = getCurrentMethodParametersName(currentMethodDef);
+    for (Symbol superClass : classSymbol.superClasses()) {
+      if (superClass.is(Symbol.Kind.CLASS)) {
+        List<String> resolvedMemberParametersName = getResolvedMemberParametersName((ClassSymbol) superClass, currentMethodDef.name().name());
+        if (currentMethodParametersName.equals(resolvedMemberParametersName)) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  private static List<String> getCurrentMethodParametersName(FunctionDef methodDef) {
+    return Optional.ofNullable(methodDef.parameters())
+      .map(parameters -> parameters.nonTuple().stream()
+        .map(Parameter::name)
+        .filter(Objects::nonNull)
+        .map(Name::name)
+        .collect(Collectors.toList()))
+      .orElse(List.of());
+  }
+
+  public static List<String> getResolvedMemberParametersName(ClassSymbol superClass, String memberName) {
+    return superClass.resolveMember(memberName)
+      .filter(FunctionSymbol.class::isInstance)
+      .map(FunctionSymbol.class::cast)
+      .map(FunctionSymbol::parameters)
+      .map(parameters -> parameters.stream().map(FunctionSymbol.Parameter::name).collect(Collectors.toList()))
+      .orElse(List.of());
   }
 }

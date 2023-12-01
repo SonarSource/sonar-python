@@ -1,4 +1,6 @@
-from typing import Any
+import typing
+from typing import Any, override, overload
+
 
 def foo(test: str, param: Any) -> str: # Noncompliant {{Use a more specific type than `Any` for this type hint.}}
                          #^^^
@@ -47,32 +49,62 @@ class Parent1:
     ...
 
 
+
 class Child1(Parent1):
 
+    @override
+    def something():
+        test: Any  # Noncompliant
+
+    @override(Parent1)
+    def add_item(self, param1: Any) -> None: # Compliant
+        ...
+
     @overload
-    def addItem(self, user_data: Any = None) -> None: # Compliant
+    def add_item(self, param2: Any) -> None: # Compliant
         ...
 
     @override
-    def addItem(self, text: str, user_data: Any = ...) -> None: # Compliant
+    def add_item(self, text: str, param1: Any) -> None: # Compliant
         ...
 
-    @overload
-    def addItem(self, text: str, user_data: Any = ...) -> None: # Compliant
+    @typing.overload
+    def add_item(self, text: str, param2: Any) -> None: # Compliant
         ...
 
+    def over():
+        def wrapper():
+            ...
+        return wrapper
 
     @over
-    def addItem(self, text: str, user_data: Any = ...) -> None: # Noncompliant
+    def add_item(self, text: str, param3: Any) -> None: # Noncompliant
         ...
 
 
 class Parent2:
-    def addItem(self, text: str, user_data: Any) -> None: # Noncompliant
+    def add_item(self, text: str, param1: Any) -> None: # Noncompliant
         ...
 
+    def some_function(self, text: str) -> None:
+        ...
+
+    def other_function(self, text: str, other: Any) -> None: # Noncompliant
+        ...
+
+    def return_type_check(self, text) -> Any: # Noncompliant
+        ...
 
 class Child2(Parent2, object):
-    def addItem(self, text: str, user_data: Any) -> None: # Compliant it is an override
-        # do something
-        super().addItem(text, user_data)
+    def add_item(self, text: str, param1: Any) -> None: # Compliant it is an override
+        ...
+
+    def some_function(self, text: str, extra_param: Any) -> None:  # Noncompliant
+        ...
+
+    # Here we do not consider this `other_function` as an override as the parameters are in the incorrect order
+    def other_function(self, other: Any, text: str) -> None: # Noncompliant
+        ...
+
+    def return_type_check(self, text) -> Any: # Compliant
+        ...
