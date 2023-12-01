@@ -20,6 +20,7 @@
 package org.sonar.plugins.python.api.cfg;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -704,6 +705,34 @@ class ControlFlowGraphTest {
       "if a: ",
       "  if_body(succ = [after_if], pred = [before])",
       "after_if(succ = [END], pred = [before, if_body])");
+  }
+
+  @Test
+  void decorators() {
+    ControlFlowGraph cfg = cfg(
+      "class Dec:",
+      "    def a():",
+      "        ...",
+      "dec = Dec()",
+      "@dec.a()",
+      "def foo():",
+      "    ..."
+    );
+    List<Tree> elements = cfg.start().elements();
+    assertThat(elements).hasSize(5);
+    assertThat(elements).extracting(Tree::getKind).containsExactly(Kind.NAME, Kind.FUNCDEF, Kind.ASSIGNMENT_STMT, Kind.DECORATOR, Kind.FUNCDEF);
+
+    cfg = cfg(
+      "class Dec:",
+      "    def __call__(self):",
+      "        ...",
+      "@Dec",
+      "class OtherClass:",
+      "    ..."
+    );
+    elements = cfg.start().elements();
+    assertThat(elements).hasSize(5);
+    assertThat(elements).extracting(Tree::getKind).containsExactly(Kind.NAME, Kind.FUNCDEF, Kind.DECORATOR, Kind.NAME, Kind.EXPRESSION_STMT);
   }
 
   @Test

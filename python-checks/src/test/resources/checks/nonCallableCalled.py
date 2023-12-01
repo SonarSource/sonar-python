@@ -80,6 +80,13 @@ def with_metaclass():
   a = A()
   a() # OK
 
+
+def decorators():
+  x = 42
+  @x() # Noncompliant
+  def foo():
+    ...
+
 #######################################
 # Valid case: Calling a callable object
 #######################################
@@ -96,6 +103,19 @@ def call_function():
     from math import max
     func()
     max()
+
+#############################
+# Valid case: Call a decorator
+#############################
+
+def decorators():
+    class Dec:
+        def __call__(self, *args):
+            ...
+
+    @Dec("foo")
+    def foo():
+        ...
 
 #############################
 # Valid case: Call a method

@@ -164,10 +164,7 @@ public class ControlFlowGraphBuilder {
       case WITH_STMT:
         return buildWithStatement((WithStatement) statement, currentBlock);
       case CLASSDEF:
-        ClassDef classDef = (ClassDef) statement;
-        PythonCfgBlock block = build(classDef.body().statements(), currentBlock);
-        block.addElement(classDef.name()); // represents binding to class name
-        return block;
+        return buildClassDefStatement((ClassDef) statement, currentBlock);
       case RETURN_STMT:
         return buildReturnStatement((ReturnStatement) statement, currentBlock);
       case RAISE_STMT:
@@ -186,10 +183,25 @@ public class ControlFlowGraphBuilder {
         return buildBreakStatement((BreakStatement) statement, currentBlock);
       case MATCH_STMT:
         return buildMatchStatement((MatchStatement) statement, currentBlock);
+      case FUNCDEF:
+        return buildFuncDefStatement((FunctionDef) statement, currentBlock);
       default:
         currentBlock.addElement(statement);
     }
 
+    return currentBlock;
+  }
+
+  private PythonCfgBlock buildClassDefStatement(ClassDef classDef, PythonCfgBlock currentBlock) {
+    PythonCfgBlock block = build(classDef.body().statements(), currentBlock);
+    block.addElement(classDef.name()); // represents binding to class name
+    classDef.decorators().stream().forEach(currentBlock::addElement);
+    return block;
+  }
+
+  private static PythonCfgBlock buildFuncDefStatement(FunctionDef functionDef, PythonCfgBlock currentBlock) {
+    currentBlock.addElement(functionDef);
+    functionDef.decorators().stream().forEach(currentBlock::addElement);
     return currentBlock;
   }
 
