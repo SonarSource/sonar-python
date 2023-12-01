@@ -36,6 +36,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Function;
 import javax.annotation.Nullable;
+import org.assertj.core.api.NotThrownAssert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
@@ -107,6 +108,7 @@ import org.sonarsource.sonarlint.core.commons.Language;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatNoException;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
@@ -130,6 +132,7 @@ class PythonSensorTest {
   private static final String FILE_2 = "file2.py";
   private static final String FILE_QUICKFIX = "file_quickfix.py";
   private static final String FILE_TEST_FILE = "test_file.py";
+  private static final String FILE_INVALID_SYNTAX = "invalid_syntax.py";
   private static final String ONE_STATEMENT_PER_LINE_RULE_KEY = "OneStatementPerLine";
   private static final String FILE_COMPLEXITY_RULE_KEY = "FileComplexity";
   private static final String CUSTOM_REPOSITORY_KEY = "customKey";
@@ -523,6 +526,35 @@ class PythonSensorTest {
     Issue issue = context.allIssues().iterator().next();
     assertThat(issue.primaryLocation().inputComponent()).isEqualTo(inputFile);
     assertThat(issue.ruleKey().rule()).isEqualTo("S5905");
+  }
+
+
+  @Test
+  void test_failFast_triggered_on_main_files() {
+    activeRules = new ActiveRulesBuilder()
+      .addRule(new NewActiveRule.Builder()
+        .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, "S5905"))
+        .build())
+      .build();
+
+    inputFile(FILE_INVALID_SYNTAX, Type.MAIN);
+    context.setSettings(new MapSettings().setProperty("sonar.internal.analysis.failFast", true));
+    PythonSensor sensor = sensor();
+    assertThatThrownBy(() -> sensor.execute(context)).isInstanceOf(IllegalStateException.class);
+  }
+
+  @Test
+  void test_failFast_not_triggered_on_test_files() {
+    activeRules = new ActiveRulesBuilder()
+      .addRule(new NewActiveRule.Builder()
+        .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, "S5905"))
+        .build())
+      .build();
+
+    inputFile(FILE_INVALID_SYNTAX, Type.TEST);
+    context.setSettings(new MapSettings().setProperty("sonar.internal.analysis.failFast", true));
+    sensor().execute(context);
+    assertThat(context.allIssues()).isEmpty();
   }
 
   @Test
