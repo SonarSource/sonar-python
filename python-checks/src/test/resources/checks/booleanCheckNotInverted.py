@@ -109,8 +109,7 @@ def set_comparison_test(a, b):
 
     ingredients: Set[str] = {'beef', 'potatos'}
     consumable_by_vegans: Set[str] = {'nut', 'apple', 'potatos'}
-    # FP: The type of both sets is inferred as ANY. Should be fixed as part of SONARPY-1574
-    if not (ingredients <= consumable_by_vegans): # Noncompliant
+    if not (ingredients <= consumable_by_vegans): # Compliant
         ...
 
     ingredients_not_annotated = {'beef', 'potato'}

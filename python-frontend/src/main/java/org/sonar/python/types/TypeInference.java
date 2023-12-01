@@ -37,6 +37,7 @@ import org.sonar.plugins.python.api.cfg.ControlFlowGraph;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
+import org.sonar.plugins.python.api.tree.AnnotatedAssignment;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.ClassDef;
@@ -212,26 +213,25 @@ public class TypeInference extends BaseTreeVisitor {
     if (lhsExpressions.size() != 1) {
       return;
     }
-    Expression lhsExpression = lhsExpressions.get(0);
-    if (!lhsExpression.is(Tree.Kind.NAME)) {
-      return;
-    }
-    Name lhs = (Name) lhsExpression;
-    SymbolImpl symbol = (SymbolImpl) lhs.symbol();
-    if (symbol == null) {
-      return;
-    }
-
-    Expression rhs = assignmentStatement.assignedValue();
-    Assignment assignment = new Assignment(symbol, lhs, rhs);
-    assignmentsByAssignmentStatement.put(assignmentStatement, assignment);
-    assignmentsByLhs.computeIfAbsent(symbol, s -> new HashSet<>()).add(assignment);
+    processAssignment(assignmentStatement, lhsExpressions.get(0), assignmentStatement.assignedValue());
   }
 
   @Override
   public void visitCompoundAssignment(CompoundAssignmentStatement compoundAssignment) {
     super.visitCompoundAssignment(compoundAssignment);
-    Expression lhsExpression = compoundAssignment.lhsExpression();
+    processAssignment(compoundAssignment, compoundAssignment.lhsExpression(), compoundAssignment.rhsExpression());
+  }
+
+  @Override
+  public void visitAnnotatedAssignment(AnnotatedAssignment annotatedAssignment){
+    super.visitAnnotatedAssignment(annotatedAssignment); 
+    Expression assignedValue = annotatedAssignment.assignedValue();
+    if (assignedValue != null) {
+      processAssignment(annotatedAssignment, annotatedAssignment.variable(), assignedValue);
+    }
+  }
+
+  private void processAssignment(Statement assignmentStatement, Expression lhsExpression, Expression rhsExpression){
     if (!lhsExpression.is(Tree.Kind.NAME)) {
       return;
     }
@@ -241,9 +241,8 @@ public class TypeInference extends BaseTreeVisitor {
       return;
     }
 
-    Expression rhs = compoundAssignment.rhsExpression();
-    Assignment assignment = new Assignment(symbol, lhs, rhs);
-    assignmentsByAssignmentStatement.put(compoundAssignment, assignment);
+    Assignment assignment = new Assignment(symbol, lhs, rhsExpression);
+    assignmentsByAssignmentStatement.put(assignmentStatement, assignment);
     assignmentsByLhs.computeIfAbsent(symbol, s -> new HashSet<>()).add(assignment);
   }
 
