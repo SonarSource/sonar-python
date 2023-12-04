@@ -84,7 +84,7 @@ public class UnusedFunctionParameterCheck extends PythonSubscriptionCheck {
     StringLiteralValuesCollector stringLiteralValuesCollector = new StringLiteralValuesCollector();
     stringLiteralValuesCollector.collect(functionDef);
     List<String> comments = collectComments(functionDef);
-    Pattern p = Pattern.compile("(^|\\s+|@)" + symbolName + "($|\\s+)");
+    Pattern p = Pattern.compile("(^|\\s+|\"|'|@)" + symbolName + "($|\\s+|\"|')");
     return stringLiteralValuesCollector.anyMatches(str -> p.matcher(str).find()) ||
       comments.stream().anyMatch(str -> p.matcher(str).find());
   }

@@ -150,6 +150,14 @@ class MyClass:
         # Overrides may use unused_param_2 to do something
         print("hello")
 
+    def param_referenced_in_comment_no_issue_2(unused_param_2):
+        # Overrides may use 'unused_param_2' to do something
+        print("hello")
+
+    def param_referenced_in_comment_no_issue_3(unused_param_2):
+        # Overrides may use "unused_param_2" to do something
+        print("hello")
+
     def param_accessed_through_pandas_no_issue(sample_df, area_of_interest): # OK
         sample_df.query('area == @area_of_interest').population
         print("hello")
