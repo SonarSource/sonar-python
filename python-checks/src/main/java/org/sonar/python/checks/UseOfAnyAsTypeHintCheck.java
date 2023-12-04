@@ -58,7 +58,7 @@ public class UseOfAnyAsTypeHintCheck extends PythonSubscriptionCheck {
       .filter(UseOfAnyAsTypeHintCheck::isTypeAny)
       .map(annotation -> (FunctionDef) TreeUtils.firstAncestorOfKind(annotation, Tree.Kind.FUNCDEF))
       .filter(Predicate.not(UseOfAnyAsTypeHintCheck::hasFunctionOverrideOrOverloadDecorator))
-      .filter(Predicate.not(UseOfAnyAsTypeHintCheck::isParentFunctionAnOverrideWithoutDecorators))
+      .filter(Predicate.not(UseOfAnyAsTypeHintCheck::canFunctionBeAnOverride))
       .ifPresent(functionDef -> ctx.addIssue(typeAnnotation.expression(), MESSAGE));
   }
 
@@ -75,7 +75,7 @@ public class UseOfAnyAsTypeHintCheck extends PythonSubscriptionCheck {
       .anyMatch(OVERRIDE_FQNS::contains);
   }
 
-  private static boolean isParentFunctionAnOverrideWithoutDecorators(FunctionDef currentMethodDef) {
+  private static boolean canFunctionBeAnOverride(FunctionDef currentMethodDef) {
     return Optional.ofNullable(TreeUtils.getFunctionSymbolFromDef(currentMethodDef))
       .map(SymbolUtils::canBeAnOverridingMethod)
       .orElse(false);
