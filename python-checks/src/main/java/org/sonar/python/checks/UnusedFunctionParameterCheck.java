@@ -19,8 +19,13 @@
  */
 package org.sonar.python.checks;
 
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Deque;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.regex.Pattern;
 import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
@@ -35,9 +40,12 @@ import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.ReturnStatement;
 import org.sonar.plugins.python.api.tree.Statement;
+import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
+import org.sonar.plugins.python.api.tree.Trivia;
 import org.sonar.python.checks.utils.CheckUtils;
+import org.sonar.python.checks.utils.StringLiteralValuesCollector;
 import org.sonar.python.semantic.SymbolUtils;
 import org.sonar.python.tree.FunctionDefImpl;
 import org.sonar.python.tree.TreeUtils;
@@ -46,6 +54,8 @@ import org.sonar.python.tree.TreeUtils;
 public class UnusedFunctionParameterCheck extends PythonSubscriptionCheck {
 
   private static final String MESSAGE = "Remove the unused function parameter \"%s\".";
+
+  private static final Set<String> AWS_LAMBDA_PARAMETERS = Set.of("event", "context");
 
   @Override
   public void initialize(Context context) {
@@ -56,14 +66,31 @@ public class UnusedFunctionParameterCheck extends PythonSubscriptionCheck {
     if (isException(ctx, functionDef)) return;
     functionDef.localVariables().stream()
       .filter(symbol -> !isIgnoredSymbolName(symbol.name()))
-      .map(Symbol::usages)
-      .filter(usages -> usages.size() == 1 && usages.get(0).tree().parent().is(Kind.PARAMETER))
-      .map(usages -> (Parameter) usages.get(0).tree().parent())
+      .filter(UnusedFunctionParameterCheck::isUnused)
+      .filter(symbol -> !isUsedInStringLiteralOrComment(symbol.name(), functionDef))
+      .map(symbol -> (Parameter) symbol.usages().get(0).tree().parent())
       .forEach(param -> ctx.addIssue(param, String.format(MESSAGE, param.name().name())));
   }
 
+  private static boolean isUnused(Symbol s) {
+    return s.usages().size() == 1 && s.usages().get(0).tree().parent().is(Kind.PARAMETER);
+  }
+
+  /* If the parameter is used within a string literal or comment, this might indicate either:
+   * A docstring or a comment explains why this parameter is unused (e.g the method is method to be overridden)
+   * The parameter is used through a DSL (e.g pandas.DataFrame.query)
+   */
+  private static boolean isUsedInStringLiteralOrComment(String symbolName, FunctionDef functionDef) {
+    StringLiteralValuesCollector stringLiteralValuesCollector = new StringLiteralValuesCollector();
+    stringLiteralValuesCollector.collect(functionDef);
+    List<String> comments = collectComments(functionDef);
+    Pattern p = Pattern.compile("(^|\\s+|\"|'|@)" + symbolName + "($|\\s+|\"|')");
+    return stringLiteralValuesCollector.anyMatches(str -> p.matcher(str).find()) ||
+      comments.stream().anyMatch(str -> p.matcher(str).find());
+  }
+
   private static boolean isIgnoredSymbolName(String symbolName) {
-    return "self".equals(symbolName) || symbolName.startsWith("_");
+    return "self".equals(symbolName) || symbolName.startsWith("_") || AWS_LAMBDA_PARAMETERS.contains(symbolName);
   }
 
   private static boolean isException(SubscriptionContext ctx, FunctionDef functionDef) {
@@ -124,5 +151,21 @@ public class UnusedFunctionParameterCheck extends PythonSubscriptionCheck {
     if (callExpression == null) return false;
     Expression callee = callExpression.callee();
     return callee == tree || TreeUtils.hasDescendant(callee, t -> t == tree);
+  }
+
+  private static List<String> collectComments(Tree element) {
+    List<String> comments = new ArrayList<>();
+    Deque<Tree> stack = new ArrayDeque<>();
+    stack.push(element);
+    while (!stack.isEmpty()) {
+      Tree currentElement = stack.pop();
+      if (currentElement.is(Kind.TOKEN)) {
+        ((Token) currentElement).trivia().stream().map(Trivia::value).forEach(comments::add);
+      }
+      for (int i = currentElement.children().size() - 1; i >= 0; i--) {
+        Optional.ofNullable(currentElement.children().get(i)).ifPresent(stack::push);
+      }
+    }
+    return comments;
   }
 }
