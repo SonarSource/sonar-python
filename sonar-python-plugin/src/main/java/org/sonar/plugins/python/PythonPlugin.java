@@ -41,7 +41,7 @@ import org.sonar.plugins.python.ruff.RuffRulesDefinition;
 import org.sonar.plugins.python.ruff.RuffSensor;
 import org.sonar.plugins.python.warnings.AnalysisWarningsWrapper;
 import org.sonar.plugins.python.xunit.PythonXUnitSensor;
-import org.sonar.plugins.python.indexer.SonarLintCacheImpl;
+import org.sonar.plugins.python.api.SonarLintCacheImpl;
 
 public class PythonPlugin implements Plugin {
 
