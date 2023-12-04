@@ -19,26 +19,18 @@
  */
 package org.sonar.python.checks;
 
-import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
-import org.sonar.plugins.python.api.symbols.ClassSymbol;
-import org.sonar.plugins.python.api.symbols.FunctionSymbol;
-import org.sonar.plugins.python.api.symbols.Symbol;
-import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.Decorator;
 import org.sonar.plugins.python.api.tree.FunctionDef;
-import org.sonar.plugins.python.api.tree.Name;
-import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TypeAnnotation;
+import org.sonar.python.semantic.SymbolUtils;
 import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S6542")
@@ -84,42 +76,9 @@ public class UseOfAnyAsTypeHintCheck extends PythonSubscriptionCheck {
   }
 
   private static boolean isParentFunctionAnOverrideWithoutDecorators(FunctionDef currentMethodDef) {
-    return Optional.ofNullable(TreeUtils.firstAncestorOfKind(currentMethodDef, Tree.Kind.CLASSDEF))
-      .map(ClassDef.class::cast)
-      .map(TreeUtils::getClassSymbolFromDef)
-      .map(classSymbol -> UseOfAnyAsTypeHintCheck.isMethodAnOverride(classSymbol, currentMethodDef))
+    return Optional.ofNullable(TreeUtils.getFunctionSymbolFromDef(currentMethodDef))
+      .map(SymbolUtils::canBeAnOverridingMethod)
       .orElse(false);
   }
 
-  private static boolean isMethodAnOverride(ClassSymbol classSymbol, FunctionDef currentMethodDef) {
-    List<String> currentMethodParametersName = getCurrentMethodParametersName(currentMethodDef);
-    for (Symbol superClass : classSymbol.superClasses()) {
-      if (superClass.is(Symbol.Kind.CLASS)) {
-        List<String> resolvedMemberParametersName = getResolvedMemberParametersName((ClassSymbol) superClass, currentMethodDef.name().name());
-        if (currentMethodParametersName.equals(resolvedMemberParametersName)) {
-          return true;
-        }
-      }
-    }
-    return false;
-  }
-
-  private static List<String> getCurrentMethodParametersName(FunctionDef methodDef) {
-    return Optional.ofNullable(methodDef.parameters())
-      .map(parameters -> parameters.nonTuple().stream()
-        .map(Parameter::name)
-        .filter(Objects::nonNull)
-        .map(Name::name)
-        .collect(Collectors.toList()))
-      .orElse(List.of());
-  }
-
-  public static List<String> getResolvedMemberParametersName(ClassSymbol superClass, String memberName) {
-    return superClass.resolveMember(memberName)
-      .filter(FunctionSymbol.class::isInstance)
-      .map(FunctionSymbol.class::cast)
-      .map(FunctionSymbol::parameters)
-      .map(parameters -> parameters.stream().map(FunctionSymbol.Parameter::name).collect(Collectors.toList()))
-      .orElse(List.of());
-  }
 }

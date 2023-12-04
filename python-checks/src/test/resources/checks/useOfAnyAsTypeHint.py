@@ -89,6 +89,9 @@ class Parent2:
     def some_function(self, text: str) -> None:
         ...
 
+    def text_function(self, text: Any) -> None: # Noncompliant
+        ... 
+
     def other_function(self, text: str, other: Any) -> None: # Noncompliant
         ...
 
@@ -99,11 +102,14 @@ class Child2(Parent2, object):
     def add_item(self, text: str, param1: Any) -> None: # Compliant it is an override
         ...
 
-    def some_function(self, text: str, extra_param: Any) -> None:  # Noncompliant
+    def some_function(self, text: str, extra_param: Any) -> None:  # Compliant FN
         ...
 
-    # Here we do not consider this `other_function` as an override as the parameters are in the incorrect order
-    def other_function(self, other: Any, text: str) -> None: # Noncompliant
+    def text_function(self, text: Any, other_param) -> None: # Compliant
+        ...
+
+    # Here we consider this `other_function` as an override even if the parameters are in different order.
+    def other_function(self, other: Any, text: str) -> None: # Compliant
         ...
 
     def return_type_check(self, text) -> Any: # Compliant
