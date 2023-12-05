@@ -66,7 +66,7 @@ public class CdkPredicate {
    * @return Predicate which tests if expression is a fully qualified name (FQN) and is equal the expected FQN
    */
   public static Predicate<Expression> isFqn(String fqnValue) {
-    return expression ->  Optional.ofNullable(TreeUtils.fullyQualifiedNameFromExpression(expression))
+    return expression ->  TreeUtils.fullyQualifiedNameFromExpression(expression)
       .filter(fqnValue::equals)
       .isPresent();
   }
@@ -75,7 +75,7 @@ public class CdkPredicate {
    * @return Predicate which tests if expression is a fully qualified name (FQN) and part of the FQN list
    */
   public static Predicate<Expression> isFqnOf(Collection<String> fqnValues) {
-    return expression ->  Optional.ofNullable(TreeUtils.fullyQualifiedNameFromExpression(expression))
+    return expression ->  TreeUtils.fullyQualifiedNameFromExpression(expression)
       .filter(fqnValues::contains)
       .isPresent();
   }

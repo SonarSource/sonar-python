@@ -217,7 +217,7 @@ public class ClearTextProtocolsCheckPart extends AbstractCdkResourceCheck {
    * @return Predicate which tests if expression is a FQN and is listed in sensitive transport protocol FQN list
    */
   private static Predicate<Expression> isSensitiveTransportProtocolFqn(Collection<String> transportProtocolFqns) {
-    return expression -> Optional.ofNullable(TreeUtils.fullyQualifiedNameFromExpression(expression))
+    return expression -> TreeUtils.fullyQualifiedNameFromExpression(expression)
       .filter(transportProtocolFqns::contains).isPresent();
   }
 

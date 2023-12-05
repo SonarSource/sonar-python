@@ -86,7 +86,7 @@ public class UnusedGroupNamesCheck extends AbstractRegexCheck {
 
   private static Optional<List<Usage>> getCallExpressionResultUsages(CallExpression regexFunctionCall, Set<String> expressionFQNs) {
     return Optional.of(regexFunctionCall)
-      .filter(c -> expressionFQNs.contains(TreeUtils.fullyQualifiedNameFromExpression(c)))
+      .filter(c -> TreeUtils.fullyQualifiedNameFromExpression(c).filter(expressionFQNs::contains).isPresent())
       .map(call -> TreeUtils.firstAncestorOfKind(call, Tree.Kind.ASSIGNMENT_STMT))
       .map(AssignmentStatement.class::cast)
       .map(UnusedGroupNamesCheck::getAssignmentResultUsages)

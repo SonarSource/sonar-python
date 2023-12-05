@@ -206,13 +206,13 @@ class PythonTreeMakerMatchStatementTest extends RuleTest {
     assertThat(((LiteralPattern) firstKeyValuePattern.value()).valueAsString()).isEqualTo("'foo'");
     QualifiedExpression firstKeyQualExpr = ((ValuePattern) firstKeyValuePattern.key()).qualifiedExpression();
     assertThat(TreeUtils.nameFromQualifiedExpression(firstKeyQualExpr)).isEqualTo("a.b");
-    assertThat(TreeUtils.fullyQualifiedNameFromQualifiedExpression(firstKeyQualExpr)).isEqualTo("a.b");
+    assertThat(TreeUtils.fullyQualifiedNameFromQualifiedExpression(firstKeyQualExpr)).contains("a.b");
 
     KeyValuePattern secondKeyValuePattern = (KeyValuePattern) mappingPattern.elements().get(1);
     assertThat(((LiteralPattern) secondKeyValuePattern.value()).valueAsString()).isEqualTo("'bar'");
     QualifiedExpression secondKeyQualExpr = ((ValuePattern) secondKeyValuePattern.key()).qualifiedExpression();
     assertThat(TreeUtils.nameFromQualifiedExpression(secondKeyQualExpr)).isEqualTo("c.d.e");
-    assertThat(TreeUtils.fullyQualifiedNameFromQualifiedExpression(secondKeyQualExpr)).isEqualTo("c.d.e");
+    assertThat(TreeUtils.fullyQualifiedNameFromQualifiedExpression(secondKeyQualExpr)).contains("c.d.e");
   }
 
   @Test
@@ -230,13 +230,13 @@ class PythonTreeMakerMatchStatementTest extends RuleTest {
     QualifiedExpression qualifiedExpression = valuePattern.qualifiedExpression();
     assertThat(((Name) qualifiedExpression.qualifier()).isVariable()).isTrue();
     assertThat(TreeUtils.nameFromQualifiedExpression(qualifiedExpression)).isEqualTo("a.b");
-    assertThat(TreeUtils.fullyQualifiedNameFromQualifiedExpression(qualifiedExpression)).isEqualTo("a.b");
+    assertThat(TreeUtils.fullyQualifiedNameFromQualifiedExpression(qualifiedExpression)).contains("a.b");
     assertThat(valuePattern.children()).containsExactly(valuePattern.qualifiedExpression());
 
     valuePattern = pattern("case a.b.c: ...");
     qualifiedExpression = valuePattern.qualifiedExpression();
     assertThat(TreeUtils.nameFromQualifiedExpression(qualifiedExpression)).isEqualTo("a.b.c");
-    assertThat(TreeUtils.fullyQualifiedNameFromQualifiedExpression(qualifiedExpression)).isEqualTo("a.b.c");
+    assertThat(TreeUtils.fullyQualifiedNameFromQualifiedExpression(qualifiedExpression)).contains("a.b.c");
   }
 
   @Test
@@ -319,7 +319,7 @@ class PythonTreeMakerMatchStatementTest extends RuleTest {
     Name qualifierA = (Name) ((QualifiedExpression) qualifiedExpression.qualifier()).qualifier();
     assertThat(qualifierA.isVariable()).isTrue();
     assertThat(TreeUtils.nameFromQualifiedExpression(qualifiedExpression)).isEqualTo("A.B.C");
-    assertThat(TreeUtils.fullyQualifiedNameFromQualifiedExpression(qualifiedExpression)).isEqualTo("A.B.C");
+    assertThat(TreeUtils.fullyQualifiedNameFromQualifiedExpression(qualifiedExpression)).contains("A.B.C");
 
     classPattern = pattern("case A(foo='bar'): ...");
     KeywordPattern arg = ((KeywordPattern) classPattern.arguments().get(0));

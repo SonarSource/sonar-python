@@ -65,7 +65,8 @@ public class UseOfAnyAsTypeHintCheck extends PythonSubscriptionCheck {
 
   private static boolean isTypeAny(@Nullable TypeAnnotation typeAnnotation) {
     return Optional.ofNullable(typeAnnotation)
-      .map(annotation -> "typing.Any".equals(TreeUtils.fullyQualifiedNameFromExpression(annotation.expression())))
+      .flatMap(a -> TreeUtils.fullyQualifiedNameFromExpression(a.expression()))
+      .map("typing.Any"::equals)
       .orElse(false);
   }
 
@@ -73,7 +74,7 @@ public class UseOfAnyAsTypeHintCheck extends PythonSubscriptionCheck {
     return currentFunctionDef.decorators().stream()
       .map(Decorator::expression)
       .map(TreeUtils::fullyQualifiedNameFromExpression)
-      .filter(Objects::nonNull)
+      .flatMap(Optional::stream)
       .anyMatch(OVERRIDE_FQNS::contains);
   }
 
