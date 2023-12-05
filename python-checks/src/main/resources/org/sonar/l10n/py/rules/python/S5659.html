@@ -22,7 +22,7 @@ can manipulate the content of the token and grant themselves permissions they sh
 <pre data-diff-id="1" data-diff-type="noncompliant">
 import jwt
 
-jwt.decode(token, verify=False) # Noncompliant
+jwt.decode(token, options={"verify_signature":False}) # Noncompliant
 </pre>
 <h4>Compliant solution</h4>
 <p>By default, verification is enabled for the method <code>decode</code>.</p>

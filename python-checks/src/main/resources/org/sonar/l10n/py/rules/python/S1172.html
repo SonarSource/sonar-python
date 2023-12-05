@@ -16,6 +16,19 @@ is insignificant.</p>
 def do_something(a, _): # no issue reported on _
   return compute(a)
 </pre>
+<p>The rule also won’t raise an issue if the parameter is referenced in a docstring or a comment:</p>
+<pre>
+class MyClass:
+    def do_something(self, my_param): # no issue reported
+      # Overrides may use my_param to ...
+      return compute(a)
+</pre>
+<pre>
+class MyClass:
+    def do_something(self, my_param): # no issue reported
+      """Overrides may use my_param to ..."""
+      return compute(a)
+</pre>
 <h2>How to fix it</h2>
 <p>Having unused function parameters in your code can lead to confusion and misunderstanding of a developer’s intention. They reduce code readability
 and introduce the potential for errors. To avoid these problems, developers should remove unused parameters from function declarations.</p>
