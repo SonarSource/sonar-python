@@ -114,3 +114,7 @@ class Child2(Parent2, object):
 
     def return_type_check(self, text) -> Any: # Compliant
         ...
+
+    @my_annotation[42]
+    def some_annotated_method(self, text: Any):  # Noncompliant
+        ...
