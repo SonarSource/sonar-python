@@ -60,6 +60,7 @@ public class JwtVerificationCheck extends PythonSubscriptionCheck {
     "jose.jws.verify");
 
   private static final Set<String> UNVERIFIED_FQNS = Set.of(
+    "jwt.get_unverified_header",
     "jose.jwt.get_unverified_header",
     "jose.jwt.get_unverified_headers",
     "jose.jws.get_unverified_header",
@@ -87,6 +88,11 @@ public class JwtVerificationCheck extends PythonSubscriptionCheck {
       RegularArgument verifyArg = TreeUtils.argumentByKeyword("verify", call.arguments());
       if (verifyArg != null && Expressions.isFalsy(verifyArg.expression())) {
         ctx.addIssue(verifyArg, MESSAGE);
+      } else {
+        Optional.ofNullable(TreeUtils.argumentByKeyword("options", call.arguments()))
+          .map(RegularArgument::expression)
+          .filter(JwtVerificationCheck::isListOrDictWithSensitiveEntry)
+          .ifPresent(expression -> ctx.addIssue(expression, MESSAGE));
       }
     } else if (PROCESS_JWT_FQNS.contains(calleeSymbol.fullyQualifiedName())) {
       Optional.ofNullable(TreeUtils.firstAncestorOfKind(call, Kind.FILE_INPUT, Kind.FUNCDEF))
