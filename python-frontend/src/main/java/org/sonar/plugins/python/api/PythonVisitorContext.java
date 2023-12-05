@@ -24,6 +24,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Nullable;
+import org.sonar.api.SonarProduct;
 import org.sonar.plugins.python.api.PythonCheck.PreciseIssue;
 import org.sonar.plugins.python.api.caching.CacheContext;
 import org.sonar.plugins.python.api.tree.FileInput;
@@ -53,8 +54,22 @@ public class PythonVisitorContext extends PythonInputFileContext {
     new SymbolTableBuilder(packageName, pythonFile, projectLevelSymbolTable).visitFileInput(rootTree);
   }
 
+  public PythonVisitorContext(FileInput rootTree, PythonFile pythonFile, @Nullable File workingDirectory, String packageName,
+    ProjectLevelSymbolTable projectLevelSymbolTable, CacheContext cacheContext, SonarProduct sonarProduct) {
+    super(pythonFile, workingDirectory, cacheContext, sonarProduct);
+    this.rootTree = rootTree;
+    this.parsingException = null;
+    new SymbolTableBuilder(packageName, pythonFile, projectLevelSymbolTable).visitFileInput(rootTree);
+  }
+
   public PythonVisitorContext(PythonFile pythonFile, RecognitionException parsingException) {
     super(pythonFile, null, CacheContextImpl.dummyCache());
+    this.rootTree = null;
+    this.parsingException = parsingException;
+  }
+
+  public PythonVisitorContext(PythonFile pythonFile, RecognitionException parsingException, SonarProduct sonarProduct) {
+    super(pythonFile, null, CacheContextImpl.dummyCache(), sonarProduct);
     this.rootTree = null;
     this.parsingException = parsingException;
   }
