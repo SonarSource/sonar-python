@@ -38,30 +38,39 @@ def test_non_compliant_call_expressions():
     app = Flask(__name__)
 
     # Tests for "flask.app.Flask.config[.update]"
-    app.config.update(dict( # Noncompliant
-#   ^[el=+3;ec=6]
-        JWT_SECRET_KEY="woopie"
+    app.config.update(dict(
+        JWT_SECRET_KEY="woopie" # Noncompliant
+#       ^^^^^^^^^^^^^^^^^^^^^^^
     ))
 
     app.config.update({"JWT_SECRET_KEY": "woopie"}) # Noncompliant
 
     d = dict(
-        JWT_SECRET_KEY="woopie"
+        JWT_SECRET_KEY="woopie" # Noncompliant 2
     )
-    d1 = {"JWT_SECRET_KEY": "woopie"}
+    d1 = {"JWT_SECRET_KEY": "woopie"} # Noncompliant 2
 
-    app.config.update(d)            # Noncompliant
-    app.config.update(d1)           # Noncompliant
+    app.config.update(d)
+    app.config.update(d1)
 
     # Tests for "flask.globals.current_app.config.update"
-    current_app.config.update(dict( # Noncompliant
-        JWT_SECRET_KEY="woopie"
+    current_app.config.update(dict(
+        JWT_SECRET_KEY="woopie" # Noncompliant
     ))
 
     current_app.config.update({"JWT_SECRET_KEY": "woopie"}) # Noncompliant
 
-    current_app.config.update(d)            # Noncompliant
-    current_app.config.update(d1)           # Noncompliant
+    current_app.config.update(d)
+    current_app.config.update(d1)
+
+    d2 = dict(JWT_SECRET_KEY="woopie")  # Noncompliant
+#             ^^^^^^^^^^^^^^^^^^^^^^^
+    app.config.update(d2)
+#   ^^^^^^^^^^^^^^^^^<1
+    d3 = {"JWT_SECRET_KEY": "woopie"}  # Noncompliant
+#         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    app.config.update(d3)
+#   ^^^^^^^^^^^^^^^^^<1
 
 
 def get_secret_from_vault():
