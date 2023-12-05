@@ -40,7 +40,7 @@ public class SonarLintCacheImpl implements SonarLintCache {
 
   @Override
   public boolean contains(String s) {
-    return false;
+    return cache.containsKey(s);
   }
 
   @Override
