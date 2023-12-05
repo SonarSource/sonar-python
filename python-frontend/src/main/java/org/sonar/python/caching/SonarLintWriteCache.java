@@ -19,8 +19,8 @@
  */
 package org.sonar.python.caching;
 
+import org.sonar.plugins.python.api.SonarLintCache;
 import org.sonar.plugins.python.api.caching.PythonWriteCache;
-import org.sonar.python.api.SonarLintCache;
 
 public class SonarLintWriteCache implements PythonWriteCache {
 

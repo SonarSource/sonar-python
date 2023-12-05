@@ -24,11 +24,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
-import org.sonar.python.api.SonarLintCache;
+import org.sonar.api.batch.sensor.cache.ReadCache;
+import org.sonar.api.batch.sensor.cache.WriteCache;
 import org.sonarsource.api.sonarlint.SonarLintSide;
 
 @SonarLintSide()
-public class SonarLintCacheImpl implements SonarLintCache {
+public class SonarLintCache implements ReadCache, WriteCache {
 
   private final Map<String, byte[]> cache = new HashMap<>();
 

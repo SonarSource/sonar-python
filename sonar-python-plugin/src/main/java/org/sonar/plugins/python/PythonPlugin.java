@@ -41,7 +41,7 @@ import org.sonar.plugins.python.ruff.RuffRulesDefinition;
 import org.sonar.plugins.python.ruff.RuffSensor;
 import org.sonar.plugins.python.warnings.AnalysisWarningsWrapper;
 import org.sonar.plugins.python.xunit.PythonXUnitSensor;
-import org.sonar.plugins.python.api.SonarLintCacheImpl;
+import org.sonar.plugins.python.api.SonarLintCache;
 
 public class PythonPlugin implements Plugin {
 
@@ -221,7 +221,7 @@ public class PythonPlugin implements Plugin {
 
     public void addSonarlintPythonIndexer(Context context, SonarLintPluginAPIVersion sonarLintPluginAPIVersion) {
       if (sonarLintPluginAPIVersion.isDependencyAvailable()) {
-        context.addExtension(SonarLintCacheImpl.class);
+        context.addExtension(SonarLintCache.class);
         context.addExtension(SonarLintPythonIndexer.class);
       } else {
         LOG.debug("Error while trying to inject SonarLintPythonIndexer");

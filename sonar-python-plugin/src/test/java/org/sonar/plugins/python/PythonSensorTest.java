@@ -91,7 +91,7 @@ import org.sonar.plugins.python.caching.TestReadCache;
 import org.sonar.plugins.python.caching.TestWriteCache;
 import org.sonar.plugins.python.indexer.FileHashingUtils;
 import org.sonar.plugins.python.indexer.PythonIndexer;
-import org.sonar.plugins.python.api.SonarLintCacheImpl;
+import org.sonar.plugins.python.api.SonarLintCache;
 import org.sonar.plugins.python.indexer.SonarLintPythonIndexer;
 import org.sonar.plugins.python.indexer.TestModuleFileSystem;
 import org.sonar.plugins.python.warnings.AnalysisWarningsWrapper;
@@ -1242,9 +1242,9 @@ class PythonSensorTest {
       return new PythonSensor(fileLinesContextFactory, checkFactory, mock(NoSonarFilter.class), customRuleRepositories, analysisWarnings);
     }
     if (customRuleRepositories == null) {
-      return new PythonSensor(fileLinesContextFactory, checkFactory, mock(NoSonarFilter.class), indexer, new SonarLintCacheImpl(), analysisWarnings);
+      return new PythonSensor(fileLinesContextFactory, checkFactory, mock(NoSonarFilter.class), indexer, new SonarLintCache(), analysisWarnings);
     }
-    return new PythonSensor(fileLinesContextFactory, checkFactory, mock(NoSonarFilter.class), customRuleRepositories, indexer, new SonarLintCacheImpl(), analysisWarnings);
+    return new PythonSensor(fileLinesContextFactory, checkFactory, mock(NoSonarFilter.class), customRuleRepositories, indexer, new SonarLintCache(), analysisWarnings);
   }
 
   private SonarLintPythonIndexer pythonIndexer(List<InputFile> files) {
