@@ -19,6 +19,7 @@
  */
 package org.sonar.python.checks;
 
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
@@ -72,6 +73,7 @@ public class UseOfAnyAsTypeHintCheck extends PythonSubscriptionCheck {
     return currentFunctionDef.decorators().stream()
       .map(Decorator::expression)
       .map(TreeUtils::fullyQualifiedNameFromExpression)
+      .filter(Objects::nonNull)
       .anyMatch(OVERRIDE_FQNS::contains);
   }
 
