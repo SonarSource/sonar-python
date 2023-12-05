@@ -24,6 +24,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Nullable;
+import org.sonar.api.SonarProduct;
 import org.sonar.plugins.python.api.PythonCheck.PreciseIssue;
 import org.sonar.plugins.python.api.caching.CacheContext;
 import org.sonar.plugins.python.api.tree.FileInput;
@@ -37,8 +38,8 @@ public class PythonVisitorContext extends PythonInputFileContext {
   private final RecognitionException parsingException;
   private List<PreciseIssue> issues = new ArrayList<>();
 
-  public PythonVisitorContext(FileInput rootTree, PythonFile pythonFile, @Nullable File workingDirectory, @Nullable String packageName) {
-    super(pythonFile, workingDirectory, CacheContextImpl.dummyCache());
+  public PythonVisitorContext(FileInput rootTree, PythonFile pythonFile, @Nullable File workingDirectory, @Nullable String packageName, SonarProduct sonarProduct) {
+    super(pythonFile, workingDirectory, CacheContextImpl.dummyCache(), sonarProduct);
     this.rootTree = rootTree;
     this.parsingException = null;
     SymbolTableBuilder symbolTableBuilder = packageName != null ? new SymbolTableBuilder(packageName, pythonFile) : new SymbolTableBuilder(pythonFile);
@@ -46,15 +47,15 @@ public class PythonVisitorContext extends PythonInputFileContext {
   }
 
   public PythonVisitorContext(FileInput rootTree, PythonFile pythonFile, @Nullable File workingDirectory, String packageName,
-    ProjectLevelSymbolTable projectLevelSymbolTable, CacheContext cacheContext) {
-    super(pythonFile, workingDirectory, cacheContext);
+    ProjectLevelSymbolTable projectLevelSymbolTable, CacheContext cacheContext, SonarProduct sonarProduct) {
+    super(pythonFile, workingDirectory, cacheContext, sonarProduct);
     this.rootTree = rootTree;
     this.parsingException = null;
     new SymbolTableBuilder(packageName, pythonFile, projectLevelSymbolTable).visitFileInput(rootTree);
   }
 
-  public PythonVisitorContext(PythonFile pythonFile, RecognitionException parsingException) {
-    super(pythonFile, null, CacheContextImpl.dummyCache());
+  public PythonVisitorContext(PythonFile pythonFile, RecognitionException parsingException, SonarProduct sonarProduct) {
+    super(pythonFile, null, CacheContextImpl.dummyCache(), sonarProduct);
     this.rootTree = null;
     this.parsingException = parsingException;
   }

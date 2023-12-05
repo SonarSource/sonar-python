@@ -24,6 +24,7 @@ import java.util.Collection;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.api.Beta;
+import org.sonar.api.SonarProduct;
 import org.sonar.plugins.python.api.caching.CacheContext;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.python.types.TypeShed;
@@ -34,10 +35,13 @@ public class PythonInputFileContext {
   private final File workingDirectory;
   private final CacheContext cacheContext;
 
-  public PythonInputFileContext(PythonFile pythonFile, @Nullable File workingDirectory, CacheContext cacheContext) {
+  private final SonarProduct sonarProduct;
+
+  public PythonInputFileContext(PythonFile pythonFile, @Nullable File workingDirectory, CacheContext cacheContext, SonarProduct sonarProduct) {
     this.pythonFile = pythonFile;
     this.workingDirectory = workingDirectory;
     this.cacheContext = cacheContext;
+    this.sonarProduct = sonarProduct;
   }
 
   public PythonFile pythonFile() {
@@ -57,5 +61,9 @@ public class PythonInputFileContext {
   @CheckForNull
   public File workingDirectory() {
     return workingDirectory;
+  }
+
+  public SonarProduct sonarProduct() {
+    return sonarProduct;
   }
 }

@@ -30,8 +30,10 @@ import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.plugins.python.Python;
+import org.sonar.plugins.python.api.SonarLintCache;
 import org.sonar.plugins.python.api.caching.CacheContext;
-import org.sonar.python.caching.CacheContextImpl;
+import org.sonar.python.caching.SonarLintCacheContext;
+import org.sonar.python.caching.SonarLintWriteCache;
 import org.sonarsource.api.sonarlint.SonarLintSide;
 import org.sonarsource.sonarlint.plugin.api.module.file.ModuleFileEvent;
 import org.sonarsource.sonarlint.plugin.api.module.file.ModuleFileListener;
@@ -41,6 +43,8 @@ import org.sonarsource.sonarlint.plugin.api.module.file.ModuleFileSystem;
 public class SonarLintPythonIndexer extends PythonIndexer implements ModuleFileListener {
 
   private final ModuleFileSystem moduleFileSystem;
+
+  private CacheContext cacheContext;
   private final Map<String, InputFile> indexedFiles = new HashMap<>();
   private static final Logger LOG = LoggerFactory.getLogger(SonarLintPythonIndexer.class);
   private boolean shouldBuildProjectSymbolTable = true;
@@ -74,6 +78,11 @@ public class SonarLintPythonIndexer extends PythonIndexer implements ModuleFileL
   }
 
   @Override
+  public void setSonarLintCache(SonarLintCache sonarLintCache) {
+    this.cacheContext = new SonarLintCacheContext(new SonarLintWriteCache(sonarLintCache));
+  }
+
+  @Override
   public InputFile getFileWithId(String fileId) {
     String compare = fileId.replace("\\", "/");
     return indexedFiles.getOrDefault(compare, null);
@@ -81,7 +90,7 @@ public class SonarLintPythonIndexer extends PythonIndexer implements ModuleFileL
 
   @Override
   public CacheContext cacheContext() {
-    return CacheContextImpl.dummyCache();
+    return cacheContext;
   }
 
   private static List<InputFile> getInputFiles(ModuleFileSystem moduleFileSystem) {

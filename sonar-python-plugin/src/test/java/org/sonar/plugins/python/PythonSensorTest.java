@@ -36,7 +36,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Function;
 import javax.annotation.Nullable;
-import org.assertj.core.api.NotThrownAssert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
@@ -92,6 +91,7 @@ import org.sonar.plugins.python.caching.TestReadCache;
 import org.sonar.plugins.python.caching.TestWriteCache;
 import org.sonar.plugins.python.indexer.FileHashingUtils;
 import org.sonar.plugins.python.indexer.PythonIndexer;
+import org.sonar.plugins.python.api.SonarLintCache;
 import org.sonar.plugins.python.indexer.SonarLintPythonIndexer;
 import org.sonar.plugins.python.indexer.TestModuleFileSystem;
 import org.sonar.plugins.python.warnings.AnalysisWarningsWrapper;
@@ -108,7 +108,6 @@ import org.sonarsource.sonarlint.core.commons.Language;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatNoException;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
@@ -1243,9 +1242,9 @@ class PythonSensorTest {
       return new PythonSensor(fileLinesContextFactory, checkFactory, mock(NoSonarFilter.class), customRuleRepositories, analysisWarnings);
     }
     if (customRuleRepositories == null) {
-      return new PythonSensor(fileLinesContextFactory, checkFactory, mock(NoSonarFilter.class), indexer, analysisWarnings);
+      return new PythonSensor(fileLinesContextFactory, checkFactory, mock(NoSonarFilter.class), indexer, new SonarLintCache(), analysisWarnings);
     }
-    return new PythonSensor(fileLinesContextFactory, checkFactory, mock(NoSonarFilter.class), customRuleRepositories, indexer, analysisWarnings);
+    return new PythonSensor(fileLinesContextFactory, checkFactory, mock(NoSonarFilter.class), customRuleRepositories, indexer, new SonarLintCache(), analysisWarnings);
   }
 
   private SonarLintPythonIndexer pythonIndexer(List<InputFile> files) {
