@@ -27,18 +27,21 @@ import javax.annotation.CheckForNull;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
+import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.ExpressionList;
+import org.sonar.plugins.python.api.tree.HasSymbol;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.SubscriptionExpression;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
+import org.sonar.python.checks.utils.Expressions;
 import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = DebugModeCheck.CHECK_KEY)
@@ -48,6 +51,7 @@ public class DebugModeCheck extends PythonSubscriptionCheck {
   private static final String FLASK_RUN_FQN = "flask.app.Flask.run";
   private static final String FLASK_APP_CONFIG_FQN = "flask.app.Flask.config";
   public static final String FLASK_APP_DEBUG_FQN = "flask.app.Flask.debug";
+  public static final String FLASK_GRAPHQL_VIEW_AS_VIEW_FQN = "flask_graphql.GraphQLView.as_view";
   private static final String MESSAGE = "Make sure this debug feature is deactivated before delivering the code in production.";
   private static final List<String> debugProperties = Arrays.asList("DEBUG", "DEBUG_PROPAGATE_EXCEPTIONS");
   private static final List<String> settingFiles = Arrays.asList("global_settings.py", "settings.py");
@@ -65,17 +69,54 @@ public class DebugModeCheck extends PythonSubscriptionCheck {
       return;
     }
 
-    if (DJANGO_CONFIGURE_FQN.equals(getQualifiedName(callExpression))) {
+    var qualifiedName = getQualifiedName(callExpression);
+
+    if (DJANGO_CONFIGURE_FQN.equals(qualifiedName)) {
       arguments.stream().filter(DebugModeCheck::isDebugArgument).forEach(arg -> ctx.addIssue(arg, MESSAGE));
     }
 
-    if (FLASK_RUN_FQN.equals(getQualifiedName(callExpression))) {
+    if (FLASK_RUN_FQN.equals(qualifiedName)) {
       RegularArgument debugArgument = TreeUtils.nthArgumentOrKeyword(2, "debug", arguments);
       Optional.ofNullable(debugArgument)
         .map(RegularArgument::expression)
-        .filter(DebugModeCheck::isTrueLiteral)
+        .filter(DebugModeCheck::isTrue)
         .ifPresent(name -> ctx.addIssue(debugArgument, MESSAGE));
     }
+
+    if (isFlaskGraphqlViewAsViewMethodCall(callExpression)) {
+      var argument = TreeUtils.nthArgumentOrKeyword(-1, "graphiql", arguments);
+      Optional.ofNullable(argument)
+        .map(RegularArgument::expression)
+        .filter(DebugModeCheck::isTrue)
+        .ifPresent(name -> ctx.addIssue(argument, MESSAGE));
+    }
+  }
+
+  private static boolean isFlaskGraphqlViewAsViewMethodCall(CallExpression callExpression) {
+    var qualifiedName = getQualifiedName(callExpression);
+    if (FLASK_GRAPHQL_VIEW_AS_VIEW_FQN.equals(qualifiedName)) {
+      return true;
+    }
+    boolean isAsViewMethodCall = Optional.of(callExpression)
+      .map(CallExpression::calleeSymbol)
+      .map(Symbol::name)
+      .filter("as_view"::equals)
+      .isPresent();
+
+    if (isAsViewMethodCall) {
+      return Optional.of(callExpression)
+        .map(CallExpression::callee)
+        .flatMap(TreeUtils.toOptionalInstanceOfMapper(QualifiedExpression.class))
+        .map(QualifiedExpression::qualifier)
+        .filter(HasSymbol.class::isInstance)
+        .map(HasSymbol.class::cast)
+        .map(HasSymbol::symbol)
+        .filter(ClassSymbol.class::isInstance)
+        .map(ClassSymbol.class::cast)
+        .filter(s -> s.isOrExtends("flask_graphql.GraphQLView"))
+        .isPresent();
+    }
+    return false;
   }
 
   private static void assignmentStatementConsumer(SubscriptionContext ctx) {
@@ -89,7 +130,7 @@ public class DebugModeCheck extends PythonSubscriptionCheck {
   private static void assignmentStatementCheck(SubscriptionContext ctx, Predicate<ExpressionList> isDebugProperty) {
     AssignmentStatement assignmentStatementTree = (AssignmentStatement) ctx.syntaxNode();
     for (ExpressionList lhsExpression : assignmentStatementTree.lhsExpressions()) {
-      if (isDebugProperty.test(lhsExpression) && isTrueLiteral(assignmentStatementTree.assignedValue())) {
+      if (isDebugProperty.test(lhsExpression) && isTrue(assignmentStatementTree.assignedValue())) {
         ctx.addIssue(assignmentStatementTree, MESSAGE);
       }
     }
@@ -144,14 +185,17 @@ public class DebugModeCheck extends PythonSubscriptionCheck {
     return expr.is(Kind.NAME) && debugProperties.contains(((Name) expr).name());
   }
 
-  private static boolean isTrueLiteral(Expression expr) {
-    return expr.is(Kind.NAME) && ((Name) expr).name().equals("True");
+  private static boolean isTrue(Expression expr) {
+    return Expressions.isTruthy(expr) || TreeUtils.toOptionalInstanceOf(Name.class, expr)
+      .map(Expressions::singleAssignedValue)
+      .filter(Expressions::isTruthy)
+      .isPresent();
   }
 
   private static boolean isDebugArgument(Argument argument) {
     Name keywordArgument = argument.is(Kind.REGULAR_ARGUMENT) ? ((RegularArgument) argument).keywordArgument() : null;
     if (keywordArgument != null && debugProperties.contains((keywordArgument).name())) {
-      return isTrueLiteral(((RegularArgument) argument).expression());
+      return isTrue(((RegularArgument) argument).expression());
     }
     return false;
   }

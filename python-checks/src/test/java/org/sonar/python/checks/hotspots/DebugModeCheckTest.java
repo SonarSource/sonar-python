@@ -38,4 +38,9 @@ class DebugModeCheckTest {
   void test_settings_file() {
     PythonCheckVerifier.verify("src/test/resources/checks/hotspots/debugMode/settings.py", new DebugModeCheck());
   }
+
+  @Test
+  void test_graphql() {
+    PythonCheckVerifier.verify("src/test/resources/checks/hotspots/debugMode/graphql.py", new DebugModeCheck());
+  }
 }
