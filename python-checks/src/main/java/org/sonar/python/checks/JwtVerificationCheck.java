@@ -71,7 +71,7 @@ public class JwtVerificationCheck extends PythonSubscriptionCheck {
 
   private static final String VERIFY_SIGNATURE_KEYWORD = "verify_signature";
 
-  public static final String JOSE_JWT_DECODE_FQN = "jose.jwt.decode";
+  public static final Set<String> VERIFY_SIGNATURE_OPTION_SUPPORTING_FUNCTION_FQNS = Set.of("jose.jwt.decode", "jwt.decode");
 
   @Override
   public void initialize(Context context) {
@@ -80,31 +80,30 @@ public class JwtVerificationCheck extends PythonSubscriptionCheck {
 
   private static void verifyCallExpression(SubscriptionContext ctx) {
     CallExpression call = (CallExpression) ctx.syntaxNode();
+
     Symbol calleeSymbol = call.calleeSymbol();
     if (calleeSymbol == null || calleeSymbol.fullyQualifiedName() == null) {
       return;
     }
-    if (WHERE_VERIFY_KWARG_SHOULD_BE_TRUE_FQNS.contains(calleeSymbol.fullyQualifiedName())) {
+
+    String calleeFqn = calleeSymbol.fullyQualifiedName();
+    if (WHERE_VERIFY_KWARG_SHOULD_BE_TRUE_FQNS.contains(calleeFqn)) {
       RegularArgument verifyArg = TreeUtils.argumentByKeyword("verify", call.arguments());
       if (verifyArg != null && Expressions.isFalsy(verifyArg.expression())) {
         ctx.addIssue(verifyArg, MESSAGE);
-      } else {
-        Optional.ofNullable(TreeUtils.argumentByKeyword("options", call.arguments()))
-          .map(RegularArgument::expression)
-          .filter(JwtVerificationCheck::isListOrDictWithSensitiveEntry)
-          .ifPresent(expression -> ctx.addIssue(expression, MESSAGE));
       }
-    } else if (PROCESS_JWT_FQNS.contains(calleeSymbol.fullyQualifiedName())) {
+    } else if (PROCESS_JWT_FQNS.contains(calleeFqn)) {
       Optional.ofNullable(TreeUtils.firstAncestorOfKind(call, Kind.FILE_INPUT, Kind.FUNCDEF))
         .filter(scriptOrFunction -> !TreeUtils.hasDescendant(scriptOrFunction, JwtVerificationCheck::isCallToVerifyJwt))
         .ifPresent(scriptOrFunction -> ctx.addIssue(call, MESSAGE));
-    } else if (UNVERIFIED_FQNS.contains(calleeSymbol.fullyQualifiedName())) {
+    } else if (UNVERIFIED_FQNS.contains(calleeFqn)) {
       Optional.ofNullable(TreeUtils.nthArgumentOrKeyword(0, "", call.arguments()))
         .flatMap(TreeUtils.toOptionalInstanceOfMapper(RegularArgument.class))
         .map(RegularArgument::expression)
         .ifPresent(argument -> ctx.addIssue(argument, MESSAGE));
 
-    } else if (JOSE_JWT_DECODE_FQN.equals(calleeSymbol.fullyQualifiedName())) {
+    }
+    if (VERIFY_SIGNATURE_OPTION_SUPPORTING_FUNCTION_FQNS.contains(calleeFqn)) {
       Optional.ofNullable(TreeUtils.argumentByKeyword("options", call.arguments()))
         .map(RegularArgument::expression)
         .filter(JwtVerificationCheck::isListOrDictWithSensitiveEntry)
