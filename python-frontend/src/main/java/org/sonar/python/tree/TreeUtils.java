@@ -349,6 +349,21 @@ public class TreeUtils {
     return null;
   }
 
+  public static Optional<String> nameFromQualifiedOrCallExpression(Expression expression) {
+    return Optional.ofNullable(TreeUtils.nameFromExpression(expression))
+      .or(() -> TreeUtils.toOptionalInstanceOf(QualifiedExpression.class, expression)
+        .map(TreeUtils::nameFromQualifiedExpression))
+      .or(() -> TreeUtils.toOptionalInstanceOf(CallExpression.class, expression)
+        .map(CallExpression::callee)
+        .flatMap(TreeUtils::nameFromExpressionOrQualifiedExpression));
+  }
+
+  public static Optional<String> nameFromExpressionOrQualifiedExpression(Expression expression) {
+    return TreeUtils.toOptionalInstanceOf(QualifiedExpression.class, expression)
+      .map(TreeUtils::nameFromQualifiedExpression)
+      .or(() -> Optional.ofNullable(TreeUtils.nameFromExpression(expression)));
+  }
+
   public static String nameFromQualifiedExpression(QualifiedExpression qualifiedExpression) {
     String exprName = qualifiedExpression.name().name();
     Expression qualifier = qualifiedExpression.qualifier();

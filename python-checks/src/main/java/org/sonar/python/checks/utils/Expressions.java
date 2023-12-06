@@ -23,6 +23,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import javax.annotation.Nullable;
@@ -41,6 +42,7 @@ import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.plugins.python.api.tree.Tuple;
+import org.sonar.python.tree.TreeUtils;
 
 public class Expressions {
 
@@ -147,6 +149,21 @@ public class Expressions {
       res = ((ParenthesizedExpression) res).expression();
     }
     return res;
+  }
+
+  public static Expression ifNameGetSingleAssignedNonNameValue(Expression expression) {
+    if (expression.is(Tree.Kind.NAME)) {
+      return Expressions.singleAssignedNonNameValue((Name) expression);
+    }
+    return expression;
+  }
+
+  public static Optional<List<Expression>> expressionsFromListOrTuple(Expression expression) {
+    return TreeUtils.toOptionalInstanceOf(ListLiteral.class, expression)
+      .map(ListLiteral::elements)
+      .map(ExpressionList::expressions)
+      .or(() -> TreeUtils.toOptionalInstanceOf(Tuple.class, expression)
+        .map(Tuple::elements));
   }
 
   /**

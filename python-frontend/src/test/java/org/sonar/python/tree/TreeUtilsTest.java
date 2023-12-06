@@ -374,6 +374,14 @@ class TreeUtilsTest {
   }
 
   @Test
+  void test_nameFromQualifiedOrCallExpression() {
+    assertThat(TreeUtils.nameFromQualifiedOrCallExpression(lastExpression("my_var"))).contains("my_var");
+    assertThat(TreeUtils.nameFromQualifiedOrCallExpression(lastExpression("self.my_var"))).contains("self.my_var");
+    assertThat(TreeUtils.nameFromQualifiedOrCallExpression(lastExpression("my_call()"))).contains("my_call");
+    assertThat(TreeUtils.nameFromQualifiedOrCallExpression(lastExpression("a == b"))).isNotPresent();
+  }
+
+  @Test
   void test_fullyQualifiedNameFromQualifiedExpression() {
     FileInput fileInput = PythonTestUtils.parse(
       "from third_party_lib import (element as alias)",
