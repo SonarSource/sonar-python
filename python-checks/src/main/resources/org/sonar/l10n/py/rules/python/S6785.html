@@ -1,0 +1,62 @@
+<p>GraphQL servers are vulnerable to Denial of Service attacks when they fail to limit the depth of queries. In such a case, an attacker is able to
+craft complex, deeply nested queries to make the application unwillingly consume an important amount of resources.</p>
+<h2>Why is this an issue?</h2>
+<p>When a server receives a deeply nested query, it attempts to resolve all the requested data. This process can consume a substantial amount of
+computational resources, leading to a slowdown in server response times.</p>
+<h3>What is the potential impact?</h3>
+<p>A server that faces a resource exhaustion situation can become unstable. The exact impact will depend on how the affected application is deployed
+and how well the hosting server configuration is hardened.</p>
+<p>In the worst case, when the application is deployed in an uncontained environment, directly on its host system, the memory exhaustion will affect
+the whole hosting server. The server’s operating system might start killing arbitrary memory-intensive processes, including the main application or
+other sensitive ones. This will result in a general operating failure, also known as a Denial of Service (DoS).</p>
+<p>In cases where the application is deployed in a virtualized or otherwise contained environment, or where resource usage limits are in place, the
+consequences are limited to the vulnerable application only. In that case, other processes and applications hosted on the same server may keep on
+running without perturbation. The vulnerable application will still stop working properly.</p>
+<p>In general, that kind of DoS attack can have severe financial consequences. They are particularly important when the affected systems are
+business-critical.</p>
+<h2>How to fix it</h2>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+from graphql_server.flask import GraphQLView
+
+app.add_url_rule("/api",
+    view_func=GraphQLView.as_view(  # Noncompliant
+        name="api",
+        schema=schema,
+    )
+)
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+from graphql_server.flask import GraphQLView
+from graphene.validation import depth_limit_validator
+
+app.add_url_rule("/api",
+    view_func=GraphQLView.as_view(
+        name="api",
+        schema=schema,
+        validation_rules=[
+           depth_limit_validator(10) # Choose a value that fits your application's requirements
+        ]
+    )
+)
+</pre>
+<h3>How does this work?</h3>
+<h4>Avoid circular references</h4>
+<p>A prerequisite for deeply nested query to be executed is the presence of circular references in the database schema. Avoid or minimize circular
+references when designing the application’s database schema.</p>
+<h4>Set limits</h4>
+<p>Limit the depth of the queries your server will accept. By setting a maximum depth, you can ensure that excessively nested queries are rejected.
+Remember, the values for maximum depth and complexity should be set according to your application’s specific needs. Setting these limits too low could
+restrict legitimate queries, while setting them too high could leave your server vulnerable to attacks.</p>
+<p>The easiest way to set such a limit is to use the query validation API available from Graphene 3. Applications running Graphene 2 should consider
+upgrading to Graphene 3 to benefit from this API.</p>
+<h2>Resources</h2>
+<h3>Standards</h3>
+<ul>
+  <li> OWASP - <a href="https://owasp.org/Top10/A04_2021-Insecure_Design/">Top 10 2021 Category A4 – Insecure Design</a> </li>
+  <li> OWASP - <a href="https://www.owasp.org/index.php/Top_10-2017_A1-Injection">Top 10 2017 Category A6 - Security Misconfiguration</a> </li>
+  <li> CWE - <a href="https://cwe.mitre.org/data/definitions/770.html">CWE-707 - Allocation of Resources Without Limits or Throttling</a> </li>
+</ul>
+
