@@ -51,6 +51,7 @@ public abstract class FlaskHardCodedSecret extends PythonSubscriptionCheck {
     "flask.app.Flask.config",
     "flask.globals.current_app.config"
   );
+  public static final String SECONDARY_LOCATION_MESSAGE = "The secret is used in this call.";
 
   protected abstract String getSecretKeyKeyword();
 
@@ -86,7 +87,7 @@ public abstract class FlaskHardCodedSecret extends PythonSubscriptionCheck {
       .map(FlaskHardCodedSecret::getAssignedValue)
       .flatMap(this::getIllegalDictArgument)
       .ifPresent(illegalArgument -> ctx.addIssue(illegalArgument, getMessage())
-        .secondary(callExpression.callee(), getMessage()));
+        .secondary(callExpression.callee(), SECONDARY_LOCATION_MESSAGE));
   }
 
   private String getMessage() {

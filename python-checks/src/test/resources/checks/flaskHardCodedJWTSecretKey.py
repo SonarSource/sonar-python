@@ -63,14 +63,14 @@ def test_non_compliant_call_expressions():
     current_app.config.update(d)
     current_app.config.update(d1)
 
-    d2 = dict(JWT_SECRET_KEY="woopie")  # Noncompliant
+    d2 = dict(JWT_SECRET_KEY="woopie")  # Noncompliant {{Don't disclose "Flask" JWT secret keys.}}
 #             ^^^^^^^^^^^^^^^^^^^^^^^
     app.config.update(d2)
-#   ^^^^^^^^^^^^^^^^^<1
-    d3 = {"JWT_SECRET_KEY": "woopie"}  # Noncompliant
+#   ^^^^^^^^^^^^^^^^^<1 {{The secret is used in this call.}}
+    d3 = {"JWT_SECRET_KEY": "woopie"}  # Noncompliant {{Don't disclose "Flask" JWT secret keys.}}
 #         ^^^^^^^^^^^^^^^^^^^^^^^^^^
     app.config.update(d3)
-#   ^^^^^^^^^^^^^^^^^<1
+#   ^^^^^^^^^^^^^^^^^<1 {{The secret is used in this call.}}
 
 
 def get_secret_from_vault():
