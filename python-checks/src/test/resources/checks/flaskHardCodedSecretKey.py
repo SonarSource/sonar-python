@@ -70,30 +70,38 @@ def test_non_compliant_call_expressions():
     app = Flask(__name__)
 
     # Tests for "flask.app.Flask.config[.update]"
-    app.config.update(dict( # Noncompliant
-#   ^[el=+3;ec=6]
-        SECRET_KEY="woopie"
+    app.config.update(dict(
+        SECRET_KEY="woopie" # Noncompliant
     ))
 
     app.config.update({"SECRET_KEY": "woopie"}) # Noncompliant
 
     d = dict(
-        SECRET_KEY="woopie"
+        SECRET_KEY="woopie" # Noncompliant 2
     )
-    d1 = {"SECRET_KEY": "woopie"}
+    d1 = {"SECRET_KEY": "woopie"} # Noncompliant 2
 
-    app.config.update(d)            # Noncompliant
-    app.config.update(d1)           # Noncompliant
+    app.config.update(d)
+    app.config.update(d1)
 
     # Tests for "flask.globals.current_app.config.update"
-    current_app.config.update(dict( # Noncompliant
-        SECRET_KEY="woopie"
+    current_app.config.update(dict(
+        SECRET_KEY="woopie" # Noncompliant
     ))
 
     current_app.config.update({"SECRET_KEY": "woopie"}) # Noncompliant
 
-    current_app.config.update(d)            # Noncompliant
-    current_app.config.update(d1)           # Noncompliant
+    current_app.config.update(d)
+    current_app.config.update(d1)
+
+    d2 = dict(SECRET_KEY="woopie") # Noncompliant {{Don't disclose "Flask" secret keys.}}
+#             ^^^^^^^^^^^^^^^^^^^
+    app.config.update(d2)
+#   ^^^^^^^^^^^^^^^^^<1 {{The secret is used in this call.}}
+    d3 = {"SECRET_KEY": "woopie"} # Noncompliant {{Don't disclose "Flask" secret keys.}}
+#         ^^^^^^^^^^^^^^^^^^^^^^
+    app.config.update(d3)
+#   ^^^^^^^^^^^^^^^^^<1 {{The secret is used in this call.}}
 
 
 def get_secret_from_vault():

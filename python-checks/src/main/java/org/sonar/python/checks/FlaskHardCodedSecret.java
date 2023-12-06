@@ -51,6 +51,7 @@ public abstract class FlaskHardCodedSecret extends PythonSubscriptionCheck {
     "flask.app.Flask.config",
     "flask.globals.current_app.config"
   );
+  public static final String SECONDARY_LOCATION_MESSAGE = "The secret is used in this call.";
 
   protected abstract String getSecretKeyKeyword();
 
@@ -84,9 +85,13 @@ public abstract class FlaskHardCodedSecret extends PythonSubscriptionCheck {
       .flatMap(TreeUtils.toOptionalInstanceOfMapper(RegularArgument.class))
       .map(RegularArgument::expression)
       .map(FlaskHardCodedSecret::getAssignedValue)
-      .filter(this::isIllegalDictArgument)
-      .ifPresent(expr -> ctx.addIssue(callExpression, String.format(MESSAGE, getSecretKeyType())));
+      .flatMap(this::getIllegalDictArgument)
+      .ifPresent(illegalArgument -> ctx.addIssue(illegalArgument, getMessage())
+        .secondary(callExpression.callee(), SECONDARY_LOCATION_MESSAGE));
+  }
 
+  private String getMessage() {
+    return String.format(MESSAGE, getSecretKeyType());
   }
 
   private static Expression getAssignedValue(Expression expression) {
@@ -96,13 +101,16 @@ public abstract class FlaskHardCodedSecret extends PythonSubscriptionCheck {
     return expression;
   }
 
-  private boolean isIllegalDictArgument(Expression expression) {
+  private Optional<Tree> getIllegalDictArgument(Expression expression) {
     if (expression.is(Tree.Kind.CALL_EXPR)) {
-      return isCallToDictConstructor((CallExpression) expression) && hasIllegalKeywordArgument((CallExpression) expression);
+      return TreeUtils.toOptionalInstanceOf(CallExpression.class, expression)
+        .filter(FlaskHardCodedSecret::isCallToDictConstructor)
+        .flatMap(this::getIllegalKeywordArgument);
     } else if (expression.is(Tree.Kind.DICTIONARY_LITERAL)) {
-      return hasIllegalKeyValuePair((DictionaryLiteral) expression);
+      return TreeUtils.toOptionalInstanceOf(DictionaryLiteral.class, expression)
+        .flatMap(this::getIllegalKeyValuePair);
     }
-    return false;
+    return Optional.empty();
   }
 
   private static boolean isCallToDictConstructor(CallExpression callExpression) {
@@ -115,11 +123,12 @@ public abstract class FlaskHardCodedSecret extends PythonSubscriptionCheck {
       .isPresent();
   }
 
-  private boolean hasIllegalKeyValuePair(DictionaryLiteral dictionaryLiteral) {
+  private Optional<KeyValuePair> getIllegalKeyValuePair(DictionaryLiteral dictionaryLiteral) {
     return dictionaryLiteral.elements().stream()
       .filter(KeyValuePair.class::isInstance)
       .map(KeyValuePair.class::cast)
-      .anyMatch(this::isIllegalKeyValuePair);
+      .filter(this::isIllegalKeyValuePair)
+      .findFirst();
   }
 
   private boolean isIllegalKeyValuePair(KeyValuePair keyValuePair) {
@@ -131,11 +140,12 @@ public abstract class FlaskHardCodedSecret extends PythonSubscriptionCheck {
       .isPresent() && isStringValue(keyValuePair.value());
   }
 
-  private boolean hasIllegalKeywordArgument(CallExpression callExpression) {
+  private Optional<RegularArgument> getIllegalKeywordArgument(CallExpression callExpression) {
     return Optional.ofNullable(TreeUtils.argumentByKeyword(getSecretKeyKeyword(), callExpression.arguments()))
-      .map(RegularArgument::expression)
-      .filter(FlaskHardCodedSecret::isStringValue)
-      .isPresent();
+      .filter(argument -> Optional.of(argument)
+        .map(RegularArgument::expression)
+        .filter(FlaskHardCodedSecret::isStringValue)
+        .isPresent());
   }
 
   private void verifyAssignmentStatement(SubscriptionContext ctx) {
@@ -149,7 +159,7 @@ public abstract class FlaskHardCodedSecret extends PythonSubscriptionCheck {
       .filter(this::isSensitiveProperty)
       .collect(Collectors.toList());
     if (!expressionList.isEmpty()) {
-      PreciseIssue issue = ctx.addIssue(assignmentStatementTree.assignedValue(), String.format(MESSAGE, getSecretKeyType()));
+      PreciseIssue issue = ctx.addIssue(assignmentStatementTree.assignedValue(), getMessage());
       expressionList.forEach(expr -> issue.secondary(expr, SECONDARY_MESSAGE));
     }
   }
