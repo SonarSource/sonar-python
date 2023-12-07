@@ -23,12 +23,12 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 import java.util.Set;
-import java.util.function.Predicate;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.CallExpression;
+import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.HasSymbol;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
@@ -44,8 +44,6 @@ public class GraphQLIntrospectionCheck extends PythonSubscriptionCheck {
     "graphql.validation.NoSchemaIntrospectionCustomRule");
 
   private static final String MESSAGE = "Disable introspection on this \"GraphQL\" server endpoint.";
-
-  private static final Predicate<String> CONTAINS_INTROSPECTION = s -> s.toUpperCase(Locale.ROOT).contains("INTROSPECTION");
 
   @Override
   public void initialize(Context context) {
@@ -75,7 +73,7 @@ public class GraphQLIntrospectionCheck extends PythonSubscriptionCheck {
     }
 
     return GraphQLUtils.extractListOrTupleArgumentValues(argument)
-      .map(values -> GraphQLUtils.expressionsNameMatchPredicate(values, CONTAINS_INTROSPECTION))
+      .map(GraphQLIntrospectionCheck::isValidMiddlewareNames)
       .orElse(true);
   }
 
@@ -86,8 +84,12 @@ public class GraphQLIntrospectionCheck extends PythonSubscriptionCheck {
     }
 
     return GraphQLUtils.extractListOrTupleArgumentValues(argument)
-      .map(values -> (GraphQLUtils.expressionsNameMatchPredicate(values, CONTAINS_INTROSPECTION)
-        || GraphQLUtils.expressionsContainsSafeRuleFQN(values, SAFE_VALIDATION_RULE_FQNS::contains)))
+      .map(values -> isValidMiddlewareNames(values) || GraphQLUtils.expressionsContainsSafeRuleFQN(values, SAFE_VALIDATION_RULE_FQNS::contains))
       .orElse(true);
   }
+
+  private static boolean isValidMiddlewareNames(List<Expression> values) {
+    return GraphQLUtils.expressionsNameMatchPredicate(values, name -> name.toUpperCase(Locale.ROOT).contains("INTROSPECTION"));
+  }
+
 }

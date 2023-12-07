@@ -24,13 +24,14 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 import java.util.Set;
-import java.util.function.Predicate;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
+import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.CallExpression;
+import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.HasSymbol;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
@@ -46,9 +47,6 @@ public class GraphQLDenialOfServiceCheck extends PythonSubscriptionCheck {
   private static final Set<String> SAFE_VALIDATION_RULE_FQNS = Set.of("graphene.validation.DepthLimitValidator");
 
   private static final List<String> VALID_MIDDLEWARE_NAMES = List.of("DEPTH", "COST");
-
-  private static final Predicate<String> VALID_MIDDLEWARE_PREDICATE = name ->
-    VALID_MIDDLEWARE_NAMES.stream().anyMatch(mwName -> name.toUpperCase(Locale.ROOT).contains(mwName));
   private static final String MESSAGE_DEPTH = "Change this code to limit the depth of GraphQL queries.";
   private static final String MESSAGE_CIRCULAR = "This relationship creates circular references.";
 
@@ -98,7 +96,7 @@ public class GraphQLDenialOfServiceCheck extends PythonSubscriptionCheck {
     }
 
     return GraphQLUtils.extractListOrTupleArgumentValues(argument)
-      .map(values -> GraphQLUtils.expressionsNameMatchPredicate(values, VALID_MIDDLEWARE_PREDICATE))
+      .map(GraphQLDenialOfServiceCheck::isValidMiddlewareNames)
       .orElse(true);
   }
 
@@ -109,9 +107,12 @@ public class GraphQLDenialOfServiceCheck extends PythonSubscriptionCheck {
     }
 
     return GraphQLUtils.extractListOrTupleArgumentValues(argument)
-      .map(values -> (GraphQLUtils.expressionsNameMatchPredicate(values, VALID_MIDDLEWARE_PREDICATE)
-          || GraphQLUtils.expressionsContainsSafeRuleFQN(values, SAFE_VALIDATION_RULE_FQNS::contains)))
+      .map(values -> (isValidMiddlewareNames(values) || GraphQLUtils.expressionsContainsSafeRuleFQN(values, SAFE_VALIDATION_RULE_FQNS::contains)))
       .orElse(true);
+  }
+
+  private static boolean isValidMiddlewareNames(List<Expression> values) {
+    return GraphQLUtils.expressionsNameMatchPredicate(values, name -> VALID_MIDDLEWARE_NAMES.stream().anyMatch(mwName -> name.toUpperCase(Locale.ROOT).contains(mwName)));
   }
 
   static class CircularRelationshipVisitor extends BaseTreeVisitor {
@@ -124,8 +125,7 @@ public class GraphQLDenialOfServiceCheck extends PythonSubscriptionCheck {
 
     @Override
     public void visitCallExpression(CallExpression callExpression) {
-      boolean createsCircularDependency = Optional.of(callExpression.callee())
-        .flatMap(TreeUtils.toOptionalInstanceOfMapper(QualifiedExpression.class))
+      TreeUtils.toOptionalInstanceOf(QualifiedExpression.class, callExpression.callee())
         .filter(qualifiedExpression -> "relationship".equals(qualifiedExpression.name().name()))
         .map(QualifiedExpression::qualifier)
         .flatMap(TreeUtils.toOptionalInstanceOfMapper(Name.class))
@@ -135,11 +135,9 @@ public class GraphQLDenialOfServiceCheck extends PythonSubscriptionCheck {
         .filter(HasSymbol.class::isInstance)
         .map(HasSymbol.class::cast)
         .map(HasSymbol::symbol)
-        .filter(s -> "flask_sqlalchemy.SQLAlchemy".equals(s.fullyQualifiedName()))
-        .isPresent();
-      if (createsCircularDependency) {
-        circularReferences.add(callExpression);
-      }
+        .map(Symbol::fullyQualifiedName)
+        .filter("flask_sqlalchemy.SQLAlchemy"::equals)
+        .ifPresent(s -> circularReferences.add(callExpression));
       super.visitCallExpression(callExpression);
     }
   }
