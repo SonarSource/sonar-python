@@ -121,7 +121,7 @@ class IPynbSensorTest {
     FileLinesContext fileLinesContext = mock(FileLinesContext.class);
     when(fileLinesContextFactory.createFor(Mockito.any(InputFile.class))).thenReturn(fileLinesContext);
     CheckFactory checkFactory = new CheckFactory(activeRules);
-   return new IPynbSensor(fileLinesContextFactory, checkFactory, mock(NoSonarFilter.class), indexer);
+    return new IPynbSensor(fileLinesContextFactory, checkFactory, activeRules, mock(NoSonarFilter.class), indexer);
   }
 
   private InputFile inputFile(String name) {
