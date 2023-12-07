@@ -83,6 +83,7 @@ import org.sonar.plugins.python.api.PythonCustomRuleRepository;
 import org.sonar.plugins.python.api.PythonInputFileContext;
 import org.sonar.plugins.python.api.PythonVersionUtils;
 import org.sonar.plugins.python.api.PythonVisitorContext;
+import org.sonar.plugins.python.api.SonarLintCache;
 import org.sonar.plugins.python.api.caching.CacheContext;
 import org.sonar.plugins.python.api.internal.EndOfAnalysis;
 import org.sonar.plugins.python.api.tree.Token;
@@ -91,7 +92,6 @@ import org.sonar.plugins.python.caching.TestReadCache;
 import org.sonar.plugins.python.caching.TestWriteCache;
 import org.sonar.plugins.python.indexer.FileHashingUtils;
 import org.sonar.plugins.python.indexer.PythonIndexer;
-import org.sonar.plugins.python.api.SonarLintCache;
 import org.sonar.plugins.python.indexer.SonarLintPythonIndexer;
 import org.sonar.plugins.python.indexer.TestModuleFileSystem;
 import org.sonar.plugins.python.warnings.AnalysisWarningsWrapper;
@@ -506,7 +506,6 @@ class PythonSensorTest {
     assertThat(context.allIssues()).hasSize(1);
   }
 
-
   @Test
   void test_issues_on_test_files() {
     activeRules = new ActiveRulesBuilder()
@@ -526,7 +525,6 @@ class PythonSensorTest {
     assertThat(issue.primaryLocation().inputComponent()).isEqualTo(inputFile);
     assertThat(issue.ruleKey().rule()).isEqualTo("S5905");
   }
-
 
   @Test
   void test_failFast_triggered_on_main_files() {
@@ -750,7 +748,6 @@ class PythonSensorTest {
     assertThat(defaultPerformanceFile).exists();
     assertThat(new String(Files.readAllBytes(defaultPerformanceFile), UTF_8)).contains("\"PythonSensor\"");
   }
-
 
   @Test
   void test_using_cache() throws IOException, NoSuchAlgorithmException {
@@ -1194,8 +1191,7 @@ class PythonSensorTest {
     context.setSettings(
       new MapSettings()
         .setProperty("sonar.python.skipUnchanged", true)
-        .setProperty("sonar.internal.analysis.failFast", true)
-    );
+        .setProperty("sonar.internal.analysis.failFast", true));
 
     sensor().execute(context);
 
@@ -1236,15 +1232,15 @@ class PythonSensorTest {
     when(fileLinesContextFactory.createFor(Mockito.any(InputFile.class))).thenReturn(fileLinesContext);
     CheckFactory checkFactory = new CheckFactory(activeRules);
     if (indexer == null && customRuleRepositories == null) {
-      return new PythonSensor(fileLinesContextFactory, checkFactory, mock(NoSonarFilter.class), analysisWarnings);
+      return new PythonSensor(fileLinesContextFactory, checkFactory, activeRules, mock(NoSonarFilter.class), analysisWarnings);
     }
     if (indexer == null) {
-      return new PythonSensor(fileLinesContextFactory, checkFactory, mock(NoSonarFilter.class), customRuleRepositories, analysisWarnings);
+      return new PythonSensor(fileLinesContextFactory, checkFactory, activeRules, mock(NoSonarFilter.class), customRuleRepositories, analysisWarnings);
     }
     if (customRuleRepositories == null) {
-      return new PythonSensor(fileLinesContextFactory, checkFactory, mock(NoSonarFilter.class), indexer, new SonarLintCache(), analysisWarnings);
+      return new PythonSensor(fileLinesContextFactory, checkFactory, activeRules, mock(NoSonarFilter.class), indexer, new SonarLintCache(), analysisWarnings);
     }
-    return new PythonSensor(fileLinesContextFactory, checkFactory, mock(NoSonarFilter.class), customRuleRepositories, indexer, new SonarLintCache(), analysisWarnings);
+    return new PythonSensor(fileLinesContextFactory, checkFactory, activeRules, mock(NoSonarFilter.class), customRuleRepositories, indexer, new SonarLintCache(), analysisWarnings);
   }
 
   private SonarLintPythonIndexer pythonIndexer(List<InputFile> files) {
@@ -1291,7 +1287,7 @@ class PythonSensorTest {
     return new DefaultTextRange(new DefaultTextPointer(lineStart, columnStart), new DefaultTextPointer(lineEnd, columnEnd));
   }
 
-  private void activate_rule_S2710(){
+  private void activate_rule_S2710() {
     activeRules = new ActiveRulesBuilder()
       .addRule(new NewActiveRule.Builder()
         .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, "S2710"))
@@ -1299,6 +1295,7 @@ class PythonSensorTest {
         .build())
       .build();
   }
+
   private void setup_quickfix_sensor() throws IOException {
     String pathToQuickFixTestFile = "src/test/resources/org/sonar/plugins/python/sensor/" + FILE_QUICKFIX;
     File file = new File(pathToQuickFixTestFile);

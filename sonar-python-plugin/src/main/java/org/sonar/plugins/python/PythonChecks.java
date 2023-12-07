@@ -19,26 +19,48 @@
  */
 package org.sonar.plugins.python;
 
+import com.google.common.collect.Streams;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 import javax.annotation.Nullable;
+import org.sonar.api.batch.rule.ActiveRules;
 import org.sonar.api.batch.rule.CheckFactory;
 import org.sonar.api.batch.rule.Checks;
 import org.sonar.api.rule.RuleKey;
 import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.PythonCustomRuleRepository;
+import org.sonar.plugins.python.api.PythonSharedCheck;
 
 public class PythonChecks {
   private final CheckFactory checkFactory;
-  private List<Checks<PythonCheck>> checksByRepository = new ArrayList<>();
+  private final ActiveRules activeRules;
+  private final List<Checks<PythonCheck>> checksByRepository = new ArrayList<>();
+  private final List<PythonSharedCheck> sharedChecks = new ArrayList<>();
 
-  PythonChecks(CheckFactory checkFactory) {
+  PythonChecks(CheckFactory checkFactory, ActiveRules activeRules) {
     this.checkFactory = checkFactory;
+    this.activeRules = activeRules;
   }
+
   public PythonChecks addChecks(String repositoryKey, Iterable<Class> checkClass) {
-    checksByRepository.add(checkFactory.<PythonCheck>create(repositoryKey).addAnnotatedChecks(checkClass));
+    var partition = StreamSupport
+      .stream(checkClass.spliterator(), false)
+      .collect(
+        Collectors.partitioningBy(PythonChecks::isSharedCheckClass));
+
+    var sharedCheckClasses = partition.get(true);
+    var regularCheckClasses = partition.get(false);
+
+    sharedCheckClasses.stream()
+      .map(PythonChecks::instantiateSharedCheck)
+      .filter(this::hasAtLeastOneActiveRule)
+      .forEach(sharedChecks::add);
+
+    checksByRepository.add(checkFactory.<PythonCheck>create(repositoryKey).addAnnotatedChecks(regularCheckClasses));
 
     return this;
   }
@@ -54,7 +76,11 @@ public class PythonChecks {
   }
 
   public List<PythonCheck> all() {
-    return checksByRepository.stream().flatMap(c -> c.all().stream()).collect(Collectors.toList());
+    return Streams.concat(
+      checksByRepository.stream()
+        .flatMap(c -> c.all().stream()),
+      sharedChecks.stream())
+      .collect(Collectors.toList());
   }
 
   @Nullable
@@ -62,4 +88,29 @@ public class PythonChecks {
     return checksByRepository.stream().map(c -> c.ruleKey(check)).filter(Objects::nonNull).findFirst().orElse(null);
   }
 
+  private static boolean isSharedCheckClass(Class checkClass) {
+    return PythonSharedCheck.class.isAssignableFrom(checkClass);
+  }
+
+  private boolean hasAtLeastOneActiveRule(PythonSharedCheck sharedCheck) {
+    return sharedCheck
+      .ruleKeys()
+      .stream()
+      .anyMatch(ruleKey -> activeRules.find(ruleKey) != null);
+  }
+
+  private static PythonSharedCheck instantiateSharedCheck(Class sharedCheckClass) {
+    try {
+      @SuppressWarnings("unchecked")
+      Class<? extends PythonSharedCheck> checkClassWithTypeAssumption = sharedCheckClass;
+
+      return checkClassWithTypeAssumption
+        .getDeclaredConstructor()
+        .newInstance();
+    } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException | ClassCastException e) {
+      throw new IllegalStateException(
+        String.format("Failed to instantiate shared check %s for rules %s", sharedCheckClass, "TODO"),
+        e);
+    }
+  }
 }
