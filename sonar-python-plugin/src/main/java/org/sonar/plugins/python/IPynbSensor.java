@@ -24,6 +24,7 @@ import java.util.Collections;
 import java.util.List;
 import org.sonar.api.batch.fs.FilePredicates;
 import org.sonar.api.batch.fs.InputFile;
+import org.sonar.api.batch.rule.ActiveRules;
 import org.sonar.api.batch.rule.CheckFactory;
 import org.sonar.api.batch.sensor.Sensor;
 import org.sonar.api.batch.sensor.SensorContext;
@@ -45,8 +46,9 @@ public final class IPynbSensor implements Sensor {
   private final NoSonarFilter noSonarFilter;
   private final PythonIndexer indexer;
 
-  public IPynbSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory, NoSonarFilter noSonarFilter, PythonIndexer indexer) {
-    this.checks = new PythonChecks(checkFactory)
+  public IPynbSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory, ActiveRules activeRules,
+    NoSonarFilter noSonarFilter, PythonIndexer indexer) {
+    this.checks = new PythonChecks(checkFactory, activeRules)
       .addChecks(CheckList.IPYTHON_REPOSITORY_KEY, CheckList.getChecks());
     this.fileLinesContextFactory = fileLinesContextFactory;
     this.noSonarFilter = noSonarFilter;
