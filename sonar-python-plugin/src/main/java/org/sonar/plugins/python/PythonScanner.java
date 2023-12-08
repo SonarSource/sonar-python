@@ -107,12 +107,12 @@ public class PythonScanner extends Scanner {
       PythonTreeMaker treeMaker = getTreeMaker(inputFile);
       FileInput parse = treeMaker.fileInput(astNode);
       visitorContext = new PythonVisitorContext(
-        parse, pythonFile, getWorkingDirectory(context), indexer.packageName(inputFile), indexer.projectLevelSymbolTable(), indexer.cacheContext());
+        parse, pythonFile, getWorkingDirectory(context), indexer.packageName(inputFile), indexer.projectLevelSymbolTable(), indexer.cacheContext(), context.runtime().getProduct());
       if (fileType == InputFile.Type.MAIN) {
         saveMeasures(inputFile, visitorContext);
       }
     } catch (RecognitionException e) {
-      visitorContext = new PythonVisitorContext(pythonFile, e);
+      visitorContext = new PythonVisitorContext(pythonFile, e, context.runtime().getProduct());
       LOG.error("Unable to parse file: " + inputFile);
       LOG.error(e.getMessage());
       context.newAnalysisError()
@@ -161,7 +161,7 @@ public class PythonScanner extends Scanner {
         continue;
       }
       PythonFile pythonFile = SonarQubePythonFile.create(inputFile);
-      PythonInputFileContext inputFileContext = new PythonInputFileContext(pythonFile, context.fileSystem().workDir(), indexer.cacheContext());
+      PythonInputFileContext inputFileContext = new PythonInputFileContext(pythonFile, context.fileSystem().workDir(), indexer.cacheContext(), context.runtime().getProduct());
       if (check.scanWithoutParsing(inputFileContext)) {
         Set<PythonCheck> executedChecks = checksExecutedWithoutParsingByFiles.getOrDefault(inputFile, new HashSet<>());
         executedChecks.add(check);
