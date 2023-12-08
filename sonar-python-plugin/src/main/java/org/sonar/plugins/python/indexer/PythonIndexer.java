@@ -25,13 +25,15 @@ import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
 import javax.annotation.CheckForNull;
-import org.sonar.api.batch.fs.InputFile;
-import org.sonar.api.batch.sensor.SensorContext;
+import javax.annotation.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.sonar.api.batch.fs.InputFile;
+import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.plugins.python.Scanner;
 import org.sonar.plugins.python.SonarQubePythonFile;
 import org.sonar.plugins.python.api.PythonFile;
+import org.sonar.plugins.python.api.SonarLintCache;
 import org.sonar.plugins.python.api.caching.CacheContext;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.python.parser.PythonParser;
@@ -79,6 +81,10 @@ public abstract class PythonIndexer {
   }
 
   public abstract void buildOnce(SensorContext context);
+
+  public void setSonarLintCache(@Nullable SonarLintCache sonarLintCache) {
+    // no op by default
+  }
 
   @CheckForNull
   public InputFile getFileWithId(String fileId) {
