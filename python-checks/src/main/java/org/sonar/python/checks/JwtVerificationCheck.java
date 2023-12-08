@@ -91,6 +91,7 @@ public class JwtVerificationCheck extends PythonSubscriptionCheck {
       RegularArgument verifyArg = TreeUtils.argumentByKeyword("verify", call.arguments());
       if (verifyArg != null && Expressions.isFalsy(verifyArg.expression())) {
         ctx.addIssue(verifyArg, MESSAGE);
+        return;
       }
     } else if (PROCESS_JWT_FQNS.contains(calleeFqn)) {
       Optional.ofNullable(TreeUtils.firstAncestorOfKind(call, Kind.FILE_INPUT, Kind.FUNCDEF))
@@ -101,7 +102,6 @@ public class JwtVerificationCheck extends PythonSubscriptionCheck {
         .flatMap(TreeUtils.toOptionalInstanceOfMapper(RegularArgument.class))
         .map(RegularArgument::expression)
         .ifPresent(argument -> ctx.addIssue(argument, MESSAGE));
-
     }
     if (VERIFY_SIGNATURE_OPTION_SUPPORTING_FUNCTION_FQNS.contains(calleeFqn)) {
       Optional.ofNullable(TreeUtils.argumentByKeyword("options", call.arguments()))
