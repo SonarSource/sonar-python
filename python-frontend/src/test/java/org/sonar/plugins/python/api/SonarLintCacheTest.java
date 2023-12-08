@@ -52,6 +52,16 @@ class SonarLintCacheTest {
   }
 
   @Test
+  void contains() {
+    SonarLintCache sonarLintCache = new SonarLintCache();
+    assertThat(sonarLintCache.contains("foo")).isFalse();
+    byte[] bytes = {42};
+    sonarLintCache.write("foo", bytes);
+    assertThat(sonarLintCache.contains("foo")).isTrue();
+    assertThat(sonarLintCache.contains("bar")).isFalse();
+  }
+
+  @Test
   void write_non_valid_input_stream() throws IOException {
     InputStream inputStream = Mockito.mock(InputStream.class);
     Mockito.when(inputStream.readAllBytes()).thenThrow(IOException.class);
@@ -67,6 +77,7 @@ class SonarLintCacheTest {
     byte[] bytes2 = {0, 1, 2};
     sonarLintCache.write("foo", bytes1);
     assertThatThrownBy(() -> sonarLintCache.write("foo", bytes2)).hasMessage("Same key cannot be written to multiple times (foo)");
+    assertThatThrownBy(() -> sonarLintCache.write("foo", new ByteArrayInputStream(bytes2))).hasMessage("Same key cannot be written to multiple times (foo)");
   }
 
   @Test
