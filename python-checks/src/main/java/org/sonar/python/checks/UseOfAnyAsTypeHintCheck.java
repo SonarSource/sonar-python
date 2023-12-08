@@ -19,7 +19,6 @@
  */
 package org.sonar.python.checks;
 
-import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
@@ -65,7 +64,8 @@ public class UseOfAnyAsTypeHintCheck extends PythonSubscriptionCheck {
 
   private static boolean isTypeAny(@Nullable TypeAnnotation typeAnnotation) {
     return Optional.ofNullable(typeAnnotation)
-      .flatMap(a -> TreeUtils.fullyQualifiedNameFromExpression(a.expression()))
+      .map(TypeAnnotation::expression)
+      .flatMap(TreeUtils:: fullyQualifiedNameFromExpression)
       .map("typing.Any"::equals)
       .orElse(false);
   }
