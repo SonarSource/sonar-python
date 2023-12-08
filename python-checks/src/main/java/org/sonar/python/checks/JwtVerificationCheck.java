@@ -110,7 +110,7 @@ public class JwtVerificationCheck extends PythonSubscriptionCheck {
     if (expression == null) {
       return false;
     } else if (expression.is(Tree.Kind.NAME)) {
-      return isListOrDictWithSensitiveEntry(Expressions.singleAssignedNonNameValue((Name) expression));
+      return isListOrDictWithSensitiveEntry(Expressions.singleAssignedNonNameValue((Name) expression).orElse(null));
     } else if (expression.is(Kind.DICTIONARY_LITERAL)) {
       return hasTrueVerifySignatureEntry((DictionaryLiteral) expression);
     } else if (expression.is(Kind.LIST_LITERAL)) {

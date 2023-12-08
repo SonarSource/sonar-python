@@ -20,12 +20,14 @@
 package org.sonar.python.checks.utils;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
+import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
@@ -96,10 +98,12 @@ public class Expressions {
     }
   }
 
+  @CheckForNull
   public static Expression singleAssignedValue(Name name) {
     return singleAssignedValue(name, new HashSet<>());
   }
 
+  @CheckForNull
   public static Expression singleAssignedValue(Name name, Set<Name> visited) {
     if (visited.contains(name)) {
       return null;
@@ -131,15 +135,6 @@ public class Expressions {
     return result;
   }
 
-  public static Expression singleAssignedNonNameValue(Name name) {
-    Set<Name> visited = new HashSet<>();
-    Expression result = singleAssignedValue(name, visited);
-    while (result != null && result.is(Kind.NAME)) {
-      result = singleAssignedValue((Name) result, visited);
-    }
-    return result;
-  }
-
   public static Expression removeParentheses(@Nullable Expression expression) {
     if (expression == null) {
       return null;
@@ -151,19 +146,29 @@ public class Expressions {
     return res;
   }
 
-  public static Expression ifNameGetSingleAssignedNonNameValue(Expression expression) {
+  public static Optional<Expression> singleAssignedNonNameValue(Name name) {
+    Set<Name> visited = new HashSet<>();
+    Expression result = singleAssignedValue(name, visited);
+    while (result != null && result.is(Kind.NAME)) {
+      result = singleAssignedValue((Name) result, visited);
+    }
+    return Optional.ofNullable(result);
+  }
+
+  public static Optional<Expression> ifNameGetSingleAssignedNonNameValue(Expression expression) {
     if (expression.is(Tree.Kind.NAME)) {
       return Expressions.singleAssignedNonNameValue((Name) expression);
     }
-    return expression;
+    return Optional.of(expression);
   }
 
-  public static Optional<List<Expression>> expressionsFromListOrTuple(Expression expression) {
+  public static List<Expression> expressionsFromListOrTuple(Expression expression) {
     return TreeUtils.toOptionalInstanceOf(ListLiteral.class, expression)
       .map(ListLiteral::elements)
       .map(ExpressionList::expressions)
       .or(() -> TreeUtils.toOptionalInstanceOf(Tuple.class, expression)
-        .map(Tuple::elements));
+        .map(Tuple::elements))
+      .orElse(Collections.emptyList());
   }
 
   /**

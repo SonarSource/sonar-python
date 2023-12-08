@@ -95,9 +95,9 @@ public class GraphQLDenialOfServiceCheck extends PythonSubscriptionCheck {
       return false;
     }
 
-    return GraphQLUtils.extractListOrTupleArgumentValues(argument)
-      .map(GraphQLDenialOfServiceCheck::isValidMiddlewareNames)
-      .orElse(true);
+    Optional<Expression> argumentValue = Expressions.ifNameGetSingleAssignedNonNameValue(argument.expression());
+    boolean isNotTupleNorListLiteral = argumentValue.filter(a -> a.is(Tree.Kind.LIST_LITERAL, Tree.Kind.TUPLE)).isEmpty();
+    return isNotTupleNorListLiteral || Expressions.expressionsFromListOrTuple(argumentValue.get()).stream().anyMatch(GraphQLDenialOfServiceCheck::isSafeMiddlewareName);
   }
 
   private static boolean hasSafeValidationRules(List<Argument> arguments) {
@@ -106,13 +106,17 @@ public class GraphQLDenialOfServiceCheck extends PythonSubscriptionCheck {
       return false;
     }
 
-    return GraphQLUtils.extractListOrTupleArgumentValues(argument)
-      .map(values -> (isValidMiddlewareNames(values) || GraphQLUtils.expressionsContainsSafeRuleFQN(values, SAFE_VALIDATION_RULE_FQNS::contains)))
-      .orElse(true);
+    Optional<Expression> argumentValue = Expressions.ifNameGetSingleAssignedNonNameValue(argument.expression());
+    boolean isNotTupleNorListLiteral = argumentValue.filter(a -> a.is(Tree.Kind.LIST_LITERAL, Tree.Kind.TUPLE)).isEmpty();
+    return isNotTupleNorListLiteral || Expressions.expressionsFromListOrTuple(argumentValue.get()).stream().anyMatch(GraphQLDenialOfServiceCheck::isSafeValidationRule);
   }
 
-  private static boolean isValidMiddlewareNames(List<Expression> values) {
-    return GraphQLUtils.expressionsNameMatchPredicate(values, name -> VALID_MIDDLEWARE_NAMES.stream().anyMatch(mwName -> name.toUpperCase(Locale.ROOT).contains(mwName)));
+  private static boolean isSafeValidationRule(Expression value) {
+    return isSafeMiddlewareName(value) || GraphQLUtils.expressionFQNMatchPredicate(value, SAFE_VALIDATION_RULE_FQNS::contains);
+  }
+
+  private static boolean isSafeMiddlewareName(Expression value) {
+    return GraphQLUtils.expressionTypeOrNameMatchPredicate(value, name -> VALID_MIDDLEWARE_NAMES.stream().anyMatch(mwName -> name.toUpperCase(Locale.ROOT).contains(mwName)));
   }
 
   static class CircularRelationshipVisitor extends BaseTreeVisitor {
@@ -129,7 +133,7 @@ public class GraphQLDenialOfServiceCheck extends PythonSubscriptionCheck {
         .filter(qualifiedExpression -> "relationship".equals(qualifiedExpression.name().name()))
         .map(QualifiedExpression::qualifier)
         .flatMap(TreeUtils.toOptionalInstanceOfMapper(Name.class))
-        .map(Expressions::singleAssignedNonNameValue)
+        .flatMap(Expressions::singleAssignedNonNameValue)
         .flatMap(TreeUtils.toOptionalInstanceOfMapper(CallExpression.class))
         .map(CallExpression::callee)
         .filter(HasSymbol.class::isInstance)

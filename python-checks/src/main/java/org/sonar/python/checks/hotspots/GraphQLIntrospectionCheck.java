@@ -33,6 +33,7 @@ import org.sonar.plugins.python.api.tree.HasSymbol;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.checks.utils.Expressions;
 import org.sonar.python.checks.utils.GraphQLUtils;
 import org.sonar.python.tree.TreeUtils;
 
@@ -72,9 +73,9 @@ public class GraphQLIntrospectionCheck extends PythonSubscriptionCheck {
       return false;
     }
 
-    return GraphQLUtils.extractListOrTupleArgumentValues(argument)
-      .map(GraphQLIntrospectionCheck::isValidMiddlewareNames)
-      .orElse(true);
+    Optional<Expression> argumentValue = Expressions.ifNameGetSingleAssignedNonNameValue(argument.expression());
+    boolean isNotTupleNorListLiteral = argumentValue.filter(a -> a.is(Tree.Kind.LIST_LITERAL, Tree.Kind.TUPLE)).isEmpty();
+    return isNotTupleNorListLiteral || Expressions.expressionsFromListOrTuple(argumentValue.get()).stream().anyMatch(GraphQLIntrospectionCheck::isSafeMiddlewareName);
   }
 
   private static boolean hasSafeValidationRules(List<Argument> arguments) {
@@ -83,13 +84,17 @@ public class GraphQLIntrospectionCheck extends PythonSubscriptionCheck {
       return false;
     }
 
-    return GraphQLUtils.extractListOrTupleArgumentValues(argument)
-      .map(values -> isValidMiddlewareNames(values) || GraphQLUtils.expressionsContainsSafeRuleFQN(values, SAFE_VALIDATION_RULE_FQNS::contains))
-      .orElse(true);
+    Optional<Expression> argumentValue = Expressions.ifNameGetSingleAssignedNonNameValue(argument.expression());
+    boolean isNotTupleNorListLiteral = argumentValue.filter(a -> a.is(Tree.Kind.LIST_LITERAL, Tree.Kind.TUPLE)).isEmpty();
+    return isNotTupleNorListLiteral || Expressions.expressionsFromListOrTuple(argumentValue.get()).stream().anyMatch(GraphQLIntrospectionCheck::isSafeValidationRule);
   }
 
-  private static boolean isValidMiddlewareNames(List<Expression> values) {
-    return GraphQLUtils.expressionsNameMatchPredicate(values, name -> name.toUpperCase(Locale.ROOT).contains("INTROSPECTION"));
+  private static boolean isSafeValidationRule(Expression value) {
+    return isSafeMiddlewareName(value) || GraphQLUtils.expressionFQNMatchPredicate(value, SAFE_VALIDATION_RULE_FQNS::contains);
+  }
+
+  private static boolean isSafeMiddlewareName(Expression value) {
+    return GraphQLUtils.expressionTypeOrNameMatchPredicate(value, name -> name.toUpperCase(Locale.ROOT).contains("INTROSPECTION"));
   }
 
 }

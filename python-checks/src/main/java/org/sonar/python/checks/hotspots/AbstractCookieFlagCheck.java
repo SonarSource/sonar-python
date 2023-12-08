@@ -181,7 +181,7 @@ public abstract class AbstractCookieFlagCheck extends PythonSubscriptionCheck {
 
   private boolean isDictWithSensitiveEntry(Expression expression) {
     return TreeUtils.toOptionalInstanceOf(Name.class, expression)
-      .map(Expressions::singleAssignedNonNameValue)
+      .flatMap(Expressions::singleAssignedNonNameValue)
       .map(this::isDictWithSensitiveEntry)
       .or(() -> TreeUtils.toOptionalInstanceOf(DictionaryLiteral.class, expression)
         .map(this::hasInvalidEntry)

@@ -19,8 +19,6 @@
  */
 package org.sonar.python.checks.utils;
 
-import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
@@ -30,7 +28,6 @@ import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
-import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.types.InferredTypes;
 
@@ -64,31 +61,20 @@ public class GraphQLUtils {
       .isPresent();
   }
 
-  public static Optional<List<Expression>> extractListOrTupleArgumentValues(RegularArgument argument) {
-    return Optional.of(argument)
-      .map(RegularArgument::expression)
-      .map(Expressions::ifNameGetSingleAssignedNonNameValue)
-      .flatMap(Expressions::expressionsFromListOrTuple);
-  }
+  public static boolean expressionTypeOrNameMatchPredicate(Expression expression, Predicate<String> predicate) {
+    Stream<Optional<String>> expressionNameAndType =
+      Stream.of(TreeUtils.nameFromQualifiedOrCallExpression(expression), Optional.ofNullable(InferredTypes.typeName(expression.type())));
 
-  public static boolean expressionsNameMatchPredicate(List<Expression> expressions, Predicate<String> predicate) {
-    Stream<Optional<String>> expressionsNameAndType = Stream.concat(expressions.stream()
-        .map(TreeUtils::nameFromQualifiedOrCallExpression),
-      expressions.stream().map(Expression::type).map(t -> Optional.ofNullable(InferredTypes.typeName(t))));
-
-    return expressionsNameAndType
+    return expressionNameAndType
       .filter(Optional::isPresent)
       .map(Optional::get)
       .anyMatch(predicate);
   }
 
-  public static boolean expressionsContainsSafeRuleFQN(List<Expression> expressions, Predicate<String> predicate) {
-    return expressions.stream()
-      .map(TreeUtils::getSymbolFromTree)
-      .filter(Optional::isPresent)
-      .map(Optional::get)
+  public static boolean expressionFQNMatchPredicate(Expression expression, Predicate<String> predicate) {
+    return TreeUtils.getSymbolFromTree(expression)
       .map(Symbol::fullyQualifiedName)
-      .filter(Objects::nonNull)
-      .anyMatch(predicate);
+      .filter(predicate)
+      .isPresent();
   }
 }
