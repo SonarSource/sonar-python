@@ -168,7 +168,7 @@ public class Expressions {
       .map(ExpressionList::expressions)
       .or(() -> TreeUtils.toOptionalInstanceOf(Tuple.class, expression)
         .map(Tuple::elements))
-      .orElse(Collections.emptyList());
+      .orElseGet(Collections::emptyList);
   }
 
   /**
