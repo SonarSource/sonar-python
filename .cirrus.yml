@@ -33,7 +33,7 @@ qa_container_definition: &QA_CONTAINER_DEFINITION
 win_vm_definition: &WINDOWS_VM_DEFINITION
   ec2_instance:
     experimental: true # see https://github.com/cirruslabs/cirrus-ci-docs/issues/1051
-    image: base-windows-jdk17-v*
+    image: pr-356-base-windows-jdk17-v*
     platform: windows
     region: eu-central-1
     type: t3.xlarge
@@ -113,7 +113,7 @@ ws_scan_task:
   always:
     ws_artifacts:
       path: "whitesource/**/*"
- 
+
 plugin_qa_task:
   depends_on:
     - build
@@ -215,7 +215,7 @@ promote_task:
     memory: 1G
   env:
     #promotion cloud function
-    ARTIFACTORY_PROMOTE_ACCESS_TOKEN: VAULT[development/artifactory/token/${CIRRUS_REPO_OWNER}-${CIRRUS_REPO_NAME}-promoter access_token]    
+    ARTIFACTORY_PROMOTE_ACCESS_TOKEN: VAULT[development/artifactory/token/${CIRRUS_REPO_OWNER}-${CIRRUS_REPO_NAME}-promoter access_token]
     GITHUB_TOKEN: VAULT[development/github/token/${CIRRUS_REPO_OWNER}-${CIRRUS_REPO_NAME}-promotion token]
     #artifacts that will have downloadable links in burgr
     ARTIFACTS: org.sonarsource.python:sonar-python-plugin:jar
