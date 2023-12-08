@@ -38,6 +38,7 @@ import org.sonar.plugins.python.api.LocationInFile;
 import org.sonar.plugins.python.api.symbols.AmbiguousSymbol;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.BinaryExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Name;
@@ -151,6 +152,23 @@ public class InferredTypes {
       return union(((AmbiguousSymbol) typeClass).alternatives().stream().map(InferredTypes::runtimeType));
     }
     return anyType();
+  }
+
+  public static InferredType anyOrUnknownClassType(Symbol symbol) {
+    return Optional.of(symbol)
+      .filter(s -> Character.isUpperCase(s.name().charAt(0)))
+      .filter(s -> {
+        var usageKinds = s.usages().stream().map(Usage::kind).collect(Collectors.toSet());
+        return usageKinds.contains(Usage.Kind.IMPORT) && !usageKinds.contains(Usage.Kind.ASSIGNMENT_LHS);
+      })
+      .filter(SymbolImpl.class::isInstance)
+      .map(SymbolImpl.class::cast)
+      .map(unknownClassSymbol -> {
+        if (unknownClassSymbol.inferredType() == null || anyType().equals(unknownClassSymbol.inferredType())) {
+          unknownClassSymbol.setInferredType(new UnknownClassType(unknownClassSymbol));
+        }
+        return unknownClassSymbol.inferredType();
+      }).orElseGet(InferredTypes::anyType);
   }
 
   public static InferredType or(InferredType t1, InferredType t2) {
@@ -398,6 +416,9 @@ public class InferredTypes {
     }
     if (other instanceof UnionType) {
       return ((UnionType) other).types().stream().anyMatch(t -> InferredTypes.isTypeClassCompatibleWith(typeClass, t));
+    }
+    if (other instanceof UnknownClassType) {
+      return InferredTypes.areSymbolsCompatible(typeClass, ((UnknownClassType) other).typeClass());
     }
     // other is AnyType
     return true;

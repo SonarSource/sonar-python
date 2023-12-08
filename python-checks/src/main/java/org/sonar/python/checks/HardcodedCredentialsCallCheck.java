@@ -129,17 +129,19 @@ public class HardcodedCredentialsCallCheck extends PythonSubscriptionCheck {
   }
 
   private Boolean callHasToBeChecked(CallExpression call) {
-    return Optional.of(call)
-      .map(CallExpression::calleeSymbol)
-      .map(Symbol::fullyQualifiedName)
+    return getMethodFqn(call)
       .map(methods::containsKey)
       .orElse(false);
   }
 
-  private Optional<CredentialMethod> getMethod(CallExpression call) {
+  private static Optional<String> getMethodFqn(CallExpression call) {
     return Optional.of(call)
       .map(CallExpression::calleeSymbol)
-      .map(Symbol::fullyQualifiedName)
+      .map(Symbol::fullyQualifiedName);
+  }
+
+  private Optional<CredentialMethod> getMethod(CallExpression call) {
+    return getMethodFqn(call)
       .map(methods::get);
   }
 

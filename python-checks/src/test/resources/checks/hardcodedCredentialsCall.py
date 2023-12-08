@@ -101,3 +101,15 @@ def byte_decode_hardcoded_value():
     b = apiKey
     apiKey = b
     network = pylast.LibreFMNetwork(api_key = apiKey)
+
+def oauth2_session():
+    from requests_oauthlib.oauth2_session import OAuth2Session
+    oauth = OAuth2Session(
+        'example_client_id',
+        redirect_uri='https://callback.example.com/uri',
+        scope=scope
+    )
+
+    oauth.fetch_token(
+        'https://api.example.com/o/oauth2/token',
+        client_secret='example_Password') # Noncompliant
