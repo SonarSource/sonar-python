@@ -40,7 +40,12 @@ import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.testfixtures.log.LogTesterJUnit5;
 import org.sonar.plugins.python.Python;
 import org.sonar.plugins.python.TestUtils;
+import org.sonar.plugins.python.api.SonarLintCache;
+import org.sonar.plugins.python.api.caching.CacheContext;
+import org.sonar.plugins.python.api.caching.PythonReadCache;
+import org.sonar.plugins.python.api.caching.PythonWriteCache;
 import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.python.caching.DummyCache;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonarsource.sonarlint.plugin.api.module.file.ModuleFileEvent;
 
@@ -175,6 +180,35 @@ class SonarLintPythonIndexerTest {
   void test_indexer_non_python_file() {
     testNonPythonFile("txt");
     testNonPythonFile(null);
+  }
+
+  @Test
+  void test_sonarlint_cache() throws IOException {
+    PythonIndexer indexer = new SonarLintPythonIndexer(moduleFileSystem);
+    CacheContext cacheContext = indexer.cacheContext();
+    assertThat(cacheContext.isCacheEnabled()).isFalse();
+    assertThat(cacheContext.getWriteCache()).isInstanceOf(DummyCache.class);
+    assertThat(cacheContext.getReadCache()).isInstanceOf(DummyCache.class);
+
+    indexer.setSonarLintCache(null);
+    cacheContext = indexer.cacheContext();
+    assertThat(cacheContext.isCacheEnabled()).isFalse();
+    assertThat(cacheContext.getWriteCache()).isInstanceOf(DummyCache.class);
+    assertThat(cacheContext.getReadCache()).isInstanceOf(DummyCache.class);
+
+    SonarLintCache sonarLintCache = new SonarLintCache();
+    indexer.setSonarLintCache(sonarLintCache);
+    cacheContext = indexer.cacheContext();
+    assertThat(cacheContext.isCacheEnabled()).isTrue();
+    assertThat(cacheContext.getWriteCache()).isInstanceOf(PythonWriteCache.class);
+    assertThat(cacheContext.getReadCache()).isInstanceOf(PythonReadCache.class);
+
+    byte[] bytes = {0};
+    sonarLintCache.write("foo", bytes);
+    PythonReadCache readCache = cacheContext.getReadCache();
+    try (var inputStream = readCache.read("foo")) {
+      assertThat(inputStream.readAllBytes()).isEqualTo(bytes);
+    }
   }
 
   private void testNonPythonFile(@Nullable String language) {

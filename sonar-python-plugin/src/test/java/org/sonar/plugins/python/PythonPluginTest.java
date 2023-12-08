@@ -30,6 +30,7 @@ import org.sonar.api.SonarRuntime;
 import org.sonar.api.internal.SonarRuntimeImpl;
 import org.sonar.api.testfixtures.log.LogTesterJUnit5;
 import org.sonar.api.utils.Version;
+import org.sonar.plugins.python.api.SonarLintCache;
 import org.sonar.plugins.python.warnings.AnalysisWarningsWrapper;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -47,7 +48,9 @@ class PythonPluginTest {
     SonarRuntime runtime = SonarRuntimeImpl.forSonarQube(v79, SonarQubeSide.SERVER, SonarEdition.DEVELOPER);
     assertThat(extensions(runtime)).hasSize(27);
     assertThat(extensions(runtime)).contains(AnalysisWarningsWrapper.class);
-    assertThat(extensions(SonarRuntimeImpl.forSonarLint(v79))).hasSize(11);
+    assertThat(extensions(SonarRuntimeImpl.forSonarLint(v79)))
+      .hasSize(12)
+      .contains(SonarLintCache.class);
   }
 
   @Test
