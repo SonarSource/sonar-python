@@ -94,7 +94,6 @@ def compliant():
         view_func=GraphQLView.as_view( # Compliant
             'compliant',
             schema=schema,
-            graphiql=True,
             middleware=[DepthProtectionMiddleware]  # Safe middleware
         )
     )
@@ -105,8 +104,20 @@ def compliant():
         view_func=GraphQLView.as_view( # Compliant
             'compliant',
             schema=schema,
-            graphiql=True,
             middleware=[DepthProtectionMiddleware],  # Safe middleware
-            validation_rules=[DepthLimitValidator]
+            validation_rules=[DepthLimitValidator]   # Safe validation rules
         )
+    )
+
+
+    GraphQLView.as_view(
+        name="introspection",
+        schema=schema,
+        middleware=some_middleware, # if it is not a list or a tuple we should not raise an issue
+    )
+
+    GraphQLView.as_view(
+        name="introspection",
+        schema=schema,
+        validation_rules=some_middleware, # if it is not a list or a tuple we should not raise an issue
     )
