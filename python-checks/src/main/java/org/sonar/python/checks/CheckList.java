@@ -212,6 +212,7 @@ public final class CheckList {
       GenericFunctionTypeParameterCheck.class,
       GenericTypeWithoutArgumentCheck.class,
       GraphemeClustersInClassesCheck.class,
+      GraphQLDenialOfServiceCheck.class,
       GraphQLIntrospectionCheck.class,
       GroupReplacementCheck.class,
       HardCodedCredentialsCheck.class,

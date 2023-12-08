@@ -109,6 +109,13 @@ def flask_graphql_middleware_compliant(schema, some_middleware, introspection_mi
         middleware=some_middleware, # if it is not a list or a tuple we should not raise an issue
     )
 
+    GraphQLView.as_view(
+        name="introspection",
+        schema=schema,
+        graphiql=True,
+        validation_rules=some_middleware, # if it is not a list or a tuple we should not raise an issue
+    )
+
     class IntrospectionCustomMiddleware:
             ...
     my_custom_middleware = IntrospectionCustomMiddleware()

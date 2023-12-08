@@ -276,7 +276,7 @@ class ExpressionsTest {
     NameVisitor nameVisitor = new NameVisitor();
     root.accept(nameVisitor);
     List<Name> names = nameVisitor.names;
-    return Expressions.singleAssignedNonNameValue(names.get(names.size() - 1));
+    return Expressions.singleAssignedNonNameValue(names.get(names.size() - 1)).orElse(null);
   }
 
   private static class NameVisitor extends BaseTreeVisitor {
