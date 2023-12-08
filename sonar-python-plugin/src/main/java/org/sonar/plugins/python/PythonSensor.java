@@ -28,6 +28,7 @@ import javax.annotation.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.SonarProduct;
+import org.sonar.api.batch.DependedUpon;
 import org.sonar.api.batch.fs.FilePredicates;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.rule.CheckFactory;
@@ -50,6 +51,7 @@ import org.sonarsource.performance.measure.PerformanceMeasure;
 
 import static org.sonar.plugins.python.api.PythonVersionUtils.PYTHON_VERSION_KEY;
 
+@DependedUpon(value = "org.sonar.plugins.python.PythonSensor_before_com.sonarsource.dbd.SonarLintPythonBugDetectionSensor")
 public final class PythonSensor implements Sensor {
 
   private static final String PERFORMANCE_MEASURE_PROPERTY = "sonar.python.performance.measure";
