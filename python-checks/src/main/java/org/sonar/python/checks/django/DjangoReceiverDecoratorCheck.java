@@ -57,7 +57,7 @@ public class DjangoReceiverDecoratorCheck extends PythonSubscriptionCheck {
   private static boolean isReceiverDecorator(Decorator decorator) {
     return Optional.of(decorator)
       .map(Decorator::expression)
-      .map(TreeUtils::fullyQualifiedNameFromExpression)
+      .flatMap(TreeUtils::fullyQualifiedNameFromExpression)
       .filter(RECEIVER_DECORATOR_FQN::equals)
       .isPresent();
   }

@@ -388,21 +388,21 @@ class TreeUtilsTest {
       "a = alias.attribute"
     );
     QualifiedExpression qualifiedExpression = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Kind.QUALIFIED_EXPR));
-    assertThat(TreeUtils.fullyQualifiedNameFromQualifiedExpression(qualifiedExpression)).isEqualTo("third_party_lib.element.attribute");
+    assertThat(TreeUtils.fullyQualifiedNameFromQualifiedExpression(qualifiedExpression)).contains("third_party_lib.element.attribute");
 
     fileInput = PythonTestUtils.parse(
       "from third_party_lib import (element as alias)",
       "a = alias().attribute"
     );
     qualifiedExpression = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Kind.QUALIFIED_EXPR));
-    assertThat(TreeUtils.fullyQualifiedNameFromQualifiedExpression(qualifiedExpression)).isEqualTo("third_party_lib.element.attribute");
+    assertThat(TreeUtils.fullyQualifiedNameFromQualifiedExpression(qualifiedExpression)).contains("third_party_lib.element.attribute");
 
     fileInput = PythonTestUtils.parse(
       "from third_party_lib import (element as alias)",
       "a = alias.attr"
     );
     qualifiedExpression = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Kind.QUALIFIED_EXPR));
-    assertThat(TreeUtils.fullyQualifiedNameFromQualifiedExpression(qualifiedExpression)).isEqualTo("third_party_lib.element.attr");
+    assertThat(TreeUtils.fullyQualifiedNameFromQualifiedExpression(qualifiedExpression)).contains("third_party_lib.element.attr");
   }
 
   @Test
