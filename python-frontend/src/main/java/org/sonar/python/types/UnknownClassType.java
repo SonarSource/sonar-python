@@ -26,13 +26,17 @@ import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.semantic.SymbolImpl;
 
+/**
+ * This type is used for symbols that we assume to be class due to how they are used,
+ * so that type inference correctly tracks objects that were created from this.
+ */
 public class UnknownClassType implements InferredType {
 
-  private final Symbol typeClass;
+  private final Symbol typeSymbol;
   private final Map<String, Symbol> members;
 
-  public UnknownClassType(Symbol typeClass) {
-    this.typeClass = typeClass;
+  public UnknownClassType(Symbol typeSymbol) {
+    this.typeSymbol = typeSymbol;
     this.members = new HashMap<>();
   }
 
@@ -53,7 +57,7 @@ public class UnknownClassType implements InferredType {
 
   @Override
   public Optional<Symbol> resolveMember(String memberName) {
-    var member = members.computeIfAbsent(memberName, n -> Optional.of(typeClass)
+    var member = members.computeIfAbsent(memberName, n -> Optional.of(typeSymbol)
       .map(Symbol::fullyQualifiedName)
       .map(fqn -> new SymbolImpl(memberName, fqn + "." + memberName))
       .orElse(null));
@@ -77,7 +81,7 @@ public class UnknownClassType implements InferredType {
 
   @Override
   public boolean isCompatibleWith(InferredType other) {
-    return InferredTypes.isTypeClassCompatibleWith(typeClass, other);
+    return true;
   }
 
   @Override
@@ -85,7 +89,7 @@ public class UnknownClassType implements InferredType {
     return false;
   }
 
-  public Symbol typeClass() {
-    return typeClass;
+  public Symbol typeSymbol() {
+    return typeSymbol;
   }
 }

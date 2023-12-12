@@ -154,6 +154,11 @@ public class InferredTypes {
     return anyType();
   }
 
+  /**
+   * Assumes unknown imported symbols whose name start with a capital letter to be classes.
+   * @param symbol
+   * @return {@link UnknownClassType} or {@link AnyType}
+   */
   public static InferredType anyOrUnknownClassType(Symbol symbol) {
     return Optional.of(symbol)
       .filter(s -> Character.isUpperCase(s.name().charAt(0)))
@@ -416,9 +421,6 @@ public class InferredTypes {
     }
     if (other instanceof UnionType) {
       return ((UnionType) other).types().stream().anyMatch(t -> InferredTypes.isTypeClassCompatibleWith(typeClass, t));
-    }
-    if (other instanceof UnknownClassType) {
-      return InferredTypes.areSymbolsCompatible(typeClass, ((UnknownClassType) other).typeClass());
     }
     // other is AnyType
     return true;
