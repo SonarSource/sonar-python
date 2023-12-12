@@ -497,11 +497,23 @@ class FullyQualifiedNameTest {
   }
 
   @Test
-  void virtual_call_qualifier_unknown_type() {
+  void virtual_call_qualifier_unknown_class_type() {
     FileInput tree = parse(
       new SymbolTableBuilder("my_package", pythonFile("my_module.py")),
       "from mod import A",
       "a = A()",
+      "a.foo()"
+    );
+    QualifiedExpression qualifiedExpression = getFirstChild(tree, t -> t.is(Tree.Kind.QUALIFIED_EXPR));
+    assertThat(qualifiedExpression.symbol().fullyQualifiedName()).isEqualTo("mod.A.foo");
+  }
+
+  @Test
+  void virtual_call_qualifier_unknown_type() {
+    FileInput tree = parse(
+      new SymbolTableBuilder("my_package", pythonFile("my_module.py")),
+      "from mod import b",
+      "a = b()",
       "a.foo()"
     );
     QualifiedExpression qualifiedExpression = getFirstChild(tree, t -> t.is(Tree.Kind.QUALIFIED_EXPR));

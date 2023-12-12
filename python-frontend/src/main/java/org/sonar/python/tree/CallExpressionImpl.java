@@ -168,7 +168,7 @@ public class CallExpressionImpl extends PyTree implements CallExpression, HasTyp
       Collection<Symbol> alternatives = ((AmbiguousSymbol) symbol).alternatives();
       return InferredTypes.union(alternatives.stream().map(CallExpressionImpl::getType));
     }
-    return InferredTypes.anyType();
+    return InferredTypes.anyOrUnknownClassType(symbol);
   }
 
   @Override

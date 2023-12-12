@@ -38,6 +38,7 @@ import org.sonar.plugins.python.api.LocationInFile;
 import org.sonar.plugins.python.api.symbols.AmbiguousSymbol;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.BinaryExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Name;
@@ -151,6 +152,28 @@ public class InferredTypes {
       return union(((AmbiguousSymbol) typeClass).alternatives().stream().map(InferredTypes::runtimeType));
     }
     return anyType();
+  }
+
+  /**
+   * Assumes unknown imported symbols whose name start with a capital letter to be classes.
+   * @param symbol
+   * @return {@link UnknownClassType} or {@link AnyType}
+   */
+  public static InferredType anyOrUnknownClassType(Symbol symbol) {
+    return Optional.of(symbol)
+      .filter(s -> Character.isUpperCase(s.name().charAt(0)))
+      .filter(s -> {
+        var usageKinds = s.usages().stream().map(Usage::kind).collect(Collectors.toSet());
+        return usageKinds.contains(Usage.Kind.IMPORT) && !usageKinds.contains(Usage.Kind.ASSIGNMENT_LHS);
+      })
+      .filter(SymbolImpl.class::isInstance)
+      .map(SymbolImpl.class::cast)
+      .map(unknownClassSymbol -> {
+        if (anyType().equals(unknownClassSymbol.inferredType())) {
+          unknownClassSymbol.setInferredType(new UnknownClassType(unknownClassSymbol));
+        }
+        return unknownClassSymbol.inferredType();
+      }).orElseGet(InferredTypes::anyType);
   }
 
   public static InferredType or(InferredType t1, InferredType t2) {

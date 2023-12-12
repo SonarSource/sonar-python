@@ -95,6 +95,25 @@ class TypeInferenceTest {
   }
 
   @Test
+  void unknown_class_type() {
+    var expression = (CallExpression) lastExpression(
+      "def oauth2_session(a):",
+        "  from requests_oauthlib.oauth2_session import OAuth2Session",
+        "  oauth = OAuth2Session()",
+        "  oauth.fetch_token()");
+    assertThat(expression.calleeSymbol().fullyQualifiedName()).isEqualTo("requests_oauthlib.oauth2_session.OAuth2Session.fetch_token");
+
+    expression = (CallExpression) lastExpression(
+      "def oauth2_session(a):",
+        "  from requests_oauthlib.oauth2_session import OAuth2Session",
+        "  if a:",
+        "    OAuth2Session = \"a\"",
+        "  oauth = OAuth2Session()",
+        "  oauth.fetch_token()");
+    assertThat(expression.calleeSymbol().fullyQualifiedName()).isNull();
+  }
+
+  @Test
   void variable_outside_function() {
     assertThat(lastExpression("a = 42; a").type()).isEqualTo(INT);
   }
