@@ -169,7 +169,7 @@ public class InferredTypes {
       .filter(SymbolImpl.class::isInstance)
       .map(SymbolImpl.class::cast)
       .map(unknownClassSymbol -> {
-        if (unknownClassSymbol.inferredType() == null || anyType().equals(unknownClassSymbol.inferredType())) {
+        if (anyType().equals(unknownClassSymbol.inferredType())) {
           unknownClassSymbol.setInferredType(new UnknownClassType(unknownClassSymbol));
         }
         return unknownClassSymbol.inferredType();

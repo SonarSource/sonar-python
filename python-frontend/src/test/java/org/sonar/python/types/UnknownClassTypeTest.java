@@ -28,7 +28,8 @@ class UnknownClassTypeTest {
 
   @Test
   void test() {
-    var type = new UnknownClassType(new SymbolImpl("Unknown", "in.the.middle.of.nowhere"));
+    var symbol = new SymbolImpl("Unknown", "in.the.middle.of.nowhere");
+    var type = new UnknownClassType(symbol);
 
     assertThat(type.isIdentityComparableWith(new RuntimeType("SonethingElse"))).isTrue();
     assertThat(type.isIdentityComparableWith(type)).isTrue();
@@ -42,6 +43,7 @@ class UnknownClassTypeTest {
     assertThat(type.canBeOrExtend("a")).isTrue();
     assertThat(type.isCompatibleWith(type)).isTrue();
     assertThat(type.mustBeOrExtend("a")).isFalse();
+    assertThat(type.typeSymbol()).isEqualTo(symbol);
   }
 
 }
