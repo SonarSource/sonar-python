@@ -66,7 +66,7 @@ public class UnknownClassType implements InferredType {
 
   @Override
   public Optional<Symbol> resolveDeclaredMember(String memberName) {
-    return Optional.empty();
+    return resolveMember(memberName);
   }
 
   @Override

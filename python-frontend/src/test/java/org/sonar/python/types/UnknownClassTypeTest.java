@@ -36,8 +36,8 @@ class UnknownClassTypeTest {
     assertThat(type.declaresMember("a")).isTrue();
     assertThat(type.resolveMember("a")).isPresent()
       .hasValueSatisfying(s -> "in.the.middle.of.nowhere.Unknown.a".equals(s.fullyQualifiedName()));
-    assertThat(type.resolveDeclaredMember("a")).isEmpty();
-    assertThat(type.resolveDeclaredMember("a")).isEmpty();
+    assertThat(type.resolveDeclaredMember("a"))
+      .hasValueSatisfying(s -> "in.the.middle.of.nowhere.Unknown.a".equals(s.fullyQualifiedName()));
     assertThat(type.canOnlyBe("a")).isFalse();
     assertThat(type.canBeOrExtend("a")).isTrue();
     assertThat(type.isCompatibleWith(type)).isTrue();
