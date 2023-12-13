@@ -67,38 +67,37 @@ public final class PythonSensor implements Sensor {
   private final SonarLintCache sonarLintCache;
   private final AnalysisWarningsWrapper analysisWarnings;
   private static final Logger LOG = LoggerFactory.getLogger(PythonSensor.class);
-  static final String UNSET_VERSION_WARNING =
-    "Your code is analyzed as compatible with all Python 3 versions by default." +
+  static final String UNSET_VERSION_WARNING = "Your code is analyzed as compatible with all Python 3 versions by default." +
     " You can get a more precise analysis by setting the exact Python version in your configuration via the parameter \"sonar.python.version\"";
 
   /**
    * Constructor to be used by pico if neither PythonCustomRuleRepository nor PythonIndexer are to be found and injected.
    */
   public PythonSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory,
-                      NoSonarFilter noSonarFilter, AnalysisWarningsWrapper analysisWarnings) {
+    NoSonarFilter noSonarFilter, AnalysisWarningsWrapper analysisWarnings) {
     this(fileLinesContextFactory, checkFactory, noSonarFilter, null, null, null, analysisWarnings);
   }
 
   public PythonSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory, NoSonarFilter noSonarFilter,
-                      PythonCustomRuleRepository[] customRuleRepositories, AnalysisWarningsWrapper analysisWarnings) {
+    PythonCustomRuleRepository[] customRuleRepositories, AnalysisWarningsWrapper analysisWarnings) {
     this(fileLinesContextFactory, checkFactory, noSonarFilter, customRuleRepositories, null, null, analysisWarnings);
   }
 
   public PythonSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory, NoSonarFilter noSonarFilter,
-                      PythonIndexer indexer, SonarLintCache sonarLintCache, AnalysisWarningsWrapper analysisWarnings) {
-    this(fileLinesContextFactory, checkFactory, noSonarFilter, null, indexer, sonarLintCache, analysisWarnings);
+    PythonIndexer indexer, AnalysisWarningsWrapper analysisWarnings) {
+    this(fileLinesContextFactory, checkFactory, noSonarFilter, null, null, indexer, analysisWarnings);
   }
 
   public PythonSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory, NoSonarFilter noSonarFilter,
-                      @Nullable PythonCustomRuleRepository[] customRuleRepositories, @Nullable PythonIndexer indexer,
-                      @Nullable SonarLintCache sonarLintCache, AnalysisWarningsWrapper analysisWarnings) {
+    @Nullable PythonCustomRuleRepository[] customRuleRepositories, @Nullable SonarLintCache sonarLintCache, @Nullable PythonIndexer indexer,
+    AnalysisWarningsWrapper analysisWarnings) {
     this.checks = new PythonChecks(checkFactory)
       .addChecks(CheckList.REPOSITORY_KEY, CheckList.getChecks())
       .addCustomChecks(customRuleRepositories);
     this.fileLinesContextFactory = fileLinesContextFactory;
     this.noSonarFilter = noSonarFilter;
-    this.indexer = indexer;
     this.sonarLintCache = sonarLintCache;
+    this.indexer = indexer;
     this.analysisWarnings = analysisWarnings;
   }
 
@@ -119,10 +118,9 @@ public final class PythonSensor implements Sensor {
       analysisWarnings.addUnique(UNSET_VERSION_WARNING);
     }
     pythonVersionParameter.ifPresent(value -> ProjectPythonVersion.setCurrentVersions(PythonVersionUtils.fromString(value)));
-    CacheContext cacheContext = CacheContextImpl.of(context);
+    CacheContext cacheContext = CacheContextImpl.of(context, sonarLintCache);
     PythonIndexer pythonIndexer = this.indexer != null ? this.indexer : new SonarQubePythonIndexer(pythonFiles, cacheContext, context);
-    pythonIndexer.setSonarLintCache(sonarLintCache);
-    PythonScanner scanner = new PythonScanner(context, checks, fileLinesContextFactory, noSonarFilter, PythonParser.create(), pythonIndexer);
+    PythonScanner scanner = new PythonScanner(context, checks, fileLinesContextFactory, noSonarFilter, PythonParser.create(), pythonIndexer, cacheContext);
     scanner.execute(pythonFiles, context);
     durationReport.stop();
   }

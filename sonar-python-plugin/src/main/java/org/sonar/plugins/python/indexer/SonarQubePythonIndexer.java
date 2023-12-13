@@ -30,10 +30,10 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import org.sonar.api.batch.fs.InputFile;
-import org.sonar.api.batch.sensor.SensorContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.sonar.api.batch.fs.InputFile;
+import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.plugins.python.api.caching.CacheContext;
 import org.sonar.plugins.python.caching.Caching;
 import org.sonar.python.index.Descriptor;
@@ -115,18 +115,18 @@ public class SonarQubePythonIndexer extends PythonIndexer {
     LOG.info(
       "Cached information of global symbols will be used for {} out of {} main files. Global symbols will be recomputed for the remaining files.",
       inputFiles.size() - impactfulFiles.size(),
-      inputFiles.size()
-    );
+      inputFiles.size());
     LOG.info("Fully optimized analysis can be performed for {} out of {} files.", fullySkippableFiles.size(), inputFiles.size());
     LOG.info("Partially optimized analysis can be performed for {} out of {} files.", partiallySkippableFiles.size(), inputFiles.size());
-    // Although we need to analyze all impacted files, we only need to recompute global symbols for modified files (no cross-file dependencies in the project symbol table)
+    // Although we need to analyze all impacted files, we only need to recompute global symbols for modified files (no cross-file dependencies
+    // in the project symbol table)
     computeGlobalSymbols(impactfulFiles, context);
   }
 
   /*
-    In a full analysis, Typeshed symbols are loaded lazily depending on which module is encountered during parsing.
-    SonarSecurity needs all Typeshed symbols used in the project to be properly loaded.
-    For that reason, we load all symbols that were used in the previous analysis upfront, even if the file using them will not be parsed.
+   * In a full analysis, Typeshed symbols are loaded lazily depending on which module is encountered during parsing.
+   * SonarSecurity needs all Typeshed symbols used in the project to be properly loaded.
+   * For that reason, we load all symbols that were used in the previous analysis upfront, even if the file using them will not be parsed.
    */
   private void loadTypeshedSymbols() {
     TypeShed.builtinSymbols();
@@ -234,11 +234,6 @@ public class SonarQubePythonIndexer extends PythonIndexer {
   @Override
   public boolean canBeFullyScannedWithoutParsing(InputFile inputFile) {
     return fullySkippableFiles.contains(inputFile);
-  }
-
-  @Override
-  public CacheContext cacheContext() {
-    return caching.cacheContext();
   }
 
   private static String getCacheVersion(SensorContext context) {

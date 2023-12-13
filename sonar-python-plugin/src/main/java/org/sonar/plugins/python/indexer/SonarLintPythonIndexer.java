@@ -25,17 +25,11 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.annotation.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.plugins.python.Python;
-import org.sonar.plugins.python.api.SonarLintCache;
-import org.sonar.plugins.python.api.caching.CacheContext;
-import org.sonar.python.caching.CacheContextImpl;
-import org.sonar.python.caching.PythonReadCacheImpl;
-import org.sonar.python.caching.PythonWriteCacheImpl;
 import org.sonarsource.api.sonarlint.SonarLintSide;
 import org.sonarsource.sonarlint.plugin.api.module.file.ModuleFileEvent;
 import org.sonarsource.sonarlint.plugin.api.module.file.ModuleFileListener;
@@ -46,7 +40,6 @@ public class SonarLintPythonIndexer extends PythonIndexer implements ModuleFileL
 
   private final ModuleFileSystem moduleFileSystem;
 
-  private CacheContext cacheContext;
   private final Map<String, InputFile> indexedFiles = new HashMap<>();
   private static final Logger LOG = LoggerFactory.getLogger(SonarLintPythonIndexer.class);
   private boolean shouldBuildProjectSymbolTable = true;
@@ -79,23 +72,10 @@ public class SonarLintPythonIndexer extends PythonIndexer implements ModuleFileL
     globalSymbolsStep.execute(files, context);
   }
 
-  // SonarLintCache has to be set lazily because SonarLintPythonIndex is injected in the PythonSensor
-  @Override
-  public void setSonarLintCache(@Nullable SonarLintCache sonarLintCache) {
-    if (sonarLintCache != null) {
-      this.cacheContext = new CacheContextImpl(true, new PythonWriteCacheImpl(sonarLintCache), new PythonReadCacheImpl(sonarLintCache));
-    }
-  }
-
   @Override
   public InputFile getFileWithId(String fileId) {
     String compare = fileId.replace("\\", "/");
     return indexedFiles.getOrDefault(compare, null);
-  }
-
-  @Override
-  public CacheContext cacheContext() {
-    return cacheContext != null ? cacheContext : CacheContextImpl.dummyCache();
   }
 
   private static List<InputFile> getInputFiles(ModuleFileSystem moduleFileSystem) {

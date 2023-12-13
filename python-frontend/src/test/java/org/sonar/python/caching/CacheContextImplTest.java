@@ -19,7 +19,9 @@
  */
 package org.sonar.python.caching;
 
+import java.io.IOException;
 import java.util.Optional;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
 import org.slf4j.event.Level;
@@ -29,7 +31,10 @@ import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.config.Configuration;
 import org.sonar.api.testfixtures.log.LogTesterJUnit5;
 import org.sonar.api.utils.Version;
+import org.sonar.plugins.python.api.SonarLintCache;
 import org.sonar.plugins.python.api.caching.CacheContext;
+import org.sonar.plugins.python.api.caching.PythonReadCache;
+import org.sonar.plugins.python.api.caching.PythonWriteCache;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
@@ -48,7 +53,7 @@ class CacheContextImplTest {
   void cache_context_of_enabled_cache() {
     SensorContext sensorContext = sensorContext(SonarProduct.SONARQUBE, VERSION_WITH_CACHING, true);
 
-    CacheContext cacheContext = CacheContextImpl.of(sensorContext);
+    CacheContext cacheContext = CacheContextImpl.of(sensorContext, null);
     assertThat(cacheContext.isCacheEnabled()).isTrue();
   }
 
@@ -56,7 +61,7 @@ class CacheContextImplTest {
   void cache_context_of_disabled_cache() {
     SensorContext sensorContext = sensorContext(SonarProduct.SONARQUBE, VERSION_WITH_CACHING, false);
 
-    CacheContext cacheContext = CacheContextImpl.of(sensorContext);
+    CacheContext cacheContext = CacheContextImpl.of(sensorContext, null);
     assertThat(cacheContext.isCacheEnabled()).isFalse();
   }
 
@@ -64,15 +69,15 @@ class CacheContextImplTest {
   void cache_context_on_sonarlint() {
     SensorContext sensorContext = sensorContext(SonarProduct.SONARLINT, VERSION_WITH_CACHING, true);
 
-    CacheContext cacheContext = CacheContextImpl.of(sensorContext);
-    assertThat(cacheContext.isCacheEnabled()).isFalse();
+    CacheContext cacheContext = CacheContextImpl.of(sensorContext, new SonarLintCache());
+    assertThat(cacheContext.isCacheEnabled()).isTrue();
   }
 
   @Test
   void cache_context_on_old_version() {
     SensorContext sensorContext = sensorContext(SonarProduct.SONARQUBE, VERSION_WITHOUT_CACHING, true);
 
-    CacheContext cacheContext = CacheContextImpl.of(sensorContext);
+    CacheContext cacheContext = CacheContextImpl.of(sensorContext, null);
     assertThat(cacheContext.isCacheEnabled()).isFalse();
   }
 
@@ -83,7 +88,7 @@ class CacheContextImplTest {
     when(configuration.get("sonar.modules")).thenReturn(Optional.of("module1, module2"));
     when(sensorContext.config()).thenReturn(configuration);
 
-    CacheContext cacheContext = CacheContextImpl.of(sensorContext);
+    CacheContext cacheContext = CacheContextImpl.of(sensorContext, null);
     assertThat(cacheContext.isCacheEnabled()).isFalse();
     assertThat(logTester.logs(Level.INFO)).contains(EXPECTED_SONAR_MODULE_LOG);
   }
@@ -95,7 +100,7 @@ class CacheContextImplTest {
     when(configuration.get("sonar.modules")).thenReturn(Optional.of("module1, module2"));
     when(sensorContext.config()).thenReturn(configuration);
 
-    CacheContext cacheContext = CacheContextImpl.of(sensorContext);
+    CacheContext cacheContext = CacheContextImpl.of(sensorContext, null);
     assertThat(cacheContext.isCacheEnabled()).isFalse();
     assertThat(logTester.logs(Level.INFO)).doesNotContain(EXPECTED_SONAR_MODULE_LOG);
   }
@@ -118,5 +123,29 @@ class CacheContextImplTest {
     when(sensorContext.config()).thenReturn(configuration);
 
     return sensorContext;
+  }
+
+  @Test
+  void test_sonarlint_cache() throws IOException {
+    SensorContext sensorContext = sensorContext(SonarProduct.SONARLINT, VERSION_WITH_CACHING, true);
+    CacheContext cacheContext;
+
+    cacheContext = CacheContextImpl.of(sensorContext, null);
+    Assertions.assertThat(cacheContext.isCacheEnabled()).isFalse();
+    Assertions.assertThat(cacheContext.getWriteCache()).isInstanceOf(DummyCache.class);
+    Assertions.assertThat(cacheContext.getReadCache()).isInstanceOf(DummyCache.class);
+
+    var sonarLintCache = new SonarLintCache();
+    cacheContext = CacheContextImpl.of(sensorContext, sonarLintCache);
+    Assertions.assertThat(cacheContext.isCacheEnabled()).isTrue();
+    Assertions.assertThat(cacheContext.getWriteCache()).isInstanceOf(PythonWriteCache.class);
+    Assertions.assertThat(cacheContext.getReadCache()).isInstanceOf(PythonReadCache.class);
+
+    byte[] bytes = {0};
+    sonarLintCache.write("foo", bytes);
+    PythonReadCache readCache = cacheContext.getReadCache();
+    try (var inputStream = readCache.read("foo")) {
+      Assertions.assertThat(inputStream.readAllBytes()).isEqualTo(bytes);
+    }
   }
 }

@@ -19,11 +19,13 @@
  */
 package org.sonar.python.caching;
 
+import javax.annotation.Nullable;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sonar.api.SonarProduct;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.utils.Version;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.sonar.plugins.python.api.SonarLintCache;
 import org.sonar.plugins.python.api.caching.CacheContext;
 import org.sonar.plugins.python.api.caching.PythonReadCache;
 import org.sonar.plugins.python.api.caching.PythonWriteCache;
@@ -58,17 +60,22 @@ public class CacheContextImpl implements CacheContext {
     return writeCache;
   }
 
-  public static CacheContextImpl of(SensorContext context) {
+  public static CacheContextImpl of(SensorContext context, @Nullable SonarLintCache sonarLintCache) {
     String sonarModules = context.config().get("sonar.modules").orElse("");
     boolean isUsingSonarModules = !sonarModules.isEmpty();
     if (isUsingSonarModules && context.isCacheEnabled()) {
       LOG.info("Caching will be disabled for this analysis due to the use of the \"sonar.modules\" property.");
     }
-    if (!context.runtime().getProduct().equals(SonarProduct.SONARLINT)
-      && context.runtime().getApiVersion().isGreaterThanOrEqual(MINIMUM_RUNTIME_VERSION)
-      && !isUsingSonarModules
-    ) {
-      return new CacheContextImpl(context.isCacheEnabled(), new PythonWriteCacheImpl(context.nextCache()), new PythonReadCacheImpl(context.previousCache()));
+
+    if (context.runtime().getApiVersion().isGreaterThanOrEqual(MINIMUM_RUNTIME_VERSION) &&
+      !isUsingSonarModules) {
+      if (context.runtime().getProduct().equals(SonarProduct.SONARLINT)) {
+        if (sonarLintCache != null) {
+          return new CacheContextImpl(context.isCacheEnabled(), new PythonWriteCacheImpl(sonarLintCache), new PythonReadCacheImpl(sonarLintCache));
+        }
+      } else {
+        return new CacheContextImpl(context.isCacheEnabled(), new PythonWriteCacheImpl(context.nextCache()), new PythonReadCacheImpl(context.previousCache()));
+      }
     }
     return new CacheContextImpl(false, new DummyCache(), new DummyCache());
   }

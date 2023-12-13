@@ -25,7 +25,6 @@ import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
 import javax.annotation.CheckForNull;
-import javax.annotation.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.fs.InputFile;
@@ -33,8 +32,6 @@ import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.plugins.python.Scanner;
 import org.sonar.plugins.python.SonarQubePythonFile;
 import org.sonar.plugins.python.api.PythonFile;
-import org.sonar.plugins.python.api.SonarLintCache;
-import org.sonar.plugins.python.api.caching.CacheContext;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.python.parser.PythonParser;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
@@ -82,34 +79,30 @@ public abstract class PythonIndexer {
 
   public abstract void buildOnce(SensorContext context);
 
-  public void setSonarLintCache(@Nullable SonarLintCache sonarLintCache) {
-    // no op by default
-  }
-
   @CheckForNull
   public InputFile getFileWithId(String fileId) {
     // no op by default
     return null;
   }
 
-  /* We consider a file to be partially skippable if it is unchanged, but may depend on impacted files.
-     Regular Python rules will not run on such files.
-     Security UCFGs and DBD IRs will be regenerated for them if they do depend on impacted files.
-     In such case, these files will still need to be parsed when Security or DBD rules are enabled.
+  /*
+   * We consider a file to be partially skippable if it is unchanged, but may depend on impacted files.
+   * Regular Python rules will not run on such files.
+   * Security UCFGs and DBD IRs will be regenerated for them if they do depend on impacted files.
+   * In such case, these files will still need to be parsed when Security or DBD rules are enabled.
    */
   public boolean canBePartiallyScannedWithoutParsing(InputFile inputFile) {
     return false;
   }
 
-  /* We consider a file to be fully skippable if it is unchanged and does NOT depend on any impacted file.
-     Regular Python rules will not run on these files. Security UCFGs and DBD IRs will be retrieved from the cache.
-     These files will not be parsed.
+  /*
+   * We consider a file to be fully skippable if it is unchanged and does NOT depend on any impacted file.
+   * Regular Python rules will not run on these files. Security UCFGs and DBD IRs will be retrieved from the cache.
+   * These files will not be parsed.
    */
   public boolean canBeFullyScannedWithoutParsing(InputFile inputFile) {
     return false;
   }
-
-  public abstract CacheContext cacheContext();
 
   class GlobalSymbolsScanner extends Scanner {
 

@@ -54,6 +54,7 @@ import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.PythonInputFileContext;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.PythonVisitorContext;
+import org.sonar.plugins.python.api.caching.CacheContext;
 import org.sonar.plugins.python.api.internal.EndOfAnalysis;
 import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
 import org.sonar.plugins.python.api.quickfix.PythonTextEdit;
@@ -76,18 +77,20 @@ public class PythonScanner extends Scanner {
   private final FileLinesContextFactory fileLinesContextFactory;
   private final NoSonarFilter noSonarFilter;
   private final PythonCpdAnalyzer cpdAnalyzer;
+  private final CacheContext cacheContext;
   private final PythonIndexer indexer;
   private final Map<InputFile, Set<PythonCheck>> checksExecutedWithoutParsingByFiles = new HashMap<>();
 
   public PythonScanner(
     SensorContext context, PythonChecks checks,
-    FileLinesContextFactory fileLinesContextFactory, NoSonarFilter noSonarFilter, PythonParser parser, PythonIndexer indexer) {
+    FileLinesContextFactory fileLinesContextFactory, NoSonarFilter noSonarFilter, PythonParser parser, PythonIndexer indexer, CacheContext cacheContext) {
     super(context);
     this.checks = checks;
     this.fileLinesContextFactory = fileLinesContextFactory;
     this.noSonarFilter = noSonarFilter;
     this.cpdAnalyzer = new PythonCpdAnalyzer(context);
     this.parser = parser;
+    this.cacheContext = cacheContext;
     this.indexer = indexer;
     this.indexer.buildOnce(context);
   }
@@ -107,7 +110,7 @@ public class PythonScanner extends Scanner {
       PythonTreeMaker treeMaker = getTreeMaker(inputFile);
       FileInput parse = treeMaker.fileInput(astNode);
       visitorContext = new PythonVisitorContext(
-        parse, pythonFile, getWorkingDirectory(context), indexer.packageName(inputFile), indexer.projectLevelSymbolTable(), indexer.cacheContext(), context.runtime().getProduct());
+        parse, pythonFile, getWorkingDirectory(context), indexer.packageName(inputFile), indexer.projectLevelSymbolTable(), cacheContext, context.runtime().getProduct());
       if (fileType == InputFile.Type.MAIN) {
         saveMeasures(inputFile, visitorContext);
       }
@@ -161,7 +164,7 @@ public class PythonScanner extends Scanner {
         continue;
       }
       PythonFile pythonFile = SonarQubePythonFile.create(inputFile);
-      PythonInputFileContext inputFileContext = new PythonInputFileContext(pythonFile, context.fileSystem().workDir(), indexer.cacheContext(), context.runtime().getProduct());
+      PythonInputFileContext inputFileContext = new PythonInputFileContext(pythonFile, context.fileSystem().workDir(), cacheContext, context.runtime().getProduct());
       if (check.scanWithoutParsing(inputFileContext)) {
         Set<PythonCheck> executedChecks = checksExecutedWithoutParsingByFiles.getOrDefault(inputFile, new HashSet<>());
         executedChecks.add(check);
@@ -187,7 +190,7 @@ public class PythonScanner extends Scanner {
     checks.all().stream()
       .filter(EndOfAnalysis.class::isInstance)
       .map(EndOfAnalysis.class::cast)
-      .forEach(c -> c.endOfAnalysis(indexer.cacheContext()));
+      .forEach(c -> c.endOfAnalysis(cacheContext));
   }
 
   boolean isCheckApplicable(PythonCheck pythonCheck, InputFile.Type fileType) {
@@ -328,7 +331,7 @@ public class PythonScanner extends Scanner {
       return true;
     }
 
-    return cpdAnalyzer.pushCachedCpdTokens(inputFile, indexer.cacheContext());
+    return cpdAnalyzer.pushCachedCpdTokens(inputFile, cacheContext);
   }
 
   private void saveMetricOnFile(InputFile inputFile, Metric<Integer> metric, Integer value) {

@@ -27,6 +27,7 @@ import org.sonar.api.SonarProduct;
 import org.sonar.api.SonarRuntime;
 import org.sonar.api.config.PropertyDefinition;
 import org.sonar.api.resources.Qualifiers;
+import org.sonar.plugins.python.api.SonarLintCache;
 import org.sonar.plugins.python.bandit.BanditRulesDefinition;
 import org.sonar.plugins.python.bandit.BanditSensor;
 import org.sonar.plugins.python.coverage.PythonCoverageSensor;
@@ -41,7 +42,6 @@ import org.sonar.plugins.python.ruff.RuffRulesDefinition;
 import org.sonar.plugins.python.ruff.RuffSensor;
 import org.sonar.plugins.python.warnings.AnalysisWarningsWrapper;
 import org.sonar.plugins.python.xunit.PythonXUnitSensor;
-import org.sonar.plugins.python.api.SonarLintCache;
 
 public class PythonPlugin implements Plugin {
 
@@ -71,7 +71,6 @@ public class PythonPlugin implements Plugin {
         .defaultValue("py")
         .build(),
 
-
       Python.class,
 
       PythonProfile.class,
@@ -94,6 +93,7 @@ public class PythonPlugin implements Plugin {
       SonarLintPluginAPIManager sonarLintPluginAPIManager = new SonarLintPluginAPIManager();
       sonarLintPluginAPIManager.addSonarlintPythonIndexer(context, new SonarLintPluginAPIVersion());
       context.addExtensions(
+        SonarLintCache.class,
         IPynb.class,
         IPynbProfile.class,
         IPynbSensor.class,
@@ -221,7 +221,6 @@ public class PythonPlugin implements Plugin {
 
     public void addSonarlintPythonIndexer(Context context, SonarLintPluginAPIVersion sonarLintPluginAPIVersion) {
       if (sonarLintPluginAPIVersion.isDependencyAvailable()) {
-        context.addExtension(SonarLintCache.class);
         context.addExtension(SonarLintPythonIndexer.class);
       } else {
         LOG.debug("Error while trying to inject SonarLintPythonIndexer");
