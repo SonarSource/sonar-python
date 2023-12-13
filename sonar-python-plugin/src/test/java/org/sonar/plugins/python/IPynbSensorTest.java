@@ -22,8 +22,11 @@ package org.sonar.plugins.python;
 import java.io.File;
 import java.util.Collections;
 import java.util.List;
+import javax.annotation.Nullable;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.Mockito;
 import org.slf4j.event.Level;
 import org.sonar.api.SonarRuntime;
@@ -44,7 +47,7 @@ import org.sonar.api.measures.FileLinesContextFactory;
 import org.sonar.api.rule.RuleKey;
 import org.sonar.api.testfixtures.log.LogTesterJUnit5;
 import org.sonar.api.utils.Version;
-import org.sonar.plugins.python.api.caching.CacheContext;
+import org.sonar.plugins.python.api.SonarLintCache;
 import org.sonar.plugins.python.indexer.PythonIndexer;
 import org.sonar.plugins.python.indexer.SonarLintPythonIndexer;
 import org.sonar.plugins.python.indexer.TestModuleFileSystem;
@@ -88,8 +91,9 @@ class IPynbSensorTest {
     assertThat(descriptor.type()).isNull();
   }
 
-  @Test
-  void test_execute_on_sonarlint() {
+  @ParameterizedTest
+  @ValueSource(booleans = {true, false})
+  void test_execute_on_sonarlint(boolean sonarLintCacheIsPresent) {
     context.setRuntime(SONARLINT_RUNTIME);
 
     activeRules = new ActiveRulesBuilder()
@@ -102,7 +106,8 @@ class IPynbSensorTest {
     InputFile inputFile = inputFile(FILE_1);
 
     PythonIndexer pythonIndexer = pythonIndexer(List.of(inputFile));
-    sensor(pythonIndexer).execute(context);
+    SonarLintCache sonarLintCache = sonarLintCacheIsPresent ? new SonarLintCache() : null;
+    sensor(pythonIndexer, sonarLintCache).execute(context);
 
     String key = "moduleKey:file1.ipynb";
     assertThat(context.measure(key, CoreMetrics.NCLOC)).isNull();
@@ -114,15 +119,20 @@ class IPynbSensorTest {
   }
 
   private IPynbSensor sensor() {
-    return sensor(pythonIndexer(Collections.emptyList()));
+    return sensor(pythonIndexer(Collections.emptyList()), new SonarLintCache());
   }
 
-  private IPynbSensor sensor(PythonIndexer indexer) {
+  private IPynbSensor sensor(PythonIndexer indexer, @Nullable SonarLintCache sonarLintCache) {
     FileLinesContextFactory fileLinesContextFactory = mock(FileLinesContextFactory.class);
     FileLinesContext fileLinesContext = mock(FileLinesContext.class);
     when(fileLinesContextFactory.createFor(Mockito.any(InputFile.class))).thenReturn(fileLinesContext);
     CheckFactory checkFactory = new CheckFactory(activeRules);
-    return new IPynbSensor(fileLinesContextFactory, checkFactory, mock(NoSonarFilter.class), mock(CacheContext.class), indexer);
+
+    if (sonarLintCache == null) {
+      return new IPynbSensor(fileLinesContextFactory, checkFactory, mock(NoSonarFilter.class), indexer);
+    }
+
+    return new IPynbSensor(fileLinesContextFactory, checkFactory, mock(NoSonarFilter.class), sonarLintCache, indexer);
   }
 
   private InputFile inputFile(String name) {

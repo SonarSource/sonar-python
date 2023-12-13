@@ -22,6 +22,7 @@ package org.sonar.plugins.python;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import javax.annotation.Nullable;
 import org.sonar.api.batch.fs.FilePredicates;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.rule.CheckFactory;
@@ -32,8 +33,10 @@ import org.sonar.api.issue.NoSonarFilter;
 import org.sonar.api.measures.FileLinesContextFactory;
 import org.sonar.plugins.python.api.ProjectPythonVersion;
 import org.sonar.plugins.python.api.PythonVersionUtils;
+import org.sonar.plugins.python.api.SonarLintCache;
 import org.sonar.plugins.python.api.caching.CacheContext;
 import org.sonar.plugins.python.indexer.PythonIndexer;
+import org.sonar.python.caching.CacheContextImpl;
 import org.sonar.python.checks.CheckList;
 import org.sonar.python.parser.PythonParser;
 
@@ -44,16 +47,24 @@ public final class IPynbSensor implements Sensor {
   private final PythonChecks checks;
   private final FileLinesContextFactory fileLinesContextFactory;
   private final NoSonarFilter noSonarFilter;
-  private final CacheContext cacheContext;
+  private final SonarLintCache sonarLintCache;
   private final PythonIndexer indexer;
 
-  public IPynbSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory, NoSonarFilter noSonarFilter, CacheContext cacheContext,
+  public IPynbSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory, NoSonarFilter noSonarFilter, PythonIndexer indexer) {
+    this(fileLinesContextFactory, checkFactory, noSonarFilter, null, indexer);
+  }
+
+  public IPynbSensor(
+    FileLinesContextFactory fileLinesContextFactory,
+    CheckFactory checkFactory,
+    NoSonarFilter noSonarFilter,
+    @Nullable SonarLintCache sonarLintCache,
     PythonIndexer indexer) {
     this.checks = new PythonChecks(checkFactory)
       .addChecks(CheckList.IPYTHON_REPOSITORY_KEY, CheckList.getChecks());
     this.fileLinesContextFactory = fileLinesContextFactory;
     this.noSonarFilter = noSonarFilter;
-    this.cacheContext = cacheContext;
+    this.sonarLintCache = sonarLintCache;
     this.indexer = indexer;
   }
 
@@ -70,7 +81,10 @@ public final class IPynbSensor implements Sensor {
     context.config().get(PYTHON_VERSION_KEY)
       .map(PythonVersionUtils::fromString)
       .ifPresent(ProjectPythonVersion::setCurrentVersions);
-    PythonScanner scanner = new PythonScanner(context, checks, fileLinesContextFactory, noSonarFilter, PythonParser.createIPythonParser(), indexer, cacheContext);
+
+    CacheContext cacheContext = CacheContextImpl.of(context, sonarLintCache);
+
+    PythonScanner scanner = new PythonScanner(context, checks, fileLinesContextFactory, noSonarFilter, PythonParser.createIPythonParser(), cacheContext, indexer);
     scanner.execute(pythonFiles, context);
   }
 

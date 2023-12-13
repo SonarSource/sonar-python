@@ -120,7 +120,7 @@ public final class PythonSensor implements Sensor {
     pythonVersionParameter.ifPresent(value -> ProjectPythonVersion.setCurrentVersions(PythonVersionUtils.fromString(value)));
     CacheContext cacheContext = CacheContextImpl.of(context, sonarLintCache);
     PythonIndexer pythonIndexer = this.indexer != null ? this.indexer : new SonarQubePythonIndexer(pythonFiles, cacheContext, context);
-    PythonScanner scanner = new PythonScanner(context, checks, fileLinesContextFactory, noSonarFilter, PythonParser.create(), pythonIndexer, cacheContext);
+    PythonScanner scanner = new PythonScanner(context, checks, fileLinesContextFactory, noSonarFilter, PythonParser.create(), cacheContext, pythonIndexer);
     scanner.execute(pythonFiles, context);
     durationReport.stop();
   }

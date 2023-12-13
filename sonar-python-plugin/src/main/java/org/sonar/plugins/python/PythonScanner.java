@@ -83,7 +83,7 @@ public class PythonScanner extends Scanner {
 
   public PythonScanner(
     SensorContext context, PythonChecks checks,
-    FileLinesContextFactory fileLinesContextFactory, NoSonarFilter noSonarFilter, PythonParser parser, PythonIndexer indexer, CacheContext cacheContext) {
+    FileLinesContextFactory fileLinesContextFactory, NoSonarFilter noSonarFilter, PythonParser parser, CacheContext cacheContext, PythonIndexer indexer) {
     super(context);
     this.checks = checks;
     this.fileLinesContextFactory = fileLinesContextFactory;
