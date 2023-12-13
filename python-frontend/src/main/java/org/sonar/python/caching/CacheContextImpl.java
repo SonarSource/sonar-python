@@ -71,13 +71,13 @@ public class CacheContextImpl implements CacheContext {
       !isUsingSonarModules) {
       if (context.runtime().getProduct().equals(SonarProduct.SONARLINT)) {
         if (sonarLintCache != null) {
-          return new CacheContextImpl(context.isCacheEnabled(), new PythonWriteCacheImpl(sonarLintCache), new PythonReadCacheImpl(sonarLintCache));
+          return new CacheContextImpl(true, new PythonWriteCacheImpl(sonarLintCache), new PythonReadCacheImpl(sonarLintCache));
         }
       } else {
         return new CacheContextImpl(context.isCacheEnabled(), new PythonWriteCacheImpl(context.nextCache()), new PythonReadCacheImpl(context.previousCache()));
       }
     }
-    return new CacheContextImpl(false, new DummyCache(), new DummyCache());
+    return dummyCache();
   }
 
   public static CacheContextImpl dummyCache() {
