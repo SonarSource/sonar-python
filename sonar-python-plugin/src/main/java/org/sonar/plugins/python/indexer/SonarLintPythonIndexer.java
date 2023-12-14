@@ -83,6 +83,9 @@ public class SonarLintPythonIndexer extends PythonIndexer implements ModuleFileL
   @Override
   public void setSonarLintCache(@Nullable SonarLintCache sonarLintCache) {
     if (sonarLintCache != null) {
+      // ^This null check is defensive.
+      // In practice, a SonarLintCache instance should always be available when a SonarLintPythonIndexer is available.
+      // See also PythonPlugin::SonarLintPluginAPIManager::addSonarlintPythonIndexer.
       this.cacheContext = new CacheContextImpl(true, new PythonWriteCacheImpl(sonarLintCache), new PythonReadCacheImpl(sonarLintCache));
     }
   }

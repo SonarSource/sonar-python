@@ -27,6 +27,7 @@ import org.sonar.api.SonarProduct;
 import org.sonar.api.SonarRuntime;
 import org.sonar.api.config.PropertyDefinition;
 import org.sonar.api.resources.Qualifiers;
+import org.sonar.plugins.python.api.SonarLintCache;
 import org.sonar.plugins.python.bandit.BanditRulesDefinition;
 import org.sonar.plugins.python.bandit.BanditSensor;
 import org.sonar.plugins.python.coverage.PythonCoverageSensor;
@@ -41,7 +42,6 @@ import org.sonar.plugins.python.ruff.RuffRulesDefinition;
 import org.sonar.plugins.python.ruff.RuffSensor;
 import org.sonar.plugins.python.warnings.AnalysisWarningsWrapper;
 import org.sonar.plugins.python.xunit.PythonXUnitSensor;
-import org.sonar.plugins.python.api.SonarLintCache;
 
 public class PythonPlugin implements Plugin {
 
@@ -70,7 +70,6 @@ public class PythonPlugin implements Plugin {
         .onQualifiers(Qualifiers.PROJECT)
         .defaultValue("py")
         .build(),
-
 
       Python.class,
 
@@ -221,6 +220,16 @@ public class PythonPlugin implements Plugin {
 
     public void addSonarlintPythonIndexer(Context context, SonarLintPluginAPIVersion sonarLintPluginAPIVersion) {
       if (sonarLintPluginAPIVersion.isDependencyAvailable()) {
+        // Only SonarLintPythonIndexer has the ModuleFileListener dependency.
+        // However, SonarLintCache can only be used with SonarLintPythonIndexer present at the moment.
+        // Hence, we also add it here, even if it technically does not share the dependency.
+        //
+        // Furthermore, with recent versions of SonarLint, the ModuleFileListener dependency should always be available.
+        //
+        // Attention:
+        // The constructors of PythonSensor currently expect both, SonarLintCache and SonarLintPythonIndexer, to always be available at the
+        // same time for injection.
+        // Thus, some care is required when making changes to the addExtension calls here.
         context.addExtension(SonarLintCache.class);
         context.addExtension(SonarLintPythonIndexer.class);
       } else {
