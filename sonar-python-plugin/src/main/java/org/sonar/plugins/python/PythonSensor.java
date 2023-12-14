@@ -67,31 +67,33 @@ public final class PythonSensor implements Sensor {
   private final SonarLintCache sonarLintCache;
   private final AnalysisWarningsWrapper analysisWarnings;
   private static final Logger LOG = LoggerFactory.getLogger(PythonSensor.class);
-  static final String UNSET_VERSION_WARNING =
-    "Your code is analyzed as compatible with all Python 3 versions by default." +
+  static final String UNSET_VERSION_WARNING = "Your code is analyzed as compatible with all Python 3 versions by default." +
     " You can get a more precise analysis by setting the exact Python version in your configuration via the parameter \"sonar.python.version\"";
 
   /**
    * Constructor to be used by pico if neither PythonCustomRuleRepository nor PythonIndexer are to be found and injected.
    */
   public PythonSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory,
-                      NoSonarFilter noSonarFilter, AnalysisWarningsWrapper analysisWarnings) {
+    NoSonarFilter noSonarFilter, AnalysisWarningsWrapper analysisWarnings) {
     this(fileLinesContextFactory, checkFactory, noSonarFilter, null, null, null, analysisWarnings);
   }
 
   public PythonSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory, NoSonarFilter noSonarFilter,
-                      PythonCustomRuleRepository[] customRuleRepositories, AnalysisWarningsWrapper analysisWarnings) {
+    PythonCustomRuleRepository[] customRuleRepositories, AnalysisWarningsWrapper analysisWarnings) {
     this(fileLinesContextFactory, checkFactory, noSonarFilter, customRuleRepositories, null, null, analysisWarnings);
   }
 
   public PythonSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory, NoSonarFilter noSonarFilter,
-                      PythonIndexer indexer, SonarLintCache sonarLintCache, AnalysisWarningsWrapper analysisWarnings) {
+    PythonIndexer indexer, SonarLintCache sonarLintCache, AnalysisWarningsWrapper analysisWarnings) {
+    // ^^ This constructor implicitly assumes that a PythonIndexer and a SonarLintCache are always available at the same time.
+    // In practice, this is currently the case, since both are provided by PythonPlugin under the same conditions.
+    // See also PythonPlugin::SonarLintPluginAPIManager::addSonarlintPythonIndexer.
     this(fileLinesContextFactory, checkFactory, noSonarFilter, null, indexer, sonarLintCache, analysisWarnings);
   }
 
   public PythonSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory, NoSonarFilter noSonarFilter,
-                      @Nullable PythonCustomRuleRepository[] customRuleRepositories, @Nullable PythonIndexer indexer,
-                      @Nullable SonarLintCache sonarLintCache, AnalysisWarningsWrapper analysisWarnings) {
+    @Nullable PythonCustomRuleRepository[] customRuleRepositories, @Nullable PythonIndexer indexer,
+    @Nullable SonarLintCache sonarLintCache, AnalysisWarningsWrapper analysisWarnings) {
     this.checks = new PythonChecks(checkFactory)
       .addChecks(CheckList.REPOSITORY_KEY, CheckList.getChecks())
       .addCustomChecks(customRuleRepositories);
