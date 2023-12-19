@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
@@ -34,13 +35,15 @@ public class TypeAnnotationImpl extends PyTree implements TypeAnnotation {
   private final Token dash;
   private final Token gt;
   private final Token colonToken;
+  private final Token starToken;
   private final Expression expression;
   private final Kind kind;
 
-  public TypeAnnotationImpl(Token colonToken, Expression expression, Kind kind) {
+  public TypeAnnotationImpl(Token colonToken, @Nullable Token starToken, Expression expression, Kind kind) {
     this.colonToken = colonToken;
     this.dash = null;
     this.gt = null;
+    this.starToken = starToken;
     this.expression = expression;
     this.kind = kind;
   }
@@ -49,6 +52,7 @@ public class TypeAnnotationImpl extends PyTree implements TypeAnnotation {
     this.colonToken = null;
     this.dash = dash;
     this.gt = gt;
+    this.starToken = null;
     this.expression = expression;
     this.kind = Kind.RETURN_TYPE_ANNOTATION;
   }
@@ -65,7 +69,7 @@ public class TypeAnnotationImpl extends PyTree implements TypeAnnotation {
 
   @Override
   public List<Tree> computeChildren() {
-    return Stream.of(dash, gt, colonToken, expression).filter(Objects::nonNull).collect(Collectors.toList());
+    return Stream.of(dash, gt, colonToken, starToken, expression).filter(Objects::nonNull).collect(Collectors.toList());
   }
 
   @Override

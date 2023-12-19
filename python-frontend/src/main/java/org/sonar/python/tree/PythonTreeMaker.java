@@ -252,7 +252,7 @@ public class PythonTreeMaker {
       equalToken = toPyToken(equalTokenNode.getToken());
       assignedValue = annotatedRhs(equalTokenNode.getNextSibling());
     }
-    TypeAnnotationImpl typeAnnotation = new TypeAnnotationImpl(toPyToken(colonTokenNode.getToken()), annotation, Tree.Kind.VARIABLE_TYPE_ANNOTATION);
+    TypeAnnotationImpl typeAnnotation = new TypeAnnotationImpl(toPyToken(colonTokenNode.getToken()), null, annotation, Tree.Kind.VARIABLE_TYPE_ANNOTATION);
     return new AnnotatedAssignmentImpl(variable, typeAnnotation, equalToken, assignedValue, separators);
   }
 
@@ -632,14 +632,18 @@ public class PythonTreeMaker {
     Name name = name(parameter.getFirstChild(PythonGrammar.NAME));
 
     var typeAnnotation = Optional.of(parameter)
-      .filter(p -> Objects.nonNull(p.getFirstChild(PythonPunctuator.COLON)))
-      .filter(p -> Objects.nonNull(p.getFirstChild(PythonGrammar.TEST)))
-      .map(p -> {
-        var colonNode = parameter.getFirstChild(PythonPunctuator.COLON);
-        var testNode = parameter.getFirstChild(PythonGrammar.TEST);
+      .map(p -> p.getFirstChild(PythonGrammar.TYPE_ANNOTATION))
+      .map(typeAnnotationNode -> {
+        var colonNode = typeAnnotationNode.getFirstChild(PythonPunctuator.COLON);
+        var starNode = typeAnnotationNode.getFirstChild(PythonPunctuator.MUL);
+        var testNode = typeAnnotationNode.getFirstChild(PythonGrammar.TEST);
         var colonToken = toPyToken(colonNode.getToken());
+        var starToken = Optional.ofNullable(starNode)
+          .map(AstNode::getToken)
+          .map(PythonTreeMaker::toPyToken)
+          .orElse(null);
         var testExpression = expression(testNode);
-        return new TypeAnnotationImpl(colonToken, testExpression, Tree.Kind.TYPE_PARAM_TYPE_ANNOTATION);
+        return new TypeAnnotationImpl(colonToken, starToken, testExpression, Tree.Kind.TYPE_PARAM_TYPE_ANNOTATION);
       }).orElse(null);
 
     return new TypeParamImpl(starOrStarStar, name, typeAnnotation);
@@ -1670,10 +1674,15 @@ public class PythonTreeMaker {
     }
 
     TypeAnnotation typeAnnotation = null;
-    AstNode testNode = parameter.getFirstChild(PythonGrammar.TEST);
-    if (testNode != null) {
-      Token colonToken = toPyToken(parameter.getFirstChild(PythonPunctuator.COLON).getToken());
-      typeAnnotation = new TypeAnnotationImpl(colonToken, expression(testNode), Tree.Kind.PARAMETER_TYPE_ANNOTATION);
+    AstNode typeAnnotationNode = parameter.getFirstChild(PythonGrammar.TYPE_ANNOTATION);
+    if (typeAnnotationNode != null) {
+      var testNode = typeAnnotationNode.getFirstChild(PythonGrammar.TEST);
+      Token colonToken = toPyToken(typeAnnotationNode.getFirstChild(PythonPunctuator.COLON).getToken());
+      var starToken = Optional.ofNullable(typeAnnotationNode.getFirstChild(PythonPunctuator.MUL))
+        .map(AstNode::getToken)
+        .map(PythonTreeMaker::toPyToken)
+        .orElse(null);
+      typeAnnotation = new TypeAnnotationImpl(colonToken, starToken, expression(testNode), Tree.Kind.PARAMETER_TYPE_ANNOTATION);
     }
 
     return new ParameterImpl(starOrStarStar, name, typeAnnotation, assignToken, defaultValue);

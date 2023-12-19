@@ -57,3 +57,8 @@ def non_compliant():
     #   ^^^^    ^^<                                 {{Use of "TypeVar" here.}}
         ...
 
+    _Ts = tp.TypeVar("_Ts")
+
+    def func_star_type(*args: *_Ts) -> None:  # Noncompliant
+        ...
+
