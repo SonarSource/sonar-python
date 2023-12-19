@@ -765,6 +765,7 @@ class PythonTreeMakerTest extends RuleTest {
       "   b: TypeVarWithBound,\n" +
       "   c: Callable[SimpleParamSpec, TypeVarWithConstraints],\n" +
       "   *d: SimpleTypeVarTuple,\n" +
+      "   e: *SimpleTypeVar\n" +
       "): pass", treeMaker::funcDefStatement);
     assertThat(functionDef.name()).isNotNull();
     var typeParams = functionDef.typeParams();

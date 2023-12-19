@@ -191,8 +191,9 @@ public class PythonGrammarBuilder {
         ), b.optional(","))))
     ));
     b.rule(TFPDEF).is(b.firstOf(
-      b.sequence(NAME, b.optional(":", TEST)),
+      b.sequence(NAME, b.optional(TYPE_ANNOTATION)),
       b.sequence("(", TFPLIST, ")")));
+    b.rule(TYPE_ANNOTATION).is(":", b.optional("*"), TEST);
     b.rule(TFPLIST).is(TFPDEF, b.zeroOrMore(",", TFPDEF), b.optional(","));
   }
 

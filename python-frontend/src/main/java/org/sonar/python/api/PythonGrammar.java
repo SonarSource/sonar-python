@@ -184,6 +184,7 @@ public enum PythonGrammar implements GrammarRuleKey {
   TYPE_PARAMS,
   TYPE_PARAM,
   TYPE_ALIAS_STMT,
+  TYPE_ANNOTATION,
 
   CLASSDEF,
   CLASSNAME,
