@@ -3,3 +3,7 @@
 * text eol=lf
 
 *.protobuf binary
+
+its/ruling/src/test/resources/types/*.json filter=lfs diff=lfs merge=lfs -text
+its/ruling/src/test/resources/types_extended/*.json filter=lfs diff=lfs merge=lfs -text
+python-checks/src/test/resources/*.json filter=lfs diff=lfs merge=lfs -text
