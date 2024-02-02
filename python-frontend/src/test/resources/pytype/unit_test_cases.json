@@ -1,0 +1,40 @@
+{
+  "call_expression/call_expression_1.py": [
+    {
+      "text": "f",
+      "start_line": 1,
+      "start_col": 0,
+      "syntax_role": "Variable",
+      "type": "AnythingType()",
+      "short_type": "Any"
+    }
+  ],
+  "call_expression/call_expression_2.py": [
+    {
+      "text": "f",
+      "start_line": 1,
+      "start_col": 0,
+      "syntax_role": "Function",
+      "type": "CallableType(base_type=ClassType(typing.Callable), parameters=(AnythingType(),))",
+      "short_type": "Callable[[], Any]"
+    },
+    {
+      "text": "f",
+      "start_line": 2,
+      "start_col": 0,
+      "syntax_role": "Variable",
+      "type": "CallableType(base_type=ClassType(typing.Callable), parameters=(AnythingType(),))",
+      "short_type": "Callable[[], Any]"
+    }
+  ],
+  "call_expression/call_expression_3.py": [
+    {
+      "text": "A",
+      "start_line": 2,
+      "start_col": 0,
+      "syntax_role": "Variable",
+      "type": "GenericType(base_type=ClassType(builtins.type), parameters=(ClassType(A),))",
+      "short_type": "Type[A]"
+    }
+  ]
+}
