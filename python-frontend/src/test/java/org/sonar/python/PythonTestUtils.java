@@ -39,9 +39,11 @@ import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.plugins.python.api.tree.StatementList;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.parser.PythonParser;
+import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.semantic.SymbolTableBuilder;
 import org.sonar.python.tree.PythonTreeMaker;
 import org.sonar.python.tree.TreeUtils;
+import org.sonar.python.types.TypeContext;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -121,9 +123,9 @@ public final class PythonTestUtils {
     return pythonFile;
   }
 
-  public static Expression lastExpression(String... lines) {
+  public static Expression lastExpression(SymbolTableBuilder symbolTableBuilder, String... lines) {
     String code = String.join("\n", lines);
-    FileInput fileInput = PythonTestUtils.parse(new SymbolTableBuilder("", pythonFile("mod1.py")), code);
+    FileInput fileInput = PythonTestUtils.parse(symbolTableBuilder, code);
     Statement statement = lastStatement(fileInput.statements());
     if (!(statement instanceof ExpressionStatement)) {
       assertThat(statement).isInstanceOf(FunctionDef.class);
@@ -133,6 +135,14 @@ public final class PythonTestUtils {
     assertThat(statement).isInstanceOf(ExpressionStatement.class);
     List<Expression> expressions = ((ExpressionStatement) statement).expressions();
     return expressions.get(expressions.size() - 1);
+  }
+
+  public static Expression lastExpression(String... lines) {
+    return lastExpression(new SymbolTableBuilder("", pythonFile("mod1.py")), lines);
+  }
+
+  public static Expression lastExpression(TypeContext typeContext, String... lines) {
+    return lastExpression(new SymbolTableBuilder("", pythonFile("mod1.py"), ProjectLevelSymbolTable.empty(), typeContext), lines);
   }
 
   private static Statement lastStatement(StatementList statementList) {
