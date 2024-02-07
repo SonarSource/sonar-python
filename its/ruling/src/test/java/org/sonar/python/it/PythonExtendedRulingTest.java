@@ -42,6 +42,8 @@ class PythonExtendedRulingTest {
   @RegisterExtension
   public static final OrchestratorExtension ORCHESTRATOR = getOrchestrator();
 
+  private final String JSON_PATH_PREFIX = "/Users/jeremi.dodinh/Documents/repositories/sonar-python/its/ruling/src/test/resources/types_extended/";
+
   @BeforeAll
   static void prepare_quality_profile() throws IOException {
     List<String> ruleKeys = bugRuleKeys();
@@ -51,20 +53,26 @@ class PythonExtendedRulingTest {
 
   @Test
   void test_airflow() throws IOException {
+
     SonarScanner build = buildWithCommonProperties("airflow");
     build.setProperty("sonar.sources", "airflow");
     build.setProperty("sonar.tests", "tests");
+    build.setEnvironmentVariable("SONAR_TYPE_INFERENCE_FILE", JSON_PATH_PREFIX + "airflow.json");
     executeBuild(build);
   }
 
   @Test
   void test_archery() throws IOException {
-    executeBuild(buildWithCommonProperties("Archery"));
+    SonarScanner build = buildWithCommonProperties("Archery");
+    build.setEnvironmentVariable("SONAR_TYPE_INFERENCE_FILE", JSON_PATH_PREFIX + "Archery.json");
+    executeBuild(build);
   }
 
   @Test
   void test_autokeras() throws IOException {
-    executeBuild(buildWithCommonProperties("autokeras"));
+    SonarScanner build = buildWithCommonProperties("autokeras");
+    build.setEnvironmentVariable("SONAR_TYPE_INFERENCE_FILE", JSON_PATH_PREFIX + "autokeras.json");
+    executeBuild(build);
   }
 
   @Test
@@ -73,6 +81,7 @@ class PythonExtendedRulingTest {
     build.setProperty("sonar.sources", "src");
     build.setProperty("sonar.tests", "tests");
     build.setProperty("sonar.test.exclusions", "tests/data/async_as_identifier.py");
+    build.setEnvironmentVariable("SONAR_TYPE_INFERENCE_FILE", JSON_PATH_PREFIX + "black.json");
     executeBuild(build);
   }
 
@@ -80,6 +89,7 @@ class PythonExtendedRulingTest {
   void test_calibre() throws IOException {
     SonarScanner build = buildWithCommonProperties("calibre");
     build.setProperty("sonar.sources", "src");
+    build.setEnvironmentVariable("SONAR_TYPE_INFERENCE_FILE", JSON_PATH_PREFIX + "calibre.json");
     executeBuild(build);
   }
 
@@ -96,6 +106,7 @@ class PythonExtendedRulingTest {
     SonarScanner build = buildWithCommonProperties("chalice");
     build.setProperty("sonar.sources", "chalice");
     build.setProperty("sonar.tests", "tests");
+    build.setEnvironmentVariable("SONAR_TYPE_INFERENCE_FILE", JSON_PATH_PREFIX + "chalice.json");
     executeBuild(build);
   }
 
@@ -104,6 +115,7 @@ class PythonExtendedRulingTest {
     SonarScanner build = buildWithCommonProperties("django-shop");
     build.setProperty("sonar.sources", "shop");
     build.setProperty("sonar.tests", "tests");
+    build.setEnvironmentVariable("SONAR_TYPE_INFERENCE_FILE", JSON_PATH_PREFIX + "django-shop.json");
     executeBuild(build);
   }
 
@@ -111,6 +123,7 @@ class PythonExtendedRulingTest {
   void test_indico() throws IOException {
     SonarScanner build = buildWithCommonProperties("indico");
     build.setProperty("sonar.sources", "indico");
+    build.setEnvironmentVariable("SONAR_TYPE_INFERENCE_FILE", JSON_PATH_PREFIX + "indico.json");
     executeBuild(build);
   }
 
@@ -120,6 +133,7 @@ class PythonExtendedRulingTest {
     build.setProperty("sonar.sources", "libcst");
     build.setProperty("sonar.tests", "libcst/tests");
     build.setProperty("sonar.test.inclusions", "**/");
+    build.setEnvironmentVariable("SONAR_TYPE_INFERENCE_FILE", JSON_PATH_PREFIX + "LibCST.json");
     executeBuild(build);
   }
 
@@ -128,6 +142,7 @@ class PythonExtendedRulingTest {
     SonarScanner build = buildWithCommonProperties("nltk");
     build.setProperty("sonar.sources", ".");
     build.setProperty("sonar.exclusions", "**/test/**/*");
+    build.setEnvironmentVariable("SONAR_TYPE_INFERENCE_FILE", JSON_PATH_PREFIX + "nltk.json");
     executeBuild(build);
   }
 
@@ -135,6 +150,7 @@ class PythonExtendedRulingTest {
   void test_saleor() throws IOException {
     SonarScanner build = buildWithCommonProperties("saleor");
     build.setProperty("sonar.sources", "saleor");
+    build.setEnvironmentVariable("SONAR_TYPE_INFERENCE_FILE", JSON_PATH_PREFIX + "saleor.json");
     executeBuild(build);
   }
 
@@ -145,6 +161,7 @@ class PythonExtendedRulingTest {
     build.setProperty("sonar.python.version", "3.12");
     build.setProperty("sonar.sources", "salt");
     build.setProperty("sonar.tests", "tests");
+    build.setEnvironmentVariable("SONAR_TYPE_INFERENCE_FILE", JSON_PATH_PREFIX + "salt.json");
     executeBuild(build);
   }
 
@@ -152,6 +169,7 @@ class PythonExtendedRulingTest {
   void test_scikit_learn() throws IOException {
     SonarScanner build = buildWithCommonProperties("scikit-learn");
     build.setProperty("sonar.sources", "sklearn");
+    build.setEnvironmentVariable("SONAR_TYPE_INFERENCE_FILE", JSON_PATH_PREFIX + "scikit-learn.json");
     executeBuild(build);
   }
 
@@ -160,6 +178,7 @@ class PythonExtendedRulingTest {
     SonarScanner build = buildWithCommonProperties("timesketch");
     build.setProperty("sonar.sources", "timesketch");
     build.setProperty("sonar.test.inclusions", "**/*_test.py");
+    build.setEnvironmentVariable("SONAR_TYPE_INFERENCE_FILE", JSON_PATH_PREFIX + "timesketch.json");
     executeBuild(build);
   }
 
