@@ -155,7 +155,7 @@ public class PythonQuickFixVerifier {
 
     return new PythonVisitorContext(fileInput,
       pythonFile, null, "",
-      ProjectLevelSymbolTable.empty(), CacheContextImpl.dummyCache(), SonarProduct.SONARLINT);
+      ProjectLevelSymbolTable.empty(), CacheContextImpl.dummyCache(), SonarProduct.SONARLINT, null);
   }
 
   private static String applyQuickFix(String codeWithIssue, PythonQuickFix quickFix) {

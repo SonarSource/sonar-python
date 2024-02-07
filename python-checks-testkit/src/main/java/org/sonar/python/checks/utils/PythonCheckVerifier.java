@@ -95,7 +95,7 @@ public class PythonCheckVerifier {
 
   private static PythonVisitorContext createContext(File file, ProjectLevelSymbolTable projectLevelSymbolTable, @Nullable File baseDir) {
     return baseDir != null
-      ? TestPythonVisitorRunner.createContext(file, null, pythonPackageName(file, baseDir.getAbsolutePath()), projectLevelSymbolTable, CacheContextImpl.dummyCache())
+      ? TestPythonVisitorRunner.createContext(file, baseDir, pythonPackageName(file, baseDir.getAbsolutePath()), projectLevelSymbolTable, CacheContextImpl.dummyCache())
       : TestPythonVisitorRunner.createContext(file);
   }
 
