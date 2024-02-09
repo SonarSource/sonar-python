@@ -113,12 +113,12 @@ class TypeContextTest {
       "}";
     String fileName = "src/AttributeError/181733998.py";
     TypeContext typeContext = TypeContext.fromJSON(json);
-    assertThat(typeContext.getTypeFor(fileName, 1, 0, "t", "Variable")).contains(InferredTypes.INT);
-    assertThat(typeContext.getTypeFor(fileName, 1, 0, "x", "Variable")).isEmpty();
-    assertThat(typeContext.getTypeFor(fileName, 1, 0, "t", "Attribute")).isEmpty();
-    assertThat(typeContext.getTypeFor(fileName, 2, 0, "t", "Variable")).isEmpty();
-    assertThat(typeContext.getTypeFor(fileName, 1, 1, "t", "Variable")).isEmpty();
-    assertThat(typeContext.getTypeFor(fileName, 7, 4, "append", "Attribute")).contains(new RuntimeType(callableClassSymbol));
+    assertThat(typeContext.getTypeFor(fileName, 1, 0, "t", "Variable", null)).contains(InferredTypes.INT);
+    assertThat(typeContext.getTypeFor(fileName, 1, 0, "x", "Variable", null)).isEmpty();
+    assertThat(typeContext.getTypeFor(fileName, 1, 0, "t", "Attribute", null)).isEmpty();
+    assertThat(typeContext.getTypeFor(fileName, 2, 0, "t", "Variable", null)).isEmpty();
+    assertThat(typeContext.getTypeFor(fileName, 1, 1, "t", "Variable", null)).isEmpty();
+    assertThat(typeContext.getTypeFor(fileName, 7, 4, "append", "Attribute", null)).contains(new RuntimeType(callableClassSymbol));
   }
 
   @Test
@@ -126,15 +126,15 @@ class TypeContextTest {
     String json = readJsonTypeInfo("src/test/resources/pytype/code.json");
     String fileName = "level1.py";
     TypeContext typeContext = TypeContext.fromJSON(json);
-    assertThat(typeContext.getTypeFor(fileName, 2, 4, "my_int", "Variable")).contains(InferredTypes.INT);
-    assertThat(typeContext.getTypeFor(fileName, 3, 4, "my_float", "Variable")).contains(InferredTypes.FLOAT);
-    assertThat(typeContext.getTypeFor(fileName, 4, 4, "my_str", "Variable")).contains(InferredTypes.STR);
-    assertThat(typeContext.getTypeFor(fileName, 5, 4, "my_bool", "Variable")).contains(InferredTypes.BOOL);
-    assertThat(typeContext.getTypeFor(fileName, 6, 4, "my_complex", "Variable")).contains(InferredTypes.COMPLEX);
-    assertThat(typeContext.getTypeFor(fileName, 7, 4, "my_tuple", "Variable")).contains(InferredTypes.TUPLE);
-    assertThat(typeContext.getTypeFor(fileName, 8, 4, "my_list", "Variable")).contains(InferredTypes.LIST);
-    assertThat(typeContext.getTypeFor(fileName, 9, 4, "my_set", "Variable")).contains(InferredTypes.SET);
-    assertThat(typeContext.getTypeFor(fileName, 10, 4, "my_dict", "Variable")).contains(InferredTypes.DICT);
+    assertThat(typeContext.getTypeFor(fileName, 2, 4, "my_int", "Variable", null)).contains(InferredTypes.INT);
+    assertThat(typeContext.getTypeFor(fileName, 3, 4, "my_float", "Variable", null)).contains(InferredTypes.FLOAT);
+    assertThat(typeContext.getTypeFor(fileName, 4, 4, "my_str", "Variable", null)).contains(InferredTypes.STR);
+    assertThat(typeContext.getTypeFor(fileName, 5, 4, "my_bool", "Variable", null)).contains(InferredTypes.BOOL);
+    assertThat(typeContext.getTypeFor(fileName, 6, 4, "my_complex", "Variable", null)).contains(InferredTypes.COMPLEX);
+    assertThat(typeContext.getTypeFor(fileName, 7, 4, "my_tuple", "Variable", null)).contains(InferredTypes.TUPLE);
+    assertThat(typeContext.getTypeFor(fileName, 8, 4, "my_list", "Variable", null)).contains(InferredTypes.LIST);
+    assertThat(typeContext.getTypeFor(fileName, 9, 4, "my_set", "Variable", null)).contains(InferredTypes.SET);
+    assertThat(typeContext.getTypeFor(fileName, 10, 4, "my_dict", "Variable", null)).contains(InferredTypes.DICT);
   }
 
   private String readJsonTypeInfo(String path) {

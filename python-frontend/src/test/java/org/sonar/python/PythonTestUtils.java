@@ -157,6 +157,17 @@ public final class PythonTestUtils {
     return lastStatement(fileInput.statements());
   }
 
+  public static Statement lastStatement(TypeContext typeContext, String... lines) {
+    String code = String.join("\n", lines);
+    FileInput fileInput = PythonTestUtils.parse(new SymbolTableBuilder("",
+      pythonFile("mod1.py"),
+      ProjectLevelSymbolTable.empty(),
+      typeContext),
+      code);
+
+    return lastStatement(fileInput.statements());
+  }
+
   public static Expression lastExpressionInFunction(String... lines) {
     String code = "def f():\n  " + String.join("\n  ", lines);
     return lastExpression(code);
