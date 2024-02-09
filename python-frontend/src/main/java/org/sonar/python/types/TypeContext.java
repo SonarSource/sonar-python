@@ -28,11 +28,15 @@ import java.util.Objects;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.Token;
+import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.semantic.ClassSymbolImpl;
+import org.sonar.python.semantic.Scope;
+import org.sonar.python.tree.TreeUtils;
 
 public class TypeContext {
   private static final class JsonTypeInfo {
@@ -90,12 +94,18 @@ public class TypeContext {
 
   private Map<NameAccess, JsonTypeInfo> typesByPosition = null;
 
+  private Map<Tree, Scope> scopesByRootTree = null;
+
   public TypeContext() {
     this.files = new HashMap<>();
   }
 
   public static TypeContext fromJSON(String json) {
     return new Gson().fromJson("{files: " + json + "}", TypeContext.class);
+  }
+
+  public void setScopesByRootTree(Map<Tree, Scope> scopesByRootTree) {
+    this.scopesByRootTree = scopesByRootTree;
   }
 
   private void populateTypesByPosition() {
@@ -108,7 +118,7 @@ public class TypeContext {
   }
 
   @VisibleForTesting
-  Optional<InferredType> getTypeFor(String fileName, int line, int column, String name, String kind) {
+  Optional<InferredType> getTypeFor(String fileName, int line, int column, String name, String kind, Tree tree) {
     if (typesByPosition == null) {
       populateTypesByPosition();
     }
@@ -120,12 +130,16 @@ public class TypeContext {
       LOG.error("Found type at position, but does not match expected kind ({}): {}", kind, typeInfo);
       return Optional.empty();
     }
-    return Optional.of(typeStringToTypeInfo(typeInfo.short_type, typeInfo.type, fileName));
+    return Optional.of(typeStringToTypeInfo(typeInfo.short_type, typeInfo.type, fileName, tree));
   }
 
-  private static InferredType typeStringToTypeInfo(String typeString, String detailedType, String fileName) {
+  private InferredType typeStringToTypeInfo(String typeString, String detailedType, String fileName, Tree tree) {
     if ("None".equals(typeString)) {
       typeString = "NoneType";
+    }
+    Optional<InferredType> localType = getLocallyDefinedClassSymbolType(typeString, fileName, tree);
+    if (localType.isPresent()) {
+      return localType.get();
     }
     // workaround until Typeshed is fixed
     if (detailedType.startsWith("builtins.") ||
@@ -146,6 +160,19 @@ public class TypeContext {
     }
   }
 
+  private Optional<InferredType> getLocallyDefinedClassSymbolType(String typeString, String fileName, Tree tree) {
+    fileName = fileName.substring(0, fileName.lastIndexOf('.'));
+    Symbol ourSymbol = null;
+    String symbolFullyQualifiedName = String.join(".", fileName, typeString);
+    String symbolName = symbolFullyQualifiedName.substring(symbolFullyQualifiedName.lastIndexOf('.') + 1);
+    while (ourSymbol == null && !tree.is(Tree.Kind.FILE_INPUT)) {
+      tree = TreeUtils.firstAncestorOfKind(tree, Tree.Kind.FUNCDEF, Tree.Kind.CLASSDEF, Tree.Kind.FILE_INPUT);
+      Scope currentScope = this.scopesByRootTree.get(tree);
+      ourSymbol = currentScope.symbolsByName.get(symbolName);
+  }
+  return Optional.ofNullable(ourSymbol).map(InferredTypes::runtimeType);
+  }
+
   private static String getBaseType(String typeString) { // Tuple[int, int]
     if (typeString.startsWith("Tuple")) {
       return "tuple";
@@ -164,11 +191,12 @@ public class TypeContext {
 
   public Optional<InferredType> getTypeFor(String fileName, Name name) {
     Token token = name.firstToken();
-    return getTypeFor(fileName, token.line(), token.column(), name.name(), "Variable");
+
+    return getTypeFor(fileName, token.line(), token.column(), name.name(), "Variable", name);
   }
 
   public Optional<InferredType> getTypeFor(String fileName, QualifiedExpression attributeAccess) {
     Token token = attributeAccess.firstToken();
-    return getTypeFor(fileName, token.line(), token.column(), attributeAccess.name().name(), "Attribute");
+    return getTypeFor(fileName, token.line(), token.column(), attributeAccess.name().name(), "Attribute", attributeAccess);
   }
 }
