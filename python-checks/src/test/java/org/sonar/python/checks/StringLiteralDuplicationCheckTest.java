@@ -22,7 +22,6 @@ package org.sonar.python.checks;
 import org.assertj.core.api.Assertions;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
-import org.sonar.python.SubscriptionVisitor;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 class StringLiteralDuplicationCheckTest {
@@ -30,6 +29,11 @@ class StringLiteralDuplicationCheckTest {
   @Test
   void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/stringLiteralDuplication.py", new StringLiteralDuplicationCheck());
+  }
+
+  @Test
+  void test_no_issue_on_test_code() {
+    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/test_stringLiteralDuplication.py", new StringLiteralDuplicationCheck());
   }
 
   @Test
@@ -43,7 +47,8 @@ class StringLiteralDuplicationCheckTest {
   void test_invalid_custom_pattern() {
     StringLiteralDuplicationCheck check = new StringLiteralDuplicationCheck();
     check.customExclusionRegex = "a+*(";
-    IllegalStateException e = Assert.assertThrows(IllegalStateException.class, () -> PythonCheckVerifier.verify("src/test/resources/checks/stringLiteralDuplicationCustom.py", check));
+    IllegalStateException e = Assert.assertThrows(IllegalStateException.class,
+      () -> PythonCheckVerifier.verify("src/test/resources/checks/stringLiteralDuplicationCustom.py", check));
     Assertions.assertThat(e.getMessage()).isEqualTo("Unable to compile regular expression: a+*(");
 
   }

@@ -88,6 +88,9 @@ public class StringLiteralDuplicationCheck extends PythonVisitorCheck {
   public void visitFileInput(FileInput fileInput) {
     literalsByValue.clear();
 
+    if (this.getContext().pythonFile().fileName().startsWith("test")) {
+      return;
+    }
     super.visitFileInput(fileInput);
 
     for (Map.Entry<String, List<StringLiteral>> entry : literalsByValue.entrySet()) {
