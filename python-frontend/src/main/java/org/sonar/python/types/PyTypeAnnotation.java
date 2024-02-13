@@ -58,21 +58,5 @@ public class PyTypeAnnotation extends BaseTreeVisitor {
       super.visitName(name);
     }
   }
-  // private static class FirstVisitor extends BaseTreeVisitor {
-  // // 1st visit
-  // @Override
-  // public void visitClassDef(ClassDef classDef) {
-  // localSymbolsByName.put(classDef.name().name(), classDef.name().symbol());
-  // }
-  // }
-  // private static class SecondVisitor extends BaseTreeVisitor {
-  // // 2nd visit
-  // @Override
-  // public void visitName(Name name) {
-  // String pytypeType = ...
-  // ClassSymbol classSymbol = localSymbolsByName.get(pytyptType); // ClassSymbol
-  // name.setInferredType(InferredTypes.runtimeType(classSymbol));
-  // }
-  // }
 
 }

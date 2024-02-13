@@ -36,6 +36,7 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.semantic.ClassSymbolImpl;
 import org.sonar.python.semantic.Scope;
+import org.sonar.python.semantic.SymbolImpl;
 import org.sonar.python.tree.TreeUtils;
 
 public class TypeContext {
@@ -137,9 +138,11 @@ public class TypeContext {
     if ("None".equals(typeString)) {
       typeString = "NoneType";
     }
-    Optional<InferredType> localType = getLocallyDefinedClassSymbolType(typeString, fileName, tree);
-    if (localType.isPresent()) {
-      return localType.get();
+    if (tree != null) {
+      Optional<InferredType> localType = getLocallyDefinedClassSymbolType(typeString, fileName, tree);
+      if (localType.isPresent() && localType.filter(type -> InferredTypes.anyType().equals(type)).isEmpty()) {
+        return localType.get();
+      }
     }
     // workaround until Typeshed is fixed
     if (detailedType.startsWith("builtins.") ||
@@ -147,7 +150,7 @@ public class TypeContext {
       detailedType.startsWith("TupleType(base_type=ClassType(builtins.")) {
       return InferredTypes.runtimeBuiltinType(getBaseType(typeString));
     } else if (typeString.indexOf('.') >= 0 || !detailedType.startsWith(typeString)) {
-      ClassSymbolImpl callableClassSymbol = new ClassSymbolImpl(typeString, detailedType);
+      ClassSymbolImpl callableClassSymbol = new ClassSymbolImpl(typeString.substring(typeString.lastIndexOf('.') + 1), detailedType);
       return new RuntimeType(callableClassSymbol);
     } else if (typeString.equals("Any")) {
       return InferredTypes.anyType();
@@ -168,9 +171,41 @@ public class TypeContext {
     while (ourSymbol == null && !tree.is(Tree.Kind.FILE_INPUT)) {
       tree = TreeUtils.firstAncestorOfKind(tree, Tree.Kind.FUNCDEF, Tree.Kind.CLASSDEF, Tree.Kind.FILE_INPUT);
       Scope currentScope = this.scopesByRootTree.get(tree);
-      ourSymbol = currentScope.symbolsByName.get(symbolName);
+      ourSymbol = Optional.ofNullable(currentScope.symbolsByName.get(symbolName))
+        .orElse(resolveFqnSymbol(typeString, currentScope));
+    }
+    return Optional.ofNullable(ourSymbol).map(InferredTypes::runtimeType);
   }
-  return Optional.ofNullable(ourSymbol).map(InferredTypes::runtimeType);
+
+  private Symbol resolveFqnSymbol(String symbolFullyQualifiedName, Scope currentScope) {
+    String[] fqnSplit = symbolFullyQualifiedName.split("\\.");
+    SymbolImpl currentSymbol = null;
+    Optional<Symbol> classSymbol = Optional.empty();
+    for (int i = 0; i < fqnSplit.length; i++) {
+      currentSymbol = ((SymbolImpl) currentScope.symbolsByName.get(fqnSplit[i]));
+      if (currentSymbol != null) {
+        classSymbol = getImportedClassSymbol(currentSymbol, fqnSplit, i);
+      }
+      if (classSymbol.map(Symbol::fullyQualifiedName)
+        .filter(symbolFullyQualifiedName::equals).isPresent()) {
+        return classSymbol.get();
+      }
+    }
+    return null;
+  }
+
+  private static Optional<Symbol> getImportedClassSymbol(SymbolImpl currentSymbol, String[] fqnSplit, int index) {
+    while (index < fqnSplit.length) {
+      if (index == fqnSplit.length - 1) {
+        return Optional.of(currentSymbol);
+      }
+      index++;
+      currentSymbol = ((SymbolImpl) currentSymbol.getChildrenSymbolByName().get(fqnSplit[index]));
+      if (currentSymbol == null) {
+        return Optional.empty();
+      }
+    }
+    return Optional.of(currentSymbol);
   }
 
   private static String getBaseType(String typeString) { // Tuple[int, int]
