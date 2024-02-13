@@ -52,7 +52,7 @@ class MypyReportTest {
     assertIssue(issues.get(1), "external_mypy:no-untyped-def", "Function is missing a type annotation");
     assertIssue(issues.get(2), "external_mypy:import", "Cannot find implementation or library stub for module named \"unknown\"");
     assertIssue(issues.get(3), "external_mypy:no-untyped-call", "Call to untyped function \"no_type_hints\" in typed context");
-    assertIssue(issues.get(4), "external_mypy:????", "Unused \"type: ignore\" comment");
+    assertIssue(issues.get(4), "external_mypy:unknown_mypy_rule", "Unused \"type: ignore\" comment");
   }
 
   private static void assertIssue(Issues.Issue issue, String rule, String message) {
