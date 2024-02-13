@@ -30,6 +30,11 @@ class UselessStatementCheckTest {
   }
 
   @Test
+  void test_ignore_manifest() {
+    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/__manifest__.py", new UselessStatementCheck());
+  }
+
+  @Test
   void custom() {
     UselessStatementCheck check = new UselessStatementCheck();
     check.reportOnStrings = true;
