@@ -37,6 +37,11 @@
       <scope>test</scope>
     </dependency>
     <dependency>
+      <groupId>org.junit.platform</groupId>
+      <artifactId>junit-platform-suite-engine</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
       <groupId>org.sonarsource.sonarlint.core</groupId>
       <artifactId>sonarlint-core</artifactId>
     </dependency>
@@ -58,8 +63,7 @@
           <artifactId>maven-surefire-plugin</artifactId>
           <configuration>
             <includes>
-              <include>com/sonar/python/it/plugin/Tests.java</include>
-              <include>com/sonar/python/it/plugin/SonarLintTest.java</include>
+              <include>com/sonar/python/it/plugin/TestSuite.java</include>
             </includes>
           </configuration>
         </plugin>
