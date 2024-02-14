@@ -23,6 +23,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.sonar.check.Rule;
@@ -89,15 +90,23 @@ public class UselessStatementCheck extends PythonSubscriptionCheck {
 
   private static final String MESSAGE = "Remove or refactor this statement; it has no side effects.";
 
+  private static Consumer<SubscriptionContext> ignoredFileWrapper(Consumer<SubscriptionContext> originalFunc) {
+    return (SubscriptionContext ctx) -> {
+      if ("__manifest__.py".equals(ctx.pythonFile().fileName())) {
+        return;
+      }
+      originalFunc.accept(ctx);
+    };
+  }
   @Override
   public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(Kind.STRING_LITERAL, this::checkStringLiteral);
-    context.registerSyntaxNodeConsumer(Kind.NAME, UselessStatementCheck::checkName);
-    context.registerSyntaxNodeConsumer(Kind.QUALIFIED_EXPR, UselessStatementCheck::checkQualifiedExpression);
-    context.registerSyntaxNodeConsumer(Kind.CONDITIONAL_EXPR, UselessStatementCheck::checkConditionalExpression);
-    binaryExpressionKinds.forEach(b -> context.registerSyntaxNodeConsumer(b, this::checkBinaryExpression));
-    unaryExpressionKinds.forEach(u -> context.registerSyntaxNodeConsumer(u, this::checkUnaryExpression));
-    regularKinds.forEach(r -> context.registerSyntaxNodeConsumer(r, UselessStatementCheck::checkNode));
+    context.registerSyntaxNodeConsumer(Kind.STRING_LITERAL, ignoredFileWrapper(this::checkStringLiteral));
+    context.registerSyntaxNodeConsumer(Kind.NAME, ignoredFileWrapper(UselessStatementCheck::checkName));
+    context.registerSyntaxNodeConsumer(Kind.QUALIFIED_EXPR, ignoredFileWrapper(UselessStatementCheck::checkQualifiedExpression));
+    context.registerSyntaxNodeConsumer(Kind.CONDITIONAL_EXPR, ignoredFileWrapper(UselessStatementCheck::checkConditionalExpression));
+    binaryExpressionKinds.forEach(b -> context.registerSyntaxNodeConsumer(b, ignoredFileWrapper(this::checkBinaryExpression)));
+    unaryExpressionKinds.forEach(u -> context.registerSyntaxNodeConsumer(u, ignoredFileWrapper(this::checkUnaryExpression)));
+    regularKinds.forEach(r -> context.registerSyntaxNodeConsumer(r, ignoredFileWrapper(UselessStatementCheck::checkNode)));
   }
 
   private static void checkNode(SubscriptionContext ctx) {
