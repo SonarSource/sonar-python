@@ -334,3 +334,21 @@ def echo_round() -> Generator[int, float, str]:
 @contextlib.contextmanager
 def test() -> contextlib.AbstractContextManager[str]:
   yield "this is an example"
+
+
+def no_fp_on_optional_of_unknown_symbol(cond) -> Optional[Unknown]:
+    if cond == 42:
+        return 10  # OK
+    if cond == 24:
+        return "hello"  # OK
+    if cond == 5:
+        return None
+
+
+def no_fp_on_optional_union_of_unknown_symbol(cond) -> Optional[Union[str, Unknown]]:
+    if cond == 42:
+        return 10  # OK
+    if cond == 24:
+        return "hello"  # OK
+    if cond == 5:
+        return None

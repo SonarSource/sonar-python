@@ -301,9 +301,7 @@ class InferredTypesTest {
     );
     assertThat(fromTypeshedTypeAnnotation(typeAnnotation)).isEqualTo(InferredTypes.anyType());
     declaredType = fromTypeAnnotation(typeAnnotation);
-    assertThat(declaredType).isInstanceOf(DeclaredType.class);
-    assertThat(((DeclaredType) declaredType).alternativeTypeSymbols()).extracting(Symbol::fullyQualifiedName)
-      .containsExactlyInAnyOrder("typing.Optional");
+    assertThat(declaredType).isInstanceOf(AnyType.class);
   }
 
   @Test
