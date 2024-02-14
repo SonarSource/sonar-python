@@ -161,3 +161,35 @@ class MyClass:
     def param_accessed_through_pandas_no_issue(sample_df, area_of_interest): # OK
         sample_df.query('area == @area_of_interest').population
         print("hello")
+
+import abc
+class Test(abc.ABC):
+    def execute_test(self, name):
+        print("Test")
+
+class Suite(metaclass=abc.ABCMeta):
+    def execute_suite(self, name):
+        print("Suite")
+
+import abc as xyz
+class Suite2(metaclass=xyz.ABCMeta):
+    def execute_suite(self, name):
+        print("Suite")
+class Test2(xyz.ABC):
+    def execute_test(self, name):
+        print("Test")
+
+from abc import ABC as XYZ
+class Test2(XYZ):
+    def execute_test(self, name):
+        print("Test")
+
+# source :  https://stackoverflow.com/a/392767
+class FakeMetaclass(type):
+    def __init__(cls, *args, **kwargs):
+        type.__init__(cls, *args, **kwargs)
+        cls.name = cls.__name__
+
+class OtherMetaclass(metaclass=FakeMetaclass):
+    def execute(self, name):
+        print("Execute")

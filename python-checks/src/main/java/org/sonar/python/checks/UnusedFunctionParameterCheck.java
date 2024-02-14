@@ -46,6 +46,8 @@ import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.plugins.python.api.tree.Trivia;
 import org.sonar.python.checks.utils.CheckUtils;
 import org.sonar.python.checks.utils.StringLiteralValuesCollector;
+import org.sonar.python.semantic.ClassSymbolImpl;
+import org.sonar.python.semantic.FunctionSymbolImpl;
 import org.sonar.python.semantic.SymbolUtils;
 import org.sonar.python.tree.FunctionDefImpl;
 import org.sonar.python.tree.TreeUtils;
@@ -102,7 +104,18 @@ public class UnusedFunctionParameterCheck extends PythonSubscriptionCheck {
       !functionDef.decorators().isEmpty() ||
       isSpecialMethod(functionDef) ||
       hasNonCallUsages(functionSymbol) ||
-      isTestFunction(ctx, functionDef);
+      isTestFunction(ctx, functionDef) ||
+      isAbstractClass(functionDef);
+  }
+
+  private static boolean isAbstractClass(FunctionDef functionDef) {
+    FunctionSymbol functionSymbol = ((FunctionDefImpl) functionDef).functionSymbol();
+    if (functionSymbol == null) {
+      return false;
+    }
+    Symbol owner = ((FunctionSymbolImpl) functionSymbol).owner();
+    return owner != null && ((((ClassSymbolImpl) owner).superClasses().stream().anyMatch(symbol -> "abc.ABC".equals(symbol.fullyQualifiedName())))
+      || (((ClassSymbolImpl) owner).hasMetaClass()));
   }
 
   private static boolean isInterfaceMethod(FunctionDef functionDef) {
