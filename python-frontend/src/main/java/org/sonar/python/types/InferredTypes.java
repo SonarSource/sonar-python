@@ -96,7 +96,7 @@ public class InferredTypes {
   // https://github.com/python/mypy/blob/e97377c454a1d5c019e9c56871d5f229db6b47b2/mypy/semanal_classprop.py#L16-L46
   private static final Map<String, Set<String>> HARDCODED_COMPATIBLE_TYPES = new HashMap<>();
 
-  private static final Set<Set<String>> HARDCODED_INCOMPATIBLE_TYPES = Set.of(Set.of("tuple", "list"));
+  private static final Set<Set<String>> HARDCODED_INCOMPATIBLE_TYPES = Set.of(Set.of(BuiltinTypes.TUPLE, BuiltinTypes.LIST));
 
   static {
     HARDCODED_COMPATIBLE_TYPES.put(BuiltinTypes.INT, new HashSet<>(Arrays.asList(BuiltinTypes.FLOAT, BuiltinTypes.COMPLEX)));
@@ -440,7 +440,8 @@ public class InferredTypes {
       expectedTypeClass.declaredMembers().stream().allMatch(m -> actualTypeClass.resolveMember(m.name()).isPresent());
     boolean canBeOrExtend = otherFullyQualifiedName == null || actualTypeClass.canBeOrExtend(otherFullyQualifiedName);
     boolean areHardcodedIncompatible = areHardCodedIncompatible(actualTypeClass, expectedTypeClass);
-    return (areHardcodedCompatible || isDuckTypeCompatible || canBeOrExtend) && !areHardcodedIncompatible;
+    boolean areTupleClasses = actualTypeClass.isOrExtends(BuiltinTypes.TUPLE) && expectedTypeClass.isOrExtends(BuiltinTypes.TUPLE);
+    return (areHardcodedCompatible || isDuckTypeCompatible || canBeOrExtend || areTupleClasses) && !areHardcodedIncompatible;
   }
 
   private static boolean areHardcodedCompatible(ClassSymbol actual, ClassSymbol expected) {

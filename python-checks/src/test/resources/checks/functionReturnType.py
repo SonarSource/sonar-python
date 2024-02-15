@@ -352,3 +352,18 @@ def no_fp_on_optional_union_of_unknown_symbol(cond) -> Optional[Union[str, Unkno
         return "hello"  # OK
     if cond == 5:
         return None
+
+
+import psutil
+from psutil._common import sdiskusage
+
+def update_data(self) -> sdiskusage:
+    return psutil.disk_usage(self._argument)
+
+
+class MyTuple(tuple):
+    def some_method():
+        ...
+
+def no_fp_when_returning_tuple_literal() -> MyTuple:
+    return (1, 2, 3)  # FN

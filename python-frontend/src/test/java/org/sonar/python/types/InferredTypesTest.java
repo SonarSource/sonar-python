@@ -35,12 +35,14 @@ import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.PythonTestUtils;
 import org.sonar.python.semantic.AmbiguousSymbolImpl;
 import org.sonar.python.semantic.ClassSymbolImpl;
+import org.sonar.python.semantic.FunctionSymbolImpl;
 import org.sonar.python.semantic.SymbolImpl;
 import org.sonar.python.types.protobuf.SymbolsProtos;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.PythonTestUtils.lastExpression;
 import static org.sonar.python.PythonTestUtils.lastExpressionInFunction;
+import static org.sonar.python.PythonTestUtils.pythonFile;
 import static org.sonar.python.types.InferredTypes.COMPLEX;
 import static org.sonar.python.types.InferredTypes.DECL_INT;
 import static org.sonar.python.types.InferredTypes.DECL_STR;
@@ -164,6 +166,18 @@ class InferredTypesTest {
     );
     assertThat(fromTypeshedTypeAnnotation(typeAnnotation)).isEqualTo(LIST);
     assertThat(((DeclaredType) fromTypeAnnotation(typeAnnotation)).alternativeTypeSymbols()).extracting(Symbol::fullyQualifiedName).containsExactly("list");
+  }
+
+  @Test
+  void test_tuples_classes_are_compatibles() {
+    TypeAnnotation tupleAnnotation = typeAnnotation(
+      "t1 : tuple"
+    );
+    InferredType tupleType = fromTypeshedTypeAnnotation(tupleAnnotation);
+    ClassSymbolImpl typeClass = new ClassSymbolImpl("MyTuple", "mod.MyTuple");
+    typeClass.addSuperClass(tupleType.runtimeTypeSymbol());
+    typeClass.addMembers(List.of(new ClassSymbolImpl("SomeMember", "mod.MyTuple.SomeMember")));
+    assertThat(tupleType.isCompatibleWith(declaredType(typeClass))).isTrue();
   }
 
   private void assertAliasedTypeAnnotation(String type, String... code) {
