@@ -20,9 +20,11 @@
 package org.sonar.python.checks;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -88,6 +90,8 @@ public class UselessStatementCheck extends PythonSubscriptionCheck {
 
   private static final List<Kind> unaryExpressionKinds = Arrays.asList(Kind.UNARY_PLUS, Kind.UNARY_MINUS, Kind.BITWISE_COMPLEMENT, Kind.NOT);
 
+  private static final Set<String> suppressionContext = new HashSet<>(Arrays.asList("contextlib.suppress", "airflow.DAG"));
+
   private static final String MESSAGE = "Remove or refactor this statement; it has no side effects.";
 
   private static Consumer<SubscriptionContext> ignoredFileWrapper(Consumer<SubscriptionContext> originalFunc) {
@@ -122,13 +126,13 @@ public class UselessStatementCheck extends PythonSubscriptionCheck {
     if (parent == null || !parent.is(Kind.EXPRESSION_STMT)) {
       return;
     }
-    if (isWithinContextlibSuppress(tree)) {
+    if (isWithinSuppressionContext(tree)) {
       return;
     }
     ctx.addIssue(tree, MESSAGE);
   }
 
-  private static boolean isWithinContextlibSuppress(Tree tree) {
+  private static boolean isWithinSuppressionContext(Tree tree) {
     Tree withParent = TreeUtils.firstAncestorOfKind(tree, Kind.WITH_STMT);
     if (withParent != null) {
       WithStatement withStatement = (WithStatement) withParent;
@@ -137,7 +141,7 @@ public class UselessStatementCheck extends PythonSubscriptionCheck {
         .filter(item -> item.is(Kind.CALL_EXPR))
         .map(item -> ((CallExpression) item).calleeSymbol())
         .filter(Objects::nonNull)
-        .anyMatch(s -> "contextlib.suppress".equals(s.fullyQualifiedName()));
+        .anyMatch(s -> suppressionContext.contains(s.fullyQualifiedName()));
     }
     return false;
   }
