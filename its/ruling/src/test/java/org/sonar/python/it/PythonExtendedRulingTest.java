@@ -98,6 +98,7 @@ class PythonExtendedRulingTest {
     SonarScanner build = buildWithCommonProperties("celery");
     build.setProperty("sonar.sources", "celery");
     build.setProperty("sonar.tests", "t");
+    build.setEnvironmentVariable("SONAR_TYPE_INFERENCE_FILE", JSON_PATH_PREFIX + "celery.json");
     executeBuild(build);
   }
 
