@@ -84,6 +84,14 @@ class PythonExtendedRulingTest {
   }
 
   @Test
+  void test_celery() throws IOException {
+    SonarScanner build = buildWithCommonProperties("celery");
+    build.setProperty("sonar.sources", "celery");
+    build.setProperty("sonar.tests", "t");
+    executeBuild(build);
+  }
+
+  @Test
   void test_chalice() throws IOException {
     SonarScanner build = buildWithCommonProperties("chalice");
     build.setProperty("sonar.sources", "chalice");
