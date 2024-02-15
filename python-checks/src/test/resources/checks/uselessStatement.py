@@ -151,3 +151,4 @@ def airflow_ignore_context_false_negative():
         upload = HttpOperator(endpoint="http://example.com/upload/")
         ping # FN because we suppress the rule in the with statement
         download >> upload
+
