@@ -164,7 +164,9 @@ def get_project_types(source_code_dir: str, output_file: str):
         run_pytype('.')
         results = extract_types('.', Options.create())
     with (open(output_file, "w") as fout):
+        rich.print("Dumping data into the json")
         json.dump(results, fout, indent=2)
+        rich.print("Dumping done")
 
 
 if __name__ == "__main__":
