@@ -163,33 +163,34 @@ class MyClass:
         print("hello")
 
 import abc
-class Test(abc.ABC):
+class SomeAbstractClass1(abc.ABC):
     def execute_test(self, name):
         print("Test")
 
-class Suite(metaclass=abc.ABCMeta):
+class AnImplementationOfAnAbstractClass(SomeAbstractClass1):
+    def execute_test_nc(self, name): # Noncompliant
+        print("Test")
+
+ class SomeClassWithMetaclass1(metaclass=abc.ABCMeta):
     def execute_suite(self, name):
         print("Suite")
 
 import abc as xyz
-class Suite2(metaclass=xyz.ABCMeta):
+class SomeClassWithMetaclass2(metaclass=xyz.ABCMeta):
     def execute_suite(self, name):
         print("Suite")
-class Test2(xyz.ABC):
+class SomeAbstractClass2(xyz.ABC):
     def execute_test(self, name):
         print("Test")
 
 from abc import ABC as XYZ
-class Test2(XYZ):
+class SomeAbstractClass3(XYZ):
     def execute_test(self, name):
         print("Test")
 
-# source :  https://stackoverflow.com/a/392767
 class FakeMetaclass(type):
-    def __init__(cls, *args, **kwargs):
-        type.__init__(cls, *args, **kwargs)
-        cls.name = cls.__name__
+    ...
 
-class OtherMetaclass(metaclass=FakeMetaclass):
+class ClassWithFakeMetaClass(metaclass=FakeMetaclass):
     def execute(self, name):
         print("Execute")
