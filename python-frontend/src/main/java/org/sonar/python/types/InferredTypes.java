@@ -298,7 +298,9 @@ public class InferredTypes {
           .map(exp -> declaredTypeFromTypeAnnotation(exp, builtinSymbols))
           .collect(Collectors.toList());
         if (args.stream().anyMatch(Objects::isNull)) {
-          args = Collections.emptyList();
+          // null args indicate something was wrong in the resolution of some of the alternatives
+          // returning null here will ensure the resulting type will be AnyType, which will avoid potential FPs
+          return null;
         }
         String builtinFqn = ALIASED_ANNOTATIONS.get(symbol.fullyQualifiedName());
         return builtinFqn != null ? new DeclaredType(builtinSymbols.get(builtinFqn), args) : new DeclaredType(symbol, args);
