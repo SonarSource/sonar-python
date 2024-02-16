@@ -136,3 +136,26 @@ def no_issue_within_contextlib_suppress(a):
   with suppress(TypeError):
     a + ''  # OK
     return a
+
+from airflow import DAG
+from airflow.providers.http.operators.http import HttpOperator
+def airflow_ignore_context():
+    with DAG("my-dag"):
+        ping = HttpOperator(endpoint="http://example.com/update/")
+        ping
+
+def airflow_ignore_context_false_negative():
+    with DAG("my-dag"):
+        ping = HttpOperator(endpoint="http://example.com/update/")
+        download = HttpOperator(endpoint="http://example.com/download/")
+        upload = HttpOperator(endpoint="http://example.com/upload/")
+        ping # FN because we suppress the rule in the with statement
+        download >> upload
+
+from airflow.decorators import dag
+
+@dag
+def airflow_decorator_dag():
+    ping = HttpOperator(endpoint="http://example.com/update/")
+    # This is a false positive because we don't handle the @dag decorator
+    ping # Noncompliant

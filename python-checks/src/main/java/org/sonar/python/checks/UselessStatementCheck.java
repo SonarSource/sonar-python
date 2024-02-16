@@ -20,10 +20,11 @@
 package org.sonar.python.checks;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.function.Consumer;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.sonar.check.Rule;
@@ -88,28 +89,25 @@ public class UselessStatementCheck extends PythonSubscriptionCheck {
 
   private static final List<Kind> unaryExpressionKinds = Arrays.asList(Kind.UNARY_PLUS, Kind.UNARY_MINUS, Kind.BITWISE_COMPLEMENT, Kind.NOT);
 
+  private static final Set<String> ignoredContexts = new HashSet<>(Arrays.asList("contextlib.suppress", "airflow.DAG"));
+
   private static final String MESSAGE = "Remove or refactor this statement; it has no side effects.";
 
-  private static Consumer<SubscriptionContext> ignoredFileWrapper(Consumer<SubscriptionContext> originalFunc) {
-    return (SubscriptionContext ctx) -> {
-      if ("__manifest__.py".equals(ctx.pythonFile().fileName())) {
-        return;
-      }
-      originalFunc.accept(ctx);
-    };
-  }
   @Override
   public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(Kind.STRING_LITERAL, ignoredFileWrapper(this::checkStringLiteral));
-    context.registerSyntaxNodeConsumer(Kind.NAME, ignoredFileWrapper(UselessStatementCheck::checkName));
-    context.registerSyntaxNodeConsumer(Kind.QUALIFIED_EXPR, ignoredFileWrapper(UselessStatementCheck::checkQualifiedExpression));
-    context.registerSyntaxNodeConsumer(Kind.CONDITIONAL_EXPR, ignoredFileWrapper(UselessStatementCheck::checkConditionalExpression));
-    binaryExpressionKinds.forEach(b -> context.registerSyntaxNodeConsumer(b, ignoredFileWrapper(this::checkBinaryExpression)));
-    unaryExpressionKinds.forEach(u -> context.registerSyntaxNodeConsumer(u, ignoredFileWrapper(this::checkUnaryExpression)));
-    regularKinds.forEach(r -> context.registerSyntaxNodeConsumer(r, ignoredFileWrapper(UselessStatementCheck::checkNode)));
+    context.registerSyntaxNodeConsumer(Kind.STRING_LITERAL, this::checkStringLiteral);
+    context.registerSyntaxNodeConsumer(Kind.NAME, UselessStatementCheck::checkName);
+    context.registerSyntaxNodeConsumer(Kind.QUALIFIED_EXPR, UselessStatementCheck::checkQualifiedExpression);
+    context.registerSyntaxNodeConsumer(Kind.CONDITIONAL_EXPR, UselessStatementCheck::checkConditionalExpression);
+    binaryExpressionKinds.forEach(b -> context.registerSyntaxNodeConsumer(b, this::checkBinaryExpression));
+    unaryExpressionKinds.forEach(u -> context.registerSyntaxNodeConsumer(u, this::checkUnaryExpression));
+    regularKinds.forEach(r -> context.registerSyntaxNodeConsumer(r, UselessStatementCheck::checkNode));
   }
 
   private static void checkNode(SubscriptionContext ctx) {
+    if ("__manifest__.py".equals(ctx.pythonFile().fileName())) {
+      return;
+    }
     Tree tree = ctx.syntaxNode();
     Tree tryParent = TreeUtils.firstAncestorOfKind(tree, Kind.TRY_STMT);
     if (tryParent != null) {
@@ -122,13 +120,13 @@ public class UselessStatementCheck extends PythonSubscriptionCheck {
     if (parent == null || !parent.is(Kind.EXPRESSION_STMT)) {
       return;
     }
-    if (isWithinContextlibSuppress(tree)) {
+    if (isWithinIgnoredContext(tree)) {
       return;
     }
     ctx.addIssue(tree, MESSAGE);
   }
 
-  private static boolean isWithinContextlibSuppress(Tree tree) {
+  private static boolean isWithinIgnoredContext(Tree tree) {
     Tree withParent = TreeUtils.firstAncestorOfKind(tree, Kind.WITH_STMT);
     if (withParent != null) {
       WithStatement withStatement = (WithStatement) withParent;
@@ -137,7 +135,7 @@ public class UselessStatementCheck extends PythonSubscriptionCheck {
         .filter(item -> item.is(Kind.CALL_EXPR))
         .map(item -> ((CallExpression) item).calleeSymbol())
         .filter(Objects::nonNull)
-        .anyMatch(s -> "contextlib.suppress".equals(s.fullyQualifiedName()));
+        .anyMatch(s -> ignoredContexts.contains(s.fullyQualifiedName()));
     }
     return false;
   }
