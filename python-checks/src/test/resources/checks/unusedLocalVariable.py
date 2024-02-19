@@ -144,3 +144,17 @@ def generic_type_overrides_defined():
         ...
 
     return foo
+
+def additional_test_for_loop_comprehension():
+    return ["a" for i in range(5)] # Noncompliant
+
+def dont_raise_issue_on_reused_underscore():
+    _ = 3
+    for i in range(10): # Noncompliant
+        ...
+    return _
+
+def global_variable_modified():
+    global _
+    for i in range(10): # Noncompliant
+        ...
