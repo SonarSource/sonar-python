@@ -130,6 +130,15 @@ public class InferredTypes {
     BUILTINS_TYPE_CATEGORY.put(BuiltinTypes.DICT, BuiltinTypes.DICT);
     BUILTINS_TYPE_CATEGORY.put(BuiltinTypes.TUPLE, BuiltinTypes.TUPLE);
   }
+  //
+  // public static final Map<String, InferredType> TYPE_BASED_ON_PROTOCOL = new HashMap<>();
+  //
+  // static {
+  // SymbolImpl callableSymbol = new SymbolImpl("Callable", "typing.Callable");
+  // FunctionSymbolImpl callFunctionSymbol = new FunctionSymbolImpl(SymbolsProtos.FunctionSymbol.getDefaultInstance(), "__call__");
+  // callableSymbol.addChildSymbol(callFunctionSymbol);
+  // TYPE_BASED_ON_PROTOCOL.put("callable", new RuntimeType(callableSymbol);
+  // }
 
   private static final SymbolImpl OPTIONAL_SYMBOL = new SymbolImpl("Optional", "typing.Optional");
 

@@ -21,6 +21,7 @@ package org.sonar.python.types;
 
 import javax.annotation.Nullable;
 import org.junit.jupiter.api.Test;
+import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.ExpressionStatement;
 import org.sonar.plugins.python.api.tree.FileInput;
@@ -409,6 +410,47 @@ class PyTypeInferenceTest {
 
   @Test
   void test_correct_annotation_of_callable() {
+    TypeContext typeContext = TypeContext.fromJSON("{\n" +
+      "  \"mod1.py\": [\n" +
+      "    {\n" +
+      "      \"text\": \"func\",\n" +
+      "      \"start_line\": 1,\n" +
+      "      \"start_col\": 0,\n" +
+      "      \"syntax_role\": \"Function\",\n" +
+      "      \"type\": \"CallableType(base_type=ClassType(typing.Callable), parameters=(AnythingType(),))\",\n" +
+      "      \"short_type\": \"Callable[[], Any]\"\n" +
+      "    },\n" +
+      "    {\n" +
+      "      \"text\": \"func\",\n" +
+      "      \"start_line\": 3,\n" +
+      "      \"start_col\": 0,\n" +
+      "      \"syntax_role\": \"Variable\",\n" +
+      "      \"type\": \"CallableType(base_type=ClassType(typing.Callable), parameters=(AnythingType(),))\",\n" +
+      "      \"short_type\": \"Callable[[], Any]\"\n" +
+      "    },\n" +
+      "    {\n" +
+      "      \"text\": \"print\",\n" +
+      "      \"start_line\": 2,\n" +
+      "      \"start_col\": 4,\n" +
+      "      \"syntax_role\": \"Variable\",\n" +
+      "      \"type\": \"GenericType(base_type=ClassType(typing.Callable), parameters=(AnythingType(), ClassType(builtins.NoneType)))\",\n" +
+      "      \"short_type\": \"Callable[..., None]\"\n" +
+      "    }\n" +
+      "  ]\n" +
+      "}");
+
+    FileInput fileInput = getFileInputFromLines(typeContext, "def func():",
+      "    print(1)",
+      "func()");
+
+    ExpressionStatement expressionStatement = ((ExpressionStatement) fileInput.statements().statements().get(1));
+    InferredType inferredType = (((CallExpression) expressionStatement.expressions().get(0))).callee().type();
+    assertThat(inferredType.canHaveMember("__call__")).isTrue();
+
+  }
+
+  @Test
+  void test_correct_annotation_of_callable_2() {
     TypeContext typeContext = TypeContext.fromJSON("{\n" +
       "  \"mod1.py\": [\n" +
       "    {\n" +
