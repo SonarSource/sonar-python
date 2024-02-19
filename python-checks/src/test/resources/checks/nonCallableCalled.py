@@ -169,3 +169,15 @@ class CalledAtModuleLevel:
 
 module_level_object = CalledAtModuleLevel()
 module_level_object() # Noncompliant
+
+
+def collections_named_tuple_no_fp():
+    from collections import namedtuple
+    MyNamedTuple = namedtuple('Employee', ['name', 'age', 'title'])
+    x = MyNamedTuple()
+
+
+def typing_named_tuple_no_fp():
+    from typing import NamedTuple
+    Employee = NamedTuple('Employee', [('name', str), ('id', int)])
+    employee = Employee("Sam", 42)

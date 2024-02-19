@@ -113,6 +113,14 @@ class CallExpressionImplTest {
   }
 
   @Test
+  void typing_NamedTuple_call_type() {
+    assertThat(lastExpression(
+      "from typing import NamedTuple",
+      "NamedTuple()"
+    ).type()).isEqualTo(InferredTypes.TYPE);
+  }
+
+  @Test
   void null_callee_symbol_type() {
     assertThat(lastExpression("x()").type()).isEqualTo(InferredTypes.anyType());
   }

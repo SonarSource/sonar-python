@@ -158,6 +158,10 @@ public class CallExpressionImpl extends PyTree implements CallExpression, HasTyp
   private static InferredType getType(Symbol symbol) {
     if (symbol.is(CLASS)) {
       ClassSymbol classSymbol = (ClassSymbol) symbol;
+      if ("typing.NamedTuple".equals(classSymbol.fullyQualifiedName())) {
+        // Calling typing.NamedTuple actually returns a "type" object
+        return InferredTypes.TYPE;
+      }
       return InferredTypes.runtimeType(classSymbol);
     }
     if (symbol.is(Symbol.Kind.FUNCTION)) {
