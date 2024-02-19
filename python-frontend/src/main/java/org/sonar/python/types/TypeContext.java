@@ -40,6 +40,11 @@ import org.sonar.python.semantic.SymbolImpl;
 import org.sonar.python.tree.TreeUtils;
 
 public class TypeContext {
+
+  public static final String CALLABLE_TYPE_CALLABLE = "CallableType(base_type=ClassType(typing.Callable)";
+  public static final String GENERIC_TYPE_CALLABLE = "GenericType(base_type=ClassType(typing.Callable)";
+  public static final ClassSymbolImpl CALLABLE_CLASS_SYMBOL = new ClassSymbolImpl("Callable", "typing.Callable");
+
   private static final class JsonTypeInfo {
     String text;
     int start_line;
@@ -145,7 +150,10 @@ public class TypeContext {
       }
     }
     // workaround until Typeshed is fixed
-    if (detailedType.startsWith("builtins.") ||
+    if (detailedType.startsWith(CALLABLE_TYPE_CALLABLE)
+      || detailedType.startsWith(GENERIC_TYPE_CALLABLE)) {
+      return new RuntimeType(CALLABLE_CLASS_SYMBOL);
+    } else if (detailedType.startsWith("builtins.") ||
       detailedType.startsWith("GenericType(base_type=ClassType(builtins.") ||
       detailedType.startsWith("TupleType(base_type=ClassType(builtins.")) {
       return InferredTypes.runtimeBuiltinType(getBaseType(typeString));

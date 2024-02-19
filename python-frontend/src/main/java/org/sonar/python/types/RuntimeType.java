@@ -19,6 +19,7 @@
  */
 package org.sonar.python.types;
 
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
@@ -35,6 +36,8 @@ class RuntimeType implements InferredType {
   private String builtinFullyQualifiedName;
   private Set<String> typeClassSuperClassesFQN = null;
   private Set<String> typeClassMembersFQN = null;
+
+  private static Map<String, String> protocolMethods = Map.of("typing.Callable", "__call__");
 
   RuntimeType(ClassSymbol typeClass) {
     this.typeClass = typeClass;
@@ -57,7 +60,8 @@ class RuntimeType implements InferredType {
 
   @Override
   public boolean canHaveMember(String memberName) {
-    if (MOCK_FQNS.stream().anyMatch(this::mustBeOrExtend)){
+    if (MOCK_FQNS.stream().anyMatch(this::mustBeOrExtend) ||
+      protocolMethods.getOrDefault(getTypeClass().fullyQualifiedName(), "").equals(memberName)) {
       return true;  
     }
     return getTypeClass().canHaveMember(memberName);
