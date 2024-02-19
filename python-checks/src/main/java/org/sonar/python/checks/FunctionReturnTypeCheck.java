@@ -51,8 +51,9 @@ public class FunctionReturnTypeCheck extends PythonSubscriptionCheck {
 
   private static final String MESSAGE = "Return a value of type \"%s\" instead of \"%s\" or update function \"%s\" type hint.";
   private static final Set<String> ITERABLE_TYPES = Set.of("typing.Generator", "typing.Iterator", "typing.Iterable",
-    "collections.abc.Generator" ,"collections.abc.Iterator", "collections.abc.Iterable");
-  private static final Set<String> ASYNC_ITERABLE_TYPES = Set.of("typing.AsyncGenerator", "typing.AsyncIterator", "typing.AsyncIterable");
+    "collections.abc.Generator", "collections.abc.Iterator", "collections.abc.Iterable");
+  private static final Set<String> ASYNC_ITERABLE_TYPES = Set.of("typing.AsyncGenerator", "typing.AsyncIterator", "typing.AsyncIterable", "collections.abc.AsyncGenerator",
+    "collections.abc.AsyncIterator", "collections.abc.AsyncIterable");
   private static final String CONTEXT_MANAGER_DECORATOR_FQN = "contextlib.contextmanager";
 
   @Override
