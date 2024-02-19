@@ -32,3 +32,9 @@ def foo():
     try: import gadfly #Noncompliant
     except: return False #Noncompliant
     return True
+
+def dummy_function_impl(): ... # OK
+
+def not_dummyfunction(): something(); ... # Noncompliant
+
+class DummyClassImpl: ... # OK
