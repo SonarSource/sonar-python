@@ -33,3 +33,16 @@ def type_aliases():
   def ordered_steps() -> StepGenerator:
     for i in range(10):
       yield str(i)
+
+
+def abc_collections():
+  from collections.abc import AsyncIterable, AsyncGenerator, AsyncIterator
+  async def async_iterator() -> AsyncIterator[int]:
+    for i in range(5):
+      yield i
+  async def async_generator() -> AsyncGenerator[int]:
+    for i in range(5):
+      yield i
+  async def async_iterable() -> AsyncIterable[int]:
+    for i in range(5):
+      yield i
