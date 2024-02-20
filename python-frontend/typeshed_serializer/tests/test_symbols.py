@@ -89,6 +89,18 @@ def test_class_symbol(typeshed_stdlib):
     assert cmd_class_symbol.super_classes == [OBJECT_FQN]
 
 
+def test_type_return(typeshed_stdlib):
+    mypy_collections_module = typeshed_stdlib.files.get("collections")
+    mypy_namedtuple_function = mypy_collections_module.names.get("namedtuple")
+
+    namedtuple_function_symbol = symbols.FunctionSymbol(mypy_namedtuple_function.node)
+    return_type = namedtuple_function_symbol.return_type
+    assert return_type.fully_qualified_name == "type"
+    assert return_type.pretty_printed_name == "Type[builtins.tuple[Any]]"
+    assert return_type.args[0].fully_qualified_name == "builtins.tuple"
+    assert return_type.args[0].pretty_printed_name == "builtins.tuple[Any]"
+
+
 def test_class_symbol_metaclass(typeshed_stdlib):
     io_module = typeshed_stdlib.files.get("io")
     iobase_class = io_module.names.get("IOBase")
@@ -105,6 +117,7 @@ def test_class_symbol_metaclass(typeshed_stdlib):
     str_meta_class_symbol = symbols.ClassSymbol(str_meta_class.node)
     assert str_meta_class_symbol.has_metaclass
     assert str_meta_class_symbol.metaclass_name is None
+
 
 def test_function_symbol(typeshed_stdlib):
     mypy_cmd_module = typeshed_stdlib.files.get("cmd")
