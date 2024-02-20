@@ -46,6 +46,7 @@ import static org.sonar.python.PythonTestUtils.pythonFile;
 import static org.sonar.python.types.InferredTypes.COMPLEX;
 import static org.sonar.python.types.InferredTypes.DECL_INT;
 import static org.sonar.python.types.InferredTypes.DECL_STR;
+import static org.sonar.python.types.InferredTypes.DECL_TYPE;
 import static org.sonar.python.types.InferredTypes.DICT;
 import static org.sonar.python.types.InferredTypes.FLOAT;
 import static org.sonar.python.types.InferredTypes.INT;
@@ -54,6 +55,7 @@ import static org.sonar.python.types.InferredTypes.NONE;
 import static org.sonar.python.types.InferredTypes.SET;
 import static org.sonar.python.types.InferredTypes.STR;
 import static org.sonar.python.types.InferredTypes.TUPLE;
+import static org.sonar.python.types.InferredTypes.TYPE;
 import static org.sonar.python.types.InferredTypes.anyType;
 import static org.sonar.python.types.InferredTypes.containsDeclaredType;
 import static org.sonar.python.types.InferredTypes.fromTypeAnnotation;
@@ -285,6 +287,15 @@ class InferredTypesTest {
     InferredType declaredType = fromTypeAnnotation(typeAnnotation);
     assertThat(declaredType).isInstanceOf(AnyType.class);
   }
+
+  @Test
+  void test_type_annotation() {
+    TypeAnnotation typeAnnotation = typeAnnotation(
+      "l : type"
+    );
+    assertThat(fromTypeshedTypeAnnotation(typeAnnotation)).isEqualTo(TYPE);
+    assertThat(fromTypeAnnotation(typeAnnotation)).isEqualTo(DECL_TYPE);
+  }
  
 
   @Test
@@ -455,6 +466,7 @@ class InferredTypesTest {
       "kind: NONE\n")).isEqualTo(NONE);
     assertThat(protobufType("kind: TYPED_DICT")).isEqualTo(DICT);
     assertThat(protobufType("kind: TUPLE")).isEqualTo(TUPLE);
+    assertThat(protobufType("kind: TYPE")).isEqualTo(TYPE);
     assertThat(protobufType(
       "pretty_printed_name: \"builtins.str\"\n" +
       "fully_qualified_name: \"builtins.str\"\n")).isEqualTo(STR);

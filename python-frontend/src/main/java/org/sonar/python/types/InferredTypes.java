@@ -91,6 +91,9 @@ public class InferredTypes {
   public static final InferredType BOOL = runtimeBuiltinType(BuiltinTypes.BOOL);
   public static final InferredType DECL_BOOL = declaredBuiltinType(BuiltinTypes.BOOL);
 
+  public static final InferredType TYPE = runtimeBuiltinType("type");
+  public static final InferredType DECL_TYPE = declaredBuiltinType("type");
+
   private static final String UNICODE = "unicode";
   private static final String BYTES = "bytes";
   // https://github.com/python/mypy/blob/e97377c454a1d5c019e9c56871d5f229db6b47b2/mypy/semanal_classprop.py#L16-L46
@@ -210,6 +213,8 @@ public class InferredTypes {
           return anyType();
         }
         return typeName.isEmpty() ? anyType() : runtimeType(TypeShed.symbolWithFQN(typeName));
+      case TYPE:
+        return InferredTypes.TYPE;
       case TYPE_ALIAS:
         return fromTypeshedProtobuf(type.getArgs(0));
       case CALLABLE:

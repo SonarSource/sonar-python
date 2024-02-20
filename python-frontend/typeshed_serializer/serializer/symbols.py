@@ -92,6 +92,7 @@ class TypeDescriptor:
             item = TypeDescriptor(_type.item, visited)
             self.args.append(item)
             self.pretty_printed_name = f"Type[{item.pretty_printed_name}]"
+            self.fully_qualified_name = "type"
         elif isinstance(_type, mpt.TupleType):
             self.kind = TypeKind.TUPLE
             items = [TypeDescriptor(t, visited) for t in _type.items]
