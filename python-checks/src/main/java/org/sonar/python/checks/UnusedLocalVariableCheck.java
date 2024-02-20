@@ -26,6 +26,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
@@ -47,6 +48,7 @@ import org.sonar.python.checks.utils.CheckUtils;
 import org.sonar.python.checks.utils.ImportedNamesCollector;
 import org.sonar.python.checks.utils.StringLiteralValuesCollector;
 import org.sonar.python.quickfix.TextEditUtils;
+import org.sonar.python.tree.FileInputImpl;
 import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S1481")
@@ -54,8 +56,8 @@ public class UnusedLocalVariableCheck extends PythonSubscriptionCheck {
 
   private static final String DEFAULT = "(_[a-zA-Z0-9_]*|dummy|unused|ignored)";
   private static final String MESSAGE = "Remove the unused local variable \"%s\".";
-  private static final String SEQUENCE_UNPACKING_MESSAGE = "Replace unused local variable \"%s\" with \"_\".";
-  private static final String LOOP_INDEX_MESSAGE = "Replace unused loop index \"%s\" with \"_\".";
+  private static final String SEQUENCE_UNPACKING_MESSAGE = "Replace the unused local variable \"%s\" with \"_\".";
+  private static final String LOOP_INDEX_MESSAGE = "Replace the unused loop index \"%s\" with \"_\".";
   private static final String RENAME_QUICK_FIX_MESSAGE = "Replace with \"_\"";
   private static final String EXCEPT_CLAUSE_QUICK_FIX_MESSAGE = "Remove the unused local variable";
   private static final String SECONDARY_MESSAGE = "Assignment to unused local variable \"%s\".";
@@ -129,14 +131,8 @@ public class UnusedLocalVariableCheck extends PythonSubscriptionCheck {
       return issue;
     } else if (isLoopIndex(usage, symbol)) {
       PreciseIssue issue = ctx.addIssue(usage.tree(), String.format(LOOP_INDEX_MESSAGE, symbol.name()));
-      PythonQuickFix quickFix = PythonQuickFix.newQuickFix(RENAME_QUICK_FIX_MESSAGE, TextEditUtils.replace(usage.tree(), "_"));
-      Symbol foundUnderscoreSymbol = null;
-      Tree searchTree = usage.kind().equals(Usage.Kind.LOOP_DECLARATION) ? ctx.syntaxNode() : null;
-      while (foundUnderscoreSymbol == null && searchTree != null) {
-        foundUnderscoreSymbol = ((FunctionDef) searchTree).localVariables().stream().filter(symbol1 -> "_".equals(symbol1.name())).findAny().orElse(null);
-        searchTree = TreeUtils.firstAncestorOfKind(searchTree, Kind.FUNCDEF);
-      }
-      if (foundUnderscoreSymbol == null) {
+      if (isUnderscoreSymbolAlreadyAssigned(ctx, usage) == null) {
+        PythonQuickFix quickFix = PythonQuickFix.newQuickFix(RENAME_QUICK_FIX_MESSAGE, TextEditUtils.replace(usage.tree(), "_"));
         issue.addQuickFix(quickFix);
       }
       return issue;
@@ -145,6 +141,21 @@ public class UnusedLocalVariableCheck extends PythonSubscriptionCheck {
       createExceptClauseQuickFix(usage, issue);
       return issue;
     }
+  }
+
+  @Nullable
+  private static Symbol isUnderscoreSymbolAlreadyAssigned(SubscriptionContext ctx, Usage usage) {
+    Symbol foundUnderscoreSymbol = null;
+    Tree searchTree = usage.kind().equals(Usage.Kind.LOOP_DECLARATION) ? ctx.syntaxNode() : null;
+    while (foundUnderscoreSymbol == null && searchTree != null) {
+      if (searchTree.is(Kind.FUNCDEF)) {
+        foundUnderscoreSymbol = ((FunctionDef) searchTree).localVariables().stream().filter(symbol1 -> "_".equals(symbol1.name())).findAny().orElse(null);
+      } else if (searchTree.is(Kind.FILE_INPUT)) {
+        foundUnderscoreSymbol = ((FileInputImpl) searchTree ).globalVariables().stream().filter(symbol1 -> "_".equals(symbol1.name())).findAny().orElse(null);
+      }
+      searchTree = TreeUtils.firstAncestor(searchTree, a -> a.is(Kind.FUNCDEF, Kind.FILE_INPUT));
+    }
+    return foundUnderscoreSymbol;
   }
 
   private static boolean isLoopIndex(Usage usage, Symbol symbol) {

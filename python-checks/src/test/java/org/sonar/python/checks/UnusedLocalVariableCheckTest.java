@@ -100,6 +100,7 @@ class UnusedLocalVariableCheckTest {
       "    print(\"Hello\")";
 
     PythonQuickFixVerifier.verify(check, before, after);
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, before, "Replace with \"_\"");
   }
 
   @Test
@@ -110,6 +111,7 @@ class UnusedLocalVariableCheckTest {
     var after = "def loop_index():\n" + " return [True for _ in range(10)]\n";
 
     PythonQuickFixVerifier.verify(check, before, after);
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, before, "Replace with \"_\"");
   }
 
   @Test
@@ -122,5 +124,37 @@ class UnusedLocalVariableCheckTest {
       "        ...\n" +
       "    return _\n";
     PythonQuickFixVerifier.verifyNoQuickFixes(check, before);
+  }
+
+  @Test
+  void loopQuickFixIndexFileLevelAlreadyTakenTest() {
+    var check = new UnusedLocalVariableCheck();
+
+    var before = "_ = 42\n" +
+      "def foo():\n" +
+      "  for i in range(5):\n" +
+      "    print(\"hello\")\n" +
+      "  print(_)\n" +
+      "foo()";
+    PythonQuickFixVerifier.verifyNoQuickFixes(check, before);
+  }
+
+  @Test
+  void loopIndexComprehensionClassQuickFixTest() {
+    var check = new UnusedLocalVariableCheck();
+
+    var before = "class A():\n" +
+      "  _ = True\n" +
+      "  def __init__(self):\n" +
+      "    for i in range(5):\n" +
+      "      print(\"print\")";
+    var after = "class A():\n" +
+      "  _ = True\n" +
+      "  def __init__(self):\n" +
+      "    for _ in range(5):\n" +
+      "      print(\"print\")";
+
+    PythonQuickFixVerifier.verify(check, before, after);
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, before, "Replace with \"_\"");
   }
 }

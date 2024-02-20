@@ -47,13 +47,13 @@ def function_with_lambdas():
 #             ^
 
 def using_tuples():
-    x, y = (1, 2) # Noncompliant {{Replace unused local variable "y" with "_".}}
+    x, y = (1, 2) # Noncompliant {{Replace the unused local variable "y" with "_".}}
 #      ^
     print x
     (a, b) = (1, 2)
     print b
 
-    i, j = (1, 2) # Noncompliant {{Replace unused local variable "j" with "_".}}
+    i, j = (1, 2) # Noncompliant {{Replace the unused local variable "j" with "_".}}
 #      ^ 1
     j = 3
 #   ^< 1 {{Assignment to unused local variable "j".}}
@@ -146,7 +146,7 @@ def generic_type_overrides_defined():
     return foo
 
 def additional_test_for_loop_comprehension():
-    return ["a" for i in range(5)] # Noncompliant
+    return ["a" for i in range(5)] # Noncompliant {{Replace the unused loop index "i" with "_".}}
 
 def dont_raise_issue_on_reused_underscore():
     _ = 3
