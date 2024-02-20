@@ -147,8 +147,8 @@ QTuple[starlette.routing.Match,TypeAlias[typing.MutableMapping[builtins.str,Any]
 %builtins.list[fastapi.params.Depends]0
 fastapi.params.Depends"fastapi.params.Depends"builtins.listrˆ
 	dependant+fastapi.routing.APIWebSocketRoute.dependantN
-%fastapi.dependencies.models.Dependant"%fastapi.dependencies.models.DependantÌY
-APIRoutefastapi.routing.APIRoute"starlette.routing.Route*¡%
+%fastapi.dependencies.models.Dependant"%fastapi.dependencies.models.DependantØY
+APIRoutefastapi.routing.APIRoute"starlette.routing.Route*§%
 __init__!fastapi.routing.APIRoute.__init__"
 None*>
 self4
@@ -253,11 +253,11 @@ BUnion[builtins.set[builtins.str],builtins.list[builtins.str],None]H
 response_model_exclude_none
 builtins.bool"builtins.bool *7
 include_in_schema
-builtins.bool"builtins.bool *¬
-response_class•
-SUnion[Type[starlette.responses.Response],fastapi.datastructures.DefaultPlaceholder]d
+builtins.bool"builtins.bool *²
+response_class›
+SUnion[Type[starlette.responses.Response],fastapi.datastructures.DefaultPlaceholder]j
 "Type[starlette.responses.Response]<
-starlette.responses.Response"starlette.responses.ResponseV
+starlette.responses.Response"starlette.responses.Response"typeV
 )fastapi.datastructures.DefaultPlaceholder")fastapi.datastructures.DefaultPlaceholder *K
 dependency_overrides_provider&
 Union[Any,None]
@@ -350,11 +350,11 @@ deprecated#fastapi.routing.APIRoute.deprecatedG
 response_model_exclude_defaults8fastapi.routing.APIRoute.response_model_exclude_defaults
 builtins.bool"builtins.boolrs
 response_model_exclude_none4fastapi.routing.APIRoute.response_model_exclude_none
-builtins.bool"builtins.boolrÑ
-response_class'fastapi.routing.APIRoute.response_class•
-SUnion[Type[starlette.responses.Response],fastapi.datastructures.DefaultPlaceholder]d
+builtins.bool"builtins.boolr×
+response_class'fastapi.routing.APIRoute.response_class›
+SUnion[Type[starlette.responses.Response],fastapi.datastructures.DefaultPlaceholder]j
 "Type[starlette.responses.Response]<
-starlette.responses.Response"starlette.responses.ResponseV
+starlette.responses.Response"starlette.responses.Response"typeV
 )fastapi.datastructures.DefaultPlaceholder")fastapi.datastructures.DefaultPlaceholderr
 dependency_overrides_provider6fastapi.routing.APIRoute.dependency_overrides_provider&
 Union[Any,None]
@@ -421,8 +421,8 @@ Jbuiltins.dict[Union[builtins.int,builtins.str],pydantic.fields.ModelField]`
 body_field#fastapi.routing.APIRoute.body_fieldn
 &Union[pydantic.fields.ModelField,None]8
 pydantic.fields.ModelField"pydantic.fields.ModelField
-None‰‹
-	APIRouterfastapi.routing.APIRouter"starlette.routing.Router*­
+Noneò‹
+	APIRouterfastapi.routing.APIRouter"starlette.routing.Router*¹
 __init__"fastapi.routing.APIRouter.__init__"
 None*@
 self6
@@ -440,10 +440,10 @@ body_field#fastapi.routing.APIRoute.body_fieldn
 3Union[typing.Sequence[fastapi.params.Depends],None]l
 'typing.Sequence[fastapi.params.Depends]0
 fastapi.params.Depends"fastapi.params.Depends"typing.Sequence
-None *‚
-default_response_classd
+None *ˆ
+default_response_classj
 "Type[starlette.responses.Response]<
-starlette.responses.Response"starlette.responses.Response *™
+starlette.responses.Response"starlette.responses.Response"type *™
 	responses‡
 [Union[builtins.dict[Union[builtins.int,builtins.str],builtins.dict[builtins.str,Any]],None]›
 Obuiltins.dict[Union[builtins.int,builtins.str],builtins.dict[builtins.str,Any]]`
@@ -475,10 +475,10 @@ Obuiltins.dict[Union[builtins.int,builtins.str],builtins.dict[builtins.str,Any]]
 dependency_overrides_provider&
 Union[Any,None]
 Any
-None *k
-route_classX
+None *q
+route_class^
 Type[fastapi.routing.APIRoute]4
-fastapi.routing.APIRoute"fastapi.routing.APIRoute *ð
+fastapi.routing.APIRoute"fastapi.routing.APIRoute"type *ð
 
 on_startupÝ
 <Union[typing.Sequence[CallableType[builtins.function]],None]
@@ -528,7 +528,7 @@ deprecatedG
 builtins.str"builtins.str
 None *7
 include_in_schema
-builtins.bool"builtins.bool *“&
+builtins.bool"builtins.bool *Ÿ&
 add_api_route'fastapi.routing.APIRouter.add_api_route"
 None*@
 self6
@@ -629,20 +629,20 @@ BUnion[builtins.set[builtins.str],builtins.list[builtins.str],None]H
 response_model_exclude_none
 builtins.bool"builtins.bool *7
 include_in_schema
-builtins.bool"builtins.bool *¬
-response_class•
-SUnion[Type[starlette.responses.Response],fastapi.datastructures.DefaultPlaceholder]d
+builtins.bool"builtins.bool *²
+response_class›
+SUnion[Type[starlette.responses.Response],fastapi.datastructures.DefaultPlaceholder]j
 "Type[starlette.responses.Response]<
-starlette.responses.Response"starlette.responses.ResponseV
+starlette.responses.Response"starlette.responses.Response"typeV
 )fastapi.datastructures.DefaultPlaceholder")fastapi.datastructures.DefaultPlaceholder *P
 nameD
 Union[builtins.str,None]
 builtins.str"builtins.str
-None *¯
-route_class_override’
-*Union[Type[fastapi.routing.APIRoute],None]X
+None *µ
+route_class_override˜
+*Union[Type[fastapi.routing.APIRoute],None]^
 Type[fastapi.routing.APIRoute]4
-fastapi.routing.APIRoute"fastapi.routing.APIRoute
+fastapi.routing.APIRoute"fastapi.routing.APIRoute"type
 None *Ï
 	callbacks½
 6Union[builtins.list[starlette.routing.BaseRoute],None]w
@@ -659,7 +659,7 @@ SUnion[Type[starlette.responses.Response],fastapi.datastructures.DefaultPlacehol
 PUnion[CallableType[builtins.function],fastapi.datastructures.DefaultPlaceholder]K
 CallableType[builtins.function]&
 builtins.function"builtins.functionV
-)fastapi.datastructures.DefaultPlaceholder")fastapi.datastructures.DefaultPlaceholder *ù 
+)fastapi.datastructures.DefaultPlaceholder")fastapi.datastructures.DefaultPlaceholder *€!
 	api_route#fastapi.routing.APIRouter.api_route"K
 CallableType[builtins.function]&
 builtins.function"builtins.function*@
@@ -756,10 +756,10 @@ deprecatedG
 response_model_exclude_none
 builtins.bool"builtins.bool *7
 include_in_schema
-builtins.bool"builtins.bool *z
-response_classd
+builtins.bool"builtins.bool *€
+response_classj
 "Type[starlette.responses.Response]<
-starlette.responses.Response"starlette.responses.Response *P
+starlette.responses.Response"starlette.responses.Response"type *P
 nameD
 Union[builtins.str,None]
 builtins.str"builtins.str
@@ -822,7 +822,7 @@ deprecatedG
 nameD
 Union[builtins.str,None]
 builtins.str"builtins.str
-None *£
+None *©
 include_router(fastapi.routing.APIRouter.include_router"
 None*@
 self6
@@ -842,10 +842,10 @@ deprecatedG
 3Union[typing.Sequence[fastapi.params.Depends],None]l
 'typing.Sequence[fastapi.params.Depends]0
 fastapi.params.Depends"fastapi.params.Depends"typing.Sequence
-None *‚
-default_response_classd
+None *ˆ
+default_response_classj
 "Type[starlette.responses.Response]<
-starlette.responses.Response"starlette.responses.Response *™
+starlette.responses.Response"starlette.responses.Response"type *™
 	responses‡
 [Union[builtins.dict[Union[builtins.int,builtins.str],builtins.dict[builtins.str,Any]],None]›
 Obuiltins.dict[Union[builtins.int,builtins.str],builtins.dict[builtins.str,Any]]`
@@ -870,7 +870,7 @@ deprecatedG
 builtins.bool"builtins.bool *n
 generate_unique_id_functionK
 CallableType[builtins.function]&
-builtins.function"builtins.function *Ù
+builtins.function"builtins.function *à
 getfastapi.routing.APIRouter.get"K
 CallableType[builtins.function]&
 builtins.function"builtins.function*@
@@ -962,10 +962,10 @@ deprecatedG
 response_model_exclude_none
 builtins.bool"builtins.bool *7
 include_in_schema
-builtins.bool"builtins.bool *z
-response_classd
+builtins.bool"builtins.bool *€
+response_classj
 "Type[starlette.responses.Response]<
-starlette.responses.Response"starlette.responses.Response *P
+starlette.responses.Response"starlette.responses.Response"type *P
 nameD
 Union[builtins.str,None]
 builtins.str"builtins.str
@@ -983,7 +983,7 @@ deprecatedG
 None *n
 generate_unique_id_functionK
 CallableType[builtins.function]&
-builtins.function"builtins.function *Ù
+builtins.function"builtins.function *à
 putfastapi.routing.APIRouter.put"K
 CallableType[builtins.function]&
 builtins.function"builtins.function*@
@@ -1075,10 +1075,10 @@ deprecatedG
 response_model_exclude_none
 builtins.bool"builtins.bool *7
 include_in_schema
-builtins.bool"builtins.bool *z
-response_classd
+builtins.bool"builtins.bool *€
+response_classj
 "Type[starlette.responses.Response]<
-starlette.responses.Response"starlette.responses.Response *P
+starlette.responses.Response"starlette.responses.Response"type *P
 nameD
 Union[builtins.str,None]
 builtins.str"builtins.str
@@ -1096,7 +1096,7 @@ deprecatedG
 None *n
 generate_unique_id_functionK
 CallableType[builtins.function]&
-builtins.function"builtins.function *Û
+builtins.function"builtins.function *â
 postfastapi.routing.APIRouter.post"K
 CallableType[builtins.function]&
 builtins.function"builtins.function*@
@@ -1188,10 +1188,10 @@ deprecatedG
 response_model_exclude_none
 builtins.bool"builtins.bool *7
 include_in_schema
-builtins.bool"builtins.bool *z
-response_classd
+builtins.bool"builtins.bool *€
+response_classj
 "Type[starlette.responses.Response]<
-starlette.responses.Response"starlette.responses.Response *P
+starlette.responses.Response"starlette.responses.Response"type *P
 nameD
 Union[builtins.str,None]
 builtins.str"builtins.str
@@ -1209,7 +1209,7 @@ deprecatedG
 None *n
 generate_unique_id_functionK
 CallableType[builtins.function]&
-builtins.function"builtins.function *ß
+builtins.function"builtins.function *æ
 delete fastapi.routing.APIRouter.delete"K
 CallableType[builtins.function]&
 builtins.function"builtins.function*@
@@ -1301,10 +1301,10 @@ deprecatedG
 response_model_exclude_none
 builtins.bool"builtins.bool *7
 include_in_schema
-builtins.bool"builtins.bool *z
-response_classd
+builtins.bool"builtins.bool *€
+response_classj
 "Type[starlette.responses.Response]<
-starlette.responses.Response"starlette.responses.Response *P
+starlette.responses.Response"starlette.responses.Response"type *P
 nameD
 Union[builtins.str,None]
 builtins.str"builtins.str
@@ -1322,7 +1322,7 @@ deprecatedG
 None *n
 generate_unique_id_functionK
 CallableType[builtins.function]&
-builtins.function"builtins.function *á
+builtins.function"builtins.function *è
 options!fastapi.routing.APIRouter.options"K
 CallableType[builtins.function]&
 builtins.function"builtins.function*@
@@ -1414,10 +1414,10 @@ deprecatedG
 response_model_exclude_none
 builtins.bool"builtins.bool *7
 include_in_schema
-builtins.bool"builtins.bool *z
-response_classd
+builtins.bool"builtins.bool *€
+response_classj
 "Type[starlette.responses.Response]<
-starlette.responses.Response"starlette.responses.Response *P
+starlette.responses.Response"starlette.responses.Response"type *P
 nameD
 Union[builtins.str,None]
 builtins.str"builtins.str
@@ -1435,7 +1435,7 @@ deprecatedG
 None *n
 generate_unique_id_functionK
 CallableType[builtins.function]&
-builtins.function"builtins.function *Û
+builtins.function"builtins.function *â
 headfastapi.routing.APIRouter.head"K
 CallableType[builtins.function]&
 builtins.function"builtins.function*@
@@ -1527,10 +1527,10 @@ deprecatedG
 response_model_exclude_none
 builtins.bool"builtins.bool *7
 include_in_schema
-builtins.bool"builtins.bool *z
-response_classd
+builtins.bool"builtins.bool *€
+response_classj
 "Type[starlette.responses.Response]<
-starlette.responses.Response"starlette.responses.Response *P
+starlette.responses.Response"starlette.responses.Response"type *P
 nameD
 Union[builtins.str,None]
 builtins.str"builtins.str
@@ -1548,7 +1548,7 @@ deprecatedG
 None *n
 generate_unique_id_functionK
 CallableType[builtins.function]&
-builtins.function"builtins.function *Ý
+builtins.function"builtins.function *ä
 patchfastapi.routing.APIRouter.patch"K
 CallableType[builtins.function]&
 builtins.function"builtins.function*@
@@ -1640,10 +1640,10 @@ deprecatedG
 response_model_exclude_none
 builtins.bool"builtins.bool *7
 include_in_schema
-builtins.bool"builtins.bool *z
-response_classd
+builtins.bool"builtins.bool *€
+response_classj
 "Type[starlette.responses.Response]<
-starlette.responses.Response"starlette.responses.Response *P
+starlette.responses.Response"starlette.responses.Response"type *P
 nameD
 Union[builtins.str,None]
 builtins.str"builtins.str
@@ -1661,7 +1661,7 @@ deprecatedG
 None *n
 generate_unique_id_functionK
 CallableType[builtins.function]&
-builtins.function"builtins.function *Ý
+builtins.function"builtins.function *ä
 tracefastapi.routing.APIRouter.trace"K
 CallableType[builtins.function]&
 builtins.function"builtins.function*@
@@ -1753,10 +1753,10 @@ deprecatedG
 response_model_exclude_none
 builtins.bool"builtins.bool *7
 include_in_schema
-builtins.bool"builtins.bool *z
-response_classd
+builtins.bool"builtins.bool *€
+response_classj
 "Type[starlette.responses.Response]<
-starlette.responses.Response"starlette.responses.Response *P
+starlette.responses.Response"starlette.responses.Response"type *P
 nameD
 Union[builtins.str,None]
 builtins.str"builtins.str
@@ -1814,13 +1814,13 @@ Obuiltins.dict[Union[builtins.int,builtins.str],builtins.dict[builtins.str,Any]]
 dependency_overrides_provider7fastapi.routing.APIRouter.dependency_overrides_provider&
 Union[Any,None]
 Any
-NonerŽ
-route_class%fastapi.routing.APIRouter.route_classX
+Noner”
+route_class%fastapi.routing.APIRouter.route_class^
 Type[fastapi.routing.APIRoute]4
-fastapi.routing.APIRoute"fastapi.routing.APIRouter°
-default_response_class0fastapi.routing.APIRouter.default_response_classd
+fastapi.routing.APIRoute"fastapi.routing.APIRoute"typer¶
+default_response_class0fastapi.routing.APIRouter.default_response_classj
 "Type[starlette.responses.Response]<
-starlette.responses.Response"starlette.responses.Responser¡
+starlette.responses.Response"starlette.responses.Response"typer¡
 generate_unique_id_function5fastapi.routing.APIRouter.generate_unique_id_functionK
 CallableType[builtins.function]&
 builtins.function"builtins.function€
@@ -1895,7 +1895,7 @@ Obuiltins.dict[Union[builtins.int,builtins.str],builtins.dict[builtins.str,Any]]
 builtins.str"builtins.str
 Any"builtins.dict*0
 is_coroutine
-builtins.bool"builtins.boolHè
+builtins.bool"builtins.boolHî
 get_request_handler#fastapi.routing.get_request_handler"K
 CallableType[builtins.function]&
 builtins.function"builtins.function*]
@@ -1909,11 +1909,11 @@ body_fieldn
 status_codeD
 Union[builtins.int,None]
 builtins.int"builtins.int
-None *¬
-response_class•
-SUnion[Type[starlette.responses.Response],fastapi.datastructures.DefaultPlaceholder]d
+None *²
+response_class›
+SUnion[Type[starlette.responses.Response],fastapi.datastructures.DefaultPlaceholder]j
 "Type[starlette.responses.Response]<
-starlette.responses.Response"starlette.responses.ResponseV
+starlette.responses.Response"starlette.responses.Response"typeV
 )fastapi.datastructures.DefaultPlaceholder")fastapi.datastructures.DefaultPlaceholder *„
 response_fieldn
 &Union[pydantic.fields.ModelField,None]8

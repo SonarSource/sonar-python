@@ -1,6 +1,6 @@
 
-redis.asyncio.retryˆ
-Retryredis.asyncio.retry.Retry"builtins.object*Î
+redis.asyncio.retry”
+Retryredis.asyncio.retry.Retry"builtins.object*Ô
 __init__"redis.asyncio.retry.Retry.__init__"
 None*@
 self6
@@ -8,19 +8,19 @@
 backoff>
 redis.backoff.AbstractBackoff"redis.backoff.AbstractBackoff*)
 retries
-builtins.int"builtins.int*¿
-supported_errors¦
-1builtins.tuple[Type[redis.exceptions.RedisError]]a
+builtins.int"builtins.int*Å
+supported_errors¬
+1builtins.tuple[Type[redis.exceptions.RedisError]]g
 !Type[redis.exceptions.RedisError]:
-redis.exceptions.RedisError"redis.exceptions.RedisError"builtins.tuple z36z37z38z39z310z311*ô
+redis.exceptions.RedisError"redis.exceptions.RedisError"type"builtins.tuple z36z37z38z39z310z311*ú
 update_supported_errors1redis.asyncio.retry.Retry.update_supported_errors"
 None*@
 self6
-redis.asyncio.retry.Retry"redis.asyncio.retry.Retry*¿
-specified_errors¨
-2typing.Iterable[Type[redis.exceptions.RedisError]]a
+redis.asyncio.retry.Retry"redis.asyncio.retry.Retry*Å
+specified_errors®
+2typing.Iterable[Type[redis.exceptions.RedisError]]g
 !Type[redis.exceptions.RedisError]:
-redis.exceptions.RedisError"redis.exceptions.RedisError"typing.Iterablez36z37z38z39z310z311*ð
+redis.exceptions.RedisError"redis.exceptions.RedisError"type"typing.Iterablez36z37z38z39z310z311*ð
 call_with_retry)redis.asyncio.retry.Retry.call_with_retry"§
 0typing.Coroutine[Any,Any,redis.asyncio.retry._T]
 Any
