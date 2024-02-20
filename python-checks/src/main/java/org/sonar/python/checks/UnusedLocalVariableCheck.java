@@ -26,7 +26,6 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
-import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
@@ -131,7 +130,7 @@ public class UnusedLocalVariableCheck extends PythonSubscriptionCheck {
       return issue;
     } else if (isLoopIndex(usage, symbol)) {
       PreciseIssue issue = ctx.addIssue(usage.tree(), String.format(LOOP_INDEX_MESSAGE, symbol.name()));
-      if (isUnderscoreSymbolAlreadyAssigned(ctx, usage) == null) {
+      if (isUnderscoreSymbolAlreadyAssigned(ctx, usage)) {
         PythonQuickFix quickFix = PythonQuickFix.newQuickFix(RENAME_QUICK_FIX_MESSAGE, TextEditUtils.replace(usage.tree(), "_"));
         issue.addQuickFix(quickFix);
       }
@@ -143,19 +142,18 @@ public class UnusedLocalVariableCheck extends PythonSubscriptionCheck {
     }
   }
 
-  @Nullable
-  private static Symbol isUnderscoreSymbolAlreadyAssigned(SubscriptionContext ctx, Usage usage) {
+  private static boolean isUnderscoreSymbolAlreadyAssigned(SubscriptionContext ctx, Usage usage) {
     Symbol foundUnderscoreSymbol = null;
     Tree searchTree = usage.kind().equals(Usage.Kind.LOOP_DECLARATION) ? ctx.syntaxNode() : null;
     while (foundUnderscoreSymbol == null && searchTree != null) {
       if (searchTree.is(Kind.FUNCDEF)) {
         foundUnderscoreSymbol = ((FunctionDef) searchTree).localVariables().stream().filter(symbol1 -> "_".equals(symbol1.name())).findAny().orElse(null);
       } else if (searchTree.is(Kind.FILE_INPUT)) {
-        foundUnderscoreSymbol = ((FileInputImpl) searchTree ).globalVariables().stream().filter(symbol1 -> "_".equals(symbol1.name())).findAny().orElse(null);
+        foundUnderscoreSymbol = ((FileInputImpl) searchTree).globalVariables().stream().filter(symbol1 -> "_".equals(symbol1.name())).findAny().orElse(null);
       }
       searchTree = TreeUtils.firstAncestor(searchTree, a -> a.is(Kind.FUNCDEF, Kind.FILE_INPUT));
     }
-    return foundUnderscoreSymbol;
+    return foundUnderscoreSymbol == null;
   }
 
   private static boolean isLoopIndex(Usage usage, Symbol symbol) {
