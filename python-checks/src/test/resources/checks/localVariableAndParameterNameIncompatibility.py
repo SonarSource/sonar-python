@@ -65,3 +65,18 @@ def fun10():
     #Noncompliant@+1
     for (builderName, stepName) in foo: #Noncompliant
       pass
+
+
+def type_variables_ok(MyTypeParameter: type):
+    from collections import namedtuple
+    Person = namedtuple('Person', ['name', 'age', 'gender'])
+
+    from typing import NamedTuple
+    Employee = NamedTuple('Employee', [('name', str), ('id', int)])
+
+
+def type_variables_fp():
+    class MyClass:
+        ...
+    MyClassAlias = MyClass  # Noncompliant
+    MyTypeVariable: type = unknown_call()  # Noncompliant

@@ -26,6 +26,7 @@ import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
+import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.symbols.Symbol;
@@ -64,12 +65,20 @@ public class LocalVariableAndParameterNameConventionCheck extends PythonSubscrip
   private void checkName(Symbol symbol, SubscriptionContext ctx) {
     String name = symbol.name();
     if (!pattern.matcher(name).matches()) {
+      if (isType(symbol)) {
+        // Type variables generally adhere to class naming conventions rather than regular variable naming conventions
+        return;
+      }
       symbol.usages().stream()
         .filter(usage -> USAGES.contains(usage.kind()))
         .sorted(Comparator.comparingInt(u -> u.tree().firstToken().line()))
         .limit(1)
         .forEach(usage -> raiseIssueForNameAndUsage(ctx, name, usage));
     }
+  }
+
+  private static boolean isType(Symbol symbol) {
+    return symbol.usages().stream().map(Usage::tree).filter(Expression.class::isInstance).map(Expression.class::cast).anyMatch(e -> e.type().mustBeOrExtend("type"));
   }
 
   private void raiseIssueForNameAndUsage(SubscriptionContext ctx, String name, Usage usage) {
