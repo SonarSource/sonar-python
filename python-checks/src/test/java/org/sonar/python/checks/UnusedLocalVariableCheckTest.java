@@ -87,4 +87,74 @@ class UnusedLocalVariableCheckTest {
     PythonQuickFixVerifier.verify(check, before, after);
     PythonQuickFixVerifier.verifyQuickFixMessages(check, before, "Remove the unused local variable");
   }
+
+  @Test
+  void loopIndexQuickFixTest() {
+    var check = new UnusedLocalVariableCheck();
+
+    var before = "def loop_index():\n"
+      + "  for i in range(10):\n" +
+      "    print(\"Hello\")";
+    var after = "def loop_index():\n"
+      + "  for _ in range(10):\n" +
+      "    print(\"Hello\")";
+
+    PythonQuickFixVerifier.verify(check, before, after);
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, before, "Replace with \"_\"");
+  }
+
+  @Test
+  void loopIndexComprehensionQuickFixTest() {
+    var check = new UnusedLocalVariableCheck();
+
+    var before = "def loop_index():\n" + " return [True for i in range(10)]\n";
+    var after = "def loop_index():\n" + " return [True for _ in range(10)]\n";
+
+    PythonQuickFixVerifier.verify(check, before, after);
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, before, "Replace with \"_\"");
+  }
+
+  @Test
+  void loopQuickFixIndexAlreadyTakenTest() {
+    var check = new UnusedLocalVariableCheck();
+
+    var before = "def a():\n" +
+      "    _ = 3\n" +
+      "    for i in range(10):\n" +
+      "        ...\n" +
+      "    return _\n";
+    PythonQuickFixVerifier.verifyNoQuickFixes(check, before);
+  }
+
+  @Test
+  void loopQuickFixIndexFileLevelAlreadyTakenTest() {
+    var check = new UnusedLocalVariableCheck();
+
+    var before = "_ = 42\n" +
+      "def foo():\n" +
+      "  for i in range(5):\n" +
+      "    print(\"hello\")\n" +
+      "  print(_)\n" +
+      "foo()";
+    PythonQuickFixVerifier.verifyNoQuickFixes(check, before);
+  }
+
+  @Test
+  void loopIndexComprehensionClassQuickFixTest() {
+    var check = new UnusedLocalVariableCheck();
+
+    var before = "class A():\n" +
+      "  _ = True\n" +
+      "  def __init__(self):\n" +
+      "    for i in range(5):\n" +
+      "      print(\"print\")";
+    var after = "class A():\n" +
+      "  _ = True\n" +
+      "  def __init__(self):\n" +
+      "    for _ in range(5):\n" +
+      "      print(\"print\")";
+
+    PythonQuickFixVerifier.verify(check, before, after);
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, before, "Replace with \"_\"");
+  }
 }
