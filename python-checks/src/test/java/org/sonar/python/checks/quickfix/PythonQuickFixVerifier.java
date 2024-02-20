@@ -44,6 +44,7 @@ import org.sonar.python.tree.IPythonTreeMaker;
 import org.sonar.python.tree.PythonTreeMaker;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatCode;
 
 public class PythonQuickFixVerifier {
   private PythonQuickFixVerifier() {
@@ -96,6 +97,8 @@ public class PythonQuickFixVerifier {
       .as("The code with the quickfix applied is not the expected result.\n" +
         "\"Applied QuickFixes are:\n%s\nExpected result:\n%s", appliedQuickFix, Arrays.asList(codesFixed))
       .isEqualTo(Arrays.asList(codesFixed));
+
+    assertThatCode( () -> PythonParser.createIPythonParser().parse(String.join("\n", codesFixed))).doesNotThrowAnyException(); // We assume that any IPython code is valid Python code
   }
 
   public static void verifyNoQuickFixes(Function<String, PythonVisitorContext> createVisitorContext, PythonCheck check, String codeWithIssue) {
