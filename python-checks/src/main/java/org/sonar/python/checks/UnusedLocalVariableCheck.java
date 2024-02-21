@@ -34,6 +34,7 @@ import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.AnnotatedAssignment;
+import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.ComprehensionExpression;
 import org.sonar.plugins.python.api.tree.DictCompExpression;
 import org.sonar.plugins.python.api.tree.ExceptClause;
@@ -59,6 +60,7 @@ public class UnusedLocalVariableCheck extends PythonSubscriptionCheck {
   private static final String LOOP_INDEX_MESSAGE = "Replace the unused loop index \"%s\" with \"_\".";
   private static final String RENAME_QUICK_FIX_MESSAGE = "Replace with \"_\"";
   private static final String EXCEPT_CLAUSE_QUICK_FIX_MESSAGE = "Remove the unused local variable";
+  private static final String ASSIGNMENT_QUICK_FIX_MESSAGE = "Remove assignment target";
   private static final String SECONDARY_MESSAGE = "Assignment to unused local variable \"%s\".";
 
   @RuleProperty(
@@ -132,6 +134,15 @@ public class UnusedLocalVariableCheck extends PythonSubscriptionCheck {
       PreciseIssue issue = ctx.addIssue(usage.tree(), String.format(LOOP_INDEX_MESSAGE, symbol.name()));
       if (isUnderscoreSymbolAlreadyAssigned(ctx, usage)) {
         PythonQuickFix quickFix = PythonQuickFix.newQuickFix(RENAME_QUICK_FIX_MESSAGE, TextEditUtils.replace(usage.tree(), "_"));
+        issue.addQuickFix(quickFix);
+      }
+      return issue;
+    } else if (usage.kind().equals(Usage.Kind.ASSIGNMENT_LHS)) {
+      PreciseIssue issue = ctx.addIssue(usage.tree(), String.format(MESSAGE, symbol.name()));
+      AssignmentStatement assignmentStatement = ((AssignmentStatement) TreeUtils.firstAncestorOfKind(usage.tree(), Kind.ASSIGNMENT_STMT));
+      if (!(assignmentStatement == null || assignmentStatement.lhsExpressions().size() != 1)) {
+        PythonQuickFix quickFix = PythonQuickFix.newQuickFix(ASSIGNMENT_QUICK_FIX_MESSAGE,
+          TextEditUtils.removeUntil(usage.tree(), assignmentStatement.assignedValue().firstToken()));
         issue.addQuickFix(quickFix);
       }
       return issue;
