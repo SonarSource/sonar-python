@@ -140,7 +140,8 @@ public class UnusedLocalVariableCheck extends PythonSubscriptionCheck {
     } else if (usage.kind().equals(Usage.Kind.ASSIGNMENT_LHS)) {
       PreciseIssue issue = ctx.addIssue(usage.tree(), String.format(MESSAGE, symbol.name()));
       AssignmentStatement assignmentStatement = ((AssignmentStatement) TreeUtils.firstAncestorOfKind(usage.tree(), Kind.ASSIGNMENT_STMT));
-      if (!(assignmentStatement == null || assignmentStatement.lhsExpressions().size() != 1)) {
+      // This can only trigger if there is 1 lhs expression, the other cases are handled by isSequenceUnpacking
+      if (assignmentStatement != null) {
         PythonQuickFix quickFix = PythonQuickFix.newQuickFix(ASSIGNMENT_QUICK_FIX_MESSAGE,
           TextEditUtils.removeUntil(usage.tree(), assignmentStatement.assignedValue().firstToken()));
         issue.addQuickFix(quickFix);
