@@ -39,10 +39,13 @@ import org.sonar.plugins.python.api.tree.BinaryExpression;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.ConditionalExpression;
+import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
+import org.sonar.plugins.python.api.tree.Statement;
+import org.sonar.plugins.python.api.tree.StatementList;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
@@ -89,7 +92,7 @@ public class UselessStatementCheck extends PythonSubscriptionCheck {
 
   private static final List<Kind> unaryExpressionKinds = Arrays.asList(Kind.UNARY_PLUS, Kind.UNARY_MINUS, Kind.BITWISE_COMPLEMENT, Kind.NOT);
 
-  private static final Set<String> ignoredContexts = new HashSet<>(Arrays.asList("contextlib.suppress", "airflow.DAG"));
+  private static final Set<String> ignoredContexts = new HashSet<>(List.of("contextlib.suppress"));
 
   private static final String MESSAGE = "Remove or refactor this statement; it has no side effects.";
 
@@ -123,7 +126,25 @@ public class UselessStatementCheck extends PythonSubscriptionCheck {
     if (isWithinIgnoredContext(tree)) {
       return;
     }
+    if (isAnAirflowException(tree)) {
+      return;
+    }
     ctx.addIssue(tree, MESSAGE);
+  }
+
+  private static boolean isAnAirflowException(Tree tree) {
+    if (isWithinAirflowContext(tree) && tree instanceof Expression && ((Expression) tree).type().canBeOrExtend("airflow.models.baseoperator.BaseOperator")) {
+      StatementList statementList = (StatementList) TreeUtils.firstAncestorOfKind(tree, Kind.STATEMENT_LIST);
+      if (statementList != null) {
+        List<Statement> statements = statementList.statements();
+        if (statements != null) {
+          var lastStatementOfBlock = statements.get(statementList.statements().size() - 1);
+          var currentStatement = TreeUtils.firstAncestorOfKind(tree, Kind.EXPRESSION_STMT);
+          return lastStatementOfBlock.equals(currentStatement);
+        }
+      }
+    }
+    return false;
   }
 
   private static boolean isWithinIgnoredContext(Tree tree) {
@@ -138,6 +159,25 @@ public class UselessStatementCheck extends PythonSubscriptionCheck {
         .anyMatch(s -> ignoredContexts.contains(s.fullyQualifiedName()));
     }
     return false;
+  }
+
+  private static boolean isWithinAirflowContext(Tree tree) {
+    Tree withParent = TreeUtils.firstAncestorOfKind(tree, Kind.WITH_STMT);
+    while (withParent != null) {
+      WithStatement withStatement = (WithStatement) withParent;
+      if (withStatement.withItems().stream()
+        .map(WithItem::test)
+        .filter(item -> item.is(Kind.CALL_EXPR))
+        .map(item -> ((CallExpression) item).calleeSymbol())
+        .filter(Objects::nonNull)
+        .anyMatch(s -> "airflow.DAG".equals(s.fullyQualifiedName()))) {
+        return true;
+      }
+      withParent = TreeUtils.firstAncestorOfKind(withParent, Kind.WITH_STMT);
+    }
+    FunctionDef funcParent = (FunctionDef) TreeUtils.firstAncestorOfKind(tree, Kind.FUNCDEF);
+    return funcParent != null && funcParent.decorators().stream().map(deco -> TreeUtils.getSymbolFromTree(deco.expression())).filter(Optional::isPresent)
+      .anyMatch(symbol -> "airflow.decorators.dag".equals(symbol.get().fullyQualifiedName()));
   }
 
   private static boolean isBooleanExpressionWithCalls(Tree tree) {

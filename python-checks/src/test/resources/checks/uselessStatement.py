@@ -149,7 +149,7 @@ def airflow_ignore_context_false_negative():
         ping = HttpOperator(endpoint="http://example.com/update/")
         download = HttpOperator(endpoint="http://example.com/download/")
         upload = HttpOperator(endpoint="http://example.com/upload/")
-        ping # FN because we suppress the rule in the with statement
+        ping # Noncompliant
         download >> upload
 
 from airflow.decorators import dag
@@ -157,5 +157,22 @@ from airflow.decorators import dag
 @dag
 def airflow_decorator_dag():
     ping = HttpOperator(endpoint="http://example.com/update/")
-    # This is a false positive because we don't handle the @dag decorator
+    ping
+
+@dag
+def airflow_decorator_multiple_statements():
+    ping = HttpOperator(endpoint="http://example.com/update/")
+    download = HttpOperator(endpoint="http://example.com/download/")
+    upload = HttpOperator(endpoint="http://example.com/upload/")
+    download >> upload
     ping # Noncompliant
+    ping >> upload
+
+def airflow_nested_with():
+    with DAG("my-dag"):
+        with open("some_file.txt") as file:
+            ping = HttpOperator(endpoint="http://example.com/update/")
+            download = HttpOperator(endpoint="http://example.com/download/")
+            upload = HttpOperator(endpoint="http://example.com/upload/")
+            ping # Noncompliant
+            download >> upload
