@@ -176,3 +176,9 @@ def airflow_nested_with():
             upload = HttpOperator(endpoint="http://example.com/upload/")
             ping # Noncompliant
             download >> upload
+
+@dag
+def airflow_decorator_no_dag():
+    x = 3
+    x # Noncompliant
+    return x

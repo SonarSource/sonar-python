@@ -44,7 +44,6 @@ import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
-import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.plugins.python.api.tree.StatementList;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Token;
@@ -126,23 +125,18 @@ public class UselessStatementCheck extends PythonSubscriptionCheck {
     if (isWithinIgnoredContext(tree)) {
       return;
     }
-    if (isAnAirflowException(tree)) {
+    // Safe cast because the rule only subscribes to expressions
+    if (isAnAirflowException((Expression) tree)) {
       return;
     }
     ctx.addIssue(tree, MESSAGE);
   }
 
-  private static boolean isAnAirflowException(Tree tree) {
-    if (isWithinAirflowContext(tree) && tree instanceof Expression && ((Expression) tree).type().canBeOrExtend("airflow.models.baseoperator.BaseOperator")) {
-      StatementList statementList = (StatementList) TreeUtils.firstAncestorOfKind(tree, Kind.STATEMENT_LIST);
-      if (statementList != null) {
-        List<Statement> statements = statementList.statements();
-        if (statements != null) {
-          var lastStatementOfBlock = statements.get(statementList.statements().size() - 1);
-          var currentStatement = TreeUtils.firstAncestorOfKind(tree, Kind.EXPRESSION_STMT);
-          return lastStatementOfBlock.equals(currentStatement);
-        }
-      }
+  private static boolean isAnAirflowException(Expression expression) {
+    if (isWithinAirflowContext(expression) && expression.type().canBeOrExtend("airflow.models.baseoperator.BaseOperator")) {
+      StatementList statementList = (StatementList) TreeUtils.firstAncestorOfKind(expression, Kind.STATEMENT_LIST);
+      return Optional.ofNullable(statementList).map(StatementList::statements).map(statements -> statements.get(statements.size() - 1))
+        .filter(lastStatement -> lastStatement.equals(TreeUtils.firstAncestorOfKind(expression, Kind.EXPRESSION_STMT))).isPresent();
     }
     return false;
   }
