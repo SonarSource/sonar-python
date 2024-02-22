@@ -53,3 +53,17 @@ def type_given_by_except_clause():
         raise MyException() from e
     except (NotAnException, str) as e:
         raise MyException() from e # FN
+
+
+def except_from_exception_type():
+    try:
+        foo()
+    except ValueError:
+        raise ValueError("Caught some value error") from ValueError
+
+    class SomeClass:
+        ...
+    try:
+        foo()
+    except ValueError:
+        raise ValueError("Caught some value error") from SomeClass  # FN SONARPY-1666

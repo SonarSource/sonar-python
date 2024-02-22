@@ -71,7 +71,7 @@ def collections():
 
   my_set_nok: Set = {}  # Noncompliant {{Assign to "my_set_nok" a value of type "set" instead of "dict" or update its type hint.}}
 
-  my_set_nok2: Set = set  # Noncompliant  {{Assign to "my_set_nok2" a value of type "set" or update its type hint.}}
+  my_set_nok2: Set = set  # Noncompliant  {{Assign to "my_set_nok2" a value of type "set" instead of "type" or update its type hint.}}
 
   my_set_ok: Set = set()  # OK
 
@@ -103,7 +103,7 @@ class MyClassWithMeta(metaclass=Meta): ...
 def metaclasses():
   my_var: Meta = set # Accepted FN
   my_other_var: Meta = MyClassWithMeta  # OK
-  my_other_var: MyClassWithMeta = MyClassWithMeta  # Noncompliant {{Assign to "my_other_var" a value of type "MyClassWithMeta" or update its type hint.}}
+  my_other_var: MyClassWithMeta = MyClassWithMeta  # Noncompliant {{Assign to "my_other_var" a value of type "MyClassWithMeta" instead of "type" or update its type hint.}}
   another_var: Type = MyClassWithMeta
   another_var: Type = set
   def a_function(): ...

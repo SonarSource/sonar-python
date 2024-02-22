@@ -78,5 +78,5 @@ def type_variables_ok(MyTypeParameter: type):
 def type_variables_fp():
     class MyClass:
         ...
-    MyClassAlias = MyClass  # Noncompliant
+    MyClassAlias = MyClass  # OK
     MyTypeVariable: type = unknown_call()  # Noncompliant

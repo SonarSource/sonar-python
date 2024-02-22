@@ -180,3 +180,12 @@ def mocks():
 
     def custom_mock():
         del ExtendedMock()[42]
+
+
+class SomeClass:
+    ...
+
+def get_state_fp():
+    some_class = SomeClass()
+    state = SomeClass.__getstate__(some_class)  # __getstate__ usually returns a dict but is annotated to return 'object' in Typeshed
+    del state["foo"]  # Noncompliant
