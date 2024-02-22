@@ -103,7 +103,7 @@ public class InferredTypes {
 
   static {
     HARDCODED_COMPATIBLE_TYPES.put(BuiltinTypes.INT, new HashSet<>(Arrays.asList(BuiltinTypes.FLOAT, BuiltinTypes.COMPLEX, BuiltinTypes.BOOL)));
-    HARDCODED_COMPATIBLE_TYPES.put(BuiltinTypes.FLOAT, new HashSet<>(List.of(BuiltinTypes.COMPLEX, BuiltinTypes.BOOL)));
+    HARDCODED_COMPATIBLE_TYPES.put(BuiltinTypes.FLOAT, new HashSet<>(List.of(BuiltinTypes.COMPLEX)));
     HARDCODED_COMPATIBLE_TYPES.put(BuiltinTypes.BOOL, new HashSet<>(List.of(BuiltinTypes.FLOAT)));
     HARDCODED_COMPATIBLE_TYPES.put("bytearray", new HashSet<>(Arrays.asList(BYTES, BuiltinTypes.STR, UNICODE)));
     HARDCODED_COMPATIBLE_TYPES.put("memoryview", new HashSet<>(Arrays.asList(BYTES, BuiltinTypes.STR, UNICODE)));
