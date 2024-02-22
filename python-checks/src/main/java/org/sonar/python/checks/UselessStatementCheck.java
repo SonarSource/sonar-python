@@ -133,7 +133,7 @@ public class UselessStatementCheck extends PythonSubscriptionCheck {
   }
 
   private static boolean isAnAirflowException(Expression expression) {
-    if (isWithinAirflowContext(expression) && expression.type().canBeOrExtend("airflow.models.baseoperator.BaseOperator")) {
+    if (isWithinAirflowContext(expression)) {
       StatementList statementList = (StatementList) TreeUtils.firstAncestorOfKind(expression, Kind.STATEMENT_LIST);
       return Optional.ofNullable(statementList).map(StatementList::statements).map(statements -> statements.get(statements.size() - 1))
         .filter(lastStatement -> lastStatement.equals(TreeUtils.firstAncestorOfKind(expression, Kind.EXPRESSION_STMT))).isPresent();

@@ -182,3 +182,10 @@ def airflow_decorator_no_dag():
     x = 3
     x # Noncompliant
     return x
+
+def airflow_ignore_context_not_operator():
+    with DAG("my-dag"):
+        some_var = True
+        some_other_var = True
+        some_var # Noncompliant
+        some_other_var
