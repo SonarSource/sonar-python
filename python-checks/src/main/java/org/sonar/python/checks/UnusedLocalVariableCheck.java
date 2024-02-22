@@ -43,7 +43,6 @@ import org.sonar.plugins.python.api.tree.ForStatement;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Statement;
-import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.python.checks.utils.CheckUtils;
@@ -139,35 +138,31 @@ public class UnusedLocalVariableCheck extends PythonSubscriptionCheck {
         issue.addQuickFix(quickFix);
       }
       return issue;
-    } else if (usage.kind().equals(Usage.Kind.ASSIGNMENT_LHS)) {
-      PreciseIssue issue = ctx.addIssue(usage.tree(), String.format(MESSAGE, symbol.name()));
-
-      Statement assignmentStatement = ((Statement) TreeUtils.firstAncestorOfKind(usage.tree(), Kind.ASSIGNMENT_STMT, Kind.ANNOTATED_ASSIGNMENT));
-
-      // This can only trigger if there is 1 assigned variable in the same statement, the other cases are handled by isSequenceUnpacking
-
-      Optional.ofNullable(assignmentStatement).ifPresent(stmt -> createAssignmentQuickFix(usage, stmt, issue));
-      return issue;
     } else {
       var issue = ctx.addIssue(usage.tree(), String.format(MESSAGE, symbol.name()));
       createExceptClauseQuickFix(usage, issue);
+      createAssignmentQuickFix(usage, issue);
       return issue;
     }
   }
 
-  private static void createAssignmentQuickFix(Usage usage, Statement assignmentStatement, PreciseIssue issue) {
-    Token lastQuickFixToken;
-    if (assignmentStatement.is(Kind.ASSIGNMENT_STMT)) {
-      lastQuickFixToken = ((AssignmentStatement) assignmentStatement).assignedValue().firstToken();
-    } else {
-      var assignedValue = ((AnnotatedAssignment) assignmentStatement).assignedValue();
-      // This is an assignment, so it can't be null
-      assert assignedValue != null;
-      lastQuickFixToken = assignedValue.firstToken();
+  private static void createAssignmentQuickFix(Usage usage, PreciseIssue issue) {
+    if (usage.kind().equals(Usage.Kind.ASSIGNMENT_LHS)) {
+      Statement assignmentStatement = ((Statement) TreeUtils.firstAncestorOfKind(usage.tree(), Kind.ASSIGNMENT_STMT, Kind.ANNOTATED_ASSIGNMENT));
+
+      Optional.ofNullable(assignmentStatement).filter(stmt -> stmt.is(Kind.ASSIGNMENT_STMT)).map(AssignmentStatement.class::cast).ifPresent(stmt -> {
+        PythonQuickFix quickFix = PythonQuickFix.newQuickFix(ASSIGNMENT_QUICK_FIX_MESSAGE,
+          TextEditUtils.removeUntil(usage.tree(), stmt.assignedValue().firstToken()));
+        issue.addQuickFix(quickFix);
+      });
+
+      Optional.ofNullable(assignmentStatement).filter(stmt -> stmt.is(Kind.ANNOTATED_ASSIGNMENT)).map(AnnotatedAssignment.class::cast)
+        .map(AnnotatedAssignment::assignedValue).ifPresent(stmt -> {
+          PythonQuickFix quickFix = PythonQuickFix.newQuickFix(ASSIGNMENT_QUICK_FIX_MESSAGE,
+            TextEditUtils.removeUntil(usage.tree(), stmt.firstToken()));
+          issue.addQuickFix(quickFix);
+        });
     }
-    PythonQuickFix quickFix = PythonQuickFix.newQuickFix(ASSIGNMENT_QUICK_FIX_MESSAGE,
-      TextEditUtils.removeUntil(usage.tree(), lastQuickFixToken));
-    issue.addQuickFix(quickFix);
   }
 
   private static boolean isUnderscoreSymbolAlreadyAssigned(SubscriptionContext ctx, Usage usage) {
