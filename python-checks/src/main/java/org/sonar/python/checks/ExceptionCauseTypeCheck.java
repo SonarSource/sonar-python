@@ -63,6 +63,10 @@ public class ExceptionCauseTypeCheck extends PythonSubscriptionCheck {
       return;
     }
     InferredType causeType = cause.type();
+    if (causeType.canOnlyBe("type")) {
+      // SONARPY-1666: Here we should only exclude type objects that represent Exception types
+      return;
+    }
     // TODO remove the test against str once type inference knows the complete hierarchy of str
     if ((!causeType.canBeOrExtend(BASE_EXCEPTION) && !causeType.canOnlyBe(NONE_TYPE)) || causeType.canOnlyBe(STR)) {
       ctx.addIssue(cause, "Replace this expression with an exception or None");

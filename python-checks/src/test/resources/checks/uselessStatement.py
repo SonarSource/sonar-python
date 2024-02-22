@@ -94,7 +94,7 @@ def accessing_members(param):
     MyClass.my_property # OK, properties might involve lazy loading
     MyClass.class_method  # Noncompliant
     MyClass.static_method  # Noncompliant
-    MyClass.__eq__  # FN
+    MyClass.__eq__  # Noncompliant
     instance = MyClass()
     instance.attr # FN
     instance.my_property # OK

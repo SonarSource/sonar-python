@@ -99,8 +99,13 @@ public class NameImpl extends PyTree implements Name {
 
   @Override
   public InferredType type() {
-    if (symbol != null && isBooleanBuiltinSymbol()) {
-      return InferredTypes.BOOL;
+    if (symbol != null) {
+      if (isBooleanBuiltinSymbol()) {
+        return InferredTypes.BOOL;
+      }
+      if (symbol.kind() == Symbol.Kind.CLASS) {
+        return InferredTypes.TYPE;
+      }
     }
     return inferredType;
   }

@@ -58,6 +58,7 @@ import static org.sonar.python.types.InferredTypes.NONE;
 import static org.sonar.python.types.InferredTypes.SET;
 import static org.sonar.python.types.InferredTypes.STR;
 import static org.sonar.python.types.InferredTypes.TUPLE;
+import static org.sonar.python.types.InferredTypes.TYPE;
 import static org.sonar.python.types.InferredTypes.anyType;
 import static org.sonar.python.types.InferredTypes.or;
 import static org.sonar.python.types.InferredTypes.runtimeType;
@@ -807,7 +808,7 @@ class TypeInferenceTest {
       "class OtherClass:",
       "  ...");
     Name name = (Name) decorator.expression();
-    assertThat(name.type()).isEqualTo(anyType());
+    assertThat(name.type()).isEqualTo(TYPE);
     assertThat(name.symbol().fullyQualifiedName()).isEqualTo("some_package.some_module.A");
   }
 

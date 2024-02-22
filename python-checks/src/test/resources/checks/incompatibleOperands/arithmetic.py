@@ -106,3 +106,15 @@ def mocks():
   def custom_mock():
     ExtendedMock() + 1
     -ExtendedMock()
+
+
+def type_symbols():
+    import ctypes
+    class SomeCtypeClass(ctypes.Structure):
+        ...
+    x = SomeCtypeClass * 42  # OK
+    x = 42 * SomeCtypeClass  # OK
+    y = ctypes.c_int32 * 2  # OK
+    class RandomClass:
+        ...
+    z = RandomClass * 42 # FN

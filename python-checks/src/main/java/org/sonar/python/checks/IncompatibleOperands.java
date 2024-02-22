@@ -104,6 +104,10 @@ public abstract class IncompatibleOperands extends PythonSubscriptionCheck {
     public void visitBinaryExpression(BinaryExpression binaryExpression) {
       InferredType leftType = binaryExpression.leftOperand().type();
       InferredType rightType = binaryExpression.rightOperand().type();
+      if (leftType.canOnlyBe("type") || rightType.canOnlyBe("type")) {
+        // SONARPY-1666 We should only exclude types that represent ctypes
+        return;
+      }
       checkOperands(binaryExpression.operator(), leftType, rightType);
       super.visitBinaryExpression(binaryExpression);
     }
