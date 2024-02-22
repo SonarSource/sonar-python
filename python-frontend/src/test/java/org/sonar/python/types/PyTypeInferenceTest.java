@@ -31,7 +31,6 @@ import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.semantic.SymbolTableBuilder;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.sonar.python.PythonTestUtils.lastExpression;
 import static org.sonar.python.PythonTestUtils.pythonFile;
 
@@ -294,8 +293,8 @@ class PyTypeInferenceTest {
     ExpressionStatement expressionStatement = ((ExpressionStatement) fileInput.statements().statements().get(2));
     InferredType inferredType = expressionStatement.expressions().get(0).type();
     // assertThat(inferredType.resolveMember("set_tunnel")).isPresent(); // This fails at this point. It should be fixed.
-    assertEquals("HTTPConnection", inferredType.runtimeTypeSymbol().name());
-    assertEquals("http.client.HTTPConnection", inferredType.runtimeTypeSymbol().fullyQualifiedName());
+    assertThat(inferredType.runtimeTypeSymbol().name()).isEqualTo("HTTPConnection");
+    assertThat(inferredType.runtimeTypeSymbol().fullyQualifiedName()).isEqualTo("http.client.HTTPConnection");
   }
 
   @Test
@@ -345,8 +344,9 @@ class PyTypeInferenceTest {
     ExpressionStatement expressionStatement = ((ExpressionStatement) fileInput.statements().statements().get(2));
     InferredType inferredType = expressionStatement.expressions().get(0).type();
     // assertThat(inferredType.resolveMember("set_tunnel")).isPresent();
-    assertEquals("HTTPConnection", inferredType.runtimeTypeSymbol().name());
-    assertEquals("http.client.HTTPConnection", inferredType.runtimeTypeSymbol().fullyQualifiedName());
+    assertThat(inferredType.runtimeTypeSymbol().name()).isEqualTo("HTTPConnection");
+    assertThat(inferredType.runtimeTypeSymbol().fullyQualifiedName()).isEqualTo("http.client.HTTPConnection");
+
   }
 
   @Test
@@ -404,8 +404,8 @@ class PyTypeInferenceTest {
     ExpressionStatement expressionStatement = ((ExpressionStatement) fileInput.statements().statements().get(2));
     InferredType inferredType = expressionStatement.expressions().get(0).type();
     // assertThat(inferredType.resolveMember("set_tunnel")).isPresent(); // This fails at this point. It should be fixed.
-    assertEquals("HTTPConnection", inferredType.runtimeTypeSymbol().name());
-    assertEquals("http.client.HTTPConnection", inferredType.runtimeTypeSymbol().fullyQualifiedName());
+    assertThat(inferredType.runtimeTypeSymbol().name()).isEqualTo("HTTPConnection");
+    assertThat(inferredType.runtimeTypeSymbol().fullyQualifiedName()).isEqualTo("http.client.HTTPConnection");
   }
 
   @Test
@@ -598,6 +598,76 @@ class PyTypeInferenceTest {
       "    license=\"Apache License 2.0\",",
       "    packages=find_packages(exclude=(\"*test*\",)),",
       ")");
+
+  }
+
+  @Test
+  void test_optional_type() {
+    TypeContext typeContext = TypeContext.fromJSON("{\n" +
+      "  \"mod1.py\": [\n" +
+      "    {\n" +
+      "      \"text\": \"func\",\n" +
+      "      \"start_line\": 1,\n" +
+      "      \"start_col\": 0,\n" +
+      "      \"syntax_role\": \"Function\",\n" +
+      "      \"type\": \"CallableType(base_type=ClassType(typing.Callable), parameters=(AnythingType(), AnythingType()))\",\n" +
+      "      \"short_type\": \"Callable[[Any], Any]\"\n" +
+      "    },\n" +
+      "    {\n" +
+      "      \"text\": \"x\",\n" +
+      "      \"start_line\": 2,\n" +
+      "      \"start_col\": 7,\n" +
+      "      \"syntax_role\": \"Variable\",\n" +
+      "      \"type\": \"AnythingType()\",\n" +
+      "      \"short_type\": \"Any\"\n" +
+      "    },\n" +
+      "    {\n" +
+      "      \"text\": \"value\",\n" +
+      "      \"start_line\": 6,\n" +
+      "      \"start_col\": 4,\n" +
+      "      \"syntax_role\": \"Variable\",\n" +
+      "      \"type\": \"UnionType(type_list=(ClassType(builtins.NoneType), ClassType(builtins.int)))\",\n" +
+      "      \"short_type\": \"Optional[int]\"\n" +
+      "    },\n" +
+      "    {\n" +
+      "      \"text\": \"value\",\n" +
+      "      \"start_line\": 3,\n" +
+      "      \"start_col\": 8,\n" +
+      "      \"syntax_role\": \"Variable\",\n" +
+      "      \"type\": \"builtins.int\",\n" +
+      "      \"short_type\": \"int\"\n" +
+      "    },\n" +
+      "    {\n" +
+      "      \"text\": \"value\",\n" +
+      "      \"start_line\": 5,\n" +
+      "      \"start_col\": 8,\n" +
+      "      \"syntax_role\": \"Variable\",\n" +
+      "      \"type\": \"builtins.NoneType\",\n" +
+      "      \"short_type\": \"None\"\n" +
+      "    },\n" +
+      "    {\n" +
+      "      \"text\": \"int\",\n" +
+      "      \"start_line\": 3,\n" +
+      "      \"start_col\": 16,\n" +
+      "      \"syntax_role\": \"Variable\",\n" +
+      "      \"type\": \"GenericType(base_type=ClassType(builtins.type), parameters=(ClassType(builtins.int),))\",\n" +
+      "      \"short_type\": \"Type[int]\"\n" +
+      "    }\n" +
+      "  ]\n" +
+      "}");
+
+    FileInput fileInput = getFileInputFromLines(typeContext, "def func(x):",
+      "    if x:",
+      "        value = int(\"42\")",
+      "    else:",
+      "        value = None",
+      "    value");
+  }
+
+  @Test
+  void test_template() {
+    TypeContext typeContext = TypeContext.fromJSON("{}");
+    FileInput fileInput = getFileInputFromLines(typeContext, "");
 
   }
 

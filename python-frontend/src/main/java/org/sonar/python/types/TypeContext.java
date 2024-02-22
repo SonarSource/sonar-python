@@ -26,6 +26,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
+import org.antlr.v4.runtime.RecognitionException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.plugins.python.api.symbols.Symbol;
@@ -150,6 +151,18 @@ public class TypeContext {
       }
     }
     // workaround until Typeshed is fixed
+    try {
+      return PyTypeTypeGrammar.getTypeFromString(detailedType);
+    } catch (RecognitionException e) {
+      LOG.error("");
+      LOG.error(e.toString());
+      LOG.error(detailedType);
+      LOG.error("");
+    }
+    return getInferredTypeWithoutParsing(typeString, detailedType, fileName);
+  }
+
+  private static InferredType getInferredTypeWithoutParsing(String typeString, String detailedType, String fileName) {
     if (detailedType.startsWith(CALLABLE_TYPE_CALLABLE)
       || detailedType.startsWith(GENERIC_TYPE_CALLABLE)) {
       return new RuntimeType(CALLABLE_CLASS_SYMBOL);
