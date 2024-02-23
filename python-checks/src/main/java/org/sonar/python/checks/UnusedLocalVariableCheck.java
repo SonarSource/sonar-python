@@ -157,9 +157,9 @@ public class UnusedLocalVariableCheck extends PythonSubscriptionCheck {
       });
 
       Optional.ofNullable(assignmentStatement).filter(stmt -> stmt.is(Kind.ANNOTATED_ASSIGNMENT)).map(AnnotatedAssignment.class::cast)
-        .map(AnnotatedAssignment::assignedValue).ifPresent(stmt -> {
+        .map(AnnotatedAssignment::assignedValue).ifPresent(assignedValue -> {
           PythonQuickFix quickFix = PythonQuickFix.newQuickFix(ASSIGNMENT_QUICK_FIX_MESSAGE,
-            TextEditUtils.removeUntil(usage.tree(), stmt.firstToken()));
+            TextEditUtils.removeUntil(usage.tree(), assignedValue.firstToken()));
           issue.addQuickFix(quickFix);
         });
     }

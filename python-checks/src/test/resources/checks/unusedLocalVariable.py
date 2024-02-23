@@ -158,3 +158,6 @@ def global_variable_modified():
     global _
     for i in range(10): # Noncompliant
         ...
+def annotated_assignment_null_value():
+    value: str # Noncompliant
+    value = "hello"

@@ -176,7 +176,7 @@ class UnusedLocalVariableCheckTest {
   }
 
   @Test
-  void multipleAssignmentNoQuickFixTest() {
+  void multipleAssignmentQuickFixTest() {
     var check = new UnusedLocalVariableCheck();
 
     var before = "def foo():\n" +
@@ -203,5 +203,17 @@ class UnusedLocalVariableCheckTest {
 
     PythonQuickFixVerifier.verify(check, before, after);
     PythonQuickFixVerifier.verifyQuickFixMessages(check, before, "Remove assignment target");
+  }
+
+  @Test
+  void typeAnnotationSeparateDeclarationAssignmentNoQuickFixTest() {
+    var check = new UnusedLocalVariableCheck();
+
+    var before = "def foo():\n" +
+      "  value: str \n" +
+      "  value = \"Hello\"\n" +
+      "  return [int(value) for value in something()]";
+
+    PythonQuickFixVerifier.verifyNoQuickFixes(check, before);
   }
 }
