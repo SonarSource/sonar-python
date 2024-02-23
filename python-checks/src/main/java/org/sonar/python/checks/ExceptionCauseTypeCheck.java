@@ -63,7 +63,7 @@ public class ExceptionCauseTypeCheck extends PythonSubscriptionCheck {
       return;
     }
     InferredType causeType = cause.type();
-    if (causeType.canOnlyBe("type")) {
+    if (causeType.canBeOrExtend("type")) {
       // SONARPY-1666: Here we should only exclude type objects that represent Exception types
       return;
     }

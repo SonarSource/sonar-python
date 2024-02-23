@@ -153,3 +153,12 @@ def no_fp_on_nonlocal_variables(x):
     do_something()
     if exception:
         raise exception
+
+
+def reassigned_exception():
+    my_exception = None
+    my_exception = ValueError
+    try:
+        ...
+    except my_exception:
+        raise my_exception

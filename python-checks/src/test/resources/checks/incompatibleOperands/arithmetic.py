@@ -118,3 +118,13 @@ def type_symbols():
     class RandomClass:
         ...
     z = RandomClass * 42 # FN
+
+
+def type_symbols_try_except():
+    import ctypes
+    some_variable = None
+    some_variable = ctypes.c_int32
+    try:
+        x = some_variable * 42  # OK
+    except:
+        x = some_variable * 42  # OK
