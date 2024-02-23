@@ -256,3 +256,14 @@ def boolean_compatible_with_float() -> None:
   takes_boolean(1.0) # Noncompliant
   takes_int(True)
   takes_boolean(42) # FN
+
+
+def no_fp_on_enum_types():
+    from enum import Enum
+
+    class EnumA(Enum):
+        A = 1
+        B = 2
+        C = 3
+
+    len(EnumA)

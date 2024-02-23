@@ -197,6 +197,6 @@ public class ArgumentTypeCheck extends PythonSubscriptionCheck {
   }
 
   private static boolean isException(InferredType inferredType) {
-    return inferredType.canBeOrExtend("unittest.mock.Mock");
+    return inferredType.canBeOrExtend("unittest.mock.Mock") || inferredType.canBeOrExtend("type");
   }
 }

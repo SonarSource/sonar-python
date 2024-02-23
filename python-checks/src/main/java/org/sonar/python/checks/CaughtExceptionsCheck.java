@@ -121,7 +121,7 @@ public class CaughtExceptionsCheck extends PythonSubscriptionCheck {
       // avoid FP on variables holding a tuple: SONARPY-713
       return true;
     }
-    if (type.canOnlyBe("type")) {
+    if (type.canBeOrExtend("type")) {
       // SONARPY-1666: Here we should only exclude type objects that represent Exception types
       return true;
     }
