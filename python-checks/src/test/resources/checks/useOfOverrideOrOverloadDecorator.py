@@ -1,6 +1,6 @@
 from typing import Any
 
-class Class(UnknownParent):
+class ClassUsingUnknownOverloadSymbols(UnknownParent):
     @overload
     def addItem(self, data: Any = ...) -> None:
         ...
@@ -11,7 +11,8 @@ class Class(UnknownParent):
 
 from reexport_typing_overload_override import reexported_override, reexported_overload
 
-class ClassWithReExports(UnknownParent):
+class ClassWithReExportsFP(UnknownParent):
+    # The 2 methods are FPs : see SONARPY-1673
     @reexported_override
     def addItem(self, data: Any = ...) -> None: # Noncompliant
         ...
