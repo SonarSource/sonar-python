@@ -157,4 +157,63 @@ class UnusedLocalVariableCheckTest {
     PythonQuickFixVerifier.verify(check, before, after);
     PythonQuickFixVerifier.verifyQuickFixMessages(check, before, "Replace with \"_\"");
   }
+
+  @Test
+  void assignmentQuickFixTest() {
+    var check = new UnusedLocalVariableCheck();
+
+    var before = "def foo():\n" +
+      "  x = bar()\n" +
+      "  y = True\n" +
+      "  return y";
+    var after = "def foo():\n" +
+      "  bar()\n" +
+      "  y = True\n" +
+      "  return y";
+
+    PythonQuickFixVerifier.verify(check, before, after);
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, before, "Remove assignment target");
+  }
+
+  @Test
+  void multipleAssignmentQuickFixTest() {
+    var check = new UnusedLocalVariableCheck();
+
+    var before = "def foo():\n" +
+      "  x, y, z = bar(), True, False\n" +
+      "  return y, z";
+    var after = "def foo():\n" +
+      "  _, y, z = bar(), True, False\n" +
+      "  return y, z";
+
+    PythonQuickFixVerifier.verify(check, before, after);
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, before, "Replace with \"_\"");
+  }
+
+  @Test
+  void typeAnnotationQuickFixTest() {
+    var check = new UnusedLocalVariableCheck();
+
+    var before = "def foo():\n" +
+      "  value: str = \"hello\"\n" +
+      "  return [int(value) for value in something()]";
+    var after = "def foo():\n" +
+      "  \"hello\"\n" +
+      "  return [int(value) for value in something()]";
+
+    PythonQuickFixVerifier.verify(check, before, after);
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, before, "Remove assignment target");
+  }
+
+  @Test
+  void typeAnnotationSeparateDeclarationAssignmentNoQuickFixTest() {
+    var check = new UnusedLocalVariableCheck();
+
+    var before = "def foo():\n" +
+      "  value: str \n" +
+      "  value = \"Hello\"\n" +
+      "  return [int(value) for value in something()]";
+
+    PythonQuickFixVerifier.verifyNoQuickFixes(check, before);
+  }
 }

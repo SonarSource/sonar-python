@@ -34,6 +34,7 @@ import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.AnnotatedAssignment;
+import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.ComprehensionExpression;
 import org.sonar.plugins.python.api.tree.DictCompExpression;
 import org.sonar.plugins.python.api.tree.ExceptClause;
@@ -41,6 +42,7 @@ import org.sonar.plugins.python.api.tree.ExpressionList;
 import org.sonar.plugins.python.api.tree.ForStatement;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.python.checks.utils.CheckUtils;
@@ -59,6 +61,7 @@ public class UnusedLocalVariableCheck extends PythonSubscriptionCheck {
   private static final String LOOP_INDEX_MESSAGE = "Replace the unused loop index \"%s\" with \"_\".";
   private static final String RENAME_QUICK_FIX_MESSAGE = "Replace with \"_\"";
   private static final String EXCEPT_CLAUSE_QUICK_FIX_MESSAGE = "Remove the unused local variable";
+  private static final String ASSIGNMENT_QUICK_FIX_MESSAGE = "Remove assignment target";
   private static final String SECONDARY_MESSAGE = "Assignment to unused local variable \"%s\".";
 
   @RuleProperty(
@@ -138,7 +141,27 @@ public class UnusedLocalVariableCheck extends PythonSubscriptionCheck {
     } else {
       var issue = ctx.addIssue(usage.tree(), String.format(MESSAGE, symbol.name()));
       createExceptClauseQuickFix(usage, issue);
+      createAssignmentQuickFix(usage, issue);
       return issue;
+    }
+  }
+
+  private static void createAssignmentQuickFix(Usage usage, PreciseIssue issue) {
+    if (usage.kind().equals(Usage.Kind.ASSIGNMENT_LHS)) {
+      Statement assignmentStatement = ((Statement) TreeUtils.firstAncestorOfKind(usage.tree(), Kind.ASSIGNMENT_STMT, Kind.ANNOTATED_ASSIGNMENT));
+
+      Optional.ofNullable(assignmentStatement).filter(stmt -> stmt.is(Kind.ASSIGNMENT_STMT)).map(AssignmentStatement.class::cast).ifPresent(stmt -> {
+        PythonQuickFix quickFix = PythonQuickFix.newQuickFix(ASSIGNMENT_QUICK_FIX_MESSAGE,
+          TextEditUtils.removeUntil(usage.tree(), stmt.assignedValue().firstToken()));
+        issue.addQuickFix(quickFix);
+      });
+
+      Optional.ofNullable(assignmentStatement).filter(stmt -> stmt.is(Kind.ANNOTATED_ASSIGNMENT)).map(AnnotatedAssignment.class::cast)
+        .map(AnnotatedAssignment::assignedValue).ifPresent(assignedValue -> {
+          PythonQuickFix quickFix = PythonQuickFix.newQuickFix(ASSIGNMENT_QUICK_FIX_MESSAGE,
+            TextEditUtils.removeUntil(usage.tree(), assignedValue.firstToken()));
+          issue.addQuickFix(quickFix);
+        });
     }
   }
 
