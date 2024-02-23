@@ -255,3 +255,4 @@ def boolean_compatible_with_float() -> None:
   takes_float(True)
   takes_boolean(1.0) # Noncompliant
   takes_int(True)
+  takes_boolean(42) # FN

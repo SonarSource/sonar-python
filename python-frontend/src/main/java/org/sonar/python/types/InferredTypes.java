@@ -102,7 +102,7 @@ public class InferredTypes {
   private static final Set<Set<String>> HARDCODED_INCOMPATIBLE_TYPES = Set.of(Set.of(BuiltinTypes.TUPLE, BuiltinTypes.LIST));
 
   static {
-    HARDCODED_COMPATIBLE_TYPES.put(BuiltinTypes.INT, new HashSet<>(Arrays.asList(BuiltinTypes.FLOAT, BuiltinTypes.COMPLEX, BuiltinTypes.BOOL)));
+    HARDCODED_COMPATIBLE_TYPES.put(BuiltinTypes.INT, new HashSet<>(Arrays.asList(BuiltinTypes.FLOAT, BuiltinTypes.COMPLEX)));
     HARDCODED_COMPATIBLE_TYPES.put(BuiltinTypes.FLOAT, new HashSet<>(List.of(BuiltinTypes.COMPLEX)));
     HARDCODED_COMPATIBLE_TYPES.put(BuiltinTypes.BOOL, new HashSet<>(List.of(BuiltinTypes.FLOAT)));
     HARDCODED_COMPATIBLE_TYPES.put("bytearray", new HashSet<>(Arrays.asList(BYTES, BuiltinTypes.STR, UNICODE)));
