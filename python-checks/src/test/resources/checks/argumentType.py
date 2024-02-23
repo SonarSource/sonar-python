@@ -243,3 +243,16 @@ def win32_no_support(machine, object, instance, inum, counter):
 def fn_len():
     len(len([1,2,3]))  # Noncompliant
     len(42)  # Noncompliant
+
+def boolean_compatible_with_float() -> None:
+  def takes_float(f: float) -> float:
+    return 1.0 + f
+  def takes_boolean(b: bool) -> float:
+    return True + b
+  def takes_int(some_parameter: int) -> int:
+    return some_parameter + 1
+
+  takes_float(True)
+  takes_boolean(1.0) # Noncompliant
+  takes_int(True)
+  takes_boolean(42) # FN
