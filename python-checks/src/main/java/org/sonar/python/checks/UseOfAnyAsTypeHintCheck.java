@@ -28,6 +28,7 @@ import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.Decorator;
 import org.sonar.plugins.python.api.tree.FunctionDef;
+import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TypeAnnotation;
 import org.sonar.python.semantic.SymbolUtils;
@@ -38,6 +39,7 @@ public class UseOfAnyAsTypeHintCheck extends PythonSubscriptionCheck {
 
   private static final String MESSAGE = "Use a more specific type than `Any` for this type hint.";
   private static final Set<String> OVERRIDE_FQNS = Set.of("typing.override", "typing.overload");
+  private static final Set<String> OVERRIDE_NAMES = Set.of("override", "overload");
 
   @Override
   public void initialize(Context context) {
@@ -65,7 +67,7 @@ public class UseOfAnyAsTypeHintCheck extends PythonSubscriptionCheck {
   private static boolean isTypeAny(@Nullable TypeAnnotation typeAnnotation) {
     return Optional.ofNullable(typeAnnotation)
       .map(TypeAnnotation::expression)
-      .flatMap(TreeUtils:: fullyQualifiedNameFromExpression)
+      .flatMap(TreeUtils::fullyQualifiedNameFromExpression)
       .map("typing.Any"::equals)
       .orElse(false);
   }
@@ -73,9 +75,13 @@ public class UseOfAnyAsTypeHintCheck extends PythonSubscriptionCheck {
   private static boolean hasFunctionOverrideOrOverloadDecorator(FunctionDef currentFunctionDef) {
     return currentFunctionDef.decorators().stream()
       .map(Decorator::expression)
-      .map(TreeUtils::fullyQualifiedNameFromExpression)
-      .flatMap(Optional::stream)
-      .anyMatch(OVERRIDE_FQNS::contains);
+      .anyMatch(expression -> expression.is(Tree.Kind.NAME) && OVERRIDE_NAMES.contains(((Name) expression).name()))
+      ||
+      currentFunctionDef.decorators().stream()
+        .map(Decorator::expression)
+        .map(TreeUtils::fullyQualifiedNameFromExpression)
+        .flatMap(Optional::stream)
+        .anyMatch(OVERRIDE_FQNS::contains);
   }
 
   private static boolean canFunctionBeAnOverride(FunctionDef currentMethodDef) {
