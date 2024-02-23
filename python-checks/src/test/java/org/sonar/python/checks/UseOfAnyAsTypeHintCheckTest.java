@@ -19,6 +19,7 @@
  */
 package org.sonar.python.checks;
 
+import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
@@ -35,5 +36,10 @@ class UseOfAnyAsTypeHintCheckTest {
   @Test
   void useOfUserDefinedTypeCalledAny() {
     PythonCheckVerifier.verify("src/test/resources/checks/useOfUserDefinedTypeAnyAsTypeHint.py", new UseOfAnyAsTypeHintCheck());
+  }
+
+  @Test
+  void useOfOverrideOrOverloadDecorator() {
+    PythonCheckVerifier.verify(List.of("src/test/resources/checks/useOfOverrideOrOverloadDecorator.py", "src/test/resources/checks/reexport_typing_overload_override.py"), new UseOfAnyAsTypeHintCheck());
   }
 }
