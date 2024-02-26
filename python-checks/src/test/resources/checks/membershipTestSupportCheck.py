@@ -223,3 +223,14 @@ def f():
             ...
 
     x in OverloadedContains() # Compliant
+
+def no_fp_on_enum_types():
+    from enum import Enum
+
+    class EnumA(Enum):
+        A = 1
+        B = 2
+        C = 3
+
+    selected = foo()
+    selected in EnumA # OK

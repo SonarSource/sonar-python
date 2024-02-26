@@ -60,6 +60,10 @@ class RuntimeType implements InferredType {
     if (MOCK_FQNS.stream().anyMatch(this::mustBeOrExtend)){
       return true;  
     }
+    if (this.equals(InferredTypes.TYPE)) {
+      // SONARPY-1666: need to know the actual type to know its members
+      return true;
+    }
     return getTypeClass().canHaveMember(memberName);
   }
 

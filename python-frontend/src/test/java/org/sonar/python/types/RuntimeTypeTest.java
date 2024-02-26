@@ -121,6 +121,16 @@ class RuntimeTypeTest {
   }
 
   @Test
+  void type_types_can_have_any_member() {
+    assertThat(InferredTypes.TYPE.canHaveMember("foo")).isTrue();
+    assertThat(InferredTypes.TYPE.declaresMember("foo")).isTrue();
+    assertThat(InferredTypes.TYPE.resolveMember("foo")).isEmpty();
+    assertThat(InferredTypes.TYPE.canHaveMember("bar")).isTrue();
+    assertThat(InferredTypes.TYPE.declaresMember("bar")).isTrue();
+    assertThat(InferredTypes.TYPE.resolveMember("bar")).isEmpty();
+  }
+
+  @Test
   void overridden_symbol() {
     ClassSymbolImpl x = new ClassSymbolImpl("x", "x");
     SymbolImpl fooX = new SymbolImpl("foo", null);

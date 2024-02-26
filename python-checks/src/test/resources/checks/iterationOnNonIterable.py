@@ -276,3 +276,15 @@ def mocks_no_issue():
     a, *rest = extended_mock
     iter(extended_mock)
     for elem in extended_mock: ... # OK
+
+
+def no_fp_on_enum_types():
+    from enum import Enum
+
+    class EnumA(Enum):
+        A = 1
+        B = 2
+        C = 3
+
+    for elem in EnumA:
+        ...

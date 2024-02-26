@@ -67,3 +67,12 @@ def except_from_exception_type():
         foo()
     except ValueError:
         raise ValueError("Caught some value error") from SomeClass  # FN SONARPY-1666
+
+
+def reassigned_exception():
+    my_exception = None
+    my_exception = ZeroDivisionError
+    try:
+        ...
+    except my_exception:
+        raise my_exception("Caught some value error") from my_exception

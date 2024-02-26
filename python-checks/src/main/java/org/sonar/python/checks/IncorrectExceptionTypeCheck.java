@@ -55,7 +55,7 @@ public class IncorrectExceptionTypeCheck extends PythonSubscriptionCheck {
       if (hasGlobalOrNonLocalUsage(symbol)) {
         return;
       }
-      if (!raisedExpression.type().canBeOrExtend(BASE_EXCEPTION) && !raisedExpression.type().canOnlyBe("type")) {
+      if (!raisedExpression.type().canBeOrExtend(BASE_EXCEPTION) && !raisedExpression.type().canBeOrExtend("type")) {
         // SONARPY-1666: Here we should only exclude type objects that represent Exception types
         ctx.addIssue(raiseStatement, MESSAGE);
         return;
