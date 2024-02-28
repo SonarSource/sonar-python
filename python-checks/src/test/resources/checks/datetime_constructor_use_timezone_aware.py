@@ -1,6 +1,5 @@
 def some_function():
     from datetime import datetime
-
     datetime.utcnow() # Noncompliant
 
     timestamp = 1571595618.0
@@ -29,3 +28,9 @@ def compliant_examples():
     datetime.now(timezone.utc)
     timestamp = 1571595618.0
     datetime.fromtimestamp(timestamp, timezone.utc)
+
+def aliased_utcnow():
+    from datetime import datetime
+    aliased = datetime.utcnow
+    # FN because we lose the FQN
+    aliased()
