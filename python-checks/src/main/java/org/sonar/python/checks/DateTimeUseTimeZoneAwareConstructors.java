@@ -64,7 +64,7 @@ public class DateTimeUseTimeZoneAwareConstructors extends PythonSubscriptionChec
         return;
       }
       var issue = context.addIssue(callExpression, MESSAGE);
-      addQuickFix(context, issue, calleeSymbol);
+      addQuickFix(context, issue, fullyQualifiedName);
     }
   }
 
@@ -82,22 +82,20 @@ public class DateTimeUseTimeZoneAwareConstructors extends PythonSubscriptionChec
     return foundSymbol != null;
   }
 
-  private static void addQuickFix(SubscriptionContext context, PreciseIssue issue, @Nonnull Symbol calleeSymbol) {
-    if (!isFoundTimezoneImport(context) && !isNameAlreadyUsed(context, "timezone") && !isNameAlreadyUsed(context, "now")) {
+  private static void addQuickFix(SubscriptionContext context, PreciseIssue issue, @Nonnull String calleeFullyQualifiedName) {
+    if (!isFoundTimezoneImport(context) && !isNameAlreadyUsed(context, "timezone")) {
       List<PythonTextEdit> pythonTextEdits = new ArrayList<>();
       CallExpression callExpression = (CallExpression) context.syntaxNode();
-      String fullyQualifiedName = calleeSymbol.fullyQualifiedName();
       Expression calleeExpression = callExpression.callee();
 
-      if (fullyQualifiedName == null || !calleeExpression.is(Tree.Kind.QUALIFIED_EXPR)) {
+      if (!calleeExpression.is(Tree.Kind.QUALIFIED_EXPR)) {
         return;
       }
-      String quickFixDescription;
-      if (UTCNOW_FQN.equals(fullyQualifiedName) && callExpression.arguments().isEmpty()) {
+      String quickFixDescription = "utcnow";
+      if (UTCNOW_FQN.equals(calleeFullyQualifiedName) && callExpression.arguments().isEmpty()) {
         pythonTextEdits.add(TextEditUtils.replace(((QualifiedExpression) calleeExpression).name(), "now"));
         pythonTextEdits.add(TextEditUtils.insertBefore(callExpression.rightPar(), "timezone.utc"));
-        quickFixDescription = "utcnow";
-      } else if (UTCFROMTIMESTAMP_FQN.equals(fullyQualifiedName) && callExpression.arguments().size() == 1) {
+      } else if (UTCFROMTIMESTAMP_FQN.equals(calleeFullyQualifiedName) && callExpression.arguments().size() == 1) {
         pythonTextEdits.add(TextEditUtils.replace(((QualifiedExpression) calleeExpression).name(), "fromtimestamp"));
         pythonTextEdits.add(TextEditUtils.insertBefore(callExpression.rightPar(), ", timezone.utc"));
         quickFixDescription = "utcfromtimestamp";
