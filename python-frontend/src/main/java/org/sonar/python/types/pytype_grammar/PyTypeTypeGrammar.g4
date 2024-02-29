@@ -10,7 +10,8 @@ type :  union_type
         | builtin_type
         | class_type
         | anything_type
-        | generic_callable_type
+//        | generic_callable_type
+        | generic_type
         | qualified_type;
 
 union_type : UNION_PREFIX type_list ')';
@@ -19,7 +20,9 @@ builtin_type: builtin | BUILTINS_PREFIX '.' builtin;
 
 class_type : CLASS_PREFIX (builtin_type | qualified_type) ')';
 
-generic_callable_type : GENERIC_CALLABLE_PREFIX ',' PARAMETERS type_list ')';
+//generic_callable_type : GENERIC_CALLABLE_PREFIX ',' PARAMETERS type_list ')';
+
+generic_type : GENERIC_TYPE_PREFIX type ',' PARAMETERS type_list ')';
 
 anything_type: ANYTHING_TYPE;
 
@@ -36,7 +39,8 @@ builtin: NONE_TYPE
          | TUPLE
          | LIST
          | SET
-         | DICT;
+         | DICT
+         | BASE_EXCEPTION;
 
 // UNION TYPES
 UNION_PREFIX: 'UnionType(type_list=';
@@ -45,7 +49,11 @@ UNION_PREFIX: 'UnionType(type_list=';
 CLASS_PREFIX: 'ClassType(';
 
 // GENERIC CALLABLE TYPES
-GENERIC_CALLABLE_PREFIX: 'GenericType(base_type=ClassType(typing.Callable)';
+//GENERIC_CALLABLE_PREFIX: 'GenericType(base_type=ClassType(typing.Callable)';
+
+GENERIC_TYPE_PREFIX: 'GenericType(base_type=';
+
+// GenericType(base_type=ClassType(builtins.list), parameters=(AnythingType(),))
 
 // ANYTHING TYPE
 ANYTHING_TYPE : 'AnythingType()';
@@ -63,6 +71,7 @@ TUPLE : 'tuple';
 LIST : 'list';
 SET : 'set';
 DICT : 'dict';
+BASE_EXCEPTION : 'BaseException';
 
 PARAMETERS : 'parameters=';
 

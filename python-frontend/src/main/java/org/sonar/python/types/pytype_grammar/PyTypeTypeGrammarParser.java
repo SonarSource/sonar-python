@@ -38,17 +38,17 @@ public class PyTypeTypeGrammarParser extends Parser {
 	protected static final PredictionContextCache _sharedContextCache =
 		new PredictionContextCache();
 	public static final int
-		T__0=1, T__1=2, T__2=3, T__3=4, UNION_PREFIX=5, CLASS_PREFIX=6, GENERIC_CALLABLE_PREFIX=7, 
+		T__0=1, T__1=2, T__2=3, T__3=4, UNION_PREFIX=5, CLASS_PREFIX=6, GENERIC_TYPE_PREFIX=7, 
 		ANYTHING_TYPE=8, BUILTINS_PREFIX=9, NONE_TYPE=10, STR=11, BOOL=12, INT=13, 
-		FLOAT=14, COMPLEX=15, TUPLE=16, LIST=17, SET=18, DICT=19, PARAMETERS=20, 
-		STRING=21, SKIPS=22;
+		FLOAT=14, COMPLEX=15, TUPLE=16, LIST=17, SET=18, DICT=19, BASE_EXCEPTION=20, 
+		PARAMETERS=21, STRING=22, SKIPS=23;
 	public static final int
 		RULE_outer_type = 0, RULE_type = 1, RULE_union_type = 2, RULE_builtin_type = 3, 
-		RULE_class_type = 4, RULE_generic_callable_type = 5, RULE_anything_type = 6, 
-		RULE_qualified_type = 7, RULE_type_list = 8, RULE_builtin = 9;
+		RULE_class_type = 4, RULE_generic_type = 5, RULE_anything_type = 6, RULE_qualified_type = 7, 
+		RULE_type_list = 8, RULE_builtin = 9;
 	private static String[] makeRuleNames() {
 		return new String[] {
-			"outer_type", "type", "union_type", "builtin_type", "class_type", "generic_callable_type", 
+			"outer_type", "type", "union_type", "builtin_type", "class_type", "generic_type", 
 			"anything_type", "qualified_type", "type_list", "builtin"
 		};
 	}
@@ -57,18 +57,18 @@ public class PyTypeTypeGrammarParser extends Parser {
 	private static String[] makeLiteralNames() {
 		return new String[] {
 			null, "')'", "'.'", "','", "'('", "'UnionType(type_list='", "'ClassType('", 
-			"'GenericType(base_type=ClassType(typing.Callable)'", "'AnythingType()'", 
-			"'builtins'", "'NoneType'", "'str'", "'bool'", "'int'", "'float'", "'complex'", 
-			"'tuple'", "'list'", "'set'", "'dict'", "'parameters='"
+			"'GenericType(base_type='", "'AnythingType()'", "'builtins'", "'NoneType'", 
+			"'str'", "'bool'", "'int'", "'float'", "'complex'", "'tuple'", "'list'", 
+			"'set'", "'dict'", "'BaseException'", "'parameters='"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
 	private static String[] makeSymbolicNames() {
 		return new String[] {
-			null, null, null, null, null, "UNION_PREFIX", "CLASS_PREFIX", "GENERIC_CALLABLE_PREFIX", 
+			null, null, null, null, null, "UNION_PREFIX", "CLASS_PREFIX", "GENERIC_TYPE_PREFIX", 
 			"ANYTHING_TYPE", "BUILTINS_PREFIX", "NONE_TYPE", "STR", "BOOL", "INT", 
-			"FLOAT", "COMPLEX", "TUPLE", "LIST", "SET", "DICT", "PARAMETERS", "STRING", 
-			"SKIPS"
+			"FLOAT", "COMPLEX", "TUPLE", "LIST", "SET", "DICT", "BASE_EXCEPTION", 
+			"PARAMETERS", "STRING", "SKIPS"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -179,8 +179,8 @@ public class PyTypeTypeGrammarParser extends Parser {
 		public Anything_typeContext anything_type() {
 			return getRuleContext(Anything_typeContext.class,0);
 		}
-		public Generic_callable_typeContext generic_callable_type() {
-			return getRuleContext(Generic_callable_typeContext.class,0);
+		public Generic_typeContext generic_type() {
+			return getRuleContext(Generic_typeContext.class,0);
 		}
 		public Qualified_typeContext qualified_type() {
 			return getRuleContext(Qualified_typeContext.class,0);
@@ -224,6 +224,7 @@ public class PyTypeTypeGrammarParser extends Parser {
 			case LIST:
 			case SET:
 			case DICT:
+			case BASE_EXCEPTION:
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(24);
@@ -244,11 +245,11 @@ public class PyTypeTypeGrammarParser extends Parser {
 				anything_type();
 				}
 				break;
-			case GENERIC_CALLABLE_PREFIX:
+			case GENERIC_TYPE_PREFIX:
 				enterOuterAlt(_localctx, 5);
 				{
 				setState(27);
-				generic_callable_type();
+				generic_type();
 				}
 				break;
 			case STRING:
@@ -355,6 +356,7 @@ public class PyTypeTypeGrammarParser extends Parser {
 			case LIST:
 			case SET:
 			case DICT:
+			case BASE_EXCEPTION:
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(35);
@@ -432,6 +434,7 @@ public class PyTypeTypeGrammarParser extends Parser {
 			case LIST:
 			case SET:
 			case DICT:
+			case BASE_EXCEPTION:
 				{
 				setState(42);
 				builtin_type();
@@ -462,41 +465,46 @@ public class PyTypeTypeGrammarParser extends Parser {
 	}
 
 	@SuppressWarnings("CheckReturnValue")
-	public static class Generic_callable_typeContext extends ParserRuleContext {
-		public TerminalNode GENERIC_CALLABLE_PREFIX() { return getToken(PyTypeTypeGrammarParser.GENERIC_CALLABLE_PREFIX, 0); }
+	public static class Generic_typeContext extends ParserRuleContext {
+		public TerminalNode GENERIC_TYPE_PREFIX() { return getToken(PyTypeTypeGrammarParser.GENERIC_TYPE_PREFIX, 0); }
+		public TypeContext type() {
+			return getRuleContext(TypeContext.class,0);
+		}
 		public TerminalNode PARAMETERS() { return getToken(PyTypeTypeGrammarParser.PARAMETERS, 0); }
 		public Type_listContext type_list() {
 			return getRuleContext(Type_listContext.class,0);
 		}
-		public Generic_callable_typeContext(ParserRuleContext parent, int invokingState) {
+		public Generic_typeContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_generic_callable_type; }
+		@Override public int getRuleIndex() { return RULE_generic_type; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof PyTypeTypeGrammarListener ) ((PyTypeTypeGrammarListener)listener).enterGeneric_callable_type(this);
+			if ( listener instanceof PyTypeTypeGrammarListener ) ((PyTypeTypeGrammarListener)listener).enterGeneric_type(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof PyTypeTypeGrammarListener ) ((PyTypeTypeGrammarListener)listener).exitGeneric_callable_type(this);
+			if ( listener instanceof PyTypeTypeGrammarListener ) ((PyTypeTypeGrammarListener)listener).exitGeneric_type(this);
 		}
 	}
 
-	public final Generic_callable_typeContext generic_callable_type() throws RecognitionException {
-		Generic_callable_typeContext _localctx = new Generic_callable_typeContext(_ctx, getState());
-		enterRule(_localctx, 10, RULE_generic_callable_type);
+	public final Generic_typeContext generic_type() throws RecognitionException {
+		Generic_typeContext _localctx = new Generic_typeContext(_ctx, getState());
+		enterRule(_localctx, 10, RULE_generic_type);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(48);
-			match(GENERIC_CALLABLE_PREFIX);
+			match(GENERIC_TYPE_PREFIX);
 			setState(49);
-			match(T__2);
+			type();
 			setState(50);
-			match(PARAMETERS);
+			match(T__2);
 			setState(51);
-			type_list();
+			match(PARAMETERS);
 			setState(52);
+			type_list();
+			setState(53);
 			match(T__0);
 			}
 		}
@@ -534,7 +542,7 @@ public class PyTypeTypeGrammarParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(54);
+			setState(55);
 			match(ANYTHING_TYPE);
 			}
 		}
@@ -576,21 +584,21 @@ public class PyTypeTypeGrammarParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(56);
+			setState(57);
 			match(STRING);
-			setState(61);
+			setState(62);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==T__1) {
 				{
 				{
-				setState(57);
-				match(T__1);
 				setState(58);
+				match(T__1);
+				setState(59);
 				match(STRING);
 				}
 				}
-				setState(63);
+				setState(64);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
@@ -634,46 +642,46 @@ public class PyTypeTypeGrammarParser extends Parser {
 		enterRule(_localctx, 16, RULE_type_list);
 		int _la;
 		try {
-			setState(79);
+			setState(80);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,5,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(64);
-				match(T__3);
 				setState(65);
+				match(T__3);
+				setState(66);
 				type();
-				setState(68); 
+				setState(69); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				do {
 					{
 					{
-					setState(66);
-					match(T__2);
 					setState(67);
+					match(T__2);
+					setState(68);
 					type();
 					}
 					}
-					setState(70); 
+					setState(71); 
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				} while ( _la==T__2 );
-				setState(72);
+				setState(73);
 				match(T__0);
 				}
 				break;
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(74);
-				match(T__3);
 				setState(75);
-				type();
+				match(T__3);
 				setState(76);
-				match(T__2);
+				type();
 				setState(77);
+				match(T__2);
+				setState(78);
 				match(T__0);
 				}
 				break;
@@ -702,6 +710,7 @@ public class PyTypeTypeGrammarParser extends Parser {
 		public TerminalNode LIST() { return getToken(PyTypeTypeGrammarParser.LIST, 0); }
 		public TerminalNode SET() { return getToken(PyTypeTypeGrammarParser.SET, 0); }
 		public TerminalNode DICT() { return getToken(PyTypeTypeGrammarParser.DICT, 0); }
+		public TerminalNode BASE_EXCEPTION() { return getToken(PyTypeTypeGrammarParser.BASE_EXCEPTION, 0); }
 		public BuiltinContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -723,9 +732,9 @@ public class PyTypeTypeGrammarParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(81);
+			setState(82);
 			_la = _input.LA(1);
-			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 1047552L) != 0)) ) {
+			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 2096128L) != 0)) ) {
 			_errHandler.recoverInline(this);
 			}
 			else {
@@ -747,7 +756,7 @@ public class PyTypeTypeGrammarParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\u0004\u0001\u0016T\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
+		"\u0004\u0001\u0017U\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
 		"\u0002\u0007\u0002\u0002\u0003\u0007\u0003\u0002\u0004\u0007\u0004\u0002"+
 		"\u0005\u0007\u0005\u0002\u0006\u0007\u0006\u0002\u0007\u0007\u0007\u0002"+
 		"\b\u0007\b\u0002\t\u0007\t\u0001\u0000\u0001\u0000\u0001\u0000\u0001\u0001"+
@@ -756,45 +765,46 @@ public class PyTypeTypeGrammarParser extends Parser {
 		"\u0001\u0003\u0001\u0003\u0001\u0003\u0003\u0003(\b\u0003\u0001\u0004"+
 		"\u0001\u0004\u0001\u0004\u0003\u0004-\b\u0004\u0001\u0004\u0001\u0004"+
 		"\u0001\u0005\u0001\u0005\u0001\u0005\u0001\u0005\u0001\u0005\u0001\u0005"+
-		"\u0001\u0006\u0001\u0006\u0001\u0007\u0001\u0007\u0001\u0007\u0005\u0007"+
-		"<\b\u0007\n\u0007\f\u0007?\t\u0007\u0001\b\u0001\b\u0001\b\u0001\b\u0004"+
-		"\bE\b\b\u000b\b\f\bF\u0001\b\u0001\b\u0001\b\u0001\b\u0001\b\u0001\b\u0001"+
-		"\b\u0003\bP\b\b\u0001\t\u0001\t\u0001\t\u0000\u0000\n\u0000\u0002\u0004"+
-		"\u0006\b\n\f\u000e\u0010\u0012\u0000\u0001\u0001\u0000\n\u0013S\u0000"+
-		"\u0014\u0001\u0000\u0000\u0000\u0002\u001d\u0001\u0000\u0000\u0000\u0004"+
-		"\u001f\u0001\u0000\u0000\u0000\u0006\'\u0001\u0000\u0000\u0000\b)\u0001"+
-		"\u0000\u0000\u0000\n0\u0001\u0000\u0000\u0000\f6\u0001\u0000\u0000\u0000"+
-		"\u000e8\u0001\u0000\u0000\u0000\u0010O\u0001\u0000\u0000\u0000\u0012Q"+
-		"\u0001\u0000\u0000\u0000\u0014\u0015\u0003\u0002\u0001\u0000\u0015\u0016"+
-		"\u0005\u0000\u0000\u0001\u0016\u0001\u0001\u0000\u0000\u0000\u0017\u001e"+
-		"\u0003\u0004\u0002\u0000\u0018\u001e\u0003\u0006\u0003\u0000\u0019\u001e"+
-		"\u0003\b\u0004\u0000\u001a\u001e\u0003\f\u0006\u0000\u001b\u001e\u0003"+
-		"\n\u0005\u0000\u001c\u001e\u0003\u000e\u0007\u0000\u001d\u0017\u0001\u0000"+
-		"\u0000\u0000\u001d\u0018\u0001\u0000\u0000\u0000\u001d\u0019\u0001\u0000"+
-		"\u0000\u0000\u001d\u001a\u0001\u0000\u0000\u0000\u001d\u001b\u0001\u0000"+
-		"\u0000\u0000\u001d\u001c\u0001\u0000\u0000\u0000\u001e\u0003\u0001\u0000"+
-		"\u0000\u0000\u001f \u0005\u0005\u0000\u0000 !\u0003\u0010\b\u0000!\"\u0005"+
-		"\u0001\u0000\u0000\"\u0005\u0001\u0000\u0000\u0000#(\u0003\u0012\t\u0000"+
-		"$%\u0005\t\u0000\u0000%&\u0005\u0002\u0000\u0000&(\u0003\u0012\t\u0000"+
-		"\'#\u0001\u0000\u0000\u0000\'$\u0001\u0000\u0000\u0000(\u0007\u0001\u0000"+
-		"\u0000\u0000),\u0005\u0006\u0000\u0000*-\u0003\u0006\u0003\u0000+-\u0003"+
-		"\u000e\u0007\u0000,*\u0001\u0000\u0000\u0000,+\u0001\u0000\u0000\u0000"+
-		"-.\u0001\u0000\u0000\u0000./\u0005\u0001\u0000\u0000/\t\u0001\u0000\u0000"+
-		"\u000001\u0005\u0007\u0000\u000012\u0005\u0003\u0000\u000023\u0005\u0014"+
-		"\u0000\u000034\u0003\u0010\b\u000045\u0005\u0001\u0000\u00005\u000b\u0001"+
-		"\u0000\u0000\u000067\u0005\b\u0000\u00007\r\u0001\u0000\u0000\u00008="+
-		"\u0005\u0015\u0000\u00009:\u0005\u0002\u0000\u0000:<\u0005\u0015\u0000"+
-		"\u0000;9\u0001\u0000\u0000\u0000<?\u0001\u0000\u0000\u0000=;\u0001\u0000"+
-		"\u0000\u0000=>\u0001\u0000\u0000\u0000>\u000f\u0001\u0000\u0000\u0000"+
-		"?=\u0001\u0000\u0000\u0000@A\u0005\u0004\u0000\u0000AD\u0003\u0002\u0001"+
-		"\u0000BC\u0005\u0003\u0000\u0000CE\u0003\u0002\u0001\u0000DB\u0001\u0000"+
-		"\u0000\u0000EF\u0001\u0000\u0000\u0000FD\u0001\u0000\u0000\u0000FG\u0001"+
-		"\u0000\u0000\u0000GH\u0001\u0000\u0000\u0000HI\u0005\u0001\u0000\u0000"+
-		"IP\u0001\u0000\u0000\u0000JK\u0005\u0004\u0000\u0000KL\u0003\u0002\u0001"+
-		"\u0000LM\u0005\u0003\u0000\u0000MN\u0005\u0001\u0000\u0000NP\u0001\u0000"+
-		"\u0000\u0000O@\u0001\u0000\u0000\u0000OJ\u0001\u0000\u0000\u0000P\u0011"+
-		"\u0001\u0000\u0000\u0000QR\u0007\u0000\u0000\u0000R\u0013\u0001\u0000"+
-		"\u0000\u0000\u0006\u001d\',=FO";
+		"\u0001\u0005\u0001\u0006\u0001\u0006\u0001\u0007\u0001\u0007\u0001\u0007"+
+		"\u0005\u0007=\b\u0007\n\u0007\f\u0007@\t\u0007\u0001\b\u0001\b\u0001\b"+
+		"\u0001\b\u0004\bF\b\b\u000b\b\f\bG\u0001\b\u0001\b\u0001\b\u0001\b\u0001"+
+		"\b\u0001\b\u0001\b\u0003\bQ\b\b\u0001\t\u0001\t\u0001\t\u0000\u0000\n"+
+		"\u0000\u0002\u0004\u0006\b\n\f\u000e\u0010\u0012\u0000\u0001\u0001\u0000"+
+		"\n\u0014T\u0000\u0014\u0001\u0000\u0000\u0000\u0002\u001d\u0001\u0000"+
+		"\u0000\u0000\u0004\u001f\u0001\u0000\u0000\u0000\u0006\'\u0001\u0000\u0000"+
+		"\u0000\b)\u0001\u0000\u0000\u0000\n0\u0001\u0000\u0000\u0000\f7\u0001"+
+		"\u0000\u0000\u0000\u000e9\u0001\u0000\u0000\u0000\u0010P\u0001\u0000\u0000"+
+		"\u0000\u0012R\u0001\u0000\u0000\u0000\u0014\u0015\u0003\u0002\u0001\u0000"+
+		"\u0015\u0016\u0005\u0000\u0000\u0001\u0016\u0001\u0001\u0000\u0000\u0000"+
+		"\u0017\u001e\u0003\u0004\u0002\u0000\u0018\u001e\u0003\u0006\u0003\u0000"+
+		"\u0019\u001e\u0003\b\u0004\u0000\u001a\u001e\u0003\f\u0006\u0000\u001b"+
+		"\u001e\u0003\n\u0005\u0000\u001c\u001e\u0003\u000e\u0007\u0000\u001d\u0017"+
+		"\u0001\u0000\u0000\u0000\u001d\u0018\u0001\u0000\u0000\u0000\u001d\u0019"+
+		"\u0001\u0000\u0000\u0000\u001d\u001a\u0001\u0000\u0000\u0000\u001d\u001b"+
+		"\u0001\u0000\u0000\u0000\u001d\u001c\u0001\u0000\u0000\u0000\u001e\u0003"+
+		"\u0001\u0000\u0000\u0000\u001f \u0005\u0005\u0000\u0000 !\u0003\u0010"+
+		"\b\u0000!\"\u0005\u0001\u0000\u0000\"\u0005\u0001\u0000\u0000\u0000#("+
+		"\u0003\u0012\t\u0000$%\u0005\t\u0000\u0000%&\u0005\u0002\u0000\u0000&"+
+		"(\u0003\u0012\t\u0000\'#\u0001\u0000\u0000\u0000\'$\u0001\u0000\u0000"+
+		"\u0000(\u0007\u0001\u0000\u0000\u0000),\u0005\u0006\u0000\u0000*-\u0003"+
+		"\u0006\u0003\u0000+-\u0003\u000e\u0007\u0000,*\u0001\u0000\u0000\u0000"+
+		",+\u0001\u0000\u0000\u0000-.\u0001\u0000\u0000\u0000./\u0005\u0001\u0000"+
+		"\u0000/\t\u0001\u0000\u0000\u000001\u0005\u0007\u0000\u000012\u0003\u0002"+
+		"\u0001\u000023\u0005\u0003\u0000\u000034\u0005\u0015\u0000\u000045\u0003"+
+		"\u0010\b\u000056\u0005\u0001\u0000\u00006\u000b\u0001\u0000\u0000\u0000"+
+		"78\u0005\b\u0000\u00008\r\u0001\u0000\u0000\u00009>\u0005\u0016\u0000"+
+		"\u0000:;\u0005\u0002\u0000\u0000;=\u0005\u0016\u0000\u0000<:\u0001\u0000"+
+		"\u0000\u0000=@\u0001\u0000\u0000\u0000><\u0001\u0000\u0000\u0000>?\u0001"+
+		"\u0000\u0000\u0000?\u000f\u0001\u0000\u0000\u0000@>\u0001\u0000\u0000"+
+		"\u0000AB\u0005\u0004\u0000\u0000BE\u0003\u0002\u0001\u0000CD\u0005\u0003"+
+		"\u0000\u0000DF\u0003\u0002\u0001\u0000EC\u0001\u0000\u0000\u0000FG\u0001"+
+		"\u0000\u0000\u0000GE\u0001\u0000\u0000\u0000GH\u0001\u0000\u0000\u0000"+
+		"HI\u0001\u0000\u0000\u0000IJ\u0005\u0001\u0000\u0000JQ\u0001\u0000\u0000"+
+		"\u0000KL\u0005\u0004\u0000\u0000LM\u0003\u0002\u0001\u0000MN\u0005\u0003"+
+		"\u0000\u0000NO\u0005\u0001\u0000\u0000OQ\u0001\u0000\u0000\u0000PA\u0001"+
+		"\u0000\u0000\u0000PK\u0001\u0000\u0000\u0000Q\u0011\u0001\u0000\u0000"+
+		"\u0000RS\u0007\u0000\u0000\u0000S\u0013\u0001\u0000\u0000\u0000\u0006"+
+		"\u001d\',>GP";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

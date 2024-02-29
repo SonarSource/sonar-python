@@ -150,6 +150,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     fileInput.accept(new ThirdPhaseVisitor());
     if (typeContext != null) {
       this.typeContext.setScopesByRootTree(scopesByRootTree);
+      this.typeContext.setProjectLevelSymbolTable(projectLevelSymbolTable);
       new PyTypeAnnotation(this.typeContext, pythonFile).annotate(fileInput);
     } else {
       TypeInference.inferTypes(fileInput, pythonFile);

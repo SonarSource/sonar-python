@@ -79,15 +79,15 @@ public interface PyTypeTypeGrammarListener extends ParseTreeListener {
 	 */
 	void exitClass_type(PyTypeTypeGrammarParser.Class_typeContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link PyTypeTypeGrammarParser#generic_callable_type}.
+	 * Enter a parse tree produced by {@link PyTypeTypeGrammarParser#generic_type}.
 	 * @param ctx the parse tree
 	 */
-	void enterGeneric_callable_type(PyTypeTypeGrammarParser.Generic_callable_typeContext ctx);
+	void enterGeneric_type(PyTypeTypeGrammarParser.Generic_typeContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link PyTypeTypeGrammarParser#generic_callable_type}.
+	 * Exit a parse tree produced by {@link PyTypeTypeGrammarParser#generic_type}.
 	 * @param ctx the parse tree
 	 */
-	void exitGeneric_callable_type(PyTypeTypeGrammarParser.Generic_callable_typeContext ctx);
+	void exitGeneric_type(PyTypeTypeGrammarParser.Generic_typeContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link PyTypeTypeGrammarParser#anything_type}.
 	 * @param ctx the parse tree

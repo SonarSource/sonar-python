@@ -29,4 +29,9 @@ class ComparisonToNoneCheckTest {
     PythonCheckVerifier.verify("src/test/resources/checks/comparisonToNoneCheck.py", new ComparisonToNoneCheck());
   }
 
+  @Test
+  void test_2() {
+    PythonCheckVerifier.verify("../tools/resources/mod1.py", new ComparisonToNoneCheck());
+  }
+
 }

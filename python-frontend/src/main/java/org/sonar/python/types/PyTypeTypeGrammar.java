@@ -26,18 +26,29 @@ import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.RecognitionException;
 import org.antlr.v4.runtime.tree.TerminalNode;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.sonar.plugins.python.api.symbols.ClassSymbol;
+import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.semantic.ClassSymbolImpl;
+import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.types.pytype_grammar.ExceptionErrorStrategy;
 import org.sonar.python.types.pytype_grammar.PyTypeTypeGrammarLexer;
 import org.sonar.python.types.pytype_grammar.PyTypeTypeGrammarParser;
 import org.sonar.python.types.pytype_grammar.PyTypeTypeGrammarParser.Builtin_typeContext;
 import org.sonar.python.types.pytype_grammar.PyTypeTypeGrammarParser.Class_typeContext;
+import org.sonar.python.types.pytype_grammar.PyTypeTypeGrammarParser.Generic_typeContext;
 import org.sonar.python.types.pytype_grammar.PyTypeTypeGrammarParser.Qualified_typeContext;
 import org.sonar.python.types.pytype_grammar.PyTypeTypeGrammarParser.TypeContext;
 import org.sonar.python.types.pytype_grammar.PyTypeTypeGrammarParser.Union_typeContext;
 
 public class PyTypeTypeGrammar {
+
+  static ProjectLevelSymbolTable projectLevelSymbolTable = ProjectLevelSymbolTable.empty();
+  static String fileName = "";
+
+  private static final Logger LOG = LoggerFactory.getLogger(PyTypeTypeGrammar.class);
 
   public static TypeContext getParseTree(String typeString) throws RecognitionException {
     PyTypeTypeGrammarLexer lexer = new PyTypeTypeGrammarLexer(CharStreams.fromString(typeString));
@@ -58,8 +69,8 @@ public class PyTypeTypeGrammar {
       return getInferredTypeForBuiltin(typeContext.builtin_type());
     } else if (typeContext.class_type() != null) {
       return getInferredTypeForClass(typeContext.class_type());
-    } else if (typeContext.generic_callable_type() != null) {
-      return new RuntimeType(org.sonar.python.types.TypeContext.CALLABLE_CLASS_SYMBOL);
+    } else if (typeContext.generic_type() != null) {
+      return getInferredTypeForGeneric(typeContext.generic_type());
     } else if (typeContext.union_type() != null) {
       return getInferredTypeForUnion(typeContext);
     } else if (typeContext.anything_type() != null) {
@@ -67,6 +78,14 @@ public class PyTypeTypeGrammar {
     } else {
       return null;
     }
+  }
+
+  private static InferredType getInferredTypeForGeneric(Generic_typeContext genericTypeContext) {
+    TypeContext type = genericTypeContext.type();
+    if (type != null) {
+      return getTypeFromParseTree(type);
+    }
+    return null;
   }
 
   private static InferredType getInferredTypeForQualified(Qualified_typeContext qualifiedTypeContext) {
@@ -87,8 +106,22 @@ public class PyTypeTypeGrammar {
     } else {
       Qualified_typeContext qualifiedTypeContext = classTypeContext.qualified_type();
       String fullyQualifiedName = qualifiedTypeContext.STRING().stream().map(TerminalNode::toString).collect(Collectors.joining("."));
-      ClassSymbolImpl classSymbol = new ClassSymbolImpl(fullyQualifiedName, null);
-      return new RuntimeType(classSymbol);
+      if (fullyQualifiedName.equals("typing.Callable")) {
+        return new RuntimeType(org.sonar.python.types.TypeContext.CALLABLE_CLASS_SYMBOL);
+      }
+      Symbol symbol = projectLevelSymbolTable.getSymbol(fullyQualifiedName);
+      if (symbol != null && symbol.is(Symbol.Kind.CLASS)) {
+        return new RuntimeType(((ClassSymbol) symbol));
+      }
+      symbol = TypeShed.symbolWithFQN(fullyQualifiedName);
+      if (symbol != null && symbol.is(Symbol.Kind.CLASS)) {
+        return new RuntimeType(((ClassSymbol) symbol));
+      }
+      LOG.error("");
+      LOG.error(String.format("Unresolved class symbol: %s", fullyQualifiedName));
+      LOG.error(String.format("Filename: %s", fileName));
+      LOG.error("");
+      return InferredTypes.anyType();
     }
   }
 
@@ -113,6 +146,8 @@ public class PyTypeTypeGrammar {
       return InferredTypes.runtimeBuiltinType(builtinTypeContext.builtin().SET().toString());
     } else if (builtinTypeContext.builtin().DICT() != null) {
       return InferredTypes.runtimeBuiltinType(builtinTypeContext.builtin().DICT().toString());
+    } else if (builtinTypeContext.builtin().BASE_EXCEPTION() != null) {
+      return InferredTypes.runtimeBuiltinType(builtinTypeContext.builtin().BASE_EXCEPTION().toString());
     } else {
       return null;
     }
