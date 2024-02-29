@@ -19,64 +19,65 @@
  */
 package org.sonar.python.checks;
 
-import java.util.List;
-import java.util.Objects;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.Symbol;
-import org.sonar.plugins.python.api.tree.ArgList;
-import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.cfg.fixpoint.ReachingDefinitionsAnalysis;
+import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S6887")
-public class DateTimeNoPyTzTimeZoneInConstructor extends PythonSubscriptionCheck {
+public class PytzTimeZoneInDatetimeConstructorCheck extends PythonSubscriptionCheck {
 
   private ReachingDefinitionsAnalysis reachingDefinitionsAnalysis;
-  private static final String MESSAGE = "pytz.timezone should not be passed to the datetime.datetime constructor";
+  private static final String MESSAGE = "Don't pass a \"pytz.timezone\" to the \"datetime.datetime\" constructor.";
+  private static final String SECONDARY_MESSAGE = "The pytz.timezone is created here";
 
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT,
       ctx -> reachingDefinitionsAnalysis = new ReachingDefinitionsAnalysis(ctx.pythonFile()));
 
-    context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, this::checkContext);
+    context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, this::checkCallExpression);
   }
 
-  private void checkContext(SubscriptionContext context) {
+  private void checkCallExpression(SubscriptionContext context) {
     CallExpression callExpression = (CallExpression) context.syntaxNode();
     Symbol calleeSymbol = callExpression.calleeSymbol();
 
     if (calleeSymbol != null && "datetime.datetime".equals(calleeSymbol.fullyQualifiedName())) {
-      ArgList argList = callExpression.argumentList();
-      if (argList != null) {
-        List<Argument> argumentList = argList.arguments();
-        argumentList.stream().filter(this::checkArgument)
-          .findAny().ifPresent(argument -> context.addIssue(argument, MESSAGE));
+      RegularArgument argument = TreeUtils.nthArgumentOrKeyword(-1, "tzinfo", callExpression.arguments());
+      if (argument == null) {
+        return;
       }
+      createIssue(argument, context);
     }
   }
 
-  private boolean checkArgument(Argument argument) {
-    if (argument.is(Tree.Kind.REGULAR_ARGUMENT)) {
-      RegularArgument regularArgument = ((RegularArgument) argument);
-      if (regularArgument.expression().is(Tree.Kind.CALL_EXPR)) {
-        CallExpression callExpression1 = (CallExpression) regularArgument.expression();
-        Symbol calleeSymbol = callExpression1.calleeSymbol();
-        return calleeSymbol != null && "pytz.timezone".equals(calleeSymbol.fullyQualifiedName());
-      } else if (regularArgument.expression().is(Tree.Kind.NAME)) {
-        return reachingDefinitionsAnalysis.valuesAtLocation((Name) regularArgument.expression()).stream()
-          .filter(expression -> expression.is(Tree.Kind.CALL_EXPR))
-          .map(CallExpression.class::cast)
-          .map(CallExpression::calleeSymbol)
-          .filter(Objects::nonNull)
-          .anyMatch(symbol -> "pytz.timezone".equals(symbol.fullyQualifiedName()));
+  private void createIssue(RegularArgument argument, SubscriptionContext context) {
+    if (argument.expression().is(Tree.Kind.CALL_EXPR)) {
+      CallExpression callExpression1 = (CallExpression) argument.expression();
+      Symbol calleeSymbol = callExpression1.calleeSymbol();
+      if (!(calleeSymbol != null && "pytz.timezone".equals(calleeSymbol.fullyQualifiedName()))) {
+        return;
       }
+      context.addIssue(argument, MESSAGE);
+    } else if (argument.expression().is(Tree.Kind.NAME)) {
+      var lastAssignmentExpression = reachingDefinitionsAnalysis.valuesAtLocation((Name) argument.expression()).stream()
+        .filter(expression -> expression.is(Tree.Kind.CALL_EXPR))
+        .map(CallExpression.class::cast)
+        .findFirst();
+      var lastAssignmentSymbol = lastAssignmentExpression.map(CallExpression::calleeSymbol)
+        .filter(symbol -> "pytz.timezone".equals(symbol.fullyQualifiedName()));
+
+      if (lastAssignmentExpression.isEmpty()) {
+        return;
+      }
+      lastAssignmentSymbol.ifPresent(assignment -> context.addIssue(argument, MESSAGE).secondary(lastAssignmentExpression.get(), SECONDARY_MESSAGE));
     }
-    return false;
   }
 }

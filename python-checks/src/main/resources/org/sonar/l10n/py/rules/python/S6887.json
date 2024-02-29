@@ -1,0 +1,23 @@
+{
+  "title": "pytz.timezone should not be passed to the datetime.datetime constructor",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-6887",
+  "sqKey": "S6887",
+  "scope": "All",
+  "quickfix": "unknown",
+  "code": {
+    "impacts": {
+      "MAINTAINABILITY": "HIGH",
+      "RELIABILITY": "HIGH",
+      "SECURITY": "LOW"
+    },
+    "attribute": "LOGICAL"
+  }
+}

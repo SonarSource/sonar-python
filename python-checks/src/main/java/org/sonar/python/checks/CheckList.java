@@ -304,6 +304,7 @@ public final class CheckList {
       PublicApiIsSecuritySensitiveCheck.class,
       PubliclyWritableDirectoriesCheck.class,
       PublicNetworkAccessToCloudResourcesCheck.class,
+      PytzTimeZoneInDatetimeConstructorCheck.class,
       RaiseOutsideExceptCheck.class,
       RedosCheck.class,
       RedundantJumpCheck.class,

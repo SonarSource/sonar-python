@@ -22,9 +22,9 @@ package org.sonar.python.checks;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-class DateTimeNoPyTzTimeZoneInConstructorTest {
+class PytzTimeZoneInDatetimeConstructorCheckTest {
   @Test
   void test() {
-    PythonCheckVerifier.verify("src/test/resources/checks/datetime_constructor_pytz_timezone.py", new DateTimeNoPyTzTimeZoneInConstructor());
+    PythonCheckVerifier.verify("src/test/resources/checks/datetime_constructor_pytz_timezone.py", new PytzTimeZoneInDatetimeConstructorCheck());
   }
 }
