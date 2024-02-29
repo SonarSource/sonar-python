@@ -29,4 +29,9 @@ class PandasChainInstructionCheckTest {
     PythonCheckVerifier.verify("src/test/resources/checks/pandasChainInstructionCheck.py", new PandasChainInstructionCheck());
   }
 
+  @Test
+  void nonPandasDataFrameChainTest() {
+    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/pandasChainInstructionCheck_non_pandas_df.py", new PandasChainInstructionCheck());
+  }
+
 }

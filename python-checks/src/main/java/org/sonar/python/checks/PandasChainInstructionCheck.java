@@ -116,7 +116,7 @@ public class PandasChainInstructionCheck extends PythonSubscriptionCheck {
       .filter(Objects::nonNull)
       .noneMatch((DATAFRAME_FQN + ".pipe")::equals);
 
-    boolean isADataFrame = "DataFrame".equals(InferredTypes.typeName(firstQualifiedExpression.qualifier().type()));
+    boolean isADataFrame = DATAFRAME_FQN.equals(InferredTypes.fullyQualifiedTypeName(firstQualifiedExpression.qualifier().type()));
 
     return (isADataFrameMethodCall || isAFunctionReturningADataFrame || isADataFrame) && doesNotContainACallToPipe;
   }
