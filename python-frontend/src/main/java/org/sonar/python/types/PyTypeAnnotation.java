@@ -31,29 +31,35 @@ public class PyTypeAnnotation extends BaseTreeVisitor {
 
   private final TypeContext typeContext;
   private final PythonFile pythonFile;
+  private final String filePath;
 
   public PyTypeAnnotation(TypeContext typeContext, PythonFile pythonFile) {
     this.typeContext = typeContext;
     this.pythonFile = pythonFile;
+    if (pythonFile.key().startsWith("project:")) {
+      this.filePath = pythonFile.key().substring("project:".length());
+    } else {
+      this.filePath = pythonFile.key();
+    }
   }
 
   public void annotate(FileInput fileInput) {
-    fileInput.accept(new NameVisitor(typeContext, pythonFile));
+    fileInput.accept(new NameVisitor(typeContext, filePath));
   }
 
   private static class NameVisitor extends BaseTreeVisitor {
 
     private final TypeContext typeContext;
-    private final PythonFile pythonFile;
+    private final String filePath;
 
-    public NameVisitor(TypeContext typeContext, PythonFile pythonFile) {
+    public NameVisitor(TypeContext typeContext, String filePath) {
       this.typeContext = typeContext;
-      this.pythonFile = pythonFile;
+      this.filePath = filePath;
     }
 
     @Override
     public void visitName(Name name) {
-      Optional<InferredType> typeForName = typeContext.getTypeFor(this.pythonFile.fileName(), name);
+      Optional<InferredType> typeForName = typeContext.getTypeFor(this.filePath, name);
       typeForName.ifPresent(type -> ((NameImpl) name).setInferredType(type));
       super.visitName(name);
     }

@@ -98,13 +98,13 @@ public class PyTypeTypeGrammarBaseListener implements PyTypeTypeGrammarListener 
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterGeneric_callable_type(PyTypeTypeGrammarParser.Generic_callable_typeContext ctx) { }
+	@Override public void enterGeneric_type(PyTypeTypeGrammarParser.Generic_typeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitGeneric_callable_type(PyTypeTypeGrammarParser.Generic_callable_typeContext ctx) { }
+	@Override public void exitGeneric_type(PyTypeTypeGrammarParser.Generic_typeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

@@ -36,6 +36,7 @@ import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.semantic.ClassSymbolImpl;
+import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.semantic.Scope;
 import org.sonar.python.semantic.SymbolImpl;
 import org.sonar.python.tree.TreeUtils;
@@ -45,6 +46,11 @@ public class TypeContext {
   public static final String CALLABLE_TYPE_CALLABLE = "CallableType(base_type=ClassType(typing.Callable)";
   public static final String GENERIC_TYPE_CALLABLE = "GenericType(base_type=ClassType(typing.Callable)";
   public static final ClassSymbolImpl CALLABLE_CLASS_SYMBOL = new ClassSymbolImpl("Callable", "typing.Callable");
+  public static ProjectLevelSymbolTable projectLevelSymbolTable = ProjectLevelSymbolTable.empty();
+
+  public void setProjectLevelSymbolTable(ProjectLevelSymbolTable projectLevelSymbolTable) {
+    TypeContext.projectLevelSymbolTable = projectLevelSymbolTable;
+  }
 
   private static final class JsonTypeInfo {
     String text;
@@ -152,14 +158,17 @@ public class TypeContext {
     }
     // workaround until Typeshed is fixed
     try {
-      return PyTypeTypeGrammar.getTypeFromString(detailedType);
+      PyTypeTypeGrammar.projectLevelSymbolTable = TypeContext.projectLevelSymbolTable;
+      PyTypeTypeGrammar.fileName = fileName;
+      return Optional.ofNullable(PyTypeTypeGrammar.getTypeFromString(detailedType)).orElseGet(InferredTypes::anyType);
     } catch (RecognitionException e) {
       LOG.error("");
       LOG.error(e.toString());
       LOG.error(detailedType);
       LOG.error("");
+      return InferredTypes.anyType();
     }
-    return getInferredTypeWithoutParsing(typeString, detailedType, fileName);
+    // return getInferredTypeWithoutParsing(typeString, detailedType, fileName);
   }
 
   private static InferredType getInferredTypeWithoutParsing(String typeString, String detailedType, String fileName) {

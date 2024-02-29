@@ -23,11 +23,11 @@ import java.util.Objects;
 import org.antlr.v4.runtime.RecognitionException;
 import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.types.InferredType;
-import org.sonar.python.types.pytype_grammar.PyTypeTypeGrammarParser;
 import org.sonar.python.types.pytype_grammar.PyTypeTypeGrammarParser.Anything_typeContext;
 import org.sonar.python.types.pytype_grammar.PyTypeTypeGrammarParser.Builtin_typeContext;
 import org.sonar.python.types.pytype_grammar.PyTypeTypeGrammarParser.Class_typeContext;
-import org.sonar.python.types.pytype_grammar.PyTypeTypeGrammarParser.Generic_callable_typeContext;
+import org.sonar.python.types.pytype_grammar.PyTypeTypeGrammarParser.Generic_typeContext;
+import org.sonar.python.types.pytype_grammar.PyTypeTypeGrammarParser.Qualified_typeContext;
 import org.sonar.python.types.pytype_grammar.PyTypeTypeGrammarParser.TypeContext;
 import org.sonar.python.types.pytype_grammar.PyTypeTypeGrammarParser.Type_listContext;
 import org.sonar.python.types.pytype_grammar.PyTypeTypeGrammarParser.Union_typeContext;
@@ -42,7 +42,7 @@ class PyTypeTypeGrammarTest {
     String typeString = "hello";
     TypeContext typeContext = PyTypeTypeGrammar.getParseTree(typeString);
 
-    PyTypeTypeGrammarParser.Qualified_typeContext qualifiedTypeContext = typeContext.qualified_type();
+    Qualified_typeContext qualifiedTypeContext = typeContext.qualified_type();
     assertThat(qualifiedTypeContext).isNotNull();
 
     InferredType typeFromParseTree = PyTypeTypeGrammar.getTypeFromParseTree(typeContext);
@@ -178,10 +178,10 @@ class PyTypeTypeGrammarTest {
     String typeString = "GenericType(base_type=ClassType(typing.Callable), parameters=(AnythingType(), ClassType(builtins.NoneType)))";
     TypeContext typeContext = PyTypeTypeGrammar.getParseTree(typeString);
 
-    Generic_callable_typeContext genericCallableTypeContext = typeContext.generic_callable_type();
-    assertThat(genericCallableTypeContext).isNotNull();
+    Generic_typeContext genericTypeContext = typeContext.generic_type();
+    assertThat(genericTypeContext).isNotNull();
 
-    Type_listContext typeListContext = genericCallableTypeContext.type_list();
+    Type_listContext typeListContext = genericTypeContext.type_list();
     assertThat(typeListContext).isNotNull();
 
     InferredType typeFromParseTree = PyTypeTypeGrammar.getTypeFromParseTree(typeContext);

@@ -4,7 +4,7 @@ T__2=3
 T__3=4
 UNION_PREFIX=5
 CLASS_PREFIX=6
-GENERIC_CALLABLE_PREFIX=7
+GENERIC_TYPE_PREFIX=7
 ANYTHING_TYPE=8
 BUILTINS_PREFIX=9
 NONE_TYPE=10
@@ -17,16 +17,17 @@ TUPLE=16
 LIST=17
 SET=18
 DICT=19
-PARAMETERS=20
-STRING=21
-SKIPS=22
+BASE_EXCEPTION=20
+PARAMETERS=21
+STRING=22
+SKIPS=23
 ')'=1
 '.'=2
 ','=3
 '('=4
 'UnionType(type_list='=5
 'ClassType('=6
-'GenericType(base_type=ClassType(typing.Callable)'=7
+'GenericType(base_type='=7
 'AnythingType()'=8
 'builtins'=9
 'NoneType'=10
@@ -39,4 +40,5 @@ SKIPS=22
 'list'=17
 'set'=18
 'dict'=19
-'parameters='=20
+'BaseException'=20
+'parameters='=21
