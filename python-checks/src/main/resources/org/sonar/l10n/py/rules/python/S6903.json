@@ -1,0 +1,22 @@
+{
+  "title": "Using timezone-aware \"datetime\" objects should be preferred over using \"datetime.datetime.utcnow\" and \"datetime.datetime.utcfromtimestamp\"",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-6903",
+  "sqKey": "S6903",
+  "scope": "All",
+  "quickfix": "unknown",
+  "code": {
+    "impacts": {
+      "MAINTAINABILITY": "MEDIUM",
+      "RELIABILITY": "HIGH"
+    },
+    "attribute": "CONVENTIONAL"
+  }
+}

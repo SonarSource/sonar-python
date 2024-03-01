@@ -1,0 +1,48 @@
+<p>This rule raises an issue when the functions <code>datetime.datetime.utcnow</code> or <code>datetime.datetime.utcfromtimestamp</code> are used.</p>
+<h2>Why is this an issue?</h2>
+<p>Python’s <code>datetime</code> API provide several different ways to create <code>datetime</code> objects. One possibility is the to use
+<code>datetime.datetime.utcnow</code> or <code>datetime.datetime.utcfromtimestamp</code> functions. The issue with these two functions is they are not
+time zone aware, even if their name would suggest otherwise.</p>
+<p>Using these functions could cause issue as they may not behave as expected, for example:</p>
+<pre>
+from datetime import datetime
+timestamp = 1571595618.0
+date = datetime.utcfromtimestamp(timestamp)
+date_timestamp = date.timestamp()
+
+assert timestamp == date_timestamp
+</pre>
+<p>This assertion will fail if the system locale is not set to UTC. For this reason these 2 functions are deprecated in Python 3.12.</p>
+<h2>How to fix it</h2>
+<p>To fix this issue, prefer the usage of a timezone-aware datetime.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+from datetime import datetime
+
+datetime.utcnow() # Noncompliant
+
+timestamp = 1571595618.0
+datetime.utcfromtimestamp(timestamp) # Noncompliant
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+from datetime import datetime, timezone
+
+datetime.now(timezone.utc) # Compliant
+
+timestamp = 1571595618.0
+datetime.fromtimestamp(timestamp, timezone.utc) # Compliant
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Python documentation - <a href="https://docs.python.org/3/library/datetime.html#datetime.datetime.utcnow">utcnow reference</a> </li>
+  <li> Python documentation - <a href="https://docs.python.org/3/library/datetime.html#datetime.datetime.utcfromtimestamp">utcfromtimestamp
+  reference</a> </li>
+</ul>
+<h3>Articles &amp; blog posts</h3>
+<ul>
+  <li> Paul Ganssle blog - <a href="https://blog.ganssle.io/articles/2019/11/utcnow.html">Stop using utcnow and utcfromtimestamp</a> </li>
+</ul>
+
