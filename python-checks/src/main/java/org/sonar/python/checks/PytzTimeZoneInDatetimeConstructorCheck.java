@@ -54,7 +54,7 @@ public class PytzTimeZoneInDatetimeConstructorCheck extends PythonSubscriptionCh
     Symbol calleeSymbol = callExpression.calleeSymbol();
 
     if (calleeSymbol != null && "datetime.datetime".equals(calleeSymbol.fullyQualifiedName())) {
-      RegularArgument argument = TreeUtils.nthArgumentOrKeyword(-1, "tzinfo", callExpression.arguments());
+      RegularArgument argument = TreeUtils.nthArgumentOrKeyword(7, "tzinfo", callExpression.arguments());
       if (argument == null) {
         return;
       }

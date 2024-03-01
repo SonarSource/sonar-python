@@ -3,6 +3,8 @@ import pytz
 
 dt = datetime.datetime(2022, 1, 1, tzinfo=pytz.timezone('US/Eastern'))  # Noncompliant {{Don't pass a "pytz.timezone" to the "datetime.datetime" constructor.}}
                                   #^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+dt_ = datetime.datetime(2024, 2, 4, 5, 5, 5, 1, pytz.timezone('US/Eastern'))  # Noncompliant {{Don't pass a "pytz.timezone" to the "datetime.datetime" constructor.}}
+                                               #^^^^^^^^^^^^^^^^^^^^^^^^^^^
 def timezone_in_a_variable():
     some_timezone = pytz.timezone('US/Eastern')
                    #^^^^^^^^^^^^^^^^^^^^^^^^^^^> 1 {{The pytz.timezone is created here.}}
@@ -36,7 +38,9 @@ def with_tuple_unpacking():
     date_tuple = [2024, 2, 28]
     some_timezone_2 = pytz.timezone('US/Eastern')
     dt9 = datetime.datetime(*date_tuple, tzinfo=some_timezone_2)  # Noncompliant
-    dt9 = datetime.datetime(*date_tuple, tzinfo=pytz.timezone('US/Eastern'))  # Noncompliant
+    dt9_1 = datetime.datetime(*date_tuple, tzinfo=pytz.timezone('US/Eastern'))  # Noncompliant
+    full_date_tuple = [2024, 2, 28, 5, 5, 5, 1]
+    dt9_2 = datetime.datetime(*full_date_tuple, some_timezone_2)  # FN because nthArgumentOrKeyword does not take into account the size of the tuple
 
 def multiple_definitions():
     if random():
@@ -67,3 +71,4 @@ def with_valid_timezone_alternative():
     aliased_timezone = another_timezone
     another_timezone = pytz.timezone('US/Eastern')
     dt12 = datetime.datetime(2022, 1, 1, tzinfo=aliased_timezone)
+    dt13 = datetime.datetime(2022, 1, 1, tzinfo=another_timezone) # Noncompliant {{Don't pass a "pytz.timezone" to the "datetime.datetime" constructor.}}
