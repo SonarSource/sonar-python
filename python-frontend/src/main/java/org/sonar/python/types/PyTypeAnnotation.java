@@ -36,8 +36,8 @@ public class PyTypeAnnotation extends BaseTreeVisitor {
   public PyTypeAnnotation(TypeContext typeContext, PythonFile pythonFile) {
     this.typeContext = typeContext;
     this.pythonFile = pythonFile;
-    if (pythonFile.key().startsWith("project:")) {
-      this.filePath = pythonFile.key().substring("project:".length());
+    if (pythonFile.key().indexOf(':') != -1) {
+      this.filePath = pythonFile.key().substring(pythonFile.key().indexOf(':') + 1);
     } else {
       this.filePath = pythonFile.key();
     }
@@ -60,7 +60,18 @@ public class PyTypeAnnotation extends BaseTreeVisitor {
     @Override
     public void visitName(Name name) {
       Optional<InferredType> typeForName = typeContext.getTypeFor(this.filePath, name);
-      typeForName.ifPresent(type -> ((NameImpl) name).setInferredType(type));
+      typeForName.ifPresentOrElse(type -> {
+        if (!(type instanceof RuntimeType)) {
+          ((NameImpl) name).setInferredType(type);
+          return;
+        }
+        RuntimeType type1 = (RuntimeType) type;
+        if (type1.runtimeTypeSymbol() != null && type1.runtimeTypeSymbol().fullyQualifiedName() != null) {
+          ((NameImpl) name).setInferredType(type1);
+          return;
+        }
+        ((NameImpl) name).setInferredType(InferredTypes.anyType());
+      }, () -> ((NameImpl) name).setInferredType(InferredTypes.anyType()));
       super.visitName(name);
     }
   }
