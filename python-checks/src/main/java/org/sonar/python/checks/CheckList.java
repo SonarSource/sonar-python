@@ -379,7 +379,7 @@ public final class CheckList {
       UselessStatementCheck.class,
       UseOfAnyAsTypeHintCheck.class,
       UseOfEmptyReturnValueCheck.class,
-      UseTimeZoneAwareDateTimeConstructorsCheck.class,
+      TimezoneNaiveDatetimeConstructorsCheck.class,
       UseStartsWithEndsWithCheck.class,
       VerboseRegexCheck.class,
       VerifiedSslTlsCertificateCheck.class,

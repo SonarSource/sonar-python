@@ -1,9 +1,9 @@
 def some_function():
     from datetime import datetime
-    datetime.utcnow() # Noncompliant {{Using timezone aware "datetime"s should be preferred over using "datetime.datetime.utcnow" and "datetime.datetime.utcfromtimestamp"}}
+    datetime.utcnow() # Noncompliant {{Don't use datetime.datetime.utcnow to create this datetime object.}}
    #^^^^^^^^^^^^^^^^^
     timestamp = 1571595618.0
-    datetime.utcfromtimestamp(timestamp) # Noncompliant {{Using timezone aware "datetime"s should be preferred over using "datetime.datetime.utcnow" and "datetime.datetime.utcfromtimestamp"}}
+    datetime.utcfromtimestamp(timestamp) # Noncompliant {{Don't use datetime.datetime.utcfromtimestamp to create this datetime object.}}
    #^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 def other_function():
@@ -20,8 +20,8 @@ def unknown_symbols():
 
     unrelated_call()
 
-    datetime.datetime.utcnow() # FN because there is no symbol
-    datetime.datetime.utcfromtimestamp() # FN because there is no symbol
+    datetime.datetime.utcnow()
+    datetime.datetime.utcfromtimestamp()
 
 def compliant_examples():
     from datetime import datetime, timezone
@@ -32,9 +32,12 @@ def compliant_examples():
 
 def aliased_utcnow():
     from datetime import datetime
-    aliased = datetime.utcnow
+    reassigned = datetime.utcnow
     # FN because we lose the FQN in the assignment
-    aliased()
+    reassigned()
+
+    from datetime.datetime import utcnow as aliased
+    aliased() # Noncompliant
 
     from datetime.datetime import utcnow
     utcnow() # Noncompliant
