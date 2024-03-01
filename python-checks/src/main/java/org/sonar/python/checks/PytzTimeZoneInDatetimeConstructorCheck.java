@@ -19,6 +19,10 @@
  */
 package org.sonar.python.checks;
 
+import java.util.Comparator;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
@@ -35,7 +39,7 @@ public class PytzTimeZoneInDatetimeConstructorCheck extends PythonSubscriptionCh
 
   private ReachingDefinitionsAnalysis reachingDefinitionsAnalysis;
   private static final String MESSAGE = "Don't pass a \"pytz.timezone\" to the \"datetime.datetime\" constructor.";
-  private static final String SECONDARY_MESSAGE = "The pytz.timezone is created here";
+  private static final String SECONDARY_MESSAGE = "The pytz.timezone is created here.";
 
   @Override
   public void initialize(Context context) {
@@ -54,30 +58,31 @@ public class PytzTimeZoneInDatetimeConstructorCheck extends PythonSubscriptionCh
       if (argument == null) {
         return;
       }
-      createIssue(argument, context);
+      checkArgument(argument, context);
     }
   }
 
-  private void createIssue(RegularArgument argument, SubscriptionContext context) {
+  private void checkArgument(RegularArgument argument, SubscriptionContext context) {
     if (argument.expression().is(Tree.Kind.CALL_EXPR)) {
-      CallExpression callExpression1 = (CallExpression) argument.expression();
-      Symbol calleeSymbol = callExpression1.calleeSymbol();
+      CallExpression callExpression = (CallExpression) argument.expression();
+      Symbol calleeSymbol = callExpression.calleeSymbol();
       if (!(calleeSymbol != null && "pytz.timezone".equals(calleeSymbol.fullyQualifiedName()))) {
         return;
       }
       context.addIssue(argument, MESSAGE);
     } else if (argument.expression().is(Tree.Kind.NAME)) {
-      var lastAssignmentExpression = reachingDefinitionsAnalysis.valuesAtLocation((Name) argument.expression()).stream()
+      List<CallExpression> allSecondaryLocations = reachingDefinitionsAnalysis.valuesAtLocation((Name) argument.expression()).stream()
         .filter(expression -> expression.is(Tree.Kind.CALL_EXPR))
         .map(CallExpression.class::cast)
-        .findFirst();
-      var lastAssignmentSymbol = lastAssignmentExpression.map(CallExpression::calleeSymbol)
-        .filter(symbol -> "pytz.timezone".equals(symbol.fullyQualifiedName()));
+        .filter(call -> Optional.ofNullable(call.calleeSymbol()).map(symbol ->"pytz.timezone".equals(symbol.fullyQualifiedName())).orElse(false))
+        .sorted(Comparator.comparingInt(call -> call.firstToken().line()))
+        .collect(Collectors.toList());
 
-      if (lastAssignmentExpression.isEmpty()) {
+      if (allSecondaryLocations.isEmpty()) {
         return;
       }
-      lastAssignmentSymbol.ifPresent(assignment -> context.addIssue(argument, MESSAGE).secondary(lastAssignmentExpression.get(), SECONDARY_MESSAGE));
+      var issue = context.addIssue(argument, MESSAGE);
+      allSecondaryLocations.forEach(secondaryLocation -> issue.secondary(secondaryLocation, SECONDARY_MESSAGE));
     }
   }
 }

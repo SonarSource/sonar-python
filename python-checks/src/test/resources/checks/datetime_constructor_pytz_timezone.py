@@ -5,7 +5,7 @@ dt = datetime.datetime(2022, 1, 1, tzinfo=pytz.timezone('US/Eastern'))  # Noncom
                                   #^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 def timezone_in_a_variable():
     some_timezone = pytz.timezone('US/Eastern')
-                   #^^^^^^^^^^^^^^^^^^^^^^^^^^^> 1 {{The pytz.timezone is created here}}
+                   #^^^^^^^^^^^^^^^^^^^^^^^^^^^> 1 {{The pytz.timezone is created here.}}
     dt1 = datetime.datetime(2022, 1, 1, tzinfo=some_timezone)  # Noncompliant {{Don't pass a "pytz.timezone" to the "datetime.datetime" constructor.}}
                                        #^^^^^^^^^^^^^^^^^^^^
     return dt1
@@ -37,3 +37,33 @@ def with_tuple_unpacking():
     some_timezone_2 = pytz.timezone('US/Eastern')
     dt9 = datetime.datetime(*date_tuple, tzinfo=some_timezone_2)  # Noncompliant
     dt9 = datetime.datetime(*date_tuple, tzinfo=pytz.timezone('US/Eastern'))  # Noncompliant
+
+def multiple_definitions():
+    if random():
+        some_timezone_3 = pytz.timezone('US/Eastern')
+                         #^^^^^^^^^^^^^^^^^^^^^^^^^^^> 1 {{The pytz.timezone is created here.}}
+    else:
+        some_timezone_3 = pytz.timezone('US/Pacific')
+                         #^^^^^^^^^^^^^^^^^^^^^^^^^^^> 2 {{The pytz.timezone is created here.}}
+    dt10 = datetime.datetime(2022, 1, 1, tzinfo=some_timezone_3)  # Noncompliant {{Don't pass a "pytz.timezone" to the "datetime.datetime" constructor.}}
+                                        #^^^^^^^^^^^^^^^^^^^^^^
+
+def with_valid_timezone_alternative():
+    import datetime
+    class ValidTimeZone(datetime.tzinfo):
+        ...
+
+    cond = True
+    if cond:
+        some_timezone = ValidTimeZone()
+    else:
+        some_timezone = pytz.timezone('US/Eastern')
+                       #^^^^^^^^^^^^^^^^^^^^^^^^^^^> 1 {{The pytz.timezone is created here.}}
+    if cond: # This is technically wrong because we will never use the pytz.timezone
+        dt11 = datetime.datetime(2022, 1, 1, tzinfo=some_timezone) # Noncompliant {{Don't pass a "pytz.timezone" to the "datetime.datetime" constructor.}}
+                                            #^^^^^^^^^^^^^^^^^^^^
+
+    another_timezone = ValidTimeZone()
+    aliased_timezone = another_timezone
+    another_timezone = pytz.timezone('US/Eastern')
+    dt12 = datetime.datetime(2022, 1, 1, tzinfo=aliased_timezone)
