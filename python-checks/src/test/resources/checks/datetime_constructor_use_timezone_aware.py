@@ -1,9 +1,9 @@
 def some_function():
     from datetime import datetime
-    datetime.utcnow() # Noncompliant {{Don't use datetime.datetime.utcnow to create this datetime object.}}
+    datetime.utcnow() # Noncompliant {{Don't use `datetime.datetime.utcnow` to create this datetime object.}}
    #^^^^^^^^^^^^^^^^^
     timestamp = 1571595618.0
-    datetime.utcfromtimestamp(timestamp) # Noncompliant {{Don't use datetime.datetime.utcfromtimestamp to create this datetime object.}}
+    datetime.utcfromtimestamp(timestamp) # Noncompliant {{Don't use `datetime.datetime.utcfromtimestamp` to create this datetime object.}}
    #^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 def other_function():

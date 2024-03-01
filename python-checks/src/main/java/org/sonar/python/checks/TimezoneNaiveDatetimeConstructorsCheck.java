@@ -29,7 +29,7 @@ import org.sonar.plugins.python.api.tree.Tree;
 
 @Rule(key = "S6903")
 public class TimezoneNaiveDatetimeConstructorsCheck extends PythonSubscriptionCheck {
-  private static final String MESSAGE = "Don't use %s to create this datetime object.";
+  private static final String MESSAGE = "Don't use `%s` to create this datetime object.";
   private static final Set<String> NON_COMPLIANT_FQNS = Set.of("datetime.datetime.utcnow", "datetime.datetime.utcfromtimestamp");
 
   @Override
