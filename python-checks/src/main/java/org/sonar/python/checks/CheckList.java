@@ -300,6 +300,7 @@ public final class CheckList {
       PrivilegePolicyCheck.class,
       ProcessSignallingCheck.class,
       PropertyAccessorParameterCountCheck.class,
+      ProvideCorrectParameterDateTimeConstructorsCheck.class,
       PseudoRandomCheck.class,
       PublicApiIsSecuritySensitiveCheck.class,
       PubliclyWritableDirectoriesCheck.class,
