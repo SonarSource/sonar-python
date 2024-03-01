@@ -19,7 +19,8 @@
  */
 package org.sonar.python.types;
 
-import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.antlr.v4.runtime.CharStreams;
@@ -31,7 +32,6 @@ import org.slf4j.LoggerFactory;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.types.InferredType;
-import org.sonar.python.semantic.ClassSymbolImpl;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.types.pytype_grammar.ExceptionErrorStrategy;
 import org.sonar.python.types.pytype_grammar.PyTypeTypeGrammarLexer;
@@ -89,14 +89,13 @@ public class PyTypeTypeGrammar {
   }
 
   private static InferredType getInferredTypeForQualified(Qualified_typeContext qualifiedTypeContext) {
-    List<String> collected = qualifiedTypeContext.STRING().stream().map(TerminalNode::toString).collect(Collectors.toList());
-    ClassSymbolImpl classSymbol = new ClassSymbolImpl(collected.get(collected.size() - 1), String.join(".", collected));
-    return new RuntimeType(classSymbol);
+    String fullyQualifiedName = qualifiedTypeContext.STRING().stream().map(TerminalNode::toString).collect(Collectors.joining("."));
+    return getInferredType(fullyQualifiedName);
   }
 
   private static InferredType getInferredTypeForUnion(TypeContext typeContext) {
     Union_typeContext unionTypeContext = typeContext.union_type();
-    Stream<InferredType> unionTypeSet = unionTypeContext.type_list().type().stream().map(PyTypeTypeGrammar::getTypeFromParseTree);
+    Stream<InferredType> unionTypeSet = unionTypeContext.type_list().type().stream().map(PyTypeTypeGrammar::getTypeFromParseTree).filter(Objects::nonNull);
     return InferredTypes.union(unionTypeSet);
   }
 
@@ -105,24 +104,33 @@ public class PyTypeTypeGrammar {
       return getInferredTypeForBuiltin(classTypeContext.builtin_type());
     } else {
       Qualified_typeContext qualifiedTypeContext = classTypeContext.qualified_type();
-      String fullyQualifiedName = qualifiedTypeContext.STRING().stream().map(TerminalNode::toString).collect(Collectors.joining("."));
-      if (fullyQualifiedName.equals("typing.Callable")) {
-        return new RuntimeType(org.sonar.python.types.TypeContext.CALLABLE_CLASS_SYMBOL);
-      }
-      Symbol symbol = projectLevelSymbolTable.getSymbol(fullyQualifiedName);
-      if (symbol != null && symbol.is(Symbol.Kind.CLASS)) {
-        return new RuntimeType(((ClassSymbol) symbol));
-      }
-      symbol = TypeShed.symbolWithFQN(fullyQualifiedName);
-      if (symbol != null && symbol.is(Symbol.Kind.CLASS)) {
-        return new RuntimeType(((ClassSymbol) symbol));
-      }
-      LOG.error("");
-      LOG.error(String.format("Unresolved class symbol: %s", fullyQualifiedName));
-      LOG.error(String.format("Filename: %s", fileName));
-      LOG.error("");
-      return InferredTypes.anyType();
+      return getInferredTypeForQualified(qualifiedTypeContext);
     }
+  }
+
+  private static InferredType getInferredType(String fullyQualifiedName) {
+    return Optional.ofNullable(getRuntimeType(fullyQualifiedName)).orElseGet(() -> {
+//      LOG.error("");
+//      LOG.error(String.format("Unresolved class symbol: %s", fullyQualifiedName));
+//      LOG.error(String.format("Filename: %s", fileName));
+//      LOG.error("");
+      return InferredTypes.anyType();
+    });
+  }
+
+  private static InferredType getRuntimeType(String fullyQualifiedName) {
+    if (fullyQualifiedName.equals("typing.Callable")) {
+      return new RuntimeType(org.sonar.python.types.TypeContext.CALLABLE_CLASS_SYMBOL);
+    }
+    Symbol symbol = projectLevelSymbolTable.getSymbol(fullyQualifiedName);
+    if (symbol != null && symbol.is(Symbol.Kind.CLASS) && symbol.fullyQualifiedName() != null) {
+      return new RuntimeType(((ClassSymbol) symbol));
+    }
+    symbol = TypeShed.symbolWithFQN(fullyQualifiedName);
+    if (symbol != null && symbol.is(Symbol.Kind.CLASS) && symbol.fullyQualifiedName() != null) {
+      return new RuntimeType(((ClassSymbol) symbol));
+    }
+    return null;
   }
 
   private static InferredType getInferredTypeForBuiltin(Builtin_typeContext builtinTypeContext) {

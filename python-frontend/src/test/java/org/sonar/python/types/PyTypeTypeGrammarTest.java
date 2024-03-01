@@ -104,6 +104,18 @@ class PyTypeTypeGrammarTest {
   }
 
   @Test
+  void test_class_builtins_4() {
+    String typeString = "builtins.range";
+    TypeContext typeContext = PyTypeTypeGrammar.getParseTree(typeString);
+
+    // Builtin_typeContext builtinTypeContext = typeContext.builtin_type();
+    // assertThat(builtinTypeContext).isNotNull();
+
+    // InferredType typeFromParseTree = PyTypeTypeGrammar.getTypeFromParseTree(typeContext);
+    // assertThat(typeFromParseTree).isEqualTo(InferredTypes.DICT);
+  }
+
+  @Test
   void test_none_type() {
     String typeString = "builtins.NoneType";
     TypeContext typeContext = PyTypeTypeGrammar.getParseTree(typeString);

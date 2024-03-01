@@ -156,16 +156,22 @@ public class TypeContext {
         return localType.get();
       }
     }
+    if (detailedType.startsWith(CALLABLE_TYPE_CALLABLE)) {
+      return new RuntimeType(CALLABLE_CLASS_SYMBOL);
+    }
+    if (typeString.startsWith("Any")) {
+      return InferredTypes.anyType();
+    }
     // workaround until Typeshed is fixed
     try {
       PyTypeTypeGrammar.projectLevelSymbolTable = TypeContext.projectLevelSymbolTable;
       PyTypeTypeGrammar.fileName = fileName;
       return Optional.ofNullable(PyTypeTypeGrammar.getTypeFromString(detailedType)).orElseGet(InferredTypes::anyType);
     } catch (RecognitionException e) {
-      LOG.error("");
-      LOG.error(e.toString());
-      LOG.error(detailedType);
-      LOG.error("");
+      // LOG.error("");
+      // LOG.error(e.toString());
+      // LOG.error(detailedType);
+      // LOG.error("");
       return InferredTypes.anyType();
     }
     // return getInferredTypeWithoutParsing(typeString, detailedType, fileName);
