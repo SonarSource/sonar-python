@@ -1,0 +1,44 @@
+<p>This rule raises an issue when a date format string has the 24-hour code with the AM/PM marker or the 12-hour code without the AM/PM marker.</p>
+<h2>Why is this an issue?</h2>
+<p>The <code>%p</code> directive in the <code>strftime</code> method is used to represent the AM/PM marker in a time string. It is commonly used in
+conjunction with the <code>%I</code> directive, which represents the hour in a 12-hour clock.</p>
+<p>Using the 24-hour format directive with an AM/PM marker can lead to unwanted results e.g.:</p>
+<pre>
+time_string = time(16,0).strftime("%H:%M %p")
+print(time_string)
+</pre>
+<p>will print <code>16:00 PM</code> which makes no sense.</p>
+<p>On the other hand the AM/PM marker is needed when the 12-hour format directive is used to show complete information about an hour e.g.:</p>
+<pre>
+time_string = time(16,0).strftime("%I:%M")
+print(time_string)
+</pre>
+<p>will print 04:00 without indicating if the time is in the morning or the afternoon.</p>
+<h2>How to fix it</h2>
+<p>Use either the 12-hour time format with an AM/PM marker or the 24-hour format without.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+from datetime import time
+
+def foo():
+    t = time(16, 0)
+    formatted_time1 = t.strftime("%H:%M %p") # Noncompliant: 16:00 PM
+    formatted_time2 = t.strftime("%I:%M") # Noncompliant: 04:00
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+from datetime import time
+
+def foo():
+    t = time(16, 0)
+    formatted_time1 = t.strftime("%I:%M %p") # OK: 04:00 PM
+    formatted_time2 = t.strftime("%H:%M") # OK: 16:00
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Python documentation - <a href="https://docs.python.org/3/library/datetime.html#strftime-and-strptime-format-codes">strftime() and strptime()
+  Format Codes</a> </li>
+</ul>
+
