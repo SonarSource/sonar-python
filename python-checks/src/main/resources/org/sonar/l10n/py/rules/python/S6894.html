@@ -1,0 +1,51 @@
+<p>This rule raises an issue when the argument <code>dayfirst</code> or <code>yearfirst</code> is set to <code>True</code> on
+<code>pandas.to_datetime</code> function with an incorrect string format.</p>
+<h2>Why is this an issue?</h2>
+<p>The <code>pandas.to_datetime</code> function transforms a string to a date object. The string representation of the date can take multiple formats.
+To correctly parse these strings, <code>pandas.to_datetime</code> provides several arguments to setup the parsing, such as <code>dayfirst</code> or
+<code>yearfirst</code>. For example setting <code>dayfirst</code> to <code>True</code> indicates to <code>pandas.to_datetime</code> that the date and
+time will be represented as a string with the shape <code>day month year time</code>. Similarly with <code>yearfirst</code>, the string should have
+the following shape <code>year month day time</code>.</p>
+<p>These two arguments are not strict, meaning if the shape of the string is not the one expected by <code>pandas.to_datetime</code>, the function
+will not fail and try to figure out which part of the string is the day, month or year.</p>
+<p>In the following example the <code>dayfirst</code> argument is set to <code>True</code> but we can clearly see that the <code>month</code> part of
+the date would be incorrect. In this case <code>pandas.to_datetime</code> will ignore the <code>dayfirst</code> argument, and parse the date as the
+22nd of January.</p>
+<pre>
+import pandas as pd
+
+pd.to_datetime(["01-22-2000 10:00"], dayfirst=True)
+</pre>
+<p>No issue will be raised in such a case, which could lead to bugs later in the program. Either the user made a mistake by setting
+<code>dayfirst</code> to <code>True</code> or the month part of the date is incorrect.</p>
+<h2>How to fix it</h2>
+<p>To fix this issue either correct the string representation of the date to match the expected format, or remove the arguments <code>dayfirst</code>
+or <code>yearfirst</code>.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+import pandas as pd
+
+pd.to_datetime(["01-22-2000 10:00"], dayfirst=True) # Noncompliant: the second part of the date (22) is not a valid month
+
+pd.to_datetime(["02/03/2000 12:00"], yearfirst=True) # Noncompliant: the year is not the first part of the date
+
+pd.to_datetime(["03-14-2000 10:00"], dayfirst=True) # Noncompliant
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+import pandas as pd
+
+pd.to_datetime(["01-12-2000 10:00"], dayfirst=True) # Compliant: the date will be parsed as expected
+
+pd.to_datetime(["2000/02/28 12:00"], yearfirst=True) # Compliant
+
+pd.to_datetime(["03-14-2000 10:00"]) # Compliant
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Pandas documentation - <a href="https://pandas.pydata.org/docs/user_guide/timeseries.html#converting-to-timestamps">Converting to
+  timestamps</a> </li>
+</ul>
+
