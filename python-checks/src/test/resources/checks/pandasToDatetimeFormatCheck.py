@@ -6,7 +6,7 @@ def yearfirst_true_noncompliant():
 #                  ^^^^^^^^^^^^> ^^^^^^^^^^^^^^
     pd.to_datetime(
         "02/03/2022",
-    #   ^^^^^^^^^^^^>  {{The invalid date(s).}}
+    #   ^^^^^^^^^^^^>  {{Invalid date.}}
         yearfirst=True # Noncompliant
     ) # ^^^^^^^^^^^^^^
 
@@ -18,7 +18,13 @@ def yearfirst_true_noncompliant():
 
 def list_argument_noncompliant():
     pd.to_datetime(["02-03-2022"], yearfirst=True) # Noncompliant
-    pd.to_datetime(["02-03-2022", "03-03-2022"], yearfirst=True)  # Noncompliant
+    pd.to_datetime(
+        ["02-03-2022", "03-03-2022"],
+    #   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^> {{This contains invalid date(s).}}
+    #    ^^^^^^^^^^^^@-1> {{Invalid date.}}
+    yearfirst=True   # Noncompliant
+#   ^^^^^^^^^^^^^^ {{Remove this `yearfirst=True` parameter or make sure the provided date(s) can be parsed accordingly.}}
+    )
     # Following case will actually raise an exception
     pd.to_datetime(["2022-03-02", "03-03-2022"], yearfirst=True) # Noncompliant
     pd.to_datetime([unknown(), "03-03-2022"], yearfirst=True) # Noncompliant
@@ -26,8 +32,14 @@ def list_argument_noncompliant():
 
 def dataflow_arguments():
     my_date_01 = "02-03-2022"
-    pd.to_datetime(my_date_01, yearfirst=True)  # Noncompliant
-#                  ^^^^^^^^^^> ^^^^^^^^^^^^^^
+#                ^^^^^^^^^^^^> {{Invalid date.}}
+    pd.to_datetime(
+        my_date_01,
+#       ^^^^^^^^^^>  {{This contains invalid date(s).}}
+        yearfirst=True  # Noncompliant
+#       ^^^^^^^^^^^^^^
+    )
+
     my_date_02 = "02-04-2022"
     my_date_02 = "02-03-2022"
     pd.to_datetime(my_date_02, yearfirst=True)  # FN
@@ -42,6 +54,12 @@ def dataflow_arguments():
     pd.to_datetime(unknown_call(), yearfirst=True) # OK
     pd.to_datetime([unknown_call()], yearfirst=True) # OK
     pd.to_datetime([my_unknown_date, "20-03-2022"], yearfirst=True) # Noncompliant
+
+    my_date_literal = "01-01-2022"
+#                     ^^^^^^^^^^^^>
+    my_list_literal = [my_date_literal]
+    pd.to_datetime(my_list_literal, yearfirst=True)  # Noncompliant
+#                  ^^^^^^^^^^^^^^^> ^^^^^^^^^^^^^^
 
 
 def yearfirst_true_compliant():

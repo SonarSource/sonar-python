@@ -50,7 +50,7 @@ public class PandasToDatetimeFormatCheck extends PythonSubscriptionCheck {
 
   static final String PANDAS_TO_DATETIME_FQN = "pandas.core.tools.datetimes.to_datetime";
   static final String MESSAGE = "Remove this `%s=%s` parameter or make sure the provided date(s) can be parsed accordingly.";
-  static final String SECONDARY_MESSAGE = "The invalid date(s).";
+  static final String SECONDARY_MESSAGE = "Invalid date.";
   static final String DAYFIRST = "dayfirst";
   static final String YEARFIRST = "yearfirst";
 
@@ -100,17 +100,17 @@ public class PandasToDatetimeFormatCheck extends PythonSubscriptionCheck {
     if (argument == null) {
       return;
     }
-    List<String> argStringValues = getStringValues(argument.expression());
-    List<String> normalizedDateStrings = argStringValues.stream().map(PandasToDatetimeFormatCheck::normalizeDateString).collect(Collectors.toList());
+    Expression argumentExpression = argument.expression();
+    List<ExpressionAndStringValue> expressionAndStringValues = getExpressionsAndStringValues(argumentExpression);
 
     RegularArgument dayfirstArgument = TreeUtils.nthArgumentOrKeyword(2, DAYFIRST, callExpression.arguments());
     RegularArgument yearfirstArgument = TreeUtils.nthArgumentOrKeyword(3, YEARFIRST, callExpression.arguments());
 
-    checkArguments(ctx, dayfirstArgument, yearfirstArgument, normalizedDateStrings, argument);
+    checkArguments(ctx, dayfirstArgument, yearfirstArgument, expressionAndStringValues, argumentExpression);
   }
 
   private static void checkArguments(SubscriptionContext ctx, @Nullable RegularArgument dayfirstArgument, @Nullable RegularArgument yearfirstArgument,
-    List<String> normalizedDateStrings, RegularArgument argument) {
+    List<ExpressionAndStringValue> expressionAndStringValues, Expression argumentExpression) {
 
     boolean isDayFirstTrue = getArgumentConstraint(dayfirstArgument, Expressions::isTruthy);
     boolean isDayFirstFalse = getArgumentConstraint(dayfirstArgument, Expressions::isFalsy);
@@ -124,26 +124,36 @@ public class PandasToDatetimeFormatCheck extends PythonSubscriptionCheck {
       return;
     }
 
-    for (String normalizedDateString : normalizedDateStrings) {
-      ParseResult parseResult = parseResult(normalizedDateString, expectedParseResult);
+    for (ExpressionAndStringValue expressionAndStringValue : expressionAndStringValues) {
+      ParseResult parseResult = parseResult(expressionAndStringValue.normalizedStringValue, expectedParseResult);
 
       if (dayfirstArgument != null && !parseResult.isCompatibleDayFirstTrue) {
-        ctx.addIssue(dayfirstArgument, String.format(MESSAGE, DAYFIRST, "True")).secondary(argument, SECONDARY_MESSAGE);
+        reportIssue(ctx, dayfirstArgument, argumentExpression, expressionAndStringValue.originalExpression, String.format(MESSAGE, DAYFIRST, "True"));
         return;
       }
       if (dayfirstArgument != null && !parseResult.isCompatibleDayFirstFalse) {
-        ctx.addIssue(dayfirstArgument, String.format(MESSAGE, DAYFIRST, "False")).secondary(argument, SECONDARY_MESSAGE);
+        reportIssue(ctx, dayfirstArgument, argumentExpression, expressionAndStringValue.originalExpression, String.format(MESSAGE, DAYFIRST, "False"));
         return;
       }
 
       if (yearfirstArgument != null && !parseResult.isCompatibleYearFirstTrue) {
-        ctx.addIssue(yearfirstArgument, String.format(MESSAGE, YEARFIRST, "True")).secondary(argument, SECONDARY_MESSAGE);
+        reportIssue(ctx, yearfirstArgument, argumentExpression, expressionAndStringValue.originalExpression, String.format(MESSAGE, YEARFIRST, "True"));
         return;
       }
       if (yearfirstArgument != null && !parseResult.isCompatibleYearFirstFalse) {
-        ctx.addIssue(yearfirstArgument, String.format(MESSAGE, YEARFIRST, "False")).secondary(argument, SECONDARY_MESSAGE);
+        reportIssue(ctx, yearfirstArgument, argumentExpression, expressionAndStringValue.originalExpression, String.format(MESSAGE, YEARFIRST, "False"));
         return;
       }
+    }
+  }
+
+  private static void reportIssue(SubscriptionContext ctx, RegularArgument dayfirstArgument, Expression argumentExpression, Expression originalExpression, String message) {
+    PreciseIssue preciseIssue = ctx.addIssue(dayfirstArgument, message);
+    if (argumentExpression != originalExpression) {
+      preciseIssue.secondary(argumentExpression, "This contains invalid date(s).");
+      preciseIssue.secondary(originalExpression, SECONDARY_MESSAGE);
+    } else {
+      preciseIssue.secondary(argumentExpression, SECONDARY_MESSAGE);
     }
   }
 
@@ -163,17 +173,18 @@ public class PandasToDatetimeFormatCheck extends PythonSubscriptionCheck {
     return !Expressions.isTruthy(e) && !Expressions.isFalsy(e);
   }
 
-  private static List<String> getStringValues(Expression expression) {
+  private static List<ExpressionAndStringValue> getExpressionsAndStringValues(Expression expression) {
     if (expression.is(Tree.Kind.STRING_LITERAL)) {
-      return List.of(((StringLiteral) expression).trimmedQuotesValue());
+      String normalizedStringValue = normalizeDateString(((StringLiteral) expression).trimmedQuotesValue());
+      return List.of(new ExpressionAndStringValue(expression, normalizedStringValue));
     }
     if (expression.is(Tree.Kind.NAME)) {
       Optional<Expression> assignedValue = Expressions.singleAssignedNonNameValue((Name) expression);
-      return assignedValue.map(PandasToDatetimeFormatCheck::getStringValues).orElse(Collections.emptyList());
+      return assignedValue.map(PandasToDatetimeFormatCheck::getExpressionsAndStringValues).orElse(Collections.emptyList());
     }
     if (expression.is(Tree.Kind.LIST_LITERAL)) {
       return ((ListLiteral) expression).elements().expressions().stream()
-        .map(PandasToDatetimeFormatCheck::getStringValues).flatMap(List::stream).collect(Collectors.toList());
+        .map(PandasToDatetimeFormatCheck::getExpressionsAndStringValues).flatMap(List::stream).collect(Collectors.toList());
     }
     return Collections.emptyList();
   }
@@ -214,6 +225,16 @@ public class PandasToDatetimeFormatCheck extends PythonSubscriptionCheck {
     }
     // Can't be parsed: no issue raised
     return new ParseResult(true, true, true, true);
+  }
+
+  static class ExpressionAndStringValue {
+    Expression originalExpression;
+    String normalizedStringValue;
+
+    public ExpressionAndStringValue(Expression originalExpression, String normalizedStringValue) {
+      this.originalExpression = originalExpression;
+      this.normalizedStringValue = normalizedStringValue;
+    }
   }
 
   static final class ParseResult {
