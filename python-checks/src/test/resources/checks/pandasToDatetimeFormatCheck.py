@@ -3,7 +3,7 @@ import pandas as pd
 
 def yearfirst_true_noncompliant():
     pd.to_datetime("02-03-2022", yearfirst=True) # Noncompliant {{Remove this `yearfirst=True` parameter or make sure the provided date(s) can be parsed accordingly.}}
-#                  ^^^^^^^^^^^^> ^^^^^^^^^^^^^^
+#                  ^^^^^^^^^^^^>1^^^^^^^^^^^^^^
     pd.to_datetime(
         "02/03/2022",
     #   ^^^^^^^^^^^^>  {{Invalid date.}}
@@ -20,8 +20,8 @@ def list_argument_noncompliant():
     pd.to_datetime(["02-03-2022"], yearfirst=True) # Noncompliant
     pd.to_datetime(
         ["02-03-2022", "03-03-2022"],
-    #   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^> {{This contains invalid date(s).}}
-    #    ^^^^^^^^^^^^@-1> {{Invalid date.}}
+    #   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^>1 {{This contains invalid date(s).}}
+    #    ^^^^^^^^^^^^@-1>2 {{Invalid date.}}
     yearfirst=True   # Noncompliant
 #   ^^^^^^^^^^^^^^ {{Remove this `yearfirst=True` parameter or make sure the provided date(s) can be parsed accordingly.}}
     )
@@ -32,10 +32,10 @@ def list_argument_noncompliant():
 
 def dataflow_arguments():
     my_date_01 = "02-03-2022"
-#                ^^^^^^^^^^^^> {{Invalid date.}}
+#                ^^^^^^^^^^^^>2 {{Invalid date.}}
     pd.to_datetime(
         my_date_01,
-#       ^^^^^^^^^^>  {{This contains invalid date(s).}}
+#       ^^^^^^^^^^>1  {{This contains invalid date(s).}}
         yearfirst=True  # Noncompliant
 #       ^^^^^^^^^^^^^^
     )

@@ -57,6 +57,8 @@ public class PandasToDatetimeFormatCheck extends PythonSubscriptionCheck {
   static final Map<String, ParseResult> DATE_FORMATS = new HashMap<>();
 
   static {
+    // Various separators can actually be provided to pandas.to_datetime and will be normalized to "-"
+    // The absence of separator is treated separately as a special case to avoid loss of information (leading to possible FNs)
     DATE_FORMATS.put("yyyy-MM-dd", new ParseResult(true, false, false, true));
     DATE_FORMATS.put("yyyyMMdd", new ParseResult(true, false, false, true));
     DATE_FORMATS.put("yy-MM-dd", new ParseResult(true, false, false, true));
@@ -84,13 +86,14 @@ public class PandasToDatetimeFormatCheck extends PythonSubscriptionCheck {
     "HH:mm:ss",
     "HH:mm"
   );
+  final Map<String, DateTimeFormatter> formatters = new HashMap<>();
 
   @Override
   public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, PandasToDatetimeFormatCheck::checkCallExpression);
+    context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, this::checkCallExpression);
   }
 
-  static void checkCallExpression(SubscriptionContext ctx) {
+  void checkCallExpression(SubscriptionContext ctx) {
     CallExpression callExpression = (CallExpression) ctx.syntaxNode();
     Symbol symbol = callExpression.calleeSymbol();
     if (symbol == null || !PANDAS_TO_DATETIME_FQN.equals(symbol.fullyQualifiedName())) {
@@ -106,10 +109,10 @@ public class PandasToDatetimeFormatCheck extends PythonSubscriptionCheck {
     RegularArgument dayfirstArgument = TreeUtils.nthArgumentOrKeyword(2, DAYFIRST, callExpression.arguments());
     RegularArgument yearfirstArgument = TreeUtils.nthArgumentOrKeyword(3, YEARFIRST, callExpression.arguments());
 
-    checkArguments(ctx, dayfirstArgument, yearfirstArgument, expressionAndStringValues, argumentExpression);
+    this.checkArguments(ctx, dayfirstArgument, yearfirstArgument, expressionAndStringValues, argumentExpression);
   }
 
-  private static void checkArguments(SubscriptionContext ctx, @Nullable RegularArgument dayfirstArgument, @Nullable RegularArgument yearfirstArgument,
+  private void checkArguments(SubscriptionContext ctx, @Nullable RegularArgument dayfirstArgument, @Nullable RegularArgument yearfirstArgument,
     List<ExpressionAndStringValue> expressionAndStringValues, Expression argumentExpression) {
 
     boolean isDayFirstTrue = getArgumentConstraint(dayfirstArgument, Expressions::isTruthy);
@@ -125,7 +128,7 @@ public class PandasToDatetimeFormatCheck extends PythonSubscriptionCheck {
     }
 
     for (ExpressionAndStringValue expressionAndStringValue : expressionAndStringValues) {
-      ParseResult parseResult = parseResult(expressionAndStringValue.normalizedStringValue, expectedParseResult);
+      ParseResult parseResult = this.parseResult(expressionAndStringValue.normalizedStringValue, expectedParseResult);
 
       if (dayfirstArgument != null && !parseResult.isCompatibleDayFirstTrue) {
         reportIssue(ctx, dayfirstArgument, argumentExpression, expressionAndStringValue.originalExpression, String.format(MESSAGE, DAYFIRST, "True"));
@@ -193,7 +196,7 @@ public class PandasToDatetimeFormatCheck extends PythonSubscriptionCheck {
     return dateString.trim().replaceAll("[\\./;\\s_]", "-");
   }
 
-  private static ParseResult parseResult(String normalizedDateString, ParseResult expected) {
+  private ParseResult parseResult(String normalizedDateString, ParseResult expected) {
     boolean parsedOnce = false;
     for (Map.Entry<String, ParseResult> entry : DATE_FORMATS.entrySet()) {
       if (expected.areAllConditionsMet()) {
@@ -201,7 +204,7 @@ public class PandasToDatetimeFormatCheck extends PythonSubscriptionCheck {
       }
       String dateFormat = entry.getKey();
       ParseResult parseResult = entry.getValue();
-      DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(dateFormat);
+      DateTimeFormatter dateTimeFormatter = formatters.computeIfAbsent(dateFormat, DateTimeFormatter::ofPattern);
       try {
         LocalDate.parse(normalizedDateString, dateTimeFormatter);
         parsedOnce = true;
@@ -211,7 +214,8 @@ public class PandasToDatetimeFormatCheck extends PythonSubscriptionCheck {
       }
       for (String timeFormat : TIME_FORMATS) {
         try {
-          dateTimeFormatter = DateTimeFormatter.ofPattern(dateFormat + timeFormat);
+          String dateTimeFormat = dateFormat + timeFormat;
+          dateTimeFormatter = formatters.computeIfAbsent(dateTimeFormat, DateTimeFormatter::ofPattern);
           LocalDateTime.parse(normalizedDateString, dateTimeFormatter);
           parsedOnce = true;
           expected = expected.updateExpectedParseResult(parseResult);
