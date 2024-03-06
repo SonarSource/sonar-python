@@ -22,10 +22,10 @@ package org.sonar.python.checks;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-class StrftimeUseAppropriateHourSystemCheckTest {
+class StrftimeConfusingHourSystemCheckTest {
   @Test
   void test() {
-    PythonCheckVerifier.verify("src/test/resources/checks/strftime.py", new StrftimeUseAppropriateHourSystemCheck());
+    PythonCheckVerifier.verify("src/test/resources/checks/strftimeConfusingHourSystem.py", new StrftimeConfusingHourSystemCheck());
   }
 
 }

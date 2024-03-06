@@ -23,3 +23,25 @@ def simple_cases():
     formatted_time16 = t.strftime("%I:%M:%S %p %x")
     formatted_time17 = t.strftime("%I:%M:%S %p %X")
     formatted_time18 = t.strftime("%I:%M:%S %p %G")
+    formatted_time19 = t.strftime(" %p %H %M") # Noncompliant {{Use %I (12-hour clock) or %H (24-hour clock) without %p (AM/PM).}}
+                                 #^^^^^^^^^^^
+    formatted_time20 = t.strftime("Hour :%I , minutes :  %M") # Noncompliant {{Use %I (12-hour clock) with %p (AM/PM).}}
+    formatted_time21 = t.strftime("Hour :%H , minutes :  %M , useless : %p") # Noncompliant {{Use %I (12-hour clock) or %H (24-hour clock) without %p (AM/PM).}}
+    format1 = "%H:%M %p"
+             #^^^^^^^^^^> 1 {{Wrong format created here.}}
+    t.strftime(format1) # Noncompliant {{Use %I (12-hour clock) or %H (24-hour clock) without %p (AM/PM).}}
+              #^^^^^^^
+
+    if cond():
+        format2 = "%I:%M"
+    else:
+        format2 = "%H:%M"
+    t.strftime(format2) # FN because of the limitations of SingleAssignedValue
+
+    # This one is a FN because we don't support f-strings in this rule
+    format19 = f"%I:%M"
+    t.strftime(format19)
+
+    # This one is a FN because we don't support f-strings in this rule
+    format_marker = "%p"
+    t.strftime(f"%I:%M {format_marker}")

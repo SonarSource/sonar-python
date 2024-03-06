@@ -24,20 +24,53 @@ import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.CallExpression;
+import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.checks.utils.Expressions;
 import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S6883")
-public class StrftimeUseAppropriateHourSystemCheck extends PythonSubscriptionCheck {
+public class StrftimeConfusingHourSystemCheck extends PythonSubscriptionCheck {
 
   public static final String MESSAGE = "Use %I (12-hour clock) or %H (24-hour clock) without %p (AM/PM).";
   public static final String MESSAGE_12_HOURS = "Use %I (12-hour clock) with %p (AM/PM).";
+  private static final String MESSAGE_SECONDARY_LOCATION = "Wrong format created here.";
 
   @Override
   public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, StrftimeUseAppropriateHourSystemCheck::checkCallExpr);
+    context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, StrftimeConfusingHourSystemCheck::checkCallExpr);
+  }
+
+  private static void checkExpression(SubscriptionContext context, Expression expression) {
+    checkExpression(context, expression, expression);
+  }
+
+  private static void checkExpression(SubscriptionContext context, Expression expression, Tree primaryLocation) {
+    if (expression.is(Tree.Kind.NAME)) {
+      Expressions.singleAssignedNonNameValue((Name) expression).ifPresent(a -> checkExpression(context, a, primaryLocation));
+    }
+    if (expression.is(Tree.Kind.STRING_LITERAL)) {
+      StringLiteral stringLiteral = (StringLiteral) expression;
+      if (stringLiteral.stringElements().stream().anyMatch(stringElement -> "f".equalsIgnoreCase(stringElement.prefix()))) {
+        return;
+      }
+      String value = stringLiteral.trimmedQuotesValue();
+      String effectiveMessage = null;
+      if (value.contains("%H") && value.contains("%p")) {
+        effectiveMessage = MESSAGE;
+      } else if (value.contains("%I") && !value.contains("%p")) {
+        effectiveMessage = MESSAGE_12_HOURS;
+      }
+      if (effectiveMessage != null) {
+        var issue = context.addIssue(primaryLocation, effectiveMessage);
+        if (issue != null) {
+          issue.secondary(stringLiteral, MESSAGE_SECONDARY_LOCATION);
+        }
+      }
+    }
   }
 
   private static void checkCallExpr(SubscriptionContext context) {
@@ -55,15 +88,6 @@ public class StrftimeUseAppropriateHourSystemCheck extends PythonSubscriptionChe
     if (formatArgument == null) {
       return;
     }
-    if (!formatArgument.expression().is(Tree.Kind.STRING_LITERAL)) {
-      return;
-    }
-    StringLiteral formatString = (StringLiteral) formatArgument.expression();
-    String format = formatString.trimmedQuotesValue();
-    if (format.contains("%H") && format.contains("%p")) {
-      context.addIssue(formatString, MESSAGE);
-    } else if (format.contains("%I") && !format.contains("%p")) {
-      context.addIssue(formatString, MESSAGE_12_HOURS);
-    }
+    checkExpression(context, formatArgument.expression());
   }
 }
