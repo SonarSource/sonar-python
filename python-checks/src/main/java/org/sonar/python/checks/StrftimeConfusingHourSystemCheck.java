@@ -66,7 +66,7 @@ public class StrftimeConfusingHourSystemCheck extends PythonSubscriptionCheck {
       }
       if (effectiveMessage != null) {
         var issue = context.addIssue(primaryLocation, effectiveMessage);
-        if (issue != null) {
+        if (primaryLocation != expression) {
           issue.secondary(stringLiteral, MESSAGE_SECONDARY_LOCATION);
         }
       }

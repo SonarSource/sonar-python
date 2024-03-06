@@ -44,4 +44,4 @@ def simple_cases():
 
     # This one is a FN because we don't support f-strings in this rule
     format_marker = "%p"
-    t.strftime(f"%I:%M {format_marker}")
+    t.strftime(f"%H:%M {format_marker}")
