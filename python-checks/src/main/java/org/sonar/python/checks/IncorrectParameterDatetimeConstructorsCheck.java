@@ -119,15 +119,12 @@ public class IncorrectParameterDatetimeConstructorsCheck extends PythonSubscript
   }
 
   private static void checkArgument(SubscriptionContext context, RegularArgument argument, long min, long max, String name) {
-    if (!argument.expression().is(Tree.Kind.NUMERIC_LITERAL) && !argument.expression().is(Tree.Kind.UNARY_MINUS) && !argument.expression().is(Tree.Kind.NAME)) {
-      return;
-    }
     ValueWithExpression valueWithExpression = getValue(argument.expression());
     if (valueWithExpression == null) {
       return;
     }
     long value = valueWithExpression.value();
-    Tree secondaryLocation = valueWithExpression.expression();
+    Tree secondaryLocation = argument.expression() == valueWithExpression.expression() ? null : valueWithExpression.expression();
     if (value < min || value > max) {
       PreciseIssue issue = context.addIssue(argument, String.format(MESSAGE, name));
       if (secondaryLocation != null) {

@@ -95,3 +95,7 @@ def no_issue_on_syntax_errors():
     datetime.datetime(True, 3, 1, 12, 30, 0, 0)
 
     datetime.time(-random(), 12, 5, 0)
+    datetime.time(12 + 65, 12, 5, 0)
+
+def some_function(): ...
+some_function()
