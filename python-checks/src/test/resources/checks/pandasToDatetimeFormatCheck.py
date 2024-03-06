@@ -28,6 +28,10 @@ def list_argument_noncompliant():
     # Following case will actually raise an exception
     pd.to_datetime(["2022-03-02", "03-03-2022"], yearfirst=True) # Noncompliant
     pd.to_datetime([unknown(), "03-03-2022"], yearfirst=True) # Noncompliant
+    some_date = "03-03-2022"
+    #           ^^^^^^^^^^^^>2
+    pd.to_datetime([unknown(), some_date], yearfirst=True) # Noncompliant
+    #              ^^^^^^^^^^^^^^^^^^^^^^>1^^^^^^^^^^^^^^
 
 
 def dataflow_arguments():
