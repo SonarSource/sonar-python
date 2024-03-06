@@ -1,6 +1,12 @@
 import numpy as np
 
-unkwown_function()
+def unrelated():
+    unkwown_function()
+    np.busday_offset('2012-05' , 1, roll='forward')
+    def other_function(): ...
+    other_function()
+    np.busday_offset('2012-05' , 1, roll='forward', weekmask=other_function())
+
 def some_cases():
     offset = np.busday_offset('2012-05', 1, roll='forward', weekmask='0111100')
     offset = np.busday_offset('2012-05', 1, roll='forward', weekmask=[0, 1, 1, 1, 1, 0, 0])
@@ -52,3 +58,6 @@ def with_assigned_values():
                                                                      #^^^^^^^^^
     weekmask9 = ("TueWed")
     offset9 = np.busday_offset('2012-05', 1, roll='forward', weekmask=weekmask9)
+
+    weekmask10 = [1,1,1,1,1,1,2]
+    offset10 = np.busday_offset('2012-05', 1, roll='forward', weekmask=weekmask10) # Noncompliant {{Array must have 7 elements, all of which are 0 or 1.}}

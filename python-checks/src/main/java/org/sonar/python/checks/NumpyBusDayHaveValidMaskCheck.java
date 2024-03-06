@@ -72,15 +72,13 @@ public class NumpyBusDayHaveValidMaskCheck extends PythonSubscriptionCheck {
       checkList(context, ((ListLiteral) weekmaskArgument.expression()));
     } else if (weekmaskArgument.expression().is(Tree.Kind.NAME)) {
       Name name = (Name) weekmaskArgument.expression();
-      Expression assignedExpression = Expressions.singleAssignedValue(name);
-      if (assignedExpression == null) {
-        return;
-      }
-      if (assignedExpression.is(Tree.Kind.STRING_LITERAL)) {
-        checkString(context, ((StringLiteral) assignedExpression).trimmedQuotesValue(), weekmaskArgument.expression(), assignedExpression);
-      } else if (assignedExpression.is(Tree.Kind.LIST_LITERAL)) {
-        checkList(context, ((ListLiteral) assignedExpression), weekmaskArgument.expression(), assignedExpression);
-      }
+      Expressions.singleAssignedNonNameValue(name).ifPresent(assignedExpression -> {
+        if (assignedExpression.is(Tree.Kind.STRING_LITERAL)) {
+          checkString(context, ((StringLiteral) assignedExpression).trimmedQuotesValue(), weekmaskArgument.expression(), assignedExpression);
+        } else if (assignedExpression.is(Tree.Kind.LIST_LITERAL)) {
+          checkList(context, ((ListLiteral) assignedExpression), weekmaskArgument.expression(), assignedExpression);
+        }
+      });
     }
   }
 
@@ -102,13 +100,11 @@ public class NumpyBusDayHaveValidMaskCheck extends PythonSubscriptionCheck {
   private static void checkList(SubscriptionContext context, ListLiteral listLiteral, Tree primaryLocation, @Nullable Tree secondaryLocation) {
     ExpressionList listElements = listLiteral.elements();
     List<Expression> expressionList = listElements.expressions();
-    if (expressionList.size() == 7) {
-      return;
-    }
-    if (!expressionList.stream()
+    if (expressionList.stream()
       .filter(e -> e.is(Tree.Kind.NUMERIC_LITERAL))
       .map(NumericLiteral.class::cast)
-      .allMatch(numericLiteral -> "0".equals(numericLiteral.valueAsString()) || "1".equals(numericLiteral.valueAsString()))) {
+      .allMatch(numericLiteral -> "0".equals(numericLiteral.valueAsString()) || "1".equals(numericLiteral.valueAsString()))
+      && expressionList.size() == 7) {
       return;
     }
     createIssue(context, MESSAGE_ARRAY, primaryLocation, secondaryLocation);
