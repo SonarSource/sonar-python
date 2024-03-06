@@ -24,21 +24,25 @@ import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.CallExpression;
+import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.NumericLiteral;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.UnaryExpression;
+import org.sonar.python.checks.utils.Expressions;
 import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S6882")
-public class ProvideCorrectParameterDateTimeConstructorsCheck extends PythonSubscriptionCheck {
+public class IncorrectParameterDatetimeConstructorsCheck extends PythonSubscriptionCheck {
   private static final int MIN_YEAR = 1;
   private static final int MAX_YEAR = 9999;
-  private static final String MESSAGE = "The %s parameter must be valid.";
+  private static final String MESSAGE = "Provide a correct value for the `%s` parameter.";
+  private static final String MESSAGE_SECONDARY_LOCATION = "An invalid value is assigned here.";
 
   @Override
   public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, ProvideCorrectParameterDateTimeConstructorsCheck::checkCallExpr);
+    context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, IncorrectParameterDatetimeConstructorsCheck::checkCallExpr);
   }
 
   private static void checkCallExpr(SubscriptionContext context) {
@@ -68,35 +72,67 @@ public class ProvideCorrectParameterDateTimeConstructorsCheck extends PythonSubs
     RegularArgument microsecondArgument = TreeUtils.nthArgumentOrKeyword(parameterOffset + 3, "microsecond", callExpression.arguments());
 
     if (hourArgument != null) {
-      checkArgument(hourArgument, 0, 23, context, "hour");
+      checkArgument(context, hourArgument, 0, 23, "hour");
     }
     if (minuteArgument != null) {
-      checkArgument(minuteArgument, 0, 59, context, "minute");
+      checkArgument(context, minuteArgument, 0, 59, "minute");
     }
     if (secondArgument != null) {
-      checkArgument(secondArgument, 0, 59, context, "second");
+      checkArgument(context, secondArgument, 0, 59, "second");
     }
     if (microsecondArgument != null) {
-      checkArgument(microsecondArgument, 0, 999_999, context, "microsecond");
+      checkArgument(context, microsecondArgument, 0, 999_999, "microsecond");
     }
   }
 
-  private static void checkArgument(RegularArgument argument, long min, long max, SubscriptionContext context, String name) {
-    if (!argument.expression().is(Tree.Kind.NUMERIC_LITERAL) && !argument.expression().is(Tree.Kind.UNARY_MINUS)) {
+  private static class ValueWithExpression {
+    private final long value;
+    private final Tree expression;
+
+    public ValueWithExpression(long value, Tree expression) {
+      this.value = value;
+      this.expression = expression;
+    }
+
+    public long value() {
+      return value;
+    }
+
+    public Tree expression() {
+      return expression;
+    }
+  }
+
+  private static ValueWithExpression getValue(Expression expression) {
+    if (expression.is(Tree.Kind.NUMERIC_LITERAL)) {
+      return new ValueWithExpression(((NumericLiteral) expression).valueAsLong(), expression);
+    } else if (expression.is(Tree.Kind.UNARY_MINUS)) {
+      UnaryExpression unaryExpression = (UnaryExpression) expression;
+      if (!unaryExpression.expression().is(Tree.Kind.NUMERIC_LITERAL)) {
+        return null;
+      }
+      return new ValueWithExpression(-((NumericLiteral) unaryExpression.expression()).valueAsLong(), unaryExpression);
+    } else if (expression.is(Tree.Kind.NAME)) {
+      return Expressions.singleAssignedNonNameValue((Name) expression).map(IncorrectParameterDatetimeConstructorsCheck::getValue).orElse(null);
+    }
+    return null;
+  }
+
+  private static void checkArgument(SubscriptionContext context, RegularArgument argument, long min, long max, String name) {
+    if (!argument.expression().is(Tree.Kind.NUMERIC_LITERAL) && !argument.expression().is(Tree.Kind.UNARY_MINUS) && !argument.expression().is(Tree.Kind.NAME)) {
       return;
     }
-    long value;
-    if (argument.expression().is(Tree.Kind.NUMERIC_LITERAL)) {
-      value = ((NumericLiteral) argument.expression()).valueAsLong();
-    } else {
-      UnaryExpression unaryExpression = (UnaryExpression) argument.expression();
-      if (!unaryExpression.expression().is(Tree.Kind.NUMERIC_LITERAL)) {
-        return;
-      }
-      value = -((NumericLiteral) unaryExpression.expression()).valueAsLong();
+    ValueWithExpression valueWithExpression = getValue(argument.expression());
+    if (valueWithExpression == null) {
+      return;
     }
+    long value = valueWithExpression.value();
+    Tree secondaryLocation = valueWithExpression.expression();
     if (value < min || value > max) {
-      context.addIssue(argument, String.format(MESSAGE, name));
+      PreciseIssue issue = context.addIssue(argument, String.format(MESSAGE, name));
+      if (secondaryLocation != null) {
+        issue.secondary(secondaryLocation, MESSAGE_SECONDARY_LOCATION);
+      }
     }
   }
 
@@ -109,9 +145,8 @@ public class ProvideCorrectParameterDateTimeConstructorsCheck extends PythonSubs
       return;
     }
 
-    checkArgument(yearArgument, MIN_YEAR, MAX_YEAR, context, "year");
-    checkArgument(monthArgument, 1, 12, context, "month");
-    checkArgument(dayArgument, 1, 31, context, "day");
+    checkArgument(context, yearArgument, MIN_YEAR, MAX_YEAR, "year");
+    checkArgument(context, monthArgument, 1, 12, "month");
+    checkArgument(context, dayArgument, 1, 31, "day");
   }
-
 }

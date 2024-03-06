@@ -22,9 +22,9 @@ package org.sonar.python.checks;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-class ProvideCorrectParameterDateTimeConstructorsCheckTest {
+class IncorrectParameterDatetimeConstructorsCheckTest {
   @Test
   void test() {
-    PythonCheckVerifier.verify("src/test/resources/checks/datetime_constructor_values.py", new ProvideCorrectParameterDateTimeConstructorsCheck());
+    PythonCheckVerifier.verify("src/test/resources/checks/incorrectParameterDatetimeConstructorsCheck.py", new IncorrectParameterDatetimeConstructorsCheck());
   }
 }
