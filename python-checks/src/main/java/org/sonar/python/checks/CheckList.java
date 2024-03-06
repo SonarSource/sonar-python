@@ -293,6 +293,7 @@ public final class CheckList {
       PandasDataFrameToNumpyCheck.class,
       PandasModifyInPlaceCheck.class,
       PandasReadNoDataTypeCheck.class,
+      PandasToDatetimeFormatCheck.class,
       ParsingErrorCheck.class,
       PredictableSaltCheck.class,
       PreIncrementDecrementCheck.class,
