@@ -1,6 +1,8 @@
 package org.sonar.python.types;
 
 import com.google.gson.annotations.SerializedName;
+import java.util.Optional;
+import org.sonar.plugins.python.api.types.InferredType;
 
 public class PyTypeInfo {
   private final String text;
@@ -45,5 +47,12 @@ public class PyTypeInfo {
 
   public String shortType() {
     return shortType;
+  }
+
+  public InferredType inferredType() {
+    return Optional.of(this)
+      .map(PyTypeInfo::type)
+      .map(PyTypeDetailedInfo::inferredType)
+      .orElseGet(InferredTypes::anyType);
   }
 }
