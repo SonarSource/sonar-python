@@ -120,10 +120,12 @@ public class TypeContext {
       LOG.error("Found type at position, but does not match expected kind ({}): {}", kind, typeInfo);
       return Optional.empty();
     }
-    return Optional.of(typeStringToTypeInfo(typeInfo.shortType(), typeInfo.type().raw(), fileName, tree));
+    return Optional.of(getInferredType(typeInfo, fileName, tree));
   }
 
-  private InferredType typeStringToTypeInfo(String typeString, String detailedType, String fileName, Tree tree) {
+  private InferredType getInferredType(PyTypeInfo typeInfo, String fileName, Tree tree) {
+    var typeString = typeInfo.shortType();
+    var detailedType = typeInfo.type().raw();
     if ("None".equals(typeString)) {
       typeString = "NoneType";
     }
