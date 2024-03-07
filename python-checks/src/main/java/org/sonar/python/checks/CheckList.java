@@ -338,6 +338,7 @@ public final class CheckList {
       SpecialMethodReturnTypeCheck.class,
       SQLQueriesCheck.class,
       StandardInputCheck.class,
+      StrftimeConfusingHourSystemCheck.class,
       StringFormatCorrectnessCheck.class,
       StringFormatMisuseCheck.class,
       StringLiteralDuplicationCheck.class,
