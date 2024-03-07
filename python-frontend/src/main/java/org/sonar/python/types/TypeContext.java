@@ -145,7 +145,7 @@ public class TypeContext {
     try {
       PyTypeTypeGrammar.projectLevelSymbolTable = TypeContext.projectLevelSymbolTable;
       PyTypeTypeGrammar.fileName = fileName;
-      return Optional.ofNullable(PyTypeTypeGrammar.getTypeFromString(detailedType)).orElseGet(InferredTypes::anyType);
+      return typeInfo.inferredType();
     } catch (RecognitionException e) {
       // LOG.error("");
       // LOG.error(e.toString());
