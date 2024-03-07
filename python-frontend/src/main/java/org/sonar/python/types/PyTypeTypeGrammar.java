@@ -134,31 +134,23 @@ public class PyTypeTypeGrammar {
   }
 
   private static InferredType getInferredTypeForBuiltin(Builtin_typeContext builtinTypeContext) {
-    if (builtinTypeContext.builtin().NONE_TYPE() != null) {
-      return InferredTypes.runtimeBuiltinType(builtinTypeContext.builtin().NONE_TYPE().toString());
-    } else if (builtinTypeContext.builtin().BOOL() != null) {
-      return InferredTypes.runtimeBuiltinType(builtinTypeContext.builtin().BOOL().toString());
-    } else if (builtinTypeContext.builtin().STR() != null) {
-      return InferredTypes.runtimeBuiltinType(builtinTypeContext.builtin().STR().toString());
-    } else if (builtinTypeContext.builtin().INT() != null) {
-      return InferredTypes.runtimeBuiltinType(builtinTypeContext.builtin().INT().toString());
-    } else if (builtinTypeContext.builtin().FLOAT() != null) {
-      return InferredTypes.runtimeBuiltinType(builtinTypeContext.builtin().FLOAT().toString());
-    } else if (builtinTypeContext.builtin().COMPLEX() != null) {
-      return InferredTypes.runtimeBuiltinType(builtinTypeContext.builtin().COMPLEX().toString());
-    } else if (builtinTypeContext.builtin().TUPLE() != null) {
-      return InferredTypes.runtimeBuiltinType(builtinTypeContext.builtin().TUPLE().toString());
-    } else if (builtinTypeContext.builtin().LIST() != null) {
-      return InferredTypes.runtimeBuiltinType(builtinTypeContext.builtin().LIST().toString());
-    } else if (builtinTypeContext.builtin().SET() != null) {
-      return InferredTypes.runtimeBuiltinType(builtinTypeContext.builtin().SET().toString());
-    } else if (builtinTypeContext.builtin().DICT() != null) {
-      return InferredTypes.runtimeBuiltinType(builtinTypeContext.builtin().DICT().toString());
-    } else if (builtinTypeContext.builtin().BASE_EXCEPTION() != null) {
-      return InferredTypes.runtimeBuiltinType(builtinTypeContext.builtin().BASE_EXCEPTION().toString());
-    } else {
-      return null;
-    }
+    return Stream.of(
+      builtinTypeContext.builtin().NONE_TYPE(),
+      builtinTypeContext.builtin().BOOL(),
+      builtinTypeContext.builtin().STR(),
+      builtinTypeContext.builtin().INT(),
+      builtinTypeContext.builtin().FLOAT(),
+      builtinTypeContext.builtin().COMPLEX(),
+      builtinTypeContext.builtin().TUPLE(),
+      builtinTypeContext.builtin().LIST(),
+      builtinTypeContext.builtin().SET(),
+      builtinTypeContext.builtin().DICT(),
+      builtinTypeContext.builtin().BASE_EXCEPTION()
+    ).filter(Objects::nonNull)
+      .map(Objects::toString)
+      .map(InferredTypes::runtimeBuiltinType)
+      .findFirst()
+      .orElse(null);
   }
 
 }

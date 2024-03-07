@@ -38,7 +38,7 @@ class PyTypeInferenceTest {
 
   @Test
   void test_type_inference_builtins() {
-    TypeContext typeContext = TypeContext.fromJSON("{\n" +
+    TypeContext typeContext = TypeContextReader.fromJson("{\n" +
       "  \"mod1.py\": [\n" +
       "    {\n" +
       "      \"text\": \"x\",\n" +
@@ -65,7 +65,7 @@ class PyTypeInferenceTest {
 
   @Test
   void test_type_inference_custom_class() {
-    TypeContext typeContext = TypeContext.fromJSON("{\n" +
+    TypeContext typeContext = TypeContextReader.fromJson("{\n" +
       "  \"mod1.py\": [\n" +
       "    {\n" +
       "      \"text\": \"a\",\n" +
@@ -103,7 +103,7 @@ class PyTypeInferenceTest {
 
   @Test
   void test_type_inference_with_scopes() {
-    TypeContext typeContext = TypeContext.fromJSON("{\n" +
+    TypeContext typeContext = TypeContextReader.fromJson("{\n" +
       "  \"mod1.py\": [\n" +
       "    {\n" +
       "      \"text\": \"a\",\n" +
@@ -232,7 +232,7 @@ class PyTypeInferenceTest {
 
   @Test
   void test_import_of_known_typeshed_symbol() {
-    TypeContext typeContext = TypeContext.fromJSON("{\n" +
+    TypeContext typeContext = TypeContextReader.fromJson("{\n" +
       "  \"mod1.py\": [\n" +
       "    {\n" +
       "      \"text\": \"connection\",\n" +
@@ -299,7 +299,7 @@ class PyTypeInferenceTest {
 
   @Test
   void test_import_of_known_typeshed_symbol_2() {
-    TypeContext typeContext = TypeContext.fromJSON("{\n" +
+    TypeContext typeContext = TypeContextReader.fromJson("{\n" +
       "  \"mod1.py\": [\n" +
       "    {\n" +
       "      \"text\": \"connection\",\n" +
@@ -351,7 +351,7 @@ class PyTypeInferenceTest {
 
   @Test
   void test_import_of_known_typeshed_symbol_3() {
-    TypeContext typeContext = TypeContext.fromJSON("{\n" +
+    TypeContext typeContext = TypeContextReader.fromJson("{\n" +
       "  \"mod1.py\": [\n" +
       "    {\n" +
       "      \"text\": \"connection\",\n" +
@@ -410,7 +410,7 @@ class PyTypeInferenceTest {
 
   @Test
   void test_correct_annotation_of_callable() {
-    TypeContext typeContext = TypeContext.fromJSON("{\n" +
+    TypeContext typeContext = TypeContextReader.fromJson("{\n" +
       "  \"mod1.py\": [\n" +
       "    {\n" +
       "      \"text\": \"func\",\n" +
@@ -451,7 +451,7 @@ class PyTypeInferenceTest {
 
   @Test
   void test_correct_annotation_of_callable_2() {
-    TypeContext typeContext = TypeContext.fromJSON("{\n" +
+    TypeContext typeContext = TypeContextReader.fromJson("{\n" +
       "  \"mod1.py\": [\n" +
       "    {\n" +
       "      \"text\": \"this_file\",\n" +
@@ -603,7 +603,7 @@ class PyTypeInferenceTest {
 
   @Test
   void test_optional_type() {
-    TypeContext typeContext = TypeContext.fromJSON("{\n" +
+    TypeContext typeContext = TypeContextReader.fromJson("{\n" +
       "  \"mod1.py\": [\n" +
       "    {\n" +
       "      \"text\": \"func\",\n" +
@@ -666,7 +666,7 @@ class PyTypeInferenceTest {
 
   @Test
   void test_template() {
-    TypeContext typeContext = TypeContext.fromJSON("{}");
+    TypeContext typeContext = TypeContextReader.fromJson("{}");
     FileInput fileInput = getFileInputFromLines(typeContext, "");
 
   }
