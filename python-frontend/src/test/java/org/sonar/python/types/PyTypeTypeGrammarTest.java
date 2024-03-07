@@ -22,6 +22,7 @@ package org.sonar.python.types;
 import java.util.Objects;
 import org.antlr.v4.runtime.RecognitionException;
 import org.junit.jupiter.api.Test;
+import org.sonar.python.semantic.ClassSymbolImpl;
 import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.types.pytype_grammar.PyTypeTypeGrammarParser.Anything_typeContext;
 import org.sonar.python.types.pytype_grammar.PyTypeTypeGrammarParser.Builtin_typeContext;
@@ -38,14 +39,19 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 class PyTypeTypeGrammarTest {
 
   @Test
+  void test_parse_tree_string_number_and_underscore() {
+    String typeString = "hello_3";
+    InferredType typeFromParseTree = PyTypeTypeGrammar.getTypeFromString(typeString);
+    assertThat(typeFromParseTree.runtimeTypeSymbol().fullyQualifiedName()).isEqualTo("hello_3");
+    assertThat(typeFromParseTree).isInstanceOf(RuntimeType.class);
+  }
+
+  @Test
   void test_parse_tree_string() {
     String typeString = "hello";
     TypeContext typeContext = PyTypeTypeGrammar.getParseTree(typeString);
 
-    Qualified_typeContext qualifiedTypeContext = typeContext.qualified_type();
-    assertThat(qualifiedTypeContext).isNotNull();
-
-    InferredType typeFromParseTree = PyTypeTypeGrammar.getTypeFromParseTree(typeContext);
+    InferredType typeFromParseTree = PyTypeTypeGrammar.getTypeFromString(typeString);
     assertThat(typeFromParseTree.runtimeTypeSymbol().fullyQualifiedName()).isEqualTo("hello");
     assertThat(typeFromParseTree).isInstanceOf(RuntimeType.class);
   }
@@ -55,105 +61,59 @@ class PyTypeTypeGrammarTest {
     String typeString = "ClassType(GabaGool)";
     TypeContext typeContext = PyTypeTypeGrammar.getParseTree(typeString);
 
-    Class_typeContext classType = typeContext.class_type();
-    assertThat(classType).isNotNull();
-
-    InferredType typeFromParseTree = PyTypeTypeGrammar.getTypeFromParseTree(typeContext);
+    InferredType typeFromParseTree = PyTypeTypeGrammar.getTypeFromString(typeString);
     assertThat(typeFromParseTree).isInstanceOf(RuntimeType.class);
     RuntimeType runtimeType = (RuntimeType) typeFromParseTree;
     assertThat(runtimeType.getTypeClass().name()).isEqualTo("GabaGool");
   }
 
   @Test
-  void test_class_builtins_1() {
-    String typeString = "ClassType(int)";
-    TypeContext typeContext = PyTypeTypeGrammar.getParseTree(typeString);
-
-    Class_typeContext classType = typeContext.class_type();
-    assertThat(classType).isNotNull();
-
-    Builtin_typeContext builtinTypeContext = classType.builtin_type();
-    assertThat(builtinTypeContext).isNotNull();
-
-    InferredType typeFromParseTree = PyTypeTypeGrammar.getTypeFromParseTree(typeContext);
-    assertThat(typeFromParseTree).isEqualTo(InferredTypes.INT);
-  }
-
-  @Test
   void test_class_builtins_2() {
     String typeString = "ClassType(builtins.int)";
-    TypeContext typeContext = PyTypeTypeGrammar.getParseTree(typeString);
-
-    Class_typeContext classType = typeContext.class_type();
-    assertThat(classType).isNotNull();
-
-    InferredType typeFromParseTree = PyTypeTypeGrammar.getTypeFromParseTree(typeContext);
+    InferredType typeFromParseTree = PyTypeTypeGrammar.getTypeFromString(typeString);
     assertThat(typeFromParseTree).isEqualTo(InferredTypes.INT);
   }
 
   @Test
   void test_class_builtins_3() {
     String typeString = "ClassType(builtins.dict)";
-    TypeContext typeContext = PyTypeTypeGrammar.getParseTree(typeString);
-
-    Class_typeContext classType = typeContext.class_type();
-    assertThat(classType).isNotNull();
-
-    InferredType typeFromParseTree = PyTypeTypeGrammar.getTypeFromParseTree(typeContext);
+    InferredType typeFromParseTree = PyTypeTypeGrammar.getTypeFromString(typeString);
     assertThat(typeFromParseTree).isEqualTo(InferredTypes.DICT);
   }
 
   @Test
   void test_class_builtins_4() {
     String typeString = "builtins.range";
-    TypeContext typeContext = PyTypeTypeGrammar.getParseTree(typeString);
+    InferredType typeFromParseTree = PyTypeTypeGrammar.getTypeFromString(typeString);
+    assertThat(typeFromParseTree).isEqualTo(new RuntimeType("range"));
+  }
 
-    // Builtin_typeContext builtinTypeContext = typeContext.builtin_type();
-    // assertThat(builtinTypeContext).isNotNull();
-
-    // InferredType typeFromParseTree = PyTypeTypeGrammar.getTypeFromParseTree(typeContext);
-    // assertThat(typeFromParseTree).isEqualTo(InferredTypes.DICT);
+  @Test
+  void test_class_builtins_generator() {
+    String typeString = "builtins.generator";
+    InferredType typeFromParseTree = PyTypeTypeGrammar.getTypeFromString(typeString);
+    assertThat(typeFromParseTree).isEqualTo(new RuntimeType(new ClassSymbolImpl("Generator", "typing.Generator")));
   }
 
   @Test
   void test_none_type() {
     String typeString = "builtins.NoneType";
-    TypeContext typeContext = PyTypeTypeGrammar.getParseTree(typeString);
-
-    Builtin_typeContext builtinTypeContext = typeContext.builtin_type();
-    assertThat(builtinTypeContext).isNotNull();
-
-    InferredType typeFromParseTree = PyTypeTypeGrammar.getTypeFromParseTree(typeContext);
+    InferredType typeFromParseTree = PyTypeTypeGrammar.getTypeFromString(typeString);
     assertThat(typeFromParseTree).isEqualTo(InferredTypes.NONE);
   }
 
   @Test
   void test_anything_type() {
     String typeString = "AnythingType()";
-    TypeContext typeContext = PyTypeTypeGrammar.getParseTree(typeString);
-
-    Anything_typeContext anythingTypeContext = typeContext.anything_type();
-    assertThat(anythingTypeContext).isNotNull();
-
-    InferredType typeFromParseTree = PyTypeTypeGrammar.getTypeFromParseTree(typeContext);
+    InferredType typeFromParseTree = PyTypeTypeGrammar.getTypeFromString(typeString);
     assertThat(typeFromParseTree).isEqualTo(InferredTypes.anyType());
   }
 
   @Test
-  void test_union_1() {
-
-    String typeString = "UnionType(type_list=(hello, world))";
-    TypeContext typeContext = PyTypeTypeGrammar.getParseTree(typeString);
-
-    Union_typeContext unionType = typeContext.union_type();
-    assertThat(unionType).isNotNull();
-
-    Type_listContext typeListContext = unionType.type_list();
-
-    assertThat(typeListContext.type(0).qualified_type().STRING(0)).hasToString("hello");
-    assertThat(typeListContext.type(1).qualified_type().STRING(0)).hasToString("world");
-
-    InferredType typeFromParseTree = PyTypeTypeGrammar.getTypeFromParseTree(typeContext);
+  void test_nothing_type() {
+    String typeString = "NothingType()";
+    InferredType typeFromParseTree = PyTypeTypeGrammar.getTypeFromString(typeString);
+    assertThat(typeFromParseTree).isEqualTo(InferredTypes.anyType());
   }
 
   @Test
@@ -173,31 +133,19 @@ class PyTypeTypeGrammarTest {
 
   @Test
   void test_union_3() {
-
-    String typeString = "UnionType(type_list=(ClassType(NoneElement), ClassType(IntegerElement)))";
-    TypeContext typeContext = PyTypeTypeGrammar.getParseTree(typeString);
-
-    Union_typeContext unionType = typeContext.union_type();
-    assertThat(unionType).isNotNull();
-
-    Type_listContext typeListContext = unionType.type_list();
-
-    assertThat(typeListContext.type().stream().map(TypeContext::class_type).allMatch(Objects::nonNull)).isTrue();
+    String typeString = "UnionType(type_list=(ClassType(builtins.int), ClassType(builtins.str)))";
+    InferredType typeFromParseTree = PyTypeTypeGrammar.getTypeFromString(typeString);
+    assertThat(typeFromParseTree).isEqualTo(UnionType.or(InferredTypes.INT, InferredTypes.STR));
   }
 
   @Test
   void test_callable_1() {
     String typeString = "GenericType(base_type=ClassType(typing.Callable), parameters=(AnythingType(), ClassType(builtins.NoneType)))";
-    TypeContext typeContext = PyTypeTypeGrammar.getParseTree(typeString);
 
-    Generic_typeContext genericTypeContext = typeContext.generic_type();
-    assertThat(genericTypeContext).isNotNull();
-
-    Type_listContext typeListContext = genericTypeContext.type_list();
-    assertThat(typeListContext).isNotNull();
-
-    InferredType typeFromParseTree = PyTypeTypeGrammar.getTypeFromParseTree(typeContext);
-    assertThat(typeFromParseTree.canHaveMember("__call__")).isTrue();
+    InferredType typeFromParseTree = PyTypeTypeGrammar.getTypeFromString(typeString);
+    assertThat(typeFromParseTree).isInstanceOf(RuntimeType.class);
+    RuntimeType runtimeType = (RuntimeType) typeFromParseTree;
+    assertThat(runtimeType.getTypeClass().name()).isEqualTo("Callable");
 
   }
 
@@ -210,12 +158,6 @@ class PyTypeTypeGrammarTest {
   @Test
   void test_exception_2() {
     String someInvalidTypeString = "str bool";
-    assertThatThrownBy(() -> PyTypeTypeGrammar.getParseTree(someInvalidTypeString)).isInstanceOf(RecognitionException.class);
-  }
-
-  @Test
-  void test_exception_3() {
-    String someInvalidTypeString = "UnionType(type_list=(ClassType(None, ClassType(IntegerElement))";
     assertThatThrownBy(() -> PyTypeTypeGrammar.getParseTree(someInvalidTypeString)).isInstanceOf(RecognitionException.class);
   }
 }
