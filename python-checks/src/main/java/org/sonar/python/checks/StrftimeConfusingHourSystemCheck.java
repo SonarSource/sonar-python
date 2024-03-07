@@ -25,7 +25,6 @@ import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
-import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
@@ -49,26 +48,25 @@ public class StrftimeConfusingHourSystemCheck extends PythonSubscriptionCheck {
   }
 
   private static void checkExpression(SubscriptionContext context, Expression expression, Tree primaryLocation) {
-    if (expression.is(Tree.Kind.NAME)) {
-      Expressions.singleAssignedNonNameValue((Name) expression).ifPresent(a -> checkExpression(context, a, primaryLocation));
+    Expressions.ifNameGetSingleAssignedNonNameValue(expression)
+      .filter(StringLiteral.class::isInstance)
+      .map(StringLiteral.class::cast)
+      .filter(stringLiteral -> stringLiteral.stringElements().stream().noneMatch(stringElement -> "f".equalsIgnoreCase(stringElement.prefix())))
+      .ifPresent(stringLiteral -> checkDateFormatStringLiteral(context, primaryLocation, stringLiteral));
+  }
+
+  private static void checkDateFormatStringLiteral(SubscriptionContext context, Tree primaryLocation, StringLiteral stringLiteral) {
+    String value = stringLiteral.trimmedQuotesValue();
+    String effectiveMessage = null;
+    if (value.contains("%H") && value.contains("%p")) {
+      effectiveMessage = MESSAGE;
+    } else if (value.contains("%I") && !value.contains("%p")) {
+      effectiveMessage = MESSAGE_12_HOURS;
     }
-    if (expression.is(Tree.Kind.STRING_LITERAL)) {
-      StringLiteral stringLiteral = (StringLiteral) expression;
-      if (stringLiteral.stringElements().stream().anyMatch(stringElement -> "f".equalsIgnoreCase(stringElement.prefix()))) {
-        return;
-      }
-      String value = stringLiteral.trimmedQuotesValue();
-      String effectiveMessage = null;
-      if (value.contains("%H") && value.contains("%p")) {
-        effectiveMessage = MESSAGE;
-      } else if (value.contains("%I") && !value.contains("%p")) {
-        effectiveMessage = MESSAGE_12_HOURS;
-      }
-      if (effectiveMessage != null) {
-        var issue = context.addIssue(primaryLocation, effectiveMessage);
-        if (primaryLocation != expression) {
-          issue.secondary(stringLiteral, MESSAGE_SECONDARY_LOCATION);
-        }
+    if (effectiveMessage != null) {
+      var issue = context.addIssue(primaryLocation, effectiveMessage);
+      if (primaryLocation != stringLiteral) {
+        issue.secondary(stringLiteral, MESSAGE_SECONDARY_LOCATION);
       }
     }
   }
