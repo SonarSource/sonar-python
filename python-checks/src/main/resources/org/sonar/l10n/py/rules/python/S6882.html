@@ -1,0 +1,23 @@
+<p>This rule raises an issue when an incorrect value is set as an attribute of <code>datetime.date</code>, <code>datetime.time</code>, or
+<code>datetime.datetime</code></p>
+<h2>Why is this an issue?</h2>
+<p>Setting a date attribute value with a value which is out of the range of possible values will lead to a <code>ValueError</code>.</p>
+<h2>How to fix it</h2>
+<p>Set attribute values with values that are within the range of possible values.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+def foo():
+    dt = datetime(year=2024, day=66, month=1, hour=16, minute=1) # ValueError: day is out of range for month
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+def foo():
+    dt = datetime(year=2024, day=1, month=1, hour=16, minute=1)
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Python documentation - <a href="https://docs.python.org/3/library/datetime.html#">datetime</a> </li>
+</ul>
+
