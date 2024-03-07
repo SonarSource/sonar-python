@@ -115,6 +115,7 @@ public final class PythonTestUtils {
   public static PythonFile pythonFile(String fileName) {
     PythonFile pythonFile = Mockito.mock(PythonFile.class);
     Mockito.when(pythonFile.fileName()).thenReturn(fileName);
+    Mockito.when(pythonFile.key()).thenReturn(fileName);
     try {
       Mockito.when(pythonFile.uri()).thenReturn(Files.createTempFile(fileName, "py").toUri());
     } catch (IOException e) {

@@ -67,7 +67,7 @@ class PyTypeAnnotationTest {
     File file = new File("src/test/resources/pytype/code/level1.py");
     TestPythonFile testPythonFile = new TestPythonFile(file);
     PyTypeAnnotation pyTypeAnnotation = new PyTypeAnnotation(
-      TypeContext.fromJSON(readJsonTypeInfo("src/test/resources/pytype/code.json")),
+      TypeContextReader.fromJson(readJsonTypeInfo("src/test/resources/pytype/code.json")),
       testPythonFile);
 
     FileInput fileInput = parseFile(testPythonFile);
@@ -92,7 +92,7 @@ class PyTypeAnnotationTest {
     File file = new File("src/test/resources/pytype/code/level2.py");
     TestPythonFile testPythonFile = new TestPythonFile(file);
     PyTypeAnnotation pyTypeAnnotation = new PyTypeAnnotation(
-      TypeContext.fromJSON(readJsonTypeInfo("src/test/resources/pytype/code.json")),
+      TypeContextReader.fromJson(readJsonTypeInfo("src/test/resources/pytype/code.json")),
       testPythonFile
     );
     FileInput fileInput = parseFile(testPythonFile);
@@ -112,7 +112,7 @@ class PyTypeAnnotationTest {
     File file = new File("src/test/resources/pytype/code/level3.py");
     TestPythonFile testPythonFile = new TestPythonFile(file);
     PyTypeAnnotation pyTypeAnnotation = new PyTypeAnnotation(
-      TypeContext.fromJSON(readJsonTypeInfo("src/test/resources/pytype/code.json")),
+      TypeContextReader.fromJson(readJsonTypeInfo("src/test/resources/pytype/code.json")),
       testPythonFile);
 
     FileInput fileInput = parseFile(testPythonFile);

@@ -20,12 +20,12 @@
 package org.sonar.python.types;
 
 import com.google.common.annotations.VisibleForTesting;
-import com.google.gson.Gson;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import org.antlr.v4.runtime.RecognitionException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,7 +42,7 @@ import org.sonar.python.semantic.SymbolImpl;
 import org.sonar.python.tree.TreeUtils;
 
 public class TypeContext {
-
+  private static final Logger LOG = LoggerFactory.getLogger(TypeContext.class);
   public static final String CALLABLE_TYPE_CALLABLE = "CallableType(base_type=ClassType(typing.Callable)";
   public static final String GENERIC_TYPE_CALLABLE = "GenericType(base_type=ClassType(typing.Callable)";
   public static final ClassSymbolImpl CALLABLE_CLASS_SYMBOL = new ClassSymbolImpl("Callable", "typing.Callable");
@@ -52,34 +52,13 @@ public class TypeContext {
     TypeContext.projectLevelSymbolTable = projectLevelSymbolTable;
   }
 
-  private static final class JsonTypeInfo {
-    String text;
-    int start_line;
-    int start_col;
-    String syntax_role;
-    String type;
-    String short_type;
-
-    @Override
-    public String toString() {
-      return "TypeInfo{" +
-        "text='" + text + '\'' +
-        ", start_line=" + start_line +
-        ", start_col=" + start_col +
-        ", syntax_role='" + syntax_role + '\'' +
-        ", type='" + type + '\'' +
-        ", short_type='" + short_type + '\'' +
-        '}';
-    }
-  }
-
-  private static final class NameAccess {
+  private static final class TypePositionKey {
     final String fileName;
     final int line;
     final int column;
     final String name;
 
-    public NameAccess(String fileName, int line, int column, String name) {
+    public TypePositionKey(String fileName, int line, int column, String name) {
       this.fileName = fileName;
       this.line = line;
       this.column = column;
@@ -92,7 +71,7 @@ public class TypeContext {
         return true;
       if (o == null || getClass() != o.getClass())
         return false;
-      NameAccess that = (NameAccess) o;
+      TypePositionKey that = (TypePositionKey) o;
       return line == that.line && column == that.column && Objects.equals(fileName, that.fileName) && Objects.equals(name, that.name);
     }
 
@@ -102,48 +81,46 @@ public class TypeContext {
     }
   }
 
-  private static final Logger LOG = LoggerFactory.getLogger(TypeContext.class);
-  private final Map<String, List<JsonTypeInfo>> files;
-
-  private Map<NameAccess, JsonTypeInfo> typesByPosition = null;
-
+  private final Map<String, List<PyTypeInfo>> files;
+  private final Map<TypePositionKey, PyTypeInfo> typesByPosition;
   private Map<Tree, Scope> scopesByRootTree = null;
 
   public TypeContext() {
     this.files = new HashMap<>();
+    this.typesByPosition = new HashMap<>();
   }
 
-  public static TypeContext fromJSON(String json) {
-    return new Gson().fromJson("{files: " + json + "}", TypeContext.class);
+  public TypeContext(Map<String, List<PyTypeInfo>> files) {
+    this.files = files;
+    typesByPosition = files.entrySet()
+        .stream()
+          .flatMap(entry -> {
+            var file = entry.getKey();
+            return entry.getValue()
+              .stream()
+              .map(typeInfo -> Map.entry(
+                new TypePositionKey(file, typeInfo.startLine(), typeInfo.startCol(), typeInfo.text()),
+                typeInfo));
+          })
+      .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (v1, v2) -> v1));
+    System.out.println("files = " + files);
   }
 
   public void setScopesByRootTree(Map<Tree, Scope> scopesByRootTree) {
     this.scopesByRootTree = scopesByRootTree;
   }
 
-  private void populateTypesByPosition() {
-    typesByPosition = new HashMap<>();
-    files.forEach((file, typeInfos) -> {
-      for (JsonTypeInfo typeInfo : typeInfos) {
-        typesByPosition.put(new NameAccess(file, typeInfo.start_line, typeInfo.start_col, typeInfo.text), typeInfo);
-      }
-    });
-  }
-
   @VisibleForTesting
   Optional<InferredType> getTypeFor(String fileName, int line, int column, String name, String kind, Tree tree) {
-    if (typesByPosition == null) {
-      populateTypesByPosition();
-    }
-    NameAccess nameAccess = new NameAccess(fileName, line, column, name);
-    if (!typesByPosition.containsKey(nameAccess))
+    TypePositionKey typePositionKey = new TypePositionKey(fileName, line, column, name);
+    if (!typesByPosition.containsKey(typePositionKey))
       return Optional.empty();
-    JsonTypeInfo typeInfo = typesByPosition.get(nameAccess);
-    if (!typeInfo.syntax_role.equals(kind)) {
+    var typeInfo = typesByPosition.get(typePositionKey);
+    if (!typeInfo.syntaxRole().equals(kind)) {
       LOG.error("Found type at position, but does not match expected kind ({}): {}", kind, typeInfo);
       return Optional.empty();
     }
-    return Optional.of(typeStringToTypeInfo(typeInfo.short_type, typeInfo.type, fileName, tree));
+    return Optional.of(typeStringToTypeInfo(typeInfo.shortType(), typeInfo.type().raw(), fileName, tree));
   }
 
   private InferredType typeStringToTypeInfo(String typeString, String detailedType, String fileName, Tree tree) {

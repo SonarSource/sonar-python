@@ -22,7 +22,6 @@ package org.sonar.plugins.python.api;
 import com.sonar.sslr.api.RecognitionException;
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +34,7 @@ import org.sonar.python.caching.CacheContextImpl;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.semantic.SymbolTableBuilder;
 import org.sonar.python.types.TypeContext;
+import org.sonar.python.types.TypeContextReader;
 
 public class PythonVisitorContext extends PythonInputFileContext {
 
@@ -100,7 +100,7 @@ public class PythonVisitorContext extends PythonInputFileContext {
 
   private TypeContext getTypeContext(File workingDirectory) {
     try {
-      return TypeContext.fromJSON(Files.readString(Paths.get(workingDirectory.getAbsolutePath() + ".json")));
+      return new TypeContextReader().fromJson(Paths.get(workingDirectory.getAbsolutePath() + ".json"));
     } catch (IOException e) {
       throw new AssertionError(e);
     }

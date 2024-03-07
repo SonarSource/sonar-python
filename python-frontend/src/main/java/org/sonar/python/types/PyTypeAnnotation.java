@@ -20,22 +20,21 @@
 package org.sonar.python.types;
 
 import java.util.Optional;
+import java.util.function.Predicate;
 import org.sonar.plugins.python.api.PythonFile;
+import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.Name;
-import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.tree.NameImpl;
 
 public class PyTypeAnnotation extends BaseTreeVisitor {
 
   private final TypeContext typeContext;
-  private final PythonFile pythonFile;
   private final String filePath;
 
   public PyTypeAnnotation(TypeContext typeContext, PythonFile pythonFile) {
     this.typeContext = typeContext;
-    this.pythonFile = pythonFile;
     if (pythonFile.key().indexOf(':') != -1) {
       this.filePath = pythonFile.key().substring(pythonFile.key().indexOf(':') + 1);
     } else {
@@ -44,36 +43,26 @@ public class PyTypeAnnotation extends BaseTreeVisitor {
   }
 
   public void annotate(FileInput fileInput) {
-    fileInput.accept(new NameVisitor(typeContext, filePath));
+    fileInput.accept(this);
   }
 
-  private static class NameVisitor extends BaseTreeVisitor {
-
-    private final TypeContext typeContext;
-    private final String filePath;
-
-    public NameVisitor(TypeContext typeContext, String filePath) {
-      this.typeContext = typeContext;
-      this.filePath = filePath;
-    }
-
-    @Override
-    public void visitName(Name name) {
-      Optional<InferredType> typeForName = typeContext.getTypeFor(this.filePath, name);
-      typeForName.ifPresentOrElse(type -> {
-        if (!(type instanceof RuntimeType)) {
-          ((NameImpl) name).setInferredType(type);
-          return;
-        }
-        RuntimeType type1 = (RuntimeType) type;
-        if (type1.runtimeTypeSymbol() != null && type1.runtimeTypeSymbol().fullyQualifiedName() != null) {
-          ((NameImpl) name).setInferredType(type1);
-          return;
-        }
-        ((NameImpl) name).setInferredType(InferredTypes.anyType());
-      }, () -> ((NameImpl) name).setInferredType(InferredTypes.anyType()));
-      super.visitName(name);
-    }
+  @Override
+  public void visitName(Name name) {
+    var inferredType = typeContext.getTypeFor(this.filePath, name)
+      .flatMap(type -> Optional.of(type)
+        .filter(Predicate.not(RuntimeType.class::isInstance))
+        .or(() -> Optional.of(type)
+          .map(RuntimeType.class::cast)
+          .filter(runtimeType -> Optional.of(runtimeType)
+            .map(RuntimeType::runtimeTypeSymbol)
+            .map(Symbol::fullyQualifiedName)
+            .isPresent()
+          )
+        )
+      )
+      .orElseGet(InferredTypes::anyType);
+    ((NameImpl) name).setInferredType(inferredType);
+    super.visitName(name);
   }
 
 }

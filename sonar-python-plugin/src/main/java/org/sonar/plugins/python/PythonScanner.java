@@ -23,8 +23,6 @@ import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.RecognitionException;
 import java.io.File;
 import java.io.IOException;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -71,6 +69,7 @@ import org.sonar.python.parser.PythonParser;
 import org.sonar.python.tree.IPythonTreeMaker;
 import org.sonar.python.tree.PythonTreeMaker;
 import org.sonar.python.types.TypeContext;
+import org.sonar.python.types.TypeContextReader;
 
 public class PythonScanner extends Scanner {
 
@@ -161,7 +160,7 @@ public class PythonScanner extends Scanner {
     if (typeInferenceFile == null)
       return new TypeContext();
     try {
-      return TypeContext.fromJSON(Files.readString(Paths.get(typeInferenceFile), Charset.defaultCharset()));
+      return new TypeContextReader().fromJson(Paths.get(typeInferenceFile));
     } catch (IOException ex) {
       return new TypeContext();
     }
