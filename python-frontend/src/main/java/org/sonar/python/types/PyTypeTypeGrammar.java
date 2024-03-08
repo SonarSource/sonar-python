@@ -66,12 +66,6 @@ public class PyTypeTypeGrammar {
     return parser.outer_type().type();
   }
 
-  private static final Pattern builtinsPattern = Pattern.compile("^(?:ClassType\\()?builtins\\.(\\w+)(?:\\))?");
-  private static final Pattern classTypePattern = Pattern.compile("^ClassType\\(([\\w\\.]+)\\)$");
-  private static final Pattern anyTypePattern = Pattern.compile("^(Any|No)thingType\\(\\)$");
-  private static final Pattern unionTypePattern = Pattern.compile("^UnionType\\(type_list=\\((.+)\\)\\)$");
-  private static final Pattern genericTypePatter = Pattern.compile("^GenericType\\(base_type=(.+), parameters=\\(.+\\)\\)$");
-  private static final Pattern namedTypePattern = Pattern.compile("(\\w+(\\.\\w+)?)");
 
   private static final InferredType iterator = new RuntimeType(new ClassSymbolImpl("Iterator", "typing.Iterator"));
   // complete list https://github.com/google/pytype/blob/95cb0b760cf9a5b8d7d7b315b4440d2e56519072/pytype/pytd/abc_hierarchy.py#L60
@@ -100,6 +94,13 @@ public class PyTypeTypeGrammar {
     Map.entry("coroutine", (InferredType) new RuntimeType(new ClassSymbolImpl("Coroutine", "types.Coroutine"))),
     Map.entry("code", (InferredType) new RuntimeType(new ClassSymbolImpl("CodeType", "types.CodeType"))));
 
+  private static final Pattern builtinsPattern = Pattern.compile("^(?:ClassType\\()?builtins\\.(\\w+)(?:\\))?");
+  private static final Pattern classTypePattern = Pattern.compile("^ClassType\\(([\\w\\.]+)\\)$");
+  private static final Pattern anyTypePattern = Pattern.compile("^(Any|No)thingType\\(\\)$");
+  private static final Pattern unionTypePattern = Pattern.compile("^UnionType\\(type_list=\\((.+)\\)\\)$");
+  private static final Pattern genericTypePatter = Pattern.compile("^GenericType\\(base_type=(.+), parameters=\\((.+),\\)\\)$");
+  private static final Pattern namedTypePattern = Pattern.compile("(\\w+(\\.\\w+)?)");
+
   public static InferredType getTypeFromString(String detailedType) {
     Matcher m = builtinsPattern.matcher(detailedType);
     if (m.find()) {
@@ -124,6 +125,10 @@ public class PyTypeTypeGrammar {
     m = genericTypePatter.matcher(detailedType);
     if (m.find()) {
       var baseType = m.group(1);
+      if(baseType.equals("ClassType(builtins.type)")){
+        var parameters = parseTopLevelTypeString(m.group(2));
+        return getTypeFromString(parameters.get(0));
+      }
       return getTypeFromString(baseType);
     }
     m = anyTypePattern.matcher(detailedType);
