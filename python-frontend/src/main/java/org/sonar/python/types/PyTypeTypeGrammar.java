@@ -126,8 +126,9 @@ public class PyTypeTypeGrammar {
     if (m.find()) {
       var baseType = m.group(1);
       if(baseType.equals("ClassType(builtins.type)")){
-        var parameters = parseTopLevelTypeString(m.group(2));
-        return getTypeFromString(parameters.get(0));
+        var parameter = m.group(2);
+        var firstParameterType = parameter.split(",")[0].trim();
+        return getTypeFromString(firstParameterType);
       }
       return getTypeFromString(baseType);
     }
