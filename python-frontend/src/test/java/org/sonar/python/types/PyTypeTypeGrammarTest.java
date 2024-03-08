@@ -150,6 +150,16 @@ class PyTypeTypeGrammarTest {
   }
 
   @Test
+  void test_generics_builtins() {
+    String typeString = "GenericType(base_type=ClassType(builtins.type), parameters=(ClassType(builtins.ImportError),))";
+    InferredType typeFromParseTree = PyTypeTypeGrammar.getTypeFromString(typeString);
+    assertThat(typeFromParseTree).isInstanceOf(RuntimeType.class);
+    RuntimeType runtimeType = (RuntimeType) typeFromParseTree;
+    assertThat(runtimeType.getTypeClass().name()).isEqualTo("ImportError");
+
+  }
+
+  @Test
   void test_exception_1() {
     String someInvalidTypeString = "UnionType(type_list=(ClassType(None, ClassType(IntegerElement))";
     assertThatThrownBy(() -> PyTypeTypeGrammar.getParseTree(someInvalidTypeString)).isInstanceOf(RecognitionException.class);
