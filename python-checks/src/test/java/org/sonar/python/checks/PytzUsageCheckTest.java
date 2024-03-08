@@ -27,11 +27,11 @@ import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class PytzDontUseAfterPy39CheckTest {
+class PytzUsageCheckTest {
   @Test
   void test_38() {
     ProjectPythonVersion.setCurrentVersions(EnumSet.of(PythonVersionUtils.Version.V_38));
-    var issues = PythonCheckVerifier.issues("src/test/resources/checks/pytzDontUseAfterPy39.py", new PytzDontUseAfterPy39Check());
+    var issues = PythonCheckVerifier.issues("src/test/resources/checks/pytzUsage.py", new PytzUsageCheck());
     assertThat(issues)
       .isEmpty();
   }
@@ -40,6 +40,6 @@ class PytzDontUseAfterPy39CheckTest {
   void test_39_310_311_312() {
     ProjectPythonVersion
       .setCurrentVersions(EnumSet.of(PythonVersionUtils.Version.V_39, PythonVersionUtils.Version.V_310, PythonVersionUtils.Version.V_311, PythonVersionUtils.Version.V_312));
-    PythonCheckVerifier.verify("src/test/resources/checks/pytzDontUseAfterPy39.py", new PytzDontUseAfterPy39Check());
+    PythonCheckVerifier.verify("src/test/resources/checks/pytzUsage.py", new PytzUsageCheck());
   }
 }

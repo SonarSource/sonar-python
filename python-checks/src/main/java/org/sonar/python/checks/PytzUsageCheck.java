@@ -19,6 +19,7 @@
  */
 package org.sonar.python.checks;
 
+import java.util.Collection;
 import java.util.Optional;
 import java.util.stream.Stream;
 import org.sonar.check.Rule;
@@ -31,16 +32,17 @@ import org.sonar.plugins.python.api.tree.DottedName;
 import org.sonar.plugins.python.api.tree.ImportFrom;
 import org.sonar.plugins.python.api.tree.ImportName;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S6890")
-public class PytzDontUseAfterPy39Check extends PythonSubscriptionCheck {
+public class PytzUsageCheck extends PythonSubscriptionCheck {
   private static final PythonVersionUtils.Version REQUIRED_VERSION = PythonVersionUtils.Version.V_39;
   private static final String MESSAGE = "Don't use `pytz` module with Python 3.9 and later.";
 
   @Override
   public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(Tree.Kind.IMPORT_FROM, PytzDontUseAfterPy39Check::checkImport);
-    context.registerSyntaxNodeConsumer(Tree.Kind.IMPORT_NAME, PytzDontUseAfterPy39Check::checkImport);
+    context.registerSyntaxNodeConsumer(Tree.Kind.IMPORT_FROM, PytzUsageCheck::checkImport);
+    context.registerSyntaxNodeConsumer(Tree.Kind.IMPORT_NAME, PytzUsageCheck::checkImport);
   }
 
   private static boolean isRelevantPythonVersion(SubscriptionContext context) {
@@ -53,16 +55,22 @@ public class PytzDontUseAfterPy39Check extends PythonSubscriptionCheck {
       return;
     }
 
-    Stream<DottedName> dottedNames = context.syntaxNode().is(Tree.Kind.IMPORT_FROM) ? ((ImportFrom) context.syntaxNode()).importedNames().stream().map(AliasedName::dottedName)
-      : ((ImportName) context.syntaxNode()).modules().stream().map(AliasedName::dottedName);
-    checkDottedNamesGetLocations(context, dottedNames);
-  }
-
-  private static void checkDottedNamesGetLocations(SubscriptionContext context, Stream<DottedName> dottedNames) {
-    dottedNames
-      .flatMap(dottedName -> dottedName.names().stream())
-      .filter(dottedName -> "pytz".equals(dottedName
-        .name()) || Optional.ofNullable(dottedName.symbol())
+    Stream.of(
+      Optional.of(context.syntaxNode())
+        .flatMap(TreeUtils.toOptionalInstanceOfMapper(ImportFrom.class))
+        .map(ImportFrom::importedNames),
+      Optional.of(context.syntaxNode())
+        .flatMap(TreeUtils.toOptionalInstanceOfMapper(ImportName.class))
+        .map(ImportName::modules))
+      .filter(Optional::isPresent)
+      .map(Optional::get)
+      .flatMap(Collection::stream)
+      .map(AliasedName::dottedName)
+      .map(DottedName::names)
+      .filter(list -> !list.isEmpty())
+      .map(names -> names.get(0))
+      .filter(name -> "pytz".equals(name.name())
+        || Optional.ofNullable(name.symbol())
           .map(Symbol::fullyQualifiedName)
           .filter(fqn -> fqn.startsWith("pytz")).isPresent())
       .forEach(name -> raiseIssue(context, name));
