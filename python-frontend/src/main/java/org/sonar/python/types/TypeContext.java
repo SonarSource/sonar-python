@@ -103,7 +103,6 @@ public class TypeContext {
                 typeInfo));
           })
       .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (v1, v2) -> v1));
-    System.out.println("files = " + files);
   }
 
   public void setScopesByRootTree(Map<Tree, Scope> scopesByRootTree) {
