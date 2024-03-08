@@ -301,6 +301,7 @@ public final class CheckList {
       PrivilegePolicyCheck.class,
       ProcessSignallingCheck.class,
       PropertyAccessorParameterCountCheck.class,
+      PytzUsageCheck.class,
       IncorrectParameterDatetimeConstructorsCheck.class,
       PseudoRandomCheck.class,
       PublicApiIsSecuritySensitiveCheck.class,

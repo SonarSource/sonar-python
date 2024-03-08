@@ -1,0 +1,43 @@
+<p>This rule raises an issue when using the <code>pytz</code> library on a codebase using Python 3.9 or later.</p>
+<h2>Why is this an issue?</h2>
+<p>In Python 3.9 and later, the <code>zoneinfo</code> module is the recommended tool for handling timezones, replacing the <code>pytz</code> library.
+This recommendation is based on several key advantages.</p>
+<p>First, <code>zoneinfo</code> is part of Python’s standard library, making it readily available without needing additional installation, unlike
+<code>pytz</code>.</p>
+<p>Second, <code>zoneinfo</code> integrates seamlessly with Python’s datetime module. You can directly use <code>zoneinfo</code> timezone objects when
+creating <code>datetime</code> objects, making it more intuitive and less error-prone than <code>pytz</code>, which requires a separate localize
+method for this purpose.</p>
+<p>Third, <code>zoneinfo</code> handles historical timezone changes more accurately than <code>pytz</code>. When a <code>pytz</code> timezone object
+is used, it defaults to the earliest known offset, which can lead to unexpected results. <code>zoneinfo</code> does not have this issue.</p>
+<p>Lastly, <code>zoneinfo</code> uses the system’s IANA time zone database when available, ensuring it works with the most up-to-date timezone data.
+In contrast, <code>pytz</code> includes its own copy of the IANA database, which may not be as current.</p>
+<p>In summary, <code>zoneinfo</code> offers a more modern, intuitive, and reliable approach to handling timezones in Python 3.9 and later, making it
+the preferred choice over <code>pytz</code>.</p>
+<h2>How to fix it</h2>
+<p>To fix this is issue use a <code>zoneinfo</code> timezone object when constructing a <code>datetime</code> instead of the <code>pytz</code>
+library.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+from datetime import datetime
+import pytz
+
+dt = pytz.timezone('America/New_York'').localize(datetime(2022, 1, 1))  # Noncompliant: the localize method is needed to avoid bugs (see S6887)
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+from datetime import datetime
+from zoneinfo import ZoneInfo
+
+dt = datetime(2022, 1, 1, tzinfo=ZoneInfo('America/New_York'))  # OK: timezone object can be used safely through the datetime constructor
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> PEP 615 - <a href="https://peps.python.org/pep-0615/">Support for the IANA Time Zone Database in the Standard Library</a> </li>
+</ul>
+<h3>Related rules</h3>
+<ul>
+  <li> {rule:python:S6887} - pytz.timezone should not be passed to the datetime.datetime constructor </li>
+</ul>
+
