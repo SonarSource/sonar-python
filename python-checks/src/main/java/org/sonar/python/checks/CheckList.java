@@ -278,6 +278,7 @@ public final class CheckList {
       NoSonarCommentCheck.class,
       NotDiscoverableTestMethodCheck.class,
       NotImplementedErrorInOperatorMethodsCheck.class,
+      NumpyWeekMaskValidationCheck.class,
       NumpyIsNanCheck.class,
       NumpyListOverGeneratorCheck.class,
       NumpyRandomSeedCheck.class,
