@@ -29,6 +29,10 @@ def some_cases():
     offset = np.busday_offset('2012-05', 1, roll='forward', weekmask=[1,1]) # Noncompliant
     offset = np.busday_offset('2012-05', 1, roll='forward', weekmask=["a", "b", "c"]) # Noncompliant {{Array must have 7 elements, all of which are 0 or 1.}}
                                                                     #^^^^^^^^^^^^^^^
+    offset = np.busday_offset('2012-05', 1, roll='forward', weekmask=[1,1,1,"1",1,1,1]) # Noncompliant {{Array must have 7 elements, all of which are 0 or 1.}}
+                                                                    #^^^^^^^^^^^^^^^^^
+    offset = np.busday_offset('2012-05', 1, roll='forward', weekmask=[1,1,0,"0",1,1,1]) # Noncompliant {{Array must have 7 elements, all of which are 0 or 1.}}
+                                                                    #^^^^^^^^^^^^^^^^^
 def with_assigned_values():
     weekmask1 = "Tue Wed Thu Fri"
     offset1 = np.busday_offset('2012-05', 1, roll='forward', weekmask=weekmask1)

@@ -22,9 +22,9 @@ package org.sonar.python.checks;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-class NumpyBusDayHaveValidMaskCheckTest {
+class NumpyWeekMaskValidationCheckTest {
   @Test
   void test() {
-    PythonCheckVerifier.verify("src/test/resources/checks/numpyBusDayHaveValidMaskCheck.py", new NumpyBusDayHaveValidMaskCheck());
+    PythonCheckVerifier.verify("src/test/resources/checks/numpyWeekMaskValidation.py", new NumpyWeekMaskValidationCheck());
   }
 }
