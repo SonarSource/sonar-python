@@ -20,6 +20,7 @@
 package org.sonar.python.checks;
 
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Pattern;
 import javax.annotation.Nullable;
 import org.sonar.check.Rule;
@@ -40,11 +41,17 @@ import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S6900")
 public class NumpyBusDayHaveValidMaskCheck extends PythonSubscriptionCheck {
-  public static final Pattern PATTERN_STRING1 = Pattern.compile("^[01]{7}$");
-  public static final Pattern PATTERN_STRING2 = Pattern.compile("^(Mon|Tue|Wed|Thu|Fri|Sat|Sun)(\\s*(Mon|Tue|Wed|Thu|Fri|Sat|Sun))*+$");
+  private static final Pattern PATTERN_STRING1 = Pattern.compile("^[01]{7}$");
+  private static final Pattern PATTERN_STRING2 = Pattern
+    .compile("^(Mon|Tue|Wed|Thu|Fri|Sat|Sun|\\s|\\\\t|\\\\n|\\\\x0b|\\\\x0c|\\\\r)*+$");
   private static final String MESSAGE_ARRAY = "Array must have 7 elements, all of which are 0 or 1.";
   private static final String MESSAGE_STRING = "String must be either 7 characters long and contain only 0 and 1, or contain abbreviated weekdays.";
-  public static final String MESSAGE_SECONDARY_LOCATION = "Invalid mask is created here.";
+  private static final String MESSAGE_SECONDARY_LOCATION = "Invalid mask is created here.";
+  private static final Map<String, Integer> FUNCTIONS_PARAMETER_POSITION = Map.of(
+    "numpy.busday_offset", 3,
+    "numpy.busday_count", 2,
+    "numpy.is_busday", 1,
+    "numpy.busdaycalendar", 0);
 
   @Override
   public void initialize(Context context) {
@@ -57,11 +64,16 @@ public class NumpyBusDayHaveValidMaskCheck extends PythonSubscriptionCheck {
     if (calleeSymbol == null) {
       return;
     }
-    if (!"numpy.busday_offset".equals(calleeSymbol.fullyQualifiedName())) {
+    String fullyQualifiedName = calleeSymbol.fullyQualifiedName();
+    if (fullyQualifiedName == null) {
+      return;
+    }
+    Integer parameterPosition = FUNCTIONS_PARAMETER_POSITION.get(fullyQualifiedName);
+    if (parameterPosition == null) {
       return;
     }
 
-    RegularArgument weekmaskArgument = TreeUtils.nthArgumentOrKeyword(3, "weekmask", callExpression.arguments());
+    RegularArgument weekmaskArgument = TreeUtils.nthArgumentOrKeyword(parameterPosition, "weekmask", callExpression.arguments());
     if (weekmaskArgument == null) {
       return;
     }
