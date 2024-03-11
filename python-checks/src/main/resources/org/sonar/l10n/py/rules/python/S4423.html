@@ -52,8 +52,8 @@ ssl.SSLContext(ssl.PROTOCOL_SSLv3) # Noncompliant
 <pre data-diff-id="21" data-diff-type="compliant">
 import ssl
 
-context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
-context.minimum_version = ssl.TLSVersion.TLSv1_3
+context = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
+context.minimum_version = ssl.TLSVersion.TLSv1_2
 </pre>
 <h3>How does this work?</h3>
 <p>As a rule of thumb, by default you should use the cryptographic algorithms and mechanisms that are considered strong by the cryptographic
@@ -80,7 +80,7 @@ SSL.Context(SSL.SSLv3_METHOD)  # Noncompliant
 from OpenSSL import SSL
 
 context = SSL.Context(SSL.TLS_SERVER_METHOD)
-context.set_min_proto_version(SSL.TLS1_3_VERSION)
+context.set_min_proto_version(SSL.TLS1_2_VERSION)
 </pre>
 <h3>How does this work?</h3>
 <p>As a rule of thumb, by default you should use the cryptographic algorithms and mechanisms that are considered strong by the cryptographic
