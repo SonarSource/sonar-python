@@ -1,0 +1,41 @@
+<p>This rule raises an issue when a <code>tensorflow.function</code> is recursive.</p>
+<h2>Why is this an issue?</h2>
+<p>When defining a <code>tensorflow.function</code> it is generally a bad practice to make this function recursive. TensorFlow does not support
+recursive <code>tensorflow.function</code> and will in the majority of cases throw an exception. However it is possible as well that the execution of
+such function succeeds, but with multiple tracings which has strong performance implications. When executing <code>tensorflow.function</code>, the
+code is split into two distinct stages. The first stage call <code>tracing</code> creates a new <code>tensorflow.Graph</code>, runs the Python code
+normally, but defers the execution of TensorFlow operations (i.e. adding two Tensors). These operations are added to the graph without being ran. The
+second stage which is much faster than the first, runs everything that was deferred previously. Depending on the input of the
+<code>tensorflow.function</code> the first stage may not be needed, see: <a href="https://www.tensorflow.org/guide/function#rules_of_tracing">Rules of
+tracing</a>. Skipping this first stage is what provides the user with TensorFlow’s high performance.</p>
+<p>Having a recursive <code>tensorflow.function</code> prevents the user from benefiting of TensorFlow’s capabilities.</p>
+<h2>How to fix it</h2>
+<p>To fix this issue, refactor the <code>tensorflow.function</code> so that is it not recursive.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+import tensorflow as tf
+
+@tf.function
+def factorial(n):
+     if n == 1:
+        return 1
+    else:
+        return (n * factorial(n-1)) # Noncompliant: the function is recursive
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+import tensorflow as tf
+
+@tf.function
+def factorial(n):
+     return tf.exp(tf.lgamma(n + 1)) # Compliant
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> TensorFlow Documentation - <a href="https://www.tensorflow.org/guide/function#recursive_tffunctions_are_not_supported">Recursive tf.functions
+  are not supported</a> </li>
+  <li> TensorFlow Documentation - <a href="https://www.tensorflow.org/guide/function#rules_of_tracing">Rules of tracing</a> </li>
+</ul>
+
