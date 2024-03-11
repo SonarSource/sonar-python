@@ -13,32 +13,364 @@ used to encode and decode JWTs when using a symmetric signing algorithm, and an 
 authentication and gain access to sensitive data or functionality.</p>
 <p>In the worst-case scenario, an attacker could be able to execute arbitrary code on the application by abusing administrative features, and take
 over its hosting server.</p>
-<h2>How to fix it</h2>
+<h2>How to fix it in Flask</h2>
 <p><strong>Revoke the secret</strong></p>
 <p>Revoke any leaked secrets and remove them from the application source code.</p>
 <p>Before revoking the secret, ensure that no other applications or processes are using it. Other usages of the secret will also be impacted when the
 secret is revoked.</p>
 <p>Changing the secret value is sufficient to invalidate any data that it protected.</p>
-<p><strong>Use a secret vault</strong></p>
-<p>A secret vault should be used to generate and store the new secret. This will ensure the secret’s security and prevent any further unexpected
-disclosure.</p>
-<p>Depending on the development platform and the leaked secret type, multiple solutions are currently available.</p>
 <h3>Code examples</h3>
 <h4>Noncompliant code example</h4>
-<pre data-diff-id="1" data-diff-type="noncompliant">
+<p>The following noncompliant code contains a hard-coded secret that can be exposed unintentionally.</p>
+<pre data-diff-id="101" data-diff-type="noncompliant">
 from flask import Flask
 
 app = Flask(__name__)
-app.config['JWT_SECRET_KEY'] = "secret"  # Noncompliant
+app.config['JWT_SECRET_KEY'] = secret_key  # Noncompliant
 </pre>
 <h4>Compliant solution</h4>
-<pre data-diff-id="1" data-diff-type="compliant">
+<p>A solution is to set this secret in an environment string.</p>
+<pre data-diff-id="101" data-diff-type="compliant">
 from flask import Flask
 import os
 
 app = Flask(__name__)
 app.config['JWT_SECRET_KEY'] = os.environ["JWT_SECRET_KEY"]
 </pre>
+<h3>Going the extra mile</h3>
+<p><strong>Use a secret vault</strong></p>
+<p>A secret vault should be used to generate and store the new secret. This will ensure the secret’s security and prevent any further unexpected
+disclosure.</p>
+<p>Depending on the development platform and the leaked secret type, multiple solutions are currently available.</p>
+<h2>How to fix it in python-jose</h2>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<p>The following noncompliant FastAPI application contains a hard-coded secret that can be exposed unintentionally.</p>
+<pre data-diff-id="201" data-diff-type="noncompliant">
+from typing import Dict
+from fastapi import Depends, FastAPI
+from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
+from jose import jwt
+
+
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
+secret_key = 'secret'
+
+
+def create_access_token(data: dict):
+    to_encode = data.copy()
+    to_encode.update({"exp": datetime.now(timezone.utc) +
+                      timedelta(minutes=15)})
+    return jwt.encode(to_encode, secret_key, algorithm="HS256")  # Noncompliant
+
+def validate_login(username: str, password: str) -&gt; None:
+     ...
+
+
+@app.post("/login")
+async def login(
+    form_data: OAuth2PasswordRequestForm = Depends()
+) -&gt; Dict[str, str]:
+    validate_login(form_data.username, form_data.password)
+    return dict(access_token=create_access_token(data={"sub": form_data.username}))
+</pre>
+<h4>Compliant solution</h4>
+<p>A solution is to set this secret in an environment variable.</p>
+<pre data-diff-id="201" data-diff-type="compliant">
+from typing import Dict
+from fastapi import Depends, FastAPI
+from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
+from jose import jwt
+import os
+
+
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
+secret_key = os.environ["JWT_SECRET_KEY"]
+
+
+def create_access_token(data: dict):
+    to_encode = data.copy()
+    to_encode.update({"exp": datetime.now(timezone.utc) +
+                      timedelta(minutes=15)})
+    return jwt.encode(to_encode, secret_key, algorithm="HS256")
+
+def validate_login(username: str, password: str) -&gt; None:
+     ...
+
+
+@app.post("/login")
+async def login(
+    form_data: OAuth2PasswordRequestForm = Depends()
+) -&gt; Dict[str, str]:
+    validate_login(form_data.username, form_data.password)
+    return dict(access_token=create_access_token(data={"sub": form_data.username}))
+</pre>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="202" data-diff-type="noncompliant">
+from typing import Dict
+from fastapi import Depends, FastAPI
+from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
+from jose import jwt
+
+
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
+
+private_key = '''-----BEGIN PRIVATE KEY-----
+MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDAK5Lsx5Ow0N+d
+...
+-----END PRIVATE KEY-----'''
+
+
+def create_access_token(data: dict):
+    to_encode = data.copy()
+    to_encode.update({"exp": datetime.now(timezone.utc) +
+                      timedelta(minutes=15)})
+    return jwt.encode(to_encode, private_key, algorithm="RS256")  # Noncompliant
+
+def validate_login(username: str, password: str) -&gt; None:
+     ...
+
+
+@app.post("/login")
+async def login(
+    form_data: OAuth2PasswordRequestForm = Depends()
+) -&gt; Dict[str, str]:
+    validate_login(form_data.username, form_data.password)
+    return dict(access_token=create_access_token(data={"sub": form_data.username}))
+</pre>
+<h4>Compliant solution</h4>
+<p>When using an asymmetric encryption algorithm, the keys can be loaded from a file instead of being hardcoded.</p>
+<pre data-diff-id="202" data-diff-type="compliant">
+from typing import Dict
+from fastapi import Depends, FastAPI
+from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
+from jose import jwt
+
+
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
+
+private_key = ''
+with open('resources/rs256.pem', 'r') as f:
+    private_key = f.read()
+
+
+def create_access_token(data: dict):
+    to_encode = data.copy()
+    to_encode.update({"exp": datetime.now(timezone.utc) +
+                      timedelta(minutes=15)})
+    return jwt.encode(to_encode, private_key, algorithm="RS256")
+
+def validate_login(username: str, password: str) -&gt; None:
+     ...
+
+
+@app.post("/login")
+async def login(
+    form_data: OAuth2PasswordRequestForm = Depends()
+) -&gt; Dict[str, str]:
+    validate_login(form_data.username, form_data.password)
+    return dict(access_token=create_access_token(data={"sub": form_data.username}))
+</pre>
+<h3>Going the extra mile</h3>
+<p><strong>Use a secret vault</strong></p>
+<p>A secret vault should be used to generate and store the new secret. This will ensure the secret’s security and prevent any further unexpected
+disclosure.</p>
+<p>Depending on the development platform and the leaked secret type, multiple solutions are currently available.</p>
+<h2>How to fix it in PyJWT</h2>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<p>The following noncompliant FastAPI application contains a hard-coded secret that can be exposed unintentionally.</p>
+<pre data-diff-id="301" data-diff-type="noncompliant">
+from typing import Dict
+from fastapi import Depends, FastAPI
+from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
+import jwt
+
+
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
+secret_key = 'secret'
+
+
+def create_access_token(data: dict):
+    to_encode = data.copy()
+    to_encode.update({"exp": datetime.now(timezone.utc) +
+                      timedelta(minutes=15)})
+    return jwt.encode(to_encode, secret_key, algorithm="HS256")  # Noncompliant
+
+def validate_login(username: str, password: str) -&gt; None:
+     ...
+
+
+@app.post("/login")
+async def login(
+    form_data: OAuth2PasswordRequestForm = Depends()
+) -&gt; Dict[str, str]:
+    validate_login(form_data.username, form_data.password)
+    return dict(access_token=create_access_token(data={"sub": form_data.username}))
+</pre>
+<h4>Compliant solution</h4>
+<p>A solution is to set this secret in an environment string.</p>
+<pre data-diff-id="301" data-diff-type="compliant">
+from typing import Dict
+from fastapi import Depends, FastAPI
+from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
+import jwt
+import os
+
+
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
+secret_key = os.environ["JWT_SECRET_KEY"]
+
+
+def create_access_token(data: dict):
+    to_encode = data.copy()
+    to_encode.update({"exp": datetime.now(timezone.utc) +
+                      timedelta(minutes=15)})
+    return jwt.encode(to_encode, secret_key, algorithm="HS256")
+
+def validate_login(username: str, password: str) -&gt; None:
+     ...
+
+
+@app.post("/login")
+async def login(
+    form_data: OAuth2PasswordRequestForm = Depends()
+) -&gt; Dict[str, str]:
+    validate_login(form_data.username, form_data.password)
+    return dict(access_token=create_access_token(data={"sub": form_data.username}))
+</pre>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="302" data-diff-type="noncompliant">
+from typing import Dict
+from fastapi import Depends, FastAPI
+from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
+import jwt
+
+
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
+
+private_key = '''-----BEGIN PRIVATE KEY-----
+MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDAK5Lsx5Ow0N+d
+...
+-----END PRIVATE KEY-----'''
+
+
+def create_access_token(data: dict):
+    to_encode = data.copy()
+    to_encode.update({"exp": datetime.now(timezone.utc) +
+                      timedelta(minutes=15)})
+    return jwt.encode(to_encode, private_key, algorithm="RS256")  # Noncompliant
+
+def validate_login(username: str, password: str) -&gt; None:
+     ...
+
+
+@app.post("/login")
+async def login(
+    form_data: OAuth2PasswordRequestForm = Depends()
+) -&gt; Dict[str, str]:
+    validate_login(form_data.username, form_data.password)
+    return dict(access_token=create_access_token(data={"sub": form_data.username}))
+</pre>
+<h4>Compliant solution</h4>
+<p>When using an asymmetric encryption algorithm, the keys can be loaded from a file instead of being hardcoded.</p>
+<pre data-diff-id="302" data-diff-type="compliant">
+from typing import Dict
+from fastapi import Depends, FastAPI
+from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
+import jwt
+
+
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
+
+private_key = ''
+with open('resources/rs256.pem', 'r') as f:
+    private_key = f.read()
+
+
+def create_access_token(data: dict):
+    to_encode = data.copy()
+    to_encode.update({"exp": datetime.now(timezone.utc) +
+                      timedelta(minutes=15)})
+    return jwt.encode(to_encode, private_key, algorithm="RS256")
+
+def validate_login(username: str, password: str) -&gt; None:
+     ...
+
+
+@app.post("/login")
+async def login(
+    form_data: OAuth2PasswordRequestForm = Depends()
+) -&gt; Dict[str, str]:
+    validate_login(form_data.username, form_data.password)
+    return dict(access_token=create_access_token(data={"sub": form_data.username}))
+</pre>
+<h3>Going the extra mile</h3>
+<p><strong>Use a secret vault</strong></p>
+<p>A secret vault should be used to generate and store the new secret. This will ensure the secret’s security and prevent any further unexpected
+disclosure.</p>
+<p>Depending on the development platform and the leaked secret type, multiple solutions are currently available.</p>
+<h2>How to fix it in Django</h2>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<p>The following noncompliant Django REST framework application contains a hard-coded secret that can be exposed unintentionally.</p>
+<pre data-diff-id="401" data-diff-type="noncompliant">
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'rest_framework',
+]
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+      'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
+}
+
+SIMPLE_JWT = {
+  "ALGORITHM": "HS256",
+  "SIGNING_KEY": "secret"  # Noncompliant
+}
+</pre>
+<h4>Compliant solution</h4>
+<p>A solution is to set this secret in an environment variable.</p>
+<pre data-diff-id="401" data-diff-type="compliant">
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'rest_framework',
+]
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+      'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
+}
+
+SIMPLE_JWT = {
+  "ALGORITHM": "HS256",
+  "SIGNING_KEY": os.environ["SIGNING_KEY"]
+}
+</pre>
+<h3>Going the extra mile</h3>
+<p><strong>Use a secret vault</strong></p>
+<p>A secret vault should be used to generate and store the new secret. This will ensure the secret’s security and prevent any further unexpected
+disclosure.</p>
+<p>Depending on the development platform and the leaked secret type, multiple solutions are currently available.</p>
 <h2>Resources</h2>
 <h3>Standards</h3>
 <ul>
@@ -52,6 +384,10 @@ app.config['JWT_SECRET_KEY'] = os.environ["JWT_SECRET_KEY"]
 <h3>Documentation</h3>
 <ul>
   <li> Flask JWT documentation - <a href="https://flask-jwt-extended.readthedocs.io/en/stable/options.html#jwt-secret-key">Config - JWT_SECRET_KEY</a>
+  </li>
+  <li> Python-Jose documentation - <a href="https://python-jose.readthedocs.io/en/latest/jwt/index.html">JSON Web Token</a> </li>
+  <li> PyJWT documentation - <a href="https://pyjwt.readthedocs.io/en/stable/api.html">API Reference</a> </li>
+  <li> Simple JWT documentation - <a href="https://django-rest-framework-simplejwt.readthedocs.io/en/latest/settings.html#signing-key">SIGNING_KEY</a>
   </li>
 </ul>
 
