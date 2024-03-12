@@ -60,13 +60,15 @@ class PythonQuickFixVerifierTest {
 
   @Test
   void one_issue_one_qf_wrong_fix() {
-    var expectedMsg = ("[The code with the quickfix applied is not the expected result.\n" +
-      "\"Applied QuickFixes are:\n" +
-      "[a!=10]\n" +
-      "Expected result:\n" +
-      "[a==10]] \n" +
-      "expected: [\"a==10\"]\n" +
-      " but was: [\"a!=10\"]").replaceAll("\\s+", "");
+    var expectedMsg = ("""
+      [The code with the quickfix applied is not the expected result.
+      Applied QuickFixes are:
+      [a!=10]
+      Expected result:
+      [a==10]]
+      expected: ["a==10"]
+      but was: ["a!=10"]
+      """).replaceAll("\\s+", "");
 
     SimpleCheck simpleCheck = new SimpleCheck();
     assertThatThrownBy(() -> PythonQuickFixVerifier.verify(simpleCheck, "a=10", "a==10"))
