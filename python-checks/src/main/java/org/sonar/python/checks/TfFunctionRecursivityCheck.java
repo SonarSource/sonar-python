@@ -21,6 +21,7 @@ package org.sonar.python.checks;
 
 import java.util.ArrayList;
 import java.util.Optional;
+import javax.annotation.Nonnull;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
@@ -66,11 +67,10 @@ public class TfFunctionRecursivityCheck extends PythonSubscriptionCheck {
   }
 
   private static boolean isTfFunction(FunctionDef functionDefinition) {
-    FunctionSymbol functionSymbol = ((FunctionDefImpl) functionDefinition).functionSymbol();
-    return functionSymbol != null && isTfFunction(functionSymbol);
+    return Optional.of(functionDefinition).map(fd -> (FunctionDefImpl) fd).map(FunctionDefImpl::functionSymbol).map(TfFunctionRecursivityCheck::isTfFunction).orElse(false);
   }
 
-  private static boolean isTfFunction(FunctionSymbol functionSymbol) {
+  private static boolean isTfFunction(@Nonnull FunctionSymbol functionSymbol) {
     return functionSymbol.decorators().stream().anyMatch("tf.function"::equals);
   }
 }

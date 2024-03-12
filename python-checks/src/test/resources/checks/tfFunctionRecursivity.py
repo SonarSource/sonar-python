@@ -6,7 +6,7 @@ def factorial(n):
         return 1
     else:
         return (n * factorial(n-1)) # Noncompliant {{Remove this recursive call.}}
-
+                   #^^^^^^^^^^^^^^
 @tf.function
 def other_function(n):
     return n
@@ -19,3 +19,5 @@ def compliant_factorial(n):
         return 1
     else:
         return (n * compliant_factorial(n-1))
+
+factorial(5)
