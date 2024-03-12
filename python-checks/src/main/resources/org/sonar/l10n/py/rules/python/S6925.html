@@ -1,0 +1,27 @@
+<p>This rule raises an issue when the <code>validate_indices</code> argument is set for `tf.gather ` function call.</p>
+<h2>Why is this an issue?</h2>
+<p>The <code>tf.gather</code> function allows you to gather slices from a tensor along a specified axis according to the indices provided. The
+<code>validate_indices</code> argument is deprecated and setting its value has no effect. Indices are always validated on CPU and never validated on
+GPU.</p>
+<h2>How to fix it</h2>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+import tensorflow as tf
+
+x = tf.constant([[1, 2], [3, 4]])
+y = tf.gather(x, [1], validate_indices=True)  # Noncompliant: validate_indices is deprecated
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+import tensorflow as tf
+
+x = tf.constant([[1, 2], [3, 4]])
+y = tf.gather(x, [1])  # OK
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Tensorflow documentation - <a href="https://www.tensorflow.org/api_docs/python/tf/gather">tf.gather</a> </li>
+</ul>
+
