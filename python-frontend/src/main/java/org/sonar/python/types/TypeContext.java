@@ -57,12 +57,14 @@ public class TypeContext {
     final int line;
     final int column;
     final String name;
+    final String kind;
 
-    public TypePositionKey(String fileName, int line, int column, String name) {
+    public TypePositionKey(String fileName, int line, int column, String name, String kind) {
       this.fileName = fileName;
       this.line = line;
       this.column = column;
       this.name = name;
+      this.kind = kind;
     }
 
     @Override
@@ -72,37 +74,56 @@ public class TypeContext {
       if (o == null || getClass() != o.getClass())
         return false;
       TypePositionKey that = (TypePositionKey) o;
-      return line == that.line && column == that.column && Objects.equals(fileName, that.fileName) && Objects.equals(name, that.name);
+      return line == that.line
+        && column == that.column
+        && Objects.equals(fileName, that.fileName)
+        && Objects.equals(name, that.name)
+        && Objects.equals(kind, kind);
     }
 
     @Override
     public int hashCode() {
-      return Objects.hash(fileName, line, column, name);
+      return Objects.hash(fileName, line, column, name, kind);
     }
   }
 
   private final Map<String, List<PyTypeInfo>> files;
   private final Map<TypePositionKey, PyTypeInfo> typesByPosition;
+  private final HashMap<TypePositionKey, List<PyTypeInfo>> multipleTypesByPosition;
   private Map<Tree, Scope> scopesByRootTree = null;
 
   public TypeContext() {
     this.files = new HashMap<>();
     this.typesByPosition = new HashMap<>();
+    this.multipleTypesByPosition = new HashMap<>();
   }
 
   public TypeContext(Map<String, List<PyTypeInfo>> files) {
     this.files = files;
     typesByPosition = files.entrySet()
-        .stream()
-          .flatMap(entry -> {
-            var file = entry.getKey();
-            return entry.getValue()
-              .stream()
-              .map(typeInfo -> Map.entry(
-                new TypePositionKey(file, typeInfo.startLine(), typeInfo.startCol(), typeInfo.text()),
-                typeInfo));
-          })
+      .stream()
+      .flatMap(entry -> {
+        var file = entry.getKey();
+        return entry.getValue()
+          .stream()
+          .map(typeInfo -> Map.entry(
+            new TypePositionKey(file, typeInfo.startLine(), typeInfo.startCol(), typeInfo.text(), typeInfo.syntaxRole()),
+            typeInfo));
+      })
       .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (v1, v2) -> v1));
+
+    multipleTypesByPosition = files
+      .entrySet()
+      .stream()
+      .flatMap(entry -> {
+        var file = entry.getKey();
+        return entry.getValue()
+          .stream()
+          .map(typeInfo -> Map.entry(
+            new TypePositionKey(file, typeInfo.startLine(), typeInfo.startCol(), typeInfo.text(), typeInfo.syntaxRole()),
+            typeInfo));
+      })
+      .collect(Collectors.groupingBy(Map.Entry::getKey, HashMap::new, Collectors.mapping(Map.Entry::getValue, Collectors.toList())));
   }
 
   public void setScopesByRootTree(Map<Tree, Scope> scopesByRootTree) {
@@ -111,15 +132,10 @@ public class TypeContext {
 
   @VisibleForTesting
   Optional<InferredType> getTypeFor(String fileName, int line, int column, String name, String kind, Tree tree) {
-    TypePositionKey typePositionKey = new TypePositionKey(fileName, line, column, name);
-    if (!typesByPosition.containsKey(typePositionKey))
-      return Optional.empty();
-    var typeInfo = typesByPosition.get(typePositionKey);
-    if (!typeInfo.syntaxRole().equals(kind)) {
-      LOG.error("Found type at position, but does not match expected kind ({}): {}", kind, typeInfo);
-      return Optional.empty();
-    }
-    return Optional.of(getInferredType(typeInfo, fileName, tree));
+    TypePositionKey typePositionKey = new TypePositionKey(fileName, line, column, name, kind);
+    var result = Optional.of(typesByPosition.get(typePositionKey))
+      .map(typeInfo -> getInferredType(typeInfo, fileName, tree));
+    return result;
   }
 
   private InferredType getInferredType(PyTypeInfo typeInfo, String fileName, Tree tree) {
@@ -162,19 +178,19 @@ public class TypeContext {
     } else if (detailedType.startsWith("builtins.") ||
       detailedType.startsWith("GenericType(base_type=ClassType(builtins.") ||
       detailedType.startsWith("TupleType(base_type=ClassType(builtins.")) {
-      return InferredTypes.runtimeBuiltinType(getBaseType(typeString));
-    } else if (typeString.indexOf('.') >= 0 || !detailedType.startsWith(typeString)) {
-      ClassSymbolImpl callableClassSymbol = new ClassSymbolImpl(typeString.substring(typeString.lastIndexOf('.') + 1), detailedType);
-      return new RuntimeType(callableClassSymbol);
-    } else if (typeString.equals("Any")) {
-      return InferredTypes.anyType();
-    } else {
-      // Try to make a qualified name. pytype does not give a qualified name for classes defined in the same file.
-      // The filename should contain the module path, but we may get and extra prefix. The prefix will get removed later.
-      var qualifiedTypeString = fileName.replace('/', '.').substring(0, fileName.lastIndexOf('.') + 1) + typeString;
-      ClassSymbolImpl callableClassSymbol = new ClassSymbolImpl(typeString, qualifiedTypeString);
-      return new RuntimeType(callableClassSymbol);
-    }
+        return InferredTypes.runtimeBuiltinType(getBaseType(typeString));
+      } else if (typeString.indexOf('.') >= 0 || !detailedType.startsWith(typeString)) {
+        ClassSymbolImpl callableClassSymbol = new ClassSymbolImpl(typeString.substring(typeString.lastIndexOf('.') + 1), detailedType);
+        return new RuntimeType(callableClassSymbol);
+      } else if (typeString.equals("Any")) {
+        return InferredTypes.anyType();
+      } else {
+        // Try to make a qualified name. pytype does not give a qualified name for classes defined in the same file.
+        // The filename should contain the module path, but we may get and extra prefix. The prefix will get removed later.
+        var qualifiedTypeString = fileName.replace('/', '.').substring(0, fileName.lastIndexOf('.') + 1) + typeString;
+        ClassSymbolImpl callableClassSymbol = new ClassSymbolImpl(typeString, qualifiedTypeString);
+        return new RuntimeType(callableClassSymbol);
+      }
   }
 
   private Optional<InferredType> getLocallyDefinedClassSymbolType(String typeString, String fileName, Tree tree) {
