@@ -43,6 +43,8 @@ import org.sonar.plugins.python.ruff.RuffSensor;
 import org.sonar.plugins.python.warnings.AnalysisWarningsWrapper;
 import org.sonar.plugins.python.xunit.PythonXUnitSensor;
 
+import static org.sonar.plugins.python.api.PythonVersionUtils.PYTHON_VERSION_KEY;
+
 public class PythonPlugin implements Plugin {
 
   private static final String PYTHON_CATEGORY = "Python";
@@ -69,6 +71,16 @@ public class PythonPlugin implements Plugin {
         .subCategory(GENERAL)
         .onQualifiers(Qualifiers.PROJECT)
         .defaultValue("py")
+        .build(),
+
+      PropertyDefinition.builder(PYTHON_VERSION_KEY)
+        .index(11)
+        .name("Python versions")
+        .description("Comma-separated list of Python versions this project is compatible with.")
+        .multiValues(true)
+        .category(PYTHON_CATEGORY)
+        .subCategory(GENERAL)
+        .onQualifiers(Qualifiers.PROJECT)
         .build(),
 
       Python.class,
