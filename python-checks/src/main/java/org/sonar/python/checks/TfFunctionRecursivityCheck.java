@@ -20,57 +20,95 @@
 package org.sonar.python.checks;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 import javax.annotation.Nonnull;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
-import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.symbols.Usage;
+import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.CallExpression;
+import org.sonar.plugins.python.api.tree.Decorator;
+import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.python.tree.FunctionDefImpl;
 import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S6908")
 public class TfFunctionRecursivityCheck extends PythonSubscriptionCheck {
 
   private static final String MESSAGE = "Remove this recursive call.";
+  private static final String SECONDARY_MESSAGE = "Recursive call is here.";
 
   @Override
   public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, TfFunctionRecursivityCheck::checkCallExpr);
+    context.registerSyntaxNodeConsumer(Tree.Kind.FUNCDEF, TfFunctionRecursivityCheck::checkFunctionDef);
   }
 
-  private static void checkCallExpr(SubscriptionContext context) {
-    CallExpression callExpression = (CallExpression) context.syntaxNode();
-    var containingFunctions = new ArrayList<FunctionDef>();
-    var currentFunction = TreeUtils.firstAncestorOfKind(callExpression, Tree.Kind.FUNCDEF);
-    if (currentFunction == null) {
+  private static void checkFunctionDef(SubscriptionContext context) {
+    FunctionDef functionDef = (FunctionDef) context.syntaxNode();
+    if (!isTfFunction(functionDef)) {
       return;
     }
-    while (currentFunction != null) {
-      containingFunctions.add((FunctionDef) currentFunction);
-      currentFunction = TreeUtils.firstAncestorOfKind(currentFunction, Tree.Kind.FUNCDEF);
-    }
-
-    if (containingFunctions.stream().noneMatch(TfFunctionRecursivityCheck::isTfFunction)) {
+    var selfSymbol = TreeUtils.getFunctionSymbolFromDef(functionDef);
+    if (selfSymbol == null) {
       return;
     }
-
-    Symbol calleeSymbol = callExpression.calleeSymbol();
-    Optional.ofNullable(calleeSymbol)
-      .filter(symbol -> symbol.is(Symbol.Kind.FUNCTION))
-      .filter(symbol -> symbol == (TreeUtils.getFunctionSymbolFromDef(containingFunctions.get(0))))
-      .ifPresent(symbol -> context.addIssue(callExpression, MESSAGE));
+    var collector = new CallCollector(selfSymbol);
+    context.syntaxNode().accept(collector);
+    if (collector.expressionList.isEmpty()) {
+      return;
+    }
+    var issue = context.addIssue(functionDef.name(), MESSAGE);
+    collector.expressionList.forEach(call -> issue.secondary(call, SECONDARY_MESSAGE));
   }
 
   private static boolean isTfFunction(FunctionDef functionDefinition) {
-    return Optional.of(functionDefinition).map(fd -> (FunctionDefImpl) fd).map(FunctionDefImpl::functionSymbol).map(TfFunctionRecursivityCheck::isTfFunction).orElse(false);
+    return functionDefinition.decorators().stream()
+      .map(Decorator::expression).map(TreeUtils::getSymbolFromTree)
+      .filter(Optional::isPresent).map(Optional::get)
+      .map(Symbol::fullyQualifiedName)
+      .filter(Objects::nonNull)
+      .anyMatch("tensorflow.function"::equals);
   }
 
-  private static boolean isTfFunction(@Nonnull FunctionSymbol functionSymbol) {
-    return functionSymbol.decorators().stream().anyMatch("tf.function"::equals);
+  private static class CallCollector extends BaseTreeVisitor {
+    private final Symbol originalSymbol;
+    List<Expression> expressionList = new ArrayList<>();
+
+    Set<FunctionDef> visited = new HashSet<>();
+
+    private CallCollector(@Nonnull Symbol originalSymbol) {
+      this.originalSymbol = originalSymbol;
+    }
+
+    @Override
+    public void visitCallExpression(CallExpression callExpression) {
+      Symbol symbol = TreeUtils.getSymbolFromTree(callExpression.callee()).orElse(null);
+      if (symbol == null) {
+        return;
+      }
+      if (symbol.equals(originalSymbol)) {
+        expressionList.add(callExpression.callee());
+      }
+      if (symbol.is(Symbol.Kind.FUNCTION)) {
+        symbol.usages().stream().filter(usage -> usage.kind() == (Usage.Kind.FUNC_DECLARATION)).forEach(usage -> usage.tree().parent().accept(this));
+      }
+      super.visitCallExpression(callExpression);
+    }
+
+    @Override
+    public void visitFunctionDef(FunctionDef functionDef) {
+      if (visited.contains(functionDef)) {
+        return;
+      }
+      visited.add(functionDef);
+      super.visitFunctionDef(functionDef);
+    }
   }
 }
