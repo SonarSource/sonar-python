@@ -23,7 +23,6 @@ import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 class TfGatherDeprecatedValidateIndicesCheckTest {
-
   @Test
   void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/tfGatherDeprecatedValidateIndices.py", new TfGatherDeprecatedValidateIndicesCheck());
