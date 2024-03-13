@@ -62,3 +62,14 @@ def ambiguous(n):
 @tf.function
 def ambiguous(n, n1):
     return ambiguous(n-1, n1) # FN because of ambiguous symbol
+
+def other_names():
+    import tensorflow as not_tf
+    @not_tf.function
+    def not_tf_function(n): # Noncompliant {{Remove this recursive call.}}
+        return not_tf_function(n-1)
+
+    from tensorflow import function as our_decorator
+    @our_decorator
+    def our_decorated_function(n): # Noncompliant {{Remove this recursive call.}}
+        return our_decorated_function(n-1)
