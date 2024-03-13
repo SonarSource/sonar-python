@@ -1,0 +1,81 @@
+<p>This rule raises an issue when the axis argument is not provided to TensorFlow’s reduction operations.</p>
+<h2>Why is this an issue?</h2>
+<p>The result of TensorFlow’s reduction operations (i.e. <code>tf.math.reduce_sum</code>, <code>tf.math.reduce_std</code>), highly depends on the
+shape of the Tensor provided.</p>
+<pre>
+import tensorflow as tf
+
+x = tf.constant([[1, 1, 1], [1, 1, 1]])
+tf.math.reduce_sum(x)
+</pre>
+<p>In the example above the reduction of the 2 dimensional array will return the value <code>6</code> as all the elements are added together. By
+default TensorFlow’s reduction operations are applied across all axis. When specifying an axis the result will be completely different.</p>
+<pre>
+import tensorflow as tf
+
+x = tf.constant([[1, 1, 1], [1, 1, 1]])
+tf.math.reduce_sum(x, axis=0)
+</pre>
+<p>Here the result will be <code>[2,2,2]</code> as the reduction is applied only on the axis 0.</p>
+<p>TensorFlow’s default behavior can be confusing, especially when the reducing array of different shapes.</p>
+<p>Considering the following example:</p>
+<pre>
+import tensorflow as tf
+
+x = tf.constant([[1], [2]])
+y = tf.constant([1, 2])
+tf.math.reduce_sum(x + y)
+</pre>
+<p>Here the result will be <code>12</code> instead of the <code>6</code> that could be expected. This is because the implicit broadcasting reshapes
+the first array to <code>[[1,1], [2,2]]</code> which is then added to the <code>y</code> array <code>[1,2]</code> resulting in <code>[[2,3],
+[3,4]]</code>. As the reduction happen across all dimensions the result is then <code>2 + 3 + 3 + 4 = 12</code>. It is not clear by looking at the
+example if this was intentional or if the user made a mistake.</p>
+<p>This is why a good practice is to always specify the axis on which to perform the reduction.</p>
+<p>For example:</p>
+<pre>
+import tensorflow as tf
+
+x = tf.constant([[1], [2]])
+y = tf.constant([1, 2])
+tf.math.reduce_sum(x + y, axis=0)
+</pre>
+<p>In the example above, specifying the axis clarifies the intent, as the result now is <code>[5, 7]</code>. If the intent was to effectively reduce
+across all dimensions the user should provide the list of axis <code>axis=[0,1]</code> or clearly state the default behavior should be applied with
+<code>axis=None</code>.</p>
+<h2>How to fix it</h2>
+<p>To fix this issue provide the axis argument when using a TensorFlow reduction operation such as <code>tf.math.reduce_sum</code>,
+<code>tf.math.reduce_prod</code>, <code>tf.math.reduce_mean</code>, etc…​</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+import tensorflow as tf
+
+x = tf.constant([[1, 1, 1], [1, 1, 1]])
+tf.math.reduce_sum(x) # Noncompliant: the axis arguments defaults to None
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+import tensorflow as tf
+
+x = tf.constant([[1, 1, 1], [1, 1, 1]])
+tf.math.reduce_sum(x, axis=0) # Compliant: the reduction will happen only on the axis 0, resulting in `[2,2,2]`
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> TensorFlow Documentation - <a href="https://www.tensorflow.org/api_docs/python/tf/math/reduce_max">tf.math.reduce_max reference</a> </li>
+  <li> TensorFlow Documentation - <a href="https://www.tensorflow.org/api_docs/python/tf/math/reduce_mean">tf.math.reduce_mean reference</a> </li>
+  <li> TensorFlow Documentation - <a href="https://www.tensorflow.org/api_docs/python/tf/math/reduce_min">tf.math.reduce_min reference</a> </li>
+  <li> TensorFlow Documentation - <a href="https://www.tensorflow.org/api_docs/python/tf/math/reduce_prod">tf.math.reduce_prod reference</a> </li>
+  <li> TensorFlow Documentation - <a href="https://www.tensorflow.org/api_docs/python/tf/math/reduce_std">tf.math.reduce_std reference</a> </li>
+  <li> TensorFlow Documentation - <a href="https://www.tensorflow.org/api_docs/python/tf/math/reduce_sum">tf.math.reduce_sum reference</a> </li>
+  <li> TensorFlow Documentation - <a href="https://www.tensorflow.org/api_docs/python/tf/math/reduce_variance">tf.math.reduce_variance reference</a>
+  </li>
+</ul>
+<h3>Articles &amp; blog posts</h3>
+<ul>
+  <li> Vahidk Developers Guide - <a
+  href="https://github.com/vahidk/EffectiveTensorflow?tab=readme-ov-file#broadcasting-the-good-and-the-ugly">Broadcasting the good and the ugly</a>
+  </li>
+</ul>
+

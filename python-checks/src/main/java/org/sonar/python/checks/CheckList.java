@@ -358,6 +358,7 @@ public final class CheckList {
       TrailingWhitespaceCheck.class,
       TypeAliasAnnotationCheck.class,
       TfGatherDeprecatedValidateIndicesCheck.class,
+      TfSpecifyReductionAxisCheck.class,
       ReferencedBeforeAssignmentCheck.class,
       RegexComplexityCheck.class,
       RegexLookaheadCheck.class,
