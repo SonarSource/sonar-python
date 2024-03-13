@@ -1,7 +1,7 @@
 import tensorflow as tf
 
 @tf.function
-def factorial(n): # Noncompliant {{Remove this recursive call.}}
+def factorial(n): # Noncompliant {{Make sure to avoid recursive calls in this function.}}
    #^^^^^^^^^
     if n == 1:
         return 1
@@ -10,7 +10,7 @@ def factorial(n): # Noncompliant {{Remove this recursive call.}}
                    #^^^^^^^^^< {{Recursive call is here.}}
 
 @tf.function
-def multiple_recursive_calls(n): # Noncompliant {{Remove this recursive call.}}
+def multiple_recursive_calls(n): # Noncompliant {{Make sure to avoid recursive calls in this function.}}
    #^^^^^^^^^^^^^^^^^^^^^^^^
     if cond:
         multiple_recursive_calls(n-1)
@@ -23,12 +23,12 @@ def multiple_recursive_calls(n): # Noncompliant {{Remove this recursive call.}}
                                           #^^^^^^^^^^^^^^^^^^^^^^^^@-1< {{Recursive call is here.}}
 
 @tf.function
-def indirect_rec1(n): # Noncompliant {{Remove this recursive call.}}
+def indirect_rec1(n): # Noncompliant {{Make sure to avoid recursive calls in this function.}}
    #^^^^^^^^^^^^^
     return indirect_rec2(n)
           #^^^^^^^^^^^^^> {{Recursive call is here.}}
 @tf.function
-def indirect_rec2(n): # Noncompliant {{Remove this recursive call.}}
+def indirect_rec2(n): # Noncompliant {{Make sure to avoid recursive calls in this function.}}
    #^^^^^^^^^^^^^
     return indirect_rec1(n)
 
@@ -40,6 +40,7 @@ def unknown_call(n):
 def symbol_not_function(x):
     indirect_call = symbol_not_function
     return indirect_call(x) # FN
+
 @tf.function
 def other_function(n):
     return n
@@ -66,10 +67,13 @@ def ambiguous(n, n1):
 def other_names():
     import tensorflow as not_tf
     @not_tf.function
-    def not_tf_function(n): # Noncompliant {{Remove this recursive call.}}
+    def not_tf_function(n): # Noncompliant {{Make sure to avoid recursive calls in this function.}}
         return not_tf_function(n-1)
 
     from tensorflow import function as our_decorator
     @our_decorator
-    def our_decorated_function(n): # Noncompliant {{Remove this recursive call.}}
+    def our_decorated_function(n): # Noncompliant {{Make sure to avoid recursive calls in this function.}}
         return our_decorated_function(n-1)
+
+    @unknown_decorator
+    def some_function(): ...

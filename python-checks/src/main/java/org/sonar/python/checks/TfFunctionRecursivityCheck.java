@@ -20,15 +20,12 @@
 package org.sonar.python.checks;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
-import java.util.Set;
-import javax.annotation.Nonnull;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
+import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
@@ -42,7 +39,7 @@ import org.sonar.python.tree.TreeUtils;
 @Rule(key = "S6908")
 public class TfFunctionRecursivityCheck extends PythonSubscriptionCheck {
 
-  private static final String MESSAGE = "Remove this recursive call.";
+  private static final String MESSAGE = "Make sure to avoid recursive calls in this function.";
   private static final String SECONDARY_MESSAGE = "Recursive call is here.";
 
   @Override
@@ -55,12 +52,12 @@ public class TfFunctionRecursivityCheck extends PythonSubscriptionCheck {
     if (!isTfFunction(functionDef)) {
       return;
     }
-    var selfSymbol = TreeUtils.getFunctionSymbolFromDef(functionDef);
-    if (selfSymbol == null) {
+    FunctionSymbol functionSymbol = TreeUtils.getFunctionSymbolFromDef(functionDef);
+    if (functionSymbol == null) {
       return;
     }
-    var collector = new CallCollector(selfSymbol);
-    context.syntaxNode().accept(collector);
+    CallCollector collector = new CallCollector(functionSymbol);
+    functionDef.accept(collector);
     if (collector.expressionList.isEmpty()) {
       return;
     }
@@ -70,20 +67,22 @@ public class TfFunctionRecursivityCheck extends PythonSubscriptionCheck {
 
   private static boolean isTfFunction(FunctionDef functionDefinition) {
     return functionDefinition.decorators().stream()
-      .map(Decorator::expression).map(TreeUtils::getSymbolFromTree)
-      .filter(Optional::isPresent).map(Optional::get)
+      .anyMatch(TfFunctionRecursivityCheck::isTfFunctionDecorator);
+  }
+
+  private static boolean isTfFunctionDecorator(Decorator decorator) {
+    return Optional.of(decorator.expression())
+      .flatMap(TreeUtils::getSymbolFromTree)
       .map(Symbol::fullyQualifiedName)
-      .filter(Objects::nonNull)
-      .anyMatch("tensorflow.function"::equals);
+      .filter("tensorflow.function"::equals)
+      .isPresent();
   }
 
   private static class CallCollector extends BaseTreeVisitor {
     private final Symbol originalSymbol;
     List<Expression> expressionList = new ArrayList<>();
 
-    Set<FunctionDef> visited = new HashSet<>();
-
-    private CallCollector(@Nonnull Symbol originalSymbol) {
+    private CallCollector(Symbol originalSymbol) {
       this.originalSymbol = originalSymbol;
     }
 
@@ -95,20 +94,10 @@ public class TfFunctionRecursivityCheck extends PythonSubscriptionCheck {
       }
       if (symbol.equals(originalSymbol)) {
         expressionList.add(callExpression.callee());
-      }
-      if (symbol.is(Symbol.Kind.FUNCTION)) {
+      } else if (symbol.is(Symbol.Kind.FUNCTION)) {
         symbol.usages().stream().filter(usage -> usage.kind() == (Usage.Kind.FUNC_DECLARATION)).forEach(usage -> usage.tree().parent().accept(this));
       }
       super.visitCallExpression(callExpression);
-    }
-
-    @Override
-    public void visitFunctionDef(FunctionDef functionDef) {
-      if (visited.contains(functionDef)) {
-        return;
-      }
-      visited.add(functionDef);
-      super.visitFunctionDef(functionDef);
     }
   }
 }
