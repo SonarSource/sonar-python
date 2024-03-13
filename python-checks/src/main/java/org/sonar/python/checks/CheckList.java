@@ -331,6 +331,7 @@ public final class CheckList {
       SecureModeEncryptionAlgorithmsCheck.class,
       SelfAssignmentCheck.class,
       SetDuplicateKeyCheck.class,
+      SideEffectInTfFunctionCheck.class,
       SillyEqualityCheck.class,
       SillyIdentityCheck.class,
       SingleCharacterAlternationCheck.class,

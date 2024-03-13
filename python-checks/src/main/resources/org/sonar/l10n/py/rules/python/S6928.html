@@ -1,0 +1,51 @@
+<p>This rule raises an issue when a Python side effect happens inside a <code>tensorflow.function</code>.</p>
+<h2>Why is this an issue?</h2>
+<p>Python sides effects such as printing, mutating a list or a global variable, inside of a <code>tensorflow.function</code> may not behave as
+expected. Because of the <a href="https://www.tensorflow.org/guide/function#rules_of_tracing">Rules of tracing</a>, the execution of side effects will
+depend on the input values of the function and will execute only once per tracing.</p>
+<pre>
+import tensorflow as tf
+
+@tf.function
+def f(x):
+  print("A side effect", x)
+
+f(1) # prints "A side effect 1"
+f(1) # does not print anything
+f(2) # prints "A side effect 2"
+</pre>
+<p>The example above depicts the issue encountered when using Python side effects in a <code>tensorflow.function</code>. As a single trace is created
+per input values, the second call to <code>f(1)</code> does not output anything to the console.</p>
+<p>The best practice would be to avoid using Python side effects and prefer the usage of the TensorFlow API with functions such as
+<code>tf.print</code> or tf.TensorArray`.</p>
+<h2>How to fix it</h2>
+<p>To fix this issue either remove the side effect or use the corresponding TensorFlow function.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+import tensorflow as tf
+
+@tf.function
+def f(x):
+  print("Printing", x) # Noncompliant print is a side effect
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+import tensorflow as tf
+
+@tf.function
+def f(x):
+  tf.print("Printing", x) # Compliant
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> TensorFlow Documentation - <a href="https://www.tensorflow.org/guide/function#executing_python_side_effects">Executing Python side effects</a>
+  </li>
+  <li> TensorFlow Documentation - <a href="https://www.tensorflow.org/api_docs/python/tf/print">tf.print reference</a> </li>
+  <li> TensorFlow Documentation - <a href="https://www.tensorflow.org/api_docs/python/tf/summary">tf.summary reference</a> </li>
+  <li> TensorFlow Documentation - <a href="https://www.tensorflow.org/api_docs/python/tf/Variable#methods">tf.Variable methods reference</a> </li>
+  <li> TensorFlow Documentation - <a href="https://www.tensorflow.org/api_docs/python/tf/TensorArray">tf.TensorArray reference</a> </li>
+  <li> TensorFlow Documentation - <a href="https://www.tensorflow.org/api_docs/python/tf/data">tf.data reference</a> </li>
+</ul>
+
