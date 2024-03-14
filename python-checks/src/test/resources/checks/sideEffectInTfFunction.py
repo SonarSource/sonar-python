@@ -60,6 +60,11 @@ def subscription_modifying_list(my_list):  # Noncompliant
 
 
 @tf.function
+def using_comprehensions():
+    x = [i for i in range(10)]
+    y = {i for i in range(10)}
+
+@tf.function
 def appending_to_list(my_list):  # FN
     my_list.append("42")
 
