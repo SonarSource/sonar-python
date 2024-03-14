@@ -31,7 +31,8 @@ tf.reduce_min(x, axis=0)
 tf.reduce_max(x, axis=0)
 
 # Non compliants
-tf.reduce_sum(x) # Noncompliant
+y = tf.reduce_sum(x) # Noncompliant {{Provide a value for the axis argument.}}
+   #^^^^^^^^^^^^^
 tf.reduce_mean(x) # Noncompliant
 tf.reduce_min(x) # Noncompliant
 tf.reduce_max(x) # Noncompliant
@@ -52,7 +53,8 @@ def other_name():
     tf2.reduce_mean(x2, 2)
 
     from tensorflow import reduce_mean as rm
-    rm(x2) # Noncompliant
+    rm(x2) # Noncompliant {{Provide a value for the axis argument.}}
+   #^^
     rm(x2, 2)
 
 def unrelated():

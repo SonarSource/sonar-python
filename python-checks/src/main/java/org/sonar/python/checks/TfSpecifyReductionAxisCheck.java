@@ -60,6 +60,6 @@ public class TfSpecifyReductionAxisCheck extends PythonSubscriptionCheck {
       || TreeUtils.nthArgumentOrKeyword(AXIS_PARAMETER_POSITION, AXIS_PARAMETER, callExpression.arguments()) != null) {
       return;
     }
-    context.addIssue(callExpression, MESSAGE);
+    context.addIssue(callExpression.callee(), MESSAGE);
   }
 }
