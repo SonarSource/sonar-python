@@ -27,7 +27,6 @@ import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
-import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Decorator;
@@ -88,15 +87,9 @@ public class TfFunctionRecursivityCheck extends PythonSubscriptionCheck {
 
     @Override
     public void visitCallExpression(CallExpression callExpression) {
-      Symbol symbol = TreeUtils.getSymbolFromTree(callExpression.callee()).orElse(null);
-      if (symbol == null) {
-        return;
-      }
-      if (symbol.equals(originalSymbol)) {
-        expressionList.add(callExpression.callee());
-      } else if (symbol.is(Symbol.Kind.FUNCTION)) {
-        symbol.usages().stream().filter(usage -> usage.kind() == (Usage.Kind.FUNC_DECLARATION)).forEach(usage -> usage.tree().parent().accept(this));
-      }
+      TreeUtils.getSymbolFromTree(callExpression.callee())
+        .filter(symbol -> symbol.equals(originalSymbol))
+        .ifPresent(symbol -> expressionList.add(callExpression.callee()));
       super.visitCallExpression(callExpression);
     }
   }

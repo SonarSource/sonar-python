@@ -23,13 +23,10 @@ def multiple_recursive_calls(n): # Noncompliant {{Make sure to avoid recursive c
                                           #^^^^^^^^^^^^^^^^^^^^^^^^@-1< {{Recursive call is here.}}
 
 @tf.function
-def indirect_rec1(n): # Noncompliant {{Make sure to avoid recursive calls in this function.}}
-   #^^^^^^^^^^^^^
+def indirect_rec1(n): # FN because of indirect recursion
     return indirect_rec2(n)
-          #^^^^^^^^^^^^^> {{Recursive call is here.}}
 @tf.function
-def indirect_rec2(n): # Noncompliant {{Make sure to avoid recursive calls in this function.}}
-   #^^^^^^^^^^^^^
+def indirect_rec2(n): # FN because of indirect recursion
     return indirect_rec1(n)
 
 @tf.function
