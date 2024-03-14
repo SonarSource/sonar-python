@@ -273,6 +273,7 @@ public final class CheckList {
       NonCallableCalledCheck.class,
       NonStandardCryptographicAlgorithmCheck.class,
       NonStringInAllPropertyCheck.class,
+      NonSingletonTfVariableCheck.class,
       NoPersonReferenceInTodoCheck.class,
       NoReRaiseInExitCheck.class,
       NoSonarCommentCheck.class,
