@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import org.antlr.v4.runtime.RecognitionException;
 import org.slf4j.Logger;
@@ -57,14 +58,12 @@ public class TypeContext {
     final int line;
     final int column;
     final String name;
-    final String kind;
 
-    public TypePositionKey(String fileName, int line, int column, String name, String kind) {
+    public TypePositionKey(String fileName, int line, int column, String name) {
       this.fileName = fileName;
       this.line = line;
       this.column = column;
       this.name = name;
-      this.kind = kind;
     }
 
     @Override
@@ -77,13 +76,12 @@ public class TypeContext {
       return line == that.line
         && column == that.column
         && Objects.equals(fileName, that.fileName)
-        && Objects.equals(name, that.name)
-        && Objects.equals(kind, kind);
+        && Objects.equals(name, that.name);
     }
 
     @Override
     public int hashCode() {
-      return Objects.hash(fileName, line, column, name, kind);
+      return Objects.hash(fileName, line, column, name);
     }
   }
 
@@ -107,7 +105,7 @@ public class TypeContext {
         return entry.getValue()
           .stream()
           .map(typeInfo -> Map.entry(
-            new TypePositionKey(file, typeInfo.startLine(), typeInfo.startCol(), typeInfo.text(), typeInfo.syntaxRole()),
+            new TypePositionKey(file, typeInfo.startLine(), typeInfo.startCol(), typeInfo.text()),
             typeInfo));
       })
       .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (v1, v2) -> v1));
@@ -120,7 +118,7 @@ public class TypeContext {
         return entry.getValue()
           .stream()
           .map(typeInfo -> Map.entry(
-            new TypePositionKey(file, typeInfo.startLine(), typeInfo.startCol(), typeInfo.text(), typeInfo.syntaxRole()),
+            new TypePositionKey(file, typeInfo.startLine(), typeInfo.startCol(), typeInfo.text()),
             typeInfo));
       })
       .collect(Collectors.groupingBy(Map.Entry::getKey, HashMap::new, Collectors.mapping(Map.Entry::getValue, Collectors.toList())));
@@ -132,10 +130,14 @@ public class TypeContext {
 
   @VisibleForTesting
   Optional<InferredType> getTypeFor(String fileName, int line, int column, String name, String kind, Tree tree) {
-    TypePositionKey typePositionKey = new TypePositionKey(fileName, line, column, name, kind);
-    var result = Optional.of(typesByPosition.get(typePositionKey))
+    TypePositionKey typePositionKey = new TypePositionKey(fileName, line, column, name);
+    return Optional.ofNullable(multipleTypesByPosition.get(typePositionKey))
+      .filter(Predicate.not(List::isEmpty))
+      .map(types -> types.stream()
+        .filter(t -> kind.equals(t.syntaxRole()))
+        .findFirst()
+        .orElse(types.get(0)))
       .map(typeInfo -> getInferredType(typeInfo, fileName, tree));
-    return result;
   }
 
   private InferredType getInferredType(PyTypeInfo typeInfo, String fileName, Tree tree) {
