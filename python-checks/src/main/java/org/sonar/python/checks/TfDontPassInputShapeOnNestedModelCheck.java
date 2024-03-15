@@ -20,6 +20,7 @@
 package org.sonar.python.checks;
 
 import java.util.Optional;
+import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
@@ -35,7 +36,7 @@ public class TfDontPassInputShapeOnNestedModelCheck extends PythonSubscriptionCh
 
   public static final String MESSAGE = "Remove this `input_shape` argument, it is deprecated.";
   public static final String ARGUMENT_NAME = "input_shape";
-  public static final String CLASS_FQN = "tensorflow.keras.Model";
+  public static final Set<String> CLASS_FQN = Set.of("tensorflow.keras.Model", "tf.keras.Model", "keras.Model");
 
   @Override
   public void initialize(Context context) {
@@ -49,7 +50,8 @@ public class TfDontPassInputShapeOnNestedModelCheck extends PythonSubscriptionCh
       .map(funcDef -> TreeUtils.firstAncestorOfKind(funcDef, Tree.Kind.CLASSDEF))
       .map(ClassDef.class::cast)
       .map(TreeUtils::getClassSymbolFromDef)
-      .filter(classSymbol -> classSymbol.isOrExtends(CLASS_FQN))
+      .filter(
+        classSymbol -> classSymbol.superClasses().stream().anyMatch(superClass -> superClass.fullyQualifiedName() != null && CLASS_FQN.contains(superClass.fullyQualifiedName())))
       .isEmpty()) {
       return;
     }
