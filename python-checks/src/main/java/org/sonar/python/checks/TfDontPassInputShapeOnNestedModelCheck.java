@@ -24,9 +24,12 @@ import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
+import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.ClassDef;
+import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FunctionDef;
+import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.tree.TreeUtils;
@@ -45,8 +48,10 @@ public class TfDontPassInputShapeOnNestedModelCheck extends PythonSubscriptionCh
 
   private static void checkCallExpr(SubscriptionContext context) {
     if (Optional.of((CallExpression) context.syntaxNode())
+      .filter(TfDontPassInputShapeOnNestedModelCheck::isSuperInitCall)
       .map(callExpression -> TreeUtils.firstAncestorOfKind(callExpression, Tree.Kind.FUNCDEF))
       .map(FunctionDef.class::cast)
+      .filter(functionDef -> "__init__".equals(functionDef.name().name()))
       .map(funcDef -> TreeUtils.firstAncestorOfKind(funcDef, Tree.Kind.CLASSDEF))
       .map(ClassDef.class::cast)
       .map(TreeUtils::getClassSymbolFromDef)
@@ -60,5 +65,21 @@ public class TfDontPassInputShapeOnNestedModelCheck extends PythonSubscriptionCh
     if (inputShapeArgument != null) {
       context.addIssue(inputShapeArgument, MESSAGE);
     }
+  }
+
+  private static boolean isSuperInitCall(CallExpression callExpression) {
+    Expression callee = callExpression.callee();
+    if (callee.is(Tree.Kind.QUALIFIED_EXPR)) {
+      QualifiedExpression qualifiedExpression = (QualifiedExpression) callee;
+      return "__init__".equals(qualifiedExpression.name().name()) && Optional.of(qualifiedExpression.qualifier())
+        .filter(expr -> expr.is(Tree.Kind.CALL_EXPR))
+        .map(CallExpression.class::cast)
+        .map(CallExpression::calleeSymbol)
+        .filter(symbol -> symbol.kind() == Symbol.Kind.CLASS)
+        .map(Symbol::fullyQualifiedName)
+        .filter("super"::equals)
+        .isPresent();
+    }
+    return false;
   }
 }
