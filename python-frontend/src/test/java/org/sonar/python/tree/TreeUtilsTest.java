@@ -25,6 +25,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.symbols.Symbol;
@@ -418,6 +419,22 @@ class TreeUtilsTest {
     fileInput = PythonTestUtils.parse("a = 1", "");
     lastToken = TreeUtils.getTreeSeparatorOrLastToken(fileInput.statements().statements().get(0));
     assertThat(lastToken.type().getName()).isEqualTo("NEWLINE");
+  }
+
+  @Test
+  void test_isFunctionWithGivenDecoratorFQN() {
+    FileInput fileInput = PythonTestUtils.parse(
+      """
+        import some_module
+        @some_module.some_decorator
+        def foo():
+          ...
+        """
+    );
+    assertThat(TreeUtils.isFunctionWithGivenDecoratorFQN(fileInput, "some_module.some_decorator")).isFalse();
+    FunctionDef functionDef = ((FunctionDef) fileInput.statements().statements().get(1));
+    assertThat(TreeUtils.isFunctionWithGivenDecoratorFQN(functionDef, "some_module.some_decorator")).isTrue();
+    assertThat(TreeUtils.isFunctionWithGivenDecoratorFQN(functionDef, "some_module.unknown")).isFalse();
   }
 
   @Test

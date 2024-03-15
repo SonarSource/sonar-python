@@ -48,7 +48,7 @@ public class TfFunctionRecursivityCheck extends PythonSubscriptionCheck {
 
   private static void checkFunctionDef(SubscriptionContext context) {
     FunctionDef functionDef = (FunctionDef) context.syntaxNode();
-    if (!isTfFunction(functionDef)) {
+    if (!TreeUtils.isFunctionWithGivenDecoratorFQN(functionDef, "tensorflow.function")) {
       return;
     }
     FunctionSymbol functionSymbol = TreeUtils.getFunctionSymbolFromDef(functionDef);
@@ -62,19 +62,6 @@ public class TfFunctionRecursivityCheck extends PythonSubscriptionCheck {
     }
     var issue = context.addIssue(functionDef.name(), MESSAGE);
     collector.expressionList.forEach(call -> issue.secondary(call, SECONDARY_MESSAGE));
-  }
-
-  private static boolean isTfFunction(FunctionDef functionDefinition) {
-    return functionDefinition.decorators().stream()
-      .anyMatch(TfFunctionRecursivityCheck::isTfFunctionDecorator);
-  }
-
-  private static boolean isTfFunctionDecorator(Decorator decorator) {
-    return Optional.of(decorator.expression())
-      .flatMap(TreeUtils::getSymbolFromTree)
-      .map(Symbol::fullyQualifiedName)
-      .filter("tensorflow.function"::equals)
-      .isPresent();
   }
 
   private static class CallCollector extends BaseTreeVisitor {

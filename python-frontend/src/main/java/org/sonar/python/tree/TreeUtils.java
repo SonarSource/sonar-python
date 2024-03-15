@@ -45,6 +45,7 @@ import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.ClassDef;
+import org.sonar.plugins.python.api.tree.Decorator;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.HasSymbol;
@@ -388,6 +389,22 @@ public class TreeUtils {
       return decoratorNameFromExpression(((CallExpression) expression).callee());
     }
     return null;
+  }
+
+
+  public static boolean isFunctionWithGivenDecoratorFQN(Tree tree, String decoratorFQN) {
+    if (!tree.is(Kind.FUNCDEF)) {
+      return false;
+    }
+    return ((FunctionDef) tree).decorators().stream().anyMatch(d -> isDecoratorWithFQN(d, decoratorFQN));
+  }
+
+  public static boolean isDecoratorWithFQN(Decorator decorator, String fullyQualifiedName) {
+    return Optional.of(decorator.expression())
+      .flatMap(TreeUtils::getSymbolFromTree)
+      .map(Symbol::fullyQualifiedName)
+      .filter(fullyQualifiedName::equals)
+      .isPresent();
   }
 
   public static Optional<String> fullyQualifiedNameFromQualifiedExpression(QualifiedExpression qualifiedExpression) {
