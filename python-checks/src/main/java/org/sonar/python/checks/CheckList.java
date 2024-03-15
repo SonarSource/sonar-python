@@ -359,6 +359,7 @@ public final class CheckList {
       TrailingCommentCheck.class,
       TrailingWhitespaceCheck.class,
       TypeAliasAnnotationCheck.class,
+      TfDontPassInputShapeOnNestedModelCheck.class,
       TfFunctionRecursivityCheck.class,
       TfGatherDeprecatedValidateIndicesCheck.class,
       TfSpecifyReductionAxisCheck.class,
