@@ -44,14 +44,14 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.tree.FunctionDefImpl;
 import org.sonar.python.types.TypeShed;
 
-class Scope {
+public class Scope {
 
   final Tree rootTree;
   private PythonFile pythonFile;
   private String fullyQualifiedModuleName;
   private final ProjectLevelSymbolTable projectLevelSymbolTable;
   private final Scope parent;
-  final Map<String, Symbol> symbolsByName = new HashMap<>();
+  public final Map<String, Symbol> symbolsByName = new HashMap<>();
   private final Set<Symbol> symbols = new HashSet<>();
   final Set<Symbol> builtinSymbols = new HashSet<>();
   private final Set<String> globalNames = new HashSet<>();

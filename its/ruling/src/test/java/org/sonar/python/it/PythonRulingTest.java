@@ -45,6 +45,7 @@ import static org.sonar.python.it.RulingHelper.getOrchestrator;
 class PythonRulingTest {
 
   public static final String PROJECT_KEY = "project";
+  private final String JSON_PATH_PREFIX = "/Users/jeremi.dodinh/Documents/repositories/sonar-python/its/ruling/src/test/resources/types/";
 
   @RegisterExtension
   public static final OrchestratorExtension ORCHESTRATOR = getOrchestrator();
@@ -76,7 +77,9 @@ class PythonRulingTest {
       .setProperty("sonar.cpd.exclusions", "**/*")
       .setProperty("sonar.lits.differences", litsDifferencesFile.getAbsolutePath())
       .setProperty("sonar.internal.analysis.failFast", "true")
-      .setEnvironmentVariable("SONAR_RUNNER_OPTS", "-Xmx2000m");
+      .setEnvironmentVariable("SONAR_RUNNER_OPTS", "-Xmx2000m")
+      .setEnvironmentVariable("SONAR_TYPE_INFERENCE_FILE", JSON_PATH_PREFIX + "sources.json");
+
     ORCHESTRATOR.executeBuild(build);
 
     String issueDifferences = issues(PROJECT_KEY).stream()
