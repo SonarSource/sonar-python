@@ -35,7 +35,7 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S6919")
-public class TfDontPassInputShapeOnNestedModelCheck extends PythonSubscriptionCheck {
+public class TfInputShapeOnModelSubclassCheck extends PythonSubscriptionCheck {
 
   public static final String MESSAGE = "Remove this `input_shape` argument, it is deprecated.";
   public static final String ARGUMENT_NAME = "input_shape";
@@ -43,21 +43,16 @@ public class TfDontPassInputShapeOnNestedModelCheck extends PythonSubscriptionCh
 
   @Override
   public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, TfDontPassInputShapeOnNestedModelCheck::checkCallExpr);
+    context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, TfInputShapeOnModelSubclassCheck::checkCallExpr);
   }
 
   private static void checkCallExpr(SubscriptionContext context) {
-    if (Optional.of((CallExpression) context.syntaxNode())
-      .filter(TfDontPassInputShapeOnNestedModelCheck::isSuperInitCall)
-      .map(callExpression -> TreeUtils.firstAncestorOfKind(callExpression, Tree.Kind.FUNCDEF))
-      .map(FunctionDef.class::cast)
-      .filter(functionDef -> "__init__".equals(functionDef.name().name()))
-      .map(funcDef -> TreeUtils.firstAncestorOfKind(funcDef, Tree.Kind.CLASSDEF))
-      .map(ClassDef.class::cast)
-      .map(TreeUtils::getClassSymbolFromDef)
-      .filter(
-        classSymbol -> classSymbol.superClasses().stream().anyMatch(superClass -> superClass.fullyQualifiedName() != null && CLASS_FQN.contains(superClass.fullyQualifiedName())))
-      .isEmpty()) {
+    CallExpression callExpression = (CallExpression) context.syntaxNode();
+    if (!isSuperInitCall(callExpression)) {
+      return;
+    }
+
+    if (!isWithinInitOfTfModel(callExpression)) {
       return;
     }
 
@@ -67,19 +62,36 @@ public class TfDontPassInputShapeOnNestedModelCheck extends PythonSubscriptionCh
     }
   }
 
+  private static boolean isWithinInitOfTfModel(CallExpression callExpression) {
+    return Optional.of(callExpression)
+      .map(c -> TreeUtils.firstAncestorOfKind(callExpression, Tree.Kind.FUNCDEF))
+      .map(FunctionDef.class::cast)
+      .filter(functionDef -> "__init__".equals(functionDef.name().name()))
+      .map(funcDef -> TreeUtils.firstAncestorOfKind(funcDef, Tree.Kind.CLASSDEF))
+      .map(ClassDef.class::cast)
+      .map(TreeUtils::getClassSymbolFromDef)
+      .filter(
+        classSymbol -> classSymbol.superClasses().stream().anyMatch(superClass -> superClass.fullyQualifiedName() != null && CLASS_FQN.contains(superClass.fullyQualifiedName())))
+      .isPresent();
+  }
+
   private static boolean isSuperInitCall(CallExpression callExpression) {
     Expression callee = callExpression.callee();
-    if (callee.is(Tree.Kind.QUALIFIED_EXPR)) {
-      QualifiedExpression qualifiedExpression = (QualifiedExpression) callee;
-      return "__init__".equals(qualifiedExpression.name().name()) && Optional.of(qualifiedExpression.qualifier())
-        .filter(expr -> expr.is(Tree.Kind.CALL_EXPR))
-        .map(CallExpression.class::cast)
-        .map(CallExpression::calleeSymbol)
-        .filter(symbol -> symbol.kind() == Symbol.Kind.CLASS)
-        .map(Symbol::fullyQualifiedName)
-        .filter("super"::equals)
-        .isPresent();
+    if (!callee.is(Tree.Kind.QUALIFIED_EXPR)) {
+      return false;
     }
-    return false;
+    QualifiedExpression qualifiedExpression = (QualifiedExpression) callee;
+    return "__init__".equals(qualifiedExpression.name().name()) && isCallToSuper(qualifiedExpression);
+  }
+
+  private static boolean isCallToSuper(QualifiedExpression qualifiedExpression) {
+    return Optional.of(qualifiedExpression.qualifier())
+      .filter(expr -> expr.is(Tree.Kind.CALL_EXPR))
+      .map(CallExpression.class::cast)
+      .map(CallExpression::calleeSymbol)
+      .filter(symbol -> symbol.kind() == Symbol.Kind.CLASS)
+      .map(Symbol::fullyQualifiedName)
+      .filter("super"::equals)
+      .isPresent();
   }
 }

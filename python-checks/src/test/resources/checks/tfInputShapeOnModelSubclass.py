@@ -57,4 +57,4 @@ some_other_function()
 
 class UnrelatedClass3():
     def __init__(self):
-        some_other_function().__init__()
+        some_other_function().__init__(input_shape=(32, 24, 24, 3))

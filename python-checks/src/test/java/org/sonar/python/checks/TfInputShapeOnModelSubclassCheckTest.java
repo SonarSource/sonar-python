@@ -22,8 +22,9 @@ package org.sonar.python.checks;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-class TfDontPassInputShapeOnNestedModelCheckTest {
+class TfInputShapeOnModelSubclassCheckTest {
   @Test
-  void test() { PythonCheckVerifier.verify("src/test/resources/checks/tfDontPassInputShapeOnNestedModel.py", new TfDontPassInputShapeOnNestedModelCheck());}
-
+  void test() {
+    PythonCheckVerifier.verify("src/test/resources/checks/tfInputShapeOnModelSubclass.py", new TfInputShapeOnModelSubclassCheck());
+  }
 }
