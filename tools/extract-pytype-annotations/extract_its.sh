@@ -1,5 +1,14 @@
 #!/bin/bash
 # Usage: run from repository root: source ./tools/extract-pytype-annotations/extract_its.sh
+
+echo ""
+echo "##########################################################"
+echo "### Generating PyType information for checks ###"
+echo "##########################################################"
+echo ""
+dir=python-checks/src/test/resources/checks
+python tools/extract-pytype-annotations/extract_info.py $dir python-checks/src/test/resources/checks.json
+
 echo ""
 echo "#################################################"
 echo "### Generating PyType information for sources ###"
