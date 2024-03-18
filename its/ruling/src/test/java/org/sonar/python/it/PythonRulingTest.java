@@ -78,6 +78,7 @@ class PythonRulingTest {
       .setProperty("sonar.cpd.exclusions", "**/*")
       .setProperty("sonar.lits.differences", litsDifferencesFile.getAbsolutePath())
       .setProperty("sonar.internal.analysis.failFast", "true")
+//      .setEnvironmentVariable("SONAR_SCANNER_OPTS", "-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=8000")
       .setEnvironmentVariable("SONAR_RUNNER_OPTS", "-Xmx2000m")
       .setEnvironmentVariable("SONAR_TYPE_INFERENCE_FILE", JSON_PATH_PREFIX.resolve("sources.json").toAbsolutePath().toString());
 
