@@ -360,6 +360,7 @@ public final class CheckList {
       TrailingWhitespaceCheck.class,
       TypeAliasAnnotationCheck.class,
       TfFunctionRecursivityCheck.class,
+      TfInputShapeOnModelSubclassCheck.class,
       TfGatherDeprecatedValidateIndicesCheck.class,
       TfSpecifyReductionAxisCheck.class,
       ReferencedBeforeAssignmentCheck.class,

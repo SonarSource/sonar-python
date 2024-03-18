@@ -1,0 +1,32 @@
+<p>This rule raises an issue when the <code>input_shape</code> is specified in a <code>tensorflow.keras.Model</code> subclass.</p>
+<h2>Why is this an issue?</h2>
+<p>Keras provides a full-featured model class called <code>tensorflow.keras.Model</code>. It inherits from <code>tensorflow.keras.layers.Layer</code>,
+so a Keras model can be used and nested in the same way as Keras layers. Keras models come with extra functionality that makes them easy to train,
+evaluate, load, save, and even train on multiple machines.</p>
+<p>As the <code>tensorflow.keras.Model</code> class inherits from the 'tensorflow.keras.layers' you do not need to specify <code>input_shape</code> in
+a subclassed model; this argument will be ignored.</p>
+<h2>How to fix it</h2>
+<p>Do not specify <code>input_shape</code> in a <code>tf.keras.Model</code> subclasses</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+import tensorflow as tf
+
+class MyModel(tf.keras.Model):
+    def __init__(self):
+        super(MyModel, self).__init__(input_shape=...)  # Nonpompliant: this parameter will be ignored
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+import tensorflow as tf
+
+class MyModel(tf.keras.Model):
+    def __init__(self):
+        super(MyModel, self).__init__()  # OK
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Tensorflow documentation - <a href="https://www.tensorflow.org/guide/intro_to_modules#keras_models">Keras models</a> </li>
+</ul>
+
