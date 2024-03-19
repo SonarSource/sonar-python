@@ -1,6 +1,6 @@
 /*
  * SonarQube Python Plugin
- * Copyright (C) 2011-2023 SonarSource SA
+ * Copyright (C) 2011-2024 SonarSource SA
  * mailto:info AT sonarsource DOT com
  *
  * This program is free software; you can redistribute it and/or
@@ -22,6 +22,7 @@ package org.sonar.python.types;
 import com.google.gson.annotations.SerializedName;
 import java.util.Optional;
 import org.sonar.plugins.python.api.types.InferredType;
+import org.sonar.python.types.pytype.BaseType;
 
 public class PyTypeInfo {
   private final String text;
@@ -34,14 +35,17 @@ public class PyTypeInfo {
   private final PyTypeDetailedInfo type;
   @SerializedName("short_type")
   private final String shortType;
+  @SerializedName("type_details")
+  private final BaseType baseType;
 
-  public PyTypeInfo(String text, int startLine, int startCol, String syntaxRole, PyTypeDetailedInfo type, String shortType) {
+  public PyTypeInfo(String text, int startLine, int startCol, String syntaxRole, PyTypeDetailedInfo type, String shortType, BaseType baseType) {
     this.text = text;
     this.startLine = startLine;
     this.startCol = startCol;
     this.syntaxRole = syntaxRole;
     this.type = type;
     this.shortType = shortType;
+    this.baseType = baseType;
   }
 
   public String text() {
@@ -66,6 +70,10 @@ public class PyTypeInfo {
 
   public String shortType() {
     return shortType;
+  }
+
+  public BaseType baseType() {
+    return baseType;
   }
 
   public InferredType inferredType() {

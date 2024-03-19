@@ -5,14 +5,16 @@ import glob
 import json
 import os
 import pathlib
+
 import rich
 import rich.progress
 import subprocess
 import sys
 import textwrap
 from pytype.config import Options
+import pytype.pytd.pytd as pydt
 from pytype.tools.annotate_ast import annotate_ast
-from typing import TypedDict, Sequence
+from typing import TypedDict, Sequence, Dict
 from typing_extensions import NotRequired
 
 
@@ -80,6 +82,7 @@ class TypedItem(TypedDict):
     syntax_role: NotRequired[str]
     type: str
     short_type: NotRequired[str]
+    type_details: Dict
 
 def run_pytype(source_code_dir: str):
     rich.print("Running Pytype.")
@@ -96,14 +99,17 @@ def process_file(file: str, source_code_dir: str, pytype_options: Options) -> li
     list_items = []
 
     for node in annotations:
+        resolved_type = node.resolved_type
+        type_details = type_dict(resolved_type)
         if isinstance(node, ast.Name):
             new_item: TypedItem = {
                 "text": node.id,
                 "start_line": node.lineno,
                 "start_col": node.col_offset,
                 "syntax_role": "Variable",
-                "type": str(node.resolved_type),
-                "short_type": str(node.resolved_annotation)
+                "type": str(resolved_type),
+                "short_type": str(node.resolved_annotation),
+                "type_details": type_details
             }
         elif isinstance(node, ast.Attribute):
             new_item: TypedItem = {
@@ -111,8 +117,9 @@ def process_file(file: str, source_code_dir: str, pytype_options: Options) -> li
                 "start_line": node.lineno,
                 "start_col": node.col_offset,
                 "syntax_role": "Attribute",
-                "type": str(node.resolved_type),
-                "short_type": str(node.resolved_annotation)
+                "type": str(resolved_type),
+                "short_type": str(node.resolved_annotation),
+                "type_details": type_details
             }
         elif isinstance(node, ast.FunctionDef):
             new_item: TypedItem = {
@@ -120,8 +127,9 @@ def process_file(file: str, source_code_dir: str, pytype_options: Options) -> li
                 "start_line": node.lineno,
                 "start_col": node.col_offset,
                 "syntax_role": "Function",
-                "type": str(node.resolved_type),
-                "short_type": str(node.resolved_annotation)
+                "type": str(resolved_type),
+                "short_type": str(node.resolved_annotation),
+                "type_details": type_details
             }
         else:
             continue
@@ -129,6 +137,36 @@ def process_file(file: str, source_code_dir: str, pytype_options: Options) -> li
 
     return list_items
 
+def type_dict(resolved_type) -> Dict:
+    if isinstance(resolved_type, str) or isinstance(resolved_type, int) or isinstance(resolved_type, bool):
+        return {
+            "$class": "Primitive",
+            "value": resolved_type
+        }
+    result = {
+        "$class": type(resolved_type).__name__,
+    }
+    if resolved_type.name is not None:
+        result["name"] = resolved_type.name
+    if isinstance(resolved_type, pydt.GenericType):
+        if resolved_type.base_type is not None:
+            result["base_type"] = type_dict(resolved_type.base_type)
+        if resolved_type.parameters is not None:
+            parameters = list(map(lambda x: type_dict(x), resolved_type.parameters))
+            result["parameters"] = parameters
+    if isinstance(resolved_type, pydt._SetOfTypes):
+        if resolved_type.type_list is not None:
+            type_list = list(map(lambda x: type_dict(x), resolved_type.type_list))
+            result["type_list"] = type_list
+    if isinstance(resolved_type, pydt.Alias):
+        if resolved_type.type is not None:
+            result["type"] = type_dict(resolved_type.type)
+    if isinstance(resolved_type, pydt.Module):
+        if resolved_type.module_name is not None:
+            result["module_name"] = resolved_type.module_name
+    if isinstance(resolved_type, pydt.Literal):
+        result["value"] = type_dict(resolved_type.value)
+    return result
 
 def extract_types(source_code_dir: str, pytype_options: Options) -> dict[str, list[TypedItem]]:
     """
@@ -170,4 +208,5 @@ def get_project_types(source_code_dir: str, output_file: str):
 
 
 if __name__ == "__main__":
+    # get_project_types("sample", "types.json")
     get_project_types(sys.argv[1], sys.argv[2])

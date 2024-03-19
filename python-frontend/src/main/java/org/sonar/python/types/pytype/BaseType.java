@@ -17,7 +17,23 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.types.v2;
+package org.sonar.python.types.pytype;
 
-public interface PythonType {
+import org.sonar.python.types.json.JsonSubtype;
+import org.sonar.python.types.json.JsonType;
+
+@JsonType(
+  property = "$class",
+  subtypes = {
+    @JsonSubtype(name = "Primitive", child = PrimitiveType.class),
+    @JsonSubtype(name = "ClassType", child = ClassType.class),
+    @JsonSubtype(name = "Module", child = Module.class),
+    @JsonSubtype(name = "Alias", child = Alias.class),
+    @JsonSubtype(name = "GenericType", child = GenericType.class),
+    @JsonSubtype(name = "CallableType", child = CallableType.class),
+    @JsonSubtype(name = "AnythingType", child = AnythingType.class),
+    @JsonSubtype(name = "NothingType", child = NothingType.class),
+  }
+)
+public class BaseType {
 }
