@@ -24,6 +24,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import org.sonar.check.Rule;
@@ -31,7 +32,9 @@ import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
+import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
+import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Tree;
@@ -55,13 +58,13 @@ public class TfFunctionDependOnOutsideVariableCheck extends PythonSubscriptionCh
     }
     NameCollector collector = new NameCollector();
     functionDef.body().accept(collector);
-    Set<Symbol> b = new HashSet<>(collector.symbolToNames.keySet());
-    b.removeAll(functionDef.localVariables());
-    if (b.isEmpty()) {
+    Set<Symbol> allNames = new HashSet<>(collector.symbolToNames.keySet());
+    allNames.removeAll(functionDef.localVariables());
+    if (allNames.isEmpty()) {
       return;
     }
     var issue = context.addIssue(functionDef.name(), MESSAGE);
-    b.forEach(symbol -> collector.symbolToNames.get(symbol).forEach(name -> issue.secondary(name, MESSAGE_SECONDARY)));
+    allNames.forEach(symbol -> collector.symbolToNames.get(symbol).forEach(name -> issue.secondary(name, MESSAGE_SECONDARY)));
   }
 
   private static class NameCollector extends BaseTreeVisitor {
@@ -69,15 +72,40 @@ public class TfFunctionDependOnOutsideVariableCheck extends PythonSubscriptionCh
 
     @Override
     public void visitName(Name pyNameTree) {
-      if (pyNameTree.isVariable()) {
-        Optional.ofNullable(pyNameTree.symbol())
-          .filter(symbol -> !symbol.is(Symbol.Kind.FUNCTION, Symbol.Kind.CLASS))
-          .filter(symbol -> symbol.usages().stream().map(Usage::kind).noneMatch(usageKind -> usageKind == Usage.Kind.IMPORT))
-          .ifPresent(symbol -> {
-            symbolToNames.putIfAbsent(symbol, new ArrayList<>());
-            symbolToNames.get(symbol).add(pyNameTree);
-          });
+      if (!pyNameTree.isVariable()) {
+        return;
       }
+      if (pyNameTree.type().mustBeOrExtend("tensorflow.Variable")) {
+        return;
+      }
+      if (isInstantiatedByTensorflow(pyNameTree)) {
+        return;
+      }
+
+      Optional.ofNullable(pyNameTree.symbol())
+        .filter(symbol -> !symbol.is(Symbol.Kind.FUNCTION, Symbol.Kind.CLASS, Symbol.Kind.AMBIGUOUS))
+        .filter(symbol -> symbol.usages().stream().map(Usage::kind).noneMatch(usageKind -> usageKind == Usage.Kind.IMPORT))
+        .ifPresent(symbol -> {
+          symbolToNames.putIfAbsent(symbol, new ArrayList<>());
+          symbolToNames.get(symbol).add(pyNameTree);
+        });
+    }
+
+    private static boolean isInstantiatedByTensorflow(Name pyNameTree) {
+      Symbol symbol = pyNameTree.symbol();
+      return symbol != null && symbol.usages().stream().filter(u -> u.kind().equals(Usage.Kind.ASSIGNMENT_LHS))
+        .map(Usage::tree)
+        .map(tree -> TreeUtils.firstAncestorOfKind(tree, Tree.Kind.ASSIGNMENT_STMT))
+        .filter(Objects::nonNull)
+        .map(AssignmentStatement.class::cast)
+        .map(AssignmentStatement::assignedValue)
+        .filter(assignedValue -> assignedValue.is(Tree.Kind.CALL_EXPR))
+        .map(CallExpression.class::cast)
+        .map(CallExpression::calleeSymbol)
+        .filter(Objects::nonNull)
+        .map(Symbol::fullyQualifiedName)
+        .filter(Objects::nonNull)
+        .anyMatch(fqn -> fqn.startsWith("tensorflow."));
     }
   }
 }

@@ -1,7 +1,7 @@
 import tensorflow as tf
 
 foo = 3
-
+foobar = 42
 @tf.function
 def non_compliant(): # Noncompliant {{This function should not depend implicitly on a global or free variable.}}
    #^^^^^^^^^^^^^
@@ -11,7 +11,7 @@ def non_compliant(): # Noncompliant {{This function should not depend implicitly
 no_symbol = True
 def no_symbol(): ...
 @tf.function
-def non_compliant2(): # Noncompliant {{This function should not depend implicitly on a global or free variable.}}
+def non_compliant2(): # FN because we have an ambiguous symbol
     something_else = no_symbol
     return something_else + 1
 
@@ -20,20 +20,20 @@ def non_compliant3(): # Noncompliant
    #^^^^^^^^^^^^^^
     something = foo
                #^^^< {{Variable used here.}}
-    smth = no_symbol
-          #^^^^^^^^^< {{Variable used here.}}
-    return foo + no_symbol
+    smth = foobar
+          #^^^^^^< {{Variable used here.}}
+    return foo + foobar
           #^^^< {{Variable used here.}}
-                #^^^^^^^^^@-1< {{Variable used here.}}
+                #^^^^^^@-1< {{Variable used here.}}
 
 @tf.function
 def non_compliant4(foo): # Noncompliant
    #^^^^^^^^^^^^^^
     something = foo
-    smth = no_symbol
-          #^^^^^^^^^< {{Variable used here.}}
-    return foo + no_symbol
-                #^^^^^^^^^< {{Variable used here.}}
+    smth = foobar
+          #^^^^^^< {{Variable used here.}}
+    return foo + foobar
+                #^^^^^^< {{Variable used here.}}
 @tf.function
 def compliant(foo):
     return foo + 1
@@ -62,3 +62,12 @@ def indirect_tf_function():
 @tf.function
 def direct_tf_function():
     return indirect_tf_function()
+
+def containing():
+    foo_tf = tf.Variable(3)
+    @tf.function
+    def compliant2():
+        tenf = tf.Variable(10)
+        return foo_tf + tenf
+
+    foo_tf = True
