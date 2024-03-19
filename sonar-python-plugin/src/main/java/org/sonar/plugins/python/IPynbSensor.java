@@ -63,9 +63,10 @@ public final class IPynbSensor implements Sensor {
   @Override
   public void execute(SensorContext context) {
     List<InputFile> pythonFiles = getInputFiles(context);
-    context.config().get(PYTHON_VERSION_KEY)
-      .map(PythonVersionUtils::fromString)
-      .ifPresent(ProjectPythonVersion::setCurrentVersions);
+    var pythonVersions = context.config().getStringArray(PYTHON_VERSION_KEY);
+    if (pythonVersions.length != 0) {
+      ProjectPythonVersion.setCurrentVersions(PythonVersionUtils.fromString(pythonVersions));
+    }
     PythonScanner scanner = new PythonScanner(context, checks, fileLinesContextFactory, noSonarFilter, PythonParser.createIPythonParser(), indexer);
     scanner.execute(pythonFiles, context);
   }

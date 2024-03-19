@@ -243,7 +243,11 @@ public class SonarQubePythonIndexer extends PythonIndexer {
 
   private static String getCacheVersion(SensorContext context) {
     String implementationVersion = getImplementationVersion(SonarQubePythonIndexer.class);
-    return context.config().get(PYTHON_VERSION_KEY).map(v -> implementationVersion + ";" + v).orElse(implementationVersion);
+    var pythonVersions = context.config().getStringArray(PYTHON_VERSION_KEY);
+    if (pythonVersions.length == 0) {
+      return implementationVersion;
+    }
+    return implementationVersion + ";" + String.join(",", pythonVersions);
   }
 
   private static String getImplementationVersion(Class<?> cls) {
