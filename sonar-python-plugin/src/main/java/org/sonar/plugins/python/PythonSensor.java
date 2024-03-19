@@ -121,7 +121,7 @@ public final class PythonSensor implements Sensor {
       analysisWarnings.addUnique(UNSET_VERSION_WARNING);
     }
     if (pythonVersionParameter.length != 0){
-      ProjectPythonVersion.setCurrentVersions(PythonVersionUtils.fromString(pythonVersionParameter));
+      ProjectPythonVersion.setCurrentVersions(PythonVersionUtils.fromStringArray(pythonVersionParameter));
     }
     CacheContext cacheContext = CacheContextImpl.of(context);
     PythonIndexer pythonIndexer = this.indexer != null ? this.indexer : new SonarQubePythonIndexer(pythonFiles, cacheContext, context);

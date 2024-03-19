@@ -106,9 +106,9 @@ public class PythonVersionUtils {
   }
 
   public static Set<Version> fromString(String propertyValue) {
-    return fromString(propertyValue.split(","));
+    return fromStringArray(propertyValue.split(","));
   }
-  public static Set<Version> fromString(String[] versions) {
+  public static Set<Version> fromStringArray(String[] versions) {
     if (versions.length == 0) {
       return allVersions();
     }
