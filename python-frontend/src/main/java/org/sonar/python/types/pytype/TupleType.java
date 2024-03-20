@@ -19,25 +19,5 @@
  */
 package org.sonar.python.types.pytype;
 
-import org.sonar.python.types.json.JsonSubtype;
-import org.sonar.python.types.json.JsonType;
-
-@JsonType(
-  property = "$class",
-  subtypes = {
-    @JsonSubtype(name = "Primitive", child = PrimitiveType.class),
-    @JsonSubtype(name = "ClassType", child = ClassType.class),
-    @JsonSubtype(name = "Module", child = Module.class),
-    @JsonSubtype(name = "Alias", child = Alias.class),
-    @JsonSubtype(name = "GenericType", child = GenericType.class),
-    @JsonSubtype(name = "CallableType", child = CallableType.class),
-    @JsonSubtype(name = "TupleType", child = TupleType.class),
-    @JsonSubtype(name = "AnythingType", child = AnythingType.class),
-    @JsonSubtype(name = "NothingType", child = NothingType.class),
-    @JsonSubtype(name = "UnionType", child = UnionType.class),
-    @JsonSubtype(name = "TypeParameter", child = TypeParameter.class),
-
-  }
-)
-public class BaseType {
+public class TupleType extends GenericType{
 }

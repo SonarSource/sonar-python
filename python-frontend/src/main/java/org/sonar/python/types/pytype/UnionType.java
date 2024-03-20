@@ -19,25 +19,19 @@
  */
 package org.sonar.python.types.pytype;
 
-import org.sonar.python.types.json.JsonSubtype;
-import org.sonar.python.types.json.JsonType;
+import com.google.gson.annotations.SerializedName;
+import java.util.List;
 
-@JsonType(
-  property = "$class",
-  subtypes = {
-    @JsonSubtype(name = "Primitive", child = PrimitiveType.class),
-    @JsonSubtype(name = "ClassType", child = ClassType.class),
-    @JsonSubtype(name = "Module", child = Module.class),
-    @JsonSubtype(name = "Alias", child = Alias.class),
-    @JsonSubtype(name = "GenericType", child = GenericType.class),
-    @JsonSubtype(name = "CallableType", child = CallableType.class),
-    @JsonSubtype(name = "TupleType", child = TupleType.class),
-    @JsonSubtype(name = "AnythingType", child = AnythingType.class),
-    @JsonSubtype(name = "NothingType", child = NothingType.class),
-    @JsonSubtype(name = "UnionType", child = UnionType.class),
-    @JsonSubtype(name = "TypeParameter", child = TypeParameter.class),
+public class UnionType extends BaseType {
+  @SerializedName("type_list")
+  private List<BaseType> typeList;
 
+  public List<BaseType> typeList() {
+    return typeList;
   }
-)
-public class BaseType {
+
+  public UnionType typeList(List<BaseType> typeList) {
+    this.typeList = typeList;
+    return this;
+  }
 }

@@ -166,6 +166,13 @@ def type_dict(resolved_type) -> Dict:
             result["module_name"] = resolved_type.module_name
     if isinstance(resolved_type, pydt.Literal):
         result["value"] = type_dict(resolved_type.value)
+    if isinstance(resolved_type, pydt.TypeParameter):
+        if resolved_type.constraints is not None:
+            result["constraints"] = list(map(lambda x: type_dict(x), resolved_type.constraints))
+        if resolved_type.bound is not None:
+            result["bound"] = type_dict(resolved_type.bound)
+        if resolved_type.scope is not None:
+            result["scope"] = resolved_type.scope
     return result
 
 def extract_types(source_code_dir: str, pytype_options: Options) -> dict[str, list[TypedItem]]:
