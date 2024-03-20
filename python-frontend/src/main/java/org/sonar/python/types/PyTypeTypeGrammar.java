@@ -26,7 +26,6 @@ import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
-import org.antlr.v4.runtime.RecognitionException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
@@ -150,7 +149,7 @@ public class PyTypeTypeGrammar {
 
     }
     if (parentheses != 0) {
-      throw new RecognitionException("Unbalanced parentheses", null, null, null);
+      throw new RuntimeException("Unbalanced parentheses");
     }
     if (sb.length() > 0) {
       innerTypeNames.add(sb.toString());

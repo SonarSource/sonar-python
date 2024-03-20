@@ -26,7 +26,6 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
-import org.antlr.v4.runtime.RecognitionException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.plugins.python.api.symbols.Symbol;
@@ -134,7 +133,7 @@ public class TypeContext {
       PyTypeTypeGrammar.projectLevelSymbolTable = TypeContext.projectLevelSymbolTable;
       PyTypeTypeGrammar.fileName = fileName;
       return typeInfo.inferredType();
-    } catch (RecognitionException e) {
+    } catch (Exception e) {
       // LOG.error("");
       // LOG.error(e.toString());
       // LOG.error(detailedType);
