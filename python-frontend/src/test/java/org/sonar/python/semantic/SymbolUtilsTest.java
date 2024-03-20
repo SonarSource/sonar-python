@@ -220,6 +220,31 @@ class SymbolUtilsTest {
   }
 
   @Test
+  void hasSameParameterCountTest() {
+    var file = PythonTestUtils.parse( new SymbolTableBuilder("my_package", pythonFile("my_module.py")),
+      "class A:",
+      "  def foo1(self, a, b):",
+      "    ...",
+      "class B:",
+      "  def foo2(self, a):",
+      "    ...",
+      "class C:",
+      "  def foo3(self, b, c):",
+      "    ..."
+    );
+
+    FunctionSymbol foo1 = (FunctionSymbol) descendantFunction(file, "foo1").name().symbol();
+    FunctionSymbol foo2 = (FunctionSymbol) descendantFunction(file, "foo2").name().symbol();
+    FunctionSymbol foo3 = (FunctionSymbol) descendantFunction(file, "foo3").name().symbol();
+
+    assertThat(foo1).isNotNull();
+    assertThat(foo2).isNotNull();
+    assertThat(foo3).isNotNull();
+    assertThat(SymbolUtils.haveSameParameterCount(List.of(foo1, foo2))).isFalse();
+    assertThat(SymbolUtils.haveSameParameterCount(List.of(foo1, foo3))).isTrue();
+  }
+
+  @Test
   void isEqualArgumentNamesTest() {
     var file = PythonTestUtils.parse( new SymbolTableBuilder("my_package", pythonFile("my_module.py")),
       "class A:",
