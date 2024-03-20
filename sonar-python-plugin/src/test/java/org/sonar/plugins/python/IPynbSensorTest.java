@@ -36,6 +36,7 @@ import org.sonar.api.batch.rule.internal.ActiveRulesBuilder;
 import org.sonar.api.batch.rule.internal.NewActiveRule;
 import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
+import org.sonar.api.config.internal.MapSettings;
 import org.sonar.api.internal.SonarRuntimeImpl;
 import org.sonar.api.issue.NoSonarFilter;
 import org.sonar.api.measures.CoreMetrics;
@@ -44,6 +45,8 @@ import org.sonar.api.measures.FileLinesContextFactory;
 import org.sonar.api.rule.RuleKey;
 import org.sonar.api.testfixtures.log.LogTesterJUnit5;
 import org.sonar.api.utils.Version;
+import org.sonar.plugins.python.api.ProjectPythonVersion;
+import org.sonar.plugins.python.api.PythonVersionUtils;
 import org.sonar.plugins.python.indexer.PythonIndexer;
 import org.sonar.plugins.python.indexer.SonarLintPythonIndexer;
 import org.sonar.plugins.python.indexer.TestModuleFileSystem;
@@ -143,5 +146,18 @@ class IPynbSensorTest {
 
   private SonarLintPythonIndexer pythonIndexer(List<InputFile> files) {
     return new SonarLintPythonIndexer(new TestModuleFileSystem(files));
+  }
+  @Test
+  void test_python_version_parameter() {
+    context.setRuntime(SONARLINT_RUNTIME);
+
+    InputFile inputFile = inputFile(FILE_1);
+    activeRules = new ActiveRulesBuilder().build();
+    context.setSettings(new MapSettings().setProperty("sonar.python.version", "3.8"));
+    PythonIndexer pythonIndexer = pythonIndexer(List.of(inputFile));
+
+    sensor(pythonIndexer).execute(context);
+
+    assertThat(ProjectPythonVersion.currentVersions()).containsExactly(PythonVersionUtils.Version.V_38);
   }
 }

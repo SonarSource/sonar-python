@@ -115,12 +115,14 @@ public final class PythonSensor implements Sensor {
   public void execute(SensorContext context) {
     PerformanceMeasure.Duration durationReport = createPerformanceMeasureReport(context);
     List<InputFile> pythonFiles = getInputFiles(context);
-    Optional<String> pythonVersionParameter = context.config().get(PYTHON_VERSION_KEY);
-    if (!pythonVersionParameter.isPresent() && context.runtime().getProduct() != SonarProduct.SONARLINT) {
+    String[] pythonVersionParameter = context.config().getStringArray(PYTHON_VERSION_KEY);
+    if (pythonVersionParameter.length == 0 && context.runtime().getProduct() != SonarProduct.SONARLINT) {
       LOG.warn(UNSET_VERSION_WARNING);
       analysisWarnings.addUnique(UNSET_VERSION_WARNING);
     }
-    pythonVersionParameter.ifPresent(value -> ProjectPythonVersion.setCurrentVersions(PythonVersionUtils.fromString(value)));
+    if (pythonVersionParameter.length != 0){
+      ProjectPythonVersion.setCurrentVersions(PythonVersionUtils.fromStringArray(pythonVersionParameter));
+    }
     CacheContext cacheContext = CacheContextImpl.of(context);
     PythonIndexer pythonIndexer = this.indexer != null ? this.indexer : new SonarQubePythonIndexer(pythonFiles, cacheContext, context);
     pythonIndexer.setSonarLintCache(sonarLintCache);
