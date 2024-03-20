@@ -21,35 +21,9 @@ package org.sonar.python.types.pytype;
 
 import java.util.List;
 
-public class TypeParameter extends BaseType {
-  private List<BaseType> constraints;
-  private BaseType bound;
-  private String scope;
-
-  public List<BaseType> constraints() {
-    return constraints;
-  }
-
-  public TypeParameter constraints(List<BaseType> constraints) {
-    this.constraints = constraints;
-    return this;
-  }
-
-  public BaseType bound() {
-    return bound;
-  }
-
-  public TypeParameter bound(BaseType bound) {
-    this.bound = bound;
-    return this;
-  }
-
-  public String scope() {
-    return scope;
-  }
-
-  public TypeParameter scope(String scope) {
-    this.scope = scope;
-    return this;
-  }
+public record TypeParameter(
+  List<BaseType> constraints,
+  BaseType bound,
+  String scope
+) implements BaseType {
 }

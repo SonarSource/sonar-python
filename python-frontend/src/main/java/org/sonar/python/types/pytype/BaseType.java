@@ -36,8 +36,7 @@ import org.sonar.python.types.json.JsonType;
     @JsonSubtype(name = "NothingType", child = NothingType.class),
     @JsonSubtype(name = "UnionType", child = UnionType.class),
     @JsonSubtype(name = "TypeParameter", child = TypeParameter.class),
-
   }
 )
-public class BaseType {
+public interface BaseType {
 }

@@ -19,15 +19,5 @@
  */
 package org.sonar.python.types.pytype;
 
-public class ClassType extends BaseType {
-  private String name;
-
-  public String name() {
-    return name;
-  }
-
-  public ClassType name(String name) {
-    this.name = name;
-    return this;
-  }
+public record ClassType(String name) implements BaseType {
 }

@@ -19,5 +19,11 @@
  */
 package org.sonar.python.types.pytype;
 
-public class CallableType extends GenericType {
+import com.google.gson.annotations.SerializedName;
+import java.util.List;
+
+public record CallableType(String name,
+                          @SerializedName("base_type")
+                          BaseType baseType,
+                          List<BaseType> parameters) implements BaseType {
 }

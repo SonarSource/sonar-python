@@ -20,15 +20,5 @@
 package org.sonar.python.types.pytype;
 
 
-public class PrimitiveType extends BaseType {
-  private String value;
-
-  public String value() {
-    return value;
-  }
-
-  public PrimitiveType value(String value) {
-    this.value = value;
-    return this;
-  }
+public record PrimitiveType(String value) implements BaseType {
 }

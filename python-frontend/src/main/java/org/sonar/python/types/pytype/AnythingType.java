@@ -19,5 +19,5 @@
  */
 package org.sonar.python.types.pytype;
 
-public class AnythingType extends BaseType {
+public record AnythingType() implements BaseType {
 }

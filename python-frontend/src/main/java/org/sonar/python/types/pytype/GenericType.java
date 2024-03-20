@@ -22,9 +22,9 @@ package org.sonar.python.types.pytype;
 import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
-public class GenericType extends BaseType {
-  private String name;
-  @SerializedName("base_type")
-  private BaseType baseType;
-  private List<BaseType> parameters;
+public record GenericType(String name,
+                          @SerializedName("base_type")
+                          BaseType baseType,
+                          List<BaseType> parameters
+                          ) implements BaseType {
 }

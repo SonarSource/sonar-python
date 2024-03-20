@@ -22,16 +22,8 @@ package org.sonar.python.types.pytype;
 import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
-public class UnionType extends BaseType {
+public record UnionType(
   @SerializedName("type_list")
-  private List<BaseType> typeList;
-
-  public List<BaseType> typeList() {
-    return typeList;
-  }
-
-  public UnionType typeList(List<BaseType> typeList) {
-    this.typeList = typeList;
-    return this;
-  }
+  List<BaseType> typeList
+) implements BaseType {
 }

@@ -21,26 +21,7 @@ package org.sonar.python.types.pytype;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Module extends BaseType {
-  private String name;
-  @SerializedName("module_name")
-  private String moduleName;
-
-  public String name() {
-    return name;
-  }
-
-  public Module name(String name) {
-    this.name = name;
-    return this;
-  }
-
-  public String moduleName() {
-    return moduleName;
-  }
-
-  public Module moduleName(String moduleName) {
-    this.moduleName = moduleName;
-    return this;
-  }
+public record Module(String name,
+                     @SerializedName("module_name")
+                     String moduleName) implements BaseType {
 }

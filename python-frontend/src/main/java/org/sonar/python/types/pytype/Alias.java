@@ -19,10 +19,5 @@
  */
 package org.sonar.python.types.pytype;
 
-public class Alias extends BaseType {
-  private BaseType type;
-
-  public BaseType type() {
-    return type;
-  }
+public record Alias(BaseType type) implements BaseType {
 }
