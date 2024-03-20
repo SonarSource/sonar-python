@@ -34,7 +34,7 @@ import org.sonar.python.caching.CacheContextImpl;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.semantic.SymbolTableBuilder;
 import org.sonar.python.types.TypeContext;
-import org.sonar.python.types.TypeContextReader;
+import org.sonar.python.types.pytype.json.TypeContextReader;
 
 public class PythonVisitorContext extends PythonInputFileContext {
 

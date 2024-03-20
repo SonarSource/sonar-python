@@ -17,7 +17,7 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.types;
+package org.sonar.python.types.pytype.json;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -30,7 +30,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Map;
-import org.sonar.python.types.json.PolymorphDeserializer;
+import org.sonar.python.types.PyTypeDetailedInfo;
+import org.sonar.python.types.PyTypeDetailedInfoDeserializer;
+import org.sonar.python.types.pytype.PyTypeInfo;
+import org.sonar.python.types.TypeContext;
 import org.sonar.python.types.pytype.BaseType;
 
 public class TypeContextReader {

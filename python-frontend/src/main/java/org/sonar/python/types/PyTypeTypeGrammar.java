@@ -19,22 +19,14 @@
  */
 package org.sonar.python.types;
 
-import com.google.common.eventbus.DeadEvent;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Optional;
-import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import org.antlr.v4.runtime.CharStreams;
-import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.RecognitionException;
-import org.antlr.v4.runtime.tree.TerminalNode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
@@ -42,15 +34,6 @@ import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.semantic.ClassSymbolImpl;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
-import org.sonar.python.types.pytype_grammar.ExceptionErrorStrategy;
-import org.sonar.python.types.pytype_grammar.PyTypeTypeGrammarLexer;
-import org.sonar.python.types.pytype_grammar.PyTypeTypeGrammarParser;
-import org.sonar.python.types.pytype_grammar.PyTypeTypeGrammarParser.Builtin_typeContext;
-import org.sonar.python.types.pytype_grammar.PyTypeTypeGrammarParser.Class_typeContext;
-import org.sonar.python.types.pytype_grammar.PyTypeTypeGrammarParser.Generic_typeContext;
-import org.sonar.python.types.pytype_grammar.PyTypeTypeGrammarParser.Qualified_typeContext;
-import org.sonar.python.types.pytype_grammar.PyTypeTypeGrammarParser.TypeContext;
-import org.sonar.python.types.pytype_grammar.PyTypeTypeGrammarParser.Union_typeContext;
 
 public class PyTypeTypeGrammar {
 
@@ -58,14 +41,6 @@ public class PyTypeTypeGrammar {
   static String fileName = "";
 
   private static final Logger LOG = LoggerFactory.getLogger(PyTypeTypeGrammar.class);
-
-  public static TypeContext getParseTree(String typeString) throws RecognitionException {
-    PyTypeTypeGrammarLexer lexer = new PyTypeTypeGrammarLexer(CharStreams.fromString(typeString));
-    PyTypeTypeGrammarParser parser = new PyTypeTypeGrammarParser(new CommonTokenStream(lexer));
-    parser.setErrorHandler(new ExceptionErrorStrategy());
-    return parser.outer_type().type();
-  }
-
 
   private static final InferredType iterator = new RuntimeType(new ClassSymbolImpl("Iterator", "typing.Iterator"));
   // complete list https://github.com/google/pytype/blob/95cb0b760cf9a5b8d7d7b315b4440d2e56519072/pytype/pytd/abc_hierarchy.py#L60
@@ -144,24 +119,6 @@ public class PyTypeTypeGrammar {
     return null;
   }
 
-  public static InferredType getTypeFromParseTree(TypeContext typeContext) {
-    if (typeContext.qualified_type() != null) {
-      return getInferredTypeForQualified(typeContext.qualified_type());
-    } else if (typeContext.builtin_type() != null) {
-      return getInferredTypeForBuiltin(typeContext.builtin_type());
-    } else if (typeContext.class_type() != null) {
-      return getInferredTypeForClass(typeContext.class_type());
-    } else if (typeContext.generic_type() != null) {
-      return getInferredTypeForGeneric(typeContext.generic_type());
-    } else if (typeContext.union_type() != null) {
-      return getInferredTypeForUnion(typeContext);
-    } else if (typeContext.anything_type() != null) {
-      return InferredTypes.anyType();
-    } else {
-      return null;
-    }
-  }
-
   private static List<String> parseTopLevelTypeString(String typeList) {
     List<String> innerTypeNames = new ArrayList<>();
     int parentheses = 0;
@@ -201,34 +158,6 @@ public class PyTypeTypeGrammar {
     return innerTypeNames;
   }
 
-  private static InferredType getInferredTypeForGeneric(Generic_typeContext genericTypeContext) {
-    TypeContext type = genericTypeContext.type();
-    if (type != null) {
-      return getTypeFromParseTree(type);
-    }
-    return null;
-  }
-
-  private static InferredType getInferredTypeForQualified(Qualified_typeContext qualifiedTypeContext) {
-    String fullyQualifiedName = qualifiedTypeContext.STRING().stream().map(TerminalNode::toString).collect(Collectors.joining("."));
-    return getInferredType(fullyQualifiedName);
-  }
-
-  private static InferredType getInferredTypeForUnion(TypeContext typeContext) {
-    Union_typeContext unionTypeContext = typeContext.union_type();
-    Stream<InferredType> unionTypeSet = unionTypeContext.type_list().type().stream().map(PyTypeTypeGrammar::getTypeFromParseTree).filter(Objects::nonNull);
-    return InferredTypes.union(unionTypeSet);
-  }
-
-  private static InferredType getInferredTypeForClass(Class_typeContext classTypeContext) {
-    if (classTypeContext.builtin_type() != null) {
-      return getInferredTypeForBuiltin(classTypeContext.builtin_type());
-    } else {
-      Qualified_typeContext qualifiedTypeContext = classTypeContext.qualified_type();
-      return getInferredTypeForQualified(qualifiedTypeContext);
-    }
-  }
-
   private static InferredType getInferredType(String fullyQualifiedName) {
     return Optional.ofNullable(getRuntimeType(fullyQualifiedName)).orElseGet(() -> {
       //      LOG.error("");
@@ -252,26 +181,6 @@ public class PyTypeTypeGrammar {
       return new RuntimeType(((ClassSymbol) symbol));
     }
     return null;
-  }
-
-  private static InferredType getInferredTypeForBuiltin(Builtin_typeContext builtinTypeContext) {
-    return Stream.of(
-      builtinTypeContext.builtin().NONE_TYPE(),
-      builtinTypeContext.builtin().BOOL(),
-      builtinTypeContext.builtin().STR(),
-      builtinTypeContext.builtin().INT(),
-      builtinTypeContext.builtin().FLOAT(),
-      builtinTypeContext.builtin().COMPLEX(),
-      builtinTypeContext.builtin().TUPLE(),
-      builtinTypeContext.builtin().LIST(),
-      builtinTypeContext.builtin().SET(),
-      builtinTypeContext.builtin().DICT(),
-      builtinTypeContext.builtin().BASE_EXCEPTION()
-    ).filter(Objects::nonNull)
-      .map(Objects::toString)
-      .map(InferredTypes::runtimeBuiltinType)
-      .findFirst()
-      .orElse(null);
   }
 
 }

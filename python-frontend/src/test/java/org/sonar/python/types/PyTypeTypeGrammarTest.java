@@ -19,22 +19,11 @@
  */
 package org.sonar.python.types;
 
-import java.util.Objects;
-import org.antlr.v4.runtime.RecognitionException;
 import org.junit.jupiter.api.Test;
-import org.sonar.python.semantic.ClassSymbolImpl;
 import org.sonar.plugins.python.api.types.InferredType;
-import org.sonar.python.types.pytype_grammar.PyTypeTypeGrammarParser.Anything_typeContext;
-import org.sonar.python.types.pytype_grammar.PyTypeTypeGrammarParser.Builtin_typeContext;
-import org.sonar.python.types.pytype_grammar.PyTypeTypeGrammarParser.Class_typeContext;
-import org.sonar.python.types.pytype_grammar.PyTypeTypeGrammarParser.Generic_typeContext;
-import org.sonar.python.types.pytype_grammar.PyTypeTypeGrammarParser.Qualified_typeContext;
-import org.sonar.python.types.pytype_grammar.PyTypeTypeGrammarParser.TypeContext;
-import org.sonar.python.types.pytype_grammar.PyTypeTypeGrammarParser.Type_listContext;
-import org.sonar.python.types.pytype_grammar.PyTypeTypeGrammarParser.Union_typeContext;
+import org.sonar.python.semantic.ClassSymbolImpl;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class PyTypeTypeGrammarTest {
 
@@ -49,8 +38,6 @@ class PyTypeTypeGrammarTest {
   @Test
   void test_parse_tree_string() {
     String typeString = "hello";
-    TypeContext typeContext = PyTypeTypeGrammar.getParseTree(typeString);
-
     InferredType typeFromParseTree = PyTypeTypeGrammar.getTypeFromString(typeString);
     assertThat(typeFromParseTree.runtimeTypeSymbol().fullyQualifiedName()).isEqualTo("hello");
     assertThat(typeFromParseTree).isInstanceOf(RuntimeType.class);
@@ -59,8 +46,6 @@ class PyTypeTypeGrammarTest {
   @Test
   void test_class_1() {
     String typeString = "ClassType(GabaGool)";
-    TypeContext typeContext = PyTypeTypeGrammar.getParseTree(typeString);
-
     InferredType typeFromParseTree = PyTypeTypeGrammar.getTypeFromString(typeString);
     assertThat(typeFromParseTree).isInstanceOf(RuntimeType.class);
     RuntimeType runtimeType = (RuntimeType) typeFromParseTree;
@@ -117,21 +102,6 @@ class PyTypeTypeGrammarTest {
   }
 
   @Test
-  void test_union_2() {
-    String typeString = "UnionType(type_list=(gabagool, ova, here))";
-    TypeContext typeContext = PyTypeTypeGrammar.getParseTree(typeString);
-
-    Union_typeContext unionType = typeContext.union_type();
-    assertThat(unionType).isNotNull();
-
-    Type_listContext typeListContext = unionType.type_list();
-
-    assertThat(typeListContext.type(0).qualified_type().STRING(0)).hasToString("gabagool");
-    assertThat(typeListContext.type(1).qualified_type().STRING(0)).hasToString("ova");
-    assertThat(typeListContext.type(2).qualified_type().STRING(0)).hasToString("here");
-  }
-
-  @Test
   void test_union_3() {
     String typeString = "UnionType(type_list=(ClassType(builtins.int), ClassType(builtins.str)))";
     InferredType typeFromParseTree = PyTypeTypeGrammar.getTypeFromString(typeString);
@@ -157,17 +127,5 @@ class PyTypeTypeGrammarTest {
     RuntimeType runtimeType = (RuntimeType) typeFromParseTree;
     assertThat(runtimeType.getTypeClass().name()).isEqualTo("ImportError");
 
-  }
-
-  @Test
-  void test_exception_1() {
-    String someInvalidTypeString = "UnionType(type_list=(ClassType(None, ClassType(IntegerElement))";
-    assertThatThrownBy(() -> PyTypeTypeGrammar.getParseTree(someInvalidTypeString)).isInstanceOf(RecognitionException.class);
-  }
-
-  @Test
-  void test_exception_2() {
-    String someInvalidTypeString = "str bool";
-    assertThatThrownBy(() -> PyTypeTypeGrammar.getParseTree(someInvalidTypeString)).isInstanceOf(RecognitionException.class);
   }
 }

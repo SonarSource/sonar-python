@@ -19,8 +19,8 @@
  */
 package org.sonar.python.types.pytype;
 
-import org.sonar.python.types.json.JsonSubtype;
-import org.sonar.python.types.json.JsonType;
+import org.sonar.python.types.pytype.json.JsonSubtype;
+import org.sonar.python.types.pytype.json.JsonType;
 
 @JsonType(
   property = "$class",

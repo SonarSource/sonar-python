@@ -17,12 +17,13 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.types;
+package org.sonar.python.types.pytype;
 
 import com.google.gson.annotations.SerializedName;
 import java.util.Optional;
 import org.sonar.plugins.python.api.types.InferredType;
-import org.sonar.python.types.pytype.BaseType;
+import org.sonar.python.types.InferredTypes;
+import org.sonar.python.types.PyTypeDetailedInfo;
 
 public class PyTypeInfo {
   private final String text;

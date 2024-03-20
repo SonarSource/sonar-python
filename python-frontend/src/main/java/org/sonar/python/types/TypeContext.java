@@ -23,7 +23,6 @@ import com.google.common.annotations.VisibleForTesting;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -41,6 +40,7 @@ import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.semantic.Scope;
 import org.sonar.python.semantic.SymbolImpl;
 import org.sonar.python.tree.TreeUtils;
+import org.sonar.python.types.pytype.PyTypeInfo;
 
 public class TypeContext {
   private static final Logger LOG = LoggerFactory.getLogger(TypeContext.class);
@@ -53,36 +53,7 @@ public class TypeContext {
     TypeContext.projectLevelSymbolTable = projectLevelSymbolTable;
   }
 
-  private static final class TypePositionKey {
-    final String fileName;
-    final int line;
-    final int column;
-    final String name;
-
-    public TypePositionKey(String fileName, int line, int column, String name) {
-      this.fileName = fileName;
-      this.line = line;
-      this.column = column;
-      this.name = name;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-      if (this == o)
-        return true;
-      if (o == null || getClass() != o.getClass())
-        return false;
-      TypePositionKey that = (TypePositionKey) o;
-      return line == that.line
-        && column == that.column
-        && Objects.equals(fileName, that.fileName)
-        && Objects.equals(name, that.name);
-    }
-
-    @Override
-    public int hashCode() {
-      return Objects.hash(fileName, line, column, name);
-    }
+  private record TypePositionKey(String fileName, int line, int column, String name) {
   }
 
   private final Map<String, List<PyTypeInfo>> files;

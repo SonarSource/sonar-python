@@ -69,7 +69,7 @@ import org.sonar.python.parser.PythonParser;
 import org.sonar.python.tree.IPythonTreeMaker;
 import org.sonar.python.tree.PythonTreeMaker;
 import org.sonar.python.types.TypeContext;
-import org.sonar.python.types.TypeContextReader;
+import org.sonar.python.types.pytype.json.TypeContextReader;
 
 public class PythonScanner extends Scanner {
 

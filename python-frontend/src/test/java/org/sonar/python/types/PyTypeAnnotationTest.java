@@ -37,6 +37,7 @@ import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.parser.PythonParser;
 import org.sonar.python.semantic.ClassSymbolImpl;
 import org.sonar.python.tree.PythonTreeMaker;
+import org.sonar.python.types.pytype.json.TypeContextReader;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.types.InferredTypes.BOOL;

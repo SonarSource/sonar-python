@@ -24,6 +24,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.semantic.ClassSymbolImpl;
+import org.sonar.python.types.pytype.json.TypeContextReader;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

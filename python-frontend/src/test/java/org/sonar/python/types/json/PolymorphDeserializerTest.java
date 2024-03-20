@@ -29,8 +29,9 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.types.PyTypeDetailedInfo;
 import org.sonar.python.types.PyTypeDetailedInfoDeserializer;
-import org.sonar.python.types.PyTypeInfo;
+import org.sonar.python.types.pytype.PyTypeInfo;
 import org.sonar.python.types.pytype.BaseType;
+import org.sonar.python.types.pytype.json.PolymorphDeserializer;
 
 class PolymorphDeserializerTest {
 
