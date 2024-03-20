@@ -46,6 +46,8 @@ import static org.sonar.python.PythonTestUtils.getLastDescendant;
 import static org.sonar.python.PythonTestUtils.lastFunctionSymbolWithName;
 import static org.sonar.python.PythonTestUtils.parse;
 import static org.sonar.python.PythonTestUtils.pythonFile;
+import static org.sonar.python.semantic.SymbolUtils.getFirstAlternativeIfEqualArgumentNames;
+import static org.sonar.python.semantic.SymbolUtils.isEqualParameterCountAndNames;
 import static org.sonar.python.semantic.SymbolUtils.pathOf;
 import static org.sonar.python.semantic.SymbolUtils.pythonPackageName;
 
@@ -220,32 +222,33 @@ class SymbolUtilsTest {
   }
 
   @Test
-  void hasSameParameterCountTest() {
+  void getFirstAlternativeIfEqualArgumentNamesTest() {
     var file = PythonTestUtils.parse( new SymbolTableBuilder("my_package", pythonFile("my_module.py")),
-      "class A:",
-      "  def foo1(self, a, b):",
-      "    ...",
-      "class B:",
-      "  def foo2(self, a):",
-      "    ...",
-      "class C:",
-      "  def foo3(self, b, c):",
-      "    ..."
-    );
+      """
+        class MyClass(dict):
+          def get(self, key): ...
+        
+        def foo1(a, b, c): ...
+        def foo2(a, b, c): ...
+        def bar(b, c, a): ...
+        def qix(c, a, b): ...
+        """);
+    FunctionSymbol getMethod = (FunctionSymbol) descendantFunction(file, "get").name().symbol();
+    List<FunctionSymbol> overriddenMethods = SymbolUtils.getOverriddenMethods(getMethod);
+    assertThat(isEqualParameterCountAndNames(overriddenMethods)).isFalse();
+    assertThat(getFirstAlternativeIfEqualArgumentNames(overriddenMethods)).isEmpty();
 
     FunctionSymbol foo1 = (FunctionSymbol) descendantFunction(file, "foo1").name().symbol();
     FunctionSymbol foo2 = (FunctionSymbol) descendantFunction(file, "foo2").name().symbol();
-    FunctionSymbol foo3 = (FunctionSymbol) descendantFunction(file, "foo3").name().symbol();
-
-    assertThat(foo1).isNotNull();
-    assertThat(foo2).isNotNull();
-    assertThat(foo3).isNotNull();
-    assertThat(SymbolUtils.haveSameParameterCount(List.of(foo1, foo2))).isFalse();
-    assertThat(SymbolUtils.haveSameParameterCount(List.of(foo1, foo3))).isTrue();
+    FunctionSymbol bar = (FunctionSymbol) descendantFunction(file, "bar").name().symbol();
+    FunctionSymbol qix = (FunctionSymbol) descendantFunction(file, "qix").name().symbol();
+    assertThat(isEqualParameterCountAndNames(List.of(foo1, bar, qix))).isFalse();
+    assertThat(isEqualParameterCountAndNames(List.of(foo1, foo2))).isTrue();
+    assertThat(getFirstAlternativeIfEqualArgumentNames(List.of(foo1, foo2))).isPresent();
   }
 
   @Test
-  void isEqualArgumentNamesTest() {
+  void isEqualParameterCountAndNamesTest() {
     var file = PythonTestUtils.parse( new SymbolTableBuilder("my_package", pythonFile("my_module.py")),
       "class A:",
       "  def foo1(self, a):",
@@ -265,8 +268,8 @@ class SymbolUtilsTest {
     assertThat(foo1).isNotNull();
     assertThat(foo2).isNotNull();
     assertThat(foo3).isNotNull();
-    assertThat(SymbolUtils.isEqualArgumentNames(List.of(foo1, foo2))).isTrue();
-    assertThat(SymbolUtils.isEqualArgumentNames(List.of(foo1, foo3))).isFalse();
+    assertThat(SymbolUtils.isEqualParameterCountAndNames(List.of(foo1, foo2))).isTrue();
+    assertThat(SymbolUtils.isEqualParameterCountAndNames(List.of(foo1, foo3))).isFalse();
   }
 
 

@@ -306,29 +306,18 @@ public class SymbolUtils {
 
   public static Optional<FunctionSymbol> getFirstAlternativeIfEqualArgumentNames(List<FunctionSymbol> alternatives) {
     return Optional.of(alternatives)
-      .filter(SymbolUtils::haveSameParameterCount)
-      .filter(SymbolUtils::isEqualArgumentNames)
+      .filter(SymbolUtils::isEqualParameterCountAndNames)
       .map(Collection::stream)
       .flatMap(Stream::findFirst);
   }
 
-  public static boolean haveSameParameterCount(List<FunctionSymbol> alternatives) {
-    return alternatives.stream()
-      .map(FunctionSymbol::parameters)
-      .map(List::size)
-      .collect(Collectors.toSet())
-      .size() == 1;
-  }
-
-  public static boolean isEqualArgumentNames(List<FunctionSymbol> alternatives) {
-    // Positional only parameters from stubs may have null parameter names. It is therefore important to use this method in conjunction with haveSameParameterCount
-    // to ensure the alternatives have the same signature
+  public static boolean isEqualParameterCountAndNames(List<FunctionSymbol> alternatives) {
     return alternatives.stream()
       .map(FunctionSymbol::parameters)
       .filter(Objects::nonNull)
       .map(parameters -> parameters.stream()
         .map(parameter -> List.of(Objects.requireNonNullElse(parameter.name(), ""), parameter.isKeywordOnly(), parameter.isPositionalOnly()))
-        .collect(Collectors.toSet())
+        .toList()
       ).distinct()
       .count() == 1;
   }

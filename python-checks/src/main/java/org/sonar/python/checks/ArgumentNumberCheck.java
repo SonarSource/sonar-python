@@ -62,7 +62,7 @@ public class ArgumentNumberCheck extends PythonSubscriptionCheck {
       Optional.of(callExpression)
         .map(CallExpression::calleeSymbol)
         .map(SymbolUtils::getFunctionSymbols)
-        .filter(SymbolUtils::isEqualArgumentNames)
+        .filter(SymbolUtils::isEqualParameterCountAndNames)
         .map(Collection::stream)
         .flatMap(Stream::findFirst)
         .ifPresent(functionSymbol -> checkFunctionSymbol(ctx, callExpression, functionSymbol));
