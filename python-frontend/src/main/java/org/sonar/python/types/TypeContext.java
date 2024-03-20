@@ -40,6 +40,8 @@ import org.sonar.python.semantic.Scope;
 import org.sonar.python.semantic.SymbolImpl;
 import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.types.pytype.PyTypeInfo;
+import org.sonar.python.types.v2.PythonType;
+import org.sonar.python.types.v2.converter.PyTypeToPythonTypeConverter;
 
 public class TypeContext {
   private static final Logger LOG = LoggerFactory.getLogger(TypeContext.class);
@@ -108,6 +110,22 @@ public class TypeContext {
         .findFirst()
         .orElse(types.get(0)))
       .map(typeInfo -> getInferredType(typeInfo, fileName, tree));
+  }
+
+  @VisibleForTesting
+  Optional<PythonType> getPythonTypeFor(String fileName, int line, int column, String name, String kind, Tree tree) {
+    TypePositionKey typePositionKey = new TypePositionKey(fileName, line, column, name);
+    return Optional.ofNullable(multipleTypesByPosition.get(typePositionKey))
+      .filter(Predicate.not(List::isEmpty))
+      .map(types -> types.stream()
+        .filter(t -> kind.equals(t.syntaxRole()))
+        .findFirst()
+        .orElse(types.get(0)))
+      .map(typeInfo -> getPythonType(typeInfo, fileName, tree));
+  }
+
+  private PythonType getPythonType(PyTypeInfo typeInfo, String fileName, Tree tree) {
+    return PyTypeToPythonTypeConverter.convert(typeInfo.baseType());
   }
 
   private InferredType getInferredType(PyTypeInfo typeInfo, String fileName, Tree tree) {
