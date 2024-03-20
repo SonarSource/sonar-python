@@ -35,14 +35,17 @@ import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.CallExpression;
+import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.checks.utils.Expressions;
 import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S6911")
 public class TfFunctionDependOnOutsideVariableCheck extends PythonSubscriptionCheck {
-  private static final String MESSAGE = "This function should not depend implicitly on a global or free variable.";
+  private static final String MESSAGE = "Make sure this function does not depend on a global or free variable.";
   private static final String MESSAGE_SECONDARY = "Variable used here.";
 
   @Override
@@ -85,10 +88,7 @@ public class TfFunctionDependOnOutsideVariableCheck extends PythonSubscriptionCh
       Optional.ofNullable(pyNameTree.symbol())
         .filter(symbol -> !symbol.is(Symbol.Kind.FUNCTION, Symbol.Kind.CLASS, Symbol.Kind.AMBIGUOUS))
         .filter(symbol -> symbol.usages().stream().map(Usage::kind).noneMatch(usageKind -> usageKind == Usage.Kind.IMPORT))
-        .ifPresent(symbol -> {
-          symbolToNames.putIfAbsent(symbol, new ArrayList<>());
-          symbolToNames.get(symbol).add(pyNameTree);
-        });
+        .ifPresent(symbol -> symbolToNames.computeIfAbsent(symbol, s -> new ArrayList<>()).add(pyNameTree));
     }
 
     private static boolean isInstantiatedByTensorflow(Name pyNameTree) {
@@ -99,13 +99,43 @@ public class TfFunctionDependOnOutsideVariableCheck extends PythonSubscriptionCh
         .filter(Objects::nonNull)
         .map(AssignmentStatement.class::cast)
         .map(AssignmentStatement::assignedValue)
-        .filter(assignedValue -> assignedValue.is(Tree.Kind.CALL_EXPR))
-        .map(CallExpression.class::cast)
+        .anyMatch(NameCollector::isTensorflowValue);
+    }
+
+    private static boolean isTensorflowValue(Expression expression) {
+      return Optional.of(expression)
+        .map(Expressions::removeParentheses)
+        .flatMap(TreeUtils.toOptionalInstanceOfMapper(CallExpression.class))
+        .map(callExpression -> NameCollector.isDirectCallToTensorflow(callExpression) || NameCollector.isChainedCallToTensorflow(callExpression))
+        .orElse(false);
+    }
+
+    private static boolean isChainedCallToTensorflow(CallExpression callExpression) {
+      return Optional.of(callExpression).map(CallExpression::callee)
+        .flatMap(TreeUtils.toOptionalInstanceOfMapper(QualifiedExpression.class))
+        .map(NameCollector::getLeftMostNameFromCallChain)
+        .map(name -> name.name().startsWith("tensorflow."))
+        .isPresent();
+    }
+
+    private static boolean isDirectCallToTensorflow(CallExpression callExpression) {
+      return Optional.of(callExpression)
         .map(CallExpression::calleeSymbol)
-        .filter(Objects::nonNull)
         .map(Symbol::fullyQualifiedName)
-        .filter(Objects::nonNull)
-        .anyMatch(fqn -> fqn.startsWith("tensorflow."));
+        .filter(fqn -> fqn.startsWith("tensorflow."))
+        .isPresent();
+    }
+
+    private static Name getLeftMostNameFromCallChain(QualifiedExpression qualifiedExpression) {
+      QualifiedExpression current = qualifiedExpression;
+      while (current != null && current.qualifier().is(Tree.Kind.CALL_EXPR, Tree.Kind.QUALIFIED_EXPR)) {
+        if (current.qualifier().is(Tree.Kind.CALL_EXPR)) {
+          current = ((CallExpression) current.qualifier()).callee().is(Tree.Kind.QUALIFIED_EXPR) ? (QualifiedExpression) ((CallExpression) current.qualifier()).callee() : null;
+        } else {
+          current = (QualifiedExpression) current.qualifier();
+        }
+      }
+      return current != null && current.qualifier().is(Tree.Kind.NAME) ? (Name) current.qualifier() : null;
     }
   }
 }

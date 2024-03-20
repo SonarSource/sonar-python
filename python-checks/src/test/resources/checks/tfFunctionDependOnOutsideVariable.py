@@ -3,7 +3,7 @@ import tensorflow as tf
 foo = 3
 foobar = 42
 @tf.function
-def non_compliant(): # Noncompliant {{This function should not depend implicitly on a global or free variable.}}
+def non_compliant(): # Noncompliant {{Make sure this function does not depend on a global or free variable.}}
    #^^^^^^^^^^^^^
     return foo + 1
           #^^^< {{Variable used here.}}
@@ -71,3 +71,33 @@ def containing():
         return foo_tf + tenf
 
     foo_tf = True
+
+def testStandardTrainingLoopInFunction(self):
+    layer = tf.keras.layers.Dense(2)
+    dataset = (
+        tf.data.Dataset.from_tensors((tf.ones([784]), tf.ones([], tf.int32)))
+        .map(lambda x, y: (x, y))
+        .repeat(10)
+        .batch(32))
+    optimizer = tf.keras.optimizers.Adam()
+
+    @tf.function
+    def train():
+        for x, y in dataset:
+            with tf.GradientTape() as tape:
+                out = layer(x)
+                loss = tf.reduce_mean(
+                    tf.nn.sparse_softmax_cross_entropy_with_logits(
+                        logits=out, labels=y))
+            layer_variables = layer.trainable_variables
+            gradients = tape.gradient(loss, layer_variables)
+            optimizer.apply_gradients(zip(gradients, layer_variables))
+
+    train()
+
+@tf.function
+def qualifier_test():
+    baz = SomeClass.something.some_call()
+    some_call()
+    object = SomeClass().something()
+    baz2 = [1, 5].some_call()
