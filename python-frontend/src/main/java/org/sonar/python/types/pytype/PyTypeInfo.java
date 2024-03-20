@@ -25,57 +25,19 @@ import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.types.InferredTypes;
 import org.sonar.python.types.PyTypeDetailedInfo;
 
-public class PyTypeInfo {
-  private final String text;
+public record PyTypeInfo(
+  String text,
   @SerializedName("start_line")
-  private final int startLine;
+  int startLine,
   @SerializedName("start_col")
-  private final int startCol;
+  int startCol,
   @SerializedName("syntax_role")
-  private final String syntaxRole;
-  private final PyTypeDetailedInfo type;
+  String syntaxRole,
+  PyTypeDetailedInfo type,
   @SerializedName("short_type")
-  private final String shortType;
+  String shortType,
   @SerializedName("type_details")
-  private final BaseType baseType;
-
-  public PyTypeInfo(String text, int startLine, int startCol, String syntaxRole, PyTypeDetailedInfo type, String shortType, BaseType baseType) {
-    this.text = text;
-    this.startLine = startLine;
-    this.startCol = startCol;
-    this.syntaxRole = syntaxRole;
-    this.type = type;
-    this.shortType = shortType;
-    this.baseType = baseType;
-  }
-
-  public String text() {
-    return text;
-  }
-
-  public int startLine() {
-    return startLine;
-  }
-
-  public int startCol() {
-    return startCol;
-  }
-
-  public String syntaxRole() {
-    return syntaxRole;
-  }
-
-  public PyTypeDetailedInfo type() {
-    return type;
-  }
-
-  public String shortType() {
-    return shortType;
-  }
-
-  public BaseType baseType() {
-    return baseType;
-  }
+  BaseType baseType) {
 
   public InferredType inferredType() {
     return Optional.of(this)
