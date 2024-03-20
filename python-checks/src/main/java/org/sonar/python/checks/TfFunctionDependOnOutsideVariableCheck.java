@@ -21,7 +21,6 @@ package org.sonar.python.checks;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -59,26 +58,29 @@ public class TfFunctionDependOnOutsideVariableCheck extends PythonSubscriptionCh
     if (!TreeUtils.isFunctionWithGivenDecoratorFQN(functionDef, "tensorflow.function")) {
       return;
     }
-    NameCollector collector = new NameCollector();
+    NameCollector collector = new NameCollector(functionDef.localVariables());
     functionDef.body().accept(collector);
-    Set<Symbol> allNames = new HashSet<>(collector.symbolToNames.keySet());
-    allNames.removeAll(functionDef.localVariables());
-    if (allNames.isEmpty()) {
+    if (collector.symbolToNames.keySet().isEmpty()) {
       return;
     }
     var issue = context.addIssue(functionDef.name(), MESSAGE);
-    allNames.forEach(symbol -> collector.symbolToNames.get(symbol).forEach(name -> issue.secondary(name, MESSAGE_SECONDARY)));
+    collector.symbolToNames.keySet().forEach(symbol -> collector.symbolToNames.get(symbol).forEach(name -> issue.secondary(name, MESSAGE_SECONDARY)));
   }
 
   private static class NameCollector extends BaseTreeVisitor {
     Map<Symbol, List<Name>> symbolToNames = new HashMap<>();
+    Set<Symbol> localSymbols;
+
+    private NameCollector(Set<Symbol> localSymbols) {
+      this.localSymbols = localSymbols;
+    }
 
     @Override
     public void visitName(Name pyNameTree) {
-      if (!pyNameTree.isVariable()) {
+      if (localSymbols.contains(pyNameTree.symbol())) {
         return;
       }
-      if (pyNameTree.type().mustBeOrExtend("tensorflow.Variable")) {
+      if (!pyNameTree.isVariable()) {
         return;
       }
       if (isInstantiatedByTensorflow(pyNameTree)) {

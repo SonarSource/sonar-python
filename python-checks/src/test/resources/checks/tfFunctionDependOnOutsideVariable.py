@@ -95,9 +95,12 @@ def testStandardTrainingLoopInFunction(self):
 
     train()
 
+
+baz = SomeClass.something.some_call()
+some_call()
+object = SomeClass().something()
+baz2 = [1, 5].some_call()
+baz3: tf.Variable = tf.Variable(3)
 @tf.function
-def qualifier_test():
-    baz = SomeClass.something.some_call()
-    some_call()
-    object = SomeClass().something()
-    baz2 = [1, 5].some_call()
+def qualifier_test(): # Noncompliant
+    return baz, some_call(), object, baz2, baz3
