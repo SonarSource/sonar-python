@@ -1,0 +1,78 @@
+<p>This rule raises an issue when a <code>tensorflow.function</code> depends on a global or free Python variable.</p>
+<h2>Why is this an issue?</h2>
+<p>When calling a <code>tensorflow.function</code> behind the scenes a <code>ConcreteFunction</code> is created everytime a new value is passed as
+argument. This is not the case with Python global variables, closure or nonlocal variables.</p>
+<p>This means the state and the result of the <code>tensorflow.function</code> may not be what is expected.</p>
+<pre>
+import tensorflow as tf
+
+@tf.function
+def addition():
+  return 1 + foo
+
+foo = 4
+addition() # tf.Tensor(5, shape=(), dtype=int32): on this first step we obtain the expected result
+
+foo = 10
+addition() # tf.Tensor(5, shape=(), dtype=int32): unexpected result of 5 instead of 11
+</pre>
+<p>As we can see in the example above the second time <code>addition</code> is called, we obtain the same result as the first call. This is due to the
+fact that between the 2 calls of <code>addition</code> the value of the argument passed to the function did not change. This result in the creation of
+a single <code>ConcreteFunction</code> during the first call of <code>addition</code>, with the value of foo set to 4.</p>
+<p>This is why it is a good practice to not use and mutate global variables or nonlocal variables inside of a <code>tensorflow.function</code>.</p>
+<h3>Exceptions</h3>
+<p>This rule will not raise an issue if the global or nonlocal variable is a <code>tensorflow.Variable</code>.</p>
+<pre>
+import tensorflow as tf
+
+@tf.function
+def addition():
+  return 1 + foo
+
+foo = tf.Variable(4)
+addition()
+
+foo.assign(10)
+addition()
+</pre>
+<p>In this case the <code>ConcreteFunction</code> will be created properly each call if the value of the variable changes.</p>
+<h2>How to fix it</h2>
+<p>To fix this issue refactor the Python global or nonlocal variable to be an argument of the <code>tensorflow.function</code>.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+import tensorflow as tf
+
+@tf.function
+def addition():
+  return 1 + foo # Noncompliant the usage of the nonlocal variable may not behave as expected.
+
+foo = 4
+addition()
+
+foo = 10
+addition()
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+import tensorflow as tf
+
+@tf.function
+def addition(foo):
+  return 1 + foo # Compliant
+
+foo = 4
+addition(foo)
+
+foo = 10
+addition(foo)
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> TensorFlow Documentation - <a href="https://www.tensorflow.org/guide/function#depending_on_python_global_and_free_variables">Depending on
+  Python global and free variables</a> </li>
+  <li> TensorFlow Documentation - <a href="https://www.tensorflow.org/jvm/api_docs/java/org/tensorflow/ConcreteFunction?hl=en">ConcreteFunction
+  reference</a> </li>
+</ul>
+

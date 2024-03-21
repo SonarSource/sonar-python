@@ -1,0 +1,21 @@
+{
+  "title": "\"tf.function\"s should not depend on global or free Python variables",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-6911",
+  "sqKey": "S6911",
+  "scope": "All",
+  "quickfix": "unknown",
+  "code": {
+    "impacts": {
+      "RELIABILITY": "HIGH"
+    },
+    "attribute": "CONVENTIONAL"
+  }
+}
