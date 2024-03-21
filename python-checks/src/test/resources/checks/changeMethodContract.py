@@ -124,3 +124,8 @@ import datetime
 class MyTZInfo(datetime.tzinfo):
   def tzname(self): # Noncompliant
     ...
+
+
+class MyDictionary(dict):
+    def get(self, key):
+        ...

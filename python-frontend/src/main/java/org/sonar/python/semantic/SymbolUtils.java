@@ -306,18 +306,18 @@ public class SymbolUtils {
 
   public static Optional<FunctionSymbol> getFirstAlternativeIfEqualArgumentNames(List<FunctionSymbol> alternatives) {
     return Optional.of(alternatives)
-      .filter(SymbolUtils::isEqualArgumentNames)
+      .filter(SymbolUtils::isEqualParameterCountAndNames)
       .map(Collection::stream)
       .flatMap(Stream::findFirst);
   }
 
-  public static boolean isEqualArgumentNames(List<FunctionSymbol> alternatives) {
+  public static boolean isEqualParameterCountAndNames(List<FunctionSymbol> alternatives) {
     return alternatives.stream()
       .map(FunctionSymbol::parameters)
       .filter(Objects::nonNull)
       .map(parameters -> parameters.stream()
         .map(parameter -> List.of(Objects.requireNonNullElse(parameter.name(), ""), parameter.isKeywordOnly(), parameter.isPositionalOnly()))
-        .collect(Collectors.toSet())
+        .toList()
       ).distinct()
       .count() == 1;
   }
