@@ -127,8 +127,8 @@ public class PythonScanner extends Scanner {
         || checksExecutedWithoutParsingByFiles.getOrDefault(inputFile, Collections.emptySet()).contains(check)) {
         continue;
       }
-      if (check instanceof PythonSubscriptionCheck) {
-        checksBasedOnTree.add((PythonSubscriptionCheck) check);
+      if (check instanceof PythonSubscriptionCheck pythonSubscriptionCheck) {
+        checksBasedOnTree.add(pythonSubscriptionCheck);
       } else {
         check.scanFile(visitorContext);
       }

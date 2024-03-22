@@ -223,8 +223,8 @@ class ExpressionsTest {
   }
 
   private Expression exp(Tree tree) {
-    if (tree instanceof Expression) {
-      return (Expression) tree;
+    if (tree instanceof Expression expression) {
+      return expression;
     }
     for (Tree child : tree.children()) {
       Expression exp = exp(child);

@@ -173,7 +173,7 @@ public class BuiltinShadowingAssignmentCheck extends PythonSubscriptionCheck {
       .map(Usage::tree)
       .map(Tree::firstToken)
       .map(token -> TextEditUtils.insertBefore(token, RENAME_PREFIX))
-      .collect(Collectors.toList());
+      .toList();
 
     return PythonQuickFix.newQuickFix(String.format(QUICK_FIX_MESSAGE_FORMAT, symbol.name()))
       .addTextEdit(edits)

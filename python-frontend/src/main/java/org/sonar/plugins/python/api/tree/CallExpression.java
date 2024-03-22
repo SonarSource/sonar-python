@@ -47,8 +47,8 @@ public interface CallExpression extends Expression {
 
   @CheckForNull
   default Symbol calleeSymbol() {
-    if (callee() instanceof HasSymbol) {
-      return ((HasSymbol) callee()).symbol();
+    if (callee() instanceof HasSymbol hasSymbol) {
+      return hasSymbol.symbol();
     }
     return null;
   }

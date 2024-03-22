@@ -103,8 +103,8 @@ public class RuffJsonReportReader {
   }
 
   private static Integer toInteger(Object value) {
-    if (value instanceof Number) {
-      return ((Number) value).intValue();
+    if (value instanceof Number number) {
+      return number.intValue();
     }
     return null;
   }

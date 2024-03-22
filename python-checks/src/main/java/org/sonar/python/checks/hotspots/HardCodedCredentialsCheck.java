@@ -280,8 +280,8 @@ public class HardCodedCredentialsCheck extends PythonSubscriptionCheck {
     ExpressionList lhs = assignmentStatement.lhsExpressions().get(0);
     Expression expression = lhs.expressions().get(0);
 
-    if (expression instanceof HasSymbol) {
-      Symbol symbol = ((HasSymbol) expression).symbol();
+    if (expression instanceof HasSymbol hasSymbol) {
+      Symbol symbol = hasSymbol.symbol();
       String matchedCredential = credentialSymbolName(symbol);
       if (matchedCredential != null) {
         checkAssignedValue(assignmentStatement, matchedCredential, ctx);

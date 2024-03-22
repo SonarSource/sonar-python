@@ -52,8 +52,8 @@ class UnionType implements InferredType {
   }
 
   private static void addTypes(InferredType type, Set<InferredType> types) {
-    if (type instanceof UnionType) {
-      types.addAll(((UnionType) type).types);
+    if (type instanceof UnionType unionType) {
+      types.addAll(unionType.types);
     } else {
       types.add(type);
     }

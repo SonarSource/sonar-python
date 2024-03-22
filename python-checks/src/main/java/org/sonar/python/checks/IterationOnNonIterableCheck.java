@@ -47,8 +47,8 @@ public class IterationOnNonIterableCheck extends IterationOnNonIterable {
         return false;
       }
     }
-    if (expression instanceof HasSymbol) {
-      Symbol symbol = ((HasSymbol) expression).symbol();
+    if (expression instanceof HasSymbol hasSymbol) {
+      Symbol symbol = hasSymbol.symbol();
       if (symbol != null) {
         if (symbol.is(Symbol.Kind.FUNCTION)) {
           FunctionSymbol functionSymbol = (FunctionSymbol) symbol;

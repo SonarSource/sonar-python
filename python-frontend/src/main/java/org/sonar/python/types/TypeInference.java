@@ -340,8 +340,8 @@ public class TypeInference extends BaseTreeVisitor {
           QualifiedExpression qualifiedExpression = (QualifiedExpression) e;
           memberAccessDependencies.add(qualifiedExpression);
           memberAccessesByQualifiedExpr.get(qualifiedExpression).dependents().add(this);
-        } else if (e instanceof HasTypeDependencies) {
-          workList.addAll(((HasTypeDependencies) e).typeDependencies());
+        } else if (e instanceof HasTypeDependencies hasTypeDependencies) {
+          workList.addAll(hasTypeDependencies.typeDependencies());
         }
       }
     }

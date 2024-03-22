@@ -89,7 +89,7 @@ public class ArgumentNumberCheck extends PythonSubscriptionCheck {
 
     List<RegularArgument> arguments = callExpression.arguments().stream()
       .map(RegularArgument.class::cast)
-      .collect(Collectors.toList());
+      .toList();
     long nbPositionalArgs = arguments.stream().filter(a -> a.keywordArgument() == null).count();
     long nbNonKeywordOnlyPassedWithKeyword = arguments.stream()
       .map(RegularArgument::keywordArgument)

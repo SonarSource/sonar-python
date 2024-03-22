@@ -125,8 +125,8 @@ public class ConfusingTypeCheckingCheck extends PythonSubscriptionCheck {
 
     private static boolean isRightOperandInExpression(Tree tree) {
       Tree parent = tree.parent();
-      if (parent instanceof InExpression) {
-        return ((InExpression) parent).rightOperand() == tree;
+      if (parent instanceof InExpression inExpression) {
+        return inExpression.rightOperand() == tree;
       }
       return false;
     }

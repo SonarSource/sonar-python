@@ -58,24 +58,16 @@ public class Expressions {
     if (expression == null) {
       return false;
     }
-    switch (expression.getKind()) {
-      case NAME: 
-        return "False".equals(((Name) expression).name());
-      case NONE:
-        return true;
-      case STRING_LITERAL:
-        return unescape((StringLiteral) expression).isEmpty();
-      case NUMERIC_LITERAL:
-        return ZERO_VALUES.contains(((NumericLiteral) expression).valueAsString());
-      case LIST_LITERAL:
-        return ((ListLiteral) expression).elements().expressions().isEmpty();
-      case TUPLE:
-        return ((Tuple) expression).elements().isEmpty();
-      case DICTIONARY_LITERAL:
-        return ((DictionaryLiteral) expression).elements().isEmpty();
-      default:
-        return false;
-    }
+    return switch (expression.getKind()) {
+      case NAME -> "False".equals(((Name) expression).name());
+      case NONE -> true;
+      case STRING_LITERAL -> unescape((StringLiteral) expression).isEmpty();
+      case NUMERIC_LITERAL -> ZERO_VALUES.contains(((NumericLiteral) expression).valueAsString());
+      case LIST_LITERAL -> ((ListLiteral) expression).elements().expressions().isEmpty();
+      case TUPLE -> ((Tuple) expression).elements().isEmpty();
+      case DICTIONARY_LITERAL -> ((DictionaryLiteral) expression).elements().isEmpty();
+      default -> false;
+    };
   }
 
   // https://docs.python.org/3/library/stdtypes.html#truth-value-testing
@@ -83,19 +75,11 @@ public class Expressions {
     if (expression == null) {
       return false;
     }
-    switch (expression.getKind()) {
-      case NAME:
-        return "True".equals(((Name) expression).name());
-      case STRING_LITERAL:
-      case NUMERIC_LITERAL:
-      case LIST_LITERAL:
-      case TUPLE:
-      case SET_LITERAL:
-      case DICTIONARY_LITERAL:
-        return !isFalsy(expression);
-      default:
-        return false;
-    }
+    return switch (expression.getKind()) {
+      case NAME -> "True".equals(((Name) expression).name());
+      case STRING_LITERAL, NUMERIC_LITERAL, LIST_LITERAL, TUPLE, SET_LITERAL, DICTIONARY_LITERAL -> !isFalsy(expression);
+      default -> false;
+    };
   }
 
   @CheckForNull

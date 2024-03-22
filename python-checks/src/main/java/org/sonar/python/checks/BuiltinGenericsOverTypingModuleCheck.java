@@ -72,8 +72,7 @@ public class BuiltinGenericsOverTypingModuleCheck extends PythonSubscriptionChec
   }
 
   private static void checkForGenericsFromTypingModule(SubscriptionContext subscriptionContext, Expression expression) {
-    if (expression instanceof SubscriptionExpression) {
-      SubscriptionExpression subscriptionExpression = (SubscriptionExpression) expression;
+    if (expression instanceof SubscriptionExpression subscriptionExpression) {
       getGenericsCounterPartFromTypingModule(subscriptionContext, subscriptionExpression)
         .ifPresent(preferredGenerics -> raiseIssueForGenerics(subscriptionContext, subscriptionExpression, preferredGenerics));
     }

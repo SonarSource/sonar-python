@@ -146,8 +146,8 @@ public class StrongCryptographicKeysCheck extends PythonSubscriptionCheck {
         return false;
       }
       QualifiedExpression qualifiedExpressionTree = (QualifiedExpression) expression;
-      if (qualifiedExpressionTree.qualifier() instanceof HasSymbol) {
-        Symbol symbol = ((HasSymbol) qualifiedExpressionTree.qualifier()).symbol();
+      if (qualifiedExpressionTree.qualifier() instanceof HasSymbol hasSymbol) {
+        Symbol symbol = hasSymbol.symbol();
         if (symbol == null || !"cryptography.hazmat.primitives.asymmetric.ec".equals(symbol.fullyQualifiedName())) {
           return false;
         }

@@ -57,15 +57,10 @@ public class BackslashInStringCheck extends PythonSubscriptionCheck {
   private static boolean isBackslashedSpaceAfterInlineMarkup(boolean isThreeQuotes, String string, int position, char current) {
     if (isThreeQuotes && current == ' ' && position > 6) {
       char twoCharactersBefore = string.charAt(position - 2);
-      switch (twoCharactersBefore) {
-        case '`':
-        case '*':
-        case '_':
-        case '|':
-          return true;
-        default:
-          return false;
-      }
+      return switch (twoCharactersBefore) {
+        case '`', '*', '_', '|' -> true;
+        default -> false;
+      };
     }
     return false;
   }

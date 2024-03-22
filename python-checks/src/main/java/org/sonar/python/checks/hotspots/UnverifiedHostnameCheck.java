@@ -63,8 +63,8 @@ public class UnverifiedHostnameCheck extends PythonSubscriptionCheck {
     }
     if (parent.is(Tree.Kind.ASSIGNMENT_STMT)) {
       Expression lhs = ((AssignmentStatement) parent).lhsExpressions().get(0).expressions().get(0);
-      if (lhs instanceof HasSymbol) {
-        Symbol symbol = ((HasSymbol) lhs).symbol();
+      if (lhs instanceof HasSymbol hasSymbol) {
+        Symbol symbol = hasSymbol.symbol();
         if (symbol == null) {
           return;
         }

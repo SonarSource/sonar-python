@@ -201,8 +201,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
 
   private void addSymbolsToTree(FileInputImpl fileInput) {
     for (Scope scope : scopesByRootTree.values()) {
-      if (scope.rootTree instanceof FunctionLike) {
-        FunctionLike funcDef = (FunctionLike) scope.rootTree;
+      if (scope.rootTree instanceof FunctionLike funcDef) {
         for (Symbol symbol : scope.symbols()) {
           if (funcDef.is(Kind.LAMBDA)) {
             ((LambdaExpressionImpl) funcDef).addLocalVariableSymbol(symbol);
@@ -706,8 +705,8 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     public void visitQualifiedExpression(QualifiedExpression qualifiedExpression) {
       // We need to firstly create symbol for qualifier
       super.visitQualifiedExpression(qualifiedExpression);
-      if (qualifiedExpression.qualifier() instanceof HasSymbol) {
-        Symbol qualifierSymbol = ((HasSymbol) qualifiedExpression.qualifier()).symbol();
+      if (qualifiedExpression.qualifier() instanceof HasSymbol hasSymbol) {
+        Symbol qualifierSymbol = hasSymbol.symbol();
         if (qualifierSymbol != null) {
           Usage.Kind usageKind = assignmentLeftHandSides.contains(qualifiedExpression) ? Usage.Kind.ASSIGNMENT_LHS : Usage.Kind.OTHER;
           ((SymbolImpl) qualifierSymbol).addOrCreateChildUsage(qualifiedExpression.name(), usageKind);

@@ -204,8 +204,8 @@ public class SymbolImpl implements Symbol {
       SubscriptionExpression subscriptionExpression = (SubscriptionExpression) expression;
       return getTypeSymbolFromExpression(subscriptionExpression.object());
     }
-    if (expression instanceof HasSymbol) {
-      return ((HasSymbol) expression).symbol();
+    if (expression instanceof HasSymbol hasSymbol) {
+      return hasSymbol.symbol();
     }
     return null;
   }

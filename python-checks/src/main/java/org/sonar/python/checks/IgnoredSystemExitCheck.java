@@ -79,8 +79,8 @@ public class IgnoredSystemExitCheck extends PythonSubscriptionCheck {
         this.isReRaised = true;
       }
 
-      if (raisedException instanceof HasSymbol) {
-        Symbol symbol = ((HasSymbol) raisedException).symbol();
+      if (raisedException instanceof HasSymbol hasSymbol) {
+        Symbol symbol = hasSymbol.symbol();
         if (symbol == null) {
           // The symbol is unknown, bail out
           return;
@@ -108,16 +108,16 @@ public class IgnoredSystemExitCheck extends PythonSubscriptionCheck {
   @CheckForNull
   private static Symbol findExceptionInstanceSymbol(@Nullable Expression exceptionInstance) {
     Symbol exceptionInstanceSymbol = null;
-    if (exceptionInstance instanceof HasSymbol) {
-      exceptionInstanceSymbol = ((HasSymbol) exceptionInstance).symbol();
+    if (exceptionInstance instanceof HasSymbol hasSymbol) {
+      exceptionInstanceSymbol = hasSymbol.symbol();
     }
     return exceptionInstanceSymbol;
   }
 
   @CheckForNull
   private static String findExceptionName(Expression exception) {
-    if (exception instanceof HasSymbol) {
-      Symbol exceptionSymbol = ((HasSymbol) exception).symbol();
+    if (exception instanceof HasSymbol hasSymbol) {
+      Symbol exceptionSymbol = hasSymbol.symbol();
       if (exceptionSymbol != null) {
         return exceptionSymbol.fullyQualifiedName();
       }

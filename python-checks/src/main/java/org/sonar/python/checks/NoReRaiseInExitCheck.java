@@ -64,7 +64,7 @@ public class NoReRaiseInExitCheck extends PythonSubscriptionCheck {
       }
 
       Expression raisedException = pyRaiseStatementTree.expressions().get(0);
-      if (raisedException instanceof HasSymbol && Objects.equals(((HasSymbol) raisedException).symbol(), caughtException)) {
+      if (raisedException instanceof HasSymbol hasSymbol && Objects.equals(hasSymbol.symbol(), caughtException)) {
         nonCompliantRaises.add(pyRaiseStatementTree);
       }
 
@@ -72,7 +72,7 @@ public class NoReRaiseInExitCheck extends PythonSubscriptionCheck {
         SubscriptionExpression subscriptionExpression = (SubscriptionExpression) raisedException;
         Expression objectExpression = subscriptionExpression.object();
 
-        if (objectExpression instanceof HasSymbol && Objects.equals(((HasSymbol) objectExpression).symbol(), packedParameter)) {
+        if (objectExpression instanceof HasSymbol hasSymbol && Objects.equals(hasSymbol.symbol(), packedParameter)) {
           nonCompliantRaises.add(pyRaiseStatementTree);
         }
       }

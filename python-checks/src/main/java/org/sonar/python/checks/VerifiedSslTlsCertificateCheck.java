@@ -323,8 +323,7 @@ public class VerifiedSslTlsCertificateCheck extends PythonSubscriptionCheck {
    * Checks whether an expression is obviously a falsy collection (e.g. <code>set()</code> or <code>range(0)</code>).
    */
   private static boolean isFalsyCollection(Expression expr) {
-    if (expr instanceof CallExpression) {
-      CallExpression callExpr = (CallExpression) expr;
+    if (expr instanceof CallExpression callExpr) {
       Optional<String> fqnOpt = Optional.ofNullable(callExpr.calleeSymbol()).map(Symbol::fullyQualifiedName);
       if (fqnOpt.isPresent()) {
         String fqn = fqnOpt.get();
@@ -347,8 +346,7 @@ public class VerifiedSslTlsCertificateCheck extends PythonSubscriptionCheck {
     if ("range".equals(fqn) && callExpr.arguments().size() == 1) {
       // `range(0)` is also falsy
       Argument firstArg = callExpr.arguments().get(0);
-      if (firstArg instanceof RegularArgument) {
-        RegularArgument regArg = (RegularArgument) firstArg;
+      if (firstArg instanceof RegularArgument regArg) {
         Expression firstArgExpr = regArg.expression();
         if (firstArgExpr.is(Tree.Kind.NUMERIC_LITERAL)) {
           NumericLiteral num = (NumericLiteral) firstArgExpr;
@@ -455,8 +453,7 @@ public class VerifiedSslTlsCertificateCheck extends PythonSubscriptionCheck {
    * are dangerous.
    */
   private static Optional<VulnerabilityAndProblematicToken> isVulnerableMethodCall(Expression expr) {
-    if (expr instanceof CallExpression) {
-      CallExpression callExpression = (CallExpression) expr;
+    if (expr instanceof CallExpression callExpression) {
       Symbol calleeSymbol = callExpression.calleeSymbol();
       if (calleeSymbol != null) {
         String fqn = calleeSymbol.fullyQualifiedName();

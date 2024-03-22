@@ -149,11 +149,11 @@ public class InferredTypes {
   }
 
   public static InferredType runtimeType(@Nullable Symbol typeClass) {
-    if (typeClass instanceof ClassSymbol) {
-      return new RuntimeType((ClassSymbol) typeClass);
+    if (typeClass instanceof ClassSymbol classSymbol) {
+      return new RuntimeType(classSymbol);
     }
-    if (typeClass instanceof AmbiguousSymbol) {
-      return union(((AmbiguousSymbol) typeClass).alternatives().stream().map(InferredTypes::runtimeType));
+    if (typeClass instanceof AmbiguousSymbol ambiguousSymbol) {
+      return union(ambiguousSymbol.alternatives().stream().map(InferredTypes::runtimeType));
     }
     return anyType();
   }
@@ -364,13 +364,13 @@ public class InferredTypes {
     if (inferredType instanceof RuntimeType) {
       return Collections.singleton(inferredType.runtimeTypeSymbol());
     }
-    if (inferredType instanceof DeclaredType) {
-      Symbol typeClass = ((DeclaredType) inferredType).getTypeClass();
+    if (inferredType instanceof DeclaredType declaredType) {
+      Symbol typeClass = declaredType.getTypeClass();
       return typeClass.is(CLASS) ? Collections.singleton(((ClassSymbol) typeClass)) : Collections.emptySet();
     }
-    if (inferredType instanceof UnionType) {
+    if (inferredType instanceof UnionType unionType) {
       Set<ClassSymbol> typeClasses = new HashSet<>();
-      ((UnionType) inferredType).types().forEach(type -> typeClasses.addAll(typeSymbols(type)));
+      unionType.types().forEach(type -> typeClasses.addAll(typeSymbols(type)));
       return typeClasses;
     }
     return Collections.emptySet();
@@ -378,8 +378,8 @@ public class InferredTypes {
 
   @CheckForNull
   public static String typeName(InferredType inferredType) {
-    if (inferredType instanceof DeclaredType) {
-      return ((DeclaredType) inferredType).typeName();
+    if (inferredType instanceof DeclaredType declaredType) {
+      return declaredType.typeName();
     }
     Collection<ClassSymbol> typeClasses = typeSymbols(inferredType);
     if (typeClasses.size() == 1) {
@@ -390,8 +390,8 @@ public class InferredTypes {
 
   @CheckForNull
   public static String fullyQualifiedTypeName(InferredType inferredType) {
-    if (inferredType instanceof DeclaredType) {
-      return ((DeclaredType) inferredType).getTypeClass().fullyQualifiedName();
+    if (inferredType instanceof DeclaredType declaredType) {
+      return declaredType.getTypeClass().fullyQualifiedName();
     }
     Collection<ClassSymbol> typeClasses = typeSymbols(inferredType);
     if (typeClasses.size() == 1) {
@@ -410,25 +410,25 @@ public class InferredTypes {
   }
 
   public static boolean isDeclaredTypeWithTypeClass(InferredType type, String typeName) {
-    if (type instanceof DeclaredType) {
-      Symbol typeClass = ((DeclaredType) type).getTypeClass();
+    if (type instanceof DeclaredType declaredType) {
+      Symbol typeClass = declaredType.getTypeClass();
       return typeName.equals(typeClass.fullyQualifiedName());
     }
     return false;
   }
 
   static boolean isTypeClassCompatibleWith(Symbol typeClass, InferredType other) {
-    if (other instanceof RuntimeType) {
-      return InferredTypes.areSymbolsCompatible(typeClass, ((RuntimeType) other).getTypeClass());
+    if (other instanceof RuntimeType runtimeType) {
+      return InferredTypes.areSymbolsCompatible(typeClass, runtimeType.getTypeClass());
     }
-    if (other instanceof DeclaredType) {
-      if (((DeclaredType) other).alternativeTypeSymbols().isEmpty()) {
+    if (other instanceof DeclaredType declaredType) {
+      if (declaredType.alternativeTypeSymbols().isEmpty()) {
         return true;
       }
-      return ((DeclaredType) other).alternativeTypeSymbols().stream().anyMatch(a -> InferredTypes.areSymbolsCompatible(typeClass, a));
+      return (declaredType).alternativeTypeSymbols().stream().anyMatch(a -> InferredTypes.areSymbolsCompatible(typeClass, a));
     }
-    if (other instanceof UnionType) {
-      return ((UnionType) other).types().stream().anyMatch(t -> InferredTypes.isTypeClassCompatibleWith(typeClass, t));
+    if (other instanceof UnionType unionType) {
+      return unionType.types().stream().anyMatch(t -> InferredTypes.isTypeClassCompatibleWith(typeClass, t));
     }
     // other is AnyType
     return true;
@@ -467,8 +467,8 @@ public class InferredTypes {
     if (type instanceof DeclaredType) {
       return true;
     }
-    if (type instanceof UnionType) {
-      return ((UnionType) type).types().stream().anyMatch(InferredTypes::containsDeclaredType);
+    if (type instanceof UnionType unionType) {
+      return unionType.types().stream().anyMatch(InferredTypes::containsDeclaredType);
     }
     return false;
   }

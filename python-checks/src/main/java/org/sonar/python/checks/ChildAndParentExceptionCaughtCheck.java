@@ -148,8 +148,8 @@ public class ChildAndParentExceptionCaughtCheck extends PythonSubscriptionCheck 
   }
 
   private static void addExceptionExpression(Expression exceptionExpression, Map<ClassSymbol, List<Expression>> caughtExceptionsByFQN) {
-    if (exceptionExpression instanceof HasSymbol) {
-      Symbol symbol = ((HasSymbol) exceptionExpression).symbol();
+    if (exceptionExpression instanceof HasSymbol hasSymbol) {
+      Symbol symbol = hasSymbol.symbol();
       if (symbol != null && symbol.kind().equals(Symbol.Kind.CLASS)) {
         ClassSymbol classSymbol = (ClassSymbol) symbol;
         caughtExceptionsByFQN.computeIfAbsent(classSymbol, k -> new ArrayList<>()).add(exceptionExpression);

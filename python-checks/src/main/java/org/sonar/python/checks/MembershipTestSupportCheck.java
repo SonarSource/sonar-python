@@ -102,8 +102,7 @@ public class MembershipTestSupportCheck extends PythonSubscriptionCheck {
       switch (canMemberBeMethod(type, methodName)) {
         case NOT_A_METHOD:
           return false;
-        case METHOD:
-        case UNKNOWN:
+        case METHOD, UNKNOWN:
           return true;
         default:
       }

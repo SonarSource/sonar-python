@@ -155,9 +155,9 @@ public class SpecialMethodReturnTypeCheck extends PythonSubscriptionCheck {
     // We check for the second case and unwrap it:
     if (numReturnedExpressions == 1) {
       Expression firstExpression = returnedExpressions.get(0);
-      if (firstExpression instanceof TupleImpl) {
+      if (firstExpression instanceof TupleImpl tupleImpl) {
         // If a single expression is being returned, and it is a tuple, we directly inspect its elements:
-        returnedExpressions = ((TupleImpl) firstExpression).elements();
+        returnedExpressions = tupleImpl.elements();
         numReturnedExpressions = returnedExpressions.size();
       } else {
         // If there is only one expression being returned, and it is not a tuple expression, then

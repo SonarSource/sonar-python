@@ -89,18 +89,10 @@ public class NewLineChannel extends Channel<Lexer> {
 
   private void checkForBrackets(char ch) {
     switch (ch) {
-      case '[':
-      case '(':
-      case '{':
-        lexerState.brackets++;
-        break;
-      case ']':
-      case ')':
-      case '}':
-        lexerState.brackets--;
-        break;
-      default:
-        break;
+      case '[', '(', '{' -> lexerState.brackets++;
+      case ']', ')', '}' -> lexerState.brackets--;
+      default -> {
+      }
     }
   }
 

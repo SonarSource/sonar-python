@@ -136,8 +136,8 @@ public class SymbolUtils {
       // to support using 'typing' symbols like 'List[str]'
       expression = ((SubscriptionExpression) expression).object();
     }
-    if (expression instanceof HasSymbol) {
-      return ((HasSymbol) expression).symbol();
+    if (expression instanceof HasSymbol hasSymbol) {
+      return hasSymbol.symbol();
     }
     return null;
   }

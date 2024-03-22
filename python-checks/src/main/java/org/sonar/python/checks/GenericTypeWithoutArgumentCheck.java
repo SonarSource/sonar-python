@@ -56,8 +56,8 @@ public class GenericTypeWithoutArgumentCheck extends PythonSubscriptionCheck {
   }
 
   private static void checkForGenericTypeWithoutArgument(SubscriptionContext subscriptionContext, Expression expression) {
-    if (expression instanceof SubscriptionExpression) {
-      checkNestedTypes(subscriptionContext, (SubscriptionExpression) expression);
+    if (expression instanceof SubscriptionExpression subscriptionExpression) {
+      checkNestedTypes(subscriptionContext, subscriptionExpression);
       return;
     }
 
@@ -74,9 +74,8 @@ public class GenericTypeWithoutArgumentCheck extends PythonSubscriptionCheck {
   private static boolean typeSupportsGenericsOrIsACollection(Expression expression) {
     if (expression.is(Tree.Kind.NAME)) {
       NameImpl name = (NameImpl) expression;
-      if (name.symbol() instanceof ClassSymbolImpl) {
-        ClassSymbolImpl maybeSymbol = (ClassSymbolImpl) name.symbol();
-        return Optional.ofNullable(maybeSymbol)
+      if (name.symbol() instanceof ClassSymbolImpl maybeSymbol) {
+        return Optional.of(maybeSymbol)
           .map(ClassSymbolImpl::supportsGenerics)
           .orElse(false);
       } else {
@@ -87,8 +86,7 @@ public class GenericTypeWithoutArgumentCheck extends PythonSubscriptionCheck {
   }
 
   private static boolean qualifiedExpressionIsACollection(Expression expression) {
-    if (expression instanceof QualifiedExpression) {
-      QualifiedExpression qualifiedExpression = (QualifiedExpression) expression;
+    if (expression instanceof QualifiedExpression qualifiedExpression) {
       return isACollection(qualifiedExpression.symbol());
     }
     return false;
