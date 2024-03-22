@@ -19,10 +19,6 @@
  */
 package org.sonar.python.cfg.fixpoint;
 
-import static org.sonar.plugins.python.api.tree.Tree.Kind.ASSIGNMENT_STMT;
-import static org.sonar.plugins.python.api.tree.Tree.Kind.FUNCDEF;
-import static org.sonar.plugins.python.api.tree.Tree.Kind.TRY_STMT;
-
 import java.util.ArrayDeque;
 import java.util.Collection;
 import java.util.Collections;
@@ -34,9 +30,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Supplier;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
 import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.cfg.CfgBlock;
 import org.sonar.plugins.python.api.cfg.ControlFlowGraph;
@@ -50,6 +44,10 @@ import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.tree.TreeUtils;
+
+import static org.sonar.plugins.python.api.tree.Tree.Kind.ASSIGNMENT_STMT;
+import static org.sonar.plugins.python.api.tree.Tree.Kind.FUNCDEF;
+import static org.sonar.plugins.python.api.tree.Tree.Kind.TRY_STMT;
 
 /**
  * https://en.wikipedia.org/wiki/Reaching_definition

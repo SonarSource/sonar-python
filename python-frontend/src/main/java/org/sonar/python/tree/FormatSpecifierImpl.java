@@ -21,8 +21,6 @@ package org.sonar.python.tree;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-
 import org.sonar.plugins.python.api.tree.FormatSpecifier;
 import org.sonar.plugins.python.api.tree.FormattedExpression;
 import org.sonar.plugins.python.api.tree.Token;

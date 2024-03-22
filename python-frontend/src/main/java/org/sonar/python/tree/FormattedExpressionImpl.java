@@ -21,10 +21,8 @@ package org.sonar.python.tree;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.annotation.Nullable;
-
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FormatSpecifier;
 import org.sonar.plugins.python.api.tree.FormattedExpression;

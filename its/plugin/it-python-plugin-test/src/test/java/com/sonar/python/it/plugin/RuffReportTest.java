@@ -24,7 +24,6 @@ import com.sonar.orchestrator.build.SonarScanner;
 import java.io.File;
 import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
 import org.sonarqube.ws.Common;
