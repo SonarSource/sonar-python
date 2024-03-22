@@ -20,7 +20,6 @@
 package org.sonar.python.tree;
 
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.sonar.plugins.python.api.tree.ExpressionList;
 import org.sonar.plugins.python.api.tree.ReprExpression;

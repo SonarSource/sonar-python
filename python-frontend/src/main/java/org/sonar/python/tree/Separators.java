@@ -22,7 +22,6 @@ package org.sonar.python.tree;
 import com.sonar.sslr.api.AstNode;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;

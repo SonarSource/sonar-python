@@ -21,7 +21,6 @@ package org.sonar.python.tree;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
@@ -29,8 +28,8 @@ import org.sonar.plugins.python.api.tree.ExceptClause;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.StatementList;
 import org.sonar.plugins.python.api.tree.Token;
-import org.sonar.plugins.python.api.tree.TreeVisitor;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.TreeVisitor;
 
 public class ExceptClauseImpl extends PyTree implements ExceptClause {
   private final Token exceptKeyword;

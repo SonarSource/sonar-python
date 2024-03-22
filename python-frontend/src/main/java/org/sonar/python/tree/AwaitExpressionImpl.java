@@ -21,7 +21,6 @@ package org.sonar.python.tree;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.sonar.plugins.python.api.tree.AwaitExpression;
 import org.sonar.plugins.python.api.tree.Expression;
