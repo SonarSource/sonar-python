@@ -21,7 +21,6 @@ package org.sonar.python.tree;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.sonar.plugins.python.api.tree.AwaitExpression;
 import org.sonar.plugins.python.api.tree.Expression;
@@ -56,7 +55,7 @@ public class AwaitExpressionImpl extends PyTree implements AwaitExpression {
 
   @Override
   public List<Tree> computeChildren() {
-    return Stream.of(awaitToken, expression).filter(Objects::nonNull).collect(Collectors.toList());
+    return Stream.of(awaitToken, expression).filter(Objects::nonNull).toList();
   }
 
   @Override

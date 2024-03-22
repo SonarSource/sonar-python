@@ -79,7 +79,7 @@ public class StringElementImpl extends PyTree implements StringElement {
     children.add(fstringEnd);
     return children.stream()
       .filter(Objects::nonNull)
-      .collect(Collectors.toList());
+      .toList();
   }
 
   @Override
@@ -119,7 +119,7 @@ public class StringElementImpl extends PyTree implements StringElement {
 
   @Override
   public List<FormattedExpression> formattedExpressions() {
-    return fStringMiddles.stream().filter(FormattedExpression.class::isInstance).map(FormattedExpression.class::cast).collect(Collectors.toList());
+    return fStringMiddles.stream().filter(FormattedExpression.class::isInstance).map(FormattedExpression.class::cast).toList();
   }
 
   private static boolean isTripleQuote(String trimmed) {

@@ -205,7 +205,7 @@ public class ReachingDefinitionsAnalysis {
   private void updateStateForAssignment(AssignmentStatement element, Map<Symbol, Set<Expression>> programState) {
     List<Expression> lhsExpressions = element.lhsExpressions().stream()
         .flatMap(exprList -> exprList.expressions().stream())
-        .collect(Collectors.toList());
+        .toList();
     performUpdate(programState, lhsExpressions, element::assignedValue);
   }
 

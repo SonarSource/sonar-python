@@ -146,7 +146,7 @@ public class SymbolUtils {
     return assignmentStatement.lhsExpressions().stream()
       .flatMap(exprList -> exprList.expressions().stream())
       .flatMap(TreeUtils::flattenTuples)
-      .collect(Collectors.toList());
+      .toList();
   }
 
   static List<Name> boundNamesFromExpression(@CheckForNull Tree tree) {
@@ -293,7 +293,7 @@ public class SymbolUtils {
         .stream()
         .filter(alternative -> alternative.is(Symbol.Kind.FUNCTION))
         .map(FunctionSymbol.class::cast)
-        .collect(Collectors.toList());
+        .toList();
 
       if (functionSymbols.size() != ambiguousSymbol.alternatives().size()) {
         return List.of();

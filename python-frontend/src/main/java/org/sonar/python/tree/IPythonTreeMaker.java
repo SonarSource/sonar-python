@@ -91,7 +91,7 @@ public class IPythonTreeMaker extends PythonTreeMaker {
       .map(AstNode::getTokens)
       .flatMap(Collection::stream)
       .map(IPythonTreeMaker::toPyToken)
-      .collect(Collectors.toList());
+      .toList();
     return new CellMagicStatementImpl(tokens);
   }
 
@@ -138,7 +138,7 @@ public class IPythonTreeMaker extends PythonTreeMaker {
       .map(AstNode::getTokens)
       .flatMap(Collection::stream)
       .map(IPythonTreeMaker::toPyToken)
-      .collect(Collectors.toList());
+      .toList();
     return new LineMagicImpl(percent, name, tokens);
   }
 

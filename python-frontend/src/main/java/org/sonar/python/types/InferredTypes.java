@@ -302,7 +302,7 @@ public class InferredTypes {
       .map(symbol -> {
         List<DeclaredType> args = subscription.subscripts().expressions().stream()
           .map(exp -> declaredTypeFromTypeAnnotation(exp, builtinSymbols))
-          .collect(Collectors.toList());
+          .toList();
         if (args.stream().anyMatch(Objects::isNull)) {
           // null args indicate something was wrong in the resolution of some of the alternatives
           // returning null here will ensure the resulting type will be AnyType, which will avoid potential FPs

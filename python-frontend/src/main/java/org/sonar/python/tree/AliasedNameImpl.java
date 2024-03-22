@@ -21,7 +21,6 @@ package org.sonar.python.tree;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
 import org.sonar.plugins.python.api.tree.AliasedName;
@@ -78,6 +77,6 @@ public class AliasedNameImpl extends PyTree implements AliasedName {
 
   @Override
   public List<Tree> computeChildren() {
-    return Stream.of(dottedName, asKeyword, alias).filter(Objects::nonNull).collect(Collectors.toList());
+    return Stream.of(dottedName, asKeyword, alias).filter(Objects::nonNull).toList();
   }
 }

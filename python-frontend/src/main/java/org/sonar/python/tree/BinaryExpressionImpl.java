@@ -111,7 +111,7 @@ public class BinaryExpressionImpl extends PyTree implements BinaryExpression, Ha
 
   @Override
   public List<Tree> computeChildren() {
-    return Stream.of(leftOperand, operator, rightOperand).filter(Objects::nonNull).collect(Collectors.toList());
+    return Stream.of(leftOperand, operator, rightOperand).filter(Objects::nonNull).toList();
   }
 
   @Override

@@ -121,7 +121,7 @@ public class WithStatementImpl extends PyTree implements WithStatement {
       i++;
     }
     children.addAll(Arrays.asList(closeParens, colon, newLine, indent, statements, dedent));
-    return children.stream().filter(Objects::nonNull).collect(Collectors.toList());
+    return children.stream().filter(Objects::nonNull).toList();
   }
 
   public static class WithItemImpl extends PyTree implements WithItem {
@@ -165,7 +165,7 @@ public class WithStatementImpl extends PyTree implements WithStatement {
 
     @Override
     public List<Tree> computeChildren() {
-      return Stream.of(test, as, expr).filter(Objects::nonNull).collect(Collectors.toList());
+      return Stream.of(test, as, expr).filter(Objects::nonNull).toList();
     }
   }
 }

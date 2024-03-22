@@ -86,7 +86,7 @@ public class SliceItemImpl extends PyTree implements SliceItem {
 
   @Override
   public List<Tree> computeChildren() {
-    return Stream.of(lowerBound, boundSeparator, upperBound, strideSeparator, stride).filter(Objects::nonNull).collect(Collectors.toList());
+    return Stream.of(lowerBound, boundSeparator, upperBound, strideSeparator, stride).filter(Objects::nonNull).toList();
   }
 
   @Override

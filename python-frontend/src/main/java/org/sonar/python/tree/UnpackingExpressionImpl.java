@@ -56,7 +56,7 @@ public class UnpackingExpressionImpl extends PyTree implements UnpackingExpressi
 
   @Override
   public List<Tree> computeChildren() {
-    return Stream.of(starToken, expression).filter(Objects::nonNull).collect(Collectors.toList());
+    return Stream.of(starToken, expression).filter(Objects::nonNull).toList();
   }
 
   @Override
