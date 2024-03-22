@@ -147,21 +147,19 @@ public class IdentityComparisonWithNewObjectCheck extends PythonSubscriptionChec
    */
   private static boolean instantiatesFreshObject(Expression expr) {
     switch (expr.getKind()) {
-      case DICTIONARY_LITERAL:
-      case DICT_COMPREHENSION:
-      case LIST_LITERAL:
-      case LIST_COMPREHENSION:
-      case SET_LITERAL:
-      case SET_COMPREHENSION:
+      case DICTIONARY_LITERAL, DICT_COMPREHENSION, LIST_LITERAL, LIST_COMPREHENSION, SET_LITERAL, SET_COMPREHENSION -> {
         return true;
-      case CALL_EXPR:
+      }
+      case CALL_EXPR -> {
         Symbol calleeSymbol = ((CallExpression) expr).calleeSymbol();
         if (calleeSymbol != null) {
           return FUNCTIONS_RETURNING_UNIQUE_REF.contains(calleeSymbol.fullyQualifiedName());
         }
         return false;
-      default:
+      }
+      default -> {
         return false;
+      }
     }
   }
 

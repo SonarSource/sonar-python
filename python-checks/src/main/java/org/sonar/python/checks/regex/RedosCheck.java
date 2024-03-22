@@ -120,16 +120,11 @@ public class RedosCheck extends AbstractRegexCheck {
 
     @Override
     protected Optional<String> message(RedosFinder.BacktrackingType backtrackingType, boolean regexContainsBackReference) {
-      switch (backtrackingType) {
-        case ALWAYS_EXPONENTIAL:
-        case QUADRATIC_WHEN_OPTIMIZED:
-        case LINEAR_WHEN_OPTIMIZED:
-          return Optional.of(String.format(MESSAGE, EXP));
-        case ALWAYS_QUADRATIC:
-          return Optional.of(String.format(MESSAGE, POLY));
-        default:
-          return Optional.empty();
-      }
+      return switch (backtrackingType) {
+        case ALWAYS_EXPONENTIAL, QUADRATIC_WHEN_OPTIMIZED, LINEAR_WHEN_OPTIMIZED -> Optional.of(String.format(MESSAGE, EXP));
+        case ALWAYS_QUADRATIC -> Optional.of(String.format(MESSAGE, POLY));
+        default -> Optional.empty();
+      };
     }
   }
 }

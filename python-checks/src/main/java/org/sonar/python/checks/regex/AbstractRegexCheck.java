@@ -197,36 +197,17 @@ public abstract class AbstractRegexCheck extends PythonSubscriptionCheck {
       return Optional.empty();
     }
 
-    Integer result;
-    switch (symbolFqn) {
-      case "re.IGNORECASE":
-      case "re.I":
-        result = Pattern.CASE_INSENSITIVE;
-        break;
-      case "re.MULTILINE":
-      case "re.M":
-        result = Pattern.MULTILINE;
-        break;
-      case "re.DOTALL":
-      case "re.S":
-        result = Pattern.DOTALL;
-        break;
-      case "re.VERBOSE":
-      case "re.X":
-        result = Pattern.COMMENTS;
-        break;
-      case "re.UNICODE":
-      case "re.U":
-        result = Pattern.UNICODE_CHARACTER_CLASS;
-        break;
-      case "re.ASCII":
-      case "re.A":
+    Integer result = switch (symbolFqn) {
+      case "re.IGNORECASE", "re.I" -> Pattern.CASE_INSENSITIVE;
+      case "re.MULTILINE", "re.M" -> Pattern.MULTILINE;
+      case "re.DOTALL", "re.S" -> Pattern.DOTALL;
+      case "re.VERBOSE", "re.X" -> Pattern.COMMENTS;
+      case "re.UNICODE", "re.U" -> Pattern.UNICODE_CHARACTER_CLASS;
+      case "re.ASCII", "re.A" ->
         // We misuse Pattern.LITERAL to represent re.ASCII. It will be removed before being provided to the parser.
-        result = Pattern.LITERAL;
-        break;
-      default:
-        result = null;
-    }
+        Pattern.LITERAL;
+      default -> null;
+    };
     return Optional.ofNullable(result);
   }
 
