@@ -21,7 +21,6 @@ package org.sonar.python.checks;
 
 import java.util.List;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
@@ -93,7 +92,7 @@ public class TrailingCommentCheck extends PythonSubscriptionCheck {
 
   private List<String> getLines(SubscriptionContext ctx) {
     if (lines == null) {
-      lines = ctx.pythonFile().content().lines().collect(Collectors.toList());
+      lines = ctx.pythonFile().content().lines().toList();
     }
     return lines;
   }

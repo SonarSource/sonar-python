@@ -76,7 +76,7 @@ public class ChildAndParentExceptionCaughtCheck extends PythonSubscriptionCheck 
       var caughtParentExceptions = caughtExceptionsBySymbol.entrySet()
         .stream()
         .filter(entry -> entry.getKey() != currentSymbol && currentSymbol.isOrExtends(entry.getKey()))
-        .collect(Collectors.toList());
+        .toList();
 
       if (!caughtParentExceptions.isEmpty()) {
         var issue = ctx.addIssue(currentException, "Remove this redundant Exception class; it derives from another which is already caught.");
@@ -104,7 +104,7 @@ public class ChildAndParentExceptionCaughtCheck extends PythonSubscriptionCheck 
         .stream()
         .map(ChildAndParentExceptionCaughtCheck::collectNames)
         .flatMap(Collection::stream)
-        .collect(Collectors.toList());
+        .toList();
     }
     throw new IllegalArgumentException("Unsupported kind of tree element: " + expression.getKind().name());
   }
@@ -132,7 +132,7 @@ public class ChildAndParentExceptionCaughtCheck extends PythonSubscriptionCheck 
         .map(ExceptClause.class::cast)
         .map(ExceptClause::exception)
         .map(exceptions -> {
-          List<String> names = collectNamesFromTuple(exceptions);
+          List<String> names = new ArrayList<>(collectNamesFromTuple(exceptions));
           names.remove(currentExceptionName);
 
           var text = names.size() == 1 ? names.get(0) : names.stream().collect(Collectors.joining(", ", "(", ")"));

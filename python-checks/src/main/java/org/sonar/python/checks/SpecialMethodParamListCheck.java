@@ -146,7 +146,7 @@ public class SpecialMethodParamListCheck extends PythonSubscriptionCheck {
 
       List<AnyParameter> nonOptionalParameters = parameters.stream()
         .filter(SpecialMethodParamListCheck::isRequiredParameter)
-        .collect(Collectors.toList());
+        .toList();
       int numRequiredParams = nonOptionalParameters.size();
       int numAllParams = parameters.size();
 

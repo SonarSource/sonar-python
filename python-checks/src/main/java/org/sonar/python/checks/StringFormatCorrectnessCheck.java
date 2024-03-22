@@ -25,7 +25,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 import java.util.Set;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.SubscriptionContext;
@@ -116,7 +115,7 @@ public class StringFormatCorrectnessCheck extends AbstractStringFormatCheck {
 
     List<StringElement> fStrings = literal.stringElements().stream()
       .filter(stringElement -> stringElement.prefix().toLowerCase(Locale.ENGLISH).contains("f"))
-      .collect(Collectors.toList());
+      .toList();
 
     if (!fStrings.isEmpty() && fStrings.stream().allMatch(str -> str.formattedExpressions().isEmpty())) {
       ctx.addIssue(literal, "Add replacement fields or use a normal string instead of an f-string.");
@@ -131,7 +130,7 @@ public class StringFormatCorrectnessCheck extends AbstractStringFormatCheck {
     List<RegularArgument> arguments = callExpression.arguments().stream()
       .map(RegularArgument.class::cast)
       .filter(argument -> argument.keywordArgument() == null)
-      .collect(Collectors.toList());
+      .toList();
 
     if (arguments.isEmpty()) {
       // Out of scope
@@ -170,7 +169,7 @@ public class StringFormatCorrectnessCheck extends AbstractStringFormatCheck {
     } else {
       List<Expression> expressions = arguments.subList(1, arguments.size()).stream()
         .map(RegularArgument::expression)
-        .collect(Collectors.toList());
+        .toList();
 
       checkPrintfExpressionList(ctx, format, argIssueFrom, argIssueTo, expressions);
     }
@@ -211,7 +210,7 @@ public class StringFormatCorrectnessCheck extends AbstractStringFormatCheck {
     List<String> allNames = format.replacementFields().stream()
       .filter(StringFormat.ReplacementField::isNamed)
       .map(StringFormat.ReplacementField::name)
-      .collect(Collectors.toList());
+      .toList();
     dict.elements().stream()
       .map(KeyValuePair.class::cast)
       .map(kv -> (StringLiteral) kv.key())
@@ -252,7 +251,7 @@ public class StringFormatCorrectnessCheck extends AbstractStringFormatCheck {
     StringFormat format = formatOptional.get();
     List<RegularArgument> arguments = callExpression.arguments().stream()
       .map(RegularArgument.class::cast)
-      .collect(Collectors.toList());
+      .toList();
 
     int firstKwIdx = IntStream.range(0, arguments.size())
       .filter(idx -> arguments.get(idx).keywordArgument() != null)

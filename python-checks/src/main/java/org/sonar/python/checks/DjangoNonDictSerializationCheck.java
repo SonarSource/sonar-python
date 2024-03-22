@@ -21,7 +21,6 @@ package org.sonar.python.checks;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 import javax.annotation.CheckForNull;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
@@ -83,7 +82,7 @@ public class DjangoNonDictSerializationCheck extends PythonSubscriptionCheck {
         .map(Usage::tree)
         .map(usage -> TreeUtils.firstAncestorOfKind(usage, Tree.Kind.ASSIGNMENT_STMT, Tree.Kind.ANNOTATED_ASSIGNMENT, Tree.Kind.ASSIGNMENT_EXPRESSION))
         .filter(Objects::nonNull)
-        .collect(Collectors.toList());
+        .toList();
       if (assignmentStmts.size() == 1) {
         Tree assignment = assignmentStmts.get(0);
         Expression assignedValue = getAssignedValue(assignment);

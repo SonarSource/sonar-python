@@ -23,7 +23,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.stream.Collectors;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
@@ -98,7 +97,7 @@ public class UnreachableExceptCheck extends PythonSubscriptionCheck {
   }
 
   private static List<Expression> retrieveAlreadyHandledExceptionsByClass(ClassSymbol classSymbol, Map<String, Expression> caughtTypes) {
-    return caughtTypes.keySet().stream().filter(classSymbol::isOrExtends).map(caughtTypes::get).collect(Collectors.toList());
+    return caughtTypes.keySet().stream().filter(classSymbol::isOrExtends).map(caughtTypes::get).toList();
   }
 
   private static List<Expression> retrieveAlreadyHandledExceptionsByFullyQualifiedName(Symbol symbol, Map<String, Expression> caughtTypes) {
@@ -106,7 +105,7 @@ public class UnreachableExceptCheck extends PythonSubscriptionCheck {
       .filter(caughtTypes::containsKey)
       .map(caughtTypes::get)
       .stream()
-      .collect(Collectors.toList());
+      .toList();
   }
 
   private static Optional<String> getSymbolName(Symbol symbol) {

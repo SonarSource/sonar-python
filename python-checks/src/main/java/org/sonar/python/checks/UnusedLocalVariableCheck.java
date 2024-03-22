@@ -25,7 +25,6 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
@@ -109,7 +108,7 @@ public class UnusedLocalVariableCheck extends PythonSubscriptionCheck {
           .filter(usage -> !isTupleDeclaration(usage))
           .filter(usage -> usage.kind() != Usage.Kind.FUNC_DECLARATION)
           .filter(usage -> usage.kind() != Usage.Kind.CLASS_DECLARATION)
-          .collect(Collectors.toList());
+          .toList();
 
         if (!usages.isEmpty()) {
           var firstUsage = usages.get(0);

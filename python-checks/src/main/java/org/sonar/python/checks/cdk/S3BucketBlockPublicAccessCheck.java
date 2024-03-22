@@ -22,7 +22,6 @@ package org.sonar.python.checks.cdk;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.BiConsumer;
-import java.util.stream.Collectors;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.Symbol;
@@ -73,7 +72,7 @@ public class S3BucketBlockPublicAccessCheck extends AbstractS3BucketCheck {
       .map(args -> getArgument(ctx, bpaConstructor, args))
       .filter(Optional::isPresent)
       .map(Optional::get)
-      .collect(Collectors.toList())
+      .toList()
       .forEach(flow -> flow.addIssueIf(isFalse(), MESSAGE));
   }
 

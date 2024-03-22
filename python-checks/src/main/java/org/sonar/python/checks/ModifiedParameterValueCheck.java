@@ -254,7 +254,7 @@ public class ModifiedParameterValueCheck extends PythonSubscriptionCheck {
     return paramSymbol.usages().stream()
       .map(Usage::tree)
       .filter(tree -> isUsedInLhsOfAssignment(tree, expression -> isQualifier(tree, expression)))
-      .collect(Collectors.toList());
+      .toList();
   }
 
   private static boolean isUsedInLhsOfCompoundAssignment(Tree tree) {

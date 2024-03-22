@@ -342,6 +342,6 @@ public class HardCodedCredentialsCheck extends PythonSubscriptionCheck {
     return Stream.of(credentialWords.split(","))
       .map(String::trim)
       .map(word -> Pattern.compile(word + suffix, Pattern.CASE_INSENSITIVE))
-      .collect(Collectors.toList());
+      .toList();
   }
 }

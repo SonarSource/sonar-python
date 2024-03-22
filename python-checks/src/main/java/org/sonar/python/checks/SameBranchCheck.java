@@ -21,8 +21,8 @@ package org.sonar.python.checks;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 import org.sonar.check.Rule;
+import org.sonar.plugins.python.api.IssueLocation;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.ElseClause;
@@ -31,7 +31,6 @@ import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.plugins.python.api.tree.StatementList;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.plugins.python.api.IssueLocation;
 import org.sonar.python.checks.utils.CheckUtils;
 import org.sonar.python.tree.TreeUtils;
 
@@ -117,7 +116,7 @@ public class SameBranchCheck extends PythonSubscriptionCheck {
   private List<StatementList> getIfBranches(IfStatement ifStmt) {
     List<StatementList> branches = new ArrayList<>();
     branches.add(ifStmt.body());
-    branches.addAll(ifStmt.elifBranches().stream().map(IfStatement::body).collect(Collectors.toList()));
+    branches.addAll(ifStmt.elifBranches().stream().map(IfStatement::body).toList());
     ElseClause elseClause = ifStmt.elseBranch();
     if (elseClause != null) {
       branches.add(elseClause.body());

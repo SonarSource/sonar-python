@@ -21,20 +21,19 @@ package org.sonar.python.checks;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
+import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
+import org.sonar.plugins.python.api.quickfix.PythonTextEdit;
 import org.sonar.plugins.python.api.tree.Decorator;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.ParameterList;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
-import org.sonar.plugins.python.api.quickfix.PythonTextEdit;
 import org.sonar.python.quickfix.TextEditUtils;
 import org.sonar.python.tree.TreeUtils;
 
@@ -55,7 +54,7 @@ public class ClassMethodFirstArgumentNameCheck extends PythonSubscriptionCheck {
     if (classParameterNamesList == null) {
       classParameterNamesList = Stream.of(classParameterNames.split(","))
         .map(String::trim)
-        .collect(Collectors.toList());
+        .toList();
     }
     return classParameterNamesList;
   }

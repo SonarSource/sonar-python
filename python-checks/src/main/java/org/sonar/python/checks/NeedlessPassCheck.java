@@ -20,7 +20,6 @@
 package org.sonar.python.checks;
 
 import java.util.List;
-import java.util.stream.Collectors;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
@@ -47,7 +46,7 @@ public class NeedlessPassCheck extends PythonSubscriptionCheck {
     context.registerSyntaxNodeConsumer(STATEMENT_LIST, ctx -> {
       List<Statement> statements = ((StatementList) ctx.syntaxNode()).statements().stream()
         .filter(NeedlessPassCheck::isNotStringLiteralExpressionStatement)
-        .collect(Collectors.toList());
+        .toList();
       if (statements.size() <= 1) {
         return;
       }

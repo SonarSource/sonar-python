@@ -20,7 +20,6 @@
 package org.sonar.python.checks;
 
 import java.util.List;
-import java.util.stream.Collectors;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
@@ -129,7 +128,7 @@ public class MembershipTestSupportCheck extends PythonSubscriptionCheck {
     // This handles cases like __contains__ = other() or __contains__ = None.
     // Although it is unclear, whether such edge cases really appear in the wild
     if (symbol.is(Symbol.Kind.OTHER)) {
-      var bindingUsages = symbol.usages().stream().filter(Usage::isBindingUsage).limit(2).collect(Collectors.toUnmodifiableList());
+      var bindingUsages = symbol.usages().stream().filter(Usage::isBindingUsage).limit(2).toList();
       if (bindingUsages.size() == 1) {
         var bindingUsage = bindingUsages.get(0);
         var assignment = TreeUtils.firstAncestorOfKind(bindingUsage.tree(), Tree.Kind.ASSIGNMENT_STMT);

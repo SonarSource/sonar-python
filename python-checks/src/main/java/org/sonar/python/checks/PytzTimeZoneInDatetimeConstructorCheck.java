@@ -22,7 +22,6 @@ package org.sonar.python.checks;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
@@ -76,7 +75,7 @@ public class PytzTimeZoneInDatetimeConstructorCheck extends PythonSubscriptionCh
         .map(CallExpression.class::cast)
         .filter(call -> Optional.ofNullable(call.calleeSymbol()).map(symbol ->"pytz.timezone".equals(symbol.fullyQualifiedName())).orElse(false))
         .sorted(Comparator.comparingInt(call -> call.firstToken().line()))
-        .collect(Collectors.toList());
+        .toList();
 
       if (allSecondaryLocations.isEmpty()) {
         return;

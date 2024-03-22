@@ -26,7 +26,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
@@ -131,7 +130,7 @@ public class OverwrittenCollectionEntryCheck extends PythonSubscriptionCheck {
     return names.stream()
       .map(HasSymbol::symbol)
       .filter(Objects::nonNull)
-      .collect(Collectors.toList());
+      .toList();
   }
 
   private static List<Name> findNames(Tree tree) {
@@ -142,7 +141,7 @@ public class OverwrittenCollectionEntryCheck extends PythonSubscriptionCheck {
         .stream()
         .map(OverwrittenCollectionEntryCheck::findNames)
         .flatMap(Collection::stream)
-        .collect(Collectors.toList());
+        .toList();
     }
   }
 
@@ -173,7 +172,7 @@ public class OverwrittenCollectionEntryCheck extends PythonSubscriptionCheck {
       SliceItem sliceItem = (SliceItem) tree;
       List<String> keyParts = Stream.of(sliceItem.lowerBound(), sliceItem.upperBound(), sliceItem.stride())
         .map(e -> e == null ? "" : key(e))
-        .collect(Collectors.toList());
+        .toList();
       return keyParts.contains(null) ? null : String.join(":", keyParts);
     } else if (tree.is(Kind.UNARY_MINUS)) {
       String nested = key(((UnaryExpression) tree).expression());
