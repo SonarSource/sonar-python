@@ -14,7 +14,7 @@ import tensorflow as tf
 
 class MyModel(tf.keras.Model):
     def __init__(self):
-        super(MyModel, self).__init__(input_shape=...)  # Nonpompliant: this parameter will be ignored
+        super(MyModel, self).__init__(input_shape=...)  # Noncompliant: this parameter will be ignored
 </pre>
 <h4>Compliant solution</h4>
 <pre data-diff-id="1" data-diff-type="compliant">
