@@ -209,7 +209,7 @@ public class TypeInference extends BaseTreeVisitor {
     }
     List<Expression> lhsExpressions = assignmentStatement.lhsExpressions().stream()
       .flatMap(exprList -> exprList.expressions().stream())
-      .collect(Collectors.toList());
+      .toList();
     if (lhsExpressions.size() != 1) {
       return;
     }

@@ -157,7 +157,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
       Set<SymbolToUpdate> symbolsToUpdate = new HashSet<>();
       for (Symbol symbol : scope.symbols()) {
         if (symbol.kind() == Symbol.Kind.OTHER) {
-          List<Usage> bindingUsages = symbol.usages().stream().filter(Usage::isBindingUsage).collect(Collectors.toList());
+          List<Usage> bindingUsages = symbol.usages().stream().filter(Usage::isBindingUsage).toList();
           if (bindingUsages.size() > 1 &&
             bindingUsages.stream().anyMatch(usage -> usage.kind() == Usage.Kind.FUNC_DECLARATION || usage.kind() == Usage.Kind.CLASS_DECLARATION)) {
 

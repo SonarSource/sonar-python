@@ -96,7 +96,7 @@ public class TypeAliasStatementImpl extends SimpleStatement implements TypeAlias
       .add(equalToken()).add(expression());
 
     separator.elements().forEach(builder::add);
-    return builder.build().filter(Objects::nonNull).collect(Collectors.toList());
+    return builder.build().filter(Objects::nonNull).toList();
   }
 
   @Override

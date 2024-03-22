@@ -69,7 +69,7 @@ public class ListLiteralImpl extends PyTree implements ListLiteral {
 
   @Override
   public List<Tree> computeChildren() {
-    return Stream.of(leftBracket, elements, rightBracket).collect(Collectors.toList());
+    return Stream.of(leftBracket, elements, rightBracket).toList();
   }
 
   @Override

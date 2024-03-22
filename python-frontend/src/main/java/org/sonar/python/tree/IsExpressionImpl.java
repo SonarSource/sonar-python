@@ -52,6 +52,6 @@ public class IsExpressionImpl extends BinaryExpressionImpl implements IsExpressi
 
   @Override
   public List<Tree> computeChildren() {
-    return Stream.of(leftOperand(), operator(), notToken, rightOperand()).filter(Objects::nonNull).collect(Collectors.toList());
+    return Stream.of(leftOperand(), operator(), notToken, rightOperand()).filter(Objects::nonNull).toList();
   }
 }

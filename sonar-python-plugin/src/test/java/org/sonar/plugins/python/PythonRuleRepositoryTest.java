@@ -95,7 +95,7 @@ class PythonRuleRepositoryTest {
       .map(p -> p.getFileName().toString())
       .filter(f -> f.endsWith("Check.java"))
       .filter(f -> !f.startsWith("Abstract"))
-      .collect(Collectors.toList());
+      .toList();
   }
 
   @Test

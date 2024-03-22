@@ -77,6 +77,6 @@ public class RegularArgumentImpl extends PyTree implements RegularArgument {
 
   @Override
   public List<Tree> computeChildren() {
-    return Stream.of(keywordArgument, equalToken, expression).filter(Objects::nonNull).collect(Collectors.toList());
+    return Stream.of(keywordArgument, equalToken, expression).filter(Objects::nonNull).toList();
   }
 }

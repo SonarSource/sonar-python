@@ -98,7 +98,7 @@ public class ControlFlowGraph {
 
     Function<Collection<CfgBlock>, List<CfgBlock>> sortedByDisplayString = list -> list.stream()
       .sorted(Comparator.comparing(Object::toString))
-      .collect(Collectors.toList());
+      .toList();
 
     List<CfgBlock> sortedBlocks = sortedByDisplayString.apply(blocks);
     int graphNodeId = 0;

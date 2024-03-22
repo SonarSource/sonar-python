@@ -68,6 +68,6 @@ public class KeyValuePatternImpl extends PyTree implements KeyValuePattern {
 
   @Override
   List<Tree> computeChildren() {
-    return Stream.of(key, colon, value).collect(Collectors.toList());
+    return Stream.of(key, colon, value).toList();
   }
 }

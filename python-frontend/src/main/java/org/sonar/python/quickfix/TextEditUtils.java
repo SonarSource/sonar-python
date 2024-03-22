@@ -97,7 +97,7 @@ public class TextEditUtils {
       .map(statement -> shiftLeft(statement, offset))
       .flatMap(List::stream)
       .distinct()
-      .collect(Collectors.toList());
+      .toList();
   }
 
   /**
@@ -110,7 +110,7 @@ public class TextEditUtils {
       .map(Token::line)
       .distinct()
       .map(line -> removeRange(line, 0, line, offset))
-      .collect(Collectors.toList());
+      .toList();
   }
 
   public static PythonTextEdit removeRange(int startLine, int startColumn, int endLine, int endColumn) {

@@ -119,7 +119,7 @@ public class TreeUtils {
   public static List<Token> nonWhitespaceTokens(Tree tree) {
     return TreeUtils.tokens(tree).stream()
       .filter(t -> !WHITESPACE_TOKEN_TYPES.contains(t.type()))
-      .collect(Collectors.toList());
+      .toList();
   }
 
   public static boolean hasDescendant(Tree tree, Predicate<Tree> predicate) {
@@ -164,7 +164,7 @@ public class TreeUtils {
     return getParentClasses(TreeUtils.getClassSymbolFromDef(classDef), new HashSet<>()).stream()
       .map(Symbol::fullyQualifiedName)
       .filter(Objects::nonNull)
-      .collect(Collectors.toList());
+      .toList();
   }
 
   private static List<Symbol> getParentClasses(@Nullable ClassSymbol classSymbol, Set<ClassSymbol> visitedSymbols) {

@@ -46,7 +46,7 @@ public class ReprExpressionImpl extends PyTree implements ReprExpression {
 
   @Override
   public List<Tree> computeChildren() {
-    return Stream.of(openingBacktick, expressionListTree, closingBacktick).collect(Collectors.toList());
+    return Stream.of(openingBacktick, expressionListTree, closingBacktick).toList();
   }
 
   @Override

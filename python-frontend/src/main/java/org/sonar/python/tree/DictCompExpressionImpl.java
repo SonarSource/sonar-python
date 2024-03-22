@@ -87,7 +87,7 @@ public class DictCompExpressionImpl extends PyTree implements DictCompExpression
 
   @Override
   public List<Tree> computeChildren() {
-    return Stream.of(openingBrace, keyExpression, colon, valueExpression, comprehensionFor, closingBrace).filter(Objects::nonNull).collect(Collectors.toList());
+    return Stream.of(openingBrace, keyExpression, colon, valueExpression, comprehensionFor, closingBrace).filter(Objects::nonNull).toList();
   }
 
   @Override

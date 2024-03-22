@@ -43,7 +43,7 @@ public abstract class Scanner {
     ProgressReport progressReport = new ProgressReport(this.name() + " progress", TimeUnit.SECONDS.toMillis(10));
     String name = this.name();
     LOG.info("Starting {}", name);
-    List<String> filenames = files.stream().map(InputFile::toString).collect(Collectors.toList());
+    List<String> filenames = files.stream().map(InputFile::toString).toList();
 
     int numScannedWithoutParsing = 0;
     progressReport.start(filenames);

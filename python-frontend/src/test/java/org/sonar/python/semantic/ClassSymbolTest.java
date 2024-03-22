@@ -524,20 +524,20 @@ class ClassSymbolTest {
     ClassSymbolImpl copied = classSymbol.copyWithoutUsages();
     assertThat(copied.hasUnresolvedTypeHierarchy()).isEqualTo(classSymbol.hasUnresolvedTypeHierarchy());
 
-    List<String> copiedfqnSuperClasses = copied.superClasses().stream().map(Symbol::fullyQualifiedName).collect(Collectors.toList());
-    List<String> fqnSuperClasses = classSymbol.superClasses().stream().map(Symbol::fullyQualifiedName).collect(Collectors.toList());
+    List<String> copiedfqnSuperClasses = copied.superClasses().stream().map(Symbol::fullyQualifiedName).toList();
+    List<String> fqnSuperClasses = classSymbol.superClasses().stream().map(Symbol::fullyQualifiedName).toList();
     assertThat(copiedfqnSuperClasses).isEqualTo(fqnSuperClasses);
 
-    List<Symbol.Kind> copiedKindSuperClasses = copied.superClasses().stream().map(Symbol::kind).collect(Collectors.toList());
-    List<Symbol.Kind> kindSuperClasses = classSymbol.superClasses().stream().map(Symbol::kind).collect(Collectors.toList());
+    List<Symbol.Kind> copiedKindSuperClasses = copied.superClasses().stream().map(Symbol::kind).toList();
+    List<Symbol.Kind> kindSuperClasses = classSymbol.superClasses().stream().map(Symbol::kind).toList();
     assertThat(copiedKindSuperClasses).isEqualTo(kindSuperClasses);
 
-    List<String> copiedFqnMembers = copied.declaredMembers().stream().map(Symbol::fullyQualifiedName).collect(Collectors.toList());
-    List<String> fqnMembers = classSymbol.declaredMembers().stream().map(Symbol::fullyQualifiedName).collect(Collectors.toList());
+    List<String> copiedFqnMembers = copied.declaredMembers().stream().map(Symbol::fullyQualifiedName).toList();
+    List<String> fqnMembers = classSymbol.declaredMembers().stream().map(Symbol::fullyQualifiedName).toList();
     assertThat(copiedFqnMembers).isEqualTo(fqnMembers);
 
-    List<Symbol.Kind> copiedKindMembers = copied.declaredMembers().stream().map(Symbol::kind).collect(Collectors.toList());
-    List<Symbol.Kind> kindMembers = classSymbol.declaredMembers().stream().map(Symbol::kind).collect(Collectors.toList());
+    List<Symbol.Kind> copiedKindMembers = copied.declaredMembers().stream().map(Symbol::kind).toList();
+    List<Symbol.Kind> kindMembers = classSymbol.declaredMembers().stream().map(Symbol::kind).toList();
     assertThat(copiedKindMembers).isEqualTo(kindMembers);
 
     assertThat(copied.usages()).isEmpty();

@@ -69,6 +69,6 @@ public class ElseClauseImpl extends PyTree implements ElseClause {
 
   @Override
   public List<Tree> computeChildren() {
-    return Stream.of(elseKeyword, colon, newLine, indent, body, dedent).filter(Objects::nonNull).collect(Collectors.toList());
+    return Stream.of(elseKeyword, colon, newLine, indent, body, dedent).filter(Objects::nonNull).toList();
   }
 }

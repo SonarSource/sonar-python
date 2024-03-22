@@ -100,7 +100,7 @@ class TreeUtilsTest {
     // simple statement parsed so that we easily get all tokens from children or first token.
     FileInput parsed = parse("if foo:\n  pass");
     IfStatement ifStmt = (IfStatement) parsed.statements().statements().get(0);
-    List<Token> collect = new ArrayList<>(ifStmt.children().stream().map(t -> t.is(Kind.TOKEN) ? (Token) t : t.firstToken()).collect(Collectors.toList()));
+    List<Token> collect = new ArrayList<>(ifStmt.children().stream().map(t -> t.is(Kind.TOKEN) ? (Token) t : t.firstToken()).toList());
     collect.add(parsed.lastToken());
     assertThat(TreeUtils.tokens(parsed)).containsExactly(collect.toArray(new Token[0]));
 

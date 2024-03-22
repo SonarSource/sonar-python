@@ -65,7 +65,7 @@ public class DescriptorUtils {
       .withName(classSymbol.name())
       .withFullyQualifiedName(classSymbol.fullyQualifiedName())
       .withMembers(classSymbol.declaredMembers().stream().map(DescriptorUtils::descriptor).collect(Collectors.toSet()))
-      .withSuperClasses(classSymbol.superClasses().stream().map(Symbol::fullyQualifiedName).filter(Objects::nonNull).collect(Collectors.toList()))
+      .withSuperClasses(classSymbol.superClasses().stream().map(Symbol::fullyQualifiedName).filter(Objects::nonNull).toList())
       .withDefinitionLocation(classSymbol.definitionLocation())
       .withHasMetaClass(((ClassSymbolImpl) classSymbol).hasMetaClass())
       .withHasSuperClassWithoutDescriptor(((ClassSymbolImpl) classSymbol).hasSuperClassWithoutSymbol() ||
@@ -114,7 +114,7 @@ public class DescriptorUtils {
       parameter.isPositionalVariadic(),
       parameter.isKeywordVariadic(),
       parameter.location()
-    )).collect(Collectors.toList());
+    )).toList();
   }
 
   // TODO SONARPY-958: Cleanup the symbol construction from descriptors by extracting this logic in a builder class
@@ -169,7 +169,7 @@ public class DescriptorUtils {
         }
         return member;
       })
-      .collect(Collectors.toList()));
+      .toList());
   }
 
   private static void addSuperClasses(ClassSymbolImpl classSymbol, ClassDescriptor classDescriptor,

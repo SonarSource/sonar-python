@@ -933,7 +933,7 @@ class ProjectLevelSymbolTableTest {
       .flatMap(f -> f.parameters().stream()
         .map(FunctionSymbol.Parameter::declaredType)
         .map(DeclaredType.class::cast))
-      .collect(Collectors.toList()))
+      .toList())
       .extracting(DeclaredType::getTypeClass)
       .containsExactlyInAnyOrder(classSymbolA, classSymbolB);
   }

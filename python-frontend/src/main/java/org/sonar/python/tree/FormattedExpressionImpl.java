@@ -74,7 +74,7 @@ public class FormattedExpressionImpl extends PyTree implements FormattedExpressi
   @Override
   List<Tree> computeChildren() {
     return Stream.of(lCurlyBrace, expression, equalToken, fstringConversionToken, fstringConversionName, formatSpecifier, rCurlyBrace)
-      .filter(Objects::nonNull).collect(Collectors.toList());
+      .filter(Objects::nonNull).toList();
   }
 
   @Override

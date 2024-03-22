@@ -54,7 +54,7 @@ public class ConsistentReturnCheck extends PythonSubscriptionCheck {
 
       List<Tree> returnsWithValue = endStatements.stream()
         .filter(s -> s.is(Kind.RETURN_STMT) && hasValue((ReturnStatement) s))
-        .collect(Collectors.toList());
+        .toList();
 
       if (returnsWithValue.size() != endStatements.size() && !returnsWithValue.isEmpty()) {
         addIssue(ctx, functionDef, endStatements);

@@ -96,7 +96,7 @@ public class PythonQuickFixVerifier {
 
     List<String> appliedQuickFix = issue.quickFixes().stream()
       .map(quickFix -> applyQuickFix(codeWithIssue, quickFix))
-      .collect(Collectors.toList());
+      .toList();
 
     assertThat(appliedQuickFix)
       .as("The code with the quickfix applied is not the expected result.\n" +

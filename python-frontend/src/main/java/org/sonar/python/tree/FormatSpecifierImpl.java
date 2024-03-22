@@ -49,7 +49,7 @@ public class FormatSpecifierImpl extends PyTree implements FormatSpecifier {
     return fStringMiddles.stream()
       .filter(FormattedExpression.class::isInstance)
       .map(FormattedExpression.class::cast)
-      .collect(Collectors.toList());
+      .toList();
   }
 
   @Override
