@@ -3,7 +3,8 @@ the API that can be exploited.</p>
 <h2>Why is this an issue?</h2>
 <p>GraphQL introspection is a feature that allows client applications to query the schema of a GraphQL API at runtime. It provides a way for
 developers to explore and understand the available data and operations supported by the API.</p>
-<p>While this feature is useful, it also creates risks if not properly secured.</p>
+<p>This feature is a diagnostic tool that should only be used in the development phase as its presence also creates risks.</p>
+<p>Clear documentation and API references should be considered better discoverability tools for a public GraphQL API.</p>
 <h3>What is the potential impact?</h3>
 <p>An attacker can use introspection to identify all of the operations and data types supported by the server. This information can then be used to
 identify potential targets for attacks.</p>
@@ -31,11 +32,15 @@ app.add_url_rule("/api",
 )
 </pre>
 <h4>Compliant solution</h4>
+<p>Make sure that introspection is disabled in production environments. You can use the following code sample as a reference, in conjunction with your
+own methods for distinguishing between production and non-production environments.</p>
 <pre data-diff-id="1" data-diff-type="compliant">
 from graphql_server.flask import GraphQLView
+
 # Only one of the following needs to be used
-from graphql.validation import NoSchemaIntrospectionCustomRule  # graphql-core v3
-from graphene.validation import DisableIntrospection  # graphene v3
+from graphql.validation import NoSchemaIntrospectionCustomRule # graphql-core v3
+from graphene.validation import DisableIntrospection           # graphene v3
+
 
 app.add_url_rule("/api",
     view_func=GraphQLView.as_view(
@@ -50,8 +55,8 @@ app.add_url_rule("/api",
 </pre>
 <h3>How does this work?</h3>
 <h4>Disabling introspection</h4>
-<p>The GraphQL server framework should be instructed to disable introspection. This prevents any attempt to retrieve schema information from the
-server at runtime.</p>
+<p>The GraphQL server framework should be instructed to disable introspection in production environments. This prevents any attacker attempt to
+retrieve schema information from the server at runtime.</p>
 <p>Each GraphQL framework will have a different method of doing this, possibly including:</p>
 <ul>
   <li> Changing a simple boolean setting. </li>
