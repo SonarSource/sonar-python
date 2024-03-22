@@ -81,7 +81,7 @@ public class ConditionalExpressionImpl extends PyTree implements ConditionalExpr
 
   @Override
   public List<Tree> computeChildren() {
-    return Stream.of(trueExpression, ifToken, condition, elseToken, falseExpression).filter(Objects::nonNull).collect(Collectors.toList());
+    return Stream.of(trueExpression, ifToken, condition, elseToken, falseExpression).filter(Objects::nonNull).toList();
   }
 
   @Override

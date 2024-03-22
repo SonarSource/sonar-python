@@ -74,7 +74,7 @@ public class DecoratorImpl extends SimpleStatement implements Decorator {
 
   @Override
   public List<Tree> computeChildren() {
-    return Stream.of(atToken, expression, newLineToken).filter(Objects::nonNull).collect(Collectors.toList());
+    return Stream.of(atToken, expression, newLineToken).filter(Objects::nonNull).toList();
   }
 
   @Override

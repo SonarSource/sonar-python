@@ -281,7 +281,7 @@ class IPythonTreeMakerTest extends RuleTest {
     assertThat(statementList).isNotNull();
 
     var assignments = findChildrenWithKind(statementList, Tree.Kind.ASSIGNMENT_STMT)
-      .stream().map(AssignmentStatement.class::cast).collect(Collectors.toList());
+      .stream().map(AssignmentStatement.class::cast).toList();
     assertThat(assignments).hasSize(3);
     assertThat(assignments.get(0).assignedValue().getKind()).isEqualTo(Tree.Kind.YIELD_EXPR);
     assertThat(assignments.get(1).assignedValue().getKind()).isEqualTo(Tree.Kind.PLUS);
@@ -311,7 +311,7 @@ class IPythonTreeMakerTest extends RuleTest {
           return findChildrenWithKind(c, kind).stream();
         }
       })
-      .collect(Collectors.toList());
+      .toList();
   }
 
   private Tree findFirstChildWithKind(Tree parent, Tree.Kind kind) {

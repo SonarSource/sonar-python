@@ -88,17 +88,17 @@ class CheckListTest {
       List<Path> jsonList = fileStream
         .filter(path -> !path.toString().endsWith("Sonar_way_profile.json"))
         .sorted()
-        .collect(Collectors.toList());
+        .toList();
 
       List<String> fileNames = jsonList.stream()
         .map(Path::getFileName)
         .map(Path::toString)
         .map(name -> name.replaceAll("\\.json$", ""))
-        .collect(Collectors.toList());
+        .toList();
 
       List<String> sqKeys = jsonList.stream()
         .map(CheckListTest::extractSqKey)
-        .collect(Collectors.toList());
+        .toList();
 
       assertThat(fileNames).isEqualTo(sqKeys);
     }
@@ -107,7 +107,7 @@ class CheckListTest {
   @Test
   void test_no_deprecated_rule_in_default_profile() throws IOException, ParseException {
     try (Stream<Path> fileStream = Files.find(METADATA_DIR, 1, (path, attr) -> path.toString().endsWith(".json"))) {
-      List<Path> jsonList = fileStream.collect(Collectors.toList());
+      List<Path> jsonList = fileStream.toList();
 
       Path sonarWayProfilePath = jsonList.stream().filter(path -> path.toString().endsWith("Sonar_way_profile.json")).findFirst().get();
       List<String> keysInDefaultProfile = getKeysInDefaultProfile(sonarWayProfilePath);
@@ -171,7 +171,7 @@ class CheckListTest {
     JSONParser jsonParser = new JSONParser();
     JSONObject sonarWayJson = (JSONObject) jsonParser.parse(new InputStreamReader(in, UTF_8));
     JSONArray sonarWayKeys = (JSONArray) sonarWayJson.get("ruleKeys");
-    return (List<String>) sonarWayKeys.stream().sorted().collect(Collectors.toList());
+    return (List<String>) sonarWayKeys.stream().sorted().toList();
   }
 
   private static String extractSqKey(Path jsonFile) {

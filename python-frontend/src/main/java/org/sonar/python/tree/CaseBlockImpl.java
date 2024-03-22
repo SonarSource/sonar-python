@@ -101,6 +101,6 @@ public class CaseBlockImpl extends PyTree implements CaseBlock {
   List<Tree> computeChildren() {
     return Stream.of(caseKeyword, pattern, guard, colon, newLine, indent, body, dedent)
       .filter(Objects::nonNull)
-      .collect(Collectors.toList());
+      .toList();
   }
 }

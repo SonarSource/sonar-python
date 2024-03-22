@@ -96,7 +96,7 @@ class ExpectedCfgStructure {
   }
 
   List<String> blockIds(Collection<? extends CfgBlock> blocks) {
-    return blocks.stream().map(this::testId).collect(Collectors.toList());
+    return blocks.stream().map(this::testId).toList();
   }
 
   CfgBlock cfgBlock(String testId) {
@@ -346,12 +346,12 @@ class ExpectedCfgStructure {
     }
 
     private static String[] getVariableStrings(Tree tree) {
-      return getStringList(tree).stream().map(s -> s.substring(1)).collect(Collectors.toList()).toArray(new String[] {});
+      return getStringList(tree).stream().map(s -> s.substring(1)).toList().toArray(new String[] {});
     }
 
     private static List<String> getStringList(Tree tree) {
       if (tree instanceof ListLiteral listLiteral) {
-        return listLiteral.elements().expressions().stream().map(e -> getValue(e)).collect(Collectors.toList());
+        return listLiteral.elements().expressions().stream().map(e -> getValue(e)).toList();
       } else {
         throw new UnsupportedOperationException("Expecting list literal, got '" + tree.toString() + "'");
       }

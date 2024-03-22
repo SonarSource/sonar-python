@@ -164,7 +164,7 @@ class CallExpressionImplTest {
   @Test
   void method_call_with_declared_type_union_and_optional() {
     ClassSymbolImpl union = new ClassSymbolImpl("Union", "typing.Union");
-    List<DeclaredType> typeArgs = Stream.of(DECL_INT, DECL_STR).map(DeclaredType.class::cast).collect(Collectors.toList());
+    List<DeclaredType> typeArgs = Stream.of(DECL_INT, DECL_STR).map(DeclaredType.class::cast).toList();
     assertThat(lastExpression(
       "from typing import Union",
       "class A:",
@@ -183,7 +183,7 @@ class CallExpressionImplTest {
     ).type()).isEqualTo(anyType());
 
     ClassSymbolImpl optional = new ClassSymbolImpl("Optional", "typing.Optional");
-    typeArgs = Stream.of(DECL_STR).map(DeclaredType.class::cast).collect(Collectors.toList());
+    typeArgs = Stream.of(DECL_STR).map(DeclaredType.class::cast).toList();
     assertThat(lastExpression(
       "from typing import Optional",
       "class A:",

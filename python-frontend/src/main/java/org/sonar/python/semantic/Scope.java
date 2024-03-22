@@ -204,7 +204,7 @@ class Scope {
 
   void addSubmoduleSymbol(Name nameTree, String fullyQualifiedName) {
     String symbolName = nameTree.name();
-    List<String> names = Arrays.stream(fullyQualifiedName.split("\\.")).collect(Collectors.toList());
+    List<String> names = Arrays.stream(fullyQualifiedName.split("\\.")).toList();
     Set<Symbol> moduleExportedSymbols = projectLevelSymbolTable.getSymbolsFromModule(fullyQualifiedName);
     if (moduleExportedSymbols != null) {
       addSymbolAndChildren(fullyQualifiedName, symbolName, names, moduleExportedSymbols);

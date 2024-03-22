@@ -91,7 +91,7 @@ public class PythonCoverageSensor implements Sensor {
 
     return Arrays.stream(config.getStringArray(REPORT_PATHS_KEY))
       .flatMap(path -> getReports(config, baseDir, REPORT_PATHS_KEY, path, analysisWarnings).stream())
-      .collect(Collectors.toList());
+      .toList();
   }
 
   private void warnDeprecatedPropertyUsage(Configuration config) {

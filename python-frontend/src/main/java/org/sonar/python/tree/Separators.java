@@ -39,7 +39,7 @@ public class Separators {
   Separators(@Nullable AstNode separator, @Nullable AstNode newline){
     this.separator = separator == null ? null : new TokenImpl(separator.getToken());
     this.newline = newline == null ? null : new TokenImpl(newline.getToken());
-    this.elements = Stream.of(this.separator, this.newline).filter(Objects::nonNull).collect(Collectors.toList());
+    this.elements = Stream.of(this.separator, this.newline).filter(Objects::nonNull).toList();
   }
 
   @CheckForNull

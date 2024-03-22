@@ -127,7 +127,7 @@ public class DescriptorsToProtobuf {
   public static DescriptorsProtos.FunctionDescriptor toProtobuf(FunctionDescriptor functionDescriptor) {
     DescriptorsProtos.FunctionDescriptor.Builder builder = DescriptorsProtos.FunctionDescriptor.newBuilder()
       .setName(functionDescriptor.name())
-      .addAllParameters(functionDescriptor.parameters().stream().map(DescriptorsToProtobuf::toProtobuf).collect(Collectors.toList()))
+      .addAllParameters(functionDescriptor.parameters().stream().map(DescriptorsToProtobuf::toProtobuf).toList())
       .setIsAsynchronous(functionDescriptor.isAsynchronous())
       .setIsInstanceMethod(functionDescriptor.isInstanceMethod())
       .addAllDecorators(functionDescriptor.decorators())

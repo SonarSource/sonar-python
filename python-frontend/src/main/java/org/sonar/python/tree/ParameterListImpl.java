@@ -45,7 +45,7 @@ public class ParameterListImpl extends PyTree implements ParameterList {
     return parameters.stream()
       .filter(Parameter.class::isInstance)
       .map(Parameter.class::cast)
-      .collect(Collectors.toList());
+      .toList();
   }
 
   @Override

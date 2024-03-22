@@ -153,7 +153,7 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
       classMembers.add(symbols.size() > 1 ? AmbiguousSymbolImpl.create(symbols) : symbols.iterator().next());
     }
     addMembers(classMembers);
-    superClassesFqns.addAll(classSymbolProto.getSuperClassesList().stream().map(TypeShed::normalizedFqn).collect(Collectors.toList()));
+    superClassesFqns.addAll(classSymbolProto.getSuperClassesList().stream().map(TypeShed::normalizedFqn).toList());
     superClassesFqns.removeAll(inlinedSuperClassFqn);
     validForPythonVersions = new HashSet<>(classSymbolProto.getValidForList());
   }

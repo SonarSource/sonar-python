@@ -54,7 +54,7 @@ public class PythonChecks {
   }
 
   public List<PythonCheck> all() {
-    return checksByRepository.stream().flatMap(c -> c.all().stream()).collect(Collectors.toList());
+    return checksByRepository.stream().flatMap(c -> c.all().stream()).toList();
   }
 
   @Nullable

@@ -52,6 +52,6 @@ public class InExpressionImpl extends BinaryExpressionImpl implements InExpressi
 
   @Override
   public List<Tree> computeChildren() {
-    return Stream.of(leftOperand(), notToken, operator(), rightOperand()).filter(Objects::nonNull).collect(Collectors.toList());
+    return Stream.of(leftOperand(), notToken, operator(), rightOperand()).filter(Objects::nonNull).toList();
   }
 }

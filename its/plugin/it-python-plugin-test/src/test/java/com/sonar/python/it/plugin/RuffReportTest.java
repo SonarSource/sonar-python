@@ -49,7 +49,7 @@ class RuffReportTest {
             .setProjectDir(new File("projects/ruff_project")));
 
     List<Issues.Issue> issues = issues(PROJECT).stream().sorted(Comparator.comparing(Issues.Issue::getRule))
-        .collect(Collectors.toList());
+        .toList();
     assertThat(issues).hasSize(2);
 
     Issues.Issue firstIssue = issues.get(0);

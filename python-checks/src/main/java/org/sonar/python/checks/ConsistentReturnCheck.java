@@ -54,7 +54,7 @@ public class ConsistentReturnCheck extends PythonSubscriptionCheck {
 
       List<Tree> returnsWithValue = endStatements.stream()
         .filter(s -> s.is(Kind.RETURN_STMT) && hasValue((ReturnStatement) s))
-        .collect(Collectors.toList());
+        .toList();
 
       if (returnsWithValue.size() != endStatements.size() && !returnsWithValue.isEmpty()) {
         addIssue(ctx, functionDef, endStatements);
@@ -64,7 +64,7 @@ public class ConsistentReturnCheck extends PythonSubscriptionCheck {
 
   private static boolean hasExceptOrFinally(ControlFlowGraph cfg) {
     return cfg.blocks().stream().anyMatch(block ->
-      block instanceof CfgBranchingBlock && ((CfgBranchingBlock) block).branchingTree().is(Kind.EXCEPT_CLAUSE, Kind.FINALLY_CLAUSE));
+      block instanceof CfgBranchingBlock cfgBranchingBlock && cfgBranchingBlock.branchingTree().is(Kind.EXCEPT_CLAUSE, Kind.FINALLY_CLAUSE));
   }
 
   private static boolean isWhileTrue(Statement statement) {

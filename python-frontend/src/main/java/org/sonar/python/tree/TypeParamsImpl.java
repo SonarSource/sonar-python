@@ -80,6 +80,6 @@ public class TypeParamsImpl extends PyTree implements TypeParams {
     return builder.build()
       .filter(Objects::nonNull)
       .sorted(Comparator.<Tree, Integer>comparing(t -> t.firstToken().line()).thenComparing(t -> t.firstToken().column()))
-      .collect(Collectors.toList());
+      .toList();
   }
 }

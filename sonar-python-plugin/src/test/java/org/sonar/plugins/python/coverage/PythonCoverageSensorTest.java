@@ -143,7 +143,7 @@ class PythonCoverageSensorTest {
   void test_coverage_4_4_2() {
     settings.setProperty(PythonCoverageSensor.REPORT_PATHS_KEY, "coverage.4.4.2.xml");
     coverageSensor.execute(context);
-    List<Integer> actual = IntStream.range(1, 18).mapToObj(line -> context.lineHits(FILE4_KEY, line)).collect(Collectors.toList());
+    List<Integer> actual = IntStream.range(1, 18).mapToObj(line -> context.lineHits(FILE4_KEY, line)).toList();
     assertThat(actual).isEqualTo(Arrays.asList(
       // line 1
       null,
@@ -196,7 +196,7 @@ class PythonCoverageSensorTest {
     settings.setProperty(PythonCoverageSensor.REPORT_PATHS_KEY, "*coverage.4.4.2*.xml");
     settings.setProperty(PythonCoverageSensor.REPORT_PATH_KEY, "*coverage.4.4.2*.xml");
     coverageSensor.execute(context);
-    List<Integer> actual = IntStream.range(1, 18).mapToObj(line -> context.lineHits(FILE4_KEY, line)).collect(Collectors.toList());
+    List<Integer> actual = IntStream.range(1, 18).mapToObj(line -> context.lineHits(FILE4_KEY, line)).toList();
     Integer coverageAtLine6 = actual.get(5);
     assertThat(coverageAtLine6).isEqualTo(1);
     verify(analysisWarnings, times(1)).addUnique(eq("Property 'sonar.python.coverage.reportPath' has been removed. Please use 'sonar.python.coverage.reportPaths' instead."));

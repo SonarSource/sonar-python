@@ -105,7 +105,7 @@ public class CfgValidator {
   private void assertEmptyBlock(CfgBlock emptyBlock) {
     List<ExpectedCfgStructure.BlockExpectation> matchedExpectations = expectedCfg.emptyBlockExpectations.stream()
       .filter(blockExpectation -> blockExpectation.matchesBlock(emptyBlock))
-      .collect(Collectors.toList());
+      .toList();
     assertThat(matchedExpectations)
       .withFailMessage(format("Failed to assert empty block succ=%s, pred=%s. Matched expectations: %s",
         expectedCfg.blockIds(emptyBlock.successors()),

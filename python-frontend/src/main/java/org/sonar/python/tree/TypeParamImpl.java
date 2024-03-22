@@ -73,6 +73,6 @@ public class TypeParamImpl extends PyTree implements TypeParam {
 
   @Override
   List<Tree> computeChildren() {
-    return Stream.of(starToken, name, annotation).filter(Objects::nonNull).collect(Collectors.toList());
+    return Stream.of(starToken, name, annotation).filter(Objects::nonNull).toList();
   }
 }

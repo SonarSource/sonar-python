@@ -57,7 +57,7 @@ class PythonCpdAnalyzerTest {
     assertThat(line1.getEndLine()).isEqualTo(2);
     assertThat(line1.getStartUnit()).isEqualTo(1);
     assertThat(line1.getEndUnit()).isEqualTo(1);
-    List<String> values = lines.stream().map(TokensLine::getValue).collect(Collectors.toList());
+    List<String> values = lines.stream().map(TokensLine::getValue).toList();
     assertThat(values).containsExactly(
       "00000",
       "1111L",

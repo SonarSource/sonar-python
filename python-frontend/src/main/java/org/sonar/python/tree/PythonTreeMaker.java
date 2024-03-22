@@ -115,7 +115,7 @@ import org.sonar.python.api.PythonTokenType;
 public class PythonTreeMaker {
 
   public FileInput fileInput(AstNode astNode) {
-    List<Statement> statements = getStatements(astNode).stream().map(this::statement).collect(Collectors.toList());
+    List<Statement> statements = getStatements(astNode).stream().map(this::statement).toList();
     StatementListImpl statementList = statements.isEmpty() ? null : new StatementListImpl(statements);
     Token endOfFile = toPyToken(astNode.getFirstChild(GenericTokenType.EOF).getToken());
     FileInputImpl pyFileInputTree = new FileInputImpl(statementList, endOfFile, DocstringExtractor.extractDocstring(statementList));
@@ -265,10 +265,10 @@ public class PythonTreeMaker {
       List<StatementWithSeparator> statements = getStatements(astNode);
       if (statements.isEmpty()) {
         List<StatementWithSeparator> statementsWithSeparators = getStatementsWithSeparators(astNode);
-        return statementsWithSeparators.stream().map(this::statement).collect(Collectors.toList());
+        return statementsWithSeparators.stream().map(this::statement).toList();
       }
       return statements.stream().map(this::statement)
-        .collect(Collectors.toList());
+        .toList();
     }
     return Collections.emptyList();
   }
@@ -406,7 +406,7 @@ public class PythonTreeMaker {
     }
     List<Expression> expressionTrees = expressions.stream()
       .map(this::expression)
-      .collect(Collectors.toList());
+      .toList();
     return new RaiseStatementImpl(toPyToken(astNode.getFirstChild(PythonKeyword.RAISE).getToken()),
       expressionTrees, fromKeyword == null ? null : toPyToken(fromKeyword.getToken()), fromExpression == null ? null : expression(fromExpression), separators);
   }
@@ -439,7 +439,7 @@ public class PythonTreeMaker {
       .getFirstChild(PythonGrammar.DOTTED_AS_NAMES)
       .getChildren(PythonGrammar.DOTTED_AS_NAME).stream()
       .map(PythonTreeMaker::aliasedName)
-      .collect(Collectors.toList());
+      .toList();
     return new ImportNameImpl(importKeyword, aliasedNames, separators);
   }
 
@@ -458,7 +458,7 @@ public class PythonTreeMaker {
     if (importAsnames != null) {
       aliasedImportNames = importAsnames.getChildren(PythonGrammar.IMPORT_AS_NAME).stream()
         .map(PythonTreeMaker::aliasedName)
-        .collect(Collectors.toList());
+        .toList();
       isWildcardImport = false;
     }
     Token wildcard = null;
@@ -488,7 +488,7 @@ public class PythonTreeMaker {
     List<Name> names = astNode
       .getChildren(PythonGrammar.NAME).stream()
       .map(PythonTreeMaker::name)
-      .collect(Collectors.toList());
+      .toList();
     return new DottedNameImpl(names);
   }
 
@@ -498,7 +498,7 @@ public class PythonTreeMaker {
     Token globalKeyword = toPyToken(astNode.getFirstChild(PythonKeyword.GLOBAL).getToken());
     List<Name> variables = astNode.getChildren(PythonGrammar.NAME).stream()
       .map(PythonTreeMaker::variable)
-      .collect(Collectors.toList());
+      .toList();
     return new GlobalStatementImpl(globalKeyword, variables, separators);
   }
 
@@ -508,7 +508,7 @@ public class PythonTreeMaker {
     Token nonlocalKeyword = toPyToken(astNode.getFirstChild(PythonKeyword.NONLOCAL).getToken());
     List<Name> variables = astNode.getChildren(PythonGrammar.NAME).stream()
       .map(PythonTreeMaker::variable)
-      .collect(Collectors.toList());
+      .toList();
     return new NonlocalStatementImpl(nonlocalKeyword, variables, separators);
   }
 
@@ -526,7 +526,7 @@ public class PythonTreeMaker {
     }
     List<IfStatement> elifBranches = astNode.getChildren(PythonKeyword.ELIF).stream()
       .map(this::elifStatement)
-      .collect(Collectors.toList());
+      .toList();
 
     return new IfStatementImpl(ifToken, expression(condition), colon, suiteNewLine(suite), suiteIndent(suite), body, suiteDedent(suite), elifBranches, elseClause);
   }
@@ -554,7 +554,7 @@ public class PythonTreeMaker {
     if (decoratorsNode != null) {
       decorators = decoratorsNode.getChildren(PythonGrammar.DECORATOR).stream()
         .map(this::decorator)
-        .collect(Collectors.toList());
+        .toList();
     }
     Name name = name(astNode.getFirstChild(PythonGrammar.FUNCNAME).getFirstChild(PythonGrammar.NAME));
 
@@ -591,7 +591,7 @@ public class PythonTreeMaker {
       .map(n -> n.getFirstChild(PythonGrammar.TYPEDARGSLIST))
       .map(n -> {
         List<AnyParameter> arguments = n.getChildren(PythonGrammar.TFPDEF, PythonPunctuator.MUL, PythonPunctuator.DIV).stream()
-          .map(this::parameter).filter(Objects::nonNull).collect(Collectors.toList());
+          .map(this::parameter).filter(Objects::nonNull).toList();
         List<Token> commas = punctuators(n, PythonPunctuator.COMMA);
         return new ParameterListImpl(arguments, commas);
       }).orElse(null);
@@ -608,13 +608,13 @@ public class PythonTreeMaker {
           .stream()
           .flatMap(Collection::stream)
           .map(this::typeParam)
-          .collect(Collectors.toList());
+          .toList();
 
         var commas = Optional.of(n.getFirstChild(PythonGrammar.TYPEDARGSLIST))
           .map(argList -> punctuators(argList, PythonPunctuator.COMMA))
           .stream()
           .flatMap(Collection::stream)
-          .collect(Collectors.toList());
+          .toList();
 
         var rBracket = toPyToken(n.getFirstChild(PythonPunctuator.RBRACKET).getToken());
 
@@ -670,7 +670,7 @@ public class PythonTreeMaker {
     if (decoratorsNode != null) {
       decorators = decoratorsNode.getChildren(PythonGrammar.DECORATOR).stream()
         .map(this::decorator)
-        .collect(Collectors.toList());
+        .toList();
     }
     Name name = name(astNode.getFirstChild(PythonGrammar.CLASSNAME).getFirstChild(PythonGrammar.NAME));
     var typeParams = typeParams(astNode);
@@ -715,7 +715,7 @@ public class PythonTreeMaker {
     List<Expression> testExpressions = starNamedExpressions
       .getChildren(PythonGrammar.STAR_NAMED_EXPRESSION).stream()
       .map(this::expression)
-      .collect(Collectors.toList());
+      .toList();
     List<Token> testExpressionsCommas = punctuators(starNamedExpressions, PythonPunctuator.COMMA);
     AstNode firstSuite = forStatementNode.getFirstChild(PythonGrammar.SUITE);
     StatementList body = getStatementListFromSuite(firstSuite);
@@ -743,7 +743,7 @@ public class PythonTreeMaker {
 
     List<Expression> expressions = astNode.getFirstChild(PythonGrammar.TESTLIST_STAR_EXPR).getChildren(PythonGrammar.TEST, PythonGrammar.STAR_EXPR).stream()
       .map(this::expression)
-      .collect(Collectors.toList());
+      .toList();
     return new ExpressionStatementImpl(expressions, separators);
   }
 
@@ -800,7 +800,7 @@ public class PythonTreeMaker {
     if (astNode.is(PythonGrammar.TESTLIST_STAR_EXPR, PythonGrammar.TESTLIST_COMP)) {
       List<Expression> expressions = astNode.getChildren(PythonGrammar.NAMED_EXPR_TEST, PythonGrammar.TEST, PythonGrammar.STAR_EXPR).stream()
         .map(this::expression)
-        .collect(Collectors.toList());
+        .toList();
       List<Token> commas = punctuators(astNode, PythonPunctuator.COMMA);
       return new ExpressionListImpl(expressions, commas);
     }
@@ -817,7 +817,7 @@ public class PythonTreeMaker {
         AstNode suite = except.getNextSibling().getNextSibling();
         return exceptClause(except, getStatementListFromSuite(suite));
       })
-      .collect(Collectors.toList());
+      .toList();
     checkExceptClauses(exceptClauseTrees);
     FinallyClause finallyClause = null;
     AstNode finallyNode = astNode.getFirstChild(PythonKeyword.FINALLY);
@@ -874,7 +874,7 @@ public class PythonTreeMaker {
   }
 
   private List<WithItem> withItems(List<AstNode> withItems) {
-    return withItems.stream().map(this::withItem).collect(Collectors.toList());
+    return withItems.stream().map(this::withItem).toList();
   }
 
   private WithItem withItem(AstNode withItem) {
@@ -919,7 +919,7 @@ public class PythonTreeMaker {
     Token colon = toPyToken(matchStmt.getFirstChild(PythonPunctuator.COLON).getToken());
     Token newLine = toPyToken(matchStmt.getFirstChild(PythonTokenType.NEWLINE).getToken());
     Token indent = toPyToken(matchStmt.getFirstChild(PythonTokenType.INDENT).getToken());
-    List<CaseBlock> caseBlocks = matchStmt.getChildren(PythonGrammar.CASE_BLOCK).stream().map(this::caseBlock).collect(Collectors.toList());
+    List<CaseBlock> caseBlocks = matchStmt.getChildren(PythonGrammar.CASE_BLOCK).stream().map(this::caseBlock).toList();
     Token dedent = toPyToken(matchStmt.getFirstChild(PythonTokenType.DEDENT).getToken());
     return new MatchStatementImpl(matchKeyword, expression(subjectExpr), colon, newLine, indent, caseBlocks, dedent);
   }
@@ -959,7 +959,7 @@ public class PythonTreeMaker {
     }
     List<Pattern> patterns = pattern.getChildren(PythonGrammar.CLOSED_PATTERN).stream()
       .map(PythonTreeMaker::closedPattern)
-      .collect(Collectors.toList());
+      .toList();
     return new OrPatternImpl(patterns, separators);
   }
 
@@ -1026,7 +1026,7 @@ public class PythonTreeMaker {
       return Collections.emptyList();
     }
     commas.addAll(punctuators(patternArgs, PythonPunctuator.COMMA));
-    return patternArgs.getChildren(PythonGrammar.PATTERN_ARG).stream().map(arg -> patternArg(arg.getFirstChild())).collect(Collectors.toList());
+    return patternArgs.getChildren(PythonGrammar.PATTERN_ARG).stream().map(arg -> patternArg(arg.getFirstChild())).toList();
   }
 
   private static Pattern patternArg(AstNode patternArg) {
@@ -1092,7 +1092,7 @@ public class PythonTreeMaker {
     if (maybeSequencePattern == null) {
       return;
     }
-    patterns.addAll(maybeSequencePattern.getChildren(PythonGrammar.MAYBE_STAR_PATTERN).stream().map(PythonTreeMaker::maybeStarPattern).collect(Collectors.toList()));
+    patterns.addAll(maybeSequencePattern.getChildren(PythonGrammar.MAYBE_STAR_PATTERN).stream().map(PythonTreeMaker::maybeStarPattern).toList());
     commas.addAll(punctuators(maybeSequencePattern, PythonPunctuator.COMMA));
   }
 
@@ -1167,38 +1167,38 @@ public class PythonTreeMaker {
     } else {
       literalKind = Tree.Kind.BOOLEAN_LITERAL_PATTERN;
     }
-    List<Token> tokens = literalPattern.getTokens().stream().map(PythonTreeMaker::toPyToken).collect(Collectors.toList());
+    List<Token> tokens = literalPattern.getTokens().stream().map(PythonTreeMaker::toPyToken).toList();
     return new LiteralPatternImpl(tokens, literalKind);
   }
 
   // expressions
 
   private List<Expression> expressionsFromTest(AstNode astNode) {
-    return astNode.getChildren(PythonGrammar.TEST).stream().map(this::expression).collect(Collectors.toList());
+    return astNode.getChildren(PythonGrammar.TEST).stream().map(this::expression).toList();
   }
 
   private List<Expression> expressionsFromTestListStarExpr(AstNode astNode) {
     return astNode
       .getChildren(PythonGrammar.TEST, PythonGrammar.STAR_EXPR)
-      .stream().map(this::expression).collect(Collectors.toList());
+      .stream().map(this::expression).toList();
   }
 
   private List<Expression> expressionsFromExprList(AstNode firstChild) {
     return firstChild
       .getChildren(PythonGrammar.EXPR, PythonGrammar.STAR_EXPR)
-      .stream().map(this::expression).collect(Collectors.toList());
+      .stream().map(this::expression).toList();
   }
 
   private Expression exprListOrTestList(AstNode exprListOrTestList) {
     List<Expression> expressions = exprListOrTestList
       .getChildren(PythonGrammar.EXPR, PythonGrammar.STAR_EXPR, PythonGrammar.TEST).stream()
       .map(this::expression)
-      .collect(Collectors.toList());
+      .toList();
     List<AstNode> commas = exprListOrTestList.getChildren(PythonPunctuator.COMMA);
     if (commas.isEmpty()) {
       return expressions.get(0);
     }
-    List<Token> commaTokens = toPyToken(commas.stream().map(AstNode::getToken).collect(Collectors.toList()));
+    List<Token> commaTokens = toPyToken(commas.stream().map(AstNode::getToken).toList());
     return new TupleImpl(null, expressions, commaTokens, null);
   }
 
@@ -1287,10 +1287,10 @@ public class PythonTreeMaker {
     List<Expression> expressions = astNode
       .getChildren(PythonGrammar.STAR_NAMED_EXPRESSION).stream()
       .map(this::expression)
-      .collect(Collectors.toList());
+      .toList();
     List<AstNode> commas = astNode.getChildren(PythonPunctuator.COMMA);
     if (!commas.isEmpty()) {
-      List<Token> commaTokens = toPyToken(commas.stream().map(AstNode::getToken).collect(Collectors.toList()));
+      List<Token> commaTokens = toPyToken(commas.stream().map(AstNode::getToken).toList());
       return new TupleImpl(null, expressions, commaTokens, null);
     }
     return expressions.get(0);
@@ -1313,14 +1313,14 @@ public class PythonTreeMaker {
   private Expression repr(AstNode astNode) {
     Token openingBacktick = toPyToken(astNode.getFirstChild(PythonPunctuator.BACKTICK).getToken());
     Token closingBacktick = toPyToken(astNode.getLastChild(PythonPunctuator.BACKTICK).getToken());
-    List<Expression> expressions = astNode.getChildren(PythonGrammar.TEST).stream().map(this::expression).collect(Collectors.toList());
+    List<Expression> expressions = astNode.getChildren(PythonGrammar.TEST).stream().map(this::expression).toList();
     List<Token> commas = punctuators(astNode, PythonPunctuator.COMMA);
     ExpressionList expressionListTree = new ExpressionListImpl(expressions, commas);
     return new ReprExpressionImpl(openingBacktick, expressionListTree, closingBacktick);
   }
 
   private static List<Token> punctuators(AstNode astNode, PythonPunctuator punctuator) {
-    return toPyToken(astNode.getChildren(punctuator).stream().map(AstNode::getToken).collect(Collectors.toList()));
+    return toPyToken(astNode.getChildren(punctuator).stream().map(AstNode::getToken).toList());
   }
 
   private Expression dictOrSetLiteral(AstNode astNode) {
@@ -1360,7 +1360,7 @@ public class PythonTreeMaker {
       }
       return new DictionaryLiteralImpl(lCurlyBrace, commas, dictionaryLiteralElements, rCurlyBrace);
     }
-    List<Expression> expressions = dictOrSetMaker.getChildren(PythonGrammar.TEST, PythonGrammar.STAR_EXPR).stream().map(this::expression).collect(Collectors.toList());
+    List<Expression> expressions = dictOrSetMaker.getChildren(PythonGrammar.TEST, PythonGrammar.STAR_EXPR).stream().map(this::expression).toList();
     return new SetLiteralImpl(lCurlyBrace, expressions, commas, rCurlyBrace);
   }
 
@@ -1389,7 +1389,7 @@ public class PythonTreeMaker {
       return new ParenthesizedExpressionImpl(lPar, expression, rPar);
     }
 
-    List<Token> commaTokens = toPyToken(commas.stream().map(AstNode::getToken).collect(Collectors.toList()));
+    List<Token> commaTokens = toPyToken(commas.stream().map(AstNode::getToken).toList());
     return new TupleImpl(lPar, expressionList.expressions(), commaTokens, rPar);
   }
 
@@ -1460,7 +1460,7 @@ public class PythonTreeMaker {
       return new SliceExpressionImpl(expr, leftBracket, sliceList, rightBracket);
 
     } else {
-      List<Expression> expressions = slices.stream().map(Expression.class::cast).collect(Collectors.toList());
+      List<Expression> expressions = slices.stream().map(Expression.class::cast).toList();
       List<Token> commas = punctuators(subscriptList, PythonPunctuator.COMMA);
       ExpressionList subscripts = new ExpressionListImpl(expressions, commas);
       return new SubscriptionExpressionImpl(expr, leftBracket, subscripts, rightBracket);
@@ -1544,7 +1544,7 @@ public class PythonTreeMaker {
     if (argList != null) {
       List<Argument> arguments = argList.getChildren(PythonGrammar.ARGUMENT).stream()
         .map(this::argument)
-        .collect(Collectors.toList());
+        .toList();
       List<Token> commas = punctuators(argList, PythonPunctuator.COMMA);
       return new ArgListImpl(arguments, commas);
     }
@@ -1620,7 +1620,7 @@ public class PythonTreeMaker {
     ParameterList argListTree = null;
     if (varArgsListNode != null) {
       List<AnyParameter> parameters = varArgsListNode.getChildren(PythonGrammar.FPDEF, PythonGrammar.NAME, PythonPunctuator.MUL, PythonPunctuator.DIV).stream()
-        .map(this::parameter).filter(Objects::nonNull).collect(Collectors.toList());
+        .map(this::parameter).filter(Objects::nonNull).toList();
       List<Token> commas = punctuators(varArgsListNode, PythonPunctuator.COMMA);
       argListTree = new ParameterListImpl(parameters, commas);
     }
@@ -1651,7 +1651,7 @@ public class PythonTreeMaker {
     if (paramList != null) {
       List<AnyParameter> params = paramList.getChildren(PythonGrammar.TFPDEF, PythonGrammar.FPDEF).stream()
         .map(this::parameter)
-        .collect(Collectors.toList());
+        .toList();
       List<Token> commas = punctuators(paramList, PythonPunctuator.COMMA);
       return new TupleParameterImpl(toPyToken(parameter.getFirstChild(PythonPunctuator.LPARENTHESIS).getToken()),
         params, commas,

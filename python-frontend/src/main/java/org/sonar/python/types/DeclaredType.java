@@ -136,7 +136,7 @@ public class DeclaredType implements InferredType {
         return ((AmbiguousSymbol) a).alternatives().stream().filter(alternative -> alternative.is(CLASS));
       }
       return Stream.of(a);
-    }).filter(a -> a.is(CLASS)).collect(Collectors.toList());
+    }).filter(a -> a.is(CLASS)).toList();
     return !classSymbols.isEmpty() && classSymbols.stream().allMatch(a -> ((ClassSymbol) a).isOrExtends(typeName));
   }
 
