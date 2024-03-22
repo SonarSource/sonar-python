@@ -152,11 +152,11 @@ public class XMLParserXXEVulnerableCheck extends PythonSubscriptionCheck {
     Expression first = ((RegularArgument) arguments.get(0)).expression();
     Expression second = ((RegularArgument) arguments.get(1)).expression();
 
-    if (!(first instanceof HasSymbol)) {
+    if (!(first instanceof HasSymbol hasSymbol)) {
       return false;
     }
 
-    Symbol symbol = ((HasSymbol) first).symbol();
+    Symbol symbol = hasSymbol.symbol();
     if (symbol == null) {
       return false;
     }

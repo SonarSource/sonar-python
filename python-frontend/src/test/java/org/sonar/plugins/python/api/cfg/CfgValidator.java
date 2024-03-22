@@ -121,8 +121,7 @@ public class CfgValidator {
 
     List<String> expectedSucc = expectedCfg.expectedSucc(actualBlock);
     List<String> actual = expectedCfg.blockIds(actualBlock.successors());
-    if (actualBlock instanceof CfgBranchingBlock) {
-      CfgBranchingBlock branchingBlock = (CfgBranchingBlock) actualBlock;
+    if (actualBlock instanceof CfgBranchingBlock branchingBlock) {
       actual = expectedCfg.blockIds(Arrays.asList(branchingBlock.trueSuccessor(), branchingBlock.falseSuccessor()));
     }
 

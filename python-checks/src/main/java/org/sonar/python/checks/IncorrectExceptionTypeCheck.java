@@ -47,8 +47,8 @@ public class IncorrectExceptionTypeCheck extends PythonSubscriptionCheck {
       }
       Expression raisedExpression = raiseStatement.expressions().get(0);
       Symbol symbol = null;
-      if (raisedExpression instanceof HasSymbol) {
-        symbol = ((HasSymbol) raisedExpression).symbol();
+      if (raisedExpression instanceof HasSymbol hasSymbol) {
+        symbol = hasSymbol.symbol();
       } else if (raisedExpression.is(Tree.Kind.CALL_EXPR)) {
         symbol = ((CallExpression) raisedExpression).calleeSymbol();
       }

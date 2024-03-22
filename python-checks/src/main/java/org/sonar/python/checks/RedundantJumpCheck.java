@@ -72,12 +72,12 @@ public class RedundantJumpCheck extends PythonSubscriptionCheck {
   }
 
   private static void addQuickFix(Tree lastElement, PreciseIssue issue) {
-    if (!(lastElement instanceof Statement)) {
+    if (!(lastElement instanceof Statement statement)) {
       return;
     }
     var quickFix = PythonQuickFix
       .newQuickFix(QUICK_FIX_DESCRIPTION)
-      .addTextEdit(TextEditUtils.removeStatement((Statement) lastElement))
+      .addTextEdit(TextEditUtils.removeStatement(statement))
       .build();
     issue.addQuickFix(quickFix);
   }

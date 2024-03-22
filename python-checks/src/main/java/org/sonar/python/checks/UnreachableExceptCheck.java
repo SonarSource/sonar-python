@@ -78,10 +78,10 @@ public class UnreachableExceptCheck extends PythonSubscriptionCheck {
 
   private static void handleExceptionExpression(SubscriptionContext ctx, Map<String, Expression> caughtTypes,
                                          Expression exceptionExpression, Map<String, Expression> caughtInExceptClause) {
-    if (!(exceptionExpression instanceof HasSymbol)) {
+    if (!(exceptionExpression instanceof HasSymbol hasSymbol)) {
       return;
     }
-    var symbol = ((HasSymbol) exceptionExpression).symbol();
+    var symbol = hasSymbol.symbol();
     if (symbol == null) {
       return;
     }

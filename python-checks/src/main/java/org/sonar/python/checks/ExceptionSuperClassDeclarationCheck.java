@@ -59,8 +59,8 @@ public class ExceptionSuperClassDeclarationCheck extends PythonSubscriptionCheck
 
   private static void checkSuperClass(RegularArgument arg, SubscriptionContext ctx) {
     Expression expression = arg.expression();
-    if (expression instanceof HasSymbol) {
-      Symbol symbol = ((HasSymbol) expression).symbol();
+    if (expression instanceof HasSymbol hasSymbol) {
+      Symbol symbol = hasSymbol.symbol();
       if (symbol != null && FORBIDDEN_SUPER_CLASS_FQNS.contains(symbol.fullyQualifiedName())) {
         ctx.addIssue(arg, String.format("Derive this class from \"Exception\" instead of \"%s\".", symbol.fullyQualifiedName()));
       }

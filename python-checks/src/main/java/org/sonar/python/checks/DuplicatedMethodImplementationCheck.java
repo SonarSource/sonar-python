@@ -135,8 +135,8 @@ public class DuplicatedMethodImplementationCheck extends PythonSubscriptionCheck
 
   private static boolean isClassOrStaticMethod(FunctionDef originalMethod) {
     return originalMethod.decorators().stream()
-      .anyMatch(d -> d.expression() instanceof NameImpl
-        && CLASS_AND_STATIC_DECORATORS.contains(((NameImpl) d.expression()).name()));
+      .anyMatch(d -> d.expression() instanceof NameImpl nameImpl
+        && CLASS_AND_STATIC_DECORATORS.contains(nameImpl.name()));
   }
 
   private static class MethodVisitor extends BaseTreeVisitor {

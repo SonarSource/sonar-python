@@ -78,8 +78,8 @@ public class SkippedTestNoReasonCheck extends PythonSubscriptionCheck {
   }
 
   private static Symbol getSymbolFromExpression(Expression expression) {
-    if (expression instanceof HasSymbol) {
-      return ((HasSymbol) expression).symbol();
+    if (expression instanceof HasSymbol hasSymbol) {
+      return hasSymbol.symbol();
     }
 
     if (expression.is(Tree.Kind.CALL_EXPR)) {

@@ -105,8 +105,8 @@ public class NotImplementedErrorInOperatorMethodsCheck extends PythonSubscriptio
       Expression raisedException = pyRaiseStatementTree.expressions().get(0);
       if (raisedException.type().canOnlyBe(NOT_IMPLEMENTED_ERROR)) {
         nonCompliantRaises.add(pyRaiseStatementTree);
-      } else if (raisedException instanceof HasSymbol) {
-        Symbol symbol = ((HasSymbol) raisedException).symbol();
+      } else if (raisedException instanceof HasSymbol hasSymbol) {
+        Symbol symbol = hasSymbol.symbol();
         if (symbol != null && NOT_IMPLEMENTED_ERROR.equals(symbol.fullyQualifiedName())) {
           nonCompliantRaises.add(pyRaiseStatementTree);
         }

@@ -49,8 +49,8 @@ public class PythonCheckVerifier {
 
   private static List<PreciseIssue> scanFileForIssues(PythonCheck check, PythonVisitorContext context) {
     check.scanFile(context);
-    if (check instanceof PythonSubscriptionCheck) {
-      SubscriptionVisitor.analyze(Collections.singletonList((PythonSubscriptionCheck) check), context);
+    if (check instanceof PythonSubscriptionCheck subscriptionCheck) {
+      SubscriptionVisitor.analyze(Collections.singletonList(subscriptionCheck), context);
     }
     return context.getIssues();
   }

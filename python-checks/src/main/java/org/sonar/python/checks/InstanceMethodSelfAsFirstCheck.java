@@ -81,8 +81,8 @@ public class InstanceMethodSelfAsFirstCheck extends PythonSubscriptionCheck {
   }
 
   private static boolean isUsedAsDecorator(@Nullable Tree tree, Tree usageTree) {
-    if (tree instanceof FunctionDef) {
-      return ((FunctionDef) tree).decorators().stream()
+    if (tree instanceof FunctionDef functionDef) {
+      return functionDef.decorators().stream()
         .map(Decorator::expression)
         .map(expression -> expression.is(Tree.Kind.CALL_EXPR) ? ((CallExpression) expression).callee() : expression)
         .anyMatch(expression -> expression.equals(usageTree));

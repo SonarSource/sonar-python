@@ -164,8 +164,8 @@ public class DescriptorUtils {
     classSymbol.addMembers(classDescriptor.members().stream()
       .map(memberFqn -> DescriptorUtils.symbolFromDescriptor(memberFqn, projectLevelSymbolTable, null, createdSymbolsByDescriptor, createdSymbolsByFqn))
       .map(member -> {
-        if (member instanceof FunctionSymbolImpl) {
-          ((FunctionSymbolImpl) member).setOwner(classSymbol);
+        if (member instanceof FunctionSymbolImpl functionSymbol) {
+          functionSymbol.setOwner(classSymbol);
         }
         return member;
       })

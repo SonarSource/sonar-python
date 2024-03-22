@@ -72,7 +72,7 @@ public class LoggersConfigurationCheck extends PythonSubscriptionCheck {
         .filter(argument -> argument.is(Tree.Kind.REGULAR_ARGUMENT))
         .map(RegularArgument.class::cast)
         .map(RegularArgument::expression)
-        .filter(expr -> expr instanceof HasSymbol && ((HasSymbol) expr).symbol() != null)
+        .filter(expr -> expr instanceof HasSymbol hasSymbol && hasSymbol.symbol() != null)
         .filter(expr -> LOGGERS_CLASSES.contains(((HasSymbol) expr).symbol().fullyQualifiedName()))
         .forEach(expr -> ctx.addIssue(expr, MESSAGE));
     }
@@ -83,8 +83,8 @@ public class LoggersConfigurationCheck extends PythonSubscriptionCheck {
     assignment.lhsExpressions().stream()
       .flatMap(exprList -> exprList.expressions().stream())
       .forEach(expr -> {
-        if (expr instanceof HasSymbol) {
-          Symbol symbol = ((HasSymbol) expr).symbol();
+        if (expr instanceof HasSymbol hasSymbol) {
+          Symbol symbol = hasSymbol.symbol();
           if (symbol != null && "logging.lastResort".equals(symbol.fullyQualifiedName())) {
             ctx.addIssue(expr, MESSAGE);
           }

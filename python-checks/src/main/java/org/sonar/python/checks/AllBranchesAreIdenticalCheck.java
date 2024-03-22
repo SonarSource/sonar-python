@@ -178,12 +178,11 @@ public class AllBranchesAreIdenticalCheck extends PythonSubscriptionCheck {
     if (expression.is(Tree.Kind.CALL_EXPR)) {
       return true;
     }
-    if (expression instanceof BinaryExpression) {
-      BinaryExpression binaryExpression = (BinaryExpression) expression;
+    if (expression instanceof BinaryExpression binaryExpression) {
       return containsPossibleSideEffect(binaryExpression.leftOperand()) || containsPossibleSideEffect(binaryExpression.rightOperand());
     }
-    if (expression instanceof ParenthesizedExpression) {
-      return containsPossibleSideEffect(((ParenthesizedExpression) expression).expression());
+    if (expression instanceof ParenthesizedExpression parenthesizedExpression) {
+      return containsPossibleSideEffect(parenthesizedExpression.expression());
     }
     return false;
   }

@@ -97,8 +97,8 @@ public class PubliclyWritableDirectoriesCheck extends PythonSubscriptionCheck {
   }
 
   private static boolean isOsEnvironQualifiedExpression(Expression expression) {
-    if (expression instanceof HasSymbol) {
-      Symbol symbol = ((HasSymbol) expression).symbol();
+    if (expression instanceof HasSymbol hasSymbol) {
+      Symbol symbol = hasSymbol.symbol();
       if (symbol != null) {
         return "os.environ".equals(symbol.fullyQualifiedName());
       }

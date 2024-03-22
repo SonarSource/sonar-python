@@ -137,8 +137,8 @@ public class CallExpressionImpl extends PyTree implements CallExpression, HasTyp
   private static InferredType getDeclaredType(Expression callee) {
     QualifiedExpression qualifiedCallee = (QualifiedExpression) callee;
     InferredType qualifierType = qualifiedCallee.qualifier().type();
-    if (qualifierType instanceof DeclaredType) {
-      Set<Optional<Symbol>> resolvedMembers = ((DeclaredType) qualifierType).alternativeTypeSymbols().stream()
+    if (qualifierType instanceof DeclaredType declaredType) {
+      Set<Optional<Symbol>> resolvedMembers = declaredType.alternativeTypeSymbols().stream()
         .filter(s -> s.is(CLASS))
         .map(ClassSymbol.class::cast)
         .map(t -> t.resolveMember(qualifiedCallee.name().name()))

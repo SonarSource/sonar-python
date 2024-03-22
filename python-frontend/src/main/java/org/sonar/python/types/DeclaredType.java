@@ -192,8 +192,8 @@ public class DeclaredType implements InferredType {
   }
 
   public static InferredType fromInferredType(InferredType inferredType) {
-    if (inferredType instanceof RuntimeType) {
-      ClassSymbol typeClass = ((RuntimeType) inferredType).getTypeClass();
+    if (inferredType instanceof RuntimeType runtimeType) {
+      ClassSymbol typeClass = runtimeType.getTypeClass();
       return new DeclaredType(typeClass);
     }
     if (inferredType instanceof DeclaredType) {

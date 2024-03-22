@@ -233,8 +233,8 @@ public class TypeShed {
       if (descriptor instanceof SymbolsProtos.FunctionSymbol) {
         symbols.add(new FunctionSymbolImpl(((SymbolsProtos.FunctionSymbol) descriptor), containerClassFqn, moduleName));
       }
-      if (descriptor instanceof OverloadedFunctionSymbol) {
-        if (((OverloadedFunctionSymbol) descriptor).getDefinitionsList().size() < 2) {
+      if (descriptor instanceof OverloadedFunctionSymbol overloadedFunctionSymbol) {
+        if (overloadedFunctionSymbol.getDefinitionsList().size() < 2) {
           throw new IllegalStateException("Overloaded function symbols should have at least two definitions.");
         }
         symbols.add(fromOverloadedFunction(((OverloadedFunctionSymbol) descriptor), containerClassFqn, moduleName));

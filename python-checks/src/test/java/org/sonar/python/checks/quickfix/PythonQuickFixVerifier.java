@@ -135,8 +135,8 @@ public class PythonQuickFixVerifier {
 
   private static List<PreciseIssue> scanFileForIssues(PythonCheck check, PythonVisitorContext context) {
     check.scanFile(context);
-    if (check instanceof PythonSubscriptionCheck) {
-      SubscriptionVisitor.analyze(Collections.singletonList((PythonSubscriptionCheck) check), context);
+    if (check instanceof PythonSubscriptionCheck pythonSubscriptionCheck) {
+      SubscriptionVisitor.analyze(Collections.singletonList(pythonSubscriptionCheck), context);
     }
     return context.getIssues();
   }

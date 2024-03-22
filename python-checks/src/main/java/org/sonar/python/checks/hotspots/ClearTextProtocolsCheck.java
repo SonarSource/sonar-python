@@ -147,8 +147,8 @@ public class ClearTextProtocolsCheck extends PythonSubscriptionCheck {
       return;
     }
     Expression lhs = assignmentStatement.lhsExpressions().get(0).expressions().get(0);
-    if (lhs instanceof HasSymbol) {
-      Symbol symbol = ((HasSymbol) lhs).symbol();
+    if (lhs instanceof HasSymbol hasSymbol) {
+      Symbol symbol = hasSymbol.symbol();
       if (symbol == null) {
         return;
       }

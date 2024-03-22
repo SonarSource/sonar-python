@@ -206,8 +206,7 @@ public class CsrfDisabledCheck extends PythonSubscriptionCheck {
     }
 
     callExpr.arguments().forEach(arg -> {
-      if (arg instanceof RegularArgument) {
-        RegularArgument regArg = (RegularArgument) arg;
+      if (arg instanceof RegularArgument regArg) {
         searchForProblemsInFormInitializationArguments(regArg)
           .ifPresent(badExpr -> subscriptionContext.addIssue(badExpr, MESSAGE));
       }

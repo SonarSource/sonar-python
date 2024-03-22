@@ -84,8 +84,8 @@ public class InvariantReturnCheck extends PythonSubscriptionCheck {
   private static List<LatestExecutedBlock> collectLatestExecutedBlocks(ControlFlowGraph cfg) {
     List<LatestExecutedBlock> collectedBlocks = new ArrayList<>();
     for (CfgBlock predecessor : cfg.end().predecessors()) {
-      if (predecessor instanceof PythonCfgBranchingBlock) {
-        collectBranchingBlock(collectedBlocks, (PythonCfgBranchingBlock) predecessor);
+      if (predecessor instanceof PythonCfgBranchingBlock pythonCfgBranchingBlock) {
+        collectBranchingBlock(collectedBlocks, pythonCfgBranchingBlock);
       } else if (!endsWithElementKind(predecessor, Kind.RAISE_STMT)) {
         collectedBlocks.add(new LatestExecutedBlock(predecessor));
       }
@@ -110,8 +110,8 @@ public class InvariantReturnCheck extends PythonSubscriptionCheck {
   private static void collectBlocksHavingReturnBeforeExceptOrFinallyBlock(List<LatestExecutedBlock> collectedBlocks, PythonCfgBranchingBlock branchingBlock) {
     if (branchingBlock.branchingTree().is(Kind.EXCEPT_CLAUSE, Kind.FINALLY_CLAUSE)) {
       for (CfgBlock predecessor : branchingBlock.predecessors()) {
-        if (predecessor instanceof PythonCfgBranchingBlock) {
-          collectBlocksHavingReturnBeforeExceptOrFinallyBlock(collectedBlocks, (PythonCfgBranchingBlock) predecessor);
+        if (predecessor instanceof PythonCfgBranchingBlock pythonCfgBranchingBlock) {
+          collectBlocksHavingReturnBeforeExceptOrFinallyBlock(collectedBlocks, pythonCfgBranchingBlock);
         } else if (endsWithElementKind(predecessor, Kind.RETURN_STMT)) {
           collectedBlocks.add(new LatestExecutedBlock(predecessor));
         }

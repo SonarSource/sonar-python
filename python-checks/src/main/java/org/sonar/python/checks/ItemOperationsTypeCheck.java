@@ -55,8 +55,8 @@ public class ItemOperationsTypeCheck extends ItemOperationsType {
         return false;
       }
     }
-    if (subscriptionObject instanceof HasSymbol) {
-      Symbol symbol = ((HasSymbol) subscriptionObject).symbol();
+    if (subscriptionObject instanceof HasSymbol hasSymbol) {
+      Symbol symbol = hasSymbol.symbol();
       if (symbol == null || isTypingOrCollectionsSymbol(symbol)) {
         return true;
       }

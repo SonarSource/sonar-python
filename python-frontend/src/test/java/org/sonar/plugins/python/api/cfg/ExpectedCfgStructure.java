@@ -309,22 +309,21 @@ class ExpectedCfgStructure {
       Tree firstElement = elements.get(0);
 
       Expression expression;
-      if (firstElement instanceof ExpressionStatement) {
-        expression = ((ExpressionStatement) firstElement).expressions().get(0);
-      } else if (firstElement instanceof Expression) {
-        expression = (Expression) firstElement;
-      } else if (firstElement instanceof ForStatement) {
-        expression = ((ForStatement) firstElement).expressions().get(0);
-      } else if (firstElement instanceof ExceptClause) {
-        expression = ((ExceptClause) firstElement).exception();
+      if (firstElement instanceof ExpressionStatement expressionStatement) {
+        expression = expressionStatement.expressions().get(0);
+      } else if (firstElement instanceof Expression firstElementExpression) {
+        expression = firstElementExpression;
+      } else if (firstElement instanceof ForStatement forStatement) {
+        expression = forStatement.expressions().get(0);
+      } else if (firstElement instanceof ExceptClause exceptClause) {
+        expression = exceptClause.exception();
       } else {
         return null;
       }
 
-      if (!(expression instanceof CallExpression)) {
+      if (!(expression instanceof CallExpression call)) {
         return null;
       }
-      CallExpression call = (CallExpression) expression;
       if (call.arguments().isEmpty()) {
         return null;
       }
@@ -351,8 +350,7 @@ class ExpectedCfgStructure {
     }
 
     private static List<String> getStringList(Tree tree) {
-      if (tree instanceof ListLiteral) {
-        ListLiteral listLiteral = (ListLiteral) tree;
+      if (tree instanceof ListLiteral listLiteral) {
         return listLiteral.elements().expressions().stream().map(e -> getValue(e)).collect(Collectors.toList());
       } else {
         throw new UnsupportedOperationException("Expecting list literal, got '" + tree.toString() + "'");

@@ -89,8 +89,8 @@ public class FilePermissionsCheck extends PythonSubscriptionCheck {
       return false;
     }
     checkedExpressions.add(expression);
-    if (expression instanceof HasSymbol) {
-      Symbol symbol = ((HasSymbol) expression).symbol();
+    if (expression instanceof HasSymbol hasSymbol) {
+      Symbol symbol = hasSymbol.symbol();
       if (symbol != null && SENSITIVE_CONSTANTS.contains(symbol.fullyQualifiedName())) {
         return true;
       }

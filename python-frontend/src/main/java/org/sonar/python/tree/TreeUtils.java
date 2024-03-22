@@ -136,8 +136,8 @@ public class TreeUtils {
   }
 
   public static Optional<Symbol> getSymbolFromTree(@Nullable Tree tree) {
-    if (tree instanceof HasSymbol) {
-      return Optional.ofNullable(((HasSymbol) tree).symbol());
+    if (tree instanceof HasSymbol hasSymbol) {
+      return Optional.ofNullable(hasSymbol.symbol());
     }
     return Optional.empty();
   }
@@ -175,8 +175,8 @@ public class TreeUtils {
     visitedSymbols.add(classSymbol);
     for (Symbol symbol : classSymbol.superClasses()) {
       superClasses.add(symbol);
-      if (symbol instanceof ClassSymbol) {
-        superClasses.addAll(getParentClasses((ClassSymbol) symbol, visitedSymbols));
+      if (symbol instanceof ClassSymbol superClassSymbol) {
+        superClasses.addAll(getParentClasses(superClassSymbol, visitedSymbols));
       }
     }
     return superClasses;
@@ -216,8 +216,7 @@ public class TreeUtils {
 
     List<Parameter> result = new ArrayList<>();
     for (AnyParameter anyParameter : parameterList.all()) {
-      if (anyParameter instanceof Parameter) {
-        Parameter parameter = (Parameter) anyParameter;
+      if (anyParameter instanceof Parameter parameter) {
         Token starToken = parameter.starToken();
         if (parameter.name() == null && starToken != null) {
           if ("*".equals(starToken.value())) {
@@ -441,8 +440,8 @@ public class TreeUtils {
    * Statements can have a separator like semicolon. When handling ranges we want to take them into account.
    */
   public static Token getTreeSeparatorOrLastToken(Tree tree) {
-    if (tree instanceof Statement) {
-      Token separator = ((Statement) tree).separator();
+    if (tree instanceof Statement statement) {
+      Token separator = statement.separator();
       if (separator != null) {
         return separator;
       }

@@ -207,8 +207,8 @@ public class HashingDataCheck extends AbstractCallExpressionCheck {
   }
 
   private static String getQualifiedName(Expression node) {
-    if (node instanceof HasSymbol) {
-      Symbol symbol = ((HasSymbol) node).symbol();
+    if (node instanceof HasSymbol hasSymbol) {
+      Symbol symbol = hasSymbol.symbol();
       return symbol != null ? symbol.fullyQualifiedName() : "";
     }
     return "";

@@ -103,7 +103,7 @@ public class NonStringInAllPropertyCheck extends PythonSubscriptionCheck {
   }
 
   private static boolean couldBeString(Expression expression, Set<Tree> visitedTrees) {
-    if (expression instanceof HasSymbol && isClassOrFunctionSymbol(((HasSymbol) expression).symbol())) {
+    if (expression instanceof HasSymbol hasSymbol && isClassOrFunctionSymbol(hasSymbol.symbol())) {
       return false;
     }
     if (!expression.type().canBeOrExtend("str")) {
