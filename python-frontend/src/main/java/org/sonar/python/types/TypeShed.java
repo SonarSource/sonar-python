@@ -227,11 +227,11 @@ public class TypeShed {
   public static Set<Symbol> symbolsFromProtobufDescriptors(Set<Object> protobufDescriptors, @Nullable String containerClassFqn, String moduleName, boolean isFromClass) {
     Set<Symbol> symbols = new HashSet<>();
     for (Object descriptor : protobufDescriptors) {
-      if (descriptor instanceof SymbolsProtos.ClassSymbol) {
-        symbols.add(new ClassSymbolImpl(((SymbolsProtos.ClassSymbol) descriptor), moduleName));
+      if (descriptor instanceof SymbolsProtos.ClassSymbol classSymbolProto) {
+        symbols.add(new ClassSymbolImpl(classSymbolProto, moduleName));
       }
-      if (descriptor instanceof SymbolsProtos.FunctionSymbol) {
-        symbols.add(new FunctionSymbolImpl(((SymbolsProtos.FunctionSymbol) descriptor), containerClassFqn, moduleName));
+      if (descriptor instanceof SymbolsProtos.FunctionSymbol functionSymbolProto) {
+        symbols.add(new FunctionSymbolImpl(functionSymbolProto, containerClassFqn, moduleName));
       }
       if (descriptor instanceof OverloadedFunctionSymbol overloadedFunctionSymbol) {
         if (overloadedFunctionSymbol.getDefinitionsList().size() < 2) {
@@ -239,8 +239,7 @@ public class TypeShed {
         }
         symbols.add(fromOverloadedFunction(((OverloadedFunctionSymbol) descriptor), containerClassFqn, moduleName));
       }
-      if (descriptor instanceof SymbolsProtos.VarSymbol) {
-        SymbolsProtos.VarSymbol varSymbol = (SymbolsProtos.VarSymbol) descriptor;
+      if (descriptor instanceof SymbolsProtos.VarSymbol varSymbol) {
         SymbolImpl symbol = new SymbolImpl(varSymbol, moduleName, isFromClass);
         if (varSymbol.getIsImportedModule()) {
           Map<String, Symbol> moduleExportedSymbols = symbolsForModule(varSymbol.getFullyQualifiedName());

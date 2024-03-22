@@ -132,12 +132,12 @@ public class DeadStoreCheck extends PythonSubscriptionCheck {
       .map(DeadStoreCheck::mapToParentAssignmentStatementOrExpression)
       .forEach(tree -> issue.secondary(tree, String.format(SECONDARY_MESSAGE_TEMPLATE, symbolName)));
 
-    if (element instanceof Statement && !isExceptionForQuickFix((Statement) element)) {
+    if (element instanceof Statement statement && !isExceptionForQuickFix(statement)) {
       if (element.is(Tree.Kind.ASSIGNMENT_STMT) && ((AssignmentStatement) element).lhsExpressions().size() > 1) {
         addMultipleAssignmentStatementQuickFix((AssignmentStatement) element, issue, unnecessaryAssignment.symbol);
       } else {
         issue.addQuickFix(PythonQuickFix.newQuickFix(QUICK_FIX_MESSAGE,
-          TextEditUtils.removeStatement((Statement) element)));
+          TextEditUtils.removeStatement(statement)));
       }
     }
 

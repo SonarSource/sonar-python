@@ -100,10 +100,10 @@ class UnionType implements InferredType {
 
   private boolean hasUnresolvedHierarchy() {
     for (InferredType type : types) {
-      if (type instanceof RuntimeType && ((RuntimeType) type).hasUnresolvedHierarchy()) {
+      if (type instanceof RuntimeType runtimeType && runtimeType.hasUnresolvedHierarchy()) {
         return true;
       }
-      if (type instanceof DeclaredType && ((DeclaredType) type).hasUnresolvedHierarchy()) {
+      if (type instanceof DeclaredType declaredType && declaredType.hasUnresolvedHierarchy()) {
         return true;
       }
     }
