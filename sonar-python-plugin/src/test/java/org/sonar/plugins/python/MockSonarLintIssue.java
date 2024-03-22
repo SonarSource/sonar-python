@@ -180,7 +180,7 @@ class MockSonarLintIssue implements NewIssue, Issue {
   @Override
   public NewIssue setCodeVariants(@Nullable Iterable<String> iterable) {
     codeVariants = iterable == null ? null : StreamSupport.stream(iterable.spliterator(), false)
-      .collect(Collectors.toList());
+      .toList();
     return this;
   }
 

@@ -126,7 +126,7 @@ public class CoberturaParser {
       List<File> fileList = baseDirectories.stream()
         .map(base -> new File(base, filename))
         .filter(File::exists)
-        .collect(Collectors.toList());
+        .toList();
       if (fileList.isEmpty()) {
         logUnresolvedFile("Cannot resolve the file path '%s' of the coverage report, the file does not exist in all 'source'.", filename);
         return null;
