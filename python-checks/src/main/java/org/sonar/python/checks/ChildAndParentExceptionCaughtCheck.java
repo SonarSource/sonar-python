@@ -104,7 +104,7 @@ public class ChildAndParentExceptionCaughtCheck extends PythonSubscriptionCheck 
         .stream()
         .map(ChildAndParentExceptionCaughtCheck::collectNames)
         .flatMap(Collection::stream)
-        .toList();
+        .collect(Collectors.toList());
     }
     throw new IllegalArgumentException("Unsupported kind of tree element: " + expression.getKind().name());
   }
@@ -132,7 +132,7 @@ public class ChildAndParentExceptionCaughtCheck extends PythonSubscriptionCheck 
         .map(ExceptClause.class::cast)
         .map(ExceptClause::exception)
         .map(exceptions -> {
-          List<String> names = new ArrayList<>(collectNamesFromTuple(exceptions));
+          List<String> names = collectNamesFromTuple(exceptions);
           names.remove(currentExceptionName);
 
           var text = names.size() == 1 ? names.get(0) : names.stream().collect(Collectors.joining(", ", "(", ")"));
