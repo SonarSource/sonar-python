@@ -24,7 +24,6 @@ import java.io.File;
 import java.nio.file.Path;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.IssueLocation;
 import org.sonar.plugins.python.api.PythonCheck;
@@ -65,14 +64,14 @@ public class PythonCheckVerifier {
   }
 
   public static void verify(List<String> paths, PythonCheck check) {
-    List<File> files = paths.stream().map(File::new).collect(Collectors.toList());
+    List<File> files = paths.stream().map(File::new).toList();
     File baseDirFile = new File(files.get(0).getParent());
     ProjectLevelSymbolTable projectLevelSymbolTable = TestPythonVisitorRunner.globalSymbols(files, baseDirFile);
     createVerifier(files, check, projectLevelSymbolTable, baseDirFile).assertOneOrMoreIssues();
   }
 
   public static void verifyNoIssue(List<String> paths, PythonCheck check) {
-    List<File> files = paths.stream().map(File::new).collect(Collectors.toList());
+    List<File> files = paths.stream().map(File::new).toList();
     File baseDirFile = new File(files.get(0).getParent());
     ProjectLevelSymbolTable projectLevelSymbolTable = TestPythonVisitorRunner.globalSymbols(files, baseDirFile);
     createVerifier(files, check, projectLevelSymbolTable, baseDirFile).assertNoIssues();

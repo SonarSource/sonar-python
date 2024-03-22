@@ -105,7 +105,7 @@ public class ChangeMethodContractCheck extends PythonSubscriptionCheck {
     var missingParameters = overriddenParams.subList(indexFirstMissingParam, overriddenParams.size())
       .stream()
       .map(FunctionSymbol.Parameter::name)
-      .collect(Collectors.toList());
+      .toList();
     if (!missingParameters.isEmpty()) {
 //      If at least one parameter missing name - set message as "Add missing N parameters" where N is amount of missing parameters
       reportIssue(ctx, getMissingParametersMessage(missingParameters), method.definitionLocation(), overriddenMethod);
