@@ -87,7 +87,7 @@ public class StringFormatMisuseCheck extends AbstractStringFormatCheck {
 
     List<RegularArgument> arguments = callExpression.arguments().stream()
       .map(RegularArgument.class::cast)
-      .collect(Collectors.toList());
+      .toList();
 
     OptionalInt firstKwIdx = IntStream.range(0, arguments.size())
       .filter(idx -> arguments.get(idx).keywordArgument() != null)

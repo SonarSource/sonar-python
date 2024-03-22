@@ -26,7 +26,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.IssueLocation;
@@ -138,7 +137,7 @@ public class CdkUtils {
   public static List<CdkUtils.ExpressionFlow> getListElements(SubscriptionContext ctx, ListLiteral list) {
     return list.elements().expressions().stream()
       .map(expression -> CdkUtils.ExpressionFlow.build(ctx, expression))
-      .collect(Collectors.toList());
+      .toList();
   }
 
   /**
@@ -180,7 +179,7 @@ public class CdkUtils {
     return getListElements(ctx, listeners).stream()
       .map(CdkUtils::getDictionary)
       .flatMap(Optional::stream)
-      .collect(Collectors.toList());
+      .toList();
   }
 
   /**
@@ -190,7 +189,7 @@ public class CdkUtils {
     return dict.elements().stream()
       .map(e -> CdkUtils.getKeyValuePair(ctx, e))
       .flatMap(Optional::stream)
-      .collect(Collectors.toUnmodifiableList());
+      .toList();
   }
 
   /**

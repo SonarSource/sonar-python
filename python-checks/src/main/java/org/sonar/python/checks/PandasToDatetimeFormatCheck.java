@@ -29,7 +29,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
@@ -187,7 +186,7 @@ public class PandasToDatetimeFormatCheck extends PythonSubscriptionCheck {
     }
     if (expression.is(Tree.Kind.LIST_LITERAL)) {
       return ((ListLiteral) expression).elements().expressions().stream()
-        .map(PandasToDatetimeFormatCheck::getExpressionsAndStringValues).flatMap(List::stream).collect(Collectors.toList());
+        .map(PandasToDatetimeFormatCheck::getExpressionsAndStringValues).flatMap(List::stream).toList();
     }
     return Collections.emptyList();
   }

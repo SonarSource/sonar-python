@@ -23,7 +23,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-import java.util.stream.Collectors;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
@@ -157,7 +156,7 @@ public abstract class FlaskHardCodedSecret extends PythonSubscriptionCheck {
       .map(ExpressionList::expressions)
       .flatMap(List::stream)
       .filter(this::isSensitiveProperty)
-      .collect(Collectors.toList());
+      .toList();
     if (!expressionList.isEmpty()) {
       PreciseIssue issue = ctx.addIssue(assignmentStatementTree.assignedValue(), getMessage());
       expressionList.forEach(expr -> issue.secondary(expr, SECONDARY_MESSAGE));

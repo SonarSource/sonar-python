@@ -29,7 +29,6 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
@@ -126,7 +125,7 @@ public class CsrfDisabledCheck extends PythonSubscriptionCheck {
     List<String> names = Stream.of(TreeUtils.decoratorNameFromExpression(decorator.expression()))
       .filter(Objects::nonNull)
       .flatMap(s -> Arrays.stream(s.split("\\.")))
-      .collect(Collectors.toList());
+      .toList();
     // This is a temporary workaround until symbol resolution works for decorators.
     // Use the actual functions with FQNs from DANGEROUS_DECORATORS once that's fixed.
     // Related ticket: https://jira.sonarsource.com/browse/SONARPY-681

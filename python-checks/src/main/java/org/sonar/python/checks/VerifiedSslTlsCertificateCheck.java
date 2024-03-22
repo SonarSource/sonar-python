@@ -30,7 +30,6 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
@@ -277,7 +276,7 @@ public class VerifiedSslTlsCertificateCheck extends PythonSubscriptionCheck {
         .filter(argumentNames::contains)
         .isPresent())
       .map(RegularArgument::expression)
-      .collect(Collectors.toList());
+      .toList();
     return Optional.of(args).filter(Predicate.not(List::isEmpty));
   }
 

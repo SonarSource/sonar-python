@@ -76,7 +76,7 @@ public class ChildAndParentExceptionCaughtCheck extends PythonSubscriptionCheck 
       var caughtParentExceptions = caughtExceptionsBySymbol.entrySet()
         .stream()
         .filter(entry -> entry.getKey() != currentSymbol && currentSymbol.isOrExtends(entry.getKey()))
-        .collect(Collectors.toList());
+        .toList();
 
       if (!caughtParentExceptions.isEmpty()) {
         var issue = ctx.addIssue(currentException, "Remove this redundant Exception class; it derives from another which is already caught.");

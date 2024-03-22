@@ -24,16 +24,15 @@ import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
+import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.plugins.python.api.symbols.Symbol;
-import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S1845")
@@ -56,7 +55,7 @@ public class DuplicatedMethodFieldNamesCheck extends PythonSubscriptionCheck {
         .map(s -> s.usages().stream().findFirst())
         .filter(Optional::isPresent)
         .map(usage -> usage.get().tree())
-        .collect(Collectors.toList());
+        .toList();
       lookForDuplications(ctx, fieldNames, methodVisitor.methodNames);
     });
   }

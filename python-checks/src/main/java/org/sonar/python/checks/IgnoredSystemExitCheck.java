@@ -21,12 +21,12 @@ package org.sonar.python.checks;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
+import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.CallExpression;
@@ -37,7 +37,6 @@ import org.sonar.plugins.python.api.tree.RaiseStatement;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TryStatement;
-import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
 import org.sonar.python.quickfix.TextEditUtils;
 import org.sonar.python.tree.TreeUtils;
 
@@ -212,7 +211,7 @@ public class IgnoredSystemExitCheck extends PythonSubscriptionCheck {
         Expression exceptionInstance = exceptClause.exceptionInstance();
         Symbol exceptionInstanceSymbol = findExceptionInstanceSymbol(exceptionInstance);
 
-        List<Expression> caughtExceptions = TreeUtils.flattenTuples(exceptionExpr).collect(Collectors.toList());
+        List<Expression> caughtExceptions = TreeUtils.flattenTuples(exceptionExpr).toList();
         for (Expression caughtException : caughtExceptions) {
           isSystemExitHandled |= handleCaughtException(ctx, caughtException, exceptionInstanceSymbol, exceptClause.body(), isSystemExitHandled);
         }

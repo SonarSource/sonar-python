@@ -20,7 +20,6 @@
 package org.sonar.python.checks.regex;
 
 import java.util.List;
-import java.util.stream.Collectors;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonarsource.analyzer.commons.regex.RegexIssueLocation;
@@ -46,7 +45,7 @@ public class InvalidRegexCheck extends AbstractRegexCheck {
     RegexSyntaxElement tree = syntaxErrors.get(0).getOffendingSyntaxElement();
     List<RegexIssueLocation> secondaries = syntaxErrors.stream()
       .map(error -> new RegexIssueLocation(error.getOffendingSyntaxElement(), error.getMessage()))
-      .collect(Collectors.toList());
+      .toList();
 
     String msg = String.format(MESSAGE_FORMAT, secondaries.size() > 1 ? "s" : "");
     addIssue(tree, msg, null, secondaries);

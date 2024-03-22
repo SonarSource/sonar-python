@@ -148,7 +148,7 @@ public class HashingDataCheck extends AbstractCallExpressionCheck {
     if (listLiteral != null) {
       return listLiteral.elements().expressions().stream()
         .filter(HashingDataCheck::isWeakHasher)
-        .collect(Collectors.toList());
+        .toList();
     }
     return Collections.emptyList();
   }

@@ -22,10 +22,10 @@ package org.sonar.python.checks;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
+import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.symbols.Usage;
@@ -33,7 +33,6 @@ import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
 import org.sonar.python.tree.TreeUtils;
 
 import static org.sonar.python.quickfix.TextEditUtils.insertAfter;
@@ -81,7 +80,7 @@ public class InstanceAndClassMethodsAtLeastOnePositionalCheck extends PythonSubs
     List<String> decoratorNames = functionDef.decorators()
       .stream()
       .map(decorator -> TreeUtils.decoratorNameFromExpression(decorator.expression()))
-      .filter(Objects::nonNull).collect(Collectors.toList());
+      .filter(Objects::nonNull).toList();
 
     if (decoratorNames.contains("staticmethod")) {
       return;

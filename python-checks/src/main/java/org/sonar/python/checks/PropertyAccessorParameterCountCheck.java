@@ -25,7 +25,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
@@ -39,7 +38,6 @@ import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.HasSymbol;
-import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.ParameterList;
 import org.sonar.plugins.python.api.tree.RegularArgument;
@@ -94,7 +92,7 @@ public class PropertyAccessorParameterCountCheck extends PythonSubscriptionCheck
       List<RegularArgument> regularArguments = argumentList.stream()
         .filter(arg -> arg.is(Tree.Kind.REGULAR_ARGUMENT))
         .map(RegularArgument.class::cast)
-        .collect(Collectors.toList());
+        .toList();
 
       // Do not bother with tuple arguments and keyword arguments
       if (regularArguments.size() != argumentList.size() || regularArguments.stream().anyMatch(arg -> arg.keywordArgument() != null)) {
@@ -161,7 +159,7 @@ public class PropertyAccessorParameterCountCheck extends PythonSubscriptionCheck
 
     public List<PropertyAccessorTriple> propertyAccessors() {
       return Stream.concat(this.propertyCallStyleProperties.stream(), this.decoratorStyleProperties.values().stream())
-        .collect(Collectors.toList());
+        .toList();
     }
   }
 

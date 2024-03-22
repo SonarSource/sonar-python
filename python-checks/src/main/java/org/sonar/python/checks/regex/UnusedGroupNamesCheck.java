@@ -27,7 +27,6 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.symbols.Symbol;
@@ -79,7 +78,7 @@ public class UnusedGroupNamesCheck extends AbstractRegexCheck {
         // To avoid FP apply rule only if there is only one match assignment
         .filter(UnusedGroupNamesCheck::isSingleAssignment)
         .flatMap(Collection::stream)
-        .collect(Collectors.toList()))
+        .toList())
       .or(() -> getCallExpressionResultUsages(regexFunctionCall, MATCH_CREATION_FUNCTION_NAMES))
       .ifPresent(matchUsages -> checkGroupAccesses(regexParseResult, groupsCollector, matchUsages));
   }
@@ -189,7 +188,7 @@ public class UnusedGroupNamesCheck extends AbstractRegexCheck {
       .filter(Objects::nonNull)
       .map(Symbol::usages)
       .flatMap(Collection::stream)
-      .collect(Collectors.toList());
+      .toList();
   }
 
   private static class KnownGroupsCollector extends RegexBaseVisitor {

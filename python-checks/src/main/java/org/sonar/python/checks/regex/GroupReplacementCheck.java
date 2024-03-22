@@ -28,7 +28,6 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
@@ -67,7 +66,7 @@ public class GroupReplacementCheck extends AbstractRegexCheck {
       List<Integer> references = collectReferences(expression.trimmedQuotesValue());
       references.removeIf(reference -> groups.stream().anyMatch(group -> group.getGroupNumber() == reference));
       if (!references.isEmpty()) {
-        List<String> stringReferences = references.stream().map(String::valueOf).collect(Collectors.toList());
+        List<String> stringReferences = references.stream().map(String::valueOf).toList();
         regexContext.addIssue(expression, String.format(MESSAGE, references.size() == 1 ? "" : "s", String.join(", ", stringReferences)));
       }
     }

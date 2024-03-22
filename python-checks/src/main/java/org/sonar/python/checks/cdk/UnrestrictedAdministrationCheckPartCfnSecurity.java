@@ -26,7 +26,6 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.DictionaryLiteral;
@@ -138,7 +137,7 @@ public class UnrestrictedAdministrationCheckPartCfnSecurity extends AbstractCdkR
 
       List<CdkUtils.ResolvedKeyValuePair> pairs = dictionary.elements().stream()
         .map(e -> CdkUtils.getKeyValuePair(ctx, e))
-        .filter(Optional::isPresent).map(Optional::get).collect(Collectors.toList());
+        .filter(Optional::isPresent).map(Optional::get).toList();
 
       for (CdkUtils.ResolvedKeyValuePair pair : pairs) {
         pair.key.getExpression(isStringLiteral()).map(StringLiteral.class::cast)
