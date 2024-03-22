@@ -19,15 +19,12 @@
  */
 package org.sonar.python.types.v2.converter;
 
-import java.util.List;
-import java.util.Map;
 import org.sonar.python.types.pytype.ClassType;
-import org.sonar.python.types.v2.ExactType;
-import org.sonar.python.types.v2.PythonType;
+import org.sonar.python.types.v2.ObjectType;
 
-public class ClassTypeConverter implements PyTypeConverter<ClassType, ExactType> {
+public class ClassTypeConverter implements PyTypeConverter<org.sonar.python.types.pytype.ClassType, ObjectType> {
   @Override
-  public ExactType convert(ClassType from) {
-    return new ExactType(from.name(), List.of(), Map.of());
+  public ObjectType convert(ClassType from) {
+    return null;
   }
 }
