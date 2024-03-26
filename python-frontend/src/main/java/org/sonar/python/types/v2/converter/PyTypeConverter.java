@@ -19,9 +19,33 @@
  */
 package org.sonar.python.types.v2.converter;
 
+import java.util.Map;
 import org.sonar.python.types.pytype.BaseType;
+import org.sonar.python.types.pytype.CallableType;
+import org.sonar.python.types.pytype.ClassType;
+import org.sonar.python.types.pytype.GenericType;
+import org.sonar.python.types.pytype.PyTypeInfo;
 import org.sonar.python.types.v2.PythonType;
+import org.sonar.python.types.v2.TypesTable;
 
 public interface PyTypeConverter<F extends BaseType, T extends PythonType> {
-  T convert(F from);
+  T convert(TypesTable typesTable, PyTypeInfo pyTypeInfo, F from);
+
+  Map<Class<? extends BaseType>, PyTypeConverter> converterMap = Map.ofEntries(
+    Map.entry(ClassType.class, new ClassTypeConverter()),
+    Map.entry(CallableType.class, new CallableTypeConverter()),
+    Map.entry(GenericType.class, new GenericTypeConverter())
+  );
+
+  static PythonType convert(TypesTable typesTable, PyTypeInfo from) {
+    if (converterMap.containsKey(from.baseType().getClass())) {
+      var converted = converterMap.get(from.baseType().getClass()).convert(typesTable, from, from.baseType());
+      if (!typesTable.declaredTypesTable().containsKey(converted.toString())) {
+        typesTable.declaredTypesTable().put(converted.toString(), converted);
+      }
+      return converted;
+    } else {
+      return PythonType.UNKNOWN;
+    }
+  }
 }

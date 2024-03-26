@@ -33,12 +33,12 @@ import org.sonar.python.types.pytype.json.PyTypeTableReader;
 public class TypesTableBuilderTest {
 
   @Test
-  void test() {
+  void simpleVarsTypeTest() {
     var file = Path.of("src/test/resources/v2/code/snippet1.py");
     var pythonFile = new TestPythonFile(Path.of("src/test/resources/v2/code"), file);
     var pyTypeTable = PyTypeTableReader.fromJsonPath(Path.of("src/test/resources/v2/code.json"));
-    var typesTable = new TypesTable(pyTypeTable);
-    var typesTableBuilder = new TypesTableBuilder(typesTable, pythonFile);
+    var typesTable = new TypesTable();
+    var typesTableBuilder = new TypesTableBuilder(pyTypeTable, typesTable, pythonFile);
     var fileInput = parseFile(pythonFile);
     typesTableBuilder.annotate(fileInput);
     
@@ -50,6 +50,78 @@ public class TypesTableBuilderTest {
       .orElse(null);
     Assertions.assertNotNull(dName);
     Assertions.assertNotNull(dName.pythonType());
+  }
+
+  @Test
+  void functionTypeTest() {
+    var file = Path.of("src/test/resources/v2/code/snippet2.py");
+    var pythonFile = new TestPythonFile(Path.of("src/test/resources/v2/code"), file);
+    var pyTypeTable = PyTypeTableReader.fromJsonPath(Path.of("src/test/resources/v2/code.json"));
+    var typesTable = new TypesTable();
+    var typesTableBuilder = new TypesTableBuilder(pyTypeTable, typesTable, pythonFile);
+    var fileInput = parseFile(pythonFile);
+    typesTableBuilder.annotate(fileInput);
+
+    var fooName = TreeUtils.firstChild(fileInput, v -> TreeUtils.toOptionalInstanceOf(NameImpl.class, v)
+        .map(NameImpl::name)
+        .filter("foo"::equals)
+        .isPresent()
+    ).flatMap(TreeUtils.toOptionalInstanceOfMapper(NameImpl.class))
+      .orElse(null);
+    Assertions.assertNotNull(fooName);
+    Assertions.assertNotNull(fooName.pythonType());
+    Assertions.assertInstanceOf(FunctionType.class, fooName.pythonType());
+
+    var returnType = ((FunctionType) fooName.pythonType()).returnType();
+
+    var aName = TreeUtils.firstChild(fileInput, v -> TreeUtils.toOptionalInstanceOf(NameImpl.class, v)
+        .map(NameImpl::name)
+        .filter("a"::equals)
+        .isPresent()
+      ).flatMap(TreeUtils.toOptionalInstanceOfMapper(NameImpl.class))
+      .orElse(null);
+    Assertions.assertNotNull(aName);
+    Assertions.assertNotNull(aName.pythonType());
+    Assertions.assertInstanceOf(ObjectType.class, aName.pythonType());
+    var resultValueType = ((ObjectType) aName.pythonType()).type();
+
+    Assertions.assertEquals(returnType, resultValueType);
+  }
+
+  @Test
+  void genericFunctionTypeTest() {
+    var file = Path.of("src/test/resources/v2/code/snippet3.py");
+    var pythonFile = new TestPythonFile(Path.of("src/test/resources/v2/code"), file);
+    var pyTypeTable = PyTypeTableReader.fromJsonPath(Path.of("src/test/resources/v2/code.json"));
+    var typesTable = new TypesTable();
+    var typesTableBuilder = new TypesTableBuilder(pyTypeTable, typesTable, pythonFile);
+    var fileInput = parseFile(pythonFile);
+    typesTableBuilder.annotate(fileInput);
+
+    var fooName = TreeUtils.firstChild(fileInput, v -> TreeUtils.toOptionalInstanceOf(NameImpl.class, v)
+        .map(NameImpl::name)
+        .filter("foo"::equals)
+        .isPresent()
+    ).flatMap(TreeUtils.toOptionalInstanceOfMapper(NameImpl.class))
+      .orElse(null);
+    Assertions.assertNotNull(fooName);
+    Assertions.assertNotNull(fooName.pythonType());
+    Assertions.assertInstanceOf(FunctionType.class, fooName.pythonType());
+
+    var returnType = ((FunctionType) fooName.pythonType()).returnType();
+
+    var aName = TreeUtils.firstChild(fileInput, v -> TreeUtils.toOptionalInstanceOf(NameImpl.class, v)
+        .map(NameImpl::name)
+        .filter("a"::equals)
+        .isPresent()
+      ).flatMap(TreeUtils.toOptionalInstanceOfMapper(NameImpl.class))
+      .orElse(null);
+    Assertions.assertNotNull(aName);
+    Assertions.assertNotNull(aName.pythonType());
+    Assertions.assertInstanceOf(ObjectType.class, aName.pythonType());
+    var resultValueType = ((ObjectType) aName.pythonType()).type();
+
+    Assertions.assertEquals(returnType, resultValueType);
   }
 
   private static FileInput parseFile(TestPythonFile file) {

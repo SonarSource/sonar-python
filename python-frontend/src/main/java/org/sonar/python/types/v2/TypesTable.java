@@ -20,34 +20,17 @@
 package org.sonar.python.types.v2;
 
 import java.util.HashMap;
-import java.util.List;
-import org.sonar.plugins.python.api.tree.Name;
-import org.sonar.python.types.pytype.PyTypeTable;
-import org.sonar.python.types.v2.converter.PyTypeToPythonTypeConverter;
 
 public class TypesTable {
 
   private final HashMap<String, PythonType> declaredTypesTable;
-  private final PyTypeTable pyTypeTable;
 
-  public TypesTable(PyTypeTable pyTypeTable) {
-    this.pyTypeTable = pyTypeTable;
+  public TypesTable() {
     declaredTypesTable = new HashMap<>();
   }
 
-  public PythonType getTypeForName(String fileName, Name name) {
-    return pyTypeTable.getTypeFor(fileName, name)
-      .map(pyTypeInfo -> {
-        var baseType = pyTypeInfo.baseType();
-        var pythonType = PyTypeToPythonTypeConverter.convert(baseType);
-        var typeKey = pythonType.toString();
-        if (declaredTypesTable.containsKey(typeKey)) {
-          pythonType = declaredTypesTable.get(typeKey);
-        } else {
-          declaredTypesTable.put(typeKey, pythonType);
-        }
-        return (PythonType) new ObjectType(pythonType, List.of());
-      }).orElse(PythonType.UNKNOWN);
+  public HashMap<String, PythonType> declaredTypesTable() {
+    return declaredTypesTable;
   }
 
 }

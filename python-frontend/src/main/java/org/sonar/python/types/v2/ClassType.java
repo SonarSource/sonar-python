@@ -33,4 +33,7 @@ public record ClassType(
   public ClassType(String name) {
     this(name, List.of(), List.of(), List.of(), List.of());
   }
+  public ClassType(String name, List<PythonType> attributes) {
+    this(name, List.of(), attributes, List.of(), List.of());
+  }
 }

@@ -19,20 +19,23 @@
  */
 package org.sonar.python.types.v2.converter;
 
-import java.util.Map;
-import org.sonar.python.types.pytype.BaseType;
-import org.sonar.python.types.pytype.ClassType;
-import org.sonar.python.types.v2.PythonType;
+import java.util.List;
+import org.sonar.python.types.pytype.CallableType;
+import org.sonar.python.types.pytype.PyTypeInfo;
+import org.sonar.python.types.v2.FunctionType;
+import org.sonar.python.types.v2.TypesTable;
 
-public class PyTypeToPythonTypeConverter {
-
-  private static Map<Class<? extends BaseType>, PyTypeConverter> converterMap = Map.ofEntries(
-   Map.entry(ClassType.class, new ClassTypeConverter())
-  );
-
-  public static PythonType convert(BaseType from) {
-    return converterMap.get(from.getClass()).convert(from);
+public class CallableTypeConverter implements PyTypeConverter<CallableType, FunctionType> {
+  @Override
+  public FunctionType convert(TypesTable typesTable, PyTypeInfo pyTypeInfo, CallableType from) {
+    var returnPyType = from.parameters().get(from.parameters().size() - 1);
+    var returnPyTypeInfo = new PyTypeInfo(null, 0, 0, "Variable", null, null, returnPyType);
+    return new FunctionType(pyTypeInfo.text(),
+      List.of(),
+      List.of(),
+      List.of(),
+      List.of(),
+      PyTypeConverter.convert(typesTable, returnPyTypeInfo)
+      );
   }
-
-
 }

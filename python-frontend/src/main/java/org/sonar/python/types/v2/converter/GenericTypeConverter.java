@@ -17,19 +17,21 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.types.v2;
+package org.sonar.python.types.v2.converter;
 
-import java.util.List;
+import org.sonar.python.types.pytype.GenericType;
+import org.sonar.python.types.pytype.PyTypeInfo;
+import org.sonar.python.types.v2.ClassType;
+import org.sonar.python.types.v2.TypesTable;
 
-/**
- * FunctionType
- */
-public record FunctionType(
-  String name,
-  List<Member> members,
-  List<PythonType> attributes,
-  List<PythonType> typeVars,
-  List<Member> parameters,
-  PythonType returnType) implements PythonType {
-
+public class GenericTypeConverter implements PyTypeConverter<GenericType, ClassType> {
+  @Override
+  public ClassType convert(TypesTable typesTable, PyTypeInfo pyTypeInfo, GenericType from) {
+    var attributes = from.parameters()
+      .stream().map(paramType -> {
+        var paramTypeInfo = new PyTypeInfo(null, 0, 0, "Variable", null, null, paramType);
+        return PyTypeConverter.convert(typesTable, paramTypeInfo);
+      }).toList();
+    return new ClassType(from.name(), attributes);
+  }
 }

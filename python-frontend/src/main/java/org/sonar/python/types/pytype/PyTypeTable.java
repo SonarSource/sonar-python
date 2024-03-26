@@ -62,12 +62,17 @@ public class PyTypeTable {
       .collect(Collectors.groupingBy(Map.Entry::getKey, HashMap::new, Collectors.mapping(Map.Entry::getValue, Collectors.toList())));
   }
 
-  public Optional<PyTypeInfo> getTypeFor(String fileName, Name name) {
+  public Optional<PyTypeInfo> getVariableTypeFor(String fileName, Name name) {
     var token = name.firstToken();
-    return getTypeFor(fileName, token.line(), token.column(), name.name(), "Variable");
+    return getVariableTypeFor(fileName, token.line(), token.column(), name.name(), "Variable");
   }
 
-  public Optional<PyTypeInfo> getTypeFor(String fileName, int line, int column, String name, String kind) {
+  public Optional<PyTypeInfo> getFunctionTypeFor(String fileName, Name name) {
+    var token = name.parent().firstToken();
+    return getVariableTypeFor(fileName, token.line(), token.column(), name.name(), "Function");
+  }
+
+  public Optional<PyTypeInfo> getVariableTypeFor(String fileName, int line, int column, String name, String kind) {
     TypePositionKey typePositionKey = new TypePositionKey(fileName, line, column, name);
     return Optional.ofNullable(multipleTypesByPosition.get(typePositionKey))
       .filter(Predicate.not(List::isEmpty))

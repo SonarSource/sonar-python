@@ -141,7 +141,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     }
     this.projectLevelSymbolTable = projectLevelSymbolTable;
     this.typeContext = typeContext;
-    this.typesTable = new TypesTable(typeContext.pyTypeTable());
+    this.typesTable = new TypesTable();
   }
 
   @Override
@@ -157,7 +157,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
       this.typeContext.setScopesByRootTree(scopesByRootTree);
       this.typeContext.setProjectLevelSymbolTable(projectLevelSymbolTable);
       new PyTypeAnnotation(this.typeContext, pythonFile).annotate(fileInput);
-      new TypesTableBuilder(this.typesTable, pythonFile).annotate(fileInput);
+      new TypesTableBuilder(this.typeContext.pyTypeTable(), this.typesTable, pythonFile).annotate(fileInput);
     } else {
       TypeInference.inferTypes(fileInput, pythonFile);
     }
