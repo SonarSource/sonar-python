@@ -35,19 +35,20 @@ import org.sonar.python.types.PyTypeDetailedInfoDeserializer;
 import org.sonar.python.types.pytype.PyTypeInfo;
 import org.sonar.python.types.TypeContext;
 import org.sonar.python.types.pytype.BaseType;
+import org.sonar.python.types.pytype.PyTypeTable;
 
-public class TypeContextReader {
+public class PyTypeTableReader {
 
   private final Gson gson;
   private final Type type;
 
   public static TypeContext fromJson(String json) {
     try (var reader = new StringReader(json)) {
-      return new TypeContextReader().fromJson(reader);
+      return new PyTypeTableReader().fromJson(reader);
     }
   }
 
-  public TypeContextReader() {
+  public PyTypeTableReader() {
     gson = new GsonBuilder()
       .registerTypeAdapter(PyTypeDetailedInfo.class, new PyTypeDetailedInfoDeserializer())
       .registerTypeAdapter(BaseType.class, new PolymorphDeserializer<>())
@@ -64,7 +65,7 @@ public class TypeContextReader {
 
   private TypeContext fromJson(Reader reader) {
     var files = gson.<Map<String, List<PyTypeInfo>>>fromJson(reader, type);
-    return new TypeContext(files);
+    return new TypeContext(new PyTypeTable(files));
   }
 
 }

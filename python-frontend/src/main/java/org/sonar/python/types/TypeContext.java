@@ -21,11 +21,8 @@ package org.sonar.python.types;
 
 import com.google.common.annotations.VisibleForTesting;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.plugins.python.api.symbols.Symbol;
@@ -40,6 +37,7 @@ import org.sonar.python.semantic.Scope;
 import org.sonar.python.semantic.SymbolImpl;
 import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.types.pytype.PyTypeInfo;
+import org.sonar.python.types.pytype.PyTypeTable;
 import org.sonar.python.types.v2.PythonType;
 import org.sonar.python.types.v2.converter.PyTypeToPythonTypeConverter;
 
@@ -53,47 +51,15 @@ public class TypeContext {
   public void setProjectLevelSymbolTable(ProjectLevelSymbolTable projectLevelSymbolTable) {
     TypeContext.projectLevelSymbolTable = projectLevelSymbolTable;
   }
-
-  private record TypePositionKey(String fileName, int line, int column, String name) {
-  }
-
-  private final Map<String, List<PyTypeInfo>> files;
-  private final Map<TypePositionKey, PyTypeInfo> typesByPosition;
-  private final HashMap<TypePositionKey, List<PyTypeInfo>> multipleTypesByPosition;
+  private PyTypeTable pyTypeTable;
   private Map<Tree, Scope> scopesByRootTree = null;
 
   public TypeContext() {
-    this.files = new HashMap<>();
-    this.typesByPosition = new HashMap<>();
-    this.multipleTypesByPosition = new HashMap<>();
+    pyTypeTable = new PyTypeTable(new HashMap<>());
   }
 
-  public TypeContext(Map<String, List<PyTypeInfo>> files) {
-    this.files = files;
-    typesByPosition = files.entrySet()
-      .stream()
-      .flatMap(entry -> {
-        var file = entry.getKey();
-        return entry.getValue()
-          .stream()
-          .map(typeInfo -> Map.entry(
-            new TypePositionKey(file, typeInfo.startLine(), typeInfo.startCol(), typeInfo.text()),
-            typeInfo));
-      })
-      .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (v1, v2) -> v1));
-
-    multipleTypesByPosition = files
-      .entrySet()
-      .stream()
-      .flatMap(entry -> {
-        var file = entry.getKey();
-        return entry.getValue()
-          .stream()
-          .map(typeInfo -> Map.entry(
-            new TypePositionKey(file, typeInfo.startLine(), typeInfo.startCol(), typeInfo.text()),
-            typeInfo));
-      })
-      .collect(Collectors.groupingBy(Map.Entry::getKey, HashMap::new, Collectors.mapping(Map.Entry::getValue, Collectors.toList())));
+  public TypeContext(PyTypeTable pyTypeTable) {
+    this.pyTypeTable = pyTypeTable;
   }
 
   public void setScopesByRootTree(Map<Tree, Scope> scopesByRootTree) {
@@ -102,25 +68,13 @@ public class TypeContext {
 
   @VisibleForTesting
   Optional<InferredType> getTypeFor(String fileName, int line, int column, String name, String kind, Tree tree) {
-    TypePositionKey typePositionKey = new TypePositionKey(fileName, line, column, name);
-    return Optional.ofNullable(multipleTypesByPosition.get(typePositionKey))
-      .filter(Predicate.not(List::isEmpty))
-      .map(types -> types.stream()
-        .filter(t -> kind.equals(t.syntaxRole()))
-        .findFirst()
-        .orElse(types.get(0)))
+    return pyTypeTable.getTypeFor(fileName, line, column, name, kind)
       .map(typeInfo -> getInferredType(typeInfo, fileName, tree));
   }
 
   @VisibleForTesting
   Optional<PythonType> getPythonTypeFor(String fileName, int line, int column, String name, String kind, Tree tree) {
-    TypePositionKey typePositionKey = new TypePositionKey(fileName, line, column, name);
-    return Optional.ofNullable(multipleTypesByPosition.get(typePositionKey))
-      .filter(Predicate.not(List::isEmpty))
-      .map(types -> types.stream()
-        .filter(t -> kind.equals(t.syntaxRole()))
-        .findFirst()
-        .orElse(types.get(0)))
+    return pyTypeTable.getTypeFor(fileName, line, column, name, kind)
       .map(typeInfo -> getPythonType(typeInfo, fileName, tree));
   }
 
@@ -246,7 +200,6 @@ public class TypeContext {
 
   public Optional<InferredType> getTypeFor(String fileName, Name name) {
     Token token = name.firstToken();
-
     return getTypeFor(fileName, token.line(), token.column(), name.name(), "Variable", name);
   }
 

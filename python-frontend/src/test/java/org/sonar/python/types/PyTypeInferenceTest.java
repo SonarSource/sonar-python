@@ -29,7 +29,7 @@ import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.PythonTestUtils;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.semantic.SymbolTableBuilder;
-import org.sonar.python.types.pytype.json.TypeContextReader;
+import org.sonar.python.types.pytype.json.PyTypeTableReader;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.PythonTestUtils.lastExpression;
@@ -39,7 +39,7 @@ class PyTypeInferenceTest {
 
   @Test
   void test_type_inference_builtins() {
-    TypeContext typeContext = TypeContextReader.fromJson("{\n" +
+    TypeContext typeContext = PyTypeTableReader.fromJson("{\n" +
       "  \"mod1.py\": [\n" +
       "    {\n" +
       "      \"text\": \"x\",\n" +
@@ -66,7 +66,7 @@ class PyTypeInferenceTest {
 
   @Test
   void test_type_inference_custom_class() {
-    TypeContext typeContext = TypeContextReader.fromJson("{\n" +
+    TypeContext typeContext = PyTypeTableReader.fromJson("{\n" +
       "  \"mod1.py\": [\n" +
       "    {\n" +
       "      \"text\": \"a\",\n" +
@@ -104,7 +104,7 @@ class PyTypeInferenceTest {
 
   @Test
   void test_type_inference_with_scopes() {
-    TypeContext typeContext = TypeContextReader.fromJson("{\n" +
+    TypeContext typeContext = PyTypeTableReader.fromJson("{\n" +
       "  \"mod1.py\": [\n" +
       "    {\n" +
       "      \"text\": \"a\",\n" +
@@ -233,7 +233,7 @@ class PyTypeInferenceTest {
 
   @Test
   void test_import_of_known_typeshed_symbol() {
-    TypeContext typeContext = TypeContextReader.fromJson("{\n" +
+    TypeContext typeContext = PyTypeTableReader.fromJson("{\n" +
       "  \"mod1.py\": [\n" +
       "    {\n" +
       "      \"text\": \"connection\",\n" +
@@ -300,7 +300,7 @@ class PyTypeInferenceTest {
 
   @Test
   void test_import_of_known_typeshed_symbol_2() {
-    TypeContext typeContext = TypeContextReader.fromJson("{\n" +
+    TypeContext typeContext = PyTypeTableReader.fromJson("{\n" +
       "  \"mod1.py\": [\n" +
       "    {\n" +
       "      \"text\": \"connection\",\n" +
@@ -352,7 +352,7 @@ class PyTypeInferenceTest {
 
   @Test
   void test_import_of_known_typeshed_symbol_3() {
-    TypeContext typeContext = TypeContextReader.fromJson("{\n" +
+    TypeContext typeContext = PyTypeTableReader.fromJson("{\n" +
       "  \"mod1.py\": [\n" +
       "    {\n" +
       "      \"text\": \"connection\",\n" +
@@ -411,7 +411,7 @@ class PyTypeInferenceTest {
 
   @Test
   void test_correct_annotation_of_callable() {
-    TypeContext typeContext = TypeContextReader.fromJson("{\n" +
+    TypeContext typeContext = PyTypeTableReader.fromJson("{\n" +
       "  \"mod1.py\": [\n" +
       "    {\n" +
       "      \"text\": \"func\",\n" +
@@ -452,7 +452,7 @@ class PyTypeInferenceTest {
 
   @Test
   void test_correct_annotation_of_callable_2() {
-    TypeContext typeContext = TypeContextReader.fromJson("{\n" +
+    TypeContext typeContext = PyTypeTableReader.fromJson("{\n" +
       "  \"mod1.py\": [\n" +
       "    {\n" +
       "      \"text\": \"this_file\",\n" +
@@ -604,7 +604,7 @@ class PyTypeInferenceTest {
 
   @Test
   void test_optional_type() {
-    TypeContext typeContext = TypeContextReader.fromJson("{\n" +
+    TypeContext typeContext = PyTypeTableReader.fromJson("{\n" +
       "  \"mod1.py\": [\n" +
       "    {\n" +
       "      \"text\": \"func\",\n" +
@@ -667,7 +667,7 @@ class PyTypeInferenceTest {
 
   @Test
   void test_template() {
-    TypeContext typeContext = TypeContextReader.fromJson("{}");
+    TypeContext typeContext = PyTypeTableReader.fromJson("{}");
     FileInput fileInput = getFileInputFromLines(typeContext, "");
 
   }

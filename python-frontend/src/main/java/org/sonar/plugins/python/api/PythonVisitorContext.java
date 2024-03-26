@@ -34,7 +34,7 @@ import org.sonar.python.caching.CacheContextImpl;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.semantic.SymbolTableBuilder;
 import org.sonar.python.types.TypeContext;
-import org.sonar.python.types.pytype.json.TypeContextReader;
+import org.sonar.python.types.pytype.json.PyTypeTableReader;
 
 public class PythonVisitorContext extends PythonInputFileContext {
 
@@ -100,7 +100,7 @@ public class PythonVisitorContext extends PythonInputFileContext {
 
   private TypeContext getTypeContext(File workingDirectory) {
     try {
-      return new TypeContextReader().fromJson(Paths.get(workingDirectory.getAbsolutePath() + ".json"));
+      return new PyTypeTableReader().fromJson(Paths.get(workingDirectory.getAbsolutePath() + ".json"));
     } catch (IOException e) {
       throw new AssertionError(e);
     }

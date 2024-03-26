@@ -69,7 +69,7 @@ import org.sonar.python.parser.PythonParser;
 import org.sonar.python.tree.IPythonTreeMaker;
 import org.sonar.python.tree.PythonTreeMaker;
 import org.sonar.python.types.TypeContext;
-import org.sonar.python.types.pytype.json.TypeContextReader;
+import org.sonar.python.types.pytype.json.PyTypeTableReader;
 
 public class PythonScanner extends Scanner {
 
@@ -160,7 +160,7 @@ public class PythonScanner extends Scanner {
     if (typeInferenceFile == null)
       return new TypeContext();
     try {
-      return new TypeContextReader().fromJson(Paths.get(typeInferenceFile));
+      return new PyTypeTableReader().fromJson(Paths.get(typeInferenceFile));
     } catch (IOException ex) {
       return new TypeContext();
     }

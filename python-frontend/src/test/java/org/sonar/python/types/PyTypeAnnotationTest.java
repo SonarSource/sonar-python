@@ -37,7 +37,7 @@ import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.parser.PythonParser;
 import org.sonar.python.semantic.ClassSymbolImpl;
 import org.sonar.python.tree.PythonTreeMaker;
-import org.sonar.python.types.pytype.json.TypeContextReader;
+import org.sonar.python.types.pytype.json.PyTypeTableReader;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.types.InferredTypes.BOOL;
@@ -68,7 +68,7 @@ class PyTypeAnnotationTest {
     File file = new File("src/test/resources/pytype/code/level1.py");
     TestPythonFile testPythonFile = new TestPythonFile(file);
     PyTypeAnnotation pyTypeAnnotation = new PyTypeAnnotation(
-      TypeContextReader.fromJson(readJsonTypeInfo("src/test/resources/pytype/code.json")),
+      PyTypeTableReader.fromJson(readJsonTypeInfo("src/test/resources/pytype/code.json")),
       testPythonFile);
 
     FileInput fileInput = parseFile(testPythonFile);
@@ -93,7 +93,7 @@ class PyTypeAnnotationTest {
     File file = new File("src/test/resources/pytype/code/level2.py");
     TestPythonFile testPythonFile = new TestPythonFile(file);
     PyTypeAnnotation pyTypeAnnotation = new PyTypeAnnotation(
-      TypeContextReader.fromJson(readJsonTypeInfo("src/test/resources/pytype/code.json")),
+      PyTypeTableReader.fromJson(readJsonTypeInfo("src/test/resources/pytype/code.json")),
       testPythonFile
     );
     FileInput fileInput = parseFile(testPythonFile);
@@ -113,7 +113,7 @@ class PyTypeAnnotationTest {
     File file = new File("src/test/resources/pytype/code/level3.py");
     TestPythonFile testPythonFile = new TestPythonFile(file);
     PyTypeAnnotation pyTypeAnnotation = new PyTypeAnnotation(
-      TypeContextReader.fromJson(readJsonTypeInfo("src/test/resources/pytype/code.json")),
+      PyTypeTableReader.fromJson(readJsonTypeInfo("src/test/resources/pytype/code.json")),
       testPythonFile);
 
     FileInput fileInput = parseFile(testPythonFile);

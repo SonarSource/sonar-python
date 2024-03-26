@@ -5,7 +5,9 @@ import java.util.List;
 /**
  * ClassType
  */
-public record ClassType (List<Member> members, List<PythonType> attributes,   List<PythonType> superClasses, List<PythonType> typeVars) implements PythonType{
-
-  
+public record ClassType(
+  List<Member> members,
+  List<PythonType> attributes,
+  List<PythonType> superClasses,
+  List<PythonType> typeVars) implements PythonType{
 }
