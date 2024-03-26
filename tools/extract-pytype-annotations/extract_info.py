@@ -89,20 +89,13 @@ def run_pytype(source_code_dir: str):
     run_shell_command(['pytype', '-k', '-j', 'auto', '--no-report-errors', source_code_dir], ok_codes=(0,1))
     rich.print("Pytype done.")
 
-def process_file(file: str, source_code_dir: str, pytype_options: Options) -> list[TypedItem]:
-    file_path = os.path.join(source_code_dir, file)
-    src = open(file_path, "r").read()
-    src = textwrap.dedent(src.lstrip('\n'))
-    module = annotate_ast.annotate_source(src, ast, pytype_options)
-    annotations = [node for node in ast.walk(module) if hasattr(node, 'resolved_type')]
-
-    list_items = []
-
-    for node in annotations:
+def extract_node_info(node):
+    new_item: TypedItem | None = None
+    if hasattr(node, 'resolved_type'):
         resolved_type = node.resolved_type
         type_details = type_dict(resolved_type)
         if isinstance(node, ast.Name):
-            new_item: TypedItem = {
+            new_item = {
                 "text": node.id,
                 "start_line": node.lineno,
                 "start_col": node.col_offset,
@@ -112,7 +105,7 @@ def process_file(file: str, source_code_dir: str, pytype_options: Options) -> li
                 "type_details": type_details
             }
         elif isinstance(node, ast.Attribute):
-            new_item: TypedItem = {
+            new_item= {
                 "text": node.attr,
                 "start_line": node.lineno,
                 "start_col": node.col_offset,
@@ -122,7 +115,7 @@ def process_file(file: str, source_code_dir: str, pytype_options: Options) -> li
                 "type_details": type_details
             }
         elif isinstance(node, ast.FunctionDef):
-            new_item: TypedItem = {
+            new_item= {
                 "text": node.name,
                 "start_line": node.lineno,
                 "start_col": node.col_offset,
@@ -131,11 +124,51 @@ def process_file(file: str, source_code_dir: str, pytype_options: Options) -> li
                 "short_type": str(node.resolved_annotation),
                 "type_details": type_details
             }
+    return new_item
+
+def extract_scope_info(scope_node, list_items):
+    for node in ast.walk(scope_node):
+        if isinstance(node, ast.ClassDef):
+            for inner_node in node.body:
+                if isinstance(inner_node, ast.FunctionDef):
+                    args = [ n.annotation.resolved_type for n in inner_node.args.args if hasattr(n.annotation, "resolved_type") ]
+                    class_type = pydt.ClassType(node.name)
+                    params = [class_type]
+                    params.extend(args)
+                    if inner_node.returns is None:
+                        params.append(pydt.ClassType("builtins.NoneType"))
+                    elif hasattr(inner_node.returns, "resolved_type"):
+                        params.append(inner_node.returns.resolved_type)
+                    else:
+                        params.append(pydt.AnythingType())
+                    method_type = pydt.ClassType("typing.Callable")
+                    ret = pydt.CallableType(method_type, params)
+                    type_details = type_dict(ret)
+                    new_item= {
+                        "text": inner_node.name,
+                        "start_line": inner_node.lineno,
+                        "start_col": inner_node.col_offset,
+                        "syntax_role": "Function",
+                        "type": str(ret),
+                        "short_type": "",
+                        "type_details": type_details
+                    }
+                    list_items.append(new_item)
         else:
-            continue
-        list_items.append(new_item)
+            t = extract_node_info( node)
+            if t is not None:
+                list_items.append(t)
 
     return list_items
+
+
+def process_file(file: str, source_code_dir: str, pytype_options: Options) -> list[TypedItem]:
+    file_path = os.path.join(source_code_dir, file)
+    src = open(file_path, "r").read()
+    src = textwrap.dedent(src.lstrip('\n'))
+    module = annotate_ast.annotate_source(src, ast, pytype_options)
+    list_items = []
+    return extract_scope_info(module, list_items)
 
 def type_dict(resolved_type) -> Dict:
     if isinstance(resolved_type, str) or isinstance(resolved_type, int) or isinstance(resolved_type, bool):
