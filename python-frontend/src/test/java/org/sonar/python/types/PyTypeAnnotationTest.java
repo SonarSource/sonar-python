@@ -19,21 +19,19 @@
  */
 package org.sonar.python.types;
 
-import java.io.File;
 import java.io.IOException;
-import java.net.URI;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import org.junit.jupiter.api.Test;
-import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.ReturnStatement;
 import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.plugins.python.api.types.InferredType;
+import org.sonar.python.TestPythonFile;
 import org.sonar.python.parser.PythonParser;
 import org.sonar.python.semantic.ClassSymbolImpl;
 import org.sonar.python.tree.PythonTreeMaker;
@@ -65,10 +63,10 @@ class PyTypeAnnotationTest {
 
   @Test
   void test_pytype_annotation_of_builtin_types() {
-    File file = new File("src/test/resources/pytype/code/level1.py");
-    TestPythonFile testPythonFile = new TestPythonFile(file);
+    var file = Path.of("src/test/resources/pytype/code/level1.py");
+    TestPythonFile testPythonFile = new TestPythonFile(Path.of("src/test/resources/pytype/code"), file);
     PyTypeAnnotation pyTypeAnnotation = new PyTypeAnnotation(
-      PyTypeTableReader.fromJson(readJsonTypeInfo("src/test/resources/pytype/code.json")),
+      new TypeContext(PyTypeTableReader.fromJsonString(readJsonTypeInfo("src/test/resources/pytype/code.json"))),
       testPythonFile);
 
     FileInput fileInput = parseFile(testPythonFile);
@@ -90,10 +88,10 @@ class PyTypeAnnotationTest {
 
   @Test
   void test_pytype_annotation_of_integers() {
-    File file = new File("src/test/resources/pytype/code/level2.py");
-    TestPythonFile testPythonFile = new TestPythonFile(file);
+    var file = Path.of("src/test/resources/pytype/code/level2.py");
+    TestPythonFile testPythonFile = new TestPythonFile(Path.of("src/test/resources/pytype/code"), file);
     PyTypeAnnotation pyTypeAnnotation = new PyTypeAnnotation(
-      PyTypeTableReader.fromJson(readJsonTypeInfo("src/test/resources/pytype/code.json")),
+      TypeContext.fromJson(readJsonTypeInfo("src/test/resources/pytype/code.json")),
       testPythonFile
     );
     FileInput fileInput = parseFile(testPythonFile);
@@ -110,10 +108,10 @@ class PyTypeAnnotationTest {
 
   @Test
   void test_pytype_annotation_of_custom_types() {
-    File file = new File("src/test/resources/pytype/code/level3.py");
-    TestPythonFile testPythonFile = new TestPythonFile(file);
+    var file = Path.of("src/test/resources/pytype/code/level3.py");
+    TestPythonFile testPythonFile = new TestPythonFile(Path.of("src/test/resources/pytype/code"), file);
     PyTypeAnnotation pyTypeAnnotation = new PyTypeAnnotation(
-      PyTypeTableReader.fromJson(readJsonTypeInfo("src/test/resources/pytype/code.json")),
+      TypeContext.fromJson(readJsonTypeInfo("src/test/resources/pytype/code.json")),
       testPythonFile);
 
     FileInput fileInput = parseFile(testPythonFile);
@@ -150,41 +148,4 @@ class PyTypeAnnotationTest {
     return treeMaker.fileInput(astNode);
   }
 
-  private static class TestPythonFile implements PythonFile {
-
-    private final File file;
-
-    public TestPythonFile(File file) {
-      this.file = file;
-    }
-
-    @Override
-    public String content() {
-      try {
-        return new String(Files.readAllBytes(file.toPath()), StandardCharsets.UTF_8);
-      } catch (IOException e) {
-        throw new IllegalStateException("Cannot read " + file, e);
-      }
-    }
-
-    @Override
-    public String fileName() {
-      return file.getName();
-    }
-
-    @Override
-    public URI uri() {
-      return file.toURI();
-    }
-
-    @Override
-    public String key() {
-      return file.getPath();
-    }
-
-    public boolean isIPython() {
-      return fileName().endsWith(".ipynb");
-    }
-
-  }
 }

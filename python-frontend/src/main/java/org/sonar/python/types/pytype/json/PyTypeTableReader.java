@@ -32,9 +32,8 @@ import java.util.List;
 import java.util.Map;
 import org.sonar.python.types.PyTypeDetailedInfo;
 import org.sonar.python.types.PyTypeDetailedInfoDeserializer;
-import org.sonar.python.types.pytype.PyTypeInfo;
-import org.sonar.python.types.TypeContext;
 import org.sonar.python.types.pytype.BaseType;
+import org.sonar.python.types.pytype.PyTypeInfo;
 import org.sonar.python.types.pytype.PyTypeTable;
 
 public class PyTypeTableReader {
@@ -42,9 +41,17 @@ public class PyTypeTableReader {
   private final Gson gson;
   private final Type type;
 
-  public static TypeContext fromJson(String json) {
+  public static PyTypeTable fromJsonString(String json) {
     try (var reader = new StringReader(json)) {
       return new PyTypeTableReader().fromJson(reader);
+    }
+  }
+
+  public static PyTypeTable fromJsonPath(Path path) {
+    try {
+      return new PyTypeTableReader().fromJson(path);
+    } catch (IOException e) {
+      throw new RuntimeException(e);
     }
   }
 
@@ -57,15 +64,15 @@ public class PyTypeTableReader {
     }.getType();
   }
 
-  public TypeContext fromJson(Path path) throws IOException {
+  public PyTypeTable fromJson(Path path) throws IOException {
     try (var reader = Files.newBufferedReader(path)) {
       return fromJson(reader);
     }
   }
 
-  private TypeContext fromJson(Reader reader) {
+  private PyTypeTable fromJson(Reader reader) {
     var files = gson.<Map<String, List<PyTypeInfo>>>fromJson(reader, type);
-    return new TypeContext(new PyTypeTable(files));
+    return new PyTypeTable(files);
   }
 
 }

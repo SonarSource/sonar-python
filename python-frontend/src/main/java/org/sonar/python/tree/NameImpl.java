@@ -31,6 +31,7 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TreeVisitor;
 import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.types.InferredTypes;
+import org.sonar.python.types.v2.PythonType;
 
 public class NameImpl extends PyTree implements Name {
   private final Token token;
@@ -39,6 +40,7 @@ public class NameImpl extends PyTree implements Name {
   private Symbol symbol;
   private Usage usage;
   private InferredType inferredType = InferredTypes.anyType();
+  private PythonType pythonType = PythonType.UNKNOWN;
   private static final String TRUE = "True";
   private static final String FALSE = "False";
 
@@ -117,5 +119,14 @@ public class NameImpl extends PyTree implements Name {
 
   public void setInferredType(InferredType inferredType) {
     this.inferredType = inferredType;
+  }
+
+  public PythonType pythonType() {
+    return pythonType;
+  }
+
+  public NameImpl pythonType(PythonType pythonType) {
+    this.pythonType = pythonType;
+    return this;
   }
 }

@@ -21,7 +21,6 @@ package org.sonar.plugins.python.api;
 
 import com.sonar.sslr.api.RecognitionException;
 import java.io.File;
-import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
@@ -99,11 +98,7 @@ public class PythonVisitorContext extends PythonInputFileContext {
   }
 
   private TypeContext getTypeContext(File workingDirectory) {
-    try {
-      return new PyTypeTableReader().fromJson(Paths.get(workingDirectory.getAbsolutePath() + ".json"));
-    } catch (IOException e) {
-      throw new AssertionError(e);
-    }
+    return new TypeContext(PyTypeTableReader.fromJsonPath(Paths.get(workingDirectory.getAbsolutePath() + ".json")));
   }
 
 }

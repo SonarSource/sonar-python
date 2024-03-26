@@ -91,6 +91,8 @@ import org.sonar.python.types.PyTypeAnnotation;
 import org.sonar.python.types.TypeContext;
 import org.sonar.python.types.TypeInference;
 import org.sonar.python.types.TypeShed;
+import org.sonar.python.types.v2.TypesTable;
+import org.sonar.python.types.v2.TypesTableBuilder;
 
 import static org.sonar.python.semantic.SymbolUtils.boundNamesFromExpression;
 import static org.sonar.python.semantic.SymbolUtils.resolveTypeHierarchy;
@@ -106,6 +108,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
   private final PythonFile pythonFile;
   private final Set<String> importedModulesFQN = new HashSet<>();
   private final TypeContext typeContext;
+  private final TypesTable typesTable;
 
   public SymbolTableBuilder(PythonFile pythonFile) {
     fullyQualifiedModuleName = null;
@@ -113,6 +116,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     projectLevelSymbolTable = ProjectLevelSymbolTable.empty();
     this.pythonFile = pythonFile;
     typeContext = null;
+    typesTable = null;
   }
 
   public Set<String> importedModulesFQN() {
@@ -137,6 +141,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     }
     this.projectLevelSymbolTable = projectLevelSymbolTable;
     this.typeContext = typeContext;
+    this.typesTable = new TypesTable(typeContext.pyTypeTable());
   }
 
   @Override
@@ -152,6 +157,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
       this.typeContext.setScopesByRootTree(scopesByRootTree);
       this.typeContext.setProjectLevelSymbolTable(projectLevelSymbolTable);
       new PyTypeAnnotation(this.typeContext, pythonFile).annotate(fileInput);
+      new TypesTableBuilder(this.typesTable, pythonFile).annotate(fileInput);
     } else {
       TypeInference.inferTypes(fileInput, pythonFile);
     }

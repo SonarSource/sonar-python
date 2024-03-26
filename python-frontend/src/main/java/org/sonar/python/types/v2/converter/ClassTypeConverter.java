@@ -19,12 +19,11 @@
  */
 package org.sonar.python.types.v2.converter;
 
-import org.sonar.python.types.pytype.ClassType;
-import org.sonar.python.types.v2.ObjectType;
+import org.sonar.python.types.v2.ClassType;
 
-public class ClassTypeConverter implements PyTypeConverter<org.sonar.python.types.pytype.ClassType, ObjectType> {
+public class ClassTypeConverter implements PyTypeConverter<org.sonar.python.types.pytype.ClassType, ClassType> {
   @Override
-  public ObjectType convert(ClassType from) {
-    return null;
+  public ClassType convert(org.sonar.python.types.pytype.ClassType from) {
+    return new ClassType(from.name());
   }
 }

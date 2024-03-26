@@ -24,7 +24,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.semantic.ClassSymbolImpl;
-import org.sonar.python.types.pytype.json.PyTypeTableReader;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -113,7 +112,7 @@ class TypeContextTest {
       "  ]\n" +
       "}";
     String fileName = "src/AttributeError/181733998.py";
-    TypeContext typeContext = PyTypeTableReader.fromJson(json);
+    TypeContext typeContext = TypeContext.fromJson(json);
     assertThat(typeContext.getTypeFor(fileName, 1, 0, "t", "Variable", null)).contains(InferredTypes.INT);
     assertThat(typeContext.getTypeFor(fileName, 1, 0, "x", "Variable", null)).isEmpty();
     assertThat(typeContext.getTypeFor(fileName, 1, 0, "t", "Attribute", null)).isEmpty();
@@ -126,7 +125,7 @@ class TypeContextTest {
   void test2() {
     String json = readJsonTypeInfo("src/test/resources/pytype/code.json");
     String fileName = "level1.py";
-    TypeContext typeContext = PyTypeTableReader.fromJson(json);
+    TypeContext typeContext = TypeContext.fromJson(json);
     assertThat(typeContext.getTypeFor(fileName, 2, 4, "my_int", "Variable", null)).contains(InferredTypes.INT);
     assertThat(typeContext.getTypeFor(fileName, 3, 4, "my_float", "Variable", null)).contains(InferredTypes.FLOAT);
     assertThat(typeContext.getTypeFor(fileName, 4, 4, "my_str", "Variable", null)).contains(InferredTypes.STR);

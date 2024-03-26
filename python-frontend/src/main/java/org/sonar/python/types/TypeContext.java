@@ -38,6 +38,7 @@ import org.sonar.python.semantic.SymbolImpl;
 import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.types.pytype.PyTypeInfo;
 import org.sonar.python.types.pytype.PyTypeTable;
+import org.sonar.python.types.pytype.json.PyTypeTableReader;
 import org.sonar.python.types.v2.PythonType;
 import org.sonar.python.types.v2.converter.PyTypeToPythonTypeConverter;
 
@@ -60,6 +61,10 @@ public class TypeContext {
 
   public TypeContext(PyTypeTable pyTypeTable) {
     this.pyTypeTable = pyTypeTable;
+  }
+
+  public static TypeContext fromJson(String json) {
+    return new TypeContext(PyTypeTableReader.fromJsonString(json));
   }
 
   public void setScopesByRootTree(Map<Tree, Scope> scopesByRootTree) {
@@ -206,5 +211,9 @@ public class TypeContext {
   public Optional<InferredType> getTypeFor(String fileName, QualifiedExpression attributeAccess) {
     Token token = attributeAccess.firstToken();
     return getTypeFor(fileName, token.line(), token.column(), attributeAccess.name().name(), "Attribute", attributeAccess);
+  }
+
+  public PyTypeTable pyTypeTable() {
+    return pyTypeTable;
   }
 }
