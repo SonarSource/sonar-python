@@ -84,6 +84,7 @@ class TypedItem(TypedDict):
     short_type: NotRequired[str]
     type_details: Dict
 
+    
 def run_pytype(source_code_dir: str):
     rich.print("Running Pytype.")
     run_shell_command(['pytype', '-k', '-j', 'auto', '--no-report-errors', source_code_dir], ok_codes=(0,1))
@@ -91,6 +92,18 @@ def run_pytype(source_code_dir: str):
 
 def extract_node_info(node):
     new_item: TypedItem | None = None
+    if isinstance(node, ast.AnnAssign) and hasattr(node.target, "resolved_type"):
+        annotation_type = pydt.GenericType(pydt.ClassType("typing.Type"), [node.target.resolved_type])
+        type_details = type_dict(annotation_type)
+        new_item = {
+            "text": node.annotation.id,
+            "start_line": node.annotation.lineno,
+            "start_col": node.annotation.col_offset,
+            "syntax_role": "Annotation",
+            "type": str(annotation_type),
+            "short_type": str(node.target.resolved_type),
+            "type_details": type_details
+        }
     if hasattr(node, 'resolved_type'):
         resolved_type = node.resolved_type
         type_details = type_dict(resolved_type)
@@ -126,34 +139,37 @@ def extract_node_info(node):
             }
     return new_item
 
+def extract_method_type(inner_node, list_items, node):
+    args = [ n.annotation.resolved_type for n in inner_node.args.args if hasattr(n.annotation, "resolved_type") ]
+    class_type = pydt.ClassType(node.name)
+    params = [class_type]
+    params.extend(args)
+    r = [n for n in inner_node.body if isinstance(n, ast.Return)]
+    return_type = pydt.ClassType("builtins.NoneType")
+    if len(r) == 1:
+        return_type = r[0].value.resolved_type
+    params.append(return_type)
+    
+    method_type = pydt.ClassType("typing.Callable")
+    ret = pydt.CallableType(method_type, params)
+    type_details = type_dict(ret)
+    new_item= {
+        "text": inner_node.name,
+        "start_line": inner_node.lineno,
+        "start_col": inner_node.col_offset,
+        "syntax_role": "Method",
+        "type": str(ret),
+        "short_type": "",
+        "type_details": type_details
+    }
+    list_items.append(new_item)
+
 def extract_scope_info(scope_node, list_items):
     for node in ast.walk(scope_node):
         if isinstance(node, ast.ClassDef):
             for inner_node in node.body:
                 if isinstance(inner_node, ast.FunctionDef):
-                    args = [ n.annotation.resolved_type for n in inner_node.args.args if hasattr(n.annotation, "resolved_type") ]
-                    class_type = pydt.ClassType(node.name)
-                    params = [class_type]
-                    params.extend(args)
-                    if inner_node.returns is None:
-                        params.append(pydt.ClassType("builtins.NoneType"))
-                    elif hasattr(inner_node.returns, "resolved_type"):
-                        params.append(inner_node.returns.resolved_type)
-                    else:
-                        params.append(pydt.AnythingType())
-                    method_type = pydt.ClassType("typing.Callable")
-                    ret = pydt.CallableType(method_type, params)
-                    type_details = type_dict(ret)
-                    new_item= {
-                        "text": inner_node.name,
-                        "start_line": inner_node.lineno,
-                        "start_col": inner_node.col_offset,
-                        "syntax_role": "Function",
-                        "type": str(ret),
-                        "short_type": "",
-                        "type_details": type_details
-                    }
-                    list_items.append(new_item)
+                    extract_method_type(inner_node, list_items, node)
         else:
             t = extract_node_info( node)
             if t is not None:
