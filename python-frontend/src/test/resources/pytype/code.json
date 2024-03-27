@@ -1,0 +1,524 @@
+{
+  "level1.py": [
+    {
+      "text": "foo",
+      "start_line": 1,
+      "start_col": 0,
+      "syntax_role": "Function",
+      "type": "CallableType(base_type=ClassType(typing.Callable), parameters=(AnythingType(),))",
+      "short_type": "Callable[[], Any]"
+    },
+    {
+      "text": "my_int",
+      "start_line": 2,
+      "start_col": 4,
+      "syntax_role": "Variable",
+      "type": "builtins.int",
+      "short_type": "int"
+    },
+    {
+      "text": "my_float",
+      "start_line": 3,
+      "start_col": 4,
+      "syntax_role": "Variable",
+      "type": "builtins.float",
+      "short_type": "float"
+    },
+    {
+      "text": "my_str",
+      "start_line": 4,
+      "start_col": 4,
+      "syntax_role": "Variable",
+      "type": "builtins.str",
+      "short_type": "str"
+    },
+    {
+      "text": "my_bool",
+      "start_line": 5,
+      "start_col": 4,
+      "syntax_role": "Variable",
+      "type": "builtins.bool",
+      "short_type": "bool"
+    },
+    {
+      "text": "my_complex",
+      "start_line": 6,
+      "start_col": 4,
+      "syntax_role": "Variable",
+      "type": "builtins.complex",
+      "short_type": "complex"
+    },
+    {
+      "text": "my_tuple",
+      "start_line": 7,
+      "start_col": 4,
+      "syntax_role": "Variable",
+      "type": "TupleType(base_type=ClassType(builtins.tuple), parameters=(ClassType(builtins.int), ClassType(builtins.int)))",
+      "short_type": "Tuple[int, int]"
+    },
+    {
+      "text": "my_list",
+      "start_line": 8,
+      "start_col": 4,
+      "syntax_role": "Variable",
+      "type": "GenericType(base_type=ClassType(builtins.list), parameters=(ClassType(builtins.str),))",
+      "short_type": "List[str]"
+    },
+    {
+      "text": "my_set",
+      "start_line": 9,
+      "start_col": 4,
+      "syntax_role": "Variable",
+      "type": "GenericType(base_type=ClassType(builtins.set), parameters=(ClassType(builtins.str),))",
+      "short_type": "Set[str]"
+    },
+    {
+      "text": "my_dict",
+      "start_line": 10,
+      "start_col": 4,
+      "syntax_role": "Variable",
+      "type": "GenericType(base_type=ClassType(builtins.dict), parameters=(ClassType(builtins.str), ClassType(builtins.str)))",
+      "short_type": "Dict[str, str]"
+    },
+    {
+      "text": "my_int",
+      "start_line": 11,
+      "start_col": 11,
+      "syntax_role": "Variable",
+      "type": "builtins.int",
+      "short_type": "int"
+    }
+  ],
+  "level2.py": [
+    {
+      "text": "foo",
+      "start_line": 1,
+      "start_col": 0,
+      "syntax_role": "Function",
+      "type": "CallableType(base_type=ClassType(typing.Callable), parameters=(AnythingType(),))",
+      "short_type": "Callable[[], Any]"
+    },
+    {
+      "text": "foo_result",
+      "start_line": 6,
+      "start_col": 0,
+      "syntax_role": "Variable",
+      "type": "builtins.int",
+      "short_type": "int"
+    },
+    {
+      "text": "x",
+      "start_line": 2,
+      "start_col": 4,
+      "syntax_role": "Variable",
+      "type": "builtins.int",
+      "short_type": "int"
+    },
+    {
+      "text": "x",
+      "start_line": 3,
+      "start_col": 11,
+      "syntax_role": "Variable",
+      "type": "builtins.int",
+      "short_type": "int"
+    },
+    {
+      "text": "foo",
+      "start_line": 6,
+      "start_col": 13,
+      "syntax_role": "Variable",
+      "type": "CallableType(base_type=ClassType(typing.Callable), parameters=(AnythingType(),))",
+      "short_type": "Callable[[], Any]"
+    }
+  ],
+  "level3.py": [
+    {
+      "text": "foo",
+      "start_line": 4,
+      "start_col": 0,
+      "syntax_role": "Function",
+      "type": "CallableType(base_type=ClassType(typing.Callable), parameters=(AnythingType(),))",
+      "short_type": "Callable[[], Any]"
+    },
+    {
+      "text": "mc_out",
+      "start_line": 9,
+      "start_col": 0,
+      "syntax_role": "Variable",
+      "type": "MyClass",
+      "short_type": "MyClass"
+    },
+    {
+      "text": "mc_in",
+      "start_line": 5,
+      "start_col": 4,
+      "syntax_role": "Variable",
+      "type": "MyClass",
+      "short_type": "MyClass"
+    },
+    {
+      "text": "mc_in",
+      "start_line": 6,
+      "start_col": 11,
+      "syntax_role": "Variable",
+      "type": "MyClass",
+      "short_type": "MyClass"
+    },
+    {
+      "text": "foo",
+      "start_line": 9,
+      "start_col": 9,
+      "syntax_role": "Variable",
+      "type": "CallableType(base_type=ClassType(typing.Callable), parameters=(AnythingType(),))",
+      "short_type": "Callable[[], Any]"
+    },
+    {
+      "text": "MyClass",
+      "start_line": 5,
+      "start_col": 12,
+      "syntax_role": "Variable",
+      "type": "GenericType(base_type=ClassType(builtins.type), parameters=(ClassType(MyClass),))",
+      "short_type": "Type[MyClass]"
+    }
+  ],
+  "module1/module1.py": [
+    {
+      "text": "instance_check",
+      "start_line": 11,
+      "start_col": 0,
+      "syntax_role": "Function",
+      "type": "CallableType(base_type=ClassType(typing.Callable), parameters=(AnythingType(),))",
+      "short_type": "Callable[[], Any]"
+    },
+    {
+      "text": "str",
+      "start_line": 2,
+      "start_col": 10,
+      "syntax_role": "Variable",
+      "type": "GenericType(base_type=ClassType(builtins.type), parameters=(ClassType(builtins.str),))",
+      "short_type": "Type[str]"
+    },
+    {
+      "text": "int",
+      "start_line": 3,
+      "start_col": 9,
+      "syntax_role": "Variable",
+      "type": "GenericType(base_type=ClassType(builtins.type), parameters=(ClassType(builtins.int),))",
+      "short_type": "Type[int]"
+    },
+    {
+      "text": "person",
+      "start_line": 12,
+      "start_col": 4,
+      "syntax_role": "Variable",
+      "type": "Person",
+      "short_type": "Person"
+    },
+    {
+      "text": "dynamically_assigned_variable",
+      "start_line": 6,
+      "start_col": 8,
+      "syntax_role": "Variable",
+      "type": "builtins.int",
+      "short_type": "int"
+    },
+    {
+      "text": "my_attribute",
+      "start_line": 7,
+      "start_col": 8,
+      "syntax_role": "Attribute",
+      "type": "builtins.int",
+      "short_type": "int"
+    },
+    {
+      "text": "Person",
+      "start_line": 12,
+      "start_col": 13,
+      "syntax_role": "Variable",
+      "type": "GenericType(base_type=ClassType(builtins.type), parameters=(ClassType(Person),))",
+      "short_type": "Type[Person]"
+    },
+    {
+      "text": "foo",
+      "start_line": 13,
+      "start_col": 4,
+      "syntax_role": "Attribute",
+      "type": "CallableType(base_type=ClassType(typing.Callable), parameters=(AnythingType(),))",
+      "short_type": "Callable[[], Any]"
+    },
+    {
+      "text": "self",
+      "start_line": 7,
+      "start_col": 8,
+      "syntax_role": "Variable",
+      "type": "Person",
+      "short_type": "Person"
+    },
+    {
+      "text": "person",
+      "start_line": 13,
+      "start_col": 4,
+      "syntax_role": "Variable",
+      "type": "Person",
+      "short_type": "Person"
+    }
+  ],
+  "python_file.py": [
+    {
+      "text": "calculate_average",
+      "start_line": 4,
+      "start_col": 0,
+      "syntax_role": "Function",
+      "type": "CallableType(base_type=ClassType(typing.Callable), parameters=(AnythingType(), AnythingType()))",
+      "short_type": "Callable[[Any], Any]"
+    },
+    {
+      "text": "get_name_and_age",
+      "start_line": 7,
+      "start_col": 0,
+      "syntax_role": "Function",
+      "type": "CallableType(base_type=ClassType(typing.Callable), parameters=(AnythingType(),))",
+      "short_type": "Callable[[], Any]"
+    },
+    {
+      "text": "greet",
+      "start_line": 12,
+      "start_col": 0,
+      "syntax_role": "Function",
+      "type": "CallableType(base_type=ClassType(typing.Callable), parameters=(AnythingType(), AnythingType()))",
+      "short_type": "Callable[[Any], Any]"
+    },
+    {
+      "text": "main",
+      "start_line": 15,
+      "start_col": 0,
+      "syntax_role": "Function",
+      "type": "CallableType(base_type=ClassType(typing.Callable), parameters=(AnythingType(),))",
+      "short_type": "Callable[[], Any]"
+    },
+    {
+      "text": "name",
+      "start_line": 8,
+      "start_col": 4,
+      "syntax_role": "Variable",
+      "type": "builtins.str",
+      "short_type": "str"
+    },
+    {
+      "text": "age",
+      "start_line": 9,
+      "start_col": 4,
+      "syntax_role": "Variable",
+      "type": "builtins.int",
+      "short_type": "int"
+    },
+    {
+      "text": "numbers",
+      "start_line": 16,
+      "start_col": 4,
+      "syntax_role": "Variable",
+      "type": "GenericType(base_type=ClassType(builtins.list), parameters=(ClassType(builtins.int),))",
+      "short_type": "List[int]"
+    },
+    {
+      "text": "bar",
+      "start_line": 19,
+      "start_col": 4,
+      "syntax_role": "Variable",
+      "type": "builtins.int",
+      "short_type": "int"
+    },
+    {
+      "text": "greeting",
+      "start_line": 24,
+      "start_col": 4,
+      "syntax_role": "Variable",
+      "type": "builtins.str",
+      "short_type": "str"
+    },
+    {
+      "text": "__name__",
+      "start_line": 28,
+      "start_col": 3,
+      "syntax_role": "Variable",
+      "type": "builtins.str",
+      "short_type": "str"
+    },
+    {
+      "text": "name",
+      "start_line": 10,
+      "start_col": 11,
+      "syntax_role": "Variable",
+      "type": "builtins.str",
+      "short_type": "str"
+    },
+    {
+      "text": "age",
+      "start_line": 10,
+      "start_col": 17,
+      "syntax_role": "Variable",
+      "type": "builtins.int",
+      "short_type": "int"
+    },
+    {
+      "text": "print",
+      "start_line": 17,
+      "start_col": 4,
+      "syntax_role": "Variable",
+      "type": "GenericType(base_type=ClassType(typing.Callable), parameters=(AnythingType(), ClassType(builtins.NoneType)))",
+      "short_type": "Callable[..., None]"
+    },
+    {
+      "text": "numbers",
+      "start_line": 19,
+      "start_col": 10,
+      "syntax_role": "Variable",
+      "type": "GenericType(base_type=ClassType(builtins.list), parameters=(ClassType(builtins.int),))",
+      "short_type": "List[int]"
+    },
+    {
+      "text": "name",
+      "start_line": 21,
+      "start_col": 4,
+      "syntax_role": "Variable",
+      "type": "builtins.str",
+      "short_type": "str"
+    },
+    {
+      "text": "age",
+      "start_line": 21,
+      "start_col": 10,
+      "syntax_role": "Variable",
+      "type": "builtins.int",
+      "short_type": "int"
+    },
+    {
+      "text": "get_name_and_age",
+      "start_line": 21,
+      "start_col": 16,
+      "syntax_role": "Variable",
+      "type": "CallableType(base_type=ClassType(typing.Callable), parameters=(AnythingType(),))",
+      "short_type": "Callable[[], Any]"
+    },
+    {
+      "text": "print",
+      "start_line": 22,
+      "start_col": 4,
+      "syntax_role": "Variable",
+      "type": "GenericType(base_type=ClassType(typing.Callable), parameters=(AnythingType(), ClassType(builtins.NoneType)))",
+      "short_type": "Callable[..., None]"
+    },
+    {
+      "text": "greet",
+      "start_line": 24,
+      "start_col": 15,
+      "syntax_role": "Variable",
+      "type": "CallableType(base_type=ClassType(typing.Callable), parameters=(AnythingType(), AnythingType()))",
+      "short_type": "Callable[[Any], Any]"
+    },
+    {
+      "text": "name",
+      "start_line": 24,
+      "start_col": 21,
+      "syntax_role": "Variable",
+      "type": "builtins.str",
+      "short_type": "str"
+    },
+    {
+      "text": "print",
+      "start_line": 25,
+      "start_col": 4,
+      "syntax_role": "Variable",
+      "type": "GenericType(base_type=ClassType(typing.Callable), parameters=(AnythingType(), ClassType(builtins.NoneType)))",
+      "short_type": "Callable[..., None]"
+    },
+    {
+      "text": "greeting",
+      "start_line": 25,
+      "start_col": 10,
+      "syntax_role": "Variable",
+      "type": "builtins.str",
+      "short_type": "str"
+    },
+    {
+      "text": "main",
+      "start_line": 29,
+      "start_col": 4,
+      "syntax_role": "Variable",
+      "type": "CallableType(base_type=ClassType(typing.Callable), parameters=(AnythingType(),))",
+      "short_type": "Callable[[], Any]"
+    },
+    {
+      "text": "sum",
+      "start_line": 5,
+      "start_col": 11,
+      "syntax_role": "Variable",
+      "type": "typing.Callable",
+      "short_type": "Callable"
+    },
+    {
+      "text": "numbers",
+      "start_line": 5,
+      "start_col": 15,
+      "syntax_role": "Variable",
+      "type": "GenericType(base_type=ClassType(builtins.list), parameters=(ClassType(builtins.int),))",
+      "short_type": "List[int]"
+    },
+    {
+      "text": "len",
+      "start_line": 5,
+      "start_col": 26,
+      "syntax_role": "Variable",
+      "type": "CallableType(base_type=ClassType(typing.Callable), parameters=(ClassType(typing.Sized), ClassType(builtins.int)))",
+      "short_type": "Callable[[Sized], int]"
+    },
+    {
+      "text": "numbers",
+      "start_line": 5,
+      "start_col": 30,
+      "syntax_role": "Variable",
+      "type": "GenericType(base_type=ClassType(builtins.list), parameters=(ClassType(builtins.int),))",
+      "short_type": "List[int]"
+    },
+    {
+      "text": "name",
+      "start_line": 13,
+      "start_col": 21,
+      "syntax_role": "Variable",
+      "type": "builtins.str",
+      "short_type": "str"
+    },
+    {
+      "text": "calculate_average",
+      "start_line": 17,
+      "start_col": 10,
+      "syntax_role": "Variable",
+      "type": "CallableType(base_type=ClassType(typing.Callable), parameters=(AnythingType(), AnythingType()))",
+      "short_type": "Callable[[Any], Any]"
+    },
+    {
+      "text": "numbers",
+      "start_line": 17,
+      "start_col": 28,
+      "syntax_role": "Variable",
+      "type": "GenericType(base_type=ClassType(builtins.list), parameters=(ClassType(builtins.int),))",
+      "short_type": "List[int]"
+    },
+    {
+      "text": "name",
+      "start_line": 22,
+      "start_col": 19,
+      "syntax_role": "Variable",
+      "type": "builtins.str",
+      "short_type": "str"
+    },
+    {
+      "text": "age",
+      "start_line": 22,
+      "start_col": 32,
+      "syntax_role": "Variable",
+      "type": "builtins.int",
+      "short_type": "int"
+    }
+  ]
+}

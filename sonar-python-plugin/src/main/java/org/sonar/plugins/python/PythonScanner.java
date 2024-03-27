@@ -22,6 +22,8 @@ package org.sonar.plugins.python;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.RecognitionException;
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -66,6 +68,8 @@ import org.sonar.python.metrics.FileMetrics;
 import org.sonar.python.parser.PythonParser;
 import org.sonar.python.tree.IPythonTreeMaker;
 import org.sonar.python.tree.PythonTreeMaker;
+import org.sonar.python.types.TypeContext;
+import org.sonar.python.types.pytype.json.PyTypeTableReader;
 
 public class PythonScanner extends Scanner {
 
@@ -78,6 +82,7 @@ public class PythonScanner extends Scanner {
   private final PythonCpdAnalyzer cpdAnalyzer;
   private final PythonIndexer indexer;
   private final Map<InputFile, Set<PythonCheck>> checksExecutedWithoutParsingByFiles = new HashMap<>();
+  private final TypeContext typeContext;
 
   public PythonScanner(
     SensorContext context, PythonChecks checks,
@@ -90,6 +95,7 @@ public class PythonScanner extends Scanner {
     this.parser = parser;
     this.indexer = indexer;
     this.indexer.buildOnce(context);
+    this.typeContext = createTypeContext();
   }
 
   @Override
@@ -107,7 +113,14 @@ public class PythonScanner extends Scanner {
       PythonTreeMaker treeMaker = getTreeMaker(inputFile);
       FileInput parse = treeMaker.fileInput(astNode);
       visitorContext = new PythonVisitorContext(
-        parse, pythonFile, getWorkingDirectory(context), indexer.packageName(inputFile), indexer.projectLevelSymbolTable(), indexer.cacheContext(), context.runtime().getProduct());
+        parse,
+        pythonFile,
+        getWorkingDirectory(context),
+        indexer.packageName(inputFile),
+        indexer.projectLevelSymbolTable(),
+        indexer.cacheContext(),
+        context.runtime().getProduct(),
+        typeContext);
       if (fileType == InputFile.Type.MAIN) {
         saveMeasures(inputFile, visitorContext);
       }
@@ -139,6 +152,17 @@ public class PythonScanner extends Scanner {
     if (visitorContext.rootTree() != null && !isInSonarLint(context)) {
       new SymbolVisitor(context.newSymbolTable().onFile(inputFile)).visitFileInput(visitorContext.rootTree());
       new PythonHighlighter(context, inputFile).scanFile(visitorContext);
+    }
+  }
+
+  private static TypeContext createTypeContext() {
+    String typeInferenceFile = System.getenv("SONAR_TYPE_INFERENCE_FILE");
+    if (typeInferenceFile == null)
+      return new TypeContext();
+    try {
+      return new PyTypeTableReader().fromJson(Paths.get(typeInferenceFile));
+    } catch (IOException ex) {
+      return new TypeContext();
     }
   }
 

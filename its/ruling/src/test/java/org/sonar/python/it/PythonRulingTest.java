@@ -24,6 +24,7 @@ import com.sonar.orchestrator.junit5.OrchestratorExtension;
 import com.sonar.orchestrator.locator.FileLocation;
 import java.io.File;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -45,6 +46,7 @@ import static org.sonar.python.it.RulingHelper.getOrchestrator;
 class PythonRulingTest {
 
   public static final String PROJECT_KEY = "project";
+  private final Path JSON_PATH_PREFIX = Path.of("src/test/resources/types");
 
   @RegisterExtension
   public static final OrchestratorExtension ORCHESTRATOR = getOrchestrator();
@@ -76,7 +78,10 @@ class PythonRulingTest {
       .setProperty("sonar.cpd.exclusions", "**/*")
       .setProperty("sonar.lits.differences", litsDifferencesFile.getAbsolutePath())
       .setProperty("sonar.internal.analysis.failFast", "true")
-      .setEnvironmentVariable("SONAR_RUNNER_OPTS", "-Xmx2000m");
+//      .setEnvironmentVariable("SONAR_SCANNER_OPTS", "-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=8000")
+      .setEnvironmentVariable("SONAR_RUNNER_OPTS", "-Xmx2000m")
+      .setEnvironmentVariable("SONAR_TYPE_INFERENCE_FILE", JSON_PATH_PREFIX.resolve("sources.json").toAbsolutePath().toString());
+
     ORCHESTRATOR.executeBuild(build);
 
     String issueDifferences = issues(PROJECT_KEY).stream()

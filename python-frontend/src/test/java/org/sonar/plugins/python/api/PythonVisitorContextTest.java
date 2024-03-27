@@ -102,10 +102,12 @@ class PythonVisitorContextTest {
     Mockito.when(pythonFile.fileName()).thenReturn("my_module.py");
     FileInput fileInput = mock(FileInputImpl.class);
 
-    PythonVisitorContext pythonVisitorContext = new PythonVisitorContext(fileInput, pythonFile, workingDirectory, myPackage, projectLevelSymbolTable, cacheContext, SonarProduct.SONARLINT);
+    PythonVisitorContext pythonVisitorContext = new PythonVisitorContext(fileInput, pythonFile, workingDirectory, myPackage, projectLevelSymbolTable, cacheContext,
+      SonarProduct.SONARLINT, null);
     assertThat(pythonVisitorContext.sonarProduct()).isEqualTo(SonarProduct.SONARLINT);
 
-    pythonVisitorContext = new PythonVisitorContext(fileInput, pythonFile, workingDirectory, myPackage, projectLevelSymbolTable, cacheContext, SonarProduct.SONARQUBE);
+    pythonVisitorContext = new PythonVisitorContext(fileInput, pythonFile, workingDirectory, myPackage, projectLevelSymbolTable, cacheContext, SonarProduct.SONARQUBE,
+      null);
     assertThat(pythonVisitorContext.sonarProduct()).isEqualTo(SonarProduct.SONARQUBE);
 
     pythonVisitorContext = new PythonVisitorContext(fileInput, pythonFile, workingDirectory, myPackage, projectLevelSymbolTable, cacheContext);

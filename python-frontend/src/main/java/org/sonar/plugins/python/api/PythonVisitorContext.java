@@ -21,6 +21,7 @@ package org.sonar.plugins.python.api;
 
 import com.sonar.sslr.api.RecognitionException;
 import java.io.File;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Nullable;
@@ -31,6 +32,8 @@ import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.python.caching.CacheContextImpl;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.semantic.SymbolTableBuilder;
+import org.sonar.python.types.TypeContext;
+import org.sonar.python.types.pytype.json.PyTypeTableReader;
 
 public class PythonVisitorContext extends PythonInputFileContext {
 
@@ -51,15 +54,19 @@ public class PythonVisitorContext extends PythonInputFileContext {
     super(pythonFile, workingDirectory, cacheContext);
     this.rootTree = rootTree;
     this.parsingException = null;
-    new SymbolTableBuilder(packageName, pythonFile, projectLevelSymbolTable).visitFileInput(rootTree);
+    if (workingDirectory != null) {
+      new SymbolTableBuilder(packageName, pythonFile, projectLevelSymbolTable, getTypeContext(workingDirectory)).visitFileInput(rootTree);
+    } else {
+      new SymbolTableBuilder(packageName, pythonFile, projectLevelSymbolTable).visitFileInput(rootTree);
+    }
   }
 
   public PythonVisitorContext(FileInput rootTree, PythonFile pythonFile, @Nullable File workingDirectory, String packageName,
-    ProjectLevelSymbolTable projectLevelSymbolTable, CacheContext cacheContext, SonarProduct sonarProduct) {
+    ProjectLevelSymbolTable projectLevelSymbolTable, CacheContext cacheContext, SonarProduct sonarProduct, TypeContext typeContext) {
     super(pythonFile, workingDirectory, cacheContext, sonarProduct);
     this.rootTree = rootTree;
     this.parsingException = null;
-    new SymbolTableBuilder(packageName, pythonFile, projectLevelSymbolTable).visitFileInput(rootTree);
+    new SymbolTableBuilder(packageName, pythonFile, projectLevelSymbolTable, typeContext).visitFileInput(rootTree);
   }
 
   public PythonVisitorContext(PythonFile pythonFile, RecognitionException parsingException) {
@@ -89,4 +96,9 @@ public class PythonVisitorContext extends PythonInputFileContext {
   public List<PreciseIssue> getIssues() {
     return issues;
   }
+
+  private TypeContext getTypeContext(File workingDirectory) {
+    return new TypeContext(PyTypeTableReader.fromJsonPath(Paths.get(workingDirectory.getAbsolutePath() + ".json")));
+  }
+
 }

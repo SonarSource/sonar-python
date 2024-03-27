@@ -87,8 +87,12 @@ import org.sonar.python.tree.ImportFromImpl;
 import org.sonar.python.tree.LambdaExpressionImpl;
 import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.types.InferredTypes;
+import org.sonar.python.types.PyTypeAnnotation;
+import org.sonar.python.types.TypeContext;
 import org.sonar.python.types.TypeInference;
 import org.sonar.python.types.TypeShed;
+import org.sonar.python.types.v2.TypesTable;
+import org.sonar.python.types.v2.TypesTableBuilder;
 
 import static org.sonar.python.semantic.SymbolUtils.boundNamesFromExpression;
 import static org.sonar.python.semantic.SymbolUtils.resolveTypeHierarchy;
@@ -103,12 +107,16 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
   private Set<Tree> assignmentLeftHandSides = new HashSet<>();
   private final PythonFile pythonFile;
   private final Set<String> importedModulesFQN = new HashSet<>();
+  private final TypeContext typeContext;
+  private final TypesTable typesTable;
 
   public SymbolTableBuilder(PythonFile pythonFile) {
     fullyQualifiedModuleName = null;
     filePath = null;
     projectLevelSymbolTable = ProjectLevelSymbolTable.empty();
     this.pythonFile = pythonFile;
+    typeContext = null;
+    typesTable = null;
   }
 
   public Set<String> importedModulesFQN() {
@@ -120,6 +128,10 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
   }
 
   public SymbolTableBuilder(String packageName, PythonFile pythonFile, ProjectLevelSymbolTable projectLevelSymbolTable) {
+    this(packageName, pythonFile, projectLevelSymbolTable, null);
+  }
+
+  public SymbolTableBuilder(String packageName, PythonFile pythonFile, ProjectLevelSymbolTable projectLevelSymbolTable, TypeContext typeContext) {
     this.pythonFile = pythonFile;
     String fileName = pythonFile.fileName();
     fullyQualifiedModuleName = SymbolUtils.fullyQualifiedModuleName(packageName, fileName);
@@ -128,6 +140,8 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
       filePath.add("");
     }
     this.projectLevelSymbolTable = projectLevelSymbolTable;
+    this.typeContext = typeContext;
+    this.typesTable = new TypesTable();
   }
 
   @Override
@@ -139,7 +153,14 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     createAmbiguousSymbols();
     addSymbolsToTree((FileInputImpl) fileInput);
     fileInput.accept(new ThirdPhaseVisitor());
-    TypeInference.inferTypes(fileInput, pythonFile);
+    if (typeContext != null) {
+      this.typeContext.setScopesByRootTree(scopesByRootTree);
+      this.typeContext.setProjectLevelSymbolTable(projectLevelSymbolTable);
+      new PyTypeAnnotation(this.typeContext, pythonFile).annotate(fileInput);
+      new TypesTableBuilder(this.typeContext.pyTypeTable(), this.typesTable, pythonFile).annotate(fileInput);
+    } else {
+      TypeInference.inferTypes(fileInput, pythonFile);
+    }
   }
 
   private static class SymbolToUpdate {
