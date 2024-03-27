@@ -24,13 +24,43 @@ import java.util.HashMap;
 public class TypesTable {
 
   private final HashMap<String, PythonType> declaredTypesTable;
+  private final HashMap<String, PythonType> declaredClassesTable;
 
   public TypesTable() {
     declaredTypesTable = new HashMap<>();
+    declaredClassesTable = new HashMap<>();
   }
 
   public HashMap<String, PythonType> declaredTypesTable() {
     return declaredTypesTable;
+  }
+
+  public PythonType addType(PythonType pythonType) {
+    if (pythonType instanceof ClassType classType) {
+      return addClassType(classType);
+    } else {
+      return addAnotherType(pythonType);
+    }
+  }
+
+  public PythonType addClassType(ClassType classType) {
+    var key = classType.getName();
+    if (declaredClassesTable.containsKey(key)) {
+      return declaredClassesTable.get(key);
+    } else {
+      declaredClassesTable.put(key, classType);
+      return classType;
+    }
+  }
+
+  public PythonType addAnotherType(PythonType pythonType) {
+    var key = pythonType.getName();
+    if (declaredTypesTable.containsKey(key)) {
+      return declaredTypesTable.get(key);
+    } else {
+      declaredTypesTable.put(key, pythonType);
+      return pythonType;
+    }
   }
 
 }

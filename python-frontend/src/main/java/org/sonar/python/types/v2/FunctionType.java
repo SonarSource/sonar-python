@@ -32,4 +32,8 @@ public record FunctionType(
   List<Member> parameters,
   PythonType returnType) implements PythonType {
 
+  @Override
+  public String getName() {
+    return name;
+  }
 }

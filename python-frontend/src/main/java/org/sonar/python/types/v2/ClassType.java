@@ -19,6 +19,7 @@
  */
 package org.sonar.python.types.v2;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -30,10 +31,16 @@ public record ClassType(
   List<PythonType> attributes,
   List<PythonType> superClasses,
   List<PythonType> typeVars) implements PythonType{
+
   public ClassType(String name) {
-    this(name, List.of(), List.of(), List.of(), List.of());
+    this(name, new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
   }
   public ClassType(String name, List<PythonType> attributes) {
-    this(name, List.of(), attributes, List.of(), List.of());
+    this(name, new ArrayList<>(), attributes, new ArrayList<>(), new ArrayList<>());
+  }
+
+  @Override
+  public String getName() {
+    return name;
   }
 }

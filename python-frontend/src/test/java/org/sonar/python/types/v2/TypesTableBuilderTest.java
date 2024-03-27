@@ -22,7 +22,9 @@ package org.sonar.python.types.v2;
 import java.nio.file.Path;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.FileInput;
+import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.python.TestPythonFile;
 import org.sonar.python.parser.PythonParser;
 import org.sonar.python.tree.NameImpl;
@@ -30,7 +32,7 @@ import org.sonar.python.tree.PythonTreeMaker;
 import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.types.pytype.json.PyTypeTableReader;
 
-public class TypesTableBuilderTest {
+class TypesTableBuilderTest {
 
   @Test
   void simpleVarsTypeTest() {
@@ -122,6 +124,44 @@ public class TypesTableBuilderTest {
     var resultValueType = ((ObjectType) aName.pythonType()).type();
 
     Assertions.assertEquals(returnType, resultValueType);
+  }
+
+  @Test
+  void classMethodTypeTest() {
+    var file = Path.of("src/test/resources/v2/code/snippet4.py");
+    var pythonFile = new TestPythonFile(Path.of("src/test/resources/v2/code"), file);
+    var pyTypeTable = PyTypeTableReader.fromJsonPath(Path.of("src/test/resources/v2/code.json"));
+    var typesTable = new TypesTable();
+    var typesTableBuilder = new TypesTableBuilder(pyTypeTable, typesTable, pythonFile);
+    var fileInput = parseFile(pythonFile);
+    typesTableBuilder.annotate(fileInput);
+
+    var aClassName = TreeUtils.firstChild(fileInput, v -> TreeUtils.toOptionalInstanceOf(ClassDef.class, v)
+        .map(ClassDef::name)
+        .map(Name::name)
+        .filter("A"::equals)
+        .isPresent()
+      ).flatMap(TreeUtils.toOptionalInstanceOfMapper(ClassDef.class))
+      .map(ClassDef::name)
+      .orElse(null);
+    Assertions.assertNotNull(aClassName);
+    Assertions.assertNotNull(aClassName.pythonType());
+    Assertions.assertInstanceOf(ClassType.class, aClassName.pythonType());
+
+//    var returnType = ((ClassType) aClassName.pythonType()).returnType();
+
+    var aInstanceName = TreeUtils.firstChild(fileInput, v -> TreeUtils.toOptionalInstanceOf(NameImpl.class, v)
+        .map(NameImpl::name)
+        .filter("a_instance"::equals)
+        .isPresent()
+      ).flatMap(TreeUtils.toOptionalInstanceOfMapper(NameImpl.class))
+      .orElse(null);
+    Assertions.assertNotNull(aInstanceName);
+    Assertions.assertNotNull(aInstanceName.pythonType());
+    Assertions.assertInstanceOf(ObjectType.class, aInstanceName.pythonType());
+    var resultValueType = ((ObjectType) aInstanceName.pythonType()).type();
+
+    Assertions.assertEquals(aClassName.pythonType(), resultValueType);
   }
 
   private static FileInput parseFile(TestPythonFile file) {

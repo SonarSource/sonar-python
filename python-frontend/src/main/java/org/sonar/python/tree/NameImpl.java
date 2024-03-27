@@ -121,6 +121,7 @@ public class NameImpl extends PyTree implements Name {
     this.inferredType = inferredType;
   }
 
+  @Override
   public PythonType pythonType() {
     return pythonType;
   }

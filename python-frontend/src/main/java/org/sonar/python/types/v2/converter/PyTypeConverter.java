@@ -38,10 +38,14 @@ public interface PyTypeConverter<F extends BaseType, T extends PythonType> {
   );
 
   static PythonType convert(TypesTable typesTable, PyTypeInfo from) {
+    return convert(typesTable, from, true);
+  }
+
+  static PythonType convert(TypesTable typesTable, PyTypeInfo from, boolean addToTypeTable) {
     if (converterMap.containsKey(from.baseType().getClass())) {
       var converted = converterMap.get(from.baseType().getClass()).convert(typesTable, from, from.baseType());
-      if (!typesTable.declaredTypesTable().containsKey(converted.toString())) {
-        typesTable.declaredTypesTable().put(converted.toString(), converted);
+      if (addToTypeTable) {
+        converted = typesTable.addType(converted);
       }
       return converted;
     } else {

@@ -72,6 +72,11 @@ public class PyTypeTable {
     return getVariableTypeFor(fileName, token.line(), token.column(), name.name(), "Function");
   }
 
+  public Optional<PyTypeInfo> getMethodTypeFor(String fileName, Name name) {
+    var token = name.parent().firstToken();
+    return getVariableTypeFor(fileName, token.line(), token.column(), name.name(), "Method");
+  }
+
   public Optional<PyTypeInfo> getVariableTypeFor(String fileName, int line, int column, String name, String kind) {
     TypePositionKey typePositionKey = new TypePositionKey(fileName, line, column, name);
     return Optional.ofNullable(multipleTypesByPosition.get(typePositionKey))

@@ -24,4 +24,9 @@ package org.sonar.python.types.v2;
  */
 public interface PythonType {
   PythonType UNKNOWN = new UnionType();
+
+  default String getName() {
+    return this.toString();
+  }
+
 }

@@ -20,12 +20,16 @@
 package org.sonar.python.types.v2;
 
 import java.util.List;
+import java.util.Optional;
 import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
+import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.tree.NameImpl;
+import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.types.pytype.PyTypeTable;
 import org.sonar.python.types.v2.converter.PyTypeConverter;
 
@@ -35,12 +39,14 @@ public class TypesTableBuilder extends BaseTreeVisitor {
   private final TypesTable typesTable;
   private final String filePath;
   private boolean isFunctionDefName;
+  private boolean isClassDefName;
 
   public TypesTableBuilder(PyTypeTable pyTypeTable, TypesTable typesTable, PythonFile pythonFile) {
     this.pyTypeTable = pyTypeTable;
     this.typesTable = typesTable;
     this.filePath = getFilePath(pythonFile);
     this.isFunctionDefName = false;
+    this.isClassDefName = false;
   }
 
   private String getFilePath(PythonFile pythonFile) {
@@ -53,6 +59,17 @@ public class TypesTableBuilder extends BaseTreeVisitor {
 
   public void annotate(FileInput fileInput) {
     fileInput.accept(this);
+  }
+
+  @Override
+  public void visitClassDef(ClassDef pyClassDefTree) {
+    scan(pyClassDefTree.decorators());
+    isClassDefName = true;
+    scan(pyClassDefTree.name());
+    isClassDefName = false;
+    scan(pyClassDefTree.typeParams());
+    scan(pyClassDefTree.args());
+    scan(pyClassDefTree.body());
   }
 
   @Override
@@ -70,7 +87,9 @@ public class TypesTableBuilder extends BaseTreeVisitor {
   @Override
   public void visitName(Name name) {
     PythonType type;
-    if (isFunctionDefName) {
+    if (isClassDefName) {
+      type = getTypeForClassDefName(filePath, name);
+    } else if (isFunctionDefName) {
       type = getTypeForFunctionDefName(filePath, name);
     } else {
       type = getTypeForName(filePath, name);
@@ -81,31 +100,42 @@ public class TypesTableBuilder extends BaseTreeVisitor {
     super.visitName(name);
   }
 
+  private PythonType getTypeForClassDefName(String fileName, Name name) {
+    var classType = typesTable.addType(new ClassType(name.name()));
+    return classType;
+  }
+
   private PythonType getTypeForName(String fileName, Name name) {
     return pyTypeTable.getVariableTypeFor(fileName, name)
       .map(pyTypeInfo -> {
         var pythonType = PyTypeConverter.convert(typesTable, pyTypeInfo);
-        var typeKey = pythonType.toString();
-        if (typesTable.declaredTypesTable().containsKey(typeKey)) {
-          pythonType = typesTable.declaredTypesTable().get(typeKey);
-        } else {
-          typesTable.declaredTypesTable().put(typeKey, pythonType);
-        }
+        pythonType = typesTable.addType(pythonType);
         return (PythonType) new ObjectType(pythonType, List.of());
       }).orElse(PythonType.UNKNOWN);
   }
 
   private PythonType getTypeForFunctionDefName(String fileName, Name name) {
-    return pyTypeTable.getFunctionTypeFor(fileName, name)
-      .map(pyTypeInfo -> {
-        var pythonType = PyTypeConverter.convert(typesTable, pyTypeInfo);
-        var typeKey = pythonType.toString();
-        if (typesTable.declaredTypesTable().containsKey(typeKey)) {
-          pythonType = typesTable.declaredTypesTable().get(typeKey);
-        } else {
-          typesTable.declaredTypesTable().put(typeKey, pythonType);
-        }
-        return pythonType;
-      }).orElse(PythonType.UNKNOWN);
+    return Optional.of(name)
+      .map(Tree::parent)
+      .map(Tree::parent)
+      .map(Tree::parent)
+      .flatMap(TreeUtils.toOptionalInstanceOfMapper(ClassDef.class))
+      .map(classDef -> {
+        var classType = (ClassType) classDef.name().pythonType();
+        return pyTypeTable.getMethodTypeFor(fileName, name)
+          .map(pyTypeInfo -> {
+            var pythonType = (FunctionType) PyTypeConverter.convert(typesTable, pyTypeInfo, false);
+            classType.members().add(new Member(pythonType.getName(), pythonType));
+            return (PythonType) pythonType;
+          }).orElse(PythonType.UNKNOWN);
+      }).orElseGet(() -> {
+        return pyTypeTable.getFunctionTypeFor(fileName, name)
+          .map(pyTypeInfo -> {
+            var pythonType = PyTypeConverter.convert(typesTable, pyTypeInfo);
+            pythonType = typesTable.addType(pythonType);
+            return pythonType;
+          }).orElse(PythonType.UNKNOWN);
+      });
+
   }
 }
