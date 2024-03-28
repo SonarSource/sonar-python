@@ -205,8 +205,22 @@ class TypesTableBuilderTest {
     Assertions.assertNotNull(bClassName.pythonType());
     Assertions.assertInstanceOf(ClassType.class, bClassName.pythonType());
 
-    Assertions.assertFalse(aClassName.pythonType().isCompatibleWith(bClassName.pythonType()));
+    var cClassName = TreeUtils.firstChild(fileInput, v -> TreeUtils.toOptionalInstanceOf(ClassDef.class, v)
+        .map(ClassDef::name)
+        .map(Name::name)
+        .filter("C"::equals)
+        .isPresent()
+      ).flatMap(TreeUtils.toOptionalInstanceOfMapper(ClassDef.class))
+      .map(ClassDef::name)
+      .orElse(null);
+    Assertions.assertNotNull(cClassName);
+    Assertions.assertNotNull(cClassName.pythonType());
+    Assertions.assertInstanceOf(ClassType.class, cClassName.pythonType());
+
     Assertions.assertTrue(bClassName.pythonType().isCompatibleWith(aClassName.pythonType()));
+    Assertions.assertFalse(aClassName.pythonType().isCompatibleWith(bClassName.pythonType()));
+    Assertions.assertFalse(cClassName.pythonType().isCompatibleWith(aClassName.pythonType()));
+    Assertions.assertFalse(cClassName.pythonType().isCompatibleWith(bClassName.pythonType()));
 
     var aInstanceName = TreeUtils.firstChild(fileInput, v -> TreeUtils.toOptionalInstanceOf(Name.class, v)
         .map(Name::name)
@@ -220,6 +234,7 @@ class TypesTableBuilderTest {
 
     Assertions.assertTrue(aInstanceName.pythonType().isCompatibleWith(aClassName.pythonType()));
     Assertions.assertTrue(aInstanceName.pythonType().isCompatibleWith(bClassName.pythonType()));
+    Assertions.assertFalse(aInstanceName.pythonType().isCompatibleWith(cClassName.pythonType()));
   }
 
   private static FileInput parseFile(TestPythonFile file) {
