@@ -52,6 +52,15 @@ class TypesTableBuilderTest {
       .orElse(null);
     Assertions.assertNotNull(dName);
     Assertions.assertNotNull(dName.pythonType());
+
+    var cName = TreeUtils.firstChild(fileInput, v -> TreeUtils.toOptionalInstanceOf(NameImpl.class, v)
+        .map(NameImpl::name)
+        .filter("c"::equals)
+        .isPresent()
+      ).flatMap(TreeUtils.toOptionalInstanceOfMapper(NameImpl.class))
+      .orElse(null);
+    Assertions.assertNotNull(cName);
+    Assertions.assertNotNull(cName.pythonType());
   }
 
   @Test
@@ -100,11 +109,11 @@ class TypesTableBuilderTest {
     var fileInput = parseFile(pythonFile);
     typesTableBuilder.annotate(fileInput);
 
-    var fooName = TreeUtils.firstChild(fileInput, v -> TreeUtils.toOptionalInstanceOf(NameImpl.class, v)
-        .map(NameImpl::name)
+    var fooName = TreeUtils.firstChild(fileInput, v -> TreeUtils.toOptionalInstanceOf(Name.class, v)
+        .map(Name::name)
         .filter("foo"::equals)
         .isPresent()
-    ).flatMap(TreeUtils.toOptionalInstanceOfMapper(NameImpl.class))
+    ).flatMap(TreeUtils.toOptionalInstanceOfMapper(Name.class))
       .orElse(null);
     Assertions.assertNotNull(fooName);
     Assertions.assertNotNull(fooName.pythonType());
@@ -112,11 +121,11 @@ class TypesTableBuilderTest {
 
     var returnType = ((FunctionType) fooName.pythonType()).returnType();
 
-    var aName = TreeUtils.firstChild(fileInput, v -> TreeUtils.toOptionalInstanceOf(NameImpl.class, v)
-        .map(NameImpl::name)
+    var aName = TreeUtils.firstChild(fileInput, v -> TreeUtils.toOptionalInstanceOf(Name.class, v)
+        .map(Name::name)
         .filter("a"::equals)
         .isPresent()
-      ).flatMap(TreeUtils.toOptionalInstanceOfMapper(NameImpl.class))
+      ).flatMap(TreeUtils.toOptionalInstanceOfMapper(Name.class))
       .orElse(null);
     Assertions.assertNotNull(aName);
     Assertions.assertNotNull(aName.pythonType());
@@ -148,13 +157,11 @@ class TypesTableBuilderTest {
     Assertions.assertNotNull(aClassName.pythonType());
     Assertions.assertInstanceOf(ClassType.class, aClassName.pythonType());
 
-//    var returnType = ((ClassType) aClassName.pythonType()).returnType();
-
-    var aInstanceName = TreeUtils.firstChild(fileInput, v -> TreeUtils.toOptionalInstanceOf(NameImpl.class, v)
-        .map(NameImpl::name)
+    var aInstanceName = TreeUtils.firstChild(fileInput, v -> TreeUtils.toOptionalInstanceOf(Name.class, v)
+        .map(Name::name)
         .filter("a_instance"::equals)
         .isPresent()
-      ).flatMap(TreeUtils.toOptionalInstanceOfMapper(NameImpl.class))
+      ).flatMap(TreeUtils.toOptionalInstanceOfMapper(Name.class))
       .orElse(null);
     Assertions.assertNotNull(aInstanceName);
     Assertions.assertNotNull(aInstanceName.pythonType());
@@ -162,6 +169,57 @@ class TypesTableBuilderTest {
     var resultValueType = ((ObjectType) aInstanceName.pythonType()).type();
 
     Assertions.assertEquals(aClassName.pythonType(), resultValueType);
+  }
+
+  @Test
+  void classInheritanceTypeTest() {
+    var file = Path.of("src/test/resources/v2/code/snippet5.py");
+    var pythonFile = new TestPythonFile(Path.of("src/test/resources/v2/code"), file);
+    var pyTypeTable = PyTypeTableReader.fromJsonPath(Path.of("src/test/resources/v2/code.json"));
+    var typesTable = new TypesTable();
+    var typesTableBuilder = new TypesTableBuilder(pyTypeTable, typesTable, pythonFile);
+    var fileInput = parseFile(pythonFile);
+    typesTableBuilder.annotate(fileInput);
+
+    var aClassName = TreeUtils.firstChild(fileInput, v -> TreeUtils.toOptionalInstanceOf(ClassDef.class, v)
+        .map(ClassDef::name)
+        .map(Name::name)
+        .filter("A"::equals)
+        .isPresent()
+      ).flatMap(TreeUtils.toOptionalInstanceOfMapper(ClassDef.class))
+      .map(ClassDef::name)
+      .orElse(null);
+    Assertions.assertNotNull(aClassName);
+    Assertions.assertNotNull(aClassName.pythonType());
+    Assertions.assertInstanceOf(ClassType.class, aClassName.pythonType());
+
+    var bClassName = TreeUtils.firstChild(fileInput, v -> TreeUtils.toOptionalInstanceOf(ClassDef.class, v)
+        .map(ClassDef::name)
+        .map(Name::name)
+        .filter("B"::equals)
+        .isPresent()
+      ).flatMap(TreeUtils.toOptionalInstanceOfMapper(ClassDef.class))
+      .map(ClassDef::name)
+      .orElse(null);
+    Assertions.assertNotNull(bClassName);
+    Assertions.assertNotNull(bClassName.pythonType());
+    Assertions.assertInstanceOf(ClassType.class, bClassName.pythonType());
+
+    Assertions.assertFalse(aClassName.pythonType().isCompatibleWith(bClassName.pythonType()));
+    Assertions.assertTrue(bClassName.pythonType().isCompatibleWith(aClassName.pythonType()));
+
+    var aInstanceName = TreeUtils.firstChild(fileInput, v -> TreeUtils.toOptionalInstanceOf(Name.class, v)
+        .map(Name::name)
+        .filter("a_instance"::equals)
+        .isPresent()
+      ).flatMap(TreeUtils.toOptionalInstanceOfMapper(Name.class))
+      .orElse(null);
+    Assertions.assertNotNull(aInstanceName);
+    Assertions.assertNotNull(aInstanceName.pythonType());
+    Assertions.assertInstanceOf(ObjectType.class, aInstanceName.pythonType());
+
+    Assertions.assertTrue(aInstanceName.pythonType().isCompatibleWith(aClassName.pythonType()));
+    Assertions.assertTrue(aInstanceName.pythonType().isCompatibleWith(bClassName.pythonType()));
   }
 
   private static FileInput parseFile(TestPythonFile file) {

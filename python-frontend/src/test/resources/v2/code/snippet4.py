@@ -6,3 +6,4 @@ class A:
         return a
 
 a_instance = A()
+b = a_instance.foo()

@@ -19,6 +19,8 @@
  */
 package org.sonar.python.types.v2;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.List;
 import java.util.Optional;
 import org.sonar.plugins.python.api.PythonFile;
@@ -38,8 +40,10 @@ public class TypesTableBuilder extends BaseTreeVisitor {
   private final PyTypeTable pyTypeTable;
   private final TypesTable typesTable;
   private final String filePath;
+  private final Deque<PythonType> typesStack;
   private boolean isFunctionDefName;
   private boolean isClassDefName;
+  private boolean isClassArgName;
 
   public TypesTableBuilder(PyTypeTable pyTypeTable, TypesTable typesTable, PythonFile pythonFile) {
     this.pyTypeTable = pyTypeTable;
@@ -47,6 +51,8 @@ public class TypesTableBuilder extends BaseTreeVisitor {
     this.filePath = getFilePath(pythonFile);
     this.isFunctionDefName = false;
     this.isClassDefName = false;
+    this.isClassArgName = false;
+    this.typesStack = new ArrayDeque<>();
   }
 
   private String getFilePath(PythonFile pythonFile) {
@@ -62,14 +68,17 @@ public class TypesTableBuilder extends BaseTreeVisitor {
   }
 
   @Override
-  public void visitClassDef(ClassDef pyClassDefTree) {
-    scan(pyClassDefTree.decorators());
+  public void visitClassDef(ClassDef classDef) {
+    scan(classDef.decorators());
     isClassDefName = true;
-    scan(pyClassDefTree.name());
+    scan(classDef.name());
     isClassDefName = false;
-    scan(pyClassDefTree.typeParams());
-    scan(pyClassDefTree.args());
-    scan(pyClassDefTree.body());
+    scan(classDef.typeParams());
+    isClassArgName = true;
+    scan(classDef.args());
+    isClassArgName = false;
+    scan(classDef.body());
+    typesStack.poll();
   }
 
   @Override
@@ -89,8 +98,14 @@ public class TypesTableBuilder extends BaseTreeVisitor {
     PythonType type;
     if (isClassDefName) {
       type = getTypeForClassDefName(filePath, name);
+      typesStack.add(type);
     } else if (isFunctionDefName) {
       type = getTypeForFunctionDefName(filePath, name);
+    } else if (isClassArgName) {
+      type = getTypeForClassDefName(filePath, name);
+      if (typesStack.pop() instanceof ClassType classType) {
+        classType.superClasses().add(type);
+      }
     } else {
       type = getTypeForName(filePath, name);
     }
@@ -125,7 +140,7 @@ public class TypesTableBuilder extends BaseTreeVisitor {
         return pyTypeTable.getMethodTypeFor(fileName, name)
           .map(pyTypeInfo -> {
             var pythonType = (FunctionType) PyTypeConverter.convert(typesTable, pyTypeInfo, false);
-            classType.members().add(new Member(pythonType.getName(), pythonType));
+            classType.members().add(new Member(pythonType.name(), pythonType));
             return (PythonType) pythonType;
           }).orElse(PythonType.UNKNOWN);
       }).orElseGet(() -> {

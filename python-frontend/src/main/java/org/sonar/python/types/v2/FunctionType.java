@@ -31,9 +31,4 @@ public record FunctionType(
   List<PythonType> typeVars,
   List<Member> parameters,
   PythonType returnType) implements PythonType {
-
-  @Override
-  public String getName() {
-    return name;
-  }
 }

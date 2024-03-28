@@ -44,7 +44,7 @@ public class TypesTable {
   }
 
   public PythonType addClassType(ClassType classType) {
-    var key = classType.getName();
+    var key = classType.name();
     if (declaredClassesTable.containsKey(key)) {
       return declaredClassesTable.get(key);
     } else {
@@ -54,7 +54,7 @@ public class TypesTable {
   }
 
   public PythonType addAnotherType(PythonType pythonType) {
-    var key = pythonType.getName();
+    var key = pythonType.name();
     if (declaredTypesTable.containsKey(key)) {
       return declaredTypesTable.get(key);
     } else {

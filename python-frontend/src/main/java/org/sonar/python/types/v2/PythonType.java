@@ -25,8 +25,12 @@ package org.sonar.python.types.v2;
 public interface PythonType {
   PythonType UNKNOWN = new UnionType();
 
-  default String getName() {
+  default String name() {
     return this.toString();
+  }
+
+  default boolean isCompatibleWith(PythonType another) {
+    return true;
   }
 
 }

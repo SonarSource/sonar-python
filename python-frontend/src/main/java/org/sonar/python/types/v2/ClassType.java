@@ -21,6 +21,7 @@ package org.sonar.python.types.v2;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * ClassType
@@ -35,12 +36,14 @@ public record ClassType(
   public ClassType(String name) {
     this(name, new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
   }
+
   public ClassType(String name, List<PythonType> attributes) {
     this(name, new ArrayList<>(), attributes, new ArrayList<>(), new ArrayList<>());
   }
 
   @Override
-  public String getName() {
-    return name;
+  public boolean isCompatibleWith(PythonType another) {
+    return Objects.equals(this, another) || superClasses
+      .stream().anyMatch(superClass -> superClass.isCompatibleWith(another));
   }
 }

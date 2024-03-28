@@ -25,4 +25,10 @@ public record UnionType(List<PythonType> candidates) implements PythonType {
   public UnionType() {
     this(List.of());
   }
+
+  @Override
+  public boolean isCompatibleWith(PythonType another) {
+    return candidates.isEmpty() || candidates.stream()
+      .anyMatch(candidate -> candidate.isCompatibleWith(another));
+  }
 }
