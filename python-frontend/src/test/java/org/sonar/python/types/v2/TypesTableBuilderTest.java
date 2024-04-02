@@ -22,9 +22,11 @@ package org.sonar.python.types.v2;
 import java.nio.file.Path;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.python.TestPythonFile;
 import org.sonar.python.parser.PythonParser;
 import org.sonar.python.tree.NameImpl;
@@ -235,6 +237,51 @@ class TypesTableBuilderTest {
     Assertions.assertTrue(aInstanceName.pythonType().isCompatibleWith(aClassName.pythonType()));
     Assertions.assertTrue(aInstanceName.pythonType().isCompatibleWith(bClassName.pythonType()));
     Assertions.assertFalse(aInstanceName.pythonType().isCompatibleWith(cClassName.pythonType()));
+  }
+
+  @Test
+  void methodCallTypeTest() {
+    var file = Path.of("src/test/resources/v2/code/snippet6.py");
+    var pythonFile = new TestPythonFile(Path.of("src/test/resources/v2/code"), file);
+    var pyTypeTable = PyTypeTableReader.fromJsonPath(Path.of("src/test/resources/v2/code.json"));
+    var typesTable = new TypesTable();
+    var typesTableBuilder = new TypesTableBuilder(pyTypeTable, typesTable, pythonFile);
+    var fileInput = parseFile(pythonFile);
+    typesTableBuilder.annotate(fileInput);
+
+    var aConstructorCallExpression = TreeUtils.firstChild(fileInput, v -> TreeUtils.toOptionalInstanceOf(CallExpression.class, v)
+        .map(CallExpression::callee)
+        .flatMap(TreeUtils.toOptionalInstanceOfMapper(Name.class))
+        .map(Name::name)
+        .filter("A"::equals)
+        .isPresent()
+      ).flatMap(TreeUtils.toOptionalInstanceOfMapper(CallExpression.class))
+      .orElse(null);
+
+    Assertions.assertNotNull(aConstructorCallExpression);
+    Assertions.assertNotNull(aConstructorCallExpression.pythonType());
+    Assertions.assertInstanceOf(ObjectType.class, aConstructorCallExpression.pythonType());
+    var aConstructorCallType = ((ObjectType) aConstructorCallExpression.pythonType()).type();
+    Assertions.assertInstanceOf(ClassType.class, aConstructorCallType);
+    Assertions.assertEquals("A", aConstructorCallType.name());
+
+    var method1CallExpression = TreeUtils.firstChild(fileInput, v -> TreeUtils.toOptionalInstanceOf(CallExpression.class, v)
+        .map(CallExpression::callee)
+        .flatMap(TreeUtils.toOptionalInstanceOfMapper(QualifiedExpression.class))
+        .map(QualifiedExpression::name)
+        .map(Name::name)
+        .filter("method1"::equals)
+        .isPresent()
+      ).flatMap(TreeUtils.toOptionalInstanceOfMapper(CallExpression.class))
+      .orElse(null);
+
+    Assertions.assertNotNull(method1CallExpression);
+    Assertions.assertNotNull(method1CallExpression.pythonType());
+    Assertions.assertInstanceOf(ObjectType.class, method1CallExpression.pythonType());
+
+    var method1CallType = ((ObjectType) method1CallExpression.pythonType()).type();
+    Assertions.assertInstanceOf(FunctionType.class, method1CallType);
+    Assertions.assertEquals("method1", method1CallType.name());
   }
 
   private static FileInput parseFile(TestPythonFile file) {

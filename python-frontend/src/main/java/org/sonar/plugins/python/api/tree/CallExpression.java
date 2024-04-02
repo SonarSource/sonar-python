@@ -22,6 +22,7 @@ package org.sonar.plugins.python.api.tree;
 import java.util.List;
 import javax.annotation.CheckForNull;
 import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.python.types.v2.PythonType;
 
 /**
  * <pre>
@@ -51,5 +52,10 @@ public interface CallExpression extends Expression {
       return ((HasSymbol) callee()).symbol();
     }
     return null;
+  }
+
+  @Override
+  default PythonType pythonType() {
+    return callee().pythonType();
   }
 }

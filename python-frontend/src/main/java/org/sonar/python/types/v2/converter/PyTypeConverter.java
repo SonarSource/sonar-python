@@ -44,6 +44,9 @@ public interface PyTypeConverter<F extends BaseType, T extends PythonType> {
   static PythonType convert(TypesTable typesTable, PyTypeInfo from, boolean addToTypeTable) {
     if (converterMap.containsKey(from.baseType().getClass())) {
       var converted = converterMap.get(from.baseType().getClass()).convert(typesTable, from, from.baseType());
+      if (converted == null) {
+        converted = PythonType.UNKNOWN;
+      }
       if (addToTypeTable) {
         converted = typesTable.addType(converted);
       }

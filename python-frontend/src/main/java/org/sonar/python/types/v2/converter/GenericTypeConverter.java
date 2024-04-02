@@ -32,6 +32,14 @@ public class GenericTypeConverter implements PyTypeConverter<GenericType, ClassT
         var paramTypeInfo = new PyTypeInfo(null, 0, 0, "Variable", null, null, paramType);
         return PyTypeConverter.convert(typesTable, paramTypeInfo);
       }).toList();
-    return new ClassType(from.name(), attributes);
+    if ("builtins.type".equals(from.name())) {
+      return attributes.stream()
+        .filter(ClassType.class::isInstance)
+        .map(ClassType.class::cast)
+        .findFirst()
+        .orElse(null);
+    } else {
+      return new ClassType(from.name(), attributes);
+    }
   }
 }

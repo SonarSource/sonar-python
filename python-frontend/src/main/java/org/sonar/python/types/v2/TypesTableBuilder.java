@@ -20,15 +20,20 @@
 package org.sonar.python.types.v2;
 
 import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Deque;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
+import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.tree.NameImpl;
 import org.sonar.python.tree.TreeUtils;
@@ -91,6 +96,35 @@ public class TypesTableBuilder extends BaseTreeVisitor {
     scan(functionDef.parameters());
     scan(functionDef.returnTypeAnnotation());
     scan(functionDef.body());
+  }
+
+  @Override
+  public void visitCallExpression(CallExpression callExpression) {
+    super.visitCallExpression(callExpression);
+  }
+
+  @Override
+  public void visitQualifiedExpression(QualifiedExpression qualifiedExpression) {
+    scan(qualifiedExpression.qualifier());
+    var qualifiedExpressionName = qualifiedExpression.name();
+
+    var qualifierType = qualifiedExpression.qualifier().pythonType();
+    Optional.of(qualifierType)
+      .filter(ObjectType.class::isInstance)
+      .map(ObjectType.class::cast)
+      .map(ObjectType::type)
+      .filter(ClassType.class::isInstance)
+      .map(ClassType.class::cast)
+      .map(ClassType::members)
+      .stream()
+      .flatMap(Collection::stream)
+      .filter(member -> Objects.equals(qualifiedExpressionName.name(), member.name()))
+      .findFirst()
+      .ifPresent(member -> {
+        if (qualifiedExpressionName instanceof NameImpl name) {
+          name.pythonType(new ObjectType(member.type(), new ArrayList<>()));
+        }
+      });
   }
 
   @Override
