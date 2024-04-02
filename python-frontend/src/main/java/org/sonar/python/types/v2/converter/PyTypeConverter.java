@@ -25,6 +25,7 @@ import org.sonar.python.types.pytype.CallableType;
 import org.sonar.python.types.pytype.ClassType;
 import org.sonar.python.types.pytype.GenericType;
 import org.sonar.python.types.pytype.PyTypeInfo;
+import org.sonar.python.types.pytype.UnionType;
 import org.sonar.python.types.v2.PythonType;
 import org.sonar.python.types.v2.TypesTable;
 
@@ -34,7 +35,8 @@ public interface PyTypeConverter<F extends BaseType, T extends PythonType> {
   Map<Class<? extends BaseType>, PyTypeConverter> converterMap = Map.ofEntries(
     Map.entry(ClassType.class, new ClassTypeConverter()),
     Map.entry(CallableType.class, new CallableTypeConverter()),
-    Map.entry(GenericType.class, new GenericTypeConverter())
+    Map.entry(GenericType.class, new GenericTypeConverter()),
+    Map.entry(UnionType.class, new UnionTypeConverter())
   );
 
   static PythonType convert(TypesTable typesTable, PyTypeInfo from) {

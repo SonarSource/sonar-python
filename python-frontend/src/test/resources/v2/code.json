@@ -1113,5 +1113,438 @@
         "name": "A"
       }
     }
+  ],
+  "snippet7.py": [
+    {
+      "text": "method1",
+      "start_line": 4,
+      "start_col": 4,
+      "syntax_role": "Method",
+      "type": "CallableType(base_type=ClassType<unresolved>(typing.Callable), parameters=[ClassType<unresolved>(A), AnythingType()])",
+      "short_type": "",
+      "type_details": {
+        "$class": "CallableType",
+        "name": "typing.Callable",
+        "base_type": {
+          "$class": "ClassType",
+          "name": "typing.Callable"
+        },
+        "parameters": [
+          {
+            "$class": "ClassType",
+            "name": "A"
+          },
+          {
+            "$class": "AnythingType"
+          }
+        ]
+      }
+    },
+    {
+      "text": "method1",
+      "start_line": 8,
+      "start_col": 4,
+      "syntax_role": "Method",
+      "type": "CallableType(base_type=ClassType<unresolved>(typing.Callable), parameters=[ClassType<unresolved>(B), AnythingType()])",
+      "short_type": "",
+      "type_details": {
+        "$class": "CallableType",
+        "name": "typing.Callable",
+        "base_type": {
+          "$class": "ClassType",
+          "name": "typing.Callable"
+        },
+        "parameters": [
+          {
+            "$class": "ClassType",
+            "name": "B"
+          },
+          {
+            "$class": "AnythingType"
+          }
+        ]
+      }
+    },
+    {
+      "text": "method2",
+      "start_line": 12,
+      "start_col": 4,
+      "syntax_role": "Method",
+      "type": "CallableType(base_type=ClassType<unresolved>(typing.Callable), parameters=[ClassType<unresolved>(C), AnythingType()])",
+      "short_type": "",
+      "type_details": {
+        "$class": "CallableType",
+        "name": "typing.Callable",
+        "base_type": {
+          "$class": "ClassType",
+          "name": "typing.Callable"
+        },
+        "parameters": [
+          {
+            "$class": "ClassType",
+            "name": "C"
+          },
+          {
+            "$class": "AnythingType"
+          }
+        ]
+      }
+    },
+    {
+      "text": "method2",
+      "start_line": 16,
+      "start_col": 4,
+      "syntax_role": "Method",
+      "type": "CallableType(base_type=ClassType<unresolved>(typing.Callable), parameters=[ClassType<unresolved>(D), AnythingType()])",
+      "short_type": "",
+      "type_details": {
+        "$class": "CallableType",
+        "name": "typing.Callable",
+        "base_type": {
+          "$class": "ClassType",
+          "name": "typing.Callable"
+        },
+        "parameters": [
+          {
+            "$class": "ClassType",
+            "name": "D"
+          },
+          {
+            "$class": "AnythingType"
+          }
+        ]
+      }
+    },
+    {
+      "text": "B",
+      "start_line": 11,
+      "start_col": 8,
+      "syntax_role": "Variable",
+      "type": "GenericType(base_type=ClassType(builtins.type), parameters=(ClassType(B),))",
+      "short_type": "Type[B]",
+      "type_details": {
+        "$class": "GenericType",
+        "name": "builtins.type",
+        "base_type": {
+          "$class": "ClassType",
+          "name": "builtins.type"
+        },
+        "parameters": [
+          {
+            "$class": "ClassType",
+            "name": "B"
+          }
+        ]
+      }
+    },
+    {
+      "text": "b",
+      "start_line": 24,
+      "start_col": 0,
+      "syntax_role": "Variable",
+      "type": "UnionType(type_list=(ClassType(A), ClassType(C)))",
+      "short_type": "Union[A, C]",
+      "type_details": {
+        "$class": "UnionType",
+        "type_list": [
+          {
+            "$class": "ClassType",
+            "name": "A"
+          },
+          {
+            "$class": "ClassType",
+            "name": "C"
+          }
+        ]
+      }
+    },
+    {
+      "text": "a",
+      "start_line": 24,
+      "start_col": 4,
+      "syntax_role": "Variable",
+      "type": "UnionType(type_list=(ClassType(A), ClassType(C)))",
+      "short_type": "Union[A, C]",
+      "type_details": {
+        "$class": "UnionType",
+        "type_list": [
+          {
+            "$class": "ClassType",
+            "name": "A"
+          },
+          {
+            "$class": "ClassType",
+            "name": "C"
+          }
+        ]
+      }
+    },
+    {
+      "text": "int",
+      "start_line": 4,
+      "start_col": 25,
+      "syntax_role": "Variable",
+      "type": "GenericType(base_type=ClassType(builtins.type), parameters=(ClassType(builtins.int),))",
+      "short_type": "Type[int]",
+      "type_details": {
+        "$class": "GenericType",
+        "name": "builtins.type",
+        "base_type": {
+          "$class": "ClassType",
+          "name": "builtins.type"
+        },
+        "parameters": [
+          {
+            "$class": "ClassType",
+            "name": "builtins.int"
+          }
+        ]
+      }
+    },
+    {
+      "text": "str",
+      "start_line": 8,
+      "start_col": 25,
+      "syntax_role": "Variable",
+      "type": "GenericType(base_type=ClassType(builtins.type), parameters=(ClassType(builtins.str),))",
+      "short_type": "Type[str]",
+      "type_details": {
+        "$class": "GenericType",
+        "name": "builtins.type",
+        "base_type": {
+          "$class": "ClassType",
+          "name": "builtins.type"
+        },
+        "parameters": [
+          {
+            "$class": "ClassType",
+            "name": "builtins.str"
+          }
+        ]
+      }
+    },
+    {
+      "text": "str",
+      "start_line": 12,
+      "start_col": 25,
+      "syntax_role": "Variable",
+      "type": "GenericType(base_type=ClassType(builtins.type), parameters=(ClassType(builtins.str),))",
+      "short_type": "Type[str]",
+      "type_details": {
+        "$class": "GenericType",
+        "name": "builtins.type",
+        "base_type": {
+          "$class": "ClassType",
+          "name": "builtins.type"
+        },
+        "parameters": [
+          {
+            "$class": "ClassType",
+            "name": "builtins.str"
+          }
+        ]
+      }
+    },
+    {
+      "text": "str",
+      "start_line": 16,
+      "start_col": 25,
+      "syntax_role": "Variable",
+      "type": "GenericType(base_type=ClassType(builtins.type), parameters=(ClassType(builtins.str),))",
+      "short_type": "Type[str]",
+      "type_details": {
+        "$class": "GenericType",
+        "name": "builtins.type",
+        "base_type": {
+          "$class": "ClassType",
+          "name": "builtins.type"
+        },
+        "parameters": [
+          {
+            "$class": "ClassType",
+            "name": "builtins.str"
+          }
+        ]
+      }
+    },
+    {
+      "text": "Constant",
+      "start_line": 19,
+      "start_col": 22,
+      "syntax_role": "Literal",
+      "type": "builtins.int",
+      "short_type": "",
+      "type_details": {
+        "$class": "ClassType",
+        "name": "builtins.int"
+      }
+    },
+    {
+      "text": "a",
+      "start_line": 20,
+      "start_col": 4,
+      "syntax_role": "Variable",
+      "type": "C",
+      "short_type": "C",
+      "type_details": {
+        "$class": "ClassType",
+        "name": "C"
+      }
+    },
+    {
+      "text": "a",
+      "start_line": 22,
+      "start_col": 4,
+      "syntax_role": "Variable",
+      "type": "A",
+      "short_type": "A",
+      "type_details": {
+        "$class": "ClassType",
+        "name": "A"
+      }
+    },
+    {
+      "text": "Constant",
+      "start_line": 5,
+      "start_col": 15,
+      "syntax_role": "Literal",
+      "type": "builtins.int",
+      "short_type": "",
+      "type_details": {
+        "$class": "ClassType",
+        "name": "builtins.int"
+      }
+    },
+    {
+      "text": "Constant",
+      "start_line": 9,
+      "start_col": 15,
+      "syntax_role": "Literal",
+      "type": "builtins.int",
+      "short_type": "",
+      "type_details": {
+        "$class": "ClassType",
+        "name": "builtins.int"
+      }
+    },
+    {
+      "text": "Constant",
+      "start_line": 13,
+      "start_col": 15,
+      "syntax_role": "Literal",
+      "type": "builtins.int",
+      "short_type": "",
+      "type_details": {
+        "$class": "ClassType",
+        "name": "builtins.int"
+      }
+    },
+    {
+      "text": "Constant",
+      "start_line": 17,
+      "start_col": 15,
+      "syntax_role": "Literal",
+      "type": "builtins.int",
+      "short_type": "",
+      "type_details": {
+        "$class": "ClassType",
+        "name": "builtins.int"
+      }
+    },
+    {
+      "text": "Constant",
+      "start_line": 19,
+      "start_col": 17,
+      "syntax_role": "Literal",
+      "type": "builtins.int",
+      "short_type": "",
+      "type_details": {
+        "$class": "ClassType",
+        "name": "builtins.int"
+      }
+    },
+    {
+      "text": "C",
+      "start_line": 20,
+      "start_col": 8,
+      "syntax_role": "Variable",
+      "type": "GenericType(base_type=ClassType(builtins.type), parameters=(ClassType(C),))",
+      "short_type": "Type[C]",
+      "type_details": {
+        "$class": "GenericType",
+        "name": "builtins.type",
+        "base_type": {
+          "$class": "ClassType",
+          "name": "builtins.type"
+        },
+        "parameters": [
+          {
+            "$class": "ClassType",
+            "name": "C"
+          }
+        ]
+      }
+    },
+    {
+      "text": "A",
+      "start_line": 22,
+      "start_col": 8,
+      "syntax_role": "Variable",
+      "type": "GenericType(base_type=ClassType(builtins.type), parameters=(ClassType(A),))",
+      "short_type": "Type[A]",
+      "type_details": {
+        "$class": "GenericType",
+        "name": "builtins.type",
+        "base_type": {
+          "$class": "ClassType",
+          "name": "builtins.type"
+        },
+        "parameters": [
+          {
+            "$class": "ClassType",
+            "name": "A"
+          }
+        ]
+      }
+    },
+    {
+      "text": "time",
+      "start_line": 19,
+      "start_col": 3,
+      "syntax_role": "Attribute",
+      "type": "CallableType(base_type=ClassType(typing.Callable), parameters=(ClassType(builtins.float),))",
+      "short_type": "Callable[[], float]",
+      "type_details": {
+        "$class": "CallableType",
+        "name": "typing.Callable",
+        "base_type": {
+          "$class": "ClassType",
+          "name": "typing.Callable"
+        },
+        "parameters": [
+          {
+            "$class": "ClassType",
+            "name": "builtins.float"
+          }
+        ]
+      }
+    },
+    {
+      "text": "time",
+      "start_line": 19,
+      "start_col": 3,
+      "syntax_role": "Variable",
+      "type": "Alias(name='time', type=Module(name='time', module_name='time'))",
+      "short_type": "module",
+      "type_details": {
+        "$class": "Alias",
+        "name": "time",
+        "type": {
+          "$class": "Module",
+          "name": "time",
+          "module_name": "time"
+        }
+      }
+    }
   ]
 }
