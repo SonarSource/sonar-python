@@ -1546,5 +1546,183 @@
         }
       }
     }
+  ],
+  "snippet8.py": [
+    {
+      "text": "A",
+      "start_line": 4,
+      "start_col": 8,
+      "syntax_role": "Variable",
+      "type": "GenericType(base_type=ClassType(builtins.type), parameters=(ClassType(A),))",
+      "short_type": "Type[A]",
+      "type_details": {
+        "$class": "GenericType",
+        "name": "builtins.type",
+        "base_type": {
+          "$class": "ClassType",
+          "name": "builtins.type"
+        },
+        "parameters": [
+          {
+            "$class": "ClassType",
+            "name": "A"
+          }
+        ]
+      }
+    },
+    {
+      "text": "a",
+      "start_line": 7,
+      "start_col": 0,
+      "syntax_role": "Variable",
+      "type": "GenericType(base_type=ClassType(builtins.list), parameters=(ClassType(A),))",
+      "short_type": "List[A]",
+      "type_details": {
+        "$class": "GenericType",
+        "name": "builtins.list",
+        "base_type": {
+          "$class": "ClassType",
+          "name": "builtins.list"
+        },
+        "parameters": [
+          {
+            "$class": "ClassType",
+            "name": "A"
+          }
+        ]
+      }
+    },
+    {
+      "text": "List",
+      "start_line": 7,
+      "start_col": 4,
+      "syntax_role": "Literal",
+      "type": "GenericType(base_type=ClassType<unresolved>(builtins.list), parameters=[AnythingType()])",
+      "short_type": "",
+      "type_details": {
+        "$class": "GenericType",
+        "name": "builtins.list",
+        "base_type": {
+          "$class": "ClassType",
+          "name": "builtins.list"
+        },
+        "parameters": [
+          {
+            "$class": "AnythingType"
+          }
+        ]
+      }
+    },
+    {
+      "text": "b",
+      "start_line": 8,
+      "start_col": 0,
+      "syntax_role": "Variable",
+      "type": "GenericType(base_type=ClassType(builtins.list), parameters=(ClassType(B),))",
+      "short_type": "List[B]",
+      "type_details": {
+        "$class": "GenericType",
+        "name": "builtins.list",
+        "base_type": {
+          "$class": "ClassType",
+          "name": "builtins.list"
+        },
+        "parameters": [
+          {
+            "$class": "ClassType",
+            "name": "B"
+          }
+        ]
+      }
+    },
+    {
+      "text": "List",
+      "start_line": 8,
+      "start_col": 4,
+      "syntax_role": "Literal",
+      "type": "GenericType(base_type=ClassType<unresolved>(builtins.list), parameters=[AnythingType()])",
+      "short_type": "",
+      "type_details": {
+        "$class": "GenericType",
+        "name": "builtins.list",
+        "base_type": {
+          "$class": "ClassType",
+          "name": "builtins.list"
+        },
+        "parameters": [
+          {
+            "$class": "AnythingType"
+          }
+        ]
+      }
+    },
+    {
+      "text": "Constant",
+      "start_line": 2,
+      "start_col": 4,
+      "syntax_role": "Literal",
+      "type": "builtins.ellipsis",
+      "short_type": "",
+      "type_details": {
+        "$class": "ClassType",
+        "name": "builtins.ellipsis"
+      }
+    },
+    {
+      "text": "Constant",
+      "start_line": 5,
+      "start_col": 4,
+      "syntax_role": "Literal",
+      "type": "builtins.ellipsis",
+      "short_type": "",
+      "type_details": {
+        "$class": "ClassType",
+        "name": "builtins.ellipsis"
+      }
+    },
+    {
+      "text": "A",
+      "start_line": 7,
+      "start_col": 5,
+      "syntax_role": "Variable",
+      "type": "GenericType(base_type=ClassType(builtins.type), parameters=(ClassType(A),))",
+      "short_type": "Type[A]",
+      "type_details": {
+        "$class": "GenericType",
+        "name": "builtins.type",
+        "base_type": {
+          "$class": "ClassType",
+          "name": "builtins.type"
+        },
+        "parameters": [
+          {
+            "$class": "ClassType",
+            "name": "A"
+          }
+        ]
+      }
+    },
+    {
+      "text": "B",
+      "start_line": 8,
+      "start_col": 5,
+      "syntax_role": "Variable",
+      "type": "GenericType(base_type=ClassType(builtins.type), parameters=(ClassType(B),))",
+      "short_type": "Type[B]",
+      "type_details": {
+        "$class": "GenericType",
+        "name": "builtins.type",
+        "base_type": {
+          "$class": "ClassType",
+          "name": "builtins.type"
+        },
+        "parameters": [
+          {
+            "$class": "ClassType",
+            "name": "B"
+          }
+        ]
+      }
+    }
   ]
 }

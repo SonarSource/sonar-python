@@ -37,4 +37,8 @@ public interface PythonType {
     return true;
   }
 
+  default String key() {
+    return name();
+  }
+
 }

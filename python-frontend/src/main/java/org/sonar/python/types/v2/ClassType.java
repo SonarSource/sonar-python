@@ -20,8 +20,11 @@
 package org.sonar.python.types.v2;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * ClassType
@@ -73,5 +76,14 @@ public record ClassType(
 
   public boolean areAttributesSubclassesFrom(ClassType other) {
     return attributes.stream().allMatch(attr -> other.attributes.stream().anyMatch(otherAttr -> attr.isCompatibleWith(otherAttr)));
+  }
+
+  @Override
+  public String key() {
+    return Optional.of(attributes())
+      .stream()
+      .flatMap(Collection::stream)
+      .map(PythonType::key)
+      .collect(Collectors.joining(",", name() + "[", "]"));
   }
 }
