@@ -31,7 +31,7 @@ public record ClassType(
   List<Member> members,
   List<PythonType> attributes,
   List<PythonType> superClasses,
-  List<PythonType> typeVars) implements PythonType{
+  List<PythonType> typeVars) implements PythonType {
 
   public ClassType(String name) {
     this(name, new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
@@ -42,8 +42,36 @@ public record ClassType(
   }
 
   @Override
+  public String displayName() {
+    var splits = name.split("\\.");
+    if (splits.length > 0) {
+      return splits[splits.length - 1];
+    }
+    return name;
+  }
+
+  @Override
   public boolean isCompatibleWith(PythonType another) {
-    return Objects.equals(this, another) || superClasses
-      .stream().anyMatch(superClass -> superClass.isCompatibleWith(another));
+    if (another instanceof ObjectType) {
+      return this.isCompatibleWith(((ObjectType) another).type());
+    }
+    if (another instanceof UnionType) {
+      return ((UnionType) another).candidates().stream().anyMatch(c -> this.isCompatibleWith(c));
+    }
+    if (another instanceof FunctionType) {
+      return this.isCompatibleWith(((FunctionType) another).returnType());
+    }
+    if (another instanceof ClassType) {
+      return Objects.equals(this, another) || (this.isASubClassFrom((ClassType) another) && this.areAttributesSubclassesFrom((ClassType) another));
+    }
+    return true;
+  }
+
+  public boolean isASubClassFrom(ClassType other) {
+    return superClasses.stream().anyMatch(superClass -> superClass.isCompatibleWith(other));
+  }
+
+  public boolean areAttributesSubclassesFrom(ClassType other) {
+    return attributes.stream().allMatch(attr -> other.attributes.stream().anyMatch(otherAttr -> attr.isCompatibleWith(otherAttr)));
   }
 }

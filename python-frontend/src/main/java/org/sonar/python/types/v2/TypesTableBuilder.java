@@ -137,7 +137,7 @@ public class TypesTableBuilder extends BaseTreeVisitor {
       type = getTypeForFunctionDefName(filePath, name);
     } else if (isClassArgName) {
       type = getTypeForClassDefName(filePath, name);
-      if (typesStack.pop() instanceof ClassType classType) {
+      if (!typesStack.isEmpty() && typesStack.pop() instanceof ClassType classType) {
         classType.superClasses().add(type);
       }
     } else {

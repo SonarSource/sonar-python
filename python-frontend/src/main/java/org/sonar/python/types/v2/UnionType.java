@@ -27,6 +27,12 @@ public record UnionType(List<PythonType> candidates) implements PythonType {
   }
 
   @Override
+  public String displayName() {
+    var candidatesName = candidates.stream().map(c -> c.displayName()).toList();
+    return "Union[%s]".formatted(String.join(", ", candidatesName));
+  }
+
+  @Override
   public boolean isCompatibleWith(PythonType another) {
     return candidates.isEmpty() || candidates.stream()
       .anyMatch(candidate -> candidate.isCompatibleWith(another));

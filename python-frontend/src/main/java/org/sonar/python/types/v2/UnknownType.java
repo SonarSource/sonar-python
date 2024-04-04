@@ -1,3 +1,4 @@
+
 /*
  * SonarQube Python Plugin
  * Copyright (C) 2011-2024 SonarSource SA
@@ -19,17 +20,16 @@
  */
 package org.sonar.python.types.v2;
 
-import java.util.List;
-
-public record ObjectType(PythonType type, List<PythonType> attributes) implements PythonType {
-
-  @Override
-  public String displayName() {
-    return type.displayName();
-  }
+public record UnknownType() implements PythonType {
 
   @Override
   public boolean isCompatibleWith(PythonType another) {
-    return this.type.isCompatibleWith(another);
+    return true;
   }
+
+  @Override
+  public String displayName() {
+    return "UnknownType";
+  }
+
 }

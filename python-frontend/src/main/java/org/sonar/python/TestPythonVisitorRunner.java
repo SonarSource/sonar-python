@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.PythonCheck;
@@ -62,7 +63,7 @@ public class TestPythonVisitorRunner {
 
   public static PythonVisitorContext createContext(File file, @Nullable File workingDirectory, String packageName,
     ProjectLevelSymbolTable projectLevelSymbolTable, CacheContext cacheContext) {
-    TestPythonFile pythonFile = new TestPythonFile(file);
+    TestPythonFile pythonFile = new TestPythonFile( workingDirectory.toPath(),file.toPath());
     FileInput rootTree = parseFile(pythonFile);
     return new PythonVisitorContext(rootTree, pythonFile, workingDirectory, packageName, projectLevelSymbolTable, cacheContext);
   }
@@ -70,7 +71,7 @@ public class TestPythonVisitorRunner {
   public static ProjectLevelSymbolTable globalSymbols(List<File> files, File baseDir) {
     ProjectLevelSymbolTable projectLevelSymbolTable = new ProjectLevelSymbolTable();
     for (File file : files) {
-      var pythonFile = new TestPythonFile(file);
+      var pythonFile = new TestPythonFile( baseDir.toPath(), file.toPath());
       if (pythonFile.isIPython()) {
         continue;
       }
@@ -91,38 +92,48 @@ public class TestPythonVisitorRunner {
 
   private static class TestPythonFile implements PythonFile {
 
-    private final File file;
+    private final Path rootDirectory;
+    private final Path filePath;
 
-    public TestPythonFile(File file) {
-      this.file = file;
+    public TestPythonFile(Path rootDirectory, Path filePath) {
+      this.rootDirectory = rootDirectory;
+      this.filePath = filePath;
     }
 
     @Override
     public String content() {
       try {
-        return new String(Files.readAllBytes(file.toPath()), StandardCharsets.UTF_8);
+        return new String(Files.readAllBytes(filePath), StandardCharsets.UTF_8);
       } catch (IOException e) {
-        throw new IllegalStateException("Cannot read " + file, e);
+        throw new IllegalStateException("Cannot read " + filePath, e);
       }
     }
 
     @Override
     public String fileName() {
-      return file.getName();
+      return filePath.getFileName().toString();
     }
 
     @Override
     public URI uri() {
-      return file.toURI();
+      return filePath.toUri();
     }
 
     @Override
     public String key() {
-      return file.getPath();
+      return rootDirectory.relativize(filePath).toString();
     }
 
     public boolean isIPython() {
       return fileName().endsWith(".ipynb");
+    }
+
+    public FileInput parseFile() {
+      var parser = PythonParser.create();
+      var treeMaker = new PythonTreeMaker();
+
+      var astNode = parser.parse(content());
+      return treeMaker.fileInput(astNode);
     }
 
   }
