@@ -83,14 +83,4 @@ public class InconsistentTypeHintCheck extends PythonSubscriptionCheck {
         inferredTypeNameMessage);
     }
   }
-
-  private static boolean isTypeUsedInsteadOfInstance(Expression assignedExpression, InferredType expectedType) {
-    if (assignedExpression.is(Tree.Kind.NAME)) {
-      Name name = (Name) assignedExpression;
-      Symbol symbol = name.symbol();
-      return symbol != null && symbol.is(Symbol.Kind.CLASS) &&
-        !expectedType.isCompatibleWith(InferredTypes.runtimeType(TypeShed.typeShedClass("type")));
-    }
-    return false;
-  }
 }

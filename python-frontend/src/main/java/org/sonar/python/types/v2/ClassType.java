@@ -65,7 +65,11 @@ public record ClassType(
       return this.isCompatibleWith(((FunctionType) another).returnType());
     }
     if (another instanceof ClassType) {
-      return Objects.equals(this, another) || (this.isASubClassFrom((ClassType) another) && this.areAttributesSubclassesFrom((ClassType) another));
+      var other = (ClassType) another;
+      var isASubClass = this.isASubClassFrom(other);
+      var areAttributeCompatible = this.areAttributesCompatible(other);
+      return Objects.equals(this, another) || "builtins.object".equals(other.name()) ||  
+        ( isASubClass && areAttributeCompatible) ;
     }
     return true;
   }
@@ -74,7 +78,7 @@ public record ClassType(
     return superClasses.stream().anyMatch(superClass -> superClass.isCompatibleWith(other));
   }
 
-  public boolean areAttributesSubclassesFrom(ClassType other) {
+  public boolean areAttributesCompatible(ClassType other) {
     return attributes.stream().allMatch(attr -> other.attributes.stream().anyMatch(otherAttr -> attr.isCompatibleWith(otherAttr)));
   }
 
