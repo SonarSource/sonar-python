@@ -350,7 +350,8 @@
             },
             "parameters": [
               {
-                "$class": "AnythingType"
+                "$class": "AnythingType",
+                "name": ""
               }
             ]
           }
@@ -631,7 +632,8 @@
             },
             "parameters": [
               {
-                "$class": "AnythingType"
+                "$class": "AnythingType",
+                "name": ""
               }
             ]
           }
@@ -994,7 +996,8 @@
             "name": "A"
           },
           {
-            "$class": "AnythingType"
+            "$class": "AnythingType",
+            "name": ""
           }
         ]
       }
@@ -1135,7 +1138,8 @@
             "name": "A"
           },
           {
-            "$class": "AnythingType"
+            "$class": "AnythingType",
+            "name": ""
           }
         ]
       }
@@ -1160,7 +1164,8 @@
             "name": "B"
           },
           {
-            "$class": "AnythingType"
+            "$class": "AnythingType",
+            "name": ""
           }
         ]
       }
@@ -1185,7 +1190,8 @@
             "name": "C"
           },
           {
-            "$class": "AnythingType"
+            "$class": "AnythingType",
+            "name": ""
           }
         ]
       }
@@ -1210,7 +1216,8 @@
             "name": "D"
           },
           {
-            "$class": "AnythingType"
+            "$class": "AnythingType",
+            "name": ""
           }
         ]
       }
@@ -1246,6 +1253,7 @@
       "short_type": "Union[A, C]",
       "type_details": {
         "$class": "UnionType",
+        "name": "",
         "type_list": [
           {
             "$class": "ClassType",
@@ -1267,6 +1275,7 @@
       "short_type": "Union[A, C]",
       "type_details": {
         "$class": "UnionType",
+        "name": "",
         "type_list": [
           {
             "$class": "ClassType",
@@ -1608,7 +1617,8 @@
         },
         "parameters": [
           {
-            "$class": "AnythingType"
+            "$class": "AnythingType",
+            "name": ""
           }
         ]
       }
@@ -1651,7 +1661,8 @@
         },
         "parameters": [
           {
-            "$class": "AnythingType"
+            "$class": "AnythingType",
+            "name": ""
           }
         ]
       }
@@ -1720,6 +1731,66 @@
           {
             "$class": "ClassType",
             "name": "B"
+          }
+        ]
+      }
+    }
+  ],
+  "snippet9.py": [
+    {
+      "text": "UnresolvedType",
+      "start_line": 2,
+      "start_col": 8,
+      "syntax_role": "Variable",
+      "type": "AnythingType()",
+      "short_type": "Any",
+      "type_details": {
+        "$class": "AnythingType",
+        "name": ""
+      }
+    },
+    {
+      "text": "a",
+      "start_line": 5,
+      "start_col": 0,
+      "syntax_role": "Variable",
+      "type": "A",
+      "short_type": "A",
+      "type_details": {
+        "$class": "ClassType",
+        "name": "A"
+      }
+    },
+    {
+      "text": "Constant",
+      "start_line": 3,
+      "start_col": 4,
+      "syntax_role": "Literal",
+      "type": "builtins.ellipsis",
+      "short_type": "",
+      "type_details": {
+        "$class": "ClassType",
+        "name": "builtins.ellipsis"
+      }
+    },
+    {
+      "text": "A",
+      "start_line": 5,
+      "start_col": 4,
+      "syntax_role": "Variable",
+      "type": "GenericType(base_type=ClassType(builtins.type), parameters=(ClassType(A),))",
+      "short_type": "Type[A]",
+      "type_details": {
+        "$class": "GenericType",
+        "name": "builtins.type",
+        "base_type": {
+          "$class": "ClassType",
+          "name": "builtins.type"
+        },
+        "parameters": [
+          {
+            "$class": "ClassType",
+            "name": "A"
           }
         ]
       }

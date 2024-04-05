@@ -335,6 +335,32 @@ class TypesTableBuilderTest {
     Assertions.assertEquals("B", bTypeParam.displayName());
   }
 
+  @Test
+  void unknownTypeTest() {
+    var file = Path.of("src/test/resources/v2/code/snippet9.py");
+    var pythonFile = new TestPythonFile(Path.of("src/test/resources/v2/code"), file);
+    var pyTypeTable = PyTypeTableReader.fromJsonPath(Path.of("src/test/resources/v2/code.json"));
+    var typesTable = new TypesTable();
+    var typesTableBuilder = new TypesTableBuilder(pyTypeTable, typesTable, pythonFile);
+    var fileInput = parseFile(pythonFile);
+    typesTableBuilder.annotate(fileInput);
+
+    var aName = TreeUtils.firstChild(fileInput, v -> TreeUtils.toOptionalInstanceOf(Name.class, v)
+      .map(Name::name)
+      .filter("a"::equals)
+      .isPresent()).flatMap(TreeUtils.toOptionalInstanceOfMapper(Name.class))
+      .orElse(null);
+    Assertions.assertNotNull(aName);
+    Assertions.assertNotNull(aName.pythonType());
+    Assertions.assertInstanceOf(ObjectType.class, aName.pythonType());
+    var resultValueType = ((ObjectType) aName.pythonType()).type();
+
+    Assertions.assertInstanceOf(ClassType.class, resultValueType);
+    Assertions.assertEquals("A", resultValueType.displayName());
+    var superClass = ((ClassType) resultValueType).superClasses().get(0);
+    Assertions.assertEquals(PythonType.UNKNOWN, superClass);
+  }
+
   private static Name getClassDefName(FileInput fileInput, String className) {
     return TreeUtils.firstChild(fileInput, v -> TreeUtils.toOptionalInstanceOf(ClassDef.class, v)
       .map(ClassDef::name)
