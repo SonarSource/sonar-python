@@ -68,7 +68,9 @@ public record ClassType(
       var other = (ClassType) another;
       var isASubClass = this.isASubClassFrom(other);
       var areAttributeCompatible = this.areAttributesCompatible(other);
-      return Objects.equals(this, another) || "builtins.object".equals(other.name()) ||  
+      var isDuckTypeCompatible = !this.members.isEmpty() && other.members.stream().allMatch(member -> this.members.contains(member));
+      return Objects.equals(this, another) || "builtins.object".equals(other.name()) || 
+        isDuckTypeCompatible ||
         ( isASubClass && areAttributeCompatible) ;
     }
     return true;

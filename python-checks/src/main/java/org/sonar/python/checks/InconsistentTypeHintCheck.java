@@ -23,15 +23,10 @@ import java.util.Optional;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
-import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.AnnotatedAssignment;
 import org.sonar.plugins.python.api.tree.Expression;
-import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.tree.TreeUtils;
-import org.sonar.python.types.InferredTypes;
-import org.sonar.python.types.TypeShed;
 import org.sonar.python.types.v2.PythonType;
 
 @Rule(key = "S5890")

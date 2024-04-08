@@ -71,6 +71,10 @@ class C(B):
     def other():
         ...
 
+class DuckTypeOfA:
+    def method():
+        ...
+    
 from module1 import SomeType
 
 class D(SomeType):
@@ -95,6 +99,9 @@ def custom_classes():
     my_d_ok: A = d
     my_d_ok: B = d
     my_d_ok: C = d
+
+    duck_type = DuckTypeOfA()
+    duck_type_ok: A = duck_type # OK
 
 def get_generator():
     yield 1
