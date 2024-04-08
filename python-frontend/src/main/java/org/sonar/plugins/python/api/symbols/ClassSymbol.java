@@ -53,4 +53,7 @@ public interface ClassSymbol extends Symbol {
 
   @Beta
   boolean hasDecorators();
+
+  @Beta
+  boolean hasMetaClass();
 }

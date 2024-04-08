@@ -474,9 +474,10 @@ public class InferredTypes {
   }
 
   public static String getBuiltinCategory(InferredType inferredType) {
-    return BUILTINS_TYPE_CATEGORY.keySet().stream()
+    List<String> list = BUILTINS_TYPE_CATEGORY.keySet().stream()
       .filter(inferredType::canOnlyBe)
-      .map(BUILTINS_TYPE_CATEGORY::get).findFirst().orElse(null);
+      .map(BUILTINS_TYPE_CATEGORY::get).toList();
+    return list.size() == 1 ? list.get(0) : null;
   }
 
   public static Map<String, String> getBuiltinsTypeCategory() {

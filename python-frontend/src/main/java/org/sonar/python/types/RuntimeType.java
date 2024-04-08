@@ -112,6 +112,9 @@ class RuntimeType implements InferredType {
     RuntimeType that = (RuntimeType) o;
     return Objects.equals(getTypeClass().name(), that.getTypeClass().name()) &&
       Objects.equals(getTypeClass().fullyQualifiedName(), that.getTypeClass().fullyQualifiedName())
+      && Objects.equals(getTypeClass().hasUnresolvedTypeHierarchy(), that.getTypeClass().hasUnresolvedTypeHierarchy())
+      && Objects.equals(getTypeClass().hasDecorators(), that.getTypeClass().hasDecorators())
+      && Objects.equals(getTypeClass().hasMetaClass(), that.getTypeClass().hasMetaClass())
       && Objects.equals(typeClassSuperClassesFQN(), that.typeClassSuperClassesFQN())
       && Objects.equals(typeClassMembersFQN(), that.typeClassMembersFQN());
   }
@@ -136,7 +139,14 @@ class RuntimeType implements InferredType {
 
   @Override
   public int hashCode() {
-    return Objects.hash(getTypeClass().name(), getTypeClass().fullyQualifiedName(), typeClassSuperClassesFQN(), typeClassMembersFQN());
+    return Objects.hash(
+      getTypeClass().name(),
+      getTypeClass().fullyQualifiedName(),
+      getTypeClass().hasDecorators(),
+      getTypeClass().hasUnresolvedTypeHierarchy(),
+      getTypeClass().hasMetaClass(),
+      typeClassSuperClassesFQN(),
+      typeClassMembersFQN());
   }
 
   @Override

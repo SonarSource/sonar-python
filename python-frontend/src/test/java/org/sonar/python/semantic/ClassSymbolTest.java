@@ -53,6 +53,7 @@ class ClassSymbolTest {
     ClassSymbol classSymbol = (ClassSymbol) symbol;
     assertThat(classSymbol.superClasses()).hasSize(0);
     assertThat(classSymbol.hasUnresolvedTypeHierarchy()).isFalse();
+    assertThat(classSymbol.hasMetaClass()).isFalse();
   }
 
   @Test

@@ -157,3 +157,28 @@ class MyTest(unittest.TestCase):
     self.assertEqual(5, *a)
     self.assertEqual("5", b)  # Noncompliant
     a.assertEqual("string", True)
+
+
+class AmbiguousSymbolsNoType(unittest.TestCase):
+    def test_signature_on_class(self):
+        class ClassWithMultipleDefinitions:
+            def __init__(self, a):
+                pass
+
+        class CM(type):
+            def __call__(cls, a):
+                pass
+        class ClassWithMultipleDefinitions(metaclass=CM):
+            def __init__(self, b):
+                pass
+
+        with ...:
+            class CM(type):
+                @classmethod
+                def __call__(cls, a):
+                    return a
+            class ClassWithMultipleDefinitions(metaclass=CM):
+                def __init__(self, b):
+                    pass
+
+            self.assertEqual(ClassWithMultipleDefinitions(1), 1)  # OK, ambiguous type

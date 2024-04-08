@@ -23,7 +23,6 @@ import com.google.protobuf.TextFormat;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
-
 import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.LocationInFile;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
@@ -35,14 +34,12 @@ import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.PythonTestUtils;
 import org.sonar.python.semantic.AmbiguousSymbolImpl;
 import org.sonar.python.semantic.ClassSymbolImpl;
-import org.sonar.python.semantic.FunctionSymbolImpl;
 import org.sonar.python.semantic.SymbolImpl;
 import org.sonar.python.types.protobuf.SymbolsProtos;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.PythonTestUtils.lastExpression;
 import static org.sonar.python.PythonTestUtils.lastExpressionInFunction;
-import static org.sonar.python.PythonTestUtils.pythonFile;
 import static org.sonar.python.types.InferredTypes.COMPLEX;
 import static org.sonar.python.types.InferredTypes.DECL_INT;
 import static org.sonar.python.types.InferredTypes.DECL_STR;
@@ -501,6 +498,7 @@ class InferredTypesTest {
     assertThat(getBuiltinCategory(LIST)).isEqualTo(BuiltinTypes.LIST);
     assertThat(getBuiltinCategory(SET)).isEqualTo(BuiltinTypes.SET);
     assertThat(getBuiltinCategory(TUPLE)).isEqualTo(BuiltinTypes.TUPLE);
+    assertThat(getBuiltinCategory(anyType())).isNull();
     assertThat(getBuiltinsTypeCategory()).isNotNull();
     assertThat(getBuiltinsTypeCategory()).isNotEmpty();
   }
