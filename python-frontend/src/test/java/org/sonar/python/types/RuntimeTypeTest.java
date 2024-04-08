@@ -20,6 +20,7 @@
 package org.sonar.python.types;
 
 import java.util.Collections;
+import java.util.Set;
 import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.tree.ClassDef;
@@ -27,6 +28,7 @@ import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.PythonTestUtils;
+import org.sonar.python.index.ClassDescriptor;
 import org.sonar.python.semantic.ClassSymbolImpl;
 import org.sonar.python.semantic.SymbolImpl;
 import org.sonar.python.semantic.SymbolTableBuilder;
@@ -204,6 +206,18 @@ class RuntimeTypeTest {
     RuntimeType x = new RuntimeType(new ClassSymbolImpl("X", null));
     RuntimeType y = new RuntimeType(new ClassSymbolImpl("Y", null));
     assertThat(x).isNotEqualTo(y);
+
+    RuntimeType fff1 = new RuntimeType(new ClassSymbolImpl(generateDescriptor(false, false, false), "a"));
+    RuntimeType fff2 = new RuntimeType(new ClassSymbolImpl(generateDescriptor(false, false, false), "a"));
+    RuntimeType tff = new RuntimeType(new ClassSymbolImpl(generateDescriptor(true, false, false), "a"));
+    RuntimeType ftf = new RuntimeType(new ClassSymbolImpl(generateDescriptor(false, true, false), "a"));
+    RuntimeType fft = new RuntimeType(new ClassSymbolImpl(generateDescriptor(false, false, true), "a"));
+
+    assertThat(fff1)
+      .isEqualTo(fff2)
+      .isNotEqualTo(tff)
+      .isNotEqualTo(ftf)
+      .isNotEqualTo(fft);
   }
 
   @Test
@@ -346,6 +360,19 @@ class RuntimeTypeTest {
 
     assertThat(typeX2.mustBeOrExtend("x1")).isTrue();
     assertThat(typeX2.mustBeOrExtend("x2")).isTrue();
+  }
+
+  ClassDescriptor generateDescriptor(boolean hasDecorators, boolean hasMetaClass, boolean hasUnresolvedHierarchy) {
+    return new ClassDescriptor("a",
+      "a",
+      Set.of(),
+      Set.of(),
+      hasDecorators,
+      null,
+      hasUnresolvedHierarchy,
+      hasMetaClass,
+      null,
+      false);
   }
 
   @Test
