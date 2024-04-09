@@ -19,17 +19,10 @@
  */
 package org.sonar.python.types.v2;
 
-import java.util.List;
-
-public record ObjectType(PythonType type, List<PythonType> attributes, List<Member> members) implements PythonType {
-
-  @Override
-  public String displayName() {
-    return type.displayName();
-  }
-
-  @Override
-  public boolean isCompatibleWith(PythonType another) {
-    return this.type.isCompatibleWith(another);
-  }
+public enum NameKind {
+  CLASS_DEF,
+  CLASS_DEF_ARG,
+  FUNCTION_DEF,
+  CALL,
+  ANOTHER
 }

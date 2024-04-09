@@ -46,18 +46,14 @@ public class TypesTableBuilder extends BaseTreeVisitor {
   private final TypesTable typesTable;
   private final String filePath;
   private final Deque<PythonType> typesStack;
-  private boolean isFunctionDefName;
-  private boolean isClassDefName;
-  private boolean isClassArgName;
+  private final Deque<NameKind> nameKinds;
 
   public TypesTableBuilder(PyTypeTable pyTypeTable, TypesTable typesTable, PythonFile pythonFile) {
     this.pyTypeTable = pyTypeTable;
     this.typesTable = typesTable;
     this.filePath = getFilePath(pythonFile);
-    this.isFunctionDefName = false;
-    this.isClassDefName = false;
-    this.isClassArgName = false;
     this.typesStack = new ArrayDeque<>();
+    this.nameKinds = new ArrayDeque<>();
   }
 
   private String getFilePath(PythonFile pythonFile) {
@@ -75,13 +71,10 @@ public class TypesTableBuilder extends BaseTreeVisitor {
   @Override
   public void visitClassDef(ClassDef classDef) {
     scan(classDef.decorators());
-    isClassDefName = true;
-    scan(classDef.name());
-    isClassDefName = false;
+    inNameScope(NameKind.CLASS_DEF, () -> scan(classDef.name()));
     scan(classDef.typeParams());
-    isClassArgName = true;
+    inNameScope(NameKind.CLASS_DEF_ARG, () -> scan(classDef.args()));
     scan(classDef.args());
-    isClassArgName = false;
     scan(classDef.body());
     typesStack.poll();
   }
@@ -89,9 +82,7 @@ public class TypesTableBuilder extends BaseTreeVisitor {
   @Override
   public void visitFunctionDef(FunctionDef functionDef) {
     scan(functionDef.decorators());
-    isFunctionDefName = true;
-    scan(functionDef.name());
-    isFunctionDefName = false;
+    inNameScope(NameKind.FUNCTION_DEF, () -> scan(functionDef.name()));
     scan(functionDef.typeParams());
     scan(functionDef.parameters());
     scan(functionDef.returnTypeAnnotation());
@@ -122,31 +113,33 @@ public class TypesTableBuilder extends BaseTreeVisitor {
       .findFirst()
       .ifPresent(member -> {
         if (qualifiedExpressionName instanceof NameImpl name) {
-          name.pythonType(new ObjectType(member.type(), new ArrayList<>()));
+          name.pythonType(new ObjectType(member.type(), new ArrayList<>(), new ArrayList<>()));
         }
       });
   }
 
   @Override
   public void visitName(Name name) {
-    PythonType type;
-    if (isClassDefName) {
-      type = getTypeForClassDefName(filePath, name);
-      typesStack.add(type);
-    } else if (isFunctionDefName) {
-      type = getTypeForFunctionDefName(filePath, name);
-    } else if (isClassArgName) {
-      type = getTypeForClassDefName(filePath, name);
-      if (!typesStack.isEmpty() && typesStack.pop() instanceof ClassType classType) {
-        classType.superClasses().add(type);
+    var nameScope = Optional.ofNullable(nameKinds.peek()).orElse(NameKind.ANOTHER);
+    PythonType type = switch (nameScope) {
+      case CLASS_DEF -> {
+        var t = getTypeForClassDefName(filePath, name);
+        typesStack.add(t);
+        yield t;
       }
-    } else {
-      type = getTypeForName(filePath, name);
-    }
+      case FUNCTION_DEF -> getTypeForFunctionDefName(filePath, name);
+      case CLASS_DEF_ARG -> {
+        var t = getTypeForClassDefName(filePath, name);
+        if (!typesStack.isEmpty() && typesStack.pop() instanceof ClassType classType) {
+          classType.superClasses().add(t);
+        }
+        yield t;
+      }
+      default -> getTypeForName(filePath, name);
+    };
     if (name instanceof NameImpl ni) {
       ni.pythonType(type);
     }
-    super.visitName(name);
   }
 
   private PythonType getTypeForClassDefName(String fileName, Name name) {
@@ -159,7 +152,7 @@ public class TypesTableBuilder extends BaseTreeVisitor {
       .map(pyTypeInfo -> {
         var pythonType = PyTypeConverter.convert(typesTable, pyTypeInfo);
         pythonType = typesTable.addType(pythonType);
-        return (PythonType) new ObjectType(pythonType, List.of());
+        return (PythonType) new ObjectType(pythonType, List.of(), List.of());
       }).orElse(PythonType.UNKNOWN);
   }
 
@@ -185,6 +178,11 @@ public class TypesTableBuilder extends BaseTreeVisitor {
             return pythonType;
           }).orElse(PythonType.UNKNOWN);
       });
+  }
 
+  private void inNameScope(NameKind nameKind, Runnable runnable) {
+    this.nameKinds.push(nameKind);
+    runnable.run();
+    this.nameKinds.poll();
   }
 }
