@@ -17,23 +17,19 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.plugins.python.api.tree;
+package org.sonar.python.types.v2;
 
-import com.google.common.annotations.Beta;
-import org.sonar.plugins.python.api.types.InferredType;
-import org.sonar.python.types.InferredTypes;
-import org.sonar.python.types.v2.PythonType;
+import java.util.List;
 
-public interface Expression extends Tree {
+public record ObjectType(PythonType type, List<PythonType> attributes, List<Member> members) implements PythonType {
 
-  @Beta
-  default InferredType type() {
-    return InferredTypes.anyType();
-  }
-  
-  @Beta
-  default PythonType pythonType() {
-    return PythonType.UNKNOWN;
+  @Override
+  public String displayName() {
+    return type.displayName();
   }
 
+  @Override
+  public boolean isCompatibleWith(PythonType another) {
+    return this.type.isCompatibleWith(another);
+  }
 }

@@ -1,3 +1,4 @@
+
 /*
  * SonarQube Python Plugin
  * Copyright (C) 2011-2024 SonarSource SA
@@ -17,23 +18,18 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.plugins.python.api.tree;
+package org.sonar.python.types.v2;
 
-import com.google.common.annotations.Beta;
-import org.sonar.plugins.python.api.types.InferredType;
-import org.sonar.python.types.InferredTypes;
-import org.sonar.python.types.v2.PythonType;
+public record UnknownType() implements PythonType {
 
-public interface Expression extends Tree {
-
-  @Beta
-  default InferredType type() {
-    return InferredTypes.anyType();
+  @Override
+  public boolean isCompatibleWith(PythonType another) {
+    return true;
   }
-  
-  @Beta
-  default PythonType pythonType() {
-    return PythonType.UNKNOWN;
+
+  @Override
+  public String displayName() {
+    return "UnknownType";
   }
 
 }
