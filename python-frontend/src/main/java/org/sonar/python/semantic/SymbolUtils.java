@@ -148,7 +148,7 @@ public class SymbolUtils {
       .toList();
   }
 
-  static List<Name> boundNamesFromExpression(@CheckForNull Tree tree) {
+  public static List<Name> boundNamesFromExpression(@CheckForNull Tree tree) {
     List<Name> names = new ArrayList<>();
     if (tree == null) {
       return names;

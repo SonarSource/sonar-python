@@ -17,19 +17,29 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.plugins.python.api.tree;
+package org.sonar.python.semantic.v2;
 
-import org.sonar.python.semantic.v2.SymbolV2;
+import java.util.ArrayList;
+import java.util.List;
+import javax.annotation.Nullable;
+import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.python.tree.NameImpl;
 
-/**
- * See https://docs.python.org/3/reference/expressions.html#atom-identifiers
- */
-public interface Name extends Expression, HasSymbol {
+public record SymbolV2(String name, @Nullable String fullyQualifiedName, List<UsageV2> usages) {
 
-  String name();
+  public SymbolV2(String name) {
+    this(name, null, new ArrayList<>());
+  }
 
-  // FIXME: we should create a separate tree for Variables
-  boolean isVariable();
-
-  SymbolV2 symbolV2();
+  void addUsage(Name name, UsageV2.Kind kind) {
+    UsageV2 usage = new UsageV2(name, kind);
+    usages.add(usage);
+    if (name instanceof NameImpl ni) {
+      ni.symbolV2(this);
+    }
+/*    if (tree.is(Tree.Kind.NAME)) {
+      ((NameImpl) tree).setSymbol(this);
+      ((NameImpl) tree).setUsage(usage);
+    }*/
+  }
 }
