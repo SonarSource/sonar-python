@@ -17,23 +17,24 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.plugins.python.api.tree;
+package org.sonar.python.types.v2;
 
-import com.google.common.annotations.Beta;
-import org.sonar.plugins.python.api.types.InferredType;
-import org.sonar.python.types.InferredTypes;
-import org.sonar.python.types.v2.PythonType;
+import java.util.List;
 
-public interface Expression extends Tree {
-
-  @Beta
-  default InferredType type() {
-    return InferredTypes.anyType();
-  }
-  
-  @Beta
-  default PythonType pythonType() {
-    return PythonType.UNKNOWN;
+public record UnionType(List<PythonType> candidates) implements PythonType {
+  public UnionType() {
+    this(List.of());
   }
 
+  @Override
+  public String displayName() {
+    var candidatesName = candidates.stream().map(c -> c.displayName()).toList();
+    return "Union[%s]".formatted(String.join(", ", candidatesName));
+  }
+
+  @Override
+  public boolean isCompatibleWith(PythonType another) {
+    return candidates.isEmpty() || candidates.stream()
+      .anyMatch(candidate -> candidate.isCompatibleWith(another));
+  }
 }
