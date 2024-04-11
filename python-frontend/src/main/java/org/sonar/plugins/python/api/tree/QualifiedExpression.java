@@ -59,7 +59,7 @@ public interface QualifiedExpression extends Expression, HasSymbol {
   }
 
   @Override
-  default PythonType pythonType() {
-    return name().pythonType();
+  default PythonType typeV2() {
+    return name().typeV2();
   }
 }

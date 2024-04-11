@@ -26,9 +26,8 @@ import java.util.List;
  */
 public record FunctionType(
   String name,
-  List<Member> members,
   List<PythonType> attributes,
-  List<PythonType> typeVars,
-  List<Member> parameters,
+  List<Parameter> parameters,
   PythonType returnType) implements PythonType {
+  // TODO: Decorators? Parameters should express keyword/positional-only information - Difference between attributes and typeVars?
 }

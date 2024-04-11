@@ -46,6 +46,10 @@ import org.sonar.python.semantic.FunctionSymbolImpl;
 import org.sonar.python.types.DeclaredType;
 import org.sonar.python.types.HasTypeDependencies;
 import org.sonar.python.types.InferredTypes;
+import org.sonar.python.types.v2.ClassType;
+import org.sonar.python.types.v2.FunctionType;
+import org.sonar.python.types.v2.ObjectType;
+import org.sonar.python.types.v2.PythonType;
 
 import static org.sonar.plugins.python.api.symbols.Symbol.Kind.CLASS;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.SUBSCRIPTION;
@@ -178,5 +182,16 @@ public class CallExpressionImpl extends PyTree implements CallExpression, HasTyp
   @Override
   public List<Expression> typeDependencies() {
     return Collections.singletonList(callee);
+  }
+
+  @Override
+  public PythonType typeV2() {
+    if (callee().typeV2() instanceof ClassType classType) {
+      return new ObjectType(classType);
+    }
+    if (callee().typeV2() instanceof FunctionType functionType) {
+      return new ObjectType(functionType.returnType());
+    }
+    return PythonType.UNKNOWN;
   }
 }

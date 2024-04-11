@@ -124,11 +124,11 @@ public class NameImpl extends PyTree implements Name {
   }
 
   @Override
-  public PythonType pythonType() {
+  public PythonType typeV2() {
     return pythonType;
   }
 
-  public NameImpl pythonType(PythonType pythonType) {
+  public NameImpl typeV2(PythonType pythonType) {
     this.pythonType = pythonType;
     return this;
   }
