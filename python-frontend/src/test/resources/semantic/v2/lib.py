@@ -1,7 +1,7 @@
 
-def foo():
+def lib_function():
     return 42
 
-class A():
-    def do_something():
-        return foo()
+class LibClass():
+    def do_something(self):
+        return lib_function()

@@ -32,7 +32,7 @@ public interface Expression extends Tree {
   }
   
   @Beta
-  default PythonType pythonType() {
+  default PythonType typeV2() {
     return PythonType.UNKNOWN;
   }
 

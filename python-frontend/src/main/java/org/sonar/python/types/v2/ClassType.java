@@ -21,9 +21,11 @@ package org.sonar.python.types.v2;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -31,17 +33,16 @@ import java.util.stream.Collectors;
  */
 public record ClassType(
   String name,
-  List<Member> members,
+  Set<Member> members,
   List<PythonType> attributes,
-  List<PythonType> superClasses,
-  List<PythonType> typeVars) implements PythonType {
+  List<PythonType> superClasses) implements PythonType {
 
   public ClassType(String name) {
-    this(name, new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+    this(name, new HashSet<>(), new ArrayList<>(), new ArrayList<>());
   }
 
   public ClassType(String name, List<PythonType> attributes) {
-    this(name, new ArrayList<>(), attributes, new ArrayList<>(), new ArrayList<>());
+    this(name, new HashSet<>(), attributes, new ArrayList<>());
   }
 
   @Override
@@ -91,5 +92,13 @@ public record ClassType(
       .flatMap(Collection::stream)
       .map(PythonType::key)
       .collect(Collectors.joining(",", name() + "[", "]"));
+  }
+
+  @Override
+  public PythonType resolveMember(String memberName) {
+    return members.stream()
+      .filter(m -> m.name().equals(memberName))
+      .map(Member::type)
+      .findFirst().orElse(PythonType.UNKNOWN);
   }
 }

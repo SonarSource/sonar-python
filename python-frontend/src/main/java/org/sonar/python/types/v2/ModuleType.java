@@ -19,10 +19,10 @@
  */
 package org.sonar.python.types.v2;
 
-import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
-public record ModuleType(String name, List<PythonType> children) implements PythonType {
+public record ModuleType(String name, Map<String, PythonType> members) implements PythonType {
 
   @Override
   public boolean isCompatibleWith(PythonType another) {
@@ -32,5 +32,10 @@ public record ModuleType(String name, List<PythonType> children) implements Pyth
       .map(ModuleType::name)
       .filter(name::equals)
       .isPresent();
+  }
+
+  public PythonType resolveMember(String memberName) {
+    // FIXME: handle case where type is missing
+    return members.getOrDefault(memberName, PythonType.UNKNOWN);
   }
 }
