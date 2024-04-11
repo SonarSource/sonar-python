@@ -41,4 +41,8 @@ public interface PythonType {
     return name();
   }
 
+  default PythonType resolveMember(String memberName) {
+    return PythonType.UNKNOWN;
+  }
+
 }

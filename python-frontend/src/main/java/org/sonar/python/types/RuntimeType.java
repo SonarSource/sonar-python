@@ -29,7 +29,7 @@ import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.semantic.ClassSymbolImpl;
 
-class RuntimeType implements InferredType {
+public class RuntimeType implements InferredType {
 
   private ClassSymbol typeClass;
   private String builtinFullyQualifiedName;

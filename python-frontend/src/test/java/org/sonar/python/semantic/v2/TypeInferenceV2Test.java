@@ -19,31 +19,31 @@
  */
 package org.sonar.python.semantic.v2;
 
-import java.util.ArrayList;
-import java.util.List;
-import javax.annotation.Nullable;
-import org.sonar.plugins.python.api.tree.Name;
-import org.sonar.python.tree.NameImpl;
+import java.io.File;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.sonar.plugins.python.api.tree.FileInput;
+import org.sonar.python.PythonTestUtils;
+import org.sonar.python.TestPythonVisitorRunner;
+import org.sonar.python.semantic.ProjectLevelSymbolTable;
 
-public record SymbolV2(String name, @Nullable String fullyQualifiedName, List<UsageV2> usages) {
+class TypeInferenceV2Test {
+  private static FileInput fileInput;
 
-  public SymbolV2(String name) {
-    this(name, null, new ArrayList<>());
+  @BeforeAll
+  static void init() {
+    var context = TestPythonVisitorRunner.createContext(new File("src/test/resources/semantic/v2/script.py"));
+    fileInput = context.rootTree();
   }
 
-  void addUsage(Name name, UsageV2.Kind kind) {
-    UsageV2 usage = new UsageV2(name, kind);
-    usages.add(usage);
-    if (name instanceof NameImpl ni) {
-      ni.symbolV2(this);
-    }
-/*    if (tree.is(Tree.Kind.NAME)) {
-      ((NameImpl) tree).setSymbol(this);
-      ((NameImpl) tree).setUsage(usage);
-    }*/
-  }
+  @Test
+  void test() {
+    var pythonFile = PythonTestUtils.pythonFile("script.py");
+    var builder = new SymbolTableBuilderV2();
+    builder.visitFileInput(fileInput);
+    var typeInferenceV2 = new TypeInferenceV2(new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty()));
+    fileInput.accept(typeInferenceV2);
 
-  boolean hasSingleBindingUsage() {
-    return usages.stream().filter(UsageV2::isBindingUsage).toList().size() == 1;
+    System.out.println("hello");
   }
 }

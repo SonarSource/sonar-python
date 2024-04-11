@@ -28,12 +28,15 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TreeVisitor;
 import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.types.InferredTypes;
+import org.sonar.python.types.v2.PythonType;
 
 public class NumericLiteralImpl extends PyTree implements NumericLiteral {
 
   private final String valueAsString;
   private final Token token;
   private final InferredType type;
+
+  private PythonType typeV2;
 
   NumericLiteralImpl(Token token) {
     this.token = token;
@@ -97,5 +100,14 @@ public class NumericLiteralImpl extends PyTree implements NumericLiteral {
       return InferredTypes.FLOAT;
     }
     return InferredTypes.INT;
+  }
+
+
+  public PythonType typeV2() {
+    return this.typeV2;
+  }
+
+  public void typeV2(PythonType type) {
+    this.typeV2 = type;
   }
 }

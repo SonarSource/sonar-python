@@ -19,9 +19,14 @@
  */
 package org.sonar.python.semantic.v2;
 
+import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.Tree;
 
 public record UsageV2(Tree tree, Kind kind) {
+
+  public boolean isBindingUsage() {
+    return kind() != UsageV2.Kind.OTHER && kind() != UsageV2.Kind.GLOBAL_DECLARATION;
+  }
 
   enum Kind {
     ASSIGNMENT_LHS,
