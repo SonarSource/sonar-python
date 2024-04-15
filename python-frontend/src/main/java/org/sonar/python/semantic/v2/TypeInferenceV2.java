@@ -107,10 +107,13 @@ public class TypeInferenceV2 extends BaseTreeVisitor {
   @Override
   public void visitFunctionDef(FunctionDef functionDef) {
     scan(functionDef.decorators());
-    FunctionType functionType = new FunctionType(functionDef.name().name(), new ArrayList<>(), new ArrayList<>(), PythonType.UNKNOWN);
+    scan(functionDef.typeParams());
+    scan(functionDef.parameters());
+    FunctionType functionType = new FunctionType(functionDef);
     if (currentType() instanceof ClassType classType) {
       if (functionDef.name().symbolV2().hasSingleBindingUsage()) {
         classType.members().add(new Member(functionType.name(), functionType));
+        functionType.setOwner(classType);
       } else {
         // TODO: properly infer type in case of multiple assignments
         classType.members().add(new Member(functionType.name(), PythonType.UNKNOWN));
