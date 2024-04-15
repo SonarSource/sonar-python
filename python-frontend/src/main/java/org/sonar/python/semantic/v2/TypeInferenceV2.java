@@ -28,7 +28,6 @@ import java.util.List;
 import java.util.Optional;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
-import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.ExpressionList;
@@ -51,7 +50,6 @@ import org.sonar.python.types.v2.FunctionType;
 import org.sonar.python.types.v2.Member;
 import org.sonar.python.types.v2.ModuleType;
 import org.sonar.python.types.v2.ObjectType;
-import org.sonar.python.types.v2.ObjectTypeBuilder;
 import org.sonar.python.types.v2.PythonType;
 
 public class TypeInferenceV2 extends BaseTreeVisitor {
