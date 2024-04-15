@@ -20,6 +20,7 @@
 package org.sonar.python.types.v2;
 
 import java.util.List;
+import javax.annotation.Nullable;
 
 /**
  * FunctionType
@@ -27,7 +28,11 @@ import java.util.List;
 public record FunctionType(
   String name,
   List<PythonType> attributes,
-  List<Parameter> parameters,
-  PythonType returnType) implements PythonType {
-  // TODO: Decorators? Parameters should express keyword/positional-only information - Difference between attributes and typeVars?
-}
+  List<ParameterV2> parameters,
+  PythonType returnType,
+  boolean isAsynchronous,
+  boolean hasDecorators,
+  boolean isInstanceMethod,
+  boolean hasVariadicParameter,
+  @Nullable PythonType owner
+) implements PythonType { }

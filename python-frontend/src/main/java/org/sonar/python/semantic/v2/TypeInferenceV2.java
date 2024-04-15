@@ -20,7 +20,6 @@
 package org.sonar.python.semantic.v2;
 
 import java.util.ArrayDeque;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Deque;
 import java.util.HashMap;
@@ -28,7 +27,6 @@ import java.util.List;
 import java.util.Optional;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
-import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.ExpressionList;
@@ -51,7 +49,6 @@ import org.sonar.python.types.v2.FunctionType;
 import org.sonar.python.types.v2.Member;
 import org.sonar.python.types.v2.ModuleType;
 import org.sonar.python.types.v2.ObjectType;
-import org.sonar.python.types.v2.ObjectTypeBuilder;
 import org.sonar.python.types.v2.PythonType;
 
 public class TypeInferenceV2 extends BaseTreeVisitor {
@@ -109,15 +106,9 @@ public class TypeInferenceV2 extends BaseTreeVisitor {
   @Override
   public void visitFunctionDef(FunctionDef functionDef) {
     scan(functionDef.decorators());
-    FunctionType functionType = new FunctionType(functionDef.name().name(), new ArrayList<>(), new ArrayList<>(), PythonType.UNKNOWN);
-    if (currentType() instanceof ClassType classType) {
-      if (functionDef.name().symbolV2().hasSingleBindingUsage()) {
-        classType.members().add(new Member(functionType.name(), functionType));
-      } else {
-        // TODO: properly infer type in case of multiple assignments
-        classType.members().add(new Member(functionType.name(), PythonType.UNKNOWN));
-      }
-    }
+    scan(functionDef.typeParams());
+    scan(functionDef.parameters());
+    FunctionType functionType = buildFunctionType(functionDef);
     ((NameImpl) functionDef.name()).typeV2(functionType);
     inTypeScope(functionType, () -> {
       // TODO: check scope accuracy
@@ -126,6 +117,26 @@ public class TypeInferenceV2 extends BaseTreeVisitor {
       scan(functionDef.returnTypeAnnotation());
       scan(functionDef.body());
     });
+  }
+
+  private FunctionType buildFunctionType(FunctionDef functionDef) {
+    FunctionTypeBuilder functionTypeBuilder = new FunctionTypeBuilder().fromFunctionDef(functionDef);
+    ClassType owner = null;
+    if (currentType() instanceof ClassType classType) {
+      owner = classType;
+    }
+    if (owner != null) {
+      functionTypeBuilder.setOwner(owner);
+    }
+    FunctionType functionType = functionTypeBuilder.build();
+    if (owner != null) {
+      if (functionDef.name().symbolV2().hasSingleBindingUsage()) {
+        owner.members().add(new Member(functionType.name(), functionType));
+      } else {
+        owner.members().add(new Member(functionType.name(), PythonType.UNKNOWN));
+      }
+    }
+    return functionType;
   }
 
   @Override
