@@ -1,0 +1,8 @@
+version: '3'
+services:
+  typeshed-serializer:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ../src:/sonar-python/python-frontend/src
