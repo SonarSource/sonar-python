@@ -19,10 +19,20 @@
  */
 package org.sonar.python.types.v2;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nullable;
 
-public record ModuleType(String name, Map<String, PythonType> members) implements PythonType {
+public record ModuleType(@Nullable @CheckForNull String name, @Nullable @CheckForNull ModuleType parent, Map<String, PythonType> members) implements PythonType {
+  public ModuleType(@Nullable String name) {
+    this(name, null);
+  }
+
+  public ModuleType(@Nullable String name, @Nullable ModuleType parent) {
+    this(name, parent, new HashMap<>());
+  }
 
   @Override
   public boolean isCompatibleWith(PythonType another) {
@@ -37,5 +47,13 @@ public record ModuleType(String name, Map<String, PythonType> members) implement
   public PythonType resolveMember(String memberName) {
     // FIXME: handle case where type is missing
     return members.getOrDefault(memberName, PythonType.UNKNOWN);
+  }
+
+  @Override
+  public String toString() {
+    return "ModuleType{" +
+      "name='" + name + '\'' +
+      ", members=" + members +
+      '}';
   }
 }

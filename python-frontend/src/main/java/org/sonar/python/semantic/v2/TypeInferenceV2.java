@@ -22,9 +22,11 @@ package org.sonar.python.semantic.v2;
 import java.util.ArrayDeque;
 import java.util.Collection;
 import java.util.Deque;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
+import javax.annotation.Nullable;
+import org.sonar.plugins.python.api.tree.AliasedName;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.ClassDef;
@@ -32,12 +34,14 @@ import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.ExpressionList;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
+import org.sonar.plugins.python.api.tree.ImportFrom;
 import org.sonar.plugins.python.api.tree.ImportName;
 import org.sonar.plugins.python.api.tree.ListLiteral;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.NumericLiteral;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.StringLiteral;
+import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.tree.ListLiteralImpl;
 import org.sonar.python.tree.NameImpl;
@@ -63,7 +67,7 @@ public class TypeInferenceV2 extends BaseTreeVisitor {
 
   @Override
   public void visitFileInput(FileInput fileInput) {
-    var type = new ModuleType("somehow get its name", new HashMap<>());
+    var type = new ModuleType("somehow get its name");
     inTypeScope(type, () -> super.visitFileInput(fileInput));
   }
 
@@ -141,8 +145,44 @@ public class TypeInferenceV2 extends BaseTreeVisitor {
 
   @Override
   public void visitImportName(ImportName importName) {
-    //createImportedNames(importName.modules(), null, Collections.emptyList());
-    super.visitImportName(importName);
+    importName.modules()
+      .forEach(aliasedName -> {
+        var names = aliasedName.dottedName().names();
+        var fqn = names
+              .stream().map(Name::name)
+              .toList();
+        var module = projectLevelTypeTable.getModule(fqn);
+        setTypeToName(aliasedName.alias(), module);
+
+        for (int i = names.size() - 1; i >= 0; i--) {
+          setTypeToName(names.get(i), module);
+          module = Optional.ofNullable(module)
+            .map(ModuleType::parent)
+            .orElse(null);
+        }
+      });
+  }
+
+  @Override
+  public void visitImportFrom(ImportFrom importFrom) {
+    var names = importFrom.module().names();
+    var fqn = names
+      .stream().map(Name::name)
+      .toList();
+
+    var module = projectLevelTypeTable.getModule(fqn);
+    importFrom.importedNames().forEach(aliasedName -> aliasedName
+      .dottedName()
+      .names()
+      .stream()
+      .findFirst()
+      .ifPresent(name -> {
+        var type = module.resolveMember(name.name());
+        setTypeToName(name, type);
+
+        Optional.ofNullable(aliasedName.alias())
+          .ifPresent(alias -> setTypeToName(alias, type));
+      }));
   }
 
   @Override
@@ -186,8 +226,8 @@ public class TypeInferenceV2 extends BaseTreeVisitor {
       .map(Expression::typeV2)
       .toList();
 
-    if (type.size() == 1 && name instanceof NameImpl nameImpl) {
-      nameImpl.typeV2(type.get(0));
+    if (type.size() == 1) {
+      setTypeToName(name, type.get(0));
     }
   }
 
@@ -199,6 +239,12 @@ public class TypeInferenceV2 extends BaseTreeVisitor {
     this.typeStack.push(pythonType);
     runnable.run();
     this.typeStack.poll();
+  }
+
+  private static void setTypeToName(@Nullable Tree tree, @Nullable PythonType type) {
+    if (tree instanceof NameImpl name && type != null) {
+      name.typeV2(type);
+    }
   }
 
 }
