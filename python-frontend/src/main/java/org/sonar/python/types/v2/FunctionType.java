@@ -19,20 +19,7 @@
  */
 package org.sonar.python.types.v2;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-import javax.annotation.Nullable;
-import org.sonar.plugins.python.api.tree.AnyParameter;
-import org.sonar.plugins.python.api.tree.FunctionDef;
-import org.sonar.plugins.python.api.tree.Name;
-import org.sonar.plugins.python.api.tree.ParameterList;
-import org.sonar.plugins.python.api.tree.Token;
-import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.python.tree.TreeUtils;
-
-import static org.sonar.python.tree.TreeUtils.locationInFile;
 
 /**
  * FunctionType
@@ -48,9 +35,6 @@ public class FunctionType implements PythonType {
   private PythonType owner;
   private PythonType returnType = PythonType.UNKNOWN;
 
-  private static final String CLASS_METHOD_DECORATOR = "classmethod";
-  private static final String STATIC_METHOD_DECORATOR = "staticmethod";
-
 
   public FunctionType(String name, List<PythonType> attributes, List<ParameterV2> parameters, PythonType returnType) {
     this.name = name;
@@ -59,101 +43,25 @@ public class FunctionType implements PythonType {
     this.returnType = returnType;
   }
 
-  public FunctionType(FunctionDef functionDef) {
-    this.name = functionDef.name().name();
-    this.attributes = new ArrayList<>();
-    this.parameters = new ArrayList<>();
-    isAsynchronous = functionDef.asyncKeyword() != null;
-    hasDecorators = !functionDef.decorators().isEmpty();
-    isInstanceMethod = isInstanceMethod(functionDef);
-    ParameterList parameterList = functionDef.parameters();
-    if (parameterList != null) {
-      createParameterNames(parameterList.all(), null);
-    }
+  public FunctionType(String name, List<PythonType> attributes, List<ParameterV2> parameters, PythonType returnType,
+    boolean isAsynchronous, boolean hasDecorators, boolean isInstanceMethod, boolean hasVariadicParameter, PythonType owner) {
+    this.name = name;
+    this.attributes = attributes;
+    this.parameters = parameters;
+    this.returnType = returnType;
+    this.isAsynchronous = isAsynchronous;
+    this.hasDecorators = hasDecorators;
+    this.isInstanceMethod = isInstanceMethod;
+    this.hasVariadicParameter = hasVariadicParameter;
+    this.owner = owner;
   }
 
-  private static boolean isInstanceMethod(FunctionDef functionDef) {
-    return !functionDef.name().name().equals("__new__") && functionDef.isMethodDefinition() && functionDef.decorators().stream()
-      .map(decorator -> TreeUtils.decoratorNameFromExpression(decorator.expression()))
-      .filter(Objects::nonNull)
-      .noneMatch(decorator -> decorator.equals(STATIC_METHOD_DECORATOR) || decorator.equals(CLASS_METHOD_DECORATOR));
+  public static class ParameterState {
+    public boolean keywordOnly = false;
+    public boolean positionalOnly = false;
   }
 
-  private void createParameterNames(List<AnyParameter> parameterTrees, @Nullable String fileId) {
-    ParameterState parameterState = new ParameterState();
-    parameterState.positionalOnly = parameterTrees.stream().anyMatch(param -> Optional.of(param)
-      .filter(p -> p.is(Tree.Kind.PARAMETER))
-      .map(p -> ((org.sonar.plugins.python.api.tree.Parameter) p).starToken())
-      .map(Token::value)
-      .filter("/"::equals)
-      .isPresent()
-    );
-    for (AnyParameter anyParameter : parameterTrees) {
-      if (anyParameter.is(Tree.Kind.PARAMETER)) {
-        addParameter((org.sonar.plugins.python.api.tree.Parameter) anyParameter, fileId, parameterState);
-      } else {
-        parameters.add(new ParameterV2(null, PythonType.UNKNOWN, null, false, parameterState, false, false, null, locationInFile(anyParameter, fileId)));
-      }
-    }
-  }
-
-  private void addParameter(org.sonar.plugins.python.api.tree.Parameter parameter, @Nullable String fileId, ParameterState parameterState) {
-    Name parameterName = parameter.name();
-    Token starToken = parameter.starToken();
-    if (parameterName != null) {
-      ParameterType parameterType = getParameterType(parameter);
-      this.parameters.add(new ParameterV2(parameterName.name(), parameterType.pythonType(), "UNKNOWN", parameter.defaultValue() != null,
-        parameterState, parameterType.isKeywordVariadic, parameterType.isPositionalVariadic, null, locationInFile(parameter, fileId)));
-      if (starToken != null) {
-        hasVariadicParameter = true;
-        parameterState.keywordOnly = true;
-        parameterState.positionalOnly = false;
-      }
-    } else if (starToken != null) {
-      if ("*".equals(starToken.value())) {
-        parameterState.keywordOnly = true;
-        parameterState.positionalOnly = false;
-      }
-      if ("/".equals(starToken.value())) {
-        parameterState.positionalOnly = false;
-      }
-    }
-  }
-
-  private ParameterType getParameterType(org.sonar.plugins.python.api.tree.Parameter parameter) {
-    // TODO: SONARPY-1773 handle parameter declared types
-    PythonType pythonType = PythonType.UNKNOWN;
-    boolean isPositionalVariadic = false;
-    boolean isKeywordVariadic = false;
-    Token starToken = parameter.starToken();
-    if (starToken != null) {
-      // https://docs.python.org/3/reference/compound_stmts.html#function-definitions
-      hasVariadicParameter = true;
-      if ("*".equals(starToken.value())) {
-        // if the form “*identifier” is present, it is initialized to a tuple receiving any excess positional parameters
-        isPositionalVariadic = true;
-        // Should set type to TUPLE
-        pythonType = PythonType.UNKNOWN;
-      }
-      if ("**".equals(starToken.value())) {
-        //  If the form “**identifier” is present, it is initialized to a new ordered mapping receiving any excess keyword arguments
-        isKeywordVariadic = true;
-        // Should set type to DICT
-        pythonType = PythonType.UNKNOWN;
-      }
-    } else {
-      // Should resolve type annotation
-      pythonType = PythonType.UNKNOWN;
-    }
-    return new ParameterType(pythonType, isKeywordVariadic, isPositionalVariadic);
-  }
-
-  static class ParameterState {
-    boolean keywordOnly = false;
-    boolean positionalOnly = false;
-  }
-
-  record ParameterType(PythonType pythonType, boolean isKeywordVariadic, boolean isPositionalVariadic) { }
+  public record ParameterType(PythonType pythonType, boolean isKeywordVariadic, boolean isPositionalVariadic) { }
 
   public boolean hasVariadicParameter() {
     return hasVariadicParameter;
@@ -189,9 +97,5 @@ public class FunctionType implements PythonType {
 
   public PythonType owner() {
     return owner;
-  }
-
-  public void setOwner(PythonType owner) {
-    this.owner = owner;
   }
 }

@@ -20,7 +20,6 @@
 package org.sonar.python.semantic.v2;
 
 import java.util.ArrayDeque;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Deque;
 import java.util.HashMap;
@@ -109,16 +108,7 @@ public class TypeInferenceV2 extends BaseTreeVisitor {
     scan(functionDef.decorators());
     scan(functionDef.typeParams());
     scan(functionDef.parameters());
-    FunctionType functionType = new FunctionType(functionDef);
-    if (currentType() instanceof ClassType classType) {
-      if (functionDef.name().symbolV2().hasSingleBindingUsage()) {
-        classType.members().add(new Member(functionType.name(), functionType));
-        functionType.setOwner(classType);
-      } else {
-        // TODO: properly infer type in case of multiple assignments
-        classType.members().add(new Member(functionType.name(), PythonType.UNKNOWN));
-      }
-    }
+    FunctionType functionType = buildFunctionType(functionDef);
     ((NameImpl) functionDef.name()).typeV2(functionType);
     inTypeScope(functionType, () -> {
       // TODO: check scope accuracy
@@ -127,6 +117,26 @@ public class TypeInferenceV2 extends BaseTreeVisitor {
       scan(functionDef.returnTypeAnnotation());
       scan(functionDef.body());
     });
+  }
+
+  private FunctionType buildFunctionType(FunctionDef functionDef) {
+    FunctionTypeBuilder functionTypeBuilder = new FunctionTypeBuilder().fromFunctionDef(functionDef);
+    ClassType owner = null;
+    if (currentType() instanceof ClassType classType) {
+      owner = classType;
+    }
+    if (owner != null) {
+      functionTypeBuilder.setOwner(owner);
+    }
+    FunctionType functionType = functionTypeBuilder.build();
+    if (owner != null) {
+      if (functionDef.name().symbolV2().hasSingleBindingUsage()) {
+        owner.members().add(new Member(functionType.name(), functionType));
+      } else {
+        owner.members().add(new Member(functionType.name(), PythonType.UNKNOWN));
+      }
+    }
+    return functionType;
   }
 
   @Override

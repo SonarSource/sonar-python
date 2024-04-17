@@ -39,7 +39,7 @@ public class ParameterV2 {
   private final LocationInFile location;
   private boolean hasReadDeclaredType = false;
 
-  ParameterV2(@Nullable String name, PythonType declaredType, @Nullable String annotatedTypeName, boolean hasDefaultValue,
+  public ParameterV2(@Nullable String name, PythonType declaredType, @Nullable String annotatedTypeName, boolean hasDefaultValue,
     FunctionType.ParameterState parameterState, boolean isKeywordVariadic, boolean isPositionalVariadic, @Nullable SymbolsProtos.Type protobufType, @Nullable LocationInFile location) {
     this.name = name;
     this.declaredType = declaredType;
