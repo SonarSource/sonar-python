@@ -82,7 +82,7 @@ public class FunctionTypeBuilder {
   }
 
   private void createParameterNames(List<AnyParameter> parameterTrees, @Nullable String fileId) {
-    FunctionType.ParameterState parameterState = new FunctionType.ParameterState();
+    ParameterState parameterState = new ParameterState();
     parameterState.positionalOnly = parameterTrees.stream().anyMatch(param -> Optional.of(param)
       .filter(p -> p.is(Tree.Kind.PARAMETER))
       .map(p -> ((org.sonar.plugins.python.api.tree.Parameter) p).starToken())
@@ -99,11 +99,11 @@ public class FunctionTypeBuilder {
     }
   }
 
-  private void addParameter(org.sonar.plugins.python.api.tree.Parameter parameter, @Nullable String fileId, FunctionType.ParameterState parameterState) {
+  private void addParameter(org.sonar.plugins.python.api.tree.Parameter parameter, @Nullable String fileId, ParameterState parameterState) {
     Name parameterName = parameter.name();
     Token starToken = parameter.starToken();
     if (parameterName != null) {
-      FunctionType.ParameterType parameterType = getParameterType(parameter);
+      ParameterType parameterType = getParameterType(parameter);
       this.parameters.add(new ParameterV2(parameterName.name(), parameterType.pythonType(), "UNKNOWN", parameter.defaultValue() != null,
         parameterState, parameterType.isKeywordVariadic(), parameterType.isPositionalVariadic(), null, locationInFile(parameter, fileId)));
       if (starToken != null) {
@@ -122,7 +122,7 @@ public class FunctionTypeBuilder {
     }
   }
 
-  private FunctionType.ParameterType getParameterType(org.sonar.plugins.python.api.tree.Parameter parameter) {
+  private ParameterType getParameterType(org.sonar.plugins.python.api.tree.Parameter parameter) {
     // TODO: SONARPY-1773 handle parameter declared types
     PythonType pythonType = PythonType.UNKNOWN;
     boolean isPositionalVariadic = false;
@@ -147,12 +147,12 @@ public class FunctionTypeBuilder {
       // Should resolve type annotation
       pythonType = PythonType.UNKNOWN;
     }
-    return new FunctionType.ParameterType(pythonType, isKeywordVariadic, isPositionalVariadic);
+    return new ParameterType(pythonType, isKeywordVariadic, isPositionalVariadic);
   }
 
-  static class ParameterState {
-    boolean keywordOnly = false;
-    boolean positionalOnly = false;
+  public static class ParameterState {
+    public boolean keywordOnly = false;
+    public boolean positionalOnly = false;
   }
 
   record ParameterType(PythonType pythonType, boolean isKeywordVariadic, boolean isPositionalVariadic) { }

@@ -89,7 +89,7 @@ public class ProjectLevelTypeTable {
   }
 
   private PythonType convertToFunctionType(FunctionSymbol symbol) {
-    return new FunctionType(symbol.name(), List.of(), List.of(), PythonType.UNKNOWN);
+    return new FunctionType(symbol.name(), List.of(), List.of(), PythonType.UNKNOWN, false, false, false, false, null);
   }
 
   private PythonType converToClassType(ClassSymbol symbol) {

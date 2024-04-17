@@ -20,6 +20,7 @@
 package org.sonar.python.types.v2;
 
 import org.junit.jupiter.api.Test;
+import org.sonar.plugins.python.api.LocationInFile;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
@@ -88,6 +89,9 @@ class FunctionTypeTest {
     assertThat(functionType.parameters().get(0).hasDefaultValue()).isFalse();
     assertThat(functionType.parameters().get(0).isKeywordOnly()).isFalse();
     assertThat(functionType.parameters().get(0).isVariadic()).isFalse();
+    assertThat(functionType.parameters().get(0).isKeywordVariadic()).isFalse();
+    assertThat(functionType.parameters().get(0).isPositionalVariadic()).isFalse();
+    assertThat(functionType.parameters().get(0).location()).isNull();
 
     functionType = functionType("def fn(**kwargs): pass");
     assertThat(functionType.parameters()).hasSize(1);
@@ -96,6 +100,8 @@ class FunctionTypeTest {
     assertThat(functionType.parameters().get(0).hasDefaultValue()).isFalse();
     assertThat(functionType.parameters().get(0).isKeywordOnly()).isFalse();
     assertThat(functionType.parameters().get(0).isVariadic()).isTrue();
+    assertThat(functionType.parameters().get(0).isKeywordVariadic()).isTrue();
+    assertThat(functionType.parameters().get(0).isPositionalVariadic()).isFalse();
 
     functionType = functionType("def fn(p1, *args): pass");
     assertThat(functionType.hasVariadicParameter()).isTrue();
@@ -126,10 +132,11 @@ class FunctionTypeTest {
   }
 
   @Test
-  void declaredReturnType() {
+  void declaredTypes() {
     // TODO: SONARPY-1776 handle declared return type
     FunctionType functionType = functionType("def fn(p1: int): pass");
     assertThat(functionType.returnType()).isEqualTo(PythonType.UNKNOWN);
+    assertThat(functionType.parameters()).extracting(ParameterV2::declaredType).containsExactly(PythonType.UNKNOWN);
   }
 
   @Test

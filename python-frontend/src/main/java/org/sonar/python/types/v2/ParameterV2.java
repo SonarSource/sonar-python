@@ -22,7 +22,7 @@ package org.sonar.python.types.v2;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.LocationInFile;
-import org.sonar.python.index.FunctionDescriptor;
+import org.sonar.python.semantic.v2.FunctionTypeBuilder;
 import org.sonar.python.types.protobuf.SymbolsProtos;
 
 public class ParameterV2 {
@@ -37,10 +37,10 @@ public class ParameterV2 {
   private final boolean isKeywordOnly;
   private final boolean isPositionalOnly;
   private final LocationInFile location;
-  private boolean hasReadDeclaredType = false;
 
   public ParameterV2(@Nullable String name, PythonType declaredType, @Nullable String annotatedTypeName, boolean hasDefaultValue,
-    FunctionType.ParameterState parameterState, boolean isKeywordVariadic, boolean isPositionalVariadic, @Nullable SymbolsProtos.Type protobufType, @Nullable LocationInFile location) {
+    FunctionTypeBuilder.ParameterState parameterState, boolean isKeywordVariadic, boolean isPositionalVariadic,
+    @Nullable SymbolsProtos.Type protobufType, @Nullable LocationInFile location) {
     this.name = name;
     this.declaredType = declaredType;
     this.hasDefaultValue = hasDefaultValue;
@@ -53,37 +53,13 @@ public class ParameterV2 {
     this.annotatedTypeName = annotatedTypeName;
   }
 
-  public ParameterV2(FunctionDescriptor.Parameter parameterDescriptor) {
-    this.name = parameterDescriptor.name();
-    this.hasDefaultValue = parameterDescriptor.hasDefaultValue();
-    this.isPositionalVariadic = parameterDescriptor.isPositionalVariadic();
-    this.isKeywordVariadic = parameterDescriptor.isKeywordVariadic();
-    this.isKeywordOnly = parameterDescriptor.isKeywordOnly();
-    this.isPositionalOnly = parameterDescriptor.isPositionalOnly();
-    this.location = parameterDescriptor.location();
-    this.annotatedTypeName = parameterDescriptor.annotatedType();
-  }
-
   @CheckForNull
   public String name() {
     return name;
   }
 
   public PythonType declaredType() {
-/*      if (!hasReadDeclaredType && protobufType != null) {
-        declaredType = InferredTypes.fromTypeshedProtobuf(protobufType);
-        hasReadDeclaredType = true;
-      }*/
     return declaredType;
-  }
-
-  public void setDeclaredType(PythonType type) {
-    this.declaredType = type;
-  }
-
-  @CheckForNull
-  public String annotatedTypeName() {
-    return annotatedTypeName;
   }
 
   public boolean hasDefaultValue() {
