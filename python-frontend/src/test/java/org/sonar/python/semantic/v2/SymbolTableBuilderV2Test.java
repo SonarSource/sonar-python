@@ -19,9 +19,7 @@
  */
 package org.sonar.python.semantic.v2;
 
-import java.io.File;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.FileInput;
@@ -29,22 +27,28 @@ import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.ImportName;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.python.PythonTestUtils;
-import org.sonar.python.TestPythonVisitorRunner;
 
 class SymbolTableBuilderV2Test {
 
-  private static FileInput fileInput;
-
-  @BeforeAll
-  static void init() {
-    var context = TestPythonVisitorRunner.createContext(new File("src/test/resources/semantic/v2/script.py"));
-    fileInput = context.rootTree();
-  }
 
   @Test
   void test() {
-    var pythonFile = PythonTestUtils.pythonFile("script.py");
     var builder = new SymbolTableBuilderV2();
+    FileInput fileInput = PythonTestUtils.parse(
+      """
+        import lib
+        
+        v = lib.foo()
+        a = lib.A()
+        b = a.do_something()
+        x = 42
+        
+        def script_do_something(param):
+            return 42
+        
+        script_do_something()
+        """
+    );
     builder.visitFileInput(fileInput);
 
     Assertions.assertNotNull(fileInput.statements());
