@@ -22,7 +22,6 @@ package org.sonar.python.types.v2;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.LocationInFile;
-import org.sonar.python.semantic.v2.FunctionTypeBuilder;
 
 public class ParameterV2 {
 
@@ -36,15 +35,15 @@ public class ParameterV2 {
   private final LocationInFile location;
 
   public ParameterV2(@Nullable String name, PythonType declaredType, boolean hasDefaultValue,
-    FunctionTypeBuilder.ParameterState parameterState, boolean isKeywordVariadic, boolean isPositionalVariadic,
+    boolean isKeywordOnly, boolean isPositionalOnly, boolean isKeywordVariadic, boolean isPositionalVariadic,
     @Nullable LocationInFile location) {
     this.name = name;
     this.declaredType = declaredType;
     this.hasDefaultValue = hasDefaultValue;
     this.isKeywordVariadic = isKeywordVariadic;
     this.isPositionalVariadic = isPositionalVariadic;
-    this.isKeywordOnly = parameterState.keywordOnly;
-    this.isPositionalOnly = parameterState.positionalOnly;
+    this.isKeywordOnly = isKeywordOnly;
+    this.isPositionalOnly = isPositionalOnly;
     this.location = location;
   }
 

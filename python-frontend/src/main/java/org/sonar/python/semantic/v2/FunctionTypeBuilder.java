@@ -94,7 +94,8 @@ public class FunctionTypeBuilder {
       if (anyParameter.is(Tree.Kind.PARAMETER)) {
         addParameter((org.sonar.plugins.python.api.tree.Parameter) anyParameter, fileId, parameterState);
       } else {
-        parameters.add(new ParameterV2(null, PythonType.UNKNOWN, false, parameterState, false, false, locationInFile(anyParameter, fileId)));
+        parameters.add(new ParameterV2(null, PythonType.UNKNOWN, false,
+          parameterState.keywordOnly, parameterState.positionalOnly, false, false, locationInFile(anyParameter, fileId)));
       }
     }
   }
@@ -105,7 +106,7 @@ public class FunctionTypeBuilder {
     if (parameterName != null) {
       ParameterType parameterType = getParameterType(parameter);
       this.parameters.add(new ParameterV2(parameterName.name(), parameterType.pythonType(), parameter.defaultValue() != null,
-        parameterState, parameterType.isKeywordVariadic(), parameterType.isPositionalVariadic(), locationInFile(parameter, fileId)));
+        parameterState.keywordOnly, parameterState.positionalOnly, parameterType.isKeywordVariadic(), parameterType.isPositionalVariadic(), locationInFile(parameter, fileId)));
       if (starToken != null) {
         hasVariadicParameter = true;
         parameterState.keywordOnly = true;
@@ -145,8 +146,8 @@ public class FunctionTypeBuilder {
   }
 
   public static class ParameterState {
-    public boolean keywordOnly = false;
-    public boolean positionalOnly = false;
+    boolean keywordOnly = false;
+    boolean positionalOnly = false;
   }
 
   record ParameterType(PythonType pythonType, boolean isKeywordVariadic, boolean isPositionalVariadic) { }
