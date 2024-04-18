@@ -25,14 +25,12 @@ import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
-import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.PythonTestUtils;
 import org.sonar.python.TestPythonVisitorRunner;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.types.v2.FunctionType;
-import org.sonar.python.types.v2.PythonType;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.PythonTestUtils.parseWithoutSymbols;
@@ -68,6 +66,8 @@ class TypeInferenceV2Test {
 
     FunctionType functionType = (FunctionType) functionDef.name().typeV2();
     assertThat(functionType.name()).isEqualTo("foo");
+    assertThat(functionType.hasVariadicParameter()).isFalse();
+    assertThat(functionType.parameters()).hasSize(3);
 
     CallExpression callExpression = ((CallExpression) TreeUtils.firstChild(root, t -> t.is(Tree.Kind.CALL_EXPR)).get());
     assertThat(callExpression.callee().typeV2()).isInstanceOf(FunctionType.class);
