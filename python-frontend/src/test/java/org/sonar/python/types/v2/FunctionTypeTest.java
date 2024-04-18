@@ -20,7 +20,6 @@
 package org.sonar.python.types.v2;
 
 import org.junit.jupiter.api.Test;
-import org.sonar.plugins.python.api.LocationInFile;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;

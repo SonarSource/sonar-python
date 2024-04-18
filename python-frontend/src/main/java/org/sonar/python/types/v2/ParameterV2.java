@@ -23,14 +23,11 @@ import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.LocationInFile;
 import org.sonar.python.semantic.v2.FunctionTypeBuilder;
-import org.sonar.python.types.protobuf.SymbolsProtos;
 
 public class ParameterV2 {
 
   private final String name;
   private PythonType declaredType;
-  private SymbolsProtos.Type protobufType;
-  private final String annotatedTypeName;
   private final boolean hasDefaultValue;
   private final boolean isKeywordVariadic;
   private final boolean isPositionalVariadic;
@@ -38,9 +35,9 @@ public class ParameterV2 {
   private final boolean isPositionalOnly;
   private final LocationInFile location;
 
-  public ParameterV2(@Nullable String name, PythonType declaredType, @Nullable String annotatedTypeName, boolean hasDefaultValue,
+  public ParameterV2(@Nullable String name, PythonType declaredType, boolean hasDefaultValue,
     FunctionTypeBuilder.ParameterState parameterState, boolean isKeywordVariadic, boolean isPositionalVariadic,
-    @Nullable SymbolsProtos.Type protobufType, @Nullable LocationInFile location) {
+    @Nullable LocationInFile location) {
     this.name = name;
     this.declaredType = declaredType;
     this.hasDefaultValue = hasDefaultValue;
@@ -49,8 +46,6 @@ public class ParameterV2 {
     this.isKeywordOnly = parameterState.keywordOnly;
     this.isPositionalOnly = parameterState.positionalOnly;
     this.location = location;
-    this.protobufType = protobufType;
-    this.annotatedTypeName = annotatedTypeName;
   }
 
   @CheckForNull
