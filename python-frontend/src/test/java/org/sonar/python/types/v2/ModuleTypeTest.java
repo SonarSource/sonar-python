@@ -24,6 +24,20 @@ import org.junit.jupiter.api.Test;
 
 class ModuleTypeTest {
 
+
+  @Test
+  void resolveMemberTest() {
+    var a = new ModuleType("a");
+    var b = new ModuleType("b");
+    b.members().put("a", a);
+
+    var resolved = b.resolveMember("a");
+    Assertions.assertThat(resolved).isSameAs(a);
+
+    resolved = b.resolveMember("b");
+    Assertions.assertThat(resolved).isSameAs(PythonType.UNKNOWN);
+  }
+
   @Test
   void toStringTest() {
     var root = new ModuleType(null);
@@ -33,14 +47,39 @@ class ModuleTypeTest {
   }
 
   @Test
-  void isCompatibleWithTest() {
+  void equalsTest() {
+    var parent1 = new ModuleType(null);
+    var module1 = new ModuleType("a", parent1);
+    parent1.members().put("a", module1);
+
+    var parent2 = new ModuleType(null);
+    var module2 = new ModuleType("a", parent2);
+    parent2.members().put("a", module2);
+
+    var module3 = module1;
+
+    var module4 = new ModuleType("b");
+
+    var module5 = new ModuleType("a");
+    module5.members().put("b", module4);
+
+    Assertions.assertThat(module1).isEqualTo(module2)
+      .isEqualTo(module3)
+      .isNotEqualTo(module4)
+      .isNotEqualTo(module5);
+  }
+
+  @Test
+  void hashCodeTest() {
     var module1 = new ModuleType("a");
     var module2 = new ModuleType("a");
     var module3 = new ModuleType("b");
 
-    Assertions.assertThat(module1.isCompatibleWith(module2)).isTrue();
-    Assertions.assertThat(module2.isCompatibleWith(module1)).isTrue();
-    Assertions.assertThat(module1.isCompatibleWith(module3)).isFalse();
+    Assertions.assertThat(module1)
+      .hasSameHashCodeAs(module2)
+      .doesNotHaveSameHashCodeAs(module3);
   }
+
+
 
 }

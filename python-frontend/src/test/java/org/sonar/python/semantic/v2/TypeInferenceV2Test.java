@@ -156,7 +156,43 @@ class TypeInferenceV2Test {
   }
 
   @Test
+  void testImportWithAlias() {
+    FileInput root = inferTypes("""
+      import datetime as d
+      """);
+
+    var importName = (ImportName) root.statements().statements().get(0);
+    var aliasedName = importName.modules().get(0);
+
+    var importedNames = aliasedName.dottedName().names();
+    assertThat(importedNames)
+      .flatExtracting(Expression::typeV2)
+      .allMatch(PythonType.UNKNOWN::equals);
+    
+    assertThat(aliasedName.alias())
+      .extracting(Expression::typeV2)
+      .isInstanceOf(ModuleType.class)
+      .extracting(PythonType::name)
+      .isEqualTo("datetime");
+  }
+
+  @Test
   void testImportFrom() {
+    FileInput root = inferTypes("""
+      from datetime import date
+      """);
+
+    var importFrom = (ImportFrom) root.statements().statements().get(0);
+    var type = importFrom.importedNames().get(0).dottedName().names().get(0).typeV2();
+
+    Assertions.assertThat(type)
+      .isInstanceOf(ClassType.class)
+      .extracting(PythonType::name)
+      .isEqualTo("date");
+  }
+
+  @Test
+  void testImportFromWithAlias() {
     FileInput root = inferTypes("""
       from datetime import date as d
       """);
@@ -165,12 +201,8 @@ class TypeInferenceV2Test {
     var type1 = importFrom.importedNames().get(0).dottedName().names().get(0).typeV2();
     var type2 = importFrom.importedNames().get(0).alias().typeV2();
 
-    Assertions.assertThat(type1).isEqualTo(type2);
-
     Assertions.assertThat(type1)
-      .isInstanceOf(ClassType.class)
-      .extracting(PythonType::name)
-      .isEqualTo("date");
+      .isEqualTo(PythonType.UNKNOWN);
 
     Assertions.assertThat(type2)
       .isInstanceOf(ClassType.class)

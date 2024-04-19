@@ -23,13 +23,12 @@ import java.util.ArrayDeque;
 import java.util.Collection;
 import java.util.Deque;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 import javax.annotation.Nullable;
-import org.sonar.plugins.python.api.tree.AliasedName;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.ClassDef;
+import org.sonar.plugins.python.api.tree.DottedName;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.ExpressionList;
 import org.sonar.plugins.python.api.tree.FileInput;
@@ -152,37 +151,45 @@ public class TypeInferenceV2 extends BaseTreeVisitor {
               .stream().map(Name::name)
               .toList();
         var module = projectLevelTypeTable.getModule(fqn);
-        setTypeToName(aliasedName.alias(), module);
 
-        for (int i = names.size() - 1; i >= 0; i--) {
-          setTypeToName(names.get(i), module);
-          module = Optional.ofNullable(module)
-            .map(ModuleType::parent)
-            .orElse(null);
+        if (aliasedName.alias() != null) {
+          setTypeToName(aliasedName.alias(), module);
+        } else {
+          for (int i = names.size() - 1; i >= 0; i--) {
+            setTypeToName(names.get(i), module);
+            module = Optional.ofNullable(module)
+              .map(ModuleType::parent)
+              .orElse(null);
+          }
         }
       });
   }
 
   @Override
   public void visitImportFrom(ImportFrom importFrom) {
-    var names = importFrom.module().names();
-    var fqn = names
-      .stream().map(Name::name)
-      .toList();
+    Optional.of(importFrom)
+      .map(ImportFrom::module)
+      .map(DottedName::names)
+      .ifPresent(names -> {
+        var fqn = names
+          .stream().map(Name::name)
+          .toList();
 
-    var module = projectLevelTypeTable.getModule(fqn);
-    importFrom.importedNames().forEach(aliasedName -> aliasedName
-      .dottedName()
-      .names()
-      .stream()
-      .findFirst()
-      .ifPresent(name -> {
-        var type = module.resolveMember(name.name());
-        setTypeToName(name, type);
+        var module = projectLevelTypeTable.getModule(fqn);
+        importFrom.importedNames().forEach(aliasedName -> aliasedName
+          .dottedName()
+          .names()
+          .stream()
+          .findFirst()
+          .ifPresent(name -> {
+            var type = module.resolveMember(name.name());
 
-        Optional.ofNullable(aliasedName.alias())
-          .ifPresent(alias -> setTypeToName(alias, type));
-      }));
+            var boundName = Optional.ofNullable(aliasedName.alias())
+              .orElse(name);
+
+            setTypeToName(boundName, type);
+          }));
+      });
   }
 
   @Override

@@ -47,9 +47,9 @@ public class SymbolsModuleTypeProvider {
     this.projectLevelSymbolTable = projectLevelSymbolTable;
   }
 
-  public ModuleType createBuiltinModule(ModuleType parent) {
+  public void createBuiltinModule(ModuleType parent) {
     var name = "builtins";
-    return createModuleFromSymbols(name, parent, TypeShed.builtinSymbols().values());
+    createModuleFromSymbols(name, parent, TypeShed.builtinSymbols().values());
   }
 
   public ModuleType createModuleType(List<String> moduleFqn, ModuleType parent) {

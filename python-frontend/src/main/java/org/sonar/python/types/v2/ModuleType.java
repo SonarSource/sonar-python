@@ -21,11 +21,10 @@ package org.sonar.python.types.v2;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
-import javax.annotation.CheckForNull;
+import java.util.Objects;
 import javax.annotation.Nullable;
 
-public record ModuleType(@Nullable @CheckForNull String name, @Nullable @CheckForNull ModuleType parent, Map<String, PythonType> members) implements PythonType {
+public record ModuleType(@Nullable String name, @Nullable ModuleType parent, Map<String, PythonType> members) implements PythonType {
   public ModuleType(@Nullable String name) {
     this(name, null);
   }
@@ -34,19 +33,23 @@ public record ModuleType(@Nullable @CheckForNull String name, @Nullable @CheckFo
     this(name, parent, new HashMap<>());
   }
 
-  @Override
-  public boolean isCompatibleWith(PythonType another) {
-    return Optional.ofNullable(another)
-      .filter(ModuleType.class::isInstance)
-      .map(ModuleType.class::cast)
-      .map(ModuleType::name)
-      .filter(name::equals)
-      .isPresent();
-  }
-
   public PythonType resolveMember(String memberName) {
     // FIXME: handle case where type is missing
     return members.getOrDefault(memberName, PythonType.UNKNOWN);
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    // TODO: Find a way how we want to compare modules
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    ModuleType that = (ModuleType) o;
+    return Objects.equals(name, that.name) && Objects.equals(members, that.members);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(name, members);
   }
 
   @Override
