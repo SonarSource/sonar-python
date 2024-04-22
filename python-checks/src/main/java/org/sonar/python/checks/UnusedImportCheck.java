@@ -21,6 +21,7 @@ package org.sonar.python.checks;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonVisitorCheck;
@@ -34,12 +35,12 @@ import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Trivia;
 
-
 @Rule(key = "S1128")
 public class UnusedImportCheck extends PythonVisitorCheck {
 
   private static final String MESSAGE = "Remove this unused import.";
   private static final Set<String> ALLOWED_MODULES = Set.of("__future__", "typing", "typing_extensions");
+  private static final Set<String> ALLOWED_FQN_PREFIX = Set.of("sklearn.experimental.");
 
   private final Map<String, Name> unusedImports = new HashMap<>();
 
@@ -79,11 +80,14 @@ public class UnusedImportCheck extends PythonVisitorCheck {
     for (AliasedName aliasedName : importFrom.importedNames()) {
       Name alias = aliasedName.alias();
       var importedName = alias != null ? alias : aliasedName.dottedName().names().get(0);
-      var importedSymbol = importedName.symbol();
-      // defensive programming: imported symbol should never be null, because it always binds a name
-      if (importedSymbol != null && importedSymbol.usages().stream().filter(u -> !u.isBindingUsage()).findFirst().isEmpty()) {
-        unusedImports.put(importedName.name(), importedName);
-      }
+      Optional.ofNullable(importedName.symbol())
+        .filter(symbol -> symbol.usages().stream().filter(u -> !u.isBindingUsage()).findFirst().isEmpty())
+        .filter(symbol ->
+          Optional.ofNullable(symbol.fullyQualifiedName())
+            .map(fqn -> ALLOWED_FQN_PREFIX.stream().noneMatch(fqn::startsWith))
+            .orElse(true)
+        )
+        .ifPresent(symbol -> unusedImports.put(importedName.name(), importedName));
     }
     super.visitImportFrom(importFrom);
   }
