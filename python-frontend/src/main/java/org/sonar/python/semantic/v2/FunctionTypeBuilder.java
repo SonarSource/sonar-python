@@ -37,7 +37,7 @@ import org.sonar.python.types.v2.PythonType;
 
 import static org.sonar.python.tree.TreeUtils.locationInFile;
 
-public class FunctionTypeBuilder {
+public class FunctionTypeBuilder implements TypeBuilder<FunctionType> {
 
   private boolean hasVariadicParameter;
   private String name;
@@ -66,6 +66,48 @@ public class FunctionTypeBuilder {
     return this;
   }
 
+  public FunctionTypeBuilder(String name) {
+    this.name = name;
+  }
+
+  public FunctionTypeBuilder() {
+  }
+
+  public FunctionTypeBuilder withHasVariadicParameter(boolean hasVariadicParameter) {
+    this.hasVariadicParameter = hasVariadicParameter;
+    return this;
+  }
+
+  public FunctionTypeBuilder withAttributes(List<PythonType> attributes) {
+    this.attributes = attributes;
+    return this;
+  }
+
+  public FunctionTypeBuilder withParameters(List<ParameterV2> parameters) {
+    this.parameters = parameters;
+    return this;
+  }
+
+  public FunctionTypeBuilder withAsynchronous(boolean asynchronous) {
+    isAsynchronous = asynchronous;
+    return this;
+  }
+
+  public FunctionTypeBuilder withHasDecorators(boolean hasDecorators) {
+    this.hasDecorators = hasDecorators;
+    return this;
+  }
+
+  public FunctionTypeBuilder withInstanceMethod(boolean instanceMethod) {
+    isInstanceMethod = instanceMethod;
+    return this;
+  }
+
+  public FunctionTypeBuilder withReturnType(PythonType returnType) {
+    this.returnType = returnType;
+    return this;
+  }
+
   public FunctionType build() {
     return new FunctionType(name, attributes, parameters, returnType, isAsynchronous, hasDecorators, isInstanceMethod, hasVariadicParameter, owner);
   }
@@ -77,8 +119,9 @@ public class FunctionTypeBuilder {
       .noneMatch(decorator -> decorator.equals(STATIC_METHOD_DECORATOR) || decorator.equals(CLASS_METHOD_DECORATOR));
   }
 
-  public void setOwner(PythonType owner) {
+  public FunctionTypeBuilder withOwner(PythonType owner) {
     this.owner = owner;
+    return this;
   }
 
   private void createParameterNames(List<AnyParameter> parameterTrees, @Nullable String fileId) {
