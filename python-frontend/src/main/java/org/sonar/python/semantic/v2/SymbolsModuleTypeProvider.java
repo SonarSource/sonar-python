@@ -84,7 +84,7 @@ public class SymbolsModuleTypeProvider {
   private ModuleType createModuleFromSymbols(String name, ModuleType parent, Collection<Symbol> symbols) {
     var members = new HashMap<String, PythonType>();
     symbols.forEach(symbol -> {
-      var type = convertToType(symbol);
+      var type = convertToType(symbol, new HashMap<>());
       members.put(symbol.name(), type);
     });
     var module = new ModuleType(name, parent);
@@ -99,26 +99,49 @@ public class SymbolsModuleTypeProvider {
     return PythonType.UNKNOWN;
   }
 
-  private static PythonType convertToFunctionType(FunctionSymbol symbol) {
-    return new FunctionType(symbol.name(), List.of(), List.of(), PythonType.UNKNOWN, false, false, false, false, null);
+  private static PythonType convertToFunctionType(FunctionSymbol symbol, Map<Symbol, PythonType> createdTypesBySymbol) {
+    // TODO: ensure we don't build twice
+    if (createdTypesBySymbol.containsKey(symbol)) {
+      return createdTypesBySymbol.get(symbol);
+    }
+    FunctionTypeBuilder functionTypeBuilder =
+      new FunctionTypeBuilder(symbol.name())
+      .withAttributes(List.of())
+        .withParameters(List.of())
+        .withReturnType(PythonType.UNKNOWN)
+        .withAsynchronous(false)
+        .withHasDecorators(false)
+        .withInstanceMethod(false)
+        .withHasVariadicParameter(false)
+        .withOwner(null);
+    FunctionType functionType = functionTypeBuilder.build();
+    createdTypesBySymbol.put(symbol, functionType);
+    return functionType;
   }
 
-  private PythonType convertToClassType(ClassSymbol symbol) {
-    Set<Member> members = symbol.declaredMembers().stream().map(m -> new Member(m.name(), convertToType(m))).collect(Collectors.toSet());
-    List<PythonType> superClasses = symbol.superClasses().stream().map(this::convertToType).toList();
-    return new ClassType(symbol.name(), members, List.of(), superClasses);
+  private PythonType convertToClassType(ClassSymbol symbol, Map<Symbol, PythonType> createdTypesBySymbol) {
+    if (createdTypesBySymbol.containsKey(symbol)) {
+      return createdTypesBySymbol.get(symbol);
+    }
+    ClassType classType = new ClassType(symbol.name());
+    createdTypesBySymbol.put(symbol, classType);
+    Set<Member> members = symbol.declaredMembers().stream().map(m -> new Member(m.name(), convertToType(m, createdTypesBySymbol))).collect(Collectors.toSet());
+    classType.members().addAll(members);
+    List<PythonType> superClasses = symbol.superClasses().stream().map(s -> convertToType(s, createdTypesBySymbol)).toList();
+    classType.superClasses().addAll(superClasses);
+    return classType;
   }
 
-  private PythonType convertToUnionType(AmbiguousSymbol ambiguousSymbol) {
-    List<PythonType> pythonTypes = ambiguousSymbol.alternatives().stream().map(this::convertToType).toList();
+  private PythonType convertToUnionType(AmbiguousSymbol ambiguousSymbol, Map<Symbol, PythonType> createdTypesBySymbol) {
+    List<PythonType> pythonTypes = ambiguousSymbol.alternatives().stream().map(a -> convertToType(a, createdTypesBySymbol)).toList();
     return new UnionType(pythonTypes);
   }
 
-  private PythonType convertToType(Symbol symbol) {
+  private PythonType convertToType(Symbol symbol, Map<Symbol, PythonType> createdTypesBySymbol) {
     return switch (symbol.kind()) {
-      case CLASS -> convertToClassType((ClassSymbol) symbol);
-      case FUNCTION -> convertToFunctionType((FunctionSymbol) symbol);
-      case AMBIGUOUS -> convertToUnionType((AmbiguousSymbol) symbol);
+      case CLASS -> convertToClassType((ClassSymbol) symbol, createdTypesBySymbol);
+      case FUNCTION -> convertToFunctionType((FunctionSymbol) symbol, createdTypesBySymbol);
+      case AMBIGUOUS -> convertToUnionType((AmbiguousSymbol) symbol, createdTypesBySymbol);
       case OTHER -> convertToObjectType(symbol);
     };
   }
