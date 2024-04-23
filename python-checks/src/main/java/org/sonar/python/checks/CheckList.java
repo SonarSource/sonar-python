@@ -338,6 +338,7 @@ public final class CheckList {
       SingleCharacterAlternationCheck.class,
       SingleCharCharacterClassCheck.class,
       SkippedTestNoReasonCheck.class,
+      SkLearnEstimatorDontInitializeEstimatedValuesCheck.class,
       SpecialMethodParamListCheck.class,
       SpecialMethodReturnTypeCheck.class,
       SQLQueriesCheck.class,
