@@ -147,7 +147,7 @@ class TypeInferenceV2Test {
       .extracting(Expression::typeV2)
       .isInstanceOf(ModuleType.class)
       .matches(type -> {
-        assertThat(type.resolveMember("C"))
+        assertThat(type.resolveMember("C").get())
           .isInstanceOf(ClassType.class);
         return true;
       })

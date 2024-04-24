@@ -60,6 +60,18 @@ public class ClassTypeTest {
   }
 
   @Test
+  void simple_member() {
+    ClassType classType = classType("""
+          class C:
+            def foo(): ...
+          """
+    );
+
+    assertThat(classType.instancesHaveMember("foo")).isEqualTo(TriBool.TRUE);
+    assertThat(classType.instancesHaveMember("bar")).isEqualTo(TriBool.FALSE);
+  }
+
+  @Test
   void equals_test() {
     ClassType classType1 = classType("class C: ...");
     ClassType classType2 = classType("class C: ...");
@@ -411,15 +423,42 @@ public class ClassTypeTest {
 
   @Test
   void class_members_with_inheritance() {
-    ClassType classType = classTypes(
+    ClassType classB = classTypes(
       "class A:",
       "  def meth(): pass",
       "class B(A): ",
       "  def foo(): pass").get(1);
 
-    assertThat(classType.members()).hasSize(1);
-    ClassType classA = (ClassType) classType.superClasses().get(0);
+    assertThat(classB.members()).hasSize(1);
+    ClassType classA = (ClassType) classB.superClasses().get(0);
     assertThat(classA.members()).hasSize(1);
+
+    assertThat(classB.resolveMember("foo")).isPresent();
+    assertThat(classB.resolveMember("meth")).isPresent();
+    assertThat(classB.resolveMember("unkown")).isNotPresent();
+  }
+
+  @Test
+  void class_members_multiple_inheritance() {
+    // See https://docs.python.org/3/howto/mro.html#python-2-3-mro
+    List<ClassType> classTypes = classTypes(
+      """
+        class A:
+          def foo(param): ...
+        class B:
+          def foo(): ...
+        class C(A, B): ...
+        """
+    );
+    ClassType classA = classTypes.get(0);
+    ClassType classB = classTypes.get(1);
+    ClassType classC = classTypes.get(2);
+
+    PythonType fooA = classA.resolveMember("foo").get();
+    PythonType fooB = classB.resolveMember("foo").get();
+    PythonType fooC = classC.resolveMember("foo").get();
+
+    assertThat(fooC).isSameAs(fooA).isNotSameAs(fooB);
   }
 
   @Test
@@ -433,9 +472,8 @@ public class ClassTypeTest {
       "    A.foo = 0",
       "    A.bar"
     );
-    PythonType foo = classType.resolveMember("foo");
-    assertThat(foo).isNotNull();
-    assertThat(classType.resolveMember("bar")).isNull();
+    assertThat((classType.resolveMember("foo"))).isPresent();
+    assertThat(classType.resolveMember("bar")).isNotPresent();
   }
 
   @Test
@@ -449,8 +487,7 @@ public class ClassTypeTest {
     );
 
     assertThat(classType.instancesHaveMember("foo")).isEqualTo(TriBool.TRUE);
-    PythonType foo = classType.resolveMember("foo");
-    assertThat(foo).isNotNull();
+    assertThat(classType.resolveMember("foo")).isPresent();
   }
 
   @Test
