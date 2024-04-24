@@ -20,11 +20,42 @@
 package org.sonar.python.checks;
 
 import org.junit.jupiter.api.Test;
+import org.sonar.python.checks.quickfix.PythonQuickFixVerifier;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 class SkLearnEstimatorDontInitializeEstimatedValuesCheckTest {
   @Test
   void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/sklearn_estimator_underscore_initialization.py", new SkLearnEstimatorDontInitializeEstimatedValuesCheck());
+  }
+
+  @Test
+  void testQuickfix1() {
+    PythonQuickFixVerifier.verify(
+      new SkLearnEstimatorDontInitializeEstimatedValuesCheck(),
+      """
+        class InheritingEstimator(MyEstimator):
+            def __init__(self) -> None:
+                self.a_ = None
+                ...""",
+      """
+        class InheritingEstimator(MyEstimator):
+            def __init__(self) -> None:
+                ..."""
+          );
+  }
+  @Test
+  void testQuickfixEmptyFunc() {
+    PythonQuickFixVerifier.verify(
+      new SkLearnEstimatorDontInitializeEstimatedValuesCheck(),
+      """
+        class InheritingEstimator(MyEstimator):
+            def __init__(self) -> None:
+                self.a_ = None""",
+      """
+        class InheritingEstimator(MyEstimator):
+            def __init__(self) -> None:
+                pass"""
+    );
   }
 }
