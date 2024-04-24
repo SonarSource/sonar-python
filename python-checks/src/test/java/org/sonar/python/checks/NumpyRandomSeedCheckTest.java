@@ -28,5 +28,10 @@ class NumpyRandomSeedCheckTest {
     PythonCheckVerifier.verify("src/test/resources/checks/numpyRandomSeedCheck.py", new NumpyRandomSeedCheck());
   }
 
+  
+  @Test
+  void test_sklearn() {
+    PythonCheckVerifier.verify("src/test/resources/checks/randomSeedSKlearn.py", new NumpyRandomSeedCheck());
+  }
 }
 
