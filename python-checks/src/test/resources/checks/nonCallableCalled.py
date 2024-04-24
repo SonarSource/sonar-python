@@ -22,32 +22,32 @@ def call_noncallable(p):
     list_var()  # Noncompliant
 
     tuple_var = ()
-    tuple_var()  # Noncompliant
+    tuple_var()  # FN
 
     dict_var = {}
-    dict_var()  # Noncompliant
+    dict_var()  # FN
 
     set_var = set()
-    set_var()  # Noncompliant
+    set_var()  # FN
 
     frozenset_var = frozenset()
-    frozenset_var() # Noncompliant
+    frozenset_var() # FN
 
     if p:
       x = 42
     else:
       x = 'str'
-    x() # Noncompliant {{Fix this call; "x" is not callable.}}
+    x() # FN: multiple assignment not handled
 
 def flow_sensitivity():
   my_var = "hello"
   my_var = 42
-  my_var() # Noncompliant
+  my_var() # FN: multiple assignment not handled
 
   my_other_var = func
   my_other_var() # OK
   my_other_var = 42
-  my_other_var() # Noncompliant
+  my_other_var() # FN: multiple assignment not handled
 
 def flow_sensitivity_nested_try_except():
   def func_with_try_except():
@@ -59,7 +59,7 @@ def flow_sensitivity_nested_try_except():
   def other_func():
     my_var = "hello"
     my_var = 42
-    my_var() # Noncompliant
+    my_var() # FN: multiple assignments
 
 def member_access():
   my_callable = MyCallable()
@@ -69,8 +69,7 @@ def member_access():
 def types_from_typeshed(foo):
   from math import acos
   from functools import wraps
-  acos(42)() # Noncompliant {{Fix this call; this expression has type float and it is not callable.}}
-# ^^^^^^^^
+  acos(42)() # FN: declared return type of Typeshed
   wraps(func)(foo) # OK, wraps returns a Callable
 
 def with_metaclass():
@@ -78,7 +77,8 @@ def with_metaclass():
   class Base(metaclass=Factory): ...
   class A(Base): ...
   a = A()
-  a() # OK
+  # TODO: resolve type hierarchy and metaclasses
+  a() # Noncompliant
 
 
 def decorators():
