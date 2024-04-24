@@ -130,6 +130,28 @@ class FunctionTypeTest {
     assertThat(functionType.hasDecorators()).isTrue();
   }
 
+
+  @Test
+  void equals() {
+    FunctionType functionType1 = functionType("def foo(): ...");
+    FunctionType functionType2 = functionType("def foo(): ...");
+    FunctionType functionType3 = functionType("def bar(): ...");
+    FunctionType functionType4 = functionType("@some_decorator\ndef foo(): ...");
+
+    FunctionType functionTypeWithParam1 = functionType("def foo(param): ...");
+    FunctionType functionTypeWithParam2 = functionType("def foo(*param): ...");
+    FunctionType functionTypeWithParam3 = functionType("def foo(**param): ...");
+
+    assertThat(functionType1).isEqualTo(functionType1);
+    assertThat(functionType1).isEqualTo(functionType2);
+    assertThat(functionType1).isNotEqualTo(functionType3);
+    assertThat(functionType1).isNotEqualTo(functionType4);
+    assertThat(functionType1).isNotEqualTo(functionTypeWithParam1);
+    assertThat(functionTypeWithParam1).isNotEqualTo(functionTypeWithParam2);
+    assertThat(functionTypeWithParam1).isNotEqualTo(functionTypeWithParam3);
+    assertThat(functionTypeWithParam2).isNotEqualTo(functionTypeWithParam3);
+  }
+
   @Test
   void declaredTypes() {
     // TODO: SONARPY-1776 handle declared return type

@@ -100,7 +100,6 @@ public class SymbolsModuleTypeProvider {
   }
 
   private static PythonType convertToFunctionType(FunctionSymbol symbol, Map<Symbol, PythonType> createdTypesBySymbol) {
-    // TODO: ensure we don't build twice
     if (createdTypesBySymbol.containsKey(symbol)) {
       return createdTypesBySymbol.get(symbol);
     }
@@ -112,8 +111,7 @@ public class SymbolsModuleTypeProvider {
         .withAsynchronous(false)
         .withHasDecorators(false)
         .withInstanceMethod(false)
-        .withHasVariadicParameter(false)
-        .withOwner(null);
+        .withHasVariadicParameter(false);
     FunctionType functionType = functionTypeBuilder.build();
     createdTypesBySymbol.put(symbol, functionType);
     return functionType;
