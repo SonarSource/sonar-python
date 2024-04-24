@@ -34,12 +34,14 @@ class SkLearnEstimatorDontInitializeEstimatedValuesCheckTest {
     PythonQuickFixVerifier.verify(
       new SkLearnEstimatorDontInitializeEstimatedValuesCheck(),
       """
-        class InheritingEstimator(MyEstimator):
+        from sklearn.base import BaseEstimator
+        class InheritingEstimator(BaseEstimator):
             def __init__(self) -> None:
                 self.a_ = None
                 ...""",
       """
-        class InheritingEstimator(MyEstimator):
+        from sklearn.base import BaseEstimator
+        class InheritingEstimator(BaseEstimator):
             def __init__(self) -> None:
                 ..."""
           );
@@ -49,11 +51,13 @@ class SkLearnEstimatorDontInitializeEstimatedValuesCheckTest {
     PythonQuickFixVerifier.verify(
       new SkLearnEstimatorDontInitializeEstimatedValuesCheck(),
       """
-        class InheritingEstimator(MyEstimator):
+        from sklearn.base import ClassifierMixin
+        class InheritingEstimator(ClassifierMixin):
             def __init__(self) -> None:
                 self.a_ = None""",
       """
-        class InheritingEstimator(MyEstimator):
+        from sklearn.base import ClassifierMixin
+        class InheritingEstimator(ClassifierMixin):
             def __init__(self) -> None:
                 pass"""
     );

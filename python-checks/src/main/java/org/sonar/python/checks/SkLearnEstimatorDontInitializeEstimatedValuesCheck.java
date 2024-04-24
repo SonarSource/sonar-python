@@ -28,6 +28,8 @@ import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
+import org.sonar.plugins.python.api.symbols.ClassSymbol;
+import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.ClassDef;
@@ -41,8 +43,8 @@ import org.sonar.python.tree.TreeUtils;
 @Rule(key = "S6974")
 public class SkLearnEstimatorDontInitializeEstimatedValuesCheck extends PythonSubscriptionCheck {
 
-  private static final Set<String> BASE_FULLY_QUALIFIED_NAMES = Set.of(
-    "sklearn.base.BaseEstimator",
+  private static final String BASE_ESTIMATOR_FULLY_QUALIFIED_NAME = "sklearn.base.BaseEstimator";
+  private static final Set<String> MIXINS_FULLY_QUALIFIED_NAME = Set.of(
     "sklearn.base.BiclusterMixin",
     "sklearn.base.ClassifierMixin",
     "sklearn.base.ClusterMixin",
@@ -55,11 +57,18 @@ public class SkLearnEstimatorDontInitializeEstimatedValuesCheck extends PythonSu
 
   private static final String MESSAGE = "Move this estimated attribute in the `fit` method.";
   private static final String MESSAGE_SECONDARY = "The attribute is used in this estimator";
-  public static final String QUICK_FIX_MESSAGE = "Quick fix";
+  public static final String QUICK_FIX_MESSAGE = "Remove the statement";
 
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.FUNCDEF, SkLearnEstimatorDontInitializeEstimatedValuesCheck::checkFunction);
+  }
+
+  private static boolean inheritsMixin(ClassSymbol classSymbol) {
+    boolean directlyInheritsMixin = classSymbol.superClasses().stream().filter(superClass -> superClass.fullyQualifiedName() != null)
+      .anyMatch(superClass -> MIXINS_FULLY_QUALIFIED_NAME.contains(superClass.fullyQualifiedName()));
+    return directlyInheritsMixin || classSymbol.superClasses().stream().filter(symbol -> symbol.is(Symbol.Kind.CLASS)).map(ClassSymbol.class::cast)
+      .anyMatch(SkLearnEstimatorDontInitializeEstimatedValuesCheck::inheritsMixin);
   }
 
   private static void checkFunction(SubscriptionContext subscriptionContext) {
@@ -77,10 +86,10 @@ public class SkLearnEstimatorDontInitializeEstimatedValuesCheck extends PythonSu
       return;
     }
     boolean inheritsBaseEstimator = Optional.of(classSymbol)
-      .map(classSymbol1 -> BASE_FULLY_QUALIFIED_NAMES.stream().anyMatch(classSymbol1::canBeOrExtend))
+      .map(classSymbol1 -> classSymbol1.isOrExtends(BASE_ESTIMATOR_FULLY_QUALIFIED_NAME))
       .orElse(false);
 
-    if (!inheritsBaseEstimator) {
+    if (!inheritsBaseEstimator && !inheritsMixin(classSymbol)) {
       return;
     }
 
@@ -90,9 +99,9 @@ public class SkLearnEstimatorDontInitializeEstimatedValuesCheck extends PythonSu
     var secondaryLocation = classDef.name();
     offendingVariables
       .forEach((qualifiedExpression, assignmentStatement) -> {
-        var qf = createQuickFix(assignmentStatement);
+        var quickFixOptional = createQuickFix(assignmentStatement);
         var issue = subscriptionContext.addIssue(qualifiedExpression.name(), MESSAGE).secondary(secondaryLocation, MESSAGE_SECONDARY);
-        qf.ifPresent(issue::addQuickFix);
+        quickFixOptional.ifPresent(issue::addQuickFix);
       });
 
   }
@@ -115,6 +124,11 @@ public class SkLearnEstimatorDontInitializeEstimatedValuesCheck extends PythonSu
 
     private final Map<QualifiedExpression, AssignmentStatement> qualifiedExpressions = new HashMap<>();
 
+    private static boolean isOffendingQualifiedExpression(QualifiedExpression qualifiedExpression) {
+      return !qualifiedExpression.name().name().startsWith("__") && qualifiedExpression.name().name().endsWith("_") && qualifiedExpression.qualifier().is(Tree.Kind.NAME)
+        && "self".equals(((org.sonar.plugins.python.api.tree.Name) qualifiedExpression.qualifier()).name());
+    }
+
     @Override
     public void visitAssignmentStatement(AssignmentStatement pyAssignmentStatementTree) {
       var offendingQualifiedExpressions = pyAssignmentStatementTree.lhsExpressions()
@@ -122,7 +136,7 @@ public class SkLearnEstimatorDontInitializeEstimatedValuesCheck extends PythonSu
         .flatMap(expressionList -> expressionList.expressions().stream())
         .filter(expression -> expression.is(Tree.Kind.QUALIFIED_EXPR))
         .map(QualifiedExpression.class::cast);
-      
+
       var offendingTuples = pyAssignmentStatementTree.lhsExpressions()
         .stream()
         .flatMap(expressionList -> expressionList.expressions().stream())
@@ -134,8 +148,7 @@ public class SkLearnEstimatorDontInitializeEstimatedValuesCheck extends PythonSu
 
       var qualifiedExpressionsStream = Stream.concat(
         offendingQualifiedExpressions, offendingTuples)
-        .filter(qualifiedExpression -> qualifiedExpression.name().name().endsWith("_") && qualifiedExpression.qualifier().is(Tree.Kind.NAME)
-          && "self".equals(((org.sonar.plugins.python.api.tree.Name) qualifiedExpression.qualifier()).name()));
+        .filter(VariableDeclarationEndingWithUnderscoreVisitor::isOffendingQualifiedExpression);
 
       qualifiedExpressionsStream.forEach(qualifiedExpression -> qualifiedExpressions.put(qualifiedExpression, pyAssignmentStatementTree));
       super.visitAssignmentStatement(pyAssignmentStatementTree);

@@ -1,0 +1,46 @@
+<p>This rule raises an issue when an attributes ending with <code>_</code> is set in the <code>__init__</code> method of a class inheriting from
+Scikit-Learn <code>BaseEstimator</code></p>
+<h2>Why is this an issue?</h2>
+<p>On a Scikit-Learn estimator, attributes that have a trailing underscore represents attributes that are estimated. These attributes have to be set
+in the fit method. Their presence are used to verify if an estimator has been fitted.</p>
+<pre>
+from sklearn.neighbors import KNeighborsClassifier
+
+X = [[0], [1], [2], [3]]
+y = [0, 0, 1, 1]
+knn = KNeighborsClassifier(n_neighbors=1)
+knn.fit(X, y)
+knn.n_samples_fit_
+</pre>
+<p>In the example above the attributes of the <code>KNeighborsClassifier</code>, <code>n_samples_fit_</code> is set only after the estimator’s
+<code>fit</code> method is called. Calling <code>n_samples_fit_</code> before the estimator is fitted would raise an <code>AttributeError</code>
+exception.</p>
+<p>When implementing a custom estimator by subclassing Scikit-Learn’s <code>BaseEstimator</code>, it is important to follow the above convention and
+not set attributes with a trailing underscore inside the <code>__init__</code> method.</p>
+<h2>How to fix it</h2>
+<p>To fix this issue, move the attributes with a trailing underscore from the <code>__init__</code> method to the <code>fit</code> method.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+from sklearn.base import BaseEstimator
+
+class MyEstimator(BaseEstimator):
+    def __init__(self):
+        self.estimated_attribute_ = None # Noncompliant: an estimated attribute is set in the __init__ method.
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+from sklearn.base import BaseEstimator
+
+class MyEstimator(BaseEstimator):
+    def fit(self, X, y):
+        self.estimated_attribute_ = some_estimation(X) # Compliant
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Scikit-Learn documentation - <a href="https://scikit-learn.org/stable/developers/develop.html#parameters-and-init">Parameters and init</a>
+  </li>
+  <li> {rule:python:S6970} - The Scikit-learn <code>fit</code> method should be called before methods yielding results </li>
+</ul>
+
