@@ -27,6 +27,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.symbols.AmbiguousSymbol;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
@@ -37,6 +38,7 @@ import org.sonar.python.types.v2.ClassType;
 import org.sonar.python.types.v2.FunctionType;
 import org.sonar.python.types.v2.Member;
 import org.sonar.python.types.v2.ModuleType;
+import org.sonar.python.types.v2.ParameterV2;
 import org.sonar.python.types.v2.PythonType;
 import org.sonar.python.types.v2.UnionType;
 
@@ -47,9 +49,8 @@ public class SymbolsModuleTypeProvider {
     this.projectLevelSymbolTable = projectLevelSymbolTable;
   }
 
-  public void createBuiltinModule(ModuleType parent) {
-    var name = "builtins";
-    createModuleFromSymbols(name, parent, TypeShed.builtinSymbols().values());
+  public ModuleType createBuiltinModule() {
+    return createModuleFromSymbols(null, null, TypeShed.builtinSymbols().values());
   }
 
   public ModuleType createModuleType(List<String> moduleFqn, ModuleType parent) {
@@ -81,7 +82,7 @@ public class SymbolsModuleTypeProvider {
     return emptyModule;
   }
 
-  private ModuleType createModuleFromSymbols(String name, ModuleType parent, Collection<Symbol> symbols) {
+  private ModuleType createModuleFromSymbols(@Nullable String name, @Nullable ModuleType parent, Collection<Symbol> symbols) {
     var members = new HashMap<String, PythonType>();
     symbols.forEach(symbol -> {
       var type = convertToType(symbol, new HashMap<>());
@@ -90,7 +91,10 @@ public class SymbolsModuleTypeProvider {
     var module = new ModuleType(name, parent);
     module.members().putAll(members);
 
-    parent.members().put(name, module);
+    Optional.ofNullable(parent)
+      .map(ModuleType::members)
+      .ifPresent(m -> m.put(name, module));
+
     return module;
   }
 
@@ -103,18 +107,35 @@ public class SymbolsModuleTypeProvider {
     if (createdTypesBySymbol.containsKey(symbol)) {
       return createdTypesBySymbol.get(symbol);
     }
+
+    var parameters = symbol.parameters()
+      .stream()
+      .map(SymbolsModuleTypeProvider::convertParameter)
+      .toList();
+
     FunctionTypeBuilder functionTypeBuilder =
       new FunctionTypeBuilder(symbol.name())
-      .withAttributes(List.of())
-        .withParameters(List.of())
+        .withAttributes(List.of())
+        .withParameters(parameters)
         .withReturnType(PythonType.UNKNOWN)
-        .withAsynchronous(false)
-        .withHasDecorators(false)
-        .withInstanceMethod(false)
-        .withHasVariadicParameter(false);
+        .withAsynchronous(symbol.isAsynchronous())
+        .withHasDecorators(symbol.hasDecorators())
+        .withInstanceMethod(symbol.isInstanceMethod())
+        .withHasVariadicParameter(symbol.hasVariadicParameter());
     FunctionType functionType = functionTypeBuilder.build();
     createdTypesBySymbol.put(symbol, functionType);
     return functionType;
+  }
+
+  private static ParameterV2 convertParameter(FunctionSymbol.Parameter parameter) {
+    return new ParameterV2(parameter.name(),
+      PythonType.UNKNOWN,
+      parameter.hasDefaultValue(),
+      parameter.isKeywordOnly(),
+      parameter.isPositionalOnly(),
+      parameter.isKeywordVariadic(),
+      parameter.isPositionalVariadic(),
+      null);
   }
 
   private PythonType convertToClassType(ClassSymbol symbol, Map<Symbol, PythonType> createdTypesBySymbol) {
@@ -123,7 +144,8 @@ public class SymbolsModuleTypeProvider {
     }
     ClassType classType = new ClassType(symbol.name());
     createdTypesBySymbol.put(symbol, classType);
-    Set<Member> members = symbol.declaredMembers().stream().map(m -> new Member(m.name(), convertToType(m, createdTypesBySymbol))).collect(Collectors.toSet());
+    Set<Member> members =
+      symbol.declaredMembers().stream().map(m -> new Member(m.name(), convertToType(m, createdTypesBySymbol))).collect(Collectors.toSet());
     classType.members().addAll(members);
     List<PythonType> superClasses = symbol.superClasses().stream().map(s -> convertToType(s, createdTypesBySymbol)).toList();
     classType.superClasses().addAll(superClasses);

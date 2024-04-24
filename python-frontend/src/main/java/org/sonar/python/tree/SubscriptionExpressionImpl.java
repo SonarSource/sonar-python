@@ -28,6 +28,8 @@ import org.sonar.plugins.python.api.tree.SubscriptionExpression;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TreeVisitor;
+import org.sonar.python.types.v2.ClassType;
+import org.sonar.python.types.v2.PythonType;
 
 public class SubscriptionExpressionImpl extends PyTree implements SubscriptionExpression {
 
@@ -76,5 +78,14 @@ public class SubscriptionExpressionImpl extends PyTree implements SubscriptionEx
   @Override
   public Kind getKind() {
     return Kind.SUBSCRIPTION;
+  }
+
+  @Override
+  public PythonType typeV2() {
+    var objectType = object().typeV2();
+    if (objectType instanceof ClassType classType) {
+      return classType;
+    }
+    return PythonType.UNKNOWN;
   }
 }
