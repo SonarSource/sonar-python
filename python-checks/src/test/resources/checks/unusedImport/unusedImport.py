@@ -38,3 +38,7 @@ if True:
     from my_module import if_import # Compliant
 
 if_import()
+
+from sklearn.experimental import enable_iterative_imputer
+from sklearn.experimental import pjdfgpojdgf as something
+from sklearn.impute import IterativeImputer # Noncompliant
