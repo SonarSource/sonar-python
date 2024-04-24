@@ -21,17 +21,52 @@ package org.sonar.python.checks;
 
 import javax.annotation.Nullable;
 import org.sonar.check.Rule;
+import org.sonar.plugins.python.api.LocationInFile;
+import org.sonar.plugins.python.api.PythonSubscriptionCheck;
+import org.sonar.plugins.python.api.tree.CallExpression;
+import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.types.InferredType;
+import org.sonar.python.types.InferredTypes;
+import org.sonar.python.types.v2.PythonType;
+import org.sonar.python.types.v2.TriBool;
+
+import static org.sonar.python.tree.TreeUtils.nameFromExpression;
+import static org.sonar.python.types.InferredTypes.typeClassLocation;
 
 @Rule(key = "S5756")
-public class NonCallableCalledCheck extends NonCallableCalled {
+public class NonCallableCalledCheck extends PythonSubscriptionCheck {
 
   @Override
-  public boolean isNonCallableType(InferredType type) {
-    return !type.canHaveMember("__call__");
+  public void initialize(Context context) {
+    context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, ctx -> {
+      CallExpression callExpression = (CallExpression) ctx.syntaxNode();
+      Expression callee = callExpression.callee();
+      InferredType calleeType = callee.type();
+      PythonType typeV2 = callee.typeV2();
+      if (isNonCallableType(typeV2)) {
+        String name = nameFromExpression(callee);
+        PreciseIssue preciseIssue = ctx.addIssue(callee, message(calleeType, name));
+        LocationInFile location = typeClassLocation(calleeType);
+        if (location != null) {
+          preciseIssue.secondary(location, "Definition.");
+        }
+      }
+    });
   }
 
-  @Override
+  protected static String addTypeName(InferredType type) {
+    String typeName = InferredTypes.typeName(type);
+    if (typeName != null) {
+      return " has type " + typeName + " and it";
+    }
+    return "";
+  }
+
+  public boolean isNonCallableType(PythonType type) {
+    return type.hasMember("__call__") == TriBool.FALSE;
+  }
+
   public String message(InferredType calleeType, @Nullable String name) {
     if (name != null) {
       return String.format("Fix this call; \"%s\"%s is not callable.", name, addTypeName(calleeType));
