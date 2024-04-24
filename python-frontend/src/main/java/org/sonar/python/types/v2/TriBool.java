@@ -19,33 +19,8 @@
  */
 package org.sonar.python.types.v2;
 
-/**
- * PythonType
- */
-public interface PythonType {
-  PythonType UNKNOWN = new UnknownType();
-
-  default String name() {
-    return this.toString();
-  }
-
-  default String displayName() {
-    return this.toString();
-  }
-
-  default boolean isCompatibleWith(PythonType another) {
-    return true;
-  }
-
-  default String key() {
-    return name();
-  }
-
-  default PythonType resolveMember(String memberName) {
-    return PythonType.UNKNOWN;
-  }
-
-  default TriBool hasMember(String memberName) {
-    return TriBool.UNKNOWN;
-  }
+public enum TriBool {
+  TRUE,
+  FALSE,
+  UNKNOWN
 }
