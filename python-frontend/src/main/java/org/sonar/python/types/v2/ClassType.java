@@ -35,14 +35,15 @@ public record ClassType(
   String name,
   Set<Member> members,
   List<PythonType> attributes,
-  List<PythonType> superClasses) implements PythonType {
+  List<PythonType> superClasses,
+  List<PythonType> metaClasses) implements PythonType {
 
   public ClassType(String name) {
-    this(name, new HashSet<>(), new ArrayList<>(), new ArrayList<>());
+    this(name, new HashSet<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
   }
 
   public ClassType(String name, List<PythonType> attributes) {
-    this(name, new HashSet<>(), attributes, new ArrayList<>());
+    this(name, new HashSet<>(), attributes, new ArrayList<>(), new ArrayList<>());
   }
 
   @Override
@@ -100,5 +101,62 @@ public record ClassType(
       .filter(m -> m.name().equals(memberName))
       .map(Member::type)
       .findFirst().orElse(PythonType.UNKNOWN);
+  }
+
+  public boolean hasUnresolvedHierarchy() {
+    return superClasses.stream().anyMatch(s -> {
+      if (s instanceof ClassType parentClassType) {
+        return parentClassType.hasUnresolvedHierarchy();
+      }
+      return true;
+    }
+    );
+  }
+
+  @Override
+  public TriBool hasMember(String memberName) {
+    // a ClassType is an object of class type, it has the same members as those present on any type
+    if ("__call__".equals(memberName)) {
+      return TriBool.TRUE;
+    }
+    if (hasUnresolvedHierarchy()) {
+      return TriBool.UNKNOWN;
+    }
+    // TODO: Not correct, we should look at what the actual type is instead (SONARPY-1666)
+    return TriBool.UNKNOWN;
+  }
+
+  public boolean hasMetaClass() {
+    return !this.metaClasses.isEmpty();
+  }
+
+  public TriBool instancesHaveMember(String memberName) {
+    if (hasUnresolvedHierarchy() || hasMetaClass()) {
+      return TriBool.UNKNOWN;
+    }
+    if ("NamedTuple".equals(this.name)) {
+      // TODO: instances of NamedTuple are type
+      return TriBool.TRUE;
+    }
+    // TODO: look at parents
+    return resolveMember(memberName) != PythonType.UNKNOWN ? TriBool.TRUE : TriBool.FALSE;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    ClassType classType = (ClassType) o;
+    boolean haveSameAttributes = Objects.equals(name, classType.name) && Objects.equals(members, classType.members) && Objects.equals(attributes, classType.attributes);
+    List<String> parentNames = superClasses.stream().map(PythonType::key).toList();
+    List<String> metaClassNames = metaClasses.stream().map(PythonType::key).toList();
+    List<String> otherParentNames = classType.superClasses.stream().map(PythonType::key).toList();
+    List<String> otherMetaClassNames = classType.metaClasses.stream().map(PythonType::key).toList();
+    return haveSameAttributes && Objects.equals(parentNames, otherParentNames) && Objects.equals(metaClassNames, otherMetaClassNames);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(name, members, attributes, superClasses);
   }
 }

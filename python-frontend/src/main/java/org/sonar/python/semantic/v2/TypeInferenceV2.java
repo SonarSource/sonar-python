@@ -25,6 +25,7 @@ import java.util.Deque;
 import java.util.List;
 import java.util.Optional;
 import javax.annotation.Nullable;
+import org.sonar.plugins.python.api.tree.ArgList;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.ClassDef;
@@ -37,13 +38,16 @@ import org.sonar.plugins.python.api.tree.ImportFrom;
 import org.sonar.plugins.python.api.tree.ImportName;
 import org.sonar.plugins.python.api.tree.ListLiteral;
 import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.tree.NoneExpression;
 import org.sonar.plugins.python.api.tree.NumericLiteral;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
+import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.tree.ListLiteralImpl;
 import org.sonar.python.tree.NameImpl;
+import org.sonar.python.tree.NoneExpressionImpl;
 import org.sonar.python.tree.NumericLiteralImpl;
 import org.sonar.python.tree.StringLiteralImpl;
 import org.sonar.python.types.RuntimeType;
@@ -64,6 +68,8 @@ public class TypeInferenceV2 extends BaseTreeVisitor {
     this.projectLevelTypeTable = projectLevelTypeTable;
   }
 
+  private static final String BUILTINS = "builtins";
+
   @Override
   public void visitFileInput(FileInput fileInput) {
     var type = new ModuleType("somehow get its name");
@@ -72,14 +78,14 @@ public class TypeInferenceV2 extends BaseTreeVisitor {
 
   @Override
   public void visitStringLiteral(StringLiteral stringLiteral) {
-    ModuleType builtins = this.projectLevelTypeTable.getModule("builtins");
+    ModuleType builtins = this.projectLevelTypeTable.getModule(BUILTINS);
     // TODO: multiple object types to represent str instance?
     ((StringLiteralImpl) stringLiteral).typeV2(new ObjectType(builtins.resolveMember("str"), List.of(), List.of()));
   }
 
   @Override
   public void visitNumericLiteral(NumericLiteral numericLiteral) {
-    ModuleType builtins = this.projectLevelTypeTable.getModule("builtins");
+    ModuleType builtins = this.projectLevelTypeTable.getModule(BUILTINS);
     InferredType type = numericLiteral.type();
     String memberName = ((RuntimeType) type).getTypeClass().fullyQualifiedName();
     if (memberName != null) {
@@ -88,8 +94,15 @@ public class TypeInferenceV2 extends BaseTreeVisitor {
   }
 
   @Override
+  public void visitNone(NoneExpression noneExpression) {
+    ModuleType builtins = this.projectLevelTypeTable.getModule(BUILTINS);
+    // TODO: multiple object types to represent str instance?
+    ((NoneExpressionImpl) noneExpression).typeV2(new ObjectType(builtins.resolveMember("NoneType"), List.of(), List.of()));
+  }
+
+  @Override
   public void visitListLiteral(ListLiteral listLiteral) {
-    ModuleType builtins = this.projectLevelTypeTable.getModule("builtins");
+    ModuleType builtins = this.projectLevelTypeTable.getModule(BUILTINS);
     scan(listLiteral.elements());
     List<PythonType> pythonTypes = listLiteral.elements().expressions().stream().map(Expression::typeV2).distinct().toList();
     // TODO: cleanly reduce attributes
@@ -100,10 +113,48 @@ public class TypeInferenceV2 extends BaseTreeVisitor {
   public void visitClassDef(ClassDef classDef) {
     scan(classDef.args());
     Name name = classDef.name();
-    ClassType type = new ClassType(name.name());
+    ClassTypeBuilder classTypeBuilder = new ClassTypeBuilder().setName(name.name());
+    resolveTypeHierarchy(classDef, classTypeBuilder);
+    ClassType type = classTypeBuilder.build();
     ((NameImpl) name).typeV2(type);
     
     inTypeScope(type, () -> scan(classDef.body()));
+  }
+
+  static void resolveTypeHierarchy(ClassDef classDef, ClassTypeBuilder classTypeBuilder) {
+    Optional.of(classDef)
+      .map(ClassDef::args)
+      .map(ArgList::arguments)
+      .stream()
+      .flatMap(Collection::stream)
+      .forEach(argument -> {
+        if (argument instanceof RegularArgument regularArgument) {
+          addParentClass(classTypeBuilder, regularArgument);
+        } else {
+          classTypeBuilder.superClasses().add(PythonType.UNKNOWN);
+        }
+      });
+  }
+
+  private static void addParentClass(ClassTypeBuilder classTypeBuilder, RegularArgument regularArgument) {
+    Name keyword = regularArgument.keywordArgument();
+    // TODO: store names if not resolved properly
+    if (keyword != null) {
+      if ("metaclass".equals(keyword.name())) {
+        PythonType argumentType = getTypeV2FromArgument(regularArgument);
+        classTypeBuilder.metaClasses().add(argumentType);
+      }
+      return;
+    }
+    PythonType argumentType = getTypeV2FromArgument(regularArgument);
+    classTypeBuilder.superClasses().add(argumentType);
+    // TODO: handle generics
+  }
+
+  private static PythonType getTypeV2FromArgument(RegularArgument regularArgument) {
+    Expression expression = regularArgument.expression();
+    // Ensure we support correctly typing symbols like "List[str] / list[str]"
+    return expression.typeV2();
   }
 
   @Override
@@ -129,7 +180,7 @@ public class TypeInferenceV2 extends BaseTreeVisitor {
       owner = classType;
     }
     if (owner != null) {
-      functionTypeBuilder.setOwner(owner);
+      functionTypeBuilder.withOwner(owner);
     }
     FunctionType functionType = functionTypeBuilder.build();
     if (owner != null) {

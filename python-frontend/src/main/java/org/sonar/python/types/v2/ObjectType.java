@@ -47,4 +47,15 @@ public record ObjectType(PythonType type, List<PythonType> attributes, List<Memb
       .findFirst()
       .orElseGet(() -> type.resolveMember(memberName));
   }
+
+  @Override
+  public TriBool hasMember(String memberName) {
+    if (resolveMember(memberName) != PythonType.UNKNOWN) {
+      return TriBool.TRUE;
+    }
+    if (type instanceof ClassType classType) {
+      return classType.instancesHaveMember(memberName);
+    }
+    return TriBool.UNKNOWN;
+  }
 }

@@ -20,6 +20,7 @@
 package org.sonar.python.types.v2;
 
 import java.util.List;
+import java.util.Objects;
 import javax.annotation.Nullable;
 
 /**
@@ -35,4 +36,25 @@ public record FunctionType(
   boolean isInstanceMethod,
   boolean hasVariadicParameter,
   @Nullable PythonType owner
-) implements PythonType { }
+) implements PythonType {
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    FunctionType that = (FunctionType) o;
+    return hasDecorators == that.hasDecorators
+      && isAsynchronous == that.isAsynchronous
+      && isInstanceMethod == that.isInstanceMethod
+      && hasVariadicParameter == that.hasVariadicParameter
+      && Objects.equals(name, that.name)
+      && Objects.equals(returnType, that.returnType)
+      && Objects.equals(attributes, that.attributes)
+      && Objects.equals(parameters, that.parameters);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(name, attributes, parameters, returnType, isAsynchronous, hasDecorators, isInstanceMethod, hasVariadicParameter);
+  }
+}
