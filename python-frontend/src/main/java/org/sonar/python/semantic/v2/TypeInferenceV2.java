@@ -69,8 +69,6 @@ public class TypeInferenceV2 extends BaseTreeVisitor {
     this.projectLevelTypeTable = projectLevelTypeTable;
   }
 
-  private static final String BUILTINS = "builtins";
-
   @Override
   public void visitFileInput(FileInput fileInput) {
     var type = new ModuleType("somehow get its name");
@@ -79,7 +77,7 @@ public class TypeInferenceV2 extends BaseTreeVisitor {
 
   @Override
   public void visitStringLiteral(StringLiteral stringLiteral) {
-    ModuleType builtins = this.projectLevelTypeTable.getModule(BUILTINS);
+    ModuleType builtins = this.projectLevelTypeTable.getModule();
     // TODO: multiple object types to represent str instance?
     PythonType strType = builtins.resolveMember("str").orElse(PythonType.UNKNOWN);
     ((StringLiteralImpl) stringLiteral).typeV2(new ObjectType(strType, List.of(), List.of()));
@@ -87,7 +85,7 @@ public class TypeInferenceV2 extends BaseTreeVisitor {
 
   @Override
   public void visitNumericLiteral(NumericLiteral numericLiteral) {
-    ModuleType builtins = this.projectLevelTypeTable.getModule(BUILTINS);
+    ModuleType builtins = this.projectLevelTypeTable.getModule();
     InferredType type = numericLiteral.type();
     String memberName = ((RuntimeType) type).getTypeClass().fullyQualifiedName();
     if (memberName != null) {
@@ -98,7 +96,7 @@ public class TypeInferenceV2 extends BaseTreeVisitor {
 
   @Override
   public void visitNone(NoneExpression noneExpression) {
-    ModuleType builtins = this.projectLevelTypeTable.getModule(BUILTINS);
+    ModuleType builtins = this.projectLevelTypeTable.getModule();
     // TODO: multiple object types to represent str instance?
     PythonType noneType = builtins.resolveMember("NoneType").orElse(PythonType.UNKNOWN);
     ((NoneExpressionImpl) noneExpression).typeV2(new ObjectType(noneType, List.of(), List.of()));
@@ -106,7 +104,7 @@ public class TypeInferenceV2 extends BaseTreeVisitor {
 
   @Override
   public void visitListLiteral(ListLiteral listLiteral) {
-    ModuleType builtins = this.projectLevelTypeTable.getModule(BUILTINS);
+    ModuleType builtins = this.projectLevelTypeTable.getModule();
     scan(listLiteral.elements());
     List<PythonType> pythonTypes = listLiteral.elements().expressions().stream().map(Expression::typeV2).distinct().toList();
     // TODO: cleanly reduce attributes
@@ -281,6 +279,8 @@ public class TypeInferenceV2 extends BaseTreeVisitor {
   public void visitName(Name name) {
     SymbolV2 symbolV2 = name.symbolV2();
     if (symbolV2 == null) {
+      var builtinType = projectLevelTypeTable.getModule().resolveMember(name.name());
+      builtinType.ifPresent(t -> setTypeToName(name, t));
       return;
     }
     List<PythonType> types = new ArrayList<>();

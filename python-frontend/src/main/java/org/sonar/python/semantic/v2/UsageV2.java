@@ -28,7 +28,7 @@ public record UsageV2(Tree tree, Kind kind) {
     return kind() != UsageV2.Kind.OTHER && kind() != UsageV2.Kind.GLOBAL_DECLARATION;
   }
 
-  enum Kind {
+  public enum Kind {
     ASSIGNMENT_LHS,
     COMPOUND_ASSIGNMENT_LHS,
     IMPORT,

@@ -148,8 +148,16 @@ public class FunctionTypeBuilder implements TypeBuilder<FunctionType> {
     Token starToken = parameter.starToken();
     if (parameterName != null) {
       ParameterType parameterType = getParameterType(parameter);
-      this.parameters.add(new ParameterV2(parameterName.name(), parameterType.pythonType(), parameter.defaultValue() != null,
-        parameterState.keywordOnly, parameterState.positionalOnly, parameterType.isKeywordVariadic(), parameterType.isPositionalVariadic(), locationInFile(parameter, fileId)));
+      var parameterV2 = new ParameterV2(parameterName.name(),
+        parameterType.pythonType(),
+        parameter.defaultValue() != null,
+        parameterState.keywordOnly,
+        parameterState.positionalOnly,
+        parameterType.isKeywordVariadic(),
+        parameterType.isPositionalVariadic(),
+        locationInFile(parameter, fileId));
+
+      this.parameters.add(parameterV2);
       if (starToken != null) {
         hasVariadicParameter = true;
         parameterState.keywordOnly = true;

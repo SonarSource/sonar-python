@@ -157,8 +157,7 @@ public class ClassTypeTest {
     );
     ClassType classB = classTypes.get(1);
     assertThat(classB.superClasses()).hasSize(2);
-    // FIXME: ensure builtin parent is resolved
-    assertThat(classB.hasUnresolvedHierarchy()).isTrue();
+    assertThat(classB.hasUnresolvedHierarchy()).isFalse();
   }
 
   @Test

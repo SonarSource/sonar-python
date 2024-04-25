@@ -20,6 +20,8 @@
 package org.sonar.python.semantic.v2;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.EnumSet;
 import java.util.List;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.tree.Name;
@@ -37,13 +39,14 @@ public record SymbolV2(String name, @Nullable String fullyQualifiedName, List<Us
     if (name instanceof NameImpl ni) {
       ni.symbolV2(this);
     }
-/*    if (tree.is(Tree.Kind.NAME)) {
-      ((NameImpl) tree).setSymbol(this);
-      ((NameImpl) tree).setUsage(usage);
-    }*/
   }
 
   boolean hasSingleBindingUsage() {
     return usages.stream().filter(UsageV2::isBindingUsage).toList().size() == 1;
+  }
+
+  boolean hasUsageOfKind(UsageV2.Kind... kinds) {
+    var kindsSet = EnumSet.copyOf(Arrays.asList(kinds));
+    return usages.stream().map(UsageV2::kind).anyMatch(kindsSet::contains);
   }
 }

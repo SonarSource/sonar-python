@@ -171,4 +171,9 @@ public record ClassType(
   public int hashCode() {
     return Objects.hash(name, members, attributes, superClasses);
   }
+
+  public boolean isOrExtends(String s) {
+//    TODO: implement and maybe it should accept PythonType instead of string
+    return false;
+  }
 }

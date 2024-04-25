@@ -33,7 +33,7 @@ class ArgumentNumberCheckTest {
   @Test
   void test_multiple_files() {
     PythonCheckVerifier.verify(
-      Arrays.asList("src/test/resources/checks/argumentNumberWithImport.py", "src/test/resources/checks/argumentNumberImported.py"),
+      Arrays.asList("src/test/resources/checks/argumentNumberImported.py", "src/test/resources/checks/argumentNumberWithImport.py"),
       new ArgumentNumberCheck());
   }
 }
