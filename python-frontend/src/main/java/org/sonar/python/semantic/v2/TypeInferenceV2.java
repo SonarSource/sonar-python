@@ -20,6 +20,7 @@
 package org.sonar.python.semantic.v2;
 
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Deque;
 import java.util.List;
@@ -278,20 +279,26 @@ public class TypeInferenceV2 extends BaseTreeVisitor {
 
   @Override
   public void visitName(Name name) {
-    var type = Optional.of(name)
-      .map(Name::symbolV2)
-      .map(SymbolV2::usages)
-      .stream()
-      .flatMap(Collection::stream)
-      .filter(UsageV2::isBindingUsage)
-      .map(UsageV2::tree)
-      .filter(Expression.class::isInstance)
-      .map(Expression.class::cast)
-      .map(Expression::typeV2)
-      .toList();
-
-    if (type.size() == 1) {
-      setTypeToName(name, type.get(0));
+    SymbolV2 symbolV2 = name.symbolV2();
+    if (symbolV2 == null) {
+      return;
+    }
+    List<PythonType> types = new ArrayList<>();
+    for (UsageV2 usage : symbolV2.usages()) {
+      if (usage.kind().equals(UsageV2.Kind.GLOBAL_DECLARATION)) {
+        // Don't infer type for global variables
+        return;
+      }
+      Optional.of(usage)
+        .filter(UsageV2::isBindingUsage)
+        .map(UsageV2::tree)
+        .filter(Expression.class::isInstance)
+        .map(Expression.class::cast)
+        .map(Expression::typeV2)
+        .ifPresent(types::add);
+    }
+    if (types.size() == 1) {
+      setTypeToName(name, types.get(0));
     }
   }
 
