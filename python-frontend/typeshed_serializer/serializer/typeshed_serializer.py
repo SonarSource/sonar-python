@@ -18,7 +18,7 @@
 # Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #
 
-from serializer.serializers import TypeshedSerializer, CustomStubsSerializer, ImporterSerializer
+from serializer.serializers import MicrosoftStubsSerializer, TypeshedSerializer, CustomStubsSerializer, ImporterSerializer
 
 
 def main():
@@ -26,6 +26,7 @@ def main():
     TypeshedSerializer(is_third_parties=True).serialize_merged_modules()
     CustomStubsSerializer().serialize()
     ImporterSerializer().serialize()
+    MicrosoftStubsSerializer().serialize()
 
 
 if __name__ == '__main__':

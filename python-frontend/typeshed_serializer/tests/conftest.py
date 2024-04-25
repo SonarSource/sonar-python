@@ -25,7 +25,7 @@ import pytest
 from mypy import build
 
 from serializer import serializers
-from serializer.serializers import CustomStubsSerializer, TypeshedSerializer, get_options
+from serializer.serializers import CustomStubsSerializer, MicrosoftStubsSerializer, TypeshedSerializer, get_options
 
 CURRENT_PATH = os.path.dirname(__file__)
 MOCK_THIRD_PARTY_STUBS_LOCATION = "resources/mock_third_parties"
@@ -47,6 +47,11 @@ def typeshed_custom_stubs():
     assert len(build_result.errors) == 0
     return build_result
 
+@pytest.fixture(scope="session")
+def microsoft_stubs():
+    build_result, _ = MicrosoftStubsSerializer().get_build_result()
+    assert len(build_result.errors) == 323
+    return build_result
 
 @pytest.fixture(scope="session")
 def fake_module_36_38():
