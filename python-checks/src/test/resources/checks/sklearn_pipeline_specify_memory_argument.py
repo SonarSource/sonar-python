@@ -63,6 +63,62 @@ def non_compliants():
                  ("clf", VotingClassifier([pipe1, pipe2]))
                ])
 
+def more_nested():
+    from sklearn.pipeline import Pipeline, make_pipeline
+    from sklearn.preprocessing import StandardScaler
+
+    p1 = make_pipeline(StandardScaler())
+    p2 = make_pipeline(StandardScaler())
+    p3 = make_pipeline(StandardScaler())
+    p4 = make_pipeline(StandardScaler())
+
+    p5, p6 = make_pipeline(p1, p2), make_pipeline(p3, p4) # Noncompliant
+                                   #^^^^^^^^^^^^^
+
+    r1 = make_pipeline(p5) # Noncompliant
+
+def more_nested2():
+    from sklearn.pipeline import Pipeline, make_pipeline
+    from sklearn.preprocessing import StandardScaler
+
+    p1 = make_pipeline(StandardScaler())
+    p2 = make_pipeline(StandardScaler())
+    p3 = make_pipeline(StandardScaler())
+    p4 = make_pipeline(StandardScaler())
+
+    p5, p6 = *(make_pipeline(p1, p2), make_pipeline(p3, p4)) # Noncompliant
+                                     #^^^^^^^^^^^^^
+
+    r1 = make_pipeline(p5) # Noncompliant
+def more_nested3():
+    from sklearn.pipeline import Pipeline, make_pipeline
+    from sklearn.preprocessing import StandardScaler
+
+    p1 = make_pipeline(StandardScaler())
+    p2 = make_pipeline(StandardScaler())
+    p3 = make_pipeline(StandardScaler())
+    p4 = make_pipeline(StandardScaler())
+
+    p5, p6 = *[make_pipeline(p1, p2), make_pipeline(p3, p4)] # Noncompliant
+                                     #^^^^^^^^^^^^^
+
+    r1 = make_pipeline(p5) # Noncompliant
+
+def more_nested4():
+    from sklearn.pipeline import Pipeline, make_pipeline
+    from sklearn.preprocessing import StandardScaler
+    class SomeClass:
+        def __init__(self):
+            self.p1 = make_pipeline(StandardScaler())
+            p2 = make_pipeline(StandardScaler())
+            self.p3 = make_pipeline(StandardScaler())
+            p4 = make_pipeline(StandardScaler())
+
+            p5, self.p6 = *[make_pipeline(self.p1, p2), make_pipeline(self.p3, p4)] # Noncompliant
+                                                       #^^^^^^^^^^^^^
+            r1 = make_pipeline(p5) # Noncompliant
+
+
 def other():
     from sklearn.pipeline import Pipeline, make_pipeline
 
