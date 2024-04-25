@@ -31,11 +31,8 @@ class ModuleTypeTest {
     var b = new ModuleType("b");
     b.members().put("a", a);
 
-    var resolved = b.resolveMember("a");
-    Assertions.assertThat(resolved).isSameAs(a);
-
-    resolved = b.resolveMember("b");
-    Assertions.assertThat(resolved).isSameAs(PythonType.UNKNOWN);
+    Assertions.assertThat(b.resolveMember("a")).containsSame(a);
+    Assertions.assertThat(b.resolveMember("b")).isNotPresent();
   }
 
   @Test
