@@ -118,7 +118,8 @@ def methods():
     class MyInterface(zope.interface.Interface):
         def foo(): pass
     x = MyInterface()
-    x.foo()
+    # FP
+    x.foo()  # Noncompliant
 
 
     # Coverage: loop in inheritance
@@ -141,7 +142,8 @@ def methods():
 
     class B2(B1):
       def foo(self):
-        super().__reduce__(1, 2) # OK, __reduce__ is not 'object.__reduce__' but B1.__reduce__
+        #  SONARPY-1799 FP, __reduce__ is not 'object.__reduce__' but B1.__reduce__
+        super().__reduce__(1, 2) # Noncompliant
 
 def builtin_method():
     myList = list(42, 43)
@@ -173,7 +175,7 @@ def no_overlap_with_S5549():
   class MyClass:
     def method1(self, a): ...
     def method2(self, a):
-      self.method1(self, a)  # Noncompliant
+      self.method1(self, a)  # FN
       self.method1(a, self=self) # S5549 scope
       self.method1(self, a=a) # S5549 scope
       "{self}".format(self=self)  # Ok
