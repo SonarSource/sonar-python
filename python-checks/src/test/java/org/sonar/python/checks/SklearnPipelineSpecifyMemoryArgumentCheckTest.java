@@ -20,6 +20,7 @@
 package org.sonar.python.checks;
 
 import org.junit.jupiter.api.Test;
+import org.sonar.python.checks.quickfix.PythonQuickFixVerifier;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 class SklearnPipelineSpecifyMemoryArgumentCheckTest {
@@ -29,4 +30,46 @@ class SklearnPipelineSpecifyMemoryArgumentCheckTest {
     PythonCheckVerifier.verify("src/test/resources/checks/sklearn_pipeline_specify_memory_argument.py", new SklearnPipelineSpecifyMemoryArgumentCheck());
   }
 
+  @Test
+  void test_quickfix_1(){
+    PythonQuickFixVerifier.verify(
+      new SklearnPipelineSpecifyMemoryArgumentCheck(),
+      """
+        from sklearn.pipeline import Pipeline
+        from sklearn.preprocessing import StandardScaler
+        from sklearn.linear_model import LogisticRegression
+        pipeline = Pipeline([
+          ('scaler', StandardScaler()),
+          ('classifier', LogisticRegression())
+        ])
+        """,
+      """
+        from sklearn.pipeline import Pipeline
+        from sklearn.preprocessing import StandardScaler
+        from sklearn.linear_model import LogisticRegression
+        pipeline = Pipeline([
+          ('scaler', StandardScaler()),
+          ('classifier', LogisticRegression())
+        ], memory=None)
+        """
+    );
+  }
+  @Test
+  void test_quickfix_2(){
+    PythonQuickFixVerifier.verify(
+      new SklearnPipelineSpecifyMemoryArgumentCheck(),
+      """
+        from sklearn.pipeline import make_pipeline
+        from sklearn.preprocessing import StandardScaler
+        from sklearn.linear_model import LogisticRegression
+        pipeline = make_pipeline(StandardScaler(), LogisticRegression())
+        """,
+      """
+        from sklearn.pipeline import make_pipeline
+        from sklearn.preprocessing import StandardScaler
+        from sklearn.linear_model import LogisticRegression
+        pipeline = make_pipeline(StandardScaler(), LogisticRegression(), memory=None)
+        """
+    );
+  }
 }

@@ -20,7 +20,7 @@ def compliants():
 def non_compliants():
     from sklearn.pipeline import Pipeline, make_pipeline
 
-    pipeline1 = Pipeline([ # Noncompliant
+    pipeline1 = Pipeline([ # Noncompliant {{Specify a memory argument for the pipeline.}}
                #^^^^^^^^
         ('scaler', StandardScaler()),
         ('classifier', LinearDiscriminantAnalysis())

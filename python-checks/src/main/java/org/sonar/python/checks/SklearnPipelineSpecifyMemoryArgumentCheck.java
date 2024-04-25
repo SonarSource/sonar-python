@@ -23,6 +23,7 @@ import java.util.Optional;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
+import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.CallExpression;
@@ -30,6 +31,7 @@ import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.quickfix.TextEditUtils;
 import org.sonar.python.semantic.SymbolUtils;
 import org.sonar.python.tree.TreeUtils;
 
@@ -37,6 +39,7 @@ import org.sonar.python.tree.TreeUtils;
 public class SklearnPipelineSpecifyMemoryArgumentCheck extends PythonSubscriptionCheck {
 
   public static final String MESSAGE = "Specify a memory argument for the pipeline.";
+  public static final String MESSAGE_QUICKFIX = "Add memory argument";
 
   @Override
   public void initialize(Context context) {
@@ -51,10 +54,15 @@ public class SklearnPipelineSpecifyMemoryArgumentCheck extends PythonSubscriptio
       if (memoryArgument != null) {
         return;
       }
+
       if (getAssignedName(callExpression).map(SklearnPipelineSpecifyMemoryArgumentCheck::isUsedInAnotherPipeline).orElse(false)) {
         return;
       }
-      subscriptionContext.addIssue(callExpression.callee(), MESSAGE);
+      var issue = subscriptionContext.addIssue(callExpression.callee(), MESSAGE);
+      var quickFix = PythonQuickFix.newQuickFix(MESSAGE_QUICKFIX)
+        .addTextEdit(TextEditUtils.insertBefore(callExpression.rightPar(), ", memory=None"))
+        .build();
+      issue.addQuickFix(quickFix);
     }
   }
 
