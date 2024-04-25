@@ -22,7 +22,7 @@ import os
 from unittest.mock import Mock, patch
 
 from serializer import symbols, serializers
-from serializer.serializers import CustomStubsSerializer, TypeshedSerializer, ImporterSerializer
+from serializer.serializers import CustomStubsSerializer, MicrosoftStubsSerializer, TypeshedSerializer, ImporterSerializer
 from tests import conftest
 from tests.conftest import MOCK_THIRD_PARTY_STUBS_LIST
 
@@ -39,6 +39,14 @@ def test_serialize_typeshed_stdlib(typeshed_stdlib):
         assert serializers.walk_typeshed_stdlib.call_count == 1
         assert symbols.save_module.call_count == len(typeshed_stdlib.files)
 
+def test_microsoft_stubs_serializer(microsoft_stubs):
+    save_module_mock = Mock()
+    with patch('serializer.serializers.symbols.save_module', save_module_mock):
+        stubs_serializer = MicrosoftStubsSerializer()
+        stubs_serializer.get_build_result = Mock(return_value=(microsoft_stubs, set()))
+        stubs_serializer.serialize()
+        assert stubs_serializer.get_build_result.call_count == 1
+        assert symbols.save_module.call_count == 308
 
 def test_custom_stubs_serializer(typeshed_custom_stubs):
     save_module_mock = Mock()
