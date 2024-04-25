@@ -80,7 +80,8 @@ public class TypeInferenceV2 extends BaseTreeVisitor {
   public void visitStringLiteral(StringLiteral stringLiteral) {
     ModuleType builtins = this.projectLevelTypeTable.getModule(BUILTINS);
     // TODO: multiple object types to represent str instance?
-    ((StringLiteralImpl) stringLiteral).typeV2(new ObjectType(builtins.resolveMember("str"), List.of(), List.of()));
+    PythonType strType = builtins.resolveMember("str").orElse(PythonType.UNKNOWN);
+    ((StringLiteralImpl) stringLiteral).typeV2(new ObjectType(strType, List.of(), List.of()));
   }
 
   @Override
@@ -89,7 +90,8 @@ public class TypeInferenceV2 extends BaseTreeVisitor {
     InferredType type = numericLiteral.type();
     String memberName = ((RuntimeType) type).getTypeClass().fullyQualifiedName();
     if (memberName != null) {
-      ((NumericLiteralImpl) numericLiteral).typeV2(new ObjectType(builtins.resolveMember(memberName), List.of(), List.of()));
+      PythonType pythonType = builtins.resolveMember(memberName).orElse(PythonType.UNKNOWN);
+      ((NumericLiteralImpl) numericLiteral).typeV2(new ObjectType(pythonType, List.of(), List.of()));
     }
   }
 
@@ -97,7 +99,8 @@ public class TypeInferenceV2 extends BaseTreeVisitor {
   public void visitNone(NoneExpression noneExpression) {
     ModuleType builtins = this.projectLevelTypeTable.getModule(BUILTINS);
     // TODO: multiple object types to represent str instance?
-    ((NoneExpressionImpl) noneExpression).typeV2(new ObjectType(builtins.resolveMember("NoneType"), List.of(), List.of()));
+    PythonType noneType = builtins.resolveMember("NoneType").orElse(PythonType.UNKNOWN);
+    ((NoneExpressionImpl) noneExpression).typeV2(new ObjectType(noneType, List.of(), List.of()));
   }
 
   @Override
@@ -106,7 +109,8 @@ public class TypeInferenceV2 extends BaseTreeVisitor {
     scan(listLiteral.elements());
     List<PythonType> pythonTypes = listLiteral.elements().expressions().stream().map(Expression::typeV2).distinct().toList();
     // TODO: cleanly reduce attributes
-    ((ListLiteralImpl) listLiteral).typeV2(new ObjectType(builtins.resolveMember("list"), pythonTypes, List.of()));
+    PythonType listType = builtins.resolveMember("list").orElse(PythonType.UNKNOWN);
+    ((ListLiteralImpl) listLiteral).typeV2(new ObjectType(listType, pythonTypes, List.of()));
   }
 
   @Override
@@ -233,7 +237,7 @@ public class TypeInferenceV2 extends BaseTreeVisitor {
           .stream()
           .findFirst()
           .ifPresent(name -> {
-            var type = module.resolveMember(name.name());
+            var type = module.resolveMember(name.name()).orElse(PythonType.UNKNOWN);
 
             var boundName = Optional.ofNullable(aliasedName.alias())
               .orElse(name);
@@ -265,7 +269,9 @@ public class TypeInferenceV2 extends BaseTreeVisitor {
   public void visitQualifiedExpression(QualifiedExpression qualifiedExpression) {
     scan(qualifiedExpression.qualifier());
     if (qualifiedExpression.name() instanceof NameImpl name) {
-      var nameType = qualifiedExpression.qualifier().typeV2().resolveMember(qualifiedExpression.name().name());
+      var nameType = qualifiedExpression.qualifier().typeV2()
+        .resolveMember(qualifiedExpression.name().name())
+        .orElse(PythonType.UNKNOWN);
       name.typeV2(nameType);
     }
   }

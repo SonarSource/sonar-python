@@ -22,6 +22,7 @@ package org.sonar.python.types.v2;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 public record ObjectType(PythonType type, List<PythonType> attributes, List<Member> members) implements PythonType {
 
@@ -40,17 +41,17 @@ public record ObjectType(PythonType type, List<PythonType> attributes, List<Memb
   }
 
   @Override
-  public PythonType resolveMember(String memberName) {
+  public Optional<PythonType> resolveMember(String memberName) {
     return members().stream()
       .filter(member -> Objects.equals(member.name(), memberName))
       .map(Member::type)
       .findFirst()
-      .orElseGet(() -> type.resolveMember(memberName));
+      .or(() -> type.resolveMember(memberName));
   }
 
   @Override
   public TriBool hasMember(String memberName) {
-    if (resolveMember(memberName) != PythonType.UNKNOWN) {
+    if (resolveMember(memberName).isPresent()) {
       return TriBool.TRUE;
     }
     if (type instanceof ClassType classType) {
