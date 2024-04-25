@@ -19,6 +19,8 @@
  */
 package org.sonar.python.types.v2;
 
+import java.util.Optional;
+
 /**
  * PythonType
  */
@@ -41,8 +43,8 @@ public interface PythonType {
     return name();
   }
 
-  default PythonType resolveMember(String memberName) {
-    return PythonType.UNKNOWN;
+  default Optional<PythonType> resolveMember(String memberName) {
+    return Optional.empty();
   }
 
   default TriBool hasMember(String memberName) {

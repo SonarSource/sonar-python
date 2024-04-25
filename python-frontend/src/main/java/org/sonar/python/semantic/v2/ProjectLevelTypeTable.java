@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.stream.IntStream;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.types.v2.ModuleType;
+import org.sonar.python.types.v2.PythonType;
 
 public class ProjectLevelTypeTable {
 
@@ -42,7 +43,7 @@ public class ProjectLevelTypeTable {
   public ModuleType getModule(List<String> moduleNameParts) {
     var parent = rootModule;
     for (int i = 0; i < moduleNameParts.size(); i++) {
-      var existing = parent.resolveMember(moduleNameParts.get(i));
+      var existing = parent.resolveMember(moduleNameParts.get(i)).orElse(PythonType.UNKNOWN);
 
       if (existing instanceof ModuleType existingModule) {
         parent = existingModule;

@@ -71,9 +71,9 @@ public record ClassType(
       var isASubClass = this.isASubClassFrom(other);
       var areAttributeCompatible = this.areAttributesCompatible(other);
       var isDuckTypeCompatible = !this.members.isEmpty() && other.members.stream().allMatch(member -> this.members.contains(member));
-      return Objects.equals(this, another) || "builtins.object".equals(other.name()) || 
+      return Objects.equals(this, another) || "builtins.object".equals(other.name()) ||
         isDuckTypeCompatible ||
-        ( isASubClass && areAttributeCompatible) ;
+        (isASubClass && areAttributeCompatible);
     }
     return true;
   }
@@ -96,20 +96,33 @@ public record ClassType(
   }
 
   @Override
-  public PythonType resolveMember(String memberName) {
+  public Optional<PythonType> resolveMember(String memberName) {
+    return localMember(memberName)
+      .or(() -> inheritedMember(memberName));
+  }
+
+  private Optional<PythonType> localMember(String memberName) {
     return members.stream()
       .filter(m -> m.name().equals(memberName))
       .map(Member::type)
-      .findFirst().orElse(PythonType.UNKNOWN);
+      .findFirst();
+  }
+
+  private Optional<PythonType> inheritedMember(String memberName) {
+    return superClasses.stream()
+      .map(s -> s.resolveMember(memberName))
+      .filter(Optional::isPresent)
+      .map(Optional::get)
+      .findFirst();
   }
 
   public boolean hasUnresolvedHierarchy() {
     return superClasses.stream().anyMatch(s -> {
-      if (s instanceof ClassType parentClassType) {
-        return parentClassType.hasUnresolvedHierarchy();
+        if (s instanceof ClassType parentClassType) {
+          return parentClassType.hasUnresolvedHierarchy();
+        }
+        return true;
       }
-      return true;
-    }
     );
   }
 
@@ -138,8 +151,7 @@ public record ClassType(
       // TODO: instances of NamedTuple are type
       return TriBool.TRUE;
     }
-    // TODO: look at parents
-    return resolveMember(memberName) != PythonType.UNKNOWN ? TriBool.TRUE : TriBool.FALSE;
+    return resolveMember(memberName).isPresent() ? TriBool.TRUE : TriBool.FALSE;
   }
 
   @Override

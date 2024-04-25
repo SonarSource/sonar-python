@@ -22,6 +22,7 @@ package org.sonar.python.types.v2;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import javax.annotation.Nullable;
 
 public record ModuleType(@Nullable String name, @Nullable ModuleType parent, Map<String, PythonType> members) implements PythonType {
@@ -33,9 +34,9 @@ public record ModuleType(@Nullable String name, @Nullable ModuleType parent, Map
     this(name, parent, new HashMap<>());
   }
 
-  public PythonType resolveMember(String memberName) {
-    // FIXME: handle case where type is missing
-    return members.getOrDefault(memberName, PythonType.UNKNOWN);
+  @Override
+  public Optional<PythonType> resolveMember(String memberName) {
+    return Optional.ofNullable(members.get(memberName));
   }
 
   @Override
