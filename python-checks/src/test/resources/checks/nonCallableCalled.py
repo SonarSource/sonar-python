@@ -203,5 +203,11 @@ def assigning_global(my_func):
     some_global_func = my_func
 
 def calling_global_func():
-    # FP
-    some_global_func() # Noncompliant
+    some_global_func() # OK
+
+
+some_nonlocal_var = 42
+
+def using_nonlocal_var():
+    nonlocal some_nonlocal_var
+    some_nonlocal_var()  # Noncompliant
