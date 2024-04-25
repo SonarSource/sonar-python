@@ -30,6 +30,7 @@ import org.sonar.plugins.python.api.tree.ArgList;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.ClassDef;
+import org.sonar.plugins.python.api.tree.DictionaryLiteral;
 import org.sonar.plugins.python.api.tree.DottedName;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.ExpressionList;
@@ -43,14 +44,19 @@ import org.sonar.plugins.python.api.tree.NoneExpression;
 import org.sonar.plugins.python.api.tree.NumericLiteral;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
+import org.sonar.plugins.python.api.tree.SetLiteral;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.Tuple;
 import org.sonar.plugins.python.api.types.InferredType;
+import org.sonar.python.tree.DictionaryLiteralImpl;
 import org.sonar.python.tree.ListLiteralImpl;
 import org.sonar.python.tree.NameImpl;
 import org.sonar.python.tree.NoneExpressionImpl;
 import org.sonar.python.tree.NumericLiteralImpl;
+import org.sonar.python.tree.SetLiteralImpl;
 import org.sonar.python.tree.StringLiteralImpl;
+import org.sonar.python.tree.TupleImpl;
 import org.sonar.python.types.RuntimeType;
 import org.sonar.python.types.v2.ClassType;
 import org.sonar.python.types.v2.FunctionType;
@@ -83,6 +89,35 @@ public class TypeInferenceV2 extends BaseTreeVisitor {
     // TODO: multiple object types to represent str instance?
     PythonType strType = builtins.resolveMember("str").orElse(PythonType.UNKNOWN);
     ((StringLiteralImpl) stringLiteral).typeV2(new ObjectType(strType, List.of(), List.of()));
+  }
+
+  @Override
+  public void visitTuple(Tuple tuple) {
+    super.visitTuple(tuple);
+    List<PythonType> contentTypes = tuple.elements().stream().map(Expression::typeV2).distinct().toList();
+    List<PythonType> attributes = List.of();
+    if (contentTypes.size() == 1 && !contentTypes.get(0).equals(PythonType.UNKNOWN)) {
+      attributes = contentTypes;
+    }
+    ModuleType builtins = this.projectLevelTypeTable.getModule(BUILTINS);
+    PythonType tupleType = builtins.resolveMember("tuple").orElse(PythonType.UNKNOWN);
+    ((TupleImpl) tuple).typeV2(new ObjectType(tupleType,  attributes, List.of()));
+  }
+
+  @Override
+  public void visitDictionaryLiteral(DictionaryLiteral dictionaryLiteral) {
+    super.visitDictionaryLiteral(dictionaryLiteral);
+    ModuleType builtins = this.projectLevelTypeTable.getModule(BUILTINS);
+    PythonType dictType = builtins.resolveMember("dict").orElse(PythonType.UNKNOWN);
+    ((DictionaryLiteralImpl) dictionaryLiteral).typeV2(new ObjectType(dictType,  List.of(), List.of()));
+  }
+
+  @Override
+  public void visitSetLiteral(SetLiteral setLiteral) {
+    super.visitSetLiteral(setLiteral);
+    ModuleType builtins = this.projectLevelTypeTable.getModule(BUILTINS);
+    PythonType setType = builtins.resolveMember("set").orElse(PythonType.UNKNOWN);
+    ((SetLiteralImpl) setLiteral).typeV2(new ObjectType(setType,  List.of(), List.of()));
   }
 
   @Override
