@@ -181,3 +181,27 @@ def typing_named_tuple_no_fp():
     from typing import NamedTuple
     Employee = NamedTuple('Employee', [('name', str), ('id', int)])
     employee = Employee("Sam", 42)
+
+
+class Parent:
+    def __call__(self):
+        ...
+
+class Child(Parent):
+    ...
+
+
+def inherited_call_method():
+    child = Child()
+    child()  # OK
+
+
+some_global_func = None
+
+def assigning_global(my_func):
+    global some_global_func
+    some_global_func = my_func
+
+def calling_global_func():
+    # FP
+    some_global_func() # Noncompliant
