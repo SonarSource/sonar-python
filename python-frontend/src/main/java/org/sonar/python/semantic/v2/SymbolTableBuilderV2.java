@@ -347,8 +347,8 @@ public class SymbolTableBuilderV2 extends BaseTreeVisitor {
 
     @Override
     public void visitGlobalStatement(GlobalStatement globalStatement) {
-      // FIXME: handle global statements
-
+      // Global statements are not binding usages, but we consider them as such for symbol creation
+      globalStatement.variables().forEach(name -> moduleScope.addBindingUsage(name, UsageV2.Kind.GLOBAL_DECLARATION, null));
       super.visitGlobalStatement(globalStatement);
     }
 
