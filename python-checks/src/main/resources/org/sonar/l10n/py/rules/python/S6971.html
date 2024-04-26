@@ -1,0 +1,54 @@
+<p>This rule raises an issue when trying to access a Scikit-Learn transformer used in a pipeline with caching directly.</p>
+<h2>Why is this an issue?</h2>
+<p>When using a pipeline with a cache and passing the transformer objects as an instance from a variable, it is possible to access them directly.</p>
+<p>This is an issue, since when the Pipeline is fitted, all the transformers are cloned. The objects outside the Pipeline are therefore not updated,
+and will yield unexpected results.</p>
+<h2>How to fix it</h2>
+<p>Replace the direct access to the transformer with an access to the <code>named_steps</code> attribute of the pipeline.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+from sklearn.datasets import load_diabetes
+from sklearn.preprocessing import RobustScaler
+from sklearn.neighbors import KNeighborsRegressor
+from sklearn.pipeline import Pipeline
+
+diabetes = load_diabetes()
+scaler = RobustScaler()
+knn = KNeighborsRegressor(n_neighbors=5)
+
+pipeline = Pipeline([
+    ('scaler', scaler),
+    ('knn', knn)
+], memory="cache")
+
+pipeline.fit(diabetes.data, diabetes.target)
+print(scaler.center_) # Noncompliant : raises an AttributeError
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+from sklearn.datasets import load_diabetes
+from sklearn.preprocessing import RobustScaler
+from sklearn.neighbors import KNeighborsRegressor
+from sklearn.pipeline import Pipeline
+
+diabetes = load_diabetes()
+scaler = RobustScaler()
+knn = KNeighborsRegressor(n_neighbors=5)
+
+pipeline = Pipeline([
+    ('scaler', scaler),
+    ('knn', knn)
+], memory="cache")
+
+pipeline.fit(diabetes.data, diabetes.target)
+print(pipeline.named_steps['scaler'].center_) # Compliant
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Scikit-Learn - Pipelines and composite estimators : <a
+  href="https://scikit-learn.org/stable/modules/compose.html#warning:-side-effect-of-caching-transformers">Side effect of caching transformers</a>
+  </li>
+</ul>
+
