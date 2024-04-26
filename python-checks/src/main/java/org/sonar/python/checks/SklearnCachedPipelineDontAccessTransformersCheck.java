@@ -19,23 +19,32 @@
  */
 package org.sonar.python.checks;
 
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
-import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
+import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
 import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.ListLiteral;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
+import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.Tuple;
+import org.sonar.plugins.python.api.tree.UnpackingExpression;
+import org.sonar.python.quickfix.TextEditUtils;
+import org.sonar.python.semantic.SymbolUtils;
 import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.tree.TupleImpl;
 
@@ -64,6 +73,7 @@ public class SklearnCachedPipelineDontAccessTransformersCheck extends PythonSubs
     var stepsArgument = TreeUtils.nthArgumentOrKeyword(0, "steps", callExpression.arguments());
 
     Stream<Name> nameStream;
+    Map<Name, String> nameToStepName = new HashMap<>();
     Optional<Expression> stepArgumentExpression = Optional.ofNullable(stepsArgument)
       .map(RegularArgument::expression);
 
@@ -78,8 +88,14 @@ public class SklearnCachedPipelineDontAccessTransformersCheck extends PythonSubs
       nameStream = tuples
         .map(t -> ((TupleImpl) t).elements())
         .filter(e -> e.size() == 2)
+        .filter(e -> e.get(1).is(Tree.Kind.NAME))
+        .map(e2 -> {
+          if (e2.get(0).is(Tree.Kind.STRING_LITERAL)) {
+            nameToStepName.put((Name) e2.get(1), ((StringLiteral) e2.get(0)).trimmedQuotesValue());
+          }
+          return e2;
+        })
         .map(e -> e.get(1))
-        .filter(e -> e.is(Tree.Kind.NAME))
         .map(Name.class::cast);
     } else {
       nameStream = stepArgumentExpression
@@ -93,24 +109,37 @@ public class SklearnCachedPipelineDontAccessTransformersCheck extends PythonSubs
     qualifiedUses.forEach((name, uses) -> {
       if (!uses.isEmpty()) {
         var issue = subscriptionContext.addIssue(name, MESSAGE);
-        uses.forEach(use -> issue.secondary(use, MESSAGE_SECONDARY));
+        uses.forEach((useTree, qualExpr) -> issue.secondary(useTree, MESSAGE_SECONDARY));
         if (pipelineCreation == PipelineCreation.PIPELINE) {
           issue.secondary(callExpression.callee(), MESSAGE_SECONDARY_CREATION);
+          uses
+            .forEach((useTree, qualExpr) -> getAssignedName(callExpression).flatMap(pipelineBindingVariable -> getQuickFix(pipelineBindingVariable, name, qualExpr, nameToStepName))
+              .ifPresent(issue::addQuickFix));
         }
       }
     });
-
   }
 
-  private static Set<Tree> symbolIsUsedInQualifiedExpression(Name name) {
+  private static Optional<PythonQuickFix> getQuickFix(Name pipelineBindingVariable, Tree name, QualifiedExpression qualifiedExpression, Map<Name, String> nameToStepName) {
+    var quickFix = PythonQuickFix.newQuickFix("Access the property through the ");
+    String stepName = nameToStepName.get(name);
+    if (stepName == null) {
+      return Optional.empty();
+    }
+    quickFix.addTextEdit(TextEditUtils.replace(qualifiedExpression.qualifier(), String.format("%s.named_steps[\"%s\"]", pipelineBindingVariable.name(), stepName)));
+    return Optional.of(quickFix.build());
+  }
+
+  private static Map<Tree, QualifiedExpression> symbolIsUsedInQualifiedExpression(Name name) {
     Symbol symbol = name.symbol();
     if (symbol == null) {
-      return new HashSet<>();
+      return new HashMap<>();
     }
-    Set<Tree> qualifiedExpressions = new HashSet<>();
+    Map<Tree, QualifiedExpression> qualifiedExpressions = new HashMap<>();
     symbol.usages().stream()
       .filter(u -> u.tree().parent().is(Tree.Kind.QUALIFIED_EXPR))
-      .forEach(u -> qualifiedExpressions.add(((QualifiedExpression) u.tree().parent()).qualifier()));
+      .forEach(u -> qualifiedExpressions.put(((QualifiedExpression) u.tree().parent()).qualifier(), ((QualifiedExpression) u.tree().parent())));
+
     return qualifiedExpressions;
   }
 
@@ -131,5 +160,39 @@ public class SklearnCachedPipelineDontAccessTransformersCheck extends PythonSubs
         }
         return PipelineCreation.NOT_PIPELINE;
       }).orElse(PipelineCreation.NOT_PIPELINE);
+  }
+
+  private static Optional<Name> getAssignedName(Expression expression) {
+    if (expression.is(Tree.Kind.NAME)) {
+      return Optional.of((Name) expression);
+    }
+    if (expression.is(Tree.Kind.QUALIFIED_EXPR)) {
+      return getAssignedName(((QualifiedExpression) expression).name());
+    }
+    var assignment = (AssignmentStatement) TreeUtils.firstAncestorOfKind(expression, Tree.Kind.ASSIGNMENT_STMT);
+    if (assignment == null) {
+      return Optional.empty();
+    }
+    var expressions = SymbolUtils.assignmentsLhs(assignment);
+    if (expressions.size() != 1) {
+      List<Expression> rhsExpressions = getExpressionsFromRhs(assignment.assignedValue());
+      var rhsIndex = rhsExpressions.indexOf(expression);
+      if (rhsIndex != -1) {
+        return getAssignedName(expressions.get(rhsIndex));
+      }
+    }
+    return getAssignedName(expressions.get(0));
+  }
+
+  private static List<Expression> getExpressionsFromRhs(Expression rhs) {
+    List<Expression> expressions = new ArrayList<>();
+    if (rhs.is(Tree.Kind.TUPLE)) {
+      expressions.addAll(((Tuple) rhs).elements());
+    } else if (rhs.is(Tree.Kind.LIST_LITERAL)) {
+      expressions.addAll(((ListLiteral) rhs).elements().expressions());
+    } else if (rhs.is(Tree.Kind.UNPACKING_EXPR)) {
+      return getExpressionsFromRhs(((UnpackingExpression) rhs).expression());
+    }
+    return expressions;
   }
 }

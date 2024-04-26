@@ -54,3 +54,47 @@ def case3():
 
     print(scaler.center_)
          #^^^^^^< {{Accessed here}}
+
+def case4():
+    from sklearn.pipeline import Pipeline
+    from sklearn.preprocessing import StandardScaler
+    from sklearn.decomposition import PCA
+
+    scaler = StandardScaler()
+    pca = PCA(n_components=2)
+    a, b, p1 = True, None, Pipeline([('scaler', scaler), ('pca', pca)], memory="cache") # Noncompliant
+    pca.fff_ = 12
+
+def case5():
+    from sklearn.pipeline import Pipeline
+    from sklearn.preprocessing import StandardScaler
+    from sklearn.decomposition import PCA
+
+    scaler = StandardScaler()
+    pca = PCA(n_components=2)
+    Pipeline([('scaler', scaler), ('pca', pca)], memory="cache") # Noncompliant
+    pca.fff_ = 12
+
+    scaler2 = StandardScaler()
+    pca2 = PCA()
+    _, (a, b) = *[True, None, Pipeline([('scaler', scaler), ('pca', pca)], memory="cache")] # Noncompliant
+    pca2.fff_ = 12
+
+    scaler3 = StandardScaler()
+    pca3 = PCA()
+    pipel = Pipeline([(clever_generator())])
+
+def case5():
+    from sklearn.pipeline import Pipeline
+    from sklearn.preprocessing import StandardScaler
+    from sklearn.decomposition import PCA
+
+    class SomeKindOfRecord():
+        ...
+
+    obj = SomeKindOfRecord()
+    scaler = StandardScaler()
+    pca = PCA(n_components=2)
+    obj.pipeline =  Pipeline([('scaler', scaler), ('pca', pca)], memory="cache") # Noncompliant
+
+    scaler.szsdgf_ = 12
