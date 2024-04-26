@@ -45,6 +45,7 @@ import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.types.v2.ClassType;
 import org.sonar.python.types.v2.FunctionType;
 import org.sonar.python.types.v2.ModuleType;
+import org.sonar.python.types.v2.ObjectType;
 import org.sonar.python.types.v2.PythonType;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -262,6 +263,35 @@ class TypeInferenceV2Test {
     var functionDef = (FunctionDef) root.statements().statements().get(0);
     var expressionStatement = (ExpressionStatement) functionDef.body().statements().get(3);
     Assertions.assertThat(expressionStatement.expressions().get(0).typeV2()).isEqualTo(PythonType.UNKNOWN);
+  }
+
+  @Test
+  void inferForSubscriptionExpressionFromClassType() {
+    FileInput root = inferTypes("""
+      def foo():
+        a = list[int](1, 2, 3)
+      """);
+
+    var functionDef = (FunctionDef) root.statements().statements().get(0);
+    var assignmentStatement = (AssignmentStatement) functionDef.body().statements().get(0);
+    var type = (ObjectType) assignmentStatement.assignedValue().typeV2();
+    assertThat(type.type()).isInstanceOf(ClassType.class)
+      .extracting(PythonType::name)
+      .isEqualTo("list");
+  }
+
+  @Test
+  void inferTypeForSubscriptionExpressionFromObjectType() {
+    FileInput root = inferTypes("""
+      def foo():
+        my_list = ["hello"]
+        a = my_list[0]
+      """);
+
+    var functionDef = (FunctionDef) root.statements().statements().get(0);
+    var assignmentStatement = (AssignmentStatement) functionDef.body().statements().get(1);
+    var type = assignmentStatement.assignedValue().typeV2();
+    assertThat(type).isEqualTo(PythonType.UNKNOWN);
   }
 
   private FileInput inferTypes(String lines) {
