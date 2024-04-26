@@ -22,16 +22,24 @@ package org.sonar.python.types.v2;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.tree.ClassDef;
+import org.sonar.plugins.python.api.tree.DictionaryLiteral;
 import org.sonar.plugins.python.api.tree.ExpressionStatement;
 import org.sonar.plugins.python.api.tree.FileInput;
+import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.tree.NoneExpression;
+import org.sonar.plugins.python.api.tree.NumericLiteral;
+import org.sonar.plugins.python.api.tree.SetLiteral;
+import org.sonar.plugins.python.api.tree.StringLiteral;
+import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.Tuple;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.semantic.v2.ProjectLevelTypeTable;
 import org.sonar.python.semantic.v2.SymbolTableBuilderV2;
 import org.sonar.python.semantic.v2.TypeInferenceV2;
-
-import static org.sonar.python.PythonTestUtils.parseWithoutSymbols;
+import org.sonar.python.tree.TreeUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.sonar.python.PythonTestUtils.parseWithoutSymbols;
 
 
 public class ObjectTypeTest {
@@ -85,6 +93,75 @@ public class ObjectTypeTest {
     assertThat(aType).isEqualTo(PythonType.UNKNOWN);
     assertThat(aType.isCompatibleWith(classType)).isTrue();
     assertThat(aType.hasMember("foo")).isEqualTo(TriBool.UNKNOWN);
+  }
+
+  @Test
+  void literalTypes() {
+    FileInput fileInput = parseAndInferTypes("\"hello\"");
+    StringLiteral stringLiteral = (StringLiteral) TreeUtils.firstChild(fileInput, t -> t.is(Tree.Kind.STRING_LITERAL)).get();
+    ObjectType stringLiteralType = (ObjectType) stringLiteral.typeV2();
+    assertThat(stringLiteralType.displayName()).isEqualTo("str");
+
+    fileInput = parseAndInferTypes("(1, 2, 3)");
+    Tuple intTuple = (Tuple) TreeUtils.firstChild(fileInput, t -> t.is(Tree.Kind.TUPLE)).get();
+    ObjectType intTupleType = (ObjectType) intTuple.typeV2();
+    assertThat(intTupleType.displayName()).isEqualTo("tuple");
+    assertThat(intTupleType.attributes()).extracting(PythonType::displayName).containsExactly("int");
+
+    fileInput = parseAndInferTypes("(1, \"hello\")");
+    Tuple intStrTuple = (Tuple) TreeUtils.firstChild(fileInput, t -> t.is(Tree.Kind.TUPLE)).get();
+    ObjectType intStrTupleType = (ObjectType) intStrTuple.typeV2();
+    assertThat(intStrTupleType.displayName()).isEqualTo("tuple");
+    assertThat(intStrTupleType.attributes()).isEmpty();
+
+    fileInput = parseAndInferTypes("(foo(),)");
+    Tuple unknownTuple = (Tuple) TreeUtils.firstChild(fileInput, t -> t.is(Tree.Kind.TUPLE)).get();
+    ObjectType unknownTupleType = (ObjectType) unknownTuple.typeV2();
+    assertThat(unknownTupleType.displayName()).isEqualTo("tuple");
+    assertThat(unknownTupleType.attributes()).isEmpty();
+
+    fileInput = parseAndInferTypes("{1, 2, 3}");
+    SetLiteral setLiteral = (SetLiteral) TreeUtils.firstChild(fileInput, t -> t.is(Tree.Kind.SET_LITERAL)).get();
+    ObjectType setLiteralType = (ObjectType) setLiteral.typeV2();
+    assertThat(setLiteralType.displayName()).isEqualTo("set");
+
+    fileInput = parseAndInferTypes("{\"my_key\": 42}");
+    DictionaryLiteral dictionaryLiteral = (DictionaryLiteral) TreeUtils.firstChild(fileInput, t -> t.is(Tree.Kind.DICTIONARY_LITERAL)).get();
+    ObjectType dictionaryLiteralType = (ObjectType) dictionaryLiteral.typeV2();
+    assertThat(dictionaryLiteralType.displayName()).isEqualTo("dict");
+
+    fileInput = parseAndInferTypes("None");
+    NoneExpression noneExpression = (NoneExpression) TreeUtils.firstChild(fileInput, t -> t.is(Tree.Kind.NONE)).get();
+    ObjectType noneExpressionType = (ObjectType) noneExpression.typeV2();
+    assertThat(noneExpressionType.displayName()).isEqualTo("NoneType");
+
+    fileInput = parseAndInferTypes("unknown");
+    Name name = (Name) TreeUtils.firstChild(fileInput, t -> t.is(Tree.Kind.NAME)).get();
+    UnknownType nameType = (UnknownType) name.typeV2();
+    assertThat(nameType.displayName()).isEqualTo("UnknownType");
+  }
+
+  @Test
+  void numericLiteralTypes() {
+    FileInput fileInput = parseAndInferTypes("42");
+    NumericLiteral intLiteral = (NumericLiteral) TreeUtils.firstChild(fileInput, t -> t.is(Tree.Kind.NUMERIC_LITERAL)).get();
+    ObjectType intLiteralType = (ObjectType) intLiteral.typeV2();
+    assertThat(intLiteralType.displayName()).isEqualTo("int");
+
+    fileInput = parseAndInferTypes("42.5");
+    NumericLiteral floatLiteral = (NumericLiteral) TreeUtils.firstChild(fileInput, t -> t.is(Tree.Kind.NUMERIC_LITERAL)).get();
+    ObjectType floatLiteralType = (ObjectType) floatLiteral.typeV2();
+    assertThat(floatLiteralType.displayName()).isEqualTo("float");
+
+    fileInput = parseAndInferTypes("4e2");
+    NumericLiteral exponentLiteral = (NumericLiteral) TreeUtils.firstChild(fileInput, t -> t.is(Tree.Kind.NUMERIC_LITERAL)).get();
+    ObjectType exponentLiteralType = (ObjectType) exponentLiteral.typeV2();
+    assertThat(exponentLiteralType.displayName()).isEqualTo("float");
+
+    fileInput = parseAndInferTypes("42j");
+    NumericLiteral complexLiteral = (NumericLiteral) TreeUtils.firstChild(fileInput, t -> t.is(Tree.Kind.NUMERIC_LITERAL)).get();
+    ObjectType complexLiteralType = (ObjectType) complexLiteral.typeV2();
+    assertThat(complexLiteralType.displayName()).isEqualTo("complex");
   }
 
   @Test

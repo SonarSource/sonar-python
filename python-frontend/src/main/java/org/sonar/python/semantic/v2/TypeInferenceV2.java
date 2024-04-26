@@ -30,6 +30,7 @@ import org.sonar.plugins.python.api.tree.ArgList;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.ClassDef;
+import org.sonar.plugins.python.api.tree.DictionaryLiteral;
 import org.sonar.plugins.python.api.tree.DottedName;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.ExpressionList;
@@ -43,14 +44,19 @@ import org.sonar.plugins.python.api.tree.NoneExpression;
 import org.sonar.plugins.python.api.tree.NumericLiteral;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
+import org.sonar.plugins.python.api.tree.SetLiteral;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.Tuple;
 import org.sonar.plugins.python.api.types.InferredType;
+import org.sonar.python.tree.DictionaryLiteralImpl;
 import org.sonar.python.tree.ListLiteralImpl;
 import org.sonar.python.tree.NameImpl;
 import org.sonar.python.tree.NoneExpressionImpl;
 import org.sonar.python.tree.NumericLiteralImpl;
+import org.sonar.python.tree.SetLiteralImpl;
 import org.sonar.python.tree.StringLiteralImpl;
+import org.sonar.python.tree.TupleImpl;
 import org.sonar.python.types.RuntimeType;
 import org.sonar.python.types.v2.ClassType;
 import org.sonar.python.types.v2.FunctionType;
@@ -82,7 +88,36 @@ public class TypeInferenceV2 extends BaseTreeVisitor {
     ModuleType builtins = this.projectLevelTypeTable.getModule(BUILTINS);
     // TODO: multiple object types to represent str instance?
     PythonType strType = builtins.resolveMember("str").orElse(PythonType.UNKNOWN);
-    ((StringLiteralImpl) stringLiteral).typeV2(new ObjectType(strType, List.of(), List.of()));
+    ((StringLiteralImpl) stringLiteral).typeV2(new ObjectType(strType, new ArrayList<>(), new ArrayList<>()));
+  }
+
+  @Override
+  public void visitTuple(Tuple tuple) {
+    super.visitTuple(tuple);
+    List<PythonType> contentTypes = tuple.elements().stream().map(Expression::typeV2).distinct().toList();
+    List<PythonType> attributes = new ArrayList<>();
+    if (contentTypes.size() == 1 && !contentTypes.get(0).equals(PythonType.UNKNOWN)) {
+      attributes = contentTypes;
+    }
+    ModuleType builtins = this.projectLevelTypeTable.getModule(BUILTINS);
+    PythonType tupleType = builtins.resolveMember("tuple").orElse(PythonType.UNKNOWN);
+    ((TupleImpl) tuple).typeV2(new ObjectType(tupleType,  attributes, new ArrayList<>()));
+  }
+
+  @Override
+  public void visitDictionaryLiteral(DictionaryLiteral dictionaryLiteral) {
+    super.visitDictionaryLiteral(dictionaryLiteral);
+    ModuleType builtins = this.projectLevelTypeTable.getModule(BUILTINS);
+    PythonType dictType = builtins.resolveMember("dict").orElse(PythonType.UNKNOWN);
+    ((DictionaryLiteralImpl) dictionaryLiteral).typeV2(new ObjectType(dictType,  new ArrayList<>(), new ArrayList<>()));
+  }
+
+  @Override
+  public void visitSetLiteral(SetLiteral setLiteral) {
+    super.visitSetLiteral(setLiteral);
+    ModuleType builtins = this.projectLevelTypeTable.getModule(BUILTINS);
+    PythonType setType = builtins.resolveMember("set").orElse(PythonType.UNKNOWN);
+    ((SetLiteralImpl) setLiteral).typeV2(new ObjectType(setType,  new ArrayList<>(), new ArrayList<>()));
   }
 
   @Override
@@ -92,7 +127,7 @@ public class TypeInferenceV2 extends BaseTreeVisitor {
     String memberName = ((RuntimeType) type).getTypeClass().fullyQualifiedName();
     if (memberName != null) {
       PythonType pythonType = builtins.resolveMember(memberName).orElse(PythonType.UNKNOWN);
-      ((NumericLiteralImpl) numericLiteral).typeV2(new ObjectType(pythonType, List.of(), List.of()));
+      ((NumericLiteralImpl) numericLiteral).typeV2(new ObjectType(pythonType, new ArrayList<>(), new ArrayList<>()));
     }
   }
 
@@ -101,7 +136,7 @@ public class TypeInferenceV2 extends BaseTreeVisitor {
     ModuleType builtins = this.projectLevelTypeTable.getModule(BUILTINS);
     // TODO: multiple object types to represent str instance?
     PythonType noneType = builtins.resolveMember("NoneType").orElse(PythonType.UNKNOWN);
-    ((NoneExpressionImpl) noneExpression).typeV2(new ObjectType(noneType, List.of(), List.of()));
+    ((NoneExpressionImpl) noneExpression).typeV2(new ObjectType(noneType, new ArrayList<>(), new ArrayList<>()));
   }
 
   @Override
@@ -111,7 +146,7 @@ public class TypeInferenceV2 extends BaseTreeVisitor {
     List<PythonType> pythonTypes = listLiteral.elements().expressions().stream().map(Expression::typeV2).distinct().toList();
     // TODO: cleanly reduce attributes
     PythonType listType = builtins.resolveMember("list").orElse(PythonType.UNKNOWN);
-    ((ListLiteralImpl) listLiteral).typeV2(new ObjectType(listType, pythonTypes, List.of()));
+    ((ListLiteralImpl) listLiteral).typeV2(new ObjectType(listType, pythonTypes, new ArrayList<>()));
   }
 
   @Override
