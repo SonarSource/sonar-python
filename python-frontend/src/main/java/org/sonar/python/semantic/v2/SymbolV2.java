@@ -37,10 +37,6 @@ public record SymbolV2(String name, @Nullable String fullyQualifiedName, List<Us
     if (name instanceof NameImpl ni) {
       ni.symbolV2(this);
     }
-/*    if (tree.is(Tree.Kind.NAME)) {
-      ((NameImpl) tree).setSymbol(this);
-      ((NameImpl) tree).setUsage(usage);
-    }*/
   }
 
   boolean hasSingleBindingUsage() {
