@@ -31,10 +31,10 @@ def call_noncallable(p):
     set_literal()  # Noncompliant
 
     set_var = set()
-    set_var()  # FN
+    set_var()  # Noncompliant
 
     frozenset_var = frozenset()
-    frozenset_var() # FN
+    frozenset_var() # Noncompliant
 
     if p:
       x = 42
@@ -206,7 +206,7 @@ def assigning_global(my_func):
     some_global_func = my_func
 
 def calling_global_func():
-    some_global_func() # OK
+    some_global_func()  # OK
 
 
 some_nonlocal_var = 42
