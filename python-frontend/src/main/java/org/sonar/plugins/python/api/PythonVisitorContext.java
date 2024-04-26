@@ -60,7 +60,7 @@ public class PythonVisitorContext extends PythonInputFileContext {
     new SymbolTableBuilder(packageName, pythonFile, projectLevelSymbolTable).visitFileInput(rootTree);
     SymbolTableBuilderV2 symbolTableBuilderV2 = new SymbolTableBuilderV2();
     symbolTableBuilderV2.visitFileInput(rootTree);
-    rootTree.accept(new TypeInferenceV2(new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty())));
+    rootTree.accept(new TypeInferenceV2(new ProjectLevelTypeTable(projectLevelSymbolTable)));
   }
 
   public PythonVisitorContext(FileInput rootTree, PythonFile pythonFile, @Nullable File workingDirectory, String packageName,
