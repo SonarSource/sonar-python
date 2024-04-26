@@ -40,6 +40,8 @@ class FunctionTypeTest {
     FunctionType functionType = functionType("def fn(): pass");
     assertThat(functionType.isAsynchronous()).isFalse();
     assertThat(functionType.parameters()).isEmpty();
+    assertThat(functionType.displayName()).contains("Callable");
+    assertThat(functionType.instanceDisplayName()).isEmpty();
 
     functionType = functionType("async def fn(p1, p2, p3): pass");
     assertThat(functionType.parameters()).extracting(ParameterV2::name).containsExactly("p1", "p2", "p3");

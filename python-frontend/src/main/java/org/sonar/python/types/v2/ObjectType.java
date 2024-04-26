@@ -31,8 +31,8 @@ public record ObjectType(PythonType type, List<PythonType> attributes, List<Memb
   }
 
   @Override
-  public String displayName() {
-    return type.displayName();
+  public Optional<String> displayName() {
+    return type.instanceDisplayName();
   }
 
   @Override
