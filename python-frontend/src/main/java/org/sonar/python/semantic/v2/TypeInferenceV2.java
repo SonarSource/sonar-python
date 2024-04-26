@@ -88,20 +88,20 @@ public class TypeInferenceV2 extends BaseTreeVisitor {
     ModuleType builtins = this.projectLevelTypeTable.getModule(BUILTINS);
     // TODO: multiple object types to represent str instance?
     PythonType strType = builtins.resolveMember("str").orElse(PythonType.UNKNOWN);
-    ((StringLiteralImpl) stringLiteral).typeV2(new ObjectType(strType, List.of(), List.of()));
+    ((StringLiteralImpl) stringLiteral).typeV2(new ObjectType(strType, new ArrayList<>(), new ArrayList<>()));
   }
 
   @Override
   public void visitTuple(Tuple tuple) {
     super.visitTuple(tuple);
     List<PythonType> contentTypes = tuple.elements().stream().map(Expression::typeV2).distinct().toList();
-    List<PythonType> attributes = List.of();
+    List<PythonType> attributes = new ArrayList<>();
     if (contentTypes.size() == 1 && !contentTypes.get(0).equals(PythonType.UNKNOWN)) {
       attributes = contentTypes;
     }
     ModuleType builtins = this.projectLevelTypeTable.getModule(BUILTINS);
     PythonType tupleType = builtins.resolveMember("tuple").orElse(PythonType.UNKNOWN);
-    ((TupleImpl) tuple).typeV2(new ObjectType(tupleType,  attributes, List.of()));
+    ((TupleImpl) tuple).typeV2(new ObjectType(tupleType,  attributes, new ArrayList<>()));
   }
 
   @Override
@@ -109,7 +109,7 @@ public class TypeInferenceV2 extends BaseTreeVisitor {
     super.visitDictionaryLiteral(dictionaryLiteral);
     ModuleType builtins = this.projectLevelTypeTable.getModule(BUILTINS);
     PythonType dictType = builtins.resolveMember("dict").orElse(PythonType.UNKNOWN);
-    ((DictionaryLiteralImpl) dictionaryLiteral).typeV2(new ObjectType(dictType,  List.of(), List.of()));
+    ((DictionaryLiteralImpl) dictionaryLiteral).typeV2(new ObjectType(dictType,  new ArrayList<>(), new ArrayList<>()));
   }
 
   @Override
@@ -117,7 +117,7 @@ public class TypeInferenceV2 extends BaseTreeVisitor {
     super.visitSetLiteral(setLiteral);
     ModuleType builtins = this.projectLevelTypeTable.getModule(BUILTINS);
     PythonType setType = builtins.resolveMember("set").orElse(PythonType.UNKNOWN);
-    ((SetLiteralImpl) setLiteral).typeV2(new ObjectType(setType,  List.of(), List.of()));
+    ((SetLiteralImpl) setLiteral).typeV2(new ObjectType(setType,  new ArrayList<>(), new ArrayList<>()));
   }
 
   @Override
@@ -127,7 +127,7 @@ public class TypeInferenceV2 extends BaseTreeVisitor {
     String memberName = ((RuntimeType) type).getTypeClass().fullyQualifiedName();
     if (memberName != null) {
       PythonType pythonType = builtins.resolveMember(memberName).orElse(PythonType.UNKNOWN);
-      ((NumericLiteralImpl) numericLiteral).typeV2(new ObjectType(pythonType, List.of(), List.of()));
+      ((NumericLiteralImpl) numericLiteral).typeV2(new ObjectType(pythonType, new ArrayList<>(), new ArrayList<>()));
     }
   }
 
@@ -136,7 +136,7 @@ public class TypeInferenceV2 extends BaseTreeVisitor {
     ModuleType builtins = this.projectLevelTypeTable.getModule(BUILTINS);
     // TODO: multiple object types to represent str instance?
     PythonType noneType = builtins.resolveMember("NoneType").orElse(PythonType.UNKNOWN);
-    ((NoneExpressionImpl) noneExpression).typeV2(new ObjectType(noneType, List.of(), List.of()));
+    ((NoneExpressionImpl) noneExpression).typeV2(new ObjectType(noneType, new ArrayList<>(), new ArrayList<>()));
   }
 
   @Override
@@ -146,7 +146,7 @@ public class TypeInferenceV2 extends BaseTreeVisitor {
     List<PythonType> pythonTypes = listLiteral.elements().expressions().stream().map(Expression::typeV2).distinct().toList();
     // TODO: cleanly reduce attributes
     PythonType listType = builtins.resolveMember("list").orElse(PythonType.UNKNOWN);
-    ((ListLiteralImpl) listLiteral).typeV2(new ObjectType(listType, pythonTypes, List.of()));
+    ((ListLiteralImpl) listLiteral).typeV2(new ObjectType(listType, pythonTypes, new ArrayList<>()));
   }
 
   @Override
