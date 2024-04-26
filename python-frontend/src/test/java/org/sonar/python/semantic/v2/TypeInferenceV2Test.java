@@ -28,8 +28,10 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.ExpressionStatement;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.ImportFrom;
@@ -226,6 +228,40 @@ class TypeInferenceV2Test {
 
     CallExpression callExpression = ((CallExpression) TreeUtils.firstChild(root, t -> t.is(Tree.Kind.CALL_EXPR)).get());
     assertThat(callExpression.callee().typeV2()).isInstanceOf(FunctionType.class);
+  }
+
+  @Test
+  void inferTypeForBuiltins() {
+    FileInput root = inferTypes("""
+      a = list
+      """);
+
+    var assignmentStatement = (AssignmentStatement) root.statements().statements().get(0);
+    var assignedType = assignmentStatement.assignedValue().typeV2();
+
+    assertThat(assignedType)
+      .isNotNull()
+      .isInstanceOf(ClassType.class);
+
+    assertThat(assignedType.resolveMember("append"))
+      .isPresent()
+      .get()
+      .isInstanceOf(FunctionType.class);
+  }
+
+  @Test
+  void inferTypeForReassignedBuiltins() {
+    FileInput root = inferTypes("""
+      def foo():
+        global list
+        list = 42
+        list = "hello"
+        list
+      """);
+
+    var functionDef = (FunctionDef) root.statements().statements().get(0);
+    var expressionStatement = (ExpressionStatement) functionDef.body().statements().get(3);
+    Assertions.assertThat(expressionStatement.expressions().get(0).typeV2()).isEqualTo(PythonType.UNKNOWN);
   }
 
   private FileInput inferTypes(String lines) {

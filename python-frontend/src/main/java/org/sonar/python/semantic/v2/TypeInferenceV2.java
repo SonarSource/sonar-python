@@ -75,8 +75,6 @@ public class TypeInferenceV2 extends BaseTreeVisitor {
     this.projectLevelTypeTable = projectLevelTypeTable;
   }
 
-  private static final String BUILTINS = "builtins";
-
   @Override
   public void visitFileInput(FileInput fileInput) {
     var type = new ModuleType("somehow get its name");
@@ -85,7 +83,7 @@ public class TypeInferenceV2 extends BaseTreeVisitor {
 
   @Override
   public void visitStringLiteral(StringLiteral stringLiteral) {
-    ModuleType builtins = this.projectLevelTypeTable.getModule(BUILTINS);
+    ModuleType builtins = this.projectLevelTypeTable.getModule();
     // TODO: multiple object types to represent str instance?
     PythonType strType = builtins.resolveMember("str").orElse(PythonType.UNKNOWN);
     ((StringLiteralImpl) stringLiteral).typeV2(new ObjectType(strType, new ArrayList<>(), new ArrayList<>()));
@@ -99,7 +97,7 @@ public class TypeInferenceV2 extends BaseTreeVisitor {
     if (contentTypes.size() == 1 && !contentTypes.get(0).equals(PythonType.UNKNOWN)) {
       attributes = contentTypes;
     }
-    ModuleType builtins = this.projectLevelTypeTable.getModule(BUILTINS);
+    ModuleType builtins = this.projectLevelTypeTable.getModule();
     PythonType tupleType = builtins.resolveMember("tuple").orElse(PythonType.UNKNOWN);
     ((TupleImpl) tuple).typeV2(new ObjectType(tupleType,  attributes, new ArrayList<>()));
   }
@@ -107,7 +105,7 @@ public class TypeInferenceV2 extends BaseTreeVisitor {
   @Override
   public void visitDictionaryLiteral(DictionaryLiteral dictionaryLiteral) {
     super.visitDictionaryLiteral(dictionaryLiteral);
-    ModuleType builtins = this.projectLevelTypeTable.getModule(BUILTINS);
+    ModuleType builtins = this.projectLevelTypeTable.getModule();
     PythonType dictType = builtins.resolveMember("dict").orElse(PythonType.UNKNOWN);
     ((DictionaryLiteralImpl) dictionaryLiteral).typeV2(new ObjectType(dictType,  new ArrayList<>(), new ArrayList<>()));
   }
@@ -115,14 +113,14 @@ public class TypeInferenceV2 extends BaseTreeVisitor {
   @Override
   public void visitSetLiteral(SetLiteral setLiteral) {
     super.visitSetLiteral(setLiteral);
-    ModuleType builtins = this.projectLevelTypeTable.getModule(BUILTINS);
+    ModuleType builtins = this.projectLevelTypeTable.getModule();
     PythonType setType = builtins.resolveMember("set").orElse(PythonType.UNKNOWN);
     ((SetLiteralImpl) setLiteral).typeV2(new ObjectType(setType,  new ArrayList<>(), new ArrayList<>()));
   }
 
   @Override
   public void visitNumericLiteral(NumericLiteral numericLiteral) {
-    ModuleType builtins = this.projectLevelTypeTable.getModule(BUILTINS);
+    ModuleType builtins = this.projectLevelTypeTable.getModule();
     InferredType type = numericLiteral.type();
     String memberName = ((RuntimeType) type).getTypeClass().fullyQualifiedName();
     if (memberName != null) {
@@ -133,7 +131,7 @@ public class TypeInferenceV2 extends BaseTreeVisitor {
 
   @Override
   public void visitNone(NoneExpression noneExpression) {
-    ModuleType builtins = this.projectLevelTypeTable.getModule(BUILTINS);
+    ModuleType builtins = this.projectLevelTypeTable.getModule();
     // TODO: multiple object types to represent str instance?
     PythonType noneType = builtins.resolveMember("NoneType").orElse(PythonType.UNKNOWN);
     ((NoneExpressionImpl) noneExpression).typeV2(new ObjectType(noneType, new ArrayList<>(), new ArrayList<>()));
@@ -141,7 +139,7 @@ public class TypeInferenceV2 extends BaseTreeVisitor {
 
   @Override
   public void visitListLiteral(ListLiteral listLiteral) {
-    ModuleType builtins = this.projectLevelTypeTable.getModule(BUILTINS);
+    ModuleType builtins = this.projectLevelTypeTable.getModule();
     scan(listLiteral.elements());
     List<PythonType> pythonTypes = listLiteral.elements().expressions().stream().map(Expression::typeV2).distinct().toList();
     // TODO: cleanly reduce attributes
@@ -312,29 +310,40 @@ public class TypeInferenceV2 extends BaseTreeVisitor {
     }
   }
 
+
   @Override
   public void visitName(Name name) {
     SymbolV2 symbolV2 = name.symbolV2();
     if (symbolV2 == null) {
+//    This part could be affected by SONARPY-1802
+      projectLevelTypeTable.getModule().resolveMember(name.name())
+        .ifPresent(type -> setTypeToName(name, type));
       return;
     }
-    List<PythonType> types = new ArrayList<>();
-    for (UsageV2 usage : symbolV2.usages()) {
+
+    var bindingUsages = new ArrayList<UsageV2>();
+    for (var usage : symbolV2.usages()) {
       if (usage.kind().equals(UsageV2.Kind.GLOBAL_DECLARATION)) {
         // Don't infer type for global variables
         return;
       }
-      Optional.of(usage)
-        .filter(UsageV2::isBindingUsage)
-        .map(UsageV2::tree)
-        .filter(Expression.class::isInstance)
-        .map(Expression.class::cast)
-        .map(Expression::typeV2)
-        .ifPresent(types::add);
+      if (usage.isBindingUsage()) {
+        bindingUsages.add(usage);
+      }
+      if (bindingUsages.size() > 1) {
+        // no need to iterate over usages if there is more than one binding usage
+        return;
+      }
     }
-    if (types.size() == 1) {
-      setTypeToName(name, types.get(0));
-    }
+
+    bindingUsages.stream()
+      .findFirst()
+      .filter(UsageV2::isBindingUsage)
+      .map(UsageV2::tree)
+      .filter(Expression.class::isInstance)
+      .map(Expression.class::cast)
+      .map(Expression::typeV2)
+      .ifPresent(type -> setTypeToName(name, type));
   }
 
   private PythonType currentType() {
