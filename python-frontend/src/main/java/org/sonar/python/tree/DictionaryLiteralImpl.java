@@ -26,8 +26,11 @@ import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.TreeVisitor;
 import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.types.InferredTypes;
+import org.sonar.python.types.v2.PythonType;
 
 public class DictionaryLiteralImpl extends DictOrSetLiteralImpl<DictionaryLiteralElement> implements DictionaryLiteral {
+
+  private PythonType pythonType = PythonType.UNKNOWN;
 
   public DictionaryLiteralImpl(Token lCurlyBrace, List<Token> commas, List<DictionaryLiteralElement> elements, Token rCurlyBrace) {
     super(lCurlyBrace, commas, elements, rCurlyBrace);
@@ -45,5 +48,15 @@ public class DictionaryLiteralImpl extends DictOrSetLiteralImpl<DictionaryLitera
   @Override
   public InferredType type() {
     return InferredTypes.DICT;
+  }
+
+  @Override
+  public PythonType typeV2() {
+    return pythonType;
+  }
+
+  public DictionaryLiteral typeV2(PythonType pythonType) {
+    this.pythonType = pythonType;
+    return this;
   }
 }

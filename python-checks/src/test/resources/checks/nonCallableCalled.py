@@ -22,10 +22,13 @@ def call_noncallable(p):
     list_var()  # Noncompliant
 
     tuple_var = ()
-    tuple_var()  # FN
+    tuple_var()  # Noncompliant
 
     dict_var = {}
-    dict_var()  # FN
+    dict_var()  # Noncompliant
+
+    set_literal = {1, 2}
+    set_literal()  # Noncompliant
 
     set_var = set()
     set_var()  # FN
