@@ -21,17 +21,14 @@ package org.sonar.python.checks;
 
 import javax.annotation.Nullable;
 import org.sonar.check.Rule;
-import org.sonar.plugins.python.api.LocationInFile;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.types.v2.PythonType;
 import org.sonar.python.types.v2.TriBool;
 
 import static org.sonar.python.tree.TreeUtils.nameFromExpression;
-import static org.sonar.python.types.InferredTypes.typeClassLocation;
 
 @Rule(key = "S5756")
 public class NonCallableCalledCheck extends PythonSubscriptionCheck {
@@ -41,15 +38,12 @@ public class NonCallableCalledCheck extends PythonSubscriptionCheck {
     context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, ctx -> {
       CallExpression callExpression = (CallExpression) ctx.syntaxNode();
       Expression callee = callExpression.callee();
-      InferredType calleeType = callee.type();
       PythonType type = callee.typeV2();
       if (isNonCallableType(type)) {
         String name = nameFromExpression(callee);
         PreciseIssue preciseIssue = ctx.addIssue(callee, message(type, name));
-        LocationInFile location = typeClassLocation(calleeType);
-        if (location != null) {
-          preciseIssue.secondary(location, "Definition.");
-        }
+        type.definitionLocation()
+          .ifPresent(location -> preciseIssue.secondary(location, "Definition."));
       }
     });
   }

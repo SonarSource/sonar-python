@@ -27,6 +27,8 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
+import javax.annotation.Nullable;
+import org.sonar.plugins.python.api.LocationInFile;
 
 /**
  * ClassType
@@ -36,14 +38,15 @@ public record ClassType(
   Set<Member> members,
   List<PythonType> attributes,
   List<PythonType> superClasses,
-  List<PythonType> metaClasses) implements PythonType {
+  List<PythonType> metaClasses,
+  @Nullable LocationInFile locationInFile) implements PythonType {
 
   public ClassType(String name) {
-    this(name, new HashSet<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+    this(name, new HashSet<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), null);
   }
 
-  public ClassType(String name, List<PythonType> attributes) {
-    this(name, new HashSet<>(), attributes, new ArrayList<>(), new ArrayList<>());
+  public ClassType(String name, @Nullable LocationInFile locationInFile) {
+    this(name, new HashSet<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), locationInFile);
   }
 
   @Override
@@ -157,6 +160,11 @@ public record ClassType(
       return TriBool.TRUE;
     }
     return resolveMember(memberName).isPresent() ? TriBool.TRUE : TriBool.FALSE;
+  }
+
+  @Override
+  public Optional<LocationInFile> definitionLocation() {
+    return Optional.ofNullable(this.locationInFile);
   }
 
   @Override

@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import javax.annotation.Nullable;
+import org.sonar.plugins.python.api.LocationInFile;
 
 /**
  * FunctionType
@@ -36,7 +37,8 @@ public record FunctionType(
   boolean hasDecorators,
   boolean isInstanceMethod,
   boolean hasVariadicParameter,
-  @Nullable PythonType owner
+  @Nullable PythonType owner,
+  @Nullable LocationInFile locationInFile
 ) implements PythonType {
 
   @Override
@@ -57,6 +59,11 @@ public record FunctionType(
   @Override
   public Optional<String> displayName() {
     return Optional.of("Callable");
+  }
+
+  @Override
+  public Optional<LocationInFile> definitionLocation() {
+    return Optional.ofNullable(this.locationInFile);
   }
 
   @Override

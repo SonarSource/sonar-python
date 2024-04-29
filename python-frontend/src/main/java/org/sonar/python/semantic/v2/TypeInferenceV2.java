@@ -19,6 +19,7 @@
  */
 package org.sonar.python.semantic.v2;
 
+import java.nio.file.Path;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -26,6 +27,7 @@ import java.util.Deque;
 import java.util.List;
 import java.util.Optional;
 import javax.annotation.Nullable;
+import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.tree.ArgList;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
@@ -65,14 +67,20 @@ import org.sonar.python.types.v2.ModuleType;
 import org.sonar.python.types.v2.ObjectType;
 import org.sonar.python.types.v2.PythonType;
 
+import static org.sonar.python.semantic.SymbolUtils.pathOf;
+import static org.sonar.python.tree.TreeUtils.locationInFile;
+
 public class TypeInferenceV2 extends BaseTreeVisitor {
 
   private final ProjectLevelTypeTable projectLevelTypeTable;
+  private final String fileId;
 
   private final Deque<PythonType> typeStack = new ArrayDeque<>();
 
-  public TypeInferenceV2(ProjectLevelTypeTable projectLevelTypeTable) {
+  public TypeInferenceV2(ProjectLevelTypeTable projectLevelTypeTable, PythonFile pythonFile) {
     this.projectLevelTypeTable = projectLevelTypeTable;
+    Path path = pathOf(pythonFile);
+    this.fileId = path != null ? path.toString() : pythonFile.toString();
   }
 
   @Override
@@ -151,7 +159,9 @@ public class TypeInferenceV2 extends BaseTreeVisitor {
   public void visitClassDef(ClassDef classDef) {
     scan(classDef.args());
     Name name = classDef.name();
-    ClassTypeBuilder classTypeBuilder = new ClassTypeBuilder().setName(name.name());
+    ClassTypeBuilder classTypeBuilder = new ClassTypeBuilder()
+      .withName(name.name())
+      .withDefinitionLocation(locationInFile(classDef.name(), fileId));
     resolveTypeHierarchy(classDef, classTypeBuilder);
     ClassType type = classTypeBuilder.build();
     ((NameImpl) name).typeV2(type);
@@ -212,7 +222,9 @@ public class TypeInferenceV2 extends BaseTreeVisitor {
   }
 
   private FunctionType buildFunctionType(FunctionDef functionDef) {
-    FunctionTypeBuilder functionTypeBuilder = new FunctionTypeBuilder().fromFunctionDef(functionDef);
+    FunctionTypeBuilder functionTypeBuilder = new FunctionTypeBuilder()
+      .fromFunctionDef(functionDef)
+      .withDefinitionLocation(locationInFile(functionDef.name(), fileId));
     ClassType owner = null;
     if (currentType() instanceof ClassType classType) {
       owner = classType;
