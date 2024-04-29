@@ -27,9 +27,4 @@ public record UnknownType() implements PythonType {
     return true;
   }
 
-  @Override
-  public String displayName() {
-    return "UnknownType";
-  }
-
 }

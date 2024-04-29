@@ -21,6 +21,7 @@ package org.sonar.python.types.v2;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import javax.annotation.Nullable;
 
 /**
@@ -51,6 +52,11 @@ public record FunctionType(
       && Objects.equals(returnType, that.returnType)
       && Objects.equals(attributes, that.attributes)
       && Objects.equals(parameters, that.parameters);
+  }
+
+  @Override
+  public Optional<String> displayName() {
+    return Optional.of("Callable");
   }
 
   @Override

@@ -31,8 +31,12 @@ public interface PythonType {
     return this.toString();
   }
 
-  default String displayName() {
-    return this.toString();
+  default Optional<String> displayName() {
+    return Optional.empty();
+  }
+
+  default Optional<String> instanceDisplayName() {
+    return Optional.empty();
   }
 
   default boolean isCompatibleWith(PythonType another) {

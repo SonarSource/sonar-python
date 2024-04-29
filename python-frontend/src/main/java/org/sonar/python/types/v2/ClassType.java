@@ -47,12 +47,17 @@ public record ClassType(
   }
 
   @Override
-  public String displayName() {
+  public Optional<String> displayName() {
+    return Optional.of("type");
+  }
+
+  @Override
+  public Optional<String> instanceDisplayName() {
     var splits = name.split("\\.");
     if (splits.length > 0) {
-      return splits[splits.length - 1];
+      return Optional.of(splits[splits.length - 1]);
     }
-    return name;
+    return Optional.of(name);
   }
 
   @Override
