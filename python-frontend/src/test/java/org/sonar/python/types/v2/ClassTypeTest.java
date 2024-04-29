@@ -22,6 +22,8 @@ package org.sonar.python.types.v2;
 import java.util.List;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import org.sonar.plugins.python.api.LocationInFile;
+import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.tree.AnnotatedAssignment;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.FileInput;
@@ -30,6 +32,7 @@ import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.PythonTestUtils;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
+import org.sonar.python.semantic.SymbolUtils;
 import org.sonar.python.semantic.v2.ClassTypeBuilder;
 import org.sonar.python.semantic.v2.ProjectLevelTypeTable;
 import org.sonar.python.semantic.v2.SymbolTableBuilderV2;
@@ -42,6 +45,8 @@ import static org.sonar.python.PythonTestUtils.parse;
 import static org.sonar.python.PythonTestUtils.parseWithoutSymbols;
 
 public class ClassTypeTest {
+
+  static PythonFile pythonFile = PythonTestUtils.pythonFile("");
 
   @Test
   void no_parents() {
@@ -60,6 +65,9 @@ public class ClassTypeTest {
 
     assertThat(classType.displayName()).contains("type");
     assertThat(classType.instanceDisplayName()).contains("C");
+
+    String fileId = SymbolUtils.pathOf(pythonFile).toString();
+    assertThat(classType.definitionLocation()).contains(new LocationInFile(fileId, 1, 6, 1, 7));
   }
 
   @Test
@@ -190,7 +198,7 @@ public class ClassTypeTest {
       "  pass",
       "C = \"hello\"");
     fileInput.accept(new SymbolTableBuilderV2());
-    fileInput.accept(new TypeInferenceV2(new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty())));
+    fileInput.accept(new TypeInferenceV2(new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty()), pythonFile));
 
     ClassDef classDef = (ClassDef) fileInput.statements().statements().get(0);
     PythonType pythonType = classDef.name().typeV2();
@@ -210,7 +218,7 @@ public class ClassTypeTest {
       "  pass"
     );
     fileInput.accept(new SymbolTableBuilderV2());
-    fileInput.accept(new TypeInferenceV2(new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty())));
+    fileInput.accept(new TypeInferenceV2(new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty()), pythonFile));
 
     ClassDef classDef = (ClassDef) fileInput.statements().statements().get(1);
     PythonType pythonType = classDef.name().typeV2();
@@ -555,7 +563,7 @@ public class ClassTypeTest {
       "        x: Inner"
     );
     fileInput.accept(new SymbolTableBuilderV2());
-    fileInput.accept(new TypeInferenceV2(new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty())));
+    fileInput.accept(new TypeInferenceV2(new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty()), pythonFile));
     ClassDef firstDef = (ClassDef) fileInput.statements().statements().get(0);
     ClassDef innerClass = (ClassDef) firstDef.body().statements().get(0);
     FunctionDef functionDef = (FunctionDef) firstDef.body().statements().get(1);
@@ -578,7 +586,7 @@ public class ClassTypeTest {
   @Test
   void builder() {
     ClassType classType = classType("class A: ...");
-    ClassTypeBuilder classTypeBuilder = new ClassTypeBuilder().setName("A");
+    ClassTypeBuilder classTypeBuilder = new ClassTypeBuilder().withName("A");
     assertThat(classTypeBuilder.build()).isEqualTo(classType);
   }
 
@@ -604,7 +612,7 @@ public class ClassTypeTest {
   public static List<ClassType> classTypes(String... code) {
     FileInput fileInput = parseWithoutSymbols(code);
     fileInput.accept(new SymbolTableBuilderV2());
-    fileInput.accept(new TypeInferenceV2(new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty())));
+    fileInput.accept(new TypeInferenceV2(new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty()), pythonFile));
     return PythonTestUtils.getAllDescendant(fileInput, t -> t.is(Tree.Kind.CLASSDEF))
       .stream()
       .map(ClassDef.class::cast)

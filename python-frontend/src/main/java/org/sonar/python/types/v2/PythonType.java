@@ -20,6 +20,7 @@
 package org.sonar.python.types.v2;
 
 import java.util.Optional;
+import org.sonar.plugins.python.api.LocationInFile;
 
 /**
  * PythonType
@@ -53,5 +54,9 @@ public interface PythonType {
 
   default TriBool hasMember(String memberName) {
     return TriBool.UNKNOWN;
+  }
+
+  default Optional<LocationInFile> definitionLocation() {
+    return Optional.empty();
   }
 }
