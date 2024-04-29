@@ -1,0 +1,236 @@
+
+-sklearn.neural_network._stochastic_optimizersÕ
+BaseOptimizer;sklearn.neural_network._stochastic_optimizers.BaseOptimizer"builtins.object*›	
+__init__Dsklearn.neural_network._stochastic_optimizers.BaseOptimizer.__init__"
+None*„
+selfz
+;sklearn.neural_network._stochastic_optimizers.BaseOptimizer";sklearn.neural_network._stochastic_optimizers.BaseOptimizer*·
+learning_rate_initœ
+°TypeAlias[Union[builtins.float,TypeAlias[numpy.floating[numpy._typing._16Bit]],TypeAlias[numpy.floating[numpy._typing._32Bit]],TypeAlias[numpy.floating[numpy._typing._64Bit]]]]Í
+¥Union[builtins.float,TypeAlias[numpy.floating[numpy._typing._16Bit]],TypeAlias[numpy.floating[numpy._typing._32Bit]],TypeAlias[numpy.floating[numpy._typing._64Bit]]] 
+builtins.float"builtins.float¨
+/TypeAlias[numpy.floating[numpy._typing._16Bit]]d
+$numpy.floating[numpy._typing._16Bit],
+numpy._typing._16Bit"numpy._typing._16Bit"numpy.floating"numpy.float16¨
+/TypeAlias[numpy.floating[numpy._typing._32Bit]]d
+$numpy.floating[numpy._typing._32Bit],
+numpy._typing._32Bit"numpy._typing._32Bit"numpy.floating"numpy.float32¨
+/TypeAlias[numpy.floating[numpy._typing._64Bit]]d
+$numpy.floating[numpy._typing._64Bit],
+numpy._typing._64Bit"numpy._typing._64Bit"numpy.floating"numpy.float64"sklearn._typing.Float *Þ
+update_paramsIsklearn.neural_network._stochastic_optimizers.BaseOptimizer.update_params"
+None*„
+selfz
+;sklearn.neural_network._stochastic_optimizers.BaseOptimizer";sklearn.neural_network._stochastic_optimizers.BaseOptimizer*÷
+paramsê
+AUnion[typing.Sequence[Any],builtins.list[numpy.ndarray[Any,Any]]]0
+typing.Sequence[Any]
+Any"typing.Sequenceq
+%builtins.list[numpy.ndarray[Any,Any]]9
+numpy.ndarray[Any,Any]
+Any
+Any"numpy.ndarray"builtins.list*ö
+gradsê
+AUnion[typing.Sequence[Any],builtins.list[numpy.ndarray[Any,Any]]]0
+typing.Sequence[Any]
+Any"typing.Sequenceq
+%builtins.list[numpy.ndarray[Any,Any]]9
+numpy.ndarray[Any,Any]
+Any
+Any"numpy.ndarray"builtins.list*š
+iteration_endsJsklearn.neural_network._stochastic_optimizers.BaseOptimizer.iteration_ends"
+None*„
+selfz
+;sklearn.neural_network._stochastic_optimizers.BaseOptimizer";sklearn.neural_network._stochastic_optimizers.BaseOptimizer*+
+	time_step
+builtins.int"builtins.int*Û
+trigger_stoppingLsklearn.neural_network._stochastic_optimizers.BaseOptimizer.trigger_stopping"
+builtins.bool"builtins.bool*„
+selfz
+;sklearn.neural_network._stochastic_optimizers.BaseOptimizer";sklearn.neural_network._stochastic_optimizers.BaseOptimizer*%
+msg
+builtins.str"builtins.str*+
+verbose
+builtins.bool"builtins.boolr|
+learning_rateIsklearn.neural_network._stochastic_optimizers.BaseOptimizer.learning_rate 
+builtins.float"builtins.floatÖ.
+SGDOptimizer:sklearn.neural_network._stochastic_optimizers.SGDOptimizer";sklearn.neural_network._stochastic_optimizers.BaseOptimizer*þ
+__init__Csklearn.neural_network._stochastic_optimizers.SGDOptimizer.__init__"
+None*‚
+selfx
+:sklearn.neural_network._stochastic_optimizers.SGDOptimizer":sklearn.neural_network._stochastic_optimizers.SGDOptimizer*÷
+paramsê
+AUnion[typing.Sequence[Any],builtins.list[numpy.ndarray[Any,Any]]]0
+typing.Sequence[Any]
+Any"typing.Sequenceq
+%builtins.list[numpy.ndarray[Any,Any]]9
+numpy.ndarray[Any,Any]
+Any
+Any"numpy.ndarray"builtins.list*·
+learning_rate_initœ
+°TypeAlias[Union[builtins.float,TypeAlias[numpy.floating[numpy._typing._16Bit]],TypeAlias[numpy.floating[numpy._typing._32Bit]],TypeAlias[numpy.floating[numpy._typing._64Bit]]]]Í
+¥Union[builtins.float,TypeAlias[numpy.floating[numpy._typing._16Bit]],TypeAlias[numpy.floating[numpy._typing._32Bit]],TypeAlias[numpy.floating[numpy._typing._64Bit]]] 
+builtins.float"builtins.float¨
+/TypeAlias[numpy.floating[numpy._typing._16Bit]]d
+$numpy.floating[numpy._typing._16Bit],
+numpy._typing._16Bit"numpy._typing._16Bit"numpy.floating"numpy.float16¨
+/TypeAlias[numpy.floating[numpy._typing._32Bit]]d
+$numpy.floating[numpy._typing._32Bit],
+numpy._typing._32Bit"numpy._typing._32Bit"numpy.floating"numpy.float32¨
+/TypeAlias[numpy.floating[numpy._typing._64Bit]]d
+$numpy.floating[numpy._typing._64Bit],
+numpy._typing._64Bit"numpy._typing._64Bit"numpy.floating"numpy.float64"sklearn._typing.Float *Ú
+lr_scheduleÆ
+^Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str *­
+momentumœ
+°TypeAlias[Union[builtins.float,TypeAlias[numpy.floating[numpy._typing._16Bit]],TypeAlias[numpy.floating[numpy._typing._32Bit]],TypeAlias[numpy.floating[numpy._typing._64Bit]]]]Í
+¥Union[builtins.float,TypeAlias[numpy.floating[numpy._typing._16Bit]],TypeAlias[numpy.floating[numpy._typing._32Bit]],TypeAlias[numpy.floating[numpy._typing._64Bit]]] 
+builtins.float"builtins.float¨
+/TypeAlias[numpy.floating[numpy._typing._16Bit]]d
+$numpy.floating[numpy._typing._16Bit],
+numpy._typing._16Bit"numpy._typing._16Bit"numpy.floating"numpy.float16¨
+/TypeAlias[numpy.floating[numpy._typing._32Bit]]d
+$numpy.floating[numpy._typing._32Bit],
+numpy._typing._32Bit"numpy._typing._32Bit"numpy.floating"numpy.float32¨
+/TypeAlias[numpy.floating[numpy._typing._64Bit]]d
+$numpy.floating[numpy._typing._64Bit],
+numpy._typing._64Bit"numpy._typing._64Bit"numpy.floating"numpy.float64"sklearn._typing.Float *.
+nesterov
+builtins.bool"builtins.bool *¬
+power_tœ
+°TypeAlias[Union[builtins.float,TypeAlias[numpy.floating[numpy._typing._16Bit]],TypeAlias[numpy.floating[numpy._typing._32Bit]],TypeAlias[numpy.floating[numpy._typing._64Bit]]]]Í
+¥Union[builtins.float,TypeAlias[numpy.floating[numpy._typing._16Bit]],TypeAlias[numpy.floating[numpy._typing._32Bit]],TypeAlias[numpy.floating[numpy._typing._64Bit]]] 
+builtins.float"builtins.float¨
+/TypeAlias[numpy.floating[numpy._typing._16Bit]]d
+$numpy.floating[numpy._typing._16Bit],
+numpy._typing._16Bit"numpy._typing._16Bit"numpy.floating"numpy.float16¨
+/TypeAlias[numpy.floating[numpy._typing._32Bit]]d
+$numpy.floating[numpy._typing._32Bit],
+numpy._typing._32Bit"numpy._typing._32Bit"numpy.floating"numpy.float32¨
+/TypeAlias[numpy.floating[numpy._typing._64Bit]]d
+$numpy.floating[numpy._typing._64Bit],
+numpy._typing._64Bit"numpy._typing._64Bit"numpy.floating"numpy.float64"sklearn._typing.Float *ï
+iteration_endsIsklearn.neural_network._stochastic_optimizers.SGDOptimizer.iteration_ends"
+None*‚
+selfx
+:sklearn.neural_network._stochastic_optimizers.SGDOptimizer":sklearn.neural_network._stochastic_optimizers.SGDOptimizer*‚
+
+	time_stepò	
+ñTypeAlias[Union[builtins.int,TypeAlias[numpy.signedinteger[numpy._typing._8Bit]],TypeAlias[numpy.signedinteger[numpy._typing._16Bit]],TypeAlias[numpy.signedinteger[numpy._typing._32Bit]],TypeAlias[numpy.signedinteger[numpy._typing._64Bit]]]]ä
+æUnion[builtins.int,TypeAlias[numpy.signedinteger[numpy._typing._8Bit]],TypeAlias[numpy.signedinteger[numpy._typing._16Bit]],TypeAlias[numpy.signedinteger[numpy._typing._32Bit]],TypeAlias[numpy.signedinteger[numpy._typing._64Bit]]]
+builtins.int"builtins.int°
+3TypeAlias[numpy.signedinteger[numpy._typing._8Bit]]k
+(numpy.signedinteger[numpy._typing._8Bit]*
+numpy._typing._8Bit"numpy._typing._8Bit"numpy.signedinteger"
+numpy.int8µ
+4TypeAlias[numpy.signedinteger[numpy._typing._16Bit]]n
+)numpy.signedinteger[numpy._typing._16Bit],
+numpy._typing._16Bit"numpy._typing._16Bit"numpy.signedinteger"numpy.int16µ
+4TypeAlias[numpy.signedinteger[numpy._typing._32Bit]]n
+)numpy.signedinteger[numpy._typing._32Bit],
+numpy._typing._32Bit"numpy._typing._32Bit"numpy.signedinteger"numpy.int32µ
+4TypeAlias[numpy.signedinteger[numpy._typing._64Bit]]n
+)numpy.signedinteger[numpy._typing._64Bit],
+numpy._typing._64Bit"numpy._typing._64Bit"numpy.signedinteger"numpy.int64"sklearn._typing.Int*Ø
+trigger_stoppingKsklearn.neural_network._stochastic_optimizers.SGDOptimizer.trigger_stopping"
+builtins.bool"builtins.bool*‚
+selfx
+:sklearn.neural_network._stochastic_optimizers.SGDOptimizer":sklearn.neural_network._stochastic_optimizers.SGDOptimizer*%
+msg
+builtins.str"builtins.str*+
+verbose
+builtins.bool"builtins.boolr
+
+velocitiesEsklearn.neural_network._stochastic_optimizers.SGDOptimizer.velocities,
+builtins.list[Any]
+Any"builtins.listr{
+learning_rateHsklearn.neural_network._stochastic_optimizers.SGDOptimizer.learning_rate 
+builtins.float"builtins.floatô%
+AdamOptimizer;sklearn.neural_network._stochastic_optimizers.AdamOptimizer";sklearn.neural_network._stochastic_optimizers.BaseOptimizer* !
+__init__Dsklearn.neural_network._stochastic_optimizers.AdamOptimizer.__init__"
+None*„
+selfz
+;sklearn.neural_network._stochastic_optimizers.AdamOptimizer";sklearn.neural_network._stochastic_optimizers.AdamOptimizer*÷
+paramsê
+AUnion[typing.Sequence[Any],builtins.list[numpy.ndarray[Any,Any]]]0
+typing.Sequence[Any]
+Any"typing.Sequenceq
+%builtins.list[numpy.ndarray[Any,Any]]9
+numpy.ndarray[Any,Any]
+Any
+Any"numpy.ndarray"builtins.list*·
+learning_rate_initœ
+°TypeAlias[Union[builtins.float,TypeAlias[numpy.floating[numpy._typing._16Bit]],TypeAlias[numpy.floating[numpy._typing._32Bit]],TypeAlias[numpy.floating[numpy._typing._64Bit]]]]Í
+¥Union[builtins.float,TypeAlias[numpy.floating[numpy._typing._16Bit]],TypeAlias[numpy.floating[numpy._typing._32Bit]],TypeAlias[numpy.floating[numpy._typing._64Bit]]] 
+builtins.float"builtins.float¨
+/TypeAlias[numpy.floating[numpy._typing._16Bit]]d
+$numpy.floating[numpy._typing._16Bit],
+numpy._typing._16Bit"numpy._typing._16Bit"numpy.floating"numpy.float16¨
+/TypeAlias[numpy.floating[numpy._typing._32Bit]]d
+$numpy.floating[numpy._typing._32Bit],
+numpy._typing._32Bit"numpy._typing._32Bit"numpy.floating"numpy.float32¨
+/TypeAlias[numpy.floating[numpy._typing._64Bit]]d
+$numpy.floating[numpy._typing._64Bit],
+numpy._typing._64Bit"numpy._typing._64Bit"numpy.floating"numpy.float64"sklearn._typing.Float *«
+beta_1œ
+°TypeAlias[Union[builtins.float,TypeAlias[numpy.floating[numpy._typing._16Bit]],TypeAlias[numpy.floating[numpy._typing._32Bit]],TypeAlias[numpy.floating[numpy._typing._64Bit]]]]Í
+¥Union[builtins.float,TypeAlias[numpy.floating[numpy._typing._16Bit]],TypeAlias[numpy.floating[numpy._typing._32Bit]],TypeAlias[numpy.floating[numpy._typing._64Bit]]] 
+builtins.float"builtins.float¨
+/TypeAlias[numpy.floating[numpy._typing._16Bit]]d
+$numpy.floating[numpy._typing._16Bit],
+numpy._typing._16Bit"numpy._typing._16Bit"numpy.floating"numpy.float16¨
+/TypeAlias[numpy.floating[numpy._typing._32Bit]]d
+$numpy.floating[numpy._typing._32Bit],
+numpy._typing._32Bit"numpy._typing._32Bit"numpy.floating"numpy.float32¨
+/TypeAlias[numpy.floating[numpy._typing._64Bit]]d
+$numpy.floating[numpy._typing._64Bit],
+numpy._typing._64Bit"numpy._typing._64Bit"numpy.floating"numpy.float64"sklearn._typing.Float *«
+beta_2œ
+°TypeAlias[Union[builtins.float,TypeAlias[numpy.floating[numpy._typing._16Bit]],TypeAlias[numpy.floating[numpy._typing._32Bit]],TypeAlias[numpy.floating[numpy._typing._64Bit]]]]Í
+¥Union[builtins.float,TypeAlias[numpy.floating[numpy._typing._16Bit]],TypeAlias[numpy.floating[numpy._typing._32Bit]],TypeAlias[numpy.floating[numpy._typing._64Bit]]] 
+builtins.float"builtins.float¨
+/TypeAlias[numpy.floating[numpy._typing._16Bit]]d
+$numpy.floating[numpy._typing._16Bit],
+numpy._typing._16Bit"numpy._typing._16Bit"numpy.floating"numpy.float16¨
+/TypeAlias[numpy.floating[numpy._typing._32Bit]]d
+$numpy.floating[numpy._typing._32Bit],
+numpy._typing._32Bit"numpy._typing._32Bit"numpy.floating"numpy.float32¨
+/TypeAlias[numpy.floating[numpy._typing._64Bit]]d
+$numpy.floating[numpy._typing._64Bit],
+numpy._typing._64Bit"numpy._typing._64Bit"numpy.floating"numpy.float64"sklearn._typing.Float *¬
+epsilonœ
+°TypeAlias[Union[builtins.float,TypeAlias[numpy.floating[numpy._typing._16Bit]],TypeAlias[numpy.floating[numpy._typing._32Bit]],TypeAlias[numpy.floating[numpy._typing._64Bit]]]]Í
+¥Union[builtins.float,TypeAlias[numpy.floating[numpy._typing._16Bit]],TypeAlias[numpy.floating[numpy._typing._32Bit]],TypeAlias[numpy.floating[numpy._typing._64Bit]]] 
+builtins.float"builtins.float¨
+/TypeAlias[numpy.floating[numpy._typing._16Bit]]d
+$numpy.floating[numpy._typing._16Bit],
+numpy._typing._16Bit"numpy._typing._16Bit"numpy.floating"numpy.float16¨
+/TypeAlias[numpy.floating[numpy._typing._32Bit]]d
+$numpy.floating[numpy._typing._32Bit],
+numpy._typing._32Bit"numpy._typing._32Bit"numpy.floating"numpy.float32¨
+/TypeAlias[numpy.floating[numpy._typing._64Bit]]d
+$numpy.floating[numpy._typing._64Bit],
+numpy._typing._64Bit"numpy._typing._64Bit"numpy.floating"numpy.float64"sklearn._typing.Float rr
+vs>sklearn.neural_network._stochastic_optimizers.AdamOptimizer.vs,
+builtins.list[Any]
+Any"builtins.listrr
+ms>sklearn.neural_network._stochastic_optimizers.AdamOptimizer.ms,
+builtins.list[Any]
+Any"builtins.listr`
+t=sklearn.neural_network._stochastic_optimizers.AdamOptimizer.t
+builtins.int"builtins.intr|
+learning_rateIsklearn.neural_network._stochastic_optimizers.AdamOptimizer.learning_rate 
+builtins.float"builtins.float*©
+__annotations__=sklearn.neural_network._stochastic_optimizers.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*
+npnumpy 
