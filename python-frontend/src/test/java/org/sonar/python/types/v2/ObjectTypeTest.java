@@ -22,6 +22,8 @@ package org.sonar.python.types.v2;
 import java.util.List;
 import java.util.Optional;
 import org.junit.jupiter.api.Test;
+import org.sonar.plugins.python.api.LocationInFile;
+import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.DictionaryLiteral;
 import org.sonar.plugins.python.api.tree.ExpressionStatement;
@@ -33,17 +35,20 @@ import org.sonar.plugins.python.api.tree.SetLiteral;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tuple;
+import org.sonar.python.PythonTestUtils;
 import org.sonar.python.tree.TreeUtils;
+import org.sonar.python.semantic.SymbolUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.types.v2.TypesTestUtils.parseAndInferTypes;
 
 
-public class ObjectTypeTest {
+class ObjectTypeTest {
 
   @Test
   void simpleObject() {
-    FileInput fileInput = parseAndInferTypes("""
+    PythonFile pythonFile = PythonTestUtils.pythonFile("");
+    FileInput fileInput = parseAndInferTypes(pythonFile, """
       class A: ...
       a = A()
       a
@@ -55,6 +60,8 @@ public class ObjectTypeTest {
     assertThat(objectType.displayName()).contains("A");
     assertThat(objectType.isCompatibleWith(classType)).isTrue();
     assertThat(objectType.hasMember("foo")).isEqualTo(TriBool.FALSE);
+    String fileId = SymbolUtils.pathOf(pythonFile).toString();
+    assertThat(objectType.definitionLocation()).contains(new LocationInFile(fileId, 1, 6, 1, 7));
   }
 
   @Test
