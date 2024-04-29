@@ -24,7 +24,7 @@ import sys
 from abc import abstractmethod, ABC
 
 
-from mypy import options, build, errors
+from mypy import options, build
 
 from serializer import symbols
 from serializer.symbols import ModuleSymbol
@@ -174,11 +174,7 @@ class TypeshedSerializer(Serializer):
         for major, minor in SUPPORTED_PYTHON_VERSIONS:
             opt = get_options((major, minor))
             self.logger.info(f"Building for python version {major}.{minor}")
-            try:
-                build_result, source_paths = self.get_build_result(opt=opt)
-            except errors.CompileError as e:
-                self.logger.warn(f"Compile error has been ignored {e}")
-                continue
+            build_result, source_paths = self.get_build_result(opt=opt)
             modules = {}
             for file in build_result.files:
                 path = build_result.files[file].path
@@ -239,7 +235,7 @@ class MicrosoftStubsSerializer(Serializer):
 
     def is_exception(self, file, build_result, source_paths):
         file_path = build_result.files[file].path
-        return file.startswith("numpy") or "sklearn" not in file_path
+        return "sklearn" not in file_path
 
 
 class CustomStubsSerializer(Serializer):
