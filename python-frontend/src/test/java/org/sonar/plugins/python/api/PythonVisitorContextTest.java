@@ -84,8 +84,7 @@ class PythonVisitorContextTest {
   void globalSymbols() {
     String code = "from mod import a, b";
     FileInput fileInput = new PythonTreeMaker().fileInput(PythonParser.create().parse(code));
-    PythonFile pythonFile = mock(PythonFile.class, "my_module.py");
-    Mockito.when(pythonFile.fileName()).thenReturn("my_module.py");
+    PythonFile pythonFile = pythonFile("my_module.py");
     List<Symbol> modSymbols = Arrays.asList(new SymbolImpl("a", null), new SymbolImpl("b", null));
     Map<String, Set<Symbol>> globalSymbols = Collections.singletonMap("mod", new HashSet<>(modSymbols));
     new PythonVisitorContext(fileInput, pythonFile, null, "my_package", ProjectLevelSymbolTable.from(globalSymbols), null);
@@ -98,8 +97,7 @@ class PythonVisitorContextTest {
     ProjectLevelSymbolTable projectLevelSymbolTable = ProjectLevelSymbolTable.empty();
     String myPackage = "my_package";
     File workingDirectory = null;
-    PythonFile pythonFile = mock(PythonFile.class, "my_module.py");
-    Mockito.when(pythonFile.fileName()).thenReturn("my_module.py");
+    PythonFile pythonFile = pythonFile("my_module.py");
     FileInput fileInput = mock(FileInputImpl.class);
 
     PythonVisitorContext pythonVisitorContext = new PythonVisitorContext(fileInput, pythonFile, workingDirectory, myPackage, projectLevelSymbolTable, cacheContext, SonarProduct.SONARLINT);

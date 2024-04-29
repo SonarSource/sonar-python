@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import org.sonar.plugins.python.api.LocationInFile;
 
 public record ObjectType(PythonType type, List<PythonType> attributes, List<Member> members) implements PythonType {
 
@@ -58,5 +59,10 @@ public record ObjectType(PythonType type, List<PythonType> attributes, List<Memb
       return classType.instancesHaveMember(memberName);
     }
     return TriBool.UNKNOWN;
+  }
+
+  @Override
+  public Optional<LocationInFile> definitionLocation() {
+    return type.definitionLocation();
   }
 }

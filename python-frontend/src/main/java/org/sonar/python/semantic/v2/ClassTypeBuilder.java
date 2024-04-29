@@ -23,6 +23,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import javax.annotation.Nullable;
+import org.sonar.plugins.python.api.LocationInFile;
 import org.sonar.python.types.v2.ClassType;
 import org.sonar.python.types.v2.Member;
 import org.sonar.python.types.v2.PythonType;
@@ -35,14 +37,21 @@ public class ClassTypeBuilder implements TypeBuilder<ClassType> {
   List<PythonType> attributes = new ArrayList<>();
   List<PythonType> superClasses = new ArrayList<>();
   List<PythonType> metaClasses = new ArrayList<>();
+  LocationInFile definitionLocation;
 
   @Override
   public ClassType build() {
-    return new ClassType(name, members, attributes, superClasses, metaClasses);
+    return new ClassType(name, members, attributes, superClasses, metaClasses, definitionLocation);
   }
 
-  public ClassTypeBuilder setName(String name) {
+  public ClassTypeBuilder withName(String name) {
     this.name = name;
+    return this;
+  }
+
+  @Override
+  public ClassTypeBuilder withDefinitionLocation(@Nullable LocationInFile definitionLocation) {
+    this.definitionLocation = definitionLocation;
     return this;
   }
 

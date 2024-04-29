@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import javax.annotation.Nullable;
+import org.sonar.plugins.python.api.LocationInFile;
 import org.sonar.plugins.python.api.tree.AnyParameter;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Name;
@@ -48,6 +49,7 @@ public class FunctionTypeBuilder implements TypeBuilder<FunctionType> {
   private boolean isInstanceMethod;
   private PythonType owner;
   private PythonType returnType = PythonType.UNKNOWN;
+  private LocationInFile definitionLocation;
 
   private static final String CLASS_METHOD_DECORATOR = "classmethod";
   private static final String STATIC_METHOD_DECORATOR = "staticmethod";
@@ -108,8 +110,16 @@ public class FunctionTypeBuilder implements TypeBuilder<FunctionType> {
     return this;
   }
 
+  @Override
+  public FunctionTypeBuilder withDefinitionLocation(@Nullable LocationInFile definitionLocation) {
+    this.definitionLocation = definitionLocation;
+    return this;
+  }
+
   public FunctionType build() {
-    return new FunctionType(name, attributes, parameters, returnType, isAsynchronous, hasDecorators, isInstanceMethod, hasVariadicParameter, owner);
+    return new FunctionType(
+      name, attributes, parameters, returnType, isAsynchronous, hasDecorators, isInstanceMethod, hasVariadicParameter, owner, definitionLocation
+    );
   }
 
   private static boolean isInstanceMethod(FunctionDef functionDef) {

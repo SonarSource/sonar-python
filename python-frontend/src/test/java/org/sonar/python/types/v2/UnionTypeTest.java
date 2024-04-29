@@ -43,6 +43,7 @@ class UnionTypeTest {
 
     assertThat(unionType.displayName()).contains("Union[int, str]");
     assertThat(unionType.instanceDisplayName()).isEmpty();
+    assertThat(unionType.definitionLocation()).isEmpty();
   }
 
   @Test
