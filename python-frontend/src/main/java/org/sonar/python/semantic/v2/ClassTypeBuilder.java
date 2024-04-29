@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.LocationInFile;
 import org.sonar.python.types.v2.ClassType;
 import org.sonar.python.types.v2.Member;
@@ -49,7 +50,7 @@ public class ClassTypeBuilder implements TypeBuilder<ClassType> {
   }
 
   @Override
-  public ClassTypeBuilder withDefinitionLocation(LocationInFile definitionLocation) {
+  public ClassTypeBuilder withDefinitionLocation(@Nullable LocationInFile definitionLocation) {
     this.definitionLocation = definitionLocation;
     return this;
   }
