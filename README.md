@@ -32,7 +32,13 @@ The Python interpreter is not required in that case.
 - Maven 3.0.0 or newer
 - Python 3.9 or newer
 - [tox](https://tox.readthedocs.io/en/latest/) - `pip install tox`
-- Run `git submodule update --init` to retrieve [Typeshed](https://github.com/python/typeshed) as a Git submodule
+- Run `git submodule update --init` to retrieve [Typeshed](https://github.com/python/typeshed) and [SKlearn stubs](https://github.com/microsoft/python-type-stubs/tree/main/stubs/sklearn) as a Git submodules.
+- Run the following commands to extract only the needed files for the SKlearn stubs
+```
+cd python-frontend/typeshed_serializer/resources/python-type-stubs
+git sparse-checkout set --no-cone stubs/sklearn 
+git checkout
+```
 
 All the above should be available in PATH.
 
