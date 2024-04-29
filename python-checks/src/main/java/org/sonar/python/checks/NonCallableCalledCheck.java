@@ -66,8 +66,8 @@ public class NonCallableCalledCheck extends PythonSubscriptionCheck {
 
   public String message(PythonType typeV2, @Nullable String name) {
     if (name != null) {
-      return String.format("Fix this call; \"%s\"%s is not callable.", name, addTypeName(typeV2));
+      return "Fix this call; \"%s\"%s is not callable.".formatted(name, addTypeName(typeV2));
     }
-    return String.format("Fix this call; this expression%s is not callable.", addTypeName(typeV2));
+    return "Fix this call; this expression%s is not callable.".formatted(addTypeName(typeV2));
   }
 }
