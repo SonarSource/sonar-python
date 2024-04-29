@@ -1,0 +1,184 @@
+
+sklearn.tree._tree„
+Nodesklearn.tree._tree.Node"builtins.objectrN
+
+left_child"sklearn.tree._tree.Node.left_child
+builtins.int"builtins.intrP
+right_child#sklearn.tree._tree.Node.right_child
+builtins.int"builtins.intrH
+featuresklearn.tree._tree.Node.feature
+builtins.int"builtins.intrP
+	threshold!sklearn.tree._tree.Node.threshold 
+builtins.float"builtins.floatrN
+impurity sklearn.tree._tree.Node.impurity 
+builtins.float"builtins.floatrV
+n_node_samples&sklearn.tree._tree.Node.n_node_samples
+builtins.int"builtins.intrl
+weighted_n_node_samples/sklearn.tree._tree.Node.weighted_n_node_samples 
+builtins.float"builtins.float¹
+DepthFirstTreeBuilder(sklearn.tree._tree.DepthFirstTreeBuilder"sklearn.tree._tree.TreeBuilder*ƒ
+__init__1sklearn.tree._tree.DepthFirstTreeBuilder.__init__"
+None*^
+selfT
+(sklearn.tree._tree.DepthFirstTreeBuilder"(sklearn.tree._tree.DepthFirstTreeBuilder*P
+splitterB
+sklearn.tree._splitter.Splitter"sklearn.tree._splitter.Splitter*3
+min_samples_split
+builtins.int"builtins.int*2
+min_samples_leaf
+builtins.int"builtins.int*5
+min_weight_leaf 
+builtins.float"builtins.float*+
+	max_depth
+builtins.int"builtins.int*;
+min_impurity_decrease 
+builtins.float"builtins.float*Ï
+build.sklearn.tree._tree.DepthFirstTreeBuilder.build"
+None*^
+selfT
+(sklearn.tree._tree.DepthFirstTreeBuilder"(sklearn.tree._tree.DepthFirstTreeBuilder*<
+tree2
+sklearn.tree._tree.Tree"sklearn.tree._tree.Tree*)
+X"
+builtins.object"builtins.object*@
+y9
+numpy.ndarray[Any,Any]
+Any
+Any"numpy.ndarray*€
+sample_weightk
+"Union[numpy.ndarray[Any,Any],None]9
+numpy.ndarray[Any,Any]
+Any
+Any"numpy.ndarray
+None Ë	
+BestFirstTreeBuilder'sklearn.tree._tree.BestFirstTreeBuilder"sklearn.tree._tree.TreeBuilder*²
+__init__0sklearn.tree._tree.BestFirstTreeBuilder.__init__"
+None*\
+selfR
+'sklearn.tree._tree.BestFirstTreeBuilder"'sklearn.tree._tree.BestFirstTreeBuilder*P
+splitterB
+sklearn.tree._splitter.Splitter"sklearn.tree._splitter.Splitter*3
+min_samples_split
+builtins.int"builtins.int*2
+min_samples_leaf
+builtins.int"builtins.int*5
+min_weight_leaf 
+builtins.float"builtins.float*+
+	max_depth
+builtins.int"builtins.int*0
+max_leaf_nodes
+builtins.int"builtins.int*;
+min_impurity_decrease 
+builtins.float"builtins.float*Ì
+build-sklearn.tree._tree.BestFirstTreeBuilder.build"
+None*\
+selfR
+'sklearn.tree._tree.BestFirstTreeBuilder"'sklearn.tree._tree.BestFirstTreeBuilder*<
+tree2
+sklearn.tree._tree.Tree"sklearn.tree._tree.Tree*)
+X"
+builtins.object"builtins.object*@
+y9
+numpy.ndarray[Any,Any]
+Any
+Any"numpy.ndarray*€
+sample_weightk
+"Union[numpy.ndarray[Any,Any],None]9
+numpy.ndarray[Any,Any]
+Any
+Any"numpy.ndarray
+None rf
+max_leaf_nodes6sklearn.tree._tree.BestFirstTreeBuilder.max_leaf_nodes
+builtins.int"builtins.int§
+Treesklearn.tree._tree.Tree"builtins.object*³
+predictsklearn.tree._tree.Tree.predict"9
+numpy.ndarray[Any,Any]
+Any
+Any"numpy.ndarray*<
+self2
+sklearn.tree._tree.Tree"sklearn.tree._tree.Tree*
+X
+Any*¯
+applysklearn.tree._tree.Tree.apply"9
+numpy.ndarray[Any,Any]
+Any
+Any"numpy.ndarray*<
+self2
+sklearn.tree._tree.Tree"sklearn.tree._tree.Tree*
+X
+Any*
+decision_path%sklearn.tree._tree.Tree.decision_path"
+Any*<
+self2
+sklearn.tree._tree.Tree"sklearn.tree._tree.Tree*
+X
+Any*L
+compute_node_depths+sklearn.tree._tree.Tree.compute_node_depths*
+self*k
+compute_feature_importances3sklearn.tree._tree.Tree.compute_feature_importances*
+self*
+	normalizerN
+
+n_features"sklearn.tree._tree.Tree.n_features
+builtins.int"builtins.intrL
+	n_classes!sklearn.tree._tree.Tree.n_classes
+builtins.int"builtins.intrL
+	n_outputs!sklearn.tree._tree.Tree.n_outputs
+builtins.int"builtins.intrT
+max_n_classes%sklearn.tree._tree.Tree.max_n_classes
+builtins.int"builtins.intrJ
+max_dept sklearn.tree._tree.Tree.max_dept
+builtins.int"builtins.intrN
+
+node_count"sklearn.tree._tree.Tree.node_count
+builtins.int"builtins.intrJ
+capacity sklearn.tree._tree.Tree.capacity
+builtins.int"builtins.intra
+nodessklearn.tree._tree.Tree.nodes9
+numpy.ndarray[Any,Any]
+Any
+Any"numpy.ndarrayra
+valuesklearn.tree._tree.Tree.value9
+numpy.ndarray[Any,Any]
+Any
+Any"numpy.ndarrayrR
+value_stride$sklearn.tree._tree.Tree.value_stride
+builtins.int"builtins.int©
+TreeBuildersklearn.tree._tree.TreeBuilder"builtins.object*ü
+build$sklearn.tree._tree.TreeBuilder.build"
+Any*J
+self@
+sklearn.tree._tree.TreeBuilder"sklearn.tree._tree.TreeBuilder*<
+tree2
+sklearn.tree._tree.Tree"sklearn.tree._tree.Tree*
+X
+Any*
+y
+Any*
+sample_weight
+Anyrw
+splitter'sklearn.tree._tree.TreeBuilder.splitterB
+sklearn.tree._splitter.Splitter"sklearn.tree._splitter.Splitterrc
+min_samples_split0sklearn.tree._tree.TreeBuilder.min_samples_split
+builtins.int"builtins.intra
+min_samples_leaf/sklearn.tree._tree.TreeBuilder.min_samples_leaf
+builtins.int"builtins.intrc
+min_weight_leaf.sklearn.tree._tree.TreeBuilder.min_weight_leaf 
+builtins.float"builtins.floatrS
+	max_depth(sklearn.tree._tree.TreeBuilder.max_depth
+builtins.int"builtins.intro
+min_impurity_decrease4sklearn.tree._tree.TreeBuilder.min_impurity_decrease 
+builtins.float"builtins.floatµ
+ccp_pruning_path#sklearn.tree._tree.ccp_pruning_path"9
+builtins.dict[Any,Any]
+Any
+Any"builtins.dict*A
+	orig_tree2
+sklearn.tree._tree.Tree"sklearn.tree._tree.Tree*
+__annotations__"sklearn.tree._tree.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*
+npnumpy *G
+	TREE_LEAFsklearn.tree._tree.TREE_LEAF
+builtins.int"builtins.int
