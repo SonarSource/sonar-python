@@ -235,7 +235,8 @@ class MicrosoftStubsSerializer(Serializer):
 
     def is_exception(self, file, build_result, source_paths):
         file_path = build_result.files[file].path
-        return "sklearn" not in file_path
+        # Filtering out KDTree and BallTree to avoid FPs
+        return "sklearn" not in file_path or "_kd_tree" in file_path or "_ball_tree" in file_path
 
 
 class CustomStubsSerializer(Serializer):

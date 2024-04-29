@@ -46,7 +46,7 @@ def test_microsoft_stubs_serializer(microsoft_stubs):
         stubs_serializer.get_build_result = Mock(return_value=(microsoft_stubs, set()))
         stubs_serializer.serialize()
         assert stubs_serializer.get_build_result.call_count == 1
-        assert symbols.save_module.call_count == 308
+        assert symbols.save_module.call_count == 306
 
 def test_custom_stubs_serializer(typeshed_custom_stubs):
     save_module_mock = Mock()
