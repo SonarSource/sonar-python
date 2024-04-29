@@ -586,7 +586,7 @@ public class ClassTypeTest {
   @Test
   void builder() {
     ClassType classType = classType("class A: ...");
-    ClassTypeBuilder classTypeBuilder = new ClassTypeBuilder().setName("A");
+    ClassTypeBuilder classTypeBuilder = new ClassTypeBuilder().withName("A");
     assertThat(classTypeBuilder.build()).isEqualTo(classType);
   }
 

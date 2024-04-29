@@ -160,7 +160,7 @@ public class TypeInferenceV2 extends BaseTreeVisitor {
     scan(classDef.args());
     Name name = classDef.name();
     ClassTypeBuilder classTypeBuilder = new ClassTypeBuilder()
-      .setName(name.name())
+      .withName(name.name())
       .withDefinitionLocation(locationInFile(classDef.name(), fileId));
     resolveTypeHierarchy(classDef, classTypeBuilder);
     ClassType type = classTypeBuilder.build();

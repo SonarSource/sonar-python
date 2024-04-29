@@ -44,7 +44,7 @@ public class ClassTypeBuilder implements TypeBuilder<ClassType> {
     return new ClassType(name, members, attributes, superClasses, metaClasses, definitionLocation);
   }
 
-  public ClassTypeBuilder setName(String name) {
+  public ClassTypeBuilder withName(String name) {
     this.name = name;
     return this;
   }
