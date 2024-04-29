@@ -121,7 +121,8 @@ public class SymbolsModuleTypeProvider {
         .withAsynchronous(symbol.isAsynchronous())
         .withHasDecorators(symbol.hasDecorators())
         .withInstanceMethod(symbol.isInstanceMethod())
-        .withHasVariadicParameter(symbol.hasVariadicParameter());
+        .withHasVariadicParameter(symbol.hasVariadicParameter())
+        .withDefinitionLocation(symbol.definitionLocation());
     FunctionType functionType = functionTypeBuilder.build();
     createdTypesBySymbol.put(symbol, functionType);
     return functionType;
@@ -142,7 +143,7 @@ public class SymbolsModuleTypeProvider {
     if (createdTypesBySymbol.containsKey(symbol)) {
       return createdTypesBySymbol.get(symbol);
     }
-    ClassType classType = new ClassType(symbol.name());
+    ClassType classType = new ClassType(symbol.name(), symbol.definitionLocation());
     createdTypesBySymbol.put(symbol, classType);
     Set<Member> members =
       symbol.declaredMembers().stream().map(m -> new Member(m.name(), convertToType(m, createdTypesBySymbol))).collect(Collectors.toSet());

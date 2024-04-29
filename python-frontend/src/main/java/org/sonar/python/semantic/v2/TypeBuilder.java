@@ -19,9 +19,12 @@
  */
 package org.sonar.python.semantic.v2;
 
+import org.sonar.plugins.python.api.LocationInFile;
 import org.sonar.python.types.v2.PythonType;
 
 public interface TypeBuilder<T extends PythonType> {
 
   T build();
+
+  TypeBuilder<T> withDefinitionLocation(LocationInFile definitionLocation);
 }

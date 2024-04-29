@@ -20,6 +20,8 @@
 package org.sonar.python.types.v2;
 
 import org.junit.jupiter.api.Test;
+import org.sonar.plugins.python.api.LocationInFile;
+import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
@@ -32,8 +34,11 @@ import org.sonar.python.semantic.v2.TypeInferenceV2;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.PythonTestUtils.parseWithoutSymbols;
+import static org.sonar.python.semantic.SymbolUtils.pathOf;
 
 class FunctionTypeTest {
+
+  static PythonFile pythonFile = PythonTestUtils.pythonFile("");
 
   @Test
   void arity() {
@@ -42,6 +47,8 @@ class FunctionTypeTest {
     assertThat(functionType.parameters()).isEmpty();
     assertThat(functionType.displayName()).contains("Callable");
     assertThat(functionType.instanceDisplayName()).isEmpty();
+    String fileId = pathOf(pythonFile).toString();
+    assertThat(functionType.definitionLocation()).contains(new LocationInFile(fileId, 1, 4, 1, 6));
 
     functionType = functionType("async def fn(p1, p2, p3): pass");
     assertThat(functionType.parameters()).extracting(ParameterV2::name).containsExactly("p1", "p2", "p3");
@@ -179,7 +186,7 @@ class FunctionTypeTest {
       "  def foo(self): pass"
     );
     fileInput.accept(new SymbolTableBuilderV2());
-    fileInput.accept(new TypeInferenceV2(new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty())));
+    fileInput.accept(new TypeInferenceV2(new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty()), pythonFile));
 
     ClassDef classDef = (ClassDef) PythonTestUtils.getAllDescendant(fileInput, t -> t.is(Tree.Kind.CLASSDEF)).get(0);
     FunctionDef functionDef = (FunctionDef) PythonTestUtils.getAllDescendant(fileInput, t -> t.is(Tree.Kind.FUNCDEF)).get(0);
@@ -195,7 +202,7 @@ class FunctionTypeTest {
   public static FunctionType functionType(String... code) {
     FileInput fileInput = parseWithoutSymbols(code);
     fileInput.accept(new SymbolTableBuilderV2());
-    fileInput.accept(new TypeInferenceV2(new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty())));
+    fileInput.accept(new TypeInferenceV2(new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty()), pythonFile));
     FunctionDef functionDef = (FunctionDef) PythonTestUtils.getAllDescendant(fileInput, t -> t.is(Tree.Kind.FUNCDEF)).get(0);
     return (FunctionType) functionDef.name().typeV2();
   }

@@ -27,6 +27,8 @@ import java.util.Set;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
+import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.CallExpression;
@@ -53,6 +55,8 @@ import static org.sonar.python.PythonTestUtils.parseWithoutSymbols;
 class TypeInferenceV2Test {
   private static FileInput fileInput;
 
+  static PythonFile pythonFile = PythonTestUtils.pythonFile("");
+
   @BeforeAll
   static void init() {
     var context = TestPythonVisitorRunner.createContext(new File("src/test/resources/semantic/v2/script.py"));
@@ -64,7 +68,7 @@ class TypeInferenceV2Test {
     var pythonFile = PythonTestUtils.pythonFile("script.py");
     var builder = new SymbolTableBuilderV2();
     builder.visitFileInput(fileInput);
-    var typeInferenceV2 = new TypeInferenceV2(new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty()));
+    var typeInferenceV2 = new TypeInferenceV2(new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty()), pythonFile);
     fileInput.accept(typeInferenceV2);
 
     System.out.println("hello");
@@ -272,7 +276,7 @@ class TypeInferenceV2Test {
     FileInput root = parseWithoutSymbols(lines);
     var symbolTableBuilderV2 = new SymbolTableBuilderV2();
     root.accept(symbolTableBuilderV2);
-    var typeInferenceV2 = new TypeInferenceV2(new ProjectLevelTypeTable(ProjectLevelSymbolTable.from(globalSymbols)));
+    var typeInferenceV2 = new TypeInferenceV2(new ProjectLevelTypeTable(ProjectLevelSymbolTable.from(globalSymbols)), pythonFile);
     root.accept(typeInferenceV2);
     return root;
   }
