@@ -42,6 +42,10 @@ def call_noncallable(p):
       x = 'str'
     x() # FN: multiple assignment not handled
 
+
+def call_no_name():
+    42() # Noncompliant {{Fix this call; this expression has type int and it is not callable.}}
+
 def flow_sensitivity():
   my_var = "hello"
   my_var = 42
