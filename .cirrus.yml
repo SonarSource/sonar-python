@@ -74,6 +74,10 @@ build_task:
     folder: ${CIRRUS_WORKING_DIR}/.m2/repository
   build_script:
     - git submodule update --init
+    - cd python-frontend/typeshed_serializer/resources/python-type-stubs
+    - git sparse-checkout set --no-cone stubs/sklearn 
+    - git checkout
+    - cd -
     - source cirrus-env BUILD
     - regular_mvn_build_deploy_analyze
     - ./check-license-compliance.sh
@@ -90,6 +94,10 @@ build_win_task:
   build_script:
     - git config --global core.autocrlf input
     - git submodule update --init
+    - cd python-frontend/typeshed_serializer/resources/python-type-stubs
+    - git sparse-checkout set --no-cone stubs/sklearn 
+    - git checkout
+    - cd -
     - source cirrus-env CI
     - unset SONARSOURCE_QA
     - mvn.cmd package -DskipTypeshed=true
