@@ -72,37 +72,14 @@ public class SklearnCachedPipelineDontAccessTransformersCheck extends PythonSubs
     }
     var stepsArgument = TreeUtils.nthArgumentOrKeyword(0, "steps", callExpression.arguments());
 
-    Stream<Name> nameStream;
     Map<Name, String> nameToStepName = new HashMap<>();
     Optional<Expression> stepArgumentExpression = Optional.ofNullable(stepsArgument)
       .map(RegularArgument::expression);
 
-    if (pipelineCreation == PipelineCreation.PIPELINE) {
-      var tuples = stepArgumentExpression
-        .filter(e -> e.is(Tree.Kind.LIST_LITERAL))
-        .map(e -> ((ListLiteral) e).elements().expressions())
-        .stream()
-        .flatMap(Collection::stream)
-        .filter(e -> e.is(Tree.Kind.TUPLE));
+    var nameStream = stepArgumentExpression.map(
+      e -> pipelineCreation == PipelineCreation.PIPELINE ? extractFromPipeline(e, nameToStepName) : extractFromMakePipeline(e))
+      .orElse(Stream.empty());
 
-      nameStream = tuples
-        .map(t -> ((TupleImpl) t).elements())
-        .filter(e -> e.size() == 2)
-        .filter(e -> e.get(1).is(Tree.Kind.NAME))
-        .map(e2 -> {
-          if (e2.get(0).is(Tree.Kind.STRING_LITERAL)) {
-            nameToStepName.put((Name) e2.get(1), ((StringLiteral) e2.get(0)).trimmedQuotesValue());
-          }
-          return e2;
-        })
-        .map(e -> e.get(1))
-        .map(Name.class::cast);
-    } else {
-      nameStream = stepArgumentExpression
-        .filter(e -> e.is(Tree.Kind.NAME))
-        .map(Name.class::cast)
-        .stream();
-    }
     var qualifiedUses = nameStream
       .collect(Collectors.toMap(n -> n, SklearnCachedPipelineDontAccessTransformersCheck::symbolIsUsedInQualifiedExpression));
 
@@ -118,6 +95,35 @@ public class SklearnCachedPipelineDontAccessTransformersCheck extends PythonSubs
         }
       }
     });
+  }
+
+  private static Stream<Name> extractFromMakePipeline(Expression stepArgumentExpression) {
+    return Optional.of(stepArgumentExpression)
+      .filter(e -> e.is(Tree.Kind.NAME))
+      .map(Name.class::cast)
+      .stream();
+  }
+
+  private static Stream<Name> extractFromPipeline(Expression stepArgumentExpression, Map<Name, String> nameToStepName) {
+    var tuples = Optional.of(stepArgumentExpression)
+      .filter(e -> e.is(Tree.Kind.LIST_LITERAL))
+      .map(e -> ((ListLiteral) e).elements().expressions())
+      .stream()
+      .flatMap(Collection::stream)
+      .filter(e -> e.is(Tree.Kind.TUPLE));
+
+    return tuples
+      .map(t -> ((TupleImpl) t).elements())
+      .filter(e -> e.size() == 2)
+      .filter(e -> e.get(1).is(Tree.Kind.NAME))
+      .map(e2 -> {
+        if (e2.get(0).is(Tree.Kind.STRING_LITERAL)) {
+          nameToStepName.put((Name) e2.get(1), ((StringLiteral) e2.get(0)).trimmedQuotesValue());
+        }
+        return e2;
+      })
+      .map(e -> e.get(1))
+      .map(Name.class::cast);
   }
 
   private static Optional<PythonQuickFix> getQuickFix(Name pipelineBindingVariable, Tree name, QualifiedExpression qualifiedExpression, Map<Name, String> nameToStepName) {
