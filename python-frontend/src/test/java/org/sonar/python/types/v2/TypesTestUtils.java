@@ -21,22 +21,20 @@ package org.sonar.python.types.v2;
 
 import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.tree.FileInput;
+import org.sonar.python.PythonTestUtils;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.semantic.v2.ProjectLevelTypeTable;
 import org.sonar.python.semantic.v2.SymbolTableBuilderV2;
 import org.sonar.python.semantic.v2.TypeInferenceV2;
 
-import static org.sonar.python.PythonTestUtils.parseWithoutSymbols;
-import static org.sonar.python.PythonTestUtils.pythonFile;
-
 public class TypesTestUtils {
 
   public static FileInput parseAndInferTypes(String... code) {
-    return parseAndInferTypes(pythonFile(""), code);
+    return parseAndInferTypes(PythonTestUtils.pythonFile(""), code);
   }
 
   public static FileInput parseAndInferTypes(PythonFile pythonFile, String... code) {
-    FileInput fileInput = parseWithoutSymbols(code);
+    FileInput fileInput = PythonTestUtils.parseWithoutSymbols(code);
     fileInput.accept(new SymbolTableBuilderV2());
     fileInput.accept(new TypeInferenceV2(new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty()), pythonFile));
     return fileInput;

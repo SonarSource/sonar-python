@@ -37,9 +37,9 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tuple;
 import org.sonar.python.PythonTestUtils;
 import org.sonar.python.tree.TreeUtils;
+import org.sonar.python.semantic.SymbolUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.sonar.python.semantic.SymbolUtils.pathOf;
 import static org.sonar.python.types.v2.TypesTestUtils.parseAndInferTypes;
 
 
@@ -60,7 +60,7 @@ class ObjectTypeTest {
     assertThat(objectType.displayName()).contains("A");
     assertThat(objectType.isCompatibleWith(classType)).isTrue();
     assertThat(objectType.hasMember("foo")).isEqualTo(TriBool.FALSE);
-    String fileId = pathOf(pythonFile).toString();
+    String fileId = SymbolUtils.pathOf(pythonFile).toString();
     assertThat(objectType.definitionLocation()).contains(new LocationInFile(fileId, 1, 6, 1, 7));
   }
 

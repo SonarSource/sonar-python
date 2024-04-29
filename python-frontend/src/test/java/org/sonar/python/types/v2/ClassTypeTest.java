@@ -32,6 +32,7 @@ import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.PythonTestUtils;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
+import org.sonar.python.semantic.SymbolUtils;
 import org.sonar.python.semantic.v2.ClassTypeBuilder;
 import org.sonar.python.semantic.v2.ProjectLevelTypeTable;
 import org.sonar.python.semantic.v2.SymbolTableBuilderV2;
@@ -42,7 +43,6 @@ import org.sonar.python.semantic.v2.UsageV2;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.PythonTestUtils.parse;
 import static org.sonar.python.PythonTestUtils.parseWithoutSymbols;
-import static org.sonar.python.semantic.SymbolUtils.pathOf;
 
 public class ClassTypeTest {
 
@@ -66,7 +66,7 @@ public class ClassTypeTest {
     assertThat(classType.displayName()).contains("type");
     assertThat(classType.instanceDisplayName()).contains("C");
 
-    String fileId = pathOf(pythonFile).toString();
+    String fileId = SymbolUtils.pathOf(pythonFile).toString();
     assertThat(classType.definitionLocation()).contains(new LocationInFile(fileId, 1, 6, 1, 7));
   }
 

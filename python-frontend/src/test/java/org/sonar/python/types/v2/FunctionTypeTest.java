@@ -28,13 +28,13 @@ import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.PythonTestUtils;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
+import org.sonar.python.semantic.SymbolUtils;
 import org.sonar.python.semantic.v2.ProjectLevelTypeTable;
 import org.sonar.python.semantic.v2.SymbolTableBuilderV2;
 import org.sonar.python.semantic.v2.TypeInferenceV2;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.PythonTestUtils.parseWithoutSymbols;
-import static org.sonar.python.semantic.SymbolUtils.pathOf;
 
 class FunctionTypeTest {
 
@@ -47,7 +47,7 @@ class FunctionTypeTest {
     assertThat(functionType.parameters()).isEmpty();
     assertThat(functionType.displayName()).contains("Callable");
     assertThat(functionType.instanceDisplayName()).isEmpty();
-    String fileId = pathOf(pythonFile).toString();
+    String fileId = SymbolUtils.pathOf(pythonFile).toString();
     assertThat(functionType.definitionLocation()).contains(new LocationInFile(fileId, 1, 4, 1, 6));
 
     functionType = functionType("async def fn(p1, p2, p3): pass");
