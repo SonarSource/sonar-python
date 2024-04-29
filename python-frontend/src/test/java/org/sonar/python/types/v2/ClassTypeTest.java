@@ -57,6 +57,9 @@ public class ClassTypeTest {
     assertThat(classType.hasMember("unknown")).isEqualTo(TriBool.UNKNOWN);
     assertThat(classType.instancesHaveMember("__call__")).isEqualTo(TriBool.FALSE);
     assertThat(classType.instancesHaveMember("unknown")).isEqualTo(TriBool.FALSE);
+
+    assertThat(classType.displayName()).contains("type");
+    assertThat(classType.instanceDisplayName()).contains("C");
   }
 
   @Test
@@ -577,6 +580,21 @@ public class ClassTypeTest {
     ClassType classType = classType("class A: ...");
     ClassTypeBuilder classTypeBuilder = new ClassTypeBuilder().setName("A");
     assertThat(classTypeBuilder.build()).isEqualTo(classType);
+  }
+
+  @Test
+  void displayName() {
+    ClassType classType = new ClassType("...");
+    assertThat(classType.instanceDisplayName()).contains("...");
+    assertThat(classType.displayName()).contains("type");
+
+    classType = new ClassType("MyClass");
+    assertThat(classType.instanceDisplayName()).contains("MyClass");
+    assertThat(classType.displayName()).contains("type");
+
+    classType = new ClassType("mymod.MyClass");
+    assertThat(classType.instanceDisplayName()).contains("MyClass");
+    assertThat(classType.displayName()).contains("type");
   }
 
   public static ClassType classType(String... code) {

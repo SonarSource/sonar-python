@@ -19,31 +19,21 @@
  */
 package org.sonar.python.types.v2;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import org.sonar.plugins.python.api.tree.FileInput;
+import org.sonar.python.semantic.ProjectLevelSymbolTable;
+import org.sonar.python.semantic.v2.ProjectLevelTypeTable;
+import org.sonar.python.semantic.v2.SymbolTableBuilderV2;
+import org.sonar.python.semantic.v2.TypeInferenceV2;
 
-public record UnionType(List<PythonType> candidates) implements PythonType {
-  public UnionType() {
-    this(List.of());
-  }
+import static org.sonar.python.PythonTestUtils.parseWithoutSymbols;
 
-  @Override
-  public Optional<String> displayName() {
-    List<String> candidateNames = new ArrayList<>();
-    for (PythonType candidate : candidates) {
-      Optional<String> s = candidate.displayName();
-      s.ifPresent(candidateNames::add);
-      if (s.isEmpty()) {
-        return Optional.empty();
-      }
-    }
-    return Optional.of("Union[%s]".formatted(String.join(", ", candidateNames)));
-  }
+public class TypesTestUtils {
 
-  @Override
-  public boolean isCompatibleWith(PythonType another) {
-    return candidates.isEmpty() || candidates.stream()
-      .anyMatch(candidate -> candidate.isCompatibleWith(another));
+
+  public static FileInput parseAndInferTypes(String... code) {
+    FileInput fileInput = parseWithoutSymbols(code);
+    fileInput.accept(new SymbolTableBuilderV2());
+    fileInput.accept(new TypeInferenceV2(new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty())));
+    return fileInput;
   }
 }
