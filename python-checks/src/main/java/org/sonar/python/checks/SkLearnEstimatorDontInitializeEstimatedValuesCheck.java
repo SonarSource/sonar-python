@@ -29,7 +29,6 @@ import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
-import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.ClassDef;
@@ -65,10 +64,7 @@ public class SkLearnEstimatorDontInitializeEstimatedValuesCheck extends PythonSu
   }
 
   private static boolean inheritsMixin(ClassSymbol classSymbol) {
-    boolean directlyInheritsMixin = classSymbol.superClasses().stream().filter(superClass -> superClass.fullyQualifiedName() != null)
-      .anyMatch(superClass -> MIXINS_FULLY_QUALIFIED_NAME.contains(superClass.fullyQualifiedName()));
-    return directlyInheritsMixin || classSymbol.superClasses().stream().filter(symbol -> symbol.is(Symbol.Kind.CLASS)).map(ClassSymbol.class::cast)
-      .anyMatch(SkLearnEstimatorDontInitializeEstimatedValuesCheck::inheritsMixin);
+    return MIXINS_FULLY_QUALIFIED_NAME.stream().anyMatch(classSymbol::isOrExtends);
   }
 
   private static void checkFunction(SubscriptionContext subscriptionContext) {

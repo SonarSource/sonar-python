@@ -9,14 +9,13 @@ class MyEstimator(BaseEstimator):
         self.__something_private__ = True
         local_variable = 5.
         callable().a_  = []
+        b_ = 0
 
     def another_method(self):
         self.b_ = True
 
     def fit(x, y):
         self.a_ = 5
-
-# def CustomRegressor
 
 class UnrelatedClass():
     def __init__(self) -> None:
@@ -47,7 +46,7 @@ class IndirectlyFromMixin(IndirectlyFromMixinStep1, IndirectlyFromMixinStep3):
         self.a_ = None # Noncompliant
 
 def __init__():
-    ...
+    a_ = 0
 
 class Duplicated(BaseEstimator):
     def __init__(self) -> None:
