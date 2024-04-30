@@ -25,7 +25,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
@@ -47,13 +46,14 @@ import org.sonar.python.quickfix.TextEditUtils;
 import org.sonar.python.semantic.SymbolUtils;
 import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.tree.TupleImpl;
+import org.sonar.python.types.InferredTypes;
 
 @Rule(key = "S6971")
 public class SklearnCachedPipelineDontAccessTransformersCheck extends PythonSubscriptionCheck {
 
   public static final String MESSAGE = "Avoid accessing transformers in a cached pipeline.";
-  public static final String MESSAGE_SECONDARY = "Accessed here";
-  public static final String MESSAGE_SECONDARY_CREATION = "Pipeline created here";
+  public static final String MESSAGE_SECONDARY = "The transformer is accessed here";
+  public static final String MESSAGE_SECONDARY_CREATION = "The Pipeline is created here";
 
   @Override
   public void initialize(Context context) {
@@ -62,12 +62,14 @@ public class SklearnCachedPipelineDontAccessTransformersCheck extends PythonSubs
 
   private static void checkCallExpr(SubscriptionContext subscriptionContext) {
     CallExpression callExpression = (CallExpression) subscriptionContext.syntaxNode();
-    PipelineCreation pipelineCreation = isPipelineCreation(callExpression);
-    if (pipelineCreation == PipelineCreation.NOT_PIPELINE) {
+    Optional<PipelineCreation> pipelineCreationOptional = isPipelineCreation(callExpression);
+    if (pipelineCreationOptional.isEmpty()) {
       return;
     }
+    PipelineCreation pipelineCreation = pipelineCreationOptional.get();
+
     var memoryArgument = TreeUtils.argumentByKeyword("memory", callExpression.arguments());
-    if (memoryArgument == null || memoryArgument.expression().is(Tree.Kind.NONE)) {
+    if (memoryArgument == null || memoryArgument.expression().is(Tree.Kind.NONE) || memoryArgument.expression().type() == InferredTypes.anyType()) {
       return;
     }
     var stepsArgument = TreeUtils.nthArgumentOrKeyword(0, "steps", callExpression.arguments());
@@ -76,14 +78,17 @@ public class SklearnCachedPipelineDontAccessTransformersCheck extends PythonSubs
     Optional<Expression> stepArgumentExpression = Optional.ofNullable(stepsArgument)
       .map(RegularArgument::expression);
 
-    var nameStream = stepArgumentExpression.map(
+    var stepNames = stepArgumentExpression.map(
       e -> pipelineCreation == PipelineCreation.PIPELINE ? extractFromPipeline(e, nameToStepName) : extractFromMakePipeline(e))
       .orElse(Stream.empty());
 
-    var qualifiedUses = nameStream
-      .collect(Collectors.toMap(n -> n, SklearnCachedPipelineDontAccessTransformersCheck::symbolIsUsedInQualifiedExpression));
+    var qualifiedUses = stepNames
+      .map(name -> Map.entry(name, symbolIsUsedInQualifiedExpression(name)));
 
-    qualifiedUses.forEach((name, uses) -> {
+    qualifiedUses.forEach(entry -> {
+      Name name = entry.getKey();
+      Map<Tree, QualifiedExpression> uses = entry.getValue();
+
       if (!uses.isEmpty()) {
         var issue = subscriptionContext.addIssue(name, MESSAGE);
         uses.forEach((useTree, qualExpr) -> issue.secondary(useTree, MESSAGE_SECONDARY));
@@ -105,14 +110,12 @@ public class SklearnCachedPipelineDontAccessTransformersCheck extends PythonSubs
   }
 
   private static Stream<Name> extractFromPipeline(Expression stepArgumentExpression, Map<Name, String> nameToStepName) {
-    var tuples = Optional.of(stepArgumentExpression)
+    return Optional.of(stepArgumentExpression)
       .filter(e -> e.is(Tree.Kind.LIST_LITERAL))
       .map(e -> ((ListLiteral) e).elements().expressions())
       .stream()
       .flatMap(Collection::stream)
-      .filter(e -> e.is(Tree.Kind.TUPLE));
-
-    return tuples
+      .filter(e -> e.is(Tree.Kind.TUPLE))
       .map(t -> ((TupleImpl) t).elements())
       .filter(e -> e.size() == 2)
       .filter(e -> e.get(1).is(Tree.Kind.NAME))
@@ -127,13 +130,10 @@ public class SklearnCachedPipelineDontAccessTransformersCheck extends PythonSubs
   }
 
   private static Optional<PythonQuickFix> getQuickFix(Name pipelineBindingVariable, Tree name, QualifiedExpression qualifiedExpression, Map<Name, String> nameToStepName) {
-    var quickFix = PythonQuickFix.newQuickFix("Access the property through the ");
-    String stepName = nameToStepName.get(name);
-    if (stepName == null) {
-      return Optional.empty();
-    }
-    quickFix.addTextEdit(TextEditUtils.replace(qualifiedExpression.qualifier(), String.format("%s.named_steps[\"%s\"]", pipelineBindingVariable.name(), stepName)));
-    return Optional.of(quickFix.build());
+    return Optional.ofNullable(nameToStepName.get(name))
+      .map(stepName -> PythonQuickFix.newQuickFix("Access the property through the ")
+        .addTextEdit(TextEditUtils.replace(qualifiedExpression.qualifier(), String.format("%s.named_steps[\"%s\"]", pipelineBindingVariable.name(), stepName)))
+        .build());
   }
 
   private static Map<Tree, QualifiedExpression> symbolIsUsedInQualifiedExpression(Name name) {
@@ -155,7 +155,7 @@ public class SklearnCachedPipelineDontAccessTransformersCheck extends PythonSubs
     NOT_PIPELINE
   }
 
-  private static PipelineCreation isPipelineCreation(CallExpression callExpression) {
+  private static Optional<PipelineCreation> isPipelineCreation(CallExpression callExpression) {
     return Optional.ofNullable(callExpression.calleeSymbol()).map(Symbol::fullyQualifiedName)
       .map(fqn -> {
         if ("sklearn.pipeline.Pipeline".equals(fqn)) {
@@ -164,8 +164,8 @@ public class SklearnCachedPipelineDontAccessTransformersCheck extends PythonSubs
         if ("sklearn.pipeline.make_pipeline".equals(fqn)) {
           return PipelineCreation.MAKE_PIPELINE;
         }
-        return PipelineCreation.NOT_PIPELINE;
-      }).orElse(PipelineCreation.NOT_PIPELINE);
+        return null;
+      });
   }
 
   private static Optional<Name> getAssignedName(Expression expression) {
@@ -175,18 +175,23 @@ public class SklearnCachedPipelineDontAccessTransformersCheck extends PythonSubs
     if (expression.is(Tree.Kind.QUALIFIED_EXPR)) {
       return getAssignedName(((QualifiedExpression) expression).name());
     }
+
     var assignment = (AssignmentStatement) TreeUtils.firstAncestorOfKind(expression, Tree.Kind.ASSIGNMENT_STMT);
     if (assignment == null) {
       return Optional.empty();
     }
+
     var expressions = SymbolUtils.assignmentsLhs(assignment);
     if (expressions.size() != 1) {
       List<Expression> rhsExpressions = getExpressionsFromRhs(assignment.assignedValue());
       var rhsIndex = rhsExpressions.indexOf(expression);
       if (rhsIndex != -1) {
         return getAssignedName(expressions.get(rhsIndex));
+      } else {
+        return Optional.empty();
       }
     }
+
     return getAssignedName(expressions.get(0));
   }
 

@@ -12,25 +12,23 @@ def case1():
     knn = KNeighborsRegressor(n_neighbors=5)
 
     pipeline = Pipeline([
-              #^^^^^^^^> {{Pipeline created here}}
+              #^^^^^^^^> {{The Pipeline is created here}}
         ('scaler', scaler), # Noncompliant {{Avoid accessing transformers in a cached pipeline.}}
                   #^^^^^^
         ('knn', knn)
     ], memory="cache")
 
     print(scaler.center_)
-         #^^^^^^< {{Accessed here}}
+         #^^^^^^< {{The transformer is accessed here}}
 
 def case2():
     diabetes = load_diabetes()
     scaler = RobustScaler()
     knn = KNeighborsRegressor(n_neighbors=5)
 
-    pipeline = make_pipeline(scaler, knn, memory=something()) # Noncompliant
-                            #^^^^^^
+    pipeline = make_pipeline(scaler, knn, memory=something())
 
     print(scaler.center_)
-         #^^^^^^< {{Accessed here}}
 
     scaler1, knn1 = RobustScaler(), KNeighborsRegressor(n_neighbors=12)
     p3 = make_pipeline(scaler1, knn1, memory=None)
@@ -45,7 +43,7 @@ def case3():
     knn = KNeighborsRegressor(n_neighbors=5)
 
     pipeline = Pipeline([
-              #^^^^^^^^> {{Pipeline created here}}
+              #^^^^^^^^> {{The Pipeline is created here}}
         ('scaler', scaler), # Noncompliant
                   #^^^^^^
         ('knn', knn),
@@ -53,7 +51,7 @@ def case3():
     ], memory="cache")
 
     print(scaler.center_)
-         #^^^^^^< {{Accessed here}}
+         #^^^^^^< {{The transformer is accessed here}}
 
 def case4():
     from sklearn.pipeline import Pipeline
