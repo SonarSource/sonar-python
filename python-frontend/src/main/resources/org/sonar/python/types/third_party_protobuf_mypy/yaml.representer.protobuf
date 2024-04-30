@@ -67,7 +67,7 @@ start_markM
 SequenceNodeyaml.nodes.SequenceNode"yaml.nodes.CollectionNoder>
 idyaml.nodes.SequenceNode.id
 builtins.str"builtins.strK
-RepresenterError!yaml.representer.RepresenterError"yaml.error.YAMLErrorç$
+RepresenterError!yaml.representer.RepresenterError"yaml.error.YAMLErrorÿ$
 BaseRepresenter yaml.representer.BaseRepresenter"builtins.object*Õ
 __init__)yaml.representer.BaseRepresenter.__init__"
 None*N
@@ -144,23 +144,22 @@ start_markM
 flow_styleG
 Union[builtins.bool,None]
 builtins.bool"builtins.bool
-None *£
+None *Ð
 represent_mapping2yaml.representer.BaseRepresenter.represent_mapping"0
 yaml.nodes.MappingNode"yaml.nodes.MappingNode*N
 selfD
  yaml.representer.BaseRepresenter" yaml.representer.BaseRepresenter*%
 tag
-builtins.str"builtins.str*Õ
-mappingÇ
-ITypeAlias[Union[typing.Mapping[Any,Any],typing.Iterable[Tuple[Any,Any]]]]Ù
->Union[typing.Mapping[Any,Any],typing.Iterable[Tuple[Any,Any]]];
-typing.Mapping[Any,Any]
+builtins.str"builtins.str*‚
+mappingô
+GUnion[_typeshed.SupportsItems[Any,Any],typing.Iterable[Tuple[Any,Any]]]M
+ _typeshed.SupportsItems[Any,Any]
 Any
-Any"typing.MappingX
+Any"_typeshed.SupportsItemsX
 typing.Iterable[Tuple[Any,Any]]$
 Tuple[Any,Any]
 Any
-Any"typing.Iterable"yaml.representer.MappingLike*Y
+Any"typing.Iterable*Y
 
 flow_styleG
 Union[builtins.bool,None]
@@ -183,11 +182,12 @@ flow_styleG
 	Type[Any]
 Any"typeK
 CallableType[builtins.function]&
-builtins.function"builtins.function"builtins.dictrƒ
-default_style.yaml.representer.BaseRepresenter.default_styleB
-Union[builtins.str,Any]
-builtins.str"builtins.str
-AnyrW
+builtins.function"builtins.function"builtins.dictr¸
+default_style.yaml.representer.BaseRepresenter.default_stylew
+"Union[builtins.str,TypeAlias[Any]]
+builtins.str"builtins.str1
+TypeAlias[Any]
+Any"_typeshed.IncompleterW
 	sort_keys*yaml.representer.BaseRepresenter.sort_keys
 builtins.bool"builtins.boolri
 default_flow_style3yaml.representer.BaseRepresenter.default_flow_style
@@ -198,11 +198,12 @@ flow_styleG
 yaml.nodes.Node"yaml.nodes.Node"builtins.dictrm
 object_keeper.yaml.representer.BaseRepresenter.object_keeper,
 builtins.list[Any]
-Any"builtins.listr{
-	alias_key*yaml.representer.BaseRepresenter.alias_keyB
-Union[builtins.int,Any]
-builtins.int"builtins.int
-Any»
+Any"builtins.listr°
+	alias_key*yaml.representer.BaseRepresenter.alias_keyw
+"Union[builtins.int,TypeAlias[Any]]
+builtins.int"builtins.int1
+TypeAlias[Any]
+Any"_typeshed.Incomplete $
 SafeRepresenter yaml.representer.SafeRepresenter" yaml.representer.BaseRepresenter*Ä
 ignore_aliases/yaml.representer.SafeRepresenter.ignore_aliases"
 builtins.bool"builtins.bool*N
@@ -221,13 +222,24 @@ flow_styleG
 selfD
  yaml.representer.SafeRepresenter" yaml.representer.SafeRepresenter*&
 data
-builtins.str"builtins.str*ñ
+builtins.str"builtins.str*©
 represent_binary1yaml.representer.SafeRepresenter.represent_binary".
 yaml.nodes.ScalarNode"yaml.nodes.ScalarNode*N
 selfD
- yaml.representer.SafeRepresenter" yaml.representer.SafeRepresenter**
-data 
-builtins.bytes"builtins.bytes*ë
+ yaml.representer.SafeRepresenter" yaml.representer.SafeRepresenter*á
+dataÖ
+–TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]ž
+‹Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]] 
+builtins.bytes"builtins.bytesé
+uTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]Ò
+jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer](
+builtins.bytearray"builtins.bytearray*
+builtins.memoryview"builtins.memoryview(
+array.array[Any]
+Any"array.array
+	mmap.mmap"	mmap.mmap
+ctypes._CData"ctypes._CData*
+pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer"_typeshed.ReadableBuffer*ë
 represent_bool/yaml.representer.SafeRepresenter.represent_bool".
 yaml.nodes.ScalarNode"yaml.nodes.ScalarNode*N
 selfD
@@ -252,21 +264,20 @@ flow_styleG
  yaml.representer.SafeRepresenter" yaml.representer.SafeRepresenter*:
 data0
 typing.Iterable[Any]
-Any"typing.Iterable*˜
+Any"typing.Iterable*Å
 represent_dict/yaml.representer.SafeRepresenter.represent_dict"0
 yaml.nodes.MappingNode"yaml.nodes.MappingNode*N
 selfD
- yaml.representer.SafeRepresenter" yaml.representer.SafeRepresenter*Ò
-dataÇ
-ITypeAlias[Union[typing.Mapping[Any,Any],typing.Iterable[Tuple[Any,Any]]]]Ù
->Union[typing.Mapping[Any,Any],typing.Iterable[Tuple[Any,Any]]];
-typing.Mapping[Any,Any]
+ yaml.representer.SafeRepresenter" yaml.representer.SafeRepresenter*ÿ
+dataô
+GUnion[_typeshed.SupportsItems[Any,Any],typing.Iterable[Tuple[Any,Any]]]M
+ _typeshed.SupportsItems[Any,Any]
 Any
-Any"typing.MappingX
+Any"_typeshed.SupportsItemsX
 typing.Iterable[Tuple[Any,Any]]$
 Tuple[Any,Any]
 Any
-Any"typing.Iterable"yaml.representer.MappingLike*ý
+Any"typing.Iterable*ý
 represent_set.yaml.representer.SafeRepresenter.represent_set"0
 yaml.nodes.MappingNode"yaml.nodes.MappingNode*N
 selfD
