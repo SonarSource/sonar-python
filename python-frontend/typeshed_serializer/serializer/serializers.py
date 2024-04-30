@@ -43,7 +43,6 @@ IMPORTER_FQN = "sonar_third_party_libs"
 SUPPORTED_PYTHON_VERSIONS = ((3, 6), (3, 7), (3, 8), (3, 9), (3, 10), (3, 11))
 
 
-
 def get_options(python_version=(3, 8)):
     opt = options.Options()
     # Setting incremental to false to avoid issues with mypy caching
@@ -105,7 +104,9 @@ class Serializer(ABC):
 
     logger = logging.getLogger(__name__)
     handler = logging.StreamHandler(sys.stdout)
-    log_formatter = logging.Formatter(fmt="%(name)s [%(levelname)s] --- %(message)s ---")
+    log_formatter = logging.Formatter(
+        fmt="%(name)s [%(levelname)s] --- %(message)s ---"
+    )
     logger.setLevel(logging.INFO)
     handler.setFormatter(log_formatter)
     logger.addHandler(handler)
@@ -203,9 +204,7 @@ class TypeshedSerializer(Serializer):
 
     def is_exception(self, file, build_result, source_paths):
         file_path = build_result.files[file].path
-        return (
-            self.is_third_parties and file_path not in source_paths
-        ) or "/numpy/" in file_path
+        return self.is_third_parties and file_path not in source_paths
 
 
 class ImporterSerializer(Serializer):
@@ -236,7 +235,11 @@ class MicrosoftStubsSerializer(Serializer):
     def is_exception(self, file, build_result, source_paths):
         file_path = build_result.files[file].path
         # Filtering out KDTree and BallTree to avoid FPs
-        return "sklearn" not in file_path or "_kd_tree" in file_path or "_ball_tree" in file_path
+        return (
+            "sklearn" not in file_path
+            or "_kd_tree" in file_path
+            or "_ball_tree" in file_path
+        )
 
 
 class CustomStubsSerializer(Serializer):
