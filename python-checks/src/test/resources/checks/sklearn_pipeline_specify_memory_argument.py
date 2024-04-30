@@ -12,13 +12,12 @@ def compliants():
 
     from sklearn.pipeline import make_pipeline as mkpipe
     pipeline4 = mkpipe(StandardScaler(), LinearDiscriminantAnalysis(), memory=None)
-    pipeline5 = mkpipe(StandardScaler(), LinearDiscriminantAnalysis()) # Noncompliant
-    mkpipe(StandardScaler(), LinearDiscriminantAnalysis()) # Noncompliant
-    _ = mkpipe(StandardScaler(), LinearDiscriminantAnalysis()) # Noncompliant
+
 
 
 def non_compliants():
     from sklearn.pipeline import Pipeline, make_pipeline
+    from sklearn.pipeline import make_pipeline as mkpipe
 
     pipeline1 = Pipeline([ # Noncompliant {{Specify a memory argument for the pipeline.}}
                #^^^^^^^^
@@ -31,9 +30,12 @@ def non_compliants():
     pipeline2 = make_pipeline(StandardScaler(), LinearDiscriminantAnalysis()) # Noncompliant
                #^^^^^^^^^^^^^
 
+    pipeline5 = mkpipe(StandardScaler(), LinearDiscriminantAnalysis()) # Noncompliant
+    _ = mkpipe(StandardScaler(), LinearDiscriminantAnalysis()) # Noncompliant
+    mkpipe(StandardScaler(), LinearDiscriminantAnalysis()) # Noncompliant
 
-    pipe1 = make_pipeline(StandardScaler(), LinearDiscriminantAnalysis()) # Compliant
-    pipe2 = make_pipeline(RobustScaler(), KNeighborsClassifier()) # Compliant
+    pipe1 = make_pipeline(StandardScaler(), LinearDiscriminantAnalysis()) # Compliant because used in a VotingClassifier
+    pipe2 = make_pipeline(RobustScaler(), KNeighborsClassifier()) # Compliant because used in a VotingClassifier
 
     pipe = Pipeline([ # Noncompliant
           #^^^^^^^^

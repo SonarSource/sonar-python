@@ -44,31 +44,39 @@ import org.sonar.python.tree.TreeUtils;
 public class SklearnPipelineSpecifyMemoryArgumentCheck extends PythonSubscriptionCheck {
 
   public static final String MESSAGE = "Specify a memory argument for the pipeline.";
-  public static final String MESSAGE_QUICKFIX = "Add memory argument";
+  public static final String MESSAGE_QUICKFIX = "Add the memory argument";
 
   @Override
   public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, SklearnPipelineSpecifyMemoryArgumentCheck::checkName);
+    context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, SklearnPipelineSpecifyMemoryArgumentCheck::checkCallExpression);
   }
 
-  private static void checkName(SubscriptionContext subscriptionContext) {
-    CallExpression callExpression = (CallExpression) subscriptionContext.syntaxNode();
-    if (isPipelineCreation(callExpression)) {
-      var memoryArgument = TreeUtils.argumentByKeyword("memory", callExpression.arguments());
+  private static void checkCallExpression(SubscriptionContext subscriptionContext) {
+    Optional.of(subscriptionContext.syntaxNode())
+      .map(CallExpression.class::cast)
+      .filter(SklearnPipelineSpecifyMemoryArgumentCheck::isPipelineCreation)
+      .ifPresent(
+        callExpression -> {
+          var memoryArgument = TreeUtils.argumentByKeyword("memory", callExpression.arguments());
 
-      if (memoryArgument != null) {
-        return;
-      }
+          if (memoryArgument != null) {
+            return;
+          }
 
-      if (getAssignedName(callExpression).map(SklearnPipelineSpecifyMemoryArgumentCheck::isUsedInAnotherPipeline).orElse(false)) {
-        return;
-      }
-      var issue = subscriptionContext.addIssue(callExpression.callee(), MESSAGE);
-      var quickFix = PythonQuickFix.newQuickFix(MESSAGE_QUICKFIX)
-        .addTextEdit(TextEditUtils.insertBefore(callExpression.rightPar(), ", memory=None"))
-        .build();
-      issue.addQuickFix(quickFix);
-    }
+          if (getAssignedName(callExpression).map(SklearnPipelineSpecifyMemoryArgumentCheck::isUsedInAnotherPipeline).orElse(false)) {
+            return;
+          }
+
+          createIssue(subscriptionContext, callExpression);
+        });
+  }
+
+  private static void createIssue(SubscriptionContext subscriptionContext, CallExpression callExpression) {
+    var issue = subscriptionContext.addIssue(callExpression.callee(), MESSAGE);
+    var quickFix = PythonQuickFix.newQuickFix(MESSAGE_QUICKFIX)
+      .addTextEdit(TextEditUtils.insertBefore(callExpression.rightPar(), ", memory=None"))
+      .build();
+    issue.addQuickFix(quickFix);
   }
 
   private static Optional<Name> getAssignedName(Expression expression) {
@@ -88,6 +96,8 @@ public class SklearnPipelineSpecifyMemoryArgumentCheck extends PythonSubscriptio
       var rhsIndex = rhsExpressions.indexOf(expression);
       if (rhsIndex != -1) {
         return getAssignedName(expressions.get(rhsIndex));
+      } else {
+        return Optional.empty();
       }
     }
     return getAssignedName(expressions.get(0));
