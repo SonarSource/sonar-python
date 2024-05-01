@@ -42,7 +42,7 @@ import org.sonar.python.semantic.SymbolUtils;
 import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S6709")
-public class NumpyRandomSeedCheck extends PythonSubscriptionCheck {
+public class RandomSeedCheck extends PythonSubscriptionCheck {
 
   private static final String NUMPY_SEED_ARG_NAME = "seed";
 

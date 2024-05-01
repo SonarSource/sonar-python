@@ -282,7 +282,7 @@ public final class CheckList {
       NumpyWeekMaskValidationCheck.class,
       NumpyIsNanCheck.class,
       NumpyListOverGeneratorCheck.class,
-      NumpyRandomSeedCheck.class,
+      RandomSeedCheck.class,
       NumpyRandomStateCheck.class,
       NumpyWhereOneConditionCheck.class,
       UnusedGroupNamesCheck.class,
