@@ -197,8 +197,9 @@ public class ClassTypeTest {
       "class C: ",
       "  pass",
       "C = \"hello\"");
-    fileInput.accept(new SymbolTableBuilderV2());
-    fileInput.accept(new TypeInferenceV2(new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty()), pythonFile));
+    var symbolTable = new SymbolTableBuilderV2(fileInput)
+      .build();
+    fileInput.accept(new TypeInferenceV2(new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty()), pythonFile, symbolTable));
 
     ClassDef classDef = (ClassDef) fileInput.statements().statements().get(0);
     PythonType pythonType = classDef.name().typeV2();
@@ -208,6 +209,9 @@ public class ClassTypeTest {
     assertThat(symbol.name()).isEqualTo("C");
     assertThat(symbol.usages()).hasSize(2);
     assertThat(symbol.usages()).extracting(UsageV2::isBindingUsage).containsExactly(true, true);
+
+    var moduleSymbols = symbolTable.getSymbolsByRootTree(fileInput);
+    assertThat(moduleSymbols).hasSize(1).contains(symbol);
   }
 
   @Test
@@ -217,8 +221,9 @@ public class ClassTypeTest {
       "class C: ",
       "  pass"
     );
-    fileInput.accept(new SymbolTableBuilderV2());
-    fileInput.accept(new TypeInferenceV2(new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty()), pythonFile));
+    var symbolTable = new SymbolTableBuilderV2(fileInput)
+      .build();
+    fileInput.accept(new TypeInferenceV2(new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty()), pythonFile, symbolTable));
 
     ClassDef classDef = (ClassDef) fileInput.statements().statements().get(1);
     PythonType pythonType = classDef.name().typeV2();
@@ -562,8 +567,9 @@ public class ClassTypeTest {
       "    def f(self, x: Inner) -> Inner:",
       "        x: Inner"
     );
-    fileInput.accept(new SymbolTableBuilderV2());
-    fileInput.accept(new TypeInferenceV2(new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty()), pythonFile));
+    var symbolTable = new SymbolTableBuilderV2(fileInput)
+      .build();
+    fileInput.accept(new TypeInferenceV2(new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty()), pythonFile, symbolTable));
     ClassDef firstDef = (ClassDef) fileInput.statements().statements().get(0);
     ClassDef innerClass = (ClassDef) firstDef.body().statements().get(0);
     FunctionDef functionDef = (FunctionDef) firstDef.body().statements().get(1);
@@ -611,8 +617,9 @@ public class ClassTypeTest {
 
   public static List<ClassType> classTypes(String... code) {
     FileInput fileInput = parseWithoutSymbols(code);
-    fileInput.accept(new SymbolTableBuilderV2());
-    fileInput.accept(new TypeInferenceV2(new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty()), pythonFile));
+    var symbolTable = new SymbolTableBuilderV2(fileInput)
+      .build();
+    fileInput.accept(new TypeInferenceV2(new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty()), pythonFile, symbolTable));
     return PythonTestUtils.getAllDescendant(fileInput, t -> t.is(Tree.Kind.CLASSDEF))
       .stream()
       .map(ClassDef.class::cast)
