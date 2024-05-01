@@ -185,8 +185,9 @@ class FunctionTypeTest {
       "class A:",
       "  def foo(self): pass"
     );
-    fileInput.accept(new SymbolTableBuilderV2());
-    fileInput.accept(new TypeInferenceV2(new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty()), pythonFile));
+    var symbolTable = new SymbolTableBuilderV2(fileInput)
+      .build();
+    fileInput.accept(new TypeInferenceV2(new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty()), pythonFile, symbolTable));
 
     ClassDef classDef = (ClassDef) PythonTestUtils.getAllDescendant(fileInput, t -> t.is(Tree.Kind.CLASSDEF)).get(0);
     FunctionDef functionDef = (FunctionDef) PythonTestUtils.getAllDescendant(fileInput, t -> t.is(Tree.Kind.FUNCDEF)).get(0);
@@ -201,8 +202,9 @@ class FunctionTypeTest {
 
   public static FunctionType functionType(String... code) {
     FileInput fileInput = parseWithoutSymbols(code);
-    fileInput.accept(new SymbolTableBuilderV2());
-    fileInput.accept(new TypeInferenceV2(new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty()), pythonFile));
+    var symbolTable = new SymbolTableBuilderV2(fileInput)
+      .build();
+    fileInput.accept(new TypeInferenceV2(new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty()), pythonFile, symbolTable));
     FunctionDef functionDef = (FunctionDef) PythonTestUtils.getAllDescendant(fileInput, t -> t.is(Tree.Kind.FUNCDEF)).get(0);
     return (FunctionType) functionDef.name().typeV2();
   }

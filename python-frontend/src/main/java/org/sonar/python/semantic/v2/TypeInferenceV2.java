@@ -73,12 +73,14 @@ import static org.sonar.python.tree.TreeUtils.locationInFile;
 public class TypeInferenceV2 extends BaseTreeVisitor {
 
   private final ProjectLevelTypeTable projectLevelTypeTable;
+  private final SymbolTable symbolTable;
   private final String fileId;
 
   private final Deque<PythonType> typeStack = new ArrayDeque<>();
 
-  public TypeInferenceV2(ProjectLevelTypeTable projectLevelTypeTable, PythonFile pythonFile) {
+  public TypeInferenceV2(ProjectLevelTypeTable projectLevelTypeTable, PythonFile pythonFile, SymbolTable symbolTable) {
     this.projectLevelTypeTable = projectLevelTypeTable;
+    this.symbolTable = symbolTable;
     Path path = pathOf(pythonFile);
     this.fileId = path != null ? path.toString() : pythonFile.toString();
   }

@@ -19,29 +19,20 @@
  */
 package org.sonar.python.semantic.v2;
 
-import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
-import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
-import org.sonar.plugins.python.api.tree.FileInput;
+import java.util.Optional;
+import java.util.Set;
 import org.sonar.plugins.python.api.tree.Tree;
 
-public class SymbolTableBuilderV2 extends BaseTreeVisitor {
-  private final FileInput fileInput;
-  private Map<Tree, ScopeV2> scopesByRootTree;
+public record SymbolTable(Map<Tree, ScopeV2> scopesByRootTree) {
 
-  public SymbolTableBuilderV2(FileInput fileInput) {
-    this.fileInput = fileInput;
+  public Set<SymbolV2> getSymbolsByRootTree(Tree tree) {
+    return Optional.ofNullable(scopesByRootTree.get(tree))
+      .map(ScopeV2::symbols)
+      .map(Map::values)
+      .map(HashSet::new)
+      .orElseGet(HashSet::new);
   }
 
-  @Override
-  public void visitFileInput(FileInput fileInput) {
-    scopesByRootTree = new HashMap<>();
-    fileInput.accept(new WriteUsagesVisitor(scopesByRootTree));
-    fileInput.accept(new ReadUsagesVisitor(scopesByRootTree));
-  }
-
-  public SymbolTable build() {
-    fileInput.accept(this);
-    return new SymbolTable(scopesByRootTree);
-  }
 }
