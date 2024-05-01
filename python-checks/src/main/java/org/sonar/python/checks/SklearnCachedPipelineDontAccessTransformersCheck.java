@@ -26,6 +26,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Stream;
+import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
@@ -74,6 +75,12 @@ public class SklearnCachedPipelineDontAccessTransformersCheck extends PythonSubs
     }
     var stepsArgument = TreeUtils.nthArgumentOrKeyword(0, "steps", callExpression.arguments());
 
+    StepsFromPipeline stepsFromPipeline = getStepsFromPipeline(stepsArgument, pipelineCreation);
+
+    handleStepNames(subscriptionContext, stepsFromPipeline, pipelineCreation, callExpression);
+  }
+
+  private static StepsFromPipeline getStepsFromPipeline(@Nullable RegularArgument stepsArgument, PipelineCreation pipelineCreation) {
     Map<Name, String> nameToStepName = new HashMap<>();
     Optional<Expression> stepArgumentExpression = Optional.ofNullable(stepsArgument)
       .map(RegularArgument::expression);
@@ -81,25 +88,37 @@ public class SklearnCachedPipelineDontAccessTransformersCheck extends PythonSubs
     var stepNames = stepArgumentExpression.map(
       e -> pipelineCreation == PipelineCreation.PIPELINE ? extractFromPipeline(e, nameToStepName) : extractFromMakePipeline(e))
       .orElse(Stream.empty());
+    return new StepsFromPipeline(nameToStepName, stepNames);
+  }
 
-    var qualifiedUses = stepNames
-      .map(name -> Map.entry(name, symbolIsUsedInQualifiedExpression(name)));
+  private record StepsFromPipeline(Map<Name, String> nameToStepName, Stream<Name> stepNames) {
+  }
 
-    qualifiedUses.forEach(entry -> {
-      Name name = entry.getKey();
-      Map<Tree, QualifiedExpression> uses = entry.getValue();
+  private static void handleStepNames(SubscriptionContext subscriptionContext, StepsFromPipeline stepsFromPipeline, PipelineCreation pipelineCreation,
+    CallExpression callExpression) {
+    stepsFromPipeline.stepNames()
+      .map(name -> Map.entry(name, symbolIsUsedInQualifiedExpression(name))).forEach(entry -> {
+        Name name = entry.getKey();
+        Map<Tree, QualifiedExpression> uses = entry.getValue();
 
-      if (!uses.isEmpty()) {
-        var issue = subscriptionContext.addIssue(name, MESSAGE);
-        uses.forEach((useTree, qualExpr) -> issue.secondary(useTree, MESSAGE_SECONDARY));
-        if (pipelineCreation == PipelineCreation.PIPELINE) {
-          issue.secondary(callExpression.callee(), MESSAGE_SECONDARY_CREATION);
-          uses
-            .forEach((useTree, qualExpr) -> getAssignedName(callExpression).flatMap(pipelineBindingVariable -> getQuickFix(pipelineBindingVariable, name, qualExpr, nameToStepName))
-              .ifPresent(issue::addQuickFix));
+        if (!uses.isEmpty()) {
+          createIssue(subscriptionContext, stepsFromPipeline, pipelineCreation, callExpression, name, uses);
         }
-      }
-    });
+      });
+  }
+
+  private static void createIssue(SubscriptionContext subscriptionContext, StepsFromPipeline stepsFromPipeline, PipelineCreation pipelineCreation, CallExpression callExpression,
+    Name name, Map<Tree, QualifiedExpression> uses) {
+    var issue = subscriptionContext.addIssue(name, MESSAGE);
+    uses.forEach((useTree, qualExpr) -> issue.secondary(useTree, MESSAGE_SECONDARY));
+    if (pipelineCreation == PipelineCreation.PIPELINE) {
+      issue.secondary(callExpression.callee(), MESSAGE_SECONDARY_CREATION);
+      uses
+        .forEach(
+          (useTree, qualExpr) -> getAssignedName(callExpression)
+            .flatMap(pipelineBindingVariable -> getQuickFix(pipelineBindingVariable, name, qualExpr, stepsFromPipeline.nameToStepName()))
+            .ifPresent(issue::addQuickFix));
+    }
   }
 
   private static Stream<Name> extractFromMakePipeline(Expression stepArgumentExpression) {
@@ -119,11 +138,11 @@ public class SklearnCachedPipelineDontAccessTransformersCheck extends PythonSubs
       .map(t -> ((TupleImpl) t).elements())
       .filter(e -> e.size() == 2)
       .filter(e -> e.get(1).is(Tree.Kind.NAME))
-      .map(e2 -> {
-        if (e2.get(0).is(Tree.Kind.STRING_LITERAL)) {
-          nameToStepName.put((Name) e2.get(1), ((StringLiteral) e2.get(0)).trimmedQuotesValue());
+      .map(elements -> {
+        if (elements.get(0).is(Tree.Kind.STRING_LITERAL)) {
+          nameToStepName.put((Name) elements.get(1), ((StringLiteral) elements.get(0)).trimmedQuotesValue());
         }
-        return e2;
+        return elements;
       })
       .map(e -> e.get(1))
       .map(Name.class::cast);
@@ -151,8 +170,7 @@ public class SklearnCachedPipelineDontAccessTransformersCheck extends PythonSubs
 
   private enum PipelineCreation {
     PIPELINE,
-    MAKE_PIPELINE,
-    NOT_PIPELINE
+    MAKE_PIPELINE
   }
 
   private static Optional<PipelineCreation> isPipelineCreation(CallExpression callExpression) {
