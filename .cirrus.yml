@@ -75,7 +75,7 @@ build_task:
   build_script:
     - git submodule update --init
     - cd python-frontend/typeshed_serializer/resources/python-type-stubs
-    - git sparse-checkout set --no-cone stubs/sklearn 
+    - git sparse-checkout set stubs/sklearn 
     - git checkout
     - cd -
     - source cirrus-env BUILD
@@ -95,7 +95,7 @@ build_win_task:
     - git config --global core.autocrlf input
     - git submodule update --init
     - cd python-frontend/typeshed_serializer/resources/python-type-stubs
-    - git sparse-checkout set --no-cone stubs/sklearn 
+    - git sparse-checkout set stubs/sklearn 
     - git checkout
     - cd -
     - source cirrus-env CI

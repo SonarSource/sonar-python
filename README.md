@@ -36,7 +36,7 @@ The Python interpreter is not required in that case.
 - Run the following commands to extract only the needed files for the SKlearn stubs
 ```
 cd python-frontend/typeshed_serializer/resources/python-type-stubs
-git sparse-checkout set --no-cone stubs/sklearn 
+git sparse-checkout set stubs/sklearn 
 git checkout
 ```
 
