@@ -105,7 +105,7 @@ class Serializer(ABC):
     logger = logging.getLogger(__name__)
     handler = logging.StreamHandler(sys.stdout)
     log_formatter = logging.Formatter(
-        fmt="%(name)s [%(levelname)s] --- %(message)s ---"
+        fmt="%(asctime)s %(name)s [%(levelname)s] --- %(message)s ---"
     )
     logger.setLevel(logging.INFO)
     handler.setFormatter(log_formatter)
