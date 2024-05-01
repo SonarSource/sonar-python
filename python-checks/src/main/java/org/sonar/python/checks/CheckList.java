@@ -348,6 +348,7 @@ public final class CheckList {
       StringLiteralDuplicationCheck.class,
       StringReplaceCheck.class,
       StrongCryptographicKeysCheck.class,
+      SklearnCachedPipelineDontAccessTransformersCheck.class,
       SuperfluousCurlyBraceCheck.class,
       TempFileCreationCheck.class,
       ImplicitlySkippedTestCheck.class,
