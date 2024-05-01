@@ -19,7 +19,10 @@
 #
 
 import os
+import logging
+import sys
 from abc import abstractmethod, ABC
+
 
 from mypy import options, build
 
@@ -30,6 +33,7 @@ from utils.folder_manager import FolderManager
 
 STDLIB_PATH = "../resources/typeshed/stdlib"
 STUBS_PATH = "../resources/typeshed/stubs"
+SKLEARN_STUBS_PATH = "../resources/python-type-stubs/stubs"
 CURRENT_PATH = os.path.dirname(__file__)
 THIRD_PARTIES_STUBS = os.listdir(os.path.join(CURRENT_PATH, STUBS_PATH))
 CUSTOM_STUBS_PATH = "../resources/custom"
@@ -71,7 +75,9 @@ def get_sources(relative_path: str):
     source_paths = set()
     path = os.path.join(CURRENT_PATH, relative_path)
     for root, dirs, files in os.walk(path):
-        package_name = root.replace(path, "").replace("\\", ".").replace("/", ".").lstrip(".")
+        package_name = (
+            root.replace(path, "").replace("\\", ".").replace("/", ".").lstrip(".")
+        )
         if "python2" in package_name:
             # Avoid python2 stubs
             continue
@@ -80,7 +86,9 @@ def get_sources(relative_path: str):
                 # Only consider actual stubs
                 continue
             module_name = file.replace(".pyi", "")
-            fq_module_name = f"{package_name}.{module_name}" if package_name != "" else module_name
+            fq_module_name = (
+                f"{package_name}.{module_name}" if package_name != "" else module_name
+            )
             if module_name == "__init__":
                 fq_module_name = package_name
             file_path = f"{root}/{file}"
@@ -94,6 +102,15 @@ class Serializer(ABC):
     save_location: str
     output_folder: str
 
+    logger = logging.getLogger(__name__)
+    handler = logging.StreamHandler(sys.stdout)
+    log_formatter = logging.Formatter(
+        fmt="%(asctime)s %(name)s [%(levelname)s] --- %(message)s ---"
+    )
+    logger.setLevel(logging.INFO)
+    handler.setFormatter(log_formatter)
+    logger.addHandler(handler)
+
     def __init__(self, is_debug=False, python_version=(3, 8)):
         self.is_debug = is_debug
         self.opt = get_options(python_version)
@@ -105,8 +122,12 @@ class Serializer(ABC):
                 continue
             current_file = build_result.files.get(file)
             module_symbol = symbols.ModuleSymbol(current_file)
-            symbols.save_module(module_symbol, self.output_folder, is_debug=self.is_debug,
-                                debug_dir=output_dir_name)
+            symbols.save_module(
+                module_symbol,
+                self.output_folder,
+                is_debug=self.is_debug,
+                debug_dir=output_dir_name,
+            )
 
     @abstractmethod
     def get_build_result(self, opt=get_options()) -> tuple[build.BuildResult, set[str]]:
@@ -118,20 +139,24 @@ class Serializer(ABC):
 
 
 class TypeshedSerializer(Serializer):
-
     EXCLUDED_PACKAGES = ["win32"]
 
     def __init__(self, is_third_parties=False, is_debug=False):
         super().__init__(is_debug)
         self.is_third_parties = is_third_parties
-        self.save_location = "third_party_protobuf" if is_third_parties else "stdlib_protobuf"
+        self.save_location = (
+            "third_party_protobuf" if is_third_parties else "stdlib_protobuf"
+        )
         self.output_folder = f"{FolderManager.output_folder}/{self.save_location}"
 
     def serialize_merged_modules(self):
         merged_modules = self.get_merged_modules()
         for mod in merged_modules:
             symbols.save_module(
-                merged_modules[mod], self.output_folder, is_debug=self.is_debug, debug_dir="output_merge"
+                merged_modules[mod],
+                self.output_folder,
+                is_debug=self.is_debug,
+                debug_dir="output_merge",
             )
 
     def get_merged_modules(self):
@@ -149,22 +174,32 @@ class TypeshedSerializer(Serializer):
         model_by_version: dict[str, dict[str, ModuleSymbol]] = {}
         for major, minor in SUPPORTED_PYTHON_VERSIONS:
             opt = get_options((major, minor))
+            self.logger.info(f"Building for python version {major}.{minor}")
             build_result, source_paths = self.get_build_result(opt=opt)
             modules = {}
             for file in build_result.files:
                 path = build_result.files[file].path
-                if self.is_third_parties and (path not in source_paths or any(
-                        excluded_package in path for excluded_package in self.EXCLUDED_PACKAGES)):
+                if self.is_third_parties and (
+                    path not in source_paths
+                    or any(
+                        excluded_package in path
+                        for excluded_package in self.EXCLUDED_PACKAGES
+                    )
+                ):
                     # build_result contains more modules from stdlib unrelated to third_parties
                     continue
+
                 ms = ModuleSymbol(build_result.files.get(file))
                 modules[ms.fullname] = ms
             model_by_version[f"{major}{minor}"] = modules
         return model_by_version
 
     def get_build_result(self, opt=get_options()):
-        build_result, source_paths = walk_typeshed_third_parties(opt) if self.is_third_parties \
+        build_result, source_paths = (
+            walk_typeshed_third_parties(opt)
+            if self.is_third_parties
             else walk_typeshed_stdlib(opt)
+        )
         return build_result, source_paths
 
     def is_exception(self, file, build_result, source_paths):
@@ -188,6 +223,25 @@ class ImporterSerializer(Serializer):
         return file == "sonar_third_party_libs" or file.startswith("numpy")
 
 
+class MicrosoftStubsSerializer(Serializer):
+    save_location = "third_party_protobuf"
+    output_folder = f"{FolderManager.output_folder}/{save_location}"
+
+    def get_build_result(self, opt=get_options()):
+        src_list, src_paths = get_sources(SKLEARN_STUBS_PATH)
+        build_result = build.build(src_list, opt)
+        return build_result, src_paths
+
+    def is_exception(self, file, build_result, source_paths):
+        file_path = build_result.files[file].path
+        # Filtering out KDTree and BallTree to avoid FPs
+        return (
+            "sklearn" not in file_path
+            or "_kd_tree" in file_path
+            or "_ball_tree" in file_path
+        )
+
+
 class CustomStubsSerializer(Serializer):
     path = os.path.join(CURRENT_PATH, CUSTOM_STUBS_PATH)
     save_location = "custom_protobuf"
@@ -199,4 +253,6 @@ class CustomStubsSerializer(Serializer):
         return build_result, source_paths
 
     def is_exception(self, file, build_result, source_paths=None):
-        return file == SONAR_CUSTOM_BASE_STUB_MODULE or not build_result.files.get(file).path.startswith(self.path)
+        return file == SONAR_CUSTOM_BASE_STUB_MODULE or not build_result.files.get(
+            file
+        ).path.startswith(self.path)

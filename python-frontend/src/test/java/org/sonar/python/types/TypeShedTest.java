@@ -149,6 +149,15 @@ class TypeShedTest {
   }
 
   @Test
+  void third_party_symbols_sklearn() {
+    Map<String, Symbol> sklearnSymbol = symbolsForModule("sklearn.datasets._base");
+    Symbol loadIrisSymbol = sklearnSymbol.get("load_iris");
+    assertThat(loadIrisSymbol.kind()).isEqualTo(Kind.FUNCTION);
+    assertThat(((FunctionSymbolImpl) loadIrisSymbol).declaredReturnType().canOnlyBe("tuple")).isTrue();
+    assertThat(TypeShed.symbolWithFQN("sklearn.datasets._base", "sklearn.datasets._base.load_iris")).isSameAs(loadIrisSymbol);
+  }
+
+  @Test
   void should_resolve_packages() {
     assertThat(symbolsForModule("urllib")).isNotEmpty();
     assertThat(symbolsForModule("ctypes")).isNotEmpty();
