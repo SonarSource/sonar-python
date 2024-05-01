@@ -65,10 +65,9 @@ class TypeInferenceV2Test {
   @Test
   void test() {
     var pythonFile = PythonTestUtils.pythonFile("script.py");
-    var builder = new SymbolTableBuilderV2();
-    builder.visitFileInput(fileInput);
-    var typeInferenceV2 = new TypeInferenceV2(new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty()), pythonFile);
-    fileInput.accept(typeInferenceV2);
+    var symbolTable = new SymbolTableBuilderV2(fileInput)
+      .build();
+    fileInput.accept(new TypeInferenceV2(new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty()), pythonFile, symbolTable));
 
     System.out.println("hello");
   }
@@ -273,10 +272,10 @@ class TypeInferenceV2Test {
 
   private FileInput inferTypes(String lines, Map<String, Set<Symbol>> globalSymbols) {
     FileInput root = parseWithoutSymbols(lines);
-    var symbolTableBuilderV2 = new SymbolTableBuilderV2();
-    root.accept(symbolTableBuilderV2);
-    var typeInferenceV2 = new TypeInferenceV2(new ProjectLevelTypeTable(ProjectLevelSymbolTable.from(globalSymbols)), pythonFile);
-    root.accept(typeInferenceV2);
+
+    var symbolTable = new SymbolTableBuilderV2(root)
+      .build();
+    root.accept(new TypeInferenceV2(new ProjectLevelTypeTable(ProjectLevelSymbolTable.from(globalSymbols)), pythonFile, symbolTable));
     return root;
   }
 }

@@ -19,7 +19,8 @@
  */
 package org.sonar.python.semantic.v2;
 
-import org.junit.jupiter.api.Assertions;
+import java.util.Set;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.FileInput;
@@ -27,13 +28,97 @@ import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.ImportName;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.python.PythonTestUtils;
+import org.sonar.python.tree.TreeUtils;
 
 class SymbolTableBuilderV2Test {
 
 
   @Test
-  void test() {
-    var builder = new SymbolTableBuilderV2();
+  void testSymbolTableModuleSymbols() {
+    FileInput fileInput = PythonTestUtils.parse(
+      """
+        import lib
+                
+        v = lib.foo()
+        a = lib.A()
+        b = a.do_something()
+        x = 42
+                
+        def script_do_something(param):
+            c = 42
+            return c
+                
+        script_do_something()
+        """
+    );
+
+    var symbolTable = new SymbolTableBuilderV2(fileInput)
+      .build();
+    
+    var moduleSymbols = symbolTable.getSymbolsByRootTree(fileInput);
+    Assertions.assertThat(moduleSymbols)
+      .hasSize(6)
+      .extracting(SymbolV2::name)
+      .contains("lib", "a", "b", "v", "x", "script_do_something");
+  }
+
+  @Test
+  void testSymbolTableLocalSymbols() {
+    FileInput fileInput = PythonTestUtils.parse(
+      """
+        import lib
+        a = lib.A()
+        def script_do_something(param):
+            c = 42
+            return c
+        """
+    );
+
+    var symbolTable = new SymbolTableBuilderV2(fileInput)
+      .build();
+
+    var localSymbols = TreeUtils.firstChild(fileInput, FunctionDef.class::isInstance)
+      .map(symbolTable::getSymbolsByRootTree)
+      .orElseGet(Set::of);
+
+    Assertions.assertThat(localSymbols)
+      .hasSize(2)
+      .extracting(SymbolV2::name)
+      .contains("param", "c");
+  }
+
+  @Test
+  void testSymbolTableGlobalSymbols() {
+    FileInput fileInput = PythonTestUtils.parse(
+      """
+        global a
+        def script_do_something(param):
+            global b
+       
+        """
+    );
+
+    var symbolTable = new SymbolTableBuilderV2(fileInput)
+      .build();
+
+    var localSymbols = TreeUtils.firstChild(fileInput, FunctionDef.class::isInstance)
+      .map(symbolTable::getSymbolsByRootTree)
+      .orElseGet(Set::of);
+    var moduleSymbols = symbolTable.getSymbolsByRootTree(fileInput);
+
+    Assertions.assertThat(localSymbols)
+      .hasSize(1)
+      .extracting(SymbolV2::name)
+      .contains("param");
+
+    Assertions.assertThat(moduleSymbols)
+      .hasSize(3)
+      .extracting(SymbolV2::name)
+      .contains("a", "b", "script_do_something");
+  }
+
+  @Test
+  void testNameSymbols() {
     FileInput fileInput = PythonTestUtils.parse(
       """
         import lib
@@ -49,89 +134,68 @@ class SymbolTableBuilderV2Test {
         script_do_something()
         """
     );
-    builder.visitFileInput(fileInput);
 
-    Assertions.assertNotNull(fileInput.statements());
+    new SymbolTableBuilderV2(fileInput)
+      .build();
+
+    var statements = fileInput.statements().statements();
 
     {
-      var importStatement = (ImportName) fileInput.statements().statements().get(0);
+      var importStatement = (ImportName) statements.get(0);
       var libName = importStatement.modules().get(0).dottedName().names().get(0);
-      var symbol = libName.symbolV2();
-      Assertions.assertNotNull(symbol);
-      Assertions.assertEquals("lib", symbol.name());
-      Assertions.assertEquals(3, symbol.usages().size());
+      assertNameSymbol(libName, "lib", 3);
     }
 
     {
-      var assignmentStatement = (AssignmentStatement) fileInput.statements().statements().get(1);
+      var assignmentStatement = (AssignmentStatement) statements.get(1);
       var vName = (Name) assignmentStatement.children().get(0).children().get(0);
-      var vNameSymbol = vName.symbolV2();
-      Assertions.assertNotNull(vNameSymbol);
-      Assertions.assertEquals("v", vNameSymbol.name());
-      Assertions.assertEquals(1, vNameSymbol.usages().size());
+      assertNameSymbol(vName, "v", 1);
 
       var libName = (Name) assignmentStatement.children().get(2).children().get(0).children().get(0);
-      var symbol = libName.symbolV2();
-      Assertions.assertNotNull(symbol);
-      Assertions.assertEquals("lib", symbol.name());
-      Assertions.assertEquals(3, symbol.usages().size());
+      assertNameSymbol(libName, "lib", 3);
     }
 
     {
-      var assignmentStatement = (AssignmentStatement) fileInput.statements().statements().get(2);
+      var assignmentStatement = (AssignmentStatement) statements.get(2);
       var aName = (Name) assignmentStatement.children().get(0).children().get(0);
-      var aNameSymbol = aName.symbolV2();
-      Assertions.assertNotNull(aNameSymbol);
-      Assertions.assertEquals("a", aNameSymbol.name());
-      Assertions.assertEquals(2, aNameSymbol.usages().size());
+      assertNameSymbol(aName, "a", 2);
 
       var libName = (Name) assignmentStatement.children().get(2).children().get(0).children().get(0);
-      var symbol = libName.symbolV2();
-      Assertions.assertNotNull(symbol);
-      Assertions.assertEquals("lib", symbol.name());
-      Assertions.assertEquals(3, symbol.usages().size());
+      assertNameSymbol(libName, "lib", 3);
     }
 
     {
-      var assignmentStatement = (AssignmentStatement) fileInput.statements().statements().get(3);
+      var assignmentStatement = (AssignmentStatement) statements.get(3);
       var bName = (Name) assignmentStatement.children().get(0).children().get(0);
-      var bNameSymbol = bName.symbolV2();
-      Assertions.assertNotNull(bNameSymbol);
-      Assertions.assertEquals("b", bNameSymbol.name());
-      Assertions.assertEquals(1, bNameSymbol.usages().size());
+      assertNameSymbol(bName, "b", 1);
 
       var aName = (Name) assignmentStatement.children().get(2).children().get(0).children().get(0);
-      var aNameSymbol = aName.symbolV2();
-      Assertions.assertNotNull(aNameSymbol);
-      Assertions.assertEquals("a", aNameSymbol.name());
-      Assertions.assertEquals(2, aNameSymbol.usages().size());
+      assertNameSymbol(aName, "a", 2);
     }
 
     {
-      var assignmentStatement = (AssignmentStatement) fileInput.statements().statements().get(4);
+      var assignmentStatement = (AssignmentStatement) statements.get(4);
       var xName = (Name) assignmentStatement.children().get(0).children().get(0);
-      var xNameSymbol = xName.symbolV2();
-      Assertions.assertNotNull(xNameSymbol);
-      Assertions.assertEquals("x", xNameSymbol.name());
-      Assertions.assertEquals(1, xNameSymbol.usages().size());
+      assertNameSymbol(xName, "x", 1);
     }
 
     {
-      var functionDef = (FunctionDef) fileInput.statements().statements().get(5);
+      var functionDef = (FunctionDef) statements.get(5);
       var scriptFunctionName = (Name) functionDef.name();
-      var scriptFunctionNameSymbol = scriptFunctionName.symbolV2();
-      Assertions.assertNotNull(scriptFunctionNameSymbol);
-      Assertions.assertEquals("script_do_something", scriptFunctionNameSymbol.name());
-      Assertions.assertEquals(2, scriptFunctionNameSymbol.usages().size());
+      assertNameSymbol(scriptFunctionName, "script_do_something", 2);
     }
 
     {
-      var functionCallName = (Name) fileInput.statements().statements().get(6).children().get(0).children().get(0);
-      var functionCallNameSymbol = functionCallName.symbolV2();
-      Assertions.assertNotNull(functionCallNameSymbol);
-      Assertions.assertEquals("script_do_something", functionCallNameSymbol.name());
-      Assertions.assertEquals(2, functionCallNameSymbol.usages().size());
+      var functionCallName = (Name) statements.get(6).children().get(0).children().get(0);
+      assertNameSymbol(functionCallName, "script_do_something", 2);
     }
 
+  }
+
+  private static void assertNameSymbol(Name name, String expectedSymbolName, int expectedUsagesCount) {
+    var symbol = name.symbolV2();
+    Assertions.assertThat(symbol).isNotNull();
+    Assertions.assertThat(symbol.name()).isEqualTo(expectedSymbolName);
+    Assertions.assertThat(symbol.usages()).hasSize(expectedUsagesCount);
   }
 }
