@@ -1,0 +1,22 @@
+{
+  "title": "Subclasses of Scikit-Learn\u0027s \"BaseEstimator\" should not set attributes ending with \"_\" in the \"__init__\" method",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-6974",
+  "sqKey": "S6974",
+  "scope": "All",
+  "quickfix": "partial",
+  "code": {
+    "impacts": {
+      "MAINTAINABILITY": "MEDIUM",
+      "RELIABILITY": "HIGH"
+    },
+    "attribute": "CONVENTIONAL"
+  }
+}
