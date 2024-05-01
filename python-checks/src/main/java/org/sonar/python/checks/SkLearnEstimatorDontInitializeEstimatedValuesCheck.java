@@ -57,6 +57,7 @@ public class SkLearnEstimatorDontInitializeEstimatedValuesCheck extends PythonSu
   private static final String MESSAGE = "Move this estimated attribute in the `fit` method.";
   private static final String MESSAGE_SECONDARY = "The attribute is used in this estimator";
   public static final String QUICK_FIX_MESSAGE = "Remove the statement";
+  public static final String QUICK_FIX_RENAME_MESSAGE = "Remove all trailing underscores from the variable name";
 
   @Override
   public void initialize(Context context) {
@@ -95,11 +96,17 @@ public class SkLearnEstimatorDontInitializeEstimatedValuesCheck extends PythonSu
     var secondaryLocation = classDef.name();
     offendingVariables
       .forEach((qualifiedExpression, assignmentStatement) -> {
-        var quickFixOptional = createQuickFix(assignmentStatement);
         var issue = subscriptionContext.addIssue(qualifiedExpression.name(), MESSAGE).secondary(secondaryLocation, MESSAGE_SECONDARY);
-        quickFixOptional.ifPresent(issue::addQuickFix);
-      });
 
+        createQuickFix(assignmentStatement).ifPresent(issue::addQuickFix);
+        issue.addQuickFix(createQuickFixRename(qualifiedExpression));
+      });
+  }
+
+  private static PythonQuickFix createQuickFixRename(QualifiedExpression qualifiedExpression) {
+    var quickFix = PythonQuickFix.newQuickFix(QUICK_FIX_RENAME_MESSAGE);
+    var newName = qualifiedExpression.name().name().replaceAll("_+$", "");
+    return quickFix.addTextEdit(TextEditUtils.renameAllUsages(qualifiedExpression.name(), newName)).build();
   }
 
   private static Optional<PythonQuickFix> createQuickFix(AssignmentStatement assignmentStatement) {

@@ -43,8 +43,35 @@ class SkLearnEstimatorDontInitializeEstimatedValuesCheckTest {
         from sklearn.base import BaseEstimator
         class InheritingEstimator(BaseEstimator):
             def __init__(self) -> None:
-                ..."""
+                ...""",
+      """
+  from sklearn.base import BaseEstimator
+  class InheritingEstimator(BaseEstimator):
+      def __init__(self) -> None:
+          self.a = None
+          ..."""
           );
+  }
+  @Test
+  void testQuickfix2() {
+    PythonQuickFixVerifier.verify(
+      new SkLearnEstimatorDontInitializeEstimatedValuesCheck(),
+      """
+        from sklearn.base import BaseEstimator
+        class InheritingEstimator(BaseEstimator):
+            def __init__(self) -> None:
+                self._something_a_______ = None""",
+      """
+        from sklearn.base import BaseEstimator
+        class InheritingEstimator(BaseEstimator):
+            def __init__(self) -> None:
+                pass""",
+      """
+  from sklearn.base import BaseEstimator
+  class InheritingEstimator(BaseEstimator):
+      def __init__(self) -> None:
+          self._something_a = None"""
+    );
   }
   @Test
   void testQuickfixEmptyFunc() {
@@ -59,7 +86,12 @@ class SkLearnEstimatorDontInitializeEstimatedValuesCheckTest {
         from sklearn.base import ClassifierMixin
         class InheritingEstimator(ClassifierMixin):
             def __init__(self) -> None:
-                pass"""
+                pass""",
+      """
+  from sklearn.base import ClassifierMixin
+  class InheritingEstimator(ClassifierMixin):
+      def __init__(self) -> None:
+          self.a = None"""
     );
   }
 }
