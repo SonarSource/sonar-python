@@ -34,13 +34,11 @@ import org.sonar.plugins.python.api.tree.Tree;
 public class ScopeV2 {
   private final ScopeV2 parent;
   private final Tree rootTree;
-
   private final List<ScopeV2> childrenScopes;
-
-  final Map<String, SymbolV2> symbolsByName = new HashMap<>();
+  private final Map<String, SymbolV2> symbolsByName = new HashMap<>();
   private final Set<SymbolV2> symbols = new HashSet<>();
 
-  public ScopeV2(ScopeV2 parent, Tree rootTree) {
+  public ScopeV2(@Nullable ScopeV2 parent, Tree rootTree) {
     this.parent = parent;
     this.rootTree = rootTree;
     this.childrenScopes = new ArrayList<>();
