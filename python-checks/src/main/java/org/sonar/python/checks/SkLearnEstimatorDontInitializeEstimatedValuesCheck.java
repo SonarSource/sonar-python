@@ -149,11 +149,10 @@ public class SkLearnEstimatorDontInitializeEstimatedValuesCheck extends PythonSu
         .filter(expression -> expression.is(Tree.Kind.QUALIFIED_EXPR))
         .map(QualifiedExpression.class::cast);
 
-      var qualifiedExpressionsStream = Stream.concat(
+      Stream.concat(
         offendingQualifiedExpressions, offendingTuples)
-        .filter(VariableDeclarationEndingWithUnderscoreVisitor::isOffendingQualifiedExpression);
-
-      qualifiedExpressionsStream.forEach(qualifiedExpression -> qualifiedExpressions.put(qualifiedExpression, pyAssignmentStatementTree));
+        .filter(VariableDeclarationEndingWithUnderscoreVisitor::isOffendingQualifiedExpression)
+        .forEach(qualifiedExpression -> qualifiedExpressions.put(qualifiedExpression, pyAssignmentStatementTree));
       super.visitAssignmentStatement(pyAssignmentStatementTree);
     }
   }
