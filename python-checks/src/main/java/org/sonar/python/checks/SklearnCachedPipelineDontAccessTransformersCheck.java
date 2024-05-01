@@ -19,10 +19,8 @@
  */
 package org.sonar.python.checks;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Stream;
@@ -32,7 +30,6 @@ import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
 import org.sonar.plugins.python.api.symbols.Symbol;
-import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.ListLiteral;
@@ -41,13 +38,12 @@ import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.plugins.python.api.tree.Tuple;
-import org.sonar.plugins.python.api.tree.UnpackingExpression;
 import org.sonar.python.quickfix.TextEditUtils;
-import org.sonar.python.semantic.SymbolUtils;
 import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.tree.TupleImpl;
 import org.sonar.python.types.InferredTypes;
+
+import static org.sonar.python.checks.utils.Expressions.getAssignedName;
 
 @Rule(key = "S6971")
 public class SklearnCachedPipelineDontAccessTransformersCheck extends PythonSubscriptionCheck {
@@ -184,44 +180,5 @@ public class SklearnCachedPipelineDontAccessTransformersCheck extends PythonSubs
         }
         return null;
       });
-  }
-
-  private static Optional<Name> getAssignedName(Expression expression) {
-    if (expression.is(Tree.Kind.NAME)) {
-      return Optional.of((Name) expression);
-    }
-    if (expression.is(Tree.Kind.QUALIFIED_EXPR)) {
-      return getAssignedName(((QualifiedExpression) expression).name());
-    }
-
-    var assignment = (AssignmentStatement) TreeUtils.firstAncestorOfKind(expression, Tree.Kind.ASSIGNMENT_STMT);
-    if (assignment == null) {
-      return Optional.empty();
-    }
-
-    var expressions = SymbolUtils.assignmentsLhs(assignment);
-    if (expressions.size() != 1) {
-      List<Expression> rhsExpressions = getExpressionsFromRhs(assignment.assignedValue());
-      var rhsIndex = rhsExpressions.indexOf(expression);
-      if (rhsIndex != -1) {
-        return getAssignedName(expressions.get(rhsIndex));
-      } else {
-        return Optional.empty();
-      }
-    }
-
-    return getAssignedName(expressions.get(0));
-  }
-
-  private static List<Expression> getExpressionsFromRhs(Expression rhs) {
-    List<Expression> expressions = new ArrayList<>();
-    if (rhs.is(Tree.Kind.TUPLE)) {
-      expressions.addAll(((Tuple) rhs).elements());
-    } else if (rhs.is(Tree.Kind.LIST_LITERAL)) {
-      expressions.addAll(((ListLiteral) rhs).elements().expressions());
-    } else if (rhs.is(Tree.Kind.UNPACKING_EXPR)) {
-      return getExpressionsFromRhs(((UnpackingExpression) rhs).expression());
-    }
-    return expressions;
   }
 }
