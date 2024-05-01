@@ -224,7 +224,7 @@ class ImporterSerializer(Serializer):
 
 
 class MicrosoftStubsSerializer(Serializer):
-    save_location = "third_party_protobuf_microsoft"
+    save_location = "third_party_protobuf"
     output_folder = f"{FolderManager.output_folder}/{save_location}"
 
     def get_build_result(self, opt=get_options()):
