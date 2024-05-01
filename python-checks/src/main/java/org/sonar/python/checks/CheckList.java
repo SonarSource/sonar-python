@@ -349,6 +349,7 @@ public final class CheckList {
       StringReplaceCheck.class,
       StrongCryptographicKeysCheck.class,
       SuperfluousCurlyBraceCheck.class,
+      SklearnPipelineParameterAreCorrectCheck.class,
       TempFileCreationCheck.class,
       ImplicitlySkippedTestCheck.class,
       ToDoCommentCheck.class,

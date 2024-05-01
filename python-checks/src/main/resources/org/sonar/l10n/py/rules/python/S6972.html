@@ -1,0 +1,47 @@
+<p>This rule raises an issue when an invalid nested estimator parameter is set on a Pipeline.</p>
+<h2>Why is this an issue?</h2>
+<p>In the sklearn library, when using the <code>Pipeline</code> class, it is possible to modify the parameters of the nested estimators. This
+modification can be done by using the <code>Pipeline</code> method <code>set_params</code> and specifying the name of the estimator and the parameter
+to update separated by a double underscore <code>__</code>.</p>
+<pre>
+from sklearn.pipeline import Pipeline
+from sklearn.svm import SVC
+
+pipe = Pipeline(steps=[("clf", SVC())])
+pipe.set_params(clf__C=10)
+</pre>
+<p>In the example above, the regularization parameter <code>C</code> is set to the value <code>10</code> for the classifier called <code>clf</code>.
+Setting such parameters can be done as well with the help of the <code>param_grid</code> parameter for example when using
+<code>GridSearchCV</code>.</p>
+<p>Providing invalid parameters that do not exist on the estimator can lead to unexpected behavior or runtime errors.</p>
+<p>This rule checks that the parameters provided to the <code>set_params</code> method of a Pipeline instance or through the <code>param_grid</code>
+parameters of a <code>GridSearchCV</code> are valid for the nested estimators.</p>
+<h2>How to fix it</h2>
+<p>To fix this issue provide valid parameters to the nested estimators.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+from sklearn.pipeline import Pipeline
+from sklearn.decomposition import PCA
+
+pipe = Pipeline(steps=[('reduce_dim', PCA())])
+pipe.set_params(reduce_dim__C=2) # Noncompliant: the parameter C does not exists for the PCA estimator
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+from sklearn.pipeline import Pipeline
+from sklearn.decomposition import PCA
+
+pipe = Pipeline(steps=[('reduce_dim', PCA())])
+pipe.set_params(reduce_dim__n_components=2) # Compliant
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Scikit-Learn documentation - <a href="https://scikit-learn.org/stable/modules/compose.html#access-to-nested-parameters">Access to nested
+  parameters</a> </li>
+  <li> Scikit-Learn documentation - <a
+  href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html#sklearn-model-selection-gridsearchcv">GridSearchCV
+  reference</a> </li>
+</ul>
+
