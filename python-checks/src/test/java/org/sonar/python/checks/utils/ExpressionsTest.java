@@ -26,6 +26,7 @@ import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.tree.NumericLiteral;
 import org.sonar.plugins.python.api.tree.StringElement;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
@@ -33,8 +34,10 @@ import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.python.parser.PythonParser;
 import org.sonar.python.semantic.SymbolTableBuilder;
 import org.sonar.python.tree.PythonTreeMaker;
+import org.sonar.python.tree.TreeUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.sonar.python.checks.utils.Expressions.getAssignedName;
 import static org.sonar.python.checks.utils.Expressions.isFalsy;
 import static org.sonar.python.checks.utils.Expressions.isTruthy;
 import static org.sonar.python.checks.utils.Expressions.removeParentheses;
@@ -288,4 +291,29 @@ class ExpressionsTest {
     }
   }
 
+  @Test
+  void assignedName() {
+    assertThat(getAssignedName(exp("x=42"))).isNotEmpty().get().extracting(Name::name).isEqualTo("x");
+
+    assertThat(
+      getAssignedName(((Expression) TreeUtils.firstChild(parse("x,y, z = 1, 2, 3"), t -> t.is(Kind.NUMERIC_LITERAL) && ((NumericLiteral) t).valueAsString().equals("2")).get())))
+        .isNotEmpty().get().extracting(Name::name).isEqualTo("y");
+    assertThat(
+      getAssignedName(((Expression) TreeUtils.firstChild(parse("x,y, z = (1, 2, 3)"), t -> t.is(Kind.NUMERIC_LITERAL) && ((NumericLiteral) t).valueAsString().equals("3")).get())))
+        .isNotEmpty().get().extracting(Name::name).isEqualTo("z");
+    assertThat(
+      getAssignedName(((Expression) TreeUtils.firstChild(parse("x,y, z = *[1, 2, 3]"), t -> t.is(Kind.NUMERIC_LITERAL) && ((NumericLiteral) t).valueAsString().equals("3")).get())))
+        .isNotEmpty().get().extracting(Name::name).isEqualTo("z");
+    assertThat(
+      getAssignedName(
+        ((Expression) TreeUtils.firstChild(parse("a, (b, c) = 1, (2, 3)"), t -> t.is(Kind.NUMERIC_LITERAL) && ((NumericLiteral) t).valueAsString().equals("3")).get())))
+          .isNotEmpty().get().extracting(Name::name).isEqualTo("c");
+    assertThat(
+      getAssignedName(
+        ((Expression) TreeUtils.firstChild(parse("1, (2, 3)"), t -> t.is(Kind.NUMERIC_LITERAL) && ((NumericLiteral) t).valueAsString().equals("3")).get())))
+      .isEmpty();
+    assertThat(
+      getAssignedName(((Expression) TreeUtils.firstChild(parse("x,self.y, z = *[1, 2, 3]"), t -> t.is(Kind.NUMERIC_LITERAL) && ((NumericLiteral) t).valueAsString().equals("2")).get())))
+      .isNotEmpty().get().extracting(Name::name).isEqualTo("y");
+  }
 }

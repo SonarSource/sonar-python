@@ -19,6 +19,7 @@
  */
 package org.sonar.python.checks.utils;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
@@ -39,11 +40,14 @@ import org.sonar.plugins.python.api.tree.ListLiteral;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.NumericLiteral;
 import org.sonar.plugins.python.api.tree.ParenthesizedExpression;
+import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.StringElement;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.plugins.python.api.tree.Tuple;
+import org.sonar.plugins.python.api.tree.UnpackingExpression;
+import org.sonar.python.semantic.SymbolUtils;
 import org.sonar.python.tree.TreeUtils;
 
 public class Expressions {
@@ -302,7 +306,44 @@ public class Expressions {
         return IGNORE;
       }
     }
-
   }
 
+  public static Optional<Name> getAssignedName(Expression expression) {
+    if (expression.is(Tree.Kind.NAME)) {
+      return Optional.of((Name) expression);
+    }
+    if (expression.is(Tree.Kind.QUALIFIED_EXPR)) {
+      return getAssignedName(((QualifiedExpression) expression).name());
+    }
+
+    var assignment = (AssignmentStatement) TreeUtils.firstAncestorOfKind(expression, Tree.Kind.ASSIGNMENT_STMT);
+    if (assignment == null) {
+      return Optional.empty();
+    }
+
+    var expressions = SymbolUtils.assignmentsLhs(assignment);
+    if (expressions.size() != 1) {
+      List<Expression> rhsExpressions = getExpressionsFromRhs(assignment.assignedValue());
+      var rhsIndex = rhsExpressions.stream().flatMap(TreeUtils::flattenTuples).toList().indexOf(expression);
+      if (rhsIndex != -1) {
+        return getAssignedName(expressions.get(rhsIndex));
+      } else {
+        return Optional.empty();
+      }
+    }
+
+    return getAssignedName(expressions.get(0));
+  }
+
+  private static List<Expression> getExpressionsFromRhs(Expression rhs) {
+    List<Expression> expressions = new ArrayList<>();
+    if (rhs.is(Tree.Kind.TUPLE)) {
+      expressions.addAll(((Tuple) rhs).elements());
+    } else if (rhs.is(Tree.Kind.LIST_LITERAL)) {
+      expressions.addAll(((ListLiteral) rhs).elements().expressions());
+    } else if (rhs.is(Tree.Kind.UNPACKING_EXPR)) {
+      return getExpressionsFromRhs(((UnpackingExpression) rhs).expression());
+    }
+    return expressions;
+  }
 }

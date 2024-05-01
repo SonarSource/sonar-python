@@ -1,0 +1,42 @@
+<p>This rule raises an issue when a Scikit-Learn Pipeline is created without specifying the <code>memory</code> argument.</p>
+<h2>Why is this an issue?</h2>
+<p>When the <code>memory</code> argument is not specified, the pipeline will recompute the transformers every time the pipeline is fitted. This can be
+time-consuming if the transformers are expensive to compute or if the dataset is large.</p>
+<p>However, if the intent is to recompute the transformers everytime, the memory argument should be set explicitly to <code>None</code>. This way the
+intention is clear.</p>
+<h2>How to fix it</h2>
+<p>Specify the <code>memory</code> argument when creating a Scikit-Learn Pipeline.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
+from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
+
+pipeline = Pipeline([
+    ('scaler', StandardScaler()),
+    ('classifier', LinearDiscriminantAnalysis())
+]) # Noncompliant: the memory parameter is not provided
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
+from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
+
+pipeline = Pipeline([
+    ('scaler', StandardScaler()),
+    ('classifier', LinearDiscriminantAnalysis())
+], memory="cache_folder") # Compliant
+</pre>
+<h3>Pitfalls</h3>
+<p>If the pipeline is used with different datasets, the cache may not be helpful and can consume a lot of space. This is true when using
+<code>sklearn.model_selection.HalvingGridSearchCV</code> or <code>sklearn.model_selection.HalvingRandomSearchCV</code> because the size of the dataset
+changes every iteration when using the default configuration.</p>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Scikit-Learn documentation - <a
+  href="https://scikit-learn.org/stable/modules/compose.html#caching-transformers-avoid-repeated-computation">Pipeline</a> </li>
+</ul>
+

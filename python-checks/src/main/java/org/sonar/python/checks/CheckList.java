@@ -350,6 +350,7 @@ public final class CheckList {
       StrongCryptographicKeysCheck.class,
       SklearnCachedPipelineDontAccessTransformersCheck.class,
       SuperfluousCurlyBraceCheck.class,
+      SklearnPipelineSpecifyMemoryArgumentCheck.class,
       TempFileCreationCheck.class,
       ImplicitlySkippedTestCheck.class,
       ToDoCommentCheck.class,
