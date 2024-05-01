@@ -140,3 +140,8 @@ def other():
     def a_call(): ...
     def b_call(): ...
     a_call(b_call(pipeline3))
+
+    def outer():
+        pipe1 = make_pipeline(StandardScaler(), LinearDiscriminantAnalysis())
+        def inner():
+            pipe = Pipeline([("clf", VotingClassifier([pipe1]))]) # Noncompliant
