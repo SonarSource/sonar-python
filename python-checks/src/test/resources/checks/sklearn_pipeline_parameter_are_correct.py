@@ -4,7 +4,7 @@ from sklearn.svm import SVC
 def aa():
     pipe = Pipeline(steps=[("clf", SVC())])
 
-    pipe.set_params(clf__F=10, clf__C=45) # Noncompliant
+    pipe.set_params(clf__F=10, clf__C=45) # Noncompliant {{Provide valid parameters to the estimator.}}
     #               ^^^^^^
 
 def incorrect_pipelines():
