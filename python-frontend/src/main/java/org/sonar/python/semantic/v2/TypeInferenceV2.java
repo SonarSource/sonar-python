@@ -19,361 +19,114 @@
  */
 package org.sonar.python.semantic.v2;
 
-import java.nio.file.Path;
-import java.util.ArrayDeque;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Deque;
-import java.util.List;
-import java.util.Optional;
-import javax.annotation.Nullable;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+import java.util.function.Supplier;
+import java.util.stream.Collectors;
 import org.sonar.plugins.python.api.PythonFile;
-import org.sonar.plugins.python.api.tree.ArgList;
-import org.sonar.plugins.python.api.tree.AssignmentStatement;
-import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
-import org.sonar.plugins.python.api.tree.ClassDef;
-import org.sonar.plugins.python.api.tree.DictionaryLiteral;
-import org.sonar.plugins.python.api.tree.DottedName;
-import org.sonar.plugins.python.api.tree.Expression;
-import org.sonar.plugins.python.api.tree.ExpressionList;
+import org.sonar.plugins.python.api.cfg.ControlFlowGraph;
 import org.sonar.plugins.python.api.tree.FileInput;
-import org.sonar.plugins.python.api.tree.FunctionDef;
-import org.sonar.plugins.python.api.tree.ImportFrom;
-import org.sonar.plugins.python.api.tree.ImportName;
-import org.sonar.plugins.python.api.tree.ListLiteral;
 import org.sonar.plugins.python.api.tree.Name;
-import org.sonar.plugins.python.api.tree.NoneExpression;
-import org.sonar.plugins.python.api.tree.NumericLiteral;
-import org.sonar.plugins.python.api.tree.QualifiedExpression;
-import org.sonar.plugins.python.api.tree.RegularArgument;
-import org.sonar.plugins.python.api.tree.SetLiteral;
-import org.sonar.plugins.python.api.tree.StringLiteral;
+import org.sonar.plugins.python.api.tree.StatementList;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.plugins.python.api.tree.Tuple;
-import org.sonar.plugins.python.api.types.InferredType;
-import org.sonar.python.tree.DictionaryLiteralImpl;
-import org.sonar.python.tree.ListLiteralImpl;
-import org.sonar.python.tree.NameImpl;
-import org.sonar.python.tree.NoneExpressionImpl;
-import org.sonar.python.tree.NumericLiteralImpl;
-import org.sonar.python.tree.SetLiteralImpl;
-import org.sonar.python.tree.StringLiteralImpl;
-import org.sonar.python.tree.TupleImpl;
-import org.sonar.python.types.RuntimeType;
-import org.sonar.python.types.v2.ClassType;
-import org.sonar.python.types.v2.FunctionType;
-import org.sonar.python.types.v2.Member;
-import org.sonar.python.types.v2.ModuleType;
-import org.sonar.python.types.v2.ObjectType;
-import org.sonar.python.types.v2.PythonType;
+import org.sonar.python.semantic.v2.types.Assignment;
+import org.sonar.python.semantic.v2.types.FlowSensitiveTypeInference;
+import org.sonar.python.semantic.v2.types.PropagationVisitor;
+import org.sonar.python.semantic.v2.types.TrivialTypeInferenceVisitor;
+import org.sonar.python.semantic.v2.types.TryStatementVisitor;
 
-import static org.sonar.python.semantic.SymbolUtils.pathOf;
-import static org.sonar.python.tree.TreeUtils.locationInFile;
-
-public class TypeInferenceV2 extends BaseTreeVisitor {
+public class TypeInferenceV2 {
 
   private final ProjectLevelTypeTable projectLevelTypeTable;
   private final SymbolTable symbolTable;
-  private final String fileId;
-
-  private final Deque<PythonType> typeStack = new ArrayDeque<>();
+  private final PythonFile pythonFile;
 
   public TypeInferenceV2(ProjectLevelTypeTable projectLevelTypeTable, PythonFile pythonFile, SymbolTable symbolTable) {
     this.projectLevelTypeTable = projectLevelTypeTable;
     this.symbolTable = symbolTable;
-    Path path = pathOf(pythonFile);
-    this.fileId = path != null ? path.toString() : pythonFile.toString();
+    this.pythonFile = pythonFile;
   }
 
-  @Override
-  public void visitFileInput(FileInput fileInput) {
-    var type = new ModuleType("somehow get its name");
-    inTypeScope(type, () -> super.visitFileInput(fileInput));
+  public void inferTypes(FileInput fileInput) {
+    TrivialTypeInferenceVisitor trivialTypeInferenceVisitor = new TrivialTypeInferenceVisitor(projectLevelTypeTable, pythonFile, symbolTable);
+    fileInput.accept(trivialTypeInferenceVisitor);
+
+    inferTypesAndMemberAccessSymbols(fileInput);
   }
 
-  @Override
-  public void visitStringLiteral(StringLiteral stringLiteral) {
-    ModuleType builtins = this.projectLevelTypeTable.getModule();
-    // TODO: multiple object types to represent str instance?
-    PythonType strType = builtins.resolveMember("str").orElse(PythonType.UNKNOWN);
-    ((StringLiteralImpl) stringLiteral).typeV2(new ObjectType(strType, new ArrayList<>(), new ArrayList<>()));
-  }
 
-  @Override
-  public void visitTuple(Tuple tuple) {
-    super.visitTuple(tuple);
-    List<PythonType> contentTypes = tuple.elements().stream().map(Expression::typeV2).distinct().toList();
-    List<PythonType> attributes = new ArrayList<>();
-    if (contentTypes.size() == 1 && !contentTypes.get(0).equals(PythonType.UNKNOWN)) {
-      attributes = contentTypes;
+  private void inferTypesAndMemberAccessSymbols(FileInput fileInput) {
+    StatementList statements = fileInput.statements();
+    if (statements == null) {
+      return;
     }
-    ModuleType builtins = this.projectLevelTypeTable.getModule();
-    PythonType tupleType = builtins.resolveMember("tuple").orElse(PythonType.UNKNOWN);
-    ((TupleImpl) tuple).typeV2(new ObjectType(tupleType,  attributes, new ArrayList<>()));
+    var moduleSymbols = symbolTable.getSymbolsByRootTree(fileInput);
+
+    inferTypesAndMemberAccessSymbols(
+      fileInput,
+      statements,
+      moduleSymbols,
+      Collections.emptySet(),
+      () -> ControlFlowGraph.build(fileInput, pythonFile)
+    );
   }
 
-  @Override
-  public void visitDictionaryLiteral(DictionaryLiteral dictionaryLiteral) {
-    super.visitDictionaryLiteral(dictionaryLiteral);
-    ModuleType builtins = this.projectLevelTypeTable.getModule();
-    PythonType dictType = builtins.resolveMember("dict").orElse(PythonType.UNKNOWN);
-    ((DictionaryLiteralImpl) dictionaryLiteral).typeV2(new ObjectType(dictType,  new ArrayList<>(), new ArrayList<>()));
-  }
 
-  @Override
-  public void visitSetLiteral(SetLiteral setLiteral) {
-    super.visitSetLiteral(setLiteral);
-    ModuleType builtins = this.projectLevelTypeTable.getModule();
-    PythonType setType = builtins.resolveMember("set").orElse(PythonType.UNKNOWN);
-    ((SetLiteralImpl) setLiteral).typeV2(new ObjectType(setType,  new ArrayList<>(), new ArrayList<>()));
-  }
-
-  @Override
-  public void visitNumericLiteral(NumericLiteral numericLiteral) {
-    ModuleType builtins = this.projectLevelTypeTable.getModule();
-    InferredType type = numericLiteral.type();
-    String memberName = ((RuntimeType) type).getTypeClass().fullyQualifiedName();
-    if (memberName != null) {
-      PythonType pythonType = builtins.resolveMember(memberName).orElse(PythonType.UNKNOWN);
-      ((NumericLiteralImpl) numericLiteral).typeV2(new ObjectType(pythonType, new ArrayList<>(), new ArrayList<>()));
-    }
-  }
-
-  @Override
-  public void visitNone(NoneExpression noneExpression) {
-    ModuleType builtins = this.projectLevelTypeTable.getModule();
-    // TODO: multiple object types to represent str instance?
-    PythonType noneType = builtins.resolveMember("NoneType").orElse(PythonType.UNKNOWN);
-    ((NoneExpressionImpl) noneExpression).typeV2(new ObjectType(noneType, new ArrayList<>(), new ArrayList<>()));
-  }
-
-  @Override
-  public void visitListLiteral(ListLiteral listLiteral) {
-    ModuleType builtins = this.projectLevelTypeTable.getModule();
-    scan(listLiteral.elements());
-    List<PythonType> pythonTypes = listLiteral.elements().expressions().stream().map(Expression::typeV2).distinct().toList();
-    // TODO: cleanly reduce attributes
-    PythonType listType = builtins.resolveMember("list").orElse(PythonType.UNKNOWN);
-    ((ListLiteralImpl) listLiteral).typeV2(new ObjectType(listType, pythonTypes, new ArrayList<>()));
-  }
-
-  @Override
-  public void visitClassDef(ClassDef classDef) {
-    scan(classDef.args());
-    Name name = classDef.name();
-    ClassTypeBuilder classTypeBuilder = new ClassTypeBuilder()
-      .withName(name.name())
-      .withDefinitionLocation(locationInFile(classDef.name(), fileId));
-    resolveTypeHierarchy(classDef, classTypeBuilder);
-    ClassType type = classTypeBuilder.build();
-    ((NameImpl) name).typeV2(type);
-    
-    inTypeScope(type, () -> scan(classDef.body()));
-  }
-
-  static void resolveTypeHierarchy(ClassDef classDef, ClassTypeBuilder classTypeBuilder) {
-    Optional.of(classDef)
-      .map(ClassDef::args)
-      .map(ArgList::arguments)
-      .stream()
+  private static void inferTypesAndMemberAccessSymbols(Tree scopeTree,
+    StatementList statements,
+    Set<SymbolV2> declaredVariables,
+    Set<Name> annotatedParameterNames,
+    Supplier<ControlFlowGraph> controlFlowGraphSupplier
+  ) {
+    PropagationVisitor propagationVisitor = new PropagationVisitor();
+    scopeTree.accept(propagationVisitor);
+    Set<Name> assignedNames = propagationVisitor.assignmentsByLhs().values().stream()
       .flatMap(Collection::stream)
-      .forEach(argument -> {
-        if (argument instanceof RegularArgument regularArgument) {
-          addParentClass(classTypeBuilder, regularArgument);
-        } else {
-          classTypeBuilder.superClasses().add(PythonType.UNKNOWN);
-        }
-      });
-  }
+      .map(Assignment::lhsName)
+      .collect(Collectors.toSet());
 
-  private static void addParentClass(ClassTypeBuilder classTypeBuilder, RegularArgument regularArgument) {
-    Name keyword = regularArgument.keywordArgument();
-    // TODO: store names if not resolved properly
-    if (keyword != null) {
-      if ("metaclass".equals(keyword.name())) {
-        PythonType argumentType = getTypeV2FromArgument(regularArgument);
-        classTypeBuilder.metaClasses().add(argumentType);
-      }
-      return;
-    }
-    PythonType argumentType = getTypeV2FromArgument(regularArgument);
-    classTypeBuilder.superClasses().add(argumentType);
-    // TODO: handle generics
-  }
-
-  private static PythonType getTypeV2FromArgument(RegularArgument regularArgument) {
-    Expression expression = regularArgument.expression();
-    // Ensure we support correctly typing symbols like "List[str] / list[str]"
-    return expression.typeV2();
-  }
-
-  @Override
-  public void visitFunctionDef(FunctionDef functionDef) {
-    scan(functionDef.decorators());
-    scan(functionDef.typeParams());
-    scan(functionDef.parameters());
-    FunctionType functionType = buildFunctionType(functionDef);
-    ((NameImpl) functionDef.name()).typeV2(functionType);
-    inTypeScope(functionType, () -> {
-      // TODO: check scope accuracy
-      scan(functionDef.typeParams());
-      scan(functionDef.parameters());
-      scan(functionDef.returnTypeAnnotation());
-      scan(functionDef.body());
-    });
-  }
-
-  private FunctionType buildFunctionType(FunctionDef functionDef) {
-    FunctionTypeBuilder functionTypeBuilder = new FunctionTypeBuilder()
-      .fromFunctionDef(functionDef)
-      .withDefinitionLocation(locationInFile(functionDef.name(), fileId));
-    ClassType owner = null;
-    if (currentType() instanceof ClassType classType) {
-      owner = classType;
-    }
-    if (owner != null) {
-      functionTypeBuilder.withOwner(owner);
-    }
-    FunctionType functionType = functionTypeBuilder.build();
-    if (owner != null) {
-      if (functionDef.name().symbolV2().hasSingleBindingUsage()) {
-        owner.members().add(new Member(functionType.name(), functionType));
-      } else {
-        owner.members().add(new Member(functionType.name(), PythonType.UNKNOWN));
-      }
-    }
-    return functionType;
-  }
-
-  @Override
-  public void visitImportName(ImportName importName) {
-    importName.modules()
-      .forEach(aliasedName -> {
-        var names = aliasedName.dottedName().names();
-        var fqn = names
-              .stream().map(Name::name)
-              .toList();
-        var module = projectLevelTypeTable.getModule(fqn);
-
-        if (aliasedName.alias() != null) {
-          setTypeToName(aliasedName.alias(), module);
-        } else {
-          for (int i = names.size() - 1; i >= 0; i--) {
-            setTypeToName(names.get(i), module);
-            module = Optional.ofNullable(module)
-              .map(ModuleType::parent)
-              .orElse(null);
-          }
-        }
-      });
-  }
-
-  @Override
-  public void visitImportFrom(ImportFrom importFrom) {
-    Optional.of(importFrom)
-      .map(ImportFrom::module)
-      .map(DottedName::names)
-      .ifPresent(names -> {
-        var fqn = names
-          .stream().map(Name::name)
-          .toList();
-
-        var module = projectLevelTypeTable.getModule(fqn);
-        importFrom.importedNames().forEach(aliasedName -> aliasedName
-          .dottedName()
-          .names()
-          .stream()
-          .findFirst()
-          .ifPresent(name -> {
-            var type = module.resolveMember(name.name()).orElse(PythonType.UNKNOWN);
-
-            var boundName = Optional.ofNullable(aliasedName.alias())
-              .orElse(name);
-
-            setTypeToName(boundName, type);
-          }));
-      });
-  }
-
-  @Override
-  public void visitAssignmentStatement(AssignmentStatement assignmentStatement) {
-    scan(assignmentStatement.assignedValue());
-    Optional.of(assignmentStatement)
-      .map(AssignmentStatement::lhsExpressions)
-      .filter(lhs -> lhs.size() == 1)
-      .map(lhs -> lhs.get(0))
-      .map(ExpressionList::expressions)
-      .filter(lhs -> lhs.size() == 1)
-      .map(lhs -> lhs.get(0))
-      .filter(NameImpl.class::isInstance)
-      .map(NameImpl.class::cast)
-      .ifPresent(lhsName -> {
-        var assignedValueType = assignmentStatement.assignedValue().typeV2();
-        lhsName.typeV2(assignedValueType);
-      });
-  }
-
-  @Override
-  public void visitQualifiedExpression(QualifiedExpression qualifiedExpression) {
-    scan(qualifiedExpression.qualifier());
-    if (qualifiedExpression.name() instanceof NameImpl name) {
-      var nameType = qualifiedExpression.qualifier().typeV2()
-        .resolveMember(qualifiedExpression.name().name())
-        .orElse(PythonType.UNKNOWN);
-      name.typeV2(nameType);
-    }
-  }
-
-
-  @Override
-  public void visitName(Name name) {
-    SymbolV2 symbolV2 = name.symbolV2();
-    if (symbolV2 == null) {
-//    This part could be affected by SONARPY-1802
-      projectLevelTypeTable.getModule().resolveMember(name.name())
-        .ifPresent(type -> setTypeToName(name, type));
-      return;
-    }
-
-    var bindingUsages = new ArrayList<UsageV2>();
-    for (var usage : symbolV2.usages()) {
-      if (usage.kind().equals(UsageV2.Kind.GLOBAL_DECLARATION)) {
-        // Don't infer type for global variables
+    TryStatementVisitor tryStatementVisitor = new TryStatementVisitor();
+    statements.accept(tryStatementVisitor);
+    if (tryStatementVisitor.hasTryStatement()) {
+      // CFG doesn't model precisely try-except statements. Hence we fallback to AST based type inference
+      // TODO: Check if still relevant
+/*      visitor.processPropagations(getTrackedVars(declaredVariables, assignedNames));
+      statements.accept(new TypeInference.NameVisitor());*/
+    } else {
+      ControlFlowGraph cfg = controlFlowGraphSupplier.get();
+      if (cfg == null) {
         return;
       }
-      if (usage.isBindingUsage()) {
-        bindingUsages.add(usage);
-      }
-      if (bindingUsages.size() > 1) {
-        // no need to iterate over usages if there is more than one binding usage
-        return;
+      assignedNames.addAll(annotatedParameterNames);
+      flowSensitiveTypeInference(cfg, getTrackedVars(declaredVariables, assignedNames), propagationVisitor);
+    }
+  }
+
+  private static void flowSensitiveTypeInference(ControlFlowGraph cfg, Set<SymbolV2> trackedVars, PropagationVisitor propagationVisitor) {
+    FlowSensitiveTypeInference flowSensitiveTypeInference = new FlowSensitiveTypeInference(
+      trackedVars,
+      propagationVisitor.assignmentsByAssignmentStatement(),
+      Map.of());
+
+    flowSensitiveTypeInference.compute(cfg);
+    flowSensitiveTypeInference.compute(cfg);
+  }
+
+  private static Set<SymbolV2> getTrackedVars(Set<SymbolV2> localVariables, Set<Name> assignedNames) {
+    Set<SymbolV2> trackedVars = new HashSet<>();
+    for (SymbolV2 variable : localVariables) {
+      boolean hasMissingBindingUsage = variable.usages().stream()
+        .filter(UsageV2::isBindingUsage)
+        .anyMatch(u -> !assignedNames.contains(u.tree()));
+      boolean isGlobal = variable.usages().stream().anyMatch(v -> v.kind().equals(UsageV2.Kind.GLOBAL_DECLARATION));
+      if (!hasMissingBindingUsage && !isGlobal) {
+        trackedVars.add(variable);
       }
     }
-
-    bindingUsages.stream()
-      .findFirst()
-      .filter(UsageV2::isBindingUsage)
-      .map(UsageV2::tree)
-      .filter(Expression.class::isInstance)
-      .map(Expression.class::cast)
-      .map(Expression::typeV2)
-      .ifPresent(type -> setTypeToName(name, type));
-  }
-
-  private PythonType currentType() {
-    return typeStack.peek();
-  }
-
-  private void inTypeScope(PythonType pythonType, Runnable runnable) {
-    this.typeStack.push(pythonType);
-    runnable.run();
-    this.typeStack.poll();
-  }
-
-  private static void setTypeToName(@Nullable Tree tree, @Nullable PythonType type) {
-    if (tree instanceof NameImpl name && type != null) {
-      name.typeV2(type);
-    }
+    return trackedVars;
   }
 
 }

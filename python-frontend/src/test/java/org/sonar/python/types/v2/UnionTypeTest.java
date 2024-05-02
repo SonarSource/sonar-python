@@ -19,13 +19,16 @@
  */
 package org.sonar.python.types.v2;
 
-import java.util.List;
+import java.util.Set;
 import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.tree.ExpressionStatement;
 import org.sonar.plugins.python.api.tree.FileInput;
 
-import static org.sonar.python.types.v2.TypesTestUtils.parseAndInferTypes;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.sonar.python.types.v2.TypesTestUtils.BOOL_TYPE;
+import static org.sonar.python.types.v2.TypesTestUtils.INT_TYPE;
+import static org.sonar.python.types.v2.TypesTestUtils.STR_TYPE;
+import static org.sonar.python.types.v2.TypesTestUtils.parseAndInferTypes;
 
 
 class UnionTypeTest {
@@ -36,7 +39,7 @@ class UnionTypeTest {
     PythonType intType = ((ExpressionStatement) fileInput.statements().statements().get(0)).expressions().get(0).typeV2();
     PythonType strType = ((ExpressionStatement) fileInput.statements().statements().get(1)).expressions().get(0).typeV2();
 
-    UnionType unionType = new UnionType(List.of(intType, strType));
+    UnionType unionType = new UnionType(Set.of(intType, strType));
 
     assertThat(unionType.isCompatibleWith(intType)).isTrue();
     assertThat(unionType.isCompatibleWith(strType)).isTrue();
@@ -51,9 +54,40 @@ class UnionTypeTest {
     FileInput fileInput = parseAndInferTypes("42;foo()");
     PythonType intType = ((ExpressionStatement) fileInput.statements().statements().get(0)).expressions().get(0).typeV2();
     PythonType strType = ((ExpressionStatement) fileInput.statements().statements().get(1)).expressions().get(0).typeV2();
-    UnionType unionType = new UnionType(List.of(intType, strType));
+    UnionType unionType = new UnionType(Set.of(intType, strType));
 
     assertThat(unionType.displayName()).isEmpty();
     assertThat(unionType.instanceDisplayName()).isEmpty();
+  }
+
+  @Test
+  void or_with_itself() {
+    PythonType unionType = UnionType.or(INT_TYPE, INT_TYPE);
+    assertThat(unionType).isEqualTo(INT_TYPE);
+  }
+
+  @Test
+  void or_with_union_type() {
+    PythonType unionType = UnionType.or(INT_TYPE, STR_TYPE);
+    PythonType result = UnionType.or(unionType, BOOL_TYPE);
+    assertThat(((UnionType) result).candidates()).containsExactlyInAnyOrder(INT_TYPE, STR_TYPE, BOOL_TYPE);
+  }
+
+  @Test
+  void or_unionType() {
+    FileInput fileInput = parseAndInferTypes("42;\"hello\"");
+    PythonType intType = ((ExpressionStatement) fileInput.statements().statements().get(0)).expressions().get(0).typeV2();
+    PythonType strType = ((ExpressionStatement) fileInput.statements().statements().get(1)).expressions().get(0).typeV2();
+
+    UnionType unionType = (UnionType) UnionType.or(intType, strType);
+
+    assertThat(unionType.candidates()).containsExactlyInAnyOrder(intType, strType);
+    assertThat(unionType.displayName()).contains("Union[int, str]");
+
+    PythonType unknownUnion = UnionType.or(intType, PythonType.UNKNOWN);
+    assertThat(unknownUnion).isEqualTo(PythonType.UNKNOWN);
+
+    unknownUnion = UnionType.or(PythonType.UNKNOWN, intType);
+    assertThat(unknownUnion).isEqualTo(PythonType.UNKNOWN);
   }
 }
