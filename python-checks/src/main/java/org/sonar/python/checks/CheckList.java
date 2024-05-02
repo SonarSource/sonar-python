@@ -352,6 +352,7 @@ public final class CheckList {
       SklearnCachedPipelineDontAccessTransformersCheck.class,
       SuperfluousCurlyBraceCheck.class,
       SklearnPipelineSpecifyMemoryArgumentCheck.class,
+      SklearnEstimatorHyperparametersCheck.class,
       TempFileCreationCheck.class,
       ImplicitlySkippedTestCheck.class,
       ToDoCommentCheck.class,
