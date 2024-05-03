@@ -19,7 +19,6 @@
  */
 package org.sonar.python.checks;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
@@ -47,15 +46,15 @@ public class RandomSeedCheck extends PythonSubscriptionCheck {
   private static final String NUMPY_SEED_ARG_NAME = "seed";
 
   private static final Map<String, String> SEED_METHODS_TO_CHECK = Map.of(
-      "numpy.seed", NUMPY_SEED_ARG_NAME,
-      "numpy.random.seed", NUMPY_SEED_ARG_NAME,
-      "numpy.random.default_rng", NUMPY_SEED_ARG_NAME,
-      "numpy.random.SeedSequence", "entropy",
-      "numpy.random.PCG64", NUMPY_SEED_ARG_NAME,
-      "numpy.random.PCG64DXSM", NUMPY_SEED_ARG_NAME,
-      "numpy.random.MT19937", NUMPY_SEED_ARG_NAME,
-      "numpy.random.SFC64", NUMPY_SEED_ARG_NAME,
-      "numpy.random.Philox", NUMPY_SEED_ARG_NAME);
+    "numpy.seed", NUMPY_SEED_ARG_NAME,
+    "numpy.random.seed", NUMPY_SEED_ARG_NAME,
+    "numpy.random.default_rng", NUMPY_SEED_ARG_NAME,
+    "numpy.random.SeedSequence", "entropy",
+    "numpy.random.PCG64", NUMPY_SEED_ARG_NAME,
+    "numpy.random.PCG64DXSM", NUMPY_SEED_ARG_NAME,
+    "numpy.random.MT19937", NUMPY_SEED_ARG_NAME,
+    "numpy.random.SFC64", NUMPY_SEED_ARG_NAME,
+    "numpy.random.Philox", NUMPY_SEED_ARG_NAME);
 
   private static final String SKLEARN_FQN = "sklearn";
   private static final String SKLEARN_ARG_NAME = "random_state";
@@ -68,7 +67,7 @@ public class RandomSeedCheck extends PythonSubscriptionCheck {
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT,
-        ctx -> this.reachingDefinitionsAnalysis = new ReachingDefinitionsAnalysis(ctx.pythonFile()));
+      ctx -> this.reachingDefinitionsAnalysis = new ReachingDefinitionsAnalysis(ctx.pythonFile()));
     context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, this::checkEmptySeedCall);
   }
 
@@ -91,27 +90,34 @@ public class RandomSeedCheck extends PythonSubscriptionCheck {
   }
 
   private static boolean hasRandomStateParameter(Symbol calleeSymbol) {
-    if (calleeSymbol.is(Kind.CLASS)) {
-      List<Symbol> constructorSymbols = ((ClassSymbolImpl) calleeSymbol).declaredMembers()
+    return isClassInstantiationWithRandomStateParameter(calleeSymbol)
+      .or(() -> isFunctionWithRandomStateParameter(calleeSymbol))
+      .orElse(false);
+  }
+
+  private static Optional<Boolean> isClassInstantiationWithRandomStateParameter(Symbol calleeSymbol) {
+    return Optional.of(calleeSymbol)
+      .filter(s -> s.is(Kind.CLASS))
+      .map(ClassSymbolImpl.class::cast)
+      .map(classSymbol -> classSymbol.declaredMembers()
         .stream()
-        .filter(s -> "__init__".equals(s.name()))
-        .toList();
-      if (constructorSymbols.size() == 1) {
-        return hasRandomStateParameter(constructorSymbols.get(0));
-      }
-      return false;
-    }
-    if (calleeSymbol.is(Kind.FUNCTION)) {
-      List<FunctionSymbol> symbols = SymbolUtils.getFunctionSymbols(calleeSymbol);
-      if (symbols.size() == 1) {
-        FunctionSymbol symbol = symbols.get(0);
-        return symbol.parameters()
-          .stream()
-          .map(FunctionSymbol.Parameter::name)
-          .anyMatch(SKLEARN_ARG_NAME::equals);
-      }
-    }
-    return false;
+        .filter(member -> "__init__".equals(member.name()))
+        .toList())
+      .filter(members -> members.size() == 1)
+      .map(members -> members.get(0))
+      .map(RandomSeedCheck::hasRandomStateParameter);
+  }
+
+  private static Optional<Boolean> isFunctionWithRandomStateParameter(Symbol calleeSymbol) {
+    return Optional.of(calleeSymbol)
+      .filter(s1 -> s1.is(Kind.FUNCTION))
+      .map(SymbolUtils::getFunctionSymbols)
+      .filter(symbols -> symbols.size() == 1)
+      .map(symbols -> symbols.get(0))
+      .map(symbol -> symbol.parameters()
+        .stream()
+        .map(FunctionSymbol.Parameter::name)
+        .anyMatch(SKLEARN_ARG_NAME::equals));
   }
 
   private boolean isArgumentAbsentOrNone(@Nullable RegularArgument arg) {
@@ -120,9 +126,9 @@ public class RandomSeedCheck extends PythonSubscriptionCheck {
 
   private boolean isAssignedNone(Expression exp) {
     return Optional.of(exp)
-        .flatMap(TreeUtils.toOptionalInstanceOfMapper(Name.class))
-        .map(reachingDefinitionsAnalysis::valuesAtLocation)
-        .filter(Predicate.not(Set::isEmpty))
-        .filter(values -> values.stream().allMatch(value -> value.is(Tree.Kind.NONE))).isPresent();
+      .flatMap(TreeUtils.toOptionalInstanceOfMapper(Name.class))
+      .map(reachingDefinitionsAnalysis::valuesAtLocation)
+      .filter(Predicate.not(Set::isEmpty))
+      .filter(values -> values.stream().allMatch(value -> value.is(Tree.Kind.NONE))).isPresent();
   }
 }
