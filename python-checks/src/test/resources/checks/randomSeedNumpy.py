@@ -2,35 +2,35 @@ import numpy as np
 
 def failure():
     gen = np.random.default_rng()  # Noncompliant {{Provide a seed for this random generator.}}
-    #     ^^^^^^^^^^^^^^^^^^^^^^^
+    #     ^^^^^^^^^^^^^^^^^^^^^
 
     gen = np.random.SeedSequence()  # Noncompliant
-    #     ^^^^^^^^^^^^^^^^^^^^^^^^
+    #     ^^^^^^^^^^^^^^^^^^^^^^
 
     gen = np.random.SeedSequence(entropy=None)  # Noncompliant
-    #     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    #     ^^^^^^^^^^^^^^^^^^^^^^
     gen = np.random.SeedSequence(spawn_key=[123])  # Noncompliant
-    #     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    #     ^^^^^^^^^^^^^^^^^^^^^^
 
     from numpy.random import SFC64, MT19937, PCG64, PCG64DXSM, Philox
 
     gen = SFC64()  # Noncompliant
-    #     ^^^^^^^
+    #     ^^^^^
     gen = MT19937(seed=None)  # Noncompliant
-    #     ^^^^^^^^^^^^^^^^^^
-    gen = PCG64()  # Noncompliant
     #     ^^^^^^^
+    gen = PCG64()  # Noncompliant
+    #     ^^^^^
 
     gen = PCG64DXSM()  # Noncompliant
-    #     ^^^^^^^^^^^
+    #     ^^^^^^^^^
     a = None
     gen = Philox(a)  # Noncompliant
-    #     ^^^^^^^^^
+    #     ^^^^^^
 
     gen = np.random.seed()  # Noncompliant
-    #     ^^^^^^^^^^^^^^^^
+    #     ^^^^^^^^^^^^^^
     gen = np.seed(None)  # Noncompliant
-    #     ^^^^^^^^^^^^^
+    #     ^^^^^^^
 
 
 def success():

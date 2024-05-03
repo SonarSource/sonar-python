@@ -22,11 +22,17 @@ package org.sonar.python.checks;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-class NumpyRandomSeedCheckTest {
-  @Test
-  void test() {
-    PythonCheckVerifier.verify("src/test/resources/checks/numpyRandomSeedCheck.py", new NumpyRandomSeedCheck());
-  }
+class RandomSeedCheckTest {
+  RandomSeedCheck check = new RandomSeedCheck();
 
+  @Test
+  void test_numpy() {
+    PythonCheckVerifier.verify("src/test/resources/checks/randomSeedNumpy.py", check );
+  }
+  
+  @Test
+  void test_sklearn() {
+    PythonCheckVerifier.verify("src/test/resources/checks/randomSeedSKlearn.py", check);
+  }
 }
 
