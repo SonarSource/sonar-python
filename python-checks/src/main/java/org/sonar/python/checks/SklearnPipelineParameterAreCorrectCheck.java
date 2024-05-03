@@ -245,19 +245,19 @@ public class SklearnPipelineParameterAreCorrectCheck extends PythonSubscriptionC
   }
 
   private static Optional<StepAndParameter> getStepAndParameterFromName(Name name) {
-    var split = name.name().split("__");
-    if (split.length != 2) {
-      return Optional.empty();
-    }
-    return Optional.of(new StepAndParameter(split[0], split[1], name));
+    return splitStepString(name.name()).map(split -> new StepAndParameter(split[0], split[1], name));
   }
 
   private static Optional<StepAndParameter> getStepAndParameterFromString(String string, Tree location) {
+    return splitStepString(string).map(split -> new StepAndParameter(split[0], split[1], location));
+  }
+
+  private static Optional<String[]> splitStepString(String string) {
     var split = string.split("__");
     if (split.length != 2 || string.endsWith("__")) {
       return Optional.empty();
     }
-    return Optional.of(new StepAndParameter(split[0], split[1], location));
+    return Optional.of(split);
   }
 
   private record StepAndParameter(String step, String parameter, Tree location) {
