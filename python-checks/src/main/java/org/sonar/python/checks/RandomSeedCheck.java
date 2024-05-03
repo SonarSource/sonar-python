@@ -87,7 +87,7 @@ public class RandomSeedCheck extends PythonSubscriptionCheck {
         .filter(RandomSeedCheck::hasRandomStateParameter)
         .filter(symbol -> isArgumentAbsentOrNone(TreeUtils.argumentByKeyword(SKLEARN_ARG_NAME, call.arguments())))
         .map(symbol -> SKLEARN_MESSAGE))
-      .ifPresent(message -> ctx.addIssue(call, message));
+      .ifPresent(message -> ctx.addIssue(call.callee(), message));
   }
 
   private static boolean hasRandomStateParameter(Symbol calleeSymbol) {

@@ -5,12 +5,12 @@ from sklearn.datasets import load_iris, make_blobs
 def failure():
     X, y = load_iris(return_X_y=True)
     X_train, X_test, y_train, y_test = train_test_split(X, y) # Noncompliant {{Provide a seed for the random_state parameter.}}
-    #                                  ^^^^^^^^^^^^^^^^^^^^^^
+    #                                  ^^^^^^^^^^^^^^^^
     svc = SVC() # Noncompliant
-    #     ^^^^^
+    #     ^^^
 
     X, y = make_blobs(n_samples=1300, random_state=None) # Noncompliant
-    #      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ 
+    #      ^^^^^^^^^^
 
 def success():
     from sklearn.ensemble import RandomForestClassifier
