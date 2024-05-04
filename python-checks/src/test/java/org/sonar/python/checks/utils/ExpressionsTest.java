@@ -296,24 +296,57 @@ class ExpressionsTest {
     assertThat(getAssignedName(exp("x=42"))).isNotEmpty().get().extracting(Name::name).isEqualTo("x");
 
     assertThat(
-      getAssignedName(((Expression) TreeUtils.firstChild(parse("x,y, z = 1, 2, 3"), t -> t.is(Kind.NUMERIC_LITERAL) && ((NumericLiteral) t).valueAsString().equals("2")).get())))
+      getAssignedName(((Expression) TreeUtils.firstChild(parse("x,y, z = 1, 2, 3"), t -> getFirstChildWithValue(t, "2")).get())))
         .isNotEmpty().get().extracting(Name::name).isEqualTo("y");
     assertThat(
-      getAssignedName(((Expression) TreeUtils.firstChild(parse("x,y, z = (1, 2, 3)"), t -> t.is(Kind.NUMERIC_LITERAL) && ((NumericLiteral) t).valueAsString().equals("3")).get())))
+      getAssignedName(((Expression) TreeUtils.firstChild(parse("x,y, z = (1, 2, 3)"), t -> getFirstChildWithValue(t, "3")).get())))
         .isNotEmpty().get().extracting(Name::name).isEqualTo("z");
     assertThat(
-      getAssignedName(((Expression) TreeUtils.firstChild(parse("x,y, z = *[1, 2, 3]"), t -> t.is(Kind.NUMERIC_LITERAL) && ((NumericLiteral) t).valueAsString().equals("3")).get())))
+      getAssignedName(((Expression) TreeUtils.firstChild(parse("x,y, z = *[1, 2, 3]"), t -> getFirstChildWithValue(t, "3")).get())))
         .isNotEmpty().get().extracting(Name::name).isEqualTo("z");
     assertThat(
       getAssignedName(
-        ((Expression) TreeUtils.firstChild(parse("a, (b, c) = 1, (2, 3)"), t -> t.is(Kind.NUMERIC_LITERAL) && ((NumericLiteral) t).valueAsString().equals("3")).get())))
+        ((Expression) TreeUtils.firstChild(parse("a, (b, c) = 1, (2, 3)"), t -> getFirstChildWithValue(t, "3")).get())))
           .isNotEmpty().get().extracting(Name::name).isEqualTo("c");
     assertThat(
       getAssignedName(
-        ((Expression) TreeUtils.firstChild(parse("1, (2, 3)"), t -> t.is(Kind.NUMERIC_LITERAL) && ((NumericLiteral) t).valueAsString().equals("3")).get())))
-      .isEmpty();
+        ((Expression) TreeUtils.firstChild(parse("1, (2, 3)"), t -> getFirstChildWithValue(t, "3")).get())))
+          .isEmpty();
     assertThat(
-      getAssignedName(((Expression) TreeUtils.firstChild(parse("x,self.y, z = *[1, 2, 3]"), t -> t.is(Kind.NUMERIC_LITERAL) && ((NumericLiteral) t).valueAsString().equals("2")).get())))
-      .isNotEmpty().get().extracting(Name::name).isEqualTo("y");
+      getAssignedName(((Expression) TreeUtils.firstChild(parse("x,self.y, z = *[1, 2, 3]"), t -> getFirstChildWithValue(t, "2")).get())))
+        .isNotEmpty().get().extracting(Name::name).isEqualTo("y");
+    assertThat(
+      getAssignedName(((Expression) TreeUtils.firstChild(parse("1"), t -> getFirstChildWithValue(t, "1")).get())))
+        .isEmpty();
+
+    assertThat(
+      getAssignedName(((Expression) TreeUtils.firstChild(parse("_ = 1"), t -> getFirstChildWithValue(t, "1")).get())))
+        .isNotEmpty().get().extracting(Name::name).isEqualTo("_");
+
+    assertThat(
+      getAssignedName(((Expression) TreeUtils.firstChild(parse("a ,_ = (1,2,3)"), t -> getFirstChildWithValue(t, "1")).get())))
+        .isNotEmpty().get().extracting(Name::name).isEqualTo("a");
+
+    assertThat(
+      getAssignedName(((Expression) TreeUtils.firstChild(parse("a , *b = (1,2,3)"), t -> getFirstChildWithValue(t, "3")).get())))
+        .isEmpty();
+
+    assertThat(
+      getAssignedName(((Expression) TreeUtils.firstChild(parse("b = a[0]"), t -> t.is(Kind.SUBSCRIPTION)).get())))
+        .isNotEmpty().get().extracting(Name::name).isEqualTo("b");
+
+    assertThat(
+      getAssignedName(((Expression) TreeUtils.firstChild(parse("b = a[1:2]"), t -> t.is(Kind.SLICE_EXPR)).get())))
+        .isNotEmpty().get().extracting(Name::name).isEqualTo("b");
+
+    assertThat(
+      getAssignedName(((Expression) TreeUtils.firstChild(parse("b[0] = a[1:2]"), t -> t.is(Kind.SLICE_EXPR)).get())))
+        .isEmpty();
+
   }
+
+  private boolean getFirstChildWithValue(Tree tree, String value) {
+    return tree.is(Kind.NUMERIC_LITERAL) && ((NumericLiteral) tree).valueAsString().equals(value);
+  }
+
 }
