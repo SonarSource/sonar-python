@@ -56,6 +56,7 @@ class ObjectTypeTest {
     );
     ClassType classType = (ClassType) ((ClassDef) fileInput.statements().statements().get(0)).name().typeV2();
     ObjectType objectType = (ObjectType) ((ExpressionStatement) fileInput.statements().statements().get(2)).expressions().get(0).typeV2();
+    assertThat(objectType.unwrappedType()).isEqualTo(classType);
 
     assertThat(objectType.displayName()).contains("A");
     assertThat(objectType.isCompatibleWith(classType)).isTrue();

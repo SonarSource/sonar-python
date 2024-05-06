@@ -33,6 +33,7 @@ class ModuleTypeTest {
 
     Assertions.assertThat(b.resolveMember("a")).containsSame(a);
     Assertions.assertThat(b.resolveMember("b")).isNotPresent();
+    Assertions.assertThat(b.unwrappedType()).isEqualTo(b);
   }
 
   @Test

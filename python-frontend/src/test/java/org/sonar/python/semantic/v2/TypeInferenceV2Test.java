@@ -58,13 +58,14 @@ import org.sonar.python.types.v2.UnionType;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.PythonTestUtils.parseWithoutSymbols;
+import static org.sonar.python.types.v2.TypesTestUtils.INT_TYPE;
+import static org.sonar.python.types.v2.TypesTestUtils.LIST_TYPE;
+import static org.sonar.python.types.v2.TypesTestUtils.STR_TYPE;
 
 class TypeInferenceV2Test {
   private static FileInput fileInput;
 
   static PythonFile pythonFile = PythonTestUtils.pythonFile("");
-
-  static ModuleType BUILTINS = new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty()).getModule();
 
   @BeforeAll
   static void init() {
@@ -299,20 +300,17 @@ class TypeInferenceV2Test {
     var aSymbol = aName.symbolV2();
     Assertions.assertThat(aSymbol.usages()).hasSize(6);
 
-    var typeNames = aSymbol.usages()
+    var types = aSymbol.usages()
       .stream()
       .map(UsageV2::tree)
       .map(Name.class::cast)
       .sorted(Comparator.comparing(n -> n.firstToken().line()))
       .map(Expression::typeV2)
-      .filter(ObjectType.class::isInstance)
-      .map(ObjectType.class::cast)
-      .map(ObjectType::type)
-      .map(PythonType::name)
+      .map(PythonType::unwrappedType)
       .toList();
 
-    Assertions.assertThat(typeNames).hasSize(6)
-      .containsExactly("int", "int", "str", "str", "str", "str");
+    Assertions.assertThat(types).hasSize(6)
+      .containsExactly(INT_TYPE, INT_TYPE, STR_TYPE, STR_TYPE, STR_TYPE, STR_TYPE);
   }
 
   @Test
@@ -408,7 +406,7 @@ class TypeInferenceV2Test {
       a = 42
       a += 1
       a
-      """).typeV2().displayName()).contains("int");
+      """).typeV2().unwrappedType()).isEqualTo(INT_TYPE);
   }
 
   @Test
@@ -418,7 +416,7 @@ class TypeInferenceV2Test {
         b = 'world'
         a += b
         a
-        """).typeV2().displayName()).contains("list");
+        """).typeV2().unwrappedType()).isEqualTo(LIST_TYPE);
   }
 
   @Test
@@ -427,7 +425,7 @@ class TypeInferenceV2Test {
         a = "foo"
         b: int = a
         b
-        """).typeV2().displayName()).contains("str");
+        """).typeV2().unwrappedType()).isEqualTo(STR_TYPE);
   }
 
   @Test
@@ -450,7 +448,7 @@ class TypeInferenceV2Test {
 
   @Test
   void variable_outside_function() {
-    assertThat(lastExpression("a = 42; a").typeV2().displayName()).contains("int");
+    assertThat(lastExpression("a = 42; a").typeV2().unwrappedType()).isEqualTo(INT_TYPE);
   }
 
   @Test
@@ -482,7 +480,7 @@ class TypeInferenceV2Test {
       def foo():
         a = 'hello'
       a
-      """).typeV2().displayName()).contains("int");
+      """).typeV2().unwrappedType()).isEqualTo(INT_TYPE);
   }
 
   private static FileInput inferTypes(String lines) {
