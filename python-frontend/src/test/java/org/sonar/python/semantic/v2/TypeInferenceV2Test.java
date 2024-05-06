@@ -19,7 +19,6 @@
  */
 package org.sonar.python.semantic.v2;
 
-import java.io.File;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -27,7 +26,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.PythonFile;
