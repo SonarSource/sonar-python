@@ -65,6 +65,7 @@ public class ClassTypeTest {
 
     assertThat(classType.displayName()).contains("type");
     assertThat(classType.instanceDisplayName()).contains("C");
+    assertThat(classType.unwrappedType()).isEqualTo(classType);
 
     String fileId = SymbolUtils.pathOf(pythonFile).toString();
     assertThat(classType.definitionLocation()).contains(new LocationInFile(fileId, 1, 6, 1, 7));
