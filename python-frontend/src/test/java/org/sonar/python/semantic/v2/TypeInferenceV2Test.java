@@ -45,7 +45,6 @@ import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.plugins.python.api.tree.StatementList;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.PythonTestUtils;
-import org.sonar.python.TestPythonVisitorRunner;
 import org.sonar.python.semantic.ClassSymbolImpl;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.tree.TreeUtils;
@@ -63,25 +62,8 @@ import static org.sonar.python.types.v2.TypesTestUtils.LIST_TYPE;
 import static org.sonar.python.types.v2.TypesTestUtils.STR_TYPE;
 
 class TypeInferenceV2Test {
-  private static FileInput fileInput;
 
   static PythonFile pythonFile = PythonTestUtils.pythonFile("");
-
-  @BeforeAll
-  static void init() {
-    var context = TestPythonVisitorRunner.createContext(new File("src/test/resources/semantic/v2/script.py"));
-    fileInput = context.rootTree();
-  }
-
-  @Test
-  void test() {
-    var pythonFile = PythonTestUtils.pythonFile("script.py");
-    var symbolTable = new SymbolTableBuilderV2(fileInput)
-      .build();
-    new TypeInferenceV2(new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty()), pythonFile, symbolTable).inferTypes(fileInput);
-
-    System.out.println("hello");
-  }
 
   @Test
   void testTypeshedImports() {
