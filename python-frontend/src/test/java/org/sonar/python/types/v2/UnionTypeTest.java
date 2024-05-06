@@ -45,6 +45,7 @@ class UnionTypeTest {
     assertThat(unionType.isCompatibleWith(strType)).isTrue();
 
     assertThat(unionType.displayName()).contains("Union[int, str]");
+    assertThat(unionType.unwrappedType()).isEqualTo(unionType);
     assertThat(unionType.instanceDisplayName()).isEmpty();
     assertThat(unionType.definitionLocation()).isEmpty();
   }

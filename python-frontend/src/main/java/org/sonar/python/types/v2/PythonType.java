@@ -59,4 +59,8 @@ public interface PythonType {
   default Optional<LocationInFile> definitionLocation() {
     return Optional.empty();
   }
+
+  default PythonType unwrappedType() {
+    return this;
+  }
 }
