@@ -12,7 +12,8 @@ from sklearn.neural_network import MLPClassifier, MLPRegressor
 from sklearn.preprocessing import PolynomialFeatures
 
 from sklearn.pipeline import Pipeline, make_pipeline
-from sklearn.model_selection import GridSearchCV
+from sklearn.experimental import enable_halving_search_cv
+from sklearn.model_selection import GridSearchCV, HalvingGridSearchCV,HalvingRandomSearchCV, RandomizedSearchCV
 
 def non_compliant():
     AdaBoostClassifier(n_estimators=100, algorithm="SAMME", random_state=0) # Noncompliant  {{Specify important hyperparameters when instantiating a Scikit-learn estimator.}}
@@ -94,3 +95,10 @@ def compliant():
     pipe2 = Pipeline([('svc'), SVC()]) # FN
 
     grid2 = GridSearchCV(pipe2, param_grid={'svc__C': [1, 10, 100]}) 
+
+    GridSearchCV(s, param_grid={'svc__C': [1, 10, 100]}) # FN
+
+    classifier = RandomForestClassifier() # FN
+    HalvingRandomSearchCV(classifier, {})  
+    HalvingGridSearchCV(classifier, {'svc__C': [1, 10, 100]}) 
+    RandomizedSearchCV(SVC(), dict()) # FN

@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
@@ -32,14 +33,14 @@ import org.sonar.plugins.python.api.symbols.Symbol.Kind;
 import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.checks.utils.Expressions;
-import org.sonar.python.tree.CallExpressionImpl;
-import org.sonar.python.tree.QualifiedExpressionImpl;
 import org.sonar.python.tree.TreeUtils;
 
 import static org.sonar.plugins.python.api.tree.Tree.Kind.CALL_EXPR;
+import static org.sonar.plugins.python.api.tree.Tree.Kind.REGULAR_ARGUMENT;
 import static org.sonar.python.tree.TreeUtils.toOptionalInstanceOfMapper;
 
 @Rule(key = "S6973")
@@ -86,6 +87,16 @@ public class SklearnEstimatorHyperparametersCheck extends PythonSubscriptionChec
     Map.entry("sklearn.neural_network._multilayer_perceptron.MLPRegressor", List.of(new Param("hidden_layer_sizes", 0))),
     Map.entry("sklearn.preprocessing._polynomial.PolynomialFeatures", List.of(new Param("degree", 0), new Param("interaction_only"))));
 
+  private static final Set<String> SEARCH_CV_FQNS = Set.of(
+    "sklearn.model_selection._search.GridSearchCV",
+    "sklearn.model_selection._search.RandomizedSearchCV",
+    "sklearn.model_selection._search_successive_halving.HalvingRandomSearchCV",
+    "sklearn.model_selection._search_successive_halving.HalvingGridSearchCV");
+
+  private static final Set<String> PIPELINE_FQNS = Set.of(
+    "sklearn.pipeline.make_pipeline",
+    "sklearn.pipeline.Pipeline");
+
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(CALL_EXPR, SklearnEstimatorHyperparametersCheck::checkEstimator);
@@ -101,58 +112,64 @@ public class SklearnEstimatorHyperparametersCheck extends PythonSubscriptionChec
       .map(ClassSymbol.class::cast)
       .map(ClassSymbol::fullyQualifiedName)
       .map(ESTIMATORS_AND_PARAMETERS_TO_CHECK::get)
+      .filter(parameters -> !isDirectlyUsedInSearchCV(callExpression))
       .filter(parameters -> !isSetParamsCalled(callExpression))
-      .filter(parameters -> !isPartOfPipelineAndGridSearch(callExpression))
+      .filter(parameters -> !isPartOfPipelineAndSearchCV(callExpression))
       .filter(parameters -> isMissingAHyperparameter(callExpression, parameters))
       .ifPresent(parameters -> ctx.addIssue(callExpression, MESSAGE));
   }
 
   private static boolean isMissingAHyperparameter(CallExpression callExpression, List<Param> parametersToCheck) {
     return parametersToCheck.stream()
-      .map(param -> {
-        if (param.position.isPresent()) {
-          return TreeUtils.nthArgumentOrKeyword(param.position.get(), param.name, callExpression.arguments());
-        }
-        return TreeUtils.argumentByKeyword(param.name, callExpression.arguments());
-      })
+      .map(param -> param.position()
+        .map(position -> TreeUtils.nthArgumentOrKeyword(position, param.name, callExpression.arguments()))
+        .orElse(TreeUtils.argumentByKeyword(param.name, callExpression.arguments())))
       .anyMatch(Objects::isNull);
   }
 
-  private static boolean isPartOfPipelineAndGridSearch(CallExpression callExpression) {
-    return getPipelineAssignement(callExpression)
-      .map(SklearnEstimatorHyperparametersCheck::isPipelineUsedInGridSearch)
+  private static boolean isDirectlyUsedInSearchCV(CallExpression callExpression) {
+    return Optional.ofNullable(TreeUtils.firstAncestorOfKind(callExpression, REGULAR_ARGUMENT))
+      .flatMap(TreeUtils.toOptionalInstanceOfMapper(RegularArgument.class))
+      .map(SklearnEstimatorHyperparametersCheck::isArgumentPartOfSearchCV)
+      .orElse(false);
+  }
+
+  private static boolean isPartOfPipelineAndSearchCV(CallExpression callExpression) {
+    return Expressions.getAssignedName(callExpression)
+      .map(SklearnEstimatorHyperparametersCheck::isEstimatorUsedInSearchCV)
+      .or(() -> getPipelineAssignement(callExpression)
+        .map(SklearnEstimatorHyperparametersCheck::isEstimatorUsedInSearchCV))
       .orElse(false);
   }
 
   private static Optional<Name> getPipelineAssignement(CallExpression callExpression) {
     return Optional.ofNullable(TreeUtils.firstAncestorOfKind(callExpression, CALL_EXPR))
-      .flatMap(TreeUtils.toOptionalInstanceOfMapper(CallExpressionImpl.class))
-      .filter(Objects::nonNull)
+      .flatMap(TreeUtils.toOptionalInstanceOfMapper(CallExpression.class))
       .filter(callExp -> Optional.ofNullable(callExp.calleeSymbol())
         .map(Symbol::fullyQualifiedName)
-        .map(fqn -> "sklearn.pipeline.make_pipeline".equals(fqn) || "sklearn.pipeline.Pipeline".equals(fqn))
+        .map(PIPELINE_FQNS::contains)
         .orElse(false))
       .flatMap(Expressions::getAssignedName);
   }
 
-  private static boolean isPipelineUsedInGridSearch(Name pipeline) {
-    return Optional.ofNullable(pipeline.symbol())
+  private static boolean isEstimatorUsedInSearchCV(Name estimator) {
+    return Optional.ofNullable(estimator.symbol())
       .map(Symbol::usages)
       .map(usages -> usages.stream()
         .map(Usage::tree)
         .map(Tree::parent)
-        .filter(parent -> parent.is(Tree.Kind.REGULAR_ARGUMENT))
+        .filter(parent -> parent.is(REGULAR_ARGUMENT))
         .map(RegularArgument.class::cast)
-        .anyMatch(SklearnEstimatorHyperparametersCheck::isArgumentPartOfGridSearch))
+        .anyMatch(SklearnEstimatorHyperparametersCheck::isArgumentPartOfSearchCV))
       .orElse(false);
   }
 
-  private static boolean isArgumentPartOfGridSearch(RegularArgument arg) {
+  private static boolean isArgumentPartOfSearchCV(RegularArgument arg) {
     return Optional.ofNullable(TreeUtils.firstAncestorOfKind(arg, CALL_EXPR))
-      .flatMap(toOptionalInstanceOfMapper(CallExpressionImpl.class))
-      .map(CallExpressionImpl::calleeSymbol)
+      .flatMap(toOptionalInstanceOfMapper(CallExpression.class))
+      .map(CallExpression::calleeSymbol)
       .map(Symbol::fullyQualifiedName)
-      .map("sklearn.model_selection._search.GridSearchCV"::equals)
+      .map(SEARCH_CV_FQNS::contains)
       .orElse(false);
   }
 
@@ -169,7 +186,7 @@ public class SklearnEstimatorHyperparametersCheck extends PythonSubscriptionChec
       .map(Usage::tree)
       .map(Tree::parent)
       .filter(parent -> parent.is(Tree.Kind.QUALIFIED_EXPR))
-      .map(TreeUtils.toInstanceOfMapper(QualifiedExpressionImpl.class))
+      .map(TreeUtils.toInstanceOfMapper(QualifiedExpression.class))
       .filter(Objects::nonNull)
       .map(qExp -> qExp.name().name())
       .anyMatch("set_params"::equals);
