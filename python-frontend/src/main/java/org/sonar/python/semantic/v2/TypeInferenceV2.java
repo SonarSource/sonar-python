@@ -28,8 +28,11 @@ import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.cfg.ControlFlowGraph;
+import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.FileInput;
+import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.StatementList;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.semantic.v2.types.Assignment;
@@ -37,6 +40,7 @@ import org.sonar.python.semantic.v2.types.FlowSensitiveTypeInference;
 import org.sonar.python.semantic.v2.types.PropagationVisitor;
 import org.sonar.python.semantic.v2.types.TrivialTypeInferenceVisitor;
 import org.sonar.python.semantic.v2.types.TryStatementVisitor;
+import org.sonar.python.tree.TreeUtils;
 
 public class TypeInferenceV2 {
 
@@ -55,6 +59,14 @@ public class TypeInferenceV2 {
     fileInput.accept(trivialTypeInferenceVisitor);
 
     inferTypesAndMemberAccessSymbols(fileInput);
+
+    fileInput.accept(new BaseTreeVisitor() {
+      @Override
+      public void visitFunctionDef(FunctionDef funcDef) {
+        super.visitFunctionDef(funcDef);
+        inferTypesAndMemberAccessSymbols(funcDef);
+      }
+    });
   }
 
 
@@ -71,6 +83,22 @@ public class TypeInferenceV2 {
       moduleSymbols,
       Collections.emptySet(),
       () -> ControlFlowGraph.build(fileInput, pythonFile)
+    );
+  }
+
+  private void inferTypesAndMemberAccessSymbols(FunctionDef functionDef) {
+    Set<Name> parameterNames = TreeUtils.nonTupleParameters(functionDef).stream()
+      // TODO: it probably doesn't make sense to restrict to annotated parameters here
+      .filter(parameter -> parameter.typeAnnotation() != null)
+      .map(Parameter::name)
+      .collect(Collectors.toSet());
+    Set<SymbolV2> localVariables = symbolTable.getSymbolsByRootTree(functionDef);
+    inferTypesAndMemberAccessSymbols(
+      functionDef,
+      functionDef.body(),
+      localVariables,
+      parameterNames,
+      () -> ControlFlowGraph.build(functionDef, pythonFile)
     );
   }
 
