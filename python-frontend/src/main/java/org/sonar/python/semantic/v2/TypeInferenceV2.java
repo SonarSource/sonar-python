@@ -120,9 +120,7 @@ public class TypeInferenceV2 {
     statements.accept(tryStatementVisitor);
     if (tryStatementVisitor.hasTryStatement()) {
       // CFG doesn't model precisely try-except statements. Hence we fallback to AST based type inference
-      // TODO: Check if still relevant
-/*      visitor.processPropagations(getTrackedVars(declaredVariables, assignedNames));
-      statements.accept(new TypeInference.NameVisitor());*/
+      propagationVisitor.processPropagations(getTrackedVars(declaredVariables, assignedNames));
     } else {
       ControlFlowGraph cfg = controlFlowGraphSupplier.get();
       if (cfg == null) {
