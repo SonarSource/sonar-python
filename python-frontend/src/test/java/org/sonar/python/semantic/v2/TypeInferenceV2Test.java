@@ -39,6 +39,7 @@ import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.ImportFrom;
 import org.sonar.plugins.python.api.tree.ImportName;
 import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.plugins.python.api.tree.StatementList;
 import org.sonar.plugins.python.api.tree.Tree;
@@ -624,6 +625,177 @@ class TypeInferenceV2Test {
         a = 'hello'
       a
       """).typeV2().unwrappedType()).isEqualTo(INT_TYPE);
+  }
+
+  @Test
+  void flow_insensitive_when_try_except() {
+    FileInput fileInput = inferTypes("""
+      try:
+        if p:
+          x = 42
+          type(x)
+        else:
+          x = "foo"
+          type(x)
+      except:
+        type(x)
+      """);
+
+    List<CallExpression> calls = PythonTestUtils.getAllDescendant(fileInput, tree -> tree.is(Tree.Kind.CALL_EXPR));
+    RegularArgument firstX = (RegularArgument) calls.get(0).arguments().get(0);
+    RegularArgument secondX = (RegularArgument) calls.get(1).arguments().get(0);
+    RegularArgument thirdX = (RegularArgument) calls.get(2).arguments().get(0);
+    assertThat(((UnionType) firstX.expression().typeV2()).candidates()).extracting(PythonType::unwrappedType).containsExactlyInAnyOrder(INT_TYPE, STR_TYPE);
+    assertThat(((UnionType) secondX.expression().typeV2()).candidates()).extracting(PythonType::unwrappedType).containsExactlyInAnyOrder(INT_TYPE, STR_TYPE);
+    assertThat(((UnionType) thirdX.expression().typeV2()).candidates()).extracting(PythonType::unwrappedType).containsExactlyInAnyOrder(INT_TYPE, STR_TYPE);
+  }
+
+  @Test
+  void nested_try_except() {
+    FileInput fileInput = inferTypes("""
+        def f(p):
+          try:
+            if p:
+              x = 42
+              type(x)
+            else:
+              x = "foo"
+              type(x)
+          except:
+            type(x)
+        def g(p):
+          if p:
+            y = 42
+            type(y)
+          else:
+            y = "hello"
+            type(y)
+          type(y)
+        if cond:
+          z = 42
+          type(z)
+        else:
+          z = "hello"
+          type(z)
+        type(z)
+        """);
+    List<CallExpression> calls = PythonTestUtils.getAllDescendant(fileInput, tree -> tree.is(Tree.Kind.CALL_EXPR));
+    RegularArgument firstX = (RegularArgument) calls.get(0).arguments().get(0);
+    RegularArgument secondX = (RegularArgument) calls.get(1).arguments().get(0);
+    RegularArgument thirdX = (RegularArgument) calls.get(2).arguments().get(0);
+    assertThat(((UnionType) firstX.expression().typeV2()).candidates()).extracting(PythonType::unwrappedType).containsExactlyInAnyOrder(INT_TYPE, STR_TYPE);
+    assertThat(((UnionType) secondX.expression().typeV2()).candidates()).extracting(PythonType::unwrappedType).containsExactlyInAnyOrder(INT_TYPE, STR_TYPE);
+    assertThat(((UnionType) thirdX.expression().typeV2()).candidates()).extracting(PythonType::unwrappedType).containsExactlyInAnyOrder(INT_TYPE, STR_TYPE);
+
+    RegularArgument firstY = (RegularArgument) calls.get(3).arguments().get(0);
+    RegularArgument secondY = (RegularArgument) calls.get(4).arguments().get(0);
+    RegularArgument thirdY = (RegularArgument) calls.get(5).arguments().get(0);
+    assertThat(firstY.expression().typeV2().unwrappedType()).isEqualTo(INT_TYPE);
+    assertThat(secondY.expression().typeV2().unwrappedType()).isEqualTo(STR_TYPE);
+    assertThat(((UnionType) thirdY.expression().typeV2()).candidates()).extracting(PythonType::unwrappedType).containsExactlyInAnyOrder(INT_TYPE, STR_TYPE);
+
+    RegularArgument firstZ = (RegularArgument) calls.get(6).arguments().get(0);
+    RegularArgument secondZ = (RegularArgument) calls.get(7).arguments().get(0);
+    RegularArgument thirdZ = (RegularArgument) calls.get(8).arguments().get(0);
+    assertThat(firstZ.expression().typeV2().unwrappedType()).isEqualTo(INT_TYPE);
+    assertThat(secondZ.expression().typeV2().unwrappedType()).isEqualTo(STR_TYPE);
+    assertThat(((UnionType) thirdZ.expression().typeV2()).candidates()).extracting(PythonType::unwrappedType).containsExactlyInAnyOrder(INT_TYPE, STR_TYPE);
+  }
+
+  @Test
+  void nested_try_except_2() {
+    FileInput fileInput = inferTypes("""
+        try:
+          if p:
+            x = 42
+            type(x)
+          else:
+            x = "foo"
+            type(x)
+        except:
+          type(x)
+        def g(p):
+          if p:
+            y = 42
+            type(y)
+          else:
+            y = "hello"
+            type(y)
+          type(y)
+        if cond:
+          z = 42
+          type(z)
+        else:
+          z = "hello"
+          type(z)
+        type(z)
+        """);
+    List<CallExpression> calls = PythonTestUtils.getAllDescendant(fileInput, tree -> tree.is(Tree.Kind.CALL_EXPR));
+    RegularArgument firstX = (RegularArgument) calls.get(0).arguments().get(0);
+    RegularArgument secondX = (RegularArgument) calls.get(1).arguments().get(0);
+    RegularArgument thirdX = (RegularArgument) calls.get(2).arguments().get(0);
+    assertThat(((UnionType) firstX.expression().typeV2()).candidates()).extracting(PythonType::unwrappedType).containsExactlyInAnyOrder(INT_TYPE, STR_TYPE);
+    assertThat(((UnionType) secondX.expression().typeV2()).candidates()).extracting(PythonType::unwrappedType).containsExactlyInAnyOrder(INT_TYPE, STR_TYPE);
+    assertThat(((UnionType) thirdX.expression().typeV2()).candidates()).extracting(PythonType::unwrappedType).containsExactlyInAnyOrder(INT_TYPE, STR_TYPE);
+
+    RegularArgument firstY = (RegularArgument) calls.get(3).arguments().get(0);
+    RegularArgument secondY = (RegularArgument) calls.get(4).arguments().get(0);
+    RegularArgument thirdY = (RegularArgument) calls.get(5).arguments().get(0);
+    assertThat(firstY.expression().typeV2().unwrappedType()).isEqualTo(INT_TYPE);
+    assertThat(secondY.expression().typeV2().unwrappedType()).isEqualTo(STR_TYPE);
+    assertThat(((UnionType) thirdY.expression().typeV2()).candidates()).extracting(PythonType::unwrappedType).containsExactlyInAnyOrder(INT_TYPE, STR_TYPE);
+
+    RegularArgument firstZ = (RegularArgument) calls.get(6).arguments().get(0);
+    RegularArgument secondZ = (RegularArgument) calls.get(7).arguments().get(0);
+    RegularArgument thirdZ = (RegularArgument) calls.get(8).arguments().get(0);
+    assertThat(((UnionType) firstZ.expression().typeV2()).candidates()).extracting(PythonType::unwrappedType).containsExactlyInAnyOrder(INT_TYPE, STR_TYPE);
+    assertThat(((UnionType) secondZ.expression().typeV2()).candidates()).extracting(PythonType::unwrappedType).containsExactlyInAnyOrder(INT_TYPE, STR_TYPE);
+    assertThat(((UnionType) thirdZ.expression().typeV2()).candidates()).extracting(PythonType::unwrappedType).containsExactlyInAnyOrder(INT_TYPE, STR_TYPE);
+  }
+
+  @Test
+  void try_except_with_dependents() {
+    FileInput fileInput = inferTypes("""
+      try:
+        x = 42
+        y = x
+        z = y
+        type(x)
+        type(y)
+        type(z)
+      except:
+        x = "hello"
+        y = x
+        z = y
+        type(x)
+        type(y)
+        type(z)
+      type(x)
+      type(y)
+      type(z)
+      """);
+
+    List<CallExpression> calls = PythonTestUtils.getAllDescendant(fileInput, tree -> tree.is(Tree.Kind.CALL_EXPR));
+    RegularArgument firstX = (RegularArgument) calls.get(0).arguments().get(0);
+    RegularArgument firstY = (RegularArgument) calls.get(1).arguments().get(0);
+    RegularArgument firstZ = (RegularArgument) calls.get(2).arguments().get(0);
+    assertThat(((UnionType) firstX.expression().typeV2()).candidates()).extracting(PythonType::unwrappedType).containsExactlyInAnyOrder(INT_TYPE, STR_TYPE);
+    assertThat(((UnionType) firstY.expression().typeV2()).candidates()).extracting(PythonType::unwrappedType).containsExactlyInAnyOrder(INT_TYPE, STR_TYPE);
+    assertThat(((UnionType) firstZ.expression().typeV2()).candidates()).extracting(PythonType::unwrappedType).containsExactlyInAnyOrder(INT_TYPE, STR_TYPE);
+
+    RegularArgument secondX = (RegularArgument) calls.get(3).arguments().get(0);
+    RegularArgument secondY = (RegularArgument) calls.get(4).arguments().get(0);
+    RegularArgument secondZ = (RegularArgument) calls.get(5).arguments().get(0);
+    assertThat(((UnionType) secondX.expression().typeV2()).candidates()).extracting(PythonType::unwrappedType).containsExactlyInAnyOrder(INT_TYPE, STR_TYPE);
+    assertThat(((UnionType) secondY.expression().typeV2()).candidates()).extracting(PythonType::unwrappedType).containsExactlyInAnyOrder(INT_TYPE, STR_TYPE);
+    assertThat(((UnionType) secondZ.expression().typeV2()).candidates()).extracting(PythonType::unwrappedType).containsExactlyInAnyOrder(INT_TYPE, STR_TYPE);
+
+    RegularArgument thirdX = (RegularArgument) calls.get(6).arguments().get(0);
+    RegularArgument thirdY = (RegularArgument) calls.get(7).arguments().get(0);
+    RegularArgument thirdZ = (RegularArgument) calls.get(8).arguments().get(0);
+    assertThat(((UnionType) thirdX.expression().typeV2()).candidates()).extracting(PythonType::unwrappedType).containsExactlyInAnyOrder(INT_TYPE, STR_TYPE);
+    assertThat(((UnionType) thirdY.expression().typeV2()).candidates()).extracting(PythonType::unwrappedType).containsExactlyInAnyOrder(INT_TYPE, STR_TYPE);
+    assertThat(((UnionType) thirdZ.expression().typeV2()).candidates()).extracting(PythonType::unwrappedType).containsExactlyInAnyOrder(INT_TYPE, STR_TYPE);
   }
 
   private static FileInput inferTypes(String lines) {
