@@ -19,70 +19,21 @@
  */
 package org.sonar.python.types.v2;
 
-import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.LocationInFile;
 
-public class ParameterV2 {
-
-  private final String name;
-  private PythonType declaredType;
-  private final boolean hasDefaultValue;
-  private final boolean isKeywordVariadic;
-  private final boolean isPositionalVariadic;
-  private final boolean isKeywordOnly;
-  private final boolean isPositionalOnly;
-  private final LocationInFile location;
-
-  public ParameterV2(@Nullable String name, PythonType declaredType, boolean hasDefaultValue,
-    boolean isKeywordOnly, boolean isPositionalOnly, boolean isKeywordVariadic, boolean isPositionalVariadic,
-    @Nullable LocationInFile location) {
-    this.name = name;
-    this.declaredType = declaredType;
-    this.hasDefaultValue = hasDefaultValue;
-    this.isKeywordVariadic = isKeywordVariadic;
-    this.isPositionalVariadic = isPositionalVariadic;
-    this.isKeywordOnly = isKeywordOnly;
-    this.isPositionalOnly = isPositionalOnly;
-    this.location = location;
-  }
-
-  @CheckForNull
-  public String name() {
-    return name;
-  }
-
-  public PythonType declaredType() {
-    return declaredType;
-  }
-
-  public boolean hasDefaultValue() {
-    return hasDefaultValue;
-  }
+public record ParameterV2(
+  @Nullable String name,
+  PythonType declaredType,
+  boolean hasDefaultValue,
+  boolean isKeywordOnly,
+  boolean isPositionalOnly,
+  boolean isKeywordVariadic,
+  boolean isPositionalVariadic,
+  @Nullable LocationInFile location) {
 
   public boolean isVariadic() {
     return isKeywordVariadic || isPositionalVariadic;
-  }
-
-  public boolean isKeywordOnly() {
-    return isKeywordOnly;
-  }
-
-  public boolean isPositionalOnly() {
-    return isPositionalOnly;
-  }
-
-  public boolean isKeywordVariadic() {
-    return isKeywordVariadic;
-  }
-
-  public boolean isPositionalVariadic() {
-    return isPositionalVariadic;
-  }
-
-  @CheckForNull
-  public LocationInFile location() {
-    return location;
   }
 }
 
