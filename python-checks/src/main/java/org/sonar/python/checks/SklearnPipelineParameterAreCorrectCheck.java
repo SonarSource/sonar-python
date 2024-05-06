@@ -65,6 +65,17 @@ public class SklearnPipelineParameterAreCorrectCheck extends PythonSubscriptionC
     "sklearn.model_selection._search.RandomizedSearchCV",
     "sklearn.model_selection._search.HalvingRandomSearchCV");
 
+  private record PipelineNameAndParsedParameters(Name pipelineName, Map<String, Set<ParameterNameAndLocation>> parsedParameters) {
+  }
+  private record ExpressionAndPrefix(List<Expression> tuple, String prefix, int depth) {
+  }
+  private record ParameterNameAndLocation(String string, Tree tree) {
+  }
+  private record StepAndClassifier(String stepName, ClassSymbol classifierName) {
+  }
+  private record StepAndParameter(String step, String parameter, Tree location) {
+  }
+
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, SklearnPipelineParameterAreCorrectCheck::checkCallExpression);
@@ -86,15 +97,16 @@ public class SklearnPipelineParameterAreCorrectCheck extends PythonSubscriptionC
 
     parsedFunctionOptional.ifPresent(
       pipelineNameAndParsedParameters -> {
-        var parsedFunction = pipelineNameAndParsedParameters.parsedParameters();
-        var pipelineName = pipelineNameAndParsedParameters.pipelineName();
+        var parsedFunction = pipelineNameAndParsedParameters.parsedParameters;
+        var pipelineName = pipelineNameAndParsedParameters.pipelineName;
         Expressions.singleAssignedNonNameValue(pipelineName)
           .flatMap(TreeUtils.toOptionalInstanceOfMapper(CallExpression.class))
           .ifPresent(pipelineCallExpr -> findProblems(parsedFunction, parsePipeline(pipelineCallExpr), subscriptionContext));
       });
   }
 
-  private static Optional<PipelineNameAndParsedParameters> getPipelineNameAndParsedParametersFromPipelineSetParamsFunction(Map<String, Set<StringAndTree>> parsedParameters,
+  private static Optional<PipelineNameAndParsedParameters> getPipelineNameAndParsedParametersFromPipelineSetParamsFunction(
+    Map<String, Set<ParameterNameAndLocation>> parsedParameters,
     CallExpression callExpression) {
     return newPipelineNameAndParsedParameters(
       Optional.of(callExpression).map(CallExpression::callee)
@@ -105,7 +117,7 @@ public class SklearnPipelineParameterAreCorrectCheck extends PythonSubscriptionC
       parsedParameters);
   }
 
-  private static Optional<PipelineNameAndParsedParameters> getPipelineNameAndParsedParametersFromSearchFunctions(Map<String, Set<StringAndTree>> parsedParameters,
+  private static Optional<PipelineNameAndParsedParameters> getPipelineNameAndParsedParametersFromSearchFunctions(Map<String, Set<ParameterNameAndLocation>> parsedParameters,
     CallExpression callExpression) {
     return newPipelineNameAndParsedParameters(
       Optional.ofNullable(TreeUtils.nthArgumentOrKeyword(0, "estimator", callExpression.arguments()))
@@ -116,18 +128,17 @@ public class SklearnPipelineParameterAreCorrectCheck extends PythonSubscriptionC
       parsedParameters);
   }
 
-  private record PipelineNameAndParsedParameters(Name pipelineName, Map<String, Set<StringAndTree>> parsedParameters) {
+  private static Optional<PipelineNameAndParsedParameters> newPipelineNameAndParsedParameters(@Nullable Name pipelineName,
+    Map<String, Set<ParameterNameAndLocation>> parsedParameters) {
+    return Optional.ofNullable(pipelineName)
+      .map(pipelineName1 -> new PipelineNameAndParsedParameters(pipelineName1, parsedParameters));
   }
 
-  private static Optional<PipelineNameAndParsedParameters> newPipelineNameAndParsedParameters(@Nullable Name pipelineName, Map<String, Set<StringAndTree>> parsedParameters) {
-    return Optional.ofNullable(pipelineName).map(pipelineName1 -> new PipelineNameAndParsedParameters(pipelineName1, parsedParameters));
-  }
-
-  private static void findProblems(Map<String, Set<StringAndTree>> setParameters, Map<String, ClassSymbol> pipelineDefinition, SubscriptionContext subscriptionContext) {
+  private static void findProblems(Map<String, Set<ParameterNameAndLocation>> setParameters, Map<String, ClassSymbol> pipelineDefinition, SubscriptionContext subscriptionContext) {
     for (var entry : setParameters.entrySet()) {
       var step = entry.getKey();
       var stringAndTree = entry.getValue();
-      var parameters = stringAndTree.stream().map(StringAndTree::string).collect(Collectors.toSet());
+      var parameters = stringAndTree.stream().map(ParameterNameAndLocation::string).collect(Collectors.toSet());
 
       var classifier = pipelineDefinition.get(step);
       if (classifier == null) {
@@ -143,8 +154,12 @@ public class SklearnPipelineParameterAreCorrectCheck extends PythonSubscriptionC
     }
   }
 
-  private static void createIssue(SubscriptionContext subscriptionContext, String parameter, Set<StringAndTree> stringAndTree) {
-    stringAndTree.stream().filter(stringAndTree1 -> stringAndTree1.string().equals(parameter)).findFirst()
+  private static void createIssue(SubscriptionContext subscriptionContext, String parameter, Set<ParameterNameAndLocation> parameterNameAndLocation) {
+    parameterNameAndLocation
+      .stream()
+      .filter(parameterNameAndLocation1 -> parameterNameAndLocation1.string()
+        .equals(parameter))
+      .findFirst()
       .ifPresent(location -> subscriptionContext.addIssue(location.tree, MESSAGE));
   }
 
@@ -167,14 +182,11 @@ public class SklearnPipelineParameterAreCorrectCheck extends PythonSubscriptionC
       .flatMap(Collection::stream);
   }
 
-  private record ExpressionAndPrefix(List<Expression> tuple, String prefix) {
-  }
-
   private static Map<String, ClassSymbol> parsePipeline(CallExpression callExpression) {
     var stepsArgument = TreeUtils.nthArgumentOrKeyword(0, "steps", callExpression.arguments());
     var out = new HashMap<String, ClassSymbol>();
 
-    var a = getExpressionsFromArgument(stepsArgument)
+    getExpressionsFromArgument(stepsArgument)
       .map(
         TreeUtils.toInstanceOfMapper(TupleImpl.class))
       .filter(Objects::nonNull)
@@ -182,9 +194,10 @@ public class SklearnPipelineParameterAreCorrectCheck extends PythonSubscriptionC
       .filter(SklearnPipelineParameterAreCorrectCheck::isTwoElementTuple)
       // If we find a pipeline inside the pipeline, we need to parse it recursively
       .map(SklearnPipelineParameterAreCorrectCheck::createEmptyExpressionAndPrefix)
-      .flatMap(expandRecursivePipelines());
-    a.forEach(
-      expressionAndPrefix -> getResult(expressionAndPrefix.tuple()).ifPresent(result1 -> out.put(expressionAndPrefix.prefix() + result1.stepName(), result1.classifierName())));
+      .flatMap(expandRecursivePipelines())
+      .forEach(
+        expressionAndPrefix -> getResult(expressionAndPrefix.tuple())
+          .ifPresent(stepAndClassifier1 -> out.put(expressionAndPrefix.prefix() + stepAndClassifier1.stepName(), stepAndClassifier1.classifierName())));
     return out;
   }
 
@@ -193,7 +206,7 @@ public class SklearnPipelineParameterAreCorrectCheck extends PythonSubscriptionC
   }
 
   private static ExpressionAndPrefix createEmptyExpressionAndPrefix(List<Expression> tuple) {
-    return new ExpressionAndPrefix(tuple, "");
+    return new ExpressionAndPrefix(tuple, "", 0);
   }
 
   private static Function<ExpressionAndPrefix, Stream<ExpressionAndPrefix>> expandRecursivePipelines() {
@@ -202,34 +215,37 @@ public class SklearnPipelineParameterAreCorrectCheck extends PythonSubscriptionC
       var step = tuple.get(0);
       var classifier = tuple.get(1);
 
-      if (!step.is(Tree.Kind.STRING_LITERAL)) {
+      if (!step.is(Tree.Kind.STRING_LITERAL) || !classifier.is(Tree.Kind.NAME)) {
+        return Stream.of(expressionAndPrefix);
+      }
+      if (expressionAndPrefix.depth > 10) {
         return Stream.of(expressionAndPrefix);
       }
 
-      if (classifier.is(Tree.Kind.NAME)) {
-        var nestedPipelineCallExpressionOptional = Expressions.singleAssignedNonNameValue((Name) classifier)
-          .flatMap(TreeUtils.toOptionalInstanceOfMapper(CallExpression.class))
-          .filter(callExpression1 -> Optional.of(callExpression1)
-            .map(CallExpression::calleeSymbol).map(Symbol::fullyQualifiedName)
-            .filter("sklearn.pipeline.Pipeline"::equals)
-            .isPresent());
-
-        return nestedPipelineCallExpressionOptional.map(callExpression -> TreeUtils.nthArgumentOrKeyword(0, "steps", callExpression.arguments()))
-          .map(SklearnPipelineParameterAreCorrectCheck::getExpressionsFromArgument)
-          .orElse(Stream.empty())
-          .map(TreeUtils.toInstanceOfMapper(TupleImpl.class))
-          .filter(Objects::nonNull)
-          .map(TupleImpl::elements)
-          .filter(SklearnPipelineParameterAreCorrectCheck::isTwoElementTuple)
-          .map(elements -> new ExpressionAndPrefix(elements,
-            expressionAndPrefix.prefix() + ((StringLiteral) step).trimmedQuotesValue() + "__"))
-          .flatMap(expandRecursivePipelines());
-      }
-      return Stream.of(expressionAndPrefix);
+      return classifierIsANestedPipeline((Name) classifier)
+        .map(callExpression -> TreeUtils.nthArgumentOrKeyword(0, "steps", callExpression.arguments()))
+        .map(SklearnPipelineParameterAreCorrectCheck::getExpressionsFromArgument)
+        .orElse(Stream.empty())
+        .map(TreeUtils.toInstanceOfMapper(TupleImpl.class))
+        .filter(Objects::nonNull)
+        .map(TupleImpl::elements)
+        .filter(SklearnPipelineParameterAreCorrectCheck::isTwoElementTuple)
+        .map(elements -> new ExpressionAndPrefix(elements,
+          expressionAndPrefix.prefix() + ((StringLiteral) step).trimmedQuotesValue() + "__", expressionAndPrefix.depth + 1))
+        .flatMap(expandRecursivePipelines());
     };
   }
 
-  private static Optional<Result> getResult(List<Expression> tuple) {
+  private static Optional<CallExpression> classifierIsANestedPipeline(Name classifier) {
+    return Expressions.singleAssignedNonNameValue(classifier)
+      .flatMap(TreeUtils.toOptionalInstanceOfMapper(CallExpression.class))
+      .filter(callExpression1 -> Optional.of(callExpression1)
+        .map(CallExpression::calleeSymbol).map(Symbol::fullyQualifiedName)
+        .filter("sklearn.pipeline.Pipeline"::equals)
+        .isPresent());
+  }
+
+  private static Optional<StepAndClassifier> getResult(List<Expression> tuple) {
     var step = tuple.get(0);
     var classifier = tuple.get(1);
     var stepName = Optional.ofNullable(step)
@@ -238,17 +254,16 @@ public class SklearnPipelineParameterAreCorrectCheck extends PythonSubscriptionC
     var classifierName = Optional.ofNullable(classifier)
       .flatMap(TreeUtils.toOptionalInstanceOfMapper(CallExpression.class))
       .map(CallExpression::calleeSymbol)
-      .filter(symbol -> symbol.is(Symbol.Kind.CLASS) && !Objects.equals(symbol.fullyQualifiedName(), "sklearn.pipeline.Pipeline"))
+      .filter(symbol -> symbol.is(Symbol.Kind.CLASS) && !"sklearn.pipeline.Pipeline".equals(symbol.fullyQualifiedName()))
       .map(ClassSymbol.class::cast);
 
-    return stepName.flatMap(stepName1 -> classifierName.map(classifierName1 -> new Result(stepName1, classifierName1)));
+    return stepName.flatMap(stepName1 -> classifierName.map(classifierName1 -> new StepAndClassifier(stepName1, classifierName1)));
   }
 
-  private record Result(String stepName, ClassSymbol classifierName) {
-  }
-
-  private static Map<String, Set<StringAndTree>> getStepAndParametersFromArguments(CallExpression callExpression) {
-    return callExpression.arguments().stream().filter(argument -> argument.is(Tree.Kind.REGULAR_ARGUMENT))
+  private static Map<String, Set<ParameterNameAndLocation>> getStepAndParametersFromArguments(CallExpression callExpression) {
+    return callExpression.arguments()
+      .stream()
+      .filter(argument -> argument.is(Tree.Kind.REGULAR_ARGUMENT))
       .map(RegularArgument.class::cast)
       .map(RegularArgument::keywordArgument)
       .filter(Objects::nonNull)
@@ -257,7 +272,7 @@ public class SklearnPipelineParameterAreCorrectCheck extends PythonSubscriptionC
       .collect(mergeStringAndTreeToMapCollector());
   }
 
-  private static Map<String, Set<StringAndTree>> getStepAndParametersFromDict(CallExpression callExpression) {
+  private static Map<String, Set<ParameterNameAndLocation>> getStepAndParametersFromDict(CallExpression callExpression) {
     return Optional.ofNullable(TreeUtils.nthArgumentOrKeyword(1, "param_grid", callExpression.arguments()))
       .flatMap(TreeUtils.toOptionalInstanceOfMapper(RegularArgument.class))
       .map(RegularArgument::expression)
@@ -284,16 +299,13 @@ public class SklearnPipelineParameterAreCorrectCheck extends PythonSubscriptionC
       .filter(Objects::nonNull);
   }
 
-  private static Collector<StepAndParameter, ?, Map<String, Set<StringAndTree>>> mergeStringAndTreeToMapCollector() {
-    return Collectors.toMap(StepAndParameter::step, stepAndParameter -> Set.of(new StringAndTree(stepAndParameter.parameter, stepAndParameter.location)),
+  private static Collector<StepAndParameter, ?, Map<String, Set<ParameterNameAndLocation>>> mergeStringAndTreeToMapCollector() {
+    return Collectors.toMap(StepAndParameter::step, stepAndParameter -> Set.of(new ParameterNameAndLocation(stepAndParameter.parameter, stepAndParameter.location)),
       (set1, set2) -> {
         var set = new HashSet<>(set1);
         set.addAll(set2);
         return set;
       });
-  }
-
-  private record StringAndTree(String string, Tree tree) {
   }
 
   private static Optional<StepAndParameter> getStepAndParameterFromName(Name name) {
@@ -315,6 +327,4 @@ public class SklearnPipelineParameterAreCorrectCheck extends PythonSubscriptionC
     return Optional.of(split);
   }
 
-  private record StepAndParameter(String step, String parameter, Tree location) {
-  }
 }
