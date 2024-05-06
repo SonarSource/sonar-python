@@ -61,9 +61,9 @@ public class SklearnPipelineParameterAreCorrectCheck extends PythonSubscriptionC
   public static final String MESSAGE = "Provide valid parameters to the estimator.";
   private static final Set<String> SKLEARN_SEARCH_FQNS = Set.of(
     "sklearn.model_selection._search.GridSearchCV",
-    "sklearn.model_selection._search.HalvingGridSearchCV",
+    "sklearn.model_selection._search_successive_halving.HalvingGridSearchCV",
     "sklearn.model_selection._search.RandomizedSearchCV",
-    "sklearn.model_selection._search.HalvingRandomSearchCV");
+    "sklearn.model_selection._search_successive_halving.HalvingRandomSearchCV");
 
   private record PipelineNameAndParsedParameters(Name pipelineName, Map<String, Set<ParameterNameAndLocation>> parsedParameters) {
   }
@@ -239,7 +239,7 @@ public class SklearnPipelineParameterAreCorrectCheck extends PythonSubscriptionC
   private static Optional<CallExpression> classifierIsANestedPipeline(Name classifier) {
     return Expressions.singleAssignedNonNameValue(classifier)
       .flatMap(TreeUtils.toOptionalInstanceOfMapper(CallExpression.class))
-      .filter(callExpression1 -> Optional.of(callExpression1)
+      .filter(callExpression -> Optional.of(callExpression)
         .map(CallExpression::calleeSymbol).map(Symbol::fullyQualifiedName)
         .filter("sklearn.pipeline.Pipeline"::equals)
         .isPresent());

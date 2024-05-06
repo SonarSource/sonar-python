@@ -1,6 +1,6 @@
 from sklearn.pipeline import Pipeline, make_pipeline
 from sklearn.svm import SVC
-from sklearn.model_selection import GridSearchCV
+from sklearn.model_selection import GridSearchCV, HalvingGridSearchCV
 
 def basic():
     pipe = Pipeline(steps=[("clf", SVC())])
@@ -55,9 +55,6 @@ def recursive_nested_pipelines():
     p1, p2 = Pipeline(steps=[("P2", p2)]), Pipeline(steps=[("P1", p1)])
     p1.set_params(P2__P1__C=45)
 
-
-
-
 def param_grid_dict():
     pipe = Pipeline(steps=[("clf", SVC())])
     param_grid = {
@@ -66,6 +63,15 @@ def param_grid_dict():
         'clf__kernel': ['linear', 'rbf']
     }
     grid = GridSearchCV(pipe, param_grid=param_grid, cv=5)
+
+def param_grid_dict2():
+    pipe = Pipeline(steps=[("clf", SVC())])
+    param_grid = {
+        'clf__G': [0.1, 1, 10], # Noncompliant {{Provide valid parameters to the estimator.}}
+    #   ^^^^^^^^
+        'clf__kernel': ['linear', 'rbf']
+    }
+    grid = HalvingGridSearchCV(pipe, param_grid=param_grid, cv=5)
 
 def incorrect_pipelines():
     p1 = Pipeline(steps=[("clf", SVC(), "a")])
