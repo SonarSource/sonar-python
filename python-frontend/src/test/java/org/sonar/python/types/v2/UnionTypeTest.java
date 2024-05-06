@@ -91,4 +91,28 @@ class UnionTypeTest {
     unknownUnion = UnionType.or(PythonType.UNKNOWN, intType);
     assertThat(unknownUnion).isEqualTo(PythonType.UNKNOWN);
   }
+
+  @Test
+  void hasMemberUnionType() {
+    FileInput fileInput = parseAndInferTypes("""
+      class MyClass:
+        def common(): ...
+        def foo(): ...
+      
+      class MyOtherClass:
+        def common(): ...
+        def bar(): ...
+      
+      if cond():
+        x = MyClass()
+      else:
+        x = MyOtherClass()
+      x
+      """);
+    var lastExpressionStatement = (ExpressionStatement) fileInput.statements().statements().get(fileInput.statements().statements().size() -1);
+    assertThat(lastExpressionStatement.expressions().get(0).typeV2().hasMember("common")).isEqualTo(TriBool.TRUE);
+    assertThat(lastExpressionStatement.expressions().get(0).typeV2().hasMember("foo")).isEqualTo(TriBool.UNKNOWN);
+    assertThat(lastExpressionStatement.expressions().get(0).typeV2().hasMember("bar")).isEqualTo(TriBool.UNKNOWN);
+    assertThat(lastExpressionStatement.expressions().get(0).typeV2().hasMember("qix")).isEqualTo(TriBool.FALSE);
+  }
 }
