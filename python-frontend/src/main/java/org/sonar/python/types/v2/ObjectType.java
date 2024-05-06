@@ -42,6 +42,11 @@ public record ObjectType(PythonType type, List<PythonType> attributes, List<Memb
   }
 
   @Override
+  public PythonType unwrappedType() {
+    return this.type;
+  }
+
+  @Override
   public Optional<PythonType> resolveMember(String memberName) {
     return members().stream()
       .filter(member -> Objects.equals(member.name(), memberName))
