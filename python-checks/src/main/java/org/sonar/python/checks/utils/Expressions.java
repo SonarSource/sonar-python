@@ -41,8 +41,10 @@ import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.NumericLiteral;
 import org.sonar.plugins.python.api.tree.ParenthesizedExpression;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
+import org.sonar.plugins.python.api.tree.SliceExpression;
 import org.sonar.plugins.python.api.tree.StringElement;
 import org.sonar.plugins.python.api.tree.StringLiteral;
+import org.sonar.plugins.python.api.tree.SubscriptionExpression;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.plugins.python.api.tree.Tuple;
@@ -309,30 +311,44 @@ public class Expressions {
   }
 
   public static Optional<Name> getAssignedName(Expression expression) {
+    return getAssignedName(expression, 0);
+  }
+
+  private static Optional<Name> getAssignedName(Expression expression, int recursionCount) {
+    if(recursionCount > 4){
+      return Optional.empty();
+    }
     if (expression.is(Tree.Kind.NAME)) {
       return Optional.of((Name) expression);
     }
     if (expression.is(Tree.Kind.QUALIFIED_EXPR)) {
-      return getAssignedName(((QualifiedExpression) expression).name());
+      return Optional.of(((QualifiedExpression) expression).name());
+    }
+    if(expression.is(Tree.Kind.SUBSCRIPTION)){
+      expression = ((SubscriptionExpression) expression).object();
+    } 
+    if(expression.is(Tree.Kind.SLICE_EXPR)){
+      expression = ((SliceExpression) expression).object();
     }
 
-    var assignment = (AssignmentStatement) TreeUtils.firstAncestorOfKind(expression, Tree.Kind.ASSIGNMENT_STMT);
-    if (assignment == null) {
+    var maybeAssignment = TreeUtils.firstAncestorOfKind(expression, Tree.Kind.ASSIGNMENT_STMT);
+    if (maybeAssignment == null) {
       return Optional.empty();
     }
-
+    
+    var assignment = (AssignmentStatement) maybeAssignment;
     var expressions = SymbolUtils.assignmentsLhs(assignment);
-    if (expressions.size() != 1) {
+
+    if (expressions.size() != 1 ) {
       List<Expression> rhsExpressions = getExpressionsFromRhs(assignment.assignedValue());
       var rhsIndex = rhsExpressions.stream().flatMap(TreeUtils::flattenTuples).toList().indexOf(expression);
-      if (rhsIndex != -1) {
-        return getAssignedName(expressions.get(rhsIndex));
+      if (rhsIndex != -1 && rhsIndex < expressions.size()) {
+        return getAssignedName(expressions.get(rhsIndex), recursionCount + 1);
       } else {
         return Optional.empty();
       }
     }
-
-    return getAssignedName(expressions.get(0));
+    return getAssignedName(expressions.get(0), recursionCount + 1);
   }
 
   private static List<Expression> getExpressionsFromRhs(Expression rhs) {

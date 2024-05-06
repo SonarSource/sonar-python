@@ -1,0 +1,133 @@
+<p>This rule raises an issue when a Scikit-learn model is instantiated without specifying the important hyperparameters.</p>
+<h2>Why is this an issue?</h2>
+<p>When instantiating a Scikit-learn estimator, it will use default values for the hyperparameters that are not specified. Relying on the default
+values can lead to non-reproducible results across diffferent versions of the library.</p>
+<p>Furthermore, the default values might not be the best choice for the specific problem at hand and can lead to suboptimal performance.</p>
+<p>Here are the estimators and the parameters considered by this rule :</p>
+<table>
+  <colgroup>
+    <col style="width: 50%;">
+    <col style="width: 50%;">
+  </colgroup>
+  <tbody>
+    <tr>
+      <td><p><strong>Estimator</strong></p></td>
+      <td><p><strong>Hyperparameters</strong></p></td>
+    </tr>
+    <tr>
+      <td><p>AdaBoostClassifier</p></td>
+      <td><p>learning_rate</p></td>
+    </tr>
+    <tr>
+      <td><p>AdaBoostRegressor</p></td>
+      <td><p>learning_rate</p></td>
+    </tr>
+    <tr>
+      <td><p>GradientBoostingClassifier</p></td>
+      <td><p>learning_rate</p></td>
+    </tr>
+    <tr>
+      <td><p>GradientBoostingRegressor</p></td>
+      <td><p>learning_rate</p></td>
+    </tr>
+    <tr>
+      <td><p>HistGradientBoostingClassifier</p></td>
+      <td><p>learning_rate</p></td>
+    </tr>
+    <tr>
+      <td><p>HistGradientBoostingRegressor</p></td>
+      <td><p>learning_rate</p></td>
+    </tr>
+    <tr>
+      <td><p>RandomForestClassifier</p></td>
+      <td><p>min_samples_leaf, max_features</p></td>
+    </tr>
+    <tr>
+      <td><p>RandomForestRegressor</p></td>
+      <td><p>min_samples_leaf, max_features</p></td>
+    </tr>
+    <tr>
+      <td><p>ElasticNet</p></td>
+      <td><p>alpha, l1_ratio</p></td>
+    </tr>
+    <tr>
+      <td><p>NearestNeighbors</p></td>
+      <td><p>n_neighbors</p></td>
+    </tr>
+    <tr>
+      <td><p>KNeighborsClassifier</p></td>
+      <td><p>n_neighbors</p></td>
+    </tr>
+    <tr>
+      <td><p>KNeighborsRegressor</p></td>
+      <td><p>n_neighbors</p></td>
+    </tr>
+    <tr>
+      <td><p>NuSVC</p></td>
+      <td><p>nu, kernel, gamma</p></td>
+    </tr>
+    <tr>
+      <td><p>NuSVR</p></td>
+      <td><p>C, kernel, gamma</p></td>
+    </tr>
+    <tr>
+      <td><p>SVC</p></td>
+      <td><p>C, kernel, gamma</p></td>
+    </tr>
+    <tr>
+      <td><p>SVR</p></td>
+      <td><p>C, kernel, gamma</p></td>
+    </tr>
+    <tr>
+      <td><p>DecisionTreeClassifier</p></td>
+      <td><p>ccp_alpha</p></td>
+    </tr>
+    <tr>
+      <td><p>DecisionTreeRegressor</p></td>
+      <td><p>ccp_alpha</p></td>
+    </tr>
+    <tr>
+      <td><p>MLPClassifier</p></td>
+      <td><p>hidden_layer_sizes</p></td>
+    </tr>
+    <tr>
+      <td><p>MLPRegressor</p></td>
+      <td><p>hidden_layer_sizes</p></td>
+    </tr>
+    <tr>
+      <td><p>PolynomialFeatures</p></td>
+      <td><p>degree, interaction_only</p></td>
+    </tr>
+  </tbody>
+</table>
+<h2>How to fix it</h2>
+<p>Specify the hyperparameters when instantiating the estimator.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+from sklearn.neighbors import KNeighborsClassifier
+
+clf = KNeighborsClassifier() # Noncompliant : n_neighbors is not specified, different values can change the behaviour of the predictor significantly
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+from sklearn.neighbors import KNeighborsClassifier
+
+clf = KNeighborsClassifier( # Compliant
+    n_neighbors=5
+)
+</pre>
+<h2>Resources</h2>
+<h3>External coding guidelines</h3>
+<ul>
+  <li> Code Smells for Machine Learning Applications - <a
+  href="https://hynn01.github.io/ml-smells/posts/codesmells/11-hyperparameter-not-explicitly-set/">Hyperparameter not Explicitly Set</a> </li>
+</ul>
+<h3>Papers</h3>
+<ul>
+  <li> Probst, P., Boulesteix, A. L., &amp; Bischl, B. (2019). Tunability: Importance of Hyperparameters of Machine Learning Algorithms. Journal of
+  Machine Learning Research, 20(53), 1-32. </li>
+  <li> van Rijn, J. N., &amp; Hutter, F. (2018, July). Hyperparameter importance across datasets. In Proceedings of the 24th ACM SIGKDD International
+  Conference on Knowledge Discovery &amp; Data Mining (pp. 2367-2376). </li>
+</ul>
+
