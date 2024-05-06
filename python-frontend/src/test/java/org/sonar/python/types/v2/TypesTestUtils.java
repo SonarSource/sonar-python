@@ -30,9 +30,11 @@ import org.sonar.python.semantic.v2.TypeInferenceV2;
 public class TypesTestUtils {
 
   public static final ModuleType BUILTINS = new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty()).getModule();
+
   public static final PythonType INT_TYPE = BUILTINS.resolveMember("int").get();
   public static final PythonType BOOL_TYPE = BUILTINS.resolveMember("bool").get();
   public static final PythonType STR_TYPE = BUILTINS.resolveMember("str").get();
+  public static final PythonType LIST_TYPE = BUILTINS.resolveMember("list").get();
 
   public static FileInput parseAndInferTypes(String... code) {
     return parseAndInferTypes(PythonTestUtils.pythonFile(""), code);
