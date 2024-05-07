@@ -189,9 +189,6 @@ public class CallExpressionImpl extends PyTree implements CallExpression, HasTyp
     if (callee().typeV2() instanceof ClassType classType) {
       return new ObjectType(classType);
     }
-    if (callee().typeV2() instanceof FunctionType functionType) {
-      return new ObjectType(functionType.returnType());
-    }
     return PythonType.UNKNOWN;
   }
 }
