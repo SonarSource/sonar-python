@@ -26,6 +26,7 @@ import java.util.stream.Stream;
 import org.sonar.plugins.python.api.tree.AnnotatedAssignment;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
+import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.CompoundAssignmentStatement;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FunctionDef;
@@ -42,12 +43,18 @@ import org.sonar.python.types.v2.UnionType;
 public class FlowSensitiveTypeInference extends ForwardAnalysis {
   private final Set<SymbolV2> trackedVars;
   private final Map<Statement, Assignment> assignmentsByAssignmentStatement;
+  private final Map<Statement, Definition> definitionsByDefinitionStatement;
   private final Map<String, PythonType> parameterTypesByName;
 
-  public FlowSensitiveTypeInference(Set<SymbolV2> trackedVars,
-                                    Map<Statement, Assignment> assignmentsByAssignmentStatement, Map<String, PythonType> parameterTypesByName) {
+  public FlowSensitiveTypeInference(
+    Set<SymbolV2> trackedVars,
+    Map<Statement, Assignment> assignmentsByAssignmentStatement,
+    Map<Statement, Definition> definitionsByDefinitionStatement,
+    Map<String, PythonType> parameterTypesByName
+  ) {
     this.trackedVars = trackedVars;
     this.assignmentsByAssignmentStatement = assignmentsByAssignmentStatement;
+    this.definitionsByDefinitionStatement = definitionsByDefinitionStatement;
     this.parameterTypesByName = parameterTypesByName;
   }
 
@@ -84,7 +91,13 @@ public class FlowSensitiveTypeInference extends ForwardAnalysis {
         // update lhs
         updateTree(assignment.variable(), state);
       }
-    } else {
+    } else if (element instanceof FunctionDef functionDef) {
+      handleDefinition(functionDef, state);
+    } else if (element instanceof ClassDef classDef) {
+      // Not triggered  because ClassDef not in CFG
+      handleDefinition(classDef, state);
+    }
+    else {
       // TODO: isinstance visitor
       updateTree(element, state);
     }
@@ -130,6 +143,16 @@ public class FlowSensitiveTypeInference extends ForwardAnalysis {
           } else {
             programState.setTypes(assignment.lhsSymbol(), Set.of(rhs.typeV2()));
           }
+        }
+      });
+  }
+
+  private void handleDefinition(Statement definitionStatement, TypeInferenceProgramState programState) {
+    Optional.ofNullable(definitionsByDefinitionStatement.get(definitionStatement))
+      .ifPresent(definition -> {
+        SymbolV2 symbol = definition.lhsSymbol();
+        if (trackedVars.contains(symbol)) {
+          programState.setTypes(symbol, Set.of(definition.lhsName.typeV2()));
         }
       });
   }

@@ -218,3 +218,13 @@ some_nonlocal_var = 42
 def using_nonlocal_var():
     nonlocal some_nonlocal_var
     some_nonlocal_var()  # Noncompliant
+
+
+def reassigned_function():
+    if cond:
+        def my_callable(): ...
+        my_callable()  # OK
+    else:
+        def my_callable(): ...
+        my_callable = 42
+        my_callable()  # Noncompliant

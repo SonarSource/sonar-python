@@ -28,19 +28,25 @@ import java.util.Set;
 import org.sonar.plugins.python.api.tree.AnnotatedAssignment;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
+import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.CompoundAssignmentStatement;
 import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.python.semantic.v2.SymbolV2;
 
 public class PropagationVisitor extends BaseTreeVisitor {
   private final Map<SymbolV2, Set<Assignment>> assignmentsByLhs;
+  private final Map<SymbolV2, Set<Definition>> definitionsByReceiver;
   private final Map<Statement, Assignment> assignmentsByAssignmentStatement;
+  private final Map<Statement, Definition> definitionsByDefinitionStatement;
 
   public PropagationVisitor() {
     assignmentsByLhs = new HashMap<>();
+    definitionsByReceiver = new HashMap<>();
     assignmentsByAssignmentStatement = new HashMap<>();
+    definitionsByDefinitionStatement = new HashMap<>();
   }
 
   public Map<SymbolV2, Set<Assignment>> assignmentsByLhs() {
@@ -49,6 +55,34 @@ public class PropagationVisitor extends BaseTreeVisitor {
 
   public Map<Statement, Assignment> assignmentsByAssignmentStatement() {
     return assignmentsByAssignmentStatement;
+  }
+
+  public Map<Statement, Definition> definitionsByDefinitionStatement() {
+    return definitionsByDefinitionStatement;
+  }
+
+  public Map<SymbolV2, Set<Definition>> definitionsByReceiver() {
+    return definitionsByReceiver;
+  }
+
+  @Override
+  public void visitFunctionDef(FunctionDef functionDef) {
+    super.visitFunctionDef(functionDef);
+    Name name = functionDef.name();
+    var symbol = name.symbolV2();
+    Definition definition = new Definition(symbol, name);
+    definitionsByDefinitionStatement.put(functionDef, definition);
+    definitionsByReceiver.computeIfAbsent(symbol, s -> new HashSet<>()).add(definition);
+  }
+
+  @Override
+  public void visitClassDef(ClassDef classDef) {
+    super.visitClassDef(classDef);
+/*    Name name = classDef.name();
+    var symbol = name.symbolV2();
+    Definition definition = new Definition(symbol, name);
+    definitionsByDefinitionStatement.put(classDef, definition);
+    definitionsByReceiver.computeIfAbsent(symbol, s -> new HashSet<>()).add(definition);*/
   }
 
   @Override
@@ -91,7 +125,7 @@ public class PropagationVisitor extends BaseTreeVisitor {
   }
 
   public void processPropagations(Set<SymbolV2> trackedVars) {
-    Set<Assignment> propagations = new HashSet<>();
+    Set<Propagation> propagations = new HashSet<>();
     Set<SymbolV2> initializedVars = new HashSet<>();
 
     assignmentsByLhs.forEach((lhs, as) -> {
@@ -105,11 +139,11 @@ public class PropagationVisitor extends BaseTreeVisitor {
     applyPropagations(propagations, initializedVars, false);
   }
 
-  private static void applyPropagations(Set<Assignment> propagations, Set<SymbolV2> initializedVars, boolean checkDependenciesReadiness) {
-    Set<Assignment> workSet = new HashSet<>(propagations);
+  private static void applyPropagations(Set<Propagation> propagations, Set<SymbolV2> initializedVars, boolean checkDependenciesReadiness) {
+    Set<Propagation> workSet = new HashSet<>(propagations);
     while (!workSet.isEmpty()) {
-      Iterator<Assignment> iterator = workSet.iterator();
-      Assignment propagation = iterator.next();
+      Iterator<Propagation> iterator = workSet.iterator();
+      Propagation propagation = iterator.next();
       iterator.remove();
       if (!checkDependenciesReadiness || propagation.areDependenciesReady(initializedVars)) {
         boolean learnt = propagation.propagate(initializedVars);

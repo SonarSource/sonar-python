@@ -32,6 +32,7 @@ import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.CallExpression;
+import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.ExpressionStatement;
 import org.sonar.plugins.python.api.tree.FileInput;
@@ -222,6 +223,45 @@ class TypeInferenceV2Test {
 
     CallExpression callExpression = ((CallExpression) TreeUtils.firstChild(root, t -> t.is(Tree.Kind.CALL_EXPR)).get());
     assertThat(callExpression.callee().typeV2()).isInstanceOf(FunctionType.class);
+  }
+
+  @Test
+  void multipleFunctionDefinitions() {
+    FileInput root = inferTypes("""
+      def foo(a, b, c): ...
+      foo(1, 2, 3)
+      def foo(a, b): ...
+      foo(1, 2)
+      """);
+    FunctionType firstFunctionType = (FunctionType) ((FunctionDef) root.statements().statements().get(0)).name().typeV2();
+    FunctionType secondFunctionType = (FunctionType) ((FunctionDef) root.statements().statements().get(2)).name().typeV2();
+
+    List<CallExpression> calls = PythonTestUtils.getAllDescendant(root, tree -> tree.is(Tree.Kind.CALL_EXPR));
+    CallExpression firstCall = calls.get(0);
+    CallExpression secondCall = calls.get(1);
+
+    assertThat(firstCall.callee().typeV2()).isEqualTo(firstFunctionType);
+    assertThat(secondCall.callee().typeV2()).isEqualTo(secondFunctionType);
+  }
+
+  @Test
+  @Disabled("ClassDef not in CFG prevents us from getting this to work")
+  void multipleClassDefinitions() {
+    FileInput root = inferTypes("""
+      class MyClass(int): ...
+      MyClass()
+      class MyClass(str): ...
+      MyClass()
+      """);
+    ClassType firstClassType = (ClassType) ((ClassDef) root.statements().statements().get(0)).name().typeV2();
+    ClassType secondClassType = (ClassType) ((ClassDef) root.statements().statements().get(2)).name().typeV2();
+
+    List<CallExpression> calls = PythonTestUtils.getAllDescendant(root, tree -> tree.is(Tree.Kind.CALL_EXPR));
+    CallExpression firstCall = calls.get(0);
+    CallExpression secondCall = calls.get(1);
+
+    assertThat(firstCall.callee().typeV2()).isEqualTo(firstClassType);
+    assertThat(secondCall.callee().typeV2()).isEqualTo(secondClassType);
   }
 
   @Test

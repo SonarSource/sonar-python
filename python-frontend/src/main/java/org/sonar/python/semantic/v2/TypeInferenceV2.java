@@ -36,6 +36,7 @@ import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.StatementList;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.semantic.v2.types.Assignment;
+import org.sonar.python.semantic.v2.types.Definition;
 import org.sonar.python.semantic.v2.types.FlowSensitiveTypeInference;
 import org.sonar.python.semantic.v2.types.PropagationVisitor;
 import org.sonar.python.semantic.v2.types.TrivialTypeInferenceVisitor;
@@ -116,6 +117,12 @@ public class TypeInferenceV2 {
       .map(Assignment::lhsName)
       .collect(Collectors.toSet());
 
+    Set<Name> definedNames = propagationVisitor.definitionsByReceiver().values().stream()
+      .flatMap(Collection::stream)
+      .map(Definition::lhsName)
+      .collect(Collectors.toSet());
+    assignedNames.addAll(definedNames);
+
     TryStatementVisitor tryStatementVisitor = new TryStatementVisitor();
     statements.accept(tryStatementVisitor);
     if (tryStatementVisitor.hasTryStatement()) {
@@ -135,6 +142,7 @@ public class TypeInferenceV2 {
     FlowSensitiveTypeInference flowSensitiveTypeInference = new FlowSensitiveTypeInference(
       trackedVars,
       propagationVisitor.assignmentsByAssignmentStatement(),
+      propagationVisitor.definitionsByDefinitionStatement(),
       Map.of());
 
     flowSensitiveTypeInference.compute(cfg);
