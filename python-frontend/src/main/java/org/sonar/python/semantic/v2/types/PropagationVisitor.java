@@ -30,25 +30,43 @@ import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.CompoundAssignmentStatement;
 import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.python.semantic.v2.SymbolV2;
 
 public class PropagationVisitor extends BaseTreeVisitor {
-  private final Map<SymbolV2, Set<Assignment>> assignmentsByLhs;
+  private final Map<SymbolV2, Set<Propagation>> propagationsByLhs;
   private final Map<Statement, Assignment> assignmentsByAssignmentStatement;
+  private final Map<Statement, Definition> definitionsByDefinitionStatement;
 
   public PropagationVisitor() {
-    assignmentsByLhs = new HashMap<>();
+    propagationsByLhs = new HashMap<>();
     assignmentsByAssignmentStatement = new HashMap<>();
+    definitionsByDefinitionStatement = new HashMap<>();
   }
 
-  public Map<SymbolV2, Set<Assignment>> assignmentsByLhs() {
-    return assignmentsByLhs;
-  }
 
   public Map<Statement, Assignment> assignmentsByAssignmentStatement() {
     return assignmentsByAssignmentStatement;
+  }
+
+  public Map<Statement, Definition> definitionsByDefinitionStatement() {
+    return definitionsByDefinitionStatement;
+  }
+
+  public Map<SymbolV2, Set<Propagation>> propagationsByLhs() {
+    return propagationsByLhs;
+  }
+
+  @Override
+  public void visitFunctionDef(FunctionDef functionDef) {
+    super.visitFunctionDef(functionDef);
+    Name name = functionDef.name();
+    var symbol = name.symbolV2();
+    Definition definition = new Definition(symbol, name);
+    definitionsByDefinitionStatement.put(functionDef, definition);
+    propagationsByLhs.computeIfAbsent(symbol, s -> new HashSet<>()).add(definition);
   }
 
   @Override
@@ -84,20 +102,23 @@ public class PropagationVisitor extends BaseTreeVisitor {
   private void processAssignment(Statement assignmentStatement, Expression lhsExpression, Expression rhsExpression){
     if (lhsExpression instanceof Name lhs && lhs.symbolV2() != null) {
       var symbol = lhs.symbolV2();
-      Assignment assignment = new Assignment(symbol, lhs, rhsExpression, assignmentsByLhs);
+      Assignment assignment = new Assignment(symbol, lhs, rhsExpression, propagationsByLhs);
       assignmentsByAssignmentStatement.put(assignmentStatement, assignment);
-      assignmentsByLhs.computeIfAbsent(symbol, s -> new HashSet<>()).add(assignment);
+      propagationsByLhs.computeIfAbsent(symbol, s -> new HashSet<>()).add(assignment);
     }
   }
 
   public void processPropagations(Set<SymbolV2> trackedVars) {
-    Set<Assignment> propagations = new HashSet<>();
+    Set<Propagation> propagations = new HashSet<>();
     Set<SymbolV2> initializedVars = new HashSet<>();
 
-    assignmentsByLhs.forEach((lhs, as) -> {
+    propagationsByLhs.forEach((lhs, props) -> {
       if (trackedVars.contains(lhs)) {
-        as.forEach(a -> a.computeDependencies(a.rhs(), trackedVars));
-        propagations.addAll(as);
+        props.stream()
+          .filter(Assignment.class::isInstance)
+          .map(Assignment.class::cast)
+          .forEach(a -> a.computeDependencies(a.rhs(), trackedVars));
+        propagations.addAll(props);
       }
     });
 
@@ -105,11 +126,11 @@ public class PropagationVisitor extends BaseTreeVisitor {
     applyPropagations(propagations, initializedVars, false);
   }
 
-  private static void applyPropagations(Set<Assignment> propagations, Set<SymbolV2> initializedVars, boolean checkDependenciesReadiness) {
-    Set<Assignment> workSet = new HashSet<>(propagations);
+  private static void applyPropagations(Set<Propagation> propagations, Set<SymbolV2> initializedVars, boolean checkDependenciesReadiness) {
+    Set<Propagation> workSet = new HashSet<>(propagations);
     while (!workSet.isEmpty()) {
-      Iterator<Assignment> iterator = workSet.iterator();
-      Assignment propagation = iterator.next();
+      Iterator<Propagation> iterator = workSet.iterator();
+      Propagation propagation = iterator.next();
       iterator.remove();
       if (!checkDependenciesReadiness || propagation.areDependenciesReady(initializedVars)) {
         boolean learnt = propagation.propagate(initializedVars);
