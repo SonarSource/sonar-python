@@ -26,6 +26,7 @@ import java.util.ListIterator;
 import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.cfg.CfgBlock;
+import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.cfg.fixpoint.LiveVariablesAnalysis.LiveVariables;
@@ -51,7 +52,11 @@ public class DeadStoreUtils {
       blockLiveVariables.getSymbolReadWrites(element).forEach((symbol, symbolReadWrite) -> {
         if (symbolReadWrite.isWrite() && !symbolReadWrite.isRead()) {
           if (!element.is(Tree.Kind.IMPORT_NAME) && !willBeRead.contains(symbol) && functionDef.localVariables().contains(symbol)) {
-            unnecessaryAssignments.add(new UnnecessaryAssignment(symbol, element));
+            Tree elementToReport = element;
+            if (elementToReport instanceof ClassDef classDefElement) {
+              elementToReport = classDefElement.name();
+            }
+            unnecessaryAssignments.add(new UnnecessaryAssignment(symbol, elementToReport));
           }
           willBeRead.remove(symbol);
         } else if (symbolReadWrite.isRead()) {

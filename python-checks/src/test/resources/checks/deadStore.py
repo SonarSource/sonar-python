@@ -390,6 +390,11 @@ def class_dead_store():
 #   ^^^^^^< 1 {{'a' is reassigned here.}}
     print(a)
 
+def function_dead_store():
+    def my_func(): ...
+    my_func = 42  # FN
+    print(my_func)
+
 def multiple_issues(a):
     b = 2 # Noncompliant
     if a:
