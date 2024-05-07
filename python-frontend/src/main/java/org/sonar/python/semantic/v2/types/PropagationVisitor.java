@@ -125,7 +125,10 @@ public class PropagationVisitor extends BaseTreeVisitor {
 
     propagationsByLhs.forEach((lhs, props) -> {
       if (trackedVars.contains(lhs)) {
-        props.stream().filter(Assignment.class::isInstance).map(Assignment.class::cast).forEach(p -> p.computeDependencies(p.rhs(), trackedVars));
+        props.stream()
+          .filter(Assignment.class::isInstance)
+          .map(Assignment.class::cast)
+          .forEach(a -> a.computeDependencies(a.rhs(), trackedVars));
         propagations.addAll(props);
       }
     });

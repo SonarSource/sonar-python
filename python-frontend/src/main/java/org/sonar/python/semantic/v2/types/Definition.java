@@ -20,7 +20,6 @@
 package org.sonar.python.semantic.v2.types;
 
 import java.util.Set;
-import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.python.semantic.v2.SymbolV2;
 import org.sonar.python.semantic.v2.UsageV2;
@@ -55,11 +54,6 @@ public class Definition extends Propagation {
       lhsSymbol.usages().stream().map(UsageV2::tree).filter(NameImpl.class::isInstance).map(NameImpl.class::cast).forEach(n -> n.typeV2(newType));
       return !newType.equals(currentType);
     }
-  }
-
-  @Override
-  void computeDependencies(Expression expression, Set<SymbolV2> trackedVars) {
-    // no dependencies?
   }
 
   public SymbolV2 lhsSymbol() {
