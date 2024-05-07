@@ -245,7 +245,6 @@ class TypeInferenceV2Test {
   }
 
   @Test
-  @Disabled("ClassDef not in CFG prevents us from getting this to work")
   void multipleClassDefinitions() {
     FileInput root = inferTypes("""
       class MyClass(int): ...

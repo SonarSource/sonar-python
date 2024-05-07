@@ -182,7 +182,7 @@ public record ClassType(
 
   @Override
   public int hashCode() {
-    return Objects.hash(name, members, attributes, superClasses);
+    return Objects.hash(name, members, attributes);
   }
 
   @Override
