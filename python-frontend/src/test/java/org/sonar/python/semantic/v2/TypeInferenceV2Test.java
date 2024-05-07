@@ -33,6 +33,7 @@ import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.CallExpression;
+import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.ExpressionStatement;
 import org.sonar.plugins.python.api.tree.FileInput;
@@ -52,13 +53,15 @@ import org.sonar.python.types.v2.ClassType;
 import org.sonar.python.types.v2.FunctionType;
 import org.sonar.python.types.v2.ModuleType;
 import org.sonar.python.types.v2.ObjectType;
+import org.sonar.python.types.v2.ParameterV2;
 import org.sonar.python.types.v2.PythonType;
 import org.sonar.python.types.v2.UnionType;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.sonar.python.PythonTestUtils.parseWithoutSymbols;
+import static org.sonar.python.PythonTestUtils.parse;
 import static org.sonar.python.types.v2.TypesTestUtils.INT_TYPE;
 import static org.sonar.python.types.v2.TypesTestUtils.LIST_TYPE;
+import static org.sonar.python.types.v2.TypesTestUtils.NONE_TYPE;
 import static org.sonar.python.types.v2.TypesTestUtils.STR_TYPE;
 
 class TypeInferenceV2Test {
@@ -223,6 +226,45 @@ class TypeInferenceV2Test {
 
     CallExpression callExpression = ((CallExpression) TreeUtils.firstChild(root, t -> t.is(Tree.Kind.CALL_EXPR)).get());
     assertThat(callExpression.callee().typeV2()).isInstanceOf(FunctionType.class);
+  }
+
+  @Test
+  void multipleFunctionDefinitions() {
+    FileInput root = inferTypes("""
+      def foo(a, b, c): ...
+      foo(1, 2, 3)
+      def foo(a, b): ...
+      foo(1, 2)
+      """);
+    FunctionType firstFunctionType = (FunctionType) ((FunctionDef) root.statements().statements().get(0)).name().typeV2();
+    FunctionType secondFunctionType = (FunctionType) ((FunctionDef) root.statements().statements().get(2)).name().typeV2();
+
+    List<CallExpression> calls = PythonTestUtils.getAllDescendant(root, tree -> tree.is(Tree.Kind.CALL_EXPR));
+    CallExpression firstCall = calls.get(0);
+    CallExpression secondCall = calls.get(1);
+
+    assertThat(firstCall.callee().typeV2()).isEqualTo(firstFunctionType);
+    assertThat(secondCall.callee().typeV2()).isEqualTo(secondFunctionType);
+  }
+
+  @Test
+  @Disabled("ClassDef not in CFG prevents us from getting this to work")
+  void multipleClassDefinitions() {
+    FileInput root = inferTypes("""
+      class MyClass(int): ...
+      MyClass()
+      class MyClass(str): ...
+      MyClass()
+      """);
+    ClassType firstClassType = (ClassType) ((ClassDef) root.statements().statements().get(0)).name().typeV2();
+    ClassType secondClassType = (ClassType) ((ClassDef) root.statements().statements().get(2)).name().typeV2();
+
+    List<CallExpression> calls = PythonTestUtils.getAllDescendant(root, tree -> tree.is(Tree.Kind.CALL_EXPR));
+    CallExpression firstCall = calls.get(0);
+    CallExpression secondCall = calls.get(1);
+
+    assertThat(firstCall.callee().typeV2()).isEqualTo(firstClassType);
+    assertThat(secondCall.callee().typeV2()).isEqualTo(secondClassType);
   }
 
   @Test
@@ -627,6 +669,130 @@ class TypeInferenceV2Test {
   }
 
   @Test
+  void recursive_function() {
+    FileInput fileInput = inferTypes("""
+      def my_recursive_func(n):
+        ...
+        my_recursive_func(n-1)
+      """);
+    FunctionDef functionDef = ((FunctionDef) fileInput.statements().statements().get(0));
+    FunctionType functionType = (FunctionType) functionDef.name().typeV2();
+    CallExpression call = (CallExpression) PythonTestUtils.getAllDescendant(fileInput, tree -> tree.is(Tree.Kind.CALL_EXPR)).get(0);
+    assertThat(call.callee().typeV2()).isEqualTo(functionType);
+  }
+
+  @Test
+  void recursive_function_try_except() {
+    FileInput fileInput = inferTypes("""
+      def recurser(x):
+          if x is False:
+              return
+          recurser(False)
+          try:
+              recurser(False)
+          except:
+              recurser = None
+              recurser(False)
+          recurser(False)
+      """);
+    List<CallExpression> calls = PythonTestUtils.getAllDescendant(fileInput, tree -> tree.is(Tree.Kind.CALL_EXPR));
+
+    PythonType calleeType1 = calls.get(0).callee().typeV2();
+    PythonType calleeType2 = calls.get(1).callee().typeV2();
+    PythonType calleeType3 = calls.get(2).callee().typeV2();
+    PythonType calleeType4 = calls.get(3).callee().typeV2();
+
+    assertThat(calleeType1.unwrappedType()).isEqualTo(NONE_TYPE);
+    assertThat(calleeType2.unwrappedType()).isEqualTo(NONE_TYPE);
+    assertThat(calleeType3.unwrappedType()).isEqualTo(NONE_TYPE);
+    assertThat(calleeType4.unwrappedType()).isEqualTo(NONE_TYPE);
+  }
+
+  @Test
+  void recursive_function_try_except_2() {
+    FileInput fileInput = inferTypes("""
+      def wrapper():
+          def recurser(x):
+              ...
+              recurser(False)
+          try:
+              recurser(True)
+          finally:
+              recurser = None
+              recurser(True)
+          recurser(True)
+      """);
+
+    FunctionDef wrapperDef = ((FunctionDef) fileInput.statements().statements().get(0));
+    FunctionDef recurserDef = (FunctionDef) wrapperDef.body().statements().get(0);
+    FunctionType functionType = (FunctionType) recurserDef.name().typeV2();
+
+    List<CallExpression> calls = PythonTestUtils.getAllDescendant(fileInput, tree -> tree.is(Tree.Kind.CALL_EXPR));
+    PythonType calleeType1 = calls.get(0).callee().typeV2();
+    PythonType calleeType2 = calls.get(1).callee().typeV2();
+    PythonType calleeType3 = calls.get(2).callee().typeV2();
+    PythonType calleeType4 = calls.get(3).callee().typeV2();
+
+    assertThat(((UnionType) calleeType1).candidates()).extracting(PythonType::unwrappedType).containsExactlyInAnyOrder(functionType, NONE_TYPE);
+    assertThat(((UnionType) calleeType2).candidates()).extracting(PythonType::unwrappedType).containsExactlyInAnyOrder(functionType, NONE_TYPE);
+    assertThat(((UnionType) calleeType3).candidates()).extracting(PythonType::unwrappedType).containsExactlyInAnyOrder(functionType, NONE_TYPE);
+    assertThat(((UnionType) calleeType4).candidates()).extracting(PythonType::unwrappedType).containsExactlyInAnyOrder(functionType, NONE_TYPE);
+  }
+
+  @Test
+  void function_names_in_try_except_still_have_function_type() {
+    FileInput fileInput = inferTypes("""
+      def wrapper():
+          def recurser(x):
+              ...
+          try:
+              ...
+          finally:
+              def recurser(y):
+                ...
+      """);
+
+    FunctionDef wrapperDef = ((FunctionDef) fileInput.statements().statements().get(0));
+
+    List<FunctionDef> functionDefs = PythonTestUtils.getAllDescendant(wrapperDef, tree -> tree.is(Tree.Kind.FUNCDEF));
+    FunctionDef recurserDef1 = functionDefs.get(0);
+    FunctionDef recurserDef2 = functionDefs.get(1);
+    FunctionType functionType1 = (FunctionType) recurserDef1.name().typeV2();
+    FunctionType functionType2 = (FunctionType) recurserDef2.name().typeV2();
+
+    assertThat(functionType1.parameters()).extracting(ParameterV2::name).containsExactlyInAnyOrder("x");
+    assertThat(functionType2.parameters()).extracting(ParameterV2::name).containsExactlyInAnyOrder("y");
+  }
+
+  @Test
+  void reassigned_class_try_except() {
+    FileInput fileInput = inferTypes("""
+      class MyClass:
+          ...
+      MyClass()
+      try:
+          MyClass()
+      finally:
+          MyClass = None
+          MyClass()
+      MyClass()
+      """);
+
+    ClassDef classDef = ((ClassDef) fileInput.statements().statements().get(0));
+
+    List<CallExpression> calls = PythonTestUtils.getAllDescendant(fileInput, tree -> tree.is(Tree.Kind.CALL_EXPR));
+    PythonType calleeType1 = calls.get(0).callee().typeV2();
+    PythonType calleeType2 = calls.get(1).callee().typeV2();
+    PythonType calleeType3 = calls.get(2).callee().typeV2();
+    PythonType calleeType4 = calls.get(3).callee().typeV2();
+
+    assertThat(calleeType1).isEqualTo(PythonType.UNKNOWN);
+    assertThat(calleeType2).isEqualTo(PythonType.UNKNOWN);
+    assertThat(calleeType3).isEqualTo(PythonType.UNKNOWN);
+    assertThat(calleeType4).isEqualTo(PythonType.UNKNOWN);
+  }
+
+  @Test
   void flow_insensitive_when_try_except() {
     FileInput fileInput = inferTypes("""
       try:
@@ -832,7 +998,7 @@ class TypeInferenceV2Test {
   }
 
   private static FileInput inferTypes(String lines, Map<String, Set<Symbol>> globalSymbols) {
-    FileInput root = parseWithoutSymbols(lines);
+    FileInput root = parse(lines);
 
     var symbolTable = new SymbolTableBuilderV2(root)
       .build();

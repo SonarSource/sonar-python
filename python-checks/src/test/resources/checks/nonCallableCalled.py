@@ -218,3 +218,40 @@ some_nonlocal_var = 42
 def using_nonlocal_var():
     nonlocal some_nonlocal_var
     some_nonlocal_var()  # Noncompliant
+
+
+def reassigned_function():
+    if cond:
+        def my_callable(): ...
+        my_callable()  # OK
+    else:
+        def my_callable(): ...
+        my_callable = 42
+        my_callable()  # Noncompliant
+
+
+
+def recursive_with_try_finally(x):
+    if x is False:
+        print("recursion!")
+        return
+    recursive_with_try_finally(False) # Noncompliant
+    try:
+        recursive_with_try_finally(False) # Noncompliant
+    finally:
+        recursive_with_try_finally = None
+        recursive_with_try_finally(False) # Noncompliant
+    recursive_with_try_finally(False)  # Noncompliant
+
+
+
+def nested_recursive_try_finally():
+    def my_rec(x):
+        if x is False:
+            print("yeah")
+            return
+        my_rec(False)
+    try:
+        my_rec(True)
+    finally:
+        my_rec = None
