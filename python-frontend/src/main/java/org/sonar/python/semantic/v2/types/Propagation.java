@@ -21,6 +21,8 @@ package org.sonar.python.semantic.v2.types;
 
 import java.util.HashSet;
 import java.util.Set;
+import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.python.semantic.v2.SymbolV2;
 
 public abstract class Propagation {
@@ -34,7 +36,11 @@ public abstract class Propagation {
     return initializedVars.containsAll(variableDependencies);
   }
 
+  abstract void computeDependencies(Expression expression, Set<SymbolV2> trackedVars);
+
   Set<Propagation> dependents() {
     return dependents;
   }
+
+  public abstract Name lhsName();
 }

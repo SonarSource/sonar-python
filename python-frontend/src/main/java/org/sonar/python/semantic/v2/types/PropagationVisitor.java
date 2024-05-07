@@ -37,21 +37,16 @@ import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.python.semantic.v2.SymbolV2;
 
 public class PropagationVisitor extends BaseTreeVisitor {
-  private final Map<SymbolV2, Set<Assignment>> assignmentsByLhs;
-  private final Map<SymbolV2, Set<Definition>> definitionsByReceiver;
+  private final Map<SymbolV2, Set<Propagation>> propagationsByLhs;
   private final Map<Statement, Assignment> assignmentsByAssignmentStatement;
   private final Map<Statement, Definition> definitionsByDefinitionStatement;
 
   public PropagationVisitor() {
-    assignmentsByLhs = new HashMap<>();
-    definitionsByReceiver = new HashMap<>();
+    propagationsByLhs = new HashMap<>();
     assignmentsByAssignmentStatement = new HashMap<>();
     definitionsByDefinitionStatement = new HashMap<>();
   }
 
-  public Map<SymbolV2, Set<Assignment>> assignmentsByLhs() {
-    return assignmentsByLhs;
-  }
 
   public Map<Statement, Assignment> assignmentsByAssignmentStatement() {
     return assignmentsByAssignmentStatement;
@@ -61,8 +56,8 @@ public class PropagationVisitor extends BaseTreeVisitor {
     return definitionsByDefinitionStatement;
   }
 
-  public Map<SymbolV2, Set<Definition>> definitionsByReceiver() {
-    return definitionsByReceiver;
+  public Map<SymbolV2, Set<Propagation>> propagationsByLhs() {
+    return propagationsByLhs;
   }
 
   @Override
@@ -72,7 +67,7 @@ public class PropagationVisitor extends BaseTreeVisitor {
     var symbol = name.symbolV2();
     Definition definition = new Definition(symbol, name);
     definitionsByDefinitionStatement.put(functionDef, definition);
-    definitionsByReceiver.computeIfAbsent(symbol, s -> new HashSet<>()).add(definition);
+    propagationsByLhs.computeIfAbsent(symbol, s -> new HashSet<>()).add(definition);
   }
 
   @Override
@@ -118,9 +113,9 @@ public class PropagationVisitor extends BaseTreeVisitor {
   private void processAssignment(Statement assignmentStatement, Expression lhsExpression, Expression rhsExpression){
     if (lhsExpression instanceof Name lhs && lhs.symbolV2() != null) {
       var symbol = lhs.symbolV2();
-      Assignment assignment = new Assignment(symbol, lhs, rhsExpression, assignmentsByLhs);
+      Assignment assignment = new Assignment(symbol, lhs, rhsExpression, propagationsByLhs);
       assignmentsByAssignmentStatement.put(assignmentStatement, assignment);
-      assignmentsByLhs.computeIfAbsent(symbol, s -> new HashSet<>()).add(assignment);
+      propagationsByLhs.computeIfAbsent(symbol, s -> new HashSet<>()).add(assignment);
     }
   }
 
@@ -128,10 +123,10 @@ public class PropagationVisitor extends BaseTreeVisitor {
     Set<Propagation> propagations = new HashSet<>();
     Set<SymbolV2> initializedVars = new HashSet<>();
 
-    assignmentsByLhs.forEach((lhs, as) -> {
+    propagationsByLhs.forEach((lhs, props) -> {
       if (trackedVars.contains(lhs)) {
-        as.forEach(a -> a.computeDependencies(a.rhs(), trackedVars));
-        propagations.addAll(as);
+        props.stream().filter(Assignment.class::isInstance).map(Assignment.class::cast).forEach(p -> p.computeDependencies(p.rhs(), trackedVars));
+        propagations.addAll(props);
       }
     });
 

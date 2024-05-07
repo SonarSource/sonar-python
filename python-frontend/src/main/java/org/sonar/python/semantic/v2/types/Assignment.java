@@ -38,13 +38,13 @@ public class Assignment extends Propagation {
   final SymbolV2 lhsSymbol;
   Name lhsName;
   Expression rhs;
-  Map<SymbolV2, Set<Assignment>> assignmentsByLhs;
+  Map<SymbolV2, Set<Propagation>> propagationsByLhs;
 
-  public Assignment(SymbolV2 lhsSymbol, Name lhsName, Expression rhs, Map<SymbolV2, Set<Assignment>> assignmentsByLhs) {
+  public Assignment(SymbolV2 lhsSymbol, Name lhsName, Expression rhs, Map<SymbolV2, Set<Propagation>> propagationsByLhs) {
     this.lhsSymbol = lhsSymbol;
     this.lhsName = lhsName;
     this.rhs = rhs;
-    this.assignmentsByLhs = assignmentsByLhs;
+    this.propagationsByLhs = propagationsByLhs;
   }
 
   void computeDependencies(Expression expression, Set<SymbolV2> trackedVars) {
@@ -57,7 +57,7 @@ public class Assignment extends Propagation {
         SymbolV2 symbol = name.symbolV2();
         if (symbol != null && trackedVars.contains(symbol)) {
           variableDependencies.add(symbol);
-          assignmentsByLhs.get(symbol).forEach(a -> a.dependents.add(this));
+          propagationsByLhs.get(symbol).forEach(a -> a.dependents.add(this));
         }
       } else if (e instanceof HasTypeDependencies hasTypeDependencies) {
         workList.addAll(hasTypeDependencies.typeDependencies());

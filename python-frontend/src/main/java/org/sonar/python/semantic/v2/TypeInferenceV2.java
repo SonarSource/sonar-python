@@ -35,9 +35,8 @@ import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.StatementList;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.python.semantic.v2.types.Assignment;
-import org.sonar.python.semantic.v2.types.Definition;
 import org.sonar.python.semantic.v2.types.FlowSensitiveTypeInference;
+import org.sonar.python.semantic.v2.types.Propagation;
 import org.sonar.python.semantic.v2.types.PropagationVisitor;
 import org.sonar.python.semantic.v2.types.TrivialTypeInferenceVisitor;
 import org.sonar.python.semantic.v2.types.TryStatementVisitor;
@@ -112,16 +111,10 @@ public class TypeInferenceV2 {
   ) {
     PropagationVisitor propagationVisitor = new PropagationVisitor();
     scopeTree.accept(propagationVisitor);
-    Set<Name> assignedNames = propagationVisitor.assignmentsByLhs().values().stream()
+    Set<Name> assignedNames = propagationVisitor.propagationsByLhs().values().stream()
       .flatMap(Collection::stream)
-      .map(Assignment::lhsName)
+      .map(Propagation::lhsName)
       .collect(Collectors.toSet());
-
-    Set<Name> definedNames = propagationVisitor.definitionsByReceiver().values().stream()
-      .flatMap(Collection::stream)
-      .map(Definition::lhsName)
-      .collect(Collectors.toSet());
-    assignedNames.addAll(definedNames);
 
     TryStatementVisitor tryStatementVisitor = new TryStatementVisitor();
     statements.accept(tryStatementVisitor);
