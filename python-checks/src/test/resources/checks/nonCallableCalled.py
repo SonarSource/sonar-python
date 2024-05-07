@@ -218,3 +218,40 @@ some_nonlocal_var = 42
 def using_nonlocal_var():
     nonlocal some_nonlocal_var
     some_nonlocal_var()  # Noncompliant
+
+
+def reassigned_function():
+    if cond:
+        def my_callable(): ...
+        my_callable()  # OK
+    else:
+        def my_callable(): ...
+        my_callable = 42
+        my_callable()  # Noncompliant
+
+
+
+def totoo(x):
+    if x is False:
+        print("recursion!")
+        return
+    totoo(False) # Noncompliant
+    try:
+        totoo(False) # Noncompliant
+    finally:
+        totoo = None
+        totoo(False) # Noncompliant
+    totoo(False)  # Noncompliant
+
+
+
+def tutu():
+    def my_rec(x):
+        if x is False:
+            print("yeah")
+            return
+        my_rec(False)
+    try:
+        my_rec(True)
+    finally:
+        my_rec = None
