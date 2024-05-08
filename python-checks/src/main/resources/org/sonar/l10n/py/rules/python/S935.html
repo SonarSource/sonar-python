@@ -1,8 +1,8 @@
 <p>This rule raises an issue when a special method returns an object of an unexpected type.</p>
 <h2>Why is this an issue?</h2>
 <p>Python allows developers to customize how code is interpreted by defining special methods (also called magic methods). For example, it is possible
-to define the objects own truthiness or falsiness by iverriding <code>__bool__</code> method. It is invoked when the built-in <code>bool()</code>
-function is called on an object. The <code>bool()</code> function returns <code>True</code> or <code>False</code> based on the truth value of the
+to define an object’s own truthiness or falsiness by overriding <code>__bool__</code> method. It is invoked when the built-in <code>bool()</code>
+function is called on the object. The <code>bool()</code> function returns <code>True</code> or <code>False</code> based on the truth value of the
 object.</p>
 <p>The Python interpreter will call these methods when performing the operation they’re associated with. Each special method expects a specific return
 type. Calls to a special method will throw a <code>TypeError</code> if its return type is incorrect.</p>

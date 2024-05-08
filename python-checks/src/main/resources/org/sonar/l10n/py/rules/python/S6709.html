@@ -40,7 +40,7 @@ should be used instead. This is reported by rule {rule:python:S6711}.</p>
 <h3>Exception</h3>
 <p>In contexts that are not related to data science and machine learning, having a predictable seed may not be the desired behavior. Therefore, this
 rule will only raise issues if machine learning and data science libraries are being used.</p>
-<h2>How to fix it</h2>
+<h2>How to fix it in Numpy</h2>
 <p>To fix this issue, provide a predictable seed to the random number generator.</p>
 <h3>Code examples</h3>
 <h4>Noncompliant code example</h4>
@@ -59,10 +59,39 @@ def foo():
     generator = np.random.default_rng(42)  # Compliant
     x = generator.uniform()
 </pre>
+<h2>How to fix it in Scikit-Learn</h2>
+<p>To fix this issue, provide a predictable seed to the estimator or the utility function.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+from sklearn.model_selection import train_test_split
+from sklearn.datasets import load_iris
+
+X, y = load_iris(return_X_y=True)
+X_train, _, y_train, _ = train_test_split(X, y) # Noncompliant: no seed parameter is provided
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="2" data-diff-type="compliant">
+from sklearn.model_selection import train_test_split
+from sklearn.datasets import load_iris
+import numpy as np
+
+rng = np.random.default_rng(42)
+X, y = load_iris(return_X_y=True)
+X_train, _, y_train, _ = train_test_split(X, y, random_state=rng.integers(1)) # Compliant
+</pre>
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
   <li> NumPy documentation - <a href="https://numpy.org/neps/nep-0019-rng-policy.html">NEP 19 RNG Policy</a> </li>
+  <li> Scikit-learn documentation - <a href="https://scikit-learn.org/stable/glossary.html#term-random_state">Glossary random_state</a> </li>
+  <li> Scikit-learn documentation - <a href="https://scikit-learn.org/stable/common_pitfalls.html#controlling-randomness">Controlling randomness</a>
+  </li>
+</ul>
+<h3>Standards</h3>
+<ul>
+  <li> STIG Viewer - <a href="https://stigviewer.com/stig/application_security_and_development/2023-06-08/finding/V-222642">Application Security and
+  Development: V-222642</a> - The application must not contain embedded authentication data. </li>
 </ul>
 <h3>Related rules</h3>
 <ul>

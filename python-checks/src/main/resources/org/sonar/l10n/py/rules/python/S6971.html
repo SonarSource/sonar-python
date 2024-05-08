@@ -1,7 +1,8 @@
 <p>This rule raises an issue when trying to access a Scikit-Learn transformer used in a pipeline with caching directly.</p>
 <h2>Why is this an issue?</h2>
-<p>When using a pipeline with a cache and passing the transformer objects as an instance from a variable, it is possible to access them directly.</p>
-<p>This is an issue, since when the Pipeline is fitted, all the transformers are cloned. The objects outside the Pipeline are therefore not updated,
+<p>When using a pipeline with a cache and passing the transformer objects as an instance from a variable, it is possible to access the transformer
+objects directly.</p>
+<p>This is an issue since all the transformers are cloned when the Pipeline is fitted, and therefore, the objects outside the Pipeline are not updated
 and will yield unexpected results.</p>
 <h2>How to fix it</h2>
 <p>Replace the direct access to the transformer with an access to the <code>named_steps</code> attribute of the pipeline.</p>
