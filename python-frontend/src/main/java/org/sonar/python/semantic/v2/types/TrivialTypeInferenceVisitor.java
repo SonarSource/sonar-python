@@ -357,14 +357,14 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
       }
     }
 
-    bindingUsages.stream()
+/*    bindingUsages.stream()
       .findFirst()
       .filter(UsageV2::isBindingUsage)
       .map(UsageV2::tree)
       .filter(Expression.class::isInstance)
       .map(Expression.class::cast)
       .map(Expression::typeV2)
-      .ifPresent(type -> setTypeToName(name, type));
+      .ifPresent(type -> setTypeToName(name, type));*/
   }
 
   private PythonType currentType() {

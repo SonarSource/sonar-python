@@ -228,3 +228,13 @@ def reassigned_function():
         def my_callable(): ...
         my_callable = 42
         my_callable()  # Noncompliant
+
+
+def reassigned_class():
+    if cond:
+        class MyClass(): ...
+        MyClass()  # OK
+    else:
+        def MyClass(): ...
+        MyClass = 42
+        MyClass()  # Noncompliant
