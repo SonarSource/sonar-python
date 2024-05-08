@@ -666,6 +666,19 @@ class TypeInferenceV2Test {
   }
 
   @Test
+  void recursive_function() {
+    FileInput fileInput = inferTypes("""
+      def my_recursive_func(n):
+        ...
+        my_recursive_func(n-1)
+      """);
+    FunctionDef functionDef = ((FunctionDef) fileInput.statements().statements().get(0));
+    FunctionType functionType = (FunctionType) functionDef.name().typeV2();
+    CallExpression call = (CallExpression) PythonTestUtils.getAllDescendant(fileInput, tree -> tree.is(Tree.Kind.CALL_EXPR)).get(0);
+    assertThat(call.callee().typeV2()).isEqualTo(functionType);
+  }
+
+  @Test
   void flow_insensitive_when_try_except() {
     FileInput fileInput = inferTypes("""
       try:
