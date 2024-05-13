@@ -184,4 +184,9 @@ public record ClassType(
   public int hashCode() {
     return Objects.hash(name, members, attributes, superClasses);
   }
+
+  @Override
+  public String toString() {
+    return "ClassType[%s]".formatted(name);
+  }
 }
