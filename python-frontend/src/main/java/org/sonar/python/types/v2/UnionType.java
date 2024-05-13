@@ -42,6 +42,18 @@ public record UnionType(Set<PythonType> candidates) implements PythonType {
     return Optional.of(name);
   }
 
+
+  /**
+   * For UnionType, hasMember will return true if all alternatives have the member
+   * It will return false if all alternatives DON'T have the member
+   * It will return unknown in all other cases
+   */
+  @Override
+  public TriBool hasMember(String memberName) {
+    Set<TriBool> uniqueResult = candidates.stream().map(c -> c.hasMember(memberName)).collect(Collectors.toSet());
+    return uniqueResult.size() == 1 ? uniqueResult.iterator().next() : TriBool.UNKNOWN;
+  }
+
   @Override
   public boolean isCompatibleWith(PythonType another) {
     return candidates.isEmpty() || candidates.stream()

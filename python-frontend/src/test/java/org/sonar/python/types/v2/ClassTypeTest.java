@@ -57,6 +57,7 @@ public class ClassTypeTest {
     assertThat(classType.hasUnresolvedHierarchy()).isFalse();
     // TODO: not correct
     assertThat(classType.key()).isEqualTo("C[]");
+    assertThat(classType).hasToString("ClassType[C]");
 
     assertThat(classType.hasMember("__call__")).isEqualTo(TriBool.TRUE);
     assertThat(classType.hasMember("unknown")).isEqualTo(TriBool.UNKNOWN);

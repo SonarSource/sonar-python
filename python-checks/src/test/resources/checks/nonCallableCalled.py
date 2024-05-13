@@ -40,7 +40,7 @@ def call_noncallable(p):
       x = 42
     else:
       x = 'str'
-    x() # FN: multiple assignment not handled
+    x() # Noncompliant
 
 
 def call_no_name():
@@ -49,12 +49,12 @@ def call_no_name():
 def flow_sensitivity():
   my_var = "hello"
   my_var = 42
-  my_var() # FN: multiple assignment not handled
+  my_var() # Noncompliant
 
   my_other_var = func
   my_other_var() # OK
   my_other_var = 42
-  my_other_var() # FN: multiple assignment not handled
+  my_other_var() # Noncompliant
 
 def flow_sensitivity_nested_try_except():
   def func_with_try_except():
@@ -66,7 +66,7 @@ def flow_sensitivity_nested_try_except():
   def other_func():
     my_var = "hello"
     my_var = 42
-    my_var() # FN: multiple assignments
+    my_var() # Noncompliant
 
 def member_access():
   my_callable = MyCallable()
