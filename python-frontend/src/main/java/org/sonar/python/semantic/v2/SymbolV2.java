@@ -39,7 +39,7 @@ public record SymbolV2(String name, @Nullable String fullyQualifiedName, List<Us
     }
   }
 
-  boolean hasSingleBindingUsage() {
+  public boolean hasSingleBindingUsage() {
     return usages.stream().filter(UsageV2::isBindingUsage).toList().size() == 1;
   }
 }
