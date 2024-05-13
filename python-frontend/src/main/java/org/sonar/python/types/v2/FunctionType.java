@@ -70,4 +70,10 @@ public record FunctionType(
   public int hashCode() {
     return Objects.hash(name, attributes, parameters, returnType, isAsynchronous, hasDecorators, isInstanceMethod, hasVariadicParameter);
   }
+
+
+  @Override
+  public String toString() {
+    return "FunctionType[%s]".formatted(name);
+  }
 }

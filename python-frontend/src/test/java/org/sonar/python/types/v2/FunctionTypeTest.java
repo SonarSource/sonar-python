@@ -46,6 +46,7 @@ class FunctionTypeTest {
     assertThat(functionType.isAsynchronous()).isFalse();
     assertThat(functionType.parameters()).isEmpty();
     assertThat(functionType.displayName()).contains("Callable");
+    assertThat(functionType).hasToString("FunctionType[fn]");
     assertThat(functionType.unwrappedType()).isEqualTo(functionType);
     assertThat(functionType.instanceDisplayName()).isEmpty();
     String fileId = SymbolUtils.pathOf(pythonFile).toString();
