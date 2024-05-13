@@ -217,7 +217,7 @@ some_nonlocal_var = 42
 
 def using_nonlocal_var():
     nonlocal some_nonlocal_var
-    some_nonlocal_var()  # Noncompliant
+    some_nonlocal_var()  # OK
 
 
 def reassigned_function():
