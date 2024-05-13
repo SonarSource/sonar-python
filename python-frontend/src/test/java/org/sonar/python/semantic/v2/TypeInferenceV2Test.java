@@ -287,7 +287,6 @@ class TypeInferenceV2Test {
   }
 
   @Test
-  @Disabled("Single assigned is approximated for now")
   void inferTypesInsideFunction1() {
     FileInput root = inferTypes("""
       x = 42
