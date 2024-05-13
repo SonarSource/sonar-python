@@ -17,31 +17,33 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.semantic.v2;
+package org.sonar.python.semantic.v2.types;
 
-import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
+import org.sonar.plugins.python.api.tree.ClassDef;
+import org.sonar.plugins.python.api.tree.FunctionDef;
+import org.sonar.plugins.python.api.tree.TryStatement;
 
-public record UsageV2(Tree tree, Kind kind) {
+public class TryStatementVisitor extends BaseTreeVisitor {
+  // TODO: could be replaced with TreeUtils method call
+  private boolean hasTryStatement = false;
 
-  public boolean isBindingUsage() {
-    return kind() != UsageV2.Kind.OTHER && kind() != UsageV2.Kind.GLOBAL_DECLARATION;
+  @Override
+  public void visitClassDef(ClassDef classDef) {
+    // Don't visit nested classes
   }
 
-  public enum Kind {
-    ASSIGNMENT_LHS,
-    COMPOUND_ASSIGNMENT_LHS,
-    IMPORT,
-    LOOP_DECLARATION,
-    COMP_DECLARATION,
-    OTHER,
-    PARAMETER,
-    FUNC_DECLARATION,
-    CLASS_DECLARATION,
-    EXCEPTION_INSTANCE,
-    WITH_INSTANCE,
-    GLOBAL_DECLARATION,
-    PATTERN_DECLARATION,
-    TYPE_PARAM_DECLARATION,
-    TYPE_ALIAS_DECLARATION,
+  @Override
+  public void visitFunctionDef(FunctionDef visited) {
+    // Don't visit nested functions
+  }
+
+  @Override
+  public void visitTryStatement(TryStatement tryStatement) {
+    hasTryStatement = true;
+  }
+
+  public boolean hasTryStatement() {
+    return hasTryStatement;
   }
 }

@@ -65,23 +65,23 @@ public record ClassType(
 
   @Override
   public boolean isCompatibleWith(PythonType another) {
-    if (another instanceof ObjectType) {
-      return this.isCompatibleWith(((ObjectType) another).type());
+    if (another instanceof ObjectType objectType) {
+      return this.isCompatibleWith(objectType.type());
     }
-    if (another instanceof UnionType) {
-      return ((UnionType) another).candidates().stream().anyMatch(c -> this.isCompatibleWith(c));
+    if (another instanceof UnionType unionType) {
+      return unionType.candidates().stream().anyMatch(this::isCompatibleWith);
     }
-    if (another instanceof FunctionType) {
-      return this.isCompatibleWith(((FunctionType) another).returnType());
+    if (another instanceof FunctionType functionType) {
+      return this.isCompatibleWith(functionType.returnType());
     }
-    if (another instanceof ClassType) {
-      var other = (ClassType) another;
-      var isASubClass = this.isASubClassFrom(other);
-      var areAttributeCompatible = this.areAttributesCompatible(other);
-      var isDuckTypeCompatible = !this.members.isEmpty() && other.members.stream().allMatch(member -> this.members.contains(member));
-      return Objects.equals(this, another) || "builtins.object".equals(other.name()) ||
-        isDuckTypeCompatible ||
-        (isASubClass && areAttributeCompatible);
+    if (another instanceof ClassType classType) {
+      var isASubClass = this.isASubClassFrom(classType);
+      var areAttributeCompatible = this.areAttributesCompatible(classType);
+      var isDuckTypeCompatible = !this.members.isEmpty() && this.members.containsAll(classType.members);
+      return Objects.equals(this, another)
+        || "builtins.object".equals(classType.name())
+        || isDuckTypeCompatible
+        || (isASubClass && areAttributeCompatible);
     }
     return true;
   }

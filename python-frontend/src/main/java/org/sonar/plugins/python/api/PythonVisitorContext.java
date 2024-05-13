@@ -48,7 +48,7 @@ public class PythonVisitorContext extends PythonInputFileContext {
     SymbolTableBuilder symbolTableBuilder = packageName != null ? new SymbolTableBuilder(packageName, pythonFile) : new SymbolTableBuilder(pythonFile);
     symbolTableBuilder.visitFileInput(rootTree);
     var symbolTable = new SymbolTableBuilderV2(rootTree).build();
-    rootTree.accept(new TypeInferenceV2(new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty()), pythonFile, symbolTable));
+    new TypeInferenceV2(new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty()), pythonFile, symbolTable).inferTypes(rootTree);
   }
 
   public PythonVisitorContext(FileInput rootTree, PythonFile pythonFile, @Nullable File workingDirectory, String packageName,
@@ -60,7 +60,7 @@ public class PythonVisitorContext extends PythonInputFileContext {
 
     var symbolTable = new SymbolTableBuilderV2(rootTree)
       .build();
-    rootTree.accept(new TypeInferenceV2(new ProjectLevelTypeTable(projectLevelSymbolTable), pythonFile, symbolTable));
+    new TypeInferenceV2(new ProjectLevelTypeTable(projectLevelSymbolTable), pythonFile, symbolTable).inferTypes(rootTree);
   }
 
   public PythonVisitorContext(FileInput rootTree, PythonFile pythonFile, @Nullable File workingDirectory, String packageName,
@@ -71,7 +71,7 @@ public class PythonVisitorContext extends PythonInputFileContext {
     new SymbolTableBuilder(packageName, pythonFile, projectLevelSymbolTable).visitFileInput(rootTree);
     var symbolTable = new SymbolTableBuilderV2(rootTree)
       .build();
-    rootTree.accept(new TypeInferenceV2(new ProjectLevelTypeTable(projectLevelSymbolTable), pythonFile, symbolTable));
+    new TypeInferenceV2(new ProjectLevelTypeTable(projectLevelSymbolTable), pythonFile, symbolTable).inferTypes(rootTree);
   }
 
   public PythonVisitorContext(PythonFile pythonFile, RecognitionException parsingException) {
