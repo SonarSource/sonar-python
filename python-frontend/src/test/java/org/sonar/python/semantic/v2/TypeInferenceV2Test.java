@@ -574,7 +574,6 @@ class TypeInferenceV2Test {
   }
 
   @Test
-  @Disabled("ObjectType[PythonType.UNKNOWN] should just be PythonType.UNKNOWN")
   void call_expression() {
     assertThat(lastExpression(
       "f()").typeV2()).isEqualTo(PythonType.UNKNOWN);
@@ -607,14 +606,13 @@ class TypeInferenceV2Test {
   }
 
   @Test
-  @Disabled("Flow insensitive type inference scope issue")
   void variable_outside_function_3() {
     assertThat(lastExpression(
       """
       def foo():
         a = 42
       a
-      """).type()).isEqualTo(PythonType.UNKNOWN);
+      """).typeV2()).isEqualTo(PythonType.UNKNOWN);
   }
 
   @Test
