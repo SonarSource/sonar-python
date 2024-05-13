@@ -24,6 +24,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Disabled;
@@ -796,6 +797,36 @@ class TypeInferenceV2Test {
     assertThat(((UnionType) thirdX.expression().typeV2()).candidates()).extracting(PythonType::unwrappedType).containsExactlyInAnyOrder(INT_TYPE, STR_TYPE);
     assertThat(((UnionType) thirdY.expression().typeV2()).candidates()).extracting(PythonType::unwrappedType).containsExactlyInAnyOrder(INT_TYPE, STR_TYPE);
     assertThat(((UnionType) thirdZ.expression().typeV2()).candidates()).extracting(PythonType::unwrappedType).containsExactlyInAnyOrder(INT_TYPE, STR_TYPE);
+  }
+
+  @Test
+  void try_except_list_attributes() {
+    FileInput fileInput = inferTypes("""
+      try:
+        my_list = [1, 2, 3]
+        type(my_list)
+      except:
+        my_list = ["a", "b", "c"]
+        type(my_list)
+      type(my_list)
+      """);
+
+    List<CallExpression> calls = PythonTestUtils.getAllDescendant(fileInput, tree -> tree.is(Tree.Kind.CALL_EXPR));
+    RegularArgument list1 = (RegularArgument) calls.get(0).arguments().get(0);
+    RegularArgument list2 = (RegularArgument) calls.get(1).arguments().get(0);
+    RegularArgument list3 = (RegularArgument) calls.get(2).arguments().get(0);
+
+    UnionType listType = (UnionType) list1.expression().typeV2();
+    assertThat(listType.candidates()).extracting(PythonType::unwrappedType).containsExactlyInAnyOrder(LIST_TYPE, LIST_TYPE);
+    assertThat(listType.candidates())
+      .map(ObjectType.class::cast)
+      .flatExtracting(ObjectType::attributes)
+      .extracting(PythonType::unwrappedType)
+      .containsExactlyInAnyOrder(INT_TYPE, STR_TYPE);
+
+    assertThat(list2.expression().typeV2()).isEqualTo(listType);
+    assertThat(list3.expression().typeV2()).isEqualTo(listType);
+
   }
 
   private static FileInput inferTypes(String lines) {

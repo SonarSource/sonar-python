@@ -26,7 +26,6 @@ import java.util.Map;
 import java.util.Set;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Name;
-import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.semantic.v2.SymbolV2;
 import org.sonar.python.semantic.v2.UsageV2;
 import org.sonar.python.tree.NameImpl;
@@ -55,8 +54,7 @@ public class Assignment {
     workList.push(expression);
     while (!workList.isEmpty()) {
       Expression e = workList.pop();
-      if (e.is(Tree.Kind.NAME)) {
-        Name name = (Name) e;
+      if (e instanceof Name name) {
         SymbolV2 symbol = name.symbolV2();
         if (symbol != null && trackedVars.contains(symbol)) {
           variableDependencies.add(symbol);
