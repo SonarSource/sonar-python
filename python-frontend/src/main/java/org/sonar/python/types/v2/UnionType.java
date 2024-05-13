@@ -20,13 +20,13 @@
 package org.sonar.python.types.v2;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
-public record UnionType(List<PythonType> candidates) implements PythonType {
-  public UnionType() {
-    this(List.of());
-  }
+public record UnionType(Set<PythonType> candidates) implements PythonType {
 
   @Override
   public Optional<String> displayName() {
@@ -38,12 +38,34 @@ public record UnionType(List<PythonType> candidates) implements PythonType {
         return Optional.empty();
       }
     }
-    return Optional.of("Union[%s]".formatted(String.join(", ", candidateNames)));
+    String name = candidateNames.stream().sorted().collect(Collectors.joining(", ", "Union[", "]"));
+    return Optional.of(name);
   }
 
   @Override
   public boolean isCompatibleWith(PythonType another) {
     return candidates.isEmpty() || candidates.stream()
       .anyMatch(candidate -> candidate.isCompatibleWith(another));
+  }
+
+  public static PythonType or(PythonType type1, PythonType type2) {
+    if (type1.equals(PythonType.UNKNOWN) || type2.equals(PythonType.UNKNOWN)) {
+      return PythonType.UNKNOWN;
+    }
+    if (type1.equals(type2)) {
+      return type1;
+    }
+    Set<PythonType> types = new HashSet<>();
+    addTypes(type1, types);
+    addTypes(type2, types);
+    return new UnionType(types);
+  }
+
+  private static void addTypes(PythonType type, Set<PythonType> types) {
+    if (type instanceof UnionType unionType) {
+      types.addAll(unionType.candidates());
+    } else {
+      types.add(type);
+    }
   }
 }

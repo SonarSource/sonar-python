@@ -17,31 +17,11 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.semantic.v2;
+package org.sonar.python.semantic.v2.types;
 
-import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.python.semantic.v2.SymbolV2;
 
-public record UsageV2(Tree tree, Kind kind) {
-
-  public boolean isBindingUsage() {
-    return kind() != UsageV2.Kind.OTHER && kind() != UsageV2.Kind.GLOBAL_DECLARATION;
-  }
-
-  public enum Kind {
-    ASSIGNMENT_LHS,
-    COMPOUND_ASSIGNMENT_LHS,
-    IMPORT,
-    LOOP_DECLARATION,
-    COMP_DECLARATION,
-    OTHER,
-    PARAMETER,
-    FUNC_DECLARATION,
-    CLASS_DECLARATION,
-    EXCEPTION_INSTANCE,
-    WITH_INSTANCE,
-    GLOBAL_DECLARATION,
-    PATTERN_DECLARATION,
-    TYPE_PARAM_DECLARATION,
-    TYPE_ALIAS_DECLARATION,
-  }
+public record Assignment(SymbolV2 lhsSymbol, Name lhsName, Expression rhs) {
 }

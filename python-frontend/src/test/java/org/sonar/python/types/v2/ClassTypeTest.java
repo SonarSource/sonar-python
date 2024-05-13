@@ -199,7 +199,7 @@ public class ClassTypeTest {
       "C = \"hello\"");
     var symbolTable = new SymbolTableBuilderV2(fileInput)
       .build();
-    fileInput.accept(new TypeInferenceV2(new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty()), pythonFile, symbolTable));
+    new TypeInferenceV2(new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty()), pythonFile, symbolTable).inferTypes(fileInput);
 
     ClassDef classDef = (ClassDef) fileInput.statements().statements().get(0);
     PythonType pythonType = classDef.name().typeV2();
@@ -223,7 +223,7 @@ public class ClassTypeTest {
     );
     var symbolTable = new SymbolTableBuilderV2(fileInput)
       .build();
-    fileInput.accept(new TypeInferenceV2(new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty()), pythonFile, symbolTable));
+    new TypeInferenceV2(new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty()), pythonFile, symbolTable).inferTypes(fileInput);
 
     ClassDef classDef = (ClassDef) fileInput.statements().statements().get(1);
     PythonType pythonType = classDef.name().typeV2();
@@ -485,6 +485,17 @@ public class ClassTypeTest {
   }
 
   @Test
+  void classTypeAmbiguousMember() {
+    ClassType classType = classType("""
+      class MyClass:
+        def foo(param): ...
+        def foo(param, other_param): ...
+      """);
+    assertThat(classType.resolveMember("foo")).contains(PythonType.UNKNOWN);
+    assertThat(classType.resolveMember("bar")).isEmpty();
+  }
+
+  @Test
   @Disabled("TODO: resolve static members")
   void static_member_usages() {
     ClassType classType = classType(
@@ -569,7 +580,7 @@ public class ClassTypeTest {
     );
     var symbolTable = new SymbolTableBuilderV2(fileInput)
       .build();
-    fileInput.accept(new TypeInferenceV2(new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty()), pythonFile, symbolTable));
+    new TypeInferenceV2(new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty()), pythonFile, symbolTable).inferTypes(fileInput);
     ClassDef firstDef = (ClassDef) fileInput.statements().statements().get(0);
     ClassDef innerClass = (ClassDef) firstDef.body().statements().get(0);
     FunctionDef functionDef = (FunctionDef) firstDef.body().statements().get(1);
@@ -619,7 +630,7 @@ public class ClassTypeTest {
     FileInput fileInput = parseWithoutSymbols(code);
     var symbolTable = new SymbolTableBuilderV2(fileInput)
       .build();
-    fileInput.accept(new TypeInferenceV2(new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty()), pythonFile, symbolTable));
+    new TypeInferenceV2(new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty()), pythonFile, symbolTable).inferTypes(fileInput);
     return PythonTestUtils.getAllDescendant(fileInput, t -> t.is(Tree.Kind.CLASSDEF))
       .stream()
       .map(ClassDef.class::cast)

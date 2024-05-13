@@ -20,12 +20,15 @@
 package org.sonar.python.semantic.v2;
 
 import java.io.File;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.symbols.Symbol;
@@ -37,6 +40,9 @@ import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.ImportFrom;
 import org.sonar.plugins.python.api.tree.ImportName;
+import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.tree.Statement;
+import org.sonar.plugins.python.api.tree.StatementList;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.PythonTestUtils;
 import org.sonar.python.TestPythonVisitorRunner;
@@ -46,7 +52,9 @@ import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.types.v2.ClassType;
 import org.sonar.python.types.v2.FunctionType;
 import org.sonar.python.types.v2.ModuleType;
+import org.sonar.python.types.v2.ObjectType;
 import org.sonar.python.types.v2.PythonType;
+import org.sonar.python.types.v2.UnionType;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.PythonTestUtils.parseWithoutSymbols;
@@ -55,6 +63,8 @@ class TypeInferenceV2Test {
   private static FileInput fileInput;
 
   static PythonFile pythonFile = PythonTestUtils.pythonFile("");
+
+  static ModuleType BUILTINS = new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty()).getModule();
 
   @BeforeAll
   static void init() {
@@ -67,7 +77,7 @@ class TypeInferenceV2Test {
     var pythonFile = PythonTestUtils.pythonFile("script.py");
     var symbolTable = new SymbolTableBuilderV2(fileInput)
       .build();
-    fileInput.accept(new TypeInferenceV2(new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty()), pythonFile, symbolTable));
+    new TypeInferenceV2(new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty()), pythonFile, symbolTable).inferTypes(fileInput);
 
     System.out.println("hello");
   }
@@ -266,16 +276,243 @@ class TypeInferenceV2Test {
     Assertions.assertThat(expressionStatement.expressions().get(0).typeV2()).isEqualTo(PythonType.UNKNOWN);
   }
 
-  private FileInput inferTypes(String lines) {
+  @Test
+  void inferTypeForReassignedVariables() {
+    var root = inferTypes("""
+      a = 42
+      print(a)
+      a = "Bob"
+      print(a)
+      a = "Marley"
+      print(a)
+      """);
+
+    var aName = TreeUtils.firstChild(root.statements().statements().get(0), Name.class::isInstance)
+      .map(Name.class::cast)
+      .get();
+
+    Assertions.assertThat(aName)
+      .isNotNull()
+      .extracting(Name::symbolV2)
+      .isNotNull();
+
+    var aSymbol = aName.symbolV2();
+    Assertions.assertThat(aSymbol.usages()).hasSize(6);
+
+    var typeNames = aSymbol.usages()
+      .stream()
+      .map(UsageV2::tree)
+      .map(Name.class::cast)
+      .sorted(Comparator.comparing(n -> n.firstToken().line()))
+      .map(Expression::typeV2)
+      .filter(ObjectType.class::isInstance)
+      .map(ObjectType.class::cast)
+      .map(ObjectType::type)
+      .map(PythonType::name)
+      .toList();
+
+    Assertions.assertThat(typeNames).hasSize(6)
+      .containsExactly("int", "int", "str", "str", "str", "str");
+  }
+
+  @Test
+  void inferTypeForConditionallyReassignedVariables() {
+    var root = inferTypes("""
+      a = 42
+      if (b):
+        a = "Bob"
+      print(a)
+      """);
+
+    var aName = TreeUtils.firstChild(root.statements().statements().get(0), Name.class::isInstance)
+      .map(Name.class::cast)
+      .get();
+
+    Assertions.assertThat(aName)
+      .isNotNull()
+      .extracting(Name::symbolV2)
+      .isNotNull();
+
+    var aSymbol = aName.symbolV2();
+    Assertions.assertThat(aSymbol.usages()).hasSize(3);
+
+    var types = aSymbol.usages()
+      .stream()
+      .map(UsageV2::tree)
+      .map(Name.class::cast)
+      .sorted(Comparator.comparing(n -> n.firstToken().line()))
+      .map(Expression::typeV2)
+      .toList();
+
+    Assertions.assertThat(types).hasSize(3);
+
+    Assertions.assertThat(types.get(0)).isInstanceOf(ObjectType.class)
+      .extracting(ObjectType.class::cast)
+      .extracting(ObjectType::type)
+      .isInstanceOf(ClassType.class)
+      .extracting(PythonType::name)
+      .isEqualTo("int");
+
+    Assertions.assertThat(types.get(1)).isInstanceOf(ObjectType.class)
+      .extracting(ObjectType.class::cast)
+      .extracting(ObjectType::type)
+      .isInstanceOf(ClassType.class)
+      .extracting(PythonType::name)
+      .isEqualTo("str");
+
+    Assertions.assertThat(types.get(2)).isInstanceOf(UnionType.class);
+    var type3 = (UnionType) types.get(2);
+    Assertions.assertThat(type3.candidates())
+      .hasSize(2)
+      .extracting(ObjectType.class::cast)
+      .extracting(ObjectType::type)
+      .extracting(ClassType.class::cast)
+      .extracting(ClassType::name)
+      .containsExactlyInAnyOrder("int", "str");
+  }
+
+  @Test
+  @Disabled("Resulting type should not be tuple")
+  void unpacking_assignment() {
+    assertThat(lastExpression(
+      """
+      x, = 42,
+      x
+      """
+    ).typeV2()).isEqualTo(PythonType.UNKNOWN);
+  }
+
+  @Test
+  void unpacking_assignment_2() {
+    assertThat(lastExpression(
+      """
+      x, y = 42, 43
+      x
+      """
+    ).typeV2()).isEqualTo(PythonType.UNKNOWN);
+  }
+
+  @Test
+  void multiple_lhs_expressions() {
+    assertThat(lastExpression(
+      """
+      x = y = 42
+      x
+      """
+    ).typeV2()).isEqualTo(PythonType.UNKNOWN);
+  }
+
+  @Test
+  void compoundAssignmentStr() {
+    assertThat(lastExpression("""
+      a = 42
+      a += 1
+      a
+      """).typeV2().displayName()).contains("int");
+  }
+
+  @Test
+  void compoundAssignmentList() {
+    assertThat(lastExpression("""
+        a = []
+        b = 'world'
+        a += b
+        a
+        """).typeV2().displayName()).contains("list");
+  }
+
+  @Test
+  void annotation_with_reassignment() {
+    assertThat(lastExpression("""
+        a = "foo"
+        b: int = a
+        b
+        """).typeV2().displayName()).contains("str");
+  }
+
+  @Test
+  @Disabled("ObjectType[PythonType.UNKNOWN] should just be PythonType.UNKNOWN")
+  void call_expression() {
+    assertThat(lastExpression(
+      "f()").typeV2()).isEqualTo(PythonType.UNKNOWN);
+
+    assertThat(lastExpression("""
+        def f(): pass
+        f()
+        """).typeV2()).isEqualTo(PythonType.UNKNOWN);
+
+    assertThat(lastExpression(
+      """
+      class A: pass
+      A()
+      """).typeV2().displayName()).contains("A");
+  }
+
+  @Test
+  void variable_outside_function() {
+    assertThat(lastExpression("a = 42; a").typeV2().displayName()).contains("int");
+  }
+
+  @Test
+  @Disabled("Flow insensitive type inference scope issue")
+  void variable_outside_function_2() {
+    assertThat(lastExpression(
+      """
+        a = 42
+        def foo(): a
+        """).typeV2()).isEqualTo(PythonType.UNKNOWN);
+  }
+
+  @Test
+  @Disabled("Flow insensitive type inference scope issue")
+  void variable_outside_function_3() {
+    assertThat(lastExpression(
+      """
+      def foo():
+        a = 42
+      a
+      """).type()).isEqualTo(PythonType.UNKNOWN);
+  }
+
+  @Test
+  void variable_outside_function_4() {
+    assertThat(lastExpression(
+      """
+      a = 42
+      def foo():
+        a = 'hello'
+      a
+      """).typeV2().displayName()).contains("int");
+  }
+
+  private static FileInput inferTypes(String lines) {
     return inferTypes(lines, new HashMap<>());
   }
 
-  private FileInput inferTypes(String lines, Map<String, Set<Symbol>> globalSymbols) {
+  private static FileInput inferTypes(String lines, Map<String, Set<Symbol>> globalSymbols) {
     FileInput root = parseWithoutSymbols(lines);
 
     var symbolTable = new SymbolTableBuilderV2(root)
       .build();
-    root.accept(new TypeInferenceV2(new ProjectLevelTypeTable(ProjectLevelSymbolTable.from(globalSymbols)), pythonFile, symbolTable));
+    new TypeInferenceV2(new ProjectLevelTypeTable(ProjectLevelSymbolTable.from(globalSymbols)), pythonFile, symbolTable).inferTypes(root);
     return root;
+  }
+
+  public static Expression lastExpression(String lines) {
+    FileInput fileInput = inferTypes(lines);
+    Statement statement = lastStatement(fileInput.statements());
+    if (!(statement instanceof ExpressionStatement)) {
+      assertThat(statement).isInstanceOf(FunctionDef.class);
+      FunctionDef fnDef = (FunctionDef) statement;
+      statement = lastStatement(fnDef.body());
+    }
+    assertThat(statement).isInstanceOf(ExpressionStatement.class);
+    List<Expression> expressions = ((ExpressionStatement) statement).expressions();
+    return expressions.get(expressions.size() - 1);
+  }
+
+  private static Statement lastStatement(StatementList statementList) {
+    List<Statement> statements = statementList.statements();
+    return statements.get(statements.size() - 1);
   }
 }
