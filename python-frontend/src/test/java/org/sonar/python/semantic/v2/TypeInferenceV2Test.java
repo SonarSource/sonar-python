@@ -41,6 +41,7 @@ import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.ImportFrom;
 import org.sonar.plugins.python.api.tree.ImportName;
 import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.plugins.python.api.tree.StatementList;
@@ -990,6 +991,84 @@ class TypeInferenceV2Test {
     assertThat(list2.expression().typeV2()).isEqualTo(listType);
     assertThat(list3.expression().typeV2()).isEqualTo(listType);
 
+  }
+
+  @Test
+  void inferTypeForQualifiedExpression() {
+    var root = inferTypes("""
+      class A:
+        def foo():
+           ...
+      def f():
+        a = A()
+        a.foo()
+      """);
+
+    var qualifiedExpression = TreeUtils.firstChild(root.statements().statements().get(1), QualifiedExpression.class::isInstance)
+      .map(QualifiedExpression.class::cast)
+      .get();
+
+    Assertions.assertThat(qualifiedExpression)
+      .isNotNull()
+      .extracting(QualifiedExpression::typeV2)
+      .isNotNull();
+
+    var qualifiedExpressionType = qualifiedExpression.typeV2();
+    Assertions.assertThat(qualifiedExpressionType)
+      .isInstanceOf(FunctionType.class)
+      .extracting(PythonType::name)
+      .isEqualTo("foo");
+  }
+
+
+  @Test
+  void inferBuiltinsTypeForQualifiedExpression() {
+    var root = inferTypes("""
+      a = [42]
+      a.append(1)
+      """);
+
+    var qualifiedExpression = TreeUtils.firstChild(root.statements().statements().get(1), QualifiedExpression.class::isInstance)
+      .map(QualifiedExpression.class::cast)
+      .get();
+
+    Assertions.assertThat(qualifiedExpression)
+      .isNotNull()
+      .extracting(QualifiedExpression::typeV2)
+      .isNotNull();
+
+    var qualifiedExpressionType = qualifiedExpression.typeV2();
+    Assertions.assertThat(qualifiedExpressionType)
+      .isInstanceOf(FunctionType.class)
+      .extracting(PythonType::name)
+      .isEqualTo("append");
+  }
+
+  @Test
+  @Disabled("Attribute types resolving")
+  void inferBuiltinsAttributeTypeForQualifiedExpression() {
+    var root = inferTypes("""
+      def f():
+        e = OSError()
+        e.errno
+      """);
+
+    var qualifiedExpression = TreeUtils.firstChild(root.statements().statements().get(0), QualifiedExpression.class::isInstance)
+      .map(QualifiedExpression.class::cast)
+      .get();
+
+    Assertions.assertThat(qualifiedExpression)
+      .isNotNull()
+      .extracting(QualifiedExpression::typeV2)
+      .isNotNull();
+
+    var qualifiedExpressionType = qualifiedExpression.typeV2();
+    Assertions.assertThat(qualifiedExpressionType)
+      .isInstanceOf(ObjectType.class)
+      .extracting(ObjectType.class::cast)
+      .extracting(ObjectType::type)
+      .extracting(PythonType::name)
+      .isEqualTo("int");
   }
 
   private static FileInput inferTypes(String lines) {

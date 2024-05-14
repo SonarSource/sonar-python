@@ -255,3 +255,8 @@ def nested_recursive_try_finally():
         my_rec(True)
     finally:
         my_rec = None
+
+def call_non_callable_property():
+    e = OSError()
+    e.errno()  # FN
+
