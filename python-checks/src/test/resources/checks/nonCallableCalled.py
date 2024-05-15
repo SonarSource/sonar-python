@@ -260,3 +260,9 @@ def call_non_callable_property():
     e = OSError()
     e.errno()  # FN
 
+class MyClass:
+    x = 42
+
+def foo():
+    mc = MyClass()
+    mc.x()

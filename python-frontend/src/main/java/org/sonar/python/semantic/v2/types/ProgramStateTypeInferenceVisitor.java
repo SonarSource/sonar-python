@@ -23,6 +23,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Stream;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
+import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
@@ -30,6 +31,9 @@ import org.sonar.python.tree.NameImpl;
 import org.sonar.python.types.v2.PythonType;
 import org.sonar.python.types.v2.UnionType;
 
+/**
+ * Used in FlowSensitiveTypeInference to update name types based on program state
+ */
 public class ProgramStateTypeInferenceVisitor extends BaseTreeVisitor {
   private final TypeInferenceProgramState state;
 
@@ -57,9 +61,9 @@ public class ProgramStateTypeInferenceVisitor extends BaseTreeVisitor {
   public void visitQualifiedExpression(QualifiedExpression qualifiedExpression) {
     scan(qualifiedExpression.qualifier());
     if (qualifiedExpression.name() instanceof NameImpl name) {
-      qualifiedExpression.qualifier()
-        .typeV2()
-        .resolveMember(name.name())
+      Optional.of(qualifiedExpression.qualifier())
+        .map(Expression::typeV2)
+        .flatMap(t -> t.resolveMember(name.name()))
         .ifPresent(name::typeV2);
     }
   }

@@ -68,6 +68,7 @@ import static org.sonar.python.types.v2.TypesTestUtils.STR_TYPE;
 class TypeInferenceV2Test {
 
   static PythonFile pythonFile = PythonTestUtils.pythonFile("");
+  private static ProjectLevelTypeTable projectLevelTypeTable;
 
   @Test
   void testTypeshedImports() {
@@ -1004,6 +1005,12 @@ class TypeInferenceV2Test {
         a.foo()
       """);
 
+    var fooMethodType = TreeUtils.firstChild(root.statements().statements().get(0), FunctionDef.class::isInstance)
+      .map(FunctionDef.class::cast)
+      .map(FunctionDef::name)
+      .map(Expression::typeV2)
+      .get();
+
     var qualifiedExpression = TreeUtils.firstChild(root.statements().statements().get(1), QualifiedExpression.class::isInstance)
       .map(QualifiedExpression.class::cast)
       .get();
@@ -1015,9 +1022,92 @@ class TypeInferenceV2Test {
 
     var qualifiedExpressionType = qualifiedExpression.typeV2();
     Assertions.assertThat(qualifiedExpressionType)
+      .isSameAs(fooMethodType)
       .isInstanceOf(FunctionType.class)
       .extracting(PythonType::name)
       .isEqualTo("foo");
+  }
+
+  @Test
+  void inferTypeForVariableAssignedToQualifiedExpression() {
+    var root = inferTypes("""
+      class A:
+        def foo():
+           ...
+      def f():
+        a = A()
+        b = a.foo
+        b()
+      """);
+
+    var fooMethodType = TreeUtils.firstChild(root.statements().statements().get(0), FunctionDef.class::isInstance)
+      .map(FunctionDef.class::cast)
+      .map(FunctionDef::name)
+      .map(Expression::typeV2)
+      .get();
+
+    var qualifiedExpression = TreeUtils.firstChild(root.statements().statements().get(1), QualifiedExpression.class::isInstance)
+      .map(QualifiedExpression.class::cast)
+      .get();
+
+    Assertions.assertThat(qualifiedExpression)
+      .isNotNull()
+      .extracting(QualifiedExpression::typeV2)
+      .isNotNull();
+
+    var qualifiedExpressionType = qualifiedExpression.typeV2();
+    Assertions.assertThat(qualifiedExpressionType)
+      .isSameAs(fooMethodType)
+      .isInstanceOf(FunctionType.class)
+      .extracting(PythonType::name)
+      .isEqualTo("foo");
+
+    var bType = TreeUtils.firstChild(root.statements().statements().get(1), FunctionDef.class::isInstance)
+      .map(FunctionDef.class::cast)
+      .map(FunctionDef::body)
+      .map(StatementList::statements)
+      .map(s -> s.get(2))
+      .flatMap(s -> TreeUtils.firstChild(s, Name.class::isInstance))
+      .map(Name.class::cast)
+      .map(Expression::typeV2)
+      .get();
+
+    Assertions.assertThat(qualifiedExpressionType).isSameAs(bType);
+  }
+
+  @Test
+  @Disabled("Member overrides are not supported")
+  void inferTypeForOverridenMemberQualifiedExpression() {
+    var root = inferTypes("""
+      class A:
+        def foo():
+           ...
+      def f():
+        a = A()
+        a.foo = 42
+        a.foo()
+      """);
+
+
+    var fBodyStatements = TreeUtils.firstChild(root.statements().statements().get(1), FunctionDef.class::isInstance)
+      .map(FunctionDef.class::cast)
+      .map(FunctionDef::body)
+      .map(StatementList::statements)
+      .get();
+
+
+    var qualifiedExpressionType = TreeUtils.firstChild(fBodyStatements.get(2), QualifiedExpression.class::isInstance)
+      .map(QualifiedExpression.class::cast)
+      .map(QualifiedExpression::typeV2)
+      .map(PythonType::unwrappedType)
+      .get();
+
+    var builtinsIntType = projectLevelTypeTable.getModule()
+      .resolveMember("int")
+      .get();
+
+    Assertions.assertThat(qualifiedExpressionType)
+      .isSameAs(builtinsIntType);
   }
 
 
@@ -1037,11 +1127,39 @@ class TypeInferenceV2Test {
       .extracting(QualifiedExpression::typeV2)
       .isNotNull();
 
+    var builtinsListType = projectLevelTypeTable.getModule()
+      .resolveMember("list")
+      .get();
+
+    var builtinsAppendType = builtinsListType.resolveMember("append").get();
+
+    var qualifierType = qualifiedExpression.qualifier().typeV2().unwrappedType();
+    Assertions.assertThat(qualifierType).isSameAs(builtinsListType);
+
     var qualifiedExpressionType = qualifiedExpression.typeV2();
     Assertions.assertThat(qualifiedExpressionType)
+      .isSameAs(builtinsAppendType)
       .isInstanceOf(FunctionType.class)
       .extracting(PythonType::name)
       .isEqualTo("append");
+  }
+
+  @Test
+  void inferUnknownTypeNestedQualifiedExpression() {
+    var root = inferTypes("""
+      def f():
+        a = foo()
+        a.b.c
+      """);
+
+    var qualifiedExpression = TreeUtils.firstChild(root.statements().statements().get(0), QualifiedExpression.class::isInstance)
+      .map(QualifiedExpression.class::cast)
+      .get();
+
+    Assertions.assertThat(qualifiedExpression)
+      .isNotNull()
+      .extracting(QualifiedExpression::typeV2)
+      .isNotNull();
   }
 
   @Test
@@ -1080,7 +1198,8 @@ class TypeInferenceV2Test {
 
     var symbolTable = new SymbolTableBuilderV2(root)
       .build();
-    new TypeInferenceV2(new ProjectLevelTypeTable(ProjectLevelSymbolTable.from(globalSymbols)), pythonFile, symbolTable).inferTypes(root);
+    projectLevelTypeTable = new ProjectLevelTypeTable(ProjectLevelSymbolTable.from(globalSymbols));
+    new TypeInferenceV2(projectLevelTypeTable, pythonFile, symbolTable).inferTypes(root);
     return root;
   }
 
