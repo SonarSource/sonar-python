@@ -19,6 +19,7 @@
  */
 package org.sonar.python.semantic.v2;
 
+import java.util.List;
 import java.util.Set;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -27,6 +28,7 @@ import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.ImportName;
 import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.PythonTestUtils;
 import org.sonar.python.tree.TreeUtils;
 
@@ -94,6 +96,7 @@ class SymbolTableBuilderV2Test {
         global a
         def script_do_something(param):
             global b
+            b = 42
        
         """
     );
@@ -115,6 +118,34 @@ class SymbolTableBuilderV2Test {
       .hasSize(3)
       .extracting(SymbolV2::name)
       .contains("a", "b", "script_do_something");
+  }
+
+  @Test
+  void testNonLocalSymbol() {
+    FileInput fileInput = PythonTestUtils.parse(
+      """
+        def foo():
+          a = 42
+          def inner(param):
+            nonlocal a
+            a = "hello"
+            print(a)
+       
+        """
+    );
+
+    var symbolTable = new SymbolTableBuilderV2(fileInput)
+      .build();
+
+    var moduleSymbols = symbolTable.getSymbolsByRootTree(fileInput);
+    List<FunctionDef> functionDefs = PythonTestUtils.getAllDescendant(fileInput, tree -> tree.is(Tree.Kind.FUNCDEF));
+
+    Set<SymbolV2> fooSymbols = symbolTable.getSymbolsByRootTree(functionDefs.get(0));
+    Set<SymbolV2> innerSymbols = symbolTable.getSymbolsByRootTree(functionDefs.get(1));
+
+    Assertions.assertThat(moduleSymbols).extracting(SymbolV2::name).containsExactlyInAnyOrder("foo");
+    Assertions.assertThat(fooSymbols).extracting(SymbolV2::name).containsExactlyInAnyOrder("a", "inner");
+    Assertions.assertThat(innerSymbols).extracting(SymbolV2::name).containsExactlyInAnyOrder("param");
   }
 
   @Test
