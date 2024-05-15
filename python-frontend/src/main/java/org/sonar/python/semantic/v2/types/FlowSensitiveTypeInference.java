@@ -27,6 +27,7 @@ import org.sonar.plugins.python.api.tree.AnnotatedAssignment;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.CompoundAssignmentStatement;
 import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.ForStatement;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Parameter;
@@ -88,6 +89,8 @@ public class FlowSensitiveTypeInference extends ForwardAnalysis {
       handleDefinition(functionDef, state);
     } else if (element instanceof Parameter parameter) {
       handleParameter(parameter, state);
+    } else if (isForLoopAssignment(element)) {
+      handleLoopAssignment(element, state);
     } else {
       // Here we should run "isinstance" visitor when we handle declared types, to avoid FPs when type guard checks are made
       updateTree(element, state);
@@ -108,6 +111,27 @@ public class FlowSensitiveTypeInference extends ForwardAnalysis {
 
   private static void updateTree(Tree tree, TypeInferenceProgramState state) {
     tree.accept(new ProgramStateTypeInferenceVisitor(state));
+  }
+
+
+  private static boolean isForLoopAssignment(Tree tree) {
+    return tree instanceof Name && tree.parent() instanceof ForStatement forStatement && forStatement.expressions().contains(tree);
+  }
+
+  private void handleLoopAssignment(Tree element, TypeInferenceProgramState state) {
+    Optional.of(element)
+      .map(Tree::parent)
+      .filter(ForStatement.class::isInstance)
+      .map(ForStatement.class::cast)
+      .ifPresent(forStatement -> {
+        forStatement.testExpressions().forEach(t -> updateTree(t, state));
+        Optional.ofNullable(assignmentsByAssignmentStatement.get(forStatement))
+          .filter(assignment -> trackedVars.contains(assignment.lhsSymbol()))
+          .ifPresent(assignment -> Optional.of(assignment)
+            .map(Assignment::rhsType)
+            .ifPresent(collectionItemType -> state.setTypes(assignment.lhsSymbol(), Set.of(collectionItemType)))
+          );
+      });
   }
 
   private void handleAssignment(Statement assignmentStatement, TypeInferenceProgramState programState) {

@@ -20,6 +20,7 @@
 package org.sonar.python.types.v2;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -60,6 +61,12 @@ public record UnionType(Set<PythonType> candidates) implements PythonType {
       .anyMatch(candidate -> candidate.isCompatibleWith(another));
   }
 
+  public static PythonType or(Collection<PythonType> candidates) {
+    return candidates
+      .stream()
+      .reduce(new UnionType(new HashSet<>()), UnionType::or);
+  }
+
   public static PythonType or(PythonType type1, PythonType type2) {
     if (type1.equals(PythonType.UNKNOWN) || type2.equals(PythonType.UNKNOWN)) {
       return PythonType.UNKNOWN;
@@ -70,6 +77,9 @@ public record UnionType(Set<PythonType> candidates) implements PythonType {
     Set<PythonType> types = new HashSet<>();
     addTypes(type1, types);
     addTypes(type2, types);
+    if (types.size() == 1) {
+      return types.iterator().next();
+    }
     return new UnionType(types);
   }
 

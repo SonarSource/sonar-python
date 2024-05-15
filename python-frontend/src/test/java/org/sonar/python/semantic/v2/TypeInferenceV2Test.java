@@ -19,12 +19,14 @@
  */
 package org.sonar.python.semantic.v2;
 
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Stream;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -36,6 +38,7 @@ import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.ExpressionStatement;
 import org.sonar.plugins.python.api.tree.FileInput;
+import org.sonar.plugins.python.api.tree.ForStatement;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.ImportFrom;
 import org.sonar.plugins.python.api.tree.ImportName;
@@ -56,6 +59,7 @@ import org.sonar.python.types.v2.ObjectType;
 import org.sonar.python.types.v2.ParameterV2;
 import org.sonar.python.types.v2.PythonType;
 import org.sonar.python.types.v2.UnionType;
+import org.sonar.python.types.v2.UnknownType;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.PythonTestUtils.parse;
@@ -637,7 +641,6 @@ class TypeInferenceV2Test {
   }
 
   @Test
-  @Disabled("Flow insensitive type inference scope issue")
   void variable_outside_function_2() {
     assertThat(lastExpression(
       """
@@ -1174,6 +1177,274 @@ class TypeInferenceV2Test {
       .isNotNull()
       .extracting(QualifiedExpression::typeV2)
       .isNotNull();
+  }
+
+  @Test
+  void inferLoopVarType() {
+    var root = inferTypes("""
+      def f():
+        l = [1,2,3]
+        for i in l:
+          i
+      """);
+
+    var iType = TreeUtils.firstChild(root.statements().statements().get(0), ExpressionStatement.class::isInstance)
+      .map(ExpressionStatement.class::cast)
+      .flatMap(expressionStatement -> TreeUtils.firstChild(expressionStatement, Name.class::isInstance))
+      .map(Name.class::cast)
+      .map(Expression::typeV2)
+      .get();
+
+    Assertions.assertThat(iType).isInstanceOf(ObjectType.class)
+      .extracting(PythonType::unwrappedType)
+      .isInstanceOf(ClassType.class)
+      .isEqualTo(INT_TYPE);
+  }
+
+  @Test
+  void inferLoopOverLiteralVarType() {
+    var root = inferTypes("""
+      def f():
+        for i in [1,2,3]:
+          i
+      """);
+
+    var iType = TreeUtils.firstChild(root.statements().statements().get(0), ExpressionStatement.class::isInstance)
+      .map(ExpressionStatement.class::cast)
+      .flatMap(expressionStatement -> TreeUtils.firstChild(expressionStatement, Name.class::isInstance))
+      .map(Name.class::cast)
+      .map(Expression::typeV2)
+      .get();
+
+    Assertions.assertThat(iType).isInstanceOf(ObjectType.class)
+      .extracting(PythonType::unwrappedType)
+      .isInstanceOf(ClassType.class)
+      .isEqualTo(INT_TYPE);
+  }
+
+  @Test
+  void inferLoopOverLiteralVarTypeCallable() {
+    var root = inferTypes("""
+      def foo():
+        print("foo")
+      
+      def bar():
+        print("bar")
+      
+      def f():
+        l = [foo, bar]
+        for i in l:
+          i
+      """);
+
+    var fooType = TreeUtils.firstChild(root.statements().statements().get(0), FunctionDef.class::isInstance)
+      .map(FunctionDef.class::cast)
+      .map(FunctionDef::name)
+      .map(Expression::typeV2)
+      .get();
+
+    var barType = TreeUtils.firstChild(root.statements().statements().get(1), FunctionDef.class::isInstance)
+      .map(FunctionDef.class::cast)
+      .map(FunctionDef::name)
+      .map(Expression::typeV2)
+      .get();
+
+
+    var iType = TreeUtils.firstChild(root.statements().statements().get(2), ExpressionStatement.class::isInstance)
+      .map(ExpressionStatement.class::cast)
+      .flatMap(expressionStatement -> TreeUtils.firstChild(expressionStatement, Name.class::isInstance))
+      .map(Name.class::cast)
+      .map(Expression::typeV2)
+      .get();
+
+    Assertions.assertThat(iType).isInstanceOf(UnionType.class);
+    var candidates = ((UnionType) iType).candidates();
+    Assertions.assertThat(candidates)
+      .allMatch(FunctionType.class::isInstance)
+      .contains(fooType, barType);
+  }
+
+  @Test
+  @Disabled("Need to support collection item type modification")
+  void inferLoopOverModifiedList() {
+    var root = inferTypes("""
+      def f():
+        l = [1,2,3]
+        l.append("1")
+        for i in l:
+          i
+      """);
+
+    var iType = TreeUtils.firstChild(root, ForStatement.class::isInstance)
+      .map(ForStatement.class::cast)
+      .map(ForStatement::body)
+      .flatMap(b -> TreeUtils.firstChild(b, ExpressionStatement.class::isInstance))
+      .flatMap(expressionStatement -> TreeUtils.firstChild(expressionStatement, Name.class::isInstance))
+      .map(Name.class::cast)
+      .map(Expression::typeV2)
+      .get();
+
+    Assertions.assertThat(iType).isInstanceOf(ObjectType.class)
+      .extracting(PythonType::unwrappedType)
+      .isEqualTo(INT_TYPE);
+  }
+
+  @Test
+  @Disabled("Need to support collection item type modification")
+  void inferLoopOverFlowSensitivePopulatedItemsList() {
+    var root = inferTypes("""
+      def f(b):
+        a = 1
+        if (b):
+          a = "1"
+        l = [a]
+        for i in l:
+          i
+      """);
+
+    var iType = TreeUtils.firstChild(root, ForStatement.class::isInstance)
+      .map(ForStatement.class::cast)
+      .map(ForStatement::body)
+      .flatMap(b -> TreeUtils.firstChild(b, ExpressionStatement.class::isInstance))
+      .flatMap(expressionStatement -> TreeUtils.firstChild(expressionStatement, Name.class::isInstance))
+      .map(Name.class::cast)
+      .map(Expression::typeV2)
+      .get();
+
+    Assertions.assertThat(iType).isInstanceOf(UnionType.class);
+
+    var candidates = ((UnionType) iType).candidates();
+    Assertions.assertThat(candidates)
+      .allMatch(ObjectType.class::isInstance)
+      .extracting(PythonType::unwrappedType)
+      .contains(INT_TYPE, STR_TYPE);
+  }
+
+  @Test
+  @Disabled("We should consider the declared return type of the __iter__ method here")
+  void inferLoopOverCustomIterableVarType() {
+    var root = inferTypes("""
+      from typing import Iterator
+      
+      class MyIterable[T]:
+        def __iter__(self) -> Iterator[str]:
+          ...
+      
+      def f():
+        a = MyIterable[int]()
+        for i in a:
+          i
+      """);
+
+    var iType = TreeUtils.firstChild(root, ForStatement.class::isInstance)
+      .map(ForStatement.class::cast)
+      .map(ForStatement::body)
+      .flatMap(b -> TreeUtils.firstChild(b, ExpressionStatement.class::isInstance))
+      .map(ExpressionStatement.class::cast)
+      .flatMap(expressionStatement -> TreeUtils.firstChild(expressionStatement, Name.class::isInstance))
+      .map(Name.class::cast)
+      .map(Expression::typeV2)
+      .get();
+
+    Assertions.assertThat(iType).isInstanceOf(ObjectType.class)
+      .extracting(PythonType::unwrappedType)
+      .isInstanceOf(ClassType.class)
+      .isEqualTo(STR_TYPE);
+  }
+
+
+  @Test
+  void inferLoopOverUnknownVarType() {
+    var root = inferTypes("""
+      def f(l):
+        for i in l:
+          i
+      """);
+
+    var iType = TreeUtils.firstChild(root.statements().statements().get(0), ExpressionStatement.class::isInstance)
+      .map(ExpressionStatement.class::cast)
+      .flatMap(expressionStatement -> TreeUtils.firstChild(expressionStatement, Name.class::isInstance))
+      .map(Name.class::cast)
+      .map(Expression::typeV2)
+      .get();
+
+    Assertions.assertThat(iType).isInstanceOf(UnknownType.class)
+      .isSameAs(PythonType.UNKNOWN);
+  }
+
+  @Test
+  void inferLoopOverNonIterableVarType() {
+    var root = inferTypes("""
+      def f():
+        l = 1
+        for i in l:
+          i
+      """);
+
+    var iType = TreeUtils.firstChild(root.statements().statements().get(0), ExpressionStatement.class::isInstance)
+      .map(ExpressionStatement.class::cast)
+      .flatMap(expressionStatement -> TreeUtils.firstChild(expressionStatement, Name.class::isInstance))
+      .map(Name.class::cast)
+      .map(Expression::typeV2)
+      .get();
+
+    Assertions.assertThat(iType).isInstanceOf(UnknownType.class)
+      .isSameAs(PythonType.UNKNOWN);
+  }
+
+  @Test
+  void inferLoopOverNonIterableVarTypeInTry() {
+    var root = inferTypes("""
+      def f():
+        try:
+          l = 1
+          for i in l:
+            i
+        except:
+          ...
+      """);
+
+    var iType = TreeUtils.firstChild(root.statements().statements().get(0), ExpressionStatement.class::isInstance)
+      .map(ExpressionStatement.class::cast)
+      .flatMap(expressionStatement -> TreeUtils.firstChild(expressionStatement, Name.class::isInstance))
+      .map(Name.class::cast)
+      .map(Expression::typeV2)
+      .get();
+
+    Assertions.assertThat(iType).isInstanceOf(UnknownType.class)
+      .isSameAs(PythonType.UNKNOWN);
+  }
+
+  @Test
+  void hasUnknownListItemType() {
+    var root = inferTypes("""
+      def f(i):
+        l = [1,2,i]
+      """);
+
+    var lType = TreeUtils.firstChild(root.statements().statements().get(0), AssignmentStatement.class::isInstance)
+      .map(AssignmentStatement.class::cast)
+      .map(AssignmentStatement::lhsExpressions)
+      .map(Collection::stream)
+      .flatMap(Stream::findFirst)
+      .flatMap(expressionStatement -> TreeUtils.firstChild(expressionStatement, Name.class::isInstance))
+      .map(Name.class::cast)
+      .map(Expression::typeV2)
+      .get();
+
+    Assertions.assertThat(lType).isInstanceOf(ObjectType.class)
+      .extracting(PythonType::unwrappedType)
+      .isInstanceOf(ClassType.class)
+      .extracting(PythonType::name)
+      .isEqualTo("list");
+
+    Assertions.assertThat(lType)
+      .extracting(ObjectType.class::cast)
+      .extracting(ObjectType::attributes)
+      .asList()
+      .hasSize(1)
+      .contains(PythonType.UNKNOWN);
+
   }
 
   @Test

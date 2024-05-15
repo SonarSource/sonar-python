@@ -310,3 +310,42 @@ def nested_function_in_try_catch():
         ...
     def bar():
         foo()
+
+
+
+def f1():
+    ...
+
+def f2():
+    ...
+
+def callable_from_loop_try_except():
+    l = [f1, f2]
+    try:
+        for i in l:
+            i()
+    except:
+        ...
+
+def non_callable_from_loop_try_except():
+    l = ["f1", "f2"]
+    try:
+        for i in l:
+            i() # Noncompliant
+    except:
+        ...
+
+
+def callable_from_loop_append_noncallable():
+    l = [f1, f2]
+    l.append("1")
+    for i in l:
+        i() # FN
+
+
+def callable_from_loop_append_noncallable():
+    l = ["1"]
+    possible_modiffication(l)
+    for i in l:
+        # FP
+        i() # Noncompliant
