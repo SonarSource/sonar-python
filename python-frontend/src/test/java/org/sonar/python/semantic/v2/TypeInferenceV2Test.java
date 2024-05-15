@@ -396,16 +396,15 @@ class TypeInferenceV2Test {
   void inferTypeForReassignedBuiltinsInsideFunction() {
     FileInput root = inferTypes("""
       def foo():
-        global list
-        list = 42
-        list = "hello"
-        list
+        global x
+        x = 42
+        x = "hello"
+        x
       """);
 
     var functionDef = (FunctionDef) root.statements().statements().get(0);
     var expressionStatement = (ExpressionStatement) functionDef.body().statements().get(3);
-    // TODO: Shouldn't this be UNKNOWN due to glboal?
-    assertThat(expressionStatement.expressions().get(0).typeV2().unwrappedType()).isEqualTo(STR_TYPE);
+    assertThat(expressionStatement.expressions().get(0).typeV2().unwrappedType()).isEqualTo(PythonType.UNKNOWN);
   }
 
   @Test
