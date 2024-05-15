@@ -49,6 +49,7 @@ import org.sonar.plugins.python.api.tree.ImportFrom;
 import org.sonar.plugins.python.api.tree.ImportName;
 import org.sonar.plugins.python.api.tree.LambdaExpression;
 import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.tree.NonlocalStatement;
 import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.ParameterList;
 import org.sonar.plugins.python.api.tree.Token;
@@ -281,8 +282,17 @@ public class WriteUsagesVisitor extends ScopeVisitor {
   @Override
   public void visitGlobalStatement(GlobalStatement globalStatement) {
     // Global statements are not binding usages, but we consider them as such for symbol creation
-    globalStatement.variables().forEach(name -> moduleScope.addBindingUsage(name, UsageV2.Kind.GLOBAL_DECLARATION, null));
+    globalStatement.variables().forEach(name -> {
+      moduleScope.addBindingUsage(name, UsageV2.Kind.GLOBAL_DECLARATION, null);
+      currentScope().addGlobalName(name);
+    });
     super.visitGlobalStatement(globalStatement);
+  }
+
+  @Override
+  public void visitNonlocalStatement(NonlocalStatement pyNonlocalStatementTree) {
+    pyNonlocalStatementTree.variables().forEach(name -> currentScope().addNonLocalName(name));
+    super.visitNonlocalStatement(pyNonlocalStatementTree);
   }
 
   @Override

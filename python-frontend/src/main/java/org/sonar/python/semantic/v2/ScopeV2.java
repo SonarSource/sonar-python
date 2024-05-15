@@ -37,6 +37,8 @@ public class ScopeV2 {
   private final List<ScopeV2> childrenScopes;
   private final Map<String, SymbolV2> symbolsByName = new HashMap<>();
   private final Set<SymbolV2> symbols = new HashSet<>();
+  private final Set<String> globalNames = new HashSet<>();
+  private final Set<String> nonlocalNames = new HashSet<>();
 
   public ScopeV2(@Nullable ScopeV2 parent, Tree rootTree) {
     this.parent = parent;
@@ -79,8 +81,7 @@ public class ScopeV2 {
   }
 
   private boolean isExistingSymbol(String symbolName) {
-    //return symbolsByName.containsKey(symbolName) || globalNames.contains(symbolName) || nonlocalNames.contains(symbolName);
-    return symbolsByName.containsKey(symbolName);
+    return symbolsByName.containsKey(symbolName) || globalNames.contains(symbolName) || nonlocalNames.contains(symbolName);
   }
 
   void createSelfParameter(Parameter parameter) {
@@ -94,6 +95,14 @@ public class ScopeV2 {
     symbols.add(symbol);
     symbolsByName.put(symbolName, symbol);
     symbol.addUsage(nameTree, UsageV2.Kind.PARAMETER);
+  }
+
+  public void addGlobalName(Name name) {
+    this.globalNames.add(name.name());
+  }
+
+  public void addNonLocalName(Name name) {
+    this.nonlocalNames.add(name.name());
   }
 
   public Map<String, SymbolV2> symbols() {
