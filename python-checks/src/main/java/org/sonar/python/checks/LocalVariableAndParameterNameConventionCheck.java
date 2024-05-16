@@ -57,7 +57,6 @@ public class LocalVariableAndParameterNameConventionCheck extends PythonSubscrip
   private Pattern constantPattern;
   private Pattern pattern;
 
-
   @Override
   public void initialize(Context context) {
     pattern = Pattern.compile(format);
@@ -69,8 +68,7 @@ public class LocalVariableAndParameterNameConventionCheck extends PythonSubscrip
     });
   }
 
-
-  private Optional<Set<String>> getOverriddenParameterNames(FunctionDef functionDef) {
+  private static Set<String> getOverriddenParameterNames(FunctionDef functionDef) {
     return Optional.of(functionDef)
       .map(FunctionDef::name)
       .map(HasSymbol::symbol)
@@ -80,11 +78,10 @@ public class LocalVariableAndParameterNameConventionCheck extends PythonSubscrip
       .map(f -> f.parameters().stream()
         .map(FunctionSymbol.Parameter::name)
         .collect(Collectors.toSet())
-      )
-      ;
+      ).orElseGet(Set::of);
   }
 
-  private void checkName(Symbol symbol, SubscriptionContext ctx, Optional<Set<String>> overriddenParameterNames) {
+  private void checkName(Symbol symbol, SubscriptionContext ctx, Set<String> overriddenParameterNames) {
     String name = symbol.name();
     if (!pattern.matcher(name).matches()) {
       if (isType(symbol)) {
@@ -95,15 +92,15 @@ public class LocalVariableAndParameterNameConventionCheck extends PythonSubscrip
         .filter(usage -> USAGES.contains(usage.kind()))
         .sorted(Comparator.comparingInt(u -> u.tree().firstToken().line()))
         .limit(1)
-        .filter(usage -> isNotOverriddenName(usage, symbol, overriddenParameterNames))
+        .filter(usage -> !isOverriddenName(usage, symbol, overriddenParameterNames))
         .forEach(usage -> raiseIssueForNameAndUsage(ctx, name, usage));
     }
   }
 
-  private boolean isNotOverriddenName(Usage usage, Symbol symbol, Optional<Set<String>> overriddenParameterNames) {
-    return usage.kind() != Usage.Kind.PARAMETER || overriddenParameterNames
-      .map(s -> !s.contains(symbol.name()))
-      .orElse(true);
+  private boolean isOverriddenName(Usage usage, Symbol symbol, Set<String> overriddenParameterNames) {
+    return usage.kind() == Usage.Kind.PARAMETER
+      && !overriddenParameterNames.isEmpty()
+      && overriddenParameterNames.contains(symbol.name());
   }
 
   private static boolean isType(Symbol symbol) {
