@@ -21,16 +21,22 @@ package org.sonar.python.checks;
 
 import java.util.Comparator;
 import java.util.EnumSet;
+import java.util.Optional;
+import java.util.Set;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
-import org.sonar.plugins.python.api.tree.Expression;
-import org.sonar.plugins.python.api.tree.FunctionDef;
-import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
+import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.FunctionDef;
+import org.sonar.plugins.python.api.tree.HasSymbol;
+import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.semantic.SymbolUtils;
 
 @Rule(key = "S117")
 public class LocalVariableAndParameterNameConventionCheck extends PythonSubscriptionCheck {
@@ -58,11 +64,27 @@ public class LocalVariableAndParameterNameConventionCheck extends PythonSubscrip
     constantPattern = Pattern.compile(CONSTANT_PATTERN);
     context.registerSyntaxNodeConsumer(Tree.Kind.FUNCDEF, ctx -> {
       FunctionDef funcDef = (FunctionDef) ctx.syntaxNode();
-      funcDef.localVariables().stream().sorted(Comparator.comparing(Symbol::name)).forEach(s -> checkName(s, ctx));
+      var overriddenParameterNames = getOverriddenParameterNames(funcDef);
+      funcDef.localVariables().stream().sorted(Comparator.comparing(Symbol::name)).forEach(s -> checkName(s, ctx, overriddenParameterNames));
     });
   }
 
-  private void checkName(Symbol symbol, SubscriptionContext ctx) {
+
+  private Optional<Set<String>> getOverriddenParameterNames(FunctionDef functionDef) {
+    return Optional.of(functionDef)
+      .map(FunctionDef::name)
+      .map(HasSymbol::symbol)
+      .filter(FunctionSymbol.class::isInstance)
+      .map(FunctionSymbol.class::cast)
+      .flatMap(SymbolUtils::getOverriddenMethod)
+      .map(f -> f.parameters().stream()
+        .map(FunctionSymbol.Parameter::name)
+        .collect(Collectors.toSet())
+      )
+      ;
+  }
+
+  private void checkName(Symbol symbol, SubscriptionContext ctx, Optional<Set<String>> overriddenParameterNames) {
     String name = symbol.name();
     if (!pattern.matcher(name).matches()) {
       if (isType(symbol)) {
@@ -73,8 +95,15 @@ public class LocalVariableAndParameterNameConventionCheck extends PythonSubscrip
         .filter(usage -> USAGES.contains(usage.kind()))
         .sorted(Comparator.comparingInt(u -> u.tree().firstToken().line()))
         .limit(1)
+        .filter(usage -> isNotOverriddenName(usage, symbol, overriddenParameterNames))
         .forEach(usage -> raiseIssueForNameAndUsage(ctx, name, usage));
     }
+  }
+
+  private boolean isNotOverriddenName(Usage usage, Symbol symbol, Optional<Set<String>> overriddenParameterNames) {
+    return usage.kind() != Usage.Kind.PARAMETER || overriddenParameterNames
+      .map(s -> !s.contains(symbol.name()))
+      .orElse(true);
   }
 
   private static boolean isType(Symbol symbol) {

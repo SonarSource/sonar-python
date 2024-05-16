@@ -80,3 +80,11 @@ def type_variables_fp():
         ...
     MyClassAlias = MyClass  # OK
     MyTypeVariable: type = unknown_call()  # Noncompliant
+
+import json
+from typing import Any
+
+class CustomJSONEncoder(json.JSONEncoder):
+    """Custom JsonEncoder."""
+    def default(self, o: Any) -> dict[str, Any]:  # OK
+        ...
