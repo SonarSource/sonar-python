@@ -114,7 +114,7 @@ public class PythonCoverageSensor implements Sensor {
       CoberturaParser parser = new CoberturaParser();
       parser.parseReport(report, context, coverageMeasures);
       if (!parser.errors().isEmpty()) {
-        String parseErrors = String.join("%n", parser.errors());
+        String parseErrors = String.format(String.join("%n", parser.errors()));
         analysisWarnings.addUnique(String.format("The following error(s) occurred while trying to import coverage report:%n%s", parseErrors));
       }
     } catch (EmptyReportException e) {
