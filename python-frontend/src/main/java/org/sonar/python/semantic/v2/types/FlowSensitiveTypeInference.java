@@ -22,10 +22,8 @@ package org.sonar.python.semantic.v2.types;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
-import java.util.stream.Stream;
 import org.sonar.plugins.python.api.tree.AnnotatedAssignment;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
-import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.CompoundAssignmentStatement;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FunctionDef;
@@ -35,9 +33,7 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.cfg.fixpoint.ForwardAnalysis;
 import org.sonar.python.cfg.fixpoint.ProgramState;
 import org.sonar.python.semantic.v2.SymbolV2;
-import org.sonar.python.tree.NameImpl;
 import org.sonar.python.types.v2.PythonType;
-import org.sonar.python.types.v2.UnionType;
 
 public class FlowSensitiveTypeInference extends ForwardAnalysis {
   private final Set<SymbolV2> trackedVars;
@@ -99,31 +95,7 @@ public class FlowSensitiveTypeInference extends ForwardAnalysis {
   }
 
   private static void updateTree(Tree tree, TypeInferenceProgramState state) {
-    tree.accept(new BaseTreeVisitor() {
-      @Override
-      public void visitName(Name name) {
-        Optional.ofNullable(name.symbolV2()).ifPresent(symbol -> {
-          Set<PythonType> pythonTypes = state.getTypes(symbol);
-          if (!pythonTypes.isEmpty()) {
-            ((NameImpl) name).typeV2(union(pythonTypes.stream()));
-          }
-        });
-        super.visitName(name);
-      }
-
-      @Override
-      public void visitFunctionDef(FunctionDef pyFunctionDefTree) {
-        // skip inner functions
-      }
-    });
-  }
-
-  public static PythonType or(PythonType t1, PythonType t2) {
-    return UnionType.or(t1, t2);
-  }
-
-  public static PythonType union(Stream<PythonType> types) {
-    return types.reduce(FlowSensitiveTypeInference::or).orElse(PythonType.UNKNOWN);
+    tree.accept(new ProgramStateTypeInferenceVisitor(state));
   }
 
   private void handleAssignment(Statement assignmentStatement, TypeInferenceProgramState programState) {
