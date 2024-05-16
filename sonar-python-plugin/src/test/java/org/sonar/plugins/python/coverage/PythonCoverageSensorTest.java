@@ -305,10 +305,13 @@ class PythonCoverageSensorTest {
   void should_warn_if_source_is_not_directory() {
     settings.setProperty(PythonCoverageSensor.REPORT_PATHS_KEY, "coverage_source_invalid_directory.xml");
     coverageSensor.execute(context);
-    File file = new File("src/test/resources/org/sonar/plugins/python/coverage-reports/sources/file1.py");
-    String message = "Invalid directory path in 'source' element: " + file.getPath();
-    assertThat(logTester.logs(Level.WARN)).contains(message);
-    verify(analysisWarnings, times(1)).addUnique("The following error(s) occurred while trying to import coverage report:" + System.lineSeparator() + message);
+    File file1 = new File("src/test/resources/org/sonar/plugins/python/coverage-reports/sources/file1.py");
+    File file2 = new File("src/test/resources/org/sonar/plugins/python/coverage-reports/sources/file2.py");
+    String message1 = "Invalid directory path in 'source' element: " + file1.getPath();
+    String message2 = "Invalid directory path in 'source' element: " + file2.getPath();
+    assertThat(logTester.logs(Level.WARN)).contains(message1);
+    assertThat(logTester.logs(Level.WARN)).contains(message2);
+    verify(analysisWarnings, times(1)).addUnique("The following error(s) occurred while trying to import coverage report:" + System.lineSeparator() + message1 + System.lineSeparator() + message2);
   }
 
   @Test

@@ -22,7 +22,7 @@ package org.sonar.plugins.python.coverage;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -44,7 +44,7 @@ public class CoberturaParser {
 
   private static final Logger LOG = LoggerFactory.getLogger(CoberturaParser.class);
 
-  private final Set<String> errors = new HashSet<>();
+  private final Set<String> errors = new LinkedHashSet<>();
   private int unresolvedFilenameCount;
 
   public void parseReport(File xmlFile, SensorContext context, final Map<InputFile, NewCoverage> coverageData) throws XMLStreamException {
