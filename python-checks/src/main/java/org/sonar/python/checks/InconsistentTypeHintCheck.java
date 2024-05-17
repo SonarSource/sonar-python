@@ -23,16 +23,11 @@ import java.util.Optional;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
-import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.AnnotatedAssignment;
 import org.sonar.plugins.python.api.tree.Expression;
-import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.plugins.python.api.tree.TypeAnnotation;
-import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.tree.TreeUtils;
-import org.sonar.python.types.InferredTypes;
-import org.sonar.python.types.TypeShed;
+import org.sonar.python.types.v2.PythonType;
 
 @Rule(key = "S5890")
 public class InconsistentTypeHintCheck extends PythonSubscriptionCheck {
@@ -52,24 +47,19 @@ public class InconsistentTypeHintCheck extends PythonSubscriptionCheck {
   }
 
   private static void checkAnnotatedAssignment(SubscriptionContext ctx, AnnotatedAssignment annotatedAssignment, Expression assignedExpression) {
-    InferredType inferredType = assignedExpression.type();
-    TypeAnnotation annotation = annotatedAssignment.annotation();
-    InferredType expectedType = InferredTypes.fromTypeAnnotation(annotation);
-    if (expectedType.mustBeOrExtend("typing.TypedDict")) {
-      // Avoid FPs for TypedDict
-      return;
-    }
-    if (!inferredType.isCompatibleWith(expectedType) || isTypeUsedInsteadOfInstance(assignedExpression, expectedType)) {
-      String message = getIssueMessage(annotatedAssignment.variable(), inferredType, expectedType);
+    PythonType assignedType = assignedExpression.pythonType();
+    PythonType hintType = annotatedAssignment.variable().pythonType();
+    if (!assignedType.isCompatibleWith(hintType)) {
+      String message = getIssueMessage(annotatedAssignment.variable(), assignedType, hintType);
 
       ctx.addIssue(assignedExpression, message)
-        .secondary(annotation.expression(), null);
+        .secondary(annotatedAssignment.annotation().expression(), null);
     }
   }
 
-  private static String getIssueMessage(Expression variable, InferredType inferredType, InferredType expectedType) {
-    String expectedTypeName = InferredTypes.typeName(expectedType);
-    String inferredTypeName = InferredTypes.typeName(inferredType);
+  private static String getIssueMessage(Expression variable, PythonType inferredType, PythonType expectedType) {
+    String expectedTypeName = expectedType.displayName();
+    String inferredTypeName = inferredType.displayName();
 
     var variableName = Optional.ofNullable(TreeUtils.nameFromExpression(variable))
       .map(name -> "\"" + name + "\"")
@@ -87,15 +77,5 @@ public class InconsistentTypeHintCheck extends PythonSubscriptionCheck {
         expectedTypeName,
         inferredTypeNameMessage);
     }
-  }
-
-  private static boolean isTypeUsedInsteadOfInstance(Expression assignedExpression, InferredType expectedType) {
-    if (assignedExpression.is(Tree.Kind.NAME)) {
-      Name name = (Name) assignedExpression;
-      Symbol symbol = name.symbol();
-      return symbol != null && symbol.is(Symbol.Kind.CLASS) &&
-        !expectedType.isCompatibleWith(InferredTypes.runtimeType(TypeShed.typeShedClass("type")));
-    }
-    return false;
   }
 }
