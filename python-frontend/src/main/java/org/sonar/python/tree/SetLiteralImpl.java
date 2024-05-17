@@ -26,8 +26,11 @@ import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.TreeVisitor;
 import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.types.InferredTypes;
+import org.sonar.python.types.v2.PythonType;
 
 public class SetLiteralImpl extends DictOrSetLiteralImpl<Expression> implements SetLiteral {
+
+  private PythonType pythonType = PythonType.UNKNOWN;
 
   public SetLiteralImpl(Token lCurlyBrace, List<Expression> elements, List<Token> commas, Token rCurlyBrace) {
     super(lCurlyBrace, commas, elements, rCurlyBrace);
@@ -45,5 +48,15 @@ public class SetLiteralImpl extends DictOrSetLiteralImpl<Expression> implements 
   @Override
   public InferredType type() {
     return InferredTypes.SET;
+  }
+
+  @Override
+  public PythonType typeV2() {
+    return pythonType;
+  }
+
+  public SetLiteralImpl typeV2(PythonType pythonType) {
+    this.pythonType = pythonType;
+    return this;
   }
 }

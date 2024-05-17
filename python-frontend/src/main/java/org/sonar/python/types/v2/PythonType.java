@@ -17,19 +17,46 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.plugins.python.api.tree;
+package org.sonar.python.types.v2;
 
-import org.sonar.python.semantic.v2.SymbolV2;
+import java.util.Optional;
+import org.sonar.plugins.python.api.LocationInFile;
 
 /**
- * See https://docs.python.org/3/reference/expressions.html#atom-identifiers
+ * PythonType
  */
-public interface Name extends Expression, HasSymbol {
+public interface PythonType {
+  PythonType UNKNOWN = new UnknownType();
 
-  String name();
+  default String name() {
+    return this.toString();
+  }
 
-  // FIXME: we should create a separate tree for Variables
-  boolean isVariable();
+  default Optional<String> displayName() {
+    return Optional.empty();
+  }
 
-  SymbolV2 symbolV2();
+  default Optional<String> instanceDisplayName() {
+    return Optional.empty();
+  }
+
+  default boolean isCompatibleWith(PythonType another) {
+    return true;
+  }
+
+  default String key() {
+    return name();
+  }
+
+  default Optional<PythonType> resolveMember(String memberName) {
+    return Optional.empty();
+  }
+
+  default TriBool hasMember(String memberName) {
+    return TriBool.UNKNOWN;
+  }
+
+  default Optional<LocationInFile> definitionLocation() {
+    return Optional.empty();
+  }
 }

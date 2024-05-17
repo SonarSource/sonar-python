@@ -27,6 +27,9 @@ def call_noncallable(p):
     dict_var = {}
     dict_var()  # Noncompliant
 
+    set_literal = {1, 2}
+    set_literal()  # Noncompliant
+
     set_var = set()
     set_var()  # Noncompliant
 
@@ -37,17 +40,21 @@ def call_noncallable(p):
       x = 42
     else:
       x = 'str'
-    x() # Noncompliant {{Fix this call; "x" is not callable.}}
+    x() # FN: multiple assignment not handled
+
+
+def call_no_name():
+    42() # Noncompliant {{Fix this call; this expression has type int and it is not callable.}}
 
 def flow_sensitivity():
   my_var = "hello"
   my_var = 42
-  my_var() # Noncompliant
+  my_var() # FN: multiple assignment not handled
 
   my_other_var = func
   my_other_var() # OK
   my_other_var = 42
-  my_other_var() # Noncompliant
+  my_other_var() # FN: multiple assignment not handled
 
 def flow_sensitivity_nested_try_except():
   def func_with_try_except():
@@ -59,7 +66,7 @@ def flow_sensitivity_nested_try_except():
   def other_func():
     my_var = "hello"
     my_var = 42
-    my_var() # Noncompliant
+    my_var() # FN: multiple assignments
 
 def member_access():
   my_callable = MyCallable()
@@ -69,8 +76,7 @@ def member_access():
 def types_from_typeshed(foo):
   from math import acos
   from functools import wraps
-  acos(42)() # Noncompliant {{Fix this call; this expression has type float and it is not callable.}}
-# ^^^^^^^^
+  acos(42)() # FN: declared return type of Typeshed
   wraps(func)(foo) # OK, wraps returns a Callable
 
 def with_metaclass():
@@ -78,7 +84,8 @@ def with_metaclass():
   class Base(metaclass=Factory): ...
   class A(Base): ...
   a = A()
-  a() # OK
+  # TODO: resolve type hierarchy and metaclasses
+  a() # Noncompliant
 
 
 def decorators():
@@ -181,3 +188,33 @@ def typing_named_tuple_no_fp():
     from typing import NamedTuple
     Employee = NamedTuple('Employee', [('name', str), ('id', int)])
     employee = Employee("Sam", 42)
+
+
+class Parent:
+    def __call__(self):
+        ...
+
+class Child(Parent):
+    ...
+
+
+def inherited_call_method():
+    child = Child()
+    child()  # OK
+
+
+some_global_func = None
+
+def assigning_global(my_func):
+    global some_global_func
+    some_global_func = my_func
+
+def calling_global_func():
+    some_global_func()  # OK
+
+
+some_nonlocal_var = 42
+
+def using_nonlocal_var():
+    nonlocal some_nonlocal_var
+    some_nonlocal_var()  # Noncompliant

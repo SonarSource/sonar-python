@@ -17,19 +17,14 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.plugins.python.api.tree;
+package org.sonar.python.semantic.v2;
 
-import org.sonar.python.semantic.v2.SymbolV2;
+import org.sonar.plugins.python.api.LocationInFile;
+import org.sonar.python.types.v2.PythonType;
 
-/**
- * See https://docs.python.org/3/reference/expressions.html#atom-identifiers
- */
-public interface Name extends Expression, HasSymbol {
+public interface TypeBuilder<T extends PythonType> {
 
-  String name();
+  T build();
 
-  // FIXME: we should create a separate tree for Variables
-  boolean isVariable();
-
-  SymbolV2 symbolV2();
+  TypeBuilder<T> withDefinitionLocation(LocationInFile definitionLocation);
 }

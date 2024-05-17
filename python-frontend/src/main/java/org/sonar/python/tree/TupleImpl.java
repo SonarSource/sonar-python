@@ -30,6 +30,7 @@ import org.sonar.plugins.python.api.tree.TreeVisitor;
 import org.sonar.plugins.python.api.tree.Tuple;
 import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.types.InferredTypes;
+import org.sonar.python.types.v2.PythonType;
 
 public class TupleImpl extends PyTree implements Tuple {
 
@@ -37,6 +38,7 @@ public class TupleImpl extends PyTree implements Tuple {
   private final List<Expression> elements;
   private final List<Token> commas;
   private final Token rightParenthesis;
+  private PythonType pythonType = PythonType.UNKNOWN;
 
   public TupleImpl(@Nullable Token leftParenthesis, List<Expression> elements, List<Token> commas, @Nullable Token rightParenthesis) {
     this.leftParenthesis = leftParenthesis;
@@ -100,5 +102,15 @@ public class TupleImpl extends PyTree implements Tuple {
   @Override
   public InferredType type() {
     return InferredTypes.TUPLE;
+  }
+
+  @Override
+  public PythonType typeV2() {
+    return pythonType;
+  }
+
+  public TupleImpl typeV2(PythonType pythonType) {
+    this.pythonType = pythonType;
+    return this;
   }
 }

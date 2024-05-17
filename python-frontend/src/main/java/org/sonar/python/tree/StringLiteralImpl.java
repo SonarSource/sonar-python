@@ -31,11 +31,13 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TreeVisitor;
 import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.types.InferredTypes;
+import org.sonar.python.types.v2.PythonType;
 
 public class StringLiteralImpl extends PyTree implements StringLiteral {
 
   private final List<StringElement> stringElements;
   private static final Set<String> BYTES_PREFIXES = new HashSet<>(Arrays.asList("b", "B", "br", "Br", "bR", "BR", "rb", "rB", "Rb", "RB"));
+  private PythonType typeV2;
 
   StringLiteralImpl(List<StringElement> stringElements) {
     this.stringElements = stringElements;
@@ -76,5 +78,13 @@ public class StringLiteralImpl extends PyTree implements StringLiteral {
       return InferredTypes.anyType();
     }
     return InferredTypes.STR;
+  }
+
+  public PythonType typeV2() {
+    return this.typeV2;
+  }
+
+  public void typeV2(PythonType type) {
+    this.typeV2 = type;
   }
 }

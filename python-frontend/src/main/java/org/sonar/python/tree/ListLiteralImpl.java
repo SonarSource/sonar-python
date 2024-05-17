@@ -28,12 +28,15 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TreeVisitor;
 import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.types.InferredTypes;
+import org.sonar.python.types.v2.PythonType;
 
 public class ListLiteralImpl extends PyTree implements ListLiteral {
 
   private final Token leftBracket;
   private final ExpressionList elements;
   private final Token rightBracket;
+
+  private PythonType typeV2;
 
   public ListLiteralImpl(Token leftBracket, ExpressionList elements, Token rightBracket) {
     this.leftBracket = leftBracket;
@@ -74,5 +77,13 @@ public class ListLiteralImpl extends PyTree implements ListLiteral {
   @Override
   public InferredType type() {
     return InferredTypes.LIST;
+  }
+
+  public PythonType typeV2() {
+    return this.typeV2;
+  }
+
+  public void typeV2(PythonType type) {
+    this.typeV2 = type;
   }
 }

@@ -17,19 +17,33 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.plugins.python.api.tree;
+package org.sonar.python.types.v2;
 
-import org.sonar.python.semantic.v2.SymbolV2;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
-/**
- * See https://docs.python.org/3/reference/expressions.html#atom-identifiers
- */
-public interface Name extends Expression, HasSymbol {
+public record UnionType(List<PythonType> candidates) implements PythonType {
+  public UnionType() {
+    this(List.of());
+  }
 
-  String name();
+  @Override
+  public Optional<String> displayName() {
+    List<String> candidateNames = new ArrayList<>();
+    for (PythonType candidate : candidates) {
+      Optional<String> s = candidate.displayName();
+      s.ifPresent(candidateNames::add);
+      if (s.isEmpty()) {
+        return Optional.empty();
+      }
+    }
+    return Optional.of("Union[%s]".formatted(String.join(", ", candidateNames)));
+  }
 
-  // FIXME: we should create a separate tree for Variables
-  boolean isVariable();
-
-  SymbolV2 symbolV2();
+  @Override
+  public boolean isCompatibleWith(PythonType another) {
+    return candidates.isEmpty() || candidates.stream()
+      .anyMatch(candidate -> candidate.isCompatibleWith(another));
+  }
 }

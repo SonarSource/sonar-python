@@ -21,21 +21,47 @@ package org.sonar.python.checks;
 
 import javax.annotation.Nullable;
 import org.sonar.check.Rule;
-import org.sonar.plugins.python.api.types.InferredType;
+import org.sonar.plugins.python.api.PythonSubscriptionCheck;
+import org.sonar.plugins.python.api.tree.CallExpression;
+import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.types.v2.PythonType;
+import org.sonar.python.types.v2.TriBool;
+
+import static org.sonar.python.tree.TreeUtils.nameFromExpression;
 
 @Rule(key = "S5756")
-public class NonCallableCalledCheck extends NonCallableCalled {
+public class NonCallableCalledCheck extends PythonSubscriptionCheck {
 
   @Override
-  public boolean isNonCallableType(InferredType type) {
-    return !type.canHaveMember("__call__");
+  public void initialize(Context context) {
+    context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, ctx -> {
+      CallExpression callExpression = (CallExpression) ctx.syntaxNode();
+      Expression callee = callExpression.callee();
+      PythonType type = callee.typeV2();
+      if (isNonCallableType(type)) {
+        String name = nameFromExpression(callee);
+        PreciseIssue preciseIssue = ctx.addIssue(callee, message(type, name));
+        type.definitionLocation()
+          .ifPresent(location -> preciseIssue.secondary(location, "Definition."));
+      }
+    });
   }
 
-  @Override
-  public String message(InferredType calleeType, @Nullable String name) {
+  protected static String addTypeName(PythonType type) {
+    return type.displayName()
+      .map(d -> " has type " + d + " and it")
+      .orElse("");
+  }
+
+  public boolean isNonCallableType(PythonType type) {
+    return type.hasMember("__call__") == TriBool.FALSE;
+  }
+
+  public String message(PythonType typeV2, @Nullable String name) {
     if (name != null) {
-      return String.format("Fix this call; \"%s\"%s is not callable.", name, addTypeName(calleeType));
+      return "Fix this call; \"%s\"%s is not callable.".formatted(name, addTypeName(typeV2));
     }
-    return String.format("Fix this call; this expression%s is not callable.", addTypeName(calleeType));
+    return "Fix this call; this expression%s is not callable.".formatted(addTypeName(typeV2));
   }
 }

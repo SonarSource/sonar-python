@@ -1,3 +1,4 @@
+
 /*
  * SonarQube Python Plugin
  * Copyright (C) 2011-2024 SonarSource SA
@@ -17,19 +18,13 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.plugins.python.api.tree;
+package org.sonar.python.types.v2;
 
-import org.sonar.python.semantic.v2.SymbolV2;
+public record UnknownType() implements PythonType {
 
-/**
- * See https://docs.python.org/3/reference/expressions.html#atom-identifiers
- */
-public interface Name extends Expression, HasSymbol {
+  @Override
+  public boolean isCompatibleWith(PythonType another) {
+    return true;
+  }
 
-  String name();
-
-  // FIXME: we should create a separate tree for Variables
-  boolean isVariable();
-
-  SymbolV2 symbolV2();
 }
