@@ -114,7 +114,7 @@ public class WriteUsagesVisitor extends ScopeVisitor {
 
   @Override
   public void visitFunctionDef(FunctionDef functionDef) {
-    currentScope().addBindingUsage(functionDef.name(), UsageV2.Kind.FUNC_DECLARATION, null);
+    currentScope().addBindingUsage(functionDef.name(), UsageV2.Kind.FUNC_DECLARATION);
     createAndEnterScope(functionDef, currentScope());
     createTypeParameters(functionDef.typeParams());
     createParameters(functionDef);
@@ -127,7 +127,7 @@ public class WriteUsagesVisitor extends ScopeVisitor {
       .map(TypeParams::typeParamsList)
       .stream()
       .flatMap(Collection::stream)
-      .forEach(typeParam -> currentScope().addBindingUsage(typeParam.name(), UsageV2.Kind.TYPE_PARAM_DECLARATION, null));
+      .forEach(typeParam -> currentScope().addBindingUsage(typeParam.name(), UsageV2.Kind.TYPE_PARAM_DECLARATION));
   }
 
 
@@ -151,7 +151,7 @@ public class WriteUsagesVisitor extends ScopeVisitor {
       .skip(hasSelf ? 1 : 0)
       .map(Parameter::name)
       .filter(Objects::nonNull)
-      .forEach(param -> currentScope().addBindingUsage(param, UsageV2.Kind.PARAMETER, null));
+      .forEach(param -> currentScope().addBindingUsage(param, UsageV2.Kind.PARAMETER));
 
     parameterList.all().stream()
       .filter(param -> param.is(Tree.Kind.TUPLE_PARAMETER))
@@ -163,7 +163,7 @@ public class WriteUsagesVisitor extends ScopeVisitor {
     param.parameters().stream()
       .filter(p -> p.is(Tree.Kind.PARAMETER))
       .map(p -> ((Parameter) p).name())
-      .forEach(name -> currentScope().addBindingUsage(name, UsageV2.Kind.PARAMETER, null));
+      .forEach(name -> currentScope().addBindingUsage(name, UsageV2.Kind.PARAMETER));
     param.parameters().stream()
       .filter(p -> p.is(Tree.Kind.TUPLE_PARAMETER))
       .map(TupleParameter.class::cast)
@@ -172,13 +172,13 @@ public class WriteUsagesVisitor extends ScopeVisitor {
 
   @Override
   public void visitTypeAliasStatement(TypeAliasStatement typeAliasStatement) {
-    currentScope().addBindingUsage(typeAliasStatement.name(), UsageV2.Kind.TYPE_ALIAS_DECLARATION, null);
+    currentScope().addBindingUsage(typeAliasStatement.name(), UsageV2.Kind.TYPE_ALIAS_DECLARATION);
     super.visitTypeAliasStatement(typeAliasStatement);
   }
 
   @Override
   public void visitClassDef(ClassDef classDef) {
-    currentScope().addBindingUsage(classDef.name(), UsageV2.Kind.CLASS_DECLARATION, null);
+    currentScope().addBindingUsage(classDef.name(), UsageV2.Kind.CLASS_DECLARATION);
     createAndEnterScope(classDef, currentScope());
     createTypeParameters(classDef.typeParams());
     super.visitClassDef(classDef);
@@ -198,7 +198,7 @@ public class WriteUsagesVisitor extends ScopeVisitor {
       ? moduleTree.names().stream().map(Name::name).collect(Collectors.joining("."))
       : null;
     if (importFrom.isWildcardImport()) {
-      // FIXME: handle wildcard import
+      // TODO: SONARPY-1781 handle wildcard import
     } else {
       createImportedNames(importFrom.importedNames(), moduleName, importFrom.dottedPrefixForModule());
     }
@@ -212,15 +212,15 @@ public class WriteUsagesVisitor extends ScopeVisitor {
       String targetModuleName = fromModuleName;
       Name alias = module.alias();
       if (targetModuleName != null) {
-        addBindingUsage(alias == null ? nameTree : alias, UsageV2.Kind.IMPORT, null);
+        addBindingUsage(alias == null ? nameTree : alias, UsageV2.Kind.IMPORT);
       } else if (alias != null) {
-        addBindingUsage(alias, UsageV2.Kind.IMPORT, null);
+        addBindingUsage(alias, UsageV2.Kind.IMPORT);
       } else if (dottedPrefix.isEmpty() && dottedNames.size() > 1) {
         // Submodule import
-        addBindingUsage(nameTree, UsageV2.Kind.IMPORT, null);
+        addBindingUsage(nameTree, UsageV2.Kind.IMPORT);
       } else {
         // It's a simple case - no "from" imports or aliasing
-        addBindingUsage(nameTree, UsageV2.Kind.IMPORT, null);
+        addBindingUsage(nameTree, UsageV2.Kind.IMPORT);
       }
     });
   }
@@ -238,12 +238,12 @@ public class WriteUsagesVisitor extends ScopeVisitor {
   }
 
   private void addCompDeclarationParam(Tree tree) {
-    boundNamesFromExpression(tree).forEach(name -> currentScope().addBindingUsage(name, UsageV2.Kind.COMP_DECLARATION, null));
+    boundNamesFromExpression(tree).forEach(name -> currentScope().addBindingUsage(name, UsageV2.Kind.COMP_DECLARATION));
   }
 
   private void createLoopVariables(ForStatement loopTree) {
     loopTree.expressions().forEach(expr ->
-      boundNamesFromExpression(expr).forEach(name -> currentScope().addBindingUsage(name, UsageV2.Kind.LOOP_DECLARATION, null)));
+      boundNamesFromExpression(expr).forEach(name -> currentScope().addBindingUsage(name, UsageV2.Kind.LOOP_DECLARATION)));
   }
 
   @Override
@@ -260,7 +260,7 @@ public class WriteUsagesVisitor extends ScopeVisitor {
   public void visitAnnotatedAssignment(AnnotatedAssignment annotatedAssignment) {
     if (annotatedAssignment.variable().is(Tree.Kind.NAME)) {
       Name variable = (Name) annotatedAssignment.variable();
-      addBindingUsage(variable, UsageV2.Kind.ASSIGNMENT_LHS, null);
+      addBindingUsage(variable, UsageV2.Kind.ASSIGNMENT_LHS);
     }
     super.visitAnnotatedAssignment(annotatedAssignment);
   }
@@ -283,7 +283,7 @@ public class WriteUsagesVisitor extends ScopeVisitor {
   public void visitGlobalStatement(GlobalStatement globalStatement) {
     // Global statements are not binding usages, but we consider them as such for symbol creation
     globalStatement.variables().forEach(name -> {
-      moduleScope.addBindingUsage(name, UsageV2.Kind.GLOBAL_DECLARATION, null);
+      moduleScope.addBindingUsage(name, UsageV2.Kind.GLOBAL_DECLARATION);
       currentScope().addGlobalName(name);
     });
     super.visitGlobalStatement(globalStatement);
@@ -314,10 +314,6 @@ public class WriteUsagesVisitor extends ScopeVisitor {
   }
 
   private void addBindingUsage(Name nameTree, UsageV2.Kind usage) {
-    addBindingUsage(nameTree, usage, null);
-  }
-
-  private void addBindingUsage(Name nameTree, UsageV2.Kind usage, @Nullable String fullyQualifiedName) {
-    currentScope().addBindingUsage(nameTree, usage, fullyQualifiedName);
+    currentScope().addBindingUsage(nameTree, usage);
   }
 }

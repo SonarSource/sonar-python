@@ -55,7 +55,7 @@ public class TypeInferenceV2 {
   }
 
   public void inferTypes(FileInput fileInput) {
-    TrivialTypeInferenceVisitor trivialTypeInferenceVisitor = new TrivialTypeInferenceVisitor(projectLevelTypeTable, pythonFile, symbolTable);
+    TrivialTypeInferenceVisitor trivialTypeInferenceVisitor = new TrivialTypeInferenceVisitor(projectLevelTypeTable, pythonFile);
     fileInput.accept(trivialTypeInferenceVisitor);
 
     inferTypesAndMemberAccessSymbols(fileInput);
@@ -88,7 +88,7 @@ public class TypeInferenceV2 {
 
   private void inferTypesAndMemberAccessSymbols(FunctionDef functionDef) {
     Set<Name> parameterNames = TreeUtils.nonTupleParameters(functionDef).stream()
-      // TODO: it probably doesn't make sense to restrict to annotated parameters here
+      // TODO SONARPY-1866: it probably doesn't make sense to restrict to annotated parameters here
       .filter(parameter -> parameter.typeAnnotation() != null)
       .map(Parameter::name)
       .collect(Collectors.toSet());
