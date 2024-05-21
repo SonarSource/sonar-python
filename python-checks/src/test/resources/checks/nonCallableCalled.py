@@ -266,3 +266,10 @@ class MyClass:
 def foo():
     mc = MyClass()
     mc.x()
+
+def using_isinstance_with_runtime_type():
+    my_non_callable = MyNonCallable()
+    if isinstance(my_non_callable, whatever):
+        my_non_callable() # Noncompliant
+    ...
+    my_non_callable()  # Noncompliant
