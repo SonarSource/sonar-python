@@ -91,7 +91,7 @@ public record ClassType(
   }
 
   public boolean areAttributesCompatible(ClassType other) {
-    return attributes.stream().allMatch(attr -> other.attributes.stream().anyMatch(otherAttr -> attr.isCompatibleWith(otherAttr)));
+    return attributes.stream().allMatch(attr -> other.attributes.stream().anyMatch(attr::isCompatibleWith));
   }
 
   @Override

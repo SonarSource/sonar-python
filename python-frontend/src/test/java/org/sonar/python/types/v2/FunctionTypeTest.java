@@ -153,14 +153,16 @@ class FunctionTypeTest {
     FunctionType functionTypeWithParam2 = functionType("def foo(*param): ...");
     FunctionType functionTypeWithParam3 = functionType("def foo(**param): ...");
 
-    assertThat(functionType1).isEqualTo(functionType1);
-    assertThat(functionType1).isEqualTo(functionType2);
-    assertThat(functionType1).isNotEqualTo(functionType3);
-    assertThat(functionType1).isNotEqualTo(functionType4);
-    assertThat(functionType1).isNotEqualTo(functionTypeWithParam1);
-    assertThat(functionTypeWithParam1).isNotEqualTo(functionTypeWithParam2);
-    assertThat(functionTypeWithParam1).isNotEqualTo(functionTypeWithParam3);
-    assertThat(functionTypeWithParam2).isNotEqualTo(functionTypeWithParam3);
+    assertThat(functionType1)
+      .isEqualTo(functionType1)
+      .isEqualTo(functionType2)
+      .isNotEqualTo(functionType3)
+      .isNotEqualTo(functionType4)
+      .isNotEqualTo(functionTypeWithParam1);
+    assertThat(functionTypeWithParam1)
+      .isNotEqualTo(functionTypeWithParam2)
+      .isNotEqualTo(functionTypeWithParam3)
+      .isNotEqualTo(functionTypeWithParam3);
   }
 
   @Test

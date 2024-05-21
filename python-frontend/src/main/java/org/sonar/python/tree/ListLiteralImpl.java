@@ -79,6 +79,7 @@ public class ListLiteralImpl extends PyTree implements ListLiteral {
     return InferredTypes.LIST;
   }
 
+  @Override
   public PythonType typeV2() {
     return this.typeV2;
   }
