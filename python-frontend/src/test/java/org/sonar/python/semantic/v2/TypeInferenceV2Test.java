@@ -350,7 +350,7 @@ class TypeInferenceV2Test {
 
     var functionDef = (FunctionDef) root.statements().statements().get(0);
     var lastExpressionStatement = (ExpressionStatement) functionDef.body().statements().get(functionDef.body().statements().size() -1);
-    // TODO: should be declared int
+    // TODO SONARPY-1773: should be declared int
     Assertions.assertThat(lastExpressionStatement.expressions().get(0).typeV2().unwrappedType()).isEqualTo(PythonType.UNKNOWN);
   }
 
@@ -776,8 +776,6 @@ class TypeInferenceV2Test {
           MyClass()
       MyClass()
       """);
-
-    ClassDef classDef = ((ClassDef) fileInput.statements().statements().get(0));
 
     List<CallExpression> calls = PythonTestUtils.getAllDescendant(fileInput, tree -> tree.is(Tree.Kind.CALL_EXPR));
     PythonType calleeType1 = calls.get(0).callee().typeV2();

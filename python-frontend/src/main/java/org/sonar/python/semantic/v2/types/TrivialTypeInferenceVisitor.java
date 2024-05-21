@@ -191,7 +191,7 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
 
   private static void addParentClass(ClassTypeBuilder classTypeBuilder, RegularArgument regularArgument) {
     Name keyword = regularArgument.keywordArgument();
-    // TODO: store names if not resolved properly
+    // TODO: SONARPY-1871 store names if not resolved properly
     if (keyword != null) {
       if ("metaclass".equals(keyword.name())) {
         PythonType argumentType = getTypeV2FromArgument(regularArgument);
