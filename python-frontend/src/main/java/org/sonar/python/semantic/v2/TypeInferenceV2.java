@@ -88,8 +88,6 @@ public class TypeInferenceV2 {
 
   private void inferTypesAndMemberAccessSymbols(FunctionDef functionDef) {
     Set<Name> parameterNames = TreeUtils.nonTupleParameters(functionDef).stream()
-      // TODO SONARPY-1866: it probably doesn't make sense to restrict to annotated parameters here
-      .filter(parameter -> parameter.typeAnnotation() != null)
       .map(Parameter::name)
       .collect(Collectors.toSet());
     Set<SymbolV2> localVariables = symbolTable.getSymbolsByRootTree(functionDef);
