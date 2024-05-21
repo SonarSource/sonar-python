@@ -171,7 +171,7 @@ class ObjectTypeTest {
 
   @Test
   void objectType_of_unknown() {
-    // TODO: Ensure this is the behavior we want (do we even want it possible to have object of unknown? Maybe replace with UnionType when implemented
+    // TODO SONARPY-1875: Ensure this is the behavior we want (do we even want it possible to have object of unknown? Maybe replace with UnionType when implemented
     ObjectType objectType = new ObjectType(PythonType.UNKNOWN, List.of(), List.of());
     assertThat(objectType.hasMember("foo")).isEqualTo(TriBool.UNKNOWN);
   }

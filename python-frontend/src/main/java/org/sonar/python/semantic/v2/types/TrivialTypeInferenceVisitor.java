@@ -54,7 +54,6 @@ import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.semantic.v2.ClassTypeBuilder;
 import org.sonar.python.semantic.v2.FunctionTypeBuilder;
 import org.sonar.python.semantic.v2.ProjectLevelTypeTable;
-import org.sonar.python.semantic.v2.SymbolTable;
 import org.sonar.python.semantic.v2.SymbolV2;
 import org.sonar.python.semantic.v2.UsageV2;
 import org.sonar.python.tree.DictionaryLiteralImpl;
@@ -79,14 +78,12 @@ import static org.sonar.python.tree.TreeUtils.locationInFile;
 public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
 
   private final ProjectLevelTypeTable projectLevelTypeTable;
-  private final SymbolTable symbolTable;
   private final String fileId;
 
   private final Deque<PythonType> typeStack = new ArrayDeque<>();
 
-  public TrivialTypeInferenceVisitor(ProjectLevelTypeTable projectLevelTypeTable, PythonFile pythonFile, SymbolTable symbolTable) {
+  public TrivialTypeInferenceVisitor(ProjectLevelTypeTable projectLevelTypeTable, PythonFile pythonFile) {
     this.projectLevelTypeTable = projectLevelTypeTable;
-    this.symbolTable = symbolTable;
     Path path = pathOf(pythonFile);
     this.fileId = path != null ? path.toString() : pythonFile.toString();
   }
@@ -101,7 +98,7 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
   @Override
   public void visitStringLiteral(StringLiteral stringLiteral) {
     ModuleType builtins = this.projectLevelTypeTable.getModule();
-    // TODO: multiple object types to represent str instance?
+    // TODO: SONARPY-1867 multiple object types to represent str instance?
     PythonType strType = builtins.resolveMember("str").orElse(PythonType.UNKNOWN);
     ((StringLiteralImpl) stringLiteral).typeV2(new ObjectType(strType, new ArrayList<>(), new ArrayList<>()));
   }
@@ -149,7 +146,7 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
   @Override
   public void visitNone(NoneExpression noneExpression) {
     ModuleType builtins = this.projectLevelTypeTable.getModule();
-    // TODO: multiple object types to represent str instance?
+    // TODO: SONARPY-1867 multiple object types to represent str instance?
     PythonType noneType = builtins.resolveMember("NoneType").orElse(PythonType.UNKNOWN);
     ((NoneExpressionImpl) noneExpression).typeV2(new ObjectType(noneType, new ArrayList<>(), new ArrayList<>()));
   }
@@ -159,7 +156,6 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
     ModuleType builtins = this.projectLevelTypeTable.getModule();
     scan(listLiteral.elements());
     List<PythonType> pythonTypes = listLiteral.elements().expressions().stream().map(Expression::typeV2).distinct().toList();
-    // TODO: cleanly reduce attributes
     PythonType listType = builtins.resolveMember("list").orElse(PythonType.UNKNOWN);
     ((ListLiteralImpl) listLiteral).typeV2(new ObjectType(listType, pythonTypes, new ArrayList<>()));
   }
@@ -195,7 +191,7 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
 
   private static void addParentClass(ClassTypeBuilder classTypeBuilder, RegularArgument regularArgument) {
     Name keyword = regularArgument.keywordArgument();
-    // TODO: store names if not resolved properly
+    // TODO: SONARPY-1871 store names if not resolved properly
     if (keyword != null) {
       if ("metaclass".equals(keyword.name())) {
         PythonType argumentType = getTypeV2FromArgument(regularArgument);
@@ -205,7 +201,7 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
     }
     PythonType argumentType = getTypeV2FromArgument(regularArgument);
     classTypeBuilder.superClasses().add(argumentType);
-    // TODO: handle generics
+    // TODO: SONARPY-1869 handle generics
   }
 
   private static PythonType getTypeV2FromArgument(RegularArgument regularArgument) {
@@ -364,7 +360,7 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
       .filter(Expression.class::isInstance)
       .map(Expression.class::cast)
       .map(Expression::typeV2)
-      // FIXME: classes and functions should be propagated like other types
+      // TODO: classes (SONARPY-1829) and functions should be propagated like other types
       .filter(t -> (t instanceof ClassType) || (t instanceof FunctionType))
       .ifPresent(type -> setTypeToName(name, type));
   }

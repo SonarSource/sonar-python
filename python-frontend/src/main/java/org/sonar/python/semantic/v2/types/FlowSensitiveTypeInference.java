@@ -89,7 +89,7 @@ public class FlowSensitiveTypeInference extends ForwardAnalysis {
     } else if (element instanceof FunctionDef functionDef) {
       handleDefinition(functionDef, state);
     } else {
-      // TODO: isinstance visitor
+      // Here we should run "isinstance" visitor when we handle declared types, to avoid FPs when type guard checks are made
       updateTree(element, state);
     }
   }

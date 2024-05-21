@@ -19,6 +19,7 @@
  */
 package org.sonar.python.checks;
 
+import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
@@ -27,6 +28,11 @@ class NonCallableCalledCheckTest {
   @Test
   void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/nonCallableCalled.py", new NonCallableCalledCheck());
+  }
+
+  @Test
+  void test_multiple_files() {
+    PythonCheckVerifier.verify(List.of("src/test/resources/checks/nonCallableCalledImporter.py", "src/test/resources/checks/nonCallableCalledImported.py"), new NonCallableCalledCheck());
   }
 
 }

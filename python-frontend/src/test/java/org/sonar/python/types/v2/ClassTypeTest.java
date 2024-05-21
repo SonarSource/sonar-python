@@ -55,7 +55,7 @@ public class ClassTypeTest {
     assertThat(classType.hasUnresolvedHierarchy()).isFalse();
     assertThat(classType.hasMetaClass()).isFalse();
     assertThat(classType.hasUnresolvedHierarchy()).isFalse();
-    // TODO: not correct
+    // TODO: SONARPY-1874 correctly represent keys
     assertThat(classType.key()).isEqualTo("C[]");
     assertThat(classType).hasToString("ClassType[C]");
 
@@ -97,12 +97,13 @@ public class ClassTypeTest {
           """
     );
 
-    assertThat(classType1).isEqualTo(classType1);
-    assertThat(classType1).isEqualTo(classType2);
-    assertThat(classType1).isNotEqualTo(classType3);
-    assertThat(classType1).isNotEqualTo(classType4);
-    assertThat(classType1).isNotEqualTo(classType5);
-    assertThat(classType1).isNotEqualTo(classType6);
+    assertThat(classType1)
+      .isEqualTo(classType1)
+      .isEqualTo(classType2)
+      .isNotEqualTo(classType3)
+      .isNotEqualTo(classType4)
+      .isNotEqualTo(classType5)
+      .isNotEqualTo(classType6);
   }
 
   @Test
@@ -116,9 +117,6 @@ public class ClassTypeTest {
     ClassType classB = classTypes.get(1);
     assertThat(classB.superClasses()).hasSize(1);
     assertThat(classB.superClasses()).containsExactlyInAnyOrder(classC);
-
-    //assertThat(fileInput.globalVariables()).hasSize(2);
-    //assertThat(fileInput.globalVariables()).containsExactlyInAnyOrder(symbol, parentSymbol);
   }
 
   @Test
@@ -135,9 +133,6 @@ public class ClassTypeTest {
     ClassType classB = classTypes.get(2);
     assertThat(classB.superClasses()).hasSize(2);
     assertThat(classB.superClasses()).containsExactlyInAnyOrder(classC, classA);
-
-/*    assertThat(fileInput.globalVariables()).hasSize(3);
-    assertThat(fileInput.globalVariables()).containsExactlyInAnyOrder(symbol, parentSymbol, parentSymbol2);*/
   }
 
   @Test
@@ -245,8 +240,7 @@ public class ClassTypeTest {
       "class C(foo()): ",
       "  pass");
     ClassType classType = classTypes.get(0);
-    // TODO: ObjectType[PythonType.UNKNOWN] vs PythonType.UNKNOWN
-    //assertThat(classType.superClasses()).containsExactly(PythonType.UNKNOWN);
+    assertThat(classType.superClasses()).containsExactly(PythonType.UNKNOWN);
     assertThat(classType.hasUnresolvedHierarchy()).isTrue();
   }
 
@@ -260,8 +254,7 @@ public class ClassTypeTest {
       "  pass");
     ClassType classType = classTypes.get(0);
     assertThat(classType.superClasses()).hasSize(1);
-    // TODO: ObjectType[PythonType.UNKNOWN] vs PythonType.UNKNOWN
-    //assertThat(classType.superClasses()).containsExactly(PythonType.UNKNOWN);
+    assertThat(classType.superClasses()).containsExactly(PythonType.UNKNOWN);
     assertThat(classType.hasUnresolvedHierarchy()).isTrue();
   }
 
@@ -317,7 +310,6 @@ public class ClassTypeTest {
       "class C(B):",
       "  pass").get(2);
 
-    // FIXME: fix the test
     assertThat(classC.instancesHaveMember("foo")).isEqualTo(TriBool.UNKNOWN);
 
     classC = classTypes(
@@ -390,7 +382,6 @@ public class ClassTypeTest {
       "class B(): ",
       "  pass");
     assertThat(classType.name()).isEqualTo("B");
-    // TODO: Have assertions on symbol to check binding usages
   }
 
   @Test
@@ -400,7 +391,6 @@ public class ClassTypeTest {
       "class B(): ",
       "  pass");
     assertThat(classType.name()).isEqualTo("B");
-    // TODO: Have assertions on symbol to check binding usages
   }
 
   @Test
@@ -558,18 +548,18 @@ public class ClassTypeTest {
   }
 
   @Test
-  @Disabled("Add assertions, API for decorators")
+  @Disabled("Add assertions, API for decorators (SONARPY-1872)")
   void has_decorators() {
     ClassType classA = classType(
       "@foo",
       "class A: ..."
     );
-//    assertThat(classA.hasDecorators()).isTrue();
+    assertThat(classA.instancesHaveMember("bar")).isEqualTo(TriBool.UNKNOWN);
 
     classA = classType(
       "class A: ..."
     );
-//    assertThat(classA.hasDecorators()).isFalse();
+    assertThat(classA.instancesHaveMember("bar")).isEqualTo(TriBool.FALSE);
   }
 
   @Test
