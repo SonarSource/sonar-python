@@ -98,11 +98,6 @@ public class SymbolsModuleTypeProvider {
     return module;
   }
 
-  private static PythonType convertToObjectType(Symbol symbol) {
-    // What should we have here?
-    return PythonType.UNKNOWN;
-  }
-
   private static PythonType convertToFunctionType(FunctionSymbol symbol, Map<Symbol, PythonType> createdTypesBySymbol) {
     if (createdTypesBySymbol.containsKey(symbol)) {
       return createdTypesBySymbol.get(symbol);
@@ -163,7 +158,8 @@ public class SymbolsModuleTypeProvider {
       case CLASS -> convertToClassType((ClassSymbol) symbol, createdTypesBySymbol);
       case FUNCTION -> convertToFunctionType((FunctionSymbol) symbol, createdTypesBySymbol);
       case AMBIGUOUS -> convertToUnionType((AmbiguousSymbol) symbol, createdTypesBySymbol);
-      case OTHER -> convertToObjectType(symbol);
+      // Symbols that are neither classes or function nor ambiguous symbols whose alternatives are all classes or functions are considered of unknown type
+      case OTHER -> PythonType.UNKNOWN;
     };
   }
 

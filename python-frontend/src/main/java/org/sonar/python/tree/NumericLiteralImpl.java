@@ -102,7 +102,7 @@ public class NumericLiteralImpl extends PyTree implements NumericLiteral {
     return InferredTypes.INT;
   }
 
-
+  @Override
   public PythonType typeV2() {
     return this.typeV2;
   }

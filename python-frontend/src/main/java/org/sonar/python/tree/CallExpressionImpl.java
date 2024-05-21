@@ -47,7 +47,6 @@ import org.sonar.python.types.DeclaredType;
 import org.sonar.python.types.HasTypeDependencies;
 import org.sonar.python.types.InferredTypes;
 import org.sonar.python.types.v2.ClassType;
-import org.sonar.python.types.v2.FunctionType;
 import org.sonar.python.types.v2.ObjectType;
 import org.sonar.python.types.v2.PythonType;
 

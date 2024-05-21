@@ -54,7 +54,7 @@ public class ScopeV2 {
     return rootTree;
   }
 
-  void addBindingUsage(Name nameTree, UsageV2.Kind kind, @Nullable String fullyQualifiedName) {
+  void addBindingUsage(Name nameTree, UsageV2.Kind kind) {
     String symbolName = nameTree.name();
     if (!isExistingSymbol(symbolName)) {
       SymbolV2 symbol = new SymbolV2(symbolName);
@@ -90,7 +90,7 @@ public class ScopeV2 {
       return;
     }
     String symbolName = nameTree.name();
-    //TODO: Check with SelfSymbolImpl
+    //TODO: SONARPY-1865 Represent "self"
     SymbolV2 symbol = new SymbolV2(symbolName);
     symbols.add(symbol);
     symbolsByName.put(symbolName, symbol);

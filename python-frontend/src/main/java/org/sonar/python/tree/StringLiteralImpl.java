@@ -80,6 +80,7 @@ public class StringLiteralImpl extends PyTree implements StringLiteral {
     return InferredTypes.STR;
   }
 
+  @Override
   public PythonType typeV2() {
     return this.typeV2;
   }
