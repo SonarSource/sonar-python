@@ -1185,6 +1185,47 @@ class TypeInferenceV2Test {
       .isEqualTo("int");
   }
 
+  @Test
+  void inferClassHierarchyHasMetaClass() {
+    var root = inferTypes("""
+      class CustomMetaClass:
+        ...
+      
+      class ParentClass(metaclass=CustomMetaClass):
+        ...
+      
+      class ChildClass(ParentClass):
+        ...
+      
+      def f():
+        a = ChildClass()
+        a
+      """);
+
+
+    var childClassType = TreeUtils.firstChild(root.statements().statements().get(2), ClassDef.class::isInstance)
+      .map(ClassDef.class::cast)
+      .map(ClassDef::name)
+      .map(Expression::typeV2)
+      .map(ClassType.class::cast)
+      .get();
+
+    Assertions.assertThat(childClassType.hasMetaClass()).isTrue();
+
+    var aType = TreeUtils.firstChild(root.statements().statements().get(3), ExpressionStatement.class::isInstance)
+      .map(ExpressionStatement.class::cast)
+      .flatMap(expressionStatement -> TreeUtils.firstChild(expressionStatement, Name.class::isInstance))
+      .map(Name.class::cast)
+      .map(Expression::typeV2)
+      .get();
+
+    Assertions.assertThat(aType)
+      .isNotNull()
+      .isNotEqualTo(PythonType.UNKNOWN)
+      .extracting(PythonType::unwrappedType)
+      .isSameAs(childClassType);
+  }
+
   private static FileInput inferTypes(String lines) {
     return inferTypes(lines, new HashMap<>());
   }

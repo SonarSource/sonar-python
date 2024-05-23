@@ -148,7 +148,12 @@ public record ClassType(
   }
 
   public boolean hasMetaClass() {
-    return !this.metaClasses.isEmpty();
+    return !this.metaClasses.isEmpty() ||
+           this.superClasses()
+             .stream()
+             .filter(ClassType.class::isInstance)
+             .map(ClassType.class::cast)
+             .anyMatch(ClassType::hasMetaClass);
   }
 
   public TriBool instancesHaveMember(String memberName) {
