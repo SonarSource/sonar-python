@@ -84,8 +84,7 @@ def with_metaclass():
   class Base(metaclass=Factory): ...
   class A(Base): ...
   a = A()
-  # TODO: resolve type hierarchy and metaclasses
-  a() # Noncompliant
+  a()
 
 
 def decorators():
