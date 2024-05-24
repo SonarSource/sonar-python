@@ -79,8 +79,8 @@ public abstract class Propagation {
     }
   }
 
-  private boolean isInSameScope(NameImpl n, Tree scopeTree) {
-    return Optional.ofNullable(scopeTree(n)).filter(s -> s.equals(scopeTree)).isPresent();
+  private boolean isInSameScope(Name n, Tree scopeTree) {
+    return Optional.ofNullable(scopeTree(n)).filter(scopeTree::equals).isPresent();
   }
 
   Tree scopeTree(Name name) {
