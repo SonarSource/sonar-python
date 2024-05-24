@@ -20,7 +20,9 @@
 package org.sonar.python.semantic.v2.types;
 
 import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.semantic.v2.SymbolV2;
+import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.types.v2.PythonType;
 
 /**
@@ -44,5 +46,10 @@ public class Definition extends Propagation {
   @Override
   public PythonType rhsType() {
     return lhsName.typeV2();
+  }
+
+  @Override
+  Tree scopeTree(Name name) {
+    return TreeUtils.firstAncestor(name, t -> !t.equals(lhsName.parent()) && t.is(Tree.Kind.FUNCDEF, Tree.Kind.FILE_INPUT, Tree.Kind.CLASSDEF));
   }
 }

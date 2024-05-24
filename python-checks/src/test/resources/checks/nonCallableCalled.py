@@ -300,3 +300,13 @@ def conditionally_reassigned_param_try_except(a, param):
         param()
     except:
         ...
+
+
+def nested_function_in_try_catch():
+    foo = None
+    try:
+        ...
+    except:
+        ...
+    def bar():
+        foo()

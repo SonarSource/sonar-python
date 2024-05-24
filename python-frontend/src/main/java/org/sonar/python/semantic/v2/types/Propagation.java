@@ -20,6 +20,7 @@
 package org.sonar.python.semantic.v2.types;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Stream;
 import org.sonar.plugins.python.api.tree.Expression;
@@ -29,6 +30,7 @@ import org.sonar.python.semantic.v2.SymbolV2;
 import org.sonar.python.semantic.v2.SymbolV2Utils;
 import org.sonar.python.semantic.v2.UsageV2;
 import org.sonar.python.tree.NameImpl;
+import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.types.v2.PythonType;
 import org.sonar.python.types.v2.UnionType;
 
@@ -53,10 +55,13 @@ public abstract class Propagation {
    */
   boolean propagate(Set<SymbolV2> initializedVars) {
     PythonType rhsType = rhsType();
+    Tree scopeTree = scopeTree(lhsName);
     if (initializedVars.add(lhsSymbol)) {
       getSymbolNonDeclarationUsageTrees(lhsSymbol)
         .filter(NameImpl.class::isInstance)
         .map(NameImpl.class::cast)
+        // Avoid propagation to usages in nested scopes, as this may lead to FPs
+        .filter(n -> isInSameScope(n, scopeTree))
         .forEach(n -> n.typeV2(rhsType));
       return true;
     } else {
@@ -68,9 +73,18 @@ public abstract class Propagation {
       getSymbolNonDeclarationUsageTrees(lhsSymbol)
         .filter(NameImpl.class::isInstance)
         .map(NameImpl.class::cast)
+        .filter(n -> isInSameScope(n, scopeTree))
         .forEach(n -> n.typeV2(newType));
       return !newType.equals(currentType);
     }
+  }
+
+  private boolean isInSameScope(Name n, Tree scopeTree) {
+    return Optional.ofNullable(scopeTree(n)).filter(scopeTree::equals).isPresent();
+  }
+
+  Tree scopeTree(Name name) {
+    return TreeUtils.firstAncestor(name, t ->  t.is(Tree.Kind.FUNCDEF, Tree.Kind.FILE_INPUT, Tree.Kind.CLASSDEF));
   }
 
   public static Stream<Tree> getSymbolNonDeclarationUsageTrees(SymbolV2 symbol) {
