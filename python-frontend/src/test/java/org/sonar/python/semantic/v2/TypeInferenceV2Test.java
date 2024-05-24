@@ -991,6 +991,24 @@ class TypeInferenceV2Test {
   }
 
   @Test
+  void tryExceptNestedScope() {
+    FileInput fileInput = inferTypes("""
+      try:
+          ...
+      except:
+          ...
+      
+      do_smth = None
+      
+      def something(param):
+          type(do_smth)
+      """);
+    List<CallExpression> calls = PythonTestUtils.getAllDescendant(fileInput, tree -> tree.is(Tree.Kind.CALL_EXPR));
+    RegularArgument doSmthArg = (RegularArgument) calls.get(0).arguments().get(0);
+    assertThat(doSmthArg.expression().typeV2()).isEqualTo(PythonType.UNKNOWN);
+  }
+
+  @Test
   void inferTypeForQualifiedExpression() {
     var root = inferTypes("""
       class A:
