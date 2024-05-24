@@ -25,9 +25,7 @@ import java.util.Map;
 import java.util.Set;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Name;
-import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.semantic.v2.SymbolV2;
-import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.types.HasTypeDependencies;
 import org.sonar.python.types.v2.PythonType;
 
