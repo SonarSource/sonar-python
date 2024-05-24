@@ -19,6 +19,7 @@
  */
 package org.sonar.python.semantic.v2.types;
 
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
@@ -28,6 +29,7 @@ import org.sonar.plugins.python.api.tree.CompoundAssignmentStatement;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.cfg.fixpoint.ForwardAnalysis;
@@ -57,11 +59,7 @@ public class FlowSensitiveTypeInference extends ForwardAnalysis {
   public ProgramState initialState() {
     TypeInferenceProgramState initialState = new TypeInferenceProgramState();
     for (SymbolV2 variable : trackedVars) {
-      var pythonTypeSet = Optional.of(variable.name())
-        .map(parameterTypesByName::get)
-        .map(Set::of)
-        .orElseGet(Set::of);
-      initialState.setTypes(variable, pythonTypeSet);
+      initialState.setTypes(variable, Set.of());
     }
     return initialState;
   }
@@ -88,10 +86,24 @@ public class FlowSensitiveTypeInference extends ForwardAnalysis {
       }
     } else if (element instanceof FunctionDef functionDef) {
       handleDefinition(functionDef, state);
+    } else if (element instanceof Parameter parameter) {
+      handleParameter(parameter, state);
     } else {
       // Here we should run "isinstance" visitor when we handle declared types, to avoid FPs when type guard checks are made
       updateTree(element, state);
     }
+  }
+
+  private void handleParameter(Parameter parameter, TypeInferenceProgramState state) {
+    var name = parameter.name();
+
+    if (name == null || !trackedVars.contains(name.symbolV2())) {
+      return;
+    }
+
+    var type = parameterTypesByName.getOrDefault(name.name(), PythonType.UNKNOWN);
+    state.setTypes(name.symbolV2(), new HashSet<>(Set.of(type)));
+    updateTree(name, state);
   }
 
   private static void updateTree(Tree tree, TypeInferenceProgramState state) {

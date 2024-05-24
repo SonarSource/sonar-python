@@ -272,3 +272,31 @@ def using_isinstance_with_runtime_type():
         my_non_callable() # Noncompliant
     ...
     my_non_callable()  # Noncompliant
+
+def reassigned_param(a, param):
+    param = 1
+    if a:
+        param = [1,2,3]
+    param() # Noncompliant
+
+def conditionaly_reassigned_param(a, param):
+    if a:
+        param = [1,2,3]
+    param()
+
+def reassigned_param_try_except(a, param):
+    try:
+        param = 1
+        if a:
+            param = [1,2,3]
+        param() # FN
+    except:
+        ...
+
+def conditionally_reassigned_param_try_except(a, param):
+    try:
+        if a:
+            param = [1,2,3]
+        param()
+    except:
+        ...
