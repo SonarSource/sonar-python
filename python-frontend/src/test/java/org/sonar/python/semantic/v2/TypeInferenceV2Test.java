@@ -1226,6 +1226,54 @@ class TypeInferenceV2Test {
       .isSameAs(childClassType);
   }
 
+  @Test
+  void inferReassignedParameterType() {
+    var root = inferTypes("""
+      def reassigned_param(a, param):
+          param = 1
+          if a:
+              param = "1"
+          param()
+      """);
+
+    var paramType = TreeUtils.firstChild(root, CallExpression.class::isInstance)
+      .map(CallExpression.class::cast)
+      .map(CallExpression::callee)
+      .map(Expression::typeV2)
+      .map(UnionType.class::cast)
+      .get();
+
+
+    Assertions.assertThat(paramType).isInstanceOf(UnionType.class);
+    Assertions.assertThat(paramType.candidates())
+      .hasSize(2);
+
+    var candidatesUnwrappedType = paramType.candidates().stream()
+      .map(PythonType::unwrappedType)
+      .toList();
+
+    Assertions.assertThat(candidatesUnwrappedType)
+      .contains(INT_TYPE, STR_TYPE);
+  }
+
+  @Test
+  void inferConditionallyReassignedParameterType() {
+    var root = inferTypes("""
+      def reassigned_param(a, param):
+          if a:
+              param = "1"
+          param()
+      """);
+
+    var paramType = TreeUtils.firstChild(root, CallExpression.class::isInstance)
+      .map(CallExpression.class::cast)
+      .map(CallExpression::callee)
+      .map(Expression::typeV2)
+      .get();
+
+    Assertions.assertThat(paramType).isSameAs(PythonType.UNKNOWN);
+  }
+
   private static FileInput inferTypes(String lines) {
     return inferTypes(lines, new HashMap<>());
   }

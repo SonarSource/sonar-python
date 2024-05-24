@@ -24,6 +24,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import org.sonar.plugins.python.api.tree.AnnotatedAssignment;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
@@ -32,6 +33,7 @@ import org.sonar.plugins.python.api.tree.CompoundAssignmentStatement;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.python.semantic.v2.SymbolV2;
 
@@ -67,6 +69,16 @@ public class PropagationVisitor extends BaseTreeVisitor {
     Definition definition = new Definition(symbol, name);
     definitionsByDefinitionStatement.put(functionDef, definition);
     propagationsByLhs.computeIfAbsent(symbol, s -> new HashSet<>()).add(definition);
+  }
+
+  @Override
+  public void visitParameter(Parameter parameter) {
+    Optional.ofNullable(parameter.name())
+      .ifPresent(name -> {
+        var symbol = name.symbolV2();
+        var parametedDefinition = new ParameterDefinition(symbol, name);
+        propagationsByLhs.computeIfAbsent(symbol, s -> new HashSet<>()).add(parametedDefinition);
+      });
   }
 
   @Override

@@ -41,6 +41,7 @@ import org.sonar.python.semantic.v2.types.PropagationVisitor;
 import org.sonar.python.semantic.v2.types.TrivialTypeInferenceVisitor;
 import org.sonar.python.semantic.v2.types.TryStatementVisitor;
 import org.sonar.python.tree.TreeUtils;
+import org.sonar.python.types.v2.PythonType;
 
 public class TypeInferenceV2 {
 
@@ -130,11 +131,17 @@ public class TypeInferenceV2 {
   }
 
   private static void flowSensitiveTypeInference(ControlFlowGraph cfg, Set<SymbolV2> trackedVars, PropagationVisitor propagationVisitor) {
+    // TODO: infer parameter type based on type hint or default value assignement
+    var parameterTypes = trackedVars
+      .stream()
+      .filter(s -> s.usages().stream().map(UsageV2::kind).anyMatch(UsageV2.Kind.PARAMETER::equals))
+      .collect(Collectors.toMap(SymbolV2::name, v -> PythonType.UNKNOWN));
+
     FlowSensitiveTypeInference flowSensitiveTypeInference = new FlowSensitiveTypeInference(
       trackedVars,
       propagationVisitor.assignmentsByAssignmentStatement(),
       propagationVisitor.definitionsByDefinitionStatement(),
-      Map.of());
+      parameterTypes);
 
     flowSensitiveTypeInference.compute(cfg);
     flowSensitiveTypeInference.compute(cfg);
