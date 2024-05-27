@@ -28,6 +28,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import javax.annotation.CheckForNull;
@@ -133,11 +134,10 @@ public class TypeShed {
   }
 
   public static Map<String, Symbol> symbolsForModuleWithoutStoreInCache(String moduleName) {
-    if (!TypeShed.typeShedSymbols.containsKey(moduleName)) {
-      Map<String, Symbol> symbols = searchTypeShedForModule(moduleName);
-      return symbols;
-    }
-    return TypeShed.typeShedSymbols.get(moduleName);
+    return Optional.of(moduleName)
+      .filter(TypeShed.typeShedSymbols::containsKey)
+      .map(TypeShed.typeShedSymbols::get)
+      .orElseGet(() -> searchTypeShedForModule(moduleName));
   }
 
   @CheckForNull
