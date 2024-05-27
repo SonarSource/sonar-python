@@ -71,7 +71,7 @@ public class SymbolsModuleTypeProvider {
   }
 
   private Optional<ModuleType> createModuleTypeFromTypeShed(String moduleName, String moduleFqn, ModuleType parent) {
-    return Optional.ofNullable(TypeShed.symbolsForModule(moduleFqn))
+    return Optional.ofNullable(TypeShed.symbolsForModuleWithoutStoreInCache(moduleFqn))
       .filter(Predicate.not(Map::isEmpty))
       .map(typeShedModuleSymbols -> createModuleFromSymbols(moduleName, parent, typeShedModuleSymbols.values()));
   }

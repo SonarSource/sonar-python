@@ -132,6 +132,14 @@ public class TypeShed {
     return TypeShed.typeShedSymbols.get(moduleName);
   }
 
+  public static Map<String, Symbol> symbolsForModuleWithoutStoreInCache(String moduleName) {
+    if (!TypeShed.typeShedSymbols.containsKey(moduleName)) {
+      Map<String, Symbol> symbols = searchTypeShedForModule(moduleName);
+      return symbols;
+    }
+    return TypeShed.typeShedSymbols.get(moduleName);
+  }
+
   @CheckForNull
   public static Symbol symbolWithFQN(String stdLibModuleName, String fullyQualifiedName) {
     Map<String, Symbol> symbols = symbolsForModule(stdLibModuleName);
