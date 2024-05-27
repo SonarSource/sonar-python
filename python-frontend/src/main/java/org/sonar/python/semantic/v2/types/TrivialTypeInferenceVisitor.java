@@ -71,6 +71,7 @@ import org.sonar.python.types.v2.Member;
 import org.sonar.python.types.v2.ModuleType;
 import org.sonar.python.types.v2.ObjectType;
 import org.sonar.python.types.v2.PythonType;
+import org.sonar.python.types.v2.UnionType;
 
 import static org.sonar.python.semantic.SymbolUtils.pathOf;
 import static org.sonar.python.tree.TreeUtils.locationInFile;
@@ -153,11 +154,22 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
 
   @Override
   public void visitListLiteral(ListLiteral listLiteral) {
-    ModuleType builtins = this.projectLevelTypeTable.getModule();
+    var builtins = this.projectLevelTypeTable.getModule();
     scan(listLiteral.elements());
-    List<PythonType> pythonTypes = listLiteral.elements().expressions().stream().map(Expression::typeV2).distinct().toList();
+
+    var candidateTypes = listLiteral.elements()
+      .expressions()
+      .stream()
+      .map(Expression::typeV2)
+      .distinct()
+      .toList();
+
+    var elementsType = UnionType.or(candidateTypes);
+
+    var attributes = new ArrayList<PythonType>();
+    attributes.add(elementsType);
     PythonType listType = builtins.resolveMember("list").orElse(PythonType.UNKNOWN);
-    ((ListLiteralImpl) listLiteral).typeV2(new ObjectType(listType, pythonTypes, new ArrayList<>()));
+    ((ListLiteralImpl) listLiteral).typeV2(new ObjectType(listType, attributes, new ArrayList<>()));
   }
 
   @Override

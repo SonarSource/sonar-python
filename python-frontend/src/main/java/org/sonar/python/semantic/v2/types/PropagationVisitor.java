@@ -31,11 +31,13 @@ import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.CompoundAssignmentStatement;
 import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.ForStatement;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.python.semantic.v2.SymbolV2;
+import org.sonar.python.tree.NameImpl;
 
 public class PropagationVisitor extends BaseTreeVisitor {
   private final Map<SymbolV2, Set<Propagation>> propagationsByLhs;
@@ -111,10 +113,35 @@ public class PropagationVisitor extends BaseTreeVisitor {
     }
   }
 
+  @Override
+  public void visitForStatement(ForStatement forStatement) {
+    scan(forStatement.testExpressions());
+    if (forStatement.testExpressions().size() == 1 && forStatement.expressions().size() == 1) {
+      forStatement
+        .testExpressions()
+        .stream()
+        .findFirst()
+        .ifPresent(rhsExpression -> forStatement.expressions().stream()
+            .findFirst()
+            .filter(NameImpl.class::isInstance)
+            .map(NameImpl.class::cast)
+            .ifPresent(i -> {
+              var symbol = i.symbolV2();
+              var assignment = new LoopAssignment(symbol, i, rhsExpression, propagationsByLhs);
+              assignmentsByAssignmentStatement.put(forStatement, assignment);
+              propagationsByLhs.computeIfAbsent(symbol, s -> new HashSet<>()).add(assignment);
+            })
+        );
+
+    }
+    scan(forStatement.body());
+    scan(forStatement.elseClause());
+  }
+
   private void processAssignment(Statement assignmentStatement, Expression lhsExpression, Expression rhsExpression){
     if (lhsExpression instanceof Name lhs && lhs.symbolV2() != null) {
       var symbol = lhs.symbolV2();
-      Assignment assignment = new Assignment(symbol, lhs, rhsExpression, propagationsByLhs);
+      var assignment = new Assignment(symbol, lhs, rhsExpression, propagationsByLhs);
       assignmentsByAssignmentStatement.put(assignmentStatement, assignment);
       propagationsByLhs.computeIfAbsent(symbol, s -> new HashSet<>()).add(assignment);
     }
