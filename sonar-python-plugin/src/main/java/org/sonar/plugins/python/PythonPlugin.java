@@ -27,7 +27,7 @@ import org.sonar.api.SonarProduct;
 import org.sonar.api.SonarRuntime;
 import org.sonar.api.config.PropertyDefinition;
 import org.sonar.api.resources.Qualifiers;
-import org.sonar.plugins.python.api.SonarLintCache;
+import org.sonar.plugins.commons.api.SonarLintCache;
 import org.sonar.plugins.python.bandit.BanditRulesDefinition;
 import org.sonar.plugins.python.bandit.BanditSensor;
 import org.sonar.plugins.python.coverage.PythonCoverageSensor;
@@ -144,7 +144,8 @@ public class PythonPlugin implements Plugin {
       PropertyDefinition.builder(PythonXUnitSensor.SKIP_DETAILS)
         .index(23)
         .name("Skip the details when importing the Xunit reports")
-        .description("When enabled the test execution statistics is provided only on project level. Use this mode when paths in report are not found. Disabled by default.")
+        .description("When enabled the test execution statistics is provided only on project level. Use this mode when paths in report " +
+          "are not found. Disabled by default.")
         .category(PYTHON_CATEGORY)
         .subCategory(TEST_AND_COVERAGE)
         .onQualifiers(Qualifiers.PROJECT)
@@ -154,7 +155,8 @@ public class PythonPlugin implements Plugin {
       PropertyDefinition.builder(PythonXUnitSensor.REPORT_PATH_KEY)
         .index(24)
         .name("Path to xunit report(s)")
-        .description("Path to the report of test execution, relative to project's root. Ant patterns are accepted. The reports have to conform to the junitreport XML format.")
+        .description("Path to the report of test execution, relative to project's root. Ant patterns are accepted. The reports have to " +
+          "conform to the junitreport XML format.")
         .category(PYTHON_CATEGORY)
         .subCategory(TEST_AND_COVERAGE)
         .onQualifiers(Qualifiers.PROJECT)

@@ -37,10 +37,10 @@ import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonar.api.issue.NoSonarFilter;
 import org.sonar.api.measures.FileLinesContextFactory;
+import org.sonar.plugins.commons.api.SonarLintCache;
 import org.sonar.plugins.python.api.ProjectPythonVersion;
 import org.sonar.plugins.python.api.PythonCustomRuleRepository;
 import org.sonar.plugins.python.api.PythonVersionUtils;
-import org.sonar.plugins.python.api.SonarLintCache;
 import org.sonar.plugins.python.api.caching.CacheContext;
 import org.sonar.plugins.python.indexer.PythonIndexer;
 import org.sonar.plugins.python.indexer.SonarQubePythonIndexer;
@@ -68,7 +68,8 @@ public final class PythonSensor implements Sensor {
   private final AnalysisWarningsWrapper analysisWarnings;
   private static final Logger LOG = LoggerFactory.getLogger(PythonSensor.class);
   static final String UNSET_VERSION_WARNING = "Your code is analyzed as compatible with all Python 3 versions by default." +
-    " You can get a more precise analysis by setting the exact Python version in your configuration via the parameter \"sonar.python.version\"";
+    " You can get a more precise analysis by setting the exact Python version in your configuration via the parameter " +
+    "\"sonar.python.version\"";
 
   /**
    * Constructor to be used by pico if neither PythonCustomRuleRepository nor PythonIndexer are to be found and injected.
@@ -120,13 +121,14 @@ public final class PythonSensor implements Sensor {
       LOG.warn(UNSET_VERSION_WARNING);
       analysisWarnings.addUnique(UNSET_VERSION_WARNING);
     }
-    if (pythonVersionParameter.length != 0){
+    if (pythonVersionParameter.length != 0) {
       ProjectPythonVersion.setCurrentVersions(PythonVersionUtils.fromStringArray(pythonVersionParameter));
     }
     CacheContext cacheContext = CacheContextImpl.of(context);
     PythonIndexer pythonIndexer = this.indexer != null ? this.indexer : new SonarQubePythonIndexer(pythonFiles, cacheContext, context);
     pythonIndexer.setSonarLintCache(sonarLintCache);
-    PythonScanner scanner = new PythonScanner(context, checks, fileLinesContextFactory, noSonarFilter, PythonParser.create(), pythonIndexer);
+    PythonScanner scanner = new PythonScanner(context, checks, fileLinesContextFactory, noSonarFilter, PythonParser.create(),
+      pythonIndexer);
     scanner.execute(pythonFiles, context);
     durationReport.stop();
   }

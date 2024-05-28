@@ -30,8 +30,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
+import org.sonar.plugins.commons.api.SonarLintCache;
 import org.sonar.plugins.python.Python;
-import org.sonar.plugins.python.api.SonarLintCache;
 import org.sonar.plugins.python.api.caching.CacheContext;
 import org.sonar.python.caching.CacheContextImpl;
 import org.sonar.python.caching.PythonReadCacheImpl;
@@ -69,7 +69,10 @@ public class SonarLintPythonIndexer extends PythonIndexer implements ModuleFileL
     long maxLinesForIndexing = context.config().getLong(MAX_LINES_PROPERTY).orElse(DEFAULT_MAX_LINES_FOR_INDEXING);
     if (nLines > maxLinesForIndexing) {
       // Avoid performance issues for large projects
-      LOG.debug("Project symbol table deactivated due to project size (total number of lines is {}, maximum for indexing is {})", nLines, maxLinesForIndexing);
+      LOG.debug(
+        "Project symbol table deactivated due to project size (total number of lines is {}, maximum for indexing is {})",
+        nLines, maxLinesForIndexing
+      );
       LOG.debug("Update \"sonar.python.sonarlint.indexing.maxlines\" to set a different limit.");
       return;
     }

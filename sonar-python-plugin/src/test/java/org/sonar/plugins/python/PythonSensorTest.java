@@ -77,6 +77,7 @@ import org.sonar.api.testfixtures.log.LogTesterJUnit5;
 import org.sonar.api.utils.Version;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
+import org.sonar.plugins.commons.api.SonarLintCache;
 import org.sonar.plugins.python.api.ProjectPythonVersion;
 import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.PythonCustomRuleRepository;
@@ -91,7 +92,6 @@ import org.sonar.plugins.python.caching.TestReadCache;
 import org.sonar.plugins.python.caching.TestWriteCache;
 import org.sonar.plugins.python.indexer.FileHashingUtils;
 import org.sonar.plugins.python.indexer.PythonIndexer;
-import org.sonar.plugins.python.api.SonarLintCache;
 import org.sonar.plugins.python.indexer.SonarLintPythonIndexer;
 import org.sonar.plugins.python.indexer.TestModuleFileSystem;
 import org.sonar.plugins.python.warnings.AnalysisWarningsWrapper;
@@ -315,7 +315,8 @@ class PythonSensorTest {
     assertThat(issue.quickFixes()).isEmpty();
     assertThat(issue.getSaved()).isTrue();
 
-    assertThat(traceLogTester.logs()).contains("Could not report quick fixes for rule: python:S2710. java.lang.RuntimeException: Exception message");
+    assertThat(traceLogTester.logs())
+      .contains("Could not report quick fixes for rule: python:S2710. java.lang.RuntimeException: Exception message");
   }
 
   @Test
@@ -370,14 +371,16 @@ class PythonSensorTest {
 
       switch (issue.ruleKey().rule()) {
         case "S134":
-          assertThat(issueLocation.message()).isEqualTo("Refactor this code to not nest more than 4 \"if\", \"for\", \"while\", \"try\" and \"with\" statements.");
+          assertThat(issueLocation.message())
+            .isEqualTo("Refactor this code to not nest more than 4 \"if\", \"for\", \"while\", \"try\" and \"with\" statements.");
           assertThat(issueLocation.textRange()).isEqualTo(inputFile.newRange(7, 16, 7, 18));
           assertThat(issue.flows()).hasSize(4);
           assertThat(issue.gap()).isNull();
           checkedIssues++;
           break;
         case ONE_STATEMENT_PER_LINE_RULE_KEY:
-          assertThat(issueLocation.message()).isEqualTo("At most one statement is allowed per line, but 2 statements were found on this line.");
+          assertThat(issueLocation.message())
+            .isEqualTo("At most one statement is allowed per line, but 2 statements were found on this line.");
           assertThat(issueLocation.textRange()).isEqualTo(inputFile.newRange(1, 0, 1, 50));
           assertThat(issue.flows()).isEmpty();
           assertThat(issue.gap()).isNull();
@@ -486,7 +489,8 @@ class PythonSensorTest {
     PythonIndexer pythonIndexer = pythonIndexer(Collections.singletonList(mainFile));
     sensor(CUSTOM_RULES, pythonIndexer, analysisWarning).execute(context);
     assertThat(context.allIssues()).isEmpty();
-    assertThat(logTester.logs(Level.DEBUG)).contains("Project symbol table deactivated due to project size (total number of lines is 4, maximum for indexing is 1)");
+    assertThat(logTester.logs(Level.DEBUG))
+      .contains("Project symbol table deactivated due to project size (total number of lines is 4, maximum for indexing is 1)");
     assertThat(logTester.logs(Level.DEBUG)).contains("Update \"sonar.python.sonarlint.indexing.maxlines\" to set a different limit.");
   }
 
@@ -787,7 +791,9 @@ class PythonSensorTest {
 
     assertThat(context.allIssues()).isEmpty();
     assertThat(logTester.logs(Level.INFO))
-      .contains("The Python analyzer was able to leverage cached data from previous analyses for 1 out of 1 files. These files were not parsed.");
+      .contains(
+        "The Python analyzer was able to leverage cached data from previous analyses for 1 out of 1 files. These files were not parsed."
+      );
   }
 
   @Test
@@ -802,7 +808,8 @@ class PythonSensorTest {
       .build();
 
     InputFile inputFile = inputFile(FILE_TEST_FILE, Type.TEST, InputFile.Status.SAME);
-    byte[] serializedSymbolTable = toProtobufModuleDescriptor(Set.of(new VariableDescriptor("test_func", "test_file.test_func", null))).toByteArray();
+    byte[] serializedSymbolTable =
+      toProtobufModuleDescriptor(Set.of(new VariableDescriptor("test_func", "test_file.test_func", null))).toByteArray();
     TestReadCache readCache = getValidReadCache();
     readCache.put(fileContentHashCacheKey(inputFile.key()), inputFileContentHash(inputFile));
     readCache.put(importsMapCacheKey(inputFile.key()), String.join(";", Collections.emptyList()).getBytes(StandardCharsets.UTF_8));
@@ -847,7 +854,9 @@ class PythonSensorTest {
 
     assertThat(context.allIssues()).isEmpty();
     assertThat(logTester.logs(Level.INFO))
-      .contains("The Python analyzer was able to leverage cached data from previous analyses for 0 out of 1 files. These files were not parsed.");
+      .contains(
+        "The Python analyzer was able to leverage cached data from previous analyses for 0 out of 1 files. These files were not parsed."
+      );
   }
 
   @Test
@@ -879,7 +888,9 @@ class PythonSensorTest {
 
     assertThat(context.allIssues()).hasSize(2);
     assertThat(logTester.logs(Level.INFO))
-      .contains("The Python analyzer was able to leverage cached data from previous analyses for 0 out of 2 files. These files were not parsed.");
+      .contains(
+        "The Python analyzer was able to leverage cached data from previous analyses for 0 out of 2 files. These files were not parsed."
+      );
   }
 
   @Test
@@ -967,7 +978,8 @@ class PythonSensorTest {
     sensor().execute(context);
 
     assertThat(logTester.logs(Level.WARN))
-      .contains("Could not write CPD tokens to cache (IllegalArgumentException: Same key cannot be written to multiple times (python:cpd:data:moduleKey:pass.py))");
+      .contains("Could not write CPD tokens to cache (IllegalArgumentException: Same key cannot be written to multiple times " +
+        "(python:cpd:data:moduleKey:pass.py))");
   }
 
   @Test
@@ -1230,7 +1242,8 @@ class PythonSensorTest {
     return sensor(CUSTOM_RULES, null, analysisWarning);
   }
 
-  private PythonSensor sensor(@Nullable PythonCustomRuleRepository[] customRuleRepositories, @Nullable PythonIndexer indexer, AnalysisWarningsWrapper analysisWarnings) {
+  private PythonSensor sensor(@Nullable PythonCustomRuleRepository[] customRuleRepositories, @Nullable PythonIndexer indexer,
+    AnalysisWarningsWrapper analysisWarnings) {
     FileLinesContextFactory fileLinesContextFactory = mock(FileLinesContextFactory.class);
     FileLinesContext fileLinesContext = mock(FileLinesContext.class);
     when(fileLinesContextFactory.createFor(Mockito.any(InputFile.class))).thenReturn(fileLinesContext);
@@ -1242,9 +1255,11 @@ class PythonSensorTest {
       return new PythonSensor(fileLinesContextFactory, checkFactory, mock(NoSonarFilter.class), customRuleRepositories, analysisWarnings);
     }
     if (customRuleRepositories == null) {
-      return new PythonSensor(fileLinesContextFactory, checkFactory, mock(NoSonarFilter.class), indexer, new SonarLintCache(), analysisWarnings);
+      return new PythonSensor(fileLinesContextFactory, checkFactory, mock(NoSonarFilter.class), indexer, new SonarLintCache(),
+        analysisWarnings);
     }
-    return new PythonSensor(fileLinesContextFactory, checkFactory, mock(NoSonarFilter.class), customRuleRepositories, indexer, new SonarLintCache(), analysisWarnings);
+    return new PythonSensor(fileLinesContextFactory, checkFactory, mock(NoSonarFilter.class), customRuleRepositories, indexer,
+      new SonarLintCache(), analysisWarnings);
   }
 
   private SonarLintPythonIndexer pythonIndexer(List<InputFile> files) {
@@ -1291,7 +1306,7 @@ class PythonSensorTest {
     return new DefaultTextRange(new DefaultTextPointer(lineStart, columnStart), new DefaultTextPointer(lineEnd, columnEnd));
   }
 
-  private void activate_rule_S2710(){
+  private void activate_rule_S2710() {
     activeRules = new ActiveRulesBuilder()
       .addRule(new NewActiveRule.Builder()
         .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, "S2710"))
@@ -1299,6 +1314,7 @@ class PythonSensorTest {
         .build())
       .build();
   }
+
   private void setup_quickfix_sensor() throws IOException {
     String pathToQuickFixTestFile = "src/test/resources/org/sonar/plugins/python/sensor/" + FILE_QUICKFIX;
     File file = new File(pathToQuickFixTestFile);

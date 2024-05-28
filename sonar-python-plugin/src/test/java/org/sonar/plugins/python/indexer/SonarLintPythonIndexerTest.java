@@ -38,9 +38,9 @@ import org.sonar.api.batch.fs.internal.DefaultInputFile;
 import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.testfixtures.log.LogTesterJUnit5;
+import org.sonar.plugins.commons.api.SonarLintCache;
 import org.sonar.plugins.python.Python;
 import org.sonar.plugins.python.TestUtils;
-import org.sonar.plugins.python.api.SonarLintCache;
 import org.sonar.plugins.python.api.caching.CacheContext;
 import org.sonar.plugins.python.api.caching.PythonReadCache;
 import org.sonar.plugins.python.api.caching.PythonWriteCache;
@@ -196,7 +196,7 @@ class SonarLintPythonIndexerTest {
     assertThat(cacheContext.getWriteCache()).isInstanceOf(DummyCache.class);
     assertThat(cacheContext.getReadCache()).isInstanceOf(DummyCache.class);
 
-    SonarLintCache sonarLintCache = new SonarLintCache();
+    var sonarLintCache = new SonarLintCache();
     indexer.setSonarLintCache(sonarLintCache);
     cacheContext = indexer.cacheContext();
     assertThat(cacheContext.isCacheEnabled()).isTrue();
@@ -220,7 +220,8 @@ class SonarLintPythonIndexerTest {
     } catch (RecognitionException exception) {
       fail("Non Python files should not be parsed.");
     }
-    assertThat(logTester.logs(Level.DEBUG)).contains("Module file event for non_python.txt has been ignored because it's not a Python file.");
+    assertThat(logTester.logs(Level.DEBUG))
+      .contains("Module file event for non_python.txt has been ignored because it's not a Python file.");
     assertThat(projectLevelSymbolTable.getSymbolsFromModule("non_python")).isNull();
   }
 

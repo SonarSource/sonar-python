@@ -30,7 +30,7 @@ import org.sonar.api.SonarRuntime;
 import org.sonar.api.internal.SonarRuntimeImpl;
 import org.sonar.api.testfixtures.log.LogTesterJUnit5;
 import org.sonar.api.utils.Version;
-import org.sonar.plugins.python.api.SonarLintCache;
+import org.sonar.plugins.commons.api.SonarLintCache;
 import org.sonar.plugins.python.warnings.AnalysisWarningsWrapper;
 
 import static org.assertj.core.api.Assertions.assertThat;
