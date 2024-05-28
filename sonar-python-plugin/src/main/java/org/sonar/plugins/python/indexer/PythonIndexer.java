@@ -23,6 +23,7 @@ import com.sonar.sslr.api.AstNode;
 import java.io.IOException;
 import java.net.URI;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
@@ -52,7 +53,7 @@ public abstract class PythonIndexer {
   private final Map<URI, String> packageNames = new HashMap<>();
   private final PythonParser parser = PythonParser.create();
   private final ProjectLevelSymbolTable projectLevelSymbolTable = new ProjectLevelSymbolTable();
-  private final TypeShed typeShed = new TypeShed();
+  private final TypeShed typeShed = new TypeShed(projectLevelSymbolTable);
 
   public ProjectLevelSymbolTable projectLevelSymbolTable() {
     return projectLevelSymbolTable;
@@ -63,7 +64,19 @@ public abstract class PythonIndexer {
   }
 
   public String packageName(InputFile inputFile) {
-    return packageNames.computeIfAbsent(inputFile.uri(), k -> pythonPackageName(inputFile.file(), projectBaseDirAbsolutePath));
+    if (!packageNames.containsKey(inputFile.uri())) {
+      String name = pythonPackageName(inputFile.file(), projectBaseDirAbsolutePath);
+      packageNames.put(inputFile.uri(), name);
+      projectLevelSymbolTable.addProjectPackage(name);
+    }
+    return packageNames.get(inputFile.uri());
+  }
+
+  public void collectPackageNames(List<InputFile> inputFiles) {
+    for (InputFile inputFile : inputFiles) {
+      String packageName = pythonPackageName(inputFile.file(), projectBaseDirAbsolutePath);
+      projectLevelSymbolTable.addProjectPackage(packageName);
+    }
   }
 
   void removeFile(InputFile inputFile) {
@@ -82,6 +95,7 @@ public abstract class PythonIndexer {
     FileInput astRoot = new PythonTreeMaker().fileInput(astNode);
     String packageName = pythonPackageName(inputFile.file(), projectBaseDirAbsolutePath);
     packageNames.put(inputFile.uri(), packageName);
+    projectLevelSymbolTable.addProjectPackage(packageName);
     PythonFile pythonFile = SonarQubePythonFile.create(inputFile);
     projectLevelSymbolTable.addModule(astRoot, packageName, pythonFile);
   }

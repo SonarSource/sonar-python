@@ -31,7 +31,7 @@ public class ProjectLevelTypeTable {
   private final ModuleType rootModule;
 
   public ProjectLevelTypeTable(ProjectLevelSymbolTable projectLevelSymbolTable) {
-    this(projectLevelSymbolTable, new TypeShed());
+    this(projectLevelSymbolTable, new TypeShed(projectLevelSymbolTable));
   }
 
   public ProjectLevelTypeTable(ProjectLevelSymbolTable projectLevelSymbolTable, TypeShed typeShed) {

@@ -461,6 +461,39 @@ class PythonSensorTest {
   }
 
   @Test
+  void not_relying_on_stubs_for_project_under_analysis() {
+    activeRules = new ActiveRulesBuilder()
+      .addRule(new NewActiveRule.Builder()
+        .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, "S6709"))
+        .build())
+      .build();
+
+    InputFile firstFile = inputFile("sklearn/__init__.py");
+    InputFile secondFile = inputFile("sklearn/my_file.py");
+    PythonIndexer pythonIndexer = pythonIndexer(Arrays.asList(firstFile, secondFile));
+    sensor(null, pythonIndexer, analysisWarning).execute(context);
+    assertThat(context.allIssues()).isEmpty();
+  }
+
+  @Test
+  void not_relying_on_stubs_for_project_under_analysis_2() {
+    activeRules = new ActiveRulesBuilder()
+      .addRule(new NewActiveRule.Builder()
+        .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, "S6709"))
+        .build())
+      .build();
+
+    InputFile initFile = inputFile("not_sklearn/__init__.py");
+    InputFile mainFile = inputFile("not_sklearn/my_file.py");
+    PythonIndexer pythonIndexer = pythonIndexer(Arrays.asList(initFile, mainFile));
+    sensor(null, pythonIndexer, analysisWarning).execute(context);
+    assertThat(context.allIssues()).hasSize(1);
+    Issue issue = context.allIssues().iterator().next();
+    assertThat(issue.primaryLocation().inputComponent()).isEqualTo(mainFile);
+    assertThat(issue.ruleKey().rule()).isEqualTo("S6709");
+  }
+
+  @Test
   void end_of_analysis_called() {
     inputFile(FILE_2);
     activeRules = new ActiveRulesBuilder()
