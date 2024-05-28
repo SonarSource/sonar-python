@@ -19,6 +19,7 @@
  */
 package org.sonar.plugins.python.api.tree;
 
+import org.sonar.api.Beta;
 import org.sonar.python.semantic.v2.SymbolV2;
 
 /**
@@ -31,5 +32,6 @@ public interface Name extends Expression, HasSymbol {
   // FIXME: we should create a separate tree for Variables
   boolean isVariable();
 
+  @Beta
   SymbolV2 symbolV2();
 }
