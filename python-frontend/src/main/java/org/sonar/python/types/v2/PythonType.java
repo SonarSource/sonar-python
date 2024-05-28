@@ -20,46 +20,57 @@
 package org.sonar.python.types.v2;
 
 import java.util.Optional;
+import org.sonar.api.Beta;
 import org.sonar.plugins.python.api.LocationInFile;
 
 /**
  * PythonType
  */
+@Beta
 public interface PythonType {
   PythonType UNKNOWN = new UnknownType();
 
+  @Beta
   default String name() {
     return this.toString();
   }
 
+  @Beta
   default Optional<String> displayName() {
     return Optional.empty();
   }
 
+  @Beta
   default Optional<String> instanceDisplayName() {
     return Optional.empty();
   }
 
+  @Beta
   default boolean isCompatibleWith(PythonType another) {
     return true;
   }
 
+  @Beta
   default String key() {
     return name();
   }
 
+  @Beta
   default Optional<PythonType> resolveMember(String memberName) {
     return Optional.empty();
   }
 
+  @Beta
   default TriBool hasMember(String memberName) {
     return TriBool.UNKNOWN;
   }
 
+  @Beta
   default Optional<LocationInFile> definitionLocation() {
     return Optional.empty();
   }
 
+  @Beta
   default PythonType unwrappedType() {
     return this;
   }

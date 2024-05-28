@@ -28,11 +28,13 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import javax.annotation.Nullable;
+import org.sonar.api.Beta;
 import org.sonar.plugins.python.api.LocationInFile;
 
 /**
  * ClassType
  */
+@Beta
 public record ClassType(
   String name,
   Set<Member> members,
@@ -86,10 +88,12 @@ public record ClassType(
     return true;
   }
 
+  @Beta
   public boolean isASubClassFrom(ClassType other) {
     return superClasses.stream().anyMatch(superClass -> superClass.isCompatibleWith(other));
   }
 
+  @Beta
   public boolean areAttributesCompatible(ClassType other) {
     return attributes.stream().allMatch(attr -> other.attributes.stream().anyMatch(attr::isCompatibleWith));
   }

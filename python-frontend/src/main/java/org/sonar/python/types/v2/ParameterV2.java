@@ -20,8 +20,10 @@
 package org.sonar.python.types.v2;
 
 import javax.annotation.Nullable;
+import org.sonar.api.Beta;
 import org.sonar.plugins.python.api.LocationInFile;
 
+@Beta
 public record ParameterV2(
   @Nullable String name,
   PythonType declaredType,
@@ -32,6 +34,7 @@ public record ParameterV2(
   boolean isPositionalVariadic,
   @Nullable LocationInFile location) {
 
+  @Beta
   public boolean isVariadic() {
     return isKeywordVariadic || isPositionalVariadic;
   }

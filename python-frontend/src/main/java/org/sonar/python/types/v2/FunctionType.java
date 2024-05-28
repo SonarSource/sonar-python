@@ -23,11 +23,13 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import javax.annotation.Nullable;
+import org.sonar.api.Beta;
 import org.sonar.plugins.python.api.LocationInFile;
 
 /**
  * FunctionType
  */
+@Beta
 public record FunctionType(
   String name,
   List<PythonType> attributes,
@@ -70,7 +72,6 @@ public record FunctionType(
   public int hashCode() {
     return Objects.hash(name, attributes, parameters, returnType, isAsynchronous, hasDecorators, isInstanceMethod, hasVariadicParameter);
   }
-
 
   @Override
   public String toString() {

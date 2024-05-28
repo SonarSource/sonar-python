@@ -20,6 +20,9 @@
  */
 package org.sonar.python.types.v2;
 
+import org.sonar.api.Beta;
+
+@Beta
 public record UnknownType() implements PythonType {
 
   @Override

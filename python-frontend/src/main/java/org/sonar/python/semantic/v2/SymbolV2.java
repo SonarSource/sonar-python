@@ -22,9 +22,11 @@ package org.sonar.python.semantic.v2;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Nullable;
+import org.sonar.api.Beta;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.python.tree.NameImpl;
 
+@Beta
 public record SymbolV2(String name, @Nullable String fullyQualifiedName, List<UsageV2> usages) {
 
   public SymbolV2(String name) {
@@ -39,6 +41,7 @@ public record SymbolV2(String name, @Nullable String fullyQualifiedName, List<Us
     }
   }
 
+  @Beta
   public boolean hasSingleBindingUsage() {
     return usages.stream().filter(UsageV2::isBindingUsage).toList().size() == 1;
   }

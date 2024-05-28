@@ -26,7 +26,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
+import org.sonar.api.Beta;
 
+@Beta
 public record UnionType(Set<PythonType> candidates) implements PythonType {
 
   @Override
@@ -61,12 +63,14 @@ public record UnionType(Set<PythonType> candidates) implements PythonType {
       .anyMatch(candidate -> candidate.isCompatibleWith(another));
   }
 
+  @Beta
   public static PythonType or(Collection<PythonType> candidates) {
     return candidates
       .stream()
       .reduce(new UnionType(new HashSet<>()), UnionType::or);
   }
 
+  @Beta
   public static PythonType or(PythonType type1, PythonType type2) {
     if (type1.equals(PythonType.UNKNOWN) || type2.equals(PythonType.UNKNOWN)) {
       return PythonType.UNKNOWN;

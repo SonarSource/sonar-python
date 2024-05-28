@@ -24,7 +24,9 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import javax.annotation.Nullable;
+import org.sonar.api.Beta;
 
+@Beta
 public record ModuleType(@Nullable String name, @Nullable ModuleType parent, Map<String, PythonType> members) implements PythonType {
   public ModuleType(@Nullable String name) {
     this(name, null);

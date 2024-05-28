@@ -23,8 +23,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import org.sonar.api.Beta;
 import org.sonar.plugins.python.api.LocationInFile;
 
+@Beta
 public record ObjectType(PythonType type, List<PythonType> attributes, List<Member> members) implements PythonType {
 
   public ObjectType(PythonType type) {
