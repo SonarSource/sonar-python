@@ -48,9 +48,9 @@ public class SymbolsModuleTypeProvider {
   private final ProjectLevelSymbolTable projectLevelSymbolTable;
   private final TypeShed typeShed;
 
-  public SymbolsModuleTypeProvider(ProjectLevelSymbolTable projectLevelSymbolTable) {
+  public SymbolsModuleTypeProvider(ProjectLevelSymbolTable projectLevelSymbolTable, TypeShed typeShed) {
     this.projectLevelSymbolTable = projectLevelSymbolTable;
-    typeShed = new TypeShed();
+    this.typeShed = typeShed;
   }
 
   public ModuleType createBuiltinModule() {

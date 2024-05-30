@@ -31,7 +31,11 @@ public class ProjectLevelTypeTable {
   private final ModuleType rootModule;
 
   public ProjectLevelTypeTable(ProjectLevelSymbolTable projectLevelSymbolTable) {
-    this.symbolsModuleTypeProvider = new SymbolsModuleTypeProvider(projectLevelSymbolTable);
+    this(projectLevelSymbolTable, new TypeShed());
+  }
+
+  public ProjectLevelTypeTable(ProjectLevelSymbolTable projectLevelSymbolTable, TypeShed typeShed) {
+    this.symbolsModuleTypeProvider = new SymbolsModuleTypeProvider(projectLevelSymbolTable, typeShed);
     this.rootModule = this.symbolsModuleTypeProvider.createBuiltinModule();
   }
 

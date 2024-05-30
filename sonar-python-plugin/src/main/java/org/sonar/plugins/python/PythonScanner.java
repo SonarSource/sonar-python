@@ -106,8 +106,14 @@ public class PythonScanner extends Scanner {
       AstNode astNode = parser.parse(pythonFile.content());
       PythonTreeMaker treeMaker = getTreeMaker(inputFile);
       FileInput parse = treeMaker.fileInput(astNode);
-      visitorContext = new PythonVisitorContext(
-        parse, pythonFile, getWorkingDirectory(context), indexer.packageName(inputFile), indexer.projectLevelSymbolTable(), indexer.cacheContext(), context.runtime().getProduct());
+      visitorContext = new PythonVisitorContext(parse,
+        pythonFile,
+        getWorkingDirectory(context),
+        indexer.packageName(inputFile),
+        indexer.projectLevelSymbolTable(),
+        indexer.typeShed(),
+        indexer.cacheContext(),
+        context.runtime().getProduct());
       if (fileType == InputFile.Type.MAIN) {
         saveMeasures(inputFile, visitorContext);
       }
