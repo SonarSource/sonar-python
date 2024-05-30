@@ -19,10 +19,13 @@
  */
 package org.sonar.python.semantic.v2;
 
+import org.sonar.api.Beta;
 import org.sonar.plugins.python.api.tree.Tree;
 
+@Beta
 public record UsageV2(Tree tree, Kind kind) {
 
+  @Beta
   public boolean isBindingUsage() {
     return kind() != UsageV2.Kind.OTHER && kind() != UsageV2.Kind.GLOBAL_DECLARATION;
   }
