@@ -39,6 +39,7 @@ import org.sonar.python.caching.CacheContextImpl;
 import org.sonar.python.parser.PythonParser;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.semantic.SymbolImpl;
+import org.sonar.python.semantic.v2.TypeShed;
 import org.sonar.python.tree.FileInputImpl;
 import org.sonar.python.tree.PythonTreeMaker;
 
@@ -95,15 +96,16 @@ class PythonVisitorContextTest {
   void sonar_product() {
     CacheContextImpl cacheContext = CacheContextImpl.dummyCache();
     ProjectLevelSymbolTable projectLevelSymbolTable = ProjectLevelSymbolTable.empty();
+    var typeShed = new TypeShed();
     String myPackage = "my_package";
     File workingDirectory = null;
     PythonFile pythonFile = pythonFile("my_module.py");
     FileInput fileInput = mock(FileInputImpl.class);
 
-    PythonVisitorContext pythonVisitorContext = new PythonVisitorContext(fileInput, pythonFile, workingDirectory, myPackage, projectLevelSymbolTable, cacheContext, SonarProduct.SONARLINT);
+    PythonVisitorContext pythonVisitorContext = new PythonVisitorContext(fileInput, pythonFile, workingDirectory, myPackage, projectLevelSymbolTable, typeShed, cacheContext, SonarProduct.SONARLINT);
     assertThat(pythonVisitorContext.sonarProduct()).isEqualTo(SonarProduct.SONARLINT);
 
-    pythonVisitorContext = new PythonVisitorContext(fileInput, pythonFile, workingDirectory, myPackage, projectLevelSymbolTable, cacheContext, SonarProduct.SONARQUBE);
+    pythonVisitorContext = new PythonVisitorContext(fileInput, pythonFile, workingDirectory, myPackage, projectLevelSymbolTable, typeShed, cacheContext, SonarProduct.SONARQUBE);
     assertThat(pythonVisitorContext.sonarProduct()).isEqualTo(SonarProduct.SONARQUBE);
 
     pythonVisitorContext = new PythonVisitorContext(fileInput, pythonFile, workingDirectory, myPackage, projectLevelSymbolTable, cacheContext);
