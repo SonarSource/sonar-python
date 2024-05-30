@@ -27,6 +27,9 @@ import javax.annotation.CheckForNull;
 import org.sonar.plugins.python.api.LocationInFile;
 
 public interface ClassSymbol extends Symbol {
+  @Beta
+  List<String> superClassesFqn();
+
   List<Symbol> superClasses();
 
   boolean hasUnresolvedTypeHierarchy();

@@ -199,6 +199,15 @@ public class ClassSymbolImpl extends SymbolImpl implements ClassSymbol {
   }
 
   @Override
+  public List<String> superClassesFqn() {
+    return superClassesFqns;
+  }
+
+  public boolean shouldSearchHierarchyInTypeshed() {
+    return !hasAlreadyReadSuperClasses && superClasses.isEmpty() && !superClassesFqns.isEmpty();
+  }
+
+  @Override
   public List<Symbol> superClasses() {
     // In case of symbols coming from TypeShed protobuf, we resolve superclasses lazily
     if (!hasAlreadyReadSuperClasses && superClasses.isEmpty() && !superClassesFqns.isEmpty()) {
