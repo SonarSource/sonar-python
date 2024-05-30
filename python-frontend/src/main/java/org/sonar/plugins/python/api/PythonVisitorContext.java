@@ -60,7 +60,7 @@ public class PythonVisitorContext extends PythonInputFileContext {
 
     var symbolTable = new SymbolTableBuilderV2(rootTree)
       .build();
-    new TypeInferenceV2(new ProjectLevelTypeTable(projectLevelSymbolTable), pythonFile, symbolTable).inferTypes(rootTree);
+    new TypeInferenceV2(new ProjectLevelTypeTable(ProjectLevelSymbolTable.from(projectLevelSymbolTable)), pythonFile, symbolTable).inferTypes(rootTree);
   }
 
   public PythonVisitorContext(FileInput rootTree, PythonFile pythonFile, @Nullable File workingDirectory, String packageName,
@@ -71,7 +71,7 @@ public class PythonVisitorContext extends PythonInputFileContext {
     new SymbolTableBuilder(packageName, pythonFile, projectLevelSymbolTable).visitFileInput(rootTree);
     var symbolTable = new SymbolTableBuilderV2(rootTree)
       .build();
-    new TypeInferenceV2(new ProjectLevelTypeTable(projectLevelSymbolTable), pythonFile, symbolTable).inferTypes(rootTree);
+    new TypeInferenceV2(new ProjectLevelTypeTable(ProjectLevelSymbolTable.from(projectLevelSymbolTable)), pythonFile, symbolTable).inferTypes(rootTree);
   }
 
   public PythonVisitorContext(PythonFile pythonFile, RecognitionException parsingException) {

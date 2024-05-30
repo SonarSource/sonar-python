@@ -24,6 +24,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -58,6 +59,16 @@ public class ProjectLevelSymbolTable {
 
   public static ProjectLevelSymbolTable from(Map<String, Set<Symbol>> globalSymbolsByModuleName) {
     return new ProjectLevelSymbolTable(globalSymbolsByModuleName);
+  }
+
+  public static ProjectLevelSymbolTable from(ProjectLevelSymbolTable from) {
+    var to = empty();
+    to.globalDescriptorsByModuleName.putAll(from.globalDescriptorsByModuleName);
+    Optional.ofNullable(from.globalDescriptorsByFQN)
+        .ifPresent(v -> to.globalDescriptorsByFQN = new HashMap<>(v));
+    to.djangoViewsFQN.addAll(from.djangoViewsFQN);
+    to.importsByModule.putAll(from.importsByModule);
+    return to;
   }
 
   public ProjectLevelSymbolTable() {
