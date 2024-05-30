@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import javax.annotation.Nullable;
@@ -32,8 +33,9 @@ import org.sonar.plugins.python.api.symbols.AmbiguousSymbol;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.python.semantic.ClassSymbolImpl;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
-import org.sonar.python.types.TypeShed;
+import org.sonar.python.semantic.SymbolImpl;
 import org.sonar.python.types.v2.ClassType;
 import org.sonar.python.types.v2.FunctionType;
 import org.sonar.python.types.v2.Member;
@@ -44,13 +46,15 @@ import org.sonar.python.types.v2.UnionType;
 
 public class SymbolsModuleTypeProvider {
   private final ProjectLevelSymbolTable projectLevelSymbolTable;
+  private final TypeShed typeShed;
 
   public SymbolsModuleTypeProvider(ProjectLevelSymbolTable projectLevelSymbolTable) {
     this.projectLevelSymbolTable = projectLevelSymbolTable;
+    typeShed = new TypeShed();
   }
 
   public ModuleType createBuiltinModule() {
-    return createModuleFromSymbols(null, null, TypeShed.builtinSymbols().values());
+    return createModuleFromSymbols(null, null, typeShed.builtinSymbols().values());
   }
 
   public ModuleType createModuleType(List<String> moduleFqn, ModuleType parent) {
@@ -71,7 +75,7 @@ public class SymbolsModuleTypeProvider {
   }
 
   private Optional<ModuleType> createModuleTypeFromTypeShed(String moduleName, String moduleFqn, ModuleType parent) {
-    return Optional.ofNullable(TypeShed.symbolsForModuleWithoutStoreInCache(moduleFqn))
+    return Optional.ofNullable(typeShed.symbolsForModule(moduleFqn))
       .filter(Predicate.not(Map::isEmpty))
       .map(typeShedModuleSymbols -> createModuleFromSymbols(moduleName, parent, typeShedModuleSymbols.values()));
   }
@@ -143,9 +147,30 @@ public class SymbolsModuleTypeProvider {
     Set<Member> members =
       symbol.declaredMembers().stream().map(m -> new Member(m.name(), convertToType(m, createdTypesBySymbol))).collect(Collectors.toSet());
     classType.members().addAll(members);
-    List<PythonType> superClasses = symbol.superClasses().stream().map(s -> convertToType(s, createdTypesBySymbol)).toList();
-    classType.superClasses().addAll(superClasses);
+
+
+    Optional.of(symbol)
+      .filter(ClassSymbolImpl.class::isInstance)
+      .map(ClassSymbolImpl.class::cast)
+      .filter(ClassSymbolImpl::shouldSearchHierarchyInTypeshed)
+      .map(ClassSymbol::superClassesFqn)
+      .map(fqns -> fqns.stream().map(this::typeshedSymbolWithFQN))
+      .or(() -> Optional.of(symbol)
+        .map(ClassSymbol::superClasses)
+        .map(Collection::stream))
+      .stream()
+      .flatMap(Function.identity())
+      .map(s -> convertToType(s, createdTypesBySymbol))
+      .forEach(classType.superClasses()::add);
+
     return classType;
+  }
+
+  private Symbol typeshedSymbolWithFQN(String fullyQualifiedName) {
+    String[] fqnSplitByDot = fullyQualifiedName.split("\\.");
+    String localName = fqnSplitByDot[fqnSplitByDot.length - 1];
+    Symbol symbol = typeShed.symbolWithFQN(fullyQualifiedName);
+    return symbol == null ? new SymbolImpl(localName, fullyQualifiedName) : ((SymbolImpl) symbol).copyWithoutUsages();
   }
 
   private PythonType convertToUnionType(AmbiguousSymbol ambiguousSymbol, Map<Symbol, PythonType> createdTypesBySymbol) {
