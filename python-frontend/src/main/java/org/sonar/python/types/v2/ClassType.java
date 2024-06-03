@@ -41,7 +41,6 @@ public final class ClassType implements PythonType {
   private final List<PythonType> attributes;
   private final List<PythonType> superClasses;
   private final List<PythonType> metaClasses;
-  @Nullable
   private final LocationInFile locationInFile;
 
   /**
@@ -220,10 +219,4 @@ public final class ClassType implements PythonType {
   public List<PythonType> metaClasses() {
     return metaClasses;
   }
-
-  @Nullable
-  public LocationInFile locationInFile() {
-    return locationInFile;
-  }
-
 }

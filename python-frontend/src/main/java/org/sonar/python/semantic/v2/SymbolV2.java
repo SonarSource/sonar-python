@@ -21,7 +21,6 @@ package org.sonar.python.semantic.v2;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import javax.annotation.Nullable;
 import org.sonar.api.Beta;
 import org.sonar.plugins.python.api.tree.Name;
@@ -61,22 +60,8 @@ public class SymbolV2 {
     return name;
   }
 
-  @Nullable
-  public String fullyQualifiedName() {
-    return fullyQualifiedName;
-  }
-
   public List<UsageV2> usages() {
     return usages;
   }
-
-  @Override
-  public String toString() {
-    return "SymbolV2[" +
-      "name=" + name + ", " +
-      "fullyQualifiedName=" + fullyQualifiedName + ", " +
-      "usages=" + usages + ']';
-  }
-
 
 }

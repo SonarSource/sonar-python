@@ -21,6 +21,7 @@ package org.sonar.python.types.v2;
 
 import java.util.List;
 import java.util.Optional;
+import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.api.Beta;
 import org.sonar.plugins.python.api.LocationInFile;
@@ -38,9 +39,7 @@ public final class FunctionType implements PythonType {
   private final boolean hasDecorators;
   private final boolean isInstanceMethod;
   private final boolean hasVariadicParameter;
-  @Nullable
   private final PythonType owner;
-  @Nullable
   private final LocationInFile locationInFile;
 
   /**
@@ -118,14 +117,8 @@ public final class FunctionType implements PythonType {
     return hasVariadicParameter;
   }
 
-  @Nullable
+  @CheckForNull
   public PythonType owner() {
     return owner;
   }
-
-  @Nullable
-  public LocationInFile locationInFile() {
-    return locationInFile;
-  }
-
 }
