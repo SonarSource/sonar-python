@@ -49,7 +49,7 @@ public class PythonVisitorContext extends PythonInputFileContext {
     SymbolTableBuilder symbolTableBuilder = packageName != null ? new SymbolTableBuilder(packageName, pythonFile) : new SymbolTableBuilder(pythonFile);
     symbolTableBuilder.visitFileInput(rootTree);
     var symbolTable = new SymbolTableBuilderV2(rootTree).build();
-    var projectLevelTypeTable = new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty(), new TypeShed());
+    var projectLevelTypeTable = new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty(), new TypeShed(ProjectLevelSymbolTable.empty()));
     new TypeInferenceV2(projectLevelTypeTable, pythonFile, symbolTable).inferTypes(rootTree);
   }
 
@@ -62,7 +62,7 @@ public class PythonVisitorContext extends PythonInputFileContext {
 
     var symbolTable = new SymbolTableBuilderV2(rootTree)
       .build();
-    var projectLevelTypeTable = new ProjectLevelTypeTable(ProjectLevelSymbolTable.from(projectLevelSymbolTable), new TypeShed());
+    var projectLevelTypeTable = new ProjectLevelTypeTable(ProjectLevelSymbolTable.from(projectLevelSymbolTable), new TypeShed(projectLevelSymbolTable));
     new TypeInferenceV2(projectLevelTypeTable, pythonFile, symbolTable).inferTypes(rootTree);
   }
 

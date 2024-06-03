@@ -26,7 +26,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.sonar.api.SonarProduct;
 import org.sonar.plugins.python.api.PythonCheck;
@@ -162,7 +161,7 @@ public class PythonQuickFixVerifier {
 
     return new PythonVisitorContext(fileInput,
       pythonFile, null, "",
-      ProjectLevelSymbolTable.empty(), new TypeShed(), CacheContextImpl.dummyCache(), SonarProduct.SONARLINT);
+      ProjectLevelSymbolTable.empty(), new TypeShed(ProjectLevelSymbolTable.empty()), CacheContextImpl.dummyCache(), SonarProduct.SONARLINT);
   }
 
   private static String applyQuickFix(String codeWithIssue, PythonQuickFix quickFix) {

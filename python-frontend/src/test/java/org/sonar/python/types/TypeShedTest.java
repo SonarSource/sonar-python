@@ -29,6 +29,7 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
+import org.mockito.Mockito;
 import org.slf4j.event.Level;
 import org.sonar.api.testfixtures.log.LogTesterJUnit5;
 import org.sonar.plugins.python.api.ProjectPythonVersion;
@@ -40,12 +41,14 @@ import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Symbol.Kind;
 import org.sonar.python.semantic.AmbiguousSymbolImpl;
 import org.sonar.python.semantic.FunctionSymbolImpl;
+import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.semantic.SymbolImpl;
 import org.sonar.python.types.protobuf.SymbolsProtos;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.Assertions.tuple;
+import static org.sonar.python.types.TypeShed.symbolWithFQN;
 import static org.sonar.python.types.TypeShed.symbolsForModule;
 
 class TypeShedTest {
@@ -137,6 +140,26 @@ class TypeShedTest {
     Map<String, Symbol> imaplibSymbols = symbolsForModule("imaplib");
     assertThat(imaplibSymbols).isNotEmpty();
     assertThat(imaplibSymbols.values()).allMatch(s -> s.usages().isEmpty());
+  }
+
+  @Test
+  void symbols_not_retrieved_when_within_same_project() {
+    ProjectLevelSymbolTable projectLevelSymbolTable = Mockito.mock(ProjectLevelSymbolTable.class);
+    TypeShed.setProjectLevelSymbolTable(projectLevelSymbolTable);
+
+    Mockito.when(projectLevelSymbolTable.projectBasePackages()).thenReturn(Set.of("sklearn"));
+    Map<String, Symbol> sklearnSymbols = symbolsForModule("sklearn.ensemble");
+    assertThat(sklearnSymbols).isEmpty();
+    sklearnSymbols = symbolsForModule("sklearn");
+    assertThat(sklearnSymbols).isEmpty();
+    Symbol symbol = symbolWithFQN("sklearn.ensemble", "sklearn.ensemble.RandomForestClassifier");
+    assertThat(symbol).isNull();
+
+    Mockito.when(projectLevelSymbolTable.projectBasePackages()).thenReturn(Set.of("unrelated"));
+    sklearnSymbols = symbolsForModule("sklearn.ensemble");
+    assertThat(sklearnSymbols).isNotEmpty();
+    symbol = symbolWithFQN("sklearn.ensemble", "sklearn.ensemble.RandomForestClassifier");
+    assertThat(symbol).isNotNull();
   }
 
   @Test

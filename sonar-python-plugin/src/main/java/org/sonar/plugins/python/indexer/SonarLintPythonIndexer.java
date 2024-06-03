@@ -65,6 +65,7 @@ public class SonarLintPythonIndexer extends PythonIndexer implements ModuleFileL
     this.projectBaseDirAbsolutePath = context.fileSystem().baseDir().getAbsolutePath();
     shouldBuildProjectSymbolTable = false;
     List<InputFile> files = getInputFiles(moduleFileSystem);
+    collectPackageNames(files);
     long nLines = files.stream().map(InputFile::lines).mapToLong(Integer::longValue).sum();
     long maxLinesForIndexing = context.config().getLong(MAX_LINES_PROPERTY).orElse(DEFAULT_MAX_LINES_FOR_INDEXING);
     if (nLines > maxLinesForIndexing) {

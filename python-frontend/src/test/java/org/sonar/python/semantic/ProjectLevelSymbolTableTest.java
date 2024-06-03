@@ -1001,4 +1001,13 @@ class ProjectLevelSymbolTableTest {
     assertThat(recomputedDescriptors).usingRecursiveFieldByFieldElementComparator().containsExactlyInAnyOrderElementsOf(retrievedDescriptors);
   }
 
+  @Test
+  void projectPackages() {
+    ProjectLevelSymbolTable projectLevelSymbolTable = new ProjectLevelSymbolTable();
+    projectLevelSymbolTable.addProjectPackage("first.package");
+    projectLevelSymbolTable.addProjectPackage("second.package");
+    projectLevelSymbolTable.addProjectPackage("third");
+    assertThat(projectLevelSymbolTable.projectBasePackages()).containsExactlyInAnyOrder("first", "second", "third");
+  }
+
 }

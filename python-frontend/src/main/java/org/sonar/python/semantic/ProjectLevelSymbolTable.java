@@ -52,6 +52,7 @@ public class ProjectLevelSymbolTable {
   private Map<String, Descriptor> globalDescriptorsByFQN;
   private final Set<String> djangoViewsFQN = new HashSet<>();
   private final Map<String, Set<String>> importsByModule = new HashMap<>();
+  private final Set<String> projectBasePackages = new HashSet<>();
 
   public static ProjectLevelSymbolTable empty() {
     return new ProjectLevelSymbolTable(Collections.emptyMap());
@@ -187,6 +188,14 @@ public class ProjectLevelSymbolTable {
 
   public boolean isDjangoView(@Nullable String fqn) {
     return djangoViewsFQN.contains(fqn);
+  }
+
+  public void addProjectPackage(String projectPackage) {
+    projectBasePackages.add(projectPackage.split("\\.", 2)[0]);
+  }
+
+  public Set<String> projectBasePackages() {
+    return projectBasePackages;
   }
 
   private class DjangoViewsVisitor extends BaseTreeVisitor {

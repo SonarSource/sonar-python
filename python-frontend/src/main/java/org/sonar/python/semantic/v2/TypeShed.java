@@ -43,6 +43,7 @@ import org.sonar.python.semantic.AmbiguousSymbolImpl;
 import org.sonar.python.semantic.BuiltinSymbols;
 import org.sonar.python.semantic.ClassSymbolImpl;
 import org.sonar.python.semantic.FunctionSymbolImpl;
+import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.semantic.SymbolImpl;
 import org.sonar.python.types.protobuf.SymbolsProtos;
 import org.sonar.python.types.protobuf.SymbolsProtos.ModuleSymbol;
@@ -84,13 +85,15 @@ public class TypeShed {
   private Map<String, Symbol> builtins;
   private final Map<String, Map<String, Symbol>> typeShedSymbols;
   private final Set<String> modulesInProgress;
+  private final ProjectLevelSymbolTable projectLevelSymbolTable;
 
-  public TypeShed() {
+  public TypeShed(ProjectLevelSymbolTable projectLevelSymbolTable) {
     // workaround to initialize supported python versions used in ClassSymbolImpl
     // TODO: remove once v2 types model will be populated from TypeShed bypassing conversion to symbols
     org.sonar.python.types.TypeShed.builtinSymbols();
     typeShedSymbols = new HashMap<>();
     modulesInProgress = new HashSet<>();
+    this.projectLevelSymbolTable = projectLevelSymbolTable;
   }
 
   //================================================================================
@@ -115,10 +118,17 @@ public class TypeShed {
     return supportedPythonVersions;
   }
 
+  private boolean searchedModuleMatchesCurrentProject(String searchedModule) {
+    return projectLevelSymbolTable.projectBasePackages().contains(searchedModule.split("\\.", 2)[0]);
+  }
+
   /**
    * Returns map of exported symbols by name for a given module
    */
   public Map<String, Symbol> symbolsForModule(String moduleName) {
+    if (searchedModuleMatchesCurrentProject(moduleName)) {
+      return Collections.emptyMap();
+    }
     if (!typeShedSymbols.containsKey(moduleName)) {
       Map<String, Symbol> symbols = searchTypeShedForModule(moduleName);
       typeShedSymbols.put(moduleName, symbols);

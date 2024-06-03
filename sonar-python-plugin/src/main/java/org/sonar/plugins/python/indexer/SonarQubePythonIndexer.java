@@ -72,6 +72,7 @@ public class SonarQubePythonIndexer extends PythonIndexer {
   @Override
   public void buildOnce(SensorContext context) {
     LOG.debug("Input files for indexing: {}", inputFiles);
+    collectPackageNames(inputFiles);
     if (shouldOptimizeAnalysis(context)) {
       computeGlobalSymbolsUsingCache(context);
       return;
