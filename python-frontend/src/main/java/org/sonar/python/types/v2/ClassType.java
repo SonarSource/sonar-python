@@ -191,7 +191,9 @@ public record ClassType(
 
   @Override
   public int hashCode() {
-    return Objects.hash(name, members, attributes, superClasses);
+    List<String> parentNames = superClasses.stream().map(PythonType::key).toList();
+    List<String> metaClassNames = metaClasses.stream().map(PythonType::key).toList();
+    return Objects.hash(name, members, attributes, parentNames, metaClassNames);
   }
 
   @Override
