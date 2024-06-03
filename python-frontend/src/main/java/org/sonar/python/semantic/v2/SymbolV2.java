@@ -21,13 +21,24 @@ package org.sonar.python.semantic.v2;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import javax.annotation.Nullable;
 import org.sonar.api.Beta;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.python.tree.NameImpl;
 
 @Beta
-public record SymbolV2(String name, @Nullable String fullyQualifiedName, List<UsageV2> usages) {
+public class SymbolV2 {
+  private final String name;
+  @Nullable
+  private final String fullyQualifiedName;
+  private final List<UsageV2> usages;
+
+  public SymbolV2(String name, @Nullable String fullyQualifiedName, List<UsageV2> usages) {
+    this.name = name;
+    this.fullyQualifiedName = fullyQualifiedName;
+    this.usages = usages;
+  }
 
   public SymbolV2(String name) {
     this(name, null, new ArrayList<>());
@@ -45,4 +56,27 @@ public record SymbolV2(String name, @Nullable String fullyQualifiedName, List<Us
   public boolean hasSingleBindingUsage() {
     return usages.stream().filter(UsageV2::isBindingUsage).toList().size() == 1;
   }
+
+  public String name() {
+    return name;
+  }
+
+  @Nullable
+  public String fullyQualifiedName() {
+    return fullyQualifiedName;
+  }
+
+  public List<UsageV2> usages() {
+    return usages;
+  }
+
+  @Override
+  public String toString() {
+    return "SymbolV2[" +
+      "name=" + name + ", " +
+      "fullyQualifiedName=" + fullyQualifiedName + ", " +
+      "usages=" + usages + ']';
+  }
+
+
 }

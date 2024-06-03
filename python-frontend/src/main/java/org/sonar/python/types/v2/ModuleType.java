@@ -27,7 +27,19 @@ import javax.annotation.Nullable;
 import org.sonar.api.Beta;
 
 @Beta
-public record ModuleType(@Nullable String name, @Nullable ModuleType parent, Map<String, PythonType> members) implements PythonType {
+public final class ModuleType implements PythonType {
+  @Nullable
+  private final String name;
+  @Nullable
+  private final ModuleType parent;
+  private final Map<String, PythonType> members;
+
+  public ModuleType(@Nullable String name, @Nullable ModuleType parent, Map<String, PythonType> members) {
+    this.name = name;
+    this.parent = parent;
+    this.members = members;
+  }
+
   public ModuleType(@Nullable String name) {
     this(name, null);
   }
@@ -62,4 +74,20 @@ public record ModuleType(@Nullable String name, @Nullable ModuleType parent, Map
       ", members=" + members +
       '}';
   }
+
+  @Override
+  @Nullable
+  public String name() {
+    return name;
+  }
+
+  @Nullable
+  public ModuleType parent() {
+    return parent;
+  }
+
+  public Map<String, PythonType> members() {
+    return members;
+  }
+
 }

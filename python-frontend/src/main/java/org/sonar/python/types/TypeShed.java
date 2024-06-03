@@ -115,6 +115,10 @@ public class TypeShed {
     return builtins;
   }
 
+  public static Map<String, Map<String, Symbol>> getLoadedTypeShedSymbols() {
+    return typeShedSymbols;
+  }
+
   public static ClassSymbol typeShedClass(String fullyQualifiedName) {
     Symbol symbol = builtinSymbols().get(fullyQualifiedName);
     if (symbol == null) {

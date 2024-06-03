@@ -27,6 +27,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -130,7 +131,11 @@ public class TypeShed {
       return Collections.emptyMap();
     }
     if (!typeShedSymbols.containsKey(moduleName)) {
-      Map<String, Symbol> symbols = searchTypeShedForModule(moduleName);
+      var symbols = Optional.of(org.sonar.python.types.TypeShed.getLoadedTypeShedSymbols())
+        .filter(m -> m.containsKey(moduleName))
+        .map(m -> m.get(moduleName))
+        .orElseGet(() -> searchTypeShedForModule(moduleName));
+
       typeShedSymbols.put(moduleName, symbols);
       return symbols;
     }

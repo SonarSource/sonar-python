@@ -35,13 +35,32 @@ import org.sonar.plugins.python.api.LocationInFile;
  * ClassType
  */
 @Beta
-public record ClassType(
-  String name,
-  Set<Member> members,
-  List<PythonType> attributes,
-  List<PythonType> superClasses,
-  List<PythonType> metaClasses,
-  @Nullable LocationInFile locationInFile) implements PythonType {
+public final class ClassType implements PythonType {
+  private final String name;
+  private final Set<Member> members;
+  private final List<PythonType> attributes;
+  private final List<PythonType> superClasses;
+  private final List<PythonType> metaClasses;
+  @Nullable
+  private final LocationInFile locationInFile;
+
+  /**
+   *
+   */
+  public ClassType(
+    String name,
+    Set<Member> members,
+    List<PythonType> attributes,
+    List<PythonType> superClasses,
+    List<PythonType> metaClasses,
+    @Nullable LocationInFile locationInFile) {
+    this.name = name;
+    this.members = members;
+    this.attributes = attributes;
+    this.superClasses = superClasses;
+    this.metaClasses = metaClasses;
+    this.locationInFile = locationInFile;
+  }
 
   public ClassType(String name) {
     this(name, new HashSet<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), null);
@@ -153,11 +172,11 @@ public record ClassType(
 
   public boolean hasMetaClass() {
     return !this.metaClasses.isEmpty() ||
-           this.superClasses()
-             .stream()
-             .filter(ClassType.class::isInstance)
-             .map(ClassType.class::cast)
-             .anyMatch(ClassType::hasMetaClass);
+      this.superClasses()
+        .stream()
+        .filter(ClassType.class::isInstance)
+        .map(ClassType.class::cast)
+        .anyMatch(ClassType::hasMetaClass);
   }
 
   public TriBool instancesHaveMember(String memberName) {
@@ -177,27 +196,34 @@ public record ClassType(
   }
 
   @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    ClassType classType = (ClassType) o;
-    boolean haveSameAttributes = Objects.equals(name, classType.name) && Objects.equals(members, classType.members) && Objects.equals(attributes, classType.attributes);
-    List<String> parentNames = superClasses.stream().map(PythonType::key).toList();
-    List<String> metaClassNames = metaClasses.stream().map(PythonType::key).toList();
-    List<String> otherParentNames = classType.superClasses.stream().map(PythonType::key).toList();
-    List<String> otherMetaClassNames = classType.metaClasses.stream().map(PythonType::key).toList();
-    return haveSameAttributes && Objects.equals(parentNames, otherParentNames) && Objects.equals(metaClassNames, otherMetaClassNames);
-  }
-
-  @Override
-  public int hashCode() {
-    List<String> parentNames = superClasses.stream().map(PythonType::key).toList();
-    List<String> metaClassNames = metaClasses.stream().map(PythonType::key).toList();
-    return Objects.hash(name, members, attributes, parentNames, metaClassNames);
-  }
-
-  @Override
   public String toString() {
     return "ClassType[%s]".formatted(name);
   }
+
+  @Override
+  public String name() {
+    return name;
+  }
+
+  public Set<Member> members() {
+    return members;
+  }
+
+  public List<PythonType> attributes() {
+    return attributes;
+  }
+
+  public List<PythonType> superClasses() {
+    return superClasses;
+  }
+
+  public List<PythonType> metaClasses() {
+    return metaClasses;
+  }
+
+  @Nullable
+  public LocationInFile locationInFile() {
+    return locationInFile;
+  }
+
 }
