@@ -72,4 +72,23 @@ public record ObjectType(PythonType type, List<PythonType> attributes, List<Memb
   public Optional<LocationInFile> definitionLocation() {
     return type.definitionLocation();
   }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    ObjectType that = (ObjectType) o;
+    List<String> membersNames = members.stream().map(Member::name).toList();
+    List<String> otherMembersNames = that.members.stream().map(Member::name).toList();
+    List<String> attributesNames = attributes.stream().map(PythonType::key).toList();
+    List<String> otherAttributesNames = that.attributes.stream().map(PythonType::key).toList();
+    return Objects.equals(type, that.type) && Objects.equals(membersNames, otherMembersNames) && Objects.equals(attributesNames, otherAttributesNames);
+  }
+
+  @Override
+  public int hashCode() {
+    List<String> membersNames = members.stream().map(Member::name).toList();
+    List<String> attributesNames = attributes.stream().map(PythonType::key).toList();
+    return Objects.hash(type, attributesNames, membersNames);
+  }
 }

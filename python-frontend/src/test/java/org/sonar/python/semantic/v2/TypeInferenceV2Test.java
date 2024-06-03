@@ -21,7 +21,6 @@ package org.sonar.python.semantic.v2;
 
 import java.util.Collection;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -31,7 +30,6 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.PythonFile;
-import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.ClassDef;
@@ -66,12 +64,12 @@ import static org.sonar.python.PythonTestUtils.parse;
 import static org.sonar.python.types.v2.TypesTestUtils.INT_TYPE;
 import static org.sonar.python.types.v2.TypesTestUtils.LIST_TYPE;
 import static org.sonar.python.types.v2.TypesTestUtils.NONE_TYPE;
+import static org.sonar.python.types.v2.TypesTestUtils.PROJECT_LEVEL_TYPE_TABLE;
 import static org.sonar.python.types.v2.TypesTestUtils.STR_TYPE;
 
 class TypeInferenceV2Test {
 
   static PythonFile pythonFile = PythonTestUtils.pythonFile("");
-  private static ProjectLevelTypeTable projectLevelTypeTable;
 
   @Test
   void testTypeshedImports() {
@@ -137,9 +135,12 @@ class TypeInferenceV2Test {
   void testProjectLevelSymbolTableImports() {
     var classSymbol = new ClassSymbolImpl("C", "something.known.C");
 
+    ProjectLevelTypeTable projectLevelTypeTable = new ProjectLevelTypeTable(ProjectLevelSymbolTable.from(
+      Map.of("something", new HashSet<>(), "something.known", Set.of(classSymbol)))
+    );
     var root = inferTypes("""
       import something.known
-      """, Map.of("something", new HashSet<>(), "something.known", Set.of(classSymbol)));
+      """, projectLevelTypeTable);
 
     var importName = (ImportName) root.statements().statements().get(0);
     var importedNames = importName.modules().get(0).dottedName().names();
@@ -1119,12 +1120,8 @@ class TypeInferenceV2Test {
       .map(PythonType::unwrappedType)
       .get();
 
-    var builtinsIntType = projectLevelTypeTable.getModule()
-      .resolveMember("int")
-      .get();
-
     Assertions.assertThat(qualifiedExpressionType)
-      .isSameAs(builtinsIntType);
+      .isSameAs(INT_TYPE);
   }
 
 
@@ -1144,14 +1141,11 @@ class TypeInferenceV2Test {
       .extracting(QualifiedExpression::typeV2)
       .isNotNull();
 
-    var builtinsListType = projectLevelTypeTable.getModule()
-      .resolveMember("list")
-      .get();
 
-    var builtinsAppendType = builtinsListType.resolveMember("append").get();
+    var builtinsAppendType = LIST_TYPE.resolveMember("append").get();
 
     var qualifierType = qualifiedExpression.qualifier().typeV2().unwrappedType();
-    Assertions.assertThat(qualifierType).isSameAs(builtinsListType);
+    Assertions.assertThat(qualifierType).isSameAs(LIST_TYPE);
 
     var qualifiedExpressionType = qualifiedExpression.typeV2();
     Assertions.assertThat(qualifiedExpressionType)
@@ -1564,15 +1558,14 @@ class TypeInferenceV2Test {
   }
 
   private static FileInput inferTypes(String lines) {
-    return inferTypes(lines, new HashMap<>());
+    return inferTypes(lines, PROJECT_LEVEL_TYPE_TABLE);
   }
 
-  private static FileInput inferTypes(String lines, Map<String, Set<Symbol>> globalSymbols) {
+  private static FileInput inferTypes(String lines, ProjectLevelTypeTable projectLevelTypeTable) {
     FileInput root = parse(lines);
 
     var symbolTable = new SymbolTableBuilderV2(root)
       .build();
-    projectLevelTypeTable = new ProjectLevelTypeTable(ProjectLevelSymbolTable.from(globalSymbols));
     new TypeInferenceV2(projectLevelTypeTable, pythonFile, symbolTable).inferTypes(root);
     return root;
   }

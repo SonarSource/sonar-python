@@ -29,7 +29,8 @@ import org.sonar.python.semantic.v2.TypeInferenceV2;
 
 public class TypesTestUtils {
 
-  public static final ModuleType BUILTINS = new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty()).getModule();
+  public static final ProjectLevelTypeTable PROJECT_LEVEL_TYPE_TABLE = new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty());
+  public static final ModuleType BUILTINS = PROJECT_LEVEL_TYPE_TABLE.getModule();
 
   public static final PythonType INT_TYPE = BUILTINS.resolveMember("int").get();
   public static final PythonType BOOL_TYPE = BUILTINS.resolveMember("bool").get();
@@ -45,7 +46,7 @@ public class TypesTestUtils {
     FileInput fileInput = PythonTestUtils.parseWithoutSymbols(code);
     var symbolTable = new SymbolTableBuilderV2(fileInput)
       .build();
-    new TypeInferenceV2(new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty()), pythonFile, symbolTable).inferTypes(fileInput);
+    new TypeInferenceV2(PROJECT_LEVEL_TYPE_TABLE, pythonFile, symbolTable).inferTypes(fileInput);
     return fileInput;
   }
 }

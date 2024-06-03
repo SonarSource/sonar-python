@@ -30,18 +30,47 @@ import org.sonar.plugins.python.api.LocationInFile;
  * FunctionType
  */
 @Beta
-public record FunctionType(
-  String name,
-  List<PythonType> attributes,
-  List<ParameterV2> parameters,
-  PythonType returnType,
-  boolean isAsynchronous,
-  boolean hasDecorators,
-  boolean isInstanceMethod,
-  boolean hasVariadicParameter,
-  @Nullable PythonType owner,
-  @Nullable LocationInFile locationInFile
-) implements PythonType {
+public final class FunctionType implements PythonType {
+  private final String name;
+  private final List<PythonType> attributes;
+  private final List<ParameterV2> parameters;
+  private final PythonType returnType;
+  private final boolean isAsynchronous;
+  private final boolean hasDecorators;
+  private final boolean isInstanceMethod;
+  private final boolean hasVariadicParameter;
+  @Nullable
+  private final PythonType owner;
+  @Nullable
+  private final LocationInFile locationInFile;
+
+  /**
+   *
+   */
+  public FunctionType(
+    String name,
+    List<PythonType> attributes,
+    List<ParameterV2> parameters,
+    PythonType returnType,
+    boolean isAsynchronous,
+    boolean hasDecorators,
+    boolean isInstanceMethod,
+    boolean hasVariadicParameter,
+    @Nullable PythonType owner,
+    @Nullable LocationInFile locationInFile
+  ) {
+    this.name = name;
+    this.attributes = attributes;
+    this.parameters = parameters;
+    this.returnType = returnType;
+    this.isAsynchronous = isAsynchronous;
+    this.hasDecorators = hasDecorators;
+    this.isInstanceMethod = isInstanceMethod;
+    this.hasVariadicParameter = hasVariadicParameter;
+    this.owner = owner;
+    this.locationInFile = locationInFile;
+  }
+/*
 
   @Override
   public boolean equals(Object o) {
@@ -57,6 +86,7 @@ public record FunctionType(
       && Objects.equals(attributes, that.attributes)
       && Objects.equals(parameters, that.parameters);
   }
+*/
 
   @Override
   public Optional<String> displayName() {
@@ -68,13 +98,57 @@ public record FunctionType(
     return Optional.ofNullable(this.locationInFile);
   }
 
-  @Override
+/*  @Override
   public int hashCode() {
     return Objects.hash(name, attributes, parameters, returnType, isAsynchronous, hasDecorators, isInstanceMethod, hasVariadicParameter);
-  }
+  }*/
 
   @Override
   public String toString() {
     return "FunctionType[%s]".formatted(name);
   }
+
+  @Override
+  public String name() {
+    return name;
+  }
+
+  public List<PythonType> attributes() {
+    return attributes;
+  }
+
+  public List<ParameterV2> parameters() {
+    return parameters;
+  }
+
+  public PythonType returnType() {
+    return returnType;
+  }
+
+  public boolean isAsynchronous() {
+    return isAsynchronous;
+  }
+
+  public boolean hasDecorators() {
+    return hasDecorators;
+  }
+
+  public boolean isInstanceMethod() {
+    return isInstanceMethod;
+  }
+
+  public boolean hasVariadicParameter() {
+    return hasVariadicParameter;
+  }
+
+  @Nullable
+  public PythonType owner() {
+    return owner;
+  }
+
+  @Nullable
+  public LocationInFile locationInFile() {
+    return locationInFile;
+  }
+
 }

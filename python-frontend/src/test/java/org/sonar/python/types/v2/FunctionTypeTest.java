@@ -35,6 +35,7 @@ import org.sonar.python.semantic.v2.TypeInferenceV2;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.PythonTestUtils.parseWithoutSymbols;
+import static org.sonar.python.types.v2.TypesTestUtils.PROJECT_LEVEL_TYPE_TABLE;
 
 class FunctionTypeTest {
 
@@ -141,30 +142,6 @@ class FunctionTypeTest {
     assertThat(functionType.hasDecorators()).isTrue();
   }
 
-
-  @Test
-  void equals() {
-    FunctionType functionType1 = functionType("def foo(): ...");
-    FunctionType functionType2 = functionType("def foo(): ...");
-    FunctionType functionType3 = functionType("def bar(): ...");
-    FunctionType functionType4 = functionType("@some_decorator\ndef foo(): ...");
-
-    FunctionType functionTypeWithParam1 = functionType("def foo(param): ...");
-    FunctionType functionTypeWithParam2 = functionType("def foo(*param): ...");
-    FunctionType functionTypeWithParam3 = functionType("def foo(**param): ...");
-
-    assertThat(functionType1)
-      .isEqualTo(functionType1)
-      .isEqualTo(functionType2)
-      .isNotEqualTo(functionType3)
-      .isNotEqualTo(functionType4)
-      .isNotEqualTo(functionTypeWithParam1);
-    assertThat(functionTypeWithParam1)
-      .isNotEqualTo(functionTypeWithParam2)
-      .isNotEqualTo(functionTypeWithParam3)
-      .isNotEqualTo(functionTypeWithParam3);
-  }
-
   @Test
   void declaredTypes() {
     // TODO: SONARPY-1776 handle declared return type
@@ -191,7 +168,7 @@ class FunctionTypeTest {
     );
     var symbolTable = new SymbolTableBuilderV2(fileInput)
       .build();
-    new TypeInferenceV2(new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty()), pythonFile, symbolTable).inferTypes(fileInput);
+    new TypeInferenceV2(PROJECT_LEVEL_TYPE_TABLE, pythonFile, symbolTable).inferTypes(fileInput);
 
     ClassDef classDef = (ClassDef) PythonTestUtils.getAllDescendant(fileInput, t -> t.is(Tree.Kind.CLASSDEF)).get(0);
     FunctionDef functionDef = (FunctionDef) PythonTestUtils.getAllDescendant(fileInput, t -> t.is(Tree.Kind.FUNCDEF)).get(0);
@@ -208,7 +185,7 @@ class FunctionTypeTest {
     FileInput fileInput = parseWithoutSymbols(code);
     var symbolTable = new SymbolTableBuilderV2(fileInput)
       .build();
-    new TypeInferenceV2(new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty()), pythonFile, symbolTable).inferTypes(fileInput);
+    new TypeInferenceV2(PROJECT_LEVEL_TYPE_TABLE, pythonFile, symbolTable).inferTypes(fileInput);
     FunctionDef functionDef = (FunctionDef) PythonTestUtils.getAllDescendant(fileInput, t -> t.is(Tree.Kind.FUNCDEF)).get(0);
     return (FunctionType) functionDef.name().typeV2();
   }
