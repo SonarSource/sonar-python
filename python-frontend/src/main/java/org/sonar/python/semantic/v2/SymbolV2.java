@@ -28,8 +28,8 @@ import org.sonar.python.tree.NameImpl;
 
 @Beta
 public class SymbolV2 {
+
   private final String name;
-  @Nullable
   private final String fullyQualifiedName;
   private final List<UsageV2> usages;
 

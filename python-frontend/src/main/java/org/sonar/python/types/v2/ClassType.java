@@ -36,6 +36,7 @@ import org.sonar.plugins.python.api.LocationInFile;
  */
 @Beta
 public final class ClassType implements PythonType {
+
   private final String name;
   private final Set<Member> members;
   private final List<PythonType> attributes;
@@ -43,9 +44,6 @@ public final class ClassType implements PythonType {
   private final List<PythonType> metaClasses;
   private final LocationInFile locationInFile;
 
-  /**
-   *
-   */
   public ClassType(
     String name,
     Set<Member> members,
