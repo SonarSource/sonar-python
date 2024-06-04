@@ -62,16 +62,6 @@ public class ProjectLevelSymbolTable {
     return new ProjectLevelSymbolTable(globalSymbolsByModuleName);
   }
 
-  public static ProjectLevelSymbolTable from(ProjectLevelSymbolTable from) {
-    var to = empty();
-    to.globalDescriptorsByModuleName.putAll(from.globalDescriptorsByModuleName);
-    Optional.ofNullable(from.globalDescriptorsByFQN)
-        .ifPresent(v -> to.globalDescriptorsByFQN = new HashMap<>(v));
-    to.djangoViewsFQN.addAll(from.djangoViewsFQN);
-    to.importsByModule.putAll(from.importsByModule);
-    return to;
-  }
-
   public ProjectLevelSymbolTable() {
     this.globalDescriptorsByModuleName = new HashMap<>();
   }
