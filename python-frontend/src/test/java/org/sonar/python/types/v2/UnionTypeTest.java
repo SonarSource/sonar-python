@@ -19,10 +19,13 @@
  */
 package org.sonar.python.types.v2;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.tree.ExpressionStatement;
 import org.sonar.plugins.python.api.tree.FileInput;
+import org.sonar.python.semantic.v2.FunctionTypeBuilder;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.types.v2.TypesTestUtils.BOOL_TYPE;
@@ -114,5 +117,26 @@ class UnionTypeTest {
     assertThat(lastExpressionStatement.expressions().get(0).typeV2().hasMember("foo")).isEqualTo(TriBool.UNKNOWN);
     assertThat(lastExpressionStatement.expressions().get(0).typeV2().hasMember("bar")).isEqualTo(TriBool.UNKNOWN);
     assertThat(lastExpressionStatement.expressions().get(0).typeV2().hasMember("qix")).isEqualTo(TriBool.FALSE);
+  }
+
+  @Test
+  void unionTypeCandidatesResolution() {
+    var candidate1 = new ClassType("candidate", Set.of(
+      new Member("a", new FunctionTypeBuilder("a").build())
+    ), List.of(), List.of(), List.of(), null);
+
+    var candidate2 = new ClassType("candidate", Set.of(
+      new Member("a", new FunctionTypeBuilder("a").build())
+    ), List.of(), List.of(), List.of(), null);
+
+    var unionType = UnionType.or(candidate1, candidate2);
+    // TODO: SONARPY-1901 UnionType.or should resolve it to class type since the candidates are the same
+    assertThat(unionType).isInstanceOf(UnionType.class)
+      .extracting(UnionType.class::cast)
+      .extracting(UnionType::candidates)
+      .extracting(ArrayList::new)
+      .asList()
+      .hasSize(2)
+      .contains(candidate1, candidate2);
   }
 }
