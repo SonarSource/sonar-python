@@ -31,10 +31,8 @@ import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.PythonTestUtils;
-import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.semantic.SymbolUtils;
 import org.sonar.python.semantic.v2.ClassTypeBuilder;
-import org.sonar.python.semantic.v2.ProjectLevelTypeTable;
 import org.sonar.python.semantic.v2.SymbolTableBuilderV2;
 import org.sonar.python.semantic.v2.SymbolV2;
 import org.sonar.python.semantic.v2.TypeInferenceV2;
@@ -43,6 +41,7 @@ import org.sonar.python.semantic.v2.UsageV2;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.PythonTestUtils.parse;
 import static org.sonar.python.PythonTestUtils.parseWithoutSymbols;
+import static org.sonar.python.types.v2.TypesTestUtils.PROJECT_LEVEL_TYPE_TABLE;
 
 public class ClassTypeTest {
 
@@ -82,28 +81,6 @@ public class ClassTypeTest {
 
     assertThat(classType.instancesHaveMember("foo")).isEqualTo(TriBool.TRUE);
     assertThat(classType.instancesHaveMember("bar")).isEqualTo(TriBool.FALSE);
-  }
-
-  @Test
-  void equals_test() {
-    ClassType classType1 = classType("class C: ...");
-    ClassType classType2 = classType("class C: ...");
-    ClassType classType3 = classType("class C(B): ...");
-    ClassType classType4 = classType("class C(metaclass=MyMeta): ...");
-    ClassType classType5 = classType("class D: ...");
-    ClassType classType6 = classType("""
-          class C:
-            def foo(): ...
-          """
-    );
-
-    assertThat(classType1)
-      .isEqualTo(classType1)
-      .isEqualTo(classType2)
-      .isNotEqualTo(classType3)
-      .isNotEqualTo(classType4)
-      .isNotEqualTo(classType5)
-      .isNotEqualTo(classType6);
   }
 
   @Test
@@ -196,7 +173,7 @@ public class ClassTypeTest {
       "C = \"hello\"");
     var symbolTable = new SymbolTableBuilderV2(fileInput)
       .build();
-    new TypeInferenceV2(new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty()), pythonFile, symbolTable).inferTypes(fileInput);
+    new TypeInferenceV2(PROJECT_LEVEL_TYPE_TABLE, pythonFile, symbolTable).inferTypes(fileInput);
 
     ClassDef classDef = (ClassDef) fileInput.statements().statements().get(0);
     PythonType pythonType = classDef.name().typeV2();
@@ -220,7 +197,7 @@ public class ClassTypeTest {
     );
     var symbolTable = new SymbolTableBuilderV2(fileInput)
       .build();
-    new TypeInferenceV2(new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty()), pythonFile, symbolTable).inferTypes(fileInput);
+    new TypeInferenceV2(PROJECT_LEVEL_TYPE_TABLE, pythonFile, symbolTable).inferTypes(fileInput);
 
     ClassDef classDef = (ClassDef) fileInput.statements().statements().get(1);
     PythonType pythonType = classDef.name().typeV2();
@@ -572,7 +549,7 @@ public class ClassTypeTest {
     );
     var symbolTable = new SymbolTableBuilderV2(fileInput)
       .build();
-    new TypeInferenceV2(new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty()), pythonFile, symbolTable).inferTypes(fileInput);
+    new TypeInferenceV2(PROJECT_LEVEL_TYPE_TABLE, pythonFile, symbolTable).inferTypes(fileInput);
     ClassDef firstDef = (ClassDef) fileInput.statements().statements().get(0);
     ClassDef innerClass = (ClassDef) firstDef.body().statements().get(0);
     FunctionDef functionDef = (FunctionDef) firstDef.body().statements().get(1);
@@ -594,9 +571,8 @@ public class ClassTypeTest {
 
   @Test
   void builder() {
-    ClassType classType = classType("class A: ...");
     ClassTypeBuilder classTypeBuilder = new ClassTypeBuilder().withName("A");
-    assertThat(classTypeBuilder.build()).isEqualTo(classType);
+    assertThat(classTypeBuilder.build()).extracting(ClassType::name).isEqualTo("A");
   }
 
   @Test
@@ -622,7 +598,7 @@ public class ClassTypeTest {
     FileInput fileInput = parseWithoutSymbols(code);
     var symbolTable = new SymbolTableBuilderV2(fileInput)
       .build();
-    new TypeInferenceV2(new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty()), pythonFile, symbolTable).inferTypes(fileInput);
+    new TypeInferenceV2(PROJECT_LEVEL_TYPE_TABLE, pythonFile, symbolTable).inferTypes(fileInput);
     return PythonTestUtils.getAllDescendant(fileInput, t -> t.is(Tree.Kind.CLASSDEF))
       .stream()
       .map(ClassDef.class::cast)

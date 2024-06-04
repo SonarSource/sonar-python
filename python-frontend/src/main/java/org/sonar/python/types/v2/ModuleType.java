@@ -23,11 +23,22 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
+import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.api.Beta;
 
 @Beta
-public record ModuleType(@Nullable String name, @Nullable ModuleType parent, Map<String, PythonType> members) implements PythonType {
+public final class ModuleType implements PythonType {
+  private final String name;
+  private final ModuleType parent;
+  private final Map<String, PythonType> members;
+
+  public ModuleType(@Nullable String name, @Nullable ModuleType parent, Map<String, PythonType> members) {
+    this.name = name;
+    this.parent = parent;
+    this.members = members;
+  }
+
   public ModuleType(@Nullable String name) {
     this(name, null);
   }
@@ -42,24 +53,26 @@ public record ModuleType(@Nullable String name, @Nullable ModuleType parent, Map
   }
 
   @Override
-  public boolean equals(Object o) {
-    // TODO: Find a way how we want to compare modules
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    ModuleType that = (ModuleType) o;
-    return Objects.equals(name, that.name) && Objects.equals(members, that.members);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(name, members);
-  }
-
-  @Override
   public String toString() {
     return "ModuleType{" +
       "name='" + name + '\'' +
       ", members=" + members +
       '}';
   }
+
+  @Override
+  @CheckForNull
+  public String name() {
+    return name;
+  }
+
+  @CheckForNull
+  public ModuleType parent() {
+    return parent;
+  }
+
+  public Map<String, PythonType> members() {
+    return members;
+  }
+
 }

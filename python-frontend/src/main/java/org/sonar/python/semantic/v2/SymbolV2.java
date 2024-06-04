@@ -27,10 +27,18 @@ import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.python.tree.NameImpl;
 
 @Beta
-public record SymbolV2(String name, @Nullable String fullyQualifiedName, List<UsageV2> usages) {
+public class SymbolV2 {
+
+  private final String name;
+  private final List<UsageV2> usages;
+
+  public SymbolV2(String name, List<UsageV2> usages) {
+    this.name = name;
+    this.usages = usages;
+  }
 
   public SymbolV2(String name) {
-    this(name, null, new ArrayList<>());
+    this(name, new ArrayList<>());
   }
 
   void addUsage(Name name, UsageV2.Kind kind) {
@@ -45,4 +53,13 @@ public record SymbolV2(String name, @Nullable String fullyQualifiedName, List<Us
   public boolean hasSingleBindingUsage() {
     return usages.stream().filter(UsageV2::isBindingUsage).toList().size() == 1;
   }
+
+  public String name() {
+    return name;
+  }
+
+  public List<UsageV2> usages() {
+    return usages;
+  }
+
 }
