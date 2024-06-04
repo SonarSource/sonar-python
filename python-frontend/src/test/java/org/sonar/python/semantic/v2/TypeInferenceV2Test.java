@@ -1470,6 +1470,24 @@ class TypeInferenceV2Test {
   }
 
   @Test
+  void conditionallyAssignedString() {
+    var root = inferTypes("""
+      if cond:
+        x = "hello"
+      else:
+        x = "world"
+      x
+      """);
+
+    var xType = TreeUtils.firstChild(root.statements().statements().get(1), Name.class::isInstance)
+      .map(Name.class::cast)
+      .map(Name::typeV2)
+      .get();
+
+    Assertions.assertThat(xType).extracting(PythonType::unwrappedType).isSameAs(STR_TYPE);
+  }
+
+  @Test
   void inferClassHierarchyHasMetaClass() {
     var root = inferTypes("""
       class CustomMetaClass:
