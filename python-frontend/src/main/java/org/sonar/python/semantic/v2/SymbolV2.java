@@ -30,17 +30,15 @@ import org.sonar.python.tree.NameImpl;
 public class SymbolV2 {
 
   private final String name;
-  private final String fullyQualifiedName;
   private final List<UsageV2> usages;
 
-  public SymbolV2(String name, @Nullable String fullyQualifiedName, List<UsageV2> usages) {
+  public SymbolV2(String name, List<UsageV2> usages) {
     this.name = name;
-    this.fullyQualifiedName = fullyQualifiedName;
     this.usages = usages;
   }
 
   public SymbolV2(String name) {
-    this(name, null, new ArrayList<>());
+    this(name, new ArrayList<>());
   }
 
   void addUsage(Name name, UsageV2.Kind kind) {
