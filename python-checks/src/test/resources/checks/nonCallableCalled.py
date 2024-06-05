@@ -349,3 +349,35 @@ def callable_from_loop_append_noncallable():
     for i in l:
         # FP
         i() # Noncompliant
+
+
+
+def add_call_method(cls):
+    def new_call_method(self, *args, **kwargs):
+        ...
+    cls.__call__ = new_call_method
+    return cls
+
+@add_call_method
+class DecoratedClass:
+    ...
+
+@unknown_decorator
+class ClassWithUnknownDecorator:
+    ...
+
+from dataclasses import dataclass
+
+@dataclass
+class Employee:
+    name: str
+    age: int
+    position: str
+
+def no_fp_on_decorated_classes():
+    decorated_class = DecoratedClass()
+    decorated_class()  # OK
+    unknown_decorated_class = ClassWithUnknownDecorator()
+    unknown_decorated_class()  # OK
+    employee = Employee("John Doe", 30, "Software Engineer")
+    employee() # FN

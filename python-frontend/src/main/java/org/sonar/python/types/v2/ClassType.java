@@ -42,6 +42,7 @@ public final class ClassType implements PythonType {
   private final List<PythonType> attributes;
   private final List<PythonType> superClasses;
   private final List<PythonType> metaClasses;
+  private final boolean hasDecorators;
   private final LocationInFile locationInFile;
 
   public ClassType(
@@ -50,21 +51,23 @@ public final class ClassType implements PythonType {
     List<PythonType> attributes,
     List<PythonType> superClasses,
     List<PythonType> metaClasses,
+    boolean hasDecorators,
     @Nullable LocationInFile locationInFile) {
     this.name = name;
     this.members = members;
     this.attributes = attributes;
     this.superClasses = superClasses;
     this.metaClasses = metaClasses;
+    this.hasDecorators = hasDecorators;
     this.locationInFile = locationInFile;
   }
 
   public ClassType(String name) {
-    this(name, new HashSet<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), null);
+    this(name, new HashSet<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), false, null);
   }
 
   public ClassType(String name, @Nullable LocationInFile locationInFile) {
-    this(name, new HashSet<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), locationInFile);
+    this(name, new HashSet<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), false, locationInFile);
   }
 
   @Override
@@ -177,7 +180,7 @@ public final class ClassType implements PythonType {
   }
 
   public TriBool instancesHaveMember(String memberName) {
-    if (hasUnresolvedHierarchy() || hasMetaClass()) {
+    if (hasUnresolvedHierarchy() || hasMetaClass() || hasDecorators()) {
       return TriBool.UNKNOWN;
     }
     if ("NamedTuple".equals(this.name)) {
@@ -216,5 +219,9 @@ public final class ClassType implements PythonType {
 
   public List<PythonType> metaClasses() {
     return metaClasses;
+  }
+
+  public boolean hasDecorators() {
+    return hasDecorators;
   }
 }
