@@ -30,8 +30,6 @@ import org.sonar.python.types.v2.Member;
 import org.sonar.python.types.v2.PythonType;
 
 public class ClassTypeBuilder implements TypeBuilder<ClassType> {
-
-
   String name;
   Set<Member> members = new HashSet<>();
   List<PythonType> attributes = new ArrayList<>();
@@ -59,6 +57,10 @@ public class ClassTypeBuilder implements TypeBuilder<ClassType> {
   public ClassTypeBuilder withDefinitionLocation(@Nullable LocationInFile definitionLocation) {
     this.definitionLocation = definitionLocation;
     return this;
+  }
+
+  public Set<Member> members() {
+    return members;
   }
 
   public List<PythonType> superClasses() {

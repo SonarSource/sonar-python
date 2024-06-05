@@ -24,19 +24,79 @@ import org.sonar.api.Beta;
 import org.sonar.plugins.python.api.LocationInFile;
 
 @Beta
-public record ParameterV2(
-  @Nullable String name,
-  PythonType declaredType,
-  boolean hasDefaultValue,
-  boolean isKeywordOnly,
-  boolean isPositionalOnly,
-  boolean isKeywordVariadic,
-  boolean isPositionalVariadic,
-  @Nullable LocationInFile location) {
+public class ParameterV2 {
+  @Nullable
+  private final String name;
+  private PythonType declaredType;
+  private final boolean hasDefaultValue;
+  private final boolean isKeywordOnly;
+  private final boolean isPositionalOnly;
+  private final boolean isKeywordVariadic;
+  private final boolean isPositionalVariadic;
+  @Nullable
+  private final LocationInFile location;
+
+  public ParameterV2(
+    @Nullable String name,
+    PythonType declaredType,
+    boolean hasDefaultValue,
+    boolean isKeywordOnly,
+    boolean isPositionalOnly,
+    boolean isKeywordVariadic,
+    boolean isPositionalVariadic,
+    @Nullable LocationInFile location) {
+    this.name = name;
+    this.declaredType = declaredType;
+    this.hasDefaultValue = hasDefaultValue;
+    this.isKeywordOnly = isKeywordOnly;
+    this.isPositionalOnly = isPositionalOnly;
+    this.isKeywordVariadic = isKeywordVariadic;
+    this.isPositionalVariadic = isPositionalVariadic;
+    this.location = location;
+  }
 
   @Beta
   public boolean isVariadic() {
     return isKeywordVariadic || isPositionalVariadic;
   }
+
+  @Nullable
+  public String name() {
+    return name;
+  }
+
+  public void declaredType(PythonType declaredType) {
+    this.declaredType = declaredType;
+  }
+
+  public PythonType declaredType() {
+    return declaredType;
+  }
+
+  public boolean hasDefaultValue() {
+    return hasDefaultValue;
+  }
+
+  public boolean isKeywordOnly() {
+    return isKeywordOnly;
+  }
+
+  public boolean isPositionalOnly() {
+    return isPositionalOnly;
+  }
+
+  public boolean isKeywordVariadic() {
+    return isKeywordVariadic;
+  }
+
+  public boolean isPositionalVariadic() {
+    return isPositionalVariadic;
+  }
+
+  @Nullable
+  public LocationInFile location() {
+    return location;
+  }
+
 }
 
