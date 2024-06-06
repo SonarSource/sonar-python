@@ -1,8 +1,8 @@
-<p>This rule raises an issue when an attributes ending with <code>_</code> is set in the <code>__init__</code> method of a class inheriting from
+<p>This rule raises an issue when an attribute ending with <code>_</code> is set in the <code>__init__</code> method of a class inheriting from
 Scikit-Learn <code>BaseEstimator</code></p>
 <h2>Why is this an issue?</h2>
-<p>On a Scikit-Learn estimator, attributes that have a trailing underscore represents attributes that are estimated. These attributes have to be set
-in the fit method. Their presence are used to verify if an estimator has been fitted.</p>
+<p>On a Scikit-Learn estimator, attributes that have a trailing underscore represent attributes that are estimated. These attributes have to be set in
+the fit method. Their presence is used to verify if an estimator has been fitted.</p>
 <pre>
 from sklearn.neighbors import KNeighborsClassifier
 
@@ -41,6 +41,5 @@ class MyEstimator(BaseEstimator):
 <ul>
   <li> Scikit-Learn documentation - <a href="https://scikit-learn.org/stable/developers/develop.html#parameters-and-init">Parameters and init</a>
   </li>
-  <li> {rule:python:S6970} - The Scikit-learn <code>fit</code> method should be called before methods yielding results </li>
 </ul>
 
