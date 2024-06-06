@@ -534,6 +534,20 @@ public class ClassTypeTest {
     assertThat(classA.instancesHaveMember("bar")).isEqualTo(TriBool.UNKNOWN);
 
     classA = classType(
+      "@foo()",
+      "class A: ..."
+    );
+    assertThat(classA.hasDecorators()).isTrue();
+    assertThat(classA.instancesHaveMember("bar")).isEqualTo(TriBool.UNKNOWN);
+
+    classA = classType(
+      "@foo.bar()[qix()]",
+      "class A: ..."
+    );
+    assertThat(classA.hasDecorators()).isTrue();
+    assertThat(classA.instancesHaveMember("bar")).isEqualTo(TriBool.UNKNOWN);
+
+    classA = classType(
       "class A: ..."
     );
     assertThat(classA.hasDecorators()).isFalse();
