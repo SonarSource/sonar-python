@@ -21,7 +21,6 @@ package org.sonar.python.semantic.v2;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.annotation.Nullable;
 import org.sonar.api.Beta;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.python.tree.NameImpl;
