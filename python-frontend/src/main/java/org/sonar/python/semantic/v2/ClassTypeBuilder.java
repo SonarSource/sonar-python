@@ -37,15 +37,21 @@ public class ClassTypeBuilder implements TypeBuilder<ClassType> {
   List<PythonType> attributes = new ArrayList<>();
   List<PythonType> superClasses = new ArrayList<>();
   List<PythonType> metaClasses = new ArrayList<>();
+  boolean hasDecorators = false;
   LocationInFile definitionLocation;
 
   @Override
   public ClassType build() {
-    return new ClassType(name, members, attributes, superClasses, metaClasses, definitionLocation);
+    return new ClassType(name, members, attributes, superClasses, metaClasses, hasDecorators, definitionLocation);
   }
 
   public ClassTypeBuilder withName(String name) {
     this.name = name;
+    return this;
+  }
+
+  public ClassTypeBuilder withHasDecorators(boolean hasDecorators) {
+    this.hasDecorators = hasDecorators;
     return this;
   }
 

@@ -178,6 +178,7 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
     Name name = classDef.name();
     ClassTypeBuilder classTypeBuilder = new ClassTypeBuilder()
       .withName(name.name())
+      .withHasDecorators(!classDef.decorators().isEmpty())
       .withDefinitionLocation(locationInFile(classDef.name(), fileId));
     resolveTypeHierarchy(classDef, classTypeBuilder);
     ClassType type = classTypeBuilder.build();

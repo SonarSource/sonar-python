@@ -525,17 +525,32 @@ public class ClassTypeTest {
   }
 
   @Test
-  @Disabled("Add assertions, API for decorators (SONARPY-1872)")
   void has_decorators() {
     ClassType classA = classType(
       "@foo",
       "class A: ..."
     );
+    assertThat(classA.hasDecorators()).isTrue();
+    assertThat(classA.instancesHaveMember("bar")).isEqualTo(TriBool.UNKNOWN);
+
+    classA = classType(
+      "@foo()",
+      "class A: ..."
+    );
+    assertThat(classA.hasDecorators()).isTrue();
+    assertThat(classA.instancesHaveMember("bar")).isEqualTo(TriBool.UNKNOWN);
+
+    classA = classType(
+      "@foo.bar()[qix()]",
+      "class A: ..."
+    );
+    assertThat(classA.hasDecorators()).isTrue();
     assertThat(classA.instancesHaveMember("bar")).isEqualTo(TriBool.UNKNOWN);
 
     classA = classType(
       "class A: ..."
     );
+    assertThat(classA.hasDecorators()).isFalse();
     assertThat(classA.instancesHaveMember("bar")).isEqualTo(TriBool.FALSE);
   }
 
