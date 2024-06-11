@@ -62,7 +62,7 @@ public class ReadModulesContext {
   }
 
   public PromiseType getOrCreatePromiseType(String fullyQualifiedName) {
-    return promiseTypes.computeIfAbsent(fullyQualifiedName, PromiseType::new);
+    return promiseTypes.computeIfAbsent(fullyQualifiedName, fqn -> new PromiseType());
   }
 
   public Map<String, ModuleType> resolvedModules() {

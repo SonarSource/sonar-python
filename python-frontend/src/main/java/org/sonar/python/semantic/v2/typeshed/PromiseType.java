@@ -27,10 +27,8 @@ import org.sonar.python.types.v2.PythonType;
 
 public class PromiseType implements PythonType {
   private final Queue<Consumer<PythonType>> consumers;
-  private final String fqn;
 
-  public PromiseType(String fqn) {
-    this.fqn = fqn;
+  public PromiseType() {
     consumers = new ArrayDeque<>();
   }
 

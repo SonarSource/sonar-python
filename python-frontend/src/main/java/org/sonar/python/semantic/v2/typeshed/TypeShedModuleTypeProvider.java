@@ -35,19 +35,17 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.sonar.plugins.python.api.ProjectPythonVersion;
 import org.sonar.plugins.python.api.PythonVersionUtils;
 import org.sonar.python.semantic.v2.ClassTypeBuilder;
 import org.sonar.python.semantic.v2.FunctionTypeBuilder;
-import org.sonar.python.semantic.v2.TypeShed;
 import org.sonar.python.types.protobuf.SymbolsProtos;
 import org.sonar.python.types.v2.ClassType;
 import org.sonar.python.types.v2.Member;
 import org.sonar.python.types.v2.ModuleType;
 import org.sonar.python.types.v2.ParameterV2;
 import org.sonar.python.types.v2.PythonType;
+import org.sonar.python.types.v2.UnionType;
 
 import static org.sonar.plugins.python.api.types.BuiltinTypes.NONE_TYPE;
 
@@ -126,7 +124,9 @@ public class TypeShedModuleTypeProvider {
   private void resolvePromiseType(ReadModulesContext context, String typeFqn, PromiseType promiseType) {
     var moduleFqn = getModuleName(typeFqn);
     var typeName = getName(typeFqn);
-    var resolvedType = context.resolvedModules().containsKey(moduleFqn) ? context.resolvedModules().get(moduleFqn).resolveMember(typeName).orElse(PythonType.UNKNOWN) : PythonType.UNKNOWN;
+    var resolvedType = context.resolvedModules().containsKey(moduleFqn) ?
+      context.resolvedModules().get(moduleFqn).resolveMember(typeName).orElse(PythonType.UNKNOWN)
+      : PythonType.UNKNOWN;
     promiseType.resolve(resolvedType);
   }
 
@@ -189,7 +189,7 @@ public class TypeShedModuleTypeProvider {
       .map(s -> Map.entry(symbolNameProvider.apply(s), symbolToTypeConverter.apply(s)));
   }
 
-  private PythonType fromVarSymbol(ReadModulesContext context, SymbolsProtos.VarSymbol symbol) {
+  private static PythonType fromVarSymbol(ReadModulesContext context, SymbolsProtos.VarSymbol symbol) {
     return PythonType.UNKNOWN;
   }
 
@@ -198,10 +198,11 @@ public class TypeShedModuleTypeProvider {
       throw new IllegalStateException("Overloaded function symbols should have at least two definitions.");
     }
 
-//    symbol.getDefinitionsList().stream()
-//      .map(functionSymbol -> fromFunctionSymbol(context, functionSymbol, owner))
-//      .map()
-    return PythonType.UNKNOWN;
+    var functionTypes = symbol.getDefinitionsList().stream()
+      .map(functionSymbol -> fromFunctionSymbol(context, functionSymbol, owner))
+      .toList();
+
+    return UnionType.or(functionTypes);
   }
 
   private PythonType fromFunctionSymbol(ReadModulesContext context, SymbolsProtos.FunctionSymbol symbol, PythonType owner) {
