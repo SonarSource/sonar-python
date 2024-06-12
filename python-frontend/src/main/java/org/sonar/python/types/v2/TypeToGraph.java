@@ -3,7 +3,9 @@ package org.sonar.python.types.v2;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Stream;
 
 public class TypeToGraph {
 
@@ -12,6 +14,11 @@ public class TypeToGraph {
   private final Set<Edge> edges;
 
   private final boolean filterDunder = true;
+
+  private final int branchingLimit = 2;
+
+  private final Optional<Integer> depthLimit = Optional.of(5);
+//  private final Optional<Integer> depthLimit = Optional.empty();
 
   public static class Builder {
 
@@ -34,10 +41,15 @@ public class TypeToGraph {
     }
   }
 
-  record Node(String name, String label) {
+  record Node(String name, String label, String extraProps) {
     @Override
     public String toString() {
-      return name + " [label=\"" + label + "\"]";
+      String formattedExtraProps = extraProps.isEmpty() ? "" : (", " + extraProps);
+      return name + " [label=\"" + label + "\"" + formattedExtraProps + "]";
+    }
+
+    Node(String name, String label) {
+      this(name, label, "");
     }
   }
 
@@ -64,99 +76,121 @@ public class TypeToGraph {
   }
 
   public void parse(Root root) {
-    nodes.add(new Node(root.rootName, root.rootName));
-    this.parse(root.root, root.rootName, "");
+    nodes.add(new Node(root.rootName, root.rootName, "color=\"red\", style=\"filled\", shape=\"box\""));
+    this.parse(root.root, root.rootName, "", 0);
   }
 
-  private void parse(PythonType type, String parentNode, String parentLabel) {
+  private void parse(PythonType type, String parentNode, String parentLabel, int depth) {
     String currentNode = Integer.toString(System.identityHashCode(type));
 
+    if (depthLimit.isPresent() && depth >= depthLimit.get()) {
+      return;
+    }
+
     if (type instanceof ObjectType objectType) {
-      parse(objectType, parentNode, parentLabel, currentNode);
+      parse(objectType, currentNode, depth + 1);
     } else if (type instanceof ClassType functionType) {
-      parse(functionType, parentNode, parentLabel, currentNode);
+      parse(functionType, currentNode, depth + 1);
     } else if (type instanceof FunctionType functionType) {
-      parse(functionType, parentNode, parentLabel, currentNode);
+      parse(functionType, currentNode, depth + 1);
     } else if (type instanceof UnknownType unknownType) {
-//      parse(unknownType, parentNode, parentLabel, currentNode);
+      // parse(unknownType, parentNode, parentLabel, currentNode, depth + 1);
       return;
     } else if (type instanceof UnionType unionType) {
-      parse(unionType, parentNode, parentLabel, currentNode);
+      parse(unionType, currentNode, depth + 1);
     } else {
       throw new IllegalStateException("Unsupported type: " + type.getClass().getName());
     }
     edges.add(new Edge(parentNode, currentNode, parentLabel));
   }
 
-  private void parse(ParameterV2 type, String parentNode, String parentLabel) {
+  private void parse(ParameterV2 type, String parentNode, String parentLabel, int depth) {
     String currentNode = Integer.toString(System.identityHashCode(type));
-
+    // name, hasDefault, isKeywordOnly, isPositionalOnly, isKeywordVariadic, isPositionalVariadic
     edges.add(new Edge(parentNode, currentNode, parentLabel));
     this.nodes.add(new Node(
       currentNode,
-      "ParameterV2 | {name | " + type.name() + "}"));
+      "ParameterV2 | {name | " + type.name() + "}" + " | {hasDefault | " + type.hasDefaultValue() + "}" + " | {isKeywordOnly | " + type.isKeywordOnly() + "}" + " | {isPositionalOnly | "
+        + type.isPositionalOnly() + "}" + " | {isKeywordVariadic | " + type.isKeywordVariadic() + "}" + " | {isPositionalVariadic | " + type.isPositionalVariadic() + "}"));
 
-    parse(type.declaredType(), currentNode, "declaredType");
+    parse(type.declaredType(), currentNode, "declaredType", depth + 1);
   }
 
-  private void parse(ObjectType type, String parentNode, String parentLabel, String currentNode) {
+  private void parse(ObjectType type, String currentNode, int depth) {
     this.nodes.add(new Node(
       currentNode,
       "ObjectType | {attributes | " + type.attributes().size() + "}"));
 
     for (PythonType attribute : type.attributes()) {
-      parse(attribute, currentNode, "attribute");
+      parse(attribute, currentNode, "attribute", depth + 1);
     }
-    parse(type.type(), currentNode, "type");
+    parse(type.type(), currentNode, "type", depth + 1);
   }
 
-  private void parse(ClassType type, String parentNode, String parentLabel, String currentNode) {
+  private <T> Stream<T> branchLimit(Stream<T> stream) {
+    if (branchingLimit > 0) {
+      return stream.limit(branchingLimit);
+    }
+    return stream;
+  }
+
+  private void parse(ClassType type, String currentNode, int depth) {
+    // name, members, superClass, metaClass, hasDecorators, attributes
     this.nodes.add(new Node(
       currentNode,
-      "ClassType | {name | " + type.name() + "} | {members | " + type.members().size() + "}"));
+      "ClassType | {name | " + type.name() + "} | {members | " + type.members().size() + "}" + " | {superClasses | " + type.superClasses().size() + "}" + " | {metaClasses | "
+        + type.metaClasses().size() + "}" + " | {attributes | " + type.attributes().size() + "}"));
 
-    for (PythonType superClass : type.superClasses()) {
-      parse(superClass, currentNode, "superClass");
+    for (PythonType superClass : branchLimit(type.superClasses().stream()).toList()) {
+      parse(superClass, currentNode, "superClass", depth + 1);
     }
 
-    for (PythonType metaClass : type.metaClasses()) {
-      parse(metaClass, currentNode, "metaClass");
+    for (PythonType metaClass : branchLimit(type.metaClasses().stream()).toList()) {
+      parse(metaClass, currentNode, "metaClass", depth + 1);
     }
 
-    for (Member member : type.members().stream().filter(member -> !filterDunder || !member.name().startsWith("__")).toList()) {
-      parse(member.type(), currentNode, "member");
+    for (Member member : branchLimit(type.members().stream().filter(member -> !filterDunder || !member.name().startsWith("__"))).toList()) {
+      parse(member.type(), currentNode, "member", depth + 1);
+    }
+
+    for (PythonType attribute : branchLimit(type.attributes().stream()).toList()) {
+      parse(attribute, currentNode, "attribute", depth + 1);
     }
   }
 
-  private void parse(FunctionType type, String parentNode, String parentLabel, String currentNode) {
+  private void parse(FunctionType type, String currentNode, int depth) {
+    // name, parameters, isAsynchronous, hasDecorators, isInstanceMethod, hasVariadicParameter
+
     this.nodes.add(new Node(
       currentNode,
-      "FunctionType | {name | " + type.name() + "} | {parameters | " + type.parameters().size() + "}"));
+      "FunctionType | {name | " + type.name() + "} | {parameters | " + type.parameters().size() + "}" + " | {isAsynchronous | " + type.isAsynchronous() + "}"
+        + " | {hasDecorators | "
+        + type.hasDecorators() + "}" + " | {isInstanceMethod | " + type.isInstanceMethod() + "}" + " | {hasVariadicParameter | " + type.hasVariadicParameter() + "}"));
 
     for (PythonType attribute : type.attributes()) {
-      parse(attribute, currentNode, "attribute");
+      parse(attribute, currentNode, "attribute", depth + 1);
     }
 
     for (ParameterV2 parameter : type.parameters()) {
-      parse(parameter, currentNode, "parameter");
+      parse(parameter, currentNode, "parameter", depth + 1);
     }
 
-    parse(type.returnType(), currentNode, "returnType");
+    parse(type.returnType(), currentNode, "returnType", depth + 1);
   }
 
-  private void parse(UnknownType type, String parentNode, String parentLabel, String currentNode) {
+  private void parse(UnknownType type, String currentNode, int depth) {
     this.nodes.add(new Node(
       currentNode,
       "UnknownType"));
   }
 
-  private void parse(UnionType type, String parentNode, String parentLabel, String currentNode) {
+  private void parse(UnionType type, String currentNode, int depth) {
     this.nodes.add(new Node(
       currentNode,
       "UnionType | {candidates | " + type.candidates().size() + "}"));
 
     for (PythonType candidate : type.candidates()) {
-      parse(candidate, currentNode, "candidate");
+      parse(candidate, currentNode, "candidate", depth + 1);
     }
   }
 
