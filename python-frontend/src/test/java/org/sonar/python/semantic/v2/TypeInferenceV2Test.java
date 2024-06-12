@@ -1615,6 +1615,8 @@ class TypeInferenceV2Test {
     String input = """
       a = ["1"]
       b = ["2"]
+      def f(param1: int):
+          ...
       """;
 
     FileInput fileInput = inferTypes(input);
@@ -1635,11 +1637,11 @@ class TypeInferenceV2Test {
       }
     }
 
-    TypeToGraph typeToGraph = new TypeToGraph.Builder()
-      .root(typeMap.get("a"), "a")
-//      .root(typeMap.get("i"), "i")
-      .root(typeMap.get("b"), "b")
-      .build();
+  var typeToGraph = new TypeToGraph.Builder()
+    .addCollector( new TypeToGraph.V2TypeInferenceVisitor(), new TypeToGraph.Root<>(typeMap.get("a"), "a"))
+    .addCollector( new TypeToGraph.V2TypeInferenceVisitor(), new TypeToGraph.Root<>(typeMap.get("b"), "b"))
+    .addCollector( new TypeToGraph.V2TypeInferenceVisitor(), new TypeToGraph.Root<>(typeMap.get("f"), "f"))
+    .build();
     String out = typeToGraph.toString();
     System.out.println(out);
   }
