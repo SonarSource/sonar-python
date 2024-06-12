@@ -1645,4 +1645,43 @@ class TypeInferenceV2Test {
     String out = typeToGraph.toString();
     System.out.println(out);
   }
+
+  @Test
+  void intereseing_one(){
+    String input = """
+      a = 1
+      a = "2"
+      def a():
+      	...
+      a = 2
+      b = a
+      ...
+      c = 42
+      def d(): ...
+      """;
+
+    FileInput fileInput = inferTypes(input);
+
+    var a_1 = ((AssignmentStatementImpl) fileInput.statements().statements().get(0)).lhsExpressions().get(0).expressions().get(0).typeV2();
+    var a_2 = ((AssignmentStatementImpl) fileInput.statements().statements().get(1)).lhsExpressions().get(0).expressions().get(0).typeV2();
+    var a_3 = ((FunctionDef) fileInput.statements().statements().get(2)).name().typeV2();
+    var a_4 = ((AssignmentStatementImpl) fileInput.statements().statements().get(3)).lhsExpressions().get(0).expressions().get(0).typeV2();
+    var b = ((AssignmentStatementImpl) fileInput.statements().statements().get(4)).lhsExpressions().get(0).expressions().get(0).typeV2();
+    var c = ((AssignmentStatementImpl) fileInput.statements().statements().get(6)).lhsExpressions().get(0).expressions().get(0).typeV2();
+    var d = ((FunctionDef) fileInput.statements().statements().get(7)).name().typeV2();
+
+    var typeToGraph = new TypeToGraph.Builder()
+      .addCollector( new TypeToGraph.V2TypeInferenceVisitor(false, 2, null), new TypeToGraph.Root<>(a_1, "a_1"))
+      .addCollector( new TypeToGraph.V2TypeInferenceVisitor(false, 2, null), new TypeToGraph.Root<>(a_2, "a_2"))
+      .addCollector( new TypeToGraph.V2TypeInferenceVisitor(false, 2, null), new TypeToGraph.Root<>(a_3, "a_3"))
+      .addCollector( new TypeToGraph.V2TypeInferenceVisitor(false, 2, null), new TypeToGraph.Root<>(a_4, "a_4"))
+      .addCollector( new TypeToGraph.V2TypeInferenceVisitor(false, 2, null), new TypeToGraph.Root<>(b, "b"))
+      .addCollector( new TypeToGraph.V2TypeInferenceVisitor(false, 2, null), new TypeToGraph.Root<>(c, "c"))
+      .addCollector( new TypeToGraph.V2TypeInferenceVisitor(false, 2, null), new TypeToGraph.Root<>(d, "d"))
+      .build();
+
+    String out = typeToGraph.toString();
+    System.out.println(out);
+  }
+
 }
