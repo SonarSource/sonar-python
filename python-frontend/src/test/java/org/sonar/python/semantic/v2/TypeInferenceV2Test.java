@@ -50,6 +50,7 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.PythonTestUtils;
 import org.sonar.python.semantic.ClassSymbolImpl;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
+import org.sonar.python.tree.AssignmentStatementImpl;
 import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.types.v2.ClassType;
 import org.sonar.python.types.v2.FunctionType;
@@ -138,8 +139,7 @@ class TypeInferenceV2Test {
     var classSymbol = new ClassSymbolImpl("C", "something.known.C");
 
     ProjectLevelTypeTable projectLevelTypeTable = new ProjectLevelTypeTable(ProjectLevelSymbolTable.from(
-      Map.of("something", new HashSet<>(), "something.known", Set.of(classSymbol)))
-    );
+      Map.of("something", new HashSet<>(), "something.known", Set.of(classSymbol))));
     var root = inferTypes("""
       import something.known
       """, projectLevelTypeTable);
@@ -176,7 +176,7 @@ class TypeInferenceV2Test {
     assertThat(importedNames)
       .flatExtracting(Expression::typeV2)
       .allMatch(PythonType.UNKNOWN::equals);
-    
+
     assertThat(aliasedName.alias())
       .extracting(Expression::typeV2)
       .isInstanceOf(ModuleType.class)
@@ -303,7 +303,7 @@ class TypeInferenceV2Test {
       """);
 
     var functionDef = (FunctionDef) root.statements().statements().get(1);
-    var lastExpressionStatement = (ExpressionStatement) functionDef.body().statements().get(functionDef.body().statements().size() -1);
+    var lastExpressionStatement = (ExpressionStatement) functionDef.body().statements().get(functionDef.body().statements().size() - 1);
     Assertions.assertThat(lastExpressionStatement.expressions().get(0).typeV2().unwrappedType()).isEqualTo(PythonType.UNKNOWN);
   }
 
@@ -317,7 +317,7 @@ class TypeInferenceV2Test {
       """);
 
     var functionDef = (FunctionDef) root.statements().statements().get(1);
-    var lastExpressionStatement = (ExpressionStatement) functionDef.body().statements().get(functionDef.body().statements().size() -1);
+    var lastExpressionStatement = (ExpressionStatement) functionDef.body().statements().get(functionDef.body().statements().size() - 1);
     Assertions.assertThat(lastExpressionStatement.expressions().get(0).typeV2().unwrappedType()).isEqualTo(PythonType.UNKNOWN);
   }
 
@@ -332,7 +332,7 @@ class TypeInferenceV2Test {
       """);
 
     var functionDef = (FunctionDef) root.statements().statements().get(1);
-    var lastExpressionStatement = (ExpressionStatement) functionDef.body().statements().get(functionDef.body().statements().size() -1);
+    var lastExpressionStatement = (ExpressionStatement) functionDef.body().statements().get(functionDef.body().statements().size() - 1);
     Assertions.assertThat(lastExpressionStatement.expressions().get(0).typeV2().unwrappedType()).isEqualTo(INT_TYPE);
   }
 
@@ -344,7 +344,7 @@ class TypeInferenceV2Test {
       x
       """);
 
-    var lastExpressionStatement = (ExpressionStatement) root.statements().statements().get(root.statements().statements().size() -1);
+    var lastExpressionStatement = (ExpressionStatement) root.statements().statements().get(root.statements().statements().size() - 1);
     Assertions.assertThat(lastExpressionStatement.expressions().get(0).typeV2().unwrappedType()).isEqualTo(PythonType.UNKNOWN);
   }
 
@@ -356,7 +356,7 @@ class TypeInferenceV2Test {
       """);
 
     var functionDef = (FunctionDef) root.statements().statements().get(0);
-    var lastExpressionStatement = (ExpressionStatement) functionDef.body().statements().get(functionDef.body().statements().size() -1);
+    var lastExpressionStatement = (ExpressionStatement) functionDef.body().statements().get(functionDef.body().statements().size() - 1);
     // TODO SONARPY-1773: should be declared int
     Assertions.assertThat(lastExpressionStatement.expressions().get(0).typeV2().unwrappedType()).isEqualTo(PythonType.UNKNOWN);
   }
@@ -370,7 +370,7 @@ class TypeInferenceV2Test {
       """);
 
     var functionDef = (FunctionDef) root.statements().statements().get(0);
-    var lastExpressionStatement = (ExpressionStatement) functionDef.body().statements().get(functionDef.body().statements().size() -1);
+    var lastExpressionStatement = (ExpressionStatement) functionDef.body().statements().get(functionDef.body().statements().size() - 1);
     Assertions.assertThat(lastExpressionStatement.expressions().get(0).typeV2().unwrappedType()).isEqualTo(STR_TYPE);
   }
 
@@ -383,7 +383,7 @@ class TypeInferenceV2Test {
       """);
 
     var functionDef = (FunctionDef) root.statements().statements().get(0);
-    var lastExpressionStatement = (ExpressionStatement) functionDef.body().statements().get(functionDef.body().statements().size() -1);
+    var lastExpressionStatement = (ExpressionStatement) functionDef.body().statements().get(functionDef.body().statements().size() - 1);
     Assertions.assertThat(lastExpressionStatement.expressions().get(0).typeV2().unwrappedType()).isEqualTo(STR_TYPE);
   }
 
@@ -396,7 +396,7 @@ class TypeInferenceV2Test {
       """);
 
     var functionDef = (FunctionDef) root.statements().statements().get(0);
-    var lastExpressionStatement = (ExpressionStatement) functionDef.body().statements().get(functionDef.body().statements().size() -1);
+    var lastExpressionStatement = (ExpressionStatement) functionDef.body().statements().get(functionDef.body().statements().size() - 1);
     Assertions.assertThat(lastExpressionStatement.expressions().get(0).typeV2().unwrappedType()).isEqualTo(PythonType.UNKNOWN);
   }
 
@@ -418,19 +418,19 @@ class TypeInferenceV2Test {
   @Test
   void global_variable() {
     assertThat(lastExpression("""
-        global a
-        a = 42
-        a
-        """).typeV2().unwrappedType()).isEqualTo(PythonType.UNKNOWN);
+      global a
+      a = 42
+      a
+      """).typeV2().unwrappedType()).isEqualTo(PythonType.UNKNOWN);
   }
 
   @Test
   void global_variable_builtin() {
     assertThat(lastExpression("""
-        global list
-        list = 42
-        list
-        """).typeV2().unwrappedType()).isEqualTo(PythonType.UNKNOWN);
+      global list
+      list = 42
+      list
+      """).typeV2().unwrappedType()).isEqualTo(PythonType.UNKNOWN);
   }
 
   @Test
@@ -457,9 +457,10 @@ class TypeInferenceV2Test {
         x
       """);
     var functionDef = (FunctionDef) fileInput.statements().statements().get(0);
-    var lastExpressionStatement = (ExpressionStatement) functionDef.body().statements().get(functionDef.body().statements().size() -1);
+    var lastExpressionStatement = (ExpressionStatement) functionDef.body().statements().get(functionDef.body().statements().size() - 1);
     assertThat(lastExpressionStatement.expressions().get(0).typeV2()).isInstanceOf(UnionType.class);
-    assertThat(((UnionType) lastExpressionStatement.expressions().get(0).typeV2()).candidates()).extracting(PythonType::unwrappedType).containsExactlyInAnyOrder(INT_TYPE, STR_TYPE);
+    assertThat(((UnionType) lastExpressionStatement.expressions().get(0).typeV2()).candidates()).extracting(PythonType::unwrappedType).containsExactlyInAnyOrder(INT_TYPE,
+      STR_TYPE);
   }
 
   @Test
@@ -559,30 +560,27 @@ class TypeInferenceV2Test {
   void unpacking_assignment() {
     assertThat(lastExpression(
       """
-      x, = 42,
-      x
-      """
-    ).typeV2()).isEqualTo(PythonType.UNKNOWN);
+        x, = 42,
+        x
+        """).typeV2()).isEqualTo(PythonType.UNKNOWN);
   }
 
   @Test
   void unpacking_assignment_2() {
     assertThat(lastExpression(
       """
-      x, y = 42, 43
-      x
-      """
-    ).typeV2()).isEqualTo(PythonType.UNKNOWN);
+        x, y = 42, 43
+        x
+        """).typeV2()).isEqualTo(PythonType.UNKNOWN);
   }
 
   @Test
   void multiple_lhs_expressions() {
     assertThat(lastExpression(
       """
-      x = y = 42
-      x
-      """
-    ).typeV2()).isEqualTo(PythonType.UNKNOWN);
+        x = y = 42
+        x
+        """).typeV2()).isEqualTo(PythonType.UNKNOWN);
   }
 
   @Test
@@ -597,28 +595,28 @@ class TypeInferenceV2Test {
   @Test
   void compoundAssignmentList() {
     assertThat(lastExpression("""
-        a = []
-        b = 'world'
-        a += b
-        a
-        """).typeV2().unwrappedType()).isEqualTo(LIST_TYPE);
+      a = []
+      b = 'world'
+      a += b
+      a
+      """).typeV2().unwrappedType()).isEqualTo(LIST_TYPE);
   }
 
   @Test
   void annotation_with_reassignment() {
     assertThat(lastExpression("""
-        a = "foo"
-        b: int = a
-        b
-        """).typeV2().unwrappedType()).isEqualTo(STR_TYPE);
+      a = "foo"
+      b: int = a
+      b
+      """).typeV2().unwrappedType()).isEqualTo(STR_TYPE);
   }
 
   @Test
   void annotation_without_reassignment() {
     assertThat(lastExpression("""
-        a: int
-        a
-        """).typeV2().unwrappedType()).isEqualTo(PythonType.UNKNOWN);
+      a: int
+      a
+      """).typeV2().unwrappedType()).isEqualTo(PythonType.UNKNOWN);
   }
 
   @Test
@@ -627,15 +625,15 @@ class TypeInferenceV2Test {
       "f()").typeV2()).isEqualTo(PythonType.UNKNOWN);
 
     assertThat(lastExpression("""
-        def f(): pass
-        f()
-        """).typeV2()).isEqualTo(PythonType.UNKNOWN);
+      def f(): pass
+      f()
+      """).typeV2()).isEqualTo(PythonType.UNKNOWN);
 
     assertThat(lastExpression(
       """
-      class A: pass
-      A()
-      """).typeV2().displayName()).contains("A");
+        class A: pass
+        A()
+        """).typeV2().displayName()).contains("A");
   }
 
   @Test
@@ -656,21 +654,21 @@ class TypeInferenceV2Test {
   void variable_outside_function_3() {
     assertThat(lastExpression(
       """
-      def foo():
-        a = 42
-      a
-      """).typeV2()).isEqualTo(PythonType.UNKNOWN);
+        def foo():
+          a = 42
+        a
+        """).typeV2()).isEqualTo(PythonType.UNKNOWN);
   }
 
   @Test
   void variable_outside_function_4() {
     assertThat(lastExpression(
       """
-      a = 42
-      def foo():
-        a = 'hello'
-      a
-      """).typeV2().unwrappedType()).isEqualTo(INT_TYPE);
+        a = 42
+        def foo():
+          a = 'hello'
+        a
+        """).typeV2().unwrappedType()).isEqualTo(INT_TYPE);
   }
 
   @Test
@@ -821,32 +819,32 @@ class TypeInferenceV2Test {
   @Test
   void nested_try_except() {
     FileInput fileInput = inferTypes("""
-        def f(p):
-          try:
-            if p:
-              x = 42
-              type(x)
-            else:
-              x = "foo"
-              type(x)
-          except:
-            type(x)
-        def g(p):
+      def f(p):
+        try:
           if p:
-            y = 42
-            type(y)
+            x = 42
+            type(x)
           else:
-            y = "hello"
-            type(y)
+            x = "foo"
+            type(x)
+        except:
+          type(x)
+      def g(p):
+        if p:
+          y = 42
           type(y)
-        if cond:
-          z = 42
-          type(z)
         else:
-          z = "hello"
-          type(z)
+          y = "hello"
+          type(y)
+        type(y)
+      if cond:
+        z = 42
         type(z)
-        """);
+      else:
+        z = "hello"
+        type(z)
+      type(z)
+      """);
     List<CallExpression> calls = PythonTestUtils.getAllDescendant(fileInput, tree -> tree.is(Tree.Kind.CALL_EXPR));
     RegularArgument firstX = (RegularArgument) calls.get(0).arguments().get(0);
     RegularArgument secondX = (RegularArgument) calls.get(1).arguments().get(0);
@@ -873,31 +871,31 @@ class TypeInferenceV2Test {
   @Test
   void nested_try_except_2() {
     FileInput fileInput = inferTypes("""
-        try:
-          if p:
-            x = 42
-            type(x)
-          else:
-            x = "foo"
-            type(x)
-        except:
+      try:
+        if p:
+          x = 42
           type(x)
-        def g(p):
-          if p:
-            y = 42
-            type(y)
-          else:
-            y = "hello"
-            type(y)
-          type(y)
-        if cond:
-          z = 42
-          type(z)
         else:
-          z = "hello"
-          type(z)
+          x = "foo"
+          type(x)
+      except:
+        type(x)
+      def g(p):
+        if p:
+          y = 42
+          type(y)
+        else:
+          y = "hello"
+          type(y)
+        type(y)
+      if cond:
+        z = 42
         type(z)
-        """);
+      else:
+        z = "hello"
+        type(z)
+      type(z)
+      """);
     List<CallExpression> calls = PythonTestUtils.getAllDescendant(fileInput, tree -> tree.is(Tree.Kind.CALL_EXPR));
     RegularArgument firstX = (RegularArgument) calls.get(0).arguments().get(0);
     RegularArgument secondX = (RegularArgument) calls.get(1).arguments().get(0);
@@ -1003,9 +1001,9 @@ class TypeInferenceV2Test {
           ...
       except:
           ...
-      
+
       do_smth = None
-      
+
       def something(param):
           type(do_smth)
       """);
@@ -1108,13 +1106,11 @@ class TypeInferenceV2Test {
         a.foo()
       """);
 
-
     var fBodyStatements = TreeUtils.firstChild(root.statements().statements().get(1), FunctionDef.class::isInstance)
       .map(FunctionDef.class::cast)
       .map(FunctionDef::body)
       .map(StatementList::statements)
       .get();
-
 
     var qualifiedExpressionType = TreeUtils.firstChild(fBodyStatements.get(2), QualifiedExpression.class::isInstance)
       .map(QualifiedExpression.class::cast)
@@ -1125,7 +1121,6 @@ class TypeInferenceV2Test {
     Assertions.assertThat(qualifiedExpressionType)
       .isSameAs(INT_TYPE);
   }
-
 
   @Test
   void inferBuiltinsTypeForQualifiedExpression() {
@@ -1222,10 +1217,10 @@ class TypeInferenceV2Test {
     var root = inferTypes("""
       def foo():
         print("foo")
-      
+
       def bar():
         print("bar")
-      
+
       def f():
         l = [foo, bar]
         for i in l:
@@ -1243,7 +1238,6 @@ class TypeInferenceV2Test {
       .map(FunctionDef::name)
       .map(Expression::typeV2)
       .get();
-
 
     var iType = TreeUtils.firstChild(root.statements().statements().get(2), ExpressionStatement.class::isInstance)
       .map(ExpressionStatement.class::cast)
@@ -1320,11 +1314,11 @@ class TypeInferenceV2Test {
   void inferLoopOverCustomIterableVarType() {
     var root = inferTypes("""
       from typing import Iterator
-      
+
       class MyIterable[T]:
         def __iter__(self) -> Iterator[str]:
           ...
-      
+
       def f():
         a = MyIterable[int]()
         for i in a:
@@ -1346,7 +1340,6 @@ class TypeInferenceV2Test {
       .isInstanceOf(ClassType.class)
       .isEqualTo(STR_TYPE);
   }
-
 
   @Test
   void inferLoopOverUnknownVarType() {
@@ -1492,18 +1485,17 @@ class TypeInferenceV2Test {
     var root = inferTypes("""
       class CustomMetaClass:
         ...
-      
+
       class ParentClass(metaclass=CustomMetaClass):
         ...
-      
+
       class ChildClass(ParentClass):
         ...
-      
+
       def f():
         a = ChildClass()
         a
       """);
-
 
     var childClassType = TreeUtils.firstChild(root.statements().statements().get(2), ClassDef.class::isInstance)
       .map(ClassDef.class::cast)
@@ -1544,7 +1536,6 @@ class TypeInferenceV2Test {
       .map(Expression::typeV2)
       .map(UnionType.class::cast)
       .get();
-
 
     Assertions.assertThat(paramType).isInstanceOf(UnionType.class);
     Assertions.assertThat(paramType.candidates())
@@ -1608,46 +1599,48 @@ class TypeInferenceV2Test {
   }
 
   @Test
-  void dumpAllV2Types(){
-//    String input = """
-//      l = [1,2,3]
-//      """;
+  void dumpAllV2Types() {
     String input = """
-      a = ["1"]
-      b = ["2"]
-      def f(param1: int):
-          ...
+      a = 1
+      a = "2"
+      def a():
+      	...
+      a = 2
+      b = a
+      ...
+      c = 42
+      def d(): ...
       """;
 
     FileInput fileInput = inferTypes(input);
-    List<Expression> expressions = PythonTestUtils.getAllDescendant(fileInput, tree -> tree instanceof  Expression);
+    List<Expression> expressions = PythonTestUtils.getAllDescendant(fileInput, tree -> tree instanceof Expression);
 
-    Map<String, PythonType>   typeMap = new HashMap<>();
+    Map<String, PythonType> typeMap = new HashMap<>();
     for (Expression expression : expressions) {
       PythonType type = expression.typeV2();
       if (type != null) {
         String key = expression.toString();
-        if (expression.is(Tree.Kind.NAME)){
-          key = ((Name)expression).name();
+        if (expression.is(Tree.Kind.NAME)) {
+          key = ((Name) expression).name();
         }
         if (expression.is(Tree.Kind.CALL_EXPR)) {
-          key = ((CallExpression)expression).callee().toString();
+          key = ((CallExpression) expression).callee().toString();
         }
         typeMap.put(key, type);
       }
     }
 
-  var typeToGraph = new TypeToGraph.Builder()
-    .addCollector( new TypeToGraph.V2TypeInferenceVisitor(), new TypeToGraph.Root<>(typeMap.get("a"), "a"))
-    .addCollector( new TypeToGraph.V2TypeInferenceVisitor(), new TypeToGraph.Root<>(typeMap.get("b"), "b"))
-    .addCollector( new TypeToGraph.V2TypeInferenceVisitor(), new TypeToGraph.Root<>(typeMap.get("f"), "f"))
-    .build();
+    var typeToGraph = new TypeToGraph.Builder()
+      .addCollector(new TypeToGraph.V2TypeInferenceVisitor(false, 2, null, true), new TypeToGraph.Root<>(typeMap.get("a"), "a"))
+      .addCollector(new TypeToGraph.V2TypeInferenceVisitor(false, 2, null, true), new TypeToGraph.Root<>(typeMap.get("b"), "b"))
+      .addCollector(new TypeToGraph.V2TypeInferenceVisitor(false, 2, null, true), new TypeToGraph.Root<>(typeMap.get("c"), "c"))
+      .build();
     String out = typeToGraph.toString();
     System.out.println(out);
   }
 
   @Test
-  void intereseing_one(){
+  void interesting_one() {
     String input = """
       a = 1
       a = "2"
@@ -1670,18 +1663,24 @@ class TypeInferenceV2Test {
     var c = ((AssignmentStatementImpl) fileInput.statements().statements().get(6)).lhsExpressions().get(0).expressions().get(0).typeV2();
     var d = ((FunctionDef) fileInput.statements().statements().get(7)).name().typeV2();
 
+    var d_symbol = ((FunctionDef) fileInput.statements().statements().get(7)).name().symbolV2();
+    var a_symbol = ((FunctionDef) fileInput.statements().statements().get(2)).name().symbolV2();
+
+    Integer branchLimit = null;
     var typeToGraph = new TypeToGraph.Builder()
-      .addCollector( new TypeToGraph.V2TypeInferenceVisitor(false, 2, null), new TypeToGraph.Root<>(a_1, "a_1"))
-      .addCollector( new TypeToGraph.V2TypeInferenceVisitor(false, 2, null), new TypeToGraph.Root<>(a_2, "a_2"))
-      .addCollector( new TypeToGraph.V2TypeInferenceVisitor(false, 2, null), new TypeToGraph.Root<>(a_3, "a_3"))
-      .addCollector( new TypeToGraph.V2TypeInferenceVisitor(false, 2, null), new TypeToGraph.Root<>(a_4, "a_4"))
-      .addCollector( new TypeToGraph.V2TypeInferenceVisitor(false, 2, null), new TypeToGraph.Root<>(b, "b"))
-      .addCollector( new TypeToGraph.V2TypeInferenceVisitor(false, 2, null), new TypeToGraph.Root<>(c, "c"))
-      .addCollector( new TypeToGraph.V2TypeInferenceVisitor(false, 2, null), new TypeToGraph.Root<>(d, "d"))
+      .addCollector(new TypeToGraph.V2TypeInferenceVisitor(false, branchLimit, null, true), new TypeToGraph.Root<>(a_1, "a"))
+      .addCollector(new TypeToGraph.V2TypeInferenceVisitor(false, branchLimit, null, true), new TypeToGraph.Root<>(a_2, "a"))
+      .addCollector(new TypeToGraph.V2TypeInferenceVisitor(false, branchLimit, null, true), new TypeToGraph.Root<>(a_3, "a"))
+      .addCollector(new TypeToGraph.V2TypeInferenceVisitor(false, branchLimit, null, true), new TypeToGraph.Root<>(a_4, "a"))
+      .addCollector(new TypeToGraph.V2TypeInferenceVisitor(false, branchLimit, null, true), new TypeToGraph.Root<>(b, "b"))
+      .addCollector(new TypeToGraph.V2TypeInferenceVisitor(false, branchLimit, null, true), new TypeToGraph.Root<>(c, "c"))
+      .addCollector(new TypeToGraph.V2TypeInferenceVisitor(false, branchLimit, null, true), new TypeToGraph.Root<>(d, "d"))
+
+      .addCollector(new TypeToGraph.V2SymbolVisitor(), new TypeToGraph.Root<>(a_symbol, "a"))
+      .addCollector(new TypeToGraph.V2SymbolVisitor(), new TypeToGraph.Root<>(d_symbol, "d"))
       .build();
 
     String out = typeToGraph.toString();
     System.out.println(out);
   }
-
 }
