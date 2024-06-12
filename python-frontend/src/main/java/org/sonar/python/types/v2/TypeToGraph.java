@@ -1,10 +1,13 @@
 package org.sonar.python.types.v2;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.annotation.Nullable;
 
@@ -83,19 +86,25 @@ public class TypeToGraph {
       String currentNode = Integer.toString(System.identityHashCode(type));
       // name, hasDefault, isKeywordOnly, isPositionalOnly, isKeywordVariadic, isPositionalVariadic
       edges.add(new Edge(parentNode, currentNode, parentLabel));
-      this.nodes.add(new Node(
-        currentNode,
-        "ParameterV2 | {name | " + type.name() + "}" + " | {hasDefault | " + type.hasDefaultValue() + "}" + " | {isKeywordOnly | " + type.isKeywordOnly() + "}"
-          + " | {isPositionalOnly | "
-          + type.isPositionalOnly() + "}" + " | {isKeywordVariadic | " + type.isKeywordVariadic() + "}" + " | {isPositionalVariadic | " + type.isPositionalVariadic() + "}"));
 
+      this.nodes.add(new NodeBuilder(currentNode)
+        .addLabel("ParameterV2")
+        .addLabel("name", type.name() == null ? "null" : type.name())
+        .addLabel("hasDefault", Boolean.toString(type.hasDefaultValue()))
+        .addLabel("isKeywordOnly", Boolean.toString(type.isKeywordOnly()))
+        .addLabel("isPositionalOnly", Boolean.toString(type.isPositionalOnly()))
+        .addLabel("isKeywordVariadic", Boolean.toString(type.isKeywordVariadic()))
+        .addLabel("isPositionalVariadic", Boolean.toString(type.isPositionalVariadic()))
+        .build());
       parse(type.declaredType(), currentNode, "declaredType", depth + 1);
     }
 
     private void parse(ObjectType type, String currentNode, int depth) {
-      this.nodes.add(new Node(
-        currentNode,
-        "ObjectType | {attributes | " + type.attributes().size() + "}"));
+      this.nodes.add(new NodeBuilder(currentNode)
+        .addLabel("ObjectType")
+        .addLabel("type", type.type().name())
+        .addLabel("attributes", Integer.toString(type.attributes().size()))
+        .build());
 
       for (PythonType attribute : type.attributes()) {
         parse(attribute, currentNode, "attribute", depth + 1);
@@ -112,10 +121,15 @@ public class TypeToGraph {
 
     private void parse(ClassType type, String currentNode, int depth) {
       // name, members, superClass, metaClass, hasDecorators, attributes
-      this.nodes.add(new Node(
-        currentNode,
-        "ClassType | {name | " + type.name() + "} | {members | " + type.members().size() + "}" + " | {superClasses | " + type.superClasses().size() + "}" + " | {metaClasses | "
-          + type.metaClasses().size() + "}" + " | {attributes | " + type.attributes().size() + "}"));
+      this.nodes.add(new NodeBuilder(currentNode)
+        .addLabel("ClassType")
+        .addLabel("name", type.name())
+        .addLabel("members", Integer.toString(type.members().size()))
+        .addLabel("superClasses", Integer.toString(type.superClasses().size()))
+        .addLabel("metaClasses", Integer.toString(type.metaClasses().size()))
+        .addLabel("hasDecorators", Boolean.toString(type.hasDecorators()))
+        .addLabel("attributes", Integer.toString(type.attributes().size()))
+        .build());
 
       for (PythonType superClass : branchLimit(type.superClasses().stream()).toList()) {
         parse(superClass, currentNode, "superClass", depth + 1);
@@ -135,13 +149,15 @@ public class TypeToGraph {
     }
 
     private void parse(FunctionType type, String currentNode, int depth) {
-      // name, parameters, isAsynchronous, hasDecorators, isInstanceMethod, hasVariadicParameter
-
-      this.nodes.add(new Node(
-        currentNode,
-        "FunctionType | {name | " + type.name() + "} | {parameters | " + type.parameters().size() + "}" + " | {isAsynchronous | " + type.isAsynchronous() + "}"
-          + " | {hasDecorators | "
-          + type.hasDecorators() + "}" + " | {isInstanceMethod | " + type.isInstanceMethod() + "}" + " | {hasVariadicParameter | " + type.hasVariadicParameter() + "}"));
+      this.nodes.add(new NodeBuilder(currentNode)
+        .addLabel("FunctionType")
+        .addLabel("name", type.name())
+        .addLabel("parameters", Integer.toString(type.parameters().size()))
+        .addLabel("isAsynchronous", Boolean.toString(type.isAsynchronous()))
+        .addLabel("hasDecorators", Boolean.toString(type.hasDecorators()))
+        .addLabel("isInstanceMethod", Boolean.toString(type.isInstanceMethod()))
+        .addLabel("hasVariadicParameter", Boolean.toString(type.hasVariadicParameter()))
+        .build());
 
       for (PythonType attribute : type.attributes()) {
         parse(attribute, currentNode, "attribute", depth + 1);
@@ -161,15 +177,49 @@ public class TypeToGraph {
     }
 
     private void parse(UnionType type, String currentNode, int depth) {
-      this.nodes.add(new Node(
-        currentNode,
-        "UnionType | {candidates | " + type.candidates().size() + "}"));
+      this.nodes.add(new TypeToGraph.NodeBuilder(currentNode)
+        .addLabel("UnionType")
+        .addLabel("candidates", Integer.toString(type.candidates().size()))
+        .build());
 
       for (PythonType candidate : type.candidates()) {
         parse(candidate, currentNode, "candidate", depth + 1);
       }
     }
 
+  }
+
+  public static class NodeBuilder {
+    private final String name;
+    private final Collection<Label> labels = new ArrayList<>();
+
+    record Label(String key, @Nullable String value) {
+      @Override
+      public String toString() {
+        if (value == null) {
+          return "{" + key + "}";
+        }
+        return "{" + key + " | " + value + "}";
+      }
+    }
+
+    public NodeBuilder(String name) {
+      this.name = name;
+    }
+
+    public NodeBuilder addLabel(String key, String value) {
+      labels.add(new Label(key, value));
+      return this;
+    }
+
+    public NodeBuilder addLabel(String key) {
+      labels.add(new Label(key, null));
+      return this;
+    }
+
+    public Node build() {
+      return new Node(name, labels.stream().map(Label::toString).collect(Collectors.joining(" | ")));
+    }
   }
 
   private final Set<Node> nodes;
