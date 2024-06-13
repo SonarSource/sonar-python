@@ -1,0 +1,3 @@
+class Mod2Class:
+    def m2_meth(self):
+        ...

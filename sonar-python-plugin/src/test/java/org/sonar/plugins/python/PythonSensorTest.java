@@ -101,6 +101,7 @@ import org.sonar.python.checks.CheckList;
 import org.sonar.python.index.VariableDescriptor;
 import org.sonar.python.tree.TokenImpl;
 import org.sonar.python.types.TypeShed;
+import org.sonar.python.types.v2.TypeToGraph;
 import org.sonarsource.sonarlint.core.analysis.api.ClientInputFile;
 import org.sonarsource.sonarlint.core.analysis.container.analysis.filesystem.FileMetadata;
 import org.sonarsource.sonarlint.core.analysis.container.analysis.filesystem.SonarLintInputFile;
@@ -1247,6 +1248,32 @@ class PythonSensorTest {
     assertThat(writeCache.getData())
       .containsEntry(Caching.CPD_TOKENS_CACHE_KEY_PREFIX + inputFile.key(), cpdTokens.data)
       .containsEntry(CPD_TOKENS_STRING_TABLE_KEY_PREFIX + inputFile.key(), cpdTokens.stringTable);
+  }
+
+  @Test
+  void graph_project_level_symbol_table_miniproject() {
+    activeRules = new ActiveRulesBuilder()
+      .addRule(new NewActiveRule.Builder()
+        .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, "S930"))
+        .build())
+      .build();
+
+    List<String> miniprojectpyPaths = List.of("miniprojectpy/main.py",
+      "miniprojectpy/mypackage/module3.py",
+      "miniprojectpy/mypackage/module4.py",
+      "miniprojectpy/mypackage/subpackage1/module1.py",
+      "miniprojectpy/mypackage/subpackage1/module2.py"
+    );
+    List<InputFile> files = miniprojectpyPaths.stream().map(this::inputFile).toList();
+    PythonIndexer pythonIndexer = pythonIndexer(files);
+    sensor(null, pythonIndexer, analysisWarning).execute(context);
+
+    var graphBuilder = new TypeToGraph.Builder();
+    graphBuilder.addCollector(new TypeToGraph.ProjectLevelSymbolTableVisitor(), new TypeToGraph.Root<>(pythonIndexer.projectLevelSymbolTable(), "ProjectLevelSymbolTable"));
+    var typeToGraph = graphBuilder.build();
+    var out = typeToGraph.toString();
+
+    System.out.println(out);
   }
 
   private com.sonar.sslr.api.Token passToken(URI uri) {

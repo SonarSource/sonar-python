@@ -47,7 +47,7 @@ public class TypeToGraph {
     }
     @Override
     public void parse(Root<ProjectLevelSymbolTable> root) {
-      nodes.add(new Node(root.rootName, root.rootName, "color=\"yellow\", style=\"filled\", shape=\"box\""));
+      nodes.add(new Node(root.rootName, root.rootName, "color=\"red\", style=\"filled\", shape=\"box\""));
       parse(root.root, root.rootName, "");
     }
 
@@ -67,7 +67,6 @@ public class TypeToGraph {
 
     private void parse(Descriptor descriptor, String currentNode, String parentLabel) {
       String descriptorNode = Integer.toString(System.identityHashCode(descriptor));
-      nodes.add(new Node(descriptorNode, "Descriptor", "color=\"yellow\", style=\"filled\", shape=\"box\""));
       if (descriptor instanceof VariableDescriptor variableDescriptor) {
         parse(variableDescriptor, descriptorNode);
       } else if (descriptor instanceof FunctionDescriptor functionDescriptor) {
@@ -104,9 +103,9 @@ public class TypeToGraph {
         .addLabel("isInstanceMethod", Boolean.toString(descriptor.isInstanceMethod()))
         .addLabel("decorators", Integer.toString(descriptor.decorators().size()))
         .addLabel("hasDecorators", Boolean.toString(descriptor.hasDecorators()))
-        .addLabel("annotatedReturnTypeName", descriptor.annotatedReturnTypeName())
+        .addLabel("annotatedReturnTypeName", Optional.ofNullable(descriptor.annotatedReturnTypeName()).orElse("Ø"))
         .extraProp("style", "filled")
-        .extraProp("fillcolor", "lightorange")
+        .extraProp("fillcolor", "orange")
         .build());
 
       for (FunctionDescriptor.Parameter parameter : descriptor.parameters()) {
@@ -120,14 +119,14 @@ public class TypeToGraph {
       nodes.add(new NodeBuilder(parameterNode)
         .addLabel("Parameter")
         .addLabel("name", parameter.name())
-        .addLabel("annotatedType", parameter.annotatedType())
+        .addLabel("annotatedType", Optional.ofNullable(parameter.annotatedType()).orElse("Ø"))
         .addLabel("hasDefaultValue", Boolean.toString(parameter.hasDefaultValue()))
         .addLabel("isKeywordVariadic", Boolean.toString(parameter.isKeywordVariadic()))
         .addLabel("isPositionalVariadic", Boolean.toString(parameter.isPositionalVariadic()))
         .addLabel("isKeywordOnly", Boolean.toString(parameter.isKeywordOnly()))
         .addLabel("isPositionalOnly", Boolean.toString(parameter.isPositionalOnly()))
         .extraProp("style", "filled")
-        .extraProp("fillcolor", "lightgreen")
+        .extraProp("fillcolor", "green")
         .build());
       edges.add(new Edge(currentNode, parameterNode, "parameter"));
     }
@@ -142,10 +141,10 @@ public class TypeToGraph {
         .addLabel("superClasses", Integer.toString(descriptor.superClasses().size()))
         .addLabel("members", Integer.toString(descriptor.members().size()))
         .addLabel("hasDecorators", Boolean.toString(descriptor.hasDecorators()))
-        .addLabel("definitionLocation", descriptor.definitionLocation().toString())
+        .addLabel("definitionLocation", descriptor.definitionLocation() == null ? "null" : "not null")
         .addLabel("hasSuperClassWithoutDescriptor", Boolean.toString(descriptor.hasSuperClassWithoutDescriptor()))
         .addLabel("hasMetaClass", Boolean.toString(descriptor.hasMetaClass()))
-        .addLabel("metaclassFQN", descriptor.metaclassFQN())
+        .addLabel("metaclassFQN", Optional.ofNullable(descriptor.metaclassFQN()).orElse("Ø"))
         .addLabel("supportsGenerics", Boolean.toString(descriptor.supportsGenerics()))
         .extraProp("style", "filled")
         .extraProp("fillcolor", "lightpink")
