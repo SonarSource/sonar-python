@@ -17,7 +17,7 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.types.v2;
+package org.sonarsource.python;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -47,6 +47,14 @@ import org.sonar.python.semantic.v2.UsageV2;
 import org.sonar.python.types.AnyType;
 import org.sonar.python.types.DeclaredType;
 import org.sonar.python.types.RuntimeType;
+import org.sonar.python.types.v2.ClassType;
+import org.sonar.python.types.v2.FunctionType;
+import org.sonar.python.types.v2.Member;
+import org.sonar.python.types.v2.ObjectType;
+import org.sonar.python.types.v2.ParameterV2;
+import org.sonar.python.types.v2.PythonType;
+import org.sonar.python.types.v2.UnionType;
+import org.sonar.python.types.v2.UnknownType;
 
 public class TypeToGraph {
 

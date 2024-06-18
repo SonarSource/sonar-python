@@ -17,31 +17,29 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.types.v2;
+package org.sonarsource.python;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.sonar.api.internal.apachecommons.lang.StringUtils;
 import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
-import org.sonar.python.PythonTestUtils;
 import org.sonar.python.semantic.v2.ProjectLevelTypeTable;
 import org.sonar.python.semantic.v2.SymbolTableBuilderV2;
 import org.sonar.python.semantic.v2.TypeInferenceV2;
 import org.sonar.python.tree.AssignmentStatementImpl;
-
-import static org.sonar.python.PythonTestUtils.parse;
-import static org.sonar.python.types.v2.TypesTestUtils.PROJECT_LEVEL_TYPE_TABLE;
 
 class TypeToGraphTest {
 
   static PythonFile pythonFile = PythonTestUtils.pythonFile("");
 
   private static FileInput inferTypes(String lines) {
-    return inferTypes(lines, PROJECT_LEVEL_TYPE_TABLE);
+    return inferTypes(lines, TypesTestUtils.PROJECT_LEVEL_TYPE_TABLE);
   }
 
   private static FileInput inferTypes(String lines, ProjectLevelTypeTable projectLevelTypeTable) {
-    FileInput root = parse(lines);
+    FileInput root = PythonTestUtils.parse(lines);
 
     var symbolTable = new SymbolTableBuilderV2(root)
       .build();
@@ -55,7 +53,7 @@ class TypeToGraphTest {
       a = 1
       a = "2"
       def a():
-      	...
+        ...
       a = 2
       b = a
       ...
@@ -101,15 +99,30 @@ class TypeToGraphTest {
       .build();
 
     String out = typeToGraph.toString();
-    System.out.println(out);
+
+    Assertions.assertThat(out)
+      .containsOnlyOnce("a [label=\"a\"")
+      .containsOnlyOnce("b [label=\"b\"")
+      .containsOnlyOnce("c [label=\"c\"")
+      .containsOnlyOnce("d [label=\"d\"")
+      .containsOnlyOnce("e [label=\"e\"")
+      .containsOnlyOnce("f [label=\"f\"")
+      .containsOnlyOnce("UnknownType");
+    Assertions.assertThat(StringUtils.countMatches(out, "ObjectType")).isEqualTo(6);
+    Assertions.assertThat(StringUtils.countMatches(out, "ClassType")).isEqualTo(4);
+    Assertions.assertThat(StringUtils.countMatches(out, "FunctionType")).isEqualTo(4);
+    Assertions.assertThat(StringUtils.countMatches(out, "ParameterV2")).isEqualTo(2);
+    Assertions.assertThat(StringUtils.countMatches(out, "SymbolV2")).isEqualTo(2);
+    Assertions.assertThat(StringUtils.countMatches(out, "UsageV2")).isEqualTo(6);
   }
+
   @Test
   void test_type_inference_v1() {
     String input = """
       a = 1
       a = "2"
       def a():
-      	...
+        ...
       a = 2
       b = a
       ...
@@ -135,8 +148,6 @@ class TypeToGraphTest {
     var e = ((AssignmentStatementImpl) fileInput.statements().statements().get(10)).lhsExpressions().get(0).expressions().get(0).type();
     var f = ((AssignmentStatementImpl) fileInput.statements().statements().get(11)).lhsExpressions().get(0).expressions().get(0).type();
 
-
-
     Integer branchLimit = null;
     var typeToGraph = new TypeToGraph.Builder()
       .addCollector(new TypeToGraph.TypeV1Visitor(), new TypeToGraph.Root<>(a_1, "a"))
@@ -151,6 +162,19 @@ class TypeToGraphTest {
       .build();
 
     String out = typeToGraph.toString();
-    System.out.println(out);
+
+    Assertions.assertThat(out)
+      .containsOnlyOnce("a [label=\"a\"")
+      .containsOnlyOnce("b [label=\"b\"")
+      .containsOnlyOnce("c [label=\"c\"")
+      .containsOnlyOnce("d [label=\"d\"")
+      .containsOnlyOnce("e [label=\"e\"")
+      .containsOnlyOnce("f [label=\"f\"")
+      .containsOnlyOnce("AnyType");
+    Assertions.assertThat(StringUtils.countMatches(out, "Parameter")).isEqualTo(3);
+    Assertions.assertThat(StringUtils.countMatches(out, "FunctionSymbol")).isEqualTo(2);
+    Assertions.assertThat(StringUtils.countMatches(out, "ClassSymbol")).isEqualTo(4);
+    Assertions.assertThat(StringUtils.countMatches(out, "RuntimeType")).isEqualTo(3);
+    Assertions.assertThat(StringUtils.countMatches(out, "DeclaredType")).isEqualTo(1);
   }
 }

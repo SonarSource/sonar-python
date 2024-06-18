@@ -21,7 +21,6 @@ package org.sonar.python.semantic.v2;
 
 import java.util.Collection;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -47,7 +46,6 @@ import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.plugins.python.api.tree.StatementList;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.PythonTestUtils;
 import org.sonar.python.semantic.ClassSymbolImpl;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
@@ -58,7 +56,6 @@ import org.sonar.python.types.v2.ModuleType;
 import org.sonar.python.types.v2.ObjectType;
 import org.sonar.python.types.v2.ParameterV2;
 import org.sonar.python.types.v2.PythonType;
-import org.sonar.python.types.v2.TypeToGraph;
 import org.sonar.python.types.v2.UnionType;
 import org.sonar.python.types.v2.UnknownType;
 
@@ -1596,53 +1593,6 @@ class TypeInferenceV2Test {
   private static Statement lastStatement(StatementList statementList) {
     List<Statement> statements = statementList.statements();
     return statements.get(statements.size() - 1);
-  }
-
-  @Test
-  void dumpAllV2Types() {
-    String input = """
-from typing import overload
-
-@overload
-def process(response: None) -> None:
-    ...
-@overload
-def process(response: int) -> tuple[int, str]:
-    ...
-@overload
-def process(response: bytes) -> str:
-    ...
-def process(response):
-    ...  # actual implementation goes here
-      """;
-
-    FileInput fileInput = inferTypes(input);
-    List<Expression> expressions = PythonTestUtils.getAllDescendant(fileInput, tree -> tree instanceof Expression);
-
-    Map<String, PythonType> typeMap = new HashMap<>();
-    Map<String, InferredType> inferredTypeMap = new HashMap<>();
-    for (Expression expression : expressions) {
-      PythonType type = expression.typeV2();
-      InferredType inferredType = expression.type();
-      if (type != null) {
-        String key = expression.toString();
-        if (expression.is(Tree.Kind.NAME)) {
-          key = ((Name) expression).name();
-        }
-        if (expression.is(Tree.Kind.CALL_EXPR)) {
-          key = ((CallExpression) expression).callee().toString();
-        }
-        typeMap.put(key, type);
-        inferredTypeMap.put(key, inferredType);
-      }
-    }
-
-    var typeToGraph = new TypeToGraph.Builder()
-      .addCollector(new TypeToGraph.V2TypeInferenceVisitor(false, 2, null, true), new TypeToGraph.Root<>(typeMap.get("process"), "process"))
-      .addCollector( new TypeToGraph.TypeV1Visitor(), new TypeToGraph.Root<>(inferredTypeMap.get("process"), "process"))
-      .build();
-    String out = typeToGraph.toString();
-    System.out.println(out);
   }
 
 }
