@@ -1272,8 +1272,8 @@ class PythonSensorTest {
     graphBuilder.addCollector(new TypeToGraph.ProjectLevelSymbolTableVisitor(), new TypeToGraph.Root<>(pythonIndexer.projectLevelSymbolTable(), "ProjectLevelSymbolTable"));
     var typeToGraph = graphBuilder.build();
     var out = typeToGraph.toString();
-
-    System.out.println(out);
+    assertThat(out).isNotNull();
+    assertThat(out).contains("ProjectLevelSymbolTable").contains("digraph");
   }
 
   private com.sonar.sslr.api.Token passToken(URI uri) {
