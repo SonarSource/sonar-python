@@ -35,6 +35,7 @@ import org.sonar.python.types.AnyType;
 import org.sonar.python.types.DeclaredType;
 import org.sonar.python.types.RuntimeType;
 import org.sonar.python.types.UnionType;
+import org.sonar.python.types.UnknownClassType;
 import org.sonar.python.types.visualization.GraphVisualizer;
 
 public class TypeV1Visitor implements GraphVisualizer.TypeToGraphCollector<InferredType> {
@@ -80,10 +81,22 @@ public class TypeV1Visitor implements GraphVisualizer.TypeToGraphCollector<Infer
       parse(declaredType, typeNode);
     } else if (type instanceof UnionType unionType) {
       parse(unionType, typeNode);
+    } else if (type instanceof UnknownClassType unknownClassType) {
+      parse(unknownClassType, typeNode);
     } else {
       throw new IllegalStateException("Unsupported type: " + type.getClass().getName());
     }
     edges.add(new GraphVisualizer.Edge(currentNode, typeNode, parentLabel));
+  }
+
+  private void parse(UnknownClassType unknownClassType, String typeNode) {
+    nodes.add(new GraphVisualizer.NodeBuilder(typeNode)
+      .addLabel("UnknownClassType")
+      .extraProp("style", "filled")
+      .extraProp("fillcolor", "lightblue")
+      .build());
+
+    parseSymbol(unknownClassType.typeSymbol(), typeNode, "typeSymbol");
   }
 
   private void parse(UnionType unionType, String typeNode) {

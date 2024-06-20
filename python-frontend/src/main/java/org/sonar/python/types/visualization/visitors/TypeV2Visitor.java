@@ -134,8 +134,8 @@ public class TypeV2Visitor {
         parse(functionType, currentNode, depth + 1);
       } else if (type instanceof FunctionType functionType) {
         parse(functionType, currentNode, depth + 1);
-      } else if (type instanceof UnknownType unknownType) {
-        parse(unknownType, currentNode, depth + 1);
+      } else if (type instanceof UnknownType) {
+        parse(currentNode);
       } else if (type instanceof UnionType unionType) {
         parse(unionType, currentNode, depth + 1);
       } else {
@@ -238,7 +238,7 @@ public class TypeV2Visitor {
       parse(type.returnType(), currentNode, "returnType", depth + 1);
     }
 
-    private void parse(UnknownType type, String currentNode, int depth) {
+    private void parse(String currentNode) {
       this.nodes.add(new GraphVisualizer.Node(
         currentNode,
         "UnknownType"));
@@ -259,4 +259,7 @@ public class TypeV2Visitor {
 
   }
 
+  private TypeV2Visitor() {
+    // utility class
+  }
 }

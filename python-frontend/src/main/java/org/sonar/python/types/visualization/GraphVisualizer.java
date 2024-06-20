@@ -95,18 +95,18 @@ public class GraphVisualizer {
 
   final Set<Edge> edges;
 
-  public static class Builder {
+  public static class Builder<R> {
 
-    private final Map<TypeToGraphCollector, Root> collectors = new HashMap<>();
+    private final Map<TypeToGraphCollector<R>, Root<R>> collectors = new HashMap<>();
 
-    public <R> Builder addCollector(TypeToGraphCollector<R> collector, Root<R> root) {
+    public Builder<R> addCollector(TypeToGraphCollector<R> collector, Root<R> root) {
       collectors.put(collector, root);
       return this;
     }
 
     public GraphVisualizer build() {
       GraphVisualizer graph = new GraphVisualizer();
-      for (Map.Entry<TypeToGraphCollector, Root> entry : collectors.entrySet()) {
+      for (Map.Entry<TypeToGraphCollector<R>, Root<R>> entry : collectors.entrySet()) {
         entry.getKey().parse(entry.getValue());
         graph.nodes.addAll(entry.getKey().nodes());
         graph.edges.addAll(entry.getKey().edges());

@@ -19,26 +19,35 @@
  */
 package org.sonar.python.types.visualization;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
 import org.apache.commons.lang.StringUtils;
 import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.PythonFile;
+import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
+import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.PythonTestUtils;
+import org.sonar.python.semantic.AmbiguousSymbolImpl;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
+import org.sonar.python.semantic.SymbolImpl;
 import org.sonar.python.semantic.v2.ProjectLevelTypeTable;
 import org.sonar.python.semantic.v2.SymbolTableBuilderV2;
 import org.sonar.python.semantic.v2.TypeInferenceV2;
 import org.sonar.python.tree.AnnotatedAssignmentImpl;
 import org.sonar.python.tree.AssignmentStatementImpl;
+import org.sonar.python.types.RuntimeType;
+import org.sonar.python.types.UnknownClassType;
 import org.sonar.python.types.v2.TypesTestUtils;
 import org.sonar.python.types.visualization.visitors.ProjectLevelSymbolTableVisitor;
 import org.sonar.python.types.visualization.visitors.TypeV1Visitor;
 import org.sonar.python.types.visualization.visitors.TypeV2Visitor;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 import static org.sonar.python.PythonTestUtils.parseWithoutSymbols;
 import static org.sonar.python.PythonTestUtils.pythonFile;
 
@@ -144,6 +153,7 @@ class GraphVisualizerTest {
 
     @Override
     public void parse(GraphVisualizer.Root<Object> root) {
+      // Test code
     }
   }
 
@@ -165,7 +175,7 @@ class GraphVisualizerTest {
         }""");
   }
 
-  private final String code_1 = """
+  private final String code1 = """
     a = 1
     a = "2"
     def a():
@@ -195,12 +205,12 @@ class GraphVisualizerTest {
 
   @Test
   void test_type_inference_v1() {
-    FileInput fileInput = inferTypes(code_1);
+    FileInput fileInput = inferTypes(code1);
 
-    var a_1 = ((AssignmentStatementImpl) fileInput.statements().statements().get(0)).lhsExpressions().get(0).expressions().get(0).type();
-    var a_2 = ((AssignmentStatementImpl) fileInput.statements().statements().get(1)).lhsExpressions().get(0).expressions().get(0).type();
-    var a_3 = ((FunctionDef) fileInput.statements().statements().get(2)).name().type();
-    var a_4 = ((AssignmentStatementImpl) fileInput.statements().statements().get(3)).lhsExpressions().get(0).expressions().get(0).type();
+    var a1 = ((AssignmentStatementImpl) fileInput.statements().statements().get(0)).lhsExpressions().get(0).expressions().get(0).type();
+    var a2 = ((AssignmentStatementImpl) fileInput.statements().statements().get(1)).lhsExpressions().get(0).expressions().get(0).type();
+    var a3 = ((FunctionDef) fileInput.statements().statements().get(2)).name().type();
+    var a4 = ((AssignmentStatementImpl) fileInput.statements().statements().get(3)).lhsExpressions().get(0).expressions().get(0).type();
     var b = ((AssignmentStatementImpl) fileInput.statements().statements().get(4)).lhsExpressions().get(0).expressions().get(0).type();
     var c = ((AssignmentStatementImpl) fileInput.statements().statements().get(6)).lhsExpressions().get(0).expressions().get(0).type();
     var d = ((FunctionDef) fileInput.statements().statements().get(7)).name().type();
@@ -211,10 +221,10 @@ class GraphVisualizerTest {
     var i = ((AssignmentStatementImpl) fileInput.statements().statements().get(17)).lhsExpressions().get(0).expressions().get(0).type();
 
     var typeToGraph = new GraphVisualizer.Builder()
-      .addCollector(new TypeV1Visitor(), new GraphVisualizer.Root<>(a_1, "a"))
-      .addCollector(new TypeV1Visitor(), new GraphVisualizer.Root<>(a_2, "a"))
-      .addCollector(new TypeV1Visitor(), new GraphVisualizer.Root<>(a_3, "a"))
-      .addCollector(new TypeV1Visitor(), new GraphVisualizer.Root<>(a_4, "a"))
+      .addCollector(new TypeV1Visitor(), new GraphVisualizer.Root<>(a1, "a"))
+      .addCollector(new TypeV1Visitor(), new GraphVisualizer.Root<>(a2, "a"))
+      .addCollector(new TypeV1Visitor(), new GraphVisualizer.Root<>(a3, "a"))
+      .addCollector(new TypeV1Visitor(), new GraphVisualizer.Root<>(a4, "a"))
       .addCollector(new TypeV1Visitor(), new GraphVisualizer.Root<>(b, "b"))
       .addCollector(new TypeV1Visitor(), new GraphVisualizer.Root<>(c, "c"))
       .addCollector(new TypeV1Visitor(), new GraphVisualizer.Root<>(d, "d"))
@@ -243,12 +253,12 @@ class GraphVisualizerTest {
 
   @Test
   void test_type_inference_v2() {
-    FileInput fileInput = inferTypes(code_1);
+    FileInput fileInput = inferTypes(code1);
 
-    var a_1 = ((AssignmentStatementImpl) fileInput.statements().statements().get(0)).lhsExpressions().get(0).expressions().get(0).typeV2();
-    var a_2 = ((AssignmentStatementImpl) fileInput.statements().statements().get(1)).lhsExpressions().get(0).expressions().get(0).typeV2();
-    var a_3 = ((FunctionDef) fileInput.statements().statements().get(2)).name().typeV2();
-    var a_4 = ((AssignmentStatementImpl) fileInput.statements().statements().get(3)).lhsExpressions().get(0).expressions().get(0).typeV2();
+    var a1 = ((AssignmentStatementImpl) fileInput.statements().statements().get(0)).lhsExpressions().get(0).expressions().get(0).typeV2();
+    var a2 = ((AssignmentStatementImpl) fileInput.statements().statements().get(1)).lhsExpressions().get(0).expressions().get(0).typeV2();
+    var a3 = ((FunctionDef) fileInput.statements().statements().get(2)).name().typeV2();
+    var a4 = ((AssignmentStatementImpl) fileInput.statements().statements().get(3)).lhsExpressions().get(0).expressions().get(0).typeV2();
     var b = ((AssignmentStatementImpl) fileInput.statements().statements().get(4)).lhsExpressions().get(0).expressions().get(0).typeV2();
     var c = ((AssignmentStatementImpl) fileInput.statements().statements().get(6)).lhsExpressions().get(0).expressions().get(0).typeV2();
     var d = ((FunctionDef) fileInput.statements().statements().get(7)).name().typeV2();
@@ -258,15 +268,15 @@ class GraphVisualizerTest {
     var h = ((AnnotatedAssignmentImpl) fileInput.statements().statements().get(15)).assignedValue().typeV2();
     var i = ((AssignmentStatementImpl) fileInput.statements().statements().get(17)).lhsExpressions().get(0).expressions().get(0).typeV2();
 
-    var d_symbol = ((FunctionDef) fileInput.statements().statements().get(7)).name().symbolV2();
-    var a_symbol = ((FunctionDef) fileInput.statements().statements().get(2)).name().symbolV2();
+    var dSymbol = ((FunctionDef) fileInput.statements().statements().get(7)).name().symbolV2();
+    var aSymbol = ((FunctionDef) fileInput.statements().statements().get(2)).name().symbolV2();
 
     Integer branchLimit = 3;
     var graphVisualizer = new GraphVisualizer.Builder()
-      .addCollector(new TypeV2Visitor.V2TypeInferenceVisitor(false, branchLimit, null, true), new GraphVisualizer.Root<>(a_1, "a"))
-      .addCollector(new TypeV2Visitor.V2TypeInferenceVisitor(false, branchLimit, null, true), new GraphVisualizer.Root<>(a_2, "a"))
-      .addCollector(new TypeV2Visitor.V2TypeInferenceVisitor(false, branchLimit, null, true), new GraphVisualizer.Root<>(a_3, "a"))
-      .addCollector(new TypeV2Visitor.V2TypeInferenceVisitor(false, branchLimit, null, true), new GraphVisualizer.Root<>(a_4, "a"))
+      .addCollector(new TypeV2Visitor.V2TypeInferenceVisitor(false, branchLimit, null, true), new GraphVisualizer.Root<>(a1, "a"))
+      .addCollector(new TypeV2Visitor.V2TypeInferenceVisitor(false, branchLimit, null, true), new GraphVisualizer.Root<>(a2, "a"))
+      .addCollector(new TypeV2Visitor.V2TypeInferenceVisitor(false, branchLimit, null, true), new GraphVisualizer.Root<>(a3, "a"))
+      .addCollector(new TypeV2Visitor.V2TypeInferenceVisitor(false, branchLimit, null, true), new GraphVisualizer.Root<>(a4, "a"))
       .addCollector(new TypeV2Visitor.V2TypeInferenceVisitor(false, branchLimit, null, true), new GraphVisualizer.Root<>(b, "b"))
       .addCollector(new TypeV2Visitor.V2TypeInferenceVisitor(false, branchLimit, null, true), new GraphVisualizer.Root<>(c, "c"))
       .addCollector(new TypeV2Visitor.V2TypeInferenceVisitor(false, branchLimit, null, true), new GraphVisualizer.Root<>(d, "d"))
@@ -275,8 +285,8 @@ class GraphVisualizerTest {
       .addCollector(new TypeV2Visitor.V2TypeInferenceVisitor(false, branchLimit, null, true), new GraphVisualizer.Root<>(g, "g"))
       .addCollector(new TypeV2Visitor.V2TypeInferenceVisitor(false, branchLimit, null, true), new GraphVisualizer.Root<>(h, "h"))
       .addCollector(new TypeV2Visitor.V2TypeInferenceVisitor(false, branchLimit, null, true), new GraphVisualizer.Root<>(i, "i"))
-      .addCollector(new TypeV2Visitor.V2SymbolVisitor(), new GraphVisualizer.Root<>(a_symbol, "a"))
-      .addCollector(new TypeV2Visitor.V2SymbolVisitor(), new GraphVisualizer.Root<>(d_symbol, "d"))
+      .addCollector(new TypeV2Visitor.V2SymbolVisitor(), new GraphVisualizer.Root<>(aSymbol, "a"))
+      .addCollector(new TypeV2Visitor.V2SymbolVisitor(), new GraphVisualizer.Root<>(dSymbol, "d"))
       .build();
 
     String out = graphVisualizer.toString();
@@ -295,6 +305,63 @@ class GraphVisualizerTest {
     assertThat(StringUtils.countMatches(out, "ParameterV2")).isEqualTo(4);
     assertThat(StringUtils.countMatches(out, "SymbolV2")).isEqualTo(2);
     assertThat(StringUtils.countMatches(out, "UsageV2")).isEqualTo(6);
+  }
+
+  @Test
+  void test_type_inference_v1_skip_builtin() {
+
+    FileInput fileInput = inferTypes(code1);
+
+    var a = ((AssignmentStatementImpl) fileInput.statements().statements().get(0)).lhsExpressions().get(0).expressions().get(0).type();
+
+    var out = new GraphVisualizer.Builder()
+      .addCollector(new TypeV1Visitor(false), new GraphVisualizer.Root<>(a, "a"))
+      .build()
+      .toString();
+
+    assertThat(out).isNotEmpty();
+  }
+
+  @Test
+  void test_type_inference_v1_unknown_class_type() {
+    var code = """
+      from something import A
+      a = A()
+      """;
+    FileInput fileInput = inferTypes(code);
+
+    var a = ((AssignmentStatementImpl) fileInput.statements().statements().get(1)).lhsExpressions().get(0).expressions().get(0).type();
+
+    var graphVisualizer = new GraphVisualizer.Builder()
+      .addCollector(new TypeV1Visitor(false), new GraphVisualizer.Root<>(a, "a"))
+      .build();
+
+    String out = graphVisualizer.toString();
+
+    assertThat(out)
+      .containsOnlyOnce("a [label=\"a\"");
+    assertThat(StringUtils.countMatches(out, "UnknownClassType")).isEqualTo(1);
+    assertThat(StringUtils.countMatches(out, "SymbolImpl")).isEqualTo(1);
+  }
+
+  @Test
+  void test_type_inference_v1_ambiguous_symbol() {
+    // Test by creating an ambiguous symbol manually and calling the visitor
+    var symbol = AmbiguousSymbolImpl.create(new SymbolImpl("a", "a"), new SymbolImpl("a", "a"));
+    var unknownClassType = mock(UnknownClassType.class);
+    ClassSymbol classSymbol = mock(ClassSymbol.class);
+    when(classSymbol.superClasses()).thenReturn(List.of(symbol));
+    when(unknownClassType.typeSymbol()).thenReturn(symbol);
+    var inferredType = mock(RuntimeType.class);
+    when(inferredType.getTypeClass()).thenReturn(classSymbol);
+
+    var root = new GraphVisualizer.Root<>(((InferredType) inferredType), "inferredType");
+
+    var out = new GraphVisualizer.Builder()
+      .addCollector(new TypeV1Visitor(false), root)
+      .build().toString();
+
+    assertThat(out).isNotEmpty();
   }
 
   static PythonFile pythonFile = PythonTestUtils.pythonFile("");
@@ -350,15 +417,15 @@ class GraphVisualizerTest {
   }
 
   @Test
-  void branch_limit(){
-    var initialStream = Stream.of(1,2,3,4,5,6,7,8,9);
+  void branch_limit() {
+    var initialStream = Stream.of(1, 2, 3, 4, 5, 6, 7, 8, 9);
     var limitedStream = GraphVisualizer.branchLimit(initialStream, 3);
     assertThat(limitedStream.count()).isEqualTo(3);
   }
 
   @Test
-  void branch_limit_null(){
-    var initialStream = Stream.of(1,2,3,4,5,6,7,8,9);
+  void branch_limit_null() {
+    var initialStream = Stream.of(1, 2, 3, 4, 5, 6, 7, 8, 9);
     var limitedStream = GraphVisualizer.branchLimit(initialStream, null);
     assertThat(limitedStream.count()).isEqualTo(9);
   }
