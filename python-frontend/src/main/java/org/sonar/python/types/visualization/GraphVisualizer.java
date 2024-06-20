@@ -26,6 +26,7 @@ import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import javax.annotation.Nullable;
 
 public class GraphVisualizer {
@@ -167,6 +168,14 @@ public class GraphVisualizer {
     output.append("}");
 
     return output.toString();
+  }
+
+
+  public static <T> Stream<T> branchLimit(Stream<T> stream, Integer branchingLimit) {
+    if (branchingLimit != null) {
+      return stream.limit(branchingLimit);
+    }
+    return stream;
   }
 }
 

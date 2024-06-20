@@ -22,7 +22,6 @@ package org.sonar.python.types.visualization.visitors;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
-import java.util.stream.Stream;
 import javax.annotation.Nullable;
 import org.sonar.python.semantic.v2.SymbolV2;
 import org.sonar.python.semantic.v2.UsageV2;
@@ -35,6 +34,8 @@ import org.sonar.python.types.v2.PythonType;
 import org.sonar.python.types.v2.UnionType;
 import org.sonar.python.types.v2.UnknownType;
 import org.sonar.python.types.visualization.GraphVisualizer;
+
+import static org.sonar.python.types.visualization.GraphVisualizer.branchLimit;
 
 public class TypeV2Visitor {
   public static class V2SymbolVisitor implements GraphVisualizer.TypeToGraphCollector<SymbolV2> {
@@ -90,13 +91,13 @@ public class TypeV2Visitor {
     private final Set<GraphVisualizer.Edge> edges = new HashSet<>();
 
     private boolean filterDunder;
-    private Optional<Integer> branchingLimit;
+    private Integer branchingLimit;
     private Optional<Integer> depthLimit;
     private boolean skipBuiltins;
 
     public V2TypeInferenceVisitor(boolean filterDunder, @Nullable Integer branchingLimit, @Nullable Integer depthLimit, boolean skipBuiltins) {
       this.filterDunder = filterDunder;
-      this.branchingLimit = Optional.ofNullable(branchingLimit);
+      this.branchingLimit = branchingLimit;
       this.depthLimit = Optional.ofNullable(depthLimit);
       this.skipBuiltins = skipBuiltins;
     }
@@ -195,19 +196,19 @@ public class TypeV2Visitor {
       if (skipBuiltins && type.definitionLocation().isEmpty()) {
         return;
       }
-      for (PythonType superClass : branchLimit(type.superClasses().stream()).toList()) {
+      for (PythonType superClass : branchLimit(type.superClasses().stream(), branchingLimit).toList()) {
         parse(superClass, currentNode, "superClass", depth + 1);
       }
 
-      for (PythonType metaClass : branchLimit(type.metaClasses().stream()).toList()) {
+      for (PythonType metaClass : branchLimit(type.metaClasses().stream(), branchingLimit).toList()) {
         parse(metaClass, currentNode, "metaClass", depth + 1);
       }
 
-      for (PythonType attribute : branchLimit(type.attributes().stream()).toList()) {
+      for (PythonType attribute : branchLimit(type.attributes().stream(), branchingLimit).toList()) {
         parse(attribute, currentNode, "attribute", depth + 1);
       }
 
-      for (Member member : branchLimit(type.members().stream().filter(member -> !filterDunder || !member.name().startsWith("__"))).toList()) {
+      for (Member member : branchLimit(type.members().stream().filter(member -> !filterDunder || !member.name().startsWith("__")), branchingLimit).toList()) {
         parse(member.type(), currentNode, "member", depth + 1);
       }
 
@@ -254,13 +255,6 @@ public class TypeV2Visitor {
       for (PythonType candidate : type.candidates()) {
         parse(candidate, currentNode, "candidate", depth + 1);
       }
-    }
-
-    private <T> Stream<T> branchLimit(Stream<T> stream) {
-      if (branchingLimit.isPresent()) {
-        return stream.limit(branchingLimit.get());
-      }
-      return stream;
     }
 
   }

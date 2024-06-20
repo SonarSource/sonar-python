@@ -20,6 +20,7 @@
 package org.sonar.python.types.visualization;
 
 import java.util.Set;
+import java.util.stream.Stream;
 import org.apache.commons.lang.StringUtils;
 import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.PythonFile;
@@ -346,5 +347,19 @@ class GraphVisualizerTest {
     assertThat(StringUtils.countMatches(out, "Parameter")).isEqualTo(5);
     assertThat(StringUtils.countMatches(out, "VariableDescriptor")).isEqualTo(1);
     assertThat(StringUtils.countMatches(out, "AmbiguousDescriptor")).isEqualTo(1);
+  }
+
+  @Test
+  void branch_limit(){
+    var initialStream = Stream.of(1,2,3,4,5,6,7,8,9);
+    var limitedStream = GraphVisualizer.branchLimit(initialStream, 3);
+    assertThat(limitedStream.count()).isEqualTo(3);
+  }
+
+  @Test
+  void branch_limit_null(){
+    var initialStream = Stream.of(1,2,3,4,5,6,7,8,9);
+    var limitedStream = GraphVisualizer.branchLimit(initialStream, null);
+    assertThat(limitedStream.count()).isEqualTo(9);
   }
 }
