@@ -6,3 +6,5 @@ services:
       dockerfile: Dockerfile
     volumes:
       - ../src:/sonar-python/python-frontend/src
+      - ./checksum:/sonar-python/python-frontend/typeshed_serializer/checksum
+    user: ${UID}:${GID}
