@@ -47,6 +47,8 @@ public final class TestsUtils {
   private static final String SQ_VERSION_PROPERTY = "sonar.runtimeVersion";
   private static final String DEFAULT_SQ_VERSION = "LATEST_RELEASE";
 
+  static final String DEFAULT_SCANNER_VERSION = "6.0.0.4432";
+
   public static final FileLocation PLUGIN_LOCATION = FileLocation.byWildcardMavenFilename(new File("../../../sonar-python-plugin/target"), "sonar-python-plugin-*.jar");
 
   public static final OrchestratorExtension ORCHESTRATOR = OrchestratorExtension.builderEnv()

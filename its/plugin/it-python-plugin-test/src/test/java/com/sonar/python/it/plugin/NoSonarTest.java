@@ -28,6 +28,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
 import org.sonarqube.ws.Issues;
 
+import static com.sonar.python.it.plugin.TestsUtils.DEFAULT_SCANNER_VERSION;
 import static com.sonar.python.it.plugin.TestsUtils.issues;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -48,7 +49,8 @@ class NoSonarTest {
       .setProjectKey(PROJECT_KEY)
       .setProjectName(PROJECT_KEY)
       .setProjectVersion("1.0-SNAPSHOT")
-      .setSourceDirs(".");
+      .setSourceDirs(".")
+      .setScannerVersion(DEFAULT_SCANNER_VERSION);
     ORCHESTRATOR.executeBuild(build);
   }
 

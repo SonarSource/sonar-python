@@ -30,6 +30,7 @@ import java.util.Map;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
 
+import static com.sonar.python.it.plugin.TestsUtils.DEFAULT_SCANNER_VERSION;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class CoverageTest {
@@ -59,6 +60,7 @@ class CoverageTest {
 
   private static void basicCoverageReports(String utReportPath) {
     SonarScanner build = SonarScanner.create()
+      .setScannerVersion(DEFAULT_SCANNER_VERSION)
       .setProjectDir(new File(COVERAGE_PROJECT))
       .setProperty(DEPRECATED_COVERAGE_REPORT_PATH, "someReport")
       .setProperty(COVERAGE_REPORT_PATHS, utReportPath+",it-coverage1.xml,it-coverage2.xml");
@@ -79,6 +81,7 @@ class CoverageTest {
   @Test
   void default_values() {
     SonarScanner build = SonarScanner.create()
+      .setScannerVersion(DEFAULT_SCANNER_VERSION)
       .setProjectDir(new File(COVERAGE_PROJECT));
     ORCHESTRATOR.executeBuild(build);
 
@@ -94,6 +97,7 @@ class CoverageTest {
   @Test
   void empty_property() {
     SonarScanner build = SonarScanner.create()
+      .setScannerVersion(DEFAULT_SCANNER_VERSION)
       .setProjectDir(new File(COVERAGE_PROJECT))
       .setProperty(DEPRECATED_COVERAGE_REPORT_PATH, "")
       .setProperty(COVERAGE_REPORT_PATHS, "");
@@ -110,6 +114,7 @@ class CoverageTest {
   @Test
   void empty_coverage_report() {
     SonarScanner build = SonarScanner.create()
+      .setScannerVersion(DEFAULT_SCANNER_VERSION)
       .setProjectDir(new File(COVERAGE_PROJECT))
       .setProperty(DEPRECATED_COVERAGE_REPORT_PATH, EMPTY_XML)
       .setProperty(COVERAGE_REPORT_PATHS, EMPTY_XML);
