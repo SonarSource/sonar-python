@@ -1,9 +1,11 @@
-version: '3'
 services:
   typeshed-serializer:
     build:
       context: .
       dockerfile: Dockerfile
+      args:
+        UID: ${UID}
+        GID: ${GID}
     volumes:
       - ../src:/sonar-python/python-frontend/src
       - ./checksum:/sonar-python/python-frontend/typeshed_serializer/checksum
