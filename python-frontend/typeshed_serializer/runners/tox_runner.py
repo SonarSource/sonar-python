@@ -127,11 +127,11 @@ def main(skip_tests=False, fail_fast=False):
     logger.info(f"Current checksum {current_sources_checksum}")
     logger.info(f"Checksum is computed over {len(source_files)} files")
     if previous_sources_checksum != current_sources_checksum:
-        if not fail_fast:
+        if fail_fast:
+            raise RuntimeError('INCONSISTENT BINARY CHECKSUMS')
+        else:
             logger.info("STARTING TYPESHED SERIALIZATION")
             subprocess.run(["tox"], check=True)
-        else:
-            raise RuntimeError('INCONSISTENT BINARY CHECKSUMS')
     else:
         binary_file_names = fetch_binary_file_names()
         current_binaries_checksum = compute_checksum(binary_file_names, read_file)
