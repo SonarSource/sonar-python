@@ -32,6 +32,7 @@ import org.junit.jupiter.api.extension.RegisterExtension;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.sonar.python.it.RulingHelper.DEFAULT_SCANNER_VERSION;
 import static org.sonar.python.it.RulingHelper.bugRuleKeys;
 import static org.sonar.python.it.RulingHelper.getOrchestrator;
 
@@ -181,7 +182,8 @@ class PythonExtendedRulingTest {
       .setProperty("sonar.lits.dump.new", FileLocation.of(String.format("target/actual_extended/%s", projectKey)).getFile().getAbsolutePath())
       .setProperty("sonar.cpd.exclusions", "**/*")
       .setProperty("sonar.internal.analysis.failFast", "true")
-      .setEnvironmentVariable("SONAR_RUNNER_OPTS", "-Xmx2000m");
+      .setEnvironmentVariable("SONAR_RUNNER_OPTS", "-Xmx2000m")
+      .setScannerVersion(DEFAULT_SCANNER_VERSION);
   }
 
   void executeBuild(SonarScanner build) throws IOException {

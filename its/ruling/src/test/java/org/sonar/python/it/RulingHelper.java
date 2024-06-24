@@ -41,6 +41,8 @@ class RulingHelper {
 
   private static final String SQ_VERSION_PROPERTY = "sonar.runtimeVersion";
   private static final String DEFAULT_SQ_VERSION = "LATEST_RELEASE";
+  public static final String DEFAULT_SCANNER_VERSION = "6.0.0.4432";
+
 
   static OrchestratorExtension getOrchestrator(Edition sonarEdition) {
     var builder = OrchestratorExtension.builderEnv()
