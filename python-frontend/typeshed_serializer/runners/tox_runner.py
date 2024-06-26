@@ -118,7 +118,7 @@ def update_checksum():
         file.writelines([f"{source_checksum}\n", binary_checksum])
 
 
-def main(skip_tests=False):
+def main(skip_tests=False, fail_fast=False):
     source_files = fetch_source_file_names(SERIALIZER_PATH)
     (previous_sources_checksum, previous_binaries_checksum) = read_previous_checksum(CHECKSUM_FILE)
     current_sources_checksum = compute_checksum(source_files, normalize_text_files)
@@ -127,8 +127,11 @@ def main(skip_tests=False):
     logger.info(f"Current checksum {current_sources_checksum}")
     logger.info(f"Checksum is computed over {len(source_files)} files")
     if previous_sources_checksum != current_sources_checksum:
-        logger.info("STARTING TYPESHED SERIALIZATION")
-        subprocess.run(["tox"], check=True)
+        if fail_fast:
+            raise RuntimeError('INCONSISTENT BINARY CHECKSUMS')
+        else:
+            logger.info("STARTING TYPESHED SERIALIZATION")
+            subprocess.run(["tox"], check=True)
     else:
         binary_file_names = fetch_binary_file_names()
         current_binaries_checksum = compute_checksum(binary_file_names, read_file)
@@ -150,6 +153,8 @@ def main(skip_tests=False):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--skip_tests')
+    parser.add_argument('--fail_fast')
     args = parser.parse_args()
     skip_tests = args.skip_tests == "true"
-    main(skip_tests)
+    fail_fast = args.fail_fast == "true"
+    main(skip_tests, fail_fast)

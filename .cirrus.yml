@@ -79,7 +79,7 @@ build_task:
     - git checkout
     - cd -
     - source cirrus-env BUILD
-    - regular_mvn_build_deploy_analyze
+    - regular_mvn_build_deploy_analyze -DfailStubGenerationFast=true
     - ./check-license-compliance.sh
   cleanup_before_cache_script: cleanup_maven_repository
 
@@ -100,7 +100,7 @@ build_win_task:
     - cd -
     - source cirrus-env CI
     - unset SONARSOURCE_QA
-    - mvn.cmd package -DskipTypeshed=true
+    - mvn.cmd package -DskipTypeshed=true -DfailStubGenerationFast=true
 
 ws_scan_task:
   depends_on:

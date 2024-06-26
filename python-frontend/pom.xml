@@ -16,6 +16,7 @@
     <sonar.python.coverage.reportPaths>typeshed_serializer/cov.xml</sonar.python.coverage.reportPaths>
     <sonar.python.version>3.9</sonar.python.version>
     <skipTests>false</skipTests>
+    <failStubGenerationFast>false</failStubGenerationFast>
   </properties>
   <dependencies>
     <dependency>
@@ -175,6 +176,8 @@
                       <argument>runners/tox_runner.py</argument>
                       <argument>--skip_tests</argument>
                       <argument>${skipTests}</argument>
+                      <argument>--fail_fast</argument>
+                      <argument>${failStubGenerationFast}</argument>
                   </arguments>
                   <useMavenLogger>true</useMavenLogger>
                 </configuration>
