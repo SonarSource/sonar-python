@@ -19,8 +19,9 @@ for i in range(1):
 if True:
     print(1)
     raise TypeError("message")
-    if True: pass # Noncompliant [[secondary=-1]]
-
+#   ^^^^^^^^^^^^^^^^^^^^^^^^^^> {{Statement exiting the current code block.}}
+    if True: pass # Noncompliant 
+#      ^^^^
 def fun1():
     return 1
 
@@ -42,10 +43,13 @@ def if_else_return(x):
     if x:
         print(True)
         return
+    #   ^^^^^^>
     else:
         print(False)
         return
-    print('dead code!') # Noncompliant [[secondary=-4,-1]]
+    #   ^^^^^^>
+    print('dead code!') # Noncompliant 
+#   ^^^^^^^^^^^^^^^^^^^
 
 def if_else_yield(x):
     if x:

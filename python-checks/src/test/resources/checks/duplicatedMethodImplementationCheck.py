@@ -1,15 +1,17 @@
 class clazz:
   def method(self):
+#     ^^^^^^>
     foo()
     bar()
 
-  def method2(self): #Noncompliant {{Update this function so that its implementation is not identical to method on line 2.}} [[secondary=-4]]
+  def method2(self): #Noncompliant {{Update this function so that its implementation is not identical to method on line 2.}} 
 #     ^^^^^^^
     foo()
     bar()
 
-  def method3(self): #Noncompliant {{Update this function so that its implementation is not identical to method on line 2.}} [[secondary=-4]]
+  def method3(self): #Noncompliant {{Update this function so that its implementation is not identical to method on line 2.}} 
 #     ^^^^^^^
+#     ^^^^^^@-11<
     foo()
     bar()
 

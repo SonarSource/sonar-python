@@ -2,13 +2,11 @@ x = 1 + 2
 
 x = (1 + 2)
 
-x = ((1 + 2))                          # Noncompliant {{Remove those redundant parentheses.}} [[secondary=+0]]
+x = ((1 + 2))                          # Noncompliant {{Remove those redundant parentheses.}}
 #   ^
+#           ^@-1<
 
-x = ((((1 + 2))))
-# Noncompliant@-1 [[sc=5;ec=6;secondary=+0]]
-# Noncompliant@-2 [[sc=6;ec=7;secondary=+0]]
-# Noncompliant@-3 [[sc=7;ec=8;secondary=+0]]
+x = ((((1 + 2)))) # Noncompliant 3
 
 y = ((x1) + (x2))
 
@@ -24,8 +22,8 @@ y = ((x1)) + ((x2))
 y = x1 * ((x3))
 # Noncompliant@-1
 
-y = (x1 * (x2 + 2) * ((x3 + 3)) + 4)
-# Noncompliant@-1 [[sc=22]]
+y = (x1 * (x2 + 2) * ((x3 + 3)) + 4) # Noncompliant
+#                    ^        ^<
 
 # tuple:
 y = ((x1, x2))                         # Noncompliant

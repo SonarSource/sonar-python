@@ -2,9 +2,11 @@
 
 # Noncompliant@-2
 
-# Noncompliant@+2 {{Remove this commented out code.}} [[sc=0;el=+0;ec=9]]
+# Noncompliant@+2 {{Remove this commented out code.}} 
 
 # x += 1
+
+# ^[sc=1;ec=8]@-1
 
 x = 1
 #Noncompliant@+2
@@ -99,10 +101,11 @@ u'''
 return a
 '''
 
-# Noncompliant@+1 [[sc=1;ec=4;el=+2]]
+# Noncompliant@+1 
 '''
 return a
 '''
+#^[sc=1;ec=3;el=+2]@-2
 
 x = u'''
 return a

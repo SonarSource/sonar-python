@@ -16,13 +16,17 @@ def fun1():
         return 2
 
 
-def fun3(): # Noncompliant [[secondary=+3,+5,+6]]
+def fun3(): # Noncompliant 
+#   ^^^^
     for i in range(5):
         if i > 0:
             return 1
+#           ^^^^^^^^<
     if True:
         return 2
+#       ^^^^^^^^<
     return 3
+#   ^^^^^^^^<
 
 
 def fun4(): # Noncompliant

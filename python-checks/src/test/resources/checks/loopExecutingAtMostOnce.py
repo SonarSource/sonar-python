@@ -18,14 +18,19 @@ def foo(cond, cond2):
         if cond2:
             break
 
-    while cond: # Noncompliant [[secondary=+2,+4]]
+    while cond: # Noncompliant 
+#   ^^^^^
         if cond2:
             break
+#           ^^^^^<
         else:
             break
+#           ^^^^^<
 
-   while cond: # Noncompliant [[secondary=+1]]
+   while cond: # Noncompliant 
+#  ^^^^^
        raise error
+#      ^^^^^<
 
 def try_statements():
 
@@ -51,20 +56,24 @@ def invalid_continue():
     continue
 
 def nested_jump_statements(items):
-    while True: # Noncompliant [[secondary=+5]]
+    while True: # Noncompliant 
+#   ^^^^^
         for item in items:
             if not item:
                 break # should not belong to secondary locations
             print(item)
         break
+#       ^^^^^<
 
 def nested_jump_statements_with_else(items, p):
-    while p: # Noncompliant [[secondary=+5]]
+    while p: # Noncompliant 
+#   ^^^^^
         for item in items:
             if not item:
                 break # should not belong to secondary locations
             print(item)
         break
+#       ^^^^^<
     else:
         print("foo")
     print("after")

@@ -23,7 +23,9 @@ class MyUser(models.Model):
         MyUser.objects.raw(request)  # OK
         MyUser.objects.raw(hardcoded_request)  # OK
         MyUser.objects.raw(x := hardcoded_request)  # OK
-        MyUser.objects.raw(formatted_request)  #  Noncompliant [[secondary=-14]]
+        MyUser.objects.raw(formatted_request)  #  Noncompliant
+#       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+#                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^@-17<
         MyUser.objects.raw(formatted_request2)  # Noncompliant
         MyUser.objects.raw(formatted_request3)  # Noncompliant
         MyUser.objects.raw(y := formatted_request3)  # Noncompliant

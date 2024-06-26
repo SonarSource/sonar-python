@@ -3,21 +3,25 @@ param = 1
 
 if 0 <= a < 10:
     print(1)
+#   ^[ec=9;el=+2]>
     foo()
 elif 10 <= a < 20:
     print(2)
 elif 20 <= a < 50:
-    print(1) # Noncompliant [[sc=5;ec=10;el=+1;secondary=-5]]
+    print(1) # Noncompliant 
+#   ^[ec=9;el=+2]
     foo()
 else:
     print(3)
 
 if param == 1:
     print(1)
+#   ^[ec=9;el=+2]>
     foo()
 else:
     if param == 2:
-        print(1) # Noncompliant [[secondary=-4]]
+        print(1) # Noncompliant
+#       ^[ec=13;el=+2]
         foo()
 
 if param == 1:
@@ -86,9 +90,11 @@ else:
 
 if 1:
     print("1")
+#   ^[el=+2;ec=9]>
     foo()
 elif 2:
-    print("1") # Noncompliant [[secondary=-3;sc=5;ec=10;el=+1]]
+    print("1") # Noncompliant 
+#   ^[el=+2;ec=9]
     foo()
 else:
     print("2")

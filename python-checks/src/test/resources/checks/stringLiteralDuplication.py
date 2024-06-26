@@ -25,8 +25,9 @@ print("aa\\aa")
 print(r"aa\\aa")
 
 def literals_with_multiple_elements():
-    print("First element of a string literal." # Noncompliant [[el=+1]]
+    print("First element of a string literal." # Noncompliant 
           "Second element of a string literal.")
+#         ^[ec=47;el=+1]@-1
     print("First element of a string literal."
           "Second element of a string literal.")
     print("First element of a string literal."
