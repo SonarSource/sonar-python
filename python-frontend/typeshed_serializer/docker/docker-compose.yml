@@ -3,9 +3,6 @@ services:
     build:
       context: ../
       dockerfile: ./docker/Dockerfile
-      args:
-        UID: $USER_ID
-        GID: $GROUP_ID
     # mount the generated typeshed proto files destination directory and checksum file to the container
     volumes:
       - ../../src:/sonar-python/python-frontend/src
