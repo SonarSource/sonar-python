@@ -157,6 +157,22 @@ class PythonExtendedRulingTest {
   }
 
   @Test
+  void test_scikit_learn_py_32() throws IOException {
+    SonarScanner build = buildWithCommonProperties("scikit-learn"); // Same project key as without a specified version
+    build.setProperty("sonar.sources", "sklearn");
+    build.setProperty("sonar.python.version", "3.2");
+    executeBuild(build);
+  }
+
+  @Test
+  void test_scikit_learn_py_27() throws IOException {
+    SonarScanner build = buildWithCommonProperties("scikit-learn"); // Same project key as without a specified version
+    build.setProperty("sonar.sources", "sklearn");
+    build.setProperty("sonar.python.version", "2.7");
+    executeBuild(build);
+  }
+
+  @Test
   void test_timesketch() throws IOException {
     SonarScanner build = buildWithCommonProperties("timesketch");
     build.setProperty("sonar.sources", "timesketch");
