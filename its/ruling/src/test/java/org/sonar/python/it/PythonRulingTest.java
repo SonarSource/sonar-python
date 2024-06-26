@@ -40,6 +40,7 @@ import org.sonarsource.analyzer.commons.ProfileGenerator;
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.sonar.python.it.RulingHelper.DEFAULT_SCANNER_VERSION;
 import static org.sonar.python.it.RulingHelper.getOrchestrator;
 
 class PythonRulingTest {
@@ -76,7 +77,8 @@ class PythonRulingTest {
       .setProperty("sonar.cpd.exclusions", "**/*")
       .setProperty("sonar.lits.differences", litsDifferencesFile.getAbsolutePath())
       .setProperty("sonar.internal.analysis.failFast", "true")
-      .setEnvironmentVariable("SONAR_RUNNER_OPTS", "-Xmx2000m");
+      .setEnvironmentVariable("SONAR_RUNNER_OPTS", "-Xmx2000m")
+      .setScannerVersion(DEFAULT_SCANNER_VERSION);
     ORCHESTRATOR.executeBuild(build);
 
     String issueDifferences = issues(PROJECT_KEY).stream()

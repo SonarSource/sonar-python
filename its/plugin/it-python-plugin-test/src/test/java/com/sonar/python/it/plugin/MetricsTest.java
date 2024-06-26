@@ -29,6 +29,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
 import org.sonarqube.ws.Measures.Measure;
 
+import static com.sonar.python.it.plugin.TestsUtils.DEFAULT_SCANNER_VERSION;
 import static com.sonar.python.it.plugin.TestsUtils.getMeasure;
 import static com.sonar.python.it.plugin.TestsUtils.getMeasureAsDouble;
 import static com.sonar.python.it.plugin.TestsUtils.getMeasureAsInt;
@@ -79,7 +80,8 @@ class MetricsTest {
       .setProjectName(PROJECT_KEY)
       .setProjectVersion("1.0-SNAPSHOT")
       .setTestDirs("test")
-      .setSourceDirs("src");
+      .setSourceDirs("src")
+      .setScannerVersion(DEFAULT_SCANNER_VERSION);
     buildResult = orchestrator.executeBuild(build);
   }
 

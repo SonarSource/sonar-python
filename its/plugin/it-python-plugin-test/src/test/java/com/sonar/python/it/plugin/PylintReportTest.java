@@ -26,6 +26,7 @@ import java.io.File;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
 
+import static com.sonar.python.it.plugin.TestsUtils.DEFAULT_SCANNER_VERSION;
 import static com.sonar.python.it.plugin.TestsUtils.issues;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -90,7 +91,8 @@ class PylintReportTest {
         .setProjectKey(projectKey)
         .setProjectName(projectKey)
         .setProjectDir(new File("projects/pylint_project"))
-        .setProperty(property, reportPaths));
+        .setProperty(property, reportPaths)
+        .setScannerVersion(DEFAULT_SCANNER_VERSION));
   }
 
 }
