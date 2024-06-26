@@ -131,7 +131,7 @@ def main(skip_tests=False, fail_fast=False):
             raise RuntimeError('INCONSISTENT BINARY CHECKSUMS')
         else:
             logger.info("STARTING TYPESHED SERIALIZATION")
-            subprocess.run(["tox"], check=True)
+            subprocess.run(['python', '-m', 'tox'], check=True)
     else:
         binary_file_names = fetch_binary_file_names()
         current_binaries_checksum = compute_checksum(binary_file_names, read_file)
@@ -147,7 +147,7 @@ def main(skip_tests=False, fail_fast=False):
         if skip_tests:
             logger.info("SKIPPING TYPESHED SERIALIZER TESTS")
             return
-        subprocess.run(['tox', '-e', 'py39'], check=True)
+        subprocess.run(['python', '-m', 'tox', '-e', 'py39'], check=True)
 
 
 if __name__ == '__main__':

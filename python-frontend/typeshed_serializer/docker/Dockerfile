@@ -1,19 +1,16 @@
 FROM python:3.9
 ARG UID
 ARG GID
-# Create user with same IDs as host machine current user
-RUN groupadd -g ${GID} -o host_group
-RUN useradd -m -u ${UID} -g ${GID} -o -s /bin/bash host_user
+
 
 # Add typeshed serializer to the image container
-ADD ./ /sonar-python/python-frontend/typeshed_serializer
+ADD --chown=${UID}:${GID} ./ /sonar-python/python-frontend/typeshed_serializer
 WORKDIR /sonar-python/python-frontend/typeshed_serializer
 
-# Grant permissions to current host user to access typeshed serializer files
-RUN chown ${UID}:${GID} ./
-RUN chown -R ${UID}:${GID} ./docker
-
+# Create user with same IDs as host machine current user
 # Switch to host user
+RUN groupadd -g ${GID} -o host_group
+RUN useradd -m -u ${UID} -g ${GID} -o -s /bin/bash host_user
 USER host_user
 
 # Install tox
