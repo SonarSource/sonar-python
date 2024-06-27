@@ -68,7 +68,6 @@ class PythonRulingTest {
       .setProjectKey(PROJECT_KEY)
       .setProjectName(PROJECT_KEY)
       .setProjectVersion("1")
-      .setLanguage("py")
       .setSourceEncoding("UTF-8")
       .setSourceDirs(".")
       .setProperty("sonar.lits.dump.old", FileLocation.of("src/test/resources/expected").getFile().getAbsolutePath())

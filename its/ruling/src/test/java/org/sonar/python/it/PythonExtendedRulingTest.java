@@ -174,7 +174,6 @@ class PythonExtendedRulingTest {
       .setProjectKey(projectKey)
       .setProjectName(projectKey)
       .setProjectVersion("1")
-      .setLanguage("py")
       .setSourceEncoding("UTF-8")
       .setSourceDirs(".")
       .setProperty("sonar.lits.dump.old", FileLocation.of(String.format("src/test/resources/expected_extended/%s", projectKey)).getFile().getAbsolutePath())
