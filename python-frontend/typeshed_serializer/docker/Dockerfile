@@ -1,7 +1,7 @@
 FROM python:3.9
 
 # Add typeshed serializer to the image container
-COPY --chmod=777 ./ /sonar-python/python-frontend/typeshed_serializer
+COPY --chmod=666 ./ /sonar-python/python-frontend/typeshed_serializer
 # ADD --chown=${UID}:${GID} ./ /sonar-python/python-frontend/typeshed_serializer
 WORKDIR /sonar-python/python-frontend/typeshed_serializer
 
@@ -15,7 +15,7 @@ RUN python -m tox --recreate --notest
 RUN chmod +x ./docker/cmd.sh
 
 # Grant premissions
-RUN chmod 777 -R ./
+RUN chmod 666 -R ./
 
 # Run runners/tox_runner.py when the container launches
 CMD ["./docker/cmd.sh"]
