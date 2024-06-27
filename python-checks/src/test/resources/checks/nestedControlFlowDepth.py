@@ -4,10 +4,14 @@ for y in range(10):
             pass
 
 for x in range(10):
+#^[sc=1;ec=3]>
     while x:
+#   ^^^^^>
         for y in range(10):
+#       ^^^>
             if x > y:
-                if x > 1:  # Noncompliant {{Refactor this code to not nest more than 4 "if", "for", "while", "try" and "with" statements.}} [[secondary=-4,-3,-2,-1]]
+#           ^^>
+                if x > 1:  # Noncompliant {{Refactor this code to not nest more than 4 "if", "for", "while", "try" and "with" statements.}} 
 #               ^^
                     if y > 10:
                         pass

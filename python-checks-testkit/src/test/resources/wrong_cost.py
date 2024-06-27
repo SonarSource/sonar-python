@@ -1,3 +1,3 @@
-def fun(): # Noncompliant [[effortToFix=23;secondary=+0]]
-#   ^^^
+def fun(): # Noncompliant [[effortToFix=23]]
+#   ^^^  ^<
    pass

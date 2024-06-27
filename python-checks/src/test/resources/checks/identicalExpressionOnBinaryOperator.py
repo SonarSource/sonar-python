@@ -4,12 +4,14 @@ b = 1
 def work():
     pass
 
-if a == a: # Noncompliant {{Correct one of the identical sub-expressions on both sides of operator "==".}} [[secondary=+0;sc=9;ec=10]]
-#       ^
+if a == a: # Noncompliant {{Correct one of the identical sub-expressions on both sides of operator "==".}} 
+#  ^>   ^
     work()
 
 if  a != \
-        a: # Noncompliant [[secondary=-1;sc=9;ec=10]]
+        a: # Noncompliant 
+#       ^
+#   ^@-2<
     work()
 
 if  a == b and a == b: # Noncompliant
