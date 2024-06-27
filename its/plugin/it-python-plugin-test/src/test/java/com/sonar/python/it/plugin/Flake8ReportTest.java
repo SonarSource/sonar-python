@@ -28,7 +28,6 @@ import org.junit.jupiter.api.extension.RegisterExtension;
 import org.sonarqube.ws.Common;
 import org.sonarqube.ws.Issues;
 
-import static com.sonar.python.it.plugin.TestsUtils.DEFAULT_SCANNER_VERSION;
 import static com.sonar.python.it.plugin.TestsUtils.issues;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -45,7 +44,6 @@ class Flake8ReportTest {
     ORCHESTRATOR.getServer().associateProjectToQualityProfile(PROJECT, "py", "no_rule");
     ORCHESTRATOR.executeBuild(
       SonarScanner.create()
-        .setScannerVersion(DEFAULT_SCANNER_VERSION)
         .setProjectDir(new File("projects/flake8_project")));
 
     List<Issues.Issue> issues = issues(PROJECT);

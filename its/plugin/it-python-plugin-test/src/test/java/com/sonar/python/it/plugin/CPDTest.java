@@ -27,7 +27,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
 
-import static com.sonar.python.it.plugin.TestsUtils.DEFAULT_SCANNER_VERSION;
 import static com.sonar.python.it.plugin.TestsUtils.getMeasureAsDouble;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -57,8 +56,7 @@ class CPDTest {
       .setProjectName(PROJECT_KEY)
       .setProjectVersion("1.0-SNAPSHOT")
       .setSourceDirs(".")
-      .setSourceEncoding("UTF-8")
-      .setScannerVersion(DEFAULT_SCANNER_VERSION);
+      .setSourceEncoding("UTF-8");
     ORCHESTRATOR.executeBuild(build);
   }
 

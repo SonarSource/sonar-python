@@ -29,7 +29,6 @@ import org.junit.jupiter.api.extension.RegisterExtension;
 import org.sonarqube.ws.Issues;
 import org.sonarqube.ws.client.issues.SearchRequest;
 
-import static com.sonar.python.it.plugin.TestsUtils.DEFAULT_SCANNER_VERSION;
 import static com.sonar.python.it.plugin.TestsUtils.newWsClient;
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -51,8 +50,7 @@ class CustomRulesTest {
       .setProjectKey(PROJECT_KEY)
       .setProjectName(PROJECT_NAME)
       .setProjectVersion("1.0")
-      .setSourceDirs("src")
-      .setScannerVersion(DEFAULT_SCANNER_VERSION);
+      .setSourceDirs("src");
     orchestrator.executeBuild(build);
   }
 

@@ -42,7 +42,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.sonar.python.it.RulingHelper.DEFAULT_SCANNER_VERSION;
 import static org.sonar.python.it.RulingHelper.getMeasure;
 import static org.sonar.python.it.RulingHelper.getOrchestrator;
 
@@ -226,8 +225,7 @@ class PythonPrAnalysisTest {
       .setProperty("sonar.lits.dump.new", FileLocation.of("target/actual").getFile().getAbsolutePath())
       .setProperty("sonar.lits.differences", litsDifferencesFile.getAbsolutePath())
       .setProperty("sonar.internal.analysis.failFast", "true")
-      .setEnvironmentVariable("SONAR_RUNNER_OPTS", "-Xmx2000m")
-      .setScannerVersion(DEFAULT_SCANNER_VERSION);
+      .setEnvironmentVariable("SONAR_RUNNER_OPTS", "-Xmx2000m");
   }
 
 

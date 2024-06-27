@@ -32,7 +32,6 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
 
-import static com.sonar.python.it.plugin.TestsUtils.DEFAULT_SCANNER_VERSION;
 import static com.sonar.python.it.plugin.TestsUtils.assertProjectMeasures;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -53,8 +52,7 @@ class TestReportTest {
       .setProjectKey(projectKey)
       .setProjectName(projectKey)
       .setProjectDir(new File("projects/nosetests_project"))
-      .setProperty("sonar.python.xunit.reportPath", testReportPath)
-      .setScannerVersion(DEFAULT_SCANNER_VERSION);
+      .setProperty("sonar.python.xunit.reportPath", testReportPath);
   }
 
   @Test
