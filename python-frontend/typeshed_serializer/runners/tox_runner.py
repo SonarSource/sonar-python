@@ -25,7 +25,7 @@ from os.path import isfile, join
 import subprocess
 import hashlib
 from pathlib import Path
-from typing import Optional, Tuple
+from typing import Optional, Tuple, Union
 from collections.abc import Callable
 import logging
 import argparse
@@ -117,28 +117,33 @@ def update_checksum():
         binary_checksum = compute_checksum(binary_file_names, read_file)
         file.writelines([f"{source_checksum}\n", binary_checksum])
 
+def __log_process_begins(is_for_binary:bool, over_n_files:int, previous_checksum: Union[str, None], current_checksum:str) -> None:
+    file_type = "SOURCE"
+    binaries = ""
+    if is_for_binary:
+        file_type = "BINARY"
+        binaries = "binaries "
+    logger.info(f"STARTING TYPESHED {file_type} FILE CHECKSUM COMPUTATION")
+    logger.info(f"Previous {binaries}checksum {previous_checksum}")
+    logger.info(f"Current {binaries}checksum {current_checksum}")
+    logger.info(f"Checksum is computed over {over_n_files} files")
+
 
 def main(skip_tests=False, fail_fast=False):
     source_files = fetch_source_file_names(SERIALIZER_PATH)
-    (previous_sources_checksum, previous_binaries_checksum) = read_previous_checksum(CHECKSUM_FILE)
     current_sources_checksum = compute_checksum(source_files, normalize_text_files)
-    logger.info("STARTING TYPESHED SOURCE FILE CHECKSUM COMPUTATION")
-    logger.info(f"Previous checksum {previous_sources_checksum}")
-    logger.info(f"Current checksum {current_sources_checksum}")
-    logger.info(f"Checksum is computed over {len(source_files)} files")
+    (previous_sources_checksum, previous_binaries_checksum) = read_previous_checksum(CHECKSUM_FILE)
+    __log_process_begins(False, len(source_files), previous_sources_checksum, current_sources_checksum)
     if previous_sources_checksum != current_sources_checksum:
         if fail_fast:
-            raise RuntimeError('INCONSISTENT BINARY CHECKSUMS')
+            raise RuntimeError('INCONSISTENT SOURCES CHECKSUMS')
         else:
             logger.info("STARTING TYPESHED SERIALIZATION")
             subprocess.run(["tox"], check=True)
     else:
         binary_file_names = fetch_binary_file_names()
         current_binaries_checksum = compute_checksum(binary_file_names, read_file)
-        logger.info("STARTING TYPESHED BINARY FILES CHECKSUM COMPUTATION")
-        logger.info(f"Previous binaries checksum {previous_binaries_checksum}")
-        logger.info(f"Current binaries checksum {current_binaries_checksum}")
-        logger.info(f"Checksum is computed over {len(binary_file_names)} files")
+        __log_process_begins(True, len(binary_file_names), previous_binaries_checksum, current_binaries_checksum)
         if previous_binaries_checksum != current_binaries_checksum:
             raise RuntimeError('INCONSISTENT BINARY CHECKSUMS')
         logger.info("SKIPPING TYPESHED SERIALIZATION")
