@@ -218,7 +218,6 @@ class PythonPrAnalysisTest {
       .setProjectKey(projectKey)
       .setProjectName(projectKey)
       .setProjectVersion("1")
-      .setLanguage("py")
       .setSourceEncoding("UTF-8")
       .setSourceDirs(".")
       .setProperty("sonar.lits.dump.old", FileLocation.of("src/test/resources/expected_pr_analysis/" + scenario).getFile().getAbsolutePath())
