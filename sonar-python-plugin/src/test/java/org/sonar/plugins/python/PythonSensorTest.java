@@ -723,6 +723,21 @@ class PythonSensorTest {
   }
 
   @Test
+  void test_python_version_unknown_upper() {
+    setup_typing_concise_rule("3.4569");
+
+    assertThat(ProjectPythonVersion.currentVersions()).containsExactly(PythonVersionUtils.MAX_SUPPORTED_VERSION);
+    assertThat(context.allIssues()).hasSize(1);
+  }
+  @Test
+  void test_python_version_unknown_lower() {
+    setup_typing_concise_rule("2.4569");
+
+    assertThat(ProjectPythonVersion.currentVersions()).containsExactlyElementsOf(PythonVersionUtils.allVersions());
+    assertThat(context.allIssues()).isEmpty();
+  }
+
+  @Test
   void parse_error() {
     inputFile("parse_error.py");
     activeRules = new ActiveRulesBuilder()
