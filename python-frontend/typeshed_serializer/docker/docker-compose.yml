@@ -1,0 +1,10 @@
+services:
+  typeshed-serializer:
+    build:
+      context: ../
+      dockerfile: ./docker/Dockerfile
+    # mount the generated typeshed proto files destination directory and checksum file to the container
+    volumes:
+      - ../..:/sonar-python/python-frontend
+    # Pass current host machine user ids to keep the files ownership
+    user: ${USER_ID}:${GROUP_ID}
