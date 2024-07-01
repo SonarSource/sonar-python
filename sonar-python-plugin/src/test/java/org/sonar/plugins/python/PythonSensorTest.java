@@ -39,6 +39,8 @@ import javax.annotation.Nullable;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.Mockito;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -691,6 +693,48 @@ class PythonSensorTest {
     assertThat(ProjectPythonVersion.currentVersions()).containsExactly(PythonVersionUtils.Version.V_38);
     assertThat(logTester.logs(Level.WARN)).doesNotContain(PythonSensor.UNSET_VERSION_WARNING);
     verify(analysisWarning, times(0)).addUnique(PythonSensor.UNSET_VERSION_WARNING);
+  }
+
+  void setup_typing_concise_rule(String pythonVersion){
+    context.fileSystem().add(inputFile("python-version/typing.py"));
+
+    activeRules = new ActiveRulesBuilder().addRule(new NewActiveRule.Builder()
+      .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, "S6546"))
+      .build()).build();
+
+    context.setSettings(new MapSettings().setProperty("sonar.python.version", pythonVersion));
+    sensor().execute(context);
+  }
+
+  @ParameterizedTest
+  @ValueSource(strings = {"2.7", "3", "3.1", "3.9"})
+  void test_python_version_pre_310(String version) {
+    setup_typing_concise_rule(version);
+
+    assertThat(context.allIssues()).isEmpty();
+  }
+
+  @ParameterizedTest
+  @ValueSource(strings = {"3.10", "3.11", "3.12"})
+  void test_python_version_post_310(String version) {
+    setup_typing_concise_rule(version);
+
+    assertThat(context.allIssues()).hasSize(1);
+  }
+
+  @Test
+  void test_python_version_unknown_upper() {
+    setup_typing_concise_rule("3.4569");
+
+    assertThat(ProjectPythonVersion.currentVersions()).containsExactly(PythonVersionUtils.MAX_SUPPORTED_VERSION);
+    assertThat(context.allIssues()).hasSize(1);
+  }
+  @Test
+  void test_python_version_unknown_lower() {
+    setup_typing_concise_rule("2.4569");
+
+    assertThat(ProjectPythonVersion.currentVersions()).containsExactlyElementsOf(PythonVersionUtils.allVersions());
+    assertThat(context.allIssues()).isEmpty();
   }
 
   @Test

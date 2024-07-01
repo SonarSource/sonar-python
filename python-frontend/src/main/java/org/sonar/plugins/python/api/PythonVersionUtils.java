@@ -98,7 +98,7 @@ public class PythonVersionUtils {
     Map.entry("3.11", V_311),
     Map.entry("3.12", V_312));
   private static final Version MIN_SUPPORTED_VERSION = V_36;
-  private static final Version MAX_SUPPORTED_VERSION = V_312;
+  public static final Version MAX_SUPPORTED_VERSION = V_312;
   private static final Logger LOG = LoggerFactory.getLogger(PythonVersionUtils.class);
   public static final String PYTHON_VERSION_KEY = "sonar.python.version";
 
