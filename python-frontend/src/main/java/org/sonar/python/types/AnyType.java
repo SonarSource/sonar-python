@@ -23,7 +23,7 @@ import java.util.Optional;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.types.InferredType;
 
-enum AnyType implements InferredType {
+public enum AnyType implements InferredType {
   ANY;
 
   @Override

@@ -30,7 +30,7 @@ import org.sonar.plugins.python.api.types.InferredType;
 
 import static org.sonar.python.types.InferredTypes.anyType;
 
-class UnionType implements InferredType {
+public class UnionType implements InferredType {
 
   private final Set<InferredType> types;
 
@@ -151,7 +151,7 @@ class UnionType implements InferredType {
     return "UnionType" + types;
   }
 
-  Set<InferredType> types() {
+  public Set<InferredType> types() {
     return Collections.unmodifiableSet(types);
   }
 }

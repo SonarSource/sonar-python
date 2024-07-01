@@ -47,7 +47,7 @@ import static org.sonar.python.tree.TreeUtils.nthArgumentOrKeyword;
 
 public class ProjectLevelSymbolTable {
 
-  private final Map<String, Set<Descriptor>> globalDescriptorsByModuleName;
+  public final Map<String, Set<Descriptor>> globalDescriptorsByModuleName;
   private Map<String, Descriptor> globalDescriptorsByFQN;
   private final Set<String> djangoViewsFQN = new HashSet<>();
   private final Map<String, Set<String>> importsByModule = new HashMap<>();
