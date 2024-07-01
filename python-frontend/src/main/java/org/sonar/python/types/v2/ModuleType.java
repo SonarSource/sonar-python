@@ -27,7 +27,7 @@ import javax.annotation.Nullable;
 import org.sonar.api.Beta;
 
 @Beta
-public final class ModuleType implements PythonType {
+public class ModuleType implements PythonType {
   private final String name;
   private final ModuleType parent;
   private final Map<String, PythonType> members;
