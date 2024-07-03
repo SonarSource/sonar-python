@@ -34,7 +34,6 @@ import org.sonar.plugins.python.api.ProjectPythonVersion;
 import org.sonar.plugins.python.api.PythonVersionUtils;
 import org.sonar.plugins.python.indexer.PythonIndexer;
 import org.sonar.python.checks.CheckList;
-import org.sonar.python.parser.PythonParser;
 
 import static org.sonar.plugins.python.api.PythonVersionUtils.PYTHON_VERSION_KEY;
 
@@ -67,8 +66,11 @@ public final class IPynbSensor implements Sensor {
     if (pythonVersions.length != 0) {
       ProjectPythonVersion.setCurrentVersions(PythonVersionUtils.fromStringArray(pythonVersions));
     }
-    PythonScanner scanner = new PythonScanner(context, checks, fileLinesContextFactory, noSonarFilter, PythonParser.createIPythonParser(), indexer);
+//    PythonScanner scanner = new PythonScanner(context, checks, fileLinesContextFactory, noSonarFilter, PythonParser.createIPythonParser(), indexer);
+//    scanner.execute(pythonFiles, context);
+    JsonNotebookScanner  scanner = new JsonNotebookScanner(context);
     scanner.execute(pythonFiles, context);
+    System.out.println("b");
   }
 
   private static List<InputFile> getInputFiles(SensorContext context) {

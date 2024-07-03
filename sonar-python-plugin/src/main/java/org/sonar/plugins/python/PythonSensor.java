@@ -117,7 +117,7 @@ public final class PythonSensor implements Sensor {
     PerformanceMeasure.Duration durationReport = createPerformanceMeasureReport(context);
     List<InputFile> pythonFiles = getInputFiles(context);
     String[] pythonVersionParameter = context.config().getStringArray(PYTHON_VERSION_KEY);
-    if (pythonVersionParameter.length == 0 && context.runtime().getProduct() != SonarProduct.SONARLINT) {
+     if (pythonVersionParameter.length == 0 && context.runtime().getProduct() != SonarProduct.SONARLINT) {
       LOG.warn(UNSET_VERSION_WARNING);
       analysisWarnings.addUnique(UNSET_VERSION_WARNING);
     }

@@ -64,6 +64,7 @@ class IPynbSensorTest {
   static final SonarRuntime SONARLINT_RUNTIME = SonarRuntimeImpl.forSonarLint(SONARLINT_DETECTABLE_VERSION);
 
   private static final String FILE_1 = "file1.ipynb";
+  private static final String FILE_2 = "real_nb.ipynb";
 
   private final File baseDir = new File("src/test/resources/org/sonar/plugins/python/ipynb").getAbsoluteFile();
 
@@ -113,6 +114,23 @@ class IPynbSensorTest {
     assertThat(context.allAnalysisErrors()).isEmpty();
 
     assertThat(PythonScanner.getWorkingDirectory(context)).isNull();
+  }
+  
+  @Test
+  void test_execute(){
+    activeRules = new ActiveRulesBuilder()
+      .addRule(new NewActiveRule.Builder()
+        .setRuleKey(RuleKey.of(CheckList.IPYTHON_REPOSITORY_KEY, "PrintStatementUsage"))
+        .setName("Print Statement Usage")
+        .build())
+      .build();
+    
+    InputFile inputFile = inputFile(FILE_2);
+    PythonIndexer pythonIndexer = pythonIndexer(List.of(inputFile));
+    sensor(pythonIndexer).execute(context);
+
+    System.out.println("bb");
+      
   }
 
   private IPynbSensor sensor() {

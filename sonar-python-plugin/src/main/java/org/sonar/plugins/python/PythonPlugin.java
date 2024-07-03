@@ -88,6 +88,12 @@ public class PythonPlugin implements Plugin {
       PythonProfile.class,
 
       PythonSensor.class,
+
+      IPynb.class,
+      IPynbProfile.class,
+      IPynbSensor.class,
+      IPynbRuleRepository.class,
+
       PythonRuleRepository.class,
       AnalysisWarningsWrapper.class);
 
@@ -104,11 +110,11 @@ public class PythonPlugin implements Plugin {
     if (sonarRuntime.getProduct() == SonarProduct.SONARLINT) {
       SonarLintPluginAPIManager sonarLintPluginAPIManager = new SonarLintPluginAPIManager();
       sonarLintPluginAPIManager.addSonarlintPythonIndexer(context, new SonarLintPluginAPIVersion());
-      context.addExtensions(
-        IPynb.class,
-        IPynbProfile.class,
-        IPynbSensor.class,
-        IPynbRuleRepository.class);
+//      context.addExtensions(
+//        IPynb.class,
+//        IPynbProfile.class,
+//        IPynbSensor.class,
+//        IPynbRuleRepository.class);
     }
   }
 
