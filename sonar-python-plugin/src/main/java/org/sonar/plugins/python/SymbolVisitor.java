@@ -22,8 +22,6 @@ package org.sonar.plugins.python;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import org.sonar.api.batch.sensor.symbol.NewSymbol;
-import org.sonar.api.batch.sensor.symbol.NewSymbolTable;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.ComprehensionExpression;
 import org.sonar.plugins.python.api.tree.FileInput;
@@ -37,9 +35,9 @@ import org.sonar.python.tree.DictCompExpressionImpl;
 
 public class SymbolVisitor extends BaseTreeVisitor {
 
-  private final NewSymbolTable newSymbolTable;
+  private final NewSymbolTableWrapper newSymbolTable;
 
-  public SymbolVisitor(NewSymbolTable newSymbolTable) {
+  public SymbolVisitor(NewSymbolTableWrapper newSymbolTable) {
     this.newSymbolTable = newSymbolTable;
   }
 
@@ -89,7 +87,7 @@ public class SymbolVisitor extends BaseTreeVisitor {
     List<Usage> usages = new ArrayList<>(symbol.usages());
     usages.sort(Comparator.comparingInt(u -> u.tree().firstToken().line()));
     Tree firstUsageTree = usages.get(0).tree();
-    NewSymbol newSymbol = newSymbolTable.newSymbol(firstUsageTree.firstToken().line(), firstUsageTree.firstToken().column(),
+    NewSymbolTableWrapper.NewSymbolWrapper newSymbol = newSymbolTable.newSymbol(firstUsageTree.firstToken().line(), firstUsageTree.firstToken().column(),
       firstUsageTree.lastToken().line(), firstUsageTree.lastToken().column() + firstUsageTree.lastToken().value().length());
     for (int i = 1; i < usages.size(); i++) {
       Tree usageTree = usages.get(i).tree();

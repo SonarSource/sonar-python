@@ -19,9 +19,11 @@
  */
 package org.sonar.plugins.python;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import org.sonar.api.SonarProduct;
 import org.sonar.api.batch.fs.FilePredicates;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.rule.CheckFactory;
@@ -67,8 +69,29 @@ public final class IPynbSensor implements Sensor {
     if (pythonVersions.length != 0) {
       ProjectPythonVersion.setCurrentVersions(PythonVersionUtils.fromStringArray(pythonVersions));
     }
+    if (areFilesActualNotebook(context)) {
+      pythonFiles = processNotebooks(pythonFiles);
+    }
     PythonScanner scanner = new PythonScanner(context, checks, fileLinesContextFactory, noSonarFilter, PythonParser.createIPythonParser(), indexer);
     scanner.execute(pythonFiles, context);
+  }
+
+  private static List<InputFile> processNotebooks(List<InputFile> pythonFiles) {
+    List<InputFile> generatedIPythonFiles = new ArrayList<>();
+    for (InputFile inputFile : pythonFiles) {
+      try {
+        generatedIPythonFiles.add(IPythonNotebookParser.parseNotebook(inputFile));
+      } catch (IOException e) {
+        throw new RuntimeException(e);
+      }
+    }
+    return generatedIPythonFiles;
+  }
+
+  private static boolean areFilesActualNotebook(SensorContext context) {
+    // Hack: SL preprocesses notebooks and send us Python files
+    // SQ/SC sends us the actual JSON files
+    return !context.runtime().getProduct().equals(SonarProduct.SONARLINT);
   }
 
   private static List<InputFile> getInputFiles(SensorContext context) {

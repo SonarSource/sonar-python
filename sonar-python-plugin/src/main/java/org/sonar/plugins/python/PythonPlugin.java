@@ -101,14 +101,14 @@ public class PythonPlugin implements Plugin {
       addMypyExtensions(context);
       addRuffExtensions(context);
     }
+    context.addExtensions(
+      IPynb.class,
+      IPynbProfile.class,
+      IPynbSensor.class,
+      IPynbRuleRepository.class);
     if (sonarRuntime.getProduct() == SonarProduct.SONARLINT) {
       SonarLintPluginAPIManager sonarLintPluginAPIManager = new SonarLintPluginAPIManager();
       sonarLintPluginAPIManager.addSonarlintPythonIndexer(context, new SonarLintPluginAPIVersion());
-      context.addExtensions(
-        IPynb.class,
-        IPynbProfile.class,
-        IPynbSensor.class,
-        IPynbRuleRepository.class);
     }
   }
 

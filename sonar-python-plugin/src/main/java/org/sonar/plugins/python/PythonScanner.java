@@ -143,7 +143,7 @@ public class PythonScanner extends Scanner {
     saveIssues(inputFile, visitorContext.getIssues());
 
     if (visitorContext.rootTree() != null && !isInSonarLint(context)) {
-      new SymbolVisitor(context.newSymbolTable().onFile(inputFile)).visitFileInput(visitorContext.rootTree());
+      new SymbolVisitor(new NewSymbolTableWrapper(context, inputFile)).visitFileInput(visitorContext.rootTree());
       new PythonHighlighter(context, inputFile).scanFile(visitorContext);
     }
   }
@@ -281,8 +281,12 @@ public class PythonScanner extends Scanner {
   }
 
   private static NewIssueLocation newLocation(InputFile inputFile, NewIssue issue, IssueLocation location) {
-    NewIssueLocation newLocation = issue.newLocation()
-      .on(inputFile);
+    NewIssueLocation newLocation;
+    if (inputFile instanceof GeneratedIPythonFile generatedIPythonFile) {
+      newLocation = issue.newLocation().on(generatedIPythonFile.originalFile);
+    } else {
+      newLocation = issue.newLocation().on(inputFile);
+    }
     if (location.startLine() != IssueLocation.UNDEFINED_LINE) {
       TextRange range;
       if (location.startLineOffset() == IssueLocation.UNDEFINED_OFFSET) {
@@ -306,7 +310,7 @@ public class PythonScanner extends Scanner {
 
     noSonarFilter.noSonarInFile(inputFile, fileLinesVisitor.getLinesWithNoSonar());
 
-    if (!isInSonarLint(context)) {
+    if (!isInSonarLint(context) && !(inputFile instanceof GeneratedIPythonFile)) {
       cpdAnalyzer.pushCpdTokens(inputFile, visitorContext);
 
       Set<Integer> linesOfCode = fileLinesVisitor.getLinesOfCode();
