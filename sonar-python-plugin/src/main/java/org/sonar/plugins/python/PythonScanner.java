@@ -308,7 +308,9 @@ public class PythonScanner extends Scanner {
     FileMetrics fileMetrics = new FileMetrics(visitorContext);
     FileLinesVisitor fileLinesVisitor = fileMetrics.fileLinesVisitor();
 
-    noSonarFilter.noSonarInFile(inputFile, fileLinesVisitor.getLinesWithNoSonar());
+    if (!(inputFile instanceof GeneratedIPythonFile)) {
+      noSonarFilter.noSonarInFile(inputFile, fileLinesVisitor.getLinesWithNoSonar());
+    }
 
     if (!isInSonarLint(context) && !(inputFile instanceof GeneratedIPythonFile)) {
       cpdAnalyzer.pushCpdTokens(inputFile, visitorContext);

@@ -34,7 +34,11 @@ import org.sonar.api.issue.NoSonarFilter;
 import org.sonar.api.measures.FileLinesContextFactory;
 import org.sonar.plugins.python.api.ProjectPythonVersion;
 import org.sonar.plugins.python.api.PythonVersionUtils;
+import org.sonar.plugins.python.api.caching.CacheContext;
 import org.sonar.plugins.python.indexer.PythonIndexer;
+import org.sonar.plugins.python.indexer.SonarQubePythonIndexer;
+import org.sonar.python.caching.CacheContextImpl;
+import org.sonar.python.caching.DummyCache;
 import org.sonar.python.checks.CheckList;
 import org.sonar.python.parser.PythonParser;
 
@@ -46,6 +50,15 @@ public final class IPynbSensor implements Sensor {
   private final FileLinesContextFactory fileLinesContextFactory;
   private final NoSonarFilter noSonarFilter;
   private final PythonIndexer indexer;
+
+  public IPynbSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory, NoSonarFilter noSonarFilter) {
+    this.checks = new PythonChecks(checkFactory)
+      .addChecks(CheckList.IPYTHON_REPOSITORY_KEY, CheckList.getChecks());
+    this.fileLinesContextFactory = fileLinesContextFactory;
+    this.noSonarFilter = noSonarFilter;
+    this.indexer = null;
+  }
+
 
   public IPynbSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory, NoSonarFilter noSonarFilter, PythonIndexer indexer) {
     this.checks = new PythonChecks(checkFactory)
@@ -72,7 +85,11 @@ public final class IPynbSensor implements Sensor {
     if (areFilesActualNotebook(context)) {
       pythonFiles = processNotebooks(pythonFiles);
     }
-    PythonScanner scanner = new PythonScanner(context, checks, fileLinesContextFactory, noSonarFilter, PythonParser.createIPythonParser(), indexer);
+    // Disable caching for IPynb files for now
+    CacheContext cacheContext = CacheContextImpl.dummyCache();
+    PythonIndexer pythonIndexer = this.indexer != null ? this.indexer : new SonarQubePythonIndexer(pythonFiles, cacheContext, context);
+
+    PythonScanner scanner = new PythonScanner(context, checks, fileLinesContextFactory, noSonarFilter, PythonParser.createIPythonParser(), pythonIndexer);
     scanner.execute(pythonFiles, context);
   }
 

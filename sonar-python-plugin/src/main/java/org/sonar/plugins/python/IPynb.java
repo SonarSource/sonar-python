@@ -19,20 +19,38 @@
  */
 package org.sonar.plugins.python;
 
+import java.util.ArrayList;
+import java.util.List;
+import org.apache.commons.lang.StringUtils;
+import org.sonar.api.config.Configuration;
 import org.sonar.api.resources.AbstractLanguage;
 
 public class IPynb extends AbstractLanguage {
 
   public static final String KEY = "ipynb";
 
-  private static final String[] DEFAULT_FILE_SUFFIXES = { ".ipynb" };
+  private static final String[] DEFAULT_FILE_SUFFIXES = { "ipynb" };
 
-  public IPynb() {
+  private Configuration configuration;
+
+  public IPynb(Configuration configuration) {
     super(KEY, "IPython Notebooks");
+    this.configuration = configuration;
   }
 
   @Override
   public String[] getFileSuffixes() {
-    return IPynb.DEFAULT_FILE_SUFFIXES;
+    String[] suffixes = filterEmptyStrings(configuration.getStringArray(PythonPlugin.IPYNB_FILE_SUFFIXES_KEY));
+    return suffixes.length == 0 ? DEFAULT_FILE_SUFFIXES : suffixes;
+  }
+
+  private static String[] filterEmptyStrings(String[] stringArray) {
+    List<String> nonEmptyStrings = new ArrayList<>();
+    for (String string : stringArray) {
+      if (StringUtils.isNotBlank(string.trim())) {
+        nonEmptyStrings.add(string.trim());
+      }
+    }
+    return nonEmptyStrings.toArray(new String[nonEmptyStrings.size()]);
   }
 }

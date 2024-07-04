@@ -58,7 +58,6 @@ import org.sonar.plugins.python.indexer.PythonIndexer;
 import org.sonar.plugins.python.indexer.SonarLintPythonIndexer;
 import org.sonar.plugins.python.indexer.TestModuleFileSystem;
 import org.sonar.python.checks.CheckList;
-import org.sonarsource.sonarlint.core.commons.TextRange;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -156,7 +155,7 @@ class IPynbSensorTest {
 
     Collection<Issue> issues = context.allIssues();
     Issue issue = issues.iterator().next();
-    assertThat(issue.primaryLocation().textRange()).isEqualTo(inputFile.newRange(19, 10, 19, 15));
+    assertThat(issue.primaryLocation().textRange()).isEqualTo(inputFile.newRange(19, 9, 19, 14));
   }
 
   private IPynbSensor sensor() {
