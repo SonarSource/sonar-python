@@ -25,6 +25,8 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonToken;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import org.sonar.api.batch.fs.InputFile;
 
@@ -48,12 +50,13 @@ public class IPythonNotebookParser {
       }
     }
     System.out.println(aggregatedSource);
-    return new GeneratedIPythonFile(inputFile, aggregatedSource.toString(), offSetMap);
+    return new GeneratedIPythonFile(inputFile, aggregatedSource.toString(), offSetMap, colOffSet);
   }
 
   private static StringBuilder aggregatedSource = new StringBuilder();
   private static Map<Integer, JsonLocation> locationMap = new HashMap<>();
   private static Map<Integer, GeneratedIPythonFile.Offset> offSetMap = new HashMap<>();
+  private static Map<Integer, Map<Integer, Integer>> colOffSet = new HashMap<>();
   private static int aggregatedSourceLine = 1;
 
   private static void processCodeCell(JsonParser parser) throws IOException {
@@ -68,6 +71,7 @@ public class IPythonNotebookParser {
             aggregatedSource.append(sourceLine);
             locationMap.put(aggregatedSourceLine, tokenLocation);
             offSetMap.put(aggregatedSourceLine, new GeneratedIPythonFile.Offset(tokenLocation.getLineNr(), tokenLocation.getColumnNr()));
+            colOffSet.put(aggregatedSourceLine, countEscapeCharacters(sourceLine, new LinkedHashMap<>(), tokenLocation.getColumnNr()));
             aggregatedSourceLine++;
           }
           // account for the cell delimiter
@@ -77,5 +81,24 @@ public class IPythonNotebookParser {
         }
       }
     }
+  }
+   private static Map<Integer, Integer> countEscapeCharacters(String sourceLine, Map<Integer, Integer> colMap, int colOffSet) {
+    int count = 0;
+    var arr = sourceLine.toCharArray();
+    for (int i = 1; i < sourceLine.length() - 1; ++i) {
+      char c = arr[i];
+      switch (c) {
+        case '"','\'', '/': 
+          // + 1 as we do have to count the open quote.
+          colMap.put(i ,i + colOffSet + count + 1);
+          break;
+        case '\\', '\b', '\f', '\n', '\r', '\t':
+          count+=2;
+          break;
+        default:
+          break;
+      }
+    }
+    return colMap;
   }
 }

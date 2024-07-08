@@ -23,7 +23,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
@@ -138,6 +138,10 @@ class IPynbSensorTest {
         .setRuleKey(RuleKey.of(CheckList.IPYTHON_REPOSITORY_KEY, "PrintStatementUsage"))
         .setName("Print Statement Usage")
         .build())
+      .addRule(new NewActiveRule.Builder()
+        .setRuleKey(RuleKey.of(CheckList.IPYTHON_REPOSITORY_KEY, "S3457"))
+        .setName("f-string without any placeholders")
+        .build())
       .build();
 
     InputFile inputFile = inputFile(ACTUAL_NOTEBOOK);
@@ -147,15 +151,16 @@ class IPynbSensorTest {
 
     String key = "moduleKey:file1.ipynb";
     assertThat(context.measure(key, CoreMetrics.NCLOC)).isNull();
-    assertThat(context.allIssues()).hasSize(1);
+    assertThat(context.allIssues()).hasSize(2);
     assertThat(context.highlightingTypeAt(key, 15, 2)).isEmpty();
     assertThat(context.allAnalysisErrors()).isEmpty();
 
     assertThat(PythonScanner.getWorkingDirectory(context)).isNotNull();
 
-    Collection<Issue> issues = context.allIssues();
-    Issue issue = issues.iterator().next();
-    assertThat(issue.primaryLocation().textRange()).isEqualTo(inputFile.newRange(19, 9, 19, 14));
+    List<Issue> issues = new ArrayList<>(context.allIssues());
+    assertThat(issues.get(0).primaryLocation().textRange()).isEqualTo(inputFile.newRange(19, 9, 19, 14));
+    assertThat(issues.get(1).primaryLocation().textRange()).isEqualTo(inputFile.newRange(21, 17, 21, 23));
+
   }
 
   private IPynbSensor sensor() {

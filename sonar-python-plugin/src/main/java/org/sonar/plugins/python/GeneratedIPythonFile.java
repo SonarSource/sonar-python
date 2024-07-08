@@ -19,6 +19,7 @@
  */
 package org.sonar.plugins.python;
 
+import com.google.thirdparty.publicsuffix.PublicSuffixPatterns;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -26,6 +27,8 @@ import java.net.URI;
 import java.nio.charset.Charset;
 import java.nio.file.Path;
 import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 import javax.annotation.CheckForNull;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.TextPointer;
@@ -36,15 +39,23 @@ public class GeneratedIPythonFile implements InputFile {
   InputFile originalFile;
   String pythonContent;
   Map<Integer, Offset> offsetMap;
+  // A map from the line to a Map of column location of escaped chars: 
+  // from the position in the Python code to the position in the original file
+  Map<Integer, Map<Integer, Integer>> colOffSet;
 
-  public GeneratedIPythonFile(InputFile originalFile, String pythonContent, Map<Integer, Offset> locationMap) {
+  public GeneratedIPythonFile(InputFile originalFile, String pythonContent, Map<Integer, Offset> locationMap, Map<Integer, Map<Integer, Integer>> colOffSet) {
     this.originalFile = originalFile;
     this.pythonContent = pythonContent;
     this.offsetMap = locationMap;
+    this.colOffSet = colOffSet;
   }
 
   public Map<Integer, Offset> offsetMap() {
     return offsetMap;
+  }
+
+  public Map<Integer, Map<Integer, Integer>> colOffSet(){
+    return colOffSet;
   }
 
   public record Offset(int line, int column) {
@@ -131,7 +142,21 @@ public class GeneratedIPythonFile implements InputFile {
   public TextRange newRange(int i, int i1, int i2, int i3) {
     Offset offsetFrom = offsetMap.get(i);
     Offset offsetTo = offsetMap.get(i2);
-    return originalFile.newRange(offsetFrom.line(), i1 + offsetFrom.column(), offsetTo.line(), i3 + offsetTo.column());
+
+    Map<Integer, Integer> escapes = colOffSet.get(i);
+    // the column location is an escape char we directly get the position from the column offset.
+    // Otherwise we need to count the number of escaped char present before the current position and
+    // add this new offset
+    Integer startCol = escapes.get(i1);
+    if(startCol == null) {
+      startCol = (int) escapes.keySet().stream().filter(k -> k < i1).count() + offsetFrom.column() + i1;
+    }
+
+    Integer endCol = escapes.get(i3);
+    if(endCol == null) {
+      endCol = (int) escapes.keySet().stream().filter(k -> k < i3).count() + offsetTo.column() + i3;
+    }
+    return originalFile.newRange(offsetFrom.line(), startCol, offsetTo.line(), endCol);
   }
 
   @Override
