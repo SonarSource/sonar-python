@@ -19,7 +19,6 @@
  */
 package org.sonar.plugins.python;
 
-import java.util.Map;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.symbol.NewSymbol;
@@ -45,11 +44,7 @@ public class NewSymbolTableWrapper {
 
   public NewSymbolWrapper newSymbol(int var1, int var2, int var3, int var4) {
     if (inputFile instanceof GeneratedIPythonFile generatedIPythonFile) {
-      Map<Integer, GeneratedIPythonFile.Offset> offsetMap = generatedIPythonFile.offsetMap;
-      var fromOffset = offsetMap.get(var1);
-      var toOffset = offsetMap.get(var3);
-      return new NewSymbolWrapper(newSymbolTable.newSymbol(fromOffset.line(), var2 + fromOffset.column(),
-        toOffset.line(), var4 + toOffset.column()), inputFile);
+      return new NewSymbolWrapper(newSymbolTable.newSymbol(inputFile.newRange(var1, var2, var3, var4)), inputFile);
     }
     return new NewSymbolWrapper(newSymbolTable.newSymbol(var1, var2, var3, var4), inputFile);
   }
@@ -66,11 +61,7 @@ public class NewSymbolTableWrapper {
 
       public void newReference(int var1, int var2, int var3, int var4) {
         if (this.inputFile instanceof GeneratedIPythonFile generatedIPythonFile) {
-          Map<Integer, GeneratedIPythonFile.Offset> offsetMap = generatedIPythonFile.offsetMap;
-          var fromOffset = offsetMap.get(var1);
-          var toOffset = offsetMap.get(var3);
-          newSymbol.newReference(fromOffset.line(), var2 + fromOffset.column(),
-            toOffset.line(), var4 + toOffset.column());
+          newSymbol.newReference(inputFile.newRange(var1, var2, var3, var4));
         } else {
           newSymbol.newReference(var1, var2, var3, var4);
         }

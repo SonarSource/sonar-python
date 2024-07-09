@@ -163,12 +163,8 @@ public class PythonHighlighter extends PythonSubscriptionCheck {
   private void highlight(Token token, TypeOfText typeOfText) {
     TokenLocation tokenLocation = new TokenLocation(token);
     if (currentFile instanceof GeneratedIPythonFile generatedIPythonFile) {
-      Map<Integer, GeneratedIPythonFile.Offset> notebookOffsetMap = generatedIPythonFile.offsetMap();
-      var startOffset = notebookOffsetMap.get(tokenLocation.startLine());
-      var endOffset = notebookOffsetMap.get(tokenLocation.endLine());
-      newHighlighting.highlight(startOffset.line(),
-        tokenLocation.startLineOffset() + startOffset.column(), endOffset.line(),
-        tokenLocation.endLineOffset() + endOffset.column(), typeOfText);
+      var newRange = generatedIPythonFile.newRange(tokenLocation.startLine(), tokenLocation.startLineOffset(), tokenLocation.endLine(), tokenLocation.endLineOffset() );
+      newHighlighting.highlight(newRange, typeOfText);
     } else {
       newHighlighting.highlight(tokenLocation.startLine(), tokenLocation.startLineOffset(), tokenLocation.endLine(), tokenLocation.endLineOffset(), typeOfText);
     }

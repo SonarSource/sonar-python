@@ -54,7 +54,7 @@ public class GeneratedIPythonFile implements InputFile {
     return offsetMap;
   }
 
-  public Map<Integer, Map<Integer, Integer>> colOffSet(){
+  public Map<Integer, Map<Integer, Integer>> colOffSet() {
     return colOffSet;
   }
 
@@ -148,15 +148,22 @@ public class GeneratedIPythonFile implements InputFile {
     // Otherwise we need to count the number of escaped char present before the current position and
     // add this new offset
     Integer startCol = escapes.get(i1);
-    if(startCol == null) {
-      startCol = (int) escapes.keySet().stream().filter(k -> k < i1).count() + offsetFrom.column() + i1;
+    if (startCol == null) {
+      startCol = computeColWithEscapes(i1, escapes, offsetTo);
+    } else {
+      // - 1 here as we want to start the location at the backslash
+      startCol--;
     }
 
     Integer endCol = escapes.get(i3);
-    if(endCol == null) {
-      endCol = (int) escapes.keySet().stream().filter(k -> k < i3).count() + offsetTo.column() + i3;
+    if (endCol == null) {
+      endCol = computeColWithEscapes(i3, escapes, offsetTo);
     }
     return originalFile.newRange(offsetFrom.line(), startCol, offsetTo.line(), endCol);
+  }
+
+  private static int computeColWithEscapes(int currentCol, Map<Integer, Integer> escapes, Offset offsetTo) {
+    return (int) escapes.keySet().stream().filter(k -> k < currentCol).count() + offsetTo.column() + currentCol;
   }
 
   @Override
