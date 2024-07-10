@@ -166,8 +166,24 @@ def parameter_default_value():
         foo = 43
 
 def assignment_expression():
-  if (b:=foo()) != 42:
-    bar(b)
+    if (b:=foo()) != 42:
+        bar(b)
+
+def assignment_expression_in_generator():
+    if any((last := i) for i in range(5)):
+        something(last)
+
+def assignment_expression_in_list_comprehension():
+    if [last := i for i in range(5)]:
+        something(last)
+
+def assignment_expression_in_set_comprehension():
+    if {(last := i) for i in range(5)}:
+        something(last)
+
+def assignment_expression_in_dict_comprehension():
+    if {'test': (last := i) for i in range(5)}:
+        something(last)
 
 def importing_stdlib():
   import math

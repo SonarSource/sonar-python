@@ -47,8 +47,8 @@ import org.sonar.python.types.TypeShed;
 class Scope {
 
   final Tree rootTree;
-  private PythonFile pythonFile;
-  private String fullyQualifiedModuleName;
+  private final PythonFile pythonFile;
+  private final String fullyQualifiedModuleName;
   private final ProjectLevelSymbolTable projectLevelSymbolTable;
   private final Scope parent;
   final Map<String, Symbol> symbolsByName = new HashMap<>();
@@ -148,6 +148,10 @@ class Scope {
         }
         return copiedSymbol;
     }
+  }
+
+  Scope parent() {
+    return parent;
   }
 
   private ClassSymbolImpl copyClassSymbol(String symbolName, ClassSymbolImpl originalClassSymbol, Set<Symbol> alreadyVisitedSymbols) {
