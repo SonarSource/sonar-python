@@ -150,6 +150,10 @@ class Scope {
     }
   }
 
+  Scope parent() {
+    return parent;
+  }
+
   private ClassSymbolImpl copyClassSymbol(String symbolName, ClassSymbolImpl originalClassSymbol, Set<Symbol> alreadyVisitedSymbols) {
     // Must use symbolName to preserve import aliases
     ClassSymbolImpl classSymbol = (ClassSymbolImpl) ClassSymbolImpl.copyFrom(symbolName, originalClassSymbol);

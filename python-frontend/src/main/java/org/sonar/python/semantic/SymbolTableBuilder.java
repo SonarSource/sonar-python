@@ -552,7 +552,12 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
 
     @Override
     public void visitAssignmentExpression(AssignmentExpression assignmentExpression) {
-      addBindingUsage(assignmentExpression.lhsName(), Usage.Kind.ASSIGNMENT_LHS);
+      final Scope scope = currentScope();
+      if (scope.rootTree.is(Kind.GENERATOR_EXPR)) {
+        scope.parent().addBindingUsage(assignmentExpression.lhsName(), Usage.Kind.ASSIGNMENT_LHS, null);
+      } else {
+        addBindingUsage(assignmentExpression.lhsName(), Usage.Kind.ASSIGNMENT_LHS);
+      }
       super.visitAssignmentExpression(assignmentExpression);
     }
 
