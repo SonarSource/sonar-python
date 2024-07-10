@@ -166,3 +166,9 @@ def correct_scope_for_assignment_target_in_generator_expression():
     lines = ['#comment', 'normal']
     if any((comment := line).startswith('#') for line in lines):
         return comment
+
+def unused_assignment_target_in_generator_expression():
+    lines = ['#comment', 'normal']
+    if any((comment := line).startswith('#') for line in lines): # Noncompliant {{Remove the unused local variable "comment".}}
+#           ^^^^^^^
+        return
