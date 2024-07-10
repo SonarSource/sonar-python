@@ -161,3 +161,8 @@ def global_variable_modified():
 def annotated_assignment_null_value():
     value: str # Noncompliant
     value = "hello"
+
+def correct_scope_for_assignment_target_in_generator_expression():
+    lines = ['#comment', 'normal']
+    if any((comment := line).startswith('#') for line in lines):
+        return comment
