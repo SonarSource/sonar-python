@@ -30,9 +30,11 @@ import org.sonar.check.RuleProperty;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
+import org.sonar.plugins.python.api.quickfix.PythonTextEdit;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.AnnotatedAssignment;
+import org.sonar.plugins.python.api.tree.AssignmentExpression;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.ComprehensionExpression;
 import org.sonar.plugins.python.api.tree.DictCompExpression;
@@ -161,6 +163,23 @@ public class UnusedLocalVariableCheck extends PythonSubscriptionCheck {
             TextEditUtils.removeUntil(usage.tree(), assignedValue.firstToken()));
           issue.addQuickFix(quickFix);
         });
+
+      AssignmentExpression assignmentExpression = ((AssignmentExpression) TreeUtils.firstAncestorOfKind(usage.tree(), Kind.ASSIGNMENT_EXPRESSION));
+      Optional.ofNullable(assignmentExpression).map(AssignmentExpression.class::cast).ifPresent(expr -> {
+        PythonQuickFix quickFix = PythonQuickFix.newQuickFix(ASSIGNMENT_QUICK_FIX_MESSAGE,
+                createAssignmentExpressionQuickFix(usage, assignmentExpression));
+        issue.addQuickFix(quickFix);
+      });
+    }
+  }
+
+  private static PythonTextEdit createAssignmentExpressionQuickFix(final Usage usage, final AssignmentExpression assignmentExpression) {
+    var expression = assignmentExpression.expression();
+    var parent = assignmentExpression.parent();
+    if (parent.is(Kind.PARENTHESIZED) && expression.is(Kind.NAME)) {
+      return TextEditUtils.replace(parent, ((Name) expression).name());
+    } else {
+      return TextEditUtils.removeUntil(usage.tree(), expression.firstToken());
     }
   }
 
