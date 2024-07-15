@@ -18,6 +18,7 @@ jobs:
       ((contains(fromJSON('["main", "master"]'),
       github.event.check_suite.head_branch) ||
       startsWith(github.event.check_suite.head_branch, 'dogfood-') ||
+      startsWith(github.event.check_suite.head_branch, 'gp/') ||
       startsWith(github.event.check_suite.head_branch, 'branch-')) &&
       github.event.check_suite.conclusion == 'success' &&
       github.event.check_suite.app.slug == 'cirrus-ci')
@@ -26,5 +27,4 @@ jobs:
           SonarSource/gh-action_releasability/releasability-status@v1.2.1
         env:
           GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
-        with:
-          allow_failure: true
+        continue-on-error: true
