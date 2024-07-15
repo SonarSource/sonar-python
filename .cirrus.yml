@@ -49,7 +49,7 @@ build_container_definition: &BUILD_CONTAINER_DEFINITION
     region: eu-central-1
     namespace: default
     cpu: 2
-    memory: 2G
+    memory: 4G
 
 only_sonarsource_qa: &ONLY_SONARSOURCE_QA
   only_if: $CIRRUS_USER_COLLABORATOR == 'true' && $CIRRUS_TAG == "" && ($CIRRUS_PR != "" || $CIRRUS_BRANCH == 'master' || $CIRRUS_BRANCH =~ "branch-.*" || $CIRRUS_BUILD_SOURCE == 'api'  || $CIRRUS_BRANCH =~ "dogfood-on-.*")
