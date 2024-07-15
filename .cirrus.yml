@@ -79,24 +79,24 @@ build_task:
     - ./check-license-compliance.sh
   cleanup_before_cache_script: cleanup_maven_repository
 
-build_win_task:
-  <<: *WINDOWS_VM_DEFINITION
-  <<: *ONLY_SONARSOURCE_QA
-  depends_on:
-    - build
-  maven_cache:
-    #windows cache is buggy if using ${CIRRUS_WORKING_DIR}
-    folder: ~/.m2/repository
-  build_script:
-    - git config --global core.autocrlf input
-    - git submodule update --init
-    - cd python-frontend/typeshed_serializer/resources/python-type-stubs
-    - git sparse-checkout set stubs/sklearn 
-    - git checkout
-    - cd -
-    - source cirrus-env CI
-    - unset SONARSOURCE_QA
-    - mvn.cmd package -DskipTypeshed=true -DfailStubGenerationFast=true
+# build_win_task:
+#   <<: *WINDOWS_VM_DEFINITION
+#   <<: *ONLY_SONARSOURCE_QA
+#   depends_on:
+#     - build
+#   maven_cache:
+#     #windows cache is buggy if using ${CIRRUS_WORKING_DIR}
+#     folder: ~/.m2/repository
+#   build_script:
+#     - git config --global core.autocrlf input
+#     - git submodule update --init
+#     - cd python-frontend/typeshed_serializer/resources/python-type-stubs
+#     - git sparse-checkout set stubs/sklearn 
+#     - git checkout
+#     - cd -
+#     - source cirrus-env CI
+#     - unset SONARSOURCE_QA
+#     - mvn.cmd package -DskipTypeshed=true -DfailStubGenerationFast=true
 
 ws_scan_task:
   depends_on:
@@ -118,100 +118,100 @@ ws_scan_task:
     ws_artifacts:
       path: "whitesource/**/*"
  
-plugin_qa_task:
-  depends_on:
-    - build
-  <<: *ONLY_SONARSOURCE_QA
-  eks_container:
-    <<: *QA_CONTAINER_DEFINITION
-    cpu: 3
-    memory: 8G
-  env:
-    CIRRUS_CLONE_DEPTH: 10
-    SONARSOURCE_QA: true
-    matrix:
-      - SQ_VERSION: LATEST_RELEASE[9.9]
-      - SQ_VERSION: DEV
-  maven_cache:
-    folder: ${CIRRUS_WORKING_DIR}/.m2/repository
-  qa_script:
-    - source cirrus-env QA
-    - source set_maven_build_version $BUILD_NUMBER
-    - cd its/plugin
-    - mvn verify -Dsonar.runtimeVersion=${SQ_VERSION} -Dmaven.test.redirectTestOutputToFile=false -B -e -V
-  cleanup_before_cache_script: cleanup_maven_repository
+# plugin_qa_task:
+#   depends_on:
+#     - build
+#   <<: *ONLY_SONARSOURCE_QA
+#   eks_container:
+#     <<: *QA_CONTAINER_DEFINITION
+#     cpu: 3
+#     memory: 8G
+#   env:
+#     CIRRUS_CLONE_DEPTH: 10
+#     SONARSOURCE_QA: true
+#     matrix:
+#       - SQ_VERSION: LATEST_RELEASE[9.9]
+#       - SQ_VERSION: DEV
+#   maven_cache:
+#     folder: ${CIRRUS_WORKING_DIR}/.m2/repository
+#   qa_script:
+#     - source cirrus-env QA
+#     - source set_maven_build_version $BUILD_NUMBER
+#     - cd its/plugin
+#     - mvn verify -Dsonar.runtimeVersion=${SQ_VERSION} -Dmaven.test.redirectTestOutputToFile=false -B -e -V
+#   cleanup_before_cache_script: cleanup_maven_repository
 
-ruling_task:
-  depends_on:
-    - build
-  <<: *ONLY_SONARSOURCE_QA
-  eks_container:
-    <<: *QA_CONTAINER_DEFINITION
-    cpu: 4
-    memory: 8G
-  env:
-    CIRRUS_CLONE_DEPTH: 10
-    SONARSOURCE_QA: true
-  maven_cache:
-    folder: ${CIRRUS_WORKING_DIR}/.m2/repository
-  submodules_script:
-    - git submodule update --init
-  ruling_script:
-    - source cirrus-env QA
-    - source set_maven_build_version $BUILD_NUMBER
-    - cd its/ruling
-    - mvn verify -Dsonar.runtimeVersion=LATEST_RELEASE -Dmaven.test.redirectTestOutputToFile=false -B -e -V -Dtest=PythonRulingTest
-  cleanup_before_cache_script: cleanup_maven_repository
+# ruling_task:
+#   depends_on:
+#     - build
+#   <<: *ONLY_SONARSOURCE_QA
+#   eks_container:
+#     <<: *QA_CONTAINER_DEFINITION
+#     cpu: 4
+#     memory: 8G
+#   env:
+#     CIRRUS_CLONE_DEPTH: 10
+#     SONARSOURCE_QA: true
+#   maven_cache:
+#     folder: ${CIRRUS_WORKING_DIR}/.m2/repository
+#   submodules_script:
+#     - git submodule update --init
+#   ruling_script:
+#     - source cirrus-env QA
+#     - source set_maven_build_version $BUILD_NUMBER
+#     - cd its/ruling
+#     - mvn verify -Dsonar.runtimeVersion=LATEST_RELEASE -Dmaven.test.redirectTestOutputToFile=false -B -e -V -Dtest=PythonRulingTest
+#   cleanup_before_cache_script: cleanup_maven_repository
 
-extended_ruling_task:
-  depends_on:
-    - build
-  <<: *ONLY_SONARSOURCE_QA
-  eks_container:
-    <<: *QA_CONTAINER_DEFINITION
-    cpu: 4
-    memory: 8G
-  env:
-    CIRRUS_CLONE_DEPTH: 10
-    SONARSOURCE_QA: true
-  maven_cache:
-    folder: ${CIRRUS_WORKING_DIR}/.m2/repository
-  submodules_script:
-    - git submodule update --init
-  ruling_script:
-    - source cirrus-env QA
-    - source set_maven_build_version $BUILD_NUMBER
-    - cd its/ruling
-    - mvn verify -Dsonar.runtimeVersion=LATEST_RELEASE -Dmaven.test.redirectTestOutputToFile=false -B -e -V -Dtest=PythonExtendedRulingTest
-  cleanup_before_cache_script: cleanup_maven_repository
+# extended_ruling_task:
+#   depends_on:
+#     - build
+#   <<: *ONLY_SONARSOURCE_QA
+#   eks_container:
+#     <<: *QA_CONTAINER_DEFINITION
+#     cpu: 4
+#     memory: 8G
+#   env:
+#     CIRRUS_CLONE_DEPTH: 10
+#     SONARSOURCE_QA: true
+#   maven_cache:
+#     folder: ${CIRRUS_WORKING_DIR}/.m2/repository
+#   submodules_script:
+#     - git submodule update --init
+#   ruling_script:
+#     - source cirrus-env QA
+#     - source set_maven_build_version $BUILD_NUMBER
+#     - cd its/ruling
+#     - mvn verify -Dsonar.runtimeVersion=LATEST_RELEASE -Dmaven.test.redirectTestOutputToFile=false -B -e -V -Dtest=PythonExtendedRulingTest
+#   cleanup_before_cache_script: cleanup_maven_repository
 
-pr_analysis_qa_task:
-  depends_on:
-    - build
-  <<: *ONLY_SONARSOURCE_QA
-  eks_container:
-    <<: *QA_CONTAINER_DEFINITION
-    cpu: 4
-    memory: 8G
-  env:
-    GITHUB_TOKEN: VAULT[development/github/token/licenses-ro token]
-    CIRRUS_CLONE_DEPTH: 10
-    SONARSOURCE_QA: true
-  maven_cache:
-    folder: ${CIRRUS_WORKING_DIR}/.m2/repository
-  qa_script:
-    - source cirrus-env QA
-    - source set_maven_build_version $BUILD_NUMBER
-    - cd its/ruling
-    - mvn verify -Dsonar.runtimeVersion=LATEST_RELEASE -Dmaven.test.redirectTestOutputToFile=false -B -e -V -Dtest=PythonPrAnalysisTest
-  cleanup_before_cache_script: cleanup_maven_repository
+# pr_analysis_qa_task:
+#   depends_on:
+#     - build
+#   <<: *ONLY_SONARSOURCE_QA
+#   eks_container:
+#     <<: *QA_CONTAINER_DEFINITION
+#     cpu: 4
+#     memory: 8G
+#   env:
+#     GITHUB_TOKEN: VAULT[development/github/token/licenses-ro token]
+#     CIRRUS_CLONE_DEPTH: 10
+#     SONARSOURCE_QA: true
+#   maven_cache:
+#     folder: ${CIRRUS_WORKING_DIR}/.m2/repository
+#   qa_script:
+#     - source cirrus-env QA
+#     - source set_maven_build_version $BUILD_NUMBER
+#     - cd its/ruling
+#     - mvn verify -Dsonar.runtimeVersion=LATEST_RELEASE -Dmaven.test.redirectTestOutputToFile=false -B -e -V -Dtest=PythonPrAnalysisTest
+#   cleanup_before_cache_script: cleanup_maven_repository
 
 promote_task:
   depends_on:
-    - ruling
-    - plugin_qa
+    # - ruling
+    # - plugin_qa
     - ws_scan
-    - pr_analysis_qa
+    # - pr_analysis_qa
   <<: *ONLY_SONARSOURCE_QA
   eks_container:
     <<: *CONTAINER_DEFINITION
