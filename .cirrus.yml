@@ -210,7 +210,7 @@ promote_task:
   depends_on:
     # - ruling
     # - plugin_qa
-    - ws_scan
+    - build
     # - pr_analysis_qa
   <<: *ONLY_SONARSOURCE_QA
   eks_container:
