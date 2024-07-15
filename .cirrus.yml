@@ -221,8 +221,6 @@ promote_task:
     #promotion cloud function
     ARTIFACTORY_PROMOTE_ACCESS_TOKEN: VAULT[development/artifactory/token/${CIRRUS_REPO_OWNER}-${CIRRUS_REPO_NAME}-promoter access_token]    
     GITHUB_TOKEN: VAULT[development/github/token/${CIRRUS_REPO_OWNER}-${CIRRUS_REPO_NAME}-promotion token]
-    #artifacts that will have downloadable links
-    ARTIFACTS: org.sonarsource.python:sonar-python-plugin:jar
   maven_cache:
     folder: ${CIRRUS_WORKING_DIR}/.m2/repository
   script: cirrus_promote_maven
