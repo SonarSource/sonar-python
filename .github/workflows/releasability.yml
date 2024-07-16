@@ -36,20 +36,23 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Get current description
-        id: get_description
+      - name: Extract status information
+        id: extract_info
         run: |
-          description=$(echo '${{ steps.check_status.outputs.data }}' | jq -r '.statuses[] | select(.context == "Releasability") | .description')
+          status_info=$(echo '${{ steps.check_status.outputs.data }}' | jq -r '.statuses[] | select(.context == "Releasability") | {description: .description, target_url: .target_url}')
+          description=$(echo "$status_info" | jq -r '.description')
+          target_url=$(echo "$status_info" | jq -r '.target_url')
           echo "::set-output name=description::$description"
-    
+          echo "::set-output name=target_url::$target_url"
+      
       - name: Update status to success
         if: fromJson(steps.check_status.outputs.data).state != 'success'
         uses: octokit/request-action@v2.x
         with:
           route: POST /repos/${{ github.repository }}/statuses/${{ github.sha }}
           state: "success"
-          target_url: "${{ github.event.repository.html_url }}/actions/runs/${{ github.run_id }}"
-          description: "${{ steps.get_description.outputs.description }} (status rewritten)"
+          target_url: "${{ steps.extract_info.outputs.target_url }}"
+          description: "${{ steps.extract_info.outputs.description }} (status rewritten)"
           context: "Releasability"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
