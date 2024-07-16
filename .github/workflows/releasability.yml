@@ -39,7 +39,7 @@ jobs:
       - name: Get current description
         id: get_description
         run: |
-          description=$(echo '${{ fromJson(steps.check_status.outputs.data).statuses[0].description }}' | sed 's/"/\\"/g')
+          description=$(echo '${{ steps.check_status.outputs.data }}' | jq -r '.statuses[] | select(.context == "Releasability") | .description')
           echo "::set-output name=description::$description"
     
       - name: Update status to success
