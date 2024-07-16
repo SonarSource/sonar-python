@@ -36,6 +36,12 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Get current description
+        id: get_description
+        run: |
+          description=$(echo '${{ fromJson(steps.check_status.outputs.data).statuses[0].description }}' | sed 's/"/\\"/g')
+          echo "::set-output name=description::$description"
+    
       - name: Update status to success
         if: fromJson(steps.check_status.outputs.data).state != 'success'
         uses: octokit/request-action@v2.x
@@ -43,7 +49,7 @@ jobs:
           route: POST /repos/${{ github.repository }}/statuses/${{ github.sha }}
           state: "success"
           target_url: "${{ github.event.repository.html_url }}/actions/runs/${{ github.run_id }}"
-          description: "✈ Releasability checks passed (status rewritten)"
+          description: "${{ steps.get_description.outputs.description }} (status rewritten)"
           context: "Releasability"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
