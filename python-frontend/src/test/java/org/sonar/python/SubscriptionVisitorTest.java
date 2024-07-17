@@ -28,11 +28,13 @@ import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.PythonVisitorContext;
 import org.sonar.plugins.python.api.caching.CacheContext;
+import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.StringElement;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.regex.RegexContext;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
+import org.sonar.python.types.v2.TriBool;
 import org.sonarsource.analyzer.commons.regex.RegexParseResult;
 import org.sonarsource.analyzer.commons.regex.ast.FlagSet;
 
@@ -82,6 +84,23 @@ class SubscriptionVisitorTest {
         });
       }
     };
+    SubscriptionVisitor.analyze(Collections.singleton(check), context);
+  }
+
+  @Test
+  void typeChecker() {
+    PythonSubscriptionCheck check = new PythonSubscriptionCheck() {
+      @Override
+      public void initialize(Context context) {
+        context.registerSyntaxNodeConsumer(Tree.Kind.CLASSDEF, ctx -> {
+          ClassDef classDef = (ClassDef) ctx.syntaxNode();
+          assertThat(ctx.typeChecker().typeCheckBuilder().instancesHaveMember("foo").check(classDef.name().typeV2())).isEqualTo(TriBool.TRUE);
+        });
+      }
+    };
+
+    FileInput fileInput = PythonTestUtils.parse("class A:\n  def foo(self): ...");
+    PythonVisitorContext context = new PythonVisitorContext(fileInput, PythonTestUtils.pythonFile("file"), null, null);
     SubscriptionVisitor.analyze(Collections.singleton(check), context);
   }
 }
