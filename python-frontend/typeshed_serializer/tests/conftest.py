@@ -50,7 +50,7 @@ def typeshed_custom_stubs():
 @pytest.fixture(scope="session")
 def microsoft_stubs():
     build_result, _ = MicrosoftStubsSerializer().get_build_result()
-    assert len(build_result.files) == 972
+    assert len(build_result.files) == 982
     return build_result
 
 @pytest.fixture(scope="session")
