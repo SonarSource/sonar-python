@@ -25,7 +25,7 @@ public class IPynb extends AbstractLanguage {
 
   public static final String KEY = "ipynb";
 
-  private static final String[] DEFAULT_FILE_SUFFIXES = { ".ipynb" };
+  private static final String[] DEFAULT_FILE_SUFFIXES = { KEY };
 
   public IPynb() {
     super(KEY, "IPython Notebooks");
