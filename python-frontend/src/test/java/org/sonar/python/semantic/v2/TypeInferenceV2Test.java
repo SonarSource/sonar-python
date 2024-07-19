@@ -409,8 +409,12 @@ class TypeInferenceV2Test {
 
     var functionDef = (FunctionDef) root.statements().statements().get(0);
     var lastExpressionStatement = (ExpressionStatement) functionDef.body().statements().get(functionDef.body().statements().size() -1);
-    Assertions.assertThat(lastExpressionStatement.expressions().get(0).typeV2().unwrappedType()).isEqualTo(LIST_TYPE);
-    Assertions.assertThat(lastExpressionStatement.expressions().get(0).typeV2().typeSource()).isEqualTo(TypeSource.TYPE_HINT);
+    var type = (ObjectType) lastExpressionStatement.expressions().get(0).typeV2();
+    Assertions.assertThat(type.unwrappedType()).isEqualTo(LIST_TYPE);
+    Assertions.assertThat(type.typeSource()).isEqualTo(TypeSource.TYPE_HINT);
+    Assertions.assertThat(type.attributes())
+      .extracting(PythonType::unwrappedType)
+      .containsOnly(INT_TYPE);
   }
 
   @Test
@@ -435,6 +439,35 @@ class TypeInferenceV2Test {
     var functionDef = (FunctionDef) root.statements().statements().get(0);
     var lastExpressionStatement = (ExpressionStatement) functionDef.body().statements().get(functionDef.body().statements().size() -1);
     Assertions.assertThat(lastExpressionStatement.expressions().get(0).typeV2().unwrappedType()).isEqualTo(PythonType.UNKNOWN);
+  }
+
+  @Test
+  void inferTypesInsideFunction12() {
+    FileInput root = inferTypes("""
+      o = "123"
+      def foo(param: o):
+        param
+      """);
+
+    var functionDef = (FunctionDef) root.statements().statements().get(1);
+    var lastExpressionStatement = (ExpressionStatement) functionDef.body().statements().get(functionDef.body().statements().size() -1);
+    Assertions.assertThat(lastExpressionStatement.expressions().get(0).typeV2().unwrappedType()).isEqualTo(PythonType.UNKNOWN);
+  }
+
+  @Test
+  void inferTypesInsideFunction13() {
+    FileInput root = inferTypes("""
+      def foo(param: int | str):
+        param
+      """);
+
+    var functionDef = (FunctionDef) root.statements().statements().get(0);
+    var lastExpressionStatement = (ExpressionStatement) functionDef.body().statements().get(functionDef.body().statements().size() -1);
+    var type = (UnionType) lastExpressionStatement.expressions().get(0).typeV2();
+    
+    Assertions.assertThat(type.candidates())
+      .extracting(PythonType::unwrappedType)
+      .containsOnly(INT_TYPE, STR_TYPE);
   }
 
   @Test

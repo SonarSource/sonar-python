@@ -31,6 +31,7 @@ import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.tree.ArgList;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
+import org.sonar.plugins.python.api.tree.BinaryExpression;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.DictionaryLiteral;
 import org.sonar.plugins.python.api.tree.DottedName;
@@ -338,15 +339,16 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
     scan(parameter.typeAnnotation());
     scan(parameter.defaultValue());
     Optional.ofNullable(parameter.typeAnnotation())
-      .map(TrivialTypeInferenceVisitor::resolveTypeAnnotationType)
+      .map(TypeAnnotation::expression)
+      .map(TrivialTypeInferenceVisitor::resolveTypeAnnotationExpressionType)
       .ifPresent(type -> setTypeToName(parameter.name(), type));
     scan(parameter.name());
   }
 
-  private static PythonType resolveTypeAnnotationType(TypeAnnotation typeAnnotation) {
-    if (typeAnnotation.expression() instanceof Name name && name.typeV2() != PythonType.UNKNOWN) {
+  private static PythonType resolveTypeAnnotationExpressionType(Expression expression) {
+    if (expression instanceof Name name && name.typeV2() != PythonType.UNKNOWN) {
       return new ObjectType(name.typeV2(), TypeSource.TYPE_HINT);
-    } else if (typeAnnotation.expression() instanceof SubscriptionExpression subscriptionExpression && subscriptionExpression.object().typeV2() != PythonType.UNKNOWN) {
+    } else if (expression instanceof SubscriptionExpression subscriptionExpression && subscriptionExpression.object().typeV2() != PythonType.UNKNOWN) {
       var candidateTypes = subscriptionExpression.subscripts()
         .expressions()
         .stream()
@@ -359,6 +361,10 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
       var attributes = new ArrayList<PythonType>();
       attributes.add(new ObjectType(elementsType, TypeSource.TYPE_HINT));
       return new ObjectType(subscriptionExpression.object().typeV2(), attributes, new ArrayList<>(), TypeSource.TYPE_HINT);
+    } else if (expression instanceof BinaryExpression binaryExpression) {
+      var left = resolveTypeAnnotationExpressionType(binaryExpression.leftOperand());
+      var right = resolveTypeAnnotationExpressionType(binaryExpression.rightOperand());
+      return UnionType.or(left, right);
     }
     return PythonType.UNKNOWN;
   }
@@ -402,13 +408,13 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
 
     bindingUsages.stream()
       .findFirst()
-      .flatMap(usage -> Optional.of(usage)
-        .map(UsageV2::tree)
-        .filter(Expression.class::isInstance)
-        .map(Expression.class::cast)
-        .map(Expression::typeV2)
-        // TODO: classes (SONARPY-1829) and functions should be propagated like other types
-        .filter(t -> (usage.kind() == UsageV2.Kind.PARAMETER) || (t instanceof ClassType) || (t instanceof FunctionType)))
+      .filter(UsageV2::isBindingUsage)
+      .map(UsageV2::tree)
+      .filter(Expression.class::isInstance)
+      .map(Expression.class::cast)
+      .map(Expression::typeV2)
+      // TODO: classes (SONARPY-1829) and functions should be propagated like other types
+      .filter(t -> (t instanceof ClassType) || (t instanceof FunctionType))
       .ifPresent(type -> setTypeToName(name, type));
   }
 

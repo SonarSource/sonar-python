@@ -22,8 +22,6 @@ package org.sonar.python.semantic.v2;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.Map;
-import java.util.Optional;
 import java.util.Set;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
@@ -136,10 +134,7 @@ public class TypeInferenceV2 {
     // TODO: infer parameter type based on default value assignement
     var parameterTypes = trackedVars
       .stream()
-      .map(TypeInferenceV2::getParameterType)
-      .filter(Optional::isPresent)
-      .map(Optional::get)
-      .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+      .collect(Collectors.toMap(SymbolV2::name, TypeInferenceV2::getParameterType));
 
     FlowSensitiveTypeInference flowSensitiveTypeInference = new FlowSensitiveTypeInference(
       trackedVars,
@@ -151,7 +146,7 @@ public class TypeInferenceV2 {
     flowSensitiveTypeInference.compute(cfg);
   }
 
-  private static Optional<Map.Entry<String, PythonType>> getParameterType(SymbolV2 symbol) {
+  private static PythonType getParameterType(SymbolV2 symbol) {
     return symbol.usages()
       .stream()
       .filter(usage -> usage.kind() == UsageV2.Kind.PARAMETER)
@@ -160,7 +155,7 @@ public class TypeInferenceV2 {
       .map(Expression.class::cast)
       .map(Expression::typeV2)
       .findFirst()
-      .map(t -> Map.entry(symbol.name(), t));
+      .orElse(PythonType.UNKNOWN);
   }
 
   private static Set<SymbolV2> getTrackedVars(Set<SymbolV2> localVariables, Set<Name> assignedNames) {
