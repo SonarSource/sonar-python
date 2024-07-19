@@ -115,7 +115,7 @@ public final class PythonSensor implements Sensor {
   @Override
   public void execute(SensorContext context) {
     PerformanceMeasure.Duration durationReport = createPerformanceMeasureReport(context);
-    List<InputFile> pythonFiles = getInputFiles(context);
+    List<PythonInputFile> pythonFiles = getInputFiles(context);
     String[] pythonVersionParameter = context.config().getStringArray(PYTHON_VERSION_KEY);
     if (pythonVersionParameter.length == 0 && context.runtime().getProduct() != SonarProduct.SONARLINT) {
       LOG.warn(UNSET_VERSION_WARNING);
@@ -133,11 +133,11 @@ public final class PythonSensor implements Sensor {
     durationReport.stop();
   }
 
-  private static List<InputFile> getInputFiles(SensorContext context) {
+  private static List<PythonInputFile> getInputFiles(SensorContext context) {
     FilePredicates p = context.fileSystem().predicates();
     Iterable<InputFile> it = context.fileSystem().inputFiles(p.and(p.hasLanguage(Python.KEY)));
-    List<InputFile> list = new ArrayList<>();
-    it.forEach(list::add);
+    List<PythonInputFile> list = new ArrayList<>();
+    it.forEach(f -> list.add(new  PythonInputFileImpl(f)));
     return Collections.unmodifiableList(list);
   }
 
