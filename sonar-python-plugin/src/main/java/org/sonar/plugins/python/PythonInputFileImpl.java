@@ -32,14 +32,19 @@ public class PythonInputFileImpl implements PythonInputFile {
     return this.wrappedFile;
   }
 
+  @Override
   public String toString() {
     return wrappedFile.toString();
   }
 
+
+  @Override
   public boolean equals(Object obj) {
     return wrappedFile.equals(obj);
   }
 
+
+  @Override
   public int hashCode() {
     return wrappedFile.hashCode();
   }

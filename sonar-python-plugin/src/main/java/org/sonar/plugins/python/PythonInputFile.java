@@ -25,9 +25,4 @@ public interface PythonInputFile {
 
   InputFile wrappedFile();
 
-  boolean equals(Object obj);
-
-  int hashCode();
-
-  String toString();
 }
