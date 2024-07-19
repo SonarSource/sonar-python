@@ -22,25 +22,25 @@ package org.sonar.plugins.python;
 import org.sonar.api.batch.fs.InputFile;
 
 public class PythonInputFileImpl implements PythonInputFile {
-  InputFile originalFile;
+  InputFile wrappedFile;
 
-  public PythonInputFileImpl(InputFile originalFile) {
-    this.originalFile = originalFile;
+  public PythonInputFileImpl(InputFile wrappedFile) {
+    this.wrappedFile = wrappedFile;
   }
 
-  public InputFile originalFile() {
-    return this.originalFile;
+  public InputFile wrappedFile() {
+    return this.wrappedFile;
   }
 
   public String toString() {
-    return originalFile.toString();
+    return wrappedFile.toString();
   }
 
   public boolean equals(Object obj) {
-    return originalFile.equals(obj);
+    return wrappedFile.equals(obj);
   }
 
   public int hashCode() {
-    return originalFile.hashCode();
+    return wrappedFile.hashCode();
   }
 }

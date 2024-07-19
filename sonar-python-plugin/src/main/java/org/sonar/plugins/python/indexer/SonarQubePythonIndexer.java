@@ -66,7 +66,7 @@ public class SonarQubePythonIndexer extends PythonIndexer {
     this.caching = new Caching(cacheContext, getCacheVersion(context));
     inputFiles.forEach(f -> {
       this.inputFiles.add(f);
-      inputFileToFQN.put(f, SymbolUtils.fullyQualifiedModuleName(packageName(f), f.originalFile().filename()));
+      inputFileToFQN.put(f, SymbolUtils.fullyQualifiedModuleName(packageName(f), f.wrappedFile().filename()));
     });
   }
 
@@ -141,13 +141,13 @@ public class SonarQubePythonIndexer extends PythonIndexer {
       return false;
     }
 
-    Set<String> imports = caching.readImportMapEntry(inputFile.originalFile().key());
+    Set<String> imports = caching.readImportMapEntry(inputFile.wrappedFile().key());
     if (imports != null) {
       importsByModule.put(currFQN, imports);
     }
-    Set<Descriptor> descriptors = caching.readProjectLevelSymbolTableEntry(inputFile.originalFile().key());
+    Set<Descriptor> descriptors = caching.readProjectLevelSymbolTableEntry(inputFile.wrappedFile().key());
     if (descriptors != null && imports != null) {
-      saveRetrievedDescriptors(inputFile.originalFile().key(), descriptors, caching);
+      saveRetrievedDescriptors(inputFile.wrappedFile().key(), descriptors, caching);
       return true;
     }
 
@@ -155,17 +155,17 @@ public class SonarQubePythonIndexer extends PythonIndexer {
   }
 
   private boolean fileIsUnchanged(PythonInputFile inputFile) {
-    if (!inputFile.originalFile().status().equals(InputFile.Status.SAME)) {
+    if (!inputFile.wrappedFile().status().equals(InputFile.Status.SAME)) {
       return false;
     }
-    byte[] fileHash = caching.readFileContentHash(inputFile.originalFile().key());
+    byte[] fileHash = caching.readFileContentHash(inputFile.wrappedFile().key());
     // InputFile.Status is not reliable in some cases
     // We use the hash of the file's content to double-check the content is the same.
     try {
-      byte[] bytes = FileHashingUtils.inputFileContentHash(inputFile.originalFile());
+      byte[] bytes = FileHashingUtils.inputFileContentHash(inputFile.wrappedFile());
       return MessageDigest.isEqual(fileHash, bytes);
     } catch (IOException | NoSuchAlgorithmException e) {
-      LOG.debug("Failed to compute content hash for file {}", inputFile.originalFile().key());
+      LOG.debug("Failed to compute content hash for file {}", inputFile.wrappedFile().key());
       return false;
     }
   }
@@ -200,8 +200,8 @@ public class SonarQubePythonIndexer extends PythonIndexer {
         if (!writeContentHashToCache(inputFile)) {
           return;
         }
-        caching.writeProjectLevelSymbolTableEntry(inputFile.originalFile().key(), descriptors);
-        caching.writeImportsMapEntry(inputFile.originalFile().key(), imports);
+        caching.writeProjectLevelSymbolTableEntry(inputFile.wrappedFile().key(), descriptors);
+        caching.writeImportsMapEntry(inputFile.wrappedFile().key(), imports);
       }
     }
   }
@@ -209,12 +209,12 @@ public class SonarQubePythonIndexer extends PythonIndexer {
   private boolean writeContentHashToCache(PythonInputFile inputFile) {
     byte[] contentHash;
     try {
-      contentHash = FileHashingUtils.inputFileContentHash(inputFile.originalFile());
+      contentHash = FileHashingUtils.inputFileContentHash(inputFile.wrappedFile());
     } catch (IOException | NoSuchAlgorithmException e) {
-      LOG.debug("Failed to compute content hash for file {}", inputFile.originalFile().key());
+      LOG.debug("Failed to compute content hash for file {}", inputFile.wrappedFile().key());
       return false;
     }
-    caching.writeFileContentHash(inputFile.originalFile().key(), contentHash);
+    caching.writeFileContentHash(inputFile.wrappedFile().key(), contentHash);
     return true;
   }
 

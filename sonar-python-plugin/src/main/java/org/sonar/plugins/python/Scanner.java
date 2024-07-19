@@ -42,7 +42,7 @@ public abstract class Scanner {
     ProgressReport progressReport = new ProgressReport(this.name() + " progress", TimeUnit.SECONDS.toMillis(10));
     String name = this.name();
     LOG.info("Starting {}", name);
-    List<String> filenames = files.stream().map(PythonInputFile::originalFile).map(InputFile::toString).toList();
+    List<String> filenames = files.stream().map(PythonInputFile::wrappedFile).map(InputFile::toString).toList();
 
     int numScannedWithoutParsing = 0;
     progressReport.start(filenames);
@@ -99,6 +99,6 @@ public abstract class Scanner {
 
   private static boolean isParseErrorOnTestFile(PythonInputFile file, Exception e) {
     // As test files may contain invalid syntax on purpose, we avoid failing the analysis when encountering parse errors on them
-    return e instanceof RecognitionException && file.originalFile().type() == InputFile.Type.TEST;
+    return e instanceof RecognitionException && file.wrappedFile().type() == InputFile.Type.TEST;
   }
 }

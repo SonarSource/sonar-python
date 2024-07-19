@@ -65,39 +65,39 @@ public abstract class PythonIndexer {
   }
 
   public String packageName(PythonInputFile inputFile) {
-    if (!packageNames.containsKey(inputFile.originalFile().uri())) {
-      String name = pythonPackageName(inputFile.originalFile().file(), projectBaseDirAbsolutePath);
-      packageNames.put(inputFile.originalFile().uri(), name);
+    if (!packageNames.containsKey(inputFile.wrappedFile().uri())) {
+      String name = pythonPackageName(inputFile.wrappedFile().file(), projectBaseDirAbsolutePath);
+      packageNames.put(inputFile.wrappedFile().uri(), name);
       projectLevelSymbolTable.addProjectPackage(name);
     }
-    return packageNames.get(inputFile.originalFile().uri());
+    return packageNames.get(inputFile.wrappedFile().uri());
   }
 
   public void collectPackageNames(List<PythonInputFile> inputFiles) {
     for (PythonInputFile inputFile : inputFiles) {
-      String packageName = pythonPackageName(inputFile.originalFile().file(), projectBaseDirAbsolutePath);
+      String packageName = pythonPackageName(inputFile.wrappedFile().file(), projectBaseDirAbsolutePath);
       projectLevelSymbolTable.addProjectPackage(packageName);
     }
   }
 
   void removeFile(PythonInputFile inputFile) {
-    String packageName = packageNames.get(inputFile.originalFile().uri());
-    String filename = inputFile.originalFile().filename();
+    String packageName = packageNames.get(inputFile.wrappedFile().uri());
+    String filename = inputFile.wrappedFile().filename();
     if (packageName == null) {
       LOG.debug("Failed to remove file \"{}\" from project-level symbol table (file not indexed)", filename);
       return;
     }
-    packageNames.remove(inputFile.originalFile().uri());
+    packageNames.remove(inputFile.wrappedFile().uri());
     projectLevelSymbolTable.removeModule(packageName, filename);
   }
 
   void addFile(PythonInputFile inputFile) throws IOException {
-    AstNode astNode = parser.parse(inputFile.originalFile().contents());
+    AstNode astNode = parser.parse(inputFile.wrappedFile().contents());
     FileInput astRoot = new PythonTreeMaker().fileInput(astNode);
-    String packageName = pythonPackageName(inputFile.originalFile().file(), projectBaseDirAbsolutePath);
-    packageNames.put(inputFile.originalFile().uri(), packageName);
+    String packageName = pythonPackageName(inputFile.wrappedFile().file(), projectBaseDirAbsolutePath);
+    packageNames.put(inputFile.wrappedFile().uri(), packageName);
     projectLevelSymbolTable.addProjectPackage(packageName);
-    PythonFile pythonFile = SonarQubePythonFile.create(inputFile.originalFile());
+    PythonFile pythonFile = SonarQubePythonFile.create(inputFile.wrappedFile());
     projectLevelSymbolTable.addModule(astRoot, packageName, pythonFile);
   }
 

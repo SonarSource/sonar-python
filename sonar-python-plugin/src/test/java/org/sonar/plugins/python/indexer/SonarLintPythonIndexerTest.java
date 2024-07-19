@@ -110,7 +110,7 @@ class SonarLintPythonIndexerTest {
   void test_indexer_removed_file() {
     ModuleFileEvent moduleFileEvent = mock(ModuleFileEvent.class);
     when(moduleFileEvent.getType()).thenReturn(ModuleFileEvent.Type.DELETED);
-    when(moduleFileEvent.getTarget()).thenReturn(file2.originalFile());
+    when(moduleFileEvent.getTarget()).thenReturn(file2.wrappedFile());
     pythonIndexer.process(moduleFileEvent);
 
     assertThat(projectLevelSymbolTable.getSymbolsFromModule("main")).hasSize(1);
@@ -123,7 +123,7 @@ class SonarLintPythonIndexerTest {
   void test_indexer_file_removed_twice() {
     ModuleFileEvent moduleFileEvent = mock(ModuleFileEvent.class);
     when(moduleFileEvent.getType()).thenReturn(ModuleFileEvent.Type.DELETED);
-    when(moduleFileEvent.getTarget()).thenReturn(file2.originalFile());
+    when(moduleFileEvent.getTarget()).thenReturn(file2.wrappedFile());
     pythonIndexer.process(moduleFileEvent);
 
     assertThat(projectLevelSymbolTable.getSymbolsFromModule("mod")).isNull();
@@ -137,7 +137,7 @@ class SonarLintPythonIndexerTest {
     PythonInputFile file3 = createInputFile("added.py");
     ModuleFileEvent moduleFileEvent = mock(ModuleFileEvent.class);
     when(moduleFileEvent.getType()).thenReturn(ModuleFileEvent.Type.CREATED);
-    when(moduleFileEvent.getTarget()).thenReturn(file3.originalFile());
+    when(moduleFileEvent.getTarget()).thenReturn(file3.wrappedFile());
     pythonIndexer.process(moduleFileEvent);
 
     assertThat(projectLevelSymbolTable.getSymbolsFromModule("main")).hasSize(1);
@@ -169,7 +169,7 @@ class SonarLintPythonIndexerTest {
   void test_indexer_modified_file() throws IOException {
     ModuleFileEvent moduleFileEvent = mock(ModuleFileEvent.class);
     when(moduleFileEvent.getType()).thenReturn(ModuleFileEvent.Type.MODIFIED);
-    when(moduleFileEvent.getTarget()).thenReturn(file2.originalFile());
+    when(moduleFileEvent.getTarget()).thenReturn(file2.wrappedFile());
     pythonIndexer.process(moduleFileEvent);
 
     assertThat(projectLevelSymbolTable.getSymbolsFromModule("main")).hasSize(1);
@@ -216,7 +216,7 @@ class SonarLintPythonIndexerTest {
   private void testNonPythonFile(@Nullable String language) {
     ModuleFileEvent moduleFileEvent = mock(ModuleFileEvent.class);
     PythonInputFile txtFile = createInputFile("non_python.txt", language);
-    when(moduleFileEvent.getTarget()).thenReturn(txtFile.originalFile());
+    when(moduleFileEvent.getTarget()).thenReturn(txtFile.wrappedFile());
     try {
       pythonIndexer.process(moduleFileEvent);
     } catch (RecognitionException exception) {
@@ -228,7 +228,7 @@ class SonarLintPythonIndexerTest {
 
   private PythonInputFile inputFile(String name) {
     PythonInputFile inputFile = createInputFile(name);
-    context.fileSystem().add(inputFile.originalFile());
+    context.fileSystem().add(inputFile.wrappedFile());
     return inputFile;
   }
 

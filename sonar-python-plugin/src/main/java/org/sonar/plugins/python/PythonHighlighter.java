@@ -95,7 +95,7 @@ public class PythonHighlighter extends PythonSubscriptionCheck {
   public PythonHighlighter(SensorContext context, PythonInputFile inputFile) {
     docStringTokens = new HashSet<>();
     newHighlighting = context.newHighlighting();
-    newHighlighting.onFile(inputFile.originalFile());
+    newHighlighting.onFile(inputFile.wrappedFile());
   }
 
   @Override

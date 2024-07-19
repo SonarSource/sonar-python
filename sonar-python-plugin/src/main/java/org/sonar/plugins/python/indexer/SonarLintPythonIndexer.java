@@ -68,7 +68,7 @@ public class SonarLintPythonIndexer extends PythonIndexer implements ModuleFileL
     shouldBuildProjectSymbolTable = false;
     List<PythonInputFile> files = getInputFiles(moduleFileSystem);
     collectPackageNames(files);
-    long nLines = files.stream().map(PythonInputFile::originalFile).map(InputFile::lines).mapToLong(Integer::longValue).sum();
+    long nLines = files.stream().map(PythonInputFile::wrappedFile).map(InputFile::lines).mapToLong(Integer::longValue).sum();
     long maxLinesForIndexing = context.config().getLong(MAX_LINES_PROPERTY).orElse(DEFAULT_MAX_LINES_FOR_INDEXING);
     if (nLines > maxLinesForIndexing) {
       // Avoid performance issues for large projects
@@ -113,19 +113,19 @@ public class SonarLintPythonIndexer extends PythonIndexer implements ModuleFileL
   @Override
   void addFile(PythonInputFile inputFile) throws IOException {
     super.addFile(inputFile);
-    indexedFiles.put(inputFile.originalFile().absolutePath(), inputFile.originalFile());
+    indexedFiles.put(inputFile.wrappedFile().absolutePath(), inputFile.wrappedFile());
   }
 
   @Override
   void removeFile(PythonInputFile inputFile) {
     super.removeFile(inputFile);
-    indexedFiles.remove(inputFile.originalFile().absolutePath());
+    indexedFiles.remove(inputFile.wrappedFile().absolutePath());
   }
 
   @Override
   public void process(ModuleFileEvent moduleFileEvent) {
     PythonInputFile target = new PythonInputFileImpl(moduleFileEvent.getTarget());
-    String language = target.originalFile().language();
+    String language = target.wrappedFile().language();
     if (language == null || !language.equals(Python.KEY)) {
       LOG.debug("Module file event for {} has been ignored because it's not a Python file.", target);
       return;
@@ -138,7 +138,7 @@ public class SonarLintPythonIndexer extends PythonIndexer implements ModuleFileL
       try {
         addFile(target);
       } catch (IOException e) {
-        LOG.debug("Failed to load file \"{}\" ({}) to the project symbol table", target.originalFile().filename(), type);
+        LOG.debug("Failed to load file \"{}\" ({}) to the project symbol table", target.wrappedFile().filename(), type);
       }
     }
   }

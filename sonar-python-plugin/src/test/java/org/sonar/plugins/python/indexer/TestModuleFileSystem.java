@@ -35,12 +35,12 @@ public class TestModuleFileSystem implements ModuleFileSystem {
 
   @Override
   public Stream<InputFile> files(String s, InputFile.Type type) {
-    return inputFiles.stream().map(PythonInputFile::originalFile);
+    return inputFiles.stream().map(PythonInputFile::wrappedFile);
   }
 
   @Override
   public Stream<InputFile> files() {
-    return inputFiles.stream().map(PythonInputFile::originalFile);
+    return inputFiles.stream().map(PythonInputFile::wrappedFile);
   }
 
   public void addFile(PythonInputFile inputFile) {

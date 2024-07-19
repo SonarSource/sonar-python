@@ -368,19 +368,19 @@ class PythonSensorTest {
     while (issuesIterator.hasNext()) {
       Issue issue = issuesIterator.next();
       IssueLocation issueLocation = issue.primaryLocation();
-      assertThat(issueLocation.inputComponent()).isEqualTo(inputFile.originalFile());
+      assertThat(issueLocation.inputComponent()).isEqualTo(inputFile.wrappedFile());
 
       switch (issue.ruleKey().rule()) {
         case "S134":
           assertThat(issueLocation.message()).isEqualTo("Refactor this code to not nest more than 4 \"if\", \"for\", \"while\", \"try\" and \"with\" statements.");
-          assertThat(issueLocation.textRange()).isEqualTo(inputFile.originalFile().newRange(7, 16, 7, 18));
+          assertThat(issueLocation.textRange()).isEqualTo(inputFile.wrappedFile().newRange(7, 16, 7, 18));
           assertThat(issue.flows()).hasSize(4);
           assertThat(issue.gap()).isNull();
           checkedIssues++;
           break;
         case ONE_STATEMENT_PER_LINE_RULE_KEY:
           assertThat(issueLocation.message()).isEqualTo("At most one statement is allowed per line, but 2 statements were found on this line.");
-          assertThat(issueLocation.textRange()).isEqualTo(inputFile.originalFile().newRange(1, 0, 1, 50));
+          assertThat(issueLocation.textRange()).isEqualTo(inputFile.wrappedFile().newRange(1, 0, 1, 50));
           assertThat(issue.flows()).isEmpty();
           assertThat(issue.gap()).isNull();
           checkedIssues++;
@@ -422,8 +422,8 @@ class PythonSensorTest {
     assertThat(issue.flows()).hasSize(1);
     Issue.Flow flow = issue.flows().get(0);
     assertThat(flow.locations()).hasSize(2);
-    assertThat(flow.locations().get(0).inputComponent()).isEqualTo(mainFile.originalFile());
-    assertThat(flow.locations().get(1).inputComponent()).isEqualTo(modFile.originalFile());
+    assertThat(flow.locations().get(0).inputComponent()).isEqualTo(mainFile.wrappedFile());
+    assertThat(flow.locations().get(1).inputComponent()).isEqualTo(modFile.wrappedFile());
   }
 
   @Test
@@ -454,12 +454,12 @@ class PythonSensorTest {
     sensor(null, pythonIndexer, analysisWarning).execute(context);
     assertThat(context.allIssues()).hasSize(1);
     Issue issue = context.allIssues().iterator().next();
-    assertThat(issue.primaryLocation().inputComponent()).isEqualTo(mainFile.originalFile());
+    assertThat(issue.primaryLocation().inputComponent()).isEqualTo(mainFile.wrappedFile());
     assertThat(issue.flows()).hasSize(1);
     Issue.Flow flow = issue.flows().get(0);
     assertThat(flow.locations()).hasSize(2);
-    assertThat(flow.locations().get(0).inputComponent()).isEqualTo(mainFile.originalFile());
-    assertThat(flow.locations().get(1).inputComponent()).isEqualTo(modFile.originalFile());
+    assertThat(flow.locations().get(0).inputComponent()).isEqualTo(mainFile.wrappedFile());
+    assertThat(flow.locations().get(1).inputComponent()).isEqualTo(modFile.wrappedFile());
   }
 
   @Test
@@ -491,7 +491,7 @@ class PythonSensorTest {
     sensor(null, pythonIndexer, analysisWarning).execute(context);
     assertThat(context.allIssues()).hasSize(1);
     Issue issue = context.allIssues().iterator().next();
-    assertThat(issue.primaryLocation().inputComponent()).isEqualTo(mainFile.originalFile());
+    assertThat(issue.primaryLocation().inputComponent()).isEqualTo(mainFile.wrappedFile());
     assertThat(issue.ruleKey().rule()).isEqualTo("S6709");
   }
 
@@ -557,7 +557,7 @@ class PythonSensorTest {
 
     assertThat(context.allIssues()).hasSize(1);
     Issue issue = context.allIssues().iterator().next();
-    assertThat(issue.primaryLocation().inputComponent()).isEqualTo(inputFile.originalFile());
+    assertThat(issue.primaryLocation().inputComponent()).isEqualTo(inputFile.wrappedFile());
     assertThat(issue.ruleKey().rule()).isEqualTo("S5905");
   }
 
@@ -656,7 +656,7 @@ class PythonSensorTest {
 
   @Test
   void test_exception_should_fail_analysis_if_configured_so() throws IOException {
-    DefaultInputFile inputFile = (DefaultInputFile) spy(createInputFile(FILE_1).originalFile());
+    DefaultInputFile inputFile = (DefaultInputFile) spy(createInputFile(FILE_1).wrappedFile());
     when(inputFile.contents()).thenThrow(FileNotFoundException.class);
     context.fileSystem().add(inputFile);
 
@@ -671,7 +671,7 @@ class PythonSensorTest {
 
   @Test
   void test_python_version_parameter_warning() {
-    context.fileSystem().add(inputFile(FILE_1).originalFile());
+    context.fileSystem().add(inputFile(FILE_1).wrappedFile());
 
     activeRules = new ActiveRulesBuilder().build();
 
@@ -682,7 +682,7 @@ class PythonSensorTest {
 
   @Test
   void test_python_version_parameter_no_warning() {
-    context.fileSystem().add(inputFile(FILE_1).originalFile());
+    context.fileSystem().add(inputFile(FILE_1).wrappedFile());
 
     activeRules = new ActiveRulesBuilder().build();
 
@@ -694,7 +694,7 @@ class PythonSensorTest {
   }
 
   void setup_typing_concise_rule(String pythonVersion) {
-    context.fileSystem().add(inputFile("python-version/typing.py").originalFile());
+    context.fileSystem().add(inputFile("python-version/typing.py").wrappedFile());
 
     activeRules = new ActiveRulesBuilder().addRule(new NewActiveRule.Builder()
       .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, "S6546"))
@@ -764,7 +764,7 @@ class PythonSensorTest {
     activeRules = (new ActiveRulesBuilder()).build();
     context.setCancelled(true);
     sensor(null, null, analysisWarning).execute(context);
-    assertThat(context.measure(inputFile.originalFile().key(), CoreMetrics.NCLOC)).isNull();
+    assertThat(context.measure(inputFile.wrappedFile().key(), CoreMetrics.NCLOC)).isNull();
     assertThat(context.allAnalysisErrors()).isEmpty();
   }
 
@@ -849,11 +849,11 @@ class PythonSensorTest {
 
     byte[] serializedSymbolTable = toProtobufModuleDescriptor(Set.of(new VariableDescriptor("x", "main.x", null))).toByteArray();
     CpdSerializer.SerializationResult cpdTokens = CpdSerializer.serialize(Collections.emptyList());
-    readCache.put(importsMapCacheKey(inputFile.originalFile().key()), String.join(";", Collections.emptyList()).getBytes(StandardCharsets.UTF_8));
-    readCache.put(projectSymbolTableCacheKey(inputFile.originalFile().key()), serializedSymbolTable);
-    readCache.put(CPD_TOKENS_CACHE_KEY_PREFIX + inputFile.originalFile().key(), cpdTokens.data);
-    readCache.put(CPD_TOKENS_STRING_TABLE_KEY_PREFIX + inputFile.originalFile().key(), cpdTokens.stringTable);
-    readCache.put(fileContentHashCacheKey(inputFile.originalFile().key()), FileHashingUtils.inputFileContentHash(inputFile.originalFile()));
+    readCache.put(importsMapCacheKey(inputFile.wrappedFile().key()), String.join(";", Collections.emptyList()).getBytes(StandardCharsets.UTF_8));
+    readCache.put(projectSymbolTableCacheKey(inputFile.wrappedFile().key()), serializedSymbolTable);
+    readCache.put(CPD_TOKENS_CACHE_KEY_PREFIX + inputFile.wrappedFile().key(), cpdTokens.data);
+    readCache.put(CPD_TOKENS_STRING_TABLE_KEY_PREFIX + inputFile.wrappedFile().key(), cpdTokens.stringTable);
+    readCache.put(fileContentHashCacheKey(inputFile.wrappedFile().key()), FileHashingUtils.inputFileContentHash(inputFile.wrappedFile()));
     context.setPreviousCache(readCache);
     context.setNextCache(writeCache);
     context.setCacheEnabled(true);
@@ -879,9 +879,9 @@ class PythonSensorTest {
     PythonInputFile inputFile = inputFile(FILE_TEST_FILE, Type.TEST, InputFile.Status.SAME);
     byte[] serializedSymbolTable = toProtobufModuleDescriptor(Set.of(new VariableDescriptor("test_func", "test_file.test_func", null))).toByteArray();
     TestReadCache readCache = getValidReadCache();
-    readCache.put(fileContentHashCacheKey(inputFile.originalFile().key()), inputFileContentHash(inputFile.originalFile()));
-    readCache.put(importsMapCacheKey(inputFile.originalFile().key()), String.join(";", Collections.emptyList()).getBytes(StandardCharsets.UTF_8));
-    readCache.put(projectSymbolTableCacheKey(inputFile.originalFile().key()), serializedSymbolTable);
+    readCache.put(fileContentHashCacheKey(inputFile.wrappedFile().key()), inputFileContentHash(inputFile.wrappedFile()));
+    readCache.put(importsMapCacheKey(inputFile.wrappedFile().key()), String.join(";", Collections.emptyList()).getBytes(StandardCharsets.UTF_8));
+    readCache.put(projectSymbolTableCacheKey(inputFile.wrappedFile().key()), serializedSymbolTable);
     TestWriteCache writeCache = new TestWriteCache();
     writeCache.bind(readCache);
 
@@ -911,9 +911,9 @@ class PythonSensorTest {
     writeCache.bind(readCache);
 
     byte[] serializedSymbolTable = toProtobufModuleDescriptor(Set.of(new VariableDescriptor("x", "main.x", null))).toByteArray();
-    readCache.put(importsMapCacheKey(inputFile.originalFile().key()), String.join(";", Collections.emptyList()).getBytes(StandardCharsets.UTF_8));
-    readCache.put(projectSymbolTableCacheKey(inputFile.originalFile().key()), serializedSymbolTable);
-    readCache.put(fileContentHashCacheKey(inputFile.originalFile().key()), FileHashingUtils.inputFileContentHash(inputFile.originalFile()));
+    readCache.put(importsMapCacheKey(inputFile.wrappedFile().key()), String.join(";", Collections.emptyList()).getBytes(StandardCharsets.UTF_8));
+    readCache.put(projectSymbolTableCacheKey(inputFile.wrappedFile().key()), serializedSymbolTable);
+    readCache.put(fileContentHashCacheKey(inputFile.wrappedFile().key()), FileHashingUtils.inputFileContentHash(inputFile.wrappedFile()));
     context.setPreviousCache(readCache);
     context.setNextCache(writeCache);
     context.setCacheEnabled(true);
@@ -943,9 +943,9 @@ class PythonSensorTest {
     writeCache.bind(readCache);
 
     byte[] serializedSymbolTable = toProtobufModuleDescriptor(Set.of(new VariableDescriptor("x", "main.x", null))).toByteArray();
-    readCache.put(importsMapCacheKey(inputFile2.originalFile().key()), String.join(";", List.of("file1.py")).getBytes(StandardCharsets.UTF_8));
-    readCache.put(projectSymbolTableCacheKey(inputFile2.originalFile().key()), serializedSymbolTable);
-    readCache.put(fileContentHashCacheKey(inputFile2.originalFile().key()), FileHashingUtils.inputFileContentHash(inputFile2.originalFile()));
+    readCache.put(importsMapCacheKey(inputFile2.wrappedFile().key()), String.join(";", List.of("file1.py")).getBytes(StandardCharsets.UTF_8));
+    readCache.put(projectSymbolTableCacheKey(inputFile2.wrappedFile().key()), serializedSymbolTable);
+    readCache.put(fileContentHashCacheKey(inputFile2.wrappedFile().key()), FileHashingUtils.inputFileContentHash(inputFile2.wrappedFile()));
     context.setPreviousCache(readCache);
     context.setNextCache(writeCache);
     context.setCacheEnabled(true);
@@ -1033,7 +1033,7 @@ class PythonSensorTest {
     writeCache.bind(readCache);
 
     PythonInputFile inputFile = inputFile("pass.py", Type.MAIN, InputFile.Status.ADDED);
-    writeCache.write(CPD_TOKENS_CACHE_KEY_PREFIX + inputFile.originalFile().key(), "whatever".getBytes());
+    writeCache.write(CPD_TOKENS_CACHE_KEY_PREFIX + inputFile.wrappedFile().key(), "whatever".getBytes());
 
     context.setPreviousCache(readCache);
     context.setNextCache(writeCache);
@@ -1087,17 +1087,17 @@ class PythonSensorTest {
       .build();
 
     PythonInputFile inputFile = inputFile("main.py", Type.MAIN, InputFile.Status.SAME);
-    var sslrToken = passToken(inputFile.originalFile().uri());
+    var sslrToken = passToken(inputFile.wrappedFile().uri());
     List<Token> tokens = List.of(new TokenImpl(sslrToken));
 
     TestReadCache readCache = getValidReadCache();
     CpdSerializer.SerializationResult cpdTokens = CpdSerializer.serialize(tokens);
-    readCache.put(CPD_TOKENS_CACHE_KEY_PREFIX + inputFile.originalFile().key(), cpdTokens.data);
-    readCache.put(CPD_TOKENS_STRING_TABLE_KEY_PREFIX + inputFile.originalFile().key(), cpdTokens.stringTable);
+    readCache.put(CPD_TOKENS_CACHE_KEY_PREFIX + inputFile.wrappedFile().key(), cpdTokens.data);
+    readCache.put(CPD_TOKENS_STRING_TABLE_KEY_PREFIX + inputFile.wrappedFile().key(), cpdTokens.stringTable);
     byte[] serializedSymbolTable = toProtobufModuleDescriptor(Collections.emptySet()).toByteArray();
-    readCache.put(importsMapCacheKey(inputFile.originalFile().key()), String.join(";", Collections.emptyList()).getBytes(StandardCharsets.UTF_8));
-    readCache.put(projectSymbolTableCacheKey(inputFile.originalFile().key()), serializedSymbolTable);
-    readCache.put(fileContentHashCacheKey(inputFile.originalFile().key()), FileHashingUtils.inputFileContentHash(inputFile.originalFile()));
+    readCache.put(importsMapCacheKey(inputFile.wrappedFile().key()), String.join(";", Collections.emptyList()).getBytes(StandardCharsets.UTF_8));
+    readCache.put(projectSymbolTableCacheKey(inputFile.wrappedFile().key()), serializedSymbolTable);
+    readCache.put(fileContentHashCacheKey(inputFile.wrappedFile().key()), FileHashingUtils.inputFileContentHash(inputFile.wrappedFile()));
 
     TestWriteCache writeCache = new TestWriteCache();
     writeCache.bind(readCache);
@@ -1119,8 +1119,8 @@ class PythonSensorTest {
 
     // Verify that we carried the tokens over to the next cache
     assertThat(writeCache.getData())
-      .containsEntry(CPD_TOKENS_CACHE_KEY_PREFIX + inputFile.originalFile().key(), cpdTokens.data)
-      .containsEntry(CPD_TOKENS_STRING_TABLE_KEY_PREFIX + inputFile.originalFile().key(), cpdTokens.stringTable);
+      .containsEntry(CPD_TOKENS_CACHE_KEY_PREFIX + inputFile.wrappedFile().key(), cpdTokens.data)
+      .containsEntry(CPD_TOKENS_STRING_TABLE_KEY_PREFIX + inputFile.wrappedFile().key(), cpdTokens.stringTable);
   }
 
   @Test
@@ -1135,8 +1135,8 @@ class PythonSensorTest {
 
     TestReadCache readCache = getValidReadCache();
     byte[] serializedSymbolTable = toProtobufModuleDescriptor(Collections.emptySet()).toByteArray();
-    readCache.put(importsMapCacheKey(inputFile.originalFile().key()), String.join(";", Collections.emptyList()).getBytes(StandardCharsets.UTF_8));
-    readCache.put(projectSymbolTableCacheKey(inputFile.originalFile().key()), serializedSymbolTable);
+    readCache.put(importsMapCacheKey(inputFile.wrappedFile().key()), String.join(";", Collections.emptyList()).getBytes(StandardCharsets.UTF_8));
+    readCache.put(projectSymbolTableCacheKey(inputFile.wrappedFile().key()), serializedSymbolTable);
 
     TestWriteCache writeCache = new TestWriteCache();
     writeCache.bind(readCache);
@@ -1157,12 +1157,12 @@ class PythonSensorTest {
     assertThat(tokensLines.get(0).getValue()).isEqualTo("pass");
 
     // Verify that we carried the tokens over to the next cache
-    List<Token> expectedTokens = List.of(new TokenImpl(passToken(inputFile.originalFile().uri())));
+    List<Token> expectedTokens = List.of(new TokenImpl(passToken(inputFile.wrappedFile().uri())));
     CpdSerializer.SerializationResult cpdTokens = CpdSerializer.serialize(expectedTokens);
 
     assertThat(writeCache.getData())
-      .containsEntry(Caching.CPD_TOKENS_CACHE_KEY_PREFIX + inputFile.originalFile().key(), cpdTokens.data)
-      .containsEntry(CPD_TOKENS_STRING_TABLE_KEY_PREFIX + inputFile.originalFile().key(), cpdTokens.stringTable);
+      .containsEntry(Caching.CPD_TOKENS_CACHE_KEY_PREFIX + inputFile.wrappedFile().key(), cpdTokens.data)
+      .containsEntry(CPD_TOKENS_STRING_TABLE_KEY_PREFIX + inputFile.wrappedFile().key(), cpdTokens.stringTable);
   }
 
   @Test
@@ -1174,18 +1174,18 @@ class PythonSensorTest {
       .build();
 
     PythonInputFile inputFile = inputFile("pass.py", Type.MAIN, InputFile.Status.SAME);
-    var sslrToken = passToken(inputFile.originalFile().uri());
+    var sslrToken = passToken(inputFile.wrappedFile().uri());
     List<Token> tokens = List.of(new TokenImpl(sslrToken));
 
     TestReadCache readCache = getValidReadCache();
 
-    readCache.put(CPD_TOKENS_CACHE_KEY_PREFIX + inputFile.originalFile().key(), "not valid data".getBytes(UTF_8));
-    readCache.put(CPD_TOKENS_STRING_TABLE_KEY_PREFIX + inputFile.originalFile().key(), "not valid string table".getBytes(UTF_8));
+    readCache.put(CPD_TOKENS_CACHE_KEY_PREFIX + inputFile.wrappedFile().key(), "not valid data".getBytes(UTF_8));
+    readCache.put(CPD_TOKENS_STRING_TABLE_KEY_PREFIX + inputFile.wrappedFile().key(), "not valid string table".getBytes(UTF_8));
 
     byte[] serializedSymbolTable = toProtobufModuleDescriptor(Collections.emptySet()).toByteArray();
-    readCache.put(importsMapCacheKey(inputFile.originalFile().key()), String.join(";", Collections.emptyList()).getBytes(StandardCharsets.UTF_8));
-    readCache.put(projectSymbolTableCacheKey(inputFile.originalFile().key()), serializedSymbolTable);
-    readCache.put(fileContentHashCacheKey(inputFile.originalFile().key()), FileHashingUtils.inputFileContentHash(inputFile.originalFile()));
+    readCache.put(importsMapCacheKey(inputFile.wrappedFile().key()), String.join(";", Collections.emptyList()).getBytes(StandardCharsets.UTF_8));
+    readCache.put(projectSymbolTableCacheKey(inputFile.wrappedFile().key()), serializedSymbolTable);
+    readCache.put(fileContentHashCacheKey(inputFile.wrappedFile().key()), FileHashingUtils.inputFileContentHash(inputFile.wrappedFile()));
 
     TestWriteCache writeCache = new TestWriteCache();
     writeCache.bind(readCache);
@@ -1209,12 +1209,12 @@ class PythonSensorTest {
     assertThat(tokensLines.get(0).getValue()).isEqualTo("pass");
 
     // Verify that we carried the tokens over to the next cache
-    List<Token> expectedTokens = List.of(new TokenImpl(passToken(inputFile.originalFile().uri())));
+    List<Token> expectedTokens = List.of(new TokenImpl(passToken(inputFile.wrappedFile().uri())));
     CpdSerializer.SerializationResult cpdTokens = CpdSerializer.serialize(expectedTokens);
 
     assertThat(writeCache.getData())
-      .containsEntry(Caching.CPD_TOKENS_CACHE_KEY_PREFIX + inputFile.originalFile().key(), cpdTokens.data)
-      .containsEntry(CPD_TOKENS_STRING_TABLE_KEY_PREFIX + inputFile.originalFile().key(), cpdTokens.stringTable);
+      .containsEntry(Caching.CPD_TOKENS_CACHE_KEY_PREFIX + inputFile.wrappedFile().key(), cpdTokens.data)
+      .containsEntry(CPD_TOKENS_STRING_TABLE_KEY_PREFIX + inputFile.wrappedFile().key(), cpdTokens.stringTable);
   }
 
   @Test
@@ -1256,9 +1256,9 @@ class PythonSensorTest {
 
     TestReadCache readCache = getValidReadCache();
     byte[] serializedSymbolTable = toProtobufModuleDescriptor(Collections.emptySet()).toByteArray();
-    readCache.put(importsMapCacheKey(inputFile.originalFile().key()), String.join(";", Collections.emptyList()).getBytes(StandardCharsets.UTF_8));
-    readCache.put(projectSymbolTableCacheKey(inputFile.originalFile().key()), serializedSymbolTable);
-    readCache.put(fileContentHashCacheKey(inputFile.originalFile().key()), FileHashingUtils.inputFileContentHash(inputFile.originalFile()));
+    readCache.put(importsMapCacheKey(inputFile.wrappedFile().key()), String.join(";", Collections.emptyList()).getBytes(StandardCharsets.UTF_8));
+    readCache.put(projectSymbolTableCacheKey(inputFile.wrappedFile().key()), serializedSymbolTable);
+    readCache.put(fileContentHashCacheKey(inputFile.wrappedFile().key()), FileHashingUtils.inputFileContentHash(inputFile.wrappedFile()));
 
     TestWriteCache writeCache = new TestWriteCache();
     writeCache.bind(readCache);
@@ -1282,12 +1282,12 @@ class PythonSensorTest {
     assertThat(tokensLines.get(0).getValue()).isEqualTo("pass");
 
     // Verify that we carried the tokens over to the next cache
-    List<Token> expectedTokens = List.of(new TokenImpl(passToken(inputFile.originalFile().uri())));
+    List<Token> expectedTokens = List.of(new TokenImpl(passToken(inputFile.wrappedFile().uri())));
     CpdSerializer.SerializationResult cpdTokens = CpdSerializer.serialize(expectedTokens);
 
     assertThat(writeCache.getData())
-      .containsEntry(Caching.CPD_TOKENS_CACHE_KEY_PREFIX + inputFile.originalFile().key(), cpdTokens.data)
-      .containsEntry(CPD_TOKENS_STRING_TABLE_KEY_PREFIX + inputFile.originalFile().key(), cpdTokens.stringTable);
+      .containsEntry(Caching.CPD_TOKENS_CACHE_KEY_PREFIX + inputFile.wrappedFile().key(), cpdTokens.data)
+      .containsEntry(CPD_TOKENS_STRING_TABLE_KEY_PREFIX + inputFile.wrappedFile().key(), cpdTokens.stringTable);
   }
 
   private com.sonar.sslr.api.Token passToken(URI uri) {
@@ -1331,13 +1331,13 @@ class PythonSensorTest {
 
   private PythonInputFile inputFile(String name, Type fileType) {
     PythonInputFile inputFile = createInputFile(name, fileType, InputFile.Status.ADDED);
-    context.fileSystem().add(inputFile.originalFile());
+    context.fileSystem().add(inputFile.wrappedFile());
     return inputFile;
   }
 
   private PythonInputFile inputFile(String name, Type fileType, InputFile.Status status) {
     PythonInputFile inputFile = createInputFile(name, fileType, status);
-    context.fileSystem().add(inputFile.originalFile());
+    context.fileSystem().add(inputFile.wrappedFile());
     return inputFile;
   }
 

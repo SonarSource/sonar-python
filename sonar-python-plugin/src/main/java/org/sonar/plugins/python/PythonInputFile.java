@@ -23,7 +23,7 @@ import org.sonar.api.batch.fs.InputFile;
 
 public interface PythonInputFile {
 
-  InputFile originalFile();
+  InputFile wrappedFile();
 
   boolean equals(Object obj);
 

@@ -128,7 +128,7 @@ class IPynbSensorTest {
 
   private PythonInputFile inputFile(String name) {
     PythonInputFile inputFile = createInputFile(name);
-    context.fileSystem().add(inputFile.originalFile());
+    context.fileSystem().add(inputFile.wrappedFile());
     return inputFile;
   }
 

@@ -99,9 +99,9 @@ public class PythonScanner extends Scanner {
 
   @Override
   protected void scanFile(PythonInputFile inputFile) {
-    PythonFile pythonFile = SonarQubePythonFile.create(inputFile.originalFile());
+    PythonFile pythonFile = SonarQubePythonFile.create(inputFile.wrappedFile());
     PythonVisitorContext visitorContext;
-    InputFile.Type fileType = inputFile.originalFile().type();
+    InputFile.Type fileType = inputFile.wrappedFile().type();
     try {
       AstNode astNode = parser.parse(pythonFile.content());
       PythonTreeMaker treeMaker = getTreeMaker(inputFile);
@@ -122,8 +122,8 @@ public class PythonScanner extends Scanner {
       LOG.error("Unable to parse file: " + inputFile);
       LOG.error(e.getMessage());
       context.newAnalysisError()
-        .onFile(inputFile.originalFile())
-        .at(inputFile.originalFile().newPointer(e.getLine(), 0))
+        .onFile(inputFile.wrappedFile())
+        .at(inputFile.wrappedFile().newPointer(e.getLine(), 0))
         .message(e.getMessage())
         .save();
     }
@@ -143,18 +143,18 @@ public class PythonScanner extends Scanner {
     saveIssues(inputFile, visitorContext.getIssues());
 
     if (visitorContext.rootTree() != null && !isInSonarLint(context)) {
-      new SymbolVisitor(context.newSymbolTable().onFile(inputFile.originalFile())).visitFileInput(visitorContext.rootTree());
+      new SymbolVisitor(context.newSymbolTable().onFile(inputFile.wrappedFile())).visitFileInput(visitorContext.rootTree());
       new PythonHighlighter(context, inputFile).scanFile(visitorContext);
     }
   }
 
   private static PythonTreeMaker getTreeMaker(PythonInputFile inputFile) {
-    return Python.KEY.equals(inputFile.originalFile().language()) ? new PythonTreeMaker() : new IPythonTreeMaker();
+    return Python.KEY.equals(inputFile.wrappedFile().language()) ? new PythonTreeMaker() : new IPythonTreeMaker();
   }
 
   @Override
   public boolean scanFileWithoutParsing(PythonInputFile inputFile) {
-    InputFile.Type fileType = inputFile.originalFile().type();
+    InputFile.Type fileType = inputFile.wrappedFile().type();
     boolean result = true;
     for (PythonCheck check : checks.all()) {
       if (!isCheckApplicable(check, fileType)) {
@@ -166,7 +166,7 @@ public class PythonScanner extends Scanner {
         result = false;
         continue;
       }
-      PythonFile pythonFile = SonarQubePythonFile.create(inputFile.originalFile());
+      PythonFile pythonFile = SonarQubePythonFile.create(inputFile.wrappedFile());
       PythonInputFileContext inputFileContext = new PythonInputFileContext(pythonFile, context.fileSystem().workDir(), indexer.cacheContext(), context.runtime().getProduct());
       if (check.scanWithoutParsing(inputFileContext)) {
         Set<PythonCheck> executedChecks = checksExecutedWithoutParsingByFiles.getOrDefault(inputFile, new HashSet<>());
@@ -264,7 +264,7 @@ public class PythonScanner extends Scanner {
         newIssue.addFlow(secondaryLocationsFlow);
       }
 
-      handleQuickFixes(inputFile.originalFile(), ruleKey, newIssue, preciseIssue);
+      handleQuickFixes(inputFile.wrappedFile(), ruleKey, newIssue, preciseIssue);
 
       newIssue.save();
     }
@@ -282,13 +282,13 @@ public class PythonScanner extends Scanner {
 
   private static NewIssueLocation newLocation(PythonInputFile inputFile, NewIssue issue, IssueLocation location) {
     NewIssueLocation newLocation = issue.newLocation()
-      .on(inputFile.originalFile());
+      .on(inputFile.wrappedFile());
     if (location.startLine() != IssueLocation.UNDEFINED_LINE) {
       TextRange range;
       if (location.startLineOffset() == IssueLocation.UNDEFINED_OFFSET) {
-        range = inputFile.originalFile().selectLine(location.startLine());
+        range = inputFile.wrappedFile().selectLine(location.startLine());
       } else {
-        range = inputFile.originalFile().newRange(location.startLine(), location.startLineOffset(), location.endLine(), location.endLineOffset());
+        range = inputFile.wrappedFile().newRange(location.startLine(), location.startLineOffset(), location.endLine(), location.endLineOffset());
       }
       newLocation.at(range);
     }
@@ -304,10 +304,10 @@ public class PythonScanner extends Scanner {
     FileMetrics fileMetrics = new FileMetrics(visitorContext);
     FileLinesVisitor fileLinesVisitor = fileMetrics.fileLinesVisitor();
 
-    noSonarFilter.noSonarInFile(inputFile.originalFile(), fileLinesVisitor.getLinesWithNoSonar());
+    noSonarFilter.noSonarInFile(inputFile.wrappedFile(), fileLinesVisitor.getLinesWithNoSonar());
 
     if (!isInSonarLint(context)) {
-      cpdAnalyzer.pushCpdTokens(inputFile.originalFile(), visitorContext);
+      cpdAnalyzer.pushCpdTokens(inputFile.wrappedFile(), visitorContext);
 
       Set<Integer> linesOfCode = fileLinesVisitor.getLinesOfCode();
       saveMetricOnFile(inputFile, CoreMetrics.NCLOC, linesOfCode.size());
@@ -318,7 +318,7 @@ public class PythonScanner extends Scanner {
       saveMetricOnFile(inputFile, CoreMetrics.COGNITIVE_COMPLEXITY, fileMetrics.cognitiveComplexity());
       saveMetricOnFile(inputFile, CoreMetrics.COMMENT_LINES, fileLinesVisitor.getCommentLineCount());
 
-      FileLinesContext fileLinesContext = fileLinesContextFactory.createFor(inputFile.originalFile());
+      FileLinesContext fileLinesContext = fileLinesContextFactory.createFor(inputFile.wrappedFile());
       for (int line : linesOfCode) {
         fileLinesContext.setIntValue(CoreMetrics.NCLOC_DATA_KEY, line, 1);
       }
@@ -330,18 +330,18 @@ public class PythonScanner extends Scanner {
   }
 
   private boolean restoreAndPushMeasuresIfApplicable(PythonInputFile inputFile) {
-    if (inputFile.originalFile().type() == InputFile.Type.TEST) {
+    if (inputFile.wrappedFile().type() == InputFile.Type.TEST) {
       return true;
     }
 
-    return cpdAnalyzer.pushCachedCpdTokens(inputFile.originalFile(), indexer.cacheContext());
+    return cpdAnalyzer.pushCachedCpdTokens(inputFile.wrappedFile(), indexer.cacheContext());
   }
 
   private void saveMetricOnFile(PythonInputFile inputFile, Metric<Integer> metric, Integer value) {
     context.<Integer>newMeasure()
       .withValue(value)
       .forMetric(metric)
-      .on(inputFile.originalFile())
+      .on(inputFile.wrappedFile())
       .save();
   }
 
