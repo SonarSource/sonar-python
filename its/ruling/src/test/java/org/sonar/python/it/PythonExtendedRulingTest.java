@@ -38,15 +38,18 @@ import static org.sonar.python.it.RulingHelper.getOrchestrator;
 // Ruling test for bug rules, to ensure they are properly tested without slowing down the CI
 class PythonExtendedRulingTest {
 
-
   @RegisterExtension
   public static final OrchestratorExtension ORCHESTRATOR = getOrchestrator();
+
+  private static final String PROFILE_NAME = "customProfile";
 
   @BeforeAll
   static void prepare_quality_profile() throws IOException {
     List<String> ruleKeys = bugRuleKeys();
-    String pythonProfile = RulingHelper.profile("customProfile", "py", "python", ruleKeys);
+    String pythonProfile = RulingHelper.profile(PROFILE_NAME, "py", "python", ruleKeys);
     RulingHelper.loadProfile(ORCHESTRATOR, pythonProfile);
+    String iPythonProfile = RulingHelper.profile(PROFILE_NAME, "ipynb", "python", ruleKeys);
+    RulingHelper.loadProfile(ORCHESTRATOR, iPythonProfile);
   }
 
   @Test
@@ -169,7 +172,8 @@ class PythonExtendedRulingTest {
 
   public SonarScanner buildWithCommonProperties(String projectKey, String projectName) {
     ORCHESTRATOR.getServer().provisionProject(projectKey, projectKey);
-    ORCHESTRATOR.getServer().associateProjectToQualityProfile(projectKey, "py", "customProfile");
+    ORCHESTRATOR.getServer().associateProjectToQualityProfile(projectKey, "py", PROFILE_NAME);
+    ORCHESTRATOR.getServer().associateProjectToQualityProfile(projectKey, "ipynb", PROFILE_NAME);
     return SonarScanner.create(FileLocation.of(String.format("../sources_extended/%s", projectName)).getFile())
       .setProjectKey(projectKey)
       .setProjectName(projectKey)

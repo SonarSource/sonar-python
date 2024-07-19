@@ -92,6 +92,9 @@ class PythonPrAnalysisTest {
     String profile = RulingHelper.profile(INCREMENTAL_ANALYSIS_PROFILE, "py", "python", List.of("S5713"));
     RulingHelper.loadProfile(ORCHESTRATOR, profile);
     ORCHESTRATOR.getServer().associateProjectToQualityProfile(PR_ANALYSIS_PROJECT_KEY, "py", INCREMENTAL_ANALYSIS_PROFILE);
+    String iPythonProfile = RulingHelper.profile(INCREMENTAL_ANALYSIS_PROFILE, "ipynb", "ipython", List.of("S5713"));
+    RulingHelper.loadProfile(ORCHESTRATOR, iPythonProfile);
+    ORCHESTRATOR.getServer().associateProjectToQualityProfile(PR_ANALYSIS_PROJECT_KEY, "ipynb", INCREMENTAL_ANALYSIS_PROFILE);
   }
 
 //  @Parameters(name = "{index}: {0}")
