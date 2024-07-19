@@ -56,13 +56,14 @@ public class PythonPlugin implements Plugin {
   private static final String EXTERNAL_ANALYZERS_CATEGORY = "External Analyzers";
   private static final String DEPRECATED_PREFIX = "DEPRECATED : Use " + PythonCoverageSensor.REPORT_PATHS_KEY + " instead. ";
 
-  public static final String FILE_SUFFIXES_KEY = "sonar.python.file.suffixes";
+  public static final String PYTHON_FILE_SUFFIXES_KEY = "sonar.python.file.suffixes";
+  public static final String IPYNB_FILE_SUFFIXES_KEY = "sonar.ipynb.file.suffixes";
 
   @Override
   public void define(Context context) {
 
     context.addExtensions(
-      PropertyDefinition.builder(FILE_SUFFIXES_KEY)
+      PropertyDefinition.builder(PYTHON_FILE_SUFFIXES_KEY)
         .index(10)
         .name("File Suffixes")
         .description("List of suffixes of Python files to analyze.")
@@ -72,6 +73,7 @@ public class PythonPlugin implements Plugin {
         .onQualifiers(Qualifiers.PROJECT)
         .defaultValue("py")
         .build(),
+
 
       PropertyDefinition.builder(PYTHON_VERSION_KEY)
         .index(11)
@@ -91,6 +93,22 @@ public class PythonPlugin implements Plugin {
       PythonRuleRepository.class,
       AnalysisWarningsWrapper.class);
 
+    context.addExtensions(
+      PropertyDefinition.builder(IPYNB_FILE_SUFFIXES_KEY)
+        .index(12)
+        .name("IPython File Suffixes")
+        .description("List of suffixes of IPython Notebooks files to analyze.")
+        .multiValues(true)
+        .category(PYTHON_CATEGORY)
+        .subCategory(GENERAL)
+        .onQualifiers(Qualifiers.PROJECT)
+        .defaultValue("ipynb")
+        .build(),
+      IPynb.class,
+      IPynbProfile.class,
+      IPynbSensor.class,
+      IPynbRuleRepository.class);
+
     SonarRuntime sonarRuntime = context.getRuntime();
     if (sonarRuntime.getProduct() != SonarProduct.SONARLINT) {
       addCoberturaExtensions(context);
@@ -101,14 +119,11 @@ public class PythonPlugin implements Plugin {
       addMypyExtensions(context);
       addRuffExtensions(context);
     }
+
+
     if (sonarRuntime.getProduct() == SonarProduct.SONARLINT) {
       SonarLintPluginAPIManager sonarLintPluginAPIManager = new SonarLintPluginAPIManager();
       sonarLintPluginAPIManager.addSonarlintPythonIndexer(context, new SonarLintPluginAPIVersion());
-      context.addExtensions(
-        IPynb.class,
-        IPynbProfile.class,
-        IPynbSensor.class,
-        IPynbRuleRepository.class);
     }
   }
 

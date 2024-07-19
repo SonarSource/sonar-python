@@ -30,6 +30,6 @@ class IPynbTest {
     IPynb language = new IPynb();
     assertThat(language.getKey()).isEqualTo("ipynb");
     assertThat(language.getName()).isEqualTo("IPython Notebooks");
-    assertThat(language.getFileSuffixes()).hasSize(1).contains(".ipynb");
+    assertThat(language.getFileSuffixes()).hasSize(1).contains("ipynb");
   }
 }
