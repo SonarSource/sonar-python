@@ -1574,6 +1574,65 @@ class TypeInferenceV2Test {
     Assertions.assertThat(paramType).isSameAs(PythonType.UNKNOWN);
   }
 
+  @Test
+  void return_type_of_call_expression_1() {
+    assertThat(lastExpression(
+      """
+      x = [1,2,3]
+      a = x.append(42)
+      a
+      """
+    ).typeV2().unwrappedType()).isEqualTo(NONE_TYPE);
+  }
+
+  @Test
+  void return_type_of_call_expression_2() {
+    assertThat(lastExpression(
+      """
+      x = [1,2,3]
+      a = x.sort()
+      a
+      """
+    ).typeV2().unwrappedType()).isEqualTo(NONE_TYPE);
+  }
+
+  @Test
+  void return_type_of_call_expression_union_type() {
+    FileInput fileInput = inferTypes(
+      """
+        class A:
+          def foo(self): ...
+        class B:
+          def bar(self): ...
+        a = A
+        b = B
+        if cond:
+          x = a
+        else:
+          x = b
+        y = x()
+        y
+        """
+    );
+    var classA = TreeUtils.firstChild(fileInput.statements().statements().get(0), ClassDef.class::isInstance)
+      .map(ClassDef.class::cast)
+      .map(ClassDef::name)
+      .map(Expression::typeV2)
+      .map(ClassType.class::cast)
+      .get();
+
+    var classB = TreeUtils.firstChild(fileInput.statements().statements().get(1), ClassDef.class::isInstance)
+      .map(ClassDef.class::cast)
+      .map(ClassDef::name)
+      .map(Expression::typeV2)
+      .map(ClassType.class::cast)
+      .get();
+
+    assertThat(((ExpressionStatement) fileInput.statements().statements().get(6)).expressions().get(0).typeV2()).isInstanceOf(ObjectType.class);
+    UnionType unionType = (UnionType) ((ExpressionStatement) fileInput.statements().statements().get(6)).expressions().get(0).typeV2().unwrappedType();
+    assertThat(unionType.candidates()).containsExactlyInAnyOrder(classA, classB);
+  }
+
   private static FileInput inferTypes(String lines) {
     return inferTypes(lines, PROJECT_LEVEL_TYPE_TABLE);
   }

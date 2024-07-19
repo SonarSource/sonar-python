@@ -47,8 +47,10 @@ import org.sonar.python.types.DeclaredType;
 import org.sonar.python.types.HasTypeDependencies;
 import org.sonar.python.types.InferredTypes;
 import org.sonar.python.types.v2.ClassType;
+import org.sonar.python.types.v2.FunctionType;
 import org.sonar.python.types.v2.ObjectType;
 import org.sonar.python.types.v2.PythonType;
+import org.sonar.python.types.v2.UnionType;
 
 import static org.sonar.plugins.python.api.symbols.Symbol.Kind.CLASS;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.SUBSCRIPTION;
@@ -187,6 +189,21 @@ public class CallExpressionImpl extends PyTree implements CallExpression, HasTyp
   public PythonType typeV2() {
     if (callee().typeV2() instanceof ClassType classType) {
       return new ObjectType(classType);
+    }
+    if (callee().typeV2() instanceof FunctionType functionType) {
+      return functionType.returnType();
+    }
+    if (callee().typeV2() instanceof UnionType unionType) {
+      PythonType result = null;
+      for (PythonType candidate : unionType.candidates()) {
+        if (candidate instanceof ClassType classType) {
+          result = result == null ? classType : UnionType.or(result, classType);
+        }
+        if (candidate instanceof FunctionType functionType) {
+          result = result == null ? functionType.returnType() : UnionType.or(result, functionType.returnType());
+        }
+      }
+      return result == null ? PythonType.UNKNOWN : new ObjectType(result);
     }
     return PythonType.UNKNOWN;
   }
