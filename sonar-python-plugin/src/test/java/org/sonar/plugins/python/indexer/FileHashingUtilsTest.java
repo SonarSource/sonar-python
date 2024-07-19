@@ -36,8 +36,8 @@ class FileHashingUtilsTest {
 
   @Test
   void hashing() throws IOException, NoSuchAlgorithmException {
-    InputFile file1 = createInputFile(baseDir, "main.py", InputFile.Status.CHANGED, InputFile.Type.MAIN);
-    InputFile file2 = createInputFile(baseDir, "mod.py", InputFile.Status.SAME, InputFile.Type.MAIN);
+    InputFile file1 = createInputFile(baseDir, "main.py", InputFile.Status.CHANGED, InputFile.Type.MAIN).originalFile();
+    InputFile file2 = createInputFile(baseDir, "mod.py", InputFile.Status.SAME, InputFile.Type.MAIN).originalFile();
     assertThat(MessageDigest.isEqual(FileHashingUtils.inputFileContentHash(file1), FileHashingUtils.inputFileContentHash(file1))).isTrue();
     assertThat(MessageDigest.isEqual(FileHashingUtils.inputFileContentHash(file1), FileHashingUtils.inputFileContentHash(file2))).isFalse();
   }
