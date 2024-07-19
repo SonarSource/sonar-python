@@ -23,7 +23,6 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 import javax.annotation.Nullable;
-import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.highlighting.NewHighlighting;
 import org.sonar.api.batch.sensor.highlighting.TypeOfText;
@@ -93,10 +92,10 @@ public class PythonHighlighter extends PythonSubscriptionCheck {
 
   private Set<Token> docStringTokens;
 
-  public PythonHighlighter(SensorContext context, InputFile inputFile) {
+  public PythonHighlighter(SensorContext context, PythonInputFile inputFile) {
     docStringTokens = new HashSet<>();
     newHighlighting = context.newHighlighting();
-    newHighlighting.onFile(inputFile);
+    newHighlighting.onFile(inputFile.originalFile());
   }
 
   @Override
