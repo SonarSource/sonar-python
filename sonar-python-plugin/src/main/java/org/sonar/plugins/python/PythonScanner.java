@@ -77,7 +77,7 @@ public class PythonScanner extends Scanner {
   private final NoSonarFilter noSonarFilter;
   private final PythonCpdAnalyzer cpdAnalyzer;
   private final PythonIndexer indexer;
-  private final Map<InputFile, Set<PythonCheck>> checksExecutedWithoutParsingByFiles = new HashMap<>();
+  private final Map<PythonInputFile, Set<PythonCheck>> checksExecutedWithoutParsingByFiles = new HashMap<>();
 
   public PythonScanner(
     SensorContext context, PythonChecks checks,
@@ -98,10 +98,10 @@ public class PythonScanner extends Scanner {
   }
 
   @Override
-  protected void scanFile(InputFile inputFile) {
-    PythonFile pythonFile = SonarQubePythonFile.create(inputFile);
+  protected void scanFile(PythonInputFile inputFile) {
+    PythonFile pythonFile = SonarQubePythonFile.create(inputFile.originalFile());
     PythonVisitorContext visitorContext;
-    InputFile.Type fileType = inputFile.type();
+    InputFile.Type fileType = inputFile.originalFile().type();
     try {
       AstNode astNode = parser.parse(pythonFile.content());
       PythonTreeMaker treeMaker = getTreeMaker(inputFile);
@@ -122,8 +122,8 @@ public class PythonScanner extends Scanner {
       LOG.error("Unable to parse file: " + inputFile);
       LOG.error(e.getMessage());
       context.newAnalysisError()
-        .onFile(inputFile)
-        .at(inputFile.newPointer(e.getLine(), 0))
+        .onFile(inputFile.originalFile())
+        .at(inputFile.originalFile().newPointer(e.getLine(), 0))
         .message(e.getMessage())
         .save();
     }
@@ -143,18 +143,18 @@ public class PythonScanner extends Scanner {
     saveIssues(inputFile, visitorContext.getIssues());
 
     if (visitorContext.rootTree() != null && !isInSonarLint(context)) {
-      new SymbolVisitor(context.newSymbolTable().onFile(inputFile)).visitFileInput(visitorContext.rootTree());
+      new SymbolVisitor(context.newSymbolTable().onFile(inputFile.originalFile())).visitFileInput(visitorContext.rootTree());
       new PythonHighlighter(context, inputFile).scanFile(visitorContext);
     }
   }
 
-  private static PythonTreeMaker getTreeMaker(InputFile inputFile) {
-    return Python.KEY.equals(inputFile.language()) ? new PythonTreeMaker() : new IPythonTreeMaker();
+  private static PythonTreeMaker getTreeMaker(PythonInputFile inputFile) {
+    return Python.KEY.equals(inputFile.originalFile().language()) ? new PythonTreeMaker() : new IPythonTreeMaker();
   }
 
   @Override
-  public boolean scanFileWithoutParsing(InputFile inputFile) {
-    InputFile.Type fileType = inputFile.type();
+  public boolean scanFileWithoutParsing(PythonInputFile inputFile) {
+    InputFile.Type fileType = inputFile.originalFile().type();
     boolean result = true;
     for (PythonCheck check : checks.all()) {
       if (!isCheckApplicable(check, fileType)) {
@@ -166,7 +166,7 @@ public class PythonScanner extends Scanner {
         result = false;
         continue;
       }
-      PythonFile pythonFile = SonarQubePythonFile.create(inputFile);
+      PythonFile pythonFile = SonarQubePythonFile.create(inputFile.originalFile());
       PythonInputFileContext inputFileContext = new PythonInputFileContext(pythonFile, context.fileSystem().workDir(), indexer.cacheContext(), context.runtime().getProduct());
       if (check.scanWithoutParsing(inputFileContext)) {
         Set<PythonCheck> executedChecks = checksExecutedWithoutParsingByFiles.getOrDefault(inputFile, new HashSet<>());
@@ -184,7 +184,7 @@ public class PythonScanner extends Scanner {
     return restoreAndPushMeasuresIfApplicable(inputFile);
   }
 
-  private boolean checkRequiresParsingOfImpactedFile(InputFile inputFile, PythonCheck check) {
+  private boolean checkRequiresParsingOfImpactedFile(PythonInputFile inputFile, PythonCheck check) {
     return !indexer.canBeFullyScannedWithoutParsing(inputFile) && !check.getClass().getPackageName().startsWith("org.sonar.python.checks");
   }
 
@@ -214,12 +214,12 @@ public class PythonScanner extends Scanner {
   }
 
   @Override
-  protected void processException(Exception e, InputFile file) {
+  protected void processException(Exception e, PythonInputFile file) {
     LOG.warn("Unable to analyze file: " + file, e);
   }
 
   @Override
-  public boolean canBeScannedWithoutParsing(InputFile inputFile) {
+  public boolean canBeScannedWithoutParsing(PythonInputFile inputFile) {
     return this.indexer.canBePartiallyScannedWithoutParsing(inputFile);
   }
 
@@ -229,7 +229,7 @@ public class PythonScanner extends Scanner {
       numSkippedFiles, numTotalFiles);
   }
 
-  private void saveIssues(InputFile inputFile, List<PreciseIssue> issues) {
+  private void saveIssues(PythonInputFile inputFile, List<PreciseIssue> issues) {
     for (PreciseIssue preciseIssue : issues) {
       RuleKey ruleKey = checks.ruleKey(preciseIssue.check());
       NewIssue newIssue = context
@@ -251,7 +251,7 @@ public class PythonScanner extends Scanner {
         if (fileId != null) {
           InputFile issueLocationFile = component(fileId, context);
           if (issueLocationFile != null) {
-            secondaryLocationsFlow.addFirst(newLocation(issueLocationFile, newIssue, secondaryLocation));
+            secondaryLocationsFlow.addFirst(newLocation(new PythonInputFileImpl(issueLocationFile), newIssue, secondaryLocation));
           }
         } else {
           newIssue.addLocation(newLocation(inputFile, newIssue, secondaryLocation));
@@ -264,7 +264,7 @@ public class PythonScanner extends Scanner {
         newIssue.addFlow(secondaryLocationsFlow);
       }
 
-      handleQuickFixes(inputFile, ruleKey, newIssue, preciseIssue);
+      handleQuickFixes(inputFile.originalFile(), ruleKey, newIssue, preciseIssue);
 
       newIssue.save();
     }
@@ -280,15 +280,15 @@ public class PythonScanner extends Scanner {
     return inputFile;
   }
 
-  private static NewIssueLocation newLocation(InputFile inputFile, NewIssue issue, IssueLocation location) {
+  private static NewIssueLocation newLocation(PythonInputFile inputFile, NewIssue issue, IssueLocation location) {
     NewIssueLocation newLocation = issue.newLocation()
-      .on(inputFile);
+      .on(inputFile.originalFile());
     if (location.startLine() != IssueLocation.UNDEFINED_LINE) {
       TextRange range;
       if (location.startLineOffset() == IssueLocation.UNDEFINED_OFFSET) {
-        range = inputFile.selectLine(location.startLine());
+        range = inputFile.originalFile().selectLine(location.startLine());
       } else {
-        range = inputFile.newRange(location.startLine(), location.startLineOffset(), location.endLine(), location.endLineOffset());
+        range = inputFile.originalFile().newRange(location.startLine(), location.startLineOffset(), location.endLine(), location.endLineOffset());
       }
       newLocation.at(range);
     }
@@ -300,14 +300,14 @@ public class PythonScanner extends Scanner {
     return newLocation;
   }
 
-  private void saveMeasures(InputFile inputFile, PythonVisitorContext visitorContext) {
+  private void saveMeasures(PythonInputFile inputFile, PythonVisitorContext visitorContext) {
     FileMetrics fileMetrics = new FileMetrics(visitorContext);
     FileLinesVisitor fileLinesVisitor = fileMetrics.fileLinesVisitor();
 
-    noSonarFilter.noSonarInFile(inputFile, fileLinesVisitor.getLinesWithNoSonar());
+    noSonarFilter.noSonarInFile(inputFile.originalFile(), fileLinesVisitor.getLinesWithNoSonar());
 
     if (!isInSonarLint(context)) {
-      cpdAnalyzer.pushCpdTokens(inputFile, visitorContext);
+      cpdAnalyzer.pushCpdTokens(inputFile.originalFile(), visitorContext);
 
       Set<Integer> linesOfCode = fileLinesVisitor.getLinesOfCode();
       saveMetricOnFile(inputFile, CoreMetrics.NCLOC, linesOfCode.size());
@@ -318,7 +318,7 @@ public class PythonScanner extends Scanner {
       saveMetricOnFile(inputFile, CoreMetrics.COGNITIVE_COMPLEXITY, fileMetrics.cognitiveComplexity());
       saveMetricOnFile(inputFile, CoreMetrics.COMMENT_LINES, fileLinesVisitor.getCommentLineCount());
 
-      FileLinesContext fileLinesContext = fileLinesContextFactory.createFor(inputFile);
+      FileLinesContext fileLinesContext = fileLinesContextFactory.createFor(inputFile.originalFile());
       for (int line : linesOfCode) {
         fileLinesContext.setIntValue(CoreMetrics.NCLOC_DATA_KEY, line, 1);
       }
@@ -329,19 +329,19 @@ public class PythonScanner extends Scanner {
     }
   }
 
-  private boolean restoreAndPushMeasuresIfApplicable(InputFile inputFile) {
-    if (inputFile.type() == InputFile.Type.TEST) {
+  private boolean restoreAndPushMeasuresIfApplicable(PythonInputFile inputFile) {
+    if (inputFile.originalFile().type() == InputFile.Type.TEST) {
       return true;
     }
 
-    return cpdAnalyzer.pushCachedCpdTokens(inputFile, indexer.cacheContext());
+    return cpdAnalyzer.pushCachedCpdTokens(inputFile.originalFile(), indexer.cacheContext());
   }
 
-  private void saveMetricOnFile(InputFile inputFile, Metric<Integer> metric, Integer value) {
+  private void saveMetricOnFile(PythonInputFile inputFile, Metric<Integer> metric, Integer value) {
     context.<Integer>newMeasure()
       .withValue(value)
       .forMetric(metric)
-      .on(inputFile)
+      .on(inputFile.originalFile())
       .save();
   }
 

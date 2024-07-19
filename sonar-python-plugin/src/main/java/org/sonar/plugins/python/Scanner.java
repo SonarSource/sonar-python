@@ -38,15 +38,15 @@ public abstract class Scanner {
     this.context = context;
   }
 
-  public void execute(List<InputFile> files, SensorContext context) {
+  public void execute(List<PythonInputFile> files, SensorContext context) {
     ProgressReport progressReport = new ProgressReport(this.name() + " progress", TimeUnit.SECONDS.toMillis(10));
     String name = this.name();
     LOG.info("Starting {}", name);
-    List<String> filenames = files.stream().map(InputFile::toString).toList();
+    List<String> filenames = files.stream().map(PythonInputFile::originalFile).map(InputFile::toString).toList();
 
     int numScannedWithoutParsing = 0;
     progressReport.start(filenames);
-    for (InputFile file : files) {
+    for (PythonInputFile file : files) {
       if (context.isCancelled()) {
         progressReport.cancel();
         return;
@@ -77,9 +77,9 @@ public abstract class Scanner {
 
   protected abstract String name();
 
-  protected abstract void scanFile(InputFile file) throws IOException;
+  protected abstract void scanFile(PythonInputFile file) throws IOException;
 
-  protected boolean scanFileWithoutParsing(InputFile file) throws IOException {
+  protected boolean scanFileWithoutParsing(PythonInputFile file) throws IOException {
     return false;
   }
 
@@ -87,18 +87,18 @@ public abstract class Scanner {
     // no op
   }
 
-  protected abstract void processException(Exception e, InputFile file);
+  protected abstract void processException(Exception e, PythonInputFile file);
 
   protected void reportStatistics(int numSkippedFiles, int numTotalFiles) {
     // Intentionally empty. Subclasses can override this method to output logs containing some logs after the execution of the scanner.
   }
 
-  public boolean canBeScannedWithoutParsing(InputFile inputFile) {
+  public boolean canBeScannedWithoutParsing(PythonInputFile inputFile) {
     return false;
   }
 
-  private static boolean isParseErrorOnTestFile(InputFile file, Exception e) {
+  private static boolean isParseErrorOnTestFile(PythonInputFile file, Exception e) {
     // As test files may contain invalid syntax on purpose, we avoid failing the analysis when encountering parse errors on them
-    return e instanceof RecognitionException && file.type() == InputFile.Type.TEST;
+    return e instanceof RecognitionException && file.originalFile().type() == InputFile.Type.TEST;
   }
 }
