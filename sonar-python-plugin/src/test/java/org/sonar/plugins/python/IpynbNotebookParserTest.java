@@ -25,6 +25,7 @@ import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.internal.apachecommons.lang.StringUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.sonar.plugins.python.TestUtils.createInputFile;
 
 class IpynbNotebookParserTest {
@@ -36,9 +37,19 @@ class IpynbNotebookParserTest {
 
     IpynbNotebookParser.ParseResult result = IpynbNotebookParser.parseNotebook(inputFile);
 
-    assertThat(result.offsetMap().keySet()).hasSize(12);
+    assertThat(result.offsetMap().keySet()).hasSize(14);
     assertThat(StringUtils.countMatches(result.aggregatedSource(), IpynbNotebookParser.SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER))
-      .isEqualTo(3);
+      .isEqualTo(4);
+    assertThat(result.offsetMap()).extracting(map -> map.get(17)).isEqualTo(new IpynbNotebookParser.Offset(64, 27));
+  }
+
+  @Test
+  void testParseInvalidNotebook() {
+    InputFile inputFile = createInputFile(baseDir, "invalid_notebook.ipynb", InputFile.Status.CHANGED, InputFile.Type.MAIN);
+
+    assertThatThrownBy(() -> IpynbNotebookParser.parseNotebook(inputFile))
+      .isInstanceOf(IllegalStateException.class)
+      .hasMessageContaining("Unexpected token");
   }
 
 }

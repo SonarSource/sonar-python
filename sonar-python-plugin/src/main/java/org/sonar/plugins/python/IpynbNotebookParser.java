@@ -79,24 +79,56 @@ public class IpynbNotebookParser {
         JsonToken jsonToken = jParser.nextToken();
         if (JsonToken.FIELD_NAME.equals(jsonToken) && "source".equals(jParser.currentName())) {
           jsonToken = jParser.nextToken();
-          if (jsonToken == JsonToken.START_ARRAY) {
-            while (jParser.nextToken() != JsonToken.END_ARRAY) {
-              String sourceLine = jParser.getValueAsString();
-              JsonLocation tokenLocation = jParser.currentTokenLocation();
-
-              aggregatedSource.append(sourceLine);
-              locationMap.put(aggregatedSourceLine, tokenLocation);
-              offSetMap.put(aggregatedSourceLine, new Offset(tokenLocation.getLineNr(), tokenLocation.getColumnNr()));
-              aggregatedSourceLine++;
-            }
-            // Account for the cell delimiter
-            aggregatedSource.append(SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER);
-            aggregatedSourceLine++;
+          if (parseSourceArray(jParser, jsonToken) || parseSourceMultilineString(jParser, jsonToken)) {
             break;
+          }else {
+            throw new IllegalStateException("Unexpected token: " + jsonToken);
           }
         }
       }
     }
+
+    private boolean parseSourceArray(JsonParser jParser, JsonToken jsonToken) throws IOException {
+      if (jsonToken != JsonToken.START_ARRAY) {
+        return false;
+      }
+      while (jParser.nextToken() != JsonToken.END_ARRAY) {
+        String sourceLine = jParser.getValueAsString();
+        JsonLocation tokenLocation = jParser.currentTokenLocation();
+
+        aggregatedSource.append(sourceLine);
+        locationMap.put(aggregatedSourceLine, tokenLocation);
+        offSetMap.put(aggregatedSourceLine, new Offset(tokenLocation.getLineNr(), tokenLocation.getColumnNr()));
+        aggregatedSourceLine++;
+      }
+      // Account for the cell delimiter
+      aggregatedSource.append(SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER);
+      aggregatedSourceLine++;
+      return true;
+    }
+
+    private boolean parseSourceMultilineString(JsonParser jParser, JsonToken jsonToken) throws IOException {
+      if (jsonToken != JsonToken.VALUE_STRING) {
+        return false;
+      }
+      String sourceLine = jParser.getValueAsString();
+      JsonLocation tokenLocation = jParser.currentTokenLocation();
+      Offset offset = new Offset(tokenLocation.getLineNr(), tokenLocation.getColumnNr());
+
+      for (String line : sourceLine.lines().toList()) {
+        aggregatedSource.append(line);
+        aggregatedSource.append("\n");
+        locationMap.put(aggregatedSourceLine, tokenLocation);
+        offSetMap.put(aggregatedSourceLine, offset);
+        offset = new Offset(offset.line(), offset.column() + line.length() + 2 + 1);
+        aggregatedSourceLine++;
+      }
+      // Account for the cell delimiter
+      aggregatedSource.append(SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER);
+      aggregatedSourceLine++;
+      return true;
+    }
+
   }
 
   public record ParseResult(InputFile inputFile, String aggregatedSource, Map<Integer, Offset> offsetMap) {
