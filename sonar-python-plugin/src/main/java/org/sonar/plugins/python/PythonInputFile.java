@@ -25,13 +25,6 @@ public interface PythonInputFile {
 
   InputFile originalFile();
 
-  PythonInputFile.Kind kind();
-
-  enum Kind {
-    PYTHONFILE,
-    IPYTHONFILE
-  }
-
   boolean equals(Object obj);
 
   int hashCode();

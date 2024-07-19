@@ -32,10 +32,6 @@ public class PythonInputFileImpl implements PythonInputFile {
     return this.originalFile;
   }
 
-  public PythonInputFile.Kind kind() {
-    return PythonInputFile.Kind.PYTHONFILE;
-  }
-
   public String toString() {
     return originalFile.toString();
   }
