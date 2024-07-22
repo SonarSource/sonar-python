@@ -33,6 +33,7 @@ import org.sonar.plugins.python.api.tree.CompoundAssignmentStatement;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.ForStatement;
 import org.sonar.plugins.python.api.tree.FunctionDef;
+import org.sonar.plugins.python.api.tree.ImportName;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.Statement;
@@ -42,7 +43,7 @@ import org.sonar.python.tree.NameImpl;
 public class PropagationVisitor extends BaseTreeVisitor {
   private final Map<SymbolV2, Set<Propagation>> propagationsByLhs;
   private final Map<Statement, Assignment> assignmentsByAssignmentStatement;
-  private final Map<Statement, Definition> definitionsByDefinitionStatement;
+  private final Map<Statement, Set<Definition>> definitionsByDefinitionStatement;
 
   public PropagationVisitor() {
     propagationsByLhs = new HashMap<>();
@@ -55,7 +56,7 @@ public class PropagationVisitor extends BaseTreeVisitor {
     return assignmentsByAssignmentStatement;
   }
 
-  public Map<Statement, Definition> definitionsByDefinitionStatement() {
+  public Map<Statement, Set<Definition>> definitionsByDefinitionStatement() {
     return definitionsByDefinitionStatement;
   }
 
@@ -69,7 +70,7 @@ public class PropagationVisitor extends BaseTreeVisitor {
     Name name = functionDef.name();
     var symbol = name.symbolV2();
     Definition definition = new Definition(symbol, name);
-    definitionsByDefinitionStatement.put(functionDef, definition);
+    definitionsByDefinitionStatement.computeIfAbsent(functionDef, k -> new HashSet<>()).add(definition);
     propagationsByLhs.computeIfAbsent(symbol, s -> new HashSet<>()).add(definition);
   }
 
@@ -111,6 +112,32 @@ public class PropagationVisitor extends BaseTreeVisitor {
     if (assignedValue != null) {
       processAssignment(annotatedAssignment, annotatedAssignment.variable(), assignedValue);
     }
+  }
+
+  @Override
+  public void visitImportName(ImportName importName) {
+    super.visitImportName(importName);
+    importName.modules()
+      .forEach(aliasedName -> {
+        var names = aliasedName.dottedName().names();
+        Name alias = aliasedName.alias();
+        if (alias != null) {
+          SymbolV2 aliasSymbol = alias.symbolV2();
+          Definition definition = new Definition(aliasSymbol, alias);
+          definitionsByDefinitionStatement.computeIfAbsent(importName, k -> new HashSet<>()).add(definition);
+          propagationsByLhs.computeIfAbsent(aliasSymbol, s -> new HashSet<>()).add(definition);
+        } else {
+          for (int i = names.size() - 1; i >= 0; i--) {
+            Name name = names.get(i);
+            SymbolV2 symbolV2 = name.symbolV2();
+            if (symbolV2 != null) {
+              Definition definition = new Definition(symbolV2, name);
+              definitionsByDefinitionStatement.computeIfAbsent(importName, k -> new HashSet<>()).add(definition);
+              propagationsByLhs.computeIfAbsent(symbolV2, s -> new HashSet<>()).add(definition);
+            }
+          }
+        }
+      });
   }
 
   @Override
