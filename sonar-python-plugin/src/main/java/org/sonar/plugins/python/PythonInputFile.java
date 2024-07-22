@@ -17,33 +17,12 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.plugins.python.indexer;
+package org.sonar.plugins.python;
 
-import java.util.List;
-import java.util.stream.Stream;
 import org.sonar.api.batch.fs.InputFile;
-import org.sonar.plugins.python.PythonInputFile;
-import org.sonarsource.sonarlint.plugin.api.module.file.ModuleFileSystem;
 
-public class TestModuleFileSystem implements ModuleFileSystem {
+public interface PythonInputFile {
 
-  private final List<PythonInputFile> inputFiles;
+  InputFile wrappedFile();
 
-  public TestModuleFileSystem(List<PythonInputFile> inputFiles) {
-    this.inputFiles = inputFiles;
-  }
-
-  @Override
-  public Stream<InputFile> files(String s, InputFile.Type type) {
-    return inputFiles.stream().map(PythonInputFile::wrappedFile);
-  }
-
-  @Override
-  public Stream<InputFile> files() {
-    return inputFiles.stream().map(PythonInputFile::wrappedFile);
-  }
-
-  public void addFile(PythonInputFile inputFile) {
-    inputFiles.add(inputFile);
-  }
 }

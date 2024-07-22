@@ -31,6 +31,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
+import org.sonar.plugins.python.PythonInputFile;
 import org.sonar.plugins.python.Scanner;
 import org.sonar.plugins.python.SonarQubePythonFile;
 import org.sonar.plugins.python.api.PythonFile;
@@ -63,40 +64,40 @@ public abstract class PythonIndexer {
     return typeShed;
   }
 
-  public String packageName(InputFile inputFile) {
-    if (!packageNames.containsKey(inputFile.uri())) {
-      String name = pythonPackageName(inputFile.file(), projectBaseDirAbsolutePath);
-      packageNames.put(inputFile.uri(), name);
+  public String packageName(PythonInputFile inputFile) {
+    if (!packageNames.containsKey(inputFile.wrappedFile().uri())) {
+      String name = pythonPackageName(inputFile.wrappedFile().file(), projectBaseDirAbsolutePath);
+      packageNames.put(inputFile.wrappedFile().uri(), name);
       projectLevelSymbolTable.addProjectPackage(name);
     }
-    return packageNames.get(inputFile.uri());
+    return packageNames.get(inputFile.wrappedFile().uri());
   }
 
-  public void collectPackageNames(List<InputFile> inputFiles) {
-    for (InputFile inputFile : inputFiles) {
-      String packageName = pythonPackageName(inputFile.file(), projectBaseDirAbsolutePath);
+  public void collectPackageNames(List<PythonInputFile> inputFiles) {
+    for (PythonInputFile inputFile : inputFiles) {
+      String packageName = pythonPackageName(inputFile.wrappedFile().file(), projectBaseDirAbsolutePath);
       projectLevelSymbolTable.addProjectPackage(packageName);
     }
   }
 
-  void removeFile(InputFile inputFile) {
-    String packageName = packageNames.get(inputFile.uri());
-    String filename = inputFile.filename();
+  void removeFile(PythonInputFile inputFile) {
+    String packageName = packageNames.get(inputFile.wrappedFile().uri());
+    String filename = inputFile.wrappedFile().filename();
     if (packageName == null) {
       LOG.debug("Failed to remove file \"{}\" from project-level symbol table (file not indexed)", filename);
       return;
     }
-    packageNames.remove(inputFile.uri());
+    packageNames.remove(inputFile.wrappedFile().uri());
     projectLevelSymbolTable.removeModule(packageName, filename);
   }
 
-  void addFile(InputFile inputFile) throws IOException {
-    AstNode astNode = parser.parse(inputFile.contents());
+  void addFile(PythonInputFile inputFile) throws IOException {
+    AstNode astNode = parser.parse(inputFile.wrappedFile().contents());
     FileInput astRoot = new PythonTreeMaker().fileInput(astNode);
-    String packageName = pythonPackageName(inputFile.file(), projectBaseDirAbsolutePath);
-    packageNames.put(inputFile.uri(), packageName);
+    String packageName = pythonPackageName(inputFile.wrappedFile().file(), projectBaseDirAbsolutePath);
+    packageNames.put(inputFile.wrappedFile().uri(), packageName);
     projectLevelSymbolTable.addProjectPackage(packageName);
-    PythonFile pythonFile = SonarQubePythonFile.create(inputFile);
+    PythonFile pythonFile = SonarQubePythonFile.create(inputFile.wrappedFile());
     projectLevelSymbolTable.addModule(astRoot, packageName, pythonFile);
   }
 
@@ -112,20 +113,26 @@ public abstract class PythonIndexer {
     return null;
   }
 
-  /* We consider a file to be partially skippable if it is unchanged, but may depend on impacted files.
-     Regular Python rules will not run on such files.
-     Security UCFGs and DBD IRs will be regenerated for them if they do depend on impacted files.
-     In such case, these files will still need to be parsed when Security or DBD rules are enabled.
+  /**
+   * @param inputFile
+   * @return true if a file is partially skippable, false otherwise
+   * We consider a file to be partially skippable if it is unchanged, but may depend on impacted files.
+   * Regular Python rules will not run on such files.
+   * Security UCFGs and DBD IRs will be regenerated for them if they do depend on impacted files.
+   * In such case, these files will still need to be parsed when Security or DBD rules are enabled.
    */
-  public boolean canBePartiallyScannedWithoutParsing(InputFile inputFile) {
+  public boolean canBePartiallyScannedWithoutParsing(PythonInputFile inputFile) {
     return false;
   }
 
-  /* We consider a file to be fully skippable if it is unchanged and does NOT depend on any impacted file.
-     Regular Python rules will not run on these files. Security UCFGs and DBD IRs will be retrieved from the cache.
-     These files will not be parsed.
+  /**
+   * @param inputFile
+   * @return true if a file is fully skippable, false otherwise
+   * We consider a file to be fully skippable if it is unchanged and does NOT depend on any impacted file.
+   * Regular Python rules will not run on these files. Security UCFGs and DBD IRs will be retrieved from the cache.
+   * These files will not be parsed.
    */
-  public boolean canBeFullyScannedWithoutParsing(InputFile inputFile) {
+  public boolean canBeFullyScannedWithoutParsing(PythonInputFile inputFile) {
     return false;
   }
 
@@ -143,12 +150,12 @@ public abstract class PythonIndexer {
     }
 
     @Override
-    protected void scanFile(InputFile inputFile) throws IOException {
+    protected void scanFile(PythonInputFile inputFile) throws IOException {
       addFile(inputFile);
     }
 
     @Override
-    protected void processException(Exception e, InputFile file) {
+    protected void processException(Exception e, PythonInputFile file) {
       LOG.debug("Unable to construct project-level symbol table for file: {}", file);
       LOG.debug(e.getMessage());
     }
