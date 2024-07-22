@@ -26,9 +26,13 @@ public interface PythonInputFile {
 
   InputFile wrappedFile();
 
-  String contents() throws IOException;
+  default String contents() throws IOException {
+    return wrappedFile().contents();
+  }
 
-  Kind kind();
+  default Kind kind() {
+    return Kind.PYTHON;
+  }
 
   enum Kind {
     PYTHON,

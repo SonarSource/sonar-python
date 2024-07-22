@@ -19,7 +19,6 @@
  */
 package org.sonar.plugins.python;
 
-import java.io.IOException;
 import org.sonar.api.batch.fs.InputFile;
 
 public class PythonInputFileImpl implements PythonInputFile {
@@ -31,33 +30,11 @@ public class PythonInputFileImpl implements PythonInputFile {
 
   @Override
   public InputFile wrappedFile() {
-    return this.wrappedFile;
+    return wrappedFile;
   }
 
   @Override
   public String toString() {
     return wrappedFile.toString();
-  }
-
-
-  @Override
-  public boolean equals(Object obj) {
-    return wrappedFile.equals(obj);
-  }
-
-
-  @Override
-  public int hashCode() {
-    return wrappedFile.hashCode();
-  }
-
-  @Override
-  public Kind kind() {
-    return Kind.PYTHON;
-  }
-
-  @Override
-  public String contents() throws IOException {
-    return wrappedFile.contents();
   }
 }

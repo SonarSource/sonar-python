@@ -27,26 +27,12 @@ import org.sonar.plugins.python.PythonInputFile.Kind;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class PythonInputFileTest {
+class PythonInputFileImplTest {
 
   @Test
   void shouldHavePythonKind() {
     PythonInputFile inputFile = new PythonInputFileImpl(createWrappedFile());
     assertThat(inputFile.kind()).isEqualTo(Kind.PYTHON);
-  }
-
-  @Test
-  void shouldHaveTheWrappedFileHash() {
-    InputFile wrappedFile = createWrappedFile();
-    PythonInputFile inputFile = new PythonInputFileImpl(wrappedFile);
-    assertThat(inputFile).hasSameHashCodeAs(wrappedFile);
-  }
-
-  @Test
-  void shouldEqualTheWrappedFile() {
-    InputFile wrappedFile = createWrappedFile();
-    PythonInputFile inputFile = new PythonInputFileImpl(wrappedFile);
-    assertThat(inputFile).isEqualTo(wrappedFile);
   }
 
   @Test
@@ -62,9 +48,8 @@ class PythonInputFileTest {
     PythonInputFile inputFile = new PythonInputFileImpl(wrappedFile);
     assertThat(inputFile.contents()).isEqualTo(wrappedFile.contents());
   }
+
   private InputFile createWrappedFile() {
     return TestInputFileBuilder.create("moduleKey", "name").setContents("Test").build();
   }
 }
-
-

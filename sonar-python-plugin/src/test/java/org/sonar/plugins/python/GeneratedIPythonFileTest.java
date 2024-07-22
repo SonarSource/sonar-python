@@ -24,6 +24,7 @@ import java.util.Map;
 import org.junit.jupiter.api.Test;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
+import org.sonar.plugins.python.IpynbNotebookParser.IPythonLocation;
 import org.sonar.plugins.python.PythonInputFile.Kind;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -32,40 +33,41 @@ class GeneratedIPythonFileTest {
 
   @Test
   void shouldHaveIPythonKind() {
-    PythonInputFile inputFile = new GeneratedIPythonFile(createWrappedFile(), "",  Map.of());
+    PythonInputFile inputFile = new GeneratedIPythonFile(createWrappedFile(), "", Map.of());
     assertThat(inputFile.kind()).isEqualTo(Kind.IPYTHON);
   }
 
   @Test
-  void shouldHaveTheWrappedFileHash() {
+  void shouldReturnTheWrappedFile() {
     InputFile wrappedFile = createWrappedFile();
-    PythonInputFile inputFile = new GeneratedIPythonFile(wrappedFile, "",  Map.of());
-    assertThat(inputFile).hasSameHashCodeAs(wrappedFile);
+    GeneratedIPythonFile inputFile = new GeneratedIPythonFile(wrappedFile, "",Map.of());
+    assertThat(inputFile.wrappedFile()).isEqualTo(wrappedFile);
   }
 
   @Test
-  void shouldEqualTheWrappedFile() {
+  void shouldReturnTheOffsetMap() {
     InputFile wrappedFile = createWrappedFile();
-    PythonInputFile inputFile = new GeneratedIPythonFile(wrappedFile, "", Map.of());
-    assertThat(inputFile).isEqualTo(wrappedFile);
+    Map<Integer, IPythonLocation> offsetMap = Map.of(1, new IPythonLocation(1 , 2));
+    GeneratedIPythonFile inputFile = new GeneratedIPythonFile(wrappedFile, "", offsetMap);
+    assertThat(inputFile.getOffsetMap()).isEqualTo(offsetMap);
   }
 
   @Test
   void shouldHaveTheWrappedFileToString() {
     InputFile wrappedFile = createWrappedFile();
-    PythonInputFile inputFile = new GeneratedIPythonFile(wrappedFile, "",  Map.of());
+    PythonInputFile inputFile = new GeneratedIPythonFile(wrappedFile, "", Map.of());
     assertThat(inputFile).hasToString(wrappedFile.toString());
   }
 
   @Test
   void shouldHaveTheContentPassed() throws IOException {
     InputFile wrappedFile = createWrappedFile();
-    PythonInputFile inputFile = new GeneratedIPythonFile(wrappedFile, "test",  Map.of());
+    PythonInputFile inputFile = new GeneratedIPythonFile(wrappedFile, "test", Map.of());
     assertThat(inputFile.contents()).isEqualTo("test");
 
   }
+
   private InputFile createWrappedFile() {
     return TestInputFileBuilder.create("moduleKey", "name").setContents("Some content").build();
   }
 }
-
