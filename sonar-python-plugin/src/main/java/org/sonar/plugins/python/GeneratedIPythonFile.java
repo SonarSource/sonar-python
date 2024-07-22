@@ -48,8 +48,14 @@ public class GeneratedIPythonFile implements PythonInputFile {
   public record Offset(int line, int column) {
   }
 
+  @Override
   public InputFile wrappedFile() {
     return this.wrappedFile;
+  }
+
+  @Override
+  public Kind kind(){
+    return Kind.IPYTHON;
   }
 
   @Override
@@ -66,4 +72,6 @@ public class GeneratedIPythonFile implements PythonInputFile {
   public int hashCode() {
     return wrappedFile.hashCode();
   }
+
+
 }

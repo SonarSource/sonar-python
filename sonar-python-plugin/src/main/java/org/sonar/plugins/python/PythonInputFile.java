@@ -25,4 +25,11 @@ public interface PythonInputFile {
 
   InputFile wrappedFile();
 
+  Kind kind();
+
+  enum Kind {
+    PYTHON,
+    IPYTHON
+  }
+
 }

@@ -19,7 +19,6 @@
  */
 package org.sonar.plugins.python;
 
-import java.util.Map;
 import org.junit.jupiter.api.Test;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
@@ -27,32 +26,32 @@ import org.sonar.plugins.python.PythonInputFile.Kind;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class GeneratedIPythonFileTest {
+class PythonInputFileTest {
 
   @Test
-  void shouldHaveIPythonKind() {
-    PythonInputFile inputFile = new GeneratedIPythonFile(createWrappedFile(), Map.of(), Map.of());
-    assertThat(inputFile.kind()).isEqualTo(Kind.IPYTHON);
+  void shouldHavePythonKind() {
+    PythonInputFile inputFile = new PythonInputFileImpl(createWrappedFile());
+    assertThat(inputFile.kind()).isEqualTo(Kind.PYTHON);
   }
 
   @Test
   void shouldHaveTheWrappedFileHash() {
     InputFile wrappedFile = createWrappedFile();
-    PythonInputFile inputFile = new GeneratedIPythonFile(wrappedFile, Map.of(), Map.of());
+    PythonInputFile inputFile = new PythonInputFileImpl(wrappedFile);
     assertThat(inputFile).hasSameHashCodeAs(wrappedFile);
   }
 
   @Test
   void shouldEqualTheWrappedFile() {
     InputFile wrappedFile = createWrappedFile();
-    PythonInputFile inputFile = new GeneratedIPythonFile(wrappedFile, Map.of(), Map.of());
+    PythonInputFile inputFile = new PythonInputFileImpl(wrappedFile);
     assertThat(inputFile).isEqualTo(wrappedFile);
   }
 
   @Test
   void shouldHaveTheWrappedFileToString() {
     InputFile wrappedFile = createWrappedFile();
-    PythonInputFile inputFile = new GeneratedIPythonFile(wrappedFile, Map.of(), Map.of());
+    PythonInputFile inputFile = new PythonInputFileImpl(wrappedFile);
     assertThat(inputFile).hasToString(wrappedFile.toString());
   }
 
@@ -60,4 +59,5 @@ class GeneratedIPythonFileTest {
     return TestInputFileBuilder.create("moduleKey", "name").build();
   }
 }
+
 

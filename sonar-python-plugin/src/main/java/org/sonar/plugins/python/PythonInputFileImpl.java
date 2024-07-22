@@ -28,6 +28,7 @@ public class PythonInputFileImpl implements PythonInputFile {
     this.wrappedFile = wrappedFile;
   }
 
+  @Override
   public InputFile wrappedFile() {
     return this.wrappedFile;
   }
@@ -47,5 +48,10 @@ public class PythonInputFileImpl implements PythonInputFile {
   @Override
   public int hashCode() {
     return wrappedFile.hashCode();
+  }
+
+  @Override
+  public Kind kind() {
+    return Kind.PYTHON;
   }
 }
