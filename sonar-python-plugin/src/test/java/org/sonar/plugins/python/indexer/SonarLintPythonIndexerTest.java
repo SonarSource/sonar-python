@@ -39,6 +39,8 @@ import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.testfixtures.log.LogTesterJUnit5;
 import org.sonar.plugins.python.Python;
+import org.sonar.plugins.python.PythonInputFile;
+import org.sonar.plugins.python.PythonInputFileImpl;
 import org.sonar.plugins.python.TestUtils;
 import org.sonar.plugins.python.api.SonarLintCache;
 import org.sonar.plugins.python.api.caching.CacheContext;
@@ -62,8 +64,8 @@ class SonarLintPythonIndexerTest {
   @RegisterExtension
   public LogTesterJUnit5 logTester = new LogTesterJUnit5().setLevel(Level.DEBUG);
 
-  InputFile file1;
-  InputFile file2;
+  PythonInputFile file1;
+  PythonInputFile file2;
   TestModuleFileSystem moduleFileSystem;
   SonarLintPythonIndexer pythonIndexer;
   ProjectLevelSymbolTable projectLevelSymbolTable;
@@ -76,7 +78,7 @@ class SonarLintPythonIndexerTest {
 
     file1 = inputFile("main.py");
     file2 = inputFile("mod.py");
-    List<InputFile> inputFiles = new ArrayList<>(Arrays.asList(file1, file2));
+    List<PythonInputFile> inputFiles = new ArrayList<>(Arrays.asList(file1, file2));
     moduleFileSystem = new TestModuleFileSystem(inputFiles);
     pythonIndexer = new SonarLintPythonIndexer(moduleFileSystem);
     pythonIndexer.buildOnce(context);
@@ -96,7 +98,7 @@ class SonarLintPythonIndexerTest {
 
   @Test
   void build_once_should_build_once() {
-    InputFile file3 = inputFile("added.py");
+    PythonInputFile file3 = inputFile("added.py");
     moduleFileSystem.addFile(file3);
     pythonIndexer.buildOnce(context);
 
@@ -108,7 +110,7 @@ class SonarLintPythonIndexerTest {
   void test_indexer_removed_file() {
     ModuleFileEvent moduleFileEvent = mock(ModuleFileEvent.class);
     when(moduleFileEvent.getType()).thenReturn(ModuleFileEvent.Type.DELETED);
-    when(moduleFileEvent.getTarget()).thenReturn(file2);
+    when(moduleFileEvent.getTarget()).thenReturn(file2.wrappedFile());
     pythonIndexer.process(moduleFileEvent);
 
     assertThat(projectLevelSymbolTable.getSymbolsFromModule("main")).hasSize(1);
@@ -121,7 +123,7 @@ class SonarLintPythonIndexerTest {
   void test_indexer_file_removed_twice() {
     ModuleFileEvent moduleFileEvent = mock(ModuleFileEvent.class);
     when(moduleFileEvent.getType()).thenReturn(ModuleFileEvent.Type.DELETED);
-    when(moduleFileEvent.getTarget()).thenReturn(file2);
+    when(moduleFileEvent.getTarget()).thenReturn(file2.wrappedFile());
     pythonIndexer.process(moduleFileEvent);
 
     assertThat(projectLevelSymbolTable.getSymbolsFromModule("mod")).isNull();
@@ -132,10 +134,10 @@ class SonarLintPythonIndexerTest {
 
   @Test
   void test_indexer_added_file() throws IOException {
-    InputFile file3 = createInputFile("added.py");
+    PythonInputFile file3 = createInputFile("added.py");
     ModuleFileEvent moduleFileEvent = mock(ModuleFileEvent.class);
     when(moduleFileEvent.getType()).thenReturn(ModuleFileEvent.Type.CREATED);
-    when(moduleFileEvent.getTarget()).thenReturn(file3);
+    when(moduleFileEvent.getTarget()).thenReturn(file3.wrappedFile());
     pythonIndexer.process(moduleFileEvent);
 
     assertThat(projectLevelSymbolTable.getSymbolsFromModule("main")).hasSize(1);
@@ -167,7 +169,7 @@ class SonarLintPythonIndexerTest {
   void test_indexer_modified_file() throws IOException {
     ModuleFileEvent moduleFileEvent = mock(ModuleFileEvent.class);
     when(moduleFileEvent.getType()).thenReturn(ModuleFileEvent.Type.MODIFIED);
-    when(moduleFileEvent.getTarget()).thenReturn(file2);
+    when(moduleFileEvent.getTarget()).thenReturn(file2.wrappedFile());
     pythonIndexer.process(moduleFileEvent);
 
     assertThat(projectLevelSymbolTable.getSymbolsFromModule("main")).hasSize(1);
@@ -213,8 +215,8 @@ class SonarLintPythonIndexerTest {
 
   private void testNonPythonFile(@Nullable String language) {
     ModuleFileEvent moduleFileEvent = mock(ModuleFileEvent.class);
-    DefaultInputFile txtFile = createInputFile("non_python.txt", language);
-    when(moduleFileEvent.getTarget()).thenReturn(txtFile);
+    PythonInputFile txtFile = createInputFile("non_python.txt", language);
+    when(moduleFileEvent.getTarget()).thenReturn(txtFile.wrappedFile());
     try {
       pythonIndexer.process(moduleFileEvent);
     } catch (RecognitionException exception) {
@@ -224,23 +226,23 @@ class SonarLintPythonIndexerTest {
     assertThat(projectLevelSymbolTable.getSymbolsFromModule("non_python")).isNull();
   }
 
-  private InputFile inputFile(String name) {
-    DefaultInputFile inputFile = createInputFile(name);
-    context.fileSystem().add(inputFile);
+  private PythonInputFile inputFile(String name) {
+    PythonInputFile inputFile = createInputFile(name);
+    context.fileSystem().add(inputFile.wrappedFile());
     return inputFile;
   }
 
-  private DefaultInputFile createInputFile(String name) {
+  private PythonInputFile createInputFile(String name) {
     return createInputFile(name, Python.KEY);
   }
 
-  private DefaultInputFile createInputFile(String name, String languageKey) {
-    return TestInputFileBuilder.create("moduleKey", name)
+  private PythonInputFile createInputFile(String name, String languageKey) {
+    return new PythonInputFileImpl(TestInputFileBuilder.create("moduleKey", name)
       .setModuleBaseDir(baseDir.toPath())
       .setCharset(StandardCharsets.UTF_8)
       .setType(InputFile.Type.MAIN)
       .setLanguage(languageKey)
       .initMetadata(TestUtils.fileContent(new File(baseDir, name), StandardCharsets.UTF_8))
-      .build();
+      .build());
   }
 }

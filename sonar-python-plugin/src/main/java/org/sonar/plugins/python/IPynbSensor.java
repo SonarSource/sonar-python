@@ -62,7 +62,7 @@ public final class IPynbSensor implements Sensor {
 
   @Override
   public void execute(SensorContext context) {
-    List<InputFile> pythonFiles = getInputFiles(context);
+    List<PythonInputFile> pythonFiles = getInputFiles(context);
     var pythonVersions = context.config().getStringArray(PYTHON_VERSION_KEY);
     if (pythonVersions.length != 0) {
       ProjectPythonVersion.setCurrentVersions(PythonVersionUtils.fromStringArray(pythonVersions));
@@ -71,11 +71,11 @@ public final class IPynbSensor implements Sensor {
     scanner.execute(pythonFiles, context);
   }
 
-  private static List<InputFile> getInputFiles(SensorContext context) {
+  private static List<PythonInputFile> getInputFiles(SensorContext context) {
     FilePredicates p = context.fileSystem().predicates();
     Iterable<InputFile> it = context.fileSystem().inputFiles(p.and(p.hasLanguage(IPynb.KEY)));
-    List<InputFile> list = new ArrayList<>();
-    it.forEach(list::add);
+    List<PythonInputFile> list = new ArrayList<>();
+    it.forEach(f -> list.add(new PythonInputFileImpl(f)));
     return Collections.unmodifiableList(list);
   }
 }
