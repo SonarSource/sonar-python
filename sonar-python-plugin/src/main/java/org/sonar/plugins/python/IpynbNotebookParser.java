@@ -44,7 +44,7 @@ public class IpynbNotebookParser {
   }
 
   private final PythonInputFile inputFile;
-  private StringBuilder aggregatedSource = new StringBuilder();
+  private final StringBuilder aggregatedSource = new StringBuilder();
 
   // Keys are the aggregated source line number
   private final Map<Integer, IPythonLocation> locationMap = new HashMap<>();
@@ -109,17 +109,34 @@ public class IpynbNotebookParser {
     }
     String sourceLine = jParser.getValueAsString();
     JsonLocation tokenLocation = jParser.currentTokenLocation();
+    var jsonColOffset = 1;
 
     for (String line : sourceLine.lines().toList()) {
       aggregatedSource.append(line);
       aggregatedSource.append("\n");
-      locationMap.put(aggregatedSourceLine, new IPythonLocation(tokenLocation.getLineNr(), tokenLocation.getColumnNr()));
+      locationMap.put(aggregatedSourceLine, new IPythonLocation(tokenLocation.getLineNr(), tokenLocation.getColumnNr() + jsonColOffset));
+      jsonColOffset += line.length() + 2 + countEscapeCharacters(line);
       aggregatedSourceLine++;
     }
     // Account for the last cell delimiter
     aggregatedSource.append(SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER);
     aggregatedSourceLine++;
     return true;
+  }
+
+  private static int countEscapeCharacters(String str) {
+    int count = 0;
+    for (char c : str.toCharArray()) {
+      if (c == '"' || c == '\\' || c == '/' || c == '\b' || c == '\f' || c == '\n' || c == '\r' || c == '\t') {
+        count++;
+      } else {
+        if (c <= '\u001F') {
+          // Unicode escape sequence \u001F
+          count += 5;
+        }
+      }
+    }
+    return count;
   }
 
   public record ParseResult(PythonInputFile inputFile, String aggregatedSource, Map<Integer, IPythonLocation> locationMap) {
