@@ -26,6 +26,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
+import javax.annotation.Nullable;
 import org.sonar.api.Beta;
 
 @Beta
@@ -71,7 +72,13 @@ public record UnionType(Set<PythonType> candidates) implements PythonType {
   }
 
   @Beta
-  public static PythonType or(PythonType type1, PythonType type2) {
+  public static PythonType or(@Nullable PythonType type1, @Nullable PythonType type2) {
+    if (type1 == null) {
+      return type2;
+    }
+    if (type2 == null) {
+      return type1;
+    }
     if (type1.equals(PythonType.UNKNOWN) || type2.equals(PythonType.UNKNOWN)) {
       return PythonType.UNKNOWN;
     }
