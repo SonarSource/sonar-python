@@ -364,6 +364,8 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
     } else if (expression instanceof BinaryExpression binaryExpression) {
       var left = resolveTypeAnnotationExpressionType(binaryExpression.leftOperand());
       var right = resolveTypeAnnotationExpressionType(binaryExpression.rightOperand());
+      // TODO: we need to make a decision on should here be a union type of object types or an object type of a union type.
+      //  ATM it is blocked by the generic types resolution redesign
       return UnionType.or(left, right);
     }
     return PythonType.UNKNOWN;
