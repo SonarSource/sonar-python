@@ -33,6 +33,8 @@ import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.plugins.python.Python;
 import org.sonar.plugins.python.api.SonarLintCache;
 import org.sonar.plugins.python.api.caching.CacheContext;
+import org.sonar.plugins.python.PythonInputFile;
+import org.sonar.plugins.python.PythonInputFileImpl;
 import org.sonar.python.caching.CacheContextImpl;
 import org.sonar.python.caching.PythonReadCacheImpl;
 import org.sonar.python.caching.PythonWriteCacheImpl;
@@ -64,9 +66,9 @@ public class SonarLintPythonIndexer extends PythonIndexer implements ModuleFileL
     }
     this.projectBaseDirAbsolutePath = context.fileSystem().baseDir().getAbsolutePath();
     shouldBuildProjectSymbolTable = false;
-    List<InputFile> files = getInputFiles(moduleFileSystem);
+    List<PythonInputFile> files = getInputFiles(moduleFileSystem);
     collectPackageNames(files);
-    long nLines = files.stream().map(InputFile::lines).mapToLong(Integer::longValue).sum();
+    long nLines = files.stream().map(PythonInputFile::wrappedFile).map(InputFile::lines).mapToLong(Integer::longValue).sum();
     long maxLinesForIndexing = context.config().getLong(MAX_LINES_PROPERTY).orElse(DEFAULT_MAX_LINES_FOR_INDEXING);
     if (nLines > maxLinesForIndexing) {
       // Avoid performance issues for large projects
@@ -102,28 +104,28 @@ public class SonarLintPythonIndexer extends PythonIndexer implements ModuleFileL
     return cacheContext != null ? cacheContext : CacheContextImpl.dummyCache();
   }
 
-  private static List<InputFile> getInputFiles(ModuleFileSystem moduleFileSystem) {
-    List<InputFile> files = new ArrayList<>();
-    moduleFileSystem.files(Python.KEY, InputFile.Type.MAIN).forEach(files::add);
+  private static List<PythonInputFile> getInputFiles(ModuleFileSystem moduleFileSystem) {
+    List<PythonInputFile> files = new ArrayList<>();
+    moduleFileSystem.files(Python.KEY, InputFile.Type.MAIN).map(PythonInputFileImpl::new).forEach(files::add);
     return Collections.unmodifiableList(files);
   }
 
   @Override
-  void addFile(InputFile inputFile) throws IOException {
+  void addFile(PythonInputFile inputFile) throws IOException {
     super.addFile(inputFile);
-    indexedFiles.put(inputFile.absolutePath(), inputFile);
+    indexedFiles.put(inputFile.wrappedFile().absolutePath(), inputFile.wrappedFile());
   }
 
   @Override
-  void removeFile(InputFile inputFile) {
+  void removeFile(PythonInputFile inputFile) {
     super.removeFile(inputFile);
-    indexedFiles.remove(inputFile.absolutePath());
+    indexedFiles.remove(inputFile.wrappedFile().absolutePath());
   }
 
   @Override
   public void process(ModuleFileEvent moduleFileEvent) {
-    InputFile target = moduleFileEvent.getTarget();
-    String language = target.language();
+    PythonInputFile target = new PythonInputFileImpl(moduleFileEvent.getTarget());
+    String language = target.wrappedFile().language();
     if (language == null || !language.equals(Python.KEY)) {
       LOG.debug("Module file event for {} has been ignored because it's not a Python file.", target);
       return;
@@ -136,7 +138,7 @@ public class SonarLintPythonIndexer extends PythonIndexer implements ModuleFileL
       try {
         addFile(target);
       } catch (IOException e) {
-        LOG.debug("Failed to load file \"{}\" ({}) to the project symbol table", target.filename(), type);
+        LOG.debug("Failed to load file \"{}\" ({}) to the project symbol table", target.wrappedFile().filename(), type);
       }
     }
   }
