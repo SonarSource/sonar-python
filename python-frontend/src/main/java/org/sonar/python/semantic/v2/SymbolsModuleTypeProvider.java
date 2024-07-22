@@ -49,14 +49,16 @@ import org.sonar.python.types.v2.UnionType;
 public class SymbolsModuleTypeProvider {
   private final ProjectLevelSymbolTable projectLevelSymbolTable;
   private final TypeShed typeShed;
+  private ModuleType rootModule;
 
   public SymbolsModuleTypeProvider(ProjectLevelSymbolTable projectLevelSymbolTable, TypeShed typeShed) {
     this.projectLevelSymbolTable = projectLevelSymbolTable;
     this.typeShed = typeShed;
+    this.rootModule = createModuleFromSymbols(null, null, typeShed.builtinSymbols().values());
   }
 
   public ModuleType createBuiltinModule() {
-    return createModuleFromSymbols(null, null, typeShed.builtinSymbols().values());
+    return rootModule;
   }
 
   public ModuleType createModuleType(List<String> moduleFqn, ModuleType parent) {
@@ -117,10 +119,7 @@ public class SymbolsModuleTypeProvider {
 
     InferredType inferredType = ((FunctionSymbolImpl) symbol).declaredReturnType();
     ClassSymbol classSymbol = inferredType.runtimeTypeSymbol();
-    var returnType = PythonType.UNKNOWN;
-    if (classSymbol != null) {
-      returnType = convertToType(classSymbol, createdTypesBySymbol);
-    }
+    var returnType = resolveReturnType(createdTypesBySymbol, classSymbol);
 
     FunctionTypeBuilder functionTypeBuilder =
       new FunctionTypeBuilder(symbol.name())
@@ -137,15 +136,21 @@ public class SymbolsModuleTypeProvider {
     return functionType;
   }
 
-  private static ParameterV2 convertParameter(FunctionSymbol.Parameter parameter) {
-    return new ParameterV2(parameter.name(),
-      PythonType.UNKNOWN,
-      parameter.hasDefaultValue(),
-      parameter.isKeywordOnly(),
-      parameter.isPositionalOnly(),
-      parameter.isKeywordVariadic(),
-      parameter.isPositionalVariadic(),
-      null);
+  private PythonType resolveReturnType(Map<Symbol, PythonType> createdTypesBySymbol, @Nullable ClassSymbol classSymbol) {
+    var returnType = PythonType.UNKNOWN;
+    if (classSymbol == null) {
+      return returnType;
+    }
+    if (rootModule == null) {
+      return convertToType(classSymbol, createdTypesBySymbol);
+    }
+    // If the symbol is a built-in symbol and the root module already exists, we search for it instead of recreating the symbol
+    // This is necessary to avoid duplicated symbols in the original ProjectSymbolTable to translate into duplicated PythonType
+    returnType = Optional.ofNullable(classSymbol.fullyQualifiedName())
+      .filter(fqn -> !fqn.contains("."))
+      .flatMap(f -> rootModule.resolveMember(f))
+      .orElseGet(() -> convertToType(classSymbol, createdTypesBySymbol));
+    return returnType;
   }
 
   private PythonType convertToClassType(ClassSymbol symbol, Map<Symbol, PythonType> createdTypesBySymbol) {
@@ -174,6 +179,17 @@ public class SymbolsModuleTypeProvider {
       .forEach(classType.superClasses()::add);
 
     return classType;
+  }
+
+  private static ParameterV2 convertParameter(FunctionSymbol.Parameter parameter) {
+    return new ParameterV2(parameter.name(),
+      PythonType.UNKNOWN,
+      parameter.hasDefaultValue(),
+      parameter.isKeywordOnly(),
+      parameter.isPositionalOnly(),
+      parameter.isKeywordVariadic(),
+      parameter.isPositionalVariadic(),
+      null);
   }
 
   private Symbol typeshedSymbolWithFQN(String fullyQualifiedName) {
