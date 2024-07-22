@@ -1633,6 +1633,46 @@ class TypeInferenceV2Test {
     assertThat(unionType.candidates()).containsExactlyInAnyOrder(classA, classB);
   }
 
+  @Test
+  @Disabled("Duplicate PythonType for NONE_TYPE")
+  void imported_symbol_call_return_type() {
+    assertThat(lastExpression(
+      """
+      import fcntl
+      ret = fcntl.flock(..., ...)
+      ret
+      """
+    ).typeV2()).isEqualTo(NONE_TYPE);
+  }
+
+  @Test
+  void basic_imported_symbol() {
+    assertThat(lastExpression(
+      """
+      import fcntl
+      fcntl
+      """
+    ).typeV2()).isInstanceOf(ModuleType.class);
+  }
+
+  @Test
+  void basic_imported_symbols() {
+    FileInput fileInput = inferTypes(
+      """
+      import fcntl, math
+      fcntl
+      math
+      """
+    );
+    PythonType fnctlModule = ((ExpressionStatement) fileInput.statements().statements().get(1)).expressions().get(0).typeV2();
+    assertThat(fnctlModule).isInstanceOf(ModuleType.class);
+    assertThat(fnctlModule.name()).isEqualTo("fcntl");
+    PythonType mathModule = ((ExpressionStatement) fileInput.statements().statements().get(2)).expressions().get(0).typeV2();
+    assertThat(mathModule).isInstanceOf(ModuleType.class);
+    assertThat(mathModule.name()).isEqualTo("math");
+    assertThat(((UnionType) mathModule.resolveMember("acos").get()).candidates()).allMatch(FunctionType.class::isInstance);
+  }
+
   private static FileInput inferTypes(String lines) {
     return inferTypes(lines, PROJECT_LEVEL_TYPE_TABLE);
   }
