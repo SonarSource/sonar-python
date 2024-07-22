@@ -33,6 +33,7 @@ import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.BinaryExpression;
 import org.sonar.plugins.python.api.tree.ClassDef;
+import org.sonar.plugins.python.api.tree.ComprehensionExpression;
 import org.sonar.plugins.python.api.tree.DictionaryLiteral;
 import org.sonar.plugins.python.api.tree.DottedName;
 import org.sonar.plugins.python.api.tree.Expression;
@@ -60,6 +61,7 @@ import org.sonar.python.semantic.v2.FunctionTypeBuilder;
 import org.sonar.python.semantic.v2.ProjectLevelTypeTable;
 import org.sonar.python.semantic.v2.SymbolV2;
 import org.sonar.python.semantic.v2.UsageV2;
+import org.sonar.python.tree.ComprehensionExpressionImpl;
 import org.sonar.python.tree.DictionaryLiteralImpl;
 import org.sonar.python.tree.ListLiteralImpl;
 import org.sonar.python.tree.NameImpl;
@@ -175,6 +177,18 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
     attributes.add(elementsType);
     PythonType listType = builtins.resolveMember("list").orElse(PythonType.UNKNOWN);
     ((ListLiteralImpl) listLiteral).typeV2(new ObjectType(listType, attributes, new ArrayList<>()));
+  }
+
+  @Override
+  public void visitPyListOrSetCompExpression(ComprehensionExpression comprehensionExpression) {
+    super.visitPyListOrSetCompExpression(comprehensionExpression);
+    var builtins = this.projectLevelTypeTable.getModule();
+    PythonType pythonType = switch (comprehensionExpression.getKind()) {
+      case LIST_COMPREHENSION -> builtins.resolveMember("list").orElse(PythonType.UNKNOWN);
+      case SET_COMPREHENSION -> builtins.resolveMember("set").orElse(PythonType.UNKNOWN);
+      default -> PythonType.UNKNOWN;
+    };
+    ((ComprehensionExpressionImpl) comprehensionExpression).typeV2(new ObjectType(pythonType, new ArrayList<>(), new ArrayList<>()));
   }
 
   @Override

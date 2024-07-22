@@ -34,6 +34,7 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TreeVisitor;
 import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.types.InferredTypes;
+import org.sonar.python.types.v2.PythonType;
 
 public class ComprehensionExpressionImpl extends PyTree implements ComprehensionExpression {
 
@@ -43,6 +44,7 @@ public class ComprehensionExpressionImpl extends PyTree implements Comprehension
   private final ComprehensionFor comprehensionFor;
   private final Token closingToken;
   private Set<Symbol> symbols = new HashSet<>();
+  private PythonType typeV2;
 
   public ComprehensionExpressionImpl(Kind kind, @Nullable Token openingToken, Expression resultExpression,
                                      ComprehensionFor compFor, @Nullable Token closingToken) {
@@ -98,5 +100,14 @@ public class ComprehensionExpressionImpl extends PyTree implements Comprehension
         // GENERATOR_EXPR: needs a class symbol for 'generator'
         return InferredTypes.anyType();
     }
+  }
+
+  @Override
+  public PythonType typeV2() {
+    return this.typeV2;
+  }
+
+  public void typeV2(PythonType type) {
+    this.typeV2 = type;
   }
 }

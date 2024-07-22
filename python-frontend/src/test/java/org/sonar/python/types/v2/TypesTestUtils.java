@@ -36,6 +36,7 @@ public class TypesTestUtils {
   public static final PythonType BOOL_TYPE = BUILTINS.resolveMember("bool").get();
   public static final PythonType STR_TYPE = BUILTINS.resolveMember("str").get();
   public static final PythonType LIST_TYPE = BUILTINS.resolveMember("list").get();
+  public static final PythonType SET_TYPE = BUILTINS.resolveMember("set").get();
   public static final PythonType NONE_TYPE = BUILTINS.resolveMember("NoneType").get();
 
   public static FileInput parseAndInferTypes(String... code) {
