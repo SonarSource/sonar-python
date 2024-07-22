@@ -31,6 +31,7 @@ import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.tree.ArgList;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
+import org.sonar.plugins.python.api.tree.BinaryExpression;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.DictionaryLiteral;
 import org.sonar.plugins.python.api.tree.DottedName;
@@ -44,12 +45,15 @@ import org.sonar.plugins.python.api.tree.ListLiteral;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.NoneExpression;
 import org.sonar.plugins.python.api.tree.NumericLiteral;
+import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.SetLiteral;
 import org.sonar.plugins.python.api.tree.StringLiteral;
+import org.sonar.plugins.python.api.tree.SubscriptionExpression;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tuple;
+import org.sonar.plugins.python.api.tree.TypeAnnotation;
 import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.semantic.v2.ClassTypeBuilder;
 import org.sonar.python.semantic.v2.FunctionTypeBuilder;
@@ -71,6 +75,7 @@ import org.sonar.python.types.v2.Member;
 import org.sonar.python.types.v2.ModuleType;
 import org.sonar.python.types.v2.ObjectType;
 import org.sonar.python.types.v2.PythonType;
+import org.sonar.python.types.v2.TypeSource;
 import org.sonar.python.types.v2.UnionType;
 
 import static org.sonar.python.semantic.SymbolUtils.pathOf;
@@ -114,7 +119,7 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
     }
     ModuleType builtins = this.projectLevelTypeTable.getModule();
     PythonType tupleType = builtins.resolveMember("tuple").orElse(PythonType.UNKNOWN);
-    ((TupleImpl) tuple).typeV2(new ObjectType(tupleType,  attributes, new ArrayList<>()));
+    ((TupleImpl) tuple).typeV2(new ObjectType(tupleType, attributes, new ArrayList<>()));
   }
 
   @Override
@@ -122,7 +127,7 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
     super.visitDictionaryLiteral(dictionaryLiteral);
     ModuleType builtins = this.projectLevelTypeTable.getModule();
     PythonType dictType = builtins.resolveMember("dict").orElse(PythonType.UNKNOWN);
-    ((DictionaryLiteralImpl) dictionaryLiteral).typeV2(new ObjectType(dictType,  new ArrayList<>(), new ArrayList<>()));
+    ((DictionaryLiteralImpl) dictionaryLiteral).typeV2(new ObjectType(dictType, new ArrayList<>(), new ArrayList<>()));
   }
 
   @Override
@@ -130,7 +135,7 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
     super.visitSetLiteral(setLiteral);
     ModuleType builtins = this.projectLevelTypeTable.getModule();
     PythonType setType = builtins.resolveMember("set").orElse(PythonType.UNKNOWN);
-    ((SetLiteralImpl) setLiteral).typeV2(new ObjectType(setType,  new ArrayList<>(), new ArrayList<>()));
+    ((SetLiteralImpl) setLiteral).typeV2(new ObjectType(setType, new ArrayList<>(), new ArrayList<>()));
   }
 
   @Override
@@ -327,6 +332,43 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
         var assignedValueType = assignmentStatement.assignedValue().typeV2();
         lhsName.typeV2(assignedValueType);
       });
+  }
+
+  @Override
+  public void visitParameter(Parameter parameter) {
+    scan(parameter.typeAnnotation());
+    scan(parameter.defaultValue());
+    Optional.ofNullable(parameter.typeAnnotation())
+      .map(TypeAnnotation::expression)
+      .map(TrivialTypeInferenceVisitor::resolveTypeAnnotationExpressionType)
+      .ifPresent(type -> setTypeToName(parameter.name(), type));
+    scan(parameter.name());
+  }
+
+  private static PythonType resolveTypeAnnotationExpressionType(Expression expression) {
+    if (expression instanceof Name name && name.typeV2() != PythonType.UNKNOWN) {
+      return new ObjectType(name.typeV2(), TypeSource.TYPE_HINT);
+    } else if (expression instanceof SubscriptionExpression subscriptionExpression && subscriptionExpression.object().typeV2() != PythonType.UNKNOWN) {
+      var candidateTypes = subscriptionExpression.subscripts()
+        .expressions()
+        .stream()
+        .map(Expression::typeV2)
+        .distinct()
+        .toList();
+
+      var elementsType = UnionType.or(candidateTypes);
+
+      var attributes = new ArrayList<PythonType>();
+      attributes.add(new ObjectType(elementsType, TypeSource.TYPE_HINT));
+      return new ObjectType(subscriptionExpression.object().typeV2(), attributes, new ArrayList<>(), TypeSource.TYPE_HINT);
+    } else if (expression instanceof BinaryExpression binaryExpression) {
+      var left = resolveTypeAnnotationExpressionType(binaryExpression.leftOperand());
+      var right = resolveTypeAnnotationExpressionType(binaryExpression.rightOperand());
+      // TODO: we need to make a decision on should here be a union type of object types or an object type of a union type.
+      //  ATM it is blocked by the generic types resolution redesign
+      return UnionType.or(left, right);
+    }
+    return PythonType.UNKNOWN;
   }
 
   @Override

@@ -42,6 +42,11 @@ public class TypeCheckBuilder {
     return this;
   }
 
+  public TypeCheckBuilder isTypeHintTypeSource() {
+    predicates.add(new TypeSourceMatcherTypePredicate(TypeSource.TYPE_HINT));
+    return this;
+  }
+
   public TriBool check(PythonType pythonType) {
     TriBool result = TriBool.TRUE;
     for (TypePredicate predicate : predicates) {
@@ -82,6 +87,14 @@ public class TypeCheckBuilder {
         return classType.instancesHaveMember(memberName);
       }
       return TriBool.FALSE;
+    }
+  }
+
+  record TypeSourceMatcherTypePredicate(TypeSource typeSource) implements TypePredicate {
+
+    @Override
+    public TriBool test(PythonType pythonType) {
+      return pythonType.typeSource() == typeSource ? TriBool.TRUE : TriBool.FALSE;
     }
   }
 }
