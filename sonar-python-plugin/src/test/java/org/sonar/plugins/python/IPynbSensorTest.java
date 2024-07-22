@@ -28,7 +28,6 @@ import org.mockito.Mockito;
 import org.slf4j.event.Level;
 import org.sonar.api.SonarRuntime;
 import org.sonar.api.batch.fs.InputFile;
-import org.sonar.api.batch.fs.internal.DefaultInputFile;
 import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.rule.ActiveRules;
 import org.sonar.api.batch.rule.CheckFactory;
@@ -101,7 +100,7 @@ class IPynbSensorTest {
         .build())
       .build();
 
-    InputFile inputFile = inputFile(FILE_1);
+    PythonInputFile inputFile = inputFile(FILE_1);
 
     PythonIndexer pythonIndexer = pythonIndexer(List.of(inputFile));
     sensor(pythonIndexer).execute(context);
@@ -124,34 +123,35 @@ class IPynbSensorTest {
     FileLinesContext fileLinesContext = mock(FileLinesContext.class);
     when(fileLinesContextFactory.createFor(Mockito.any(InputFile.class))).thenReturn(fileLinesContext);
     CheckFactory checkFactory = new CheckFactory(activeRules);
-   return new IPynbSensor(fileLinesContextFactory, checkFactory, mock(NoSonarFilter.class), indexer);
+    return new IPynbSensor(fileLinesContextFactory, checkFactory, mock(NoSonarFilter.class), indexer);
   }
 
-  private InputFile inputFile(String name) {
-    DefaultInputFile inputFile = createInputFile(name);
-    context.fileSystem().add(inputFile);
+  private PythonInputFile inputFile(String name) {
+    PythonInputFile inputFile = createInputFile(name);
+    context.fileSystem().add(inputFile.wrappedFile());
     return inputFile;
   }
 
-  private DefaultInputFile createInputFile(String name) {
-    return TestInputFileBuilder.create("moduleKey", name)
+  private PythonInputFile createInputFile(String name) {
+    return new PythonInputFileImpl(TestInputFileBuilder.create("moduleKey", name)
       .setModuleBaseDir(baseDir.toPath())
       .setCharset(UTF_8)
       .setType(InputFile.Type.MAIN)
       .setLanguage(IPynb.KEY)
       .initMetadata(TestUtils.fileContent(new File(baseDir, name), UTF_8))
       .setStatus(InputFile.Status.ADDED)
-      .build();
+      .build());
   }
 
-  private SonarLintPythonIndexer pythonIndexer(List<InputFile> files) {
+  private SonarLintPythonIndexer pythonIndexer(List<PythonInputFile> files) {
     return new SonarLintPythonIndexer(new TestModuleFileSystem(files));
   }
+
   @Test
   void test_python_version_parameter() {
     context.setRuntime(SONARLINT_RUNTIME);
 
-    InputFile inputFile = inputFile(FILE_1);
+    PythonInputFile inputFile = inputFile(FILE_1);
     activeRules = new ActiveRulesBuilder().build();
     context.setSettings(new MapSettings().setProperty("sonar.python.version", "3.8"));
     PythonIndexer pythonIndexer = pythonIndexer(List.of(inputFile));
