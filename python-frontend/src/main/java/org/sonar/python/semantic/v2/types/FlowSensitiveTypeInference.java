@@ -87,9 +87,9 @@ public class FlowSensitiveTypeInference extends ForwardAnalysis {
         updateTree(assignment.variable(), state);
       }
     } else if (element instanceof FunctionDef functionDef) {
-      handleDefinition(functionDef, state);
+      handleDefinitions(functionDef, state);
     } else if (element instanceof ImportName importName) {
-      handleDefinition(importName, state);
+      handleDefinitions(importName, state);
     } else if (element instanceof Parameter parameter) {
       handleParameter(parameter, state);
     } else if (isForLoopAssignment(element)) {
@@ -153,9 +153,9 @@ public class FlowSensitiveTypeInference extends ForwardAnalysis {
       });
   }
 
-  private void handleDefinition(Statement definitionStatement, TypeInferenceProgramState programState) {
+  private void handleDefinitions(Statement definitionStatement, TypeInferenceProgramState programState) {
     Optional.ofNullable(definitionsByDefinitionStatement.get(definitionStatement))
-      .ifPresent(definition -> definition.forEach(d -> {
+      .ifPresent(definitions -> definitions.forEach(d -> {
         SymbolV2 symbol = d.lhsSymbol();
         if (trackedVars.contains(symbol)) {
           programState.setTypes(symbol, Set.of(d.lhsName.typeV2()));
