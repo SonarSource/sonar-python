@@ -471,6 +471,39 @@ class TypeInferenceV2Test {
   }
 
   @Test
+  void inferTypesInsideFunction14() {
+    FileInput root = inferTypes("""
+      def foo(param: int):
+        param
+        param = "hello"
+        param
+      """);
+
+    var functionDef = (FunctionDef) root.statements().statements().get(0);
+    var firstExpressionStatement = (ExpressionStatement) functionDef.body().statements().get(0);
+    var firstType = firstExpressionStatement.expressions().get(0).typeV2();
+    var lastExpressionStatement = (ExpressionStatement) functionDef.body().statements().get(2);
+    var lastType = lastExpressionStatement.expressions().get(0).typeV2();
+
+    Assertions.assertThat(firstType.unwrappedType()).isEqualTo(INT_TYPE);
+    Assertions.assertThat(lastType.unwrappedType()).isEqualTo(STR_TYPE);
+  }
+
+  @Test
+  void inferTypesInsideFunction15() {
+    FileInput root = inferTypes("""
+      def foo3(a: int = "123"):
+        a
+      """);
+
+    var functionDef = (FunctionDef) root.statements().statements().get(0);
+    var lastExpressionStatement = (ExpressionStatement) functionDef.body().statements().get(0);
+    var lastType = lastExpressionStatement.expressions().get(0).typeV2();
+
+    Assertions.assertThat(lastType.unwrappedType()).isEqualTo(INT_TYPE);
+  }
+
+  @Test
   void inferTypeForReassignedBuiltinsInsideFunction() {
     FileInput root = inferTypes("""
       def foo():

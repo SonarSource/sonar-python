@@ -134,6 +134,9 @@ public class TypeInferenceV2 {
     // TODO: infer parameter type based on default value assignement
     var parameterTypes = trackedVars
       .stream()
+      .filter(symbol -> symbol.usages()
+        .stream()
+        .anyMatch(usage -> usage.kind() == UsageV2.Kind.PARAMETER))
       .collect(Collectors.toMap(SymbolV2::name, TypeInferenceV2::getParameterType));
 
     FlowSensitiveTypeInference flowSensitiveTypeInference = new FlowSensitiveTypeInference(
