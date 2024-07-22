@@ -76,7 +76,7 @@ public class IpynbNotebookParser {
       JsonToken jsonToken = jParser.nextToken();
       if (JsonToken.FIELD_NAME.equals(jsonToken) && "source".equals(jParser.currentName())) {
         jsonToken = jParser.nextToken();
-        if (parseSourceArray(jParser, jsonToken)) {
+        if (parseSourceArray(jParser, jsonToken) || parseSourceMultilineString(jParser, jsonToken)) {
           break;
         } else {
           throw new IllegalStateException("Unexpected token: " + jsonToken);
@@ -94,6 +94,25 @@ public class IpynbNotebookParser {
       JsonLocation tokenLocation = jParser.currentTokenLocation();
 
       aggregatedSource.append(sourceLine);
+      locationMap.put(aggregatedSourceLine, new IPythonLocation(tokenLocation.getLineNr(), tokenLocation.getColumnNr()));
+      aggregatedSourceLine++;
+    }
+    // Account for the last cell delimiter
+    aggregatedSource.append(SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER);
+    aggregatedSourceLine++;
+    return true;
+  }
+
+  private boolean parseSourceMultilineString(JsonParser jParser, JsonToken jsonToken) throws IOException {
+    if (jsonToken != JsonToken.VALUE_STRING) {
+      return false;
+    }
+    String sourceLine = jParser.getValueAsString();
+    JsonLocation tokenLocation = jParser.currentTokenLocation();
+
+    for (String line : sourceLine.lines().toList()) {
+      aggregatedSource.append(line);
+      aggregatedSource.append("\n");
       locationMap.put(aggregatedSourceLine, new IPythonLocation(tokenLocation.getLineNr(), tokenLocation.getColumnNr()));
       aggregatedSourceLine++;
     }
