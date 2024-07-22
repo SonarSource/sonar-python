@@ -19,33 +19,27 @@
  */
 package org.sonar.plugins.python;
 
+import java.io.IOException;
 import java.util.Map;
 import org.sonar.api.batch.fs.InputFile;
+import org.sonar.plugins.python.IpynbNotebookParser.IPythonLocation;
 
 public class GeneratedIPythonFile implements PythonInputFile {
 
   InputFile wrappedFile;
 
-  Map<Integer, Offset> offsetMap;
-  // A map from the line to a Map of column location of escaped chars: 
-  // from the position in the Python code to the position in the original file
-  Map<Integer, Map<Integer, Integer>> colOffSet;
+  Map<Integer, IPythonLocation> offsetMap;
 
-  public GeneratedIPythonFile(InputFile wrappedFile, Map<Integer, Offset> offsetMap, Map<Integer, Map<Integer, Integer>> colOffSet) {
+  private String pythonContent;
+
+  public GeneratedIPythonFile(InputFile wrappedFile, String pythonContent, Map<Integer, IPythonLocation> offsetMap) {
     this.wrappedFile = wrappedFile;
+    this.pythonContent = pythonContent;
     this.offsetMap = offsetMap;
-    this.colOffSet = colOffSet;
   }
 
-  public Map<Integer, Offset> getOffsetMap() {
+  public Map<Integer, IPythonLocation> getOffsetMap() {
     return offsetMap;
-  }
-
-  public Map<Integer, Map<Integer, Integer>> getColOffSet() {
-    return colOffSet;
-  }
-
-  public record Offset(int line, int column) {
   }
 
   @Override
@@ -54,7 +48,7 @@ public class GeneratedIPythonFile implements PythonInputFile {
   }
 
   @Override
-  public Kind kind(){
+  public Kind kind() {
     return Kind.IPYTHON;
   }
 
@@ -73,5 +67,9 @@ public class GeneratedIPythonFile implements PythonInputFile {
     return wrappedFile.hashCode();
   }
 
+  @Override
+  public String contents() throws IOException {
+    return pythonContent;
+  }
 
 }

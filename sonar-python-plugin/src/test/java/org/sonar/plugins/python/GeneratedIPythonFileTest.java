@@ -19,6 +19,7 @@
  */
 package org.sonar.plugins.python;
 
+import java.io.IOException;
 import java.util.Map;
 import org.junit.jupiter.api.Test;
 import org.sonar.api.batch.fs.InputFile;
@@ -31,33 +32,40 @@ class GeneratedIPythonFileTest {
 
   @Test
   void shouldHaveIPythonKind() {
-    PythonInputFile inputFile = new GeneratedIPythonFile(createWrappedFile(), Map.of(), Map.of());
+    PythonInputFile inputFile = new GeneratedIPythonFile(createWrappedFile(), "",  Map.of());
     assertThat(inputFile.kind()).isEqualTo(Kind.IPYTHON);
   }
 
   @Test
   void shouldHaveTheWrappedFileHash() {
     InputFile wrappedFile = createWrappedFile();
-    PythonInputFile inputFile = new GeneratedIPythonFile(wrappedFile, Map.of(), Map.of());
+    PythonInputFile inputFile = new GeneratedIPythonFile(wrappedFile, "",  Map.of());
     assertThat(inputFile).hasSameHashCodeAs(wrappedFile);
   }
 
   @Test
   void shouldEqualTheWrappedFile() {
     InputFile wrappedFile = createWrappedFile();
-    PythonInputFile inputFile = new GeneratedIPythonFile(wrappedFile, Map.of(), Map.of());
+    PythonInputFile inputFile = new GeneratedIPythonFile(wrappedFile, "", Map.of());
     assertThat(inputFile).isEqualTo(wrappedFile);
   }
 
   @Test
   void shouldHaveTheWrappedFileToString() {
     InputFile wrappedFile = createWrappedFile();
-    PythonInputFile inputFile = new GeneratedIPythonFile(wrappedFile, Map.of(), Map.of());
+    PythonInputFile inputFile = new GeneratedIPythonFile(wrappedFile, "",  Map.of());
     assertThat(inputFile).hasToString(wrappedFile.toString());
   }
 
+  @Test
+  void shouldHaveTheContentPassed() throws IOException {
+    InputFile wrappedFile = createWrappedFile();
+    PythonInputFile inputFile = new GeneratedIPythonFile(wrappedFile, "test",  Map.of());
+    assertThat(inputFile.contents()).isEqualTo("test");
+
+  }
   private InputFile createWrappedFile() {
-    return TestInputFileBuilder.create("moduleKey", "name").build();
+    return TestInputFileBuilder.create("moduleKey", "name").setContents("Some content").build();
   }
 }
 

@@ -19,11 +19,14 @@
  */
 package org.sonar.plugins.python;
 
+import java.io.IOException;
 import org.sonar.api.batch.fs.InputFile;
 
 public interface PythonInputFile {
 
   InputFile wrappedFile();
+
+  String contents() throws IOException;
 
   Kind kind();
 

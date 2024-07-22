@@ -19,6 +19,7 @@
  */
 package org.sonar.plugins.python;
 
+import java.io.IOException;
 import org.sonar.api.batch.fs.InputFile;
 
 public class PythonInputFileImpl implements PythonInputFile {
@@ -53,5 +54,10 @@ public class PythonInputFileImpl implements PythonInputFile {
   @Override
   public Kind kind() {
     return Kind.PYTHON;
+  }
+
+  @Override
+  public String contents() throws IOException {
+    return wrappedFile.contents();
   }
 }

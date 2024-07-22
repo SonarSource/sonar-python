@@ -19,6 +19,7 @@
  */
 package org.sonar.plugins.python;
 
+import java.io.IOException;
 import org.junit.jupiter.api.Test;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
@@ -55,8 +56,14 @@ class PythonInputFileTest {
     assertThat(inputFile).hasToString(wrappedFile.toString());
   }
 
+  @Test
+  void shouldReturnTheContentOfTheWrappedFile() throws IOException {
+    InputFile wrappedFile = createWrappedFile();
+    PythonInputFile inputFile = new PythonInputFileImpl(wrappedFile);
+    assertThat(inputFile.contents()).isEqualTo(wrappedFile.contents());
+  }
   private InputFile createWrappedFile() {
-    return TestInputFileBuilder.create("moduleKey", "name").build();
+    return TestInputFileBuilder.create("moduleKey", "name").setContents("Test").build();
   }
 }
 
