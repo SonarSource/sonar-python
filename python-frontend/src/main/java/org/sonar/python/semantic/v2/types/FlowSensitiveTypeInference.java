@@ -29,6 +29,7 @@ import org.sonar.plugins.python.api.tree.CompoundAssignmentStatement;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.ForStatement;
 import org.sonar.plugins.python.api.tree.FunctionDef;
+import org.sonar.plugins.python.api.tree.ImportName;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.Statement;
@@ -41,13 +42,13 @@ import org.sonar.python.types.v2.PythonType;
 public class FlowSensitiveTypeInference extends ForwardAnalysis {
   private final Set<SymbolV2> trackedVars;
   private final Map<Statement, Assignment> assignmentsByAssignmentStatement;
-  private final Map<Statement, Definition> definitionsByDefinitionStatement;
+  private final Map<Statement, Set<Definition>> definitionsByDefinitionStatement;
   private final Map<String, PythonType> parameterTypesByName;
 
   public FlowSensitiveTypeInference(
     Set<SymbolV2> trackedVars,
     Map<Statement, Assignment> assignmentsByAssignmentStatement,
-    Map<Statement, Definition> definitionsByDefinitionStatement,
+    Map<Statement, Set<Definition>> definitionsByDefinitionStatement,
     Map<String, PythonType> parameterTypesByName
   ) {
     this.trackedVars = trackedVars;
@@ -87,6 +88,8 @@ public class FlowSensitiveTypeInference extends ForwardAnalysis {
       }
     } else if (element instanceof FunctionDef functionDef) {
       handleDefinition(functionDef, state);
+    } else if (element instanceof ImportName importName) {
+      handleDefinition(importName, state);
     } else if (element instanceof Parameter parameter) {
       handleParameter(parameter, state);
     } else if (isForLoopAssignment(element)) {
@@ -152,11 +155,11 @@ public class FlowSensitiveTypeInference extends ForwardAnalysis {
 
   private void handleDefinition(Statement definitionStatement, TypeInferenceProgramState programState) {
     Optional.ofNullable(definitionsByDefinitionStatement.get(definitionStatement))
-      .ifPresent(definition -> {
-        SymbolV2 symbol = definition.lhsSymbol();
+      .ifPresent(definition -> definition.forEach(d -> {
+        SymbolV2 symbol = d.lhsSymbol();
         if (trackedVars.contains(symbol)) {
-          programState.setTypes(symbol, Set.of(definition.lhsName.typeV2()));
+          programState.setTypes(symbol, Set.of(d.lhsName.typeV2()));
         }
-      });
+      }));
   }
 }
