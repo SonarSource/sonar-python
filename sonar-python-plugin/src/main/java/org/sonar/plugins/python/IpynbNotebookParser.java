@@ -127,13 +127,8 @@ public class IpynbNotebookParser {
   private static int countEscapeCharacters(String str) {
     int count = 0;
     for (char c : str.toCharArray()) {
-      if (c == '"' || c == '\\' || c == '/' || c == '\b' || c == '\f' || c == '\n' || c == '\r' || c == '\t') {
+      if (c == '"' || c == '\\') {
         count++;
-      } else {
-        if (c <= '\u001F') {
-          // Unicode escape sequence \u001F
-          count += 5;
-        }
       }
     }
     return count;
