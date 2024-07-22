@@ -49,16 +49,14 @@ import org.sonar.python.types.v2.UnionType;
 public class SymbolsModuleTypeProvider {
   private final ProjectLevelSymbolTable projectLevelSymbolTable;
   private final TypeShed typeShed;
-  private ModuleType rootModule;
 
   public SymbolsModuleTypeProvider(ProjectLevelSymbolTable projectLevelSymbolTable, TypeShed typeShed) {
     this.projectLevelSymbolTable = projectLevelSymbolTable;
     this.typeShed = typeShed;
-    this.rootModule = createModuleFromSymbols(null, null, typeShed.builtinSymbols().values());
   }
 
   public ModuleType createBuiltinModule() {
-    return rootModule;
+    return createModuleFromSymbols(null, null, typeShed.builtinSymbols().values());
   }
 
   public ModuleType createModuleType(List<String> moduleFqn, ModuleType parent) {

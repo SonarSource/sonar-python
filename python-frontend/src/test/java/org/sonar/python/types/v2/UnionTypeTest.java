@@ -78,6 +78,14 @@ class UnionTypeTest {
   }
 
   @Test
+  void or_with_null() {
+    PythonType type = UnionType.or(INT_TYPE, null);
+    assertThat(type).isEqualTo(INT_TYPE);
+    type = UnionType.or(null, INT_TYPE);
+    assertThat(type).isEqualTo(INT_TYPE);
+  }
+
+  @Test
   void or_unionType() {
     FileInput fileInput = parseAndInferTypes("42;\"hello\"");
     PythonType intType = ((ExpressionStatement) fileInput.statements().statements().get(0)).expressions().get(0).typeV2();
