@@ -20,13 +20,17 @@
 package org.sonar.python.types.v2;
 
 import org.junit.jupiter.api.Test;
+import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.tree.CallExpression;
+import org.sonar.plugins.python.api.tree.ExpressionStatement;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.NumericLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.PythonTestUtils;
 import org.sonar.python.tree.TreeUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.sonar.python.types.v2.ClassTypeTest.classType;
 import static org.sonar.python.types.v2.TypesTestUtils.INT_TYPE;
 import static org.sonar.python.types.v2.TypesTestUtils.PROJECT_LEVEL_TYPE_TABLE;
 import static org.sonar.python.types.v2.TypesTestUtils.parseAndInferTypes;
@@ -37,7 +41,7 @@ class TypeCheckerTest {
   TypeChecker typeChecker = new TypeChecker(PROJECT_LEVEL_TYPE_TABLE);
 
   @Test
-  void isBuiltinWithName() {
+  void isBuiltinWithNameTest() {
     FileInput fileInput = parseAndInferTypes("42");
     NumericLiteral intLiteral = (NumericLiteral) TreeUtils.firstChild(fileInput, t -> t.is(Tree.Kind.NUMERIC_LITERAL)).get();
     ObjectType intLiteralType = (ObjectType) intLiteral.typeV2();
@@ -55,5 +59,41 @@ class TypeCheckerTest {
     assertThat(typeChecker.typeCheckBuilder().isBuiltinWithName("unknown").check(callExpressionType)).isEqualTo(TriBool.UNKNOWN);
 
     assertThat(typeChecker.typeCheckBuilder().isBuiltinWithName("int").check(INT_TYPE)).isEqualTo(TriBool.TRUE);
+  }
+
+
+  @Test
+  void objectTypeHasMemberTest() {
+    PythonFile pythonFile = PythonTestUtils.pythonFile("");
+    FileInput fileInput = parseAndInferTypes(pythonFile, """
+      class A: ...
+      a = A()
+      a
+      """
+    );
+    ObjectType objectType = (ObjectType) ((ExpressionStatement) fileInput.statements().statements().get(2)).expressions().get(0).typeV2();
+
+    assertThat(typeChecker.typeCheckBuilder().hasMember("foo").check(objectType)).isEqualTo(TriBool.FALSE);
+    assertThat(typeChecker.typeCheckBuilder().instancesHaveMember("foo").check(objectType)).isEqualTo(TriBool.FALSE);
+
+    fileInput = parseAndInferTypes("""
+      class A:
+        def foo(self): ...
+      a = A()
+      a
+      """
+    );
+    objectType = (ObjectType) ((ExpressionStatement) fileInput.statements().statements().get(2)).expressions().get(0).typeV2();
+    assertThat(typeChecker.typeCheckBuilder().hasMember("foo").check(objectType)).isEqualTo(TriBool.TRUE);
+    assertThat(typeChecker.typeCheckBuilder().instancesHaveMember("foo").check(objectType)).isEqualTo(TriBool.FALSE);
+  }
+
+  @Test
+  void classTypeHasMemberTest() {
+    ClassType classType = classType("class C: ...");
+
+    assertThat(typeChecker.typeCheckBuilder().hasMember("__call__").check(classType)).isEqualTo(TriBool.TRUE);
+    assertThat(typeChecker.typeCheckBuilder().hasMember("unknown").check(classType)).isEqualTo(TriBool.UNKNOWN);
+    assertThat(typeChecker.typeCheckBuilder().instancesHaveMember("__call__").check(classType)).isEqualTo(TriBool.FALSE);
   }
 }

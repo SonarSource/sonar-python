@@ -48,7 +48,6 @@ import static org.sonar.python.types.v2.TypesTestUtils.PROJECT_LEVEL_TYPE_TABLE;
 public class ClassTypeTest {
 
   static PythonFile pythonFile = PythonTestUtils.pythonFile("");
-  TypeChecker typeChecker = new TypeChecker(new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty()));
 
   @Test
   void no_parents() {
@@ -65,9 +64,6 @@ public class ClassTypeTest {
     assertThat(classType.hasMember("unknown")).isEqualTo(TriBool.UNKNOWN);
     assertThat(classType.instancesHaveMember("__call__")).isEqualTo(TriBool.FALSE);
     assertThat(classType.instancesHaveMember("unknown")).isEqualTo(TriBool.FALSE);
-    assertThat(typeChecker.typeCheckBuilder().hasMember("__call__").check(classType)).isEqualTo(TriBool.TRUE);
-    assertThat(typeChecker.typeCheckBuilder().hasMember("unknown").check(classType)).isEqualTo(TriBool.UNKNOWN);
-    assertThat(typeChecker.typeCheckBuilder().instancesHaveMember("__call__").check(classType)).isEqualTo(TriBool.FALSE);
 
     assertThat(classType.displayName()).contains("type");
     assertThat(classType.instanceDisplayName()).contains("C");
