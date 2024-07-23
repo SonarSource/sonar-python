@@ -33,6 +33,7 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TreeVisitor;
 import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.types.InferredTypes;
+import org.sonar.python.types.v2.PythonType;
 
 public class DictCompExpressionImpl extends PyTree implements DictCompExpression {
 
@@ -43,6 +44,7 @@ public class DictCompExpressionImpl extends PyTree implements DictCompExpression
   private final ComprehensionFor comprehensionFor;
   private final Token closingBrace;
   private Set<Symbol> symbols = new HashSet<>();
+  private PythonType pythonType;
 
   public DictCompExpressionImpl(Token openingBrace, Expression keyExpression, Token colon, Expression valueExpression,
                                 ComprehensionFor compFor, Token closingBrace) {
@@ -101,5 +103,14 @@ public class DictCompExpressionImpl extends PyTree implements DictCompExpression
   @Override
   public InferredType type() {
     return InferredTypes.DICT;
+  }
+
+  @Override
+  public PythonType typeV2() {
+    return this.pythonType;
+  }
+
+  public void typeV2(PythonType type) {
+    this.pythonType = type;
   }
 }
