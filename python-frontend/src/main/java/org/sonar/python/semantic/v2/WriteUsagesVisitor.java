@@ -38,6 +38,7 @@ import org.sonar.plugins.python.api.tree.CompoundAssignmentStatement;
 import org.sonar.plugins.python.api.tree.ComprehensionExpression;
 import org.sonar.plugins.python.api.tree.ComprehensionFor;
 import org.sonar.plugins.python.api.tree.Decorator;
+import org.sonar.plugins.python.api.tree.DictCompExpression;
 import org.sonar.plugins.python.api.tree.DottedName;
 import org.sonar.plugins.python.api.tree.ExceptClause;
 import org.sonar.plugins.python.api.tree.FileInput;
@@ -87,7 +88,7 @@ public class WriteUsagesVisitor extends ScopeVisitor {
   }
 
   @Override
-  public void visitDictCompExpression(DictCompExpressionImpl tree) {
+  public void visitDictCompExpression(DictCompExpression tree) {
     createAndEnterScope(tree, currentScope());
     super.visitDictCompExpression(tree);
     leaveScope();

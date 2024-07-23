@@ -43,6 +43,7 @@ import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.ComprehensionExpression;
 import org.sonar.plugins.python.api.tree.ComprehensionIf;
 import org.sonar.plugins.python.api.tree.ConditionalExpression;
+import org.sonar.plugins.python.api.tree.DictCompExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.ExpressionList;
 import org.sonar.plugins.python.api.tree.FunctionDef;
@@ -194,7 +195,7 @@ public class InfiniteRecursionCheck extends PythonSubscriptionCheck {
     }
 
     @Override
-    public void visitDictCompExpression(DictCompExpressionImpl tree) {
+    public void visitDictCompExpression(DictCompExpression tree) {
       // ignore, not broken down in the cfg
     }
 

@@ -62,10 +62,12 @@ import org.sonar.python.types.v2.UnknownType;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.PythonTestUtils.parse;
+import static org.sonar.python.types.v2.TypesTestUtils.DICT_TYPE;
 import static org.sonar.python.types.v2.TypesTestUtils.INT_TYPE;
 import static org.sonar.python.types.v2.TypesTestUtils.LIST_TYPE;
 import static org.sonar.python.types.v2.TypesTestUtils.NONE_TYPE;
 import static org.sonar.python.types.v2.TypesTestUtils.PROJECT_LEVEL_TYPE_TABLE;
+import static org.sonar.python.types.v2.TypesTestUtils.SET_TYPE;
 import static org.sonar.python.types.v2.TypesTestUtils.STR_TYPE;
 
 class TypeInferenceV2Test {
@@ -1677,6 +1679,56 @@ class TypeInferenceV2Test {
       .get();
 
     Assertions.assertThat(paramType).isSameAs(PythonType.UNKNOWN);
+  }
+
+  @Test
+  void list_comprehension() {
+    assertThat(lastExpression(
+      """
+      x = [a for a in foo()]
+      x
+      """
+    ).typeV2().unwrappedType()).isEqualTo(LIST_TYPE);
+  }
+
+  @Test
+  void set_comprehension() {
+    assertThat(lastExpression(
+      """
+      x = {a for a in foo()}
+      x
+      """
+    ).typeV2().unwrappedType()).isEqualTo(SET_TYPE);
+  }
+
+  @Test
+  void dict_comprehension() {
+    assertThat(lastExpression(
+      """
+      x = {num: num**2 for num in numbers()}
+      x
+      """
+    ).typeV2().unwrappedType()).isEqualTo(DICT_TYPE);
+  }
+
+  @Test
+  void comprehension_if() {
+    assertThat(lastExpression(
+      """
+      x = [num for num in numbers if num % 2 == 0]
+      x
+      """
+    ).typeV2().unwrappedType()).isEqualTo(LIST_TYPE);
+  }
+
+  @Test
+  void generator_expression() {
+    assertThat(lastExpression(
+      """
+      x = (num**2 for num in numbers())
+      x
+      """
+    ).typeV2().unwrappedType()).isEqualTo(PythonType.UNKNOWN);
   }
 
   @Test
