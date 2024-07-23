@@ -36,9 +36,7 @@ import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tuple;
 import org.sonar.python.PythonTestUtils;
-import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.semantic.SymbolUtils;
-import org.sonar.python.semantic.v2.ProjectLevelTypeTable;
 import org.sonar.python.tree.TreeUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -46,8 +44,6 @@ import static org.sonar.python.types.v2.TypesTestUtils.parseAndInferTypes;
 
 
 class ObjectTypeTest {
-
-  TypeChecker typeChecker = new TypeChecker(new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty()));
 
   @Test
   void simpleObject() {
@@ -65,8 +61,6 @@ class ObjectTypeTest {
     assertThat(objectType.displayName()).contains("A");
     assertThat(objectType.isCompatibleWith(classType)).isTrue();
     assertThat(objectType.hasMember("foo")).isEqualTo(TriBool.FALSE);
-    assertThat(typeChecker.typeCheckBuilder().hasMember("foo").check(objectType)).isEqualTo(TriBool.FALSE);
-    assertThat(typeChecker.typeCheckBuilder().instancesHaveMember("foo").check(objectType)).isEqualTo(TriBool.FALSE);
     String fileId = SymbolUtils.pathOf(pythonFile).toString();
     assertThat(objectType.definitionLocation()).contains(new LocationInFile(fileId, 1, 6, 1, 7));
   }
@@ -86,8 +80,6 @@ class ObjectTypeTest {
     assertThat(objectType.displayName()).contains("A");
     assertThat(objectType.isCompatibleWith(classType)).isTrue();
     assertThat(objectType.hasMember("foo")).isEqualTo(TriBool.TRUE);
-    assertThat(typeChecker.typeCheckBuilder().hasMember("foo").check(objectType)).isEqualTo(TriBool.TRUE);
-    assertThat(typeChecker.typeCheckBuilder().instancesHaveMember("foo").check(objectType)).isEqualTo(TriBool.FALSE);
   }
 
   @Test

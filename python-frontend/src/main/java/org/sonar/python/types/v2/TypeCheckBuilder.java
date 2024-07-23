@@ -47,6 +47,12 @@ public class TypeCheckBuilder {
     return this;
   }
 
+  public TypeCheckBuilder isBuiltinWithName(String name) {
+    PythonType builtinType = projectLevelTypeTable.getModule().resolveMember(name).orElse(PythonType.UNKNOWN);
+    predicates.add(new IsSameAsTypePredicate(builtinType));
+    return this;
+  }
+
   public TriBool check(PythonType pythonType) {
     TriBool result = TriBool.TRUE;
     for (TypePredicate predicate : predicates) {
@@ -70,6 +76,7 @@ public class TypeCheckBuilder {
       this.memberName = memberName;
     }
 
+    @Override
     public TriBool test(PythonType pythonType) {
       return pythonType.hasMember(memberName);
     }
@@ -82,6 +89,7 @@ public class TypeCheckBuilder {
       this.memberName = memberName;
     }
 
+    @Override
     public TriBool test(PythonType pythonType) {
       if (pythonType instanceof ClassType classType) {
         return classType.instancesHaveMember(memberName);
@@ -95,6 +103,26 @@ public class TypeCheckBuilder {
     @Override
     public TriBool test(PythonType pythonType) {
       return pythonType.typeSource() == typeSource ? TriBool.TRUE : TriBool.FALSE;
+    }
+  }
+
+  static class IsSameAsTypePredicate implements TypePredicate {
+
+    PythonType expectedType;
+
+    public IsSameAsTypePredicate(PythonType expectedType) {
+      this.expectedType = expectedType;
+    }
+
+    @Override
+    public TriBool test(PythonType pythonType) {
+      if (pythonType instanceof ObjectType objectType) {
+        pythonType = objectType.unwrappedType();
+      }
+      if (pythonType == PythonType.UNKNOWN || expectedType == PythonType.UNKNOWN) {
+        return TriBool.UNKNOWN;
+      }
+      return pythonType.equals(expectedType) ? TriBool.TRUE : TriBool.FALSE;
     }
   }
 }
