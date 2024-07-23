@@ -62,6 +62,7 @@ import org.sonar.python.types.v2.UnknownType;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.PythonTestUtils.parse;
+import static org.sonar.python.types.v2.TypesTestUtils.CALLABLE_TYPE;
 import static org.sonar.python.types.v2.TypesTestUtils.INT_TYPE;
 import static org.sonar.python.types.v2.TypesTestUtils.LIST_TYPE;
 import static org.sonar.python.types.v2.TypesTestUtils.NONE_TYPE;
@@ -215,6 +216,22 @@ class TypeInferenceV2Test {
       .isInstanceOf(ClassType.class)
       .extracting(PythonType::name)
       .isEqualTo("date");
+  }
+
+  @Test
+  void testSyntheticTypes() {
+    FileInput root = inferTypes("""
+      from typing import Callable
+      """);
+
+    var importFrom = (ImportFrom) root.statements().statements().get(0);
+    var type = importFrom.importedNames().get(0).dottedName().names().get(0).typeV2();
+
+    Assertions.assertThat(type)
+      .isInstanceOf(ClassType.class)
+      .isEqualTo(CALLABLE_TYPE)
+      .extracting(PythonType::name)
+      .isEqualTo("Callable");
   }
 
   @Test
