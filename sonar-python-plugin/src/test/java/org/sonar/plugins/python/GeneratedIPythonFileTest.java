@@ -20,11 +20,9 @@
 package org.sonar.plugins.python;
 
 import java.io.IOException;
-import java.util.Map;
 import org.junit.jupiter.api.Test;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
-import org.sonar.plugins.python.IpynbNotebookParser.IPythonLocation;
 import org.sonar.plugins.python.PythonInputFile.Kind;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -33,36 +31,28 @@ class GeneratedIPythonFileTest {
 
   @Test
   void shouldHaveIPythonKind() {
-    PythonInputFile inputFile = new GeneratedIPythonFile(createWrappedFile(), "", Map.of());
+    PythonInputFile inputFile = new GeneratedIPythonFile(createWrappedFile(), "");
     assertThat(inputFile.kind()).isEqualTo(Kind.IPYTHON);
   }
 
   @Test
   void shouldReturnTheWrappedFile() {
     InputFile wrappedFile = createWrappedFile();
-    GeneratedIPythonFile inputFile = new GeneratedIPythonFile(wrappedFile, "",Map.of());
+    GeneratedIPythonFile inputFile = new GeneratedIPythonFile(wrappedFile, "");
     assertThat(inputFile.wrappedFile()).isEqualTo(wrappedFile);
-  }
-
-  @Test
-  void shouldReturnTheOffsetMap() {
-    InputFile wrappedFile = createWrappedFile();
-    Map<Integer, IPythonLocation> offsetMap = Map.of(1, new IPythonLocation(1 , 2));
-    GeneratedIPythonFile inputFile = new GeneratedIPythonFile(wrappedFile, "", offsetMap);
-    assertThat(inputFile.getOffsetMap()).isEqualTo(offsetMap);
   }
 
   @Test
   void shouldHaveTheWrappedFileToString() {
     InputFile wrappedFile = createWrappedFile();
-    PythonInputFile inputFile = new GeneratedIPythonFile(wrappedFile, "", Map.of());
+    PythonInputFile inputFile = new GeneratedIPythonFile(wrappedFile, "");
     assertThat(inputFile).hasToString(wrappedFile.toString());
   }
 
   @Test
   void shouldHaveTheContentPassed() throws IOException {
     InputFile wrappedFile = createWrappedFile();
-    PythonInputFile inputFile = new GeneratedIPythonFile(wrappedFile, "test", Map.of());
+    PythonInputFile inputFile = new GeneratedIPythonFile(wrappedFile, "test");
     assertThat(inputFile.contents()).isEqualTo("test");
 
   }
