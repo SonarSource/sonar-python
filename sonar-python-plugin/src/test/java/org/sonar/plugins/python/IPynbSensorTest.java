@@ -53,6 +53,8 @@ import org.sonar.python.checks.CheckList;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -63,6 +65,7 @@ class IPynbSensorTest {
   static final SonarRuntime SONARLINT_RUNTIME = SonarRuntimeImpl.forSonarLint(SONARLINT_DETECTABLE_VERSION);
 
   private static final String FILE_1 = "file1.ipynb";
+  private static final String NOTEBOOK_FILE = "notebook.ipynb";
 
   private final File baseDir = new File("src/test/resources/org/sonar/plugins/python/ipynb").getAbsoluteFile();
 
@@ -126,6 +129,7 @@ class IPynbSensorTest {
     return new IPynbSensor(fileLinesContextFactory, checkFactory, mock(NoSonarFilter.class), indexer);
   }
 
+
   private PythonInputFile inputFile(String name) {
     PythonInputFile inputFile = createInputFile(name);
     context.fileSystem().add(inputFile.wrappedFile());
@@ -159,5 +163,28 @@ class IPynbSensorTest {
     sensor(pythonIndexer).execute(context);
 
     assertThat(ProjectPythonVersion.currentVersions()).containsExactly(PythonVersionUtils.Version.V_38);
+  }
+
+  private IPynbSensor notebookSensor() {
+    FileLinesContextFactory fileLinesContextFactory = mock(FileLinesContextFactory.class);
+    FileLinesContext fileLinesContext = mock(FileLinesContext.class);
+    when(fileLinesContextFactory.createFor(Mockito.any(InputFile.class))).thenReturn(fileLinesContext);
+    CheckFactory checkFactory = new CheckFactory(activeRules);
+    return new IPynbSensor(fileLinesContextFactory, checkFactory, mock(NoSonarFilter.class));
+  }
+
+  @Test
+  void test_notebook_sensor_cannot_read_python_file_is_executed() {
+    inputFile(FILE_1);
+    activeRules = new ActiveRulesBuilder().build();
+    IPynbSensor sensor = notebookSensor();
+    assertThrows("Cannot read file1.ipynb", IllegalStateException.class, () -> sensor.execute(context));
+  }
+
+  @Test
+  void test_notebook_sensor_is_excuted_on_json_file() {
+    inputFile(NOTEBOOK_FILE);
+    activeRules = new ActiveRulesBuilder().build();
+    assertDoesNotThrow(() -> notebookSensor().execute(context));
   }
 }
