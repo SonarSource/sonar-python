@@ -1791,7 +1791,6 @@ class TypeInferenceV2Test {
   }
 
   @Test
-  @Disabled("Duplicate PythonType for NONE_TYPE")
   void imported_symbol_call_return_type() {
     assertThat(lastExpression(
       """
@@ -1810,6 +1809,20 @@ class TypeInferenceV2Test {
       fcntl
       """
     ).typeV2()).isInstanceOf(ModuleType.class);
+  }
+
+  @Test
+  void imported_symbol_in_different_branch() {
+    FileInput fileInput = inferTypes("""
+      if x:
+        import fcntl
+      def lock():
+        fcntl
+      """);
+    Statement functionDef = fileInput.statements().statements().get(1);
+    ExpressionStatement fcntlStatement = ((ExpressionStatement) TreeUtils.firstChild(functionDef, t -> t.is(Tree.Kind.EXPRESSION_STMT)).get());
+    assertThat(fcntlStatement.expressions().get(0).typeV2()).isInstanceOf(ModuleType.class);
+    assertThat(fcntlStatement.expressions().get(0).typeV2().name()).isEqualTo("fcntl");
   }
 
   @Test
