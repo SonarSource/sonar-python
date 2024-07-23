@@ -37,9 +37,9 @@ class IpynbNotebookParserTest {
 
     IpynbNotebookParser.ParseResult result = IpynbNotebookParser.parseNotebook(inputFile);
 
-    assertThat(result.locationMap().keySet()).hasSize(12);
+    assertThat(result.locationMap().keySet()).hasSize(18);
     assertThat(StringUtils.countMatches(result.aggregatedSource(), IpynbNotebookParser.SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER))
-      .isEqualTo(3);
+      .isEqualTo(6);
   }
 
   @Test
