@@ -25,6 +25,7 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonToken;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class IpynbNotebookParser {
@@ -48,6 +49,7 @@ public class IpynbNotebookParser {
 
   // Keys are the aggregated source line number
   private final Map<Integer, IPythonLocation> locationMap = new HashMap<>();
+  private final Map<Integer, Map<Integer, Integer>> colOffSet = new HashMap<>();
   private int aggregatedSourceLine = 1;
 
   public ParseResult parseNotebook() throws IOException {
@@ -68,7 +70,7 @@ public class IpynbNotebookParser {
       }
     }
 
-    return new ParseResult(inputFile, aggregatedSource.toString(), locationMap);
+    return new ParseResult(inputFile, aggregatedSource.toString(), locationMap, colOffSet);
   }
 
   private void processCodeCell(JsonParser jParser) throws IOException {
@@ -91,7 +93,9 @@ public class IpynbNotebookParser {
     }
     while (jParser.nextToken() != JsonToken.END_ARRAY) {
       String sourceLine = jParser.getValueAsString();
-      addLineToSource(sourceLine,  jParser.currentTokenLocation());
+      var tokenLocation = jParser.currentTokenLocation();
+      colOffSet.put(aggregatedSourceLine, countEscapeCharacters(sourceLine, new LinkedHashMap<>(), tokenLocation.getColumnNr()));
+      addLineToSource(sourceLine, tokenLocation);
     }
     // Account for the last cell delimiter
     addDelimiterToSource();
@@ -104,10 +108,16 @@ public class IpynbNotebookParser {
     }
     String sourceLine = jParser.getValueAsString();
     JsonLocation tokenLocation = jParser.currentTokenLocation();
+    var previousLen = 0;
+    var previousExtraChars = 0;
 
     for (String line : sourceLine.lines().toList()) {
-      aggregatedSource.append(line);
-      addLineToSource("\n", tokenLocation);
+      colOffSet.put(aggregatedSourceLine, countEscapeCharacters(line, new LinkedHashMap<>(), tokenLocation.getColumnNr()));
+      var currentCount = colOffSet.get(aggregatedSourceLine).get(-1);
+      addLineToSource(line, new IPythonLocation(tokenLocation.getLineNr(),
+        tokenLocation.getColumnNr() + previousLen + previousExtraChars + 1));
+      previousLen = line.length() + 2;
+      previousExtraChars = currentCount;
     }
     // Account for the last cell delimiter
     addDelimiterToSource();
@@ -115,8 +125,12 @@ public class IpynbNotebookParser {
   }
 
   private void addLineToSource(String sourceLine, JsonLocation tokenLocation) {
+    addLineToSource(sourceLine, new IPythonLocation(tokenLocation.getLineNr(), tokenLocation.getColumnNr()));
+  }
+
+  private void addLineToSource(String sourceLine, IPythonLocation location) {
     aggregatedSource.append(sourceLine);
-    locationMap.put(aggregatedSourceLine, new IPythonLocation(tokenLocation.getLineNr(), tokenLocation.getColumnNr()));
+    locationMap.put(aggregatedSourceLine, location);
     aggregatedSourceLine++;
   }
 
@@ -125,7 +139,33 @@ public class IpynbNotebookParser {
     aggregatedSourceLine++;
   }
 
-  public record ParseResult(PythonInputFile inputFile, String aggregatedSource, Map<Integer, IPythonLocation> locationMap) {
+  private static Map<Integer, Integer> countEscapeCharacters(String sourceLine, Map<Integer, Integer> colMap, int colOffSet) {
+    int count = 0;
+    var numberOfExtraChars = 0;
+    var arr = sourceLine.toCharArray();
+    for (int i = 1; i < sourceLine.length(); ++i) {
+      char c = arr[i];
+      switch (c) {
+        case '"', '\'', '/':
+          // + 1 as we do have to count the open quote.
+          colMap.put(i, i + colOffSet + count + 1);
+          if (c != '/') {
+            numberOfExtraChars++;
+          }
+          break;
+        case '\\', '\b', '\f', '\n', '\r', '\t':
+          count += 2;
+          numberOfExtraChars++;
+          break;
+        default:
+          break;
+      }
+    }
+    colMap.put(-1, numberOfExtraChars);
+    return colMap;
+  }
+
+  public record ParseResult(PythonInputFile inputFile, String aggregatedSource, Map<Integer, IPythonLocation> locationMap, Map<Integer, Map<Integer, Integer>> colOffSet) {
   }
 
   public record IPythonLocation(int line, int column) {
