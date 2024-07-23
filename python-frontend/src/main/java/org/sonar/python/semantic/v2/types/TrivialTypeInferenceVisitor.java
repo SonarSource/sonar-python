@@ -34,6 +34,7 @@ import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.BinaryExpression;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.ComprehensionExpression;
+import org.sonar.plugins.python.api.tree.DictCompExpression;
 import org.sonar.plugins.python.api.tree.DictionaryLiteral;
 import org.sonar.plugins.python.api.tree.DottedName;
 import org.sonar.plugins.python.api.tree.Expression;
@@ -62,6 +63,7 @@ import org.sonar.python.semantic.v2.ProjectLevelTypeTable;
 import org.sonar.python.semantic.v2.SymbolV2;
 import org.sonar.python.semantic.v2.UsageV2;
 import org.sonar.python.tree.ComprehensionExpressionImpl;
+import org.sonar.python.tree.DictCompExpressionImpl;
 import org.sonar.python.tree.DictionaryLiteralImpl;
 import org.sonar.python.tree.ListLiteralImpl;
 import org.sonar.python.tree.NameImpl;
@@ -189,6 +191,14 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
       default -> PythonType.UNKNOWN;
     };
     ((ComprehensionExpressionImpl) comprehensionExpression).typeV2(new ObjectType(pythonType, new ArrayList<>(), new ArrayList<>()));
+  }
+
+  @Override
+  public void visitDictCompExpression(DictCompExpression dictCompExpression) {
+    super.visitDictCompExpression(dictCompExpression);
+    var builtins = this.projectLevelTypeTable.getModule();
+    PythonType dictType = builtins.resolveMember("dict").orElse(PythonType.UNKNOWN);
+    ((DictCompExpressionImpl) dictCompExpression).typeV2(new ObjectType(dictType, new ArrayList<>(), new ArrayList<>()));
   }
 
   @Override

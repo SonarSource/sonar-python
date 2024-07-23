@@ -62,6 +62,7 @@ import org.sonar.python.types.v2.UnknownType;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.PythonTestUtils.parse;
+import static org.sonar.python.types.v2.TypesTestUtils.DICT_TYPE;
 import static org.sonar.python.types.v2.TypesTestUtils.INT_TYPE;
 import static org.sonar.python.types.v2.TypesTestUtils.LIST_TYPE;
 import static org.sonar.python.types.v2.TypesTestUtils.NONE_TYPE;
@@ -1707,7 +1708,7 @@ class TypeInferenceV2Test {
       x = {num: num**2 for num in numbers()}
       x
       """
-    ).typeV2().unwrappedType()).isEqualTo(PythonType.UNKNOWN);
+    ).typeV2().unwrappedType()).isEqualTo(DICT_TYPE);
   }
 
   @Test
