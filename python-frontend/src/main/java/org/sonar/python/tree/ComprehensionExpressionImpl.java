@@ -44,7 +44,7 @@ public class ComprehensionExpressionImpl extends PyTree implements Comprehension
   private final ComprehensionFor comprehensionFor;
   private final Token closingToken;
   private Set<Symbol> symbols = new HashSet<>();
-  private PythonType typeV2;
+  private PythonType pythonType;
 
   public ComprehensionExpressionImpl(Kind kind, @Nullable Token openingToken, Expression resultExpression,
                                      ComprehensionFor compFor, @Nullable Token closingToken) {
@@ -104,10 +104,10 @@ public class ComprehensionExpressionImpl extends PyTree implements Comprehension
 
   @Override
   public PythonType typeV2() {
-    return this.typeV2;
+    return this.pythonType;
   }
 
   public void typeV2(PythonType type) {
-    this.typeV2 = type;
+    this.pythonType = type;
   }
 }

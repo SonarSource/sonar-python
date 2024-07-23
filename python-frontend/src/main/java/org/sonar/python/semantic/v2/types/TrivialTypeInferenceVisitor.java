@@ -185,7 +185,7 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
   public void visitPyListOrSetCompExpression(ComprehensionExpression comprehensionExpression) {
     super.visitPyListOrSetCompExpression(comprehensionExpression);
     var builtins = this.projectLevelTypeTable.getModule();
-    PythonType pythonType = switch (comprehensionExpression.getKind()) {
+    var pythonType = switch (comprehensionExpression.getKind()) {
       case LIST_COMPREHENSION -> builtins.resolveMember("list").orElse(PythonType.UNKNOWN);
       case SET_COMPREHENSION -> builtins.resolveMember("set").orElse(PythonType.UNKNOWN);
       default -> PythonType.UNKNOWN;
@@ -197,7 +197,7 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
   public void visitDictCompExpression(DictCompExpression dictCompExpression) {
     super.visitDictCompExpression(dictCompExpression);
     var builtins = this.projectLevelTypeTable.getModule();
-    PythonType dictType = builtins.resolveMember("dict").orElse(PythonType.UNKNOWN);
+    var dictType = builtins.resolveMember("dict").orElse(PythonType.UNKNOWN);
     ((DictCompExpressionImpl) dictCompExpression).typeV2(new ObjectType(dictType, new ArrayList<>(), new ArrayList<>()));
   }
 

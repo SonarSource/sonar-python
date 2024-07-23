@@ -44,7 +44,7 @@ public class DictCompExpressionImpl extends PyTree implements DictCompExpression
   private final ComprehensionFor comprehensionFor;
   private final Token closingBrace;
   private Set<Symbol> symbols = new HashSet<>();
-  private PythonType typeV2;
+  private PythonType pythonType;
 
   public DictCompExpressionImpl(Token openingBrace, Expression keyExpression, Token colon, Expression valueExpression,
                                 ComprehensionFor compFor, Token closingBrace) {
@@ -107,10 +107,10 @@ public class DictCompExpressionImpl extends PyTree implements DictCompExpression
 
   @Override
   public PythonType typeV2() {
-    return this.typeV2;
+    return this.pythonType;
   }
 
   public void typeV2(PythonType type) {
-    this.typeV2 = type;
+    this.pythonType = type;
   }
 }
