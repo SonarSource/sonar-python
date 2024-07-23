@@ -30,3 +30,40 @@ def win32():
     # We should not raise issues as the stubs of win32 are inaccurate
     path = win32pdh.MakeCounterPath((None, None, None, None, -1, None)) # OK
     hc = win32pdh.AddCounter(None, path)
+
+
+class SomeClass:
+    def __init__(self):
+        ...
+
+class SomeOtherClass:
+    ...
+
+def foo():
+    # FN: we should fallback to "type.__init__" when actual type not available
+    x = SomeClass.__init__(...)  # FN
+    y = SomeOtherClass.__init__(...)  # FN SONARPY-2007
+
+
+def using_fcntl():
+    import fcntl
+    ret = fcntl.flock(..., ...)  # Noncompliant
+
+
+
+def list_comprehensions():
+    exp_list = [x() for y in unknown()]
+    actual_list = [...]
+    for _ in range(len(exp_list)):
+        actual_list.append(smth())
+    self.assertEqual(
+        exp_list.sort(), # Noncompliant
+        actual_list.sort() # Noncompliant
+    )
+
+
+def import_in_different_branch():
+    if x:
+        import fcntl
+    def lock():
+        ret = fcntl.flock(..., ...)  # Noncompliant
