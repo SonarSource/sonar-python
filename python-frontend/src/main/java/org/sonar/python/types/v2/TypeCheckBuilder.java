@@ -59,6 +59,12 @@ public class TypeCheckBuilder {
     return result;
   }
 
+  public TypeCheckBuilder isInstanceOf(String... fqn) {
+    var expected = projectLevelTypeTable.getType(fqn);
+    predicates.add(new IsInstanceOfPredicate(expected));
+    return this;
+  }
+
   interface TypePredicate {
     TriBool test(PythonType pythonType);
   }
@@ -95,6 +101,14 @@ public class TypeCheckBuilder {
     @Override
     public TriBool test(PythonType pythonType) {
       return pythonType.typeSource() == typeSource ? TriBool.TRUE : TriBool.FALSE;
+    }
+  }
+
+  record IsInstanceOfPredicate(PythonType pythonType)  implements TypePredicate {
+
+    @Override
+    public TriBool test(PythonType pythonType) {
+      return this.pythonType.equals(pythonType.unwrappedType()) ? TriBool.TRUE : TriBool.FALSE;
     }
   }
 }

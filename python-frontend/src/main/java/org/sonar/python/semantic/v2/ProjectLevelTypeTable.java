@@ -24,6 +24,7 @@ import java.util.stream.IntStream;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.types.v2.ModuleType;
 import org.sonar.python.types.v2.PythonType;
+import org.sonar.python.types.v2.TriBool;
 
 public class ProjectLevelTypeTable {
 
@@ -58,6 +59,28 @@ public class ProjectLevelTypeTable {
         .toList();
 
       parent = symbolsModuleTypeProvider.createModuleType(moduleFqn, parent);
+    }
+    return parent;
+  }
+
+  public PythonType getType(String... moduleName) {
+    return getType(List.of(moduleName));
+  }
+
+  public PythonType getType(List<String> moduleNameParts) {
+    var parent = (PythonType) rootModule;
+    for (int i = 0; i < moduleNameParts.size(); i++) {
+      var part = moduleNameParts.get(i);
+      if (parent.hasMember(part) == TriBool.TRUE) {
+        parent = parent.resolveMember(part).orElse(PythonType.UNKNOWN);
+      } else if (parent instanceof ModuleType module) {
+        var moduleFqn = IntStream.rangeClosed(0, i)
+          .mapToObj(moduleNameParts::get)
+          .toList();
+        parent = symbolsModuleTypeProvider.createModuleType(moduleFqn, module);
+      } else {
+        return PythonType.UNKNOWN;
+      }
     }
     return parent;
   }

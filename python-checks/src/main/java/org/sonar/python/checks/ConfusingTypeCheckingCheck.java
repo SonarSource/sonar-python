@@ -50,29 +50,13 @@ import static org.sonar.python.types.InferredTypes.typeSymbols;
 public class ConfusingTypeCheckingCheck extends PythonSubscriptionCheck {
   @Override
   public void initialize(Context context) {
-    new NonCallableCalledCheck().initialize(context);
+    new NonCallableCalled().initialize(context);
     new IncompatibleOperandsCheck().initialize(context);
     new ItemOperationsTypeCheck().initialize(context);
     new IterationOnNonIterableCheck().initialize(context);
     new SillyEqualityCheck().initialize(context);
     context.registerSyntaxNodeConsumer(Tree.Kind.RAISE_STMT, ConfusingTypeCheckingCheck::checkIncorrectExceptionType);
     context.registerSyntaxNodeConsumer(Tree.Kind.IS, ConfusingTypeCheckingCheck::checkSillyIdentity);
-  }
-
-  private static class NonCallableCalledCheck extends NonCallableCalled {
-
-    @Override
-    public boolean isNonCallableType(InferredType type) {
-      return containsDeclaredType(type) && !type.declaresMember("__call__") && !type.mustBeOrExtend("typing.Coroutine");
-    }
-
-    @Override
-    public String message(InferredType calleeType, @Nullable String name) {
-      if (name != null) {
-        return String.format("Fix this call; Previous type checks suggest that \"%s\"%s is not callable.", name, addTypeName(calleeType));
-      }
-      return String.format("Fix this call; Previous type checks suggest that this expression%s is not callable.", addTypeName(calleeType));
-    }
   }
 
   private static class IncompatibleOperandsCheck extends IncompatibleOperands {

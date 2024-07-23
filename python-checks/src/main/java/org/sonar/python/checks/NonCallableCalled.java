@@ -20,45 +20,49 @@
 package org.sonar.python.checks;
 
 import javax.annotation.Nullable;
-import org.sonar.plugins.python.api.LocationInFile;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
+import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.CallExpression;
-import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.plugins.python.api.types.InferredType;
-import org.sonar.python.types.InferredTypes;
+import org.sonar.python.types.v2.PythonType;
+import org.sonar.python.types.v2.TriBool;
 
 import static org.sonar.python.tree.TreeUtils.nameFromExpression;
-import static org.sonar.python.types.InferredTypes.typeClassLocation;
 
-public abstract class NonCallableCalled extends PythonSubscriptionCheck {
+public class NonCallableCalled extends PythonSubscriptionCheck {
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, ctx -> {
-      CallExpression callExpression = (CallExpression) ctx.syntaxNode();
-      Expression callee = callExpression.callee();
-      InferredType calleeType = callee.type();
-      if (isNonCallableType(calleeType)) {
+      var callExpression = (CallExpression) ctx.syntaxNode();
+      var callee = callExpression.callee();
+      var calleeType = callee.typeV2();
+      if (isNonCallableCall(ctx, calleeType)) {
         String name = nameFromExpression(callee);
-        PreciseIssue preciseIssue = ctx.addIssue(callee, message(calleeType, name));
-        LocationInFile location = typeClassLocation(calleeType);
-        if (location != null) {
-          preciseIssue.secondary(location, "Definition.");
-        }
+        var preciseIssue = ctx.addIssue(callee, message(calleeType, name));
+        calleeType.definitionLocation()
+          .ifPresent(location -> preciseIssue.secondary(location, "Definition."));
       }
     });
   }
 
-  protected static String addTypeName(InferredType type) {
-    String typeName = InferredTypes.typeName(type);
-    if (typeName != null) {
-      return " has type " + typeName + " and it";
-    }
-    return "";
+  private static boolean isNonCallableCall(SubscriptionContext ctx, PythonType calleeType) {
+    return ctx.typeChecker().typeCheckBuilder().isTypeHintTypeSource().check(calleeType) == TriBool.TRUE
+           && ctx.typeChecker().typeCheckBuilder().hasMember("__call__").check(calleeType) == TriBool.FALSE
+           && ctx.typeChecker().typeCheckBuilder().isInstanceOf("typing", "Coroutine").check(calleeType) == TriBool.FALSE
+           && ctx.typeChecker().typeCheckBuilder().isInstanceOf("typing", "Callable").check(calleeType) == TriBool.FALSE;
   }
 
-  public abstract boolean isNonCallableType(InferredType type);
+  protected static String addTypeName(PythonType type) {
+    return type.displayName()
+      .map(d -> " has type " + d + " and it")
+      .orElse("");
+  }
 
-  public abstract String message(InferredType calleeType, @Nullable String name);
+  private static String message(PythonType calleeType, @Nullable String name) {
+    if (name != null) {
+      return String.format("Fix this call; Previous type checks suggest that \"%s\"%s is not callable.", name, addTypeName(calleeType));
+    }
+    return String.format("Fix this call; Previous type checks suggest that this expression%s is not callable.", addTypeName(calleeType));
+  }
 
 }

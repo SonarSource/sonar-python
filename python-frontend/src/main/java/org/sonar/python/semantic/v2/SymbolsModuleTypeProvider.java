@@ -49,6 +49,12 @@ import org.sonar.python.types.v2.UnionType;
 public class SymbolsModuleTypeProvider {
   private final ProjectLevelSymbolTable projectLevelSymbolTable;
   private final TypeShed typeShed;
+  private final Map<String, Map<String, PythonType>> syntheticModuleMembers = Map.ofEntries(
+    Map.entry("typing", Map.ofEntries(
+      Map.entry("Callable", new ClassTypeBuilder().withName("Callable").withHasDecorators(false).build()),
+      Map.entry("Coroutine", new ClassTypeBuilder().withName("Coroutine").withHasDecorators(false).build())
+    ))
+  );
 
   public SymbolsModuleTypeProvider(ProjectLevelSymbolTable projectLevelSymbolTable, TypeShed typeShed) {
     this.projectLevelSymbolTable = projectLevelSymbolTable;
@@ -62,9 +68,15 @@ public class SymbolsModuleTypeProvider {
   public ModuleType createModuleType(List<String> moduleFqn, ModuleType parent) {
     var moduleName = moduleFqn.get(moduleFqn.size() - 1);
     var moduleFqnString = getModuleFqnString(moduleFqn);
-    return createModuleTypeFromProjectLevelSymbolTable(moduleName, moduleFqnString, parent)
+    var moduleType = createModuleTypeFromProjectLevelSymbolTable(moduleName, moduleFqnString, parent)
       .or(() -> createModuleTypeFromTypeShed(moduleName, moduleFqnString, parent))
       .orElseGet(() -> createEmptyModule(moduleName, parent));
+
+    if (syntheticModuleMembers.containsKey(moduleFqnString)) {
+      var members = syntheticModuleMembers.get(moduleFqnString);
+      moduleType.members().putAll(members);
+    }
+    return moduleType;
   }
 
   private static String getModuleFqnString(List<String> moduleFqn) {
