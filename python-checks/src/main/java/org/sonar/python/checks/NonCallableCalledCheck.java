@@ -26,7 +26,6 @@ import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.python.types.v2.TypeChecker;
 import org.sonar.python.types.v2.PythonType;
 import org.sonar.python.types.v2.TriBool;
 
@@ -57,8 +56,8 @@ public class NonCallableCalledCheck extends PythonSubscriptionCheck {
   }
 
   private static boolean isNonCallableType(SubscriptionContext ctx, PythonType calleeType) {
-    return ctx.typeChecker().typeCheckBuilder().isTypeHintTypeSource().check(calleeType) != TriBool.TRUE
-           && ctx.typeChecker().typeCheckBuilder().hasMember("__call__").check(calleeType) == TriBool.FALSE;
+    return ctx.typeCheckers().typeCheckBuilder().isTypeHintTypeSource().check(calleeType) != TriBool.TRUE
+           && ctx.typeCheckers().typeCheckBuilder().hasMember("__call__").check(calleeType) == TriBool.FALSE;
   }
 
   public String message(PythonType typeV2, @Nullable String name) {

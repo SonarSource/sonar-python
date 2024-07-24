@@ -47,7 +47,7 @@ import static org.sonar.python.types.v2.TypesTestUtils.parseAndInferTypes;
 
 class ObjectTypeTest {
 
-  TypeChecker typeChecker = new TypeChecker(new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty()));
+  TypeCheckers typeChecker = new TypeCheckers(new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty()));
 
   @Test
   void simpleObject() {

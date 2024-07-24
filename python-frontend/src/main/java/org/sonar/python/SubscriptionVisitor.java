@@ -48,7 +48,7 @@ import org.sonar.plugins.python.api.tree.StringElement;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
-import org.sonar.python.types.v2.TypeChecker;
+import org.sonar.python.types.v2.TypeCheckers;
 import org.sonar.python.regex.PythonAnalyzerRegexSource;
 import org.sonar.python.regex.PythonRegexIssueLocation;
 import org.sonar.python.regex.RegexContext;
@@ -184,7 +184,7 @@ public class SubscriptionVisitor {
     }
 
     @Override
-    public TypeChecker typeChecker() {
+    public TypeCheckers typeCheckers() {
       return pythonVisitorContext.typeChecker();
     }
 

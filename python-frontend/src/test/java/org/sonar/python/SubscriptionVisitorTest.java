@@ -94,7 +94,7 @@ class SubscriptionVisitorTest {
       public void initialize(Context context) {
         context.registerSyntaxNodeConsumer(Tree.Kind.CLASSDEF, ctx -> {
           ClassDef classDef = (ClassDef) ctx.syntaxNode();
-          assertThat(ctx.typeChecker().typeCheckBuilder().instancesHaveMember("foo").check(classDef.name().typeV2())).isEqualTo(TriBool.TRUE);
+          assertThat(ctx.typeCheckers().typeCheckBuilder().instancesHaveMember("foo").check(classDef.name().typeV2())).isEqualTo(TriBool.TRUE);
         });
       }
     };

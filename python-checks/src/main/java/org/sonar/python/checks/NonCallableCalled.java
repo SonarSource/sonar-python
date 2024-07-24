@@ -46,10 +46,22 @@ public class NonCallableCalled extends PythonSubscriptionCheck {
   }
 
   private static boolean isNonCallableCall(SubscriptionContext ctx, PythonType calleeType) {
-    return ctx.typeChecker().typeCheckBuilder().isTypeHintTypeSource().check(calleeType) == TriBool.TRUE
-           && ctx.typeChecker().typeCheckBuilder().hasMember("__call__").check(calleeType) == TriBool.FALSE
-           && ctx.typeChecker().typeCheckBuilder().isInstanceOf("typing.Coroutine").check(calleeType) == TriBool.FALSE
-           && ctx.typeChecker().typeCheckBuilder().isInstanceOf("typing.Callable").check(calleeType) == TriBool.FALSE;
+    var checker = ctx.typeCheckers().and(
+      ctx.typeCheckers().isTypeHintTypeSource(),
+      ctx.typeCheckers().not(ctx.typeCheckers().hasMember("__call__")),
+      ctx.typeCheckers().not(ctx.typeCheckers().isInstance("typing.Coroutine")),
+      ctx.typeCheckers().not(ctx.typeCheckers().isInstance("typing.Callable"))
+    );
+
+    checker.check(calleeType)
+    ctx.typeCheckers().and(
+      ctx.typeCheckers().isTypeHintTypeSource(),
+      ctx.typeCheckers().hasMember("__call__"),
+    )
+    return ctx.typeCheckers().typeCheckBuilder().isTypeHintTypeSource().check(calleeType) == TriBool.TRUE
+           && ctx.typeCheckers().typeCheckBuilder().hasMember("__call__").check(calleeType) == TriBool.FALSE
+           && ctx.typeCheckers().typeCheckBuilder().isInstanceOf("typing.Coroutine").check(calleeType) == TriBool.FALSE
+           && ctx.typeCheckers().typeCheckBuilder().isInstanceOf("typing.Callable").check(calleeType) == TriBool.FALSE;
   }
 
   protected static String addTypeName(PythonType type) {

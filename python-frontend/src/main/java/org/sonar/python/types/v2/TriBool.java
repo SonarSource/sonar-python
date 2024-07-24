@@ -36,4 +36,12 @@ public enum TriBool {
     }
     return FALSE;
   }
+
+  public TriBool not() {
+    return switch (this) {
+      case FALSE -> TriBool.TRUE;
+      case TRUE -> TriBool.FALSE;
+      default -> TriBool.UNKNOWN;
+    };
+  }
 }

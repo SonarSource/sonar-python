@@ -48,7 +48,7 @@ import static org.sonar.python.types.v2.TypesTestUtils.PROJECT_LEVEL_TYPE_TABLE;
 public class ClassTypeTest {
 
   static PythonFile pythonFile = PythonTestUtils.pythonFile("");
-  TypeChecker typeChecker = new TypeChecker(new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty()));
+  TypeCheckers typeChecker = new TypeCheckers(new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty()));
 
   @Test
   void no_parents() {
