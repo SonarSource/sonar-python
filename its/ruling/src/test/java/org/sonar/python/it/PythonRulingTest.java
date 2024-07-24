@@ -57,12 +57,15 @@ class PythonRulingTest {
     String serverUrl = ORCHESTRATOR.getServer().getUrl();
     File profileFile = ProfileGenerator.generateProfile(serverUrl, "py", "python", parameters, Collections.emptySet());
     ORCHESTRATOR.getServer().restoreProfile(FileLocation.of(profileFile));
+    File iPythonProfileFile = ProfileGenerator.generateProfile(serverUrl, "ipynb", "python", parameters, Collections.emptySet());
+    ORCHESTRATOR.getServer().restoreProfile(FileLocation.of(iPythonProfileFile));
   }
 
   @Test
   void test() throws Exception {
     ORCHESTRATOR.getServer().provisionProject(PROJECT_KEY, PROJECT_KEY);
     ORCHESTRATOR.getServer().associateProjectToQualityProfile(PROJECT_KEY, "py", "rules");
+    ORCHESTRATOR.getServer().associateProjectToQualityProfile(PROJECT_KEY, "ipynb", "rules");
     File litsDifferencesFile = FileLocation.of("target/differences").getFile();
     SonarScanner build = SonarScanner.create(FileLocation.of("../sources").getFile())
       .setProjectKey(PROJECT_KEY)
