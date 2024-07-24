@@ -49,7 +49,6 @@ public class IpynbNotebookParser {
 
   // Keys are the aggregated source line number
   private final Map<Integer, IPythonLocation> locationMap = new HashMap<>();
-  private final Map<Integer, Map<Integer, Integer>> colOffSet = new HashMap<>();
   private int aggregatedSourceLine = 1;
 
   public ParseResult parseNotebook() throws IOException {
@@ -70,7 +69,7 @@ public class IpynbNotebookParser {
       }
     }
 
-    return new ParseResult(inputFile, aggregatedSource.toString(), locationMap, colOffSet);
+    return new ParseResult(inputFile, aggregatedSource.toString(), locationMap);
   }
 
   private void processCodeCell(JsonParser jParser) throws IOException {
@@ -94,8 +93,8 @@ public class IpynbNotebookParser {
     while (jParser.nextToken() != JsonToken.END_ARRAY) {
       String sourceLine = jParser.getValueAsString();
       var tokenLocation = jParser.currentTokenLocation();
-      colOffSet.put(aggregatedSourceLine, countEscapeCharacters(sourceLine, new LinkedHashMap<>(), tokenLocation.getColumnNr()));
-      addLineToSource(sourceLine, tokenLocation, colOffSet.get(aggregatedSourceLine));
+      var countEscapedChar = countEscapeCharacters(sourceLine, new LinkedHashMap<>(), tokenLocation.getColumnNr());
+      addLineToSource(sourceLine, tokenLocation, countEscapedChar);
     }
     // Account for the last cell delimiter
     addDelimiterToSource();
@@ -112,10 +111,10 @@ public class IpynbNotebookParser {
     var previousExtraChars = 0;
 
     for (String line : sourceLine.lines().toList()) {
-      colOffSet.put(aggregatedSourceLine, countEscapeCharacters(line, new LinkedHashMap<>(), tokenLocation.getColumnNr()));
-      var currentCount = colOffSet.get(aggregatedSourceLine).get(-1);
+      var countEscapedChar = countEscapeCharacters(line, new LinkedHashMap<>(), tokenLocation.getColumnNr());
+      var currentCount = countEscapedChar.get(-1);
       addLineToSource(line, new IPythonLocation(tokenLocation.getLineNr(),
-        tokenLocation.getColumnNr() + previousLen + previousExtraChars + 1, colOffSet.get(aggregatedSourceLine)));
+        tokenLocation.getColumnNr() + previousLen + previousExtraChars + 1, countEscapedChar));
       previousLen = line.length() + 2;
       previousExtraChars = currentCount;
     }
@@ -165,7 +164,7 @@ public class IpynbNotebookParser {
     return colMap;
   }
 
-  public record ParseResult(PythonInputFile inputFile, String aggregatedSource, Map<Integer, IPythonLocation> locationMap, Map<Integer, Map<Integer, Integer>> colOffSet) {
+  public record ParseResult(PythonInputFile inputFile, String aggregatedSource, Map<Integer, IPythonLocation> locationMap) {
   }
 
   public record IPythonLocation(int line, int column, Map<Integer, Integer> colOffset) {
