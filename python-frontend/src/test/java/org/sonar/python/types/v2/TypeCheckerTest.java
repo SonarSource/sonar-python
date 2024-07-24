@@ -96,4 +96,35 @@ class TypeCheckerTest {
     assertThat(typeChecker.typeCheckBuilder().hasMember("unknown").check(classType)).isEqualTo(TriBool.UNKNOWN);
     assertThat(typeChecker.typeCheckBuilder().instancesHaveMember("__call__").check(classType)).isEqualTo(TriBool.FALSE);
   }
+
+  @Test
+  void orTest() {
+    FileInput fileInput = parseAndInferTypes("42");
+    NumericLiteral intLiteral = (NumericLiteral) TreeUtils.firstChild(fileInput, t -> t.is(Tree.Kind.NUMERIC_LITERAL)).get();
+    ObjectType intLiteralType = (ObjectType) intLiteral.typeV2();
+    assertThat(intLiteralType.unwrappedType()).isEqualTo(INT_TYPE);
+
+    assertThat(typeChecker.typeCheckBuilder().isBuiltinWithName("str").or(
+      typeChecker.typeCheckBuilder().isBuiltinWithName("int")
+    ).check(intLiteralType)).isEqualTo(TriBool.TRUE);
+
+    assertThat(typeChecker.typeCheckBuilder().isBuiltinWithName("int").or(
+      typeChecker.typeCheckBuilder().isBuiltinWithName("str")
+    ).check(intLiteralType)).isEqualTo(TriBool.TRUE);
+
+    assertThat(typeChecker.typeCheckBuilder().isBuiltinWithName("int").or(
+      typeChecker.typeCheckBuilder().hasMember("__abs__")
+    ).check(intLiteralType)).isEqualTo(TriBool.TRUE);
+  }
+
+  @Test
+  void andTest() {
+    FileInput fileInput = parseAndInferTypes("42");
+    NumericLiteral intLiteral = (NumericLiteral) TreeUtils.firstChild(fileInput, t -> t.is(Tree.Kind.NUMERIC_LITERAL)).get();
+    ObjectType intLiteralType = (ObjectType) intLiteral.typeV2();
+
+    assertThat(typeChecker.typeCheckBuilder().isBuiltinWithName("int").isBuiltinWithName("str").check(intLiteralType)).isEqualTo(TriBool.FALSE);
+    assertThat(typeChecker.typeCheckBuilder().isBuiltinWithName("str").isBuiltinWithName("int").check(intLiteralType)).isEqualTo(TriBool.FALSE);
+    assertThat(typeChecker.typeCheckBuilder().isBuiltinWithName("int").hasMember("__abs__").check(intLiteralType)).isEqualTo(TriBool.TRUE);
+  }
 }

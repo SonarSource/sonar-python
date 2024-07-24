@@ -37,4 +37,17 @@ class TriBoolTest {
     assertThat(TriBool.UNKNOWN.and(TriBool.UNKNOWN)).isEqualTo(TriBool.UNKNOWN);
     assertThat(TriBool.UNKNOWN.and(TriBool.FALSE)).isEqualTo(TriBool.UNKNOWN);
   }
+
+  @Test
+  void orTest() {
+    assertThat(TriBool.TRUE.or(TriBool.TRUE)).isEqualTo(TriBool.TRUE);
+    assertThat(TriBool.TRUE.or(TriBool.UNKNOWN)).isEqualTo(TriBool.TRUE);
+    assertThat(TriBool.TRUE.or(TriBool.FALSE)).isEqualTo(TriBool.TRUE);
+    assertThat(TriBool.FALSE.or(TriBool.TRUE)).isEqualTo(TriBool.TRUE);
+    assertThat(TriBool.FALSE.or(TriBool.UNKNOWN)).isEqualTo(TriBool.UNKNOWN);
+    assertThat(TriBool.FALSE.or(TriBool.FALSE)).isEqualTo(TriBool.FALSE);
+    assertThat(TriBool.UNKNOWN.or(TriBool.TRUE)).isEqualTo(TriBool.TRUE);
+    assertThat(TriBool.UNKNOWN.or(TriBool.UNKNOWN)).isEqualTo(TriBool.UNKNOWN);
+    assertThat(TriBool.UNKNOWN.or(TriBool.FALSE)).isEqualTo(TriBool.UNKNOWN);
+  }
 }
