@@ -27,7 +27,7 @@ import org.sonar.plugins.python.api.tree.RaiseStatement;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.python.types.v2.PythonType;
 import org.sonar.python.types.v2.TriBool;
-import org.sonar.python.types.v2.TypeChecker;
+import org.sonar.python.types.v2.TypeCheckerContext;
 
 import static org.sonar.plugins.python.api.types.BuiltinTypes.BASE_EXCEPTION;
 import static org.sonar.plugins.python.api.types.BuiltinTypes.EXCEPTION;
@@ -45,10 +45,10 @@ public class GenericExceptionRaisedCheck extends PythonSubscriptionCheck {
       }
       Expression expression = expressions.get(0);
       PythonType pythonType = expression.typeV2();
-      TypeChecker typeChecker = ctx.typeChecker();
-      TriBool isExceptionOrBaseException = typeChecker.or(
-        typeChecker.typeCheckBuilder().isBuiltinWithName(EXCEPTION),
-        typeChecker.typeCheckBuilder().isBuiltinWithName(BASE_EXCEPTION)
+      TypeCheckerContext typeCheckerContext = ctx.typeChecker();
+      TriBool isExceptionOrBaseException = typeCheckerContext.or(
+        typeCheckerContext.typeChecker().isBuiltinWithName(EXCEPTION),
+        typeCheckerContext.typeChecker().isBuiltinWithName(BASE_EXCEPTION)
         )
         .check(pythonType);
       if (isExceptionOrBaseException == TriBool.TRUE) {
