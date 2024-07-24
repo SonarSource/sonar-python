@@ -104,6 +104,11 @@ class TypeCheckerContextTest {
     ObjectType intLiteralType = (ObjectType) intLiteral.typeV2();
     assertThat(intLiteralType.unwrappedType()).isEqualTo(INT_TYPE);
 
+    assertThat(typeCheckerContext.or(
+      typeCheckerContext.typeChecker().isBuiltinWithName("int"),
+      typeCheckerContext.typeChecker().isBuiltinWithName("str")
+    ).check(intLiteralType)).isEqualTo(TriBool.TRUE);
+
     assertThat(typeCheckerContext.typeChecker().isBuiltinWithName("str").or(
       typeCheckerContext.typeChecker().isBuiltinWithName("int")
     ).check(intLiteralType)).isEqualTo(TriBool.TRUE);
@@ -122,6 +127,11 @@ class TypeCheckerContextTest {
     FileInput fileInput = parseAndInferTypes("42");
     NumericLiteral intLiteral = (NumericLiteral) TreeUtils.firstChild(fileInput, t -> t.is(Tree.Kind.NUMERIC_LITERAL)).get();
     ObjectType intLiteralType = (ObjectType) intLiteral.typeV2();
+
+    assertThat(typeCheckerContext.and(
+      typeCheckerContext.typeChecker().isBuiltinWithName("int"),
+      typeCheckerContext.typeChecker().isBuiltinWithName("str")
+    ).check(intLiteralType)).isEqualTo(TriBool.FALSE);
 
     TypeChecker isIntAndStr = typeCheckerContext.typeChecker().isBuiltinWithName("int").isBuiltinWithName("str");
     TypeChecker isStrAndInt = typeCheckerContext.typeChecker().isBuiltinWithName("str").isBuiltinWithName("int");
@@ -143,10 +153,22 @@ class TypeCheckerContextTest {
     TypeChecker trueOr2 = isIntAndHasMemberAbs.or(isStrAndInt);
     TypeChecker trueOr3 = isIntAndHasMemberAbs.or(isUnknownAndHasMemberFloat);
     TypeChecker trueOr4 = isUnknownAndHasMemberFloat.or(isIntAndHasMemberAbs);
+    TypeChecker unknownOr = isUnknownAndHasMemberFloat.or(isIntAndStr);
+    TypeChecker falseOr = isStrAndInt.or(isIntAndStr);
 
     assertThat(trueOr1.check(intLiteralType)).isEqualTo(TriBool.TRUE);
     assertThat(trueOr2.check(intLiteralType)).isEqualTo(TriBool.TRUE);
     assertThat(trueOr3.check(intLiteralType)).isEqualTo(TriBool.TRUE);
     assertThat(trueOr4.check(intLiteralType)).isEqualTo(TriBool.TRUE);
+
+    assertThat(unknownOr.check(intLiteralType)).isEqualTo(TriBool.UNKNOWN);
+    assertThat(falseOr.check(intLiteralType)).isEqualTo(TriBool.FALSE);
+
+    assertThat(trueOr1.or(isIntAndStr).check(intLiteralType)).isEqualTo(TriBool.TRUE);
+    assertThat(trueOr1.or(trueOr2).check(intLiteralType)).isEqualTo(TriBool.TRUE);
+
+    assertThat(trueOr1.and(isIntAndHasMemberAbs).check(intLiteralType)).isEqualTo(TriBool.TRUE);
+    assertThat(trueOr1.and(isUnknownAndHasMemberFloat).check(intLiteralType)).isEqualTo(TriBool.UNKNOWN);
+    assertThat(trueOr1.and(isIntAndStr).check(intLiteralType)).isEqualTo(TriBool.FALSE);
   }
 }
