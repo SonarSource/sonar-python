@@ -95,7 +95,7 @@ public class IpynbNotebookParser {
       String sourceLine = jParser.getValueAsString();
       var tokenLocation = jParser.currentTokenLocation();
       colOffSet.put(aggregatedSourceLine, countEscapeCharacters(sourceLine, new LinkedHashMap<>(), tokenLocation.getColumnNr()));
-      addLineToSource(sourceLine, tokenLocation);
+      addLineToSource(sourceLine, tokenLocation, colOffSet.get(aggregatedSourceLine));
     }
     // Account for the last cell delimiter
     addDelimiterToSource();
@@ -115,7 +115,7 @@ public class IpynbNotebookParser {
       colOffSet.put(aggregatedSourceLine, countEscapeCharacters(line, new LinkedHashMap<>(), tokenLocation.getColumnNr()));
       var currentCount = colOffSet.get(aggregatedSourceLine).get(-1);
       addLineToSource(line, new IPythonLocation(tokenLocation.getLineNr(),
-        tokenLocation.getColumnNr() + previousLen + previousExtraChars + 1));
+        tokenLocation.getColumnNr() + previousLen + previousExtraChars + 1, colOffSet.get(aggregatedSourceLine)));
       previousLen = line.length() + 2;
       previousExtraChars = currentCount;
     }
@@ -124,8 +124,8 @@ public class IpynbNotebookParser {
     return true;
   }
 
-  private void addLineToSource(String sourceLine, JsonLocation tokenLocation) {
-    addLineToSource(sourceLine, new IPythonLocation(tokenLocation.getLineNr(), tokenLocation.getColumnNr()));
+  private void addLineToSource(String sourceLine, JsonLocation tokenLocation, Map<Integer, Integer> colOffset) {
+    addLineToSource(sourceLine, new IPythonLocation(tokenLocation.getLineNr(), tokenLocation.getColumnNr(), colOffset));
   }
 
   private void addLineToSource(String sourceLine, IPythonLocation location) {
@@ -168,7 +168,7 @@ public class IpynbNotebookParser {
   public record ParseResult(PythonInputFile inputFile, String aggregatedSource, Map<Integer, IPythonLocation> locationMap, Map<Integer, Map<Integer, Integer>> colOffSet) {
   }
 
-  public record IPythonLocation(int line, int column) {
+  public record IPythonLocation(int line, int column, Map<Integer, Integer> colOffset) {
   }
 
 }
