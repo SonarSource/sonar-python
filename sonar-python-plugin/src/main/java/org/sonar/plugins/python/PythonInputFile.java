@@ -19,10 +19,24 @@
  */
 package org.sonar.plugins.python;
 
+import java.io.IOException;
 import org.sonar.api.batch.fs.InputFile;
 
 public interface PythonInputFile {
 
   InputFile wrappedFile();
+
+  default String contents() throws IOException {
+    return wrappedFile().contents();
+  }
+
+  default Kind kind() {
+    return Kind.PYTHON;
+  }
+
+  enum Kind {
+    PYTHON,
+    IPYTHON
+  }
 
 }
