@@ -19,26 +19,20 @@
  */
 package org.sonar.python.checks;
 
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
-import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.Expression;
-import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.RaiseStatement;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
-import org.sonar.plugins.python.api.types.InferredType;
+import org.sonar.python.types.v2.PythonType;
+import org.sonar.python.types.v2.TriBool;
 
 import static org.sonar.plugins.python.api.types.BuiltinTypes.BASE_EXCEPTION;
 import static org.sonar.plugins.python.api.types.BuiltinTypes.EXCEPTION;
 
 @Rule(key = "S112")
 public class GenericExceptionRaisedCheck extends PythonSubscriptionCheck {
-
-  private static final Set<String> GENERIC_EXCEPTION_NAMES = new HashSet<>(Arrays.asList(EXCEPTION, BASE_EXCEPTION));
 
   @Override
   public void initialize(Context context) {
@@ -49,19 +43,12 @@ public class GenericExceptionRaisedCheck extends PythonSubscriptionCheck {
         return;
       }
       Expression expression = expressions.get(0);
-      InferredType type = expression.type();
-      if (GENERIC_EXCEPTION_NAMES.stream().anyMatch(type::canOnlyBe) || isGenericExceptionClass(expression)) {
+      PythonType pythonType = expression.typeV2();
+      TriBool isException = ctx.typeChecker().typeCheckBuilder().isBuiltinWithName(EXCEPTION).check(pythonType);
+      TriBool isBaseException = ctx.typeChecker().typeCheckBuilder().isBuiltinWithName(BASE_EXCEPTION).check(pythonType);
+      if (isException == TriBool.TRUE || isBaseException == TriBool.TRUE) {
         ctx.addIssue(expression, "Replace this generic exception class with a more specific one.");
       }
     });
   }
-
-  private static boolean isGenericExceptionClass(Expression expression) {
-    if (expression.is(Kind.NAME)) {
-      Symbol symbol = ((Name) expression).symbol();
-      return symbol != null && GENERIC_EXCEPTION_NAMES.contains(symbol.fullyQualifiedName());
-    }
-    return false;
-  }
-
 }
