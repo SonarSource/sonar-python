@@ -21,6 +21,7 @@ package org.sonar.python.semantic.v2;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.types.v2.ObjectType;
 import org.sonar.python.types.v2.PythonType;
 import org.sonar.python.types.v2.TriBool;
@@ -36,6 +37,23 @@ class TypeCheckerBuilderTest {
       .isEqualTo(TriBool.TRUE);
     Assertions.assertThat(builder.check(new ObjectType(PythonType.UNKNOWN, TypeSource.EXACT)))
       .isEqualTo(TriBool.FALSE);
+  }
+
+  @Test
+  void isInstanceOfTest() {
+    var symbolTable = ProjectLevelSymbolTable.empty();
+    var table = new ProjectLevelTypeTable(symbolTable, new TypeShed(symbolTable));
+    var builder = new TypeCheckBuilder(table).isInstanceOf("typing.Callable");
+
+
+    var callableClassType = table.getType("typing.Callable");
+    var coroutineClassType = table.getType("typing.Coroutine");
+    Assertions.assertThat(builder.check(callableClassType))
+      .isEqualTo(TriBool.TRUE);
+    Assertions.assertThat(builder.check(coroutineClassType))
+      .isEqualTo(TriBool.FALSE);
+    Assertions.assertThat(builder.check(PythonType.UNKNOWN))
+      .isEqualTo(TriBool.UNKNOWN);
   }
 
 }

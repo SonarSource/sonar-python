@@ -108,6 +108,9 @@ public class TypeCheckBuilder {
 
     @Override
     public TriBool test(PythonType pythonType) {
+      if (pythonType == PythonType.UNKNOWN) {
+        return TriBool.UNKNOWN;
+      }
       return this.pythonType.equals(pythonType.unwrappedType()) ? TriBool.TRUE : TriBool.FALSE;
     }
   }
