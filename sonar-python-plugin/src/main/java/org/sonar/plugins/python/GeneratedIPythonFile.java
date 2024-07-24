@@ -22,7 +22,8 @@ package org.sonar.plugins.python;
 import java.io.IOException;
 import java.util.Map;
 import org.sonar.api.batch.fs.InputFile;
-import org.sonar.plugins.python.IpynbNotebookParser.IPythonLocation;
+import org.sonar.python.IPythonLocation;
+
 
 public class GeneratedIPythonFile implements PythonInputFile {
 
