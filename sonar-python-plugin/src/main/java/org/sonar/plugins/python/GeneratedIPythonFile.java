@@ -19,22 +19,38 @@
  */
 package org.sonar.plugins.python;
 
+import java.io.IOException;
 import org.sonar.api.batch.fs.InputFile;
 
-public class PythonInputFileImpl implements PythonInputFile {
+public class GeneratedIPythonFile implements PythonInputFile {
+
   InputFile wrappedFile;
 
-  public PythonInputFileImpl(InputFile wrappedFile) {
-    this.wrappedFile = wrappedFile;
-  }
+  private String pythonContent;
 
+  public GeneratedIPythonFile(InputFile wrappedFile, String pythonContent) {
+    this.wrappedFile = wrappedFile;
+    this.pythonContent = pythonContent;
+  }
+  
   @Override
   public InputFile wrappedFile() {
     return wrappedFile;
   }
 
   @Override
+  public Kind kind() {
+    return Kind.IPYTHON;
+  }
+
+  @Override
   public String toString() {
     return wrappedFile.toString();
   }
+
+  @Override
+  public String contents() throws IOException {
+    return pythonContent;
+  }
+
 }
