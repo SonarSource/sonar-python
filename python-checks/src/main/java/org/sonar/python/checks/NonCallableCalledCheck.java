@@ -22,6 +22,7 @@ package org.sonar.python.checks;
 import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
+import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Tree;
@@ -40,7 +41,7 @@ public class NonCallableCalledCheck extends PythonSubscriptionCheck {
       CallExpression callExpression = (CallExpression) ctx.syntaxNode();
       Expression callee = callExpression.callee();
       PythonType type = callee.typeV2();
-      if (isNonCallableType(type, ctx.typeChecker())) {
+      if (isNonCallableType(ctx, type)) {
         String name = nameFromExpression(callee);
         PreciseIssue preciseIssue = ctx.addIssue(callee, message(type, name));
         type.definitionLocation()
@@ -55,8 +56,9 @@ public class NonCallableCalledCheck extends PythonSubscriptionCheck {
       .orElse("");
   }
 
-  public boolean isNonCallableType(PythonType type, TypeChecker typeChecker) {
-    return typeChecker.typeCheckBuilder().hasMember("__call__").check(type) == TriBool.FALSE;
+  private static boolean isNonCallableType(SubscriptionContext ctx, PythonType calleeType) {
+    return ctx.typeChecker().typeCheckBuilder().isTypeHintTypeSource().check(calleeType) != TriBool.TRUE
+           && ctx.typeChecker().typeCheckBuilder().hasMember("__call__").check(calleeType) == TriBool.FALSE
   }
 
   public String message(PythonType typeV2, @Nullable String name) {
