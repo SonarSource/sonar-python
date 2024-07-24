@@ -164,9 +164,6 @@ public class IpynbNotebookParser {
     return colMap;
   }
 
-  public record ParseResult(PythonInputFile inputFile, String aggregatedSource, Map<Integer, IPythonLocation> locationMap) {
-  }
-
   public record IPythonLocation(int line, int column, Map<Integer, Integer> colOffset) {
   }
 
