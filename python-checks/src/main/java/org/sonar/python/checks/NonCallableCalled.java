@@ -48,8 +48,8 @@ public class NonCallableCalled extends PythonSubscriptionCheck {
   private static boolean isNonCallableCall(SubscriptionContext ctx, PythonType calleeType) {
     return ctx.typeChecker().typeCheckBuilder().isTypeHintTypeSource().check(calleeType) == TriBool.TRUE
            && ctx.typeChecker().typeCheckBuilder().hasMember("__call__").check(calleeType) == TriBool.FALSE
-           && ctx.typeChecker().typeCheckBuilder().isInstanceOf("typing", "Coroutine").check(calleeType) == TriBool.FALSE
-           && ctx.typeChecker().typeCheckBuilder().isInstanceOf("typing", "Callable").check(calleeType) == TriBool.FALSE;
+           && ctx.typeChecker().typeCheckBuilder().isInstanceOf("typing.Coroutine").check(calleeType) == TriBool.FALSE
+           && ctx.typeChecker().typeCheckBuilder().isInstanceOf("typing.Callable").check(calleeType) == TriBool.FALSE;
   }
 
   protected static String addTypeName(PythonType type) {

@@ -63,19 +63,23 @@ public class ProjectLevelTypeTable {
     return parent;
   }
 
-  public PythonType getType(String... moduleName) {
-    return getType(List.of(moduleName));
+  public PythonType getType(String typeFqn) {
+    return getType(typeFqn.split("\\."));
   }
 
-  public PythonType getType(List<String> moduleNameParts) {
+  public PythonType getType(String... typeFqnParts) {
+    return getType(List.of(typeFqnParts));
+  }
+
+  public PythonType getType(List<String> typeFqnParts) {
     var parent = (PythonType) rootModule;
-    for (int i = 0; i < moduleNameParts.size(); i++) {
-      var part = moduleNameParts.get(i);
+    for (int i = 0; i < typeFqnParts.size(); i++) {
+      var part = typeFqnParts.get(i);
       if (parent.hasMember(part) == TriBool.TRUE) {
         parent = parent.resolveMember(part).orElse(PythonType.UNKNOWN);
       } else if (parent instanceof ModuleType module) {
         var moduleFqn = IntStream.rangeClosed(0, i)
-          .mapToObj(moduleNameParts::get)
+          .mapToObj(typeFqnParts::get)
           .toList();
         parent = symbolsModuleTypeProvider.createModuleType(moduleFqn, module);
       } else {

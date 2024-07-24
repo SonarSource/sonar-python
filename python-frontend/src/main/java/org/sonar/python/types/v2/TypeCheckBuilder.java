@@ -59,7 +59,7 @@ public class TypeCheckBuilder {
     return result;
   }
 
-  public TypeCheckBuilder isInstanceOf(String... fqn) {
+  public TypeCheckBuilder isInstanceOf(String fqn) {
     var expected = projectLevelTypeTable.getType(fqn);
     predicates.add(new IsInstanceOfPredicate(expected));
     return this;
