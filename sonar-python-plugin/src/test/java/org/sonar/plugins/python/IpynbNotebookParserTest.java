@@ -20,6 +20,7 @@
 package org.sonar.plugins.python;
 
 import java.io.File;
+import java.util.Map;
 import org.junit.jupiter.api.Test;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.internal.apachecommons.lang.StringUtils;
@@ -35,11 +36,20 @@ class IpynbNotebookParserTest {
   void testParseNotebook() {
     var inputFile = createInputFile(baseDir, "notebook.ipynb", InputFile.Status.CHANGED, InputFile.Type.MAIN);
 
-    IpynbNotebookParser.ParseResult result = IpynbNotebookParser.parseNotebook(inputFile);
+    var result = IpynbNotebookParser.parseNotebook(inputFile);
 
-    assertThat(result.locationMap().keySet()).hasSize(18);
+    assertThat(result.locationMap().keySet()).hasSize(20);
     assertThat(StringUtils.countMatches(result.aggregatedSource(), IpynbNotebookParser.SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER))
-      .isEqualTo(6);
+      .isEqualTo(7);
+    assertThat(result.locationMap()).extracting(map -> map.get(17)).isEqualTo(new IpynbNotebookParser.IPythonLocation(64, 27, Map.of(6, 21, 20, 37, -1, 3)));
+
+    // The wrapped file changes the lines of the notebook
+    assertThat(result.locationMap()).extracting(map -> map.get(22)).isEqualTo(new IpynbNotebookParser.IPythonLocation(84, 15, Map.of(6, 21, 15, 32, -1, 3)));
+    assertThat(result.locationMap()).extracting(map -> map.get(23)).isEqualTo(new IpynbNotebookParser.IPythonLocation(84, 37, Map.of(6, 21, 23, 40, -1, 3)));
+
+    assertThat(result.locationMap()).extracting(map -> map.get(25))
+      .isEqualTo(new IpynbNotebookParser.IPythonLocation(91, 15, Map.of(4, 19, 39, 62, 41, 64, 42, 65, 46, 71, -1, 7)));
+    assertThat(result.locationMap()).extracting(map -> map.get(26)).isEqualTo(new IpynbNotebookParser.IPythonLocation(91, 71, Map.of(-1, 0)));
   }
 
   @Test
