@@ -32,7 +32,7 @@ public class IpynbNotebookParser {
 
   public static final String SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER = "\n#SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER\n";
 
-  public static ParseResult parseNotebook(PythonInputFile inputFile) {
+  public static GeneratedIPythonFile parseNotebook(PythonInputFile inputFile) {
     try {
       return new IpynbNotebookParser(inputFile).parseNotebook();
     } catch (IOException e) {
@@ -51,7 +51,7 @@ public class IpynbNotebookParser {
   private final Map<Integer, IPythonLocation> locationMap = new HashMap<>();
   private int aggregatedSourceLine = 1;
 
-  public ParseResult parseNotebook() throws IOException {
+  public GeneratedIPythonFile parseNotebook() throws IOException {
     String content = inputFile.wrappedFile().contents();
     JsonFactory factory = new JsonFactory();
     try (JsonParser jParser = factory.createParser(content)) {
@@ -69,7 +69,7 @@ public class IpynbNotebookParser {
       }
     }
 
-    return new ParseResult(inputFile, aggregatedSource.toString(), locationMap);
+    return new GeneratedIPythonFile(inputFile.wrappedFile(), aggregatedSource.toString(), locationMap);
   }
 
   private void processCodeCell(JsonParser jParser) throws IOException {
