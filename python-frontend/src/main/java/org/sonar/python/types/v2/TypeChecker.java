@@ -19,11 +19,12 @@
  */
 package org.sonar.python.types.v2;
 
+import java.util.Arrays;
 import org.sonar.python.semantic.v2.ProjectLevelTypeTable;
 
 public class TypeChecker {
 
-  private ProjectLevelTypeTable projectLevelTypeTable;
+  private final ProjectLevelTypeTable projectLevelTypeTable;
 
   public TypeChecker(ProjectLevelTypeTable projectLevelTypeTable) {
     this.projectLevelTypeTable = projectLevelTypeTable;
@@ -31,5 +32,19 @@ public class TypeChecker {
 
   public TypeCheckBuilder typeCheckBuilder() {
     return new TypeCheckBuilder(projectLevelTypeTable);
+  }
+
+  public TypeCheckBuilder and(TypeCheckBuilder... builders) {
+    TypeCheckBuilder result = Arrays.stream(builders)
+      .reduce(TypeCheckBuilder::and)
+      .orElseThrow(() -> new IllegalArgumentException("At least one builder is required"));
+    return new TypeCheckBuilder(projectLevelTypeTable, result.predicate);
+  }
+
+  public TypeCheckBuilder or(TypeCheckBuilder... builders) {
+    TypeCheckBuilder result = Arrays.stream(builders)
+      .reduce(TypeCheckBuilder::or)
+      .orElseThrow(() -> new IllegalArgumentException("At least one builder is required"));
+    return new TypeCheckBuilder(projectLevelTypeTable, result.predicate);
   }
 }

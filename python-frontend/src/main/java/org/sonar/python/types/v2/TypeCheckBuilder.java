@@ -32,34 +32,38 @@ public class TypeCheckBuilder {
     this.projectLevelTypeTable = projectLevelTypeTable;
   }
 
+  TypeCheckBuilder(ProjectLevelTypeTable projectLevelTypeTable, TypePredicate predicate) {
+    this.projectLevelTypeTable = projectLevelTypeTable;
+    this.predicate = predicate;
+  }
+
   public TypeCheckBuilder hasMember(String memberName) {
-    this.predicate = predicate.and(new HasMemberTypePredicate(memberName));
-    return this;
+    return this.and(new TypeCheckBuilder(projectLevelTypeTable, new HasMemberTypePredicate(memberName)));
   }
 
   public TypeCheckBuilder instancesHaveMember(String memberName) {
-    this.predicate = predicate.and(new InstancesHaveMemberTypePredicate(memberName));
-    return this;
+    return this.and(new TypeCheckBuilder(projectLevelTypeTable, new InstancesHaveMemberTypePredicate(memberName)));
   }
 
   public TypeCheckBuilder isTypeHintTypeSource() {
-    this.predicate = predicate.and(new TypeSourceMatcherTypePredicate(TypeSource.TYPE_HINT));
-    return this;
+    return this.and(new TypeCheckBuilder(projectLevelTypeTable, new TypeSourceMatcherTypePredicate(TypeSource.TYPE_HINT)));
   }
 
   public TypeCheckBuilder isBuiltinWithName(String name) {
     PythonType builtinType = projectLevelTypeTable.getModule().resolveMember(name).orElse(PythonType.UNKNOWN);
-    this.predicate = predicate.and(new IsSameAsTypePredicate(builtinType));
-    return this;
+    return this.and(new TypeCheckBuilder(projectLevelTypeTable, new IsSameAsTypePredicate(builtinType)));
   }
 
   /**
    * By default, chaining predicates in the TypeCheckBuilder will AND the consecutive predicates
    * This method allows to OR them instead
    */
-  public TypeCheckBuilder or(TypeCheckBuilder typeCheckBuilder) {
-    this.predicate = predicate.or(typeCheckBuilder.predicate);
-    return this;
+  TypeCheckBuilder or(TypeCheckBuilder typeCheckBuilder) {
+    return new TypeCheckBuilder(projectLevelTypeTable, predicate.or(typeCheckBuilder.predicate));
+  }
+
+  TypeCheckBuilder and(TypeCheckBuilder typeCheckBuilder) {
+    return new TypeCheckBuilder(projectLevelTypeTable, predicate.and(typeCheckBuilder.predicate));
   }
 
   public TriBool check(PythonType pythonType) {
@@ -70,25 +74,11 @@ public class TypeCheckBuilder {
     TriBool test(PythonType pythonType);
 
     default TypePredicate and(TypePredicate typePredicate) {
-      if (this instanceof AndTypePredicate andTypePredicate) {
-        andTypePredicate.and(typePredicate);
-        return this;
-      }
-      List<TypePredicate> andedPredicates = new ArrayList<>();
-      andedPredicates.add(this);
-      andedPredicates.add(typePredicate);
-      return new AndTypePredicate(andedPredicates);
+      return new AndTypePredicate(this, typePredicate);
     }
 
     default TypePredicate or(TypePredicate typePredicate) {
-      if (this instanceof OrTypePredicate orTypePredicate) {
-        orTypePredicate.and(typePredicate);
-        return this;
-      }
-      List<TypePredicate> oredPredicates = new ArrayList<>();
-      oredPredicates.add(this);
-      oredPredicates.add(typePredicate);
-      return new OrTypePredicate(oredPredicates);
+      return new OrTypePredicate(this, typePredicate);
     }
   }
 
@@ -100,10 +90,19 @@ public class TypeCheckBuilder {
       this.andedPredicates = andedPredicates;
     }
 
-    @Override
-    public TypePredicate and(TypePredicate typePredicate) {
-      andedPredicates.add(typePredicate);
-      return this;
+    public AndTypePredicate(TypePredicate firstPredicate, TypePredicate secondPredicate) {
+      List<TypePredicate> unwrapped = new ArrayList<>();
+      if (firstPredicate instanceof  AndTypePredicate andTypePredicate) {
+        unwrapped.addAll(andTypePredicate.andedPredicates);
+      } else {
+        unwrapped.add(firstPredicate);
+      }
+      if (secondPredicate instanceof  AndTypePredicate andTypePredicate) {
+        unwrapped.addAll(andTypePredicate.andedPredicates);
+      } else {
+        unwrapped.add(secondPredicate);
+      }
+      this.andedPredicates = unwrapped;
     }
 
     public TriBool test(PythonType pythonType) {
@@ -123,14 +122,19 @@ public class TypeCheckBuilder {
 
     List<TypePredicate> oredPredicates;
 
-    public OrTypePredicate(List<TypePredicate> andedPredicates) {
-      this.oredPredicates = andedPredicates;
-    }
-
-    @Override
-    public TypePredicate or(TypePredicate typePredicate) {
-      oredPredicates.add(typePredicate);
-      return this;
+    public OrTypePredicate(TypePredicate firstPredicate, TypePredicate secondPredicate) {
+      List<TypePredicate> unwrapped = new ArrayList<>();
+      if (firstPredicate instanceof  OrTypePredicate orTypePredicate) {
+        unwrapped.addAll(orTypePredicate.oredPredicates);
+      } else {
+        unwrapped.add(firstPredicate);
+      }
+      if (secondPredicate instanceof  OrTypePredicate orTypePredicate) {
+        unwrapped.addAll(orTypePredicate.oredPredicates);
+      } else {
+        unwrapped.add(secondPredicate);
+      }
+      this.oredPredicates = unwrapped;
     }
 
     public TriBool test(PythonType pythonType) {

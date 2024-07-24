@@ -46,10 +46,9 @@ public class GenericExceptionRaisedCheck extends PythonSubscriptionCheck {
       Expression expression = expressions.get(0);
       PythonType pythonType = expression.typeV2();
       TypeChecker typeChecker = ctx.typeChecker();
-      TriBool isExceptionOrBaseException = typeChecker.typeCheckBuilder()
-        .isBuiltinWithName(EXCEPTION)
-        .or(
-          typeChecker.typeCheckBuilder().isBuiltinWithName(BASE_EXCEPTION)
+      TriBool isExceptionOrBaseException = typeChecker.or(
+        typeChecker.typeCheckBuilder().isBuiltinWithName(EXCEPTION),
+        typeChecker.typeCheckBuilder().isBuiltinWithName(BASE_EXCEPTION)
         )
         .check(pythonType);
       if (isExceptionOrBaseException == TriBool.TRUE) {
