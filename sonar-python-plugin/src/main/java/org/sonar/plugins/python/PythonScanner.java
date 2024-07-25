@@ -145,7 +145,7 @@ public class PythonScanner extends Scanner {
 
     if (visitorContext.rootTree() != null && !isInSonarLint(context)) {
       new SymbolVisitor(context.newSymbolTable().onFile(inputFile.wrappedFile())).visitFileInput(visitorContext.rootTree());
-      new PythonHighlighter(context, inputFile).scanFile(visitorContext);
+//      new PythonHighlighter(context, inputFile).scanFile(visitorContext);
     }
   }
 
@@ -308,7 +308,7 @@ public class PythonScanner extends Scanner {
     noSonarFilter.noSonarInFile(inputFile.wrappedFile(), fileLinesVisitor.getLinesWithNoSonar());
 
     if (!isInSonarLint(context)) {
-      cpdAnalyzer.pushCpdTokens(inputFile.wrappedFile(), visitorContext);
+//      cpdAnalyzer.pushCpdTokens(inputFile.wrappedFile(), visitorContext);
 
       Set<Integer> linesOfCode = fileLinesVisitor.getLinesOfCode();
       saveMetricOnFile(inputFile, CoreMetrics.NCLOC, linesOfCode.size());
