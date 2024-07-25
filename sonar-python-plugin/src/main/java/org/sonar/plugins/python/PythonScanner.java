@@ -22,6 +22,7 @@ package org.sonar.plugins.python;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.RecognitionException;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -98,12 +99,12 @@ public class PythonScanner extends Scanner {
   }
 
   @Override
-  protected void scanFile(PythonInputFile inputFile) {
+  protected void scanFile(PythonInputFile inputFile) throws IOException {
     PythonFile pythonFile = SonarQubePythonFile.create(inputFile.wrappedFile());
     PythonVisitorContext visitorContext;
     InputFile.Type fileType = inputFile.wrappedFile().type();
     try {
-      AstNode astNode = parser.parse(pythonFile.content());
+      AstNode astNode = parser.parse(inputFile.contents());
       PythonTreeMaker treeMaker = getTreeMaker(inputFile);
       FileInput parse = treeMaker.fileInput(astNode);
       visitorContext = new PythonVisitorContext(parse,
