@@ -20,6 +20,7 @@
 package org.sonar.plugins.python;
 
 import java.io.IOException;
+import java.util.Map;
 import org.junit.jupiter.api.Test;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
@@ -31,28 +32,28 @@ class GeneratedIPythonFileTest {
 
   @Test
   void shouldHaveIPythonKind() {
-    PythonInputFile inputFile = new GeneratedIPythonFile(createWrappedFile(), "");
+    PythonInputFile inputFile = new GeneratedIPythonFile(createWrappedFile(), "", Map.of());
     assertThat(inputFile.kind()).isEqualTo(Kind.IPYTHON);
   }
 
   @Test
   void shouldReturnTheWrappedFile() {
     InputFile wrappedFile = createWrappedFile();
-    GeneratedIPythonFile inputFile = new GeneratedIPythonFile(wrappedFile, "");
+    GeneratedIPythonFile inputFile = new GeneratedIPythonFile(wrappedFile, "", Map.of());
     assertThat(inputFile.wrappedFile()).isEqualTo(wrappedFile);
   }
 
   @Test
   void shouldHaveTheWrappedFileToString() {
     InputFile wrappedFile = createWrappedFile();
-    PythonInputFile inputFile = new GeneratedIPythonFile(wrappedFile, "");
+    PythonInputFile inputFile = new GeneratedIPythonFile(wrappedFile, "", Map.of());
     assertThat(inputFile).hasToString(wrappedFile.toString());
   }
 
   @Test
   void shouldHaveTheContentPassed() throws IOException {
     InputFile wrappedFile = createWrappedFile();
-    PythonInputFile inputFile = new GeneratedIPythonFile(wrappedFile, "test");
+    PythonInputFile inputFile = new GeneratedIPythonFile(wrappedFile, "test", Map.of());
     assertThat(inputFile.contents()).isEqualTo("test");
 
   }

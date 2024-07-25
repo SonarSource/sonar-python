@@ -20,6 +20,7 @@
 package org.sonar.plugins.python;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Map;
 import org.junit.jupiter.api.Test;
 import org.sonar.api.batch.fs.InputFile;
@@ -33,23 +34,22 @@ class IpynbNotebookParserTest {
   private final File baseDir = new File("src/test/resources/org/sonar/plugins/python").getAbsoluteFile();
 
   @Test
-  void testParseNotebook() {
+  void testParseNotebook() throws IOException {
     var inputFile = createInputFile(baseDir, "notebook.ipynb", InputFile.Status.CHANGED, InputFile.Type.MAIN);
 
     var result = IpynbNotebookParser.parseNotebook(inputFile);
 
     assertThat(result.locationMap().keySet()).hasSize(20);
-    assertThat(StringUtils.countMatches(result.aggregatedSource(), IpynbNotebookParser.SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER))
+    assertThat(StringUtils.countMatches(result.contents(), IpynbNotebookParser.SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER))
       .isEqualTo(7);
     assertThat(result.locationMap()).extracting(map -> map.get(17)).isEqualTo(new IpynbNotebookParser.IPythonLocation(64, 27, Map.of(6, 21, 20, 37, -1, 3)));
 
-    // The wrapped file changes the lines of the notebook
-    assertThat(result.locationMap()).extracting(map -> map.get(22)).isEqualTo(new IpynbNotebookParser.IPythonLocation(84, 15, Map.of(6, 21, 15, 32, -1, 3)));
-    assertThat(result.locationMap()).extracting(map -> map.get(23)).isEqualTo(new IpynbNotebookParser.IPythonLocation(84, 37, Map.of(6, 21, 23, 40, -1, 3)));
+    assertThat(result.locationMap()).extracting(map -> map.get(22)).isEqualTo(new IpynbNotebookParser.IPythonLocation(83, 15, Map.of(6, 21, 15, 32, -1, 3)));
+    assertThat(result.locationMap()).extracting(map -> map.get(23)).isEqualTo(new IpynbNotebookParser.IPythonLocation(83, 37, Map.of(6, 21, 23, 40, -1, 3)));
 
     assertThat(result.locationMap()).extracting(map -> map.get(25))
-      .isEqualTo(new IpynbNotebookParser.IPythonLocation(91, 15, Map.of(4, 19, 39, 62, 41, 64, 42, 65, 46, 71, -1, 7)));
-    assertThat(result.locationMap()).extracting(map -> map.get(26)).isEqualTo(new IpynbNotebookParser.IPythonLocation(91, 71, Map.of(-1, 0)));
+      .isEqualTo(new IpynbNotebookParser.IPythonLocation(90, 15, Map.of(4, 19, 39, 62, 41, 64, 42, 65, 46, 71, -1, 7)));
+    assertThat(result.locationMap()).extracting(map -> map.get(26)).isEqualTo(new IpynbNotebookParser.IPythonLocation(90, 71, Map.of(-1, 0)));
   }
 
   @Test
