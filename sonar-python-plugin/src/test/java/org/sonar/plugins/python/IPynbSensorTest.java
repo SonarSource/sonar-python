@@ -20,6 +20,8 @@
 package org.sonar.plugins.python;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.Collections;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
@@ -67,7 +69,7 @@ class IPynbSensorTest {
   private static final String FILE_1 = "file1.ipynb";
   private static final String NOTEBOOK_FILE = "notebook.ipynb";
 
-  private final File baseDir = new File("src/test/resources/org/sonar/plugins/python/ipynb").getAbsoluteFile();
+  private final File baseDir = new File("src/test/resources/org/sonar/plugins/python/ipynb/").getAbsoluteFile();
 
   private SensorContextTester context;
 
@@ -77,8 +79,10 @@ class IPynbSensorTest {
   public LogTesterJUnit5 logTester = new LogTesterJUnit5().setLevel(Level.DEBUG);
 
   @BeforeEach
-  void init() {
+  void init() throws IOException {
     context = SensorContextTester.create(baseDir);
+    var workDir = Files.createTempDirectory("workDir");
+    context.fileSystem().setWorkDir(workDir);
   }
 
   @Test
