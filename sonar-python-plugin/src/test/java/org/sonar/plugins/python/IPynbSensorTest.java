@@ -129,7 +129,6 @@ class IPynbSensorTest {
     return new IPynbSensor(fileLinesContextFactory, checkFactory, mock(NoSonarFilter.class), indexer);
   }
 
-
   private PythonInputFile inputFile(String name) {
     PythonInputFile inputFile = createInputFile(name);
     context.fileSystem().add(inputFile.wrappedFile());
@@ -174,11 +173,37 @@ class IPynbSensorTest {
   }
 
   @Test
-  void test_notebook_sensor_cannot_read_python_file_is_executed() {
+  void test_notebook_sensor_error_should_throw_if_fail_fast() {
+    context.settings().setProperty("sonar.internal.analysis.failFast", true);
     inputFile(FILE_1);
     activeRules = new ActiveRulesBuilder().build();
     IPynbSensor sensor = notebookSensor();
-    assertThrows("Cannot read file1.ipynb", IllegalStateException.class, () -> sensor.execute(context));
+    Throwable throwable = assertThrows(IllegalStateException.class, () -> sensor.execute(context));
+    assertThat(throwable.getClass()).isEqualTo(IllegalStateException.class);
+    assertThat(throwable.getMessage()).isEqualTo("Exception when parsing file1.ipynb");
+  }
+
+  @Test
+  void test_notebook_sensor_should_not_throw_on_test_file() {
+    context.settings().setProperty("sonar.internal.analysis.failFast", true);
+    PythonInputFile testFile = new PythonInputFileImpl(TestInputFileBuilder.create("moduleKey", FILE_1)
+      .setModuleBaseDir(baseDir.toPath())
+      .setCharset(UTF_8)
+      .setType(InputFile.Type.TEST)
+      .setLanguage(IPynb.KEY)
+      .initMetadata(TestUtils.fileContent(new File(baseDir, FILE_1), UTF_8))
+      .setStatus(InputFile.Status.ADDED)
+      .build());
+    context.fileSystem().add(testFile.wrappedFile());
+    activeRules = new ActiveRulesBuilder().build();
+    assertDoesNotThrow(() -> notebookSensor().execute(context));
+  }
+
+  @Test
+  void test_notebook_sensor_cannot_parse_file() {
+    inputFile(FILE_1);
+    activeRules = new ActiveRulesBuilder().build();
+    assertDoesNotThrow(() -> notebookSensor().execute(context));
   }
 
   @Test

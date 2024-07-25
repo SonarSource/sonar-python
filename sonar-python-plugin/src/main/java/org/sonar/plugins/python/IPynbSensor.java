@@ -50,6 +50,7 @@ public final class IPynbSensor implements Sensor {
   private final FileLinesContextFactory fileLinesContextFactory;
   private final NoSonarFilter noSonarFilter;
   private final PythonIndexer indexer;
+  private static final String FAIL_FAST_PROPERTY_NAME = "sonar.internal.analysis.failFast";
 
   public IPynbSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory, NoSonarFilter noSonarFilter) {
     this(fileLinesContextFactory, checkFactory, noSonarFilter, null);
@@ -86,7 +87,7 @@ public final class IPynbSensor implements Sensor {
   }
 
   private void processNotebooksFiles(List<PythonInputFile> pythonFiles, SensorContext context) {
-    pythonFiles = parseNotebooks(pythonFiles);
+    pythonFiles = parseNotebooks(pythonFiles, context);
     // Disable caching for IPynb files for now
     CacheContext cacheContext = CacheContextImpl.dummyCache();
     PythonIndexer pythonIndexer = new SonarQubePythonIndexer(pythonFiles, cacheContext, context);
@@ -94,11 +95,17 @@ public final class IPynbSensor implements Sensor {
     scanner.execute(pythonFiles, context);
   }
 
-  private static List<PythonInputFile> parseNotebooks(List<PythonInputFile> pythonFiles) {
+  private static List<PythonInputFile> parseNotebooks(List<PythonInputFile> pythonFiles, SensorContext context) {
     List<PythonInputFile> generatedIPythonFiles = new ArrayList<>();
     for (PythonInputFile inputFile : pythonFiles) {
-      ParseResult result = IpynbNotebookParser.parseNotebook(inputFile);
-      generatedIPythonFiles.add(result.inputFile());
+      try {
+        ParseResult result = IpynbNotebookParser.parseNotebook(inputFile);
+        generatedIPythonFiles.add(result.inputFile());
+      } catch (Exception e) {
+        if (context.config().getBoolean(FAIL_FAST_PROPERTY_NAME).orElse(false) && !isErrorOnTestFile(inputFile)) {
+          throw new IllegalStateException("Exception when parsing " + inputFile, e);
+        }
+      }
     }
     return generatedIPythonFiles;
   }
@@ -115,5 +122,9 @@ public final class IPynbSensor implements Sensor {
     List<PythonInputFile> list = new ArrayList<>();
     it.forEach(f -> list.add(new PythonInputFileImpl(f)));
     return Collections.unmodifiableList(list);
+  }
+
+  private static boolean isErrorOnTestFile(PythonInputFile inputFile) {
+    return inputFile.wrappedFile().type() == InputFile.Type.TEST;
   }
 }
