@@ -32,7 +32,6 @@ import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonar.api.issue.NoSonarFilter;
 import org.sonar.api.measures.FileLinesContextFactory;
-import org.sonar.plugins.python.IpynbNotebookParser.ParseResult;
 import org.sonar.plugins.python.api.ProjectPythonVersion;
 import org.sonar.plugins.python.api.PythonVersionUtils;
 import org.sonar.plugins.python.api.caching.CacheContext;
@@ -50,6 +49,7 @@ public final class IPynbSensor implements Sensor {
   private final FileLinesContextFactory fileLinesContextFactory;
   private final NoSonarFilter noSonarFilter;
   private final PythonIndexer indexer;
+  private static final String FAIL_FAST_PROPERTY_NAME = "sonar.internal.analysis.failFast";
 
   public IPynbSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory, NoSonarFilter noSonarFilter) {
     this(fileLinesContextFactory, checkFactory, noSonarFilter, null);
@@ -86,19 +86,25 @@ public final class IPynbSensor implements Sensor {
   }
 
   private void processNotebooksFiles(List<PythonInputFile> pythonFiles, SensorContext context) {
-    pythonFiles = parseNotebooks(pythonFiles);
-    // Disable caching for IPynb files for now
+    pythonFiles = parseNotebooks(pythonFiles, context);
+    // Disable caching for IPynb files for now see: SONARPY-2020
     CacheContext cacheContext = CacheContextImpl.dummyCache();
     PythonIndexer pythonIndexer = new SonarQubePythonIndexer(pythonFiles, cacheContext, context);
     PythonScanner scanner = new PythonScanner(context, checks, fileLinesContextFactory, noSonarFilter, PythonParser.createIPythonParser(), pythonIndexer);
     scanner.execute(pythonFiles, context);
   }
 
-  private static List<PythonInputFile> parseNotebooks(List<PythonInputFile> pythonFiles) {
+  private static List<PythonInputFile> parseNotebooks(List<PythonInputFile> pythonFiles, SensorContext context) {
     List<PythonInputFile> generatedIPythonFiles = new ArrayList<>();
     for (PythonInputFile inputFile : pythonFiles) {
-      ParseResult result = IpynbNotebookParser.parseNotebook(inputFile);
-      generatedIPythonFiles.add(result.inputFile());
+      try {
+        PythonInputFile result = IpynbNotebookParser.parseNotebook(inputFile);
+        generatedIPythonFiles.add(result);
+      } catch (Exception e) {
+        if (context.config().getBoolean(FAIL_FAST_PROPERTY_NAME).orElse(false) && !isErrorOnTestFile(inputFile)) {
+          throw new IllegalStateException("Exception when parsing " + inputFile, e);
+        }
+      }
     }
     return generatedIPythonFiles;
   }
@@ -115,5 +121,9 @@ public final class IPynbSensor implements Sensor {
     List<PythonInputFile> list = new ArrayList<>();
     it.forEach(f -> list.add(new PythonInputFileImpl(f)));
     return Collections.unmodifiableList(list);
+  }
+
+  private static boolean isErrorOnTestFile(PythonInputFile inputFile) {
+    return inputFile.wrappedFile().type() == InputFile.Type.TEST;
   }
 }
