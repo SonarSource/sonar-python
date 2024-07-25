@@ -88,7 +88,7 @@ public final class IPynbSensor implements Sensor {
 
   private void processNotebooksFiles(List<PythonInputFile> pythonFiles, SensorContext context) {
     pythonFiles = parseNotebooks(pythonFiles, context);
-    // Disable caching for IPynb files for now
+    // Disable caching for IPynb files for now see: SONARPY-2020
     CacheContext cacheContext = CacheContextImpl.dummyCache();
     PythonIndexer pythonIndexer = new SonarQubePythonIndexer(pythonFiles, cacheContext, context);
     PythonScanner scanner = new PythonScanner(context, checks, fileLinesContextFactory, noSonarFilter, PythonParser.createIPythonParser(), pythonIndexer);
