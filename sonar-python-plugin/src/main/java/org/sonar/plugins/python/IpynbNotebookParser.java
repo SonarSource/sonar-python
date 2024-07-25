@@ -93,7 +93,7 @@ public class IpynbNotebookParser {
     while (jParser.nextToken() != JsonToken.END_ARRAY) {
       String sourceLine = jParser.getValueAsString();
       var tokenLocation = jParser.currentTokenLocation();
-      var countEscapedChar = countEscapeCharacters(sourceLine, new LinkedHashMap<>(), tokenLocation.getColumnNr());
+      var countEscapedChar = countEscapeCharacters(sourceLine , new LinkedHashMap<>(), tokenLocation.getColumnNr());
       addLineToSource(sourceLine, tokenLocation, countEscapedChar);
     }
     aggregatedSource.append("\n");
