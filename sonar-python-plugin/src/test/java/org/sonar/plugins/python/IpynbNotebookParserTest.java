@@ -40,6 +40,7 @@ class IpynbNotebookParserTest {
     var result = IpynbNotebookParser.parseNotebook(inputFile);
 
     assertThat(result.locationMap().keySet()).hasSize(20);
+    assertThat(result.contents()).hasLineCount(27);
     assertThat(StringUtils.countMatches(result.contents(), IpynbNotebookParser.SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER))
       .isEqualTo(7);
     assertThat(result.locationMap()).extracting(map -> map.get(17)).isEqualTo(new IpynbNotebookParser.IPythonLocation(64, 27, Map.of(6, 21, 20, 37, -1, 3)));
