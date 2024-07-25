@@ -32,7 +32,6 @@ import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonar.api.issue.NoSonarFilter;
 import org.sonar.api.measures.FileLinesContextFactory;
-import org.sonar.plugins.python.IpynbNotebookParser.ParseResult;
 import org.sonar.plugins.python.api.ProjectPythonVersion;
 import org.sonar.plugins.python.api.PythonVersionUtils;
 import org.sonar.plugins.python.api.caching.CacheContext;
@@ -99,8 +98,8 @@ public final class IPynbSensor implements Sensor {
     List<PythonInputFile> generatedIPythonFiles = new ArrayList<>();
     for (PythonInputFile inputFile : pythonFiles) {
       try {
-        ParseResult result = IpynbNotebookParser.parseNotebook(inputFile);
-        generatedIPythonFiles.add(result.inputFile());
+        PythonInputFile result = IpynbNotebookParser.parseNotebook(inputFile);
+        generatedIPythonFiles.add(result);
       } catch (Exception e) {
         if (context.config().getBoolean(FAIL_FAST_PROPERTY_NAME).orElse(false) && !isErrorOnTestFile(inputFile)) {
           throw new IllegalStateException("Exception when parsing " + inputFile, e);
