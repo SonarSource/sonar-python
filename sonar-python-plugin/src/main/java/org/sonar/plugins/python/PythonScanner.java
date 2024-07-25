@@ -302,7 +302,7 @@ public class PythonScanner extends Scanner {
   }
 
   private void saveMeasures(PythonInputFile inputFile, PythonVisitorContext visitorContext) {
-    FileMetrics fileMetrics = new FileMetrics(visitorContext);
+    FileMetrics fileMetrics = new FileMetrics(visitorContext, inputFile instanceof GeneratedIPythonFile);
     FileLinesVisitor fileLinesVisitor = fileMetrics.fileLinesVisitor();
 
     noSonarFilter.noSonarInFile(inputFile.wrappedFile(), fileLinesVisitor.getLinesWithNoSonar());
