@@ -141,7 +141,7 @@ class SonarQubePythonIndexerTest {
     byte[] outdatedEntry = toProtobufModuleDescriptor(Set.of(new VariableDescriptor("outdated", "mod.outdated", null))).toByteArray();
     readCache.put(importsMapCacheKey("moduleKey:main.py"), importsAsByteArray(List.of("unknown", "mod", "other")));
     readCache.put(importsMapCacheKey("moduleKey:mod.py"), importsAsByteArray(Collections.emptyList()));
-    readCache.put(projectSymbolTableCacheKey("moduleKey:main.py") , serializedSymbolTable);
+    readCache.put(projectSymbolTableCacheKey("moduleKey:main.py"), serializedSymbolTable);
     readCache.put(projectSymbolTableCacheKey("moduleKey:mod.py"), outdatedEntry);
     readCache.put(fileContentHashCacheKey("moduleKey:main.py"), inputFileContentHash(file1.wrappedFile()));
     readCache.put(fileContentHashCacheKey("moduleKey:mod.py"), inputFileContentHash(file2.wrappedFile()));
@@ -311,7 +311,6 @@ class SonarQubePythonIndexerTest {
       .contains("2/2 source files have been analyzed");
   }
 
-
   @Test
   void test_no_file_modified_invalid_cache_version_due_to_changed_python_version() throws IOException, NoSuchAlgorithmException {
     file1 = createInputFile(baseDir, "main.py", InputFile.Status.SAME, InputFile.Type.MAIN);
@@ -446,8 +445,7 @@ class SonarQubePythonIndexerTest {
   void test_regular_scan_when_scan_without_parsing_fails() {
     List<PythonInputFile> files = List.of(createInputFile(baseDir, "main.py", InputFile.Status.SAME, InputFile.Type.MAIN));
     PythonIndexer.GlobalSymbolsScanner globalSymbolsScanner = spy(
-      new SonarQubePythonIndexer(files, cacheContext, context).new GlobalSymbolsScanner(context)
-    );
+      new SonarQubePythonIndexer(files, cacheContext, context).new GlobalSymbolsScanner(context));
     when(globalSymbolsScanner.canBeScannedWithoutParsing(any())).thenReturn(true);
     globalSymbolsScanner.execute(files, context);
 
@@ -516,6 +514,19 @@ class SonarQubePythonIndexerTest {
       assertThat(logTester.logs(Level.DEBUG)).contains("Failed to compute content hash for file moduleKey:mod.py");
     }
     assertThat(pythonIndexer.canBePartiallyScannedWithoutParsing(file1)).isFalse();
+  }
+
+  @Test
+  void test_notebook_should_not_be_in_project_level_symbol_table() {
+    file1 = createInputFile(baseDir, "notebook.ipynb", InputFile.Status.SAME, InputFile.Type.MAIN);
+    file2 = createInputFile(baseDir, "mod.py", InputFile.Status.SAME, InputFile.Type.MAIN);
+    List<PythonInputFile> inputFiles = new ArrayList<>(List.of(file1, file2));
+
+    pythonIndexer = new SonarQubePythonIndexer(inputFiles, cacheContext, context);
+    pythonIndexer.buildOnce(context);
+
+    assertThat(pythonIndexer.projectLevelSymbolTable().getSymbolsFromModule("mod")).isNotEmpty();
+    assertThat(pythonIndexer.projectLevelSymbolTable().getSymbolsFromModule("notebook")).isEmpty();
   }
 
   private byte[] importsAsByteArray(List<String> mod) {

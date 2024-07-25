@@ -151,7 +151,10 @@ public abstract class PythonIndexer {
 
     @Override
     protected void scanFile(PythonInputFile inputFile) throws IOException {
-      addFile(inputFile);
+      // Global Symbol Table is deactivated for Notebooks see: SONARPY-2021
+      if (inputFile.kind() == PythonInputFile.Kind.PYTHON) {
+        addFile(inputFile);
+      }
     }
 
     @Override
