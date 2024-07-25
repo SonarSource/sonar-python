@@ -20,7 +20,9 @@
 package org.sonar.plugins.python;
 
 import java.io.IOException;
+import java.util.Map;
 import org.sonar.api.batch.fs.InputFile;
+import org.sonar.plugins.python.IpynbNotebookParser.IPythonLocation;
 
 public class GeneratedIPythonFile implements PythonInputFile {
 
@@ -28,11 +30,18 @@ public class GeneratedIPythonFile implements PythonInputFile {
 
   private String pythonContent;
 
-  public GeneratedIPythonFile(InputFile wrappedFile, String pythonContent) {
+  private Map<Integer, IPythonLocation> locationMap;
+
+  public GeneratedIPythonFile(InputFile wrappedFile, String pythonContent, Map<Integer, IPythonLocation> locationMap) {
+    this.locationMap = locationMap;
     this.wrappedFile = wrappedFile;
     this.pythonContent = pythonContent;
   }
-  
+
+  public Map<Integer, IPythonLocation> locationMap() {
+    return locationMap;
+  }
+
   @Override
   public InputFile wrappedFile() {
     return wrappedFile;
