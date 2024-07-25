@@ -38,4 +38,6 @@ public interface Token extends Tree {
 
   int physicalColumn();
 
+  int includedEscapeChars();
+
 }
