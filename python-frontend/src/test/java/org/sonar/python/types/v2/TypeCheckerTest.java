@@ -24,6 +24,7 @@ import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.ExpressionStatement;
 import org.sonar.plugins.python.api.tree.FileInput;
+import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.NumericLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.PythonTestUtils;
@@ -95,5 +96,27 @@ class TypeCheckerTest {
     assertThat(typeChecker.typeCheckBuilder().hasMember("__call__").check(classType)).isEqualTo(TriBool.TRUE);
     assertThat(typeChecker.typeCheckBuilder().hasMember("unknown").check(classType)).isEqualTo(TriBool.UNKNOWN);
     assertThat(typeChecker.typeCheckBuilder().instancesHaveMember("__call__").check(classType)).isEqualTo(TriBool.FALSE);
+  }
+
+  @Test
+  void typeSourceCheckTest() {
+    var fileInput = parseAndInferTypes("""
+      def foo(x: int):
+        y = 10
+        x
+        y
+      """
+    );
+    var functionBodyStatements = ((FunctionDef) fileInput.statements().statements().get(0)).body().statements();
+    var xName = ((ExpressionStatement) functionBodyStatements.get(1)).expressions().get(0);
+    var yName = ((ExpressionStatement) functionBodyStatements.get(2)).expressions().get(0);
+    var xType = xName.typeV2();
+    var yType = yName.typeV2();
+
+    assertThat(typeChecker.typeCheckBuilder().isTypeHintTypeSource().check(xType)).isEqualTo(TriBool.TRUE);
+    assertThat(typeChecker.typeCheckBuilder().isExactTypeSource().check(xType)).isEqualTo(TriBool.FALSE);
+
+    assertThat(typeChecker.typeCheckBuilder().isTypeHintTypeSource().check(yType)).isEqualTo(TriBool.FALSE);
+    assertThat(typeChecker.typeCheckBuilder().isExactTypeSource().check(yType)).isEqualTo(TriBool.TRUE);
   }
 }

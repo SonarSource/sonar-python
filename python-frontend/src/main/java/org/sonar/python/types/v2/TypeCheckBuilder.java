@@ -47,6 +47,11 @@ public class TypeCheckBuilder {
     return this;
   }
 
+  public TypeCheckBuilder isExactTypeSource() {
+    predicates.add(new TypeSourceMatcherTypePredicate(TypeSource.EXACT));
+    return this;
+  }
+
   public TypeCheckBuilder isBuiltinWithName(String name) {
     PythonType builtinType = projectLevelTypeTable.getModule().resolveMember(name).orElse(PythonType.UNKNOWN);
     predicates.add(new IsSameAsTypePredicate(builtinType));
@@ -63,6 +68,12 @@ public class TypeCheckBuilder {
       }
     }
     return result;
+  }
+
+  public TypeCheckBuilder isInstanceOf(String fqn) {
+    var expected = projectLevelTypeTable.getType(fqn);
+    predicates.add(new IsInstanceOfPredicate(expected));
+    return this;
   }
 
   interface TypePredicate {
@@ -123,6 +134,17 @@ public class TypeCheckBuilder {
         return TriBool.UNKNOWN;
       }
       return pythonType.equals(expectedType) ? TriBool.TRUE : TriBool.FALSE;
+    }
+  }
+
+  record IsInstanceOfPredicate(PythonType pythonType)  implements TypePredicate {
+
+    @Override
+    public TriBool test(PythonType pythonType) {
+      if (pythonType instanceof ObjectType objectType) {
+        return this.pythonType.equals(objectType.unwrappedType()) ? TriBool.TRUE : TriBool.FALSE;
+      }
+      return TriBool.UNKNOWN;
     }
   }
 }
