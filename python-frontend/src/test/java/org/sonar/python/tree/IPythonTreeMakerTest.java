@@ -21,8 +21,8 @@ package org.sonar.python.tree;
 
 import com.sonar.sslr.api.RecognitionException;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
@@ -31,6 +31,7 @@ import org.sonar.plugins.python.api.tree.ExpressionStatement;
 import org.sonar.plugins.python.api.tree.LineMagic;
 import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.IPythonLocation;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.parser.RuleTest;
 
@@ -286,6 +287,27 @@ class IPythonTreeMakerTest extends RuleTest {
     assertThat(assignments.get(0).assignedValue().getKind()).isEqualTo(Tree.Kind.YIELD_EXPR);
     assertThat(assignments.get(1).assignedValue().getKind()).isEqualTo(Tree.Kind.PLUS);
     assertThat(assignments.get(2).assignedValue().getKind()).isEqualTo(Tree.Kind.MODULO);
+  }
+
+  @Test
+  void enrichTokens() {
+    var offsetMap = Map.of(1, new IPythonLocation(7, 10, Map.of(4, 15, 8, 20)));
+    var statementList = parseIPython(
+      "a = \"123\"", new IPythonTreeMaker(offsetMap)::fileInput).statements();
+    assertThat(statementList).isNotNull();
+
+    var stringLiteral = findChildrenWithKind(statementList, Tree.Kind.STRING_LITERAL)
+      .stream().map(StringLiteralImpl.class::cast).toList();
+    assertThat(stringLiteral).hasSize(1);
+    assertThat(stringLiteral.get(0).firstToken().line()).isEqualTo(7);
+    assertThat(stringLiteral.get(0).firstToken().column()).isEqualTo(14);
+
+  }
+  @Test 
+  void toPyTokenShouldReturnNull(){
+    //when the token is null
+    var token = treeMaker.toPyToken(null);
+    assertThat(token).isNull();
   }
 
   private static void assertLineMagicStatement(Statement statement) {
