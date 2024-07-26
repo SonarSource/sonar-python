@@ -52,6 +52,14 @@ public final class ModuleType implements PythonType {
   }
 
   @Override
+  public TriBool hasMember(String memberName) {
+    if (resolveMember(memberName).isPresent()) {
+      return TriBool.TRUE;
+    }
+    return TriBool.UNKNOWN;
+  }
+
+  @Override
   public String toString() {
     return "ModuleType{" +
       "name='" + name + '\'' +
