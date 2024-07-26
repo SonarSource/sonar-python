@@ -30,7 +30,7 @@ import java.util.Map;
 
 public class IpynbNotebookParser {
 
-  public static final String SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER = "\n#SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER\n";
+  public static final String SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER = "#SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER\n";
 
   public static GeneratedIPythonFile parseNotebook(PythonInputFile inputFile) {
     try {
@@ -96,6 +96,7 @@ public class IpynbNotebookParser {
       var countEscapedChar = countEscapeCharacters(sourceLine, new LinkedHashMap<>(), tokenLocation.getColumnNr());
       addLineToSource(sourceLine, tokenLocation, countEscapedChar);
     }
+    aggregatedSource.append("\n");
     // Account for the last cell delimiter
     addDelimiterToSource();
     return true;
@@ -115,6 +116,7 @@ public class IpynbNotebookParser {
       var currentCount = countEscapedChar.get(-1);
       addLineToSource(line, new IPythonLocation(tokenLocation.getLineNr(),
         tokenLocation.getColumnNr() + previousLen + previousExtraChars + 1, countEscapedChar));
+      aggregatedSource.append("\n");
       previousLen = line.length() + 2;
       previousExtraChars = currentCount;
     }
