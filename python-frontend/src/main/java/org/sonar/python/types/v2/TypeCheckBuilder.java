@@ -116,6 +116,9 @@ public class TypeCheckBuilder {
 
     @Override
     public TriBool test(PythonType pythonType) {
+      if (pythonType instanceof LazyType lazyType) {
+        pythonType = lazyType.resolve();
+      }
       if (pythonType instanceof ObjectType objectType) {
         pythonType = objectType.unwrappedType();
       }

@@ -34,7 +34,7 @@ public final class FunctionType implements PythonType {
   private final String name;
   private final List<PythonType> attributes;
   private final List<ParameterV2> parameters;
-  private final PythonType returnType;
+  private PythonType returnType;
   private final boolean isAsynchronous;
   private final boolean hasDecorators;
   private final boolean isInstanceMethod;
@@ -98,6 +98,9 @@ public final class FunctionType implements PythonType {
   }
 
   public PythonType returnType() {
+    if (returnType instanceof LazyType lazyType) {
+      return lazyType.resolve();
+    }
     return returnType;
   }
 
@@ -120,5 +123,12 @@ public final class FunctionType implements PythonType {
   @CheckForNull
   public PythonType owner() {
     return owner;
+  }
+
+  public void resolveLazyReturnType(PythonType pythonType) {
+    if (!(returnType instanceof LazyType)) {
+      throw new IllegalStateException("Trying to resolve an already resolved lazy type.");
+    }
+    this.returnType = pythonType;
   }
 }

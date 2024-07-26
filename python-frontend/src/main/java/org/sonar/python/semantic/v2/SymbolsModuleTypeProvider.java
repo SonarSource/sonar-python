@@ -19,11 +19,14 @@
  */
 package org.sonar.python.semantic.v2;
 
+import java.util.ArrayDeque;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Queue;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -40,6 +43,7 @@ import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.semantic.SymbolImpl;
 import org.sonar.python.types.v2.ClassType;
 import org.sonar.python.types.v2.FunctionType;
+import org.sonar.python.types.v2.LazyType;
 import org.sonar.python.types.v2.Member;
 import org.sonar.python.types.v2.ModuleType;
 import org.sonar.python.types.v2.ParameterV2;
@@ -50,10 +54,12 @@ public class SymbolsModuleTypeProvider {
   private final ProjectLevelSymbolTable projectLevelSymbolTable;
   private final TypeShed typeShed;
   private ModuleType rootModule;
+  private LazyTypesContext lazyTypesContext;
 
   public SymbolsModuleTypeProvider(ProjectLevelSymbolTable projectLevelSymbolTable, TypeShed typeShed) {
     this.projectLevelSymbolTable = projectLevelSymbolTable;
     this.typeShed = typeShed;
+    this.lazyTypesContext = new LazyTypesContext();
     this.rootModule = createModuleFromSymbols(null, null, typeShed.builtinSymbols().values());
   }
 
@@ -67,6 +73,52 @@ public class SymbolsModuleTypeProvider {
     return createModuleTypeFromProjectLevelSymbolTable(moduleName, moduleFqnString, parent)
       .or(() -> createModuleTypeFromTypeShed(moduleName, moduleFqnString, parent))
       .orElseGet(() -> createEmptyModule(moduleName, parent));
+  }
+
+  PythonType resolveLazyTypeForFqn(String fullyQualifiedName) {
+    String[] split = fullyQualifiedName.split("\\.");
+    ModuleType currentModule = rootModule;
+    for (int i = 0; i < split.length; i++) {
+      String currentElement = split[i];
+      Optional<PythonType> pythonType = currentModule.resolveMember(currentElement);
+      if (pythonType.isEmpty()) {
+        // We should probably return an "UnresolvedType" here, keeping the FQN available for possible checks
+        return PythonType.UNKNOWN;
+      }
+      PythonType currentType = pythonType.get();
+      if (i == split.length - 1) {
+        // We have resolved the type we were looking for, return it
+        return currentType;
+      }
+      if (!(currentType instanceof ModuleType moduleType)) {
+        break;
+      }
+      // We have resolved an enclosing module, continue searching
+      currentModule = moduleType;
+    }
+    return PythonType.UNKNOWN;
+  }
+
+  public PythonType resolveLazyType(LazyType lazyType) {
+    if (lazyTypesContext.resolvedLazyTypes().containsKey(lazyType)) {
+      return lazyTypesContext.resolvedLazyTypes().get(lazyType);
+    }
+    Queue<String> modules = lazyTypesContext.lazyTypeRequirements().get(lazyType);
+    ModuleType parent = rootModule;
+    while (!modules.isEmpty()) {
+      String nextModule = modules.poll();
+      // We shouldn't create a new module again if it has been resolved since
+      Optional<PythonType> pythonType = parent.resolveMember(nextModule);
+      if (pythonType.isEmpty()) {
+        List<String> fqnParts = Arrays.stream(nextModule.split("\\.")).toList();
+        parent = createModuleType(fqnParts, parent);
+        continue;
+      }
+      parent = (ModuleType) pythonType.get();
+    }
+    PythonType resolvedType = resolveLazyTypeForFqn(lazyType.fullyQualifiedName());
+    lazyTypesContext.addResolvedLazyType(lazyType, resolvedType);
+    return resolvedType;
   }
 
   private static String getModuleFqnString(List<String> moduleFqn) {
@@ -132,6 +184,9 @@ public class SymbolsModuleTypeProvider {
         .withHasVariadicParameter(symbol.hasVariadicParameter())
         .withDefinitionLocation(symbol.definitionLocation());
     FunctionType functionType = functionTypeBuilder.build();
+    if (returnType instanceof LazyType lazyType) {
+      lazyType.addConsumer(functionType::resolveLazyReturnType);
+    }
     createdTypesBySymbol.put(symbol, functionType);
     return functionType;
   }
@@ -140,16 +195,63 @@ public class SymbolsModuleTypeProvider {
     if (classSymbol == null) {
       return PythonType.UNKNOWN;
     }
-    if (rootModule == null) {
+    if (createdTypesBySymbol.containsKey(classSymbol)) {
+      return createdTypesBySymbol.get(classSymbol);
+    }
+    String fullyQualifiedName = classSymbol.fullyQualifiedName();
+    if (fullyQualifiedName == null) {
       return convertToType(classSymbol, createdTypesBySymbol);
     }
-    // If the symbol is a built-in symbol and the root module already exists, we search for it instead of recreating the symbol
-    // This is necessary to avoid duplicated symbols in the original ProjectSymbolTable to translate into duplicated PythonType
-    // TODO: SONARPY-2010 to fix this
-    return Optional.ofNullable(classSymbol.fullyQualifiedName())
-      .filter(fqn -> !fqn.contains("."))
-      .flatMap(f -> rootModule.resolveMember(f))
-      .orElseGet(() -> convertToType(classSymbol, createdTypesBySymbol));
+    return resolvePossibleLazyType(createdTypesBySymbol, classSymbol, fullyQualifiedName);
+  }
+
+  PythonType resolvePossibleLazyType(Map<Symbol, PythonType> createdTypesBySymbol, ClassSymbol classSymbol, String fullyQualifiedName) {
+    PythonType currentModule = rootModule;
+    String[] split = fullyQualifiedName.split("\\.");
+    StringBuilder sb = new StringBuilder();
+    for (int i = 0; i < split.length; i++) {
+      String currentElement = split[i];
+      if (!sb.isEmpty()) {
+        sb.append(".");
+      }
+      sb.append(currentElement);
+      Optional<PythonType> pythonType = currentModule == null ? Optional.empty() : currentModule.resolveMember(currentElement);
+      if (pythonType.isEmpty()) {
+        // Either the containing module has not been resolved yet, or the type is not present
+        // We need to create a LazyType for it
+        String missingFqn = sb.toString();
+        String[] remainingParts = Arrays.copyOfRange(split, i + 1, split.length);
+        return createLazyType(fullyQualifiedName, missingFqn, remainingParts);
+      }
+      PythonType currentType = pythonType.get();
+      if (i == split.length - 1) {
+        // We have resolved the type we were looking for, return it
+        return currentType;
+      }
+      if (!(currentType instanceof ModuleType moduleType)) {
+        break;
+      }
+      currentModule = moduleType;
+    }
+    return convertToType(classSymbol, createdTypesBySymbol);
+  }
+
+  private LazyType createLazyType(String fullyQualifiedName, String prefix, String[] remainingParts) {
+    Queue<String> missingModules = new ArrayDeque<>();
+    String missingFqn = prefix;
+    StringBuilder sb = new StringBuilder(missingFqn);
+    if (!missingFqn.equals(fullyQualifiedName)) {
+      // This means a module is missing, otherwise it means only the type is missing
+      missingModules.add(missingFqn);
+    }
+    for (int j = 0; j < remainingParts.length - 1; j++) {
+      sb.append(".").append(remainingParts[j]);
+      missingFqn = sb.toString();
+      if (!missingFqn.equals(fullyQualifiedName)) {
+        missingModules.add(missingFqn);
+      }
+    }
+    return lazyTypesContext.getOrCreateLazyType(fullyQualifiedName, missingModules, this);
   }
 
   private PythonType convertToClassType(ClassSymbol symbol, Map<Symbol, PythonType> createdTypesBySymbol) {
