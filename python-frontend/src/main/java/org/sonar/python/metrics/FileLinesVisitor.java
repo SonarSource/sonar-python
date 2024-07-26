@@ -80,12 +80,12 @@ public class FileLinesVisitor extends PythonSubscriptionCheck {
 
   @Override
   public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, ctx -> visitFile(ctx));
+    context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, ctx -> visitFile());
     EXECUTABLE_LINES.forEach(kind -> context.registerSyntaxNodeConsumer(kind, this::visitNode));
     context.registerSyntaxNodeConsumer(Tree.Kind.TOKEN, ctx -> visitToken((Token) ctx.syntaxNode()));
   }
 
-  private void visitFile(SubscriptionContext ctx) {
+  private void visitFile() {
     noSonar.clear();
     linesOfCode.clear();
     linesOfComments.clear();
