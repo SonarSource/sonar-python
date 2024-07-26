@@ -114,8 +114,9 @@ public class IpynbNotebookParser {
     for (String line : sourceLine.lines().toList()) {
       var countEscapedChar = countEscapeCharacters(line, new LinkedHashMap<>(), tokenLocation.getColumnNr());
       var currentCount = countEscapedChar.get(-1);
-      addLineToSource(line + "\n", new IPythonLocation(tokenLocation.getLineNr(),
+      addLineToSource(line, new IPythonLocation(tokenLocation.getLineNr(),
         tokenLocation.getColumnNr() + previousLen + previousExtraChars + 1, countEscapedChar));
+      aggregatedSource.append("\n");
       previousLen = line.length() + 2;
       previousExtraChars = currentCount;
     }
