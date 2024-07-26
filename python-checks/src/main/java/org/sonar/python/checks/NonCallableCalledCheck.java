@@ -22,6 +22,7 @@ package org.sonar.python.checks;
 import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
+import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Tree;
@@ -32,34 +33,15 @@ import org.sonar.python.types.v2.TriBool;
 import static org.sonar.python.tree.TreeUtils.nameFromExpression;
 
 @Rule(key = "S5756")
-public class NonCallableCalledCheck extends PythonSubscriptionCheck {
+public class NonCallableCalledCheck extends NonCallableCalled {
 
   @Override
-  public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, ctx -> {
-      CallExpression callExpression = (CallExpression) ctx.syntaxNode();
-      Expression callee = callExpression.callee();
-      PythonType type = callee.typeV2();
-      if (isNonCallableType(type, ctx.typeChecker())) {
-        String name = nameFromExpression(callee);
-        PreciseIssue preciseIssue = ctx.addIssue(callee, message(type, name));
-        type.definitionLocation()
-          .ifPresent(location -> preciseIssue.secondary(location, "Definition."));
-      }
-    });
+  protected boolean isExpectedTypeSource(SubscriptionContext ctx, PythonType calleeType) {
+    return ctx.typeChecker().typeCheckBuilder().isExactTypeSource().check(calleeType) == TriBool.TRUE;
   }
 
-  protected static String addTypeName(PythonType type) {
-    return type.displayName()
-      .map(d -> " has type " + d + " and it")
-      .orElse("");
-  }
-
-  public boolean isNonCallableType(PythonType type, TypeChecker typeChecker) {
-    return typeChecker.typeCheckBuilder().hasMember("__call__").check(type) == TriBool.FALSE;
-  }
-
-  public String message(PythonType typeV2, @Nullable String name) {
+  @Override
+  protected String message(PythonType typeV2, @Nullable String name) {
     if (name != null) {
       return "Fix this call; \"%s\"%s is not callable.".formatted(name, addTypeName(typeV2));
     }

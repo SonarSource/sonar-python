@@ -21,6 +21,7 @@ package org.sonar.python.types.v2;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import org.sonar.python.semantic.v2.ProjectLevelTypeTable;
 
 public class TypeCheckBuilder {
@@ -47,6 +48,11 @@ public class TypeCheckBuilder {
     return this;
   }
 
+  public TypeCheckBuilder isExactTypeSource() {
+    predicates.add(new TypeSourceMatcherTypePredicate(TypeSource.EXACT));
+    return this;
+  }
+
   public TypeCheckBuilder isBuiltinWithName(String name) {
     PythonType builtinType = projectLevelTypeTable.getBuiltinsModule().resolveMember(name).orElse(PythonType.UNKNOWN);
     predicates.add(new IsSameAsTypePredicate(builtinType));
@@ -63,6 +69,12 @@ public class TypeCheckBuilder {
       }
     }
     return result;
+  }
+
+  public TypeCheckBuilder isInstanceOf(String fqn) {
+    var expected = projectLevelTypeTable.getType(fqn);
+    predicates.add(new IsInstanceOfPredicate(expected));
+    return this;
   }
 
   interface TypePredicate {
@@ -123,6 +135,59 @@ public class TypeCheckBuilder {
         return TriBool.UNKNOWN;
       }
       return pythonType.equals(expectedType) ? TriBool.TRUE : TriBool.FALSE;
+    }
+  }
+
+  record IsInstanceOfPredicate(PythonType expectedType)  implements TypePredicate {
+
+    @Override
+    public TriBool test(PythonType pythonType) {
+      if (expectedType instanceof ClassType expectedClassType) {
+        if (pythonType instanceof ObjectType objectType) {
+          if (objectType.type() instanceof ClassType classType) {
+            return isClassInheritedFrom(classType, expectedClassType) ? TriBool.TRUE : TriBool.FALSE;
+          } else if (objectType.type() instanceof UnionType unionType) {
+            return isObjectOfUnionTypeInstanceOf(expectedClassType, unionType);
+          }
+        } else if (pythonType instanceof UnionType unionType) {
+          return isUnionTypeInstanceOf(unionType);
+        }
+      }
+      return TriBool.UNKNOWN;
+    }
+
+    private static TriBool isObjectOfUnionTypeInstanceOf(ClassType expectedClassType, UnionType unionType) {
+      var candidatesInheritanceMatches = unionType.candidates()
+        .stream()
+        .filter(ClassType.class::isInstance)
+        .map(ClassType.class::cast)
+        .map(classType -> isClassInheritedFrom(classType, expectedClassType))
+        .collect(Collectors.toSet());
+
+      if (candidatesInheritanceMatches.size() > 1) {
+        return TriBool.UNKNOWN;
+      } else if (candidatesInheritanceMatches.contains(false)) {
+        return TriBool.FALSE;
+      } else {
+        return TriBool.TRUE;
+      }
+    }
+
+    private TriBool isUnionTypeInstanceOf(UnionType unionType) {
+      var candidatesResults = unionType.candidates()
+        .stream()
+        .map(this::test)
+        .collect(Collectors.toSet());
+
+      if (candidatesResults.size() > 1) {
+        return TriBool.UNKNOWN;
+      } else {
+        return candidatesResults.stream().findFirst().orElse(TriBool.UNKNOWN);
+      }
+    }
+
+    private static boolean isClassInheritedFrom(ClassType classType, ClassType expectedClassType) {
+      return classType.equals(expectedClassType) || classType.isASubClassFrom(expectedClassType);
     }
   }
 }
