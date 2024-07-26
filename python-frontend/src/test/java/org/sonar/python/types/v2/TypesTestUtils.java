@@ -31,6 +31,7 @@ public class TypesTestUtils {
 
   public static final ProjectLevelTypeTable PROJECT_LEVEL_TYPE_TABLE = new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty());
   public static final ModuleType BUILTINS = PROJECT_LEVEL_TYPE_TABLE.getModule();
+  public static final ModuleType TYPING = PROJECT_LEVEL_TYPE_TABLE.getModule("typing");
 
   public static final PythonType INT_TYPE = BUILTINS.resolveMember("int").get();
   public static final PythonType BOOL_TYPE = BUILTINS.resolveMember("bool").get();
@@ -39,6 +40,7 @@ public class TypesTestUtils {
   public static final PythonType SET_TYPE = BUILTINS.resolveMember("set").get();
   public static final PythonType DICT_TYPE = BUILTINS.resolveMember("dict").get();
   public static final PythonType NONE_TYPE = BUILTINS.resolveMember("NoneType").get();
+  public static final PythonType TYPING_CALLABLE_TYPE = TYPING.resolveMember("Callable").get();
 
   public static FileInput parseAndInferTypes(String... code) {
     return parseAndInferTypes(PythonTestUtils.pythonFile(""), code);

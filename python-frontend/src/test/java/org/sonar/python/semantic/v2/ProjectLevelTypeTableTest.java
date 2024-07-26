@@ -29,6 +29,21 @@ import org.sonar.python.types.v2.PythonType;
 class ProjectLevelTypeTableTest {
   
   @Test
+  void getSyntheticTypeTest() {
+    var symbolTable = ProjectLevelSymbolTable.empty();
+    var table = new ProjectLevelTypeTable(symbolTable, new TypeShed(symbolTable));
+
+    var callableClassType = table.getType("typing.Callable");
+    Assertions.assertThat(callableClassType).isNotNull().isInstanceOf(ClassType.class);
+
+    var typingModuleType = table.getType("typing");
+    Assertions.assertThat(typingModuleType).isNotNull().isInstanceOf(ModuleType.class);
+    Assertions.assertThat(typingModuleType.resolveMember("Callable")).isPresent().containsSame(callableClassType);
+
+    Assertions.assertThat(table.getType("typing.Callable.something")).isSameAs(PythonType.UNKNOWN);
+  }
+
+  @Test
   void getBuiltinTypeTest() {
     var symbolTable = ProjectLevelSymbolTable.empty();
     var table = new ProjectLevelTypeTable(symbolTable, new TypeShed(symbolTable));
