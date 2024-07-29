@@ -302,7 +302,7 @@ public class PythonScanner extends Scanner {
   }
 
   private void saveMeasures(PythonInputFile inputFile, PythonVisitorContext visitorContext) {
-    FileMetrics fileMetrics = new FileMetrics(visitorContext);
+    FileMetrics fileMetrics = new FileMetrics(visitorContext, isNotebook(inputFile));
     FileLinesVisitor fileLinesVisitor = fileMetrics.fileLinesVisitor();
 
     noSonarFilter.noSonarInFile(inputFile.wrappedFile(), fileLinesVisitor.getLinesWithNoSonar());
@@ -328,6 +328,10 @@ public class PythonScanner extends Scanner {
       }
       fileLinesContext.save();
     }
+  }
+
+  static boolean isNotebook(PythonInputFile inputFile) {
+    return inputFile.kind() == PythonInputFile.Kind.IPYTHON;
   }
 
   private boolean restoreAndPushMeasuresIfApplicable(PythonInputFile inputFile) {
