@@ -40,4 +40,6 @@ public interface Token extends Tree {
 
   int includedEscapeChars();
 
+  int valueLength();
+
 }
