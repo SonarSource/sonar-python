@@ -24,8 +24,10 @@ import com.sonar.sslr.api.GenericTokenType;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.tree.CellMagicStatement;
 import org.sonar.plugins.python.api.tree.DynamicObjectInfoStatement;
 import org.sonar.plugins.python.api.tree.Expression;
@@ -37,17 +39,38 @@ import org.sonar.plugins.python.api.tree.StatementList;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.DocstringExtractor;
+import org.sonar.python.IPythonLocation;
 import org.sonar.python.api.IPythonGrammar;
 import org.sonar.python.api.PythonGrammar;
 
 public class IPythonTreeMaker extends PythonTreeMaker {
+
+  private Map<Integer, IPythonLocation> offsetMap;
+
+  public IPythonTreeMaker() {
+    this(null);
+  }
+  public IPythonTreeMaker(@Nullable Map<Integer, IPythonLocation> offsetMap) {
+    this.offsetMap = offsetMap;
+  }
+
+  @Override
+  protected Token toPyToken(@Nullable com.sonar.sslr.api.Token token) {
+    if (token == null) {
+      return null;
+    }
+    if (this.offsetMap != null) {
+      return TokenEnricher.enrichToken(token, offsetMap);
+    }
+    return new TokenImpl(token);
+  }
 
   @Override
   public FileInput fileInput(AstNode astNode) {
     StatementList statementList = astNode.getChildren(IPythonGrammar.CELL, IPythonGrammar.MAGIC_CELL)
       .stream()
       .flatMap(this::getStatementsFromCell)
-      .collect(Collectors.collectingAndThen(Collectors.toList(), l -> l.isEmpty()? null : new StatementListImpl(l)));
+      .collect(Collectors.collectingAndThen(Collectors.toList(), l -> l.isEmpty() ? null : new StatementListImpl(l)));
     Token endOfFile = toPyToken(astNode.getFirstChild(GenericTokenType.EOF).getToken());
     FileInputImpl pyFileInputTree = new FileInputImpl(statementList, endOfFile, DocstringExtractor.extractDocstring(statementList));
     setParents(pyFileInputTree);
@@ -59,7 +82,7 @@ public class IPythonTreeMaker extends PythonTreeMaker {
     if (cell.is(IPythonGrammar.CELL)) {
       return getStatements(cell).stream().map(this::statement);
     } else {
-      return Stream.of(cell.getFirstChild(IPythonGrammar.CELL_MAGIC_STATEMENT)).map(IPythonTreeMaker::cellMagicStatement);
+      return Stream.of(cell.getFirstChild(IPythonGrammar.CELL_MAGIC_STATEMENT)).map(this::cellMagicStatement);
     }
   }
 
@@ -85,12 +108,12 @@ public class IPythonTreeMaker extends PythonTreeMaker {
     return super.annotatedRhs(annotatedRhs);
   }
 
-  private static CellMagicStatement cellMagicStatement(AstNode astNode) {
+  private  CellMagicStatement cellMagicStatement(AstNode astNode) {
     var tokens = astNode.getChildren()
       .stream()
       .map(AstNode::getTokens)
       .flatMap(Collection::stream)
-      .map(IPythonTreeMaker::toPyToken)
+      .map(this::toPyToken)
       .toList();
     return new CellMagicStatementImpl(tokens);
   }
@@ -121,7 +144,7 @@ public class IPythonTreeMaker extends PythonTreeMaker {
         isQuestionMarksBefore = false;
         child.getTokens()
           .stream()
-          .map(PythonTreeMaker::toPyToken)
+          .map(this::toPyToken)
           .forEach(children::add);
       }
     }
@@ -137,9 +160,8 @@ public class IPythonTreeMaker extends PythonTreeMaker {
       .skip(2)
       .map(AstNode::getTokens)
       .flatMap(Collection::stream)
-      .map(IPythonTreeMaker::toPyToken)
+      .map(this::toPyToken)
       .toList();
     return new LineMagicImpl(percent, name, tokens);
   }
-
 }
