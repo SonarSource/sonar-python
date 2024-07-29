@@ -1290,6 +1290,17 @@ class PythonSensorTest {
       .containsEntry(CPD_TOKENS_STRING_TABLE_KEY_PREFIX + inputFile.wrappedFile().key(), cpdTokens.stringTable);
   }
 
+  @Test
+  void test_scanner_isNotebook(){
+    var regularPythonFile = mock(PythonInputFile.class);
+    when(regularPythonFile.kind()).thenReturn(PythonInputFile.Kind.PYTHON);
+    assertThat(PythonScanner.isNotebook(regularPythonFile)).isFalse();
+
+    var notebookPythonFile = mock(PythonInputFile.class);
+    when(notebookPythonFile.kind()).thenReturn(PythonInputFile.Kind.IPYTHON);
+    assertThat(PythonScanner.isNotebook(notebookPythonFile)).isTrue();
+  }
+
   private com.sonar.sslr.api.Token passToken(URI uri) {
     return com.sonar.sslr.api.Token.builder()
       .setType(PythonKeyword.PASS)
