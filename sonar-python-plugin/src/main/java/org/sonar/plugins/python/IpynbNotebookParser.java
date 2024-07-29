@@ -27,11 +27,14 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Set;
 import org.sonar.python.IPythonLocation;
 
 public class IpynbNotebookParser {
 
   public static final String SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER = "#SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER\n";
+
+  private static final Set<String> ACCEPTED_LANGUAGES = Set.of("python", "ipython");
 
   public static GeneratedIPythonFile parseNotebook(PythonInputFile inputFile) {
     try {
@@ -52,6 +55,8 @@ public class IpynbNotebookParser {
   private final Map<Integer, IPythonLocation> locationMap = new HashMap<>();
   private int aggregatedSourceLine = 1;
 
+  private String language = null;
+
   public GeneratedIPythonFile parseNotebook() throws IOException {
     String content = inputFile.wrappedFile().contents();
     JsonFactory factory = new JsonFactory();
@@ -60,30 +65,108 @@ public class IpynbNotebookParser {
         JsonToken jsonToken = jParser.nextToken();
         if (JsonToken.FIELD_NAME.equals(jsonToken)) {
           String fieldName = jParser.currentName();
-          if ("cell_type".equals(fieldName)) {
-            jParser.nextToken();
-            if ("code".equals(jParser.getValueAsString())) {
-              processCodeCell(jParser);
-            }
+          if ("cells".equals(fieldName)) {
+            processCells(jParser);
+          } else if ("metadata".equals(fieldName)) {
+            processMetadata(jParser);
           }
         }
       }
     }
 
+    if (language == null || !ACCEPTED_LANGUAGES.contains(language)) {
+      return new GeneratedIPythonFile(inputFile.wrappedFile(), "", Map.of());
+    }
+
     return new GeneratedIPythonFile(inputFile.wrappedFile(), aggregatedSource.toString(), locationMap);
   }
 
-  private void processCodeCell(JsonParser jParser) throws IOException {
+  private void processMetadata(JsonParser jParser) throws IOException {
+    int depth = 0;
     while (!jParser.isClosed()) {
       JsonToken jsonToken = jParser.nextToken();
-      if (JsonToken.FIELD_NAME.equals(jsonToken) && "source".equals(jParser.currentName())) {
-        jsonToken = jParser.nextToken();
-        if (parseSourceArray(jParser, jsonToken) || parseSourceMultilineString(jParser, jsonToken)) {
+      if (JsonToken.START_OBJECT.equals(jsonToken)) {
+        depth++;
+      } else if (JsonToken.END_OBJECT.equals(jsonToken)) {
+        depth--;
+        if (depth == 0) {
           break;
-        } else {
-          throw new IllegalStateException("Unexpected token: " + jsonToken);
+        }
+      } else if (JsonToken.FIELD_NAME.equals(jsonToken) && "language_info".equals(jParser.currentName())) {
+        processLanguageInfo(jParser);
+      }
+    }
+  }
+
+  private void processLanguageInfo(JsonParser jParser) throws IOException {
+    int depth = 0;
+    while (!jParser.isClosed()) {
+      JsonToken jsonToken = jParser.nextToken();
+      if (JsonToken.FIELD_NAME.equals(jsonToken) && "name".equals(jParser.currentName())) {
+        jParser.nextToken();
+        language = jParser.getValueAsString();
+      } else {
+        depth = getNewDepth(jsonToken, depth);
+        if (depth == -1) {
+          break;
         }
       }
+    }
+  }
+
+  private void processCells(JsonParser jParser) throws IOException {
+    int depth = 0;
+    while (!jParser.isClosed()) {
+      JsonToken jsonToken = jParser.nextToken();
+      if (JsonToken.START_OBJECT.equals(jsonToken)) {
+        processCell(jParser);
+      } else {
+        depth = getNewDepth(jsonToken, depth);
+        if (depth == -1) {
+          break;
+        }
+      }
+    }
+  }
+
+  private static int getNewDepth(JsonToken jsonToken, int depth) {
+    if (JsonToken.START_OBJECT.equals(jsonToken) || JsonToken.START_ARRAY.equals(jsonToken)) {
+      depth++;
+    } else if (JsonToken.END_OBJECT.equals(jsonToken) || JsonToken.END_ARRAY.equals(jsonToken)) {
+      depth--;
+      if (depth == 0) {
+        return -1;
+      }
+    }
+    return depth;
+  }
+
+  private void processCell(JsonParser jParser) throws IOException {
+    int depth = 1;
+    String cellType = null;
+    while (!jParser.isClosed() && depth > 0) {
+      JsonToken jsonToken = jParser.nextToken();
+      if (JsonToken.FIELD_NAME.equals(jsonToken)) {
+        String fieldName = jParser.currentName();
+        if ("cell_type".equals(fieldName)) {
+          jParser.nextToken();
+          cellType = jParser.getValueAsString();
+        } else if ("source".equals(fieldName) && "code".equals(cellType)) {
+          processCodeCellSource(jParser);
+        }
+      } else {
+        depth = getNewDepth(jsonToken, depth);
+        if (depth == -1) {
+          break;
+        }
+      }
+    }
+  }
+
+  private void processCodeCellSource(JsonParser jParser) throws IOException {
+    JsonToken jsonToken = jParser.nextToken();
+    if (!parseSourceArray(jParser, jsonToken) && !parseSourceMultilineString(jParser, jsonToken)) {
+      throw new IllegalStateException("Unexpected token: " + jsonToken);
     }
   }
 

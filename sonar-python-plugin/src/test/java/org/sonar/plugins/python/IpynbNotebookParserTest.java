@@ -63,4 +63,14 @@ class IpynbNotebookParserTest {
       .hasMessageContaining("Unexpected token");
   }
 
+  @Test
+  void testMojoNotebook() throws IOException {
+    var inputFile = createInputFile(baseDir, "mojo_notebook.ipynb", InputFile.Status.CHANGED, InputFile.Type.MAIN);
+    var result = IpynbNotebookParser.parseNotebook(inputFile);
+
+    assertThat(result.contents()).isEmpty();
+    assertThat(result.locationMap()).isEmpty();
+    assertThat(result.wrappedFile()).isEqualTo(inputFile.wrappedFile());
+  }
+
 }
