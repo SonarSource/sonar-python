@@ -102,7 +102,7 @@ public class TypeInferenceV2 {
   }
 
 
-  private static void inferTypesAndMemberAccessSymbols(Tree scopeTree,
+  private void inferTypesAndMemberAccessSymbols(Tree scopeTree,
     StatementList statements,
     Set<SymbolV2> declaredVariables,
     Set<Name> annotatedParameterNames,
@@ -130,7 +130,7 @@ public class TypeInferenceV2 {
     }
   }
 
-  private static void flowSensitiveTypeInference(ControlFlowGraph cfg, Set<SymbolV2> trackedVars, PropagationVisitor propagationVisitor) {
+  private void flowSensitiveTypeInference(ControlFlowGraph cfg, Set<SymbolV2> trackedVars, PropagationVisitor propagationVisitor) {
     // TODO: infer parameter type based on default value assignement
     var parameterTypes = trackedVars
       .stream()
@@ -140,6 +140,7 @@ public class TypeInferenceV2 {
       .collect(Collectors.toMap(SymbolV2::name, TypeInferenceV2::getParameterType));
 
     FlowSensitiveTypeInference flowSensitiveTypeInference = new FlowSensitiveTypeInference(
+      projectLevelTypeTable,
       trackedVars,
       propagationVisitor.assignmentsByAssignmentStatement(),
       propagationVisitor.definitionsByDefinitionStatement(),

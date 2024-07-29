@@ -1843,6 +1843,51 @@ class TypeInferenceV2Test {
     assertThat(((UnionType) mathModule.resolveMember("acos").get()).candidates()).allMatch(FunctionType.class::isInstance);
   }
 
+  @Test
+  void isInstanceTests() {
+    var xType = lastExpression("""
+      def foo(x: int):
+        if isinstance(x, Foo):
+          ...
+        x
+      """).typeV2();
+    Assertions.assertThat(xType).isSameAs(PythonType.UNKNOWN);
+
+    xType = lastExpression("""
+      def foo(x: int):
+        if isinstance(x):
+          ...
+        x
+      """).typeV2();
+    Assertions.assertThat(xType.unwrappedType()).isSameAs(INT_TYPE);
+
+    xType = lastExpression("""
+      def foo(x: int):
+        if isinstance(x.b, Foo):
+          ...
+        x
+      """).typeV2();
+    Assertions.assertThat(xType.unwrappedType()).isSameAs(INT_TYPE);
+
+    xType = lastExpression("""
+      def foo():
+        x = 10
+        if isinstance(x, Foo):
+          ...
+        x
+      """).typeV2();
+    Assertions.assertThat(xType.unwrappedType()).isSameAs(INT_TYPE);
+
+    xType = lastExpression("""
+      def foo(x: list):
+        if isinstance(**x, Foo):
+          ...
+        x
+      """).typeV2();
+
+    Assertions.assertThat(xType.unwrappedType()).isSameAs(LIST_TYPE);
+  }
+
   private static FileInput inferTypes(String lines) {
     return inferTypes(lines, PROJECT_LEVEL_TYPE_TABLE);
   }

@@ -36,6 +36,7 @@ import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.cfg.fixpoint.ForwardAnalysis;
 import org.sonar.python.cfg.fixpoint.ProgramState;
+import org.sonar.python.semantic.v2.ProjectLevelTypeTable;
 import org.sonar.python.semantic.v2.SymbolV2;
 import org.sonar.python.types.v2.PythonType;
 
@@ -44,9 +45,10 @@ public class FlowSensitiveTypeInference extends ForwardAnalysis {
   private final Map<Statement, Assignment> assignmentsByAssignmentStatement;
   private final Map<Statement, Set<Definition>> definitionsByDefinitionStatement;
   private final Map<String, PythonType> parameterTypesByName;
+  private final IsInstanceVisitor isInstanceVisitor;
 
   public FlowSensitiveTypeInference(
-    Set<SymbolV2> trackedVars,
+    ProjectLevelTypeTable projectLevelTypeTable, Set<SymbolV2> trackedVars,
     Map<Statement, Assignment> assignmentsByAssignmentStatement,
     Map<Statement, Set<Definition>> definitionsByDefinitionStatement,
     Map<String, PythonType> parameterTypesByName
@@ -55,6 +57,7 @@ public class FlowSensitiveTypeInference extends ForwardAnalysis {
     this.assignmentsByAssignmentStatement = assignmentsByAssignmentStatement;
     this.definitionsByDefinitionStatement = definitionsByDefinitionStatement;
     this.parameterTypesByName = parameterTypesByName;
+    this.isInstanceVisitor = new IsInstanceVisitor(projectLevelTypeTable);
   }
 
   @Override
@@ -95,7 +98,8 @@ public class FlowSensitiveTypeInference extends ForwardAnalysis {
     } else if (isForLoopAssignment(element)) {
       handleLoopAssignment(element, state);
     } else {
-      // Here we should run "isinstance" visitor when we handle declared types, to avoid FPs when type guard checks are made
+      isInstanceVisitor.setState(state);
+      element.accept(isInstanceVisitor);
       updateTree(element, state);
     }
   }
