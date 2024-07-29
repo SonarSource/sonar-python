@@ -27,6 +27,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import org.sonar.python.IPythonLocation;
 
 public class IpynbNotebookParser {
 
@@ -164,9 +165,6 @@ public class IpynbNotebookParser {
     }
     colMap.put(-1, numberOfExtraChars);
     return colMap;
-  }
-
-  public record IPythonLocation(int line, int column, Map<Integer, Integer> colOffset) {
   }
 
 }
