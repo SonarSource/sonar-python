@@ -443,7 +443,7 @@ public class PythonTreeMaker {
     return new ImportNameImpl(importKeyword, aliasedNames, separators);
   }
 
-  private  ImportFrom importFromStatement(AstNode astNode, Separators separators) {
+  private ImportFrom importFromStatement(AstNode astNode, Separators separators) {
     Token importKeyword = toPyToken(astNode.getFirstChild(PythonKeyword.IMPORT).getToken());
     Token fromKeyword = toPyToken(astNode.getFirstChild(PythonKeyword.FROM).getToken());
     List<Token> dottedPrefixForModule = punctuators(astNode, PythonPunctuator.DOT);
@@ -468,7 +468,7 @@ public class PythonTreeMaker {
     return new ImportFromImpl(fromKeyword, dottedPrefixForModule, moduleName, importKeyword, aliasedImportNames, wildcard, separators);
   }
 
-  private  AliasedName aliasedName(AstNode astNode) {
+  private AliasedName aliasedName(AstNode astNode) {
     AstNode asKeyword = astNode.getFirstChild(PythonKeyword.AS);
     DottedName dottedName;
     if (astNode.is(PythonGrammar.DOTTED_AS_NAME)) {
@@ -484,7 +484,7 @@ public class PythonTreeMaker {
     return new AliasedNameImpl(toPyToken(asKeyword.getToken()), dottedName, name(astNode.getLastChild(PythonGrammar.NAME)));
   }
 
-  private  DottedName dottedName(AstNode astNode) {
+  private DottedName dottedName(AstNode astNode) {
     List<Name> names = astNode
       .getChildren(PythonGrammar.NAME).stream()
       .map(this::name)
@@ -999,7 +999,7 @@ public class PythonTreeMaker {
     return new GroupPatternImpl(leftPar, pattern, rightPar);
   }
 
-  private  ClassPattern classPattern(AstNode classPattern) {
+  private ClassPattern classPattern(AstNode classPattern) {
     Expression nameOrAttr = nameOrAttr(classPattern.getFirstChild(PythonGrammar.NAME_OR_ATTR));
     Token leftPar = punctuators(classPattern, PythonPunctuator.LPARENTHESIS).get(0);
     List<Token> commas = new ArrayList<>();
@@ -1021,7 +1021,7 @@ public class PythonTreeMaker {
     }
   }
 
-  private  List<Pattern> patternArgs(@Nullable AstNode patternArgs, List<Token> commas) {
+  private List<Pattern> patternArgs(@Nullable AstNode patternArgs, List<Token> commas) {
     if (patternArgs == null) {
       return Collections.emptyList();
     }
@@ -1029,21 +1029,21 @@ public class PythonTreeMaker {
     return patternArgs.getChildren(PythonGrammar.PATTERN_ARG).stream().map(arg -> patternArg(arg.getFirstChild())).toList();
   }
 
-  private  Pattern patternArg(AstNode patternArg) {
+  private Pattern patternArg(AstNode patternArg) {
     if (patternArg.is(PythonGrammar.KEYWORD_PATTERN)) {
       return keywordPattern(patternArg);
     }
     return pattern(patternArg.getFirstChild());
   }
 
-  private  KeywordPattern keywordPattern(AstNode keywordPattern) {
+  private KeywordPattern keywordPattern(AstNode keywordPattern) {
     Name name = name(keywordPattern.getFirstChild(PythonGrammar.NAME));
     Token equalToken = punctuators(keywordPattern, PythonPunctuator.ASSIGN).get(0);
     Pattern pattern = pattern(keywordPattern.getFirstChild(PythonGrammar.PATTERN).getFirstChild());
     return new KeywordPatternImpl(name, equalToken, pattern);
   }
 
-  private  Expression nameOrAttr(AstNode nameOrAttr) {
+  private Expression nameOrAttr(AstNode nameOrAttr) {
     List<Token> dots = punctuators(nameOrAttr, PythonPunctuator.DOT);
     List<AstNode> names = nameOrAttr.getChildren(PythonGrammar.NAME);
     if (dots.isEmpty()) {
@@ -1058,7 +1058,7 @@ public class PythonTreeMaker {
     return qualifier;
   }
 
-  private  SequencePattern sequencePattern(AstNode sequencePattern) {
+  private SequencePattern sequencePattern(AstNode sequencePattern) {
     AstNode leftDelimiter = sequencePattern.getFirstChild(PythonPunctuator.LPARENTHESIS, PythonPunctuator.LBRACKET);
     AstNode rightDelimiter = sequencePattern.getFirstChild(PythonPunctuator.RPARENTHESIS, PythonPunctuator.RBRACKET);
     List<Token> commas = new ArrayList<>();
@@ -1082,13 +1082,13 @@ public class PythonTreeMaker {
     return new SequencePatternImpl(toPyToken(leftDelimiter.getToken()), patterns, commas, toPyToken(rightDelimiter.getToken()));
   }
 
-  private  void addPatternsAndCommasFromSequencePattern(AstNode sequencePattern, List<Token> commas, List<Pattern> patterns) {
+  private void addPatternsAndCommasFromSequencePattern(AstNode sequencePattern, List<Token> commas, List<Pattern> patterns) {
     commas.add(toPyToken(sequencePattern.getFirstChild(PythonPunctuator.COMMA).getToken()));
     patterns.add(maybeStarPattern(sequencePattern.getFirstChild(PythonGrammar.MAYBE_STAR_PATTERN)));
     addPatternsAndCommasFromMaybeSequencePattern(sequencePattern.getFirstChild(PythonGrammar.MAYBE_SEQUENCE_PATTERN), patterns, commas);
   }
 
-  private  void addPatternsAndCommasFromMaybeSequencePattern(@Nullable AstNode maybeSequencePattern, List<Pattern> patterns, List<Token> commas) {
+  private void addPatternsAndCommasFromMaybeSequencePattern(@Nullable AstNode maybeSequencePattern, List<Pattern> patterns, List<Token> commas) {
     if (maybeSequencePattern == null) {
       return;
     }
@@ -1096,7 +1096,7 @@ public class PythonTreeMaker {
     commas.addAll(punctuators(maybeSequencePattern, PythonPunctuator.COMMA));
   }
 
-  private  Pattern maybeStarPattern(AstNode maybeStarPattern) {
+  private Pattern maybeStarPattern(AstNode maybeStarPattern) {
     AstNode astNode = maybeStarPattern.getFirstChild();
     if (astNode.is(PythonGrammar.STAR_PATTERN)) {
       return starPattern(astNode);
@@ -1104,7 +1104,7 @@ public class PythonTreeMaker {
     return pattern(astNode.getFirstChild());
   }
 
-  private  StarPattern starPattern(AstNode starPattern) {
+  private StarPattern starPattern(AstNode starPattern) {
     Token starToken = toPyToken(starPattern.getFirstChild(PythonPunctuator.MUL).getToken());
     Pattern pattern;
     AstNode capturePattern = starPattern.getFirstChild(PythonGrammar.CAPTURE_PATTERN);
@@ -1116,11 +1116,11 @@ public class PythonTreeMaker {
     return new StarPatternImpl(starToken, pattern);
   }
 
-  private  WildcardPatternImpl wildcardPattern(AstNode wildcardPattern) {
+  private WildcardPatternImpl wildcardPattern(AstNode wildcardPattern) {
     return new WildcardPatternImpl(toPyToken(wildcardPattern.getFirstChild().getToken()));
   }
 
-  private  MappingPattern mappingPattern(AstNode astNode) {
+  private MappingPattern mappingPattern(AstNode astNode) {
     Token lCurlyBrace = toPyToken(astNode.getFirstChild(PythonPunctuator.LCURLYBRACE).getToken());
     Token rCurlyBrace = toPyToken(astNode.getLastChild(PythonPunctuator.RCURLYBRACE).getToken());
     AstNode itemsPattern = astNode.getFirstChild(PythonGrammar.ITEMS_PATTERN);
@@ -1156,7 +1156,7 @@ public class PythonTreeMaker {
     return new MappingPatternImpl(lCurlyBrace, commas, keyValuePatterns, rCurlyBrace);
   }
 
-  private  LiteralPattern literalPattern(AstNode literalPattern) {
+  private LiteralPattern literalPattern(AstNode literalPattern) {
     Tree.Kind literalKind;
     if (literalPattern.hasDirectChildren(PythonGrammar.COMPLEX_NUMBER, PythonGrammar.SIGNED_NUMBER)) {
       literalKind = Tree.Kind.NUMERIC_LITERAL_PATTERN;
@@ -1688,7 +1688,7 @@ public class PythonTreeMaker {
     return new ParameterImpl(starOrStarStar, name, typeAnnotation, assignToken, defaultValue);
   }
 
-  private  Expression numericLiteral(AstNode astNode) {
+  private Expression numericLiteral(AstNode astNode) {
     return new NumericLiteralImpl(toPyToken(astNode.getToken()));
   }
 
