@@ -41,7 +41,7 @@ public class TokenLocation {
 
     } else {
       this.endLine = this.startLine;
-      this.endLineOffset = this.startLineOffset + token.value().length();
+      this.endLineOffset = this.startLineOffset + token.valueLength();
     }
   }
 
