@@ -112,4 +112,9 @@ public class TokenImpl extends PyTree implements Token {
   public Token lastToken() {
     return this;
   }
+
+  @Override
+  public int valueLength() {
+    return value().length() + includedEscapeChars();
+  }
 }
