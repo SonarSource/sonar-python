@@ -25,6 +25,7 @@ import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.types.v2.ClassType;
 import org.sonar.python.types.v2.ModuleType;
 import org.sonar.python.types.v2.PythonType;
+import org.sonar.python.types.v2.TriBool;
 
 class ProjectLevelTypeTableTest {
   
@@ -54,5 +55,24 @@ class ProjectLevelTypeTableTest {
     var typingModuleType = table.getType("typing");
     Assertions.assertThat(typingModuleType).isNotNull().isInstanceOf(ModuleType.class);
     Assertions.assertThat(typingModuleType.resolveMember("Generator")).isPresent().containsSame(generatorClassType);
+  }
+
+  @Test
+  void updateTypeTableDuringGetTypeTest() {
+    var symbolTable = ProjectLevelSymbolTable.empty();
+    var table = new ProjectLevelTypeTable(symbolTable, new TypeShed(symbolTable));
+
+    var rootModuleType = table.getType();
+    Assertions.assertThat(rootModuleType.hasMember("typing")).isNotEqualTo(TriBool.TRUE);
+
+    var generatorClassType = table.getType("typing.Generator");
+    Assertions.assertThat(generatorClassType).isNotNull().isInstanceOf(ClassType.class);
+
+    var typingModuleType = table.getType("typing");
+    Assertions.assertThat(typingModuleType).isNotNull().isInstanceOf(ModuleType.class);
+    Assertions.assertThat(typingModuleType.resolveMember("Generator")).isPresent().containsSame(generatorClassType);
+
+    Assertions.assertThat(rootModuleType.hasMember("typing")).isEqualTo(TriBool.TRUE);
+    Assertions.assertThat(rootModuleType.resolveMember("typing")).containsSame(typingModuleType);
   }
 }
