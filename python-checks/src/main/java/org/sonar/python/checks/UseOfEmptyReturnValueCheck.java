@@ -28,7 +28,7 @@ import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.python.types.v2.TriBool;
-import org.sonar.python.types.v2.TypeCheckBuilder;
+import org.sonar.python.types.v2.TypeChecker;
 
 import static org.sonar.plugins.python.api.tree.Tree.Kind.ASSIGNMENT_STMT;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.CALL_EXPR;
@@ -49,8 +49,8 @@ public class UseOfEmptyReturnValueCheck extends PythonSubscriptionCheck {
     if (!expression.is(CALL_EXPR)) {
       return;
     }
-    TypeCheckBuilder typeCheckBuilder = ctx.typeChecker().typeCheckBuilder().isBuiltinWithName("NoneType");
-    boolean noneType = typeCheckBuilder.check(expression.typeV2()) == TriBool.TRUE;
+    TypeChecker typeChecker = ctx.typeChecker().typeChecker().isBuiltinWithName("NoneType");
+    boolean noneType = typeChecker.check(expression.typeV2()) == TriBool.TRUE;
     if (noneType) {
       CallExpression callExpression = (CallExpression) expression;
       Optional.ofNullable(callExpression.calleeSymbol())

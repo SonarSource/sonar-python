@@ -29,7 +29,7 @@ import org.sonar.plugins.python.api.caching.CacheContext;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.python.types.v2.TypeChecker;
+import org.sonar.python.types.v2.TypeCheckerContext;
 
 public interface SubscriptionContext {
   Tree syntaxNode();
@@ -69,5 +69,5 @@ public interface SubscriptionContext {
   @Beta
   CacheContext cacheContext();
 
-  TypeChecker typeChecker();
+  TypeCheckerContext typeChecker();
 }

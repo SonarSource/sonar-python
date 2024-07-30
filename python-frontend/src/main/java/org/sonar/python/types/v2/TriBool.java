@@ -36,4 +36,16 @@ public enum TriBool {
     }
     return FALSE;
   }
+
+  public TriBool or(TriBool triBool) {
+    if (this.equals(TRUE) || triBool.equals(TRUE)) {
+      return TRUE;
+    }
+    if (this.equals(triBool)) {
+      // both unknown or both false
+      return this;
+    }
+    // one is false and the other is unknown
+    return UNKNOWN;
+  }
 }

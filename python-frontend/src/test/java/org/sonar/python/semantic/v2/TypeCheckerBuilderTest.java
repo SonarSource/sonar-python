@@ -24,14 +24,14 @@ import org.junit.jupiter.api.Test;
 import org.sonar.python.types.v2.ObjectType;
 import org.sonar.python.types.v2.PythonType;
 import org.sonar.python.types.v2.TriBool;
-import org.sonar.python.types.v2.TypeCheckBuilder;
+import org.sonar.python.types.v2.TypeChecker;
 import org.sonar.python.types.v2.TypeSource;
 
 class TypeCheckerBuilderTest {
 
   @Test
   void typeSourceTest() {
-    var builder = new TypeCheckBuilder(null).isTypeHintTypeSource();
+    var builder = new TypeChecker(null).isTypeHintTypeSource();
     Assertions.assertThat(builder.check(new ObjectType(PythonType.UNKNOWN, TypeSource.TYPE_HINT)))
       .isEqualTo(TriBool.TRUE);
     Assertions.assertThat(builder.check(new ObjectType(PythonType.UNKNOWN, TypeSource.EXACT)))
