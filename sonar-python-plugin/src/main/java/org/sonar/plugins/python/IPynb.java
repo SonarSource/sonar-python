@@ -19,20 +19,26 @@
  */
 package org.sonar.plugins.python;
 
+import org.sonar.api.config.Configuration;
 import org.sonar.api.resources.AbstractLanguage;
+
+import static org.sonar.plugins.python.Python.filterEmptyStrings;
 
 public class IPynb extends AbstractLanguage {
 
   public static final String KEY = "ipynb";
 
-  private static final String[] DEFAULT_FILE_SUFFIXES = { KEY };
+  private static final String[] DEFAULT_FILE_SUFFIXES = {KEY};
+  private final Configuration configuration;
 
-  public IPynb() {
+  public IPynb(Configuration configuration) {
     super(KEY, "IPython Notebooks");
+    this.configuration = configuration;
   }
 
   @Override
   public String[] getFileSuffixes() {
-    return IPynb.DEFAULT_FILE_SUFFIXES;
+    String[] suffixes = filterEmptyStrings(configuration.getStringArray(PythonPlugin.IPYNB_FILE_SUFFIXES_KEY));
+    return suffixes.length == 0 ? DEFAULT_FILE_SUFFIXES : suffixes;
   }
 }
