@@ -67,13 +67,11 @@ class RulingHelper {
       .append("<name>").append(name).append("</name>")
       .append("<language>").append(language).append("</language>")
       .append("<rules>");
-    ruleKeys.forEach(ruleKey -> {
-      sb.append("<rule>")
-        .append("<repositoryKey>").append(repositoryKey).append("</repositoryKey>")
-        .append("<key>").append(ruleKey).append("</key>")
-        .append("<priority>INFO</priority>")
-        .append("</rule>");
-    });
+    ruleKeys.forEach(ruleKey -> sb.append("<rule>")
+      .append("<repositoryKey>").append(repositoryKey).append("</repositoryKey>")
+      .append("<key>").append(ruleKey).append("</key>")
+      .append("<priority>INFO</priority>")
+      .append("</rule>"));
 
     return sb
       .append("</rules>")
