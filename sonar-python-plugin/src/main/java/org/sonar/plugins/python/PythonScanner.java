@@ -61,6 +61,7 @@ import org.sonar.plugins.python.api.quickfix.PythonTextEdit;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.cpd.PythonCpdAnalyzer;
 import org.sonar.plugins.python.indexer.PythonIndexer;
+import org.sonar.python.IPythonLocation;
 import org.sonar.python.SubscriptionVisitor;
 import org.sonar.python.metrics.FileLinesVisitor;
 import org.sonar.python.metrics.FileMetrics;
@@ -150,7 +151,14 @@ public class PythonScanner extends Scanner {
   }
 
   private static PythonTreeMaker getTreeMaker(PythonInputFile inputFile) {
-    return Python.KEY.equals(inputFile.wrappedFile().language()) ? new PythonTreeMaker() : new IPythonTreeMaker();
+    return Python.KEY.equals(inputFile.wrappedFile().language()) ? new PythonTreeMaker() : new IPythonTreeMaker(getOffsetLocations(inputFile));
+  }
+
+  private static Map<Integer, IPythonLocation> getOffsetLocations(PythonInputFile inputFile) {
+    if(inputFile.kind() == PythonInputFile.Kind.IPYTHON){
+      return ((GeneratedIPythonFile) inputFile).locationMap();
+    }
+    return Map.of();
   }
 
   @Override
