@@ -364,6 +364,29 @@ class TypeInferenceV2Test {
   }
 
   @Test
+  void typeSourceOfCallExpressionResultDependsOnTypeSourceOfQualifier() {
+    FileInput root = inferTypes("""
+      def foo(x: int):
+        y = x.conjugate()
+        y
+        z = x.conjugate().conjugate()
+        z
+      """);
+    var functionDef = (FunctionDef) root.statements().statements().get(0);
+    var yStatement = (ExpressionStatement) functionDef.body().statements().get(1);
+    PythonType yType = yStatement.expressions().get(0).typeV2();
+    assertThat(yType).isInstanceOf(ObjectType.class);
+    assertThat(yType.unwrappedType()).isEqualTo(INT_TYPE);
+    assertThat(yType.typeSource()).isEqualTo(TypeSource.TYPE_HINT);
+
+    var zStatement = (ExpressionStatement) functionDef.body().statements().get(3);
+    PythonType zType = zStatement.expressions().get(0).typeV2();
+    assertThat(zType).isInstanceOf(ObjectType.class);
+    assertThat(zType.unwrappedType()).isEqualTo(INT_TYPE);
+    assertThat(zType.typeSource()).isEqualTo(TypeSource.TYPE_HINT);
+  }
+
+  @Test
   void inferTypesInsideFunction6() {
     FileInput root = inferTypes("""
       def foo(param: int):
@@ -1789,6 +1812,25 @@ class TypeInferenceV2Test {
     assertThat(((ExpressionStatement) fileInput.statements().statements().get(6)).expressions().get(0).typeV2()).isInstanceOf(ObjectType.class);
     UnionType unionType = (UnionType) ((ExpressionStatement) fileInput.statements().statements().get(6)).expressions().get(0).typeV2().unwrappedType();
     assertThat(unionType.candidates()).containsExactlyInAnyOrder(classA, classB);
+  }
+
+  @Test
+  void return_type_of_call_expression_inconsistent() {
+    FileInput fileInput = inferTypes(
+      """
+        foo()
+        """
+    );
+    CallExpression callExpression = ((CallExpression) ((ExpressionStatement) fileInput.statements().statements().get(0)).expressions().get(0));
+    CallExpression callExpressionSpy = Mockito.spy(callExpression);
+
+    // Inconsistent union type, should not happen
+    UnionType unionType = new UnionType(Set.of(PythonType.UNKNOWN));
+    Name mock = Mockito.mock(Name.class);
+    Mockito.when(mock.typeV2()).thenReturn(unionType);
+    Mockito.doReturn(mock).when(callExpressionSpy).callee();
+
+    assertThat(callExpressionSpy.typeV2()).isEqualTo(PythonType.UNKNOWN);
   }
 
   @Test
