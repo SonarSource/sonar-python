@@ -116,8 +116,8 @@ class TokenEnricherTest {
     assertThat(stringToken.includedEscapeChars()).isEqualTo(2);
 
     var eofToken = tokens.get(tokens.size() - 1);
-    assertThat(eofToken.line()).isEqualTo(1);
-    assertThat(eofToken.column()).isEqualTo(24);
+    assertThat(eofToken.line()).isEqualTo(100);
+    assertThat(eofToken.column()).isEqualTo(329);
     assertThat(eofToken.includedEscapeChars()).isZero();
   }
 }
