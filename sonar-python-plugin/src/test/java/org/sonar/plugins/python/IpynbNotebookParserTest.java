@@ -40,7 +40,7 @@ class IpynbNotebookParserTest {
 
     var result = IpynbNotebookParser.parseNotebook(inputFile);
 
-    assertThat(result.locationMap().keySet()).hasSize(20);
+    assertThat(result.locationMap().keySet()).hasSize(27);
     assertThat(result.contents()).hasLineCount(27);
     assertThat(StringUtils.countMatches(result.contents(), IpynbNotebookParser.SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER))
       .isEqualTo(7);
@@ -52,6 +52,24 @@ class IpynbNotebookParserTest {
     assertThat(result.locationMap()).extracting(map -> map.get(25))
       .isEqualTo(new IPythonLocation(90, 15, Map.of(4, 19, 39, 62, 41, 64, 42, 65, 46, 71, -1, 7)));
     assertThat(result.locationMap()).extracting(map -> map.get(26)).isEqualTo(new IPythonLocation(90, 71, Map.of(-1, 0)));
+    // last line with the cell delimiter which contains the EOF token 
+    assertThat(result.locationMap()).extracting(map -> map.get(27)).isEqualTo(new IPythonLocation(90, 14, Map.of(-1, 0)));
+  }
+
+  @Test
+  void testParseNotebookWithEmptyLines() throws IOException {
+    var inputFile = createInputFile(baseDir, "notebook_with_empty_lines.ipynb", InputFile.Status.CHANGED, InputFile.Type.MAIN);
+
+    var result = IpynbNotebookParser.parseNotebook(inputFile);
+
+    assertThat(result.locationMap().keySet()).hasSize(4);
+    assertThat(result.contents()).hasLineCount(5);
+    assertThat(StringUtils.countMatches(result.contents(), IpynbNotebookParser.SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER))
+      .isEqualTo(1);
+    assertThat(result.locationMap()).extracting(map -> map.get(3)).isEqualTo(new IPythonLocation(11, 5, Map.of(-1, 0)));
+
+    // last line with the cell delimiter which contains the EOF token 
+    assertThat(result.locationMap()).extracting(map -> map.get(4)).isEqualTo(new IPythonLocation(11, 5, Map.of(-1, 0)));
   }
 
   @Test
