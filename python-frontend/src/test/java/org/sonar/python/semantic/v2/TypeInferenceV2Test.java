@@ -1964,6 +1964,116 @@ class TypeInferenceV2Test {
     Assertions.assertThat(xType.unwrappedType()).isSameAs(LIST_TYPE);
   }
 
+  @Test
+  void assignmentOrTest() {
+    var yType = (UnionType) lastExpression("""
+      def foo(x: int):
+        y = x or "str"
+        y
+      """).typeV2();
+
+    Assertions.assertThat(yType.candidates())
+      .allMatch(ObjectType.class::isInstance)
+      .extracting(PythonType::unwrappedType)
+      .containsOnly(INT_TYPE, STR_TYPE);
+    Assertions.assertThat(yType.typeSource()).isSameAs(TypeSource.TYPE_HINT);
+  }
+
+  @Test
+  void assignmentPlusTest() {
+    var fileInput = inferTypes("""
+      class A: ...
+      def foo(x: int, y: str):
+        a = x + 1
+        b = x + y
+        c = A + x
+        d = x + A
+        e = 2 + 3
+        a
+        b
+        c
+        d
+        e
+      """);
+
+    var statements = TreeUtils.firstChild(fileInput, FunctionDef.class::isInstance)
+      .map(FunctionDef.class::cast)
+      .map(FunctionDef::body)
+      .map(StatementList::statements)
+      .orElseGet(List::of);
+
+    var aType = ((ExpressionStatement) statements.get(statements.size() - 5)).expressions().get(0).typeV2();
+    var bType = ((ExpressionStatement) statements.get(statements.size() - 4)).expressions().get(0).typeV2();
+    var cType = ((ExpressionStatement) statements.get(statements.size() - 3)).expressions().get(0).typeV2();
+    var dType = ((ExpressionStatement) statements.get(statements.size() - 2)).expressions().get(0).typeV2();
+    var eType = ((ExpressionStatement) statements.get(statements.size() - 1)).expressions().get(0).typeV2();
+
+    Assertions.assertThat(aType.unwrappedType()).isSameAs(INT_TYPE);
+    Assertions.assertThat(aType.typeSource()).isSameAs(TypeSource.TYPE_HINT);
+
+    Assertions.assertThat(bType).isSameAs(PythonType.UNKNOWN);
+    Assertions.assertThat(cType).isSameAs(PythonType.UNKNOWN);
+    Assertions.assertThat(dType).isSameAs(PythonType.UNKNOWN);
+
+    Assertions.assertThat(eType.unwrappedType()).isSameAs(INT_TYPE);
+    Assertions.assertThat(eType.typeSource()).isSameAs(TypeSource.EXACT);
+  }
+
+  @Test
+  void assignmentPlusTest2() {
+    var fileInput = inferTypes("""
+      class A: ...
+      def foo(x):
+        if x:
+          t = int
+        else:
+          t = str
+        a = t()
+        b = 1 + a
+        c = a + 1
+        a
+        b
+        c
+      """);
+
+    var statements = TreeUtils.firstChild(fileInput, FunctionDef.class::isInstance)
+      .map(FunctionDef.class::cast)
+      .map(FunctionDef::body)
+      .map(StatementList::statements)
+      .orElseGet(List::of);
+
+    var aType = ((ExpressionStatement) statements.get(statements.size() - 3)).expressions().get(0).typeV2();
+    var bType = ((ExpressionStatement) statements.get(statements.size() - 2)).expressions().get(0).typeV2();
+    var cType = ((ExpressionStatement) statements.get(statements.size() - 1)).expressions().get(0).typeV2();
+
+    Assertions.assertThat(aType).isInstanceOf(ObjectType.class);
+    Assertions.assertThat(aType.unwrappedType()).isInstanceOf(UnionType.class);
+    var candidates = ((UnionType) aType.unwrappedType()).candidates();
+    Assertions.assertThat(candidates).containsOnly(INT_TYPE, STR_TYPE);
+
+    Assertions.assertThat(bType).isSameAs(PythonType.UNKNOWN);
+    Assertions.assertThat(cType).isSameAs(PythonType.UNKNOWN);
+  }
+
+  @Test
+  void assignmentMinusTest() {
+    var fileInput = inferTypes("""
+      def foo():
+        f = 2 - 3
+        f
+      """);
+
+    var statements = TreeUtils.firstChild(fileInput, FunctionDef.class::isInstance)
+      .map(FunctionDef.class::cast)
+      .map(FunctionDef::body)
+      .map(StatementList::statements)
+      .orElseGet(List::of);
+
+    var fType = ((ExpressionStatement) statements.get(statements.size() - 1)).expressions().get(0).typeV2();
+    Assertions.assertThat(fType).isSameAs(PythonType.UNKNOWN);
+  }
+
+
   private static FileInput inferTypes(String lines) {
     return inferTypes(lines, PROJECT_LEVEL_TYPE_TABLE);
   }
