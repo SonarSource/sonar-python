@@ -45,22 +45,7 @@ public class ProjectLevelTypeTable {
   }
 
   public ModuleType getModule(List<String> moduleNameParts) {
-    var parent = rootModule;
-    for (int i = 0; i < moduleNameParts.size(); i++) {
-      var existing = parent.resolveMember(moduleNameParts.get(i)).orElse(PythonType.UNKNOWN);
-
-      if (existing instanceof ModuleType existingModule) {
-        parent = existingModule;
-        continue;
-      }
-
-      var moduleFqn = IntStream.rangeClosed(0, i)
-        .mapToObj(moduleNameParts::get)
-        .toList();
-
-      parent = symbolsModuleTypeProvider.createModuleType(moduleFqn, parent);
-    }
-    return parent;
+    return symbolsModuleTypeProvider.getModuleForFqn(moduleNameParts);
   }
 
   public PythonType getType(String typeFqn) {

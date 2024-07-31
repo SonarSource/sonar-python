@@ -98,10 +98,7 @@ public final class FunctionType implements PythonType {
   }
 
   public PythonType returnType() {
-    if (returnType instanceof LazyType lazyType) {
-      return lazyType.resolve();
-    }
-    return returnType;
+    return TypeUtils.resolved(returnType);
   }
 
   public boolean isAsynchronous() {

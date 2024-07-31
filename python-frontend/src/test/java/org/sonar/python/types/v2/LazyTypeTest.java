@@ -21,7 +21,9 @@ package org.sonar.python.types.v2;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.semantic.v2.SymbolsModuleTypeProvider;
+import org.sonar.python.semantic.v2.TypeShed;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
@@ -49,6 +51,21 @@ class LazyTypeTest {
     assertThat(lazyType.typeSource()).isEqualTo(INT_TYPE.typeSource());
     assertThat(lazyType.displayName()).contains("type");
 
-    assertThat(new TypeCheckBuilder(PROJECT_LEVEL_TYPE_TABLE).isBuiltinWithName("int").check(lazyType)).isEqualTo(TriBool.TRUE);
+    TypeCheckBuilder typeCheckBuilder = new TypeCheckBuilder(PROJECT_LEVEL_TYPE_TABLE);
+    assertThat(typeCheckBuilder.isBuiltinWithName("int").check(lazyType)).isEqualTo(TriBool.TRUE);
+    assertThat(TypeUtils.resolved(lazyType)).isEqualTo(INT_TYPE);
+  }
+
+  @Test
+  void resolutionOfLazyTypeOfMethod() {
+    ProjectLevelSymbolTable projectLevelSymbolTable = ProjectLevelSymbolTable.empty();
+    TypeShed typeShed = new TypeShed(projectLevelSymbolTable);
+    SymbolsModuleTypeProvider symbolsModuleTypeProvider = new SymbolsModuleTypeProvider(projectLevelSymbolTable, typeShed);
+    LazyType lazyType = new LazyType("calendar.Calendar.iterweekdays", symbolsModuleTypeProvider);
+    PythonType pythonType = lazyType.resolve();
+    assertThat(pythonType).isInstanceOf(FunctionType.class);
+    FunctionType functionType = (FunctionType) pythonType;
+    assertThat(functionType.name()).isEqualTo("iterweekdays");
+    assertThat(functionType.parameters()).hasSize(1);
   }
 }

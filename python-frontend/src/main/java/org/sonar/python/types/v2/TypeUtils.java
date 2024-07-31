@@ -17,31 +17,18 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.semantic.v2;
+package org.sonar.python.types.v2;
 
-import java.util.HashMap;
-import java.util.Map;
-import org.sonar.python.types.v2.LazyType;
-import org.sonar.python.types.v2.PythonType;
+public class TypeUtils {
 
-public class LazyTypesContext {
-  private final Map<String, LazyType> lazyTypes;
+  private TypeUtils() {
 
-  public LazyTypesContext() {
-    this.lazyTypes = new HashMap<>();
   }
 
-  public LazyType getOrCreateLazyType(String fullyQualifiedName, SymbolsModuleTypeProvider symbolsModuleTypeProvider) {
-    if (lazyTypes.containsKey(fullyQualifiedName)) {
-      return lazyTypes.get(fullyQualifiedName);
+  static PythonType resolved(PythonType pythonType) {
+    if (pythonType instanceof LazyType lazyType) {
+      return lazyType.resolve();
     }
-    var lazyType = new LazyType(fullyQualifiedName, symbolsModuleTypeProvider);
-    lazyTypes.put(fullyQualifiedName, lazyType);
-    return lazyType;
-  }
-
-  public void resolveLazyType(LazyType lazyType, PythonType pythonType) {
-    lazyType.resolve(pythonType);
-    lazyTypes.remove(lazyType.fullyQualifiedName());
+    return pythonType;
   }
 }

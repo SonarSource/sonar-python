@@ -56,6 +56,7 @@ import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.types.v2.ClassType;
 import org.sonar.python.types.v2.FunctionType;
+import org.sonar.python.types.v2.LazyType;
 import org.sonar.python.types.v2.ModuleType;
 import org.sonar.python.types.v2.ObjectType;
 import org.sonar.python.types.v2.ParameterV2;
@@ -1872,10 +1873,9 @@ class TypeInferenceV2Test {
     SymbolsModuleTypeProvider symbolsModuleTypeProvider = new SymbolsModuleTypeProvider(empty, typeShed);
     ModuleType builtinModule = symbolsModuleTypeProvider.createBuiltinModule();
     symbolsModuleTypeProvider.createModuleType(List.of("typing"), builtinModule);
-
-    assertThat(symbolsModuleTypeProvider.resolveLazyTypeForFqn("typing.unknown")).isEqualTo(PythonType.UNKNOWN);
-    assertThat(symbolsModuleTypeProvider.resolveLazyTypeForFqn("typing.Iterable.unknown")).isEqualTo(PythonType.UNKNOWN);
-    assertThat(symbolsModuleTypeProvider.resolveLazyTypeForFqn("")).isEqualTo(PythonType.UNKNOWN);
+    assertThat(symbolsModuleTypeProvider.resolveLazyType(new LazyType("unknown", symbolsModuleTypeProvider))).isEqualTo(PythonType.UNKNOWN);
+    assertThat(symbolsModuleTypeProvider.resolveLazyType(new LazyType("typing.unknown", symbolsModuleTypeProvider))).isEqualTo(PythonType.UNKNOWN);
+    assertThat(symbolsModuleTypeProvider.resolveLazyType(new LazyType("unrelated.unknown", symbolsModuleTypeProvider))).isEqualTo(PythonType.UNKNOWN);
   }
 
   @Test

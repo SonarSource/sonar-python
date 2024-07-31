@@ -19,18 +19,18 @@
  */
 package org.sonar.python.semantic.v2;
 
-import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.Queue;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.symbols.AmbiguousSymbol;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
@@ -75,50 +75,60 @@ public class SymbolsModuleTypeProvider {
       .orElseGet(() -> createEmptyModule(moduleName, parent));
   }
 
-  PythonType resolveLazyTypeForFqn(String fullyQualifiedName) {
-    String[] split = fullyQualifiedName.split("\\.");
-    ModuleType currentModule = rootModule;
-    for (int i = 0; i < split.length; i++) {
-      String currentElement = split[i];
-      Optional<PythonType> pythonType = currentModule.resolveMember(currentElement);
-      if (pythonType.isEmpty()) {
-        // We should probably return an "UnresolvedType" here, keeping the FQN available for possible checks
-        return PythonType.UNKNOWN;
+  public ModuleType getModuleForFqn(List<String> fqnParts) {
+    List<String> fqnPartsCopy = new ArrayList<>(fqnParts);
+    PythonType pythonType = null;
+    while (!(pythonType instanceof ModuleType)) {
+      try {
+        pythonType = resolveTypeWithFQN(fqnPartsCopy);
+      } catch (IllegalStateException e) {
+        // If the FQN represents an existing non-Module, returns its parent module
       }
-      PythonType currentType = pythonType.get();
-      if (i == split.length - 1) {
-        // We have resolved the type we were looking for, return it
-        return currentType;
+      if (!fqnPartsCopy.isEmpty()) {
+        fqnPartsCopy.remove(fqnPartsCopy.size() - 1);
       }
-      if (!(currentType instanceof ModuleType moduleType)) {
-        break;
-      }
-      // We have resolved an enclosing module, continue searching
-      currentModule = moduleType;
     }
-    return PythonType.UNKNOWN;
+    return (ModuleType) pythonType;
+  }
+
+  public PythonType resolveTypeWithFQN(List<String> fullyQualifiedNameParts) {
+    var parent = rootModule;
+    for (int i = 0; i < fullyQualifiedNameParts.size(); i++) {
+      var existing = parent.resolveMember(fullyQualifiedNameParts.get(i)).orElse(PythonType.UNKNOWN);
+
+      if (existing instanceof ModuleType existingModule) {
+        parent = existingModule;
+        continue;
+      }
+      if (existing != PythonType.UNKNOWN) {
+        if (i == fullyQualifiedNameParts.size() -1) {
+          return existing;
+        }
+        throw new IllegalStateException("Expected to resolve a module, but got a non-module type");
+      }
+
+      var moduleFqn = IntStream.rangeClosed(0, i)
+        .mapToObj(fullyQualifiedNameParts::get)
+        .toList();
+
+      parent = createModuleType(moduleFqn, parent);
+    }
+    return parent;
   }
 
   public PythonType resolveLazyType(LazyType lazyType) {
-    if (lazyTypesContext.resolvedLazyTypes().containsKey(lazyType)) {
-      return lazyTypesContext.resolvedLazyTypes().get(lazyType);
-    }
-    Queue<String> modules = lazyTypesContext.lazyTypeRequirements().get(lazyType);
-    ModuleType parent = rootModule;
-    while (!modules.isEmpty()) {
-      String nextModule = modules.poll();
-      // We shouldn't create a new module again if it has been resolved since
-      Optional<PythonType> pythonType = parent.resolveMember(nextModule);
-      if (pythonType.isEmpty()) {
-        List<String> fqnParts = Arrays.stream(nextModule.split("\\.")).toList();
-        parent = createModuleType(fqnParts, parent);
-        continue;
-      }
-      parent = (ModuleType) pythonType.get();
-    }
-    PythonType resolvedType = resolveLazyTypeForFqn(lazyType.fullyQualifiedName());
-    lazyTypesContext.addResolvedLazyType(lazyType, resolvedType);
-    return resolvedType;
+    String fullyQualifiedName = lazyType.fullyQualifiedName();
+    int lastDotIndex = fullyQualifiedName.lastIndexOf('.');
+    String moduleOfLazyType = lastDotIndex != -1 ? fullyQualifiedName.substring(0, lastDotIndex) : "";
+    String name = lastDotIndex != -1 ? fullyQualifiedName.substring(lastDotIndex + 1) : fullyQualifiedName;
+
+    List<String> enclosingModuleNameParts = moduleOfLazyType.isEmpty() ? List.of() : Arrays.stream(moduleOfLazyType.split("\\.")).toList();
+    PythonType parent = resolveTypeWithFQN(enclosingModuleNameParts);
+    Optional<PythonType> pythonType1 = parent.resolveMember(name);
+    PythonType resolved = pythonType1.orElse(PythonType.UNKNOWN);
+
+    lazyTypesContext.resolveLazyType(lazyType, resolved);
+    return resolved;
   }
 
   private static String getModuleFqnString(List<String> moduleFqn) {
@@ -219,9 +229,7 @@ public class SymbolsModuleTypeProvider {
       if (pythonType.isEmpty()) {
         // Either the containing module has not been resolved yet, or the type is not present
         // We need to create a LazyType for it
-        String missingFqn = sb.toString();
-        String[] remainingParts = Arrays.copyOfRange(split, i + 1, split.length);
-        return createLazyType(fullyQualifiedName, missingFqn, remainingParts);
+        return lazyTypesContext.getOrCreateLazyType(fullyQualifiedName, this);
       }
       PythonType currentType = pythonType.get();
       if (i == split.length - 1) {
@@ -234,24 +242,6 @@ public class SymbolsModuleTypeProvider {
       currentModule = moduleType;
     }
     return convertToType(classSymbol, createdTypesBySymbol);
-  }
-
-  private LazyType createLazyType(String fullyQualifiedName, String prefix, String[] remainingParts) {
-    Queue<String> missingModules = new ArrayDeque<>();
-    String missingFqn = prefix;
-    StringBuilder sb = new StringBuilder(missingFqn);
-    if (!missingFqn.equals(fullyQualifiedName)) {
-      // This means a module is missing, otherwise it means only the type is missing
-      missingModules.add(missingFqn);
-    }
-    for (int j = 0; j < remainingParts.length - 1; j++) {
-      sb.append(".").append(remainingParts[j]);
-      missingFqn = sb.toString();
-      if (!missingFqn.equals(fullyQualifiedName)) {
-        missingModules.add(missingFqn);
-      }
-    }
-    return lazyTypesContext.getOrCreateLazyType(fullyQualifiedName, missingModules, this);
   }
 
   private PythonType convertToClassType(ClassSymbol symbol, Map<Symbol, PythonType> createdTypesBySymbol) {
