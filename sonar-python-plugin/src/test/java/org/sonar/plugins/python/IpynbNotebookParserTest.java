@@ -67,4 +67,13 @@ class IpynbNotebookParserTest {
       .hasMessageContaining("Unexpected token");
   }
 
+  @Test
+  void testParseMojoNotebook() {
+    var inputFile = createInputFile(baseDir, "notebook_mojo.ipynb", InputFile.Status.CHANGED, InputFile.Type.MAIN);
+
+    var resultOptional = IpynbNotebookParser.parseNotebook(inputFile);
+
+    assertThat(resultOptional).isEmpty();
+  }
+
 }
