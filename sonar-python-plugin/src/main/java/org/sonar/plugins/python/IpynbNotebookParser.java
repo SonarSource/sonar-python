@@ -57,7 +57,8 @@ public class IpynbNotebookParser {
   private int aggregatedSourceLine = 1;
 
   public Optional<GeneratedIPythonFile> parse() throws IOException {
-    var isPythonNotebook = parseLanguage().map(ACCEPTED_LANGUAGE::contains).orElse(false);
+    // If the language is not present, we assume it is a Python notebook
+    var isPythonNotebook = parseLanguage().map(ACCEPTED_LANGUAGE::contains).orElse(true);
 
     return Boolean.TRUE.equals(isPythonNotebook) ? Optional.of(parseNotebook()) : Optional.empty();
   }

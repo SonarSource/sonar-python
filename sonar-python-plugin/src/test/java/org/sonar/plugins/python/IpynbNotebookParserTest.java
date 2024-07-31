@@ -76,4 +76,13 @@ class IpynbNotebookParserTest {
     assertThat(resultOptional).isEmpty();
   }
 
+  @Test
+  void testParseNotebookWithNoLanguage() {
+    var inputFile = createInputFile(baseDir, "notebook_no_language.ipynb", InputFile.Status.CHANGED, InputFile.Type.MAIN);
+
+    var resultOptional = IpynbNotebookParser.parseNotebook(inputFile);
+
+    assertThat(resultOptional).isPresent();
+  }
+
 }
