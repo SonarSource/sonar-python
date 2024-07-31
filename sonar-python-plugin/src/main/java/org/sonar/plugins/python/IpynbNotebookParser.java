@@ -27,15 +27,19 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
 import org.sonar.python.IPythonLocation;
 
 public class IpynbNotebookParser {
 
   public static final String SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER = "#SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER\n";
 
-  public static GeneratedIPythonFile parseNotebook(PythonInputFile inputFile) {
+  private static final Set<String> ACCEPTED_LANGUAGE = Set.of("python", "ipython");
+
+  public static Optional<GeneratedIPythonFile> parseNotebook(PythonInputFile inputFile) {
     try {
-      return new IpynbNotebookParser(inputFile).parseNotebook();
+      return new IpynbNotebookParser(inputFile).parse();
     } catch (IOException e) {
       throw new IllegalStateException("Cannot read " + inputFile, e);
     }
@@ -51,6 +55,30 @@ public class IpynbNotebookParser {
   // Keys are the aggregated source line number
   private final Map<Integer, IPythonLocation> locationMap = new HashMap<>();
   private int aggregatedSourceLine = 1;
+
+  public Optional<GeneratedIPythonFile> parse() throws IOException {
+    var isPythonNotebook = parseLanguage().map(ACCEPTED_LANGUAGE::contains).orElse(false);
+
+    return Boolean.TRUE.equals(isPythonNotebook) ? Optional.of(parseNotebook()) : Optional.empty();
+  }
+
+  public Optional<String> parseLanguage() throws IOException {
+    String content = inputFile.wrappedFile().contents();
+    JsonFactory factory = new JsonFactory();
+    try (JsonParser jParser = factory.createParser(content)) {
+      while (!jParser.isClosed()) {
+        JsonToken jsonToken = jParser.nextToken();
+        if (JsonToken.FIELD_NAME.equals(jsonToken)) {
+          String fieldName = jParser.currentName();
+          if ("language".equals(fieldName)) {
+            jParser.nextToken();
+            return Optional.ofNullable(jParser.getValueAsString());
+          }
+        }
+      }
+    }
+    return Optional.empty();
+  }
 
   public GeneratedIPythonFile parseNotebook() throws IOException {
     String content = inputFile.wrappedFile().contents();

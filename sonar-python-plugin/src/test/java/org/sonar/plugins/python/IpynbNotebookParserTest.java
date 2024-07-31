@@ -38,7 +38,11 @@ class IpynbNotebookParserTest {
   void testParseNotebook() throws IOException {
     var inputFile = createInputFile(baseDir, "notebook.ipynb", InputFile.Status.CHANGED, InputFile.Type.MAIN);
 
-    var result = IpynbNotebookParser.parseNotebook(inputFile);
+    var resultOptional = IpynbNotebookParser.parseNotebook(inputFile);
+
+    assertThat(resultOptional).isPresent();
+
+    var result = resultOptional.get();
 
     assertThat(result.locationMap().keySet()).hasSize(20);
     assertThat(result.contents()).hasLineCount(27);
