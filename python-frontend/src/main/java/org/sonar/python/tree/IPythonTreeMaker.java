@@ -48,9 +48,9 @@ public class IPythonTreeMaker extends PythonTreeMaker {
   private Map<Integer, IPythonLocation> offsetMap;
 
   public IPythonTreeMaker() {
-    this(null);
+    this(Map.of());
   }
-  public IPythonTreeMaker(@Nullable Map<Integer, IPythonLocation> offsetMap) {
+  public IPythonTreeMaker(Map<Integer, IPythonLocation> offsetMap) {
     this.offsetMap = offsetMap;
   }
 
@@ -59,7 +59,7 @@ public class IPythonTreeMaker extends PythonTreeMaker {
     if (token == null) {
       return null;
     }
-    if (this.offsetMap != null) {
+    if (this.offsetMap != null && !this.offsetMap.isEmpty()) {
       return TokenEnricher.enrichToken(token, offsetMap);
     }
     return new TokenImpl(token);
