@@ -35,6 +35,7 @@ import org.sonar.api.batch.rule.ActiveRules;
 import org.sonar.api.batch.rule.CheckFactory;
 import org.sonar.api.batch.rule.internal.ActiveRulesBuilder;
 import org.sonar.api.batch.rule.internal.NewActiveRule;
+import org.sonar.api.batch.sensor.cpd.internal.TokensLine;
 import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.config.internal.MapSettings;
@@ -215,5 +216,15 @@ class IPynbSensorTest {
     inputFile(NOTEBOOK_FILE);
     activeRules = new ActiveRulesBuilder().build();
     assertDoesNotThrow(() -> notebookSensor().execute(context));
+  }
+
+  @Test
+  void test_notebook_sensor_does_not_execute_cpd_measures() {
+    inputFile(NOTEBOOK_FILE);
+    activeRules = new ActiveRulesBuilder().build();
+    notebookSensor().execute(context);
+    List<TokensLine> tokensLines = context.cpdTokens("moduleKey:notebook.ipynb");
+    assertThat(tokensLines)
+      .isNull();
   }
 }
