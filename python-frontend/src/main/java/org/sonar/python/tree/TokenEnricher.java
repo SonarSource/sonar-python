@@ -19,19 +19,15 @@
  */
 package org.sonar.python.tree;
 
-import com.sonar.sslr.api.GenericTokenType;
 import com.sonar.sslr.api.Token;
-import com.sonar.sslr.api.TokenType;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import org.sonar.python.IPythonLocation;
-import org.sonar.python.api.PythonTokenType;
 
 public class TokenEnricher {
 
   private static final Set<Character> ESCAPED_CHARS = Set.of('"', '\'', '\\', '\b', '\f', '\n', '\r', '\t');
-  private static final Set<TokenType> TOKEN_TYPES_TO_IGNORE = Set.of(PythonTokenType.DEDENT, GenericTokenType.EOF, PythonTokenType.INDENT);
 
   private TokenEnricher() {
   }
@@ -41,7 +37,7 @@ public class TokenEnricher {
   }
 
   public static TokenImpl enrichToken(Token token, Map<Integer, IPythonLocation> offsetMap) {
-    if (!offsetMap.isEmpty() && !TOKEN_TYPES_TO_IGNORE.contains(token.getType())) {
+    if (!offsetMap.isEmpty()) {
       IPythonLocation location = offsetMap.get(token.getLine());
       if (location == null) {
         throw new IllegalStateException(String.format("No IPythonLocation found for line %s", token.getLine()));
