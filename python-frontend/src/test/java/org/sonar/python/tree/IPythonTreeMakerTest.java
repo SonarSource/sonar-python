@@ -301,8 +301,8 @@ class IPythonTreeMakerTest extends RuleTest {
     assertThat(stringLiteral).hasSize(1);
     assertThat(stringLiteral.get(0).firstToken().line()).isEqualTo(7);
     assertThat(stringLiteral.get(0).firstToken().column()).isEqualTo(14);
-
   }
+
   @Test 
   void toPyTokenShouldReturnNull(){
     //when the token is null
