@@ -20,6 +20,7 @@
 package org.sonar.python.tree;
 
 import com.sonar.sslr.api.Token;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -42,7 +43,7 @@ public class TokenEnricher {
       if (location == null) {
         throw new IllegalStateException(String.format("No IPythonLocation found for line %s", token.getLine()));
       }
-      Map<Integer, Integer> escapeCharsMap = location.colOffset();
+      var escapeCharsMap = location.colOffset();
       int startCol = computeColWithEscapes(token.getColumn(), escapeCharsMap, location.column());
       int escapedCharInToken = 0;
       for (int i = 0; i < token.getValue().length(); i++) {
@@ -55,8 +56,8 @@ public class TokenEnricher {
     return new TokenImpl(token);
   }
 
-  private static int computeColWithEscapes(int currentCol, Map<Integer, Integer> escapes, int offsetColumn) {
-    return (int) escapes.keySet().stream().filter(k -> k < currentCol).count() + offsetColumn + currentCol;
+  private static int computeColWithEscapes(int currentCol, Collection<Integer> escapes, int offsetColumn) {
+    return (int) escapes.stream().skip(1).filter(k -> k < currentCol).count() + offsetColumn + currentCol;
   }
 
 }

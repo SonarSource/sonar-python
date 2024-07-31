@@ -19,7 +19,8 @@
  */
 package org.sonar.python;
 
-import java.util.Map;
+import java.util.List;
 
-public record IPythonLocation(int line, int column, Map<Integer, Integer> colOffset) {
+// The first element of colOffset is the count, and the following ones are the index of the escaped characters
+public record IPythonLocation(int line, int column, List<Integer> colOffset) {
 }

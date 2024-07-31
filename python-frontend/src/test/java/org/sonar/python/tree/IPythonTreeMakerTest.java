@@ -291,7 +291,7 @@ class IPythonTreeMakerTest extends RuleTest {
 
   @Test
   void enrichTokens() {
-    var offsetMap = Map.of(1, new IPythonLocation(7, 10, Map.of(4, 15, 8, 20)));
+    var offsetMap = Map.of(1, new IPythonLocation(7, 10, List.of(-1, 4, 8)));
     var statementList = parseIPython(
       "a = \"123\"", new IPythonTreeMaker(offsetMap)::fileInput).statements();
     assertThat(statementList).isNotNull();
