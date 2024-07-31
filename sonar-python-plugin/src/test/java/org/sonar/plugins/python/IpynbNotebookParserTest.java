@@ -44,14 +44,21 @@ class IpynbNotebookParserTest {
     assertThat(result.contents()).hasLineCount(27);
     assertThat(StringUtils.countMatches(result.contents(), IpynbNotebookParser.SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER))
       .isEqualTo(7);
-    assertThat(result.locationMap()).extracting(map -> map.get(17)).isEqualTo(new IPythonLocation(64, 27, Map.of(6, 21, 20, 37, -1, 3)));
+    assertThat(result.locationMap()).extracting(map -> map.get(1)).isEqualTo(new IPythonLocation(17, 5, Map.of(-1, 0)));
+    //"    print \"not none\"\n"
+    assertThat(result.locationMap()).extracting(map -> map.get(3)).isEqualTo(new IPythonLocation(19, 5, Map.of(10, 16, 19, 26, -1, 2)));
+    //"source": "#Some code\nprint(\"hello world\\n\")",
+    assertThat(result.locationMap()).extracting(map -> map.get(16)).isEqualTo(new IPythonLocation(64, 14, Map.of(-1, 0)));
+    assertThat(result.locationMap()).extracting(map -> map.get(17)).isEqualTo(new IPythonLocation(64, 26, Map.of(6, 33, 18, 46, 20, 49, -1, 3)));
 
-    assertThat(result.locationMap()).extracting(map -> map.get(22)).isEqualTo(new IPythonLocation(83, 15, Map.of(6, 21, 15, 32, -1, 3)));
-    assertThat(result.locationMap()).extracting(map -> map.get(23)).isEqualTo(new IPythonLocation(83, 37, Map.of(6, 21, 23, 40, -1, 3)));
+    //"source": "print(\"My\\ntext\")\nprint(\"Something else\\n\")"
+    assertThat(result.locationMap()).extracting(map -> map.get(22)).isEqualTo(new IPythonLocation(83, 14, Map.of(6, 21, 9, 25, 15, 32, -1, 3)));
+    assertThat(result.locationMap()).extracting(map -> map.get(23)).isEqualTo(new IPythonLocation(83, 36, Map.of(6, 43, 21, 59, 23, 62, -1, 3)));
 
+    //"source": "a = \"A bunch of characters \\n \\f \\r \\ \t \"\nb = None"
     assertThat(result.locationMap()).extracting(map -> map.get(25))
-      .isEqualTo(new IPythonLocation(90, 15, Map.of(4, 19, 39, 62, 41, 64, 42, 65, 46, 71, -1, 7)));
-    assertThat(result.locationMap()).extracting(map -> map.get(26)).isEqualTo(new IPythonLocation(90, 71, Map.of(-1, 0)));
+      .isEqualTo(new IPythonLocation(90, 14, Map.of(4, 19, 27, 43, 30, 47, 33, 51, 36, 55, 40, 61, -1, 6)));
+    assertThat(result.locationMap()).extracting(map -> map.get(26)).isEqualTo(new IPythonLocation(90, 63, Map.of(-1, 0)));
     // last line with the cell delimiter which contains the EOF token 
     assertThat(result.locationMap()).extracting(map -> map.get(27)).isEqualTo(new IPythonLocation(90, 14, Map.of(-1, 0)));
   }

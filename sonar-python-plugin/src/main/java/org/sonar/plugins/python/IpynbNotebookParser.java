@@ -130,10 +130,10 @@ public class IpynbNotebookParser {
     var previousExtraChars = 0;
 
     for (String line : sourceLine.lines().toList()) {
-      var countEscapedChar = countEscapeCharacters(line, new LinkedHashMap<>(), tokenLocation.getColumnNr());
+      var countEscapedChar = countEscapeCharacters(line, new LinkedHashMap<>(), previousLen + previousExtraChars + tokenLocation.getColumnNr());
       var currentCount = countEscapedChar.get(-1);
       addLineToSource(line, new IPythonLocation(tokenLocation.getLineNr(),
-        tokenLocation.getColumnNr() + previousLen + previousExtraChars + 1, countEscapedChar));
+        tokenLocation.getColumnNr() + previousLen + previousExtraChars, countEscapedChar));
       aggregatedSource.append("\n");
       previousLen = line.length() + 2;
       previousExtraChars = currentCount;
@@ -171,16 +171,12 @@ public class IpynbNotebookParser {
     for (int i = 1; i < sourceLine.length(); ++i) {
       char c = arr[i];
       switch (c) {
-        case '"', '\'', '/':
-          // + 1 as we do have to count the open quote.
-          colMap.put(i, i + colOffSet + count + 1);
-          if (c != '/') {
-            numberOfExtraChars++;
-          }
-          break;
-        case '\\', '\b', '\f', '\n', '\r', '\t':
-          count += 2;
+        case '"', '\'', '\\':
           numberOfExtraChars++;
+          colMap.put(i, i + colOffSet + count + numberOfExtraChars);
+          break;
+        case '\b', '\f', '\t': // we never encounter \n or \r as the lines are split at these characters
+          count += 1; // we increase the count of one char as we count the \ but not the t or b
           break;
         default:
           break;
