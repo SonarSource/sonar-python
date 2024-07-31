@@ -31,7 +31,7 @@ import org.sonar.python.IPythonLocation;
 
 public class IpynbNotebookParser {
 
-  public static final String SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER = "#SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER\n";
+  public static final String SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER = "#SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER";
 
   public static GeneratedIPythonFile parseNotebook(PythonInputFile inputFile) {
     try {
@@ -50,7 +50,9 @@ public class IpynbNotebookParser {
 
   // Keys are the aggregated source line number
   private final Map<Integer, IPythonLocation> locationMap = new HashMap<>();
-  private int aggregatedSourceLine = 1;
+  private int aggregatedSourceLine = 0;
+  private int lastPythonLine = 0;
+  private boolean isFirstCell = true;
 
   public GeneratedIPythonFile parseNotebook() throws IOException {
     String content = inputFile.wrappedFile().contents();
@@ -68,12 +70,15 @@ public class IpynbNotebookParser {
           }
         }
       }
+      // Account for EOF token
+      addDefaultLocation(lastPythonLine, jParser.currentTokenLocation());
     }
 
     return new GeneratedIPythonFile(inputFile.wrappedFile(), aggregatedSource.toString(), locationMap);
   }
 
   private void processCodeCell(JsonParser jParser) throws IOException {
+
     while (!jParser.isClosed()) {
       JsonToken jsonToken = jParser.nextToken();
       if (JsonToken.FIELD_NAME.equals(jsonToken) && "source".equals(jParser.currentName())) {
@@ -87,19 +92,30 @@ public class IpynbNotebookParser {
     }
   }
 
+  private void appendNewLineAfterPreviousCellDelimiter() {
+    if (!isFirstCell) {
+      aggregatedSource.append("\n");
+    } else {
+      isFirstCell = false;
+    }
+  }
+
   private boolean parseSourceArray(JsonParser jParser, JsonToken jsonToken) throws IOException {
     if (jsonToken != JsonToken.START_ARRAY) {
       return false;
     }
+    appendNewLineAfterPreviousCellDelimiter();
+    JsonLocation tokenLocation = jParser.currentTokenLocation();
     while (jParser.nextToken() != JsonToken.END_ARRAY) {
       String sourceLine = jParser.getValueAsString();
-      var tokenLocation = jParser.currentTokenLocation();
+      tokenLocation = jParser.currentTokenLocation();
       var countEscapedChar = countEscapeCharacters(sourceLine, new LinkedHashMap<>(), tokenLocation.getColumnNr());
       addLineToSource(sourceLine, tokenLocation, countEscapedChar);
     }
     aggregatedSource.append("\n");
     // Account for the last cell delimiter
-    addDelimiterToSource();
+    addDelimiterToSource(tokenLocation);
+    lastPythonLine = aggregatedSourceLine;
     return true;
   }
 
@@ -107,6 +123,7 @@ public class IpynbNotebookParser {
     if (jsonToken != JsonToken.VALUE_STRING) {
       return false;
     }
+    appendNewLineAfterPreviousCellDelimiter();
     String sourceLine = jParser.getValueAsString();
     JsonLocation tokenLocation = jParser.currentTokenLocation();
     var previousLen = 0;
@@ -122,7 +139,8 @@ public class IpynbNotebookParser {
       previousExtraChars = currentCount;
     }
     // Account for the last cell delimiter
-    addDelimiterToSource();
+    addDelimiterToSource(tokenLocation);
+    lastPythonLine = aggregatedSourceLine;
     return true;
   }
 
@@ -132,13 +150,18 @@ public class IpynbNotebookParser {
 
   private void addLineToSource(String sourceLine, IPythonLocation location) {
     aggregatedSource.append(sourceLine);
-    locationMap.put(aggregatedSourceLine, location);
     aggregatedSourceLine++;
+    locationMap.put(aggregatedSourceLine, location);
   }
 
-  private void addDelimiterToSource() {
+  private void addDelimiterToSource(JsonLocation tokenLocation) {
     aggregatedSource.append(SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER);
     aggregatedSourceLine++;
+    addDefaultLocation(aggregatedSourceLine, tokenLocation);
+  }
+
+  private void addDefaultLocation(int line, JsonLocation tokenLocation) {
+    locationMap.putIfAbsent(line, new IPythonLocation(tokenLocation.getLineNr(), tokenLocation.getColumnNr(), Map.of(-1, 0)));
   }
 
   private static Map<Integer, Integer> countEscapeCharacters(String sourceLine, Map<Integer, Integer> colMap, int colOffSet) {
