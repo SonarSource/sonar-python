@@ -135,8 +135,8 @@ public class PythonTreeMaker {
     return new TokenImpl(token);
   }
 
-  private static List<Token> toPyToken(List<com.sonar.sslr.api.Token> tokens) {
-    return tokens.stream().map(TokenImpl::new).collect(Collectors.toList());
+  protected List<Token> toPyToken(List<com.sonar.sslr.api.Token> tokens) {
+    return tokens.stream().map(this::toPyToken).toList();
   }
 
   public void setParents(Tree root) {
@@ -1319,7 +1319,7 @@ public class PythonTreeMaker {
     return new ReprExpressionImpl(openingBacktick, expressionListTree, closingBacktick);
   }
 
-  private static List<Token> punctuators(AstNode astNode, PythonPunctuator punctuator) {
+  private List<Token> punctuators(AstNode astNode, PythonPunctuator punctuator) {
     return toPyToken(astNode.getChildren(punctuator).stream().map(AstNode::getToken).toList());
   }
 
