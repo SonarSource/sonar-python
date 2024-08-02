@@ -387,6 +387,50 @@ class TypeInferenceV2Test {
   }
 
   @Test
+  void typeSourceOfCallExpressionResultDependsOnTypeSourceOfName() {
+    FileInput fileInput = inferTypes("""
+      from pyasn1.debug import Printer
+      def foo(p: Printer):
+        a = p()
+        a
+        b = p.__call__()
+        b
+      """);
+
+    var functionDef = (FunctionDef) fileInput.statements().statements().get(1);
+    var aStatement = (ExpressionStatement) functionDef.body().statements().get(1);
+    PythonType aType = aStatement.expressions().get(0).typeV2();
+    assertThat(aType).isInstanceOf(ObjectType.class);
+    assertThat(aType.unwrappedType()).isEqualTo(NONE_TYPE);
+    assertThat(aType.typeSource()).isEqualTo(TypeSource.TYPE_HINT);
+
+    var bStatement = (ExpressionStatement) functionDef.body().statements().get(3);
+    PythonType bType = bStatement.expressions().get(0).typeV2();
+    assertThat(bType).isInstanceOf(ObjectType.class);
+    assertThat(bType.unwrappedType()).isEqualTo(NONE_TYPE);
+    assertThat(bType.typeSource()).isEqualTo(TypeSource.TYPE_HINT);
+  }
+
+  @Test
+  void typeSourceIsExactByDefault() {
+    FileInput fileInput = inferTypes("""
+      random[2]()
+      """);
+    CallExpression callExpression = ((CallExpression) ((ExpressionStatement) fileInput.statements().statements().get(0)).expressions().get(0));
+
+    CallExpression callExpressionSpy = Mockito.spy(callExpression);
+    Expression calleeSpy = Mockito.spy(callExpression.callee());
+    FunctionType functionType = new FunctionType("foo", List.of(), List.of(), INT_TYPE, false, false, false, false, null, null);
+    Mockito.when(calleeSpy.typeV2()).thenReturn(functionType);
+    Mockito.when(callExpressionSpy.callee()).thenReturn(calleeSpy);
+
+    var resultType = callExpressionSpy.typeV2();
+    assertThat(resultType.typeSource()).isEqualTo(TypeSource.EXACT);
+    assertThat(resultType).isInstanceOf(ObjectType.class);
+    assertThat(resultType.unwrappedType()).isEqualTo(INT_TYPE);
+  }
+
+  @Test
   void inferTypesInsideFunction6() {
     FileInput root = inferTypes("""
       def foo(param: int):

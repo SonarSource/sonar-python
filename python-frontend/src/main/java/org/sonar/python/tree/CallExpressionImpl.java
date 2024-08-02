@@ -189,17 +189,22 @@ public class CallExpressionImpl extends PyTree implements CallExpression, HasTyp
   @Override
   public PythonType typeV2() {
     TypeSource typeSource = computeTypeSource();
-    if (callee().typeV2() instanceof ClassType classType) {
-      return new ObjectType(classType, typeSource);
+    PythonType pythonType = returnTypeOfCall(callee().typeV2());
+    return pythonType != PythonType.UNKNOWN ? new ObjectType(pythonType, typeSource) : PythonType.UNKNOWN;
+  }
+
+  static PythonType returnTypeOfCall(PythonType calleeType) {
+    if (calleeType instanceof ClassType classType) {
+      return classType;
     }
-    if (callee().typeV2() instanceof FunctionType functionType) {
+    if (calleeType instanceof FunctionType functionType) {
       PythonType returnType = functionType.returnType();
       if (returnType.equals(PythonType.UNKNOWN)) {
         return PythonType.UNKNOWN;
       }
-      return new ObjectType(returnType, typeSource);
+      return returnType;
     }
-    if (callee().typeV2() instanceof UnionType unionType) {
+    if (calleeType instanceof UnionType unionType) {
       PythonType result = null;
       for (PythonType candidate : unionType.candidates()) {
         if (candidate instanceof ClassType classType) {
@@ -209,15 +214,19 @@ public class CallExpressionImpl extends PyTree implements CallExpression, HasTyp
           result = UnionType.or(result, functionType.returnType());
         }
       }
-      return result == null ? PythonType.UNKNOWN : new ObjectType(result, typeSource);
+      return result == null ? PythonType.UNKNOWN : result;
+    }
+    if (calleeType instanceof ObjectType objectType) {
+      Optional<PythonType> pythonType = objectType.resolveMember("__call__");
+      return pythonType.map(CallExpressionImpl::returnTypeOfCall).orElse(PythonType.UNKNOWN);
     }
     return PythonType.UNKNOWN;
   }
 
   TypeSource computeTypeSource() {
-    if (callee instanceof QualifiedExpression qualifiedExpression) {
+    if (callee() instanceof QualifiedExpression qualifiedExpression) {
       return qualifiedExpression.qualifier().typeV2().typeSource();
     }
-    return TypeSource.EXACT;
+    return callee().typeV2().typeSource();
   }
 }
