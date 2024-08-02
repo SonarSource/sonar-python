@@ -25,6 +25,7 @@ import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.List;
+import java.util.Map;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.PythonFile;
@@ -52,6 +53,14 @@ public class TestPythonVisitorRunner {
     return context;
   }
 
+  public static PythonVisitorContext scanNotebookFile(File file, Map<Integer, IPythonLocation> locations, String content, PythonCheck... visitors) {
+    PythonVisitorContext context = createNotebookContext(file, locations, content, "", ProjectLevelSymbolTable.empty(), CacheContextImpl.dummyCache());
+    for (PythonCheck visitor : visitors) {
+      visitor.scanFile(context);
+    }
+    return context;
+  }
+
   public static PythonVisitorContext createContext(File file) {
     return createContext(file, null);
   }
@@ -65,6 +74,13 @@ public class TestPythonVisitorRunner {
     TestPythonFile pythonFile = new TestPythonFile(file);
     FileInput rootTree = parseFile(pythonFile);
     return new PythonVisitorContext(rootTree, pythonFile, workingDirectory, packageName, projectLevelSymbolTable, cacheContext);
+  }
+
+  public static PythonVisitorContext createNotebookContext(File file, Map<Integer, IPythonLocation> locations, String content, String packageName,
+    ProjectLevelSymbolTable projectLevelSymbolTable, CacheContext cacheContext) {
+    TestPythonFile pythonFile = new TestPythonFile(file);
+    FileInput rootTree = parseNotebookFile(locations, content);
+    return new PythonVisitorContext(rootTree, pythonFile, null, packageName, projectLevelSymbolTable, cacheContext);
   }
 
   public static ProjectLevelSymbolTable globalSymbols(List<File> files, File baseDir) {
@@ -81,9 +97,16 @@ public class TestPythonVisitorRunner {
     return projectLevelSymbolTable;
   }
 
+  private static FileInput parseNotebookFile(Map<Integer, IPythonLocation> locations, String content) {
+    var parser = PythonParser.createIPythonParser();
+    var treeMaker = new IPythonTreeMaker(locations);
+    var astNode = parser.parse(content);
+    return treeMaker.fileInput(astNode);
+  }
+
   private static FileInput parseFile(TestPythonFile file) {
     var parser = file.isIPython() ? PythonParser.createIPythonParser() : PythonParser.create();
-    var treeMaker = file.isIPython() ? new IPythonTreeMaker() : new PythonTreeMaker();
+    var treeMaker = file.isIPython() ? new IPythonTreeMaker(Map.of()) : new PythonTreeMaker();
 
     var astNode = parser.parse(file.content());
     return treeMaker.fileInput(astNode);
