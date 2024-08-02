@@ -175,8 +175,10 @@ public class IpynbNotebookParser {
           numberOfExtraChars++;
           colMap.put(i, i + colOffSet + count + numberOfExtraChars);
           break;
-        case '\b', '\f', '\t': // we never encounter \n or \r as the lines are split at these characters
-          count += 1; // we increase the count of one char as we count the \ but not the t or b
+        // we never encounter \n or \r as the lines are split at these characters 
+        case '\b', '\f', '\t':
+          // we increase the count of one char as we count the \ but not the t or b
+          count += 1;
           break;
         default:
           break;
