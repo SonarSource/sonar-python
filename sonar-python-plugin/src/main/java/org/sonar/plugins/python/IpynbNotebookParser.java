@@ -135,7 +135,8 @@ public class IpynbNotebookParser {
     }
     appendNewLineAfterPreviousCellDelimiter();
     JsonLocation tokenLocation = jParser.currentTokenLocation();
-    var lastSourceLine = "";
+    // In case of an empty cell, we don't add an extra line
+    var lastSourceLine = "\n";
     while (jParser.nextToken() != JsonToken.END_ARRAY) {
       String sourceLine = jParser.getValueAsString();
       tokenLocation = jParser.currentTokenLocation();
