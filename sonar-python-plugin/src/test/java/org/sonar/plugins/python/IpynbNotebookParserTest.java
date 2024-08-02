@@ -78,7 +78,7 @@ class IpynbNotebookParserTest {
     var result = resultOptional.get();
 
     assertThat(result.locationMap().keySet()).hasSize(4);
-    assertThat(result.contents()).hasLineCount(5);
+    assertThat(result.contents()).hasLineCount(4);
     assertThat(StringUtils.countMatches(result.contents(), IpynbNotebookParser.SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER))
       .isEqualTo(1);
     assertThat(result.locationMap()).extracting(map -> map.get(3)).isEqualTo(new IPythonLocation(11, 5, Map.of(-1, 0)));
@@ -112,6 +112,19 @@ class IpynbNotebookParserTest {
     var resultOptional = IpynbNotebookParser.parseNotebook(inputFile);
 
     assertThat(resultOptional).isPresent();
+  }
+
+  @Test
+  void testParseNotebookWithExtraLineEndInArray() throws IOException {
+    var inputFile = createInputFile(baseDir, "notebook_extra_line.ipynb", InputFile.Status.CHANGED, InputFile.Type.MAIN);
+
+    var resultOptional = IpynbNotebookParser.parseNotebook(inputFile);
+
+    assertThat(resultOptional).isPresent();
+
+    var result = resultOptional.get();
+    assertThat(result.locationMap()).hasSize(3);
+    assertThat(result.contents()).hasLineCount(3);
   }
 
 }
