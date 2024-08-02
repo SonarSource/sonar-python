@@ -38,7 +38,11 @@ class IpynbNotebookParserTest {
   void testParseNotebook() throws IOException {
     var inputFile = createInputFile(baseDir, "notebook.ipynb", InputFile.Status.CHANGED, InputFile.Type.MAIN);
 
-    var result = IpynbNotebookParser.parseNotebook(inputFile);
+    var resultOptional = IpynbNotebookParser.parseNotebook(inputFile);
+
+    assertThat(resultOptional).isPresent();
+
+    var result = resultOptional.get();
 
     assertThat(result.locationMap().keySet()).hasSize(27);
     assertThat(result.contents()).hasLineCount(27);
@@ -60,7 +64,11 @@ class IpynbNotebookParserTest {
   void testParseNotebookWithEmptyLines() throws IOException {
     var inputFile = createInputFile(baseDir, "notebook_with_empty_lines.ipynb", InputFile.Status.CHANGED, InputFile.Type.MAIN);
 
-    var result = IpynbNotebookParser.parseNotebook(inputFile);
+    var resultOptional = IpynbNotebookParser.parseNotebook(inputFile);
+
+    assertThat(resultOptional).isPresent();
+
+    var result = resultOptional.get();
 
     assertThat(result.locationMap().keySet()).hasSize(4);
     assertThat(result.contents()).hasLineCount(5);
@@ -79,6 +87,24 @@ class IpynbNotebookParserTest {
     assertThatThrownBy(() -> IpynbNotebookParser.parseNotebook(inputFile))
       .isInstanceOf(IllegalStateException.class)
       .hasMessageContaining("Unexpected token");
+  }
+
+  @Test
+  void testParseMojoNotebook() {
+    var inputFile = createInputFile(baseDir, "notebook_mojo.ipynb", InputFile.Status.CHANGED, InputFile.Type.MAIN);
+
+    var resultOptional = IpynbNotebookParser.parseNotebook(inputFile);
+
+    assertThat(resultOptional).isEmpty();
+  }
+
+  @Test
+  void testParseNotebookWithNoLanguage() {
+    var inputFile = createInputFile(baseDir, "notebook_no_language.ipynb", InputFile.Status.CHANGED, InputFile.Type.MAIN);
+
+    var resultOptional = IpynbNotebookParser.parseNotebook(inputFile);
+
+    assertThat(resultOptional).isPresent();
   }
 
 }
