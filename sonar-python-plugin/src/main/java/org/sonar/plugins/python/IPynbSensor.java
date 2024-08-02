@@ -98,8 +98,8 @@ public final class IPynbSensor implements Sensor {
     List<PythonInputFile> generatedIPythonFiles = new ArrayList<>();
     for (PythonInputFile inputFile : pythonFiles) {
       try {
-        PythonInputFile result = IpynbNotebookParser.parseNotebook(inputFile);
-        generatedIPythonFiles.add(result);
+        var result = IpynbNotebookParser.parseNotebook(inputFile);
+        result.ifPresent(generatedIPythonFiles::add);
       } catch (Exception e) {
         if (context.config().getBoolean(FAIL_FAST_PROPERTY_NAME).orElse(false) && !isErrorOnTestFile(inputFile)) {
           throw new IllegalStateException("Exception when parsing " + inputFile, e);
