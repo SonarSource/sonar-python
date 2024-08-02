@@ -291,8 +291,8 @@ class IPythonTreeMakerTest extends RuleTest {
 
   @Test
   void enrichTokens() {
-    var offsetMap = Map.of(1, new IPythonLocation(7, 10, Map.of(4, 15, 8, 20)));
-    var statementList = parseIPython(
+    var offsetMap = Map.of(1, new IPythonLocation(7, 10, Map.of(4, 15, 8, 20, -1, 2)));
+    var statementList = parseIPython( 
       "a = \"123\"", new IPythonTreeMaker(offsetMap)::fileInput).statements();
     assertThat(statementList).isNotNull();
 
@@ -301,13 +301,16 @@ class IPythonTreeMakerTest extends RuleTest {
     assertThat(stringLiteral).hasSize(1);
     assertThat(stringLiteral.get(0).firstToken().line()).isEqualTo(7);
     assertThat(stringLiteral.get(0).firstToken().column()).isEqualTo(14);
-  }
 
-  @Test 
-  void toPyTokenShouldReturnNull(){
-    //when the token is null
-    var token = treeMaker.toPyToken(null);
-    assertThat(token).isNull();
+    offsetMap = Map.of(1, new IPythonLocation(7, 10, Map.of(-1,0)), 2, new IPythonLocation(8, 10, Map.of(-1, 0)));
+    statementList = parseIPython( 
+      "def foo(): # comment \n    pass", new IPythonTreeMaker(offsetMap)::fileInput).statements();
+    assertThat(statementList).isNotNull();
+    var passStatement = findChildrenWithKind(statementList, Tree.Kind.PASS_STMT)
+      .stream().map(PassStatementImpl.class::cast).toList();
+    assertThat(passStatement).hasSize(1);
+    assertThat(passStatement.get(0).firstToken().line()).isEqualTo(8);
+    assertThat(passStatement.get(0).firstToken().column()).isEqualTo(14);
   }
 
   private static void assertLineMagicStatement(Statement statement) {
