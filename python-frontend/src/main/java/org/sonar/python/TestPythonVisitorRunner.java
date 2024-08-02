@@ -79,7 +79,7 @@ public class TestPythonVisitorRunner {
   public static PythonVisitorContext createNotebookContext(File file, Map<Integer, IPythonLocation> locations, String content, String packageName,
     ProjectLevelSymbolTable projectLevelSymbolTable, CacheContext cacheContext) {
     TestPythonFile pythonFile = new TestPythonFile(file);
-    FileInput rootTree = parseNotebookFile(pythonFile, locations, content);
+    FileInput rootTree = parseNotebookFile(locations, content);
     return new PythonVisitorContext(rootTree, pythonFile, null, packageName, projectLevelSymbolTable, cacheContext);
   }
 
@@ -97,7 +97,7 @@ public class TestPythonVisitorRunner {
     return projectLevelSymbolTable;
   }
 
-  private static FileInput parseNotebookFile(TestPythonFile file, Map<Integer, IPythonLocation> locations, String content) {
+  private static FileInput parseNotebookFile(Map<Integer, IPythonLocation> locations, String content) {
     var parser = PythonParser.createIPythonParser();
     var treeMaker = new IPythonTreeMaker(locations);
     var astNode = parser.parse(content);

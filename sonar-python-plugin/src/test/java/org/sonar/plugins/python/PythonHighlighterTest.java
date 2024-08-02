@@ -131,7 +131,10 @@ class PythonHighlighterTest {
     check(27, 17, file, TypeOfText.STRING);
     check(27, 18, file, null);
     checkOnRange(27, 26, 16, file, TypeOfText.STRING);
+  }
 
+  @Test
+  void docStrings() {
     // docstrings and non-docstrings
     check(1, 0, file, TypeOfText.STRUCTURED_COMMENT);
     checkOnRange(2, 0, 22, file, TypeOfText.STRUCTURED_COMMENT);
@@ -205,7 +208,7 @@ class PythonHighlighterTest {
       2, new IPythonLocation(10, 5, Map.of(-1, 0)),
       3, new IPythonLocation(11, 5, Map.of(-1, 2, 9, 10, 14, 16)),
       4, new IPythonLocation(12, 5, Map.of(-1, 0)),
-      5, new IPythonLocation(12, 5, Map.of(-1, 0))); //EOF Token
+      5, new IPythonLocation(12, 0, Map.of(-1, 0))); //EOF Token
     PythonHighlighter pythonHighlighter = new PythonHighlighter(context, new GeneratedIPythonFile(notebookInputFile, pythonContent, locations));
     TestPythonVisitorRunner.scanNotebookFile(notebookFile, locations, pythonContent, pythonHighlighter);
     // def
