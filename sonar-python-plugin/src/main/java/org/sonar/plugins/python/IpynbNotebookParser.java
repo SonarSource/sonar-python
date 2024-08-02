@@ -135,13 +135,17 @@ public class IpynbNotebookParser {
     }
     appendNewLineAfterPreviousCellDelimiter();
     JsonLocation tokenLocation = jParser.currentTokenLocation();
+    var lastSourceLine = "";
     while (jParser.nextToken() != JsonToken.END_ARRAY) {
       String sourceLine = jParser.getValueAsString();
       tokenLocation = jParser.currentTokenLocation();
       var countEscapedChar = countEscapeCharacters(sourceLine, new LinkedHashMap<>(), tokenLocation.getColumnNr());
       addLineToSource(sourceLine, tokenLocation, countEscapedChar);
+      lastSourceLine = sourceLine;
     }
-    aggregatedSource.append("\n");
+    if (!lastSourceLine.endsWith("\n")) {
+      aggregatedSource.append("\n");
+    }
     // Account for the last cell delimiter
     addDelimiterToSource(tokenLocation);
     lastPythonLine = aggregatedSourceLine;
