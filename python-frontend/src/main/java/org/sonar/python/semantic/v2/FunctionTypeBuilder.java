@@ -35,6 +35,7 @@ import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.types.v2.FunctionType;
 import org.sonar.python.types.v2.ParameterV2;
 import org.sonar.python.types.v2.PythonType;
+import org.sonar.python.types.v2.TypeOrigin;
 
 import static org.sonar.python.tree.TreeUtils.locationInFile;
 
@@ -49,6 +50,7 @@ public class FunctionTypeBuilder implements TypeBuilder<FunctionType> {
   private boolean isInstanceMethod;
   private PythonType owner;
   private PythonType returnType = PythonType.UNKNOWN;
+  private TypeOrigin typeOrigin = TypeOrigin.STUB;
   private LocationInFile definitionLocation;
 
   private static final String CLASS_METHOD_DECORATOR = "classmethod";
@@ -110,6 +112,11 @@ public class FunctionTypeBuilder implements TypeBuilder<FunctionType> {
     return this;
   }
 
+  public FunctionTypeBuilder withTypeOrigin(TypeOrigin typeOrigin) {
+    this.typeOrigin = typeOrigin;
+    return this;
+  }
+
   @Override
   public FunctionTypeBuilder withDefinitionLocation(@Nullable LocationInFile definitionLocation) {
     this.definitionLocation = definitionLocation;
@@ -118,7 +125,7 @@ public class FunctionTypeBuilder implements TypeBuilder<FunctionType> {
 
   public FunctionType build() {
     return new FunctionType(
-      name, attributes, parameters, returnType, isAsynchronous, hasDecorators, isInstanceMethod, hasVariadicParameter, owner, definitionLocation
+      name, attributes, parameters, returnType, typeOrigin, isAsynchronous, hasDecorators, isInstanceMethod, hasVariadicParameter, owner, definitionLocation
     );
   }
 

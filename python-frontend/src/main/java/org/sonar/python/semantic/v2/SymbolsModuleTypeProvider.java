@@ -47,6 +47,7 @@ import org.sonar.python.types.v2.Member;
 import org.sonar.python.types.v2.ModuleType;
 import org.sonar.python.types.v2.ParameterV2;
 import org.sonar.python.types.v2.PythonType;
+import org.sonar.python.types.v2.TypeOrigin;
 import org.sonar.python.types.v2.UnionType;
 
 public class SymbolsModuleTypeProvider {
@@ -122,12 +123,14 @@ public class SymbolsModuleTypeProvider {
     InferredType inferredType = ((FunctionSymbolImpl) symbol).declaredReturnType();
     ClassSymbol classSymbol = inferredType.runtimeTypeSymbol();
     var returnType = resolveReturnType(createdTypesBySymbol, classSymbol);
+    TypeOrigin typeOrigin = symbol.isStub() ? TypeOrigin.STUB : TypeOrigin.LOCAL;
 
     FunctionTypeBuilder functionTypeBuilder =
       new FunctionTypeBuilder(symbol.name())
         .withAttributes(List.of())
         .withParameters(parameters)
         .withReturnType(returnType)
+        .withTypeOrigin(typeOrigin)
         .withAsynchronous(symbol.isAsynchronous())
         .withHasDecorators(symbol.hasDecorators())
         .withInstanceMethod(symbol.isInstanceMethod())

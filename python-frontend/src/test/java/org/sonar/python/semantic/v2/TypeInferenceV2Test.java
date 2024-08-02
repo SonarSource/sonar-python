@@ -60,6 +60,7 @@ import org.sonar.python.types.v2.ModuleType;
 import org.sonar.python.types.v2.ObjectType;
 import org.sonar.python.types.v2.ParameterV2;
 import org.sonar.python.types.v2.PythonType;
+import org.sonar.python.types.v2.TypeOrigin;
 import org.sonar.python.types.v2.TypeSource;
 import org.sonar.python.types.v2.UnionType;
 import org.sonar.python.types.v2.UnknownType;
@@ -67,6 +68,8 @@ import org.sonar.python.types.v2.UnknownType;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.sonar.python.PythonTestUtils.parse;
+import static org.sonar.python.PythonTestUtils.parseWithoutSymbols;
+import static org.sonar.python.PythonTestUtils.pythonFile;
 import static org.sonar.python.types.v2.TypesTestUtils.DICT_TYPE;
 import static org.sonar.python.types.v2.TypesTestUtils.INT_TYPE;
 import static org.sonar.python.types.v2.TypesTestUtils.LIST_TYPE;
@@ -420,7 +423,7 @@ class TypeInferenceV2Test {
 
     CallExpression callExpressionSpy = Mockito.spy(callExpression);
     Expression calleeSpy = Mockito.spy(callExpression.callee());
-    FunctionType functionType = new FunctionType("foo", List.of(), List.of(), INT_TYPE, false, false, false, false, null, null);
+    FunctionType functionType = new FunctionType("foo", List.of(), List.of(), INT_TYPE, TypeOrigin.STUB, false, false, false, false, null, null);
     Mockito.when(calleeSpy.typeV2()).thenReturn(functionType);
     Mockito.when(callExpressionSpy.callee()).thenReturn(calleeSpy);
 
@@ -1819,6 +1822,56 @@ class TypeInferenceV2Test {
       a
       """
     ).typeV2().unwrappedType()).isEqualTo(NONE_TYPE);
+  }
+
+  @Test
+  void return_type_of_call_of_locally_defined_function() {
+    var type = lastExpression("""
+      def foo() -> int: ...
+      x = foo()
+      x
+      """).typeV2();
+    assertThat(type.unwrappedType()).isEqualTo(INT_TYPE);
+    assertThat(type.typeSource()).isEqualTo(TypeSource.TYPE_HINT);
+  }
+
+  @Test
+  void type_origin_of_stub_function() {
+    FileInput fileInput = inferTypes("""
+      len
+      x = len([1,2])
+      x
+      """);
+
+    FunctionType lenType = (FunctionType) ((ExpressionStatement) fileInput.statements().statements().get(0)).expressions().get(0).typeV2();
+    assertThat(lenType.typeOrigin()).isEqualTo(TypeOrigin.STUB);
+    PythonType xType = ((ExpressionStatement) fileInput.statements().statements().get(2)).expressions().get(0).typeV2();
+    assertThat(xType.unwrappedType()).isEqualTo(INT_TYPE);
+    assertThat(xType.typeSource()).isEqualTo(TypeSource.EXACT);
+
+  }
+
+  @Test
+  void type_origin_of_project_function() {
+    FileInput tree = parseWithoutSymbols(
+      "def foo() -> int: ..."
+    );
+    ProjectLevelSymbolTable projectLevelSymbolTable = new ProjectLevelSymbolTable();
+    projectLevelSymbolTable.addModule(tree, "", pythonFile("mod.py"));
+    ProjectLevelTypeTable projectLevelTypeTable = new ProjectLevelTypeTable(projectLevelSymbolTable);
+
+    var lines = """
+      from mod import foo
+      foo
+      x = foo()
+      x
+      """;
+    FileInput fileInput = inferTypes(lines, projectLevelTypeTable);
+    FunctionType fooType = (FunctionType) ((ExpressionStatement) fileInput.statements().statements().get(1)).expressions().get(0).typeV2();
+    assertThat(fooType.typeOrigin()).isEqualTo(TypeOrigin.LOCAL);
+    PythonType xType = ((ExpressionStatement) fileInput.statements().statements().get(3)).expressions().get(0).typeV2();
+    // Declared return types of local functions are currently not stored in the project level symbol table
+    assertThat(xType).isEqualTo(PythonType.UNKNOWN);
   }
 
   @Test
