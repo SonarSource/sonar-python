@@ -89,13 +89,14 @@ import static com.sonar.sslr.api.GenericTokenType.IDENTIFIER;
 public class PythonHighlighter extends PythonSubscriptionCheck {
 
   private NewHighlighting newHighlighting;
-
   private Set<Token> docStringTokens;
+  private PythonInputFile inputFile;
 
   public PythonHighlighter(SensorContext context, PythonInputFile inputFile) {
     docStringTokens = new HashSet<>();
     newHighlighting = context.newHighlighting();
     newHighlighting.onFile(inputFile.wrappedFile());
+    this.inputFile = inputFile;
   }
 
   @Override
@@ -137,8 +138,10 @@ public class PythonHighlighter extends PythonSubscriptionCheck {
 
     }
 
-    for (Trivia trivia : token.trivia()) {
-      highlight(trivia.token(), TypeOfText.COMMENT);
+    if (inputFile.kind() == PythonInputFile.Kind.PYTHON) {
+      for (Trivia trivia : token.trivia()) {
+        highlight(trivia.token(), TypeOfText.COMMENT);
+      }
     }
   }
 
