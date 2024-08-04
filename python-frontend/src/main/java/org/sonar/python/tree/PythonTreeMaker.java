@@ -273,7 +273,7 @@ public class PythonTreeMaker {
     return Collections.emptyList();
   }
 
-  static List<StatementWithSeparator> getStatements(AstNode astNode) {
+  List<StatementWithSeparator> getStatements(AstNode astNode) {
     List<AstNode> statements = astNode.getChildren(PythonGrammar.STATEMENT);
     List<StatementWithSeparator> statementsWithSeparators = new ArrayList<>();
     for (AstNode stmt : statements) {
@@ -288,7 +288,7 @@ public class PythonTreeMaker {
     return statementsWithSeparators;
   }
 
-  private static List<StatementWithSeparator> getStatementsWithSeparators(AstNode stmt) {
+  protected List<StatementWithSeparator> getStatementsWithSeparators(AstNode stmt) {
     List<StatementWithSeparator> statementsWithSeparators = new ArrayList<>();
     AstNode stmtListNode = stmt.getFirstChild(PythonGrammar.STMT_LIST);
     AstNode newLine = stmt.getFirstChild(PythonTokenType.NEWLINE);
@@ -296,11 +296,11 @@ public class PythonTreeMaker {
     int nbChildren = children.size();
     for (int i = 0; i < nbChildren; i += 2) {
       AstNode current = children.get(i);
-      AstNode separator = current.getNextSibling();
-      AstNode newLineForSeparator = null;
+      Token separator = current.getNextSibling() == null ? null : toPyToken(current.getNextSibling().getToken());
+      Token newLineForSeparator = null;
       boolean isLastStmt = nbChildren - i <= 2;
       if (isLastStmt) {
-        newLineForSeparator = newLine;
+        newLineForSeparator = newLine == null ? null : toPyToken(newLine.getToken());
       }
       statementsWithSeparators.add(new StatementWithSeparator(current.getFirstChild(), new Separators(separator, newLineForSeparator)));
     }
