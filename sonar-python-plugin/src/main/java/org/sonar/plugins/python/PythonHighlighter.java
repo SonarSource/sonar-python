@@ -28,10 +28,6 @@ import org.sonar.api.batch.sensor.highlighting.NewHighlighting;
 import org.sonar.api.batch.sensor.highlighting.TypeOfText;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.PythonVisitorContext;
-import org.sonar.python.SubscriptionVisitor;
-import org.sonar.python.TokenLocation;
-import org.sonar.python.api.PythonKeyword;
-import org.sonar.python.api.PythonTokenType;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
@@ -39,6 +35,10 @@ import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Trivia;
+import org.sonar.python.SubscriptionVisitor;
+import org.sonar.python.TokenLocation;
+import org.sonar.python.api.PythonKeyword;
+import org.sonar.python.api.PythonTokenType;
 
 import static com.sonar.sslr.api.GenericTokenType.IDENTIFIER;
 
@@ -90,13 +90,11 @@ public class PythonHighlighter extends PythonSubscriptionCheck {
 
   private NewHighlighting newHighlighting;
   private Set<Token> docStringTokens;
-  private PythonInputFile inputFile;
 
   public PythonHighlighter(SensorContext context, PythonInputFile inputFile) {
     docStringTokens = new HashSet<>();
     newHighlighting = context.newHighlighting();
     newHighlighting.onFile(inputFile.wrappedFile());
-    this.inputFile = inputFile;
   }
 
   @Override
@@ -138,10 +136,8 @@ public class PythonHighlighter extends PythonSubscriptionCheck {
 
     }
 
-    if (inputFile.kind() == PythonInputFile.Kind.PYTHON) {
-      for (Trivia trivia : token.trivia()) {
-        highlight(trivia.token(), TypeOfText.COMMENT);
-      }
+    for (Trivia trivia : token.trivia()) {
+      highlight(trivia.token(), TypeOfText.COMMENT);
     }
   }
 
