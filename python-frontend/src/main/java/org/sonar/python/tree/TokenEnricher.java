@@ -28,7 +28,7 @@ import org.sonar.python.IPythonLocation;
 
 public class TokenEnricher {
 
-  private static final Set<Character> ESCAPED_CHARS = Set.of('"', '\'', '\\', '\b', '\f', '\n', '\r', '\t');
+  private static final Set<Character> ESCAPED_CHARS = Set.of('"', '\\', '\b', '\f', '\n', '\r', '\t');
 
   private TokenEnricher() {
   }
