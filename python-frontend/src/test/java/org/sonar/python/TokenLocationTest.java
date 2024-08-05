@@ -63,16 +63,16 @@ class TokenLocationTest {
   void test_comment() {
     TokenLocation commentLocation = new TokenLocation(lex("#comment\n").get(0).trivia().get(0).token());
     assertOffsets(commentLocation, 1, 0, 1, 8);
-  }
 
+  }
 
   @Test
   void test_escaped_chars_ipython_lexer() {
-    var token = new TokenImpl(iPythonLex("\"1\\n3\"").get(0), 3, 10, 3);
-    TokenLocation tokenLocation = new TokenLocation(token); 
+    var token = new TokenImpl(iPythonLex("\"1\\n3\"").get(0), 3, 10, 3, List.of());
+    TokenLocation tokenLocation = new TokenLocation(token);
     assertOffsets(tokenLocation, 3, 10, 3, 19);
 
-    token = new TokenImpl(iPythonLex("foo").get(0), 10 , 20, 0);
+    token = new TokenImpl(iPythonLex("foo").get(0), 10, 20, 0, List.of());
     tokenLocation = new TokenLocation(token);
     assertOffsets(tokenLocation, 10, 20, 10, 23);
   }
@@ -80,8 +80,8 @@ class TokenLocationTest {
   @Test
   void test_multiline_ipython_lexer() {
     var tokens = iPythonLex("'''first line\nsecond\\t'''");
-    var token = new TokenImpl(tokens.get(0), 3, 10, 1);
-    TokenLocation tokenLocation = new TokenLocation(token); 
+    var token = new TokenImpl(tokens.get(0), 3, 10, 1, List.of());
+    TokenLocation tokenLocation = new TokenLocation(token);
     assertOffsets(tokenLocation, 3, 10, 4, 11);
   }
 
