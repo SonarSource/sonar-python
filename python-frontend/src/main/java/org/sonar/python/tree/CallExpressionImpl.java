@@ -21,6 +21,7 @@ package org.sonar.python.tree;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -205,16 +206,17 @@ public class CallExpressionImpl extends PyTree implements CallExpression, HasTyp
       return returnType;
     }
     if (calleeType instanceof UnionType unionType) {
-      PythonType result = null;
+      Set<PythonType> types = new HashSet<>();
       for (PythonType candidate : unionType.candidates()) {
         if (candidate instanceof ClassType classType) {
-          result = UnionType.or(result, classType);
-        }
-        if (candidate instanceof FunctionType functionType) {
-          result = UnionType.or(result, functionType.returnType());
+          types.add(classType);
+        } else if (candidate instanceof FunctionType functionType) {
+          types.add(functionType.returnType());
+        } else {
+          return PythonType.UNKNOWN;
         }
       }
-      return result == null ? PythonType.UNKNOWN : result;
+      return UnionType.or(types);
     }
     if (calleeType instanceof ObjectType objectType) {
       Optional<PythonType> pythonType = objectType.resolveMember("__call__");

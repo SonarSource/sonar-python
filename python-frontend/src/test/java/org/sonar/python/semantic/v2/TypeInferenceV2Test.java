@@ -1878,6 +1878,45 @@ class TypeInferenceV2Test {
   }
 
   @Test
+  void return_type_of_call_expression_inconsistent_2() {
+    FileInput fileInput = inferTypes(
+      """
+        foo()
+        """
+    );
+    CallExpression callExpression = ((CallExpression) ((ExpressionStatement) fileInput.statements().statements().get(0)).expressions().get(0));
+    CallExpression callExpressionSpy = Mockito.spy(callExpression);
+
+    // Inconsistent union type, should not happen
+    UnionType unionType = new UnionType(Set.of());
+    Name mock = Mockito.mock(Name.class);
+    Mockito.when(mock.typeV2()).thenReturn(unionType);
+    Mockito.doReturn(mock).when(callExpressionSpy).callee();
+
+    assertThat(callExpressionSpy.typeV2()).isEqualTo(PythonType.UNKNOWN);
+  }
+
+  @Test
+  void return_type_of_call_expression_inconsistent_3() {
+    FileInput fileInput = inferTypes(
+      """
+        foo()
+        """
+    );
+    CallExpression callExpression = ((CallExpression) ((ExpressionStatement) fileInput.statements().statements().get(0)).expressions().get(0));
+    CallExpression callExpressionSpy = Mockito.spy(callExpression);
+
+    // Inconsistent union type, should not happen
+    UnionType unionType = new UnionType(Set.of(INT_TYPE));
+    Name mock = Mockito.mock(Name.class);
+    Mockito.when(mock.typeV2()).thenReturn(unionType);
+    Mockito.doReturn(mock).when(callExpressionSpy).callee();
+
+    assertThat(callExpressionSpy.typeV2().unwrappedType()).isEqualTo(INT_TYPE);
+  }
+
+
+  @Test
   void imported_symbol_call_return_type() {
     assertThat(lastExpression(
       """
