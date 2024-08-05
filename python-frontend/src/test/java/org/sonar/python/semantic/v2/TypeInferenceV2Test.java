@@ -68,12 +68,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.sonar.python.PythonTestUtils.parse;
 import static org.sonar.python.types.v2.TypesTestUtils.DICT_TYPE;
+import static org.sonar.python.types.v2.TypesTestUtils.FROZENSET_TYPE;
 import static org.sonar.python.types.v2.TypesTestUtils.INT_TYPE;
 import static org.sonar.python.types.v2.TypesTestUtils.LIST_TYPE;
 import static org.sonar.python.types.v2.TypesTestUtils.NONE_TYPE;
 import static org.sonar.python.types.v2.TypesTestUtils.PROJECT_LEVEL_TYPE_TABLE;
 import static org.sonar.python.types.v2.TypesTestUtils.SET_TYPE;
 import static org.sonar.python.types.v2.TypesTestUtils.STR_TYPE;
+import static org.sonar.python.types.v2.TypesTestUtils.TUPLE_TYPE;
+import static org.sonar.python.types.v2.TypesTestUtils.TYPE_TYPE;
 
 class TypeInferenceV2Test {
 
@@ -1491,6 +1494,37 @@ class TypeInferenceV2Test {
 
     Assertions.assertThat(iType).isInstanceOf(UnknownType.class)
       .isSameAs(PythonType.UNKNOWN);
+  }
+
+  @Test
+  void typing_aliases_are_resolved_to_builtin_equivalent() {
+    var fileInput = inferTypes("""
+      import typing
+      a = typing.Tuple
+      a
+      b = typing.List
+      b
+      c = typing.Dict
+      c
+      d = typing.Set
+      d
+      e = typing.FrozenSet
+      e
+      f = typing.Type
+      f
+      """);
+    var aExpr = ((ExpressionStatement) fileInput.statements().statements().get(2)).expressions().get(0);
+    assertThat(aExpr.typeV2()).isEqualTo(TUPLE_TYPE);
+    var bExpr = ((ExpressionStatement) fileInput.statements().statements().get(4)).expressions().get(0);
+    assertThat(bExpr.typeV2()).isEqualTo(LIST_TYPE);
+    var cExpr = ((ExpressionStatement) fileInput.statements().statements().get(6)).expressions().get(0);
+    assertThat(cExpr.typeV2()).isEqualTo(DICT_TYPE);
+    var dExpr = ((ExpressionStatement) fileInput.statements().statements().get(8)).expressions().get(0);
+    assertThat(dExpr.typeV2()).isEqualTo(SET_TYPE);
+    var eExpr = ((ExpressionStatement) fileInput.statements().statements().get(10)).expressions().get(0);
+    assertThat(eExpr.typeV2()).isEqualTo(FROZENSET_TYPE);
+    var fExpr = ((ExpressionStatement) fileInput.statements().statements().get(12)).expressions().get(0);
+    assertThat(fExpr.typeV2()).isEqualTo(TYPE_TYPE);
   }
 
   @Test

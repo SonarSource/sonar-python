@@ -19,7 +19,9 @@
  */
 package org.sonar.python.semantic.v2;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.IntStream;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
@@ -31,6 +33,17 @@ public class ProjectLevelTypeTable {
   private final SymbolsModuleTypeProvider symbolsModuleTypeProvider;
   private final ModuleType rootModule;
   private final LazyTypesContext lazyTypesContext;
+  private final Map<String, Map<String, String>> aliasMembers = Map.ofEntries(
+    Map.entry("typing", Map.ofEntries(
+      Map.entry("List", "list"),
+      Map.entry("Tuple", "tuple"),
+      Map.entry("Dict", "dict"),
+      Map.entry("Set", "set"),
+      Map.entry("FrozenSet", "frozenset"),
+      Map.entry("Type", "type")
+    ))
+  );
+
 
   public ProjectLevelTypeTable(ProjectLevelSymbolTable projectLevelSymbolTable) {
     this(projectLevelSymbolTable, new TypeShed(projectLevelSymbolTable));
@@ -62,10 +75,13 @@ public class ProjectLevelTypeTable {
       if (resolvedMember.isPresent()) {
         parent = resolvedMember.get();
       } else if (parent instanceof ModuleType module) {
-        var moduleFqn = IntStream.rangeClosed(0, i)
+        var moduleFqnParts = IntStream.rangeClosed(0, i)
           .mapToObj(typeFqnParts::get)
           .toList();
-        parent = symbolsModuleTypeProvider.convertModuleType(moduleFqn, module);
+        parent = symbolsModuleTypeProvider.convertModuleType(moduleFqnParts, module);
+        if (parent instanceof ModuleType moduleType) {
+          addAliasMembers(moduleFqnParts, moduleType);
+        }
       } else {
         return PythonType.UNKNOWN;
       }
@@ -75,5 +91,19 @@ public class ProjectLevelTypeTable {
 
   public LazyTypesContext lazyTypesContext() {
     return lazyTypesContext;
+  }
+
+  public void addAliasMembers(List<String> moduleFqnParts, ModuleType moduleType) {
+    String moduleFqn = String.join(".", moduleFqnParts);
+    if (aliasMembers.containsKey(moduleFqn)) {
+      Map<String, String> aliasedTypes = aliasMembers.get(moduleFqn);
+      for (Map.Entry<String, String> alias : aliasedTypes.entrySet()) {
+        List<String> split = Arrays.stream(alias.getValue().split("\\.")).toList();
+        PythonType pythonType = getType(split);
+        if (pythonType != PythonType.UNKNOWN) {
+          moduleType.members().put(alias.getKey(), pythonType);
+        }
+      }
+    }
   }
 }
