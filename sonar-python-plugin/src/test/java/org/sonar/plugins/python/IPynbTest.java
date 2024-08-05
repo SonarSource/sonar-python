@@ -20,16 +20,37 @@
 package org.sonar.plugins.python;
 
 import org.junit.jupiter.api.Test;
+import org.sonar.api.config.internal.ConfigurationBridge;
+import org.sonar.api.config.internal.MapSettings;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.sonar.plugins.python.PythonPlugin.IPYNB_FILE_SUFFIXES_KEY;
 
 class IPynbTest {
 
   @Test
   void test() {
-    IPynb language = new IPynb();
+    IPynb language = new IPynb(new ConfigurationBridge(new MapSettings()));
     assertThat(language.getKey()).isEqualTo("ipynb");
     assertThat(language.getName()).isEqualTo("IPython Notebooks");
+    assertThat(language.getFileSuffixes()).hasSize(1).contains("ipynb");
+  }
+
+  @Test
+  void custom_file_suffixes() {
+    MapSettings settings = new MapSettings();
+    settings.setProperty(IPYNB_FILE_SUFFIXES_KEY, "ipynb,my_custom_extension");
+
+    IPynb language = new IPynb(settings.asConfig());
+    assertThat(language.getFileSuffixes()).hasSize(2).contains("my_custom_extension").contains("ipynb");
+  }
+
+  @Test
+  void empty_file_suffixes() {
+    MapSettings settings = new MapSettings();
+    settings.setProperty(IPYNB_FILE_SUFFIXES_KEY, "");
+
+    IPynb language = new IPynb(settings.asConfig());
     assertThat(language.getFileSuffixes()).hasSize(1).contains("ipynb");
   }
 }
