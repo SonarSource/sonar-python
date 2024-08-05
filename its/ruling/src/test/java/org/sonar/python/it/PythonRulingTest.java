@@ -57,7 +57,7 @@ class PythonRulingTest {
     String serverUrl = ORCHESTRATOR.getServer().getUrl();
     File profileFile = ProfileGenerator.generateProfile(serverUrl, "py", "python", parameters, Collections.emptySet());
     ORCHESTRATOR.getServer().restoreProfile(FileLocation.of(profileFile));
-    File iPythonProfileFile = ProfileGenerator.generateProfile(serverUrl, "ipynb", "python", parameters, Collections.emptySet());
+    File iPythonProfileFile = ProfileGenerator.generateProfile(serverUrl, "ipynb", "ipython", parameters, Collections.emptySet());
     ORCHESTRATOR.getServer().restoreProfile(FileLocation.of(iPythonProfileFile));
   }
 
