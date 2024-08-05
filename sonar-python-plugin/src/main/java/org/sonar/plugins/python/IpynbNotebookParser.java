@@ -205,7 +205,7 @@ public class IpynbNotebookParser {
     for (int i = 1; i < sourceLine.length(); ++i) {
       char c = arr[i];
       switch (c) {
-        case '"', '\'', '\\':
+        case '"', '\\':
           numberOfExtraChars++;
           colMap.put(i, i + colOffSet + count + numberOfExtraChars);
           break;
