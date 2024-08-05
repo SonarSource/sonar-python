@@ -19,7 +19,7 @@
  */
 package org.sonar.python;
 
-import java.util.Map;
+import java.util.List;
 
-public record IPythonLocation(int line, int column, Map<Integer, Integer> colOffset) {
+public record IPythonLocation(int line, int column, List<Integer> colOffset) {
 }

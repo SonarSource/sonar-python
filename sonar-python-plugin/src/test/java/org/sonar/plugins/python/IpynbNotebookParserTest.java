@@ -21,7 +21,7 @@ package org.sonar.plugins.python;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Map;
+import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.internal.apachecommons.lang.StringUtils;
@@ -48,23 +48,23 @@ class IpynbNotebookParserTest {
     assertThat(result.contents()).hasLineCount(27);
     assertThat(StringUtils.countMatches(result.contents(), IpynbNotebookParser.SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER))
       .isEqualTo(7);
-    assertThat(result.locationMap()).extracting(map -> map.get(1)).isEqualTo(new IPythonLocation(17, 5, Map.of(-1, 0)));
+    assertThat(result.locationMap()).extracting(map -> map.get(1)).isEqualTo(new IPythonLocation(17, 5, List.of()));
     //"    print \"not none\"\n"
-    assertThat(result.locationMap()).extracting(map -> map.get(3)).isEqualTo(new IPythonLocation(19, 5, Map.of(10, 16, 19, 26, -1, 2)));
+    assertThat(result.locationMap()).extracting(map -> map.get(3)).isEqualTo(new IPythonLocation(19, 5, List.of( 10,  19)));
     //"source": "#Some code\nprint(\"hello world\\n\")",
-    assertThat(result.locationMap()).extracting(map -> map.get(16)).isEqualTo(new IPythonLocation(64, 14, Map.of(-1, 0)));
-    assertThat(result.locationMap()).extracting(map -> map.get(17)).isEqualTo(new IPythonLocation(64, 26, Map.of(6, 33, 18, 46, 20, 49, -1, 3)));
+    assertThat(result.locationMap()).extracting(map -> map.get(16)).isEqualTo(new IPythonLocation(64, 14, List.of()));
+    assertThat(result.locationMap()).extracting(map -> map.get(17)).isEqualTo(new IPythonLocation(64, 26, List.of( 6,  18,20)));
 
     //"source": "print(\"My\\ntext\")\nprint(\"Something else\\n\")"
-    assertThat(result.locationMap()).extracting(map -> map.get(22)).isEqualTo(new IPythonLocation(83, 14, Map.of(6, 21, 9, 25, 15, 32, -1, 3)));
-    assertThat(result.locationMap()).extracting(map -> map.get(23)).isEqualTo(new IPythonLocation(83, 36, Map.of(6, 43, 21, 59, 23, 62, -1, 3)));
+    assertThat(result.locationMap()).extracting(map -> map.get(22)).isEqualTo(new IPythonLocation(83, 14, List.of(6,9,15)));
+    assertThat(result.locationMap()).extracting(map -> map.get(23)).isEqualTo(new IPythonLocation(83, 36, List.of(6, 21, 23)));
 
     //"source": "a = \"A bunch of characters \\n \\f \\r \\ \t \"\nb = None"
     assertThat(result.locationMap()).extracting(map -> map.get(25))
-      .isEqualTo(new IPythonLocation(90, 14, Map.of(4, 19, 27, 43, 30, 47, 33, 51, 36, 55, 40, 61, -1, 6)));
-    assertThat(result.locationMap()).extracting(map -> map.get(26)).isEqualTo(new IPythonLocation(90, 63, Map.of(-1, 0)));
-    // last line with the cell delimiter which contains the EOF token 
-    assertThat(result.locationMap()).extracting(map -> map.get(27)).isEqualTo(new IPythonLocation(90, 14, Map.of(-1, 0)));
+      .isEqualTo(new IPythonLocation(90, 14, List.of(4, 27, 30, 33, 36, 40)));
+    assertThat(result.locationMap()).extracting(map -> map.get(26)).isEqualTo(new IPythonLocation(90, 63, List.of()));
+    // last line with the cell delimiter which contains the EOF token
+    assertThat(result.locationMap()).extracting(map -> map.get(27)).isEqualTo(new IPythonLocation(90, 14, List.of()));
   }
 
   @Test
@@ -81,10 +81,10 @@ class IpynbNotebookParserTest {
     assertThat(result.contents()).hasLineCount(4);
     assertThat(StringUtils.countMatches(result.contents(), IpynbNotebookParser.SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER))
       .isEqualTo(1);
-    assertThat(result.locationMap()).extracting(map -> map.get(3)).isEqualTo(new IPythonLocation(11, 5, Map.of(-1, 0)));
+    assertThat(result.locationMap()).extracting(map -> map.get(3)).isEqualTo(new IPythonLocation(11, 5, List.of()));
 
-    // last line with the cell delimiter which contains the EOF token 
-    assertThat(result.locationMap()).extracting(map -> map.get(4)).isEqualTo(new IPythonLocation(11, 5, Map.of(-1, 0)));
+    // last line with the cell delimiter which contains the EOF token
+    assertThat(result.locationMap()).extracting(map -> map.get(4)).isEqualTo(new IPythonLocation(11, 5, List.of()));
   }
 
   @Test

@@ -24,8 +24,9 @@ import com.fasterxml.jackson.core.JsonLocation;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonToken;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
@@ -140,7 +141,7 @@ public class IpynbNotebookParser {
     while (jParser.nextToken() != JsonToken.END_ARRAY) {
       String sourceLine = jParser.getValueAsString();
       tokenLocation = jParser.currentTokenLocation();
-      var countEscapedChar = countEscapeCharacters(sourceLine, new LinkedHashMap<>(), tokenLocation.getColumnNr());
+      var countEscapedChar = countEscapeCharacters(sourceLine, tokenLocation.getColumnNr());
       addLineToSource(sourceLine, tokenLocation, countEscapedChar);
       lastSourceLine = sourceLine;
     }
@@ -164,13 +165,12 @@ public class IpynbNotebookParser {
     var previousExtraChars = 0;
 
     for (String line : sourceLine.lines().toList()) {
-      var countEscapedChar = countEscapeCharacters(line, new LinkedHashMap<>(), previousLen + previousExtraChars + tokenLocation.getColumnNr());
-      var currentCount = countEscapedChar.get(-1);
+      var countEscapedChar = countEscapeCharacters(line, previousLen + previousExtraChars + tokenLocation.getColumnNr());
       addLineToSource(line, new IPythonLocation(tokenLocation.getLineNr(),
         tokenLocation.getColumnNr() + previousLen + previousExtraChars, countEscapedChar));
       aggregatedSource.append("\n");
       previousLen = line.length() + 2;
-      previousExtraChars = currentCount;
+      previousExtraChars = countEscapedChar.size();
     }
     // Account for the last cell delimiter
     addDelimiterToSource(tokenLocation);
@@ -178,7 +178,7 @@ public class IpynbNotebookParser {
     return true;
   }
 
-  private void addLineToSource(String sourceLine, JsonLocation tokenLocation, Map<Integer, Integer> colOffset) {
+  private void addLineToSource(String sourceLine, JsonLocation tokenLocation, List<Integer> colOffset) {
     addLineToSource(sourceLine, new IPythonLocation(tokenLocation.getLineNr(), tokenLocation.getColumnNr(), colOffset));
   }
 
@@ -195,19 +195,20 @@ public class IpynbNotebookParser {
   }
 
   private void addDefaultLocation(int line, JsonLocation tokenLocation) {
-    locationMap.putIfAbsent(line, new IPythonLocation(tokenLocation.getLineNr(), tokenLocation.getColumnNr(), Map.of(-1, 0)));
+    locationMap.putIfAbsent(line, new IPythonLocation(tokenLocation.getLineNr(), tokenLocation.getColumnNr(), List.of()));
   }
 
-  private static Map<Integer, Integer> countEscapeCharacters(String sourceLine, Map<Integer, Integer> colMap, int colOffSet) {
+  private static List<Integer> countEscapeCharacters(String sourceLine, int colOffSet) {
     int count = 0;
     var numberOfExtraChars = 0;
     var arr = sourceLine.toCharArray();
+    List<Integer> output = new ArrayList<>();
     for (int i = 1; i < sourceLine.length(); ++i) {
       char c = arr[i];
       switch (c) {
         case '"', '\'', '\\':
           numberOfExtraChars++;
-          colMap.put(i, i + colOffSet + count + numberOfExtraChars);
+          output.add(i);
           break;
         // we never encounter \n or \r as the lines are split at these characters 
         case '\b', '\f', '\t':
@@ -218,8 +219,7 @@ public class IpynbNotebookParser {
           break;
       }
     }
-    colMap.put(-1, numberOfExtraChars);
-    return colMap;
+    return output;
   }
 
 }

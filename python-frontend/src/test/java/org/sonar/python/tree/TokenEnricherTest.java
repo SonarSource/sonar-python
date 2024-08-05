@@ -21,7 +21,6 @@ package org.sonar.python.tree;
 
 import com.sonar.sslr.api.Token;
 import com.sonar.sslr.impl.Lexer;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.BeforeAll;
@@ -78,8 +77,8 @@ class TokenEnricherTest {
     //when the mapping is not present for the current line
     var code = "a = 1\n\nb=3";
     var offsetMap = Map.of(
-      1, new IPythonLocation(200, 23, Map.of()),
-      2, new IPythonLocation(201, 23, Map.of()));
+      1, new IPythonLocation(200, 23, List.of()),
+      2, new IPythonLocation(201, 23, List.of()));
     var originalTokens = lexer.lex(code);
     Throwable throwable = assertThrows(IllegalStateException.class, () -> TokenEnricher.enrichTokens(originalTokens, offsetMap));
     assertThat(throwable.getMessage()).isEqualTo("No IPythonLocation found for line 3");
@@ -89,9 +88,7 @@ class TokenEnricherTest {
   void shouldProvideOffsetForEscapeChar() {
     var code = "a = \"1\"";
     var expectedTokens = lexer.lex(code);
-    var escapedChars = new LinkedHashMap<Integer, Integer>();
-    escapedChars.put(4, 305);
-    escapedChars.put(6, 308);
+    var escapedChars = List.of(305, 305);
     var tokens = TokenEnricher.enrichTokens(expectedTokens, Map.of(1, new IPythonLocation(100, 300, escapedChars)));
     var stringToken = tokens.get(2);
     assertThat(stringToken.line()).isEqualTo(100);
@@ -103,12 +100,8 @@ class TokenEnricherTest {
   void shouldComputeColCorrectly() {
     var code = "a = f\"{b} \\n test\" + \"1\"";
     var expectedTokens = lexer.lex(code);
-    var escapedChars = new LinkedHashMap<Integer, Integer>();
-    escapedChars.put(5, 305);
-    escapedChars.put(10, 311);
-    escapedChars.put(17, 319);
-    escapedChars.put(21, 324);
-    escapedChars.put(23, 327);
+    // {Integer@2826} 28 -> {IPythonLocation@2827} "IPythonLocation[line=98, column=14, colOffset=[20, 26, 34, 39, 42]]"
+    var escapedChars = List.of(5, 10, 17, 21, 23);
     var tokens = TokenEnricher.enrichTokens(expectedTokens, Map.of(1, new IPythonLocation(100, 300, escapedChars)));
     var stringToken = tokens.get(tokens.size() - 2);
     assertThat(stringToken.line()).isEqualTo(100);

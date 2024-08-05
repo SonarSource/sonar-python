@@ -42,8 +42,8 @@ public class TokenEnricher {
       if (location == null) {
         throw new IllegalStateException(String.format("No IPythonLocation found for line %s", token.getLine()));
       }
-      Map<Integer, Integer> escapeCharsMap = location.colOffset();
-      int startCol = computeColWithEscapes(token.getColumn(), escapeCharsMap, location.column());
+      var escapeCharsList = location.colOffset();
+      int startCol = computeColWithEscapes(token.getColumn(), escapeCharsList, location.column());
       int escapedCharInToken = 0;
       for (int i = 0; i < token.getValue().length(); i++) {
         if (ESCAPED_CHARS.contains(token.getValue().charAt(i))) {
@@ -55,8 +55,8 @@ public class TokenEnricher {
     return new TokenImpl(token);
   }
 
-  private static int computeColWithEscapes(int currentCol, Map<Integer, Integer> escapes, int offsetColumn) {
-    return (int) escapes.keySet().stream().filter(k -> k > 0 && k < currentCol).count() + offsetColumn + currentCol;
+  private static int computeColWithEscapes(int currentCol, List<Integer> escapes, int offsetColumn) {
+    return ((int) escapes.stream().filter(k -> k < currentCol).count()) + offsetColumn + currentCol;
   }
 
 }
