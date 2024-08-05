@@ -23,6 +23,7 @@ import com.sonar.sslr.api.Token;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import org.sonar.plugins.python.api.tree.Trivia;
 import org.sonar.python.IPythonLocation;
 
 public class TokenEnricher {
@@ -44,15 +45,39 @@ public class TokenEnricher {
       }
       Map<Integer, Integer> escapeCharsMap = location.colOffset();
       int startCol = computeColWithEscapes(token.getColumn(), escapeCharsMap, location.column());
-      int escapedCharInToken = 0;
-      for (int i = 0; i < token.getValue().length(); i++) {
-        if (ESCAPED_CHARS.contains(token.getValue().charAt(i))) {
-          escapedCharInToken++;
-        }
-      }
-      return new TokenImpl(token, location.line(), startCol, escapedCharInToken);
+      int escapedCharInToken = computeEscapeCharsInToken(token.getValue());
+      List<Trivia> trivia = token.getTrivia().stream()
+        .map(t -> computeTriviaLocation(t, location.line(), startCol, token.getLine(), offsetMap))
+        .toList();
+
+      return new TokenImpl(token, location.line(), startCol, escapedCharInToken, trivia);
     }
     return new TokenImpl(token);
+  }
+
+  private static Trivia computeTriviaLocation(com.sonar.sslr.api.Trivia trivia, int parentLine, int parentCol, int parentPythonLine, Map<Integer, IPythonLocation> offsetMap) {
+    int escapedCharInToken = computeEscapeCharsInToken(trivia.getToken().getValue());
+    var line = parentLine;
+    var col = parentCol - escapedCharInToken - trivia.getToken().getValue().length();
+    if (parentPythonLine != trivia.getToken().getLine()) {
+      IPythonLocation location = offsetMap.get(trivia.getToken().getLine());
+      line = location.line();
+      Map<Integer, Integer> escapeCharsMap = location.colOffset();
+      col = computeColWithEscapes(trivia.getToken().getColumn(), escapeCharsMap, location.column());
+    }
+    return new TriviaImpl(new TokenImpl(trivia.getToken(), line, col,
+      escapedCharInToken, List.of()));
+  }
+
+  private static int computeEscapeCharsInToken(String tokenValue) {
+    int escapedCharInToken = 0;
+    for (int i = 0; i < tokenValue.length(); i++) {
+      if (ESCAPED_CHARS.contains(tokenValue.charAt(i))) {
+        escapedCharInToken++;
+      }
+    }
+    return escapedCharInToken;
+
   }
 
   private static int computeColWithEscapes(int currentCol, Map<Integer, Integer> escapes, int offsetColumn) {

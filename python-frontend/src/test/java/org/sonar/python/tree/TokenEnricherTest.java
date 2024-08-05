@@ -120,4 +120,41 @@ class TokenEnricherTest {
     assertThat(eofToken.column()).isEqualTo(329);
     assertThat(eofToken.includedEscapeChars()).isZero();
   }
+
+  @Test
+  void shouldComputeColCorrectlyForTrivia() {
+    var code = "a = 3 # comment";
+    var expectedTokens = lexer.lex(code);
+    var tokens = TokenEnricher.enrichTokens(expectedTokens, Map.of(1, new IPythonLocation(100, 300, Map.of(-1, 0))));
+    var trivias = tokens.get(tokens.size() - 1).trivia();
+    assertThat(trivias).hasSize(1);
+    assertThat(trivias.get(0).token().line()).isEqualTo(100);
+    assertThat(trivias.get(0).token().column()).isEqualTo(306);
+    assertThat(trivias.get(0).token().includedEscapeChars()).isZero();
+  }
+
+  @Test
+  void shouldComputeColCorrectlyForTriviaWithEscapeChar() {
+    var code = "a = 3 # test\\n";
+    var expectedTokens = lexer.lex(code);
+    var tokens = TokenEnricher.enrichTokens(expectedTokens, Map.of(1, new IPythonLocation(100, 300, Map.of(-1, 1, 12, 13))));
+    var trivias = tokens.get(tokens.size() - 1).trivia();
+    assertThat(trivias).hasSize(1);
+    assertThat(trivias.get(0).token().line()).isEqualTo(100);
+    assertThat(trivias.get(0).token().column()).isEqualTo(306);
+    assertThat(trivias.get(0).token().includedEscapeChars()).isEqualTo(1);
+  }
+
+  @Test
+  void shouldComputeColCorrectlyForTriviaOnDifferentLine() {
+    var code = "# comment\na = 3";
+    var expectedTokens = lexer.lex(code);
+    var tokens = TokenEnricher.enrichTokens(expectedTokens, Map.of(1, new IPythonLocation(100, 300, Map.of(-1, 0)), 2, new IPythonLocation(101, 300, Map.of(-1, 0))));
+    assertThat(tokens.get(0).line()).isEqualTo(101);
+    var trivias = tokens.get(0).trivia();
+    assertThat(trivias).hasSize(1);
+    assertThat(trivias.get(0).token().line()).isEqualTo(100);
+    assertThat(trivias.get(0).token().column()).isEqualTo(300);
+    assertThat(trivias.get(0).token().includedEscapeChars()).isZero();
+  }
 }
