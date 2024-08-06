@@ -212,9 +212,9 @@ public class ConfusingTypeCheckingCheck extends PythonSubscriptionCheck {
     }
 
     @Override
-    protected boolean isNonCallableType(SubscriptionContext ctx, PythonType calleeType) {
+    protected boolean isCallMemberMissing(SubscriptionContext ctx, PythonType calleeType) {
       var isNotTypingCoroutine = ctx.typeChecker().typeCheckBuilder().isInstanceOf("typing.Coroutine").check(calleeType) == TriBool.FALSE;
-      return super.isNonCallableType(ctx, calleeType) && isNotTypingCoroutine;
+      return super.isCallMemberMissing(ctx, calleeType) && isNotTypingCoroutine;
     }
   }
 

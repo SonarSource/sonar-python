@@ -27,6 +27,7 @@ import org.sonar.python.types.v2.PythonType;
 import org.sonar.python.types.v2.TriBool;
 import org.sonar.python.types.v2.TypeCheckBuilder;
 import org.sonar.python.types.v2.TypeSource;
+import org.sonar.python.types.v2.UnionType;
 
 class TypeCheckerBuilderTest {
 
@@ -48,15 +49,59 @@ class TypeCheckerBuilderTest {
     var intClassType = table.getType("int");
     var strClassType = table.getType("str");
 
+    var aClassType = new ClassTypeBuilder()
+      .withName("A")
+      .withSuperClasses(intClassType)
+      .build();
+
+    var bClassType = new ClassTypeBuilder()
+      .withName("B")
+      .withSuperClasses(strClassType)
+      .build();
+
+    var cClassType = new ClassTypeBuilder()
+      .withName("C")
+      .withSuperClasses(PythonType.UNKNOWN, intClassType)
+      .build();
+
+    var dClassType = new ClassTypeBuilder()
+      .withName("D")
+      .withSuperClasses(PythonType.UNKNOWN, strClassType)
+      .build();
+
+    var eClassType = new ClassTypeBuilder()
+      .withName("E")
+      .withSuperClasses(aClassType, intClassType)
+      .build();
 
     var intObjectType = new ObjectType(intClassType);
     var strObjectType = new ObjectType(strClassType);
+    var aObject = new ObjectType(aClassType);
+    var bObject = new ObjectType(bClassType);
+    var cObject = new ObjectType(cClassType);
+    var dObject = new ObjectType(dClassType);
+    var eObject = new ObjectType(UnionType.or(intClassType, strClassType));
+    var fObject = UnionType.or(new ObjectType(intClassType), new ObjectType(strClassType));
+    var gObject = new ObjectType(UnionType.or(intClassType, aClassType));
+    var hObject = UnionType.or(new ObjectType(intClassType), new ObjectType(aClassType));
+    var iObject = new ObjectType(eClassType);
+
     Assertions.assertThat(builder.check(intObjectType))
       .isEqualTo(TriBool.TRUE);
     Assertions.assertThat(builder.check(strObjectType))
       .isEqualTo(TriBool.FALSE);
     Assertions.assertThat(builder.check(PythonType.UNKNOWN))
       .isEqualTo(TriBool.UNKNOWN);
+
+    Assertions.assertThat(builder.check(aObject)).isEqualTo(TriBool.TRUE);
+    Assertions.assertThat(builder.check(bObject)).isEqualTo(TriBool.FALSE);
+    Assertions.assertThat(builder.check(cObject)).isEqualTo(TriBool.TRUE);
+    Assertions.assertThat(builder.check(dObject)).isEqualTo(TriBool.UNKNOWN);
+    Assertions.assertThat(builder.check(eObject)).isEqualTo(TriBool.UNKNOWN);
+    Assertions.assertThat(builder.check(fObject)).isEqualTo(TriBool.UNKNOWN);
+    Assertions.assertThat(builder.check(gObject)).isEqualTo(TriBool.TRUE);
+    Assertions.assertThat(builder.check(hObject)).isEqualTo(TriBool.TRUE);
+    Assertions.assertThat(builder.check(iObject)).isEqualTo(TriBool.TRUE);
   }
 
 }

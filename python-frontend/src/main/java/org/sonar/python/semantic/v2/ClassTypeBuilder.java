@@ -20,6 +20,7 @@
 package org.sonar.python.semantic.v2;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -63,6 +64,11 @@ public class ClassTypeBuilder implements TypeBuilder<ClassType> {
 
   public List<PythonType> superClasses() {
     return superClasses;
+  }
+
+  public ClassTypeBuilder withSuperClasses(PythonType... types) {
+    superClasses.addAll(Arrays.asList(types));
+    return this;
   }
 
   public List<PythonType> metaClasses() {

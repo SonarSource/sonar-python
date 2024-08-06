@@ -20,8 +20,9 @@
 package org.sonar.python.types.v2;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Set;
 import org.sonar.python.semantic.v2.ProjectLevelTypeTable;
 
 public class TypeCheckBuilder {
@@ -145,11 +146,14 @@ public class TypeCheckBuilder {
       if (expectedType instanceof ClassType expectedClassType) {
         if (pythonType instanceof ObjectType objectType) {
           if (objectType.type() instanceof ClassType classType) {
-            return isClassInheritedFrom(classType, expectedClassType) ? TriBool.TRUE : TriBool.FALSE;
+            // when the checking type is an ObjectType of a ClassType
+            return isClassInheritedFrom(classType, expectedClassType);
           } else if (objectType.type() instanceof UnionType unionType) {
+            // when the checking type is an ObjectType of a UnionType
             return isObjectOfUnionTypeInstanceOf(expectedClassType, unionType);
           }
         } else if (pythonType instanceof UnionType unionType) {
+          // when the checking type is a UnionType
           return isUnionTypeInstanceOf(unionType);
         }
       }
@@ -157,19 +161,16 @@ public class TypeCheckBuilder {
     }
 
     private static TriBool isObjectOfUnionTypeInstanceOf(ClassType expectedClassType, UnionType unionType) {
-      var candidatesInheritanceMatches = unionType.candidates()
+      var results = unionType.candidates()
         .stream()
-        .filter(ClassType.class::isInstance)
-        .map(ClassType.class::cast)
         .map(classType -> isClassInheritedFrom(classType, expectedClassType))
-        .collect(Collectors.toSet());
+        .distinct()
+        .toList();
 
-      if (candidatesInheritanceMatches.size() > 1) {
+      if (results.size() > 1) {
         return TriBool.UNKNOWN;
-      } else if (candidatesInheritanceMatches.contains(false)) {
-        return TriBool.FALSE;
       } else {
-        return TriBool.TRUE;
+        return results.get(0);
       }
     }
 
@@ -177,17 +178,54 @@ public class TypeCheckBuilder {
       var candidatesResults = unionType.candidates()
         .stream()
         .map(this::test)
-        .collect(Collectors.toSet());
+        .distinct()
+        .toList();
 
-      if (candidatesResults.size() > 1) {
+      if (candidatesResults.size() != 1) {
         return TriBool.UNKNOWN;
       } else {
-        return candidatesResults.stream().findFirst().orElse(TriBool.UNKNOWN);
+        return candidatesResults.get(0);
       }
     }
 
-    private static boolean isClassInheritedFrom(ClassType classType, ClassType expectedClassType) {
-      return classType.equals(expectedClassType) || classType.isASubClassFrom(expectedClassType);
+    private static TriBool isClassInheritedFrom(PythonType classType, ClassType expectedClassType) {
+      if (classType == expectedClassType) {
+        return TriBool.TRUE;
+      }
+
+      var types = collectTypes(classType);
+
+      if (types.contains(expectedClassType)) {
+        return TriBool.TRUE;
+      } else if (types.contains(PythonType.UNKNOWN)) {
+        return TriBool.UNKNOWN;
+      } else {
+        return TriBool.FALSE;
+      }
+    }
+
+    private static Set<PythonType> collectTypes(PythonType type) {
+      var result = new HashSet<PythonType>();
+      collectTypes(type, result);
+      return result;
+    }
+
+    private static void collectTypes(PythonType type, Set<PythonType> result) {
+      result.add(type);
+      if (type instanceof ClassType classType) {
+        for (var superType : classType.superClasses()) {
+          if (result.contains(superType)) {
+            continue;
+          }
+          if (superType instanceof ClassType superClassType) {
+            collectTypes(superClassType, result);
+          } else {
+            result.add(superType);
+          }
+        }
+      }
     }
   }
+
+
 }

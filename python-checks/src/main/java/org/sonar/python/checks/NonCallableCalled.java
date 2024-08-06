@@ -36,7 +36,7 @@ public abstract class NonCallableCalled extends PythonSubscriptionCheck {
       var callExpression = (CallExpression) ctx.syntaxNode();
       var callee = callExpression.callee();
       var calleeType = callee.typeV2();
-      if (isNonCallableType(ctx, calleeType)) {
+      if (isCallMemberMissing(ctx, calleeType)) {
         String name = nameFromExpression(callee);
         var preciseIssue = ctx.addIssue(callee, message(calleeType, name));
         calleeType.definitionLocation()
@@ -45,7 +45,7 @@ public abstract class NonCallableCalled extends PythonSubscriptionCheck {
     });
   }
 
-  protected boolean isNonCallableType(SubscriptionContext ctx, PythonType calleeType) {
+  protected boolean isCallMemberMissing(SubscriptionContext ctx, PythonType calleeType) {
     var typeSourceMatches = isExpectedTypeSource(ctx, calleeType);
     var isCallMemberMissed = ctx.typeChecker().typeCheckBuilder().hasMember("__call__").check(calleeType) == TriBool.FALSE;
     return typeSourceMatches
