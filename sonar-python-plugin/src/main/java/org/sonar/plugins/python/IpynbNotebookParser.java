@@ -169,8 +169,8 @@ public class IpynbNotebookParser {
       addLineToSource(line, new IPythonLocation(tokenLocation.getLineNr(),
         tokenLocation.getColumnNr() + previousLen + previousExtraChars, countEscapedChar));
       aggregatedSource.append("\n");
-      previousLen = line.length() + 2;
-      previousExtraChars = currentCount;
+      previousLen = previousLen + line.length() + 2;
+      previousExtraChars = previousExtraChars + currentCount;
     }
     // Account for the last cell delimiter
     addDelimiterToSource(tokenLocation);
