@@ -19,29 +19,37 @@
  */
 package org.sonar.python.semantic.v2;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import org.sonar.python.types.v2.LazyType;
 import org.sonar.python.types.v2.PythonType;
 
 public class LazyTypesContext {
   private final Map<String, LazyType> lazyTypes;
+  private final ProjectLevelTypeTable projectLevelTypeTable;
 
-  public LazyTypesContext() {
+  public LazyTypesContext(ProjectLevelTypeTable projectLevelTypeTable) {
     this.lazyTypes = new HashMap<>();
+    this.projectLevelTypeTable = projectLevelTypeTable;
   }
 
-  public LazyType getOrCreateLazyType(String fullyQualifiedName, SymbolsModuleTypeProvider symbolsModuleTypeProvider) {
+  public LazyType getOrCreateLazyType(String fullyQualifiedName) {
     if (lazyTypes.containsKey(fullyQualifiedName)) {
       return lazyTypes.get(fullyQualifiedName);
     }
-    var lazyType = new LazyType(fullyQualifiedName, symbolsModuleTypeProvider);
+    var lazyType = new LazyType(fullyQualifiedName, this);
     lazyTypes.put(fullyQualifiedName, lazyType);
     return lazyType;
   }
 
-  public void resolveLazyType(LazyType lazyType, PythonType pythonType) {
-    lazyType.resolve(pythonType);
+  public PythonType resolveLazyType(LazyType lazyType) {
+    String fullyQualifiedName = lazyType.fullyQualifiedName();
+    List<String> list = Arrays.stream(fullyQualifiedName.split("\\.")).toList();
+    PythonType resolved = projectLevelTypeTable.getType(list);
+    lazyType.resolve(resolved);
     lazyTypes.remove(lazyType.fullyQualifiedName());
+    return resolved;
   }
 }

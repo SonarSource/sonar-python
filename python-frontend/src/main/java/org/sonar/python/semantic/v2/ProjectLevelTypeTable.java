@@ -20,32 +20,30 @@
 package org.sonar.python.semantic.v2;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.IntStream;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.types.v2.ModuleType;
 import org.sonar.python.types.v2.PythonType;
-import org.sonar.python.types.v2.TriBool;
 
 public class ProjectLevelTypeTable {
 
   private final SymbolsModuleTypeProvider symbolsModuleTypeProvider;
   private final ModuleType rootModule;
+  private final LazyTypesContext lazyTypesContext;
 
   public ProjectLevelTypeTable(ProjectLevelSymbolTable projectLevelSymbolTable) {
     this(projectLevelSymbolTable, new TypeShed(projectLevelSymbolTable));
   }
 
   public ProjectLevelTypeTable(ProjectLevelSymbolTable projectLevelSymbolTable, TypeShed typeShed) {
-    this.symbolsModuleTypeProvider = new SymbolsModuleTypeProvider(projectLevelSymbolTable, typeShed);
+    this.lazyTypesContext = new LazyTypesContext(this);
+    this.symbolsModuleTypeProvider = new SymbolsModuleTypeProvider(projectLevelSymbolTable, typeShed, lazyTypesContext);
     this.rootModule = this.symbolsModuleTypeProvider.createBuiltinModule();
   }
 
-  public ModuleType getModule(String... moduleName) {
-    return getModule(List.of(moduleName));
-  }
-
-  public ModuleType getModule(List<String> moduleNameParts) {
-    return symbolsModuleTypeProvider.getModuleForFqn(moduleNameParts);
+  public ModuleType getBuiltinsModule() {
+    return rootModule;
   }
 
   public PythonType getType(String typeFqn) {
@@ -60,17 +58,22 @@ public class ProjectLevelTypeTable {
     var parent = (PythonType) rootModule;
     for (int i = 0; i < typeFqnParts.size(); i++) {
       var part = typeFqnParts.get(i);
-      if (parent.hasMember(part) == TriBool.TRUE) {
-        parent = parent.resolveMember(part).orElse(PythonType.UNKNOWN);
+      Optional<PythonType> resolvedMember = parent.resolveMember(part);
+      if (resolvedMember.isPresent()) {
+        parent = resolvedMember.get();
       } else if (parent instanceof ModuleType module) {
         var moduleFqn = IntStream.rangeClosed(0, i)
           .mapToObj(typeFqnParts::get)
           .toList();
-        parent = symbolsModuleTypeProvider.createModuleType(moduleFqn, module);
+        parent = symbolsModuleTypeProvider.convertModuleType(moduleFqn, module);
       } else {
         return PythonType.UNKNOWN;
       }
     }
     return parent;
+  }
+
+  public LazyTypesContext lazyTypesContext() {
+    return lazyTypesContext;
   }
 }

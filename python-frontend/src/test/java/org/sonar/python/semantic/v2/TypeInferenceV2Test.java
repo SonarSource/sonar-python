@@ -130,14 +130,10 @@ class TypeInferenceV2Test {
     var importedNames = importName.modules().get(0).dottedName().names();
     assertThat(importedNames.get(0))
       .extracting(Expression::typeV2)
-      .isInstanceOf(ModuleType.class)
-      .extracting(PythonType::name)
-      .isEqualTo("something");
+      .isEqualTo(PythonType.UNKNOWN);
     assertThat(importedNames.get(1))
       .extracting(Expression::typeV2)
-      .isInstanceOf(ModuleType.class)
-      .extracting(PythonType::name)
-      .isEqualTo("unknown");
+      .isEqualTo(PythonType.UNKNOWN);
   }
 
   @Test
@@ -1869,13 +1865,11 @@ class TypeInferenceV2Test {
   void resolveIncorrectLazyType() {
     ProjectLevelSymbolTable empty = ProjectLevelSymbolTable.empty();
     TypeShed typeShed = new TypeShed(empty);
-
-    SymbolsModuleTypeProvider symbolsModuleTypeProvider = new SymbolsModuleTypeProvider(empty, typeShed);
-    ModuleType builtinModule = symbolsModuleTypeProvider.createBuiltinModule();
-    symbolsModuleTypeProvider.createModuleType(List.of("typing"), builtinModule);
-    assertThat(symbolsModuleTypeProvider.resolveLazyType(new LazyType("unknown", symbolsModuleTypeProvider))).isEqualTo(PythonType.UNKNOWN);
-    assertThat(symbolsModuleTypeProvider.resolveLazyType(new LazyType("typing.unknown", symbolsModuleTypeProvider))).isEqualTo(PythonType.UNKNOWN);
-    assertThat(symbolsModuleTypeProvider.resolveLazyType(new LazyType("unrelated.unknown", symbolsModuleTypeProvider))).isEqualTo(PythonType.UNKNOWN);
+    ProjectLevelTypeTable projectLevelTypeTable = new ProjectLevelTypeTable(empty, typeShed);
+    LazyTypesContext lazyTypesContext = projectLevelTypeTable.lazyTypesContext();
+    assertThat(lazyTypesContext.resolveLazyType(new LazyType("unknown", lazyTypesContext))).isEqualTo(PythonType.UNKNOWN);
+    assertThat(lazyTypesContext.resolveLazyType(new LazyType("unrelated.unknown", lazyTypesContext))).isEqualTo(PythonType.UNKNOWN);
+    assertThat(lazyTypesContext.resolveLazyType(new LazyType("typing.unknown", lazyTypesContext))).isEqualTo(PythonType.UNKNOWN);
   }
 
   @Test
@@ -1883,9 +1877,11 @@ class TypeInferenceV2Test {
     ProjectLevelSymbolTable empty = ProjectLevelSymbolTable.empty();
     TypeShed typeShed = new TypeShed(empty);
 
-    SymbolsModuleTypeProvider symbolsModuleTypeProvider = new SymbolsModuleTypeProvider(empty, typeShed);
+    ProjectLevelTypeTable projectLevelTypeTable = new ProjectLevelTypeTable(empty, typeShed);
+    LazyTypesContext lazyTypesContext = projectLevelTypeTable.lazyTypesContext();
+    SymbolsModuleTypeProvider symbolsModuleTypeProvider = new SymbolsModuleTypeProvider(empty, typeShed, lazyTypesContext);
     ModuleType builtinModule = symbolsModuleTypeProvider.createBuiltinModule();
-    symbolsModuleTypeProvider.createModuleType(List.of("typing"), builtinModule);
+    symbolsModuleTypeProvider.convertModuleType(List.of("typing"), builtinModule);
 
     ClassSymbol symbol = Mockito.mock(ClassSymbolImpl.class);
     Mockito.when(symbol.kind()).thenReturn(Symbol.Kind.OTHER);

@@ -22,46 +22,45 @@ package org.sonar.python.types.v2;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
-import org.sonar.python.semantic.v2.SymbolsModuleTypeProvider;
+import org.sonar.python.semantic.v2.LazyTypesContext;
+import org.sonar.python.semantic.v2.ProjectLevelTypeTable;
 import org.sonar.python.semantic.v2.TypeShed;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.when;
 import static org.sonar.python.types.v2.TypesTestUtils.BOOL_TYPE;
 import static org.sonar.python.types.v2.TypesTestUtils.INT_TYPE;
-import static org.sonar.python.types.v2.TypesTestUtils.PROJECT_LEVEL_TYPE_TABLE;
 
 class LazyTypeTest {
 
   @Test
-  void lazyTypeResolvedWhenInteractedWith() {
-    SymbolsModuleTypeProvider symbolsModuleTypeProvider = Mockito.mock(SymbolsModuleTypeProvider.class);
-    when(symbolsModuleTypeProvider.resolveLazyType(Mockito.any())).thenReturn(INT_TYPE);
-    LazyType lazyType = new LazyType("random", symbolsModuleTypeProvider);
+  void lazyTypeThrowExceptionsWhenInteractedWith() {
+    LazyTypesContext lazyTypesContext = Mockito.mock(LazyTypesContext.class);
+    when(lazyTypesContext.resolveLazyType(Mockito.any())).thenReturn(INT_TYPE);
+    LazyType lazyType = new LazyType("random", lazyTypesContext);
     assertThat(lazyType.resolve()).isEqualTo(INT_TYPE);
-    assertThat(lazyType.unwrappedType()).isEqualTo(INT_TYPE);
-    assertThat(lazyType.hasMember("__bool__")).isEqualTo(TriBool.UNKNOWN);
-    assertThat(new ObjectType(lazyType, TypeSource.EXACT).hasMember("__bool__")).isEqualTo(TriBool.TRUE);
-    assertThat(lazyType.name()).isEqualTo(INT_TYPE.name());
-    assertThat(lazyType.instanceDisplayName()).isEqualTo(INT_TYPE.instanceDisplayName());
-    assertThat(lazyType.resolveMember("__bool__")).isEqualTo(INT_TYPE.resolveMember("__bool__"));
-    assertThat(lazyType.isCompatibleWith(BOOL_TYPE)).isEqualTo(INT_TYPE.isCompatibleWith(BOOL_TYPE));
-    assertThat(lazyType.key()).isEqualTo(INT_TYPE.key());
-    assertThat(lazyType.definitionLocation()).isEqualTo(INT_TYPE.definitionLocation());
-    assertThat(lazyType.typeSource()).isEqualTo(INT_TYPE.typeSource());
-    assertThat(lazyType.displayName()).contains("type");
-
-    TypeCheckBuilder typeCheckBuilder = new TypeCheckBuilder(PROJECT_LEVEL_TYPE_TABLE);
-    assertThat(typeCheckBuilder.isBuiltinWithName("int").check(lazyType)).isEqualTo(TriBool.TRUE);
-    assertThat(TypeUtils.resolved(lazyType)).isEqualTo(INT_TYPE);
+    assertThatThrownBy(lazyType::unwrappedType).isInstanceOf(IllegalStateException.class).hasMessage("Lazy types should not be interacted with.");
+    assertThatThrownBy(() -> lazyType.hasMember("__bool__")).isInstanceOf(IllegalStateException.class).hasMessage("Lazy types should not be interacted with.");
+    ObjectType objectContainingLazyType = new ObjectType(lazyType, TypeSource.EXACT);
+    assertThatThrownBy(() -> objectContainingLazyType.hasMember("__bool__")).isInstanceOf(IllegalStateException.class).hasMessage("Lazy types should not be interacted with.");
+    assertThatThrownBy(lazyType::name).isInstanceOf(IllegalStateException.class).hasMessage("Lazy types should not be interacted with.");
+    assertThatThrownBy(lazyType::instanceDisplayName).isInstanceOf(IllegalStateException.class).hasMessage("Lazy types should not be interacted with.");
+    assertThatThrownBy(() -> lazyType.resolveMember("__bool__")).isInstanceOf(IllegalStateException.class).hasMessage("Lazy types should not be interacted with.");
+    assertThatThrownBy(() -> lazyType.isCompatibleWith(BOOL_TYPE)).isInstanceOf(IllegalStateException.class).hasMessage("Lazy types should not be interacted with.");
+    assertThatThrownBy(lazyType::key).isInstanceOf(IllegalStateException.class).hasMessage("Lazy types should not be interacted with.");
+    assertThatThrownBy(lazyType::definitionLocation).isInstanceOf(IllegalStateException.class).hasMessage("Lazy types should not be interacted with.");
+    assertThatThrownBy(lazyType::typeSource).isInstanceOf(IllegalStateException.class).hasMessage("Lazy types should not be interacted with.");
+    assertThatThrownBy(lazyType::displayName).isInstanceOf(IllegalStateException.class).hasMessage("Lazy types should not be interacted with.");
   }
 
   @Test
   void resolutionOfLazyTypeOfMethod() {
     ProjectLevelSymbolTable projectLevelSymbolTable = ProjectLevelSymbolTable.empty();
     TypeShed typeShed = new TypeShed(projectLevelSymbolTable);
-    SymbolsModuleTypeProvider symbolsModuleTypeProvider = new SymbolsModuleTypeProvider(projectLevelSymbolTable, typeShed);
-    LazyType lazyType = new LazyType("calendar.Calendar.iterweekdays", symbolsModuleTypeProvider);
+    ProjectLevelTypeTable projectLevelTypeTable = new ProjectLevelTypeTable(projectLevelSymbolTable, typeShed);
+    LazyTypesContext lazyTypesContext = projectLevelTypeTable.lazyTypesContext();
+    LazyType lazyType = new LazyType("calendar.Calendar.iterweekdays", lazyTypesContext);
     PythonType pythonType = lazyType.resolve();
     assertThat(pythonType).isInstanceOf(FunctionType.class);
     FunctionType functionType = (FunctionType) pythonType;

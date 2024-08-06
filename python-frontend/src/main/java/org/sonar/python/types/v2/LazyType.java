@@ -24,17 +24,18 @@ import java.util.Optional;
 import java.util.Queue;
 import java.util.function.Consumer;
 import org.sonar.plugins.python.api.LocationInFile;
-import org.sonar.python.semantic.v2.SymbolsModuleTypeProvider;
+import org.sonar.python.semantic.v2.LazyTypesContext;
 
 public class LazyType implements PythonType {
 
   String fullyQualifiedName;
   private final Queue<Consumer<PythonType>> consumers;
-  private final SymbolsModuleTypeProvider symbolsModuleTypeProvider;
+  private final LazyTypesContext lazyTypesContext;
+  private static final String INTERACTION_MESSAGE = "Lazy types should not be interacted with.";
 
-  public LazyType(String fullyQualifiedName, SymbolsModuleTypeProvider symbolsModuleTypeProvider) {
+  public LazyType(String fullyQualifiedName, LazyTypesContext lazyTypesContext) {
     this.fullyQualifiedName = fullyQualifiedName;
-    this.symbolsModuleTypeProvider = symbolsModuleTypeProvider;
+    this.lazyTypesContext = lazyTypesContext;
     consumers = new ArrayDeque<>();
   }
 
@@ -54,7 +55,7 @@ public class LazyType implements PythonType {
   }
 
   public PythonType resolve() {
-    PythonType resolvedType = symbolsModuleTypeProvider.resolveLazyType(this);
+    PythonType resolvedType = lazyTypesContext.resolveLazyType(this);
     consumers.forEach(c -> c.accept(resolvedType));
     consumers.clear();
     return resolvedType;
@@ -62,51 +63,51 @@ public class LazyType implements PythonType {
 
   @Override
   public PythonType unwrappedType() {
-    return this.resolve().unwrappedType();
+    throw new IllegalStateException(INTERACTION_MESSAGE);
   }
 
   @Override
   public String name() {
-    return this.resolve().name();
+    throw new IllegalStateException(INTERACTION_MESSAGE);
   }
 
   @Override
   public Optional<String> displayName() {
-    return this.resolve().displayName();
+    throw new IllegalStateException(INTERACTION_MESSAGE);
   }
 
   @Override
   public Optional<String> instanceDisplayName() {
-    return this.resolve().instanceDisplayName();
+    throw new IllegalStateException(INTERACTION_MESSAGE);
   }
 
   @Override
   public boolean isCompatibleWith(PythonType another) {
-    return this.resolve().isCompatibleWith(another);
+    throw new IllegalStateException(INTERACTION_MESSAGE);
   }
 
   @Override
   public String key() {
-    return this.resolve().key();
+    throw new IllegalStateException(INTERACTION_MESSAGE);
   }
 
   @Override
   public Optional<PythonType> resolveMember(String memberName) {
-    return this.resolve().resolveMember(memberName);
+    throw new IllegalStateException(INTERACTION_MESSAGE);
   }
 
   @Override
   public TriBool hasMember(String memberName) {
-    return this.resolve().hasMember(memberName);
+    throw new IllegalStateException(INTERACTION_MESSAGE);
   }
 
   @Override
   public Optional<LocationInFile> definitionLocation() {
-    return this.resolve().definitionLocation();
+    throw new IllegalStateException(INTERACTION_MESSAGE);
   }
 
   @Override
   public TypeSource typeSource() {
-    return this.resolve().typeSource();
+    throw new IllegalStateException(INTERACTION_MESSAGE);
   }
 }

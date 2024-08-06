@@ -48,7 +48,7 @@ public class TypeCheckBuilder {
   }
 
   public TypeCheckBuilder isBuiltinWithName(String name) {
-    PythonType builtinType = projectLevelTypeTable.getModule().resolveMember(name).orElse(PythonType.UNKNOWN);
+    PythonType builtinType = projectLevelTypeTable.getBuiltinsModule().resolveMember(name).orElse(PythonType.UNKNOWN);
     predicates.add(new IsSameAsTypePredicate(builtinType));
     return this;
   }
@@ -116,9 +116,6 @@ public class TypeCheckBuilder {
 
     @Override
     public TriBool test(PythonType pythonType) {
-      if (pythonType instanceof LazyType lazyType) {
-        pythonType = lazyType.resolve();
-      }
       if (pythonType instanceof ObjectType objectType) {
         pythonType = objectType.unwrappedType();
       }
