@@ -63,6 +63,7 @@ class ObjectTypeTest {
     assertThat(objectType.hasMember("foo")).isEqualTo(TriBool.FALSE);
     String fileId = SymbolUtils.pathOf(pythonFile).toString();
     assertThat(objectType.definitionLocation()).contains(new LocationInFile(fileId, 1, 6, 1, 7));
+    assertThat(TypeUtils.resolved(objectType)).isEqualTo(objectType);
   }
 
   @Test

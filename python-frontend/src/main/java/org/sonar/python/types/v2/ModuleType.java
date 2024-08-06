@@ -36,6 +36,18 @@ public final class ModuleType implements PythonType {
     this.name = name;
     this.parent = parent;
     this.members = members;
+    registerAsMemberOfParent(parent);
+  }
+
+  private void registerAsMemberOfParent(@Nullable ModuleType parent) {
+    if (parent == null) {
+      return;
+    }
+    PythonType parentMember = parent.members.get(this.name);
+    if (parentMember == null || parentMember.equals(PythonType.UNKNOWN)) {
+      // SONARPY-2037 We should update this heuristic with the correct Python resolution rules
+      parent.members.put(this.name, this);
+    }
   }
 
   public ModuleType(@Nullable String name) {

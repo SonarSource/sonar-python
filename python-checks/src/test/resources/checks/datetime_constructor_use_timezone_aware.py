@@ -36,8 +36,5 @@ def aliased_utcnow():
     # FN because we lose the FQN in the assignment
     reassigned()
 
-    from datetime.datetime import utcnow as aliased
-    aliased() # Noncompliant
-
-    from datetime.datetime import utcnow
-    utcnow() # Noncompliant
+    from datetime import datetime as aliased
+    aliased.utcnow() # Noncompliant

@@ -37,6 +37,15 @@ class ModuleTypeTest {
   }
 
   @Test
+  void replaceMemberIfUnknown() {
+    var a = new ModuleType("a");
+    a.members().put("b", PythonType.UNKNOWN);
+    Assertions.assertThat(a.resolveMember("b")).containsSame(PythonType.UNKNOWN);
+    var b = new ModuleType("b", a);
+    Assertions.assertThat(a.resolveMember("b")).containsSame(b);
+  }
+
+  @Test
   void toStringTest() {
     var root = new ModuleType(null);
     var module = new ModuleType("pkg", root);
