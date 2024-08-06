@@ -19,6 +19,8 @@
  */
 package org.sonar.python.semantic.v2;
 
+import java.util.ArrayDeque;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -40,6 +42,7 @@ import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.semantic.SymbolImpl;
 import org.sonar.python.types.v2.ClassType;
 import org.sonar.python.types.v2.FunctionType;
+import org.sonar.python.types.v2.LazyType;
 import org.sonar.python.types.v2.Member;
 import org.sonar.python.types.v2.ModuleType;
 import org.sonar.python.types.v2.ParameterV2;
@@ -50,10 +53,12 @@ public class SymbolsModuleTypeProvider {
   private final ProjectLevelSymbolTable projectLevelSymbolTable;
   private final TypeShed typeShed;
   private ModuleType rootModule;
+  private LazyTypesContext lazyTypesContext;
 
-  public SymbolsModuleTypeProvider(ProjectLevelSymbolTable projectLevelSymbolTable, TypeShed typeShed) {
+  public SymbolsModuleTypeProvider(ProjectLevelSymbolTable projectLevelSymbolTable, TypeShed typeShed, LazyTypesContext lazyTypeContext) {
     this.projectLevelSymbolTable = projectLevelSymbolTable;
     this.typeShed = typeShed;
+    this.lazyTypesContext = lazyTypeContext;
     this.rootModule = createModuleFromSymbols(null, null, typeShed.builtinSymbols().values());
   }
 
@@ -61,12 +66,15 @@ public class SymbolsModuleTypeProvider {
     return rootModule;
   }
 
-  public ModuleType createModuleType(List<String> moduleFqn, ModuleType parent) {
+  public PythonType convertModuleType(List<String> moduleFqn, ModuleType parent) {
     var moduleName = moduleFqn.get(moduleFqn.size() - 1);
     var moduleFqnString = getModuleFqnString(moduleFqn);
-    return createModuleTypeFromProjectLevelSymbolTable(moduleName, moduleFqnString, parent)
-      .or(() -> createModuleTypeFromTypeShed(moduleName, moduleFqnString, parent))
-      .orElseGet(() -> createEmptyModule(moduleName, parent));
+    Optional<ModuleType> result =  createModuleTypeFromProjectLevelSymbolTable(moduleName, moduleFqnString, parent)
+      .or(() -> createModuleTypeFromTypeShed(moduleName, moduleFqnString, parent));
+    if (result.isEmpty()) {
+      return PythonType.UNKNOWN;
+    }
+    return result.get();
   }
 
   private static String getModuleFqnString(List<String> moduleFqn) {
@@ -82,12 +90,6 @@ public class SymbolsModuleTypeProvider {
     return Optional.ofNullable(typeShed.symbolsForModule(moduleFqn))
       .filter(Predicate.not(Map::isEmpty))
       .map(typeShedModuleSymbols -> createModuleFromSymbols(moduleName, parent, typeShedModuleSymbols.values()));
-  }
-
-  private static ModuleType createEmptyModule(String moduleName, ModuleType parent) {
-    var emptyModule = new ModuleType(moduleName, parent);
-    parent.members().put(moduleName, emptyModule);
-    return emptyModule;
   }
 
   private ModuleType createModuleFromSymbols(@Nullable String name, @Nullable ModuleType parent, Collection<Symbol> symbols) {
@@ -132,6 +134,9 @@ public class SymbolsModuleTypeProvider {
         .withHasVariadicParameter(symbol.hasVariadicParameter())
         .withDefinitionLocation(symbol.definitionLocation());
     FunctionType functionType = functionTypeBuilder.build();
+    if (returnType instanceof LazyType lazyType) {
+      lazyType.addConsumer(functionType::resolveLazyReturnType);
+    }
     createdTypesBySymbol.put(symbol, functionType);
     return functionType;
   }
@@ -140,16 +145,41 @@ public class SymbolsModuleTypeProvider {
     if (classSymbol == null) {
       return PythonType.UNKNOWN;
     }
-    if (rootModule == null) {
+    if (createdTypesBySymbol.containsKey(classSymbol)) {
+      return createdTypesBySymbol.get(classSymbol);
+    }
+    String fullyQualifiedName = classSymbol.fullyQualifiedName();
+    if (fullyQualifiedName == null) {
       return convertToType(classSymbol, createdTypesBySymbol);
     }
-    // If the symbol is a built-in symbol and the root module already exists, we search for it instead of recreating the symbol
-    // This is necessary to avoid duplicated symbols in the original ProjectSymbolTable to translate into duplicated PythonType
-    // TODO: SONARPY-2010 to fix this
-    return Optional.ofNullable(classSymbol.fullyQualifiedName())
-      .filter(fqn -> !fqn.contains("."))
-      .flatMap(f -> rootModule.resolveMember(f))
-      .orElseGet(() -> convertToType(classSymbol, createdTypesBySymbol));
+    return resolvePossibleLazyType(fullyQualifiedName);
+  }
+
+  PythonType resolvePossibleLazyType(String fullyQualifiedName) {
+    if (rootModule == null) {
+      // If root module has not been created yet, return lazy type
+      return lazyTypesContext.getOrCreateLazyType(fullyQualifiedName);
+    }
+    PythonType currentType = rootModule;
+    String[] fqnParts = fullyQualifiedName.split("\\.");
+    var fqnPartsQueue = new ArrayDeque<>(Arrays.asList(fqnParts));
+    while (!fqnPartsQueue.isEmpty()) {
+      var memberName = fqnPartsQueue.poll();
+      var memberOpt = currentType.resolveMember(memberName);
+      if (memberOpt.isEmpty()) {
+        if (currentType instanceof ModuleType) {
+          // The type is part of an unresolved submodule
+          // Create a lazy type for it
+          return lazyTypesContext.getOrCreateLazyType(fullyQualifiedName);
+        } else {
+          // The type is an unknown member of an already resolved type
+          // Default to UNKNOWN
+          return PythonType.UNKNOWN;
+        }
+      }
+      currentType = memberOpt.get();
+    }
+    return currentType;
   }
 
   private PythonType convertToClassType(ClassSymbol symbol, Map<Symbol, PythonType> createdTypesBySymbol) {

@@ -29,7 +29,10 @@ import java.util.stream.Stream;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.sonar.plugins.python.api.PythonFile;
+import org.sonar.plugins.python.api.symbols.ClassSymbol;
+import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.ClassDef;
@@ -52,6 +55,7 @@ import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.types.v2.ClassType;
 import org.sonar.python.types.v2.FunctionType;
+import org.sonar.python.types.v2.LazyType;
 import org.sonar.python.types.v2.ModuleType;
 import org.sonar.python.types.v2.ObjectType;
 import org.sonar.python.types.v2.ParameterV2;
@@ -61,6 +65,7 @@ import org.sonar.python.types.v2.UnionType;
 import org.sonar.python.types.v2.UnknownType;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.sonar.python.PythonTestUtils.parse;
 import static org.sonar.python.types.v2.TypesTestUtils.DICT_TYPE;
 import static org.sonar.python.types.v2.TypesTestUtils.INT_TYPE;
@@ -124,14 +129,10 @@ class TypeInferenceV2Test {
     var importedNames = importName.modules().get(0).dottedName().names();
     assertThat(importedNames.get(0))
       .extracting(Expression::typeV2)
-      .isInstanceOf(ModuleType.class)
-      .extracting(PythonType::name)
-      .isEqualTo("something");
+      .isEqualTo(PythonType.UNKNOWN);
     assertThat(importedNames.get(1))
       .extracting(Expression::typeV2)
-      .isInstanceOf(ModuleType.class)
-      .extracting(PythonType::name)
-      .isEqualTo("unknown");
+      .isEqualTo(PythonType.UNKNOWN);
   }
 
   @Test
@@ -1798,7 +1799,7 @@ class TypeInferenceV2Test {
       ret = fcntl.flock(..., ...)
       ret
       """
-    ).typeV2()).isEqualTo(NONE_TYPE);
+    ).typeV2().unwrappedType()).isEqualTo(NONE_TYPE);
   }
 
   @Test
@@ -1809,6 +1810,81 @@ class TypeInferenceV2Test {
       fcntl
       """
     ).typeV2()).isInstanceOf(ModuleType.class);
+  }
+
+  @Test
+  void resolvedBuiltinLazyType() {
+    FileInput fileInput = inferTypes("""
+      copyright
+      """);
+    FunctionType functionType = ((FunctionType) ((ExpressionStatement) fileInput.statements().statements().get(0)).expressions().get(0).typeV2());
+    PythonType pythonType = functionType.returnType();
+    assertThat(pythonType.unwrappedType()).isEqualTo(NONE_TYPE);
+  }
+
+  @Test
+  void resolvedTypingLazyType() {
+    FileInput fileInput = inferTypes("""
+      import calendar
+      calendar.Calendar.iterweekdays
+      """);
+    FunctionType functionType = ((FunctionType) ((ExpressionStatement) fileInput.statements().statements().get(1)).expressions().get(0).typeV2());
+    PythonType returnType = functionType.returnType();
+    assertThat(returnType).isInstanceOf(ClassType.class);
+    assertThatThrownBy(() -> functionType.resolveLazyReturnType(PythonType.UNKNOWN))
+      .isInstanceOf(IllegalStateException.class)
+      .hasMessage("Trying to resolve an already resolved lazy type.");
+  }
+
+  @Test
+  void resolveCustomTypeLazyType() {
+    FileInput fileInput = inferTypes("""
+      import ldap
+      connect = ldap.initialize('ldap://127.0.0.1:1389')
+      connect
+      """);
+    ObjectType pythonType = (ObjectType) ((ExpressionStatement) fileInput.statements().statements().get(2)).expressions().get(0).typeV2();
+    assertThat(pythonType.unwrappedType()).extracting(PythonType::name).isEqualTo("LDAPObject");
+  }
+
+  @Test
+  @Disabled("SONARPY-2039")
+  void lazyTypeResolutionForModules() {
+    // SONARPY-2039: The unknown "http" member of "django" is a PythonType.UNKNOWN that is manually replaced after being resolved
+    // It should instead be a LazyType that is scheduled for a clean resolution
+    FileInput fileInput = inferTypes("""
+      from django.http import request
+      request
+      """);
+    PythonType pythonType = (PythonType) ((ExpressionStatement) fileInput.statements().statements().get(1)).expressions().get(0).typeV2();
+    assertThat(pythonType).isInstanceOf(ModuleType.class);
+  }
+
+  @Test
+  void resolveIncorrectLazyType() {
+    ProjectLevelSymbolTable empty = ProjectLevelSymbolTable.empty();
+    TypeShed typeShed = new TypeShed(empty);
+    ProjectLevelTypeTable projectLevelTypeTable = new ProjectLevelTypeTable(empty, typeShed);
+    LazyTypesContext lazyTypesContext = projectLevelTypeTable.lazyTypesContext();
+    assertThat(lazyTypesContext.resolveLazyType(new LazyType("unknown", lazyTypesContext))).isEqualTo(PythonType.UNKNOWN);
+    assertThat(lazyTypesContext.resolveLazyType(new LazyType("unrelated.unknown", lazyTypesContext))).isEqualTo(PythonType.UNKNOWN);
+    assertThat(lazyTypesContext.resolveLazyType(new LazyType("typing.unknown", lazyTypesContext))).isEqualTo(PythonType.UNKNOWN);
+  }
+
+  @Test
+  void resolveIncorrectLazyType2() {
+    ProjectLevelSymbolTable empty = ProjectLevelSymbolTable.empty();
+    TypeShed typeShed = new TypeShed(empty);
+
+    ProjectLevelTypeTable projectLevelTypeTable = new ProjectLevelTypeTable(empty, typeShed);
+    LazyTypesContext lazyTypesContext = projectLevelTypeTable.lazyTypesContext();
+    SymbolsModuleTypeProvider symbolsModuleTypeProvider = new SymbolsModuleTypeProvider(empty, typeShed, lazyTypesContext);
+    ModuleType builtinModule = symbolsModuleTypeProvider.createBuiltinModule();
+    symbolsModuleTypeProvider.convertModuleType(List.of("typing"), builtinModule);
+
+    ClassSymbol symbol = Mockito.mock(ClassSymbolImpl.class);
+    Mockito.when(symbol.kind()).thenReturn(Symbol.Kind.OTHER);
+    assertThat(symbolsModuleTypeProvider.resolvePossibleLazyType("typing.Iterable.unknown")).isEqualTo(PythonType.UNKNOWN);
   }
 
   @Test
