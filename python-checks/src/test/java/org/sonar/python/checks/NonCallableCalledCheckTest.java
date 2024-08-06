@@ -35,4 +35,10 @@ class NonCallableCalledCheckTest {
     PythonCheckVerifier.verify(List.of("src/test/resources/checks/nonCallableCalledImporter.py", "src/test/resources/checks/nonCallableCalledImported.py"), new NonCallableCalledCheck());
   }
 
+  @Test
+  void testNoIssues() {
+    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/nonCallableCalledNoIssues.py", new NonCallableCalledCheck());
+  }
+
+
 }
