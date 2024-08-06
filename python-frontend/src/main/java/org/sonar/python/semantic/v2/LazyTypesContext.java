@@ -45,9 +45,7 @@ public class LazyTypesContext {
   }
 
   public PythonType resolveLazyType(LazyType lazyType) {
-    String fullyQualifiedName = lazyType.fullyQualifiedName();
-    List<String> list = Arrays.stream(fullyQualifiedName.split("\\.")).toList();
-    PythonType resolved = projectLevelTypeTable.getType(list);
+    PythonType resolved = projectLevelTypeTable.getType(lazyType.fullyQualifiedName());
     lazyType.resolve(resolved);
     lazyTypes.remove(lazyType.fullyQualifiedName());
     return resolved;

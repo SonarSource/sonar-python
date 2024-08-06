@@ -90,12 +90,6 @@ public class SymbolsModuleTypeProvider {
       .map(typeShedModuleSymbols -> createModuleFromSymbols(moduleName, parent, typeShedModuleSymbols.values()));
   }
 
-  private static ModuleType createEmptyModule(String moduleName, ModuleType parent) {
-    var emptyModule = new ModuleType(moduleName, parent);
-    parent.members().put(moduleName, emptyModule);
-    return emptyModule;
-  }
-
   private ModuleType createModuleFromSymbols(@Nullable String name, @Nullable ModuleType parent, Collection<Symbol> symbols) {
     var members = new HashMap<String, PythonType>();
     Map<Symbol, PythonType> createdTypesBySymbol = new HashMap<>();
