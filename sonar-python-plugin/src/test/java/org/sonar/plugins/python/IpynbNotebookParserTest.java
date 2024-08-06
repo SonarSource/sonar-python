@@ -54,7 +54,6 @@ class IpynbNotebookParserTest {
     //"source": "#Some code\nprint(\"hello world\\n\")",
     assertThat(result.locationMap()).extracting(map -> map.get(16)).isEqualTo(new IPythonLocation(64, 14, Map.of(-1, 0)));
     assertThat(result.locationMap()).extracting(map -> map.get(17)).isEqualTo(new IPythonLocation(64, 26, Map.of(6, 33, 18, 46, 20, 49, -1, 3)));
-
     //"source": "print(\"My\\ntext\")\nprint(\"Something else\\n\")"
     assertThat(result.locationMap()).extracting(map -> map.get(22)).isEqualTo(new IPythonLocation(83, 14, Map.of(6, 21, 9, 25, 15, 32, -1, 3)));
     assertThat(result.locationMap()).extracting(map -> map.get(23)).isEqualTo(new IPythonLocation(83, 36, Map.of(6, 43, 21, 59, 23, 62, -1, 3)));
@@ -127,4 +126,18 @@ class IpynbNotebookParserTest {
     assertThat(result.contents()).hasLineCount(3);
   }
 
+  @Test
+  void testParseNotebookSingleLine() throws IOException {
+    var inputFile = createInputFile(baseDir, "notebook_single_line.ipynb", InputFile.Status.CHANGED, InputFile.Type.MAIN);
+
+    var resultOptional = IpynbNotebookParser.parseNotebook(inputFile);
+
+    assertThat(resultOptional).isPresent();
+
+    var result = resultOptional.get();
+    assertThat(result.locationMap()).hasSize(5);
+    assertThat(result.contents()).hasLineCount(5);
+    // position of variable t
+    assertThat(result.locationMap().get(4).column()).isEqualTo(451);
+  }
 }
