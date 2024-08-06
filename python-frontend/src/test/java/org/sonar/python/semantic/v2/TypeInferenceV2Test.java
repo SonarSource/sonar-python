@@ -1885,7 +1885,7 @@ class TypeInferenceV2Test {
 
     ClassSymbol symbol = Mockito.mock(ClassSymbolImpl.class);
     Mockito.when(symbol.kind()).thenReturn(Symbol.Kind.OTHER);
-    assertThat(symbolsModuleTypeProvider.resolvePossibleLazyType(new HashMap<>(), symbol, "typing.Iterable.unknown")).isEqualTo(PythonType.UNKNOWN);
+    assertThat(symbolsModuleTypeProvider.resolvePossibleLazyType("typing.Iterable.unknown")).isEqualTo(PythonType.UNKNOWN);
   }
 
   @Test

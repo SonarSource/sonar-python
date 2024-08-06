@@ -19,6 +19,8 @@
  */
 package org.sonar.python.semantic.v2;
 
+import java.util.ArrayDeque;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -150,36 +152,34 @@ public class SymbolsModuleTypeProvider {
     if (fullyQualifiedName == null) {
       return convertToType(classSymbol, createdTypesBySymbol);
     }
-    return resolvePossibleLazyType(createdTypesBySymbol, classSymbol, fullyQualifiedName);
+    return resolvePossibleLazyType(fullyQualifiedName);
   }
 
-  PythonType resolvePossibleLazyType(Map<Symbol, PythonType> createdTypesBySymbol, ClassSymbol classSymbol, String fullyQualifiedName) {
-    PythonType currentModule = rootModule;
-    String[] split = fullyQualifiedName.split("\\.");
-    StringBuilder sb = new StringBuilder();
-    for (int i = 0; i < split.length; i++) {
-      String currentElement = split[i];
-      if (!sb.isEmpty()) {
-        sb.append(".");
-      }
-      sb.append(currentElement);
-      Optional<PythonType> pythonType = currentModule == null ? Optional.empty() : currentModule.resolveMember(currentElement);
-      if (pythonType.isEmpty()) {
-        // Either the containing module has not been resolved yet, or the type is not present
-        // We need to create a LazyType for it
-        return lazyTypesContext.getOrCreateLazyType(fullyQualifiedName);
-      }
-      PythonType currentType = pythonType.get();
-      if (i == split.length - 1) {
-        // We have resolved the type we were looking for, return it
-        return currentType;
-      }
-      if (!(currentType instanceof ModuleType moduleType)) {
-        break;
-      }
-      currentModule = moduleType;
+  PythonType resolvePossibleLazyType(String fullyQualifiedName) {
+    if (rootModule == null) {
+      // If root module has not been created yet, return lazy type
+      return lazyTypesContext.getOrCreateLazyType(fullyQualifiedName);
     }
-    return convertToType(classSymbol, createdTypesBySymbol);
+    PythonType currentType = rootModule;
+    String[] fqnParts = fullyQualifiedName.split("\\.");
+    var fqnPartsQueue = new ArrayDeque<>(Arrays.asList(fqnParts));
+    while (!fqnPartsQueue.isEmpty()) {
+      var memberName = fqnPartsQueue.poll();
+      var memberOpt = currentType.resolveMember(memberName);
+      if (memberOpt.isEmpty()) {
+        if (currentType instanceof ModuleType) {
+          // The type is part of an unresolved submodule
+          // Create a lazy type for it
+          return lazyTypesContext.getOrCreateLazyType(fullyQualifiedName);
+        } else {
+          // The type is an unknown member of an already resolved type
+          // Default to UNKNOWN
+          return PythonType.UNKNOWN;
+        }
+      }
+      currentType = memberOpt.get();
+    }
+    return currentType;
   }
 
   private PythonType convertToClassType(ClassSymbol symbol, Map<Symbol, PythonType> createdTypesBySymbol) {
