@@ -199,22 +199,16 @@ public class CallExpressionImpl extends PyTree implements CallExpression, HasTyp
       return classType;
     }
     if (calleeType instanceof FunctionType functionType) {
-      PythonType returnType = functionType.returnType();
-      if (returnType.equals(PythonType.UNKNOWN)) {
-        return PythonType.UNKNOWN;
-      }
-      return returnType;
+      return functionType.returnType();
     }
     if (calleeType instanceof UnionType unionType) {
       Set<PythonType> types = new HashSet<>();
       for (PythonType candidate : unionType.candidates()) {
-        if (candidate instanceof ClassType classType) {
-          types.add(classType);
-        } else if (candidate instanceof FunctionType functionType) {
-          types.add(functionType.returnType());
-        } else {
+        PythonType typeOfCandidate = returnTypeOfCall(candidate);
+        if (typeOfCandidate.equals(PythonType.UNKNOWN)) {
           return PythonType.UNKNOWN;
         }
+        types.add(typeOfCandidate);
       }
       return UnionType.or(types);
     }
