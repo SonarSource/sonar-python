@@ -19,9 +19,7 @@
  */
 package org.sonar.python.semantic.v2;
 
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import org.sonar.python.types.v2.LazyType;
 import org.sonar.python.types.v2.PythonType;
