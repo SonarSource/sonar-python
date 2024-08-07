@@ -36,9 +36,12 @@ public class TypesTestUtils {
   public static final PythonType BOOL_TYPE = BUILTINS.resolveMember("bool").get();
   public static final PythonType STR_TYPE = BUILTINS.resolveMember("str").get();
   public static final PythonType LIST_TYPE = BUILTINS.resolveMember("list").get();
+  public static final PythonType TUPLE_TYPE = BUILTINS.resolveMember("tuple").get();
   public static final PythonType SET_TYPE = BUILTINS.resolveMember("set").get();
+  public static final PythonType FROZENSET_TYPE = BUILTINS.resolveMember("frozenset").get();
   public static final PythonType DICT_TYPE = BUILTINS.resolveMember("dict").get();
   public static final PythonType NONE_TYPE = BUILTINS.resolveMember("NoneType").get();
+  public static final PythonType TYPE_TYPE = BUILTINS.resolveMember("type").get();
 
   public static FileInput parseAndInferTypes(String... code) {
     return parseAndInferTypes(PythonTestUtils.pythonFile(""), code);
