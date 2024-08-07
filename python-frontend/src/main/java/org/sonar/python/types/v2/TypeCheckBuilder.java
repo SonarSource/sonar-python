@@ -19,6 +19,7 @@
  */
 package org.sonar.python.types.v2;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -206,24 +207,23 @@ public class TypeCheckBuilder {
 
     private static Set<PythonType> collectTypes(PythonType type) {
       var result = new HashSet<PythonType>();
-      collectTypes(type, result);
-      return result;
-    }
-
-    private static void collectTypes(PythonType type, Set<PythonType> result) {
-      result.add(type);
-      if (type instanceof ClassType classType) {
-        for (var superType : classType.superClasses()) {
-          if (result.contains(superType)) {
-            continue;
-          }
-          if (superType instanceof ClassType superClassType) {
-            collectTypes(superClassType, result);
-          } else {
-            result.add(superType);
-          }
+      var queue = new ArrayDeque<PythonType>();
+      queue.add(type);
+      while (!queue.isEmpty()) {
+        var currentType = queue.pop();
+        if (result.contains(currentType)) {
+          continue;
+        }
+        result.add(currentType);
+        if (currentType instanceof UnionType) {
+          result.clear();
+          result.add(PythonType.UNKNOWN);
+          queue.clear();
+        } else if (currentType instanceof ClassType classType) {
+          queue.addAll(classType.superClasses());
         }
       }
+      return result;
     }
   }
 
