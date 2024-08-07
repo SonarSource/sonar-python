@@ -66,6 +66,9 @@ public record UnionType(Set<PythonType> candidates) implements PythonType {
 
   @Beta
   public static PythonType or(Collection<PythonType> candidates) {
+    if (candidates.isEmpty()) {
+      return PythonType.UNKNOWN;
+    }
     return candidates
       .stream()
       .reduce(new UnionType(new HashSet<>()), UnionType::or);
