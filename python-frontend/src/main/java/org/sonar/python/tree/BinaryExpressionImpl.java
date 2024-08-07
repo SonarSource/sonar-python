@@ -34,6 +34,11 @@ import org.sonar.plugins.python.api.tree.TreeVisitor;
 import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.types.HasTypeDependencies;
 import org.sonar.python.types.InferredTypes;
+import org.sonar.python.types.v2.ClassType;
+import org.sonar.python.types.v2.ObjectType;
+import org.sonar.python.types.v2.PythonType;
+import org.sonar.python.types.v2.TypeSource;
+import org.sonar.python.types.v2.UnionType;
 
 import static org.sonar.python.types.InferredTypes.DECL_INT;
 import static org.sonar.python.types.InferredTypes.DECL_STR;
@@ -135,6 +140,22 @@ public class BinaryExpressionImpl extends PyTree implements BinaryExpression, Ha
       }
     }
     return InferredTypes.anyType();
+  }
+
+  @Override
+  public PythonType typeV2() {
+    if (is(Kind.AND, Kind.OR)) {
+      return UnionType.or(leftOperand.typeV2(), rightOperand.typeV2());
+    }
+    if (is(Kind.PLUS)
+        && leftOperand.typeV2() instanceof ObjectType leftObjectType
+        && leftObjectType.unwrappedType() instanceof ClassType leftClassType
+        && rightOperand.typeV2() instanceof ObjectType rightObjectType
+        && rightObjectType.unwrappedType() instanceof ClassType rightClassType
+        && leftClassType == rightClassType) {
+      return new ObjectType(leftClassType, TypeSource.min(leftObjectType.typeSource(), rightObjectType.typeSource()));
+    }
+    return PythonType.UNKNOWN;
   }
 
   private static boolean shouldReturnDeclaredStr(InferredType leftType, InferredType rightType) {

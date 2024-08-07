@@ -19,7 +19,26 @@
  */
 package org.sonar.python.types.v2;
 
+import java.util.Comparator;
+import java.util.stream.Stream;
+
 public enum TypeSource {
-  EXACT,
-  TYPE_HINT
+  TYPE_HINT(0),
+  EXACT(1);
+
+  private final int score;
+
+  TypeSource(int score) {
+    this.score = score;
+  }
+
+  public int score() {
+    return score;
+  }
+
+  public static TypeSource min(TypeSource... typeSources) {
+    return Stream.of(typeSources)
+      .min(Comparator.comparing(TypeSource::score))
+      .orElse(EXACT);
+  }
 }

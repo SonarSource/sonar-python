@@ -21,6 +21,7 @@ package org.sonar.python.types.v2;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -62,6 +63,13 @@ public record UnionType(Set<PythonType> candidates) implements PythonType {
   public boolean isCompatibleWith(PythonType another) {
     return candidates.isEmpty() || candidates.stream()
       .anyMatch(candidate -> candidate.isCompatibleWith(another));
+  }
+
+  @Override
+  public TypeSource typeSource() {
+    return candidates.stream().map(PythonType::typeSource)
+      .min(Comparator.comparing(TypeSource::score))
+      .orElse(TypeSource.EXACT);
   }
 
   @Beta
