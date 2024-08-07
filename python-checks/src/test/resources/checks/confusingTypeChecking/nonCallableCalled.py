@@ -9,11 +9,11 @@ def foo(param1: int, param2: Set[int], param3: FrozenSet[int], param4: list[str]
   x = 42
   x() # OK, raised by S5756
 
-  param2() # FN SONARPY-2022
+  param2() # Noncompliant
   s = set()
   s() # OK, raised by S5756
 
-  param3() # FN SONARPY-2022
+  param3() # Noncompliant
   fs = frozenset()
   fs() # OK, raised by S5756
 
@@ -23,11 +23,11 @@ def foo(param1: int, param2: Set[int], param3: FrozenSet[int], param4: list[str]
   param5() # Noncompliant
 
 def derived(x: int):
-  x.conjugate()() # FN need return type's type source resolution SONARPY-2024
+  x.conjugate()() # Noncompliant
   y = x or 'str'
-  y() # FN Value calculation with involved parameters support is needed (SONARPY-2023)
+  y() # Noncompliant
   z = x + 42
-  z() # FN Value calculation with involved parameters support is needed (SONARPY-2023)
+  z() # Noncompliant
 
 class Base: ...
 class CallableBase:
