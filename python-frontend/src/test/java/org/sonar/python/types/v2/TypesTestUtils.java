@@ -33,6 +33,7 @@ public class TypesTestUtils {
   public static final ModuleType BUILTINS = PROJECT_LEVEL_TYPE_TABLE.getBuiltinsModule();
 
   public static final PythonType INT_TYPE = BUILTINS.resolveMember("int").get();
+  public static final PythonType FLOAT_TYPE = BUILTINS.resolveMember("float").get();
   public static final PythonType BOOL_TYPE = BUILTINS.resolveMember("bool").get();
   public static final PythonType STR_TYPE = BUILTINS.resolveMember("str").get();
   public static final PythonType LIST_TYPE = BUILTINS.resolveMember("list").get();

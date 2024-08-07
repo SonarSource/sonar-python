@@ -71,6 +71,7 @@ import static org.sonar.python.PythonTestUtils.parse;
 import static org.sonar.python.PythonTestUtils.parseWithoutSymbols;
 import static org.sonar.python.PythonTestUtils.pythonFile;
 import static org.sonar.python.types.v2.TypesTestUtils.DICT_TYPE;
+import static org.sonar.python.types.v2.TypesTestUtils.FLOAT_TYPE;
 import static org.sonar.python.types.v2.TypesTestUtils.FROZENSET_TYPE;
 import static org.sonar.python.types.v2.TypesTestUtils.INT_TYPE;
 import static org.sonar.python.types.v2.TypesTestUtils.LIST_TYPE;
@@ -1856,6 +1857,49 @@ class TypeInferenceV2Test {
       a
       """
     ).typeV2().unwrappedType()).isEqualTo(NONE_TYPE);
+  }
+
+  @Test
+  void imported_ambiguous_symbol() {
+    FileInput fileInput = inferTypes("""
+      from math import acos, atan
+      acos
+      atan
+      """);
+    UnionType acosType = (UnionType) ((ExpressionStatement) fileInput.statements().statements().get(1)).expressions().get(0).typeV2();
+    assertThat(acosType.candidates()).allMatch(p -> p instanceof FunctionType);
+    assertThat(acosType.candidates()).extracting(PythonType::name).containsExactly("acos", "acos");
+    assertThat(acosType.candidates()).map(FunctionType.class::cast).extracting(FunctionType::returnType).containsExactly(FLOAT_TYPE, FLOAT_TYPE);
+
+    UnionType atanType = (UnionType) ((ExpressionStatement) fileInput.statements().statements().get(2)).expressions().get(0).typeV2();
+    assertThat(atanType.candidates()).allMatch(p -> p instanceof FunctionType);
+    assertThat(atanType.candidates()).extracting(PythonType::name).containsExactly("atan", "atan");
+    assertThat(atanType.candidates()).map(FunctionType.class::cast).extracting(FunctionType::returnType).containsExactly(FLOAT_TYPE, FLOAT_TYPE);
+  }
+
+  @Test
+  void imported_ambiguous_symbol_try_except() {
+    FileInput fileInput = inferTypes("""
+      try:
+          from math import acos
+          acos
+      except:
+          ...
+      acos
+      """);
+    Expression acosExpr1 = TreeUtils.firstChild(fileInput.statements().statements().get(0), ExpressionStatement.class::isInstance)
+      .map(ExpressionStatement.class::cast)
+      .map(ExpressionStatement::expressions)
+      .map(expressions -> expressions.get(0))
+      .map(Expression.class::cast)
+      .get();
+    UnionType acosType1 = (UnionType) acosExpr1.typeV2();
+    assertThat(acosType1.candidates()).allMatch(p -> p instanceof FunctionType);
+    assertThat(acosType1.candidates()).map(FunctionType.class::cast).extracting(FunctionType::returnType).containsExactly(FLOAT_TYPE, FLOAT_TYPE);
+
+    UnionType acosType2 = (UnionType) ((ExpressionStatement) fileInput.statements().statements().get(1)).expressions().get(0).typeV2();
+    assertThat(acosType2.candidates()).allMatch(p -> p instanceof FunctionType);
+    assertThat(acosType2.candidates()).map(FunctionType.class::cast).extracting(FunctionType::returnType).containsExactly(FLOAT_TYPE, FLOAT_TYPE);
   }
 
   @Test
