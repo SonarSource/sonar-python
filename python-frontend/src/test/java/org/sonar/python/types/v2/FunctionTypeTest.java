@@ -33,6 +33,7 @@ import org.sonar.python.semantic.v2.TypeInferenceV2;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.PythonTestUtils.parseWithoutSymbols;
+import static org.sonar.python.types.v2.TypesTestUtils.INT_TYPE;
 import static org.sonar.python.types.v2.TypesTestUtils.PROJECT_LEVEL_TYPE_TABLE;
 
 class FunctionTypeTest {
@@ -146,6 +147,14 @@ class FunctionTypeTest {
     FunctionType functionType = functionType("def fn(p1: int): pass");
     assertThat(functionType.returnType()).isEqualTo(PythonType.UNKNOWN);
     assertThat(functionType.parameters()).extracting(ParameterV2::declaredType).containsExactly(PythonType.UNKNOWN);
+  }
+
+  @Test
+  void declared_return_type() {
+    FunctionType functionType = functionType("def fn() -> int: ...");
+    assertThat(functionType.returnType()).isEqualTo(INT_TYPE);
+    functionType = functionType("def fn() -> unknown: ...");
+    assertThat(functionType.returnType()).isEqualTo(PythonType.UNKNOWN);
   }
 
   @Test

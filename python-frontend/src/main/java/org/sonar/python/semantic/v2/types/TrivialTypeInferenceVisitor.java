@@ -79,6 +79,7 @@ import org.sonar.python.types.v2.Member;
 import org.sonar.python.types.v2.ModuleType;
 import org.sonar.python.types.v2.ObjectType;
 import org.sonar.python.types.v2.PythonType;
+import org.sonar.python.types.v2.TypeOrigin;
 import org.sonar.python.types.v2.TypeSource;
 import org.sonar.python.types.v2.UnionType;
 
@@ -257,13 +258,13 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
     scan(functionDef.decorators());
     scan(functionDef.typeParams());
     scan(functionDef.parameters());
+    scan(functionDef.returnTypeAnnotation());
     FunctionType functionType = buildFunctionType(functionDef);
     ((NameImpl) functionDef.name()).typeV2(functionType);
     inTypeScope(functionType, () -> {
       // TODO: check scope accuracy
       scan(functionDef.typeParams());
       scan(functionDef.parameters());
-      scan(functionDef.returnTypeAnnotation());
       scan(functionDef.body());
     });
   }
@@ -278,6 +279,12 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
     }
     if (owner != null) {
       functionTypeBuilder.withOwner(owner);
+    }
+    TypeAnnotation typeAnnotation = functionDef.returnTypeAnnotation();
+    if (typeAnnotation != null) {
+      PythonType returnType = typeAnnotation.expression().typeV2();
+      functionTypeBuilder.withReturnType(returnType);
+      functionTypeBuilder.withTypeOrigin(TypeOrigin.LOCAL);
     }
     FunctionType functionType = functionTypeBuilder.build();
     if (owner != null) {
