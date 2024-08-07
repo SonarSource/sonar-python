@@ -49,3 +49,9 @@ def decorators(decorator: Callable, non_callable: str):
     def bar():
         ...
 
+def local_function() -> int:
+    ...
+
+def calling_local_function():
+    x = local_function()
+    x() # Noncompliant

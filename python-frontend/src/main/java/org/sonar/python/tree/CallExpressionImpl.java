@@ -51,6 +51,7 @@ import org.sonar.python.types.v2.ClassType;
 import org.sonar.python.types.v2.FunctionType;
 import org.sonar.python.types.v2.ObjectType;
 import org.sonar.python.types.v2.PythonType;
+import org.sonar.python.types.v2.TypeOrigin;
 import org.sonar.python.types.v2.TypeSource;
 import org.sonar.python.types.v2.UnionType;
 
@@ -189,9 +190,27 @@ public class CallExpressionImpl extends PyTree implements CallExpression, HasTyp
 
   @Override
   public PythonType typeV2() {
-    TypeSource typeSource = computeTypeSource();
-    PythonType pythonType = returnTypeOfCall(callee().typeV2());
+    PythonType calleeType = callee().typeV2();
+    TypeSource typeSource = computeTypeSource(calleeType);
+    PythonType pythonType = returnTypeOfCall(calleeType);
     return pythonType != PythonType.UNKNOWN ? new ObjectType(pythonType, typeSource) : PythonType.UNKNOWN;
+  }
+
+  private TypeSource computeTypeSource(PythonType calleeType) {
+    if (isCalleeLocallyDefinedFunction(calleeType)) {
+      return TypeSource.TYPE_HINT;
+    }
+    return calleeTypeSource();
+  }
+
+  boolean isCalleeLocallyDefinedFunction(PythonType pythonType) {
+    if (pythonType instanceof FunctionType functionType) {
+      return functionType.typeOrigin() == TypeOrigin.LOCAL;
+    }
+    if (pythonType instanceof UnionType unionType) {
+      return unionType.candidates().stream().anyMatch(this::isCalleeLocallyDefinedFunction);
+    }
+    return false;
   }
 
   static PythonType returnTypeOfCall(PythonType calleeType) {
@@ -219,7 +238,7 @@ public class CallExpressionImpl extends PyTree implements CallExpression, HasTyp
     return PythonType.UNKNOWN;
   }
 
-  TypeSource computeTypeSource() {
+  TypeSource calleeTypeSource() {
     if (callee() instanceof QualifiedExpression qualifiedExpression) {
       return qualifiedExpression.qualifier().typeV2().typeSource();
     }

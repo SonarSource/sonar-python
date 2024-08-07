@@ -35,6 +35,7 @@ public final class FunctionType implements PythonType {
   private final List<PythonType> attributes;
   private final List<ParameterV2> parameters;
   private PythonType returnType;
+  private final TypeOrigin typeOrigin;
   private final boolean isAsynchronous;
   private final boolean hasDecorators;
   private final boolean isInstanceMethod;
@@ -50,6 +51,7 @@ public final class FunctionType implements PythonType {
     List<PythonType> attributes,
     List<ParameterV2> parameters,
     PythonType returnType,
+    TypeOrigin typeOrigin,
     boolean isAsynchronous,
     boolean hasDecorators,
     boolean isInstanceMethod,
@@ -61,6 +63,7 @@ public final class FunctionType implements PythonType {
     this.attributes = attributes;
     this.parameters = parameters;
     this.returnType = returnType;
+    this.typeOrigin = typeOrigin;
     this.isAsynchronous = isAsynchronous;
     this.hasDecorators = hasDecorators;
     this.isInstanceMethod = isInstanceMethod;
@@ -127,5 +130,9 @@ public final class FunctionType implements PythonType {
       throw new IllegalStateException("Trying to resolve an already resolved lazy type.");
     }
     this.returnType = pythonType;
+  }
+
+  public TypeOrigin typeOrigin() {
+    return typeOrigin;
   }
 }
