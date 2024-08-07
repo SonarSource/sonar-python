@@ -21,6 +21,7 @@ package org.sonar.python.tree;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -50,6 +51,7 @@ import org.sonar.python.types.v2.ClassType;
 import org.sonar.python.types.v2.FunctionType;
 import org.sonar.python.types.v2.ObjectType;
 import org.sonar.python.types.v2.PythonType;
+import org.sonar.python.types.v2.TypeSource;
 import org.sonar.python.types.v2.UnionType;
 
 import static org.sonar.plugins.python.api.symbols.Symbol.Kind.CLASS;
@@ -187,28 +189,40 @@ public class CallExpressionImpl extends PyTree implements CallExpression, HasTyp
 
   @Override
   public PythonType typeV2() {
-    if (callee().typeV2() instanceof ClassType classType) {
-      return new ObjectType(classType);
+    TypeSource typeSource = computeTypeSource();
+    PythonType pythonType = returnTypeOfCall(callee().typeV2());
+    return pythonType != PythonType.UNKNOWN ? new ObjectType(pythonType, typeSource) : PythonType.UNKNOWN;
+  }
+
+  static PythonType returnTypeOfCall(PythonType calleeType) {
+    if (calleeType instanceof ClassType classType) {
+      return classType;
     }
-    if (callee().typeV2() instanceof FunctionType functionType) {
-      PythonType returnType = functionType.returnType();
-      if (returnType.equals(PythonType.UNKNOWN)) {
-        return PythonType.UNKNOWN;
-      }
-      return new ObjectType(returnType);
+    if (calleeType instanceof FunctionType functionType) {
+      return functionType.returnType();
     }
-    if (callee().typeV2() instanceof UnionType unionType) {
-      PythonType result = null;
+    if (calleeType instanceof UnionType unionType) {
+      Set<PythonType> types = new HashSet<>();
       for (PythonType candidate : unionType.candidates()) {
-        if (candidate instanceof ClassType classType) {
-          result = UnionType.or(result, classType);
+        PythonType typeOfCandidate = returnTypeOfCall(candidate);
+        if (typeOfCandidate.equals(PythonType.UNKNOWN)) {
+          return PythonType.UNKNOWN;
         }
-        if (candidate instanceof FunctionType functionType) {
-          result = UnionType.or(result, functionType.returnType());
-        }
+        types.add(typeOfCandidate);
       }
-      return result == null ? PythonType.UNKNOWN : new ObjectType(result);
+      return UnionType.or(types);
+    }
+    if (calleeType instanceof ObjectType objectType) {
+      Optional<PythonType> pythonType = objectType.resolveMember("__call__");
+      return pythonType.map(CallExpressionImpl::returnTypeOfCall).orElse(PythonType.UNKNOWN);
     }
     return PythonType.UNKNOWN;
+  }
+
+  TypeSource computeTypeSource() {
+    if (callee() instanceof QualifiedExpression qualifiedExpression) {
+      return qualifiedExpression.qualifier().typeV2().typeSource();
+    }
+    return callee().typeV2().typeSource();
   }
 }
