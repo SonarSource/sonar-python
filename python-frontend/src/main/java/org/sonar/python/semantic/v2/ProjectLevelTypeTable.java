@@ -19,7 +19,6 @@
  */
 package org.sonar.python.semantic.v2;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -95,15 +94,12 @@ public class ProjectLevelTypeTable {
 
   public void addAliasMembers(List<String> moduleFqnParts, ModuleType moduleType) {
     String moduleFqn = String.join(".", moduleFqnParts);
-    if (aliasMembers.containsKey(moduleFqn)) {
-      Map<String, String> aliasedTypes = aliasMembers.get(moduleFqn);
-      for (Map.Entry<String, String> alias : aliasedTypes.entrySet()) {
-        List<String> split = Arrays.stream(alias.getValue().split("\\.")).toList();
-        PythonType pythonType = getType(split);
+    aliasMembers.getOrDefault(moduleFqn, Map.of())
+      .forEach((memberName, alias) -> {
+        var pythonType = getType(alias);
         if (pythonType != PythonType.UNKNOWN) {
-          moduleType.members().put(alias.getKey(), pythonType);
+          moduleType.members().put(memberName, pythonType);
         }
-      }
-    }
+      });
   }
 }
