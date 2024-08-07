@@ -29,6 +29,7 @@ import org.sonar.plugins.python.api.tree.CompoundAssignmentStatement;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.ForStatement;
 import org.sonar.plugins.python.api.tree.FunctionDef;
+import org.sonar.plugins.python.api.tree.ImportFrom;
 import org.sonar.plugins.python.api.tree.ImportName;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Parameter;
@@ -93,6 +94,8 @@ public class FlowSensitiveTypeInference extends ForwardAnalysis {
       handleDefinitions(functionDef, state);
     } else if (element instanceof ImportName importName) {
       handleDefinitions(importName, state);
+    } else if (element instanceof ImportFrom importFrom) {
+      handleDefinitions(importFrom, state);
     } else if (element instanceof Parameter parameter) {
       handleParameter(parameter, state);
     } else if (isForLoopAssignment(element)) {

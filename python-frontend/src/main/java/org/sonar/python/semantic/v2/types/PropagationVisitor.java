@@ -33,6 +33,7 @@ import org.sonar.plugins.python.api.tree.CompoundAssignmentStatement;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.ForStatement;
 import org.sonar.plugins.python.api.tree.FunctionDef;
+import org.sonar.plugins.python.api.tree.ImportFrom;
 import org.sonar.plugins.python.api.tree.ImportName;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Parameter;
@@ -138,6 +139,22 @@ public class PropagationVisitor extends BaseTreeVisitor {
           }
         }
       });
+  }
+
+  @Override
+  public void visitImportFrom(ImportFrom importFrom) {
+    super.visitImportFrom(importFrom);
+    importFrom.importedNames()
+      .forEach(aliasedName -> aliasedName.dottedName().names().forEach(
+        name -> {
+          SymbolV2 symbolV2 = name.symbolV2();
+          if (symbolV2 != null) {
+            Definition definition = new Definition(symbolV2, name);
+            definitionsByDefinitionStatement.computeIfAbsent(importFrom, k -> new HashSet<>()).add(definition);
+            propagationsByLhs.computeIfAbsent(symbolV2, s -> new HashSet<>()).add(definition);
+          }
+        }
+      ));
   }
 
   @Override
