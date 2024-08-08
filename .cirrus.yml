@@ -56,16 +56,20 @@ only_sonarsource_qa: &ONLY_SONARSOURCE_QA
 
 orchestrator_cache_definition: &ORCHESTRATOR_CACHE_DEFINITION
   set_orchestrator_home_script: |
-    export TODAY=$(date '+%Y-%m-%d')
-    echo "TODAY=${TODAY}" >> $CIRRUS_ENV
-    echo "ORCHESTRATOR_HOME=${CIRRUS_WORKING_DIR}/orchestrator/${TODAY}" >> $CIRRUS_ENV
+    export CURRENT_MONTH=$(date +"%B")
+    echo "TODAY=${CURRENT_MONTH}" >> $CIRRUS_ENV
+    echo "CURRENT_MONTH=${CURRENT_MONTH}" >> $CIRRUS_ENV
+    echo "ORCHESTRATOR_HOME=${CIRRUS_WORKING_DIR}/orchestrator/${CIRRUS_TASK_NAME}/${CURRENT_MONTH}" >> $CIRRUS_ENV
   mkdir_orchestrator_home_script: |
     echo "Create dir ${ORCHESTRATOR_HOME} if needed"
     mkdir -p ${ORCHESTRATOR_HOME}
   orchestrator_cache:
     folder: ${ORCHESTRATOR_HOME}
-    fingerprint_script: echo ${TODAY}
+    fingerprint_script: echo ${CURRENT_MONTH}-${CIRRUS_TASK_NAME}
     reupload_on_changes: "true"
+  echo_directory_script: |
+    echo "Directory ${ORCHESTRATOR_HOME} contains:"
+    ls -la ${ORCHESTRATOR_HOME}
 
 build_task:
   <<: *BUILD_CONTAINER_DEFINITION
@@ -81,7 +85,6 @@ build_task:
     PGP_PASSPHRASE: VAULT[development/kv/data/sign data.passphrase]
   maven_cache:
     folder: ${CIRRUS_WORKING_DIR}/.m2/repository
-  <<: *ORCHESTRATOR_CACHE_DEFINITION
   build_script:
     - git submodule update --init
     - cd python-frontend/typeshed_serializer/resources/python-type-stubs
