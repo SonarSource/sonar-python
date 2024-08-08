@@ -76,7 +76,7 @@ def member_access():
 def types_from_typeshed(foo):
   from math import acos
   from functools import wraps
-  acos(42)() # FN: declared return type of Typeshed
+  acos(42)() # Noncompliant
   wraps(func)(foo) # OK, wraps returns a Callable
 
 def with_metaclass():
