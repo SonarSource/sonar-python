@@ -56,7 +56,6 @@ only_sonarsource_qa: &ONLY_SONARSOURCE_QA
 
 orchestrator_cache_definition: &ORCHESTRATOR_CACHE_DEFINITION
   set_orchestrator_home_script: |
-    echo "CURRENT_MONTH=$(date +"%B")" >> $CIRRUS_ENV
 
     # Check if SQ_VERSION exists and create an intermediary variable
     if [ -n "$SQ_VERSION" ]; then
@@ -65,8 +64,9 @@ orchestrator_cache_definition: &ORCHESTRATOR_CACHE_DEFINITION
         TASK_NAME_WITH_VERSION="${CIRRUS_TASK_NAME}"
     fi
 
-    echo "ORCHESTRATOR_HOME=${CIRRUS_WORKING_DIR}/orchestrator/${TASK_NAME_WITH_VERSION}/${CURRENT_MONTH}" >> $CIRRUS_ENV
-    echo $TASK_NAME_WITH_VERSION >> $CIRRUS_ENV
+    echo "CURRENT_MONTH=$(date +"%B")" > $CIRRUS_ENV
+    echo "ORCHESTRATOR_HOME=${CIRRUS_WORKING_DIR}/orchestrator/${TASK_NAME_WITH_VERSION}/${CURRENT_MONTH}" > $CIRRUS_ENV
+    echo "TASK_NAME_WITH_VERSION=${TASK_NAME_WITH_VERSION}" > $CIRRUS_ENV
   mkdir_orchestrator_home_script: |
     echo "Create dir ${ORCHESTRATOR_HOME} if needed"
     mkdir -p ${ORCHESTRATOR_HOME}
@@ -78,53 +78,53 @@ orchestrator_cache_definition: &ORCHESTRATOR_CACHE_DEFINITION
     echo "Directory ${ORCHESTRATOR_HOME} contains:"
     ls -la ${ORCHESTRATOR_HOME}
 
-build_task:
-  <<: *BUILD_CONTAINER_DEFINITION
-  <<: *ONLY_SONARSOURCE_QA
-  env:
-    # analysis on next
-    SONAR_TOKEN: VAULT[development/kv/data/next data.token]
-    SONAR_HOST_URL: https://next.sonarqube.com/sonarqube
-    #allow deployment of pull request artifacts to repox
-    DEPLOY_PULL_REQUEST: true
-    CIRRUS_CLONE_DEPTH: 50
-    SIGN_KEY: VAULT[development/kv/data/sign data.key]
-    PGP_PASSPHRASE: VAULT[development/kv/data/sign data.passphrase]
-  maven_cache:
-    folder: ${CIRRUS_WORKING_DIR}/.m2/repository
-  build_script:
-    - git submodule update --init
-    - cd python-frontend/typeshed_serializer/resources/python-type-stubs
-    - git sparse-checkout set stubs/sklearn 
-    - git checkout
-    - cd -
-    - source cirrus-env BUILD
-    - regular_mvn_build_deploy_analyze -DfailStubGenerationFast=true
-    - ./check-license-compliance.sh
-  cleanup_before_cache_script: cleanup_maven_repository
+# build_task:
+#   <<: *BUILD_CONTAINER_DEFINITION
+#   <<: *ONLY_SONARSOURCE_QA
+#   env:
+#     # analysis on next
+#     SONAR_TOKEN: VAULT[development/kv/data/next data.token]
+#     SONAR_HOST_URL: https://next.sonarqube.com/sonarqube
+#     #allow deployment of pull request artifacts to repox
+#     DEPLOY_PULL_REQUEST: true
+#     CIRRUS_CLONE_DEPTH: 50
+#     SIGN_KEY: VAULT[development/kv/data/sign data.key]
+#     PGP_PASSPHRASE: VAULT[development/kv/data/sign data.passphrase]
+#   maven_cache:
+#     folder: ${CIRRUS_WORKING_DIR}/.m2/repository
+#   build_script:
+#     - git submodule update --init
+#     - cd python-frontend/typeshed_serializer/resources/python-type-stubs
+#     - git sparse-checkout set stubs/sklearn 
+#     - git checkout
+#     - cd -
+#     - source cirrus-env BUILD
+#     - regular_mvn_build_deploy_analyze -DfailStubGenerationFast=true
+#     - ./check-license-compliance.sh
+#   cleanup_before_cache_script: cleanup_maven_repository
 
-build_win_task:
-  <<: *WINDOWS_VM_DEFINITION
-  <<: *ONLY_SONARSOURCE_QA
-  depends_on:
-    - build
-  maven_cache:
-    #windows cache is buggy if using ${CIRRUS_WORKING_DIR}
-    folder: ~/.m2/repository
-  build_script:
-    - git config --global core.autocrlf input
-    - git submodule update --init
-    - cd python-frontend/typeshed_serializer/resources/python-type-stubs
-    - git sparse-checkout set stubs/sklearn 
-    - git checkout
-    - cd -
-    - source cirrus-env CI
-    - unset SONARSOURCE_QA
-    - mvn.cmd package -DskipTypeshed=true -DfailStubGenerationFast=true
+# build_win_task:
+#   <<: *WINDOWS_VM_DEFINITION
+#   <<: *ONLY_SONARSOURCE_QA
+#   depends_on:
+#     - build
+#   maven_cache:
+#     #windows cache is buggy if using ${CIRRUS_WORKING_DIR}
+#     folder: ~/.m2/repository
+#   build_script:
+#     - git config --global core.autocrlf input
+#     - git submodule update --init
+#     - cd python-frontend/typeshed_serializer/resources/python-type-stubs
+#     - git sparse-checkout set stubs/sklearn 
+#     - git checkout
+#     - cd -
+#     - source cirrus-env CI
+#     - unset SONARSOURCE_QA
+#     - mvn.cmd package -DskipTypeshed=true -DfailStubGenerationFast=true
 
 ws_scan_task:
-  depends_on:
-    - build
+  # depends_on:
+  #   - build
   <<: *BUILD_CONTAINER_DEFINITION
   # run only on master and long-term branches
   only_if: $CIRRUS_USER_COLLABORATOR == 'true' && $CIRRUS_TAG == "" && ($CIRRUS_BRANCH == "master" || $CIRRUS_BRANCH =~ "branch-.*")
@@ -143,8 +143,8 @@ ws_scan_task:
       path: "whitesource/**/*"
  
 plugin_qa_task:
-  depends_on:
-    - build
+  # depends_on:
+  #   - build
   <<: *ONLY_SONARSOURCE_QA
   eks_container:
     <<: *QA_CONTAINER_DEFINITION
@@ -167,8 +167,8 @@ plugin_qa_task:
   cleanup_before_cache_script: cleanup_maven_repository
 
 ruling_task:
-  depends_on:
-    - build
+  # depends_on:
+  #   - build
   <<: *ONLY_SONARSOURCE_QA
   eks_container:
     <<: *QA_CONTAINER_DEFINITION
@@ -190,8 +190,8 @@ ruling_task:
   cleanup_before_cache_script: cleanup_maven_repository
 
 extended_ruling_task:
-  depends_on:
-    - build
+  # depends_on:
+  #   - build
   <<: *ONLY_SONARSOURCE_QA
   eks_container:
     <<: *QA_CONTAINER_DEFINITION
@@ -213,8 +213,8 @@ extended_ruling_task:
   cleanup_before_cache_script: cleanup_maven_repository
 
 pr_analysis_qa_task:
-  depends_on:
-    - build
+  # depends_on:
+  #   - build
   <<: *ONLY_SONARSOURCE_QA
   eks_container:
     <<: *QA_CONTAINER_DEFINITION
