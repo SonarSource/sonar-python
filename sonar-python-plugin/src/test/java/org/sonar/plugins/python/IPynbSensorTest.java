@@ -26,6 +26,7 @@ import java.util.Collections;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.RegisterExtension;
 import org.mockito.Mockito;
 import org.slf4j.event.Level;
 import org.sonar.api.SonarRuntime;
@@ -76,7 +77,7 @@ class IPynbSensorTest {
 
   private ActiveRules activeRules;
 
-  @org.junit.Rule
+  @RegisterExtension
   public LogTesterJUnit5 logTester = new LogTesterJUnit5().setLevel(Level.DEBUG);
 
   @BeforeEach
@@ -226,5 +227,15 @@ class IPynbSensorTest {
     List<TokensLine> tokensLines = context.cpdTokens("moduleKey:notebook.ipynb");
     assertThat(tokensLines)
       .isNull();
+  }
+
+  @Test
+  void test_notebook_sensor_parse_error_on_valid_line(){
+    inputFile("notebook_parse_error.ipynb");
+    activeRules = new ActiveRulesBuilder().build();
+    var sensor = notebookSensor();
+    sensor.execute(context);
+    var logs = String.join("", logTester.logs());
+    assertThat(logs).contains("Unable to parse file: notebook_parse_error.ipynbParse error at line 1");
   }
 }
