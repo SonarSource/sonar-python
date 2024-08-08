@@ -26,7 +26,6 @@ public class SymbolV2Utils {
   public static boolean isDeclaration(UsageV2 usageV2) {
     return usageV2.kind() == UsageV2.Kind.FUNC_DECLARATION
       || usageV2.kind() == UsageV2.Kind.CLASS_DECLARATION
-      || usageV2.kind() == UsageV2.Kind.IMPORT
-      ;
+      || usageV2.kind() == UsageV2.Kind.IMPORT;
   }
 }
