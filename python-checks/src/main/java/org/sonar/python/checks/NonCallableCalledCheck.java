@@ -48,6 +48,13 @@ public class NonCallableCalledCheck extends PythonSubscriptionCheck {
       if (isNonCallableType(type, ctx.typeChecker())) {
         String name = nameFromExpression(callee);
         LOG.error("GDE RAISING ISSUE ON S5756 NonCallableCalledCheck");
+        LOG.error("Expression name: {}", name);
+        LOG.error("File: {}", ctx.pythonFile().fileName());
+        LOG.error("Expression line: {}", callee.firstToken().line());
+        LOG.error("Type name: {}", type.name());
+        type.definitionLocation().ifPresent(l -> LOG.error("LOCATION: {}", l.fileId()));
+        type.definitionLocation().ifPresent(l -> LOG.error("LOCATION LINE: {}", l.startLine()));
+        LOG.error("Type source: {}", type.typeSource());
         PreciseIssue preciseIssue = ctx.addIssue(callee, message(type, name));
         type.definitionLocation()
           .ifPresent(location -> preciseIssue.secondary(location, "Definition."));

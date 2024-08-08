@@ -28,7 +28,6 @@ import org.sonar.python.semantic.v2.TypeShed;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.sonar.python.types.v2.TypesTestUtils.BOOL_TYPE;
 import static org.sonar.python.types.v2.TypesTestUtils.INT_TYPE;
@@ -38,7 +37,7 @@ class LazyTypeTest {
   @Test
   void lazyTypeThrowExceptionsWhenInteractedWith() {
     LazyTypesContext lazyTypesContext = Mockito.mock(LazyTypesContext.class);
-    when(lazyTypesContext.resolveLazyType(any(LazyType.class))).thenReturn(INT_TYPE);
+    when(lazyTypesContext.resolveLazyType(Mockito.any(LazyType.class))).thenReturn(INT_TYPE);
     LazyType lazyType = new LazyType("random", lazyTypesContext);
     assertThat(lazyType.resolve()).isEqualTo(INT_TYPE);
     assertThatThrownBy(lazyType::unwrappedType).isInstanceOf(IllegalStateException.class).hasMessage("Lazy types should not be interacted with.");
