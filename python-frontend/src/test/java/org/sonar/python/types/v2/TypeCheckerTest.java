@@ -19,12 +19,15 @@
  */
 package org.sonar.python.types.v2;
 
+import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.ExpressionStatement;
 import org.sonar.plugins.python.api.tree.FileInput;
+import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.NumericLiteral;
+import org.sonar.plugins.python.api.tree.StatementList;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.PythonTestUtils;
 import org.sonar.python.tree.TreeUtils;
@@ -32,6 +35,8 @@ import org.sonar.python.tree.TreeUtils;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.types.v2.ClassTypeTest.classType;
 import static org.sonar.python.types.v2.TypesTestUtils.INT_TYPE;
+import static org.sonar.python.types.v2.TypesTestUtils.LIST_TYPE;
+import static org.sonar.python.types.v2.TypesTestUtils.SET_TYPE;
 import static org.sonar.python.types.v2.TypesTestUtils.PROJECT_LEVEL_TYPE_TABLE;
 import static org.sonar.python.types.v2.TypesTestUtils.parseAndInferTypes;
 
@@ -95,5 +100,135 @@ class TypeCheckerTest {
     assertThat(typeChecker.typeCheckBuilder().hasMember("__call__").check(classType)).isEqualTo(TriBool.TRUE);
     assertThat(typeChecker.typeCheckBuilder().hasMember("unknown").check(classType)).isEqualTo(TriBool.UNKNOWN);
     assertThat(typeChecker.typeCheckBuilder().instancesHaveMember("__call__").check(classType)).isEqualTo(TriBool.FALSE);
+  }
+
+  @Test
+  void typeSourceCheckTest() {
+    var fileInput = parseAndInferTypes("""
+      def foo(x: int):
+        y = 10
+        x
+        y
+      """
+    );
+    var functionBodyStatements = ((FunctionDef) fileInput.statements().statements().get(0)).body().statements();
+    var xName = ((ExpressionStatement) functionBodyStatements.get(1)).expressions().get(0);
+    var yName = ((ExpressionStatement) functionBodyStatements.get(2)).expressions().get(0);
+    var xType = xName.typeV2();
+    var yType = yName.typeV2();
+
+    assertThat(typeChecker.typeCheckBuilder().isTypeHintTypeSource().check(xType)).isEqualTo(TriBool.TRUE);
+    assertThat(typeChecker.typeCheckBuilder().isExactTypeSource().check(xType)).isEqualTo(TriBool.FALSE);
+
+    assertThat(typeChecker.typeCheckBuilder().isTypeHintTypeSource().check(yType)).isEqualTo(TriBool.FALSE);
+    assertThat(typeChecker.typeCheckBuilder().isExactTypeSource().check(yType)).isEqualTo(TriBool.TRUE);
+  }
+
+  @Test
+  void isInstanceOfSimpleTest() {
+    var listObject = new ObjectType(LIST_TYPE);
+    var setObject = new ObjectType(SET_TYPE);
+    var listOrSetObject = new ObjectType(UnionType.or(LIST_TYPE, SET_TYPE));
+
+    var checker = typeChecker.typeCheckBuilder().isInstanceOf("list");
+    assertThat(checker.check(listObject)).isEqualTo(TriBool.TRUE);
+    assertThat(checker.check(setObject)).isEqualTo(TriBool.FALSE);
+    assertThat(checker.check(listOrSetObject)).isEqualTo(TriBool.UNKNOWN);
+    assertThat(checker.check(LIST_TYPE)).isEqualTo(TriBool.UNKNOWN);
+    assertThat(checker.check(SET_TYPE)).isEqualTo(TriBool.UNKNOWN);
+
+    var unknownTypeChecker = typeChecker.typeCheckBuilder().isInstanceOf("typing.something");
+    assertThat(unknownTypeChecker.check(listObject)).isEqualTo(TriBool.UNKNOWN);
+    assertThat(unknownTypeChecker.check(setObject)).isEqualTo(TriBool.UNKNOWN);
+    assertThat(unknownTypeChecker.check(listOrSetObject)).isEqualTo(TriBool.UNKNOWN);
+    assertThat(unknownTypeChecker.check(LIST_TYPE)).isEqualTo(TriBool.UNKNOWN);
+    assertThat(unknownTypeChecker.check(SET_TYPE)).isEqualTo(TriBool.UNKNOWN);
+  }
+
+  @Test
+  void isInstanceOfObjectOfUnionTypeTest() {
+    var fileInput = parseAndInferTypes("""
+      import typing
+      
+      class A(typing.Iterator): ...
+      class B(typing.Iterator): ...
+      class C: ...
+      class D: ...
+      
+      def foo(p):
+        if p == 1:
+          xt = A
+          yt = A
+          zt = C
+        elif p == 2:
+          xt = B
+          yt = B
+          zt = C
+        else:
+          xt = B
+          yt = C
+          zt = D
+        x = xt()
+        y = yt()
+        z = zt()
+        x
+        y
+        z
+      """
+    );
+
+    var statements = TreeUtils.firstChild(fileInput, FunctionDef.class::isInstance)
+      .map(FunctionDef.class::cast)
+      .map(FunctionDef::body)
+      .map(StatementList::statements)
+      .orElseGet(List::of);
+    var xType = ((ExpressionStatement) statements.get(statements.size() - 3)).expressions().get(0).typeV2();
+    var yType = ((ExpressionStatement) statements.get(statements.size() - 2)).expressions().get(0).typeV2();
+    var zType = ((ExpressionStatement) statements.get(statements.size() - 1)).expressions().get(0).typeV2();
+
+    var checker = typeChecker.typeCheckBuilder().isInstanceOf("typing.Iterator");
+    assertThat(checker.check(xType)).isEqualTo(TriBool.TRUE);
+    assertThat(checker.check(yType)).isEqualTo(TriBool.UNKNOWN);
+    assertThat(checker.check(zType)).isEqualTo(TriBool.FALSE);
+  }
+
+  @Test
+  void isInstanceOfUnionTypeTest() {
+    var fileInput = parseAndInferTypes("""
+      import typing
+      
+      class A(typing.Iterator): ...
+      class B(typing.Iterator): ...
+      class C: ...
+      class D: ...
+      
+      def foo(p):
+        if p:
+          x = A()
+          y = A()
+          z = C()
+        else:
+          x = B()
+          y = C()
+          z = D()
+        x
+        y
+        z
+      """
+    );
+
+    var statements = TreeUtils.firstChild(fileInput, FunctionDef.class::isInstance)
+      .map(FunctionDef.class::cast)
+      .map(FunctionDef::body)
+      .map(StatementList::statements)
+      .orElseGet(List::of);
+    var xType = ((ExpressionStatement) statements.get(statements.size() - 3)).expressions().get(0).typeV2();
+    var yType = ((ExpressionStatement) statements.get(statements.size() - 2)).expressions().get(0).typeV2();
+    var zType = ((ExpressionStatement) statements.get(statements.size() - 1)).expressions().get(0).typeV2();
+
+    var checker = typeChecker.typeCheckBuilder().isInstanceOf("typing.Iterator");
+    assertThat(checker.check(xType)).isEqualTo(TriBool.TRUE);
+    assertThat(checker.check(yType)).isEqualTo(TriBool.UNKNOWN);
+    assertThat(checker.check(zType)).isEqualTo(TriBool.FALSE);
   }
 }
