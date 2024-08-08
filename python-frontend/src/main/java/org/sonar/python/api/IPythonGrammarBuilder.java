@@ -24,12 +24,12 @@ import org.sonar.sslr.grammar.LexerfulGrammarBuilder;
 import static com.sonar.sslr.api.GenericTokenType.EOF;
 import static org.sonar.python.api.IPythonGrammar.CELL;
 import static org.sonar.python.api.IPythonGrammar.CELL_MAGIC_STATEMENT;
-import static org.sonar.python.api.IPythonGrammar.LINE_MAGIC_STATEMENT;
 import static org.sonar.python.api.IPythonGrammar.DYNAMIC_OBJECT_INFO_STATEMENT;
 import static org.sonar.python.api.IPythonGrammar.LINE_MAGIC;
+import static org.sonar.python.api.IPythonGrammar.LINE_MAGIC_STATEMENT;
 import static org.sonar.python.api.IPythonGrammar.MAGIC_CELL;
-import static org.sonar.python.api.PythonGrammar.ASSERT_STMT;
 import static org.sonar.python.api.PythonGrammar.ANNOTATED_RHS;
+import static org.sonar.python.api.PythonGrammar.ASSERT_STMT;
 import static org.sonar.python.api.PythonGrammar.BREAK_STMT;
 import static org.sonar.python.api.PythonGrammar.CONTINUE_STMT;
 import static org.sonar.python.api.PythonGrammar.DEL_STMT;
@@ -38,7 +38,6 @@ import static org.sonar.python.api.PythonGrammar.EXPRESSION_STMT;
 import static org.sonar.python.api.PythonGrammar.FILE_INPUT;
 import static org.sonar.python.api.PythonGrammar.GLOBAL_STMT;
 import static org.sonar.python.api.PythonGrammar.IMPORT_STMT;
-import static org.sonar.python.api.PythonGrammar.NAME;
 import static org.sonar.python.api.PythonGrammar.NONLOCAL_STMT;
 import static org.sonar.python.api.PythonGrammar.PASS_STMT;
 import static org.sonar.python.api.PythonGrammar.PRINT_STMT;
@@ -75,7 +74,7 @@ public class IPythonGrammarBuilder extends PythonGrammarBuilder {
     b.rule(LINE_MAGIC_STATEMENT).is(LINE_MAGIC);
     b.rule(LINE_MAGIC).is(
       b.firstOf(PythonPunctuator.MOD, "!", PythonPunctuator.DIV),
-      NAME,
+      b.anyTokenButNot(PythonPunctuator.MOD),
       b.zeroOrMore(b.anyTokenButNot(b.firstOf(NEWLINE, b.next(EOF))))
     );
     b.rule(DYNAMIC_OBJECT_INFO_STATEMENT).is(b.firstOf(

@@ -29,12 +29,10 @@ import org.sonar.plugins.python.api.tree.TreeVisitor;
 public class LineMagicImpl extends PyTree implements LineMagic {
 
   private final Token percent;
-  private final Tree name;
   private final List<Token> tokens;
 
-  public LineMagicImpl(Token percent, Tree name, List<Token> tokens) {
+  public LineMagicImpl(Token percent, List<Token> tokens) {
     this.percent = percent;
-    this.name = name;
     this.tokens = tokens;
   }
 
@@ -52,7 +50,6 @@ public class LineMagicImpl extends PyTree implements LineMagic {
   List<Tree> computeChildren() {
     var children = new ArrayList<Tree>();
     children.add(percent);
-    children.add(name);
     children.addAll(tokens);
     return children;
   }
