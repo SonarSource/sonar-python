@@ -950,6 +950,26 @@ class TypeInferenceV2Test {
   }
 
   @Test
+  void try_except_import_from() {
+    var code = """
+      try:
+          try:
+              # py34+
+              from functools import singledispatch  # type: ignore
+          except ImportError:
+              from singledispatch import singledispatch  # backport
+      except ImportError:
+          if foo():
+              raise
+          singledispatch = None
+      singledispatch
+      """;
+    FileInput fileInput = inferTypes(code);
+    PythonType singleDispatchType = ((ExpressionStatement) fileInput.statements().statements().get(1)).expressions().get(0).typeV2();
+    assertThat(singleDispatchType).isInstanceOf(UnionType.class);
+  }
+
+  @Test
   void reassigned_class_try_except() {
     FileInput fileInput = inferTypes("""
       class MyClass:
