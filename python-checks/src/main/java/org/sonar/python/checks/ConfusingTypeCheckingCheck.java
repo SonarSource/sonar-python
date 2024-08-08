@@ -39,6 +39,8 @@ import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.types.InferredTypes;
 import org.sonar.python.types.TypeShed;
+import org.sonar.python.types.v2.PythonType;
+import org.sonar.python.types.v2.TriBool;
 
 import static org.sonar.python.tree.TreeUtils.nameFromExpression;
 import static org.sonar.python.types.InferredTypes.containsDeclaredType;
@@ -57,22 +59,6 @@ public class ConfusingTypeCheckingCheck extends PythonSubscriptionCheck {
     new SillyEqualityCheck().initialize(context);
     context.registerSyntaxNodeConsumer(Tree.Kind.RAISE_STMT, ConfusingTypeCheckingCheck::checkIncorrectExceptionType);
     context.registerSyntaxNodeConsumer(Tree.Kind.IS, ConfusingTypeCheckingCheck::checkSillyIdentity);
-  }
-
-  private static class NonCallableCalledCheck extends NonCallableCalled {
-
-    @Override
-    public boolean isNonCallableType(InferredType type) {
-      return containsDeclaredType(type) && !type.declaresMember("__call__") && !type.mustBeOrExtend("typing.Coroutine");
-    }
-
-    @Override
-    public String message(InferredType calleeType, @Nullable String name) {
-      if (name != null) {
-        return String.format("Fix this call; Previous type checks suggest that \"%s\"%s is not callable.", name, addTypeName(calleeType));
-      }
-      return String.format("Fix this call; Previous type checks suggest that this expression%s is not callable.", addTypeName(calleeType));
-    }
   }
 
   private static class IncompatibleOperandsCheck extends IncompatibleOperands {
@@ -215,6 +201,20 @@ public class ConfusingTypeCheckingCheck extends PythonSubscriptionCheck {
     @Override
     String message(String result) {
       return "Fix this equality check; Previous type checks suggest that operands have incompatible types.";
+    }
+  }
+
+  private static class NonCallableCalledCheck extends NonCallableCalled {
+
+    @Override
+    protected boolean isExpectedTypeSource(SubscriptionContext ctx, PythonType calleeType) {
+      return ctx.typeChecker().typeCheckBuilder().isTypeHintTypeSource().check(calleeType) == TriBool.TRUE;
+    }
+
+    @Override
+    protected boolean isException(SubscriptionContext ctx, PythonType calleeType) {
+      var isCoroutine = ctx.typeChecker().typeCheckBuilder().isInstanceOf("typing.Coroutine").check(calleeType) == TriBool.TRUE;
+      return super.isException(ctx, calleeType) || isCoroutine;
     }
   }
 

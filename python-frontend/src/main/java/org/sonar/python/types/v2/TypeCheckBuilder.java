@@ -19,8 +19,11 @@
  */
 package org.sonar.python.types.v2;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import org.sonar.python.semantic.v2.ProjectLevelTypeTable;
 
 public class TypeCheckBuilder {
@@ -47,6 +50,11 @@ public class TypeCheckBuilder {
     return this;
   }
 
+  public TypeCheckBuilder isExactTypeSource() {
+    predicates.add(new TypeSourceMatcherTypePredicate(TypeSource.EXACT));
+    return this;
+  }
+
   public TypeCheckBuilder isBuiltinWithName(String name) {
     PythonType builtinType = projectLevelTypeTable.getBuiltinsModule().resolveMember(name).orElse(PythonType.UNKNOWN);
     predicates.add(new IsSameAsTypePredicate(builtinType));
@@ -63,6 +71,12 @@ public class TypeCheckBuilder {
       }
     }
     return result;
+  }
+
+  public TypeCheckBuilder isInstanceOf(String fqn) {
+    var expected = projectLevelTypeTable.getType(fqn);
+    predicates.add(new IsInstanceOfPredicate(expected));
+    return this;
   }
 
   interface TypePredicate {
@@ -125,4 +139,93 @@ public class TypeCheckBuilder {
       return pythonType.equals(expectedType) ? TriBool.TRUE : TriBool.FALSE;
     }
   }
+
+  record IsInstanceOfPredicate(PythonType expectedType)  implements TypePredicate {
+
+    @Override
+    public TriBool test(PythonType pythonType) {
+      if (expectedType instanceof ClassType expectedClassType) {
+        if (pythonType instanceof ObjectType objectType) {
+          if (objectType.type() instanceof ClassType classType) {
+            // when the checking type is an ObjectType of a ClassType
+            return isClassInheritedFrom(classType, expectedClassType);
+          } else if (objectType.type() instanceof UnionType unionType) {
+            // when the checking type is an ObjectType of a UnionType
+            return isObjectOfUnionTypeInstanceOf(expectedClassType, unionType);
+          }
+        } else if (pythonType instanceof UnionType unionType) {
+          // when the checking type is a UnionType
+          return isUnionTypeInstanceOf(unionType);
+        }
+      }
+      return TriBool.UNKNOWN;
+    }
+
+    private static TriBool isObjectOfUnionTypeInstanceOf(ClassType expectedClassType, UnionType unionType) {
+      var results = unionType.candidates()
+        .stream()
+        .map(classType -> isClassInheritedFrom(classType, expectedClassType))
+        .distinct()
+        .toList();
+
+      if (results.size() > 1) {
+        return TriBool.UNKNOWN;
+      } else {
+        return results.get(0);
+      }
+    }
+
+    private TriBool isUnionTypeInstanceOf(UnionType unionType) {
+      var candidatesResults = unionType.candidates()
+        .stream()
+        .map(this::test)
+        .distinct()
+        .toList();
+
+      if (candidatesResults.size() != 1) {
+        return TriBool.UNKNOWN;
+      } else {
+        return candidatesResults.get(0);
+      }
+    }
+
+    private static TriBool isClassInheritedFrom(PythonType classType, ClassType expectedClassType) {
+      if (classType == expectedClassType) {
+        return TriBool.TRUE;
+      }
+
+      var types = collectTypes(classType);
+
+      if (types.contains(expectedClassType)) {
+        return TriBool.TRUE;
+      } else if (types.contains(PythonType.UNKNOWN)) {
+        return TriBool.UNKNOWN;
+      } else {
+        return TriBool.FALSE;
+      }
+    }
+
+    private static Set<PythonType> collectTypes(PythonType type) {
+      var result = new HashSet<PythonType>();
+      var queue = new ArrayDeque<PythonType>();
+      queue.add(type);
+      while (!queue.isEmpty()) {
+        var currentType = queue.pop();
+        if (result.contains(currentType)) {
+          continue;
+        }
+        result.add(currentType);
+        if (currentType instanceof UnionType) {
+          result.clear();
+          result.add(PythonType.UNKNOWN);
+          queue.clear();
+        } else if (currentType instanceof ClassType classType) {
+          queue.addAll(classType.superClasses());
+        }
+      }
+      return result;
+    }
+  }
+
+
 }
