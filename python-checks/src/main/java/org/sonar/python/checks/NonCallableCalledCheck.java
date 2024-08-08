@@ -20,6 +20,8 @@
 package org.sonar.python.checks;
 
 import javax.annotation.Nullable;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.tree.CallExpression;
@@ -34,6 +36,9 @@ import static org.sonar.python.tree.TreeUtils.nameFromExpression;
 @Rule(key = "S5756")
 public class NonCallableCalledCheck extends PythonSubscriptionCheck {
 
+  private static final Logger LOG = LoggerFactory.getLogger(NonCallableCalledCheck.class);
+
+
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, ctx -> {
@@ -42,6 +47,7 @@ public class NonCallableCalledCheck extends PythonSubscriptionCheck {
       PythonType type = callee.typeV2();
       if (isNonCallableType(type, ctx.typeChecker())) {
         String name = nameFromExpression(callee);
+        LOG.error("GDE RAISING ISSUE ON S5756 NonCallableCalledCheck");
         PreciseIssue preciseIssue = ctx.addIssue(callee, message(type, name));
         type.definitionLocation()
           .ifPresent(location -> preciseIssue.secondary(location, "Definition."));

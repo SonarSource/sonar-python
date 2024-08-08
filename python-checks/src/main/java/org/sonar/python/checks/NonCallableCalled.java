@@ -20,6 +20,8 @@
 package org.sonar.python.checks;
 
 import javax.annotation.Nullable;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sonar.plugins.python.api.LocationInFile;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.tree.CallExpression;
@@ -32,6 +34,9 @@ import static org.sonar.python.tree.TreeUtils.nameFromExpression;
 import static org.sonar.python.types.InferredTypes.typeClassLocation;
 
 public abstract class NonCallableCalled extends PythonSubscriptionCheck {
+
+  private static final Logger LOG = LoggerFactory.getLogger(NonCallableCalledCheck.class);
+
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, ctx -> {
@@ -40,6 +45,7 @@ public abstract class NonCallableCalled extends PythonSubscriptionCheck {
       InferredType calleeType = callee.type();
       if (isNonCallableType(calleeType)) {
         String name = nameFromExpression(callee);
+        LOG.error("GDE RAISING ISSUE ON S5864 NonCallable ConfusingTypeCheckingCheck");
         PreciseIssue preciseIssue = ctx.addIssue(callee, message(calleeType, name));
         LocationInFile location = typeClassLocation(calleeType);
         if (location != null) {
