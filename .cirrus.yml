@@ -56,10 +56,17 @@ only_sonarsource_qa: &ONLY_SONARSOURCE_QA
 
 orchestrator_cache_definition: &ORCHESTRATOR_CACHE_DEFINITION
   set_orchestrator_home_script: |
-    export CURRENT_MONTH=$(date +"%B")
     echo "TODAY=${CURRENT_MONTH}" >> $CIRRUS_ENV
     echo "CURRENT_MONTH=${CURRENT_MONTH}" >> $CIRRUS_ENV
-    echo "ORCHESTRATOR_HOME=${CIRRUS_WORKING_DIR}/orchestrator/${CIRRUS_TASK_NAME}/${CURRENT_MONTH}" >> $CIRRUS_ENV
+
+    # Check if SQ_VERSION exists and create an intermediary variable
+    if [ -n "$SQ_VERSION" ]; then
+        TASK_NAME_WITH_VERSION="${CIRRUS_TASK_NAME}-${SQ_VERSION}"
+    else
+        TASK_NAME_WITH_VERSION="${CIRRUS_TASK_NAME}"
+    fi
+
+    echo "ORCHESTRATOR_HOME=${CIRRUS_WORKING_DIR}/orchestrator/${TASK_NAME_WITH_VERSION}/${CURRENT_MONTH}" >> $CIRRUS_ENV
   mkdir_orchestrator_home_script: |
     echo "Create dir ${ORCHESTRATOR_HOME} if needed"
     mkdir -p ${ORCHESTRATOR_HOME}
@@ -104,7 +111,6 @@ build_win_task:
   maven_cache:
     #windows cache is buggy if using ${CIRRUS_WORKING_DIR}
     folder: ~/.m2/repository
-  <<: *ORCHESTRATOR_CACHE_DEFINITION
   build_script:
     - git config --global core.autocrlf input
     - git submodule update --init
