@@ -20,11 +20,14 @@
 package org.sonar.python.checks;
 
 import javax.annotation.Nullable;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.types.v2.FunctionType;
 import org.sonar.python.types.v2.TypeChecker;
 import org.sonar.python.types.v2.PythonType;
 import org.sonar.python.types.v2.TriBool;
@@ -33,6 +36,7 @@ import static org.sonar.python.tree.TreeUtils.nameFromExpression;
 
 @Rule(key = "S5756")
 public class NonCallableCalledCheck extends PythonSubscriptionCheck {
+  private static final Logger LOG = LoggerFactory.getLogger(NonCallableCalledCheck.class);
 
   @Override
   public void initialize(Context context) {
@@ -41,6 +45,10 @@ public class NonCallableCalledCheck extends PythonSubscriptionCheck {
       Expression callee = callExpression.callee();
       PythonType type = callee.typeV2();
       if (isNonCallableType(type, ctx.typeChecker())) {
+        if (callee instanceof CallExpression calleeCallExpression
+            && calleeCallExpression.callee().typeV2() instanceof FunctionType functionType) {
+          LOG.info("Callee is a function with type: " + functionType.name() + ", and type origin: " + functionType.typeOrigin().toString());
+        }
         String name = nameFromExpression(callee);
         PreciseIssue preciseIssue = ctx.addIssue(callee, message(type, name));
         type.definitionLocation()
