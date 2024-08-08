@@ -24,6 +24,7 @@ import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.ExpressionStatement;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
+import org.sonar.plugins.python.api.tree.ImportName;
 import org.sonar.plugins.python.api.tree.Name;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -38,6 +39,8 @@ class SymbolV2UtilsTest {
       foo
       class MyClass: ...
       MyClass
+      import bar
+      bar
       """);
     new SymbolTableBuilderV2(fileInput).build();
 
@@ -45,15 +48,23 @@ class SymbolV2UtilsTest {
     Name fooName = (Name) ((ExpressionStatement) fileInput.statements().statements().get(1)).expressions().get(0);
     ClassDef classDef = (ClassDef) fileInput.statements().statements().get(2);
     Name myClassName = (Name) ((ExpressionStatement) fileInput.statements().statements().get(3)).expressions().get(0);
+    ImportName importName = (ImportName) fileInput.statements().statements().get(4);
+    Name barName = (Name) ((ExpressionStatement) fileInput.statements().statements().get(5)).expressions().get(0);
 
     UsageV2 functionDefUsage = functionDef.name().symbolV2().usages().stream().filter(u -> functionDef.name().equals(u.tree())).findFirst().get();
     UsageV2 nameUsage = fooName.symbolV2().usages().stream().filter(u -> fooName.equals(u.tree())).findFirst().get();
     UsageV2 classDefUsage = classDef.name().symbolV2().usages().stream().filter(u -> classDef.name().equals(u.tree())).findFirst().get();
     UsageV2 myClassaNameUsage = myClassName.symbolV2().usages().stream().filter(u -> myClassName.equals(u.tree())).findFirst().get();
+    UsageV2 barImportUsage = importName.modules().get(0).dottedName().names().get(0).symbolV2().usages()
+      .stream().filter(u -> importName.modules().get(0).dottedName().names().get(0).equals(u.tree())).findFirst().get();
+    UsageV2 barNameUsage = barName.symbolV2().usages().stream().filter(u -> barName.equals(u.tree())).findFirst().get();
 
-    assertThat(SymbolV2Utils.isFunctionOrClassDeclaration(functionDefUsage)).isTrue();
-    assertThat(SymbolV2Utils.isFunctionOrClassDeclaration(nameUsage)).isFalse();
-    assertThat(SymbolV2Utils.isFunctionOrClassDeclaration(classDefUsage)).isTrue();
-    assertThat(SymbolV2Utils.isFunctionOrClassDeclaration(myClassaNameUsage)).isFalse();
+
+    assertThat(SymbolV2Utils.isDeclaration(functionDefUsage)).isTrue();
+    assertThat(SymbolV2Utils.isDeclaration(nameUsage)).isFalse();
+    assertThat(SymbolV2Utils.isDeclaration(classDefUsage)).isTrue();
+    assertThat(SymbolV2Utils.isDeclaration(myClassaNameUsage)).isFalse();
+    assertThat(SymbolV2Utils.isDeclaration(barImportUsage)).isTrue();
+    assertThat(SymbolV2Utils.isDeclaration(barNameUsage)).isFalse();
   }
 }
