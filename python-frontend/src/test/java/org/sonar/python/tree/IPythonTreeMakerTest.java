@@ -212,6 +212,20 @@ class IPythonTreeMakerTest extends RuleTest {
     assertThat(lineMagic)
       .isNotNull()
       .isInstanceOf(LineMagic.class);
+
+    statements = parseIPython("""
+      !7z --help
+      !./script.sh
+      !
+      """, treeMaker::fileInput).statements().statements();
+    assertThat(statements).hasSize(3);
+    assertThat(statements.get(0).getKind()).isEqualTo(Tree.Kind.EXPRESSION_STMT);
+    assertThat(((ExpressionStatement) statements.get(0)).expressions()).hasSize(1).allMatch(e -> e.is(Tree.Kind.LINE_MAGIC));
+    assertThat(statements.get(1).getKind()).isEqualTo(Tree.Kind.EXPRESSION_STMT);
+    assertThat(((ExpressionStatement) statements.get(1)).expressions()).hasSize(1).allMatch(e -> e.is(Tree.Kind.LINE_MAGIC));
+    assertThat(statements.get(2).getKind()).isEqualTo(Tree.Kind.EXPRESSION_STMT);
+    assertThat(((ExpressionStatement) statements.get(2)).expressions()).hasSize(1).allMatch(e -> e.is(Tree.Kind.LINE_MAGIC));
+
   }
 
   @Test
