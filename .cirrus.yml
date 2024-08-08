@@ -54,6 +54,19 @@ build_container_definition: &BUILD_CONTAINER_DEFINITION
 only_sonarsource_qa: &ONLY_SONARSOURCE_QA
   only_if: $CIRRUS_USER_COLLABORATOR == 'true' && $CIRRUS_TAG == "" && ($CIRRUS_PR != "" || $CIRRUS_BRANCH == 'master' || $CIRRUS_BRANCH =~ "branch-.*" || $CIRRUS_BUILD_SOURCE == 'api'  || $CIRRUS_BRANCH =~ "dogfood-on-.*")
 
+orchestrator_cache_definition: &ORCHESTRATOR_CACHE_DEFINITION
+  set_orchestrator_home_script: |
+    export TODAY=$(date '+%Y-%m-%d')
+    echo "TODAY=${TODAY}" >> $CIRRUS_ENV
+    echo "ORCHESTRATOR_HOME=${CIRRUS_WORKING_DIR}/orchestrator/${TODAY}" >> $CIRRUS_ENV
+  mkdir_orchestrator_home_script: |
+    echo "Create dir ${ORCHESTRATOR_HOME} if needed"
+    mkdir -p ${ORCHESTRATOR_HOME}
+  orchestrator_cache:
+    folder: ${ORCHESTRATOR_HOME}
+    fingerprint_script: echo ${TODAY}
+    reupload_on_changes: "true"
+
 build_task:
   <<: *BUILD_CONTAINER_DEFINITION
   <<: *ONLY_SONARSOURCE_QA
@@ -68,6 +81,7 @@ build_task:
     PGP_PASSPHRASE: VAULT[development/kv/data/sign data.passphrase]
   maven_cache:
     folder: ${CIRRUS_WORKING_DIR}/.m2/repository
+  <<: *ORCHESTRATOR_CACHE_DEFINITION
   build_script:
     - git submodule update --init
     - cd python-frontend/typeshed_serializer/resources/python-type-stubs
@@ -87,6 +101,7 @@ build_win_task:
   maven_cache:
     #windows cache is buggy if using ${CIRRUS_WORKING_DIR}
     folder: ~/.m2/repository
+  <<: *ORCHESTRATOR_CACHE_DEFINITION
   build_script:
     - git config --global core.autocrlf input
     - git submodule update --init
@@ -134,6 +149,7 @@ plugin_qa_task:
       - SQ_VERSION: DEV
   maven_cache:
     folder: ${CIRRUS_WORKING_DIR}/.m2/repository
+  <<: *ORCHESTRATOR_CACHE_DEFINITION
   qa_script:
     - source cirrus-env QA
     - source set_maven_build_version $BUILD_NUMBER
@@ -154,6 +170,7 @@ ruling_task:
     SONARSOURCE_QA: true
   maven_cache:
     folder: ${CIRRUS_WORKING_DIR}/.m2/repository
+  <<: *ORCHESTRATOR_CACHE_DEFINITION
   submodules_script:
     - git submodule update --init
   ruling_script:
@@ -176,6 +193,7 @@ extended_ruling_task:
     SONARSOURCE_QA: true
   maven_cache:
     folder: ${CIRRUS_WORKING_DIR}/.m2/repository
+  <<: *ORCHESTRATOR_CACHE_DEFINITION
   submodules_script:
     - git submodule update --init
   ruling_script:
@@ -199,6 +217,7 @@ pr_analysis_qa_task:
     SONARSOURCE_QA: true
   maven_cache:
     folder: ${CIRRUS_WORKING_DIR}/.m2/repository
+  <<: *ORCHESTRATOR_CACHE_DEFINITION
   qa_script:
     - source cirrus-env QA
     - source set_maven_build_version $BUILD_NUMBER
