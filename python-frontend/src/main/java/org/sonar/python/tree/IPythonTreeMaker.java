@@ -41,7 +41,6 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.DocstringExtractor;
 import org.sonar.python.IPythonLocation;
 import org.sonar.python.api.IPythonGrammar;
-import org.sonar.python.api.PythonGrammar;
 
 public class IPythonTreeMaker extends PythonTreeMaker {
 
@@ -153,15 +152,14 @@ public class IPythonTreeMaker extends PythonTreeMaker {
 
   protected LineMagic lineMagic(AstNode astNode) {
     var percent = toPyToken(astNode.getFirstChild().getToken());
-    var name = toPyToken(astNode.getFirstChild(PythonGrammar.NAME).getToken());
 
     var tokens = astNode.getChildren()
       .stream()
-      .skip(2)
+      .skip(1)
       .map(AstNode::getTokens)
       .flatMap(Collection::stream)
       .map(this::toPyToken)
       .toList();
-    return new LineMagicImpl(percent, name, tokens);
+    return new LineMagicImpl(percent, tokens);
   }
 }
