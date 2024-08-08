@@ -51,9 +51,9 @@ class SymbolV2UtilsTest {
     UsageV2 classDefUsage = classDef.name().symbolV2().usages().stream().filter(u -> classDef.name().equals(u.tree())).findFirst().get();
     UsageV2 myClassaNameUsage = myClassName.symbolV2().usages().stream().filter(u -> myClassName.equals(u.tree())).findFirst().get();
 
-    assertThat(SymbolV2Utils.isFunctionOrClassDeclaration(functionDefUsage)).isTrue();
-    assertThat(SymbolV2Utils.isFunctionOrClassDeclaration(nameUsage)).isFalse();
-    assertThat(SymbolV2Utils.isFunctionOrClassDeclaration(classDefUsage)).isTrue();
-    assertThat(SymbolV2Utils.isFunctionOrClassDeclaration(myClassaNameUsage)).isFalse();
+    assertThat(SymbolV2Utils.isDeclaration(functionDefUsage)).isTrue();
+    assertThat(SymbolV2Utils.isDeclaration(nameUsage)).isFalse();
+    assertThat(SymbolV2Utils.isDeclaration(classDefUsage)).isTrue();
+    assertThat(SymbolV2Utils.isDeclaration(myClassaNameUsage)).isFalse();
   }
 }
