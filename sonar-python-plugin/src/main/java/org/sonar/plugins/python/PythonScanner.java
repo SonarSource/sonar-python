@@ -121,12 +121,16 @@ public class PythonScanner extends Scanner {
       }
     } catch (RecognitionException e) {
       visitorContext = new PythonVisitorContext(pythonFile, e, context.runtime().getProduct());
+
+      var line = (inputFile.kind() == PythonInputFile.Kind.IPYTHON) ? ((GeneratedIPythonFile) inputFile).locationMap().get(e.getLine()).line() : e.getLine();
+      var newMessage = e.getMessage().replace("line " + e.getLine(), "line " + line);
+
       LOG.error("Unable to parse file: " + inputFile);
-      LOG.error(e.getMessage());
+      LOG.error(newMessage);
       context.newAnalysisError()
         .onFile(inputFile.wrappedFile())
-        .at(inputFile.wrappedFile().newPointer(e.getLine(), 0))
-        .message(e.getMessage())
+        .at(inputFile.wrappedFile().newPointer(line, 0))
+        .message(newMessage)
         .save();
     }
     List<PythonSubscriptionCheck> checksBasedOnTree = new ArrayList<>();
