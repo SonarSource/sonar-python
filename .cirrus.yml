@@ -56,8 +56,7 @@ only_sonarsource_qa: &ONLY_SONARSOURCE_QA
 
 orchestrator_cache_definition: &ORCHESTRATOR_CACHE_DEFINITION
   set_orchestrator_home_script: |
-    echo "TODAY=${CURRENT_MONTH}" >> $CIRRUS_ENV
-    echo "CURRENT_MONTH=${CURRENT_MONTH}" >> $CIRRUS_ENV
+    echo "CURRENT_MONTH=$(date +"%B")" >> $CIRRUS_ENV
 
     # Check if SQ_VERSION exists and create an intermediary variable
     if [ -n "$SQ_VERSION" ]; then
@@ -72,7 +71,7 @@ orchestrator_cache_definition: &ORCHESTRATOR_CACHE_DEFINITION
     mkdir -p ${ORCHESTRATOR_HOME}
   orchestrator_cache:
     folder: ${ORCHESTRATOR_HOME}
-    fingerprint_script: echo ${CURRENT_MONTH}-${CIRRUS_TASK_NAME}
+    fingerprint_script: echo ${TASK_NAME_WITH_VERSION}-${CURRENT_MONTH}
     reupload_on_changes: "true"
   echo_directory_script: |
     echo "Directory ${ORCHESTRATOR_HOME} contains:"
