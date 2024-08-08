@@ -66,6 +66,7 @@ orchestrator_cache_definition: &ORCHESTRATOR_CACHE_DEFINITION
     fi
 
     echo "ORCHESTRATOR_HOME=${CIRRUS_WORKING_DIR}/orchestrator/${TASK_NAME_WITH_VERSION}/${CURRENT_MONTH}" >> $CIRRUS_ENV
+    echo $TASK_NAME_WITH_VERSION >> $CIRRUS_ENV
   mkdir_orchestrator_home_script: |
     echo "Create dir ${ORCHESTRATOR_HOME} if needed"
     mkdir -p ${ORCHESTRATOR_HOME}
