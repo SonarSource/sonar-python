@@ -92,7 +92,7 @@ public abstract class Propagation {
       .stream()
       // Function and class definition names will always have FunctionType and ClassType respectively
       // so they are filtered out of type propagation
-      .filter(u -> !SymbolV2Utils.isFunctionOrClassDeclaration(u))
+      .filter(u -> !SymbolV2Utils.isDeclaration(u))
       .map(UsageV2::tree);
   }
 
@@ -111,7 +111,7 @@ public abstract class Propagation {
   static PythonType currentType(Name lhsName) {
     return lhsName.symbolV2().usages()
       .stream()
-      .filter(u -> !SymbolV2Utils.isFunctionOrClassDeclaration(u))
+      .filter(u -> !SymbolV2Utils.isDeclaration(u))
       .map(UsageV2::tree)
       .filter(Expression.class::isInstance)
       .map(Expression.class::cast)
