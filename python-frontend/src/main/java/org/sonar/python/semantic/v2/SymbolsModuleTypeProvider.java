@@ -35,11 +35,12 @@ import org.sonar.plugins.python.api.symbols.AmbiguousSymbol;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
-import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.semantic.ClassSymbolImpl;
 import org.sonar.python.semantic.FunctionSymbolImpl;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.semantic.SymbolImpl;
+import org.sonar.python.types.InferredTypes;
+import org.sonar.python.types.protobuf.SymbolsProtos;
 import org.sonar.python.types.v2.ClassType;
 import org.sonar.python.types.v2.FunctionType;
 import org.sonar.python.types.v2.LazyType;
@@ -120,9 +121,11 @@ public class SymbolsModuleTypeProvider {
       .map(SymbolsModuleTypeProvider::convertParameter)
       .toList();
 
-    InferredType inferredType = ((FunctionSymbolImpl) symbol).declaredReturnType();
-    ClassSymbol classSymbol = inferredType.runtimeTypeSymbol();
-    var returnType = resolveReturnType(createdTypesBySymbol, classSymbol);
+    var returnType = PythonType.UNKNOWN;
+    var protoReturnType = ((FunctionSymbolImpl) symbol).protobufReturnType();
+    if (protoReturnType != null) {
+      returnType = convertProtobufType(protoReturnType);
+    }
     TypeOrigin typeOrigin = symbol.isStub() ? TypeOrigin.STUB : TypeOrigin.LOCAL;
 
     FunctionTypeBuilder functionTypeBuilder =
@@ -142,20 +145,6 @@ public class SymbolsModuleTypeProvider {
     }
     createdTypesBySymbol.put(symbol, functionType);
     return functionType;
-  }
-
-  private PythonType resolveReturnType(Map<Symbol, PythonType> createdTypesBySymbol, @Nullable ClassSymbol classSymbol) {
-    if (classSymbol == null) {
-      return PythonType.UNKNOWN;
-    }
-    if (createdTypesBySymbol.containsKey(classSymbol)) {
-      return createdTypesBySymbol.get(classSymbol);
-    }
-    String fullyQualifiedName = classSymbol.fullyQualifiedName();
-    if (fullyQualifiedName == null) {
-      return convertToType(classSymbol, createdTypesBySymbol);
-    }
-    return resolvePossibleLazyType(fullyQualifiedName);
   }
 
   PythonType resolvePossibleLazyType(String fullyQualifiedName) {
@@ -244,5 +233,44 @@ public class SymbolsModuleTypeProvider {
       // Symbols that are neither classes or function nor ambiguous symbols whose alternatives are all classes or functions are considered of unknown type
       case OTHER -> PythonType.UNKNOWN;
     };
+  }
+
+  public PythonType convertProtobufType(SymbolsProtos.Type type) {
+    switch (type.getKind()) {
+      case INSTANCE:
+        String typeName = type.getFullyQualifiedName();
+        // _SpecialForm is the type used for some special types, like Callable, Union, TypeVar, ...
+        // It comes from CPython impl: https://github.com/python/cpython/blob/e39ae6bef2c357a88e232dcab2e4b4c0f367544b/Lib/typing.py#L439
+        // This doesn't seem to be very precisely specified in typeshed, because it has special semantic.
+        // To avoid FPs, we treat it as ANY
+        if ("typing._SpecialForm".equals(typeName)) {
+          return PythonType.UNKNOWN;
+        }
+        typeName = typeName.replaceFirst("^builtins\\.", "");
+        return typeName.isEmpty() ? PythonType.UNKNOWN : resolvePossibleLazyType(typeName);
+      case TYPE:
+        return resolvePossibleLazyType("type");
+      case TYPE_ALIAS:
+        return convertProtobufType(type.getArgs(0));
+      case CALLABLE:
+        // this should be handled as a function type - see SONARPY-953
+        return PythonType.UNKNOWN;
+      case UNION:
+        return UnionType.or(type.getArgsList().stream().map(this::convertProtobufType).collect(Collectors.toSet()));
+      case TUPLE:
+        return resolvePossibleLazyType("tuple");
+      case NONE:
+        return resolvePossibleLazyType("NoneType");
+      case TYPED_DICT:
+        return resolvePossibleLazyType("dict");
+      case TYPE_VAR:
+        return Optional.of(type)
+          .filter(InferredTypes::filterTypeVar)
+          .map(SymbolsProtos.Type::getFullyQualifiedName)
+          .map(this::resolvePossibleLazyType)
+          .orElse(PythonType.UNKNOWN);
+      default:
+        return PythonType.UNKNOWN;
+    }
   }
 }
