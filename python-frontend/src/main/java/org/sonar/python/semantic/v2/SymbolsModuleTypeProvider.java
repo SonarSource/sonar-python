@@ -36,6 +36,7 @@ import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.python.semantic.ClassSymbolImpl;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.semantic.SymbolImpl;
+import org.sonar.python.semantic.v2.typeshed.TypeShedModuleTypeProvider;
 import org.sonar.python.types.v2.ClassType;
 import org.sonar.python.types.v2.FunctionType;
 import org.sonar.python.types.v2.Member;
@@ -46,11 +47,13 @@ import org.sonar.python.types.v2.UnionType;
 
 public class SymbolsModuleTypeProvider {
   private final ProjectLevelSymbolTable projectLevelSymbolTable;
+  private final TypeShedModuleTypeProvider typeShedModuleTypeProvider;
   private final TypeShed typeShed;
 
   public SymbolsModuleTypeProvider(ProjectLevelSymbolTable projectLevelSymbolTable, TypeShed typeShed) {
     this.projectLevelSymbolTable = projectLevelSymbolTable;
     this.typeShed = typeShed;
+    typeShedModuleTypeProvider = new TypeShedModuleTypeProvider();
   }
 
   public ModuleType createBuiltinModule() {
@@ -61,7 +64,7 @@ public class SymbolsModuleTypeProvider {
     var moduleName = moduleFqn.get(moduleFqn.size() - 1);
     var moduleFqnString = getModuleFqnString(moduleFqn);
     return createModuleTypeFromProjectLevelSymbolTable(moduleName, moduleFqnString, parent)
-      .or(() -> createModuleTypeFromTypeShed(moduleName, moduleFqnString, parent))
+      .or(() -> Optional.ofNullable(typeShedModuleTypeProvider.getModuleType(moduleFqnString, parent)))
       .orElseGet(() -> createEmptyModule(moduleName, parent));
   }
 
