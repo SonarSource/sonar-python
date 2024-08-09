@@ -19,21 +19,7 @@
  */
 package org.sonar.python.types.v2;
 
-import org.sonar.api.Beta;
-
-@Beta
-public enum TriBool {
-  TRUE,
-  FALSE,
-  UNKNOWN;
-
-  public TriBool and(TriBool triBool) {
-    if (this.equals(triBool)) {
-      return this;
-    }
-    if (this.equals(UNKNOWN) || triBool.equals(UNKNOWN)) {
-      return UNKNOWN;
-    }
-    return FALSE;
-  }
+public enum TypeSource {
+  EXACT,
+  TYPE_HINT
 }

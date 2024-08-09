@@ -431,7 +431,7 @@ public class BaseTreeVisitor implements TreeVisitor {
   }
 
   @Override
-  public void visitDictCompExpression(DictCompExpressionImpl tree) {
+  public void visitDictCompExpression(DictCompExpression tree) {
     scan(tree.keyExpression());
     scan(tree.valueExpression());
     scan(tree.comprehensionFor());

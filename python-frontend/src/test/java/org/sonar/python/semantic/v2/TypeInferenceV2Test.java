@@ -56,15 +56,18 @@ import org.sonar.python.types.v2.ModuleType;
 import org.sonar.python.types.v2.ObjectType;
 import org.sonar.python.types.v2.ParameterV2;
 import org.sonar.python.types.v2.PythonType;
+import org.sonar.python.types.v2.TypeSource;
 import org.sonar.python.types.v2.UnionType;
 import org.sonar.python.types.v2.UnknownType;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.PythonTestUtils.parse;
+import static org.sonar.python.types.v2.TypesTestUtils.DICT_TYPE;
 import static org.sonar.python.types.v2.TypesTestUtils.INT_TYPE;
 import static org.sonar.python.types.v2.TypesTestUtils.LIST_TYPE;
 import static org.sonar.python.types.v2.TypesTestUtils.NONE_TYPE;
 import static org.sonar.python.types.v2.TypesTestUtils.PROJECT_LEVEL_TYPE_TABLE;
+import static org.sonar.python.types.v2.TypesTestUtils.SET_TYPE;
 import static org.sonar.python.types.v2.TypesTestUtils.STR_TYPE;
 
 class TypeInferenceV2Test {
@@ -355,8 +358,8 @@ class TypeInferenceV2Test {
 
     var functionDef = (FunctionDef) root.statements().statements().get(0);
     var lastExpressionStatement = (ExpressionStatement) functionDef.body().statements().get(functionDef.body().statements().size() -1);
-    // TODO SONARPY-1773: should be declared int
-    Assertions.assertThat(lastExpressionStatement.expressions().get(0).typeV2().unwrappedType()).isEqualTo(PythonType.UNKNOWN);
+    Assertions.assertThat(lastExpressionStatement.expressions().get(0).typeV2().unwrappedType()).isEqualTo(INT_TYPE);
+    Assertions.assertThat(lastExpressionStatement.expressions().get(0).typeV2().typeSource()).isEqualTo(TypeSource.TYPE_HINT);
   }
 
   @Test
@@ -395,7 +398,111 @@ class TypeInferenceV2Test {
 
     var functionDef = (FunctionDef) root.statements().statements().get(0);
     var lastExpressionStatement = (ExpressionStatement) functionDef.body().statements().get(functionDef.body().statements().size() -1);
+    Assertions.assertThat(lastExpressionStatement.expressions().get(0).typeV2().unwrappedType()).isEqualTo(INT_TYPE);
+    Assertions.assertThat(lastExpressionStatement.expressions().get(0).typeV2().typeSource()).isEqualTo(TypeSource.TYPE_HINT);
+  }
+
+  @Test
+  void inferTypesInsideFunction9() {
+    FileInput root = inferTypes("""
+      def foo(param: list[int]):
+        param
+      """);
+
+    var functionDef = (FunctionDef) root.statements().statements().get(0);
+    var lastExpressionStatement = (ExpressionStatement) functionDef.body().statements().get(functionDef.body().statements().size() -1);
+    var type = (ObjectType) lastExpressionStatement.expressions().get(0).typeV2();
+    Assertions.assertThat(type.unwrappedType()).isEqualTo(LIST_TYPE);
+    Assertions.assertThat(type.typeSource()).isEqualTo(TypeSource.TYPE_HINT);
+    Assertions.assertThat(type.attributes())
+      .extracting(PythonType::unwrappedType)
+      .containsOnly(INT_TYPE);
+  }
+
+  @Test
+  void inferTypesInsideFunction10() {
+    FileInput root = inferTypes("""
+      def foo(param: something_unknown):
+        param
+      """);
+
+    var functionDef = (FunctionDef) root.statements().statements().get(0);
+    var lastExpressionStatement = (ExpressionStatement) functionDef.body().statements().get(functionDef.body().statements().size() -1);
     Assertions.assertThat(lastExpressionStatement.expressions().get(0).typeV2().unwrappedType()).isEqualTo(PythonType.UNKNOWN);
+  }
+
+  @Test
+  void inferTypesInsideFunction11() {
+    FileInput root = inferTypes("""
+      def foo(param: something_unknown[int]):
+        param
+      """);
+
+    var functionDef = (FunctionDef) root.statements().statements().get(0);
+    var lastExpressionStatement = (ExpressionStatement) functionDef.body().statements().get(functionDef.body().statements().size() -1);
+    Assertions.assertThat(lastExpressionStatement.expressions().get(0).typeV2().unwrappedType()).isEqualTo(PythonType.UNKNOWN);
+  }
+
+  @Test
+  void inferTypesInsideFunction12() {
+    FileInput root = inferTypes("""
+      o = "123"
+      def foo(param: o):
+        param
+      """);
+
+    var functionDef = (FunctionDef) root.statements().statements().get(1);
+    var lastExpressionStatement = (ExpressionStatement) functionDef.body().statements().get(functionDef.body().statements().size() -1);
+    Assertions.assertThat(lastExpressionStatement.expressions().get(0).typeV2().unwrappedType()).isEqualTo(PythonType.UNKNOWN);
+  }
+
+  @Test
+  void inferTypesInsideFunction13() {
+    FileInput root = inferTypes("""
+      def foo(param: int | str):
+        param
+      """);
+
+    var functionDef = (FunctionDef) root.statements().statements().get(0);
+    var lastExpressionStatement = (ExpressionStatement) functionDef.body().statements().get(functionDef.body().statements().size() -1);
+    var type = (UnionType) lastExpressionStatement.expressions().get(0).typeV2();
+    
+    Assertions.assertThat(type.candidates())
+      .extracting(PythonType::unwrappedType)
+      .containsOnly(INT_TYPE, STR_TYPE);
+  }
+
+  @Test
+  void inferTypesInsideFunction14() {
+    FileInput root = inferTypes("""
+      def foo(param: int):
+        param
+        param = "hello"
+        param
+      """);
+
+    var functionDef = (FunctionDef) root.statements().statements().get(0);
+    var firstExpressionStatement = (ExpressionStatement) functionDef.body().statements().get(0);
+    var firstType = firstExpressionStatement.expressions().get(0).typeV2();
+    var lastExpressionStatement = (ExpressionStatement) functionDef.body().statements().get(2);
+    var lastType = lastExpressionStatement.expressions().get(0).typeV2();
+
+    Assertions.assertThat(firstType.unwrappedType()).isEqualTo(INT_TYPE);
+    Assertions.assertThat(lastType.unwrappedType()).isEqualTo(STR_TYPE);
+  }
+
+  @Test
+  void inferTypesInsideFunction15() {
+    FileInput root = inferTypes("""
+      def foo3(a: int = "123"):
+        a
+      """);
+
+    var functionDef = (FunctionDef) root.statements().statements().get(0);
+    var lastExpressionStatement = (ExpressionStatement) functionDef.body().statements().get(0);
+    var lastType = lastExpressionStatement.expressions().get(0).typeV2();
+
+    Assertions.assertThat(lastType.unwrappedType()).isEqualTo(INT_TYPE);
   }
 
   @Test
@@ -1572,6 +1679,168 @@ class TypeInferenceV2Test {
       .get();
 
     Assertions.assertThat(paramType).isSameAs(PythonType.UNKNOWN);
+  }
+
+  @Test
+  void list_comprehension() {
+    assertThat(lastExpression(
+      """
+      x = [a for a in foo()]
+      x
+      """
+    ).typeV2().unwrappedType()).isEqualTo(LIST_TYPE);
+  }
+
+  @Test
+  void set_comprehension() {
+    assertThat(lastExpression(
+      """
+      x = {a for a in foo()}
+      x
+      """
+    ).typeV2().unwrappedType()).isEqualTo(SET_TYPE);
+  }
+
+  @Test
+  void dict_comprehension() {
+    assertThat(lastExpression(
+      """
+      x = {num: num**2 for num in numbers()}
+      x
+      """
+    ).typeV2().unwrappedType()).isEqualTo(DICT_TYPE);
+  }
+
+  @Test
+  void comprehension_if() {
+    assertThat(lastExpression(
+      """
+      x = [num for num in numbers if num % 2 == 0]
+      x
+      """
+    ).typeV2().unwrappedType()).isEqualTo(LIST_TYPE);
+  }
+
+  @Test
+  void generator_expression() {
+    assertThat(lastExpression(
+      """
+      x = (num**2 for num in numbers())
+      x
+      """
+    ).typeV2().unwrappedType()).isEqualTo(PythonType.UNKNOWN);
+  }
+
+  @Test
+  void return_type_of_call_expression_1() {
+    assertThat(lastExpression(
+      """
+      x = [1,2,3]
+      a = x.append(42)
+      a
+      """
+    ).typeV2().unwrappedType()).isEqualTo(NONE_TYPE);
+  }
+
+  @Test
+  void return_type_of_call_expression_2() {
+    assertThat(lastExpression(
+      """
+      x = [1,2,3]
+      a = x.sort()
+      a
+      """
+    ).typeV2().unwrappedType()).isEqualTo(NONE_TYPE);
+  }
+
+  @Test
+  void return_type_of_call_expression_union_type() {
+    FileInput fileInput = inferTypes(
+      """
+        class A:
+          def foo(self): ...
+        class B:
+          def bar(self): ...
+        a = A
+        b = B
+        if cond:
+          x = a
+        else:
+          x = b
+        y = x()
+        y
+        """
+    );
+    var classA = TreeUtils.firstChild(fileInput.statements().statements().get(0), ClassDef.class::isInstance)
+      .map(ClassDef.class::cast)
+      .map(ClassDef::name)
+      .map(Expression::typeV2)
+      .map(ClassType.class::cast)
+      .get();
+
+    var classB = TreeUtils.firstChild(fileInput.statements().statements().get(1), ClassDef.class::isInstance)
+      .map(ClassDef.class::cast)
+      .map(ClassDef::name)
+      .map(Expression::typeV2)
+      .map(ClassType.class::cast)
+      .get();
+
+    assertThat(((ExpressionStatement) fileInput.statements().statements().get(6)).expressions().get(0).typeV2()).isInstanceOf(ObjectType.class);
+    UnionType unionType = (UnionType) ((ExpressionStatement) fileInput.statements().statements().get(6)).expressions().get(0).typeV2().unwrappedType();
+    assertThat(unionType.candidates()).containsExactlyInAnyOrder(classA, classB);
+  }
+
+  @Test
+  void imported_symbol_call_return_type() {
+    assertThat(lastExpression(
+      """
+      import fcntl
+      ret = fcntl.flock(..., ...)
+      ret
+      """
+    ).typeV2()).isEqualTo(NONE_TYPE);
+  }
+
+  @Test
+  void basic_imported_symbol() {
+    assertThat(lastExpression(
+      """
+      import fcntl
+      fcntl
+      """
+    ).typeV2()).isInstanceOf(ModuleType.class);
+  }
+
+  @Test
+  void imported_symbol_in_different_branch() {
+    FileInput fileInput = inferTypes("""
+      if x:
+        import fcntl
+      def lock():
+        fcntl
+      """);
+    Statement functionDef = fileInput.statements().statements().get(1);
+    ExpressionStatement fcntlStatement = ((ExpressionStatement) TreeUtils.firstChild(functionDef, t -> t.is(Tree.Kind.EXPRESSION_STMT)).get());
+    assertThat(fcntlStatement.expressions().get(0).typeV2()).isInstanceOf(ModuleType.class);
+    assertThat(fcntlStatement.expressions().get(0).typeV2().name()).isEqualTo("fcntl");
+  }
+
+  @Test
+  void basic_imported_symbols() {
+    FileInput fileInput = inferTypes(
+      """
+      import fcntl, math
+      fcntl
+      math
+      """
+    );
+    PythonType fnctlModule = ((ExpressionStatement) fileInput.statements().statements().get(1)).expressions().get(0).typeV2();
+    assertThat(fnctlModule).isInstanceOf(ModuleType.class);
+    assertThat(fnctlModule.name()).isEqualTo("fcntl");
+    PythonType mathModule = ((ExpressionStatement) fileInput.statements().statements().get(2)).expressions().get(0).typeV2();
+    assertThat(mathModule).isInstanceOf(ModuleType.class);
+    assertThat(mathModule.name()).isEqualTo("math");
+    assertThat(((UnionType) mathModule.resolveMember("acos").get()).candidates()).allMatch(FunctionType.class::isInstance);
   }
 
   private static FileInput inferTypes(String lines) {

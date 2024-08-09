@@ -17,23 +17,25 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.types.v2;
+package org.sonar.python.semantic.v2;
 
-import org.sonar.api.Beta;
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.sonar.python.types.v2.ObjectType;
+import org.sonar.python.types.v2.PythonType;
+import org.sonar.python.types.v2.TriBool;
+import org.sonar.python.types.v2.TypeCheckBuilder;
+import org.sonar.python.types.v2.TypeSource;
 
-@Beta
-public enum TriBool {
-  TRUE,
-  FALSE,
-  UNKNOWN;
+class TypeCheckerBuilderTest {
 
-  public TriBool and(TriBool triBool) {
-    if (this.equals(triBool)) {
-      return this;
-    }
-    if (this.equals(UNKNOWN) || triBool.equals(UNKNOWN)) {
-      return UNKNOWN;
-    }
-    return FALSE;
+  @Test
+  void typeSourceTest() {
+    var builder = new TypeCheckBuilder(null).isTypeHintTypeSource();
+    Assertions.assertThat(builder.check(new ObjectType(PythonType.UNKNOWN, TypeSource.TYPE_HINT)))
+      .isEqualTo(TriBool.TRUE);
+    Assertions.assertThat(builder.check(new ObjectType(PythonType.UNKNOWN, TypeSource.EXACT)))
+      .isEqualTo(TriBool.FALSE);
   }
+
 }

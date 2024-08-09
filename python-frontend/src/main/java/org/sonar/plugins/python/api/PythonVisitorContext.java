@@ -28,6 +28,7 @@ import org.sonar.api.SonarProduct;
 import org.sonar.plugins.python.api.PythonCheck.PreciseIssue;
 import org.sonar.plugins.python.api.caching.CacheContext;
 import org.sonar.plugins.python.api.tree.FileInput;
+import org.sonar.python.types.v2.TypeChecker;
 import org.sonar.python.caching.CacheContextImpl;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.semantic.SymbolTableBuilder;
@@ -41,6 +42,7 @@ public class PythonVisitorContext extends PythonInputFileContext {
   private final FileInput rootTree;
   private final RecognitionException parsingException;
   private List<PreciseIssue> issues = new ArrayList<>();
+  private final TypeChecker typeChecker;
 
   public PythonVisitorContext(FileInput rootTree, PythonFile pythonFile, @Nullable File workingDirectory, @Nullable String packageName) {
     super(pythonFile, workingDirectory, CacheContextImpl.dummyCache());
@@ -51,6 +53,7 @@ public class PythonVisitorContext extends PythonInputFileContext {
     var symbolTable = new SymbolTableBuilderV2(rootTree).build();
     var projectLevelTypeTable = new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty(), new TypeShed(ProjectLevelSymbolTable.empty()));
     new TypeInferenceV2(projectLevelTypeTable, pythonFile, symbolTable).inferTypes(rootTree);
+    this.typeChecker = new TypeChecker(projectLevelTypeTable);
   }
 
   public PythonVisitorContext(FileInput rootTree, PythonFile pythonFile, @Nullable File workingDirectory, String packageName,
@@ -64,6 +67,7 @@ public class PythonVisitorContext extends PythonInputFileContext {
       .build();
     var projectLevelTypeTable = new ProjectLevelTypeTable(projectLevelSymbolTable, new TypeShed(projectLevelSymbolTable));
     new TypeInferenceV2(projectLevelTypeTable, pythonFile, symbolTable).inferTypes(rootTree);
+    this.typeChecker = new TypeChecker(projectLevelTypeTable);
   }
 
   public PythonVisitorContext(FileInput rootTree, PythonFile pythonFile, @Nullable File workingDirectory, String packageName,
@@ -76,22 +80,29 @@ public class PythonVisitorContext extends PythonInputFileContext {
       .build();
     var projectLevelTypeTable = new ProjectLevelTypeTable(projectLevelSymbolTable, typeShed);
     new TypeInferenceV2(projectLevelTypeTable, pythonFile, symbolTable).inferTypes(rootTree);
+    this.typeChecker = new TypeChecker(projectLevelTypeTable);
   }
 
   public PythonVisitorContext(PythonFile pythonFile, RecognitionException parsingException) {
     super(pythonFile, null, CacheContextImpl.dummyCache());
     this.rootTree = null;
     this.parsingException = parsingException;
+    this.typeChecker = new TypeChecker(new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty()));
   }
 
   public PythonVisitorContext(PythonFile pythonFile, RecognitionException parsingException, SonarProduct sonarProduct) {
     super(pythonFile, null, CacheContextImpl.dummyCache(), sonarProduct);
     this.rootTree = null;
     this.parsingException = parsingException;
+    this.typeChecker = new TypeChecker(new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty()));
   }
 
   public FileInput rootTree() {
     return rootTree;
+  }
+
+  public TypeChecker typeChecker() {
+    return typeChecker;
   }
 
   public RecognitionException parsingException() {

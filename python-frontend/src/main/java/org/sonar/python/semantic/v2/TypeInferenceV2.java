@@ -28,6 +28,7 @@ import java.util.stream.Collectors;
 import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.cfg.ControlFlowGraph;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
+import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Name;
@@ -130,11 +131,13 @@ public class TypeInferenceV2 {
   }
 
   private static void flowSensitiveTypeInference(ControlFlowGraph cfg, Set<SymbolV2> trackedVars, PropagationVisitor propagationVisitor) {
-    // TODO: infer parameter type based on type hint or default value assignement
+    // TODO: infer parameter type based on default value assignement
     var parameterTypes = trackedVars
       .stream()
-      .filter(s -> s.usages().stream().map(UsageV2::kind).anyMatch(UsageV2.Kind.PARAMETER::equals))
-      .collect(Collectors.toMap(SymbolV2::name, v -> PythonType.UNKNOWN));
+      .filter(symbol -> symbol.usages()
+        .stream()
+        .anyMatch(usage -> usage.kind() == UsageV2.Kind.PARAMETER))
+      .collect(Collectors.toMap(SymbolV2::name, TypeInferenceV2::getParameterType));
 
     FlowSensitiveTypeInference flowSensitiveTypeInference = new FlowSensitiveTypeInference(
       trackedVars,
@@ -144,6 +147,18 @@ public class TypeInferenceV2 {
 
     flowSensitiveTypeInference.compute(cfg);
     flowSensitiveTypeInference.compute(cfg);
+  }
+
+  private static PythonType getParameterType(SymbolV2 symbol) {
+    return symbol.usages()
+      .stream()
+      .filter(usage -> usage.kind() == UsageV2.Kind.PARAMETER)
+      .map(UsageV2::tree)
+      .filter(Expression.class::isInstance)
+      .map(Expression.class::cast)
+      .map(Expression::typeV2)
+      .findFirst()
+      .orElse(PythonType.UNKNOWN);
   }
 
   private static Set<SymbolV2> getTrackedVars(Set<SymbolV2> localVariables, Set<Name> assignedNames) {

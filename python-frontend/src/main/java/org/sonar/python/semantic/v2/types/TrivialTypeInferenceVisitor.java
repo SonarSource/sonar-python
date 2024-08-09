@@ -31,7 +31,10 @@ import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.tree.ArgList;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
+import org.sonar.plugins.python.api.tree.BinaryExpression;
 import org.sonar.plugins.python.api.tree.ClassDef;
+import org.sonar.plugins.python.api.tree.ComprehensionExpression;
+import org.sonar.plugins.python.api.tree.DictCompExpression;
 import org.sonar.plugins.python.api.tree.DictionaryLiteral;
 import org.sonar.plugins.python.api.tree.DottedName;
 import org.sonar.plugins.python.api.tree.Expression;
@@ -44,18 +47,23 @@ import org.sonar.plugins.python.api.tree.ListLiteral;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.NoneExpression;
 import org.sonar.plugins.python.api.tree.NumericLiteral;
+import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.SetLiteral;
 import org.sonar.plugins.python.api.tree.StringLiteral;
+import org.sonar.plugins.python.api.tree.SubscriptionExpression;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tuple;
+import org.sonar.plugins.python.api.tree.TypeAnnotation;
 import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.semantic.v2.ClassTypeBuilder;
 import org.sonar.python.semantic.v2.FunctionTypeBuilder;
 import org.sonar.python.semantic.v2.ProjectLevelTypeTable;
 import org.sonar.python.semantic.v2.SymbolV2;
 import org.sonar.python.semantic.v2.UsageV2;
+import org.sonar.python.tree.ComprehensionExpressionImpl;
+import org.sonar.python.tree.DictCompExpressionImpl;
 import org.sonar.python.tree.DictionaryLiteralImpl;
 import org.sonar.python.tree.ListLiteralImpl;
 import org.sonar.python.tree.NameImpl;
@@ -71,6 +79,7 @@ import org.sonar.python.types.v2.Member;
 import org.sonar.python.types.v2.ModuleType;
 import org.sonar.python.types.v2.ObjectType;
 import org.sonar.python.types.v2.PythonType;
+import org.sonar.python.types.v2.TypeSource;
 import org.sonar.python.types.v2.UnionType;
 
 import static org.sonar.python.semantic.SymbolUtils.pathOf;
@@ -114,7 +123,7 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
     }
     ModuleType builtins = this.projectLevelTypeTable.getModule();
     PythonType tupleType = builtins.resolveMember("tuple").orElse(PythonType.UNKNOWN);
-    ((TupleImpl) tuple).typeV2(new ObjectType(tupleType,  attributes, new ArrayList<>()));
+    ((TupleImpl) tuple).typeV2(new ObjectType(tupleType, attributes, new ArrayList<>()));
   }
 
   @Override
@@ -122,7 +131,7 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
     super.visitDictionaryLiteral(dictionaryLiteral);
     ModuleType builtins = this.projectLevelTypeTable.getModule();
     PythonType dictType = builtins.resolveMember("dict").orElse(PythonType.UNKNOWN);
-    ((DictionaryLiteralImpl) dictionaryLiteral).typeV2(new ObjectType(dictType,  new ArrayList<>(), new ArrayList<>()));
+    ((DictionaryLiteralImpl) dictionaryLiteral).typeV2(new ObjectType(dictType, new ArrayList<>(), new ArrayList<>()));
   }
 
   @Override
@@ -130,7 +139,7 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
     super.visitSetLiteral(setLiteral);
     ModuleType builtins = this.projectLevelTypeTable.getModule();
     PythonType setType = builtins.resolveMember("set").orElse(PythonType.UNKNOWN);
-    ((SetLiteralImpl) setLiteral).typeV2(new ObjectType(setType,  new ArrayList<>(), new ArrayList<>()));
+    ((SetLiteralImpl) setLiteral).typeV2(new ObjectType(setType, new ArrayList<>(), new ArrayList<>()));
   }
 
   @Override
@@ -170,6 +179,26 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
     attributes.add(elementsType);
     PythonType listType = builtins.resolveMember("list").orElse(PythonType.UNKNOWN);
     ((ListLiteralImpl) listLiteral).typeV2(new ObjectType(listType, attributes, new ArrayList<>()));
+  }
+
+  @Override
+  public void visitPyListOrSetCompExpression(ComprehensionExpression comprehensionExpression) {
+    super.visitPyListOrSetCompExpression(comprehensionExpression);
+    var builtins = this.projectLevelTypeTable.getModule();
+    var pythonType = switch (comprehensionExpression.getKind()) {
+      case LIST_COMPREHENSION -> builtins.resolveMember("list").orElse(PythonType.UNKNOWN);
+      case SET_COMPREHENSION -> builtins.resolveMember("set").orElse(PythonType.UNKNOWN);
+      default -> PythonType.UNKNOWN;
+    };
+    ((ComprehensionExpressionImpl) comprehensionExpression).typeV2(new ObjectType(pythonType, new ArrayList<>(), new ArrayList<>()));
+  }
+
+  @Override
+  public void visitDictCompExpression(DictCompExpression dictCompExpression) {
+    super.visitDictCompExpression(dictCompExpression);
+    var builtins = this.projectLevelTypeTable.getModule();
+    var dictType = builtins.resolveMember("dict").orElse(PythonType.UNKNOWN);
+    ((DictCompExpressionImpl) dictCompExpression).typeV2(new ObjectType(dictType, new ArrayList<>(), new ArrayList<>()));
   }
 
   @Override
@@ -330,6 +359,43 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
   }
 
   @Override
+  public void visitParameter(Parameter parameter) {
+    scan(parameter.typeAnnotation());
+    scan(parameter.defaultValue());
+    Optional.ofNullable(parameter.typeAnnotation())
+      .map(TypeAnnotation::expression)
+      .map(TrivialTypeInferenceVisitor::resolveTypeAnnotationExpressionType)
+      .ifPresent(type -> setTypeToName(parameter.name(), type));
+    scan(parameter.name());
+  }
+
+  private static PythonType resolveTypeAnnotationExpressionType(Expression expression) {
+    if (expression instanceof Name name && name.typeV2() != PythonType.UNKNOWN) {
+      return new ObjectType(name.typeV2(), TypeSource.TYPE_HINT);
+    } else if (expression instanceof SubscriptionExpression subscriptionExpression && subscriptionExpression.object().typeV2() != PythonType.UNKNOWN) {
+      var candidateTypes = subscriptionExpression.subscripts()
+        .expressions()
+        .stream()
+        .map(Expression::typeV2)
+        .distinct()
+        .toList();
+
+      var elementsType = UnionType.or(candidateTypes);
+
+      var attributes = new ArrayList<PythonType>();
+      attributes.add(new ObjectType(elementsType, TypeSource.TYPE_HINT));
+      return new ObjectType(subscriptionExpression.object().typeV2(), attributes, new ArrayList<>(), TypeSource.TYPE_HINT);
+    } else if (expression instanceof BinaryExpression binaryExpression) {
+      var left = resolveTypeAnnotationExpressionType(binaryExpression.leftOperand());
+      var right = resolveTypeAnnotationExpressionType(binaryExpression.rightOperand());
+      // TODO: we need to make a decision on should here be a union type of object types or an object type of a union type.
+      //  ATM it is blocked by the generic types resolution redesign
+      return UnionType.or(left, right);
+    }
+    return PythonType.UNKNOWN;
+  }
+
+  @Override
   public void visitQualifiedExpression(QualifiedExpression qualifiedExpression) {
     scan(qualifiedExpression.qualifier());
     if (qualifiedExpression.name() instanceof NameImpl name) {
@@ -374,7 +440,7 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
       .map(Expression.class::cast)
       .map(Expression::typeV2)
       // TODO: classes (SONARPY-1829) and functions should be propagated like other types
-      .filter(t -> (t instanceof ClassType) || (t instanceof FunctionType))
+      .filter(t -> (t instanceof ClassType) || (t instanceof FunctionType) || (t instanceof ModuleType))
       .ifPresent(type -> setTypeToName(name, type));
   }
 

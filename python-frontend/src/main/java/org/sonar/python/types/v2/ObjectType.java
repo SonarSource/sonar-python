@@ -27,10 +27,18 @@ import org.sonar.api.Beta;
 import org.sonar.plugins.python.api.LocationInFile;
 
 @Beta
-public record ObjectType(PythonType type, List<PythonType> attributes, List<Member> members) implements PythonType {
+public record ObjectType(PythonType type, List<PythonType> attributes, List<Member> members, TypeSource typeSource) implements PythonType {
 
   public ObjectType(PythonType type) {
-    this(type, new ArrayList<>(), new ArrayList<>());
+    this(type, TypeSource.EXACT);
+  }
+
+  public ObjectType(PythonType type, TypeSource typeSource) {
+    this(type, new ArrayList<>(), new ArrayList<>(), typeSource);
+  }
+
+  public ObjectType(PythonType type, List<PythonType> attributes, List<Member> members) {
+    this(type, attributes, members, TypeSource.EXACT);
   }
 
   @Override

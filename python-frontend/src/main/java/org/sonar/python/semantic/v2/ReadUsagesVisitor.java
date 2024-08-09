@@ -23,6 +23,7 @@ import java.util.Map;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.ComprehensionExpression;
 import org.sonar.plugins.python.api.tree.ComprehensionFor;
+import org.sonar.plugins.python.api.tree.DictCompExpression;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.LambdaExpression;
@@ -91,7 +92,7 @@ public class ReadUsagesVisitor extends ScopeVisitor {
   }
 
   @Override
-  public void visitDictCompExpression(DictCompExpressionImpl tree) {
+  public void visitDictCompExpression(DictCompExpression tree) {
     enterScope(tree);
     scan(tree.keyExpression());
     scan(tree.valueExpression());

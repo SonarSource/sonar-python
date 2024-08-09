@@ -157,7 +157,7 @@ public interface TreeVisitor {
 
   void visitKeyValuePattern(KeyValuePattern keyValuePattern);
 
-  void visitDictCompExpression(DictCompExpressionImpl dictCompExpression);
+  void visitDictCompExpression(DictCompExpression dictCompExpression);
 
   void visitCompoundAssignment(CompoundAssignmentStatement compoundAssignmentStatement);
 

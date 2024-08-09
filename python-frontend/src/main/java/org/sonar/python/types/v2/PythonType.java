@@ -74,4 +74,9 @@ public interface PythonType {
   default PythonType unwrappedType() {
     return this;
   }
+
+  @Beta
+  default TypeSource typeSource() {
+    return TypeSource.EXACT;
+  }
 }

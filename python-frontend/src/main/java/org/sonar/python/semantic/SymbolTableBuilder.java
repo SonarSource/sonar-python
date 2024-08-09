@@ -53,6 +53,7 @@ import org.sonar.plugins.python.api.tree.CompoundAssignmentStatement;
 import org.sonar.plugins.python.api.tree.ComprehensionExpression;
 import org.sonar.plugins.python.api.tree.ComprehensionFor;
 import org.sonar.plugins.python.api.tree.Decorator;
+import org.sonar.plugins.python.api.tree.DictCompExpression;
 import org.sonar.plugins.python.api.tree.DottedName;
 import org.sonar.plugins.python.api.tree.ExceptClause;
 import org.sonar.plugins.python.api.tree.Expression;
@@ -294,7 +295,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     }
 
     @Override
-    public void visitDictCompExpression(DictCompExpressionImpl tree) {
+    public void visitDictCompExpression(DictCompExpression tree) {
       createScope(tree, currentScope());
       enterScope(tree);
       super.visitDictCompExpression(tree);
@@ -662,7 +663,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     }
 
     @Override
-    public void visitDictCompExpression(DictCompExpressionImpl tree) {
+    public void visitDictCompExpression(DictCompExpression tree) {
       enterScope(tree);
       scan(tree.keyExpression());
       scan(tree.valueExpression());

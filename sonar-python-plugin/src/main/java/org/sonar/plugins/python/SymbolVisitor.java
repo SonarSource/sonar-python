@@ -26,6 +26,7 @@ import org.sonar.api.batch.sensor.symbol.NewSymbol;
 import org.sonar.api.batch.sensor.symbol.NewSymbolTable;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.ComprehensionExpression;
+import org.sonar.plugins.python.api.tree.DictCompExpression;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.LambdaExpression;
@@ -69,7 +70,7 @@ public class SymbolVisitor extends BaseTreeVisitor {
   }
 
   @Override
-  public void visitDictCompExpression(DictCompExpressionImpl tree) {
+  public void visitDictCompExpression(DictCompExpression tree) {
     tree.localVariables().forEach(this::handleSymbol);
     super.visitDictCompExpression(tree);
   }

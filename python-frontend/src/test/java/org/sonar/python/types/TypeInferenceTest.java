@@ -340,6 +340,25 @@ class TypeInferenceTest {
   }
 
   @Test
+  void random() {
+    assertThat(lastExpressionInFunction(
+      "x = [1,2,3]",
+      "a = x.append(42)",
+      "a").type()).isEqualTo(NONE);
+  }
+
+  @Test
+  void imported_symbol() {
+    assertThat(lastExpression(
+      """
+      import fcntl
+      ret = fcntl.flock(..., ...)
+      ret
+      """
+    ).type()).isEqualTo(NONE);
+  }
+
+  @Test
   void propagate_return_type_to_variable() {
     assertThat(lastExpressionInFunction(
       "a = 'abc'.capitalize()",

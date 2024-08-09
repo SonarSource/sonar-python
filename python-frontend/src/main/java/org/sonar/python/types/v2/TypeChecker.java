@@ -19,21 +19,17 @@
  */
 package org.sonar.python.types.v2;
 
-import org.sonar.api.Beta;
+import org.sonar.python.semantic.v2.ProjectLevelTypeTable;
 
-@Beta
-public enum TriBool {
-  TRUE,
-  FALSE,
-  UNKNOWN;
+public class TypeChecker {
 
-  public TriBool and(TriBool triBool) {
-    if (this.equals(triBool)) {
-      return this;
-    }
-    if (this.equals(UNKNOWN) || triBool.equals(UNKNOWN)) {
-      return UNKNOWN;
-    }
-    return FALSE;
+  private ProjectLevelTypeTable projectLevelTypeTable;
+
+  public TypeChecker(ProjectLevelTypeTable projectLevelTypeTable) {
+    this.projectLevelTypeTable = projectLevelTypeTable;
+  }
+
+  public TypeCheckBuilder typeCheckBuilder() {
+    return new TypeCheckBuilder(projectLevelTypeTable);
   }
 }
