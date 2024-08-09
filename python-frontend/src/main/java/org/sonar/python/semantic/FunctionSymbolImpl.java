@@ -321,6 +321,10 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
     }
     return declaredReturnType;
   }
+
+  public SymbolsProtos.Type protobufReturnType() {
+    return protobufReturnType;
+  }
   
   static class ParameterType {
     InferredType inferredType;

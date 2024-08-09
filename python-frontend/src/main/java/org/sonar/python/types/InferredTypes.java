@@ -245,7 +245,7 @@ public class InferredTypes {
     "^builtins\\.object$",
     "^_ctypes\\._CanCastTo$"); // ref: SONARPY-1477
 
-  private static boolean filterTypeVar(SymbolsProtos.Type type) {
+  public static boolean filterTypeVar(SymbolsProtos.Type type) {
     return Optional.of(type)
       // Filtering self returning methods until the SONARPY-1472 will be solved
       .filter(Predicate.not(t -> t.getPrettyPrintedName().endsWith(".Self")))
