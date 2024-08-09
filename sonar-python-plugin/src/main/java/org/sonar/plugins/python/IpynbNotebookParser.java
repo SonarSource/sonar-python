@@ -139,10 +139,11 @@ public class IpynbNotebookParser {
     var lastSourceLine = "\n";
     while (jParser.nextToken() != JsonToken.END_ARRAY) {
       String sourceLine = jParser.getValueAsString();
-      tokenLocation = jParser.currentTokenLocation();
-      var countEscapedChar = countEscapeCharacters(sourceLine, new LinkedHashMap<>(), tokenLocation.getColumnNr());
-      addLineToSource(sourceLine, tokenLocation, countEscapedChar);
+      var newTokenLocation = jParser.currentTokenLocation();
+      var countEscapedChar = countEscapeCharacters(sourceLine, new LinkedHashMap<>(), newTokenLocation.getColumnNr());
+      addLineToSource(sourceLine, newTokenLocation, countEscapedChar, tokenLocation);
       lastSourceLine = sourceLine;
+      tokenLocation = newTokenLocation;
     }
     if (!lastSourceLine.endsWith("\n")) {
       aggregatedSource.append("\n");
@@ -168,7 +169,7 @@ public class IpynbNotebookParser {
       var countEscapedChar = countEscapeCharacters(line, new LinkedHashMap<>(), previousLen + previousExtraChars + tokenLocation.getColumnNr());
       var currentCount = countEscapedChar.get(-1);
       addLineToSource(line, new IPythonLocation(tokenLocation.getLineNr(),
-        tokenLocation.getColumnNr() + previousLen + previousExtraChars, countEscapedChar));
+        tokenLocation.getColumnNr() + previousLen + previousExtraChars, countEscapedChar, true));
       aggregatedSource.append("\n");
       previousLen = previousLen + line.length() + 2;
       previousExtraChars = previousExtraChars + currentCount;
@@ -183,8 +184,9 @@ public class IpynbNotebookParser {
     return true;
   }
 
-  private void addLineToSource(String sourceLine, JsonLocation tokenLocation, Map<Integer, Integer> colOffset) {
-    addLineToSource(sourceLine, new IPythonLocation(tokenLocation.getLineNr(), tokenLocation.getColumnNr(), colOffset));
+  private void addLineToSource(String sourceLine, JsonLocation tokenLocation, Map<Integer, Integer> colOffset, JsonLocation previousTokenLocation) {
+    addLineToSource(sourceLine,
+      new IPythonLocation(tokenLocation.getLineNr(), tokenLocation.getColumnNr(), colOffset, tokenLocation.getLineNr() == previousTokenLocation.getLineNr()));
   }
 
   private void addLineToSource(String sourceLine, IPythonLocation location) {
@@ -214,7 +216,7 @@ public class IpynbNotebookParser {
           numberOfExtraChars++;
           colMap.put(i, i + colOffSet + count + numberOfExtraChars);
           break;
-        // we never encounter \n or \r as the lines are split at these characters 
+        // we never encounter \n or \r as the lines are split at these characters
         case '\b', '\f', '\t':
           // we increase the count of one char as we count the \ but not the t or b
           count += 1;
