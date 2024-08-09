@@ -35,15 +35,19 @@ public class FileMetrics {
   private final FileLinesVisitor fileLinesVisitor;
   private List<Integer> functionComplexities = new ArrayList<>();
 
-  public FileMetrics(PythonVisitorContext context) {
+  public FileMetrics(PythonVisitorContext context, boolean isNotebook) {
     FileInput fileInput = context.rootTree();
-    fileLinesVisitor = new FileLinesVisitor();
+    fileLinesVisitor = new FileLinesVisitor(isNotebook);
     fileLinesVisitor.scanFile(context);
     numberOfStatements = fileLinesVisitor.getStatements();
     numberOfClasses = fileLinesVisitor.getClassDefs();
     fileInput.accept(complexityVisitor);
     fileInput.accept(cognitiveComplexityVisitor);
     fileInput.accept(new FunctionVisitor());
+  }
+
+  public FileMetrics(PythonVisitorContext context) {
+    this(context, false);
   }
 
   private class FunctionVisitor extends BaseTreeVisitor {

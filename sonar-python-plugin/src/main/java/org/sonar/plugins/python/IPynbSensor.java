@@ -22,6 +22,8 @@ package org.sonar.plugins.python;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import javax.annotation.Nullable;
+import org.sonar.api.SonarProduct;
 import org.sonar.api.batch.fs.FilePredicates;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.rule.CheckFactory;
@@ -32,7 +34,10 @@ import org.sonar.api.issue.NoSonarFilter;
 import org.sonar.api.measures.FileLinesContextFactory;
 import org.sonar.plugins.python.api.ProjectPythonVersion;
 import org.sonar.plugins.python.api.PythonVersionUtils;
+import org.sonar.plugins.python.api.caching.CacheContext;
 import org.sonar.plugins.python.indexer.PythonIndexer;
+import org.sonar.plugins.python.indexer.SonarQubePythonIndexer;
+import org.sonar.python.caching.CacheContextImpl;
 import org.sonar.python.checks.CheckList;
 import org.sonar.python.parser.PythonParser;
 
@@ -44,8 +49,13 @@ public final class IPynbSensor implements Sensor {
   private final FileLinesContextFactory fileLinesContextFactory;
   private final NoSonarFilter noSonarFilter;
   private final PythonIndexer indexer;
+  private static final String FAIL_FAST_PROPERTY_NAME = "sonar.internal.analysis.failFast";
 
-  public IPynbSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory, NoSonarFilter noSonarFilter, PythonIndexer indexer) {
+  public IPynbSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory, NoSonarFilter noSonarFilter) {
+    this(fileLinesContextFactory, checkFactory, noSonarFilter, null);
+  }
+
+  public IPynbSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory, NoSonarFilter noSonarFilter, @Nullable PythonIndexer indexer) {
     this.checks = new PythonChecks(checkFactory)
       .addChecks(CheckList.IPYTHON_REPOSITORY_KEY, CheckList.getChecks());
     this.fileLinesContextFactory = fileLinesContextFactory;
@@ -62,20 +72,58 @@ public final class IPynbSensor implements Sensor {
 
   @Override
   public void execute(SensorContext context) {
-    List<InputFile> pythonFiles = getInputFiles(context);
+    List<PythonInputFile> pythonFiles = getInputFiles(context);
     var pythonVersions = context.config().getStringArray(PYTHON_VERSION_KEY);
     if (pythonVersions.length != 0) {
       ProjectPythonVersion.setCurrentVersions(PythonVersionUtils.fromStringArray(pythonVersions));
     }
-    PythonScanner scanner = new PythonScanner(context, checks, fileLinesContextFactory, noSonarFilter, PythonParser.createIPythonParser(), indexer);
+    if (isInSonarLintRuntime(context)) {
+      PythonScanner scanner = new PythonScanner(context, checks, fileLinesContextFactory, noSonarFilter, PythonParser.createIPythonParser(), indexer);
+      scanner.execute(pythonFiles, context);
+    } else {
+      processNotebooksFiles(pythonFiles, context);
+    }
+  }
+
+  private void processNotebooksFiles(List<PythonInputFile> pythonFiles, SensorContext context) {
+    pythonFiles = parseNotebooks(pythonFiles, context);
+    // Disable caching for IPynb files for now see: SONARPY-2020
+    CacheContext cacheContext = CacheContextImpl.dummyCache();
+    PythonIndexer pythonIndexer = new SonarQubePythonIndexer(pythonFiles, cacheContext, context);
+    PythonScanner scanner = new PythonScanner(context, checks, fileLinesContextFactory, noSonarFilter, PythonParser.createIPythonParser(), pythonIndexer);
     scanner.execute(pythonFiles, context);
   }
 
-  private static List<InputFile> getInputFiles(SensorContext context) {
+  private static List<PythonInputFile> parseNotebooks(List<PythonInputFile> pythonFiles, SensorContext context) {
+    List<PythonInputFile> generatedIPythonFiles = new ArrayList<>();
+    for (PythonInputFile inputFile : pythonFiles) {
+      try {
+        var result = IpynbNotebookParser.parseNotebook(inputFile);
+        result.ifPresent(generatedIPythonFiles::add);
+      } catch (Exception e) {
+        if (context.config().getBoolean(FAIL_FAST_PROPERTY_NAME).orElse(false) && !isErrorOnTestFile(inputFile)) {
+          throw new IllegalStateException("Exception when parsing " + inputFile, e);
+        }
+      }
+    }
+    return generatedIPythonFiles;
+  }
+
+  private static boolean isInSonarLintRuntime(SensorContext context) {
+    // SL preprocesses notebooks and send us Python files
+    // SQ/SC sends us the actual JSON files
+    return context.runtime().getProduct().equals(SonarProduct.SONARLINT);
+  }
+
+  private static List<PythonInputFile> getInputFiles(SensorContext context) {
     FilePredicates p = context.fileSystem().predicates();
     Iterable<InputFile> it = context.fileSystem().inputFiles(p.and(p.hasLanguage(IPynb.KEY)));
-    List<InputFile> list = new ArrayList<>();
-    it.forEach(list::add);
+    List<PythonInputFile> list = new ArrayList<>();
+    it.forEach(f -> list.add(new PythonInputFileImpl(f)));
     return Collections.unmodifiableList(list);
+  }
+
+  private static boolean isErrorOnTestFile(PythonInputFile inputFile) {
+    return inputFile.wrappedFile().type() == InputFile.Type.TEST;
   }
 }

@@ -40,11 +40,11 @@ public class Python extends AbstractLanguage {
 
   @Override
   public String[] getFileSuffixes() {
-    String[] suffixes = filterEmptyStrings(configuration.getStringArray(PythonPlugin.FILE_SUFFIXES_KEY));
+    String[] suffixes = filterEmptyStrings(configuration.getStringArray(PythonPlugin.PYTHON_FILE_SUFFIXES_KEY));
     return suffixes.length == 0 ? Python.DEFAULT_FILE_SUFFIXES : suffixes;
   }
 
-  private static String[] filterEmptyStrings(String[] stringArray) {
+  static String[] filterEmptyStrings(String[] stringArray) {
     List<String> nonEmptyStrings = new ArrayList<>();
     for (String string : stringArray) {
       if (StringUtils.isNotBlank(string.trim())) {

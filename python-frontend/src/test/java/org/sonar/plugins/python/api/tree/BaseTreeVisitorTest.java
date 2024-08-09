@@ -431,7 +431,7 @@ class BaseTreeVisitorTest extends RuleTest {
   @Test
   void as_pattern() {
     setRootRule(PythonGrammar.AS_PATTERN);
-    AsPattern pattern = ((AsPattern) parse("'foo' as x", PythonTreeMaker::pattern));
+    AsPattern pattern = ((AsPattern) parse("'foo' as x", treeMaker::pattern));
     FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
     pattern.accept(visitor);
 
@@ -442,7 +442,7 @@ class BaseTreeVisitorTest extends RuleTest {
   @Test
   void or_pattern() {
     setRootRule(PythonGrammar.OR_PATTERN);
-    OrPattern pattern = ((OrPattern) parse("'foo' | 'bar'", PythonTreeMaker::pattern));
+    OrPattern pattern = ((OrPattern) parse("'foo' | 'bar'", treeMaker::pattern));
     FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
     pattern.accept(visitor);
 
@@ -453,7 +453,7 @@ class BaseTreeVisitorTest extends RuleTest {
   @Test
   void capture_pattern() {
     setRootRule(PythonGrammar.CLOSED_PATTERN);
-    CapturePattern pattern = ((CapturePattern) parse("x", PythonTreeMaker::closedPattern));
+    CapturePattern pattern = ((CapturePattern) parse("x", treeMaker::closedPattern));
     FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
     pattern.accept(visitor);
 
@@ -463,7 +463,7 @@ class BaseTreeVisitorTest extends RuleTest {
   @Test
   void sequence_pattern() {
     setRootRule(PythonGrammar.CLOSED_PATTERN);
-    SequencePattern pattern = ((SequencePattern) parse("[x, y]", PythonTreeMaker::closedPattern));
+    SequencePattern pattern = ((SequencePattern) parse("[x, y]", treeMaker::closedPattern));
     FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
     pattern.accept(visitor);
 
@@ -474,7 +474,7 @@ class BaseTreeVisitorTest extends RuleTest {
   @Test
   void star_pattern() {
     setRootRule(PythonGrammar.CLOSED_PATTERN);
-    SequencePattern pattern = ((SequencePattern) parse("[x, *rest]", PythonTreeMaker::closedPattern));
+    SequencePattern pattern = ((SequencePattern) parse("[x, *rest]", treeMaker::closedPattern));
     FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
     pattern.accept(visitor);
 
@@ -487,7 +487,7 @@ class BaseTreeVisitorTest extends RuleTest {
   @Test
   void group_pattern() {
     setRootRule(PythonGrammar.CLOSED_PATTERN);
-    GroupPattern pattern = ((GroupPattern) parse("(x)", PythonTreeMaker::closedPattern));
+    GroupPattern pattern = ((GroupPattern) parse("(x)", treeMaker::closedPattern));
     FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
     pattern.accept(visitor);
 
@@ -497,7 +497,7 @@ class BaseTreeVisitorTest extends RuleTest {
   @Test
   void class_pattern() {
     setRootRule(PythonGrammar.CLOSED_PATTERN);
-    ClassPattern pattern = ((ClassPattern) parse("A(x=42)", PythonTreeMaker::closedPattern));
+    ClassPattern pattern = ((ClassPattern) parse("A(x=42)", treeMaker::closedPattern));
     FirstLastTokenVerifierVisitor visitor = spy(FirstLastTokenVerifierVisitor.class);
     pattern.accept(visitor);
 

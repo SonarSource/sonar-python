@@ -61,8 +61,17 @@ public class FileLinesVisitor extends PythonSubscriptionCheck {
   private final Set<Integer> linesOfComments = new HashSet<>();
   private final Set<Integer> linesOfDocstring = new HashSet<>();
   private final Set<Integer> executableLines = new HashSet<>();
+  private final boolean isNotebook;
   private int statements = 0;
   private int classDefs = 0;
+
+  public FileLinesVisitor(boolean isNotebook) {
+    this.isNotebook = isNotebook;
+  }
+
+  public FileLinesVisitor() {
+    this(false);
+  }
 
   @Override
   public void scanFile(PythonVisitorContext visitorContext) {
@@ -158,7 +167,7 @@ public class FileLinesVisitor extends PythonSubscriptionCheck {
     }
   }
 
-  public static boolean containsNoSonarComment(Trivia trivia){
+  public static boolean containsNoSonarComment(Trivia trivia) {
     String commentLine = getContents(trivia.token().value());
     return commentLine.contains("NOSONAR");
   }
@@ -186,7 +195,7 @@ public class FileLinesVisitor extends PythonSubscriptionCheck {
   }
 
   public Set<Integer> getExecutableLines() {
-    return Collections.unmodifiableSet(executableLines);
+    return isNotebook ? Set.of() : Collections.unmodifiableSet(executableLines);
   }
 
   private static boolean isBlank(String line) {

@@ -28,7 +28,6 @@ import org.sonar.api.SonarEdition;
 import org.sonar.api.SonarQubeSide;
 import org.sonar.api.SonarRuntime;
 import org.sonar.api.batch.fs.InputFile;
-import org.sonar.api.batch.fs.internal.DefaultInputFile;
 import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.internal.SonarRuntimeImpl;
 import org.sonar.api.utils.Version;
@@ -49,15 +48,15 @@ public final class TestUtils {
     }
   }
 
-  public static DefaultInputFile createInputFile(File baseDir, String name, InputFile.Status status, InputFile.Type type) {
-    return TestInputFileBuilder.create("moduleKey", name)
+  public static PythonInputFile createInputFile(File baseDir, String name, InputFile.Status status, InputFile.Type type) {
+    return new PythonInputFileImpl(TestInputFileBuilder.create("moduleKey", name)
       .setModuleBaseDir(baseDir.toPath())
       .setCharset(StandardCharsets.UTF_8)
       .setStatus(status)
       .setType(type)
       .setLanguage(Python.KEY)
       .initMetadata(TestUtils.fileContent(new File(baseDir, name), StandardCharsets.UTF_8))
-      .build();
+      .build());
   }
 
 }
