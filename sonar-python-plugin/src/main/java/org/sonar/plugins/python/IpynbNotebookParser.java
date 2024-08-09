@@ -162,6 +162,7 @@ public class IpynbNotebookParser {
     JsonLocation tokenLocation = jParser.currentTokenLocation();
     var previousLen = 0;
     var previousExtraChars = 0;
+    var isFirstLine = true;
 
     for (String line : sourceLine.lines().toList()) {
       var countEscapedChar = countEscapeCharacters(line, new LinkedHashMap<>(), previousLen + previousExtraChars + tokenLocation.getColumnNr());
@@ -171,6 +172,10 @@ public class IpynbNotebookParser {
       aggregatedSource.append("\n");
       previousLen = previousLen + line.length() + 2;
       previousExtraChars = previousExtraChars + currentCount;
+      if (isFirstLine) {
+        isFirstLine = false;
+        previousLen += 1;
+      }
     }
     // Account for the last cell delimiter
     addDelimiterToSource(tokenLocation);
