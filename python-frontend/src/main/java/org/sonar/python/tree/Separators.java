@@ -19,7 +19,6 @@
  */
 package org.sonar.python.tree;
 
-import com.sonar.sslr.api.AstNode;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Stream;
@@ -35,9 +34,9 @@ public class Separators {
   private final Token newline;
   private final List<Token> elements;
 
-  Separators(@Nullable AstNode separator, @Nullable AstNode newline){
-    this.separator = separator == null ? null : new TokenImpl(separator.getToken());
-    this.newline = newline == null ? null : new TokenImpl(newline.getToken());
+  Separators(@Nullable Token separator, @Nullable Token newline) {
+    this.separator = separator;
+    this.newline = newline;
     this.elements = Stream.of(this.separator, this.newline).filter(Objects::nonNull).toList();
   }
 

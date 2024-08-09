@@ -23,6 +23,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.List;
+import java.util.Map;
 import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.PythonVisitorContext;
@@ -74,5 +75,13 @@ class TestPythonVisitorRunnerTest {
     assertThat(projectLevelSymbolTable.getSymbolsFromModule("file"))
       .extracting(Symbol::name)
       .containsExactlyInAnyOrder("hello", "A");
+  }
+
+  @Test
+  void scanNotebookFile() throws IOException {
+    File tmpFile = Files.createTempFile("foo", ".ipynb").toFile();
+    var check = (PythonCheck) visitorContect -> {};
+    PythonVisitorContext context = TestPythonVisitorRunner.scanNotebookFile(tmpFile, Map.of(), "", check);
+    assertThat(context.pythonFile().uri()).isEqualTo(tmpFile.toURI());
   }
 }

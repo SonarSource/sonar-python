@@ -36,6 +36,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.plugins.python.api.caching.CacheContext;
 import org.sonar.plugins.python.caching.Caching;
+import org.sonar.plugins.python.PythonInputFile;
 import org.sonar.python.index.Descriptor;
 import org.sonar.python.semantic.DependencyGraph;
 import org.sonar.python.semantic.SymbolUtils;
@@ -55,17 +56,17 @@ public class SonarQubePythonIndexer extends PythonIndexer {
   private static final Logger LOG = LoggerFactory.getLogger(SonarQubePythonIndexer.class);
 
   private final Caching caching;
-  private final Set<InputFile> fullySkippableFiles = new HashSet<>();
-  private final Set<InputFile> partiallySkippableFiles = new HashSet<>();
-  private final List<InputFile> inputFiles = new ArrayList<>();
-  private final Map<InputFile, String> inputFileToFQN = new HashMap<>();
+  private final Set<PythonInputFile> fullySkippableFiles = new HashSet<>();
+  private final Set<PythonInputFile> partiallySkippableFiles = new HashSet<>();
+  private final List<PythonInputFile> inputFiles = new ArrayList<>();
+  private final Map<PythonInputFile, String> inputFileToFQN = new HashMap<>();
 
-  public SonarQubePythonIndexer(List<InputFile> inputFiles, CacheContext cacheContext, SensorContext context) {
+  public SonarQubePythonIndexer(List<PythonInputFile> inputFiles, CacheContext cacheContext, SensorContext context) {
     this.projectBaseDirAbsolutePath = context.fileSystem().baseDir().getAbsolutePath();
     this.caching = new Caching(cacheContext, getCacheVersion(context));
     inputFiles.forEach(f -> {
       this.inputFiles.add(f);
-      inputFileToFQN.put(f, SymbolUtils.fullyQualifiedModuleName(packageName(f), f.filename()));
+      inputFileToFQN.put(f, SymbolUtils.fullyQualifiedModuleName(packageName(f), f.wrappedFile().filename()));
     });
   }
 
@@ -97,9 +98,9 @@ public class SonarQubePythonIndexer extends PythonIndexer {
       .collect(Collectors.toSet());
     Map<String, Set<String>> importsByModule = new HashMap<>();
     // Deleted files are considered impactful to their dependents but will not be re-analyzed.
-    List<InputFile> impactfulFiles = new ArrayList<>();
+    List<PythonInputFile> impactfulFiles = new ArrayList<>();
     List<String> impactfulModulesFQNs = new ArrayList<>(deletedModulesFQNs);
-    for (InputFile inputFile : inputFiles) {
+    for (PythonInputFile inputFile : inputFiles) {
       String currFQN = inputFileToFQN.get(inputFile);
       boolean isUnimpacted = tryToUseCache(importsByModule, inputFile, currFQN);
       if (!isUnimpacted) {
@@ -135,36 +136,36 @@ public class SonarQubePythonIndexer extends PythonIndexer {
     typeShedModules.forEach(TypeShed::symbolsForModule);
   }
 
-  private boolean tryToUseCache(Map<String, Set<String>> importsByModule, InputFile inputFile, String currFQN) {
+  private boolean tryToUseCache(Map<String, Set<String>> importsByModule, PythonInputFile inputFile, String currFQN) {
     if (!fileIsUnchanged(inputFile)) {
       return false;
     }
 
-    Set<String> imports = caching.readImportMapEntry(inputFile.key());
+    Set<String> imports = caching.readImportMapEntry(inputFile.wrappedFile().key());
     if (imports != null) {
       importsByModule.put(currFQN, imports);
     }
-    Set<Descriptor> descriptors = caching.readProjectLevelSymbolTableEntry(inputFile.key());
+    Set<Descriptor> descriptors = caching.readProjectLevelSymbolTableEntry(inputFile.wrappedFile().key());
     if (descriptors != null && imports != null) {
-      saveRetrievedDescriptors(inputFile.key(), descriptors, caching);
+      saveRetrievedDescriptors(inputFile.wrappedFile().key(), descriptors, caching);
       return true;
     }
 
     return false;
   }
 
-  private boolean fileIsUnchanged(InputFile inputFile) {
-    if (!inputFile.status().equals(InputFile.Status.SAME)) {
+  private boolean fileIsUnchanged(PythonInputFile inputFile) {
+    if (!inputFile.wrappedFile().status().equals(InputFile.Status.SAME)) {
       return false;
     }
-    byte[] fileHash = caching.readFileContentHash(inputFile.key());
+    byte[] fileHash = caching.readFileContentHash(inputFile.wrappedFile().key());
     // InputFile.Status is not reliable in some cases
     // We use the hash of the file's content to double-check the content is the same.
     try {
-      byte[] bytes = FileHashingUtils.inputFileContentHash(inputFile);
+      byte[] bytes = FileHashingUtils.inputFileContentHash(inputFile.wrappedFile());
       return MessageDigest.isEqual(fileHash, bytes);
     } catch (IOException | NoSuchAlgorithmException e) {
-      LOG.debug("Failed to compute content hash for file {}", inputFile.key());
+      LOG.debug("Failed to compute content hash for file {}", inputFile.wrappedFile().key());
       return false;
     }
   }
@@ -174,7 +175,7 @@ public class SonarQubePythonIndexer extends PythonIndexer {
     caching.copyFromPrevious(fileKey);
   }
 
-  public void computeGlobalSymbols(List<InputFile> files, SensorContext context) {
+  public void computeGlobalSymbols(List<PythonInputFile> files, SensorContext context) {
     GlobalSymbolsScanner globalSymbolsStep = new GlobalSymbolsScanner(context);
     globalSymbolsStep.execute(files, context);
     if (caching.isCacheEnabled()) {
@@ -188,8 +189,8 @@ public class SonarQubePythonIndexer extends PythonIndexer {
     }
   }
 
-  private void saveGlobalSymbolsInCache(List<InputFile> files) {
-    for (InputFile inputFile : files) {
+  private void saveGlobalSymbolsInCache(List<PythonInputFile> files) {
+    for (PythonInputFile inputFile : files) {
       String moduleFQN = inputFileToFQN.get(inputFile);
       Set<Descriptor> descriptors = projectLevelSymbolTable().descriptorsForModule(moduleFQN);
       Set<String> imports = projectLevelSymbolTable().importsByModule().get(moduleFQN);
@@ -199,21 +200,21 @@ public class SonarQubePythonIndexer extends PythonIndexer {
         if (!writeContentHashToCache(inputFile)) {
           return;
         }
-        caching.writeProjectLevelSymbolTableEntry(inputFile.key(), descriptors);
-        caching.writeImportsMapEntry(inputFile.key(), imports);
+        caching.writeProjectLevelSymbolTableEntry(inputFile.wrappedFile().key(), descriptors);
+        caching.writeImportsMapEntry(inputFile.wrappedFile().key(), imports);
       }
     }
   }
 
-  private boolean writeContentHashToCache(InputFile inputFile) {
+  private boolean writeContentHashToCache(PythonInputFile inputFile) {
     byte[] contentHash;
     try {
-      contentHash = FileHashingUtils.inputFileContentHash(inputFile);
+      contentHash = FileHashingUtils.inputFileContentHash(inputFile.wrappedFile());
     } catch (IOException | NoSuchAlgorithmException e) {
-      LOG.debug("Failed to compute content hash for file {}", inputFile.key());
+      LOG.debug("Failed to compute content hash for file {}", inputFile.wrappedFile().key());
       return false;
     }
-    caching.writeFileContentHash(inputFile.key(), contentHash);
+    caching.writeFileContentHash(inputFile.wrappedFile().key(), contentHash);
     return true;
   }
 
@@ -228,12 +229,12 @@ public class SonarQubePythonIndexer extends PythonIndexer {
   }
 
   @Override
-  public boolean canBePartiallyScannedWithoutParsing(InputFile inputFile) {
+  public boolean canBePartiallyScannedWithoutParsing(PythonInputFile inputFile) {
     return partiallySkippableFiles.contains(inputFile) || fullySkippableFiles.contains(inputFile);
   }
 
   @Override
-  public boolean canBeFullyScannedWithoutParsing(InputFile inputFile) {
+  public boolean canBeFullyScannedWithoutParsing(PythonInputFile inputFile) {
     return fullySkippableFiles.contains(inputFile);
   }
 
