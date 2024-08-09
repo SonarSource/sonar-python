@@ -36,18 +36,20 @@ public class TokenImpl extends PyTree implements Token {
   private Integer line;
   private Integer column;
   private int includedEscapeChars;
+  private boolean isCompressed = false;
 
   public TokenImpl(com.sonar.sslr.api.Token token) {
     this.token = token;
     this.trivia = token.getTrivia().stream().map(tr -> new TriviaImpl(new TokenImpl(tr.getToken()))).collect(Collectors.toList());
   }
 
-  public TokenImpl(com.sonar.sslr.api.Token token, int line, int column, int includedEscapeChars, List<Trivia> trivia) {
+  public TokenImpl(com.sonar.sslr.api.Token token, int line, int column, int includedEscapeChars, List<Trivia> trivia, boolean isCompressed) {
     this.token = token;
     this.line = line;
     this.column = column;
     this.includedEscapeChars = includedEscapeChars;
     this.trivia = trivia;
+    this.isCompressed = isCompressed;
   }
 
   @Override
@@ -118,4 +120,10 @@ public class TokenImpl extends PyTree implements Token {
   public int valueLength() {
     return value().length() + includedEscapeChars();
   }
+
+  @Override
+  public boolean isCompressed() {
+    return this.isCompressed;
+  }
+
 }

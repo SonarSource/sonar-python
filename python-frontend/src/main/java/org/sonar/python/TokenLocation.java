@@ -36,9 +36,13 @@ public class TokenLocation {
     String[] lines = value.split("\r\n|\n|\r", -1);
 
     if (lines.length > 1) {
-      endLine = token.line() + lines.length - 1;
-      endLineOffset = lines[lines.length - 1].length();
-
+      if (token.isCompressed()) {
+        endLine = token.line();
+        endLineOffset = this.startLineOffset + token.valueLength();
+      } else {
+        endLine = token.line() + lines.length - 1;
+        endLineOffset = lines[lines.length - 1].length();
+      }
     } else {
       this.endLine = this.startLine;
       this.endLineOffset = this.startLineOffset + token.valueLength();
