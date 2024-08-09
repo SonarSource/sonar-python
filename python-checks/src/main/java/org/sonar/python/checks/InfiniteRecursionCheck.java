@@ -53,7 +53,6 @@ import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.api.PythonKeyword;
 import org.sonar.python.checks.utils.CheckUtils;
-import org.sonar.python.tree.DictCompExpressionImpl;
 import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S2190")

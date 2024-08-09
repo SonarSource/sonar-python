@@ -60,7 +60,6 @@ import org.sonar.plugins.python.api.tree.TypeAliasStatement;
 import org.sonar.plugins.python.api.tree.TypeParams;
 import org.sonar.plugins.python.api.tree.WithItem;
 import org.sonar.python.semantic.SymbolUtils;
-import org.sonar.python.tree.DictCompExpressionImpl;
 
 import static org.sonar.python.semantic.SymbolUtils.boundNamesFromExpression;
 

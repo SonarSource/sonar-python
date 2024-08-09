@@ -21,7 +21,6 @@ package org.sonar.plugins.python.api.tree;
 
 import java.util.List;
 import javax.annotation.Nullable;
-import org.sonar.python.tree.DictCompExpressionImpl;
 
 /**
  * Default implementation of {@link TreeVisitor}.

@@ -31,7 +31,6 @@ import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TypeAnnotation;
-import org.sonar.python.tree.DictCompExpressionImpl;
 
 /**
  * Read (i.e. non-binding) usages have to be visited in a second phase.
