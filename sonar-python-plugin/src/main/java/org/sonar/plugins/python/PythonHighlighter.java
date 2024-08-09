@@ -23,16 +23,11 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 import javax.annotation.Nullable;
-import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.highlighting.NewHighlighting;
 import org.sonar.api.batch.sensor.highlighting.TypeOfText;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.PythonVisitorContext;
-import org.sonar.python.SubscriptionVisitor;
-import org.sonar.python.TokenLocation;
-import org.sonar.python.api.PythonKeyword;
-import org.sonar.python.api.PythonTokenType;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
@@ -40,6 +35,10 @@ import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Trivia;
+import org.sonar.python.SubscriptionVisitor;
+import org.sonar.python.TokenLocation;
+import org.sonar.python.api.PythonKeyword;
+import org.sonar.python.api.PythonTokenType;
 
 import static com.sonar.sslr.api.GenericTokenType.IDENTIFIER;
 
@@ -90,13 +89,12 @@ import static com.sonar.sslr.api.GenericTokenType.IDENTIFIER;
 public class PythonHighlighter extends PythonSubscriptionCheck {
 
   private NewHighlighting newHighlighting;
-
   private Set<Token> docStringTokens;
 
-  public PythonHighlighter(SensorContext context, InputFile inputFile) {
+  public PythonHighlighter(SensorContext context, PythonInputFile inputFile) {
     docStringTokens = new HashSet<>();
     newHighlighting = context.newHighlighting();
-    newHighlighting.onFile(inputFile);
+    newHighlighting.onFile(inputFile.wrappedFile());
   }
 
   @Override

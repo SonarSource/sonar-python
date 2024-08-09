@@ -33,9 +33,21 @@ public class TokenImpl extends PyTree implements Token {
   private com.sonar.sslr.api.Token token;
   private List<Trivia> trivia;
 
+  private Integer line;
+  private Integer column;
+  private int includedEscapeChars;
+
   public TokenImpl(com.sonar.sslr.api.Token token) {
     this.token = token;
     this.trivia = token.getTrivia().stream().map(tr -> new TriviaImpl(new TokenImpl(tr.getToken()))).collect(Collectors.toList());
+  }
+
+  public TokenImpl(com.sonar.sslr.api.Token token, int line, int column, int includedEscapeChars, List<Trivia> trivia) {
+    this.token = token;
+    this.line = line;
+    this.column = column;
+    this.includedEscapeChars = includedEscapeChars;
+    this.trivia = trivia;
   }
 
   @Override
@@ -45,11 +57,26 @@ public class TokenImpl extends PyTree implements Token {
 
   @Override
   public int line() {
-    return token.getLine();
+    return line != null ? line : physicalLine();
   }
 
   @Override
   public int column() {
+    return column != null ? column : physicalColumn();
+  }
+
+  @Override
+  public int physicalLine() {
+    return token.getLine();
+  }
+
+  @Override
+  public int includedEscapeChars() {
+    return includedEscapeChars;
+  }
+
+  @Override
+  public int physicalColumn() {
     return token.getColumn();
   }
 
@@ -85,5 +112,10 @@ public class TokenImpl extends PyTree implements Token {
   @Override
   public Token lastToken() {
     return this;
+  }
+
+  @Override
+  public int valueLength() {
+    return value().length() + includedEscapeChars();
   }
 }

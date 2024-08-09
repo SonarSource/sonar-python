@@ -66,4 +66,12 @@ class FileLinesVisitorTest {
     TestPythonVisitorRunner.scanFile(new File(BASE_DIR, "empty.py"), visitor);
     assertThat(visitor.getExecutableLines()).isEmpty();
   }
+
+  @Test
+  void notebook_locs() {
+    FileLinesVisitor visitor = new FileLinesVisitor(true);
+    TestPythonVisitorRunner.scanFile(new File(BASE_DIR, "notebook_loc.ipynb"), visitor);
+    assertThat(visitor.getExecutableLines()).isEmpty();
+    assertThat(visitor.getLinesOfCode()).hasSize(17);
+  }
 }
