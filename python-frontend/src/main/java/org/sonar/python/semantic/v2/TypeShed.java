@@ -91,7 +91,7 @@ public class TypeShed {
   public TypeShed(ProjectLevelSymbolTable projectLevelSymbolTable) {
     // workaround to initialize supported python versions used in ClassSymbolImpl
     // TODO: remove once v2 types model will be populated from TypeShed bypassing conversion to symbols
-    builtins = org.sonar.python.types.TypeShed.builtinSymbols();
+    org.sonar.python.types.TypeShed.builtinSymbols();
     typeShedSymbols = new HashMap<>();
     modulesInProgress = new HashSet<>();
     this.projectLevelSymbolTable = projectLevelSymbolTable;
