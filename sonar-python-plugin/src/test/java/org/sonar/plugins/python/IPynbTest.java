@@ -20,6 +20,8 @@
 package org.sonar.plugins.python;
 
 import org.junit.jupiter.api.Test;
+import org.sonar.api.config.internal.ConfigurationBridge;
+import org.sonar.api.config.internal.MapSettings;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -27,9 +29,9 @@ class IPynbTest {
 
   @Test
   void test() {
-    IPynb language = new IPynb();
+    IPynb language = new IPynb(new ConfigurationBridge(new MapSettings()));
     assertThat(language.getKey()).isEqualTo("ipynb");
     assertThat(language.getName()).isEqualTo("IPython Notebooks");
-    assertThat(language.getFileSuffixes()).hasSize(1).contains(".ipynb");
+    assertThat(language.getFileSuffixes()).hasSize(1).contains("ipynb");
   }
 }

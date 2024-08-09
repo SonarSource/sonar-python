@@ -21,6 +21,7 @@ package org.sonar.plugins.python;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 import javax.annotation.Nullable;
 import org.sonar.api.batch.fs.InputFile;
@@ -93,10 +94,17 @@ public class PythonHighlighter extends PythonSubscriptionCheck {
 
   private Set<Token> docStringTokens;
 
+  InputFile currentFile;
+
   public PythonHighlighter(SensorContext context, InputFile inputFile) {
     docStringTokens = new HashSet<>();
     newHighlighting = context.newHighlighting();
-    newHighlighting.onFile(inputFile);
+    if (inputFile instanceof GeneratedIPythonFile generatedIPythonFile) {
+      newHighlighting.onFile(generatedIPythonFile.originalFile);
+    } else {
+      newHighlighting.onFile(inputFile);
+    }
+    currentFile = inputFile;
   }
 
   @Override
@@ -154,7 +162,12 @@ public class PythonHighlighter extends PythonSubscriptionCheck {
 
   private void highlight(Token token, TypeOfText typeOfText) {
     TokenLocation tokenLocation = new TokenLocation(token);
-    newHighlighting.highlight(tokenLocation.startLine(), tokenLocation.startLineOffset(), tokenLocation.endLine(), tokenLocation.endLineOffset(), typeOfText);
+    if (currentFile instanceof GeneratedIPythonFile generatedIPythonFile) {
+      var newRange = generatedIPythonFile.newRange(tokenLocation.startLine(), tokenLocation.startLineOffset(), tokenLocation.endLine(), tokenLocation.endLineOffset() );
+      newHighlighting.highlight(newRange, typeOfText);
+    } else {
+      newHighlighting.highlight(tokenLocation.startLine(), tokenLocation.startLineOffset(), tokenLocation.endLine(), tokenLocation.endLineOffset(), typeOfText);
+    }
   }
 
 }

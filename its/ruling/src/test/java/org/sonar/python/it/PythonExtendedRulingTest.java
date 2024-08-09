@@ -46,7 +46,9 @@ class PythonExtendedRulingTest {
   static void prepare_quality_profile() throws IOException {
     List<String> ruleKeys = bugRuleKeys();
     String pythonProfile = RulingHelper.profile("customProfile", "py", "python", ruleKeys);
+    String iPythonProfile = RulingHelper.profile("customProfile", "ipynb", "ipython", ruleKeys);
     RulingHelper.loadProfile(ORCHESTRATOR, pythonProfile);
+    RulingHelper.loadProfile(ORCHESTRATOR, iPythonProfile);
   }
 
   @Test
@@ -170,6 +172,7 @@ class PythonExtendedRulingTest {
   public SonarScanner buildWithCommonProperties(String projectKey, String projectName) {
     ORCHESTRATOR.getServer().provisionProject(projectKey, projectKey);
     ORCHESTRATOR.getServer().associateProjectToQualityProfile(projectKey, "py", "customProfile");
+    ORCHESTRATOR.getServer().associateProjectToQualityProfile(projectKey, "ipynb", "customProfile");
     return SonarScanner.create(FileLocation.of(String.format("../sources_extended/%s", projectName)).getFile())
       .setProjectKey(projectKey)
       .setProjectName(projectKey)

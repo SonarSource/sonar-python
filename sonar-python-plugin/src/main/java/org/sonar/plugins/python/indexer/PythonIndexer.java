@@ -31,6 +31,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
+import org.sonar.plugins.python.GeneratedIPythonFile;
 import org.sonar.plugins.python.Scanner;
 import org.sonar.plugins.python.SonarQubePythonFile;
 import org.sonar.plugins.python.api.PythonFile;
@@ -144,7 +145,9 @@ public abstract class PythonIndexer {
 
     @Override
     protected void scanFile(InputFile inputFile) throws IOException {
-      addFile(inputFile);
+      if (!(inputFile instanceof GeneratedIPythonFile)) {
+        addFile(inputFile);
+      }
     }
 
     @Override
