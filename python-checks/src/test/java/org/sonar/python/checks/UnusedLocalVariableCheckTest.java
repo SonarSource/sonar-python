@@ -176,6 +176,20 @@ class UnusedLocalVariableCheckTest {
   }
 
   @Test
+  void assignmentExpressionQuickFixTest() {
+    var check = new UnusedLocalVariableCheck();
+    var before = "def foo():\n" +
+      "  if any((i := j) % 2 == 1 for j in range(3)):\n" +
+      "    return";
+    var after = "def foo():\n" +
+            "  if any(j % 2 == 1 for j in range(3)):\n" +
+            "    return";
+
+    PythonQuickFixVerifier.verify(check, before, after);
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, before, "Remove assignment target");
+  }
+
+  @Test
   void multipleAssignmentQuickFixTest() {
     var check = new UnusedLocalVariableCheck();
 
