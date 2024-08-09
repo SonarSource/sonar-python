@@ -52,7 +52,7 @@ class SymbolVisitorTest {
     context.fileSystem().add(inputFile);
     componentKey = inputFile.key();
 
-    SymbolVisitor symbolVisitor = new SymbolVisitor(context.newSymbolTable().onFile(inputFile));
+    SymbolVisitor symbolVisitor = new SymbolVisitor(new NewSymbolTableWrapper(context, inputFile));
     PythonVisitorContext context = TestPythonVisitorRunner.createContext(file);
     FileInput fileInput = context.rootTree();
     fileInput.accept(symbolVisitor);

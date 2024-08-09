@@ -19,9 +19,11 @@
  */
 package org.sonar.plugins.python;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import org.sonar.api.SonarProduct;
 import org.sonar.api.batch.fs.FilePredicates;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.rule.CheckFactory;
@@ -32,7 +34,11 @@ import org.sonar.api.issue.NoSonarFilter;
 import org.sonar.api.measures.FileLinesContextFactory;
 import org.sonar.plugins.python.api.ProjectPythonVersion;
 import org.sonar.plugins.python.api.PythonVersionUtils;
+import org.sonar.plugins.python.api.caching.CacheContext;
 import org.sonar.plugins.python.indexer.PythonIndexer;
+import org.sonar.plugins.python.indexer.SonarQubePythonIndexer;
+import org.sonar.python.caching.CacheContextImpl;
+import org.sonar.python.caching.DummyCache;
 import org.sonar.python.checks.CheckList;
 import org.sonar.python.parser.PythonParser;
 
@@ -44,6 +50,15 @@ public final class IPynbSensor implements Sensor {
   private final FileLinesContextFactory fileLinesContextFactory;
   private final NoSonarFilter noSonarFilter;
   private final PythonIndexer indexer;
+
+  public IPynbSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory, NoSonarFilter noSonarFilter) {
+    this.checks = new PythonChecks(checkFactory)
+      .addChecks(CheckList.IPYTHON_REPOSITORY_KEY, CheckList.getChecks());
+    this.fileLinesContextFactory = fileLinesContextFactory;
+    this.noSonarFilter = noSonarFilter;
+    this.indexer = null;
+  }
+
 
   public IPynbSensor(FileLinesContextFactory fileLinesContextFactory, CheckFactory checkFactory, NoSonarFilter noSonarFilter, PythonIndexer indexer) {
     this.checks = new PythonChecks(checkFactory)
@@ -67,8 +82,33 @@ public final class IPynbSensor implements Sensor {
     if (pythonVersions.length != 0) {
       ProjectPythonVersion.setCurrentVersions(PythonVersionUtils.fromStringArray(pythonVersions));
     }
-    PythonScanner scanner = new PythonScanner(context, checks, fileLinesContextFactory, noSonarFilter, PythonParser.createIPythonParser(), indexer);
+    if (areFilesActualNotebook(context)) {
+      pythonFiles = processNotebooks(pythonFiles);
+    }
+    // Disable caching for IPynb files for now
+    CacheContext cacheContext = CacheContextImpl.dummyCache();
+    PythonIndexer pythonIndexer = this.indexer != null ? this.indexer : new SonarQubePythonIndexer(pythonFiles, cacheContext, context);
+
+    PythonScanner scanner = new PythonScanner(context, checks, fileLinesContextFactory, noSonarFilter, PythonParser.createIPythonParser(), pythonIndexer);
     scanner.execute(pythonFiles, context);
+  }
+
+  private static List<InputFile> processNotebooks(List<InputFile> pythonFiles) {
+    List<InputFile> generatedIPythonFiles = new ArrayList<>();
+    for (InputFile inputFile : pythonFiles) {
+      try {
+        generatedIPythonFiles.add(IPythonNotebookParser.parseNotebook(inputFile));
+      } catch (IOException e) {
+        throw new RuntimeException(e);
+      }
+    }
+    return generatedIPythonFiles;
+  }
+
+  private static boolean areFilesActualNotebook(SensorContext context) {
+    // Hack: SL preprocesses notebooks and send us Python files
+    // SQ/SC sends us the actual JSON files
+    return !context.runtime().getProduct().equals(SonarProduct.SONARLINT);
   }
 
   private static List<InputFile> getInputFiles(SensorContext context) {
