@@ -19,8 +19,6 @@
  */
 package org.sonar.plugins.python.api.tree;
 
-import org.sonar.python.tree.DictCompExpressionImpl;
-
 public interface TreeVisitor {
 
   void visitFileInput(FileInput fileInput);
