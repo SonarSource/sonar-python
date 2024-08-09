@@ -42,4 +42,6 @@ public interface Token extends Tree {
 
   int valueLength();
 
+  boolean isCompressed();
+
 }
