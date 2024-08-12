@@ -44,7 +44,7 @@ public class DictCompExpressionImpl extends PyTree implements DictCompExpression
   private final ComprehensionFor comprehensionFor;
   private final Token closingBrace;
   private Set<Symbol> symbols = new HashSet<>();
-  private PythonType pythonType;
+  private PythonType pythonType = PythonType.UNKNOWN;
 
   public DictCompExpressionImpl(Token openingBrace, Expression keyExpression, Token colon, Expression valueExpression,
                                 ComprehensionFor compFor, Token closingBrace) {

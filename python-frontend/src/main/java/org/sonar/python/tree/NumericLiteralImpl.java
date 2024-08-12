@@ -36,7 +36,7 @@ public class NumericLiteralImpl extends PyTree implements NumericLiteral {
   private final Token token;
   private final InferredType type;
 
-  private PythonType typeV2;
+  private PythonType typeV2 = PythonType.UNKNOWN;
 
   NumericLiteralImpl(Token token) {
     this.token = token;
