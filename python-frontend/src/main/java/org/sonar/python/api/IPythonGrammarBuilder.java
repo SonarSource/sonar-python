@@ -89,7 +89,8 @@ public class IPythonGrammarBuilder extends PythonGrammarBuilder {
         TEST,
         QUESTION_MARK,
         b.optional(QUESTION_MARK)
-      )
+      ),
+      QUESTION_MARK
     ));
   }
 

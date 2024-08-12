@@ -26,23 +26,36 @@ import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.Test;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 class PythonParserTest {
 
   private final PythonParser parser = PythonParser.create();
 
+  private final PythonParser notebookParser = PythonParser.createIPythonParser();
+
   @Test
-  void test() throws Exception {
-    Collection<File> files = listFiles();
+  void test_python() throws Exception {
+    Collection<File> files = listFiles("python");
     for (File file : files) {
       String fileContent = new String(Files.readAllBytes(file.toPath()), UTF_8);
-      parser.parse(fileContent);
+      assertDoesNotThrow(() -> parser.parse(fileContent));
     }
   }
 
-  private static Collection<File> listFiles() {
-    File dir = new File("src/test/resources/parser/");
+  private static Collection<File> listFiles(String folderName) {
+    File dir = new File(String.format("src/test/resources/parser/%s/", folderName));
     return FileUtils.listFiles(dir, new String[]{"py"}, true);
+  }
+
+
+  @Test
+  void test_notebook() throws Exception {
+    Collection<File> files = listFiles("notebooks");
+    for (File file : files) {
+      String fileContent = new String(Files.readAllBytes(file.toPath()), UTF_8);
+      assertDoesNotThrow(() -> notebookParser.parse(fileContent));
+    }
   }
 
 }
