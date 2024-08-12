@@ -44,7 +44,7 @@ public class ComprehensionExpressionImpl extends PyTree implements Comprehension
   private final ComprehensionFor comprehensionFor;
   private final Token closingToken;
   private Set<Symbol> symbols = new HashSet<>();
-  private PythonType pythonType;
+  private PythonType pythonType = PythonType.UNKNOWN;
 
   public ComprehensionExpressionImpl(Kind kind, @Nullable Token openingToken, Expression resultExpression,
                                      ComprehensionFor compFor, @Nullable Token closingToken) {

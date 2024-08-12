@@ -353,6 +353,7 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
   @Override
   public void visitAssignmentStatement(AssignmentStatement assignmentStatement) {
     scan(assignmentStatement.assignedValue());
+    scan(assignmentStatement.lhsExpressions());
     Optional.of(assignmentStatement)
       .map(AssignmentStatement::lhsExpressions)
       .filter(lhs -> lhs.size() == 1)

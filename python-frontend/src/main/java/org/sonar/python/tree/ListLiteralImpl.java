@@ -36,7 +36,7 @@ public class ListLiteralImpl extends PyTree implements ListLiteral {
   private final ExpressionList elements;
   private final Token rightBracket;
 
-  private PythonType typeV2;
+  private PythonType typeV2 = PythonType.UNKNOWN;
 
   public ListLiteralImpl(Token leftBracket, ExpressionList elements, Token rightBracket) {
     this.leftBracket = leftBracket;

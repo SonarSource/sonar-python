@@ -48,6 +48,7 @@ import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.plugins.python.api.tree.StatementList;
+import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.PythonTestUtils;
 import org.sonar.python.semantic.ClassSymbolImpl;
@@ -2329,6 +2330,20 @@ class TypeInferenceV2Test {
     Assertions.assertThat(fType).isSameAs(PythonType.UNKNOWN);
   }
 
+  @Test
+  void assignmentStatementLhsTypeTest() {
+    var fileInput = inferTypes("""
+      def foo():
+          subscription[call('goal_{}'.format(1))] = 1
+      """);
+
+    var literal = TreeUtils.firstChild(fileInput, StringLiteral.class::isInstance)
+      .map(StringLiteral.class::cast)
+      .get();
+
+    var type = literal.typeV2();
+    Assertions.assertThat(type.unwrappedType()).isSameAs(STR_TYPE);
+  }
 
   private static FileInput inferTypes(String lines) {
     return inferTypes(lines, PROJECT_LEVEL_TYPE_TABLE);

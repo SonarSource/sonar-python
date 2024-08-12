@@ -37,7 +37,7 @@ public class StringLiteralImpl extends PyTree implements StringLiteral {
 
   private final List<StringElement> stringElements;
   private static final Set<String> BYTES_PREFIXES = new HashSet<>(Arrays.asList("b", "B", "br", "Br", "bR", "BR", "rb", "rB", "Rb", "RB"));
-  private PythonType typeV2;
+  private PythonType typeV2 = PythonType.UNKNOWN;
 
   StringLiteralImpl(List<StringElement> stringElements) {
     this.stringElements = stringElements;
