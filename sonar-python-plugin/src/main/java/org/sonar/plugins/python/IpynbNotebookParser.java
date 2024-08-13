@@ -24,7 +24,9 @@ import com.fasterxml.jackson.core.JsonLocation;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonToken;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
@@ -95,23 +97,24 @@ public class IpynbNotebookParser {
       if ("cells".equals(fieldName)) {
         // consume array start token
         parser.nextToken();
-        NotebookParsingData data = parseCellArray(parser);
+        Optional<NotebookParsingData> data = parseCellArray(parser);
         parser.close();
-        return Optional.of(data);
+        return data;
       }
     }
     return Optional.empty();
   }
 
-  private NotebookParsingData parseCellArray(JsonParser jParser) throws IOException {
-    NotebookParsingData aggregatedNotebookData = NotebookParsingData.empty();
+  private Optional<NotebookParsingData> parseCellArray(JsonParser jParser) throws IOException {
+    List<NotebookParsingData> cellsData = new ArrayList<>();
 
     while (jParser.nextToken() != JsonToken.END_ARRAY) {
       if (jParser.currentToken() == JsonToken.START_OBJECT) {
-        processCodeCell(aggregatedNotebookData.getAggregatedSourceLine(), jParser).ifPresent(aggregatedNotebookData::combine);
+        processCodeCell(cellsData, jParser);
       }
     }
-    aggregatedNotebookData.removeTrailingExtraLine();
+    Optional<NotebookParsingData> aggregatedNotebookData = cellsData.stream().reduce(NotebookParsingData::combine);
+    aggregatedNotebookData.ifPresent(NotebookParsingData::removeTrailingExtraLine);
     return aggregatedNotebookData;
   }
 
@@ -121,22 +124,34 @@ public class IpynbNotebookParser {
     }
   }
 
-  private Optional<NotebookParsingData> processCodeCell(int startLine, JsonParser jParser) throws IOException {
+  private static boolean processCodeCellType(JsonParser jParser) throws IOException {
+    if (JsonToken.FIELD_NAME.equals(jParser.currentToken()) && "cell_type".equals(jParser.currentName())) {
+      jParser.nextToken();
+      if ("code".equals(jParser.getValueAsString())) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  private void processCodeCell(List<NotebookParsingData> accumulator, JsonParser jParser) throws IOException {
     boolean isCodeCell = false;
     Optional<NotebookParsingData> notebookData = Optional.empty();
     while (jParser.nextToken() != JsonToken.END_OBJECT) {
 
       skipNestedObjects(jParser);
 
-      if (JsonToken.FIELD_NAME.equals(jParser.currentToken()) && "cell_type".equals(jParser.currentName())) {
-        jParser.nextToken();
-        String cellType = jParser.getValueAsString();
-        if ("code".equals(cellType)) {
-          isCodeCell = true;
-        }
+      if (!isCodeCell) {
+        isCodeCell = processCodeCellType(jParser);
       }
+
       if (JsonToken.FIELD_NAME.equals(jParser.currentToken()) && "source".equals(jParser.currentName())) {
         jParser.nextToken();
+
+        int startLine = 0;
+        if (!accumulator.isEmpty()) {
+          startLine = accumulator.get(accumulator.size() - 1).getAggregatedSourceLine();
+        }
         switch (jParser.currentToken()) {
           case START_ARRAY:
             notebookData = Optional.of(parseSourceArray(startLine, jParser));
@@ -149,13 +164,13 @@ public class IpynbNotebookParser {
         }
       }
     }
-    if (isCodeCell && notebookData.isPresent()) {
-      lastPythonLine = notebookData.get().getAggregatedSourceLine();
-      return notebookData;
-    }
-    return Optional.empty();
-  }
 
+    if (isCodeCell && notebookData.isPresent()) {
+      var data = notebookData.get();
+      lastPythonLine = data.getAggregatedSourceLine();
+      accumulator.add(data);
+    }
+  }
 
   private static NotebookParsingData parseSourceArray(int startLine, JsonParser jParser) throws IOException {
     NotebookParsingData cellData = NotebookParsingData.fromLine(startLine);
