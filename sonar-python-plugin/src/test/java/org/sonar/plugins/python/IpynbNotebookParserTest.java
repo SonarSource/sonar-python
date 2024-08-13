@@ -58,7 +58,7 @@ class IpynbNotebookParserTest {
     assertThat(result.locationMap()).extracting(map -> map.get(22)).isEqualTo(new IPythonLocation(83, 14, Map.of(6, 21, 9, 25, 15, 32, -1, 3)));
     assertThat(result.locationMap()).extracting(map -> map.get(23)).isEqualTo(new IPythonLocation(83, 37, Map.of(6, 44, 21, 60, 23, 63, -1, 3)));
 
-    //"source": "a = \"A bunch of characters \\n \\f \\r \\ \t \"\nb = None"
+    //"source": "a = \"A bunch of characters \\n \\f \\r \\  \"\nb = None"
     assertThat(result.locationMap()).extracting(map -> map.get(25))
       .isEqualTo(new IPythonLocation(90, 14, Map.of(4,19, 27, 43, 30, 47, 33, 51, 36, 55, 39, 59, -1, 6)));
     assertThat(result.locationMap()).extracting(map -> map.get(26)).isEqualTo(new IPythonLocation(90, 63, Map.of(-1, 0)));
