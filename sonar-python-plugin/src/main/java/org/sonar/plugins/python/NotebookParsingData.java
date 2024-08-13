@@ -59,10 +59,11 @@ public class NotebookParsingData {
     return aggregatedSourceLine;
   }
 
-  public void combine(NotebookParsingData other) {
+  public NotebookParsingData combine(NotebookParsingData other) {
     aggregatedSource.append(other.aggregatedSource);
     aggregatedSourceLine = other.aggregatedSourceLine;
     locationMap.putAll(other.locationMap);
+    return this;
   }
 
   public void appendToSource(String str) {
