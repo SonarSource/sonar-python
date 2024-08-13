@@ -134,15 +134,16 @@ class IPythonTreeMakerTest extends RuleTest {
 
   @Test
   void dynamicObjectInfo() {
-    var file = parseIPython("a = A()\n" +
-      "??a.foo\n" +
-      "?a.foo\n" +
-      "?a.foo?\n" +
-      "a.foo?\n" +
-      "a.foo??\n" +
-      "??a.foo()??\n" +
-      "?\n" +
-      "b = a.foo()", treeMaker::fileInput);
+    var file = parseIPython("""
+      a = A()
+      ??a.foo
+      ?a.foo
+      ?a.foo?
+      a.foo?
+      a.foo??
+      ??a.foo()??
+      ?
+      b = a.foo()""", treeMaker::fileInput);
     var statementList = findFirstChildWithKind(file, Tree.Kind.STATEMENT_LIST);
     var statements = statementList.children();
     assertThat(statements).hasSize(9);
