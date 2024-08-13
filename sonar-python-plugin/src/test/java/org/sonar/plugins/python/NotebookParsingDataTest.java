@@ -84,6 +84,11 @@ class NotebookParsingDataTest {
     assertThat(data).extracting(d -> d.getAggregatedSource().toString()).isEqualTo("First line");
     data.removeTrailingExtraLine();
     assertThat(data).extracting(d -> d.getAggregatedSource().toString()).isEqualTo("First line");
+
+    var emptyLines = new NotebookParsingData(new StringBuilder(), new LinkedHashMap<>(), 5);
+    assertThat(emptyLines).extracting(d -> d.getAggregatedSource().toString()).isEqualTo("");
+    emptyLines.removeTrailingExtraLine();
+    assertThat(emptyLines).extracting(d -> d.getAggregatedSource().toString()).isEqualTo("");
   }
 
   @Test
