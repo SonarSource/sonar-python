@@ -134,17 +134,19 @@ class IPythonTreeMakerTest extends RuleTest {
 
   @Test
   void dynamicObjectInfo() {
-    var file = parseIPython("a = A()\n" +
-      "??a.foo\n" +
-      "?a.foo\n" +
-      "?a.foo?\n" +
-      "a.foo?\n" +
-      "a.foo??\n" +
-      "??a.foo()??\n" +
-      "b = a.foo()", treeMaker::fileInput);
+    var file = parseIPython("""
+      a = A()
+      ??a.foo
+      ?a.foo
+      ?a.foo?
+      a.foo?
+      a.foo??
+      ??a.foo()??
+      ?
+      b = a.foo()""", treeMaker::fileInput);
     var statementList = findFirstChildWithKind(file, Tree.Kind.STATEMENT_LIST);
     var statements = statementList.children();
-    assertThat(statements).hasSize(8);
+    assertThat(statements).hasSize(9);
 
     assertThat(statements.get(0).getKind()).isEqualTo(Tree.Kind.ASSIGNMENT_STMT);
     checkDynamicObjectInfo(statements.get(1), 2, 0);
@@ -153,7 +155,8 @@ class IPythonTreeMakerTest extends RuleTest {
     checkDynamicObjectInfo(statements.get(4), 0, 1);
     checkDynamicObjectInfo(statements.get(5), 0, 2);
     checkDynamicObjectInfo(statements.get(6), 2, 2);
-    assertThat(statements.get(7).getKind()).isEqualTo(Tree.Kind.ASSIGNMENT_STMT);
+    checkDynamicObjectInfo(statements.get(7), 0, 0);
+    assertThat(statements.get(8).getKind()).isEqualTo(Tree.Kind.ASSIGNMENT_STMT);
   }
 
   private void checkDynamicObjectInfo(Tree dynamicObjectInfo, int questionMarksBefore, int questionMarksAfter) {
