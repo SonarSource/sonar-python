@@ -44,8 +44,38 @@ class IpynbNotebookParserTest {
 
     var result = resultOptional.get();
 
+    var pythonContent = """
+      x = None
+      if x is not None:
+          print \"not none\"
+      
+      
+      def foo():
+          x = 42
+          x = 17
+          print(x)
+      #SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER
+      if x is not None:
+          print(\"hello\")
+      #SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER
+      x = 42
+      #SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER
+      #Some code
+      print(\"hello world\\n\") 
+      #SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER
+      print(\"My\\ntext\") 
+      print(\"Something else\\n\")
+      #SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER 
+      print(\"My\\ntext\") 
+      print(\"Something else\\n\")
+      #SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER
+      a = \"A bunch of characters \\n \\f \\r \\ 	 \"
+      b = None
+      #SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER""";
+
     assertThat(result.locationMap().keySet()).hasSize(27);
     assertThat(result.contents()).hasLineCount(27);
+    assertThat(result.contents()).isEqualTo(pythonContent);
     assertThat(StringUtils.countMatches(result.contents(), IpynbNotebookParser.SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER))
       .isEqualTo(7);
     assertThat(result.locationMap()).extracting(map -> map.get(1)).isEqualTo(new IPythonLocation(17, 5, Map.of(-1, 0)));
@@ -102,6 +132,18 @@ class IpynbNotebookParserTest {
     var resultOptional = IpynbNotebookParser.parseNotebook(inputFile);
 
     assertThat(resultOptional).isEmpty();
+  }
+
+  @Test
+  void testParseNotebookWithSourceBeforeCellType() throws IOException {
+    var inputFile = createInputFile(baseDir, "notebook_source_before_cell_type.ipynb", InputFile.Status.CHANGED, InputFile.Type.MAIN);
+
+    var resultOptional = IpynbNotebookParser.parseNotebook(inputFile);
+
+    assertThat(resultOptional).isPresent();
+    var result = resultOptional.get();
+    assertThat(result.locationMap()).hasSize(2);
+    assertThat(result.contents()).isEqualTo("x = None\n#SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER");
   }
 
   @Test
