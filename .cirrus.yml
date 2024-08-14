@@ -165,6 +165,7 @@ plugin_qa_task:
     - source cirrus-env QA
     - source set_maven_build_version $BUILD_NUMBER
     - cd its/plugin
+    - echo ${ORCHESTRATOR_HOME}
     - mvn verify -Dsonar.runtimeVersion=${SQ_VERSION} -Dmaven.test.redirectTestOutputToFile=false -B -e -V
   cleanup_before_cache_script: cleanup_maven_repository
 
@@ -188,6 +189,7 @@ ruling_task:
     - source cirrus-env QA
     - source set_maven_build_version $BUILD_NUMBER
     - cd its/ruling
+    - echo ${ORCHESTRATOR_HOME}
     - mvn verify -Dsonar.runtimeVersion=LATEST_RELEASE -Dmaven.test.redirectTestOutputToFile=false -B -e -V -Dtest=PythonRulingTest
   cleanup_before_cache_script: cleanup_maven_repository
 
