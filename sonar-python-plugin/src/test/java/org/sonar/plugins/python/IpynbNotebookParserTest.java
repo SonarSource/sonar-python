@@ -82,7 +82,7 @@ class IpynbNotebookParserTest {
       .isEqualTo(1);
     assertThat(result.locationMap()).extracting(map -> map.get(3)).isEqualTo(new IPythonLocation(11, 5, Map.of(-1, 0)));
 
-    // last line with the cell delimiter which contains the EOF token 
+    // last line with the cell delimiter which contains the EOF token
     assertThat(result.locationMap()).extracting(map -> map.get(4)).isEqualTo(new IPythonLocation(11, 5, Map.of(-1, 0)));
   }
 
@@ -144,8 +144,8 @@ class IpynbNotebookParserTest {
     assertThat(result.locationMap()).containsEntry(1, new IPythonLocation(1, 382, Map.of(-1, 0)));
     assertThat(result.locationMap()).containsEntry(2, new IPythonLocation(1, 429, Map.of(-1, 0)));
 
-    assertThat(result.locationMap()).containsEntry(6, new IPythonLocation(1, 559, Map.of(-1, 2, 1, 561, 2, 563)));
-    assertThat(result.locationMap()).containsEntry(7, new IPythonLocation(1, 610, Map.of(-1, 2,2, 563, 1, 561)));
-
+    assertThat(result.locationMap()).containsEntry(6, new IPythonLocation(1, 559, Map.of(-1, 3, 0, 560, 1, 562, 2, 564)));
+    assertThat(result.locationMap()).containsEntry(7, new IPythonLocation(1, 610, Map.of(-1, 0)));
+    assertThat(result.locationMap()).containsEntry(8, new IPythonLocation(1, 637, Map.of(-1, 3, 1, 640, 2, 642, 0, 638)));
   }
 }

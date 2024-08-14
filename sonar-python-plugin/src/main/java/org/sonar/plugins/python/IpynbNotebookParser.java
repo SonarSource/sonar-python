@@ -207,7 +207,7 @@ public class IpynbNotebookParser {
     int count = 0;
     var numberOfExtraChars = 0;
     var arr = sourceLine.toCharArray();
-    for (int i = 1; i < sourceLine.length(); ++i) {
+    for (int i = 0; i < sourceLine.length(); ++i) {
       char c = arr[i];
       switch (c) {
         case '"', '\\':
