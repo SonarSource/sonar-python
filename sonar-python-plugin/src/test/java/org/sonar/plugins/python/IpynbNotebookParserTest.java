@@ -135,13 +135,17 @@ class IpynbNotebookParserTest {
     assertThat(resultOptional).isPresent();
 
     var result = resultOptional.get();
-    assertThat(result.locationMap()).hasSize(5);
-    assertThat(result.contents()).hasLineCount(5);
+    assertThat(result.locationMap()).hasSize(9);
+    assertThat(result.contents()).hasLineCount(9);
     // position of variable t
     assertThat(result.locationMap().get(4).column()).isEqualTo(452);
 
     // First and second line
     assertThat(result.locationMap()).containsEntry(1, new IPythonLocation(1, 382, Map.of(-1, 0)));
     assertThat(result.locationMap()).containsEntry(2, new IPythonLocation(1, 429, Map.of(-1, 0)));
+
+    assertThat(result.locationMap()).containsEntry(6, new IPythonLocation(1, 559, Map.of(-1, 2, 1, 561, 2, 563)));
+    assertThat(result.locationMap()).containsEntry(7, new IPythonLocation(1, 610, Map.of(-1, 2,2, 563, 1, 561)));
+
   }
 }
