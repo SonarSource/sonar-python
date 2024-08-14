@@ -74,6 +74,11 @@ orchestrator_cache_definition: &ORCHESTRATOR_CACHE_DEFINITION
     folder: ${ORCHESTRATOR_HOME}
     fingerprint_script: echo ${TASK_NAME_WITH_VERSION}-${CURRENT_MONTH}
     reupload_on_changes: "true"
+  inspect_cache_script: |
+    echo "Inspecting cache ${ORCHESTRATOR_HOME}..."
+    ls -l ${ORCHESTRATOR_HOME}
+    find ${ORCHESTRATOR_HOME}
+    echo "Inspecting cache done."
 
 build_task:
   <<: *BUILD_CONTAINER_DEFINITION
