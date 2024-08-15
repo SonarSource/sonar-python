@@ -179,10 +179,11 @@ public class IpynbNotebookParser {
     var lastSourceLine = "\n";
     while (jParser.nextToken() != JsonToken.END_ARRAY) {
       String sourceLine = jParser.getValueAsString();
-      tokenLocation = jParser.currentTokenLocation();
-      var countEscapedChar = countEscapeCharacters(sourceLine, tokenLocation.getColumnNr());
-      cellData.addLineToSource(sourceLine, tokenLocation.getLineNr(), tokenLocation.getColumnNr(), countEscapedChar);
+      var newTokenLocation = jParser.currentTokenLocation();
+      var countEscapedChar = countEscapeCharacters(sourceLine, newTokenLocation.getColumnNr());
+      cellData.addLineToSource(sourceLine, newTokenLocation.getLineNr(), newTokenLocation.getColumnNr(), countEscapedChar);
       lastSourceLine = sourceLine;
+      tokenLocation = newTokenLocation;
     }
     if (!lastSourceLine.endsWith("\n")) {
       cellData.appendToSource("\n");
@@ -204,7 +205,7 @@ public class IpynbNotebookParser {
       var countEscapedChar = countEscapeCharacters(line, previousLen + previousExtraChars + tokenLocation.getColumnNr());
       var currentCount = countEscapedChar.get(-1);
       cellData.addLineToSource(line, new IPythonLocation(tokenLocation.getLineNr(),
-        tokenLocation.getColumnNr() + previousLen + previousExtraChars, countEscapedChar));
+        tokenLocation.getColumnNr() + previousLen + previousExtraChars, countEscapedChar, true));
       cellData.appendToSource("\n");
       previousLen = previousLen + line.length() + 2;
       previousExtraChars = previousExtraChars + currentCount;
@@ -230,7 +231,7 @@ public class IpynbNotebookParser {
           numberOfExtraChars++;
           colMap.put(i, i + colOffSet + count + numberOfExtraChars);
           break;
-        // we never encounter \n or \r as the lines are split at these characters 
+        // we never encounter \n or \r as the lines are split at these characters
         case '\b', '\f', '\t':
           // we increase the count of one char as we count the \ but not the t or b
           count += 1;

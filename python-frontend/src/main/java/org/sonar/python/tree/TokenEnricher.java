@@ -50,7 +50,7 @@ public class TokenEnricher {
         .map(t -> computeTriviaLocation(t, location.line(), startCol, token.getLine(), offsetMap))
         .toList();
 
-      return new TokenImpl(token, location.line(), startCol, escapedCharInToken, trivia);
+      return new TokenImpl(token, location.line(), startCol, escapedCharInToken, trivia, location.isCompresssed());
     }
     return new TokenImpl(token);
   }
@@ -59,14 +59,16 @@ public class TokenEnricher {
     int escapedCharInToken = computeEscapeCharsInToken(trivia.getToken().getValue());
     var line = parentLine;
     var col = parentCol - escapedCharInToken - trivia.getToken().getValue().length();
+    var isCompressed = false;
     if (parentPythonLine != trivia.getToken().getLine()) {
       IPythonLocation location = offsetMap.get(trivia.getToken().getLine());
       line = location.line();
       Map<Integer, Integer> escapeCharsMap = location.colOffset();
       col = computeColWithEscapes(trivia.getToken().getColumn(), escapeCharsMap, location.column());
+      isCompressed = location.isCompresssed();
     }
     return new TriviaImpl(new TokenImpl(trivia.getToken(), line, col,
-      escapedCharInToken, List.of()));
+      escapedCharInToken, List.of(), isCompressed));
   }
 
   private static int computeEscapeCharsInToken(String tokenValue) {
