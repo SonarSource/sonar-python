@@ -24,6 +24,8 @@ import org.sonar.api.config.internal.ConfigurationBridge;
 import org.sonar.api.config.internal.MapSettings;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.sonar.plugins.python.PythonPlugin.IPYNB_FILE_SUFFIXES_KEY;
 
 class IPynbTest {
@@ -52,5 +54,32 @@ class IPynbTest {
 
     IPynb language = new IPynb(settings.asConfig());
     assertThat(language.getFileSuffixes()).hasSize(1).contains("ipynb");
+  }
+
+  @Test
+  void equals() {
+    ConfigurationBridge emptyConfig = new ConfigurationBridge(new MapSettings());
+    IPynb one = new IPynb(emptyConfig);
+    IPynb other = new IPynb(emptyConfig);
+    IPynb nullConfig = null;
+
+    MapSettings settings = new MapSettings();
+    settings.setProperty(IPYNB_FILE_SUFFIXES_KEY, "ipynb,my_custom_extension");
+    IPynb customConfig = new IPynb(settings.asConfig());
+
+    assertEquals(one, one);
+    assertEquals(one, other);
+    assertNotEquals(one, nullConfig);
+    assertNotEquals(one, customConfig);
+    assertNotEquals(one, new Python(new ConfigurationBridge(new MapSettings())));
+  }
+
+  @Test
+  void hashcode() {
+    ConfigurationBridge emptyConfig = new ConfigurationBridge(new MapSettings());
+    IPynb one = new IPynb(emptyConfig);
+    IPynb other = new IPynb(emptyConfig);
+    assertEquals(one.hashCode(), other.hashCode());
+    assertNotEquals(one.hashCode(), "test".hashCode());
   }
 }
