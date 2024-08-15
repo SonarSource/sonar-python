@@ -21,5 +21,8 @@ package org.sonar.python;
 
 import java.util.Map;
 
-public record IPythonLocation(int line, int column, Map<Integer, Integer> colOffset) {
+public record IPythonLocation(int line, int column, Map<Integer, Integer> colOffset, boolean isCompresssed) {
+  public IPythonLocation(int line, int column, Map<Integer, Integer> colOffset) {
+    this(line, column, colOffset, false);
+  }
 }
