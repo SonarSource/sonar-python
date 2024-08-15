@@ -19,6 +19,7 @@
  */
 package org.sonar.plugins.python;
 
+import java.util.Objects;
 import org.sonar.api.config.Configuration;
 import org.sonar.api.resources.AbstractLanguage;
 
@@ -40,5 +41,25 @@ public class IPynb extends AbstractLanguage {
   public String[] getFileSuffixes() {
     String[] suffixes = filterEmptyStrings(configuration.getStringArray(PythonPlugin.IPYNB_FILE_SUFFIXES_KEY));
     return suffixes.length == 0 ? DEFAULT_FILE_SUFFIXES : suffixes;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()){
+      return false;
+    }
+    if (!super.equals(o)) {
+      return false;
+    }
+    IPynb iPynb = (IPynb) o;
+    return Objects.equals(configuration, iPynb.configuration);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(super.hashCode(), configuration);
   }
 }
