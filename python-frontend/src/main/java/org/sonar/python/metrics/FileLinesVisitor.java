@@ -41,7 +41,6 @@ import org.sonar.plugins.python.api.tree.Trivia;
 import org.sonar.python.SubscriptionVisitor;
 import org.sonar.python.TokenLocation;
 import org.sonar.python.api.PythonTokenType;
-import org.sonar.python.tree.TokenImpl;
 
 /**
  * Visitor that computes {@link CoreMetrics#NCLOC_DATA_KEY} and {@link CoreMetrics#COMMENT_LINES} metrics used by the DevCockpit.
