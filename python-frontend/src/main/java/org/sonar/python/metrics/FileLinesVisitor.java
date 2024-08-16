@@ -148,7 +148,7 @@ public class FileLinesVisitor extends PythonSubscriptionCheck {
     if (!token.type().equals(PythonTokenType.DEDENT) && !token.type().equals(PythonTokenType.INDENT) && !token.type().equals(PythonTokenType.NEWLINE)) {
       // Handle all the lines of the token
       String[] tokenLines = token.value().split("\n", -1);
-      int tokenLine = token.line();
+      int tokenLine = token.pythonLine();
       for (int line = tokenLine; line < tokenLine + tokenLines.length; line++) {
         lines.add(line);
       }

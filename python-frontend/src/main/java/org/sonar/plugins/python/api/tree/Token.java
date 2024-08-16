@@ -34,9 +34,9 @@ public interface Token extends Tree {
 
   TokenType type();
 
-  int physicalLine();
+  int pythonLine();
 
-  int physicalColumn();
+  int pythonColumn();
 
   int includedEscapeChars();
 

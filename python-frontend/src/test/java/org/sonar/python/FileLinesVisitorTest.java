@@ -20,6 +20,7 @@
 package org.sonar.python;
 
 import java.io.File;
+import java.util.Map;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.metrics.FileLinesVisitor;
 
@@ -65,6 +66,23 @@ class FileLinesVisitorTest {
     FileLinesVisitor visitor = new FileLinesVisitor();
     TestPythonVisitorRunner.scanFile(new File(BASE_DIR, "empty.py"), visitor);
     assertThat(visitor.getExecutableLines()).isEmpty();
+  }
+
+  @Test
+  void notebook_locs_single_line_file() {
+    FileLinesVisitor visitor = new FileLinesVisitor(true);
+    String content = """
+      a = 2
+      def foo():
+        return 3
+      """;
+    var locations = Map.of(1, new IPythonLocation(1, 383, Map.of(-1, 0)),
+        2, new IPythonLocation(1, 390, Map.of(-1, 0)),
+        3, new IPythonLocation(1, 402, Map.of(-1, 0)), 
+        4, new IPythonLocation(1, 402, Map.of(-1, 0)));
+    TestPythonVisitorRunner.scanNotebookFile(new File(BASE_DIR, "notebook_locs_single_line.ipynb"), locations, content, visitor);
+    assertThat(visitor.getExecutableLines()).isEmpty();
+    assertThat(visitor.getLinesOfCode()).hasSize(3);
   }
 
   @Test

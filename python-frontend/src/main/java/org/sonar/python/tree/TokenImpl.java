@@ -59,16 +59,16 @@ public class TokenImpl extends PyTree implements Token {
 
   @Override
   public int line() {
-    return line != null ? line : physicalLine();
+    return line != null ? line : pythonLine();
   }
 
   @Override
   public int column() {
-    return column != null ? column : physicalColumn();
+    return column != null ? column : pythonColumn();
   }
 
   @Override
-  public int physicalLine() {
+  public int pythonLine() {
     return token.getLine();
   }
 
@@ -78,7 +78,7 @@ public class TokenImpl extends PyTree implements Token {
   }
 
   @Override
-  public int physicalColumn() {
+  public int pythonColumn() {
     return token.getColumn();
   }
 
