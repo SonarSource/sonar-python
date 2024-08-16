@@ -41,6 +41,7 @@ import org.sonar.plugins.python.api.tree.Trivia;
 import org.sonar.python.SubscriptionVisitor;
 import org.sonar.python.TokenLocation;
 import org.sonar.python.api.PythonTokenType;
+import org.sonar.python.tree.TokenImpl;
 
 /**
  * Visitor that computes {@link CoreMetrics#NCLOC_DATA_KEY} and {@link CoreMetrics#COMMENT_LINES} metrics used by the DevCockpit.
@@ -148,7 +149,7 @@ public class FileLinesVisitor extends PythonSubscriptionCheck {
     if (!token.type().equals(PythonTokenType.DEDENT) && !token.type().equals(PythonTokenType.INDENT) && !token.type().equals(PythonTokenType.NEWLINE)) {
       // Handle all the lines of the token
       String[] tokenLines = token.value().split("\n", -1);
-      int tokenLine = token.line();
+      int tokenLine = token.pythonLine();
       for (int line = tokenLine; line < tokenLine + tokenLines.length; line++) {
         lines.add(line);
       }
