@@ -70,8 +70,8 @@ public class NotebookParsingData {
     aggregatedSource.append(str);
   }
 
-  public void addLineToSource(String sourceLine, int lineNr, int columnNr, Map<Integer, Integer> colOffset) {
-    addLineToSource(sourceLine, new IPythonLocation(lineNr, columnNr, colOffset));
+  public void addLineToSource(String sourceLine, int lineNr, int columnNr, Map<Integer, Integer> colOffset, boolean isCompressed) {
+    addLineToSource(sourceLine, new IPythonLocation(lineNr, columnNr, colOffset, isCompressed));
   }
 
   private void appendLine(String line) {

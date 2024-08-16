@@ -41,7 +41,9 @@ class PythonHighlighterTest {
 
   private File file;
   private File notebookFile;
+  private File notebookFileSingleLine;
   private DefaultInputFile notebookInputFile;
+  private DefaultInputFile notebookInputFileSingleLine;
   private String dir = "src/test/resources/org/sonar/plugins/python";
 
   @BeforeEach
@@ -56,9 +58,16 @@ class PythonHighlighterTest {
     notebookInputFile = TestInputFileBuilder.create("moduleKey", notebookFile.getName())
       .initMetadata(TestUtils.fileContent(notebookFile, StandardCharsets.UTF_8))
       .build();
+
+    notebookFileSingleLine = new File(dir, "/notebookHighlighterSingleLine.ipynb");
+    notebookInputFileSingleLine = TestInputFileBuilder.create("moduleKey", notebookFileSingleLine.getName())
+      .initMetadata(TestUtils.fileContent(notebookFileSingleLine, StandardCharsets.UTF_8))
+      .build();
+
     context = SensorContextTester.create(new File(dir));
     context.fileSystem().add(inputFile);
     context.fileSystem().add(notebookInputFile);
+    context.fileSystem().add(notebookInputFileSingleLine);
 
     PythonHighlighter pythonHighlighter = new PythonHighlighter(context, new PythonInputFileImpl(inputFile));
     TestPythonVisitorRunner.scanFile(file, pythonHighlighter);
@@ -224,6 +233,26 @@ class PythonHighlighterTest {
     checkOnRange(12, 5, 21, notebookFile, TypeOfText.COMMENT);
     // 3J
     checkOnRange(13, 9, 2, notebookFile, TypeOfText.CONSTANT);
+  }
+
+  @Test
+  void highlightingNotebooksSingleLine() {
+    String pythonContent = "def foo():\n    pass\na = 2 # comment\n#SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER";
+    var locations = Map.of(
+      1, new IPythonLocation(1, 93, Map.of(-1, 0), true),
+      2, new IPythonLocation(1, 108, Map.of(-1, 0), true),
+      3, new IPythonLocation(1, 121, Map.of(-1, 0), true),
+      4, new IPythonLocation(1, 93, Map.of(-1, 0), true)); //EOF Token
+    PythonHighlighter pythonHighlighter = new PythonHighlighter(context, new GeneratedIPythonFile(notebookInputFileSingleLine, pythonContent, locations));
+    TestPythonVisitorRunner.scanNotebookFile(notebookFileSingleLine, locations, pythonContent, pythonHighlighter);
+    // def
+    checkOnRange(1, 93, 3, notebookFileSingleLine, TypeOfText.KEYWORD);
+    // pass
+    checkOnRange(1, 112, 4, notebookFileSingleLine, TypeOfText.KEYWORD);
+    // 2
+    checkOnRange(1, 125, 1, notebookFileSingleLine, TypeOfText.CONSTANT);
+    // # comment
+    checkOnRange(1, 127 , 9, notebookFileSingleLine, TypeOfText.COMMENT);
   }
 
   /**

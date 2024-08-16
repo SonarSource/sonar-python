@@ -78,9 +78,10 @@ public class IpynbNotebookParser {
 
   public GeneratedIPythonFile parseNotebook() throws IOException {
     String content = inputFile.wrappedFile().contents();
+    boolean isCompressed = content.lines().count() <= 1;
     JsonFactory factory = new JsonFactory();
     try (JsonParser jParser = factory.createParser(content)) {
-      return parseCells(jParser).map(notebookData -> {
+      return parseCells(jParser, isCompressed).map(notebookData -> {
         // Account for EOF token
         JsonLocation location = jParser.currentTokenLocation();
         notebookData.addDefaultLocation(lastPythonLine, location.getLineNr(), location.getColumnNr());
@@ -90,14 +91,14 @@ public class IpynbNotebookParser {
 
   }
 
-  private Optional<NotebookParsingData> parseCells(JsonParser parser) throws IOException {
+  private Optional<NotebookParsingData> parseCells(JsonParser parser, boolean isCompressed) throws IOException {
     while (!parser.isClosed()) {
       parser.nextToken();
       String fieldName = parser.currentName();
       if ("cells".equals(fieldName)) {
         // consume array start token
         parser.nextToken();
-        Optional<NotebookParsingData> data = parseCellArray(parser);
+        Optional<NotebookParsingData> data = parseCellArray(parser, isCompressed);
         parser.close();
         return data;
       }
@@ -105,12 +106,12 @@ public class IpynbNotebookParser {
     return Optional.empty();
   }
 
-  private Optional<NotebookParsingData> parseCellArray(JsonParser jParser) throws IOException {
+  private Optional<NotebookParsingData> parseCellArray(JsonParser jParser, boolean isCompressed) throws IOException {
     List<NotebookParsingData> cellsData = new ArrayList<>();
 
     while (jParser.nextToken() != JsonToken.END_ARRAY) {
       if (jParser.currentToken() == JsonToken.START_OBJECT) {
-        processCodeCell(cellsData, jParser);
+        processCodeCell(cellsData, jParser, isCompressed);
       }
     }
     Optional<NotebookParsingData> aggregatedNotebookData = cellsData.stream().reduce(NotebookParsingData::combine);
@@ -134,7 +135,7 @@ public class IpynbNotebookParser {
     return false;
   }
 
-  private void processCodeCell(List<NotebookParsingData> accumulator, JsonParser jParser) throws IOException {
+  private void processCodeCell(List<NotebookParsingData> accumulator, JsonParser jParser, boolean isCompressed) throws IOException {
     boolean isCodeCell = false;
     Optional<NotebookParsingData> notebookData = Optional.empty();
     while (jParser.nextToken() != JsonToken.END_OBJECT) {
@@ -154,7 +155,7 @@ public class IpynbNotebookParser {
         }
         switch (jParser.currentToken()) {
           case START_ARRAY:
-            notebookData = Optional.of(parseSourceArray(startLine, jParser));
+            notebookData = Optional.of(parseSourceArray(startLine, jParser, isCompressed));
             break;
           case VALUE_STRING:
             notebookData = Optional.of(parseSourceMultilineString(startLine, jParser));
@@ -172,7 +173,7 @@ public class IpynbNotebookParser {
     }
   }
 
-  private static NotebookParsingData parseSourceArray(int startLine, JsonParser jParser) throws IOException {
+  private static NotebookParsingData parseSourceArray(int startLine, JsonParser jParser, boolean isCompressed) throws IOException {
     NotebookParsingData cellData = NotebookParsingData.fromLine(startLine);
     JsonLocation tokenLocation = jParser.currentTokenLocation();
     // In case of an empty cell, we don't add an extra line
@@ -181,7 +182,7 @@ public class IpynbNotebookParser {
       String sourceLine = jParser.getValueAsString();
       var newTokenLocation = jParser.currentTokenLocation();
       var countEscapedChar = countEscapeCharacters(sourceLine, newTokenLocation.getColumnNr());
-      cellData.addLineToSource(sourceLine, newTokenLocation.getLineNr(), newTokenLocation.getColumnNr(), countEscapedChar);
+      cellData.addLineToSource(sourceLine, newTokenLocation.getLineNr(), newTokenLocation.getColumnNr(), countEscapedChar, isCompressed);
       lastSourceLine = sourceLine;
       tokenLocation = newTokenLocation;
     }
