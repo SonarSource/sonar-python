@@ -334,8 +334,10 @@ public class PythonScanner extends Scanner {
       saveMetricOnFile(inputFile, CoreMetrics.COMMENT_LINES, fileLinesVisitor.getCommentLineCount());
 
       FileLinesContext fileLinesContext = fileLinesContextFactory.createFor(inputFile.wrappedFile());
-      for (int line : linesOfCode) {
-        fileLinesContext.setIntValue(CoreMetrics.NCLOC_DATA_KEY, line, 1);
+      if (inputFile.kind() == PythonInputFile.Kind.PYTHON) {
+        for (int line : linesOfCode) {
+          fileLinesContext.setIntValue(CoreMetrics.NCLOC_DATA_KEY, line, 1);
+        }
       }
       for (int line : fileLinesVisitor.getExecutableLines()) {
         fileLinesContext.setIntValue(CoreMetrics.EXECUTABLE_LINES_DATA_KEY, line, 1);
