@@ -351,7 +351,7 @@ public class Expressions {
     return getAssignedName(expressions.get(0), recursionCount + 1);
   }
 
-  private static List<Expression> getExpressionsFromRhs(Expression rhs) {
+  public static List<Expression> getExpressionsFromRhs(Expression rhs) {
     List<Expression> expressions = new ArrayList<>();
     if (rhs.is(Tree.Kind.TUPLE)) {
       expressions.addAll(((Tuple) rhs).elements());
