@@ -22,9 +22,9 @@ jobs:
         github.event.check_suite.conclusion == 'success' &&
         github.event.check_suite.app.slug == 'cirrus-ci')
       steps:
-      - uses: >-
-          SonarSource/gh-action_releasability/releasability-status@v2
-        with:
-          optional_checks: "Jira"
-        env:
-          GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
+        - uses: >-
+            SonarSource/gh-action_releasability/releasability-status@v2
+          with:
+            optional_checks: "Jira"
+          env:
+            GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
