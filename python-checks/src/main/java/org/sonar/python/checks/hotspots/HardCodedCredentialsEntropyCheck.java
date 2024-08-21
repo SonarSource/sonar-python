@@ -29,6 +29,7 @@ import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
+import org.sonar.plugins.python.api.tree.AnnotatedAssignment;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.DictionaryLiteral;
 import org.sonar.plugins.python.api.tree.Expression;
@@ -67,16 +68,20 @@ public class HardCodedCredentialsEntropyCheck extends PythonSubscriptionCheck {
   @Override
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(Tree.Kind.ASSIGNMENT_STMT, this::checkAssignment);
+    context.registerSyntaxNodeConsumer(Tree.Kind.ANNOTATED_ASSIGNMENT, this::checkAnnotatedAssignment);
     context.registerSyntaxNodeConsumer(Tree.Kind.PARAMETER_LIST, this::checkParameterList);
     context.registerSyntaxNodeConsumer(Tree.Kind.REGULAR_ARGUMENT, this::checkRegularArgument);
     context.registerSyntaxNodeConsumer(Tree.Kind.DICTIONARY_LITERAL, this::checkDictionaryLiteral);
   }
 
-  private void patternMatch(Name name, Tree location, SubscriptionContext subscriptionContext) {
-    patternMatch(name.name(), location, subscriptionContext);
+  private void patternMatch(Name name, Tree location, String value, SubscriptionContext subscriptionContext) {
+    patternMatch(name.name(), location, value, subscriptionContext);
   }
 
-  private void patternMatch(String name, Tree location, SubscriptionContext subscriptionContext) {
+  private void patternMatch(String name, Tree location, String value, SubscriptionContext subscriptionContext) {
+    if (!valuePassesPostValidation(value) || !entropyShouldRaise(value)) {
+      return;
+    }
     patterns().stream()
       .filter(pattern -> pattern.matcher(name).matches())
       .findFirst()
@@ -89,11 +94,10 @@ public class HardCodedCredentialsEntropyCheck extends PythonSubscriptionCheck {
       .filter(parameter -> parameter.name() != null)
       .filter(parameter -> parameter.defaultValue() != null)
       .filter(parameter -> parameter.defaultValue().is(Tree.Kind.STRING_LITERAL))
-      .filter(parameter -> {
+      .forEach(parameter -> {
         var value = ((StringLiteral) parameter.defaultValue()).trimmedQuotesValue();
-        return valuePassesPostValidation(value) && entropyShouldRaise(value);
-      })
-      .forEach(parameter -> patternMatch(parameter.name(), parameter.defaultValue(), subscriptionContext));
+        patternMatch(parameter.name(), parameter.defaultValue(), value, subscriptionContext);
+      });
   }
 
   private void checkDictionaryLiteral(SubscriptionContext subscriptionContext) {
@@ -107,9 +111,7 @@ public class HardCodedCredentialsEntropyCheck extends PythonSubscriptionCheck {
         if (!key.is(Tree.Kind.STRING_LITERAL)) {
           return;
         }
-        if (valuePassesPostValidation(value) && entropyShouldRaise(value)) {
-          patternMatch(((StringLiteral) key).trimmedQuotesValue(), keyValuePair.value(), subscriptionContext);
-        }
+        patternMatch(((StringLiteral) key).trimmedQuotesValue(), keyValuePair.value(), value, subscriptionContext);
       });
   }
 
@@ -119,15 +121,23 @@ public class HardCodedCredentialsEntropyCheck extends PythonSubscriptionCheck {
     if (keywordArgument == null) {
       return;
     }
-    var a = regularArgument.expression();
-    if (!a.is(Tree.Kind.STRING_LITERAL)) {
+    var expression = regularArgument.expression();
+    if (!expression.is(Tree.Kind.STRING_LITERAL)) {
       return;
     }
-    var value = ((StringLiteral) a).trimmedQuotesValue();
-    if (!valuePassesPostValidation(value) || !entropyShouldRaise(value)) {
+    var value = ((StringLiteral) expression).trimmedQuotesValue();
+    patternMatch(keywordArgument, regularArgument, value, subscriptionContext);
+  }
+
+  private void checkAnnotatedAssignment(SubscriptionContext subscriptionContext) {
+    var annotatedAssignment = (AnnotatedAssignment) subscriptionContext.syntaxNode();
+    var assignedValue = annotatedAssignment.assignedValue();
+    var assignedVariable = annotatedAssignment.variable();
+    if (assignedValue == null || !assignedValue.is(Tree.Kind.STRING_LITERAL) || !assignedVariable.is(Tree.Kind.NAME)) {
       return;
     }
-    patternMatch(keywordArgument, regularArgument, subscriptionContext);
+    var value = ((StringLiteral) assignedValue).trimmedQuotesValue();
+    patternMatch(((Name) assignedVariable).name(), assignedValue, value, subscriptionContext);
   }
 
   private void checkAssignment(SubscriptionContext subscriptionContext) {
@@ -158,9 +168,7 @@ public class HardCodedCredentialsEntropyCheck extends PythonSubscriptionCheck {
         var expression = entry.getKey();
         var name = entry.getValue();
         var value = ((StringLiteral) expression).trimmedQuotesValue();
-        if (valuePassesPostValidation(value) && entropyShouldRaise(value)) {
-          patternMatch(name, expression, subscriptionContext);
-        }
+        patternMatch(name, expression, value, subscriptionContext);
       });
 
   }
