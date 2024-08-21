@@ -19,16 +19,22 @@
  */
 package org.sonar.python.checks.hotspots;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-public class HardCodedCredentialsEntropyCheckTest {
+class HardCodedCredentialsEntropyCheckTest {
 
   @Test
-  public void test() {
+  void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/hotspots/hardcodedCredentialsEntropy.py", new HardCodedCredentialsEntropyCheck());
   }
+
+  @Test
+  void test_custom() {
+    HardCodedCredentialsEntropyCheck check = new HardCodedCredentialsEntropyCheck();
+    check.secretKeyWords = "tuna,salmon,roe";
+    PythonCheckVerifier.verify("src/test/resources/checks/hotspots/hardcodedCredentialsEntropy_custom.py", check);
+  }
+
 
 }

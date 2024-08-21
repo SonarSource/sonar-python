@@ -51,7 +51,7 @@ public class HardCodedCredentialsEntropyCheck extends PythonSubscriptionCheck {
     defaultValue = DEFAULT_SECRET_KEYWORDS)
   public String secretKeyWords = DEFAULT_SECRET_KEYWORDS;
 
-  private final Collection<Pattern> patterns = getPatterns();
+  private Collection<Pattern> patterns = null;
 
   private static final String DEFAULT_RANDOMNESS_SENSIBILITY = "5.0";
   @RuleProperty(
@@ -60,7 +60,7 @@ public class HardCodedCredentialsEntropyCheck extends PythonSubscriptionCheck {
     defaultValue = DEFAULT_RANDOMNESS_SENSIBILITY)
   public double randomnessSensibility = Double.parseDouble(DEFAULT_RANDOMNESS_SENSIBILITY);
 
-  private static final Pattern POSTVALIDATON_PATTERN = Pattern.compile("[a-zA-Z0-9_.+/~$-]([a-zA-Z0-9_.+/=~$-]|\\\\\\\\(?![ntr\"])){14,1022}[a-zA-Z0-9_.+/=~$-]");
+  private static final Pattern POSTVALIDATION_PATTERN = Pattern.compile("[a-zA-Z0-9_.+/~$-]([a-zA-Z0-9_.+/=~$-]|\\\\\\\\(?![ntr\"])){14,1022}[a-zA-Z0-9_.+/=~$-]");
 
   private static final String MESSAGE = "\"%s\" detected here, make sure this is not a hard-coded secret.";
 
@@ -77,7 +77,7 @@ public class HardCodedCredentialsEntropyCheck extends PythonSubscriptionCheck {
   }
 
   private void patternMatch(String name, Tree location, SubscriptionContext subscriptionContext) {
-    patterns.stream()
+    patterns().stream()
       .filter(pattern -> pattern.matcher(name).matches())
       .findFirst()
       .ifPresent(pattern -> subscriptionContext.addIssue(location, String.format(MESSAGE, name)));
@@ -166,17 +166,20 @@ public class HardCodedCredentialsEntropyCheck extends PythonSubscriptionCheck {
   }
 
   private static boolean valuePassesPostValidation(String value) {
-    return POSTVALIDATON_PATTERN.matcher(value).matches();
+    return POSTVALIDATION_PATTERN.matcher(value).matches();
   }
 
   private boolean entropyShouldRaise(String value) {
     return ShannonEntropy.calculate(value) > randomnessSensibility;
   }
 
-  private Collection<Pattern> getPatterns() {
-    return Stream.of(secretKeyWords.split(","))
-      .map(word -> Pattern.compile("(" + word + ")", Pattern.CASE_INSENSITIVE))
-      .toList();
+  private Collection<Pattern> patterns() {
+    if (patterns == null) {
+      patterns = Stream.of(secretKeyWords.split(","))
+        .map(word -> Pattern.compile("(" + word + ")", Pattern.CASE_INSENSITIVE))
+        .toList();
+    }
+    return patterns;
   }
 
   private static final class ShannonEntropy {
@@ -199,7 +202,6 @@ public class HardCodedCredentialsEntropyCheck extends PythonSubscriptionCheck {
         .map(frequency -> -(frequency * Math.log(frequency) / LOG_2))
         .sum();
     }
-
   }
 
 }
