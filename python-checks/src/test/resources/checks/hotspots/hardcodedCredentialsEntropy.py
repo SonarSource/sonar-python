@@ -34,3 +34,6 @@ def multiple_assignment():
 
 def assignment_with_type():
     secret: str = "1IfHMPanImzX8ZxC-Ud6+YhXiLwlXq$f_-3v~.=" # Noncompliant
+
+    some_var: str
+    another_var: int = 42
