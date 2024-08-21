@@ -18,8 +18,9 @@ def function_with_secret(secret="1IfHMPanImzX8ZxC-Ud6+YhXiLwlXq$f_-3v~.="): # No
 #                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     pass
 
-def clean_function(parameter="a string", another_parameter: 42, *args, **kwargs):
-    pass
+def clean_function(some_arg, parameter="a string", another_parameter: 42, *args, **kwargs):
+    another_call(42, "a string", parameter, *args)
+
 
 some_dict = {
     "secret": "1IfHMPanImzX8ZxC-Ud6+YhXiLwlXq$f_-3v~.=", # Noncompliant
