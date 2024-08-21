@@ -190,8 +190,7 @@ public class HardCodedCredentialsEntropyCheck extends PythonSubscriptionCheck {
     return patterns;
   }
 
-  private static final class ShannonEntropy {
-
+  protected static final class ShannonEntropy {
     private static final double LOG_2 = Math.log(2.0d);
 
     private ShannonEntropy() {
