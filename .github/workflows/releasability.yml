@@ -25,6 +25,6 @@ jobs:
         - uses: >-
             SonarSource/gh-action_releasability/releasability-status@v2
           with:
-            optional_checks: "Jira"
+            optional_checks: "Jira,QA,Whitesource"
           env:
             GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
