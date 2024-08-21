@@ -19,7 +19,7 @@ def function_with_secret(secret="1IfHMPanImzX8ZxC-Ud6+YhXiLwlXq$f_-3v~.="): # No
     pass
 
 def clean_function(some_arg, parameter="a string", another_parameter: 42, *args, **kwargs):
-    another_call(42, "a string", parameter, *args)
+    another_call(42, "a string", parameter, a_keyword=42, *args)
 
 
 some_dict = {
