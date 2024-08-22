@@ -19,9 +19,9 @@
  */
 package org.sonar.python.checks.hotspots;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 import javax.annotation.Nullable;
@@ -46,24 +46,25 @@ public class HardCodedCredentialsEntropyCheck extends PythonSubscriptionCheck {
 
   private static final String DEFAULT_SECRET_KEYWORDS = "api[_.-]?key,auth,credential,secret,token";
 
+  private static final String DEFAULT_RANDOMNESS_SENSIBILITY = "5.0";
+
+  private static final Pattern POSTVALIDATION_PATTERN = Pattern.compile("[a-zA-Z0-9_.+/~$-]([a-zA-Z0-9_.+/=~$-]|\\\\\\\\(?![ntr\"])){14,1022}[a-zA-Z0-9_.+/=~$-]");
+
+  private static final String MESSAGE = "\"%s\" detected here, make sure this is not a hard-coded secret.";
+
+  private Collection<Pattern> patterns = null;
+
   @RuleProperty(
     key = "credentialWords",
     description = "Comma separated list of words identifying potential credentials",
     defaultValue = DEFAULT_SECRET_KEYWORDS)
   public String secretKeyWords = DEFAULT_SECRET_KEYWORDS;
 
-  private Collection<Pattern> patterns = null;
-
-  private static final String DEFAULT_RANDOMNESS_SENSIBILITY = "5.0";
   @RuleProperty(
     key = "randomnessSensibility",
     description = "Allows to tune the Randomness Sensibility (from 0 to 10)",
     defaultValue = DEFAULT_RANDOMNESS_SENSIBILITY)
   public double randomnessSensibility = Double.parseDouble(DEFAULT_RANDOMNESS_SENSIBILITY);
-
-  private static final Pattern POSTVALIDATION_PATTERN = Pattern.compile("[a-zA-Z0-9_.+/~$-]([a-zA-Z0-9_.+/=~$-]|\\\\\\\\(?![ntr\"])){14,1022}[a-zA-Z0-9_.+/=~$-]");
-
-  private static final String MESSAGE = "\"%s\" detected here, make sure this is not a hard-coded secret.";
 
   @Override
   public void initialize(Context context) {
@@ -105,12 +106,10 @@ public class HardCodedCredentialsEntropyCheck extends PythonSubscriptionCheck {
     dictionaryLiteral.elements().stream().filter(e -> e.is(Tree.Kind.KEY_VALUE_PAIR))
       .map(KeyValuePair.class::cast)
       .filter(keyValuePair -> keyValuePair.value().is(Tree.Kind.STRING_LITERAL))
+      .filter(keyValuePair -> keyValuePair.key().is(Tree.Kind.STRING_LITERAL))
       .forEach(keyValuePair -> {
         var value = ((StringLiteral) keyValuePair.value()).trimmedQuotesValue();
         var key = keyValuePair.key();
-        if (!key.is(Tree.Kind.STRING_LITERAL)) {
-          return;
-        }
         patternMatch(((StringLiteral) key).trimmedQuotesValue(), keyValuePair.value(), value, subscriptionContext);
       });
   }
@@ -121,56 +120,40 @@ public class HardCodedCredentialsEntropyCheck extends PythonSubscriptionCheck {
     if (keywordArgument == null) {
       return;
     }
-    var expression = regularArgument.expression();
-    if (!expression.is(Tree.Kind.STRING_LITERAL)) {
-      return;
+    if (regularArgument.expression() instanceof StringLiteral expression) {
+      var value = expression.trimmedQuotesValue();
+      patternMatch(keywordArgument, regularArgument, value, subscriptionContext);
     }
-    var value = ((StringLiteral) expression).trimmedQuotesValue();
-    patternMatch(keywordArgument, regularArgument, value, subscriptionContext);
   }
 
   private void checkAnnotatedAssignment(SubscriptionContext subscriptionContext) {
     var annotatedAssignment = (AnnotatedAssignment) subscriptionContext.syntaxNode();
     var assignedValue = annotatedAssignment.assignedValue();
     var assignedVariable = annotatedAssignment.variable();
-    if (assignedValue == null || !assignedValue.is(Tree.Kind.STRING_LITERAL) || !assignedVariable.is(Tree.Kind.NAME)) {
-      return;
+    if (assignedValue instanceof StringLiteral stringLiteral && assignedVariable instanceof Name name) {
+      patternMatch(name, assignedValue, stringLiteral.trimmedQuotesValue(), subscriptionContext);
     }
-    var value = ((StringLiteral) assignedValue).trimmedQuotesValue();
-    patternMatch(((Name) assignedVariable).name(), assignedValue, value, subscriptionContext);
   }
 
   private void checkAssignment(SubscriptionContext subscriptionContext) {
+    var expressions = new ArrayList<Expression>();
     var assignment = (AssignmentStatement) subscriptionContext.syntaxNode();
     var assignedValue = assignment.assignedValue();
-    Map<Expression, Name> expressions = null;
+
     if (assignedValue.is(Tree.Kind.TUPLE)) {
-      expressions = Expressions.getExpressionsFromRhs((assignment.assignedValue()))
-        .stream()
-        .collect(HashMap::new, (map, e) -> {
-          var name = Expressions.getAssignedName(e);
-          name.ifPresent(value -> map.put(e, value));
-        }, HashMap::putAll);
+      expressions.addAll(Expressions.getExpressionsFromRhs(assignedValue));
     } else {
-      var name = Expressions.getAssignedName(assignedValue);
-      if (name.isPresent()) {
-        expressions = Map.of(assignedValue, name.get());
-      }
+      expressions.add(assignedValue);
     }
 
-    if (expressions == null) {
-      return;
-    }
-
-    expressions.entrySet().stream()
-      .filter(entry -> entry.getKey().is(Tree.Kind.STRING_LITERAL))
-      .forEach(entry -> {
-        var expression = entry.getKey();
-        var name = entry.getValue();
-        var value = ((StringLiteral) expression).trimmedQuotesValue();
-        patternMatch(name, expression, value, subscriptionContext);
-      });
-
+    expressions.stream()
+      .filter(StringLiteral.class::isInstance)
+      .map(StringLiteral.class::cast)
+      .forEach(expression -> Expressions.getAssignedName(expression)
+        .ifPresent(name -> {
+          var value = expression.trimmedQuotesValue();
+          patternMatch(name, expression, value, subscriptionContext);
+        }));
   }
 
   private static boolean valuePassesPostValidation(String value) {
