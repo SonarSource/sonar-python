@@ -7,51 +7,24 @@ name: Releasability status
 
 jobs:
   update_releasability_status:
-    runs-on: ubuntu-latest
-    name: Releasability status
-    permissions:
-      id-token: write
-      statuses: write
-      contents: read
-    if: >-
-      github.event_name == 'workflow_dispatch' ||
-      ((contains(fromJSON('["main", "master"]'),
-      github.event.check_suite.head_branch) ||
-      startsWith(github.event.check_suite.head_branch, 'dogfood-') ||
-      startsWith(github.event.check_suite.head_branch, 'branch-')) &&
-      github.event.check_suite.conclusion == 'success' &&
-      github.event.check_suite.app.slug == 'cirrus-ci')
-    steps:
-      - uses: SonarSource/gh-action_releasability/releasability-status@v1.2.1
-        env:
-          GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
-        continue-on-error: true
-
-      - name: Check current status
-        id: check_status
-        uses: octokit/request-action@v2.x
-        with:
-          route: GET /repos/${{ github.repository }}/commits/${{ github.sha }}/status
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Extract status information
-        id: extract_info
-        run: |
-          status_info=$(echo '${{ steps.check_status.outputs.data }}' | jq -r '.statuses[] | select(.context == "Releasability") | {description: .description, target_url: .target_url}')
-          description=$(echo "$status_info" | jq -r '.description')
-          target_url=$(echo "$status_info" | jq -r '.target_url')
-          echo "::set-output name=description::$description"
-          echo "::set-output name=target_url::$target_url"
-      
-      - name: Update status to success
-        if: fromJson(steps.check_status.outputs.data).state != 'success'
-        uses: octokit/request-action@v2.x
-        with:
-          route: POST /repos/${{ github.repository }}/statuses/${{ github.sha }}
-          state: "success"
-          target_url: "${{ steps.extract_info.outputs.target_url }}"
-          description: "${{ steps.extract_info.outputs.description }} (status rewritten)"
-          context: "Releasability"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      runs-on: ubuntu-latest
+      name: Releasability status
+      permissions:
+          id-token: write
+          statuses: write
+          contents: read
+      if: >-
+        github.event_name == 'workflow_dispatch' ||
+        ((contains(fromJSON('["main", "master"]'),
+        github.event.check_suite.head_branch) ||
+        startsWith(github.event.check_suite.head_branch, 'dogfood-') ||
+        startsWith(github.event.check_suite.head_branch, 'branch-')) &&
+        github.event.check_suite.conclusion == 'success' &&
+        github.event.check_suite.app.slug == 'cirrus-ci')
+      steps:
+        - uses: >-
+            SonarSource/gh-action_releasability/releasability-status@v2
+          with:
+            optional_checks: "Jira"
+          env:
+            GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
