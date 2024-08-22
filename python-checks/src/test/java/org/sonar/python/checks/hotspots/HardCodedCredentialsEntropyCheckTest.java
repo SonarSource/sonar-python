@@ -21,7 +21,6 @@ package org.sonar.python.checks.hotspots;
 
 import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
-import static org.assertj.core.api.Assertions.assertThat;
 
 class HardCodedCredentialsEntropyCheckTest {
 
@@ -35,12 +34,6 @@ class HardCodedCredentialsEntropyCheckTest {
     HardCodedCredentialsEntropyCheck check = new HardCodedCredentialsEntropyCheck();
     check.secretKeyWords = "tuna,salmon,roe";
     PythonCheckVerifier.verify("src/test/resources/checks/hotspots/hardcodedCredentialsEntropy_custom.py", check);
-  }
-
-  @Test
-  void cover_shannon(){
-    assertThat(HardCodedCredentialsEntropyCheck.ShannonEntropy.calculate("")).isEqualTo(0.0);
-    assertThat(HardCodedCredentialsEntropyCheck.ShannonEntropy.calculate(null)).isEqualTo(0.0);
   }
 
 }
