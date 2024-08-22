@@ -108,18 +108,16 @@ public class HardCodedCredentialsEntropyCheck extends PythonSubscriptionCheck {
       .filter(keyValuePair -> keyValuePair.key().is(Tree.Kind.STRING_LITERAL))
       .forEach(keyValuePair -> {
         var value = ((StringLiteral) keyValuePair.value()).trimmedQuotesValue();
-        var key = keyValuePair.key();
-        patternMatch(((StringLiteral) key).trimmedQuotesValue(), keyValuePair.value(), value, subscriptionContext);
+        var key = ((StringLiteral) keyValuePair.key()).trimmedQuotesValue();
+        patternMatch(key, keyValuePair.value(), value, subscriptionContext);
       });
   }
 
   private void checkRegularArgument(SubscriptionContext subscriptionContext) {
     var regularArgument = (RegularArgument) subscriptionContext.syntaxNode();
     var keywordArgument = regularArgument.keywordArgument();
-    if (keywordArgument == null) {
-      return;
-    }
-    if (regularArgument.expression() instanceof StringLiteral expression) {
+
+    if (keywordArgument != null && regularArgument.expression() instanceof StringLiteral expression) {
       var value = expression.trimmedQuotesValue();
       patternMatch(keywordArgument, regularArgument, value, subscriptionContext);
     }
