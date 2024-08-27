@@ -34,7 +34,6 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonarsource.analyzer.commons.annotations.DeprecatedRuleKey;
 
-@Rule(key = "S4792")
 @DeprecatedRuleKey(ruleKey = "S4792")
 public class LoggersConfigurationCheck extends PythonSubscriptionCheck {
 
