@@ -85,15 +85,14 @@ import org.sonar.plugins.python.api.PythonCustomRuleRepository;
 import org.sonar.plugins.python.api.PythonInputFileContext;
 import org.sonar.plugins.python.api.PythonVersionUtils;
 import org.sonar.plugins.python.api.PythonVisitorContext;
+import org.sonar.plugins.python.api.SonarLintCache;
 import org.sonar.plugins.python.api.caching.CacheContext;
 import org.sonar.plugins.python.api.internal.EndOfAnalysis;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.caching.Caching;
 import org.sonar.plugins.python.caching.TestReadCache;
 import org.sonar.plugins.python.caching.TestWriteCache;
-import org.sonar.plugins.python.indexer.FileHashingUtils;
 import org.sonar.plugins.python.indexer.PythonIndexer;
-import org.sonar.plugins.python.api.SonarLintCache;
 import org.sonar.plugins.python.indexer.SonarLintPythonIndexer;
 import org.sonar.plugins.python.indexer.TestModuleFileSystem;
 import org.sonar.plugins.python.warnings.AnalysisWarningsWrapper;
@@ -124,7 +123,6 @@ import static org.sonar.plugins.python.caching.Caching.PROJECT_SYMBOL_TABLE_CACH
 import static org.sonar.plugins.python.caching.Caching.fileContentHashCacheKey;
 import static org.sonar.plugins.python.caching.Caching.importsMapCacheKey;
 import static org.sonar.plugins.python.caching.Caching.projectSymbolTableCacheKey;
-import static org.sonar.plugins.python.indexer.FileHashingUtils.inputFileContentHash;
 import static org.sonar.python.index.DescriptorsToProtobuf.toProtobufModuleDescriptor;
 
 class PythonSensorTest {
@@ -853,7 +851,7 @@ class PythonSensorTest {
     readCache.put(projectSymbolTableCacheKey(inputFile.wrappedFile().key()), serializedSymbolTable);
     readCache.put(CPD_TOKENS_CACHE_KEY_PREFIX + inputFile.wrappedFile().key(), cpdTokens.data);
     readCache.put(CPD_TOKENS_STRING_TABLE_KEY_PREFIX + inputFile.wrappedFile().key(), cpdTokens.stringTable);
-    readCache.put(fileContentHashCacheKey(inputFile.wrappedFile().key()), FileHashingUtils.inputFileContentHash(inputFile.wrappedFile()));
+    readCache.put(fileContentHashCacheKey(inputFile.wrappedFile().key()), inputFile.wrappedFile().md5Hash().getBytes(UTF_8));
     context.setPreviousCache(readCache);
     context.setNextCache(writeCache);
     context.setCacheEnabled(true);
@@ -879,7 +877,7 @@ class PythonSensorTest {
     PythonInputFile inputFile = inputFile(FILE_TEST_FILE, Type.TEST, InputFile.Status.SAME);
     byte[] serializedSymbolTable = toProtobufModuleDescriptor(Set.of(new VariableDescriptor("test_func", "test_file.test_func", null))).toByteArray();
     TestReadCache readCache = getValidReadCache();
-    readCache.put(fileContentHashCacheKey(inputFile.wrappedFile().key()), inputFileContentHash(inputFile.wrappedFile()));
+    readCache.put(fileContentHashCacheKey(inputFile.wrappedFile().key()), inputFile.wrappedFile().md5Hash().getBytes(UTF_8));
     readCache.put(importsMapCacheKey(inputFile.wrappedFile().key()), String.join(";", Collections.emptyList()).getBytes(StandardCharsets.UTF_8));
     readCache.put(projectSymbolTableCacheKey(inputFile.wrappedFile().key()), serializedSymbolTable);
     TestWriteCache writeCache = new TestWriteCache();
@@ -913,7 +911,7 @@ class PythonSensorTest {
     byte[] serializedSymbolTable = toProtobufModuleDescriptor(Set.of(new VariableDescriptor("x", "main.x", null))).toByteArray();
     readCache.put(importsMapCacheKey(inputFile.wrappedFile().key()), String.join(";", Collections.emptyList()).getBytes(StandardCharsets.UTF_8));
     readCache.put(projectSymbolTableCacheKey(inputFile.wrappedFile().key()), serializedSymbolTable);
-    readCache.put(fileContentHashCacheKey(inputFile.wrappedFile().key()), FileHashingUtils.inputFileContentHash(inputFile.wrappedFile()));
+    readCache.put(fileContentHashCacheKey(inputFile.wrappedFile().key()), inputFile.wrappedFile().md5Hash().getBytes(UTF_8));
     context.setPreviousCache(readCache);
     context.setNextCache(writeCache);
     context.setCacheEnabled(true);
@@ -945,7 +943,7 @@ class PythonSensorTest {
     byte[] serializedSymbolTable = toProtobufModuleDescriptor(Set.of(new VariableDescriptor("x", "main.x", null))).toByteArray();
     readCache.put(importsMapCacheKey(inputFile2.wrappedFile().key()), String.join(";", List.of("file1.py")).getBytes(StandardCharsets.UTF_8));
     readCache.put(projectSymbolTableCacheKey(inputFile2.wrappedFile().key()), serializedSymbolTable);
-    readCache.put(fileContentHashCacheKey(inputFile2.wrappedFile().key()), FileHashingUtils.inputFileContentHash(inputFile2.wrappedFile()));
+    readCache.put(fileContentHashCacheKey(inputFile2.wrappedFile().key()), inputFile2.wrappedFile().md5Hash().getBytes(UTF_8));
     context.setPreviousCache(readCache);
     context.setNextCache(writeCache);
     context.setCacheEnabled(true);
@@ -1097,7 +1095,7 @@ class PythonSensorTest {
     byte[] serializedSymbolTable = toProtobufModuleDescriptor(Collections.emptySet()).toByteArray();
     readCache.put(importsMapCacheKey(inputFile.wrappedFile().key()), String.join(";", Collections.emptyList()).getBytes(StandardCharsets.UTF_8));
     readCache.put(projectSymbolTableCacheKey(inputFile.wrappedFile().key()), serializedSymbolTable);
-    readCache.put(fileContentHashCacheKey(inputFile.wrappedFile().key()), FileHashingUtils.inputFileContentHash(inputFile.wrappedFile()));
+    readCache.put(fileContentHashCacheKey(inputFile.wrappedFile().key()), inputFile.wrappedFile().md5Hash().getBytes(UTF_8));
 
     TestWriteCache writeCache = new TestWriteCache();
     writeCache.bind(readCache);
@@ -1185,7 +1183,7 @@ class PythonSensorTest {
     byte[] serializedSymbolTable = toProtobufModuleDescriptor(Collections.emptySet()).toByteArray();
     readCache.put(importsMapCacheKey(inputFile.wrappedFile().key()), String.join(";", Collections.emptyList()).getBytes(StandardCharsets.UTF_8));
     readCache.put(projectSymbolTableCacheKey(inputFile.wrappedFile().key()), serializedSymbolTable);
-    readCache.put(fileContentHashCacheKey(inputFile.wrappedFile().key()), FileHashingUtils.inputFileContentHash(inputFile.wrappedFile()));
+    readCache.put(fileContentHashCacheKey(inputFile.wrappedFile().key()), inputFile.wrappedFile().md5Hash().getBytes(UTF_8));
 
     TestWriteCache writeCache = new TestWriteCache();
     writeCache.bind(readCache);
@@ -1258,7 +1256,7 @@ class PythonSensorTest {
     byte[] serializedSymbolTable = toProtobufModuleDescriptor(Collections.emptySet()).toByteArray();
     readCache.put(importsMapCacheKey(inputFile.wrappedFile().key()), String.join(";", Collections.emptyList()).getBytes(StandardCharsets.UTF_8));
     readCache.put(projectSymbolTableCacheKey(inputFile.wrappedFile().key()), serializedSymbolTable);
-    readCache.put(fileContentHashCacheKey(inputFile.wrappedFile().key()), FileHashingUtils.inputFileContentHash(inputFile.wrappedFile()));
+    readCache.put(fileContentHashCacheKey(inputFile.wrappedFile().key()), inputFile.wrappedFile().md5Hash().getBytes(UTF_8));
 
     TestWriteCache writeCache = new TestWriteCache();
     writeCache.bind(readCache);
@@ -1291,7 +1289,7 @@ class PythonSensorTest {
   }
 
   @Test
-  void test_scanner_isNotebook(){
+  void test_scanner_isNotebook() {
     var regularPythonFile = mock(PythonInputFile.class);
     when(regularPythonFile.kind()).thenReturn(PythonInputFile.Kind.PYTHON);
     assertThat(PythonScanner.isNotebook(regularPythonFile)).isFalse();

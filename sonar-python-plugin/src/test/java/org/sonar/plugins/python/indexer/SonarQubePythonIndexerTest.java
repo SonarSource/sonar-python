@@ -24,7 +24,6 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -34,8 +33,6 @@ import java.util.Set;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
-import org.mockito.MockedStatic;
-import org.mockito.Mockito;
 import org.slf4j.event.Level;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
@@ -63,7 +60,6 @@ import static org.sonar.plugins.python.caching.Caching.TYPESHED_MODULES_KEY;
 import static org.sonar.plugins.python.caching.Caching.fileContentHashCacheKey;
 import static org.sonar.plugins.python.caching.Caching.importsMapCacheKey;
 import static org.sonar.plugins.python.caching.Caching.projectSymbolTableCacheKey;
-import static org.sonar.plugins.python.indexer.FileHashingUtils.inputFileContentHash;
 import static org.sonar.python.index.DescriptorsToProtobuf.toProtobufModuleDescriptor;
 
 class SonarQubePythonIndexerTest {
@@ -101,7 +97,7 @@ class SonarQubePythonIndexerTest {
   }
 
   @Test
-  void test_single_file_modified() throws IOException, NoSuchAlgorithmException {
+  void test_single_file_modified() {
     file1 = createInputFile(baseDir, "main.py", InputFile.Status.CHANGED, InputFile.Type.MAIN);
     file2 = createInputFile(baseDir, "mod.py", InputFile.Status.SAME, InputFile.Type.MAIN);
 
@@ -113,8 +109,8 @@ class SonarQubePythonIndexerTest {
     readCache.put(importsMapCacheKey("moduleKey:mod.py"), String.join(";", Collections.emptyList()).getBytes(StandardCharsets.UTF_8));
     readCache.put(projectSymbolTableCacheKey("moduleKey:main.py"), serializedSymbolTable);
     readCache.put(projectSymbolTableCacheKey("moduleKey:mod.py"), outdatedEntry);
-    readCache.put(fileContentHashCacheKey("moduleKey:main.py"), inputFileContentHash(file1.wrappedFile()));
-    readCache.put(fileContentHashCacheKey("moduleKey:mod.py"), inputFileContentHash(file2.wrappedFile()));
+    readCache.put(fileContentHashCacheKey("moduleKey:main.py"), file1.wrappedFile().md5Hash().getBytes(StandardCharsets.UTF_8));
+    readCache.put(fileContentHashCacheKey("moduleKey:mod.py"), file2.wrappedFile().md5Hash().getBytes(StandardCharsets.UTF_8));
     pythonIndexer = new SonarQubePythonIndexer(inputFiles, cacheContext, context);
     pythonIndexer.buildOnce(context);
 
@@ -131,7 +127,7 @@ class SonarQubePythonIndexerTest {
   }
 
   @Test
-  void test_modified_dependency() throws IOException, NoSuchAlgorithmException {
+  void test_modified_dependency() {
     file1 = createInputFile(baseDir, "main.py", InputFile.Status.SAME, InputFile.Type.MAIN);
     file2 = createInputFile(baseDir, "mod.py", InputFile.Status.CHANGED, InputFile.Type.MAIN);
 
@@ -143,8 +139,8 @@ class SonarQubePythonIndexerTest {
     readCache.put(importsMapCacheKey("moduleKey:mod.py"), importsAsByteArray(Collections.emptyList()));
     readCache.put(projectSymbolTableCacheKey("moduleKey:main.py"), serializedSymbolTable);
     readCache.put(projectSymbolTableCacheKey("moduleKey:mod.py"), outdatedEntry);
-    readCache.put(fileContentHashCacheKey("moduleKey:main.py"), inputFileContentHash(file1.wrappedFile()));
-    readCache.put(fileContentHashCacheKey("moduleKey:mod.py"), inputFileContentHash(file2.wrappedFile()));
+    readCache.put(fileContentHashCacheKey("moduleKey:main.py"), file1.wrappedFile().md5Hash().getBytes(StandardCharsets.UTF_8));
+    readCache.put(fileContentHashCacheKey("moduleKey:mod.py"), file2.wrappedFile().md5Hash().getBytes(StandardCharsets.UTF_8));
     pythonIndexer = new SonarQubePythonIndexer(inputFiles, cacheContext, context);
     pythonIndexer.buildOnce(context);
 
@@ -159,7 +155,7 @@ class SonarQubePythonIndexerTest {
   }
 
   @Test
-  void test_deleted_dependency() throws IOException, NoSuchAlgorithmException {
+  void test_deleted_dependency() {
     file1 = createInputFile(baseDir, "main.py", InputFile.Status.SAME, InputFile.Type.MAIN);
 
     List<PythonInputFile> inputFiles = new ArrayList<>(List.of(file1));
@@ -171,7 +167,7 @@ class SonarQubePythonIndexerTest {
     readCache.put(PROJECT_FILES_KEY, importsAsByteArray(List.of("main", "mod")));
     readCache.put(projectSymbolTableCacheKey("moduleKey:main.py"), serializedSymbolTable);
     readCache.put(projectSymbolTableCacheKey("moduleKey:mod.py"), outdatedEntry);
-    readCache.put(fileContentHashCacheKey("moduleKey:main.py"), inputFileContentHash(file1.wrappedFile()));
+    readCache.put(fileContentHashCacheKey("moduleKey:main.py"), file1.wrappedFile().md5Hash().getBytes(StandardCharsets.UTF_8));
     pythonIndexer = new SonarQubePythonIndexer(inputFiles, cacheContext, context);
     pythonIndexer.buildOnce(context);
 
@@ -188,7 +184,7 @@ class SonarQubePythonIndexerTest {
   }
 
   @Test
-  void test_deleted_unrelated_file() throws IOException, NoSuchAlgorithmException {
+  void test_deleted_unrelated_file() {
     file1 = createInputFile(baseDir, "mod.py", InputFile.Status.SAME, InputFile.Type.MAIN);
 
     List<PythonInputFile> inputFiles = new ArrayList<>(List.of(file1));
@@ -200,7 +196,7 @@ class SonarQubePythonIndexerTest {
     readCache.put(PROJECT_FILES_KEY, importsAsByteArray(List.of("main", "mod")));
     readCache.put(projectSymbolTableCacheKey("moduleKey:main.py"), serializedSymbolTable);
     readCache.put(projectSymbolTableCacheKey("moduleKey:mod.py"), outdatedEntry);
-    readCache.put(fileContentHashCacheKey("moduleKey:mod.py"), inputFileContentHash(file1.wrappedFile()));
+    readCache.put(fileContentHashCacheKey("moduleKey:mod.py"), file1.wrappedFile().md5Hash().getBytes(StandardCharsets.UTF_8));
     pythonIndexer = new SonarQubePythonIndexer(inputFiles, cacheContext, context);
     pythonIndexer.buildOnce(context);
 
@@ -215,15 +211,15 @@ class SonarQubePythonIndexerTest {
   }
 
   @Test
-  void test_no_file_modified_missing_entry() throws IOException, NoSuchAlgorithmException {
+  void test_no_file_modified_missing_entry() {
     file1 = createInputFile(baseDir, "main.py", InputFile.Status.SAME, InputFile.Type.MAIN);
     file2 = createInputFile(baseDir, "mod.py", InputFile.Status.SAME, InputFile.Type.MAIN);
 
     List<PythonInputFile> inputFiles = new ArrayList<>(Arrays.asList(file1, file2));
 
     pythonIndexer = new SonarQubePythonIndexer(inputFiles, cacheContext, context);
-    readCache.put(fileContentHashCacheKey("moduleKey:main.py"), inputFileContentHash(file1.wrappedFile()));
-    readCache.put(fileContentHashCacheKey("moduleKey:mod.py"), inputFileContentHash(file2.wrappedFile()));
+    readCache.put(fileContentHashCacheKey("moduleKey:main.py"), file1.wrappedFile().md5Hash().getBytes(StandardCharsets.UTF_8));
+    readCache.put(fileContentHashCacheKey("moduleKey:mod.py"), file2.wrappedFile().md5Hash().getBytes(StandardCharsets.UTF_8));
     pythonIndexer.buildOnce(context);
 
     assertThat(pythonIndexer.canBePartiallyScannedWithoutParsing(file1)).isFalse();
@@ -235,7 +231,7 @@ class SonarQubePythonIndexerTest {
   }
 
   @Test
-  void test_no_file_modified_missing_imports() throws IOException, NoSuchAlgorithmException {
+  void test_no_file_modified_missing_imports() {
     file1 = createInputFile(baseDir, "main.py", InputFile.Status.SAME, InputFile.Type.MAIN);
     file2 = createInputFile(baseDir, "mod.py", InputFile.Status.SAME, InputFile.Type.MAIN);
 
@@ -245,8 +241,8 @@ class SonarQubePythonIndexerTest {
     byte[] outdatedEntry = toProtobufModuleDescriptor(Set.of(new VariableDescriptor("outdated", "mod.outdated", null))).toByteArray();
     readCache.put(projectSymbolTableCacheKey("moduleKey:main.py"), serializedSymbolTable);
     readCache.put(projectSymbolTableCacheKey("moduleKey:mod.py"), outdatedEntry);
-    readCache.put(fileContentHashCacheKey("moduleKey:main.py"), inputFileContentHash(file1.wrappedFile()));
-    readCache.put(fileContentHashCacheKey("moduleKey:mod.py"), inputFileContentHash(file2.wrappedFile()));
+    readCache.put(fileContentHashCacheKey("moduleKey:main.py"), file1.wrappedFile().md5Hash().getBytes(StandardCharsets.UTF_8));
+    readCache.put(fileContentHashCacheKey("moduleKey:mod.py"), file2.wrappedFile().md5Hash().getBytes(StandardCharsets.UTF_8));
 
     pythonIndexer = new SonarQubePythonIndexer(inputFiles, cacheContext, context);
     pythonIndexer.buildOnce(context);
@@ -260,7 +256,7 @@ class SonarQubePythonIndexerTest {
   }
 
   @Test
-  void test_no_file_modified_missing_descriptors() throws IOException, NoSuchAlgorithmException {
+  void test_no_file_modified_missing_descriptors() {
     file1 = createInputFile(baseDir, "main.py", InputFile.Status.SAME, InputFile.Type.MAIN);
     file2 = createInputFile(baseDir, "mod.py", InputFile.Status.SAME, InputFile.Type.MAIN);
 
@@ -268,8 +264,8 @@ class SonarQubePythonIndexerTest {
 
     readCache.put(importsMapCacheKey("moduleKey:main.py"), importsAsByteArray(List.of("mod")));
     readCache.put(importsMapCacheKey("moduleKey:mod.py"), importsAsByteArray(Collections.emptyList()));
-    readCache.put(fileContentHashCacheKey("moduleKey:main.py"), inputFileContentHash(file1.wrappedFile()));
-    readCache.put(fileContentHashCacheKey("moduleKey:mod.py"), inputFileContentHash(file2.wrappedFile()));
+    readCache.put(fileContentHashCacheKey("moduleKey:main.py"), file1.wrappedFile().md5Hash().getBytes(StandardCharsets.UTF_8));
+    readCache.put(fileContentHashCacheKey("moduleKey:mod.py"), file2.wrappedFile().md5Hash().getBytes(StandardCharsets.UTF_8));
 
     pythonIndexer = new SonarQubePythonIndexer(inputFiles, cacheContext, context);
     pythonIndexer.buildOnce(context);
@@ -283,7 +279,7 @@ class SonarQubePythonIndexerTest {
   }
 
   @Test
-  void test_no_file_modified_invalid_cache_version() throws IOException, NoSuchAlgorithmException {
+  void test_no_file_modified_invalid_cache_version() {
     file1 = createInputFile(baseDir, "main.py", InputFile.Status.SAME, InputFile.Type.MAIN);
     file2 = createInputFile(baseDir, "mod.py", InputFile.Status.SAME, InputFile.Type.MAIN);
 
@@ -298,8 +294,8 @@ class SonarQubePythonIndexerTest {
     readCache.put(importsMapCacheKey("moduleKey:mod.py"), String.join(";", Collections.emptyList()).getBytes(StandardCharsets.UTF_8));
     readCache.put(projectSymbolTableCacheKey("moduleKey:main.py"), serializedSymbolTable);
     readCache.put(projectSymbolTableCacheKey("moduleKey:mod.py"), outdatedEntry);
-    readCache.put(fileContentHashCacheKey("moduleKey:main.py"), inputFileContentHash(file1.wrappedFile()));
-    readCache.put(fileContentHashCacheKey("moduleKey:mod.py"), inputFileContentHash(file2.wrappedFile()));
+    readCache.put(fileContentHashCacheKey("moduleKey:main.py"), file1.wrappedFile().md5Hash().getBytes(StandardCharsets.UTF_8));
+    readCache.put(fileContentHashCacheKey("moduleKey:mod.py"), file2.wrappedFile().md5Hash().getBytes(StandardCharsets.UTF_8));
 
     pythonIndexer.buildOnce(context);
 
@@ -312,7 +308,7 @@ class SonarQubePythonIndexerTest {
   }
 
   @Test
-  void test_no_file_modified_invalid_cache_version_due_to_changed_python_version() throws IOException, NoSuchAlgorithmException {
+  void test_no_file_modified_invalid_cache_version_due_to_changed_python_version() {
     file1 = createInputFile(baseDir, "main.py", InputFile.Status.SAME, InputFile.Type.MAIN);
     file2 = createInputFile(baseDir, "mod.py", InputFile.Status.SAME, InputFile.Type.MAIN);
 
@@ -327,8 +323,8 @@ class SonarQubePythonIndexerTest {
     readCache.put(importsMapCacheKey("moduleKey:mod.py"), String.join(";", Collections.emptyList()).getBytes(StandardCharsets.UTF_8));
     readCache.put(projectSymbolTableCacheKey("moduleKey:main.py"), serializedSymbolTable);
     readCache.put(projectSymbolTableCacheKey("moduleKey:mod.py"), outdatedEntry);
-    readCache.put(fileContentHashCacheKey("moduleKey:main.py"), inputFileContentHash(file1.wrappedFile()));
-    readCache.put(fileContentHashCacheKey("moduleKey:mod.py"), inputFileContentHash(file2.wrappedFile()));
+    readCache.put(fileContentHashCacheKey("moduleKey:main.py"), file1.wrappedFile().md5Hash().getBytes(StandardCharsets.UTF_8));
+    readCache.put(fileContentHashCacheKey("moduleKey:mod.py"), file2.wrappedFile().md5Hash().getBytes(StandardCharsets.UTF_8));
 
     pythonIndexer.buildOnce(context);
 
@@ -341,10 +337,10 @@ class SonarQubePythonIndexerTest {
   }
 
   @Test
-  void test_test_files_use_cache() throws IOException, NoSuchAlgorithmException {
+  void test_test_files_use_cache() {
     file1 = createInputFile(baseDir, "main.py", InputFile.Status.SAME, InputFile.Type.TEST);
     file2 = createInputFile(baseDir, "mod.py", InputFile.Status.CHANGED, InputFile.Type.TEST);
-    readCache.put(fileContentHashCacheKey("moduleKey:main.py"), inputFileContentHash(file1.wrappedFile()));
+    readCache.put(fileContentHashCacheKey("moduleKey:main.py"), file1.wrappedFile().md5Hash().getBytes(StandardCharsets.UTF_8));
 
     List<PythonInputFile> inputFiles = new ArrayList<>(Arrays.asList(file1, file2));
 
@@ -464,7 +460,7 @@ class SonarQubePythonIndexerTest {
   }
 
   @Test
-  void test_file_content_hash_changed() throws IOException, NoSuchAlgorithmException {
+  void test_file_content_hash_changed() {
     file1 = createInputFile(baseDir, "mod.py", InputFile.Status.SAME, InputFile.Type.MAIN);
     file2 = createInputFile(baseDir, "main.py", InputFile.Status.SAME, InputFile.Type.MAIN);
 
@@ -473,7 +469,7 @@ class SonarQubePythonIndexerTest {
     byte[] outdatedEntry = toProtobufModuleDescriptor(Set.of(new VariableDescriptor("outdated", "mod.outdated", null))).toByteArray();
     readCache.put(importsMapCacheKey("moduleKey:mod.py"), String.join(";", Collections.emptyList()).getBytes(StandardCharsets.UTF_8));
     readCache.put(projectSymbolTableCacheKey("moduleKey:mod.py"), outdatedEntry);
-    readCache.put(fileContentHashCacheKey("moduleKey:mod.py"), inputFileContentHash(file2.wrappedFile()));
+    readCache.put(fileContentHashCacheKey("moduleKey:mod.py"), file2.wrappedFile().md5Hash().getBytes(StandardCharsets.UTF_8));
     pythonIndexer = new SonarQubePythonIndexer(inputFiles, cacheContext, context);
     pythonIndexer.buildOnce(context);
 
@@ -489,33 +485,8 @@ class SonarQubePythonIndexerTest {
     context.settings().setProperty("sonar.python.skipUnchanged", false);
     pythonIndexer = new SonarQubePythonIndexer(inputFiles, cacheContext, context);
 
-    try (MockedStatic<FileHashingUtils> FileHashingUtilsStaticMock = Mockito.mockStatic(FileHashingUtils.class)) {
-      FileHashingUtilsStaticMock.when(() -> FileHashingUtils.inputFileContentHash(any())).thenThrow(new IOException("BOOM!"));
-      pythonIndexer.buildOnce(context);
-      assertThat(logTester.logs(Level.DEBUG)).contains("Failed to compute content hash for file moduleKey:main.py");
-    }
   }
-
-  @Test
-  void hash_exception_when_trying_to_compare_hash() throws IOException, NoSuchAlgorithmException {
-    file1 = createInputFile(baseDir, "mod.py", InputFile.Status.SAME, InputFile.Type.MAIN);
-
-    List<PythonInputFile> inputFiles = new ArrayList<>(List.of(file1));
-    byte[] outdatedEntry = toProtobufModuleDescriptor(Set.of(new VariableDescriptor("outdated", "mod.outdated", null))).toByteArray();
-    readCache.put(importsMapCacheKey("moduleKey:mod.py"), String.join(";", Collections.emptyList()).getBytes(StandardCharsets.UTF_8));
-    readCache.put(projectSymbolTableCacheKey("moduleKey:mod.py"), outdatedEntry);
-    readCache.put(fileContentHashCacheKey("moduleKey:mod.py"), inputFileContentHash(file1.wrappedFile()));
-
-    pythonIndexer = new SonarQubePythonIndexer(inputFiles, cacheContext, context);
-
-    try (MockedStatic<FileHashingUtils> FileHashingUtilsStaticMock = Mockito.mockStatic(FileHashingUtils.class)) {
-      FileHashingUtilsStaticMock.when(() -> FileHashingUtils.inputFileContentHash(any())).thenThrow(new IOException("BOOM!"));
-      pythonIndexer.buildOnce(context);
-      assertThat(logTester.logs(Level.DEBUG)).contains("Failed to compute content hash for file moduleKey:mod.py");
-    }
-    assertThat(pythonIndexer.canBePartiallyScannedWithoutParsing(file1)).isFalse();
-  }
-
+  
   @Test
   void test_notebook_should_not_be_in_project_level_symbol_table() {
     file1 = createInputFile(baseDir, "notebook.ipynb", InputFile.Status.SAME, InputFile.Type.MAIN);
