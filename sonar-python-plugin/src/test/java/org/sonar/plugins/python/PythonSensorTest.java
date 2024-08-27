@@ -1289,7 +1289,7 @@ class PythonSensorTest {
   }
 
   @Test
-  void test_scanner_isNotebook(){
+  void test_scanner_isNotebook() {
     var regularPythonFile = mock(PythonInputFile.class);
     when(regularPythonFile.kind()).thenReturn(PythonInputFile.Kind.PYTHON);
     assertThat(PythonScanner.isNotebook(regularPythonFile)).isFalse();

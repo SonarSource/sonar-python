@@ -127,7 +127,7 @@ class SonarQubePythonIndexerTest {
   }
 
   @Test
-  void test_modified_dependency()  {
+  void test_modified_dependency() {
     file1 = createInputFile(baseDir, "main.py", InputFile.Status.SAME, InputFile.Type.MAIN);
     file2 = createInputFile(baseDir, "mod.py", InputFile.Status.CHANGED, InputFile.Type.MAIN);
 
@@ -155,7 +155,7 @@ class SonarQubePythonIndexerTest {
   }
 
   @Test
-  void test_deleted_dependency()  {
+  void test_deleted_dependency() {
     file1 = createInputFile(baseDir, "main.py", InputFile.Status.SAME, InputFile.Type.MAIN);
 
     List<PythonInputFile> inputFiles = new ArrayList<>(List.of(file1));
@@ -184,7 +184,7 @@ class SonarQubePythonIndexerTest {
   }
 
   @Test
-  void test_deleted_unrelated_file()  {
+  void test_deleted_unrelated_file() {
     file1 = createInputFile(baseDir, "mod.py", InputFile.Status.SAME, InputFile.Type.MAIN);
 
     List<PythonInputFile> inputFiles = new ArrayList<>(List.of(file1));
@@ -211,7 +211,7 @@ class SonarQubePythonIndexerTest {
   }
 
   @Test
-  void test_no_file_modified_missing_entry()  {
+  void test_no_file_modified_missing_entry() {
     file1 = createInputFile(baseDir, "main.py", InputFile.Status.SAME, InputFile.Type.MAIN);
     file2 = createInputFile(baseDir, "mod.py", InputFile.Status.SAME, InputFile.Type.MAIN);
 
@@ -231,7 +231,7 @@ class SonarQubePythonIndexerTest {
   }
 
   @Test
-  void test_no_file_modified_missing_imports()  {
+  void test_no_file_modified_missing_imports() {
     file1 = createInputFile(baseDir, "main.py", InputFile.Status.SAME, InputFile.Type.MAIN);
     file2 = createInputFile(baseDir, "mod.py", InputFile.Status.SAME, InputFile.Type.MAIN);
 
@@ -256,7 +256,7 @@ class SonarQubePythonIndexerTest {
   }
 
   @Test
-  void test_no_file_modified_missing_descriptors()  {
+  void test_no_file_modified_missing_descriptors() {
     file1 = createInputFile(baseDir, "main.py", InputFile.Status.SAME, InputFile.Type.MAIN);
     file2 = createInputFile(baseDir, "mod.py", InputFile.Status.SAME, InputFile.Type.MAIN);
 
@@ -279,7 +279,7 @@ class SonarQubePythonIndexerTest {
   }
 
   @Test
-  void test_no_file_modified_invalid_cache_version()  {
+  void test_no_file_modified_invalid_cache_version() {
     file1 = createInputFile(baseDir, "main.py", InputFile.Status.SAME, InputFile.Type.MAIN);
     file2 = createInputFile(baseDir, "mod.py", InputFile.Status.SAME, InputFile.Type.MAIN);
 
@@ -308,7 +308,7 @@ class SonarQubePythonIndexerTest {
   }
 
   @Test
-  void test_no_file_modified_invalid_cache_version_due_to_changed_python_version()  {
+  void test_no_file_modified_invalid_cache_version_due_to_changed_python_version() {
     file1 = createInputFile(baseDir, "main.py", InputFile.Status.SAME, InputFile.Type.MAIN);
     file2 = createInputFile(baseDir, "mod.py", InputFile.Status.SAME, InputFile.Type.MAIN);
 
@@ -337,7 +337,7 @@ class SonarQubePythonIndexerTest {
   }
 
   @Test
-  void test_test_files_use_cache()  {
+  void test_test_files_use_cache() {
     file1 = createInputFile(baseDir, "main.py", InputFile.Status.SAME, InputFile.Type.TEST);
     file2 = createInputFile(baseDir, "mod.py", InputFile.Status.CHANGED, InputFile.Type.TEST);
     readCache.put(fileContentHashCacheKey("moduleKey:main.py"), file1.wrappedFile().md5Hash().getBytes(StandardCharsets.UTF_8));
@@ -460,7 +460,7 @@ class SonarQubePythonIndexerTest {
   }
 
   @Test
-  void test_file_content_hash_changed()  {
+  void test_file_content_hash_changed() {
     file1 = createInputFile(baseDir, "mod.py", InputFile.Status.SAME, InputFile.Type.MAIN);
     file2 = createInputFile(baseDir, "main.py", InputFile.Status.SAME, InputFile.Type.MAIN);
 
@@ -488,7 +488,7 @@ class SonarQubePythonIndexerTest {
   }
 
   @Test
-  void hash_exception_when_trying_to_compare_hash()  {
+  void hash_exception_when_trying_to_compare_hash() {
     file1 = createInputFile(baseDir, "mod.py", InputFile.Status.SAME, InputFile.Type.MAIN);
 
     List<PythonInputFile> inputFiles = new ArrayList<>(List.of(file1));
