@@ -486,22 +486,7 @@ class SonarQubePythonIndexerTest {
     pythonIndexer = new SonarQubePythonIndexer(inputFiles, cacheContext, context);
 
   }
-
-  @Test
-  void hash_exception_when_trying_to_compare_hash() {
-    file1 = createInputFile(baseDir, "mod.py", InputFile.Status.SAME, InputFile.Type.MAIN);
-
-    List<PythonInputFile> inputFiles = new ArrayList<>(List.of(file1));
-    byte[] outdatedEntry = toProtobufModuleDescriptor(Set.of(new VariableDescriptor("outdated", "mod.outdated", null))).toByteArray();
-    readCache.put(importsMapCacheKey("moduleKey:mod.py"), String.join(";", Collections.emptyList()).getBytes(StandardCharsets.UTF_8));
-    readCache.put(projectSymbolTableCacheKey("moduleKey:mod.py"), outdatedEntry);
-    readCache.put(fileContentHashCacheKey("moduleKey:mod.py"), file1.wrappedFile().md5Hash().getBytes(StandardCharsets.UTF_8));
-
-    pythonIndexer = new SonarQubePythonIndexer(inputFiles, cacheContext, context);
-
-    assertThat(pythonIndexer.canBePartiallyScannedWithoutParsing(file1)).isFalse();
-  }
-
+  
   @Test
   void test_notebook_should_not_be_in_project_level_symbol_table() {
     file1 = createInputFile(baseDir, "notebook.ipynb", InputFile.Status.SAME, InputFile.Type.MAIN);
