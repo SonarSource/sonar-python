@@ -19,9 +19,8 @@
  */
 package org.sonar.plugins.python.indexer;
 
-import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -30,13 +29,13 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import org.sonar.api.batch.fs.InputFile;
-import org.sonar.api.batch.sensor.SensorContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.sonar.api.batch.fs.InputFile;
+import org.sonar.api.batch.sensor.SensorContext;
+import org.sonar.plugins.python.PythonInputFile;
 import org.sonar.plugins.python.api.caching.CacheContext;
 import org.sonar.plugins.python.caching.Caching;
-import org.sonar.plugins.python.PythonInputFile;
 import org.sonar.python.index.Descriptor;
 import org.sonar.python.semantic.DependencyGraph;
 import org.sonar.python.semantic.SymbolUtils;
@@ -117,18 +116,18 @@ public class SonarQubePythonIndexer extends PythonIndexer {
     LOG.info(
       "Cached information of global symbols will be used for {} out of {} main files. Global symbols will be recomputed for the remaining files.",
       inputFiles.size() - impactfulFiles.size(),
-      inputFiles.size()
-    );
+      inputFiles.size());
     LOG.info("Fully optimized analysis can be performed for {} out of {} files.", fullySkippableFiles.size(), inputFiles.size());
     LOG.info("Partially optimized analysis can be performed for {} out of {} files.", partiallySkippableFiles.size(), inputFiles.size());
-    // Although we need to analyze all impacted files, we only need to recompute global symbols for modified files (no cross-file dependencies in the project symbol table)
+    // Although we need to analyze all impacted files, we only need to recompute global symbols for modified files (no cross-file dependencies
+    // in the project symbol table)
     computeGlobalSymbols(impactfulFiles, context);
   }
 
   /*
-    In a full analysis, Typeshed symbols are loaded lazily depending on which module is encountered during parsing.
-    SonarSecurity needs all Typeshed symbols used in the project to be properly loaded.
-    For that reason, we load all symbols that were used in the previous analysis upfront, even if the file using them will not be parsed.
+   * In a full analysis, Typeshed symbols are loaded lazily depending on which module is encountered during parsing.
+   * SonarSecurity needs all Typeshed symbols used in the project to be properly loaded.
+   * For that reason, we load all symbols that were used in the previous analysis upfront, even if the file using them will not be parsed.
    */
   private void loadTypeshedSymbols() {
     TypeShed.builtinSymbols();
@@ -161,13 +160,8 @@ public class SonarQubePythonIndexer extends PythonIndexer {
     byte[] fileHash = caching.readFileContentHash(inputFile.wrappedFile().key());
     // InputFile.Status is not reliable in some cases
     // We use the hash of the file's content to double-check the content is the same.
-    try {
-      byte[] bytes = FileHashingUtils.inputFileContentHash(inputFile.wrappedFile());
-      return MessageDigest.isEqual(fileHash, bytes);
-    } catch (IOException | NoSuchAlgorithmException e) {
-      LOG.debug("Failed to compute content hash for file {}", inputFile.wrappedFile().key());
-      return false;
-    }
+    var fileInputHash = inputFile.wrappedFile().md5Hash().getBytes(StandardCharsets.UTF_8);
+    return MessageDigest.isEqual(fileHash, fileInputHash);
   }
 
   private void saveRetrievedDescriptors(String fileKey, Set<Descriptor> descriptors, Caching caching) {
@@ -207,13 +201,7 @@ public class SonarQubePythonIndexer extends PythonIndexer {
   }
 
   private boolean writeContentHashToCache(PythonInputFile inputFile) {
-    byte[] contentHash;
-    try {
-      contentHash = FileHashingUtils.inputFileContentHash(inputFile.wrappedFile());
-    } catch (IOException | NoSuchAlgorithmException e) {
-      LOG.debug("Failed to compute content hash for file {}", inputFile.wrappedFile().key());
-      return false;
-    }
+    var contentHash = inputFile.wrappedFile().md5Hash().getBytes(StandardCharsets.UTF_8);
     caching.writeFileContentHash(inputFile.wrappedFile().key(), contentHash);
     return true;
   }
