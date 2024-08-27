@@ -19,20 +19,18 @@
  */
 package org.sonar.python.lexer;
 
+import com.sonar.sslr.api.Token;
+import com.sonar.sslr.api.TokenType;
+import com.sonar.sslr.impl.Lexer;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.IntStream;
-
 import org.sonar.python.api.PythonPunctuator;
 import org.sonar.python.api.PythonTokenType;
 import org.sonar.python.lexer.FStringState.Mode;
 import org.sonar.sslr.channel.Channel;
 import org.sonar.sslr.channel.CodeReader;
-
-import com.sonar.sslr.api.Token;
-import com.sonar.sslr.api.TokenType;
-import com.sonar.sslr.impl.Lexer;
 
 /**
  * A channel to handle f-strings.
@@ -79,7 +77,7 @@ public class FStringChannel extends Channel<Lexer> {
     FStringState.Mode currentMode = currentState.getTokenizerMode();
 
     if (currentMode == Mode.REGULAR_MODE && lexerState.fStringStateStack.size() > 1) {
-      // because the lexerState removes one to the count of brackets before entering this channel 
+      // because the lexerState removes one to the count of brackets before entering this channel
       // we need to adjust the comparison
       if (c == '}' && currentState.getBrackets() - 1 == lexerState.brackets) {
         Token rCurlyBraceToken = buildToken(PythonPunctuator.RCURLYBRACE, "}", output, line, column);
@@ -108,12 +106,13 @@ public class FStringChannel extends Channel<Lexer> {
     int column = code.getColumnPosition();
     FStringState.Mode currentMode = state.getTokenizerMode();
     while (code.charAt(0) != EOF) {
-      // In a raw string we consider \ as a character not as escape so we consume it as is. 
+      // In a raw string we consider \ as a character not as escape so we consume it as is.
       // Except for quotes which will be consumed as an escaped char
-      if (currentMode == Mode.FSTRING_MODE && isRawStringBackSlash(code, state)) {
+      if (currentMode == Mode.FSTRING_MODE && isRawStringSingleBackSlash(code, state)) {
         sb.append((char) code.pop());
         // If we encounter an escaped char we can consume the next two chars directly
-      } else if (currentMode == Mode.FSTRING_MODE && isEscapedChar(code)) {
+        // Or if we encounter two \\
+      } else if (currentMode == Mode.FSTRING_MODE && (isEscapedChar(code) || isDoubleBackslashInRawString(state, code))) {
         sb.append((char) code.pop());
         sb.append((char) code.pop());
       } else if (code.charAt(0) == '{' && !isUnicodeChar(sb)) {
@@ -138,6 +137,10 @@ public class FStringChannel extends Channel<Lexer> {
     return false;
   }
 
+  private static boolean isDoubleBackslashInRawString(FStringState state, CodeReader code) {
+    return state.isRawString && code.charAt(0) == '\\' && code.charAt(1) == '\\';
+  }
+
   private static boolean canConsumeFStringPrefix(StringBuilder sb, CodeReader code) {
     Character firstChar = Character.toUpperCase(code.charAt(0));
     Character secondChar = Character.toUpperCase(code.charAt(1));
@@ -153,8 +156,8 @@ public class FStringChannel extends Channel<Lexer> {
     return false;
   }
 
-  private static boolean isRawStringBackSlash(CodeReader code, FStringState state) {
-    return state.isRawString && code.charAt(0) == '\\' && !QUOTES.contains(code.charAt(1));
+  private static boolean isRawStringSingleBackSlash(CodeReader code, FStringState state) {
+    return state.isRawString && code.charAt(0) == '\\' && !QUOTES.contains(code.charAt(1)) && code.charAt(1) != '\\';
   }
 
   private static boolean isUnicodeChar(StringBuilder sb) {
