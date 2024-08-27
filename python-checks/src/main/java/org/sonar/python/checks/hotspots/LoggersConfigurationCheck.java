@@ -32,8 +32,10 @@ import org.sonar.plugins.python.api.tree.HasSymbol;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonarsource.analyzer.commons.annotations.DeprecatedRuleKey;
 
 @Rule(key = "S4792")
+@DeprecatedRuleKey(ruleKey = "S4792")
 public class LoggersConfigurationCheck extends PythonSubscriptionCheck {
 
   private static final List<String> FUNCTIONS_TO_CHECK = Arrays.asList(
