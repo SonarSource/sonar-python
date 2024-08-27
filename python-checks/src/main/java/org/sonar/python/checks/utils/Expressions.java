@@ -33,9 +33,11 @@ import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
+import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.DictionaryLiteral;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.ExpressionList;
+import org.sonar.plugins.python.api.tree.HasSymbol;
 import org.sonar.plugins.python.api.tree.ListLiteral;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.NumericLiteral;
@@ -55,6 +57,7 @@ import org.sonar.python.tree.TreeUtils;
 public class Expressions {
 
   private static final Set<String> ZERO_VALUES = new HashSet<>(Arrays.asList("0", "0.0", "0j"));
+  private  static final String TYPE_VAR_FQN = "typing.TypeVar";
 
   private Expressions() {
   }
@@ -361,5 +364,19 @@ public class Expressions {
       return getExpressionsFromRhs(((UnpackingExpression) rhs).expression());
     }
     return expressions;
+  }
+
+  public static boolean isGenericTypeAnnotation(Expression expression) {
+    return Optional.of(expression)
+      .flatMap(TreeUtils.toOptionalInstanceOfMapper(Name.class))
+      .map(Expressions::singleAssignedValue)
+      .flatMap(TreeUtils.toOptionalInstanceOfMapper(CallExpression.class))
+      .map(CallExpression::callee)
+      .filter(HasSymbol.class::isInstance)
+      .map(HasSymbol.class::cast)
+      .map(HasSymbol::symbol)
+      .map(Symbol::fullyQualifiedName)
+      .filter(TYPE_VAR_FQN::equals)
+      .isPresent();
   }
 }

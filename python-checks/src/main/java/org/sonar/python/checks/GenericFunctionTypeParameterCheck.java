@@ -28,18 +28,13 @@ import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.PythonVersionUtils;
 import org.sonar.plugins.python.api.SubscriptionContext;
-import org.sonar.plugins.python.api.symbols.Symbol;
-import org.sonar.plugins.python.api.tree.CallExpression;
-import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FunctionDef;
-import org.sonar.plugins.python.api.tree.HasSymbol;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.ParameterList;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TypeAnnotation;
 import org.sonar.python.checks.utils.Expressions;
-import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S6796")
 public class GenericFunctionTypeParameterCheck extends PythonSubscriptionCheck {
@@ -47,7 +42,6 @@ public class GenericFunctionTypeParameterCheck extends PythonSubscriptionCheck {
   private static final String MESSAGE = "Use a generic type parameter for this function instead of a \"TypeVar\".";
   private static final String SECONDARY_MESSAGE_USE = "Use of \"TypeVar\" here.";
   private static final String SECONDARY_MESSAGE_ASSIGNMENT = "\"TypeVar\" is assigned here.";
-  public static final String TYPE_VAR_FQN = "typing.TypeVar";
 
   @Override
   public void initialize(Context context) {
@@ -66,11 +60,11 @@ public class GenericFunctionTypeParameterCheck extends PythonSubscriptionCheck {
       .map(Parameter::typeAnnotation)
       .filter(Objects::nonNull)
       .map(TypeAnnotation::expression)
-      .filter(GenericFunctionTypeParameterCheck::isGenericTypeAnnotation)
+      .filter(Expressions::isGenericTypeAnnotation)
       .collect(Collectors.toSet());
     Optional.ofNullable(functionDef.returnTypeAnnotation())
       .map(TypeAnnotation::expression)
-      .filter(GenericFunctionTypeParameterCheck::isGenericTypeAnnotation)
+      .filter(Expressions::isGenericTypeAnnotation)
       .ifPresent(secondaryLocations::add);
 
     if (!secondaryLocations.isEmpty()) {
@@ -85,20 +79,6 @@ public class GenericFunctionTypeParameterCheck extends PythonSubscriptionCheck {
       .map(Name.class::cast)
       .map(Expressions::singleAssignedValue)
       .collect(Collectors.toSet());
-  }
-
-  private static boolean isGenericTypeAnnotation(Expression expression) {
-    return Optional.of(expression)
-      .flatMap(TreeUtils.toOptionalInstanceOfMapper(Name.class))
-      .map(Expressions::singleAssignedValue)
-      .flatMap(TreeUtils.toOptionalInstanceOfMapper(CallExpression.class))
-      .map(CallExpression::callee)
-      .filter(HasSymbol.class::isInstance)
-      .map(HasSymbol.class::cast)
-      .map(HasSymbol::symbol)
-      .map(Symbol::fullyQualifiedName)
-      .filter(TYPE_VAR_FQN::equals)
-      .isPresent();
   }
 
   private static boolean supportsTypeParameterSyntax(SubscriptionContext ctx) {
