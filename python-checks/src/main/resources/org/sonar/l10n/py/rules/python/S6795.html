@@ -1,0 +1,52 @@
+<p>This rule raises an issue when a <code>TypeVar</code> is used as a type parameter in a <code>type</code> statement.</p>
+<h2>Why is this an issue?</h2>
+<p>Prior to Python 3.12, generic type aliases were defined as follows:</p>
+<pre>
+from typing import TypeAlias, TypeVar
+
+_T = TypeVar("_T")
+
+MyAlias: TypeAlias = set[_T]
+</pre>
+<p>Python 3.12 introduced the <code>type</code> statement to facilitate the use of such type aliases, allowing for less confusing and more concise
+code:</p>
+<pre>
+type MyAlias[T] = set[T]
+</pre>
+<p>Python is transitioning away from explicit <code>TypeVar</code> declaration from Python 3.12 onward. This means that Type alias expressions are not
+allowed to use <code>TypeVar</code> allocated with an explicit constructor call:</p>
+<pre>
+from typing import TypeVar
+
+_T = TypeVar("_T")
+
+type MyAlias[A: str] = dict[A, _T]  # Type checker error would be raise
+</pre>
+<p>It is a good practice to use the new syntax only, as it fulfills all the requirements of the <code>TypeVar</code> declaration in a more concise and
+readable way.</p>
+<h3>Exceptions</h3>
+<p>This rule will only raise an issue when the Python version of the analyzed project is set to 3.12 or higher.</p>
+<h2>How to fix it</h2>
+<p>To fix this error use a generic <code>type</code> statement and remove the use of the <code>TypeVar</code>.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+from typing import TypeAlias
+
+_T = TypeVar("_T")
+
+type MyAlias = set[_T]  # Noncompliant: a TypeVar is used as part of the type statement
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+type MyAlias[T] = set[T]  # Compliant: the new type statement syntax is used.
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Python Documentation - <a href="https://docs.python.org/3.12/reference/simple_stmts.html#type">The type statement</a> </li>
+  <li> Python 3.12 Release Notes - <a href="https://docs.python.org/3.12/whatsnew/3.12.html#pep-695-type-parameter-syntax">PEP 695: Type Parameter
+  Syntax</a> </li>
+  <li> PEP 695 - <a href="https://peps.python.org/pep-0695/">Type Parameter Syntax</a> </li>
+</ul>
+

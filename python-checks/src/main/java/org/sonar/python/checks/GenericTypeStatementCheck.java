@@ -17,10 +17,29 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
+
+/*
+ * SonarQube Python Plugin
+ * Copyright (C) 2011-2023 SonarSource SA
+ * mailto:info AT sonarsource DOT com
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ */
 package org.sonar.python.checks;
 
-import java.util.List;
-import java.util.Objects;
+import java.util.Collection;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -28,49 +47,45 @@ import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.PythonVersionUtils;
 import org.sonar.plugins.python.api.SubscriptionContext;
-import org.sonar.plugins.python.api.tree.FunctionDef;
+import org.sonar.plugins.python.api.tree.ExpressionList;
 import org.sonar.plugins.python.api.tree.Name;
-import org.sonar.plugins.python.api.tree.Parameter;
-import org.sonar.plugins.python.api.tree.ParameterList;
+import org.sonar.plugins.python.api.tree.SubscriptionExpression;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.plugins.python.api.tree.TypeAnnotation;
+import org.sonar.plugins.python.api.tree.TypeAliasStatement;
 import org.sonar.python.checks.utils.Expressions;
+import org.sonar.python.tree.TreeUtils;
 
-@Rule(key = "S6796")
-public class GenericFunctionTypeParameterCheck extends PythonSubscriptionCheck {
+@Rule(key = "S6795")
+public class GenericTypeStatementCheck extends PythonSubscriptionCheck {
 
-  private static final String MESSAGE = "Use a generic type parameter for this function instead of a \"TypeVar\".";
+  private static final String MESSAGE = "Use a generic type parameter instead of a \"TypeVar\" in this type statement.";
   private static final String SECONDARY_MESSAGE_USE = "Use of \"TypeVar\" here.";
   private static final String SECONDARY_MESSAGE_ASSIGNMENT = "\"TypeVar\" is assigned here.";
 
   @Override
   public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(Tree.Kind.FUNCDEF, GenericFunctionTypeParameterCheck::checkUseOfGenerics);
+    context.registerSyntaxNodeConsumer(Tree.Kind.TYPE_ALIAS_STMT, GenericTypeStatementCheck::checkUseOfGenerics);
   }
 
   private static void checkUseOfGenerics(SubscriptionContext ctx) {
     if (!supportsTypeParameterSyntax(ctx)) {
       return;
     }
-    FunctionDef functionDef = (FunctionDef) ctx.syntaxNode();
-    Set<Tree> secondaryLocations = Optional.ofNullable(functionDef.parameters())
-      .map(ParameterList::nonTuple)
+    TypeAliasStatement typeStatement = (TypeAliasStatement) ctx.syntaxNode();
+    
+    Set<Tree> typeVarAsTypeParameter = Optional.ofNullable(typeStatement.expression())
+      .flatMap(TreeUtils.toOptionalInstanceOfMapper(SubscriptionExpression.class))
+      .map(SubscriptionExpression::subscripts)
+      .map(ExpressionList::expressions)
       .stream()
-      .flatMap(List::stream)
-      .map(Parameter::typeAnnotation)
-      .filter(Objects::nonNull)
-      .map(TypeAnnotation::expression)
+      .flatMap(Collection::stream)
       .filter(Expressions::isGenericTypeAnnotation)
       .collect(Collectors.toSet());
-    Optional.ofNullable(functionDef.returnTypeAnnotation())
-      .map(TypeAnnotation::expression)
-      .filter(Expressions::isGenericTypeAnnotation)
-      .ifPresent(secondaryLocations::add);
 
-    if (!secondaryLocations.isEmpty()) {
-      PreciseIssue issue = ctx.addIssue(functionDef.name(), MESSAGE);
-      secondaryLocations.forEach(loc -> issue.secondary(loc, SECONDARY_MESSAGE_USE));
-      getAssignmentLocations(secondaryLocations).forEach(loc -> issue.secondary(loc, SECONDARY_MESSAGE_ASSIGNMENT));
+    if (!typeVarAsTypeParameter.isEmpty()) {
+      PreciseIssue issue = ctx.addIssue(typeStatement.name(), MESSAGE);
+      typeVarAsTypeParameter.forEach(loc -> issue.secondary(loc, SECONDARY_MESSAGE_USE));
+      getAssignmentLocations(typeVarAsTypeParameter).forEach(loc -> issue.secondary(loc, SECONDARY_MESSAGE_ASSIGNMENT));
     }
   }
 
@@ -80,6 +95,7 @@ public class GenericFunctionTypeParameterCheck extends PythonSubscriptionCheck {
       .map(Expressions::singleAssignedValue)
       .collect(Collectors.toSet());
   }
+
 
   private static boolean supportsTypeParameterSyntax(SubscriptionContext ctx) {
     PythonVersionUtils.Version required = PythonVersionUtils.Version.V_312;
