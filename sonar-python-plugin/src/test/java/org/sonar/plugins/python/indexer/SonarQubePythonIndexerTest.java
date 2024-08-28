@@ -477,17 +477,6 @@ class SonarQubePythonIndexerTest {
   }
 
   @Test
-  void hash_exception_when_trying_to_save_hash() {
-    file1 = createInputFile(baseDir, "main.py", InputFile.Status.CHANGED, InputFile.Type.MAIN);
-
-    List<PythonInputFile> inputFiles = new ArrayList<>(List.of(file1));
-
-    context.settings().setProperty("sonar.python.skipUnchanged", false);
-    pythonIndexer = new SonarQubePythonIndexer(inputFiles, cacheContext, context);
-
-  }
-  
-  @Test
   void test_notebook_should_not_be_in_project_level_symbol_table() {
     file1 = createInputFile(baseDir, "notebook.ipynb", InputFile.Status.SAME, InputFile.Type.MAIN);
     file2 = createInputFile(baseDir, "mod.py", InputFile.Status.SAME, InputFile.Type.MAIN);

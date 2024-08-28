@@ -27,7 +27,6 @@ import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -588,7 +587,7 @@ class PythonSensorTest {
   }
 
   @Test
-  void test_test_file_highlighting() throws IOException {
+  void test_test_file_highlighting() {
     activeRules = new ActiveRulesBuilder().build();
 
     DefaultInputFile inputFile1 = spy(TestInputFileBuilder.create("moduleKey", FILE_1)
@@ -767,7 +766,7 @@ class PythonSensorTest {
   }
 
   @Test
-  void saving_performance_measure_not_activated_by_default() throws IOException {
+  void saving_performance_measure_not_activated_by_default() {
     activeRules = (new ActiveRulesBuilder()).build();
 
     inputFile("main.py");
@@ -826,7 +825,7 @@ class PythonSensorTest {
   }
 
   @Test
-  void test_using_cache() throws IOException, NoSuchAlgorithmException {
+  void test_using_cache() throws IOException {
     activeRules = new ActiveRulesBuilder()
       .addRule(new NewActiveRule.Builder()
         .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, ONE_STATEMENT_PER_LINE_RULE_KEY))
@@ -864,7 +863,7 @@ class PythonSensorTest {
   }
 
   @Test
-  void test_scan_without_parsing_test_file() throws IOException, NoSuchAlgorithmException {
+  void test_scan_without_parsing_test_file() {
     activeRules = new ActiveRulesBuilder()
       .addRule(new NewActiveRule.Builder()
         .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, "S5905"))
@@ -893,7 +892,7 @@ class PythonSensorTest {
   }
 
   @Test
-  void test_scan_without_parsing_fails_does_not_reexecute_successful_checks() throws IOException, NoSuchAlgorithmException {
+  void test_scan_without_parsing_fails_does_not_reexecute_successful_checks() {
     activeRules = new ActiveRulesBuilder()
       .addRule(new NewActiveRule.Builder()
         .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, ONE_STATEMENT_PER_LINE_RULE_KEY))
@@ -924,7 +923,7 @@ class PythonSensorTest {
   }
 
   @Test
-  void test_partial_scan_without_parsing() throws IOException, NoSuchAlgorithmException {
+  void test_partial_scan_without_parsing() {
     activeRules = new ActiveRulesBuilder()
       .addRule(new NewActiveRule.Builder()
         .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, ONE_STATEMENT_PER_LINE_RULE_KEY))
@@ -984,7 +983,7 @@ class PythonSensorTest {
   }
 
   @Test
-  void write_cpd_tokens_to_cache() throws IOException, ClassNotFoundException {
+  void write_cpd_tokens_to_cache() throws IOException {
     activeRules = new ActiveRulesBuilder()
       .addRule(new NewActiveRule.Builder()
         .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, "S5905"))
@@ -1044,7 +1043,7 @@ class PythonSensorTest {
   }
 
   @Test
-  void write_cpd_tokens_multiple_files() throws IOException, ClassNotFoundException {
+  void write_cpd_tokens_multiple_files() throws IOException {
     activeRules = new ActiveRulesBuilder()
       .addRule(new NewActiveRule.Builder()
         .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, "S5905"))
@@ -1077,7 +1076,7 @@ class PythonSensorTest {
   }
 
   @Test
-  void read_cpd_tokens_from_cache() throws IOException, NoSuchAlgorithmException {
+  void read_cpd_tokens_from_cache() throws IOException {
     activeRules = new ActiveRulesBuilder()
       .addRule(new NewActiveRule.Builder()
         .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, "S5905"))
@@ -1164,7 +1163,7 @@ class PythonSensorTest {
   }
 
   @Test
-  void read_cpd_tokens_from_cache_corrupted_format() throws IOException, NoSuchAlgorithmException {
+  void read_cpd_tokens_from_cache_corrupted_format() throws IOException {
     activeRules = new ActiveRulesBuilder()
       .addRule(new NewActiveRule.Builder()
         .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, "S5905"))
@@ -1243,7 +1242,7 @@ class PythonSensorTest {
   }
 
   @Test
-  void cpd_tokens_failure_does_not_execute_checks_multiple_times() throws IOException, NoSuchAlgorithmException {
+  void cpd_tokens_failure_does_not_execute_checks_multiple_times() throws IOException {
     activeRules = new ActiveRulesBuilder()
       .addRule(new NewActiveRule.Builder()
         .setRuleKey(RuleKey.of(CUSTOM_REPOSITORY_KEY, RULE_CRASHING_ON_SCAN_KEY))

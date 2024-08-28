@@ -191,19 +191,17 @@ public class SonarQubePythonIndexer extends PythonIndexer {
       if (descriptors != null && imports != null) {
         // Descriptors/imports map may be null if the file failed to parse.
         // We don't try to save information in the cache in that case.
-        if (!writeContentHashToCache(inputFile)) {
-          return;
-        }
+        writeContentHashToCache(inputFile);
+
         caching.writeProjectLevelSymbolTableEntry(inputFile.wrappedFile().key(), descriptors);
         caching.writeImportsMapEntry(inputFile.wrappedFile().key(), imports);
       }
     }
   }
 
-  private boolean writeContentHashToCache(PythonInputFile inputFile) {
+  private void writeContentHashToCache(PythonInputFile inputFile) {
     var contentHash = inputFile.wrappedFile().md5Hash().getBytes(StandardCharsets.UTF_8);
     caching.writeFileContentHash(inputFile.wrappedFile().key(), contentHash);
-    return true;
   }
 
   private Set<String> deletedModulesFQNs(Set<String> projectModulesFQNs) {
