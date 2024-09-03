@@ -1,0 +1,30 @@
+<p>This rule raises an issue when an incorrect pattern is provided to an <code>einops</code> operation.</p>
+<h2>Why is this an issue?</h2>
+<p>The <code>einops</code> library provides a powerful and flexible way to manipulate tensors using the Einstein summation convention. The
+<code>einops</code> uses a different convention than the <a href="https://rockt.github.io/2018/04/30/einsum">traditional</a> one. In particular, the
+axis names can be more than one letter long and are separated by spaces.</p>
+<h2>How to fix it</h2>
+<p>Correct the syntax of the <code>einops</code> operation by balancing the parentheses and following the convention.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+from einops import rearrange
+import torch
+
+x = torch.randn(2, 3, 4, 5)
+x2 = rearrange(x, 'b c h w -&gt; b (c h w') # Noncompliant : the parentheses are not balanced
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+from einops import rearrange
+import torch
+
+x = torch.randn(2, 3, 4, 5)
+x2 = rearrange(x, 'b c h w -&gt; b (c h w)')
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> <code>einops</code> documentation - <a href="https://einops.rocks/1-einops-basics/#welcome-to-einops-land">Einops basics</a> </li>
+</ul>
+
