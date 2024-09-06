@@ -364,6 +364,7 @@ public final class CheckList {
       TooManyLinesInFunctionCheck.class,
       TooManyParametersCheck.class,
       TooManyReturnsCheck.class,
+      TorchAutogradVariableShouldNotBeUsedCheck.class,
       TrailingCommentCheck.class,
       TrailingWhitespaceCheck.class,
       TypeAliasAnnotationCheck.class,
