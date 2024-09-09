@@ -1,0 +1,24 @@
+{
+  "title": "The \"num_workers\" parameter should be specified for \"torch.utils.data.DataLoader\"",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "2min"
+  },
+  "tags": [
+    "pytorch",
+    "machine-learning"
+  ],
+  "defaultSeverity": "Minor",
+  "ruleSpecification": "RSPEC-6983",
+  "sqKey": "S6983",
+  "scope": "All",
+  "quickfix": "targeted",
+  "code": {
+    "impacts": {
+      "RELIABILITY": "LOW"
+    },
+    "attribute": "COMPLETE"
+  }
+}
