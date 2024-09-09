@@ -1,0 +1,24 @@
+{
+  "title": "Usage of \"torch.load\" can lead to untrusted code execution",
+  "type": "SECURITY_HOTSPOT",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "15min"
+  },
+  "tags": [
+    "pytorch",
+    "machine-learning"
+  ],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-6985",
+  "sqKey": "S6985",
+  "scope": "All",
+  "quickfix": "infeasible",
+  "code": {
+    "impacts": {
+      "SECURITY": "HIGH"
+    },
+    "attribute": "CONVENTIONAL"
+  }
+}
