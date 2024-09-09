@@ -1,6 +1,29 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "local>SonarSource/renovate-config"
+  "extends": ["github>SonarSource/renovate-config:languages-team"],
+  "enabledManagers": ["maven", "github-actions"],
+  "ignorePaths": ["python-frontend/typeshed_serializer/**"],
+
+  "packageRules": [
+    {
+      "matchManagers": ["maven"],
+      "matchPackageNames": ["*"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "groupName": "all non-major dependencies",
+      "groupSlug": "all-minor-patch"
+    },
+    {
+      "matchPackageNames": [
+        "/sonar-plugin-api/",
+        "/org.sonarsource.sonarqube.*/"
+      ],
+      "groupName": "sonarqube",
+      "groupSlug": "sq"
+    },
+    {
+      "matchPackageNames": ["org.sonarsource.parent:parent"],
+      "groupName": "parent",
+      "automerge": true
+    }
   ]
 }
