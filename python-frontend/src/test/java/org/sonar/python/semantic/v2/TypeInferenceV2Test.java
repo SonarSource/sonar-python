@@ -57,6 +57,7 @@ import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.types.v2.ClassType;
 import org.sonar.python.types.v2.FunctionType;
 import org.sonar.python.types.v2.LazyType;
+import org.sonar.python.types.v2.TypeWrapper;
 import org.sonar.python.types.v2.ModuleType;
 import org.sonar.python.types.v2.ObjectType;
 import org.sonar.python.types.v2.ParameterV2;
@@ -72,6 +73,7 @@ import static org.sonar.python.PythonTestUtils.parse;
 import static org.sonar.python.PythonTestUtils.parseWithoutSymbols;
 import static org.sonar.python.PythonTestUtils.pythonFile;
 import static org.sonar.python.types.v2.TypesTestUtils.DICT_TYPE;
+import static org.sonar.python.types.v2.TypesTestUtils.EXCEPTION_TYPE;
 import static org.sonar.python.types.v2.TypesTestUtils.FLOAT_TYPE;
 import static org.sonar.python.types.v2.TypesTestUtils.FROZENSET_TYPE;
 import static org.sonar.python.types.v2.TypesTestUtils.INT_TYPE;
@@ -2077,6 +2079,33 @@ class TypeInferenceV2Test {
     FunctionType functionType = ((FunctionType) ((ExpressionStatement) fileInput.statements().statements().get(0)).expressions().get(0).typeV2());
     PythonType pythonType = functionType.returnType();
     assertThat(pythonType.unwrappedType()).isEqualTo(NONE_TYPE);
+  }
+
+
+  @Test
+  void lazyTypeOfSuperType() {
+    FileInput fileInput = inferTypes("""
+      class MyClass(Exception):
+          ...
+      MyClass
+      """);
+    ClassType myClassType = (ClassType) ((ExpressionStatement) fileInput.statements().statements().get(1)).expressions().get(0).typeV2();
+    assertThat(myClassType.superClasses()).extracting(TypeWrapper::type).containsExactly(EXCEPTION_TYPE);
+  }
+
+
+  @Test
+  void lazyTypeOfSuperType2() {
+    FileInput fileInput = inferTypes("""
+      class A: ...
+      A
+      class MyClass(A, Exception, int):
+          ...
+      MyClass
+      """);
+    ClassType aType = (ClassType) ((ExpressionStatement) fileInput.statements().statements().get(1)).expressions().get(0).typeV2();
+    ClassType myClassType = (ClassType) ((ExpressionStatement) fileInput.statements().statements().get(3)).expressions().get(0).typeV2();
+    assertThat(myClassType.superClasses()).extracting(TypeWrapper::type).containsExactly(aType, EXCEPTION_TYPE, INT_TYPE);
   }
 
   @Test
