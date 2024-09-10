@@ -600,12 +600,8 @@ class TypeInferenceV2Test {
   @Test
   void inferFunctionParameterTypes2() {
     FileInput root = inferTypes("""
-      class A:
-        def foo():
-          ...
-      class A:
-        def foo(param: int):
-          ...
+      class A: ...
+      class A: ...
       def foo(param: A) -> A:
         ...
       """);
@@ -648,6 +644,16 @@ class TypeInferenceV2Test {
     assertThat(((FunctionType) functionDef.name().typeV2()).returnType().unwrappedType()).isEqualTo(patternType);
   }
 
+  @Test
+  void inferFunctionParameterTypes5() {
+    FileInput root = inferTypes("""
+      my_alias = int
+      def foo(param: my_alias): ...
+      """);
+
+    var functionDef = (FunctionDef) root.statements().statements().get(1);
+    assertThat(((FunctionType) functionDef.name().typeV2()).parameters().get(0).declaredType().unwrappedType()).isEqualTo(INT_TYPE);
+  }
 
   @Test
   void inferTypeForReassignedBuiltinsInsideFunction() {
