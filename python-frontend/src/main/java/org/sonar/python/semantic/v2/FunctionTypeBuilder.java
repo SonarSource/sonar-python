@@ -56,7 +56,7 @@ public class FunctionTypeBuilder implements TypeBuilder<FunctionType> {
   private static final String CLASS_METHOD_DECORATOR = "classmethod";
   private static final String STATIC_METHOD_DECORATOR = "staticmethod";
 
-  public FunctionTypeBuilder fromFunctionDef(FunctionDef functionDef) {
+  public FunctionTypeBuilder fromFunctionDef(FunctionDef functionDef, @Nullable String fileId) {
     this.name = functionDef.name().name();
     this.attributes = new ArrayList<>();
     this.parameters = new ArrayList<>();
@@ -65,7 +65,7 @@ public class FunctionTypeBuilder implements TypeBuilder<FunctionType> {
     isInstanceMethod = isInstanceMethod(functionDef);
     ParameterList parameterList = functionDef.parameters();
     if (parameterList != null) {
-      createParameterNames(parameterList.all(), null);
+      createParameterNames(parameterList.all(), fileId);
     }
     return this;
   }

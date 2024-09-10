@@ -101,7 +101,7 @@ class FunctionTypeTest {
     assertThat(functionType.parameters().get(0).isVariadic()).isFalse();
     assertThat(functionType.parameters().get(0).isKeywordVariadic()).isFalse();
     assertThat(functionType.parameters().get(0).isPositionalVariadic()).isFalse();
-    assertThat(functionType.parameters().get(0).location()).isNull();
+    assertThat(functionType.parameters().get(0).location()).isEqualTo(new LocationInFile(fileId, 1, 7, 1, 17));
 
     functionType = functionType("def fn(**kwargs): pass");
     assertThat(functionType.parameters()).hasSize(1);
@@ -186,6 +186,15 @@ class FunctionTypeTest {
 
     functionType = functionType("def foo(): ...");
     assertThat(functionType.owner()).isNull();
+  }
+
+  @Test
+  void location() {
+    FunctionType functionType = functionType("def fn(param: int, (a: str, b)): pass");
+    String fileId = SymbolUtils.pathOf(pythonFile).toString();
+    assertThat(functionType.definitionLocation()).contains(new LocationInFile(fileId, 1, 4, 1, 6));
+    assertThat(functionType.parameters().get(0).location()).isEqualTo(new LocationInFile(fileId, 1, 7, 1, 17));
+    assertThat(functionType.parameters().get(1).location()).isEqualTo(new LocationInFile(fileId, 1, 19, 1, 30));
   }
 
   public static FunctionType functionType(String... code) {
