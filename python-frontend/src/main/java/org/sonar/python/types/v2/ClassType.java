@@ -40,7 +40,7 @@ public final class ClassType implements PythonType {
   private final String name;
   private final Set<Member> members;
   private final List<PythonType> attributes;
-  private final List<PythonType> superClasses;
+  private final List<TypeWrapper> superClasses;
   private final List<PythonType> metaClasses;
   private final boolean hasDecorators;
   private final LocationInFile locationInFile;
@@ -49,7 +49,7 @@ public final class ClassType implements PythonType {
     String name,
     Set<Member> members,
     List<PythonType> attributes,
-    List<PythonType> superClasses,
+    List<TypeWrapper> superClasses,
     List<PythonType> metaClasses,
     boolean hasDecorators,
     @Nullable LocationInFile locationInFile) {
@@ -109,7 +109,7 @@ public final class ClassType implements PythonType {
 
   @Beta
   public boolean isASubClassFrom(ClassType other) {
-    return superClasses.stream().anyMatch(superClass -> superClass.isCompatibleWith(other));
+    return superClasses().stream().anyMatch(superClass -> superClass.type().isCompatibleWith(other));
   }
 
   @Beta
@@ -140,16 +140,16 @@ public final class ClassType implements PythonType {
   }
 
   private Optional<PythonType> inheritedMember(String memberName) {
-    return superClasses.stream()
-      .map(s -> s.resolveMember(memberName))
+    return superClasses().stream()
+      .map(s -> s.type().resolveMember(memberName))
       .filter(Optional::isPresent)
       .map(Optional::get)
       .findFirst();
   }
 
   public boolean hasUnresolvedHierarchy() {
-    return superClasses.stream().anyMatch(s -> {
-        if (s instanceof ClassType parentClassType) {
+    return superClasses().stream().anyMatch(s -> {
+        if (s.type() instanceof ClassType parentClassType) {
           return parentClassType.hasUnresolvedHierarchy();
         }
         return true;
@@ -174,6 +174,7 @@ public final class ClassType implements PythonType {
     return !this.metaClasses.isEmpty() ||
       this.superClasses()
         .stream()
+        .map(TypeWrapper::type)
         .filter(ClassType.class::isInstance)
         .map(ClassType.class::cast)
         .anyMatch(ClassType::hasMetaClass);
@@ -213,7 +214,7 @@ public final class ClassType implements PythonType {
     return attributes;
   }
 
-  public List<PythonType> superClasses() {
+  public List<TypeWrapper> superClasses() {
     return superClasses;
   }
 

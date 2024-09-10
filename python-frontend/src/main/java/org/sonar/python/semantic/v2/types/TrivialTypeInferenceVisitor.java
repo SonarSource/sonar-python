@@ -227,7 +227,7 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
         if (argument instanceof RegularArgument regularArgument) {
           addParentClass(classTypeBuilder, regularArgument);
         } else {
-          classTypeBuilder.superClasses().add(PythonType.UNKNOWN);
+          classTypeBuilder.addSuperClass(PythonType.UNKNOWN);
         }
       });
   }
@@ -243,7 +243,7 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
       return;
     }
     PythonType argumentType = getTypeV2FromArgument(regularArgument);
-    classTypeBuilder.superClasses().add(argumentType);
+    classTypeBuilder.addSuperClass(argumentType);
     // TODO: SONARPY-1869 handle generics
   }
 

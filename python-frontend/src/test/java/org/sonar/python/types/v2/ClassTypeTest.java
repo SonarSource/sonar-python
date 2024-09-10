@@ -93,7 +93,7 @@ public class ClassTypeTest {
     ClassType classC = classTypes.get(0);
     ClassType classB = classTypes.get(1);
     assertThat(classB.superClasses()).hasSize(1);
-    assertThat(classB.superClasses()).containsExactlyInAnyOrder(classC);
+    assertThat(classB.superClasses()).extracting(TypeWrapper::type).containsExactlyInAnyOrder(classC);
   }
 
   @Test
@@ -109,7 +109,7 @@ public class ClassTypeTest {
     ClassType classA = classTypes.get(1);
     ClassType classB = classTypes.get(2);
     assertThat(classB.superClasses()).hasSize(2);
-    assertThat(classB.superClasses()).containsExactlyInAnyOrder(classC, classA);
+    assertThat(classB.superClasses()).extracting(TypeWrapper::type).containsExactlyInAnyOrder(classC, classA);
   }
 
   @Test
@@ -118,7 +118,7 @@ public class ClassTypeTest {
       "class B(C): ..."
     );
     ClassType classC = classTypes.get(0);
-    assertThat(classC.superClasses()).containsExactly(PythonType.UNKNOWN);
+    assertThat(classC.superClasses()).extracting(TypeWrapper::type).containsExactly(PythonType.UNKNOWN);
     assertThat(classC.hasUnresolvedHierarchy()).isTrue();
     assertThat(classC.hasMember("unknown")).isEqualTo(TriBool.UNKNOWN);
     assertThat(classC.instancesHaveMember("unknown")).isEqualTo(TriBool.UNKNOWN);
@@ -143,7 +143,7 @@ public class ClassTypeTest {
     ClassType classB = classTypes.get(1);
     assertThat(classB.superClasses()).hasSize(2);
     assertThat(classB.hasUnresolvedHierarchy()).isFalse();
-    var baseExceptionType = classB.superClasses().get(1);
+    var baseExceptionType = classB.superClasses().get(1).type();
     assertThat(baseExceptionType)
       .isInstanceOf(ClassType.class)
       .extracting(PythonType::name)
@@ -217,7 +217,7 @@ public class ClassTypeTest {
       "class C(foo()): ",
       "  pass");
     ClassType classType = classTypes.get(0);
-    assertThat(classType.superClasses()).containsExactly(PythonType.UNKNOWN);
+    assertThat(classType.superClasses()).extracting(TypeWrapper::type).containsExactly(PythonType.UNKNOWN);
     assertThat(classType.hasUnresolvedHierarchy()).isTrue();
   }
 
@@ -231,7 +231,7 @@ public class ClassTypeTest {
       "  pass");
     ClassType classType = classTypes.get(0);
     assertThat(classType.superClasses()).hasSize(1);
-    assertThat(classType.superClasses()).containsExactly(PythonType.UNKNOWN);
+    assertThat(classType.superClasses()).extracting(TypeWrapper::type).containsExactly(PythonType.UNKNOWN);
     assertThat(classType.hasUnresolvedHierarchy()).isTrue();
   }
 
@@ -242,7 +242,7 @@ public class ClassTypeTest {
       "class C(*foo): ",
       "  pass");
     ClassType classType = classTypes.get(0);
-    assertThat(classType.superClasses()).containsExactly(PythonType.UNKNOWN);
+    assertThat(classType.superClasses()).extracting(TypeWrapper::type).containsExactly(PythonType.UNKNOWN);
     assertThat(classType.hasUnresolvedHierarchy()).isTrue();
   }
 
@@ -347,7 +347,7 @@ public class ClassTypeTest {
     ClassType classB = classTypes.get(1);
     assertThat(classB.hasUnresolvedHierarchy()).isFalse();
     assertThat(classB.superClasses()).hasSize(1);
-    assertThat(classB.superClasses()).extracting(PythonType::name).containsExactly("A");
+    assertThat(classB.superClasses()).extracting(TypeWrapper::type).extracting(PythonType::name).containsExactly("A");
     assertThat(classB.hasMetaClass()).isFalse();
     assertThat(classB.instancesHaveMember("foo")).isEqualTo(TriBool.UNKNOWN);
   }
@@ -422,7 +422,7 @@ public class ClassTypeTest {
       "  def foo(): pass").get(1);
 
     assertThat(classB.members()).hasSize(1);
-    ClassType classA = (ClassType) classB.superClasses().get(0);
+    ClassType classA = (ClassType) classB.superClasses().get(0).type();
     assertThat(classA.members()).hasSize(1);
 
     assertThat(classB.resolveMember("foo")).isPresent();

@@ -38,12 +38,12 @@ import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.python.semantic.ClassSymbolImpl;
 import org.sonar.python.semantic.FunctionSymbolImpl;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
-import org.sonar.python.semantic.SymbolImpl;
 import org.sonar.python.types.InferredTypes;
 import org.sonar.python.types.protobuf.SymbolsProtos;
 import org.sonar.python.types.v2.ClassType;
 import org.sonar.python.types.v2.FunctionType;
 import org.sonar.python.types.v2.LazyType;
+import org.sonar.python.types.v2.LazyTypeWrapper;
 import org.sonar.python.types.v2.Member;
 import org.sonar.python.types.v2.ModuleType;
 import org.sonar.python.types.v2.ParameterV2;
@@ -184,19 +184,19 @@ public class SymbolsModuleTypeProvider {
       symbol.declaredMembers().stream().map(m -> new Member(m.name(), convertToType(m, createdTypesBySymbol))).collect(Collectors.toSet());
     classType.members().addAll(members);
 
-
     Optional.of(symbol)
       .filter(ClassSymbolImpl.class::isInstance)
       .map(ClassSymbolImpl.class::cast)
       .filter(ClassSymbolImpl::shouldSearchHierarchyInTypeshed)
       .map(ClassSymbol::superClassesFqn)
-      .map(fqns -> fqns.stream().map(this::typeshedSymbolWithFQN))
+      .map(fqns -> fqns.stream().map(this::resolvePossibleLazyType))
       .or(() -> Optional.of(symbol)
         .map(ClassSymbol::superClasses)
-        .map(Collection::stream))
+        .map(Collection::stream)
+        .map(symbols -> symbols.map(s -> convertToType(s, createdTypesBySymbol))))
       .stream()
       .flatMap(Function.identity())
-      .map(s -> convertToType(s, createdTypesBySymbol))
+      .map(LazyTypeWrapper::new)
       .forEach(classType.superClasses()::add);
 
     return classType;
@@ -211,13 +211,6 @@ public class SymbolsModuleTypeProvider {
       parameter.isKeywordVariadic(),
       parameter.isPositionalVariadic(),
       null);
-  }
-
-  private Symbol typeshedSymbolWithFQN(String fullyQualifiedName) {
-    String[] fqnSplitByDot = fullyQualifiedName.split("\\.");
-    String localName = fqnSplitByDot[fqnSplitByDot.length - 1];
-    Symbol symbol = typeShed.symbolWithFQN(fullyQualifiedName);
-    return symbol == null ? new SymbolImpl(localName, fullyQualifiedName) : ((SymbolImpl) symbol).copyWithoutUsages();
   }
 
   private PythonType convertToUnionType(AmbiguousSymbol ambiguousSymbol, Map<Symbol, PythonType> createdTypesBySymbol) {
