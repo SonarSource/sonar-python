@@ -66,7 +66,7 @@ public class FunctionTypeBuilder implements TypeBuilder<FunctionType> {
     isInstanceMethod = isInstanceMethod(functionDef);
     ParameterList parameterList = functionDef.parameters();
     if (parameterList != null) {
-      createParameterNames(parameterList.all(), fileId,  projectLevelTypeTable);
+      createParameterNames(parameterList.all(), fileId, projectLevelTypeTable);
     }
     return this;
   }
