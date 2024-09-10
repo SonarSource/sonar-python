@@ -35,7 +35,8 @@ import org.sonar.python.tree.TreeUtils;
 @Rule(key = "S6984")
 public class EinopsSyntaxCheck extends PythonSubscriptionCheck {
 
-  private static final String MESSAGE_TEMPLATE = "Fix the syntax of this einops.%s operation: %s";
+  private static final String MESSAGE_TEMPLATE = "Fix the syntax of this einops operation: %s.";
+  private static final String UNBALANCED_PARENTHESIS_MESSAGE = "parenthesis are unbalanced"; 
   private static final Set<String> FQN_TO_CHECK = Set.of("einops.repeat", "einops.reduce", "einops.rearrange");
 
   @Override
@@ -50,9 +51,42 @@ public class EinopsSyntaxCheck extends PythonSubscriptionCheck {
 
     if (calleeSymbol != null && FQN_TO_CHECK.contains(calleeSymbol.fullyQualifiedName())) {
       extractPatternFromCallExpr(callExpression).ifPresent(pattern -> {
-        checkForEllipsisInParenthesis(ctx, callExpression, pattern);
+        checkForEllipsisInParenthesis(ctx, pattern);
+        checkForUnbalancedParenthesis(ctx, pattern);
       });
     }
+  }
+
+
+  private void checkForUnbalancedParenthesis(SubscriptionContext ctx, EinopsPattern pattern) {
+    hasUnbalancedParenthesis(pattern.lhs())
+      .or(() -> hasUnbalancedParenthesis(pattern.rhs()))
+      .ifPresent(message -> ctx.addIssue(pattern.originalPattern(), String.format(MESSAGE_TEMPLATE, message)));
+
+  }
+
+  private static Optional<String> hasUnbalancedParenthesis(String pattern) {
+    boolean isBalanced = true;
+    for (int i = 0; i < pattern.length(); i++) {
+      char c = pattern.charAt(i);
+      if ('(' == c) {
+        if (!isBalanced) {
+          return Optional.of("nested parenthesis are not allowed");
+        }
+        isBalanced = false;
+        continue;
+      }
+      if (')' == c) {
+        if (isBalanced) {
+          return Optional.of(UNBALANCED_PARENTHESIS_MESSAGE);
+        }
+        isBalanced = true;
+      }
+    }
+    if (!isBalanced) {
+      return Optional.of(UNBALANCED_PARENTHESIS_MESSAGE);
+    }
+    return Optional.empty();
   }
 
   private record EinopsPattern(StringLiteral originalPattern, String lhs, String rhs) {
@@ -60,10 +94,9 @@ public class EinopsSyntaxCheck extends PythonSubscriptionCheck {
 
   private static Pattern ellipsisPattern = Pattern.compile("\\(.*\\.{3}.*\\)");
 
-  private void checkForEllipsisInParenthesis(SubscriptionContext ctx, CallExpression callExpression, EinopsPattern pattern) {
-    var methodName = TreeUtils.nameFromQualifiedOrCallExpression(callExpression);
-    if (methodName.isPresent() && ellipsisPattern.matcher(pattern.lhs).find()) {
-      ctx.addIssue(pattern.originalPattern(), String.format(MESSAGE_TEMPLATE, methodName.get(), "Ellipsis inside parenthesis in the left side is not allowed"));
+  private void checkForEllipsisInParenthesis(SubscriptionContext ctx, EinopsPattern pattern) {
+    if (ellipsisPattern.matcher(pattern.lhs).find()) {
+      ctx.addIssue(pattern.originalPattern(), String.format(MESSAGE_TEMPLATE, "Ellipsis inside parenthesis on the left side is not allowed"));
     }
   }
 
