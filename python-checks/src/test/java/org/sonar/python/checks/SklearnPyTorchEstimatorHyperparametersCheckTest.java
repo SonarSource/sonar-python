@@ -23,11 +23,15 @@ import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 
-class SklearnEstimatorHyperparametersCheckTest {
+class SklearnPyTorchEstimatorHyperparametersCheckTest {
 
   @Test
-  void test(){
-    PythonCheckVerifier.verify("src/test/resources/checks/sklearn_estimator_hyperparameters.py", new SklearnEstimatorHyperparametersCheck());
+  void testSkLearn(){
+    PythonCheckVerifier.verify("src/test/resources/checks/sklearn_estimator_hyperparameters.py", new SklearnPyTorchEstimatorHyperparametersCheck());
   }
 
+  @Test
+  void testPyTorch(){
+    PythonCheckVerifier.verify("src/test/resources/checks/pytorch_estimator_hyperparameters.py", new SklearnPyTorchEstimatorHyperparametersCheck());
+  }
 }

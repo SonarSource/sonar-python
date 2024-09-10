@@ -16,7 +16,8 @@ from sklearn.experimental import enable_halving_search_cv
 from sklearn.model_selection import GridSearchCV, HalvingGridSearchCV,HalvingRandomSearchCV, RandomizedSearchCV
 
 def non_compliant():
-    AdaBoostClassifier(n_estimators=100, algorithm="SAMME", random_state=0) # Noncompliant  {{Specify important hyperparameters when instantiating a Scikit-learn estimator.}}
+    AdaBoostClassifier(n_estimators=100, algorithm="SAMME", random_state=0) # Noncompliant  {{Add the missing hyperparameter learning_rate for this Scikit-learn estimator.}}
+   #^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     AdaBoostRegressor(random_state=0, n_estimators=100) # Noncompliant
     GradientBoostingClassifier( max_depth=1, random_state=0) # Noncompliant
     GradientBoostingRegressor( max_depth=1, random_state=0) # Noncompliant
@@ -34,7 +35,7 @@ def non_compliant():
     SVC() # Noncompliant
     SVC(random_state=42) # Noncompliant
     SVC(C=1) # Noncompliant
-    SVR() # Noncompliant
+    SVR() # Noncompliant {{Add the missing hyperparameters C, kernel and gamma for this Scikit-learn estimator.}}
     SVR(C=1.2, kernel="poly") # Noncompliant
     NuSVC() # Noncompliant
     NuSVR(gamma="scale", kernel="poly") # Noncompliant
