@@ -271,7 +271,7 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
 
   private FunctionType buildFunctionType(FunctionDef functionDef) {
     FunctionTypeBuilder functionTypeBuilder = new FunctionTypeBuilder()
-      .fromFunctionDef(functionDef)
+      .fromFunctionDef(functionDef, fileId)
       .withDefinitionLocation(locationInFile(functionDef.name(), fileId));
     ClassType owner = null;
     if (currentType() instanceof ClassType classType) {
