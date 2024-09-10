@@ -220,7 +220,7 @@ public class TypeCheckBuilder {
           result.add(PythonType.UNKNOWN);
           queue.clear();
         } else if (currentType instanceof ClassType classType) {
-          queue.addAll(classType.superClasses());
+          queue.addAll(classType.superClasses().stream().map(TypeWrapper::type).toList());
         }
       }
       return result;

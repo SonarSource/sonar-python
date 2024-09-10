@@ -43,6 +43,7 @@ public class TypesTestUtils {
   public static final PythonType DICT_TYPE = BUILTINS.resolveMember("dict").get();
   public static final PythonType NONE_TYPE = BUILTINS.resolveMember("NoneType").get();
   public static final PythonType TYPE_TYPE = BUILTINS.resolveMember("type").get();
+  public static final PythonType EXCEPTION_TYPE = BUILTINS.resolveMember("Exception").get();
 
   public static FileInput parseAndInferTypes(String... code) {
     return parseAndInferTypes(PythonTestUtils.pythonFile(""), code);

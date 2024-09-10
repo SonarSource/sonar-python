@@ -27,6 +27,8 @@ import java.util.Set;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.LocationInFile;
 import org.sonar.python.types.v2.ClassType;
+import org.sonar.python.types.v2.LazyTypeWrapper;
+import org.sonar.python.types.v2.TypeWrapper;
 import org.sonar.python.types.v2.Member;
 import org.sonar.python.types.v2.PythonType;
 
@@ -36,7 +38,7 @@ public class ClassTypeBuilder implements TypeBuilder<ClassType> {
   String name;
   Set<Member> members = new HashSet<>();
   List<PythonType> attributes = new ArrayList<>();
-  List<PythonType> superClasses = new ArrayList<>();
+  List<TypeWrapper> superClasses = new ArrayList<>();
   List<PythonType> metaClasses = new ArrayList<>();
   boolean hasDecorators = false;
   LocationInFile definitionLocation;
@@ -62,12 +64,17 @@ public class ClassTypeBuilder implements TypeBuilder<ClassType> {
     return this;
   }
 
-  public List<PythonType> superClasses() {
+  public List<TypeWrapper> superClasses() {
     return superClasses;
   }
 
+  public ClassTypeBuilder addSuperClass(PythonType type) {
+    superClasses.add(new LazyTypeWrapper(type));
+    return this;
+  }
+
   public ClassTypeBuilder withSuperClasses(PythonType... types) {
-    superClasses.addAll(Arrays.asList(types));
+    Arrays.stream(types).forEach(this::addSuperClass);
     return this;
   }
 
