@@ -22,7 +22,6 @@ package org.sonar.python.checks;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
-
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
@@ -37,7 +36,8 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.cfg.fixpoint.ReachingDefinitionsAnalysis;
 import org.sonar.python.quickfix.TextEditUtils;
 import org.sonar.python.tree.TreeUtils;
-import org.sonar.python.types.InferredTypes;
+import org.sonar.python.types.v2.TriBool;
+import org.sonar.python.types.v2.TypeChecker;
 
 @Rule(key = "S1244")
 public class FloatingPointEqualityCheck extends PythonSubscriptionCheck {
@@ -60,6 +60,7 @@ public class FloatingPointEqualityCheck extends PythonSubscriptionCheck {
   private String importedModuleForIsClose;
   private Name importedAlias;
   private boolean isMathImported = false;
+  private TypeChecker typeChecker;
 
   @Override
   public void initialize(Context context) {
@@ -75,6 +76,7 @@ public class FloatingPointEqualityCheck extends PythonSubscriptionCheck {
     reachingDefinitionsAnalysis = new ReachingDefinitionsAnalysis(ctx.pythonFile());
     importedModuleForIsClose = null;
     importedAlias = null;
+    typeChecker = ctx.typeChecker();
   }
 
   private void checkFloatingPointEquality(SubscriptionContext ctx) {
@@ -95,15 +97,16 @@ public class FloatingPointEqualityCheck extends PythonSubscriptionCheck {
         isBinaryOperationWithFloat(leftOperand) || isBinaryOperationWithFloat(rightOperand);
   }
 
-  private static boolean isFloat(Expression expression) {
-    return expression.is(Tree.Kind.NUMERIC_LITERAL) && expression.type().equals(InferredTypes.FLOAT);
+  private boolean isFloat(Expression expression) {
+    TriBool isTypeFloat = typeChecker.typeCheckBuilder().isBuiltinWithName("float").check(expression.typeV2());
+    return expression.is(Tree.Kind.NUMERIC_LITERAL) && isTypeFloat == TriBool.TRUE;
   }
 
   private boolean isAssignedFloat(Expression expression) {
     if (expression.is(Tree.Kind.NAME)) {
       Set<Expression> values = reachingDefinitionsAnalysis.valuesAtLocation((Name) expression);
       if (!values.isEmpty()) {
-        return values.stream().allMatch(value -> isFloat(value));
+        return values.stream().allMatch(this::isFloat);
       }
     }
     return false;
