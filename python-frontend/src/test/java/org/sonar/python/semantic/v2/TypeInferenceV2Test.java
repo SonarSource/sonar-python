@@ -53,6 +53,7 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.PythonTestUtils;
 import org.sonar.python.semantic.ClassSymbolImpl;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
+import org.sonar.python.tree.ExpressionStatementImpl;
 import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.types.v2.ClassType;
 import org.sonar.python.types.v2.FunctionType;
@@ -595,6 +596,58 @@ class TypeInferenceV2Test {
     assertThat(((FunctionType) functionDef.name().typeV2()).parameters().get(1).declaredType().unwrappedType()).isEqualTo(TUPLE_TYPE);
     assertThat(((FunctionType) functionDef.name().typeV2()).parameters().get(2).declaredType().unwrappedType()).isEqualTo(DICT_TYPE);
   }
+
+  @Test
+  void inferFunctionParameterTypes2() {
+    FileInput root = inferTypes("""
+      class A:
+        def foo():
+          ...
+      class A:
+        def foo(param: int):
+          ...
+      def foo(param: A) -> A:
+        ...
+      """);
+
+    var functionDef = (FunctionDef) root.statements().statements().get(2);
+    assertThat(((FunctionType) functionDef.name().typeV2()).parameters().get(0).declaredType().unwrappedType()).isEqualTo(PythonType.UNKNOWN);
+    assertThat(((FunctionType) functionDef.name().typeV2()).returnType().unwrappedType()).isEqualTo(PythonType.UNKNOWN);
+  }
+
+  @Test
+  void inferFunctionParameterTypes3() {
+    FileInput root = inferTypes("""
+      class A:
+        def foo():
+          ...
+      def foo(param: A) -> A:
+        ...
+      """);
+
+    var functionDef = (FunctionDef) root.statements().statements().get(1);
+    var classType = ((ClassDef) root.statements().statements().get(0)).name().typeV2();
+
+    assertThat(((FunctionType) functionDef.name().typeV2()).parameters().get(0).declaredType().unwrappedType()).isEqualTo(classType);
+    assertThat(((FunctionType) functionDef.name().typeV2()).returnType().unwrappedType()).isEqualTo(classType);
+  }
+
+  @Test
+  void inferFunctionParameterTypes4() {
+    FileInput root = inferTypes("""
+      from re import Pattern
+      Pattern
+      def foo(param: Pattern) -> Pattern:
+        ...
+      """);
+
+    var functionDef = (FunctionDef) root.statements().statements().get(2);
+    var patternType = ((Name) ((ExpressionStatementImpl) root.statements().statements().get(1)).expressions().get(0)).typeV2();
+
+    assertThat(((FunctionType) functionDef.name().typeV2()).parameters().get(0).declaredType().unwrappedType()).isEqualTo(patternType);
+    assertThat(((FunctionType) functionDef.name().typeV2()).returnType().unwrappedType()).isEqualTo(patternType);
+  }
+
 
   @Test
   void inferTypeForReassignedBuiltinsInsideFunction() {
