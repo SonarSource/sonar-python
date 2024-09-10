@@ -195,22 +195,31 @@ public class SklearnPyTorchEstimatorHyperparametersCheck extends PythonSubscript
         .orElse(false);
     }
 
+    private static boolean isSetParamsCalled(CallExpression callExpression) {
+      return Expressions.getAssignedName(callExpression)
+        .map(Name::symbol)
+        .map(Symbol::usages)
+        .map(SkLearnCheck::isUsedWithSetParams)
+        .orElse(false);
+    }
+
+    private static boolean isUsedWithSetParams(List<Usage> usages) {
+      return usages.stream()
+        .map(Usage::tree)
+        .map(Tree::parent)
+        .filter(parent -> parent.is(Tree.Kind.QUALIFIED_EXPR))
+        .map(TreeUtils.toInstanceOfMapper(QualifiedExpression.class))
+        .filter(Objects::nonNull)
+        .map(qExp -> qExp.name().name())
+        .anyMatch("set_params"::equals);
+    }
+
     private static boolean isPartOfPipelineAndSearchCV(CallExpression callExpression) {
       return Expressions.getAssignedName(callExpression)
         .map(SkLearnCheck::isEstimatorUsedInSearchCV)
         .or(() -> getPipelineAssignement(callExpression)
           .map(SkLearnCheck::isEstimatorUsedInSearchCV))
         .orElse(false);
-    }
-
-    private static Optional<Name> getPipelineAssignement(CallExpression callExpression) {
-      return Optional.ofNullable(TreeUtils.firstAncestorOfKind(callExpression, CALL_EXPR))
-        .flatMap(TreeUtils.toOptionalInstanceOfMapper(CallExpression.class))
-        .filter(callExp -> Optional.ofNullable(callExp.calleeSymbol())
-          .map(Symbol::fullyQualifiedName)
-          .map(PIPELINE_FQNS::contains)
-          .orElse(false))
-        .flatMap(Expressions::getAssignedName);
     }
 
     private static boolean isEstimatorUsedInSearchCV(Name estimator) {
@@ -234,23 +243,14 @@ public class SklearnPyTorchEstimatorHyperparametersCheck extends PythonSubscript
         .orElse(false);
     }
 
-    private static boolean isSetParamsCalled(CallExpression callExpression) {
-      return Expressions.getAssignedName(callExpression)
-        .map(Name::symbol)
-        .map(Symbol::usages)
-        .map(SkLearnCheck::isUsedWithSetParams)
-        .orElse(false);
-    }
-
-    private static boolean isUsedWithSetParams(List<Usage> usages) {
-      return usages.stream()
-        .map(Usage::tree)
-        .map(Tree::parent)
-        .filter(parent -> parent.is(Tree.Kind.QUALIFIED_EXPR))
-        .map(TreeUtils.toInstanceOfMapper(QualifiedExpression.class))
-        .filter(Objects::nonNull)
-        .map(qExp -> qExp.name().name())
-        .anyMatch("set_params"::equals);
+    private static Optional<Name> getPipelineAssignement(CallExpression callExpression) {
+      return Optional.ofNullable(TreeUtils.firstAncestorOfKind(callExpression, CALL_EXPR))
+        .flatMap(TreeUtils.toOptionalInstanceOfMapper(CallExpression.class))
+        .filter(callExp -> Optional.ofNullable(callExp.calleeSymbol())
+          .map(Symbol::fullyQualifiedName)
+          .map(PIPELINE_FQNS::contains)
+          .orElse(false))
+        .flatMap(Expressions::getAssignedName);
     }
   }
 }
