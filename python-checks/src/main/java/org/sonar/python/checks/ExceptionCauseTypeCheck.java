@@ -29,11 +29,8 @@ import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RaiseStatement;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
-import org.sonar.plugins.python.api.types.InferredType;
-
-import static org.sonar.plugins.python.api.types.BuiltinTypes.BASE_EXCEPTION;
-import static org.sonar.plugins.python.api.types.BuiltinTypes.NONE_TYPE;
-import static org.sonar.plugins.python.api.types.BuiltinTypes.STR;
+import org.sonar.python.types.v2.PythonType;
+import org.sonar.python.types.v2.TriBool;
 
 @Rule(key = "S5707")
 public class ExceptionCauseTypeCheck extends PythonSubscriptionCheck {
@@ -62,13 +59,10 @@ public class ExceptionCauseTypeCheck extends PythonSubscriptionCheck {
     if (cause == null) {
       return;
     }
-    InferredType causeType = cause.type();
-    if (causeType.canBeOrExtend("type")) {
-      // SONARPY-1666: Here we should only exclude type objects that represent Exception types
-      return;
-    }
-    // TODO remove the test against str once type inference knows the complete hierarchy of str
-    if ((!causeType.canBeOrExtend(BASE_EXCEPTION) && !causeType.canOnlyBe(NONE_TYPE)) || causeType.canOnlyBe(STR)) {
+    PythonType causeType = cause.typeV2();
+    TriBool inheritsFromBaseException = ctx.typeChecker().typeCheckBuilder().isInstanceOf("BaseException").check(causeType);
+    TriBool isNoneType = ctx.typeChecker().typeCheckBuilder().isBuiltinWithName("NoneType").check(causeType);
+    if (inheritsFromBaseException == TriBool.FALSE && isNoneType == TriBool.FALSE) {
       ctx.addIssue(cause, "Replace this expression with an exception or None");
     }
   }
