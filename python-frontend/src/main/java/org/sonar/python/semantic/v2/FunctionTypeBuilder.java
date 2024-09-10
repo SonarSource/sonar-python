@@ -28,6 +28,7 @@ import org.sonar.plugins.python.api.LocationInFile;
 import org.sonar.plugins.python.api.tree.AnyParameter;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.ParameterList;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
@@ -56,7 +57,7 @@ public class FunctionTypeBuilder implements TypeBuilder<FunctionType> {
   private static final String CLASS_METHOD_DECORATOR = "classmethod";
   private static final String STATIC_METHOD_DECORATOR = "staticmethod";
 
-  public FunctionTypeBuilder fromFunctionDef(FunctionDef functionDef) {
+  public FunctionTypeBuilder fromFunctionDef(FunctionDef functionDef, ProjectLevelTypeTable projectLevelTypeTable) {
     this.name = functionDef.name().name();
     this.attributes = new ArrayList<>();
     this.parameters = new ArrayList<>();
@@ -65,7 +66,7 @@ public class FunctionTypeBuilder implements TypeBuilder<FunctionType> {
     isInstanceMethod = isInstanceMethod(functionDef);
     ParameterList parameterList = functionDef.parameters();
     if (parameterList != null) {
-      createParameterNames(parameterList.all(), null);
+      createParameterNames(parameterList.all(), null, projectLevelTypeTable);
     }
     return this;
   }
@@ -141,18 +142,18 @@ public class FunctionTypeBuilder implements TypeBuilder<FunctionType> {
     return this;
   }
 
-  private void createParameterNames(List<AnyParameter> parameterTrees, @Nullable String fileId) {
+  private void createParameterNames(List<AnyParameter> parameterTrees, @Nullable String fileId, ProjectLevelTypeTable projectLevelTypeTable) {
     ParameterState parameterState = new ParameterState();
     parameterState.positionalOnly = parameterTrees.stream().anyMatch(param -> Optional.of(param)
       .filter(p -> p.is(Tree.Kind.PARAMETER))
-      .map(p -> ((org.sonar.plugins.python.api.tree.Parameter) p).starToken())
+      .map(p -> ((Parameter) p).starToken())
       .map(Token::value)
       .filter("/"::equals)
       .isPresent()
     );
     for (AnyParameter anyParameter : parameterTrees) {
       if (anyParameter.is(Tree.Kind.PARAMETER)) {
-        addParameter((org.sonar.plugins.python.api.tree.Parameter) anyParameter, fileId, parameterState);
+        addParameter((Parameter) anyParameter, fileId, parameterState, projectLevelTypeTable);
       } else {
         parameters.add(new ParameterV2(null, PythonType.UNKNOWN, false,
           parameterState.keywordOnly, parameterState.positionalOnly, false, false, locationInFile(anyParameter, fileId)));
@@ -160,11 +161,11 @@ public class FunctionTypeBuilder implements TypeBuilder<FunctionType> {
     }
   }
 
-  private void addParameter(org.sonar.plugins.python.api.tree.Parameter parameter, @Nullable String fileId, ParameterState parameterState) {
+  private void addParameter(Parameter parameter, @Nullable String fileId, ParameterState parameterState, ProjectLevelTypeTable projectLevelTypeTable) {
     Name parameterName = parameter.name();
     Token starToken = parameter.starToken();
     if (parameterName != null) {
-      ParameterType parameterType = getParameterType(parameter);
+      ParameterType parameterType = getParameterType(parameter, projectLevelTypeTable);
       this.parameters.add(new ParameterV2(parameterName.name(), parameterType.pythonType(), parameter.defaultValue() != null,
         parameterState.keywordOnly, parameterState.positionalOnly, parameterType.isKeywordVariadic(), parameterType.isPositionalVariadic(), locationInFile(parameter, fileId)));
       if (starToken != null) {
@@ -183,10 +184,11 @@ public class FunctionTypeBuilder implements TypeBuilder<FunctionType> {
     }
   }
 
-  private ParameterType getParameterType(org.sonar.plugins.python.api.tree.Parameter parameter) {
+  private ParameterType getParameterType(Parameter parameter, ProjectLevelTypeTable projectLevelTypeTable) {
     boolean isPositionalVariadic = false;
     boolean isKeywordVariadic = false;
     Token starToken = parameter.starToken();
+    var parameterType = Optional.ofNullable(parameter.name()).map(Name::typeV2).orElse(PythonType.UNKNOWN);
     if (starToken != null) {
       // https://docs.python.org/3/reference/compound_stmts.html#function-definitions
       hasVariadicParameter = true;
@@ -194,15 +196,16 @@ public class FunctionTypeBuilder implements TypeBuilder<FunctionType> {
         // if the form “*identifier” is present, it is initialized to a tuple receiving any excess positional parameters
         isPositionalVariadic = true;
         // Should set PythonType to TUPLE
+        parameterType = projectLevelTypeTable.getBuiltinsModule().resolveMember("tuple").orElse(PythonType.UNKNOWN);
       }
       if ("**".equals(starToken.value())) {
         //  If the form “**identifier” is present, it is initialized to a new ordered mapping receiving any excess keyword arguments
         isKeywordVariadic = true;
         // Should set PythonType to DICT
+        parameterType = projectLevelTypeTable.getBuiltinsModule().resolveMember("dict").orElse(PythonType.UNKNOWN);
       }
     }
-    // TODO: SONARPY-1773 handle parameter declared types
-    return new ParameterType(PythonType.UNKNOWN, isKeywordVariadic, isPositionalVariadic);
+    return new ParameterType(parameterType, isKeywordVariadic, isPositionalVariadic);
   }
 
   public static class ParameterState {

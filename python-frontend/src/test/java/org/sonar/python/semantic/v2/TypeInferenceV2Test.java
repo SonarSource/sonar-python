@@ -366,9 +366,11 @@ class TypeInferenceV2Test {
       """);
 
     var functionDef = (FunctionDef) root.statements().statements().get(0);
-    var lastExpressionStatement = (ExpressionStatement) functionDef.body().statements().get(functionDef.body().statements().size() -1);
-    Assertions.assertThat(lastExpressionStatement.expressions().get(0).typeV2().unwrappedType()).isEqualTo(INT_TYPE);
-    Assertions.assertThat(lastExpressionStatement.expressions().get(0).typeV2().typeSource()).isEqualTo(TypeSource.TYPE_HINT);
+    var lastExpressionStatement = (ExpressionStatement) functionDef.body().statements().get(functionDef.body().statements().size() - 1);
+    assertThat(lastExpressionStatement.expressions().get(0).typeV2().unwrappedType()).isEqualTo(INT_TYPE);
+    assertThat(lastExpressionStatement.expressions().get(0).typeV2().typeSource()).isEqualTo(TypeSource.TYPE_HINT);
+
+    assertThat(((FunctionType) functionDef.name().typeV2()).parameters().get(0).declaredType().unwrappedType()).isEqualTo(INT_TYPE);
   }
 
   @Test
@@ -579,6 +581,19 @@ class TypeInferenceV2Test {
     var lastType = lastExpressionStatement.expressions().get(0).typeV2();
 
     Assertions.assertThat(lastType.unwrappedType()).isEqualTo(INT_TYPE);
+  }
+
+  @Test
+  void inferFunctionParameterTypes() {
+    FileInput root = inferTypes("""
+      def foo(param: int, *args, **kwargs):
+        ...
+      """);
+
+    var functionDef = (FunctionDef) root.statements().statements().get(0);
+    assertThat(((FunctionType) functionDef.name().typeV2()).parameters().get(0).declaredType().unwrappedType()).isEqualTo(INT_TYPE);
+    assertThat(((FunctionType) functionDef.name().typeV2()).parameters().get(1).declaredType().unwrappedType()).isEqualTo(TUPLE_TYPE);
+    assertThat(((FunctionType) functionDef.name().typeV2()).parameters().get(2).declaredType().unwrappedType()).isEqualTo(DICT_TYPE);
   }
 
   @Test
