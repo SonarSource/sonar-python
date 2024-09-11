@@ -25,7 +25,6 @@ import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.CallExpression;
-import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.UnpackingExpression;
 import org.sonar.python.tree.TreeUtils;
@@ -44,20 +43,19 @@ public class PyTorchDataLoaderNumWorkersCheck extends PythonSubscriptionCheck {
       Symbol calleeSymbol = callExpression.calleeSymbol();
       List<Argument> arguments = callExpression.arguments();
       if (calleeSymbol != null && TORCH_UTILS_DATA_DATA_LOADER.equals(calleeSymbol.fullyQualifiedName())
-        && checkIfNumWorkersArgIsPresent(arguments)
-        && !checkIfUnpackArgIsPresent(arguments)) {
+        && isNumWorkersArgPresent(arguments)
+        && !isUnpackArgPresent(arguments)) {
 
         ctx.addIssue(callExpression.callee(), MESSAGE);
       }
     });
   }
 
-  private static boolean checkIfNumWorkersArgIsPresent(List<Argument> arguments) {
-    RegularArgument numWorkersArg = TreeUtils.nthArgumentOrKeyword(NUM_WORKERS_ARG_POSITION, NUM_WORKERS_ARG_NAME, arguments);
-    return numWorkersArg == null;
+  private static boolean isNumWorkersArgPresent(List<Argument> arguments) {
+    return TreeUtils.nthArgumentOrKeyword(NUM_WORKERS_ARG_POSITION, NUM_WORKERS_ARG_NAME, arguments) == null;
   }
 
-  private static boolean checkIfUnpackArgIsPresent(List<Argument> arguments) {
+  private static boolean isUnpackArgPresent(List<Argument> arguments) {
     return arguments.stream().anyMatch(UnpackingExpression.class::isInstance);
   }
 }
