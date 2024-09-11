@@ -21,6 +21,7 @@ package org.sonar.python.checks;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
@@ -29,6 +30,7 @@ import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
 import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.quickfix.TextEditUtils;
@@ -84,7 +86,7 @@ public class TfPyTorchSpecifyReductionAxisCheck extends PythonSubscriptionCheck 
   private static void checkCallExpr(SubscriptionContext context) {
     CallExpression callExpression = (CallExpression) context.syntaxNode();
     Symbol symbol = callExpression.calleeSymbol();
-    if (symbol != null) {
+    if (symbol != null && !hasUnpackArgument(callExpression.arguments())) {
       if (isTfReductionMissingAxisArg(symbol, callExpression)) {
         PreciseIssue issue = context.addIssue(callExpression.callee(), TF_MESSAGE);
         createTfQuickFix(callExpression).ifPresent(issue::addQuickFix);
@@ -94,6 +96,10 @@ public class TfPyTorchSpecifyReductionAxisCheck extends PythonSubscriptionCheck 
         context.addIssue(callExpression.callee(), PY_TORCH_MESSAGE);
       }
     }
+  }
+
+  private static boolean hasUnpackArgument(List<Argument> arguments) {
+    return arguments.stream().anyMatch(argument -> argument.is(Tree.Kind.UNPACKING_EXPR));
   }
 
   private static Optional<PythonQuickFix> createTfQuickFix(CallExpression callExpression) {

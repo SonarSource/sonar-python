@@ -3,8 +3,8 @@ import torch
 def argmin(input, dict_args):
     torch.argmin(input) # Noncompliant {{Provide a value for the dim argument.}}
    #^^^^^^^^^^^^
-    torch.argmin(**dict_args) # Noncompliant
 
+    torch.argmin(**dict_args)
     torch.argmin(input, 2)
     torch.argmin(input, dim=2)
 

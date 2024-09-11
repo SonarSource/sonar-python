@@ -5,6 +5,10 @@ x = tf.constant([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
 tf.reduce_sum(x, axis=0)
 tf.reduce_sum(x, 0)
 tf.reduce_sum(x) # Noncompliant
+tf.reduce_sum(x, **some_dict)
+tf.reduce_sum(x, **{})
+tf.reduce_sum(x, *some_list)
+tf.reduce_sum(x, *[])
 tf.reduce_sum(x, keepdims=True, axis=0)
 
 tf.reduce_mean(x, axis=0)
