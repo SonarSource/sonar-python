@@ -22,13 +22,16 @@ package org.sonar.python.checks;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
+import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.quickfix.TextEditUtils;
 import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S6929")
@@ -83,13 +86,21 @@ public class TfPyTorchSpecifyReductionAxisCheck extends PythonSubscriptionCheck 
     Symbol symbol = callExpression.calleeSymbol();
     if (symbol != null) {
       if (isTfReductionMissingAxisArg(symbol, callExpression)) {
-        context.addIssue(callExpression.callee(), TF_MESSAGE);
+        PreciseIssue issue = context.addIssue(callExpression.callee(), TF_MESSAGE);
+        createTfQuickFix(callExpression).ifPresent(issue::addQuickFix);
       }
 
       if (isPyTorchReductionMissingDimArg(symbol, callExpression)) {
         context.addIssue(callExpression.callee(), PY_TORCH_MESSAGE);
       }
     }
+  }
+
+  private static Optional<PythonQuickFix> createTfQuickFix(CallExpression callExpression) {
+    if(callExpression.arguments().isEmpty()) {
+      return Optional.empty();
+    }
+    return Optional.of(PythonQuickFix.newQuickFix("Add axis parameter", TextEditUtils.insertBefore(callExpression.rightPar(), ", axis=None")));
   }
 
   private static boolean isTfReductionMissingAxisArg(Symbol symbol, CallExpression callExpression) {

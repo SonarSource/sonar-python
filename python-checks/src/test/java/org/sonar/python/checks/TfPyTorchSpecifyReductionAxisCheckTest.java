@@ -20,12 +20,42 @@
 package org.sonar.python.checks;
 
 import org.junit.jupiter.api.Test;
+import org.sonar.python.checks.quickfix.PythonQuickFixVerifier;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 class TfPyTorchSpecifyReductionAxisCheckTest {
   @Test
   void testTensorFlow() {
     PythonCheckVerifier.verify("src/test/resources/checks/tfSpecifyReductionAxis.py", new TfPyTorchSpecifyReductionAxisCheck());
+  }
+
+  @Test
+  void testTensorFlowQuickFix() {
+    PythonQuickFixVerifier.verify(new TfPyTorchSpecifyReductionAxisCheck(),
+      """
+        from tensorflow import math
+        math.reduce_all(input)
+        """,
+      """
+        from tensorflow import math
+        math.reduce_all(input, axis=None)
+        """);
+
+    PythonQuickFixVerifier.verify(new TfPyTorchSpecifyReductionAxisCheck(),
+      """
+        from tensorflow import math
+        math.reduce_all(input, keepdims=True)
+        """,
+      """
+        from tensorflow import math
+        math.reduce_all(input, keepdims=True, axis=None)
+        """);
+
+    PythonQuickFixVerifier.verifyNoQuickFixes(new TfPyTorchSpecifyReductionAxisCheck(),
+        """
+        from tensorflow import math
+        math.reduce_all()
+        """);
   }
 
   @Test
