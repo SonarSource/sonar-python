@@ -429,6 +429,10 @@ public class FunctionSymbolImpl extends SymbolImpl implements FunctionSymbol {
       this.declaredType = type;
     }
 
+    public SymbolsProtos.Type getProtobufType() {
+      return protobufType;
+    }
+
     @CheckForNull
     public String annotatedTypeName() {
       return annotatedTypeName;

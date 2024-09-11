@@ -30,6 +30,7 @@ import java.util.Set;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.symbols.AmbiguousSymbol;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
@@ -119,7 +120,7 @@ public class SymbolsModuleTypeProvider {
 
     var parameters = symbol.parameters()
       .stream()
-      .map(SymbolsModuleTypeProvider::convertParameter)
+      .map(this::convertParameter)
       .toList();
 
     var returnType = getReturnTypeFromSymbol(symbol);
@@ -207,9 +208,11 @@ public class SymbolsModuleTypeProvider {
     return classType;
   }
 
-  private static ParameterV2 convertParameter(FunctionSymbol.Parameter parameter) {
+  private ParameterV2 convertParameter(FunctionSymbol.Parameter parameter) {
+    String parameterTypeFqn = getParameterFqn(parameter);
+    var parameterType = parameterTypeFqn == null ? PythonType.UNKNOWN : lazyTypesContext.getOrCreateLazyType(parameterTypeFqn);
     return new ParameterV2(parameter.name(),
-      PythonType.UNKNOWN,
+      parameterType,
       parameter.hasDefaultValue(),
       parameter.isKeywordOnly(),
       parameter.isPositionalOnly(),
@@ -238,11 +241,25 @@ public class SymbolsModuleTypeProvider {
       return List.of(symbol.annotatedReturnTypeName());
     }
 
-    if (symbol instanceof FunctionSymbolImpl functionSymbol){
+    if (symbol instanceof FunctionSymbolImpl functionSymbol && functionSymbol.protobufReturnType() != null){
       var protoReturnType = functionSymbol.protobufReturnType();
       return getSymbolTypeFqn(protoReturnType);
     }
-  return List.of();
+    return List.of();
+  }
+
+  @CheckForNull
+  private String getParameterFqn(FunctionSymbol.Parameter parameter) {
+    if (parameter instanceof FunctionSymbolImpl.ParameterImpl parameterImpl) {
+      if (parameterImpl.annotatedTypeName() != null) {
+        return parameterImpl.annotatedTypeName();
+      } else if (parameterImpl.getProtobufType() != null) {
+        var protoType = parameterImpl.getProtobufType();
+        return protoType.getFullyQualifiedName();
+      }
+    }
+
+    return null;
   }
 
   private List<String> getSymbolTypeFqn(SymbolsProtos.Type type) {

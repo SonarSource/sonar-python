@@ -232,6 +232,22 @@ class TypeInferenceV2Test {
   }
 
   @Test
+  void parameterTypeFromTypeshed() {
+    FileInput root = inferTypes("""
+      from time import sleep 
+      sleep
+      """);
+
+    var sleep = (Name) ((ExpressionStatement) root.statements().statements().get(1)).expressions().get(0);
+    var sleepType = sleep.typeV2();
+    assertThat(sleepType)
+      .isInstanceOf(FunctionType.class)
+      .extracting(PythonType::name)
+      .isEqualTo("sleep");
+
+  }
+
+  @Test
   void simpleFunctionDef() {
     FileInput root = inferTypes("""
       def foo(a, b, c): ...
