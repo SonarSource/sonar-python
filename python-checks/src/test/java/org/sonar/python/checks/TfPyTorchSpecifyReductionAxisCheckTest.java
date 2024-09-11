@@ -22,9 +22,14 @@ package org.sonar.python.checks;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-class TfSpecifyReductionAxisCheckTest {
+class TfPyTorchSpecifyReductionAxisCheckTest {
   @Test
-  void test() {
-    PythonCheckVerifier.verify("src/test/resources/checks/tfSpecifyReductionAxis.py", new TfSpecifyReductionAxisCheck());
+  void testTensorFlow() {
+    PythonCheckVerifier.verify("src/test/resources/checks/tfSpecifyReductionAxis.py", new TfPyTorchSpecifyReductionAxisCheck());
+  }
+
+  @Test
+  void testPyTorch() {
+    PythonCheckVerifier.verify("src/test/resources/checks/pyTorchSpecifyReductionDim.py", new TfPyTorchSpecifyReductionAxisCheck());
   }
 }
