@@ -111,20 +111,20 @@ public class SklearnPyTorchEstimatorHyperparametersCheck extends PythonSubscript
     public static final String WEIGHT_DECAY = "weight_decay";
 
     private static final Map<String, List<Param>> PY_TORCH_ESTIMATORS_AND_PARAMETERS_TO_CHECK = Map.ofEntries(
-      Map.entry("torch.utils.data.DataLoader", List.of(new Param("batch_size"))),
-      Map.entry("torch.optim.Adadelta", List.of(new Param(LR), new Param(WEIGHT_DECAY))),
-      Map.entry("torch.optim.Adagrad", List.of(new Param(LR), new Param(WEIGHT_DECAY))),
-      Map.entry("torch.optim.Adam", List.of(new Param(LR), new Param(WEIGHT_DECAY))),
-      Map.entry("torch.optim.AdamW", List.of(new Param(LR), new Param(WEIGHT_DECAY))),
-      Map.entry("torch.optim.SparseAdam", List.of(new Param(LR))),
-      Map.entry("torch.optim.Adamax", List.of(new Param(LR), new Param(WEIGHT_DECAY))),
-      Map.entry("torch.optim.ASGD", List.of(new Param(LR), new Param(WEIGHT_DECAY))),
-      Map.entry("torch.optim.LBFGS", List.of(new Param(LR))),
-      Map.entry("torch.optim.NAdam", List.of(new Param(LR), new Param(WEIGHT_DECAY), new Param("momentum_decay"))),
-      Map.entry("torch.optim.RAdam", List.of(new Param(LR), new Param(WEIGHT_DECAY))),
-      Map.entry("torch.optim.RMSprop", List.of(new Param(LR), new Param(WEIGHT_DECAY), new Param("momentum"))),
-      Map.entry("torch.optim.Rprop", List.of(new Param(LR))),
-      Map.entry("torch.optim.SGD", List.of(new Param(LR), new Param(WEIGHT_DECAY), new Param("momentum")))
+      Map.entry("torch.utils.data.DataLoader", List.of(new Param("batch_size", 1))),
+      Map.entry("torch.optim.Adadelta", List.of(new Param(LR, 1), new Param(WEIGHT_DECAY, 4))),
+      Map.entry("torch.optim.Adagrad", List.of(new Param(LR, 1), new Param(WEIGHT_DECAY, 3))),
+      Map.entry("torch.optim.Adam", List.of(new Param(LR, 1), new Param(WEIGHT_DECAY, 4))),
+      Map.entry("torch.optim.AdamW", List.of(new Param(LR, 1), new Param(WEIGHT_DECAY, 4))),
+      Map.entry("torch.optim.SparseAdam", List.of(new Param(LR, 1))),
+      Map.entry("torch.optim.Adamax", List.of(new Param(LR, 1), new Param(WEIGHT_DECAY, 4))),
+      Map.entry("torch.optim.ASGD", List.of(new Param(LR, 1), new Param(WEIGHT_DECAY, 5))),
+      Map.entry("torch.optim.LBFGS", List.of(new Param(LR, 1))),
+      Map.entry("torch.optim.NAdam", List.of(new Param(LR, 1), new Param(WEIGHT_DECAY, 4), new Param("momentum_decay", 5))),
+      Map.entry("torch.optim.RAdam", List.of(new Param(LR, 1), new Param(WEIGHT_DECAY, 4))),
+      Map.entry("torch.optim.RMSprop", List.of(new Param(LR, 1), new Param(WEIGHT_DECAY, 4), new Param("momentum", 5))),
+      Map.entry("torch.optim.Rprop", List.of(new Param(LR, 1))),
+      Map.entry("torch.optim.SGD", List.of(new Param(LR, 1), new Param("momentum", 2), new Param(WEIGHT_DECAY, 4)))
     );
 
     public static Optional<List<Param>> getMissingParameters(String name, CallExpression callExpression) {
