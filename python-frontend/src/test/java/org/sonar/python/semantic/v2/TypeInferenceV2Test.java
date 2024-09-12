@@ -58,13 +58,13 @@ import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.types.v2.ClassType;
 import org.sonar.python.types.v2.FunctionType;
 import org.sonar.python.types.v2.LazyType;
-import org.sonar.python.types.v2.TypeWrapper;
 import org.sonar.python.types.v2.ModuleType;
 import org.sonar.python.types.v2.ObjectType;
 import org.sonar.python.types.v2.ParameterV2;
 import org.sonar.python.types.v2.PythonType;
 import org.sonar.python.types.v2.TypeOrigin;
 import org.sonar.python.types.v2.TypeSource;
+import org.sonar.python.types.v2.TypeWrapper;
 import org.sonar.python.types.v2.UnionType;
 import org.sonar.python.types.v2.UnknownType;
 
@@ -433,7 +433,7 @@ class TypeInferenceV2Test {
 
     CallExpression callExpressionSpy = Mockito.spy(callExpression);
     Expression calleeSpy = Mockito.spy(callExpression.callee());
-    FunctionType functionType = new FunctionType("foo", List.of(), List.of(), INT_TYPE, TypeOrigin.STUB, false, false, false, false, null, null);
+    FunctionType functionType = new FunctionType("foo", List.of(), List.of(), new ObjectType(INT_TYPE), TypeOrigin.STUB, false, false, false, false, null, null);
     Mockito.when(calleeSpy.typeV2()).thenReturn(functionType);
     Mockito.when(callExpressionSpy.callee()).thenReturn(calleeSpy);
 
@@ -453,7 +453,7 @@ class TypeInferenceV2Test {
 
     var functionDef = (FunctionDef) root.statements().statements().get(0);
     var lastExpressionStatement = (ExpressionStatement) functionDef.body().statements().get(functionDef.body().statements().size() -1);
-    Assertions.assertThat(lastExpressionStatement.expressions().get(0).typeV2().unwrappedType()).isEqualTo(STR_TYPE);
+    assertThat(lastExpressionStatement.expressions().get(0).typeV2().unwrappedType()).isEqualTo(STR_TYPE);
   }
 
   @Test
@@ -1946,12 +1946,12 @@ class TypeInferenceV2Test {
     UnionType acosType = (UnionType) ((ExpressionStatement) fileInput.statements().statements().get(1)).expressions().get(0).typeV2();
     assertThat(acosType.candidates()).allMatch(p -> p instanceof FunctionType);
     assertThat(acosType.candidates()).extracting(PythonType::name).containsExactly("acos", "acos");
-    assertThat(acosType.candidates()).map(FunctionType.class::cast).extracting(FunctionType::returnType).containsExactly(FLOAT_TYPE, FLOAT_TYPE);
+    assertThat(acosType.candidates()).map(FunctionType.class::cast).extracting(FunctionType::returnType).extracting(PythonType::unwrappedType).containsExactly(FLOAT_TYPE, FLOAT_TYPE);
 
     UnionType atanType = (UnionType) ((ExpressionStatement) fileInput.statements().statements().get(2)).expressions().get(0).typeV2();
     assertThat(atanType.candidates()).allMatch(p -> p instanceof FunctionType);
     assertThat(atanType.candidates()).extracting(PythonType::name).containsExactly("atan", "atan");
-    assertThat(atanType.candidates()).map(FunctionType.class::cast).extracting(FunctionType::returnType).containsExactly(FLOAT_TYPE, FLOAT_TYPE);
+    assertThat(atanType.candidates()).map(FunctionType.class::cast).extracting(FunctionType::returnType).extracting(PythonType::unwrappedType).containsExactly(FLOAT_TYPE, FLOAT_TYPE);
   }
 
   @Test
@@ -1972,11 +1972,11 @@ class TypeInferenceV2Test {
       .get();
     UnionType acosType1 = (UnionType) acosExpr1.typeV2();
     assertThat(acosType1.candidates()).allMatch(p -> p instanceof FunctionType);
-    assertThat(acosType1.candidates()).map(FunctionType.class::cast).extracting(FunctionType::returnType).containsExactly(FLOAT_TYPE, FLOAT_TYPE);
+    assertThat(acosType1.candidates()).map(FunctionType.class::cast).extracting(FunctionType::returnType).extracting(PythonType::unwrappedType).containsExactly(FLOAT_TYPE, FLOAT_TYPE);
 
     UnionType acosType2 = (UnionType) ((ExpressionStatement) fileInput.statements().statements().get(1)).expressions().get(0).typeV2();
     assertThat(acosType2.candidates()).allMatch(p -> p instanceof FunctionType);
-    assertThat(acosType2.candidates()).map(FunctionType.class::cast).extracting(FunctionType::returnType).containsExactly(FLOAT_TYPE, FLOAT_TYPE);
+    assertThat(acosType2.candidates()).map(FunctionType.class::cast).extracting(FunctionType::returnType).extracting(PythonType::unwrappedType).containsExactly(FLOAT_TYPE, FLOAT_TYPE);
   }
 
   @Test
@@ -2061,9 +2061,9 @@ class TypeInferenceV2Test {
       .map(ClassType.class::cast)
       .get();
 
-    assertThat(((ExpressionStatement) fileInput.statements().statements().get(6)).expressions().get(0).typeV2()).isInstanceOf(ObjectType.class);
-    UnionType unionType = (UnionType) ((ExpressionStatement) fileInput.statements().statements().get(6)).expressions().get(0).typeV2().unwrappedType();
-    assertThat(unionType.candidates()).containsExactlyInAnyOrder(classA, classB);
+    assertThat(((ExpressionStatement) fileInput.statements().statements().get(6)).expressions().get(0).typeV2()).isInstanceOf(UnionType.class);
+    UnionType unionType = (UnionType) ((ExpressionStatement) fileInput.statements().statements().get(6)).expressions().get(0).typeV2();
+    assertThat(unionType.candidates()).extracting(PythonType::unwrappedType).containsExactlyInAnyOrder(classA, classB);
   }
 
   @Test
@@ -2190,7 +2190,7 @@ class TypeInferenceV2Test {
       """);
     FunctionType functionType = ((FunctionType) ((ExpressionStatement) fileInput.statements().statements().get(1)).expressions().get(0).typeV2());
     PythonType returnType = functionType.returnType();
-    assertThat(returnType).isInstanceOf(ClassType.class);
+    assertThat(returnType.unwrappedType()).isInstanceOf(ClassType.class);
     assertThatThrownBy(() -> functionType.resolveLazyReturnType(PythonType.UNKNOWN))
       .isInstanceOf(IllegalStateException.class)
       .hasMessage("Trying to resolve an already resolved lazy type.");
@@ -2406,10 +2406,9 @@ class TypeInferenceV2Test {
     var bType = ((ExpressionStatement) statements.get(statements.size() - 2)).expressions().get(0).typeV2();
     var cType = ((ExpressionStatement) statements.get(statements.size() - 1)).expressions().get(0).typeV2();
 
-    Assertions.assertThat(aType).isInstanceOf(ObjectType.class);
+    Assertions.assertThat(aType).isInstanceOf(UnionType.class);
     Assertions.assertThat(aType.unwrappedType()).isInstanceOf(UnionType.class);
-    var candidates = ((UnionType) aType.unwrappedType()).candidates();
-    Assertions.assertThat(candidates).containsOnly(INT_TYPE, STR_TYPE);
+    Assertions.assertThat(((UnionType) aType).candidates()).extracting(PythonType::unwrappedType).containsOnly(INT_TYPE, STR_TYPE);
 
     Assertions.assertThat(bType).isSameAs(PythonType.UNKNOWN);
     Assertions.assertThat(cType).isSameAs(PythonType.UNKNOWN);

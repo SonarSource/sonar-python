@@ -152,7 +152,7 @@ class FunctionTypeTest {
   @Test
   void declared_return_type() {
     FunctionType functionType = functionType("def fn() -> int: ...");
-    assertThat(functionType.returnType()).isEqualTo(INT_TYPE);
+    assertThat(functionType.returnType().unwrappedType()).isEqualTo(INT_TYPE);
     functionType = functionType("def fn() -> unknown: ...");
     assertThat(functionType.returnType()).isEqualTo(PythonType.UNKNOWN);
   }
