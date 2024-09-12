@@ -27,10 +27,29 @@ import org.sonar.api.Beta;
 import org.sonar.plugins.python.api.LocationInFile;
 
 @Beta
-public record ObjectType(PythonType type, List<PythonType> attributes, List<Member> members, TypeSource typeSource) implements PythonType {
+public final class ObjectType implements PythonType {
+  private final TypeWrapper typeWrapper;
+  private final List<PythonType> attributes;
+  private final List<Member> members;
+  private final TypeSource typeSource;
+
+  public ObjectType(TypeWrapper typeWrapper, List<PythonType> attributes, List<Member> members, TypeSource typeSource) {
+    this.typeWrapper = typeWrapper;
+    this.attributes = attributes;
+    this.members = members;
+    this.typeSource = typeSource;
+  }
+
+  public ObjectType(PythonType type, List<PythonType> attributes, List<Member> members, TypeSource typeSource) {
+    this(new SimpleTypeWrapper(type), attributes, members, typeSource);
+  }
 
   public ObjectType(PythonType type) {
     this(type, TypeSource.EXACT);
+  }
+
+  public ObjectType(TypeWrapper typeWrapper) {
+    this(typeWrapper, new ArrayList<>(), new ArrayList<>(), TypeSource.EXACT);
   }
 
   public ObjectType(PythonType type, TypeSource typeSource) {
@@ -43,17 +62,17 @@ public record ObjectType(PythonType type, List<PythonType> attributes, List<Memb
 
   @Override
   public Optional<String> displayName() {
-    return type.instanceDisplayName();
+    return typeWrapper.type().instanceDisplayName();
   }
 
   @Override
   public boolean isCompatibleWith(PythonType another) {
-    return this.type.isCompatibleWith(another);
+    return this.typeWrapper.type().isCompatibleWith(another);
   }
 
   @Override
   public PythonType unwrappedType() {
-    return this.type;
+    return this.typeWrapper.type();
   }
 
   @Override
@@ -62,7 +81,7 @@ public record ObjectType(PythonType type, List<PythonType> attributes, List<Memb
       .filter(member -> Objects.equals(member.name(), memberName))
       .map(Member::type)
       .findFirst()
-      .or(() -> type.resolveMember(memberName));
+      .or(() -> typeWrapper.type().resolveMember(memberName));
   }
 
   @Override
@@ -70,7 +89,7 @@ public record ObjectType(PythonType type, List<PythonType> attributes, List<Memb
     if (resolveMember(memberName).isPresent()) {
       return TriBool.TRUE;
     }
-    if (type instanceof ClassType classType) {
+    if (typeWrapper.type() instanceof ClassType classType) {
       return classType.instancesHaveMember(memberName);
     }
     return TriBool.UNKNOWN;
@@ -78,7 +97,7 @@ public record ObjectType(PythonType type, List<PythonType> attributes, List<Memb
 
   @Override
   public Optional<LocationInFile> definitionLocation() {
-    return type.definitionLocation();
+    return typeWrapper.type().definitionLocation();
   }
 
   @Override
@@ -90,13 +109,44 @@ public record ObjectType(PythonType type, List<PythonType> attributes, List<Memb
     List<String> otherMembersNames = that.members.stream().map(Member::name).toList();
     List<String> attributesNames = attributes.stream().map(PythonType::key).toList();
     List<String> otherAttributesNames = that.attributes.stream().map(PythonType::key).toList();
-    return Objects.equals(type, that.type) && Objects.equals(membersNames, otherMembersNames) && Objects.equals(attributesNames, otherAttributesNames);
+    return Objects.equals(typeWrapper, that.typeWrapper) && Objects.equals(membersNames, otherMembersNames) && Objects.equals(attributesNames, otherAttributesNames);
   }
 
   @Override
   public int hashCode() {
     List<String> membersNames = members.stream().map(Member::name).toList();
     List<String> attributesNames = attributes.stream().map(PythonType::key).toList();
-    return Objects.hash(type, attributesNames, membersNames);
+    return Objects.hash(typeWrapper, attributesNames, membersNames);
   }
+
+  public PythonType type() {
+    return typeWrapper.type();
+  }
+
+  public TypeWrapper typeWrapper() {
+    return typeWrapper;
+  }
+
+  public List<PythonType> attributes() {
+    return attributes;
+  }
+
+  public List<Member> members() {
+    return members;
+  }
+
+  @Override
+  public TypeSource typeSource() {
+    return typeSource;
+  }
+
+  @Override
+  public String toString() {
+    return "ObjectType[" +
+      "type=" + typeWrapper + ", " +
+      "attributes=" + attributes + ", " +
+      "members=" + members + ", " +
+      "typeSource=" + typeSource + ']';
+  }
+
 }
