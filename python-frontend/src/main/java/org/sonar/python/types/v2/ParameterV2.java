@@ -26,7 +26,7 @@ import org.sonar.plugins.python.api.LocationInFile;
 @Beta
 public record ParameterV2(
   @Nullable String name,
-  PythonType declaredType,
+  TypeWrapper declaredType,
   boolean hasDefaultValue,
   boolean isKeywordOnly,
   boolean isPositionalOnly,

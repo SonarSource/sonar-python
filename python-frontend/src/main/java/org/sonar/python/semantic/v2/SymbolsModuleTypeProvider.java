@@ -48,6 +48,7 @@ import org.sonar.python.types.v2.Member;
 import org.sonar.python.types.v2.ModuleType;
 import org.sonar.python.types.v2.ParameterV2;
 import org.sonar.python.types.v2.PythonType;
+import org.sonar.python.types.v2.SimpleTypeWrapper;
 import org.sonar.python.types.v2.TypeOrigin;
 import org.sonar.python.types.v2.UnionType;
 
@@ -204,7 +205,7 @@ public class SymbolsModuleTypeProvider {
 
   private static ParameterV2 convertParameter(FunctionSymbol.Parameter parameter) {
     return new ParameterV2(parameter.name(),
-      PythonType.UNKNOWN,
+      new SimpleTypeWrapper(PythonType.UNKNOWN),
       parameter.hasDefaultValue(),
       parameter.isKeywordOnly(),
       parameter.isPositionalOnly(),
