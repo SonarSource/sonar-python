@@ -46,6 +46,7 @@ import org.sonar.python.types.v2.LazyType;
 import org.sonar.python.types.v2.LazyTypeWrapper;
 import org.sonar.python.types.v2.Member;
 import org.sonar.python.types.v2.ModuleType;
+import org.sonar.python.types.v2.ObjectType;
 import org.sonar.python.types.v2.ParameterV2;
 import org.sonar.python.types.v2.PythonType;
 import org.sonar.python.types.v2.SimpleTypeWrapper;
@@ -53,6 +54,7 @@ import org.sonar.python.types.v2.TypeOrigin;
 import org.sonar.python.types.v2.UnionType;
 
 public class SymbolsModuleTypeProvider {
+  public static final String OBJECT_TYPE_FQN = "object";
   private final ProjectLevelSymbolTable projectLevelSymbolTable;
   private final TypeShed typeShed;
   private ModuleType rootModule;
@@ -122,11 +124,8 @@ public class SymbolsModuleTypeProvider {
       .map(SymbolsModuleTypeProvider::convertParameter)
       .toList();
 
-    var returnType = PythonType.UNKNOWN;
-    var protoReturnType = ((FunctionSymbolImpl) symbol).protobufReturnType();
-    if (protoReturnType != null) {
-      returnType = convertProtobufType(protoReturnType);
-    }
+    var returnType = getReturnTypeFromSymbol(symbol);
+
     TypeOrigin typeOrigin = symbol.isStub() ? TypeOrigin.STUB : TypeOrigin.LOCAL;
 
     FunctionTypeBuilder functionTypeBuilder =
@@ -146,6 +145,13 @@ public class SymbolsModuleTypeProvider {
     }
     createdTypesBySymbol.put(symbol, functionType);
     return functionType;
+  }
+
+  private PythonType getReturnTypeFromSymbol(FunctionSymbol symbol) {
+    var returnTypeFqns = getReturnTypeFqn(symbol);
+    var returnTypeList = returnTypeFqns.stream().map(lazyTypesContext::getOrCreateLazyTypeWrapper).map(ObjectType::new).toList();
+    //TODO Support type unions (SONARPY-2132)
+    return returnTypeList.size() == 1 ? returnTypeList.get(0) : PythonType.UNKNOWN;
   }
 
   PythonType resolvePossibleLazyType(String fullyQualifiedName) {
@@ -229,7 +235,21 @@ public class SymbolsModuleTypeProvider {
     };
   }
 
-  public PythonType convertProtobufType(SymbolsProtos.Type type) {
+  private List<String> getReturnTypeFqn(FunctionSymbol symbol) {
+    List<String> fqnList = List.of();
+    if (symbol.annotatedReturnTypeName() != null && !OBJECT_TYPE_FQN.equals(symbol.annotatedReturnTypeName())) {
+      fqnList = List.of(symbol.annotatedReturnTypeName());
+    } else if (symbol instanceof FunctionSymbolImpl functionSymbol && functionSymbol.protobufReturnType() != null) {
+      var protoReturnType = functionSymbol.protobufReturnType();
+      fqnList = getSymbolTypeFqn(protoReturnType);
+    }
+    return fqnList;
+  }
+
+  List<String> getSymbolTypeFqn(SymbolsProtos.Type type) {
+    if (OBJECT_TYPE_FQN.equals(type.getFullyQualifiedName())) {
+      return List.of();
+    }
     switch (type.getKind()) {
       case INSTANCE:
         String typeName = type.getFullyQualifiedName();
@@ -238,33 +258,35 @@ public class SymbolsModuleTypeProvider {
         // This doesn't seem to be very precisely specified in typeshed, because it has special semantic.
         // To avoid FPs, we treat it as ANY
         if ("typing._SpecialForm".equals(typeName)) {
-          return PythonType.UNKNOWN;
+          return List.of();
         }
         typeName = typeName.replaceFirst("^builtins\\.", "");
-        return typeName.isEmpty() ? PythonType.UNKNOWN : resolvePossibleLazyType(typeName);
+        return typeName.isEmpty() ? List.of() : List.of(typeName);
       case TYPE:
-        return resolvePossibleLazyType("type");
+        return List.of("type");
       case TYPE_ALIAS:
-        return convertProtobufType(type.getArgs(0));
+        return getSymbolTypeFqn(type.getArgs(0));
       case CALLABLE:
         // this should be handled as a function type - see SONARPY-953
-        return PythonType.UNKNOWN;
+        // Creates FPs with `sys.gettrace`
+        return List.of();
       case UNION:
-        return UnionType.or(type.getArgsList().stream().map(this::convertProtobufType).collect(Collectors.toSet()));
+        return type.getArgsList().stream().map(this::getSymbolTypeFqn).flatMap(Collection::stream).toList();
       case TUPLE:
-        return resolvePossibleLazyType("tuple");
+        return List.of("tuple");
       case NONE:
-        return resolvePossibleLazyType("NoneType");
+        return List.of("NoneType");
       case TYPED_DICT:
-        return resolvePossibleLazyType("dict");
+        return List.of("dict");
       case TYPE_VAR:
         return Optional.of(type)
           .filter(InferredTypes::filterTypeVar)
           .map(SymbolsProtos.Type::getFullyQualifiedName)
-          .map(this::resolvePossibleLazyType)
-          .orElse(PythonType.UNKNOWN);
+          .map(List::of)
+          .orElseGet(List::of);
       default:
-        return PythonType.UNKNOWN;
+        return List.of();
     }
   }
+
 }
