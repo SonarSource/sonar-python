@@ -21,32 +21,12 @@ package org.sonar.python.types.v2;
 
 import java.util.Objects;
 
-public class LazyTypeWrapper implements TypeWrapper {
-  private PythonType type;
-
-  public LazyTypeWrapper(PythonType type) {
-    this.type = type;
-    if (type instanceof LazyType lazyType) {
-      lazyType.addConsumer(this::resolveLazyType);
-    }
-  }
-
-  public PythonType type() {
-    return TypeUtils.resolved(this.type);
-  }
-
-  public void resolveLazyType(PythonType pythonType) {
-    if (!(type instanceof LazyType)) {
-      throw new IllegalStateException("Trying to resolve an already resolved lazy type.");
-    }
-    this.type = pythonType;
-  }
-
+public class SimpleTypeWrapper implements TypeWrapper {
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
-    LazyTypeWrapper that = (LazyTypeWrapper) o;
+    SimpleTypeWrapper that = (SimpleTypeWrapper) o;
     return Objects.equals(type, that.type);
   }
 
@@ -55,9 +35,20 @@ public class LazyTypeWrapper implements TypeWrapper {
     return Objects.hashCode(type);
   }
 
+  private final PythonType type;
+
+  public SimpleTypeWrapper(PythonType type) {
+    this.type = type;
+  }
+
+  @Override
+  public PythonType type() {
+    return type;
+  }
+
   @Override
   public String toString() {
-    return "LazyTypeWrapper{" +
+    return "SimpleTypeWrapper{" +
       "type=" + type +
       '}';
   }
