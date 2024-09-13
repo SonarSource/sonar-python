@@ -683,6 +683,16 @@ class TypeInferenceV2Test {
   }
 
   @Test
+  void inferFunctionParameterTypes7() {
+    FileInput root = inferTypes("""
+      a = int
+      def foo(param: a): ...
+      """);
+    var functionDef = (FunctionDef) root.statements().statements().get(1);
+    assertThat(((FunctionType) functionDef.name().typeV2()).parameters().get(0).declaredType().type().unwrappedType()).isEqualTo(INT_TYPE);
+  }
+
+  @Test
   void inferTypeForReassignedBuiltinsInsideFunction() {
     FileInput root = inferTypes("""
       def foo():
