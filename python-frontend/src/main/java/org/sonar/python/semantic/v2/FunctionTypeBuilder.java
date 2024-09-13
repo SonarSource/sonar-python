@@ -33,8 +33,10 @@ import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.types.v2.FunctionType;
+import org.sonar.python.types.v2.LazyTypeWrapper;
 import org.sonar.python.types.v2.ParameterV2;
 import org.sonar.python.types.v2.PythonType;
+import org.sonar.python.types.v2.SimpleTypeWrapper;
 import org.sonar.python.types.v2.TypeOrigin;
 
 import static org.sonar.python.tree.TreeUtils.locationInFile;
@@ -154,7 +156,7 @@ public class FunctionTypeBuilder implements TypeBuilder<FunctionType> {
       if (anyParameter.is(Tree.Kind.PARAMETER)) {
         addParameter((org.sonar.plugins.python.api.tree.Parameter) anyParameter, fileId, parameterState);
       } else {
-        parameters.add(new ParameterV2(null, PythonType.UNKNOWN, false,
+        parameters.add(new ParameterV2(null, new SimpleTypeWrapper(PythonType.UNKNOWN), false,
           parameterState.keywordOnly, parameterState.positionalOnly, false, false, locationInFile(anyParameter, fileId)));
       }
     }
@@ -165,7 +167,7 @@ public class FunctionTypeBuilder implements TypeBuilder<FunctionType> {
     Token starToken = parameter.starToken();
     if (parameterName != null) {
       ParameterType parameterType = getParameterType(parameter);
-      this.parameters.add(new ParameterV2(parameterName.name(), parameterType.pythonType(), parameter.defaultValue() != null,
+      this.parameters.add(new ParameterV2(parameterName.name(), new LazyTypeWrapper(parameterType.pythonType()), parameter.defaultValue() != null,
         parameterState.keywordOnly, parameterState.positionalOnly, parameterType.isKeywordVariadic(), parameterType.isPositionalVariadic(), locationInFile(parameter, fileId)));
       if (starToken != null) {
         hasVariadicParameter = true;
