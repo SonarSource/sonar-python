@@ -50,6 +50,7 @@ import org.sonar.python.types.v2.ModuleType;
 import org.sonar.python.types.v2.ObjectType;
 import org.sonar.python.types.v2.ParameterV2;
 import org.sonar.python.types.v2.PythonType;
+import org.sonar.python.types.v2.SimpleTypeWrapper;
 import org.sonar.python.types.v2.TypeOrigin;
 import org.sonar.python.types.v2.UnionType;
 
@@ -149,7 +150,7 @@ public class SymbolsModuleTypeProvider {
   private PythonType getReturnTypeFromSymbol(FunctionSymbol symbol) {
     var returnTypeFqns = getReturnTypeFqn(symbol);
     var returnTypeList = returnTypeFqns.stream().map(lazyTypesContext::getOrCreateLazyTypeWrapper).map(ObjectType::new).toList();
-    //TODO: Support type unions
+    //TODO Support type unions (SONARPY-2132)
     return returnTypeList.size() == 1 ? returnTypeList.get(0) : PythonType.UNKNOWN;
   }
 
@@ -210,7 +211,7 @@ public class SymbolsModuleTypeProvider {
 
   private ParameterV2 convertParameter(FunctionSymbol.Parameter parameter) {
     String parameterTypeFqn = getParameterFqn(parameter);
-    var parameterType = parameterTypeFqn == null ? PythonType.UNKNOWN : lazyTypesContext.getOrCreateLazyType(parameterTypeFqn);
+    var parameterType = parameterTypeFqn == null ? new SimpleTypeWrapper(PythonType.UNKNOWN) : lazyTypesContext.getOrCreateLazyTypeWrapper(parameterTypeFqn);
     return new ParameterV2(parameter.name(),
       parameterType,
       parameter.hasDefaultValue(),
@@ -249,7 +250,7 @@ public class SymbolsModuleTypeProvider {
   }
 
   @CheckForNull
-  private String getParameterFqn(FunctionSymbol.Parameter parameter) {
+  private static String getParameterFqn(FunctionSymbol.Parameter parameter) {
     if (parameter instanceof FunctionSymbolImpl.ParameterImpl parameterImpl) {
       if (parameterImpl.annotatedTypeName() != null) {
         return parameterImpl.annotatedTypeName();

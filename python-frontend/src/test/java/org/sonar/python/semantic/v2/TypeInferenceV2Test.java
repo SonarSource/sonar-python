@@ -389,7 +389,7 @@ class TypeInferenceV2Test {
     assertThat(lastExpressionStatement.expressions().get(0).typeV2().unwrappedType()).isEqualTo(INT_TYPE);
     assertThat(lastExpressionStatement.expressions().get(0).typeV2().typeSource()).isEqualTo(TypeSource.TYPE_HINT);
 
-    assertThat(((FunctionType) functionDef.name().typeV2()).parameters().get(0).declaredType().unwrappedType()).isEqualTo(INT_TYPE);
+    assertThat(((FunctionType) functionDef.name().typeV2()).parameters().get(0).declaredType().type().unwrappedType()).isEqualTo(INT_TYPE);
   }
 
   @Test
@@ -610,9 +610,9 @@ class TypeInferenceV2Test {
       """);
 
     var functionDef = (FunctionDef) root.statements().statements().get(0);
-    assertThat(((FunctionType) functionDef.name().typeV2()).parameters().get(0).declaredType().unwrappedType()).isEqualTo(INT_TYPE);
-    assertThat(((FunctionType) functionDef.name().typeV2()).parameters().get(1).declaredType().unwrappedType()).isEqualTo(TUPLE_TYPE);
-    assertThat(((FunctionType) functionDef.name().typeV2()).parameters().get(2).declaredType().unwrappedType()).isEqualTo(DICT_TYPE);
+    assertThat(((FunctionType) functionDef.name().typeV2()).parameters().get(0).declaredType().type().unwrappedType()).isEqualTo(INT_TYPE);
+    assertThat(((FunctionType) functionDef.name().typeV2()).parameters().get(1).declaredType().type().unwrappedType()).isEqualTo(TUPLE_TYPE);
+    assertThat(((FunctionType) functionDef.name().typeV2()).parameters().get(2).declaredType().type().unwrappedType()).isEqualTo(DICT_TYPE);
   }
 
   @Test
@@ -625,7 +625,7 @@ class TypeInferenceV2Test {
       """);
 
     var functionDef = (FunctionDef) root.statements().statements().get(2);
-    assertThat(((FunctionType) functionDef.name().typeV2()).parameters().get(0).declaredType().unwrappedType()).isEqualTo(PythonType.UNKNOWN);
+    assertThat(((FunctionType) functionDef.name().typeV2()).parameters().get(0).declaredType().type().unwrappedType()).isEqualTo(PythonType.UNKNOWN);
     assertThat(((FunctionType) functionDef.name().typeV2()).returnType().unwrappedType()).isEqualTo(PythonType.UNKNOWN);
   }
 
@@ -642,7 +642,7 @@ class TypeInferenceV2Test {
     var functionDef = (FunctionDef) root.statements().statements().get(1);
     var classType = ((ClassDef) root.statements().statements().get(0)).name().typeV2();
 
-    assertThat(((FunctionType) functionDef.name().typeV2()).parameters().get(0).declaredType().unwrappedType()).isEqualTo(classType);
+    assertThat(((FunctionType) functionDef.name().typeV2()).parameters().get(0).declaredType().type().unwrappedType()).isEqualTo(classType);
     assertThat(((FunctionType) functionDef.name().typeV2()).returnType().unwrappedType()).isEqualTo(classType);
   }
 
@@ -658,7 +658,7 @@ class TypeInferenceV2Test {
     var functionDef = (FunctionDef) root.statements().statements().get(2);
     var patternType = ((Name) ((ExpressionStatementImpl) root.statements().statements().get(1)).expressions().get(0)).typeV2();
 
-    assertThat(((FunctionType) functionDef.name().typeV2()).parameters().get(0).declaredType().unwrappedType()).isEqualTo(patternType);
+    assertThat(((FunctionType) functionDef.name().typeV2()).parameters().get(0).declaredType().type().unwrappedType()).isEqualTo(patternType);
     assertThat(((FunctionType) functionDef.name().typeV2()).returnType().unwrappedType()).isEqualTo(patternType);
   }
 
@@ -670,7 +670,16 @@ class TypeInferenceV2Test {
       """);
 
     var functionDef = (FunctionDef) root.statements().statements().get(1);
-    assertThat(((FunctionType) functionDef.name().typeV2()).parameters().get(0).declaredType().unwrappedType()).isEqualTo(INT_TYPE);
+    assertThat(((FunctionType) functionDef.name().typeV2()).parameters().get(0).declaredType().type().unwrappedType()).isEqualTo(INT_TYPE);
+  }
+
+  @Test
+  void inferFunctionParameterTypes6() {
+    FileInput root = inferTypes("""
+      def foo(param: dict): ...
+      """);
+    var functionDef = (FunctionDef) root.statements().statements().get(0);
+    assertThat(((FunctionType) functionDef.name().typeV2()).parameters().get(0).declaredType().type().unwrappedType()).isEqualTo(DICT_TYPE);
   }
 
   @Test

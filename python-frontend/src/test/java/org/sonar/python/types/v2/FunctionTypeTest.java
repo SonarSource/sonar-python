@@ -146,7 +146,7 @@ class FunctionTypeTest {
     // TODO: SONARPY-1776 handle declared return type
     FunctionType functionType = functionType("def fn(p1: int): pass");
     assertThat(functionType.returnType()).isEqualTo(PythonType.UNKNOWN);
-    assertThat(functionType.parameters()).extracting(ParameterV2::declaredType).extracting(PythonType::unwrappedType).containsExactly(INT_TYPE);
+    assertThat(functionType.parameters()).extracting(ParameterV2::declaredType).extracting(TypeWrapper::type).extracting(PythonType::unwrappedType).containsExactly(INT_TYPE);
   }
 
   @Test
