@@ -41,7 +41,7 @@ public class ObjectTypeBuilder implements TypeBuilder<ObjectType> {
 
   @Override
   public TypeBuilder<ObjectType> withDefinitionLocation(LocationInFile definitionLocation) {
-    return null;
+    throw new IllegalStateException("Object type does not have definition location");
   }
 
   public ObjectTypeBuilder withTypeWrapper(TypeWrapper typeWrapper) {
