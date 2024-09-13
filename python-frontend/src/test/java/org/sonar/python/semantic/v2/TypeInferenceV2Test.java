@@ -54,6 +54,7 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.PythonTestUtils;
 import org.sonar.python.semantic.ClassSymbolImpl;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
+import org.sonar.python.tree.ExpressionStatementImpl;
 import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.types.v2.ClassType;
 import org.sonar.python.types.v2.FunctionType;
@@ -369,9 +370,11 @@ class TypeInferenceV2Test {
       """);
 
     var functionDef = (FunctionDef) root.statements().statements().get(0);
-    var lastExpressionStatement = (ExpressionStatement) functionDef.body().statements().get(functionDef.body().statements().size() -1);
-    Assertions.assertThat(lastExpressionStatement.expressions().get(0).typeV2().unwrappedType()).isEqualTo(INT_TYPE);
-    Assertions.assertThat(lastExpressionStatement.expressions().get(0).typeV2().typeSource()).isEqualTo(TypeSource.TYPE_HINT);
+    var lastExpressionStatement = (ExpressionStatement) functionDef.body().statements().get(functionDef.body().statements().size() - 1);
+    assertThat(lastExpressionStatement.expressions().get(0).typeV2().unwrappedType()).isEqualTo(INT_TYPE);
+    assertThat(lastExpressionStatement.expressions().get(0).typeV2().typeSource()).isEqualTo(TypeSource.TYPE_HINT);
+
+    assertThat(((FunctionType) functionDef.name().typeV2()).parameters().get(0).declaredType().type().unwrappedType()).isEqualTo(INT_TYPE);
   }
 
   @Test
@@ -582,6 +585,124 @@ class TypeInferenceV2Test {
     var lastType = lastExpressionStatement.expressions().get(0).typeV2();
 
     Assertions.assertThat(lastType.unwrappedType()).isEqualTo(INT_TYPE);
+  }
+
+  @Test
+  void inferFunctionParameterTypes() {
+    FileInput root = inferTypes("""
+      def foo(param: int, *args, **kwargs):
+        ...
+      """);
+
+    var functionDef = (FunctionDef) root.statements().statements().get(0);
+    assertThat(((FunctionType) functionDef.name().typeV2()).parameters().get(0).declaredType().type().unwrappedType()).isEqualTo(INT_TYPE);
+    assertThat(((FunctionType) functionDef.name().typeV2()).parameters().get(1).declaredType().type().unwrappedType()).isEqualTo(TUPLE_TYPE);
+    assertThat(((FunctionType) functionDef.name().typeV2()).parameters().get(2).declaredType().type().unwrappedType()).isEqualTo(DICT_TYPE);
+  }
+
+  @Test
+  void inferFunctionParameterTypes2() {
+    FileInput root = inferTypes("""
+      class A: ...
+      class A: ...
+      def foo(param: A) -> A:
+        ...
+      """);
+
+    var functionDef = (FunctionDef) root.statements().statements().get(2);
+    assertThat(((FunctionType) functionDef.name().typeV2()).parameters().get(0).declaredType().type().unwrappedType()).isEqualTo(PythonType.UNKNOWN);
+    assertThat(((FunctionType) functionDef.name().typeV2()).returnType().unwrappedType()).isEqualTo(PythonType.UNKNOWN);
+  }
+
+  @Test
+  void inferFunctionParameterTypes3() {
+    FileInput root = inferTypes("""
+      class A:
+        def foo():
+          ...
+      def foo(param: A) -> A:
+        ...
+      """);
+
+    var functionDef = (FunctionDef) root.statements().statements().get(1);
+    var classType = ((ClassDef) root.statements().statements().get(0)).name().typeV2();
+
+    assertThat(((FunctionType) functionDef.name().typeV2()).parameters().get(0).declaredType().type().unwrappedType()).isEqualTo(classType);
+    assertThat(((FunctionType) functionDef.name().typeV2()).returnType().unwrappedType()).isEqualTo(classType);
+  }
+
+  @Test
+  void inferFunctionParameterTypes4() {
+    FileInput root = inferTypes("""
+      from re import Pattern
+      Pattern
+      def foo(param: Pattern) -> Pattern:
+        ...
+      """);
+
+    var functionDef = (FunctionDef) root.statements().statements().get(2);
+    var patternType = ((Name) ((ExpressionStatementImpl) root.statements().statements().get(1)).expressions().get(0)).typeV2();
+
+    assertThat(((FunctionType) functionDef.name().typeV2()).parameters().get(0).declaredType().type().unwrappedType()).isEqualTo(patternType);
+    assertThat(((FunctionType) functionDef.name().typeV2()).returnType().unwrappedType()).isEqualTo(patternType);
+  }
+
+  @Test
+  void inferFunctionParameterTypes5() {
+    FileInput root = inferTypes("""
+      my_alias = int
+      def foo(param: my_alias): ...
+      """);
+
+    var functionDef = (FunctionDef) root.statements().statements().get(1);
+    assertThat(((FunctionType) functionDef.name().typeV2()).parameters().get(0).declaredType().type().unwrappedType()).isEqualTo(INT_TYPE);
+  }
+
+  @Test
+  void inferFunctionParameterTypes6() {
+    FileInput root = inferTypes("""
+      my_alias = int
+      my_alias = str
+      def foo(param: my_alias): ...
+      """);
+
+    var functionDef = (FunctionDef) root.statements().statements().get(2);
+    assertThat(((FunctionType) functionDef.name().typeV2()).parameters().get(0).declaredType().type().unwrappedType()).isEqualTo(PythonType.UNKNOWN);
+  }
+
+  @Test
+  void inferFunctionParameterTypes7() {
+    FileInput root = inferTypes("""
+      a = int
+      def foo(param: a): ...
+      """);
+    var functionDef = (FunctionDef) root.statements().statements().get(1);
+    assertThat(((FunctionType) functionDef.name().typeV2()).parameters().get(0).declaredType().type().unwrappedType()).isEqualTo(INT_TYPE);
+  }
+
+  @Test
+  void inferFunctionParameterTypes8() {
+    FileInput root = inferTypes("""
+      if cond:
+          my_alias = int
+      else:
+          my_alias = str
+      def foo(param: my_alias): ...
+      """);
+
+    var functionDef = (FunctionDef) root.statements().statements().get(root.statements().statements().size() - 1);
+    assertThat(((FunctionType) functionDef.name().typeV2()).parameters().get(0).declaredType().type().unwrappedType()).isEqualTo(PythonType.UNKNOWN);
+  }
+
+  @Test
+  void inferFunctionReturnTypeType() {
+    FileInput root = inferTypes("""
+      from collections import namedtuple
+      namedtuple
+      """);
+
+    var expr = (ExpressionStatement) root.statements().statements().get(root.statements().statements().size() - 1);
+    assertThat(expr.expressions().get(0).typeV2()).isInstanceOf(FunctionType.class);
   }
 
   @Test
