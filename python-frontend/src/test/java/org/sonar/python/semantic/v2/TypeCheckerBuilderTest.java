@@ -126,4 +126,12 @@ class TypeCheckerBuilderTest {
     );
   }
 
+  @Test
+  void objectTypeThrowsOnDefinitionLocation() {
+    var objectTypeBuilder = new ObjectTypeBuilder();
+    Assertions.assertThatThrownBy(() -> objectTypeBuilder.withDefinitionLocation(null))
+      .isInstanceOf(IllegalStateException.class)
+      .hasMessage("Object type does not have definition location");
+  }
+
 }
