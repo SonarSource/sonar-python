@@ -44,6 +44,7 @@ import org.sonar.plugins.python.api.tree.TreeVisitor;
 import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.semantic.ClassSymbolImpl;
 import org.sonar.python.semantic.FunctionSymbolImpl;
+import org.sonar.python.semantic.v2.ObjectTypeBuilder;
 import org.sonar.python.types.DeclaredType;
 import org.sonar.python.types.HasTypeDependencies;
 import org.sonar.python.types.InferredTypes;
@@ -193,7 +194,12 @@ public class CallExpressionImpl extends PyTree implements CallExpression, HasTyp
     PythonType calleeType = callee().typeV2();
     TypeSource typeSource = computeTypeSource(calleeType);
     PythonType pythonType = returnTypeOfCall(calleeType);
-    return pythonType != PythonType.UNKNOWN ? new ObjectType(pythonType, typeSource) : PythonType.UNKNOWN;
+    if (pythonType instanceof ObjectType objectType) {
+      return ObjectTypeBuilder.fromObjectType(objectType)
+        .withTypeSource(typeSource)
+        .build();
+    }
+    return pythonType;
   }
 
   private TypeSource computeTypeSource(PythonType calleeType) {
@@ -215,7 +221,7 @@ public class CallExpressionImpl extends PyTree implements CallExpression, HasTyp
 
   static PythonType returnTypeOfCall(PythonType calleeType) {
     if (calleeType instanceof ClassType classType) {
-      return classType;
+      return new ObjectType(classType);
     }
     if (calleeType instanceof FunctionType functionType) {
       return functionType.returnType();
