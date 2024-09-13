@@ -49,4 +49,18 @@ class LazyTypeWrapperTest {
       .isInstanceOf(IllegalStateException.class)
       .hasMessage("Trying to resolve an already resolved lazy type.");
   }
+
+  @Test
+  void testEquals() {
+    var lazyTypeWrapper = new LazyTypeWrapper(new LazyType("random", Mockito.mock(LazyTypesContext.class)));
+    assertThat(lazyTypeWrapper.equals(lazyTypeWrapper)).isTrue();
+    assertThat(lazyTypeWrapper.equals(null)).isFalse();
+    assertThat(lazyTypeWrapper.equals("str")).isFalse();
+  }
+
+  @Test
+  void testToString() {
+    var lazyTypeWrapper = new LazyTypeWrapper(new LazyType("random", Mockito.mock(LazyTypesContext.class)));
+    assertThat(lazyTypeWrapper.toString()).startsWith("LazyTypeWrapper{type=");
+  }
 }
