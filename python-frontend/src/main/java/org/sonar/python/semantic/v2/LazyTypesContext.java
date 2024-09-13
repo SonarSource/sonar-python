@@ -22,7 +22,9 @@ package org.sonar.python.semantic.v2;
 import java.util.HashMap;
 import java.util.Map;
 import org.sonar.python.types.v2.LazyType;
+import org.sonar.python.types.v2.LazyTypeWrapper;
 import org.sonar.python.types.v2.PythonType;
+import org.sonar.python.types.v2.TypeWrapper;
 
 public class LazyTypesContext {
   private final Map<String, LazyType> lazyTypes;
@@ -31,6 +33,10 @@ public class LazyTypesContext {
   public LazyTypesContext(ProjectLevelTypeTable projectLevelTypeTable) {
     this.lazyTypes = new HashMap<>();
     this.projectLevelTypeTable = projectLevelTypeTable;
+  }
+
+  public TypeWrapper getOrCreateLazyTypeWrapper(String fullyQualifiedName) {
+    return new LazyTypeWrapper(getOrCreateLazyType(fullyQualifiedName));
   }
 
   public LazyType getOrCreateLazyType(String fullyQualifiedName) {
