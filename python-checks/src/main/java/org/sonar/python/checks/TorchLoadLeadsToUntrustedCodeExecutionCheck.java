@@ -35,7 +35,7 @@ import org.sonar.python.tree.TreeUtils;
 public class TorchLoadLeadsToUntrustedCodeExecutionCheck extends PythonSubscriptionCheck {
 
   public static final String TORCH_LOAD = "torch.load";
-  public static final String MESSAGE = "Replace this call with a safe alternative";
+  public static final String MESSAGE = "Replace this call with a safe alternative.";
   public static final String PYTHON_FALSE = "False";
   public static final String WEIGHTS_ONLY = "weights_only";
 
@@ -44,19 +44,18 @@ public class TorchLoadLeadsToUntrustedCodeExecutionCheck extends PythonSubscript
     context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, ctx -> {
       CallExpression callExpression = (CallExpression) ctx.syntaxNode();
       Symbol calleeSymbol = callExpression.calleeSymbol();
-      if (calleeSymbol != null && TORCH_LOAD.equals(calleeSymbol.fullyQualifiedName()) && !isWeightsOnlySetToTrue(callExpression.arguments())) {
+      if (calleeSymbol != null && TORCH_LOAD.equals(calleeSymbol.fullyQualifiedName()) && isWeightsOnlyNotFoundOrSetToFalse(callExpression.arguments())) {
         ctx.addIssue(callExpression.callee(), MESSAGE);
       }
     });
   }
 
-  private static boolean isWeightsOnlySetToTrue(List<Argument> arguments) {
+  private static boolean isWeightsOnlyNotFoundOrSetToFalse(List<Argument> arguments) {
     RegularArgument weightsOnlyArg = TreeUtils.argumentByKeyword(WEIGHTS_ONLY, arguments);
-    if (weightsOnlyArg != null) {
-      Expression weightsOnlyArgExpr = weightsOnlyArg.expression();
-      return weightsOnlyArgExpr.is(Tree.Kind.NAME) && !PYTHON_FALSE.equals(((Name) weightsOnlyArgExpr).name());
-    }
-    return false;
+    if(weightsOnlyArg == null) return true;
+
+    Expression weightsOnlyArgExpr = weightsOnlyArg.expression();
+    return weightsOnlyArgExpr.is(Tree.Kind.NAME) && PYTHON_FALSE.equals(((Name) weightsOnlyArgExpr).name());
   }
 
 
