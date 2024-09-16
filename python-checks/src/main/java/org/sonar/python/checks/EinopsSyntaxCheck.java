@@ -46,33 +46,35 @@ public class EinopsSyntaxCheck extends PythonSubscriptionCheck {
 
   @Override
   public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, this::checkEinopsSyntax);
+    context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, EinopsSyntaxCheck::checkEinopsSyntax);
   }
 
-  private void checkEinopsSyntax(SubscriptionContext ctx) {
+  private static void checkEinopsSyntax(SubscriptionContext ctx) {
     CallExpression callExpression = (CallExpression) ctx.syntaxNode();
-
     Symbol calleeSymbol = callExpression.calleeSymbol();
-
     if (calleeSymbol != null && calleeSymbol.fullyQualifiedName() != null && FQN_TO_CHECK.contains(calleeSymbol.fullyQualifiedName())) {
-      extractPatternFromCallExpr(callExpression).ifPresent(pattern -> {
-        checkForEllipsisInParenthesis(ctx, pattern);
-        checkForUnbalancedParenthesis(ctx, pattern);
-        checkForUnusedParameter(ctx, callExpression.arguments(), pattern);
+      extractPatternFromCallExpr(callExpression).ifPresent(stringLiteral -> {
+        var maybePattern = toEinopsPattern(stringLiteral);
+        if (maybePattern.isPresent()) {
+          var pattern = maybePattern.get();
+          checkForEllipsisInParenthesis(ctx, pattern);
+          checkForUnbalancedParenthesis(ctx, pattern);
+          checkForUnusedParameter(ctx, callExpression.arguments(), pattern);
+        } else {
+          ctx.addIssue(callExpression.callee(), "Provide a valid einops pattern.");
+        }
       });
     }
   }
 
-  private void checkForUnusedParameter(SubscriptionContext ctx, List<Argument> arguments, EinopsPattern pattern) {
-
-    var argsToCheck = arguments.stream()
+  private static void checkForUnusedParameter(SubscriptionContext ctx, List<Argument> arguments, EinopsPattern pattern) {
+    List<String> argsToCheck = arguments.stream()
       .map(TreeUtils.toInstanceOfMapper(RegularArgument.class))
       .filter(Objects::nonNull)
       .filter(arg -> arg.expression().is(Tree.Kind.NUMERIC_LITERAL))
       .filter(arg -> arg.keywordArgument() != null)
       .map(arg -> arg.keywordArgument().name())
-      .filter(argName -> !pattern.lhs.identifiers.contains(argName))
-      .filter(argName -> !pattern.rhs.identifiers.contains(argName))
+      .filter(argName -> !pattern.lhs.identifiers.contains(argName) || !pattern.rhs.identifiers.contains(argName))
       .toList();
 
     if (!argsToCheck.isEmpty()) {
@@ -83,7 +85,7 @@ public class EinopsSyntaxCheck extends PythonSubscriptionCheck {
     }
   }
 
-  private void checkForUnbalancedParenthesis(SubscriptionContext ctx, EinopsPattern pattern) {
+  private static void checkForUnbalancedParenthesis(SubscriptionContext ctx, EinopsPattern pattern) {
     pattern.lhs.state.errorMessage.or(() -> pattern.rhs.state.errorMessage)
       .ifPresent(message -> ctx.addIssue(pattern.originalPattern(), String.format(MESSAGE_TEMPLATE, message)));
   }
@@ -97,27 +99,30 @@ public class EinopsSyntaxCheck extends PythonSubscriptionCheck {
   private record ParenthesisState(boolean hasOpenParenthesis, Optional<String> errorMessage) {
   }
 
-  private static Pattern ellipsisPattern = Pattern.compile("\\(.*\\.{3}.*\\)");
+  private static final Pattern ellipsisPattern = Pattern.compile("\\(.*\\.{3}.*\\)");
 
-  private void checkForEllipsisInParenthesis(SubscriptionContext ctx, EinopsPattern pattern) {
+  private static void checkForEllipsisInParenthesis(SubscriptionContext ctx, EinopsPattern pattern) {
     if (ellipsisPattern.matcher(pattern.lhs.originalPattern).find()) {
       ctx.addIssue(pattern.originalPattern(), String.format(MESSAGE_TEMPLATE, "Ellipsis inside parenthesis on the left side is not allowed"));
     }
   }
 
-  private static Optional<EinopsPattern> extractPatternFromCallExpr(CallExpression callExpression) {
+  private static Optional<StringLiteral> extractPatternFromCallExpr(CallExpression callExpression) {
     return Optional.ofNullable(TreeUtils.nthArgumentOrKeyword(1, "pattern", callExpression.arguments()))
       .map(RegularArgument::expression)
-      .flatMap(TreeUtils.toOptionalInstanceOfMapper(StringLiteral.class))
-      .flatMap(EinopsSyntaxCheck::toEinopsPattern);
+      .flatMap(TreeUtils.toOptionalInstanceOfMapper(StringLiteral.class));
   }
 
   private static Optional<EinopsPattern> toEinopsPattern(StringLiteral pattern) {
     String[] split = pattern.trimmedQuotesValue().split("->");
     if (split.length == 2) {
-      var lhs = parseEinopsPattern(split[0].trim());
-      var rhs = parseEinopsPattern(split[1].trim());
-      return Optional.of(new EinopsPattern(pattern, lhs, rhs));
+      var lhsStr = split[0].trim();
+      var rhsStr = split[1].trim();
+      if (!lhsStr.isEmpty() && !rhsStr.isEmpty()) {
+        var lhs = parseEinopsPattern(lhsStr);
+        var rhs = parseEinopsPattern(rhsStr);
+        return Optional.of(new EinopsPattern(pattern, lhs, rhs));
+      }
     }
     return Optional.empty();
   }
@@ -134,13 +139,13 @@ public class EinopsSyntaxCheck extends PythonSubscriptionCheck {
           currentIdentifier.setLength(0);
         }
         state = checkParenthesisBalance(c, state);
-      } // \u2026 is the unicode character for Ellipsis
-      else if (Character.isLetterOrDigit(c) || c == '_' || c == '\u2026') {
+        // \u2026 is the unicode character for Ellipsis
+      } else if (Character.isLetterOrDigit(c) || c == '_' || c == '\u2026') {
         currentIdentifier.append(c);
       }
     }
     if (state.hasOpenParenthesis && state.errorMessage.isEmpty()) {
-      state = new ParenthesisState(state.hasOpenParenthesis, Optional.of(UNBALANCED_PARENTHESIS_MESSAGE));
+      state = new ParenthesisState(true, Optional.of(UNBALANCED_PARENTHESIS_MESSAGE));
     }
     return new EinopsSide(pattern, identifiers, state);
   }
