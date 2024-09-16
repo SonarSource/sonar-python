@@ -19,7 +19,6 @@
  */
 package org.sonar.python.checks;
 
-import java.text.ParsePosition;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Objects;
@@ -27,7 +26,6 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
@@ -73,8 +71,8 @@ public class EinopsSyntaxCheck extends PythonSubscriptionCheck {
       .filter(arg -> arg.expression().is(Tree.Kind.NUMERIC_LITERAL))
       .filter(arg -> arg.keywordArgument() != null)
       .map(arg -> arg.keywordArgument().name())
-      .filter(argName -> !pattern.lhsIdentifiers().contains(argName))
-      .filter(argName -> !pattern.rhsIdentifiers().contains(argName))
+      .filter(argName -> !pattern.lhs.identifiers.contains(argName))
+      .filter(argName -> !pattern.rhs.identifiers.contains(argName))
       .toList();
 
     if (!argsToCheck.isEmpty()) {
@@ -86,42 +84,23 @@ public class EinopsSyntaxCheck extends PythonSubscriptionCheck {
   }
 
   private void checkForUnbalancedParenthesis(SubscriptionContext ctx, EinopsPattern pattern) {
-    hasUnbalancedParenthesis(pattern.lhs())
-      .or(() -> hasUnbalancedParenthesis(pattern.rhs()))
+    pattern.lhs.state.errorMessage.or(() -> pattern.rhs.state.errorMessage)
       .ifPresent(message -> ctx.addIssue(pattern.originalPattern(), String.format(MESSAGE_TEMPLATE, message)));
   }
 
-  private static Optional<String> hasUnbalancedParenthesis(String pattern) {
-    boolean isBalanced = true;
-    for (int i = 0; i < pattern.length(); i++) {
-      char c = pattern.charAt(i);
-      if ('(' == c) {
-        if (!isBalanced) {
-          return Optional.of("nested parenthesis are not allowed");
-        }
-        isBalanced = false;
-        continue;
-      }
-      if (')' == c) {
-        if (isBalanced) {
-          return Optional.of(UNBALANCED_PARENTHESIS_MESSAGE);
-        }
-        isBalanced = true;
-      }
-    }
-    if (!isBalanced) {
-      return Optional.of(UNBALANCED_PARENTHESIS_MESSAGE);
-    }
-    return Optional.empty();
+  private record EinopsPattern(StringLiteral originalPattern, EinopsSide lhs, EinopsSide rhs) {
   }
 
-  private record EinopsPattern(StringLiteral originalPattern, String lhs, String rhs, Set<String> lhsIdentifiers, Set<String> rhsIdentifiers) {
+  private record EinopsSide(String originalPattern, Set<String> identifiers, ParenthesisState state) {
+  }
+
+  private record ParenthesisState(boolean hasOpenParenthesis, Optional<String> errorMessage) {
   }
 
   private static Pattern ellipsisPattern = Pattern.compile("\\(.*\\.{3}.*\\)");
 
   private void checkForEllipsisInParenthesis(SubscriptionContext ctx, EinopsPattern pattern) {
-    if (ellipsisPattern.matcher(pattern.lhs).find()) {
+    if (ellipsisPattern.matcher(pattern.lhs.originalPattern).find()) {
       ctx.addIssue(pattern.originalPattern(), String.format(MESSAGE_TEMPLATE, "Ellipsis inside parenthesis on the left side is not allowed"));
     }
   }
@@ -136,29 +115,50 @@ public class EinopsSyntaxCheck extends PythonSubscriptionCheck {
   private static Optional<EinopsPattern> toEinopsPattern(StringLiteral pattern) {
     String[] split = pattern.trimmedQuotesValue().split("->");
     if (split.length == 2) {
-      var lhs = split[0].trim();
-      var rhs = split[1].trim();
-      var lhsIdentifiers = extractIdentifiers(lhs);
-      var rhsIdentifiers = extractIdentifiers(rhs);
-      return Optional.of(new EinopsPattern(pattern, lhs, rhs, lhsIdentifiers, rhsIdentifiers));
+      var lhs = parseEinopsPattern(split[0].trim());
+      var rhs = parseEinopsPattern(split[1].trim());
+      return Optional.of(new EinopsPattern(pattern, lhs, rhs));
     }
     return Optional.empty();
   }
 
-  private static Set<String> extractIdentifiers(String pattern) {
+  private static EinopsSide parseEinopsPattern(String pattern) {
     Set<String> identifiers = new LinkedHashSet<>();
     var currentIdentifier = new StringBuilder();
+    ParenthesisState state = new ParenthesisState(false, Optional.empty());
     for (int i = 0; i < pattern.length(); i++) {
       char c = pattern.charAt(i);
-      if (c == ' ' || c == '(' || c == ')' && !currentIdentifier.isEmpty()) {
-        identifiers.add(currentIdentifier.toString());
-        currentIdentifier.setLength(0);
-      }
-      // \u2026 is the unicode character for Ellipsis
-      if (Character.isLetterOrDigit(c) || c == '_' || c == '\u2026') {
+      if (c == ' ' || c == '(' || c == ')') {
+        if (!currentIdentifier.isEmpty()) {
+          identifiers.add(currentIdentifier.toString());
+          currentIdentifier.setLength(0);
+        }
+        state = checkParenthesisBalance(c, state);
+      } // \u2026 is the unicode character for Ellipsis
+      else if (Character.isLetterOrDigit(c) || c == '_' || c == '\u2026') {
         currentIdentifier.append(c);
       }
     }
-    return identifiers;
+    if (state.hasOpenParenthesis && state.errorMessage.isEmpty()) {
+      state = new ParenthesisState(state.hasOpenParenthesis, Optional.of(UNBALANCED_PARENTHESIS_MESSAGE));
+    }
+    return new EinopsSide(pattern, identifiers, state);
+  }
+
+  private static ParenthesisState checkParenthesisBalance(char c, ParenthesisState state) {
+    boolean hasOpenParenthesis = state.hasOpenParenthesis;
+    Optional<String> errorMessage = state.errorMessage;
+    if ('(' == c) {
+      if (hasOpenParenthesis) {
+        errorMessage = Optional.of("nested parenthesis are not allowed");
+      }
+      hasOpenParenthesis = true;
+    } else if (')' == c) {
+      if (!hasOpenParenthesis && errorMessage.isEmpty()) {
+        errorMessage = Optional.of(UNBALANCED_PARENTHESIS_MESSAGE);
+      }
+      hasOpenParenthesis = false;
+    }
+    return new ParenthesisState(hasOpenParenthesis, errorMessage);
   }
 }

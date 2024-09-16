@@ -31,6 +31,7 @@ repeat(imgs, "h w c -> h w c))") # Noncompliant
 repeat(imgs, "h w c -> h w c(") # Noncompliant 
 repeat(imgs, "h w c) -> h w c") # Noncompliant 
 repeat(imgs, "h w c -> (h w c(") # Noncompliant 
+reduce(imgs, "h w c -> (h w c(") # FN should be fixed with SONARPY-2137
 
 rearrange(imgs, ")h w c -> h w c") # Noncompliant 
 
@@ -38,5 +39,6 @@ rearrange(imgs, ")h w c -> h w c") # Noncompliant
 reduce(imgs, 'b c -> b c', 'max')
 rearrange(imgs, "h w c -> h w c", 1) # Not a correct parameter but still we should not raise.
 reduce(imgs, 'b c (h1 h2) (w1 w2) -> b c h1 w1', 'max', h2=2, w2=2) 
+reduce(imgs, 'b c (h1 h2) (w1 w2) -> b c h1 w1', 'max', h2=2, z=2) # FN should be fixed with SONARPY-2137
 rearrange(imgs, 'b c -> b c', h2=2, w2=2) # Noncompliant {{Fix the syntax of this einops operation: the parameters h2, w2 do not appear in the pattern.}}
 rearrange(imgs, "(b h) w c -> b h w c ", b1=1) # Noncompliant {{Fix the syntax of this einops operation: the parameter b1 does not appear in the pattern.}}
