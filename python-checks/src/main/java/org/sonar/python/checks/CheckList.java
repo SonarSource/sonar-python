@@ -311,6 +311,7 @@ public final class CheckList {
       PublicApiIsSecuritySensitiveCheck.class,
       PubliclyWritableDirectoriesCheck.class,
       PublicNetworkAccessToCloudResourcesCheck.class,
+      PyTorchDataLoaderNumWorkersCheck.class,
       PytzTimeZoneInDatetimeConstructorCheck.class,
       RaiseOutsideExceptCheck.class,
       RandomSeedCheck.class,

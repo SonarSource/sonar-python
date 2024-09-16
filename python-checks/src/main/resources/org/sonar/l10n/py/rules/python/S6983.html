@@ -1,0 +1,39 @@
+<p>This rule raises an issue when a <code>torch.utils.data.Dataloader</code> is instantiated without specifying the <code>num_workers</code>
+parameter.</p>
+<h2>Why is this an issue?</h2>
+<p>In the PyTorch library, the data loaders are used to provide an interface where common operations such as batching can be implemented. It is also
+possible to parallelize the data loading process by using multiple worker processes. This can improve performance by increasing the number of batches
+being fetched in parallel, at the cost of higher memory usage. This performance increase can also be attributed to avoiding the Global Interpreter
+Lock (GIL) in the Python interpreter.</p>
+<h2>How to fix it</h2>
+<p>Specify the <code>num_workers</code> parameter when instantiating the <code>torch.utils.data.Dataloader</code> object.</p>
+<p>The default value of <code>0</code> will use the main process to load the data, and might be faster for small datasets that can fit completely in
+memory.</p>
+<p>For larger datasets, it is recommended to use a value of <code>1</code> or higher to parallelize the data loading process.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+from torch.utils.data import DataLoader
+from torchvision import datasets
+from torchvision.transforms import ToTensor
+
+train_dataset = datasets.MNIST(root='data', train=True, transform=ToTensor())
+train_data_loader = DataLoader(train_dataset, batch_size=32)# Noncompliant: the num_workers parameter is not specified
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+from torch.utils.data import DataLoader
+from torchvision import datasets
+from torchvision.transforms import ToTensor
+
+train_dataset = datasets.MNIST(root='data', train=True, transform=ToTensor())
+train_data_loader = DataLoader(train_dataset, batch_size=32, num_workers=4)
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> PyTorch documentation - <a href="https://pytorch.org/docs/stable/data.html#single-and-multi-process-data-loading">Single- and Multi-process
+  Data Loading</a> </li>
+  <li> PyTorch documentation - <a href="https://pytorch.org/tutorials/beginner/basics/data_tutorial.html">Datasets and DataLoaders</a> </li>
+</ul>
+
