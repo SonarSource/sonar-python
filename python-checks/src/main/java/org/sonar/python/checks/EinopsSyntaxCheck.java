@@ -41,6 +41,8 @@ import org.sonar.python.tree.TreeUtils;
 public class EinopsSyntaxCheck extends PythonSubscriptionCheck {
 
   private static final String MESSAGE_TEMPLATE = "Fix the syntax of this einops operation: %s.";
+  private static final String NESTED_PARENTHESIS_MESSAGE = "nested parenthesis are not allowed";
+  private static final String LHS_ELLIPSIS_MESSAGE = "Ellipsis inside parenthesis on the left side is not allowed";
   private static final String UNBALANCED_PARENTHESIS_MESSAGE = "parenthesis are unbalanced";
   private static final Set<String> FQN_TO_CHECK = Set.of("einops.repeat", "einops.reduce", "einops.rearrange");
 
@@ -74,7 +76,8 @@ public class EinopsSyntaxCheck extends PythonSubscriptionCheck {
       .filter(arg -> arg.expression().is(Tree.Kind.NUMERIC_LITERAL))
       .filter(arg -> arg.keywordArgument() != null)
       .map(arg -> arg.keywordArgument().name())
-      .filter(argName -> !pattern.lhs.identifiers.contains(argName) || !pattern.rhs.identifiers.contains(argName))
+      .filter(argName -> !pattern.lhs.identifiers.contains(argName))
+      .filter(argName -> !pattern.rhs.identifiers.contains(argName))
       .toList();
 
     if (!argsToCheck.isEmpty()) {
@@ -90,6 +93,12 @@ public class EinopsSyntaxCheck extends PythonSubscriptionCheck {
       .ifPresent(message -> ctx.addIssue(pattern.originalPattern(), String.format(MESSAGE_TEMPLATE, message)));
   }
 
+  private static void checkForEllipsisInParenthesis(SubscriptionContext ctx, EinopsPattern pattern) {
+    if (ellipsisPattern.matcher(pattern.lhs.originalPattern).find()) {
+      ctx.addIssue(pattern.originalPattern(), String.format(MESSAGE_TEMPLATE, LHS_ELLIPSIS_MESSAGE));
+    }
+  }
+
   private record EinopsPattern(StringLiteral originalPattern, EinopsSide lhs, EinopsSide rhs) {
   }
 
@@ -99,13 +108,7 @@ public class EinopsSyntaxCheck extends PythonSubscriptionCheck {
   private record ParenthesisState(boolean hasOpenParenthesis, Optional<String> errorMessage) {
   }
 
-  private static final Pattern ellipsisPattern = Pattern.compile("\\(.*\\.{3}.*\\)");
-
-  private static void checkForEllipsisInParenthesis(SubscriptionContext ctx, EinopsPattern pattern) {
-    if (ellipsisPattern.matcher(pattern.lhs.originalPattern).find()) {
-      ctx.addIssue(pattern.originalPattern(), String.format(MESSAGE_TEMPLATE, "Ellipsis inside parenthesis on the left side is not allowed"));
-    }
-  }
+  private static final Pattern ellipsisPattern = Pattern.compile("\\(.*(?:\\.{3}|…).*\\)");
 
   private static Optional<StringLiteral> extractPatternFromCallExpr(CallExpression callExpression) {
     return Optional.ofNullable(TreeUtils.nthArgumentOrKeyword(1, "pattern", callExpression.arguments()))
@@ -139,10 +142,12 @@ public class EinopsSyntaxCheck extends PythonSubscriptionCheck {
           currentIdentifier.setLength(0);
         }
         state = checkParenthesisBalance(c, state);
-        // \u2026 is the unicode character for Ellipsis
-      } else if (Character.isLetterOrDigit(c) || c == '_' || c == '\u2026') {
+      } else if (Character.isLetterOrDigit(c) || c == '_' || c == '…') {
         currentIdentifier.append(c);
       }
+    }
+    if (!currentIdentifier.isEmpty()) {
+      identifiers.add(currentIdentifier.toString());
     }
     if (state.hasOpenParenthesis && state.errorMessage.isEmpty()) {
       state = new ParenthesisState(true, Optional.of(UNBALANCED_PARENTHESIS_MESSAGE));
@@ -151,19 +156,16 @@ public class EinopsSyntaxCheck extends PythonSubscriptionCheck {
   }
 
   private static ParenthesisState checkParenthesisBalance(char c, ParenthesisState state) {
-    boolean hasOpenParenthesis = state.hasOpenParenthesis;
     Optional<String> errorMessage = state.errorMessage;
-    if ('(' == c) {
-      if (hasOpenParenthesis) {
-        errorMessage = Optional.of("nested parenthesis are not allowed");
-      }
-      hasOpenParenthesis = true;
-    } else if (')' == c) {
-      if (!hasOpenParenthesis && errorMessage.isEmpty()) {
-        errorMessage = Optional.of(UNBALANCED_PARENTHESIS_MESSAGE);
-      }
-      hasOpenParenthesis = false;
+    if (' ' == c) {
+      return state;
     }
-    return new ParenthesisState(hasOpenParenthesis, errorMessage);
+    if ('(' == c && state.hasOpenParenthesis) {
+      errorMessage = Optional.of(NESTED_PARENTHESIS_MESSAGE);
+    }
+    if (')' == c && !state.hasOpenParenthesis && errorMessage.isEmpty()) {
+      errorMessage = Optional.of(UNBALANCED_PARENTHESIS_MESSAGE);
+    }
+    return new ParenthesisState('(' == c, errorMessage);
   }
 }
