@@ -21,8 +21,6 @@ def adadelta(param_dict, param_list, rho, eps):
     optimizer = Adadelta(model.parameters(), 0.001, rho, eps, 0.23)
     optimizer = Adadelta(model.parameters(), lr = 0.001, weight_decay=0.23)
     optimizer = Adadelta(model.parameters(), lr = 0.001, weight_decay=0.23, some_extra_variable=3)
-    optimizer = Adadelta(model.parameters(), **param_dict, *param_list)
-    optimizer = Adadelta(model.parameters(), **param_dict, *param_list)
 
 def adagrad(param_dict, param_list, lr_decay):
     from torch.optim import Adagrad
@@ -32,8 +30,6 @@ def adagrad(param_dict, param_list, lr_decay):
 
     optimizer = Adagrad(model.parameters(), 0.001, lr_decay, 0.23)
     optimizer = Adagrad(model.parameters(), lr = 0.001, weight_decay=0.23)
-    optimizer = Adagrad(model.parameters(), **param_dict, *param_list)
-    optimizer = Adagrad(model.parameters(), **param_dict, *param_list)
 
 def adam(param_dict, param_list, betas, eps):
     from torch.optim import Adam
@@ -54,8 +50,6 @@ def adamW(param_dict, param_list, betas, eps):
 
     optimizer = AdamW(model.parameters(), 0.001, betas, eps, 0.23)
     optimizer = AdamW(model.parameters(), lr = 0.001, weight_decay=0.23)
-    optimizer = AdamW(model.parameters(), **param_dict, *param_list)
-    optimizer = AdamW(model.parameters(), **param_dict, *param_list)
 
 def sparse_adam(param_dict, param_list):
     from torch.optim import SparseAdam
@@ -64,8 +58,6 @@ def sparse_adam(param_dict, param_list):
 
     optimizer = SparseAdam(model.parameters(), 0.001)
     optimizer = SparseAdam(model.parameters(), lr = 0.001)
-    optimizer = SparseAdam(model.parameters(), **param_dict, *param_list)
-    optimizer = SparseAdam(model.parameters(), **param_dict, *param_list)
 
 
 def adamax(param_dict, param_list, betas, eps):
@@ -76,8 +68,6 @@ def adamax(param_dict, param_list, betas, eps):
 
     optimizer = Adamax(model.parameters(), 0.001, betas, eps, 0.23)
     optimizer = Adamax(model.parameters(), lr = 0.001, weight_decay=0.23)
-    optimizer = Adamax(model.parameters(), **param_dict, *param_list)
-    optimizer = Adamax(model.parameters(), **param_dict, *param_list)
 
 def asgd(param_dict, param_list, lambda_, alpha, t0):
     from torch.optim import ASGD
@@ -87,8 +77,6 @@ def asgd(param_dict, param_list, lambda_, alpha, t0):
 
     optimizer = ASGD(model.parameters(), 0.001, lambda_, alpha, t0, 0.23)
     optimizer = ASGD(model.parameters(), lr = 0.001, weight_decay=0.23)
-    optimizer = ASGD(model.parameters(), **param_dict, *param_list)
-    optimizer = ASGD(model.parameters(), **param_dict, *param_list)
 
 def lbfgs(param_dict, param_list):
     from torch.optim import LBFGS
@@ -96,8 +84,6 @@ def lbfgs(param_dict, param_list):
 
     optimizer = LBFGS(model.parameters(), 0.001)
     optimizer = LBFGS(model.parameters(), lr = 0.001)
-    optimizer = LBFGS(model.parameters(), **param_dict, *param_list)
-    optimizer = LBFGS(model.parameters(), **param_dict, *param_list)
 
 def nadam(param_dict, param_list, betas, eps):
     from torch.optim import NAdam
@@ -108,8 +94,6 @@ def nadam(param_dict, param_list, betas, eps):
 
     optimizer = NAdam(model.parameters(), 0.001, betas, eps, 0.23, 0.25)
     optimizer = NAdam(model.parameters(), lr = 0.001, weight_decay=0.23, momentum_decay=0.25)
-    optimizer = NAdam(model.parameters(), **param_dict, *param_list)
-    optimizer = NAdam(model.parameters(), **param_dict, *param_list)
 
 def radam(param_dict, param_list, betas, eps):
     from torch.optim import RAdam
@@ -119,8 +103,6 @@ def radam(param_dict, param_list, betas, eps):
 
     optimizer = RAdam(model.parameters(), 0.001, betas, eps, 0.23)
     optimizer = RAdam(model.parameters(), lr = 0.001, weight_decay=0.23)
-    optimizer = RAdam(model.parameters(), **param_dict, *param_list)
-    optimizer = RAdam(model.parameters(), **param_dict, *param_list)
 
 def rms_prop(param_dict, param_list, alpha, eps):
     from torch.optim import RMSprop
@@ -131,8 +113,6 @@ def rms_prop(param_dict, param_list, alpha, eps):
 
     optimizer = RMSprop(model.parameters(), 0.001, alpha, eps, 0.23, 0.323)
     optimizer = RMSprop(model.parameters(), lr = 0.001, weight_decay=0.23, momentum=0.323)
-    optimizer = RMSprop(model.parameters(), **param_dict, *param_list)
-    optimizer = RMSprop(model.parameters(), **param_dict, *param_list)
 
 def rprop(param_dict, param_list):
     from torch.optim import Rprop
@@ -141,8 +121,6 @@ def rprop(param_dict, param_list):
 
     optimizer = Rprop(model.parameters(), 0.001)
     optimizer = Rprop(model.parameters(), lr = 0.001)
-    optimizer = Rprop(model.parameters(), **param_dict, *param_list)
-    optimizer = Rprop(model.parameters(), **param_dict, *param_list)
 
 def sgd(param_dict, param_list, dampening):
     from torch.optim import SGD
@@ -153,5 +131,3 @@ def sgd(param_dict, param_list, dampening):
 
     optimizer = SGD(model.parameters(), 0.001, 0.323, dampening, 0.23)
     optimizer = SGD(model.parameters(), lr = 0.001, momentum=0.323, weight_decay=0.23)
-    optimizer = SGD(model.parameters(), **param_dict, *param_list)
-    optimizer = SGD(model.parameters(), **param_dict, *param_list)

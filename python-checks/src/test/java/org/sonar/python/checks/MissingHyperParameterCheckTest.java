@@ -32,6 +32,6 @@ class MissingHyperParameterCheckTest {
 
   @Test
   void testPyTorch(){
-    PythonCheckVerifier.verify("src/test/resources/checks/pytorch_estimator_hyperparameters.py", new MissingHyperParameterCheck());
+    PythonCheckVerifier.verify("src/test/resources/checks/pytorch_optimizer_hyperparameters.py", new MissingHyperParameterCheck());
   }
 }
