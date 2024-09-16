@@ -25,8 +25,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Function;
-import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.AnyParameter;
@@ -544,6 +543,31 @@ class TreeUtilsTest {
     assertThat(funcDefPresent).isFalse();
   }
 
+  @Test
+  void test_toStreamInstanceOfMapper() {
+    var fileInput = PythonTestUtils.parse(
+      "class A:",
+      "    x = True",
+      "    def foo(self):",
+      "        def foo2(x, y): return x + y",
+      "        return foo2(1, 1)",
+      "    class B:",
+      "        def bar(self): pass"
+    );
+    Tree tree = PythonTestUtils.getFirstChild(fileInput, t -> t.is(Kind.CLASSDEF));
+
+    boolean classPresent = Stream.of(tree)
+      .flatMap(TreeUtils.toStreamInstanceOfMapper(ClassDef.class))
+      .count() > 0;
+
+    assertThat(classPresent).isTrue();
+
+    boolean funcDefPresent = Stream.of(tree)
+      .flatMap(TreeUtils.toStreamInstanceOfMapper(FunctionDef.class))
+      .count() > 0;
+
+    assertThat(funcDefPresent).isFalse();
+  }
   @Test
   void test_findIndentationSize() {
     var fileInput = PythonTestUtils.parse("def foo():\n" +
