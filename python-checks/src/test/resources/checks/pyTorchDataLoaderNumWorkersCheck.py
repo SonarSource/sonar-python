@@ -39,3 +39,6 @@ class SubDataLoader(DataLoader):
 
 # this should raise an issue but this is currently not supported
 comp10 = SubDataLoader()
+
+# checks coverage for if the symbol is null
+(lambda x: x)(2)
