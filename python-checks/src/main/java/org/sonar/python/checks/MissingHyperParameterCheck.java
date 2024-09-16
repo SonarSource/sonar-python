@@ -44,7 +44,7 @@ import static org.sonar.plugins.python.api.tree.Tree.Kind.REGULAR_ARGUMENT;
 import static org.sonar.python.tree.TreeUtils.toOptionalInstanceOfMapper;
 
 @Rule(key = "S6973")
-public class SklearnPyTorchEstimatorHyperparametersCheck extends PythonSubscriptionCheck {
+public class MissingHyperParameterCheck extends PythonSubscriptionCheck {
   private static final String SKLEARN_MESSAGE = "Add the missing hyperparameter%s %s for this Scikit-learn estimator.";
   private static final String PYTORCH_MESSAGE = "Add the missing hyperparameter%s %s for this PyTorch optimizer.";
 
@@ -60,7 +60,7 @@ public class SklearnPyTorchEstimatorHyperparametersCheck extends PythonSubscript
 
   @Override
   public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(CALL_EXPR, SklearnPyTorchEstimatorHyperparametersCheck::checkEstimator);
+    context.registerSyntaxNodeConsumer(CALL_EXPR, MissingHyperParameterCheck::checkEstimator);
   }
 
   private static void checkEstimator(SubscriptionContext ctx) {
@@ -69,21 +69,25 @@ public class SklearnPyTorchEstimatorHyperparametersCheck extends PythonSubscript
 
     Optional.ofNullable(calleeSymbol)
       .map(Symbol::fullyQualifiedName).ifPresent(name -> {
-        checkPyTorchEstimator(name, callExpression, ctx);
+        checkPyTorchOptimizer(name, callExpression, ctx);
         checkSkLearnEstimator(name, callExpression, ctx);
       });
   }
 
-  private static void checkPyTorchEstimator(String name, CallExpression callExpression, SubscriptionContext ctx) {
+  private static void checkPyTorchOptimizer(String name, CallExpression callExpression, SubscriptionContext ctx) {
     PyTorchCheck.getMissingParameters(name, callExpression)
-      .map(parameters -> parameters.stream().map(Param::name).toList())
+      .map(MissingHyperParameterCheck::toParameterNames)
       .ifPresent(parameters -> ctx.addIssue(callExpression, formatMessage(parameters, PYTORCH_MESSAGE)));
   }
 
   private static void checkSkLearnEstimator(String name, CallExpression callExpression, SubscriptionContext ctx) {
     SkLearnCheck.getMissingParameters(name, callExpression)
-      .map(parameters -> parameters.stream().map(Param::name).toList())
+      .map(MissingHyperParameterCheck::toParameterNames)
       .ifPresent(parameters -> ctx.addIssue(callExpression, formatMessage(parameters, SKLEARN_MESSAGE)));
+  }
+
+  private static List<String> toParameterNames(List<Param> parameters) {
+    return parameters.stream().map(Param::name).toList();
   }
 
   private static String formatMessage(List<String> missingArgs, String formatString) {
