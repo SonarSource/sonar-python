@@ -461,6 +461,14 @@ public class TreeUtils {
     return Optional.ofNullable(tree).filter(castToClass::isInstance).map(castToClass::cast);
   }
 
+  public static <T extends Tree> Function<Tree, Stream<T>> toStreamInstanceOfMapper(Class<T> castToClass) {
+    return tree -> toStreamInstanceOf(castToClass, tree);
+  }
+
+  public static <T extends Tree> Stream<T> toStreamInstanceOf(Class<T> castToClass, @Nullable Tree tree) {
+    return toOptionalInstanceOf(castToClass, tree).map(Stream::of).orElse(Stream.empty());
+  }
+
   public static Optional<Tree> firstChild(Tree tree, Predicate<Tree> filter) {
     if (filter.test(tree)) {
       return Optional.of(tree);

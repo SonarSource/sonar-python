@@ -20,6 +20,7 @@
 package org.sonar.python.checks;
 
 import java.util.List;
+import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.symbols.Symbol;
@@ -29,6 +30,7 @@ import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.cfg.fixpoint.ReachingDefinitionsAnalysis;
 import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S6985")
@@ -39,8 +41,13 @@ public class TorchLoadLeadsToUntrustedCodeExecutionCheck extends PythonSubscript
   public static final String PYTHON_FALSE = "False";
   public static final String WEIGHTS_ONLY = "weights_only";
 
+  private ReachingDefinitionsAnalysis reachingDefinitionsAnalysis;
+
   @Override
   public void initialize(Context context) {
+    context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, ctx -> reachingDefinitionsAnalysis =
+      new ReachingDefinitionsAnalysis(ctx.pythonFile()));
+
     context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, ctx -> {
       CallExpression callExpression = (CallExpression) ctx.syntaxNode();
       Symbol calleeSymbol = callExpression.calleeSymbol();
@@ -50,12 +57,20 @@ public class TorchLoadLeadsToUntrustedCodeExecutionCheck extends PythonSubscript
     });
   }
 
-  private static boolean isWeightsOnlyNotFoundOrSetToFalse(List<Argument> arguments) {
+  private boolean isWeightsOnlyNotFoundOrSetToFalse(List<Argument> arguments) {
     RegularArgument weightsOnlyArg = TreeUtils.argumentByKeyword(WEIGHTS_ONLY, arguments);
-    if(weightsOnlyArg == null) return true;
+    if (weightsOnlyArg == null) return true;
+    if (weightsOnlyArg.expression() instanceof Name name) {
+      return PYTHON_FALSE.equals(name.name()) || isNameSetToFalse(name);
+    }
+    return false;
+  }
 
-    Expression weightsOnlyArgExpr = weightsOnlyArg.expression();
-    return weightsOnlyArgExpr.is(Tree.Kind.NAME) && PYTHON_FALSE.equals(((Name) weightsOnlyArgExpr).name());
+  private boolean isNameSetToFalse(Name name) {
+    Set<Expression> values = reachingDefinitionsAnalysis.valuesAtLocation(name);
+    return values.size() == 1 && values.stream()
+      .flatMap(TreeUtils.toStreamInstanceOfMapper(Name.class))
+      .map(Name::name).allMatch(PYTHON_FALSE::equals);
   }
 
 
