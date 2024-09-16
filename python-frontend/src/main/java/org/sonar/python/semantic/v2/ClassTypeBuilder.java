@@ -64,12 +64,13 @@ public class ClassTypeBuilder implements TypeBuilder<ClassType> {
     return this;
   }
 
-  public List<TypeWrapper> superClasses() {
-    return superClasses;
-  }
-
   public ClassTypeBuilder addSuperClass(PythonType type) {
     superClasses.add(new LazyTypeWrapper(type));
+    return this;
+  }
+
+  public ClassTypeBuilder addSuperClass(TypeWrapper typeWrapper) {
+    superClasses.add(typeWrapper);
     return this;
   }
 
