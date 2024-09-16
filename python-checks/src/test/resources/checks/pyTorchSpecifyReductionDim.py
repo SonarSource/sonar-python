@@ -91,3 +91,9 @@ def count_nonzero(input):
 
     torch.count_nonzero(input, 2)
     torch.count_nonzero(input, dim=2)
+
+def multiple_imports():
+    from torch import var_mean
+    from other_module import var_mean
+
+    var_mean()
