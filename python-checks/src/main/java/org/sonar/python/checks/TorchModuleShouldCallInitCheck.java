@@ -20,6 +20,7 @@
 package org.sonar.python.checks;
 
 import java.util.Optional;
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
@@ -47,7 +48,7 @@ public class TorchModuleShouldCallInitCheck extends PythonSubscriptionCheck {
     context.registerSyntaxNodeConsumer(Tree.Kind.FUNCDEF, ctx -> {
       FunctionDef funcDef = (FunctionDef) ctx.syntaxNode();
       ClassDef classDef = CheckUtils.getParentClassDef(funcDef);
-      if (isConstructor(funcDef) && isInheritingFromTorchModule(classDef) && isMissingSuperCall(funcDef)) {
+      if (isInheritingFromTorchModule(classDef) && isConstructor(funcDef) && isMissingSuperCall(funcDef)) {
         PreciseIssue issue = ctx.addIssue(funcDef.name(), MESSAGE);
         issue.secondary(classDef.name(), SECONDARY_MESSAGE);
       }

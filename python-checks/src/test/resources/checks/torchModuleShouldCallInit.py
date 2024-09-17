@@ -8,6 +8,8 @@ class NonCompliantModule(nn.Module):
 
 class NonCompliantModule(nn.Module):
     def __init__(self): #Noncompliant
+        (lambda x: x)()
+        (lambda x: x)().test()
         self.call_super()
 
     def call_super(self):
@@ -36,3 +38,9 @@ class CompliantModule(nn.Module):
 class UnrelatedCompliantModule:
     def __init__(self):
         ...
+
+def __init__(test):
+    pass
+
+def some_other_func():
+    pass
