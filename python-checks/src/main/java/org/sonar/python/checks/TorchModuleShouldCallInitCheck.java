@@ -1,5 +1,6 @@
 package org.sonar.python.checks;
 
+import java.util.Optional;
 import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
@@ -9,7 +10,6 @@ import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FunctionDef;
-import org.sonar.plugins.python.api.tree.HasSymbol;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Tree;
@@ -18,8 +18,9 @@ import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S6978")
 public class TorchModuleShouldCallInitCheck extends PythonSubscriptionCheck {
-
-  public static final String TORCH_NN_MODULE = "torch.nn.Module";
+  private static final String TORCH_NN_MODULE = "torch.nn.Module";
+  private static final String MESSAGE = "Add a call to super().__init__()";
+  private static final String SECONDARY_MESSAGE = "Inheritance happens here";
 
   @Override
   public void initialize(Context context) {
@@ -27,8 +28,8 @@ public class TorchModuleShouldCallInitCheck extends PythonSubscriptionCheck {
       FunctionDef funcDef = (FunctionDef) ctx.syntaxNode();
       ClassDef classDef = CheckUtils.getParentClassDef(funcDef);
       if (isConstructor(funcDef) && isInheritingFromTorchModule(classDef) && isMissingSuperCall(funcDef)) {
-        PreciseIssue issue = ctx.addIssue(funcDef.name(), "Add a call to super().__init__()");
-        issue.secondary(classDef.name(), "Inheritance happens here");
+        PreciseIssue issue = ctx.addIssue(funcDef.name(), MESSAGE);
+        issue.secondary(classDef.name(), SECONDARY_MESSAGE);
       }
     });
   }
@@ -42,16 +43,12 @@ public class TorchModuleShouldCallInitCheck extends PythonSubscriptionCheck {
     if (classDef == null || classDef.args() == null) return false;
     return classDef.args().arguments().stream()
       .flatMap(TreeUtils.toStreamInstanceOfMapper(RegularArgument.class))
-      .anyMatch(arg -> TORCH_NN_MODULE.equals(getQualifiedName(arg.expression())));
+      .map(arg -> getQualifiedName(arg.expression()))
+      .anyMatch(expr -> expr.filter(TORCH_NN_MODULE::equals).isPresent());
   }
 
-  //TODO: Copied from NonStandardCryptographicCheck. maybe worth refactoring into some Utils class
-  private static String getQualifiedName(Expression node) {
-    if (node instanceof HasSymbol hasSymbol) {
-      Symbol symbol = hasSymbol.symbol();
-      return symbol != null ? symbol.fullyQualifiedName() : "";
-    }
-    return "";
+  private static Optional<String> getQualifiedName(Expression node) {
+    return TreeUtils.getSymbolFromTree(node).flatMap(symbol -> Optional.ofNullable(symbol.fullyQualifiedName()));
   }
 
   private static boolean isMissingSuperCall(FunctionDef funcDef) {
