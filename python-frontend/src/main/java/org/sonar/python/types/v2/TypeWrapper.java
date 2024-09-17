@@ -22,4 +22,6 @@ package org.sonar.python.types.v2;
 public interface TypeWrapper {
 
   PythonType type();
+
+  TypeWrapper UNKNOWN_TYPE_WRAPPER = new SimpleTypeWrapper(PythonType.UNKNOWN);
 }
