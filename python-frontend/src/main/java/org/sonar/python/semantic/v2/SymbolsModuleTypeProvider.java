@@ -49,8 +49,8 @@ import org.sonar.python.types.v2.ModuleType;
 import org.sonar.python.types.v2.ObjectType;
 import org.sonar.python.types.v2.ParameterV2;
 import org.sonar.python.types.v2.PythonType;
-import org.sonar.python.types.v2.SimpleTypeWrapper;
 import org.sonar.python.types.v2.TypeOrigin;
+import org.sonar.python.types.v2.TypeWrapper;
 import org.sonar.python.types.v2.UnionType;
 
 public class SymbolsModuleTypeProvider {
@@ -121,7 +121,7 @@ public class SymbolsModuleTypeProvider {
 
     var parameters = symbol.parameters()
       .stream()
-      .map(SymbolsModuleTypeProvider::convertParameter)
+      .map(this::convertParameter)
       .toList();
 
     var returnType = getReturnTypeFromSymbol(symbol);
@@ -209,15 +209,19 @@ public class SymbolsModuleTypeProvider {
     return classType;
   }
 
-  private static ParameterV2 convertParameter(FunctionSymbol.Parameter parameter) {
+  private ParameterV2 convertParameter(FunctionSymbol.Parameter parameter) {
+    var typeWrapper = Optional.ofNullable(((FunctionSymbolImpl.ParameterImpl) parameter).annotatedTypeName())
+      .map(lazyTypesContext::getOrCreateLazyTypeWrapper)
+      .orElse(TypeWrapper.UNKNOWN_TYPE_WRAPPER);
+
     return new ParameterV2(parameter.name(),
-      new SimpleTypeWrapper(PythonType.UNKNOWN),
+      typeWrapper,
       parameter.hasDefaultValue(),
       parameter.isKeywordOnly(),
       parameter.isPositionalOnly(),
       parameter.isKeywordVariadic(),
       parameter.isPositionalVariadic(),
-      null);
+      parameter.location());
   }
 
   private PythonType convertToUnionType(AmbiguousSymbol ambiguousSymbol, Map<Symbol, PythonType> createdTypesBySymbol) {
