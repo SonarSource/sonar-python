@@ -31,6 +31,7 @@ import org.assertj.core.api.InstanceOfAssertFactories;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import org.sonar.plugins.python.api.LocationInFile;
 import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
@@ -54,6 +55,7 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.PythonTestUtils;
 import org.sonar.python.semantic.ClassSymbolImpl;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
+import org.sonar.python.semantic.SymbolUtils;
 import org.sonar.python.tree.ExpressionStatementImpl;
 import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.types.v2.ClassType;
@@ -692,6 +694,38 @@ class TypeInferenceV2Test {
 
     var functionDef = (FunctionDef) root.statements().statements().get(root.statements().statements().size() - 1);
     assertThat(((FunctionType) functionDef.name().typeV2()).parameters().get(0).declaredType().type().unwrappedType()).isEqualTo(PythonType.UNKNOWN);
+  }
+
+  @Test
+  void inferFunctionParameterTypesMultiFile() {
+    FileInput tree = parseWithoutSymbols(
+      "def foo(param1: int): ...",
+      "class A: ...",
+      "def foo2(p1: dict, p2: A): ..."
+    );
+    ProjectLevelSymbolTable projectLevelSymbolTable = new ProjectLevelSymbolTable();
+    var modFile = pythonFile("mod.py");
+    projectLevelSymbolTable.addModule(tree, "", modFile);
+    ProjectLevelTypeTable projectLevelTypeTable = new ProjectLevelTypeTable(projectLevelSymbolTable);
+    var modFileId = SymbolUtils.pathOf(modFile).toString();
+
+    var intType = projectLevelTypeTable.lazyTypesContext().getOrCreateLazyType("int").resolve();
+    var dictType = projectLevelTypeTable.lazyTypesContext().getOrCreateLazyType("dict").resolve();
+    var aType = projectLevelTypeTable.lazyTypesContext().getOrCreateLazyType("mod.A").resolve();
+    var lines = """
+      from mod import foo, foo2
+      foo
+      foo2
+      """;
+    FileInput fileInput = inferTypes(lines, projectLevelTypeTable);
+    FunctionType fooType = (FunctionType) ((ExpressionStatement) fileInput.statements().statements().get(1)).expressions().get(0).typeV2();
+    assertThat(fooType.parameters().get(0).declaredType().type().unwrappedType()).isEqualTo(intType);
+
+    FunctionType foo2Type = (FunctionType) ((ExpressionStatement) fileInput.statements().statements().get(2)).expressions().get(0).typeV2();
+    assertThat(foo2Type.parameters()).extracting(ParameterV2::declaredType).extracting(TypeWrapper::type).containsExactly(dictType, aType);
+    assertThat(foo2Type.parameters()).extracting(ParameterV2::location).containsExactly(
+      new LocationInFile(modFileId, 3, 9, 3, 17),
+      new LocationInFile(modFileId, 3, 19, 3, 24));
   }
 
   @Test
