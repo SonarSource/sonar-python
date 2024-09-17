@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import org.sonar.check.Rule;
@@ -45,6 +46,7 @@ public class EinopsSyntaxCheck extends PythonSubscriptionCheck {
   private static final String LHS_ELLIPSIS_MESSAGE = "Ellipsis inside parenthesis on the left side is not allowed";
   private static final String UNBALANCED_PARENTHESIS_MESSAGE = "parenthesis are unbalanced";
   private static final Set<String> FQN_TO_CHECK = Set.of("einops.repeat", "einops.reduce", "einops.rearrange");
+  private static final Pattern ellipsisPattern = Pattern.compile("\\((.*)\\)");
 
   @Override
   public void initialize(Context context) {
@@ -94,7 +96,8 @@ public class EinopsSyntaxCheck extends PythonSubscriptionCheck {
   }
 
   private static void checkForEllipsisInParenthesis(SubscriptionContext ctx, EinopsPattern pattern) {
-    if (ellipsisPattern.matcher(pattern.lhs.originalPattern).find()) {
+    Matcher m = ellipsisPattern.matcher(pattern.lhs.originalPattern);
+    if (m.find() && (m.group().contains("...") || m.group().contains("…"))) {
       ctx.addIssue(pattern.originalPattern(), String.format(MESSAGE_TEMPLATE, LHS_ELLIPSIS_MESSAGE));
     }
   }
@@ -107,8 +110,6 @@ public class EinopsSyntaxCheck extends PythonSubscriptionCheck {
 
   private record ParenthesisState(boolean hasOpenParenthesis, Optional<String> errorMessage) {
   }
-
-  private static final Pattern ellipsisPattern = Pattern.compile("\\(.*(?:\\.{3}|…).*\\)");
 
   private static Optional<StringLiteral> extractPatternFromCallExpr(CallExpression callExpression) {
     return Optional.ofNullable(TreeUtils.nthArgumentOrKeyword(1, "pattern", callExpression.arguments()))
