@@ -54,6 +54,7 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.PythonTestUtils;
 import org.sonar.python.semantic.ClassSymbolImpl;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
+import org.sonar.python.semantic.SymbolUtils;
 import org.sonar.python.tree.ExpressionStatementImpl;
 import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.types.v2.ClassType;
@@ -705,6 +706,7 @@ class TypeInferenceV2Test {
     var modFile = pythonFile("mod.py");
     projectLevelSymbolTable.addModule(tree, "", modFile);
     ProjectLevelTypeTable projectLevelTypeTable = new ProjectLevelTypeTable(projectLevelSymbolTable);
+    var modFileId = SymbolUtils.pathOf(modFile).toString();
 
     var intType = projectLevelTypeTable.lazyTypesContext().getOrCreateLazyType("int").resolve();
     var dictType = projectLevelTypeTable.lazyTypesContext().getOrCreateLazyType("dict").resolve();
@@ -721,8 +723,8 @@ class TypeInferenceV2Test {
     FunctionType foo2Type = (FunctionType) ((ExpressionStatement) fileInput.statements().statements().get(2)).expressions().get(0).typeV2();
     assertThat(foo2Type.parameters()).extracting(ParameterV2::declaredType).extracting(TypeWrapper::type).containsExactly(dictType, aType);
     assertThat(foo2Type.parameters()).extracting(ParameterV2::location).containsExactly(
-      new LocationInFile(modFile.uri().getPath(), 3, 9, 3, 17),
-      new LocationInFile(modFile.uri().getPath(), 3, 19, 3, 24));
+      new LocationInFile(modFileId, 3, 9, 3, 17),
+      new LocationInFile(modFileId, 3, 19, 3, 24));
   }
 
   @Test
