@@ -20,11 +20,59 @@
 package org.sonar.python.checks;
 
 import org.junit.jupiter.api.Test;
+import org.sonar.python.checks.quickfix.PythonQuickFixVerifier;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 class TorchModuleShouldCallInitCheckTest {
   @Test
   void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/torchModuleShouldCallInit.py", new TorchModuleShouldCallInitCheck());
+  }
+
+  @Test
+  void testQuickFix() {
+    PythonQuickFixVerifier.verify(new TorchModuleShouldCallInitCheck(),
+      """
+        import torch
+        class Test(torch.nn.Module):
+          def __init__(self):
+            some_method()
+        """,
+      """
+        import torch
+        class Test(torch.nn.Module):
+          def __init__(self):
+            super().__init__()
+            some_method()
+        """);
+
+    PythonQuickFixVerifier.verify(new TorchModuleShouldCallInitCheck(),
+      """
+        import torch
+        class Test(torch.nn.Module):
+          def __init__(self):
+            ... 
+        """,
+      """
+        import torch
+        class Test(torch.nn.Module):
+          def __init__(self):
+            super().__init__()
+            ...
+        """);
+
+    PythonQuickFixVerifier.verifyNoQuickFixes(new TorchModuleShouldCallInitCheck(),
+      """
+        import torch
+        class Test(torch.nn.Module):
+          def __init__(self): some_method()
+        """);
+
+    PythonQuickFixVerifier.verifyNoQuickFixes(new TorchModuleShouldCallInitCheck(),
+      """
+        import torch
+        class Test(torch.nn.Module):
+          def __init__(self): pass
+        """);
   }
 }

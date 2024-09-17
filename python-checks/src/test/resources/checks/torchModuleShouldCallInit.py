@@ -29,6 +29,8 @@ class CompliantModule(NonExistantClass):
 class CompliantModule(nn.Module):
     def __init__(self):
         super().__init__()
+class CompliantModule(nn.Module):
+    pass
 
 class CompliantModule(nn.Module):
     def __init__(self, cond):

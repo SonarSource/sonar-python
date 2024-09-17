@@ -20,10 +20,11 @@
 package org.sonar.python.checks;
 
 import java.util.Optional;
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
+import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
+import org.sonar.plugins.python.api.quickfix.PythonTextEdit;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.ArgList;
@@ -35,6 +36,7 @@ import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.checks.utils.CheckUtils;
+import org.sonar.python.quickfix.TextEditUtils;
 import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S6978")
@@ -42,6 +44,7 @@ public class TorchModuleShouldCallInitCheck extends PythonSubscriptionCheck {
   private static final String TORCH_NN_MODULE = "torch.nn.Module";
   private static final String MESSAGE = "Add a call to super().__init__()";
   private static final String SECONDARY_MESSAGE = "Inheritance happens here";
+  public static final String QUICK_FIX_MESSAGE = "insert call to super constructor";
 
   @Override
   public void initialize(Context context) {
@@ -51,6 +54,7 @@ public class TorchModuleShouldCallInitCheck extends PythonSubscriptionCheck {
       if (isInheritingFromTorchModule(classDef) && isConstructor(funcDef) && isMissingSuperCall(funcDef)) {
         PreciseIssue issue = ctx.addIssue(funcDef.name(), MESSAGE);
         issue.secondary(classDef.name(), SECONDARY_MESSAGE);
+        createQuickFix(funcDef).ifPresent(issue::addQuickFix);
       }
     });
   }
@@ -87,5 +91,16 @@ public class TorchModuleShouldCallInitCheck extends PythonSubscriptionCheck {
       return superSymbol != null && "super".equals(superSymbol.name());
     }
     return false;
+  }
+
+  private static Optional<PythonQuickFix> createQuickFix(FunctionDef functionDef) {
+    // it is hard to find the correct indentation when the function def and the body is on the same line (e.g. def test(): pass).
+    // Thus we don't produce a quickfix in those cases
+    if(functionDef.colon().line() == functionDef.body().firstToken().line()) {
+      return Optional.empty();
+    }
+
+    PythonTextEdit pythonTextEdit = TextEditUtils.insertLineAfter(functionDef.colon(), functionDef.body(), "super().__init__()");
+    return Optional.of(PythonQuickFix.newQuickFix(QUICK_FIX_MESSAGE, pythonTextEdit));
   }
 }
