@@ -23,12 +23,15 @@ import java.util.List;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import org.sonar.plugins.python.api.LocationInFile;
 import org.sonar.python.index.AmbiguousDescriptor;
 import org.sonar.python.index.ClassDescriptor;
 import org.sonar.python.index.Descriptor;
+import org.sonar.python.index.FunctionDescriptor;
 import org.sonar.python.semantic.v2.ClassTypeBuilder;
 import org.sonar.python.semantic.v2.LazyTypesContext;
 import org.sonar.python.types.v2.ClassType;
+import org.sonar.python.types.v2.FunctionType;
 import org.sonar.python.types.v2.LazyType;
 import org.sonar.python.types.v2.Member;
 import org.sonar.python.types.v2.PythonType;
@@ -95,6 +98,49 @@ class DescriptorToPythonTypeConverterTest {
       .containsOnly("member");
   }
 
+  @Test
+  void functionDescriptorConversionTest() {
+    var lazyTypesContext = Mockito.mock(LazyTypesContext.class);
+    var converter = new AnyDescriptorToPythonTypeConverter(lazyTypesContext);
+    var descriptor = Mockito.mock(FunctionDescriptor.class);
+
+    var returnTypeName = "Returned";
+    var resolvedReturnType = new ClassTypeBuilder().withName(returnTypeName).build();
+
+    Mockito.when(descriptor.kind()).thenReturn(Descriptor.Kind.FUNCTION);
+    Mockito.when(descriptor.name()).thenReturn("Sample");
+    Mockito.when(descriptor.annotatedReturnTypeName()).thenReturn(returnTypeName);
+    Mockito.when(descriptor.parameters()).thenReturn(List.of(
+      new FunctionDescriptor.Parameter(
+        "p1",
+        "Returned",
+        false,
+        false,
+        true,
+        false,
+        false,
+        new LocationInFile("m1", 1, 10,  1, 15))
+    ));
+
+    Mockito.when(lazyTypesContext.getOrCreateLazyType(returnTypeName))
+      .thenReturn(new LazyType(returnTypeName, lazyTypesContext));
+
+    Mockito.when(lazyTypesContext.resolveLazyType(Mockito.argThat(lt -> returnTypeName.equals(lt.fullyQualifiedName()))))
+      .thenReturn(resolvedReturnType);
+
+    var type = (FunctionType) converter.convert(descriptor);
+    Assertions.assertThat(type.name()).isEqualTo("Sample");
+
+    Assertions.assertThat(type.parameters()).hasSize(1);
+    var parameter = type.parameters().get(0);
+    Assertions.assertThat(parameter.declaredType())
+      .extracting(TypeWrapper::type)
+      .extracting(PythonType::unwrappedType)
+      .isSameAs(resolvedReturnType);
+    Assertions.assertThat(type.returnType())
+      .extracting(PythonType::unwrappedType)
+      .isSameAs(resolvedReturnType);
+  }
 
 
 }
