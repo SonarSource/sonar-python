@@ -179,6 +179,7 @@ public final class CheckList {
       DuplicatedMethodImplementationCheck.class,
       DuplicatesInCharacterClassCheck.class,
       DynamicCodeExecutionCheck.class,
+      EinopsSyntaxCheck.class,
       ElseAfterLoopsWithoutBreakCheck.class,
       EmailSendingCheck.class,
       EmptyAlternativeCheck.class,
