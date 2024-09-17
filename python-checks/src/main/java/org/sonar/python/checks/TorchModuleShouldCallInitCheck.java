@@ -25,6 +25,7 @@ import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.tree.ArgList;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.Expression;
@@ -59,8 +60,9 @@ public class TorchModuleShouldCallInitCheck extends PythonSubscriptionCheck {
   }
 
   private static boolean isInheritingFromTorchModule(@Nullable ClassDef classDef) {
-    if (classDef == null || classDef.args() == null) return false;
-    return classDef.args().arguments().stream()
+    if (classDef == null) return false;
+    ArgList args = classDef.args();
+    return args != null && args.arguments().stream()
       .flatMap(TreeUtils.toStreamInstanceOfMapper(RegularArgument.class))
       .map(arg -> getQualifiedName(arg.expression()))
       .anyMatch(expr -> expr.filter(TORCH_NN_MODULE::equals).isPresent());
