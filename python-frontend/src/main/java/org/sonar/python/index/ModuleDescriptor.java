@@ -17,32 +17,39 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.plugins.python.api;
+package org.sonar.python.index;
 
-import java.util.Set;
-import java.util.stream.Collectors;
+import java.util.Map;
+import javax.annotation.CheckForNull;
 
-import static org.sonar.plugins.python.api.PythonVersionUtils.Version;
-import static org.sonar.plugins.python.api.PythonVersionUtils.allVersions;
+public class ModuleDescriptor implements Descriptor{
+  private final String name;
+  private final String fullyQualifiedName;
+  private final Map<String, Descriptor> members;
 
-public class ProjectPythonVersion {
-
-  private ProjectPythonVersion() {
+  public ModuleDescriptor(String name, String fullyQualifiedName, Map<String, Descriptor> members) {
+    this.name = name;
+    this.fullyQualifiedName = fullyQualifiedName;
+    this.members = members;
   }
 
-  private static Set<Version> currentVersions = allVersions();
-
-  public static Set<Version> currentVersions() {
-    return currentVersions;
+  @Override
+  public String name() {
+    return name;
   }
 
-  public static void setCurrentVersions(Set<Version> currentVersions) {
-    ProjectPythonVersion.currentVersions = currentVersions;
+  @CheckForNull
+  @Override
+  public String fullyQualifiedName() {
+    return fullyQualifiedName;
   }
 
-  public static Set<String> currentVersionValues() {
-    return currentVersions().stream()
-      .map(PythonVersionUtils.Version::serializedValue)
-      .collect(Collectors.toSet());
+  public Map<String, Descriptor> members() {
+    return members;
+  }
+
+  @Override
+  public Kind kind() {
+    return Kind.MODULE;
   }
 }

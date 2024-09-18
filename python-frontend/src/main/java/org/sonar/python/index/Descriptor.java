@@ -19,6 +19,9 @@
  */
 package org.sonar.python.index;
 
+import java.util.Comparator;
+import java.util.Set;
+import java.util.function.Function;
 import javax.annotation.CheckForNull;
 
 public interface Descriptor {
@@ -30,7 +33,18 @@ public interface Descriptor {
 
   Kind kind();
 
+  default Set<Integer> validForPythonVersions() {
+    return Set.of();
+  }
+
+  default Integer latestValidVersion() {
+    return validForPythonVersions().stream()
+      .max(Comparator.comparingInt(v -> v))
+      .orElse(Integer.MIN_VALUE);
+  }
+
   enum Kind {
+    MODULE,
     FUNCTION,
     CLASS,
     VARIABLE,

@@ -415,6 +415,8 @@ public class TypeShed {
           .collect(Collectors.joining(","));
         LOG.debug("Symbol " + name + " has conflicting fully qualified names:" + fqns);
         LOG.debug("It has been disambiguated with its latest Python version available symbol.");
+      } else {
+        LOG.debug("123");
       }
       return disambiguateWithLatestPythonSymbol(symbols);
     }

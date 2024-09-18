@@ -38,6 +38,7 @@ public class ClassDescriptor implements Descriptor {
   private final boolean hasMetaClass;
   private final String metaclassFQN;
   private final boolean supportsGenerics;
+//  private final Set<Integer> validForPythonVersions;
 
   public ClassDescriptor(String name, @Nullable String fullyQualifiedName, Collection<String> superClasses, Set<Descriptor> members,
     boolean hasDecorators, @Nullable LocationInFile definitionLocation, boolean hasSuperClassWithoutDescriptor, boolean hasMetaClass,

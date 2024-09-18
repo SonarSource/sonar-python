@@ -17,32 +17,21 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.plugins.python.api;
+package org.sonar.python.semantic.v2.typeshed;
 
-import java.util.Set;
-import java.util.stream.Collectors;
+import java.util.Optional;
+import org.sonar.python.index.Descriptor;
+import org.sonar.python.index.VariableDescriptor;
+import org.sonar.python.types.protobuf.SymbolsProtos;
 
-import static org.sonar.plugins.python.api.PythonVersionUtils.Version;
-import static org.sonar.plugins.python.api.PythonVersionUtils.allVersions;
+public class VarSymbolToDescriptorConverter {
 
-public class ProjectPythonVersion {
-
-  private ProjectPythonVersion() {
+  public Descriptor convert(SymbolsProtos.VarSymbol varSymbol) {
+    var typeAnnotation = Optional.of(varSymbol)
+      .map(SymbolsProtos.VarSymbol::getTypeAnnotation)
+      .map(SymbolsProtos.Type::getFullyQualifiedName)
+      .orElse(null);
+    return new VariableDescriptor(varSymbol.getName(), varSymbol.getFullyQualifiedName(), typeAnnotation);
   }
 
-  private static Set<Version> currentVersions = allVersions();
-
-  public static Set<Version> currentVersions() {
-    return currentVersions;
-  }
-
-  public static void setCurrentVersions(Set<Version> currentVersions) {
-    ProjectPythonVersion.currentVersions = currentVersions;
-  }
-
-  public static Set<String> currentVersionValues() {
-    return currentVersions().stream()
-      .map(PythonVersionUtils.Version::serializedValue)
-      .collect(Collectors.toSet());
-  }
 }
