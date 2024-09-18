@@ -42,13 +42,13 @@ import org.sonar.python.types.InferredTypes;
 import org.sonar.python.types.protobuf.SymbolsProtos;
 import org.sonar.python.types.v2.ClassType;
 import org.sonar.python.types.v2.FunctionType;
-import org.sonar.python.types.v2.LazyType;
 import org.sonar.python.types.v2.LazyTypeWrapper;
 import org.sonar.python.types.v2.Member;
 import org.sonar.python.types.v2.ModuleType;
 import org.sonar.python.types.v2.ObjectType;
 import org.sonar.python.types.v2.ParameterV2;
 import org.sonar.python.types.v2.PythonType;
+import org.sonar.python.types.v2.SimpleTypeWrapper;
 import org.sonar.python.types.v2.TypeOrigin;
 import org.sonar.python.types.v2.TypeWrapper;
 import org.sonar.python.types.v2.UnionType;
@@ -140,18 +140,16 @@ public class SymbolsModuleTypeProvider {
         .withHasVariadicParameter(symbol.hasVariadicParameter())
         .withDefinitionLocation(symbol.definitionLocation());
     FunctionType functionType = functionTypeBuilder.build();
-    if (returnType instanceof LazyType lazyType) {
-      lazyType.addConsumer(functionType::resolveLazyReturnType);
-    }
     createdTypesBySymbol.put(symbol, functionType);
     return functionType;
   }
 
-  private PythonType getReturnTypeFromSymbol(FunctionSymbol symbol) {
+  private TypeWrapper getReturnTypeFromSymbol(FunctionSymbol symbol) {
     var returnTypeFqns = getReturnTypeFqn(symbol);
     var returnTypeList = returnTypeFqns.stream().map(lazyTypesContext::getOrCreateLazyTypeWrapper).map(ObjectType::new).toList();
     //TODO Support type unions (SONARPY-2132)
-    return returnTypeList.size() == 1 ? returnTypeList.get(0) : PythonType.UNKNOWN;
+    var type = returnTypeList.size() == 1 ? returnTypeList.get(0) : PythonType.UNKNOWN;
+    return new SimpleTypeWrapper(type);
   }
 
   PythonType resolvePossibleLazyType(String fullyQualifiedName) {

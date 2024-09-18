@@ -39,6 +39,7 @@ import org.sonar.python.types.v2.ParameterV2;
 import org.sonar.python.types.v2.PythonType;
 import org.sonar.python.types.v2.SimpleTypeWrapper;
 import org.sonar.python.types.v2.TypeOrigin;
+import org.sonar.python.types.v2.TypeWrapper;
 
 import static org.sonar.python.tree.TreeUtils.locationInFile;
 
@@ -52,7 +53,7 @@ public class FunctionTypeBuilder implements TypeBuilder<FunctionType> {
   private boolean hasDecorators;
   private boolean isInstanceMethod;
   private PythonType owner;
-  private PythonType returnType = PythonType.UNKNOWN;
+  private TypeWrapper returnType = TypeWrapper.UNKNOWN_TYPE_WRAPPER;
   private TypeOrigin typeOrigin = TypeOrigin.STUB;
   private LocationInFile definitionLocation;
 
@@ -78,6 +79,11 @@ public class FunctionTypeBuilder implements TypeBuilder<FunctionType> {
   }
 
   public FunctionTypeBuilder() {
+  }
+
+  public FunctionTypeBuilder withName(String name) {
+    this.name = name;
+    return this;
   }
 
   public FunctionTypeBuilder withHasVariadicParameter(boolean hasVariadicParameter) {
@@ -111,6 +117,11 @@ public class FunctionTypeBuilder implements TypeBuilder<FunctionType> {
   }
 
   public FunctionTypeBuilder withReturnType(PythonType returnType) {
+    withReturnType(new LazyTypeWrapper(returnType));
+    return this;
+  }
+
+  public FunctionTypeBuilder withReturnType(TypeWrapper returnType) {
     this.returnType = returnType;
     return this;
   }
