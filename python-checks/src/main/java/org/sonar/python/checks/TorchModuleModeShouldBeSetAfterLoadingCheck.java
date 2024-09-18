@@ -39,11 +39,11 @@ import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S6982")
 public class TorchModuleModeShouldBeSetAfterLoadingCheck extends PythonSubscriptionCheck {
-  private final static Set<String> STATE_SETTING_FUNCTION_FQNS = Set.of("eval", "train");
-  public static final String TORCH_LOAD_FQN = "torch.load";
-  public static final String LOAD_STATE_DICT_NAME = "load_state_dict";
-  public static final String MESSAGE = "Set the module in training or evaluation mode.";
-  public static final int IS_TORCH_LOAD_CALL_MAX_RECURSIVE_COUNTER = 10;
+  private static final Set<String> STATE_SETTING_FUNCTION_FQNS = Set.of("eval", "train");
+  private static final String TORCH_LOAD_FQN = "torch.load";
+  private static final String LOAD_STATE_DICT_NAME = "load_state_dict";
+  private static final String MESSAGE = "Set the module in training or evaluation mode.";
+  private static final int IS_TORCH_LOAD_CALL_MAX_RECURSIVE_COUNTER = 10;
 
   private ReachingDefinitionsAnalysis reachingDefinitionsAnalysis;
 
@@ -93,7 +93,8 @@ public class TorchModuleModeShouldBeSetAfterLoadingCheck extends PythonSubscript
 
   private static List<Usage> getForwardUsages(CallExpression callExpr) {
     List<Usage> usages = getFunctionCallReceiverName(callExpr)
-      .map(name -> name.symbol().usages())
+      .flatMap(name -> Optional.ofNullable(name.symbol()))
+      .map(Symbol::usages)
       .orElse(Collections.emptyList());
 
     return usages.stream()
