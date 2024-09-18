@@ -19,11 +19,27 @@
  */
 package org.sonar.python.semantic.v2.converter;
 
+import java.util.Optional;
 import org.sonar.python.index.Descriptor;
+import org.sonar.python.index.VariableDescriptor;
+import org.sonar.python.types.v2.ObjectType;
 import org.sonar.python.types.v2.PythonType;
+import org.sonar.python.types.v2.TypeWrapper;
 
-public interface DescriptorToPythonTypeConverter {
+public class VariableDescriptorToPythonTypeConverter implements DescriptorToPythonTypeConverter {
 
-  PythonType convert(ConversionContext ctx, Descriptor from);
+  public PythonType convert(ConversionContext ctx, VariableDescriptor from) {
+    var typeWrapper = Optional.ofNullable(from.annotatedType())
+      .map(fqn -> ctx.lazyTypesContext().getOrCreateLazyTypeWrapper(fqn))
+      .orElse(TypeWrapper.UNKNOWN_TYPE_WRAPPER);
+    return new ObjectType(typeWrapper);
+  }
 
+  @Override
+  public PythonType convert(ConversionContext ctx, Descriptor from) {
+    if (from instanceof VariableDescriptor variableDescriptor) {
+      return convert(ctx, variableDescriptor);
+    }
+    throw new IllegalArgumentException("Unsupported Descriptor");
+  }
 }

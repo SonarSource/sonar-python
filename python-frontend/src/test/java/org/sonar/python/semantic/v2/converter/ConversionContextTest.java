@@ -72,5 +72,4 @@ class ConversionContextTest {
     Assertions.assertSame(expectedType, type);
   }
 
-
 }

@@ -35,7 +35,8 @@ public class AnyDescriptorToPythonTypeConverter {
     this.lazyTypesContext = lazyTypesContext;
     converters = new EnumMap<>(Map.of(
       Descriptor.Kind.CLASS, new ClassDescriptorToPythonTypeConverter(),
-      Descriptor.Kind.FUNCTION, new FunctionDescriptorToPythonTypeConverter()
+      Descriptor.Kind.FUNCTION, new FunctionDescriptorToPythonTypeConverter(),
+      Descriptor.Kind.VARIABLE, new VariableDescriptorToPythonTypeConverter()
     ));
   }
 
@@ -51,6 +52,5 @@ public class AnyDescriptorToPythonTypeConverter {
   private DescriptorToPythonTypeConverter converterFor(Descriptor descriptor) {
     return converters.getOrDefault(descriptor.kind(), UNKNOWN_DESCRIPTOR_CONVERTER);
   }
-
 
 }
