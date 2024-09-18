@@ -100,11 +100,11 @@ public class SymbolsModuleTypeProvider {
   private ModuleType createModuleFromSymbols(@Nullable String name, @Nullable ModuleType parent, Collection<Symbol> symbols) {
     var members = new HashMap<String, PythonType>();
     Map<Symbol, PythonType> createdTypesBySymbol = new HashMap<>();
+    var module = new ModuleType(name, parent);
     symbols.forEach(symbol -> {
-      var type = convertToType(symbol, createdTypesBySymbol);
+      var type = convertToType(symbol, createdTypesBySymbol, module);
       members.put(symbol.name(), type);
     });
-    var module = new ModuleType(name, parent);
     module.members().putAll(members);
 
     Optional.ofNullable(parent)
@@ -114,7 +114,7 @@ public class SymbolsModuleTypeProvider {
     return module;
   }
 
-  private PythonType convertToFunctionType(FunctionSymbol symbol, Map<Symbol, PythonType> createdTypesBySymbol) {
+  private PythonType convertToFunctionType(FunctionSymbol symbol, Map<Symbol, PythonType> createdTypesBySymbol, ModuleType parent) {
     if (createdTypesBySymbol.containsKey(symbol)) {
       return createdTypesBySymbol.get(symbol);
     }
@@ -138,7 +138,8 @@ public class SymbolsModuleTypeProvider {
         .withHasDecorators(symbol.hasDecorators())
         .withInstanceMethod(symbol.isInstanceMethod())
         .withHasVariadicParameter(symbol.hasVariadicParameter())
-        .withDefinitionLocation(symbol.definitionLocation());
+        .withDefinitionLocation(symbol.definitionLocation())
+        .withOwner(parent);
     FunctionType functionType = functionTypeBuilder.build();
     createdTypesBySymbol.put(symbol, functionType);
     return functionType;
@@ -179,14 +180,14 @@ public class SymbolsModuleTypeProvider {
     return currentType;
   }
 
-  private PythonType convertToClassType(ClassSymbol symbol, Map<Symbol, PythonType> createdTypesBySymbol) {
+  private PythonType convertToClassType(ClassSymbol symbol, Map<Symbol, PythonType> createdTypesBySymbol, ModuleType parent) {
     if (createdTypesBySymbol.containsKey(symbol)) {
       return createdTypesBySymbol.get(symbol);
     }
     ClassType classType = new ClassType(symbol.name(), symbol.definitionLocation());
     createdTypesBySymbol.put(symbol, classType);
     Set<Member> members =
-      symbol.declaredMembers().stream().map(m -> new Member(m.name(), convertToType(m, createdTypesBySymbol))).collect(Collectors.toSet());
+      symbol.declaredMembers().stream().map(m -> new Member(m.name(), convertToType(m, createdTypesBySymbol, parent))).collect(Collectors.toSet());
     classType.members().addAll(members);
 
     Optional.of(symbol)
@@ -198,7 +199,7 @@ public class SymbolsModuleTypeProvider {
       .or(() -> Optional.of(symbol)
         .map(ClassSymbol::superClasses)
         .map(Collection::stream)
-        .map(symbols -> symbols.map(s -> convertToType(s, createdTypesBySymbol))))
+        .map(symbols -> symbols.map(s -> convertToType(s, createdTypesBySymbol, parent))))
       .stream()
       .flatMap(Function.identity())
       .map(LazyTypeWrapper::new)
@@ -222,16 +223,16 @@ public class SymbolsModuleTypeProvider {
       parameter.location());
   }
 
-  private PythonType convertToUnionType(AmbiguousSymbol ambiguousSymbol, Map<Symbol, PythonType> createdTypesBySymbol) {
-    Set<PythonType> pythonTypes = ambiguousSymbol.alternatives().stream().map(a -> convertToType(a, createdTypesBySymbol)).collect(Collectors.toSet());
+  private PythonType convertToUnionType(AmbiguousSymbol ambiguousSymbol, Map<Symbol, PythonType> createdTypesBySymbol, ModuleType parent) {
+    Set<PythonType> pythonTypes = ambiguousSymbol.alternatives().stream().map(a -> convertToType(a, createdTypesBySymbol, parent)).collect(Collectors.toSet());
     return new UnionType(pythonTypes);
   }
 
-  private PythonType convertToType(Symbol symbol, Map<Symbol, PythonType> createdTypesBySymbol) {
+  private PythonType convertToType(Symbol symbol, Map<Symbol, PythonType> createdTypesBySymbol, ModuleType parent) {
     return switch (symbol.kind()) {
-      case CLASS -> convertToClassType((ClassSymbol) symbol, createdTypesBySymbol);
-      case FUNCTION -> convertToFunctionType((FunctionSymbol) symbol, createdTypesBySymbol);
-      case AMBIGUOUS -> convertToUnionType((AmbiguousSymbol) symbol, createdTypesBySymbol);
+      case CLASS -> convertToClassType((ClassSymbol) symbol, createdTypesBySymbol, parent);
+      case FUNCTION -> convertToFunctionType((FunctionSymbol) symbol, createdTypesBySymbol, parent);
+      case AMBIGUOUS -> convertToUnionType((AmbiguousSymbol) symbol, createdTypesBySymbol, parent);
       // Symbols that are neither classes or function nor ambiguous symbols whose alternatives are all classes or functions are considered of unknown type
       case OTHER -> PythonType.UNKNOWN;
     };

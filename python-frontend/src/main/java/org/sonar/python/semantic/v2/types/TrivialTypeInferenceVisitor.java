@@ -273,9 +273,9 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
     FunctionTypeBuilder functionTypeBuilder = new FunctionTypeBuilder()
       .fromFunctionDef(functionDef, fileId, projectLevelTypeTable)
       .withDefinitionLocation(locationInFile(functionDef.name(), fileId));
-    ClassType owner = null;
-    if (currentType() instanceof ClassType classType) {
-      owner = classType;
+    PythonType owner = null;
+    if (currentType() instanceof ClassType || currentType() instanceof ModuleType) {
+      owner = currentType();
     }
     if (owner != null) {
       functionTypeBuilder.withOwner(owner);
@@ -287,11 +287,12 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
       functionTypeBuilder.withTypeOrigin(TypeOrigin.LOCAL);
     }
     FunctionType functionType = functionTypeBuilder.build();
-    if (owner != null) {
+
+    if (owner instanceof ClassType classTypeOwner) {
       if (functionDef.name().symbolV2().hasSingleBindingUsage()) {
-        owner.members().add(new Member(functionType.name(), functionType));
+        classTypeOwner.members().add(new Member(functionType.name(), functionType));
       } else {
-        owner.members().add(new Member(functionType.name(), PythonType.UNKNOWN));
+        classTypeOwner.members().add(new Member(functionType.name(), PythonType.UNKNOWN));
       }
     }
     return functionType;

@@ -185,7 +185,7 @@ class FunctionTypeTest {
     assertThat(functionType.owner()).isEqualTo(classType);
 
     functionType = functionType("def foo(): ...");
-    assertThat(functionType.owner()).isNull();
+    assertThat(functionType.owner()).isInstanceOf(ModuleType.class);
   }
 
   @Test

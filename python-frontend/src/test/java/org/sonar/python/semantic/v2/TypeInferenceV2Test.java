@@ -60,19 +60,18 @@ import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.types.v2.ClassType;
 import org.sonar.python.types.v2.FunctionType;
 import org.sonar.python.types.v2.LazyType;
-import org.sonar.python.types.v2.SimpleTypeWrapper;
-import org.sonar.python.types.v2.TypeWrapper;
 import org.sonar.python.types.v2.ModuleType;
 import org.sonar.python.types.v2.ObjectType;
 import org.sonar.python.types.v2.ParameterV2;
 import org.sonar.python.types.v2.PythonType;
+import org.sonar.python.types.v2.SimpleTypeWrapper;
 import org.sonar.python.types.v2.TypeOrigin;
 import org.sonar.python.types.v2.TypeSource;
+import org.sonar.python.types.v2.TypeWrapper;
 import org.sonar.python.types.v2.UnionType;
 import org.sonar.python.types.v2.UnknownType;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.sonar.python.PythonTestUtils.parse;
 import static org.sonar.python.PythonTestUtils.parseWithoutSymbols;
 import static org.sonar.python.PythonTestUtils.pythonFile;
@@ -736,7 +735,9 @@ class TypeInferenceV2Test {
       """);
 
     var expr = (ExpressionStatement) root.statements().statements().get(root.statements().statements().size() - 1);
-    assertThat(expr.expressions().get(0).typeV2()).isInstanceOf(FunctionType.class);
+    var namedTupleType = expr.expressions().get(0).typeV2();
+    assertThat(namedTupleType).isInstanceOf(FunctionType.class);
+    assertThat(((FunctionType) namedTupleType).owner().name()).isEqualTo("collections");
   }
 
   @Test
@@ -2146,6 +2147,7 @@ class TypeInferenceV2Test {
     assertThat(((ExpressionStatement) fileInput.statements().statements().get(6)).expressions().get(0).typeV2()).isInstanceOf(UnionType.class);
     UnionType unionType = (UnionType) ((ExpressionStatement) fileInput.statements().statements().get(6)).expressions().get(0).typeV2().unwrappedType();
     assertThat(unionType.candidates()).extracting(PythonType::unwrappedType).containsExactlyInAnyOrder(classA, classB);
+    assertThat(((FunctionType) classB.members().stream().toList().get(0).type()).owner()).isEqualTo(classB);
   }
 
   @Test
