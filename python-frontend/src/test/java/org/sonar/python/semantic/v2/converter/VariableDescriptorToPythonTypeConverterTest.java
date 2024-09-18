@@ -19,11 +19,19 @@
  */
 package org.sonar.python.semantic.v2.converter;
 
-import org.sonar.python.index.Descriptor;
-import org.sonar.python.types.v2.PythonType;
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
+import org.sonar.python.index.ClassDescriptor;
 
-public interface DescriptorToPythonTypeConverter {
-
-  PythonType convert(ConversionContext ctx, Descriptor from);
-
+class VariableDescriptorToPythonTypeConverterTest {
+  @Test
+  void unsupportedClassTest() {
+    var ctx = Mockito.mock(ConversionContext.class);
+    var descriptor = Mockito.mock(ClassDescriptor.class);
+    var converter = new VariableDescriptorToPythonTypeConverter();
+    Assertions.assertThatThrownBy(() -> converter.convert(ctx, descriptor))
+      .isInstanceOf(IllegalArgumentException.class)
+      .hasMessage("Unsupported Descriptor");
+  }
 }

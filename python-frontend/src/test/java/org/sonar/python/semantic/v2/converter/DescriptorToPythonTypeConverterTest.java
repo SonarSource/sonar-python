@@ -28,12 +28,15 @@ import org.sonar.python.index.AmbiguousDescriptor;
 import org.sonar.python.index.ClassDescriptor;
 import org.sonar.python.index.Descriptor;
 import org.sonar.python.index.FunctionDescriptor;
+import org.sonar.python.index.VariableDescriptor;
 import org.sonar.python.semantic.v2.ClassTypeBuilder;
 import org.sonar.python.semantic.v2.LazyTypesContext;
 import org.sonar.python.types.v2.ClassType;
 import org.sonar.python.types.v2.FunctionType;
 import org.sonar.python.types.v2.LazyType;
+import org.sonar.python.types.v2.LazyTypeWrapper;
 import org.sonar.python.types.v2.Member;
+import org.sonar.python.types.v2.ObjectType;
 import org.sonar.python.types.v2.PythonType;
 import org.sonar.python.types.v2.TypeWrapper;
 
@@ -142,5 +145,29 @@ class DescriptorToPythonTypeConverterTest {
       .isSameAs(resolvedReturnType);
   }
 
+  @Test
+  void variableDescriptorConversionTest() {
+    var lazyTypesContext = Mockito.mock(LazyTypesContext.class);
+    var converter = new AnyDescriptorToPythonTypeConverter(lazyTypesContext);
+    var descriptor = Mockito.mock(VariableDescriptor.class);
+
+    var variableTypeName = "Returned";
+    var resolvedVariableType = new ClassTypeBuilder().withName(variableTypeName).build();
+
+    Mockito.when(descriptor.kind()).thenReturn(Descriptor.Kind.VARIABLE);
+    Mockito.when(descriptor.name()).thenReturn("variable");
+    Mockito.when(descriptor.annotatedType()).thenReturn(variableTypeName);
+
+    Mockito.when(lazyTypesContext.getOrCreateLazyTypeWrapper(variableTypeName))
+      .thenReturn(new LazyTypeWrapper(new LazyType(variableTypeName, lazyTypesContext)));
+
+    Mockito.when(lazyTypesContext.resolveLazyType(Mockito.argThat(lt -> variableTypeName.equals(lt.fullyQualifiedName()))))
+      .thenReturn(resolvedVariableType);
+
+    var type = (ObjectType) converter.convert(descriptor);
+    Assertions.assertThat(type)
+      .extracting(PythonType::unwrappedType)
+      .isSameAs(resolvedVariableType);
+  }
 
 }
