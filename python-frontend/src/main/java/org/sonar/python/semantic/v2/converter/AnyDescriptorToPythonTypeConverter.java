@@ -19,6 +19,7 @@
  */
 package org.sonar.python.semantic.v2.converter;
 
+import java.util.EnumMap;
 import java.util.Map;
 import org.sonar.python.index.Descriptor;
 import org.sonar.python.semantic.v2.LazyTypesContext;
@@ -32,7 +33,9 @@ public class AnyDescriptorToPythonTypeConverter {
 
   public AnyDescriptorToPythonTypeConverter(LazyTypesContext lazyTypesContext) {
     this.lazyTypesContext = lazyTypesContext;
-    converters = Map.of();
+    converters = new EnumMap<>(Map.of(
+      Descriptor.Kind.CLASS, new ClassDescriptorToPythonTypeConverter()
+    ));
   }
 
   public PythonType convert(Descriptor from) {
