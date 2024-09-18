@@ -1,0 +1,39 @@
+<p>This rule raises an issue when a PyTorch model state is loaded and <code>torch.nn.Module.eval()</code> or <code>torch.nn.Module.train()</code> is
+not called.</p>
+<h2>Why is this an issue?</h2>
+<p>When using PyTorch it is common practice to load and save a model’s state from/to a <code>.pth</code> file. Doing so allows, for example, to
+instantiate an untrained model and load learned parameters coming from another pre-trained model. Once the learned parameters are loaded to the model
+it is important, before inferencing, to clearly state the intention by calling <code>torch.nn.Module.eval()</code> method to set the model in
+evaluation mode or calling <code>torch.nn.Module.train()</code> to indicate the training will resume. Failing to call
+<code>torch.nn.Module.eval()</code> would leave the model in training mode which may not be the intention.</p>
+<h2>How to fix it</h2>
+<p>Call the <code>torch.nn.Module.eval()</code> or <code>torch.nn.Module.train()</code> method on the model.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+import torch
+import torchvision.models as models
+
+model = models.vgg16()
+model.load_state_dict(torch.load('model_weights.pth')) # Noncompliant: model.train() or model.eval() was not called.
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+import torch
+import torchvision.models as models
+
+model = models.vgg16()
+model.load_state_dict(torch.load('model_weights.pth'))
+model.eval()
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> PyTorch Documentation - <a href="https://pytorch.org/docs/master/generated/torch.nn.Module.html#torch.nn.Module.eval">eval - reference</a>
+  </li>
+  <li> PyTorch Documentation - <a href="https://pytorch.org/docs/master/generated/torch.nn.Module.html#torch.nn.Module.train">train - reference</a>
+  </li>
+  <li> PyTorch Documentation - <a href="https://pytorch.org/docs/stable/notes/autograd.html#evaluation-mode-nn-module-eval">Autograd - Evaluation
+  Mode</a> </li>
+</ul>
+
