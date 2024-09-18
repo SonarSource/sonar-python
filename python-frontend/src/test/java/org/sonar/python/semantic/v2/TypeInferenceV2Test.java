@@ -60,6 +60,7 @@ import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.types.v2.ClassType;
 import org.sonar.python.types.v2.FunctionType;
 import org.sonar.python.types.v2.LazyType;
+import org.sonar.python.types.v2.SimpleTypeWrapper;
 import org.sonar.python.types.v2.TypeWrapper;
 import org.sonar.python.types.v2.ModuleType;
 import org.sonar.python.types.v2.ObjectType;
@@ -435,7 +436,7 @@ class TypeInferenceV2Test {
 
     CallExpression callExpressionSpy = Mockito.spy(callExpression);
     Expression calleeSpy = Mockito.spy(callExpression.callee());
-    FunctionType functionType = new FunctionType("foo", List.of(), List.of(), new ObjectType(INT_TYPE), TypeOrigin.STUB, false, false, false, false, null, null);
+    FunctionType functionType = new FunctionType("foo", List.of(), List.of(), new SimpleTypeWrapper(new ObjectType(INT_TYPE)), TypeOrigin.STUB, false, false, false, false, null, null);
     Mockito.when(calleeSpy.typeV2()).thenReturn(functionType);
     Mockito.when(callExpressionSpy.callee()).thenReturn(calleeSpy);
 
@@ -2272,9 +2273,6 @@ class TypeInferenceV2Test {
     FunctionType functionType = ((FunctionType) ((ExpressionStatement) fileInput.statements().statements().get(1)).expressions().get(0).typeV2());
     PythonType returnType = functionType.returnType();
     assertThat(returnType.unwrappedType()).isInstanceOf(ClassType.class);
-    assertThatThrownBy(() -> functionType.resolveLazyReturnType(PythonType.UNKNOWN))
-      .isInstanceOf(IllegalStateException.class)
-      .hasMessage("Trying to resolve an already resolved lazy type.");
   }
 
   @Test
