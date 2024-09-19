@@ -27,6 +27,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
+import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.api.Beta;
 import org.sonar.plugins.python.api.LocationInFile;
@@ -44,6 +45,8 @@ public final class ClassType implements PythonType {
   private final List<PythonType> metaClasses;
   private final boolean hasDecorators;
   private final LocationInFile locationInFile;
+  private final PythonType owner;
+
 
   public ClassType(
     String name,
@@ -52,7 +55,8 @@ public final class ClassType implements PythonType {
     List<TypeWrapper> superClasses,
     List<PythonType> metaClasses,
     boolean hasDecorators,
-    @Nullable LocationInFile locationInFile) {
+    @Nullable LocationInFile locationInFile,
+    @Nullable PythonType owner) {
     this.name = name;
     this.members = members;
     this.attributes = attributes;
@@ -60,14 +64,15 @@ public final class ClassType implements PythonType {
     this.metaClasses = metaClasses;
     this.hasDecorators = hasDecorators;
     this.locationInFile = locationInFile;
+    this.owner = owner;
   }
 
   public ClassType(String name) {
-    this(name, new HashSet<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), false, null);
+    this(name, new HashSet<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), false, null, null);
   }
 
-  public ClassType(String name, @Nullable LocationInFile locationInFile) {
-    this(name, new HashSet<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), false, locationInFile);
+  public ClassType(String name, @Nullable LocationInFile locationInFile, ModuleType parent) {
+    this(name, new HashSet<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), false, locationInFile, parent);
   }
 
   @Override
@@ -224,5 +229,10 @@ public final class ClassType implements PythonType {
 
   public boolean hasDecorators() {
     return hasDecorators;
+  }
+
+  @CheckForNull
+  public PythonType owner() {
+    return owner;
   }
 }

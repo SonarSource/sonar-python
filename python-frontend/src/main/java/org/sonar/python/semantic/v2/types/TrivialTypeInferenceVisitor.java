@@ -206,10 +206,15 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
   public void visitClassDef(ClassDef classDef) {
     scan(classDef.args());
     Name name = classDef.name();
+    PythonType owner = null;
+    if (currentType() instanceof ClassType || currentType() instanceof ModuleType) {
+      owner = currentType();
+    }
     ClassTypeBuilder classTypeBuilder = new ClassTypeBuilder()
       .withName(name.name())
       .withHasDecorators(!classDef.decorators().isEmpty())
-      .withDefinitionLocation(locationInFile(classDef.name(), fileId));
+      .withDefinitionLocation(locationInFile(classDef.name(), fileId))
+      .withOwner(owner);
     resolveTypeHierarchy(classDef, classTypeBuilder);
     ClassType type = classTypeBuilder.build();
     ((NameImpl) name).typeV2(type);

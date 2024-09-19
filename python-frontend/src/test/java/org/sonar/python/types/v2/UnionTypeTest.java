@@ -131,11 +131,11 @@ class UnionTypeTest {
   void unionTypeCandidatesResolution() {
     var candidate1 = new ClassType("candidate", Set.of(
       new Member("a", new FunctionTypeBuilder("a").build())
-    ), List.of(), List.of(), List.of(), false, null);
+    ), List.of(), List.of(), List.of(), false, null, null);
 
     var candidate2 = new ClassType("candidate", Set.of(
       new Member("a", new FunctionTypeBuilder("a").build())
-    ), List.of(), List.of(), List.of(), false, null);
+    ), List.of(), List.of(), List.of(), false, null, null);
 
     var unionType = UnionType.or(candidate1, candidate2);
     // TODO: SONARPY-1901 UnionType.or should resolve it to class type since the candidates are the same

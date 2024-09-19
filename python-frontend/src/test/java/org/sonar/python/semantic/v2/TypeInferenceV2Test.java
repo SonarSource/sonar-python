@@ -719,12 +719,16 @@ class TypeInferenceV2Test {
     FileInput fileInput = inferTypes(lines, projectLevelTypeTable);
     FunctionType fooType = (FunctionType) ((ExpressionStatement) fileInput.statements().statements().get(1)).expressions().get(0).typeV2();
     assertThat(fooType.parameters().get(0).declaredType().type().unwrappedType()).isEqualTo(intType);
+    assertThat(fooType.owner()).isInstanceOf(ModuleType.class).extracting(o -> ((ModuleType) o).name()).isEqualTo("mod");
 
     FunctionType foo2Type = (FunctionType) ((ExpressionStatement) fileInput.statements().statements().get(2)).expressions().get(0).typeV2();
     assertThat(foo2Type.parameters()).extracting(ParameterV2::declaredType).extracting(TypeWrapper::type).containsExactly(dictType, aType);
     assertThat(foo2Type.parameters()).extracting(ParameterV2::location).containsExactly(
       new LocationInFile(modFileId, 3, 9, 3, 17),
       new LocationInFile(modFileId, 3, 19, 3, 24));
+    var foo2TypeOwner = ((ModuleType) foo2Type.owner());
+    assertThat(foo2TypeOwner).extracting(ModuleType::name).isEqualTo("mod");
+    assertThat(foo2TypeOwner.members()).containsOnlyKeys("foo", "foo2", "A");
   }
 
   @Test
@@ -875,6 +879,7 @@ class TypeInferenceV2Test {
       .isInstanceOf(ClassType.class)
       .extracting(PythonType::name)
       .isEqualTo("int");
+    assertThat(((ClassType) types.get(0).unwrappedType()).owner()).isInstanceOf(ModuleType.class);
 
     Assertions.assertThat(types.get(1)).isInstanceOf(ObjectType.class)
       .extracting(ObjectType.class::cast)

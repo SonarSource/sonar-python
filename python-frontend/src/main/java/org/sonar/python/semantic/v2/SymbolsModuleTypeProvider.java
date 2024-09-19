@@ -184,7 +184,7 @@ public class SymbolsModuleTypeProvider {
     if (createdTypesBySymbol.containsKey(symbol)) {
       return createdTypesBySymbol.get(symbol);
     }
-    ClassType classType = new ClassType(symbol.name(), symbol.definitionLocation());
+    ClassType classType = new ClassType(symbol.name(), symbol.definitionLocation(), parent);
     createdTypesBySymbol.put(symbol, classType);
     Set<Member> members =
       symbol.declaredMembers().stream().map(m -> new Member(m.name(), convertToType(m, createdTypesBySymbol, parent))).collect(Collectors.toSet());

@@ -42,10 +42,11 @@ public class ClassTypeBuilder implements TypeBuilder<ClassType> {
   List<PythonType> metaClasses = new ArrayList<>();
   boolean hasDecorators = false;
   LocationInFile definitionLocation;
+  PythonType owner;
 
   @Override
   public ClassType build() {
-    return new ClassType(name, members, attributes, superClasses, metaClasses, hasDecorators, definitionLocation);
+    return new ClassType(name, members, attributes, superClasses, metaClasses, hasDecorators, definitionLocation, owner);
   }
 
   public ClassTypeBuilder withName(String name) {
@@ -76,6 +77,11 @@ public class ClassTypeBuilder implements TypeBuilder<ClassType> {
 
   public ClassTypeBuilder withSuperClasses(PythonType... types) {
     Arrays.stream(types).forEach(this::addSuperClass);
+    return this;
+  }
+
+  public ClassTypeBuilder withOwner(@Nullable PythonType owner) {
+    this.owner = owner;
     return this;
   }
 
