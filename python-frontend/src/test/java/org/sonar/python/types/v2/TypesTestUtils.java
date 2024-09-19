@@ -53,7 +53,7 @@ public class TypesTestUtils {
     FileInput fileInput = PythonTestUtils.parseWithoutSymbols(code);
     var symbolTable = new SymbolTableBuilderV2(fileInput)
       .build();
-    new TypeInferenceV2(PROJECT_LEVEL_TYPE_TABLE, pythonFile, symbolTable).inferTypes(fileInput);
+    new TypeInferenceV2(PROJECT_LEVEL_TYPE_TABLE, pythonFile, symbolTable, "thisfile").inferTypes(fileInput);
     return fileInput;
   }
 }

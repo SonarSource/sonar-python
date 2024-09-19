@@ -96,7 +96,6 @@ import static org.sonar.python.semantic.SymbolUtils.resolveTypeHierarchy;
 
 // SymbolTable based on https://docs.python.org/3/reference/executionmodel.html#naming-and-binding
 public class SymbolTableBuilder extends BaseTreeVisitor {
-  private String fullyQualifiedModuleName;
   private List<String> filePath;
   private final ProjectLevelSymbolTable projectLevelSymbolTable;
   private Map<Tree, Scope> scopesByRootTree;
@@ -104,6 +103,7 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
   private Set<Tree> assignmentLeftHandSides = new HashSet<>();
   private final PythonFile pythonFile;
   private final Set<String> importedModulesFQN = new HashSet<>();
+  private String fullyQualifiedModuleName;
 
   public SymbolTableBuilder(PythonFile pythonFile) {
     fullyQualifiedModuleName = null;
@@ -114,6 +114,10 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
 
   public Set<String> importedModulesFQN() {
     return Collections.unmodifiableSet(importedModulesFQN);
+  }
+
+  public String fullyQualifiedModuleName() {
+    return fullyQualifiedModuleName;
   }
 
   public SymbolTableBuilder(String packageName, PythonFile pythonFile) {

@@ -2608,7 +2608,7 @@ class TypeInferenceV2Test {
 
     var symbolTable = new SymbolTableBuilderV2(root)
       .build();
-    new TypeInferenceV2(projectLevelTypeTable, pythonFile, symbolTable).inferTypes(root);
+    new TypeInferenceV2(projectLevelTypeTable, pythonFile, symbolTable, "thisfile").inferTypes(root);
     return root;
   }
 

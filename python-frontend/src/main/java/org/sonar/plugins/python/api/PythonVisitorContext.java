@@ -52,7 +52,7 @@ public class PythonVisitorContext extends PythonInputFileContext {
     symbolTableBuilder.visitFileInput(rootTree);
     var symbolTable = new SymbolTableBuilderV2(rootTree).build();
     var projectLevelTypeTable = new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty(), new TypeShed(ProjectLevelSymbolTable.empty()));
-    new TypeInferenceV2(projectLevelTypeTable, pythonFile, symbolTable).inferTypes(rootTree);
+    new TypeInferenceV2(projectLevelTypeTable, pythonFile, symbolTable, symbolTableBuilder.fullyQualifiedModuleName()).inferTypes(rootTree);
     this.typeChecker = new TypeChecker(projectLevelTypeTable);
   }
 
@@ -61,12 +61,13 @@ public class PythonVisitorContext extends PythonInputFileContext {
     super(pythonFile, workingDirectory, cacheContext);
     this.rootTree = rootTree;
     this.parsingException = null;
-    new SymbolTableBuilder(packageName, pythonFile, projectLevelSymbolTable).visitFileInput(rootTree);
+    var symbolTableBuilder = new SymbolTableBuilder(packageName, pythonFile, projectLevelSymbolTable);
+    symbolTableBuilder.visitFileInput(rootTree);
 
     var symbolTable = new SymbolTableBuilderV2(rootTree)
       .build();
     var projectLevelTypeTable = new ProjectLevelTypeTable(projectLevelSymbolTable, new TypeShed(projectLevelSymbolTable));
-    new TypeInferenceV2(projectLevelTypeTable, pythonFile, symbolTable).inferTypes(rootTree);
+    new TypeInferenceV2(projectLevelTypeTable, pythonFile, symbolTable, symbolTableBuilder.fullyQualifiedModuleName()).inferTypes(rootTree);
     this.typeChecker = new TypeChecker(projectLevelTypeTable);
   }
 
@@ -75,11 +76,12 @@ public class PythonVisitorContext extends PythonInputFileContext {
     super(pythonFile, workingDirectory, cacheContext, sonarProduct);
     this.rootTree = rootTree;
     this.parsingException = null;
-    new SymbolTableBuilder(packageName, pythonFile, projectLevelSymbolTable).visitFileInput(rootTree);
+    var symbolTableBuilder = new SymbolTableBuilder(packageName, pythonFile, projectLevelSymbolTable);
+    symbolTableBuilder.visitFileInput(rootTree);
     var symbolTable = new SymbolTableBuilderV2(rootTree)
       .build();
     var projectLevelTypeTable = new ProjectLevelTypeTable(projectLevelSymbolTable, typeShed);
-    new TypeInferenceV2(projectLevelTypeTable, pythonFile, symbolTable).inferTypes(rootTree);
+    new TypeInferenceV2(projectLevelTypeTable, pythonFile, symbolTable, symbolTableBuilder.fullyQualifiedModuleName()).inferTypes(rootTree);
     this.typeChecker = new TypeChecker(projectLevelTypeTable);
   }
 

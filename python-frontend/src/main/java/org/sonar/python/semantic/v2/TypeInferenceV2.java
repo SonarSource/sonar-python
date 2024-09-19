@@ -48,15 +48,17 @@ public class TypeInferenceV2 {
   private final ProjectLevelTypeTable projectLevelTypeTable;
   private final SymbolTable symbolTable;
   private final PythonFile pythonFile;
+  private final String fullyQualifiedModuleName;
 
-  public TypeInferenceV2(ProjectLevelTypeTable projectLevelTypeTable, PythonFile pythonFile, SymbolTable symbolTable) {
+  public TypeInferenceV2(ProjectLevelTypeTable projectLevelTypeTable, PythonFile pythonFile, SymbolTable symbolTable, String fullyQualifiedModuleName) {
     this.projectLevelTypeTable = projectLevelTypeTable;
     this.symbolTable = symbolTable;
     this.pythonFile = pythonFile;
+    this.fullyQualifiedModuleName = fullyQualifiedModuleName;
   }
 
   public void inferTypes(FileInput fileInput) {
-    TrivialTypeInferenceVisitor trivialTypeInferenceVisitor = new TrivialTypeInferenceVisitor(projectLevelTypeTable, pythonFile);
+    TrivialTypeInferenceVisitor trivialTypeInferenceVisitor = new TrivialTypeInferenceVisitor(projectLevelTypeTable, pythonFile, fullyQualifiedModuleName);
     fileInput.accept(trivialTypeInferenceVisitor);
 
     inferTypesAndMemberAccessSymbols(fileInput);

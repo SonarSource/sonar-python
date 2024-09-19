@@ -81,6 +81,7 @@ public class ClassTypeTest {
 
     assertThat(classType.instancesHaveMember("foo")).isEqualTo(TriBool.TRUE);
     assertThat(classType.instancesHaveMember("bar")).isEqualTo(TriBool.FALSE);
+    assertThat(classType.fullyQualifiedName()).isEqualTo("thisfile.C");
   }
 
   @Test
@@ -173,7 +174,7 @@ public class ClassTypeTest {
       "C = \"hello\"");
     var symbolTable = new SymbolTableBuilderV2(fileInput)
       .build();
-    new TypeInferenceV2(PROJECT_LEVEL_TYPE_TABLE, pythonFile, symbolTable).inferTypes(fileInput);
+    new TypeInferenceV2(PROJECT_LEVEL_TYPE_TABLE, pythonFile, symbolTable, "thisfile").inferTypes(fileInput);
 
     ClassDef classDef = (ClassDef) fileInput.statements().statements().get(0);
     PythonType pythonType = classDef.name().typeV2();
@@ -197,7 +198,7 @@ public class ClassTypeTest {
     );
     var symbolTable = new SymbolTableBuilderV2(fileInput)
       .build();
-    new TypeInferenceV2(PROJECT_LEVEL_TYPE_TABLE, pythonFile, symbolTable).inferTypes(fileInput);
+    new TypeInferenceV2(PROJECT_LEVEL_TYPE_TABLE, pythonFile, symbolTable, "thisfile").inferTypes(fileInput);
 
     ClassDef classDef = (ClassDef) fileInput.statements().statements().get(1);
     PythonType pythonType = classDef.name().typeV2();
@@ -564,7 +565,7 @@ public class ClassTypeTest {
     );
     var symbolTable = new SymbolTableBuilderV2(fileInput)
       .build();
-    new TypeInferenceV2(PROJECT_LEVEL_TYPE_TABLE, pythonFile, symbolTable).inferTypes(fileInput);
+    new TypeInferenceV2(PROJECT_LEVEL_TYPE_TABLE, pythonFile, symbolTable, "thisfile").inferTypes(fileInput);
     ClassDef firstDef = (ClassDef) fileInput.statements().statements().get(0);
     ClassDef innerClass = (ClassDef) firstDef.body().statements().get(0);
     FunctionDef functionDef = (FunctionDef) firstDef.body().statements().get(1);
@@ -613,7 +614,7 @@ public class ClassTypeTest {
     FileInput fileInput = parseWithoutSymbols(code);
     var symbolTable = new SymbolTableBuilderV2(fileInput)
       .build();
-    new TypeInferenceV2(PROJECT_LEVEL_TYPE_TABLE, pythonFile, symbolTable).inferTypes(fileInput);
+    new TypeInferenceV2(PROJECT_LEVEL_TYPE_TABLE, pythonFile, symbolTable, "thisfile").inferTypes(fileInput);
     return PythonTestUtils.getAllDescendant(fileInput, t -> t.is(Tree.Kind.CLASSDEF))
       .stream()
       .map(ClassDef.class::cast)
