@@ -31,6 +31,7 @@ import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.cfg.fixpoint.ReachingDefinitionsAnalysis;
+import org.sonar.python.checks.utils.Expressions;
 import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S6985")
@@ -51,7 +52,9 @@ public class TorchLoadLeadsToUntrustedCodeExecutionCheck extends PythonSubscript
     context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, ctx -> {
       CallExpression callExpression = (CallExpression) ctx.syntaxNode();
       Symbol calleeSymbol = callExpression.calleeSymbol();
-      if (calleeSymbol != null && TORCH_LOAD.equals(calleeSymbol.fullyQualifiedName()) && isWeightsOnlyNotFoundOrSetToFalse(callExpression.arguments())) {
+      if (calleeSymbol != null && TORCH_LOAD.equals(calleeSymbol.fullyQualifiedName())
+        && isWeightsOnlyNotFoundOrSetToFalse(callExpression.arguments())) {
+
         ctx.addIssue(callExpression.callee(), MESSAGE);
       }
     });
@@ -59,7 +62,7 @@ public class TorchLoadLeadsToUntrustedCodeExecutionCheck extends PythonSubscript
 
   private boolean isWeightsOnlyNotFoundOrSetToFalse(List<Argument> arguments) {
     RegularArgument weightsOnlyArg = TreeUtils.argumentByKeyword(WEIGHTS_ONLY, arguments);
-    if (weightsOnlyArg == null) return true;
+    if (weightsOnlyArg == null) return !Expressions.containsSpreadOperator(arguments);
     if (weightsOnlyArg.expression() instanceof Name name) {
       return PYTHON_FALSE.equals(name.name()) || isNameSetToFalse(name);
     }

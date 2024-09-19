@@ -33,5 +33,11 @@ def only_one_definition():
     weights_only = False
     torch.load(model2, 'model.pth', weights_only=weights_only) #Noncompliant
 
+def spread_operator(some_dict, some_list):
+    torch.load(model2, 'model.pth', **some_dict)
+    torch.load(model2, 'model.pth', *some_list)
+    torch.load(model2, 'model.pth', weights_only=False, *some_list) #Noncompliant
+    torch.load(model2, 'model.pth', weights_only=True, *some_list)
+
 # test if no issue is raised if there is no symbol for the callee
 something[42]()
