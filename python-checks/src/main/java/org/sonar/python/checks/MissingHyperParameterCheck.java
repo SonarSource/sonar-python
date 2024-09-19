@@ -35,7 +35,6 @@ import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.plugins.python.api.tree.UnpackingExpression;
 import org.sonar.python.checks.utils.Expressions;
 import org.sonar.python.tree.TreeUtils;
 
@@ -133,12 +132,8 @@ public class MissingHyperParameterCheck extends PythonSubscriptionCheck {
 
     public static Optional<List<Param>> getMissingParameters(String name, CallExpression callExpression) {
       return Optional.ofNullable(PY_TORCH_ESTIMATORS_AND_PARAMETERS_TO_CHECK.get(name))
-        .filter(parameters -> !containsSpreadOperator(callExpression))
+        .filter(parameters -> !Expressions.containsSpreadOperator(callExpression.arguments()))
         .filter(parameters -> isMissingAHyperparameter(callExpression, parameters));
-    }
-
-    private static boolean containsSpreadOperator(CallExpression callExpression) {
-      return callExpression.arguments().stream().anyMatch(UnpackingExpression.class::isInstance);
     }
   }
 
