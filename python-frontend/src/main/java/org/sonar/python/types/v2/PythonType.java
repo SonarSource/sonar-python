@@ -79,4 +79,20 @@ public interface PythonType {
   default TypeSource typeSource() {
     return TypeSource.EXACT;
   }
+
+  default PythonType owner() {
+    return null;
+  }
+
+  @Beta
+  default String fullyQualifiedName() {
+    return Optional.ofNullable(this.owner())
+      .map(owner -> {
+        var ownerFQN = owner.fullyQualifiedName();
+        if (ownerFQN.isEmpty()) {
+          return name();
+        }
+        return owner.fullyQualifiedName() + "." + name();
+      }).orElse(null);
+  }
 }

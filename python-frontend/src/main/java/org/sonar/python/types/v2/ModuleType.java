@@ -94,4 +94,10 @@ public final class ModuleType implements PythonType {
     return members;
   }
 
+  @Override
+  public String fullyQualifiedName() {
+    String s = name == null ? "" : name;
+    return (parent == null || parent.name == null) ? s : (parent.fullyQualifiedName() + "." + name);
+  }
+
 }

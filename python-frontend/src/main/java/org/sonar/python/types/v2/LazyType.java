@@ -39,6 +39,7 @@ public class LazyType implements PythonType {
     consumers = new ArrayDeque<>();
   }
 
+  @Override
   public String fullyQualifiedName() {
     return fullyQualifiedName;
   }

@@ -130,6 +130,8 @@ class TypeInferenceV2Test {
       .isInstanceOf(ModuleType.class)
       .extracting(PythonType::name)
       .isEqualTo("datetime");
+
+    assertThat(importedNames.get(0).typeV2().fullyQualifiedName()).isEqualTo("datetime");
   }
 
   @Test
@@ -212,6 +214,9 @@ class TypeInferenceV2Test {
       .isInstanceOf(ClassType.class)
       .extracting(PythonType::name)
       .isEqualTo("date");
+
+    Assertions.assertThat(type.fullyQualifiedName())
+      .isEqualTo("datetime.date");
   }
 
   @Test
@@ -227,10 +232,14 @@ class TypeInferenceV2Test {
     Assertions.assertThat(type1)
       .isEqualTo(PythonType.UNKNOWN);
 
+
     Assertions.assertThat(type2)
       .isInstanceOf(ClassType.class)
       .extracting(PythonType::name)
       .isEqualTo("date");
+
+    Assertions.assertThat(type2.fullyQualifiedName())
+      .isEqualTo("datetime.date");
   }
 
   @Test
@@ -2362,6 +2371,7 @@ class TypeInferenceV2Test {
     PythonType mathModule = ((ExpressionStatement) fileInput.statements().statements().get(2)).expressions().get(0).typeV2();
     assertThat(mathModule).isInstanceOf(ModuleType.class);
     assertThat(mathModule.name()).isEqualTo("math");
+    assertThat(mathModule.fullyQualifiedName()).isEqualTo("math");
     assertThat(((UnionType) mathModule.resolveMember("acos").get()).candidates()).allMatch(FunctionType.class::isInstance);
   }
 
@@ -2545,6 +2555,49 @@ class TypeInferenceV2Test {
 
     assertThat(owner.members()).containsKey("foo");
   }
+
+  @Test
+  void fqnMultiFile() {
+    FileInput tree = parseWithoutSymbols(
+      "def foo(): ...",
+      "class A: ..."
+    );
+    ProjectLevelSymbolTable projectLevelSymbolTable = new ProjectLevelSymbolTable();
+    var modFile = pythonFile("mod.py");
+    projectLevelSymbolTable.addModule(tree, "", modFile);
+    ProjectLevelTypeTable projectLevelTypeTable = new ProjectLevelTypeTable(projectLevelSymbolTable);
+    var lines = """
+      from mod import foo, A
+      foo
+      A
+      """;
+    FileInput fileInput = inferTypes(lines, projectLevelTypeTable);
+    var fooType = ((ExpressionStatement) fileInput.statements().statements().get(1)).expressions().get(0).typeV2();
+    assertThat(fooType.fullyQualifiedName()).isEqualTo("mod.foo");
+
+    var aType = ((ExpressionStatement) fileInput.statements().statements().get(2)).expressions().get(0).typeV2();
+    assertThat(aType.fullyQualifiedName()).isEqualTo("mod.A");
+  }
+
+  @Test
+  void fqnReExport() {
+    FileInput tree = parseWithoutSymbols(
+      "from time import sleep"
+    );
+    ProjectLevelSymbolTable projectLevelSymbolTable = new ProjectLevelSymbolTable();
+    var modFile = pythonFile("mod.py");
+    projectLevelSymbolTable.addModule(tree, "", modFile);
+    ProjectLevelTypeTable projectLevelTypeTable = new ProjectLevelTypeTable(projectLevelSymbolTable);
+
+    var lines = """
+      from mod import sleep
+      sleep
+      """;
+    FileInput fileInput = inferTypes(lines, projectLevelTypeTable);
+    var sleepType = ((ExpressionStatement) fileInput.statements().statements().get(1)).expressions().get(0).typeV2();
+    assertThat(sleepType.fullyQualifiedName()).isNull();
+  }
+
 
   private static FileInput inferTypes(String lines) {
     return inferTypes(lines, PROJECT_LEVEL_TYPE_TABLE);

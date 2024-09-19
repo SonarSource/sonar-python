@@ -52,4 +52,14 @@ class ModuleTypeTest {
     var moduleString = module.toString();
     Assertions.assertThat(moduleString).isEqualTo("ModuleType{name='pkg', members={}}");
   }
+
+  @Test
+  void fqn() {
+    var root = new ModuleType(null);
+    Assertions.assertThat(root.fullyQualifiedName()).isEmpty();
+    var module = new ModuleType("pkg", root);
+    Assertions.assertThat(module.fullyQualifiedName()).isEqualTo("pkg");
+    var subModule = new ModuleType("sub", module);
+    Assertions.assertThat(subModule.fullyQualifiedName()).isEqualTo("pkg.sub");
+  }
 }
