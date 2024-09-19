@@ -376,7 +376,7 @@ public final class CheckList {
       TfFunctionRecursivityCheck.class,
       TfInputShapeOnModelSubclassCheck.class,
       TfGatherDeprecatedValidateIndicesCheck.class,
-      TfSpecifyReductionAxisCheck.class,
+      TfPyTorchSpecifyReductionAxisCheck.class,
       ReferencedBeforeAssignmentCheck.class,
       RegexComplexityCheck.class,
       RegexLookaheadCheck.class,
