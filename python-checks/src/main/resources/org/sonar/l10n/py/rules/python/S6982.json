@@ -1,0 +1,25 @@
+{
+  "title": "\"model.eval()\" or \"model.train()\" should be called after loading the state of a PyTorch model",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "1min"
+  },
+  "tags": [
+    "pytorch",
+    "machine-learning"
+  ],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-6982",
+  "sqKey": "S6982",
+  "scope": "All",
+  "quickfix": "infeasible",
+  "code": {
+    "impacts": {
+      "MAINTAINABILITY": "LOW",
+      "RELIABILITY": "MEDIUM"
+    },
+    "attribute": "CLEAR"
+  }
+}
