@@ -1,0 +1,128 @@
+
+torch.onnx.utilsW
+is_in_onnx_export"torch.onnx.utils.is_in_onnx_export"
+builtins.bool"builtins.boolí
+exporttorch.onnx.utils.export"õ
+5Union[torch.onnx._internal.exporter.ONNXProgram,None]V
+)torch.onnx._internal.exporter.ONNXProgram")torch.onnx._internal.exporter.ONNXProgram
+None*»
+modelº
+eUnion[torch.nn.modules.module.Module,torch.jit._script.ScriptModule,torch._C.ScriptFunction[Any,Any]]@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module@
+torch.jit._script.ScriptModule"torch.jit._script.ScriptModuleM
+ torch._C.ScriptFunction[Any,Any]
+Any
+Any"torch._C.ScriptFunction*ú
+argsë
+/Union[builtins.tuple[Any],torch._tensor.Tensor].
+builtins.tuple[Any]
+Any"builtins.tuple,
+torch._tensor.Tensor"torch._tensor.Tensor*r
+fi
+#Union[builtins.str,io.BytesIO,None]
+builtins.str"builtins.str
+
+io.BytesIO"
+io.BytesIO
+None *3
+export_params
+builtins.bool"builtins.bool *-
+verbose
+builtins.bool"builtins.bool *J
+training:
+torch._C._onnx.TrainingMode"torch._C._onnx.TrainingMode *õ
+input_namesá
+)Union[typing.Sequence[builtins.str],None]N
+typing.Sequence[builtins.str]
+builtins.str"builtins.str"typing.Sequence
+None *ú
+output_namesá
+)Union[typing.Sequence[builtins.str],None]N
+typing.Sequence[builtins.str]
+builtins.str"builtins.str"typing.Sequence
+None *d
+operator_export_typeH
+"torch._C._onnx.OperatorExportTypes""torch._C._onnx.OperatorExportTypes *Y
+opset_versionD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *9
+do_constant_folding
+builtins.bool"builtins.bool *‡
+dynamic_axesÀ
+çUnion[typing.Mapping[builtins.str,typing.Mapping[builtins.int,builtins.str]],typing.Mapping[builtins.str,typing.Sequence[builtins.int]],None]Ô
+Ftyping.Mapping[builtins.str,typing.Mapping[builtins.int,builtins.str]]
+builtins.str"builtins.strw
+)typing.Mapping[builtins.int,builtins.str]
+builtins.int"builtins.int
+builtins.str"builtins.str"typing.Mapping"typing.Mapping∫
+:typing.Mapping[builtins.str,typing.Sequence[builtins.int]]
+builtins.str"builtins.strN
+typing.Sequence[builtins.int]
+builtins.int"builtins.int"typing.Sequence"typing.Mapping
+None *j
+keep_initializers_as_inputsG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *“
+custom_opsetsº
+5Union[typing.Mapping[builtins.str,builtins.int],None]w
+)typing.Mapping[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int"typing.Mapping
+None *’
+export_modules_as_functions±
+LUnion[builtins.bool,typing.Collection[Type[torch.nn.modules.module.Module]]]
+builtins.bool"builtins.boolæ
+7typing.Collection[Type[torch.nn.modules.module.Module]]p
+$Type[torch.nn.modules.module.Module]@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"type"typing.Collection *`
+autograd_inliningG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *,
+dynamo
+builtins.bool"builtins.bool  
+_create_jit_graph"torch.onnx.utils._create_jit_graph"Í
+fTuple[torch._C.Graph,builtins.list[torch._C.IValue],Union[Any,None],Union[torch._C.ScriptModule,None]] 
+torch._C.Graph"torch._C.GraphS
+builtins.list[torch._C.IValue]"
+torch._C.IValue"torch._C.IValue"builtins.list&
+Union[Any,None]
+Any
+None_
+!Union[torch._C.ScriptModule,None].
+torch._C.ScriptModule"torch._C.ScriptModule
+None*Á
+model€
+FUnion[torch.nn.modules.module.Module,torch._C.ScriptFunction[Any,Any]]@
+torch.nn.modules.module.Module"torch.nn.modules.module.ModuleM
+ torch._C.ScriptFunction[Any,Any]
+Any
+Any"torch._C.ScriptFunction*:
+args0
+typing.Sequence[Any]
+Any"typing.Sequence¬
+model_signature torch.onnx.utils.model_signature"&
+inspect.Signature"inspect.Signature*‰
+modelÿ
+EUnion[torch.nn.modules.module.Module,CallableType[builtins.function]]@
+torch.nn.modules.module.Module"torch.nn.modules.module.ModuleK
+CallableType[builtins.function]&
+builtins.function"builtins.function*å
+__annotations__ torch.onnx.utils.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*
+_C_onnxtorch._C._onnx *o
+__all__torch.onnx.utils.__all__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*h
+_params_dicttorch.onnx.utils._params_dict9
+builtins.dict[Any,Any]
+Any
+Any"builtins.dict*π
+_qtype_vtype_map!torch.onnx.utils._qtype_vtype_mapÅ
+,builtins.dict[torch._C.dtype,torch._C.dtype] 
+torch._C.dtype"torch._C.dtype 
+torch._C.dtype"torch._C.dtype"builtins.dict

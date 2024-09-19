@@ -1,0 +1,1833 @@
+
+torch.nested._internal.opsΩ
+TypeVartyping.TypeVar"builtins.object*∂
+__init__typing.TypeVar.__init__"
+None**
+self 
+typing.TypeVar"typing.TypeVar*&
+name
+builtins.str"builtins.str*
+constraints
+Any*3
+bound&
+Union[Any,None]
+Any
+None */
+	covariant
+builtins.bool"builtins.bool *3
+contravariant
+builtins.bool"builtins.bool 8rM
+	__bound__typing.TypeVar.__bound__&
+Union[Any,None]
+Any
+Nonera
+__constraints__typing.TypeVar.__constraints__.
+builtins.tuple[Any]
+Any"builtins.tuplerM
+__covariant__typing.TypeVar.__covariant__
+builtins.bool"builtins.boolrU
+__contravariant__ typing.TypeVar.__contravariant__
+builtins.bool"builtins.boolÀ
+SupportsInttyping.SupportsInt"builtins.object*É
+__int__typing.SupportsInt.__int__"
+builtins.int"builtins.int**(
+typing.SupportsInt"typing.SupportsInt0:abstractmethod@8@Xbabc.ABCMeta›
+SupportsFloattyping.SupportsFloat"builtins.object*ë
+	__float__typing.SupportsFloat.__float__" 
+builtins.float"builtins.float*.,
+typing.SupportsFloat"typing.SupportsFloat0:abstractmethod@8@Xbabc.ABCMetaÔ
+SupportsComplextyping.SupportsComplex"builtins.object*ü
+__complex__"typing.SupportsComplex.__complex__"$
+builtins.complex"builtins.complex*20
+typing.SupportsComplex"typing.SupportsComplex0:abstractmethod@8@Xbabc.ABCMetaÂ
+SupportsBytestyping.SupportsBytes"builtins.object*ô
+	__bytes__typing.SupportsBytes.__bytes__" 
+builtins.bytes"builtins.bytes*6
+self,
+typing.SupportsBytes"typing.SupportsBytes0:abstractmethod@8@Xbabc.ABCMeta·
+SupportsIndextyping.SupportsIndex"builtins.object*ï
+	__index__typing.SupportsIndex.__index__"
+builtins.int"builtins.int*6
+self,
+typing.SupportsIndex"typing.SupportsIndex0:abstractmethod@8@Xbabc.ABCMetaº
+SupportsAbstyping.SupportsAbs"builtins.object*Å
+__abs__typing.SupportsAbs.__abs__"E
+typing._T_co"
+builtins.object"builtins.object"builtins.object*}
+ typing.SupportsAbs[typing._T_co]E
+typing._T_co"
+builtins.object"builtins.object"builtins.object"typing.SupportsAbs0:abstractmethod@8PX©
+SupportsRoundtyping.SupportsRound"builtins.object2Í
+	__round__typing.SupportsRound.__round__¯
+	__round__typing.SupportsRound.__round__"
+builtins.int"builtins.int*å
+selfÅ
+"typing.SupportsRound[typing._T_co]E
+typing._T_co"
+builtins.object"builtins.object"builtins.object"typing.SupportsRound0:overload:abstractmethod@X¡
+	__round__typing.SupportsRound.__round__"E
+typing._T_co"
+builtins.object"builtins.object"builtins.object*å
+selfÅ
+"typing.SupportsRound[typing._T_co]E
+typing._T_co"
+builtins.object"builtins.object"builtins.object"typing.SupportsRound*
+builtins.int"builtins.int0:overload:abstractmethod@X8PX¨
+Sizedtyping.Sized"builtins.object*q
+__len__typing.Sized.__len__"
+builtins.int"builtins.int*
+typing.Sized"typing.Sized0:abstractmethod@8@Xbabc.ABCMeta∆
+Hashabletyping.Hashable"builtins.object*Ñ
+__hash__typing.Hashable.__hash__"
+builtins.int"builtins.int*,
+self"
+typing.Hashable"typing.Hashable0:abstractmethod@8@Xbabc.ABCMeta·
+Iterabletyping.Iterable"builtins.object*¨
+__iter__typing.Iterable.__iter__"w
+typing.Iterator[typing._T_co]E
+typing._T_co"
+builtins.object"builtins.object"builtins.object"typing.Iterator*yw
+typing.Iterable[typing._T_co]E
+typing._T_co"
+builtins.object"builtins.object"builtins.object"typing.Iterable0:abstractmethod@8PX”
+Iteratortyping.Iterator"typing.Iterable*É
+__next__typing.Iterator.__next__"E
+typing._T_co"
+builtins.object"builtins.object"builtins.object*Å
+selfw
+typing.Iterator[typing._T_co]E
+typing._T_co"
+builtins.object"builtins.object"builtins.object"typing.Iterator0:abstractmethod@*ò
+__iter__typing.Iterator.__iter__"w
+typing.Iterator[typing._T_co]E
+typing._T_co"
+builtins.object"builtins.object"builtins.object"typing.Iterator*yw
+typing.Iterator[typing._T_co]E
+typing._T_co"
+builtins.object"builtins.object"builtins.object"typing.Iterator8PXÛ
+
+Reversibletyping.Reversible"typing.Iterable*∫
+__reversed__typing.Reversible.__reversed__"w
+typing.Iterator[typing._T_co]E
+typing._T_co"
+builtins.object"builtins.object"builtins.object"typing.Iterator*}{
+typing.Reversible[typing._T_co]E
+typing._T_co"
+builtins.object"builtins.object"builtins.object"typing.Reversible0:abstractmethod@8PXÙ'
+	Generatortyping.Generator"typing.Iterator*£
+__next__typing.Generator.__next__"E
+typing._T_co"
+builtins.object"builtins.object"builtins.object*¥
+self©
+<typing.Generator[typing._T_co,typing._T_contra,typing._V_co]E
+typing._T_co"
+builtins.object"builtins.object"builtins.objectI
+typing._T_contra"
+builtins.object"builtins.object"builtins.objectE
+typing._V_co"
+builtins.object"builtins.object"builtins.object"typing.Generator*¸
+sendtyping.Generator.send"E
+typing._T_co"
+builtins.object"builtins.object"builtins.object*¥
+self©
+<typing.Generator[typing._T_co,typing._T_contra,typing._V_co]E
+typing._T_co"
+builtins.object"builtins.object"builtins.objectI
+typing._T_contra"
+builtins.object"builtins.object"builtins.objectE
+typing._V_co"
+builtins.object"builtins.object"builtins.object"typing.Generator*KI
+typing._T_contra"
+builtins.object"builtins.object"builtins.object0:abstractmethod@*‡
+closetyping.Generator.close"
+None*¥
+self©
+<typing.Generator[typing._T_co,typing._T_contra,typing._V_co]E
+typing._T_co"
+builtins.object"builtins.object"builtins.objectI
+typing._T_contra"
+builtins.object"builtins.object"builtins.objectE
+typing._V_co"
+builtins.object"builtins.object"builtins.object"typing.Generator*Ä
+__iter__typing.Generator.__iter__"©
+<typing.Generator[typing._T_co,typing._T_contra,typing._V_co]E
+typing._T_co"
+builtins.object"builtins.object"builtins.objectI
+typing._T_contra"
+builtins.object"builtins.object"builtins.objectE
+typing._V_co"
+builtins.object"builtins.object"builtins.object"typing.Generator*¨©
+<typing.Generator[typing._T_co,typing._T_contra,typing._V_co]E
+typing._T_co"
+builtins.object"builtins.object"builtins.objectI
+typing._T_contra"
+builtins.object"builtins.object"builtins.objectE
+typing._V_co"
+builtins.object"builtins.object"builtins.object"typing.Generator*ä
+gi_codetyping.Generator.gi_code" 
+types.CodeType"types.CodeType*¥
+self©
+<typing.Generator[typing._T_co,typing._T_contra,typing._V_co]E
+typing._T_co"
+builtins.object"builtins.object"builtins.objectI
+typing._T_contra"
+builtins.object"builtins.object"builtins.objectE
+typing._V_co"
+builtins.object"builtins.object"builtins.object"typing.Generator0:property`*é
+gi_frametyping.Generator.gi_frame""
+types.FrameType"types.FrameType*¥
+self©
+<typing.Generator[typing._T_co,typing._T_contra,typing._V_co]E
+typing._T_co"
+builtins.object"builtins.object"builtins.objectI
+typing._T_contra"
+builtins.object"builtins.object"builtins.objectE
+typing._V_co"
+builtins.object"builtins.object"builtins.object"typing.Generator0:property`*é
+
+gi_runningtyping.Generator.gi_running"
+builtins.bool"builtins.bool*¥
+self©
+<typing.Generator[typing._T_co,typing._T_contra,typing._V_co]E
+typing._T_co"
+builtins.object"builtins.object"builtins.objectI
+typing._T_contra"
+builtins.object"builtins.object"builtins.objectE
+typing._V_co"
+builtins.object"builtins.object"builtins.object"typing.Generator0:property`*˙
+gi_yieldfromtyping.Generator.gi_yieldfrom"Ö
+)Union[typing.Generator[Any,Any,Any],None]L
+typing.Generator[Any,Any,Any]
+Any
+Any
+Any"typing.Generator
+None*¥
+self©
+<typing.Generator[typing._T_co,typing._T_contra,typing._V_co]E
+typing._T_co"
+builtins.object"builtins.object"builtins.objectI
+typing._T_contra"
+builtins.object"builtins.object"builtins.objectE
+typing._V_co"
+builtins.object"builtins.object"builtins.object"typing.Generator0:property`2ä
+throwtyping.Generator.throwá
+throwtyping.Generator.throw"E
+typing._T_co"
+builtins.object"builtins.object"builtins.object*¥
+self©
+<typing.Generator[typing._T_co,typing._T_contra,typing._V_co]E
+typing._T_co"
+builtins.object"builtins.object"builtins.objectI
+typing._T_contra"
+builtins.object"builtins.object"builtins.objectE
+typing._V_co"
+builtins.object"builtins.object"builtins.object"typing.Generator*ZX
+Type[builtins.BaseException]0
+builtins.BaseException"builtins.BaseException"type*åá
+-Union[builtins.BaseException,builtins.object]0
+builtins.BaseException"builtins.BaseException"
+builtins.object"builtins.object *]Y
+Union[types.TracebackType,None]*
+types.TracebackType"types.TracebackType
+None 0:overload:abstractmethod@Xﬁ
+throwtyping.Generator.throw"E
+typing._T_co"
+builtins.object"builtins.object"builtins.object*¥
+self©
+<typing.Generator[typing._T_co,typing._T_contra,typing._V_co]E
+typing._T_co"
+builtins.object"builtins.object"builtins.objectI
+typing._T_contra"
+builtins.object"builtins.object"builtins.objectE
+typing._V_co"
+builtins.object"builtins.object"builtins.object"typing.Generator*20
+builtins.BaseException"builtins.BaseException*
+None *]Y
+Union[types.TracebackType,None]*
+types.TracebackType"types.TracebackType
+None 0:overload:abstractmethod@XPê
+	Awaitabletyping.Awaitable"builtins.object*Ÿ
+	__await__typing.Awaitable.__await__"ï
+'typing.Generator[Any,None,typing._T_co]
+Any
+NoneE
+typing._T_co"
+builtins.object"builtins.object"builtins.object"typing.Generator*É
+selfy
+typing.Awaitable[typing._T_co]E
+typing._T_co"
+builtins.object"builtins.object"builtins.object"typing.Awaitable0:abstractmethod@8PX≈
+	Coroutinetyping.Coroutine"typing.Awaitable*í
+cr_awaittyping.Coroutine.cr_await"&
+Union[Any,None]
+Any
+None*¥
+self©
+<typing.Coroutine[typing._T_co,typing._T_contra,typing._V_co]E
+typing._T_co"
+builtins.object"builtins.object"builtins.objectI
+typing._T_contra"
+builtins.object"builtins.object"builtins.objectE
+typing._V_co"
+builtins.object"builtins.object"builtins.object"typing.Coroutine0:property`*ä
+cr_codetyping.Coroutine.cr_code" 
+types.CodeType"types.CodeType*¥
+self©
+<typing.Coroutine[typing._T_co,typing._T_contra,typing._V_co]E
+typing._T_co"
+builtins.object"builtins.object"builtins.objectI
+typing._T_contra"
+builtins.object"builtins.object"builtins.objectE
+typing._V_co"
+builtins.object"builtins.object"builtins.object"typing.Coroutine0:property`*é
+cr_frametyping.Coroutine.cr_frame""
+types.FrameType"types.FrameType*¥
+self©
+<typing.Coroutine[typing._T_co,typing._T_contra,typing._V_co]E
+typing._T_co"
+builtins.object"builtins.object"builtins.objectI
+typing._T_contra"
+builtins.object"builtins.object"builtins.objectE
+typing._V_co"
+builtins.object"builtins.object"builtins.object"typing.Coroutine0:property`*é
+
+cr_runningtyping.Coroutine.cr_running"
+builtins.bool"builtins.bool*¥
+self©
+<typing.Coroutine[typing._T_co,typing._T_contra,typing._V_co]E
+typing._T_co"
+builtins.object"builtins.object"builtins.objectI
+typing._T_contra"
+builtins.object"builtins.object"builtins.objectE
+typing._V_co"
+builtins.object"builtins.object"builtins.object"typing.Coroutine0:property`*¸
+sendtyping.Coroutine.send"E
+typing._T_co"
+builtins.object"builtins.object"builtins.object*¥
+self©
+<typing.Coroutine[typing._T_co,typing._T_contra,typing._V_co]E
+typing._T_co"
+builtins.object"builtins.object"builtins.objectI
+typing._T_contra"
+builtins.object"builtins.object"builtins.objectE
+typing._V_co"
+builtins.object"builtins.object"builtins.object"typing.Coroutine*KI
+typing._T_contra"
+builtins.object"builtins.object"builtins.object0:abstractmethod@*Ù
+closetyping.Coroutine.close"
+None*¥
+self©
+<typing.Coroutine[typing._T_co,typing._T_contra,typing._V_co]E
+typing._T_co"
+builtins.object"builtins.object"builtins.objectI
+typing._T_contra"
+builtins.object"builtins.object"builtins.objectE
+typing._V_co"
+builtins.object"builtins.object"builtins.object"typing.Coroutine0:abstractmethod@2ä
+throwtyping.Coroutine.throwá
+throwtyping.Coroutine.throw"E
+typing._T_co"
+builtins.object"builtins.object"builtins.object*¥
+self©
+<typing.Coroutine[typing._T_co,typing._T_contra,typing._V_co]E
+typing._T_co"
+builtins.object"builtins.object"builtins.objectI
+typing._T_contra"
+builtins.object"builtins.object"builtins.objectE
+typing._V_co"
+builtins.object"builtins.object"builtins.object"typing.Coroutine*ZX
+Type[builtins.BaseException]0
+builtins.BaseException"builtins.BaseException"type*åá
+-Union[builtins.BaseException,builtins.object]0
+builtins.BaseException"builtins.BaseException"
+builtins.object"builtins.object *]Y
+Union[types.TracebackType,None]*
+types.TracebackType"types.TracebackType
+None 0:overload:abstractmethod@Xﬁ
+throwtyping.Coroutine.throw"E
+typing._T_co"
+builtins.object"builtins.object"builtins.object*¥
+self©
+<typing.Coroutine[typing._T_co,typing._T_contra,typing._V_co]E
+typing._T_co"
+builtins.object"builtins.object"builtins.objectI
+typing._T_contra"
+builtins.object"builtins.object"builtins.objectE
+typing._V_co"
+builtins.object"builtins.object"builtins.object"typing.Coroutine*20
+builtins.BaseException"builtins.BaseException*
+None *]Y
+Union[types.TracebackType,None]*
+types.TracebackType"types.TracebackType
+None 0:overload:abstractmethod@XPrK
+__qualname__typing.Coroutine.__qualname__
+builtins.str"builtins.strë
+AsyncIterabletyping.AsyncIterable"builtins.object*“
+	__aiter__typing.AsyncIterable.__aiter__"Å
+"typing.AsyncIterator[typing._T_co]E
+typing._T_co"
+builtins.object"builtins.object"builtins.object"typing.AsyncIterator*å
+selfÅ
+"typing.AsyncIterable[typing._T_co]E
+typing._T_co"
+builtins.object"builtins.object"builtins.object"typing.AsyncIterable0:abstractmethod@8PXŒ
+AsyncIteratortyping.AsyncIterator"typing.AsyncIterable*…
+	__anext__typing.AsyncIterator.__anext__"y
+typing.Awaitable[typing._T_co]E
+typing._T_co"
+builtins.object"builtins.object"builtins.object"typing.Awaitable*å
+selfÅ
+"typing.AsyncIterator[typing._T_co]E
+typing._T_co"
+builtins.object"builtins.object"builtins.object"typing.AsyncIterator0:abstractmethod@*æ
+	__aiter__typing.AsyncIterator.__aiter__"Å
+"typing.AsyncIterator[typing._T_co]E
+typing._T_co"
+builtins.object"builtins.object"builtins.object"typing.AsyncIterator*å
+selfÅ
+"typing.AsyncIterator[typing._T_co]E
+typing._T_co"
+builtins.object"builtins.object"builtins.object"typing.AsyncIterator8PXô
+AsyncGeneratortyping.AsyncGenerator"typing.AsyncIterator*î
+	__anext__typing.AsyncGenerator.__anext__"y
+typing.Awaitable[typing._T_co]E
+typing._T_co"
+builtins.object"builtins.object"builtins.object"typing.Awaitable*Í
+selfﬂ
+4typing.AsyncGenerator[typing._T_co,typing._T_contra]E
+typing._T_co"
+builtins.object"builtins.object"builtins.objectI
+typing._T_contra"
+builtins.object"builtins.object"builtins.object"typing.AsyncGenerator*Ì
+asendtyping.AsyncGenerator.asend"y
+typing.Awaitable[typing._T_co]E
+typing._T_co"
+builtins.object"builtins.object"builtins.object"typing.Awaitable*Í
+selfﬂ
+4typing.AsyncGenerator[typing._T_co,typing._T_contra]E
+typing._T_co"
+builtins.object"builtins.object"builtins.objectI
+typing._T_contra"
+builtins.object"builtins.object"builtins.object"typing.AsyncGenerator*KI
+typing._T_contra"
+builtins.object"builtins.object"builtins.object0:abstractmethod@*…
+aclosetyping.AsyncGenerator.aclose"4
+typing.Awaitable[None]
+None"typing.Awaitable*Í
+selfﬂ
+4typing.AsyncGenerator[typing._T_co,typing._T_contra]E
+typing._T_co"
+builtins.object"builtins.object"builtins.objectI
+typing._T_contra"
+builtins.object"builtins.object"builtins.object"typing.AsyncGenerator*Æ
+ag_awaittyping.AsyncGenerator.ag_await"
+Any*Í
+selfﬂ
+4typing.AsyncGenerator[typing._T_co,typing._T_contra]E
+typing._T_co"
+builtins.object"builtins.object"builtins.objectI
+typing._T_contra"
+builtins.object"builtins.object"builtins.object"typing.AsyncGenerator0:property`*≈
+ag_codetyping.AsyncGenerator.ag_code" 
+types.CodeType"types.CodeType*Í
+selfﬂ
+4typing.AsyncGenerator[typing._T_co,typing._T_contra]E
+typing._T_co"
+builtins.object"builtins.object"builtins.objectI
+typing._T_contra"
+builtins.object"builtins.object"builtins.object"typing.AsyncGenerator0:property`*…
+ag_frametyping.AsyncGenerator.ag_frame""
+types.FrameType"types.FrameType*Í
+selfﬂ
+4typing.AsyncGenerator[typing._T_co,typing._T_contra]E
+typing._T_co"
+builtins.object"builtins.object"builtins.objectI
+typing._T_contra"
+builtins.object"builtins.object"builtins.object"typing.AsyncGenerator0:property`*…
+
+ag_running typing.AsyncGenerator.ag_running"
+builtins.bool"builtins.bool*Í
+selfﬂ
+4typing.AsyncGenerator[typing._T_co,typing._T_contra]E
+typing._T_co"
+builtins.object"builtins.object"builtins.objectI
+typing._T_contra"
+builtins.object"builtins.object"builtins.object"typing.AsyncGenerator0:property`2Û
+
+athrowtyping.AsyncGenerator.athrow¯
+athrowtyping.AsyncGenerator.athrow"y
+typing.Awaitable[typing._T_co]E
+typing._T_co"
+builtins.object"builtins.object"builtins.object"typing.Awaitable*Í
+selfﬂ
+4typing.AsyncGenerator[typing._T_co,typing._T_contra]E
+typing._T_co"
+builtins.object"builtins.object"builtins.objectI
+typing._T_contra"
+builtins.object"builtins.object"builtins.object"typing.AsyncGenerator*ZX
+Type[builtins.BaseException]0
+builtins.BaseException"builtins.BaseException"type*åá
+-Union[builtins.BaseException,builtins.object]0
+builtins.BaseException"builtins.BaseException"
+builtins.object"builtins.object *]Y
+Union[types.TracebackType,None]*
+types.TracebackType"types.TracebackType
+None 0:overload:abstractmethod@Xœ
+athrowtyping.AsyncGenerator.athrow"y
+typing.Awaitable[typing._T_co]E
+typing._T_co"
+builtins.object"builtins.object"builtins.object"typing.Awaitable*Í
+selfﬂ
+4typing.AsyncGenerator[typing._T_co,typing._T_contra]E
+typing._T_co"
+builtins.object"builtins.object"builtins.objectI
+typing._T_contra"
+builtins.object"builtins.object"builtins.object"typing.AsyncGenerator*20
+builtins.BaseException"builtins.BaseException*
+None *]Y
+Union[types.TracebackType,None]*
+types.TracebackType"types.TracebackType
+None 0:overload:abstractmethod@XPª
+	Containertyping.Container"builtins.object*Ñ
+__contains__typing.Container.__contains__"
+builtins.bool"builtins.bool*{y
+typing.Container[typing._T_co]E
+typing._T_co"
+builtins.object"builtins.object"builtins.object"typing.Container*$"
+builtins.object"builtins.object0:abstractmethod@8PX†
+
+Collectiontyping.Collection"typing.Iterable"typing.Container*’
+__len__typing.Collection.__len__"
+builtins.int"builtins.int*}{
+typing.Collection[typing._T_co]E
+typing._T_co"
+builtins.object"builtins.object"builtins.object"typing.Collection0:abstractmethod@8PXµ
+Sequencetyping.Sequence"typing.Collection"typing.Reversible*©
+indextyping.Sequence.index"
+builtins.int"builtins.int*Å
+selfw
+typing.Sequence[typing._T_co]E
+typing._T_co"
+builtins.object"builtins.object"builtins.object"typing.Sequence*
+value
+Any*)
+start
+builtins.int"builtins.int *(
+stop
+builtins.int"builtins.int *‘
+counttyping.Sequence.count"
+builtins.int"builtins.int*Å
+selfw
+typing.Sequence[typing._T_co]E
+typing._T_co"
+builtins.object"builtins.object"builtins.object"typing.Sequence*
+value
+Any*Ì
+__contains__typing.Sequence.__contains__"
+builtins.bool"builtins.bool*yw
+typing.Sequence[typing._T_co]E
+typing._T_co"
+builtins.object"builtins.object"builtins.object"typing.Sequence*$"
+builtins.object"builtins.object*ò
+__iter__typing.Sequence.__iter__"w
+typing.Iterator[typing._T_co]E
+typing._T_co"
+builtins.object"builtins.object"builtins.object"typing.Iterator*yw
+typing.Sequence[typing._T_co]E
+typing._T_co"
+builtins.object"builtins.object"builtins.object"typing.Sequence*†
+__reversed__typing.Sequence.__reversed__"w
+typing.Iterator[typing._T_co]E
+typing._T_co"
+builtins.object"builtins.object"builtins.object"typing.Iterator*yw
+typing.Sequence[typing._T_co]E
+typing._T_co"
+builtins.object"builtins.object"builtins.object"typing.Sequence2æ
+__getitem__typing.Sequence.__getitem__¨
+__getitem__typing.Sequence.__getitem__"E
+typing._T_co"
+builtins.object"builtins.object"builtins.object*yw
+typing.Sequence[typing._T_co]E
+typing._T_co"
+builtins.object"builtins.object"builtins.object"typing.Sequence*
+builtins.int"builtins.int0:overload:abstractmethod@X‚
+__getitem__typing.Sequence.__getitem__"w
+typing.Sequence[typing._T_co]E
+typing._T_co"
+builtins.object"builtins.object"builtins.object"typing.Sequence*yw
+typing.Sequence[typing._T_co]E
+typing._T_co"
+builtins.object"builtins.object"builtins.object"typing.Sequence*" 
+builtins.slice"builtins.slice0:overload:abstractmethod@XP¿#
+MutableSequencetyping.MutableSequence"typing.Sequence*…
+inserttyping.MutableSequence.insert"
+None*â
+self
+!typing.MutableSequence[typing._T]B
+	typing._T"
+builtins.object"builtins.object"builtins.object"typing.MutableSequence*'
+index
+builtins.int"builtins.int*M
+valueB
+	typing._T"
+builtins.object"builtins.object"builtins.object0:abstractmethod@*å
+appendtyping.MutableSequence.append"
+None*â
+self
+!typing.MutableSequence[typing._T]B
+	typing._T"
+builtins.object"builtins.object"builtins.object"typing.MutableSequence*M
+valueB
+	typing._T"
+builtins.object"builtins.object"builtins.object*ª
+cleartyping.MutableSequence.clear"
+None*â
+self
+!typing.MutableSequence[typing._T]B
+	typing._T"
+builtins.object"builtins.object"builtins.object"typing.MutableSequence*º
+extendtyping.MutableSequence.extend"
+None*â
+self
+!typing.MutableSequence[typing._T]B
+	typing._T"
+builtins.object"builtins.object"builtins.object"typing.MutableSequence*}
+valuesq
+typing.Iterable[typing._T]B
+	typing._T"
+builtins.object"builtins.object"builtins.object"typing.Iterable*ø
+reversetyping.MutableSequence.reverse"
+None*â
+self
+!typing.MutableSequence[typing._T]B
+	typing._T"
+builtins.object"builtins.object"builtins.object"typing.MutableSequence*ú
+poptyping.MutableSequence.pop"B
+	typing._T"
+builtins.object"builtins.object"builtins.object*â
+self
+!typing.MutableSequence[typing._T]B
+	typing._T"
+builtins.object"builtins.object"builtins.object"typing.MutableSequence*)
+index
+builtins.int"builtins.int *å
+removetyping.MutableSequence.remove"
+None*â
+self
+!typing.MutableSequence[typing._T]B
+	typing._T"
+builtins.object"builtins.object"builtins.object"typing.MutableSequence*M
+valueB
+	typing._T"
+builtins.object"builtins.object"builtins.object*ô
+__iadd__typing.MutableSequence.__iadd__"∏
+typing.MutableSequence.Self
+!typing.MutableSequence[typing._T]B
+	typing._T"
+builtins.object"builtins.object"builtins.object"typing.MutableSequence"typing.MutableSequence*ª∏
+typing.MutableSequence.Self
+!typing.MutableSequence[typing._T]B
+	typing._T"
+builtins.object"builtins.object"builtins.object"typing.MutableSequence"typing.MutableSequence*sq
+typing.Iterable[typing._T]B
+	typing._T"
+builtins.object"builtins.object"builtins.object"typing.Iterable2Í
+__getitem__"typing.MutableSequence.__getitem__π
+__getitem__"typing.MutableSequence.__getitem__"B
+	typing._T"
+builtins.object"builtins.object"builtins.object*Å
+!typing.MutableSequence[typing._T]B
+	typing._T"
+builtins.object"builtins.object"builtins.object"typing.MutableSequence*
+builtins.int"builtins.int0:overload:abstractmethod@X˙
+__getitem__"typing.MutableSequence.__getitem__"
+!typing.MutableSequence[typing._T]B
+	typing._T"
+builtins.object"builtins.object"builtins.object"typing.MutableSequence*Å
+!typing.MutableSequence[typing._T]B
+	typing._T"
+builtins.object"builtins.object"builtins.object"typing.MutableSequence*" 
+builtins.slice"builtins.slice0:overload:abstractmethod@X2Ù
+__setitem__"typing.MutableSequence.__setitem__≈
+__setitem__"typing.MutableSequence.__setitem__"
+None*Å
+!typing.MutableSequence[typing._T]B
+	typing._T"
+builtins.object"builtins.object"builtins.object"typing.MutableSequence*
+builtins.int"builtins.int*DB
+	typing._T"
+builtins.object"builtins.object"builtins.object0:overload:abstractmethod@X¯
+__setitem__"typing.MutableSequence.__setitem__"
+None*Å
+!typing.MutableSequence[typing._T]B
+	typing._T"
+builtins.object"builtins.object"builtins.object"typing.MutableSequence*" 
+builtins.slice"builtins.slice*sq
+typing.Iterable[typing._T]B
+	typing._T"
+builtins.object"builtins.object"builtins.object"typing.Iterable0:overload:abstractmethod@X2π
+__delitem__"typing.MutableSequence.__delitem__ˇ
+__delitem__"typing.MutableSequence.__delitem__"
+None*Å
+!typing.MutableSequence[typing._T]B
+	typing._T"
+builtins.object"builtins.object"builtins.object"typing.MutableSequence*
+builtins.int"builtins.int0:overload:abstractmethod@XÉ
+__delitem__"typing.MutableSequence.__delitem__"
+None*Å
+!typing.MutableSequence[typing._T]B
+	typing._T"
+builtins.object"builtins.object"builtins.object"typing.MutableSequence*" 
+builtins.slice"builtins.slice0:overload:abstractmethod@XP§
+AbstractSettyping.AbstractSet"typing.Collection*ä
+__contains__typing.AbstractSet.__contains__"
+builtins.bool"builtins.bool*}
+ typing.AbstractSet[typing._T_co]E
+typing._T_co"
+builtins.object"builtins.object"builtins.object"typing.AbstractSet*$"
+builtins.object"builtins.object0:abstractmethod@*…
+_hashtyping.AbstractSet._hash"
+builtins.int"builtins.int*á
+self}
+ typing.AbstractSet[typing._T_co]E
+typing._T_co"
+builtins.object"builtins.object"builtins.object"typing.AbstractSet*˛
+__le__typing.AbstractSet.__le__"
+builtins.bool"builtins.bool*}
+ typing.AbstractSet[typing._T_co]E
+typing._T_co"
+builtins.object"builtins.object"builtins.object"typing.AbstractSet*86
+typing.AbstractSet[Any]
+Any"typing.AbstractSet*˛
+__lt__typing.AbstractSet.__lt__"
+builtins.bool"builtins.bool*}
+ typing.AbstractSet[typing._T_co]E
+typing._T_co"
+builtins.object"builtins.object"builtins.object"typing.AbstractSet*86
+typing.AbstractSet[Any]
+Any"typing.AbstractSet*˛
+__gt__typing.AbstractSet.__gt__"
+builtins.bool"builtins.bool*}
+ typing.AbstractSet[typing._T_co]E
+typing._T_co"
+builtins.object"builtins.object"builtins.object"typing.AbstractSet*86
+typing.AbstractSet[Any]
+Any"typing.AbstractSet*˛
+__ge__typing.AbstractSet.__ge__"
+builtins.bool"builtins.bool*}
+ typing.AbstractSet[typing._T_co]E
+typing._T_co"
+builtins.object"builtins.object"builtins.object"typing.AbstractSet*86
+typing.AbstractSet[Any]
+Any"typing.AbstractSet*ﬂ
+__and__typing.AbstractSet.__and__"}
+ typing.AbstractSet[typing._T_co]E
+typing._T_co"
+builtins.object"builtins.object"builtins.object"typing.AbstractSet*}
+ typing.AbstractSet[typing._T_co]E
+typing._T_co"
+builtins.object"builtins.object"builtins.object"typing.AbstractSet*86
+typing.AbstractSet[Any]
+Any"typing.AbstractSet*ò
+__or__typing.AbstractSet.__or__"ˆ
+1typing.AbstractSet[Union[typing._T_co,typing._T]]¨
+Union[typing._T_co,typing._T]E
+typing._T_co"
+builtins.object"builtins.object"builtins.objectB
+	typing._T"
+builtins.object"builtins.object"builtins.object"typing.AbstractSet*}
+ typing.AbstractSet[typing._T_co]E
+typing._T_co"
+builtins.object"builtins.object"builtins.object"typing.AbstractSet*yw
+typing.AbstractSet[typing._T]B
+	typing._T"
+builtins.object"builtins.object"builtins.object"typing.AbstractSet*ﬂ
+__sub__typing.AbstractSet.__sub__"}
+ typing.AbstractSet[typing._T_co]E
+typing._T_co"
+builtins.object"builtins.object"builtins.object"typing.AbstractSet*}
+ typing.AbstractSet[typing._T_co]E
+typing._T_co"
+builtins.object"builtins.object"builtins.object"typing.AbstractSet*86
+typing.AbstractSet[Any]
+Any"typing.AbstractSet*ö
+__xor__typing.AbstractSet.__xor__"ˆ
+1typing.AbstractSet[Union[typing._T_co,typing._T]]¨
+Union[typing._T_co,typing._T]E
+typing._T_co"
+builtins.object"builtins.object"builtins.objectB
+	typing._T"
+builtins.object"builtins.object"builtins.object"typing.AbstractSet*}
+ typing.AbstractSet[typing._T_co]E
+typing._T_co"
+builtins.object"builtins.object"builtins.object"typing.AbstractSet*yw
+typing.AbstractSet[typing._T]B
+	typing._T"
+builtins.object"builtins.object"builtins.object"typing.AbstractSet*í
+
+isdisjointtyping.AbstractSet.isdisjoint"
+builtins.bool"builtins.bool*á
+self}
+ typing.AbstractSet[typing._T_co]E
+typing._T_co"
+builtins.object"builtins.object"builtins.object"typing.AbstractSet*;
+other0
+typing.Iterable[Any]
+Any"typing.IterableP∏
+
+MutableSettyping.MutableSet"typing.AbstractSet*ä
+addtyping.MutableSet.add"
+None*
+selfu
+typing.MutableSet[typing._T]B
+	typing._T"
+builtins.object"builtins.object"builtins.object"typing.MutableSet*M
+valueB
+	typing._T"
+builtins.object"builtins.object"builtins.object0:abstractmethod@*í
+discardtyping.MutableSet.discard"
+None*
+selfu
+typing.MutableSet[typing._T]B
+	typing._T"
+builtins.object"builtins.object"builtins.object"typing.MutableSet*M
+valueB
+	typing._T"
+builtins.object"builtins.object"builtins.object0:abstractmethod@*´
+cleartyping.MutableSet.clear"
+None*
+selfu
+typing.MutableSet[typing._T]B
+	typing._T"
+builtins.object"builtins.object"builtins.object"typing.MutableSet*·
+poptyping.MutableSet.pop"B
+	typing._T"
+builtins.object"builtins.object"builtins.object*
+selfu
+typing.MutableSet[typing._T]B
+	typing._T"
+builtins.object"builtins.object"builtins.object"typing.MutableSet*¸
+removetyping.MutableSet.remove"
+None*
+selfu
+typing.MutableSet[typing._T]B
+	typing._T"
+builtins.object"builtins.object"builtins.object"typing.MutableSet*M
+valueB
+	typing._T"
+builtins.object"builtins.object"builtins.object*
+__ior__typing.MutableSet.__ior__"§
+typing.MutableSet.Selfu
+typing.MutableSet[typing._T]B
+	typing._T"
+builtins.object"builtins.object"builtins.object"typing.MutableSet"typing.MutableSet*ß§
+typing.MutableSet.Selfu
+typing.MutableSet[typing._T]B
+	typing._T"
+builtins.object"builtins.object"builtins.object"typing.MutableSet"typing.MutableSet*yw
+typing.AbstractSet[typing._T]B
+	typing._T"
+builtins.object"builtins.object"builtins.object"typing.AbstractSet*±
+__iand__typing.MutableSet.__iand__"§
+typing.MutableSet.Selfu
+typing.MutableSet[typing._T]B
+	typing._T"
+builtins.object"builtins.object"builtins.object"typing.MutableSet"typing.MutableSet*ß§
+typing.MutableSet.Selfu
+typing.MutableSet[typing._T]B
+	typing._T"
+builtins.object"builtins.object"builtins.object"typing.MutableSet"typing.MutableSet*86
+typing.AbstractSet[Any]
+Any"typing.AbstractSet*Ú
+__ixor__typing.MutableSet.__ixor__"§
+typing.MutableSet.Selfu
+typing.MutableSet[typing._T]B
+	typing._T"
+builtins.object"builtins.object"builtins.object"typing.MutableSet"typing.MutableSet*ß§
+typing.MutableSet.Selfu
+typing.MutableSet[typing._T]B
+	typing._T"
+builtins.object"builtins.object"builtins.object"typing.MutableSet"typing.MutableSet*yw
+typing.AbstractSet[typing._T]B
+	typing._T"
+builtins.object"builtins.object"builtins.object"typing.AbstractSet*±
+__isub__typing.MutableSet.__isub__"§
+typing.MutableSet.Selfu
+typing.MutableSet[typing._T]B
+	typing._T"
+builtins.object"builtins.object"builtins.object"typing.MutableSet"typing.MutableSet*ß§
+typing.MutableSet.Selfu
+typing.MutableSet[typing._T]B
+	typing._T"
+builtins.object"builtins.object"builtins.object"typing.MutableSet"typing.MutableSet*86
+typing.AbstractSet[Any]
+Any"typing.AbstractSetP“
+MappingViewtyping.MappingView"typing.Sized*Ø
+__init__typing.MappingView.__init__"
+None*2
+self(
+typing.MappingView"typing.MappingView*H
+mapping;
+typing.Mapping[Any,Any]
+Any
+Any"typing.Mapping*o
+__len__typing.MappingView.__len__"
+builtins.int"builtins.int**(
+typing.MappingView"typing.MappingViewù7
+	ItemsViewtyping.ItemsView"typing.MappingView"typing.AbstractSet*Ï
+__init__typing.ItemsView.__init__"
+None*‹
+self—
+-typing.ItemsView[typing._KT_co,typing._VT_co]F
+typing._KT_co"
+builtins.object"builtins.object"builtins.objectF
+typing._VT_co"
+builtins.object"builtins.object"builtins.object"typing.ItemsView*€
+mappingÕ
++typing.Mapping[typing._KT_co,typing._VT_co]F
+typing._KT_co"
+builtins.object"builtins.object"builtins.objectF
+typing._VT_co"
+builtins.object"builtins.object"builtins.object"typing.Mapping*™
+__and__typing.ItemsView.__and__"˘
+0builtins.set[Tuple[typing._KT_co,typing._VT_co]]∂
+"Tuple[typing._KT_co,typing._VT_co]F
+typing._KT_co"
+builtins.object"builtins.object"builtins.objectF
+typing._VT_co"
+builtins.object"builtins.object"builtins.object"builtins.set*‘—
+-typing.ItemsView[typing._KT_co,typing._VT_co]F
+typing._KT_co"
+builtins.object"builtins.object"builtins.objectF
+typing._VT_co"
+builtins.object"builtins.object"builtins.object"typing.ItemsView*20
+typing.Iterable[Any]
+Any"typing.Iterable*ﬁ
+__rand__typing.ItemsView.__rand__"k
+builtins.set[typing._T]B
+	typing._T"
+builtins.object"builtins.object"builtins.object"builtins.set*‘—
+-typing.ItemsView[typing._KT_co,typing._VT_co]F
+typing._KT_co"
+builtins.object"builtins.object"builtins.objectF
+typing._VT_co"
+builtins.object"builtins.object"builtins.object"typing.ItemsView*sq
+typing.Iterable[typing._T]B
+	typing._T"
+builtins.object"builtins.object"builtins.object"typing.Iterable* 
+__contains__typing.ItemsView.__contains__"
+builtins.bool"builtins.bool*‘—
+-typing.ItemsView[typing._KT_co,typing._VT_co]F
+typing._KT_co"
+builtins.object"builtins.object"builtins.objectF
+typing._VT_co"
+builtins.object"builtins.object"builtins.object"typing.ItemsView*$"
+builtins.object"builtins.object*˛
+__iter__typing.ItemsView.__iter__"ˇ
+3typing.Iterator[Tuple[typing._KT_co,typing._VT_co]]∂
+"Tuple[typing._KT_co,typing._VT_co]F
+typing._KT_co"
+builtins.object"builtins.object"builtins.objectF
+typing._VT_co"
+builtins.object"builtins.object"builtins.object"typing.Iterator*‘—
+-typing.ItemsView[typing._KT_co,typing._VT_co]F
+typing._KT_co"
+builtins.object"builtins.object"builtins.objectF
+typing._VT_co"
+builtins.object"builtins.object"builtins.object"typing.ItemsView*Ü
+__reversed__typing.ItemsView.__reversed__"ˇ
+3typing.Iterator[Tuple[typing._KT_co,typing._VT_co]]∂
+"Tuple[typing._KT_co,typing._VT_co]F
+typing._KT_co"
+builtins.object"builtins.object"builtins.objectF
+typing._VT_co"
+builtins.object"builtins.object"builtins.object"typing.Iterator*‘—
+-typing.ItemsView[typing._KT_co,typing._VT_co]F
+typing._KT_co"
+builtins.object"builtins.object"builtins.objectF
+typing._VT_co"
+builtins.object"builtins.object"builtins.object"typing.ItemsView*¯
+__or__typing.ItemsView.__or__"à
+Abuiltins.set[Union[Tuple[typing._KT_co,typing._VT_co],typing._T]]¥
+3Union[Tuple[typing._KT_co,typing._VT_co],typing._T]∂
+"Tuple[typing._KT_co,typing._VT_co]F
+typing._KT_co"
+builtins.object"builtins.object"builtins.objectF
+typing._VT_co"
+builtins.object"builtins.object"builtins.objectB
+	typing._T"
+builtins.object"builtins.object"builtins.object"builtins.set*‘—
+-typing.ItemsView[typing._KT_co,typing._VT_co]F
+typing._KT_co"
+builtins.object"builtins.object"builtins.objectF
+typing._VT_co"
+builtins.object"builtins.object"builtins.object"typing.ItemsView*sq
+typing.Iterable[typing._T]B
+	typing._T"
+builtins.object"builtins.object"builtins.object"typing.Iterable*˙
+__ror__typing.ItemsView.__ror__"à
+Abuiltins.set[Union[Tuple[typing._KT_co,typing._VT_co],typing._T]]¥
+3Union[Tuple[typing._KT_co,typing._VT_co],typing._T]∂
+"Tuple[typing._KT_co,typing._VT_co]F
+typing._KT_co"
+builtins.object"builtins.object"builtins.objectF
+typing._VT_co"
+builtins.object"builtins.object"builtins.objectB
+	typing._T"
+builtins.object"builtins.object"builtins.object"builtins.set*‘—
+-typing.ItemsView[typing._KT_co,typing._VT_co]F
+typing._KT_co"
+builtins.object"builtins.object"builtins.objectF
+typing._VT_co"
+builtins.object"builtins.object"builtins.object"typing.ItemsView*sq
+typing.Iterable[typing._T]B
+	typing._T"
+builtins.object"builtins.object"builtins.object"typing.Iterable*™
+__sub__typing.ItemsView.__sub__"˘
+0builtins.set[Tuple[typing._KT_co,typing._VT_co]]∂
+"Tuple[typing._KT_co,typing._VT_co]F
+typing._KT_co"
+builtins.object"builtins.object"builtins.objectF
+typing._VT_co"
+builtins.object"builtins.object"builtins.object"builtins.set*‘—
+-typing.ItemsView[typing._KT_co,typing._VT_co]F
+typing._KT_co"
+builtins.object"builtins.object"builtins.objectF
+typing._VT_co"
+builtins.object"builtins.object"builtins.object"typing.ItemsView*20
+typing.Iterable[Any]
+Any"typing.Iterable*ﬁ
+__rsub__typing.ItemsView.__rsub__"k
+builtins.set[typing._T]B
+	typing._T"
+builtins.object"builtins.object"builtins.object"builtins.set*‘—
+-typing.ItemsView[typing._KT_co,typing._VT_co]F
+typing._KT_co"
+builtins.object"builtins.object"builtins.objectF
+typing._VT_co"
+builtins.object"builtins.object"builtins.object"typing.ItemsView*sq
+typing.Iterable[typing._T]B
+	typing._T"
+builtins.object"builtins.object"builtins.object"typing.Iterable*˙
+__xor__typing.ItemsView.__xor__"à
+Abuiltins.set[Union[Tuple[typing._KT_co,typing._VT_co],typing._T]]¥
+3Union[Tuple[typing._KT_co,typing._VT_co],typing._T]∂
+"Tuple[typing._KT_co,typing._VT_co]F
+typing._KT_co"
+builtins.object"builtins.object"builtins.objectF
+typing._VT_co"
+builtins.object"builtins.object"builtins.objectB
+	typing._T"
+builtins.object"builtins.object"builtins.object"builtins.set*‘—
+-typing.ItemsView[typing._KT_co,typing._VT_co]F
+typing._KT_co"
+builtins.object"builtins.object"builtins.objectF
+typing._VT_co"
+builtins.object"builtins.object"builtins.object"typing.ItemsView*sq
+typing.Iterable[typing._T]B
+	typing._T"
+builtins.object"builtins.object"builtins.object"typing.Iterable*¸
+__rxor__typing.ItemsView.__rxor__"à
+Abuiltins.set[Union[Tuple[typing._KT_co,typing._VT_co],typing._T]]¥
+3Union[Tuple[typing._KT_co,typing._VT_co],typing._T]∂
+"Tuple[typing._KT_co,typing._VT_co]F
+typing._KT_co"
+builtins.object"builtins.object"builtins.objectF
+typing._VT_co"
+builtins.object"builtins.object"builtins.objectB
+	typing._T"
+builtins.object"builtins.object"builtins.object"builtins.set*‘—
+-typing.ItemsView[typing._KT_co,typing._VT_co]F
+typing._KT_co"
+builtins.object"builtins.object"builtins.objectF
+typing._VT_co"
+builtins.object"builtins.object"builtins.object"typing.ItemsView*sq
+typing.Iterable[typing._T]B
+	typing._T"
+builtins.object"builtins.object"builtins.object"typing.IterablePá%
+KeysViewtyping.KeysView"typing.MappingView"typing.AbstractSet*…
+__init__typing.KeysView.__init__"
+None*É
+selfy
+typing.KeysView[typing._KT_co]F
+typing._KT_co"
+builtins.object"builtins.object"builtins.object"typing.KeysView*í
+mappingÑ
+!typing.Mapping[typing._KT_co,Any]F
+typing._KT_co"
+builtins.object"builtins.object"builtins.object
+Any"typing.Mapping*»
+__and__typing.KeysView.__and__"s
+builtins.set[typing._KT_co]F
+typing._KT_co"
+builtins.object"builtins.object"builtins.object"builtins.set*{y
+typing.KeysView[typing._KT_co]F
+typing._KT_co"
+builtins.object"builtins.object"builtins.object"typing.KeysView*20
+typing.Iterable[Any]
+Any"typing.Iterable*É
+__rand__typing.KeysView.__rand__"k
+builtins.set[typing._T]B
+	typing._T"
+builtins.object"builtins.object"builtins.object"builtins.set*{y
+typing.KeysView[typing._KT_co]F
+typing._KT_co"
+builtins.object"builtins.object"builtins.object"typing.KeysView*sq
+typing.Iterable[typing._T]B
+	typing._T"
+builtins.object"builtins.object"builtins.object"typing.Iterable*Ô
+__contains__typing.KeysView.__contains__"
+builtins.bool"builtins.bool*{y
+typing.KeysView[typing._KT_co]F
+typing._KT_co"
+builtins.object"builtins.object"builtins.object"typing.KeysView*$"
+builtins.object"builtins.object*ú
+__iter__typing.KeysView.__iter__"y
+typing.Iterator[typing._KT_co]F
+typing._KT_co"
+builtins.object"builtins.object"builtins.object"typing.Iterator*{y
+typing.KeysView[typing._KT_co]F
+typing._KT_co"
+builtins.object"builtins.object"builtins.object"typing.KeysView*§
+__reversed__typing.KeysView.__reversed__"y
+typing.Iterator[typing._KT_co]F
+typing._KT_co"
+builtins.object"builtins.object"builtins.object"typing.Iterator*{y
+typing.KeysView[typing._KT_co]F
+typing._KT_co"
+builtins.object"builtins.object"builtins.object"typing.KeysView*Ç
+__or__typing.KeysView.__or__"Ì
+,builtins.set[Union[typing._KT_co,typing._T]]Æ
+Union[typing._KT_co,typing._T]F
+typing._KT_co"
+builtins.object"builtins.object"builtins.objectB
+	typing._T"
+builtins.object"builtins.object"builtins.object"builtins.set*{y
+typing.KeysView[typing._KT_co]F
+typing._KT_co"
+builtins.object"builtins.object"builtins.object"typing.KeysView*sq
+typing.Iterable[typing._T]B
+	typing._T"
+builtins.object"builtins.object"builtins.object"typing.Iterable*Ñ
+__ror__typing.KeysView.__ror__"Ì
+,builtins.set[Union[typing._KT_co,typing._T]]Æ
+Union[typing._KT_co,typing._T]F
+typing._KT_co"
+builtins.object"builtins.object"builtins.objectB
+	typing._T"
+builtins.object"builtins.object"builtins.object"builtins.set*{y
+typing.KeysView[typing._KT_co]F
+typing._KT_co"
+builtins.object"builtins.object"builtins.object"typing.KeysView*sq
+typing.Iterable[typing._T]B
+	typing._T"
+builtins.object"builtins.object"builtins.object"typing.Iterable*»
+__sub__typing.KeysView.__sub__"s
+builtins.set[typing._KT_co]F
+typing._KT_co"
+builtins.object"builtins.object"builtins.object"builtins.set*{y
+typing.KeysView[typing._KT_co]F
+typing._KT_co"
+builtins.object"builtins.object"builtins.object"typing.KeysView*20
+typing.Iterable[Any]
+Any"typing.Iterable*É
+__rsub__typing.KeysView.__rsub__"k
+builtins.set[typing._T]B
+	typing._T"
+builtins.object"builtins.object"builtins.object"builtins.set*{y
+typing.KeysView[typing._KT_co]F
+typing._KT_co"
+builtins.object"builtins.object"builtins.object"typing.KeysView*sq
+typing.Iterable[typing._T]B
+	typing._T"
+builtins.object"builtins.object"builtins.object"typing.Iterable*Ñ
+__xor__typing.KeysView.__xor__"Ì
+,builtins.set[Union[typing._KT_co,typing._T]]Æ
+Union[typing._KT_co,typing._T]F
+typing._KT_co"
+builtins.object"builtins.object"builtins.objectB
+	typing._T"
+builtins.object"builtins.object"builtins.object"builtins.set*{y
+typing.KeysView[typing._KT_co]F
+typing._KT_co"
+builtins.object"builtins.object"builtins.object"typing.KeysView*sq
+typing.Iterable[typing._T]B
+	typing._T"
+builtins.object"builtins.object"builtins.object"typing.Iterable*Ü
+__rxor__typing.KeysView.__rxor__"Ì
+,builtins.set[Union[typing._KT_co,typing._T]]Æ
+Union[typing._KT_co,typing._T]F
+typing._KT_co"
+builtins.object"builtins.object"builtins.objectB
+	typing._T"
+builtins.object"builtins.object"builtins.object"builtins.set*{y
+typing.KeysView[typing._KT_co]F
+typing._KT_co"
+builtins.object"builtins.object"builtins.object"typing.KeysView*sq
+typing.Iterable[typing._T]B
+	typing._T"
+builtins.object"builtins.object"builtins.object"typing.IterableP‰	
+
+ValuesViewtyping.ValuesView"typing.MappingView"typing.Collection*œ
+__init__typing.ValuesView.__init__"
+None*á
+self}
+ typing.ValuesView[typing._VT_co]F
+typing._VT_co"
+builtins.object"builtins.object"builtins.object"typing.ValuesView*í
+mappingÑ
+!typing.Mapping[Any,typing._VT_co]
+AnyF
+typing._VT_co"
+builtins.object"builtins.object"builtins.object"typing.Mapping*ı
+__contains__typing.ValuesView.__contains__"
+builtins.bool"builtins.bool*}
+ typing.ValuesView[typing._VT_co]F
+typing._VT_co"
+builtins.object"builtins.object"builtins.object"typing.ValuesView*$"
+builtins.object"builtins.object*¢
+__iter__typing.ValuesView.__iter__"y
+typing.Iterator[typing._VT_co]F
+typing._VT_co"
+builtins.object"builtins.object"builtins.object"typing.Iterator*}
+ typing.ValuesView[typing._VT_co]F
+typing._VT_co"
+builtins.object"builtins.object"builtins.object"typing.ValuesView*™
+__reversed__typing.ValuesView.__reversed__"y
+typing.Iterator[typing._VT_co]F
+typing._VT_co"
+builtins.object"builtins.object"builtins.object"typing.Iterator*}
+ typing.ValuesView[typing._VT_co]F
+typing._VT_co"
+builtins.object"builtins.object"builtins.object"typing.ValuesViewPµ
+Mappingtyping.Mapping"typing.Collection*ô
+__getitem__typing.Mapping.__getitem__"F
+typing._VT_co"
+builtins.object"builtins.object"builtins.object* «
+(typing.Mapping[typing._KT,typing._VT_co]C
+
+typing._KT"
+builtins.object"builtins.object"builtins.objectF
+typing._VT_co"
+builtins.object"builtins.object"builtins.object"typing.Mapping*EC
+
+typing._KT"
+builtins.object"builtins.object"builtins.object0:abstractmethod@*¿
+itemstyping.Mapping.items"À
+*typing.ItemsView[typing._KT,typing._VT_co]C
+
+typing._KT"
+builtins.object"builtins.object"builtins.objectF
+typing._VT_co"
+builtins.object"builtins.object"builtins.object"typing.ItemsView*“
+self«
+(typing.Mapping[typing._KT,typing._VT_co]C
+
+typing._KT"
+builtins.object"builtins.object"builtins.objectF
+typing._VT_co"
+builtins.object"builtins.object"builtins.object"typing.Mapping*Â
+keystyping.Mapping.keys"s
+typing.KeysView[typing._KT]C
+
+typing._KT"
+builtins.object"builtins.object"builtins.object"typing.KeysView*“
+self«
+(typing.Mapping[typing._KT,typing._VT_co]C
+
+typing._KT"
+builtins.object"builtins.object"builtins.objectF
+typing._VT_co"
+builtins.object"builtins.object"builtins.object"typing.Mapping*Û
+valuestyping.Mapping.values"}
+ typing.ValuesView[typing._VT_co]F
+typing._VT_co"
+builtins.object"builtins.object"builtins.object"typing.ValuesView*“
+self«
+(typing.Mapping[typing._KT,typing._VT_co]C
+
+typing._KT"
+builtins.object"builtins.object"builtins.objectF
+typing._VT_co"
+builtins.object"builtins.object"builtins.object"typing.Mapping*æ
+__contains__typing.Mapping.__contains__"
+builtins.bool"builtins.bool* «
+(typing.Mapping[typing._KT,typing._VT_co]C
+
+typing._KT"
+builtins.object"builtins.object"builtins.objectF
+typing._VT_co"
+builtins.object"builtins.object"builtins.object"typing.Mapping*$"
+builtins.object"builtins.object2Ü	
+gettyping.Mapping.get¥
+gettyping.Mapping.get"o
+Union[typing._VT_co,None]F
+typing._VT_co"
+builtins.object"builtins.object"builtins.object
+None*“
+self«
+(typing.Mapping[typing._KT,typing._VT_co]C
+
+typing._KT"
+builtins.object"builtins.object"builtins.objectF
+typing._VT_co"
+builtins.object"builtins.object"builtins.object"typing.Mapping*EC
+
+typing._KT"
+builtins.object"builtins.object"builtins.object0:overloadX≥
+gettyping.Mapping.get"Æ
+Union[typing._VT_co,typing._T]F
+typing._VT_co"
+builtins.object"builtins.object"builtins.objectB
+	typing._T"
+builtins.object"builtins.object"builtins.object*“
+self«
+(typing.Mapping[typing._KT,typing._VT_co]C
+
+typing._KT"
+builtins.object"builtins.object"builtins.objectF
+typing._VT_co"
+builtins.object"builtins.object"builtins.object"typing.Mapping*EC
+
+typing._KT"
+builtins.object"builtins.object"builtins.object*º
+defaultÆ
+Union[typing._VT_co,typing._T]F
+typing._VT_co"
+builtins.object"builtins.object"builtins.objectB
+	typing._T"
+builtins.object"builtins.object"builtins.object0:overloadXPê*
+MutableMappingtyping.MutableMapping"typing.Mapping*±
+__setitem__!typing.MutableMapping.__setitem__"
+None*“œ
+,typing.MutableMapping[typing._KT,typing._VT]C
+
+typing._KT"
+builtins.object"builtins.object"builtins.objectC
+
+typing._VT"
+builtins.object"builtins.object"builtins.object"typing.MutableMapping*EC
+
+typing._KT"
+builtins.object"builtins.object"builtins.object*EC
+
+typing._VT"
+builtins.object"builtins.object"builtins.object0:abstractmethod@*Í
+__delitem__!typing.MutableMapping.__delitem__"
+None*“œ
+,typing.MutableMapping[typing._KT,typing._VT]C
+
+typing._KT"
+builtins.object"builtins.object"builtins.objectC
+
+typing._VT"
+builtins.object"builtins.object"builtins.object"typing.MutableMapping*EC
+
+typing._KT"
+builtins.object"builtins.object"builtins.object0:abstractmethod@*ã
+cleartyping.MutableMapping.clear"
+None*⁄
+selfœ
+,typing.MutableMapping[typing._KT,typing._VT]C
+
+typing._KT"
+builtins.object"builtins.object"builtins.objectC
+
+typing._VT"
+builtins.object"builtins.object"builtins.object"typing.MutableMapping*≤
+popitemtyping.MutableMapping.popitem"™
+Tuple[typing._KT,typing._VT]C
+
+typing._KT"
+builtins.object"builtins.object"builtins.objectC
+
+typing._VT"
+builtins.object"builtins.object"builtins.object*⁄
+selfœ
+,typing.MutableMapping[typing._KT,typing._VT]C
+
+typing._KT"
+builtins.object"builtins.object"builtins.objectC
+
+typing._VT"
+builtins.object"builtins.object"builtins.object"typing.MutableMapping2Û
+poptyping.MutableMapping.popó
+poptyping.MutableMapping.pop"C
+
+typing._VT"
+builtins.object"builtins.object"builtins.object*⁄
+selfœ
+,typing.MutableMapping[typing._KT,typing._VT]C
+
+typing._KT"
+builtins.object"builtins.object"builtins.objectC
+
+typing._VT"
+builtins.object"builtins.object"builtins.object"typing.MutableMapping*EC
+
+typing._KT"
+builtins.object"builtins.object"builtins.object0:overloadX∂
+poptyping.MutableMapping.pop"®
+Union[typing._VT,typing._T]C
+
+typing._VT"
+builtins.object"builtins.object"builtins.objectB
+	typing._T"
+builtins.object"builtins.object"builtins.object*⁄
+selfœ
+,typing.MutableMapping[typing._KT,typing._VT]C
+
+typing._KT"
+builtins.object"builtins.object"builtins.objectC
+
+typing._VT"
+builtins.object"builtins.object"builtins.object"typing.MutableMapping*EC
+
+typing._KT"
+builtins.object"builtins.object"builtins.object*∂
+default®
+Union[typing._VT,typing._T]C
+
+typing._VT"
+builtins.object"builtins.object"builtins.objectB
+	typing._T"
+builtins.object"builtins.object"builtins.object0:overloadX2¶
+
+setdefault typing.MutableMapping.setdefaultÜ
+
+setdefault typing.MutableMapping.setdefault"g
+Union[typing._T,None]B
+	typing._T"
+builtins.object"builtins.object"builtins.object
+None*â
+self˛
+7typing.MutableMapping[typing._KT,Union[typing._T,None]]C
+
+typing._KT"
+builtins.object"builtins.object"builtins.objectg
+Union[typing._T,None]B
+	typing._T"
+builtins.object"builtins.object"builtins.object
+None"typing.MutableMapping*EC
+
+typing._KT"
+builtins.object"builtins.object"builtins.object*
+None 0:overloadXÏ
+
+setdefault typing.MutableMapping.setdefault"C
+
+typing._VT"
+builtins.object"builtins.object"builtins.object*⁄
+selfœ
+,typing.MutableMapping[typing._KT,typing._VT]C
+
+typing._KT"
+builtins.object"builtins.object"builtins.objectC
+
+typing._VT"
+builtins.object"builtins.object"builtins.object"typing.MutableMapping*EC
+
+typing._KT"
+builtins.object"builtins.object"builtins.object*EC
+
+typing._VT"
+builtins.object"builtins.object"builtins.object0:overloadX2—
+updatetyping.MutableMapping.update◊
+updatetyping.MutableMapping.update"
+None*⁄
+selfœ
+,typing.MutableMapping[typing._KT,typing._VT]C
+
+typing._KT"
+builtins.object"builtins.object"builtins.objectC
+
+typing._VT"
+builtins.object"builtins.object"builtins.object"typing.MutableMapping*ËÂ
+7_typeshed.SupportsKeysAndGetItem[typing._KT,typing._VT]C
+
+typing._KT"
+builtins.object"builtins.object"builtins.objectC
+
+typing._VT"
+builtins.object"builtins.object"builtins.object" _typeshed.SupportsKeysAndGetItem*O
+kwargsC
+
+typing._VT"
+builtins.object"builtins.object"builtins.object0:overloadXﬂ
+updatetyping.MutableMapping.update"
+None*⁄
+selfœ
+,typing.MutableMapping[typing._KT,typing._VT]C
+
+typing._KT"
+builtins.object"builtins.object"builtins.objectC
+
+typing._VT"
+builtins.object"builtins.object"builtins.object"typing.MutableMapping*Ì
+-typing.Iterable[Tuple[typing._KT,typing._VT]]™
+Tuple[typing._KT,typing._VT]C
+
+typing._KT"
+builtins.object"builtins.object"builtins.objectC
+
+typing._VT"
+builtins.object"builtins.object"builtins.object"typing.Iterable*O
+kwargsC
+
+typing._VT"
+builtins.object"builtins.object"builtins.object0:overloadXÏ
+updatetyping.MutableMapping.update"
+None*⁄
+selfœ
+,typing.MutableMapping[typing._KT,typing._VT]C
+
+typing._KT"
+builtins.object"builtins.object"builtins.objectC
+
+typing._VT"
+builtins.object"builtins.object"builtins.object"typing.MutableMapping*O
+kwargsC
+
+typing._VT"
+builtins.object"builtins.object"builtins.object0:overloadXP?
+
+ByteStringtyping.ByteString"typing.Sequence@babc.ABCMetaé
+
+NamedTupletyping.NamedTuple"builtins.tuple*ù
+_maketyping.NamedTuple._make"B
+	typing._T"
+builtins.object"builtins.object"builtins.object*f
+cls]
+Type[typing._T]B
+	typing._T"
+builtins.object"builtins.object"builtins.object"type*>
+iterable0
+typing.Iterable[Any]
+Any"typing.Iterable0:classmethodp*Ø
+_asdicttyping.NamedTuple._asdict"W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*0
+self&
+typing.NamedTuple"typing.NamedTuple*Û
+_replacetyping.NamedTuple._replace"U
+typing.NamedTuple.Self&
+typing.NamedTuple"typing.NamedTuple"typing.NamedTuple*_
+selfU
+typing.NamedTuple.Self&
+typing.NamedTuple"typing.NamedTuple"typing.NamedTuple*
+kwargs
+Any2°
+__init__typing.NamedTuple.__init__¨
+__init__typing.NamedTuple.__init__"
+None*0
+self&
+typing.NamedTuple"typing.NamedTuple**
+typename
+builtins.str"builtins.str*ç
+fields
+(typing.Iterable[Tuple[builtins.str,Any]]B
+Tuple[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Iterable 0:overloadX…
+__init__typing.NamedTuple.__init__"
+None*0
+self&
+typing.NamedTuple"typing.NamedTuple**
+typename
+builtins.str"builtins.str*
+fields
+None *
+kwargs
+Any0:overloadXr®
+_field_typestyping.NamedTuple._field_typesx
+)builtins.dict[builtins.str,builtins.type]
+builtins.str"builtins.str
+builtins.type"builtins.type"builtins.dictrç
+_field_defaults!typing.NamedTuple._field_defaultsW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dictrr
+_fieldstyping.NamedTuple._fieldsL
+builtins.tuple[builtins.str]
+builtins.str"builtins.str"builtins.tuplerB
+_sourcetyping.NamedTuple._source
+builtins.str"builtins.strÓ
+
+ForwardReftyping.ForwardRef"builtins.object*º
+__init__typing.ForwardRef.__init__"
+None*0
+self&
+typing.ForwardRef"typing.ForwardRef*%
+arg
+builtins.str"builtins.str*1
+is_argument
+builtins.bool"builtins.bool *…
+	_evaluatetyping.ForwardRef._evaluate"&
+Union[Any,None]
+Any
+None*0
+self&
+typing.ForwardRef"typing.ForwardRef*°
+globalnsí
++Union[builtins.dict[builtins.str,Any],None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None*†
+localnsí
++Union[builtins.dict[builtins.str,Any],None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None*í
+__eq__typing.ForwardRef.__eq__"
+builtins.bool"builtins.bool*(&
+typing.ForwardRef"typing.ForwardRef*$"
+builtins.object"builtins.object8rR
+__forward_arg__!typing.ForwardRef.__forward_arg__
+builtins.str"builtins.strrX
+__forward_code__"typing.ForwardRef.__forward_code__ 
+types.CodeType"types.CodeTyper`
+__forward_evaluated__'typing.ForwardRef.__forward_evaluated__
+builtins.bool"builtins.boolr`
+__forward_value__#typing.ForwardRef.__forward_value__&
+Union[Any,None]
+Any
+Nonerd
+__forward_is_argument__)typing.ForwardRef.__forward_is_argument__
+builtins.bool"builtins.boolr^
+__forward_is_class__&typing.ForwardRef.__forward_is_class__
+builtins.bool"builtins.boolrb
+__forward_module__$typing.ForwardRef.__forward_module__&
+Union[Any,None]
+Any
+None›
+overloadtyping.overload"Z
+	typing._FK
+CallableType[builtins.function]&
+builtins.function"builtins.function*d
+funcZ
+	typing._FK
+CallableType[builtins.function]&
+builtins.function"builtins.function§
+finaltyping.final"B
+	typing._T"
+builtins.object"builtins.object"builtins.object*I
+fB
+	typing._T"
+builtins.object"builtins.object"builtins.object[
+NewTypetyping.NewType"
+Any*&
+name
+builtins.str"builtins.str*
+tp
+AnyÊ
+no_type_checktyping.no_type_check"Z
+	typing._FK
+CallableType[builtins.function]&
+builtins.function"builtins.function*c
+argZ
+	typing._FK
+CallableType[builtins.function]&
+builtins.function"builtins.function‚
+no_type_check_decoratortyping.no_type_check_decorator"K
+CallableType[builtins.function]&
+builtins.function"builtins.function*Z
+	decoratorK
+CallableType[builtins.function]&
+builtins.function"builtins.functionÏ
+runtime_checkabletyping.runtime_checkable"Y
+
+typing._TCC
+Type[builtins.object]"
+builtins.object"builtins.object"type"type*b
+clsY
+
+typing._TCC
+Type[builtins.object]"
+builtins.object"builtins.object"type"typeã
+get_type_hintstyping.get_type_hints"W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*Ω
+obj≥
+ﬂTypeAlias[Union[builtins.object,CallableType[builtins.function],types.FunctionType,types.BuiltinFunctionType,types.MethodType,types.ModuleType,types.WrapperDescriptorType,types.MethodWrapperType,types.MethodDescriptorType]]¢
+‘Union[builtins.object,CallableType[builtins.function],types.FunctionType,types.BuiltinFunctionType,types.MethodType,types.ModuleType,types.WrapperDescriptorType,types.MethodWrapperType,types.MethodDescriptorType]"
+builtins.object"builtins.objectK
+CallableType[builtins.function]&
+builtins.function"builtins.function(
+types.FunctionType"types.FunctionType6
+types.BuiltinFunctionType"types.BuiltinFunctionType$
+types.MethodType"types.MethodType$
+types.ModuleType"types.ModuleType:
+types.WrapperDescriptorType"types.WrapperDescriptorType2
+types.MethodWrapperType"types.MethodWrapperType8
+types.MethodDescriptorType"types.MethodDescriptorType"(typing._get_type_hints_obj_allowed_types*£
+globalnsí
++Union[builtins.dict[builtins.str,Any],None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None *¢
+localnsí
++Union[builtins.dict[builtins.str,Any],None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None \
+get_argstyping.get_args".
+builtins.tuple[Any]
+Any"builtins.tuple*
+tp
+AnyX
+
+get_origintyping.get_origin"&
+Union[Any,None]
+Any
+None*
+tp
+AnyX
+_outer_to_inner_dim.torch.nested._internal.ops._outer_to_inner_dim*
+ndim*
+dimí
+_wrap_jagged_dim+torch.nested._internal.ops._wrap_jagged_dim*
+ndim*
+dim*
+op_name*
+convert_to_inner_dim *
+allow_batch_dim b
+_wrap_jagged_dims,torch.nested._internal.ops._wrap_jagged_dims*
+ndim*
+dims*
+op_name™
+check_schema'torch.nested._internal.ops.check_schema"
+None*,
+
+schema_str
+builtins.str"builtins.str*
+func
+Any*
+args
+Any*
+kwargs
+Anyò
+check_ragged_dim_same0torch.nested._internal.ops.check_ragged_dim_same"
+None*
+func
+Any*m
+af
+1torch.nested._internal.nested_tensor.NestedTensor"1torch.nested._internal.nested_tensor.NestedTensor*(
+a_name
+builtins.str"builtins.str*m
+bf
+1torch.nested._internal.nested_tensor.NestedTensor"1torch.nested._internal.nested_tensor.NestedTensor*(
+b_name
+builtins.str"builtins.strU
+raggedness_matches-torch.nested._internal.ops.raggedness_matches*
+nt*
+sizeN
+squeeze_leading_ones/torch.nested._internal.ops.squeeze_leading_ones*
+tc
+register_func(torch.nested._internal.ops.register_func*
+
+tables*
+aten_ops*
+
+schema_str˝
+lookup_jagged(torch.nested._internal.ops.lookup_jagged"Ü
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None*
+func
+Any*
+args
+Any*
+kwargs
+AnyD
+extract_kwargs)torch.nested._internal.ops.extract_kwargs*
+argk
+jagged_unary_pointwise1torch.nested._internal.ops.jagged_unary_pointwise*
+func*
+args*
+
+kwargsm
+jagged_binary_pointwise2torch.nested._internal.ops.jagged_binary_pointwise*
+func*
+args*
+
+kwargsi
+jagged_torch_function0torch.nested._internal.ops.jagged_torch_function*
+func*
+args*
+
+kwargs"≈
+casttyping.castﬂ
+casttyping.cast"B
+	typing._T"
+builtins.object"builtins.object"builtins.object*f
+typ]
+Type[typing._T]B
+	typing._T"
+builtins.object"builtins.object"builtins.object"type*
+val
+Any0:overloadXc
+casttyping.cast"
+Any*%
+typ
+builtins.str"builtins.str*
+val
+Any0:overloadXi
+casttyping.cast"
+Any*+
+typ"
+builtins.object"builtins.object*
+val
+Any0:overloadX*ñ
+__annotations__*torch.nested._internal.ops.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*5
+Any
+typing.Any"
+builtins.object"builtins.object*A
+Uniontyping.Union*
+typing._SpecialForm"typing._SpecialForm*E
+Generictyping.Generic*
+typing._SpecialForm"typing._SpecialForm*G
+Protocoltyping.Protocol*
+typing._SpecialForm"typing._SpecialForm*G
+Callabletyping.Callable*
+typing._SpecialForm"typing._SpecialForm*?
+Typetyping.Type*
+typing._SpecialForm"typing._SpecialForm*G
+NoReturntyping.NoReturn*
+typing._SpecialForm"typing._SpecialForm*G
+ClassVartyping.ClassVar*
+typing._SpecialForm"typing._SpecialForm*G
+Optionaltyping.Optional*
+typing._SpecialForm"typing._SpecialForm*A
+Tupletyping.Tuple*
+typing._SpecialForm"typing._SpecialForm*A
+Finaltyping.Final*
+typing._SpecialForm"typing._SpecialForm*E
+Literaltyping.Literal*
+typing._SpecialForm"typing._SpecialForm*A
+	TypedDicttyping.TypedDict"
+builtins.object"builtins.object*E
+TYPE_CHECKINGtyping.TYPE_CHECKING
+builtins.bool"builtins.bool*
+Ftorch.nn.functional *[
+__all__"torch.nested._internal.ops.__all__,
+builtins.list[Any]
+Any"builtins.list*z
+JAGGED_OPS_TABLE+torch.nested._internal.ops.JAGGED_OPS_TABLE9
+builtins.dict[Any,Any]
+Any
+Any"builtins.dict*}
+register_jagged_func/torch.nested._internal.ops.register_jagged_func4
+functools.partial[Any]
+Any"functools.partial*0
+atentorch.nested._internal.ops.aten
+Any

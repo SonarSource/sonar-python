@@ -1,0 +1,237 @@
+
+torch._inductor.compile_fxu
+time_and_log-redefinition'torch._inductor.compile_fx.time_and_log"
+Any*&
+attr
+builtins.str"builtins.strH
+get_expanded_dims,torch._inductor.compile_fx.get_expanded_dims*
+t‡
+index_expanded_dims.torch._inductor.compile_fx.index_expanded_dims",
+torch._tensor.Tensor"torch._tensor.Tensor*3
+t,
+torch._tensor.Tensor"torch._tensor.Tensor*]
+expanded_dimsJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list 
+complex_memory_overlap1torch._inductor.compile_fx.complex_memory_overlap"
+builtins.bool"builtins.bool*3
+t,
+torch._tensor.Tensor"torch._tensor.TensorX
+get_static_input_idxs0torch._inductor.compile_fx.get_static_input_idxs*
+	num_fixed_
+_unlift_graph(torch._inductor.compile_fx._unlift_graph*
+mod*
+gm*
+graph_signatureM
+_get_subgraph_names.torch._inductor.compile_fx._get_subgraph_names*
+gmo
+_recursive_pre_grad_passes5torch._inductor.compile_fx._recursive_pre_grad_passes*
+gm*
+example_inputsa
+_recursive_joint_graph_passes8torch._inductor.compile_fx._recursive_joint_graph_passes*
+gm£
+_recursive_post_grad_passes6torch._inductor.compile_fx._recursive_post_grad_passes"
+Any*
+gm
+Any*2
+is_inference
+builtins.bool"builtins.bool ¢
+split_const_gm)torch._inductor.compile_fx.split_const_gm"”
+QTuple[torch.fx.graph_module.GraphModule,builtins.dict[builtins.str,builtins.int]]F
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModuleu
+(builtins.dict[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int"builtins.dict*N
+gmF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule¬
+is_tf32_warning_applicable5torch._inductor.compile_fx.is_tf32_warning_applicable"
+Any*N
+gmF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModuleæ
+#maybe_disable_comprehensive_padding>torch._inductor.compile_fx.maybe_disable_comprehensive_padding"
+Any*v
+example_inputsb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.listÓ
+fake_tensor_prop+torch._inductor.compile_fx.fake_tensor_prop"
+Any*N
+gmF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*v
+example_inputsb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*A
+force_allow_non_fake_inputs
+builtins.bool"builtins.bool _
+ should_use_remote_fx_graph_cache;torch._inductor.compile_fx.should_use_remote_fx_graph_cacheÅ
+get_patched_config_dict2torch._inductor.compile_fx.get_patched_config_dict"W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*
+config_patches
+Any ‰
+clone_preserve_strides1torch._inductor.compile_fx.clone_preserve_strides"
+Any*3
+x,
+torch._tensor.Tensor"torch._tensor.Tensor°
+copy_misaligned_inputs1torch._inductor.compile_fx.copy_misaligned_inputs"
+None*r
+
+new_inputsb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*e
+check_inputs_idxsN
+typing.Sequence[builtins.int]
+builtins.int"builtins.int"typing.Sequence”
+get_input_idxs_to_check2torch._inductor.compile_fx.get_input_idxs_to_check"N
+typing.Sequence[builtins.int]
+builtins.int"builtins.int"typing.Sequence*
+inputs€
+HUnion[builtins.list[torch._tensor.Tensor],typing.Sequence[builtins.int]]b
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.listN
+typing.Sequence[builtins.int]
+builtins.int"builtins.int"typing.Sequence*e
+static_input_idxsN
+typing.Sequence[builtins.int]
+builtins.int"builtins.int"typing.Sequence
+align_inputs_from_check_idxs7torch._inductor.compile_fx.align_inputs_from_check_idxs"
+Any*V
+modelK
+CallableType[builtins.function]&
+builtins.function"builtins.function*c
+inputs_to_checkN
+typing.Sequence[builtins.int]
+builtins.int"builtins.int"typing.SequenceÕ
+remove_unaligned_input_idxs6torch._inductor.compile_fx.remove_unaligned_input_idxs"
+Any*
+inputs€
+HUnion[builtins.list[torch._tensor.Tensor],typing.Sequence[builtins.int]]b
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.listN
+typing.Sequence[builtins.int]
+builtins.int"builtins.int"typing.Sequence*e
+static_input_idxsN
+typing.Sequence[builtins.int]
+builtins.int"builtins.int"typing.Sequenceu
+static_input'torch._inductor.compile_fx.static_input"
+Any*3
+x,
+torch._tensor.Tensor"torch._tensor.Tensor¯
+index_expanded_dims_and_copy_8torch._inductor.compile_fx.index_expanded_dims_and_copy_"
+Any*5
+dst,
+torch._tensor.Tensor"torch._tensor.Tensor*5
+src,
+torch._tensor.Tensor"torch._tensor.Tensor*]
+expanded_dimsJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.listö
+cudagraphify_impl,torch._inductor.compile_fx.cudagraphify_impl"
+Any*Q
+modelF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*n
+inputsb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*g
+static_input_idxsN
+typing.Sequence[builtins.int]
+builtins.int"builtins.int"typing.Sequence Ÿ
+compile_fx_aot)torch._inductor.compile_fx.compile_fx_aot"
+Any*R
+model_F
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*w
+example_inputs_b
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*`
+inner_compileK
+CallableType[builtins.function]&
+builtins.function"builtins.function *©
+config_patches’
++Union[builtins.dict[builtins.str,Any],None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None –
+fw_compiler_freezing/torch._inductor.compile_fx.fw_compiler_freezing"
+Any*^
+aot_autograd_modelF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*z
+aot_example_inputsb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*X
+dynamo_modelF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*4
+num_example_inputs
+builtins.int"builtins.int*^
+inner_compileK
+CallableType[builtins.function]&
+builtins.function"builtins.function*R
+
+cudagraphsB
+torch._inductor.utils.BoxedBool"torch._inductor.utils.BoxedBool**
+graph_id
+builtins.int"builtins.int*x
+forward_deviced
+0torch._inductor.cudagraph_utils.BoxedDeviceIndex"0torch._inductor.cudagraph_utils.BoxedDeviceIndexÄ
+_shape_env_from_inputs1torch._inductor.compile_fx._shape_env_from_inputs"
+Any*n
+inputsb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.listž
+graph_returns_tuple.torch._inductor.compile_fx.graph_returns_tuple"
+Any*N
+gmF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModuleó
+make_graph_return_tuple2torch._inductor.compile_fx.make_graph_return_tuple"
+Any*N
+gmF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*n
+inputsb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*[
+
+compile_gmK
+CallableType[builtins.function]&
+builtins.function"builtins.functionù
+handle_dynamo_export_graph5torch._inductor.compile_fx.handle_dynamo_export_graph"
+Any*N
+gmF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*n
+inputsb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*[
+
+compile_gmK
+CallableType[builtins.function]&
+builtins.function"builtins.function´
+_check_triton_bf16_support5torch._inductor.compile_fx._check_triton_bf16_support"
+None*U
+graphJ
+#torch._inductor.graph.GraphLowering"#torch._inductor.graph.GraphLowering*–
+__annotations__*torch._inductor.compile_fx.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*
+torchtorch *
+pytreetorch.utils._pytree *n
+#min_cut_rematerialization_partition>torch._inductor.compile_fx.min_cut_rematerialization_partition
+Any*'
+dynamo_configtorch._dynamo.config *)
+dynamo_loggingtorch._dynamo.logging *%
+dynamo_utilstorch._dynamo.utils *-
+functorch_configtorch._functorch.config *P
+log_optimus_to_scuba/torch._inductor.compile_fx.log_optimus_to_scuba
+Any*@
+time_and_log'torch._inductor.compile_fx.time_and_log
+Any*G
+logtorch._inductor.compile_fx.log 
+logging.Logger"logging.Logger*B
+perf_hint_log(torch._inductor.compile_fx.perf_hint_log
+Any*P
+post_grad_graphs_log/torch._inductor.compile_fx.post_grad_graphs_log
+Any*O
+	ALIGNMENT$torch._inductor.compile_fx.ALIGNMENT
+builtins.int"builtins.int*‹
+_graph_counter)torch._inductor.compile_fx._graph_counterN
+itertools.count[builtins.int]
+builtins.int"builtins.int"itertools.count

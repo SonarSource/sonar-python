@@ -1,0 +1,377 @@
+
+1torch.ao.quantization.fx._lower_to_native_backend£
+_is_node_in_listBtorch.ao.quantization.fx._lower_to_native_backend._is_node_in_list*
+node*
+modules*
+	func_list*
+method_list*
+module_type_listw
+is_fixed_qparams_nodeGtorch.ao.quantization.fx._lower_to_native_backend.is_fixed_qparams_node*
+node*
+modulesk
+is_default_nodeAtorch.ao.quantization.fx._lower_to_native_backend.is_default_node*
+node*
+modulese
+is_copy_node>torch.ao.quantization.fx._lower_to_native_backend.is_copy_node*
+node*
+modulesÖ
+is_general_tensor_shape_nodeNtorch.ao.quantization.fx._lower_to_native_backend.is_general_tensor_shape_node*
+node*
+modulesg
+is_other_node?torch.ao.quantization.fx._lower_to_native_backend.is_other_node*
+node*
+modules{
+is_special_pattern_nodeItorch.ao.quantization.fx._lower_to_native_backend.is_special_pattern_node*
+node*
+modulesd
+is_dequantize_nodeDtorch.ao.quantization.fx._lower_to_native_backend.is_dequantize_node*
+node~
+is_getattr_tensor_metadata_nodeQtorch.ao.quantization.fx._lower_to_native_backend.is_getattr_tensor_metadata_node*
+noden
+is_get_tensor_info_nodeItorch.ao.quantization.fx._lower_to_native_backend.is_get_tensor_info_node*
+node¨
+should_skip_loweringFtorch.ao.quantization.fx._lower_to_native_backend.should_skip_lowering"
+Any*0
+op(
+torch.fx.node.Node"torch.fx.node.Node*ê
+qconfig_map˛
+Lbuiltins.dict[builtins.str,TypeAlias[Union[TypeAlias[Tuple[Any,Any]],None]]]
+builtins.str"builtins.strÄ
+0TypeAlias[Union[TypeAlias[Tuple[Any,Any]],None]]ü
+%Union[TypeAlias[Tuple[Any,Any]],None]j
+TypeAlias[Tuple[Any,Any]]$
+Tuple[Any,Any]
+Any
+Any"%torch.ao.quantization.qconfig.QConfig
+None"(torch.ao.quantization.qconfig.QConfigAny"builtins.dictí
+_save_packed_weightEtorch.ao.quantization.fx._lower_to_native_backend._save_packed_weight*
+self*
+destination*
+
+prefix*
+	keep_varsŸ
+_load_packed_weightEtorch.ao.quantization.fx._lower_to_native_backend._load_packed_weight*
+self*
+
+state_dict*
+
+prefix*
+local_metadata*
+
+strict*
+missing_keys*
+unexpected_keys*
+
+error_msgsﬁ
+fold_weight=torch.ao.quantization.fx._lower_to_native_backend.fold_weight"F
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*[
+quantized_modelF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*Í
+node_name_to_scope—
+=builtins.dict[builtins.str,Tuple[builtins.str,builtins.type]]
+builtins.str"builtins.strc
+!Tuple[builtins.str,builtins.type]
+builtins.str"builtins.str
+builtins.type"builtins.type"builtins.dict∏
+_get_module=torch.ao.quantization.fx._lower_to_native_backend._get_module"z
+*Union[torch.nn.modules.module.Module,None]@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module
+None*2
+node(
+torch.fx.node.Node"torch.fx.node.Node*π
+modules´
+:builtins.dict[builtins.str,torch.nn.modules.module.Module]
+builtins.str"builtins.str@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"builtins.dict›
+
+_match_static_patternGtorch.ao.quantization.fx._lower_to_native_backend._match_static_pattern"›
+\Union[Tuple[torch.fx.node.Node,torch.fx.node.Node,torch.fx.node.Node],Tuple[None,None,None]]¡
+?Tuple[torch.fx.node.Node,torch.fx.node.Node,torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node(
+torch.fx.node.Node"torch.fx.node.Node(
+torch.fx.node.Node"torch.fx.node.Node7
+Tuple[None,None,None]
+None
+None
+None*2
+node(
+torch.fx.node.Node"torch.fx.node.Node*π
+modules´
+:builtins.dict[builtins.str,torch.nn.modules.module.Module]
+builtins.str"builtins.str@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"builtins.dict*ê
+qconfig_map˛
+Lbuiltins.dict[builtins.str,TypeAlias[Union[TypeAlias[Tuple[Any,Any]],None]]]
+builtins.str"builtins.strÄ
+0TypeAlias[Union[TypeAlias[Tuple[Any,Any]],None]]ü
+%Union[TypeAlias[Tuple[Any,Any]],None]j
+TypeAlias[Tuple[Any,Any]]$
+Tuple[Any,Any]
+Any
+Any"%torch.ao.quantization.qconfig.QConfig
+None"(torch.ao.quantization.qconfig.QConfigAny"builtins.dict*™
+matching_modules_or_opså
+.builtins.list[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"builtins.list*k
+dequantize_node_arg_indicesJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list¨	
+%_match_static_pattern_with_two_inputsWtorch.ao.quantization.fx._lower_to_native_backend._match_static_pattern_with_two_inputs"˘
+DUnion[Tuple[torch.fx.node.Node,torch.fx.node.Node],Tuple[None,None]]Ñ
+,Tuple[torch.fx.node.Node,torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node(
+torch.fx.node.Node"torch.fx.node.Node(
+Tuple[None,None]
+None
+None*2
+node(
+torch.fx.node.Node"torch.fx.node.Node*π
+modules´
+:builtins.dict[builtins.str,torch.nn.modules.module.Module]
+builtins.str"builtins.str@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"builtins.dict*ê
+qconfig_map˛
+Lbuiltins.dict[builtins.str,TypeAlias[Union[TypeAlias[Tuple[Any,Any]],None]]]
+builtins.str"builtins.strÄ
+0TypeAlias[Union[TypeAlias[Tuple[Any,Any]],None]]ü
+%Union[TypeAlias[Tuple[Any,Any]],None]j
+TypeAlias[Tuple[Any,Any]]$
+Tuple[Any,Any]
+Any
+Any"%torch.ao.quantization.qconfig.QConfig
+None"(torch.ao.quantization.qconfig.QConfigAny"builtins.dict*™
+matching_modules_or_opså
+.builtins.list[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"builtins.listÁ
+!_lower_static_weighted_ref_moduleStorch.ao.quantization.fx._lower_to_native_backend._lower_static_weighted_ref_module"
+Any*Q
+modelF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*ê
+qconfig_map˛
+Lbuiltins.dict[builtins.str,TypeAlias[Union[TypeAlias[Tuple[Any,Any]],None]]]
+builtins.str"builtins.strÄ
+0TypeAlias[Union[TypeAlias[Tuple[Any,Any]],None]]ü
+%Union[TypeAlias[Tuple[Any,Any]],None]j
+TypeAlias[Tuple[Any,Any]]$
+Tuple[Any,Any]
+Any
+Any"%torch.ao.quantization.qconfig.QConfig
+None"(torch.ao.quantization.qconfig.QConfigAny"builtins.dictá
+1_lower_static_weighted_ref_module_with_two_inputsctorch.ao.quantization.fx._lower_to_native_backend._lower_static_weighted_ref_module_with_two_inputs"
+Any*Q
+modelF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*ê
+qconfig_map˛
+Lbuiltins.dict[builtins.str,TypeAlias[Union[TypeAlias[Tuple[Any,Any]],None]]]
+builtins.str"builtins.strÄ
+0TypeAlias[Union[TypeAlias[Tuple[Any,Any]],None]]ü
+%Union[TypeAlias[Tuple[Any,Any]],None]j
+TypeAlias[Tuple[Any,Any]]$
+Tuple[Any,Any]
+Any
+Any"%torch.ao.quantization.qconfig.QConfig
+None"(torch.ao.quantization.qconfig.QConfigAny"builtins.dict÷
+"_lower_dynamic_weighted_ref_moduleTtorch.ao.quantization.fx._lower_to_native_backend._lower_dynamic_weighted_ref_module"
+Any*Q
+modelF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModuleﬁ
+&_lower_weight_only_weighted_ref_moduleXtorch.ao.quantization.fx._lower_to_native_backend._lower_weight_only_weighted_ref_module"
+Any*Q
+modelF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModuleÔ
+%_lower_static_weighted_ref_functionalWtorch.ao.quantization.fx._lower_to_native_backend._lower_static_weighted_ref_functional"
+Any*Q
+modelF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*ê
+qconfig_map˛
+Lbuiltins.dict[builtins.str,TypeAlias[Union[TypeAlias[Tuple[Any,Any]],None]]]
+builtins.str"builtins.strÄ
+0TypeAlias[Union[TypeAlias[Tuple[Any,Any]],None]]ü
+%Union[TypeAlias[Tuple[Any,Any]],None]j
+TypeAlias[Tuple[Any,Any]]$
+Tuple[Any,Any]
+Any
+Any"%torch.ao.quantization.qconfig.QConfig
+None"(torch.ao.quantization.qconfig.QConfigAny"builtins.dictÒ
+&_lower_dynamic_weighted_ref_functionalXtorch.ao.quantization.fx._lower_to_native_backend._lower_dynamic_weighted_ref_functional"
+Any*Q
+modelF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*ê
+qconfig_map˛
+Lbuiltins.dict[builtins.str,TypeAlias[Union[TypeAlias[Tuple[Any,Any]],None]]]
+builtins.str"builtins.strÄ
+0TypeAlias[Union[TypeAlias[Tuple[Any,Any]],None]]ü
+%Union[TypeAlias[Tuple[Any,Any]],None]j
+TypeAlias[Tuple[Any,Any]]$
+Tuple[Any,Any]
+Any
+Any"%torch.ao.quantization.qconfig.QConfig
+None"(torch.ao.quantization.qconfig.QConfigAny"builtins.dictŸ
+_lower_quantized_binary_opLtorch.ao.quantization.fx._lower_to_native_backend._lower_quantized_binary_op"
+Any*Q
+modelF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*ê
+qconfig_map˛
+Lbuiltins.dict[builtins.str,TypeAlias[Union[TypeAlias[Tuple[Any,Any]],None]]]
+builtins.str"builtins.strÄ
+0TypeAlias[Union[TypeAlias[Tuple[Any,Any]],None]]ü
+%Union[TypeAlias[Tuple[Any,Any]],None]j
+TypeAlias[Tuple[Any,Any]]$
+Tuple[Any,Any]
+Any
+Any"%torch.ao.quantization.qconfig.QConfig
+None"(torch.ao.quantization.qconfig.QConfigAny"builtins.dict»
+special_pattern_replacementMtorch.ao.quantization.fx._lower_to_native_backend.special_pattern_replacement"
+Any*Q
+modelF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule“
+ _lower_getattr_tensor_metadta_opRtorch.ao.quantization.fx._lower_to_native_backend._lower_getattr_tensor_metadta_op"
+Any*Q
+modelF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModuleƒ
+_lower_get_tensor_info_opKtorch.ao.quantization.fx._lower_to_native_backend._lower_get_tensor_info_op"
+Any*Q
+modelF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModuleÅ
+_lower_to_native_backendJtorch.ao.quantization.fx._lower_to_native_backend._lower_to_native_backend"F
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*Q
+modelF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*ê
+qconfig_map˛
+Lbuiltins.dict[builtins.str,TypeAlias[Union[TypeAlias[Tuple[Any,Any]],None]]]
+builtins.str"builtins.strÄ
+0TypeAlias[Union[TypeAlias[Tuple[Any,Any]],None]]ü
+%Union[TypeAlias[Tuple[Any,Any]],None]j
+TypeAlias[Tuple[Any,Any]]$
+Tuple[Any,Any]
+Any
+Any"%torch.ao.quantization.qconfig.QConfig
+None"(torch.ao.quantization.qconfig.QConfigAny"builtins.dict*Í
+node_name_to_scope—
+=builtins.dict[builtins.str,Tuple[builtins.str,builtins.type]]
+builtins.str"builtins.strc
+!Tuple[builtins.str,builtins.type]
+builtins.str"builtins.str
+builtins.type"builtins.type"builtins.dict*≠
+__annotations__Atorch.ao.quantization.fx._lower_to_native_backend.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*
+nntorch.nn *
+Ftorch.nn.functional *
+nnitorch.ao.nn.intrinsic *)
+nniqtorch.ao.nn.intrinsic.quantized *2
+nniqd'torch.ao.nn.intrinsic.quantized.dynamic *
+nnqtorch.ao.nn.quantized *'
+nnqdtorch.ao.nn.quantized.dynamic *)
+nnqrtorch.ao.nn.quantized.reference *˝
+QOP_TO_ARG_NAMES_TO_SKIPJtorch.ao.quantization.fx._lower_to_native_backend.QOP_TO_ARG_NAMES_TO_SKIPî
+.builtins.dict[Any,builtins.list[builtins.str]]
+AnyJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list"builtins.dict*©
+STATIC_LOWER_MODULE_MAPItorch.ao.quantization.fx._lower_to_native_backend.STATIC_LOWER_MODULE_MAP¬
+ubuiltins.dict[Type[torch.nn.modules.module.Module],Type[torch.ao.nn.quantized.modules.utils.WeightedQuantizedModule]]p
+$Type[torch.nn.modules.module.Module]@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"type«
+AType[torch.ao.nn.quantized.modules.utils.WeightedQuantizedModule]z
+;torch.ao.nn.quantized.modules.utils.WeightedQuantizedModule";torch.ao.nn.quantized.modules.utils.WeightedQuantizedModule"type"builtins.dict*∂
+DYNAMIC_LOWER_MODULE_MAPJtorch.ao.quantization.fx._lower_to_native_backend.DYNAMIC_LOWER_MODULE_MAPÕ
+Xbuiltins.dict[Type[torch.nn.modules.module.Module],Type[torch.nn.modules.module.Module]]p
+$Type[torch.nn.modules.module.Module]@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"typep
+$Type[torch.nn.modules.module.Module]@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"type"builtins.dict*æ
+WEIGHT_ONLY_LOWER_MODULE_MAPNtorch.ao.quantization.fx._lower_to_native_backend.WEIGHT_ONLY_LOWER_MODULE_MAPÕ
+Xbuiltins.dict[Type[torch.nn.modules.module.Module],Type[torch.nn.modules.module.Module]]p
+$Type[torch.nn.modules.module.Module]@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"typep
+$Type[torch.nn.modules.module.Module]@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"type"builtins.dict*Û
+ SPECIAL_PATTERN_LOWER_MODULE_MAPRtorch.ao.quantization.fx._lower_to_native_backend.SPECIAL_PATTERN_LOWER_MODULE_MAP{
+*builtins.dict[builtins.type,builtins.type]
+builtins.type"builtins.type
+builtins.type"builtins.type"builtins.dict*»
+STATIC_LOWER_FUSED_MODULE_MAPOtorch.ao.quantization.fx._lower_to_native_backend.STATIC_LOWER_FUSED_MODULE_MAP’
+°builtins.dict[Type[torch.nn.modules.module.Module],Tuple[Type[torch.nn.modules.module.Module],Type[torch.ao.nn.quantized.modules.utils.WeightedQuantizedModule]]]p
+$Type[torch.nn.modules.module.Module]@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"type≠
+mTuple[Type[torch.nn.modules.module.Module],Type[torch.ao.nn.quantized.modules.utils.WeightedQuantizedModule]]p
+$Type[torch.nn.modules.module.Module]@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"type«
+AType[torch.ao.nn.quantized.modules.utils.WeightedQuantizedModule]z
+;torch.ao.nn.quantized.modules.utils.WeightedQuantizedModule";torch.ao.nn.quantized.modules.utils.WeightedQuantizedModule"type"builtins.dict*ﬁ
+(STATIC_LOWER_FUSED_MODULE_TWO_INPUTS_MAPZtorch.ao.quantization.fx._lower_to_native_backend.STATIC_LOWER_FUSED_MODULE_TWO_INPUTS_MAP’
+°builtins.dict[Type[torch.nn.modules.module.Module],Tuple[Type[torch.nn.modules.module.Module],Type[torch.ao.nn.quantized.modules.utils.WeightedQuantizedModule]]]p
+$Type[torch.nn.modules.module.Module]@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"type≠
+mTuple[Type[torch.nn.modules.module.Module],Type[torch.ao.nn.quantized.modules.utils.WeightedQuantizedModule]]p
+$Type[torch.nn.modules.module.Module]@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"type«
+AType[torch.ao.nn.quantized.modules.utils.WeightedQuantizedModule]z
+;torch.ao.nn.quantized.modules.utils.WeightedQuantizedModule";torch.ao.nn.quantized.modules.utils.WeightedQuantizedModule"type"builtins.dict*∏
+DYNAMIC_LOWER_FUSED_MODULE_MAPPtorch.ao.quantization.fx._lower_to_native_backend.DYNAMIC_LOWER_FUSED_MODULE_MAP√
+Ñbuiltins.dict[Type[torch.nn.modules.module.Module],Tuple[Type[torch.nn.modules.module.Module],Type[torch.nn.modules.module.Module]]]p
+$Type[torch.nn.modules.module.Module]@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"type∏
+PTuple[Type[torch.nn.modules.module.Module],Type[torch.nn.modules.module.Module]]p
+$Type[torch.nn.modules.module.Module]@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"typep
+$Type[torch.nn.modules.module.Module]@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"type"builtins.dict*˛
+STATIC_LOWER_FUNCTIONAL_MAPMtorch.ao.quantization.fx._lower_to_native_backend.STATIC_LOWER_FUNCTIONAL_MAPè
+Åbuiltins.dict[CallableType[builtins.function],Tuple[CallableType[builtins.function],Union[CallableType[builtins.function],None]]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function¨
+RTuple[CallableType[builtins.function],Union[CallableType[builtins.function],None]]K
+CallableType[builtins.function]&
+builtins.function"builtins.functionÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None"builtins.dict*Á
+WEIGHT_PREPACK_OPSDtorch.ao.quantization.fx._lower_to_native_backend.WEIGHT_PREPACK_OPSä
+-builtins.set[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"builtins.set*Ω
+DYNAMIC_LOWER_FUNCTIONAL_MAPNtorch.ao.quantization.fx._lower_to_native_backend.DYNAMIC_LOWER_FUNCTIONAL_MAPÃ
+µbuiltins.dict[CallableType[builtins.function],builtins.dict[Tuple[torch._C.dtype,torch._C.dtype],Tuple[CallableType[builtins.function],Union[CallableType[builtins.function],None]]]]K
+CallableType[builtins.function]&
+builtins.function"builtins.functionµ
+Übuiltins.dict[Tuple[torch._C.dtype,torch._C.dtype],Tuple[CallableType[builtins.function],Union[CallableType[builtins.function],None]]]l
+$Tuple[torch._C.dtype,torch._C.dtype] 
+torch._C.dtype"torch._C.dtype 
+torch._C.dtype"torch._C.dtype¨
+RTuple[CallableType[builtins.function],Union[CallableType[builtins.function],None]]K
+CallableType[builtins.function]&
+builtins.function"builtins.functionÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None"builtins.dict"builtins.dict*È
+CONV_FUNCTIONAL_OPSEtorch.ao.quantization.fx._lower_to_native_backend.CONV_FUNCTIONAL_OPSä
+-builtins.set[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"builtins.set*˝
+CONV_TRANSPOSE_FUNCTIONAL_OPSOtorch.ao.quantization.fx._lower_to_native_backend.CONV_TRANSPOSE_FUNCTIONAL_OPSä
+-builtins.set[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"builtins.set*º
+QBIN_OP_MAPPINGAtorch.ao.quantization.fx._lower_to_native_backend.QBIN_OP_MAPPINGÂ
+bbuiltins.dict[Union[CallableType[builtins.function],builtins.str],CallableType[builtins.function]]¢
+3Union[CallableType[builtins.function],builtins.str]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+builtins.str"builtins.strK
+CallableType[builtins.function]&
+builtins.function"builtins.function"builtins.dict*∆
+QBIN_RELU_OP_MAPPINGFtorch.ao.quantization.fx._lower_to_native_backend.QBIN_RELU_OP_MAPPINGÂ
+bbuiltins.dict[Union[CallableType[builtins.function],builtins.str],CallableType[builtins.function]]¢
+3Union[CallableType[builtins.function],builtins.str]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+builtins.str"builtins.strK
+CallableType[builtins.function]&
+builtins.function"builtins.function"builtins.dict

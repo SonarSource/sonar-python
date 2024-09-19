@@ -1,0 +1,173 @@
+
+*torch._higher_order_ops.triton_kernel_wrap—
+KernelSideTable:torch._higher_order_ops.triton_kernel_wrap.KernelSideTable"builtins.object*‹
+
+add_kernelEtorch._higher_order_ops.triton_kernel_wrap.KernelSideTable.add_kernel"
+builtins.int"builtins.int*‚
+selfx
+:torch._higher_order_ops.triton_kernel_wrap.KernelSideTable":torch._higher_order_ops.triton_kernel_wrap.KernelSideTable*
+kernel
+Any*ˆ
+
+get_kernelEtorch._higher_order_ops.triton_kernel_wrap.KernelSideTable.get_kernel"
+Any*‚
+selfx
+:torch._higher_order_ops.triton_kernel_wrap.KernelSideTable":torch._higher_order_ops.triton_kernel_wrap.KernelSideTable*%
+idx
+builtins.int"builtins.int*—
+add_constant_argsLtorch._higher_order_ops.triton_kernel_wrap.KernelSideTable.add_constant_args"
+builtins.int"builtins.int*‚
+selfx
+:torch._higher_order_ops.triton_kernel_wrap.KernelSideTable":torch._higher_order_ops.triton_kernel_wrap.KernelSideTable*
+args
+Any*–
+get_constant_argsLtorch._higher_order_ops.triton_kernel_wrap.KernelSideTable.get_constant_args"
+Any*‚
+selfx
+:torch._higher_order_ops.triton_kernel_wrap.KernelSideTable":torch._higher_order_ops.triton_kernel_wrap.KernelSideTable*%
+idx
+builtins.int"builtins.int*ä
+reset_tableFtorch._higher_order_ops.triton_kernel_wrap.KernelSideTable.reset_table"
+None*‚
+selfx
+:torch._higher_order_ops.triton_kernel_wrap.KernelSideTable":torch._higher_order_ops.triton_kernel_wrap.KernelSideTabler°
+id_to_kernelGtorch._higher_order_ops.triton_kernel_wrap.KernelSideTable.id_to_kernelW
+builtins.dict[builtins.int,Any]
+builtins.int"builtins.int
+Any"builtins.dictr°
+kernel_to_idGtorch._higher_order_ops.triton_kernel_wrap.KernelSideTable.kernel_to_idW
+builtins.dict[Any,builtins.int]
+Any
+builtins.int"builtins.int"builtins.dictr²
+constant_argsHtorch._higher_order_ops.triton_kernel_wrap.KernelSideTable.constant_argsW
+builtins.dict[builtins.int,Any]
+builtins.int"builtins.int
+Any"builtins.dictri
+lock?torch._higher_order_ops.triton_kernel_wrap.KernelSideTable.lock 
+threading.Lock"threading.LockŠ
+Param0torch._higher_order_ops.triton_kernel_wrap.Param"builtins.object*æ
+__init__9torch._higher_order_ops.triton_kernel_wrap.Param.__init__"
+None*n
+selfd
+0torch._higher_order_ops.triton_kernel_wrap.Param"0torch._higher_order_ops.triton_kernel_wrap.Param*%
+idx
+builtins.int"builtins.int8rY
+idx4torch._higher_order_ops.triton_kernel_wrap.Param.idx
+builtins.int"builtins.intr÷
+__dataclass_fields__Etorch._higher_order_ops.triton_kernel_wrap.Param.__dataclass_fields__—
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dict‹
+Intermediate7torch._higher_order_ops.triton_kernel_wrap.Intermediate"builtins.object*N
+fake<torch._higher_order_ops.triton_kernel_wrap.Intermediate.fake*
+self*û
+__init__@torch._higher_order_ops.triton_kernel_wrap.Intermediate.__init__"
+None*|
+selfr
+7torch._higher_order_ops.triton_kernel_wrap.Intermediate"7torch._higher_order_ops.triton_kernel_wrap.Intermediate*%
+idx
+builtins.int"builtins.int8r`
+idx;torch._higher_order_ops.triton_kernel_wrap.Intermediate.idx
+builtins.int"builtins.intrþ
+__dataclass_fields__Ltorch._higher_order_ops.triton_kernel_wrap.Intermediate.__dataclass_fields__—
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictó
+Op-torch._higher_order_ops.triton_kernel_wrap.Op"builtins.object*V
+__post_init__;torch._higher_order_ops.triton_kernel_wrap.Op.__post_init__*
+self* 
+__init__6torch._higher_order_ops.triton_kernel_wrap.Op.__init__"
+None*h
+self^
+-torch._higher_order_ops.triton_kernel_wrap.Op"-torch._higher_order_ops.triton_kernel_wrap.Op*&
+name
+builtins.str"builtins.str*V
+fn_call_nameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*ê
+argsß
+~builtins.list[Union[torch._higher_order_ops.triton_kernel_wrap.Param,torch._higher_order_ops.triton_kernel_wrap.Intermediate]]Í
+oUnion[torch._higher_order_ops.triton_kernel_wrap.Param,torch._higher_order_ops.triton_kernel_wrap.Intermediate]d
+0torch._higher_order_ops.triton_kernel_wrap.Param"0torch._higher_order_ops.triton_kernel_wrap.Paramr
+7torch._higher_order_ops.triton_kernel_wrap.Intermediate"7torch._higher_order_ops.triton_kernel_wrap.Intermediate"builtins.list*{
+retr
+7torch._higher_order_ops.triton_kernel_wrap.Intermediate"7torch._higher_order_ops.triton_kernel_wrap.Intermediate8rX
+name2torch._higher_order_ops.triton_kernel_wrap.Op.name
+builtins.str"builtins.strr
+fn_call_name:torch._higher_order_ops.triton_kernel_wrap.Op.fn_call_nameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+Nonerœ
+args2torch._higher_order_ops.triton_kernel_wrap.Op.argsß
+~builtins.list[Union[torch._higher_order_ops.triton_kernel_wrap.Param,torch._higher_order_ops.triton_kernel_wrap.Intermediate]]Í
+oUnion[torch._higher_order_ops.triton_kernel_wrap.Param,torch._higher_order_ops.triton_kernel_wrap.Intermediate]d
+0torch._higher_order_ops.triton_kernel_wrap.Param"0torch._higher_order_ops.triton_kernel_wrap.Paramr
+7torch._higher_order_ops.triton_kernel_wrap.Intermediate"7torch._higher_order_ops.triton_kernel_wrap.Intermediate"builtins.listr¬
+ret1torch._higher_order_ops.triton_kernel_wrap.Op.retr
+7torch._higher_order_ops.triton_kernel_wrap.Intermediate"7torch._higher_order_ops.triton_kernel_wrap.Intermediaterô
+__dataclass_fields__Btorch._higher_order_ops.triton_kernel_wrap.Op.__dataclass_fields__—
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictè
+MemoizeWithCycleCheck@torch._higher_order_ops.triton_kernel_wrap.MemoizeWithCycleCheck"builtins.object*g
+__init__Itorch._higher_order_ops.triton_kernel_wrap.MemoizeWithCycleCheck.__init__*
+self*
+fn*‰
+__call__Itorch._higher_order_ops.triton_kernel_wrap.MemoizeWithCycleCheck.__call__*
+self*
+	functions*
+fn_name*
+num_args*Y
+resetFtorch._higher_order_ops.triton_kernel_wrap.MemoizeWithCycleCheck.reset*
+selfrR
+fnCtorch._higher_order_ops.triton_kernel_wrap.MemoizeWithCycleCheck.fn
+AnyrX
+cacheFtorch._higher_order_ops.triton_kernel_wrap.MemoizeWithCycleCheck.cache
+Anyì
+TritonKernelWrapperMutationFtorch._higher_order_ops.triton_kernel_wrap.TritonKernelWrapperMutation"torch._ops.HigherOrderOperator*e
+__init__Otorch._higher_order_ops.triton_kernel_wrap.TritonKernelWrapperMutation.__init__*
+selfò
+TritonKernelWrapperFunctionalHtorch._higher_order_ops.triton_kernel_wrap.TritonKernelWrapperFunctional"torch._ops.HigherOrderOperator*g
+__init__Qtorch._higher_order_ops.triton_kernel_wrap.TritonKernelWrapperFunctional.__init__*
+selfa
+generate_ttir8torch._higher_order_ops.triton_kernel_wrap.generate_ttir*
+
+kernel*
+
+kwargsù
+ttir_to_functions<torch._higher_order_ops.triton_kernel_wrap.ttir_to_functions"‹
+Ÿbuiltins.dict[builtins.str,builtins.dict[torch._higher_order_ops.triton_kernel_wrap.Intermediate,builtins.list[torch._higher_order_ops.triton_kernel_wrap.Op]]]
+builtins.str"builtins.str¹
+ƒbuiltins.dict[torch._higher_order_ops.triton_kernel_wrap.Intermediate,builtins.list[torch._higher_order_ops.triton_kernel_wrap.Op]]r
+7torch._higher_order_ops.triton_kernel_wrap.Intermediate"7torch._higher_order_ops.triton_kernel_wrap.Intermediate­
+<builtins.list[torch._higher_order_ops.triton_kernel_wrap.Op]^
+-torch._higher_order_ops.triton_kernel_wrap.Op"-torch._higher_order_ops.triton_kernel_wrap.Op"builtins.list"builtins.dict"builtins.dict*
+ttir_module
+Anyw
+identify_mutated_tensorsCtorch._higher_order_ops.triton_kernel_wrap.identify_mutated_tensors*
+
+kernel*
+
+kwargs—
+trace_triton_kernel_wrapperFtorch._higher_order_ops.triton_kernel_wrap.trace_triton_kernel_wrapper*
+
+proxy_mode*
+func_overload*
+	node_args*¦
+__annotations__:torch._higher_order_ops.triton_kernel_wrap.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*
+pytreetorch.utils._pytree *W
+log.torch._higher_order_ops.triton_kernel_wrap.log 
+logging.Logger"logging.Logger*Ë
+kernel_side_table<torch._higher_order_ops.triton_kernel_wrap.kernel_side_tablex
+:torch._higher_order_ops.triton_kernel_wrap.KernelSideTable":torch._higher_order_ops.triton_kernel_wrap.KernelSideTable*þ
+triton_kernel_wrapper_mutationItorch._higher_order_ops.triton_kernel_wrap.triton_kernel_wrapper_mutation
+Ftorch._higher_order_ops.triton_kernel_wrap.TritonKernelWrapperMutation"Ftorch._higher_order_ops.triton_kernel_wrap.TritonKernelWrapperMutation*†
+ triton_kernel_wrapper_functionalKtorch._higher_order_ops.triton_kernel_wrap.triton_kernel_wrapper_functional”
+Htorch._higher_order_ops.triton_kernel_wrap.TritonKernelWrapperFunctional"Htorch._higher_order_ops.triton_kernel_wrap.TritonKernelWrapperFunctional

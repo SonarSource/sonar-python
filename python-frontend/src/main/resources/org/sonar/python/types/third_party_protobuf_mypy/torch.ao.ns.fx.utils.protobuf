@@ -1,0 +1,147 @@
+
+torch.ao.ns.fx.utilsû
+NodeInputOrOutputType*torch.ao.ns.fx.utils.NodeInputOrOutputType"	enum.EnumHrO
+FP32/torch.ao.ns.fx.utils.NodeInputOrOutputType.FP32
+	enum.auto"	enum.autorO
+INT8/torch.ao.ns.fx.utils.NodeInputOrOutputType.INT8
+	enum.auto"	enum.autorO
+FP16/torch.ao.ns.fx.utils.NodeInputOrOutputType.FP16
+	enum.auto"	enum.autorU
+UNKNOWN2torch.ao.ns.fx.utils.NodeInputOrOutputType.UNKNOWN
+	enum.auto"	enum.autor_
+FP32_OR_INT87torch.ao.ns.fx.utils.NodeInputOrOutputType.FP32_OR_INT8
+	enum.auto"	enum.auto…	
+$get_node_first_input_and_output_type9torch.ao.ns.fx.utils.get_node_first_input_and_output_type"”
+\Tuple[torch.ao.ns.fx.utils.NodeInputOrOutputType,torch.ao.ns.fx.utils.NodeInputOrOutputType]X
+*torch.ao.ns.fx.utils.NodeInputOrOutputType"*torch.ao.ns.fx.utils.NodeInputOrOutputTypeX
+*torch.ao.ns.fx.utils.NodeInputOrOutputType"*torch.ao.ns.fx.utils.NodeInputOrOutputType*2
+node(
+torch.fx.node.Node"torch.fx.node.Node*N
+gmF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*[
+
+logger_clsK
+CallableType[builtins.function]&
+builtins.function"builtins.function*©
+node_type_to_io_type_mapŠ
+hbuiltins.dict[builtins.str,builtins.set[TypeAlias[Union[CallableType[builtins.function],builtins.str]]]]
+builtins.str"builtins.strð
+Lbuiltins.set[TypeAlias[Union[CallableType[builtins.function],builtins.str]]]‘
+>TypeAlias[Union[CallableType[builtins.function],builtins.str]]¢
+3Union[CallableType[builtins.function],builtins.str]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+builtins.str"builtins.str"(torch.ao.ns.fx.ns_types.NSNodeTargetType"builtins.set"builtins.dictÇ	
+get_node_input_qparams+torch.ao.ns.fx.utils.get_node_input_qparams"Ï
+fUnion[Tuple[Union[torch._tensor.Tensor,builtins.float],Union[torch._tensor.Tensor,builtins.int]],None]Ø
+ZTuple[Union[torch._tensor.Tensor,builtins.float],Union[torch._tensor.Tensor,builtins.int]]~
+*Union[torch._tensor.Tensor,builtins.float],
+torch._tensor.Tensor"torch._tensor.Tensor 
+builtins.float"builtins.floatx
+(Union[torch._tensor.Tensor,builtins.int],
+torch._tensor.Tensor"torch._tensor.Tensor
+builtins.int"builtins.int
+None*2
+node(
+torch.fx.node.Node"torch.fx.node.Node*N
+gmF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*©
+node_type_to_io_type_mapŠ
+hbuiltins.dict[builtins.str,builtins.set[TypeAlias[Union[CallableType[builtins.function],builtins.str]]]]
+builtins.str"builtins.strð
+Lbuiltins.set[TypeAlias[Union[CallableType[builtins.function],builtins.str]]]‘
+>TypeAlias[Union[CallableType[builtins.function],builtins.str]]¢
+3Union[CallableType[builtins.function],builtins.str]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+builtins.str"builtins.str"(torch.ao.ns.fx.ns_types.NSNodeTargetType"builtins.set"builtins.dictƒ
+return_first_non_observer_node3torch.ao.ns.fx.utils.return_first_non_observer_node"(
+torch.fx.node.Node"torch.fx.node.Node*2
+node(
+torch.fx.node.Node"torch.fx.node.Node*N
+gmF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModuleó
+get_number_of_non_param_args1torch.ao.ns.fx.utils.get_number_of_non_param_args"
+builtins.int"builtins.int*2
+node(
+torch.fx.node.Node"torch.fx.node.Node*N
+gmF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModuleÙ
+ get_arg_indices_of_inputs_to_log5torch.ao.ns.fx.utils.get_arg_indices_of_inputs_to_log"J
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*2
+node(
+torch.fx.node.Node"torch.fx.node.Nodeá
+get_target_type_str(torch.ao.ns.fx.utils.get_target_type_str"
+builtins.str"builtins.str*2
+node(
+torch.fx.node.Node"torch.fx.node.Node*N
+gmF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule‹
+'rekey_logger_info_on_node_name_of_model<torch.ao.ns.fx.utils.rekey_logger_info_on_node_name_of_model"±
+˜TypeAlias[builtins.dict[builtins.str,builtins.dict[builtins.str,builtins.dict[builtins.str,builtins.list[TypeAlias[builtins.dict[builtins.str,Any]]]]]]]ê
+builtins.dict[builtins.str,builtins.dict[builtins.str,builtins.dict[builtins.str,builtins.list[TypeAlias[builtins.dict[builtins.str,Any]]]]]]
+builtins.str"builtins.strª
+qbuiltins.dict[builtins.str,builtins.dict[builtins.str,builtins.list[TypeAlias[builtins.dict[builtins.str,Any]]]]]
+builtins.str"builtins.str‡
+Ubuiltins.dict[builtins.str,builtins.list[TypeAlias[builtins.dict[builtins.str,Any]]]]
+builtins.str"builtins.str€
+9builtins.list[TypeAlias[builtins.dict[builtins.str,Any]]]³
+*TypeAlias[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"*torch.ao.ns.fx.ns_types.NSSingleResultType"builtins.list"builtins.dict"builtins.dict"builtins.dict"%torch.ao.ns.fx.ns_types.NSResultsType*¿
+results±
+˜TypeAlias[builtins.dict[builtins.str,builtins.dict[builtins.str,builtins.dict[builtins.str,builtins.list[TypeAlias[builtins.dict[builtins.str,Any]]]]]]]ê
+builtins.dict[builtins.str,builtins.dict[builtins.str,builtins.dict[builtins.str,builtins.list[TypeAlias[builtins.dict[builtins.str,Any]]]]]]
+builtins.str"builtins.strª
+qbuiltins.dict[builtins.str,builtins.dict[builtins.str,builtins.list[TypeAlias[builtins.dict[builtins.str,Any]]]]]
+builtins.str"builtins.str‡
+Ubuiltins.dict[builtins.str,builtins.list[TypeAlias[builtins.dict[builtins.str,Any]]]]
+builtins.str"builtins.str€
+9builtins.list[TypeAlias[builtins.dict[builtins.str,Any]]]³
+*TypeAlias[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"*torch.ao.ns.fx.ns_types.NSSingleResultType"builtins.list"builtins.dict"builtins.dict"builtins.dict"%torch.ao.ns.fx.ns_types.NSResultsType*,
+
+model_name
+builtins.str"builtins.str‘
+maybe_add_missing_fqns+torch.ao.ns.fx.utils.maybe_add_missing_fqns"
+None*¿
+results±
+˜TypeAlias[builtins.dict[builtins.str,builtins.dict[builtins.str,builtins.dict[builtins.str,builtins.list[TypeAlias[builtins.dict[builtins.str,Any]]]]]]]ê
+builtins.dict[builtins.str,builtins.dict[builtins.str,builtins.dict[builtins.str,builtins.list[TypeAlias[builtins.dict[builtins.str,Any]]]]]]
+builtins.str"builtins.strª
+qbuiltins.dict[builtins.str,builtins.dict[builtins.str,builtins.list[TypeAlias[builtins.dict[builtins.str,Any]]]]]
+builtins.str"builtins.str‡
+Ubuiltins.dict[builtins.str,builtins.list[TypeAlias[builtins.dict[builtins.str,Any]]]]
+builtins.str"builtins.str€
+9builtins.list[TypeAlias[builtins.dict[builtins.str,Any]]]³
+*TypeAlias[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"*torch.ao.ns.fx.ns_types.NSSingleResultType"builtins.list"builtins.dict"builtins.dict"builtins.dict"%torch.ao.ns.fx.ns_types.NSResultsType
+8maybe_dequantize_first_two_tensor_args_and_handle_tuplesMtorch.ao.ns.fx.utils.maybe_dequantize_first_two_tensor_args_and_handle_tuples*
+f¡
+op_type_supports_shadowing/torch.ao.ns.fx.utils.op_type_supports_shadowing"
+builtins.bool"builtins.bool*2
+node(
+torch.fx.node.Node"torch.fx.node.Nodež
+get_normalized_nth_input-torch.ao.ns.fx.utils.get_normalized_nth_input"(
+torch.fx.node.Node"torch.fx.node.Node*2
+node(
+torch.fx.node.Node"torch.fx.node.Node*N
+gmF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*%
+idx
+builtins.int"builtins.int*
+__annotations__$torch.ao.ns.fx.utils.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*
+nntorch.nn *)
+nniqtorch.ao.nn.intrinsic.quantized *
+nnqtorch.ao.nn.quantized *(
+toqtorch.ao.ns.fx.utils.toq
+Any

@@ -1,0 +1,1449 @@
+
+torch._C._distributed_c10d∏
+BuiltinCommHookType.torch._C._distributed_c10d.BuiltinCommHookType"	enum.EnumHrm
+	ALLREDUCE8torch._C._distributed_c10d.BuiltinCommHookType.ALLREDUCE&
+builtins.ellipsis"builtins.ellipsisru
+FP16_COMPRESS<torch._C._distributed_c10d.BuiltinCommHookType.FP16_COMPRESS&
+builtins.ellipsis"builtins.ellipsisƒ
+
+
+GradBucket%torch._C._distributed_c10d.GradBucket"builtins.object*¨
+index+torch._C._distributed_c10d.GradBucket.index"
+builtins.int"builtins.int*X
+selfN
+%torch._C._distributed_c10d.GradBucket"%torch._C._distributed_c10d.GradBucket*æ
+buffer,torch._C._distributed_c10d.GradBucket.buffer",
+torch._tensor.Tensor"torch._tensor.Tensor*X
+selfN
+%torch._C._distributed_c10d.GradBucket"%torch._C._distributed_c10d.GradBucket*˙
+	gradients/torch._C._distributed_c10d.GradBucket.gradients"b
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*X
+selfN
+%torch._C._distributed_c10d.GradBucket"%torch._C._distributed_c10d.GradBucket*≤
+is_last-torch._C._distributed_c10d.GradBucket.is_last"
+builtins.bool"builtins.bool*X
+selfN
+%torch._C._distributed_c10d.GradBucket"%torch._C._distributed_c10d.GradBucket*‹
+
+set_buffer0torch._C._distributed_c10d.GradBucket.set_buffer"
+None*X
+selfN
+%torch._C._distributed_c10d.GradBucket"%torch._C._distributed_c10d.GradBucket*8
+tensor,
+torch._tensor.Tensor"torch._tensor.Tensor*¸
+
+parameters0torch._C._distributed_c10d.GradBucket.parameters"b
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*X
+selfN
+%torch._C._distributed_c10d.GradBucket"%torch._C._distributed_c10d.GradBucket◊+
+Reducer"torch._C._distributed_c10d.Reducer"builtins.object*Â
+__init__+torch._C._distributed_c10d.Reducer.__init__"
+None*R
+selfH
+"torch._C._distributed_c10d.Reducer""torch._C._distributed_c10d.Reducer*n
+paramsb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*ú
+bucket_indicesá
+*builtins.list[builtins.list[builtins.int]]J
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list"builtins.list*f
+per_bucket_size_limitsJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*e
+process_groupR
+'torch._C._distributed_c10d.ProcessGroup"'torch._C._distributed_c10d.ProcessGroup*l
+expect_sparse_gradientsM
+builtins.list[builtins.bool]
+builtins.bool"builtins.bool"builtins.list *4
+bucket_bytes_cap
+builtins.int"builtins.int *<
+find_unused_parameters
+builtins.bool"builtins.bool *=
+gradient_as_bucket_view
+builtins.bool"builtins.bool *í
+param_to_name_mappingu
+(builtins.dict[builtins.int,builtins.str]
+builtins.int"builtins.int
+builtins.str"builtins.str"builtins.dict *:
+first_bucket_types_cap
+builtins.int"builtins.int *´
+prepare_for_forward6torch._C._distributed_c10d.Reducer.prepare_for_forward"
+None*R
+selfH
+"torch._C._distributed_c10d.Reducer""torch._C._distributed_c10d.Reducer*ù
+prepare_for_backward7torch._C._distributed_c10d.Reducer.prepare_for_backward"
+None*R
+selfH
+"torch._C._distributed_c10d.Reducer""torch._C._distributed_c10d.Reducer*n
+outputb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*Î
+get_backward_stats5torch._C._distributed_c10d.Reducer.get_backward_stats"J
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*R
+selfH
+"torch._C._distributed_c10d.Reducer""torch._C._distributed_c10d.Reducer*∆
+_install_post_backward_futuresAtorch._C._distributed_c10d.Reducer._install_post_backward_futures"
+None*R
+selfH
+"torch._C._distributed_c10d.Reducer""torch._C._distributed_c10d.Reducer*Ç
+futuresu
+(builtins.list[torch.futures.Future[Any]]:
+torch.futures.Future[Any]
+Any"torch.futures.Future"builtins.list*ª
+_rebuild_buckets3torch._C._distributed_c10d.Reducer._rebuild_buckets"
+builtins.bool"builtins.bool*R
+selfH
+"torch._C._distributed_c10d.Reducer""torch._C._distributed_c10d.Reducer*À
+_get_zeros_like_grad_buckets?torch._C._distributed_c10d.Reducer._get_zeros_like_grad_buckets"ï
+4builtins.list[torch._C._distributed_c10d.GradBucket]N
+%torch._C._distributed_c10d.GradBucket"%torch._C._distributed_c10d.GradBucket"builtins.list*R
+selfH
+"torch._C._distributed_c10d.Reducer""torch._C._distributed_c10d.Reducer*µ
+_push_all_rebuilt_params;torch._C._distributed_c10d.Reducer._push_all_rebuilt_params"
+None*R
+selfH
+"torch._C._distributed_c10d.Reducer""torch._C._distributed_c10d.Reducer*«
+_set_forward_pass_work_handle@torch._C._distributed_c10d.Reducer._set_forward_pass_work_handle"
+Any*R
+selfH
+"torch._C._distributed_c10d.Reducer""torch._C._distributed_c10d.Reducer*L
+workB
+torch._C._distributed_c10d.Work"torch._C._distributed_c10d.Work*9
+use_static_world_size
+builtins.bool"builtins.bool*œ
+_get_local_used_map6torch._C._distributed_c10d.Reducer._get_local_used_map",
+torch._tensor.Tensor"torch._tensor.Tensor*R
+selfH
+"torch._C._distributed_c10d.Reducer""torch._C._distributed_c10d.Reducer*¸
+$_set_ddp_runtime_logging_sample_rateGtorch._C._distributed_c10d.Reducer._set_ddp_runtime_logging_sample_rate"
+None*R
+selfH
+"torch._C._distributed_c10d.Reducer""torch._C._distributed_c10d.Reducer*-
+sample_rate
+builtins.int"builtins.int*ß
+_set_static_graph4torch._C._distributed_c10d.Reducer._set_static_graph"
+None*R
+selfH
+"torch._C._distributed_c10d.Reducer""torch._C._distributed_c10d.Reducer*Ø
+_run_comm_hook1torch._C._distributed_c10d.Reducer._run_comm_hook":
+torch.futures.Future[Any]
+Any"torch.futures.Future*R
+selfH
+"torch._C._distributed_c10d.Reducer""torch._C._distributed_c10d.Reducer*Z
+bucketN
+%torch._C._distributed_c10d.GradBucket"%torch._C._distributed_c10d.GradBucket*Ì
+
+set_logger-torch._C._distributed_c10d.Reducer.set_logger"
+None*R
+selfH
+"torch._C._distributed_c10d.Reducer""torch._C._distributed_c10d.Reducer*R
+loggerF
+!torch._C._distributed_c10d.Logger"!torch._C._distributed_c10d.Logger*±
+_remove_autograd_hooks9torch._C._distributed_c10d.Reducer._remove_autograd_hooks"
+None*R
+selfH
+"torch._C._distributed_c10d.Reducer""torch._C._distributed_c10d.Reducer*µ
+_check_reducer_finalized;torch._C._distributed_c10d.Reducer._check_reducer_finalized"
+None*R
+selfH
+"torch._C._distributed_c10d.Reducer""torch._C._distributed_c10d.Reducer*’
+_set_sparse_metadata7torch._C._distributed_c10d.Reducer._set_sparse_metadata"
+None*R
+selfH
+"torch._C._distributed_c10d.Reducer""torch._C._distributed_c10d.Reducer*•
+global_unique_idsç
+0builtins.dict[builtins.str,torch._tensor.Tensor]
+builtins.str"builtins.str,
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.dict*ù
+_reset_state/torch._C._distributed_c10d.Reducer._reset_state"
+None*R
+selfH
+"torch._C._distributed_c10d.Reducer""torch._C._distributed_c10d.Reducer*ö
+_update_process_group8torch._C._distributed_c10d.Reducer._update_process_group"
+None*R
+selfH
+"torch._C._distributed_c10d.Reducer""torch._C._distributed_c10d.Reducer*i
+new_process_groupR
+'torch._C._distributed_c10d.ProcessGroup"'torch._C._distributed_c10d.ProcessGroupº
+DDPLoggingData)torch._C._distributed_c10d.DDPLoggingData"builtins.objectrµ
+strs_map2torch._C._distributed_c10d.DDPLoggingData.strs_mapu
+(builtins.dict[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.dictrµ
+ints_map2torch._C._distributed_c10d.DDPLoggingData.ints_mapu
+(builtins.dict[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int"builtins.dict
+Logger!torch._C._distributed_c10d.Logger"builtins.object*È
+__init__*torch._C._distributed_c10d.Logger.__init__"
+None*P
+selfF
+!torch._C._distributed_c10d.Logger"!torch._C._distributed_c10d.Logger*U
+reducerH
+"torch._C._distributed_c10d.Reducer""torch._C._distributed_c10d.Reducer*ë
+set_construction_data_and_log?torch._C._distributed_c10d.Logger.set_construction_data_and_log"
+Any*P
+selfF
+!torch._C._distributed_c10d.Logger"!torch._C._distributed_c10d.Logger*-
+module_name
+builtins.str"builtins.str*Z
+
+device_idsJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*/
+output_device
+builtins.int"builtins.int*5
+broadcast_buffers
+builtins.bool"builtins.bool*/
+has_sync_bn
+builtins.bool"builtins.bool*0
+static_graph
+builtins.bool"builtins.bool*¥
+set_runtime_stats_and_log;torch._C._distributed_c10d.Logger.set_runtime_stats_and_log"
+None*P
+selfF
+!torch._C._distributed_c10d.Logger"!torch._C._distributed_c10d.Logger*Õ
+set_error_and_log3torch._C._distributed_c10d.Logger.set_error_and_log"
+None*P
+selfF
+!torch._C._distributed_c10d.Logger"!torch._C._distributed_c10d.Logger*'
+error
+builtins.str"builtins.str*˙
+_get_ddp_logging_data7torch._C._distributed_c10d.Logger._get_ddp_logging_data"V
+)torch._C._distributed_c10d.DDPLoggingData")torch._C._distributed_c10d.DDPLoggingData*P
+selfF
+!torch._C._distributed_c10d.Logger"!torch._C._distributed_c10d.Logger*’
+_set_comm_hook_name5torch._C._distributed_c10d.Logger._set_comm_hook_name"
+None*P
+selfF
+!torch._C._distributed_c10d.Logger"!torch._C._distributed_c10d.Logger*+
+	comm_hook
+builtins.str"builtins.str*Æ
+_set_uneven_input_join8torch._C._distributed_c10d.Logger._set_uneven_input_join"
+None*P
+selfF
+!torch._C._distributed_c10d.Logger"!torch._C._distributed_c10d.Logger*§
+_set_static_graph3torch._C._distributed_c10d.Logger._set_static_graph"
+None*P
+selfF
+!torch._C._distributed_c10d.Logger"!torch._C._distributed_c10d.LoggerÕ
+_WorkerServer(torch._C._distributed_c10d._WorkerServer"builtins.object*÷
+__init__1torch._C._distributed_c10d._WorkerServer.__init__"
+None*^
+selfT
+(torch._C._distributed_c10d._WorkerServer"(torch._C._distributed_c10d._WorkerServer*-
+socket_path
+builtins.str"builtins.str*ß
+shutdown1torch._C._distributed_c10d._WorkerServer.shutdown"
+None*^
+selfT
+(torch._C._distributed_c10d._WorkerServer"(torch._C._distributed_c10d._WorkerServer÷
+
+DebugLevel%torch._C._distributed_c10d.DebugLevel"	enum.EnumHrX
+OFF)torch._C._distributed_c10d.DebugLevel.OFF&
+builtins.ellipsis"builtins.ellipsisrZ
+INFO*torch._C._distributed_c10d.DebugLevel.INFO&
+builtins.ellipsis"builtins.ellipsisr^
+DETAIL,torch._C._distributed_c10d.DebugLevel.DETAIL&
+builtins.ellipsis"builtins.ellipsisç
+ReduceOp#torch._C._distributed_c10d.ReduceOp"builtins.object*Ä
+__init__,torch._C._distributed_c10d.ReduceOp.__init__"
+None*T
+selfJ
+#torch._C._distributed_c10d.ReduceOp"#torch._C._distributed_c10d.ReduceOp*f
+op^
+-torch._C._distributed_c10d.ReduceOp.RedOpType"-torch._C._distributed_c10d.ReduceOp.RedOpTyperé
+SUM'torch._C._distributed_c10d.ReduceOp.SUM^
+-torch._C._distributed_c10d.ReduceOp.RedOpType"-torch._C._distributed_c10d.ReduceOp.RedOpTyperé
+AVG'torch._C._distributed_c10d.ReduceOp.AVG^
+-torch._C._distributed_c10d.ReduceOp.RedOpType"-torch._C._distributed_c10d.ReduceOp.RedOpTyperñ
+PRODUCT+torch._C._distributed_c10d.ReduceOp.PRODUCT^
+-torch._C._distributed_c10d.ReduceOp.RedOpType"-torch._C._distributed_c10d.ReduceOp.RedOpTyperé
+MIN'torch._C._distributed_c10d.ReduceOp.MIN^
+-torch._C._distributed_c10d.ReduceOp.RedOpType"-torch._C._distributed_c10d.ReduceOp.RedOpTyperé
+MAX'torch._C._distributed_c10d.ReduceOp.MAX^
+-torch._C._distributed_c10d.ReduceOp.RedOpType"-torch._C._distributed_c10d.ReduceOp.RedOpTyperê
+BAND(torch._C._distributed_c10d.ReduceOp.BAND^
+-torch._C._distributed_c10d.ReduceOp.RedOpType"-torch._C._distributed_c10d.ReduceOp.RedOpTyperé
+BOR'torch._C._distributed_c10d.ReduceOp.BOR^
+-torch._C._distributed_c10d.ReduceOp.RedOpType"-torch._C._distributed_c10d.ReduceOp.RedOpTyperê
+BXOR(torch._C._distributed_c10d.ReduceOp.BXOR^
+-torch._C._distributed_c10d.ReduceOp.RedOpType"-torch._C._distributed_c10d.ReduceOp.RedOpTyperú
+
+PREMUL_SUM.torch._C._distributed_c10d.ReduceOp.PREMUL_SUM^
+-torch._C._distributed_c10d.ReduceOp.RedOpType"-torch._C._distributed_c10d.ReduceOp.RedOpTyperî
+UNUSED*torch._C._distributed_c10d.ReduceOp.UNUSED^
+-torch._C._distributed_c10d.ReduceOp.RedOpType"-torch._C._distributed_c10d.ReduceOp.RedOpTypeﬁ
+BroadcastOptions+torch._C._distributed_c10d.BroadcastOptions"builtins.objectr^
+rootRank4torch._C._distributed_c10d.BroadcastOptions.rootRank
+builtins.int"builtins.intrb
+
+rootTensor6torch._C._distributed_c10d.BroadcastOptions.rootTensor
+builtins.int"builtins.intrh
+timeout3torch._C._distributed_c10d.BroadcastOptions.timeout(
+datetime.timedelta"datetime.timedeltar^
+asyncOp3torch._C._distributed_c10d.BroadcastOptions.asyncOp
+builtins.bool"builtins.bool…
+AllreduceOptions+torch._C._distributed_c10d.AllreduceOptions"builtins.objectrå
+reduceOp4torch._C._distributed_c10d.AllreduceOptions.reduceOpJ
+#torch._C._distributed_c10d.ReduceOp"#torch._C._distributed_c10d.ReduceOprh
+timeout3torch._C._distributed_c10d.AllreduceOptions.timeout(
+datetime.timedelta"datetime.timedelta~
+AllreduceCoalescedOptions4torch._C._distributed_c10d.AllreduceCoalescedOptions"+torch._C._distributed_c10d.AllreduceOptions˚
+ReduceOptions(torch._C._distributed_c10d.ReduceOptions"builtins.objectrâ
+reduceOp1torch._C._distributed_c10d.ReduceOptions.reduceOpJ
+#torch._C._distributed_c10d.ReduceOp"#torch._C._distributed_c10d.ReduceOpr[
+rootRank1torch._C._distributed_c10d.ReduceOptions.rootRank
+builtins.int"builtins.intr_
+
+rootTensor3torch._C._distributed_c10d.ReduceOptions.rootTensor
+builtins.int"builtins.intre
+timeout0torch._C._distributed_c10d.ReduceOptions.timeout(
+datetime.timedelta"datetime.timedeltaö
+AllgatherOptions+torch._C._distributed_c10d.AllgatherOptions"builtins.objectrh
+timeout3torch._C._distributed_c10d.AllgatherOptions.timeout(
+datetime.timedelta"datetime.timedeltar^
+asyncOp3torch._C._distributed_c10d.AllgatherOptions.asyncOp
+builtins.bool"builtins.boolé
+GatherOptions(torch._C._distributed_c10d.GatherOptions"builtins.objectr[
+rootRank1torch._C._distributed_c10d.GatherOptions.rootRank
+builtins.int"builtins.intre
+timeout0torch._C._distributed_c10d.GatherOptions.timeout(
+datetime.timedelta"datetime.timedelta
+ScatterOptions)torch._C._distributed_c10d.ScatterOptions"builtins.objectr\
+rootRank2torch._C._distributed_c10d.ScatterOptions.rootRank
+builtins.int"builtins.intrf
+timeout1torch._C._distributed_c10d.ScatterOptions.timeout(
+datetime.timedelta"datetime.timedeltar\
+asyncOp1torch._C._distributed_c10d.ScatterOptions.asyncOp
+builtins.bool"builtins.boolΩ
+ReduceScatterOptions/torch._C._distributed_c10d.ReduceScatterOptions"builtins.objectrê
+reduceOp8torch._C._distributed_c10d.ReduceScatterOptions.reduceOpJ
+#torch._C._distributed_c10d.ReduceOp"#torch._C._distributed_c10d.ReduceOprl
+timeout7torch._C._distributed_c10d.ReduceScatterOptions.timeout(
+datetime.timedelta"datetime.timedeltarb
+asyncOp7torch._C._distributed_c10d.ReduceScatterOptions.asyncOp
+builtins.bool"builtins.bool•
+BarrierOptions)torch._C._distributed_c10d.BarrierOptions"builtins.objectré
+
+device_ids4torch._C._distributed_c10d.BarrierOptions.device_idsJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.listr^
+device0torch._C._distributed_c10d.BarrierOptions.device"
+torch._C.device"torch._C.devicerf
+timeout1torch._C._distributed_c10d.BarrierOptions.timeout(
+datetime.timedelta"datetime.timedelta∑
+AllToAllOptions*torch._C._distributed_c10d.AllToAllOptions"builtins.objectrg
+timeout2torch._C._distributed_c10d.AllToAllOptions.timeout(
+datetime.timedelta"datetime.timedeltaÜ
+Store torch._C._distributed_c10d.Store"builtins.object*‘
+set$torch._C._distributed_c10d.Store.set"
+Any*N
+selfD
+ torch._C._distributed_c10d.Store" torch._C._distributed_c10d.Store*%
+key
+builtins.str"builtins.str*'
+value
+builtins.str"builtins.str*ƒ
+get$torch._C._distributed_c10d.Store.get" 
+builtins.bytes"builtins.bytes*N
+selfD
+ torch._C._distributed_c10d.Store" torch._C._distributed_c10d.Store*%
+key
+builtins.str"builtins.str*È
+add$torch._C._distributed_c10d.Store.add"
+builtins.int"builtins.int*N
+selfD
+ torch._C._distributed_c10d.Store" torch._C._distributed_c10d.Store*%
+key
+builtins.str"builtins.str*'
+value
+builtins.int"builtins.int*∑
+compare_set,torch._C._distributed_c10d.Store.compare_set" 
+builtins.bytes"builtins.bytes*N
+selfD
+ torch._C._distributed_c10d.Store" torch._C._distributed_c10d.Store*%
+key
+builtins.str"builtins.str*0
+expected_value
+builtins.str"builtins.str*/
+desired_value
+builtins.str"builtins.str*–
+
+delete_key+torch._C._distributed_c10d.Store.delete_key"
+builtins.bool"builtins.bool*N
+selfD
+ torch._C._distributed_c10d.Store" torch._C._distributed_c10d.Store*%
+key
+builtins.str"builtins.str*£
+num_keys)torch._C._distributed_c10d.Store.num_keys"
+builtins.int"builtins.int*N
+selfD
+ torch._C._distributed_c10d.Store" torch._C._distributed_c10d.Store*À
+set_timeout,torch._C._distributed_c10d.Store.set_timeout"
+Any*N
+selfD
+ torch._C._distributed_c10d.Store" torch._C._distributed_c10d.Store*5
+timeout(
+datetime.timedelta"datetime.timedelta2æ
+wait%torch._C._distributed_c10d.Store.waitÍ
+wait%torch._C._distributed_c10d.Store.wait"
+Any*N
+selfD
+ torch._C._distributed_c10d.Store" torch._C._distributed_c10d.Store*T
+keysJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list0:overloadX°
+wait%torch._C._distributed_c10d.Store.wait"
+Any*N
+selfD
+ torch._C._distributed_c10d.Store" torch._C._distributed_c10d.Store*T
+keysJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*5
+timeout(
+datetime.timedelta"datetime.timedelta0:overloadX…
+	FileStore$torch._C._distributed_c10d.FileStore" torch._C._distributed_c10d.Store*Û
+__init__-torch._C._distributed_c10d.FileStore.__init__"
+None*V
+selfL
+$torch._C._distributed_c10d.FileStore"$torch._C._distributed_c10d.FileStore*&
+path
+builtins.str"builtins.str*.
+
+numWorkers
+builtins.int"builtins.int ò
+	HashStore$torch._C._distributed_c10d.HashStore" torch._C._distributed_c10d.Store*C
+__init__-torch._C._distributed_c10d.HashStore.__init__*
+selfë	
+TCPStore#torch._C._distributed_c10d.TCPStore" torch._C._distributed_c10d.Store*”
+__init__,torch._C._distributed_c10d.TCPStore.__init__"
+None*T
+selfJ
+#torch._C._distributed_c10d.TCPStore"#torch._C._distributed_c10d.TCPStore*+
+	host_name
+builtins.str"builtins.str*&
+port
+builtins.int"builtins.int*V
+
+world_sizeD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None */
+	is_master
+builtins.bool"builtins.bool *7
+timeout(
+datetime.timedelta"datetime.timedelta *6
+wait_for_workers
+builtins.bool"builtins.bool *2
+multi_tenant
+builtins.bool"builtins.bool *\
+master_listen_fdD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *X
+	use_libuvG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *≤
+host(torch._C._distributed_c10d.TCPStore.host"
+builtins.str"builtins.str*T
+selfJ
+#torch._C._distributed_c10d.TCPStore"#torch._C._distributed_c10d.TCPStore0:property`*≤
+port(torch._C._distributed_c10d.TCPStore.port"
+builtins.int"builtins.int*T
+selfJ
+#torch._C._distributed_c10d.TCPStore"#torch._C._distributed_c10d.TCPStore0:property`Ù
+PrefixStore&torch._C._distributed_c10d.PrefixStore" torch._C._distributed_c10d.Store*ú
+__init__/torch._C._distributed_c10d.PrefixStore.__init__"
+None*Z
+selfP
+&torch._C._distributed_c10d.PrefixStore"&torch._C._distributed_c10d.PrefixStore*(
+prefix
+builtins.str"builtins.str*O
+storeD
+ torch._C._distributed_c10d.Store" torch._C._distributed_c10d.Store*˚
+underlying_store7torch._C._distributed_c10d.PrefixStore.underlying_store"D
+ torch._C._distributed_c10d.Store" torch._C._distributed_c10d.Store*Z
+selfP
+&torch._C._distributed_c10d.PrefixStore"&torch._C._distributed_c10d.PrefixStore0:property`Œ
+_ControlCollectives.torch._C._distributed_c10d._ControlCollectives"builtins.object*√
+barrier6torch._C._distributed_c10d._ControlCollectives.barrier"
+None*j
+self`
+.torch._C._distributed_c10d._ControlCollectives".torch._C._distributed_c10d._ControlCollectives*%
+key
+builtins.str"builtins.str*5
+timeout(
+datetime.timedelta"datetime.timedelta*,
+blocking
+builtins.bool"builtins.bool*À
+broadcast_send=torch._C._distributed_c10d._ControlCollectives.broadcast_send"
+None*j
+self`
+.torch._C._distributed_c10d._ControlCollectives".torch._C._distributed_c10d._ControlCollectives*%
+key
+builtins.str"builtins.str*&
+data
+builtins.str"builtins.str*5
+timeout(
+datetime.timedelta"datetime.timedelta*∑
+broadcast_recv=torch._C._distributed_c10d._ControlCollectives.broadcast_recv"
+builtins.str"builtins.str*j
+self`
+.torch._C._distributed_c10d._ControlCollectives".torch._C._distributed_c10d._ControlCollectives*%
+key
+builtins.str"builtins.str*5
+timeout(
+datetime.timedelta"datetime.timedelta*≈
+gather_send:torch._C._distributed_c10d._ControlCollectives.gather_send"
+None*j
+self`
+.torch._C._distributed_c10d._ControlCollectives".torch._C._distributed_c10d._ControlCollectives*%
+key
+builtins.str"builtins.str*&
+data
+builtins.str"builtins.str*5
+timeout(
+datetime.timedelta"datetime.timedelta*±
+gather_recv:torch._C._distributed_c10d._ControlCollectives.gather_recv"
+builtins.str"builtins.str*j
+self`
+.torch._C._distributed_c10d._ControlCollectives".torch._C._distributed_c10d._ControlCollectives*%
+key
+builtins.str"builtins.str*5
+timeout(
+datetime.timedelta"datetime.timedelta*«
+scatter_send;torch._C._distributed_c10d._ControlCollectives.scatter_send"
+None*j
+self`
+.torch._C._distributed_c10d._ControlCollectives".torch._C._distributed_c10d._ControlCollectives*%
+key
+builtins.str"builtins.str*&
+data
+builtins.str"builtins.str*5
+timeout(
+datetime.timedelta"datetime.timedelta*≥
+scatter_recv;torch._C._distributed_c10d._ControlCollectives.scatter_recv"
+builtins.str"builtins.str*j
+self`
+.torch._C._distributed_c10d._ControlCollectives".torch._C._distributed_c10d._ControlCollectives*%
+key
+builtins.str"builtins.str*5
+timeout(
+datetime.timedelta"datetime.timedelta*◊
+
+all_gather9torch._C._distributed_c10d._ControlCollectives.all_gather"
+builtins.str"builtins.str*j
+self`
+.torch._C._distributed_c10d._ControlCollectives".torch._C._distributed_c10d._ControlCollectives*%
+key
+builtins.str"builtins.str*&
+data
+builtins.str"builtins.str*5
+timeout(
+datetime.timedelta"datetime.timedelta*—
+all_sum6torch._C._distributed_c10d._ControlCollectives.all_sum"
+builtins.int"builtins.int*j
+self`
+.torch._C._distributed_c10d._ControlCollectives".torch._C._distributed_c10d._ControlCollectives*%
+key
+builtins.str"builtins.str*&
+data
+builtins.int"builtins.int*5
+timeout(
+datetime.timedelta"datetime.timedeltaŒ
+_StoreCollectives,torch._C._distributed_c10d._StoreCollectives".torch._C._distributed_c10d._ControlCollectives*⁄
+__init__5torch._C._distributed_c10d._StoreCollectives.__init__"
+None*f
+self\
+,torch._C._distributed_c10d._StoreCollectives",torch._C._distributed_c10d._StoreCollectives*O
+storeD
+ torch._C._distributed_c10d.Store" torch._C._distributed_c10d.Store*&
+rank
+builtins.int"builtins.int*,
+
+world_size
+builtins.int"builtins.int∂
+_DistributedBackendOptions5torch._C._distributed_c10d._DistributedBackendOptions"builtins.object*T
+__init__>torch._C._distributed_c10d._DistributedBackendOptions.__init__*
+self2á
+store;torch._C._distributed_c10d._DistributedBackendOptions.storeî
+store;torch._C._distributed_c10d._DistributedBackendOptions.store"D
+ torch._C._distributed_c10d.Store" torch._C._distributed_c10d.Store*x
+selfn
+5torch._C._distributed_c10d._DistributedBackendOptions"5torch._C._distributed_c10d._DistributedBackendOptions0:propertyX`©
+store;torch._C._distributed_c10d._DistributedBackendOptions.store"
+None*x
+selfn
+5torch._C._distributed_c10d._DistributedBackendOptions"5torch._C._distributed_c10d._DistributedBackendOptions*O
+storeD
+ torch._C._distributed_c10d.Store" torch._C._distributed_c10d.Store0:store.setter2Ÿ
+
+group_rank@torch._C._distributed_c10d._DistributedBackendOptions.group_rankˆ
+
+group_rank@torch._C._distributed_c10d._DistributedBackendOptions.group_rank"
+builtins.int"builtins.int*x
+selfn
+5torch._C._distributed_c10d._DistributedBackendOptions"5torch._C._distributed_c10d._DistributedBackendOptions0:propertyX`è
+
+group_rank@torch._C._distributed_c10d._DistributedBackendOptions.group_rank"
+None*x
+selfn
+5torch._C._distributed_c10d._DistributedBackendOptions"5torch._C._distributed_c10d._DistributedBackendOptions*&
+rank
+builtins.int"builtins.int0:group_rank.setter2Ÿ
+
+group_size@torch._C._distributed_c10d._DistributedBackendOptions.group_sizeˆ
+
+group_size@torch._C._distributed_c10d._DistributedBackendOptions.group_size"
+builtins.int"builtins.int*x
+selfn
+5torch._C._distributed_c10d._DistributedBackendOptions"5torch._C._distributed_c10d._DistributedBackendOptions0:propertyX`è
+
+group_size@torch._C._distributed_c10d._DistributedBackendOptions.group_size"
+None*x
+selfn
+5torch._C._distributed_c10d._DistributedBackendOptions"5torch._C._distributed_c10d._DistributedBackendOptions*&
+size
+builtins.int"builtins.int0:group_size.setter2ﬂ
+timeout=torch._C._distributed_c10d._DistributedBackendOptions.timeout¸
+timeout=torch._C._distributed_c10d._DistributedBackendOptions.timeout"(
+datetime.timedelta"datetime.timedelta*x
+selfn
+5torch._C._distributed_c10d._DistributedBackendOptions"5torch._C._distributed_c10d._DistributedBackendOptions0:propertyX`ï
+timeout=torch._C._distributed_c10d._DistributedBackendOptions.timeout"
+None*x
+selfn
+5torch._C._distributed_c10d._DistributedBackendOptions"5torch._C._distributed_c10d._DistributedBackendOptions*5
+timeout(
+datetime.timedelta"datetime.timedelta0:timeout.setter2œ
+group_id>torch._C._distributed_c10d._DistributedBackendOptions.group_idÚ
+group_id>torch._C._distributed_c10d._DistributedBackendOptions.group_id"
+builtins.str"builtins.str*x
+selfn
+5torch._C._distributed_c10d._DistributedBackendOptions"5torch._C._distributed_c10d._DistributedBackendOptions0:propertyX`ç
+group_id>torch._C._distributed_c10d._DistributedBackendOptions.group_id"
+None*x
+selfn
+5torch._C._distributed_c10d._DistributedBackendOptions"5torch._C._distributed_c10d._DistributedBackendOptions**
+group_id
+builtins.str"builtins.str0:group_id.setter2É
+global_ranks_in_groupKtorch._C._distributed_c10d._DistributedBackendOptions.global_ranks_in_group∫
+global_ranks_in_groupKtorch._C._distributed_c10d._DistributedBackendOptions.global_ranks_in_group"J
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*x
+selfn
+5torch._C._distributed_c10d._DistributedBackendOptions"5torch._C._distributed_c10d._DistributedBackendOptions0:propertyX`ﬂ
+global_ranks_in_groupKtorch._C._distributed_c10d._DistributedBackendOptions.global_ranks_in_group"
+None*x
+selfn
+5torch._C._distributed_c10d._DistributedBackendOptions"5torch._C._distributed_c10d._DistributedBackendOptions*U
+ranksJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list0:global_ranks_in_group.setterß
+Worktorch._C._distributed_c10d.Work"builtins.object*™
+is_completed,torch._C._distributed_c10d.Work.is_completed"
+builtins.bool"builtins.bool*L
+selfB
+torch._C._distributed_c10d.Work"torch._C._distributed_c10d.Work*¶
+
+is_success*torch._C._distributed_c10d.Work.is_success"
+builtins.bool"builtins.bool*L
+selfB
+torch._C._distributed_c10d.Work"torch._C._distributed_c10d.Work*ç
+	exception)torch._C._distributed_c10d.Work.exception"
+Any*L
+selfB
+torch._C._distributed_c10d.Work"torch._C._distributed_c10d.Work*”
+wait$torch._C._distributed_c10d.Work.wait"
+builtins.bool"builtins.bool*L
+selfB
+torch._C._distributed_c10d.Work"torch._C._distributed_c10d.Work*7
+timeout(
+datetime.timedelta"datetime.timedelta *¬
+
+get_future*torch._C._distributed_c10d.Work.get_future":
+torch.futures.Future[Any]
+Any"torch.futures.Future*L
+selfB
+torch._C._distributed_c10d.Work"torch._C._distributed_c10d.Work*¶
+source_rank+torch._C._distributed_c10d.Work.source_rank"
+builtins.int"builtins.int*L
+selfB
+torch._C._distributed_c10d.Work"torch._C._distributed_c10d.Work*®
+_source_rank,torch._C._distributed_c10d.Work._source_rank"
+builtins.int"builtins.int*L
+selfB
+torch._C._distributed_c10d.Work"torch._C._distributed_c10d.Work*‚
+result&torch._C._distributed_c10d.Work.result"b
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*L
+selfB
+torch._C._distributed_c10d.Work"torch._C._distributed_c10d.Work*D
+synchronize+torch._C._distributed_c10d.Work.synchronize*
+self*¨
+boxed%torch._C._distributed_c10d.Work.boxed".
+torch._C.ScriptObject"torch._C.ScriptObject*L
+selfB
+torch._C._distributed_c10d.Work"torch._C._distributed_c10d.Work*Ω
+unbox%torch._C._distributed_c10d.Work.unbox"B
+torch._C._distributed_c10d.Work"torch._C._distributed_c10d.Work*7
+obj.
+torch._C.ScriptObject"torch._C.ScriptObject0:staticmethodhõ
+
+Backend"torch._C._distributed_c10d.Backend"builtins.object*Â
+__init__+torch._C._distributed_c10d.Backend.__init__"
+None*R
+selfH
+"torch._C._distributed_c10d.Backend""torch._C._distributed_c10d.Backend*&
+rank
+builtins.int"builtins.int*&
+size
+builtins.int"builtins.int*Õ
+supports_splitting5torch._C._distributed_c10d.Backend.supports_splitting"
+builtins.bool"builtins.bool*R
+selfH
+"torch._C._distributed_c10d.Backend""torch._C._distributed_c10d.Backend0:property`*°
+rank'torch._C._distributed_c10d.Backend.rank"
+builtins.int"builtins.int*R
+selfH
+"torch._C._distributed_c10d.Backend""torch._C._distributed_c10d.Backend*°
+size'torch._C._distributed_c10d.Backend.size"
+builtins.int"builtins.int*R
+selfH
+"torch._C._distributed_c10d.Backend""torch._C._distributed_c10d.Backend*ñ
+eager_connect_single_device>torch._C._distributed_c10d.Backend.eager_connect_single_device"
+None*R
+selfH
+"torch._C._distributed_c10d.Backend""torch._C._distributed_c10d.Backend*Y
+deviceM
+Union[torch._C.device,None]"
+torch._C.device"torch._C.device
+None*¡
+_set_sequence_number_for_groupAtorch._C._distributed_c10d.Backend._set_sequence_number_for_group"
+None*R
+selfH
+"torch._C._distributed_c10d.Backend""torch._C._distributed_c10d.Backendãô
+ProcessGroup'torch._C._distributed_c10d.ProcessGroup"builtins.object*∂
+__init__0torch._C._distributed_c10d.ProcessGroup.__init__"
+None*\
+selfR
+'torch._C._distributed_c10d.ProcessGroup"'torch._C._distributed_c10d.ProcessGroup*O
+storeD
+ torch._C._distributed_c10d.Store" torch._C._distributed_c10d.Store*&
+rank
+builtins.int"builtins.int*&
+size
+builtins.int"builtins.int*o
+optionsb
+/torch._C._distributed_c10d.ProcessGroup.Options"/torch._C._distributed_c10d.ProcessGroup.Options*∞
+rank,torch._C._distributed_c10d.ProcessGroup.rank"
+builtins.int"builtins.int*\
+selfR
+'torch._C._distributed_c10d.ProcessGroup"'torch._C._distributed_c10d.ProcessGroup*∞
+size,torch._C._distributed_c10d.ProcessGroup.size"
+builtins.int"builtins.int*\
+selfR
+'torch._C._distributed_c10d.ProcessGroup"'torch._C._distributed_c10d.ProcessGroup*˙
+allreduce_coalesced;torch._C._distributed_c10d.ProcessGroup.allreduce_coalesced"B
+torch._C._distributed_c10d.Work"torch._C._distributed_c10d.Work*\
+selfR
+'torch._C._distributed_c10d.ProcessGroup"'torch._C._distributed_c10d.ProcessGroup*o
+tensorsb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*
+opts
+Any *∂
+reduce_scatter_tensor_coalescedGtorch._C._distributed_c10d.ProcessGroup.reduce_scatter_tensor_coalesced"B
+torch._C._distributed_c10d.Work"torch._C._distributed_c10d.Work*\
+selfR
+'torch._C._distributed_c10d.ProcessGroup"'torch._C._distributed_c10d.ProcessGroup*u
+outputTensorsb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*t
+inputTensorsb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*∫
+opts≠
+;Union[torch._C._distributed_c10d.ReduceScatterOptions,None]b
+/torch._C._distributed_c10d.ReduceScatterOptions"/torch._C._distributed_c10d.ReduceScatterOptions
+None *Ù
+_allgather_base7torch._C._distributed_c10d.ProcessGroup._allgather_base"B
+torch._C._distributed_c10d.Work"torch._C._distributed_c10d.Work*\
+selfR
+'torch._C._distributed_c10d.ProcessGroup"'torch._C._distributed_c10d.ProcessGroup*8
+output,
+torch._tensor.Tensor"torch._tensor.Tensor*7
+input,
+torch._tensor.Tensor"torch._tensor.Tensor*
+opts
+Any *∫
+allgather_coalesced;torch._C._distributed_c10d.ProcessGroup.allgather_coalesced"B
+torch._C._distributed_c10d.Work"torch._C._distributed_c10d.Work*\
+selfR
+'torch._C._distributed_c10d.ProcessGroup"'torch._C._distributed_c10d.ProcessGroup*∫
+output_listsß
+2builtins.list[builtins.list[torch._tensor.Tensor]]b
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list"builtins.list*r
+
+input_listb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*
+opts
+Any *ã
+allgather_into_tensor_coalescedGtorch._C._distributed_c10d.ProcessGroup.allgather_into_tensor_coalesced"B
+torch._C._distributed_c10d.Work"torch._C._distributed_c10d.Work*\
+selfR
+'torch._C._distributed_c10d.ProcessGroup"'torch._C._distributed_c10d.ProcessGroup*t
+output_listsb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*r
+
+input_listb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*
+opts
+Any *∞
+_reduce_scatter_base<torch._C._distributed_c10d.ProcessGroup._reduce_scatter_base"B
+torch._C._distributed_c10d.Work"torch._C._distributed_c10d.Work*\
+selfR
+'torch._C._distributed_c10d.ProcessGroup"'torch._C._distributed_c10d.ProcessGroup*>
+outputTensor,
+torch._tensor.Tensor"torch._tensor.Tensor*=
+inputTensor,
+torch._tensor.Tensor"torch._tensor.Tensor*∏
+opts≠
+;Union[torch._C._distributed_c10d.ReduceScatterOptions,None]b
+/torch._C._distributed_c10d.ReduceScatterOptions"/torch._C._distributed_c10d.ReduceScatterOptions
+None*ô
+send,torch._C._distributed_c10d.ProcessGroup.send"B
+torch._C._distributed_c10d.Work"torch._C._distributed_c10d.Work*\
+selfR
+'torch._C._distributed_c10d.ProcessGroup"'torch._C._distributed_c10d.ProcessGroup*o
+tensorsb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*)
+dstRank
+builtins.int"builtins.int*%
+tag
+builtins.int"builtins.int*ô
+recv,torch._C._distributed_c10d.ProcessGroup.recv"B
+torch._C._distributed_c10d.Work"torch._C._distributed_c10d.Work*\
+selfR
+'torch._C._distributed_c10d.ProcessGroup"'torch._C._distributed_c10d.ProcessGroup*o
+tensorsb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*)
+srcRank
+builtins.int"builtins.int*%
+tag
+builtins.int"builtins.int*Ç
+recv_anysource6torch._C._distributed_c10d.ProcessGroup.recv_anysource"B
+torch._C._distributed_c10d.Work"torch._C._distributed_c10d.Work*\
+selfR
+'torch._C._distributed_c10d.ProcessGroup"'torch._C._distributed_c10d.ProcessGroup*o
+tensorsb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*%
+tag
+builtins.int"builtins.int*Ò
+barrier/torch._C._distributed_c10d.ProcessGroup.barrier"B
+torch._C._distributed_c10d.Work"torch._C._distributed_c10d.Work*\
+selfR
+'torch._C._distributed_c10d.ProcessGroup"'torch._C._distributed_c10d.ProcessGroup*
+opts
+Any *ƒ
+boxed-torch._C._distributed_c10d.ProcessGroup.boxed".
+torch._C.ScriptObject"torch._C.ScriptObject*\
+selfR
+'torch._C._distributed_c10d.ProcessGroup"'torch._C._distributed_c10d.ProcessGroup*’
+unbox-torch._C._distributed_c10d.ProcessGroup.unbox"R
+'torch._C._distributed_c10d.ProcessGroup"'torch._C._distributed_c10d.ProcessGroup*7
+obj.
+torch._C.ScriptObject"torch._C.ScriptObject0:staticmethodh*Ê
+_start_coalescing9torch._C._distributed_c10d.ProcessGroup._start_coalescing"
+None*\
+selfR
+'torch._C._distributed_c10d.ProcessGroup"'torch._C._distributed_c10d.ProcessGroup*.
+device"
+torch._C.device"torch._C.device*ú
+_end_coalescing7torch._C._distributed_c10d.ProcessGroup._end_coalescing"B
+torch._C._distributed_c10d.Work"torch._C._distributed_c10d.Work*\
+selfR
+'torch._C._distributed_c10d.ProcessGroup"'torch._C._distributed_c10d.ProcessGroup*.
+device"
+torch._C.device"torch._C.device* 
+_get_backend_name9torch._C._distributed_c10d.ProcessGroup._get_backend_name"
+builtins.str"builtins.str*\
+selfR
+'torch._C._distributed_c10d.ProcessGroup"'torch._C._distributed_c10d.ProcessGroup*º
+_backend_id3torch._C._distributed_c10d.ProcessGroup._backend_id"
+builtins.int"builtins.int*\
+selfR
+'torch._C._distributed_c10d.ProcessGroup"'torch._C._distributed_c10d.ProcessGroup*|
+backend_typej
+3torch._C._distributed_c10d.ProcessGroup.BackendType"3torch._C._distributed_c10d.ProcessGroup.BackendType*á
+_device_types5torch._C._distributed_c10d.ProcessGroup._device_types"S
+builtins.list[torch._C.device]"
+torch._C.device"torch._C.device"builtins.list*\
+selfR
+'torch._C._distributed_c10d.ProcessGroup"'torch._C._distributed_c10d.ProcessGroup0:property`*ú
+_get_backend4torch._C._distributed_c10d.ProcessGroup._get_backend"H
+"torch._C._distributed_c10d.Backend""torch._C._distributed_c10d.Backend*\
+selfR
+'torch._C._distributed_c10d.ProcessGroup"'torch._C._distributed_c10d.ProcessGroup*.
+device"
+torch._C.device"torch._C.device*˚
+_register_backend9torch._C._distributed_c10d.ProcessGroup._register_backend"
+None*\
+selfR
+'torch._C._distributed_c10d.ProcessGroup"'torch._C._distributed_c10d.ProcessGroup*.
+device"
+torch._C.device"torch._C.device*|
+backend_typej
+3torch._C._distributed_c10d.ProcessGroup.BackendType"3torch._C._distributed_c10d.ProcessGroup.BackendType*î
+backendÜ
+.Union[torch._C._distributed_c10d.Backend,None]H
+"torch._C._distributed_c10d.Backend""torch._C._distributed_c10d.Backend
+None*⁄
+_set_group_name7torch._C._distributed_c10d.ProcessGroup._set_group_name"
+None*\
+selfR
+'torch._C._distributed_c10d.ProcessGroup"'torch._C._distributed_c10d.ProcessGroup*&
+name
+builtins.str"builtins.str*⁄
+_set_group_desc7torch._C._distributed_c10d.ProcessGroup._set_group_desc"
+None*\
+selfR
+'torch._C._distributed_c10d.ProcessGroup"'torch._C._distributed_c10d.ProcessGroup*&
+desc
+builtins.str"builtins.str*∞
+name,torch._C._distributed_c10d.ProcessGroup.name"
+builtins.str"builtins.str*\
+selfR
+'torch._C._distributed_c10d.ProcessGroup"'torch._C._distributed_c10d.ProcessGroup*æ
+
+_has_hooks2torch._C._distributed_c10d.ProcessGroup._has_hooks"
+builtins.bool"builtins.bool*\
+selfR
+'torch._C._distributed_c10d.ProcessGroup"'torch._C._distributed_c10d.ProcessGroup*¬
+_wait_for_pending_works?torch._C._distributed_c10d.ProcessGroup._wait_for_pending_works"
+None*\
+selfR
+'torch._C._distributed_c10d.ProcessGroup"'torch._C._distributed_c10d.ProcessGroup*–
+_set_sequence_number_for_groupFtorch._C._distributed_c10d.ProcessGroup._set_sequence_number_for_group"
+None*\
+selfR
+'torch._C._distributed_c10d.ProcessGroup"'torch._C._distributed_c10d.ProcessGroup* 
+
+group_name2torch._C._distributed_c10d.ProcessGroup.group_name"
+builtins.str"builtins.str*\
+selfR
+'torch._C._distributed_c10d.ProcessGroup"'torch._C._distributed_c10d.ProcessGroup0:property`* 
+
+group_desc2torch._C._distributed_c10d.ProcessGroup.group_desc"
+builtins.str"builtins.str*\
+selfR
+'torch._C._distributed_c10d.ProcessGroup"'torch._C._distributed_c10d.ProcessGroup0:property`2à
+	broadcast1torch._C._distributed_c10d.ProcessGroup.broadcastÙ
+	broadcast1torch._C._distributed_c10d.ProcessGroup.broadcast"B
+torch._C._distributed_c10d.Work"torch._C._distributed_c10d.Work*\
+selfR
+'torch._C._distributed_c10d.ProcessGroup"'torch._C._distributed_c10d.ProcessGroup*o
+tensorsb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*
+opts
+Any 0:overloadX–
+	broadcast1torch._C._distributed_c10d.ProcessGroup.broadcast"B
+torch._C._distributed_c10d.Work"torch._C._distributed_c10d.Work*\
+selfR
+'torch._C._distributed_c10d.ProcessGroup"'torch._C._distributed_c10d.ProcessGroup*8
+tensor,
+torch._tensor.Tensor"torch._tensor.Tensor*&
+root
+builtins.int"builtins.int0:overloadX2ª	
+	allreduce1torch._C._distributed_c10d.ProcessGroup.allreduce«
+	allreduce1torch._C._distributed_c10d.ProcessGroup.allreduce"B
+torch._C._distributed_c10d.Work"torch._C._distributed_c10d.Work*\
+selfR
+'torch._C._distributed_c10d.ProcessGroup"'torch._C._distributed_c10d.ProcessGroup*o
+tensorsb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*f
+optsZ
++torch._C._distributed_c10d.AllreduceOptions"+torch._C._distributed_c10d.AllreduceOptions 0:overloadXÚ
+	allreduce1torch._C._distributed_c10d.ProcessGroup.allreduce"B
+torch._C._distributed_c10d.Work"torch._C._distributed_c10d.Work*\
+selfR
+'torch._C._distributed_c10d.ProcessGroup"'torch._C._distributed_c10d.ProcessGroup*o
+tensorsb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*
+op
+Any 0:overloadXª
+	allreduce1torch._C._distributed_c10d.ProcessGroup.allreduce"B
+torch._C._distributed_c10d.Work"torch._C._distributed_c10d.Work*\
+selfR
+'torch._C._distributed_c10d.ProcessGroup"'torch._C._distributed_c10d.ProcessGroup*8
+tensor,
+torch._tensor.Tensor"torch._tensor.Tensor*
+op
+Any 0:overloadX2â
+reduce.torch._C._distributed_c10d.ProcessGroup.reduceÓ
+reduce.torch._C._distributed_c10d.ProcessGroup.reduce"B
+torch._C._distributed_c10d.Work"torch._C._distributed_c10d.Work*\
+selfR
+'torch._C._distributed_c10d.ProcessGroup"'torch._C._distributed_c10d.ProcessGroup*o
+tensorsb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*
+opts
+Any 0:overloadX›
+reduce.torch._C._distributed_c10d.ProcessGroup.reduce"B
+torch._C._distributed_c10d.Work"torch._C._distributed_c10d.Work*\
+selfR
+'torch._C._distributed_c10d.ProcessGroup"'torch._C._distributed_c10d.ProcessGroup*8
+tensor,
+torch._tensor.Tensor"torch._tensor.Tensor*&
+root
+builtins.int"builtins.int*
+op
+Any 0:overloadX2£
+	allgather1torch._C._distributed_c10d.ProcessGroup.allgatherπ
+	allgather1torch._C._distributed_c10d.ProcessGroup.allgather"B
+torch._C._distributed_c10d.Work"torch._C._distributed_c10d.Work*\
+selfR
+'torch._C._distributed_c10d.ProcessGroup"'torch._C._distributed_c10d.ProcessGroup*º
+output_tensorsß
+2builtins.list[builtins.list[torch._tensor.Tensor]]b
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list"builtins.list*u
+input_tensorsb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*
+opts
+Any 0:overloadX¶
+	allgather1torch._C._distributed_c10d.ProcessGroup.allgather"B
+torch._C._distributed_c10d.Work"torch._C._distributed_c10d.Work*\
+selfR
+'torch._C._distributed_c10d.ProcessGroup"'torch._C._distributed_c10d.ProcessGroup*v
+output_tensorsb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*>
+input_tensor,
+torch._tensor.Tensor"torch._tensor.Tensor0:overloadX2π
+gather.torch._C._distributed_c10d.ProcessGroup.gather≥
+gather.torch._C._distributed_c10d.ProcessGroup.gather"B
+torch._C._distributed_c10d.Work"torch._C._distributed_c10d.Work*\
+selfR
+'torch._C._distributed_c10d.ProcessGroup"'torch._C._distributed_c10d.ProcessGroup*º
+output_tensorsß
+2builtins.list[builtins.list[torch._tensor.Tensor]]b
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list"builtins.list*u
+input_tensorsb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*
+opts
+Any 0:overloadX»
+gather.torch._C._distributed_c10d.ProcessGroup.gather"B
+torch._C._distributed_c10d.Work"torch._C._distributed_c10d.Work*\
+selfR
+'torch._C._distributed_c10d.ProcessGroup"'torch._C._distributed_c10d.ProcessGroup*v
+output_tensorsb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*>
+input_tensor,
+torch._tensor.Tensor"torch._tensor.Tensor*&
+root
+builtins.int"builtins.int0:overloadX2ø
+scatter/torch._C._distributed_c10d.ProcessGroup.scatterµ
+scatter/torch._C._distributed_c10d.ProcessGroup.scatter"B
+torch._C._distributed_c10d.Work"torch._C._distributed_c10d.Work*\
+selfR
+'torch._C._distributed_c10d.ProcessGroup"'torch._C._distributed_c10d.ProcessGroup*v
+output_tensorsb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*ª
+input_tensorsß
+2builtins.list[builtins.list[torch._tensor.Tensor]]b
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list"builtins.list*
+opts
+Any 0:overloadX 
+scatter/torch._C._distributed_c10d.ProcessGroup.scatter"B
+torch._C._distributed_c10d.Work"torch._C._distributed_c10d.Work*\
+selfR
+'torch._C._distributed_c10d.ProcessGroup"'torch._C._distributed_c10d.ProcessGroup*?
+output_tensor,
+torch._tensor.Tensor"torch._tensor.Tensor*u
+input_tensorsb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*&
+root
+builtins.int"builtins.int0:overloadX2¡
+reduce_scatter6torch._C._distributed_c10d.ProcessGroup.reduce_scatter√
+reduce_scatter6torch._C._distributed_c10d.ProcessGroup.reduce_scatter"B
+torch._C._distributed_c10d.Work"torch._C._distributed_c10d.Work*\
+selfR
+'torch._C._distributed_c10d.ProcessGroup"'torch._C._distributed_c10d.ProcessGroup*v
+output_tensorsb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*ª
+input_tensorsß
+2builtins.list[builtins.list[torch._tensor.Tensor]]b
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list"builtins.list*
+opts
+Any 0:overloadX∞
+reduce_scatter6torch._C._distributed_c10d.ProcessGroup.reduce_scatter"B
+torch._C._distributed_c10d.Work"torch._C._distributed_c10d.Work*\
+selfR
+'torch._C._distributed_c10d.ProcessGroup"'torch._C._distributed_c10d.ProcessGroup*@
+output_tensors,
+torch._tensor.Tensor"torch._tensor.Tensor*t
+input_tensorb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list0:overloadX2œ	
+alltoall_base5torch._C._distributed_c10d.ProcessGroup.alltoall_base”
+alltoall_base5torch._C._distributed_c10d.ProcessGroup.alltoall_base"B
+torch._C._distributed_c10d.Work"torch._C._distributed_c10d.Work*\
+selfR
+'torch._C._distributed_c10d.ProcessGroup"'torch._C._distributed_c10d.ProcessGroup*?
+output_tensor,
+torch._tensor.Tensor"torch._tensor.Tensor*>
+input_tensor,
+torch._tensor.Tensor"torch._tensor.Tensor*b
+output_split_sizesJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*a
+input_split_sizesJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*
+opts
+Any 0:overloadX∞
+alltoall_base5torch._C._distributed_c10d.ProcessGroup.alltoall_base"B
+torch._C._distributed_c10d.Work"torch._C._distributed_c10d.Work*\
+selfR
+'torch._C._distributed_c10d.ProcessGroup"'torch._C._distributed_c10d.ProcessGroup*8
+output,
+torch._tensor.Tensor"torch._tensor.Tensor*7
+input,
+torch._tensor.Tensor"torch._tensor.Tensor*b
+output_split_sizesJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*a
+input_split_sizesJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list0:overloadX2˚
+alltoall0torch._C._distributed_c10d.ProcessGroup.alltoallÓ
+alltoall0torch._C._distributed_c10d.ProcessGroup.alltoall"B
+torch._C._distributed_c10d.Work"torch._C._distributed_c10d.Work*\
+selfR
+'torch._C._distributed_c10d.ProcessGroup"'torch._C._distributed_c10d.ProcessGroup*u
+output_tensorb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*t
+input_tensorb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*
+opts
+Any 0:overloadXÀ
+alltoall0torch._C._distributed_c10d.ProcessGroup.alltoall"B
+torch._C._distributed_c10d.Work"torch._C._distributed_c10d.Work*\
+selfR
+'torch._C._distributed_c10d.ProcessGroup"'torch._C._distributed_c10d.ProcessGroup*n
+outputb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*m
+inputb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list0:overloadX2˛
+bound_device_id7torch._C._distributed_c10d.ProcessGroup.bound_device_idá
+bound_device_id7torch._C._distributed_c10d.ProcessGroup.bound_device_id"M
+Union[torch._C.device,None]"
+torch._C.device"torch._C.device
+None*\
+selfR
+'torch._C._distributed_c10d.ProcessGroup"'torch._C._distributed_c10d.ProcessGroup0:propertyX`ß
+bound_device_id7torch._C._distributed_c10d.ProcessGroup.bound_device_id"
+None*\
+selfR
+'torch._C._distributed_c10d.ProcessGroup"'torch._C._distributed_c10d.ProcessGroup*Y
+deviceM
+Union[torch._C.device,None]"
+torch._C.device"torch._C.device
+None0:bound_device_id.settert
+ProcessGroupRoundRobin1torch._C._distributed_c10d.ProcessGroupRoundRobin"'torch._C._distributed_c10d.ProcessGroup§	
+ProcessGroupGloo+torch._C._distributed_c10d.ProcessGroupGloo""torch._C._distributed_c10d.Backend*à
+__init__4torch._C._distributed_c10d.ProcessGroupGloo.__init__"
+None*d
+selfZ
++torch._C._distributed_c10d.ProcessGroupGloo"+torch._C._distributed_c10d.ProcessGroupGloo*O
+storeD
+ torch._C._distributed_c10d.Store" torch._C._distributed_c10d.Store*&
+rank
+builtins.int"builtins.int*&
+size
+builtins.int"builtins.int*5
+timeout(
+datetime.timedelta"datetime.timedelta*˘
+create_device9torch._C._distributed_c10d.ProcessGroupGloo.create_device"h
+2torch._C._distributed_c10d.ProcessGroupGloo.Device"2torch._C._distributed_c10d.ProcessGroupGloo.Device*
+hostname
+Any *
+	interface
+Any 0:staticmethodh*÷
+create_default_deviceAtorch._C._distributed_c10d.ProcessGroupGloo.create_default_device"h
+2torch._C._distributed_c10d.ProcessGroupGloo.Device"2torch._C._distributed_c10d.ProcessGroupGloo.Device0:staticmethodh*ﬁ
+_set_default_timeout@torch._C._distributed_c10d.ProcessGroupGloo._set_default_timeout"
+None*d
+selfZ
++torch._C._distributed_c10d.ProcessGroupGloo"+torch._C._distributed_c10d.ProcessGroupGloo*
+timeout
+Any˙
+_ProcessGroupWrapper/torch._C._distributed_c10d._ProcessGroupWrapper""torch._C._distributed_c10d.Backend*˜
+__init__8torch._C._distributed_c10d._ProcessGroupWrapper.__init__"
+None*l
+selfb
+/torch._C._distributed_c10d._ProcessGroupWrapper"/torch._C._distributed_c10d._ProcessGroupWrapper*P
+pgH
+"torch._C._distributed_c10d.Backend""torch._C._distributed_c10d.Backend*g
+gloo_pgZ
++torch._C._distributed_c10d.ProcessGroupGloo"+torch._C._distributed_c10d.ProcessGroupGloorí
+
+wrapped_pg:torch._C._distributed_c10d._ProcessGroupWrapper.wrapped_pgH
+"torch._C._distributed_c10d.Backend""torch._C._distributed_c10d.Backend¡
+ProcessGroupNCCL+torch._C._distributed_c10d.ProcessGroupNCCL""torch._C._distributed_c10d.Backend*à
+__init__4torch._C._distributed_c10d.ProcessGroupNCCL.__init__"
+None*d
+selfZ
++torch._C._distributed_c10d.ProcessGroupNCCL"+torch._C._distributed_c10d.ProcessGroupNCCL*O
+storeD
+ torch._C._distributed_c10d.Store" torch._C._distributed_c10d.Store*&
+rank
+builtins.int"builtins.int*&
+size
+builtins.int"builtins.int*5
+timeout(
+datetime.timedelta"datetime.timedelta*∏
+_group_start8torch._C._distributed_c10d.ProcessGroupNCCL._group_start"
+None*d
+selfZ
++torch._C._distributed_c10d.ProcessGroupNCCL"+torch._C._distributed_c10d.ProcessGroupNCCL*¥
+
+_group_end6torch._C._distributed_c10d.ProcessGroupNCCL._group_end"
+None*d
+selfZ
++torch._C._distributed_c10d.ProcessGroupNCCL"+torch._C._distributed_c10d.ProcessGroupNCCL*ﬁ
+_set_default_timeout@torch._C._distributed_c10d.ProcessGroupNCCL._set_default_timeout"
+None*d
+selfZ
++torch._C._distributed_c10d.ProcessGroupNCCL"+torch._C._distributed_c10d.ProcessGroupNCCL*
+timeout
+Any*≤
+	_shutdown5torch._C._distributed_c10d.ProcessGroupNCCL._shutdown"
+None*d
+selfZ
++torch._C._distributed_c10d.ProcessGroupNCCL"+torch._C._distributed_c10d.ProcessGroupNCCL*»
+uid/torch._C._distributed_c10d.ProcessGroupNCCL.uid"
+builtins.int"builtins.int*d
+selfZ
++torch._C._distributed_c10d.ProcessGroupNCCL"+torch._C._distributed_c10d.ProcessGroupNCCL0:property`È
+ProcessGroupUCC*torch._C._distributed_c10d.ProcessGroupUCC""torch._C._distributed_c10d.Backend*Ö
+__init__3torch._C._distributed_c10d.ProcessGroupUCC.__init__"
+None*b
+selfX
+*torch._C._distributed_c10d.ProcessGroupUCC"*torch._C._distributed_c10d.ProcessGroupUCC*O
+storeD
+ torch._C._distributed_c10d.Store" torch._C._distributed_c10d.Store*&
+rank
+builtins.int"builtins.int*&
+size
+builtins.int"builtins.int*5
+timeout(
+datetime.timedelta"datetime.timedeltaå
+ProcessGroupMPI*torch._C._distributed_c10d.ProcessGroupMPI""torch._C._distributed_c10d.Backend*ß
+__init__3torch._C._distributed_c10d.ProcessGroupMPI.__init__"
+None*b
+selfX
+*torch._C._distributed_c10d.ProcessGroupMPI"*torch._C._distributed_c10d.ProcessGroupMPI*&
+rank
+builtins.int"builtins.int*&
+size
+builtins.int"builtins.int*(
+pgComm
+builtins.int"builtins.int*˛
+create1torch._C._distributed_c10d.ProcessGroupMPI.create"X
+*torch._C._distributed_c10d.ProcessGroupMPI"*torch._C._distributed_c10d.ProcessGroupMPI*U
+ranksJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list0:staticmethodh˚
+ProcessGroupCudaP2P.torch._C._distributed_c10d.ProcessGroupCudaP2P""torch._C._distributed_c10d.Backend*Ÿ
+__init__7torch._C._distributed_c10d.ProcessGroupCudaP2P.__init__"
+None*j
+self`
+.torch._C._distributed_c10d.ProcessGroupCudaP2P".torch._C._distributed_c10d.ProcessGroupCudaP2P*O
+storeD
+ torch._C._distributed_c10d.Store" torch._C._distributed_c10d.Store*&
+rank
+builtins.int"builtins.int*&
+size
+builtins.int"builtins.int*}
+optionsp
+6torch._C._distributed_c10d.ProcessGroupCudaP2P.Options"6torch._C._distributed_c10d.ProcessGroupCudaP2P.Options*ﬂ
+is_p2p_available?torch._C._distributed_c10d.ProcessGroupCudaP2P.is_p2p_available"
+builtins.bool"builtins.bool*j
+self`
+.torch._C._distributed_c10d.ProcessGroupCudaP2P".torch._C._distributed_c10d.ProcessGroupCudaP2P*€
+get_buffer_size>torch._C._distributed_c10d.ProcessGroupCudaP2P.get_buffer_size"
+builtins.int"builtins.int*j
+self`
+.torch._C._distributed_c10d.ProcessGroupCudaP2P".torch._C._distributed_c10d.ProcessGroupCudaP2P*„
+stream5torch._C._distributed_c10d.ProcessGroupCudaP2P.stream"6
+torch.cuda.streams.Stream"torch.cuda.streams.Stream*j
+self`
+.torch._C._distributed_c10d.ProcessGroupCudaP2P".torch._C._distributed_c10d.ProcessGroupCudaP2P*á
+intra_node_barrierAtorch._C._distributed_c10d.ProcessGroupCudaP2P.intra_node_barrier"B
+torch._C._distributed_c10d.Work"torch._C._distributed_c10d.Work*j
+self`
+.torch._C._distributed_c10d.ProcessGroupCudaP2P".torch._C._distributed_c10d.ProcessGroupCudaP2P*≈
+get_p2p_buffer=torch._C._distributed_c10d.ProcessGroupCudaP2P.get_p2p_buffer",
+torch._tensor.Tensor"torch._tensor.Tensor*j
+self`
+.torch._C._distributed_c10d.ProcessGroupCudaP2P".torch._C._distributed_c10d.ProcessGroupCudaP2P*&
+rank
+builtins.int"builtins.int*)
+sizes
+torch._C.Size"torch._C.Size*+
+dtype 
+torch._C.dtype"torch._C.dtype*Z
+storage_offsetD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *ª
+	_shutdown8torch._C._distributed_c10d.ProcessGroupCudaP2P._shutdown"
+None*j
+self`
+.torch._C._distributed_c10d.ProcessGroupCudaP2P".torch._C._distributed_c10d.ProcessGroupCudaP2P—
+_register_comm_hook.torch._C._distributed_c10d._register_comm_hook"
+Any*U
+reducerH
+"torch._C._distributed_c10d.Reducer""torch._C._distributed_c10d.Reducer*
+state
+Any*
+	comm_hook
+Any´
+_register_builtin_comm_hook6torch._C._distributed_c10d._register_builtin_comm_hook"
+Any*U
+reducerH
+"torch._C._distributed_c10d.Reducer""torch._C._distributed_c10d.Reducer*t
+comm_hook_type`
+.torch._C._distributed_c10d.BuiltinCommHookType".torch._C._distributed_c10d.BuiltinCommHookTypeq
+_set_global_rank+torch._C._distributed_c10d._set_global_rank"
+None*&
+rank
+builtins.int"builtins.int»
+_hash_tensors(torch._C._distributed_c10d._hash_tensors"
+builtins.int"builtins.int*o
+tensorsb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list=
+get_debug_level*torch._C._distributed_c10d.get_debug_level=
+set_debug_level*torch._C._distributed_c10d.set_debug_levelO
+set_debug_level_from_env3torch._C._distributed_c10d.set_debug_level_from_env
+_round_robin_process_groups6torch._C._distributed_c10d._round_robin_process_groups"f
+1torch._C._distributed_c10d.ProcessGroupRoundRobin"1torch._C._distributed_c10d.ProcessGroupRoundRobin*∞
+process_groupsõ
+6builtins.list[torch._C._distributed_c10d.ProcessGroup]R
+'torch._C._distributed_c10d.ProcessGroup"'torch._C._distributed_c10d.ProcessGroup"builtins.list±
+"_compute_bucket_assignment_by_size=torch._C._distributed_c10d._compute_bucket_assignment_by_size"ß
+MTuple[builtins.list[builtins.list[builtins.int]],builtins.list[builtins.int]]á
+*builtins.list[builtins.list[builtins.int]]J
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list"builtins.listJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*o
+tensorsb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*b
+bucket_size_limitsJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*k
+expect_sparse_gradientM
+builtins.list[builtins.bool]
+builtins.bool"builtins.bool"builtins.list *`
+tensor_indicesJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list ˛
+_broadcast_coalesced/torch._C._distributed_c10d._broadcast_coalesced"
+Any*e
+process_groupR
+'torch._C._distributed_c10d.ProcessGroup"'torch._C._distributed_c10d.ProcessGroup*o
+tensorsb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*-
+buffer_size
+builtins.int"builtins.int*%
+src
+builtins.int"builtins.intù
+_test_python_store-torch._C._distributed_c10d._test_python_store"
+Any*O
+storeD
+ torch._C._distributed_c10d.Store" torch._C._distributed_c10d.Store–
+_verify_params_across_processes:torch._C._distributed_c10d._verify_params_across_processes"
+Any*e
+process_groupR
+'torch._C._distributed_c10d.ProcessGroup"'torch._C._distributed_c10d.ProcessGroup*n
+paramsb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*ê
+loggerÉ
+-Union[torch._C._distributed_c10d.Logger,None]F
+!torch._C._distributed_c10d.Logger"!torch._C._distributed_c10d.Logger
+NoneË
+_make_nccl_premul_sum0torch._C._distributed_c10d._make_nccl_premul_sum"J
+#torch._C._distributed_c10d.ReduceOp"#torch._C._distributed_c10d.ReduceOp*–
+factor√
+9Union[builtins.float,builtins.list[torch._tensor.Tensor]] 
+builtins.float"builtins.floatb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.listÏ
+_register_process_group2torch._C._distributed_c10d._register_process_group"
+None*,
+
+group_name
+builtins.str"builtins.str*e
+process_groupR
+'torch._C._distributed_c10d.ProcessGroup"'torch._C._distributed_c10d.ProcessGroupÕ
+_resolve_process_group1torch._C._distributed_c10d._resolve_process_group"R
+'torch._C._distributed_c10d.ProcessGroup"'torch._C._distributed_c10d.ProcessGroup*,
+
+group_name
+builtins.str"builtins.stre
+_unregister_all_process_groups9torch._C._distributed_c10d._unregister_all_process_groups"
+Noneâ
+_unregister_process_group4torch._C._distributed_c10d._unregister_process_group"
+None*,
+
+group_name
+builtins.str"builtins.str*ñ
+__annotations__*torch._C._distributed_c10d.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*s
+_DEFAULT_FIRST_BUCKET_BYTES6torch._C._distributed_c10d._DEFAULT_FIRST_BUCKET_BYTES
+builtins.int"builtins.int*o
+_DEFAULT_NO_TIMEOUT.torch._C._distributed_c10d._DEFAULT_NO_TIMEOUT(
+datetime.timedelta"datetime.timedelta*o
+_DEFAULT_PG_TIMEOUT.torch._C._distributed_c10d._DEFAULT_PG_TIMEOUT(
+datetime.timedelta"datetime.timedelta*y
+_DEFAULT_PG_NCCL_TIMEOUT3torch._C._distributed_c10d._DEFAULT_PG_NCCL_TIMEOUT(
+datetime.timedelta"datetime.timedelta

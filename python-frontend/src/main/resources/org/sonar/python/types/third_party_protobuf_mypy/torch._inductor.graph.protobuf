@@ -1,0 +1,482 @@
+
+torch._inductor.graphàâ
+GraphLowering#torch._inductor.graph.GraphLowering" torch.fx.interpreter.Interpreter*È
+symbolic_sizes_strides:torch._inductor.graph.GraphLowering.symbolic_sizes_strides"
+Any*T
+selfJ
+#torch._inductor.graph.GraphLowering"#torch._inductor.graph.GraphLowering*4
+ex,
+torch._tensor.Tensor"torch._tensor.Tensor*Â
+static_sizes_strides8torch._inductor.graph.GraphLowering.static_sizes_strides"
+Any*T
+selfJ
+#torch._inductor.graph.GraphLowering"#torch._inductor.graph.GraphLowering*4
+ex,
+torch._tensor.Tensor"torch._tensor.Tensor*d
+init_backend_registration=torch._inductor.graph.GraphLowering.init_backend_registration*
+self*û
+__init__,torch._inductor.graph.GraphLowering.__init__"
+None*T
+selfJ
+#torch._inductor.graph.GraphLowering"#torch._inductor.graph.GraphLowering*N
+gmF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*∏
+example_inputs°
+/Union[builtins.list[torch._tensor.Tensor],None]b
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list
+None *
+	shape_env
+Any *
+graph_id
+Any *
+cpp_wrapper
+Any *
+aot_mode
+Any *#
+user_visible_outputs
+Any *
+
+layout_opt
+Any *%
+extern_node_serializer
+Any *
+is_inference
+Any *
+is_const_graph
+Any *!
+const_output_index
+Any *
+
+const_code
+Any *
+const_module
+Any *
+name
+Any *®
+decide_layout_opt5torch._inductor.graph.GraphLowering.decide_layout_opt"
+builtins.bool"builtins.bool*
+gm
+Any*
+is_inference
+Any0:staticmethodh*‹
+qualify_name0torch._inductor.graph.GraphLowering.qualify_name"
+builtins.str"builtins.str*T
+selfJ
+#torch._inductor.graph.GraphLowering"#torch._inductor.graph.GraphLowering*&
+name
+builtins.str"builtins.str*›
+make_subgraph1torch._inductor.graph.GraphLowering.make_subgraph"J
+#torch._inductor.graph.GraphLowering"#torch._inductor.graph.GraphLowering*T
+selfJ
+#torch._inductor.graph.GraphLowering"#torch._inductor.graph.GraphLowering*N
+gmF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*v
+example_inputsb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*/
+subgraph_name
+builtins.str"builtins.str*p
+find_nodes_prefer_channels_lastCtorch._inductor.graph.GraphLowering.find_nodes_prefer_channels_last*
+self*V
+warn_fallback1torch._inductor.graph.GraphLowering.warn_fallback*
+self*
+name*’
+add_device_info3torch._inductor.graph.GraphLowering.add_device_info"
+Any*T
+selfJ
+#torch._inductor.graph.GraphLowering"#torch._inductor.graph.GraphLowering*.
+device"
+torch._C.device"torch._C.device*R
+	fake_mode-torch._inductor.graph.GraphLowering.fake_mode*
+self0:property`* 
+
+get_buffer.torch._inductor.graph.GraphLowering.get_buffer"
+Any*T
+selfJ
+#torch._inductor.graph.GraphLowering"#torch._inductor.graph.GraphLowering*-
+buffer_name
+builtins.str"builtins.str*»
+	get_dtype-torch._inductor.graph.GraphLowering.get_dtype"
+Any*T
+selfJ
+#torch._inductor.graph.GraphLowering"#torch._inductor.graph.GraphLowering*-
+buffer_name
+builtins.str"builtins.str*»
+	get_numel-torch._inductor.graph.GraphLowering.get_numel"
+Any*T
+selfJ
+#torch._inductor.graph.GraphLowering"#torch._inductor.graph.GraphLowering*-
+buffer_name
+builtins.str"builtins.str*R
+run'torch._inductor.graph.GraphLowering.run*
+self*
+args0:dynamo_timed*ô
+register_buffer3torch._inductor.graph.GraphLowering.register_buffer"
+Any*T
+selfJ
+#torch._inductor.graph.GraphLowering"#torch._inductor.graph.GraphLowering*B
+buffer6
+torch._inductor.ir.Buffer"torch._inductor.ir.Buffer*.
+set_name
+builtins.bool"builtins.bool *ˇ
+register_list1torch._inductor.graph.GraphLowering.register_list"
+Any*T
+selfJ
+#torch._inductor.graph.GraphLowering"#torch._inductor.graph.GraphLowering*\
+buffer_namesJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*e
+register_users_of5torch._inductor.graph.GraphLowering.register_users_of*
+self*
+node_output*’
+mark_buffer_mutated7torch._inductor.graph.GraphLowering.mark_buffer_mutated"
+Any*T
+selfJ
+#torch._inductor.graph.GraphLowering"#torch._inductor.graph.GraphLowering*&
+name
+builtins.str"builtins.str*Î
+get_original_value_of_constantBtorch._inductor.graph.GraphLowering.get_original_value_of_constant"
+Any*T
+selfJ
+#torch._inductor.graph.GraphLowering"#torch._inductor.graph.GraphLowering*&
+name
+builtins.str"builtins.str*|
+allocate_non_dup_const_name?torch._inductor.graph.GraphLowering.allocate_non_dup_const_name*
+self*
+name*
+data*n
+add_tensor_constant7torch._inductor.graph.GraphLowering.add_tensor_constant*
+self*
+data*
+
+name *≠
+constant_name1torch._inductor.graph.GraphLowering.constant_name"
+Any*T
+selfJ
+#torch._inductor.graph.GraphLowering"#torch._inductor.graph.GraphLowering*&
+name
+builtins.str"builtins.str*b
+device_overrideM
+Union[torch._C.device,None]"
+torch._C.device"torch._C.device
+None*Ô
+placeholder/torch._inductor.graph.GraphLowering.placeholder"
+Any*T
+selfJ
+#torch._inductor.graph.GraphLowering"#torch._inductor.graph.GraphLowering*(
+target
+builtins.str"builtins.str*
+args
+Any*
+kwargs
+Any*n
+call_function1torch._inductor.graph.GraphLowering.call_function*
+self*
+
+target*
+args*
+
+kwargs*µ
+can_inline_constant7torch._inductor.graph.GraphLowering.can_inline_constant"
+builtins.bool"builtins.bool*3
+t,
+torch._tensor.Tensor"torch._tensor.Tensor0:staticmethodh*d
+get_attr,torch._inductor.graph.GraphLowering.get_attr*
+self*
+
+target*
+args*
+
+kwargs*j
+call_module/torch._inductor.graph.GraphLowering.call_module*
+self*
+
+target*
+args*
+
+kwargs*j
+call_method/torch._inductor.graph.GraphLowering.call_method*
+self*
+
+target*
+args*
+
+kwargs*`
+output*torch._inductor.graph.GraphLowering.output*
+self*
+
+target*
+args*
+
+kwargs*B
+finalize,torch._inductor.graph.GraphLowering.finalize*
+self*Ì
+set_current_node4torch._inductor.graph.GraphLowering.set_current_node"
+Any*T
+selfJ
+#torch._inductor.graph.GraphLowering"#torch._inductor.graph.GraphLowering*2
+node(
+torch.fx.node.Node"torch.fx.node.Node0:contextmanager*Õ
+try_match_insignificant_stridesCtorch._inductor.graph.GraphLowering.try_match_insignificant_strides"<
+torch._inductor.ir.TensorBox"torch._inductor.ir.TensorBox*T
+selfJ
+#torch._inductor.graph.GraphLowering"#torch._inductor.graph.GraphLowering*
+tensor
+Any*ª
+meta_strides_inp§
+0builtins.tuple[Union[builtins.int,torch.SymInt]]`
+ Union[builtins.int,torch.SymInt]
+builtins.int"builtins.int
+torch.SymInt"torch.SymInt"builtins.tuple*»
+run_node,torch._inductor.graph.GraphLowering.run_node"
+Any*T
+selfJ
+#torch._inductor.graph.GraphLowering"#torch._inductor.graph.GraphLowering*/
+n(
+torch.fx.node.Node"torch.fx.node.Node*t
+!validate_can_generate_cpp_wrapperEtorch._inductor.graph.GraphLowering.validate_can_generate_cpp_wrapper*
+self*T
+init_wrapper_code5torch._inductor.graph.GraphLowering.init_wrapper_code*
+self*b
+codegen_with_cpp_wrapper<torch._inductor.graph.GraphLowering.codegen_with_cpp_wrapper*
+self*@
+codegen+torch._inductor.graph.GraphLowering.codegen*
+self*d
+codegen_subgraph4torch._inductor.graph.GraphLowering.codegen_subgraph*
+self*
+parent_graph*H
+count_bytes/torch._inductor.graph.GraphLowering.count_bytes*
+self*V
+compile_to_module5torch._inductor.graph.GraphLowering.compile_to_module*
+self0*L
+compile_to_fn1torch._inductor.graph.GraphLowering.compile_to_fn*
+self*R
+get_output_names4torch._inductor.graph.GraphLowering.get_output_names*
+self*…
+is_unspec_arg1torch._inductor.graph.GraphLowering.is_unspec_arg"
+Any*T
+selfJ
+#torch._inductor.graph.GraphLowering"#torch._inductor.graph.GraphLowering*&
+name
+builtins.str"builtins.strrµ
+graph_outputs1torch._inductor.graph.GraphLowering.graph_outputsq
+(builtins.list[torch._inductor.ir.IRNode]6
+torch._inductor.ir.IRNode"torch._inductor.ir.IRNode"builtins.listrË
+example_inputs2torch._inductor.graph.GraphLowering.example_inputs°
+/Union[builtins.list[torch._tensor.Tensor],None]b
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list
+NonerE
+
+layout_opt.torch._inductor.graph.GraphLowering.layout_opt
+Anyrr
+num_channels_last_conv:torch._inductor.graph.GraphLowering.num_channels_last_conv
+builtins.int"builtins.intrI
+is_inference0torch._inductor.graph.GraphLowering.is_inference
+AnyrM
+is_const_graph2torch._inductor.graph.GraphLowering.is_const_graph
+AnyrE
+
+const_code.torch._inductor.graph.GraphLowering.const_code
+AnyrI
+const_module0torch._inductor.graph.GraphLowering.const_module
+Anyrf
+reuse_shape_env3torch._inductor.graph.GraphLowering.reuse_shape_env
+builtins.bool"builtins.boolrE
+
+_shape_env.torch._inductor.graph.GraphLowering._shape_env
+Anyrˆ
+ras_by_symbol1torch._inductor.graph.GraphLowering.ras_by_symbol±
+Ubuiltins.dict[Any,builtins.list[torch.fx.experimental.symbolic_shapes.RuntimeAssert]]
+Anyø
+Bbuiltins.list[torch.fx.experimental.symbolic_shapes.RuntimeAssert]j
+3torch.fx.experimental.symbolic_shapes.RuntimeAssert"3torch.fx.experimental.symbolic_shapes.RuntimeAssert"builtins.list"builtins.dictrÄ
+bound_unbacked_symbols:torch._inductor.graph.GraphLowering.bound_unbacked_symbols*
+builtins.set[Any]
+Any"builtins.setrê
+sizevars,torch._inductor.graph.GraphLowering.sizevarsV
+)torch._inductor.sizevars.SizeVarAllocator")torch._inductor.sizevars.SizeVarAllocatorrñ
+graph_input_names5torch._inductor.graph.GraphLowering.graph_input_namesJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.listrË
+graph_inputs0torch._inductor.graph.GraphLowering.graph_inputs•
+8builtins.dict[builtins.str,torch._inductor.ir.TensorBox]
+builtins.str"builtins.str<
+torch._inductor.ir.TensorBox"torch._inductor.ir.TensorBox"builtins.dictrÄ
+graph_inputs_original9torch._inductor.graph.GraphLowering.graph_inputs_original´
+:builtins.dict[builtins.str,torch._inductor.ir.InputBuffer]
+builtins.str"builtins.str@
+torch._inductor.ir.InputBuffer"torch._inductor.ir.InputBuffer"builtins.dicträ
+device_types0torch._inductor.graph.GraphLowering.device_typesH
+builtins.set[builtins.str]
+builtins.str"builtins.str"builtins.setrà
+device_idxs/torch._inductor.graph.GraphLowering.device_idxsH
+builtins.set[builtins.int]
+builtins.int"builtins.int"builtins.setrP
+cuda(torch._inductor.graph.GraphLowering.cuda
+builtins.bool"builtins.boolr©
+buffers+torch._inductor.graph.GraphLowering.buffersq
+(builtins.list[torch._inductor.ir.Buffer]6
+torch._inductor.ir.Buffer"torch._inductor.ir.Buffer"builtins.listr√
+const_output_index6torch._inductor.graph.GraphLowering.const_output_indexu
+(builtins.dict[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int"builtins.dictrí
+folded_constants4torch._inductor.graph.GraphLowering.folded_constantsH
+builtins.set[builtins.str]
+builtins.str"builtins.str"builtins.setr 
+	constants-torch._inductor.graph.GraphLowering.constantsç
+0builtins.dict[builtins.str,torch._tensor.Tensor]
+builtins.str"builtins.str,
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.dictr·
+torchbind_constants7torch._inductor.graph.GraphLowering.torchbind_constantsê
+1builtins.dict[builtins.str,torch._C.ScriptObject]
+builtins.str"builtins.str.
+torch._C.ScriptObject"torch._C.ScriptObject"builtins.dictrª
+constant_reprs2torch._inductor.graph.GraphLowering.constant_reprsu
+(builtins.dict[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.dictrê
+removed_buffers3torch._inductor.graph.GraphLowering.removed_buffersH
+builtins.set[builtins.str]
+builtins.str"builtins.str"builtins.setr†
+removed_inplace_buffers;torch._inductor.graph.GraphLowering.removed_inplace_buffersH
+builtins.set[builtins.str]
+builtins.str"builtins.str"builtins.setrê
+mutated_buffers3torch._inductor.graph.GraphLowering.mutated_buffersH
+builtins.set[builtins.str]
+builtins.str"builtins.str"builtins.setrò
+never_reuse_buffers7torch._inductor.graph.GraphLowering.never_reuse_buffersH
+builtins.set[builtins.str]
+builtins.str"builtins.str"builtins.setrñ
+inplaced_to_remove6torch._inductor.graph.GraphLowering.inplaced_to_removeH
+builtins.set[builtins.str]
+builtins.str"builtins.str"builtins.setr¢
+
+device_ops.torch._inductor.graph.GraphLowering.device_opsd
+0torch._inductor.codegen.common.DeviceOpOverrides"0torch._inductor.codegen.common.DeviceOpOverridesr¢
+wrapper_code0torch._inductor.graph.GraphLowering.wrapper_code`
+.torch._inductor.codegen.wrapper.WrapperCodeGen".torch._inductor.codegen.wrapper.WrapperCodeGenr‡
+extern_kernel_nodes7torch._inductor.graph.GraphLowering.extern_kernel_nodesè
+2builtins.list[torch._inductor.ir.ExternKernelNode]J
+#torch._inductor.ir.ExternKernelNode"#torch._inductor.ir.ExternKernelNode"builtins.listr›
+extern_node_serializer:torch._inductor.graph.GraphLowering.extern_node_serializerÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+Nonerj
+current_node0torch._inductor.graph.GraphLowering.current_node(
+torch.fx.node.Node"torch.fx.node.NoderÁ
+lists)torch._inductor.graph.GraphLowering.lists≤
+7builtins.dict[builtins.str,builtins.list[builtins.str]]
+builtins.str"builtins.strJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list"builtins.dictré
+mutated_inputs2torch._inductor.graph.GraphLowering.mutated_inputsH
+builtins.set[builtins.str]
+builtins.str"builtins.str"builtins.setrò
+mutated_input_idxs6torch._inductor.graph.GraphLowering.mutated_input_idxsJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.listr„
+name_to_buffer2torch._inductor.graph.GraphLowering.name_to_bufferú
+5builtins.dict[builtins.str,torch._inductor.ir.Buffer]
+builtins.str"builtins.str6
+torch._inductor.ir.Buffer"torch._inductor.ir.Buffer"builtins.dictrø
+name_to_users1torch._inductor.graph.GraphLowering.name_to_users˙
+Ncollections.defaultdict[builtins.str,builtins.list[torch._inductor.ir.IRNode]]
+builtins.str"builtins.strq
+(builtins.list[torch._inductor.ir.IRNode]6
+torch._inductor.ir.IRNode"torch._inductor.ir.IRNode"builtins.list"collections.defaultdictrd
+creation_time1torch._inductor.graph.GraphLowering.creation_time 
+builtins.float"builtins.floatrG
+cpp_wrapper/torch._inductor.graph.GraphLowering.cpp_wrapper
+Anyre
+record_multi_kernel_choice>torch._inductor.graph.GraphLowering.record_multi_kernel_choice
+AnyrÀ
+multi_kernel_to_choice:torch._inductor.graph.GraphLowering.multi_kernel_to_choiceu
+(builtins.dict[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int"builtins.dictrA
+aot_mode,torch._inductor.graph.GraphLowering.aot_mode
+AnyrA
+graph_id,torch._inductor.graph.GraphLowering.graph_id
+Anyrj
+post_grad_graph_id6torch._inductor.graph.GraphLowering.post_grad_graph_id
+builtins.int"builtins.intrÜ
+	scheduler-torch._inductor.graph.GraphLowering.schedulerJ
+#torch._inductor.scheduler.Scheduler"#torch._inductor.scheduler.Schedulerre
+nodes_prefer_channels_last>torch._inductor.graph.GraphLowering.nodes_prefer_channels_last
+Anyrí
+_warned_fallback4torch._inductor.graph.GraphLowering._warned_fallbackH
+builtins.set[builtins.str]
+builtins.str"builtins.str"builtins.setrY
+user_visible_outputs8torch._inductor.graph.GraphLowering.user_visible_outputs
+AnyrX
+	cache_key-torch._inductor.graph.GraphLowering.cache_key
+builtins.str"builtins.strrZ
+
+cache_path.torch._inductor.graph.GraphLowering.cache_path
+builtins.str"builtins.strrÁ
+cache_linemap1torch._inductor.graph.GraphLowering.cache_linemap¢
+/builtins.list[Tuple[builtins.int,builtins.str]]`
+ Tuple[builtins.int,builtins.str]
+builtins.int"builtins.int
+builtins.str"builtins.str"builtins.listr†
+disable_cudagraphs_reason=torch._inductor.graph.GraphLowering.disable_cudagraphs_reasonD
+Union[builtins.str,None]
+builtins.str"builtins.str
+Noner·
+device_node_mapping7torch._inductor.graph.GraphLowering.device_node_mappingê
+1builtins.dict[torch._C.device,torch.fx.node.Node]"
+torch._C.device"torch._C.device(
+torch.fx.node.Node"torch.fx.node.Node"builtins.dictr~
+orig_gm+torch._inductor.graph.GraphLowering.orig_gmF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModulerq
+ dynamo_flat_name_to_original_fqnDtorch._inductor.graph.GraphLowering.dynamo_flat_name_to_original_fqn
+Anyr_
+allocated_constant_name;torch._inductor.graph.GraphLowering.allocated_constant_name
+Anyræ
+effectful_ops1torch._inductor.graph.GraphLowering.effectful_ops˘
+Tbuiltins.dict[torch._higher_order_ops.effects._EffectType,torch._inductor.ir.Buffer]Z
++torch._higher_order_ops.effects._EffectType"+torch._higher_order_ops.effects._EffectType6
+torch._inductor.ir.Buffer"torch._inductor.ir.Buffer"builtins.dictré
+aligned_inputs2torch._inductor.graph.GraphLowering.aligned_inputsH
+builtins.set[builtins.str]
+builtins.str"builtins.str"builtins.set[
+log_module_code-redefinition%torch._inductor.graph.log_module_code*
+args*
+
+kwargsk
+supported_dtype_of_cpp_wrapper4torch._inductor.graph.supported_dtype_of_cpp_wrapper*	
+dtype*
+cudai
+may_get_constant_buffer_dtype3torch._inductor.graph.may_get_constant_buffer_dtype*
+constant_buffer@
+is_magic_method%torch._inductor.graph.is_magic_method*
+opQ
+getattr_recursive'torch._inductor.graph.getattr_recursive*
+obj*
+
+targetU
+mark_nodes_dislike_padding0torch._inductor.graph.mark_nodes_dislike_padding*
+g*ë
+__annotations__%torch._inductor.graph.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*-
+sympytorch._inductor.graph.sympy
+Any*B
+logtorch._inductor.graph.log 
+logging.Logger"logging.Logger*=
+perf_hint_log#torch._inductor.graph.perf_hint_log
+Any*A
+output_code_log%torch._inductor.graph.output_code_log
+Any*+
+atentorch._inductor.graph.aten
+Any*ö
+_post_grad_graph_counter.torch._inductor.graph._post_grad_graph_counterN
+itertools.count[builtins.int]
+builtins.int"builtins.int"itertools.count*A
+log_module_code%torch._inductor.graph.log_module_code
+Any

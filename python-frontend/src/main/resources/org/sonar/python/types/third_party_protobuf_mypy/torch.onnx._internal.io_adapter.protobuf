@@ -1,0 +1,429 @@
+
+torch.onnx._internal.io_adapterˆ
+InputAdaptStep.torch.onnx._internal.io_adapter.InputAdaptStep"builtins.object*°
+apply4torch.onnx._internal.io_adapter.InputAdaptStep.apply"Í
+<Tuple[typing.Sequence[Any],typing.Mapping[builtins.str,Any]]0
+typing.Sequence[Any]
+Any"typing.SequenceY
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping*j
+self`
+.torch.onnx._internal.io_adapter.InputAdaptStep".torch.onnx._internal.io_adapter.InputAdaptStep*@
+
+model_args0
+typing.Sequence[Any]
+Any"typing.Sequence*k
+model_kwargsY
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping*ƒ
+modelõ
+xUnion[torch.nn.modules.module.Module,CallableType[builtins.function],torch.export.exported_program.ExportedProgram,None]@
+torch.nn.modules.module.Module"torch.nn.modules.module.ModuleK
+CallableType[builtins.function]&
+builtins.function"builtins.function^
+-torch.export.exported_program.ExportedProgram"-torch.export.exported_program.ExportedProgram
+None @8X—
+InputAdapter,torch.onnx._internal.io_adapter.InputAdapter"builtins.object*Î
+__init__5torch.onnx._internal.io_adapter.InputAdapter.__init__"
+None*f
+self\
+,torch.onnx._internal.io_adapter.InputAdapter",torch.onnx._internal.io_adapter.InputAdapter*˜
+stepsŠ
+IUnion[builtins.list[torch.onnx._internal.io_adapter.InputAdaptStep],None]°
+=builtins.list[torch.onnx._internal.io_adapter.InputAdaptStep]`
+.torch.onnx._internal.io_adapter.InputAdaptStep".torch.onnx._internal.io_adapter.InputAdaptStep"builtins.list
+None *»
+append_step8torch.onnx._internal.io_adapter.InputAdapter.append_step"
+None*f
+self\
+,torch.onnx._internal.io_adapter.InputAdapter",torch.onnx._internal.io_adapter.InputAdapter*j
+step`
+.torch.onnx._internal.io_adapter.InputAdaptStep".torch.onnx._internal.io_adapter.InputAdaptStep0:_beartype.beartype*Å
+apply2torch.onnx._internal.io_adapter.InputAdapter.apply"Ï
+wtyping.Sequence[Union[builtins.int,builtins.float,builtins.bool,builtins.str,torch._tensor.Tensor,torch._C.dtype,None]]Â
+fUnion[builtins.int,builtins.float,builtins.bool,builtins.str,torch._tensor.Tensor,torch._C.dtype,None]
+builtins.int"builtins.int 
+builtins.float"builtins.float
+builtins.bool"builtins.bool
+builtins.str"builtins.str,
+torch._tensor.Tensor"torch._tensor.Tensor 
+torch._C.dtype"torch._C.dtype
+None"typing.Sequence*f
+self\
+,torch.onnx._internal.io_adapter.InputAdapter",torch.onnx._internal.io_adapter.InputAdapter*
+
+model_args
+Any*ƒ
+modelõ
+xUnion[torch.nn.modules.module.Module,CallableType[builtins.function],torch.export.exported_program.ExportedProgram,None]@
+torch.nn.modules.module.Module"torch.nn.modules.module.ModuleK
+CallableType[builtins.function]&
+builtins.function"builtins.function^
+-torch.export.exported_program.ExportedProgram"-torch.export.exported_program.ExportedProgram
+None *
+model_kwargs
+Any0:_beartype.beartyperð
+_steps3torch.onnx._internal.io_adapter.InputAdapter._steps°
+=builtins.list[torch.onnx._internal.io_adapter.InputAdaptStep]`
+.torch.onnx._internal.io_adapter.InputAdaptStep".torch.onnx._internal.io_adapter.InputAdaptStep"builtins.list³
+OutputAdaptStep/torch.onnx._internal.io_adapter.OutputAdaptStep"builtins.object*Ù
+apply5torch.onnx._internal.io_adapter.OutputAdaptStep.apply"
+Any*l
+selfb
+/torch.onnx._internal.io_adapter.OutputAdaptStep"/torch.onnx._internal.io_adapter.OutputAdaptStep*
+model_outputs
+Any*ƒ
+modelõ
+xUnion[torch.nn.modules.module.Module,CallableType[builtins.function],torch.export.exported_program.ExportedProgram,None]@
+torch.nn.modules.module.Module"torch.nn.modules.module.ModuleK
+CallableType[builtins.function]&
+builtins.function"builtins.function^
+-torch.export.exported_program.ExportedProgram"-torch.export.exported_program.ExportedProgram
+None @8XÀ
+OutputAdapter-torch.onnx._internal.io_adapter.OutputAdapter"builtins.object*Õ
+__init__6torch.onnx._internal.io_adapter.OutputAdapter.__init__"
+None*h
+self^
+-torch.onnx._internal.io_adapter.OutputAdapter"-torch.onnx._internal.io_adapter.OutputAdapter*œ
+stepsŽ
+JUnion[builtins.list[torch.onnx._internal.io_adapter.OutputAdaptStep],None]³
+>builtins.list[torch.onnx._internal.io_adapter.OutputAdaptStep]b
+/torch.onnx._internal.io_adapter.OutputAdaptStep"/torch.onnx._internal.io_adapter.OutputAdaptStep"builtins.list
+None *À
+append_step9torch.onnx._internal.io_adapter.OutputAdapter.append_step"
+None*h
+self^
+-torch.onnx._internal.io_adapter.OutputAdapter"-torch.onnx._internal.io_adapter.OutputAdapter*l
+stepb
+/torch.onnx._internal.io_adapter.OutputAdaptStep"/torch.onnx._internal.io_adapter.OutputAdaptStep0:_beartype.beartype*Ü
+apply3torch.onnx._internal.io_adapter.OutputAdapter.apply"û
+ctyping.Sequence[Union[torch._tensor.Tensor,builtins.int,builtins.float,builtins.bool,builtins.str]]‚
+RUnion[torch._tensor.Tensor,builtins.int,builtins.float,builtins.bool,builtins.str],
+torch._tensor.Tensor"torch._tensor.Tensor
+builtins.int"builtins.int 
+builtins.float"builtins.float
+builtins.bool"builtins.bool
+builtins.str"builtins.str"typing.Sequence*h
+self^
+-torch.onnx._internal.io_adapter.OutputAdapter"-torch.onnx._internal.io_adapter.OutputAdapter*
+model_outputs
+Any*ƒ
+modelõ
+xUnion[torch.nn.modules.module.Module,CallableType[builtins.function],torch.export.exported_program.ExportedProgram,None]@
+torch.nn.modules.module.Module"torch.nn.modules.module.ModuleK
+CallableType[builtins.function]&
+builtins.function"builtins.function^
+-torch.export.exported_program.ExportedProgram"-torch.export.exported_program.ExportedProgram
+None 0:_beartype.beartyperô
+_steps4torch.onnx._internal.io_adapter.OutputAdapter._steps³
+>builtins.list[torch.onnx._internal.io_adapter.OutputAdaptStep]b
+/torch.onnx._internal.io_adapter.OutputAdaptStep"/torch.onnx._internal.io_adapter.OutputAdaptStep"builtins.listŽ
+BindInputStep-torch.onnx._internal.io_adapter.BindInputStep".torch.onnx._internal.io_adapter.InputAdaptStep*ó
+__init__6torch.onnx._internal.io_adapter.BindInputStep.__init__"
+None*h
+self^
+-torch.onnx._internal.io_adapter.BindInputStep"-torch.onnx._internal.io_adapter.BindInputStep*;
+model_signature&
+inspect.Signature"inspect.Signature*«
+apply3torch.onnx._internal.io_adapter.BindInputStep.apply"Í
+<Tuple[typing.Sequence[Any],typing.Mapping[builtins.str,Any]]0
+typing.Sequence[Any]
+Any"typing.SequenceY
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping*h
+self^
+-torch.onnx._internal.io_adapter.BindInputStep"-torch.onnx._internal.io_adapter.BindInputStep*@
+
+model_args0
+typing.Sequence[Any]
+Any"typing.Sequence*k
+model_kwargsY
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping*ƒ
+modelõ
+xUnion[torch.nn.modules.module.Module,CallableType[builtins.function],torch.export.exported_program.ExportedProgram,None]@
+torch.nn.modules.module.Module"torch.nn.modules.module.ModuleK
+CallableType[builtins.function]&
+builtins.function"builtins.function^
+-torch.export.exported_program.ExportedProgram"-torch.export.exported_program.ExportedProgram
+None rz
+_model_signature>torch.onnx._internal.io_adapter.BindInputStep._model_signature&
+inspect.Signature"inspect.Signatureè
+MergeKwargsIntoArgsInputStep<torch.onnx._internal.io_adapter.MergeKwargsIntoArgsInputStep".torch.onnx._internal.io_adapter.InputAdaptStep*Ù
+applyBtorch.onnx._internal.io_adapter.MergeKwargsIntoArgsInputStep.apply"Í
+<Tuple[typing.Sequence[Any],typing.Mapping[builtins.str,Any]]0
+typing.Sequence[Any]
+Any"typing.SequenceY
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping*†
+self|
+<torch.onnx._internal.io_adapter.MergeKwargsIntoArgsInputStep"<torch.onnx._internal.io_adapter.MergeKwargsIntoArgsInputStep*@
+
+model_args0
+typing.Sequence[Any]
+Any"typing.Sequence*k
+model_kwargsY
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping*ƒ
+modelõ
+xUnion[torch.nn.modules.module.Module,CallableType[builtins.function],torch.export.exported_program.ExportedProgram,None]@
+torch.nn.modules.module.Module"torch.nn.modules.module.ModuleK
+CallableType[builtins.function]&
+builtins.function"builtins.function^
+-torch.export.exported_program.ExportedProgram"-torch.export.exported_program.ExportedProgram
+None î
+)LiftParametersAndBuffersIntoArgsInputStepItorch.onnx._internal.io_adapter.LiftParametersAndBuffersIntoArgsInputStep".torch.onnx._internal.io_adapter.InputAdaptStep*þ
+__init__Rtorch.onnx._internal.io_adapter.LiftParametersAndBuffersIntoArgsInputStep.__init__"
+None*¡
+self–
+Itorch.onnx._internal.io_adapter.LiftParametersAndBuffersIntoArgsInputStep"Itorch.onnx._internal.io_adapter.LiftParametersAndBuffersIntoArgsInputStep*p
+inputsd
+$builtins.tuple[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.tuple*
+applyOtorch.onnx._internal.io_adapter.LiftParametersAndBuffersIntoArgsInputStep.apply"Í
+<Tuple[typing.Sequence[Any],typing.Mapping[builtins.str,Any]]0
+typing.Sequence[Any]
+Any"typing.SequenceY
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping*¡
+self–
+Itorch.onnx._internal.io_adapter.LiftParametersAndBuffersIntoArgsInputStep"Itorch.onnx._internal.io_adapter.LiftParametersAndBuffersIntoArgsInputStep*@
+
+model_args0
+typing.Sequence[Any]
+Any"typing.Sequence*k
+model_kwargsY
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping*ƒ
+modelõ
+xUnion[torch.nn.modules.module.Module,CallableType[builtins.function],torch.export.exported_program.ExportedProgram,None]@
+torch.nn.modules.module.Module"torch.nn.modules.module.ModuleK
+CallableType[builtins.function]&
+builtins.function"builtins.function^
+-torch.export.exported_program.ExportedProgram"-torch.export.exported_program.ExportedProgram
+None rÀ
+inputsPtorch.onnx._internal.io_adapter.LiftParametersAndBuffersIntoArgsInputStep.inputsd
+$builtins.tuple[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.tuple´	
++ConvertComplexToRealRepresentationInputStepKtorch.onnx._internal.io_adapter.ConvertComplexToRealRepresentationInputStep".torch.onnx._internal.io_adapter.InputAdaptStep*‡
+applyQtorch.onnx._internal.io_adapter.ConvertComplexToRealRepresentationInputStep.apply"Í
+<Tuple[typing.Sequence[Any],typing.Mapping[builtins.str,Any]]0
+typing.Sequence[Any]
+Any"typing.SequenceY
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping*¥
+selfš
+Ktorch.onnx._internal.io_adapter.ConvertComplexToRealRepresentationInputStep"Ktorch.onnx._internal.io_adapter.ConvertComplexToRealRepresentationInputStep*@
+
+model_args0
+typing.Sequence[Any]
+Any"typing.Sequence*k
+model_kwargsY
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping*ƒ
+modelõ
+xUnion[torch.nn.modules.module.Module,CallableType[builtins.function],torch.export.exported_program.ExportedProgram,None]@
+torch.nn.modules.module.Module"torch.nn.modules.module.ModuleK
+CallableType[builtins.function]&
+builtins.function"builtins.function^
+-torch.export.exported_program.ExportedProgram"-torch.export.exported_program.ExportedProgram
+None º
+RemoveNoneInputStep3torch.onnx._internal.io_adapter.RemoveNoneInputStep".torch.onnx._internal.io_adapter.InputAdaptStep*½
+apply9torch.onnx._internal.io_adapter.RemoveNoneInputStep.apply"Í
+<Tuple[typing.Sequence[Any],typing.Mapping[builtins.str,Any]]0
+typing.Sequence[Any]
+Any"typing.SequenceY
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping*t
+selfj
+3torch.onnx._internal.io_adapter.RemoveNoneInputStep"3torch.onnx._internal.io_adapter.RemoveNoneInputStep*@
+
+model_args0
+typing.Sequence[Any]
+Any"typing.Sequence*k
+model_kwargsY
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping*ƒ
+modelõ
+xUnion[torch.nn.modules.module.Module,CallableType[builtins.function],torch.export.exported_program.ExportedProgram,None]@
+torch.nn.modules.module.Module"torch.nn.modules.module.ModuleK
+CallableType[builtins.function]&
+builtins.function"builtins.function^
+-torch.export.exported_program.ExportedProgram"-torch.export.exported_program.ExportedProgram
+None Ó
+RemoveNonTensorInputStep8torch.onnx._internal.io_adapter.RemoveNonTensorInputStep".torch.onnx._internal.io_adapter.InputAdaptStep*Ì
+apply>torch.onnx._internal.io_adapter.RemoveNonTensorInputStep.apply"Í
+<Tuple[typing.Sequence[Any],typing.Mapping[builtins.str,Any]]0
+typing.Sequence[Any]
+Any"typing.SequenceY
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping*~
+selft
+8torch.onnx._internal.io_adapter.RemoveNonTensorInputStep"8torch.onnx._internal.io_adapter.RemoveNonTensorInputStep*@
+
+model_args0
+typing.Sequence[Any]
+Any"typing.Sequence*k
+model_kwargsY
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping*ƒ
+modelõ
+xUnion[torch.nn.modules.module.Module,CallableType[builtins.function],torch.export.exported_program.ExportedProgram,None]@
+torch.nn.modules.module.Module"torch.nn.modules.module.ModuleK
+CallableType[builtins.function]&
+builtins.function"builtins.function^
+-torch.export.exported_program.ExportedProgram"-torch.export.exported_program.ExportedProgram
+None ‡
++FlattenInputWithTreeSpecValidationInputStepKtorch.onnx._internal.io_adapter.FlattenInputWithTreeSpecValidationInputStep".torch.onnx._internal.io_adapter.InputAdaptStep*‡
+applyQtorch.onnx._internal.io_adapter.FlattenInputWithTreeSpecValidationInputStep.apply"Í
+<Tuple[typing.Sequence[Any],typing.Mapping[builtins.str,Any]]0
+typing.Sequence[Any]
+Any"typing.SequenceY
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping*¥
+selfš
+Ktorch.onnx._internal.io_adapter.FlattenInputWithTreeSpecValidationInputStep"Ktorch.onnx._internal.io_adapter.FlattenInputWithTreeSpecValidationInputStep*@
+
+model_args0
+typing.Sequence[Any]
+Any"typing.Sequence*k
+model_kwargsY
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping*ƒ
+modelõ
+xUnion[torch.nn.modules.module.Module,CallableType[builtins.function],torch.export.exported_program.ExportedProgram,None]@
+torch.nn.modules.module.Module"torch.nn.modules.module.ModuleK
+CallableType[builtins.function]&
+builtins.function"builtins.function^
+-torch.export.exported_program.ExportedProgram"-torch.export.exported_program.ExportedProgram
+None rÐ
+_specQtorch.onnx._internal.io_adapter.FlattenInputWithTreeSpecValidationInputStep._spect
+(Union[torch.utils._pytree.TreeSpec,None]<
+torch.utils._pytree.TreeSpec"torch.utils._pytree.TreeSpec
+None€
+FlattenOutputStep1torch.onnx._internal.io_adapter.FlattenOutputStep"/torch.onnx._internal.io_adapter.OutputAdaptStep*†
+apply7torch.onnx._internal.io_adapter.FlattenOutputStep.apply"0
+typing.Sequence[Any]
+Any"typing.Sequence*p
+selff
+1torch.onnx._internal.io_adapter.FlattenOutputStep"1torch.onnx._internal.io_adapter.FlattenOutputStep*
+model_outputs
+Any*ƒ
+modelõ
+xUnion[torch.nn.modules.module.Module,CallableType[builtins.function],torch.export.exported_program.ExportedProgram,None]@
+torch.nn.modules.module.Module"torch.nn.modules.module.ModuleK
+CallableType[builtins.function]&
+builtins.function"builtins.function^
+-torch.export.exported_program.ExportedProgram"-torch.export.exported_program.ExportedProgram
+None à
+,ConvertComplexToRealRepresentationOutputStepLtorch.onnx._internal.io_adapter.ConvertComplexToRealRepresentationOutputStep"/torch.onnx._internal.io_adapter.OutputAdaptStep*°
+applyRtorch.onnx._internal.io_adapter.ConvertComplexToRealRepresentationOutputStep.apply"
+Any*§
+selfœ
+Ltorch.onnx._internal.io_adapter.ConvertComplexToRealRepresentationOutputStep"Ltorch.onnx._internal.io_adapter.ConvertComplexToRealRepresentationOutputStep*
+model_outputs
+Any*ƒ
+modelõ
+xUnion[torch.nn.modules.module.Module,CallableType[builtins.function],torch.export.exported_program.ExportedProgram,None]@
+torch.nn.modules.module.Module"torch.nn.modules.module.ModuleK
+CallableType[builtins.function]&
+builtins.function"builtins.function^
+-torch.export.exported_program.ExportedProgram"-torch.export.exported_program.ExportedProgram
+None ã
+-FlattenOutputWithTreeSpecValidationOutputStepMtorch.onnx._internal.io_adapter.FlattenOutputWithTreeSpecValidationOutputStep"/torch.onnx._internal.io_adapter.OutputAdaptStep*Ü
+applyStorch.onnx._internal.io_adapter.FlattenOutputWithTreeSpecValidationOutputStep.apply"0
+typing.Sequence[Any]
+Any"typing.Sequence*©
+selfž
+Mtorch.onnx._internal.io_adapter.FlattenOutputWithTreeSpecValidationOutputStep"Mtorch.onnx._internal.io_adapter.FlattenOutputWithTreeSpecValidationOutputStep*
+model_outputs
+Any*ƒ
+modelõ
+xUnion[torch.nn.modules.module.Module,CallableType[builtins.function],torch.export.exported_program.ExportedProgram,None]@
+torch.nn.modules.module.Module"torch.nn.modules.module.ModuleK
+CallableType[builtins.function]&
+builtins.function"builtins.function^
+-torch.export.exported_program.ExportedProgram"-torch.export.exported_program.ExportedProgram
+None rÒ
+_specStorch.onnx._internal.io_adapter.FlattenOutputWithTreeSpecValidationOutputStep._spect
+(Union[torch.utils._pytree.TreeSpec,None]<
+torch.utils._pytree.TreeSpec"torch.utils._pytree.TreeSpec
+NoneÍ	
+0PrependParamsBuffersConstantAotAutogradInputStepPtorch.onnx._internal.io_adapter.PrependParamsBuffersConstantAotAutogradInputStep".torch.onnx._internal.io_adapter.InputAdaptStep*–
+applyVtorch.onnx._internal.io_adapter.PrependParamsBuffersConstantAotAutogradInputStep.apply"Í
+<Tuple[typing.Sequence[Any],typing.Mapping[builtins.str,Any]]0
+typing.Sequence[Any]
+Any"typing.SequenceY
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping*¯
+self¤
+Ptorch.onnx._internal.io_adapter.PrependParamsBuffersConstantAotAutogradInputStep"Ptorch.onnx._internal.io_adapter.PrependParamsBuffersConstantAotAutogradInputStep*@
+
+model_args0
+typing.Sequence[Any]
+Any"typing.Sequence*k
+model_kwargsY
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping*ƒ
+modelõ
+xUnion[torch.nn.modules.module.Module,CallableType[builtins.function],torch.export.exported_program.ExportedProgram,None]@
+torch.nn.modules.module.Module"torch.nn.modules.module.ModuleK
+CallableType[builtins.function]&
+builtins.function"builtins.function^
+-torch.export.exported_program.ExportedProgram"-torch.export.exported_program.ExportedProgram
+None ‰
+,PrependParamsAndBuffersAotAutogradOutputStepLtorch.onnx._internal.io_adapter.PrependParamsAndBuffersAotAutogradOutputStep"/torch.onnx._internal.io_adapter.OutputAdaptStep*Ù
+applyRtorch.onnx._internal.io_adapter.PrependParamsAndBuffersAotAutogradOutputStep.apply"0
+typing.Sequence[Any]
+Any"typing.Sequence*§
+selfœ
+Ltorch.onnx._internal.io_adapter.PrependParamsAndBuffersAotAutogradOutputStep"Ltorch.onnx._internal.io_adapter.PrependParamsAndBuffersAotAutogradOutputStep*
+model_outputs
+Any*ƒ
+modelõ
+xUnion[torch.nn.modules.module.Module,CallableType[builtins.function],torch.export.exported_program.ExportedProgram,None]@
+torch.nn.modules.module.Module"torch.nn.modules.module.ModuleK
+CallableType[builtins.function]&
+builtins.function"builtins.function^
+-torch.export.exported_program.ExportedProgram"-torch.export.exported_program.ExportedProgram
+None Ú
+_replace_tuple_with_list8torch.onnx._internal.io_adapter._replace_tuple_with_list"<
+torch.utils._pytree.TreeSpec"torch.utils._pytree.TreeSpec*F
+spec<
+torch.utils._pytree.TreeSpec"torch.utils._pytree.TreeSpecö
+&_open_top_level_list_if_single_elementFtorch.onnx._internal.io_adapter._open_top_level_list_if_single_element"<
+torch.utils._pytree.TreeSpec"torch.utils._pytree.TreeSpec*F
+spec<
+torch.utils._pytree.TreeSpec"torch.utils._pytree.TreeSpec«
+_assert_identical_pytree_spec=torch.onnx._internal.io_adapter._assert_identical_pytree_spec"
+None*G
+spec1<
+torch.utils._pytree.TreeSpec"torch.utils._pytree.TreeSpec*G
+spec2<
+torch.utils._pytree.TreeSpec"torch.utils._pytree.TreeSpec*/
+error_message
+builtins.str"builtins.str*›
+__annotations__/torch.onnx._internal.io_adapter.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*
+torch_exporttorch.export *
+pytreetorch.utils._pytree 

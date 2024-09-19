@@ -1,0 +1,90 @@
+
+torch._inductor.kernel.mma
+addmm_epilogue/torch._inductor.kernel.mm_common.addmm_epilogue*	
+dtype*	
+alpha*
+beta…
+mm_args(torch._inductor.kernel.mm_common.mm_args*
+mat1*
+mat2*
+
+others*
+layout *
+	out_dtype *
+use_4x2_dim K
+mm_grid(torch._inductor.kernel.mm_common.mm_grid*
+m*
+n*
+metaŽ
+
+mm_options+torch._inductor.kernel.mm_common.mm_options*
+
+config*	
+sym_m*	
+sym_n*	
+sym_k*
+
+layout*
+b_prologue_cast_type ?
+_is_int8_mat&torch._inductor.kernel.mm._is_int8_mat*
+mats
+
+bias_addmm$torch._inductor.kernel.mm.bias_addmm*
+inp*
+mat1*
+mat2*	
+out *
+alpha *
+
+beta b
+_is_static_problem,torch._inductor.kernel.mm._is_static_problem*
+inputs_tensors*
+
+layout]
+fallback_mixed_mm+torch._inductor.kernel.mm.fallback_mixed_mm*
+mat1*
+mat2*
+out^
+tuned_mixed_mm(torch._inductor.kernel.mm.tuned_mixed_mm*
+mat1*
+mat2*
+
+mat2_dtype…
+tuned_fused_int_mm_mul0torch._inductor.kernel.mm.tuned_fused_int_mm_mul*
+mat1*
+mat2*
+mat3*
+	out_dtype*
+layout *•
+__annotations__)torch._inductor.kernel.mm.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*+
+inductor_configtorch._inductor.config *y
+int8_mm_configs0torch._inductor.kernel.mm_common.int8_mm_configs4
+functools.partial[Any]
+Any"functools.partial*{
+mixed_mm_configs1torch._inductor.kernel.mm_common.mixed_mm_configs4
+functools.partial[Any]
+Any"functools.partial*o
+
+mm_configs+torch._inductor.kernel.mm_common.mm_configs4
+functools.partial[Any]
+Any"functools.partial*F
+logtorch._inductor.kernel.mm.log 
+logging.Logger"logging.Logger*/
+atentorch._inductor.kernel.mm.aten
+Any*˜
+mm_template%torch._inductor.kernel.mm.mm_templateb
+/torch._inductor.select_algorithm.TritonTemplate"/torch._inductor.select_algorithm.TritonTemplate*˜
+aten_mm!torch._inductor.kernel.mm.aten_mmj
+3torch._inductor.select_algorithm.ExternKernelChoice"3torch._inductor.select_algorithm.ExternKernelChoice*ž
+
+aten_addmm$torch._inductor.kernel.mm.aten_addmmj
+3torch._inductor.select_algorithm.ExternKernelChoice"3torch._inductor.select_algorithm.ExternKernelChoice*¢
+aten__int_mm&torch._inductor.kernel.mm.aten__int_mmj
+3torch._inductor.select_algorithm.ExternKernelChoice"3torch._inductor.select_algorithm.ExternKernelChoice*¨
+aten_bias_addmm)torch._inductor.kernel.mm.aten_bias_addmmj
+3torch._inductor.select_algorithm.ExternKernelChoice"3torch._inductor.select_algorithm.ExternKernelChoice*¶
+aten_fallback_mixed_mm0torch._inductor.kernel.mm.aten_fallback_mixed_mmj
+3torch._inductor.select_algorithm.ExternKernelChoice"3torch._inductor.select_algorithm.ExternKernelChoice

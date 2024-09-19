@@ -1,0 +1,572 @@
+
+ torch._inductor.autotune_process>
+Ping%torch._inductor.autotune_process.Ping"builtins.object>
+Pong%torch._inductor.autotune_process.Pong"builtins.object{
+!NonzeroWorkspaceNotSupportedErrorBtorch._inductor.autotune_process.NonzeroWorkspaceNotSupportedError"builtins.Exceptionë 
+TuningProcess.torch._inductor.autotune_process.TuningProcess"builtins.object*¶
+process_main;torch._inductor.autotune_process.TuningProcess.process_main"
+None*]
+request_queueJ
+!multiprocessing.queues.Queue[Any]
+Any"multiprocessing.queues.Queue*^
+response_queueJ
+!multiprocessing.queues.Queue[Any]
+Any"multiprocessing.queues.Queue0:staticmethodh*û
+workloop7torch._inductor.autotune_process.TuningProcess.workloop"
+None*]
+request_queueJ
+!multiprocessing.queues.Queue[Any]
+Any"multiprocessing.queues.Queue*^
+response_queueJ
+!multiprocessing.queues.Queue[Any]
+Any"multiprocessing.queues.Queue0:staticmethodh*…
+valid4torch._inductor.autotune_process.TuningProcess.valid"
+builtins.bool"builtins.bool*j
+self`
+.torch._inductor.autotune_process.TuningProcess".torch._inductor.autotune_process.TuningProcess*≥
+clear4torch._inductor.autotune_process.TuningProcess.clear"
+None*j
+self`
+.torch._inductor.autotune_process.TuningProcess".torch._inductor.autotune_process.TuningProcess*Ω
+
+initialize9torch._inductor.autotune_process.TuningProcess.initialize"
+None*j
+self`
+.torch._inductor.autotune_process.TuningProcess".torch._inductor.autotune_process.TuningProcess*¡
+put2torch._inductor.autotune_process.TuningProcess.put"
+None*j
+self`
+.torch._inductor.autotune_process.TuningProcess".torch._inductor.autotune_process.TuningProcess*
+obj
+Any*ê
+get2torch._inductor.autotune_process.TuningProcess.get"
+Any*j
+self`
+.torch._inductor.autotune_process.TuningProcess".torch._inductor.autotune_process.TuningProcess*
+result_timeout
+Any *
+graceful_timeout
+Any * 
+terminate_timeout
+Any *ª
+	terminate8torch._inductor.autotune_process.TuningProcess.terminate"
+None*j
+self`
+.torch._inductor.autotune_process.TuningProcess".torch._inductor.autotune_process.TuningProcess*±
+wait3torch._inductor.autotune_process.TuningProcess.wait"
+None*j
+self`
+.torch._inductor.autotune_process.TuningProcess".torch._inductor.autotune_process.TuningProcess*Ù
+kill3torch._inductor.autotune_process.TuningProcess.kill"
+None*j
+self`
+.torch._inductor.autotune_process.TuningProcess".torch._inductor.autotune_process.TuningProcess*
+graceful_timeout
+Any * 
+terminate_timeout
+Any *Í
+__init__7torch._inductor.autotune_process.TuningProcess.__init__"
+None*j
+self`
+.torch._inductor.autotune_process.TuningProcess".torch._inductor.autotune_process.TuningProcess*R
+deviceD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *ô
+processâ
+/Union[multiprocessing.process.BaseProcess,None]J
+#multiprocessing.process.BaseProcess"#multiprocessing.process.BaseProcess
+None *ù
+request_queueá
+-Union[multiprocessing.queues.Queue[Any],None]J
+!multiprocessing.queues.Queue[Any]
+Any"multiprocessing.queues.Queue
+None *û
+response_queueá
+-Union[multiprocessing.queues.Queue[Any],None]J
+!multiprocessing.queues.Queue[Any]
+Any"multiprocessing.queues.Queue
+None 8rÖ
+device5torch._inductor.autotune_process.TuningProcess.deviceD
+Union[builtins.int,None]
+builtins.int"builtins.int
+NonerÕ
+process6torch._inductor.autotune_process.TuningProcess.processâ
+/Union[multiprocessing.process.BaseProcess,None]J
+#multiprocessing.process.BaseProcess"#multiprocessing.process.BaseProcess
+Noner◊
+request_queue<torch._inductor.autotune_process.TuningProcess.request_queueá
+-Union[multiprocessing.queues.Queue[Any],None]J
+!multiprocessing.queues.Queue[Any]
+Any"multiprocessing.queues.Queue
+NonerŸ
+response_queue=torch._inductor.autotune_process.TuningProcess.response_queueá
+-Union[multiprocessing.queues.Queue[Any],None]J
+!multiprocessing.queues.Queue[Any]
+Any"multiprocessing.queues.Queue
+Nonerı
+__dataclass_fields__Ctorch._inductor.autotune_process.TuningProcess.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictÅ
+TuningProcessPool2torch._inductor.autotune_process.TuningProcessPool"builtins.object*…
+
+initialize=torch._inductor.autotune_process.TuningProcessPool.initialize"
+None*r
+selfh
+2torch._inductor.autotune_process.TuningProcessPool"2torch._inductor.autotune_process.TuningProcessPool*Œ
+get_device_listBtorch._inductor.autotune_process.TuningProcessPool.get_device_list"Ç
+)typing.Sequence[Union[builtins.int,None]]D
+Union[builtins.int,None]
+builtins.int"builtins.int
+None"typing.Sequence*r
+selfh
+2torch._inductor.autotune_process.TuningProcessPool"2torch._inductor.autotune_process.TuningProcessPool*«
+	terminate<torch._inductor.autotune_process.TuningProcessPool.terminate"
+None*r
+selfh
+2torch._inductor.autotune_process.TuningProcessPool"2torch._inductor.autotune_process.TuningProcessPool*’
+target9torch._inductor.autotune_process.TuningProcessPool.target" 
+builtins.float"builtins.float*r
+selfh
+2torch._inductor.autotune_process.TuningProcessPool"2torch._inductor.autotune_process.TuningProcessPool*z
+choicen
+5torch._inductor.select_algorithm.TritonTemplateCaller"5torch._inductor.select_algorithm.TritonTemplateCaller*å
+	benchmark<torch._inductor.autotune_process.TuningProcessPool.benchmark"ˆ
+Sbuiltins.dict[torch._inductor.select_algorithm.TritonTemplateCaller,builtins.float]n
+5torch._inductor.select_algorithm.TritonTemplateCaller"5torch._inductor.select_algorithm.TritonTemplateCaller 
+builtins.float"builtins.float"builtins.dict*r
+selfh
+2torch._inductor.autotune_process.TuningProcessPool"2torch._inductor.autotune_process.TuningProcessPool*”
+choices≈
+Dbuiltins.list[torch._inductor.select_algorithm.TritonTemplateCaller]n
+5torch._inductor.select_algorithm.TritonTemplateCaller"5torch._inductor.select_algorithm.TritonTemplateCaller"builtins.list*ñ
+__init__;torch._inductor.autotune_process.TuningProcessPool.__init__"
+None*r
+selfh
+2torch._inductor.autotune_process.TuningProcessPool"2torch._inductor.autotune_process.TuningProcessPool*ñ
+	processesÑ
+GUnion[queue.Queue[torch._inductor.autotune_process.TuningProcess],None]¨
+;queue.Queue[torch._inductor.autotune_process.TuningProcess]`
+.torch._inductor.autotune_process.TuningProcess".torch._inductor.autotune_process.TuningProcess"queue.Queue
+None *µ
+executor§
+8Union[concurrent.futures.thread.ThreadPoolExecutor,None]\
+,concurrent.futures.thread.ThreadPoolExecutor",concurrent.futures.thread.ThreadPoolExecutor
+None 8r–
+	processes<torch._inductor.autotune_process.TuningProcessPool.processesÑ
+GUnion[queue.Queue[torch._inductor.autotune_process.TuningProcess],None]¨
+;queue.Queue[torch._inductor.autotune_process.TuningProcess]`
+.torch._inductor.autotune_process.TuningProcess".torch._inductor.autotune_process.TuningProcess"queue.Queue
+NonerÓ
+executor;torch._inductor.autotune_process.TuningProcessPool.executor§
+8Union[concurrent.futures.thread.ThreadPoolExecutor,None]\
+,concurrent.futures.thread.ThreadPoolExecutor",concurrent.futures.thread.ThreadPoolExecutor
+Noner˘
+__dataclass_fields__Gtorch._inductor.autotune_process.TuningProcessPool.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictÂ
+
+TensorMeta+torch._inductor.autotune_process.TensorMeta"builtins.object*Œ
+from_irnodes8torch._inductor.autotune_process.TensorMeta.from_irnodes"˜
+mUnion[torch._inductor.autotune_process.TensorMeta,builtins.list[torch._inductor.autotune_process.TensorMeta]]Z
++torch._inductor.autotune_process.TensorMeta"+torch._inductor.autotune_process.TensorMetaß
+:builtins.list[torch._inductor.autotune_process.TensorMeta]Z
++torch._inductor.autotune_process.TensorMeta"+torch._inductor.autotune_process.TensorMeta"builtins.list*°
+clsó
+1Type[torch._inductor.autotune_process.TensorMeta]Z
++torch._inductor.autotune_process.TensorMeta"+torch._inductor.autotune_process.TensorMeta"type*‘
+irnodes∆
+eUnion[TypeAlias[Union[torch._inductor.ir.Layout,torch._inductor.ir.Buffer]],typing.Sequence[Unknown]]´
+ETypeAlias[Union[torch._inductor.ir.Layout,torch._inductor.ir.Buffer]]Æ
+:Union[torch._inductor.ir.Layout,torch._inductor.ir.Buffer]6
+torch._inductor.ir.Layout"torch._inductor.ir.Layout6
+torch._inductor.ir.Buffer"torch._inductor.ir.Buffer"/torch._inductor.autotune_process.LayoutOrBuffer-
+typing.Sequence[Unknown] "typing.Sequence0:classmethodp*÷
+	to_tensor5torch._inductor.autotune_process.TensorMeta.to_tensor",
+torch._tensor.Tensor"torch._tensor.Tensor*d
+selfZ
++torch._inductor.autotune_process.TensorMeta"+torch._inductor.autotune_process.TensorMeta*Ä	
+__init__4torch._inductor.autotune_process.TensorMeta.__init__"
+None*d
+selfZ
++torch._inductor.autotune_process.TensorMeta"+torch._inductor.autotune_process.TensorMeta*.
+device"
+torch._C.device"torch._C.device*+
+dtype 
+torch._C.dtype"torch._C.dtype*ï
+sizesâ
+XTypeAlias[Union[torch._C.Size,builtins.list[builtins.int],builtins.tuple[builtins.int]]]ã
+MUnion[torch._C.Size,builtins.list[builtins.int],builtins.tuple[builtins.int]]
+torch._C.Size"torch._C.SizeJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.listL
+builtins.tuple[builtins.int]
+builtins.int"builtins.int"builtins.tuple"torch._prims_common.ShapeType*‹
+stridesŒ
+JTypeAlias[Union[builtins.list[builtins.int],builtins.tuple[builtins.int]]]›
+?Union[builtins.list[builtins.int],builtins.tuple[builtins.int]]J
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.listL
+builtins.tuple[builtins.int]
+builtins.int"builtins.int"builtins.tuple"torch._prims_common.StrideType*(
+offset
+builtins.int"builtins.int*P
+nameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None 8r`
+device2torch._inductor.autotune_process.TensorMeta.device"
+torch._C.device"torch._C.devicer\
+dtype1torch._inductor.autotune_process.TensorMeta.dtype 
+torch._C.dtype"torch._C.dtyper∆
+sizes1torch._inductor.autotune_process.TensorMeta.sizesâ
+XTypeAlias[Union[torch._C.Size,builtins.list[builtins.int],builtins.tuple[builtins.int]]]ã
+MUnion[torch._C.Size,builtins.list[builtins.int],builtins.tuple[builtins.int]]
+torch._C.Size"torch._C.SizeJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.listL
+builtins.tuple[builtins.int]
+builtins.int"builtins.int"builtins.tuple"torch._prims_common.ShapeTyperè
+strides3torch._inductor.autotune_process.TensorMeta.stridesŒ
+JTypeAlias[Union[builtins.list[builtins.int],builtins.tuple[builtins.int]]]›
+?Union[builtins.list[builtins.int],builtins.tuple[builtins.int]]J
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.listL
+builtins.tuple[builtins.int]
+builtins.int"builtins.int"builtins.tuple"torch._prims_common.StrideTyperZ
+offset2torch._inductor.autotune_process.TensorMeta.offset
+builtins.int"builtins.intr~
+name0torch._inductor.autotune_process.TensorMeta.nameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+NonerÚ
+__dataclass_fields__@torch._inductor.autotune_process.TensorMeta.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictÏ
+BenchmarkRequest1torch._inductor.autotune_process.BenchmarkRequest"builtins.object*ÿ
+__init__:torch._inductor.autotune_process.BenchmarkRequest.__init__"
+None*p
+selff
+1torch._inductor.autotune_process.BenchmarkRequest"1torch._inductor.autotune_process.BenchmarkRequest*-
+kernel_name
+builtins.str"builtins.str*è
+input_tensor_meta˜
+mUnion[torch._inductor.autotune_process.TensorMeta,builtins.list[torch._inductor.autotune_process.TensorMeta]]Z
++torch._inductor.autotune_process.TensorMeta"+torch._inductor.autotune_process.TensorMetaß
+:builtins.list[torch._inductor.autotune_process.TensorMeta]Z
++torch._inductor.autotune_process.TensorMeta"+torch._inductor.autotune_process.TensorMeta"builtins.list*ê
+output_tensor_meta˜
+mUnion[torch._inductor.autotune_process.TensorMeta,builtins.list[torch._inductor.autotune_process.TensorMeta]]Z
++torch._inductor.autotune_process.TensorMeta"+torch._inductor.autotune_process.TensorMetaß
+:builtins.list[torch._inductor.autotune_process.TensorMeta]Z
++torch._inductor.autotune_process.TensorMeta"+torch._inductor.autotune_process.TensorMeta"builtins.list*@
+
+extra_args0
+typing.Iterable[Any]
+Any"typing.Iterable*ç
+make_run_fn=torch._inductor.autotune_process.BenchmarkRequest.make_run_fn"K
+CallableType[builtins.function]&
+builtins.function"builtins.function*p
+selff
+1torch._inductor.autotune_process.BenchmarkRequest"1torch._inductor.autotune_process.BenchmarkRequest*?
+input_tensors,
+torch._tensor.Tensor"torch._tensor.Tensor*?
+output_tensor,
+torch._tensor.Tensor"torch._tensor.Tensor*Œ
+cleanup_run_fn@torch._inductor.autotune_process.BenchmarkRequest.cleanup_run_fn"
+None*p
+selff
+1torch._inductor.autotune_process.BenchmarkRequest"1torch._inductor.autotune_process.BenchmarkRequest*ü
+do_bench:torch._inductor.autotune_process.BenchmarkRequest.do_bench" 
+builtins.float"builtins.float*p
+selff
+1torch._inductor.autotune_process.BenchmarkRequest"1torch._inductor.autotune_process.BenchmarkRequest*
+fn
+Any*?
+input_tensors,
+torch._tensor.Tensor"torch._tensor.Tensor*q
+output_tensor\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None *ê
+	benchmark;torch._inductor.autotune_process.BenchmarkRequest.benchmark" 
+builtins.float"builtins.float*p
+selff
+1torch._inductor.autotune_process.BenchmarkRequest"1torch._inductor.autotune_process.BenchmarkRequest*?
+input_tensors,
+torch._tensor.Tensor"torch._tensor.Tensor*q
+output_tensor\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None 8rj
+kernel_name=torch._inductor.autotune_process.BenchmarkRequest.kernel_name
+builtins.str"builtins.strrÇ
+input_tensor_metaCtorch._inductor.autotune_process.BenchmarkRequest.input_tensor_metaß
+:builtins.list[torch._inductor.autotune_process.TensorMeta]Z
++torch._inductor.autotune_process.TensorMeta"+torch._inductor.autotune_process.TensorMeta"builtins.listr∂
+output_tensor_metaDtorch._inductor.autotune_process.BenchmarkRequest.output_tensor_metaZ
++torch._inductor.autotune_process.TensorMeta"+torch._inductor.autotune_process.TensorMetar|
+
+extra_args<torch._inductor.autotune_process.BenchmarkRequest.extra_args0
+typing.Iterable[Any]
+Any"typing.Iterabler¯
+__dataclass_fields__Ftorch._inductor.autotune_process.BenchmarkRequest.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dict‹
+TestBenchmarkRequest5torch._inductor.autotune_process.TestBenchmarkRequest"1torch._inductor.autotune_process.BenchmarkRequest*ß
+__init__>torch._inductor.autotune_process.TestBenchmarkRequest.__init__"
+None*x
+selfn
+5torch._inductor.autotune_process.TestBenchmarkRequest"5torch._inductor.autotune_process.TestBenchmarkRequest*W
+valueJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None *ú
+	benchmark?torch._inductor.autotune_process.TestBenchmarkRequest.benchmark" 
+builtins.float"builtins.float*x
+selfn
+5torch._inductor.autotune_process.TestBenchmarkRequest"5torch._inductor.autotune_process.TestBenchmarkRequest*?
+input_tensors,
+torch._tensor.Tensor"torch._tensor.Tensor*q
+output_tensor\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None rê
+value;torch._inductor.autotune_process.TestBenchmarkRequest.valueJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None»
+GPUDeviceBenchmarkRequest:torch._inductor.autotune_process.GPUDeviceBenchmarkRequest"1torch._inductor.autotune_process.BenchmarkRequest*ª
+do_benchCtorch._inductor.autotune_process.GPUDeviceBenchmarkRequest.do_bench" 
+builtins.float"builtins.float*Ç
+selfx
+:torch._inductor.autotune_process.GPUDeviceBenchmarkRequest":torch._inductor.autotune_process.GPUDeviceBenchmarkRequest*
+fn
+Any*?
+input_tensors,
+torch._tensor.Tensor"torch._tensor.Tensor*q
+output_tensor\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None ã
+TritonBenchmarkRequest7torch._inductor.autotune_process.TritonBenchmarkRequest":torch._inductor.autotune_process.GPUDeviceBenchmarkRequest*∏
+__init__@torch._inductor.autotune_process.TritonBenchmarkRequest.__init__"
+None*|
+selfr
+7torch._inductor.autotune_process.TritonBenchmarkRequest"7torch._inductor.autotune_process.TritonBenchmarkRequest*-
+kernel_name
+builtins.str"builtins.str*è
+input_tensor_meta˜
+mUnion[torch._inductor.autotune_process.TensorMeta,builtins.list[torch._inductor.autotune_process.TensorMeta]]Z
++torch._inductor.autotune_process.TensorMeta"+torch._inductor.autotune_process.TensorMetaß
+:builtins.list[torch._inductor.autotune_process.TensorMeta]Z
++torch._inductor.autotune_process.TensorMeta"+torch._inductor.autotune_process.TensorMeta"builtins.list*ê
+output_tensor_meta˜
+mUnion[torch._inductor.autotune_process.TensorMeta,builtins.list[torch._inductor.autotune_process.TensorMeta]]Z
++torch._inductor.autotune_process.TensorMeta"+torch._inductor.autotune_process.TensorMetaß
+:builtins.list[torch._inductor.autotune_process.TensorMeta]Z
++torch._inductor.autotune_process.TensorMeta"+torch._inductor.autotune_process.TensorMeta"builtins.list*@
+
+extra_args0
+typing.Iterable[Any]
+Any"typing.Iterable*-
+module_path
+builtins.str"builtins.str*2
+module_cache_key
+builtins.str"builtins.str*T
+gridJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*,
+
+num_stages
+builtins.int"builtins.int*+
+	num_warps
+builtins.int"builtins.int*8
+matrix_instr_nonkdim
+builtins.int"builtins.int *ü
+make_run_fnCtorch._inductor.autotune_process.TritonBenchmarkRequest.make_run_fn"K
+CallableType[builtins.function]&
+builtins.function"builtins.function*|
+selfr
+7torch._inductor.autotune_process.TritonBenchmarkRequest"7torch._inductor.autotune_process.TritonBenchmarkRequest*?
+input_tensors,
+torch._tensor.Tensor"torch._tensor.Tensor*?
+output_tensor,
+torch._tensor.Tensor"torch._tensor.Tensor*Z
+
+precompileBtorch._inductor.autotune_process.TritonBenchmarkRequest.precompile*
+self*ﬁ
+__str__?torch._inductor.autotune_process.TritonBenchmarkRequest.__str__"
+builtins.str"builtins.str*tr
+7torch._inductor.autotune_process.TritonBenchmarkRequest"7torch._inductor.autotune_process.TritonBenchmarkRequestrp
+module_pathCtorch._inductor.autotune_process.TritonBenchmarkRequest.module_path
+builtins.str"builtins.strrz
+module_cache_keyHtorch._inductor.autotune_process.TritonBenchmarkRequest.module_cache_key
+builtins.str"builtins.strrê
+grid<torch._inductor.autotune_process.TritonBenchmarkRequest.gridJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.listrn
+
+num_stagesBtorch._inductor.autotune_process.TritonBenchmarkRequest.num_stages
+builtins.int"builtins.intrl
+	num_warpsAtorch._inductor.autotune_process.TritonBenchmarkRequest.num_warps
+builtins.int"builtins.intrÇ
+matrix_instr_nonkdimLtorch._inductor.autotune_process.TritonBenchmarkRequest.matrix_instr_nonkdim
+builtins.int"builtins.intÍ
+CUDABenchmarkRequest5torch._inductor.autotune_process.CUDABenchmarkRequest":torch._inductor.autotune_process.GPUDeviceBenchmarkRequest*ì	
+__init__>torch._inductor.autotune_process.CUDABenchmarkRequest.__init__"
+None*x
+selfn
+5torch._inductor.autotune_process.CUDABenchmarkRequest"5torch._inductor.autotune_process.CUDABenchmarkRequest*-
+kernel_name
+builtins.str"builtins.str*è
+input_tensor_meta˜
+mUnion[torch._inductor.autotune_process.TensorMeta,builtins.list[torch._inductor.autotune_process.TensorMeta]]Z
++torch._inductor.autotune_process.TensorMeta"+torch._inductor.autotune_process.TensorMetaß
+:builtins.list[torch._inductor.autotune_process.TensorMeta]Z
++torch._inductor.autotune_process.TensorMeta"+torch._inductor.autotune_process.TensorMeta"builtins.list*ê
+output_tensor_meta˜
+mUnion[torch._inductor.autotune_process.TensorMeta,builtins.list[torch._inductor.autotune_process.TensorMeta]]Z
++torch._inductor.autotune_process.TensorMeta"+torch._inductor.autotune_process.TensorMetaß
+:builtins.list[torch._inductor.autotune_process.TensorMeta]Z
++torch._inductor.autotune_process.TensorMeta"+torch._inductor.autotune_process.TensorMeta"builtins.list*@
+
+extra_args0
+typing.Iterable[Any]
+Any"typing.Iterable*-
+source_code
+builtins.str"builtins.str*X
+
+precompile@torch._inductor.autotune_process.CUDABenchmarkRequest.precompile*
+self*ô
+make_run_fnAtorch._inductor.autotune_process.CUDABenchmarkRequest.make_run_fn"K
+CallableType[builtins.function]&
+builtins.function"builtins.function*x
+selfn
+5torch._inductor.autotune_process.CUDABenchmarkRequest"5torch._inductor.autotune_process.CUDABenchmarkRequest*?
+input_tensors,
+torch._tensor.Tensor"torch._tensor.Tensor*?
+output_tensor,
+torch._tensor.Tensor"torch._tensor.Tensor*Ë
+update_workspace_sizeKtorch._inductor.autotune_process.CUDABenchmarkRequest.update_workspace_size"
+None*x
+selfn
+5torch._inductor.autotune_process.CUDABenchmarkRequest"5torch._inductor.autotune_process.CUDABenchmarkRequest*f
+ensure_dll_loadedGtorch._inductor.autotune_process.CUDABenchmarkRequest.ensure_dll_loaded*
+self*⁄
+cleanup_run_fnDtorch._inductor.autotune_process.CUDABenchmarkRequest.cleanup_run_fn"
+None*x
+selfn
+5torch._inductor.autotune_process.CUDABenchmarkRequest"5torch._inductor.autotune_process.CUDABenchmarkRequest*ÿ
+__str__=torch._inductor.autotune_process.CUDABenchmarkRequest.__str__"
+builtins.str"builtins.str*pn
+5torch._inductor.autotune_process.CUDABenchmarkRequest"5torch._inductor.autotune_process.CUDABenchmarkRequestrn
+source_codeAtorch._inductor.autotune_process.CUDABenchmarkRequest.source_code
+builtins.str"builtins.strrt
+workspace_sizeDtorch._inductor.autotune_process.CUDABenchmarkRequest.workspace_size
+builtins.int"builtins.intr™
+	workspace?torch._inductor.autotune_process.CUDABenchmarkRequest.workspace\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+Nonerœ
+DLL9torch._inductor.autotune_process.CUDABenchmarkRequest.DLLå
+0Union[torch._inductor.codecache.DLLWrapper,None]L
+$torch._inductor.codecache.DLLWrapper"$torch._inductor.codecache.DLLWrapper
+Nonerà
+_workspace_size_updatedMtorch._inductor.autotune_process.CUDABenchmarkRequest._workspace_size_updated
+builtins.bool"builtins.boolrh
+hash_key>torch._inductor.autotune_process.CUDABenchmarkRequest.hash_key
+builtins.str"builtins.strrn
+source_fileAtorch._inductor.autotune_process.CUDABenchmarkRequest.source_file
+builtins.str"builtins.str»
+CPUDeviceBenchmarkRequest:torch._inductor.autotune_process.CPUDeviceBenchmarkRequest"1torch._inductor.autotune_process.BenchmarkRequest*ª
+do_benchCtorch._inductor.autotune_process.CPUDeviceBenchmarkRequest.do_bench" 
+builtins.float"builtins.float*Ç
+selfx
+:torch._inductor.autotune_process.CPUDeviceBenchmarkRequest":torch._inductor.autotune_process.CPUDeviceBenchmarkRequest*
+fn
+Any*?
+input_tensors,
+torch._tensor.Tensor"torch._tensor.Tensor*q
+output_tensor\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None Ω
+CppBenchmarkRequest4torch._inductor.autotune_process.CppBenchmarkRequest":torch._inductor.autotune_process.CPUDeviceBenchmarkRequest*ê	
+__init__=torch._inductor.autotune_process.CppBenchmarkRequest.__init__"
+None*v
+selfl
+4torch._inductor.autotune_process.CppBenchmarkRequest"4torch._inductor.autotune_process.CppBenchmarkRequest*-
+kernel_name
+builtins.str"builtins.str*è
+input_tensor_meta˜
+mUnion[torch._inductor.autotune_process.TensorMeta,builtins.list[torch._inductor.autotune_process.TensorMeta]]Z
++torch._inductor.autotune_process.TensorMeta"+torch._inductor.autotune_process.TensorMetaß
+:builtins.list[torch._inductor.autotune_process.TensorMeta]Z
++torch._inductor.autotune_process.TensorMeta"+torch._inductor.autotune_process.TensorMeta"builtins.list*ê
+output_tensor_meta˜
+mUnion[torch._inductor.autotune_process.TensorMeta,builtins.list[torch._inductor.autotune_process.TensorMeta]]Z
++torch._inductor.autotune_process.TensorMeta"+torch._inductor.autotune_process.TensorMetaß
+:builtins.list[torch._inductor.autotune_process.TensorMeta]Z
++torch._inductor.autotune_process.TensorMeta"+torch._inductor.autotune_process.TensorMeta"builtins.list*@
+
+extra_args0
+typing.Iterable[Any]
+Any"typing.Iterable*-
+source_code
+builtins.str"builtins.str*W
+
+precompile?torch._inductor.autotune_process.CppBenchmarkRequest.precompile*
+self*ñ
+make_run_fn@torch._inductor.autotune_process.CppBenchmarkRequest.make_run_fn"K
+CallableType[builtins.function]&
+builtins.function"builtins.function*v
+selfl
+4torch._inductor.autotune_process.CppBenchmarkRequest"4torch._inductor.autotune_process.CppBenchmarkRequest*?
+input_tensors,
+torch._tensor.Tensor"torch._tensor.Tensor*?
+output_tensor,
+torch._tensor.Tensor"torch._tensor.Tensor*◊
+cleanup_run_fnCtorch._inductor.autotune_process.CppBenchmarkRequest.cleanup_run_fn"
+None*v
+selfl
+4torch._inductor.autotune_process.CppBenchmarkRequest"4torch._inductor.autotune_process.CppBenchmarkRequest*’
+__str__<torch._inductor.autotune_process.CppBenchmarkRequest.__str__"
+builtins.str"builtins.str*nl
+4torch._inductor.autotune_process.CppBenchmarkRequest"4torch._inductor.autotune_process.CppBenchmarkRequestrm
+source_code@torch._inductor.autotune_process.CppBenchmarkRequest.source_code
+builtins.str"builtins.strrR
+hash_key=torch._inductor.autotune_process.CppBenchmarkRequest.hash_key
+Anyrπ
+DLL8torch._inductor.autotune_process.CppBenchmarkRequest.DLLx
+(Union[ctypes.CDLL,types.ModuleType,None]
+ctypes.CDLL"ctypes.CDLL$
+types.ModuleType"types.ModuleType
+None§
+benchmark_in_sub_process9torch._inductor.autotune_process.benchmark_in_sub_process"ˆ
+Sbuiltins.dict[torch._inductor.select_algorithm.TritonTemplateCaller,builtins.float]n
+5torch._inductor.select_algorithm.TritonTemplateCaller"5torch._inductor.select_algorithm.TritonTemplateCaller 
+builtins.float"builtins.float"builtins.dict*”
+choices≈
+Dbuiltins.list[torch._inductor.select_algorithm.TritonTemplateCaller]n
+5torch._inductor.select_algorithm.TritonTemplateCaller"5torch._inductor.select_algorithm.TritonTemplateCaller"builtins.list*ú
+__annotations__0torch._inductor.autotune_process.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*k
+CUDA_VISIBLE_DEVICES5torch._inductor.autotune_process.CUDA_VISIBLE_DEVICES
+builtins.str"builtins.str*s
+EXIT_HANDLER_REGISTERED8torch._inductor.autotune_process.EXIT_HANDLER_REGISTERED
+builtins.bool"builtins.bool*M
+log$torch._inductor.autotune_process.log 
+logging.Logger"logging.Logger*•
+tuning_pool,torch._inductor.autotune_process.tuning_poolh
+2torch._inductor.autotune_process.TuningProcessPool"2torch._inductor.autotune_process.TuningProcessPool

@@ -1,0 +1,159 @@
+
+)torch.ao.quantization.fx.quantize_handlerÉ
+QuantizeHandler9torch.ao.quantization.fx.quantize_handler.QuantizeHandler"abc.ABC*ﬂ
+
+__init__Btorch.ao.quantization.fx.quantize_handler.QuantizeHandler.__init__"
+None*Ä
+selfv
+9torch.ao.quantization.fx.quantize_handler.QuantizeHandler"9torch.ao.quantization.fx.quantize_handler.QuantizeHandler*›
+node_pattern 
+âTypeAlias[Union[Tuple[torch.fx.node.Node,torch.fx.node.Node],Tuple[torch.fx.node.Node,Tuple[torch.fx.node.Node,torch.fx.node.Node]],Any]]ê
+~Union[Tuple[torch.fx.node.Node,torch.fx.node.Node],Tuple[torch.fx.node.Node,Tuple[torch.fx.node.Node,torch.fx.node.Node]],Any]Ñ
+,Tuple[torch.fx.node.Node,torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node(
+torch.fx.node.Node"torch.fx.node.Node˚
+FTuple[torch.fx.node.Node,Tuple[torch.fx.node.Node,torch.fx.node.Node]](
+torch.fx.node.Node"torch.fx.node.NodeÑ
+,Tuple[torch.fx.node.Node,torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node(
+torch.fx.node.Node"torch.fx.node.Node
+Any"'torch.ao.quantization.utils.NodePattern*π
+modules´
+:builtins.dict[builtins.str,torch.nn.modules.module.Module]
+builtins.str"builtins.str@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"builtins.dict*ü
+root_node_getterÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *
+is_custom_module
+Any *#
+is_standalone_module
+Any *ï
+is_general_tensor_value_opTtorch.ao.quantization.fx.quantize_handler.QuantizeHandler.is_general_tensor_value_op"
+builtins.bool"builtins.bool*Ä
+selfv
+9torch.ao.quantization.fx.quantize_handler.QuantizeHandler"9torch.ao.quantization.fx.quantize_handler.QuantizeHandler*h
+is_custom_moduleJtorch.ao.quantization.fx.quantize_handler.QuantizeHandler.is_custom_module*
+self*p
+is_standalone_moduleNtorch.ao.quantization.fx.quantize_handler.QuantizeHandler.is_standalone_module*
+selfr£
+node_patternFtorch.ao.quantization.fx.quantize_handler.QuantizeHandler.node_pattern 
+âTypeAlias[Union[Tuple[torch.fx.node.Node,torch.fx.node.Node],Tuple[torch.fx.node.Node,Tuple[torch.fx.node.Node,torch.fx.node.Node]],Any]]ê
+~Union[Tuple[torch.fx.node.Node,torch.fx.node.Node],Tuple[torch.fx.node.Node,Tuple[torch.fx.node.Node,torch.fx.node.Node]],Any]Ñ
+,Tuple[torch.fx.node.Node,torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node(
+torch.fx.node.Node"torch.fx.node.Node˚
+FTuple[torch.fx.node.Node,Tuple[torch.fx.node.Node,torch.fx.node.Node]](
+torch.fx.node.Node"torch.fx.node.NodeÑ
+,Tuple[torch.fx.node.Node,torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node(
+torch.fx.node.Node"torch.fx.node.Node
+Any"'torch.ao.quantization.utils.NodePatternr˙
+modulesAtorch.ao.quantization.fx.quantize_handler.QuantizeHandler.modules´
+:builtins.dict[builtins.str,torch.nn.modules.module.Module]
+builtins.str"builtins.str@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"builtins.dictrY
+	root_nodeCtorch.ao.quantization.fx.quantize_handler.QuantizeHandler.root_node
+Anyri
+is_custom_module_Ktorch.ao.quantization.fx.quantize_handler.QuantizeHandler.is_custom_module_
+Anyrq
+is_standalone_module_Otorch.ao.quantization.fx.quantize_handler.QuantizeHandler.is_standalone_module_
+Anyrz
+num_tensor_argsItorch.ao.quantization.fx.quantize_handler.QuantizeHandler.num_tensor_args
+builtins.int"builtins.intó
+BinaryOpQuantizeHandlerAtorch.ao.quantization.fx.quantize_handler.BinaryOpQuantizeHandler"9torch.ao.quantization.fx.quantize_handler.QuantizeHandlerç
+CatQuantizeHandler<torch.ao.quantization.fx.quantize_handler.CatQuantizeHandler"9torch.ao.quantization.fx.quantize_handler.QuantizeHandleró
+ConvReluQuantizeHandlerAtorch.ao.quantization.fx.quantize_handler.ConvReluQuantizeHandler"9torch.ao.quantization.fx.quantize_handler.QuantizeHandlerõ
+LinearReLUQuantizeHandlerCtorch.ao.quantization.fx.quantize_handler.LinearReLUQuantizeHandler"9torch.ao.quantization.fx.quantize_handler.QuantizeHandlerô
+BatchNormQuantizeHandlerBtorch.ao.quantization.fx.quantize_handler.BatchNormQuantizeHandler"9torch.ao.quantization.fx.quantize_handler.QuantizeHandlerô
+EmbeddingQuantizeHandlerBtorch.ao.quantization.fx.quantize_handler.EmbeddingQuantizeHandler"9torch.ao.quantization.fx.quantize_handler.QuantizeHandlerõ
+RNNDynamicQuantizeHandlerCtorch.ao.quantization.fx.quantize_handler.RNNDynamicQuantizeHandler"9torch.ao.quantization.fx.quantize_handler.QuantizeHandlerù
+DefaultNodeQuantizeHandlerDtorch.ao.quantization.fx.quantize_handler.DefaultNodeQuantizeHandler"9torch.ao.quantization.fx.quantize_handler.QuantizeHandler£
+FixedQParamsOpQuantizeHandlerGtorch.ao.quantization.fx.quantize_handler.FixedQParamsOpQuantizeHandler"9torch.ao.quantization.fx.quantize_handler.QuantizeHandleró
+CopyNodeQuantizeHandlerAtorch.ao.quantization.fx.quantize_handler.CopyNodeQuantizeHandler"9torch.ao.quantization.fx.quantize_handler.QuantizeHandlerØ
+#GeneralTensorShapeOpQuantizeHandlerMtorch.ao.quantization.fx.quantize_handler.GeneralTensorShapeOpQuantizeHandler"9torch.ao.quantization.fx.quantize_handler.QuantizeHandlerü
+CustomModuleQuantizeHandlerEtorch.ao.quantization.fx.quantize_handler.CustomModuleQuantizeHandler"9torch.ao.quantization.fx.quantize_handler.QuantizeHandlerß
+StandaloneModuleQuantizeHandlerItorch.ao.quantization.fx.quantize_handler.StandaloneModuleQuantizeHandler"9torch.ao.quantization.fx.quantize_handler.QuantizeHandlerç
+ConfigurableQuantizeHandler@106Itorch.ao.quantization.fx.quantize_handler.ConfigurableQuantizeHandler@106"9torch.ao.quantization.fx.quantize_handler.QuantizeHandler* 
+
+__init__Rtorch.ao.quantization.fx.quantize_handler.ConfigurableQuantizeHandler@106.__init__"
+None*°
+selfñ
+Itorch.ao.quantization.fx.quantize_handler.ConfigurableQuantizeHandler@106"Itorch.ao.quantization.fx.quantize_handler.ConfigurableQuantizeHandler@106*›
+node_pattern 
+âTypeAlias[Union[Tuple[torch.fx.node.Node,torch.fx.node.Node],Tuple[torch.fx.node.Node,Tuple[torch.fx.node.Node,torch.fx.node.Node]],Any]]ê
+~Union[Tuple[torch.fx.node.Node,torch.fx.node.Node],Tuple[torch.fx.node.Node,Tuple[torch.fx.node.Node,torch.fx.node.Node]],Any]Ñ
+,Tuple[torch.fx.node.Node,torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node(
+torch.fx.node.Node"torch.fx.node.Node˚
+FTuple[torch.fx.node.Node,Tuple[torch.fx.node.Node,torch.fx.node.Node]](
+torch.fx.node.Node"torch.fx.node.NodeÑ
+,Tuple[torch.fx.node.Node,torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node(
+torch.fx.node.Node"torch.fx.node.Node
+Any"'torch.ao.quantization.utils.NodePattern*π
+modules´
+:builtins.dict[builtins.str,torch.nn.modules.module.Module]
+builtins.str"builtins.str@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"builtins.dict*ü
+root_node_getterÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *∆
+is_general_tensor_value_opdtorch.ao.quantization.fx.quantize_handler.ConfigurableQuantizeHandler@106.is_general_tensor_value_op"
+builtins.bool"builtins.bool*°
+selfñ
+Itorch.ao.quantization.fx.quantize_handler.ConfigurableQuantizeHandler@106"Itorch.ao.quantization.fx.quantize_handler.ConfigurableQuantizeHandler@106r˚
+observation_typeZtorch.ao.quantization.fx.quantize_handler.ConfigurableQuantizeHandler@106.observation_typeä
+Ctorch.ao.quantization.backend_config.backend_config.ObservationType"Ctorch.ao.quantization.backend_config.backend_config.ObservationTyperœ
+dtype_configsWtorch.ao.quantization.fx.quantize_handler.ConfigurableQuantizeHandler@106.dtype_configs‰
+Nbuiltins.list[torch.ao.quantization.backend_config.backend_config.DTypeConfig]Ç
+?torch.ao.quantization.backend_config.backend_config.DTypeConfig"?torch.ao.quantization.backend_config.backend_config.DTypeConfig"builtins.listr
+_default_root_node_getterCtorch.ao.quantization.fx.quantize_handler._default_root_node_getter*
+node_patternã
+_get_quantize_handler_clsCtorch.ao.quantization.fx.quantize_handler._get_quantize_handler_cls"¡
+?Type[torch.ao.quantization.fx.quantize_handler.QuantizeHandler]v
+9torch.ao.quantization.fx.quantize_handler.QuantizeHandler"9torch.ao.quantization.fx.quantize_handler.QuantizeHandler"type*°
+observation_typeä
+Ctorch.ao.quantization.backend_config.backend_config.ObservationType"Ctorch.ao.quantization.backend_config.backend_config.ObservationType*¯
+dtype_configs‰
+Nbuiltins.list[torch.ao.quantization.backend_config.backend_config.DTypeConfig]Ç
+?torch.ao.quantization.backend_config.backend_config.DTypeConfig"?torch.ao.quantization.backend_config.backend_config.DTypeConfig"builtins.list*≈
+#num_tensor_args_to_observation_typeõ
+_builtins.dict[builtins.int,torch.ao.quantization.backend_config.backend_config.ObservationType]
+builtins.int"builtins.intä
+Ctorch.ao.quantization.backend_config.backend_config.ObservationType"Ctorch.ao.quantization.backend_config.backend_config.ObservationType"builtins.dict’
+!_get_pattern_to_quantize_handlersKtorch.ao.quantization.fx.quantize_handler._get_pattern_to_quantize_handlers"ƒ
+àbuiltins.dict[TypeAlias[Union[CallableType[builtins.function],Tuple[CallableType[builtins.function],CallableType[builtins.function]],Tuple[CallableType[builtins.function],Tuple[CallableType[builtins.function],CallableType[builtins.function]]],Any]],TypeAlias[Any]]‡	
+ÍTypeAlias[Union[CallableType[builtins.function],Tuple[CallableType[builtins.function],CallableType[builtins.function]],Tuple[CallableType[builtins.function],Tuple[CallableType[builtins.function],CallableType[builtins.function]]],Any]]…
+ﬂUnion[CallableType[builtins.function],Tuple[CallableType[builtins.function],CallableType[builtins.function]],Tuple[CallableType[builtins.function],Tuple[CallableType[builtins.function],CallableType[builtins.function]]],Any]K
+CallableType[builtins.function]&
+builtins.function"builtins.function‰
+FTuple[CallableType[builtins.function],CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.functionK
+CallableType[builtins.function]&
+builtins.function"builtins.function•
+mTuple[CallableType[builtins.function],Tuple[CallableType[builtins.function],CallableType[builtins.function]]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function‰
+FTuple[CallableType[builtins.function],CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.functionK
+CallableType[builtins.function]&
+builtins.function"builtins.function
+Any"#torch.ao.quantization.utils.PatternE
+TypeAlias[Any]
+Any"(torch.ao.quantization.utils.QuantizerCls"builtins.dict*õ
+backend_configÜ
+Atorch.ao.quantization.backend_config.backend_config.BackendConfig"Atorch.ao.quantization.backend_config.backend_config.BackendConfig*•
+__annotations__9torch.ao.quantization.fx.quantize_handler.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*à
+__all__1torch.ao.quantization.fx.quantize_handler.__all__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list

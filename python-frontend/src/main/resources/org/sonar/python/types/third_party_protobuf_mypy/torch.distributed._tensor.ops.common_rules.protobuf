@@ -1,0 +1,53 @@
+
+*torch.distributed._tensor.ops.common_rulesò
+_replace_char_in_str?torch.distributed._tensor.ops.common_rules._replace_char_in_str"
+builtins.str"builtins.str*(
+string
+builtins.str"builtins.str**
+new_char
+builtins.str"builtins.str*%
+idx
+builtins.int"builtins.intÜ
+_gen_reshard_suggestionsCtorch.distributed._tensor.ops.common_rules._gen_reshard_suggestions"j
+3torch.distributed._tensor._op_schema.OutputSharding"3torch.distributed._tensor._op_schema.OutputSharding*m
+	op_schema^
+-torch.distributed._tensor._op_schema.OpSchema"-torch.distributed._tensor._op_schema.OpSchema*Z
+
+input_dimsJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*Ù
+input_specsÇ
+Ebuiltins.tuple[torch.distributed._tensor.placement_types.DTensorSpec]n
+5torch.distributed._tensor.placement_types.DTensorSpec"5torch.distributed._tensor.placement_types.DTensorSpec"builtins.tuple*Š
+dim_to_shardingu
+(builtins.dict[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int"builtins.dict*[
+pending_sumJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.listÐ
+
+einop_rule5torch.distributed._tensor.ops.common_rules.einop_rule"j
+3torch.distributed._tensor._op_schema.OutputSharding"3torch.distributed._tensor._op_schema.OutputSharding**
+equation
+builtins.str"builtins.str*m
+	op_schema^
+-torch.distributed._tensor._op_schema.OpSchema"-torch.distributed._tensor._op_schema.OpSchema*/
+	linearity
+builtins.bool"builtins.bool *Ò
+enforce_sharding¹
+4Union[builtins.dict[builtins.str,builtins.int],None]u
+(builtins.dict[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int"builtins.dict
+None ×
+pointwise_rule9torch.distributed._tensor.ops.common_rules.pointwise_rule"j
+3torch.distributed._tensor._op_schema.OutputSharding"3torch.distributed._tensor._op_schema.OutputSharding*m
+	op_schema^
+-torch.distributed._tensor._op_schema.OpSchema"-torch.distributed._tensor._op_schema.OpSchema*/
+	linearity
+builtins.bool"builtins.bool *¦
+__annotations__:torch.distributed._tensor.ops.common_rules.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict

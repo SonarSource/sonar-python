@@ -1,0 +1,208 @@
+
+torch.onnx._internal.fx.passes˜
+	Decompose/torch.onnx._internal.fx.passes.decomp.Decompose"'torch.onnx._internal.fx._pass.Transform*§
+__init__8torch.onnx._internal.fx.passes.decomp.Decompose.__init__"
+None*l
+selfb
+/torch.onnx._internal.fx.passes.decomp.Decompose"/torch.onnx._internal.fx.passes.decomp.Decompose*†
+diagnostic_contextn
+5torch.onnx._internal.fx.diagnostics.DiagnosticContext"5torch.onnx._internal.fx.diagnostics.DiagnosticContext*R
+moduleF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*î
+decomposition_tableÔ
+Etyping.Mapping[torch._ops.OpOverload,CallableType[builtins.function]].
+torch._ops.OpOverload"torch._ops.OpOverloadK
+CallableType[builtins.function]&
+builtins.function"builtins.function"typing.Mapping*7
+enable_dynamic_axes
+builtins.bool"builtins.bool*b
+allow_fake_constantG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *°
+_run4torch.onnx._internal.fx.passes.decomp.Decompose._run"F
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*l
+selfb
+/torch.onnx._internal.fx.passes.decomp.Decompose"/torch.onnx._internal.fx.passes.decomp.Decompose*
+args
+Any*
+kwargs
+Any0:_beartype.beartyper±
+decomposition_tableCtorch.onnx._internal.fx.passes.decomp.Decompose.decomposition_tableÔ
+Etyping.Mapping[torch._ops.OpOverload,CallableType[builtins.function]].
+torch._ops.OpOverload"torch._ops.OpOverloadK
+CallableType[builtins.function]&
+builtins.function"builtins.function"typing.Mappingrz
+enable_dynamic_axesCtorch.onnx._internal.fx.passes.decomp.Decompose.enable_dynamic_axes
+builtins.bool"builtins.boolr£
+allow_fake_constantCtorch.onnx._internal.fx.passes.decomp.Decompose.allow_fake_constantG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+Noneœ
+Functionalize>torch.onnx._internal.fx.passes.functionalization.Functionalize"'torch.onnx._internal.fx._pass.Transform*û
+__init__Gtorch.onnx._internal.fx.passes.functionalization.Functionalize.__init__"
+None*‹
+self€
+>torch.onnx._internal.fx.passes.functionalization.Functionalize">torch.onnx._internal.fx.passes.functionalization.Functionalize*†
+diagnostic_contextn
+5torch.onnx._internal.fx.diagnostics.DiagnosticContext"5torch.onnx._internal.fx.diagnostics.DiagnosticContext*R
+moduleF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*7
+enable_dynamic_axes
+builtins.bool"builtins.bool*b
+allow_fake_constantG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None 0:_beartype.beartype*•
+_functionalizeMtorch.onnx._internal.fx.passes.functionalization.Functionalize._functionalize"K
+CallableType[builtins.function]&
+builtins.function"builtins.function*‹
+self€
+>torch.onnx._internal.fx.passes.functionalization.Functionalize">torch.onnx._internal.fx.passes.functionalization.Functionalize*Y
+functionK
+CallableType[builtins.function]&
+builtins.function"builtins.function*Ê
+_runCtorch.onnx._internal.fx.passes.functionalization.Functionalize._run"F
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*‹
+self€
+>torch.onnx._internal.fx.passes.functionalization.Functionalize">torch.onnx._internal.fx.passes.functionalization.Functionalize*
+args
+Any0:_beartype.beartyper‰
+enable_dynamic_axesRtorch.onnx._internal.fx.passes.functionalization.Functionalize.enable_dynamic_axes
+builtins.bool"builtins.boolr²
+allow_fake_constantRtorch.onnx._internal.fx.passes.functionalization.Functionalize.allow_fake_constantG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+Noneã
+RemoveInputMutationDtorch.onnx._internal.fx.passes.functionalization.RemoveInputMutation"'torch.onnx._internal.fx._pass.Transform*Ü
+_runItorch.onnx._internal.fx.passes.functionalization.RemoveInputMutation._run"F
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*—
+selfŒ
+Dtorch.onnx._internal.fx.passes.functionalization.RemoveInputMutation"Dtorch.onnx._internal.fx.passes.functionalization.RemoveInputMutation*
+args
+Any0:_beartype.beartype£
+
+Modularize8torch.onnx._internal.fx.passes.modularization.Modularize"'torch.onnx._internal.fx._pass.Transform*…
+__init__Atorch.onnx._internal.fx.passes.modularization.Modularize.__init__"
+None*~
+selft
+8torch.onnx._internal.fx.passes.modularization.Modularize"8torch.onnx._internal.fx.passes.modularization.Modularize*†
+diagnostic_contextn
+5torch.onnx._internal.fx.diagnostics.DiagnosticContext"5torch.onnx._internal.fx.diagnostics.DiagnosticContext*R
+moduleF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*9
+is_exported_program
+builtins.bool"builtins.bool 0:_beartype.beartype*£
+_run=torch.onnx._internal.fx.passes.modularization.Modularize._run"F
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*~
+selft
+8torch.onnx._internal.fx.passes.modularization.Modularize"8torch.onnx._internal.fx.passes.modularization.Modularize0:_beartype.beartyperƒ
+is_exported_programLtorch.onnx._internal.fx.passes.modularization.Modularize.is_exported_program
+builtins.bool"builtins.boolÑ
+RestoreParameterAndBufferNamesItorch.onnx._internal.fx.passes.readability.RestoreParameterAndBufferNames"'torch.onnx._internal.fx._pass.Transform*Æ
+__init__Rtorch.onnx._internal.fx.passes.readability.RestoreParameterAndBufferNames.__init__"
+None*¡
+self–
+Itorch.onnx._internal.fx.passes.readability.RestoreParameterAndBufferNames"Itorch.onnx._internal.fx.passes.readability.RestoreParameterAndBufferNames*†
+diagnostic_contextn
+5torch.onnx._internal.fx.diagnostics.DiagnosticContext"5torch.onnx._internal.fx.diagnostics.DiagnosticContext*U
+	fx_moduleF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*X
+original_nn_module@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*Í
+_rename_param_and_bufferbtorch.onnx._internal.fx.passes.readability.RestoreParameterAndBufferNames._rename_param_and_buffer"
+None*¡
+self–
+Itorch.onnx._internal.fx.passes.readability.RestoreParameterAndBufferNames"Itorch.onnx._internal.fx.passes.readability.RestoreParameterAndBufferNames*p
+
+diagnostic`
+.torch.onnx._internal.fx.diagnostics.Diagnostic".torch.onnx._internal.fx.diagnostics.Diagnostic*k
+nodes`
+#typing.Sequence[torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node"typing.Sequence**
+new_name
+builtins.str"builtins.str0:_beartype.beartype*ê
+_runNtorch.onnx._internal.fx.passes.readability.RestoreParameterAndBufferNames._run"F
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*¡
+self–
+Itorch.onnx._internal.fx.passes.readability.RestoreParameterAndBufferNames"Itorch.onnx._internal.fx.passes.readability.RestoreParameterAndBufferNames*
+args
+Any*
+kwargs
+Anyr´
+original_nn_module\torch.onnx._internal.fx.passes.readability.RestoreParameterAndBufferNames.original_nn_module@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module’
+InsertTypePromotionAtorch.onnx._internal.fx.passes.type_promotion.InsertTypePromotion"'torch.onnx._internal.fx._pass.Transform*Ò
+__init__Jtorch.onnx._internal.fx.passes.type_promotion.InsertTypePromotion.__init__"
+None*‘
+self†
+Atorch.onnx._internal.fx.passes.type_promotion.InsertTypePromotion"Atorch.onnx._internal.fx.passes.type_promotion.InsertTypePromotion*†
+diagnostic_contextn
+5torch.onnx._internal.fx.diagnostics.DiagnosticContext"5torch.onnx._internal.fx.diagnostics.DiagnosticContext*R
+moduleF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*þ
+type_promotion_tableá
+LUnion[torch.onnx._internal.fx.passes.type_promotion.TypePromotionTable,None]„
+@torch.onnx._internal.fx.passes.type_promotion.TypePromotionTable"@torch.onnx._internal.fx.passes.type_promotion.TypePromotionTable
+None *Ú
+_fetch_fake_argsRtorch.onnx._internal.fx.passes.type_promotion.InsertTypePromotion._fetch_fake_args"Ý
+™typing.Sequence[Union[torch._subclasses.fake_tensor.FakeTensor,builtins.float,builtins.int,builtins.bool,torch.SymInt,torch.SymFloat,torch.SymBool,None]]­
+ˆUnion[torch._subclasses.fake_tensor.FakeTensor,builtins.float,builtins.int,builtins.bool,torch.SymInt,torch.SymFloat,torch.SymBool,None]T
+(torch._subclasses.fake_tensor.FakeTensor"(torch._subclasses.fake_tensor.FakeTensor 
+builtins.float"builtins.float
+builtins.int"builtins.int
+builtins.bool"builtins.bool
+torch.SymInt"torch.SymInt 
+torch.SymFloat"torch.SymFloat
+torch.SymBool"torch.SymBool
+None"typing.Sequence*‘
+self†
+Atorch.onnx._internal.fx.passes.type_promotion.InsertTypePromotion"Atorch.onnx._internal.fx.passes.type_promotion.InsertTypePromotion*è
+_runFtorch.onnx._internal.fx.passes.type_promotion.InsertTypePromotion._run"F
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*‘
+self†
+Atorch.onnx._internal.fx.passes.type_promotion.InsertTypePromotion"Atorch.onnx._internal.fx.passes.type_promotion.InsertTypePromotion*
+args
+Any*
+kwargs
+Any0:_beartype.beartyperñ
+interpreterMtorch.onnx._internal.fx.passes.type_promotion.InsertTypePromotion.interpreter’
+Gtorch.onnx._internal.fx.passes.type_promotion._TypePromotionInterpreter"Gtorch.onnx._internal.fx.passes.type_promotion._TypePromotionInterpreterû
+MovePlaceholderToFrontDtorch.onnx._internal.fx.passes.virtualization.MovePlaceholderToFront"'torch.onnx._internal.fx._pass.Transform*ñ
+_runItorch.onnx._internal.fx.passes.virtualization.MovePlaceholderToFront._run"F
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*—
+selfŒ
+Dtorch.onnx._internal.fx.passes.virtualization.MovePlaceholderToFront"Dtorch.onnx._internal.fx.passes.virtualization.MovePlaceholderToFront*
+args
+Any*
+kwargs
+Any0:_beartype.beartypeÁ	
+ReplaceGetAttrWithPlaceholderKtorch.onnx._internal.fx.passes.virtualization.ReplaceGetAttrWithPlaceholder"'torch.onnx._internal.fx._pass.Transform*ˆ
+replaced_attrsZtorch.onnx._internal.fx.passes.virtualization.ReplaceGetAttrWithPlaceholder.replaced_attrs"d
+$builtins.tuple[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.tuple*¥
+selfš
+Ktorch.onnx._internal.fx.passes.virtualization.ReplaceGetAttrWithPlaceholder"Ktorch.onnx._internal.fx.passes.virtualization.ReplaceGetAttrWithPlaceholder0:property`*†
+_runPtorch.onnx._internal.fx.passes.virtualization.ReplaceGetAttrWithPlaceholder._run"F
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*¥
+selfš
+Ktorch.onnx._internal.fx.passes.virtualization.ReplaceGetAttrWithPlaceholder"Ktorch.onnx._internal.fx.passes.virtualization.ReplaceGetAttrWithPlaceholder*
+args
+Any*
+kwargs
+Any0:_beartype.beartyper•
+_replaced_attrs[torch.onnx._internal.fx.passes.virtualization.ReplaceGetAttrWithPlaceholder._replaced_attrs¤
+0Union[builtins.tuple[torch._tensor.Tensor],None]d
+$builtins.tuple[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.tuple
+None*
+__path__'torch.onnx._internal.fx.passes.__path__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*š
+__annotations__.torch.onnx._internal.fx.passes.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*}
+__all__&torch.onnx._internal.fx.passes.__all__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list

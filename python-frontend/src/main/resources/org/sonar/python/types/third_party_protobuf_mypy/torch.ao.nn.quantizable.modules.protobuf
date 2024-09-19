@@ -1,0 +1,303 @@
+
+torch.ao.nn.quantizable.modules¸)
+MultiheadAttention=torch.ao.nn.quantizable.modules.activation.MultiheadAttention".torch.nn.modules.activation.MultiheadAttention*ä
+__init__Ftorch.ao.nn.quantizable.modules.activation.MultiheadAttention.__init__"
+None*à
+self~
+=torch.ao.nn.quantizable.modules.activation.MultiheadAttention"=torch.ao.nn.quantizable.modules.activation.MultiheadAttention*+
+	embed_dim
+builtins.int"builtins.int*+
+	num_heads
+builtins.int"builtins.int*/
+dropout 
+builtins.float"builtins.float **
+bias
+builtins.bool"builtins.bool *1
+add_bias_kv
+builtins.bool"builtins.bool *3
+add_zero_attn
+builtins.bool"builtins.bool *P
+kdimD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *P
+vdimD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *1
+batch_first
+builtins.bool"builtins.bool *
+device
+Any *
+dtype
+Any *^
+	_get_nameGtorch.ao.nn.quantizable.modules.activation.MultiheadAttention._get_name*
+self*{
+
+from_floatHtorch.ao.nn.quantizable.modules.activation.MultiheadAttention.from_float*
+cls*	
+other0:classmethodp*t
+
+dequantizeHtorch.ao.nn.quantizable.modules.activation.MultiheadAttention.dequantize*
+self0:torch.jit.unused*Å
+from_observedKtorch.ao.nn.quantizable.modules.activation.MultiheadAttention.from_observed*
+cls*	
+other0:classmethodp*Ÿ
+forwardEtorch.ao.nn.quantizable.modules.activation.MultiheadAttention.forward"Ã
+<Tuple[torch._tensor.Tensor,Union[torch._tensor.Tensor,None]],
+torch._tensor.Tensor"torch._tensor.Tensor\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None*à
+self~
+=torch.ao.nn.quantizable.modules.activation.MultiheadAttention"=torch.ao.nn.quantizable.modules.activation.MultiheadAttention*7
+query,
+torch._tensor.Tensor"torch._tensor.Tensor*5
+key,
+torch._tensor.Tensor"torch._tensor.Tensor*7
+value,
+torch._tensor.Tensor"torch._tensor.Tensor*t
+key_padding_mask\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None *2
+need_weights
+builtins.bool"builtins.bool *m
+	attn_mask\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None *:
+average_attn_weights
+builtins.bool"builtins.bool */
+	is_causal
+builtins.bool"builtins.bool *Â
+_forward_implKtorch.ao.nn.quantizable.modules.activation.MultiheadAttention._forward_impl"Ã
+<Tuple[torch._tensor.Tensor,Union[torch._tensor.Tensor,None]],
+torch._tensor.Tensor"torch._tensor.Tensor\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None*à
+self~
+=torch.ao.nn.quantizable.modules.activation.MultiheadAttention"=torch.ao.nn.quantizable.modules.activation.MultiheadAttention*7
+query,
+torch._tensor.Tensor"torch._tensor.Tensor*5
+key,
+torch._tensor.Tensor"torch._tensor.Tensor*7
+value,
+torch._tensor.Tensor"torch._tensor.Tensor*t
+key_padding_mask\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None *2
+need_weights
+builtins.bool"builtins.bool *m
+	attn_mask\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None *:
+average_attn_weights
+builtins.bool"builtins.bool */
+	is_causal
+builtins.bool"builtins.bool rù
+_FLOAT_MODULEKtorch.ao.nn.quantizable.modules.activation.MultiheadAttention._FLOAT_MODULE?
+CallableType[builtins.type]
+builtins.type"builtins.typer®
+__constants__Ktorch.ao.nn.quantizable.modules.activation.MultiheadAttention.__constants__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.listrî
+linear_QFtorch.ao.nn.quantizable.modules.activation.MultiheadAttention.linear_Q@
+torch.nn.modules.linear.Linear"torch.nn.modules.linear.Linearrî
+linear_KFtorch.ao.nn.quantizable.modules.activation.MultiheadAttention.linear_K@
+torch.nn.modules.linear.Linear"torch.nn.modules.linear.Linearrî
+linear_VFtorch.ao.nn.quantizable.modules.activation.MultiheadAttention.linear_V@
+torch.nn.modules.linear.Linear"torch.nn.modules.linear.LinearrR
+out_projFtorch.ao.nn.quantizable.modules.activation.MultiheadAttention.out_projrÎ
+q_scaling_productOtorch.ao.nn.quantizable.modules.activation.MultiheadAttention.q_scaling_productÑ
+@torch.ao.nn.quantized.modules.functional_modules.FloatFunctional"@torch.ao.nn.quantized.modules.functional_modules.FloatFunctionalr¥
+quant_attn_outputOtorch.ao.nn.quantizable.modules.activation.MultiheadAttention.quant_attn_outputN
+%torch.ao.quantization.stubs.QuantStub"%torch.ao.quantization.stubs.QuantStubrƒ
+quant_attn_output_weightsWtorch.ao.nn.quantizable.modules.activation.MultiheadAttention.quant_attn_output_weightsN
+%torch.ao.quantization.stubs.QuantStub"%torch.ao.quantization.stubs.QuantStubr®
+	dequant_qGtorch.ao.nn.quantizable.modules.activation.MultiheadAttention.dequant_qR
+'torch.ao.quantization.stubs.DeQuantStub"'torch.ao.quantization.stubs.DeQuantStubr®
+	dequant_kGtorch.ao.nn.quantizable.modules.activation.MultiheadAttention.dequant_kR
+'torch.ao.quantization.stubs.DeQuantStub"'torch.ao.quantization.stubs.DeQuantStubr®
+	dequant_vGtorch.ao.nn.quantizable.modules.activation.MultiheadAttention.dequant_vR
+'torch.ao.quantization.stubs.DeQuantStub"'torch.ao.quantization.stubs.DeQuantStub√
+LSTM(torch.ao.nn.quantizable.modules.rnn.LSTM"torch.nn.modules.module.Module*¶
+__init__1torch.ao.nn.quantizable.modules.rnn.LSTM.__init__"
+None*^
+selfT
+(torch.ao.nn.quantizable.modules.rnn.LSTM"(torch.ao.nn.quantizable.modules.rnn.LSTM*,
+
+input_size
+builtins.int"builtins.int*-
+hidden_size
+builtins.int"builtins.int*.
+
+num_layers
+builtins.int"builtins.int **
+bias
+builtins.bool"builtins.bool *1
+batch_first
+builtins.bool"builtins.bool */
+dropout 
+builtins.float"builtins.float *3
+bidirectional
+builtins.bool"builtins.bool *
+device
+Any *
+dtype
+Any *»
+forward0torch.ao.nn.quantizable.modules.rnn.LSTM.forward"
+Any*^
+selfT
+(torch.ao.nn.quantizable.modules.rnn.LSTM"(torch.ao.nn.quantizable.modules.rnn.LSTM*3
+x,
+torch._tensor.Tensor"torch._tensor.Tensor*Ï
+hidden›
+<Union[Tuple[torch._tensor.Tensor,torch._tensor.Tensor],None]ê
+0Tuple[torch._tensor.Tensor,torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor,
+torch._tensor.Tensor"torch._tensor.Tensor
+None *I
+	_get_name2torch.ao.nn.quantizable.modules.rnn.LSTM._get_name*
+self*u
+
+from_float3torch.ao.nn.quantizable.modules.rnn.LSTM.from_float*
+cls*	
+other*
+qconfig 0:classmethodp*l
+from_observed6torch.ao.nn.quantizable.modules.rnn.LSTM.from_observed*
+cls*	
+other0:classmethodpró
+_FLOAT_MODULE6torch.ao.nn.quantizable.modules.rnn.LSTM._FLOAT_MODULEN
+CallableType[builtins.type]
+builtins.type"builtins.type"builtins.typer_
+
+input_size3torch.ao.nn.quantizable.modules.rnn.LSTM.input_size
+builtins.int"builtins.intra
+hidden_size4torch.ao.nn.quantizable.modules.rnn.LSTM.hidden_size
+builtins.int"builtins.intr_
+
+num_layers3torch.ao.nn.quantizable.modules.rnn.LSTM.num_layers
+builtins.int"builtins.intrU
+bias-torch.ao.nn.quantizable.modules.rnn.LSTM.bias
+builtins.bool"builtins.boolrc
+batch_first4torch.ao.nn.quantizable.modules.rnn.LSTM.batch_first
+builtins.bool"builtins.boolr]
+dropout0torch.ao.nn.quantizable.modules.rnn.LSTM.dropout 
+builtins.float"builtins.floatrg
+bidirectional6torch.ao.nn.quantizable.modules.rnn.LSTM.bidirectional
+builtins.bool"builtins.boolrâ
+layers/torch.ao.nn.quantizable.modules.rnn.LSTM.layersN
+%torch.nn.modules.container.ModuleList"%torch.nn.modules.container.ModuleList·%
+LSTMCell,torch.ao.nn.quantizable.modules.rnn.LSTMCell"torch.nn.modules.module.Module*Á
+__init__5torch.ao.nn.quantizable.modules.rnn.LSTMCell.__init__"
+None*f
+self\
+,torch.ao.nn.quantizable.modules.rnn.LSTMCell",torch.ao.nn.quantizable.modules.rnn.LSTMCell*+
+	input_dim
+builtins.int"builtins.int*,
+
+hidden_dim
+builtins.int"builtins.int**
+bias
+builtins.bool"builtins.bool *
+device
+Any *
+dtype
+Any *ﬁ
+forward4torch.ao.nn.quantizable.modules.rnn.LSTMCell.forward"ê
+0Tuple[torch._tensor.Tensor,torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor,
+torch._tensor.Tensor"torch._tensor.Tensor*f
+self\
+,torch.ao.nn.quantizable.modules.rnn.LSTMCell",torch.ao.nn.quantizable.modules.rnn.LSTMCell*3
+x,
+torch._tensor.Tensor"torch._tensor.Tensor*Ï
+hidden›
+<Union[Tuple[torch._tensor.Tensor,torch._tensor.Tensor],None]ê
+0Tuple[torch._tensor.Tensor,torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor,
+torch._tensor.Tensor"torch._tensor.Tensor
+None *∞
+initialize_hidden>torch.ao.nn.quantizable.modules.rnn.LSTMCell.initialize_hidden"ê
+0Tuple[torch._tensor.Tensor,torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor,
+torch._tensor.Tensor"torch._tensor.Tensor*f
+self\
+,torch.ao.nn.quantizable.modules.rnn.LSTMCell",torch.ao.nn.quantizable.modules.rnn.LSTMCell*,
+
+batch_size
+builtins.int"builtins.int*2
+is_quantized
+builtins.bool"builtins.bool *M
+	_get_name6torch.ao.nn.quantizable.modules.rnn.LSTMCell._get_name*
+self*Ö
+from_params8torch.ao.nn.quantizable.modules.rnn.LSTMCell.from_params*
+cls*
+wi*
+wh*
+bi *
+bh 0:classmethodp*å
+
+from_float7torch.ao.nn.quantizable.modules.rnn.LSTMCell.from_float*
+cls*	
+other* 
+use_precomputed_fake_quant 0:classmethodprå
+_FLOAT_MODULE:torch.ao.nn.quantizable.modules.rnn.LSTMCell._FLOAT_MODULE?
+CallableType[builtins.type]
+builtins.type"builtins.typerc
+
+input_size7torch.ao.nn.quantizable.modules.rnn.LSTMCell.input_size
+builtins.int"builtins.intre
+hidden_size8torch.ao.nn.quantizable.modules.rnn.LSTMCell.hidden_size
+builtins.int"builtins.intrY
+bias1torch.ao.nn.quantizable.modules.rnn.LSTMCell.bias
+builtins.bool"builtins.boolr
+igates3torch.ao.nn.quantizable.modules.rnn.LSTMCell.igates@
+torch.nn.modules.linear.Linear"torch.nn.modules.linear.Linearr
+hgates3torch.ao.nn.quantizable.modules.rnn.LSTMCell.hgates@
+torch.nn.modules.linear.Linear"torch.nn.modules.linear.Linearr¬
+gates2torch.ao.nn.quantizable.modules.rnn.LSTMCell.gatesÑ
+@torch.ao.nn.quantized.modules.functional_modules.FloatFunctional"@torch.ao.nn.quantized.modules.functional_modules.FloatFunctionalrë
+
+input_gate7torch.ao.nn.quantizable.modules.rnn.LSTMCell.input_gateJ
+#torch.nn.modules.activation.Sigmoid"#torch.nn.modules.activation.Sigmoidrì
+forget_gate8torch.ao.nn.quantizable.modules.rnn.LSTMCell.forget_gateJ
+#torch.nn.modules.activation.Sigmoid"#torch.nn.modules.activation.Sigmoidrâ
+	cell_gate6torch.ao.nn.quantizable.modules.rnn.LSTMCell.cell_gateD
+ torch.nn.modules.activation.Tanh" torch.nn.modules.activation.Tanhrì
+output_gate8torch.ao.nn.quantizable.modules.rnn.LSTMCell.output_gateJ
+#torch.nn.modules.activation.Sigmoid"#torch.nn.modules.activation.Sigmoidr»
+fgate_cx5torch.ao.nn.quantizable.modules.rnn.LSTMCell.fgate_cxÑ
+@torch.ao.nn.quantized.modules.functional_modules.FloatFunctional"@torch.ao.nn.quantized.modules.functional_modules.FloatFunctionalrŒ
+igate_cgate8torch.ao.nn.quantizable.modules.rnn.LSTMCell.igate_cgateÑ
+@torch.ao.nn.quantized.modules.functional_modules.FloatFunctional"@torch.ao.nn.quantized.modules.functional_modules.FloatFunctionalr‡
+fgate_cx_igate_cgateAtorch.ao.nn.quantizable.modules.rnn.LSTMCell.fgate_cx_igate_cgateÑ
+@torch.ao.nn.quantized.modules.functional_modules.FloatFunctional"@torch.ao.nn.quantized.modules.functional_modules.FloatFunctionalr»
+ogate_cy5torch.ao.nn.quantizable.modules.rnn.LSTMCell.ogate_cyÑ
+@torch.ao.nn.quantized.modules.functional_modules.FloatFunctional"@torch.ao.nn.quantized.modules.functional_modules.FloatFunctionalr—
+initial_hidden_state_qparamsItorch.ao.nn.quantizable.modules.rnn.LSTMCell.initial_hidden_state_qparamsf
+"Tuple[builtins.float,builtins.int] 
+builtins.float"builtins.float
+builtins.int"builtins.intrÕ
+initial_cell_state_qparamsGtorch.ao.nn.quantizable.modules.rnn.LSTMCell.initial_cell_state_qparamsf
+"Tuple[builtins.float,builtins.int] 
+builtins.float"builtins.float
+builtins.int"builtins.intrw
+hidden_state_dtype?torch.ao.nn.quantizable.modules.rnn.LSTMCell.hidden_state_dtype 
+torch._C.dtype"torch._C.dtypers
+cell_state_dtype=torch.ao.nn.quantizable.modules.rnn.LSTMCell.cell_state_dtype 
+torch._C.dtype"torch._C.dtype*Ä
+__path__(torch.ao.nn.quantizable.modules.__path__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*õ
+__annotations__/torch.ao.nn.quantizable.modules.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*~
+__all__'torch.ao.nn.quantizable.modules.__all__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list

@@ -1,0 +1,1096 @@
+
+torch._export.serde.schemaÉ
+
+
+ScalarType%torch._export.serde.schema.ScalarType"enum.IntEnumHrV
+UNKNOWN-torch._export.serde.schema.ScalarType.UNKNOWN
+builtins.int"builtins.intrP
+BYTE*torch._export.serde.schema.ScalarType.BYTE
+builtins.int"builtins.intrP
+CHAR*torch._export.serde.schema.ScalarType.CHAR
+builtins.int"builtins.intrR
+SHORT+torch._export.serde.schema.ScalarType.SHORT
+builtins.int"builtins.intrN
+INT)torch._export.serde.schema.ScalarType.INT
+builtins.int"builtins.intrP
+LONG*torch._export.serde.schema.ScalarType.LONG
+builtins.int"builtins.intrP
+HALF*torch._export.serde.schema.ScalarType.HALF
+builtins.int"builtins.intrR
+FLOAT+torch._export.serde.schema.ScalarType.FLOAT
+builtins.int"builtins.intrT
+DOUBLE,torch._export.serde.schema.ScalarType.DOUBLE
+builtins.int"builtins.intr^
+COMPLEXHALF1torch._export.serde.schema.ScalarType.COMPLEXHALF
+builtins.int"builtins.intr`
+COMPLEXFLOAT2torch._export.serde.schema.ScalarType.COMPLEXFLOAT
+builtins.int"builtins.intrb
+COMPLEXDOUBLE3torch._export.serde.schema.ScalarType.COMPLEXDOUBLE
+builtins.int"builtins.intrP
+BOOL*torch._export.serde.schema.ScalarType.BOOL
+builtins.int"builtins.intrX
+BFLOAT16.torch._export.serde.schema.ScalarType.BFLOAT16
+builtins.int"builtins.intÔ
+Layout!torch._export.serde.schema.Layout"enum.IntEnumHrR
+Unknown)torch._export.serde.schema.Layout.Unknown
+builtins.int"builtins.intrV
+	SparseCoo+torch._export.serde.schema.Layout.SparseCoo
+builtins.int"builtins.intrV
+	SparseCsr+torch._export.serde.schema.Layout.SparseCsr
+builtins.int"builtins.intrV
+	SparseCsc+torch._export.serde.schema.Layout.SparseCsc
+builtins.int"builtins.intrV
+	SparseBsr+torch._export.serde.schema.Layout.SparseBsr
+builtins.int"builtins.intrV
+	SparseBsc+torch._export.serde.schema.Layout.SparseBsc
+builtins.int"builtins.intrR
+_mkldnn)torch._export.serde.schema.Layout._mkldnn
+builtins.int"builtins.intrR
+Strided)torch._export.serde.schema.Layout.Strided
+builtins.int"builtins.int¡
+MemoryFormat'torch._export.serde.schema.MemoryFormat"enum.IntEnumHrX
+Unknown/torch._export.serde.schema.MemoryFormat.Unknown
+builtins.int"builtins.intrj
+ContiguousFormat8torch._export.serde.schema.MemoryFormat.ContiguousFormat
+builtins.int"builtins.intrb
+ChannelsLast4torch._export.serde.schema.MemoryFormat.ChannelsLast
+builtins.int"builtins.intrf
+ChannelsLast3d6torch._export.serde.schema.MemoryFormat.ChannelsLast3d
+builtins.int"builtins.intrf
+PreserveFormat6torch._export.serde.schema.MemoryFormat.PreserveFormat
+builtins.int"builtins.intˇ
+Device!torch._export.serde.schema.Device"builtins.object*ç
+__init__*torch._export.serde.schema.Device.__init__"
+None*P
+selfF
+!torch._export.serde.schema.Device"!torch._export.serde.schema.Device*&
+type
+builtins.str"builtins.str*Q
+indexD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None 8rL
+type&torch._export.serde.schema.Device.type
+builtins.str"builtins.strrv
+index'torch._export.serde.schema.Device.indexD
+Union[builtins.int,None]
+builtins.int"builtins.int
+NonerË
+__dataclass_fields__6torch._export.serde.schema.Device.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictÖ
+SymExprHint&torch._export.serde.schema.SymExprHint" torch._export.serde.union._Union*®
+__init__/torch._export.serde.schema.SymExprHint.__init__"
+None*Z
+selfP
+&torch._export.serde.schema.SymExprHint"&torch._export.serde.schema.SymExprHint*(
+as_int
+builtins.int"builtins.int*.
+as_float 
+builtins.float"builtins.float*+
+as_bool
+builtins.bool"builtins.bool8rU
+as_int-torch._export.serde.schema.SymExprHint.as_int
+builtins.int"builtins.intr]
+as_float/torch._export.serde.schema.SymExprHint.as_float 
+builtins.float"builtins.floatrY
+as_bool.torch._export.serde.schema.SymExprHint.as_bool
+builtins.bool"builtins.boolrÌ
+__dataclass_fields__;torch._export.serde.schema.SymExprHint.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dict∞
+SymExpr"torch._export.serde.schema.SymExpr"builtins.object*„
+__init__+torch._export.serde.schema.SymExpr.__init__"
+None*R
+selfH
+"torch._export.serde.schema.SymExpr""torch._export.serde.schema.SymExpr**
+expr_str
+builtins.str"builtins.str*ü
+hintí
+2Union[torch._export.serde.schema.SymExprHint,None]P
+&torch._export.serde.schema.SymExprHint"&torch._export.serde.schema.SymExprHint
+None 8rU
+expr_str+torch._export.serde.schema.SymExpr.expr_str
+builtins.str"builtins.strrƒ
+hint'torch._export.serde.schema.SymExpr.hintí
+2Union[torch._export.serde.schema.SymExprHint,None]P
+&torch._export.serde.schema.SymExprHint"&torch._export.serde.schema.SymExprHint
+NonerÈ
+__dataclass_fields__7torch._export.serde.schema.SymExpr.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dict¢
+SymInt!torch._export.serde.schema.SymInt" torch._export.serde.union._Union*ì
+__init__*torch._export.serde.schema.SymInt.__init__"
+None*P
+selfF
+!torch._export.serde.schema.SymInt"!torch._export.serde.schema.SymInt*U
+as_exprH
+"torch._export.serde.schema.SymExpr""torch._export.serde.schema.SymExpr*(
+as_int
+builtins.int"builtins.int8r~
+as_expr)torch._export.serde.schema.SymInt.as_exprH
+"torch._export.serde.schema.SymExpr""torch._export.serde.schema.SymExprrP
+as_int(torch._export.serde.schema.SymInt.as_int
+builtins.int"builtins.intrË
+__dataclass_fields__6torch._export.serde.schema.SymInt.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dict±
+SymBool"torch._export.serde.schema.SymBool" torch._export.serde.union._Union*ô
+__init__+torch._export.serde.schema.SymBool.__init__"
+None*R
+selfH
+"torch._export.serde.schema.SymBool""torch._export.serde.schema.SymBool*U
+as_exprH
+"torch._export.serde.schema.SymExpr""torch._export.serde.schema.SymExpr*+
+as_bool
+builtins.bool"builtins.bool8r
+as_expr*torch._export.serde.schema.SymBool.as_exprH
+"torch._export.serde.schema.SymExpr""torch._export.serde.schema.SymExprrU
+as_bool*torch._export.serde.schema.SymBool.as_bool
+builtins.bool"builtins.boolrÈ
+__dataclass_fields__7torch._export.serde.schema.SymBool.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dict¢
+
+TensorMeta%torch._export.serde.schema.TensorMeta"builtins.object*‚
+__init__.torch._export.serde.schema.TensorMeta.__init__"
+None*X
+selfN
+%torch._export.serde.schema.TensorMeta"%torch._export.serde.schema.TensorMeta*Y
+dtypeN
+%torch._export.serde.schema.ScalarType"%torch._export.serde.schema.ScalarType*ï
+sizesâ
+0builtins.list[torch._export.serde.schema.SymInt]F
+!torch._export.serde.schema.SymInt"!torch._export.serde.schema.SymInt"builtins.list*1
+requires_grad
+builtins.bool"builtins.bool*R
+deviceF
+!torch._export.serde.schema.Device"!torch._export.serde.schema.Device*ó
+stridesâ
+0builtins.list[torch._export.serde.schema.SymInt]F
+!torch._export.serde.schema.SymInt"!torch._export.serde.schema.SymInt"builtins.list*Z
+storage_offsetF
+!torch._export.serde.schema.SymInt"!torch._export.serde.schema.SymInt*R
+layoutF
+!torch._export.serde.schema.Layout"!torch._export.serde.schema.Layout8rÑ
+dtype+torch._export.serde.schema.TensorMeta.dtypeN
+%torch._export.serde.schema.ScalarType"%torch._export.serde.schema.ScalarTyper¿
+sizes+torch._export.serde.schema.TensorMeta.sizesâ
+0builtins.list[torch._export.serde.schema.SymInt]F
+!torch._export.serde.schema.SymInt"!torch._export.serde.schema.SymInt"builtins.listrd
+requires_grad3torch._export.serde.schema.TensorMeta.requires_grad
+builtins.bool"builtins.boolr~
+device,torch._export.serde.schema.TensorMeta.deviceF
+!torch._export.serde.schema.Device"!torch._export.serde.schema.Devicerƒ
+strides-torch._export.serde.schema.TensorMeta.stridesâ
+0builtins.list[torch._export.serde.schema.SymInt]F
+!torch._export.serde.schema.SymInt"!torch._export.serde.schema.SymInt"builtins.listré
+storage_offset4torch._export.serde.schema.TensorMeta.storage_offsetF
+!torch._export.serde.schema.SymInt"!torch._export.serde.schema.SymIntr~
+layout,torch._export.serde.schema.TensorMeta.layoutF
+!torch._export.serde.schema.Layout"!torch._export.serde.schema.LayoutrÏ
+__dataclass_fields__:torch._export.serde.schema.TensorMeta.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictä
+SymIntArgument)torch._export.serde.schema.SymIntArgument" torch._export.serde.union._Union*ˇ
+__init__2torch._export.serde.schema.SymIntArgument.__init__"
+None*`
+selfV
+)torch._export.serde.schema.SymIntArgument")torch._export.serde.schema.SymIntArgument*)
+as_name
+builtins.str"builtins.str*(
+as_int
+builtins.int"builtins.int8rZ
+as_name1torch._export.serde.schema.SymIntArgument.as_name
+builtins.str"builtins.strrX
+as_int0torch._export.serde.schema.SymIntArgument.as_int
+builtins.int"builtins.intr
+__dataclass_fields__>torch._export.serde.schema.SymIntArgument.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictô
+SymBoolArgument*torch._export.serde.schema.SymBoolArgument" torch._export.serde.union._Union*Ö
+__init__3torch._export.serde.schema.SymBoolArgument.__init__"
+None*b
+selfX
+*torch._export.serde.schema.SymBoolArgument"*torch._export.serde.schema.SymBoolArgument*)
+as_name
+builtins.str"builtins.str*+
+as_bool
+builtins.bool"builtins.bool8r[
+as_name2torch._export.serde.schema.SymBoolArgument.as_name
+builtins.str"builtins.strr]
+as_bool2torch._export.serde.schema.SymBoolArgument.as_bool
+builtins.bool"builtins.boolrÒ
+__dataclass_fields__?torch._export.serde.schema.SymBoolArgument.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictÏ
+TensorArgument)torch._export.serde.schema.TensorArgument"builtins.object*“
+__init__2torch._export.serde.schema.TensorArgument.__init__"
+None*`
+selfV
+)torch._export.serde.schema.TensorArgument")torch._export.serde.schema.TensorArgument*&
+name
+builtins.str"builtins.str8rT
+name.torch._export.serde.schema.TensorArgument.name
+builtins.str"builtins.strr
+__dataclass_fields__>torch._export.serde.schema.TensorArgument.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictÂ
+TokenArgument(torch._export.serde.schema.TokenArgument"builtins.object*œ
+__init__1torch._export.serde.schema.TokenArgument.__init__"
+None*^
+selfT
+(torch._export.serde.schema.TokenArgument"(torch._export.serde.schema.TokenArgument*&
+name
+builtins.str"builtins.str8rS
+name-torch._export.serde.schema.TokenArgument.name
+builtins.str"builtins.strrÔ
+__dataclass_fields__=torch._export.serde.schema.TokenArgument.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dict¶
+OptionalTensorArgument1torch._export.serde.schema.OptionalTensorArgument" torch._export.serde.union._Union*√
+__init__:torch._export.serde.schema.OptionalTensorArgument.__init__"
+None*p
+selff
+1torch._export.serde.schema.OptionalTensorArgument"1torch._export.serde.schema.OptionalTensorArgument*e
+	as_tensorV
+)torch._export.serde.schema.TensorArgument")torch._export.serde.schema.TensorArgument*
+as_none
+Tuple[]8r†
+	as_tensor;torch._export.serde.schema.OptionalTensorArgument.as_tensorV
+)torch._export.serde.schema.TensorArgument")torch._export.serde.schema.TensorArgumentrQ
+as_none9torch._export.serde.schema.OptionalTensorArgument.as_none
+Tuple[]r¯
+__dataclass_fields__Ftorch._export.serde.schema.OptionalTensorArgument.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictµ
+GraphArgument(torch._export.serde.schema.GraphArgument"builtins.object*†
+__init__1torch._export.serde.schema.GraphArgument.__init__"
+None*^
+selfT
+(torch._export.serde.schema.GraphArgument"(torch._export.serde.schema.GraphArgument*&
+name
+builtins.str"builtins.str*O
+graphD
+ torch._export.serde.schema.Graph" torch._export.serde.schema.Graph8rS
+name-torch._export.serde.schema.GraphArgument.name
+builtins.str"builtins.strr}
+graph.torch._export.serde.schema.GraphArgument.graphD
+ torch._export.serde.schema.Graph" torch._export.serde.schema.GraphrÔ
+__dataclass_fields__=torch._export.serde.schema.GraphArgument.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictë
+CustomObjArgument,torch._export.serde.schema.CustomObjArgument"builtins.object*à
+__init__5torch._export.serde.schema.CustomObjArgument.__init__"
+None*f
+self\
+,torch._export.serde.schema.CustomObjArgument",torch._export.serde.schema.CustomObjArgument*&
+name
+builtins.str"builtins.str*+
+	class_fqn
+builtins.str"builtins.str8rW
+name1torch._export.serde.schema.CustomObjArgument.name
+builtins.str"builtins.strra
+	class_fqn6torch._export.serde.schema.CustomObjArgument.class_fqn
+builtins.str"builtins.strrÛ
+__dataclass_fields__Atorch._export.serde.schema.CustomObjArgument.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dict˘/
+Argument#torch._export.serde.schema.Argument" torch._export.serde.union._Union*é
+__init__,torch._export.serde.schema.Argument.__init__"
+None*T
+selfJ
+#torch._export.serde.schema.Argument"#torch._export.serde.schema.Argument*
+as_none
+Tuple[]*e
+	as_tensorV
+)torch._export.serde.schema.TensorArgument")torch._export.serde.schema.TensorArgument*≤
+
+as_tensors°
+8builtins.list[torch._export.serde.schema.TensorArgument]V
+)torch._export.serde.schema.TensorArgument")torch._export.serde.schema.TensorArgument"builtins.list*(
+as_int
+builtins.int"builtins.int*W
+as_intsJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*.
+as_float 
+builtins.float"builtins.float*_
+	as_floatsP
+builtins.list[builtins.float] 
+builtins.float"builtins.float"builtins.list*+
+	as_string
+builtins.str"builtins.str*Z
+
+as_stringsJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*f
+
+as_sym_intV
+)torch._export.serde.schema.SymIntArgument")torch._export.serde.schema.SymIntArgument*≥
+as_sym_ints°
+8builtins.list[torch._export.serde.schema.SymIntArgument]V
+)torch._export.serde.schema.SymIntArgument")torch._export.serde.schema.SymIntArgument"builtins.list*b
+as_scalar_typeN
+%torch._export.serde.schema.ScalarType"%torch._export.serde.schema.ScalarType*h
+as_memory_formatR
+'torch._export.serde.schema.MemoryFormat"'torch._export.serde.schema.MemoryFormat*U
+	as_layoutF
+!torch._export.serde.schema.Layout"!torch._export.serde.schema.Layout*U
+	as_deviceF
+!torch._export.serde.schema.Device"!torch._export.serde.schema.Device*+
+as_bool
+builtins.bool"builtins.bool*[
+as_boolsM
+builtins.list[builtins.bool]
+builtins.bool"builtins.bool"builtins.list*i
+as_sym_boolX
+*torch._export.serde.schema.SymBoolArgument"*torch._export.serde.schema.SymBoolArgument*∑
+as_sym_bools§
+9builtins.list[torch._export.serde.schema.SymBoolArgument]X
+*torch._export.serde.schema.SymBoolArgument"*torch._export.serde.schema.SymBoolArgument"builtins.list*b
+as_graphT
+(torch._export.serde.schema.GraphArgument"(torch._export.serde.schema.GraphArgument*”
+as_optional_tensorsπ
+@builtins.list[torch._export.serde.schema.OptionalTensorArgument]f
+1torch._export.serde.schema.OptionalTensorArgument"1torch._export.serde.schema.OptionalTensorArgument"builtins.list*o
+as_custom_obj\
+,torch._export.serde.schema.CustomObjArgument",torch._export.serde.schema.CustomObjArgument*-
+as_operator
+builtins.str"builtins.str8rC
+as_none+torch._export.serde.schema.Argument.as_none
+Tuple[]rí
+	as_tensor-torch._export.serde.schema.Argument.as_tensorV
+)torch._export.serde.schema.TensorArgument")torch._export.serde.schema.TensorArgumentr‡
+
+as_tensors.torch._export.serde.schema.Argument.as_tensors°
+8builtins.list[torch._export.serde.schema.TensorArgument]V
+)torch._export.serde.schema.TensorArgument")torch._export.serde.schema.TensorArgument"builtins.listrR
+as_int*torch._export.serde.schema.Argument.as_int
+builtins.int"builtins.intrÇ
+as_ints+torch._export.serde.schema.Argument.as_intsJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.listrZ
+as_float,torch._export.serde.schema.Argument.as_float 
+builtins.float"builtins.floatrå
+	as_floats-torch._export.serde.schema.Argument.as_floatsP
+builtins.list[builtins.float] 
+builtins.float"builtins.float"builtins.listrX
+	as_string-torch._export.serde.schema.Argument.as_string
+builtins.str"builtins.strrà
+
+as_strings.torch._export.serde.schema.Argument.as_stringsJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.listrî
+
+as_sym_int.torch._export.serde.schema.Argument.as_sym_intV
+)torch._export.serde.schema.SymIntArgument")torch._export.serde.schema.SymIntArgumentr‚
+as_sym_ints/torch._export.serde.schema.Argument.as_sym_ints°
+8builtins.list[torch._export.serde.schema.SymIntArgument]V
+)torch._export.serde.schema.SymIntArgument")torch._export.serde.schema.SymIntArgument"builtins.listrî
+as_scalar_type2torch._export.serde.schema.Argument.as_scalar_typeN
+%torch._export.serde.schema.ScalarType"%torch._export.serde.schema.ScalarTyperú
+as_memory_format4torch._export.serde.schema.Argument.as_memory_formatR
+'torch._export.serde.schema.MemoryFormat"'torch._export.serde.schema.MemoryFormatrÇ
+	as_layout-torch._export.serde.schema.Argument.as_layoutF
+!torch._export.serde.schema.Layout"!torch._export.serde.schema.LayoutrÇ
+	as_device-torch._export.serde.schema.Argument.as_deviceF
+!torch._export.serde.schema.Device"!torch._export.serde.schema.DevicerV
+as_bool+torch._export.serde.schema.Argument.as_bool
+builtins.bool"builtins.boolrá
+as_bools,torch._export.serde.schema.Argument.as_boolsM
+builtins.list[builtins.bool]
+builtins.bool"builtins.bool"builtins.listrò
+as_sym_bool/torch._export.serde.schema.Argument.as_sym_boolX
+*torch._export.serde.schema.SymBoolArgument"*torch._export.serde.schema.SymBoolArgumentrÁ
+as_sym_bools0torch._export.serde.schema.Argument.as_sym_bools§
+9builtins.list[torch._export.serde.schema.SymBoolArgument]X
+*torch._export.serde.schema.SymBoolArgument"*torch._export.serde.schema.SymBoolArgument"builtins.listré
+as_graph,torch._export.serde.schema.Argument.as_graphT
+(torch._export.serde.schema.GraphArgument"(torch._export.serde.schema.GraphArgumenträ
+as_optional_tensors7torch._export.serde.schema.Argument.as_optional_tensorsπ
+@builtins.list[torch._export.serde.schema.OptionalTensorArgument]f
+1torch._export.serde.schema.OptionalTensorArgument"1torch._export.serde.schema.OptionalTensorArgument"builtins.listr†
+as_custom_obj1torch._export.serde.schema.Argument.as_custom_obj\
+,torch._export.serde.schema.CustomObjArgument",torch._export.serde.schema.CustomObjArgumentr\
+as_operator/torch._export.serde.schema.Argument.as_operator
+builtins.str"builtins.strrÍ
+__dataclass_fields__8torch._export.serde.schema.Argument.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictª
+NamedArgument(torch._export.serde.schema.NamedArgument"builtins.object*§
+__init__1torch._export.serde.schema.NamedArgument.__init__"
+None*^
+selfT
+(torch._export.serde.schema.NamedArgument"(torch._export.serde.schema.NamedArgument*&
+name
+builtins.str"builtins.str*S
+argJ
+#torch._export.serde.schema.Argument"#torch._export.serde.schema.Argument8rS
+name-torch._export.serde.schema.NamedArgument.name
+builtins.str"builtins.strr
+arg,torch._export.serde.schema.NamedArgument.argJ
+#torch._export.serde.schema.Argument"#torch._export.serde.schema.ArgumentrÔ
+__dataclass_fields__=torch._export.serde.schema.NamedArgument.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dict…
+Nodetorch._export.serde.schema.Node"builtins.object*ä
+__init__(torch._export.serde.schema.Node.__init__"
+None*L
+selfB
+torch._export.serde.schema.Node"torch._export.serde.schema.Node*(
+target
+builtins.str"builtins.str*´
+inputsû
+7builtins.list[torch._export.serde.schema.NamedArgument]T
+(torch._export.serde.schema.NamedArgument"(torch._export.serde.schema.NamedArgument"builtins.list*ù
+outputsè
+2builtins.list[torch._export.serde.schema.Argument]J
+#torch._export.serde.schema.Argument"#torch._export.serde.schema.Argument"builtins.list*É
+metadatau
+(builtins.dict[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.dict8rN
+target&torch._export.serde.schema.Node.target
+builtins.str"builtins.strr—
+inputs&torch._export.serde.schema.Node.inputsû
+7builtins.list[torch._export.serde.schema.NamedArgument]T
+(torch._export.serde.schema.NamedArgument"(torch._export.serde.schema.NamedArgument"builtins.listrƒ
+outputs'torch._export.serde.schema.Node.outputsè
+2builtins.list[torch._export.serde.schema.Argument]J
+#torch._export.serde.schema.Argument"#torch._export.serde.schema.Argument"builtins.listr´
+metadata(torch._export.serde.schema.Node.metadatau
+(builtins.dict[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.dictrÊ
+__dataclass_fields__4torch._export.serde.schema.Node.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictä
+Graph torch._export.serde.schema.Graph"builtins.object*Ñ
+__init__)torch._export.serde.schema.Graph.__init__"
+None*N
+selfD
+ torch._export.serde.schema.Graph" torch._export.serde.schema.Graph*ú
+inputsè
+2builtins.list[torch._export.serde.schema.Argument]J
+#torch._export.serde.schema.Argument"#torch._export.serde.schema.Argument"builtins.list*ù
+outputsè
+2builtins.list[torch._export.serde.schema.Argument]J
+#torch._export.serde.schema.Argument"#torch._export.serde.schema.Argument"builtins.list*è
+nodesÉ
+.builtins.list[torch._export.serde.schema.Node]B
+torch._export.serde.schema.Node"torch._export.serde.schema.Node"builtins.list*‘
+tensor_values¿
+Abuiltins.dict[builtins.str,torch._export.serde.schema.TensorMeta]
+builtins.str"builtins.strN
+%torch._export.serde.schema.TensorMeta"%torch._export.serde.schema.TensorMeta"builtins.dict*…
+sym_int_values¥
+=builtins.dict[builtins.str,torch._export.serde.schema.SymInt]
+builtins.str"builtins.strF
+!torch._export.serde.schema.SymInt"!torch._export.serde.schema.SymInt"builtins.dict*Õ
+sym_bool_values∑
+>builtins.dict[builtins.str,torch._export.serde.schema.SymBool]
+builtins.str"builtins.strH
+"torch._export.serde.schema.SymBool""torch._export.serde.schema.SymBool"builtins.dict*=
+is_single_tensor_return
+builtins.bool"builtins.bool *Ô
+custom_obj_values’
+Hbuiltins.dict[builtins.str,torch._export.serde.schema.CustomObjArgument]
+builtins.str"builtins.str\
+,torch._export.serde.schema.CustomObjArgument",torch._export.serde.schema.CustomObjArgument"builtins.dict 8r√
+inputs'torch._export.serde.schema.Graph.inputsè
+2builtins.list[torch._export.serde.schema.Argument]J
+#torch._export.serde.schema.Argument"#torch._export.serde.schema.Argument"builtins.listr≈
+outputs(torch._export.serde.schema.Graph.outputsè
+2builtins.list[torch._export.serde.schema.Argument]J
+#torch._export.serde.schema.Argument"#torch._export.serde.schema.Argument"builtins.listrµ
+nodes&torch._export.serde.schema.Graph.nodesÉ
+.builtins.list[torch._export.serde.schema.Node]B
+torch._export.serde.schema.Node"torch._export.serde.schema.Node"builtins.listrÇ
+tensor_values.torch._export.serde.schema.Graph.tensor_values¿
+Abuiltins.dict[builtins.str,torch._export.serde.schema.TensorMeta]
+builtins.str"builtins.strN
+%torch._export.serde.schema.TensorMeta"%torch._export.serde.schema.TensorMeta"builtins.dictr¯
+sym_int_values/torch._export.serde.schema.Graph.sym_int_values¥
+=builtins.dict[builtins.str,torch._export.serde.schema.SymInt]
+builtins.str"builtins.strF
+!torch._export.serde.schema.SymInt"!torch._export.serde.schema.SymInt"builtins.dictr˝
+sym_bool_values0torch._export.serde.schema.Graph.sym_bool_values∑
+>builtins.dict[builtins.str,torch._export.serde.schema.SymBool]
+builtins.str"builtins.strH
+"torch._export.serde.schema.SymBool""torch._export.serde.schema.SymBool"builtins.dictrs
+is_single_tensor_return8torch._export.serde.schema.Graph.is_single_tensor_return
+builtins.bool"builtins.boolrü
+custom_obj_values2torch._export.serde.schema.Graph.custom_obj_values’
+Hbuiltins.dict[builtins.str,torch._export.serde.schema.CustomObjArgument]
+builtins.str"builtins.str\
+,torch._export.serde.schema.CustomObjArgument",torch._export.serde.schema.CustomObjArgument"builtins.dictrÁ
+__dataclass_fields__5torch._export.serde.schema.Graph.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictæ
+UserInputSpec(torch._export.serde.schema.UserInputSpec"builtins.object*¸
+__init__1torch._export.serde.schema.UserInputSpec.__init__"
+None*^
+selfT
+(torch._export.serde.schema.UserInputSpec"(torch._export.serde.schema.UserInputSpec*S
+argJ
+#torch._export.serde.schema.Argument"#torch._export.serde.schema.Argument8r
+arg,torch._export.serde.schema.UserInputSpec.argJ
+#torch._export.serde.schema.Argument"#torch._export.serde.schema.ArgumentrÔ
+__dataclass_fields__=torch._export.serde.schema.UserInputSpec.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictá	
+ConstantValue(torch._export.serde.schema.ConstantValue" torch._export.serde.union._Union*ı
+__init__1torch._export.serde.schema.ConstantValue.__init__"
+None*^
+selfT
+(torch._export.serde.schema.ConstantValue"(torch._export.serde.schema.ConstantValue*
+as_none
+Tuple[]*(
+as_int
+builtins.int"builtins.int*.
+as_float 
+builtins.float"builtins.float*+
+	as_string
+builtins.str"builtins.str*+
+as_bool
+builtins.bool"builtins.bool8rH
+as_none0torch._export.serde.schema.ConstantValue.as_none
+Tuple[]rW
+as_int/torch._export.serde.schema.ConstantValue.as_int
+builtins.int"builtins.intr_
+as_float1torch._export.serde.schema.ConstantValue.as_float 
+builtins.float"builtins.floatr]
+	as_string2torch._export.serde.schema.ConstantValue.as_string
+builtins.str"builtins.strr[
+as_bool0torch._export.serde.schema.ConstantValue.as_bool
+builtins.bool"builtins.boolrÔ
+__dataclass_fields__=torch._export.serde.schema.ConstantValue.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictˆ
+ConstantInputSpec,torch._export.serde.schema.ConstantInputSpec"builtins.object*º
+__init__5torch._export.serde.schema.ConstantInputSpec.__init__"
+None*f
+self\
+,torch._export.serde.schema.ConstantInputSpec",torch._export.serde.schema.ConstantInputSpec*&
+name
+builtins.str"builtins.str*_
+valueT
+(torch._export.serde.schema.ConstantValue"(torch._export.serde.schema.ConstantValue8rW
+name1torch._export.serde.schema.ConstantInputSpec.name
+builtins.str"builtins.strrë
+value2torch._export.serde.schema.ConstantInputSpec.valueT
+(torch._export.serde.schema.ConstantValue"(torch._export.serde.schema.ConstantValuerÛ
+__dataclass_fields__Atorch._export.serde.schema.ConstantInputSpec.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dict™
+InputToParameterSpec/torch._export.serde.schema.InputToParameterSpec"builtins.object*œ
+__init__8torch._export.serde.schema.InputToParameterSpec.__init__"
+None*l
+selfb
+/torch._export.serde.schema.InputToParameterSpec"/torch._export.serde.schema.InputToParameterSpec*_
+argV
+)torch._export.serde.schema.TensorArgument")torch._export.serde.schema.TensorArgument*0
+parameter_name
+builtins.str"builtins.str8rí
+arg3torch._export.serde.schema.InputToParameterSpec.argV
+)torch._export.serde.schema.TensorArgument")torch._export.serde.schema.TensorArgumentrn
+parameter_name>torch._export.serde.schema.InputToParameterSpec.parameter_name
+builtins.str"builtins.strrˆ
+__dataclass_fields__Dtorch._export.serde.schema.InputToParameterSpec.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dict†
+InputToBufferSpec,torch._export.serde.schema.InputToBufferSpec"builtins.object*Û
+__init__5torch._export.serde.schema.InputToBufferSpec.__init__"
+None*f
+self\
+,torch._export.serde.schema.InputToBufferSpec",torch._export.serde.schema.InputToBufferSpec*_
+argV
+)torch._export.serde.schema.TensorArgument")torch._export.serde.schema.TensorArgument*-
+buffer_name
+builtins.str"builtins.str*.
+
+persistent
+builtins.bool"builtins.bool8rè
+arg0torch._export.serde.schema.InputToBufferSpec.argV
+)torch._export.serde.schema.TensorArgument")torch._export.serde.schema.TensorArgumentre
+buffer_name8torch._export.serde.schema.InputToBufferSpec.buffer_name
+builtins.str"builtins.strre
+
+persistent7torch._export.serde.schema.InputToBufferSpec.persistent
+builtins.bool"builtins.boolrÛ
+__dataclass_fields__Atorch._export.serde.schema.InputToBufferSpec.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dict‰
+InputToTensorConstantSpec4torch._export.serde.schema.InputToTensorConstantSpec"builtins.object*‰
+__init__=torch._export.serde.schema.InputToTensorConstantSpec.__init__"
+None*v
+selfl
+4torch._export.serde.schema.InputToTensorConstantSpec"4torch._export.serde.schema.InputToTensorConstantSpec*_
+argV
+)torch._export.serde.schema.TensorArgument")torch._export.serde.schema.TensorArgument*6
+tensor_constant_name
+builtins.str"builtins.str8ró
+arg8torch._export.serde.schema.InputToTensorConstantSpec.argV
+)torch._export.serde.schema.TensorArgument")torch._export.serde.schema.TensorArgumentr
+tensor_constant_nameItorch._export.serde.schema.InputToTensorConstantSpec.tensor_constant_name
+builtins.str"builtins.strr˚
+__dataclass_fields__Itorch._export.serde.schema.InputToTensorConstantSpec.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictπ
+InputToCustomObjSpec/torch._export.serde.schema.InputToCustomObjSpec"builtins.object*÷
+__init__8torch._export.serde.schema.InputToCustomObjSpec.__init__"
+None*l
+selfb
+/torch._export.serde.schema.InputToCustomObjSpec"/torch._export.serde.schema.InputToCustomObjSpec*e
+arg\
+,torch._export.serde.schema.CustomObjArgument",torch._export.serde.schema.CustomObjArgument*1
+custom_obj_name
+builtins.str"builtins.str8rò
+arg3torch._export.serde.schema.InputToCustomObjSpec.arg\
+,torch._export.serde.schema.CustomObjArgument",torch._export.serde.schema.CustomObjArgumentrp
+custom_obj_name?torch._export.serde.schema.InputToCustomObjSpec.custom_obj_name
+builtins.str"builtins.strrˆ
+__dataclass_fields__Dtorch._export.serde.schema.InputToCustomObjSpec.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dict⁄
+InputTokenSpec)torch._export.serde.schema.InputTokenSpec"builtins.object*â
+__init__2torch._export.serde.schema.InputTokenSpec.__init__"
+None*`
+selfV
+)torch._export.serde.schema.InputTokenSpec")torch._export.serde.schema.InputTokenSpec*]
+argT
+(torch._export.serde.schema.TokenArgument"(torch._export.serde.schema.TokenArgument8rä
+arg-torch._export.serde.schema.InputTokenSpec.argT
+(torch._export.serde.schema.TokenArgument"(torch._export.serde.schema.TokenArgumentr
+__dataclass_fields__>torch._export.serde.schema.InputTokenSpec.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictœ
+	InputSpec$torch._export.serde.schema.InputSpec" torch._export.serde.union._Union*´
+__init__-torch._export.serde.schema.InputSpec.__init__"
+None*V
+selfL
+$torch._export.serde.schema.InputSpec"$torch._export.serde.schema.InputSpec*d
+
+user_inputT
+(torch._export.serde.schema.UserInputSpec"(torch._export.serde.schema.UserInputSpec*q
+	parameterb
+/torch._export.serde.schema.InputToParameterSpec"/torch._export.serde.schema.InputToParameterSpec*h
+buffer\
+,torch._export.serde.schema.InputToBufferSpec",torch._export.serde.schema.InputToBufferSpec*Å
+tensor_constantl
+4torch._export.serde.schema.InputToTensorConstantSpec"4torch._export.serde.schema.InputToTensorConstantSpec*r
+
+custom_objb
+/torch._export.serde.schema.InputToCustomObjSpec"/torch._export.serde.schema.InputToCustomObjSpec*a
+tokenV
+)torch._export.serde.schema.InputTokenSpec")torch._export.serde.schema.InputTokenSpec*p
+constant_input\
+,torch._export.serde.schema.ConstantInputSpec",torch._export.serde.schema.ConstantInputSpec8rì
+
+user_input/torch._export.serde.schema.InputSpec.user_inputT
+(torch._export.serde.schema.UserInputSpec"(torch._export.serde.schema.UserInputSpecrü
+	parameter.torch._export.serde.schema.InputSpec.parameterb
+/torch._export.serde.schema.InputToParameterSpec"/torch._export.serde.schema.InputToParameterSpecrì
+buffer+torch._export.serde.schema.InputSpec.buffer\
+,torch._export.serde.schema.InputToBufferSpec",torch._export.serde.schema.InputToBufferSpecrµ
+tensor_constant4torch._export.serde.schema.InputSpec.tensor_constantl
+4torch._export.serde.schema.InputToTensorConstantSpec"4torch._export.serde.schema.InputToTensorConstantSpecr°
+
+custom_obj/torch._export.serde.schema.InputSpec.custom_objb
+/torch._export.serde.schema.InputToCustomObjSpec"/torch._export.serde.schema.InputToCustomObjSpecrã
+token*torch._export.serde.schema.InputSpec.tokenV
+)torch._export.serde.schema.InputTokenSpec")torch._export.serde.schema.InputTokenSpecr£
+constant_input3torch._export.serde.schema.InputSpec.constant_input\
+,torch._export.serde.schema.ConstantInputSpec",torch._export.serde.schema.ConstantInputSpecrÎ
+__dataclass_fields__9torch._export.serde.schema.InputSpec.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dict∆
+UserOutputSpec)torch._export.serde.schema.UserOutputSpec"builtins.object*ˇ
+__init__2torch._export.serde.schema.UserOutputSpec.__init__"
+None*`
+selfV
+)torch._export.serde.schema.UserOutputSpec")torch._export.serde.schema.UserOutputSpec*S
+argJ
+#torch._export.serde.schema.Argument"#torch._export.serde.schema.Argument8rÄ
+arg-torch._export.serde.schema.UserOutputSpec.argJ
+#torch._export.serde.schema.Argument"#torch._export.serde.schema.Argumentr
+__dataclass_fields__>torch._export.serde.schema.UserOutputSpec.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictﬁ
+LossOutputSpec)torch._export.serde.schema.LossOutputSpec"builtins.object*ã
+__init__2torch._export.serde.schema.LossOutputSpec.__init__"
+None*`
+selfV
+)torch._export.serde.schema.LossOutputSpec")torch._export.serde.schema.LossOutputSpec*_
+argV
+)torch._export.serde.schema.TensorArgument")torch._export.serde.schema.TensorArgument8rå
+arg-torch._export.serde.schema.LossOutputSpec.argV
+)torch._export.serde.schema.TensorArgument")torch._export.serde.schema.TensorArgumentr
+__dataclass_fields__>torch._export.serde.schema.LossOutputSpec.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictë
+BufferMutationSpec-torch._export.serde.schema.BufferMutationSpec"builtins.object*∆
+__init__6torch._export.serde.schema.BufferMutationSpec.__init__"
+None*h
+self^
+-torch._export.serde.schema.BufferMutationSpec"-torch._export.serde.schema.BufferMutationSpec*_
+argV
+)torch._export.serde.schema.TensorArgument")torch._export.serde.schema.TensorArgument*-
+buffer_name
+builtins.str"builtins.str8rê
+arg1torch._export.serde.schema.BufferMutationSpec.argV
+)torch._export.serde.schema.TensorArgument")torch._export.serde.schema.TensorArgumentrf
+buffer_name9torch._export.serde.schema.BufferMutationSpec.buffer_name
+builtins.str"builtins.strrÙ
+__dataclass_fields__Btorch._export.serde.schema.BufferMutationSpec.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dict¬
+GradientToParameterSpec2torch._export.serde.schema.GradientToParameterSpec"builtins.object*ÿ
+__init__;torch._export.serde.schema.GradientToParameterSpec.__init__"
+None*r
+selfh
+2torch._export.serde.schema.GradientToParameterSpec"2torch._export.serde.schema.GradientToParameterSpec*_
+argV
+)torch._export.serde.schema.TensorArgument")torch._export.serde.schema.TensorArgument*0
+parameter_name
+builtins.str"builtins.str8rï
+arg6torch._export.serde.schema.GradientToParameterSpec.argV
+)torch._export.serde.schema.TensorArgument")torch._export.serde.schema.TensorArgumentrq
+parameter_nameAtorch._export.serde.schema.GradientToParameterSpec.parameter_name
+builtins.str"builtins.strr˘
+__dataclass_fields__Gtorch._export.serde.schema.GradientToParameterSpec.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dict≈
+GradientToUserInputSpec2torch._export.serde.schema.GradientToUserInputSpec"builtins.object*Ÿ
+__init__;torch._export.serde.schema.GradientToUserInputSpec.__init__"
+None*r
+selfh
+2torch._export.serde.schema.GradientToUserInputSpec"2torch._export.serde.schema.GradientToUserInputSpec*_
+argV
+)torch._export.serde.schema.TensorArgument")torch._export.serde.schema.TensorArgument*1
+user_input_name
+builtins.str"builtins.str8rï
+arg6torch._export.serde.schema.GradientToUserInputSpec.argV
+)torch._export.serde.schema.TensorArgument")torch._export.serde.schema.TensorArgumentrs
+user_input_nameBtorch._export.serde.schema.GradientToUserInputSpec.user_input_name
+builtins.str"builtins.strr˘
+__dataclass_fields__Gtorch._export.serde.schema.GradientToUserInputSpec.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictµ
+UserInputMutationSpec0torch._export.serde.schema.UserInputMutationSpec"builtins.object*”
+__init__9torch._export.serde.schema.UserInputMutationSpec.__init__"
+None*n
+selfd
+0torch._export.serde.schema.UserInputMutationSpec"0torch._export.serde.schema.UserInputMutationSpec*_
+argV
+)torch._export.serde.schema.TensorArgument")torch._export.serde.schema.TensorArgument*1
+user_input_name
+builtins.str"builtins.str8rì
+arg4torch._export.serde.schema.UserInputMutationSpec.argV
+)torch._export.serde.schema.TensorArgument")torch._export.serde.schema.TensorArgumentrq
+user_input_name@torch._export.serde.schema.UserInputMutationSpec.user_input_name
+builtins.str"builtins.strr˜
+__dataclass_fields__Etorch._export.serde.schema.UserInputMutationSpec.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dict·
+OutputTokenSpec*torch._export.serde.schema.OutputTokenSpec"builtins.object*å
+__init__3torch._export.serde.schema.OutputTokenSpec.__init__"
+None*b
+selfX
+*torch._export.serde.schema.OutputTokenSpec"*torch._export.serde.schema.OutputTokenSpec*]
+argT
+(torch._export.serde.schema.TokenArgument"(torch._export.serde.schema.TokenArgument8rã
+arg.torch._export.serde.schema.OutputTokenSpec.argT
+(torch._export.serde.schema.TokenArgument"(torch._export.serde.schema.TokenArgumentrÒ
+__dataclass_fields__?torch._export.serde.schema.OutputTokenSpec.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictŒ
+
+OutputSpec%torch._export.serde.schema.OutputSpec" torch._export.serde.union._Union*÷
+__init__.torch._export.serde.schema.OutputSpec.__init__"
+None*X
+selfN
+%torch._export.serde.schema.OutputSpec"%torch._export.serde.schema.OutputSpec*g
+user_outputV
+)torch._export.serde.schema.UserOutputSpec")torch._export.serde.schema.UserOutputSpec*g
+loss_outputV
+)torch._export.serde.schema.LossOutputSpec")torch._export.serde.schema.LossOutputSpec*s
+buffer_mutation^
+-torch._export.serde.schema.BufferMutationSpec"-torch._export.serde.schema.BufferMutationSpec*É
+gradient_to_parameterh
+2torch._export.serde.schema.GradientToParameterSpec"2torch._export.serde.schema.GradientToParameterSpec*Ñ
+gradient_to_user_inputh
+2torch._export.serde.schema.GradientToUserInputSpec"2torch._export.serde.schema.GradientToUserInputSpec*}
+user_input_mutationd
+0torch._export.serde.schema.UserInputMutationSpec"0torch._export.serde.schema.UserInputMutationSpec*c
+tokenX
+*torch._export.serde.schema.OutputTokenSpec"*torch._export.serde.schema.OutputTokenSpec8rò
+user_output1torch._export.serde.schema.OutputSpec.user_outputV
+)torch._export.serde.schema.UserOutputSpec")torch._export.serde.schema.UserOutputSpecrò
+loss_output1torch._export.serde.schema.OutputSpec.loss_outputV
+)torch._export.serde.schema.LossOutputSpec")torch._export.serde.schema.LossOutputSpecr®
+buffer_mutation5torch._export.serde.schema.OutputSpec.buffer_mutation^
+-torch._export.serde.schema.BufferMutationSpec"-torch._export.serde.schema.BufferMutationSpecræ
+gradient_to_parameter;torch._export.serde.schema.OutputSpec.gradient_to_parameterh
+2torch._export.serde.schema.GradientToParameterSpec"2torch._export.serde.schema.GradientToParameterSpecr¿
+gradient_to_user_input<torch._export.serde.schema.OutputSpec.gradient_to_user_inputh
+2torch._export.serde.schema.GradientToUserInputSpec"2torch._export.serde.schema.GradientToUserInputSpecr∂
+user_input_mutation9torch._export.serde.schema.OutputSpec.user_input_mutationd
+0torch._export.serde.schema.UserInputMutationSpec"0torch._export.serde.schema.UserInputMutationSpecré
+token+torch._export.serde.schema.OutputSpec.tokenX
+*torch._export.serde.schema.OutputTokenSpec"*torch._export.serde.schema.OutputTokenSpecrÏ
+__dataclass_fields__:torch._export.serde.schema.OutputSpec.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dict˝	
+GraphSignature)torch._export.serde.schema.GraphSignature"builtins.object*¸
+__init__2torch._export.serde.schema.GraphSignature.__init__"
+None*`
+selfV
+)torch._export.serde.schema.GraphSignature")torch._export.serde.schema.GraphSignature*§
+input_specsí
+3builtins.list[torch._export.serde.schema.InputSpec]L
+$torch._export.serde.schema.InputSpec"$torch._export.serde.schema.InputSpec"builtins.list*®
+output_specsï
+4builtins.list[torch._export.serde.schema.OutputSpec]N
+%torch._export.serde.schema.OutputSpec"%torch._export.serde.schema.OutputSpec"builtins.list8rŸ
+input_specs5torch._export.serde.schema.GraphSignature.input_specsí
+3builtins.list[torch._export.serde.schema.InputSpec]L
+$torch._export.serde.schema.InputSpec"$torch._export.serde.schema.InputSpec"builtins.listrﬁ
+output_specs6torch._export.serde.schema.GraphSignature.output_specsï
+4builtins.list[torch._export.serde.schema.OutputSpec]N
+%torch._export.serde.schema.OutputSpec"%torch._export.serde.schema.OutputSpec"builtins.listr
+__dataclass_fields__>torch._export.serde.schema.GraphSignature.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictÑ
+RangeConstraint*torch._export.serde.schema.RangeConstraint"builtins.object*É
+__init__3torch._export.serde.schema.RangeConstraint.__init__"
+None*b
+selfX
+*torch._export.serde.schema.RangeConstraint"*torch._export.serde.schema.RangeConstraint*)
+min_val
+builtins.int"builtins.int*)
+max_val
+builtins.int"builtins.int8r[
+min_val2torch._export.serde.schema.RangeConstraint.min_val
+builtins.int"builtins.intr[
+max_val2torch._export.serde.schema.RangeConstraint.max_val
+builtins.int"builtins.intrÒ
+__dataclass_fields__?torch._export.serde.schema.RangeConstraint.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictê
+ModuleCallSignature.torch._export.serde.schema.ModuleCallSignature"builtins.object*œ
+__init__7torch._export.serde.schema.ModuleCallSignature.__init__"
+None*j
+self`
+.torch._export.serde.schema.ModuleCallSignature".torch._export.serde.schema.ModuleCallSignature*ú
+inputsè
+2builtins.list[torch._export.serde.schema.Argument]J
+#torch._export.serde.schema.Argument"#torch._export.serde.schema.Argument"builtins.list*ù
+outputsè
+2builtins.list[torch._export.serde.schema.Argument]J
+#torch._export.serde.schema.Argument"#torch._export.serde.schema.Argument"builtins.list*)
+in_spec
+builtins.str"builtins.str**
+out_spec
+builtins.str"builtins.str8r—
+inputs5torch._export.serde.schema.ModuleCallSignature.inputsè
+2builtins.list[torch._export.serde.schema.Argument]J
+#torch._export.serde.schema.Argument"#torch._export.serde.schema.Argument"builtins.listr”
+outputs6torch._export.serde.schema.ModuleCallSignature.outputsè
+2builtins.list[torch._export.serde.schema.Argument]J
+#torch._export.serde.schema.Argument"#torch._export.serde.schema.Argument"builtins.listr_
+in_spec6torch._export.serde.schema.ModuleCallSignature.in_spec
+builtins.str"builtins.strra
+out_spec7torch._export.serde.schema.ModuleCallSignature.out_spec
+builtins.str"builtins.strrı
+__dataclass_fields__Ctorch._export.serde.schema.ModuleCallSignature.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dict†
+ModuleCallEntry*torch._export.serde.schema.ModuleCallEntry"builtins.object*ì
+__init__3torch._export.serde.schema.ModuleCallEntry.__init__"
+None*b
+selfX
+*torch._export.serde.schema.ModuleCallEntry"*torch._export.serde.schema.ModuleCallEntry*%
+fqn
+builtins.str"builtins.str*º
+	signature™
+:Union[torch._export.serde.schema.ModuleCallSignature,None]`
+.torch._export.serde.schema.ModuleCallSignature".torch._export.serde.schema.ModuleCallSignature
+None 8rS
+fqn.torch._export.serde.schema.ModuleCallEntry.fqn
+builtins.str"builtins.strrÓ
+	signature4torch._export.serde.schema.ModuleCallEntry.signature™
+:Union[torch._export.serde.schema.ModuleCallSignature,None]`
+.torch._export.serde.schema.ModuleCallSignature".torch._export.serde.schema.ModuleCallSignature
+NonerÒ
+__dataclass_fields__?torch._export.serde.schema.ModuleCallEntry.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictﬂ
+
+GraphModule&torch._export.serde.schema.GraphModule"builtins.object*ò
+__init__/torch._export.serde.schema.GraphModule.__init__"
+None*Z
+selfP
+&torch._export.serde.schema.GraphModule"&torch._export.serde.schema.GraphModule*O
+graphD
+ torch._export.serde.schema.Graph" torch._export.serde.schema.Graph*e
+	signatureV
+)torch._export.serde.schema.GraphSignature")torch._export.serde.schema.GraphSignature*º
+module_call_graph§
+9builtins.list[torch._export.serde.schema.ModuleCallEntry]X
+*torch._export.serde.schema.ModuleCallEntry"*torch._export.serde.schema.ModuleCallEntry"builtins.list8r{
+graph,torch._export.serde.schema.GraphModule.graphD
+ torch._export.serde.schema.Graph" torch._export.serde.schema.Graphrï
+	signature0torch._export.serde.schema.GraphModule.signatureV
+)torch._export.serde.schema.GraphSignature")torch._export.serde.schema.GraphSignaturerÙ
+module_call_graph8torch._export.serde.schema.GraphModule.module_call_graph§
+9builtins.list[torch._export.serde.schema.ModuleCallEntry]X
+*torch._export.serde.schema.ModuleCallEntry"*torch._export.serde.schema.ModuleCallEntry"builtins.listrÌ
+__dataclass_fields__;torch._export.serde.schema.GraphModule.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictË
+SchemaVersion(torch._export.serde.schema.SchemaVersion"builtins.object*˘
+__init__1torch._export.serde.schema.SchemaVersion.__init__"
+None*^
+selfT
+(torch._export.serde.schema.SchemaVersion"(torch._export.serde.schema.SchemaVersion*'
+major
+builtins.int"builtins.int*'
+minor
+builtins.int"builtins.int8rU
+major.torch._export.serde.schema.SchemaVersion.major
+builtins.int"builtins.intrU
+minor.torch._export.serde.schema.SchemaVersion.minor
+builtins.int"builtins.intrÔ
+__dataclass_fields__=torch._export.serde.schema.SchemaVersion.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictË
+ExportedProgram*torch._export.serde.schema.ExportedProgram"builtins.object*õ
+__init__3torch._export.serde.schema.ExportedProgram.__init__"
+None*b
+selfX
+*torch._export.serde.schema.ExportedProgram"*torch._export.serde.schema.ExportedProgram*b
+graph_moduleP
+&torch._export.serde.schema.GraphModule"&torch._export.serde.schema.GraphModule*à
+opset_versionu
+(builtins.dict[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int"builtins.dict*Á
+range_constraintsœ
+Fbuiltins.dict[builtins.str,torch._export.serde.schema.RangeConstraint]
+builtins.str"builtins.strX
+*torch._export.serde.schema.RangeConstraint"*torch._export.serde.schema.RangeConstraint"builtins.dict*h
+schema_versionT
+(torch._export.serde.schema.SchemaVersion"(torch._export.serde.schema.SchemaVersion*)
+dialect
+builtins.str"builtins.str8rô
+graph_module7torch._export.serde.schema.ExportedProgram.graph_moduleP
+&torch._export.serde.schema.GraphModule"&torch._export.serde.schema.GraphModuler¿
+opset_version8torch._export.serde.schema.ExportedProgram.opset_versionu
+(builtins.dict[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int"builtins.dictr£
+range_constraints<torch._export.serde.schema.ExportedProgram.range_constraintsœ
+Fbuiltins.dict[builtins.str,torch._export.serde.schema.RangeConstraint]
+builtins.str"builtins.strX
+*torch._export.serde.schema.RangeConstraint"*torch._export.serde.schema.RangeConstraint"builtins.dictr°
+schema_version9torch._export.serde.schema.ExportedProgram.schema_versionT
+(torch._export.serde.schema.SchemaVersion"(torch._export.serde.schema.SchemaVersionr[
+dialect2torch._export.serde.schema.ExportedProgram.dialect
+builtins.str"builtins.strrÒ
+__dataclass_fields__?torch._export.serde.schema.ExportedProgram.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dict*ñ
+__annotations__*torch._export.serde.schema.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*ù
+SCHEMA_VERSION)torch._export.serde.schema.SCHEMA_VERSION`
+ Tuple[builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int*]
+TREESPEC_VERSION+torch._export.serde.schema.TREESPEC_VERSION
+builtins.int"builtins.int

@@ -1,0 +1,211 @@
+
+"torch._inductor.fx_passes.pre_gradÆ	
+NormalizedLinearNode7torch._inductor.fx_passes.pre_grad.NormalizedLinearNode"builtins.object*ˆ
+__init__@torch._inductor.fx_passes.pre_grad.NormalizedLinearNode.__init__"
+None*|
+selfr
+7torch._inductor.fx_passes.pre_grad.NormalizedLinearNode"7torch._inductor.fx_passes.pre_grad.NormalizedLinearNode*2
+node(
+torch.fx.node.Node"torch.fx.node.Node*ö
+	get_inputAtorch._inductor.fx_passes.pre_grad.NormalizedLinearNode.get_input"(
+torch.fx.node.Node"torch.fx.node.Node*|
+selfr
+7torch._inductor.fx_passes.pre_grad.NormalizedLinearNode"7torch._inductor.fx_passes.pre_grad.NormalizedLinearNode*ø
+
+get_weightBtorch._inductor.fx_passes.pre_grad.NormalizedLinearNode.get_weight"(
+torch.fx.node.Node"torch.fx.node.Node*|
+selfr
+7torch._inductor.fx_passes.pre_grad.NormalizedLinearNode"7torch._inductor.fx_passes.pre_grad.NormalizedLinearNode*ô
+get_bias@torch._inductor.fx_passes.pre_grad.NormalizedLinearNode.get_bias"(
+torch.fx.node.Node"torch.fx.node.Node*|
+selfr
+7torch._inductor.fx_passes.pre_grad.NormalizedLinearNode"7torch._inductor.fx_passes.pre_grad.NormalizedLinearNodern
+node<torch._inductor.fx_passes.pre_grad.NormalizedLinearNode.node(
+torch.fx.node.Node"torch.fx.node.NodeÍ
+NormalizedMatmulNode7torch._inductor.fx_passes.pre_grad.NormalizedMatmulNode"builtins.object*ˆ
+__init__@torch._inductor.fx_passes.pre_grad.NormalizedMatmulNode.__init__"
+None*|
+selfr
+7torch._inductor.fx_passes.pre_grad.NormalizedMatmulNode"7torch._inductor.fx_passes.pre_grad.NormalizedMatmulNode*2
+node(
+torch.fx.node.Node"torch.fx.node.Node*ö
+	get_inputAtorch._inductor.fx_passes.pre_grad.NormalizedMatmulNode.get_input"(
+torch.fx.node.Node"torch.fx.node.Node*|
+selfr
+7torch._inductor.fx_passes.pre_grad.NormalizedMatmulNode"7torch._inductor.fx_passes.pre_grad.NormalizedMatmulNode*ö
+	get_otherAtorch._inductor.fx_passes.pre_grad.NormalizedMatmulNode.get_other"(
+torch.fx.node.Node"torch.fx.node.Node*|
+selfr
+7torch._inductor.fx_passes.pre_grad.NormalizedMatmulNode"7torch._inductor.fx_passes.pre_grad.NormalizedMatmulNodern
+node<torch._inductor.fx_passes.pre_grad.NormalizedMatmulNode.node(
+torch.fx.node.Node"torch.fx.node.Nodeî
+IdentityRemover@2946torch._inductor.fx_passes.pre_grad.IdentityRemover@294" torch.fx.interpreter.Transformer*}
+call_moduleBtorch._inductor.fx_passes.pre_grad.IdentityRemover@294.call_module*
+self*
+
+target*
+args*
+
+kwargsù
+
+ConvBNFusion@3213torch._inductor.fx_passes.pre_grad.ConvBNFusion@321"builtins.object*Ü
+__init__<torch._inductor.fx_passes.pre_grad.ConvBNFusion@321.__init__*
+self*
+bn_node*
+conv_module*
+	bn_module *
+bn_running_mean *
+bn_running_var *
+bn_eps *
+	bn_weight *
+bn_bias *e
+add_bn_node?torch._inductor.fx_passes.pre_grad.ConvBNFusion@321.add_bn_node*
+self*
+bn_node*^
+disable_fusionBtorch._inductor.fx_passes.pre_grad.ConvBNFusion@321.disable_fusion*
+self*d
+is_fusion_enabledEtorch._inductor.fx_passes.pre_grad.ConvBNFusion@321.is_fusion_enabled*
+selfrQ
+bn_nodes<torch._inductor.fx_passes.pre_grad.ConvBNFusion@321.bn_nodes
+AnyrW
+conv_module?torch._inductor.fx_passes.pre_grad.ConvBNFusion@321.conv_module
+AnyrS
+	bn_module=torch._inductor.fx_passes.pre_grad.ConvBNFusion@321.bn_module
+Anyr_
+bn_running_meanCtorch._inductor.fx_passes.pre_grad.ConvBNFusion@321.bn_running_mean
+Anyr]
+bn_running_varBtorch._inductor.fx_passes.pre_grad.ConvBNFusion@321.bn_running_var
+AnyrM
+bn_eps:torch._inductor.fx_passes.pre_grad.ConvBNFusion@321.bn_eps
+AnyrS
+	bn_weight=torch._inductor.fx_passes.pre_grad.ConvBNFusion@321.bn_weight
+AnyrO
+bn_bias;torch._inductor.fx_passes.pre_grad.ConvBNFusion@321.bn_bias
+Anyr]
+fusion_enabledBtorch._inductor.fx_passes.pre_grad.ConvBNFusion@321.fusion_enabled
+Anyb
+save_inductor_dict5torch._inductor.fx_passes.pre_grad.save_inductor_dict*
+pass_to_compare d
+is_same_dict/torch._inductor.fx_passes.pre_grad.is_same_dict*
+inductor_dict*
+optimus_dictd
+fuse_parallel_linear_pass<torch._inductor.fx_passes.pre_grad.fuse_parallel_linear_pass*	
+graphb
+remove_split_ops3torch._inductor.fx_passes.pre_grad.remove_split_ops*	
+graph*
+
+shape_prop½
+pre_grad_passes2torch._inductor.fx_passes.pre_grad.pre_grad_passes"
+Any*N
+gmF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*
+example_inputs
+Any ê
+fuse_fx*torch._inductor.fx_passes.pre_grad.fuse_fx"F
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*N
+gmF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*
+example_inputs
+Any€
+
+fetch_attr-torch._inductor.fx_passes.pre_grad.fetch_attr"
+Any*(
+target
+builtins.str"builtins.str*
+mod
+AnyÝ
+remove_identity2torch._inductor.fx_passes.pre_grad.remove_identity"F
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*N
+gmF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModuleï
+fuse_conv_bn/torch._inductor.fx_passes.pre_grad.fuse_conv_bn"F
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*N
+gmF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*
+inplace
+Any •
+check_permute0torch._inductor.fx_passes.pre_grad.check_permute"
+builtins.bool"builtins.bool*2
+node(
+torch.fx.node.Node"torch.fx.node.Nodeó
+sink_cat_after_pointwise;torch._inductor.fx_passes.pre_grad.sink_cat_after_pointwise"F
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*R
+moduleF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModuleí
+linear_permute_fusion8torch._inductor.fx_passes.pre_grad.linear_permute_fusion"F
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*R
+moduleF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModuleÐ
+linear_transpose3torch._inductor.fx_passes.pre_grad.linear_transpose",
+torch._tensor.Tensor"torch._tensor.Tensor*7
+input,
+torch._tensor.Tensor"torch._tensor.Tensor*8
+weight,
+torch._tensor.Tensor"torch._tensor.Tensor*f
+bias\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+Noneí
+permute_linear_fusion8torch._inductor.fx_passes.pre_grad.permute_linear_fusion"F
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*R
+moduleF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModuleí
+permute_matmul_fusion8torch._inductor.fx_passes.pre_grad.permute_matmul_fusion"F
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*R
+moduleF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModuleÐ
+transpose_linear3torch._inductor.fx_passes.pre_grad.transpose_linear",
+torch._tensor.Tensor"torch._tensor.Tensor*7
+input,
+torch._tensor.Tensor"torch._tensor.Tensor*8
+weight,
+torch._tensor.Tensor"torch._tensor.Tensor*f
+bias\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None·
+transpose_matmul3torch._inductor.fx_passes.pre_grad.transpose_matmul",
+torch._tensor.Tensor"torch._tensor.Tensor*3
+A,
+torch._tensor.Tensor"torch._tensor.Tensor*3
+B,
+torch._tensor.Tensor"torch._tensor.Tensor**
+Atrans
+builtins.bool"builtins.bool**
+Btrans
+builtins.bool"builtins.bool*ž
+__annotations__2torch._inductor.fx_passes.pre_grad.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*
+nntorch.nn *
+Ftorch.nn.functional *O
+log&torch._inductor.fx_passes.pre_grad.log 
+logging.Logger"logging.Logger*Ç
+efficient_conv_bn_eval_pass>torch._inductor.fx_passes.pre_grad.efficient_conv_bn_eval_passh
+2torch._inductor.pattern_matcher.PatternMatcherPass"2torch._inductor.pattern_matcher.PatternMatcherPass*Å
+fuse_split_linear_add_pass=torch._inductor.fx_passes.pre_grad.fuse_split_linear_add_passh
+2torch._inductor.pattern_matcher.PatternMatcherPass"2torch._inductor.pattern_matcher.PatternMatcherPass*Ç
+fuse_chunk_squeeze_cat_pass>torch._inductor.fx_passes.pre_grad.fuse_chunk_squeeze_cat_passh
+2torch._inductor.pattern_matcher.PatternMatcherPass"2torch._inductor.pattern_matcher.PatternMatcherPass*·
+remove_reshape_pass6torch._inductor.fx_passes.pre_grad.remove_reshape_passh
+2torch._inductor.pattern_matcher.PatternMatcherPass"2torch._inductor.pattern_matcher.PatternMatcherPass*¿
+normalization_pass_aten:torch._inductor.fx_passes.pre_grad.normalization_pass_atenh
+2torch._inductor.pattern_matcher.PatternMatcherPass"2torch._inductor.pattern_matcher.PatternMatcherPass*½
+merge_splits_pass_aten9torch._inductor.fx_passes.pre_grad.merge_splits_pass_atenh
+2torch._inductor.pattern_matcher.PatternMatcherPass"2torch._inductor.pattern_matcher.PatternMatcherPass*·
+split_cat_pass_aten6torch._inductor.fx_passes.pre_grad.split_cat_pass_atenh
+2torch._inductor.pattern_matcher.PatternMatcherPass"2torch._inductor.pattern_matcher.PatternMatcherPass*½
+unbind_stack_pass_aten9torch._inductor.fx_passes.pre_grad.unbind_stack_pass_atenh
+2torch._inductor.pattern_matcher.PatternMatcherPass"2torch._inductor.pattern_matcher.PatternMatcherPass*Ç
+merge_getitem_cat_pass_aten>torch._inductor.fx_passes.pre_grad.merge_getitem_cat_pass_atenh
+2torch._inductor.pattern_matcher.PatternMatcherPass"2torch._inductor.pattern_matcher.PatternMatcherPass*Ó
+!merge_stack_tahn_unbind_pass_atenDtorch._inductor.fx_passes.pre_grad.merge_stack_tahn_unbind_pass_atenh
+2torch._inductor.pattern_matcher.PatternMatcherPass"2torch._inductor.pattern_matcher.PatternMatcherPass*¹
+mutate_cat_pass_aten7torch._inductor.fx_passes.pre_grad.mutate_cat_pass_atenh
+2torch._inductor.pattern_matcher.PatternMatcherPass"2torch._inductor.pattern_matcher.PatternMatcherPass*Ù
+$remove_split_with_size_one_pass_atenGtorch._inductor.fx_passes.pre_grad.remove_split_with_size_one_pass_atenh
+2torch._inductor.pattern_matcher.PatternMatcherPass"2torch._inductor.pattern_matcher.PatternMatcherPass*œ
+pattern_matcher_passes_aten>torch._inductor.fx_passes.pre_grad.pattern_matcher_passes_aten¼
+Abuiltins.list[torch._inductor.pattern_matcher.PatternMatcherPass]h
+2torch._inductor.pattern_matcher.PatternMatcherPass"2torch._inductor.pattern_matcher.PatternMatcherPass"builtins.list

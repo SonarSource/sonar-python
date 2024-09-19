@@ -1,0 +1,324 @@
+
+torch._dynamo.trace_rulesÏ
+FunctionIdSet'torch._dynamo.trace_rules.FunctionIdSet"builtins.object*‡
+__init__0torch._dynamo.trace_rules.FunctionIdSet.__init__"
+None*\
+selfR
+'torch._dynamo.trace_rules.FunctionIdSet"'torch._dynamo.trace_rules.FunctionIdSet*a
+lazy_initializerK
+CallableType[builtins.function]&
+builtins.function"builtins.function*F
+__call__0torch._dynamo.trace_rules.FunctionIdSet.__call__*
+self*õ
+get_name0torch._dynamo.trace_rules.FunctionIdSet.get_name"
+Any*\
+selfR
+'torch._dynamo.trace_rules.FunctionIdSet"'torch._dynamo.trace_rules.FunctionIdSet*%
+idx
+builtins.int"builtins.int*)
+default
+builtins.str"builtins.str*À
+add+torch._dynamo.trace_rules.FunctionIdSet.add"
+Any*\
+selfR
+'torch._dynamo.trace_rules.FunctionIdSet"'torch._dynamo.trace_rules.FunctionIdSet*%
+idx
+builtins.int"builtins.int*Æ
+remove.torch._dynamo.trace_rules.FunctionIdSet.remove"
+Any*\
+selfR
+'torch._dynamo.trace_rules.FunctionIdSet"'torch._dynamo.trace_rules.FunctionIdSet*%
+idx
+builtins.int"builtins.int*Ã
+__contains__4torch._dynamo.trace_rules.FunctionIdSet.__contains__"
+Any*TR
+'torch._dynamo.trace_rules.FunctionIdSet"'torch._dynamo.trace_rules.FunctionIdSet*
+builtins.int"builtins.intrÄ
+function_ids4torch._dynamo.trace_rules.FunctionIdSet.function_ids~
+&Union[builtins.set[builtins.int],None]H
+builtins.set[builtins.int]
+builtins.int"builtins.int"builtins.set
+Noner„
+function_names6torch._dynamo.trace_rules.FunctionIdSet.function_names¹
+4Union[builtins.dict[builtins.int,builtins.str],None]u
+(builtins.dict[builtins.int,builtins.str]
+builtins.int"builtins.int
+builtins.str"builtins.str"builtins.dict
+Noner™
+lazy_initializer8torch._dynamo.trace_rules.FunctionIdSet.lazy_initializerK
+CallableType[builtins.function]&
+builtins.function"builtins.function¦
+
+SkipResult$torch._dynamo.trace_rules.SkipResult"builtins.object*š
+__init__-torch._dynamo.trace_rules.SkipResult.__init__"
+None*V
+selfL
+$torch._dynamo.trace_rules.SkipResult"$torch._dynamo.trace_rules.SkipResult*+
+skipped
+builtins.bool"builtins.bool*P
+reasonD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None8rW
+skipped,torch._dynamo.trace_rules.SkipResult.skipped
+builtins.bool"builtins.boolr{
+reason+torch._dynamo.trace_rules.SkipResult.reasonD
+Union[builtins.str,None]
+builtins.str"builtins.str
+Nonerë
+__dataclass_fields__9torch._dynamo.trace_rules.SkipResult.__dataclass_fields__—
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictê	
+FunctionInfo&torch._dynamo.trace_rules.FunctionInfo"builtins.object*Î
+__init__/torch._dynamo.trace_rules.FunctionInfo.__init__"
+None*Z
+selfP
+&torch._dynamo.trace_rules.FunctionInfo"&torch._dynamo.trace_rules.FunctionInfo*Y
+py_objM
+Union[builtins.object,None]"
+builtins.object"builtins.object
+None*N
+nameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None**
+filename
+builtins.str"builtins.str*T
+codeJ
+Union[types.CodeType,None] 
+types.CodeType"types.CodeType
+None8r†
+py_obj-torch._dynamo.trace_rules.FunctionInfo.py_objM
+Union[builtins.object,None]"
+builtins.object"builtins.object
+Nonery
+name+torch._dynamo.trace_rules.FunctionInfo.nameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+NonerY
+filename/torch._dynamo.trace_rules.FunctionInfo.filename
+builtins.str"builtins.strr
+code+torch._dynamo.trace_rules.FunctionInfo.codeJ
+Union[types.CodeType,None] 
+types.CodeType"types.CodeType
+Nonerí
+__dataclass_fields__;torch._dynamo.trace_rules.FunctionInfo.__dataclass_fields__—
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dict†
+$<subclass of "str" and "ModuleType">>torch._dynamo.trace_rules.<subclass of "str" and "ModuleType">"builtins.str"types.ModuleType\
+_load_obj_from_str,torch._dynamo.trace_rules._load_obj_from_str*
+fully_qualified_name>
+load_object%torch._dynamo.trace_rules.load_object*
+name]
+is_aten_op_or_tensor_method5torch._dynamo.trace_rules.is_aten_op_or_tensor_method*
+objÔ
+add_module_init_func.torch._dynamo.trace_rules.add_module_init_func"
+None*&
+name
+builtins.str"builtins.str*Z
+	init_funcK
+CallableType[builtins.function]&
+builtins.function"builtins.functionƒ
+_maybe_init_lazy_module1torch._dynamo.trace_rules._maybe_init_lazy_module"
+None*+
+obj"
+builtins.object"builtins.objectv
+is_callable_allowed-torch._dynamo.trace_rules.is_callable_allowed"
+builtins.bool"builtins.bool*
+obj
+Any|
+is_callable_disallowed0torch._dynamo.trace_rules.is_callable_disallowed"
+builtins.bool"builtins.bool*
+obj
+Anyh
+is_forbidden&torch._dynamo.trace_rules.is_forbidden"
+builtins.bool"builtins.bool*
+obj
+Anyv
+is_builtin_callable-torch._dynamo.trace_rules.is_builtin_callable"
+builtins.bool"builtins.bool*
+obj
+Anyv
+is_builtin_constant-torch._dynamo.trace_rules.is_builtin_constant"
+builtins.bool"builtins.bool*
+obj
+Any`
+is_numpy"torch._dynamo.trace_rules.is_numpy"
+builtins.bool"builtins.bool*
+obj
+Anyl
+is_numpy_dtype(torch._dynamo.trace_rules.is_numpy_dtype"
+builtins.bool"builtins.bool*
+obj
+Anyt
+is_numpy_type_info,torch._dynamo.trace_rules.is_numpy_type_info"
+builtins.bool"builtins.bool*
+obj
+AnyA
+_strip_init_py(torch._dynamo.trace_rules._strip_init_py*
+sj
+_module_dir%torch._dynamo.trace_rules._module_dir"
+Any*+
+m$
+types.ModuleType"types.ModuleType8
+_recompile_re'torch._dynamo.trace_rules._recompile_re\
+addtorch._dynamo.trace_rules.add"
+Any*-
+import_name
+builtins.str"builtins.strW
+
+check_file$torch._dynamo.trace_rules.check_file*
+filename*
+is_inlined_call X
+check_verbose'torch._dynamo.trace_rules.check_verbose*
+obj*
+is_inlined_call H
+checktorch._dynamo.trace_rules.check*
+obj*
+is_inlined_call Z
+is_torch_inline_allowed1torch._dynamo.trace_rules.is_torch_inline_allowed*
+filename<
+is_torch"torch._dynamo.trace_rules.is_torch*
+filenameE
+lookup_callable)torch._dynamo.trace_rules.lookup_callable*
+obj3
+lookup torch._dynamo.trace_rules.lookup*
+obj®
+lookup_inner&torch._dynamo.trace_rules.lookup_inner"
+Any*
+obj
+Any*
+name
+Any *
+filename
+Any *
+is_direct_call
+Any *
+reasons~
+&Union[None,builtins.set[builtins.str]]
+NoneH
+builtins.set[builtins.str]
+builtins.str"builtins.str"builtins.set <
+clear_lru_cache)torch._dynamo.trace_rules.clear_lru_cache*•
+__annotations__)torch._dynamo.trace_rules.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*t
+nptorch._dynamo.trace_rules.npP
+Union[types.ModuleType,None]$
+types.ModuleType"types.ModuleType
+None*¶
+manual_torch_name_rule_map4torch._dynamo.trace_rules.manual_torch_name_rule_mapá
+Lbuiltins.dict[builtins.str,torch._dynamo.variables.base.VariableTrackerMeta]
+builtins.str"builtins.strd
+0torch._dynamo.variables.base.VariableTrackerMeta"0torch._dynamo.variables.base.VariableTrackerMeta"builtins.dict*™
+"torch_c_binding_in_graph_functions<torch._dynamo.trace_rules.torch_c_binding_in_graph_functions´
+Zbuiltins.dict[builtins.str,CallableType[torch._dynamo.variables.base.VariableTrackerMeta]]
+builtins.str"builtins.str¨
+>CallableType[torch._dynamo.variables.base.VariableTrackerMeta]d
+0torch._dynamo.variables.base.VariableTrackerMeta"0torch._dynamo.variables.base.VariableTrackerMeta"builtins.dict*¡
+&torch_non_c_binding_in_graph_functions@torch._dynamo.trace_rules.torch_non_c_binding_in_graph_functions´
+Zbuiltins.dict[builtins.str,CallableType[torch._dynamo.variables.base.VariableTrackerMeta]]
+builtins.str"builtins.str¨
+>CallableType[torch._dynamo.variables.base.VariableTrackerMeta]d
+0torch._dynamo.variables.base.VariableTrackerMeta"0torch._dynamo.variables.base.VariableTrackerMeta"builtins.dict*™
+torch_name_rule_map-torch._dynamo.trace_rules.torch_name_rule_mapS
+builtins.list[builtins.object]"
+builtins.object"builtins.object"builtins.list*Ë
+_lazy_module_init+torch._dynamo.trace_rules._lazy_module_initˆ
+Jbuiltins.dict[builtins.str,builtins.list[CallableType[builtins.function]]]
+builtins.str"builtins.strŒ
+.builtins.list[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"builtins.list"builtins.dict*õ
+BUILTIN_SKIPLIST*torch._dynamo.trace_rules.BUILTIN_SKIPLIST´
+•Tuple[types.ModuleType,types.ModuleType,types.ModuleType,types.ModuleType,types.ModuleType,types.ModuleType,types.ModuleType,types.ModuleType,types.ModuleType,types.ModuleType,types.ModuleType,types.ModuleType,types.ModuleType,types.ModuleType,types.ModuleType,types.ModuleType,types.ModuleType,types.ModuleType,types.ModuleType,types.ModuleType,types.ModuleType,types.ModuleType,types.ModuleType,types.ModuleType,types.ModuleType,types.ModuleType,types.ModuleType,types.ModuleType,types.ModuleType,types.ModuleType,types.ModuleType]$
+types.ModuleType"types.ModuleType$
+types.ModuleType"types.ModuleType$
+types.ModuleType"types.ModuleType$
+types.ModuleType"types.ModuleType$
+types.ModuleType"types.ModuleType$
+types.ModuleType"types.ModuleType$
+types.ModuleType"types.ModuleType$
+types.ModuleType"types.ModuleType$
+types.ModuleType"types.ModuleType$
+types.ModuleType"types.ModuleType$
+types.ModuleType"types.ModuleType$
+types.ModuleType"types.ModuleType$
+types.ModuleType"types.ModuleType$
+types.ModuleType"types.ModuleType$
+types.ModuleType"types.ModuleType$
+types.ModuleType"types.ModuleType$
+types.ModuleType"types.ModuleType$
+types.ModuleType"types.ModuleType$
+types.ModuleType"types.ModuleType$
+types.ModuleType"types.ModuleType$
+types.ModuleType"types.ModuleType$
+types.ModuleType"types.ModuleType$
+types.ModuleType"types.ModuleType$
+types.ModuleType"types.ModuleType$
+types.ModuleType"types.ModuleType$
+types.ModuleType"types.ModuleType$
+types.ModuleType"types.ModuleType$
+types.ModuleType"types.ModuleType$
+types.ModuleType"types.ModuleType$
+types.ModuleType"types.ModuleType$
+types.ModuleType"types.ModuleType*Ø
+THIRDPARTY_SKIPLIST-torch._dynamo.trace_rules.THIRDPARTY_SKIPLIST‘
+ðTuple[builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str
+builtins.str"builtins.str
+builtins.str"builtins.str
+builtins.str"builtins.str
+builtins.str"builtins.str
+builtins.str"builtins.str
+builtins.str"builtins.str
+builtins.str"builtins.str
+builtins.str"builtins.str
+builtins.str"builtins.str
+builtins.str"builtins.str
+builtins.str"builtins.str
+builtins.str"builtins.str
+builtins.str"builtins.str
+builtins.str"builtins.str
+builtins.str"builtins.str
+builtins.str"builtins.str*’
+LEGACY_MOD_INLINELIST/torch._dynamo.trace_rules.LEGACY_MOD_INLINELISTH
+builtins.set[builtins.str]
+builtins.str"builtins.str"builtins.set*„
+MOD_INLINELIST(torch._dynamo.trace_rules.MOD_INLINELISTH
+builtins.set[builtins.str]
+builtins.str"builtins.str"builtins.set*|
+	SKIP_DIRS#torch._dynamo.trace_rules.SKIP_DIRSJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*|
+SKIP_DIRS_RE&torch._dynamo.trace_rules.SKIP_DIRS_RED
+re.Pattern[builtins.str]
+builtins.str"builtins.str"
+re.Pattern*9
+	is_fbcode#torch._dynamo.trace_rules.is_fbcode
+Any*ˆ
+FBCODE_SKIP_DIRS*torch._dynamo.trace_rules.FBCODE_SKIP_DIRSH
+builtins.set[builtins.str]
+builtins.str"builtins.str"builtins.set*Š
+FBCODE_SKIP_DIRS_RE-torch._dynamo.trace_rules.FBCODE_SKIP_DIRS_RED
+re.Pattern[builtins.str]
+builtins.str"builtins.str"
+re.Pattern*®
+#FBCODE_INLINE_FILES_IN_SKIPPED_DIRS=torch._dynamo.trace_rules.FBCODE_INLINE_FILES_IN_SKIPPED_DIRSH
+builtins.set[builtins.str]
+builtins.str"builtins.str"builtins.set*°
+&FBCODE_INLINE_FILES_IN_SKIPPED_DIRS_RE@torch._dynamo.trace_rules.FBCODE_INLINE_FILES_IN_SKIPPED_DIRS_RED
+re.Pattern[builtins.str]
+builtins.str"builtins.str"
+re.Pattern*ˆ
+FORCE_SKIP_FILES*torch._dynamo.trace_rules.FORCE_SKIP_FILESH
+builtins.set[builtins.str]
+builtins.str"builtins.str"builtins.set*F
+_nametorch._dynamo.trace_rules._name
+builtins.str"builtins.str

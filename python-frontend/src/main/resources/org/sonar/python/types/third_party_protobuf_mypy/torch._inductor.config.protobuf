@@ -1,0 +1,504 @@
+
+torch._inductor.config“
+cpptorch._inductor.config.cpp"builtins.objectrK
+threads"torch._inductor.config.cpp.threads
+builtins.int"builtins.intrc
+no_redundant_loops-torch._inductor.config.cpp.no_redundant_loops
+builtins.bool"builtins.boolr]
+dynamic_threads*torch._inductor.config.cpp.dynamic_threads
+builtins.bool"builtins.boolrs
+simdlen"torch._inductor.config.cpp.simdlenD
+Union[builtins.int,None]
+builtins.int"builtins.int
+NonerY
+min_chunk_size)torch._inductor.config.cpp.min_chunk_size
+builtins.int"builtins.intrk
+cxxtorch._inductor.config.cpp.cxxD
+Tuple[None,builtins.str]
+None
+builtins.str"builtins.strri
+enable_kernel_profile0torch._inductor.config.cpp.enable_kernel_profile
+builtins.bool"builtins.boolr[
+weight_prepack)torch._inductor.config.cpp.weight_prepack
+builtins.bool"builtins.boolrù
+inject_relu_bug_TESTING_ONLY7torch._inductor.config.cpp.inject_relu_bug_TESTING_ONLYD
+Union[builtins.str,None]
+builtins.str"builtins.str
+Nonerü
+inject_log1p_bug_TESTING_ONLY8torch._inductor.config.cpp.inject_log1p_bug_TESTING_ONLYD
+Union[builtins.str,None]
+builtins.str"builtins.str
+Noner|
+
+vec_isa_ok%torch._inductor.config.cpp.vec_isa_okG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+Noner_
+descriptive_names,torch._inductor.config.cpp.descriptive_names
+builtins.str"builtins.strrq
+max_horizontal_fusion_size5torch._inductor.config.cpp.max_horizontal_fusion_size
+builtins.int"builtins.intru
+fallback_scatter_reduce_sum6torch._inductor.config.cpp.fallback_scatter_reduce_sum
+builtins.bool"builtins.boolru
+enable_unsafe_math_opt_flag6torch._inductor.config.cpp.enable_unsafe_math_opt_flag
+builtins.bool"builtins.boolrÖ
+#enable_floating_point_contract_flag>torch._inductor.config.cpp.enable_floating_point_contract_flag
+builtins.bool"builtins.bool±
+tritontorch._inductor.config.triton"builtins.objectrV
+
+cudagraphs(torch._inductor.config.triton.cudagraphs
+builtins.bool"builtins.boolr`
+cudagraph_trees-torch._inductor.config.triton.cudagraph_trees
+builtins.bool"builtins.boolr|
+cudagraph_skip_dynamic_graphs;torch._inductor.config.triton.cudagraph_skip_dynamic_graphs
+builtins.bool"builtins.boolrx
+slow_path_cudagraph_asserts9torch._inductor.config.triton.slow_path_cudagraph_asserts
+builtins.bool"builtins.boolrÑ
+!cudagraph_trees_history_recording?torch._inductor.config.triton.cudagraph_trees_history_recording
+builtins.bool"builtins.boolrÇ
+ cudagraph_support_input_mutation>torch._inductor.config.triton.cudagraph_support_input_mutation
+builtins.bool"builtins.boolrj
+force_cudagraph_sync2torch._inductor.config.triton.force_cudagraph_sync
+builtins.bool"builtins.boolrp
+force_cudagraphs_warmup5torch._inductor.config.triton.force_cudagraphs_warmup
+builtins.bool"builtins.boolrx
+fast_path_cudagraph_asserts9torch._inductor.config.triton.fast_path_cudagraph_asserts
+builtins.bool"builtins.boolrl
+skip_cudagraph_warmup3torch._inductor.config.triton.skip_cudagraph_warmup
+builtins.bool"builtins.boolrb
+debug_sync_graph.torch._inductor.config.triton.debug_sync_graph
+builtins.bool"builtins.boolrd
+debug_sync_kernel/torch._inductor.config.triton.debug_sync_kernel
+builtins.bool"builtins.boolr^
+dense_indexing,torch._inductor.config.triton.dense_indexing
+builtins.bool"builtins.boolrR
+	max_tiles'torch._inductor.config.triton.max_tiles
+builtins.int"builtins.intrf
+autotune_pointwise0torch._inductor.config.triton.autotune_pointwise
+builtins.bool"builtins.boolrd
+autotune_cublasLt/torch._inductor.config.triton.autotune_cublasLt
+builtins.bool"builtins.boolrÇ
+ tiling_prevents_pointwise_fusion>torch._inductor.config.triton.tiling_prevents_pointwise_fusion
+builtins.bool"builtins.boolrÇ
+ tiling_prevents_reduction_fusion>torch._inductor.config.triton.tiling_prevents_reduction_fusion
+builtins.bool"builtins.boolrh
+unique_kernel_names1torch._inductor.config.triton.unique_kernel_names
+builtins.bool"builtins.boolrb
+descriptive_names/torch._inductor.config.triton.descriptive_names
+builtins.str"builtins.strrl
+persistent_reductions3torch._inductor.config.triton.persistent_reductions
+builtins.bool"builtins.boolrX
+multi_kernel*torch._inductor.config.triton.multi_kernel
+builtins.int"builtins.intr`
+divisible_by_16-torch._inductor.config.triton.divisible_by_16
+builtins.bool"builtins.boolrj
+min_split_scan_rblock3torch._inductor.config.triton.min_split_scan_rblock
+builtins.int"builtins.intrX
+store_cubin)torch._inductor.config.triton.store_cubin
+builtins.bool"builtins.boolr^
+spill_threshold-torch._inductor.config.triton.spill_threshold
+builtins.int"builtins.intr\
+use_block_ptr+torch._inductor.config.triton.use_block_ptr
+builtins.bool"builtins.boolr†
+inject_relu_bug_TESTING_ONLY:torch._inductor.config.triton.inject_relu_bug_TESTING_ONLYD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None≈
+aot_inductor#torch._inductor.config.aot_inductor"builtins.objectr\
+output_path/torch._inductor.config.aot_inductor.output_path
+builtins.str"builtins.strrb
+debug_compile1torch._inductor.config.aot_inductor.debug_compile
+builtins.bool"builtins.boolrr
+debug_dump_consts_bin9torch._inductor.config.aot_inductor.debug_dump_consts_bin
+builtins.bool"builtins.boolrj
+serialized_in_spec6torch._inductor.config.aot_inductor.serialized_in_spec
+builtins.str"builtins.strrl
+serialized_out_spec7torch._inductor.config.aot_inductor.serialized_out_spec
+builtins.str"builtins.strrÄ
+use_runtime_constant_folding@torch._inductor.config.aot_inductor.use_runtime_constant_folding
+builtins.bool"builtins.boolrl
+force_mmap_weights6torch._inductor.config.aot_inductor.force_mmap_weights
+builtins.bool"builtins.boolç
+cudatorch._inductor.config.cuda"builtins.objectrn
+arch torch._inductor.config.cuda.archD
+Union[builtins.str,None]
+builtins.str"builtins.str
+Nonert
+version#torch._inductor.config.cuda.versionD
+Union[builtins.str,None]
+builtins.str"builtins.str
+Noner`
+compile_opt_level-torch._inductor.config.cuda.compile_opt_level
+builtins.str"builtins.strr^
+enable_cuda_lto+torch._inductor.config.cuda.enable_cuda_lto
+builtins.bool"builtins.boolrb
+enable_ptxas_info-torch._inductor.config.cuda.enable_ptxas_info
+builtins.bool"builtins.boolrb
+enable_debug_info-torch._inductor.config.cuda.enable_debug_info
+builtins.bool"builtins.boolrZ
+use_fast_math)torch._inductor.config.cuda.use_fast_math
+builtins.bool"builtins.boolrT
+cutlass_dir'torch._inductor.config.cuda.cutlass_dir
+builtins.str"builtins.strr†
+cutlass_max_profiling_configs9torch._inductor.config.cuda.cutlass_max_profiling_configsD
+Union[builtins.int,None]
+builtins.int"builtins.int
+Nonerv
+cuda_cxx$torch._inductor.config.cuda.cuda_cxxD
+Union[builtins.str,None]
+builtins.str"builtins.str
+Nonerx
+cutlass_backend_min_gemm_size9torch._inductor.config.cuda.cutlass_backend_min_gemm_size
+builtins.int"builtins.intrh
+generate_test_runner0torch._inductor.config.cuda.generate_test_runner
+builtins.bool"builtins.boolrö
+cutlass_op_allowlist_regex6torch._inductor.config.cuda.cutlass_op_allowlist_regexD
+Union[builtins.str,None]
+builtins.str"builtins.str
+Nonerò
+cutlass_op_denylist_regex5torch._inductor.config.cuda.cutlass_op_denylist_regexD
+Union[builtins.str,None]
+builtins.str"builtins.str
+NoneÚ
+tracetorch._inductor.config.trace"builtins.objectrO
+enabled$torch._inductor.config.trace.enabled
+builtins.bool"builtins.boolry
+	debug_dir&torch._inductor.config.trace.debug_dirD
+Union[builtins.str,None]
+builtins.str"builtins.str
+NonerS
+	debug_log&torch._inductor.config.trace.debug_log
+builtins.bool"builtins.boolrQ
+info_log%torch._inductor.config.trace.info_log
+builtins.bool"builtins.boolrQ
+fx_graph%torch._inductor.config.trace.fx_graph
+builtins.bool"builtins.boolri
+fx_graph_transformed1torch._inductor.config.trace.fx_graph_transformed
+builtins.bool"builtins.boolr[
+ir_pre_fusion*torch._inductor.config.trace.ir_pre_fusion
+builtins.bool"builtins.boolr]
+ir_post_fusion+torch._inductor.config.trace.ir_post_fusion
+builtins.bool"builtins.boolrW
+output_code(torch._inductor.config.trace.output_code
+builtins.bool"builtins.boolr[
+graph_diagram*torch._inductor.config.trace.graph_diagram
+builtins.bool"builtins.boolre
+draw_orig_fx_graph/torch._inductor.config.trace.draw_orig_fx_graph
+builtins.bool"builtins.boolrÖ
+dot_graph_shape,torch._inductor.config.trace.dot_graph_shapeD
+Union[builtins.str,None]
+builtins.str"builtins.str
+Nonerï
+log_url_for_graph_xform4torch._inductor.config.trace.log_url_for_graph_xformD
+Union[builtins.str,None]
+builtins.str"builtins.str
+Noner_
+compile_profile,torch._inductor.config.trace.compile_profile
+builtins.bool"builtins.boolræ
+
+upload_tar'torch._inductor.config.trace.upload_tarÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+Nonerm
+log_autotuning_results3torch._inductor.config.trace.log_autotuning_results
+builtins.bool"builtins.bool-
+	is_fbcode torch._inductor.config.is_fbcodeO
+decide_worker_start_method1torch._inductor.config.decide_worker_start_methodG
+decide_compile_threads-torch._inductor.config.decide_compile_threads*í
+__annotations__&torch._inductor.config.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*E
+debugtorch._inductor.config.debug
+builtins.bool"builtins.bool*[
+disable_progress'torch._inductor.config.disable_progress
+builtins.bool"builtins.bool*[
+verbose_progress'torch._inductor.config.verbose_progress
+builtins.bool"builtins.bool*W
+fx_graph_cache%torch._inductor.config.fx_graph_cache
+builtins.bool"builtins.bool*e
+fx_graph_remote_cache,torch._inductor.config.fx_graph_remote_cache
+builtins.bool"builtins.bool*c
+autotune_local_cache+torch._inductor.config.autotune_local_cache
+builtins.bool"builtins.bool*e
+autotune_remote_cache,torch._inductor.config.autotune_remote_cache
+builtins.bool"builtins.bool*c
+force_disable_caches+torch._inductor.config.force_disable_caches
+builtins.bool"builtins.bool*Q
+cpp_wrapper"torch._inductor.config.cpp_wrapper
+builtins.bool"builtins.bool*W
+abi_compatible%torch._inductor.config.abi_compatible
+builtins.bool"builtins.bool*U
+c_shim_version%torch._inductor.config.c_shim_version
+builtins.str"builtins.str*A
+dcetorch._inductor.config.dce
+builtins.bool"builtins.bool*c
+static_weight_shapes+torch._inductor.config.static_weight_shapes
+builtins.bool"builtins.bool*S
+size_asserts#torch._inductor.config.size_asserts
+builtins.bool"builtins.bool*Q
+nan_asserts"torch._inductor.config.nan_asserts
+builtins.bool"builtins.bool*[
+pick_loop_orders'torch._inductor.config.pick_loop_orders
+builtins.bool"builtins.bool*Y
+inplace_buffers&torch._inductor.config.inplace_buffers
+builtins.bool"builtins.bool*_
+allow_buffer_reuse)torch._inductor.config.allow_buffer_reuse
+builtins.bool"builtins.bool*Y
+memory_planning&torch._inductor.config.memory_planning
+builtins.bool"builtins.bool*O
+memory_pool"torch._inductor.config.memory_pool
+builtins.str"builtins.str*]
+benchmark_harness(torch._inductor.config.benchmark_harness
+builtins.bool"builtins.bool*Y
+epilogue_fusion&torch._inductor.config.epilogue_fusion
+builtins.bool"builtins.bool*e
+epilogue_fusion_first,torch._inductor.config.epilogue_fusion_first
+builtins.bool"builtins.bool*Y
+pattern_matcher&torch._inductor.config.pattern_matcher
+builtins.bool"builtins.bool*÷
+post_grad_custom_pre_pass0torch._inductor.config.post_grad_custom_pre_passÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None*ÿ
+post_grad_custom_post_pass1torch._inductor.config.post_grad_custom_post_passÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None*Œ
+joint_custom_pre_pass,torch._inductor.config.joint_custom_pre_passÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None*–
+joint_custom_post_pass-torch._inductor.config.joint_custom_post_passÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None*Ã
+pre_grad_custom_pass+torch._inductor.config.pre_grad_custom_passÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None*a
+split_cat_fx_passes*torch._inductor.config.split_cat_fx_passes
+builtins.bool"builtins.bool*{
+ efficient_conv_bn_eval_fx_passes7torch._inductor.config.efficient_conv_bn_eval_fx_passes
+builtins.bool"builtins.bool*W
+is_predispatch%torch._inductor.config.is_predispatch
+builtins.bool"builtins.bool*S
+group_fusion#torch._inductor.config.group_fusion
+builtins.bool"builtins.bool*S
+batch_fusion#torch._inductor.config.batch_fusion
+builtins.bool"builtins.bool*è
+pre_grad_fusion_options.torch._inductor.config.pre_grad_fusion_options√
+;builtins.dict[builtins.str,builtins.dict[builtins.str,Any]]
+builtins.str"builtins.strW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"builtins.dict*ë
+post_grad_fusion_options/torch._inductor.config.post_grad_fusion_options√
+;builtins.dict[builtins.str,builtins.dict[builtins.str,Any]]
+builtins.str"builtins.strW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"builtins.dict*c
+reorder_for_locality+torch._inductor.config.reorder_for_locality
+builtins.bool"builtins.bool*c
+dynamic_scale_rblock+torch._inductor.config.dynamic_scale_rblock
+builtins.bool"builtins.bool*o
+force_fuse_int_mm_with_mul1torch._inductor.config.force_fuse_int_mm_with_mul
+builtins.bool"builtins.bool*S
+use_mixed_mm#torch._inductor.config.use_mixed_mm
+builtins.bool"builtins.bool*¢
+fx_passes_numeric_check.torch._inductor.config.fx_passes_numeric_checkW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*W
+force_mixed_mm%torch._inductor.config.force_mixed_mm
+builtins.bool"builtins.bool*{
+ reorder_for_compute_comm_overlap7torch._inductor.config.reorder_for_compute_comm_overlap
+builtins.bool"builtins.bool*µ
+'reorder_for_compute_comm_overlap_passes>torch._inductor.config.reorder_for_compute_comm_overlap_passesJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*_
+estimate_op_runtime*torch._inductor.config.estimate_op_runtime
+builtins.str"builtins.str*S
+intra_node_bw$torch._inductor.config.intra_node_bw
+builtins.int"builtins.int*S
+inter_node_bw$torch._inductor.config.inter_node_bw
+builtins.int"builtins.int*S
+max_autotune#torch._inductor.config.max_autotune
+builtins.bool"builtins.bool*g
+max_autotune_pointwise-torch._inductor.config.max_autotune_pointwise
+builtins.bool"builtins.bool*]
+max_autotune_gemm(torch._inductor.config.max_autotune_gemm
+builtins.bool"builtins.bool*c
+force_same_precision+torch._inductor.config.force_same_precision
+builtins.bool"builtins.bool*m
+max_autotune_gemm_backends1torch._inductor.config.max_autotune_gemm_backends
+builtins.str"builtins.str*u
+max_autotune_gemm_search_space5torch._inductor.config.max_autotune_gemm_search_space
+builtins.str"builtins.str*m
+autotune_fallback_to_aten0torch._inductor.config.autotune_fallback_to_aten
+builtins.bool"builtins.bool*i
+unbacked_symint_fallback/torch._inductor.config.unbacked_symint_fallback
+builtins.int"builtins.int*e
+search_autotune_cache,torch._inductor.config.search_autotune_cache
+builtins.bool"builtins.bool*M
+	save_args torch._inductor.config.save_args
+builtins.bool"builtins.bool*a
+autotune_in_subproc*torch._inductor.config.autotune_in_subproc
+builtins.bool"builtins.bool*ì
++max_autotune_subproc_result_timeout_secondsBtorch._inductor.config.max_autotune_subproc_result_timeout_seconds 
+builtins.float"builtins.float*ó
+-max_autotune_subproc_graceful_timeout_secondsDtorch._inductor.config.max_autotune_subproc_graceful_timeout_seconds 
+builtins.float"builtins.float*ô
+.max_autotune_subproc_terminate_timeout_secondsEtorch._inductor.config.max_autotune_subproc_terminate_timeout_seconds 
+builtins.float"builtins.float*e
+autotune_multi_device,torch._inductor.config.autotune_multi_device
+builtins.bool"builtins.bool*m
+coordinate_descent_tuning0torch._inductor.config.coordinate_descent_tuning
+builtins.bool"builtins.bool*â
+'coordinate_descent_check_all_directions>torch._inductor.config.coordinate_descent_check_all_directions
+builtins.bool"builtins.bool*y
+ coordinate_descent_search_radius7torch._inductor.config.coordinate_descent_search_radius
+builtins.int"builtins.int*]
+layout_opt_default)torch._inductor.config.layout_opt_default
+builtins.str"builtins.str*a
+layout_optimization*torch._inductor.config.layout_optimization
+builtins.bool"builtins.bool*m
+force_layout_optimization0torch._inductor.config.force_layout_optimization
+builtins.bool"builtins.bool*_
+keep_output_stride)torch._inductor.config.keep_output_stride
+builtins.bool"builtins.bool*Y
+warn_mix_layout&torch._inductor.config.warn_mix_layout
+builtins.bool"builtins.bool*g
+realize_reads_threshold.torch._inductor.config.realize_reads_threshold
+builtins.int"builtins.int*k
+realize_opcount_threshold0torch._inductor.config.realize_opcount_threshold
+builtins.int"builtins.int*o
+realize_acc_reads_threshold2torch._inductor.config.realize_acc_reads_threshold
+builtins.int"builtins.int*Y
+fallback_random&torch._inductor.config.fallback_random
+builtins.bool"builtins.bool*_
+implicit_fallbacks)torch._inductor.config.implicit_fallbacks
+builtins.bool"builtins.bool*]
+aggressive_fusion(torch._inductor.config.aggressive_fusion
+builtins.bool"builtins.bool*S
+debug_fusion#torch._inductor.config.debug_fusion
+builtins.bool"builtins.bool*[
+benchmark_fusion'torch._inductor.config.benchmark_fusion
+builtins.bool"builtins.bool*c
+enabled_metric_tables,torch._inductor.config.enabled_metric_tables
+builtins.str"builtins.str*m
+benchmark_epilogue_fusion0torch._inductor.config.benchmark_epilogue_fusion
+builtins.bool"builtins.bool*y
+ max_epilogue_benchmarked_choices7torch._inductor.config.max_epilogue_benchmarked_choices
+builtins.int"builtins.int*W
+max_fusion_size&torch._inductor.config.max_fusion_size
+builtins.int"builtins.int*i
+max_pointwise_cat_inputs/torch._inductor.config.max_pointwise_cat_inputs
+builtins.int"builtins.int*o
+unroll_reductions_threshold2torch._inductor.config.unroll_reductions_threshold
+builtins.int"builtins.int*W
+comment_origin%torch._inductor.config.comment_origin
+builtins.bool"builtins.bool*W
+conv_1x1_as_mm%torch._inductor.config.conv_1x1_as_mm
+builtins.bool"builtins.bool*[
+split_reductions'torch._inductor.config.split_reductions
+builtins.bool"builtins.bool*[
+benchmark_kernel'torch._inductor.config.benchmark_kernel
+builtins.bool"builtins.bool*w
+constant_and_index_propagation5torch._inductor.config.constant_and_index_propagation
+builtins.bool"builtins.bool*s
+always_keep_tensor_constants3torch._inductor.config.always_keep_tensor_constants
+builtins.bool"builtins.bool*k
+assert_indirect_indexing/torch._inductor.config.assert_indirect_indexing
+builtins.bool"builtins.bool*_
+compute_all_bounds)torch._inductor.config.compute_all_bounds
+builtins.bool"builtins.bool*s
+joint_graph_constant_folding3torch._inductor.config.joint_graph_constant_folding
+builtins.bool"builtins.bool*a
+debug_index_asserts*torch._inductor.config.debug_index_asserts
+builtins.bool"builtins.bool*c
+is_nightly_or_source+torch._inductor.config.is_nightly_or_source
+builtins.bool"builtins.bool*Ü
+developer_warnings)torch._inductor.config.developer_warningsE
+Union[Any,builtins.bool]
+Any
+builtins.bool"builtins.bool*J
+worker_start_method*torch._inductor.config.worker_start_method
+Any*i
+_fuse_ddp_communication.torch._inductor.config._fuse_ddp_communication
+builtins.bool"builtins.bool*c
+_fuse_ddp_bucket_size,torch._inductor.config._fuse_ddp_bucket_size
+builtins.int"builtins.int*“
+_fuse_ddp_communication_passes5torch._inductor.config._fuse_ddp_communication_passes¯
+Bbuiltins.list[Union[CallableType[builtins.function],builtins.str]]¢
+3Union[CallableType[builtins.function],builtins.str]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+builtins.str"builtins.str"builtins.list*_
+_micro_pipeline_tp)torch._inductor.config._micro_pipeline_tp
+builtins.bool"builtins.bool*B
+compile_threads&torch._inductor.config.compile_threads
+Any*2
+parutiltorch._inductor.config.parutil
+Any*D
+global_cache_dir'torch._inductor.config.global_cache_dir
+Any*_
+kernel_name_max_ops*torch._inductor.config.kernel_name_max_ops
+builtins.int"builtins.int*U
+shape_padding$torch._inductor.config.shape_padding
+builtins.bool"builtins.bool*e
+comprehensive_padding,torch._inductor.config.comprehensive_padding
+builtins.bool"builtins.bool*]
+pad_channels_last(torch._inductor.config.pad_channels_last
+builtins.bool"builtins.bool*i
+bw_outputs_user_visible.torch._inductor.config.bw_outputs_user_visible
+builtins.bool"builtins.bool*Y
+force_shape_pad&torch._inductor.config.force_shape_pad
+builtins.bool"builtins.bool*W
+permute_fusion%torch._inductor.config.permute_fusion
+builtins.bool"builtins.bool*o
+profiler_mark_wrapper_call1torch._inductor.config.profiler_mark_wrapper_call
+builtins.bool"builtins.bool*q
+generate_intermediate_hooks2torch._inductor.config.generate_intermediate_hooks
+builtins.bool"builtins.bool*_
+debug_ir_traceback)torch._inductor.config.debug_ir_traceback
+builtins.bool"builtins.bool*k
+_raise_error_for_testing/torch._inductor.config._raise_error_for_testing
+builtins.bool"builtins.bool*Q
+_profile_var#torch._inductor.config._profile_var
+builtins.str"builtins.str*]
+profile_bandwidth(torch._inductor.config.profile_bandwidth
+builtins.bool"builtins.bool*g
+profile_bandwidth_regex.torch._inductor.config.profile_bandwidth_regex
+builtins.str"builtins.str*ë
+profile_bandwidth_output/torch._inductor.config.profile_bandwidth_outputD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*a
+disable_cpp_codegen*torch._inductor.config.disable_cpp_codegen
+builtins.bool"builtins.bool*K
+freezingtorch._inductor.config.freezing
+builtins.bool"builtins.bool*q
+freezing_discard_parameters2torch._inductor.config.freezing_discard_parameters
+builtins.bool"builtins.bool*g
+allow_stack_allocation-torch._inductor.config.allow_stack_allocation
+builtins.bool"builtins.bool*w
+use_minimal_arrayref_interface5torch._inductor.config.use_minimal_arrayref_interface
+builtins.bool"builtins.bool*g
+decompose_mem_bound_mm-torch._inductor.config.decompose_mem_bound_mm
+builtins.bool"builtins.bool*e
+assume_aligned_inputs,torch._inductor.config.assume_aligned_inputs
+builtins.bool"builtins.bool*ç
+_save_config_ignore*torch._inductor.config._save_config_ignoreJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*ù
+_cache_config_ignore_prefix2torch._inductor.config._cache_config_ignore_prefixJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list

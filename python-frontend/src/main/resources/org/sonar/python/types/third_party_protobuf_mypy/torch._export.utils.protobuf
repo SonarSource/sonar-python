@@ -1,0 +1,176 @@
+
+torch._export.utilsù
+"_check_input_constraints_for_graph6torch._export.utils._check_input_constraints_for_graph"
+Any*t
+input_placeholders\
+!builtins.list[torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node"builtins.list* 
+flat_args_with_path
+Any*
+range_constraints
+Anyµ
+
+!register_dataclass_as_pytree_node5torch._export.utils.register_dataclass_as_pytree_node"
+None*%
+cls
+	Type[Any]
+Any"type*ˆ
+
+flatten_fn„
+6Union[TypeAlias[CallableType[builtins.function]],None]ú
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"torch.utils._pytree.FlattenFunc
+None *˙
+unflatten_fnÂ
+6Union[TypeAlias[CallableType[builtins.function]],None]û
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"!torch.utils._pytree.UnflattenFunc
+None *`
+serialized_type_nameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *á
+to_dumpable_contextÎ
+6Union[TypeAlias[CallableType[builtins.function]],None]§
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"'torch.utils._pytree.ToDumpableContextFn
+None *ã
+from_dumpable_contextÌ
+6Union[TypeAlias[CallableType[builtins.function]],None]¶
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function")torch.utils._pytree.FromDumpableContextFn
+None *8
+return_none_fields
+builtins.bool"builtins.bool È
+is_paramtorch._export.utils.is_param"
+builtins.bool"builtins.bool*k
+program^
+-torch.export.exported_program.ExportedProgram"-torch.export.exported_program.ExportedProgram*2
+node(
+torch.fx.node.Node"torch.fx.node.Node¡
+	get_paramtorch._export.utils.get_param"t
+(Union[torch.nn.parameter.Parameter,None]<
+torch.nn.parameter.Parameter"torch.nn.parameter.Parameter
+None*k
+program^
+-torch.export.exported_program.ExportedProgram"-torch.export.exported_program.ExportedProgram*2
+node(
+torch.fx.node.Node"torch.fx.node.NodeÎ
+	is_buffertorch._export.utils.is_buffer"
+builtins.bool"builtins.bool*k
+program^
+-torch.export.exported_program.ExportedProgram"-torch.export.exported_program.ExportedProgram*2
+node(
+torch.fx.node.Node"torch.fx.node.Node´
+
+get_buffertorch._export.utils.get_buffer"\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None*k
+program^
+-torch.export.exported_program.ExportedProgram"-torch.export.exported_program.ExportedProgram*2
+node(
+torch.fx.node.Node"torch.fx.node.Nodeã
+is_lifted_tensor_constant-torch._export.utils.is_lifted_tensor_constant"
+builtins.bool"builtins.bool*k
+program^
+-torch.export.exported_program.ExportedProgram"-torch.export.exported_program.ExportedProgram*2
+node(
+torch.fx.node.Node"torch.fx.node.NodeÀ
+get_lifted_tensor_constant.torch._export.utils.get_lifted_tensor_constant"\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None*k
+program^
+-torch.export.exported_program.ExportedProgram"-torch.export.exported_program.ExportedProgram*2
+node(
+torch.fx.node.Node"torch.fx.node.NodeÌ
+sequential_split$torch._export.utils.sequential_split"F
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*N
+gmF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*
+node_call_back
+Anyî
+nodes_filter torch._export.utils.nodes_filter"\
+!builtins.list[torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node"builtins.list*g
+nodes\
+!builtins.list[torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node"builtins.list*
+node_call_back
+Anyé
+nodes_firsttorch._export.utils.nodes_first"V
+Union[torch.fx.node.Node,None](
+torch.fx.node.Node"torch.fx.node.Node
+None*g
+nodes\
+!builtins.list[torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node"builtins.list*
+node_call_back
+Any “
+nodes_counttorch._export.utils.nodes_count"
+builtins.int"builtins.int*g
+nodes\
+!builtins.list[torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node"builtins.list*
+node_call_back
+Anyé
+	nodes_maptorch._export.utils.nodes_map"\
+!builtins.list[torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node"builtins.list*g
+nodes\
+!builtins.list[torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node"builtins.list*
+node_call_back
+Anyﬁ
+node_replace_!torch._export.utils.node_replace_"
+None*6
+old_node(
+torch.fx.node.Node"torch.fx.node.Node*6
+new_node(
+torch.fx.node.Node"torch.fx.node.Node*0
+
+delete_old
+builtins.bool"builtins.bool w
+node_inline_ torch._export.utils.node_inline_"
+None*;
+call_mod_node(
+torch.fx.node.Node"torch.fx.node.Node∏
+&_get_torch_jit_trace_forward_signature:torch._export.utils._get_torch_jit_trace_forward_signature"
+Any*I
+mod@
+torch.nn.modules.module.Module"torch.nn.modules.module.Modules
+_bind_signature_to_inputs-torch._export.utils._bind_signature_to_inputs*
+mod*
+	fake_args*
+fake_kwargs¨
+placeholder_naming_pass+torch._export.utils.placeholder_naming_pass"
+None*N
+gmF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*Ç
+export_graph_signaturef
+1torch.export.graph_signature.ExportGraphSignature"1torch.export.graph_signature.ExportGraphSignature*I
+mod@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*
+	fake_args
+Any*
+fake_kwargs
+Any* 
+fake_params_buffers
+Any*f
+	constantsW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*è
+__annotations__#torch._export.utils.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*Ü
+placeholder_prefixes(torch._export.utils.placeholder_prefixes√
+Bbuiltins.dict[torch.export.graph_signature.InputKind,builtins.str]P
+&torch.export.graph_signature.InputKind"&torch.export.graph_signature.InputKind
+builtins.str"builtins.str"builtins.dict

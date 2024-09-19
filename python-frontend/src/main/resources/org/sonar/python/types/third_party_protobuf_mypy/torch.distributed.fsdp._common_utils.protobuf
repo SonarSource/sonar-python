@@ -1,0 +1,257 @@
+
+$torch.distributed.fsdp._common_utilsþ	
+_FSDPDeviceHandle6torch.distributed.fsdp._common_utils._FSDPDeviceHandle"builtins.object*™
+__init__?torch.distributed.fsdp._common_utils._FSDPDeviceHandle.__init__"
+None*z
+selfp
+6torch.distributed.fsdp._common_utils._FSDPDeviceHandle"6torch.distributed.fsdp._common_utils._FSDPDeviceHandle*.
+device"
+torch._C.device"torch._C.device*
+backend
+Any *É
+from_deviceBtorch.distributed.fsdp._common_utils._FSDPDeviceHandle.from_device"p
+6torch.distributed.fsdp._common_utils._FSDPDeviceHandle"6torch.distributed.fsdp._common_utils._FSDPDeviceHandle*Â
+cls¸
+<Type[torch.distributed.fsdp._common_utils._FSDPDeviceHandle]p
+6torch.distributed.fsdp._common_utils._FSDPDeviceHandle"6torch.distributed.fsdp._common_utils._FSDPDeviceHandle"type*.
+device"
+torch._C.device"torch._C.device0:classmethodp*î
+__getattr__Btorch.distributed.fsdp._common_utils._FSDPDeviceHandle.__getattr__"
+Any*rp
+6torch.distributed.fsdp._common_utils._FSDPDeviceHandle"6torch.distributed.fsdp._common_utils._FSDPDeviceHandle*
+builtins.str"builtins.strrV
+	__backend@torch.distributed.fsdp._common_utils._FSDPDeviceHandle.__backend
+Anyro
+__device?torch.distributed.fsdp._common_utils._FSDPDeviceHandle.__device"
+torch._C.device"torch._C.device
+_UninitializedDeviceHandle?torch.distributed.fsdp._common_utils._UninitializedDeviceHandle"6torch.distributed.fsdp._common_utils._FSDPDeviceHandle*^
+__init__Htorch.distributed.fsdp._common_utils._UninitializedDeviceHandle.__init__*
+self*•
+__getattribute__Ptorch.distributed.fsdp._common_utils._UninitializedDeviceHandle.__getattribute__"
+Any*…‚
+?torch.distributed.fsdp._common_utils._UninitializedDeviceHandle"?torch.distributed.fsdp._common_utils._UninitializedDeviceHandle*
+builtins.str"builtins.str®-
+
+_FSDPState/torch.distributed.fsdp._common_utils._FSDPState"*torch.distributed._composable_state._State*¼
+__init__8torch.distributed.fsdp._common_utils._FSDPState.__init__"
+None*l
+selfb
+/torch.distributed.fsdp._common_utils._FSDPState"/torch.distributed.fsdp._common_utils._FSDPStaterÔ
+_ignored_modules@torch.distributed.fsdp._common_utils._FSDPState._ignored_modules~
+,builtins.set[torch.nn.modules.module.Module]@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"builtins.setrÌ
+_ignored_params?torch.distributed.fsdp._common_utils._FSDPState._ignored_paramsx
+*builtins.set[torch.nn.parameter.Parameter]<
+torch.nn.parameter.Parameter"torch.nn.parameter.Parameter"builtins.setr¨
+_ignored_buffer_namesEtorch.distributed.fsdp._common_utils._FSDPState._ignored_buffer_namesH
+builtins.set[builtins.str]
+builtins.str"builtins.str"builtins.setræ
+process_group=torch.distributed.fsdp._common_utils._FSDPState.process_group•
+3Union[torch._C._distributed_c10d.ProcessGroup,None]R
+'torch._C._distributed_c10d.ProcessGroup"'torch._C._distributed_c10d.ProcessGroup
+NonerZ
+rank4torch.distributed.fsdp._common_utils._FSDPState.rank
+builtins.int"builtins.intrf
+
+world_size:torch.distributed.fsdp._common_utils._FSDPState.world_size
+builtins.int"builtins.intrç
+_device_mesh<torch.distributed.fsdp._common_utils._FSDPState._device_mesh˜
+4Union[torch.distributed.device_mesh.DeviceMesh,None]T
+(torch.distributed.device_mesh.DeviceMesh"(torch.distributed.device_mesh.DeviceMesh
+Noner²
+sharding_strategyAtorch.distributed.fsdp._common_utils._FSDPState.sharding_strategyZ
++torch.distributed.fsdp.api.ShardingStrategy"+torch.distributed.fsdp.api.ShardingStrategyrt
+_use_orig_params@torch.distributed.fsdp._common_utils._FSDPState._use_orig_params
+builtins.bool"builtins.boolrº
+training_state>torch.distributed.fsdp._common_utils._FSDPState.training_stateh
+2torch.distributed.fsdp._common_utils.TrainingState"2torch.distributed.fsdp._common_utils.TrainingStaterÉ
+_unshard_params_ctxCtorch.distributed.fsdp._common_utils._FSDPState._unshard_params_ctxì
+Kbuiltins.dict[torch.nn.modules.module.Module,typing.Generator[Any,Any,Any]]@
+torch.nn.modules.module.Module"torch.nn.modules.module.ModuleL
+typing.Generator[Any,Any,Any]
+Any
+Any
+Any"typing.Generator"builtins.dictrª
+_state_dict_type@torch.distributed.fsdp._common_utils._FSDPState._state_dict_typeT
+(torch.distributed.fsdp.api.StateDictType"(torch.distributed.fsdp.api.StateDictTyper²
+_state_dict_configBtorch.distributed.fsdp._common_utils._FSDPState._state_dict_configX
+*torch.distributed.fsdp.api.StateDictConfig"*torch.distributed.fsdp.api.StateDictConfigrÈ
+_optim_state_dict_configHtorch.distributed.fsdp._common_utils._FSDPState._optim_state_dict_configb
+/torch.distributed.fsdp.api.OptimStateDictConfig"/torch.distributed.fsdp.api.OptimStateDictConfigr
+_is_root8torch.distributed.fsdp._common_utils._FSDPState._is_rootG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+Nonerû
+_handle7torch.distributed.fsdp._common_utils._FSDPState._handle¶
+>Union[torch.distributed.fsdp._flat_param.FlatParamHandle,None]h
+2torch.distributed.fsdp._flat_param.FlatParamHandle"2torch.distributed.fsdp._flat_param.FlatParamHandle
+Nonerí
+_fully_sharded_module_to_handleOtorch.distributed.fsdp._common_utils._FSDPState._fully_sharded_module_to_handleø
+lbuiltins.dict[torch.nn.modules.module.Module,Union[torch.distributed.fsdp._flat_param.FlatParamHandle,None]]@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module¶
+>Union[torch.distributed.fsdp._flat_param.FlatParamHandle,None]h
+2torch.distributed.fsdp._flat_param.FlatParamHandle"2torch.distributed.fsdp._flat_param.FlatParamHandle
+None"builtins.dictrŸ
+compute_device>torch.distributed.fsdp._common_utils._FSDPState.compute_deviceM
+Union[torch._C.device,None]"
+torch._C.device"torch._C.device
+Noner†
+_gradient_predivide_factorJtorch.distributed.fsdp._common_utils._FSDPState._gradient_predivide_factor
+builtins.int"builtins.intrˆ
+_gradient_postdivide_factorKtorch.distributed.fsdp._common_utils._FSDPState._gradient_postdivide_factor
+builtins.int"builtins.intrÑ
+
+_comm_hook:torch.distributed.fsdp._common_utils._FSDPState._comm_hook†
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+Noner|
+_comm_hook_state@torch.distributed.fsdp._common_utils._FSDPState._comm_hook_state&
+Union[Any,None]
+Any
+Nonerº
+_unshard_event>torch.distributed.fsdp._common_utils._FSDPState._unshard_eventh
+$Union[torch.cuda.streams.Event,None]4
+torch.cuda.streams.Event"torch.cuda.streams.Event
+NonerÂ
+_device_handle>torch.distributed.fsdp._common_utils._FSDPState._device_handlep
+6torch.distributed.fsdp._common_utils._FSDPDeviceHandle"6torch.distributed.fsdp._common_utils._FSDPDeviceHandlerŠ
+_all_fsdp_states@torch.distributed.fsdp._common_utils._FSDPState._all_fsdp_states³
+>builtins.list[torch.distributed.fsdp._common_utils._FSDPState]b
+/torch.distributed.fsdp._common_utils._FSDPState"/torch.distributed.fsdp._common_utils._FSDPState"builtins.listr‹
+_all_handles<torch.distributed.fsdp._common_utils._FSDPState._all_handles¼
+Abuiltins.list[torch.distributed.fsdp._flat_param.FlatParamHandle]h
+2torch.distributed.fsdp._flat_param.FlatParamHandle"2torch.distributed.fsdp._flat_param.FlatParamHandle"builtins.listr—
+_fsdp_extension?torch.distributed.fsdp._common_utils._FSDPState._fsdp_extensionÂ
+BUnion[torch.distributed.fsdp._fsdp_extensions.FSDPExtensions,None]p
+6torch.distributed.fsdp._fsdp_extensions.FSDPExtensions"6torch.distributed.fsdp._fsdp_extensions.FSDPExtensions
+None
+TrainingState2torch.distributed.fsdp._common_utils.TrainingState"	enum.EnumHrW
+IDLE7torch.distributed.fsdp._common_utils.TrainingState.IDLE
+	enum.auto"	enum.autoro
+FORWARD_BACKWARDCtorch.distributed.fsdp._common_utils.TrainingState.FORWARD_BACKWARD
+	enum.auto"	enum.autors
+SUMMON_FULL_PARAMSEtorch.distributed.fsdp._common_utils.TrainingState.SUMMON_FULL_PARAMS
+	enum.auto"	enum.autoû
+HandleTrainingState8torch.distributed.fsdp._common_utils.HandleTrainingState"	enum.EnumHr]
+IDLE=torch.distributed.fsdp._common_utils.HandleTrainingState.IDLE
+	enum.auto"	enum.autorc
+FORWARD@torch.distributed.fsdp._common_utils.HandleTrainingState.FORWARD
+	enum.auto"	enum.autorm
+BACKWARD_PREEtorch.distributed.fsdp._common_utils.HandleTrainingState.BACKWARD_PRE
+	enum.auto"	enum.autoro
+BACKWARD_POSTFtorch.distributed.fsdp._common_utils.HandleTrainingState.BACKWARD_POST
+	enum.auto"	enum.autory
+SUMMON_FULL_PARAMSKtorch.distributed.fsdp._common_utils.HandleTrainingState.SUMMON_FULL_PARAMS
+	enum.auto"	enum.autoÓ
+_get_module_fsdp_state;torch.distributed.fsdp._common_utils._get_module_fsdp_state"­
+;Union[torch.distributed.fsdp._common_utils._FSDPState,None]b
+/torch.distributed.fsdp._common_utils._FSDPState"/torch.distributed.fsdp._common_utils._FSDPState
+None*L
+module@
+torch.nn.modules.module.Module"torch.nn.modules.module.Moduleƒ
+._get_module_fsdp_state_if_fully_sharded_moduleStorch.distributed.fsdp._common_utils._get_module_fsdp_state_if_fully_sharded_module"­
+;Union[torch.distributed.fsdp._common_utils._FSDPState,None]b
+/torch.distributed.fsdp._common_utils._FSDPState"/torch.distributed.fsdp._common_utils._FSDPState
+None*L
+module@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module½
+_is_composable3torch.distributed.fsdp._common_utils._is_composable"
+Any*m
+stateb
+/torch.distributed.fsdp._common_utils._FSDPState"/torch.distributed.fsdp._common_utils._FSDPStatea
+_get_sharding_strategy;torch.distributed.fsdp._common_utils._get_sharding_strategy*
+
+handle˜
+clean_tensor_name6torch.distributed.fsdp._common_utils.clean_tensor_name"
+builtins.str"builtins.str*-
+tensor_name
+builtins.str"builtins.str“
+_set_fsdp_flattened8torch.distributed.fsdp._common_utils._set_fsdp_flattened"
+None*8
+tensor,
+torch._tensor.Tensor"torch._tensor.Tensor§
+_is_fsdp_flattened7torch.distributed.fsdp._common_utils._is_fsdp_flattened"
+builtins.bool"builtins.bool*8
+tensor,
+torch._tensor.Tensor"torch._tensor.Tensor´
+!_named_parameters_with_duplicatesFtorch.distributed.fsdp._common_utils._named_parameters_with_duplicates"ã
+?builtins.list[Tuple[builtins.str,torch.nn.parameter.Parameter]]
+0Tuple[builtins.str,torch.nn.parameter.Parameter]
+builtins.str"builtins.str<
+torch.nn.parameter.Parameter"torch.nn.parameter.Parameter"builtins.list*L
+module@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*
+kwargs
+Anyº
+_get_param_to_fqns7torch.distributed.fsdp._common_utils._get_param_to_fqns"â
+Gbuiltins.dict[torch.nn.parameter.Parameter,builtins.list[builtins.str]]<
+torch.nn.parameter.Parameter"torch.nn.parameter.ParameterJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list"builtins.dict*K
+model@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*9
+dedup_shared_params
+builtins.bool"builtins.bool Ÿ
+_apply_to_modules6torch.distributed.fsdp._common_utils._apply_to_modules"
+Any*Q
+root_module@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*Z
+	module_fnK
+CallableType[builtins.function]&
+builtins.function"builtins.function*Z
+	return_fnK
+CallableType[builtins.function]&
+builtins.function"builtins.function*•
+filter_fqns
+'Union[builtins.list[builtins.str],None]J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list
+None *
+args
+Any*
+kwargs
+AnyÙ
+_get_root_modules6torch.distributed.fsdp._common_utils._get_root_modules"~
+,builtins.set[torch.nn.modules.module.Module]@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"builtins.set*‹
+modules~
+,builtins.set[torch.nn.modules.module.Module]@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"builtins.set½
+ _override_module_mixed_precisionEtorch.distributed.fsdp._common_utils._override_module_mixed_precision"´
+2builtins.set[Type[torch.nn.modules.module.Module]]p
+$Type[torch.nn.modules.module.Module]@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"type"builtins.set*J
+root@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*Û
+module_classes_to_overrideº
+5typing.Iterable[Type[torch.nn.modules.module.Module]]p
+$Type[torch.nn.modules.module.Module]@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"type"typing.Iterable*q
+wrap_override_dictW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict Ñ
+_no_dispatch_record_stream?torch.distributed.fsdp._common_utils._no_dispatch_record_stream"
+None*8
+tensor,
+torch._tensor.Tensor"torch._tensor.Tensor*.
+stream"
+torch._C.Stream"torch._C.Stream* 
+__annotations__4torch.distributed.fsdp._common_utils.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*
+disttorch.distributed *7
+flat_param_file"torch.distributed.fsdp._flat_param *
+nntorch.nn *m
+FSDP_WRAPPED_MODULE8torch.distributed.fsdp._common_utils.FSDP_WRAPPED_MODULE
+builtins.str"builtins.str*]
+FSDP_PREFIX0torch.distributed.fsdp._common_utils.FSDP_PREFIX
+builtins.str"builtins.str*c
+FSDP_FLATTENED3torch.distributed.fsdp._common_utils.FSDP_FLATTENED
+builtins.str"builtins.str*¤
+_MODULE_TO_INP_DTYPE9torch.distributed.fsdp._common_utils._MODULE_TO_INP_DTYPEQ
+"weakref.WeakKeyDictionary[Any,Any]
+Any
+Any"weakref.WeakKeyDictionary

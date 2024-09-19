@@ -1,0 +1,287 @@
+
+torch.amp.grad_scaler®
+_MultiDeviceReplicator,torch.amp.grad_scaler._MultiDeviceReplicator"builtins.object*ô
+__init__5torch.amp.grad_scaler._MultiDeviceReplicator.__init__"
+None*f
+self\
+,torch.amp.grad_scaler._MultiDeviceReplicator",torch.amp.grad_scaler._MultiDeviceReplicator*?
+master_tensor,
+torch._tensor.Tensor"torch._tensor.Tensor*ý
+get0torch.amp.grad_scaler._MultiDeviceReplicator.get",
+torch._tensor.Tensor"torch._tensor.Tensor*f
+self\
+,torch.amp.grad_scaler._MultiDeviceReplicator",torch.amp.grad_scaler._MultiDeviceReplicator*.
+device"
+torch._C.device"torch._C.devicerk
+master3torch.amp.grad_scaler._MultiDeviceReplicator.master,
+torch._tensor.Tensor"torch._tensor.Tensorrð
+_per_device_tensors@torch.amp.grad_scaler._MultiDeviceReplicator._per_device_tensors–
+3builtins.dict[torch._C.device,torch._tensor.Tensor]"
+torch._C.device"torch._C.device,
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.dict¨
+OptStatetorch.amp.grad_scaler.OptState"	enum.EnumHrK
+READY$torch.amp.grad_scaler.OptState.READY
+builtins.int"builtins.intrQ
+UNSCALED'torch.amp.grad_scaler.OptState.UNSCALED
+builtins.int"builtins.intrO
+STEPPED&torch.amp.grad_scaler.OptState.STEPPED
+builtins.int"builtins.intÃH
+
+GradScaler torch.amp.grad_scaler.GradScaler"builtins.object*Â
+__init__)torch.amp.grad_scaler.GradScaler.__init__"
+None*N
+selfD
+ torch.amp.grad_scaler.GradScaler" torch.amp.grad_scaler.GradScaler**
+device
+builtins.str"builtins.str *2
+
+init_scale 
+builtins.float"builtins.float *5
+growth_factor 
+builtins.float"builtins.float *6
+backoff_factor 
+builtins.float"builtins.float *3
+growth_interval
+builtins.int"builtins.int *-
+enabled
+builtins.bool"builtins.bool *ê
+_check_scale_growth_tracker<torch.amp.grad_scaler.GradScaler._check_scale_growth_tracker"
+0Tuple[torch._tensor.Tensor,torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor,
+torch._tensor.Tensor"torch._tensor.Tensor*N
+selfD
+ torch.amp.grad_scaler.GradScaler" torch.amp.grad_scaler.GradScaler**
+funcname
+builtins.str"builtins.str*ê
+_lazy_init_scale_growth_tracker@torch.amp.grad_scaler.GradScaler._lazy_init_scale_growth_tracker"
+None*N
+selfD
+ torch.amp.grad_scaler.GradScaler" torch.amp.grad_scaler.GradScaler*+
+dev"
+torch._C.device"torch._C.device*©
+_unscale_grads_0torch.amp.grad_scaler.GradScaler._unscale_grads_"–
+3builtins.dict[torch._C.device,torch._tensor.Tensor]"
+torch._C.device"torch._C.device,
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.dict*N
+selfD
+ torch.amp.grad_scaler.GradScaler" torch.amp.grad_scaler.GradScaler*Q
+	optimizerB
+torch.optim.optimizer.Optimizer"torch.optim.optimizer.Optimizer*;
+	inv_scale,
+torch._tensor.Tensor"torch._tensor.Tensor*;
+	found_inf,
+torch._tensor.Tensor"torch._tensor.Tensor*.
+
+allow_fp16
+builtins.bool"builtins.bool*â
+unscale_)torch.amp.grad_scaler.GradScaler.unscale_"
+None*N
+selfD
+ torch.amp.grad_scaler.GradScaler" torch.amp.grad_scaler.GradScaler*Q
+	optimizerB
+torch.optim.optimizer.Optimizer"torch.optim.optimizer.Optimizer*È
+_maybe_opt_step0torch.amp.grad_scaler.GradScaler._maybe_opt_step"J
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None*N
+selfD
+ torch.amp.grad_scaler.GradScaler" torch.amp.grad_scaler.GradScaler*Q
+	optimizerB
+torch.optim.optimizer.Optimizer"torch.optim.optimizer.Optimizer*l
+optimizer_stateW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*
+args
+Any*
+kwargs
+Any*Ä
+step%torch.amp.grad_scaler.GradScaler.step"J
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None*N
+selfD
+ torch.amp.grad_scaler.GradScaler" torch.amp.grad_scaler.GradScaler*Q
+	optimizerB
+torch.optim.optimizer.Optimizer"torch.optim.optimizer.Optimizer*
+args
+Any*
+kwargs
+Any*­
+update'torch.amp.grad_scaler.GradScaler.update"
+None*N
+selfD
+ torch.amp.grad_scaler.GradScaler" torch.amp.grad_scaler.GradScaler*Ÿ
+	new_scale
+/Union[builtins.float,torch._tensor.Tensor,None] 
+builtins.float"builtins.float,
+torch._tensor.Tensor"torch._tensor.Tensor
+None *ó
+_get_scale_async1torch.amp.grad_scaler.GradScaler._get_scale_async"\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None*N
+selfD
+ torch.amp.grad_scaler.GradScaler" torch.amp.grad_scaler.GradScaler*©
+	get_scale*torch.amp.grad_scaler.GradScaler.get_scale" 
+builtins.float"builtins.float*N
+selfD
+ torch.amp.grad_scaler.GradScaler" torch.amp.grad_scaler.GradScaler*¹
+get_growth_factor2torch.amp.grad_scaler.GradScaler.get_growth_factor" 
+builtins.float"builtins.float*N
+selfD
+ torch.amp.grad_scaler.GradScaler" torch.amp.grad_scaler.GradScaler*Ó
+set_growth_factor2torch.amp.grad_scaler.GradScaler.set_growth_factor"
+None*N
+selfD
+ torch.amp.grad_scaler.GradScaler" torch.amp.grad_scaler.GradScaler*0
+
+new_factor 
+builtins.float"builtins.float*»
+get_backoff_factor3torch.amp.grad_scaler.GradScaler.get_backoff_factor" 
+builtins.float"builtins.float*N
+selfD
+ torch.amp.grad_scaler.GradScaler" torch.amp.grad_scaler.GradScaler*Õ
+set_backoff_factor3torch.amp.grad_scaler.GradScaler.set_backoff_factor"
+None*N
+selfD
+ torch.amp.grad_scaler.GradScaler" torch.amp.grad_scaler.GradScaler*0
+
+new_factor 
+builtins.float"builtins.float*¹
+get_growth_interval4torch.amp.grad_scaler.GradScaler.get_growth_interval"
+builtins.int"builtins.int*N
+selfD
+ torch.amp.grad_scaler.GradScaler" torch.amp.grad_scaler.GradScaler*Õ
+set_growth_interval4torch.amp.grad_scaler.GradScaler.set_growth_interval"
+None*N
+selfD
+ torch.amp.grad_scaler.GradScaler" torch.amp.grad_scaler.GradScaler*.
+new_interval
+builtins.int"builtins.int*¹
+_get_growth_tracker4torch.amp.grad_scaler.GradScaler._get_growth_tracker"
+builtins.int"builtins.int*N
+selfD
+ torch.amp.grad_scaler.GradScaler" torch.amp.grad_scaler.GradScaler*©
+
+is_enabled+torch.amp.grad_scaler.GradScaler.is_enabled"
+builtins.bool"builtins.bool*N
+selfD
+ torch.amp.grad_scaler.GradScaler" torch.amp.grad_scaler.GradScaler*â
+
+state_dict+torch.amp.grad_scaler.GradScaler.state_dict"W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*N
+selfD
+ torch.amp.grad_scaler.GradScaler" torch.amp.grad_scaler.GradScaler*†
+load_state_dict0torch.amp.grad_scaler.GradScaler.load_state_dict"
+None*N
+selfD
+ torch.amp.grad_scaler.GradScaler" torch.amp.grad_scaler.GradScaler*g
+
+state_dictW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*æ
+__getstate__-torch.amp.grad_scaler.GradScaler.__getstate__"W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*N
+selfD
+ torch.amp.grad_scaler.GradScaler" torch.amp.grad_scaler.GradScaler*û
+__setstate__-torch.amp.grad_scaler.GradScaler.__setstate__"
+None*N
+selfD
+ torch.amp.grad_scaler.GradScaler" torch.amp.grad_scaler.GradScaler*b
+stateW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*Ë
+_check_inf_per_device6torch.amp.grad_scaler.GradScaler._check_inf_per_device"W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*N
+selfD
+ torch.amp.grad_scaler.GradScaler" torch.amp.grad_scaler.GradScaler*Q
+	optimizerB
+torch.optim.optimizer.Optimizer"torch.optim.optimizer.Optimizer*Ë
+_found_inf_per_device6torch.amp.grad_scaler.GradScaler._found_inf_per_device"W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*N
+selfD
+ torch.amp.grad_scaler.GradScaler" torch.amp.grad_scaler.GradScaler*Q
+	optimizerB
+torch.optim.optimizer.Optimizer"torch.optim.optimizer.Optimizer2ã
+
+scale&torch.amp.grad_scaler.GradScaler.scaleö
+scale&torch.amp.grad_scaler.GradScaler.scale",
+torch._tensor.Tensor"torch._tensor.Tensor*N
+selfD
+ torch.amp.grad_scaler.GradScaler" torch.amp.grad_scaler.GradScaler*9
+outputs,
+torch._tensor.Tensor"torch._tensor.Tensor0:overloadXâ
+scale&torch.amp.grad_scaler.GradScaler.scale"b
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*N
+selfD
+ torch.amp.grad_scaler.GradScaler" torch.amp.grad_scaler.GradScaler*o
+outputsb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list0:overloadXæ
+scale&torch.amp.grad_scaler.GradScaler.scale"d
+$builtins.tuple[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.tuple*N
+selfD
+ torch.amp.grad_scaler.GradScaler" torch.amp.grad_scaler.GradScaler*q
+outputsd
+$builtins.tuple[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.tuple0:overloadXê
+scale&torch.amp.grad_scaler.GradScaler.scale"f
+%typing.Iterable[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"typing.Iterable*N
+selfD
+ torch.amp.grad_scaler.GradScaler" torch.amp.grad_scaler.GradScaler*s
+outputsf
+%typing.Iterable[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"typing.Iterable0:overloadXrQ
+_device(torch.amp.grad_scaler.GradScaler._device
+builtins.str"builtins.strrU
+_enabled)torch.amp.grad_scaler.GradScaler._enabled
+builtins.bool"builtins.boolr]
+_init_scale,torch.amp.grad_scaler.GradScaler._init_scale 
+builtins.float"builtins.floatr
+_scale'torch.amp.grad_scaler.GradScaler._scale\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+Nonerc
+_growth_factor/torch.amp.grad_scaler.GradScaler._growth_factor 
+builtins.float"builtins.floatre
+_backoff_factor0torch.amp.grad_scaler.GradScaler._backoff_factor 
+builtins.float"builtins.floatrc
+_growth_interval1torch.amp.grad_scaler.GradScaler._growth_interval
+builtins.int"builtins.intrk
+_init_growth_tracker5torch.amp.grad_scaler.GradScaler._init_growth_tracker
+builtins.int"builtins.intr¡
+_growth_tracker0torch.amp.grad_scaler.GradScaler._growth_tracker\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+Noner•
+_per_optimizer_states6torch.amp.grad_scaler.GradScaler._per_optimizer_statesÃ
+;builtins.dict[builtins.int,builtins.dict[builtins.str,Any]]
+builtins.int"builtins.intW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"builtins.dict«
+_refresh_per_optimizer_state2torch.amp.grad_scaler._refresh_per_optimizer_state"W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*‘
+__annotations__%torch.amp.grad_scaler.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*t
+__all__torch.amp.grad_scaler.__all__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list

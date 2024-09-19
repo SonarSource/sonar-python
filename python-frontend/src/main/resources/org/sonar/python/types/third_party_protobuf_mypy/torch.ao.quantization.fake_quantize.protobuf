@@ -1,0 +1,202 @@
+
+#torch.ao.quantization.fake_quantizeˇ
+FakeQuantizeBase4torch.ao.quantization.fake_quantize.FakeQuantizeBase"abc.ABC"torch.nn.modules.module.Module*S
+__init__=torch.ao.quantization.fake_quantize.FakeQuantizeBase.__init__*
+self*l
+forward<torch.ao.quantization.fake_quantize.FakeQuantizeBase.forward*
+self*
+x0:abstractmethod@*Ö
+calculate_qparamsFtorch.ao.quantization.fake_quantize.FakeQuantizeBase.calculate_qparams*
+self*
+
+kwargs0:abstractmethod@*†
+enable_fake_quantFtorch.ao.quantization.fake_quantize.FakeQuantizeBase.enable_fake_quant"
+None*v
+selfl
+4torch.ao.quantization.fake_quantize.FakeQuantizeBase"4torch.ao.quantization.fake_quantize.FakeQuantizeBase*-
+enabled
+builtins.bool"builtins.bool 0:torch.jit.export*{
+disable_fake_quantGtorch.ao.quantization.fake_quantize.FakeQuantizeBase.disable_fake_quant*
+self0:torch.jit.export*ú
+enable_observerDtorch.ao.quantization.fake_quantize.FakeQuantizeBase.enable_observer"
+None*v
+selfl
+4torch.ao.quantization.fake_quantize.FakeQuantizeBase"4torch.ao.quantization.fake_quantize.FakeQuantizeBase*-
+enabled
+builtins.bool"builtins.bool 0:torch.jit.export*w
+disable_observerEtorch.ao.quantization.fake_quantize.FakeQuantizeBase.disable_observer*
+self0:torch.jit.export*q
+	with_args>torch.ao.quantization.fake_quantize.FakeQuantizeBase.with_args*
+cls*
+
+kwargs0:classmethodprã
+fake_quant_enabledGtorch.ao.quantization.fake_quantize.FakeQuantizeBase.fake_quant_enabled,
+torch._tensor.Tensor"torch._tensor.Tensorrá
+observer_enabledEtorch.ao.quantization.fake_quantize.FakeQuantizeBase.observer_enabled,
+torch._tensor.Tensor"torch._tensor.Tensor⁄
+FakeQuantize0torch.ao.quantization.fake_quantize.FakeQuantize"4torch.ao.quantization.fake_quantize.FakeQuantizeBase*®
+__init__9torch.ao.quantization.fake_quantize.FakeQuantize.__init__*
+self*
+observer *
+	quant_min *
+	quant_max *
+
+is_dynamic *
+observer_kwargs*u
+calculate_qparamsBtorch.ao.quantization.fake_quantize.FakeQuantize.calculate_qparams*
+self0:torch.jit.export*T
+forward8torch.ao.quantization.fake_quantize.FakeQuantize.forward*
+self*
+X*g
+
+extra_repr;torch.ao.quantization.fake_quantize.FakeQuantize.extra_repr*
+self0:torch.jit.export*ë
+_save_to_state_dictDtorch.ao.quantization.fake_quantize.FakeQuantize._save_to_state_dict*
+self*
+destination*
+
+prefix*
+	keep_vars*‹
+_load_from_state_dictFtorch.ao.quantization.fake_quantize.FakeQuantize._load_from_state_dict*
+self*
+
+state_dict*
+
+prefix*
+local_metadata*
+
+strict*
+missing_keys*
+unexpected_keys*
+
+error_msgsrm
+scale6torch.ao.quantization.fake_quantize.FakeQuantize.scale,
+torch._tensor.Tensor"torch._tensor.Tensorrw
+
+zero_point;torch.ao.quantization.fake_quantize.FakeQuantize.zero_point,
+torch._tensor.Tensor"torch._tensor.Tensorrl
+activation_post_processHtorch.ao.quantization.fake_quantize.FakeQuantize.activation_post_process
+AnyrP
+	quant_min:torch.ao.quantization.fake_quantize.FakeQuantize.quant_min
+AnyrP
+	quant_max:torch.ao.quantization.fake_quantize.FakeQuantize.quant_max
+AnyrR
+
+is_dynamic;torch.ao.quantization.fake_quantize.FakeQuantize.is_dynamic
+AnyrH
+dtype6torch.ao.quantization.fake_quantize.FakeQuantize.dtype
+AnyrL
+qscheme8torch.ao.quantization.fake_quantize.FakeQuantize.qscheme
+AnyrL
+ch_axis8torch.ao.quantization.fake_quantize.FakeQuantize.ch_axis
+AnyrZ
+is_per_channel?torch.ao.quantization.fake_quantize.FakeQuantize.is_per_channel
+Any‘
+FixedQParamsFakeQuantize<torch.ao.quantization.fake_quantize.FixedQParamsFakeQuantize"0torch.ao.quantization.fake_quantize.FakeQuantize*i
+__init__Etorch.ao.quantization.fake_quantize.FixedQParamsFakeQuantize.__init__*
+self*
+observer*Å
+calculate_qparamsNtorch.ao.quantization.fake_quantize.FixedQParamsFakeQuantize.calculate_qparams*
+self0:torch.jit.export*s
+
+extra_reprGtorch.ao.quantization.fake_quantize.FixedQParamsFakeQuantize.extra_repr*
+self0:torch.jit.exportrd
+_observer_ctrJtorch.ao.quantization.fake_quantize.FixedQParamsFakeQuantize._observer_ctr
+Anyƒ
+FusedMovingAvgObsFakeQuantizeAtorch.ao.quantization.fake_quantize.FusedMovingAvgObsFakeQuantize"0torch.ao.quantization.fake_quantize.FakeQuantize*â
+__init__Jtorch.ao.quantization.fake_quantize.FusedMovingAvgObsFakeQuantize.__init__"
+None*ë
+selfÜ
+Atorch.ao.quantization.fake_quantize.FusedMovingAvgObsFakeQuantize"Atorch.ao.quantization.fake_quantize.FusedMovingAvgObsFakeQuantize*
+observer
+Any *-
+	quant_min
+builtins.int"builtins.int *-
+	quant_max
+builtins.int"builtins.int *
+observer_kwargs
+Any*£
+calculate_qparamsStorch.ao.quantization.fake_quantize.FusedMovingAvgObsFakeQuantize.calculate_qparams"ê
+0Tuple[torch._tensor.Tensor,torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor,
+torch._tensor.Tensor"torch._tensor.Tensor*ë
+selfÜ
+Atorch.ao.quantization.fake_quantize.FusedMovingAvgObsFakeQuantize"Atorch.ao.quantization.fake_quantize.FusedMovingAvgObsFakeQuantize0:torch.jit.export*†
+
+extra_reprLtorch.ao.quantization.fake_quantize.FusedMovingAvgObsFakeQuantize.extra_repr"
+builtins.str"builtins.str*ë
+selfÜ
+Atorch.ao.quantization.fake_quantize.FusedMovingAvgObsFakeQuantize"Atorch.ao.quantization.fake_quantize.FusedMovingAvgObsFakeQuantize0:torch.jit.export*À
+forwardItorch.ao.quantization.fake_quantize.FusedMovingAvgObsFakeQuantize.forward",
+torch._tensor.Tensor"torch._tensor.Tensor*ë
+selfÜ
+Atorch.ao.quantization.fake_quantize.FusedMovingAvgObsFakeQuantize"Atorch.ao.quantization.fake_quantize.FusedMovingAvgObsFakeQuantize*3
+X,
+torch._tensor.Tensor"torch._tensor.Tensorrä
+is_symmetric_quantTtorch.ao.quantization.fake_quantize.FusedMovingAvgObsFakeQuantize.is_symmetric_quant
+builtins.bool"builtins.boolô
+_is_per_channel3torch.ao.quantization.fake_quantize._is_per_channel"
+builtins.bool"builtins.bool*1
+qscheme$
+torch._C.qscheme"torch._C.qschemeó
+_is_per_tensor2torch.ao.quantization.fake_quantize._is_per_tensor"
+builtins.bool"builtins.bool*1
+qscheme$
+torch._C.qscheme"torch._C.qscheme°
+_is_symmetric_quant7torch.ao.quantization.fake_quantize._is_symmetric_quant"
+builtins.bool"builtins.bool*1
+qscheme$
+torch._C.qscheme"torch._C.qschemeù
+_is_float_qparams5torch.ao.quantization.fake_quantize._is_float_qparams"
+builtins.bool"builtins.bool*1
+qscheme$
+torch._C.qscheme"torch._C.qschemei
+_is_fake_quant_script_module@torch.ao.quantization.fake_quantize._is_fake_quant_script_module*
+modU
+disable_fake_quant6torch.ao.quantization.fake_quantize.disable_fake_quant*
+modS
+enable_fake_quant5torch.ao.quantization.fake_quantize.enable_fake_quant*
+modQ
+disable_observer4torch.ao.quantization.fake_quantize.disable_observer*
+modO
+enable_observer3torch.ao.quantization.fake_quantize.enable_observer*
+mod*ü
+__annotations__3torch.ao.quantization.fake_quantize.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*Ç
+__all__+torch.ao.quantization.fake_quantize.__all__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*U
+default_fake_quant6torch.ao.quantization.fake_quantize.default_fake_quant
+Any*c
+default_weight_fake_quant=torch.ao.quantization.fake_quantize.default_weight_fake_quant
+Any*e
+default_dynamic_fake_quant>torch.ao.quantization.fake_quantize.default_dynamic_fake_quant
+Any*ç
+.default_fixed_qparams_range_neg1to1_fake_quantRtorch.ao.quantization.fake_quantize.default_fixed_qparams_range_neg1to1_fake_quant
+Any*á
++default_fixed_qparams_range_0to1_fake_quantOtorch.ao.quantization.fake_quantize.default_fixed_qparams_range_0to1_fake_quant
+Any*Ö
+*default_symmetric_fixed_qparams_fake_quantNtorch.ao.quantization.fake_quantize.default_symmetric_fixed_qparams_fake_quant
+Any*
+'default_affine_fixed_qparams_fake_quantKtorch.ao.quantization.fake_quantize.default_affine_fixed_qparams_fake_quant
+Any*{
+%default_per_channel_weight_fake_quantItorch.ao.quantization.fake_quantize.default_per_channel_weight_fake_quant
+Any*i
+default_embedding_fake_quant@torch.ao.quantization.fake_quantize.default_embedding_fake_quant
+Any*s
+!default_embedding_fake_quant_4bitEtorch.ao.quantization.fake_quantize.default_embedding_fake_quant_4bit
+Any*i
+default_histogram_fake_quant@torch.ao.quantization.fake_quantize.default_histogram_fake_quant
+Any*i
+default_fused_act_fake_quant@torch.ao.quantization.fake_quantize.default_fused_act_fake_quant
+Any*g
+default_fused_wt_fake_quant?torch.ao.quantization.fake_quantize.default_fused_wt_fake_quant
+Any*
+'default_fused_per_channel_wt_fake_quantKtorch.ao.quantization.fake_quantize.default_fused_per_channel_wt_fake_quant
+Any*Å
+(fused_wt_fake_quant_range_neg_127_to_127Ltorch.ao.quantization.fake_quantize.fused_wt_fake_quant_range_neg_127_to_127
+Any*ô
+4fused_per_channel_wt_fake_quant_range_neg_127_to_127Xtorch.ao.quantization.fake_quantize.fused_per_channel_wt_fake_quant_range_neg_127_to_127
+Any

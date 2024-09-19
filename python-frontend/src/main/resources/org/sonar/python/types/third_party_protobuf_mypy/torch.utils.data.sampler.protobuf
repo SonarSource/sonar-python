@@ -1,0 +1,166 @@
+
+torch.utils.data.sampler∑
+Sampler torch.utils.data.sampler.Sampler"builtins.object*·
+__init__)torch.utils.data.sampler.Sampler.__init__"
+None*∆
+selfª
+?torch.utils.data.sampler.Sampler[torch.utils.data.sampler.T_co]V
+torch.utils.data.sampler.T_co"
+builtins.object"builtins.object"builtins.object" torch.utils.data.sampler.Sampler*W
+data_sourceD
+Union[typing.Sized,None]
+typing.Sized"typing.Sized
+None *í
+__iter__)torch.utils.data.sampler.Sampler.__iter__"ô
+.typing.Iterator[torch.utils.data.sampler.T_co]V
+torch.utils.data.sampler.T_co"
+builtins.object"builtins.object"builtins.object"typing.Iterator*æª
+?torch.utils.data.sampler.Sampler[torch.utils.data.sampler.T_co]V
+torch.utils.data.sampler.T_co"
+builtins.object"builtins.object"builtins.object" torch.utils.data.sampler.SamplerPÕ
+SequentialSampler*torch.utils.data.sampler.SequentialSampler" torch.utils.data.sampler.Sampler*‹
+__init__3torch.utils.data.sampler.SequentialSampler.__init__"
+None*b
+selfX
+*torch.utils.data.sampler.SequentialSampler"*torch.utils.data.sampler.SequentialSampler*-
+data_source
+typing.Sized"typing.Sized*Î
+__iter__3torch.utils.data.sampler.SequentialSampler.__iter__"N
+typing.Iterator[builtins.int]
+builtins.int"builtins.int"typing.Iterator*ZX
+*torch.utils.data.sampler.SequentialSampler"*torch.utils.data.sampler.SequentialSampler*∑
+__len__2torch.utils.data.sampler.SequentialSampler.__len__"
+builtins.int"builtins.int*ZX
+*torch.utils.data.sampler.SequentialSampler"*torch.utils.data.sampler.SequentialSamplerrc
+data_source6torch.utils.data.sampler.SequentialSampler.data_source
+typing.Sized"typing.Sized∆
+RandomSampler&torch.utils.data.sampler.RandomSampler" torch.utils.data.sampler.Sampler*ˆ
+__init__/torch.utils.data.sampler.RandomSampler.__init__"
+None*Z
+selfP
+&torch.utils.data.sampler.RandomSampler"&torch.utils.data.sampler.RandomSampler*-
+data_source
+typing.Sized"typing.Sized*1
+replacement
+builtins.bool"builtins.bool *W
+num_samplesD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *
+	generator
+Any *…
+num_samples2torch.utils.data.sampler.RandomSampler.num_samples"
+builtins.int"builtins.int*Z
+selfP
+&torch.utils.data.sampler.RandomSampler"&torch.utils.data.sampler.RandomSampler0:property`*ﬂ
+__iter__/torch.utils.data.sampler.RandomSampler.__iter__"N
+typing.Iterator[builtins.int]
+builtins.int"builtins.int"typing.Iterator*RP
+&torch.utils.data.sampler.RandomSampler"&torch.utils.data.sampler.RandomSampler*´
+__len__.torch.utils.data.sampler.RandomSampler.__len__"
+builtins.int"builtins.int*RP
+&torch.utils.data.sampler.RandomSampler"&torch.utils.data.sampler.RandomSamplerr_
+data_source2torch.utils.data.sampler.RandomSampler.data_source
+typing.Sized"typing.Sizedra
+replacement2torch.utils.data.sampler.RandomSampler.replacement
+builtins.bool"builtins.boolrâ
+_num_samples3torch.utils.data.sampler.RandomSampler._num_samplesD
+Union[builtins.int,None]
+builtins.int"builtins.int
+NonerF
+	generator0torch.utils.data.sampler.RandomSampler.generator
+Any¶
+SubsetRandomSampler,torch.utils.data.sampler.SubsetRandomSampler" torch.utils.data.sampler.Sampler*™
+__init__5torch.utils.data.sampler.SubsetRandomSampler.__init__"
+None*f
+self\
+,torch.utils.data.sampler.SubsetRandomSampler",torch.utils.data.sampler.SubsetRandomSampler*[
+indicesN
+typing.Sequence[builtins.int]
+builtins.int"builtins.int"typing.Sequence*
+	generator
+Any *Ò
+__iter__5torch.utils.data.sampler.SubsetRandomSampler.__iter__"N
+typing.Iterator[builtins.int]
+builtins.int"builtins.int"typing.Iterator*^\
+,torch.utils.data.sampler.SubsetRandomSampler",torch.utils.data.sampler.SubsetRandomSampler*Ω
+__len__4torch.utils.data.sampler.SubsetRandomSampler.__len__"
+builtins.int"builtins.int*^\
+,torch.utils.data.sampler.SubsetRandomSampler",torch.utils.data.sampler.SubsetRandomSamplerrè
+indices4torch.utils.data.sampler.SubsetRandomSampler.indicesN
+typing.Sequence[builtins.int]
+builtins.int"builtins.int"typing.SequencerL
+	generator6torch.utils.data.sampler.SubsetRandomSampler.generator
+AnyŸ
+
+WeightedRandomSampler.torch.utils.data.sampler.WeightedRandomSampler" torch.utils.data.sampler.Sampler*ò
+__init__7torch.utils.data.sampler.WeightedRandomSampler.__init__"
+None*j
+self`
+.torch.utils.data.sampler.WeightedRandomSampler".torch.utils.data.sampler.WeightedRandomSampler*a
+weightsT
+typing.Sequence[builtins.float] 
+builtins.float"builtins.float"typing.Sequence*-
+num_samples
+builtins.int"builtins.int*1
+replacement
+builtins.bool"builtins.bool *
+	generator
+Any *˜
+__iter__7torch.utils.data.sampler.WeightedRandomSampler.__iter__"N
+typing.Iterator[builtins.int]
+builtins.int"builtins.int"typing.Iterator*b`
+.torch.utils.data.sampler.WeightedRandomSampler".torch.utils.data.sampler.WeightedRandomSampler*√
+__len__6torch.utils.data.sampler.WeightedRandomSampler.__len__"
+builtins.int"builtins.int*b`
+.torch.utils.data.sampler.WeightedRandomSampler".torch.utils.data.sampler.WeightedRandomSamplerro
+weights6torch.utils.data.sampler.WeightedRandomSampler.weights,
+torch._tensor.Tensor"torch._tensor.Tensorrg
+num_samples:torch.utils.data.sampler.WeightedRandomSampler.num_samples
+builtins.int"builtins.intri
+replacement:torch.utils.data.sampler.WeightedRandomSampler.replacement
+builtins.bool"builtins.boolrN
+	generator8torch.utils.data.sampler.WeightedRandomSampler.generator
+Any⁄
+BatchSampler%torch.utils.data.sampler.BatchSampler" torch.utils.data.sampler.Sampler*•
+__init__.torch.utils.data.sampler.BatchSampler.__init__"
+None*X
+selfN
+%torch.utils.data.sampler.BatchSampler"%torch.utils.data.sampler.BatchSampler*ß
+samplerô
+SUnion[torch.utils.data.sampler.Sampler[builtins.int],typing.Iterable[builtins.int]]p
+.torch.utils.data.sampler.Sampler[builtins.int]
+builtins.int"builtins.int" torch.utils.data.sampler.SamplerN
+typing.Iterable[builtins.int]
+builtins.int"builtins.int"typing.Iterable*,
+
+batch_size
+builtins.int"builtins.int*-
+	drop_last
+builtins.bool"builtins.bool*ö
+__iter__.torch.utils.data.sampler.BatchSampler.__iter__"ã
+,typing.Iterator[builtins.list[builtins.int]]J
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list"typing.Iterator*PN
+%torch.utils.data.sampler.BatchSampler"%torch.utils.data.sampler.BatchSampler*®
+__len__-torch.utils.data.sampler.BatchSampler.__len__"
+builtins.int"builtins.int*PN
+%torch.utils.data.sampler.BatchSampler"%torch.utils.data.sampler.BatchSamplerr‘
+sampler-torch.utils.data.sampler.BatchSampler.samplerô
+SUnion[torch.utils.data.sampler.Sampler[builtins.int],typing.Iterable[builtins.int]]p
+.torch.utils.data.sampler.Sampler[builtins.int]
+builtins.int"builtins.int" torch.utils.data.sampler.SamplerN
+typing.Iterable[builtins.int]
+builtins.int"builtins.int"typing.Iterabler\
+
+batch_size0torch.utils.data.sampler.BatchSampler.batch_size
+builtins.int"builtins.intr\
+	drop_last/torch.utils.data.sampler.BatchSampler.drop_last
+builtins.bool"builtins.bool*î
+__annotations__(torch.utils.data.sampler.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*w
+__all__ torch.utils.data.sampler.__all__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list

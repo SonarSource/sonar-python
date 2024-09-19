@@ -1,0 +1,442 @@
+
+torch._C._profiler
+RecordScopetorch._C._profiler.RecordScope"	enum.EnumHr[
+FUNCTION'torch._C._profiler.RecordScope.FUNCTION&
+builtins.ellipsis"builtins.ellipsisrm
+BACKWARD_FUNCTION0torch._C._profiler.RecordScope.BACKWARD_FUNCTION&
+builtins.ellipsis"builtins.ellipsisrs
+TORCHSCRIPT_FUNCTION3torch._C._profiler.RecordScope.TORCHSCRIPT_FUNCTION&
+builtins.ellipsis"builtins.ellipsisru
+KERNEL_FUNCTION_DTYPE4torch._C._profiler.RecordScope.KERNEL_FUNCTION_DTYPE&
+builtins.ellipsis"builtins.ellipsisrc
+CUSTOM_CLASS+torch._C._profiler.RecordScope.CUSTOM_CLASS&
+builtins.ellipsis"builtins.ellipsisre
+BUILD_FEATURE,torch._C._profiler.RecordScope.BUILD_FEATURE&
+builtins.ellipsis"builtins.ellipsisrk
+LITE_INTERPRETER/torch._C._profiler.RecordScope.LITE_INTERPRETER&
+builtins.ellipsis"builtins.ellipsisr_
+
+USER_SCOPE)torch._C._profiler.RecordScope.USER_SCOPE&
+builtins.ellipsis"builtins.ellipsisrm
+STATIC_RUNTIME_OP0torch._C._profiler.RecordScope.STATIC_RUNTIME_OP&
+builtins.ellipsis"builtins.ellipsisrs
+STATIC_RUNTIME_MODEL3torch._C._profiler.RecordScope.STATIC_RUNTIME_MODEL&
+builtins.ellipsis"builtins.ellipsisº
+ProfilerState torch._C._profiler.ProfilerState"	enum.EnumHr[
+Disable(torch._C._profiler.ProfilerState.Disable&
+builtins.ellipsis"builtins.ellipsisrS
+CPU$torch._C._profiler.ProfilerState.CPU&
+builtins.ellipsis"builtins.ellipsisrU
+CUDA%torch._C._profiler.ProfilerState.CUDA&
+builtins.ellipsis"builtins.ellipsisrU
+NVTX%torch._C._profiler.ProfilerState.NVTX&
+builtins.ellipsis"builtins.ellipsisrS
+ITT$torch._C._profiler.ProfilerState.ITT&
+builtins.ellipsis"builtins.ellipsisrY
+KINETO'torch._C._profiler.ProfilerState.KINETO&
+builtins.ellipsis"builtins.ellipsisrs
+KINETO_GPU_FALLBACK4torch._C._profiler.ProfilerState.KINETO_GPU_FALLBACK&
+builtins.ellipsis"builtins.ellipsisrÉ
+KINETO_PRIVATEUSE1_FALLBACK<torch._C._profiler.ProfilerState.KINETO_PRIVATEUSE1_FALLBACK&
+builtins.ellipsis"builtins.ellipsisrq
+KINETO_PRIVATEUSE13torch._C._profiler.ProfilerState.KINETO_PRIVATEUSE1&
+builtins.ellipsis"builtins.ellipsisö
+ActiveProfilerType%torch._C._profiler.ActiveProfilerType"	enum.EnumHrZ
+NONE*torch._C._profiler.ActiveProfilerType.NONE&
+builtins.ellipsis"builtins.ellipsisr^
+LEGACY,torch._C._profiler.ActiveProfilerType.LEGACY&
+builtins.ellipsis"builtins.ellipsisr^
+KINETO,torch._C._profiler.ActiveProfilerType.KINETO&
+builtins.ellipsis"builtins.ellipsisrZ
+NVTX*torch._C._profiler.ActiveProfilerType.NVTX&
+builtins.ellipsis"builtins.ellipsisrX
+ITT)torch._C._profiler.ActiveProfilerType.ITT&
+builtins.ellipsis"builtins.ellipsisê
+ProfilerActivity#torch._C._profiler.ProfilerActivity"	enum.EnumHrV
+CPU'torch._C._profiler.ProfilerActivity.CPU&
+builtins.ellipsis"builtins.ellipsisrX
+CUDA(torch._C._profiler.ProfilerActivity.CUDA&
+builtins.ellipsis"builtins.ellipsisrV
+XPU'torch._C._profiler.ProfilerActivity.XPU&
+builtins.ellipsis"builtins.ellipsisrX
+MTIA(torch._C._profiler.ProfilerActivity.MTIA&
+builtins.ellipsis"builtins.ellipsisrf
+PrivateUse1/torch._C._profiler.ProfilerActivity.PrivateUse1&
+builtins.ellipsis"builtins.ellipsis∏
+
+_EventTypetorch._C._profiler._EventType"	enum.EnumHrX
+TorchOp%torch._C._profiler._EventType.TorchOp&
+builtins.ellipsis"builtins.ellipsisrX
+Backend%torch._C._profiler._EventType.Backend&
+builtins.ellipsis"builtins.ellipsisr^
+
+Allocation(torch._C._profiler._EventType.Allocation&
+builtins.ellipsis"builtins.ellipsisr`
+OutOfMemory)torch._C._profiler._EventType.OutOfMemory&
+builtins.ellipsis"builtins.ellipsisrV
+PyCall$torch._C._profiler._EventType.PyCall&
+builtins.ellipsis"builtins.ellipsisrX
+PyCCall%torch._C._profiler._EventType.PyCCall&
+builtins.ellipsis"builtins.ellipsisrV
+Kineto$torch._C._profiler._EventType.Kineto&
+builtins.ellipsis"builtins.ellipsisÌ
+_ExperimentalConfig&torch._C._profiler._ExperimentalConfig"builtins.object*ú
+__init__/torch._C._profiler._ExperimentalConfig.__init__"
+None*Z
+selfP
+&torch._C._profiler._ExperimentalConfig"&torch._C._profiler._ExperimentalConfig*b
+profiler_metricsJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list *A
+profiler_measure_per_kernel
+builtins.bool"builtins.bool *-
+verbose
+builtins.bool"builtins.bool *d
+performance_eventsJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list *=
+enable_cuda_sync_events
+builtins.bool"builtins.bool î
+ProfilerConfig!torch._C._profiler.ProfilerConfig"builtins.object*Õ
+__init__*torch._C._profiler.ProfilerConfig.__init__"
+None*P
+selfF
+!torch._C._profiler.ProfilerConfig"!torch._C._profiler.ProfilerConfig*O
+stateD
+ torch._C._profiler.ProfilerState" torch._C._profiler.ProfilerState*7
+report_input_shapes
+builtins.bool"builtins.bool*2
+profile_memory
+builtins.bool"builtins.bool*.
+
+with_stack
+builtins.bool"builtins.bool*.
+
+with_flops
+builtins.bool"builtins.bool*0
+with_modules
+builtins.bool"builtins.bool*i
+experimental_configP
+&torch._C._profiler._ExperimentalConfig"&torch._C._profiler._ExperimentalConfig·+
+_ProfilerEvent!torch._C._profiler._ProfilerEvent"builtins.object*–
+typed'torch._C._profiler._ProfilerEvent.typed"Ω
+ÂUnion[Tuple[Literal[torch._C._profiler._EventType],torch._C._profiler._ExtraFields_TorchOp],Tuple[Literal[torch._C._profiler._EventType],torch._C._profiler._ExtraFields_Backend],Tuple[Literal[torch._C._profiler._EventType],torch._C._profiler._ExtraFields_Allocation],Tuple[Literal[torch._C._profiler._EventType],torch._C._profiler._ExtraFields_OutOfMemory],Tuple[Literal[torch._C._profiler._EventType],torch._C._profiler._ExtraFields_PyCall],Tuple[Literal[torch._C._profiler._EventType],torch._C._profiler._ExtraFields_PyCCall],Tuple[Literal[torch._C._profiler._EventType],torch._C._profiler._ExtraFields_Kineto]]ô
+UTuple[Literal[torch._C._profiler._EventType],torch._C._profiler._ExtraFields_TorchOp]j
+&Literal[torch._C._profiler._EventType]	>
+torch._C._profiler._EventType"torch._C._profiler._EventTypeR
+'torch._C._profiler._ExtraFields_TorchOp"'torch._C._profiler._ExtraFields_TorchOpô
+UTuple[Literal[torch._C._profiler._EventType],torch._C._profiler._ExtraFields_Backend]j
+&Literal[torch._C._profiler._EventType]	>
+torch._C._profiler._EventType"torch._C._profiler._EventTypeR
+'torch._C._profiler._ExtraFields_Backend"'torch._C._profiler._ExtraFields_Backend¢
+XTuple[Literal[torch._C._profiler._EventType],torch._C._profiler._ExtraFields_Allocation]j
+&Literal[torch._C._profiler._EventType]	>
+torch._C._profiler._EventType"torch._C._profiler._EventTypeX
+*torch._C._profiler._ExtraFields_Allocation"*torch._C._profiler._ExtraFields_Allocation•
+YTuple[Literal[torch._C._profiler._EventType],torch._C._profiler._ExtraFields_OutOfMemory]j
+&Literal[torch._C._profiler._EventType]	>
+torch._C._profiler._EventType"torch._C._profiler._EventTypeZ
++torch._C._profiler._ExtraFields_OutOfMemory"+torch._C._profiler._ExtraFields_OutOfMemoryñ
+TTuple[Literal[torch._C._profiler._EventType],torch._C._profiler._ExtraFields_PyCall]j
+&Literal[torch._C._profiler._EventType]	>
+torch._C._profiler._EventType"torch._C._profiler._EventTypeP
+&torch._C._profiler._ExtraFields_PyCall"&torch._C._profiler._ExtraFields_PyCallô
+UTuple[Literal[torch._C._profiler._EventType],torch._C._profiler._ExtraFields_PyCCall]j
+&Literal[torch._C._profiler._EventType]	>
+torch._C._profiler._EventType"torch._C._profiler._EventTypeR
+'torch._C._profiler._ExtraFields_PyCCall"'torch._C._profiler._ExtraFields_PyCCallñ
+TTuple[Literal[torch._C._profiler._EventType],torch._C._profiler._ExtraFields_Kineto]j
+&Literal[torch._C._profiler._EventType]	>
+torch._C._profiler._EventType"torch._C._profiler._EventTypeP
+&torch._C._profiler._ExtraFields_Kineto"&torch._C._profiler._ExtraFields_Kineto*P
+selfF
+!torch._C._profiler._ProfilerEvent"!torch._C._profiler._ProfilerEvent0:property`*¨
+name&torch._C._profiler._ProfilerEvent.name"
+builtins.str"builtins.str*P
+selfF
+!torch._C._profiler._ProfilerEvent"!torch._C._profiler._ProfilerEvent0:property`*Ã
+tag%torch._C._profiler._ProfilerEvent.tag">
+torch._C._profiler._EventType"torch._C._profiler._EventType*P
+selfF
+!torch._C._profiler._ProfilerEvent"!torch._C._profiler._ProfilerEvent0:property`*®
+id$torch._C._profiler._ProfilerEvent.id"
+builtins.int"builtins.int*P
+selfF
+!torch._C._profiler._ProfilerEvent"!torch._C._profiler._ProfilerEvent0:property`*ò
+parent(torch._C._profiler._ProfilerEvent.parent"É
+-Union[torch._C._profiler._ProfilerEvent,None]F
+!torch._C._profiler._ProfilerEvent"!torch._C._profiler._ProfilerEvent
+None*P
+selfF
+!torch._C._profiler._ProfilerEvent"!torch._C._profiler._ProfilerEvent0:property`*¿
+correlation_id0torch._C._profiler._ProfilerEvent.correlation_id"
+builtins.int"builtins.int*P
+selfF
+!torch._C._profiler._ProfilerEvent"!torch._C._profiler._ProfilerEvent0:property`*∫
+end_time_ns-torch._C._profiler._ProfilerEvent.end_time_ns"
+builtins.int"builtins.int*P
+selfF
+!torch._C._profiler._ProfilerEvent"!torch._C._profiler._ProfilerEvent0:property`*ƒ
+duration_time_ns2torch._C._profiler._ProfilerEvent.duration_time_ns"
+builtins.int"builtins.int*P
+selfF
+!torch._C._profiler._ProfilerEvent"!torch._C._profiler._ProfilerEvent0:property`rV
+	start_tid+torch._C._profiler._ProfilerEvent.start_tid
+builtins.int"builtins.intr^
+start_time_ns/torch._C._profiler._ProfilerEvent.start_time_ns
+builtins.int"builtins.intr¬
+children*torch._C._profiler._ProfilerEvent.childrenâ
+0builtins.list[torch._C._profiler._ProfilerEvent]F
+!torch._C._profiler._ProfilerEvent"!torch._C._profiler._ProfilerEvent"builtins.listrø
+extra_fields.torch._C._profiler._ProfilerEvent.extra_fields˛
+£Union[torch._C._profiler._ExtraFields_TorchOp,torch._C._profiler._ExtraFields_Backend,torch._C._profiler._ExtraFields_Allocation,torch._C._profiler._ExtraFields_OutOfMemory,torch._C._profiler._ExtraFields_PyCall,torch._C._profiler._ExtraFields_PyCCall,torch._C._profiler._ExtraFields_Kineto]R
+'torch._C._profiler._ExtraFields_TorchOp"'torch._C._profiler._ExtraFields_TorchOpR
+'torch._C._profiler._ExtraFields_Backend"'torch._C._profiler._ExtraFields_BackendX
+*torch._C._profiler._ExtraFields_Allocation"*torch._C._profiler._ExtraFields_AllocationZ
++torch._C._profiler._ExtraFields_OutOfMemory"+torch._C._profiler._ExtraFields_OutOfMemoryP
+&torch._C._profiler._ExtraFields_PyCall"&torch._C._profiler._ExtraFields_PyCallR
+'torch._C._profiler._ExtraFields_PyCCall"'torch._C._profiler._ExtraFields_PyCCallP
+&torch._C._profiler._ExtraFields_Kineto"&torch._C._profiler._ExtraFields_Kineto¨
+_TensorMetadata"torch._C._profiler._TensorMetadata"builtins.object*È
+allocation_id0torch._C._profiler._TensorMetadata.allocation_id"D
+Union[builtins.int,None]
+builtins.int"builtins.int
+None*R
+selfH
+"torch._C._profiler._TensorMetadata""torch._C._profiler._TensorMetadata0:property`*π
+layout)torch._C._profiler._TensorMetadata.layout""
+torch._C.layout"torch._C.layout*R
+selfH
+"torch._C._profiler._TensorMetadata""torch._C._profiler._TensorMetadata0:property`*π
+device)torch._C._profiler._TensorMetadata.device""
+torch._C.device"torch._C.device*R
+selfH
+"torch._C._profiler._TensorMetadata""torch._C._profiler._TensorMetadata0:property`*µ
+dtype(torch._C._profiler._TensorMetadata.dtype" 
+torch._C.dtype"torch._C.dtype*R
+selfH
+"torch._C._profiler._TensorMetadata""torch._C._profiler._TensorMetadata0:property`*ﬂ
+sizes(torch._C._profiler._TensorMetadata.sizes"J
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*R
+selfH
+"torch._C._profiler._TensorMetadata""torch._C._profiler._TensorMetadata0:property`*„
+strides*torch._C._profiler._TensorMetadata.strides"J
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*R
+selfH
+"torch._C._profiler._TensorMetadata""torch._C._profiler._TensorMetadata0:property`r}
+impl_ptr+torch._C._profiler._TensorMetadata.impl_ptrD
+Union[builtins.int,None]
+builtins.int"builtins.int
+Nonerç
+storage_data_ptr3torch._C._profiler._TensorMetadata.storage_data_ptrD
+Union[builtins.int,None]
+builtins.int"builtins.int
+Nonerq
+id%torch._C._profiler._TensorMetadata.idD
+Union[builtins.int,None]
+builtins.int"builtins.int
+Noneñ
+_ExtraFields_TorchOp'torch._C._profiler._ExtraFields_TorchOp"builtins.object*Æ
+
+inputs.torch._C._profiler._ExtraFields_TorchOp.inputs"á	
+«builtins.list[TypeAlias[Union[torch._C._profiler._TensorMetadata,builtins.list[torch._C._profiler._TensorMetadata],TypeAlias[Union[builtins.int,builtins.float,builtins.bool,builtins.complex]],None]]]´
+∏TypeAlias[Union[torch._C._profiler._TensorMetadata,builtins.list[torch._C._profiler._TensorMetadata],TypeAlias[Union[builtins.int,builtins.float,builtins.bool,builtins.complex]],None]]—
+≠Union[torch._C._profiler._TensorMetadata,builtins.list[torch._C._profiler._TensorMetadata],TypeAlias[Union[builtins.int,builtins.float,builtins.bool,builtins.complex]],None]H
+"torch._C._profiler._TensorMetadata""torch._C._profiler._TensorMetadataå
+1builtins.list[torch._C._profiler._TensorMetadata]H
+"torch._C._profiler._TensorMetadata""torch._C._profiler._TensorMetadata"builtins.listπ
+LTypeAlias[Union[builtins.int,builtins.float,builtins.bool,builtins.complex]]À
+AUnion[builtins.int,builtins.float,builtins.bool,builtins.complex]
+builtins.int"builtins.int 
+builtins.float"builtins.float
+builtins.bool"builtins.bool$
+builtins.complex"builtins.complex"torch._C._profiler.Scalar
+None"torch._C._profiler.Input"builtins.list*\
+selfR
+'torch._C._profiler._ExtraFields_TorchOp"'torch._C._profiler._ExtraFields_TorchOp0:property`*‰
+scope-torch._C._profiler._ExtraFields_TorchOp.scope"@
+torch._C._profiler.RecordScope"torch._C._profiler.RecordScope*\
+selfR
+'torch._C._profiler._ExtraFields_TorchOp"'torch._C._profiler._ExtraFields_TorchOp0:property`rR
+name,torch._C._profiler._ExtraFields_TorchOp.name
+builtins.str"builtins.strrh
+sequence_number7torch._C._profiler._ExtraFields_TorchOp.sequence_number
+builtins.int"builtins.intrn
+allow_tf32_cublas9torch._C._profiler._ExtraFields_TorchOp.allow_tf32_cublas
+builtins.bool"builtins.boolP
+_ExtraFields_Backend'torch._C._profiler._ExtraFields_Backend"builtins.objectπ
+_ExtraFields_Allocation*torch._C._profiler._ExtraFields_Allocation"builtins.object*Å
+allocation_id8torch._C._profiler._ExtraFields_Allocation.allocation_id"D
+Union[builtins.int,None]
+builtins.int"builtins.int
+None*b
+selfX
+*torch._C._profiler._ExtraFields_Allocation"*torch._C._profiler._ExtraFields_Allocation0:property`*—
+device1torch._C._profiler._ExtraFields_Allocation.device""
+torch._C.device"torch._C.device*b
+selfX
+*torch._C._profiler._ExtraFields_Allocation"*torch._C._profiler._ExtraFields_Allocation0:property`rS
+ptr.torch._C._profiler._ExtraFields_Allocation.ptr
+builtins.int"builtins.intry
+id-torch._C._profiler._ExtraFields_Allocation.idD
+Union[builtins.int,None]
+builtins.int"builtins.int
+Nonera
+
+alloc_size5torch._C._profiler._ExtraFields_Allocation.alloc_size
+builtins.int"builtins.intrk
+total_allocated:torch._C._profiler._ExtraFields_Allocation.total_allocated
+builtins.int"builtins.intri
+total_reserved9torch._C._profiler._ExtraFields_Allocation.total_reserved
+builtins.int"builtins.intX
+_ExtraFields_OutOfMemory+torch._C._profiler._ExtraFields_OutOfMemory"builtins.object≤
+_PyFrameState torch._C._profiler._PyFrameState"builtins.object*≥
+	file_name*torch._C._profiler._PyFrameState.file_name"
+builtins.str"builtins.str*N
+selfD
+ torch._C._profiler._PyFrameState" torch._C._profiler._PyFrameState0:property`rY
+line_number,torch._C._profiler._PyFrameState.line_number
+builtins.int"builtins.intr]
+function_name.torch._C._profiler._PyFrameState.function_name
+builtins.str"builtins.str€	
+_NNModuleInfo torch._C._profiler._NNModuleInfo"builtins.object*±
+self_ptr)torch._C._profiler._NNModuleInfo.self_ptr"
+builtins.int"builtins.int*N
+selfD
+ torch._C._profiler._NNModuleInfo" torch._C._profiler._NNModuleInfo0:property`*Ø
+cls_ptr(torch._C._profiler._NNModuleInfo.cls_ptr"
+builtins.int"builtins.int*N
+selfD
+ torch._C._profiler._NNModuleInfo" torch._C._profiler._NNModuleInfo0:property`*±
+cls_name)torch._C._profiler._NNModuleInfo.cls_name"
+builtins.str"builtins.str*N
+selfD
+ torch._C._profiler._NNModuleInfo" torch._C._profiler._NNModuleInfo0:property`*¸
+
+parameters+torch._C._profiler._NNModuleInfo.parameters"‚
+tbuiltins.list[Tuple[builtins.str,torch._C._profiler._TensorMetadata,Union[torch._C._profiler._TensorMetadata,None]]]⁄
+eTuple[builtins.str,torch._C._profiler._TensorMetadata,Union[torch._C._profiler._TensorMetadata,None]]
+builtins.str"builtins.strH
+"torch._C._profiler._TensorMetadata""torch._C._profiler._TensorMetadataÜ
+.Union[torch._C._profiler._TensorMetadata,None]H
+"torch._C._profiler._TensorMetadata""torch._C._profiler._TensorMetadata
+None"builtins.list*N
+selfD
+ torch._C._profiler._NNModuleInfo" torch._C._profiler._NNModuleInfo0:property`ö
+_OptimizerInfo!torch._C._profiler._OptimizerInfo"builtins.object*”
+
+parameters,torch._C._profiler._OptimizerInfo.parameters"∂
+≠builtins.list[Tuple[torch._C._profiler._TensorMetadata,Union[torch._C._profiler._TensorMetadata,None],builtins.list[Tuple[builtins.str,torch._C._profiler._TensorMetadata]]]]Ù
+ûTuple[torch._C._profiler._TensorMetadata,Union[torch._C._profiler._TensorMetadata,None],builtins.list[Tuple[builtins.str,torch._C._profiler._TensorMetadata]]]H
+"torch._C._profiler._TensorMetadata""torch._C._profiler._TensorMetadataÜ
+.Union[torch._C._profiler._TensorMetadata,None]H
+"torch._C._profiler._TensorMetadata""torch._C._profiler._TensorMetadata
+None˚
+Ebuiltins.list[Tuple[builtins.str,torch._C._profiler._TensorMetadata]]¢
+6Tuple[builtins.str,torch._C._profiler._TensorMetadata]
+builtins.str"builtins.strH
+"torch._C._profiler._TensorMetadata""torch._C._profiler._TensorMetadata"builtins.list"builtins.list*P
+selfF
+!torch._C._profiler._OptimizerInfo"!torch._C._profiler._OptimizerInfo0:property`Ω
+_ExtraFields_PyCCall'torch._C._profiler._ExtraFields_PyCCall"builtins.object*Í
+caller.torch._C._profiler._ExtraFields_PyCCall.caller"D
+ torch._C._profiler._PyFrameState" torch._C._profiler._PyFrameState*\
+selfR
+'torch._C._profiler._ExtraFields_PyCCall"'torch._C._profiler._ExtraFields_PyCCall0:property`˝
+_ExtraFields_PyCall&torch._C._profiler._ExtraFields_PyCall"builtins.object*Î
+callsite/torch._C._profiler._ExtraFields_PyCall.callsite"D
+ torch._C._profiler._PyFrameState" torch._C._profiler._PyFrameState*Z
+selfP
+&torch._C._profiler._ExtraFields_PyCall"&torch._C._profiler._ExtraFields_PyCall0:property`*Á
+caller-torch._C._profiler._ExtraFields_PyCall.caller"D
+ torch._C._profiler._PyFrameState" torch._C._profiler._PyFrameState*Z
+selfP
+&torch._C._profiler._ExtraFields_PyCall"&torch._C._profiler._ExtraFields_PyCall0:property`*§
+module-torch._C._profiler._ExtraFields_PyCall.module"Ä
+,Union[torch._C._profiler._NNModuleInfo,None]D
+ torch._C._profiler._NNModuleInfo" torch._C._profiler._NNModuleInfo
+None*Z
+selfP
+&torch._C._profiler._ExtraFields_PyCall"&torch._C._profiler._ExtraFields_PyCall0:property`*≠
+	optimizer0torch._C._profiler._ExtraFields_PyCall.optimizer"É
+-Union[torch._C._profiler._OptimizerInfo,None]F
+!torch._C._profiler._OptimizerInfo"!torch._C._profiler._OptimizerInfo
+None*Z
+selfP
+&torch._C._profiler._ExtraFields_PyCall"&torch._C._profiler._ExtraFields_PyCall0:property`N
+_ExtraFields_Kineto&torch._C._profiler._ExtraFields_Kineto"builtins.objectJ
+CapturedTraceback$torch._C._profiler.CapturedTraceback"builtins.objectØ
+_RecordFunctionFast&torch._C._profiler._RecordFunctionFast"builtins.object*É
+__init__/torch._C._profiler._RecordFunctionFast.__init__"
+None*Z
+selfP
+&torch._C._profiler._RecordFunctionFast"&torch._C._profiler._RecordFunctionFast*&
+name
+builtins.str"builtins.str*≥
+input_valuesû
+2Union[builtins.list[Any],builtins.tuple[Any],None],
+builtins.list[Any]
+Any"builtins.list.
+builtins.tuple[Any]
+Any"builtins.tuple
+None *Å
+keyword_valuesk
+"Union[builtins.dict[Any,Any],None]9
+builtins.dict[Any,Any]
+Any
+Any"builtins.dict
+None *õ
+	__enter__0torch._C._profiler._RecordFunctionFast.__enter__"
+None*RP
+&torch._C._profiler._RecordFunctionFast"&torch._C._profiler._RecordFunctionFast*∫
+__exit__/torch._C._profiler._RecordFunctionFast.__exit__"
+None*RP
+&torch._C._profiler._RecordFunctionFast"&torch._C._profiler._RecordFunctionFast*	
+Any*	
+Any*	
+Any•
+_add_execution_trace_observer0torch._C._profiler._add_execution_trace_observer"
+builtins.bool"builtins.bool*2
+output_file_path
+builtins.str"builtins.stra
+ _remove_execution_trace_observer3torch._C._profiler._remove_execution_trace_observer"
+Nonea
+ _enable_execution_trace_observer3torch._C._profiler._enable_execution_trace_observer"
+Nonec
+!_disable_execution_trace_observer4torch._C._profiler._disable_execution_trace_observer"
+Noneò
+'_set_record_concrete_inputs_enabled_val:torch._C._profiler._set_record_concrete_inputs_enabled_val"
+None*'
+val
+builtins.bool"builtins.boolz
+_set_fwd_bwd_enabled_val+torch._C._profiler._set_fwd_bwd_enabled_val"
+None*'
+val
+builtins.bool"builtins.bool~
+_set_cuda_sync_enabled_val-torch._C._profiler._set_cuda_sync_enabled_val"
+None*'
+val
+builtins.bool"builtins.boolÜ
+gather_traceback#torch._C._profiler.gather_traceback"L
+$torch._C._profiler.CapturedTraceback"$torch._C._profiler.CapturedTraceback**
+python
+builtins.bool"builtins.bool**
+script
+builtins.bool"builtins.bool*'
+cpp
+builtins.bool"builtins.boolÉ
+symbolize_tracebacks'torch._C._profiler.symbolize_tracebacks"ô
+Fbuiltins.list[builtins.list[builtins.dict[builtins.str,builtins.str]]]ø
+7builtins.list[builtins.dict[builtins.str,builtins.str]]u
+(builtins.dict[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.dict"builtins.list"builtins.list*•
+to_symbolizeí
+3builtins.list[torch._C._profiler.CapturedTraceback]L
+$torch._C._profiler.CapturedTraceback"$torch._C._profiler.CapturedTraceback"builtins.list*é
+__annotations__"torch._C._profiler.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict

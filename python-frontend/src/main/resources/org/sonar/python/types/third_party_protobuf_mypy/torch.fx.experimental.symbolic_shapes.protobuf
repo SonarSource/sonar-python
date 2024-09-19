@@ -1,0 +1,1765 @@
+
+%torch.fx.experimental.symbolic_shapesw
+GuardOnDataDependentSymNodeAtorch.fx.experimental.symbolic_shapes.GuardOnDataDependentSymNode"builtins.RuntimeError{
+PendingUnbackedSymbolNotFoundCtorch.fx.experimental.symbolic_shapes.PendingUnbackedSymbolNotFound"builtins.RuntimeErrorq
+ConstraintViolationError>torch.fx.experimental.symbolic_shapes.ConstraintViolationError"builtins.RuntimeError•
+ConvertIntKey3torch.fx.experimental.symbolic_shapes.ConvertIntKey"builtins.object*“
+__str__;torch.fx.experimental.symbolic_shapes.ConvertIntKey.__str__"
+builtins.str"builtins.str*lj
+3torch.fx.experimental.symbolic_shapes.ConvertIntKey"3torch.fx.experimental.symbolic_shapes.ConvertIntKey*˘
+get7torch.fx.experimental.symbolic_shapes.ConvertIntKey.get"
+builtins.int"builtins.int*t
+selfj
+3torch.fx.experimental.symbolic_shapes.ConvertIntKey"3torch.fx.experimental.symbolic_shapes.ConvertIntKey*%
+b
+builtins.bool"builtins.bool8r˙
+__dataclass_fields__Htorch.fx.experimental.symbolic_shapes.ConvertIntKey.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictÃ
+CallMethodKey3torch.fx.experimental.symbolic_shapes.CallMethodKey"builtins.object*“
+__str__;torch.fx.experimental.symbolic_shapes.CallMethodKey.__str__"
+builtins.str"builtins.str*lj
+3torch.fx.experimental.symbolic_shapes.CallMethodKey"3torch.fx.experimental.symbolic_shapes.CallMethodKey*Õ
+get7torch.fx.experimental.symbolic_shapes.CallMethodKey.get"
+Any*t
+selfj
+3torch.fx.experimental.symbolic_shapes.CallMethodKey"3torch.fx.experimental.symbolic_shapes.CallMethodKey*
+o
+Any*
+__init__<torch.fx.experimental.symbolic_shapes.CallMethodKey.__init__"
+None*t
+selfj
+3torch.fx.experimental.symbolic_shapes.CallMethodKey"3torch.fx.experimental.symbolic_shapes.CallMethodKey*&
+name
+builtins.str"builtins.str8r^
+name8torch.fx.experimental.symbolic_shapes.CallMethodKey.name
+builtins.str"builtins.strr˙
+__dataclass_fields__Htorch.fx.experimental.symbolic_shapes.CallMethodKey.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictÎ
+InnerTensorKey4torch.fx.experimental.symbolic_shapes.InnerTensorKey"builtins.object*’
+__str__<torch.fx.experimental.symbolic_shapes.InnerTensorKey.__str__"
+builtins.str"builtins.str*nl
+4torch.fx.experimental.symbolic_shapes.InnerTensorKey"4torch.fx.experimental.symbolic_shapes.InnerTensorKey*–
+get8torch.fx.experimental.symbolic_shapes.InnerTensorKey.get"
+Any*v
+selfl
+4torch.fx.experimental.symbolic_shapes.InnerTensorKey"4torch.fx.experimental.symbolic_shapes.InnerTensorKey*
+o
+Any*˘
+__init__=torch.fx.experimental.symbolic_shapes.InnerTensorKey.__init__"
+None*v
+selfl
+4torch.fx.experimental.symbolic_shapes.InnerTensorKey"4torch.fx.experimental.symbolic_shapes.InnerTensorKey*,
+
+inner_name
+builtins.str"builtins.str8rk
+
+inner_name?torch.fx.experimental.symbolic_shapes.InnerTensorKey.inner_name
+builtins.str"builtins.strr˚
+__dataclass_fields__Itorch.fx.experimental.symbolic_shapes.InnerTensorKey.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictÂ
+DivideByKey1torch.fx.experimental.symbolic_shapes.DivideByKey"builtins.object*Ã
+__str__9torch.fx.experimental.symbolic_shapes.DivideByKey.__str__"
+builtins.str"builtins.str*hf
+1torch.fx.experimental.symbolic_shapes.DivideByKey"1torch.fx.experimental.symbolic_shapes.DivideByKey*Ò
+get5torch.fx.experimental.symbolic_shapes.DivideByKey.get"
+builtins.int"builtins.int*p
+selff
+1torch.fx.experimental.symbolic_shapes.DivideByKey"1torch.fx.experimental.symbolic_shapes.DivideByKey*#
+o
+builtins.int"builtins.int*Ì
+__init__:torch.fx.experimental.symbolic_shapes.DivideByKey.__init__"
+None*p
+selff
+1torch.fx.experimental.symbolic_shapes.DivideByKey"1torch.fx.experimental.symbolic_shapes.DivideByKey*)
+divisor
+builtins.int"builtins.int8rb
+divisor9torch.fx.experimental.symbolic_shapes.DivideByKey.divisor
+builtins.int"builtins.intr¯
+__dataclass_fields__Ftorch.fx.experimental.symbolic_shapes.DivideByKey.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictÏ
+
+DimDynamic0torch.fx.experimental.symbolic_shapes.DimDynamic"	enum.EnumHra
+DYNAMIC8torch.fx.experimental.symbolic_shapes.DimDynamic.DYNAMIC
+builtins.int"builtins.intr[
+DUCK5torch.fx.experimental.symbolic_shapes.DimDynamic.DUCK
+builtins.int"builtins.intr_
+STATIC7torch.fx.experimental.symbolic_shapes.DimDynamic.STATIC
+builtins.int"builtins.int•
+
+Constraint0torch.fx.experimental.symbolic_shapes.Constraint"builtins.object*Ó
+__init__9torch.fx.experimental.symbolic_shapes.Constraint.__init__"
+None*n
+selfd
+0torch.fx.experimental.symbolic_shapes.Constraint"0torch.fx.experimental.symbolic_shapes.Constraint*-
+	warn_only
+builtins.bool"builtins.bool8rg
+	warn_only:torch.fx.experimental.symbolic_shapes.Constraint.warn_only
+builtins.bool"builtins.boolr˜
+__dataclass_fields__Etorch.fx.experimental.symbolic_shapes.Constraint.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dict€
+
+StrictMinMaxConstraint<torch.fx.experimental.symbolic_shapes.StrictMinMaxConstraint"0torch.fx.experimental.symbolic_shapes.Constraint*ô
+renderCtorch.fx.experimental.symbolic_shapes.StrictMinMaxConstraint.render"
+Any*Ü
+self|
+<torch.fx.experimental.symbolic_shapes.StrictMinMaxConstraint"<torch.fx.experimental.symbolic_shapes.StrictMinMaxConstraint*8
+source,
+torch._guards.Source"torch._guards.Source*Ö
+__init__Etorch.fx.experimental.symbolic_shapes.StrictMinMaxConstraint.__init__"
+None*Ü
+self|
+<torch.fx.experimental.symbolic_shapes.StrictMinMaxConstraint"<torch.fx.experimental.symbolic_shapes.StrictMinMaxConstraint*-
+	warn_only
+builtins.bool"builtins.bool*p
+vrh
+0torch.utils._sympy.value_ranges.ValueRanges[Any]
+Any"+torch.utils._sympy.value_ranges.ValueRanges8rØ
+vr?torch.fx.experimental.symbolic_shapes.StrictMinMaxConstraint.vrh
+0torch.utils._sympy.value_ranges.ValueRanges[Any]
+Any"+torch.utils._sympy.value_ranges.ValueRangesrs
+	warn_onlyFtorch.fx.experimental.symbolic_shapes.StrictMinMaxConstraint.warn_only
+builtins.bool"builtins.boolrÉ
+__dataclass_fields__Qtorch.fx.experimental.symbolic_shapes.StrictMinMaxConstraint.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dict¡
+RelaxedUnspecConstraint=torch.fx.experimental.symbolic_shapes.RelaxedUnspecConstraint"0torch.fx.experimental.symbolic_shapes.Constraint*ú
+renderDtorch.fx.experimental.symbolic_shapes.RelaxedUnspecConstraint.render"
+Any*à
+self~
+=torch.fx.experimental.symbolic_shapes.RelaxedUnspecConstraint"=torch.fx.experimental.symbolic_shapes.RelaxedUnspecConstraint*8
+source,
+torch._guards.Source"torch._guards.Source*ñ
+__init__Ftorch.fx.experimental.symbolic_shapes.RelaxedUnspecConstraint.__init__"
+None*à
+self~
+=torch.fx.experimental.symbolic_shapes.RelaxedUnspecConstraint"=torch.fx.experimental.symbolic_shapes.RelaxedUnspecConstraint*-
+	warn_only
+builtins.bool"builtins.bool8rt
+	warn_onlyGtorch.fx.experimental.symbolic_shapes.RelaxedUnspecConstraint.warn_only
+builtins.bool"builtins.boolrÑ
+__dataclass_fields__Rtorch.fx.experimental.symbolic_shapes.RelaxedUnspecConstraint.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictÔ
+EqualityConstraint8torch.fx.experimental.symbolic_shapes.EqualityConstraint"0torch.fx.experimental.symbolic_shapes.Constraint*a
+__post_init__Ftorch.fx.experimental.symbolic_shapes.EqualityConstraint.__post_init__*
+self*]
+_find>torch.fx.experimental.symbolic_shapes.EqualityConstraint._find*
+self*
+
+source*i
+_union?torch.fx.experimental.symbolic_shapes.EqualityConstraint._union*
+self*	
+root1*	
+root2*`
+_rewriteAtorch.fx.experimental.symbolic_shapes.EqualityConstraint._rewrite*
+self*
+src*q
+is_equalAtorch.fx.experimental.symbolic_shapes.EqualityConstraint.is_equal*
+self*
+source1*
+source2*|
+
+is_derivedCtorch.fx.experimental.symbolic_shapes.EqualityConstraint.is_derived*
+self*
+src*
+
+symbol_src*
+fn*í
+__init__Atorch.fx.experimental.symbolic_shapes.EqualityConstraint.__init__"
+None*~
+selft
+8torch.fx.experimental.symbolic_shapes.EqualityConstraint"8torch.fx.experimental.symbolic_shapes.EqualityConstraint*-
+	warn_only
+builtins.bool"builtins.bool*ˆ
+source_pairs„
+?builtins.list[Tuple[torch._guards.Source,torch._guards.Source]]ê
+0Tuple[torch._guards.Source,torch._guards.Source],
+torch._guards.Source"torch._guards.Source,
+torch._guards.Source"torch._guards.Source"builtins.list*Õ
+derived_equalities¥
+jbuiltins.list[Tuple[torch._guards.Source,Union[torch._guards.Source,Any],CallableType[builtins.function]]]∂
+[Tuple[torch._guards.Source,Union[torch._guards.Source,Any],CallableType[builtins.function]],
+torch._guards.Source"torch._guards.SourceZ
+Union[torch._guards.Source,Any],
+torch._guards.Source"torch._guards.Source
+AnyK
+CallableType[builtins.function]&
+builtins.function"builtins.function"builtins.list*A
+phantom_symbols,
+builtins.list[Any]
+Any"builtins.list8rª
+source_pairsEtorch.fx.experimental.symbolic_shapes.EqualityConstraint.source_pairs„
+?builtins.list[Tuple[torch._guards.Source,torch._guards.Source]]ê
+0Tuple[torch._guards.Source,torch._guards.Source],
+torch._guards.Source"torch._guards.Source,
+torch._guards.Source"torch._guards.Source"builtins.listrò
+derived_equalitiesKtorch.fx.experimental.symbolic_shapes.EqualityConstraint.derived_equalities¥
+jbuiltins.list[Tuple[torch._guards.Source,Union[torch._guards.Source,Any],CallableType[builtins.function]]]∂
+[Tuple[torch._guards.Source,Union[torch._guards.Source,Any],CallableType[builtins.function]],
+torch._guards.Source"torch._guards.SourceZ
+Union[torch._guards.Source,Any],
+torch._guards.Source"torch._guards.Source
+AnyK
+CallableType[builtins.function]&
+builtins.function"builtins.function"builtins.listrâ
+phantom_symbolsHtorch.fx.experimental.symbolic_shapes.EqualityConstraint.phantom_symbols,
+builtins.list[Any]
+Any"builtins.listro
+	warn_onlyBtorch.fx.experimental.symbolic_shapes.EqualityConstraint.warn_only
+builtins.bool"builtins.boolrˇ
+__dataclass_fields__Mtorch.fx.experimental.symbolic_shapes.EqualityConstraint.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dict⁄
+SymbolicContext5torch.fx.experimental.symbolic_shapes.SymbolicContext"builtins.object8r¸
+__dataclass_fields__Jtorch.fx.experimental.symbolic_shapes.SymbolicContext.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictè
+StatelessSymbolicContext>torch.fx.experimental.symbolic_shapes.StatelessSymbolicContext"5torch.fx.experimental.symbolic_shapes.SymbolicContext*g
+__post_init__Ltorch.fx.experimental.symbolic_shapes.StatelessSymbolicContext.__post_init__*
+self*∆
+__init__Gtorch.fx.experimental.symbolic_shapes.StatelessSymbolicContext.__init__"
+None*ã
+selfÄ
+>torch.fx.experimental.symbolic_shapes.StatelessSymbolicContext">torch.fx.experimental.symbolic_shapes.StatelessSymbolicContext* 
+dynamic_sizes∂
+?builtins.list[torch.fx.experimental.symbolic_shapes.DimDynamic]d
+0torch.fx.experimental.symbolic_shapes.DimDynamic"0torch.fx.experimental.symbolic_shapes.DimDynamic"builtins.list*Ø
+constraint_sizesñ
+†builtins.list[TypeAlias[Union[torch.fx.experimental.symbolic_shapes.StrictMinMaxConstraint,torch.fx.experimental.symbolic_shapes.RelaxedUnspecConstraint,None]]]·
+ëTypeAlias[Union[torch.fx.experimental.symbolic_shapes.StrictMinMaxConstraint,torch.fx.experimental.symbolic_shapes.RelaxedUnspecConstraint,None]]ì
+ÜUnion[torch.fx.experimental.symbolic_shapes.StrictMinMaxConstraint,torch.fx.experimental.symbolic_shapes.RelaxedUnspecConstraint,None]|
+<torch.fx.experimental.symbolic_shapes.StrictMinMaxConstraint"<torch.fx.experimental.symbolic_shapes.StrictMinMaxConstraint~
+=torch.fx.experimental.symbolic_shapes.RelaxedUnspecConstraint"=torch.fx.experimental.symbolic_shapes.RelaxedUnspecConstraint
+None"3torch.fx.experimental.symbolic_shapes.DimConstraint"builtins.list *Ÿ
+view_base_contextø
+AUnion[torch.fx.experimental.symbolic_shapes.SymbolicContext,None]n
+5torch.fx.experimental.symbolic_shapes.SymbolicContext"5torch.fx.experimental.symbolic_shapes.SymbolicContext
+None 8rñ
+dynamic_sizesLtorch.fx.experimental.symbolic_shapes.StatelessSymbolicContext.dynamic_sizes∂
+?builtins.list[torch.fx.experimental.symbolic_shapes.DimDynamic]d
+0torch.fx.experimental.symbolic_shapes.DimDynamic"0torch.fx.experimental.symbolic_shapes.DimDynamic"builtins.listr¸
+constraint_sizesOtorch.fx.experimental.symbolic_shapes.StatelessSymbolicContext.constraint_sizesñ
+†builtins.list[TypeAlias[Union[torch.fx.experimental.symbolic_shapes.StrictMinMaxConstraint,torch.fx.experimental.symbolic_shapes.RelaxedUnspecConstraint,None]]]·
+ëTypeAlias[Union[torch.fx.experimental.symbolic_shapes.StrictMinMaxConstraint,torch.fx.experimental.symbolic_shapes.RelaxedUnspecConstraint,None]]ì
+ÜUnion[torch.fx.experimental.symbolic_shapes.StrictMinMaxConstraint,torch.fx.experimental.symbolic_shapes.RelaxedUnspecConstraint,None]|
+<torch.fx.experimental.symbolic_shapes.StrictMinMaxConstraint"<torch.fx.experimental.symbolic_shapes.StrictMinMaxConstraint~
+=torch.fx.experimental.symbolic_shapes.RelaxedUnspecConstraint"=torch.fx.experimental.symbolic_shapes.RelaxedUnspecConstraint
+None"3torch.fx.experimental.symbolic_shapes.DimConstraint"builtins.listrß
+view_base_contextPtorch.fx.experimental.symbolic_shapes.StatelessSymbolicContext.view_base_contextø
+AUnion[torch.fx.experimental.symbolic_shapes.SymbolicContext,None]n
+5torch.fx.experimental.symbolic_shapes.SymbolicContext"5torch.fx.experimental.symbolic_shapes.SymbolicContext
+NonerÖ
+__dataclass_fields__Storch.fx.experimental.symbolic_shapes.StatelessSymbolicContext.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictä#
+StatefulSymbolicContext=torch.fx.experimental.symbolic_shapes.StatefulSymbolicContext">torch.fx.experimental.symbolic_shapes.StatelessSymbolicContext*f
+__post_init__Ktorch.fx.experimental.symbolic_shapes.StatefulSymbolicContext.__post_init__*
+self*Ï
+__init__Ftorch.fx.experimental.symbolic_shapes.StatefulSymbolicContext.__init__"
+None*à
+self~
+=torch.fx.experimental.symbolic_shapes.StatefulSymbolicContext"=torch.fx.experimental.symbolic_shapes.StatefulSymbolicContext* 
+dynamic_sizes∂
+?builtins.list[torch.fx.experimental.symbolic_shapes.DimDynamic]d
+0torch.fx.experimental.symbolic_shapes.DimDynamic"0torch.fx.experimental.symbolic_shapes.DimDynamic"builtins.list*Ø
+constraint_sizesñ
+†builtins.list[TypeAlias[Union[torch.fx.experimental.symbolic_shapes.StrictMinMaxConstraint,torch.fx.experimental.symbolic_shapes.RelaxedUnspecConstraint,None]]]·
+ëTypeAlias[Union[torch.fx.experimental.symbolic_shapes.StrictMinMaxConstraint,torch.fx.experimental.symbolic_shapes.RelaxedUnspecConstraint,None]]ì
+ÜUnion[torch.fx.experimental.symbolic_shapes.StrictMinMaxConstraint,torch.fx.experimental.symbolic_shapes.RelaxedUnspecConstraint,None]|
+<torch.fx.experimental.symbolic_shapes.StrictMinMaxConstraint"<torch.fx.experimental.symbolic_shapes.StrictMinMaxConstraint~
+=torch.fx.experimental.symbolic_shapes.RelaxedUnspecConstraint"=torch.fx.experimental.symbolic_shapes.RelaxedUnspecConstraint
+None"3torch.fx.experimental.symbolic_shapes.DimConstraint"builtins.list *Ÿ
+view_base_contextø
+AUnion[torch.fx.experimental.symbolic_shapes.SymbolicContext,None]n
+5torch.fx.experimental.symbolic_shapes.SymbolicContext"5torch.fx.experimental.symbolic_shapes.SymbolicContext
+None *A
+tensor_source,
+torch._guards.Source"torch._guards.Source *‰
+#shape_env_to_source_to_symbol_cache∏
+Xbuiltins.dict[builtins.int,builtins.dict[torch._dynamo.source.TensorPropertySource,Any]]
+builtins.int"builtins.intÆ
+<builtins.dict[torch._dynamo.source.TensorPropertySource,Any]V
+)torch._dynamo.source.TensorPropertySource")torch._dynamo.source.TensorPropertySource
+Any"builtins.dict"builtins.dict 8rä
+tensor_sourceKtorch.fx.experimental.symbolic_shapes.StatefulSymbolicContext.tensor_source,
+torch._guards.Source"torch._guards.Sourcer√
+#shape_env_to_source_to_symbol_cacheatorch.fx.experimental.symbolic_shapes.StatefulSymbolicContext.shape_env_to_source_to_symbol_cache∏
+Xbuiltins.dict[builtins.int,builtins.dict[torch._dynamo.source.TensorPropertySource,Any]]
+builtins.int"builtins.intÆ
+<builtins.dict[torch._dynamo.source.TensorPropertySource,Any]V
+)torch._dynamo.source.TensorPropertySource")torch._dynamo.source.TensorPropertySource
+Any"builtins.dict"builtins.dictrï
+dynamic_sizesKtorch.fx.experimental.symbolic_shapes.StatefulSymbolicContext.dynamic_sizes∂
+?builtins.list[torch.fx.experimental.symbolic_shapes.DimDynamic]d
+0torch.fx.experimental.symbolic_shapes.DimDynamic"0torch.fx.experimental.symbolic_shapes.DimDynamic"builtins.listr˚
+constraint_sizesNtorch.fx.experimental.symbolic_shapes.StatefulSymbolicContext.constraint_sizesñ
+†builtins.list[TypeAlias[Union[torch.fx.experimental.symbolic_shapes.StrictMinMaxConstraint,torch.fx.experimental.symbolic_shapes.RelaxedUnspecConstraint,None]]]·
+ëTypeAlias[Union[torch.fx.experimental.symbolic_shapes.StrictMinMaxConstraint,torch.fx.experimental.symbolic_shapes.RelaxedUnspecConstraint,None]]ì
+ÜUnion[torch.fx.experimental.symbolic_shapes.StrictMinMaxConstraint,torch.fx.experimental.symbolic_shapes.RelaxedUnspecConstraint,None]|
+<torch.fx.experimental.symbolic_shapes.StrictMinMaxConstraint"<torch.fx.experimental.symbolic_shapes.StrictMinMaxConstraint~
+=torch.fx.experimental.symbolic_shapes.RelaxedUnspecConstraint"=torch.fx.experimental.symbolic_shapes.RelaxedUnspecConstraint
+None"3torch.fx.experimental.symbolic_shapes.DimConstraint"builtins.listr¶
+view_base_contextOtorch.fx.experimental.symbolic_shapes.StatefulSymbolicContext.view_base_contextø
+AUnion[torch.fx.experimental.symbolic_shapes.SymbolicContext,None]n
+5torch.fx.experimental.symbolic_shapes.SymbolicContext"5torch.fx.experimental.symbolic_shapes.SymbolicContext
+NonerÑ
+__dataclass_fields__Rtorch.fx.experimental.symbolic_shapes.StatefulSymbolicContext.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictÁ'
+SubclassSymbolicContext=torch.fx.experimental.symbolic_shapes.SubclassSymbolicContext"=torch.fx.experimental.symbolic_shapes.StatefulSymbolicContext*f
+__post_init__Ktorch.fx.experimental.symbolic_shapes.SubclassSymbolicContext.__post_init__*
+self*ˆ
+__init__Ftorch.fx.experimental.symbolic_shapes.SubclassSymbolicContext.__init__"
+None*à
+self~
+=torch.fx.experimental.symbolic_shapes.SubclassSymbolicContext"=torch.fx.experimental.symbolic_shapes.SubclassSymbolicContext* 
+dynamic_sizes∂
+?builtins.list[torch.fx.experimental.symbolic_shapes.DimDynamic]d
+0torch.fx.experimental.symbolic_shapes.DimDynamic"0torch.fx.experimental.symbolic_shapes.DimDynamic"builtins.list*Ø
+constraint_sizesñ
+†builtins.list[TypeAlias[Union[torch.fx.experimental.symbolic_shapes.StrictMinMaxConstraint,torch.fx.experimental.symbolic_shapes.RelaxedUnspecConstraint,None]]]·
+ëTypeAlias[Union[torch.fx.experimental.symbolic_shapes.StrictMinMaxConstraint,torch.fx.experimental.symbolic_shapes.RelaxedUnspecConstraint,None]]ì
+ÜUnion[torch.fx.experimental.symbolic_shapes.StrictMinMaxConstraint,torch.fx.experimental.symbolic_shapes.RelaxedUnspecConstraint,None]|
+<torch.fx.experimental.symbolic_shapes.StrictMinMaxConstraint"<torch.fx.experimental.symbolic_shapes.StrictMinMaxConstraint~
+=torch.fx.experimental.symbolic_shapes.RelaxedUnspecConstraint"=torch.fx.experimental.symbolic_shapes.RelaxedUnspecConstraint
+None"3torch.fx.experimental.symbolic_shapes.DimConstraint"builtins.list *Ÿ
+view_base_contextø
+AUnion[torch.fx.experimental.symbolic_shapes.SymbolicContext,None]n
+5torch.fx.experimental.symbolic_shapes.SymbolicContext"5torch.fx.experimental.symbolic_shapes.SymbolicContext
+None *A
+tensor_source,
+torch._guards.Source"torch._guards.Source *‰
+#shape_env_to_source_to_symbol_cache∏
+Xbuiltins.dict[builtins.int,builtins.dict[torch._dynamo.source.TensorPropertySource,Any]]
+builtins.int"builtins.intÆ
+<builtins.dict[torch._dynamo.source.TensorPropertySource,Any]V
+)torch._dynamo.source.TensorPropertySource")torch._dynamo.source.TensorPropertySource
+Any"builtins.dict"builtins.dict *á
+inner_contexts
+Qbuiltins.dict[builtins.str,torch.fx.experimental.symbolic_shapes.SymbolicContext]
+builtins.str"builtins.strn
+5torch.fx.experimental.symbolic_shapes.SymbolicContext"5torch.fx.experimental.symbolic_shapes.SymbolicContext"builtins.dict 8r—
+inner_contextsLtorch.fx.experimental.symbolic_shapes.SubclassSymbolicContext.inner_contexts
+Qbuiltins.dict[builtins.str,torch.fx.experimental.symbolic_shapes.SymbolicContext]
+builtins.str"builtins.strn
+5torch.fx.experimental.symbolic_shapes.SymbolicContext"5torch.fx.experimental.symbolic_shapes.SymbolicContext"builtins.dictrï
+dynamic_sizesKtorch.fx.experimental.symbolic_shapes.SubclassSymbolicContext.dynamic_sizes∂
+?builtins.list[torch.fx.experimental.symbolic_shapes.DimDynamic]d
+0torch.fx.experimental.symbolic_shapes.DimDynamic"0torch.fx.experimental.symbolic_shapes.DimDynamic"builtins.listr˚
+constraint_sizesNtorch.fx.experimental.symbolic_shapes.SubclassSymbolicContext.constraint_sizesñ
+†builtins.list[TypeAlias[Union[torch.fx.experimental.symbolic_shapes.StrictMinMaxConstraint,torch.fx.experimental.symbolic_shapes.RelaxedUnspecConstraint,None]]]·
+ëTypeAlias[Union[torch.fx.experimental.symbolic_shapes.StrictMinMaxConstraint,torch.fx.experimental.symbolic_shapes.RelaxedUnspecConstraint,None]]ì
+ÜUnion[torch.fx.experimental.symbolic_shapes.StrictMinMaxConstraint,torch.fx.experimental.symbolic_shapes.RelaxedUnspecConstraint,None]|
+<torch.fx.experimental.symbolic_shapes.StrictMinMaxConstraint"<torch.fx.experimental.symbolic_shapes.StrictMinMaxConstraint~
+=torch.fx.experimental.symbolic_shapes.RelaxedUnspecConstraint"=torch.fx.experimental.symbolic_shapes.RelaxedUnspecConstraint
+None"3torch.fx.experimental.symbolic_shapes.DimConstraint"builtins.listr¶
+view_base_contextOtorch.fx.experimental.symbolic_shapes.SubclassSymbolicContext.view_base_contextø
+AUnion[torch.fx.experimental.symbolic_shapes.SymbolicContext,None]n
+5torch.fx.experimental.symbolic_shapes.SymbolicContext"5torch.fx.experimental.symbolic_shapes.SymbolicContext
+Nonerä
+tensor_sourceKtorch.fx.experimental.symbolic_shapes.SubclassSymbolicContext.tensor_source,
+torch._guards.Source"torch._guards.Sourcer√
+#shape_env_to_source_to_symbol_cacheatorch.fx.experimental.symbolic_shapes.SubclassSymbolicContext.shape_env_to_source_to_symbol_cache∏
+Xbuiltins.dict[builtins.int,builtins.dict[torch._dynamo.source.TensorPropertySource,Any]]
+builtins.int"builtins.intÆ
+<builtins.dict[torch._dynamo.source.TensorPropertySource,Any]V
+)torch._dynamo.source.TensorPropertySource")torch._dynamo.source.TensorPropertySource
+Any"builtins.dict"builtins.dictrÑ
+__dataclass_fields__Rtorch.fx.experimental.symbolic_shapes.SubclassSymbolicContext.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictç
+RuntimeAssert3torch.fx.experimental.symbolic_shapes.RuntimeAssert"builtins.object*´
+__init__<torch.fx.experimental.symbolic_shapes.RuntimeAssert.__init__"
+None*t
+selfj
+3torch.fx.experimental.symbolic_shapes.RuntimeAssert"3torch.fx.experimental.symbolic_shapes.RuntimeAssert*
+expr
+Any*%
+msg
+builtins.str"builtins.str*'
+stack
+builtins.str"builtins.str8rI
+expr8torch.fx.experimental.symbolic_shapes.RuntimeAssert.expr
+Anyr\
+msg7torch.fx.experimental.symbolic_shapes.RuntimeAssert.msg
+builtins.str"builtins.strr`
+stack9torch.fx.experimental.symbolic_shapes.RuntimeAssert.stack
+builtins.str"builtins.strr˙
+__dataclass_fields__Htorch.fx.experimental.symbolic_shapes.RuntimeAssert.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictÕ
+ShapeGuardPrinter7torch.fx.experimental.symbolic_shapes.ShapeGuardPrinter"builtins.object*ê
+__init__@torch.fx.experimental.symbolic_shapes.ShapeGuardPrinter.__init__*
+self*
+symbol_to_source*
+
+source_ref*
+var_to_sources*d
+
+_print_NotBtorch.fx.experimental.symbolic_shapes.ShapeGuardPrinter._print_Not*
+self*
+expr*d
+
+_print_AndBtorch.fx.experimental.symbolic_shapes.ShapeGuardPrinter._print_And*
+self*
+expr*b
+	_print_OrAtorch.fx.experimental.symbolic_shapes.ShapeGuardPrinter._print_Or*
+self*
+expr*Ö
+_print_SymbolEtorch.fx.experimental.symbolic_shapes.ShapeGuardPrinter._print_Symbol"
+builtins.str"builtins.str*|
+selfr
+7torch.fx.experimental.symbolic_shapes.ShapeGuardPrinter"7torch.fx.experimental.symbolic_shapes.ShapeGuardPrinter*
+expr
+Anyre
+symbol_to_sourceHtorch.fx.experimental.symbolic_shapes.ShapeGuardPrinter.symbol_to_source
+AnyrY
+
+source_refBtorch.fx.experimental.symbolic_shapes.ShapeGuardPrinter.source_ref
+Anyra
+var_to_sourcesFtorch.fx.experimental.symbolic_shapes.ShapeGuardPrinter.var_to_sources
+AnyÜ
+LoggingShapeGuardPrinter>torch.fx.experimental.symbolic_shapes.LoggingShapeGuardPrinter"7torch.fx.experimental.symbolic_shapes.ShapeGuardPrinter*q
+__init__Gtorch.fx.experimental.symbolic_shapes.LoggingShapeGuardPrinter.__init__*
+self*
+var_to_sourcesÃ	
+DynamicDimConstraintPrinterAtorch.fx.experimental.symbolic_shapes.DynamicDimConstraintPrinter"builtins.object*ï
+__init__Jtorch.fx.experimental.symbolic_shapes.DynamicDimConstraintPrinter.__init__*
+self*
+symbol_to_source*
+source_name_to_debug_name*•
+print_sourceNtorch.fx.experimental.symbolic_shapes.DynamicDimConstraintPrinter.print_source"
+builtins.str"builtins.str*ë
+selfÜ
+Atorch.fx.experimental.symbolic_shapes.DynamicDimConstraintPrinter"Atorch.fx.experimental.symbolic_shapes.DynamicDimConstraintPrinter*
+source
+Any*•
+_print_SymbolOtorch.fx.experimental.symbolic_shapes.DynamicDimConstraintPrinter._print_Symbol"
+builtins.str"builtins.str*ë
+selfÜ
+Atorch.fx.experimental.symbolic_shapes.DynamicDimConstraintPrinter"Atorch.fx.experimental.symbolic_shapes.DynamicDimConstraintPrinter*
+expr
+Any*|
+_print_RelationalStorch.fx.experimental.symbolic_shapes.DynamicDimConstraintPrinter._print_Relational*
+self*
+exprro
+symbol_to_sourceRtorch.fx.experimental.symbolic_shapes.DynamicDimConstraintPrinter.symbol_to_source
+AnyrÅ
+source_name_to_debug_name[torch.fx.experimental.symbolic_shapes.DynamicDimConstraintPrinter.source_name_to_debug_name
+AnyÀ(
+DimConstraints4torch.fx.experimental.symbolic_shapes.DimConstraints"builtins.object*‹
+__init__=torch.fx.experimental.symbolic_shapes.DimConstraints.__init__*
+self*
+symbol_to_source*
+
+var_to_val*
+marked_dynamic*
+source_name_to_debug_name*.
+(_allow_complex_guards_as_runtime_asserts *Ñ
+rewrite_with_congruencesMtorch.fx.experimental.symbolic_shapes.DimConstraints.rewrite_with_congruences*
+self*
+s*
+expr*Í
+add8torch.fx.experimental.symbolic_shapes.DimConstraints.add"
+builtins.bool"builtins.bool*v
+selfl
+4torch.fx.experimental.symbolic_shapes.DimConstraints"4torch.fx.experimental.symbolic_shapes.DimConstraints*
+expr
+Any*q
+add_equalityAtorch.fx.experimental.symbolic_shapes.DimConstraints.add_equality*
+self*
+
+source*
+expr*i
+_reduce_congruencesHtorch.fx.experimental.symbolic_shapes.DimConstraints._reduce_congruences*
+self*o
+_raise_inconsistenciesKtorch.fx.experimental.symbolic_shapes.DimConstraints._raise_inconsistencies*
+self*t
+_force_specializationJtorch.fx.experimental.symbolic_shapes.DimConstraints._force_specialization*
+self*
+s*y
+_specialize_divisor_symbolsPtorch.fx.experimental.symbolic_shapes.DimConstraints._specialize_divisor_symbols*
+self*t
+solve:torch.fx.experimental.symbolic_shapes.DimConstraints.solve*
+self*%
+_disable_forced_specializations *ì
+_is_supported_congruenceMtorch.fx.experimental.symbolic_shapes.DimConstraints._is_supported_congruence*
+cls*
+
+congruence0:classmethodp*o
+forced_specializationsKtorch.fx.experimental.symbolic_shapes.DimConstraints.forced_specializations*
+self*É
+ remove_redundant_dynamic_resultsUtorch.fx.experimental.symbolic_shapes.DimConstraints.remove_redundant_dynamic_results*
+self*j
+_is_derived_dimDtorch.fx.experimental.symbolic_shapes.DimConstraints._is_derived_dim*
+self*
+dim*Z
+_is_dim<torch.fx.experimental.symbolic_shapes.DimConstraints._is_dim*
+self*
+dim*≠
+_process_derived_dim_rootsOtorch.fx.experimental.symbolic_shapes.DimConstraints._process_derived_dim_roots"
+None*v
+selfl
+4torch.fx.experimental.symbolic_shapes.DimConstraints"4torch.fx.experimental.symbolic_shapes.DimConstraints*—
+results√
+;builtins.dict[builtins.str,builtins.dict[builtins.str,Any]]
+builtins.str"builtins.strW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"builtins.dict*h
+name_to_dimW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*˝
+prettify_resultsEtorch.fx.experimental.symbolic_shapes.DimConstraints.prettify_results"
+Any*v
+selfl
+4torch.fx.experimental.symbolic_shapes.DimConstraints"4torch.fx.experimental.symbolic_shapes.DimConstraints*>
+original_signature&
+inspect.Signature"inspect.Signature*é
+dynamic_shapes˜
+IUnion[builtins.dict[builtins.str,Any],Tuple[Any],builtins.list[Any],None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+
+Tuple[Any]
+Any,
+builtins.list[Any]
+Any"builtins.list
+None *)
+constraint_violation_error
+Any *%
+forced_specializations
+Any r’
+_univariate_inequalitiesMtorch.fx.experimental.symbolic_shapes.DimConstraints._univariate_inequalitiesj
+$builtins.dict[Any,builtins.set[Any]]
+Any*
+builtins.set[Any]
+Any"builtins.set"builtins.dictrï
+_symbols_with_equalitiesMtorch.fx.experimental.symbolic_shapes.DimConstraints._symbols_with_equalities*
+builtins.set[Any]
+Any"builtins.setrê
+_substitutionsCtorch.fx.experimental.symbolic_shapes.DimConstraints._substitutions9
+builtins.dict[Any,Any]
+Any
+Any"builtins.dicträ
+_var_to_val@torch.fx.experimental.symbolic_shapes.DimConstraints._var_to_val9
+builtins.dict[Any,Any]
+Any
+Any"builtins.dictr}
+_congruencesAtorch.fx.experimental.symbolic_shapes.DimConstraints._congruences*
+builtins.set[Any]
+Any"builtins.setrô
+_multivariate_inequalitiesOtorch.fx.experimental.symbolic_shapes.DimConstraints._multivariate_inequalities*
+builtins.set[Any]
+Any"builtins.setrÉ
+_symbolic_equivalencesKtorch.fx.experimental.symbolic_shapes.DimConstraints._symbolic_equivalencesõ
+.builtins.list[Tuple[torch._guards.Source,Any]]Z
+Tuple[torch._guards.Source,Any],
+torch._guards.Source"torch._guards.Source
+Any"builtins.listr°
+_static_resultsDtorch.fx.experimental.symbolic_shapes.DimConstraints._static_resultsH
+builtins.set[builtins.str]
+builtins.str"builtins.str"builtins.setr£
+_dynamic_resultsEtorch.fx.experimental.symbolic_shapes.DimConstraints._dynamic_resultsH
+builtins.set[builtins.str]
+builtins.str"builtins.str"builtins.setrJ
+_dcp9torch.fx.experimental.symbolic_shapes.DimConstraints._dcp
+Anyr•
+_inconsistenciesEtorch.fx.experimental.symbolic_shapes.DimConstraints._inconsistenciesJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.listr`
+_marked_dynamicDtorch.fx.experimental.symbolic_shapes.DimConstraints._marked_dynamic
+Anyrí
+(_allow_complex_guards_as_runtime_asserts]torch.fx.experimental.symbolic_shapes.DimConstraints._allow_complex_guards_as_runtime_asserts
+Any˙
+ShapeEnvSettings6torch.fx.experimental.symbolic_shapes.ShapeEnvSettings"builtins.object*ï
+__init__?torch.fx.experimental.symbolic_shapes.ShapeEnvSettings.__init__"
+None*z
+selfp
+6torch.fx.experimental.symbolic_shapes.ShapeEnvSettings"6torch.fx.experimental.symbolic_shapes.ShapeEnvSettings*8
+allow_scalar_outputs
+builtins.bool"builtins.bool*B
+allow_dynamic_output_shape_ops
+builtins.bool"builtins.bool*<
+assume_static_by_default
+builtins.bool"builtins.bool*7
+specialize_zero_one
+builtins.bool"builtins.bool*.
+
+duck_shape
+builtins.bool"builtins.bool*O
++prefer_deferred_runtime_asserts_over_guards
+builtins.bool"builtins.bool*L
+(_allow_complex_guards_as_runtime_asserts
+builtins.bool"builtins.bool8rÉ
+allow_scalar_outputsKtorch.fx.experimental.symbolic_shapes.ShapeEnvSettings.allow_scalar_outputs
+builtins.bool"builtins.boolró
+allow_dynamic_output_shape_opsUtorch.fx.experimental.symbolic_shapes.ShapeEnvSettings.allow_dynamic_output_shape_ops
+builtins.bool"builtins.boolrã
+assume_static_by_defaultOtorch.fx.experimental.symbolic_shapes.ShapeEnvSettings.assume_static_by_default
+builtins.bool"builtins.boolrÅ
+specialize_zero_oneJtorch.fx.experimental.symbolic_shapes.ShapeEnvSettings.specialize_zero_one
+builtins.bool"builtins.boolro
+
+duck_shapeAtorch.fx.experimental.symbolic_shapes.ShapeEnvSettings.duck_shape
+builtins.bool"builtins.boolr±
++prefer_deferred_runtime_asserts_over_guardsbtorch.fx.experimental.symbolic_shapes.ShapeEnvSettings.prefer_deferred_runtime_asserts_over_guards
+builtins.bool"builtins.boolr´
+(_allow_complex_guards_as_runtime_asserts_torch.fx.experimental.symbolic_shapes.ShapeEnvSettings._allow_complex_guards_as_runtime_asserts
+builtins.bool"builtins.boolr˝
+__dataclass_fields__Ktorch.fx.experimental.symbolic_shapes.ShapeEnvSettings.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictªˇ
+ShapeEnv.torch.fx.experimental.symbolic_shapes.ShapeEnv"builtins.object*§
+__init__7torch.fx.experimental.symbolic_shapes.ShapeEnv.__init__"
+None*j
+self`
+.torch.fx.experimental.symbolic_shapes.ShapeEnv".torch.fx.experimental.symbolic_shapes.ShapeEnv*c
+should_record_eventsG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *o
+tracked_fakesZ
+Union[builtins.list[Any],None],
+builtins.list[Any]
+Any"builtins.list
+None *
+kwargs
+Any* 
+_init4torch.fx.experimental.symbolic_shapes.ShapeEnv._init*
+self*
+allow_scalar_outputs *$
+allow_dynamic_output_shape_ops *
+assume_static_by_default *
+specialize_zero_one *
+
+duck_shape *
+	co_fields *1
++prefer_deferred_runtime_asserts_over_guards *.
+(_allow_complex_guards_as_runtime_asserts *s
+allow_scalar_outputsCtorch.fx.experimental.symbolic_shapes.ShapeEnv.allow_scalar_outputs*
+self0:property`*á
+allow_dynamic_output_shape_opsMtorch.fx.experimental.symbolic_shapes.ShapeEnv.allow_dynamic_output_shape_ops*
+self0:property`*{
+assume_static_by_defaultGtorch.fx.experimental.symbolic_shapes.ShapeEnv.assume_static_by_default*
+self0:property`*q
+specialize_zero_oneBtorch.fx.experimental.symbolic_shapes.ShapeEnv.specialize_zero_one*
+self0:property`*_
+
+duck_shape9torch.fx.experimental.symbolic_shapes.ShapeEnv.duck_shape*
+self0:property`*°
++prefer_deferred_runtime_asserts_over_guardsZtorch.fx.experimental.symbolic_shapes.ShapeEnv.prefer_deferred_runtime_asserts_over_guards*
+self0:property`*õ
+(_allow_complex_guards_as_runtime_assertsWtorch.fx.experimental.symbolic_shapes.ShapeEnv._allow_complex_guards_as_runtime_asserts*
+self0:property`*¨
+check_equal:torch.fx.experimental.symbolic_shapes.ShapeEnv.check_equal"
+None*j
+self`
+.torch.fx.experimental.symbolic_shapes.ShapeEnv".torch.fx.experimental.symbolic_shapes.ShapeEnv*k
+other`
+.torch.fx.experimental.symbolic_shapes.ShapeEnv".torch.fx.experimental.symbolic_shapes.ShapeEnv*©
+_snapshot_tracked_fakesFtorch.fx.experimental.symbolic_shapes.ShapeEnv._snapshot_tracked_fakes"Z
+Union[builtins.list[Any],None],
+builtins.list[Any]
+Any"builtins.list
+None*j
+self`
+.torch.fx.experimental.symbolic_shapes.ShapeEnv".torch.fx.experimental.symbolic_shapes.ShapeEnv*ﬂ
+_last_event_index@torch.fx.experimental.symbolic_shapes.ShapeEnv._last_event_index"
+builtins.int"builtins.int*j
+self`
+.torch.fx.experimental.symbolic_shapes.ShapeEnv".torch.fx.experimental.symbolic_shapes.ShapeEnv*c
+
+_recording9torch.fx.experimental.symbolic_shapes.ShapeEnv._recording*
+self0:contextmanager*˘
+_eliminate_unbackedBtorch.fx.experimental.symbolic_shapes.ShapeEnv._eliminate_unbacked"
+Any*j
+self`
+.torch.fx.experimental.symbolic_shapes.ShapeEnv".torch.fx.experimental.symbolic_shapes.ShapeEnv*
+orig_s
+Any*
+new_s
+Any0*é
+set_unbacked_var_to_valFtorch.fx.experimental.symbolic_shapes.ShapeEnv.set_unbacked_var_to_val"
+None*j
+self`
+.torch.fx.experimental.symbolic_shapes.ShapeEnv".torch.fx.experimental.symbolic_shapes.ShapeEnv*
+k
+Any*#
+v
+builtins.int"builtins.int0*˘
+_rename_unbacked_toBtorch.fx.experimental.symbolic_shapes.ShapeEnv._rename_unbacked_to"
+Any*j
+self`
+.torch.fx.experimental.symbolic_shapes.ShapeEnv".torch.fx.experimental.symbolic_shapes.ShapeEnv*
+orig_s
+Any*
+new_s
+Any0*é
+_constrain_range_for_sizeHtorch.fx.experimental.symbolic_shapes.ShapeEnv._constrain_range_for_size"
+Any*j
+self`
+.torch.fx.experimental.symbolic_shapes.ShapeEnv".torch.fx.experimental.symbolic_shapes.ShapeEnv*
+a
+Any*O
+minD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *O
+maxD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None 0*®
+_constrain_range?torch.fx.experimental.symbolic_shapes.ShapeEnv._constrain_range"
+Any*j
+self`
+.torch.fx.experimental.symbolic_shapes.ShapeEnv".torch.fx.experimental.symbolic_shapes.ShapeEnv*
+a
+Any*%
+min
+builtins.int"builtins.int*%
+max
+builtins.int"builtins.int0*m
+_constrain_unify?torch.fx.experimental.symbolic_shapes.ShapeEnv._constrain_unify*
+self*
+a*
+b0*Å
+"_ignore_fresh_unbacked_symbols_tlsQtorch.fx.experimental.symbolic_shapes.ShapeEnv._ignore_fresh_unbacked_symbols_tls*
+self*á
+$_ignore_fresh_unbacked_symbols_enterStorch.fx.experimental.symbolic_shapes.ShapeEnv._ignore_fresh_unbacked_symbols_enter*
+self0*Ö
+#_ignore_fresh_unbacked_symbols_exitRtorch.fx.experimental.symbolic_shapes.ShapeEnv._ignore_fresh_unbacked_symbols_exit*
+self0*â
+ignore_fresh_unbacked_symbolsLtorch.fx.experimental.symbolic_shapes.ShapeEnv.ignore_fresh_unbacked_symbols*
+self0:contextmanager*K
+freeze5torch.fx.experimental.symbolic_shapes.ShapeEnv.freeze*
+self0*k
+freeze_runtime_assertsEtorch.fx.experimental.symbolic_shapes.ShapeEnv.freeze_runtime_asserts*
+self0*≥
+_create_symbol_for_sourceHtorch.fx.experimental.symbolic_shapes.ShapeEnv._create_symbol_for_source"&
+Union[Any,None]
+Any
+None*j
+self`
+.torch.fx.experimental.symbolic_shapes.ShapeEnv".torch.fx.experimental.symbolic_shapes.ShapeEnv*8
+source,
+torch._guards.Source"torch._guards.Source*˙
+
+_add_z3var9torch.fx.experimental.symbolic_shapes.ShapeEnv._add_z3var"
+None*j
+self`
+.torch.fx.experimental.symbolic_shapes.ShapeEnv".torch.fx.experimental.symbolic_shapes.ShapeEnv*
+symbol
+Any*&
+type
+	Type[Any]
+Any"type*‹
+_add_target_expr?torch.fx.experimental.symbolic_shapes.ShapeEnv._add_target_expr"
+None*j
+self`
+.torch.fx.experimental.symbolic_shapes.ShapeEnv".torch.fx.experimental.symbolic_shapes.ShapeEnv*
+expr
+Any*ÿ
+_add_assertion=torch.fx.experimental.symbolic_shapes.ShapeEnv._add_assertion"
+None*j
+self`
+.torch.fx.experimental.symbolic_shapes.ShapeEnv".torch.fx.experimental.symbolic_shapes.ShapeEnv*
+expr
+Any*ﬂ
+_check_translation_validateJtorch.fx.experimental.symbolic_shapes.ShapeEnv._check_translation_validate"
+None*j
+self`
+.torch.fx.experimental.symbolic_shapes.ShapeEnv".torch.fx.experimental.symbolic_shapes.ShapeEnv*í
+_create_fx_call_functionGtorch.fx.experimental.symbolic_shapes.ShapeEnv._create_fx_call_function"Ø
+3Tuple[Union[torch.fx.node.Node,None],builtins.bool]V
+Union[torch.fx.node.Node,None](
+torch.fx.node.Node"torch.fx.node.Node
+None
+builtins.bool"builtins.bool*j
+self`
+.torch.fx.experimental.symbolic_shapes.ShapeEnv".torch.fx.experimental.symbolic_shapes.ShapeEnv*S
+opK
+CallableType[builtins.function]&
+builtins.function"builtins.function*8
+args.
+builtins.tuple[Any]
+Any"builtins.tuple0*Ù
+ _create_fx_placeholder_and_z3varOtorch.fx.experimental.symbolic_shapes.ShapeEnv._create_fx_placeholder_and_z3var"V
+Union[torch.fx.node.Node,None](
+torch.fx.node.Node"torch.fx.node.Node
+None*j
+self`
+.torch.fx.experimental.symbolic_shapes.ShapeEnv".torch.fx.experimental.symbolic_shapes.ShapeEnv*
+symbol
+Any*&
+type
+	Type[Any]
+Any"type*©
+_remove_fx_node>torch.fx.experimental.symbolic_shapes.ShapeEnv._remove_fx_node"
+None*j
+self`
+.torch.fx.experimental.symbolic_shapes.ShapeEnv".torch.fx.experimental.symbolic_shapes.ShapeEnv*`
+nodeV
+Union[torch.fx.node.Node,None](
+torch.fx.node.Node"torch.fx.node.Node
+None*á
+_add_fx_node_metadataDtorch.fx.experimental.symbolic_shapes.ShapeEnv._add_fx_node_metadata"
+None*j
+self`
+.torch.fx.experimental.symbolic_shapes.ShapeEnv".torch.fx.experimental.symbolic_shapes.ShapeEnv*2
+node(
+torch.fx.node.Node"torch.fx.node.Node*e
+_suppress_guards_tlsCtorch.fx.experimental.symbolic_shapes.ShapeEnv._suppress_guards_tls*
+self*k
+_suppress_guards_enterEtorch.fx.experimental.symbolic_shapes.ShapeEnv._suppress_guards_enter*
+self0*i
+_suppress_guards_exitDtorch.fx.experimental.symbolic_shapes.ShapeEnv._suppress_guards_exit*
+self0*m
+suppress_guards>torch.fx.experimental.symbolic_shapes.ShapeEnv.suppress_guards*
+self0:contextmanager*M
+_get_key7torch.fx.experimental.symbolic_shapes.ShapeEnv._get_key*
+self*k
+_update_version_counterFtorch.fx.experimental.symbolic_shapes.ShapeEnv._update_version_counter*
+self*è
+_produce_dyn_sizesAtorch.fx.experimental.symbolic_shapes.ShapeEnv._produce_dyn_sizes",
+builtins.list[Any]
+Any"builtins.list*j
+self`
+.torch.fx.experimental.symbolic_shapes.ShapeEnv".torch.fx.experimental.symbolic_shapes.ShapeEnv*[
+ex_sizeN
+typing.Sequence[builtins.int]
+builtins.int"builtins.int"typing.Sequence*8
+source,
+torch._guards.Source"torch._guards.Source*Ñ
+symbolic_contextn
+5torch.fx.experimental.symbolic_shapes.SymbolicContext"5torch.fx.experimental.symbolic_shapes.SymbolicContext*ò
+!_produce_dyn_sizes_from_int_tuplePtorch.fx.experimental.symbolic_shapes.ShapeEnv._produce_dyn_sizes_from_int_tuple",
+builtins.list[Any]
+Any"builtins.list*j
+self`
+.torch.fx.experimental.symbolic_shapes.ShapeEnv".torch.fx.experimental.symbolic_shapes.ShapeEnv*F
+tensor_size5
+Tuple[builtins.int]
+builtins.int"builtins.int*8
+source,
+torch._guards.Source"torch._guards.Source*Ñ
+symbolic_contextn
+5torch.fx.experimental.symbolic_shapes.SymbolicContext"5torch.fx.experimental.symbolic_shapes.SymbolicContext*À
+,create_symbolic_sizes_strides_storage_offset[torch.fx.experimental.symbolic_shapes.ShapeEnv.create_symbolic_sizes_strides_storage_offset"
+Any*j
+self`
+.torch.fx.experimental.symbolic_shapes.ShapeEnv".torch.fx.experimental.symbolic_shapes.ShapeEnv*4
+ex,
+torch._tensor.Tensor"torch._tensor.Tensor*8
+source,
+torch._guards.Source"torch._guards.Source*ÿ
+symbolic_contextø
+AUnion[torch.fx.experimental.symbolic_shapes.SymbolicContext,None]n
+5torch.fx.experimental.symbolic_shapes.SymbolicContext"5torch.fx.experimental.symbolic_shapes.SymbolicContext
+None *õ
+#_maybe_specialize_sym_int_with_hintRtorch.fx.experimental.symbolic_shapes.ShapeEnv._maybe_specialize_sym_int_with_hint"
+builtins.int"builtins.int*j
+self`
+.torch.fx.experimental.symbolic_shapes.ShapeEnv".torch.fx.experimental.symbolic_shapes.ShapeEnv*
+	maybe_sym
+Any*Ò
+-_create_symbolic_sizes_strides_storage_offset\torch.fx.experimental.symbolic_shapes.ShapeEnv._create_symbolic_sizes_strides_storage_offset"
+Any*j
+self`
+.torch.fx.experimental.symbolic_shapes.ShapeEnv".torch.fx.experimental.symbolic_shapes.ShapeEnv*[
+ex_sizeN
+typing.Sequence[builtins.int]
+builtins.int"builtins.int"typing.Sequence*]
+	ex_strideN
+typing.Sequence[builtins.int]
+builtins.int"builtins.int"typing.Sequence*3
+ex_storage_offset
+builtins.int"builtins.int*e
+is_dim_dynamicQ
+typing.Sequence[builtins.bool]
+builtins.bool"builtins.bool"typing.Sequence*8
+source,
+torch._guards.Source"torch._guards.Source*ÿ
+symbolic_contextø
+AUnion[torch.fx.experimental.symbolic_shapes.SymbolicContext,None]n
+5torch.fx.experimental.symbolic_shapes.SymbolicContext"5torch.fx.experimental.symbolic_shapes.SymbolicContext
+None 0*ö
+create_symintnode@torch.fx.experimental.symbolic_shapes.ShapeEnv.create_symintnode"
+Any*j
+self`
+.torch.fx.experimental.symbolic_shapes.ShapeEnv".torch.fx.experimental.symbolic_shapes.ShapeEnv*
+sym
+Any*N
+hintD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None*j
+source\
+ Union[torch._guards.Source,None],
+torch._guards.Source"torch._guards.Source
+None 0*û
+create_symfloatnodeBtorch.fx.experimental.symbolic_shapes.ShapeEnv.create_symfloatnode"
+Any*j
+self`
+.torch.fx.experimental.symbolic_shapes.ShapeEnv".torch.fx.experimental.symbolic_shapes.ShapeEnv*
+sym
+Any*N
+hintD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None*j
+source\
+ Union[torch._guards.Source,None],
+torch._guards.Source"torch._guards.Source
+None 0*Ø
+$create_unspecified_symint_and_symbolStorch.fx.experimental.symbolic_shapes.ShapeEnv.create_unspecified_symint_and_symbol*
+self*	
+value*
+
+source*
+dynamic_dim0*ﬁ
+create_symboolnodeAtorch.fx.experimental.symbolic_shapes.ShapeEnv.create_symboolnode"
+Any*j
+self`
+.torch.fx.experimental.symbolic_shapes.ShapeEnv".torch.fx.experimental.symbolic_shapes.ShapeEnv*
+sym
+Any*è
+_log_create_unbacked_symbolJtorch.fx.experimental.symbolic_shapes.ShapeEnv._log_create_unbacked_symbol"
+Any*j
+self`
+.torch.fx.experimental.symbolic_shapes.ShapeEnv".torch.fx.experimental.symbolic_shapes.ShapeEnv*(
+prefix
+builtins.str"builtins.str*
+symbol
+Any*p
+vrh
+0torch.utils._sympy.value_ranges.ValueRanges[Any]
+Any"+torch.utils._sympy.value_ranges.ValueRanges*o
+create_unbacked_symfloatGtorch.fx.experimental.symbolic_shapes.ShapeEnv.create_unbacked_symfloat*
+self0*k
+create_unbacked_symintEtorch.fx.experimental.symbolic_shapes.ShapeEnv.create_unbacked_symint*
+self0*¯
+is_unbacked_symintAtorch.fx.experimental.symbolic_shapes.ShapeEnv.is_unbacked_symint"
+builtins.bool"builtins.bool*j
+self`
+.torch.fx.experimental.symbolic_shapes.ShapeEnv".torch.fx.experimental.symbolic_shapes.ShapeEnv*
+symbol
+Any*m
+create_unbacked_symboolFtorch.fx.experimental.symbolic_shapes.ShapeEnv.create_unbacked_symbool*
+self0*Ÿ	
+create_unspecified_symbolHtorch.fx.experimental.symbolic_shapes.ShapeEnv.create_unspecified_symbol"
+Any*j
+self`
+.torch.fx.experimental.symbolic_shapes.ShapeEnv".torch.fx.experimental.symbolic_shapes.ShapeEnv*Ã
+val¬
+>Union[builtins.int,torch.SymInt,builtins.float,torch.SymFloat]
+builtins.int"builtins.int
+torch.SymInt"torch.SymInt 
+builtins.float"builtins.float 
+torch.SymFloat"torch.SymFloat*8
+source,
+torch._guards.Source"torch._guards.Source*w
+dynamic_dimd
+0torch.fx.experimental.symbolic_shapes.DimDynamic"0torch.fx.experimental.symbolic_shapes.DimDynamic *¯
+constraint_dim·
+ëTypeAlias[Union[torch.fx.experimental.symbolic_shapes.StrictMinMaxConstraint,torch.fx.experimental.symbolic_shapes.RelaxedUnspecConstraint,None]]ì
+ÜUnion[torch.fx.experimental.symbolic_shapes.StrictMinMaxConstraint,torch.fx.experimental.symbolic_shapes.RelaxedUnspecConstraint,None]|
+<torch.fx.experimental.symbolic_shapes.StrictMinMaxConstraint"<torch.fx.experimental.symbolic_shapes.StrictMinMaxConstraint~
+=torch.fx.experimental.symbolic_shapes.RelaxedUnspecConstraint"=torch.fx.experimental.symbolic_shapes.RelaxedUnspecConstraint
+None"3torch.fx.experimental.symbolic_shapes.DimConstraint 0*’	
+create_symbol<torch.fx.experimental.symbolic_shapes.ShapeEnv.create_symbol"
+Any*j
+self`
+.torch.fx.experimental.symbolic_shapes.ShapeEnv".torch.fx.experimental.symbolic_shapes.ShapeEnv*%
+val
+builtins.int"builtins.int*8
+source,
+torch._guards.Source"torch._guards.Source*w
+dynamic_dimd
+0torch.fx.experimental.symbolic_shapes.DimDynamic"0torch.fx.experimental.symbolic_shapes.DimDynamic *¯
+constraint_dim·
+ëTypeAlias[Union[torch.fx.experimental.symbolic_shapes.StrictMinMaxConstraint,torch.fx.experimental.symbolic_shapes.RelaxedUnspecConstraint,None]]ì
+ÜUnion[torch.fx.experimental.symbolic_shapes.StrictMinMaxConstraint,torch.fx.experimental.symbolic_shapes.RelaxedUnspecConstraint,None]|
+<torch.fx.experimental.symbolic_shapes.StrictMinMaxConstraint"<torch.fx.experimental.symbolic_shapes.StrictMinMaxConstraint~
+=torch.fx.experimental.symbolic_shapes.RelaxedUnspecConstraint"=torch.fx.experimental.symbolic_shapes.RelaxedUnspecConstraint
+None"3torch.fx.experimental.symbolic_shapes.DimConstraint *W
+positiveG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *@
+do_not_specialize_zero_one
+builtins.bool"builtins.bool *
+symbolic_context
+Any 0*˛
+add_var_to_val=torch.fx.experimental.symbolic_shapes.ShapeEnv.add_var_to_val"
+Any*j
+self`
+.torch.fx.experimental.symbolic_shapes.ShapeEnv".torch.fx.experimental.symbolic_shapes.ShapeEnv*
+expr
+Any*%
+val
+builtins.int"builtins.int*_
+_debug_name:torch.fx.experimental.symbolic_shapes.ShapeEnv._debug_name*
+self*
+
+source*ú
+&_render_range_for_constraint_violationUtorch.fx.experimental.symbolic_shapes.ShapeEnv._render_range_for_constraint_violation*
+self*
+
+source*
+c* 
+
+produce_guards=torch.fx.experimental.symbolic_shapes.ShapeEnv.produce_guards"J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*j
+self`
+.torch.fx.experimental.symbolic_shapes.ShapeEnv".torch.fx.experimental.symbolic_shapes.ShapeEnv*
+placeholders
+Any*
+sources
+Any*
+
+source_ref
+Any *Â
+guards÷
+Mbuiltins.list[TypeAlias[Tuple[Any,torch.utils._traceback.CapturedTraceback]]]ı
+>TypeAlias[Tuple[Any,torch.utils._traceback.CapturedTraceback]]ñ
+3Tuple[Any,torch.utils._traceback.CapturedTraceback]
+AnyT
+(torch.utils._traceback.CapturedTraceback"(torch.utils._traceback.CapturedTraceback"torch._guards.ShapeGuard"builtins.list *Ω
+input_contexts¶
+PUnion[builtins.list[torch.fx.experimental.symbolic_shapes.SymbolicContext],None]≈
+Dbuiltins.list[torch.fx.experimental.symbolic_shapes.SymbolicContext]n
+5torch.fx.experimental.symbolic_shapes.SymbolicContext"5torch.fx.experimental.symbolic_shapes.SymbolicContext"builtins.list
+None *‚
+equalities_inputs»
+DUnion[torch.fx.experimental.symbolic_shapes.EqualityConstraint,None]t
+8torch.fx.experimental.symbolic_shapes.EqualityConstraint"8torch.fx.experimental.symbolic_shapes.EqualityConstraint
+None *
+_simplified
+Any *.
+_disable_forced_specializations
+Any *
+ignore_static
+Any *Â
+produce_guards_expressionHtorch.fx.experimental.symbolic_shapes.ShapeEnv.produce_guards_expression"
+Any*j
+self`
+.torch.fx.experimental.symbolic_shapes.ShapeEnv".torch.fx.experimental.symbolic_shapes.ShapeEnv*
+placeholders
+Any*œ
+guards¿
+YUnion[builtins.list[TypeAlias[Tuple[Any,torch.utils._traceback.CapturedTraceback]]],None]÷
+Mbuiltins.list[TypeAlias[Tuple[Any,torch.utils._traceback.CapturedTraceback]]]ı
+>TypeAlias[Tuple[Any,torch.utils._traceback.CapturedTraceback]]ñ
+3Tuple[Any,torch.utils._traceback.CapturedTraceback]
+AnyT
+(torch.utils._traceback.CapturedTraceback"(torch.utils._traceback.CapturedTraceback"torch._guards.ShapeGuard"builtins.list
+None *
+ignore_static
+Any *Ö
+evaluate_guards_expressionItorch.fx.experimental.symbolic_shapes.ShapeEnv.evaluate_guards_expression*
+self*
+code*
+args*û
+evaluate_guards_for_argsGtorch.fx.experimental.symbolic_shapes.ShapeEnv.evaluate_guards_for_args*
+self*
+placeholders*
+args*
+ignore_static *l
+get_pruned_guards@torch.fx.experimental.symbolic_shapes.ShapeEnv.get_pruned_guards*
+self*
+symints*q
+bind_symbols;torch.fx.experimental.symbolic_shapes.ShapeEnv.bind_symbols*
+self*
+placeholders*
+args*g
+get_nontrivial_guardsDtorch.fx.experimental.symbolic_shapes.ShapeEnv.get_nontrivial_guards*
+self*f
+format_guards<torch.fx.experimental.symbolic_shapes.ShapeEnv.format_guards*
+self*
+verbose *Ë
+bound_sympy:torch.fx.experimental.symbolic_shapes.ShapeEnv.bound_sympy"h
+0torch.utils._sympy.value_ranges.ValueRanges[Any]
+Any"+torch.utils._sympy.value_ranges.ValueRanges*j
+self`
+.torch.fx.experimental.symbolic_shapes.ShapeEnv".torch.fx.experimental.symbolic_shapes.ShapeEnv*
+expr
+Any*4
+size_oblivious
+builtins.bool"builtins.bool *®
+
+get_axioms9torch.fx.experimental.symbolic_shapes.ShapeEnv.get_axioms"
+
+Tuple[Any]
+Any*j
+self`
+.torch.fx.experimental.symbolic_shapes.ShapeEnv".torch.fx.experimental.symbolic_shapes.ShapeEnv*L
+symbols=
+Union[Tuple[Any],None]
+
+Tuple[Any]
+Any
+None 0:
+_lru_cache*–
+get_implications?torch.fx.experimental.symbolic_shapes.ShapeEnv.get_implications"?
+Tuple[Tuple[Any,Any]]$
+Tuple[Any,Any]
+Any
+Any*j
+self`
+.torch.fx.experimental.symbolic_shapes.ShapeEnv".torch.fx.experimental.symbolic_shapes.ShapeEnv*
+e
+Any*0
+compute_hint
+builtins.bool"builtins.bool0:
+_lru_cache*í
+_maybe_evaluate_staticEtorch.fx.experimental.symbolic_shapes.ShapeEnv._maybe_evaluate_static"&
+Union[Any,None]
+Any
+None*j
+self`
+.torch.fx.experimental.symbolic_shapes.ShapeEnv".torch.fx.experimental.symbolic_shapes.ShapeEnv*
+expr
+Any*3
+unbacked_only
+builtins.bool"builtins.bool *2
+compute_hint
+builtins.bool"builtins.bool *
+expect_rational
+Any *4
+size_oblivious
+builtins.bool"builtins.bool *K
+axioms=
+Union[Tuple[Any],None]
+
+Tuple[Any]
+Any
+None *Ô
+var_to_range⁄
+NUnion[Tuple[Tuple[Any,torch.utils._sympy.value_ranges.ValueRanges[Any]]],None]˚
+BTuple[Tuple[Any,torch.utils._sympy.value_ranges.ValueRanges[Any]]]≤
+;Tuple[Any,torch.utils._sympy.value_ranges.ValueRanges[Any]]
+Anyh
+0torch.utils._sympy.value_ranges.ValueRanges[Any]
+Any"+torch.utils._sympy.value_ranges.ValueRanges
+None 0:
+_lru_cache*◊
+replace6torch.fx.experimental.symbolic_shapes.ShapeEnv.replace"
+Any*j
+self`
+.torch.fx.experimental.symbolic_shapes.ShapeEnv".torch.fx.experimental.symbolic_shapes.ShapeEnv*
+expr
+Any0:
+_lru_cache*m
+_update_divisible@torch.fx.experimental.symbolic_shapes.ShapeEnv._update_divisible*
+self0:
+_lru_cache*Ÿ
+simplify7torch.fx.experimental.symbolic_shapes.ShapeEnv.simplify"
+Any*j
+self`
+.torch.fx.experimental.symbolic_shapes.ShapeEnv".torch.fx.experimental.symbolic_shapes.ShapeEnv*
+expr
+Any0:
+_lru_cache*Í
+	size_hint8torch.fx.experimental.symbolic_shapes.ShapeEnv.size_hint"
+Any*j
+self`
+.torch.fx.experimental.symbolic_shapes.ShapeEnv".torch.fx.experimental.symbolic_shapes.ShapeEnv*
+expr
+Any*
+
+allow_none
+Any 0*Õ
+has_hint7torch.fx.experimental.symbolic_shapes.ShapeEnv.has_hint"
+Any*j
+self`
+.torch.fx.experimental.symbolic_shapes.ShapeEnv".torch.fx.experimental.symbolic_shapes.ShapeEnv*
+expr
+Any0*Ò
+_make_data_dependent_errorItorch.fx.experimental.symbolic_shapes.ShapeEnv._make_data_dependent_error"
+Any*j
+self`
+.torch.fx.experimental.symbolic_shapes.ShapeEnv".torch.fx.experimental.symbolic_shapes.ShapeEnv*
+expr
+Any*
+unhinted_expr
+Any*d
+size_oblivious_resultG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *y
+_update_var_to_rangeCtorch.fx.experimental.symbolic_shapes.ShapeEnv._update_var_to_range*
+self*
+
+symbol*
+vr*í
+_set_replacement?torch.fx.experimental.symbolic_shapes.ShapeEnv._set_replacement"
+None*j
+self`
+.torch.fx.experimental.symbolic_shapes.ShapeEnv".torch.fx.experimental.symbolic_shapes.ShapeEnv*
+a
+Any*
+tgt
+Any*%
+msg
+builtins.str"builtins.str*◊
+_add_divisible=torch.fx.experimental.symbolic_shapes.ShapeEnv._add_divisible"
+Any*j
+self`
+.torch.fx.experimental.symbolic_shapes.ShapeEnv".torch.fx.experimental.symbolic_shapes.ShapeEnv*
+expr
+Any*–
+_find4torch.fx.experimental.symbolic_shapes.ShapeEnv._find"
+Any*j
+self`
+.torch.fx.experimental.symbolic_shapes.ShapeEnv".torch.fx.experimental.symbolic_shapes.ShapeEnv*
+a
+Any0:
+_lru_cache*ﬁ
+_maybe_guard_rel?torch.fx.experimental.symbolic_shapes.ShapeEnv._maybe_guard_rel"
+None*j
+self`
+.torch.fx.experimental.symbolic_shapes.ShapeEnv".torch.fx.experimental.symbolic_shapes.ShapeEnv*
+expr
+Any0*±
+_default_value_rangeCtorch.fx.experimental.symbolic_shapes.ShapeEnv._default_value_range"h
+0torch.utils._sympy.value_ranges.ValueRanges[Any]
+Any"+torch.utils._sympy.value_ranges.ValueRanges*j
+self`
+.torch.fx.experimental.symbolic_shapes.ShapeEnv".torch.fx.experimental.symbolic_shapes.ShapeEnv*…
+ _default_unspecified_value_rangeOtorch.fx.experimental.symbolic_shapes.ShapeEnv._default_unspecified_value_range"h
+0torch.utils._sympy.value_ranges.ValueRanges[Any]
+Any"+torch.utils._sympy.value_ranges.ValueRanges*j
+self`
+.torch.fx.experimental.symbolic_shapes.ShapeEnv".torch.fx.experimental.symbolic_shapes.ShapeEnv*{
+_simplify_floor_divBtorch.fx.experimental.symbolic_shapes.ShapeEnv._simplify_floor_div*
+self*
+expr0:
+_lru_cache*s
+_check_frozen<torch.fx.experimental.symbolic_shapes.ShapeEnv._check_frozen*
+self*
+expr*
+concrete_val*¸
+_get_stack_summaryAtorch.fx.experimental.symbolic_shapes.ShapeEnv._get_stack_summary"
+Any*j
+self`
+.torch.fx.experimental.symbolic_shapes.ShapeEnv".torch.fx.experimental.symbolic_shapes.ShapeEnv*.
+is_debug
+builtins.bool"builtins.bool *®
+
+_log_guard9torch.fx.experimental.symbolic_shapes.ShapeEnv._log_guard"
+Any*j
+self`
+.torch.fx.experimental.symbolic_shapes.ShapeEnv".torch.fx.experimental.symbolic_shapes.ShapeEnv*(
+prefix
+builtins.str"builtins.str*
+g
+Any*0
+forcing_spec
+builtins.bool"builtins.bool*ì
+evaluate_expr<torch.fx.experimental.symbolic_shapes.ShapeEnv.evaluate_expr"
+Any*j
+self`
+.torch.fx.experimental.symbolic_shapes.ShapeEnv".torch.fx.experimental.symbolic_shapes.ShapeEnv*
+	orig_expr
+Any*
+hint
+Any *
+fx_node
+Any *
+expect_rational
+Any *4
+size_oblivious
+builtins.bool"builtins.bool *2
+forcing_spec
+builtins.bool"builtins.bool 0*K
+cleanup6torch.fx.experimental.symbolic_shapes.ShapeEnv.cleanup*
+self*î
+defer_runtime_assertCtorch.fx.experimental.symbolic_shapes.ShapeEnv.defer_runtime_assert"
+Any*j
+self`
+.torch.fx.experimental.symbolic_shapes.ShapeEnv".torch.fx.experimental.symbolic_shapes.ShapeEnv*
+	orig_expr
+Any*
+msg
+Any*
+fx_node
+Any 0*ÿ
+_refine_ranges=torch.fx.experimental.symbolic_shapes.ShapeEnv._refine_ranges"
+None*j
+self`
+.torch.fx.experimental.symbolic_shapes.ShapeEnv".torch.fx.experimental.symbolic_shapes.ShapeEnv*
+expr
+Any*∆
+constrain_symbol_rangeEtorch.fx.experimental.symbolic_shapes.ShapeEnv.constrain_symbol_range"
+Any*j
+self`
+.torch.fx.experimental.symbolic_shapes.ShapeEnv".torch.fx.experimental.symbolic_shapes.ShapeEnv*
+s
+Any*.
+compiler_min
+builtins.int"builtins.int*.
+compiler_max
+builtins.int"builtins.int0rë
+_translation_validation_enabledNtorch.fx.experimental.symbolic_shapes.ShapeEnv._translation_validation_enabled
+builtins.bool"builtins.boolr{
+should_record_eventsCtorch.fx.experimental.symbolic_shapes.ShapeEnv.should_record_events
+builtins.bool"builtins.boolr}
+check_recorded_eventsDtorch.fx.experimental.symbolic_shapes.ShapeEnv.check_recorded_events
+builtins.bool"builtins.boolrk
+is_recording;torch.fx.experimental.symbolic_shapes.ShapeEnv.is_recording
+builtins.bool"builtins.boolr©
+tracked_fakes<torch.fx.experimental.symbolic_shapes.ShapeEnv.tracked_fakesZ
+Union[builtins.list[Any],None],
+builtins.list[Any]
+Any"builtins.list
+NonerÔ
+events5torch.fx.experimental.symbolic_shapes.ShapeEnv.events≠
+<builtins.list[torch.fx.experimental.recording.ShapeEnvEvent]^
+-torch.fx.experimental.recording.ShapeEnvEvent"-torch.fx.experimental.recording.ShapeEnvEvent"builtins.listrL
+settings7torch.fx.experimental.symbolic_shapes.ShapeEnv.settings
+Anyrò
+guards5torch.fx.experimental.symbolic_shapes.ShapeEnv.guards÷
+Mbuiltins.list[TypeAlias[Tuple[Any,torch.utils._traceback.CapturedTraceback]]]ı
+>TypeAlias[Tuple[Any,torch.utils._traceback.CapturedTraceback]]ñ
+3Tuple[Any,torch.utils._traceback.CapturedTraceback]
+AnyT
+(torch.utils._traceback.CapturedTraceback"(torch.utils._traceback.CapturedTraceback"torch._guards.ShapeGuard"builtins.listrÇ
+
+var_to_val9torch.fx.experimental.symbolic_shapes.ShapeEnv.var_to_val9
+builtins.dict[Any,Any]
+Any
+Any"builtins.dictrî
+unbacked_var_to_valBtorch.fx.experimental.symbolic_shapes.ShapeEnv.unbacked_var_to_val9
+builtins.dict[Any,Any]
+Any
+Any"builtins.dictrï
+var_to_range;torch.fx.experimental.symbolic_shapes.ShapeEnv.var_to_range«
+Cbuiltins.dict[Any,torch.utils._sympy.value_ranges.ValueRanges[Any]]
+Anyh
+0torch.utils._sympy.value_ranges.ValueRanges[Any]
+Any"+torch.utils._sympy.value_ranges.ValueRanges"builtins.dictr‹
+source_name_to_debug_nameHtorch.fx.experimental.symbolic_shapes.ShapeEnv.source_name_to_debug_nameu
+(builtins.dict[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.dictrÜ
+var_to_sources=torch.fx.experimental.symbolic_shapes.ShapeEnv.var_to_sources¥
+6builtins.dict[Any,builtins.list[torch._guards.Source]]
+Anyb
+#builtins.list[torch._guards.Source],
+torch._guards.Source"torch._guards.Source"builtins.list"builtins.dictr˘
+var_to_stack;torch.fx.experimental.symbolic_shapes.ShapeEnv.var_to_stack´
+;builtins.dict[Any,torch.utils._traceback.CapturedTraceback]
+AnyT
+(torch.utils._traceback.CapturedTraceback"(torch.utils._traceback.CapturedTraceback"builtins.dictrÜ
+replacements;torch.fx.experimental.symbolic_shapes.ShapeEnv.replacements9
+builtins.dict[Any,Any]
+Any
+Any"builtins.dictrí
+unbacked_renamingsAtorch.fx.experimental.symbolic_shapes.ShapeEnv.unbacked_renamings9
+builtins.dict[Any,Any]
+Any
+Any"builtins.dictrq
+	divisible8torch.fx.experimental.symbolic_shapes.ShapeEnv.divisible*
+builtins.set[Any]
+Any"builtins.setrq
+	size_like8torch.fx.experimental.symbolic_shapes.ShapeEnv.size_like*
+builtins.set[Any]
+Any"builtins.setr†
+
+val_to_var9torch.fx.experimental.symbolic_shapes.ShapeEnv.val_to_varW
+builtins.dict[builtins.int,Any]
+builtins.int"builtins.int
+Any"builtins.dictrn
+unbacked_symfloat_counterHtorch.fx.experimental.symbolic_shapes.ShapeEnv.unbacked_symfloat_counter
+Anyrj
+unbacked_symint_counterFtorch.fx.experimental.symbolic_shapes.ShapeEnv.unbacked_symint_counter
+Anyró
+deferred_runtime_assertsGtorch.fx.experimental.symbolic_shapes.ShapeEnv.deferred_runtime_asserts±
+Ubuiltins.dict[Any,builtins.list[torch.fx.experimental.symbolic_shapes.RuntimeAssert]]
+Anyø
+Bbuiltins.list[torch.fx.experimental.symbolic_shapes.RuntimeAssert]j
+3torch.fx.experimental.symbolic_shapes.RuntimeAssert"3torch.fx.experimental.symbolic_shapes.RuntimeAssert"builtins.list"builtins.dictrt
+num_deferred_runtime_assertsKtorch.fx.experimental.symbolic_shapes.ShapeEnv.num_deferred_runtime_asserts
+AnyrB
+log2torch.fx.experimental.symbolic_shapes.ShapeEnv.log
+AnyrH
+frozen5torch.fx.experimental.symbolic_shapes.ShapeEnv.frozen
+Anyrh
+runtime_asserts_frozenEtorch.fx.experimental.symbolic_shapes.ShapeEnv.runtime_asserts_frozen
+Anyrê
+dim_constraints>torch.fx.experimental.symbolic_shapes.ShapeEnv.dim_constraintsº
+@Union[torch.fx.experimental.symbolic_shapes.DimConstraints,None]l
+4torch.fx.experimental.symbolic_shapes.DimConstraints"4torch.fx.experimental.symbolic_shapes.DimConstraints
+NonerJ
+counter6torch.fx.experimental.symbolic_shapes.ShapeEnv.counter
+Anyrd
+symbol_guard_counterCtorch.fx.experimental.symbolic_shapes.ShapeEnv.symbol_guard_counter
+AnyrN
+	co_fields8torch.fx.experimental.symbolic_shapes.ShapeEnv.co_fields
+Anyrù
+pending_fresh_unbacked_symbolsMtorch.fx.experimental.symbolic_shapes.ShapeEnv.pending_fresh_unbacked_symbols,
+builtins.list[Any]
+Any"builtins.listrZ
+_prev_cache_key>torch.fx.experimental.symbolic_shapes.ShapeEnv._prev_cache_key
+Anyr\
+_version_counter?torch.fx.experimental.symbolic_shapes.ShapeEnv._version_counter
+Anyr•
+fx_node_cache<torch.fx.experimental.symbolic_shapes.ShapeEnv.fx_node_cache’
+\builtins.dict[Tuple[CallableType[builtins.function],builtins.tuple[Any]],torch.fx.node.Node]ª
+:Tuple[CallableType[builtins.function],builtins.tuple[Any]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function.
+builtins.tuple[Any]
+Any"builtins.tuple(
+torch.fx.node.Node"torch.fx.node.Node"builtins.dictr¨
+source_to_symbol?torch.fx.experimental.symbolic_shapes.ShapeEnv.source_to_symbolW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dictr¥
+unbacked_alloc_orderCtorch.fx.experimental.symbolic_shapes.ShapeEnv.unbacked_alloc_orderW
+builtins.dict[Any,builtins.int]
+Any
+builtins.int"builtins.int"builtins.dictrN
+	validator8torch.fx.experimental.symbolic_shapes.ShapeEnv.validator
+AnyrF
+graph4torch.fx.experimental.symbolic_shapes.ShapeEnv.graph
+Anyr’
+name_to_node;torch.fx.experimental.symbolic_shapes.ShapeEnv.name_to_nodeá
+.builtins.dict[builtins.str,torch.fx.node.Node]
+builtins.str"builtins.str(
+torch.fx.node.Node"torch.fx.node.Node"builtins.dictö
+PropagateUnbackedSymInts>torch.fx.experimental.symbolic_shapes.PropagateUnbackedSymInts" torch.fx.interpreter.Interpreter*õ
+run_nodeGtorch.fx.experimental.symbolic_shapes.PropagateUnbackedSymInts.run_node"
+Any*ã
+selfÄ
+>torch.fx.experimental.symbolic_shapes.PropagateUnbackedSymInts">torch.fx.experimental.symbolic_shapes.PropagateUnbackedSymInts*/
+n(
+torch.fx.node.Node"torch.fx.node.Nodeƒ
+*<subclass of "SymbolicContext" and "list">Ptorch.fx.experimental.symbolic_shapes.<subclass of "SymbolicContext" and "list">"5torch.fx.experimental.symbolic_shapes.SymbolicContext"builtins.list∆
++<subclass of "SymbolicContext" and "list">1Qtorch.fx.experimental.symbolic_shapes.<subclass of "SymbolicContext" and "list">1"5torch.fx.experimental.symbolic_shapes.SymbolicContext"builtins.list_
+log_lru_cache_stats9torch.fx.experimental.symbolic_shapes.log_lru_cache_stats*
+	wrapped_fI
+	lru_cache/torch.fx.experimental.symbolic_shapes.lru_cache*
+maxsizeë
+has_symbolic_sizes_strides@torch.fx.experimental.symbolic_shapes.has_symbolic_sizes_strides"
+builtins.bool"builtins.bool*
+elem
+Anyˆ
+create_contiguous7torch.fx.experimental.symbolic_shapes.create_contiguous"ä
+:builtins.list[TypeAlias[Union[torch.SymInt,builtins.int]]]º
++TypeAlias[Union[torch.SymInt,builtins.int]]`
+ Union[torch.SymInt,builtins.int]
+torch.SymInt"torch.SymInt
+builtins.int"builtins.int")torch.fx.experimental.symbolic_shapes.Int"builtins.list*ö
+shapeé
+<typing.Sequence[TypeAlias[Union[torch.SymInt,builtins.int]]]º
++TypeAlias[Union[torch.SymInt,builtins.int]]`
+ Union[torch.SymInt,builtins.int]
+torch.SymInt"torch.SymInt
+builtins.int"builtins.int")torch.fx.experimental.symbolic_shapes.Int"typing.Sequenceó
+hint_int.torch.fx.experimental.symbolic_shapes.hint_int"
+builtins.int"builtins.int*g
+a`
+ Union[torch.SymInt,builtins.int]
+torch.SymInt"torch.SymInt
+builtins.int"builtins.int*T
+fallbackD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None ù
+has_hint.torch.fx.experimental.symbolic_shapes.has_hint"
+builtins.bool"builtins.bool*¿
+a∏
+eTypeAlias[Union[torch.SymInt,torch.SymFloat,torch.SymBool,builtins.int,builtins.float,builtins.bool]]û
+ZUnion[torch.SymInt,torch.SymFloat,torch.SymBool,builtins.int,builtins.float,builtins.bool]
+torch.SymInt"torch.SymInt 
+torch.SymFloat"torch.SymFloat
+torch.SymBool"torch.SymBool
+builtins.int"builtins.int 
+builtins.float"builtins.float
+builtins.bool"builtins.bool",torch.fx.experimental.symbolic_shapes.Scalar—
+is_concrete_int5torch.fx.experimental.symbolic_shapes.is_concrete_int"
+builtins.bool"builtins.bool*g
+a`
+ Union[builtins.int,torch.SymInt]
+builtins.int"builtins.int
+torch.SymInt"torch.SymInt‰
+guard_size_oblivious:torch.fx.experimental.symbolic_shapes.guard_size_oblivious"
+builtins.bool"builtins.bool*p
+exprf
+"Union[torch.SymBool,builtins.bool]
+torch.SymBool"torch.SymBool
+builtins.bool"builtins.boolx
+check_consistent6torch.fx.experimental.symbolic_shapes.check_consistent"
+None*
+new
+Any*
+old
+Anyy
+resolve_unbacked_bindings?torch.fx.experimental.symbolic_shapes.resolve_unbacked_bindings*
+	shape_env*
+bindingsØ
+rebind_unbacked5torch.fx.experimental.symbolic_shapes.rebind_unbacked"
+Any*
+	shape_env
+Any*/
+n(
+torch.fx.node.Node"torch.fx.node.Node*
+result
+AnyÇ
+canonicalize_bool_expr<torch.fx.experimental.symbolic_shapes.canonicalize_bool_expr"O
+TypeAlias[Any]
+Any"2torch.fx.experimental.symbolic_shapes.SympyBoolean*Y
+exprO
+TypeAlias[Any]
+Any"2torch.fx.experimental.symbolic_shapes.SympyBooleané
+_canonicalize_bool_expr_implBtorch.fx.experimental.symbolic_shapes._canonicalize_bool_expr_impl"O
+TypeAlias[Any]
+Any"2torch.fx.experimental.symbolic_shapes.SympyBoolean*Y
+exprO
+TypeAlias[Any]
+Any"2torch.fx.experimental.symbolic_shapes.SympyBooleanŸ
+is_concrete_bool6torch.fx.experimental.symbolic_shapes.is_concrete_bool"
+builtins.bool"builtins.bool*m
+af
+"Union[builtins.bool,torch.SymBool]
+builtins.bool"builtins.bool
+torch.SymBool"torch.SymBoolK
+is_nested_int3torch.fx.experimental.symbolic_shapes.is_nested_int*
+s¸
+_iterate_exprs4torch.fx.experimental.symbolic_shapes._iterate_exprs"0
+typing.Iterable[Any]
+Any"typing.Iterable*Å
+valx
+(Union[torch.SymInt,torch._tensor.Tensor]
+torch.SymInt"torch.SymInt,
+torch._tensor.Tensor"torch._tensor.TensorÄ
+free_symbols2torch.fx.experimental.symbolic_shapes.free_symbols"*
+builtins.set[Any]
+Any"builtins.set*è
+valÖ
+,Union[torch.SymInt,Any,torch._tensor.Tensor]
+torch.SymInt"torch.SymInt
+Any,
+torch._tensor.Tensor"torch._tensor.TensorÓ
+has_free_symbols6torch.fx.experimental.symbolic_shapes.has_free_symbols"
+builtins.bool"builtins.bool*Å
+valx
+(Union[torch.SymInt,torch._tensor.Tensor]
+torch.SymInt"torch.SymInt,
+torch._tensor.Tensor"torch._tensor.Tensor[
+free_unbacked_symbols;torch.fx.experimental.symbolic_shapes.free_unbacked_symbols*
+xó
+is_symbol_binding_fx_node?torch.fx.experimental.symbolic_shapes.is_symbol_binding_fx_node"&
+Union[Any,None]
+Any
+None*
+node
+Anym
+find_symbol_binding_fx_nodesBtorch.fx.experimental.symbolic_shapes.find_symbol_binding_fx_nodes*	
+graph£
+compute_unbacked_bindings?torch.fx.experimental.symbolic_shapes.compute_unbacked_bindings*
+	shape_env*
+example_value*
+old_example_value *
+
+peek O
+definitely_true5torch.fx.experimental.symbolic_shapes.definitely_true*
+aQ
+definitely_false6torch.fx.experimental.symbolic_shapes.definitely_false*
+a„
+statically_known_true;torch.fx.experimental.symbolic_shapes.statically_known_true"
+builtins.bool"builtins.bool*m
+xf
+"Union[builtins.bool,torch.SymBool]
+builtins.bool"builtins.bool
+torch.SymBool"torch.SymBoolJ
+parallel_or1torch.fx.experimental.symbolic_shapes.parallel_or*
+argsL
+parallel_and2torch.fx.experimental.symbolic_shapes.parallel_and*
+argsD
+sym_eq,torch.fx.experimental.symbolic_shapes.sym_eq*
+x*
+yI
+guard_scalar2torch.fx.experimental.symbolic_shapes.guard_scalar*
+aÈ
+_constrain_symbol_range=torch.fx.experimental.symbolic_shapes._constrain_symbol_range"
+Any*
+	shape_env
+Any*
+s
+Any*.
+compiler_min
+builtins.int"builtins.int*.
+compiler_max
+builtins.int"builtins.intO
+_advise_is_size5torch.fx.experimental.symbolic_shapes._advise_is_size*
+aó
+_constrain_range_for_size?torch.fx.experimental.symbolic_shapes._constrain_range_for_size"
+Any*
+a
+Any*O
+minD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *O
+maxD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None Å
+constrain_range5torch.fx.experimental.symbolic_shapes.constrain_range"
+Any*
+a
+Any*M
+minD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None*O
+maxD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None ú
+constrain_unify5torch.fx.experimental.symbolic_shapes.constrain_unify"
+None*#
+a
+torch.SymInt"torch.SymInt*#
+b
+torch.SymInt"torch.SymIntÉ
+expect_true1torch.fx.experimental.symbolic_shapes.expect_true"
+Any*
+a
+Any*(
+skip
+builtins.int"builtins.int E
+
+guard_bool0torch.fx.experimental.symbolic_shapes.guard_bool*
+aC
+	guard_int/torch.fx.experimental.symbolic_shapes.guard_int*
+aG
+guard_float1torch.fx.experimental.symbolic_shapes.guard_float*
+aX
+fx_placeholder_vals9torch.fx.experimental.symbolic_shapes.fx_placeholder_vals*
+gm^
+fx_placeholder_targets<torch.fx.experimental.symbolic_shapes.fx_placeholder_targets*
+gmg
+eval_guards1torch.fx.experimental.symbolic_shapes.eval_guards*
+gm*
+args*
+ignore_static T
+bind_symbols2torch.fx.experimental.symbolic_shapes.bind_symbols*
+gm*
+argsl
+_assert_symbol_context<torch.fx.experimental.symbolic_shapes._assert_symbol_context*
+symbolic_contextf
+_is_supported_equivalence?torch.fx.experimental.symbolic_shapes._is_supported_equivalence*
+exprã
+is_symbolic1torch.fx.experimental.symbolic_shapes.is_symbolic"
+builtins.bool"builtins.bool*®
+valû
+ZUnion[builtins.int,torch.SymInt,builtins.float,torch.SymFloat,builtins.bool,torch.SymBool]
+builtins.int"builtins.int
+torch.SymInt"torch.SymInt 
+builtins.float"builtins.float 
+torch.SymFloat"torch.SymFloat
+builtins.bool"builtins.bool
+torch.SymBool"torch.SymBool4
+error+torch.fx.experimental.symbolic_shapes.errorÑ
+!eval_is_non_overlapping_and_denseGtorch.fx.experimental.symbolic_shapes.eval_is_non_overlapping_and_dense*	
+sizes*
+stridesÜ
+"_eval_is_non_overlapping_and_denseHtorch.fx.experimental.symbolic_shapes._eval_is_non_overlapping_and_dense*	
+sizes*
+stridesë
+'_sympy_cast_symbool_to_symint_guardlessMtorch.fx.experimental.symbolic_shapes._sympy_cast_symbool_to_symint_guardless"
+Any*
+x
+Anyµ
+ cast_symbool_to_symint_guardlessFtorch.fx.experimental.symbolic_shapes.cast_symbool_to_symint_guardless"
+torch.SymInt"torch.SymInt*+
+symbool
+torch.SymBool"torch.SymBoolU
+
+_lru_cache0torch.fx.experimental.symbolic_shapes._lru_cache*
+fn*
+maxsize B
+_is_int-torch.fx.experimental.symbolic_shapes._is_int*
+exprV
+_is_dim_dynamic5torch.fx.experimental.symbolic_shapes._is_dim_dynamic*
+t*
+d*°
+__annotations__5torch.fx.experimental.symbolic_shapes.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*$
+fx_tracebacktorch.fx.traceback *)
+configtorch.fx.experimental._config *
+pytreetorch.utils._pytree *R
+log)torch.fx.experimental.symbolic_shapes.log 
+logging.Logger"logging.Logger*=
+sympy+torch.fx.experimental.symbolic_shapes.sympy
+Any*G
+
+StrPrinter0torch.fx.experimental.symbolic_shapes.StrPrinter
+Any*G
+
+precedence0torch.fx.experimental.symbolic_shapes.precedence
+Any*G
+
+PRECEDENCE0torch.fx.experimental.symbolic_shapes.PRECEDENCE
+Any*;
+aten*torch.fx.experimental.symbolic_shapes.aten
+Any*Ñ
+__all__-torch.fx.experimental.symbolic_shapes.__all__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*l
+SHAPEENV_EVENT_KEY8torch.fx.experimental.symbolic_shapes.SHAPEENV_EVENT_KEY
+builtins.str"builtins.str*h
+CURRENT_NODE_KEY6torch.fx.experimental.symbolic_shapes.CURRENT_NODE_KEY
+builtins.str"builtins.str*Ø
+IndicatorTypes4torch.fx.experimental.symbolic_shapes.IndicatorTypesg
+"Tuple[CallableType[builtins.type]]?
+CallableType[builtins.type]
+builtins.type"builtins.type*…
+SYMPY_INTERP2torch.fx.experimental.symbolic_shapes.SYMPY_INTERPÑ
+-builtins.dict[builtins.str,builtins.function]
+builtins.str"builtins.str&
+builtins.function"builtins.function"builtins.dict*T
+TLS)torch.fx.experimental.symbolic_shapes.TLS"
+threading.local"threading.local

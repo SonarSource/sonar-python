@@ -1,0 +1,438 @@
+
+$torch.distributed._tensor._op_schemaâ
+PlacementStrategy6torch.distributed._tensor._op_schema.PlacementStrategy"builtins.object*“
+output_specBtorch.distributed._tensor._op_schema.PlacementStrategy.output_spec"n
+5torch.distributed._tensor.placement_types.DTensorSpec"5torch.distributed._tensor.placement_types.DTensorSpec*z
+selfp
+6torch.distributed._tensor._op_schema.PlacementStrategy"6torch.distributed._tensor._op_schema.PlacementStrategy0:cached_property`*Ê
+
+input_specAtorch.distributed._tensor._op_schema.PlacementStrategy.input_spec"n
+5torch.distributed._tensor.placement_types.DTensorSpec"5torch.distributed._tensor.placement_types.DTensorSpec*z
+selfp
+6torch.distributed._tensor._op_schema.PlacementStrategy"6torch.distributed._tensor._op_schema.PlacementStrategy*)
+index
+builtins.int"builtins.int *€
+__str__>torch.distributed._tensor._op_schema.PlacementStrategy.__str__"
+builtins.str"builtins.str*rp
+6torch.distributed._tensor._op_schema.PlacementStrategy"6torch.distributed._tensor._op_schema.PlacementStrategy* 
+
+__init__?torch.distributed._tensor._op_schema.PlacementStrategy.__init__"
+None*z
+selfp
+6torch.distributed._tensor._op_schema.PlacementStrategy"6torch.distributed._tensor._op_schema.PlacementStrategy*æ
+output_specs´
+éUnion[torch.distributed._tensor.placement_types.DTensorSpec,builtins.tuple[Union[torch.distributed._tensor.placement_types.DTensorSpec,None]]]n
+5torch.distributed._tensor.placement_types.DTensorSpec"5torch.distributed._tensor.placement_types.DTensorSpec•
+Qbuiltins.tuple[Union[torch.distributed._tensor.placement_types.DTensorSpec,None]]ø
+AUnion[torch.distributed._tensor.placement_types.DTensorSpec,None]n
+5torch.distributed._tensor.placement_types.DTensorSpec"5torch.distributed._tensor.placement_types.DTensorSpec
+None"builtins.tuple*¿
+input_specs¨
+RUnion[typing.Sequence[torch.distributed._tensor.placement_types.DTensorSpec],None]…
+Ftyping.Sequence[torch.distributed._tensor.placement_types.DTensorSpec]n
+5torch.distributed._tensor.placement_types.DTensorSpec"5torch.distributed._tensor.placement_types.DTensorSpec"typing.Sequence
+None *Ú
+redistribute_costÿ
+8Union[builtins.list[builtins.list[builtins.float]],None]è
+,builtins.list[builtins.list[builtins.float]]P
+builtins.list[builtins.float] 
+builtins.float"builtins.float"builtins.list"builtins.list
+None 8rÅ
+output_specsCtorch.distributed._tensor._op_schema.PlacementStrategy.output_specs´
+éUnion[torch.distributed._tensor.placement_types.DTensorSpec,builtins.tuple[Union[torch.distributed._tensor.placement_types.DTensorSpec,None]]]n
+5torch.distributed._tensor.placement_types.DTensorSpec"5torch.distributed._tensor.placement_types.DTensorSpec•
+Qbuiltins.tuple[Union[torch.distributed._tensor.placement_types.DTensorSpec,None]]ø
+AUnion[torch.distributed._tensor.placement_types.DTensorSpec,None]n
+5torch.distributed._tensor.placement_types.DTensorSpec"5torch.distributed._tensor.placement_types.DTensorSpec
+None"builtins.tuplerÄ
+input_specsBtorch.distributed._tensor._op_schema.PlacementStrategy.input_specs¨
+RUnion[typing.Sequence[torch.distributed._tensor.placement_types.DTensorSpec],None]…
+Ftyping.Sequence[torch.distributed._tensor.placement_types.DTensorSpec]n
+5torch.distributed._tensor.placement_types.DTensorSpec"5torch.distributed._tensor.placement_types.DTensorSpec"typing.Sequence
+Noner∏
+redistribute_costHtorch.distributed._tensor._op_schema.PlacementStrategy.redistribute_costÿ
+8Union[builtins.list[builtins.list[builtins.float]],None]è
+,builtins.list[builtins.list[builtins.float]]P
+builtins.list[builtins.float] 
+builtins.float"builtins.float"builtins.list"builtins.list
+Noner˝
+__dataclass_fields__Ktorch.distributed._tensor._op_schema.PlacementStrategy.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictR
+StrategyType1torch.distributed._tensor._op_schema.StrategyType"builtins.objectŸ
+
+OpStrategy/torch.distributed._tensor._op_schema.OpStrategy"1torch.distributed._tensor._op_schema.StrategyType*ò
+__init__8torch.distributed._tensor._op_schema.OpStrategy.__init__"
+None*l
+selfb
+/torch.distributed._tensor._op_schema.OpStrategy"/torch.distributed._tensor._op_schema.OpStrategy*Ÿ
+
+strategies»
+Ebuiltins.list[torch.distributed._tensor._op_schema.PlacementStrategy]p
+6torch.distributed._tensor._op_schema.PlacementStrategy"6torch.distributed._tensor._op_schema.PlacementStrategy"builtins.list*∆
+__str__7torch.distributed._tensor._op_schema.OpStrategy.__str__"
+builtins.str"builtins.str*db
+/torch.distributed._tensor._op_schema.OpStrategy"/torch.distributed._tensor._op_schema.OpStrategy*‹
+max_num_shards>torch.distributed._tensor._op_schema.OpStrategy.max_num_shards"
+builtins.int"builtins.int*l
+selfb
+/torch.distributed._tensor._op_schema.OpStrategy"/torch.distributed._tensor._op_schema.OpStrategy*`
+
+mesh_shape:torch.distributed._tensor._op_schema.OpStrategy.mesh_shape*
+self0:property`*T
+ndim4torch.distributed._tensor._op_schema.OpStrategy.ndim*
+self0:property`*V
+shape5torch.distributed._tensor._op_schema.OpStrategy.shape*
+self0:property`rì
+
+strategies:torch.distributed._tensor._op_schema.OpStrategy.strategies»
+Ebuiltins.list[torch.distributed._tensor._op_schema.PlacementStrategy]p
+6torch.distributed._tensor._op_schema.PlacementStrategy"6torch.distributed._tensor._op_schema.PlacementStrategy"builtins.list„
+TupleStrategy2torch.distributed._tensor._op_schema.TupleStrategy"1torch.distributed._tensor._op_schema.StrategyType*í
+__init__;torch.distributed._tensor._op_schema.TupleStrategy.__init__"
+None*r
+selfh
+2torch.distributed._tensor._op_schema.TupleStrategy"2torch.distributed._tensor._op_schema.TupleStrategy* 
+childsΩ
+Btyping.Sequence[torch.distributed._tensor._op_schema.StrategyType]f
+1torch.distributed._tensor._op_schema.StrategyType"1torch.distributed._tensor._op_schema.StrategyType"typing.Sequence*œ
+__str__:torch.distributed._tensor._op_schema.TupleStrategy.__str__"
+builtins.str"builtins.str*jh
+2torch.distributed._tensor._op_schema.TupleStrategy"2torch.distributed._tensor._op_schema.TupleStrategyrÉ
+childs9torch.distributed._tensor._op_schema.TupleStrategy.childsΩ
+Btyping.Sequence[torch.distributed._tensor._op_schema.StrategyType]f
+1torch.distributed._tensor._op_schema.StrategyType"1torch.distributed._tensor._op_schema.StrategyType"typing.Sequenceˇ	
+RuntimeSchemaInfo6torch.distributed._tensor._op_schema.RuntimeSchemaInfo"builtins.object*‘
+__init__?torch.distributed._tensor._op_schema.RuntimeSchemaInfo.__init__"
+None*z
+selfp
+6torch.distributed._tensor._op_schema.RuntimeSchemaInfo"6torch.distributed._tensor._op_schema.RuntimeSchemaInfo*1
+static_argnum
+builtins.int"builtins.int *ô
+static_kwargkeyÅ
+'Union[builtins.list[builtins.str],None]J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list
+None *2
+needs_pytree
+builtins.bool"builtins.bool 8rs
+static_argnumDtorch.distributed._tensor._op_schema.RuntimeSchemaInfo.static_argnum
+builtins.int"builtins.intr›
+static_kwargkeyFtorch.distributed._tensor._op_schema.RuntimeSchemaInfo.static_kwargkeyÅ
+'Union[builtins.list[builtins.str],None]J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list
+Noners
+needs_pytreeCtorch.distributed._tensor._op_schema.RuntimeSchemaInfo.needs_pytree
+builtins.bool"builtins.boolr˝
+__dataclass_fields__Ktorch.distributed._tensor._op_schema.RuntimeSchemaInfo.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictá/
+OpSchema-torch.distributed._tensor._op_schema.OpSchema"builtins.object*Ü
+	args_spec7torch.distributed._tensor._op_schema.OpSchema.args_spec"«
+Ebuiltins.tuple[torch.distributed._tensor.placement_types.DTensorSpec]n
+5torch.distributed._tensor.placement_types.DTensorSpec"5torch.distributed._tensor.placement_types.DTensorSpec"builtins.tuple*h
+self^
+-torch.distributed._tensor._op_schema.OpSchema"-torch.distributed._tensor._op_schema.OpSchema0:property`*¸
+args_strategy;torch.distributed._tensor._op_schema.OpSchema.args_strategy"µ
+?builtins.tuple[torch.distributed._tensor._op_schema.OpStrategy]b
+/torch.distributed._tensor._op_schema.OpStrategy"/torch.distributed._tensor._op_schema.OpStrategy"builtins.tuple*h
+self^
+-torch.distributed._tensor._op_schema.OpSchema"-torch.distributed._tensor._op_schema.OpSchema0:property`*¬
+__repr__6torch.distributed._tensor._op_schema.OpSchema.__repr__"
+builtins.str"builtins.str*`^
+-torch.distributed._tensor._op_schema.OpSchema"-torch.distributed._tensor._op_schema.OpSchema*¿
+__str__5torch.distributed._tensor._op_schema.OpSchema.__str__"
+builtins.str"builtins.str*`^
+-torch.distributed._tensor._op_schema.OpSchema"-torch.distributed._tensor._op_schema.OpSchema*¿
+__post_init__;torch.distributed._tensor._op_schema.OpSchema.__post_init__"
+None*h
+self^
+-torch.distributed._tensor._op_schema.OpSchema"-torch.distributed._tensor._op_schema.OpSchema*≠
+#arg_type_tensor_or_tensor_list_likeQtorch.distributed._tensor._op_schema.OpSchema.arg_type_tensor_or_tensor_list_like"
+builtins.bool"builtins.bool*h
+self^
+-torch.distributed._tensor._op_schema.OpSchema"-torch.distributed._tensor._op_schema.OpSchema*)
+arg_idx
+builtins.int"builtins.int*ˆ
+return_type_tuple_tensor_likeKtorch.distributed._tensor._op_schema.OpSchema.return_type_tuple_tensor_like"
+builtins.bool"builtins.bool*h
+self^
+-torch.distributed._tensor._op_schema.OpSchema"-torch.distributed._tensor._op_schema.OpSchema*‡
+return_type_tensor@torch.distributed._tensor._op_schema.OpSchema.return_type_tensor"
+builtins.bool"builtins.bool*h
+self^
+-torch.distributed._tensor._op_schema.OpSchema"-torch.distributed._tensor._op_schema.OpSchema* 
+__hash__6torch.distributed._tensor._op_schema.OpSchema.__hash__"
+builtins.int"builtins.int*h
+self^
+-torch.distributed._tensor._op_schema.OpSchema"-torch.distributed._tensor._op_schema.OpSchema*Ê
+__eq__4torch.distributed._tensor._op_schema.OpSchema.__eq__"
+builtins.bool"builtins.bool*`^
+-torch.distributed._tensor._op_schema.OpSchema"-torch.distributed._tensor._op_schema.OpSchema*$"
+builtins.object"builtins.object*Ì
+gen_fake_args;torch.distributed._tensor._op_schema.OpSchema.gen_fake_args"¥
+*TypeAlias[builtins.tuple[builtins.object]]U
+builtins.tuple[builtins.object]"
+builtins.object"builtins.object"builtins.tuple"-torch.distributed._tensor._op_schema.ArgsType*h
+self^
+-torch.distributed._tensor._op_schema.OpSchema"-torch.distributed._tensor._op_schema.OpSchema*®
+gen_fake_kwargs=torch.distributed._tensor._op_schema.OpSchema.gen_fake_kwargs"Î
+6TypeAlias[builtins.dict[builtins.str,builtins.object]]~
++builtins.dict[builtins.str,builtins.object]
+builtins.str"builtins.str"
+builtins.object"builtins.object"builtins.dict"/torch.distributed._tensor._op_schema.KwargsType*h
+self^
+-torch.distributed._tensor._op_schema.OpSchema"-torch.distributed._tensor._op_schema.OpSchema*€
+!_inplace_rewrap_schema_suggestionOtorch.distributed._tensor._op_schema.OpSchema._inplace_rewrap_schema_suggestion"
+None*h
+self^
+-torch.distributed._tensor._op_schema.OpSchema"-torch.distributed._tensor._op_schema.OpSchema*q
+origin_schema^
+-torch.distributed._tensor._op_schema.OpSchema"-torch.distributed._tensor._op_schema.OpSchema*í
+__init__6torch.distributed._tensor._op_schema.OpSchema.__init__"
+None*h
+self^
+-torch.distributed._tensor._op_schema.OpSchema"-torch.distributed._tensor._op_schema.OpSchema*6
+op.
+torch._ops.OpOverload"torch._ops.OpOverload*∆
+args_schema¥
+*TypeAlias[builtins.tuple[builtins.object]]U
+builtins.tuple[builtins.object]"
+builtins.object"builtins.object"builtins.tuple"-torch.distributed._tensor._op_schema.ArgsType*ˇ
+kwargs_schemaÎ
+6TypeAlias[builtins.dict[builtins.str,builtins.object]]~
++builtins.dict[builtins.str,builtins.object]
+builtins.str"builtins.str"
+builtins.object"builtins.object"builtins.dict"/torch.distributed._tensor._op_schema.KwargsType*÷
+schema_info¬
+BUnion[torch.distributed._tensor._op_schema.RuntimeSchemaInfo,None]p
+6torch.distributed._tensor._op_schema.RuntimeSchemaInfo"6torch.distributed._tensor._op_schema.RuntimeSchemaInfo
+None 8rf
+op0torch.distributed._tensor._op_schema.OpSchema.op.
+torch._ops.OpOverload"torch._ops.OpOverloadrˇ
+args_schema9torch.distributed._tensor._op_schema.OpSchema.args_schema¥
+*TypeAlias[builtins.tuple[builtins.object]]U
+builtins.tuple[builtins.object]"
+builtins.object"builtins.object"builtins.tuple"-torch.distributed._tensor._op_schema.ArgsTyper∫
+kwargs_schema;torch.distributed._tensor._op_schema.OpSchema.kwargs_schemaÎ
+6TypeAlias[builtins.dict[builtins.str,builtins.object]]~
++builtins.dict[builtins.str,builtins.object]
+builtins.str"builtins.str"
+builtins.object"builtins.object"builtins.dict"/torch.distributed._tensor._op_schema.KwargsTyperç
+schema_info9torch.distributed._tensor._op_schema.OpSchema.schema_info¬
+BUnion[torch.distributed._tensor._op_schema.RuntimeSchemaInfo,None]p
+6torch.distributed._tensor._op_schema.RuntimeSchemaInfo"6torch.distributed._tensor._op_schema.RuntimeSchemaInfo
+Nonerh
+has_symints9torch.distributed._tensor._op_schema.OpSchema.has_symints
+builtins.bool"builtins.boolrÙ
+__dataclass_fields__Btorch.distributed._tensor._op_schema.OpSchema.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictƒ
+OutputSharding3torch.distributed._tensor._op_schema.OutputSharding"builtins.object*ˆ	
+__init__<torch.distributed._tensor._op_schema.OutputSharding.__init__"
+None*t
+selfj
+3torch.distributed._tensor._op_schema.OutputSharding"3torch.distributed._tensor._op_schema.OutputSharding*´
+output_specô
+üTypeAlias[Union[torch.distributed._tensor.placement_types.DTensorSpec,typing.Sequence[Union[torch.distributed._tensor.placement_types.DTensorSpec,None]],None]]Ω
+îUnion[torch.distributed._tensor.placement_types.DTensorSpec,typing.Sequence[Union[torch.distributed._tensor.placement_types.DTensorSpec,None]],None]n
+5torch.distributed._tensor.placement_types.DTensorSpec"5torch.distributed._tensor.placement_types.DTensorSpecß
+Rtyping.Sequence[Union[torch.distributed._tensor.placement_types.DTensorSpec,None]]ø
+AUnion[torch.distributed._tensor.placement_types.DTensorSpec,None]n
+5torch.distributed._tensor.placement_types.DTensorSpec"5torch.distributed._tensor.placement_types.DTensorSpec
+None"typing.Sequence
+None"3torch.distributed._tensor._op_schema.OutputSpecType*√
+redistribute_schemaß
+9Union[torch.distributed._tensor._op_schema.OpSchema,None]^
+-torch.distributed._tensor._op_schema.OpSchema"-torch.distributed._tensor._op_schema.OpSchema
+None *8
+needs_redistribute
+builtins.bool"builtins.bool 8rÍ
+output_spec?torch.distributed._tensor._op_schema.OutputSharding.output_specô
+üTypeAlias[Union[torch.distributed._tensor.placement_types.DTensorSpec,typing.Sequence[Union[torch.distributed._tensor.placement_types.DTensorSpec,None]],None]]Ω
+îUnion[torch.distributed._tensor.placement_types.DTensorSpec,typing.Sequence[Union[torch.distributed._tensor.placement_types.DTensorSpec,None]],None]n
+5torch.distributed._tensor.placement_types.DTensorSpec"5torch.distributed._tensor.placement_types.DTensorSpecß
+Rtyping.Sequence[Union[torch.distributed._tensor.placement_types.DTensorSpec,None]]ø
+AUnion[torch.distributed._tensor.placement_types.DTensorSpec,None]n
+5torch.distributed._tensor.placement_types.DTensorSpec"5torch.distributed._tensor.placement_types.DTensorSpec
+None"typing.Sequence
+None"3torch.distributed._tensor._op_schema.OutputSpecTyperà
+redistribute_schemaGtorch.distributed._tensor._op_schema.OutputSharding.redistribute_schemaß
+9Union[torch.distributed._tensor._op_schema.OpSchema,None]^
+-torch.distributed._tensor._op_schema.OpSchema"-torch.distributed._tensor._op_schema.OpSchema
+Noner|
+needs_redistributeFtorch.distributed._tensor._op_schema.OutputSharding.needs_redistribute
+builtins.bool"builtins.boolr˙
+__dataclass_fields__Htorch.distributed._tensor._op_schema.OutputSharding.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictƒ
+OpInfo+torch.distributed._tensor._op_schema.OpInfo"builtins.object*ô
+__init__4torch.distributed._tensor._op_schema.OpInfo.__init__"
+None*d
+selfZ
++torch.distributed._tensor._op_schema.OpInfo"+torch.distributed._tensor._op_schema.OpInfo*^
+meshT
+(torch.distributed.device_mesh.DeviceMesh"(torch.distributed.device_mesh.DeviceMesh*j
+schema^
+-torch.distributed._tensor._op_schema.OpSchema"-torch.distributed._tensor._op_schema.OpSchema*i
+flat_args_schemaS
+builtins.list[builtins.object]"
+builtins.object"builtins.object"builtins.list*g
+
+local_argsW
+ typing.Sequence[builtins.object]"
+builtins.object"builtins.object"typing.Sequence*ê
+local_kwargs~
++builtins.dict[builtins.str,builtins.object]
+builtins.str"builtins.str"
+builtins.object"builtins.object"builtins.dict*`
+args_tree_specJ
+!Union[UnboundType[TreeSpec],None]
+UnboundType[TreeSpec]
+None *—
+output_shardingπ
+?Union[torch.distributed._tensor._op_schema.OutputSharding,None]j
+3torch.distributed._tensor._op_schema.OutputSharding"3torch.distributed._tensor._op_schema.OutputSharding
+None 8ré
+mesh0torch.distributed._tensor._op_schema.OpInfo.meshT
+(torch.distributed.device_mesh.DeviceMesh"(torch.distributed.device_mesh.DeviceMeshrú
+schema2torch.distributed._tensor._op_schema.OpInfo.schema^
+-torch.distributed._tensor._op_schema.OpSchema"-torch.distributed._tensor._op_schema.OpSchemar•
+flat_args_schema<torch.distributed._tensor._op_schema.OpInfo.flat_args_schemaS
+builtins.list[builtins.object]"
+builtins.object"builtins.object"builtins.listrù
+
+local_args6torch.distributed._tensor._op_schema.OpInfo.local_argsW
+ typing.Sequence[builtins.object]"
+builtins.object"builtins.object"typing.Sequencer»
+local_kwargs8torch.distributed._tensor._op_schema.OpInfo.local_kwargs~
++builtins.dict[builtins.str,builtins.object]
+builtins.str"builtins.str"
+builtins.object"builtins.object"builtins.dictrò
+args_tree_spec:torch.distributed._tensor._op_schema.OpInfo.args_tree_specJ
+!Union[UnboundType[TreeSpec],None]
+UnboundType[TreeSpec]
+Nonerä
+output_sharding;torch.distributed._tensor._op_schema.OpInfo.output_shardingπ
+?Union[torch.distributed._tensor._op_schema.OutputSharding,None]j
+3torch.distributed._tensor._op_schema.OutputSharding"3torch.distributed._tensor._op_schema.OutputSharding
+NonerÚ
+__dataclass_fields__@torch.distributed._tensor._op_schema.OpInfo.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dict°
+!_rebuild_tensor_from_dtensor_metaFtorch.distributed._tensor._op_schema._rebuild_tensor_from_dtensor_meta""
+builtins.object"builtins.object*
+arg
+AnyÜ
+_is_inplace_op3torch.distributed._tensor._op_schema._is_inplace_op"
+Any*6
+op.
+torch._ops.OpOverload"torch._ops.OpOverloadé
+_is_out_variant_op7torch.distributed._tensor._op_schema._is_out_variant_op"
+Any*6
+op.
+torch._ops.OpOverload"torch._ops.OpOverloadô
+_pretty_print_spec7torch.distributed._tensor._op_schema._pretty_print_spec"
+builtins.str"builtins.str*,
+spec"
+builtins.object"builtins.object"·
+tree_map_only-redefinition!torch.utils._pytree.tree_map_onlyÔ
+tree_map_only!torch.utils._pytree.tree_map_only"7
+TypeAlias[Any]
+Any"torch.utils._pytree.PyTree*wu
+Type[torch.utils._pytree.T]N
+torch.utils._pytree.T"
+builtins.object"builtins.object"builtins.object"type*û
+funcì
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"torch.utils._pytree.Fn*A
+tree7
+TypeAlias[Any]
+Any"torch.utils._pytree.PyTree*ñ
+is_leafÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None 0:overloadXò
+tree_map_only!torch.utils._pytree.tree_map_only"7
+TypeAlias[Any]
+Any"torch.utils._pytree.PyTree*ûõ
+ITypeAlias[Tuple[Type[torch.utils._pytree.T],Type[torch.utils._pytree.S]]]∞
+>Tuple[Type[torch.utils._pytree.T],Type[torch.utils._pytree.S]]u
+Type[torch.utils._pytree.T]N
+torch.utils._pytree.T"
+builtins.object"builtins.object"builtins.object"typeu
+Type[torch.utils._pytree.S]N
+torch.utils._pytree.S"
+builtins.object"builtins.object"builtins.object"type"torch.utils._pytree.Type2*ü
+funcî
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"torch.utils._pytree.Fn2*A
+tree7
+TypeAlias[Any]
+Any"torch.utils._pytree.PyTree*ñ
+is_leafÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None 0:overloadX«
+tree_map_only!torch.utils._pytree.tree_map_only"7
+TypeAlias[Any]
+Any"torch.utils._pytree.PyTree*Õ 
+eTypeAlias[Tuple[Type[torch.utils._pytree.T],Type[torch.utils._pytree.S],Type[torch.utils._pytree.U]]]√
+ZTuple[Type[torch.utils._pytree.T],Type[torch.utils._pytree.S],Type[torch.utils._pytree.U]]u
+Type[torch.utils._pytree.T]N
+torch.utils._pytree.T"
+builtins.object"builtins.object"builtins.object"typeu
+Type[torch.utils._pytree.S]N
+torch.utils._pytree.S"
+builtins.object"builtins.object"builtins.object"typeu
+Type[torch.utils._pytree.U]N
+torch.utils._pytree.U"
+builtins.object"builtins.object"builtins.object"type"torch.utils._pytree.Type3*ü
+funcî
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"torch.utils._pytree.Fn3*A
+tree7
+TypeAlias[Any]
+Any"torch.utils._pytree.PyTree*ñ
+is_leafÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None 0:overloadX»
+tree_map_only!torch.utils._pytree.tree_map_only"7
+TypeAlias[Any]
+Any"torch.utils._pytree.PyTree*MK
+CallableType[builtins.function]&
+builtins.function"builtins.function*°
+funcñ
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"torch.utils._pytree.FnAny*A
+tree7
+TypeAlias[Any]
+Any"torch.utils._pytree.PyTree*ñ
+is_leafÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None 0:overloadX*†
+__annotations__4torch.distributed._tensor._op_schema.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict

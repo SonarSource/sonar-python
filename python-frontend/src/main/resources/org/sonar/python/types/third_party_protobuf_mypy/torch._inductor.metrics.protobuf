@@ -1,0 +1,157 @@
+
+torch._inductor.metricsƒ
+CachedMetricsDeltas+torch._inductor.metrics.CachedMetricsDeltas"builtins.object*Ï
+__init__4torch._inductor.metrics.CachedMetricsDeltas.__init__"
+None*d
+selfZ
++torch._inductor.metrics.CachedMetricsDeltas"+torch._inductor.metrics.CachedMetricsDeltas*8
+generated_kernel_count
+builtins.int"builtins.int*@
+generated_cpp_vec_kernel_count
+builtins.int"builtins.int*5
+ir_nodes_pre_fusion
+builtins.int"builtins.int*4
+cpp_to_dtype_count
+builtins.int"builtins.int*4
+num_bytes_accessed
+builtins.int"builtins.int8rz
+generated_kernel_countBtorch._inductor.metrics.CachedMetricsDeltas.generated_kernel_count
+builtins.int"builtins.intrŠ
+generated_cpp_vec_kernel_countJtorch._inductor.metrics.CachedMetricsDeltas.generated_cpp_vec_kernel_count
+builtins.int"builtins.intrt
+ir_nodes_pre_fusion?torch._inductor.metrics.CachedMetricsDeltas.ir_nodes_pre_fusion
+builtins.int"builtins.intrr
+cpp_to_dtype_count>torch._inductor.metrics.CachedMetricsDeltas.cpp_to_dtype_count
+builtins.int"builtins.intrr
+num_bytes_accessed>torch._inductor.metrics.CachedMetricsDeltas.num_bytes_accessed
+builtins.int"builtins.intrò
+__dataclass_fields__@torch._inductor.metrics.CachedMetricsDeltas.__dataclass_fields__—
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictÌ
+CachedMetricsHelper+torch._inductor.metrics.CachedMetricsHelper"builtins.object*J
+__init__4torch._inductor.metrics.CachedMetricsHelper.__init__*
+self*†
+
+get_deltas6torch._inductor.metrics.CachedMetricsHelper.get_deltas"Z
++torch._inductor.metrics.CachedMetricsDeltas"+torch._inductor.metrics.CachedMetricsDeltas*d
+selfZ
++torch._inductor.metrics.CachedMetricsHelper"+torch._inductor.metrics.CachedMetricsHelper*Ê
+apply_deltas8torch._inductor.metrics.CachedMetricsHelper.apply_deltas"
+Any*e
+deltaZ
++torch._inductor.metrics.CachedMetricsDeltas"+torch._inductor.metrics.CachedMetricsDeltas0:staticmethodhrU
+cached_metrics:torch._inductor.metrics.CachedMetricsHelper.cached_metrics
+Any
+MetricTable#torch._inductor.metrics.MetricTable"builtins.object*L
+add_row+torch._inductor.metrics.MetricTable.add_row*
+self*
+
+row_fn*P
+output_filename3torch._inductor.metrics.MetricTable.output_filename*
+self*J
+write_header0torch._inductor.metrics.MetricTable.write_header*
+self*O
+
+_write_row.torch._inductor.metrics.MetricTable._write_row*
+self*
+row*r
+register_table2torch._inductor.metrics.MetricTable.register_table*
+name*
+column_names0:staticmethodh*Ø
+__init__,torch._inductor.metrics.MetricTable.__init__"
+None*T
+selfJ
+#torch._inductor.metrics.MetricTable"#torch._inductor.metrics.MetricTable*,
+
+table_name
+builtins.str"builtins.str*\
+column_namesJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*2
+num_rows_added
+builtins.int"builtins.int 8rZ
+
+table_name.torch._inductor.metrics.MetricTable.table_name
+builtins.str"builtins.strrŒ
+column_names0torch._inductor.metrics.MetricTable.column_namesJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.listrb
+num_rows_added2torch._inductor.metrics.MetricTable.num_rows_added
+builtins.int"builtins.intrê
+__dataclass_fields__8torch._inductor.metrics.MetricTable.__dataclass_fields__—
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dict&
+resettorch._inductor.metrics.reset>
+get_metric_fields)torch._inductor.metrics.get_metric_fields^
+_parse_kernel_fn_code-torch._inductor.metrics._parse_kernel_fn_code*
+kernel_module_codek
+_parse_kernel_line_of_code2torch._inductor.metrics._parse_kernel_line_of_code*
+proper_kernel_fn_codek
+_parse_size_hints)torch._inductor.metrics._parse_size_hints*
+kernel_module_code*
+kernel_categorys
+_parse_reduction_hint-torch._inductor.metrics._parse_reduction_hint*
+kernel_category*
+kernel_module_code`
+_count_pattern&torch._inductor.metrics._count_pattern*
+proper_kernel_fn_code*
+patternM
+_count_args#torch._inductor.metrics._count_args*
+proper_kernel_fn_codeh
+_parse_proper_kernel_fn_code4torch._inductor.metrics._parse_proper_kernel_fn_code*
+kernel_fn_codec
+_parse_numel$torch._inductor.metrics._parse_numel*
+proper_kernel_fn_code*
+numel_arg_namew
+_parse_kernel_args_num_gb1torch._inductor.metrics._parse_kernel_args_num_gb*
+kernel_fn_code*
+kernel_category|
+log_kernel_metadata+torch._inductor.metrics.log_kernel_metadata*
+kernel_name*
+kernel_path*
+kernel_module_codeB
+purge_old_log_files+torch._inductor.metrics.purge_old_log_filesT
+is_metric_table_enabled/torch._inductor.metrics.is_metric_table_enabled*
+nameF
+get_metric_table(torch._inductor.metrics.get_metric_table*
+name*“
+__annotations__'torch._inductor.metrics.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*f
+generated_kernel_count.torch._inductor.metrics.generated_kernel_count
+builtins.int"builtins.int*v
+generated_cpp_vec_kernel_count6torch._inductor.metrics.generated_cpp_vec_kernel_count
+builtins.int"builtins.int*^
+num_bytes_accessed*torch._inductor.metrics.num_bytes_accessed
+builtins.int"builtins.int*‘
+nodes_num_elem&torch._inductor.metrics.nodes_num_elemÖ
+¶builtins.list[Tuple[Union[torch._inductor.scheduler.NopKernelSchedulerNode,torch._inductor.scheduler.SchedulerNode,torch._inductor.scheduler.ExternKernelSchedulerNode],builtins.int]]‹
+§Tuple[Union[torch._inductor.scheduler.NopKernelSchedulerNode,torch._inductor.scheduler.SchedulerNode,torch._inductor.scheduler.ExternKernelSchedulerNode],builtins.int]¾
+“Union[torch._inductor.scheduler.NopKernelSchedulerNode,torch._inductor.scheduler.SchedulerNode,torch._inductor.scheduler.ExternKernelSchedulerNode]d
+0torch._inductor.scheduler.NopKernelSchedulerNode"0torch._inductor.scheduler.NopKernelSchedulerNodeR
+'torch._inductor.scheduler.SchedulerNode"'torch._inductor.scheduler.SchedulerNodej
+3torch._inductor.scheduler.ExternKernelSchedulerNode"3torch._inductor.scheduler.ExternKernelSchedulerNode
+builtins.int"builtins.int"builtins.list*à
+node_runtimes%torch._inductor.metrics.node_runtimes§
+Pbuiltins.list[Tuple[torch._inductor.scheduler.BaseSchedulerNode,builtins.float]]Ã
+ATuple[torch._inductor.scheduler.BaseSchedulerNode,builtins.float]Z
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode 
+builtins.float"builtins.float"builtins.list*`
+ir_nodes_pre_fusion+torch._inductor.metrics.ir_nodes_pre_fusion
+builtins.int"builtins.int*^
+cpp_to_dtype_count*torch._inductor.metrics.cpp_to_dtype_count
+builtins.int"builtins.int*ª
+!cpp_outer_loop_fused_inner_counts9torch._inductor.metrics.cpp_outer_loop_fused_inner_countsJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*l
+num_comprehensive_padding1torch._inductor.metrics.num_comprehensive_padding
+builtins.int"builtins.int*‰
+REGISTERED_METRIC_TABLES0torch._inductor.metrics.REGISTERED_METRIC_TABLESº
+?builtins.dict[builtins.str,torch._inductor.metrics.MetricTable]
+builtins.str"builtins.strJ
+#torch._inductor.metrics.MetricTable"#torch._inductor.metrics.MetricTable"builtins.dict

@@ -1,0 +1,458 @@
+
+torch.export.graph_signature¯
+TensorArgument+torch.export.graph_signature.TensorArgument"builtins.object*ÿ
+__init__4torch.export.graph_signature.TensorArgument.__init__"
+None*d
+selfZ
++torch.export.graph_signature.TensorArgument"+torch.export.graph_signature.TensorArgument*&
+name
+builtins.str"builtins.str8rV
+name0torch.export.graph_signature.TensorArgument.name
+builtins.str"builtins.strrÚ
+__dataclass_fields__@torch.export.graph_signature.TensorArgument.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictÒ
+TokenArgument*torch.export.graph_signature.TokenArgument"builtins.object*’
+__init__3torch.export.graph_signature.TokenArgument.__init__"
+None*b
+selfX
+*torch.export.graph_signature.TokenArgument"*torch.export.graph_signature.TokenArgument*&
+name
+builtins.str"builtins.str8rU
+name/torch.export.graph_signature.TokenArgument.name
+builtins.str"builtins.strrÒ
+__dataclass_fields__?torch.export.graph_signature.TokenArgument.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dict¯
+SymIntArgument+torch.export.graph_signature.SymIntArgument"builtins.object*ÿ
+__init__4torch.export.graph_signature.SymIntArgument.__init__"
+None*d
+selfZ
++torch.export.graph_signature.SymIntArgument"+torch.export.graph_signature.SymIntArgument*&
+name
+builtins.str"builtins.str8rV
+name0torch.export.graph_signature.SymIntArgument.name
+builtins.str"builtins.strrÚ
+__dataclass_fields__@torch.export.graph_signature.SymIntArgument.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictü
+CustomObjArgument.torch.export.graph_signature.CustomObjArgument"builtins.object*é
+__init__7torch.export.graph_signature.CustomObjArgument.__init__"
+None*j
+self`
+.torch.export.graph_signature.CustomObjArgument".torch.export.graph_signature.CustomObjArgument*&
+name
+builtins.str"builtins.str*+
+	class_fqn
+builtins.str"builtins.str8rY
+name3torch.export.graph_signature.CustomObjArgument.name
+builtins.str"builtins.strrc
+	class_fqn8torch.export.graph_signature.CustomObjArgument.class_fqn
+builtins.str"builtins.strrı
+__dataclass_fields__Ctorch.export.graph_signature.CustomObjArgument.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictÛ
+ConstantArgument-torch.export.graph_signature.ConstantArgument"builtins.object*ª
+__init__6torch.export.graph_signature.ConstantArgument.__init__"
+None*h
+self^
+-torch.export.graph_signature.ConstantArgument"-torch.export.graph_signature.ConstantArgument*&
+name
+builtins.str"builtins.str*⁄
+valueŒ
+BUnion[builtins.int,builtins.float,builtins.bool,builtins.str,None]
+builtins.int"builtins.int 
+builtins.float"builtins.float
+builtins.bool"builtins.bool
+builtins.str"builtins.str
+None8rX
+name2torch.export.graph_signature.ConstantArgument.name
+builtins.str"builtins.strrç
+value3torch.export.graph_signature.ConstantArgument.valueŒ
+BUnion[builtins.int,builtins.float,builtins.bool,builtins.str,None]
+builtins.int"builtins.int 
+builtins.float"builtins.float
+builtins.bool"builtins.bool
+builtins.str"builtins.str
+NonerÙ
+__dataclass_fields__Btorch.export.graph_signature.ConstantArgument.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictÃ
+	InputKind&torch.export.graph_signature.InputKind"	enum.EnumHrW
+
+USER_INPUT1torch.export.graph_signature.InputKind.USER_INPUT
+	enum.auto"	enum.autorU
+	PARAMETER0torch.export.graph_signature.InputKind.PARAMETER
+	enum.auto"	enum.autorO
+BUFFER-torch.export.graph_signature.InputKind.BUFFER
+	enum.auto"	enum.autora
+CONSTANT_TENSOR6torch.export.graph_signature.InputKind.CONSTANT_TENSOR
+	enum.auto"	enum.autorW
+
+CUSTOM_OBJ1torch.export.graph_signature.InputKind.CUSTOM_OBJ
+	enum.auto"	enum.autorM
+TOKEN,torch.export.graph_signature.InputKind.TOKEN
+	enum.auto"	enum.auto–
+	InputSpec&torch.export.graph_signature.InputSpec"builtins.object*O
+__post_init__4torch.export.graph_signature.InputSpec.__post_init__*
+self*ö
+__init__/torch.export.graph_signature.InputSpec.__init__"
+None*Z
+selfP
+&torch.export.graph_signature.InputSpec"&torch.export.graph_signature.InputSpec*Z
+kindP
+&torch.export.graph_signature.InputKind"&torch.export.graph_signature.InputKind*Ì
+arg„
+ÒTypeAlias[Union[torch.export.graph_signature.TensorArgument,torch.export.graph_signature.SymIntArgument,torch.export.graph_signature.ConstantArgument,torch.export.graph_signature.CustomObjArgument,torch.export.graph_signature.TokenArgument]]ø
+ÊUnion[torch.export.graph_signature.TensorArgument,torch.export.graph_signature.SymIntArgument,torch.export.graph_signature.ConstantArgument,torch.export.graph_signature.CustomObjArgument,torch.export.graph_signature.TokenArgument]Z
++torch.export.graph_signature.TensorArgument"+torch.export.graph_signature.TensorArgumentZ
++torch.export.graph_signature.SymIntArgument"+torch.export.graph_signature.SymIntArgument^
+-torch.export.graph_signature.ConstantArgument"-torch.export.graph_signature.ConstantArgument`
+.torch.export.graph_signature.CustomObjArgument".torch.export.graph_signature.CustomObjArgumentX
+*torch.export.graph_signature.TokenArgument"*torch.export.graph_signature.TokenArgument")torch.export.graph_signature.ArgumentSpec*P
+targetD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*Y
+
+persistentG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None 8rÖ
+kind+torch.export.graph_signature.InputSpec.kindP
+&torch.export.graph_signature.InputKind"&torch.export.graph_signature.InputKindró
+arg*torch.export.graph_signature.InputSpec.arg„
+ÒTypeAlias[Union[torch.export.graph_signature.TensorArgument,torch.export.graph_signature.SymIntArgument,torch.export.graph_signature.ConstantArgument,torch.export.graph_signature.CustomObjArgument,torch.export.graph_signature.TokenArgument]]ø
+ÊUnion[torch.export.graph_signature.TensorArgument,torch.export.graph_signature.SymIntArgument,torch.export.graph_signature.ConstantArgument,torch.export.graph_signature.CustomObjArgument,torch.export.graph_signature.TokenArgument]Z
++torch.export.graph_signature.TensorArgument"+torch.export.graph_signature.TensorArgumentZ
++torch.export.graph_signature.SymIntArgument"+torch.export.graph_signature.SymIntArgument^
+-torch.export.graph_signature.ConstantArgument"-torch.export.graph_signature.ConstantArgument`
+.torch.export.graph_signature.CustomObjArgument".torch.export.graph_signature.CustomObjArgumentX
+*torch.export.graph_signature.TokenArgument"*torch.export.graph_signature.TokenArgument")torch.export.graph_signature.ArgumentSpecr}
+target-torch.export.graph_signature.InputSpec.targetD
+Union[builtins.str,None]
+builtins.str"builtins.str
+Nonerà
+
+persistent1torch.export.graph_signature.InputSpec.persistentG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+NonerÌ
+__dataclass_fields__;torch.export.graph_signature.InputSpec.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dict¸
+
+OutputKind'torch.export.graph_signature.OutputKind"	enum.EnumHrZ
+USER_OUTPUT3torch.export.graph_signature.OutputKind.USER_OUTPUT
+	enum.auto"	enum.autorZ
+LOSS_OUTPUT3torch.export.graph_signature.OutputKind.LOSS_OUTPUT
+	enum.auto"	enum.autorb
+BUFFER_MUTATION7torch.export.graph_signature.OutputKind.BUFFER_MUTATION
+	enum.auto"	enum.autorn
+GRADIENT_TO_PARAMETER=torch.export.graph_signature.OutputKind.GRADIENT_TO_PARAMETER
+	enum.auto"	enum.autorp
+GRADIENT_TO_USER_INPUT>torch.export.graph_signature.OutputKind.GRADIENT_TO_USER_INPUT
+	enum.auto"	enum.autorj
+USER_INPUT_MUTATION;torch.export.graph_signature.OutputKind.USER_INPUT_MUTATION
+	enum.auto"	enum.autorN
+TOKEN-torch.export.graph_signature.OutputKind.TOKEN
+	enum.auto"	enum.auto¯
+
+OutputSpec'torch.export.graph_signature.OutputSpec"builtins.object*P
+__post_init__5torch.export.graph_signature.OutputSpec.__post_init__*
+self*ƒ
+
+__init__0torch.export.graph_signature.OutputSpec.__init__"
+None*\
+selfR
+'torch.export.graph_signature.OutputSpec"'torch.export.graph_signature.OutputSpec*\
+kindR
+'torch.export.graph_signature.OutputKind"'torch.export.graph_signature.OutputKind*Ì
+arg„
+ÒTypeAlias[Union[torch.export.graph_signature.TensorArgument,torch.export.graph_signature.SymIntArgument,torch.export.graph_signature.ConstantArgument,torch.export.graph_signature.CustomObjArgument,torch.export.graph_signature.TokenArgument]]ø
+ÊUnion[torch.export.graph_signature.TensorArgument,torch.export.graph_signature.SymIntArgument,torch.export.graph_signature.ConstantArgument,torch.export.graph_signature.CustomObjArgument,torch.export.graph_signature.TokenArgument]Z
++torch.export.graph_signature.TensorArgument"+torch.export.graph_signature.TensorArgumentZ
++torch.export.graph_signature.SymIntArgument"+torch.export.graph_signature.SymIntArgument^
+-torch.export.graph_signature.ConstantArgument"-torch.export.graph_signature.ConstantArgument`
+.torch.export.graph_signature.CustomObjArgument".torch.export.graph_signature.CustomObjArgumentX
+*torch.export.graph_signature.TokenArgument"*torch.export.graph_signature.TokenArgument")torch.export.graph_signature.ArgumentSpec*P
+targetD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None8rà
+kind,torch.export.graph_signature.OutputSpec.kindR
+'torch.export.graph_signature.OutputKind"'torch.export.graph_signature.OutputKindrò
+arg+torch.export.graph_signature.OutputSpec.arg„
+ÒTypeAlias[Union[torch.export.graph_signature.TensorArgument,torch.export.graph_signature.SymIntArgument,torch.export.graph_signature.ConstantArgument,torch.export.graph_signature.CustomObjArgument,torch.export.graph_signature.TokenArgument]]ø
+ÊUnion[torch.export.graph_signature.TensorArgument,torch.export.graph_signature.SymIntArgument,torch.export.graph_signature.ConstantArgument,torch.export.graph_signature.CustomObjArgument,torch.export.graph_signature.TokenArgument]Z
++torch.export.graph_signature.TensorArgument"+torch.export.graph_signature.TensorArgumentZ
++torch.export.graph_signature.SymIntArgument"+torch.export.graph_signature.SymIntArgument^
+-torch.export.graph_signature.ConstantArgument"-torch.export.graph_signature.ConstantArgument`
+.torch.export.graph_signature.CustomObjArgument".torch.export.graph_signature.CustomObjArgumentX
+*torch.export.graph_signature.TokenArgument"*torch.export.graph_signature.TokenArgument")torch.export.graph_signature.ArgumentSpecr~
+target.torch.export.graph_signature.OutputSpec.targetD
+Union[builtins.str,None]
+builtins.str"builtins.str
+NonerÓ
+__dataclass_fields__<torch.export.graph_signature.OutputSpec.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictª
+ExportBackwardSignature4torch.export.graph_signature.ExportBackwardSignature"builtins.object*•
+__init__=torch.export.graph_signature.ExportBackwardSignature.__init__"
+None*v
+selfl
+4torch.export.graph_signature.ExportBackwardSignature"4torch.export.graph_signature.ExportBackwardSignature*í
+gradients_to_parametersu
+(builtins.dict[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.dict*ì
+gradients_to_user_inputsu
+(builtins.dict[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.dict*-
+loss_output
+builtins.str"builtins.str8rﬁ
+gradients_to_parametersLtorch.export.graph_signature.ExportBackwardSignature.gradients_to_parametersu
+(builtins.dict[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.dictr‡
+gradients_to_user_inputsMtorch.export.graph_signature.ExportBackwardSignature.gradients_to_user_inputsu
+(builtins.dict[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.dictrm
+loss_output@torch.export.graph_signature.ExportBackwardSignature.loss_output
+builtins.str"builtins.strr˚
+__dataclass_fields__Itorch.export.graph_signature.ExportBackwardSignature.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dict’>
+ExportGraphSignature1torch.export.graph_signature.ExportGraphSignature"builtins.object*û
+
+parameters<torch.export.graph_signature.ExportGraphSignature.parameters"R
+typing.Collection[builtins.str]
+builtins.str"builtins.str"typing.Collection*p
+selff
+1torch.export.graph_signature.ExportGraphSignature"1torch.export.graph_signature.ExportGraphSignature0:property`*ò
+buffers9torch.export.graph_signature.ExportGraphSignature.buffers"R
+typing.Collection[builtins.str]
+builtins.str"builtins.str"typing.Collection*p
+selff
+1torch.export.graph_signature.ExportGraphSignature"1torch.export.graph_signature.ExportGraphSignature0:property`*∂
+non_persistent_buffersHtorch.export.graph_signature.ExportGraphSignature.non_persistent_buffers"R
+typing.Collection[builtins.str]
+builtins.str"builtins.str"typing.Collection*p
+selff
+1torch.export.graph_signature.ExportGraphSignature"1torch.export.graph_signature.ExportGraphSignature0:property`*∏
+lifted_tensor_constantsItorch.export.graph_signature.ExportGraphSignature.lifted_tensor_constants"R
+typing.Collection[builtins.str]
+builtins.str"builtins.str"typing.Collection*p
+selff
+1torch.export.graph_signature.ExportGraphSignature"1torch.export.graph_signature.ExportGraphSignature0:property`*Æ
+lifted_custom_objsDtorch.export.graph_signature.ExportGraphSignature.lifted_custom_objs"R
+typing.Collection[builtins.str]
+builtins.str"builtins.str"typing.Collection*p
+selff
+1torch.export.graph_signature.ExportGraphSignature"1torch.export.graph_signature.ExportGraphSignature0:property`*ä
+user_inputs=torch.export.graph_signature.ExportGraphSignature.user_inputs"ª
+Utyping.Collection[Union[builtins.int,builtins.float,builtins.bool,None,builtins.str]]Œ
+BUnion[builtins.int,builtins.float,builtins.bool,None,builtins.str]
+builtins.int"builtins.int 
+builtins.float"builtins.float
+builtins.bool"builtins.bool
+None
+builtins.str"builtins.str"typing.Collection*p
+selff
+1torch.export.graph_signature.ExportGraphSignature"1torch.export.graph_signature.ExportGraphSignature0:property`*å
+user_outputs>torch.export.graph_signature.ExportGraphSignature.user_outputs"ª
+Utyping.Collection[Union[builtins.int,builtins.float,builtins.bool,None,builtins.str]]Œ
+BUnion[builtins.int,builtins.float,builtins.bool,None,builtins.str]
+builtins.int"builtins.int 
+builtins.float"builtins.float
+builtins.bool"builtins.bool
+None
+builtins.str"builtins.str"typing.Collection*p
+selff
+1torch.export.graph_signature.ExportGraphSignature"1torch.export.graph_signature.ExportGraphSignature0:property`*◊
+inputs_to_parametersFtorch.export.graph_signature.ExportGraphSignature.inputs_to_parameters"w
+)typing.Mapping[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"typing.Mapping*p
+selff
+1torch.export.graph_signature.ExportGraphSignature"1torch.export.graph_signature.ExportGraphSignature0:property`*—
+inputs_to_buffersCtorch.export.graph_signature.ExportGraphSignature.inputs_to_buffers"w
+)typing.Mapping[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"typing.Mapping*p
+selff
+1torch.export.graph_signature.ExportGraphSignature"1torch.export.graph_signature.ExportGraphSignature0:property`*—
+buffers_to_mutateCtorch.export.graph_signature.ExportGraphSignature.buffers_to_mutate"w
+)typing.Mapping[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"typing.Mapping*p
+selff
+1torch.export.graph_signature.ExportGraphSignature"1torch.export.graph_signature.ExportGraphSignature0:property`*Ÿ
+user_inputs_to_mutateGtorch.export.graph_signature.ExportGraphSignature.user_inputs_to_mutate"w
+)typing.Mapping[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"typing.Mapping*p
+selff
+1torch.export.graph_signature.ExportGraphSignature"1torch.export.graph_signature.ExportGraphSignature0:property`*Ò
+!inputs_to_lifted_tensor_constantsStorch.export.graph_signature.ExportGraphSignature.inputs_to_lifted_tensor_constants"w
+)typing.Mapping[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"typing.Mapping*p
+selff
+1torch.export.graph_signature.ExportGraphSignature"1torch.export.graph_signature.ExportGraphSignature0:property`*Á
+inputs_to_lifted_custom_objsNtorch.export.graph_signature.ExportGraphSignature.inputs_to_lifted_custom_objs"w
+)typing.Mapping[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"typing.Mapping*p
+selff
+1torch.export.graph_signature.ExportGraphSignature"1torch.export.graph_signature.ExportGraphSignature0:property`*ô
+backward_signatureDtorch.export.graph_signature.ExportGraphSignature.backward_signature"º
+@Union[torch.export.graph_signature.ExportBackwardSignature,None]l
+4torch.export.graph_signature.ExportBackwardSignature"4torch.export.graph_signature.ExportBackwardSignature
+None*p
+selff
+1torch.export.graph_signature.ExportGraphSignature"1torch.export.graph_signature.ExportGraphSignature0:property`*õ
+assertion_dep_tokenEtorch.export.graph_signature.ExportGraphSignature.assertion_dep_token"º
+5Union[typing.Mapping[builtins.int,builtins.str],None]w
+)typing.Mapping[builtins.int,builtins.str]
+builtins.int"builtins.int
+builtins.str"builtins.str"typing.Mapping
+None*p
+selff
+1torch.export.graph_signature.ExportGraphSignature"1torch.export.graph_signature.ExportGraphSignature0:property`*ö
+input_tokens>torch.export.graph_signature.ExportGraphSignature.input_tokens"J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*p
+selff
+1torch.export.graph_signature.ExportGraphSignature"1torch.export.graph_signature.ExportGraphSignature0:property`*ú
+output_tokens?torch.export.graph_signature.ExportGraphSignature.output_tokens"J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*p
+selff
+1torch.export.graph_signature.ExportGraphSignature"1torch.export.graph_signature.ExportGraphSignature0:property`*Ã
+__post_init__?torch.export.graph_signature.ExportGraphSignature.__post_init__"
+None*p
+selff
+1torch.export.graph_signature.ExportGraphSignature"1torch.export.graph_signature.ExportGraphSignature*ü
+replace_all_usesBtorch.export.graph_signature.ExportGraphSignature.replace_all_uses"
+Any*p
+selff
+1torch.export.graph_signature.ExportGraphSignature"1torch.export.graph_signature.ExportGraphSignature*%
+old
+builtins.str"builtins.str*%
+new
+builtins.str"builtins.str*`
+get_replace_hookBtorch.export.graph_signature.ExportGraphSignature.get_replace_hook*
+self*†
+__init__:torch.export.graph_signature.ExportGraphSignature.__init__"
+None*p
+selff
+1torch.export.graph_signature.ExportGraphSignature"1torch.export.graph_signature.ExportGraphSignature*™
+input_specsò
+5builtins.list[torch.export.graph_signature.InputSpec]P
+&torch.export.graph_signature.InputSpec"&torch.export.graph_signature.InputSpec"builtins.list*Æ
+output_specsõ
+6builtins.list[torch.export.graph_signature.OutputSpec]R
+'torch.export.graph_signature.OutputSpec"'torch.export.graph_signature.OutputSpec"builtins.list8rÁ
+input_specs=torch.export.graph_signature.ExportGraphSignature.input_specsò
+5builtins.list[torch.export.graph_signature.InputSpec]P
+&torch.export.graph_signature.InputSpec"&torch.export.graph_signature.InputSpec"builtins.listrÏ
+output_specs>torch.export.graph_signature.ExportGraphSignature.output_specsõ
+6builtins.list[torch.export.graph_signature.OutputSpec]R
+'torch.export.graph_signature.OutputSpec"'torch.export.graph_signature.OutputSpec"builtins.listr¯
+__dataclass_fields__Ftorch.export.graph_signature.ExportGraphSignature.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictÆ"
+_sig_to_specs*torch.export.graph_signature._sig_to_specs"∞
+sTuple[builtins.list[torch.export.graph_signature.InputSpec],builtins.list[torch.export.graph_signature.OutputSpec]]ò
+5builtins.list[torch.export.graph_signature.InputSpec]P
+&torch.export.graph_signature.InputSpec"&torch.export.graph_signature.InputSpec"builtins.listõ
+6builtins.list[torch.export.graph_signature.OutputSpec]R
+'torch.export.graph_signature.OutputSpec"'torch.export.graph_signature.OutputSpec"builtins.list*Y
+user_inputsH
+builtins.set[builtins.str]
+builtins.str"builtins.str"builtins.set*ë
+inputs_to_parametersw
+)typing.Mapping[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"typing.Mapping*é
+inputs_to_buffersw
+)typing.Mapping[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"typing.Mapping*Z
+user_outputsH
+builtins.set[builtins.str]
+builtins.str"builtins.str"builtins.set*ç
+buffer_mutationsw
+)typing.Mapping[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"typing.Mapping*ë
+user_input_mutationsw
+)typing.Mapping[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"typing.Mapping*à
+grad_paramsw
+)typing.Mapping[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"typing.Mapping*ç
+grad_user_inputsw
+)typing.Mapping[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"typing.Mapping*U
+loss_outputD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*Ö
+
+inputs¯	
+Äbuiltins.list[TypeAlias[Union[torch.export.graph_signature.TensorArgument,torch.export.graph_signature.SymIntArgument,torch.export.graph_signature.ConstantArgument,torch.export.graph_signature.CustomObjArgument,torch.export.graph_signature.TokenArgument]]]„
+ÒTypeAlias[Union[torch.export.graph_signature.TensorArgument,torch.export.graph_signature.SymIntArgument,torch.export.graph_signature.ConstantArgument,torch.export.graph_signature.CustomObjArgument,torch.export.graph_signature.TokenArgument]]ø
+ÊUnion[torch.export.graph_signature.TensorArgument,torch.export.graph_signature.SymIntArgument,torch.export.graph_signature.ConstantArgument,torch.export.graph_signature.CustomObjArgument,torch.export.graph_signature.TokenArgument]Z
++torch.export.graph_signature.TensorArgument"+torch.export.graph_signature.TensorArgumentZ
++torch.export.graph_signature.SymIntArgument"+torch.export.graph_signature.SymIntArgument^
+-torch.export.graph_signature.ConstantArgument"-torch.export.graph_signature.ConstantArgument`
+.torch.export.graph_signature.CustomObjArgument".torch.export.graph_signature.CustomObjArgumentX
+*torch.export.graph_signature.TokenArgument"*torch.export.graph_signature.TokenArgument")torch.export.graph_signature.ArgumentSpec"builtins.list*Ü
+
+outputs¯	
+Äbuiltins.list[TypeAlias[Union[torch.export.graph_signature.TensorArgument,torch.export.graph_signature.SymIntArgument,torch.export.graph_signature.ConstantArgument,torch.export.graph_signature.CustomObjArgument,torch.export.graph_signature.TokenArgument]]]„
+ÒTypeAlias[Union[torch.export.graph_signature.TensorArgument,torch.export.graph_signature.SymIntArgument,torch.export.graph_signature.ConstantArgument,torch.export.graph_signature.CustomObjArgument,torch.export.graph_signature.TokenArgument]]ø
+ÊUnion[torch.export.graph_signature.TensorArgument,torch.export.graph_signature.SymIntArgument,torch.export.graph_signature.ConstantArgument,torch.export.graph_signature.CustomObjArgument,torch.export.graph_signature.TokenArgument]Z
++torch.export.graph_signature.TensorArgument"+torch.export.graph_signature.TensorArgumentZ
++torch.export.graph_signature.SymIntArgument"+torch.export.graph_signature.SymIntArgument^
+-torch.export.graph_signature.ConstantArgument"-torch.export.graph_signature.ConstantArgument`
+.torch.export.graph_signature.CustomObjArgument".torch.export.graph_signature.CustomObjArgumentX
+*torch.export.graph_signature.TokenArgument"*torch.export.graph_signature.TokenArgument")torch.export.graph_signature.ArgumentSpec"builtins.list*\
+input_tokensJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*]
+output_tokensJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*ò
+__annotations__,torch.export.graph_signature.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*{
+__all__$torch.export.graph_signature.__all__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list

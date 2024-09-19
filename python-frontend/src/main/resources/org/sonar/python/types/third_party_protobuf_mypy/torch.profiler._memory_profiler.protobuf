@@ -1,0 +1,666 @@
+
+torch.profiler._memory_profiler¿
+Category(torch.profiler._memory_profiler.Category"	enum.EnumHrO
+INPUT.torch.profiler._memory_profiler.Category.INPUT
+	enum.auto"	enum.autorW
+	TEMPORARY2torch.profiler._memory_profiler.Category.TEMPORARY
+	enum.auto"	enum.autorY
+
+ACTIVATION3torch.profiler._memory_profiler.Category.ACTIVATION
+	enum.auto"	enum.autorU
+GRADIENT1torch.profiler._memory_profiler.Category.GRADIENT
+	enum.auto"	enum.autorc
+AUTOGRAD_DETAIL8torch.profiler._memory_profiler.Category.AUTOGRAD_DETAIL
+	enum.auto"	enum.autorW
+	PARAMETER2torch.profiler._memory_profiler.Category.PARAMETER
+	enum.auto"	enum.autorc
+OPTIMIZER_STATE8torch.profiler._memory_profiler.Category.OPTIMIZER_STATE
+	enum.auto"	enum.auto£
+Action&torch.profiler._memory_profiler.Action"	enum.EnumHrY
+PREEXISTING2torch.profiler._memory_profiler.Action.PREEXISTING
+	enum.auto"	enum.autorO
+CREATE-torch.profiler._memory_profiler.Action.CREATE
+	enum.auto"	enum.autore
+INCREMENT_VERSION8torch.profiler._memory_profiler.Action.INCREMENT_VERSION
+	enum.auto"	enum.autorQ
+DESTROY.torch.profiler._memory_profiler.Action.DESTROY
+	enum.auto"	enum.autoœ
+Key#torch.profiler._memory_profiler.Key"builtins.object*»
+__init__,torch.profiler._memory_profiler.Key.__init__"
+None*T
+selfJ
+#torch.profiler._memory_profiler.Key"#torch.profiler._memory_profiler.Key*.
+device"
+torch._C.device"torch._C.device8rX
+device*torch.profiler._memory_profiler.Key.device"
+torch._C.device"torch._C.devicerÍ
+__dataclass_fields__8torch.profiler._memory_profiler.Key.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dict√
+
+_Storage(torch.profiler._memory_profiler._Storage"builtins.object*≥
+__repr__1torch.profiler._memory_profiler._Storage.__repr__"
+builtins.str"builtins.str*VT
+(torch.profiler._memory_profiler._Storage"(torch.profiler._memory_profiler._Storage*◊
+__eq__/torch.profiler._memory_profiler._Storage.__eq__"
+builtins.bool"builtins.bool*VT
+(torch.profiler._memory_profiler._Storage"(torch.profiler._memory_profiler._Storage*$"
+builtins.object"builtins.object*ª
+__hash__1torch.profiler._memory_profiler._Storage.__hash__"
+builtins.int"builtins.int*^
+selfT
+(torch.profiler._memory_profiler._Storage"(torch.profiler._memory_profiler._Storage*ˇ
+__init__1torch.profiler._memory_profiler._Storage.__init__"
+None*^
+selfT
+(torch.profiler._memory_profiler._Storage"(torch.profiler._memory_profiler._Storage*%
+ptr
+builtins.int"builtins.int*/
+allocation_id
+builtins.int"builtins.int8rQ
+ptr,torch.profiler._memory_profiler._Storage.ptr
+builtins.int"builtins.intre
+allocation_id6torch.profiler._memory_profiler._Storage.allocation_id
+builtins.int"builtins.intrÔ
+__dataclass_fields__=torch.profiler._memory_profiler._Storage.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictˇ
+	TensorKey)torch.profiler._memory_profiler.TensorKey"#torch.profiler._memory_profiler.Key*∂
+__repr__2torch.profiler._memory_profiler.TensorKey.__repr__"
+builtins.str"builtins.str*XV
+)torch.profiler._memory_profiler.TensorKey")torch.profiler._memory_profiler.TensorKey*é
+__lt__0torch.profiler._memory_profiler.TensorKey.__lt__"
+builtins.bool"builtins.bool*XV
+)torch.profiler._memory_profiler.TensorKey")torch.profiler._memory_profiler.TensorKey*XV
+)torch.profiler._memory_profiler.TensorKey")torch.profiler._memory_profiler.TensorKey*ù
+_make/torch.profiler._memory_profiler.TensorKey._make"õ
+5Union[torch.profiler._memory_profiler.TensorKey,None]V
+)torch.profiler._memory_profiler.TensorKey")torch.profiler._memory_profiler.TensorKey
+None*S
+	tensor_idD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None*U
+storage_ptrD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None*W
+allocation_idD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None*.
+device"
+torch._C.device"torch._C.device0:staticmethodh*˛
+from_allocation9torch.profiler._memory_profiler.TensorKey.from_allocation"õ
+5Union[torch.profiler._memory_profiler.TensorKey,None]V
+)torch.profiler._memory_profiler.TensorKey")torch.profiler._memory_profiler.TensorKey
+None*õ
+clsë
+/Type[torch.profiler._memory_profiler.TensorKey]V
+)torch.profiler._memory_profiler.TensorKey")torch.profiler._memory_profiler.TensorKey"type*c
+allocX
+*torch._C._profiler._ExtraFields_Allocation"*torch._C._profiler._ExtraFields_Allocation0:classmethodp*¢
+from_tensor5torch.profiler._memory_profiler.TensorKey.from_tensor"õ
+5Union[torch.profiler._memory_profiler.TensorKey,None]V
+)torch.profiler._memory_profiler.TensorKey")torch.profiler._memory_profiler.TensorKey
+None*õ
+clsë
+/Type[torch.profiler._memory_profiler.TensorKey]V
+)torch.profiler._memory_profiler.TensorKey")torch.profiler._memory_profiler.TensorKey"type*é
+tÜ
+.Union[torch._C._profiler._TensorMetadata,None]H
+"torch._C._profiler._TensorMetadata""torch._C._profiler._TensorMetadata
+None0:classmethodp*Ô
+_as_sortable6torch.profiler._memory_profiler.TensorKey._as_sortable"∂
+:Tuple[builtins.int,builtins.int,builtins.str,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.str"builtins.str
+builtins.int"builtins.int*`
+selfV
+)torch.profiler._memory_profiler.TensorKey")torch.profiler._memory_profiler.TensorKey0:property`*„
+__init__2torch.profiler._memory_profiler.TensorKey.__init__"
+None*`
+selfV
+)torch.profiler._memory_profiler.TensorKey")torch.profiler._memory_profiler.TensorKey*.
+device"
+torch._C.device"torch._C.device*$
+id
+builtins.int"builtins.int*a
+storageT
+(torch.profiler._memory_profiler._Storage"(torch.profiler._memory_profiler._Storage8rP
+id,torch.profiler._memory_profiler.TensorKey.id
+builtins.int"builtins.intrí
+storage1torch.profiler._memory_profiler.TensorKey.storageT
+(torch.profiler._memory_profiler._Storage"(torch.profiler._memory_profiler._Storager^
+device0torch.profiler._memory_profiler.TensorKey.device"
+torch._C.device"torch._C.devicer
+__dataclass_fields__>torch.profiler._memory_profiler.TensorKey.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dict∞
+SchemaMatcher-torch.profiler._memory_profiler.SchemaMatcher"builtins.object*Û
+inputs_are_mutable@torch.profiler._memory_profiler.SchemaMatcher.inputs_are_mutable"Ñ
+)builtins.tuple[Union[builtins.bool,None]]G
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None"builtins.tuple*ß
+clsù
+3Type[torch.profiler._memory_profiler.SchemaMatcher]^
+-torch.profiler._memory_profiler.SchemaMatcher"-torch.profiler._memory_profiler.SchemaMatcher"type*Y
+tR
+'torch._C._profiler._ExtraFields_TorchOp"'torch._C._profiler._ExtraFields_TorchOp0:classmethodp*—
+match_schemas;torch.profiler._memory_profiler.SchemaMatcher.match_schemas"m
+'builtins.tuple[torch._C.FunctionSchema]2
+torch._C.FunctionSchema"torch._C.FunctionSchema"builtins.tuple*ß
+clsù
+3Type[torch.profiler._memory_profiler.SchemaMatcher]^
+-torch.profiler._memory_profiler.SchemaMatcher"-torch.profiler._memory_profiler.SchemaMatcher"type*Y
+tR
+'torch._C._profiler._ExtraFields_TorchOp"'torch._C._profiler._ExtraFields_TorchOp0:classmethodp*÷
+_types_match:torch.profiler._memory_profiler.SchemaMatcher._types_match"
+builtins.bool"builtins.bool*ß
+clsù
+3Type[torch.profiler._memory_profiler.SchemaMatcher]^
+-torch.profiler._memory_profiler.SchemaMatcher"-torch.profiler._memory_profiler.SchemaMatcher"type*
+observed
+Any*
+schema_type
+Any0:classmethodp*ª
+lookup_schemas<torch.profiler._memory_profiler.SchemaMatcher.lookup_schemas"∞
+3Union[builtins.tuple[torch._C.FunctionSchema],None]m
+'builtins.tuple[torch._C.FunctionSchema]2
+torch._C.FunctionSchema"torch._C.FunctionSchema"builtins.tuple
+None*&
+name
+builtins.str"builtins.str0:staticmethodhÁ
+
+OpTree&torch.profiler._memory_profiler.OpTree"builtins.object*˜
+__init__/torch.profiler._memory_profiler.OpTree.__init__"
+None*Z
+selfP
+&torch.profiler._memory_profiler.OpTree"&torch.profiler._memory_profiler.OpTree*T
+resultH
+"torch._C._autograd._ProfilerResult""torch._C._autograd._ProfilerResult*≈
+dfs*torch.profiler._memory_profiler.OpTree.dfs"ç
+2typing.Iterator[torch._C._profiler._ProfilerEvent]F
+!torch._C._profiler._ProfilerEvent"!torch._C._profiler._ProfilerEvent"typing.Iterator*Z
+selfP
+&torch.profiler._memory_profiler.OpTree"&torch.profiler._memory_profiler.OpTree*
+args
+Any*
+kwargs
+Any*ª
+sorted_nodes3torch.profiler._memory_profiler.OpTree.sorted_nodes"ã
+1builtins.tuple[torch._C._profiler._ProfilerEvent]F
+!torch._C._profiler._ProfilerEvent"!torch._C._profiler._ProfilerEvent"builtins.tuple*Z
+selfP
+&torch.profiler._memory_profiler.OpTree"&torch.profiler._memory_profiler.OpTree0:property`rÕ
+_root_nodes2torch.profiler._memory_profiler.OpTree._root_nodesâ
+0builtins.list[torch._C._profiler._ProfilerEvent]F
+!torch._C._profiler._ProfilerEvent"!torch._C._profiler._ProfilerEvent"builtins.listr”
+_sorted_nodes4torch.profiler._memory_profiler.OpTree._sorted_nodesã
+1builtins.tuple[torch._C._profiler._ProfilerEvent]F
+!torch._C._profiler._ProfilerEvent"!torch._C._profiler._ProfilerEvent"builtins.tupleÌ
+SizeMap'torch.profiler._memory_profiler.SizeMap"builtins.object*É
+__init__0torch.profiler._memory_profiler.SizeMap.__init__"
+None*\
+selfR
+'torch.profiler._memory_profiler.SizeMap"'torch.profiler._memory_profiler.SizeMap*]
+op_treeP
+&torch.profiler._memory_profiler.OpTree"&torch.profiler._memory_profiler.OpTree*¡
+_update_values6torch.profiler._memory_profiler.SizeMap._update_values"
+None*\
+selfR
+'torch.profiler._memory_profiler.SizeMap"'torch.profiler._memory_profiler.SizeMap*é
+tÜ
+.Union[torch._C._profiler._TensorMetadata,None]H
+"torch._C._profiler._TensorMetadata""torch._C._profiler._TensorMetadata
+None*”
+_flat_tensor_inputs;torch.profiler._memory_profiler.SizeMap._flat_tensor_inputs"ê
+3typing.Iterator[torch._C._profiler._TensorMetadata]H
+"torch._C._profiler._TensorMetadata""torch._C._profiler._TensorMetadata"typing.Iterator*Z
+opR
+'torch._C._profiler._ExtraFields_TorchOp"'torch._C._profiler._ExtraFields_TorchOp0:staticmethodh*˚
+__getitem__3torch.profiler._memory_profiler.SizeMap.__getitem__"
+Any*TR
+'torch.profiler._memory_profiler.SizeMap"'torch.profiler._memory_profiler.SizeMap*XV
+)torch.profiler._memory_profiler.TensorKey")torch.profiler._memory_profiler.TensorKeyrâ
+_values/torch.profiler._memory_profiler.SizeMap._valuesÃ
+Ebuiltins.dict[torch.profiler._memory_profiler.TensorKey,builtins.int]V
+)torch.profiler._memory_profiler.TensorKey")torch.profiler._memory_profiler.TensorKey
+builtins.int"builtins.int"builtins.dictë
+DataFlowEdge,torch.profiler._memory_profiler.DataFlowEdge"builtins.object*·
+is_allocation:torch.profiler._memory_profiler.DataFlowEdge.is_allocation"
+builtins.bool"builtins.bool*f
+self\
+,torch.profiler._memory_profiler.DataFlowEdge",torch.profiler._memory_profiler.DataFlowEdge0:property`*›
+is_deletion8torch.profiler._memory_profiler.DataFlowEdge.is_deletion"
+builtins.bool"builtins.bool*f
+self\
+,torch.profiler._memory_profiler.DataFlowEdge",torch.profiler._memory_profiler.DataFlowEdge0:property`*Ê
+__init__5torch.profiler._memory_profiler.DataFlowEdge.__init__"
+None*f
+self\
+,torch.profiler._memory_profiler.DataFlowEdge",torch.profiler._memory_profiler.DataFlowEdge*Y
+input_versionD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *V
+mutatedG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None 8rë
+input_version:torch.profiler._memory_profiler.DataFlowEdge.input_versionD
+Union[builtins.int,None]
+builtins.int"builtins.int
+Nonerà
+mutated4torch.profiler._memory_profiler.DataFlowEdge.mutatedG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+NonerÛ
+__dataclass_fields__Atorch.profiler._memory_profiler.DataFlowEdge.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictÒ
+DataFlowNode,torch.profiler._memory_profiler.DataFlowNode"builtins.object*Ò
+__init__5torch.profiler._memory_profiler.DataFlowNode.__init__"
+None*f
+self\
+,torch.profiler._memory_profiler.DataFlowNode",torch.profiler._memory_profiler.DataFlowNode*Q
+eventF
+!torch._C._profiler._ProfilerEvent"!torch._C._profiler._ProfilerEvent*i
+graph^
+-torch.profiler._memory_profiler.DataFlowGraph"-torch.profiler._memory_profiler.DataFlowGraph*Ë
+_determine_edges=torch.profiler._memory_profiler.DataFlowNode._determine_edges"¨
+ebuiltins.dict[torch.profiler._memory_profiler.TensorKey,torch.profiler._memory_profiler.DataFlowEdge]V
+)torch.profiler._memory_profiler.TensorKey")torch.profiler._memory_profiler.TensorKey\
+,torch.profiler._memory_profiler.DataFlowEdge",torch.profiler._memory_profiler.DataFlowEdge"builtins.dict*f
+self\
+,torch.profiler._memory_profiler.DataFlowNode",torch.profiler._memory_profiler.DataFlowNode*ﬁ
+inputs3torch.profiler._memory_profiler.DataFlowNode.inputs"®
+Zbuiltins.dict[torch.profiler._memory_profiler.TensorKey,Tuple[builtins.bool,builtins.int]]V
+)torch.profiler._memory_profiler.TensorKey")torch.profiler._memory_profiler.TensorKeyc
+!Tuple[builtins.bool,builtins.int]
+builtins.bool"builtins.bool
+builtins.int"builtins.int"builtins.dict*f
+self\
+,torch.profiler._memory_profiler.DataFlowNode",torch.profiler._memory_profiler.DataFlowNode0:property`*Ñ
+outputs4torch.profiler._memory_profiler.DataFlowNode.outputs"Ã
+Ebuiltins.dict[torch.profiler._memory_profiler.TensorKey,builtins.int]V
+)torch.profiler._memory_profiler.TensorKey")torch.profiler._memory_profiler.TensorKey
+builtins.int"builtins.int"builtins.dict*f
+self\
+,torch.profiler._memory_profiler.DataFlowNode",torch.profiler._memory_profiler.DataFlowNode0:property`*Á
+intermediates:torch.profiler._memory_profiler.DataFlowNode.intermediates"£
+9builtins.tuple[torch.profiler._memory_profiler.TensorKey]V
+)torch.profiler._memory_profiler.TensorKey")torch.profiler._memory_profiler.TensorKey"builtins.tuple*f
+self\
+,torch.profiler._memory_profiler.DataFlowNode",torch.profiler._memory_profiler.DataFlowNode0:property`*Ÿ
+
+start_time7torch.profiler._memory_profiler.DataFlowNode.start_time"
+builtins.int"builtins.int*f
+self\
+,torch.profiler._memory_profiler.DataFlowNode",torch.profiler._memory_profiler.DataFlowNode0:property`rÖ
+_event3torch.profiler._memory_profiler.DataFlowNode._eventF
+!torch._C._profiler._ProfilerEvent"!torch._C._profiler._ProfilerEventrù
+_graph3torch.profiler._memory_profiler.DataFlowNode._graph^
+-torch.profiler._memory_profiler.DataFlowGraph"-torch.profiler._memory_profiler.DataFlowGraphrÏ
+_edges3torch.profiler._memory_profiler.DataFlowNode._edges¨
+ebuiltins.dict[torch.profiler._memory_profiler.TensorKey,torch.profiler._memory_profiler.DataFlowEdge]V
+)torch.profiler._memory_profiler.TensorKey")torch.profiler._memory_profiler.TensorKey\
+,torch.profiler._memory_profiler.DataFlowEdge",torch.profiler._memory_profiler.DataFlowEdge"builtins.dict‰
+DataFlowGraph-torch.profiler._memory_profiler.DataFlowGraph"builtins.object*ï
+__init__6torch.profiler._memory_profiler.DataFlowGraph.__init__"
+None*h
+self^
+-torch.profiler._memory_profiler.DataFlowGraph"-torch.profiler._memory_profiler.DataFlowGraph*]
+op_treeP
+&torch.profiler._memory_profiler.OpTree"&torch.profiler._memory_profiler.OpTree*Ì
+
+flow_nodes8torch.profiler._memory_profiler.DataFlowGraph.flow_nodes"¨
+<builtins.tuple[torch.profiler._memory_profiler.DataFlowNode]\
+,torch.profiler._memory_profiler.DataFlowNode",torch.profiler._memory_profiler.DataFlowNode"builtins.tuple*h
+self^
+-torch.profiler._memory_profiler.DataFlowGraph"-torch.profiler._memory_profiler.DataFlowGraph0:property`*L
+validate6torch.profiler._memory_profiler.DataFlowGraph.validate*
+self*Œ
+leaf_events9torch.profiler._memory_profiler.DataFlowGraph.leaf_events"ã
+1builtins.tuple[torch._C._profiler._ProfilerEvent]F
+!torch._C._profiler._ProfilerEvent"!torch._C._profiler._ProfilerEvent"builtins.tuple*h
+self^
+-torch.profiler._memory_profiler.DataFlowGraph"-torch.profiler._memory_profiler.DataFlowGraph0:property`*Ÿ
+_extract_leaf_eventsBtorch.profiler._memory_profiler.DataFlowGraph._extract_leaf_events"ã
+1builtins.tuple[torch._C._profiler._ProfilerEvent]F
+!torch._C._profiler._ProfilerEvent"!torch._C._profiler._ProfilerEvent"builtins.tuple*]
+op_treeP
+&torch.profiler._memory_profiler.OpTree"&torch.profiler._memory_profiler.OpTree0:staticmethodh*ß
+lookup4torch.profiler._memory_profiler.DataFlowGraph.lookup"
+builtins.int"builtins.int*h
+self^
+-torch.profiler._memory_profiler.DataFlowGraph"-torch.profiler._memory_profiler.DataFlowGraph*_
+keyV
+)torch.profiler._memory_profiler.TensorKey")torch.profiler._memory_profiler.TensorKey*è
+bump2torch.profiler._memory_profiler.DataFlowGraph.bump"
+None*h
+self^
+-torch.profiler._memory_profiler.DataFlowGraph"-torch.profiler._memory_profiler.DataFlowGraph*_
+keyV
+)torch.profiler._memory_profiler.TensorKey")torch.profiler._memory_profiler.TensorKey*ì
+delete4torch.profiler._memory_profiler.DataFlowGraph.delete"
+None*h
+self^
+-torch.profiler._memory_profiler.DataFlowGraph"-torch.profiler._memory_profiler.DataFlowGraph*_
+keyV
+)torch.profiler._memory_profiler.TensorKey")torch.profiler._memory_profiler.TensorKeyrî
+_op_tree6torch.profiler._memory_profiler.DataFlowGraph._op_treeP
+&torch.profiler._memory_profiler.OpTree"&torch.profiler._memory_profiler.OpTreerÿ
+_leaf_events:torch.profiler._memory_profiler.DataFlowGraph._leaf_eventsã
+1builtins.tuple[torch._C._profiler._ProfilerEvent]F
+!torch._C._profiler._ProfilerEvent"!torch._C._profiler._ProfilerEvent"builtins.tupler”
+_active_version=torch.profiler._memory_profiler.DataFlowGraph._active_versionÄ
+Qbuiltins.dict[torch.profiler._memory_profiler.TensorKey,Union[builtins.int,None]]V
+)torch.profiler._memory_profiler.TensorKey")torch.profiler._memory_profiler.TensorKeyD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None"builtins.dictrı
+_flow_nodes9torch.profiler._memory_profiler.DataFlowGraph._flow_nodes™
+;builtins.list[torch.profiler._memory_profiler.DataFlowNode]\
+,torch.profiler._memory_profiler.DataFlowNode",torch.profiler._memory_profiler.DataFlowNode"builtins.listı
+CategoryElement/torch.profiler._memory_profiler.CategoryElement"builtins.object*É
+__init__8torch.profiler._memory_profiler.CategoryElement.__init__"
+None*l
+selfb
+/torch.profiler._memory_profiler.CategoryElement"/torch.profiler._memory_profiler.CategoryElement*¶
+by_idò
+4Union[torch.profiler._memory_profiler.Category,None]T
+(torch.profiler._memory_profiler.Category"(torch.profiler._memory_profiler.Category
+None *Ø
+by_key†
+abuiltins.dict[torch.profiler._memory_profiler.TensorKey,torch.profiler._memory_profiler.Category]V
+)torch.profiler._memory_profiler.TensorKey")torch.profiler._memory_profiler.TensorKeyT
+(torch.profiler._memory_profiler.Category"(torch.profiler._memory_profiler.Category"builtins.dict *±
+
+by_versionû
+Äbuiltins.dict[TypeAlias[Tuple[torch.profiler._memory_profiler.TensorKey,builtins.int]],torch.profiler._memory_profiler.Category]≥
+HTypeAlias[Tuple[torch.profiler._memory_profiler.TensorKey,builtins.int]]∑
+=Tuple[torch.profiler._memory_profiler.TensorKey,builtins.int]V
+)torch.profiler._memory_profiler.TensorKey")torch.profiler._memory_profiler.TensorKey
+builtins.int"builtins.int"+torch.profiler._memory_profiler.TensorAndIDT
+(torch.profiler._memory_profiler.Category"(torch.profiler._memory_profiler.Category"builtins.dict *µ
+_by_id_keysetü
+7builtins.set[torch.profiler._memory_profiler.TensorKey]V
+)torch.profiler._memory_profiler.TensorKey")torch.profiler._memory_profiler.TensorKey"builtins.set 8rŸ
+by_id5torch.profiler._memory_profiler.CategoryElement.by_idò
+4Union[torch.profiler._memory_profiler.Category,None]T
+(torch.profiler._memory_profiler.Category"(torch.profiler._memory_profiler.Category
+Noner„
+by_key6torch.profiler._memory_profiler.CategoryElement.by_key†
+abuiltins.dict[torch.profiler._memory_profiler.TensorKey,torch.profiler._memory_profiler.Category]V
+)torch.profiler._memory_profiler.TensorKey")torch.profiler._memory_profiler.TensorKeyT
+(torch.profiler._memory_profiler.Category"(torch.profiler._memory_profiler.Category"builtins.dictrÈ
+
+by_version:torch.profiler._memory_profiler.CategoryElement.by_versionû
+Äbuiltins.dict[TypeAlias[Tuple[torch.profiler._memory_profiler.TensorKey,builtins.int]],torch.profiler._memory_profiler.Category]≥
+HTypeAlias[Tuple[torch.profiler._memory_profiler.TensorKey,builtins.int]]∑
+=Tuple[torch.profiler._memory_profiler.TensorKey,builtins.int]V
+)torch.profiler._memory_profiler.TensorKey")torch.profiler._memory_profiler.TensorKey
+builtins.int"builtins.int"+torch.profiler._memory_profiler.TensorAndIDT
+(torch.profiler._memory_profiler.Category"(torch.profiler._memory_profiler.Category"builtins.dictr
+_by_id_keyset=torch.profiler._memory_profiler.CategoryElement._by_id_keysetü
+7builtins.set[torch.profiler._memory_profiler.TensorKey]V
+)torch.profiler._memory_profiler.TensorKey")torch.profiler._memory_profiler.TensorKey"builtins.setrˆ
+__dataclass_fields__Dtorch.profiler._memory_profiler.CategoryElement.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dict‚
+CategoryDict,torch.profiler._memory_profiler.CategoryDict"builtins.object*˙
+	set_by_id6torch.profiler._memory_profiler.CategoryDict.set_by_id"
+None*f
+self\
+,torch.profiler._memory_profiler.CategoryDict",torch.profiler._memory_profiler.CategoryDict*_
+keyV
+)torch.profiler._memory_profiler.TensorKey")torch.profiler._memory_profiler.TensorKey*b
+categoryT
+(torch.profiler._memory_profiler.Category"(torch.profiler._memory_profiler.Category*¸
+
+set_by_key7torch.profiler._memory_profiler.CategoryDict.set_by_key"
+None*f
+self\
+,torch.profiler._memory_profiler.CategoryDict",torch.profiler._memory_profiler.CategoryDict*_
+keyV
+)torch.profiler._memory_profiler.TensorKey")torch.profiler._memory_profiler.TensorKey*b
+categoryT
+(torch.profiler._memory_profiler.Category"(torch.profiler._memory_profiler.Category*Ø
+set_by_version;torch.profiler._memory_profiler.CategoryDict.set_by_version"
+None*f
+self\
+,torch.profiler._memory_profiler.CategoryDict",torch.profiler._memory_profiler.CategoryDict*_
+keyV
+)torch.profiler._memory_profiler.TensorKey")torch.profiler._memory_profiler.TensorKey*)
+version
+builtins.int"builtins.int*b
+categoryT
+(torch.profiler._memory_profiler.Category"(torch.profiler._memory_profiler.Category*Ω
+setdefault_by_versionBtorch.profiler._memory_profiler.CategoryDict.setdefault_by_version"
+None*f
+self\
+,torch.profiler._memory_profiler.CategoryDict",torch.profiler._memory_profiler.CategoryDict*_
+keyV
+)torch.profiler._memory_profiler.TensorKey")torch.profiler._memory_profiler.TensorKey*)
+version
+builtins.int"builtins.int*b
+categoryT
+(torch.profiler._memory_profiler.Category"(torch.profiler._memory_profiler.Category*∫
+get0torch.profiler._memory_profiler.CategoryDict.get"ò
+4Union[torch.profiler._memory_profiler.Category,None]T
+(torch.profiler._memory_profiler.Category"(torch.profiler._memory_profiler.Category
+None*f
+self\
+,torch.profiler._memory_profiler.CategoryDict",torch.profiler._memory_profiler.CategoryDict*S
+keyJ
+#torch.profiler._memory_profiler.Key"#torch.profiler._memory_profiler.Key*)
+version
+builtins.int"builtins.int*∏
+__init__5torch.profiler._memory_profiler.CategoryDict.__init__"
+None*f
+self\
+,torch.profiler._memory_profiler.CategoryDict",torch.profiler._memory_profiler.CategoryDict*Ç
+_valuesÚ
+Ucollections.defaultdict[builtins.int,torch.profiler._memory_profiler.CategoryElement]
+builtins.int"builtins.intb
+/torch.profiler._memory_profiler.CategoryElement"/torch.profiler._memory_profiler.CategoryElement"collections.defaultdict 8r¥
+_values4torch.profiler._memory_profiler.CategoryDict._valuesÚ
+Ucollections.defaultdict[builtins.int,torch.profiler._memory_profiler.CategoryElement]
+builtins.int"builtins.intb
+/torch.profiler._memory_profiler.CategoryElement"/torch.profiler._memory_profiler.CategoryElement"collections.defaultdictrÛ
+__dataclass_fields__Atorch.profiler._memory_profiler.CategoryDict.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictÌ$
+MemoryProfile-torch.profiler._memory_profiler.MemoryProfile"builtins.object*å
+__init__6torch.profiler._memory_profiler.MemoryProfile.__init__"
+None*h
+self^
+-torch.profiler._memory_profiler.MemoryProfile"-torch.profiler._memory_profiler.MemoryProfile*T
+resultH
+"torch._C._autograd._ProfilerResult""torch._C._autograd._ProfilerResult*•
+timeline6torch.profiler._memory_profiler.MemoryProfile.timeline"Ë
+öbuiltins.tuple[Tuple[builtins.int,torch.profiler._memory_profiler.Action,TypeAlias[Tuple[torch.profiler._memory_profiler.Key,builtins.int]],builtins.int]]∏
+äTuple[builtins.int,torch.profiler._memory_profiler.Action,TypeAlias[Tuple[torch.profiler._memory_profiler.Key,builtins.int]],builtins.int]
+builtins.int"builtins.intP
+&torch.profiler._memory_profiler.Action"&torch.profiler._memory_profiler.Actionò
+BTypeAlias[Tuple[torch.profiler._memory_profiler.Key,builtins.int]]•
+7Tuple[torch.profiler._memory_profiler.Key,builtins.int]J
+#torch.profiler._memory_profiler.Key"#torch.profiler._memory_profiler.Key
+builtins.int"builtins.int"(torch.profiler._memory_profiler.KeyAndID
+builtins.int"builtins.int"builtins.tuple*h
+self^
+-torch.profiler._memory_profiler.MemoryProfile"-torch.profiler._memory_profiler.MemoryProfile0:property`*¸
+_is_gradient:torch.profiler._memory_profiler.MemoryProfile._is_gradient"
+builtins.bool"builtins.bool*h
+self^
+-torch.profiler._memory_profiler.MemoryProfile"-torch.profiler._memory_profiler.MemoryProfile*
+args
+Any*
+kwargs
+Any*≤
+_category_snapshot@torch.profiler._memory_profiler.MemoryProfile._category_snapshot"Ô
+åbuiltins.dict[TypeAlias[Tuple[torch.profiler._memory_profiler.TensorKey,builtins.int]],Union[torch.profiler._memory_profiler.Category,None]]≥
+HTypeAlias[Tuple[torch.profiler._memory_profiler.TensorKey,builtins.int]]∑
+=Tuple[torch.profiler._memory_profiler.TensorKey,builtins.int]V
+)torch.profiler._memory_profiler.TensorKey")torch.profiler._memory_profiler.TensorKey
+builtins.int"builtins.int"+torch.profiler._memory_profiler.TensorAndIDò
+4Union[torch.profiler._memory_profiler.Category,None]T
+(torch.profiler._memory_profiler.Category"(torch.profiler._memory_profiler.Category
+None"builtins.dict*h
+self^
+-torch.profiler._memory_profiler.MemoryProfile"-torch.profiler._memory_profiler.MemoryProfile*¶
+ _any_version_depends_on_gradientNtorch.profiler._memory_profiler.MemoryProfile._any_version_depends_on_gradient"H
+builtins.set[builtins.int]
+builtins.int"builtins.int"builtins.set*h
+self^
+-torch.profiler._memory_profiler.MemoryProfile"-torch.profiler._memory_profiler.MemoryProfile*‚
+_set_gradients_and_temporariesLtorch.profiler._memory_profiler.MemoryProfile._set_gradients_and_temporaries"
+None*h
+self^
+-torch.profiler._memory_profiler.MemoryProfile"-torch.profiler._memory_profiler.MemoryProfile*Ï
+#_set_parameters_using_python_tracerQtorch.profiler._memory_profiler.MemoryProfile._set_parameters_using_python_tracer"
+None*h
+self^
+-torch.profiler._memory_profiler.MemoryProfile"-torch.profiler._memory_profiler.MemoryProfile*º
+_set_inputs9torch.profiler._memory_profiler.MemoryProfile._set_inputs"
+None*h
+self^
+-torch.profiler._memory_profiler.MemoryProfile"-torch.profiler._memory_profiler.MemoryProfile*‰
+_set_parameters_using_data_flowMtorch.profiler._memory_profiler.MemoryProfile._set_parameters_using_data_flow"
+None*h
+self^
+-torch.profiler._memory_profiler.MemoryProfile"-torch.profiler._memory_profiler.MemoryProfile*∆
+_set_activations>torch.profiler._memory_profiler.MemoryProfile._set_activations"
+None*h
+self^
+-torch.profiler._memory_profiler.MemoryProfile"-torch.profiler._memory_profiler.MemoryProfile*Œ
+_set_optimizer_stateBtorch.profiler._memory_profiler.MemoryProfile._set_optimizer_state"
+None*h
+self^
+-torch.profiler._memory_profiler.MemoryProfile"-torch.profiler._memory_profiler.MemoryProfile*d
+_set_autograd_detailBtorch.profiler._memory_profiler.MemoryProfile._set_autograd_detail*
+selfrî
+_op_tree6torch.profiler._memory_profiler.MemoryProfile._op_treeP
+&torch.profiler._memory_profiler.OpTree"&torch.profiler._memory_profiler.OpTreer≤
+_data_flow_graph>torch.profiler._memory_profiler.MemoryProfile._data_flow_graph^
+-torch.profiler._memory_profiler.DataFlowGraph"-torch.profiler._memory_profiler.DataFlowGraphrò
+	_size_map7torch.profiler._memory_profiler.MemoryProfile._size_mapR
+'torch.profiler._memory_profiler.SizeMap"'torch.profiler._memory_profiler.SizeMapr¶
+_categories9torch.profiler._memory_profiler.MemoryProfile._categories\
+,torch.profiler._memory_profiler.CategoryDict",torch.profiler._memory_profiler.CategoryDict¸
+
+MemoryProfileTimeline5torch.profiler._memory_profiler.MemoryProfileTimeline"builtins.object*h
+__init__>torch.profiler._memory_profiler.MemoryProfileTimeline.__init__*
+self*
+memory_profile*x
+_coalesce_timelineHtorch.profiler._memory_profiler.MemoryProfileTimeline._coalesce_timeline*
+self*
+
+device_str*ñ
+export_memory_timelineLtorch.profiler._memory_profiler.MemoryProfileTimeline.export_memory_timeline"
+None*x
+selfn
+5torch.profiler._memory_profiler.MemoryProfileTimeline"5torch.profiler._memory_profiler.MemoryProfileTimeline*
+path
+Any*
+
+device_str
+Any*û
+export_memory_timeline_rawPtorch.profiler._memory_profiler.MemoryProfileTimeline.export_memory_timeline_raw"
+None*x
+selfn
+5torch.profiler._memory_profiler.MemoryProfileTimeline"5torch.profiler._memory_profiler.MemoryProfileTimeline*
+path
+Any*
+
+device_str
+Any*Œ
+export_memory_timeline_htmlQtorch.profiler._memory_profiler.MemoryProfileTimeline.export_memory_timeline_html"
+None*x
+selfn
+5torch.profiler._memory_profiler.MemoryProfileTimeline"5torch.profiler._memory_profiler.MemoryProfileTimeline*
+path
+Any*
+
+device_str
+Any*
+figsize
+Any *
+title
+Any rS
+timeline>torch.profiler._memory_profiler.MemoryProfileTimeline.timeline
+AnyrW
+
+categories@torch.profiler._memory_profiler.MemoryProfileTimeline.categories
+Anyá
+!_extract_parameters_and_gradientsAtorch.profiler._memory_profiler._extract_parameters_and_gradients"Ã
+Étyping.Iterator[Tuple[Union[torch.profiler._memory_profiler.TensorKey,None],Union[torch.profiler._memory_profiler.TensorKey,None]]]≤
+rTuple[Union[torch.profiler._memory_profiler.TensorKey,None],Union[torch.profiler._memory_profiler.TensorKey,None]]õ
+5Union[torch.profiler._memory_profiler.TensorKey,None]V
+)torch.profiler._memory_profiler.TensorKey")torch.profiler._memory_profiler.TensorKey
+Noneõ
+5Union[torch.profiler._memory_profiler.TensorKey,None]V
+)torch.profiler._memory_profiler.TensorKey")torch.profiler._memory_profiler.TensorKey
+None"typing.Iterator*P
+nodeF
+!torch._C._profiler._ProfilerEvent"!torch._C._profiler._ProfilerEvent¬
+extract_parameters2torch.profiler._memory_profiler.extract_parameters"•
+:typing.Iterator[torch.profiler._memory_profiler.TensorKey]V
+)torch.profiler._memory_profiler.TensorKey")torch.profiler._memory_profiler.TensorKey"typing.Iterator*P
+nodeF
+!torch._C._profiler._ProfilerEvent"!torch._C._profiler._ProfilerEventà
+extract_gradients1torch.profiler._memory_profiler.extract_gradients"Ì
+wtyping.Iterator[Tuple[Union[torch.profiler._memory_profiler.TensorKey,None],torch.profiler._memory_profiler.TensorKey]]‡
+fTuple[Union[torch.profiler._memory_profiler.TensorKey,None],torch.profiler._memory_profiler.TensorKey]õ
+5Union[torch.profiler._memory_profiler.TensorKey,None]V
+)torch.profiler._memory_profiler.TensorKey")torch.profiler._memory_profiler.TensorKey
+NoneV
+)torch.profiler._memory_profiler.TensorKey")torch.profiler._memory_profiler.TensorKey"typing.Iterator*P
+nodeF
+!torch._C._profiler._ProfilerEvent"!torch._C._profiler._ProfilerEventœ
+
+get_scopes*torch.profiler._memory_profiler.get_scopes"Ç
+.builtins.tuple[torch._C._profiler.RecordScope]@
+torch._C._profiler.RecordScope"torch._C._profiler.RecordScope"builtins.tuple*è
+eventÉ
+-Union[torch._C._profiler._ProfilerEvent,None]F
+!torch._C._profiler._ProfilerEvent"!torch._C._profiler._ProfilerEvent
+None*õ
+__annotations__/torch.profiler._memory_profiler.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*
+it	itertools *L
+log#torch.profiler._memory_profiler.log 
+logging.Logger"logging.Logger*Á
+_CATEGORY_TO_COLORS3torch.profiler._memory_profiler._CATEGORY_TO_COLORSö
+Pbuiltins.dict[Union[torch.profiler._memory_profiler.Category,None],builtins.str]ò
+4Union[torch.profiler._memory_profiler.Category,None]T
+(torch.profiler._memory_profiler.Category"(torch.profiler._memory_profiler.Category
+None
+builtins.str"builtins.str"builtins.dict*Â
+_CATEGORY_TO_INDEX2torch.profiler._memory_profiler._CATEGORY_TO_INDEXö
+Pbuiltins.dict[Union[torch.profiler._memory_profiler.Category,None],builtins.int]ò
+4Union[torch.profiler._memory_profiler.Category,None]T
+(torch.profiler._memory_profiler.Category"(torch.profiler._memory_profiler.Category
+None
+builtins.int"builtins.int"builtins.dict*ä
+_ACTION_TO_INDEX0torch.profiler._memory_profiler._ACTION_TO_INDEX√
+Bbuiltins.dict[torch.profiler._memory_profiler.Action,builtins.int]P
+&torch.profiler._memory_profiler.Action"&torch.profiler._memory_profiler.Action
+builtins.int"builtins.int"builtins.dict

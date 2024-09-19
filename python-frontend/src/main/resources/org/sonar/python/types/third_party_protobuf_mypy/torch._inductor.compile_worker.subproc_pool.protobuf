@@ -1,0 +1,112 @@
+
++torch._inductor.compile_worker.subproc_poolˇ
+SubprocPool7torch._inductor.compile_worker.subproc_pool.SubprocPool"builtins.object*˛
+__init__@torch._inductor.compile_worker.subproc_pool.SubprocPool.__init__"
+None*|
+selfr
+7torch._inductor.compile_worker.subproc_pool.SubprocPool"7torch._inductor.compile_worker.subproc_pool.SubprocPool*(
+nprocs
+builtins.int"builtins.int*ª
+submit>torch._inductor.compile_worker.subproc_pool.SubprocPool.submit"
+Any*|
+selfr
+7torch._inductor.compile_worker.subproc_pool.SubprocPool"7torch._inductor.compile_worker.subproc_pool.SubprocPool*W
+job_fnK
+CallableType[builtins.function]&
+builtins.function"builtins.function*
+args
+Any*^
+_read_threadDtorch._inductor.compile_worker.subproc_pool.SubprocPool._read_thread*
+self*V
+shutdown@torch._inductor.compile_worker.subproc_pool.SubprocPool.shutdown*
+selfrx
+
+write_pipeBtorch._inductor.compile_worker.subproc_pool.SubprocPool.write_pipe&
+io.BufferedWriter"io.BufferedWriterrv
+	read_pipeAtorch._inductor.compile_worker.subproc_pool.SubprocPool.read_pipe&
+io.BufferedReader"io.BufferedReaderr¢
+process?torch._inductor.compile_worker.subproc_pool.SubprocPool.processV
+ subprocess.Popen[builtins.bytes] 
+builtins.bytes"builtins.bytes"subprocess.Popenrr
+
+write_lockBtorch._inductor.compile_worker.subproc_pool.SubprocPool.write_lock 
+threading.Lock"threading.Lockrx
+read_threadCtorch._inductor.compile_worker.subproc_pool.SubprocPool.read_thread$
+threading.Thread"threading.Threadrv
+futures_lockDtorch._inductor.compile_worker.subproc_pool.SubprocPool.futures_lock 
+threading.Lock"threading.Lockrû
+pending_futuresGtorch._inductor.compile_worker.subproc_pool.SubprocPool.pending_futures¡
+@builtins.dict[builtins.int,concurrent.futures._base.Future[Any]]
+builtins.int"builtins.intP
+$concurrent.futures._base.Future[Any]
+Any"concurrent.futures._base.Future"builtins.dictr§
+job_id_countDtorch._inductor.compile_worker.subproc_pool.SubprocPool.job_id_countN
+itertools.count[builtins.int]
+builtins.int"builtins.int"itertools.countrj
+running?torch._inductor.compile_worker.subproc_pool.SubprocPool.running
+builtins.bool"builtins.boolà
+SubprocMain7torch._inductor.compile_worker.subproc_pool.SubprocMain"builtins.object*Å
+__init__@torch._inductor.compile_worker.subproc_pool.SubprocMain.__init__*
+self*
+
+nprocs*
+	read_pipe*
+
+write_pipe*N
+main<torch._inductor.compile_worker.subproc_pool.SubprocMain.main*
+self*X
+	_shutdownAtorch._inductor.compile_worker.subproc_pool.SubprocMain._shutdown*
+self*h
+submit>torch._inductor.compile_worker.subproc_pool.SubprocMain.submit*
+self*
+
+job_id*
+data*d
+do_job>torch._inductor.compile_worker.subproc_pool.SubprocMain.do_job*
+data0:staticmethodhrW
+	read_pipeAtorch._inductor.compile_worker.subproc_pool.SubprocMain.read_pipe
+AnyrY
+
+write_pipeBtorch._inductor.compile_worker.subproc_pool.SubprocMain.write_pipe
+AnyrY
+
+write_lockBtorch._inductor.compile_worker.subproc_pool.SubprocMain.write_lock
+AnyrM
+pool<torch._inductor.compile_worker.subproc_pool.SubprocMain.pool
+AnyrS
+running?torch._inductor.compile_worker.subproc_pool.SubprocMain.running
+Anya
+TestException9torch._inductor.compile_worker.subproc_pool.TestException"builtins.RuntimeErrorZ
+	_pack_msg5torch._inductor.compile_worker.subproc_pool._pack_msg*
+
+job_id*
+
+lengthP
+_unpack_msg7torch._inductor.compile_worker.subproc_pool._unpack_msg*
+datan
+	_send_msg5torch._inductor.compile_worker.subproc_pool._send_msg*
+
+write_pipe*
+
+job_id*
+job_data Q
+	_recv_msg5torch._inductor.compile_worker.subproc_pool._recv_msg*
+	read_pipeã
+_warm_process_pool>torch._inductor.compile_worker.subproc_pool._warm_process_pool"
+Any*Ü
+pool˚
+xTypeAlias[Union[concurrent.futures.process.ProcessPoolExecutor,torch._inductor.compile_worker.subproc_pool.SubprocPool]]«
+mUnion[concurrent.futures.process.ProcessPoolExecutor,torch._inductor.compile_worker.subproc_pool.SubprocPool]`
+.concurrent.futures.process.ProcessPoolExecutor".concurrent.futures.process.ProcessPoolExecutorr
+7torch._inductor.compile_worker.subproc_pool.SubprocPool"7torch._inductor.compile_worker.subproc_pool.SubprocPool"3torch._inductor.compile_worker.subproc_pool.AnyPool*#
+n
+builtins.int"builtins.intJ
+raise_testexc9torch._inductor.compile_worker.subproc_pool.raise_testexc*ß
+__annotations__;torch._inductor.compile_worker.subproc_pool.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*X
+log/torch._inductor.compile_worker.subproc_pool.log 
+logging.Logger"logging.Logger*`
+	msg_bytes5torch._inductor.compile_worker.subproc_pool.msg_bytes
+builtins.int"builtins.int

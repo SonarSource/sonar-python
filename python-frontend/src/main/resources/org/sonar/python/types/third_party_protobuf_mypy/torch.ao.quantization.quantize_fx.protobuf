@@ -1,0 +1,325 @@
+
+!torch.ao.quantization.quantize_fx¿
+attach_preserved_attrs_to_modelAtorch.ao.quantization.quantize_fx.attach_preserved_attrs_to_model"
+None*·
+model’
+GUnion[torch.fx.graph_module.GraphModule,torch.nn.modules.module.Module]F
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*l
+preserved_attrsW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict©
+_check_is_graph_module8torch.ao.quantization.quantize_fx._check_is_graph_module"
+None*K
+model@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module≈
+!_attach_meta_to_node_if_not_existCtorch.ao.quantization.quantize_fx._attach_meta_to_node_if_not_exist"
+None*Q
+modelF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule°
+_swap_ff_with_fxff4torch.ao.quantization.quantize_fx._swap_ff_with_fxff"
+None*K
+model@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module–
+_fuse_fx*torch.ao.quantization.quantize_fx._fuse_fx"F
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*Q
+modelF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule**
+is_qat
+builtins.bool"builtins.bool*Ÿ
+fuse_custom_configæ
+cUnion[torch.ao.quantization.fx.custom_config.FuseCustomConfig,builtins.dict[builtins.str,Any],None]r
+7torch.ao.quantization.fx.custom_config.FuseCustomConfig"7torch.ao.quantization.fx.custom_config.FuseCustomConfigW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None *Ù
+backend_config›
+mUnion[torch.ao.quantization.backend_config.backend_config.BackendConfig,builtins.dict[builtins.str,Any],None]Ü
+Atorch.ao.quantization.backend_config.backend_config.BackendConfig"Atorch.ao.quantization.backend_config.backend_config.BackendConfigW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None 
+_prepare_fx-torch.ao.quantization.quantize_fx._prepare_fx"F
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*K
+model@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*º
+qconfig_mapping¶
+[Union[torch.ao.quantization.qconfig_mapping.QConfigMapping,builtins.dict[builtins.str,Any]]l
+4torch.ao.quantization.qconfig_mapping.QConfigMapping"4torch.ao.quantization.qconfig_mapping.QConfigMappingW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict**
+is_qat
+builtins.bool"builtins.bool*B
+example_inputs.
+builtins.tuple[Any]
+Any"builtins.tuple*Â
+prepare_custom_config«
+fUnion[torch.ao.quantization.fx.custom_config.PrepareCustomConfig,builtins.dict[builtins.str,Any],None]x
+:torch.ao.quantization.fx.custom_config.PrepareCustomConfig":torch.ao.quantization.fx.custom_config.PrepareCustomConfigW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None *“
+_equalization_configµ
+`Union[torch.ao.quantization.qconfig_mapping.QConfigMapping,builtins.dict[builtins.str,Any],None]l
+4torch.ao.quantization.qconfig_mapping.QConfigMapping"4torch.ao.quantization.qconfig_mapping.QConfigMappingW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None *Ù
+backend_config›
+mUnion[torch.ao.quantization.backend_config.backend_config.BackendConfig,builtins.dict[builtins.str,Any],None]Ü
+Atorch.ao.quantization.backend_config.backend_config.BackendConfig"Atorch.ao.quantization.backend_config.backend_config.BackendConfigW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None *:
+is_standalone_module
+builtins.bool"builtins.bool É
+_prepare_standalone_module_fx?torch.ao.quantization.quantize_fx._prepare_standalone_module_fx"F
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*K
+model@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*º
+qconfig_mapping¶
+[Union[torch.ao.quantization.qconfig_mapping.QConfigMapping,builtins.dict[builtins.str,Any]]l
+4torch.ao.quantization.qconfig_mapping.QConfigMapping"4torch.ao.quantization.qconfig_mapping.QConfigMappingW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict**
+is_qat
+builtins.bool"builtins.bool*B
+example_inputs.
+builtins.tuple[Any]
+Any"builtins.tuple*Â
+prepare_custom_config«
+fUnion[torch.ao.quantization.fx.custom_config.PrepareCustomConfig,builtins.dict[builtins.str,Any],None]x
+:torch.ao.quantization.fx.custom_config.PrepareCustomConfig":torch.ao.quantization.fx.custom_config.PrepareCustomConfigW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None *Ù
+backend_config›
+mUnion[torch.ao.quantization.backend_config.backend_config.BackendConfig,builtins.dict[builtins.str,Any],None]Ü
+Atorch.ao.quantization.backend_config.backend_config.BackendConfig"Atorch.ao.quantization.backend_config.backend_config.BackendConfigW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None ú
+fuse_fx)torch.ao.quantization.quantize_fx.fuse_fx"F
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*K
+model@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*Ÿ
+fuse_custom_configæ
+cUnion[torch.ao.quantization.fx.custom_config.FuseCustomConfig,builtins.dict[builtins.str,Any],None]r
+7torch.ao.quantization.fx.custom_config.FuseCustomConfig"7torch.ao.quantization.fx.custom_config.FuseCustomConfigW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None *Ù
+backend_config›
+mUnion[torch.ao.quantization.backend_config.backend_config.BackendConfig,builtins.dict[builtins.str,Any],None]Ü
+Atorch.ao.quantization.backend_config.backend_config.BackendConfig"Atorch.ao.quantization.backend_config.backend_config.BackendConfigW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None Ü
+
+prepare_fx,torch.ao.quantization.quantize_fx.prepare_fx"F
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*K
+model@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*º
+qconfig_mapping¶
+[Union[torch.ao.quantization.qconfig_mapping.QConfigMapping,builtins.dict[builtins.str,Any]]l
+4torch.ao.quantization.qconfig_mapping.QConfigMapping"4torch.ao.quantization.qconfig_mapping.QConfigMappingW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*B
+example_inputs.
+builtins.tuple[Any]
+Any"builtins.tuple*Â
+prepare_custom_config«
+fUnion[torch.ao.quantization.fx.custom_config.PrepareCustomConfig,builtins.dict[builtins.str,Any],None]x
+:torch.ao.quantization.fx.custom_config.PrepareCustomConfig":torch.ao.quantization.fx.custom_config.PrepareCustomConfigW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None *“
+_equalization_configµ
+`Union[torch.ao.quantization.qconfig_mapping.QConfigMapping,builtins.dict[builtins.str,Any],None]l
+4torch.ao.quantization.qconfig_mapping.QConfigMapping"4torch.ao.quantization.qconfig_mapping.QConfigMappingW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None *Ù
+backend_config›
+mUnion[torch.ao.quantization.backend_config.backend_config.BackendConfig,builtins.dict[builtins.str,Any],None]Ü
+Atorch.ao.quantization.backend_config.backend_config.BackendConfig"Atorch.ao.quantization.backend_config.backend_config.BackendConfigW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None π
+
+prepare_qat_fx0torch.ao.quantization.quantize_fx.prepare_qat_fx"F
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*K
+model@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*º
+qconfig_mapping¶
+[Union[torch.ao.quantization.qconfig_mapping.QConfigMapping,builtins.dict[builtins.str,Any]]l
+4torch.ao.quantization.qconfig_mapping.QConfigMapping"4torch.ao.quantization.qconfig_mapping.QConfigMappingW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*B
+example_inputs.
+builtins.tuple[Any]
+Any"builtins.tuple*Â
+prepare_custom_config«
+fUnion[torch.ao.quantization.fx.custom_config.PrepareCustomConfig,builtins.dict[builtins.str,Any],None]x
+:torch.ao.quantization.fx.custom_config.PrepareCustomConfig":torch.ao.quantization.fx.custom_config.PrepareCustomConfigW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None *Ù
+backend_config›
+mUnion[torch.ao.quantization.backend_config.backend_config.BackendConfig,builtins.dict[builtins.str,Any],None]Ü
+Atorch.ao.quantization.backend_config.backend_config.BackendConfig"Atorch.ao.quantization.backend_config.backend_config.BackendConfigW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None Á
+_convert_fx-torch.ao.quantization.quantize_fx._convert_fx"F
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*X
+graph_moduleF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*0
+is_reference
+builtins.bool"builtins.bool*Â
+convert_custom_config«
+fUnion[torch.ao.quantization.fx.custom_config.ConvertCustomConfig,builtins.dict[builtins.str,Any],None]x
+:torch.ao.quantization.fx.custom_config.ConvertCustomConfig":torch.ao.quantization.fx.custom_config.ConvertCustomConfigW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None *:
+is_standalone_module
+builtins.bool"builtins.bool *5
+_remove_qconfig
+builtins.bool"builtins.bool *Õ
+qconfig_mappingµ
+`Union[torch.ao.quantization.qconfig_mapping.QConfigMapping,builtins.dict[builtins.str,Any],None]l
+4torch.ao.quantization.qconfig_mapping.QConfigMapping"4torch.ao.quantization.qconfig_mapping.QConfigMappingW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None *Ù
+backend_config›
+mUnion[torch.ao.quantization.backend_config.backend_config.BackendConfig,builtins.dict[builtins.str,Any],None]Ü
+Atorch.ao.quantization.backend_config.backend_config.BackendConfig"Atorch.ao.quantization.backend_config.backend_config.BackendConfigW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None *3
+is_decomposed
+builtins.bool"builtins.bool ¬
+
+
+convert_fx,torch.ao.quantization.quantize_fx.convert_fx"F
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*X
+graph_moduleF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*Â
+convert_custom_config«
+fUnion[torch.ao.quantization.fx.custom_config.ConvertCustomConfig,builtins.dict[builtins.str,Any],None]x
+:torch.ao.quantization.fx.custom_config.ConvertCustomConfig":torch.ao.quantization.fx.custom_config.ConvertCustomConfigW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None *5
+_remove_qconfig
+builtins.bool"builtins.bool *Õ
+qconfig_mappingµ
+`Union[torch.ao.quantization.qconfig_mapping.QConfigMapping,builtins.dict[builtins.str,Any],None]l
+4torch.ao.quantization.qconfig_mapping.QConfigMapping"4torch.ao.quantization.qconfig_mapping.QConfigMappingW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None *Ù
+backend_config›
+mUnion[torch.ao.quantization.backend_config.backend_config.BackendConfig,builtins.dict[builtins.str,Any],None]Ü
+Atorch.ao.quantization.backend_config.backend_config.BackendConfig"Atorch.ao.quantization.backend_config.backend_config.BackendConfigW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None ‹
+
+convert_to_reference_fx9torch.ao.quantization.quantize_fx.convert_to_reference_fx"F
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*X
+graph_moduleF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*Â
+convert_custom_config«
+fUnion[torch.ao.quantization.fx.custom_config.ConvertCustomConfig,builtins.dict[builtins.str,Any],None]x
+:torch.ao.quantization.fx.custom_config.ConvertCustomConfig":torch.ao.quantization.fx.custom_config.ConvertCustomConfigW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None *5
+_remove_qconfig
+builtins.bool"builtins.bool *Õ
+qconfig_mappingµ
+`Union[torch.ao.quantization.qconfig_mapping.QConfigMapping,builtins.dict[builtins.str,Any],None]l
+4torch.ao.quantization.qconfig_mapping.QConfigMapping"4torch.ao.quantization.qconfig_mapping.QConfigMappingW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None *Ù
+backend_config›
+mUnion[torch.ao.quantization.backend_config.backend_config.BackendConfig,builtins.dict[builtins.str,Any],None]Ü
+Atorch.ao.quantization.backend_config.backend_config.BackendConfig"Atorch.ao.quantization.backend_config.backend_config.BackendConfigW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None Ω
+
+#_convert_to_reference_decomposed_fxEtorch.ao.quantization.quantize_fx._convert_to_reference_decomposed_fx"F
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*X
+graph_moduleF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*Â
+convert_custom_config«
+fUnion[torch.ao.quantization.fx.custom_config.ConvertCustomConfig,builtins.dict[builtins.str,Any],None]x
+:torch.ao.quantization.fx.custom_config.ConvertCustomConfig":torch.ao.quantization.fx.custom_config.ConvertCustomConfigW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None *Õ
+qconfig_mappingµ
+`Union[torch.ao.quantization.qconfig_mapping.QConfigMapping,builtins.dict[builtins.str,Any],None]l
+4torch.ao.quantization.qconfig_mapping.QConfigMapping"4torch.ao.quantization.qconfig_mapping.QConfigMappingW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None *Ù
+backend_config›
+mUnion[torch.ao.quantization.backend_config.backend_config.BackendConfig,builtins.dict[builtins.str,Any],None]Ü
+Atorch.ao.quantization.backend_config.backend_config.BackendConfig"Atorch.ao.quantization.backend_config.backend_config.BackendConfigW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None û
+_convert_standalone_module_fx?torch.ao.quantization.quantize_fx._convert_standalone_module_fx"F
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*X
+graph_moduleF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*2
+is_reference
+builtins.bool"builtins.bool *Â
+convert_custom_config«
+fUnion[torch.ao.quantization.fx.custom_config.ConvertCustomConfig,builtins.dict[builtins.str,Any],None]x
+:torch.ao.quantization.fx.custom_config.ConvertCustomConfig":torch.ao.quantization.fx.custom_config.ConvertCustomConfigW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None *ù
+__annotations__1torch.ao.quantization.quantize_fx.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict

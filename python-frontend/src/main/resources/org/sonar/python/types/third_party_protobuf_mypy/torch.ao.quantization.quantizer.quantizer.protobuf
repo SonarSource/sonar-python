@@ -1,0 +1,292 @@
+
+)torch.ao.quantization.quantizer.quantizer_
+QuantizationSpecBase>torch.ao.quantization.quantizer.quantizer.QuantizationSpecBase"abc.ABC¦
+QuantizationSpec:torch.ao.quantization.quantizer.quantizer.QuantizationSpec">torch.ao.quantization.quantizer.quantizer.QuantizationSpecBase*c
+__post_init__Htorch.ao.quantization.quantizer.quantizer.QuantizationSpec.__post_init__*
+self*”
+__init__Ctorch.ao.quantization.quantizer.quantizer.QuantizationSpec.__init__"
+None*‚
+selfx
+:torch.ao.quantization.quantizer.quantizer.QuantizationSpec":torch.ao.quantization.quantizer.quantizer.QuantizationSpec*+
+dtype 
+torch._C.dtype"torch._C.dtype*ð
+observer_or_fake_quant_ctrÏ
+­TypeAlias[Union[torch.ao.quantization.observer._PartialWrapper,Type[torch.ao.quantization.observer.ObserverBase],Type[torch.ao.quantization.fake_quantize.FakeQuantizeBase]]]Ø
+¢Union[torch.ao.quantization.observer._PartialWrapper,Type[torch.ao.quantization.observer.ObserverBase],Type[torch.ao.quantization.fake_quantize.FakeQuantizeBase]]`
+.torch.ao.quantization.observer._PartialWrapper".torch.ao.quantization.observer._PartialWrapper—
+1Type[torch.ao.quantization.observer.ObserverBase]Z
++torch.ao.quantization.observer.ObserverBase"+torch.ao.quantization.observer.ObserverBase"type²
+:Type[torch.ao.quantization.fake_quantize.FakeQuantizeBase]l
+4torch.ao.quantization.fake_quantize.FakeQuantizeBase"4torch.ao.quantization.fake_quantize.FakeQuantizeBase"type"@torch.ao.quantization.qconfig._ObserverOrFakeQuantizeConstructor*U
+	quant_minD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *U
+	quant_maxD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *_
+qschemeP
+Union[torch._C.qscheme,None]$
+torch._C.qscheme"torch._C.qscheme
+None *S
+ch_axisD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *0
+
+is_dynamic
+builtins.bool"builtins.bool 8rk
+dtype@torch.ao.quantization.quantizer.quantizer.QuantizationSpec.dtype 
+torch._C.dtype"torch._C.dtyperÅ
+observer_or_fake_quant_ctrUtorch.ao.quantization.quantizer.quantizer.QuantizationSpec.observer_or_fake_quant_ctrÏ
+­TypeAlias[Union[torch.ao.quantization.observer._PartialWrapper,Type[torch.ao.quantization.observer.ObserverBase],Type[torch.ao.quantization.fake_quantize.FakeQuantizeBase]]]Ø
+¢Union[torch.ao.quantization.observer._PartialWrapper,Type[torch.ao.quantization.observer.ObserverBase],Type[torch.ao.quantization.fake_quantize.FakeQuantizeBase]]`
+.torch.ao.quantization.observer._PartialWrapper".torch.ao.quantization.observer._PartialWrapper—
+1Type[torch.ao.quantization.observer.ObserverBase]Z
++torch.ao.quantization.observer.ObserverBase"+torch.ao.quantization.observer.ObserverBase"type²
+:Type[torch.ao.quantization.fake_quantize.FakeQuantizeBase]l
+4torch.ao.quantization.fake_quantize.FakeQuantizeBase"4torch.ao.quantization.fake_quantize.FakeQuantizeBase"type"@torch.ao.quantization.qconfig._ObserverOrFakeQuantizeConstructorr—
+	quant_minDtorch.ao.quantization.quantizer.quantizer.QuantizationSpec.quant_minD
+Union[builtins.int,None]
+builtins.int"builtins.int
+Noner—
+	quant_maxDtorch.ao.quantization.quantizer.quantizer.QuantizationSpec.quant_maxD
+Union[builtins.int,None]
+builtins.int"builtins.int
+NonerŸ
+qschemeBtorch.ao.quantization.quantizer.quantizer.QuantizationSpec.qschemeP
+Union[torch._C.qscheme,None]$
+torch._C.qscheme"torch._C.qscheme
+Noner“
+ch_axisBtorch.ao.quantization.quantizer.quantizer.QuantizationSpec.ch_axisD
+Union[builtins.int,None]
+builtins.int"builtins.int
+Noners
+
+is_dynamicEtorch.ao.quantization.quantizer.quantizer.QuantizationSpec.is_dynamic
+builtins.bool"builtins.boolr
+__dataclass_fields__Otorch.ao.quantization.quantizer.quantizer.QuantizationSpec.__dataclass_fields__—
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictó
+FixedQParamsQuantizationSpecFtorch.ao.quantization.quantizer.quantizer.FixedQParamsQuantizationSpec">torch.ao.quantization.quantizer.quantizer.QuantizationSpecBase*Ì
+__init__Otorch.ao.quantization.quantizer.quantizer.FixedQParamsQuantizationSpec.__init__"
+None*›
+self
+Ftorch.ao.quantization.quantizer.quantizer.FixedQParamsQuantizationSpec"Ftorch.ao.quantization.quantizer.quantizer.FixedQParamsQuantizationSpec*+
+dtype 
+torch._C.dtype"torch._C.dtype*+
+scale 
+builtins.float"builtins.float*,
+
+zero_point
+builtins.int"builtins.int*U
+	quant_minD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *U
+	quant_maxD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *_
+qschemeP
+Union[torch._C.qscheme,None]$
+torch._C.qscheme"torch._C.qscheme
+None *0
+
+is_dynamic
+builtins.bool"builtins.bool 8rw
+dtypeLtorch.ao.quantization.quantizer.quantizer.FixedQParamsQuantizationSpec.dtype 
+torch._C.dtype"torch._C.dtyperw
+scaleLtorch.ao.quantization.quantizer.quantizer.FixedQParamsQuantizationSpec.scale 
+builtins.float"builtins.floatr}
+
+zero_pointQtorch.ao.quantization.quantizer.quantizer.FixedQParamsQuantizationSpec.zero_point
+builtins.int"builtins.intr£
+	quant_minPtorch.ao.quantization.quantizer.quantizer.FixedQParamsQuantizationSpec.quant_minD
+Union[builtins.int,None]
+builtins.int"builtins.int
+Noner£
+	quant_maxPtorch.ao.quantization.quantizer.quantizer.FixedQParamsQuantizationSpec.quant_maxD
+Union[builtins.int,None]
+builtins.int"builtins.int
+Noner«
+qschemeNtorch.ao.quantization.quantizer.quantizer.FixedQParamsQuantizationSpec.qschemeP
+Union[torch._C.qscheme,None]$
+torch._C.qscheme"torch._C.qscheme
+Noner
+
+is_dynamicQtorch.ao.quantization.quantizer.quantizer.FixedQParamsQuantizationSpec.is_dynamic
+builtins.bool"builtins.boolr
+__dataclass_fields__[torch.ao.quantization.quantizer.quantizer.FixedQParamsQuantizationSpec.__dataclass_fields__—
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dict¥
+SharedQuantizationSpec@torch.ao.quantization.quantizer.quantizer.SharedQuantizationSpec">torch.ao.quantization.quantizer.quantizer.QuantizationSpecBase*
+__init__Itorch.ao.quantization.quantizer.quantizer.SharedQuantizationSpec.__init__"
+None*
+self„
+@torch.ao.quantization.quantizer.quantizer.SharedQuantizationSpec"@torch.ao.quantization.quantizer.quantizer.SharedQuantizationSpec*œ
+edge_or_node‰
+QTypeAlias[Union[Tuple[torch.fx.node.Node,torch.fx.node.Node],torch.fx.node.Node]]û
+FUnion[Tuple[torch.fx.node.Node,torch.fx.node.Node],torch.fx.node.Node]„
+,Tuple[torch.fx.node.Node,torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node(
+torch.fx.node.Node"torch.fx.node.Node(
+torch.fx.node.Node"torch.fx.node.Node"4torch.ao.quantization.quantizer.quantizer.EdgeOrNode8ré
+edge_or_nodeMtorch.ao.quantization.quantizer.quantizer.SharedQuantizationSpec.edge_or_node‰
+QTypeAlias[Union[Tuple[torch.fx.node.Node,torch.fx.node.Node],torch.fx.node.Node]]û
+FUnion[Tuple[torch.fx.node.Node,torch.fx.node.Node],torch.fx.node.Node]„
+,Tuple[torch.fx.node.Node,torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node(
+torch.fx.node.Node"torch.fx.node.Node(
+torch.fx.node.Node"torch.fx.node.Node"4torch.ao.quantization.quantizer.quantizer.EdgeOrNoder‡
+__dataclass_fields__Utorch.ao.quantization.quantizer.quantizer.SharedQuantizationSpec.__dataclass_fields__—
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictë
+DerivedQuantizationSpecAtorch.ao.quantization.quantizer.quantizer.DerivedQuantizationSpec">torch.ao.quantization.quantizer.quantizer.QuantizationSpecBase*®
+
+__init__Jtorch.ao.quantization.quantizer.quantizer.DerivedQuantizationSpec.__init__"
+None*‘
+self†
+Atorch.ao.quantization.quantizer.quantizer.DerivedQuantizationSpec"Atorch.ao.quantization.quantizer.quantizer.DerivedQuantizationSpec*
+derived_fromý
+`builtins.list[TypeAlias[Union[Tuple[torch.fx.node.Node,torch.fx.node.Node],torch.fx.node.Node]]]‰
+QTypeAlias[Union[Tuple[torch.fx.node.Node,torch.fx.node.Node],torch.fx.node.Node]]û
+FUnion[Tuple[torch.fx.node.Node,torch.fx.node.Node],torch.fx.node.Node]„
+,Tuple[torch.fx.node.Node,torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node(
+torch.fx.node.Node"torch.fx.node.Node(
+torch.fx.node.Node"torch.fx.node.Node"4torch.ao.quantization.quantizer.quantizer.EdgeOrNode"builtins.list*b
+derive_qparams_fnK
+CallableType[builtins.function]&
+builtins.function"builtins.function*+
+dtype 
+torch._C.dtype"torch._C.dtype*U
+	quant_minD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *U
+	quant_maxD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *_
+qschemeP
+Union[torch._C.qscheme,None]$
+torch._C.qscheme"torch._C.qscheme
+None *S
+ch_axisD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *0
+
+is_dynamic
+builtins.bool"builtins.bool 8rÞ
+derived_fromNtorch.ao.quantization.quantizer.quantizer.DerivedQuantizationSpec.derived_fromý
+`builtins.list[TypeAlias[Union[Tuple[torch.fx.node.Node,torch.fx.node.Node],torch.fx.node.Node]]]‰
+QTypeAlias[Union[Tuple[torch.fx.node.Node,torch.fx.node.Node],torch.fx.node.Node]]û
+FUnion[Tuple[torch.fx.node.Node,torch.fx.node.Node],torch.fx.node.Node]„
+,Tuple[torch.fx.node.Node,torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node(
+torch.fx.node.Node"torch.fx.node.Node(
+torch.fx.node.Node"torch.fx.node.Node"4torch.ao.quantization.quantizer.quantizer.EdgeOrNode"builtins.listrµ
+derive_qparams_fnStorch.ao.quantization.quantizer.quantizer.DerivedQuantizationSpec.derive_qparams_fnK
+CallableType[builtins.function]&
+builtins.function"builtins.functionrr
+dtypeGtorch.ao.quantization.quantizer.quantizer.DerivedQuantizationSpec.dtype 
+torch._C.dtype"torch._C.dtyperž
+	quant_minKtorch.ao.quantization.quantizer.quantizer.DerivedQuantizationSpec.quant_minD
+Union[builtins.int,None]
+builtins.int"builtins.int
+Nonerž
+	quant_maxKtorch.ao.quantization.quantizer.quantizer.DerivedQuantizationSpec.quant_maxD
+Union[builtins.int,None]
+builtins.int"builtins.int
+Noner¦
+qschemeItorch.ao.quantization.quantizer.quantizer.DerivedQuantizationSpec.qschemeP
+Union[torch._C.qscheme,None]$
+torch._C.qscheme"torch._C.qscheme
+Nonerš
+ch_axisItorch.ao.quantization.quantizer.quantizer.DerivedQuantizationSpec.ch_axisD
+Union[builtins.int,None]
+builtins.int"builtins.int
+Nonerz
+
+is_dynamicLtorch.ao.quantization.quantizer.quantizer.DerivedQuantizationSpec.is_dynamic
+builtins.bool"builtins.boolrˆ
+__dataclass_fields__Vtorch.ao.quantization.quantizer.quantizer.DerivedQuantizationSpec.__dataclass_fields__—
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dict©
+QuantizationAnnotation@torch.ao.quantization.quantizer.quantizer.QuantizationAnnotation"builtins.object*ô
+__init__Itorch.ao.quantization.quantizer.quantizer.QuantizationAnnotation.__init__"
+None*
+self„
+@torch.ao.quantization.quantizer.quantizer.QuantizationAnnotation"@torch.ao.quantization.quantizer.quantizer.QuantizationAnnotation*
+input_qspec_map…
+lbuiltins.dict[torch.fx.node.Node,Union[torch.ao.quantization.quantizer.quantizer.QuantizationSpecBase,None]](
+torch.fx.node.Node"torch.fx.node.NodeÛ
+JUnion[torch.ao.quantization.quantizer.quantizer.QuantizationSpecBase,None]€
+>torch.ao.quantization.quantizer.quantizer.QuantizationSpecBase">torch.ao.quantization.quantizer.quantizer.QuantizationSpecBase
+None"builtins.dict *ð
+output_qspecÛ
+JUnion[torch.ao.quantization.quantizer.quantizer.QuantizationSpecBase,None]€
+>torch.ao.quantization.quantizer.quantizer.QuantizationSpecBase">torch.ao.quantization.quantizer.quantizer.QuantizationSpecBase
+None *<
+allow_implicit_sharing
+builtins.bool"builtins.bool *0
+
+_annotated
+builtins.bool"builtins.bool 8rë
+input_qspec_mapPtorch.ao.quantization.quantizer.quantizer.QuantizationAnnotation.input_qspec_map…
+lbuiltins.dict[torch.fx.node.Node,Union[torch.ao.quantization.quantizer.quantizer.QuantizationSpecBase,None]](
+torch.fx.node.Node"torch.fx.node.NodeÛ
+JUnion[torch.ao.quantization.quantizer.quantizer.QuantizationSpecBase,None]€
+>torch.ao.quantization.quantizer.quantizer.QuantizationSpecBase">torch.ao.quantization.quantizer.quantizer.QuantizationSpecBase
+None"builtins.dictr»
+output_qspecMtorch.ao.quantization.quantizer.quantizer.QuantizationAnnotation.output_qspecÛ
+JUnion[torch.ao.quantization.quantizer.quantizer.QuantizationSpecBase,None]€
+>torch.ao.quantization.quantizer.quantizer.QuantizationSpecBase">torch.ao.quantization.quantizer.quantizer.QuantizationSpecBase
+Noner‘
+allow_implicit_sharingWtorch.ao.quantization.quantizer.quantizer.QuantizationAnnotation.allow_implicit_sharing
+builtins.bool"builtins.boolry
+
+_annotatedKtorch.ao.quantization.quantizer.quantizer.QuantizationAnnotation._annotated
+builtins.bool"builtins.boolr‡
+__dataclass_fields__Utorch.ao.quantization.quantizer.quantizer.QuantizationAnnotation.__dataclass_fields__—
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictç
+	Quantizer3torch.ao.quantization.quantizer.quantizer.Quantizer"abc.ABC*ù
+transform_for_annotationLtorch.ao.quantization.quantizer.quantizer.Quantizer.transform_for_annotation"F
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*t
+selfj
+3torch.ao.quantization.quantizer.quantizer.Quantizer"3torch.ao.quantization.quantizer.quantizer.Quantizer*Q
+modelF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*í
+annotate<torch.ao.quantization.quantizer.quantizer.Quantizer.annotate"F
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*t
+selfj
+3torch.ao.quantization.quantizer.quantizer.Quantizer"3torch.ao.quantization.quantizer.quantizer.Quantizer*Q
+modelF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule0:abstractmethod@*¯
+validate<torch.ao.quantization.quantizer.quantizer.Quantizer.validate"
+None*t
+selfj
+3torch.ao.quantization.quantizer.quantizer.Quantizer"3torch.ao.quantization.quantizer.quantizer.Quantizer*Q
+modelF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule0:abstractmethod@*¥
+__annotations__9torch.ao.quantization.quantizer.quantizer.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*ˆ
+__all__1torch.ao.quantization.quantizer.quantizer.__all__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list

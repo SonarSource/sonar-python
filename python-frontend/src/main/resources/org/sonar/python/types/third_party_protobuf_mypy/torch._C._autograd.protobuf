@@ -1,0 +1,352 @@
+
+torch._C._autograd¶
+
+DeviceTypetorch._C._autograd.DeviceType"	enum.EnumHrP
+CPU!torch._C._autograd.DeviceType.CPU&
+builtins.ellipsis"builtins.ellipsisrR
+CUDA"torch._C._autograd.DeviceType.CUDA&
+builtins.ellipsis"builtins.ellipsisrP
+XPU!torch._C._autograd.DeviceType.XPU&
+builtins.ellipsis"builtins.ellipsisrV
+MKLDNN$torch._C._autograd.DeviceType.MKLDNN&
+builtins.ellipsis"builtins.ellipsisrV
+OPENGL$torch._C._autograd.DeviceType.OPENGL&
+builtins.ellipsis"builtins.ellipsisrV
+OPENCL$torch._C._autograd.DeviceType.OPENCL&
+builtins.ellipsis"builtins.ellipsisrT
+IDEEP#torch._C._autograd.DeviceType.IDEEP&
+builtins.ellipsis"builtins.ellipsisrP
+HIP!torch._C._autograd.DeviceType.HIP&
+builtins.ellipsis"builtins.ellipsisrR
+FPGA"torch._C._autograd.DeviceType.FPGA&
+builtins.ellipsis"builtins.ellipsisrR
+MAIA"torch._C._autograd.DeviceType.MAIA&
+builtins.ellipsis"builtins.ellipsisrP
+XLA!torch._C._autograd.DeviceType.XLA&
+builtins.ellipsis"builtins.ellipsisrR
+MTIA"torch._C._autograd.DeviceType.MTIA&
+builtins.ellipsis"builtins.ellipsisrP
+MPS!torch._C._autograd.DeviceType.MPS&
+builtins.ellipsis"builtins.ellipsisrP
+HPU!torch._C._autograd.DeviceType.HPU&
+builtins.ellipsis"builtins.ellipsisrR
+Meta"torch._C._autograd.DeviceType.Meta&
+builtins.ellipsis"builtins.ellipsisrV
+Vulkan$torch._C._autograd.DeviceType.Vulkan&
+builtins.ellipsis"builtins.ellipsisrT
+Metal#torch._C._autograd.DeviceType.Metal&
+builtins.ellipsis"builtins.ellipsisr`
+PrivateUse1)torch._C._autograd.DeviceType.PrivateUse1&
+builtins.ellipsis"builtins.ellipsisû
+ProfilerEvent torch._C._autograd.ProfilerEvent"builtins.object*„
+cpu_elapsed_us/torch._C._autograd.ProfilerEvent.cpu_elapsed_us" 
+builtins.float"builtins.float*N
+selfD
+ torch._C._autograd.ProfilerEvent" torch._C._autograd.ProfilerEvent*O
+otherD
+ torch._C._autograd.ProfilerEvent" torch._C._autograd.ProfilerEvent*³
+cpu_memory_usage1torch._C._autograd.ProfilerEvent.cpu_memory_usage"
+builtins.int"builtins.int*N
+selfD
+ torch._C._autograd.ProfilerEvent" torch._C._autograd.ProfilerEvent*†
+cuda_elapsed_us0torch._C._autograd.ProfilerEvent.cuda_elapsed_us" 
+builtins.float"builtins.float*N
+selfD
+ torch._C._autograd.ProfilerEvent" torch._C._autograd.ProfilerEvent*O
+otherD
+ torch._C._autograd.ProfilerEvent" torch._C._autograd.ProfilerEvent*”
+privateuse1_elapsed_us7torch._C._autograd.ProfilerEvent.privateuse1_elapsed_us" 
+builtins.float"builtins.float*N
+selfD
+ torch._C._autograd.ProfilerEvent" torch._C._autograd.ProfilerEvent*O
+otherD
+ torch._C._autograd.ProfilerEvent" torch._C._autograd.ProfilerEvent*µ
+cuda_memory_usage2torch._C._autograd.ProfilerEvent.cuda_memory_usage"
+builtins.int"builtins.int*N
+selfD
+ torch._C._autograd.ProfilerEvent" torch._C._autograd.ProfilerEvent*Ÿ
+device'torch._C._autograd.ProfilerEvent.device"
+builtins.int"builtins.int*N
+selfD
+ torch._C._autograd.ProfilerEvent" torch._C._autograd.ProfilerEvent*Ÿ
+handle'torch._C._autograd.ProfilerEvent.handle"
+builtins.int"builtins.int*N
+selfD
+ torch._C._autograd.ProfilerEvent" torch._C._autograd.ProfilerEvent*¥
+has_cuda)torch._C._autograd.ProfilerEvent.has_cuda"
+builtins.bool"builtins.bool*N
+selfD
+ torch._C._autograd.ProfilerEvent" torch._C._autograd.ProfilerEvent*§
+	is_remote*torch._C._autograd.ProfilerEvent.is_remote"
+builtins.bool"builtins.bool*N
+selfD
+ torch._C._autograd.ProfilerEvent" torch._C._autograd.ProfilerEvent*›
+kind%torch._C._autograd.ProfilerEvent.kind"
+builtins.int"builtins.int*N
+selfD
+ torch._C._autograd.ProfilerEvent" torch._C._autograd.ProfilerEvent*›
+name%torch._C._autograd.ProfilerEvent.name"
+builtins.str"builtins.str*N
+selfD
+ torch._C._autograd.ProfilerEvent" torch._C._autograd.ProfilerEvent*¡
+node_id(torch._C._autograd.ProfilerEvent.node_id"
+builtins.int"builtins.int*N
+selfD
+ torch._C._autograd.ProfilerEvent" torch._C._autograd.ProfilerEvent*©
+sequence_nr,torch._C._autograd.ProfilerEvent.sequence_nr"
+builtins.int"builtins.int*N
+selfD
+ torch._C._autograd.ProfilerEvent" torch._C._autograd.ProfilerEvent*‹
+shapes'torch._C._autograd.ProfilerEvent.shapes"‡
+*builtins.list[builtins.list[builtins.int]]J
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list"builtins.list*N
+selfD
+ torch._C._autograd.ProfilerEvent" torch._C._autograd.ProfilerEvent*¥
+	thread_id*torch._C._autograd.ProfilerEvent.thread_id"
+builtins.int"builtins.int*N
+selfD
+ torch._C._autograd.ProfilerEvent" torch._C._autograd.ProfilerEvent*¡
+flops&torch._C._autograd.ProfilerEvent.flops" 
+builtins.float"builtins.float*N
+selfD
+ torch._C._autograd.ProfilerEvent" torch._C._autograd.ProfilerEvent*¥
+is_async)torch._C._autograd.ProfilerEvent.is_async"
+builtins.bool"builtins.bool*N
+selfD
+ torch._C._autograd.ProfilerEvent" torch._C._autograd.ProfilerEvent§
+_KinetoEventtorch._C._autograd._KinetoEvent"builtins.object*˜
+name$torch._C._autograd._KinetoEvent.name"
+builtins.str"builtins.str*L
+selfB
+torch._C._autograd._KinetoEvent"torch._C._autograd._KinetoEvent*¨
+device_index,torch._C._autograd._KinetoEvent.device_index"
+builtins.int"builtins.int*L
+selfB
+torch._C._autograd._KinetoEvent"torch._C._autograd._KinetoEvent*´
+device_resource_id2torch._C._autograd._KinetoEvent.device_resource_id"
+builtins.int"builtins.int*L
+selfB
+torch._C._autograd._KinetoEvent"torch._C._autograd._KinetoEvent* 
+start_ns(torch._C._autograd._KinetoEvent.start_ns"
+builtins.int"builtins.int*L
+selfB
+torch._C._autograd._KinetoEvent"torch._C._autograd._KinetoEvent*¦
+duration_ns+torch._C._autograd._KinetoEvent.duration_ns"
+builtins.int"builtins.int*L
+selfB
+torch._C._autograd._KinetoEvent"torch._C._autograd._KinetoEvent*¢
+is_async(torch._C._autograd._KinetoEvent.is_async"
+builtins.bool"builtins.bool*L
+selfB
+torch._C._autograd._KinetoEvent"torch._C._autograd._KinetoEvent*º
+linked_correlation_id5torch._C._autograd._KinetoEvent.linked_correlation_id"
+builtins.int"builtins.int*L
+selfB
+torch._C._autograd._KinetoEvent"torch._C._autograd._KinetoEvent*ˆ
+shapes&torch._C._autograd._KinetoEvent.shapes"‡
+*builtins.list[builtins.list[builtins.int]]J
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list"builtins.list*L
+selfB
+torch._C._autograd._KinetoEvent"torch._C._autograd._KinetoEvent*Ê
+dtypes&torch._C._autograd._KinetoEvent.dtypes"J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*L
+selfB
+torch._C._autograd._KinetoEvent"torch._C._autograd._KinetoEvent*¾
+concrete_inputs/torch._C._autograd._KinetoEvent.concrete_inputs",
+builtins.list[Any]
+Any"builtins.list*L
+selfB
+torch._C._autograd._KinetoEvent"torch._C._autograd._KinetoEvent*È
+device_type+torch._C._autograd._KinetoEvent.device_type">
+torch._C._autograd.DeviceType"torch._C._autograd.DeviceType*L
+selfB
+torch._C._autograd._KinetoEvent"torch._C._autograd._KinetoEvent*®
+start_thread_id/torch._C._autograd._KinetoEvent.start_thread_id"
+builtins.int"builtins.int*L
+selfB
+torch._C._autograd._KinetoEvent"torch._C._autograd._KinetoEvent*ª
+end_thread_id-torch._C._autograd._KinetoEvent.end_thread_id"
+builtins.int"builtins.int*L
+selfB
+torch._C._autograd._KinetoEvent"torch._C._autograd._KinetoEvent*¬
+correlation_id.torch._C._autograd._KinetoEvent.correlation_id"
+builtins.int"builtins.int*L
+selfB
+torch._C._autograd._KinetoEvent"torch._C._autograd._KinetoEvent*ª
+fwd_thread_id-torch._C._autograd._KinetoEvent.fwd_thread_id"
+builtins.int"builtins.int*L
+selfB
+torch._C._autograd._KinetoEvent"torch._C._autograd._KinetoEvent*È
+stack%torch._C._autograd._KinetoEvent.stack"J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*L
+selfB
+torch._C._autograd._KinetoEvent"torch._C._autograd._KinetoEvent*š
+scope%torch._C._autograd._KinetoEvent.scope"
+builtins.int"builtins.int*L
+selfB
+torch._C._autograd._KinetoEvent"torch._C._autograd._KinetoEvent*¦
+sequence_nr+torch._C._autograd._KinetoEvent.sequence_nr"
+builtins.int"builtins.int*L
+selfB
+torch._C._autograd._KinetoEvent"torch._C._autograd._KinetoEvent*š
+flops%torch._C._autograd._KinetoEvent.flops"
+builtins.int"builtins.int*L
+selfB
+torch._C._autograd._KinetoEvent"torch._C._autograd._KinetoEvent*®
+cuda_elapsed_us/torch._C._autograd._KinetoEvent.cuda_elapsed_us"
+builtins.int"builtins.int*L
+selfB
+torch._C._autograd._KinetoEvent"torch._C._autograd._KinetoEvent*¼
+privateuse1_elapsed_us6torch._C._autograd._KinetoEvent.privateuse1_elapsed_us"
+builtins.int"builtins.int*L
+selfB
+torch._C._autograd._KinetoEvent"torch._C._autograd._KinetoEventñ
+
+_ProfilerResult"torch._C._autograd._ProfilerResult"builtins.object*
+events)torch._C._autograd._ProfilerResult.events"ƒ
+.builtins.list[torch._C._autograd._KinetoEvent]B
+torch._C._autograd._KinetoEvent"torch._C._autograd._KinetoEvent"builtins.list*R
+selfH
+"torch._C._autograd._ProfilerResult""torch._C._autograd._ProfilerResult*ð
+legacy_events0torch._C._autograd._ProfilerResult.legacy_events"Ø
+>builtins.list[builtins.list[torch._C._autograd.ProfilerEvent]]†
+/builtins.list[torch._C._autograd.ProfilerEvent]D
+ torch._C._autograd.ProfilerEvent" torch._C._autograd.ProfilerEvent"builtins.list"builtins.list*R
+selfH
+"torch._C._autograd._ProfilerResult""torch._C._autograd._ProfilerResult*µ
+save'torch._C._autograd._ProfilerResult.save"
+None*R
+selfH
+"torch._C._autograd._ProfilerResult""torch._C._autograd._ProfilerResult*&
+path
+builtins.str"builtins.str*µ
+experimental_event_tree:torch._C._autograd._ProfilerResult.experimental_event_tree"‰
+0builtins.list[torch._C._profiler._ProfilerEvent]F
+!torch._C._profiler._ProfilerEvent"!torch._C._profiler._ProfilerEvent"builtins.list*R
+selfH
+"torch._C._autograd._ProfilerResult""torch._C._autograd._ProfilerResult*µ
+trace_start_ns1torch._C._autograd._ProfilerResult.trace_start_ns"
+builtins.int"builtins.int*R
+selfH
+"torch._C._autograd._ProfilerResult""torch._C._autograd._ProfilerResult>
+SavedTensortorch._C._autograd.SavedTensor"builtins.objectÊ
+CreationMetatorch._C._autograd.CreationMeta"	enum.EnumHrZ
+DEFAULT'torch._C._autograd.CreationMeta.DEFAULT&
+builtins.ellipsis"builtins.ellipsisrp
+IN_CUSTOM_FUNCTION2torch._C._autograd.CreationMeta.IN_CUSTOM_FUNCTION&
+builtins.ellipsis"builtins.ellipsisrn
+MULTI_OUTPUT_NODE1torch._C._autograd.CreationMeta.MULTI_OUTPUT_NODE&
+builtins.ellipsis"builtins.ellipsisrd
+NO_GRAD_MODE,torch._C._autograd.CreationMeta.NO_GRAD_MODE&
+builtins.ellipsis"builtins.ellipsisrh
+INFERENCE_MODE.torch._C._autograd.CreationMeta.INFERENCE_MODE&
+builtins.ellipsis"builtins.ellipsis¶
+_enable_profiler#torch._C._autograd._enable_profiler"
+None*R
+configF
+!torch._C._profiler.ProfilerConfig"!torch._C._profiler.ProfilerConfig*ž
+
+activities
+1builtins.set[torch._C._profiler.ProfilerActivity]J
+#torch._C._profiler.ProfilerActivity"#torch._C._profiler.ProfilerActivity"builtins.set¸
+_prepare_profiler$torch._C._autograd._prepare_profiler"
+None*R
+configF
+!torch._C._profiler.ProfilerConfig"!torch._C._profiler.ProfilerConfig*ž
+
+activities
+1builtins.set[torch._C._profiler.ProfilerActivity]J
+#torch._C._profiler.ProfilerActivity"#torch._C._profiler.ProfilerActivity"builtins.setƒ
+_disable_profiler$torch._C._autograd._disable_profiler"H
+"torch._C._autograd._ProfilerResult""torch._C._autograd._ProfilerResultY
+_profiler_enabled$torch._C._autograd._profiler_enabled"
+builtins.bool"builtins.bool•
+_add_metadata_json%torch._C._autograd._add_metadata_json"
+None*%
+key
+builtins.str"builtins.str*'
+value
+builtins.str"builtins.str9
+_kineto_steptorch._C._autograd._kineto_step"
+NoneU
+_get_sequence_nr#torch._C._autograd._get_sequence_nr"
+builtins.int"builtins.intW
+kineto_available#torch._C._autograd.kineto_available"
+builtins.bool"builtins.boolÀ
+ _record_function_with_args_enter3torch._C._autograd._record_function_with_args_enter",
+torch._tensor.Tensor"torch._tensor.Tensor*&
+name
+builtins.str"builtins.str*
+args
+Any™
+_record_function_with_args_exit2torch._C._autograd._record_function_with_args_exit"
+None*8
+handle,
+torch._tensor.Tensor"torch._tensor.TensorÑ
+_supported_activities(torch._C._autograd._supported_activities"
+1builtins.set[torch._C._profiler.ProfilerActivity]J
+#torch._C._profiler.ProfilerActivity"#torch._C._profiler.ProfilerActivity"builtins.set{
+_enable_record_function*torch._C._autograd._enable_record_function"
+None**
+enable
+builtins.bool"builtins.boolµ
+_set_empty_test_observer+torch._C._autograd._set_empty_test_observer"
+None*-
+	is_global
+builtins.bool"builtins.bool*3
+sampling_prob 
+builtins.float"builtins.float
+!_push_saved_tensors_default_hooks4torch._C._autograd._push_saved_tensors_default_hooks"
+None*Z
+	pack_hookK
+CallableType[builtins.function]&
+builtins.function"builtins.function*\
+unpack_hookK
+CallableType[builtins.function]&
+builtins.function"builtins.functiona
+ _pop_saved_tensors_default_hooks3torch._C._autograd._pop_saved_tensors_default_hooks"
+None¼
+_unsafe_set_version_counter.torch._C._autograd._unsafe_set_version_counter"
+None*3
+t,
+torch._tensor.Tensor"torch._tensor.Tensor*.
+prev_version
+builtins.int"builtins.int£
+_enable_profiler_legacy*torch._C._autograd._enable_profiler_legacy"
+None*R
+configF
+!torch._C._profiler.ProfilerConfig"!torch._C._profiler.ProfilerConfig¢
+_disable_profiler_legacy+torch._C._autograd._disable_profiler_legacy"Ø
+>builtins.list[builtins.list[torch._C._autograd.ProfilerEvent]]†
+/builtins.list[torch._C._autograd.ProfilerEvent]D
+ torch._C._autograd.ProfilerEvent" torch._C._autograd.ProfilerEvent"builtins.list"builtins.listƒ
+_profiler_type!torch._C._autograd._profiler_type"N
+%torch._C._profiler.ActiveProfilerType"%torch._C._profiler.ActiveProfilerTypeW
+_saved_tensors_hooks_enable.torch._C._autograd._saved_tensors_hooks_enable"
+None„
+_saved_tensors_hooks_disable/torch._C._autograd._saved_tensors_hooks_disable"
+None*)
+message
+builtins.str"builtins.str»
+/_saved_tensors_hooks_get_disabled_error_messageBtorch._C._autograd._saved_tensors_hooks_get_disabled_error_message"D
+Union[builtins.str,None]
+builtins.str"builtins.str
+NoneÑ
+_set_creation_meta%torch._C._autograd._set_creation_meta"
+None*3
+t,
+torch._tensor.Tensor"torch._tensor.Tensor*U
+creation_metaB
+torch._C._autograd.CreationMeta"torch._C._autograd.CreationMeta´
+_get_creation_meta%torch._C._autograd._get_creation_meta"B
+torch._C._autograd.CreationMeta"torch._C._autograd.CreationMeta*3
+t,
+torch._tensor.Tensor"torch._tensor.Tensor*Ž
+__annotations__"torch._C._autograd.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict

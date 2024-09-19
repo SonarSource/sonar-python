@@ -1,0 +1,613 @@
+
+torch._inductor.loweringõ
+'<subclass of "list" and "BaseConstant">@torch._inductor.lowering.<subclass of "list" and "BaseConstant">"builtins.list"torch._inductor.ir.BaseConstantù
+(<subclass of "list" and "BaseConstant">1Atorch._inductor.lowering.<subclass of "list" and "BaseConstant">1"builtins.list"torch._inductor.ir.BaseConstantD
+
+assert_nyi#torch._inductor.lowering.assert_nyi*
+cond*
+msgW
+add_needs_realized_inputs2torch._inductor.lowering.add_needs_realized_inputs*
+fn_
+add_layout_constraint.torch._inductor.lowering.add_layout_constraint*
+fn*
+
+constraintg
+decode_dtype%torch._inductor.lowering.decode_dtype"
+Any*'
+dtype
+builtins.int"builtins.intB
+is_integer_type(torch._inductor.lowering.is_integer_type*
+xB
+is_boolean_type(torch._inductor.lowering.is_boolean_type*
+x„
+get_promoted_dtype+torch._inductor.lowering.get_promoted_dtype"
+Any*
+args
+Any*É
+type_promotion_kindj
+3torch._prims_common.ELEMENTWISE_TYPE_PROMOTION_KIND"3torch._prims_common.ELEMENTWISE_TYPE_PROMOTION_KINDD
+get_overloads&torch._inductor.lowering.get_overloads*
+aten_fnÜ
+transform_args'torch._inductor.lowering.transform_args*
+args*
+	broadcast*
+type_promotion_kind*
+convert_input_to_boolm
+_register_foreach_lowering3torch._inductor.lowering._register_foreach_lowering*
+aten_fn*
+	decomp_fn†
+_register_lowering+torch._inductor.lowering._register_lowering*
+aten_fn*
+	decomp_fn*
+	broadcast*
+type_promotion_kind*
+convert_input_to_boolï
+register_lowering*torch._inductor.lowering.register_lowering*
+aten_fn*
+	broadcast *
+type_promotion_kind *
+convert_input_to_bool ]
+broadcast_symbolic_shapes2torch._inductor.lowering.broadcast_symbolic_shapes*
+a*
+bÉ
+promote_constants*torch._inductor.lowering.promote_constants*
+
+inputs*
+override_return_dtype *
+type_promotion_kind Á
+make_pointwise'torch._inductor.lowering.make_pointwise*
+fn*
+override_return_dtype *
+override_device *!
+override_fn_when_input_bool *#
+override_fn_when_cuda_float64 *
+allow_alpha *
+triton_fallback g
+make_foreach_pointwise/torch._inductor.lowering.make_foreach_pointwise*	
+pw_fn*
+allow_alpha Ω
+to_dtype!torch._inductor.lowering.to_dtype"
+Any*C
+x<
+torch._inductor.ir.TensorBox"torch._inductor.ir.TensorBox*+
+dtype 
+torch._C.dtype"torch._C.dtype*
+copy
+Any Õ
+to_dtype_bitcast)torch._inductor.lowering.to_dtype_bitcast"
+Any*C
+x<
+torch._inductor.ir.TensorBox"torch._inductor.ir.TensorBox*+
+dtype 
+torch._C.dtype"torch._C.dtype*
+copy
+Any ¬
+	to_device"torch._inductor.lowering.to_device"
+Any*C
+x<
+torch._inductor.ir.TensorBox"torch._inductor.ir.TensorBox*.
+device"
+torch._C.device"torch._C.device*
+copy
+Any ™
+register_pointwise+torch._inductor.lowering.register_pointwise*
+aten_fn*
+
+name *
+	broadcast *
+type_promotion_kind *
+convert_input_to_bool *
+override_return_dtype *!
+override_fn_when_input_bool *
+allow_alpha *
+use_libdevice_for_f64 *
+triton_fallback 9
+register_frexp'torch._inductor.lowering.register_frexpå
+register_foreach_pointwise3torch._inductor.lowering.register_foreach_pointwise*
+aten_fn*
+pointwise_lowering_fn*
+allow_alpha N
+pointwise_cat&torch._inductor.lowering.pointwise_cat*
+
+inputs*	
+dim U
+_validate_dim&torch._inductor.lowering._validate_dim*
+x*
+dim*
+offset d
+fallback_handler)torch._inductor.lowering.fallback_handler*
+
+kernel*
+add_to_fallback_set  
+unsupported_input_tensor1torch._inductor.lowering.unsupported_input_tensor"
+Any*[
+tT
+(torch._subclasses.fake_tensor.FakeTensor"(torch._subclasses.fake_tensor.FakeTensor*
+parent
+Any Ã
+unsupported_output_tensor2torch._inductor.lowering.unsupported_output_tensor"
+Any*[
+tT
+(torch._subclasses.fake_tensor.FakeTensor"(torch._subclasses.fake_tensor.FakeTensor*
+parent
+Any ≈
+%fallback_node_due_to_unsupported_type>torch._inductor.lowering.fallback_node_due_to_unsupported_type"
+Any*2
+node(
+torch.fx.node.Node"torch.fx.node.Node*
+allow_cpu_inputs
+Any d
+make_fallback&torch._inductor.lowering.make_fallback*
+op*
+layout_constraint *
+
+warn L
+philox_rand_offset+torch._inductor.lowering.philox_rand_offset*	
+shapeA
+warn_triton_random+torch._inductor.lowering.warn_triton_randomT
+require_dense&torch._inductor.lowering.require_dense*
+_*
+args*
+
+kwargs^
+require_contiguous+torch._inductor.lowering.require_contiguous*
+_*
+args*
+
+kwargsd
+require_channels_last.torch._inductor.lowering.require_channels_last*
+_*
+args*
+
+kwargsè
+constrain_to_fx_strides0torch._inductor.lowering.constrain_to_fx_strides*
+fx_node*
+args*
+ignore_mutated_args_FIXME *
+
+kwargs^
+sdpa_constraint(torch._inductor.lowering.sdpa_constraint*
+fx_node*
+args*
+
+kwargsb
+clone_preserve_reinterpret_view8torch._inductor.lowering.clone_preserve_reinterpret_view*
+x2
+_unwrap torch._inductor.lowering._unwrap*
+xX
+_fulltorch._inductor.lowering._full*
+
+fill_value*
+
+device*	
+dtype*
+sizeQ
+tensor_constructor+torch._inductor.lowering.tensor_constructor*
+
+fill_valueR
+create_tensor_like+torch._inductor.lowering.create_tensor_like*
+creation_fnG
+constant_like&torch._inductor.lowering.constant_like*
+
+fill_valueE
+new_constant%torch._inductor.lowering.new_constant*
+
+fill_valuel
+check_and_broadcast_indices4torch._inductor.lowering.check_and_broadcast_indices*
+indices*
+
+device◊
+index_output_size_and_inner_fn7torch._inductor.lowering.index_output_size_and_inner_fn*
+
+x_size*
+indices*
+tensor_indices*
+tensor_size*
+indices_loaders*
+indexed_size*
+x_loader*	
+checkP
+
+index_impl#torch._inductor.lowering.index_impl*
+x*
+indices*	
+check
+index_put_as_masked_fill1torch._inductor.lowering.index_put_as_masked_fill*
+self*
+indices*	
+value*
+
+accumulatet
+index_put_fallback+torch._inductor.lowering.index_put_fallback*
+self*
+indices*
+
+values*
+
+accumulatey
+index_put_impl_(torch._inductor.lowering.index_put_impl_*
+self*
+indices*
+
+values*
+
+accumulate*	
+checkÔ
+scatter_fallback)torch._inductor.lowering.scatter_fallback"
+Any*?
+op_overload.
+torch._ops.OpOverload"torch._ops.OpOverload*
+self
+Any*%
+dim
+builtins.int"builtins.int*
+index
+Any*
+src
+Any*R
+reduceD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *2
+include_self
+builtins.bool"builtins.bool ‚
+upsample_nearestnd+torch._inductor.lowering.upsample_nearestnd"
+Any*
+x
+Any*
+output_size
+Any*ó
+scales_xà
+*builtins.tuple[Union[builtins.float,None]]J
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None"builtins.tuple*%
+n
+builtins.int"builtins.int *+
+exact
+builtins.bool"builtins.bool T
+_create_constants*torch._inductor.lowering._create_constants*
+args*	
+dtypeü
+range_mask_low'torch._inductor.lowering.range_mask_low"
+Any*
+i
+Any*K
+lowB
+Union[Any,builtins.int]
+Any
+builtins.int"builtins.intg
+range_mask_high(torch._inductor.lowering.range_mask_high"
+Any*
+i
+Any*
+high
+Anyo
+
+range_mask#torch._inductor.lowering.range_mask"
+Any*
+i
+Any*
+high
+Any*
+low
+Anyö
+constant_boundary_condition4torch._inductor.lowering.constant_boundary_condition*
+x*
+
+fill_value*
+padding *
+pad_fill_value *	
+dim |
+pooling_size%torch._inductor.lowering.pooling_size*
+x*
+i*
+kernel_size*
+
+stride*
+padding*
+	ceil_modeä
+'should_fallback_max_pool2d_with_indices@torch._inductor.lowering.should_fallback_max_pool2d_with_indices*
+kernel_size*
+dilationï
+max_pool2d_checks*torch._inductor.lowering.max_pool2d_checks*
+x*
+kernel_size*
+
+stride*
+padding*
+dilation*
+assert_fallback Y
+pad_adaptive_loader,torch._inductor.lowering.pad_adaptive_loader*
+x*
+pad_val â
+_adaptive_pooling_idx_sum2torch._inductor.lowering._adaptive_pooling_idx_sum*
+kernel_maxes*
+start_index_fns*
+end_index_fnsú
+_adaptive_pooling_idx_max2torch._inductor.lowering._adaptive_pooling_idx_max*
+kernel_maxes*
+in_sizes*
+	out_sizes*
+return_index*
+
+loaderè
+_fractional_pooling_offsets4torch._inductor.lowering._fractional_pooling_offsets*
+samples*	
+in_sz*
+
+out_sz*
+	kernel_sz*
+dim©
+_avg_poolnd$torch._inductor.lowering._avg_poolnd*
+x*
+kernel_size*
+
+stride*
+padding*
+	ceil_mode*
+count_include_pad*
+divisor_override*
+dim^
+_validate_reduction_axis1torch._inductor.lowering._validate_reduction_axis*
+x*
+axiså
+_make_reduction_inner.torch._inductor.lowering._make_reduction_inner*
+x*
+axis*
+keepdims*	
+dtype*
+override_return_dtypeö
+make_reduction'torch._inductor.lowering.make_reduction"
+Any*0
+reduction_type
+builtins.str"builtins.str*$
+override_return_dtype
+Any Y
+_make_scan_inner)torch._inductor.lowering._make_scan_inner*
+x*
+axis*	
+dtypev
+var_mean_sum_&torch._inductor.lowering.var_mean_sum_*
+x*
+axis*
+
+correction*
+keepdim*
+return_meane
+use_two_step_variance.torch._inductor.lowering.use_two_step_variance*
+x*
+axis*
+keepdim~
+var_mean_welford_*torch._inductor.lowering.var_mean_welford_*
+x*
+axis*
+
+correction*
+keepdim*
+return_mean|
+var_mean_helper_)torch._inductor.lowering.var_mean_helper_*
+x*
+axis*
+
+correction*
+keepdim*
+return_meanP
+pow_recursive&torch._inductor.lowering.pow_recursive*
+x*
+y*	
+dtypeY
+	mutate_to"torch._inductor.lowering.mutate_to*
+changed*
+val*
+unsafe_alias Û
+get_constant_value+torch._inductor.lowering.get_constant_value"q
+'Union[torch._inductor.ir.Constant,None]:
+torch._inductor.ir.Constant"torch._inductor.ir.Constant
+None*=
+x6
+torch._inductor.ir.IRNode"torch._inductor.ir.IRNode|
+register_pointwise_numeric3torch._inductor.lowering.register_pointwise_numeric*
+op*
+
+name *
+triton_fallback e
+ register_pointwise_numeric_ldf649torch._inductor.lowering.register_pointwise_numeric_ldf64*
+op_
+_get_pointwise_overrides1torch._inductor.lowering._get_pointwise_overrides*
+ns*
+nameÅ
+register_foreach_inplace1torch._inductor.lowering.register_foreach_inplace*
+aten_op*
+outplace_aten_op*
+outplace_op[
+register_inplace)torch._inductor.lowering.register_inplace*
+aten_op*
+outplace_op*î
+__annotations__(torch._inductor.lowering.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*0
+sympytorch._inductor.lowering.sympy
+Any*
+pytreetorch.utils._pytree *E
+logtorch._inductor.lowering.log 
+logging.Logger"logging.Logger*Ñ
+	lowerings"torch._inductor.lowering.lowerings“
+Dbuiltins.dict[torch._ops.OpOverload,CallableType[builtins.function]].
+torch._ops.OpOverload"torch._ops.OpOverloadK
+CallableType[builtins.function]&
+builtins.function"builtins.function"builtins.dict*ñ
+layout_constraints+torch._inductor.lowering.layout_constraints“
+Dbuiltins.dict[torch._ops.OpOverload,CallableType[builtins.function]].
+torch._ops.OpOverload"torch._ops.OpOverloadK
+CallableType[builtins.function]&
+builtins.function"builtins.function"builtins.dict*î
+	fallbacks"torch._inductor.lowering.fallbacksc
+#builtins.set[torch._ops.OpOverload].
+torch._ops.OpOverload"torch._ops.OpOverload"builtins.set*.
+atentorch._inductor.lowering.aten
+Any*4
+tr_c10d torch._inductor.lowering.tr_c10d
+Any*0
+primstorch._inductor.lowering.prims
+Any*¨
+needs_realized_inputs.torch._inductor.lowering.needs_realized_inputsc
+#builtins.set[torch._ops.OpOverload].
+torch._ops.OpOverload"torch._ops.OpOverload"builtins.set*ò
+foreach_ops$torch._inductor.lowering.foreach_opsc
+#builtins.set[torch._ops.OpOverload].
+torch._ops.OpOverload"torch._ops.OpOverload"builtins.set*®
+inplace_foreach_ops,torch._inductor.lowering.inplace_foreach_opsc
+#builtins.set[torch._ops.OpOverload].
+torch._ops.OpOverload"torch._ops.OpOverload"builtins.set*˘
+inplaceable_foreach_ops0torch._inductor.lowering.inplaceable_foreach_ops´
+:builtins.dict[torch._ops.OpOverload,torch._ops.OpOverload].
+torch._ops.OpOverload"torch._ops.OpOverload.
+torch._ops.OpOverload"torch._ops.OpOverload"builtins.dict*N
+quantized_decomposed-torch._inductor.lowering.quantized_decomposed
+Any*∏
+DTYPE_ID_LOOKUP(torch._inductor.lowering.DTYPE_ID_LOOKUP{
+*builtins.dict[builtins.int,torch._C.dtype]
+builtins.int"builtins.int 
+torch._C.dtype"torch._C.dtype"builtins.dict*P
+fallback_rand_default.torch._inductor.lowering.fallback_rand_default
+Any*T
+fallback_rand_generator0torch._inductor.lowering.fallback_rand_generator
+Any*R
+fallback_randn_default/torch._inductor.lowering.fallback_randn_default
+Any*V
+fallback_randn_generator1torch._inductor.lowering.fallback_randn_generator
+Any*ç
+FALLBACK_ALLOW_LIST,torch._inductor.lowering.FALLBACK_ALLOW_LISTH
+builtins.set[builtins.str]
+builtins.str"builtins.str"builtins.set*:
+
+empty_like#torch._inductor.lowering.empty_like
+Any*8
+	ones_like"torch._inductor.lowering.ones_like
+Any*:
+
+zeros_like#torch._inductor.lowering.zeros_like
+Any*x
+)fallback_max_pool2d_with_indices_backwardBtorch._inductor.lowering.fallback_max_pool2d_with_indices_backward
+Any*^
+fallback_adaptive_avg_pool2d5torch._inductor.lowering.fallback_adaptive_avg_pool2d
+Any*^
+fallback_adaptive_max_pool2d5torch._inductor.lowering.fallback_adaptive_max_pool2d
+Any*b
+fallback_fractional_max_pool2d7torch._inductor.lowering.fallback_fractional_max_pool2d
+Any*L
+fallback_avg_pool2d,torch._inductor.lowering.fallback_avg_pool2d
+Any*L
+fallback_avg_pool3d,torch._inductor.lowering.fallback_avg_pool3d
+Any*^
+fallback_avg_pool2d_backward5torch._inductor.lowering.fallback_avg_pool2d_backward
+Any*Z
+fallback_pow_tensor_tensor3torch._inductor.lowering.fallback_pow_tensor_tensor
+Any*L
+fallback_pow_scalar,torch._inductor.lowering.fallback_pow_scalar
+Any*Z
+fallback_pow_tensor_scalar3torch._inductor.lowering.fallback_pow_tensor_scalar
+Any*D
+fallback_cumsum(torch._inductor.lowering.fallback_cumsum
+Any*F
+fallback_cumprod)torch._inductor.lowering.fallback_cumprod
+Any*P
+fallback_logcumsumexp.torch._inductor.lowering.fallback_logcumsumexp
+Any*D
+fallback_cummax(torch._inductor.lowering.fallback_cummax
+Any*D
+fallback_cummin(torch._inductor.lowering.fallback_cummin
+Any*<
+reduce_amax$torch._inductor.lowering.reduce_amax
+Any*<
+reduce_amin$torch._inductor.lowering.reduce_amin
+Any*@
+reduce_argmax&torch._inductor.lowering.reduce_argmax
+Any*@
+reduce_argmin&torch._inductor.lowering.reduce_argmin
+Any*,
+addtorch._inductor.lowering.add
+Any*,
+exptorch._inductor.lowering.exp
+Any*.
+exp2torch._inductor.lowering.exp2
+Any*0
+expm1torch._inductor.lowering.expm1
+Any*.
+relutorch._inductor.lowering.relu
+Any*4
+sigmoid torch._inductor.lowering.sigmoid
+Any*.
+sqrttorch._inductor.lowering.sqrt
+Any*2
+squaretorch._inductor.lowering.square
+Any*,
+subtorch._inductor.lowering.sub
+Any*,
+abstorch._inductor.lowering.abs
+Any*<
+bitwise_and$torch._inductor.lowering.bitwise_and
+Any*J
+bitwise_left_shift+torch._inductor.lowering.bitwise_left_shift
+Any*<
+bitwise_not$torch._inductor.lowering.bitwise_not
+Any*:
+
+bitwise_or#torch._inductor.lowering.bitwise_or
+Any*L
+bitwise_right_shift,torch._inductor.lowering.bitwise_right_shift
+Any*<
+bitwise_xor$torch._inductor.lowering.bitwise_xor
+Any*,
+erftorch._inductor.lowering.erf
+Any*<
+logical_and$torch._inductor.lowering.logical_and
+Any*<
+logical_not$torch._inductor.lowering.logical_not
+Any*:
+
+logical_or#torch._inductor.lowering.logical_or
+Any*<
+logical_xor$torch._inductor.lowering.logical_xor
+Any*4
+maximum torch._inductor.lowering.maximum
+Any*4
+minimum torch._inductor.lowering.minimum
+Any*,
+negtorch._inductor.lowering.neg
+Any*:
+
+reciprocal#torch._inductor.lowering.reciprocal
+Any*.
+signtorch._inductor.lowering.sign
+Any**
+gttorch._inductor.lowering.gt
+Any*C
+nametorch._inductor.lowering.name
+builtins.str"builtins.str**
+optorch._inductor.lowering.op
+Any*L
+type_promotion_kind,torch._inductor.lowering.type_promotion_kind
+Any*D
+triton_fallback(torch._inductor.lowering.triton_fallback
+Any*F
+foreach_add_list)torch._inductor.lowering.foreach_add_list
+Any*J
+foreach_add_scalar+torch._inductor.lowering.foreach_add_scalar
+Any*F
+foreach_mul_list)torch._inductor.lowering.foreach_mul_list
+Any*J
+foreach_mul_scalar+torch._inductor.lowering.foreach_mul_scalar
+Any*F
+foreach_div_list)torch._inductor.lowering.foreach_div_list
+Any*J
+foreach_div_scalar+torch._inductor.lowering.foreach_div_scalar
+Any*G
+methodtorch._inductor.lowering.method
+builtins.str"builtins.str*M
+functorch._inductor.lowering.func&
+builtins.function"builtins.function*F
+_c10d_functional)torch._inductor.lowering._c10d_functional
+Any

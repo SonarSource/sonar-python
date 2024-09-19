@@ -1,0 +1,907 @@
+
+torch._inductor.codegen.tritonÔ
+IndexingOptions.torch._inductor.codegen.triton.IndexingOptions"builtins.object*M
+has_mask7torch._inductor.codegen.triton.IndexingOptions.has_mask*
+self*U
+has_indirect;torch._inductor.codegen.triton.IndexingOptions.has_indirect*
+self*Q
+
+has_rindex9torch._inductor.codegen.triton.IndexingOptions.has_rindex*
+self*S
+has_tmpmask:torch._inductor.codegen.triton.IndexingOptions.has_tmpmask*
+self*O
+	has_rmask8torch._inductor.codegen.triton.IndexingOptions.has_rmask*
+self*è
+__init__7torch._inductor.codegen.triton.IndexingOptions.__init__"
+None*j
+self`
+.torch._inductor.codegen.triton.IndexingOptions".torch._inductor.codegen.triton.IndexingOptions*+
+	index_str
+builtins.str"builtins.str*9
+	mask_vars*
+builtins.set[Any]
+Any"builtins.set**
+mask_str
+builtins.str"builtins.str*T
+
+expand_strD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*/
+_has_rindex
+builtins.bool"builtins.bool*
+index
+Any8rc
+	index_str8torch._inductor.codegen.triton.IndexingOptions.index_str
+builtins.str"builtins.strrq
+	mask_vars8torch._inductor.codegen.triton.IndexingOptions.mask_vars*
+builtins.set[Any]
+Any"builtins.setra
+mask_str7torch._inductor.codegen.triton.IndexingOptions.mask_str
+builtins.str"builtins.strr
+
+expand_str9torch._inductor.codegen.triton.IndexingOptions.expand_strD
+Union[builtins.str,None]
+builtins.str"builtins.str
+Noneri
+_has_rindex:torch._inductor.codegen.triton.IndexingOptions._has_rindex
+builtins.bool"builtins.boolrF
+index4torch._inductor.codegen.triton.IndexingOptions.index
+Anyrõ
+__dataclass_fields__Ctorch._inductor.codegen.triton.IndexingOptions.__dataclass_fields__—
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictü
+BlockPtrOptions.torch._inductor.codegen.triton.BlockPtrOptions"builtins.object*•
+create5torch._inductor.codegen.triton.BlockPtrOptions.create"`
+.torch._inductor.codegen.triton.BlockPtrOptions".torch._inductor.codegen.triton.BlockPtrOptions*9
+strides,
+builtins.list[Any]
+Any"builtins.list*
+constant_offset
+Any*Ë
+range_trees¹
+@builtins.list[torch._inductor.codegen.simd.IterationRangesEntry]f
+1torch._inductor.codegen.simd.IterationRangesEntry"1torch._inductor.codegen.simd.IterationRangesEntry"builtins.list*9
+	mask_vars*
+builtins.set[Any]
+Any"builtins.set0:staticmethodh*‰
+format5torch._inductor.codegen.triton.BlockPtrOptions.format"
+builtins.str"builtins.str*j
+self`
+.torch._inductor.codegen.triton.BlockPtrOptions".torch._inductor.codegen.triton.BlockPtrOptions*&
+name
+builtins.str"builtins.str*
+roffset
+Any *˜
+boundary_check=torch._inductor.codegen.triton.BlockPtrOptions.boundary_check"J
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*j
+self`
+.torch._inductor.codegen.triton.BlockPtrOptions".torch._inductor.codegen.triton.BlockPtrOptions0:cache_on_self*[
+advance_roffset>torch._inductor.codegen.triton.BlockPtrOptions.advance_roffset*
+self*U
+has_indirect;torch._inductor.codegen.triton.BlockPtrOptions.has_indirect*
+self*Q
+
+has_rindex9torch._inductor.codegen.triton.BlockPtrOptions.has_rindex*
+self*O
+	has_rmask8torch._inductor.codegen.triton.BlockPtrOptions.has_rmask*
+self*S
+has_tmpmask:torch._inductor.codegen.triton.BlockPtrOptions.has_tmpmask*
+self*M
+has_mask7torch._inductor.codegen.triton.BlockPtrOptions.has_mask*
+self*ó
+__init__7torch._inductor.codegen.triton.BlockPtrOptions.__init__"
+None*j
+self`
+.torch._inductor.codegen.triton.BlockPtrOptions".torch._inductor.codegen.triton.BlockPtrOptions*
+constant_offset
+Any*7
+shape,
+builtins.list[Any]
+Any"builtins.list*9
+strides,
+builtins.list[Any]
+Any"builtins.list*[
+block_shapeJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*U
+orderJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*W
+offsetsJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*9
+	mask_vars*
+builtins.set[Any]
+Any"builtins.set*^
+reshape_suffixJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list8rZ
+constant_offset>torch._inductor.codegen.triton.BlockPtrOptions.constant_offset
+Anyrk
+shape4torch._inductor.codegen.triton.BlockPtrOptions.shape,
+builtins.list[Any]
+Any"builtins.listro
+strides6torch._inductor.codegen.triton.BlockPtrOptions.strides,
+builtins.list[Any]
+Any"builtins.listr•
+block_shape:torch._inductor.codegen.triton.BlockPtrOptions.block_shapeJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.listr‰
+order4torch._inductor.codegen.triton.BlockPtrOptions.orderJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.listr
+offsets6torch._inductor.codegen.triton.BlockPtrOptions.offsetsJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.listrq
+	mask_vars8torch._inductor.codegen.triton.BlockPtrOptions.mask_vars*
+builtins.set[Any]
+Any"builtins.setr›
+reshape_suffix=torch._inductor.codegen.triton.BlockPtrOptions.reshape_suffixJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.listrõ
+__dataclass_fields__Ctorch._inductor.codegen.triton.BlockPtrOptions.__dataclass_fields__—
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictÞ
+TritonPrinter,torch._inductor.codegen.triton.TritonPrinter",torch._inductor.codegen.common.PythonPrinter*g
+_print_TruncToInt>torch._inductor.codegen.triton.TritonPrinter._print_TruncToInt*
+self*
+expr*a
+_print_ToFloat;torch._inductor.codegen.triton.TritonPrinter._print_ToFloat*
+self*
+expr*e
+_print_PythonMod=torch._inductor.codegen.triton.TritonPrinter._print_PythonMod*
+self*
+expr*c
+_print_FloorDiv<torch._inductor.codegen.triton.TritonPrinter._print_FloorDiv*
+self*
+expr*g
+_print_IntTrueDiv>torch._inductor.codegen.triton.TritonPrinter._print_IntTrueDiv*
+self*
+expr*]
+_print_floor9torch._inductor.codegen.triton.TritonPrinter._print_floor*
+self*
+expr*g
+_print_FloorToInt>torch._inductor.codegen.triton.TritonPrinter._print_FloorToInt*
+self*
+expr*a
+_print_ceiling;torch._inductor.codegen.triton.TritonPrinter._print_ceiling*
+self*
+expr*e
+_print_CeilToInt=torch._inductor.codegen.triton.TritonPrinter._print_CeilToInt*
+self*
+expr*]
+_helper_sqrt9torch._inductor.codegen.triton.TritonPrinter._helper_sqrt*
+self*
+expr*]
+_print_Where9torch._inductor.codegen.triton.TritonPrinter._print_Where*
+self*
+expr*Y
+
+_print_Min7torch._inductor.codegen.triton.TritonPrinter._print_Min*
+self*
+expr*Y
+
+_print_Max7torch._inductor.codegen.triton.TritonPrinter._print_Max*
+self*
+expr*Y
+
+_print_Abs7torch._inductor.codegen.triton.TritonPrinter._print_Abs*
+self*
+expr*u
+_print_OpaqueUnaryFn_cosEtorch._inductor.codegen.triton.TritonPrinter._print_OpaqueUnaryFn_cos*
+self*
+expr*w
+_print_OpaqueUnaryFn_coshFtorch._inductor.codegen.triton.TritonPrinter._print_OpaqueUnaryFn_cosh*
+self*
+expr*w
+_print_OpaqueUnaryFn_acosFtorch._inductor.codegen.triton.TritonPrinter._print_OpaqueUnaryFn_acos*
+self*
+expr*u
+_print_OpaqueUnaryFn_sinEtorch._inductor.codegen.triton.TritonPrinter._print_OpaqueUnaryFn_sin*
+self*
+expr*w
+_print_OpaqueUnaryFn_sinhFtorch._inductor.codegen.triton.TritonPrinter._print_OpaqueUnaryFn_sinh*
+self*
+expr*w
+_print_OpaqueUnaryFn_asinFtorch._inductor.codegen.triton.TritonPrinter._print_OpaqueUnaryFn_asin*
+self*
+expr*u
+_print_OpaqueUnaryFn_tanEtorch._inductor.codegen.triton.TritonPrinter._print_OpaqueUnaryFn_tan*
+self*
+expr*w
+_print_OpaqueUnaryFn_tanhFtorch._inductor.codegen.triton.TritonPrinter._print_OpaqueUnaryFn_tanh*
+self*
+expr*w
+_print_OpaqueUnaryFn_atanFtorch._inductor.codegen.triton.TritonPrinter._print_OpaqueUnaryFn_atan*
+self*
+expr*g
+_print_RoundToInt>torch._inductor.codegen.triton.TritonPrinter._print_RoundToInt*
+self*
+expr*k
+_print_RoundDecimal@torch._inductor.codegen.triton.TritonPrinter._print_RoundDecimal*
+self*
+exprÍ
+TritonCSEVariable0torch._inductor.codegen.triton.TritonCSEVariable"*torch._inductor.codegen.common.CSEVariable*È
+__init__9torch._inductor.codegen.triton.TritonCSEVariable.__init__"
+None*n
+selfd
+0torch._inductor.codegen.triton.TritonCSEVariable"0torch._inductor.codegen.triton.TritonCSEVariable*
+name
+Any*t
+boundsh
+0torch.utils._sympy.value_ranges.ValueRanges[Any]
+Any"+torch.utils._sympy.value_ranges.ValueRanges*{
+update_on_args?torch._inductor.codegen.triton.TritonCSEVariable.update_on_args*
+self*
+name*
+args*
+
+kwargsr‘
+	mask_vars:torch._inductor.codegen.triton.TritonCSEVariable.mask_varsH
+builtins.set[builtins.str]
+builtins.str"builtins.str"builtins.set‡:
+TritonOverrides.torch._inductor.codegen.triton.TritonOverrides"*torch._inductor.codegen.common.OpOverrides*ø
+to_dtype7torch._inductor.codegen.triton.TritonOverrides.to_dtype"
+Any*
+x
+Any*+
+dtype 
+torch._C.dtype"torch._C.dtype*[
+	src_dtypeJ
+Union[torch._C.dtype,None] 
+torch._C.dtype"torch._C.dtype
+None 0:staticmethodh*Ü
+to_dtype_bitcast?torch._inductor.codegen.triton.TritonOverrides.to_dtype_bitcast"
+Any*
+x
+Any*+
+dtype 
+torch._C.dtype"torch._C.dtype*/
+	src_dtype 
+torch._C.dtype"torch._C.dtype0:staticmethodh*†
+_shaped_constant?torch._inductor.codegen.triton.TritonOverrides._shaped_constant*	
+value*	
+dtype*	
+shape0:staticmethodh*s
+constant7torch._inductor.codegen.triton.TritonOverrides.constant*
+cls*	
+value*	
+dtype0:classmethodp*R
+abs2torch._inductor.codegen.triton.TritonOverrides.abs*
+x0:staticmethodh*f
+libdevice_abs<torch._inductor.codegen.triton.TritonOverrides.libdevice_abs*
+x0:staticmethodh*R
+exp2torch._inductor.codegen.triton.TritonOverrides.exp*
+x0:staticmethodh*f
+libdevice_exp<torch._inductor.codegen.triton.TritonOverrides.libdevice_exp*
+x0:staticmethodh*T
+exp23torch._inductor.codegen.triton.TritonOverrides.exp2*
+x0:staticmethodh*V
+expm14torch._inductor.codegen.triton.TritonOverrides.expm1*
+x0:staticmethodh*T
+sqrt3torch._inductor.codegen.triton.TritonOverrides.sqrt*
+x0:staticmethodh*h
+libdevice_sqrt=torch._inductor.codegen.triton.TritonOverrides.libdevice_sqrt*
+x0:staticmethodh*T
+relu3torch._inductor.codegen.triton.TritonOverrides.relu*
+x0:staticmethodh*a
+minimum6torch._inductor.codegen.triton.TritonOverrides.minimum*
+a*
+b0:staticmethodh*a
+maximum6torch._inductor.codegen.triton.TritonOverrides.maximum*
+a*
+b0:staticmethodh*d
+where4torch._inductor.codegen.triton.TritonOverrides.where*
+a*
+b*
+c0:staticmethodh*R
+cos2torch._inductor.codegen.triton.TritonOverrides.cos*
+x0:staticmethodh*f
+libdevice_cos<torch._inductor.codegen.triton.TritonOverrides.libdevice_cos*
+x0:staticmethodh*R
+sin2torch._inductor.codegen.triton.TritonOverrides.sin*
+x0:staticmethodh*f
+libdevice_sin<torch._inductor.codegen.triton.TritonOverrides.libdevice_sin*
+x0:staticmethodh*v
+
+index_expr9torch._inductor.codegen.triton.TritonOverrides.index_expr*
+cls*
+expr*	
+dtype0:classmethodp*p
+masked5torch._inductor.codegen.triton.TritonOverrides.masked*
+mask*
+body*	
+other0:staticmethodh*X
+lgamma5torch._inductor.codegen.triton.TritonOverrides.lgamma*
+x0:staticmethodh*R
+erf2torch._inductor.codegen.triton.TritonOverrides.erf*
+x0:staticmethodh*T
+cosh3torch._inductor.codegen.triton.TritonOverrides.cosh*
+x0:staticmethodh*T
+sinh3torch._inductor.codegen.triton.TritonOverrides.sinh*
+x0:staticmethodh*T
+acos3torch._inductor.codegen.triton.TritonOverrides.acos*
+x0:staticmethodh*V
+acosh4torch._inductor.codegen.triton.TritonOverrides.acosh*
+x0:staticmethodh*T
+asin3torch._inductor.codegen.triton.TritonOverrides.asin*
+x0:staticmethodh*V
+asinh4torch._inductor.codegen.triton.TritonOverrides.asinh*
+x0:staticmethodh*]
+atan24torch._inductor.codegen.triton.TritonOverrides.atan2*
+x*
+y0:staticmethodh*T
+atan3torch._inductor.codegen.triton.TritonOverrides.atan*
+x0:staticmethodh*V
+atanh4torch._inductor.codegen.triton.TritonOverrides.atanh*
+x0:staticmethodh*c
+copysign7torch._inductor.codegen.triton.TritonOverrides.copysign*
+x*
+y0:staticmethodh*T
+erfc3torch._inductor.codegen.triton.TritonOverrides.erfc*
+x0:staticmethodh*X
+erfinv5torch._inductor.codegen.triton.TritonOverrides.erfinv*
+x0:staticmethodh*]
+hypot4torch._inductor.codegen.triton.TritonOverrides.hypot*
+x*
+y0:staticmethodh*V
+log104torch._inductor.codegen.triton.TritonOverrides.log10*
+x0:staticmethodh*T
+log23torch._inductor.codegen.triton.TritonOverrides.log2*
+x0:staticmethodh*e
+	nextafter8torch._inductor.codegen.triton.TritonOverrides.nextafter*
+x*
+y0:staticmethodh*i
+logical_and:torch._inductor.codegen.triton.TritonOverrides.logical_and*
+a*
+b0:staticmethodh*b
+logical_not:torch._inductor.codegen.triton.TritonOverrides.logical_not*
+a0:staticmethodh*g
+
+logical_or9torch._inductor.codegen.triton.TritonOverrides.logical_or*
+a*
+b0:staticmethodh*i
+logical_xor:torch._inductor.codegen.triton.TritonOverrides.logical_xor*
+a*
+b0:staticmethodh*i
+bitwise_and:torch._inductor.codegen.triton.TritonOverrides.bitwise_and*
+a*
+b0:staticmethodh*b
+bitwise_not:torch._inductor.codegen.triton.TritonOverrides.bitwise_not*
+a0:staticmethodh*g
+
+bitwise_or9torch._inductor.codegen.triton.TritonOverrides.bitwise_or*
+a*
+b0:staticmethodh*i
+bitwise_xor:torch._inductor.codegen.triton.TritonOverrides.bitwise_xor*
+a*
+b0:staticmethodh*w
+bitwise_left_shiftAtorch._inductor.codegen.triton.TritonOverrides.bitwise_left_shift*
+a*
+b0:staticmethodh*y
+bitwise_right_shiftBtorch._inductor.codegen.triton.TritonOverrides.bitwise_right_shift*
+a*
+b0:staticmethodh*c
+rand3torch._inductor.codegen.triton.TritonOverrides.rand*
+seed*
+
+offset0:staticmethodh*e
+randn4torch._inductor.codegen.triton.TritonOverrides.randn*
+seed*
+
+offset0:staticmethodh*€
+	randint648torch._inductor.codegen.triton.TritonOverrides.randint64*
+seed*
+
+offset*
+low*
+high0:staticmethodh*m
+	load_seed8torch._inductor.codegen.triton.TritonOverrides.load_seed*
+name*
+
+offset0:staticmethodh*V
+rsqrt4torch._inductor.codegen.triton.TritonOverrides.rsqrt*
+x0:staticmethodh*V
+log1p4torch._inductor.codegen.triton.TritonOverrides.log1p*
+x0:staticmethodh*R
+tan2torch._inductor.codegen.triton.TritonOverrides.tan*
+x0:staticmethodh*T
+tanh3torch._inductor.codegen.triton.TritonOverrides.tanh*
+x0:staticmethodh*Z
+sigmoid6torch._inductor.codegen.triton.TritonOverrides.sigmoid*
+x0:staticmethodh*Z
+signbit6torch._inductor.codegen.triton.TritonOverrides.signbit*
+x0:staticmethodh*[
+fmod3torch._inductor.codegen.triton.TritonOverrides.fmod*
+a*
+b0:staticmethodh*Y
+pow2torch._inductor.codegen.triton.TritonOverrides.pow*
+a*
+b0:staticmethodh*R
+log2torch._inductor.codegen.triton.TritonOverrides.log*
+x0:staticmethodh*f
+libdevice_log<torch._inductor.codegen.triton.TritonOverrides.libdevice_log*
+x0:staticmethodh*V
+isinf4torch._inductor.codegen.triton.TritonOverrides.isinf*
+x0:staticmethodh*V
+isnan4torch._inductor.codegen.triton.TritonOverrides.isnan*
+x0:staticmethodh*V
+round4torch._inductor.codegen.triton.TritonOverrides.round*
+x0:staticmethodh*V
+floor4torch._inductor.codegen.triton.TritonOverrides.floor*
+x0:staticmethodh*c
+floordiv7torch._inductor.codegen.triton.TritonOverrides.floordiv*
+a*
+b0:staticmethodh*T
+sign3torch._inductor.codegen.triton.TritonOverrides.sign*
+x0:staticmethodh*V
+trunc4torch._inductor.codegen.triton.TritonOverrides.trunc*
+x0:staticmethodh*c
+truncdiv7torch._inductor.codegen.triton.TritonOverrides.truncdiv*
+a*
+b0:staticmethodh*T
+ceil3torch._inductor.codegen.triton.TritonOverrides.ceil*
+x0:staticmethodhÁ
+TritonKernelOverrides4torch._inductor.codegen.triton.TritonKernelOverrides".torch._inductor.codegen.triton.TritonOverrides*y
+constant=torch._inductor.codegen.triton.TritonKernelOverrides.constant*
+cls*	
+value*	
+dtype0:classmethodp*|
+
+index_expr?torch._inductor.codegen.triton.TritonKernelOverrides.index_expr*
+cls*
+expr*	
+dtype0:classmethodp*v
+masked;torch._inductor.codegen.triton.TritonKernelOverrides.masked*
+mask*
+body*	
+other0:staticmethodh*s
+	load_seed>torch._inductor.codegen.triton.TritonKernelOverrides.load_seed*
+name*
+
+offset0:staticmethodh*\
+frexp:torch._inductor.codegen.triton.TritonKernelOverrides.frexp*
+x0:staticmethodh·
+HelperFunctions.torch._inductor.codegen.triton.HelperFunctions"builtins.object*M
+__init__7torch._inductor.codegen.triton.HelperFunctions.__init__*
+self*Ž
+add2torch._inductor.codegen.triton.HelperFunctions.add"
+builtins.str"builtins.str*j
+self`
+.torch._inductor.codegen.triton.HelperFunctions".torch._inductor.codegen.triton.HelperFunctions*/
+template_code
+builtins.str"builtins.str*
+	base_name
+Any *E
+__iter__7torch._inductor.codegen.triton.HelperFunctions.__iter__* *M
+__getitem__:torch._inductor.codegen.triton.HelperFunctions.__getitem__* * rÈ
+_templates_seen>torch._inductor.codegen.triton.HelperFunctions._templates_seenu
+(builtins.dict[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.dictr¡
+finalized_helpers@torch._inductor.codegen.triton.HelperFunctions.finalized_helpersJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.listÑ\
+TritonKernel+torch._inductor.codegen.triton.TritonKernel"'torch._inductor.codegen.simd.SIMDKernel*
+__init__4torch._inductor.codegen.triton.TritonKernel.__init__"
+None*d
+selfZ
++torch._inductor.codegen.triton.TritonKernel"+torch._inductor.codegen.triton.TritonKernel*
+groups
+Any*-
+index_dtype
+builtins.str"builtins.str*
+	mutations~
+&Union[builtins.set[builtins.str],None]H
+builtins.set[builtins.str]
+builtins.str"builtins.str"builtins.set
+None *
+	pid_cache
+Any *
+reduction_hint
+Any *"
+min_elem_per_thread
+Any *+
+disable_persistent_reduction
+Any *^
+codegen_range_tree>torch._inductor.codegen.triton.TritonKernel.codegen_range_tree*
+self*X
+need_numel_args;torch._inductor.codegen.triton.TritonKernel.need_numel_args*
+self*ô
+should_use_persistent_reductionKtorch._inductor.codegen.triton.TritonKernel.should_use_persistent_reduction"
+builtins.bool"builtins.bool*d
+selfZ
++torch._inductor.codegen.triton.TritonKernel"+torch._inductor.codegen.triton.TritonKernel*T
+want_no_x_dim9torch._inductor.codegen.triton.TritonKernel.want_no_x_dim*
+self*à
+assert_function;torch._inductor.codegen.triton.TritonKernel.assert_function"
+builtins.str"builtins.str*d
+selfZ
++torch._inductor.codegen.triton.TritonKernel"+torch._inductor.codegen.triton.TritonKernel0:property`*µ
+indexing4torch._inductor.codegen.triton.TritonKernel.indexing"
+Any*d
+selfZ
++torch._inductor.codegen.triton.TritonKernel"+torch._inductor.codegen.triton.TritonKernel*
+index
+Any*
+
+copy_shape
+Any *
+dense_indexing
+Any *
+override_mask
+Any *
+	block_ptr
+Any *Ì
+codegen_block_ptr=torch._inductor.codegen.triton.TritonKernel.codegen_block_ptr"¼
+XTuple[builtins.str,Union[torch._inductor.codegen.common.DeferredLine,None],builtins.str]
+builtins.str"builtins.str¡
+7Union[torch._inductor.codegen.common.DeferredLine,None]Z
++torch._inductor.codegen.common.DeferredLine"+torch._inductor.codegen.common.DeferredLine
+None
+builtins.str"builtins.str*d
+selfZ
++torch._inductor.codegen.triton.TritonKernel"+torch._inductor.codegen.triton.TritonKernel*&
+name
+builtins.str"builtins.str*%
+var
+builtins.str"builtins.str*n
+indexing`
+.torch._inductor.codegen.triton.BlockPtrOptions".torch._inductor.codegen.triton.BlockPtrOptions*
+other
+Any *±
+codegen_block_ptr_store_lineHtorch._inductor.codegen.triton.TritonKernel.codegen_block_ptr_store_line*
+self*
+name*
+indexing*
+	block_ptr*	
+value*
+other *³
+check_bounds8torch._inductor.codegen.triton.TritonKernel.check_bounds"
+Any*d
+selfZ
++torch._inductor.codegen.triton.TritonKernel"+torch._inductor.codegen.triton.TritonKernel*
+expr
+Any*
+size
+Any*)
+lower
+builtins.bool"builtins.bool*)
+upper
+builtins.bool"builtins.bool*f
+get_load_buffer;torch._inductor.codegen.triton.TritonKernel.get_load_buffer*
+self*
+indexing*ã
+load0torch._inductor.codegen.triton.TritonKernel.load"
+Any*d
+selfZ
++torch._inductor.codegen.triton.TritonKernel"+torch._inductor.codegen.triton.TritonKernel*&
+name
+builtins.str"builtins.str*
+index
+Any*œ
+store1torch._inductor.codegen.triton.TritonKernel.store"
+None*d
+selfZ
++torch._inductor.codegen.triton.TritonKernel"+torch._inductor.codegen.triton.TritonKernel*&
+name
+builtins.str"builtins.str*
+index
+Any*c
+valueX
+*torch._inductor.codegen.common.CSEVariable"*torch._inductor.codegen.common.CSEVariable*Î
+modeÁ
+,TypeAlias[Union[Literal[builtins.str],None]]h
+!Union[Literal[builtins.str],None]7
+Literal[builtins.str]	
+builtins.str"builtins.str
+None"%torch._inductor.ops_handler.StoreMode *”
+	bucketize5torch._inductor.codegen.triton.TritonKernel.bucketize"X
+*torch._inductor.codegen.common.CSEVariable"*torch._inductor.codegen.common.CSEVariable*d
+selfZ
++torch._inductor.codegen.triton.TritonKernel"+torch._inductor.codegen.triton.TritonKernel*d
+valuesX
+*torch._inductor.codegen.common.CSEVariable"*torch._inductor.codegen.common.CSEVariable*.
+offsets_name
+builtins.str"builtins.str*
+offsets_size
+Any*4
+indexing_dtype 
+torch._C.dtype"torch._C.dtype*)
+right
+builtins.bool"builtins.bool*e
+reduction_resize<torch._inductor.codegen.triton.TritonKernel.reduction_resize*
+self*	
+value*×
+	reduction5torch._inductor.codegen.triton.TritonKernel.reduction"ó
+lUnion[torch._inductor.codegen.common.CSEVariable,builtins.tuple[torch._inductor.codegen.common.CSEVariable]]X
+*torch._inductor.codegen.common.CSEVariable"*torch._inductor.codegen.common.CSEVariable¦
+:builtins.tuple[torch._inductor.codegen.common.CSEVariable]X
+*torch._inductor.codegen.common.CSEVariable"*torch._inductor.codegen.common.CSEVariable"builtins.tuple*d
+selfZ
++torch._inductor.codegen.triton.TritonKernel"+torch._inductor.codegen.triton.TritonKernel*+
+dtype 
+torch._C.dtype"torch._C.dtype*/
+	src_dtype 
+torch._C.dtype"torch._C.dtype*Ö
+reduction_typeÁ
+íTypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]¡
+âUnion[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str")torch._inductor.ops_handler.ReductionType*ÿ
+valueó
+lUnion[torch._inductor.codegen.common.CSEVariable,builtins.tuple[torch._inductor.codegen.common.CSEVariable]]X
+*torch._inductor.codegen.common.CSEVariable"*torch._inductor.codegen.common.CSEVariable¦
+:builtins.tuple[torch._inductor.codegen.common.CSEVariable]X
+*torch._inductor.codegen.common.CSEVariable"*torch._inductor.codegen.common.CSEVariable"builtins.tuple*Þ
+store_reduction;torch._inductor.codegen.triton.TritonKernel.store_reduction"
+Any*d
+selfZ
++torch._inductor.codegen.triton.TritonKernel"+torch._inductor.codegen.triton.TritonKernel*&
+name
+builtins.str"builtins.str*
+index
+Any*c
+valueX
+*torch._inductor.codegen.common.CSEVariable"*torch._inductor.codegen.common.CSEVariable*ô
+_lift_helper8torch._inductor.codegen.triton.TritonKernel._lift_helper"
+builtins.str"builtins.str*d
+selfZ
++torch._inductor.codegen.triton.TritonKernel"+torch._inductor.codegen.triton.TritonKernel*
+fn
+Any*
+num_args
+Any*º
+scan0torch._inductor.codegen.triton.TritonKernel.scan"¦
+:builtins.tuple[torch._inductor.codegen.common.CSEVariable]X
+*torch._inductor.codegen.common.CSEVariable"*torch._inductor.codegen.common.CSEVariable"builtins.tuple*d
+selfZ
++torch._inductor.codegen.triton.TritonKernel"+torch._inductor.codegen.triton.TritonKernel*^
+dtypesR
+builtins.tuple[torch._C.dtype] 
+torch._C.dtype"torch._C.dtype"builtins.tuple*[
+
+combine_fnK
+CallableType[builtins.function]&
+builtins.function"builtins.function*³
+values¦
+:builtins.tuple[torch._inductor.codegen.common.CSEVariable]X
+*torch._inductor.codegen.common.CSEVariable"*torch._inductor.codegen.common.CSEVariable"builtins.tuple*R
+codegen_body8torch._inductor.codegen.triton.TritonKernel.codegen_body*
+self*‚
+codegen_kernel_benchmarkDtorch._inductor.codegen.triton.TritonKernel.codegen_kernel_benchmark*
+self*
+
+num_gb*
+
+grid *r
+imports_for_benchmark_kernelHtorch._inductor.codegen.triton.TritonKernel.imports_for_benchmark_kernel*
+self*V
+_get_heuristic:torch._inductor.codegen.triton.TritonKernel._get_heuristic*
+self*j
+inductor_meta_common@torch._inductor.codegen.triton.TritonKernel.inductor_meta_common0:staticmethodh*b
+codegen_kernel:torch._inductor.codegen.triton.TritonKernel.codegen_kernel*
+self*
+
+name *n
+codegen_static_numelsAtorch._inductor.codegen.triton.TritonKernel.codegen_static_numels*
+self*
+code*R
+_get_grid_fn8torch._inductor.codegen.triton.TritonKernel._get_grid_fn*
+self*ª
+add_numel_to_call_args_and_gridKtorch._inductor.codegen.triton.TritonKernel.add_numel_to_call_args_and_grid*
+self*
+name*
+	call_args*
+	arg_types*
+grid*T
+get_call_args9torch._inductor.codegen.triton.TritonKernel.get_call_args*
+self*Ö
+call_kernel7torch._inductor.codegen.triton.TritonKernel.call_kernel"
+Any*d
+selfZ
++torch._inductor.codegen.triton.TritonKernel"+torch._inductor.codegen.triton.TritonKernel*&
+name
+builtins.str"builtins.str*w
+nodek
+%Union[torch._inductor.ir.IRNode,None]6
+torch._inductor.ir.IRNode"torch._inductor.ir.IRNode
+None *\
+codegen_nan_check=torch._inductor.codegen.triton.TritonKernel.codegen_nan_check*
+self*l
+create_cse_var:torch._inductor.codegen.triton.TritonKernel.create_cse_var*
+self*
+args*
+
+kwargs*Î
+codegen_iteration_ranges_entryJtorch._inductor.codegen.triton.TritonKernel.codegen_iteration_ranges_entry"
+Any*d
+selfZ
++torch._inductor.codegen.triton.TritonKernel"+torch._inductor.codegen.triton.TritonKernel*q
+entryf
+1torch._inductor.codegen.simd.IterationRangesEntry"1torch._inductor.codegen.simd.IterationRangesEntry*}
+iteration_ranges_ranges_codeHtorch._inductor.codegen.triton.TritonKernel.iteration_ranges_ranges_code*
+self*	
+entry*ˆ
+iteration_ranges_scalar_codeHtorch._inductor.codegen.triton.TritonKernel.iteration_ranges_scalar_code*
+self*	
+entry*	
+value*u
+iteration_ranges_get_pidDtorch._inductor.codegen.triton.TritonKernel.iteration_ranges_get_pid*
+self*	
+entry*
+iteration_ranges_codegen_headerKtorch._inductor.codegen.triton.TritonKernel.iteration_ranges_codegen_header*
+self*	
+entry*
+coderƒ
+	overrides5torch._inductor.codegen.triton.TritonKernel.overrides?
+CallableType[builtins.type]
+builtins.type"builtins.typer²
+helper_functions<torch._inductor.codegen.triton.TritonKernel.helper_functions`
+.torch._inductor.codegen.triton.HelperFunctions".torch._inductor.codegen.triton.HelperFunctionsr‡
+kexpr1torch._inductor.codegen.triton.TritonKernel.kexprK
+CallableType[builtins.function]&
+builtins.function"builtins.functionrn
+allow_block_ptr;torch._inductor.codegen.triton.TritonKernel.allow_block_ptr
+builtins.bool"builtins.boolrŠ
+suffix2torch._inductor.codegen.triton.TritonKernel.suffixL
+$torch._inductor.utils.IndentedBuffer"$torch._inductor.utils.IndentedBufferr~
+outside_loop_vars=torch._inductor.codegen.triton.TritonKernel.outside_loop_vars*
+builtins.set[Any]
+Any"builtins.setr˜
+block_ptr_id8torch._inductor.codegen.triton.TritonKernel.block_ptr_idN
+itertools.count[builtins.int]
+builtins.int"builtins.int"itertools.countrñ
+autotune_hints:torch._inductor.codegen.triton.TritonKernel.autotune_hints¢
+8builtins.set[torch._inductor.runtime.hints.AutotuneHint]X
+*torch._inductor.runtime.hints.AutotuneHint"*torch._inductor.runtime.hints.AutotuneHint"builtins.setrŽ
+triton_meta7torch._inductor.codegen.triton.TritonKernel.triton_metaÅ
+7Union[builtins.dict[builtins.str,builtins.object],None]~
++builtins.dict[builtins.str,builtins.object]
+builtins.str"builtins.str"
+builtins.object"builtins.object"builtins.dict
+None¾
+TritonScheduling/torch._inductor.codegen.triton.TritonScheduling"+torch._inductor.codegen.simd.SIMDScheduling*o
+codegen_comment?torch._inductor.codegen.triton.TritonScheduling.codegen_comment*
+self*
+node_schedule*…
+define_kernel=torch._inductor.codegen.triton.TritonScheduling.define_kernel*
+self*
+src_code*
+node_schedule*
+
+kernel*u
+benchmark_fused_nodesEtorch._inductor.codegen.triton.TritonScheduling.benchmark_fused_nodes*
+self*	
+nodes0rf
+
+int32_type:torch._inductor.codegen.triton.TritonScheduling.int32_type
+builtins.str"builtins.strrf
+
+int64_type:torch._inductor.codegen.triton.TritonScheduling.int64_type
+builtins.str"builtins.strr‹
+kernel_type;torch._inductor.codegen.triton.TritonScheduling.kernel_type?
+CallableType[builtins.type]
+builtins.type"builtins.typeå
+CSEProxy@1751,torch._inductor.codegen.triton.CSEProxy@1751"builtins.object*”
+__getattr__8torch._inductor.codegen.triton.CSEProxy@1751.__getattr__"K
+CallableType[builtins.function]&
+builtins.function"builtins.function*^\
+,torch._inductor.codegen.triton.CSEProxy@1751",torch._inductor.codegen.triton.CSEProxy@1751*
+builtins.str"builtins.strå
+	config_of.torch._inductor.codegen.triton_utils.config_of"
+Any*Š
+argsÿ
+œbuiltins.list[TypeAlias[Union[torch._inductor.codegen.common.WorkspaceArg,torch._inductor.codegen.common.TensorArg,torch._inductor.codegen.common.SizeArg]]]Î
+TypeAlias[Union[torch._inductor.codegen.common.WorkspaceArg,torch._inductor.codegen.common.TensorArg,torch._inductor.codegen.common.SizeArg]]‹
+‚Union[torch._inductor.codegen.common.WorkspaceArg,torch._inductor.codegen.common.TensorArg,torch._inductor.codegen.common.SizeArg]Z
++torch._inductor.codegen.common.WorkspaceArg"+torch._inductor.codegen.common.WorkspaceArgT
+(torch._inductor.codegen.common.TensorArg"(torch._inductor.codegen.common.TensorArgP
+&torch._inductor.codegen.common.SizeArg"&torch._inductor.codegen.common.SizeArg",torch._inductor.codegen.common.KernelArgType"builtins.list*‘
+indices
+'Union[builtins.list[builtins.int],None]J
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list
+None è
+signature_of1torch._inductor.codegen.triton_utils.signature_of"
+builtins.str"builtins.str*Ø
+argÎ
+TypeAlias[Union[torch._inductor.codegen.common.WorkspaceArg,torch._inductor.codegen.common.TensorArg,torch._inductor.codegen.common.SizeArg]]‹
+‚Union[torch._inductor.codegen.common.WorkspaceArg,torch._inductor.codegen.common.TensorArg,torch._inductor.codegen.common.SizeArg]Z
++torch._inductor.codegen.common.WorkspaceArg"+torch._inductor.codegen.common.WorkspaceArgT
+(torch._inductor.codegen.common.TensorArg"(torch._inductor.codegen.common.TensorArgP
+&torch._inductor.codegen.common.SizeArg"&torch._inductor.codegen.common.SizeArg",torch._inductor.codegen.common.KernelArgType*,
+
+size_dtype
+builtins.str"builtins.str–	
+signature_to_meta6torch._inductor.codegen.triton_utils.signature_to_meta"u
+(builtins.dict[builtins.int,builtins.str]
+builtins.int"builtins.int
+builtins.str"builtins.str"builtins.dict*
+	signatureÿ
+œbuiltins.list[TypeAlias[Union[torch._inductor.codegen.common.WorkspaceArg,torch._inductor.codegen.common.TensorArg,torch._inductor.codegen.common.SizeArg]]]Î
+TypeAlias[Union[torch._inductor.codegen.common.WorkspaceArg,torch._inductor.codegen.common.TensorArg,torch._inductor.codegen.common.SizeArg]]‹
+‚Union[torch._inductor.codegen.common.WorkspaceArg,torch._inductor.codegen.common.TensorArg,torch._inductor.codegen.common.SizeArg]Z
++torch._inductor.codegen.common.WorkspaceArg"+torch._inductor.codegen.common.WorkspaceArgT
+(torch._inductor.codegen.common.TensorArg"(torch._inductor.codegen.common.TensorArgP
+&torch._inductor.codegen.common.SizeArg"&torch._inductor.codegen.common.SizeArg",torch._inductor.codegen.common.KernelArgType"builtins.list*,
+
+size_dtype
+builtins.str"builtins.str*‘
+indices
+'Union[builtins.list[builtins.int],None]J
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list
+None §
+triton_reshape-torch._inductor.codegen.triton.triton_reshape"
+Any*'
+value
+builtins.str"builtins.str*Y
+	old_shapeJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*Y
+	new_shapeJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.listT
+triton_compute_type2torch._inductor.codegen.triton.triton_compute_type*	
+dtypeP
+triton_store_type0torch._inductor.codegen.triton.triton_store_type*	
+dtypeL
+triton_acc_type.torch._inductor.codegen.triton.triton_acc_type*	
+dtype¾
+_typecheck_TritonOverrides9torch._inductor.codegen.triton._typecheck_TritonOverrides"|
+4torch._inductor.ops_handler.OpsHandler[builtins.str]
+builtins.str"builtins.str"&torch._inductor.ops_handler.OpsHandler*g
+h`
+.torch._inductor.codegen.triton.TritonOverrides".torch._inductor.codegen.triton.TritonOverridesÖ
+ _typecheck_TritonKernelOverrides?torch._inductor.codegen.triton._typecheck_TritonKernelOverrides"|
+4torch._inductor.ops_handler.OpsHandler[builtins.str]
+builtins.str"builtins.str"&torch._inductor.ops_handler.OpsHandler*s
+hl
+4torch._inductor.codegen.triton.TritonKernelOverrides"4torch._inductor.codegen.triton.TritonKernelOverrides*š
+__annotations__.torch._inductor.codegen.triton.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*6
+sympy$torch._inductor.codegen.triton.sympy
+Any*‰
+ops torch._inductor.virtualized._opsß
+Ttorch._inductor.virtualized.Virtualized[torch._inductor.ops_handler.OpsHandler[Any]]^
++torch._inductor.ops_handler.OpsHandler[Any]
+Any"&torch._inductor.ops_handler.OpsHandler"'torch._inductor.virtualized.Virtualized*K
+log"torch._inductor.codegen.triton.log 
+logging.Logger"logging.Logger*F
+perf_hint_log,torch._inductor.codegen.triton.perf_hint_log
+Any*D
+schedule_log+torch._inductor.codegen.triton.schedule_log
+Any*@
+
+fusion_log)torch._inductor.codegen.triton.fusion_log
+Any*z
+texpr$torch._inductor.codegen.triton.texprK
+CallableType[builtins.function]&
+builtins.function"builtins.function

@@ -1,0 +1,237 @@
+
+torch.optim.adagrad‰
+Adagradtorch.optim.adagrad.Adagrad"torch.optim.optimizer.Optimizer*û	
+__init__$torch.optim.adagrad.Adagrad.__init__"
+None*D
+self:
+torch.optim.adagrad.Adagrad"torch.optim.adagrad.Adagrad*É
+paramsˆ
+hTypeAlias[Union[typing.Iterable[torch._tensor.Tensor],typing.Iterable[builtins.dict[builtins.str,Any]]]]Ë
+]Union[typing.Iterable[torch._tensor.Tensor],typing.Iterable[builtins.dict[builtins.str,Any]]]f
+%typing.Iterable[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"typing.Iterableú
+0typing.Iterable[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"typing.Iterable"torch.optim.optimizer.ParamsT**
+lr 
+builtins.float"builtins.float *0
+lr_decay 
+builtins.float"builtins.float *4
+weight_decay 
+builtins.float"builtins.float *A
+initial_accumulator_value 
+builtins.float"builtins.float *+
+eps 
+builtins.float"builtins.float *V
+foreachG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *.
+maximize
+builtins.bool"builtins.bool *4
+differentiable
+builtins.bool"builtins.bool *T
+fusedG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *M
+__setstate__(torch.optim.adagrad.Adagrad.__setstate__*
+self*	
+state*B
+share_memory(torch.optim.adagrad.Adagrad.share_memory*
+self*ç
+_init_group'torch.optim.adagrad.Adagrad._init_group*
+self*	
+group*
+params_with_grad*	
+grads*
+
+state_sums*
+state_steps*a
+step torch.optim.adagrad.Adagrad.step*
+self*
+closure 0:_use_grad_for_differentiablert
+_step_supports_amp_scaling6torch.optim.adagrad.Adagrad._step_supports_amp_scaling
+builtins.bool"builtins.boolã
+
+adagradtorch.optim.adagrad.adagrad"
+Any*n
+paramsb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*m
+gradsb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*r
+
+state_sumsb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*s
+state_stepsb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*T
+fusedG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *n
+
+grad_scale\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None *m
+	found_inf\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None *5
+has_sparse_grad
+builtins.bool"builtins.bool *V
+foreachG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *4
+differentiable
+builtins.bool"builtins.bool *1
+has_complex
+builtins.bool"builtins.bool *(
+lr 
+builtins.float"builtins.float*2
+weight_decay 
+builtins.float"builtins.float*.
+lr_decay 
+builtins.float"builtins.float*)
+eps 
+builtins.float"builtins.float*,
+maximize
+builtins.bool"builtins.boolX
+_make_sparse torch.optim.adagrad._make_sparse*
+grad*
+grad_indices*
+
+valuesÒ
+_single_tensor_adagrad*torch.optim.adagrad._single_tensor_adagrad"
+Any*n
+paramsb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*m
+gradsb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*r
+
+state_sumsb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*s
+state_stepsb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*l
+
+grad_scale\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None*k
+	found_inf\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None*(
+lr 
+builtins.float"builtins.float*2
+weight_decay 
+builtins.float"builtins.float*.
+lr_decay 
+builtins.float"builtins.float*)
+eps 
+builtins.float"builtins.float*3
+has_sparse_grad
+builtins.bool"builtins.bool*,
+maximize
+builtins.bool"builtins.bool*2
+differentiable
+builtins.bool"builtins.bool*/
+has_complex
+builtins.bool"builtins.boolÔ
+_multi_tensor_adagrad)torch.optim.adagrad._multi_tensor_adagrad"
+Any*n
+paramsb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*m
+gradsb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*r
+
+state_sumsb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*s
+state_stepsb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*l
+
+grad_scale\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None*k
+	found_inf\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None*(
+lr 
+builtins.float"builtins.float*2
+weight_decay 
+builtins.float"builtins.float*.
+lr_decay 
+builtins.float"builtins.float*)
+eps 
+builtins.float"builtins.float*3
+has_sparse_grad
+builtins.bool"builtins.bool*,
+maximize
+builtins.bool"builtins.bool*2
+differentiable
+builtins.bool"builtins.bool*/
+has_complex
+builtins.bool"builtins.bool‚
+_fused_adagrad"torch.optim.adagrad._fused_adagrad"
+None*n
+paramsb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*m
+gradsb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*r
+
+state_sumsb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*s
+state_stepsb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*l
+
+grad_scale\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None*k
+	found_inf\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None*(
+lr 
+builtins.float"builtins.float*2
+weight_decay 
+builtins.float"builtins.float*.
+lr_decay 
+builtins.float"builtins.float*)
+eps 
+builtins.float"builtins.float*3
+has_sparse_grad
+builtins.bool"builtins.bool*,
+maximize
+builtins.bool"builtins.bool*2
+differentiable
+builtins.bool"builtins.bool*/
+has_complex
+builtins.bool"builtins.bool*è
+__annotations__#torch.optim.adagrad.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*r
+__all__torch.optim.adagrad.__all__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list

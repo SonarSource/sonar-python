@@ -1,0 +1,163 @@
+
+%torch.ao.quantization.fx.fuse_handlerÜ
+FuseHandler1torch.ao.quantization.fx.fuse_handler.FuseHandler"abc.ABC*ä
+__init__:torch.ao.quantization.fx.fuse_handler.FuseHandler.__init__"
+None*p
+selff
+1torch.ao.quantization.fx.fuse_handler.FuseHandler"1torch.ao.quantization.fx.fuse_handler.FuseHandler*2
+node(
+torch.fx.node.Node"torch.fx.node.Node0:abstractmethod@*≠
+fuse6torch.ao.quantization.fx.fuse_handler.FuseHandler.fuse"(
+torch.fx.node.Node"torch.fx.node.Node*p
+selff
+1torch.ao.quantization.fx.fuse_handler.FuseHandler"1torch.ao.quantization.fx.fuse_handler.FuseHandler*Y
+load_argK
+CallableType[builtins.function]&
+builtins.function"builtins.function*ø
+named_modules´
+:builtins.dict[builtins.str,torch.nn.modules.module.Module]
+builtins.str"builtins.str@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"builtins.dict*=
+fused_graph,
+torch.fx.graph.Graph"torch.fx.graph.Graph*7
+	root_node(
+torch.fx.node.Node"torch.fx.node.Node*>
+extra_inputs,
+builtins.list[Any]
+Any"builtins.list*Â
+matched_node_pattern 
+âTypeAlias[Union[Tuple[torch.fx.node.Node,torch.fx.node.Node],Tuple[torch.fx.node.Node,Tuple[torch.fx.node.Node,torch.fx.node.Node]],Any]]ê
+~Union[Tuple[torch.fx.node.Node,torch.fx.node.Node],Tuple[torch.fx.node.Node,Tuple[torch.fx.node.Node,torch.fx.node.Node]],Any]Ñ
+,Tuple[torch.fx.node.Node,torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node(
+torch.fx.node.Node"torch.fx.node.Node˚
+FTuple[torch.fx.node.Node,Tuple[torch.fx.node.Node,torch.fx.node.Node]](
+torch.fx.node.Node"torch.fx.node.NodeÑ
+,Tuple[torch.fx.node.Node,torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node(
+torch.fx.node.Node"torch.fx.node.Node
+Any"'torch.ao.quantization.utils.NodePattern*ä
+fuse_custom_configr
+7torch.ao.quantization.fx.custom_config.FuseCustomConfig"7torch.ao.quantization.fx.custom_config.FuseCustomConfig*∆
+fuser_method_mapping´
+∆builtins.dict[TypeAlias[Union[CallableType[builtins.function],Tuple[CallableType[builtins.function],CallableType[builtins.function]],Tuple[CallableType[builtins.function],Tuple[CallableType[builtins.function],CallableType[builtins.function]]],Any]],Union[torch.nn.modules.container.Sequential,CallableType[builtins.function]]]‡	
+ÍTypeAlias[Union[CallableType[builtins.function],Tuple[CallableType[builtins.function],CallableType[builtins.function]],Tuple[CallableType[builtins.function],Tuple[CallableType[builtins.function],CallableType[builtins.function]]],Any]]…
+ﬂUnion[CallableType[builtins.function],Tuple[CallableType[builtins.function],CallableType[builtins.function]],Tuple[CallableType[builtins.function],Tuple[CallableType[builtins.function],CallableType[builtins.function]]],Any]K
+CallableType[builtins.function]&
+builtins.function"builtins.function‰
+FTuple[CallableType[builtins.function],CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.functionK
+CallableType[builtins.function]&
+builtins.function"builtins.function•
+mTuple[CallableType[builtins.function],Tuple[CallableType[builtins.function],CallableType[builtins.function]]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function‰
+FTuple[CallableType[builtins.function],CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.functionK
+CallableType[builtins.function]&
+builtins.function"builtins.function
+Any"#torch.ao.quantization.utils.PatternÌ
+LUnion[torch.nn.modules.container.Sequential,CallableType[builtins.function]]N
+%torch.nn.modules.container.Sequential"%torch.nn.modules.container.SequentialK
+CallableType[builtins.function]&
+builtins.function"builtins.function"builtins.dict**
+is_qat
+builtins.bool"builtins.bool0:abstractmethod@¿
+DefaultFuseHandler8torch.ao.quantization.fx.fuse_handler.DefaultFuseHandler"1torch.ao.quantization.fx.fuse_handler.FuseHandler*ã
+__init__Atorch.ao.quantization.fx.fuse_handler.DefaultFuseHandler.__init__"
+None*~
+selft
+8torch.ao.quantization.fx.fuse_handler.DefaultFuseHandler"8torch.ao.quantization.fx.fuse_handler.DefaultFuseHandler*2
+node(
+torch.fx.node.Node"torch.fx.node.Node*Æ
+fuse=torch.ao.quantization.fx.fuse_handler.DefaultFuseHandler.fuse"(
+torch.fx.node.Node"torch.fx.node.Node*~
+selft
+8torch.ao.quantization.fx.fuse_handler.DefaultFuseHandler"8torch.ao.quantization.fx.fuse_handler.DefaultFuseHandler*Y
+load_argK
+CallableType[builtins.function]&
+builtins.function"builtins.function*ø
+named_modules´
+:builtins.dict[builtins.str,torch.nn.modules.module.Module]
+builtins.str"builtins.str@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"builtins.dict*=
+fused_graph,
+torch.fx.graph.Graph"torch.fx.graph.Graph*7
+	root_node(
+torch.fx.node.Node"torch.fx.node.Node*>
+extra_inputs,
+builtins.list[Any]
+Any"builtins.list*Â
+matched_node_pattern 
+âTypeAlias[Union[Tuple[torch.fx.node.Node,torch.fx.node.Node],Tuple[torch.fx.node.Node,Tuple[torch.fx.node.Node,torch.fx.node.Node]],Any]]ê
+~Union[Tuple[torch.fx.node.Node,torch.fx.node.Node],Tuple[torch.fx.node.Node,Tuple[torch.fx.node.Node,torch.fx.node.Node]],Any]Ñ
+,Tuple[torch.fx.node.Node,torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node(
+torch.fx.node.Node"torch.fx.node.Node˚
+FTuple[torch.fx.node.Node,Tuple[torch.fx.node.Node,torch.fx.node.Node]](
+torch.fx.node.Node"torch.fx.node.NodeÑ
+,Tuple[torch.fx.node.Node,torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node(
+torch.fx.node.Node"torch.fx.node.Node
+Any"'torch.ao.quantization.utils.NodePattern*ä
+fuse_custom_configr
+7torch.ao.quantization.fx.custom_config.FuseCustomConfig"7torch.ao.quantization.fx.custom_config.FuseCustomConfig*∆
+fuser_method_mapping´
+∆builtins.dict[TypeAlias[Union[CallableType[builtins.function],Tuple[CallableType[builtins.function],CallableType[builtins.function]],Tuple[CallableType[builtins.function],Tuple[CallableType[builtins.function],CallableType[builtins.function]]],Any]],Union[torch.nn.modules.container.Sequential,CallableType[builtins.function]]]‡	
+ÍTypeAlias[Union[CallableType[builtins.function],Tuple[CallableType[builtins.function],CallableType[builtins.function]],Tuple[CallableType[builtins.function],Tuple[CallableType[builtins.function],CallableType[builtins.function]]],Any]]…
+ﬂUnion[CallableType[builtins.function],Tuple[CallableType[builtins.function],CallableType[builtins.function]],Tuple[CallableType[builtins.function],Tuple[CallableType[builtins.function],CallableType[builtins.function]]],Any]K
+CallableType[builtins.function]&
+builtins.function"builtins.function‰
+FTuple[CallableType[builtins.function],CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.functionK
+CallableType[builtins.function]&
+builtins.function"builtins.function•
+mTuple[CallableType[builtins.function],Tuple[CallableType[builtins.function],CallableType[builtins.function]]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function‰
+FTuple[CallableType[builtins.function],CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.functionK
+CallableType[builtins.function]&
+builtins.function"builtins.function
+Any"#torch.ao.quantization.utils.PatternÌ
+LUnion[torch.nn.modules.container.Sequential,CallableType[builtins.function]]N
+%torch.nn.modules.container.Sequential"%torch.nn.modules.container.SequentialK
+CallableType[builtins.function]&
+builtins.function"builtins.function"builtins.dict**
+is_qat
+builtins.bool"builtins.boolÙ
+'_get_fusion_pattern_to_fuse_handler_clsMtorch.ao.quantization.fx.fuse_handler._get_fusion_pattern_to_fuse_handler_cls"€
+ôbuiltins.dict[TypeAlias[Union[CallableType[builtins.function],Tuple[CallableType[builtins.function],CallableType[builtins.function]],Tuple[CallableType[builtins.function],Tuple[CallableType[builtins.function],CallableType[builtins.function]]],Any]],CallableType[builtins.function]]‡	
+ÍTypeAlias[Union[CallableType[builtins.function],Tuple[CallableType[builtins.function],CallableType[builtins.function]],Tuple[CallableType[builtins.function],Tuple[CallableType[builtins.function],CallableType[builtins.function]]],Any]]…
+ﬂUnion[CallableType[builtins.function],Tuple[CallableType[builtins.function],CallableType[builtins.function]],Tuple[CallableType[builtins.function],Tuple[CallableType[builtins.function],CallableType[builtins.function]]],Any]K
+CallableType[builtins.function]&
+builtins.function"builtins.function‰
+FTuple[CallableType[builtins.function],CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.functionK
+CallableType[builtins.function]&
+builtins.function"builtins.function•
+mTuple[CallableType[builtins.function],Tuple[CallableType[builtins.function],CallableType[builtins.function]]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function‰
+FTuple[CallableType[builtins.function],CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.functionK
+CallableType[builtins.function]&
+builtins.function"builtins.function
+Any"#torch.ao.quantization.utils.PatternK
+CallableType[builtins.function]&
+builtins.function"builtins.function"builtins.dict*õ
+backend_configÜ
+Atorch.ao.quantization.backend_config.backend_config.BackendConfig"Atorch.ao.quantization.backend_config.backend_config.BackendConfig*°
+__annotations__5torch.ao.quantization.fx.fuse_handler.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*Ñ
+__all__-torch.ao.quantization.fx.fuse_handler.__all__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list

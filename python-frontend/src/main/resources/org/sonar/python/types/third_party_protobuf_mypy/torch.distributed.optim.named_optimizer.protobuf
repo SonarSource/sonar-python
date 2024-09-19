@@ -1,0 +1,664 @@
+
+'torch.distributed.optim.named_optimizerÍ 
+FSDPKtorch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel"torch.nn.modules.module.Module"/torch.distributed.fsdp._common_utils._FSDPState*Œ
+__init__Ttorch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel.__init__"
+None*•
+selfö
+Ktorch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel"Ktorch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel*L
+module@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*ò
+process_groupÇ
+†TypeAlias[Union[torch._C._distributed_c10d.ProcessGroup,TypeAlias[Tuple[torch._C._distributed_c10d.ProcessGroup,torch._C._distributed_c10d.ProcessGroup]],None]]•
+ïUnion[torch._C._distributed_c10d.ProcessGroup,TypeAlias[Tuple[torch._C._distributed_c10d.ProcessGroup,torch._C._distributed_c10d.ProcessGroup]],None]R
+'torch._C._distributed_c10d.ProcessGroup"'torch._C._distributed_c10d.ProcessGroup™
+aTypeAlias[Tuple[torch._C._distributed_c10d.ProcessGroup,torch._C._distributed_c10d.ProcessGroup]]Ç
+VTuple[torch._C._distributed_c10d.ProcessGroup,torch._C._distributed_c10d.ProcessGroup]R
+'torch._C._distributed_c10d.ProcessGroup"'torch._C._distributed_c10d.ProcessGroupR
+'torch._C._distributed_c10d.ProcessGroup"'torch._C._distributed_c10d.ProcessGroup">torch.distributed.fsdp._init_utils.HybridShardProcessGroupType
+None"3torch.distributed.fsdp._init_utils.ProcessGroupType *ª
+sharding_strategy°
+7Union[torch.distributed.fsdp.api.ShardingStrategy,None]Z
++torch.distributed.fsdp.api.ShardingStrategy"+torch.distributed.fsdp.api.ShardingStrategy
+None *£
+cpu_offloadè
+1Union[torch.distributed.fsdp.api.CPUOffload,None]N
+%torch.distributed.fsdp.api.CPUOffload"%torch.distributed.fsdp.api.CPUOffload
+None *™
+auto_wrap_policyë
+ÅUnion[CallableType[builtins.function],torch.distributed.fsdp.wrap.ModuleWrapPolicy,torch.distributed.fsdp.wrap.CustomPolicy,None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function\
+,torch.distributed.fsdp.wrap.ModuleWrapPolicy",torch.distributed.fsdp.wrap.ModuleWrapPolicyT
+(torch.distributed.fsdp.wrap.CustomPolicy"(torch.distributed.fsdp.wrap.CustomPolicy
+None *ª
+backward_prefetch°
+7Union[torch.distributed.fsdp.api.BackwardPrefetch,None]Z
++torch.distributed.fsdp.api.BackwardPrefetch"+torch.distributed.fsdp.api.BackwardPrefetch
+None *≥
+mixed_precisionõ
+5Union[torch.distributed.fsdp.api.MixedPrecision,None]V
+)torch.distributed.fsdp.api.MixedPrecision")torch.distributed.fsdp.api.MixedPrecision
+None *Ë
+ignored_modules–
+;Union[typing.Iterable[torch.nn.modules.module.Module],None]Ñ
+/typing.Iterable[torch.nn.modules.module.Module]@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"typing.Iterable
+None *ú
+param_init_fnÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *â
+	device_idx
+(Union[builtins.int,torch._C.device,None]
+builtins.int"builtins.int"
+torch._C.device"torch._C.device
+None *8
+sync_module_states
+builtins.bool"builtins.bool *6
+forward_prefetch
+builtins.bool"builtins.bool *7
+limit_all_gathers
+builtins.bool"builtins.bool *5
+use_orig_params
+builtins.bool"builtins.bool *§
+ignored_statesç
+nUnion[typing.Iterable[torch.nn.parameter.Parameter],None,typing.Iterable[torch.nn.modules.module.Module],None]~
+-typing.Iterable[torch.nn.parameter.Parameter]<
+torch.nn.parameter.Parameter"torch.nn.parameter.Parameter"typing.Iterable
+NoneÑ
+/typing.Iterable[torch.nn.modules.module.Module]@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"typing.Iterable
+None *¨
+device_meshò
+4Union[torch.distributed.device_mesh.DeviceMesh,None]T
+(torch.distributed.device_mesh.DeviceMesh"(torch.distributed.device_mesh.DeviceMesh
+None *‘
+moduleRtorch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel.module"@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*•
+selfö
+Ktorch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel"Ktorch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel0:property`*º
+_has_paramsWtorch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel._has_params"
+builtins.bool"builtins.bool*•
+selfö
+Ktorch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel"Ktorch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel0:property`*œ
+_flat_paramWtorch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel._flat_param"∞
+<Union[torch.distributed.fsdp._flat_param.FlatParameter,None]d
+0torch.distributed.fsdp._flat_param.FlatParameter"0torch.distributed.fsdp._flat_param.FlatParameter
+None*•
+selfö
+Ktorch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel"Ktorch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel0:property`*Ø
+__getattr__Wtorch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel.__getattr__"
+Any*ùö
+Ktorch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel"Ktorch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel*
+builtins.str"builtins.str*Ø
+__getitem__Wtorch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel.__getitem__"
+Any*ùö
+Ktorch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel"Ktorch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel*
+builtins.int"builtins.int*≤
+check_is_rootYtorch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel.check_is_root"
+builtins.bool"builtins.bool*•
+selfö
+Ktorch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel"Ktorch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel*Ñ
+fsdp_modulesXtorch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel.fsdp_modules"à
+Zbuiltins.list[torch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel]ö
+Ktorch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel"Ktorch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel"builtins.list*L
+module@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*/
+	root_only
+builtins.bool"builtins.bool 0:staticmethodh*Ù
+applyQtorch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel.apply"ö
+Ktorch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel"Ktorch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel*•
+selfö
+Ktorch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel"Ktorch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel*S
+fnK
+CallableType[builtins.function]&
+builtins.function"builtins.function*‡
+$_mixed_precision_enabled_for_buffersptorch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel._mixed_precision_enabled_for_buffers"
+builtins.bool"builtins.bool*•
+selfö
+Ktorch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel"Ktorch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel*Œ
+_low_precision_hook_enabledgtorch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel._low_precision_hook_enabled"
+builtins.bool"builtins.bool*•
+selfö
+Ktorch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel"Ktorch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel*¢
+_reset_lazy_init\torch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel._reset_lazy_init"
+None*•
+selfö
+Ktorch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel"Ktorch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel*™
+set_state_dict_type_torch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel.set_state_dict_type"\
+,torch.distributed.fsdp.api.StateDictSettings",torch.distributed.fsdp.api.StateDictSettings*L
+module@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*i
+state_dict_typeT
+(torch.distributed.fsdp.api.StateDictType"(torch.distributed.fsdp.api.StateDictType*∏
+state_dict_configû
+6Union[torch.distributed.fsdp.api.StateDictConfig,None]X
+*torch.distributed.fsdp.api.StateDictConfig"*torch.distributed.fsdp.api.StateDictConfig
+None *Õ
+optim_state_dict_config≠
+;Union[torch.distributed.fsdp.api.OptimStateDictConfig,None]b
+/torch.distributed.fsdp.api.OptimStateDictConfig"/torch.distributed.fsdp.api.OptimStateDictConfig
+None 0:staticmethodh*¥
+get_state_dict_type_torch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel.get_state_dict_type"\
+,torch.distributed.fsdp.api.StateDictSettings",torch.distributed.fsdp.api.StateDictSettings*L
+module@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module0:staticmethodh*≠
+state_dict_type[torch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel.state_dict_type"L
+typing.Generator[Any,Any,Any]
+Any
+Any
+Any"typing.Generator*L
+module@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*i
+state_dict_typeT
+(torch.distributed.fsdp.api.StateDictType"(torch.distributed.fsdp.api.StateDictType*∏
+state_dict_configû
+6Union[torch.distributed.fsdp.api.StateDictConfig,None]X
+*torch.distributed.fsdp.api.StateDictConfig"*torch.distributed.fsdp.api.StateDictConfig
+None *Õ
+optim_state_dict_config≠
+;Union[torch.distributed.fsdp.api.OptimStateDictConfig,None]b
+/torch.distributed.fsdp.api.OptimStateDictConfig"/torch.distributed.fsdp.api.OptimStateDictConfig
+None 0:staticmethod:contextlib.contextmanagerh*∑
+forwardStorch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel.forward"
+Any*•
+selfö
+Ktorch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel"Ktorch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel*
+args
+Any*
+kwargs
+Any*∑
+summon_full_params^torch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel.summon_full_params"L
+typing.Generator[Any,Any,Any]
+Any
+Any
+Any"typing.Generator*L
+module@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*-
+recurse
+builtins.bool"builtins.bool */
+	writeback
+builtins.bool"builtins.bool *0
+
+rank0_only
+builtins.bool"builtins.bool *4
+offload_to_cpu
+builtins.bool"builtins.bool *0
+
+with_grads
+builtins.bool"builtins.bool 0:staticmethod:contextlib.contextmanagerh*≠
+_deregister_orig_params_ctxgtorch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel._deregister_orig_params_ctx*
+self0:contextlib.contextmanager*|
+_applyRtorch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel._apply*
+self*
+args*
+
+kwargs*É
+named_buffersYtorch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel.named_buffers"∆
+9typing.Iterator[Tuple[builtins.str,torch._tensor.Tensor]]x
+(Tuple[builtins.str,torch._tensor.Tensor]
+builtins.str"builtins.str,
+torch._tensor.Tensor"torch._tensor.Tensor"typing.Iterator*•
+selfö
+Ktorch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel"Ktorch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel*
+args
+Any*
+kwargs
+Any*™
+named_parameters\torch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel.named_parameters"Á
+Atyping.Iterator[Tuple[builtins.str,torch.nn.parameter.Parameter]]ê
+0Tuple[builtins.str,torch.nn.parameter.Parameter]
+builtins.str"builtins.str<
+torch.nn.parameter.Parameter"torch.nn.parameter.Parameter"typing.Iterator*•
+selfö
+Ktorch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel"Ktorch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel*
+args
+Any*
+kwargs
+Any*”
+_assert_stateYtorch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel._assert_state"
+None*•
+selfö
+Ktorch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel"Ktorch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel*¥
+state®
+{Union[torch.distributed.fsdp._common_utils.TrainingState,builtins.list[torch.distributed.fsdp._common_utils.TrainingState]]h
+2torch.distributed.fsdp._common_utils.TrainingState"2torch.distributed.fsdp._common_utils.TrainingStateº
+Abuiltins.list[torch.distributed.fsdp._common_utils.TrainingState]h
+2torch.distributed.fsdp._common_utils.TrainingState"2torch.distributed.fsdp._common_utils.TrainingState"builtins.list*Ê
+no_syncStorch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel.no_sync"L
+typing.Generator[Any,Any,Any]
+Any
+Any
+Any"typing.Generator*•
+selfö
+Ktorch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel"Ktorch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel0:contextmanager*µ
+clip_grad_norm_[torch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel.clip_grad_norm_",
+torch._tensor.Tensor"torch._tensor.Tensor*•
+selfö
+Ktorch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel"Ktorch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel*t
+max_normf
+"Union[builtins.float,builtins.int] 
+builtins.float"builtins.float
+builtins.int"builtins.int*w
+	norm_typef
+"Union[builtins.float,builtins.int] 
+builtins.float"builtins.float
+builtins.int"builtins.int 0*◊
+_warn_optim_input]torch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel._warn_optim_input"
+Any*
+optim_input
+Any*.
+
+stacklevel
+builtins.int"builtins.int 0:staticmethodh*⁄
+_is_using_optim_inputatorch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel._is_using_optim_input"
+builtins.bool"builtins.bool*
+optim_input
+Any*
+optim
+Any0:staticmethodh*§
+_warn_legacy_optim_state_dictitorch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel._warn_legacy_optim_state_dict"
+Any*&
+curr
+builtins.str"builtins.str*%
+new
+builtins.str"builtins.str*.
+
+stacklevel
+builtins.int"builtins.int 0:staticmethodh*ç
+
+_optim_state_dict_implbtorch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel._optim_state_dict_impl"W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*K
+model@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*M
+optimB
+torch.optim.optimizer.Optimizer"torch.optim.optimizer.Optimizer*m
+optim_state_dictW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*•
+optim_inputë
+hUnion[builtins.list[builtins.dict[builtins.str,Any]],typing.Iterable[torch.nn.parameter.Parameter],None]ò
+.builtins.list[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"builtins.list~
+-typing.Iterable[torch.nn.parameter.Parameter]<
+torch.nn.parameter.Parameter"torch.nn.parameter.Parameter"typing.Iterable
+None *0
+
+rank0_only
+builtins.bool"builtins.bool *5
+full_state_dict
+builtins.bool"builtins.bool *£
+groupï
+3Union[torch._C._distributed_c10d.ProcessGroup,None]R
+'torch._C._distributed_c10d.ProcessGroup"'torch._C._distributed_c10d.ProcessGroup
+None *1
+cpu_offload
+builtins.bool"builtins.bool */
+_stacklevel
+builtins.int"builtins.int 0:staticmethodh*±
+
+_optim_state_dict_to_load_impljtorch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel._optim_state_dict_to_load_impl"W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*m
+optim_state_dictW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*K
+model@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*•
+optim_inputë
+hUnion[builtins.list[builtins.dict[builtins.str,Any]],typing.Iterable[torch.nn.parameter.Parameter],None]ò
+.builtins.list[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"builtins.list~
+-typing.Iterable[torch.nn.parameter.Parameter]<
+torch.nn.parameter.Parameter"torch.nn.parameter.Parameter"typing.Iterable
+None *ä
+optim}
++Union[torch.optim.optimizer.Optimizer,None]B
+torch.optim.optimizer.Optimizer"torch.optim.optimizer.Optimizer
+None *5
+full_state_dict
+builtins.bool"builtins.bool *0
+
+rank0_only
+builtins.bool"builtins.bool *8
+is_named_optimizer
+builtins.bool"builtins.bool *£
+groupï
+3Union[torch._C._distributed_c10d.ProcessGroup,None]R
+'torch._C._distributed_c10d.ProcessGroup"'torch._C._distributed_c10d.ProcessGroup
+None 0:staticmethodh*Å
+full_optim_state_dictatorch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel.full_optim_state_dict"W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*K
+model@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*M
+optimB
+torch.optim.optimizer.Optimizer"torch.optim.optimizer.Optimizer*•
+optim_inputë
+hUnion[builtins.list[builtins.dict[builtins.str,Any]],typing.Iterable[torch.nn.parameter.Parameter],None]ò
+.builtins.list[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"builtins.list~
+-typing.Iterable[torch.nn.parameter.Parameter]<
+torch.nn.parameter.Parameter"torch.nn.parameter.Parameter"typing.Iterable
+None *0
+
+rank0_only
+builtins.bool"builtins.bool *£
+groupï
+3Union[torch._C._distributed_c10d.ProcessGroup,None]R
+'torch._C._distributed_c10d.ProcessGroup"'torch._C._distributed_c10d.ProcessGroup
+None 0:staticmethodh*≠
+sharded_optim_state_dictdtorch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel.sharded_optim_state_dict"W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*K
+model@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*M
+optimB
+torch.optim.optimizer.Optimizer"torch.optim.optimizer.Optimizer*£
+groupï
+3Union[torch._C._distributed_c10d.ProcessGroup,None]R
+'torch._C._distributed_c10d.ProcessGroup"'torch._C._distributed_c10d.ProcessGroup
+None 0:staticmethodh*Á
+shard_full_optim_state_dictgtorch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel.shard_full_optim_state_dict"W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*r
+full_optim_state_dictW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*K
+model@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*•
+optim_inputë
+hUnion[builtins.list[builtins.dict[builtins.str,Any]],typing.Iterable[torch.nn.parameter.Parameter],None]ò
+.builtins.list[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"builtins.list~
+-typing.Iterable[torch.nn.parameter.Parameter]<
+torch.nn.parameter.Parameter"torch.nn.parameter.Parameter"typing.Iterable
+None *ä
+optim}
++Union[torch.optim.optimizer.Optimizer,None]B
+torch.optim.optimizer.Optimizer"torch.optim.optimizer.Optimizer
+None 0:staticmethodh*é
+ flatten_sharded_optim_state_dictltorch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel.flatten_sharded_optim_state_dict"W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*u
+sharded_optim_state_dictW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*K
+model@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*M
+optimB
+torch.optim.optimizer.Optimizer"torch.optim.optimizer.Optimizer0:staticmethodh*›
+scatter_full_optim_state_dictitorch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel.scatter_full_optim_state_dict"W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*Æ
+full_optim_state_dictí
++Union[builtins.dict[builtins.str,Any],None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None*K
+model@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*•
+optim_inputë
+hUnion[builtins.list[builtins.dict[builtins.str,Any]],typing.Iterable[torch.nn.parameter.Parameter],None]ò
+.builtins.list[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"builtins.list~
+-typing.Iterable[torch.nn.parameter.Parameter]<
+torch.nn.parameter.Parameter"torch.nn.parameter.Parameter"typing.Iterable
+None *ä
+optim}
++Union[torch.optim.optimizer.Optimizer,None]B
+torch.optim.optimizer.Optimizer"torch.optim.optimizer.Optimizer
+None *3
+group&
+Union[Any,None]
+Any
+None 0:staticmethodh*Ç	
+rekey_optim_state_dictbtorch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel.rekey_optim_state_dict"W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*m
+optim_state_dictW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*ß
+optim_state_key_typeå
+Dtorch.distributed.fsdp.fully_sharded_data_parallel.OptimStateKeyType"Dtorch.distributed.fsdp.fully_sharded_data_parallel.OptimStateKeyType*K
+model@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*•
+optim_inputë
+hUnion[builtins.list[builtins.dict[builtins.str,Any]],typing.Iterable[torch.nn.parameter.Parameter],None]ò
+.builtins.list[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"builtins.list~
+-typing.Iterable[torch.nn.parameter.Parameter]<
+torch.nn.parameter.Parameter"torch.nn.parameter.Parameter"typing.Iterable
+None *ä
+optim}
++Union[torch.optim.optimizer.Optimizer,None]B
+torch.optim.optimizer.Optimizer"torch.optim.optimizer.Optimizer
+None 0:staticmethodh*À
+optim_state_dict\torch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel.optim_state_dict"W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*K
+model@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*M
+optimB
+torch.optim.optimizer.Optimizer"torch.optim.optimizer.Optimizer*´
+optim_state_dictí
++Union[builtins.dict[builtins.str,Any],None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None *£
+groupï
+3Union[torch._C._distributed_c10d.ProcessGroup,None]R
+'torch._C._distributed_c10d.ProcessGroup"'torch._C._distributed_c10d.ProcessGroup
+None 0:staticmethodh*ã
+optim_state_dict_to_loaddtorch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel.optim_state_dict_to_load"W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*K
+model@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*M
+optimB
+torch.optim.optimizer.Optimizer"torch.optim.optimizer.Optimizer*m
+optim_state_dictW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*8
+is_named_optimizer
+builtins.bool"builtins.bool *3
+load_directly
+builtins.bool"builtins.bool *£
+groupï
+3Union[torch._C._distributed_c10d.ProcessGroup,None]R
+'torch._C._distributed_c10d.ProcessGroup"'torch._C._distributed_c10d.ProcessGroup
+None 0:staticmethodh*˘
+register_comm_hook^torch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel.register_comm_hook"
+Any*•
+selfö
+Ktorch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel"Ktorch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel*-
+state"
+builtins.object"builtins.object*#
+hook
+UnboundType[callable]*¡
+_unshardTtorch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel._unshard"
+Any*•
+selfö
+Ktorch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel"Ktorch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel*.
+async_op
+builtins.bool"builtins.bool *®
+'_wait_unshard_streams_on_current_streamstorch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel._wait_unshard_streams_on_current_stream*
+self*‘
+_use_training_state_torch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel._use_training_state"
+Any*•
+selfö
+Ktorch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel"Ktorch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel*|
+training_stateh
+2torch.distributed.fsdp._common_utils.TrainingState"2torch.distributed.fsdp._common_utils.TrainingState*è
+handle_training_statet
+8torch.distributed.fsdp._common_utils.HandleTrainingState"8torch.distributed.fsdp._common_utils.HandleTrainingState0:contextlib.contextmanagerr∫
+_fsdp_wrapped_module`torch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel._fsdp_wrapped_module@
+torch.nn.modules.module.Module"torch.nn.modules.module.Moduler©
+_is_rootTtorch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel._is_rootG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None‚(
+_NamedOptimizer7torch.distributed.optim.named_optimizer._NamedOptimizer"torch.optim.optimizer.Optimizer*©	
+__init__@torch.distributed.optim.named_optimizer._NamedOptimizer.__init__"
+None*|
+selfr
+7torch.distributed.optim.named_optimizer._NamedOptimizer"7torch.distributed.optim.named_optimizer._NamedOptimizer*ª
+named_parameters§
+rtyping.Mapping[builtins.str,Union[torch._tensor.Tensor,torch.distributed._shard.sharded_tensor.api.ShardedTensor]]
+builtins.str"builtins.strˇ
+UUnion[torch._tensor.Tensor,torch.distributed._shard.sharded_tensor.api.ShardedTensor],
+torch._tensor.Tensor"torch._tensor.Tensorv
+9torch.distributed._shard.sharded_tensor.api.ShardedTensor"9torch.distributed._shard.sharded_tensor.api.ShardedTensor"typing.Mapping*W
+optimizer_classB
+torch.optim.optimizer.Optimizer"torch.optim.optimizer.Optimizer*à
+param_groupsÛ
+?Union[typing.Collection[typing.Mapping[builtins.str,Any]],None]£
+3typing.Collection[typing.Mapping[builtins.str,Any]]Y
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping"typing.Collection
+None *à
+modulez
+*Union[torch.nn.modules.module.Module,None]@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module
+None *
+args
+Any*
+kwargs
+Any*l
+_param_groups_checkKtorch.distributed.optim.named_optimizer._NamedOptimizer._param_groups_check*
+self*ß
+
+state_dictBtorch.distributed.optim.named_optimizer._NamedOptimizer.state_dict"W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*|
+selfr
+7torch.distributed.optim.named_optimizer._NamedOptimizer"7torch.distributed.optim.named_optimizer._NamedOptimizer*≈
+state=torch.distributed.optim.named_optimizer._NamedOptimizer.state"q
+(typing.Mapping[torch._tensor.Tensor,Any],
+torch._tensor.Tensor"torch._tensor.Tensor
+Any"typing.Mapping*|
+selfr
+7torch.distributed.optim.named_optimizer._NamedOptimizer"7torch.distributed.optim.named_optimizer._NamedOptimizer0:property`*Õ
+load_state_dictGtorch.distributed.optim.named_optimizer._NamedOptimizer.load_state_dict"
+None*|
+selfr
+7torch.distributed.optim.named_optimizer._NamedOptimizer"7torch.distributed.optim.named_optimizer._NamedOptimizer*i
+
+state_dictY
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping*Œ
+add_param_groupGtorch.distributed.optim.named_optimizer._NamedOptimizer.add_param_group"
+None*|
+selfr
+7torch.distributed.optim.named_optimizer._NamedOptimizer"7torch.distributed.optim.named_optimizer._NamedOptimizer*j
+param_groupY
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping*ÿ
+
+init_stateBtorch.distributed.optim.named_optimizer._NamedOptimizer.init_state"
+None*|
+selfr
+7torch.distributed.optim.named_optimizer._NamedOptimizer"7torch.distributed.optim.named_optimizer._NamedOptimizer*‘
+_pre_load_state_dictLtorch.distributed.optim.named_optimizer._NamedOptimizer._pre_load_state_dict"W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*|
+selfr
+7torch.distributed.optim.named_optimizer._NamedOptimizer"7torch.distributed.optim.named_optimizer._NamedOptimizer*
+
+state_dict
+Any*Ã
+_post_state_dictHtorch.distributed.optim.named_optimizer._NamedOptimizer._post_state_dict"W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*|
+selfr
+7torch.distributed.optim.named_optimizer._NamedOptimizer"7torch.distributed.optim.named_optimizer._NamedOptimizer*
+
+state_dict
+Any2â
+step<torch.distributed.optim.named_optimizer._NamedOptimizer.stepÛ
+step<torch.distributed.optim.named_optimizer._NamedOptimizer.step"
+None*|
+selfr
+7torch.distributed.optim.named_optimizer._NamedOptimizer"7torch.distributed.optim.named_optimizer._NamedOptimizer*
+closure
+None 0:overloadXÃ
+step<torch.distributed.optim.named_optimizer._NamedOptimizer.step" 
+builtins.float"builtins.float*|
+selfr
+7torch.distributed.optim.named_optimizer._NamedOptimizer"7torch.distributed.optim.named_optimizer._NamedOptimizer*X
+closureK
+CallableType[builtins.function]&
+builtins.function"builtins.function0:overloadXr˙
+param_groupsDtorch.distributed.optim.named_optimizer._NamedOptimizer.param_groups£
+3typing.Collection[typing.Mapping[builtins.str,Any]]Y
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping"typing.CollectionrÏ
+named_parametersHtorch.distributed.optim.named_optimizer._NamedOptimizer.named_parametersç
+0builtins.dict[builtins.str,torch._tensor.Tensor]
+builtins.str"builtins.str,
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.dictrY
+
+_optimizerBtorch.distributed.optim.named_optimizer._NamedOptimizer._optimizer
+Anyrƒ
+module>torch.distributed.optim.named_optimizer._NamedOptimizer.modulez
+*Union[torch.nn.modules.module.Module,None]@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module
+Noner¨
+ordered_param_keysJtorch.distributed.optim.named_optimizer._NamedOptimizer.ordered_param_keysJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.listŒ
+_gen_param_group_key<torch.distributed.optim.named_optimizer._gen_param_group_key"
+builtins.str"builtins.str*Z
+
+param_keysJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*£
+__annotations__7torch.distributed.optim.named_optimizer.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*
+nntorch.nn *Ü
+__all__/torch.distributed.optim.named_optimizer.__all__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*Z
+logger.torch.distributed.optim.named_optimizer.logger 
+logging.Logger"logging.Logger

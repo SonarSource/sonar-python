@@ -1,0 +1,167 @@
+
+&torch._higher_order_ops.flex_attention
+TransformGetItemToIndex>torch._higher_order_ops.flex_attention.TransformGetItemToIndex"!torch.overrides.TorchFunctionMode*ž
+__torch_function__Qtorch._higher_order_ops.flex_attention.TransformGetItemToIndex.__torch_function__*
+self*
+func*	
+types*
+args*
+kwargs é
+FlexAttentionHOP7torch._higher_order_ops.flex_attention.FlexAttentionHOP"torch._ops.HigherOrderOperator*V
+__init__@torch._higher_order_ops.flex_attention.FlexAttentionHOP.__init__*
+self*£
+__call__@torch._higher_order_ops.flex_attention.FlexAttentionHOP.__call__"
+0Tuple[torch._tensor.Tensor,torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor,
+torch._tensor.Tensor"torch._tensor.Tensor*|
+selfr
+7torch._higher_order_ops.flex_attention.FlexAttentionHOP"7torch._higher_order_ops.flex_attention.FlexAttentionHOP*7
+query,
+torch._tensor.Tensor"torch._tensor.Tensor*5
+key,
+torch._tensor.Tensor"torch._tensor.Tensor*7
+value,
+torch._tensor.Tensor"torch._tensor.Tensor*Z
+	score_modK
+CallableType[builtins.function]&
+builtins.function"builtins.function*?
+other_buffers,
+torch._tensor.Tensor"torch._tensor.Tensorþ
+
+FlexAttentionBackwardHOP?torch._higher_order_ops.flex_attention.FlexAttentionBackwardHOP"torch._ops.HigherOrderOperator*^
+__init__Htorch._higher_order_ops.flex_attention.FlexAttentionBackwardHOP.__init__*
+self* 	
+__call__Htorch._higher_order_ops.flex_attention.FlexAttentionBackwardHOP.__call__"Ó
+ETuple[torch._tensor.Tensor,torch._tensor.Tensor,torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor,
+torch._tensor.Tensor"torch._tensor.Tensor,
+torch._tensor.Tensor"torch._tensor.Tensor*
+self‚
+?torch._higher_order_ops.flex_attention.FlexAttentionBackwardHOP"?torch._higher_order_ops.flex_attention.FlexAttentionBackwardHOP*7
+query,
+torch._tensor.Tensor"torch._tensor.Tensor*5
+key,
+torch._tensor.Tensor"torch._tensor.Tensor*7
+value,
+torch._tensor.Tensor"torch._tensor.Tensor*5
+out,
+torch._tensor.Tensor"torch._tensor.Tensor*;
+	logsumexp,
+torch._tensor.Tensor"torch._tensor.Tensor*:
+grad_out,
+torch._tensor.Tensor"torch._tensor.Tensor*ð
+fw_graphá
+HUnion[CallableType[builtins.function],torch.fx.graph_module.GraphModule]K
+CallableType[builtins.function]&
+builtins.function"builtins.functionF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*W
+joint_graphF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*?
+other_buffers,
+torch._tensor.Tensor"torch._tensor.Tensor 
+FlexAttentionAutogradOp>torch._higher_order_ops.flex_attention.FlexAttentionAutogradOp" torch.autograd.function.Function*
+forwardFtorch._higher_order_ops.flex_attention.FlexAttentionAutogradOp.forward"
+0Tuple[torch._tensor.Tensor,torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor,
+torch._tensor.Tensor"torch._tensor.Tensor*
+ctx
+Any*
+query
+Any*
+key
+Any*
+value
+Any*
+fw_graph
+Any*
+joint_graph
+Any*
+other_buffers
+Any0:staticmethodh*
+backwardGtorch._higher_order_ops.flex_attention.FlexAttentionAutogradOp.backward*
+ctx*
+grad_out*
+logsumexp_grad0:staticmethodhÕ
+transform_getitem_args=torch._higher_order_ops.flex_attention.transform_getitem_args".
+builtins.tuple[Any]
+Any"builtins.tuple*3
+x,
+torch._tensor.Tensor"torch._tensor.Tensor*
+
+index_args
+Any 
+math_attention5torch._higher_order_ops.flex_attention.math_attention"
+0Tuple[torch._tensor.Tensor,torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor,
+torch._tensor.Tensor"torch._tensor.Tensor*7
+query,
+torch._tensor.Tensor"torch._tensor.Tensor*5
+key,
+torch._tensor.Tensor"torch._tensor.Tensor*7
+value,
+torch._tensor.Tensor"torch._tensor.Tensor*Z
+	score_modK
+CallableType[builtins.function]&
+builtins.function"builtins.function*?
+other_buffers,
+torch._tensor.Tensor"torch._tensor.Tensorµ
+trace_flex_attention;torch._higher_order_ops.flex_attention.trace_flex_attention"
+0Tuple[torch._tensor.Tensor,torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor,
+torch._tensor.Tensor"torch._tensor.Tensor*†
+
+proxy_modev
+9torch.fx.experimental.proxy_tensor.ProxyTorchDispatchMode"9torch.fx.experimental.proxy_tensor.ProxyTorchDispatchMode*7
+query,
+torch._tensor.Tensor"torch._tensor.Tensor*5
+key,
+torch._tensor.Tensor"torch._tensor.Tensor*7
+value,
+torch._tensor.Tensor"torch._tensor.Tensor*Z
+	score_modK
+CallableType[builtins.function]&
+builtins.function"builtins.function*?
+other_buffers,
+torch._tensor.Tensor"torch._tensor.Tensorƒ
+create_fw_bw_graph9torch._higher_order_ops.flex_attention.create_fw_bw_graph*
+	score_mod*
+index_values*
+other_buffersª	
+trace_flex_attention_backwardDtorch._higher_order_ops.flex_attention.trace_flex_attention_backward"Ó
+ETuple[torch._tensor.Tensor,torch._tensor.Tensor,torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor,
+torch._tensor.Tensor"torch._tensor.Tensor,
+torch._tensor.Tensor"torch._tensor.Tensor*†
+
+proxy_modev
+9torch.fx.experimental.proxy_tensor.ProxyTorchDispatchMode"9torch.fx.experimental.proxy_tensor.ProxyTorchDispatchMode*7
+query,
+torch._tensor.Tensor"torch._tensor.Tensor*5
+key,
+torch._tensor.Tensor"torch._tensor.Tensor*7
+value,
+torch._tensor.Tensor"torch._tensor.Tensor*5
+out,
+torch._tensor.Tensor"torch._tensor.Tensor*;
+	logsumexp,
+torch._tensor.Tensor"torch._tensor.Tensor*:
+grad_out,
+torch._tensor.Tensor"torch._tensor.Tensor*ð
+fw_graphá
+HUnion[CallableType[builtins.function],torch.fx.graph_module.GraphModule]K
+CallableType[builtins.function]&
+builtins.function"builtins.functionF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*W
+joint_graphF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*?
+other_buffers,
+torch._tensor.Tensor"torch._tensor.Tensor*¢
+__annotations__6torch._higher_order_ops.flex_attention.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*
+pytreetorch.utils._pytree *»
+flex_attention5torch._higher_order_ops.flex_attention.flex_attentionr
+7torch._higher_order_ops.flex_attention.FlexAttentionHOP"7torch._higher_order_ops.flex_attention.FlexAttentionHOP*Þ
+flex_attention_backward>torch._higher_order_ops.flex_attention.flex_attention_backward‚
+?torch._higher_order_ops.flex_attention.FlexAttentionBackwardHOP"?torch._higher_order_ops.flex_attention.FlexAttentionBackwardHOP

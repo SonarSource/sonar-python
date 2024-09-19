@@ -1,0 +1,473 @@
+
+torch._functorch.partitionersí
+OpTypes%torch._functorch.partitioners.OpTypes"builtins.object*Õ
+
+is_fusible0torch._functorch.partitioners.OpTypes.is_fusible"
+Any*X
+selfN
+%torch._functorch.partitioners.OpTypes"%torch._functorch.partitioners.OpTypes*2
+node(
+torch.fx.node.Node"torch.fx.node.Node*é
+is_compute_intensive:torch._functorch.partitioners.OpTypes.is_compute_intensive"
+Any*X
+selfN
+%torch._functorch.partitioners.OpTypes"%torch._functorch.partitioners.OpTypes*2
+node(
+torch.fx.node.Node"torch.fx.node.Node*Ó
+	is_random/torch._functorch.partitioners.OpTypes.is_random"
+Any*X
+selfN
+%torch._functorch.partitioners.OpTypes"%torch._functorch.partitioners.OpTypes*2
+node(
+torch.fx.node.Node"torch.fx.node.Node*Ï
+is_view-torch._functorch.partitioners.OpTypes.is_view"
+Any*X
+selfN
+%torch._functorch.partitioners.OpTypes"%torch._functorch.partitioners.OpTypes*2
+node(
+torch.fx.node.Node"torch.fx.node.Node*ß
+is_recomputable5torch._functorch.partitioners.OpTypes.is_recomputable"
+Any*X
+selfN
+%torch._functorch.partitioners.OpTypes"%torch._functorch.partitioners.OpTypes*2
+node(
+torch.fx.node.Node"torch.fx.node.Node*Ä
+__init__.torch._functorch.partitioners.OpTypes.__init__"
+None*X
+selfN
+%torch._functorch.partitioners.OpTypes"%torch._functorch.partitioners.OpTypes*œ
+fusible_opsŠ
+-builtins.set[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"builtins.set*¦
+compute_intensive_opsŠ
+-builtins.set[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"builtins.set*›
+
+random_opsŠ
+-builtins.set[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"builtins.set*™
+view_opsŠ
+-builtins.set[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"builtins.set*¡
+recomputable_opsŠ
+-builtins.set[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"builtins.set8rÍ
+fusible_ops1torch._functorch.partitioners.OpTypes.fusible_opsŠ
+-builtins.set[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"builtins.setrá
+compute_intensive_ops;torch._functorch.partitioners.OpTypes.compute_intensive_opsŠ
+-builtins.set[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"builtins.setrË
+
+random_ops0torch._functorch.partitioners.OpTypes.random_opsŠ
+-builtins.set[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"builtins.setrÇ
+view_ops.torch._functorch.partitioners.OpTypes.view_opsŠ
+-builtins.set[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"builtins.setr×
+recomputable_ops6torch._functorch.partitioners.OpTypes.recomputable_opsŠ
+-builtins.set[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"builtins.setrì
+__dataclass_fields__:torch._functorch.partitioners.OpTypes.__dataclass_fields__—
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dict‘
+NodeInfo&torch._functorch.partitioners.NodeInfo"builtins.object*¦
+required_fw_nodes8torch._functorch.partitioners.NodeInfo.required_fw_nodes"\
+!builtins.list[torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node"builtins.list*Z
+selfP
+&torch._functorch.partitioners.NodeInfo"&torch._functorch.partitioners.NodeInfo0:functools.cached_property`*ô
+is_required_fw5torch._functorch.partitioners.NodeInfo.is_required_fw"
+builtins.bool"builtins.bool*Z
+selfP
+&torch._functorch.partitioners.NodeInfo"&torch._functorch.partitioners.NodeInfo*/
+n(
+torch.fx.node.Node"torch.fx.node.Node*ô
+is_required_bw5torch._functorch.partitioners.NodeInfo.is_required_bw"
+builtins.bool"builtins.bool*Z
+selfP
+&torch._functorch.partitioners.NodeInfo"&torch._functorch.partitioners.NodeInfo*/
+n(
+torch.fx.node.Node"torch.fx.node.Node*ð
+is_unclaimed3torch._functorch.partitioners.NodeInfo.is_unclaimed"
+builtins.bool"builtins.bool*Z
+selfP
+&torch._functorch.partitioners.NodeInfo"&torch._functorch.partitioners.NodeInfo*/
+n(
+torch.fx.node.Node"torch.fx.node.Node*î
+get_fw_order3torch._functorch.partitioners.NodeInfo.get_fw_order"
+builtins.int"builtins.int*Z
+selfP
+&torch._functorch.partitioners.NodeInfo"&torch._functorch.partitioners.NodeInfo*/
+n(
+torch.fx.node.Node"torch.fx.node.Node*ü
+__init__/torch._functorch.partitioners.NodeInfo.__init__"
+None*Z
+selfP
+&torch._functorch.partitioners.NodeInfo"&torch._functorch.partitioners.NodeInfo*h
+inputs\
+!builtins.list[torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node"builtins.list*r
+_required_fw_nodesZ
+ builtins.set[torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node"builtins.set*q
+required_bw_nodesZ
+ builtins.set[torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node"builtins.set*o
+unclaimed_nodesZ
+ builtins.set[torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node"builtins.set*–
+fw_order‡
+.builtins.dict[torch.fx.node.Node,builtins.int](
+torch.fx.node.Node"torch.fx.node.Node
+builtins.int"builtins.int"builtins.dict8r•
+inputs-torch._functorch.partitioners.NodeInfo.inputs\
+!builtins.list[torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node"builtins.listr«
+_required_fw_nodes9torch._functorch.partitioners.NodeInfo._required_fw_nodesZ
+ builtins.set[torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node"builtins.setr©
+required_bw_nodes8torch._functorch.partitioners.NodeInfo.required_bw_nodesZ
+ builtins.set[torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node"builtins.setr¥
+unclaimed_nodes6torch._functorch.partitioners.NodeInfo.unclaimed_nodesZ
+ builtins.set[torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node"builtins.setrÅ
+fw_order/torch._functorch.partitioners.NodeInfo.fw_order‡
+.builtins.dict[torch.fx.node.Node,builtins.int](
+torch.fx.node.Node"torch.fx.node.Node
+builtins.int"builtins.int"builtins.dictrí
+__dataclass_fields__;torch._functorch.partitioners.NodeInfo.__dataclass_fields__—
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dict§
+MinCutOptions+torch._functorch.partitioners.MinCutOptions"builtins.object*à
+__init__4torch._functorch.partitioners.MinCutOptions.__init__"
+None*d
+selfZ
++torch._functorch.partitioners.MinCutOptions"+torch._functorch.partitioners.MinCutOptions*9
+ban_if_used_far_apart
+builtins.bool"builtins.bool*>
+ban_if_long_fusible_chains
+builtins.bool"builtins.bool*@
+ban_if_materialized_backward
+builtins.bool"builtins.bool*;
+ban_if_not_in_allowlist
+builtins.bool"builtins.bool*4
+ban_if_reduction
+builtins.bool"builtins.bool8rz
+ban_if_used_far_apartAtorch._functorch.partitioners.MinCutOptions.ban_if_used_far_apart
+builtins.bool"builtins.boolr„
+ban_if_long_fusible_chainsFtorch._functorch.partitioners.MinCutOptions.ban_if_long_fusible_chains
+builtins.bool"builtins.boolrˆ
+ban_if_materialized_backwardHtorch._functorch.partitioners.MinCutOptions.ban_if_materialized_backward
+builtins.bool"builtins.boolr~
+ban_if_not_in_allowlistCtorch._functorch.partitioners.MinCutOptions.ban_if_not_in_allowlist
+builtins.bool"builtins.boolrp
+ban_if_reduction<torch._functorch.partitioners.MinCutOptions.ban_if_reduction
+builtins.bool"builtins.boolrò
+__dataclass_fields__@torch._functorch.partitioners.MinCutOptions.__dataclass_fields__—
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dict—
+InvalidNodeBase-torch._functorch.partitioners.InvalidNodeBase"builtins.object*D
+__repr__6torch._functorch.partitioners.InvalidNodeBase.__repr__* ’
+must_recompute,torch._functorch.partitioners.must_recompute"
+builtins.bool"builtins.bool*2
+node(
+torch.fx.node.Node"torch.fx.node.Node¼
+has_recomputable_ops2torch._functorch.partitioners.has_recomputable_ops"
+builtins.bool"builtins.bool*P
+fx_gF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModuleÄ
+has_recomputable_rng_ops6torch._functorch.partitioners.has_recomputable_rng_ops"
+builtins.bool"builtins.bool*P
+fx_gF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModuleŽ
+sym_node_size+torch._functorch.partitioners.sym_node_size"
+builtins.int"builtins.int*2
+node(
+torch.fx.node.Node"torch.fx.node.Node¨
+"_extract_graph_with_inputs_outputs@torch._functorch.partitioners._extract_graph_with_inputs_outputs",
+torch.fx.graph.Graph"torch.fx.graph.Graph*=
+joint_graph,
+torch.fx.graph.Graph"torch.fx.graph.Graph*h
+inputs\
+!builtins.list[torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node"builtins.list*i
+outputs\
+!builtins.list[torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node"builtins.listŠ
+
+_is_primal(torch._functorch.partitioners._is_primal"
+builtins.bool"builtins.bool*2
+node(
+torch.fx.node.Node"torch.fx.node.NodeŒ
+_is_tangent)torch._functorch.partitioners._is_tangent"
+builtins.bool"builtins.bool*2
+node(
+torch.fx.node.Node"torch.fx.node.Nodeœ
+_is_bwd_seed_offset1torch._functorch.partitioners._is_bwd_seed_offset"
+builtins.bool"builtins.bool*2
+node(
+torch.fx.node.Node"torch.fx.node.Nodeœ
+_is_fwd_seed_offset1torch._functorch.partitioners._is_fwd_seed_offset"
+builtins.bool"builtins.bool*2
+node(
+torch.fx.node.Node"torch.fx.node.Nodeš
+_is_backward_state0torch._functorch.partitioners._is_backward_state"
+builtins.bool"builtins.bool*2
+node(
+torch.fx.node.Node"torch.fx.node.Node×
+_extract_fwd_bwd_outputs6torch._functorch.partitioners._extract_fwd_bwd_outputs"Š
+JTuple[builtins.list[torch.fx.node.Node],builtins.list[torch.fx.node.Node]]\
+!builtins.list[torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node"builtins.list\
+!builtins.list[torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node"builtins.list*X
+joint_moduleF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*
+num_fwd_outputs
+Anyá
+_remove_by_name-torch._functorch.partitioners._remove_by_name"
+Any*n
+saved_values\
+!builtins.list[torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node"builtins.list*&
+name
+builtins.str"builtins.str£
+_extract_fwd_bwd_modules6torch._functorch.partitioners._extract_fwd_bwd_modules"Þ
+JTuple[torch.fx.graph_module.GraphModule,torch.fx.graph_module.GraphModule]F
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModuleF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*X
+joint_moduleF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*n
+saved_values\
+!builtins.list[torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node"builtins.list*q
+saved_sym_nodes\
+!builtins.list[torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node"builtins.list*1
+num_fwd_outputs
+builtins.int"builtins.int¹
+default_partition/torch._functorch.partitioners.default_partition"Þ
+JTuple[torch.fx.graph_module.GraphModule,torch.fx.graph_module.GraphModule]F
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModuleF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*X
+joint_moduleF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*
+_joint_inputs
+Any*
+num_fwd_outputs
+Any™
+_tensor_nbytes,torch._functorch.partitioners._tensor_nbytes"
+builtins.int"builtins.int*'
+numel
+builtins.int"builtins.int*
+dtype
+Any„
+_size_of&torch._functorch.partitioners._size_of"
+builtins.int"builtins.int*2
+node(
+torch.fx.node.Node"torch.fx.node.Nodex
+
+_count_ops(torch._functorch.partitioners._count_ops"
+Any*7
+graph,
+torch.fx.graph.Graph"torch.fx.graph.Graph¢
+sort_depths)torch._functorch.partitioners.sort_depths"º
+5builtins.list[Tuple[torch.fx.node.Node,builtins.int]]r
+&Tuple[torch.fx.node.Node,builtins.int](
+torch.fx.node.Node"torch.fx.node.Node
+builtins.int"builtins.int"builtins.list*
+args
+Any*—
+	depth_map‡
+.builtins.dict[torch.fx.node.Node,builtins.int](
+torch.fx.node.Node"torch.fx.node.Node
+builtins.int"builtins.int"builtins.dict€
+#reordering_to_mimic_autograd_engineAtorch._functorch.partitioners.reordering_to_mimic_autograd_engine"F
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*N
+gmF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModuleæ
+functionalize_rng_ops3torch._functorch.partitioners.functionalize_rng_ops"Þ
+JTuple[torch.fx.graph_module.GraphModule,torch.fx.graph_module.GraphModule]F
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModuleF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*X
+joint_moduleF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*U
+	fw_moduleF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*U
+	bw_moduleF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*/
+num_sym_nodes
+builtins.int"builtins.intð
+cleanup_recompute_tags4torch._functorch.partitioners.cleanup_recompute_tags"F
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*X
+joint_moduleF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModuleï
+solve_min_cut+torch._functorch.partitioners.solve_min_cut"
+Any*=
+joint_graph,
+torch.fx.graph.Graph"torch.fx.graph.Graph*_
+	node_infoP
+&torch._functorch.partitioners.NodeInfo"&torch._functorch.partitioners.NodeInfo*o
+min_cut_optionsZ
++torch._functorch.partitioners.MinCutOptions"+torch._functorch.partitioners.MinCutOptions*
+dont_ban
+Any ^
+visualize_min_cut_graph5torch._functorch.partitioners.visualize_min_cut_graph*
+nx_graph˜
+get_default_op_list1torch._functorch.partitioners.get_default_op_list"N
+%torch._functorch.partitioners.OpTypes"%torch._functorch.partitioners.OpTypes„
+get_name_to_node.torch._functorch.partitioners.get_name_to_node"
+Any*7
+graph,
+torch.fx.graph.Graph"torch.fx.graph.Graph¾
+greedy_knapsack-torch._functorch.partitioners.greedy_knapsack"‹
+MTuple[builtins.float,builtins.list[builtins.int],builtins.list[builtins.int]] 
+builtins.float"builtins.floatJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.listJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*\
+memoryP
+builtins.list[builtins.float] 
+builtins.float"builtins.float"builtins.list*^
+runtimesP
+builtins.list[builtins.float] 
+builtins.float"builtins.float"builtins.list*0
+
+max_memory 
+builtins.float"builtins.float¸
+ilp_knapsack*torch._functorch.partitioners.ilp_knapsack"‹
+MTuple[builtins.float,builtins.list[builtins.int],builtins.list[builtins.int]] 
+builtins.float"builtins.floatJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.listJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*\
+memoryP
+builtins.list[builtins.float] 
+builtins.float"builtins.float"builtins.list*^
+runtimesP
+builtins.list[builtins.float] 
+builtins.float"builtins.float"builtins.list*0
+
+max_memory 
+builtins.float"builtins.float¶
+dp_knapsack)torch._functorch.partitioners.dp_knapsack"‹
+MTuple[builtins.float,builtins.list[builtins.int],builtins.list[builtins.int]] 
+builtins.float"builtins.floatJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.listJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*\
+memoryP
+builtins.list[builtins.float] 
+builtins.float"builtins.float"builtins.list*^
+runtimesP
+builtins.list[builtins.float] 
+builtins.float"builtins.float"builtins.list*0
+
+max_memory 
+builtins.float"builtins.floatæ
+#_optimize_runtime_with_given_memoryAtorch._functorch.partitioners._optimize_runtime_with_given_memory"‹
+MTuple[builtins.float,builtins.list[builtins.int],builtins.list[builtins.int]] 
+builtins.float"builtins.floatJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.listJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*\
+memoryP
+builtins.list[builtins.float] 
+builtins.float"builtins.float"builtins.list*^
+runtimesP
+builtins.list[builtins.float] 
+builtins.float"builtins.float"builtins.list*0
+
+max_memory 
+builtins.float"builtins.floatL
+estimate_runtime.torch._functorch.partitioners.estimate_runtime*
+nodeì
+choose_saved_values_set5torch._functorch.partitioners.choose_saved_values_set"\
+!builtins.list[torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node"builtins.list*=
+joint_graph,
+torch.fx.graph.Graph"torch.fx.graph.Graph*_
+	node_infoP
+&torch._functorch.partitioners.NodeInfo"&torch._functorch.partitioners.NodeInfo*
+memory_budget
+Any ö
+#min_cut_rematerialization_partitionAtorch._functorch.partitioners.min_cut_rematerialization_partition"Þ
+JTuple[torch.fx.graph_module.GraphModule,torch.fx.graph_module.GraphModule]F
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModuleF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*X
+joint_moduleF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*
+_joint_inputs
+Any*
+compiler
+Any *
+num_fwd_outputs
+Anyî
+
+draw_graph(torch._functorch.partitioners.draw_graph"
+None*R
+tracedF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*'
+fname
+builtins.str"builtins.str*+
+figname
+builtins.str"builtins.str *0
+
+clear_meta
+builtins.bool"builtins.bool *¹
+prog¬
+4Union[builtins.str,builtins.list[builtins.str],None]
+builtins.str"builtins.strJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list
+None *7
+parse_stack_trace
+builtins.bool"builtins.bool *[
+dot_graph_shapeD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *™
+__annotations__-torch._functorch.partitioners.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*
+fxtorch.fx *
+pytreetorch.utils._pytree *5
+sympy#torch._functorch.partitioners.sympy
+Any*±
+AOT_PARTITIONER_DEBUG3torch._functorch.partitioners.AOT_PARTITIONER_DEBUGc
+!Union[builtins.str,builtins.bool]
+builtins.str"builtins.str
+builtins.bool"builtins.bool*J
+log!torch._functorch.partitioners.log 
+logging.Logger"logging.Logger*3
+aten"torch._functorch.partitioners.aten
+Any*5
+prims#torch._functorch.partitioners.prims
+Any*˜
+InvalidNode)torch._functorch.partitioners.InvalidNode^
+-torch._functorch.partitioners.InvalidNodeBase"-torch._functorch.partitioners.InvalidNodeBase*N
+INT_INF%torch._functorch.partitioners.INT_INF
+builtins.int"builtins.int

@@ -1,0 +1,244 @@
+
+*torch._inductor.codegen.cuda.gemm_template
+inductor_cuda_configtorch._inductor.config.cuda"builtins.objectrn
+arch torch._inductor.config.cuda.archD
+Union[builtins.str,None]
+builtins.str"builtins.str
+Nonert
+version#torch._inductor.config.cuda.versionD
+Union[builtins.str,None]
+builtins.str"builtins.str
+Noner`
+compile_opt_level-torch._inductor.config.cuda.compile_opt_level
+builtins.str"builtins.strr^
+enable_cuda_lto+torch._inductor.config.cuda.enable_cuda_lto
+builtins.bool"builtins.boolrb
+enable_ptxas_info-torch._inductor.config.cuda.enable_ptxas_info
+builtins.bool"builtins.boolrb
+enable_debug_info-torch._inductor.config.cuda.enable_debug_info
+builtins.bool"builtins.boolrZ
+use_fast_math)torch._inductor.config.cuda.use_fast_math
+builtins.bool"builtins.boolrT
+cutlass_dir'torch._inductor.config.cuda.cutlass_dir
+builtins.str"builtins.strr 
+cutlass_max_profiling_configs9torch._inductor.config.cuda.cutlass_max_profiling_configsD
+Union[builtins.int,None]
+builtins.int"builtins.int
+Nonerv
+cuda_cxx$torch._inductor.config.cuda.cuda_cxxD
+Union[builtins.str,None]
+builtins.str"builtins.str
+Nonerx
+cutlass_backend_min_gemm_size9torch._inductor.config.cuda.cutlass_backend_min_gemm_size
+builtins.int"builtins.intrh
+generate_test_runner0torch._inductor.config.cuda.generate_test_runner
+builtins.bool"builtins.boolrš
+cutlass_op_allowlist_regex6torch._inductor.config.cuda.cutlass_op_allowlist_regexD
+Union[builtins.str,None]
+builtins.str"builtins.str
+Noner˜
+cutlass_op_denylist_regex5torch._inductor.config.cuda.cutlass_op_denylist_regexD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None¨=
+CUTLASSGemmTemplate>torch._inductor.codegen.cuda.gemm_template.CUTLASSGemmTemplate":torch._inductor.codegen.cuda.cuda_template.CUTLASSTemplate*§
+__init__Gtorch._inductor.codegen.cuda.gemm_template.CUTLASSGemmTemplate.__init__"
+None*‹
+self€
+>torch._inductor.codegen.cuda.gemm_template.CUTLASSGemmTemplate">torch._inductor.codegen.cuda.gemm_template.CUTLASSGemmTemplate*‚
+input_nodesq
+(builtins.list[torch._inductor.ir.Buffer]6
+torch._inductor.ir.Buffer"torch._inductor.ir.Buffer"builtins.list*B
+layout6
+torch._inductor.ir.Layout"torch._inductor.ir.Layout*+
+alpha 
+builtins.float"builtins.float**
+beta 
+builtins.float"builtins.float*—
+input_reorder
+'Union[builtins.list[builtins.int],None]J
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list
+None *«
+_are_inputs_layout_compatible\torch._inductor.codegen.cuda.gemm_template.CUTLASSGemmTemplate._are_inputs_layout_compatible"
+builtins.bool"builtins.bool*‹
+self€
+>torch._inductor.codegen.cuda.gemm_template.CUTLASSGemmTemplate">torch._inductor.codegen.cuda.gemm_template.CUTLASSGemmTemplate*~
+layoutsq
+(builtins.list[torch._inductor.ir.Layout]6
+torch._inductor.ir.Layout"torch._inductor.ir.Layout"builtins.list*Š
+add_cutlass_gemm_choicesWtorch._inductor.codegen.cuda.gemm_template.CUTLASSGemmTemplate.add_cutlass_gemm_choices"
+None*‘
+choicesƒ
+.builtins.list[torch._inductor.ir.ChoiceCaller]B
+torch._inductor.ir.ChoiceCaller"torch._inductor.ir.ChoiceCaller"builtins.list*B
+layout6
+torch._inductor.ir.Layout"torch._inductor.ir.Layout*‚
+input_nodesq
+(builtins.list[torch._inductor.ir.IRNode]6
+torch._inductor.ir.IRNode"torch._inductor.ir.IRNode"builtins.list*s
+alphaf
+"Union[builtins.float,builtins.int] 
+builtins.float"builtins.float
+builtins.int"builtins.int *r
+betaf
+"Union[builtins.float,builtins.int] 
+builtins.float"builtins.float
+builtins.int"builtins.int *—
+input_reorder
+'Union[builtins.list[builtins.int],None]J
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list
+None *
+extra_kwargs
+Any0:staticmethodh*«
+headerEtorch._inductor.codegen.cuda.gemm_template.CUTLASSGemmTemplate.header"L
+$torch._inductor.utils.IndentedBuffer"$torch._inductor.utils.IndentedBuffer*‹
+self€
+>torch._inductor.codegen.cuda.gemm_template.CUTLASSGemmTemplate">torch._inductor.codegen.cuda.gemm_template.CUTLASSGemmTemplate*ã
+cutlass_layoutMtorch._inductor.codegen.cuda.gemm_template.CUTLASSGemmTemplate.cutlass_layout"&
+Union[Any,None]
+Any
+None*H
+torch_layout6
+torch._inductor.ir.Layout"torch._inductor.ir.Layout0:staticmethodh*¡
+flip_cutlass_layoutRtorch._inductor.codegen.cuda.gemm_template.CUTLASSGemmTemplate.flip_cutlass_layout"
+Any*
+cutlass_layout
+Any0:staticmethodh*ô
+layout_matchKtorch._inductor.codegen.cuda.gemm_template.CUTLASSGemmTemplate.layout_match"
+builtins.bool"builtins.bool*H
+torch_layout6
+torch._inductor.ir.Layout"torch._inductor.ir.Layout*
+cutlass_layout
+Any0:staticmethodh*Ã
+set_alignmentLtorch._inductor.codegen.cuda.gemm_template.CUTLASSGemmTemplate.set_alignment"
+builtins.bool"builtins.bool*
+torch_layout
+Any*
+
+op_element
+Any0:staticmethodh*¦
+has_tma_epilogueOtorch._inductor.codegen.cuda.gemm_template.CUTLASSGemmTemplate.has_tma_epilogue"
+builtins.bool"builtins.bool*
+op
+Any0:staticmethodh*ì
+define_gemm_instanceStorch._inductor.codegen.cuda.gemm_template.CUTLASSGemmTemplate.define_gemm_instance"`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str*‹
+self€
+>torch._inductor.codegen.cuda.gemm_template.CUTLASSGemmTemplate">torch._inductor.codegen.cuda.gemm_template.CUTLASSGemmTemplate*
+op
+Any*Ó
+should_swap_XWMtorch._inductor.codegen.cuda.gemm_template.CUTLASSGemmTemplate.should_swap_XW"
+builtins.bool"builtins.bool*@
+bias6
+torch._inductor.ir.IRNode"torch._inductor.ir.IRNode0:staticmethodh*}
+swap_XWFtorch._inductor.codegen.cuda.gemm_template.CUTLASSGemmTemplate.swap_XW"
+Any*
+op
+Any0:staticmethodh*Î
+fix_op_layoutLtorch._inductor.codegen.cuda.gemm_template.CUTLASSGemmTemplate.fix_op_layout"
+Any*‹
+self€
+>torch._inductor.codegen.cuda.gemm_template.CUTLASSGemmTemplate">torch._inductor.codegen.cuda.gemm_template.CUTLASSGemmTemplate*
+op
+Any*=
+X6
+torch._inductor.ir.Buffer"torch._inductor.ir.Buffer*=
+W6
+torch._inductor.ir.Buffer"torch._inductor.ir.Buffer*u
+Biask
+%Union[torch._inductor.ir.Buffer,None]6
+torch._inductor.ir.Buffer"torch._inductor.ir.Buffer
+None*Ñ
+YÉ
+CUnion[torch._inductor.ir.Buffer,torch._inductor.ir.ReinterpretView]6
+torch._inductor.ir.Buffer"torch._inductor.ir.BufferH
+"torch._inductor.ir.ReinterpretView""torch._inductor.ir.ReinterpretView*ý
+	filter_opHtorch._inductor.codegen.cuda.gemm_template.CUTLASSGemmTemplate.filter_op"
+Any*‹
+self€
+>torch._inductor.codegen.cuda.gemm_template.CUTLASSGemmTemplate">torch._inductor.codegen.cuda.gemm_template.CUTLASSGemmTemplate*
+op
+Any*
+gen_opsFtorch._inductor.codegen.cuda.gemm_template.CUTLASSGemmTemplate.gen_ops",
+builtins.list[Any]
+Any"builtins.list*‹
+self€
+>torch._inductor.codegen.cuda.gemm_template.CUTLASSGemmTemplate">torch._inductor.codegen.cuda.gemm_template.CUTLASSGemmTemplate*
+	gemm_modeHtorch._inductor.codegen.cuda.gemm_template.CUTLASSGemmTemplate.gemm_mode"
+builtins.str"builtins.str*‹
+self€
+>torch._inductor.codegen.cuda.gemm_template.CUTLASSGemmTemplate">torch._inductor.codegen.cuda.gemm_template.CUTLASSGemmTemplate*´
+render_gemm_argumentsTtorch._inductor.codegen.cuda.gemm_template.CUTLASSGemmTemplate.render_gemm_arguments"
+builtins.str"builtins.str*‹
+self€
+>torch._inductor.codegen.cuda.gemm_template.CUTLASSGemmTemplate">torch._inductor.codegen.cuda.gemm_template.CUTLASSGemmTemplate*3
+argument_template
+builtins.str"builtins.str*3
+epilogue_template
+builtins.str"builtins.str*2
+should_swap_xw
+builtins.bool"builtins.bool*=
+X6
+torch._inductor.ir.IRNode"torch._inductor.ir.IRNode*=
+W6
+torch._inductor.ir.IRNode"torch._inductor.ir.IRNode*@
+Bias6
+torch._inductor.ir.IRNode"torch._inductor.ir.IRNode*=
+Y6
+torch._inductor.ir.IRNode"torch._inductor.ir.IRNode*+
+alpha 
+builtins.float"builtins.float**
+beta 
+builtins.float"builtins.float*†
+kernelz
+;torch._inductor.codegen.cuda.cuda_kernel.CUDATemplateKernel";torch._inductor.codegen.cuda.cuda_kernel.CUDATemplateKernel*
+epilogue_args
+Any*Û
+renderEtorch._inductor.codegen.cuda.gemm_template.CUTLASSGemmTemplate.render"
+builtins.str"builtins.str*‹
+self€
+>torch._inductor.codegen.cuda.gemm_template.CUTLASSGemmTemplate">torch._inductor.codegen.cuda.gemm_template.CUTLASSGemmTemplate*†
+kernelz
+;torch._inductor.codegen.cuda.cuda_kernel.CUDATemplateKernel";torch._inductor.codegen.cuda.cuda_kernel.CUDATemplateKernel*
+op
+Any *¬
+template_buffer_node
+1Union[torch._inductor.ir.CUDATemplateBuffer,None]N
+%torch._inductor.ir.CUDATemplateBuffer"%torch._inductor.ir.CUDATemplateBuffer
+None *
+kwargs
+Any*ó
+test_call_statementRtorch._inductor.codegen.cuda.gemm_template.CUTLASSGemmTemplate.test_call_statement"
+builtins.str"builtins.str*‹
+self€
+>torch._inductor.codegen.cuda.gemm_template.CUTLASSGemmTemplate">torch._inductor.codegen.cuda.gemm_template.CUTLASSGemmTemplate*
+kernel
+Any*
+input_nodes
+Any*-
+	names_str
+builtins.str"builtins.str ro
+alphaDtorch._inductor.codegen.cuda.gemm_template.CUTLASSGemmTemplate.alpha 
+builtins.float"builtins.floatrm
+betaCtorch._inductor.codegen.cuda.gemm_template.CUTLASSGemmTemplate.beta 
+builtins.float"builtins.float*¦
+__annotations__:torch._inductor.codegen.cuda.gemm_template.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*W
+log.torch._inductor.codegen.cuda.gemm_template.log 
+logging.Logger"logging.Logger*g
+GEMM_TEMPLATE8torch._inductor.codegen.cuda.gemm_template.GEMM_TEMPLATE
+builtins.str"builtins.str*u
+GEMM_ARGS_CUTLASS_3X?torch._inductor.codegen.cuda.gemm_template.GEMM_ARGS_CUTLASS_3X
+builtins.str"builtins.str*‡
+GEMM_ARGS_CUTLASS_3X_EPILOGUEHtorch._inductor.codegen.cuda.gemm_template.GEMM_ARGS_CUTLASS_3X_EPILOGUE
+builtins.str"builtins.str*¡
+*GEMM_STANDALONE_RUNNER_ADDITIONAL_INCLUDESUtorch._inductor.codegen.cuda.gemm_template.GEMM_STANDALONE_RUNNER_ADDITIONAL_INCLUDES
+builtins.str"builtins.str*‹
+GEMM_STANDALONE_RUNNER_TEMPLATEJtorch._inductor.codegen.cuda.gemm_template.GEMM_STANDALONE_RUNNER_TEMPLATE
+builtins.str"builtins.str

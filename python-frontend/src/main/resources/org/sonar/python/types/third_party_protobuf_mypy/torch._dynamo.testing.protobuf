@@ -1,0 +1,190 @@
+
+torch._dynamo.testing¾
+CompileCounter$torch._dynamo.testing.CompileCounter"builtins.object*C
+__init__-torch._dynamo.testing.CompileCounter.__init__*
+self*â
+__call__-torch._dynamo.testing.CompileCounter.__call__"
+Any*V
+selfL
+$torch._dynamo.testing.CompileCounter"$torch._dynamo.testing.CompileCounter*N
+gmF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*v
+example_inputsb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*=
+clear*torch._dynamo.testing.CompileCounter.clear*
+selfrH
+frame_count0torch._dynamo.testing.CompileCounter.frame_count
+AnyrB
+op_count-torch._dynamo.testing.CompileCounter.op_count
+Anyü
+CompileCounterWithBackend/torch._dynamo.testing.CompileCounterWithBackend"builtins.object*[
+__init__8torch._dynamo.testing.CompileCounterWithBackend.__init__*
+self*
+backend*ƒ
+__call__8torch._dynamo.testing.CompileCounterWithBackend.__call__"
+Any*l
+selfb
+/torch._dynamo.testing.CompileCounterWithBackend"/torch._dynamo.testing.CompileCounterWithBackend*N
+gmF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*v
+example_inputsb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.listrS
+frame_count;torch._dynamo.testing.CompileCounterWithBackend.frame_count
+AnyrM
+op_count8torch._dynamo.testing.CompileCounterWithBackend.op_count
+AnyrK
+backend7torch._dynamo.testing.CompileCounterWithBackend.backend
+AnyrI
+graphs6torch._dynamo.testing.CompileCounterWithBackend.graphs
+AnyÛ
+EagerAndRecordGraphs*torch._dynamo.testing.EagerAndRecordGraphs"builtins.object*I
+__init__3torch._dynamo.testing.EagerAndRecordGraphs.__init__*
+self*ô
+__call__3torch._dynamo.testing.EagerAndRecordGraphs.__call__"
+Any*b
+selfX
+*torch._dynamo.testing.EagerAndRecordGraphs"*torch._dynamo.testing.EagerAndRecordGraphs*N
+gmF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*v
+example_inputsb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.listrD
+graphs1torch._dynamo.testing.EagerAndRecordGraphs.graphs
+Any1
+clone_metorch._dynamo.testing.clone_me*
+x‡
+remove_optimized_module_prefix4torch._dynamo.testing.remove_optimized_module_prefix"
+builtins.str"builtins.str*
+name
+Anyq
+collect_results%torch._dynamo.testing.collect_results*	
+model*
+
+prediction*
+loss*
+example_inputsE
+requires_bwd_pass'torch._dynamo.testing.requires_bwd_pass*
+outM
+reduce_to_scalar_loss+torch._dynamo.testing.reduce_to_scalar_loss*
+outJ
+	debug_dirtorch._dynamo.testing.debug_dir"
+builtins.str"builtins.str
+
+debug_dump torch._dynamo.testing.debug_dump"
+None*
+name
+Any**
+code 
+types.CodeType"types.CodeType*
+extra
+Any ¶
+debug_insert_nops'torch._dynamo.testing.debug_insert_nops"}
++Union[torch._dynamo.types.GuardedCode,None]B
+torch._dynamo.types.GuardedCode"torch._dynamo.types.GuardedCode
+None*
+frame
+Any*
+
+cache_size
+Any*
+hooks
+Any*
+_
+Any*(
+skip
+builtins.int"builtins.int e
+strip_comment#torch._dynamo.testing.strip_comment"
+builtins.str"builtins.str*
+code
+Anyu
+remove_trailing_space+torch._dynamo.testing.remove_trailing_space"
+builtins.str"builtins.str*
+code
+Anye
+normalize_gm"torch._dynamo.testing.normalize_gm"
+builtins.str"builtins.str*
+gm_str
+Any
+standard_test#torch._dynamo.testing.standard_test*
+self*
+fn*	
+nargs*
+expected_ops *
+expected_ops_dynamic *
+expected_frame_count °
+dummy_fx_compile&torch._dynamo.testing.dummy_fx_compile"
+Any*N
+gmF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*
+example_inputs
+Anyy
+format_speedup$torch._dynamo.testing.format_speedup*
+speedup*
+
+pvalue*
+
+is_correct *
+pvalue_threshold É
+rand_strided"torch._dynamo.testing.rand_strided"
+Any*X
+sizeN
+typing.Sequence[builtins.int]
+builtins.int"builtins.int"typing.Sequence*Z
+strideN
+typing.Sequence[builtins.int]
+builtins.int"builtins.int"typing.Sequence*-
+dtype 
+torch._C.dtype"torch._C.dtype *w
+devicei
+#Union[builtins.str,torch._C.device]
+builtins.str"builtins.str"
+torch._C.device"torch._C.device *.
+
+extra_size
+builtins.int"builtins.int Y
+_make_fn_with_patches+torch._dynamo.testing._make_fn_with_patches*
+fn*
+patches¦
+make_test_cls_with_patches0torch._dynamo.testing.make_test_cls_with_patches*
+cls*
+
+cls_prefix*
+	fn_suffix*
+patches*
+
+xfail_prop *
+	decorator >
+skipIfNotPy311$torch._dynamo.testing.skipIfNotPy311*
+fn>
+skipIfNotPy312$torch._dynamo.testing.skipIfNotPy312*
+fn:
+xfailIfPy312"torch._dynamo.testing.xfailIfPy312*
+fn8
+skipIfPy312!torch._dynamo.testing.skipIfPy312*
+fnN
+expectedFailureDynamic,torch._dynamo.testing.expectedFailureDynamic*
+fn\
+expectedFailureCodegenDynamic3torch._dynamo.testing.expectedFailureCodegenDynamic*
+fn\
+expectedFailureDynamicWrapper3torch._dynamo.testing.expectedFailureDynamicWrapper*
+fnG
+reset_rng_state%torch._dynamo.testing.reset_rng_state*
+use_xla *‘
+__annotations__%torch._dynamo.testing.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*
+
+osos *p
+nptorch._dynamo.testing.npP
+Union[types.ModuleType,None]$
+types.ModuleType"types.ModuleType
+None*9
+unsupported!torch._dynamo.testing.unsupported
+Any*B
+threetorch._dynamo.testing.three
+builtins.int"builtins.int*B
+logtorch._dynamo.testing.log 
+logging.Logger"logging.Logger

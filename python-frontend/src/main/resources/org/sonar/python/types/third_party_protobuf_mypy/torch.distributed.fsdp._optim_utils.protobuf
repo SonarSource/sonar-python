@@ -1,0 +1,848 @@
+
+#torch.distributed.fsdp._optim_utilsª
+FSDPParamInfo1torch.distributed.fsdp._optim_utils.FSDPParamInfo"builtins.object*ö
+__init__:torch.distributed.fsdp._optim_utils.FSDPParamInfo.__init__"
+None*p
+selff
+1torch.distributed.fsdp._optim_utils.FSDPParamInfo"1torch.distributed.fsdp._optim_utils.FSDPParamInfo*m
+stateb
+/torch.distributed.fsdp._common_utils._FSDPState"/torch.distributed.fsdp._common_utils._FSDPState*t
+handleh
+2torch.distributed.fsdp._flat_param.FlatParamHandle"2torch.distributed.fsdp._flat_param.FlatParamHandle*à
+param_indicesu
+(builtins.dict[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int"builtins.dict*f
+param_requires_gradM
+builtins.list[builtins.bool]
+builtins.bool"builtins.bool"builtins.list8r§
+state7torch.distributed.fsdp._optim_utils.FSDPParamInfo.stateb
+/torch.distributed.fsdp._common_utils._FSDPState"/torch.distributed.fsdp._common_utils._FSDPStater¨
+handle8torch.distributed.fsdp._optim_utils.FSDPParamInfo.handleh
+2torch.distributed.fsdp._flat_param.FlatParamHandle"2torch.distributed.fsdp._flat_param.FlatParamHandler«
+param_indices?torch.distributed.fsdp._optim_utils.FSDPParamInfo.param_indicesu
+(builtins.dict[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int"builtins.dictr´
+param_requires_gradEtorch.distributed.fsdp._optim_utils.FSDPParamInfo.param_requires_gradM
+builtins.list[builtins.bool]
+builtins.bool"builtins.bool"builtins.listr¯
+__dataclass_fields__Ftorch.distributed.fsdp._optim_utils.FSDPParamInfo.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dict∫
+_ConsolidatedOptimState;torch.distributed.fsdp._optim_utils._ConsolidatedOptimState"builtins.object*•
+__init__Dtorch.distributed.fsdp._optim_utils._ConsolidatedOptimState.__init__"
+None*Ñ
+selfz
+;torch.distributed.fsdp._optim_utils._ConsolidatedOptimState";torch.distributed.fsdp._optim_utils._ConsolidatedOptimState*¢
+tensor_stateç
+0builtins.dict[builtins.str,torch._tensor.Tensor]
+builtins.str"builtins.str,
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.dict *´
+zero_dim_tensor_stateç
+0builtins.dict[builtins.str,torch._tensor.Tensor]
+builtins.str"builtins.str,
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.dict *o
+non_tensor_stateW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict 8rË
+tensor_stateHtorch.distributed.fsdp._optim_utils._ConsolidatedOptimState.tensor_stateç
+0builtins.dict[builtins.str,torch._tensor.Tensor]
+builtins.str"builtins.str,
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.dictr˙
+zero_dim_tensor_stateQtorch.distributed.fsdp._optim_utils._ConsolidatedOptimState.zero_dim_tensor_stateç
+0builtins.dict[builtins.str,torch._tensor.Tensor]
+builtins.str"builtins.str,
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.dictrπ
+non_tensor_stateLtorch.distributed.fsdp._optim_utils._ConsolidatedOptimState.non_tensor_stateW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dictrÇ
+__dataclass_fields__Ptorch.distributed.fsdp._optim_utils._ConsolidatedOptimState.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictƒ
+_PosDimTensorInfo5torch.distributed.fsdp._optim_utils._PosDimTensorInfo"builtins.tuple*à
+_replace>torch.distributed.fsdp._optim_utils._PosDimTensorInfo._replace"®
+9torch.distributed.fsdp._optim_utils._PosDimTensorInfo._NTi
+#Tuple[torch._C.Size,torch._C.dtype]
+torch._C.Size"torch._C.Size 
+torch._C.dtype"torch._C.dtype*¥
+_self®
+9torch.distributed.fsdp._optim_utils._PosDimTensorInfo._NTi
+#Tuple[torch._C.Size,torch._C.dtype]
+torch._C.Size"torch._C.Size 
+torch._C.dtype"torch._C.dtype*+
+shape
+torch._C.Size"torch._C.Size *-
+dtype 
+torch._C.dtype"torch._C.dtype *Õ
+__new__=torch.distributed.fsdp._optim_utils._PosDimTensorInfo.__new__"®
+9torch.distributed.fsdp._optim_utils._PosDimTensorInfo._NTi
+#Tuple[torch._C.Size,torch._C.dtype]
+torch._C.Size"torch._C.Size 
+torch._C.dtype"torch._C.dtype*ˇ
+_clsÙ
+?Type[torch.distributed.fsdp._optim_utils._PosDimTensorInfo._NT]®
+9torch.distributed.fsdp._optim_utils._PosDimTensorInfo._NTi
+#Tuple[torch._C.Size,torch._C.dtype]
+torch._C.Size"torch._C.Size 
+torch._C.dtype"torch._C.dtype"type*)
+shape
+torch._C.Size"torch._C.Size*+
+dtype 
+torch._C.dtype"torch._C.dtype*ÿ
+_asdict=torch.distributed.fsdp._optim_utils._PosDimTensorInfo._asdict"W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*¥
+_self®
+9torch.distributed.fsdp._optim_utils._PosDimTensorInfo._NTi
+#Tuple[torch._C.Size,torch._C.dtype]
+torch._C.Size"torch._C.Size 
+torch._C.dtype"torch._C.dtype*Í
+_make;torch.distributed.fsdp._optim_utils._PosDimTensorInfo._make"®
+9torch.distributed.fsdp._optim_utils._PosDimTensorInfo._NTi
+#Tuple[torch._C.Size,torch._C.dtype]
+torch._C.Size"torch._C.Size 
+torch._C.dtype"torch._C.dtype*ˇ
+_clsÙ
+?Type[torch.distributed.fsdp._optim_utils._PosDimTensorInfo._NT]®
+9torch.distributed.fsdp._optim_utils._PosDimTensorInfo._NTi
+#Tuple[torch._C.Size,torch._C.dtype]
+torch._C.Size"torch._C.Size 
+torch._C.dtype"torch._C.dtype"type*>
+iterable0
+typing.Iterable[Any]
+Any"typing.Iterable*
+new
+Any *
+len
+Any 0:classmethodprd
+shape;torch.distributed.fsdp._optim_utils._PosDimTensorInfo.shape
+torch._C.Size"torch._C.Sizerf
+dtype;torch.distributed.fsdp._optim_utils._PosDimTensorInfo.dtype 
+torch._C.dtype"torch._C.dtyperd
+shape;torch.distributed.fsdp._optim_utils._PosDimTensorInfo.shape
+torch._C.Size"torch._C.Sizerf
+dtype;torch.distributed.fsdp._optim_utils._PosDimTensorInfo.dtype 
+torch._C.dtype"torch._C.dtyper™
+_fields=torch.distributed.fsdp._optim_utils._PosDimTensorInfo._fields`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.strr´
+_field_typesBtorch.distributed.fsdp._optim_utils._PosDimTensorInfo._field_typesW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dictr±
+_field_defaultsEtorch.distributed.fsdp._optim_utils._PosDimTensorInfo._field_defaultsW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dictrf
+_source=torch.distributed.fsdp._optim_utils._PosDimTensorInfo._source
+builtins.str"builtins.strr±
+__annotations__Etorch.distributed.fsdp._optim_utils._PosDimTensorInfo.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict’
+_OptimStateKey2torch.distributed.fsdp._optim_utils._OptimStateKey"builtins.tuple*∏
+_replace;torch.distributed.fsdp._optim_utils._OptimStateKey._replace"‡
+6torch.distributed.fsdp._optim_utils._OptimStateKey._NT£
+1Tuple[builtins.tuple[builtins.str],builtins.bool]L
+builtins.tuple[builtins.str]
+builtins.str"builtins.str"builtins.tuple
+builtins.bool"builtins.bool*Ï
+_self‡
+6torch.distributed.fsdp._optim_utils._OptimStateKey._NT£
+1Tuple[builtins.tuple[builtins.str],builtins.bool]L
+builtins.tuple[builtins.str]
+builtins.str"builtins.str"builtins.tuple
+builtins.bool"builtins.bool*f
+unflat_param_namesL
+builtins.tuple[builtins.str]
+builtins.str"builtins.str"builtins.tuple *5
+is_fsdp_managed
+builtins.bool"builtins.bool *˙
+__new__:torch.distributed.fsdp._optim_utils._OptimStateKey.__new__"‡
+6torch.distributed.fsdp._optim_utils._OptimStateKey._NT£
+1Tuple[builtins.tuple[builtins.str],builtins.bool]L
+builtins.tuple[builtins.str]
+builtins.str"builtins.str"builtins.tuple
+builtins.bool"builtins.bool*¥
+_cls©
+<Type[torch.distributed.fsdp._optim_utils._OptimStateKey._NT]‡
+6torch.distributed.fsdp._optim_utils._OptimStateKey._NT£
+1Tuple[builtins.tuple[builtins.str],builtins.bool]L
+builtins.tuple[builtins.str]
+builtins.str"builtins.str"builtins.tuple
+builtins.bool"builtins.bool"type*d
+unflat_param_namesL
+builtins.tuple[builtins.str]
+builtins.str"builtins.str"builtins.tuple*3
+is_fsdp_managed
+builtins.bool"builtins.bool*ç
+_asdict:torch.distributed.fsdp._optim_utils._OptimStateKey._asdict"W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*Ï
+_self‡
+6torch.distributed.fsdp._optim_utils._OptimStateKey._NT£
+1Tuple[builtins.tuple[builtins.str],builtins.bool]L
+builtins.tuple[builtins.str]
+builtins.str"builtins.str"builtins.tuple
+builtins.bool"builtins.bool*‘
+_make8torch.distributed.fsdp._optim_utils._OptimStateKey._make"‡
+6torch.distributed.fsdp._optim_utils._OptimStateKey._NT£
+1Tuple[builtins.tuple[builtins.str],builtins.bool]L
+builtins.tuple[builtins.str]
+builtins.str"builtins.str"builtins.tuple
+builtins.bool"builtins.bool*¥
+_cls©
+<Type[torch.distributed.fsdp._optim_utils._OptimStateKey._NT]‡
+6torch.distributed.fsdp._optim_utils._OptimStateKey._NT£
+1Tuple[builtins.tuple[builtins.str],builtins.bool]L
+builtins.tuple[builtins.str]
+builtins.str"builtins.str"builtins.tuple
+builtins.bool"builtins.bool"type*>
+iterable0
+typing.Iterable[Any]
+Any"typing.Iterable*
+new
+Any *
+len
+Any 0:classmethodpr©
+unflat_param_namesEtorch.distributed.fsdp._optim_utils._OptimStateKey.unflat_param_namesL
+builtins.tuple[builtins.str]
+builtins.str"builtins.str"builtins.tupleru
+is_fsdp_managedBtorch.distributed.fsdp._optim_utils._OptimStateKey.is_fsdp_managed
+builtins.bool"builtins.boolr©
+unflat_param_namesEtorch.distributed.fsdp._optim_utils._OptimStateKey.unflat_param_namesL
+builtins.tuple[builtins.str]
+builtins.str"builtins.str"builtins.tupleru
+is_fsdp_managedBtorch.distributed.fsdp._optim_utils._OptimStateKey.is_fsdp_managed
+builtins.bool"builtins.boolrß
+_fields:torch.distributed.fsdp._optim_utils._OptimStateKey._fields`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.strr®
+_field_types?torch.distributed.fsdp._optim_utils._OptimStateKey._field_typesW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dictrÆ
+_field_defaultsBtorch.distributed.fsdp._optim_utils._OptimStateKey._field_defaultsW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dictrc
+_source:torch.distributed.fsdp._optim_utils._OptimStateKey._source
+builtins.str"builtins.strrÆ
+__annotations__Btorch.distributed.fsdp._optim_utils._OptimStateKey.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dictà
+	StateInfo-torch.distributed.fsdp._optim_utils.StateInfo"builtins.object*¶
+__init__6torch.distributed.fsdp._optim_utils.StateInfo.__init__"
+None*h
+self^
+-torch.distributed.fsdp._optim_utils.StateInfo"-torch.distributed.fsdp._optim_utils.StateInfo*ﬁ
+tensors–
+Jbuiltins.dict[builtins.str,TypeAlias[Tuple[torch._C.Size,torch._C.dtype]]]
+builtins.str"builtins.str‘
+.TypeAlias[Tuple[torch._C.Size,torch._C.dtype]]i
+#Tuple[torch._C.Size,torch._C.dtype]
+torch._C.Size"torch._C.Size 
+torch._C.dtype"torch._C.dtype"5torch.distributed.fsdp._optim_utils._PosDimTensorInfo"builtins.dict*¢
+scalar_tensorsç
+0builtins.dict[builtins.str,torch._tensor.Tensor]
+builtins.str"builtins.str,
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.dict*h
+non_tensorsW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict8rì
+tensors5torch.distributed.fsdp._optim_utils.StateInfo.tensors–
+Jbuiltins.dict[builtins.str,TypeAlias[Tuple[torch._C.Size,torch._C.dtype]]]
+builtins.str"builtins.str‘
+.TypeAlias[Tuple[torch._C.Size,torch._C.dtype]]i
+#Tuple[torch._C.Size,torch._C.dtype]
+torch._C.Size"torch._C.Size 
+torch._C.dtype"torch._C.dtype"5torch.distributed.fsdp._optim_utils._PosDimTensorInfo"builtins.dictrﬁ
+scalar_tensors<torch.distributed.fsdp._optim_utils.StateInfo.scalar_tensorsç
+0builtins.dict[builtins.str,torch._tensor.Tensor]
+builtins.str"builtins.str,
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.dictr°
+non_tensors9torch.distributed.fsdp._optim_utils.StateInfo.non_tensorsW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dictrÙ
+__dataclass_fields__Btorch.distributed.fsdp._optim_utils.StateInfo.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dict™
+sorted_items0torch.distributed.fsdp._optim_utils.sorted_items"
+(typing.Iterator[Tuple[builtins.str,Any]]B
+Tuple[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Iterator*g
+
+dictionaryW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dictÍ
+_unflatten_optim_state:torch.distributed.fsdp._optim_utils._unflatten_optim_state"ò
+.builtins.list[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"builtins.list*{
+fsdp_param_infof
+1torch.distributed.fsdp._optim_utils.FSDPParamInfo"1torch.distributed.fsdp._optim_utils.FSDPParamInfo*m
+flat_param_stateW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*+
+to_save
+builtins.bool"builtins.bool*/
+shard_state
+builtins.bool"builtins.bool*/
+cpu_offload
+builtins.bool"builtins.bool~
+_is_zero_dim_tensor7torch.distributed.fsdp._optim_utils._is_zero_dim_tensor"
+builtins.bool"builtins.bool*
+x
+Any¿
+_communicate_optim_state<torch.distributed.fsdp._optim_utils._communicate_optim_state"z
+;torch.distributed.fsdp._optim_utils._ConsolidatedOptimState";torch.distributed.fsdp._optim_utils._ConsolidatedOptimState*{
+fsdp_param_infof
+1torch.distributed.fsdp._optim_utils.FSDPParamInfo"1torch.distributed.fsdp._optim_utils.FSDPParamInfo*m
+flat_param_stateW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dictø
+#_unflatten_communicated_optim_stateGtorch.distributed.fsdp._optim_utils._unflatten_communicated_optim_state"ò
+.builtins.list[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"builtins.list*{
+fsdp_param_infof
+1torch.distributed.fsdp._optim_utils.FSDPParamInfo"1torch.distributed.fsdp._optim_utils.FSDPParamInfo*Ö
+statez
+;torch.distributed.fsdp._optim_utils._ConsolidatedOptimState";torch.distributed.fsdp._optim_utils._ConsolidatedOptimState*/
+shard_state
+builtins.bool"builtins.bool∑
+_broadcast_processed_state>torch.distributed.fsdp._optim_utils._broadcast_processed_state"W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*r
+
+fsdp_stateb
+/torch.distributed.fsdp._common_utils._FSDPState"/torch.distributed.fsdp._common_utils._FSDPState*h
+optim_stateW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*°
+groupï
+3Union[torch._C._distributed_c10d.ProcessGroup,None]R
+'torch._C._distributed_c10d.ProcessGroup"'torch._C._distributed_c10d.ProcessGroup
+None˝
+_broadcast_state4torch.distributed.fsdp._optim_utils._broadcast_state"
+Any*r
+
+fsdp_stateb
+/torch.distributed.fsdp._common_utils._FSDPState"/torch.distributed.fsdp._common_utils._FSDPState*
+state
+Any*°
+groupï
+3Union[torch._C._distributed_c10d.ProcessGroup,None]R
+'torch._C._distributed_c10d.ProcessGroup"'torch._C._distributed_c10d.ProcessGroup
+NoneΩ
+_shard_orig_param_state;torch.distributed.fsdp._optim_utils._shard_orig_param_state"W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*{
+fsdp_param_infof
+1torch.distributed.fsdp._optim_utils.FSDPParamInfo"1torch.distributed.fsdp._optim_utils.FSDPParamInfo*%
+fqn
+builtins.str"builtins.str*h
+optim_stateW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dictã
+_flatten_optim_state_dict=torch.distributed.fsdp._optim_utils._flatten_optim_state_dict"W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*m
+optim_state_dictW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*K
+model@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*5
+use_orig_params
+builtins.bool"builtins.bool *ä
+optim}
++Union[torch.optim.optimizer.Optimizer,None]B
+torch.optim.optimizer.Optimizer"torch.optim.optimizer.Optimizer
+None *0
+
+rank0_only
+builtins.bool"builtins.bool *£
+groupï
+3Union[torch._C._distributed_c10d.ProcessGroup,None]R
+'torch._C._distributed_c10d.ProcessGroup"'torch._C._distributed_c10d.ProcessGroup
+None Á
+_flatten_optim_state8torch.distributed.fsdp._optim_utils._flatten_optim_state"W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*{
+fsdp_param_infof
+1torch.distributed.fsdp._optim_utils.FSDPParamInfo"1torch.distributed.fsdp._optim_utils.FSDPParamInfo*⁄
+unflat_osd_state√
+;builtins.dict[builtins.str,builtins.dict[builtins.str,Any]]
+builtins.str"builtins.strW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"builtins.dict*b
+unflat_param_namesJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list˘
+_flatten_tensor_optim_state?torch.distributed.fsdp._optim_utils._flatten_tensor_optim_state",
+torch._tensor.Tensor"torch._tensor.Tensor*,
+
+state_name
+builtins.str"builtins.str*w
+pos_dim_tensorsb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*b
+unflat_param_namesJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*j
+unflat_param_shapesQ
+typing.Sequence[torch._C.Size]
+torch._C.Size"torch._C.Size"typing.Sequence*t
+handleh
+2torch.distributed.fsdp._flat_param.FlatParamHandle"2torch.distributed.fsdp._flat_param.FlatParamHandle™
+$_flatten_zero_dim_tensor_optim_stateHtorch.distributed.fsdp._optim_utils._flatten_zero_dim_tensor_optim_state",
+torch._tensor.Tensor"torch._tensor.Tensor*,
+
+state_name
+builtins.str"builtins.str*x
+zero_dim_tensorsb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*b
+unflat_param_namesJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list¿
+_flatten_non_tensor_optim_stateCtorch.distributed.fsdp._optim_utils._flatten_non_tensor_optim_state"
+Any*,
+
+state_name
+builtins.str"builtins.str*=
+non_tensors,
+builtins.list[Any]
+Any"builtins.list*b
+unflat_param_namesJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list‹
+_rekey_sharded_optim_state_dictCtorch.distributed.fsdp._optim_utils._rekey_sharded_optim_state_dict"W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*h
+sharded_osdW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*K
+model@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*M
+optimB
+torch.optim.optimizer.Optimizer"torch.optim.optimizer.Optimizer*£
+optim_inputë
+hUnion[builtins.list[builtins.dict[builtins.str,Any]],typing.Iterable[torch.nn.parameter.Parameter],None]ò
+.builtins.list[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"builtins.list~
+-typing.Iterable[torch.nn.parameter.Parameter]<
+torch.nn.parameter.Parameter"torch.nn.parameter.Parameter"typing.Iterable
+None*5
+using_optim_input
+builtins.bool"builtins.bool*8
+is_named_optimizer
+builtins.bool"builtins.bool ì
+'_get_param_id_to_param_from_optim_inputKtorch.distributed.fsdp._optim_utils._get_param_id_to_param_from_optim_input"•
+8builtins.dict[builtins.int,torch.nn.parameter.Parameter]
+builtins.int"builtins.int<
+torch.nn.parameter.Parameter"torch.nn.parameter.Parameter"builtins.dict*K
+model@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*•
+optim_inputë
+hUnion[builtins.list[builtins.dict[builtins.str,Any]],typing.Iterable[torch.nn.parameter.Parameter],None]ò
+.builtins.list[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"builtins.list~
+-typing.Iterable[torch.nn.parameter.Parameter]<
+torch.nn.parameter.Parameter"torch.nn.parameter.Parameter"typing.Iterable
+None Ö
+_get_flat_param_to_fqn:torch.distributed.fsdp._optim_utils._get_flat_param_to_fqn"·
+Lbuiltins.dict[torch.distributed.fsdp._flat_param.FlatParameter,builtins.str]d
+0torch.distributed.fsdp._flat_param.FlatParameter"0torch.distributed.fsdp._flat_param.FlatParameter
+builtins.str"builtins.str"builtins.dict*K
+model@
+torch.nn.modules.module.Module"torch.nn.modules.module.ModuleØ
+
+_get_param_key_to_param;torch.distributed.fsdp._optim_utils._get_param_key_to_param"˝
+Lbuiltins.dict[Union[builtins.int,builtins.str],torch.nn.parameter.Parameter]`
+ Union[builtins.int,builtins.str]
+builtins.int"builtins.int
+builtins.str"builtins.str<
+torch.nn.parameter.Parameter"torch.nn.parameter.Parameter"builtins.dict*M
+optimB
+torch.optim.optimizer.Optimizer"torch.optim.optimizer.Optimizer*á
+modelz
+*Union[torch.nn.modules.module.Module,None]@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module
+None *8
+is_named_optimizer
+builtins.bool"builtins.bool *‹
+param_to_fqns∆
+SUnion[builtins.dict[torch.nn.parameter.Parameter,builtins.list[builtins.str]],None]‚
+Gbuiltins.dict[torch.nn.parameter.Parameter,builtins.list[builtins.str]]<
+torch.nn.parameter.Parameter"torch.nn.parameter.ParameterJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list"builtins.dict
+None *‰
+flat_param_to_fqn 
+XUnion[builtins.dict[torch.distributed.fsdp._flat_param.FlatParameter,builtins.str],None]·
+Lbuiltins.dict[torch.distributed.fsdp._flat_param.FlatParameter,builtins.str]d
+0torch.distributed.fsdp._flat_param.FlatParameter"0torch.distributed.fsdp._flat_param.FlatParameter
+builtins.str"builtins.str"builtins.dict
+None Ø
+
+_get_param_to_param_key;torch.distributed.fsdp._optim_utils._get_param_to_param_key"˝
+Lbuiltins.dict[torch.nn.parameter.Parameter,Union[builtins.int,builtins.str]]<
+torch.nn.parameter.Parameter"torch.nn.parameter.Parameter`
+ Union[builtins.int,builtins.str]
+builtins.int"builtins.int
+builtins.str"builtins.str"builtins.dict*M
+optimB
+torch.optim.optimizer.Optimizer"torch.optim.optimizer.Optimizer*á
+modelz
+*Union[torch.nn.modules.module.Module,None]@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module
+None *8
+is_named_optimizer
+builtins.bool"builtins.bool *‹
+param_to_fqns∆
+SUnion[builtins.dict[torch.nn.parameter.Parameter,builtins.list[builtins.str]],None]‚
+Gbuiltins.dict[torch.nn.parameter.Parameter,builtins.list[builtins.str]]<
+torch.nn.parameter.Parameter"torch.nn.parameter.ParameterJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list"builtins.dict
+None *‰
+flat_param_to_fqn 
+XUnion[builtins.dict[torch.distributed.fsdp._flat_param.FlatParameter,builtins.str],None]·
+Lbuiltins.dict[torch.distributed.fsdp._flat_param.FlatParameter,builtins.str]d
+0torch.distributed.fsdp._flat_param.FlatParameter"0torch.distributed.fsdp._flat_param.FlatParameter
+builtins.str"builtins.str"builtins.dict
+None ì
+'_get_param_to_param_id_from_optim_inputKtorch.distributed.fsdp._optim_utils._get_param_to_param_id_from_optim_input"•
+8builtins.dict[torch.nn.parameter.Parameter,builtins.int]<
+torch.nn.parameter.Parameter"torch.nn.parameter.Parameter
+builtins.int"builtins.int"builtins.dict*K
+model@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*•
+optim_inputë
+hUnion[builtins.list[builtins.dict[builtins.str,Any]],typing.Iterable[torch.nn.parameter.Parameter],None]ò
+.builtins.list[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"builtins.list~
+-typing.Iterable[torch.nn.parameter.Parameter]<
+torch.nn.parameter.Parameter"torch.nn.parameter.Parameter"typing.Iterable
+None ›
+_check_missing_keys_on_rank?torch.distributed.fsdp._optim_utils._check_missing_keys_on_rank"
+None*ì
+r0_optim_state_keys˘
+Kbuiltins.list[TypeAlias[Tuple[builtins.tuple[builtins.str],builtins.bool]]]ö
+<TypeAlias[Tuple[builtins.tuple[builtins.str],builtins.bool]]£
+1Tuple[builtins.tuple[builtins.str],builtins.bool]L
+builtins.tuple[builtins.str]
+builtins.str"builtins.str"builtins.tuple
+builtins.bool"builtins.bool"2torch.distributed.fsdp._optim_utils._OptimStateKey"builtins.list*ü
+optim_state_key_to_param_key¸
+lbuiltins.dict[TypeAlias[Tuple[builtins.tuple[builtins.str],builtins.bool]],Union[builtins.str,builtins.int]]ö
+<TypeAlias[Tuple[builtins.tuple[builtins.str],builtins.bool]]£
+1Tuple[builtins.tuple[builtins.str],builtins.bool]L
+builtins.tuple[builtins.str]
+builtins.str"builtins.str"builtins.tuple
+builtins.bool"builtins.bool"2torch.distributed.fsdp._optim_utils._OptimStateKey`
+ Union[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int"builtins.dict*ñ
+param_key_to_param˝
+Lbuiltins.dict[Union[builtins.str,builtins.int],torch.nn.parameter.Parameter]`
+ Union[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int<
+torch.nn.parameter.Parameter"torch.nn.parameter.Parameter"builtins.dict*°
+groupï
+3Union[torch._C._distributed_c10d.ProcessGroup,None]R
+'torch._C._distributed_c10d.ProcessGroup"'torch._C._distributed_c10d.ProcessGroup
+None¯
+_map_param_key_to_optim_keys@torch.distributed.fsdp._optim_utils._map_param_key_to_optim_keys"∫
+äTuple[builtins.list[TypeAlias[Tuple[builtins.tuple[builtins.str],builtins.bool]]],builtins.dict[Unknown,Union[builtins.int,builtins.str]]]˘
+Kbuiltins.list[TypeAlias[Tuple[builtins.tuple[builtins.str],builtins.bool]]]ö
+<TypeAlias[Tuple[builtins.tuple[builtins.str],builtins.bool]]£
+1Tuple[builtins.tuple[builtins.str],builtins.bool]L
+builtins.tuple[builtins.str]
+builtins.str"builtins.str"builtins.tuple
+builtins.bool"builtins.bool"2torch.distributed.fsdp._optim_utils._OptimStateKey"builtins.list¨
+7builtins.dict[Unknown,Union[builtins.int,builtins.str]] `
+ Union[builtins.int,builtins.str]
+builtins.int"builtins.int
+builtins.str"builtins.str"builtins.dict*m
+optim_state_dictW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*°
+groupï
+3Union[torch._C._distributed_c10d.ProcessGroup,None]R
+'torch._C._distributed_c10d.ProcessGroup"'torch._C._distributed_c10d.ProcessGroup
+None*ñ
+param_key_to_param˝
+Lbuiltins.dict[Union[builtins.int,builtins.str],torch.nn.parameter.Parameter]`
+ Union[builtins.int,builtins.str]
+builtins.int"builtins.int
+builtins.str"builtins.str<
+torch.nn.parameter.Parameter"torch.nn.parameter.Parameter"builtins.dict*ˆ
+param_to_fqns‚
+Gbuiltins.dict[torch.nn.parameter.Parameter,builtins.list[builtins.str]]<
+torch.nn.parameter.Parameter"torch.nn.parameter.ParameterJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list"builtins.dict*Å
+fqn_to_fsdp_param_info‰
+Mbuiltins.dict[builtins.str,torch.distributed.fsdp._optim_utils.FSDPParamInfo]
+builtins.str"builtins.strf
+1torch.distributed.fsdp._optim_utils.FSDPParamInfo"1torch.distributed.fsdp._optim_utils.FSDPParamInfo"builtins.dict*0
+
+merge_keys
+builtins.bool"builtins.bool Ï
+_unflatten_param_groups;torch.distributed.fsdp._optim_utils._unflatten_param_groups"ò
+.builtins.list[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"builtins.list*g
+
+state_dictW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*ñ
+param_key_to_param˝
+Lbuiltins.dict[Union[builtins.int,builtins.str],torch.nn.parameter.Parameter]`
+ Union[builtins.int,builtins.str]
+builtins.int"builtins.int
+builtins.str"builtins.str<
+torch.nn.parameter.Parameter"torch.nn.parameter.Parameter"builtins.dict*ˆ
+param_to_fqns‚
+Gbuiltins.dict[torch.nn.parameter.Parameter,builtins.list[builtins.str]]<
+torch.nn.parameter.Parameter"torch.nn.parameter.ParameterJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list"builtins.dict›
+_is_named_optimizer7torch.distributed.fsdp._optim_utils._is_named_optimizer"
+builtins.bool"builtins.bool*m
+optim_state_dictW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict¯
+_allgather_state_info9torch.distributed.fsdp._optim_utils._allgather_state_info"ƒ
+Xbuiltins.list[builtins.dict[builtins.str,torch.distributed.fsdp._optim_utils.StateInfo]]ÿ
+Ibuiltins.dict[builtins.str,torch.distributed.fsdp._optim_utils.StateInfo]
+builtins.str"builtins.str^
+-torch.distributed.fsdp._optim_utils.StateInfo"-torch.distributed.fsdp._optim_utils.StateInfo"builtins.dict"builtins.list*r
+
+fsdp_stateb
+/torch.distributed.fsdp._common_utils._FSDPState"/torch.distributed.fsdp._common_utils._FSDPState*i
+input_statesW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict◊
+
+_convert_all_state_info;torch.distributed.fsdp._optim_utils._convert_all_state_info"€
+mTuple[Union[torch._C.dtype,None],builtins.dict[builtins.str,builtins.list[Union[torch._tensor.Tensor,None]]]]J
+Union[torch._C.dtype,None] 
+torch._C.dtype"torch._C.dtype
+Noneõ
+Kbuiltins.dict[builtins.str,builtins.list[Union[torch._tensor.Tensor,None]]]
+builtins.str"builtins.strû
+/builtins.list[Union[torch._tensor.Tensor,None]]\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None"builtins.list"builtins.dict*{
+fsdp_param_infof
+1torch.distributed.fsdp._optim_utils.FSDPParamInfo"1torch.distributed.fsdp._optim_utils.FSDPParamInfo*ﬁ
+gathered_state_infoƒ
+Xbuiltins.list[builtins.dict[builtins.str,torch.distributed.fsdp._optim_utils.StateInfo]]ÿ
+Ibuiltins.dict[builtins.str,torch.distributed.fsdp._optim_utils.StateInfo]
+builtins.str"builtins.str^
+-torch.distributed.fsdp._optim_utils.StateInfo"-torch.distributed.fsdp._optim_utils.StateInfo"builtins.dict"builtins.list*i
+input_statesW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*◊
+output_states√
+;builtins.dict[builtins.str,builtins.dict[builtins.str,Any]]
+builtins.str"builtins.strW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"builtins.dict˛
+_unflatten_orig_param_states@torch.distributed.fsdp._optim_utils._unflatten_orig_param_states"
+None*{
+fsdp_param_infof
+1torch.distributed.fsdp._optim_utils.FSDPParamInfo"1torch.distributed.fsdp._optim_utils.FSDPParamInfo*◊
+output_states√
+;builtins.dict[builtins.str,builtins.dict[builtins.str,Any]]
+builtins.str"builtins.strW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"builtins.dict*,
+
+state_name
+builtins.str"builtins.str*/
+shard_state
+builtins.bool"builtins.bool*+
+to_save
+builtins.bool"builtins.bool*/
+cpu_offload
+builtins.bool"builtins.bool˛
+_allgather_orig_param_states@torch.distributed.fsdp._optim_utils._allgather_orig_param_states"√
+;builtins.dict[builtins.str,builtins.dict[builtins.str,Any]]
+builtins.str"builtins.strW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"builtins.dict*{
+fsdp_param_infof
+1torch.distributed.fsdp._optim_utils.FSDPParamInfo"1torch.distributed.fsdp._optim_utils.FSDPParamInfo*ﬁ
+gathered_state_infoƒ
+Xbuiltins.list[builtins.dict[builtins.str,torch.distributed.fsdp._optim_utils.StateInfo]]ÿ
+Ibuiltins.dict[builtins.str,torch.distributed.fsdp._optim_utils.StateInfo]
+builtins.str"builtins.str^
+-torch.distributed.fsdp._optim_utils.StateInfo"-torch.distributed.fsdp._optim_utils.StateInfo"builtins.dict"builtins.list*i
+input_statesW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*/
+shard_state
+builtins.bool"builtins.bool*+
+to_save
+builtins.bool"builtins.bool*/
+cpu_offload
+builtins.bool"builtins.bool∞
+_gather_all_orig_param_state@torch.distributed.fsdp._optim_utils._gather_all_orig_param_state"W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*{
+fsdp_param_infof
+1torch.distributed.fsdp._optim_utils.FSDPParamInfo"1torch.distributed.fsdp._optim_utils.FSDPParamInfo*i
+input_statesW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*/
+shard_state
+builtins.bool"builtins.bool*+
+to_save
+builtins.bool"builtins.bool*/
+cpu_offload
+builtins.bool"builtins.bool÷
+_convert_state_with_orig_paramsCtorch.distributed.fsdp._optim_utils._convert_state_with_orig_params"W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*î
+all_optim_state_keys˘
+Kbuiltins.list[TypeAlias[Tuple[builtins.tuple[builtins.str],builtins.bool]]]ö
+<TypeAlias[Tuple[builtins.tuple[builtins.str],builtins.bool]]£
+1Tuple[builtins.tuple[builtins.str],builtins.bool]L
+builtins.tuple[builtins.str]
+builtins.str"builtins.str"builtins.tuple
+builtins.bool"builtins.bool"2torch.distributed.fsdp._optim_utils._OptimStateKey"builtins.list*ü
+optim_state_key_to_param_key¸
+lbuiltins.dict[TypeAlias[Tuple[builtins.tuple[builtins.str],builtins.bool]],Union[builtins.int,builtins.str]]ö
+<TypeAlias[Tuple[builtins.tuple[builtins.str],builtins.bool]]£
+1Tuple[builtins.tuple[builtins.str],builtins.bool]L
+builtins.tuple[builtins.str]
+builtins.str"builtins.str"builtins.tuple
+builtins.bool"builtins.bool"2torch.distributed.fsdp._optim_utils._OptimStateKey`
+ Union[builtins.int,builtins.str]
+builtins.int"builtins.int
+builtins.str"builtins.str"builtins.dict*Å
+fqn_to_fsdp_param_info‰
+Mbuiltins.dict[builtins.str,torch.distributed.fsdp._optim_utils.FSDPParamInfo]
+builtins.str"builtins.strf
+1torch.distributed.fsdp._optim_utils.FSDPParamInfo"1torch.distributed.fsdp._optim_utils.FSDPParamInfo"builtins.dict*∆
+optim_state_dictØ
+3builtins.dict[Union[builtins.str,builtins.int],Any]`
+ Union[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int
+Any"builtins.dict*+
+to_save
+builtins.bool"builtins.bool*/
+shard_state
+builtins.bool"builtins.bool*1
+cpu_offload
+builtins.bool"builtins.bool ÷
+_convert_state_with_flat_paramsCtorch.distributed.fsdp._optim_utils._convert_state_with_flat_params"W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*î
+all_optim_state_keys˘
+Kbuiltins.list[TypeAlias[Tuple[builtins.tuple[builtins.str],builtins.bool]]]ö
+<TypeAlias[Tuple[builtins.tuple[builtins.str],builtins.bool]]£
+1Tuple[builtins.tuple[builtins.str],builtins.bool]L
+builtins.tuple[builtins.str]
+builtins.str"builtins.str"builtins.tuple
+builtins.bool"builtins.bool"2torch.distributed.fsdp._optim_utils._OptimStateKey"builtins.list*ü
+optim_state_key_to_param_key¸
+lbuiltins.dict[TypeAlias[Tuple[builtins.tuple[builtins.str],builtins.bool]],Union[builtins.int,builtins.str]]ö
+<TypeAlias[Tuple[builtins.tuple[builtins.str],builtins.bool]]£
+1Tuple[builtins.tuple[builtins.str],builtins.bool]L
+builtins.tuple[builtins.str]
+builtins.str"builtins.str"builtins.tuple
+builtins.bool"builtins.bool"2torch.distributed.fsdp._optim_utils._OptimStateKey`
+ Union[builtins.int,builtins.str]
+builtins.int"builtins.int
+builtins.str"builtins.str"builtins.dict*Å
+fqn_to_fsdp_param_info‰
+Mbuiltins.dict[builtins.str,torch.distributed.fsdp._optim_utils.FSDPParamInfo]
+builtins.str"builtins.strf
+1torch.distributed.fsdp._optim_utils.FSDPParamInfo"1torch.distributed.fsdp._optim_utils.FSDPParamInfo"builtins.dict*∆
+optim_state_dictØ
+3builtins.dict[Union[builtins.str,builtins.int],Any]`
+ Union[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int
+Any"builtins.dict*+
+to_save
+builtins.bool"builtins.bool*/
+shard_state
+builtins.bool"builtins.bool*1
+cpu_offload
+builtins.bool"builtins.bool í
+_get_fqn_to_fsdp_param_info?torch.distributed.fsdp._optim_utils._get_fqn_to_fsdp_param_info"‰
+Mbuiltins.dict[builtins.str,torch.distributed.fsdp._optim_utils.FSDPParamInfo]
+builtins.str"builtins.strf
+1torch.distributed.fsdp._optim_utils.FSDPParamInfo"1torch.distributed.fsdp._optim_utils.FSDPParamInfo"builtins.dict*K
+model@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*ü
+__annotations__3torch.distributed.fsdp._optim_utils.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*
+disttorch.distributed *<
+traversal_utils'torch.distributed.fsdp._traversal_utils *
+nntorch.nn *V
+logger*torch.distributed.fsdp._optim_utils.logger 
+logging.Logger"logging.Logger

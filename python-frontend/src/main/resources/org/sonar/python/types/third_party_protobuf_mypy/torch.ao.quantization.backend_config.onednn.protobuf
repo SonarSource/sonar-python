@@ -1,0 +1,178 @@
+
++torch.ao.quantization.backend_config.onednnî
+_fuse_linear_bn_leaky_reluFtorch.ao.quantization.backend_config.onednn._fuse_linear_bn_leaky_relu*
+
+is_qat*
+
+linear*
+bn*
+
+leaky_relu|
+_fuse_conv_add_left?torch.ao.quantization.backend_config.onednn._fuse_conv_add_left*
+
+is_qat*
+add*
+conv*
+_{
+_conv_add_root_node_getter_leftKtorch.ao.quantization.backend_config.onednn._conv_add_root_node_getter_left*
+patternÅ
+"_conv_add_extra_inputs_getter_leftNtorch.ao.quantization.backend_config.onednn._conv_add_extra_inputs_getter_left*
+patternÖ
+_fuse_conv_bn_add_leftBtorch.ao.quantization.backend_config.onednn._fuse_conv_bn_add_left*
+
+is_qat*
+add*
+bn_conv*
+_Ö
+"_conv_bn_add_root_node_getter_leftNtorch.ao.quantization.backend_config.onednn._conv_bn_add_root_node_getter_left*
+add_patternã
+%_conv_bn_add_extra_inputs_getter_leftQtorch.ao.quantization.backend_config.onednn._conv_bn_add_extra_inputs_getter_left*
+add_pattern~
+_fuse_conv_add_right@torch.ao.quantization.backend_config.onednn._fuse_conv_add_right*
+
+is_qat*
+add*
+_*
+conv}
+ _conv_add_root_node_getter_rightLtorch.ao.quantization.backend_config.onednn._conv_add_root_node_getter_right*
+patternÉ
+#_conv_add_extra_inputs_getter_rightOtorch.ao.quantization.backend_config.onednn._conv_add_extra_inputs_getter_right*
+patterná
+_fuse_conv_bn_add_rightCtorch.ao.quantization.backend_config.onednn._fuse_conv_bn_add_right*
+
+is_qat*
+add*
+_*
+bn_convÉ
+#_conv_bn_add_root_node_getter_rightOtorch.ao.quantization.backend_config.onednn._conv_bn_add_root_node_getter_right*
+patternâ
+&_conv_bn_add_extra_inputs_getter_rightRtorch.ao.quantization.backend_config.onednn._conv_bn_add_extra_inputs_getter_right*
+patterná
+_fuse_conv_add_relu_leftDtorch.ao.quantization.backend_config.onednn._fuse_conv_add_relu_left*
+
+is_qat*
+relu*
+add_patternÖ
+$_conv_add_relu_root_node_getter_leftPtorch.ao.quantization.backend_config.onednn._conv_add_relu_root_node_getter_left*
+patternã
+'_conv_add_relu_extra_inputs_getter_leftStorch.ao.quantization.backend_config.onednn._conv_add_relu_extra_inputs_getter_left*
+patternç
+_fuse_conv_bn_add_relu_leftGtorch.ao.quantization.backend_config.onednn._fuse_conv_bn_add_relu_left*
+
+is_qat*
+relu*
+add_patternã
+'_conv_bn_add_relu_root_node_getter_leftStorch.ao.quantization.backend_config.onednn._conv_bn_add_relu_root_node_getter_left*
+patternë
+*_conv_bn_add_relu_extra_inputs_getter_leftVtorch.ao.quantization.backend_config.onednn._conv_bn_add_relu_extra_inputs_getter_left*
+patternâ
+_fuse_conv_add_relu_rightEtorch.ao.quantization.backend_config.onednn._fuse_conv_add_relu_right*
+
+is_qat*
+relu*
+add_patterná
+%_conv_add_relu_root_node_getter_rightQtorch.ao.quantization.backend_config.onednn._conv_add_relu_root_node_getter_right*
+patternç
+(_conv_add_relu_extra_inputs_getter_rightTtorch.ao.quantization.backend_config.onednn._conv_add_relu_extra_inputs_getter_right*
+patternè
+_fuse_conv_bn_add_relu_rightHtorch.ao.quantization.backend_config.onednn._fuse_conv_bn_add_relu_right*
+
+is_qat*
+relu*
+add_patternç
+(_conv_bn_add_relu_root_node_getter_rightTtorch.ao.quantization.backend_config.onednn._conv_bn_add_relu_root_node_getter_right*
+patternì
++_conv_bn_add_relu_extra_inputs_getter_rightWtorch.ao.quantization.backend_config.onednn._conv_bn_add_relu_extra_inputs_getter_right*
+patterní
+_add_eltwise_fusion_configsGtorch.ao.quantization.backend_config.onednn._add_eltwise_fusion_configs*
+configs*
+root_module*
+root_op*
+post_module*
+post_op*
+dtype_configs*
+fuser_method*
+fused_module*
+observation_type*
+ref_quant_moduleÎ
+get_onednn_backend_configEtorch.ao.quantization.backend_config.onednn.get_onednn_backend_config"Ü
+Atorch.ao.quantization.backend_config.backend_config.BackendConfig"Atorch.ao.quantization.backend_config.backend_config.BackendConfig*ß
+__annotations__;torch.ao.quantization.backend_config.onednn.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*
+nntorch.nn *
+nnitorch.ao.nn.intrinsic *
+Ftorch.nn.functional *)
+nnqrtorch.ao.nn.quantized.reference *˝
+$onednn_weighted_op_int8_dtype_configPtorch.ao.quantization.backend_config.onednn.onednn_weighted_op_int8_dtype_configÇ
+?torch.ao.quantization.backend_config.backend_config.DTypeConfig"?torch.ao.quantization.backend_config.backend_config.DTypeConfig*Ô
+onednn_op_quint8_dtype_configItorch.ao.quantization.backend_config.onednn.onednn_op_quint8_dtype_configÇ
+?torch.ao.quantization.backend_config.backend_config.DTypeConfig"?torch.ao.quantization.backend_config.backend_config.DTypeConfig*ı
+ onednn_dynamic_int8_dtype_configLtorch.ao.quantization.backend_config.onednn.onednn_dynamic_int8_dtype_configÇ
+?torch.ao.quantization.backend_config.backend_config.DTypeConfig"?torch.ao.quantization.backend_config.backend_config.DTypeConfig*ˇ
+%onednn_weight_only_qint8_dtype_configQtorch.ao.quantization.backend_config.onednn.onednn_weight_only_qint8_dtype_configÇ
+?torch.ao.quantization.backend_config.backend_config.DTypeConfig"?torch.ao.quantization.backend_config.backend_config.DTypeConfig*ç
+,onednn_input_output_only_quint8_dtype_configXtorch.ao.quantization.backend_config.onednn.onednn_input_output_only_quint8_dtype_configÇ
+?torch.ao.quantization.backend_config.backend_config.DTypeConfig"?torch.ao.quantization.backend_config.backend_config.DTypeConfig*›
+observation_type<torch.ao.quantization.backend_config.onednn.observation_typeä
+Ctorch.ao.quantization.backend_config.backend_config.ObservationType"Ctorch.ao.quantization.backend_config.backend_config.ObservationType*ª
+conv_dtype_configs>torch.ao.quantization.backend_config.onednn.conv_dtype_configs‰
+Nbuiltins.list[torch.ao.quantization.backend_config.backend_config.DTypeConfig]Ç
+?torch.ao.quantization.backend_config.backend_config.DTypeConfig"?torch.ao.quantization.backend_config.backend_config.DTypeConfig"builtins.list*Q
+conv_configs8torch.ao.quantization.backend_config.onednn.conv_configs
+Any*°
+conv_add_left_optioinsBtorch.ao.quantization.backend_config.onednn.conv_add_left_optioins¬
+9itertools.product[Tuple[builtins.bool,builtins.function]]r
+&Tuple[builtins.bool,builtins.function]
+builtins.bool"builtins.bool&
+builtins.function"builtins.function"itertools.product*^
+with_bn3torch.ao.quantization.backend_config.onednn.with_bn
+builtins.bool"builtins.bool*d
+add_op2torch.ao.quantization.backend_config.onednn.add_op&
+builtins.function"builtins.function*ó
+conv_add_optioins=torch.ao.quantization.backend_config.onednn.conv_add_optioins¬
+9itertools.product[Tuple[builtins.bool,builtins.function]]r
+&Tuple[builtins.bool,builtins.function]
+builtins.bool"builtins.bool&
+builtins.function"builtins.function"itertools.product*´
+conv_add_relu_left_optioinsGtorch.ao.quantization.backend_config.onednn.conv_add_relu_left_optioins¬
+9itertools.product[Tuple[builtins.bool,builtins.function]]r
+&Tuple[builtins.bool,builtins.function]
+builtins.bool"builtins.bool&
+builtins.function"builtins.function"itertools.product*°
+conv_add_relu_optioinsBtorch.ao.quantization.backend_config.onednn.conv_add_relu_optioins¬
+9itertools.product[Tuple[builtins.bool,builtins.function]]r
+&Tuple[builtins.bool,builtins.function]
+builtins.bool"builtins.bool&
+builtins.function"builtins.function"itertools.product*ø
+linear_dtype_configs@torch.ao.quantization.backend_config.onednn.linear_dtype_configs‰
+Nbuiltins.list[torch.ao.quantization.backend_config.backend_config.DTypeConfig]Ç
+?torch.ao.quantization.backend_config.backend_config.DTypeConfig"?torch.ao.quantization.backend_config.backend_config.DTypeConfig"builtins.list*Œ
+linear_configs:torch.ao.quantization.backend_config.onednn.linear_configsˇ
+Wbuiltins.list[torch.ao.quantization.backend_config.backend_config.BackendPatternConfig]î
+Htorch.ao.quantization.backend_config.backend_config.BackendPatternConfig"Htorch.ao.quantization.backend_config.backend_config.BackendPatternConfig"builtins.list*≈
+binary_op_dtype_configsCtorch.ao.quantization.backend_config.onednn.binary_op_dtype_configs‰
+Nbuiltins.list[torch.ao.quantization.backend_config.backend_config.DTypeConfig]Ç
+?torch.ao.quantization.backend_config.backend_config.DTypeConfig"?torch.ao.quantization.backend_config.backend_config.DTypeConfig"builtins.list*«
+default_op_dtype_configsDtorch.ao.quantization.backend_config.onednn.default_op_dtype_configs‰
+Nbuiltins.list[torch.ao.quantization.backend_config.backend_config.DTypeConfig]Ç
+?torch.ao.quantization.backend_config.backend_config.DTypeConfig"?torch.ao.quantization.backend_config.backend_config.DTypeConfig"builtins.list*”
+fixed_qparams_op_dtype_configsJtorch.ao.quantization.backend_config.onednn.fixed_qparams_op_dtype_configs‰
+Nbuiltins.list[torch.ao.quantization.backend_config.backend_config.DTypeConfig]Ç
+?torch.ao.quantization.backend_config.backend_config.DTypeConfig"?torch.ao.quantization.backend_config.backend_config.DTypeConfig"builtins.list*”
+share_qparams_op_dtype_configsJtorch.ao.quantization.backend_config.onednn.share_qparams_op_dtype_configs‰
+Nbuiltins.list[torch.ao.quantization.backend_config.backend_config.DTypeConfig]Ç
+?torch.ao.quantization.backend_config.backend_config.DTypeConfig"?torch.ao.quantization.backend_config.backend_config.DTypeConfig"builtins.list*ø
+rnn_op_dtype_configs@torch.ao.quantization.backend_config.onednn.rnn_op_dtype_configs‰
+Nbuiltins.list[torch.ao.quantization.backend_config.backend_config.DTypeConfig]Ç
+?torch.ao.quantization.backend_config.backend_config.DTypeConfig"?torch.ao.quantization.backend_config.backend_config.DTypeConfig"builtins.list*À
+embedding_op_dtype_configsFtorch.ao.quantization.backend_config.onednn.embedding_op_dtype_configs‰
+Nbuiltins.list[torch.ao.quantization.backend_config.backend_config.DTypeConfig]Ç
+?torch.ao.quantization.backend_config.backend_config.DTypeConfig"?torch.ao.quantization.backend_config.backend_config.DTypeConfig"builtins.list*Õ
+layer_norm_op_dtype_configsGtorch.ao.quantization.backend_config.onednn.layer_norm_op_dtype_configs‰
+Nbuiltins.list[torch.ao.quantization.backend_config.backend_config.DTypeConfig]Ç
+?torch.ao.quantization.backend_config.backend_config.DTypeConfig"?torch.ao.quantization.backend_config.backend_config.DTypeConfig"builtins.list*ä
+__all__3torch.ao.quantization.backend_config.onednn.__all__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list

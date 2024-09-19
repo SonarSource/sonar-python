@@ -1,0 +1,215 @@
+
+torch.masked._ops”
+Combine@1002torch.masked._ops.Combine@1002" torch.autograd.function.Function*a
+forward&torch.masked._ops.Combine@1002.forward*
+ctx*	
+input*
+mask0:staticmethodh*_
+backward'torch.masked._ops.Combine@1002.backward*
+ctx*
+grad_output0:staticmethodhT
+_apply_docstring_templates,torch.masked._ops._apply_docstring_templates*
+funcF
+_generate_docstring%torch.masked._ops._generate_docstring*
+func¼
+_reduction_identity%torch.masked._ops._reduction_identity"
+Any*)
+op_name
+builtins.str"builtins.str*7
+input,
+torch._tensor.Tensor"torch._tensor.Tensor*
+args
+Any£
+_canonical_dim torch.masked._ops._canonical_dim"L
+builtins.tuple[builtins.int]
+builtins.int"builtins.int"builtins.tuple*ø
+dimî
+STypeAlias[Union[builtins.int,Tuple[builtins.int],builtins.list[builtins.int],None]]÷
+HUnion[builtins.int,Tuple[builtins.int],builtins.list[builtins.int],None]
+builtins.int"builtins.int5
+Tuple[builtins.int]
+builtins.int"builtins.intJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list
+None"torch.masked._ops.DimOrDims*&
+ndim
+builtins.int"builtins.intË
+_sparse_coo_flatten_indices-torch.masked._ops._sparse_coo_flatten_indices"
+Any*9
+indices,
+torch._tensor.Tensor"torch._tensor.Tensor*9
+shape.
+builtins.tuple[Any]
+Any"builtins.tupleÆ
+_anytorch.masked._ops._any"
+Any*7
+input,
+torch._tensor.Tensor"torch._tensor.Tensor*7
+dim.
+builtins.tuple[Any]
+Any"builtins.tuple*+
+keepdim
+builtins.bool"builtins.bool•
+_sparse_coo_where#torch.masked._ops._sparse_coo_where",
+torch._tensor.Tensor"torch._tensor.Tensor*6
+mask,
+torch._tensor.Tensor"torch._tensor.Tensor*7
+input,
+torch._tensor.Tensor"torch._tensor.Tensor*<
+
+fill_value,
+torch._tensor.Tensor"torch._tensor.Tensor¹
+$_sparse_coo_scatter_reduction_helper6torch.masked._ops._sparse_coo_scatter_reduction_helper",
+torch._tensor.Tensor"torch._tensor.Tensor*
+op
+Any*<
+
+mask_input,
+torch._tensor.Tensor"torch._tensor.Tensor*V
+dimsL
+builtins.tuple[builtins.int]
+builtins.int"builtins.int"builtins.tuple*+
+keepdim
+builtins.bool"builtins.bool*W
+dtypeJ
+Union[torch._C.dtype,None] 
+torch._C.dtype"torch._C.dtype
+None ¹
+$_sparse_csr_segment_reduction_helper6torch.masked._ops._sparse_csr_segment_reduction_helper",
+torch._tensor.Tensor"torch._tensor.Tensor*
+op
+Any*<
+
+mask_input,
+torch._tensor.Tensor"torch._tensor.Tensor*V
+dimsL
+builtins.tuple[builtins.int]
+builtins.int"builtins.int"builtins.tuple*+
+keepdim
+builtins.bool"builtins.bool*W
+dtypeJ
+Union[torch._C.dtype,None] 
+torch._C.dtype"torch._C.dtype
+None •
+_sparse_csr_where#torch.masked._ops._sparse_csr_where",
+torch._tensor.Tensor"torch._tensor.Tensor*6
+mask,
+torch._tensor.Tensor"torch._tensor.Tensor*7
+input,
+torch._tensor.Tensor"torch._tensor.Tensor*<
+
+fill_value,
+torch._tensor.Tensor"torch._tensor.Tensorÿ
+_wheretorch.masked._ops._where",
+torch._tensor.Tensor"torch._tensor.Tensor*6
+mask,
+torch._tensor.Tensor"torch._tensor.Tensor*7
+input,
+torch._tensor.Tensor"torch._tensor.Tensor*<
+
+fill_value,
+torch._tensor.Tensor"torch._tensor.Tensoræ
+_input_masktorch.masked._ops._input_mask",
+torch._tensor.Tensor"torch._tensor.Tensor*á
+inputÕ
+GUnion[torch._tensor.Tensor,torch.masked.maskedtensor.core.MaskedTensor],
+torch._tensor.Tensor"torch._tensor.TensorZ
++torch.masked.maskedtensor.core.MaskedTensor"+torch.masked.maskedtensor.core.MaskedTensor*
+args
+Any*
+kwargs
+AnyÎ
+_output_masktorch.masked._ops._output_mask",
+torch._tensor.Tensor"torch._tensor.Tensor*
+op
+Any*7
+input,
+torch._tensor.Tensor"torch._tensor.Tensor*
+args
+Any*
+kwargs
+Any
+_combine_input_and_mask)torch.masked._ops._combine_input_and_mask",
+torch._tensor.Tensor"torch._tensor.Tensor*
+op
+Any*á
+inputÕ
+GUnion[torch.masked.maskedtensor.core.MaskedTensor,torch._tensor.Tensor]Z
++torch.masked.maskedtensor.core.MaskedTensor"+torch.masked.maskedtensor.core.MaskedTensor,
+torch._tensor.Tensor"torch._tensor.Tensor*
+mask
+Any*
+args
+Any×
+	logaddexptorch.masked._ops.logaddexp",
+torch._tensor.Tensor"torch._tensor.Tensor*á
+inputÕ
+GUnion[torch._tensor.Tensor,torch.masked.maskedtensor.core.MaskedTensor],
+torch._tensor.Tensor"torch._tensor.TensorZ
++torch.masked.maskedtensor.core.MaskedTensor"+torch.masked.maskedtensor.core.MaskedTensor*á
+otherÕ
+GUnion[torch._tensor.Tensor,torch.masked.maskedtensor.core.MaskedTensor],
+torch._tensor.Tensor"torch._tensor.TensorZ
++torch.masked.maskedtensor.core.MaskedTensor"+torch.masked.maskedtensor.core.MaskedTensor*W
+dtypeJ
+Union[torch._C.dtype,None] 
+torch._C.dtype"torch._C.dtype
+None *n
+
+input_mask\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None *n
+
+other_mask\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None ƒ
+
+_std_vartorch.masked._ops._std_var",
+torch._tensor.Tensor"torch._tensor.Tensor*á
+inputÕ
+GUnion[torch._tensor.Tensor,torch.masked.maskedtensor.core.MaskedTensor],
+torch._tensor.Tensor"torch._tensor.TensorZ
++torch.masked.maskedtensor.core.MaskedTensor"+torch.masked.maskedtensor.core.MaskedTensor*ø
+dimî
+STypeAlias[Union[builtins.int,Tuple[builtins.int],builtins.list[builtins.int],None]]÷
+HUnion[builtins.int,Tuple[builtins.int],builtins.list[builtins.int],None]
+builtins.int"builtins.int5
+Tuple[builtins.int]
+builtins.int"builtins.intJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list
+None"torch.masked._ops.DimOrDims*U
+unbiasedG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None*‰
+correction_optu
+'Union[builtins.int,builtins.float,None]
+builtins.int"builtins.int 
+builtins.float"builtins.float
+None*T
+keepdimG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None*U
+dtypeJ
+Union[torch._C.dtype,None] 
+torch._C.dtype"torch._C.dtype
+None*f
+mask\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None*V
+	take_sqrtG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None*
+__annotations__!torch.masked._ops.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*p
+__all__torch.masked._ops.__all__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list

@@ -1,0 +1,508 @@
+
+torch._C._distributed_rpcº
+RpcBackendOptions+torch._C._distributed_rpc.RpcBackendOptions"builtins.object*–
+__init__4torch._C._distributed_rpc.RpcBackendOptions.__init__"
+None*d
+selfZ
++torch._C._distributed_rpc.RpcBackendOptions"+torch._C._distributed_rpc.RpcBackendOptions*3
+rpc_timeout 
+builtins.float"builtins.float */
+init_method
+builtins.str"builtins.str rh
+rpc_timeout7torch._C._distributed_rpc.RpcBackendOptions.rpc_timeout 
+builtins.float"builtins.floatrd
+init_method7torch._C._distributed_rpc.RpcBackendOptions.init_method
+builtins.str"builtins.strð
+
+WorkerInfo$torch._C._distributed_rpc.WorkerInfo"builtins.object*ð
+__init__-torch._C._distributed_rpc.WorkerInfo.__init__"
+None*V
+selfL
+$torch._C._distributed_rpc.WorkerInfo"$torch._C._distributed_rpc.WorkerInfo*&
+name
+builtins.str"builtins.str*+
+	worker_id
+builtins.int"builtins.int*µ
+name)torch._C._distributed_rpc.WorkerInfo.name"
+builtins.str"builtins.str*V
+selfL
+$torch._C._distributed_rpc.WorkerInfo"$torch._C._distributed_rpc.WorkerInfo0:property`*±
+id'torch._C._distributed_rpc.WorkerInfo.id"
+builtins.int"builtins.int*V
+selfL
+$torch._C._distributed_rpc.WorkerInfo"$torch._C._distributed_rpc.WorkerInfo0:property`*Ë
+__eq__+torch._C._distributed_rpc.WorkerInfo.__eq__"
+builtins.bool"builtins.bool*NL
+$torch._C._distributed_rpc.WorkerInfo"$torch._C._distributed_rpc.WorkerInfo*$"
+builtins.object"builtins.objectß
+RpcAgent"torch._C._distributed_rpc.RpcAgent"builtins.object*í
+join'torch._C._distributed_rpc.RpcAgent.join"
+Any*R
+selfH
+"torch._C._distributed_rpc.RpcAgent""torch._C._distributed_rpc.RpcAgent*.
+shutdown
+builtins.bool"builtins.bool */
+timeout 
+builtins.float"builtins.float *9
+sync'torch._C._distributed_rpc.RpcAgent.sync*
+self*A
+shutdown+torch._C._distributed_rpc.RpcAgent.shutdown*
+self*°
+get_worker_infos3torch._C._distributed_rpc.RpcAgent.get_worker_infos"’
+3builtins.list[torch._C._distributed_rpc.WorkerInfo]L
+$torch._C._distributed_rpc.WorkerInfo"$torch._C._distributed_rpc.WorkerInfo"builtins.list*R
+selfH
+"torch._C._distributed_rpc.RpcAgent""torch._C._distributed_rpc.RpcAgent*ú
+_get_device_map2torch._C._distributed_rpc.RpcAgent._get_device_map"‡
+.builtins.dict[torch._C.device,torch._C.device]"
+torch._C.device"torch._C.device"
+torch._C.device"torch._C.device"builtins.dict*R
+selfH
+"torch._C._distributed_rpc.RpcAgent""torch._C._distributed_rpc.RpcAgent*U
+dstL
+$torch._C._distributed_rpc.WorkerInfo"$torch._C._distributed_rpc.WorkerInfo*Ž
+get_debug_info1torch._C._distributed_rpc.RpcAgent.get_debug_info"u
+(builtins.dict[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.dict*R
+selfH
+"torch._C._distributed_rpc.RpcAgent""torch._C._distributed_rpc.RpcAgent*ˆ
+get_metrics.torch._C._distributed_rpc.RpcAgent.get_metrics"u
+(builtins.dict[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.dict*R
+selfH
+"torch._C._distributed_rpc.RpcAgent""torch._C._distributed_rpc.RpcAgent2ã
+get_worker_info2torch._C._distributed_rpc.RpcAgent.get_worker_infoõ
+get_worker_info2torch._C._distributed_rpc.RpcAgent.get_worker_info"L
+$torch._C._distributed_rpc.WorkerInfo"$torch._C._distributed_rpc.WorkerInfo*R
+selfH
+"torch._C._distributed_rpc.RpcAgent""torch._C._distributed_rpc.RpcAgent0:overloadX£
+get_worker_info2torch._C._distributed_rpc.RpcAgent.get_worker_info"L
+$torch._C._distributed_rpc.WorkerInfo"$torch._C._distributed_rpc.WorkerInfo*R
+selfH
+"torch._C._distributed_rpc.RpcAgent""torch._C._distributed_rpc.RpcAgent*,
+
+workerName
+builtins.str"builtins.str0:overloadXô*
+PyRRef torch._C._distributed_rpc.PyRRef"builtins.object*‚
+__init__)torch._C._distributed_rpc.PyRRef.__init__"
+None*Ä
+self¹
+>torch._C._distributed_rpc.PyRRef[torch._C._distributed_rpc._T]U
+torch._C._distributed_rpc._T"
+builtins.object"builtins.object"builtins.object" torch._C._distributed_rpc.PyRRef*`
+valueU
+torch._C._distributed_rpc._T"
+builtins.object"builtins.object"builtins.object*
+	type_hint
+Any *œ
+is_owner)torch._C._distributed_rpc.PyRRef.is_owner"
+builtins.bool"builtins.bool*Ä
+self¹
+>torch._C._distributed_rpc.PyRRef[torch._C._distributed_rpc._T]U
+torch._C._distributed_rpc._T"
+builtins.object"builtins.object"builtins.object" torch._C._distributed_rpc.PyRRef*°
+confirmed_by_owner3torch._C._distributed_rpc.PyRRef.confirmed_by_owner"
+builtins.bool"builtins.bool*Ä
+self¹
+>torch._C._distributed_rpc.PyRRef[torch._C._distributed_rpc._T]U
+torch._C._distributed_rpc._T"
+builtins.object"builtins.object"builtins.object" torch._C._distributed_rpc.PyRRef*Ä
+owner&torch._C._distributed_rpc.PyRRef.owner"L
+$torch._C._distributed_rpc.WorkerInfo"$torch._C._distributed_rpc.WorkerInfo*Ä
+self¹
+>torch._C._distributed_rpc.PyRRef[torch._C._distributed_rpc._T]U
+torch._C._distributed_rpc._T"
+builtins.object"builtins.object"builtins.object" torch._C._distributed_rpc.PyRRef*ž
+
+owner_name+torch._C._distributed_rpc.PyRRef.owner_name"
+builtins.str"builtins.str*Ä
+self¹
+>torch._C._distributed_rpc.PyRRef[torch._C._distributed_rpc._T]U
+torch._C._distributed_rpc._T"
+builtins.object"builtins.object"builtins.object" torch._C._distributed_rpc.PyRRef*‚
+to_here(torch._C._distributed_rpc.PyRRef.to_here"U
+torch._C._distributed_rpc._T"
+builtins.object"builtins.object"builtins.object*Ä
+self¹
+>torch._C._distributed_rpc.PyRRef[torch._C._distributed_rpc._T]U
+torch._C._distributed_rpc._T"
+builtins.object"builtins.object"builtins.object" torch._C._distributed_rpc.PyRRef*/
+timeout 
+builtins.float"builtins.float *‹
+local_value,torch._C._distributed_rpc.PyRRef.local_value"
+Any*Ä
+self¹
+>torch._C._distributed_rpc.PyRRef[torch._C._distributed_rpc._T]U
+torch._C._distributed_rpc._T"
+builtins.object"builtins.object"builtins.object" torch._C._distributed_rpc.PyRRef*¶
+rpc_sync)torch._C._distributed_rpc.PyRRef.rpc_sync"
+Any*Ä
+self¹
+>torch._C._distributed_rpc.PyRRef[torch._C._distributed_rpc._T]U
+torch._C._distributed_rpc._T"
+builtins.object"builtins.object"builtins.object" torch._C._distributed_rpc.PyRRef*/
+timeout 
+builtins.float"builtins.float *¸
+	rpc_async*torch._C._distributed_rpc.PyRRef.rpc_async"
+Any*Ä
+self¹
+>torch._C._distributed_rpc.PyRRef[torch._C._distributed_rpc._T]U
+torch._C._distributed_rpc._T"
+builtins.object"builtins.object"builtins.object" torch._C._distributed_rpc.PyRRef*/
+timeout 
+builtins.float"builtins.float *²
+remote'torch._C._distributed_rpc.PyRRef.remote"
+Any*Ä
+self¹
+>torch._C._distributed_rpc.PyRRef[torch._C._distributed_rpc._T]U
+torch._C._distributed_rpc._T"
+builtins.object"builtins.object"builtins.object" torch._C._distributed_rpc.PyRRef*/
+timeout 
+builtins.float"builtins.float *°
+
+_serialize+torch._C._distributed_rpc.PyRRef._serialize".
+builtins.tuple[Any]
+Any"builtins.tuple*Ä
+self¹
+>torch._C._distributed_rpc.PyRRef[torch._C._distributed_rpc._T]U
+torch._C._distributed_rpc._T"
+builtins.object"builtins.object"builtins.object" torch._C._distributed_rpc.PyRRef*Û
+_deserialize-torch._C._distributed_rpc.PyRRef._deserialize"R
+%torch._C._distributed_rpc.PyRRef[Any]
+Any" torch._C._distributed_rpc.PyRRef*6
+tp.
+builtins.tuple[Any]
+Any"builtins.tuple0:staticmethodh*„
+	_get_type*torch._C._distributed_rpc.PyRRef._get_type"ƒ
+"Type[torch._C._distributed_rpc._T]U
+torch._C._distributed_rpc._T"
+builtins.object"builtins.object"builtins.object"type*Ä
+self¹
+>torch._C._distributed_rpc.PyRRef[torch._C._distributed_rpc._T]U
+torch._C._distributed_rpc._T"
+builtins.object"builtins.object"builtins.object" torch._C._distributed_rpc.PyRRef*œ
+_get_future,torch._C._distributed_rpc.PyRRef._get_future"—
+-torch._C.Future[torch._C._distributed_rpc._T]U
+torch._C._distributed_rpc._T"
+builtins.object"builtins.object"builtins.object"torch._C.Future*Ä
+self¹
+>torch._C._distributed_rpc.PyRRef[torch._C._distributed_rpc._T]U
+torch._C._distributed_rpc._T"
+builtins.object"builtins.object"builtins.object" torch._C._distributed_rpc.PyRRef*°
+_get_profiling_future6torch._C._distributed_rpc.PyRRef._get_profiling_future"—
+-torch._C.Future[torch._C._distributed_rpc._T]U
+torch._C._distributed_rpc._T"
+builtins.object"builtins.object"builtins.object"torch._C.Future*Ä
+self¹
+>torch._C._distributed_rpc.PyRRef[torch._C._distributed_rpc._T]U
+torch._C._distributed_rpc._T"
+builtins.object"builtins.object"builtins.object" torch._C._distributed_rpc.PyRRef*Ï
+_set_profiling_future6torch._C._distributed_rpc.PyRRef._set_profiling_future"
+Any*Ä
+self¹
+>torch._C._distributed_rpc.PyRRef[torch._C._distributed_rpc._T]U
+torch._C._distributed_rpc._T"
+builtins.object"builtins.object"builtins.object" torch._C._distributed_rpc.PyRRef*­
+profilingFuture—
+-torch._C.Future[torch._C._distributed_rpc._T]U
+torch._C._distributed_rpc._T"
+builtins.object"builtins.object"builtins.object"torch._C.FutureP”
+ _TensorPipeRpcBackendOptionsBase:torch._C._distributed_rpc._TensorPipeRpcBackendOptionsBase"+torch._C._distributed_rpc.RpcBackendOptions*Ð
+__init__Ctorch._C._distributed_rpc._TensorPipeRpcBackendOptionsBase.__init__"
+None*‚
+selfx
+:torch._C._distributed_rpc._TensorPipeRpcBackendOptionsBase":torch._C._distributed_rpc._TensorPipeRpcBackendOptionsBase*4
+num_worker_threads
+builtins.int"builtins.int*k
+_transportsZ
+Union[builtins.list[Any],None],
+builtins.list[Any]
+Any"builtins.list
+None*i
+	_channelsZ
+Union[builtins.list[Any],None],
+builtins.list[Any]
+Any"builtins.list
+None*3
+rpc_timeout 
+builtins.float"builtins.float */
+init_method
+builtins.str"builtins.str *—
+device_mapsƒ
+Jbuiltins.dict[builtins.str,builtins.dict[torch._C.device,torch._C.device]]
+builtins.str"builtins.str‡
+.builtins.dict[torch._C.device,torch._C.device]"
+torch._C.device"torch._C.device"
+torch._C.device"torch._C.device"builtins.dict"builtins.dict *b
+devicesS
+builtins.list[torch._C.device]"
+torch._C.device"torch._C.device"builtins.list *¬
+_set_device_mapJtorch._C._distributed_rpc._TensorPipeRpcBackendOptionsBase._set_device_map"
+Any*‚
+selfx
+:torch._C._distributed_rpc._TensorPipeRpcBackendOptionsBase":torch._C._distributed_rpc._TensorPipeRpcBackendOptionsBase*$
+to
+builtins.str"builtins.str*˜
+
+device_map‡
+.builtins.dict[torch._C.device,torch._C.device]"
+torch._C.device"torch._C.device"
+torch._C.device"torch._C.device"builtins.dictr
+num_worker_threadsMtorch._C._distributed_rpc._TensorPipeRpcBackendOptionsBase.num_worker_threads
+builtins.int"builtins.intrÛ
+device_mapsFtorch._C._distributed_rpc._TensorPipeRpcBackendOptionsBase.device_mapsƒ
+Jbuiltins.dict[builtins.str,builtins.dict[torch._C.device,torch._C.device]]
+builtins.str"builtins.str‡
+.builtins.dict[torch._C.device,torch._C.device]"
+torch._C.device"torch._C.device"
+torch._C.device"torch._C.device"builtins.dict"builtins.dictr¢
+devicesBtorch._C._distributed_rpc._TensorPipeRpcBackendOptionsBase.devicesS
+builtins.list[torch._C.device]"
+torch._C.device"torch._C.device"builtins.listä#
+TensorPipeAgent)torch._C._distributed_rpc.TensorPipeAgent""torch._C._distributed_rpc.RpcAgent*­
+__init__2torch._C._distributed_rpc.TensorPipeAgent.__init__"
+None*`
+selfV
+)torch._C._distributed_rpc.TensorPipeAgent")torch._C._distributed_rpc.TensorPipeAgent*O
+storeD
+ torch._C._distributed_c10d.Store" torch._C._distributed_c10d.Store*&
+name
+builtins.str"builtins.str*+
+	worker_id
+builtins.int"builtins.int*T
+
+world_sizeD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None*‚
+optsx
+:torch._C._distributed_rpc._TensorPipeRpcBackendOptionsBase":torch._C._distributed_rpc._TensorPipeRpcBackendOptionsBase*
+reverse_device_mapsƒ
+Jbuiltins.dict[builtins.str,builtins.dict[torch._C.device,torch._C.device]]
+builtins.str"builtins.str‡
+.builtins.dict[torch._C.device,torch._C.device]"
+torch._C.device"torch._C.device"
+torch._C.device"torch._C.device"builtins.dict"builtins.dict*`
+devicesS
+builtins.list[torch._C.device]"
+torch._C.device"torch._C.device"builtins.list*‚
+join.torch._C._distributed_rpc.TensorPipeAgent.join"
+Any*`
+selfV
+)torch._C._distributed_rpc.TensorPipeAgent")torch._C._distributed_rpc.TensorPipeAgent*.
+shutdown
+builtins.bool"builtins.bool */
+timeout 
+builtins.float"builtins.float *H
+shutdown2torch._C._distributed_rpc.TensorPipeAgent.shutdown*
+self*Å
+get_worker_infos:torch._C._distributed_rpc.TensorPipeAgent.get_worker_infos"’
+3builtins.list[torch._C._distributed_rpc.WorkerInfo]L
+$torch._C._distributed_rpc.WorkerInfo"$torch._C._distributed_rpc.WorkerInfo"builtins.list*`
+selfV
+)torch._C._distributed_rpc.TensorPipeAgent")torch._C._distributed_rpc.TensorPipeAgent*
+_get_device_map9torch._C._distributed_rpc.TensorPipeAgent._get_device_map"‡
+.builtins.dict[torch._C.device,torch._C.device]"
+torch._C.device"torch._C.device"
+torch._C.device"torch._C.device"builtins.dict*`
+selfV
+)torch._C._distributed_rpc.TensorPipeAgent")torch._C._distributed_rpc.TensorPipeAgent*U
+dstL
+$torch._C._distributed_rpc.WorkerInfo"$torch._C._distributed_rpc.WorkerInfo*Ù
+_update_group_membershipBtorch._C._distributed_rpc.TensorPipeAgent._update_group_membership"
+Any*`
+selfV
+)torch._C._distributed_rpc.TensorPipeAgent")torch._C._distributed_rpc.TensorPipeAgent*]
+worker_infoL
+$torch._C._distributed_rpc.WorkerInfo"$torch._C._distributed_rpc.WorkerInfo*c
+
+my_devicesS
+builtins.list[torch._C.device]"
+torch._C.device"torch._C.device"builtins.list*œ
+reverse_device_mapƒ
+Jbuiltins.dict[builtins.str,builtins.dict[torch._C.device,torch._C.device]]
+builtins.str"builtins.str‡
+.builtins.dict[torch._C.device,torch._C.device]"
+torch._C.device"torch._C.device"
+torch._C.device"torch._C.device"builtins.dict"builtins.dict*+
+is_join
+builtins.bool"builtins.bool*²
+_get_backend_options>torch._C._distributed_rpc.TensorPipeAgent._get_backend_options"x
+:torch._C._distributed_rpc._TensorPipeRpcBackendOptionsBase":torch._C._distributed_rpc._TensorPipeRpcBackendOptionsBase*`
+selfV
+)torch._C._distributed_rpc.TensorPipeAgent")torch._C._distributed_rpc.TensorPipeAgent*Ü
+is_static_group9torch._C._distributed_rpc.TensorPipeAgent.is_static_group"
+builtins.bool"builtins.bool*`
+selfV
+)torch._C._distributed_rpc.TensorPipeAgent")torch._C._distributed_rpc.TensorPipeAgent0:property`*î
+store/torch._C._distributed_rpc.TensorPipeAgent.store"D
+ torch._C._distributed_c10d.Store" torch._C._distributed_c10d.Store*`
+selfV
+)torch._C._distributed_rpc.TensorPipeAgent")torch._C._distributed_rpc.TensorPipeAgent0:property`2Ç
+get_worker_info9torch._C._distributed_rpc.TensorPipeAgent.get_worker_infoŠ
+get_worker_info9torch._C._distributed_rpc.TensorPipeAgent.get_worker_info"L
+$torch._C._distributed_rpc.WorkerInfo"$torch._C._distributed_rpc.WorkerInfo*`
+selfV
+)torch._C._distributed_rpc.TensorPipeAgent")torch._C._distributed_rpc.TensorPipeAgent0:overloadX¸
+get_worker_info9torch._C._distributed_rpc.TensorPipeAgent.get_worker_info"L
+$torch._C._distributed_rpc.WorkerInfo"$torch._C._distributed_rpc.WorkerInfo*`
+selfV
+)torch._C._distributed_rpc.TensorPipeAgent")torch._C._distributed_rpc.TensorPipeAgent*,
+
+workerName
+builtins.str"builtins.str0:overloadX°
+get_worker_info9torch._C._distributed_rpc.TensorPipeAgent.get_worker_info"L
+$torch._C._distributed_rpc.WorkerInfo"$torch._C._distributed_rpc.WorkerInfo*`
+selfV
+)torch._C._distributed_rpc.TensorPipeAgent")torch._C._distributed_rpc.TensorPipeAgent*$
+id
+builtins.int"builtins.int0:overloadX„
+RemoteProfilerManager/torch._C._distributed_rpc.RemoteProfilerManager"builtins.object*¨
+set_current_profiling_keyItorch._C._distributed_rpc.RemoteProfilerManager.set_current_profiling_key"
+Any*%
+key
+builtins.str"builtins.str0:staticmethodhp
+_is_current_rpc_agent_set3torch._C._distributed_rpc._is_current_rpc_agent_set"
+builtins.bool"builtins.bool”
+_get_current_rpc_agent0torch._C._distributed_rpc._get_current_rpc_agent"H
+"torch._C._distributed_rpc.RpcAgent""torch._C._distributed_rpc.RpcAgent¬
+_set_and_start_rpc_agent2torch._C._distributed_rpc._set_and_start_rpc_agent"
+Any*S
+agentH
+"torch._C._distributed_rpc.RpcAgent""torch._C._distributed_rpc.RpcAgentN
+_reset_current_rpc_agent2torch._C._distributed_rpc._reset_current_rpc_agent²
+)_delete_all_user_and_unforked_owner_rrefsCtorch._C._distributed_rpc._delete_all_user_and_unforked_owner_rrefs"
+Any*7
+timeout(
+datetime.timedelta"datetime.timedelta …
+_destroy_rref_context/torch._C._distributed_rpc._destroy_rref_context"
+Any*2
+ignoreRRefLeak
+builtins.bool"builtins.boolÍ
+_rref_context_get_debug_info6torch._C._distributed_rpc._rref_context_get_debug_info"u
+(builtins.dict[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.dictT
+_cleanup_python_rpc_handler5torch._C._distributed_rpc._cleanup_python_rpc_handler¯
+_invoke_rpc_builtin-torch._C._distributed_rpc._invoke_rpc_builtin"
+Any*U
+dstL
+$torch._C._distributed_rpc.WorkerInfo"$torch._C._distributed_rpc.WorkerInfo*(
+opName
+builtins.str"builtins.str*7
+rpcTimeoutSeconds 
+builtins.float"builtins.float*
+args
+Any*
+kwargs
+Any¾
+_invoke_rpc_python_udf0torch._C._distributed_rpc._invoke_rpc_python_udf"
+Any*U
+dstL
+$torch._C._distributed_rpc.WorkerInfo"$torch._C._distributed_rpc.WorkerInfo*2
+pickledPythonUDF
+builtins.str"builtins.str*o
+tensorsb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*7
+rpcTimeoutSeconds 
+builtins.float"builtins.float*4
+isAsyncExecution
+builtins.bool"builtins.bool³
+_invoke_rpc_torchscript1torch._C._distributed_rpc._invoke_rpc_torchscript"
+Any*/
+dstWorkerName
+builtins.str"builtins.str*2
+qualifiedNameStr
+builtins.str"builtins.str*=
+	argsTuple.
+builtins.tuple[Any]
+Any"builtins.tuple*I
+
+kwargsDict9
+builtins.dict[Any,Any]
+Any
+Any"builtins.dict*7
+rpcTimeoutSeconds 
+builtins.float"builtins.float*4
+isAsyncExecution
+builtins.bool"builtins.boolµ
+_invoke_remote_builtin0torch._C._distributed_rpc._invoke_remote_builtin"
+Any*U
+dstL
+$torch._C._distributed_rpc.WorkerInfo"$torch._C._distributed_rpc.WorkerInfo*(
+opName
+builtins.str"builtins.str*7
+rpcTimeoutSeconds 
+builtins.float"builtins.float*
+args
+Any*
+kwargs
+AnyÄ
+_invoke_remote_python_udf3torch._C._distributed_rpc._invoke_remote_python_udf"
+Any*U
+dstL
+$torch._C._distributed_rpc.WorkerInfo"$torch._C._distributed_rpc.WorkerInfo*2
+pickledPythonUDF
+builtins.str"builtins.str*o
+tensorsb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*7
+rpcTimeoutSeconds 
+builtins.float"builtins.float*4
+isAsyncExecution
+builtins.bool"builtins.bool‡
+_invoke_remote_torchscript4torch._C._distributed_rpc._invoke_remote_torchscript"
+Any*_
+dstWorkerNameL
+$torch._C._distributed_rpc.WorkerInfo"$torch._C._distributed_rpc.WorkerInfo*2
+qualifiedNameStr
+builtins.str"builtins.str*7
+rpcTimeoutSeconds 
+builtins.float"builtins.float*4
+isAsyncExecution
+builtins.bool"builtins.bool*
+args
+Any*
+kwargs
+Any^
+get_rpc_timeout)torch._C._distributed_rpc.get_rpc_timeout" 
+builtins.float"builtins.floaty
+enable_gil_profiling.torch._C._distributed_rpc.enable_gil_profiling"
+Any*(
+flag
+builtins.bool"builtins.bool€
+_set_rpc_timeout*torch._C._distributed_rpc._set_rpc_timeout"
+Any*7
+rpcTimeoutSeconds 
+builtins.float"builtins.floatË
+&_enable_server_process_global_profiler@torch._C._distributed_rpc._enable_server_process_global_profiler"
+Any*V
+
+new_configF
+!torch._C._profiler.ProfilerConfig"!torch._C._profiler.ProfilerConfig¨
+'_disable_server_process_global_profilerAtorch._C._distributed_rpc._disable_server_process_global_profiler"¹
+Mbuiltins.list[builtins.list[builtins.list[torch._C._autograd.ProfilerEvent]]]Ø
+>builtins.list[builtins.list[torch._C._autograd.ProfilerEvent]]†
+/builtins.list[torch._C._autograd.ProfilerEvent]D
+ torch._C._autograd.ProfilerEvent" torch._C._autograd.ProfilerEvent"builtins.list"builtins.list"builtins.list„
+_set_profiler_node_id/torch._C._distributed_rpc._set_profiler_node_id"
+Any*1
+default_node_id
+builtins.int"builtins.intL
+_enable_jit_rref_pickle1torch._C._distributed_rpc._enable_jit_rref_pickleN
+_disable_jit_rref_pickle2torch._C._distributed_rpc._disable_jit_rref_pickle*•
+__annotations__)torch._C._distributed_rpc.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*d
+_DEFAULT_INIT_METHOD.torch._C._distributed_rpc._DEFAULT_INIT_METHOD
+builtins.str"builtins.str*r
+_DEFAULT_NUM_WORKER_THREADS5torch._C._distributed_rpc._DEFAULT_NUM_WORKER_THREADS
+builtins.int"builtins.int*d
+_UNSET_RPC_TIMEOUT,torch._C._distributed_rpc._UNSET_RPC_TIMEOUT 
+builtins.float"builtins.float*p
+_DEFAULT_RPC_TIMEOUT_SEC2torch._C._distributed_rpc._DEFAULT_RPC_TIMEOUT_SEC 
+builtins.float"builtins.float

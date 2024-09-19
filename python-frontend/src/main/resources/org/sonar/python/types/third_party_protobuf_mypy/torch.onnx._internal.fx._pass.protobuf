@@ -1,0 +1,149 @@
+
+torch.onnx._internal.fx._passÓ
+PackageInfo)torch.onnx._internal.fx._pass.PackageInfo"builtins.object*ÿ
+to_onnx_domain_string?torch.onnx._internal.fx._pass.PackageInfo.to_onnx_domain_string"
+builtins.str"builtins.str*`
+selfV
+)torch.onnx._internal.fx._pass.PackageInfo")torch.onnx._internal.fx._pass.PackageInfo*”
+from_python_class;torch.onnx._internal.fx._pass.PackageInfo.from_python_class"V
+)torch.onnx._internal.fx._pass.PackageInfo")torch.onnx._internal.fx._pass.PackageInfo*õ
+clsë
+/Type[torch.onnx._internal.fx._pass.PackageInfo]V
+)torch.onnx._internal.fx._pass.PackageInfo")torch.onnx._internal.fx._pass.PackageInfo"type*z
+python_class_namec
+!Union[builtins.type,builtins.str]
+builtins.type"builtins.type
+builtins.str"builtins.str0:classmethodp*Ñ
+__init__2torch.onnx._internal.fx._pass.PackageInfo.__init__"
+None*`
+selfV
+)torch.onnx._internal.fx._pass.PackageInfo")torch.onnx._internal.fx._pass.PackageInfo*.
+package_name
+builtins.str"builtins.str*Q
+versionD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*U
+commit_hashD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None8rd
+package_name6torch.onnx._internal.fx._pass.PackageInfo.package_name
+builtins.str"builtins.strrÇ
+version1torch.onnx._internal.fx._pass.PackageInfo.versionD
+Union[builtins.str,None]
+builtins.str"builtins.str
+Nonerä
+commit_hash5torch.onnx._internal.fx._pass.PackageInfo.commit_hashD
+Union[builtins.str,None]
+builtins.str"builtins.str
+Noner
+__dataclass_fields__>torch.onnx._internal.fx._pass.PackageInfo.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictÆ
+GraphModuleOnnxMeta1torch.onnx._internal.fx._pass.GraphModuleOnnxMeta"builtins.object*¨
+__init__:torch.onnx._internal.fx._pass.GraphModuleOnnxMeta.__init__"
+None*p
+selff
+1torch.onnx._internal.fx._pass.GraphModuleOnnxMeta"1torch.onnx._internal.fx._pass.GraphModuleOnnxMeta*h
+package_infoV
+)torch.onnx._internal.fx._pass.PackageInfo")torch.onnx._internal.fx._pass.PackageInfo8r¶
+package_info>torch.onnx._internal.fx._pass.GraphModuleOnnxMeta.package_infoV
+)torch.onnx._internal.fx._pass.PackageInfo")torch.onnx._internal.fx._pass.PackageInfor¯
+__dataclass_fields__Ftorch.onnx._internal.fx._pass.GraphModuleOnnxMeta.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictí
+	Transform'torch.onnx._internal.fx._pass.Transform"abc.ABC*Å
+__init__0torch.onnx._internal.fx._pass.Transform.__init__"
+None*\
+selfR
+'torch.onnx._internal.fx._pass.Transform"'torch.onnx._internal.fx._pass.Transform*Ü
+diagnostic_contextn
+5torch.onnx._internal.fx.diagnostics.DiagnosticContext"5torch.onnx._internal.fx.diagnostics.DiagnosticContext*R
+moduleF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*”
+_detect_fake_mode9torch.onnx._internal.fx._pass.Transform._detect_fake_mode"§
+8Union[torch._subclasses.fake_tensor.FakeTensorMode,None]\
+,torch._subclasses.fake_tensor.FakeTensorMode",torch._subclasses.fake_tensor.FakeTensorMode
+None*\
+selfR
+'torch.onnx._internal.fx._pass.Transform"'torch.onnx._internal.fx._pass.Transform*®
+_maybe_fakefy_args:torch.onnx._internal.fx._pass.Transform._maybe_fakefy_args".
+builtins.tuple[Any]
+Any"builtins.tuple*\
+selfR
+'torch.onnx._internal.fx._pass.Transform"'torch.onnx._internal.fx._pass.Transform*¥
+	fake_mode§
+8Union[torch._subclasses.fake_tensor.FakeTensorMode,None]\
+,torch._subclasses.fake_tensor.FakeTensorMode",torch._subclasses.fake_tensor.FakeTensorMode
+None*
+args
+Any*ö
+_run,torch.onnx._internal.fx._pass.Transform._run"F
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*\
+selfR
+'torch.onnx._internal.fx._pass.Transform"'torch.onnx._internal.fx._pass.Transform*
+args
+Any*
+kwargs
+Any0:abc.abstractmethod@*Ç
+run+torch.onnx._internal.fx._pass.Transform.run"F
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*\
+selfR
+'torch.onnx._internal.fx._pass.Transform"'torch.onnx._internal.fx._pass.Transform*
+args
+Any*
+kwargs
+Any0r¿
+diagnostic_context:torch.onnx._internal.fx._pass.Transform.diagnostic_contextn
+5torch.onnx._internal.fx.diagnostics.DiagnosticContext"5torch.onnx._internal.fx.diagnostics.DiagnosticContextrÄ
+module.torch.onnx._internal.fx._pass.Transform.moduleF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModulerÂ
+	fake_mode1torch.onnx._internal.fx._pass.Transform.fake_mode§
+8Union[torch._subclasses.fake_tensor.FakeTensorMode,None]\
+,torch._subclasses.fake_tensor.FakeTensorMode",torch._subclasses.fake_tensor.FakeTensorMode
+NoneG
+AnalysisResult,torch.onnx._internal.fx._pass.AnalysisResult"abc.ABC∆
+Analysis&torch.onnx._internal.fx._pass.Analysis"abc.ABC*≈
+__init__/torch.onnx._internal.fx._pass.Analysis.__init__"
+None*Z
+selfP
+&torch.onnx._internal.fx._pass.Analysis"&torch.onnx._internal.fx._pass.Analysis*Ü
+diagnostic_contextn
+5torch.onnx._internal.fx.diagnostics.DiagnosticContext"5torch.onnx._internal.fx.diagnostics.DiagnosticContext*R
+moduleF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*Æ
+onnxfunction_dispatcherê
+Ftorch.onnx._internal.fx.onnxfunction_dispatcher.OnnxFunctionDispatcher"Ftorch.onnx._internal.fx.onnxfunction_dispatcher.OnnxFunctionDispatcher0:_beartype.beartype*é
+analyze.torch.onnx._internal.fx._pass.Analysis.analyze"\
+,torch.onnx._internal.fx._pass.AnalysisResult",torch.onnx._internal.fx._pass.AnalysisResult*Z
+selfP
+&torch.onnx._internal.fx._pass.Analysis"&torch.onnx._internal.fx._pass.Analysis*Ä
+diagnostic_levelj
+3torch.onnx._internal.diagnostics.infra._infra.Level"3torch.onnx._internal.diagnostics.infra._infra.Level0:abc.abstractmethod@rø
+diagnostic_context9torch.onnx._internal.fx._pass.Analysis.diagnostic_contextn
+5torch.onnx._internal.fx.diagnostics.DiagnosticContext"5torch.onnx._internal.fx.diagnostics.DiagnosticContextr
+module-torch.onnx._internal.fx._pass.Analysis.moduleF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModulerÏ
+onnxfunction_dispatcher>torch.onnx._internal.fx._pass.Analysis.onnxfunction_dispatcherê
+Ftorch.onnx._internal.fx.onnxfunction_dispatcher.OnnxFunctionDispatcher"Ftorch.onnx._internal.fx.onnxfunction_dispatcher.OnnxFunctionDispatcher§
+_unified_diff+torch.onnx._internal.fx._pass._unified_diff"
+builtins.str"builtins.str*#
+a
+builtins.str"builtins.str*#
+b
+builtins.str"builtins.strÕ
+maybe_fx_graph_tabular4torch.onnx._internal.fx._pass.maybe_fx_graph_tabular"D
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*7
+graph,
+torch.fx.graph.Graph"torch.fx.graph.Graph*ô
+__annotations__-torch.onnx._internal.fx._pass.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict

@@ -1,0 +1,97 @@
+
+.torch.distributed._functional_collectives_impl
+
+_broadcast9torch.distributed._functional_collectives_impl._broadcast*	
+input*
+src*
+tag*	
+ranks*
+
+group_size‡
+_all_reduce:torch.distributed._functional_collectives_impl._all_reduce*	
+input*
+	reduce_op*
+tag*	
+ranks*
+
+group_sizeœ
+_all_reduce_coalescedDtorch.distributed._functional_collectives_impl._all_reduce_coalesced*
+
+inputs*
+	reduce_op*
+tag*	
+ranks*
+
+group_size
+_all_gather_into_tensorFtorch.distributed._functional_collectives_impl._all_gather_into_tensor*	
+input*
+tag*	
+ranks*
+
+group_size¤
+!_all_gather_into_tensor_coalescedPtorch.distributed._functional_collectives_impl._all_gather_into_tensor_coalesced*	
+input*
+tag*	
+ranks*
+
+group_sizeú
+_reduce_scatter_tensorEtorch.distributed._functional_collectives_impl._reduce_scatter_tensor"
+Any*7
+input,
+torch._tensor.Tensor"torch._tensor.Tensor*+
+	reduce_op
+builtins.str"builtins.str*%
+tag
+builtins.str"builtins.str*U
+ranksJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*,
+
+group_size
+builtins.int"builtins.intÅ
+ _reduce_scatter_tensor_coalescedOtorch.distributed._functional_collectives_impl._reduce_scatter_tensor_coalesced"
+Any*n
+inputsb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*+
+	reduce_op
+builtins.str"builtins.str*%
+tag
+builtins.str"builtins.str*U
+ranksJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*,
+
+group_size
+builtins.int"builtins.intþ
+_all_to_all_singleAtorch.distributed._functional_collectives_impl._all_to_all_single"
+Any*7
+input,
+torch._tensor.Tensor"torch._tensor.Tensor*š
+output_split_sizes
+'Union[builtins.list[builtins.int],None]J
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list
+None*™
+input_split_sizes
+'Union[builtins.list[builtins.int],None]J
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list
+None*%
+tag
+builtins.str"builtins.str*U
+ranksJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*,
+
+group_size
+builtins.int"builtins.int³
+_wait_tensor;torch.distributed._functional_collectives_impl._wait_tensor",
+torch._tensor.Tensor"torch._tensor.Tensor*8
+tensor,
+torch._tensor.Tensor"torch._tensor.Tensor*ª
+__annotations__>torch.distributed._functional_collectives_impl.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*,
+c10d"torch.distributed.distributed_c10d 

@@ -1,0 +1,38 @@
+
+torch.nn.parallel.commS
+	broadcast torch.nn.parallel.comm.broadcast*
+
+tensor*
+devices *	
+out n
+broadcast_coalesced*torch.nn.parallel.comm.broadcast_coalesced*
+tensors*
+devices*
+buffer_size N
+
+reduce_add!torch.nn.parallel.comm.reduce_add*
+
+inputs*
+destination u
+reduce_add_coalesced+torch.nn.parallel.comm.reduce_add_coalesced*
+
+inputs*
+destination *
+buffer_size |
+scattertorch.nn.parallel.comm.scatter*
+
+tensor*
+devices *
+chunk_sizes *	
+dim *
+streams *	
+out ]
+gathertorch.nn.parallel.comm.gather*
+tensors*	
+dim *
+destination *	
+out *’
+__annotations__&torch.nn.parallel.comm.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict

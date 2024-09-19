@@ -1,0 +1,152 @@
+
+#torch._inductor.fx_passes.post_gradˆ
+ConstructorMoverPass8torch._inductor.fx_passes.post_grad.ConstructorMoverPass"builtins.object*∂
+__init__Atorch._inductor.fx_passes.post_grad.ConstructorMoverPass.__init__"
+None*~
+selft
+8torch._inductor.fx_passes.post_grad.ConstructorMoverPass"8torch._inductor.fx_passes.post_grad.ConstructorMoverPass*(
+target
+builtins.str"builtins.str*3
+allow_outputs
+builtins.bool"builtins.bool *±
+allow_cpu_deviceItorch._inductor.fx_passes.post_grad.ConstructorMoverPass.allow_cpu_device"
+builtins.bool"builtins.bool*~
+selft
+8torch._inductor.fx_passes.post_grad.ConstructorMoverPass"8torch._inductor.fx_passes.post_grad.ConstructorMoverPass*2
+node(
+torch.fx.node.Node"torch.fx.node.Node*Ø
+cannot_be_movedHtorch._inductor.fx_passes.post_grad.ConstructorMoverPass.cannot_be_moved"
+builtins.bool"builtins.bool*~
+selft
+8torch._inductor.fx_passes.post_grad.ConstructorMoverPass"8torch._inductor.fx_passes.post_grad.ConstructorMoverPass*2
+node(
+torch.fx.node.Node"torch.fx.node.Node*ﬁ
+get_node_deviceHtorch._inductor.fx_passes.post_grad.ConstructorMoverPass.get_node_device"M
+Union[torch._C.device,None]"
+torch._C.device"torch._C.device
+None*~
+selft
+8torch._inductor.fx_passes.post_grad.ConstructorMoverPass"8torch._inductor.fx_passes.post_grad.ConstructorMoverPass*2
+node(
+torch.fx.node.Node"torch.fx.node.Node*¶
+get_cpu_indeg_countLtorch._inductor.fx_passes.post_grad.ConstructorMoverPass.get_cpu_indeg_count"á
+.builtins.dict[torch.fx.node.Node,builtins.int](
+torch.fx.node.Node"torch.fx.node.Node
+builtins.int"builtins.int"builtins.dict*~
+selft
+8torch._inductor.fx_passes.post_grad.ConstructorMoverPass"8torch._inductor.fx_passes.post_grad.ConstructorMoverPass*7
+graph,
+torch.fx.graph.Graph"torch.fx.graph.Graph*ê
+__call__Atorch._inductor.fx_passes.post_grad.ConstructorMoverPass.__call__"
+None*~
+selft
+8torch._inductor.fx_passes.post_grad.ConstructorMoverPass"8torch._inductor.fx_passes.post_grad.ConstructorMoverPass*7
+graph,
+torch.fx.graph.Graph"torch.fx.graph.Graph*Ù
+find_movable_constructorsRtorch._inductor.fx_passes.post_grad.ConstructorMoverPass.find_movable_constructors"Z
+ builtins.set[torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node"builtins.set*~
+selft
+8torch._inductor.fx_passes.post_grad.ConstructorMoverPass"8torch._inductor.fx_passes.post_grad.ConstructorMoverPass*7
+graph,
+torch.fx.graph.Graph"torch.fx.graph.Graph*n
+constructors\
+!builtins.list[torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node"builtins.listrg
+target?torch._inductor.fx_passes.post_grad.ConstructorMoverPass.target
+builtins.str"builtins.strrw
+allow_outputsFtorch._inductor.fx_passes.post_grad.ConstructorMoverPass.allow_outputs
+builtins.bool"builtins.bool”
+post_grad_passes4torch._inductor.fx_passes.post_grad.post_grad_passes"
+Any*N
+gmF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*0
+is_inference
+builtins.bool"builtins.boolí
+reorder_for_locality8torch._inductor.fx_passes.post_grad.reorder_for_locality"
+Any*7
+graph,
+torch.fx.graph.Graph"torch.fx.graph.Graphç
+register_lowering_pattern=torch._inductor.fx_passes.post_grad.register_lowering_pattern*
+pattern*
+extra_check *
+pass_number ≤
+is_valid_mm_plus_mm7torch._inductor.fx_passes.post_grad.is_valid_mm_plus_mm"
+Any*Y
+matchN
+%torch._inductor.pattern_matcher.Match"%torch._inductor.pattern_matcher.Matche
+cuda_and_enabled_mixed_mm=torch._inductor.fx_passes.post_grad.cuda_and_enabled_mixed_mm*	
+match
+&cuda_and_enabled_mixed_mm_and_not_int8Jtorch._inductor.fx_passes.post_grad.cuda_and_enabled_mixed_mm_and_not_int8*	
+matchL
+shape_of_mm/torch._inductor.fx_passes.post_grad.shape_of_mm*
+a*
+bv
+cat_tuned_op0torch._inductor.fx_passes.post_grad.cat_tuned_op*	
+match*
+
+inputs*
+dim*
+op*
+shape_ofi
+is_valid_splitwithsizes_cat?torch._inductor.fx_passes.post_grad.is_valid_splitwithsizes_cat*	
+match≠
+	same_meta-torch._inductor.fx_passes.post_grad.same_meta"
+Any*3
+node1(
+torch.fx.node.Node"torch.fx.node.Node*3
+node2(
+torch.fx.node.Node"torch.fx.node.Nodel
+register_noop_decomp8torch._inductor.fx_passes.post_grad.register_noop_decomp*
+targets*
+nop_arg à
+remove_noop_ops3torch._inductor.fx_passes.post_grad.remove_noop_ops"
+Any*7
+graph,
+torch.fx.graph.Graph"torch.fx.graph.Graphm
+decompose_auto_functionalizedAtorch._inductor.fx_passes.post_grad.decompose_auto_functionalized*	
+graphi
+is_valid_cat_splitwithsizes?torch._inductor.fx_passes.post_grad.is_valid_cat_splitwithsizes*	
+matchN
+view_to_reshape3torch._inductor.fx_passes.post_grad.view_to_reshape*
+gmi
+should_prefer_unfused_addmm?torch._inductor.fx_passes.post_grad.should_prefer_unfused_addmm*	
+match]
+is_valid_addmm_fusion9torch._inductor.fx_passes.post_grad.is_valid_addmm_fusion*	
+matchç
+-check_shape_cuda_and_fused_int_mm_mul_enabledQtorch._inductor.fx_passes.post_grad.check_shape_cuda_and_fused_int_mm_mul_enabled*	
+matchù
+move_constructors_to_cuda=torch._inductor.fx_passes.post_grad.move_constructors_to_cuda"
+None*7
+graph,
+torch.fx.graph.Graph"torch.fx.graph.Graph*ü
+__annotations__3torch._inductor.fx_passes.post_grad.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*
+inductortorch._inductor *
+pytreetorch.utils._pytree *¸
+L"torch._inductor.lowering.lowerings“
+Dbuiltins.dict[torch._ops.OpOverload,CallableType[builtins.function]].
+torch._ops.OpOverload"torch._ops.OpOverloadK
+CallableType[builtins.function]&
+builtins.function"builtins.function"builtins.dict*º
+micro_pipeline_tp_patterns4torch._inductor.fx_passes.micro_pipeline_tp.patternsh
+2torch._inductor.pattern_matcher.PatternMatcherPass"2torch._inductor.pattern_matcher.PatternMatcherPass*9
+Expr(torch._inductor.fx_passes.post_grad.Expr
+Any*P
+log'torch._inductor.fx_passes.post_grad.log 
+logging.Logger"logging.Logger*9
+aten(torch._inductor.fx_passes.post_grad.aten
+Any*;
+prims)torch._inductor.fx_passes.post_grad.prims
+Any*Å
+pass_patterns1torch._inductor.fx_passes.post_grad.pass_patternsº
+Abuiltins.list[torch._inductor.pattern_matcher.PatternMatcherPass]h
+2torch._inductor.pattern_matcher.PatternMatcherPass"2torch._inductor.pattern_matcher.PatternMatcherPass"builtins.list*í
+_cat_1*torch._inductor.fx_passes.post_grad._cat_1\
+,torch._inductor.pattern_matcher.CallFunction",torch._inductor.pattern_matcher.CallFunction*}
+noop_registry1torch._inductor.fx_passes.post_grad.noop_registry9
+builtins.dict[Any,Any]
+Any
+Any"builtins.dict

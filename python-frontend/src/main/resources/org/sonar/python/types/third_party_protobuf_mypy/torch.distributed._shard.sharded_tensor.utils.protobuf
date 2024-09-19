@@ -1,0 +1,53 @@
+
+-torch.distributed._shard.sharded_tensor.utilsè
+!_parse_and_validate_remote_deviceOtorch.distributed._shard.sharded_tensor.utils._parse_and_validate_remote_device*
+pg*
+remote_deviceÔ
+"_validate_output_tensor_for_gatherPtorch.distributed._shard.sharded_tensor.utils._validate_output_tensor_for_gather"
+None*)
+my_rank
+builtins.int"builtins.int**
+dst_rank
+builtins.int"builtins.int*(
+size
+torch._C.Size"torch._C.Size*l
+
+dst_tensor\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+Noneç
+_flatten_tensor_sizeBtorch.distributed._shard.sharded_tensor.utils._flatten_tensor_size"
+torch._C.Size"torch._C.Size*
+size
+Anyö
+_raise_if_mismatch@torch.distributed._shard.sharded_tensor.utils._raise_if_mismatch*
+expected*
+
+actual*
+	prop_name*	
+ranks*
+is_local ó
+ build_metadata_from_local_shardsNtorch.distributed._shard.sharded_tensor.utils.build_metadata_from_local_shards"ê
+Ftorch.distributed._shard.sharded_tensor.metadata.ShardedTensorMetadata"Ftorch.distributed._shard.sharded_tensor.metadata.ShardedTensorMetadata*“
+local_shardsø
+Bbuiltins.list[torch.distributed._shard.sharded_tensor.shard.Shard]j
+3torch.distributed._shard.sharded_tensor.shard.Shard"3torch.distributed._shard.sharded_tensor.shard.Shard"builtins.list*/
+global_size
+torch._C.Size"torch._C.Size*.
+current_rank
+builtins.int"builtins.int*Z
+pgR
+'torch._C._distributed_c10d.ProcessGroup"'torch._C._distributed_c10d.ProcessGroupÌ
+build_global_metadataCtorch.distributed._shard.sharded_tensor.utils.build_global_metadata"
+Any*Ö
+gathered_metadatasÏ
+ctyping.Sequence[Union[torch.distributed._shard.sharded_tensor.metadata.ShardedTensorMetadata,None]]Û
+RUnion[torch.distributed._shard.sharded_tensor.metadata.ShardedTensorMetadata,None]ê
+Ftorch.distributed._shard.sharded_tensor.metadata.ShardedTensorMetadata"Ftorch.distributed._shard.sharded_tensor.metadata.ShardedTensorMetadata
+None"typing.Sequence*©
+__annotations__=torch.distributed._shard.sharded_tensor.utils.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*
+collectionscollections *,
+c10d"torch.distributed.distributed_c10d 

@@ -1,0 +1,549 @@
+
+torch._decomp.decompositions∑
+	Reduction&torch._decomp.decompositions.Reduction"	enum.EnumHrQ
+NONE+torch._decomp.decompositions.Reduction.NONE
+builtins.int"builtins.intrQ
+MEAN+torch._decomp.decompositions.Reduction.MEAN
+builtins.int"builtins.intrO
+SUM*torch._decomp.decompositions.Reduction.SUM
+builtins.int"builtins.intÃ
+
+type_casts'torch._decomp.decompositions.type_casts"
+Any*R
+fK
+CallableType[builtins.function]&
+builtins.function"builtins.function*~
+type_promotionj
+3torch._prims_common.ELEMENTWISE_TYPE_PROMOTION_KIND"3torch._prims_common.ELEMENTWISE_TYPE_PROMOTION_KIND*8
+compute_dtype_only
+builtins.bool"builtins.bool Õ
+_unsqueeze_to_dim.torch._decomp.decompositions._unsqueeze_to_dim",
+torch._tensor.Tensor"torch._tensor.Tensor*3
+x,
+torch._tensor.Tensor"torch._tensor.Tensor*%
+dim
+builtins.int"builtins.int∑
+apply_loss_reduction1torch._decomp.decompositions.apply_loss_reduction"
+Any*6
+loss,
+torch._tensor.Tensor"torch._tensor.Tensor*+
+	reduction
+builtins.int"builtins.intq
+to_real_dtype*torch._decomp.decompositions.to_real_dtype"
+Any*+
+dtype 
+torch._C.dtype"torch._C.dtype´
+_nll_loss_backward/torch._decomp.decompositions._nll_loss_backward",
+torch._tensor.Tensor"torch._tensor.Tensor*=
+grad_output,
+torch._tensor.Tensor"torch._tensor.Tensor*6
+self,
+torch._tensor.Tensor"torch._tensor.Tensor*8
+target,
+torch._tensor.Tensor"torch._tensor.Tensor*h
+weight\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None*+
+	reduction
+builtins.int"builtins.int*.
+ignore_index
+builtins.int"builtins.int*>
+total_weight,
+torch._tensor.Tensor"torch._tensor.Tensorå
+_cast_grad_to_input_dtype6torch._decomp.decompositions._cast_grad_to_input_dtype"
+Any*=
+grad_output,
+torch._tensor.Tensor"torch._tensor.Tensor*<
+
+grad_input,
+torch._tensor.Tensor"torch._tensor.Tensor*1
+input_dtype 
+torch._C.dtype"torch._C.dtypeµ
+ _im2col_col2im_indices_along_dim=torch._decomp.decompositions._im2col_col2im_indices_along_dim*
+input_d*
+kernel_d*
+
+dilation_d*
+	padding_d*
+stride_d*
+
+deviceÖ
+prod!torch._decomp.decompositions.prod"
+Any*Q
+xJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.listﬂ
+
+_pad_chunk'torch._decomp.decompositions._pad_chunk"b
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*o
+tensorsb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*%
+dim
+builtins.int"builtins.int*,
+
+num_chunks
+builtins.int"builtins.intπ
+have_same_ndims,torch._decomp.decompositions.have_same_ndims"
+Any*o
+tensorsb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.listÙ
+leading_dimension_matches6torch._decomp.decompositions.leading_dimension_matches"
+Any*o
+tensorsb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*%
+dim
+builtins.int"builtins.int®
+_preprocess_chunk_cat_inputs9torch._decomp.decompositions._preprocess_chunk_cat_inputs"
+Any*o
+tensorsb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*%
+dim
+builtins.int"builtins.int*,
+
+num_chunks
+builtins.int"builtins.inté
+_maybe_cast(torch._decomp.decompositions._maybe_cast"\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None*c
+x\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None*
+dtype
+Any…	
+native_batch_norm_helper5torch._decomp.decompositions.native_batch_norm_helper"“
+áTuple[torch._tensor.Tensor,torch._tensor.Tensor,torch._tensor.Tensor,Union[torch._tensor.Tensor,None],Union[torch._tensor.Tensor,None]],
+torch._tensor.Tensor"torch._tensor.Tensor,
+torch._tensor.Tensor"torch._tensor.Tensor,
+torch._tensor.Tensor"torch._tensor.Tensor\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None*7
+input,
+torch._tensor.Tensor"torch._tensor.Tensor*h
+weight\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None*f
+bias\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None*n
+running_mean\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None*m
+running_var\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None*,
+training
+builtins.bool"builtins.bool*.
+momentum 
+builtins.float"builtins.float*)
+eps 
+builtins.float"builtins.float*.
+
+functional
+builtins.bool"builtins.boolÓ
+_get_batch_norm_reserve_tensor;torch._decomp.decompositions._get_batch_norm_reserve_tensor",
+torch._tensor.Tensor"torch._tensor.Tensor*7
+input,
+torch._tensor.Tensor"torch._tensor.Tensor*h
+weight\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None*f
+bias\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None*>
+running_mean,
+torch._tensor.Tensor"torch._tensor.Tensor*=
+running_var,
+torch._tensor.Tensor"torch._tensor.Tensor*)
+eps 
+builtins.float"builtins.float*,
+training
+builtins.bool"builtins.boolx
+_broadcast_batch_norm_backward;torch._decomp.decompositions._broadcast_batch_norm_backward*
+x*
+broadcast_maskâ
+
+_index_add'torch._decomp.decompositions._index_add"
+Any*3
+x,
+torch._tensor.Tensor"torch._tensor.Tensor*%
+dim
+builtins.int"builtins.int*7
+index,
+torch._tensor.Tensor"torch._tensor.Tensor*8
+tensor,
+torch._tensor.Tensor"torch._tensor.Tensor*+
+inplace
+builtins.bool"builtins.bool*Ã
+alphaæ
+LTypeAlias[Union[builtins.bool,builtins.int,builtins.float,builtins.complex]]À
+AUnion[builtins.bool,builtins.int,builtins.float,builtins.complex]
+builtins.bool"builtins.bool
+builtins.int"builtins.int 
+builtins.float"builtins.float$
+builtins.complex"builtins.complex"torch._prims_common.NumberType º
+_index_copy(torch._decomp.decompositions._index_copy"
+Any*3
+x,
+torch._tensor.Tensor"torch._tensor.Tensor*%
+dim
+builtins.int"builtins.int*7
+index,
+torch._tensor.Tensor"torch._tensor.Tensor*8
+tensor,
+torch._tensor.Tensor"torch._tensor.Tensor*+
+inplace
+builtins.bool"builtins.boolç
+upsample_compute_output_size9torch._decomp.decompositions.upsample_compute_output_size*
+
+input_size*
+output_size*
+scale_factorsT
+get_scale_value,torch._decomp.decompositions.get_scale_value*
+
+scales*
+idxò
+!_compute_upsample_nearest_indices>torch._decomp.decompositions._compute_upsample_nearest_indices*	
+input*
+output_size*
+
+scales*
+exact l
+gather_params*torch._decomp.decompositions.gather_params*
+
+params*
+
+has_biases*
+has_projectionsp
+params_hiddens+torch._decomp.decompositions.params_hiddens*
+
+params*
+hiddens*
+i*
+bidirectionalì
+update_hidden_for_packed5torch._decomp.decompositions.update_hidden_for_packed*
+
+cur_hidden*
+last_batch_size*
+
+batch_size*
+hiddens¶
+ update_hidden_for_packed_reverse=torch._decomp.decompositions.update_hidden_for_packed_reverse*
+
+cur_hidden*
+last_batch_size*
+
+batch_size*
+
+inp_hidden•
+one_layer_rnn_data/torch._decomp.decompositions.one_layer_rnn_data*
+inp*
+
+hidden*
+
+params*
+
+has_biases*
+	hidden_fn*
+batch_sizes*
+reverse C
+rnn_cell%torch._decomp.decompositions.rnn_cell*
+nonlinearityM
+rnn_cell_data*torch._decomp.decompositions.rnn_cell_data*
+nonlinearityä
+one_layer_rnn*torch._decomp.decompositions.one_layer_rnn*
+inp*
+
+hidden*
+
+params*
+
+has_biases*
+	hidden_fn*
+reverse ã
+mkldnn_one_layer_lstm2torch._decomp.decompositions.mkldnn_one_layer_lstm*
+inp*
+
+hidden*
+
+params*
+
+has_biases*
+reverse ƒ
+_rnn_helper(torch._decomp.decompositions._rnn_helper*	
+input*
+
+hidden*
+
+params*
+
+has_biases*
+
+num_layers*
+dropout*	
+train*
+bidirectional*
+batch_first*
+layer_fnÜ
+	lstm_cell&torch._decomp.decompositions.lstm_cell*
+inp*
+hx*
+cx*
+	hh_weight*
+hh_bias*
+	hr_weight*
+	chunk_dim}
+one_layer_lstm+torch._decomp.decompositions.one_layer_lstm*
+inp*
+
+hidden*
+
+params*
+
+has_biases*
+reverse ò
+one_layer_lstm_data0torch._decomp.decompositions.one_layer_lstm_data*
+inp*
+
+hidden*
+
+params*
+
+has_biases*
+batch_sizes*
+reverse |
+select_one_layer_lstm_function;torch._decomp.decompositions.select_one_layer_lstm_function*	
+input*
+hx*
+
+paramsÇ
+gru_cell%torch._decomp.decompositions.gru_cell*
+inp*
+
+cur_hidden*
+	ih_weight*
+ih_bias*
+	hh_weight*
+hh_biaså
+gru_cell_data*torch._decomp.decompositions.gru_cell_data*
+inp*
+
+cur_hidden*
+	ih_weight*
+ih_bias*
+	hh_weight*
+hh_biasx
+_compute_scale+torch._decomp.decompositions._compute_scale*
+in_size*
+out_size*
+align_corners*
+scale x
+_compute_source_index2torch._decomp.decompositions._compute_source_index*	
+scale*
+	dst_index*
+align_cornersû
+_sum_tensors_uint8/torch._decomp.decompositions._sum_tensors_uint8",
+torch._tensor.Tensor"torch._tensor.Tensor*o
+srcf
+%typing.Iterable[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"typing.Iterable*s
+weightsf
+%typing.Iterable[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"typing.Iterable*C
+weights_precision,
+torch._tensor.Tensor"torch._tensor.Tensor∏
+_compute_weight_precision6torch._decomp.decompositions._compute_weight_precision",
+torch._tensor.Tensor"torch._tensor.Tensor*¥
+weights¶
+ZTypeAlias[Union[builtins.list[torch._tensor.Tensor],builtins.tuple[torch._tensor.Tensor]]]ù
+OUnion[builtins.list[torch._tensor.Tensor],builtins.tuple[torch._tensor.Tensor]]b
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.listd
+$builtins.tuple[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.tuple"&torch._prims_common.TensorSequenceTypeè
+_nll_loss_forward.torch._decomp.decompositions._nll_loss_forward"ê
+0Tuple[torch._tensor.Tensor,torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor,
+torch._tensor.Tensor"torch._tensor.Tensor*6
+self,
+torch._tensor.Tensor"torch._tensor.Tensor*8
+target,
+torch._tensor.Tensor"torch._tensor.Tensor*h
+weight\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None*+
+	reduction
+builtins.int"builtins.int*.
+ignore_index
+builtins.int"builtins.intÂ
+_upsample_cubic_convolution19torch._decomp.decompositions._upsample_cubic_convolution1",
+torch._tensor.Tensor"torch._tensor.Tensor*3
+x,
+torch._tensor.Tensor"torch._tensor.Tensor*'
+A 
+builtins.float"builtins.floatÂ
+_upsample_cubic_convolution29torch._decomp.decompositions._upsample_cubic_convolution2",
+torch._tensor.Tensor"torch._tensor.Tensor*3
+x,
+torch._tensor.Tensor"torch._tensor.Tensor*'
+A 
+builtins.float"builtins.floatø
+ _upsample_get_cubic_coefficients=torch._decomp.decompositions._upsample_get_cubic_coefficients"¶
+ZTypeAlias[Union[builtins.list[torch._tensor.Tensor],builtins.tuple[torch._tensor.Tensor]]]ù
+OUnion[builtins.list[torch._tensor.Tensor],builtins.tuple[torch._tensor.Tensor]]b
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.listd
+$builtins.tuple[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.tuple"&torch._prims_common.TensorSequenceType*3
+t,
+torch._tensor.Tensor"torch._tensor.TensorÎ
+_upsample_cubic_interp1d5torch._decomp.decompositions._upsample_cubic_interp1d",
+torch._tensor.Tensor"torch._tensor.Tensor*≥
+coeffs¶
+ZTypeAlias[Union[builtins.list[torch._tensor.Tensor],builtins.tuple[torch._tensor.Tensor]]]ù
+OUnion[builtins.list[torch._tensor.Tensor],builtins.tuple[torch._tensor.Tensor]]b
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.listd
+$builtins.tuple[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.tuple"&torch._prims_common.TensorSequenceType*4
+ts,
+torch._tensor.Tensor"torch._tensor.Tensor◊
+_sum_tensors)torch._decomp.decompositions._sum_tensors",
+torch._tensor.Tensor"torch._tensor.Tensor*n
+tsf
+%typing.Iterable[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"typing.Iterableì
+_linspace_from_neg_one3torch._decomp.decompositions._linspace_from_neg_one"
+Any*+
+	num_steps
+builtins.int"builtins.int*1
+align_corners
+builtins.bool"builtins.bool*+
+dtype 
+torch._C.dtype"torch._C.dtype*.
+device"
+torch._C.device"torch._C.deviceÑ
+_make_base_grid_4d/torch._decomp.decompositions._make_base_grid_4d"
+Any*7
+theta,
+torch._tensor.Tensor"torch._tensor.Tensor*#
+h
+builtins.int"builtins.int*#
+w
+builtins.int"builtins.int*1
+align_corners
+builtins.bool"builtins.bool©
+_make_base_grid_5d/torch._decomp.decompositions._make_base_grid_5d"
+Any*7
+theta,
+torch._tensor.Tensor"torch._tensor.Tensor*#
+d
+builtins.int"builtins.int*#
+h
+builtins.int"builtins.int*#
+w
+builtins.int"builtins.int*1
+align_corners
+builtins.bool"builtins.boolû
+_affine_grid_generator_4d6torch._decomp.decompositions._affine_grid_generator_4d"
+Any*7
+theta,
+torch._tensor.Tensor"torch._tensor.Tensor*T
+sizeJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*1
+align_corners
+builtins.bool"builtins.boolû
+_affine_grid_generator_5d6torch._decomp.decompositions._affine_grid_generator_5d"
+Any*7
+theta,
+torch._tensor.Tensor"torch._tensor.Tensor*T
+sizeJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*1
+align_corners
+builtins.bool"builtins.boolØ
+_grid_sampler_2d-torch._decomp.decompositions._grid_sampler_2d",
+torch._tensor.Tensor"torch._tensor.Tensor*3
+a,
+torch._tensor.Tensor"torch._tensor.Tensor*6
+grid,
+torch._tensor.Tensor"torch._tensor.Tensor*6
+interpolation_mode
+builtins.int"builtins.int *0
+padding_mode
+builtins.int"builtins.int *3
+align_corners
+builtins.bool"builtins.bool *2
+_expand_grid
+builtins.bool"builtins.bool ˘
+should_fold(torch._decomp.decompositions.should_fold"
+builtins.bool"builtins.bool*9
+tensor1,
+torch._tensor.Tensor"torch._tensor.Tensor*9
+tensor2,
+torch._tensor.Tensor"torch._tensor.Tensor**
+is_out
+builtins.bool"builtins.boolÙ
+_reflection_or_replication_pad;torch._decomp.decompositions._reflection_or_replication_pad",
+torch._tensor.Tensor"torch._tensor.Tensor*3
+a,
+torch._tensor.Tensor"torch._tensor.Tensor*Y
+paddingL
+builtins.tuple[builtins.int]
+builtins.int"builtins.int"builtins.tuple*W
+idx_fnK
+CallableType[builtins.function]&
+builtins.function"builtins.function_
+register_inplace-torch._decomp.decompositions.register_inplace*
+aten_op*
+outplace_oph
+isin_default)torch._decomp.decompositions.isin_default*
+elements*
+test_elements*
+invert }
+isin_sorting)torch._decomp.decompositions.isin_sorting*
+elements*
+test_elements*
+assume_unique *
+invert *ò
+__annotations__,torch._decomp.decompositions.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*
+primstorch._prims *
+utilstorch._prims_common *
+Ftorch.nn.functional *
+pytreetorch.utils._pytree *{
+__all__$torch._decomp.decompositions.__all__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*2
+aten!torch._decomp.decompositions.aten
+Any*ï
+compute_only_pw_cast_for_opmath<torch._decomp.decompositions.compute_only_pw_cast_for_opmath4
+functools.partial[Any]
+Any"functools.partial*{
+pw_cast_for_opmath/torch._decomp.decompositions.pw_cast_for_opmath4
+functools.partial[Any]
+Any"functools.partial*Ö
+pw_cast_for_int_to_real4torch._decomp.decompositions.pw_cast_for_int_to_real4
+functools.partial[Any]
+Any"functools.partial

@@ -1,0 +1,157 @@
+
+torch.nn.utils.parametrizations—
+	_OrthMaps)torch.nn.utils.parametrizations._OrthMaps"	enum.EnumHrZ
+
+matrix_exp4torch.nn.utils.parametrizations._OrthMaps.matrix_exp
+	enum.auto"	enum.autorR
+cayley0torch.nn.utils.parametrizations._OrthMaps.cayley
+	enum.auto"	enum.autor\
+householder5torch.nn.utils.parametrizations._OrthMaps.householder
+	enum.auto"	enum.autoß
+
+_Orthogonal+torch.nn.utils.parametrizations._Orthogonal"torch.nn.modules.module.Module*‘
+__init__4torch.nn.utils.parametrizations._Orthogonal.__init__"
+None*d
+selfZ
++torch.nn.utils.parametrizations._Orthogonal"+torch.nn.utils.parametrizations._Orthogonal*
+weight
+Any*j
+orthogonal_mapV
+)torch.nn.utils.parametrizations._OrthMaps")torch.nn.utils.parametrizations._OrthMaps*!
+use_trivialization
+Any *á
+forward3torch.nn.utils.parametrizations._Orthogonal.forward",
+torch._tensor.Tensor"torch._tensor.Tensor*d
+selfZ
++torch.nn.utils.parametrizations._Orthogonal"+torch.nn.utils.parametrizations._Orthogonal*3
+X,
+torch._tensor.Tensor"torch._tensor.Tensor*ï
+right_inverse9torch.nn.utils.parametrizations._Orthogonal.right_inverse",
+torch._tensor.Tensor"torch._tensor.Tensor*d
+selfZ
++torch.nn.utils.parametrizations._Orthogonal"+torch.nn.utils.parametrizations._Orthogonal*3
+Q,
+torch._tensor.Tensor"torch._tensor.Tensor0rf
+base0torch.nn.utils.parametrizations._Orthogonal.base,
+torch._tensor.Tensor"torch._tensor.TensorrC
+shape1torch.nn.utils.parametrizations._Orthogonal.shape
+Anyr§
+orthogonal_map:torch.nn.utils.parametrizations._Orthogonal.orthogonal_mapV
+)torch.nn.utils.parametrizations._OrthMaps")torch.nn.utils.parametrizations._OrthMaps¸
+_WeightNorm+torch.nn.utils.parametrizations._WeightNorm"torch.nn.modules.module.Module*Å
+__init__4torch.nn.utils.parametrizations._WeightNorm.__init__"
+None*d
+selfZ
++torch.nn.utils.parametrizations._WeightNorm"+torch.nn.utils.parametrizations._WeightNorm*O
+dimD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *d
+forward3torch.nn.utils.parametrizations._WeightNorm.forward*
+self*
+weight_g*
+weight_v*`
+right_inverse9torch.nn.utils.parametrizations._WeightNorm.right_inverse*
+self*
+
+weightrT
+dim/torch.nn.utils.parametrizations._WeightNorm.dim
+builtins.int"builtins.int¸
+_SpectralNorm-torch.nn.utils.parametrizations._SpectralNorm"torch.nn.modules.module.Module*˛
+__init__6torch.nn.utils.parametrizations._SpectralNorm.__init__"
+None*h
+self^
+-torch.nn.utils.parametrizations._SpectralNorm"-torch.nn.utils.parametrizations._SpectralNorm*8
+weight,
+torch._tensor.Tensor"torch._tensor.Tensor*6
+n_power_iterations
+builtins.int"builtins.int *'
+dim
+builtins.int"builtins.int *+
+eps 
+builtins.float"builtins.float *∂
+_reshape_weight_to_matrixGtorch.nn.utils.parametrizations._SpectralNorm._reshape_weight_to_matrix",
+torch._tensor.Tensor"torch._tensor.Tensor*h
+self^
+-torch.nn.utils.parametrizations._SpectralNorm"-torch.nn.utils.parametrizations._SpectralNorm*8
+weight,
+torch._tensor.Tensor"torch._tensor.Tensor*∂
+_power_method;torch.nn.utils.parametrizations._SpectralNorm._power_method"
+None*h
+self^
+-torch.nn.utils.parametrizations._SpectralNorm"-torch.nn.utils.parametrizations._SpectralNorm*<
+
+weight_mat,
+torch._tensor.Tensor"torch._tensor.Tensor*4
+n_power_iterations
+builtins.int"builtins.int0*í
+forward5torch.nn.utils.parametrizations._SpectralNorm.forward",
+torch._tensor.Tensor"torch._tensor.Tensor*h
+self^
+-torch.nn.utils.parametrizations._SpectralNorm"-torch.nn.utils.parametrizations._SpectralNorm*8
+weight,
+torch._tensor.Tensor"torch._tensor.Tensor*ù
+right_inverse;torch.nn.utils.parametrizations._SpectralNorm.right_inverse",
+torch._tensor.Tensor"torch._tensor.Tensor*h
+self^
+-torch.nn.utils.parametrizations._SpectralNorm"-torch.nn.utils.parametrizations._SpectralNorm*7
+value,
+torch._tensor.Tensor"torch._tensor.TensorrV
+dim1torch.nn.utils.parametrizations._SpectralNorm.dim
+builtins.int"builtins.intrZ
+eps1torch.nn.utils.parametrizations._SpectralNorm.eps 
+builtins.float"builtins.floatrt
+n_power_iterations@torch.nn.utils.parametrizations._SpectralNorm.n_power_iterations
+builtins.int"builtins.intrd
+_u0torch.nn.utils.parametrizations._SpectralNorm._u,
+torch._tensor.Tensor"torch._tensor.Tensorrd
+_v0torch.nn.utils.parametrizations._SpectralNorm._v,
+torch._tensor.Tensor"torch._tensor.TensorR
+_is_orthogonal.torch.nn.utils.parametrizations._is_orthogonal*
+Q*	
+eps K
+_make_orthogonal0torch.nn.utils.parametrizations._make_orthogonal*
+Aà
+
+orthogonal*torch.nn.utils.parametrizations.orthogonal"@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*L
+module@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*(
+name
+builtins.str"builtins.str *Z
+orthogonal_mapD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *8
+use_trivialization
+builtins.bool"builtins.bool ‰
+weight_norm+torch.nn.utils.parametrizations.weight_norm"
+Any*L
+module@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*(
+name
+builtins.str"builtins.str *'
+dim
+builtins.int"builtins.int Æ
+spectral_norm-torch.nn.utils.parametrizations.spectral_norm"@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*L
+module@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*(
+name
+builtins.str"builtins.str *6
+n_power_iterations
+builtins.int"builtins.int *+
+eps 
+builtins.float"builtins.float *O
+dimD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *õ
+__annotations__/torch.nn.utils.parametrizations.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*
+Ftorch.nn.functional *~
+__all__'torch.nn.utils.parametrizations.__all__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list

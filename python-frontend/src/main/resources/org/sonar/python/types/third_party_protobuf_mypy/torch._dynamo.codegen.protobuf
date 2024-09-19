@@ -1,0 +1,275 @@
+
+torch._dynamo.codegenç
+GraphOutputEntry&torch._dynamo.codegen.GraphOutputEntry"builtins.object*¶
+__init__/torch._dynamo.codegen.GraphOutputEntry.__init__"
+None*Z
+selfP
+&torch._dynamo.codegen.GraphOutputEntry"&torch._dynamo.codegen.GraphOutputEntry*'
+index
+builtins.int"builtins.int*j
+variable\
+,torch._dynamo.variables.base.VariableTracker",torch._dynamo.variables.base.VariableTracker8rS
+index,torch._dynamo.codegen.GraphOutputEntry.index
+builtins.int"builtins.intr™
+variable/torch._dynamo.codegen.GraphOutputEntry.variable\
+,torch._dynamo.variables.base.VariableTracker",torch._dynamo.variables.base.VariableTrackerrí
+__dataclass_fields__;torch._dynamo.codegen.GraphOutputEntry.__dataclass_fields__—
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictÛG
+	PyCodegentorch._dynamo.codegen.PyCodegen"builtins.object*Ÿ
+__init__(torch._dynamo.codegen.PyCodegen.__init__"
+None*L
+selfB
+torch._dynamo.codegen.PyCodegen"torch._dynamo.codegen.PyCodegen*
+tx
+Any *†
+rootz
+*Union[torch.nn.modules.module.Module,None]@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module
+None *\
+graph_output_varD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *
+tempvars
+Any *s
+restore_stack-torch._dynamo.codegen.PyCodegen.restore_stack*
+self*
+stack_values*
+value_from_source *P
+graph_output_vars1torch._dynamo.codegen.PyCodegen.graph_output_vars*
+self*Y
+call_reconstruct0torch._dynamo.codegen.PyCodegen.call_reconstruct*
+self*	
+value*\
+__call__(torch._dynamo.codegen.PyCodegen.__call__*
+self*	
+value*
+allow_cache *Y
+add_graph_output0torch._dynamo.codegen.PyCodegen.add_graph_output*
+self*	
+value*[
+load_graph_output1torch._dynamo.codegen.PyCodegen.load_graph_output*
+self*	
+index*K
+	add_cache)torch._dynamo.codegen.PyCodegen.add_cache*
+self*	
+value*G
+foreach'torch._dynamo.codegen.PyCodegen.foreach*
+self*	
+items*|
+setup_globally_cached5torch._dynamo.codegen.PyCodegen.setup_globally_cached*
+self*
+name*	
+value*
+	push_null*@
+	clear_tos)torch._dynamo.codegen.PyCodegen.clear_tos*
+self*R
+append_output-torch._dynamo.codegen.PyCodegen.append_output*
+self*
+inst*S
+extend_output-torch._dynamo.codegen.PyCodegen.extend_output*
+self*	
+insts*Î
+get_instructions0torch._dynamo.codegen.PyCodegen.get_instructions"¹
+@builtins.list[torch._dynamo.bytecode_transformation.Instruction]f
+1torch._dynamo.bytecode_transformation.Instruction"1torch._dynamo.bytecode_transformation.Instruction"builtins.list*L
+selfB
+torch._dynamo.codegen.PyCodegen"torch._dynamo.codegen.PyCodegen*ƒ
+create_load+torch._dynamo.codegen.PyCodegen.create_load"f
+1torch._dynamo.bytecode_transformation.Instruction"1torch._dynamo.bytecode_transformation.Instruction*L
+selfB
+torch._dynamo.codegen.PyCodegen"torch._dynamo.codegen.PyCodegen*
+name
+Any*“
+create_load_closure3torch._dynamo.codegen.PyCodegen.create_load_closure"f
+1torch._dynamo.bytecode_transformation.Instruction"1torch._dynamo.bytecode_transformation.Instruction*L
+selfB
+torch._dynamo.codegen.PyCodegen"torch._dynamo.codegen.PyCodegen*
+name
+Any*…
+create_store,torch._dynamo.codegen.PyCodegen.create_store"f
+1torch._dynamo.bytecode_transformation.Instruction"1torch._dynamo.bytecode_transformation.Instruction*L
+selfB
+torch._dynamo.codegen.PyCodegen"torch._dynamo.codegen.PyCodegen*
+name
+Any*½
+create_load_global2torch._dynamo.codegen.PyCodegen.create_load_global"f
+1torch._dynamo.bytecode_transformation.Instruction"1torch._dynamo.bytecode_transformation.Instruction*L
+selfB
+torch._dynamo.codegen.PyCodegen"torch._dynamo.codegen.PyCodegen*
+name
+Any*
+	push_null
+Any*
+add
+Any *
+create_load_const1torch._dynamo.codegen.PyCodegen.create_load_const"f
+1torch._dynamo.bytecode_transformation.Instruction"1torch._dynamo.bytecode_transformation.Instruction*L
+selfB
+torch._dynamo.codegen.PyCodegen"torch._dynamo.codegen.PyCodegen*
+value
+Any*’
+_create_load_const2torch._dynamo.codegen.PyCodegen._create_load_const"f
+1torch._dynamo.bytecode_transformation.Instruction"1torch._dynamo.bytecode_transformation.Instruction*L
+selfB
+torch._dynamo.codegen.PyCodegen"torch._dynamo.codegen.PyCodegen*
+value
+Any*\
+create_load_method2torch._dynamo.codegen.PyCodegen.create_load_method*
+self*
+name*N
+load_method+torch._dynamo.codegen.PyCodegen.load_method*
+self*
+name*O
+call_method+torch._dynamo.codegen.PyCodegen.call_method*
+self*	
+nargs*
+create_load_attr0torch._dynamo.codegen.PyCodegen.create_load_attr"f
+1torch._dynamo.bytecode_transformation.Instruction"1torch._dynamo.bytecode_transformation.Instruction*L
+selfB
+torch._dynamo.codegen.PyCodegen"torch._dynamo.codegen.PyCodegen*
+name
+Any*J
+	load_attr)torch._dynamo.codegen.PyCodegen.load_attr*
+self*
+name*[
+create_load_attrs1torch._dynamo.codegen.PyCodegen.create_load_attrs*
+self*	
+names*
+create_store_attr1torch._dynamo.codegen.PyCodegen.create_store_attr"f
+1torch._dynamo.bytecode_transformation.Instruction"1torch._dynamo.bytecode_transformation.Instruction*L
+selfB
+torch._dynamo.codegen.PyCodegen"torch._dynamo.codegen.PyCodegen*
+name
+Any*L
+
+store_attr*torch._dynamo.codegen.PyCodegen.store_attr*
+self*
+name*‚
+load_function_name2torch._dynamo.codegen.PyCodegen.load_function_name*
+self*
+fn_name*
+	push_null*
+num_on_stack *?
+rot_n%torch._dynamo.codegen.PyCodegen.rot_n*
+self*
+n*>
+pop_null(torch._dynamo.codegen.PyCodegen.pop_null*
+self*<
+pop_top'torch._dynamo.codegen.PyCodegen.pop_top*
+self*í
+call_function-torch._dynamo.codegen.PyCodegen.call_function"
+Any*L
+selfB
+torch._dynamo.codegen.PyCodegen"torch._dynamo.codegen.PyCodegen*'
+nargs
+builtins.int"builtins.int*-
+	push_null
+builtins.bool"builtins.bool*<
+dup_top'torch._dynamo.codegen.PyCodegen.dup_top*
+self*E
+store%torch._dynamo.codegen.PyCodegen.store*
+self*
+varname*Ò
+make_function_with_closure:torch._dynamo.codegen.PyCodegen.make_function_with_closure"
+Any*L
+selfB
+torch._dynamo.codegen.PyCodegen"torch._dynamo.codegen.PyCodegen*)
+fn_name
+builtins.str"builtins.str**
+code 
+types.CodeType"types.CodeType*-
+	push_null
+builtins.bool"builtins.bool*
+num_on_stack
+Any *¶
+create_load_python_module9torch._dynamo.codegen.PyCodegen.create_load_python_module"f
+1torch._dynamo.bytecode_transformation.Instruction"1torch._dynamo.bytecode_transformation.Instruction*L
+selfB
+torch._dynamo.codegen.PyCodegen"torch._dynamo.codegen.PyCodegen*
+mod
+Any*
+	push_null
+Any*×
+make_call_generated_code8torch._dynamo.codegen.PyCodegen.make_call_generated_code"
+None*L
+selfB
+torch._dynamo.codegen.PyCodegen"torch._dynamo.codegen.PyCodegen*)
+fn_name
+builtins.str"builtins.str*Ð
+load_import_from0torch._dynamo.codegen.PyCodegen.load_import_from"
+None*L
+selfB
+torch._dynamo.codegen.PyCodegen"torch._dynamo.codegen.PyCodegen*
+module_name
+Any*
+object_name
+Any*Ÿ
+create_call_function_kw7torch._dynamo.codegen.PyCodegen.create_call_function_kw"¹
+@builtins.list[torch._dynamo.bytecode_transformation.Instruction]f
+1torch._dynamo.bytecode_transformation.Instruction"1torch._dynamo.bytecode_transformation.Instruction"builtins.list*L
+selfB
+torch._dynamo.codegen.PyCodegen"torch._dynamo.codegen.PyCodegen*
+nargs
+Any*
+kw_names
+Any*
+	push_null
+Any*ˆ
+create_delete-torch._dynamo.codegen.PyCodegen.create_delete"f
+1torch._dynamo.bytecode_transformation.Instruction"1torch._dynamo.bytecode_transformation.Instruction*L
+selfB
+torch._dynamo.codegen.PyCodegen"torch._dynamo.codegen.PyCodegen*
+value
+Anyr•
+create_load_output2torch._dynamo.codegen.PyCodegen.create_load_outputK
+CallableType[builtins.function]&
+builtins.function"builtins.functionr¨
+root$torch._dynamo.codegen.PyCodegen.rootz
+*Union[torch.nn.modules.module.Module,None]@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module
+Nonerã
+top_of_stack,torch._dynamo.codegen.PyCodegen.top_of_stack¤
+8Union[torch._dynamo.variables.base.VariableTracker,None]\
+,torch._dynamo.variables.base.VariableTracker",torch._dynamo.variables.base.VariableTracker
+Nonerå
+uses$torch._dynamo.codegen.PyCodegen.uses¶
+Acollections.Counter[torch._dynamo.variables.base.VariableTracker]\
+,torch._dynamo.variables.base.VariableTracker",torch._dynamo.variables.base.VariableTracker"collections.Counterr„
+graph_outputs-torch._dynamo.codegen.PyCodegen.graph_outputsÃ
+Bbuiltins.dict[builtins.int,torch._dynamo.codegen.GraphOutputEntry]
+builtins.int"builtins.intP
+&torch._dynamo.codegen.GraphOutputEntry"&torch._dynamo.codegen.GraphOutputEntry"builtins.dictrî
+_output'torch._dynamo.codegen.PyCodegen._output¹
+@builtins.list[torch._dynamo.bytecode_transformation.Instruction]f
+1torch._dynamo.bytecode_transformation.Instruction"1torch._dynamo.bytecode_transformation.Instruction"builtins.listrŸ
+tempvars(torch._dynamo.codegen.PyCodegen.tempvarsi
+!Union[Any,builtins.dict[Any,Any]]
+Any9
+builtins.dict[Any,Any]
+Any
+Any"builtins.dictr1
+tx"torch._dynamo.codegen.PyCodegen.tx
+AnyrŠ
+graph_output_var0torch._dynamo.codegen.PyCodegen.graph_output_varD
+Union[builtins.str,None]
+builtins.str"builtins.str
+NonerE
+code_options,torch._dynamo.codegen.PyCodegen.code_options
+AnyrO
+cell_and_freevars1torch._dynamo.codegen.PyCodegen.cell_and_freevars
+Anyr;
+new_var'torch._dynamo.codegen.PyCodegen.new_var
+Anyr„
+ mutable_side_effects_from_source@torch._dynamo.codegen.PyCodegen.mutable_side_effects_from_source
+builtins.bool"builtins.boolrf
+value_from_source1torch._dynamo.codegen.PyCodegen.value_from_source
+builtins.bool"builtins.bool*‘
+__annotations__%torch._dynamo.codegen.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*
+torchtorch 

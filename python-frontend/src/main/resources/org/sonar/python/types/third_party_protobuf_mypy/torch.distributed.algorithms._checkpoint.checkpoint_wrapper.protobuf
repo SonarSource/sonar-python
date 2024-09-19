@@ -1,0 +1,137 @@
+
+;torch.distributed.algorithms._checkpoint.checkpoint_wrapperÂ
+CheckpointImplJtorch.distributed.algorithms._checkpoint.checkpoint_wrapper.CheckpointImpl"	enum.EnumHry
+	REENTRANTTtorch.distributed.algorithms._checkpoint.checkpoint_wrapper.CheckpointImpl.REENTRANT
+	enum.auto"	enum.autor
+NO_REENTRANTWtorch.distributed.algorithms._checkpoint.checkpoint_wrapper.CheckpointImpl.NO_REENTRANT
+	enum.auto"	enum.auto¶
+ActivationWrapperMtorch.distributed.algorithms._checkpoint.checkpoint_wrapper.ActivationWrapper"torch.nn.modules.module.Module*u
+__init__Vtorch.distributed.algorithms._checkpoint.checkpoint_wrapper.ActivationWrapper.__init__*
+self*
+mod*Ä
+forwardUtorch.distributed.algorithms._checkpoint.checkpoint_wrapper.ActivationWrapper.forward*
+self*
+args*
+
+kwargs*µ
+__getattr__Ytorch.distributed.algorithms._checkpoint.checkpoint_wrapper.ActivationWrapper.__getattr__"
+Any*°û
+Mtorch.distributed.algorithms._checkpoint.checkpoint_wrapper.ActivationWrapper"Mtorch.distributed.algorithms._checkpoint.checkpoint_wrapper.ActivationWrapper*
+builtins.str"builtins.str*µ
+__getitem__Ytorch.distributed.algorithms._checkpoint.checkpoint_wrapper.ActivationWrapper.__getitem__"
+Any*°û
+Mtorch.distributed.algorithms._checkpoint.checkpoint_wrapper.ActivationWrapper"Mtorch.distributed.algorithms._checkpoint.checkpoint_wrapper.ActivationWrapper*
+builtins.int"builtins.int*∞
+named_parameters^torch.distributed.algorithms._checkpoint.checkpoint_wrapper.ActivationWrapper.named_parameters"Á
+Atyping.Iterator[Tuple[builtins.str,torch.nn.parameter.Parameter]]ê
+0Tuple[builtins.str,torch.nn.parameter.Parameter]
+builtins.str"builtins.str<
+torch.nn.parameter.Parameter"torch.nn.parameter.Parameter"typing.Iterator*©
+selfû
+Mtorch.distributed.algorithms._checkpoint.checkpoint_wrapper.ActivationWrapper"Mtorch.distributed.algorithms._checkpoint.checkpoint_wrapper.ActivationWrapper*
+args
+Any*
+kwargs
+Any*€
+_post_state_dict_hookctorch.distributed.algorithms._checkpoint.checkpoint_wrapper.ActivationWrapper._post_state_dict_hook"W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*L
+module@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*g
+
+state_dictW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*(
+prefix
+builtins.str"builtins.str*
+args
+Any0:staticmethodh*î
+_pre_load_state_dict_hookgtorch.distributed.algorithms._checkpoint.checkpoint_wrapper.ActivationWrapper._pre_load_state_dict_hook"
+None*L
+module@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*g
+
+state_dictW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*(
+prefix
+builtins.str"builtins.str*
+args
+Any0:staticmethodhrè
+_checkpoint_wrapped_modulehtorch.distributed.algorithms._checkpoint.checkpoint_wrapper.ActivationWrapper._checkpoint_wrapped_module
+Anyû
+OffloadWrapperJtorch.distributed.algorithms._checkpoint.checkpoint_wrapper.OffloadWrapper"Mtorch.distributed.algorithms._checkpoint.checkpoint_wrapper.ActivationWrapper*r
+__init__Storch.distributed.algorithms._checkpoint.checkpoint_wrapper.OffloadWrapper.__init__*
+self*
+mod*}
+forwardRtorch.distributed.algorithms._checkpoint.checkpoint_wrapper.OffloadWrapper.forward*
+self*
+args*
+
+kwargs¡
+
+CheckpointWrapperMtorch.distributed.algorithms._checkpoint.checkpoint_wrapper.CheckpointWrapper"Mtorch.distributed.algorithms._checkpoint.checkpoint_wrapper.ActivationWrapper*◊
+__init__Vtorch.distributed.algorithms._checkpoint.checkpoint_wrapper.CheckpointWrapper.__init__"
+None*©
+selfû
+Mtorch.distributed.algorithms._checkpoint.checkpoint_wrapper.CheckpointWrapper"Mtorch.distributed.algorithms._checkpoint.checkpoint_wrapper.CheckpointWrapper*I
+mod@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*∞
+checkpoint_implò
+Jtorch.distributed.algorithms._checkpoint.checkpoint_wrapper.CheckpointImpl"Jtorch.distributed.algorithms._checkpoint.checkpoint_wrapper.CheckpointImpl *
+checkpoint_fn
+Any *!
+checkpoint_fn_kwargs
+Any*Ä
+forwardUtorch.distributed.algorithms._checkpoint.checkpoint_wrapper.CheckpointWrapper.forward*
+self*
+args*
+
+kwargsrã
+checkpoint_impl]torch.distributed.algorithms._checkpoint.checkpoint_wrapper.CheckpointWrapper.checkpoint_implò
+Jtorch.distributed.algorithms._checkpoint.checkpoint_wrapper.CheckpointImpl"Jtorch.distributed.algorithms._checkpoint.checkpoint_wrapper.CheckpointImplr¢
+checkpoint_fn[torch.distributed.algorithms._checkpoint.checkpoint_wrapper.CheckpointWrapper.checkpoint_fn4
+functools.partial[Any]
+Any"functools.partialÅ
+<callable subtype of object>Xtorch.distributed.algorithms._checkpoint.checkpoint_wrapper.<callable subtype of object>"builtins.object*v
+__call__atorch.distributed.algorithms._checkpoint.checkpoint_wrapper.<callable subtype of object>.__call__"
+AnyÓ
+offload_wrapperKtorch.distributed.algorithms._checkpoint.checkpoint_wrapper.offload_wrapper"@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*L
+module@
+torch.nn.modules.module.Module"torch.nn.modules.module.ModuleË
+checkpoint_wrapperNtorch.distributed.algorithms._checkpoint.checkpoint_wrapper.checkpoint_wrapper"@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*L
+module@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*∞
+checkpoint_implò
+Jtorch.distributed.algorithms._checkpoint.checkpoint_wrapper.CheckpointImpl"Jtorch.distributed.algorithms._checkpoint.checkpoint_wrapper.CheckpointImpl *
+checkpoint_fn
+Any *!
+checkpoint_fn_kwargs
+Any˙
+apply_activation_checkpointingZtorch.distributed.algorithms._checkpoint.checkpoint_wrapper.apply_activation_checkpointing"
+Any*
+model
+Any*$
+checkpoint_wrapper_fn
+Any *
+check_fn
+Any *ü
+auto_wrap_policyÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *∑
+__annotations__Ktorch.distributed.algorithms._checkpoint.checkpoint_wrapper.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*
+nntorch.nn *í
+_CHECKPOINT_WRAPPED_MODULEVtorch.distributed.algorithms._checkpoint.checkpoint_wrapper._CHECKPOINT_WRAPPED_MODULE
+builtins.str"builtins.str*Ç
+_CHECKPOINT_PREFIXNtorch.distributed.algorithms._checkpoint.checkpoint_wrapper._CHECKPOINT_PREFIX
+builtins.str"builtins.str

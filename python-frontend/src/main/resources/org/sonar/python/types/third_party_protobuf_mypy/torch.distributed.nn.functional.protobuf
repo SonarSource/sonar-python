@@ -1,0 +1,164 @@
+
+torch.distributed.nn.functional¡
+
+_Broadcast*torch.distributed.nn.functional._Broadcast" torch.autograd.function.Function*x
+forward2torch.distributed.nn.functional._Broadcast.forward*
+ctx*
+src*	
+group*
+
+tensor0:staticmethodh*k
+backward3torch.distributed.nn.functional._Broadcast.backward*
+ctx*
+grad_output0:staticmethodh∂
+_Gather'torch.distributed.nn.functional._Gather" torch.autograd.function.Function*u
+forward/torch.distributed.nn.functional._Gather.forward*
+ctx*
+dst*	
+group*
+
+tensor0:staticmethodh*i
+backward0torch.distributed.nn.functional._Gather.backward*
+ctx*
+grad_outputs0:staticmethodh∫
+_Scatter(torch.distributed.nn.functional._Scatter" torch.autograd.function.Function*w
+forward0torch.distributed.nn.functional._Scatter.forward*
+ctx*
+src*	
+group*
+tensors0:staticmethodh*i
+backward1torch.distributed.nn.functional._Scatter.backward*
+ctx*
+grad_output0:staticmethodhΩ
+_Reduce'torch.distributed.nn.functional._Reduce" torch.autograd.function.Function*}
+forward/torch.distributed.nn.functional._Reduce.forward*
+ctx*
+src*
+op*	
+group*
+
+tensor0:staticmethodh*h
+backward0torch.distributed.nn.functional._Reduce.backward*
+ctx*
+grad_output0:staticmethodhÏ
+_Reduce_Scatter/torch.distributed.nn.functional._Reduce_Scatter" torch.autograd.function.Function*ì
+forward7torch.distributed.nn.functional._Reduce_Scatter.forward*
+ctx*
+op*	
+group*
+
+tensor*
+input_tensor_list0:staticmethodh*p
+backward8torch.distributed.nn.functional._Reduce_Scatter.backward*
+ctx*
+grad_output0:staticmethodhπ
+
+_AllGather*torch.distributed.nn.functional._AllGather" torch.autograd.function.Function*o
+forward2torch.distributed.nn.functional._AllGather.forward*
+ctx*	
+group*
+
+tensor0:staticmethodh*l
+backward3torch.distributed.nn.functional._AllGather.backward*
+ctx*
+grad_outputs0:staticmethodh‚
+_AllGatherBase.torch.distributed.nn.functional._AllGatherBase" torch.autograd.function.Function*å
+forward6torch.distributed.nn.functional._AllGatherBase.forward*
+ctx*
+output_tensor*
+input_tensor*	
+group0:staticmethodh*o
+backward7torch.distributed.nn.functional._AllGatherBase.backward*
+ctx*
+grad_output0:staticmethodhÃ
+	_AlltoAll)torch.distributed.nn.functional._AlltoAll" torch.autograd.function.Function*Ñ
+forward1torch.distributed.nn.functional._AlltoAll.forward*
+ctx*	
+group*
+out_tensor_list*
+tensors0:staticmethodh*k
+backward2torch.distributed.nn.functional._AlltoAll.backward*
+ctx*
+grad_outputs0:staticmethodhá
+_AlltoAllSingle/torch.distributed.nn.functional._AlltoAllSingle" torch.autograd.function.Function*Æ
+forward7torch.distributed.nn.functional._AlltoAllSingle.forward*
+ctx*	
+group*
+
+output*
+output_split_sizes*
+input_split_sizes*	
+input0:staticmethodh*p
+backward8torch.distributed.nn.functional._AlltoAllSingle.backward*
+ctx*
+grad_output0:staticmethodh¿
+
+_AllReduce*torch.distributed.nn.functional._AllReduce" torch.autograd.function.Function*w
+forward2torch.distributed.nn.functional._AllReduce.forward*
+ctx*
+op*	
+group*
+
+tensor0:staticmethodh*k
+backward3torch.distributed.nn.functional._AllReduce.backward*
+ctx*
+grad_output0:staticmethodhX
+	broadcast)torch.distributed.nn.functional.broadcast*
+
+tensor*
+src*
+group T
+gather&torch.distributed.nn.functional.gather*
+
+tensor*	
+dst *
+group W
+scatter'torch.distributed.nn.functional.scatter*
+tensors*	
+src *
+group \
+reduce&torch.distributed.nn.functional.reduce*
+
+tensor*
+dst*
+op *
+group s
+reduce_scatter.torch.distributed.nn.functional.reduce_scatter*
+
+output*
+
+input_list*
+op *
+group Q
+
+all_gather*torch.distributed.nn.functional.all_gather*
+
+tensor*
+group v
+_all_gather_base0torch.distributed.nn.functional._all_gather_base*
+output_tensor*
+input_tensor*
+group t
+
+all_to_all*torch.distributed.nn.functional.all_to_all*
+output_tensor_list*
+input_tensor_list*
+group ù
+all_to_all_single1torch.distributed.nn.functional.all_to_all_single*
+
+output*	
+input*
+output_split_sizes *
+input_split_sizes *
+group [
+
+all_reduce*torch.distributed.nn.functional.all_reduce*
+
+tensor*
+op *
+group *õ
+__annotations__/torch.distributed.nn.functional.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*
+disttorch.distributed 

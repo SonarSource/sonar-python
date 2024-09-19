@@ -1,0 +1,301 @@
+
+torch.distributed.fsdp.wrap±
+_Policy#torch.distributed.fsdp.wrap._Policy"abc.ABC*÷
+_run_policy/torch.distributed.fsdp.wrap._Policy._run_policy"ù
+Mbuiltins.dict[torch.nn.modules.module.Module,builtins.dict[builtins.str,Any]]@
+torch.nn.modules.module.Module"torch.nn.modules.module.ModuleW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"builtins.dict*T
+selfJ
+#torch.distributed.fsdp.wrap._Policy"#torch.distributed.fsdp.wrap._Policy*Q
+root_module@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*“
+ignored_modules~
+,builtins.set[torch.nn.modules.module.Module]@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"builtins.set*h
+root_kwargsW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict0:abstractmethod@¬
+ModuleWrapPolicy,torch.distributed.fsdp.wrap.ModuleWrapPolicy"#torch.distributed.fsdp.wrap._Policy*…
+__init__5torch.distributed.fsdp.wrap.ModuleWrapPolicy.__init__"
+None*f
+self\
+,torch.distributed.fsdp.wrap.ModuleWrapPolicy",torch.distributed.fsdp.wrap.ModuleWrapPolicy*Ï
+module_classesº
+5typing.Iterable[Type[torch.nn.modules.module.Module]]p
+$Type[torch.nn.modules.module.Module]@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"type"typing.Iterable*þ
+_run_policy8torch.distributed.fsdp.wrap.ModuleWrapPolicy._run_policy"ù
+Mbuiltins.dict[torch.nn.modules.module.Module,builtins.dict[builtins.str,Any]]@
+torch.nn.modules.module.Module"torch.nn.modules.module.ModuleW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"builtins.dict*f
+self\
+,torch.distributed.fsdp.wrap.ModuleWrapPolicy",torch.distributed.fsdp.wrap.ModuleWrapPolicy*Q
+root_module@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*“
+ignored_modules~
+,builtins.set[torch.nn.modules.module.Module]@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"builtins.set*h
+root_kwargsW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*z
+__call__5torch.distributed.fsdp.wrap.ModuleWrapPolicy.__call__*
+self*
+
+module*
+recurse*
+args*
+
+kwargs*¿
+__repr__5torch.distributed.fsdp.wrap.ModuleWrapPolicy.__repr__"
+builtins.str"builtins.str*^\
+,torch.distributed.fsdp.wrap.ModuleWrapPolicy",torch.distributed.fsdp.wrap.ModuleWrapPolicyr†
+_module_classes<torch.distributed.fsdp.wrap.ModuleWrapPolicy._module_classes´
+2builtins.set[Type[torch.nn.modules.module.Module]]p
+$Type[torch.nn.modules.module.Module]@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"type"builtins.setru
+_module_classes_str@torch.distributed.fsdp.wrap.ModuleWrapPolicy._module_classes_str
+builtins.str"builtins.stré	
+CustomPolicy(torch.distributed.fsdp.wrap.CustomPolicy"#torch.distributed.fsdp.wrap._Policy*ƒ
+__init__1torch.distributed.fsdp.wrap.CustomPolicy.__init__"
+None*^
+selfT
+(torch.distributed.fsdp.wrap.CustomPolicy"(torch.distributed.fsdp.wrap.CustomPolicy*Z
+	lambda_fnK
+CallableType[builtins.function]&
+builtins.function"builtins.function*ò
+_run_policy4torch.distributed.fsdp.wrap.CustomPolicy._run_policy"ù
+Mbuiltins.dict[torch.nn.modules.module.Module,builtins.dict[builtins.str,Any]]@
+torch.nn.modules.module.Module"torch.nn.modules.module.ModuleW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"builtins.dict*^
+selfT
+(torch.distributed.fsdp.wrap.CustomPolicy"(torch.distributed.fsdp.wrap.CustomPolicy*Q
+root_module@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*“
+ignored_modules~
+,builtins.set[torch.nn.modules.module.Module]@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"builtins.set*h
+root_kwargsW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dictrŽ
+
+_lambda_fn3torch.distributed.fsdp.wrap.CustomPolicy._lambda_fnK
+CallableType[builtins.function]&
+builtins.function"builtins.functionÒ
+_ConfigAutoWrap+torch.distributed.fsdp.wrap._ConfigAutoWrap"builtins.object*•
+__init__4torch.distributed.fsdp.wrap._ConfigAutoWrap.__init__"
+None*d
+selfZ
++torch.distributed.fsdp.wrap._ConfigAutoWrap"+torch.distributed.fsdp.wrap._ConfigAutoWrap*c
+kwargsW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*
+enable_autowrap_contextCtorch.distributed.fsdp.wrap._ConfigAutoWrap.enable_autowrap_context"
+None*
+kwargs
+Any0:staticmethodh*|
+disable_autowrap_contextDtorch.distributed.fsdp.wrap._ConfigAutoWrap.disable_autowrap_context"
+None0:staticmethodh*ª
+	__enter__5torch.distributed.fsdp.wrap._ConfigAutoWrap.__enter__"
+None*\Z
++torch.distributed.fsdp.wrap._ConfigAutoWrap"+torch.distributed.fsdp.wrap._ConfigAutoWrap*É
+__exit__4torch.distributed.fsdp.wrap._ConfigAutoWrap.__exit__"
+None*\Z
++torch.distributed.fsdp.wrap._ConfigAutoWrap"+torch.distributed.fsdp.wrap._ConfigAutoWrap*	
+Any*	
+Any*	
+Anyrv
+in_autowrap_context?torch.distributed.fsdp.wrap._ConfigAutoWrap.in_autowrap_context
+builtins.bool"builtins.boolrÏ
+wrapper_cls7torch.distributed.fsdp.wrap._ConfigAutoWrap.wrapper_cls†
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+Noner•
+kwargs2torch.distributed.fsdp.wrap._ConfigAutoWrap.kwargsW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dictó
+_post_order_apply-torch.distributed.fsdp.wrap._post_order_apply"
+Any*Q
+root_module@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*S
+fnK
+CallableType[builtins.function]&
+builtins.function"builtins.functionØ
+_construct_wrap_fn.torch.distributed.fsdp.wrap._construct_wrap_fn"K
+CallableType[builtins.function]&
+builtins.function"builtins.function*Q
+root_module@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*—
+target_module_to_kwargsù
+Mbuiltins.dict[torch.nn.modules.module.Module,builtins.dict[builtins.str,Any]]@
+torch.nn.modules.module.Module"torch.nn.modules.module.ModuleW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"builtins.dict*X
+fsdp_fnK
+CallableType[builtins.function]&
+builtins.function"builtins.function°
+$_run_mixed_precision_override_policy@torch.distributed.fsdp.wrap._run_mixed_precision_override_policy"
+Any*Q
+root_module@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*Ï
+module_classesº
+5typing.Iterable[Type[torch.nn.modules.module.Module]]p
+$Type[torch.nn.modules.module.Module]@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"type"typing.Iterable*“
+ignored_modules~
+,builtins.set[torch.nn.modules.module.Module]@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"builtins.set*h
+root_kwargsW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*—
+target_module_to_kwargsù
+Mbuiltins.dict[torch.nn.modules.module.Module,builtins.dict[builtins.str,Any]]@
+torch.nn.modules.module.Module"torch.nn.modules.module.ModuleW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"builtins.dictŒ
+always_wrap_policy.torch.distributed.fsdp.wrap.always_wrap_policy"
+builtins.bool"builtins.bool*
+args
+Any*
+kwargs
+Anyá
+_module_wrap_policy/torch.distributed.fsdp.wrap._module_wrap_policy"
+builtins.bool"builtins.bool*L
+module@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*+
+recurse
+builtins.bool"builtins.bool*2
+nonwrapped_numel
+builtins.int"builtins.int*É
+module_classes´
+2builtins.set[Type[torch.nn.modules.module.Module]]p
+$Type[torch.nn.modules.module.Module]@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"type"builtins.setù
+lambda_auto_wrap_policy3torch.distributed.fsdp.wrap.lambda_auto_wrap_policy"
+builtins.bool"builtins.bool*L
+module@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*+
+recurse
+builtins.bool"builtins.bool*2
+nonwrapped_numel
+builtins.int"builtins.int*Z
+	lambda_fnK
+CallableType[builtins.function]&
+builtins.function"builtins.functionú
+transformer_auto_wrap_policy8torch.distributed.fsdp.wrap.transformer_auto_wrap_policy"
+builtins.bool"builtins.bool*L
+module@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*+
+recurse
+builtins.bool"builtins.bool*2
+nonwrapped_numel
+builtins.int"builtins.int*Ð
+transformer_layer_cls´
+2builtins.set[Type[torch.nn.modules.module.Module]]p
+$Type[torch.nn.modules.module.Module]@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"type"builtins.setí
+_wrap_module_cls_individually9torch.distributed.fsdp.wrap._wrap_module_cls_individually"
+Any*L
+module@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*e
+module_classesQ
+typing.Sequence[builtins.type]
+builtins.type"builtins.type"typing.Sequence*+
+recurse
+builtins.bool"builtins.bool*
+args
+Any*
+kwargs
+Anyš
+
+_or_policy&torch.distributed.fsdp.wrap._or_policy"
+builtins.bool"builtins.bool*L
+module@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*+
+recurse
+builtins.bool"builtins.bool*2
+nonwrapped_numel
+builtins.int"builtins.int*
+policies
+Any
+size_based_auto_wrap_policy7torch.distributed.fsdp.wrap.size_based_auto_wrap_policy"
+builtins.bool"builtins.bool*L
+module@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*+
+recurse
+builtins.bool"builtins.bool*2
+nonwrapped_numel
+builtins.int"builtins.int*2
+min_num_params
+builtins.int"builtins.int *ž
+force_leaf_modulesƒ
+>Union[builtins.set[Type[torch.nn.modules.module.Module]],None]´
+2builtins.set[Type[torch.nn.modules.module.Module]]p
+$Type[torch.nn.modules.module.Module]@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"type"builtins.set
+None * 
+exclude_wrap_modulesƒ
+>Union[builtins.set[Type[torch.nn.modules.module.Module]],None]´
+2builtins.set[Type[torch.nn.modules.module.Module]]p
+$Type[torch.nn.modules.module.Module]@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"type"builtins.set
+None Õ
+wrap torch.distributed.fsdp.wrap.wrap"@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*L
+module@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*
+wrap_overrides
+Any­
+_wrap!torch.distributed.fsdp.wrap._wrap"@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*L
+module@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*\
+wrapper_clsK
+CallableType[builtins.function]&
+builtins.function"builtins.function*
+kwargs
+AnyÚ
+_recursive_wrap+torch.distributed.fsdp.wrap._recursive_wrap"–
+2Tuple[torch.nn.modules.module.Module,builtins.int]@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module
+builtins.int"builtins.int*L
+module@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*a
+auto_wrap_policyK
+CallableType[builtins.function]&
+builtins.function"builtins.function*\
+wrapper_clsK
+CallableType[builtins.function]&
+builtins.function"builtins.function*“
+ignored_modules~
+,builtins.set[torch.nn.modules.module.Module]@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"builtins.set*Œ
+ignored_paramsx
+*builtins.set[torch.nn.parameter.Parameter]<
+torch.nn.parameter.Parameter"torch.nn.parameter.Parameter"builtins.set*8
+only_wrap_children
+builtins.bool"builtins.bool *
+kwargs
+Any*—
+__annotations__+torch.distributed.fsdp.wrap.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*
+nntorch.nn *z
+__all__#torch.distributed.fsdp.wrap.__all__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list

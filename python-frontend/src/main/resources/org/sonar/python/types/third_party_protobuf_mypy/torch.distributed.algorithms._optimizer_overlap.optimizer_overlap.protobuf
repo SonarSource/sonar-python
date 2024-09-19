@@ -1,0 +1,77 @@
+
+Atorch.distributed.algorithms._optimizer_overlap.optimizer_overlap£
+OverlappedOptimizerUtorch.distributed.algorithms._optimizer_overlap.optimizer_overlap.OverlappedOptimizer"abc.ABC*Ý
+__init__^torch.distributed.algorithms._optimizer_overlap.optimizer_overlap.OverlappedOptimizer.__init__"
+None*¹
+self®
+Utorch.distributed.algorithms._optimizer_overlap.optimizer_overlap.OverlappedOptimizer"Utorch.distributed.algorithms._optimizer_overlap.optimizer_overlap.OverlappedOptimizer*+
+	optim_cls
+	Type[Any]
+Any"type*Å
+register_ddpbtorch.distributed.algorithms._optimizer_overlap.optimizer_overlap.OverlappedOptimizer.register_ddp"
+None*¹
+self®
+Utorch.distributed.algorithms._optimizer_overlap.optimizer_overlap.OverlappedOptimizer"Utorch.distributed.algorithms._optimizer_overlap.optimizer_overlap.OverlappedOptimizer*w
+ddpn
+5torch.nn.parallel.distributed.DistributedDataParallel"5torch.nn.parallel.distributed.DistributedDataParallel0:abstractmethod@*ö
+register_fsdpctorch.distributed.algorithms._optimizer_overlap.optimizer_overlap.OverlappedOptimizer.register_fsdp"
+None*¹
+self®
+Utorch.distributed.algorithms._optimizer_overlap.optimizer_overlap.OverlappedOptimizer"Utorch.distributed.algorithms._optimizer_overlap.optimizer_overlap.OverlappedOptimizer*¥
+fsdpš
+Ktorch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel"Ktorch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel0:abstractmethod@rŠ
+	optim_cls_torch.distributed.algorithms._optimizer_overlap.optimizer_overlap.OverlappedOptimizer.optim_cls
+	Type[Any]
+Any"type§
+_OverlappedStandardOptimizer^torch.distributed.algorithms._optimizer_overlap.optimizer_overlap._OverlappedStandardOptimizer"Utorch.distributed.algorithms._optimizer_overlap.optimizer_overlap.OverlappedOptimizer*Á
+__init__gtorch.distributed.algorithms._optimizer_overlap.optimizer_overlap._OverlappedStandardOptimizer.__init__"
+None*Ë
+selfÀ
+^torch.distributed.algorithms._optimizer_overlap.optimizer_overlap._OverlappedStandardOptimizer"^torch.distributed.algorithms._optimizer_overlap.optimizer_overlap._OverlappedStandardOptimizer*+
+	optim_cls
+	Type[Any]
+Any"type*
+params
+Any*
+
+optim_args
+Any*
+optim_kwargs
+Any*Ð
+register_ddpktorch.distributed.algorithms._optimizer_overlap.optimizer_overlap._OverlappedStandardOptimizer.register_ddp"
+Any*Ë
+selfÀ
+^torch.distributed.algorithms._optimizer_overlap.optimizer_overlap._OverlappedStandardOptimizer"^torch.distributed.algorithms._optimizer_overlap.optimizer_overlap._OverlappedStandardOptimizer*|
+ddp_instn
+5torch.nn.parallel.distributed.DistributedDataParallel"5torch.nn.parallel.distributed.DistributedDataParallel*ý
+register_fsdpltorch.distributed.algorithms._optimizer_overlap.optimizer_overlap._OverlappedStandardOptimizer.register_fsdp"
+None*Ë
+selfÀ
+^torch.distributed.algorithms._optimizer_overlap.optimizer_overlap._OverlappedStandardOptimizer"^torch.distributed.algorithms._optimizer_overlap.optimizer_overlap._OverlappedStandardOptimizer*¥
+fsdpš
+Ktorch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel"Ktorch.distributed.fsdp.fully_sharded_data_parallel.FullyShardedDataParallel8r¶
+_opt_hook_statentorch.distributed.algorithms._optimizer_overlap.optimizer_overlap._OverlappedStandardOptimizer._opt_hook_state²
+Wtorch.distributed.algorithms.ddp_comm_hooks.optimizer_overlap_hooks._OptimizerHookState"Wtorch.distributed.algorithms.ddp_comm_hooks.optimizer_overlap_hooks._OptimizerHookState{
+register_overlappedUtorch.distributed.algorithms._optimizer_overlap.optimizer_overlap.register_overlapped*
+	optim_clsá
+_as_overlapped_optimVtorch.distributed.algorithms._optimizer_overlap.optimizer_overlap._as_overlapped_optim"
+Any*+
+	optim_cls
+	Type[Any]
+Any"type*
+params
+Any*
+args
+Any*
+kwargs
+Any*½
+__annotations__Qtorch.distributed.algorithms._optimizer_overlap.optimizer_overlap.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*ñ
+_registered_overlapped_optims_torch.distributed.algorithms._optimizer_overlap.optimizer_overlap._registered_overlapped_optimso
+"builtins.dict[Type[Any],Type[Any]]
+	Type[Any]
+Any"type
+	Type[Any]
+Any"type"builtins.dict

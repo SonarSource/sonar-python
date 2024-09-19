@@ -1,0 +1,581 @@
+
+torch.autograd.gradcheckP
+GradcheckError'torch.autograd.gradcheck.GradcheckError"builtins.RuntimeErrorï
+_is_sparse_compressed_tensor5torch.autograd.gradcheck._is_sparse_compressed_tensor"
+Any*5
+obj,
+torch._tensor.Tensor"torch._tensor.Tensorá
+_is_sparse_any_tensor.torch.autograd.gradcheck._is_sparse_any_tensor"
+Any*5
+obj,
+torch._tensor.Tensor"torch._tensor.Tensor\
+_is_float_or_complex_tensor4torch.autograd.gradcheck._is_float_or_complex_tensor*
+objü
+_allocate_jacobians_with_inputs8torch.autograd.gradcheck._allocate_jacobians_with_inputs"d
+$builtins.tuple[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.tuple*A
+input_tensors.
+builtins.tuple[Any]
+Any"builtins.tuple*
+numel_output
+AnyŒ
+ _allocate_jacobians_with_outputs9torch.autograd.gradcheck._allocate_jacobians_with_outputs"d
+$builtins.tuple[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.tuple*B
+output_tensors.
+builtins.tuple[Any]
+Any"builtins.tuple*
+numel_input
+Any*
+dtype
+Any *
+device
+Any ¿
+_iter_tensors&torch.autograd.gradcheck._iter_tensors"f
+%typing.Iterable[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"typing.Iterable*„
+x€
+AUnion[torch._tensor.Tensor,typing.Iterable[torch._tensor.Tensor]],
+torch._tensor.Tensor"torch._tensor.Tensorf
+%typing.Iterable[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"typing.Iterable*9
+only_requiring_grad
+builtins.bool"builtins.bool 4
+_densify!torch.autograd.gradcheck._densify*
+xC
+_iter_tensor%torch.autograd.gradcheck._iter_tensor*
+x_tensorˇ
+_get_numerical_jacobian0torch.autograd.gradcheck._get_numerical_jacobian"™
+3builtins.list[builtins.tuple[torch._tensor.Tensor]]d
+$builtins.tuple[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.tuple"builtins.list*
+fn
+Any*
+inputs
+Any*
+outputs
+Any *
+target
+Any *
+eps
+Any *
+is_forward_ad
+Any ç
+_compute_numerical_gradient4torch.autograd.gradcheck._compute_numerical_gradient*
+fn*	
+entry*
+v*
+
+norm_v*
+nbhd_checks_fnª
+*_compute_numerical_jvps_wrt_specific_inputCtorch.autograd.gradcheck._compute_numerical_jvps_wrt_specific_input"b
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*
+jvp_fn
+Any*
+delta
+Any*
+input_is_complex
+Any*
+is_forward_ad
+Any ◊
+_combine_jacobian_cols/torch.autograd.gradcheck._combine_jacobian_cols"d
+$builtins.tuple[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.tuple*Á
+jacobians_cols“
+?builtins.dict[builtins.int,builtins.list[torch._tensor.Tensor]]
+builtins.int"builtins.intb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list"builtins.dict*
+outputs
+Any*
+input
+Any*
+numel
+Any≥
+_prepare_input'torch.autograd.gradcheck._prepare_input",
+torch._tensor.Tensor"torch._tensor.Tensor*7
+input,
+torch._tensor.Tensor"torch._tensor.Tensor*w
+maybe_perturbed_input\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None*
+	fast_mode
+Any ø
+#_check_outputs_same_dtype_and_shape<torch.autograd.gradcheck._check_outputs_same_dtype_and_shape"
+None*
+output1
+Any*
+output2
+Any*
+eps
+Any*
+idx
+Any Ô
+)get_numerical_jacobian_wrt_specific_inputBtorch.autograd.gradcheck.get_numerical_jacobian_wrt_specific_input"d
+$builtins.tuple[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.tuple*
+fn
+Any*
+	input_idx
+Any*
+inputs
+Any*
+outputs
+Any*
+eps
+Any*
+input
+Any *
+is_forward_ad
+Any Ü
+#_get_analytical_jacobian_forward_ad<torch.autograd.gradcheck._get_analytical_jacobian_forward_ad"¨
+4builtins.tuple[builtins.tuple[torch._tensor.Tensor]]d
+$builtins.tuple[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.tuple"builtins.tuple*
+fn
+Any*
+inputs
+Any*
+outputs
+Any* 
+check_grad_dtypes
+Any *
+all_u
+Any R
+_get_input_to_perturb.torch.autograd.gradcheck._get_input_to_perturb*	
+inputè
+_with_prepare_inputs-torch.autograd.gradcheck._with_prepare_inputs*
+fn*
+
+inputs*
+	input_idx*
+input_to_perturb*
+	fast_mode ä
+_get_numerical_jvp_fn.torch.autograd.gradcheck._get_numerical_jvp_fn*
+
+wrapped_fn*
+input_to_perturb*
+eps*
+nbhd_checks_fn_
+_reshape_tensor_or_tuple1torch.autograd.gradcheck._reshape_tensor_or_tuple*
+u*	
+shapeS
+_mul_tensor_or_tuple-torch.autograd.gradcheck._mul_tensor_or_tuple*
+u*
+k…
+%_get_numerical_jvp_wrt_specific_input>torch.autograd.gradcheck._get_numerical_jvp_wrt_specific_input"b
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*
+fn
+Any*
+	input_idx
+Any*
+inputs
+Any*
+u
+Any*
+eps
+Any*
+is_forward_ad
+Any ¶
+_get_numerical_vJu+torch.autograd.gradcheck._get_numerical_vJu*
+fn*
+
+inputs*
+inp_indices*
+func_out*	
+all_u*	
+all_v*
+eps*
+is_forward_adc
+_check_jacobians_equal/torch.autograd.gradcheck._check_jacobians_equal*
+j1*
+j2*
+atolò
+_stack_and_check_tensors1torch.autograd.gradcheck._stack_and_check_tensors"Ò
+GTuple[builtins.tuple[torch._tensor.Tensor],builtins.bool,builtins.bool]d
+$builtins.tuple[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.tuple
+builtins.bool"builtins.bool
+builtins.bool"builtins.bool*$
+list_of_list_of_tensors
+Any*
+inputs
+Any*
+numel_outputs
+Any‹
+%_check_analytical_jacobian_attributes>torch.autograd.gradcheck._check_analytical_jacobian_attributes"d
+$builtins.tuple[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.tuple*
+inputs
+Any*
+output
+Any*
+
+nondet_tol
+Any*
+check_grad_dtypes
+Any*
+	fast_mode
+Any *
+v
+Any µ
+!_get_analytical_vJu_backward_mode:torch.autograd.gradcheck._get_analytical_vJu_backward_mode*
+
+inputs*
+outputs*
+
+nondet_tol*
+check_grad_dtypes*	
+all_v*	
+all_uÖ
+_get_analytical_jacobian1torch.autograd.gradcheck._get_analytical_jacobian*
+
+inputs*
+outputs*
+	input_idx*
+
+output_idxÉ
+!_compute_analytical_jacobian_rows:torch.autograd.gradcheck._compute_analytical_jacobian_rows"
+>builtins.list[builtins.list[Union[torch._tensor.Tensor,None]]]û
+/builtins.list[Union[torch._tensor.Tensor,None]]\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None"builtins.list"builtins.list*
+vjp_fn
+Any*
+sample_output
+Any°
+(_get_analytical_vjps_wrt_specific_outputAtorch.autograd.gradcheck._get_analytical_vjps_wrt_specific_output"
+>builtins.list[builtins.list[Union[torch._tensor.Tensor,None]]]û
+/builtins.list[Union[torch._tensor.Tensor,None]]\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None"builtins.list"builtins.list*
+vjp_fn
+Any*
+sample_output
+Any*
+v
+Anys
+_check_inputs&torch.autograd.gradcheck._check_inputs"
+builtins.bool"builtins.bool*
+tupled_inputs
+AnyY
+_check_outputs'torch.autograd.gradcheck._check_outputs"
+None*
+outputs
+AnyÍ
+ _check_no_differentiable_outputs9torch.autograd.gradcheck._check_no_differentiable_outputs"
+builtins.bool"builtins.bool*
+func
+Any*
+inputs
+Any*
+func_out
+Any*
+eps
+Any*
+is_forward_ad
+Any«
+%_check_no_differentiable_outputs_fast>torch.autograd.gradcheck._check_no_differentiable_outputs_fast*
+func*
+func_out*
+
+all_inputs*
+inputs_indices*	
+all_u*
+eps*
+
+nondet_tol•
+!_get_failed_batched_grad_test_msg:torch.autograd.gradcheck._get_failed_batched_grad_test_msg*
+
+output_idx*
+	input_idx*
+res*
+exp*
+is_forward_ad ü
+_test_batched_grad_forward_ad6torch.autograd.gradcheck._test_batched_grad_forward_ad"
+builtins.bool"builtins.bool*
+func
+Any*
+inputs
+Any£
+_test_batched_grad+torch.autograd.gradcheck._test_batched_grad"
+builtins.bool"builtins.bool*
+input
+Any*
+output
+Any*
+
+output_idx
+Anyø
+!_test_backward_mul_by_grad_output:torch.autograd.gradcheck._test_backward_mul_by_grad_output"
+builtins.bool"builtins.bool*
+outputs
+Any*
+inputs
+Any*
+masked
+Anyx
+_test_undefined_forward_mode5torch.autograd.gradcheck._test_undefined_forward_mode*
+func*
+outputs*
+
+inputsµ
+_test_undefined_backward_mode6torch.autograd.gradcheck._test_undefined_backward_mode"
+builtins.bool"builtins.bool*
+func
+Any*
+outputs
+Any*
+inputs
+Any6
+	_as_tuple"torch.autograd.gradcheck._as_tuple*
+xR
+_differentiable_outputs0torch.autograd.gradcheck._differentiable_outputs*
+xõ
+_get_notallclose_msg-torch.autograd.gradcheck._get_notallclose_msg"
+builtins.str"builtins.str*
+
+analytical
+Any*
+	numerical
+Any*
+
+output_idx
+Any*
+	input_idx
+Any*
+complex_indices
+Any*
+	test_imag
+Any *
+is_forward_ad
+Any H
+
+_transpose#torch.autograd.gradcheck._transpose*
+matrix_of_tensorsO
+_real_and_imag_output.torch.autograd.gradcheck._real_and_imag_output*
+fny
+_real_and_imag_input-torch.autograd.gradcheck._real_and_imag_input*
+fn*
+complex_inp_indices*
+tupled_inputsö
+_gradcheck_real_imag-torch.autograd.gradcheck._gradcheck_real_imag*
+gradcheck_fn*
+func*
+func_out*
+tupled_inputs*
+outputs*
+eps*
+rtol*
+atol*
+check_grad_dtypes*
+check_forward_ad*
+check_backward_ad*
+
+nondet_tol*
+check_undefined_gradÉ
+_slow_gradcheck(torch.autograd.gradcheck._slow_gradcheck*
+func*
+func_out*
+tupled_inputs*
+outputs*
+eps*
+rtol*
+atol*
+check_grad_dtypes*
+
+nondet_tol*
+use_forward_ad *
+complex_indices *
+	test_imag *
+masked [
+_dot_with_type_promotion1torch.autograd.gradcheck._dot_with_type_promotion*
+u*
+vy
+_allclose_with_type_promotion6torch.autograd.gradcheck._allclose_with_type_promotion*
+a*
+b*
+rtol*
+atolD
+_to_real_dtype'torch.autograd.gradcheck._to_real_dtype*	
+dtypek
+_vec_from_tensor)torch.autograd.gradcheck._vec_from_tensor*
+x*
+	generator*
+downcast_complex P
+_get_inp_tensors)torch.autograd.gradcheck._get_inp_tensors*
+tupled_inputsQ
+_adjusted_atol'torch.autograd.gradcheck._adjusted_atol*
+atol*
+u*
+vŒ
+_run_slow_mode_and_get_error5torch.autograd.gradcheck._run_slow_mode_and_get_error*
+func*
+tupled_inputs*
+outputs*
+	input_idx*
+
+output_idx*
+rtol*
+atol*
+eps*
+is_forward_adY
+_to_flat_dense_if_sparse1torch.autograd.gradcheck._to_flat_dense_if_sparse*
+
+tensori
+_make_vectors&torch.autograd.gradcheck._make_vectors*
+inp_tensors*
+outputs*
+use_forward_adú
+!_check_analytical_numerical_equal:torch.autograd.gradcheck._check_analytical_numerical_equal*
+all_analytical*
+all_numerical*
+complex_indices*
+tupled_inputs*
+outputs*
+func*	
+all_v*	
+all_u*
+rtol*
+atol*
+eps*
+	test_imag*
+is_forward_ad ¸
+_fast_gradcheck(torch.autograd.gradcheck._fast_gradcheck*
+func*
+func_out*
+
+inputs*
+outputs*
+eps*
+rtol*
+atol*
+check_grad_dtypes*
+
+nondet_tol*
+use_forward_ad *
+complex_indices *
+	test_imag *
+masked ‡	
+	gradcheck"torch.autograd.gradcheck.gradcheck"
+builtins.bool"builtins.bool*U
+funcK
+CallableType[builtins.function]&
+builtins.function"builtins.function*Ÿ
+inputsÃ
+LTypeAlias[Union[torch._tensor.Tensor,typing.Sequence[torch._tensor.Tensor]]]€
+AUnion[torch._tensor.Tensor,typing.Sequence[torch._tensor.Tensor]],
+torch._tensor.Tensor"torch._tensor.Tensorf
+%typing.Sequence[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"typing.Sequence"torch.types._TensorOrTensors*+
+eps 
+builtins.float"builtins.float *,
+atol 
+builtins.float"builtins.float *,
+rtol 
+builtins.float"builtins.float *5
+raise_exception
+builtins.bool"builtins.bool *2
+
+nondet_tol 
+builtins.float"builtins.float *:
+check_undefined_grad
+builtins.bool"builtins.bool *7
+check_grad_dtypes
+builtins.bool"builtins.bool *8
+check_batched_grad
+builtins.bool"builtins.bool *@
+check_batched_forward_grad
+builtins.bool"builtins.bool *6
+check_forward_ad
+builtins.bool"builtins.bool *7
+check_backward_ad
+builtins.bool"builtins.bool */
+	fast_mode
+builtins.bool"builtins.bool *U
+maskedG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None ≥
+_gradcheck_helper*torch.autograd.gradcheck._gradcheck_helper*
+func*
+
+inputs*
+eps*
+atol*
+rtol*
+
+nondet_tol*
+check_undefined_grad*
+check_grad_dtypes*
+check_batched_grad*
+check_batched_forward_grad*
+check_forward_ad*
+check_backward_ad*
+	fast_mode*
+
+masked≈
+gradgradcheck&torch.autograd.gradcheck.gradgradcheck"
+builtins.bool"builtins.bool*U
+funcK
+CallableType[builtins.function]&
+builtins.function"builtins.function*Ÿ
+inputsÃ
+LTypeAlias[Union[torch._tensor.Tensor,typing.Sequence[torch._tensor.Tensor]]]€
+AUnion[torch._tensor.Tensor,typing.Sequence[torch._tensor.Tensor]],
+torch._tensor.Tensor"torch._tensor.Tensorf
+%typing.Sequence[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"typing.Sequence"torch.types._TensorOrTensors*ˇ
+grad_outputsÍ
+FUnion[torch._tensor.Tensor,typing.Sequence[torch._tensor.Tensor],None],
+torch._tensor.Tensor"torch._tensor.Tensorf
+%typing.Sequence[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"typing.Sequence
+None *+
+eps 
+builtins.float"builtins.float *,
+atol 
+builtins.float"builtins.float *,
+rtol 
+builtins.float"builtins.float *A
+gen_non_contig_grad_outputs
+builtins.bool"builtins.bool *5
+raise_exception
+builtins.bool"builtins.bool *2
+
+nondet_tol 
+builtins.float"builtins.float *:
+check_undefined_grad
+builtins.bool"builtins.bool *7
+check_grad_dtypes
+builtins.bool"builtins.bool *8
+check_batched_grad
+builtins.bool"builtins.bool *8
+check_fwd_over_rev
+builtins.bool"builtins.bool *8
+check_rev_over_rev
+builtins.bool"builtins.bool */
+	fast_mode
+builtins.bool"builtins.bool *,
+masked
+builtins.bool"builtins.bool *î
+__annotations__(torch.autograd.gradcheck.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*w
+__all__ torch.autograd.gradcheck.__all__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*]
+FAILED_NONDET_MSG*torch.autograd.gradcheck.FAILED_NONDET_MSG
+builtins.str"builtins.str*i
+FAILED_BATCHED_GRAD_MSG0torch.autograd.gradcheck.FAILED_BATCHED_GRAD_MSG
+builtins.str"builtins.str*w
+FAILED_BATCHED_GRAD_MSG_FWD_AD7torch.autograd.gradcheck.FAILED_BATCHED_GRAD_MSG_FWD_AD
+builtins.str"builtins.str*e
+FAST_FAIL_SLOW_OK_MSG.torch.autograd.gradcheck.FAST_FAIL_SLOW_OK_MSG
+builtins.str"builtins.str

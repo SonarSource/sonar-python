@@ -1,0 +1,147 @@
+
+!torch.fx.passes.infra.partitioneræ
+	Partition+torch.fx.passes.infra.partitioner.Partition"builtins.object*°
+__init__4torch.fx.passes.infra.partitioner.Partition.__init__"
+None*d
+selfZ
++torch.fx.passes.infra.partitioner.Partition"+torch.fx.passes.infra.partitioner.Partition*N
+idD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *­
+nodesŸ
+/Union[typing.Iterable[torch.fx.node.Node],None]`
+#typing.Iterable[torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node"typing.Iterable
+None *¼
+__repr__4torch.fx.passes.infra.partitioner.Partition.__repr__"
+builtins.str"builtins.str*\Z
++torch.fx.passes.infra.partitioner.Partition"+torch.fx.passes.infra.partitioner.Partition*ã
+add_node4torch.fx.passes.infra.partitioner.Partition.add_node"
+Any*d
+selfZ
++torch.fx.passes.infra.partitioner.Partition"+torch.fx.passes.infra.partitioner.Partition*2
+node(
+torch.fx.node.Node"torch.fx.node.Node*é
+remove_node7torch.fx.passes.infra.partitioner.Partition.remove_node"
+Any*d
+selfZ
++torch.fx.passes.infra.partitioner.Partition"+torch.fx.passes.infra.partitioner.Partition*2
+node(
+torch.fx.node.Node"torch.fx.node.Node*B
+size0torch.fx.passes.infra.partitioner.Partition.size*
+selfrz
+id.torch.fx.passes.infra.partitioner.Partition.idD
+Union[builtins.int,None]
+builtins.int"builtins.int
+Noner–
+nodes1torch.fx.passes.infra.partitioner.Partition.nodesZ
+ builtins.set[torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node"builtins.setÒ
+_DependencyViewer3torch.fx.passes.infra.partitioner._DependencyViewer"builtins.object*¢
+__init__<torch.fx.passes.infra.partitioner._DependencyViewer.__init__"
+None*t
+selfj
+3torch.fx.passes.infra.partitioner._DependencyViewer"3torch.fx.passes.infra.partitioner._DependencyViewer*X
+graph_moduleF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*Ú
+downstreams_ofBtorch.fx.passes.infra.partitioner._DependencyViewer.downstreams_of"Z
+ builtins.set[torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node"builtins.set*t
+selfj
+3torch.fx.passes.infra.partitioner._DependencyViewer"3torch.fx.passes.infra.partitioner._DependencyViewer*2
+node(
+torch.fx.node.Node"torch.fx.node.Node*Ö
+upstreams_of@torch.fx.passes.infra.partitioner._DependencyViewer.upstreams_of"Z
+ builtins.set[torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node"builtins.set*t
+selfj
+3torch.fx.passes.infra.partitioner._DependencyViewer"3torch.fx.passes.infra.partitioner._DependencyViewer*2
+node(
+torch.fx.node.Node"torch.fx.node.NoderÊ
+	upstreams=torch.fx.passes.infra.partitioner._DependencyViewer.upstreams~
+.collections.defaultdict[Any,builtins.set[Any]]
+Any*
+builtins.set[Any]
+Any"builtins.set"collections.defaultdictrÎ
+downstreams?torch.fx.passes.infra.partitioner._DependencyViewer.downstreams~
+.collections.defaultdict[Any,builtins.set[Any]]
+Any*
+builtins.set[Any]
+Any"builtins.set"collections.defaultdictå 
+CapabilityBasedPartitioner<torch.fx.passes.infra.partitioner.CapabilityBasedPartitioner"builtins.object*Ý
+__init__Etorch.fx.passes.infra.partitioner.CapabilityBasedPartitioner.__init__"
+None*†
+self|
+<torch.fx.passes.infra.partitioner.CapabilityBasedPartitioner"<torch.fx.passes.infra.partitioner.CapabilityBasedPartitioner*X
+graph_moduleF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*‚
+operator_supportl
+4torch.fx.passes.operator_support.OperatorSupportBase"4torch.fx.passes.operator_support.OperatorSupportBase*B
+allows_single_node_partition
+builtins.bool"builtins.bool *Ÿ
+non_compute_ops‡
+)Union[typing.Sequence[builtins.str],None]N
+typing.Sequence[builtins.str]
+builtins.str"builtins.str"typing.Sequence
+None *±
+!allowed_single_node_partition_ops‡
+)Union[typing.Sequence[builtins.str],None]N
+typing.Sequence[builtins.str]
+builtins.str"builtins.str"typing.Sequence
+None *Ä
+__is_node_supportedPtorch.fx.passes.infra.partitioner.CapabilityBasedPartitioner.__is_node_supported"
+builtins.bool"builtins.bool*†
+self|
+<torch.fx.passes.infra.partitioner.CapabilityBasedPartitioner"<torch.fx.passes.infra.partitioner.CapabilityBasedPartitioner*2
+node(
+torch.fx.node.Node"torch.fx.node.Node*˜
+propose_partitionsOtorch.fx.passes.infra.partitioner.CapabilityBasedPartitioner.propose_partitions"§
+:builtins.list[torch.fx.passes.infra.partitioner.Partition]Z
++torch.fx.passes.infra.partitioner.Partition"+torch.fx.passes.infra.partitioner.Partition"builtins.list*†
+self|
+<torch.fx.passes.infra.partitioner.CapabilityBasedPartitioner"<torch.fx.passes.infra.partitioner.CapabilityBasedPartitioner*—
+fuse_partitionsLtorch.fx.passes.infra.partitioner.CapabilityBasedPartitioner.fuse_partitions"F
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*†
+self|
+<torch.fx.passes.infra.partitioner.CapabilityBasedPartitioner"<torch.fx.passes.infra.partitioner.CapabilityBasedPartitioner*¸
+
+partitions§
+:builtins.list[torch.fx.passes.infra.partitioner.Partition]Z
++torch.fx.passes.infra.partitioner.Partition"+torch.fx.passes.infra.partitioner.Partition"builtins.list**
+prefix
+builtins.str"builtins.str *Ê
+remove_bookend_non_compute_ops[torch.fx.passes.infra.partitioner.CapabilityBasedPartitioner.remove_bookend_non_compute_ops"
+Any*†
+self|
+<torch.fx.passes.infra.partitioner.CapabilityBasedPartitioner"<torch.fx.passes.infra.partitioner.CapabilityBasedPartitioner*¸
+
+partitions§
+:builtins.list[torch.fx.passes.infra.partitioner.Partition]Z
++torch.fx.passes.infra.partitioner.Partition"+torch.fx.passes.infra.partitioner.Partition"builtins.list*â
+partition_and_fuseOtorch.fx.passes.infra.partitioner.CapabilityBasedPartitioner.partition_and_fuse"F
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*†
+self|
+<torch.fx.passes.infra.partitioner.CapabilityBasedPartitioner"<torch.fx.passes.infra.partitioner.CapabilityBasedPartitioner**
+prefix
+builtins.str"builtins.str r¡
+graph_moduleItorch.fx.passes.infra.partitioner.CapabilityBasedPartitioner.graph_moduleF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModulerÏ
+operator_supportMtorch.fx.passes.infra.partitioner.CapabilityBasedPartitioner.operator_supportl
+4torch.fx.passes.operator_support.OperatorSupportBase"4torch.fx.passes.operator_support.OperatorSupportBaser™
+allows_single_node_partitionYtorch.fx.passes.infra.partitioner.CapabilityBasedPartitioner.allows_single_node_partition
+builtins.bool"builtins.boolr¯
+non_compute_opsLtorch.fx.passes.infra.partitioner.CapabilityBasedPartitioner.non_compute_opsN
+typing.Sequence[builtins.str]
+builtins.str"builtins.str"typing.SequencerÓ
+!allowed_single_node_partition_ops^torch.fx.passes.infra.partitioner.CapabilityBasedPartitioner.allowed_single_node_partition_opsN
+typing.Sequence[builtins.str]
+builtins.str"builtins.str"typing.SequencerÏ
+dependency_viewerNtorch.fx.passes.infra.partitioner.CapabilityBasedPartitioner.dependency_viewerj
+3torch.fx.passes.infra.partitioner._DependencyViewer"3torch.fx.passes.infra.partitioner._DependencyViewer*
+__annotations__1torch.fx.passes.infra.partitioner.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*T
+logger(torch.fx.passes.infra.partitioner.logger 
+logging.Logger"logging.Logger

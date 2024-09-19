@@ -1,0 +1,172 @@
+
+ torch.ao.quantization.pt2e.utilsÉ
+_is_connected.torch.ao.quantization.pt2e.utils._is_connected"
+builtins.bool"builtins.bool*4
+source(
+torch.fx.node.Node"torch.fx.node.Node*2
+dest(
+torch.fx.node.Node"torch.fx.node.Nodeæ
+_find_q_dq_node_for_user9torch.ao.quantization.pt2e.utils._find_q_dq_node_for_user"$
+Tuple[Any,Any]
+Any
+Any*5
+produer(
+torch.fx.node.Node"torch.fx.node.Node*2
+user(
+torch.fx.node.Node"torch.fx.node.Node„
+_is_sym_size_node2torch.ao.quantization.pt2e.utils._is_sym_size_node"
+Any*2
+node(
+torch.fx.node.Node"torch.fx.node.Nodeã
+_filter_sym_size_users7torch.ao.quantization.pt2e.utils._filter_sym_size_users"\
+!builtins.list[torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node"builtins.list*2
+node(
+torch.fx.node.Node"torch.fx.node.Node…
+_is_valid_annotation5torch.ao.quantization.pt2e.utils._is_valid_annotation"
+builtins.bool"builtins.bool*•
+
+annotation„
+@torch.ao.quantization.quantizer.quantizer.QuantizationAnnotation"@torch.ao.quantization.quantizer.quantizer.QuantizationAnnotationr
+_get_tensor_constant_from_node?torch.ao.quantization.pt2e.utils._get_tensor_constant_from_node*
+node*
+mz
+_get_all_arguments3torch.ao.quantization.pt2e.utils._get_all_arguments*
+	orig_args*
+orig_kwargs*
+args_schema¬
+%_is_supported_batch_norm_for_trainingFtorch.ao.quantization.pt2e.utils._is_supported_batch_norm_for_training"
+Any*2
+node(
+torch.fx.node.Node"torch.fx.node.Nodey
+_is_conv_node.torch.ao.quantization.pt2e.utils._is_conv_node"
+Any*/
+n(
+torch.fx.node.Node"torch.fx.node.Node
+_is_conv_transpose_node8torch.ao.quantization.pt2e.utils._is_conv_transpose_node"
+Any*/
+n(
+torch.fx.node.Node"torch.fx.node.Node
+_is_conv_or_conv_transpose_node@torch.ao.quantization.pt2e.utils._is_conv_or_conv_transpose_node"
+Any*/
+n(
+torch.fx.node.Node"torch.fx.node.Node²
+_is_conv_transpose_fn6torch.ao.quantization.pt2e.utils._is_conv_transpose_fn"
+Any*X
+conv_fnK
+CallableType[builtins.function]&
+builtins.function"builtins.functionu
+_is_bn_node,torch.ao.quantization.pt2e.utils._is_bn_node"
+Any*/
+n(
+torch.fx.node.Node"torch.fx.node.NodeÖ
+fold_bn_weights_into_conv_node?torch.ao.quantization.pt2e.utils.fold_bn_weights_into_conv_node"
+None*7
+	conv_node(
+torch.fx.node.Node"torch.fx.node.Node*>
+conv_weight_node(
+torch.fx.node.Node"torch.fx.node.Node*j
+conv_bias_nodeV
+Union[torch.fx.node.Node,None](
+torch.fx.node.Node"torch.fx.node.Node
+None*5
+bn_node(
+torch.fx.node.Node"torch.fx.node.Node*M
+mF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModuleš
+_fuse_conv_bn_/torch.ao.quantization.pt2e.utils._fuse_conv_bn_"
+None*M
+mF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModuleú
+_get_node_name_to_scope8torch.ao.quantization.pt2e.utils._get_node_name_to_scope"Ñ
+=builtins.dict[builtins.str,Tuple[builtins.str,builtins.type]]
+builtins.str"builtins.strc
+!Tuple[builtins.str,builtins.type]
+builtins.str"builtins.str
+builtins.type"builtins.type"builtins.dict*Q
+modelF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule“
+"_get_aten_graph_module_for_patternCtorch.ao.quantization.pt2e.utils._get_aten_graph_module_for_pattern"F
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*X
+patternK
+CallableType[builtins.function]&
+builtins.function"builtins.function*B
+example_inputs.
+builtins.tuple[Any]
+Any"builtins.tuple*-
+is_cuda
+builtins.bool"builtins.bool *
+kwargs
+AnyÎ
+"remove_tensor_overload_for_qdq_opsCtorch.ao.quantization.pt2e.utils.remove_tensor_overload_for_qdq_ops"
+None*Y
+match_patternF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModuleD
+_is_literal,torch.ao.quantization.pt2e.utils._is_literal*
+argñ
+'_replace_literals_with_new_placeholdersHtorch.ao.quantization.pt2e.utils._replace_literals_with_new_placeholders"
+Any*N
+gmF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*/
+	merge_dup
+builtins.bool"builtins.bool *r
+exclude_literalsZ
+Union[builtins.list[Any],None],
+builtins.list[Any]
+Any"builtins.list
+None ±
+,_replace_literals_with_existing_placeholdersMtorch.ao.quantization.pt2e.utils._replace_literals_with_existing_placeholders"
+Any*N
+gmF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*r
+exclude_literalsZ
+Union[builtins.list[Any],None],
+builtins.list[Any]
+Any"builtins.list
+None *ä
+literal_to_ph_idxÊ
+gUnion[builtins.dict[Union[builtins.float,builtins.int,builtins.bool,torch._C.dtype],builtins.int],None]Ò
+[builtins.dict[Union[builtins.float,builtins.int,builtins.bool,torch._C.dtype],builtins.int]Å
+?Union[builtins.float,builtins.int,builtins.bool,torch._C.dtype] 
+builtins.float"builtins.float
+builtins.int"builtins.int
+builtins.bool"builtins.bool 
+torch._C.dtype"torch._C.dtype
+builtins.int"builtins.int"builtins.dict
+None ©
+_disallow_eval_train5torch.ao.quantization.pt2e.utils._disallow_eval_train"
+Any*Q
+modelF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*œ
+__annotations__0torch.ao.quantization.pt2e.utils.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*
+Ftorch.nn.functional *
+__all__(torch.ao.quantization.pt2e.utils.__all__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*m
+_QUANTIZE_OPS.torch.ao.quantization.pt2e.utils._QUANTIZE_OPS,
+builtins.list[Any]
+Any"builtins.list*q
+_DEQUANTIZE_OPS0torch.ao.quantization.pt2e.utils._DEQUANTIZE_OPS,
+builtins.list[Any]
+Any"builtins.list*º
+_conv1d_bn_example_inputs:torch.ao.quantization.pt2e.utils._conv1d_bn_example_inputsà
+™Tuple[torch._tensor.Tensor,torch._tensor.Tensor,torch._tensor.Tensor,torch._tensor.Tensor,torch._tensor.Tensor,torch._tensor.Tensor,torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor,
+torch._tensor.Tensor"torch._tensor.Tensor,
+torch._tensor.Tensor"torch._tensor.Tensor,
+torch._tensor.Tensor"torch._tensor.Tensor,
+torch._tensor.Tensor"torch._tensor.Tensor,
+torch._tensor.Tensor"torch._tensor.Tensor,
+torch._tensor.Tensor"torch._tensor.Tensor*º
+_conv2d_bn_example_inputs:torch.ao.quantization.pt2e.utils._conv2d_bn_example_inputsà
+™Tuple[torch._tensor.Tensor,torch._tensor.Tensor,torch._tensor.Tensor,torch._tensor.Tensor,torch._tensor.Tensor,torch._tensor.Tensor,torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor,
+torch._tensor.Tensor"torch._tensor.Tensor,
+torch._tensor.Tensor"torch._tensor.Tensor,
+torch._tensor.Tensor"torch._tensor.Tensor,
+torch._tensor.Tensor"torch._tensor.Tensor,
+torch._tensor.Tensor"torch._tensor.Tensor,
+torch._tensor.Tensor"torch._tensor.Tensor

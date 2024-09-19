@@ -1,0 +1,134 @@
+
+*torch.ao.nn.quantizable.modules.activation¸)
+MultiheadAttention=torch.ao.nn.quantizable.modules.activation.MultiheadAttention".torch.nn.modules.activation.MultiheadAttention*ä
+__init__Ftorch.ao.nn.quantizable.modules.activation.MultiheadAttention.__init__"
+None*à
+self~
+=torch.ao.nn.quantizable.modules.activation.MultiheadAttention"=torch.ao.nn.quantizable.modules.activation.MultiheadAttention*+
+	embed_dim
+builtins.int"builtins.int*+
+	num_heads
+builtins.int"builtins.int*/
+dropout 
+builtins.float"builtins.float **
+bias
+builtins.bool"builtins.bool *1
+add_bias_kv
+builtins.bool"builtins.bool *3
+add_zero_attn
+builtins.bool"builtins.bool *P
+kdimD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *P
+vdimD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *1
+batch_first
+builtins.bool"builtins.bool *
+device
+Any *
+dtype
+Any *^
+	_get_nameGtorch.ao.nn.quantizable.modules.activation.MultiheadAttention._get_name*
+self*{
+
+from_floatHtorch.ao.nn.quantizable.modules.activation.MultiheadAttention.from_float*
+cls*	
+other0:classmethodp*t
+
+dequantizeHtorch.ao.nn.quantizable.modules.activation.MultiheadAttention.dequantize*
+self0:torch.jit.unused*Å
+from_observedKtorch.ao.nn.quantizable.modules.activation.MultiheadAttention.from_observed*
+cls*	
+other0:classmethodp*Ÿ
+forwardEtorch.ao.nn.quantizable.modules.activation.MultiheadAttention.forward"Ã
+<Tuple[torch._tensor.Tensor,Union[torch._tensor.Tensor,None]],
+torch._tensor.Tensor"torch._tensor.Tensor\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None*à
+self~
+=torch.ao.nn.quantizable.modules.activation.MultiheadAttention"=torch.ao.nn.quantizable.modules.activation.MultiheadAttention*7
+query,
+torch._tensor.Tensor"torch._tensor.Tensor*5
+key,
+torch._tensor.Tensor"torch._tensor.Tensor*7
+value,
+torch._tensor.Tensor"torch._tensor.Tensor*t
+key_padding_mask\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None *2
+need_weights
+builtins.bool"builtins.bool *m
+	attn_mask\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None *:
+average_attn_weights
+builtins.bool"builtins.bool */
+	is_causal
+builtins.bool"builtins.bool *Â
+_forward_implKtorch.ao.nn.quantizable.modules.activation.MultiheadAttention._forward_impl"Ã
+<Tuple[torch._tensor.Tensor,Union[torch._tensor.Tensor,None]],
+torch._tensor.Tensor"torch._tensor.Tensor\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None*à
+self~
+=torch.ao.nn.quantizable.modules.activation.MultiheadAttention"=torch.ao.nn.quantizable.modules.activation.MultiheadAttention*7
+query,
+torch._tensor.Tensor"torch._tensor.Tensor*5
+key,
+torch._tensor.Tensor"torch._tensor.Tensor*7
+value,
+torch._tensor.Tensor"torch._tensor.Tensor*t
+key_padding_mask\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None *2
+need_weights
+builtins.bool"builtins.bool *m
+	attn_mask\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None *:
+average_attn_weights
+builtins.bool"builtins.bool */
+	is_causal
+builtins.bool"builtins.bool rù
+_FLOAT_MODULEKtorch.ao.nn.quantizable.modules.activation.MultiheadAttention._FLOAT_MODULE?
+CallableType[builtins.type]
+builtins.type"builtins.typer®
+__constants__Ktorch.ao.nn.quantizable.modules.activation.MultiheadAttention.__constants__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.listrî
+linear_QFtorch.ao.nn.quantizable.modules.activation.MultiheadAttention.linear_Q@
+torch.nn.modules.linear.Linear"torch.nn.modules.linear.Linearrî
+linear_KFtorch.ao.nn.quantizable.modules.activation.MultiheadAttention.linear_K@
+torch.nn.modules.linear.Linear"torch.nn.modules.linear.Linearrî
+linear_VFtorch.ao.nn.quantizable.modules.activation.MultiheadAttention.linear_V@
+torch.nn.modules.linear.Linear"torch.nn.modules.linear.LinearrR
+out_projFtorch.ao.nn.quantizable.modules.activation.MultiheadAttention.out_projrÎ
+q_scaling_productOtorch.ao.nn.quantizable.modules.activation.MultiheadAttention.q_scaling_productÑ
+@torch.ao.nn.quantized.modules.functional_modules.FloatFunctional"@torch.ao.nn.quantized.modules.functional_modules.FloatFunctionalr¥
+quant_attn_outputOtorch.ao.nn.quantizable.modules.activation.MultiheadAttention.quant_attn_outputN
+%torch.ao.quantization.stubs.QuantStub"%torch.ao.quantization.stubs.QuantStubrƒ
+quant_attn_output_weightsWtorch.ao.nn.quantizable.modules.activation.MultiheadAttention.quant_attn_output_weightsN
+%torch.ao.quantization.stubs.QuantStub"%torch.ao.quantization.stubs.QuantStubr®
+	dequant_qGtorch.ao.nn.quantizable.modules.activation.MultiheadAttention.dequant_qR
+'torch.ao.quantization.stubs.DeQuantStub"'torch.ao.quantization.stubs.DeQuantStubr®
+	dequant_kGtorch.ao.nn.quantizable.modules.activation.MultiheadAttention.dequant_kR
+'torch.ao.quantization.stubs.DeQuantStub"'torch.ao.quantization.stubs.DeQuantStubr®
+	dequant_vGtorch.ao.nn.quantizable.modules.activation.MultiheadAttention.dequant_vR
+'torch.ao.quantization.stubs.DeQuantStub"'torch.ao.quantization.stubs.DeQuantStub*¶
+__annotations__:torch.ao.nn.quantizable.modules.activation.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*
+nnFtorch.nn.functional *â
+__all__2torch.ao.nn.quantizable.modules.activation.__all__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list

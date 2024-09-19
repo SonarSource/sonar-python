@@ -1,0 +1,624 @@
+
+ torch._inductor.select_algorithmT
+KernelNamespace0torch._inductor.select_algorithm.KernelNamespace"builtins.object∞
+PartialRender.torch._inductor.select_algorithm.PartialRender"builtins.object*n
+__init__7torch._inductor.select_algorithm.PartialRender.__init__*
+self*
+code*
+replacement_hooks*Ô
+finalize_hook<torch._inductor.select_algorithm.PartialRender.finalize_hook"
+None*j
+self`
+.torch._inductor.select_algorithm.PartialRender".torch._inductor.select_algorithm.PartialRender**
+hook_key
+builtins.str"builtins.str*’
+finalize_all;torch._inductor.select_algorithm.PartialRender.finalize_all"
+builtins.str"builtins.str*j
+self`
+.torch._inductor.select_algorithm.PartialRender".torch._inductor.select_algorithm.PartialRenderrD
+code3torch._inductor.select_algorithm.PartialRender.code
+Anyr^
+replacement_hooks@torch._inductor.select_algorithm.PartialRender.replacement_hooks
+Anyé6
+TritonTemplateKernel5torch._inductor.select_algorithm.TritonTemplateKernel"+torch._inductor.codegen.triton.TritonKernel*ñ
+__init__>torch._inductor.select_algorithm.TritonTemplateKernel.__init__"
+None*x
+selfn
+5torch._inductor.select_algorithm.TritonTemplateKernel"5torch._inductor.select_algorithm.TritonTemplateKernel*
+kernel_name
+Any*
+input_nodes
+Any*
+output_node
+Any*
+defines
+Any*
+
+num_stages
+Any*
+	num_warps
+Any*
+grid_fn
+Any*
+meta
+Any*
+
+call_sizes
+Any*
+use_jit
+Any *
+prefix_args
+Any *
+suffix_args
+Any *
+epilogue_fn
+Any *Ë
+	subgraphs÷
+<Union[builtins.list[torch._inductor.ir.ComputedBuffer],None]â
+0builtins.list[torch._inductor.ir.ComputedBuffer]F
+!torch._inductor.ir.ComputedBuffer"!torch._inductor.ir.ComputedBuffer"builtins.list
+None *
+index_dtype
+Any*©
+set_subgraph_bodyGtorch._inductor.select_algorithm.TritonTemplateKernel.set_subgraph_body"
+Any*x
+selfn
+5torch._inductor.select_algorithm.TritonTemplateKernel"5torch._inductor.select_algorithm.TritonTemplateKernel*+
+	body_name
+builtins.str"builtins.str0:contextlib.contextmanager*Ø
+create_subgraph_bodyJtorch._inductor.select_algorithm.TritonTemplateKernel.create_subgraph_body"
+Any*x
+selfn
+5torch._inductor.select_algorithm.TritonTemplateKernel"5torch._inductor.select_algorithm.TritonTemplateKernel*+
+	body_name
+builtins.str"builtins.str0:contextlib.contextmanager*b
+need_numel_argsEtorch._inductor.select_algorithm.TritonTemplateKernel.need_numel_args*
+self*v
+estimate_kernel_num_bytesOtorch._inductor.select_algorithm.TritonTemplateKernel.estimate_kernel_num_bytes*
+self*V
+	jit_lines?torch._inductor.select_algorithm.TritonTemplateKernel.jit_lines*
+self*f
+
+def_kernel@torch._inductor.select_algorithm.TritonTemplateKernel.def_kernel*
+self*
+argnames*ñ
+size:torch._inductor.select_algorithm.TritonTemplateKernel.size"
+Any*x
+selfn
+5torch._inductor.select_algorithm.TritonTemplateKernel"5torch._inductor.select_algorithm.TritonTemplateKernel*&
+name
+builtins.str"builtins.str*'
+index
+builtins.int"builtins.int*e
+stride<torch._inductor.select_algorithm.TritonTemplateKernel.stride*
+self*
+name*	
+index*Á
+modificationBtorch._inductor.select_algorithm.TritonTemplateKernel.modification"
+builtins.str"builtins.str*x
+selfn
+5torch._inductor.select_algorithm.TritonTemplateKernel"5torch._inductor.select_algorithm.TritonTemplateKernel*1
+subgraph_number
+builtins.int"builtins.int*-
+output_name
+builtins.str"builtins.str*
+fixed_inputs
+Any*˛
+store_outputBtorch._inductor.select_algorithm.TritonTemplateKernel.store_output"
+Any*x
+selfn
+5torch._inductor.select_algorithm.TritonTemplateKernel"5torch._inductor.select_algorithm.TritonTemplateKernel*|
+indiceso
+$Union[builtins.list[Any],Tuple[Any]],
+builtins.list[Any]
+Any"builtins.list
+
+Tuple[Any]
+Any*%
+val
+builtins.str"builtins.str*P
+maskD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *0
+indent_width
+builtins.int"builtins.int *j
+render<torch._inductor.select_algorithm.TritonTemplateKernel.render*
+self*
+template*
+
+kwargs*w
+	make_load?torch._inductor.select_algorithm.TritonTemplateKernel.make_load*
+self*
+name*
+indices*
+mask*\
+template_envBtorch._inductor.select_algorithm.TritonTemplateKernel.template_env*
+self*”
+indexing>torch._inductor.select_algorithm.TritonTemplateKernel.indexing"
+Any*x
+selfn
+5torch._inductor.select_algorithm.TritonTemplateKernel"5torch._inductor.select_algorithm.TritonTemplateKernel*
+index
+Any*
+dense_indexing
+Any *
+
+copy_shape
+Any *
+override_mask
+Any *
+	block_ptr
+Any *h
+codegen_range_treeHtorch._inductor.select_algorithm.TritonTemplateKernel.codegen_range_tree*
+self*Ù
+call_kernelAtorch._inductor.select_algorithm.TritonTemplateKernel.call_kernel"
+Any*x
+selfn
+5torch._inductor.select_algorithm.TritonTemplateKernel"5torch._inductor.select_algorithm.TritonTemplateKernel*&
+name
+builtins.str"builtins.str*w
+nodek
+%Union[torch._inductor.ir.IRNode,None]6
+torch._inductor.ir.IRNode"torch._inductor.ir.IRNode
+None rY
+input_nodesAtorch._inductor.select_algorithm.TritonTemplateKernel.input_nodes
+AnyrY
+output_nodeAtorch._inductor.select_algorithm.TritonTemplateKernel.output_node
+Anyró
+named_input_nodesGtorch._inductor.select_algorithm.TritonTemplateKernel.named_input_nodes9
+builtins.dict[Any,Any]
+Any
+Any"builtins.dictrQ
+defines=torch._inductor.select_algorithm.TritonTemplateKernel.defines
+Anyr^
+template_maskCtorch._inductor.select_algorithm.TritonTemplateKernel.template_mask
+NonerQ
+use_jit=torch._inductor.select_algorithm.TritonTemplateKernel.use_jit
+AnyrW
+
+num_stages@torch._inductor.select_algorithm.TritonTemplateKernel.num_stages
+AnyrU
+	num_warps?torch._inductor.select_algorithm.TritonTemplateKernel.num_warps
+AnyrQ
+grid_fn=torch._inductor.select_algorithm.TritonTemplateKernel.grid_fn
+AnyrK
+meta:torch._inductor.select_algorithm.TritonTemplateKernel.meta
+AnyrW
+
+call_sizes@torch._inductor.select_algorithm.TritonTemplateKernel.call_sizes
+AnyrY
+prefix_argsAtorch._inductor.select_algorithm.TritonTemplateKernel.prefix_args
+AnyrY
+suffix_argsAtorch._inductor.select_algorithm.TritonTemplateKernel.suffix_args
+AnyrY
+epilogue_fnAtorch._inductor.select_algorithm.TritonTemplateKernel.epilogue_fn
+Anyrç
+render_hooksBtorch._inductor.select_algorithm.TritonTemplateKernel.render_hooks9
+builtins.dict[Any,Any]
+Any
+Any"builtins.dictrò
+triton_metaAtorch._inductor.select_algorithm.TritonTemplateKernel.triton_meta≈
+7Union[builtins.dict[builtins.str,builtins.object],None]~
++builtins.dict[builtins.str,builtins.object]
+builtins.str"builtins.str"
+builtins.object"builtins.object"builtins.dict
+Noner•
+	subgraphs?torch._inductor.select_algorithm.TritonTemplateKernel.subgraphs÷
+<Union[builtins.list[torch._inductor.ir.ComputedBuffer],None]â
+0builtins.list[torch._inductor.ir.ComputedBuffer]F
+!torch._inductor.ir.ComputedBuffer"!torch._inductor.ir.ComputedBuffer"builtins.list
+Nonerê
+body:torch._inductor.select_algorithm.TritonTemplateKernel.bodyL
+$torch._inductor.utils.IndentedBuffer"$torch._inductor.utils.IndentedBufferrò
+subgraph_bodiesEtorch._inductor.select_algorithm.TritonTemplateKernel.subgraph_bodiesΩ
+@builtins.dict[builtins.str,torch._inductor.utils.IndentedBuffer]
+builtins.str"builtins.strL
+$torch._inductor.utils.IndentedBuffer"$torch._inductor.utils.IndentedBuffer"builtins.dictrà
+template_indicesFtorch._inductor.select_algorithm.TritonTemplateKernel.template_indices,
+builtins.list[Any]
+Any"builtins.listÁ
+
+TritonTemplate/torch._inductor.select_algorithm.TritonTemplate"-torch._inductor.codegen.common.KernelTemplate*∑
+__init__8torch._inductor.select_algorithm.TritonTemplate.__init__"
+None*l
+selfb
+/torch._inductor.select_algorithm.TritonTemplate"/torch._inductor.select_algorithm.TritonTemplate*&
+name
+builtins.str"builtins.str*
+grid
+Any*(
+source
+builtins.str"builtins.str*
+debug
+Any *à
+generate8torch._inductor.select_algorithm.TritonTemplate.generate*
+self*
+input_nodes*
+
+layout*
+
+num_stages*
+	num_warps*
+prefix_args *
+suffix_args *
+epilogue_fn *
+	subgraphs *
+mutated_inputs *
+
+call_sizes *
+
+kwargsrû
+index_counter=torch._inductor.select_algorithm.TritonTemplate.index_counterN
+itertools.count[builtins.int]
+builtins.int"builtins.int"itertools.countrØ
+all_templates=torch._inductor.select_algorithm.TritonTemplate.all_templatesﬁ
+Kbuiltins.dict[builtins.str,torch._inductor.select_algorithm.TritonTemplate]
+builtins.str"builtins.strb
+/torch._inductor.select_algorithm.TritonTemplate"/torch._inductor.select_algorithm.TritonTemplate"builtins.dictrE
+grid4torch._inductor.select_algorithm.TritonTemplate.grid
+AnyrM
+template8torch._inductor.select_algorithm.TritonTemplate.template
+AnyrG
+debug5torch._inductor.select_algorithm.TritonTemplate.debug
+AnyÄ
+ExternKernelChoice3torch._inductor.select_algorithm.ExternKernelChoice"builtins.object*◊
+__init__<torch._inductor.select_algorithm.ExternKernelChoice.__init__*
+self*
+
+kernel*
+
+cpp_kernel *
+
+name *
+has_out_variant *
+op_overload *
+use_fallback_kernel *
+kernel_creator *X
+to_callable?torch._inductor.select_algorithm.ExternKernelChoice.to_callable*
+self*T
+	call_name=torch._inductor.select_algorithm.ExternKernelChoice.call_name*
+self*T
+hash_key<torch._inductor.select_algorithm.ExternKernelChoice.hash_key*
+self0*ò
+bind8torch._inductor.select_algorithm.ExternKernelChoice.bind*
+self*
+input_nodes*
+
+layout*#
+ordered_kwargs_for_cpp_kernel *
+
+kwargsrI
+name8torch._inductor.select_algorithm.ExternKernelChoice.name
+Anyr_
+cpp_kernel_nameCtorch._inductor.select_algorithm.ExternKernelChoice.cpp_kernel_name
+Anyr_
+has_out_variantCtorch._inductor.select_algorithm.ExternKernelChoice.has_out_variant
+AnyrW
+op_overload?torch._inductor.select_algorithm.ExternKernelChoice.op_overload
+Anyrg
+use_fallback_kernelGtorch._inductor.select_algorithm.ExternKernelChoice.use_fallback_kernel
+Anyr]
+kernel_creatorBtorch._inductor.select_algorithm.ExternKernelChoice.kernel_creator
+Anyr{
+ordered_kwargs_for_cpp_kernelQtorch._inductor.select_algorithm.ExternKernelChoice.ordered_kwargs_for_cpp_kernel
+Anyè%
+TritonTemplateCaller5torch._inductor.select_algorithm.TritonTemplateCaller"+torch._inductor.ir.TritonTemplateCallerBase*Ÿ
+__init__>torch._inductor.select_algorithm.TritonTemplateCaller.__init__"
+None*x
+selfn
+5torch._inductor.select_algorithm.TritonTemplateCaller"5torch._inductor.select_algorithm.TritonTemplateCaller*
+name
+Any*
+input_nodes
+Any*
+layout
+Any*
+make_kernel_render
+Any*
+debug_extra
+Any*
+bmreq
+Any*ÿ
+log_info«
+€Union[builtins.dict[builtins.str,Union[TypeAlias[Union[builtins.int,builtins.float,builtins.bool,builtins.str,builtins.list[Union[builtins.int,builtins.str,builtins.float,builtins.bool]]]],builtins.list[Unknown]]],None]⁄	
+œbuiltins.dict[builtins.str,Union[TypeAlias[Union[builtins.int,builtins.float,builtins.bool,builtins.str,builtins.list[Union[builtins.int,builtins.str,builtins.float,builtins.bool]]]],builtins.list[Unknown]]]
+builtins.str"builtins.strÿ
+≥Union[TypeAlias[Union[builtins.int,builtins.float,builtins.bool,builtins.str,builtins.list[Union[builtins.int,builtins.str,builtins.float,builtins.bool]]]],builtins.list[Unknown]]Ú
+ïTypeAlias[Union[builtins.int,builtins.float,builtins.bool,builtins.str,builtins.list[Union[builtins.int,builtins.str,builtins.float,builtins.bool]]]]Ø
+äUnion[builtins.int,builtins.float,builtins.bool,builtins.str,builtins.list[Union[builtins.int,builtins.str,builtins.float,builtins.bool]]]
+builtins.int"builtins.int 
+builtins.float"builtins.float
+builtins.bool"builtins.bool
+builtins.str"builtins.strü
+Lbuiltins.list[Union[builtins.int,builtins.str,builtins.float,builtins.bool]]ø
+=Union[builtins.int,builtins.str,builtins.float,builtins.bool]
+builtins.int"builtins.int
+builtins.str"builtins.str 
+builtins.float"builtins.float
+builtins.bool"builtins.bool"builtins.list"$torch._inductor.ir.PrimitiveInfoType)
+builtins.list[Unknown] "builtins.list"builtins.dict
+None *
+mutated_inputs
+Any *i
+	benchmark?torch._inductor.select_algorithm.TritonTemplateCaller.benchmark*
+self*
+args*
+out*X
+
+precompile@torch._inductor.select_algorithm.TritonTemplateCaller.precompile*
+self*J
+__str__=torch._inductor.select_algorithm.TritonTemplateCaller.__str__* *V
+	call_name?torch._inductor.select_algorithm.TritonTemplateCaller.call_name*
+self*T
+hash_key>torch._inductor.select_algorithm.TritonTemplateCaller.hash_key*
+self*Z
+output_nodeAtorch._inductor.select_algorithm.TritonTemplateCaller.output_node*
+self*£
+	info_dict?torch._inductor.select_algorithm.TritonTemplateCaller.info_dict"⁄	
+œbuiltins.dict[builtins.str,Union[TypeAlias[Union[builtins.int,builtins.float,builtins.bool,builtins.str,builtins.list[Union[builtins.int,builtins.str,builtins.float,builtins.bool]]]],builtins.list[Unknown]]]
+builtins.str"builtins.strÿ
+≥Union[TypeAlias[Union[builtins.int,builtins.float,builtins.bool,builtins.str,builtins.list[Union[builtins.int,builtins.str,builtins.float,builtins.bool]]]],builtins.list[Unknown]]Ú
+ïTypeAlias[Union[builtins.int,builtins.float,builtins.bool,builtins.str,builtins.list[Union[builtins.int,builtins.str,builtins.float,builtins.bool]]]]Ø
+äUnion[builtins.int,builtins.float,builtins.bool,builtins.str,builtins.list[Union[builtins.int,builtins.str,builtins.float,builtins.bool]]]
+builtins.int"builtins.int 
+builtins.float"builtins.float
+builtins.bool"builtins.bool
+builtins.str"builtins.strü
+Lbuiltins.list[Union[builtins.int,builtins.str,builtins.float,builtins.bool]]ø
+=Union[builtins.int,builtins.str,builtins.float,builtins.bool]
+builtins.int"builtins.int
+builtins.str"builtins.str 
+builtins.float"builtins.float
+builtins.bool"builtins.bool"builtins.list"$torch._inductor.ir.PrimitiveInfoType)
+builtins.list[Unknown] "builtins.list"builtins.dict*x
+selfn
+5torch._inductor.select_algorithm.TritonTemplateCaller"5torch._inductor.select_algorithm.TritonTemplateCaller*p
+get_make_kernel_renderLtorch._inductor.select_algorithm.TritonTemplateCaller.get_make_kernel_render*
+selfrg
+make_kernel_renderHtorch._inductor.select_algorithm.TritonTemplateCaller.make_kernel_render
+AnyrY
+debug_extraAtorch._inductor.select_algorithm.TritonTemplateCaller.debug_extra
+Anyr∏
+bmreq;torch._inductor.select_algorithm.TritonTemplateCaller.bmreqr
+7torch._inductor.autotune_process.TritonBenchmarkRequest"7torch._inductor.autotune_process.TritonBenchmarkRequestr£
+log_info>torch._inductor.select_algorithm.TritonTemplateCaller.log_infoW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dictr_
+mutated_inputsDtorch._inductor.select_algorithm.TritonTemplateCaller.mutated_inputs
+Any¥
+ExternKernelCaller3torch._inductor.select_algorithm.ExternKernelCaller"torch._inductor.ir.ChoiceCaller*¶
+__init__<torch._inductor.select_algorithm.ExternKernelCaller.__init__"
+None*t
+selfj
+3torch._inductor.select_algorithm.ExternKernelCaller"3torch._inductor.select_algorithm.ExternKernelCaller*v
+choicej
+3torch._inductor.select_algorithm.ExternKernelChoice"3torch._inductor.select_algorithm.ExternKernelChoice*
+input_nodes
+Any*
+layout
+Any*
+kwargs
+Any *
+has_out_variant
+Any *H
+__str__;torch._inductor.select_algorithm.ExternKernelCaller.__str__* *g
+	benchmark=torch._inductor.select_algorithm.ExternKernelCaller.benchmark*
+self*
+args*
+out*X
+to_callable?torch._inductor.select_algorithm.ExternKernelCaller.to_callable*
+self*R
+hash_key<torch._inductor.select_algorithm.ExternKernelCaller.hash_key*
+self*X
+output_node?torch._inductor.select_algorithm.ExternKernelCaller.output_node*
+self*ù
+	info_dict=torch._inductor.select_algorithm.ExternKernelCaller.info_dict"⁄	
+œbuiltins.dict[builtins.str,Union[TypeAlias[Union[builtins.int,builtins.float,builtins.bool,builtins.str,builtins.list[Union[builtins.int,builtins.str,builtins.float,builtins.bool]]]],builtins.list[Unknown]]]
+builtins.str"builtins.strÿ
+≥Union[TypeAlias[Union[builtins.int,builtins.float,builtins.bool,builtins.str,builtins.list[Union[builtins.int,builtins.str,builtins.float,builtins.bool]]]],builtins.list[Unknown]]Ú
+ïTypeAlias[Union[builtins.int,builtins.float,builtins.bool,builtins.str,builtins.list[Union[builtins.int,builtins.str,builtins.float,builtins.bool]]]]Ø
+äUnion[builtins.int,builtins.float,builtins.bool,builtins.str,builtins.list[Union[builtins.int,builtins.str,builtins.float,builtins.bool]]]
+builtins.int"builtins.int 
+builtins.float"builtins.float
+builtins.bool"builtins.bool
+builtins.str"builtins.strü
+Lbuiltins.list[Union[builtins.int,builtins.str,builtins.float,builtins.bool]]ø
+=Union[builtins.int,builtins.str,builtins.float,builtins.bool]
+builtins.int"builtins.int
+builtins.str"builtins.str 
+builtins.float"builtins.float
+builtins.bool"builtins.bool"builtins.list"$torch._inductor.ir.PrimitiveInfoType)
+builtins.list[Unknown] "builtins.list"builtins.dict*t
+selfj
+3torch._inductor.select_algorithm.ExternKernelCaller"3torch._inductor.select_algorithm.ExternKernelCallerr∞
+choice:torch._inductor.select_algorithm.ExternKernelCaller.choicej
+3torch._inductor.select_algorithm.ExternKernelChoice"3torch._inductor.select_algorithm.ExternKernelChoicerØ
+kwargs:torch._inductor.select_algorithm.ExternKernelCaller.kwargsi
+!Union[Any,builtins.dict[Any,Any]]
+Any9
+builtins.dict[Any,Any]
+Any
+Any"builtins.dictr_
+has_out_variantCtorch._inductor.select_algorithm.ExternKernelCaller.has_out_variant
+Anyê
+ DataProcessorChoiceCallerWrapperAtorch._inductor.select_algorithm.DataProcessorChoiceCallerWrapper"builtins.object*í
+__init__Jtorch._inductor.select_algorithm.DataProcessorChoiceCallerWrapper.__init__*
+self*
+wrapped*
+preprocessor*
+postprocessor*`
+__getattr__Mtorch._inductor.select_algorithm.DataProcessorChoiceCallerWrapper.__getattr__* * *≥
+	benchmarkKtorch._inductor.select_algorithm.DataProcessorChoiceCallerWrapper.benchmark" 
+builtins.float"builtins.float*ë
+selfÜ
+Atorch._inductor.select_algorithm.DataProcessorChoiceCallerWrapper"Atorch._inductor.select_algorithm.DataProcessorChoiceCallerWrapper*
+args
+Any*
+out
+Any*Æ
+output_nodeMtorch._inductor.select_algorithm.DataProcessorChoiceCallerWrapper.output_node"<
+torch._inductor.ir.TensorBox"torch._inductor.ir.TensorBox*ë
+selfÜ
+Atorch._inductor.select_algorithm.DataProcessorChoiceCallerWrapper"Atorch._inductor.select_algorithm.DataProcessorChoiceCallerWrapper*Ä
+__repr__Jtorch._inductor.select_algorithm.DataProcessorChoiceCallerWrapper.__repr__"
+builtins.str"builtins.str*âÜ
+Atorch._inductor.select_algorithm.DataProcessorChoiceCallerWrapper"Atorch._inductor.select_algorithm.DataProcessorChoiceCallerWrapperr_
+_wrappedJtorch._inductor.select_algorithm.DataProcessorChoiceCallerWrapper._wrapped
+Anyri
+_preprocessorOtorch._inductor.select_algorithm.DataProcessorChoiceCallerWrapper._preprocessor
+Anyrk
+_postprocessorPtorch._inductor.select_algorithm.DataProcessorChoiceCallerWrapper._postprocessor
+Anyë	
+DataProcessorTemplateWrapper=torch._inductor.select_algorithm.DataProcessorTemplateWrapper"builtins.object*ß
+__init__Ftorch._inductor.select_algorithm.DataProcessorTemplateWrapper.__init__*
+self*
+wrapped_template_cls*
+preprocessor*
+postprocessor*
+
+kwargs*\
+__getattr__Itorch._inductor.select_algorithm.DataProcessorTemplateWrapper.__getattr__* * *ã
+maybe_append_choiceQtorch._inductor.select_algorithm.DataProcessorTemplateWrapper.maybe_append_choice*
+self*
+choices*
+
+kwargs*h
+generateFtorch._inductor.select_algorithm.DataProcessorTemplateWrapper.generate*
+self*
+
+kwargs*Û
+__repr__Ftorch._inductor.select_algorithm.DataProcessorTemplateWrapper.__repr__"
+builtins.str"builtins.str*Ä~
+=torch._inductor.select_algorithm.DataProcessorTemplateWrapper"=torch._inductor.select_algorithm.DataProcessorTemplateWrapperre
+_preprocessorKtorch._inductor.select_algorithm.DataProcessorTemplateWrapper._preprocessor
+Anyrg
+_postprocessorLtorch._inductor.select_algorithm.DataProcessorTemplateWrapper._postprocessor
+Anyr[
+_wrappedFtorch._inductor.select_algorithm.DataProcessorTemplateWrapper._wrapped
+Anyü
+ErrorFromChoice0torch._inductor.select_algorithm.ErrorFromChoice"builtins.RuntimeError*∫
+__init__9torch._inductor.select_algorithm.ErrorFromChoice.__init__"
+None*n
+selfd
+0torch._inductor.select_algorithm.ErrorFromChoice"0torch._inductor.select_algorithm.ErrorFromChoice*
+msg
+Any*N
+choiceB
+torch._inductor.ir.ChoiceCaller"torch._inductor.ir.ChoiceCaller*
+
+inputs_str
+AnyrÖ
+choice7torch._inductor.select_algorithm.ErrorFromChoice.choiceB
+torch._inductor.ir.ChoiceCaller"torch._inductor.ir.ChoiceCallerb
+NoValidChoicesError4torch._inductor.select_algorithm.NoValidChoicesError"builtins.RuntimeError≥
+AlgorithmSelectorCache7torch._inductor.select_algorithm.AlgorithmSelectorCache")torch._inductor.codecache.PersistentCache*l
+__init__@torch._inductor.select_algorithm.AlgorithmSelectorCache.__init__*
+self*
+args*
+
+kwargs*ª
+__call__@torch._inductor.select_algorithm.AlgorithmSelectorCache.__call__"
+Any*|
+selfr
+7torch._inductor.select_algorithm.AlgorithmSelectorCache"7torch._inductor.select_algorithm.AlgorithmSelectorCache*
+name
+Any*ë
+choicesÉ
+.builtins.list[torch._inductor.ir.ChoiceCaller]B
+torch._inductor.ir.ChoiceCaller"torch._inductor.ir.ChoiceCaller"builtins.list*
+input_nodes
+Any*
+layout
+Any*•
+input_gen_fnsè
+GUnion[builtins.dict[builtins.int,CallableType[builtins.function]],None]∑
+;builtins.dict[builtins.int,CallableType[builtins.function]]
+builtins.int"builtins.intK
+CallableType[builtins.function]&
+builtins.function"builtins.function"builtins.dict
+None *B
+precompilation_timeout_seconds
+builtins.int"builtins.int *$
+return_multi_template
+Any *∑
+make_benchmark_fnItorch._inductor.select_algorithm.AlgorithmSelectorCache.make_benchmark_fn*
+cls*
+choices*
+input_nodes*
+
+layout*
+input_gen_fns 0:classmethodp*∆
+log_resultsCtorch._inductor.select_algorithm.AlgorithmSelectorCache.log_results"
+Any*&
+name
+builtins.str"builtins.str*Ç
+input_nodesq
+(builtins.list[torch._inductor.ir.IRNode]6
+torch._inductor.ir.IRNode"torch._inductor.ir.IRNode"builtins.list*¬
+timings¥
+=builtins.dict[torch._inductor.ir.ChoiceCaller,builtins.float]B
+torch._inductor.ir.ChoiceCaller"torch._inductor.ir.ChoiceCaller 
+builtins.float"builtins.float"builtins.dict*,
+elapse 
+builtins.float"builtins.float*7
+precompile_elapse 
+builtins.float"builtins.float0:staticmethodh*Ü
+benchmark_example_valueOtorch._inductor.select_algorithm.AlgorithmSelectorCache.benchmark_example_value*
+node0:staticmethodh*d
+key_of>torch._inductor.select_algorithm.AlgorithmSelectorCache.key_of*
+node0:staticmethodhrñ
+precompile_cacheHtorch._inductor.select_algorithm.AlgorithmSelectorCache.precompile_cache∑
+;builtins.dict[builtins.str,CallableType[builtins.function]]
+builtins.str"builtins.strK
+CallableType[builtins.function]&
+builtins.function"builtins.function"builtins.dictÉ
+PlaceholderSubstitution@335<torch._inductor.select_algorithm.PlaceholderSubstitution@335"builtins.object*ó
+loadAtorch._inductor.select_algorithm.PlaceholderSubstitution@335.load"
+Any*Ü
+self|
+<torch._inductor.select_algorithm.PlaceholderSubstitution@335"<torch._inductor.select_algorithm.PlaceholderSubstitution@335*&
+name
+builtins.str"builtins.str*
+index
+Any*ë
+indirect_indexingNtorch._inductor.select_algorithm.PlaceholderSubstitution@335.indirect_indexing*
+self*
+	index_var*
+size*	
+checkrg
+nameAtorch._inductor.select_algorithm.PlaceholderSubstitution@335.name
+builtins.str"builtins.str≠
+'<subclass of "Loops" and "InputBuffer">Htorch._inductor.select_algorithm.<subclass of "Loops" and "InputBuffer">"torch._inductor.ir.Loops"torch._inductor.ir.InputBufferW
+append_to_log.torch._inductor.select_algorithm.append_to_log*
+filename*
+datam
+autotune_select_algorithm:torch._inductor.select_algorithm.autotune_select_algorithm*
+args*
+
+kwargsK
+realize_inputs/torch._inductor.select_algorithm.realize_inputs*
+args*ú
+__annotations__0torch._inductor.select_algorithm.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*8
+sympy&torch._inductor.select_algorithm.sympy
+Any*M
+log$torch._inductor.select_algorithm.log 
+logging.Logger"logging.Logger*ä
+VERIFY'torch._inductor.select_algorithm.VERIFYW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*a
+PRINT_AUTOTUNE/torch._inductor.select_algorithm.PRINT_AUTOTUNE
+builtins.bool"builtins.bool*O
+DEBUG&torch._inductor.select_algorithm.DEBUG
+builtins.bool"builtins.bool*ß
+extern_kernels/torch._inductor.select_algorithm.extern_kernelsd
+0torch._inductor.select_algorithm.KernelNamespace"0torch._inductor.select_algorithm.KernelNamespace*ü
+_ALGORITHM_SELECTOR_CACHE:torch._inductor.select_algorithm._ALGORITHM_SELECTOR_CACHE≈
+CUnion[torch._inductor.select_algorithm.AlgorithmSelectorCache,None]r
+7torch._inductor.select_algorithm.AlgorithmSelectorCache"7torch._inductor.select_algorithm.AlgorithmSelectorCache
+None

@@ -1,0 +1,604 @@
+
+torch.fx.interpreter π
+Interpreter torch.fx.interpreter.Interpreter"builtins.object*à
+__init__)torch.fx.interpreter.Interpreter.__init__"
+None*N
+selfD
+ torch.fx.interpreter.Interpreter" torch.fx.interpreter.Interpreter*L
+module@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*<
+garbage_collect_values
+builtins.bool"builtins.bool *i
+graph\
+ Union[torch.fx.graph.Graph,None],
+torch.fx.graph.Graph"torch.fx.graph.Graph
+None 0*ñ
+run$torch.fx.interpreter.Interpreter.run"
+Any*N
+selfD
+ torch.fx.interpreter.Interpreter" torch.fx.interpreter.Interpreter*
+args
+Any*æ
+initial_env™
+1Union[builtins.dict[torch.fx.node.Node,Any],None]i
+%builtins.dict[torch.fx.node.Node,Any](
+torch.fx.node.Node"torch.fx.node.Node
+Any"builtins.dict
+None *:
+enable_io_processing
+builtins.bool"builtins.bool 0*R
+	boxed_run*torch.fx.interpreter.Interpreter.boxed_run*
+self*
+	args_list0*m
+_set_current_node2torch.fx.interpreter.Interpreter._set_current_node*
+self*
+node0:contextmanager*¡
+run_node)torch.fx.interpreter.Interpreter.run_node"
+Any*N
+selfD
+ torch.fx.interpreter.Interpreter" torch.fx.interpreter.Interpreter*/
+n(
+torch.fx.node.Node"torch.fx.node.Node0*Ë
+placeholder,torch.fx.interpreter.Interpreter.placeholder"
+Any*N
+selfD
+ torch.fx.interpreter.Interpreter" torch.fx.interpreter.Interpreter*ä
+target˝
+>TypeAlias[Union[CallableType[builtins.function],builtins.str]]¢
+3Union[CallableType[builtins.function],builtins.str]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+builtins.str"builtins.str"torch.fx.node.Target*›
+args“
+Èbuiltins.tuple[TypeAlias[Union[builtins.tuple[Any],builtins.list[Any],builtins.dict[builtins.str,Any],builtins.slice,builtins.range,torch.fx.node.Node,TypeAlias[Union[builtins.str,builtins.int,builtins.float,builtins.bool,builtins.complex,torch._C.dtype,torch._tensor.Tensor,torch._C.device,torch._C.memory_format,torch._C.layout,torch._ops.OpOverload]],None]]]”
+ŸTypeAlias[Union[builtins.tuple[Any],builtins.list[Any],builtins.dict[builtins.str,Any],builtins.slice,builtins.range,torch.fx.node.Node,TypeAlias[Union[builtins.str,builtins.int,builtins.float,builtins.bool,builtins.complex,torch._C.dtype,torch._tensor.Tensor,torch._C.device,torch._C.memory_format,torch._C.layout,torch._ops.OpOverload]],None]]⁄
+ŒUnion[builtins.tuple[Any],builtins.list[Any],builtins.dict[builtins.str,Any],builtins.slice,builtins.range,torch.fx.node.Node,TypeAlias[Union[builtins.str,builtins.int,builtins.float,builtins.bool,builtins.complex,torch._C.dtype,torch._tensor.Tensor,torch._C.device,torch._C.memory_format,torch._C.layout,torch._ops.OpOverload]],None].
+builtins.tuple[Any]
+Any"builtins.tuple,
+builtins.list[Any]
+Any"builtins.listW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict 
+builtins.slice"builtins.slice 
+builtins.range"builtins.range(
+torch.fx.node.Node"torch.fx.node.Node’
+ TypeAlias[Union[builtins.str,builtins.int,builtins.float,builtins.bool,builtins.complex,torch._C.dtype,torch._tensor.Tensor,torch._C.device,torch._C.memory_format,torch._C.layout,torch._ops.OpOverload]]‚
+øUnion[builtins.str,builtins.int,builtins.float,builtins.bool,builtins.complex,torch._C.dtype,torch._tensor.Tensor,torch._C.device,torch._C.memory_format,torch._C.layout,torch._ops.OpOverload]
+builtins.str"builtins.str
+builtins.int"builtins.int 
+builtins.float"builtins.float
+builtins.bool"builtins.bool$
+builtins.complex"builtins.complex 
+torch._C.dtype"torch._C.dtype,
+torch._tensor.Tensor"torch._tensor.Tensor"
+torch._C.device"torch._C.device0
+torch._C.memory_format"torch._C.memory_format"
+torch._C.layout"torch._C.layout.
+torch._ops.OpOverload"torch._ops.OpOverload"torch.fx.node.BaseArgumentTypes
+None"torch.fx.node.Argument"builtins.tuple*c
+kwargsW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict0*‚
+get_attr)torch.fx.interpreter.Interpreter.get_attr"
+Any*N
+selfD
+ torch.fx.interpreter.Interpreter" torch.fx.interpreter.Interpreter*ä
+target˝
+>TypeAlias[Union[CallableType[builtins.function],builtins.str]]¢
+3Union[CallableType[builtins.function],builtins.str]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+builtins.str"builtins.str"torch.fx.node.Target*›
+args“
+Èbuiltins.tuple[TypeAlias[Union[builtins.tuple[Any],builtins.list[Any],builtins.dict[builtins.str,Any],builtins.slice,builtins.range,torch.fx.node.Node,TypeAlias[Union[builtins.str,builtins.int,builtins.float,builtins.bool,builtins.complex,torch._C.dtype,torch._tensor.Tensor,torch._C.device,torch._C.memory_format,torch._C.layout,torch._ops.OpOverload]],None]]]”
+ŸTypeAlias[Union[builtins.tuple[Any],builtins.list[Any],builtins.dict[builtins.str,Any],builtins.slice,builtins.range,torch.fx.node.Node,TypeAlias[Union[builtins.str,builtins.int,builtins.float,builtins.bool,builtins.complex,torch._C.dtype,torch._tensor.Tensor,torch._C.device,torch._C.memory_format,torch._C.layout,torch._ops.OpOverload]],None]]⁄
+ŒUnion[builtins.tuple[Any],builtins.list[Any],builtins.dict[builtins.str,Any],builtins.slice,builtins.range,torch.fx.node.Node,TypeAlias[Union[builtins.str,builtins.int,builtins.float,builtins.bool,builtins.complex,torch._C.dtype,torch._tensor.Tensor,torch._C.device,torch._C.memory_format,torch._C.layout,torch._ops.OpOverload]],None].
+builtins.tuple[Any]
+Any"builtins.tuple,
+builtins.list[Any]
+Any"builtins.listW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict 
+builtins.slice"builtins.slice 
+builtins.range"builtins.range(
+torch.fx.node.Node"torch.fx.node.Node’
+ TypeAlias[Union[builtins.str,builtins.int,builtins.float,builtins.bool,builtins.complex,torch._C.dtype,torch._tensor.Tensor,torch._C.device,torch._C.memory_format,torch._C.layout,torch._ops.OpOverload]]‚
+øUnion[builtins.str,builtins.int,builtins.float,builtins.bool,builtins.complex,torch._C.dtype,torch._tensor.Tensor,torch._C.device,torch._C.memory_format,torch._C.layout,torch._ops.OpOverload]
+builtins.str"builtins.str
+builtins.int"builtins.int 
+builtins.float"builtins.float
+builtins.bool"builtins.bool$
+builtins.complex"builtins.complex 
+torch._C.dtype"torch._C.dtype,
+torch._tensor.Tensor"torch._tensor.Tensor"
+torch._C.device"torch._C.device0
+torch._C.memory_format"torch._C.memory_format"
+torch._C.layout"torch._C.layout.
+torch._ops.OpOverload"torch._ops.OpOverload"torch.fx.node.BaseArgumentTypes
+None"torch.fx.node.Argument"builtins.tuple*c
+kwargsW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict0*Ï
+call_function.torch.fx.interpreter.Interpreter.call_function"
+Any*N
+selfD
+ torch.fx.interpreter.Interpreter" torch.fx.interpreter.Interpreter*ä
+target˝
+>TypeAlias[Union[CallableType[builtins.function],builtins.str]]¢
+3Union[CallableType[builtins.function],builtins.str]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+builtins.str"builtins.str"torch.fx.node.Target*›
+args“
+Èbuiltins.tuple[TypeAlias[Union[builtins.tuple[Any],builtins.list[Any],builtins.dict[builtins.str,Any],builtins.slice,builtins.range,torch.fx.node.Node,TypeAlias[Union[builtins.str,builtins.int,builtins.float,builtins.bool,builtins.complex,torch._C.dtype,torch._tensor.Tensor,torch._C.device,torch._C.memory_format,torch._C.layout,torch._ops.OpOverload]],None]]]”
+ŸTypeAlias[Union[builtins.tuple[Any],builtins.list[Any],builtins.dict[builtins.str,Any],builtins.slice,builtins.range,torch.fx.node.Node,TypeAlias[Union[builtins.str,builtins.int,builtins.float,builtins.bool,builtins.complex,torch._C.dtype,torch._tensor.Tensor,torch._C.device,torch._C.memory_format,torch._C.layout,torch._ops.OpOverload]],None]]⁄
+ŒUnion[builtins.tuple[Any],builtins.list[Any],builtins.dict[builtins.str,Any],builtins.slice,builtins.range,torch.fx.node.Node,TypeAlias[Union[builtins.str,builtins.int,builtins.float,builtins.bool,builtins.complex,torch._C.dtype,torch._tensor.Tensor,torch._C.device,torch._C.memory_format,torch._C.layout,torch._ops.OpOverload]],None].
+builtins.tuple[Any]
+Any"builtins.tuple,
+builtins.list[Any]
+Any"builtins.listW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict 
+builtins.slice"builtins.slice 
+builtins.range"builtins.range(
+torch.fx.node.Node"torch.fx.node.Node’
+ TypeAlias[Union[builtins.str,builtins.int,builtins.float,builtins.bool,builtins.complex,torch._C.dtype,torch._tensor.Tensor,torch._C.device,torch._C.memory_format,torch._C.layout,torch._ops.OpOverload]]‚
+øUnion[builtins.str,builtins.int,builtins.float,builtins.bool,builtins.complex,torch._C.dtype,torch._tensor.Tensor,torch._C.device,torch._C.memory_format,torch._C.layout,torch._ops.OpOverload]
+builtins.str"builtins.str
+builtins.int"builtins.int 
+builtins.float"builtins.float
+builtins.bool"builtins.bool$
+builtins.complex"builtins.complex 
+torch._C.dtype"torch._C.dtype,
+torch._tensor.Tensor"torch._tensor.Tensor"
+torch._C.device"torch._C.device0
+torch._C.memory_format"torch._C.memory_format"
+torch._C.layout"torch._C.layout.
+torch._ops.OpOverload"torch._ops.OpOverload"torch.fx.node.BaseArgumentTypes
+None"torch.fx.node.Argument"builtins.tuple*c
+kwargsW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict0*Ë
+call_method,torch.fx.interpreter.Interpreter.call_method"
+Any*N
+selfD
+ torch.fx.interpreter.Interpreter" torch.fx.interpreter.Interpreter*ä
+target˝
+>TypeAlias[Union[CallableType[builtins.function],builtins.str]]¢
+3Union[CallableType[builtins.function],builtins.str]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+builtins.str"builtins.str"torch.fx.node.Target*›
+args“
+Èbuiltins.tuple[TypeAlias[Union[builtins.tuple[Any],builtins.list[Any],builtins.dict[builtins.str,Any],builtins.slice,builtins.range,torch.fx.node.Node,TypeAlias[Union[builtins.str,builtins.int,builtins.float,builtins.bool,builtins.complex,torch._C.dtype,torch._tensor.Tensor,torch._C.device,torch._C.memory_format,torch._C.layout,torch._ops.OpOverload]],None]]]”
+ŸTypeAlias[Union[builtins.tuple[Any],builtins.list[Any],builtins.dict[builtins.str,Any],builtins.slice,builtins.range,torch.fx.node.Node,TypeAlias[Union[builtins.str,builtins.int,builtins.float,builtins.bool,builtins.complex,torch._C.dtype,torch._tensor.Tensor,torch._C.device,torch._C.memory_format,torch._C.layout,torch._ops.OpOverload]],None]]⁄
+ŒUnion[builtins.tuple[Any],builtins.list[Any],builtins.dict[builtins.str,Any],builtins.slice,builtins.range,torch.fx.node.Node,TypeAlias[Union[builtins.str,builtins.int,builtins.float,builtins.bool,builtins.complex,torch._C.dtype,torch._tensor.Tensor,torch._C.device,torch._C.memory_format,torch._C.layout,torch._ops.OpOverload]],None].
+builtins.tuple[Any]
+Any"builtins.tuple,
+builtins.list[Any]
+Any"builtins.listW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict 
+builtins.slice"builtins.slice 
+builtins.range"builtins.range(
+torch.fx.node.Node"torch.fx.node.Node’
+ TypeAlias[Union[builtins.str,builtins.int,builtins.float,builtins.bool,builtins.complex,torch._C.dtype,torch._tensor.Tensor,torch._C.device,torch._C.memory_format,torch._C.layout,torch._ops.OpOverload]]‚
+øUnion[builtins.str,builtins.int,builtins.float,builtins.bool,builtins.complex,torch._C.dtype,torch._tensor.Tensor,torch._C.device,torch._C.memory_format,torch._C.layout,torch._ops.OpOverload]
+builtins.str"builtins.str
+builtins.int"builtins.int 
+builtins.float"builtins.float
+builtins.bool"builtins.bool$
+builtins.complex"builtins.complex 
+torch._C.dtype"torch._C.dtype,
+torch._tensor.Tensor"torch._tensor.Tensor"
+torch._C.device"torch._C.device0
+torch._C.memory_format"torch._C.memory_format"
+torch._C.layout"torch._C.layout.
+torch._ops.OpOverload"torch._ops.OpOverload"torch.fx.node.BaseArgumentTypes
+None"torch.fx.node.Argument"builtins.tuple*c
+kwargsW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict0*Ë
+call_module,torch.fx.interpreter.Interpreter.call_module"
+Any*N
+selfD
+ torch.fx.interpreter.Interpreter" torch.fx.interpreter.Interpreter*ä
+target˝
+>TypeAlias[Union[CallableType[builtins.function],builtins.str]]¢
+3Union[CallableType[builtins.function],builtins.str]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+builtins.str"builtins.str"torch.fx.node.Target*›
+args“
+Èbuiltins.tuple[TypeAlias[Union[builtins.tuple[Any],builtins.list[Any],builtins.dict[builtins.str,Any],builtins.slice,builtins.range,torch.fx.node.Node,TypeAlias[Union[builtins.str,builtins.int,builtins.float,builtins.bool,builtins.complex,torch._C.dtype,torch._tensor.Tensor,torch._C.device,torch._C.memory_format,torch._C.layout,torch._ops.OpOverload]],None]]]”
+ŸTypeAlias[Union[builtins.tuple[Any],builtins.list[Any],builtins.dict[builtins.str,Any],builtins.slice,builtins.range,torch.fx.node.Node,TypeAlias[Union[builtins.str,builtins.int,builtins.float,builtins.bool,builtins.complex,torch._C.dtype,torch._tensor.Tensor,torch._C.device,torch._C.memory_format,torch._C.layout,torch._ops.OpOverload]],None]]⁄
+ŒUnion[builtins.tuple[Any],builtins.list[Any],builtins.dict[builtins.str,Any],builtins.slice,builtins.range,torch.fx.node.Node,TypeAlias[Union[builtins.str,builtins.int,builtins.float,builtins.bool,builtins.complex,torch._C.dtype,torch._tensor.Tensor,torch._C.device,torch._C.memory_format,torch._C.layout,torch._ops.OpOverload]],None].
+builtins.tuple[Any]
+Any"builtins.tuple,
+builtins.list[Any]
+Any"builtins.listW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict 
+builtins.slice"builtins.slice 
+builtins.range"builtins.range(
+torch.fx.node.Node"torch.fx.node.Node’
+ TypeAlias[Union[builtins.str,builtins.int,builtins.float,builtins.bool,builtins.complex,torch._C.dtype,torch._tensor.Tensor,torch._C.device,torch._C.memory_format,torch._C.layout,torch._ops.OpOverload]]‚
+øUnion[builtins.str,builtins.int,builtins.float,builtins.bool,builtins.complex,torch._C.dtype,torch._tensor.Tensor,torch._C.device,torch._C.memory_format,torch._C.layout,torch._ops.OpOverload]
+builtins.str"builtins.str
+builtins.int"builtins.int 
+builtins.float"builtins.float
+builtins.bool"builtins.bool$
+builtins.complex"builtins.complex 
+torch._C.dtype"torch._C.dtype,
+torch._tensor.Tensor"torch._tensor.Tensor"
+torch._C.device"torch._C.device0
+torch._C.memory_format"torch._C.memory_format"
+torch._C.layout"torch._C.layout.
+torch._ops.OpOverload"torch._ops.OpOverload"torch.fx.node.BaseArgumentTypes
+None"torch.fx.node.Argument"builtins.tuple*c
+kwargsW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict0*ﬁ
+output'torch.fx.interpreter.Interpreter.output"
+Any*N
+selfD
+ torch.fx.interpreter.Interpreter" torch.fx.interpreter.Interpreter*ä
+target˝
+>TypeAlias[Union[CallableType[builtins.function],builtins.str]]¢
+3Union[CallableType[builtins.function],builtins.str]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+builtins.str"builtins.str"torch.fx.node.Target*›
+args“
+Èbuiltins.tuple[TypeAlias[Union[builtins.tuple[Any],builtins.list[Any],builtins.dict[builtins.str,Any],builtins.slice,builtins.range,torch.fx.node.Node,TypeAlias[Union[builtins.str,builtins.int,builtins.float,builtins.bool,builtins.complex,torch._C.dtype,torch._tensor.Tensor,torch._C.device,torch._C.memory_format,torch._C.layout,torch._ops.OpOverload]],None]]]”
+ŸTypeAlias[Union[builtins.tuple[Any],builtins.list[Any],builtins.dict[builtins.str,Any],builtins.slice,builtins.range,torch.fx.node.Node,TypeAlias[Union[builtins.str,builtins.int,builtins.float,builtins.bool,builtins.complex,torch._C.dtype,torch._tensor.Tensor,torch._C.device,torch._C.memory_format,torch._C.layout,torch._ops.OpOverload]],None]]⁄
+ŒUnion[builtins.tuple[Any],builtins.list[Any],builtins.dict[builtins.str,Any],builtins.slice,builtins.range,torch.fx.node.Node,TypeAlias[Union[builtins.str,builtins.int,builtins.float,builtins.bool,builtins.complex,torch._C.dtype,torch._tensor.Tensor,torch._C.device,torch._C.memory_format,torch._C.layout,torch._ops.OpOverload]],None].
+builtins.tuple[Any]
+Any"builtins.tuple,
+builtins.list[Any]
+Any"builtins.listW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict 
+builtins.slice"builtins.slice 
+builtins.range"builtins.range(
+torch.fx.node.Node"torch.fx.node.Node’
+ TypeAlias[Union[builtins.str,builtins.int,builtins.float,builtins.bool,builtins.complex,torch._C.dtype,torch._tensor.Tensor,torch._C.device,torch._C.memory_format,torch._C.layout,torch._ops.OpOverload]]‚
+øUnion[builtins.str,builtins.int,builtins.float,builtins.bool,builtins.complex,torch._C.dtype,torch._tensor.Tensor,torch._C.device,torch._C.memory_format,torch._C.layout,torch._ops.OpOverload]
+builtins.str"builtins.str
+builtins.int"builtins.int 
+builtins.float"builtins.float
+builtins.bool"builtins.bool$
+builtins.complex"builtins.complex 
+torch._C.dtype"torch._C.dtype,
+torch._tensor.Tensor"torch._tensor.Tensor"
+torch._C.device"torch._C.device0
+torch._C.memory_format"torch._C.memory_format"
+torch._C.layout"torch._C.layout.
+torch._ops.OpOverload"torch._ops.OpOverload"torch.fx.node.BaseArgumentTypes
+None"torch.fx.node.Argument"builtins.tuple*c
+kwargsW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict0*æ
+
+fetch_attr+torch.fx.interpreter.Interpreter.fetch_attr"
+Any*N
+selfD
+ torch.fx.interpreter.Interpreter" torch.fx.interpreter.Interpreter*(
+target
+builtins.str"builtins.str0*ˇ
+fetch_args_kwargs_from_env;torch.fx.interpreter.Interpreter.fetch_args_kwargs_from_env"†
+1Tuple[builtins.tuple[Any],builtins.dict[Any,Any]].
+builtins.tuple[Any]
+Any"builtins.tuple9
+builtins.dict[Any,Any]
+Any
+Any"builtins.dict*N
+selfD
+ torch.fx.interpreter.Interpreter" torch.fx.interpreter.Interpreter*/
+n(
+torch.fx.node.Node"torch.fx.node.Node0*Ö
+map_nodes_to_values4torch.fx.interpreter.Interpreter.map_nodes_to_values"”
+ŸTypeAlias[Union[builtins.tuple[Any],builtins.list[Any],builtins.dict[builtins.str,Any],builtins.slice,builtins.range,torch.fx.node.Node,TypeAlias[Union[builtins.str,builtins.int,builtins.float,builtins.bool,builtins.complex,torch._C.dtype,torch._tensor.Tensor,torch._C.device,torch._C.memory_format,torch._C.layout,torch._ops.OpOverload]],None]]⁄
+ŒUnion[builtins.tuple[Any],builtins.list[Any],builtins.dict[builtins.str,Any],builtins.slice,builtins.range,torch.fx.node.Node,TypeAlias[Union[builtins.str,builtins.int,builtins.float,builtins.bool,builtins.complex,torch._C.dtype,torch._tensor.Tensor,torch._C.device,torch._C.memory_format,torch._C.layout,torch._ops.OpOverload]],None].
+builtins.tuple[Any]
+Any"builtins.tuple,
+builtins.list[Any]
+Any"builtins.listW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict 
+builtins.slice"builtins.slice 
+builtins.range"builtins.range(
+torch.fx.node.Node"torch.fx.node.Node’
+ TypeAlias[Union[builtins.str,builtins.int,builtins.float,builtins.bool,builtins.complex,torch._C.dtype,torch._tensor.Tensor,torch._C.device,torch._C.memory_format,torch._C.layout,torch._ops.OpOverload]]‚
+øUnion[builtins.str,builtins.int,builtins.float,builtins.bool,builtins.complex,torch._C.dtype,torch._tensor.Tensor,torch._C.device,torch._C.memory_format,torch._C.layout,torch._ops.OpOverload]
+builtins.str"builtins.str
+builtins.int"builtins.int 
+builtins.float"builtins.float
+builtins.bool"builtins.bool$
+builtins.complex"builtins.complex 
+torch._C.dtype"torch._C.dtype,
+torch._tensor.Tensor"torch._tensor.Tensor"
+torch._C.device"torch._C.device0
+torch._C.memory_format"torch._C.memory_format"
+torch._C.layout"torch._C.layout.
+torch._ops.OpOverload"torch._ops.OpOverload"torch.fx.node.BaseArgumentTypes
+None"torch.fx.node.Argument*N
+selfD
+ torch.fx.interpreter.Interpreter" torch.fx.interpreter.Interpreter*ﬁ
+args”
+ŸTypeAlias[Union[builtins.tuple[Any],builtins.list[Any],builtins.dict[builtins.str,Any],builtins.slice,builtins.range,torch.fx.node.Node,TypeAlias[Union[builtins.str,builtins.int,builtins.float,builtins.bool,builtins.complex,torch._C.dtype,torch._tensor.Tensor,torch._C.device,torch._C.memory_format,torch._C.layout,torch._ops.OpOverload]],None]]⁄
+ŒUnion[builtins.tuple[Any],builtins.list[Any],builtins.dict[builtins.str,Any],builtins.slice,builtins.range,torch.fx.node.Node,TypeAlias[Union[builtins.str,builtins.int,builtins.float,builtins.bool,builtins.complex,torch._C.dtype,torch._tensor.Tensor,torch._C.device,torch._C.memory_format,torch._C.layout,torch._ops.OpOverload]],None].
+builtins.tuple[Any]
+Any"builtins.tuple,
+builtins.list[Any]
+Any"builtins.listW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict 
+builtins.slice"builtins.slice 
+builtins.range"builtins.range(
+torch.fx.node.Node"torch.fx.node.Node’
+ TypeAlias[Union[builtins.str,builtins.int,builtins.float,builtins.bool,builtins.complex,torch._C.dtype,torch._tensor.Tensor,torch._C.device,torch._C.memory_format,torch._C.layout,torch._ops.OpOverload]]‚
+øUnion[builtins.str,builtins.int,builtins.float,builtins.bool,builtins.complex,torch._C.dtype,torch._tensor.Tensor,torch._C.device,torch._C.memory_format,torch._C.layout,torch._ops.OpOverload]
+builtins.str"builtins.str
+builtins.int"builtins.int 
+builtins.float"builtins.float
+builtins.bool"builtins.bool$
+builtins.complex"builtins.complex 
+torch._C.dtype"torch._C.dtype,
+torch._tensor.Tensor"torch._tensor.Tensor"
+torch._C.device"torch._C.device0
+torch._C.memory_format"torch._C.memory_format"
+torch._C.layout"torch._C.layout.
+torch._ops.OpOverload"torch._ops.OpOverload"torch.fx.node.BaseArgumentTypes
+None"torch.fx.node.Argument*/
+n(
+torch.fx.node.Node"torch.fx.node.Node08rs
+module'torch.fx.interpreter.Interpreter.module@
+torch.nn.modules.module.Module"torch.nn.modules.module.Modulert
+
+submodules+torch.fx.interpreter.Interpreter.submodules9
+builtins.dict[Any,Any]
+Any
+Any"builtins.dictr]
+graph&torch.fx.interpreter.Interpreter.graph,
+torch.fx.graph.Graph"torch.fx.graph.Graphrñ
+env$torch.fx.interpreter.Interpreter.envi
+%builtins.dict[torch.fx.node.Node,Any](
+torch.fx.node.Node"torch.fx.node.Node
+Any"builtins.dictrK
+name%torch.fx.interpreter.Interpreter.name
+builtins.str"builtins.strrq
+garbage_collect_values7torch.fx.interpreter.Interpreter.garbage_collect_values
+builtins.bool"builtins.boolrc
+extra_traceback0torch.fx.interpreter.Interpreter.extra_traceback
+builtins.bool"builtins.boolr¶
+user_to_last_uses2torch.fx.interpreter.Interpreter.user_to_last_uses‹
+Cbuiltins.dict[torch.fx.node.Node,builtins.list[torch.fx.node.Node]](
+torch.fx.node.Node"torch.fx.node.Node\
+!builtins.list[torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node"builtins.list"builtins.dictri
+	args_iter*torch.fx.interpreter.Interpreter.args_iter0
+typing.Iterator[Any]
+Any"typing.IteratorË[
+Transformer torch.fx.interpreter.Transformer" torch.fx.interpreter.Interpreter*M
+__init__)torch.fx.interpreter.Transformer.__init__*
+self*
+
+module0*ç
+placeholder,torch.fx.interpreter.Transformer.placeholder",
+torch.fx.proxy.Proxy"torch.fx.proxy.Proxy*N
+selfD
+ torch.fx.interpreter.Transformer" torch.fx.interpreter.Transformer*ä
+target˝
+>TypeAlias[Union[CallableType[builtins.function],builtins.str]]¢
+3Union[CallableType[builtins.function],builtins.str]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+builtins.str"builtins.str"torch.fx.node.Target*›
+args“
+Èbuiltins.tuple[TypeAlias[Union[builtins.tuple[Any],builtins.list[Any],builtins.dict[builtins.str,Any],builtins.slice,builtins.range,torch.fx.node.Node,TypeAlias[Union[builtins.str,builtins.int,builtins.float,builtins.bool,builtins.complex,torch._C.dtype,torch._tensor.Tensor,torch._C.device,torch._C.memory_format,torch._C.layout,torch._ops.OpOverload]],None]]]”
+ŸTypeAlias[Union[builtins.tuple[Any],builtins.list[Any],builtins.dict[builtins.str,Any],builtins.slice,builtins.range,torch.fx.node.Node,TypeAlias[Union[builtins.str,builtins.int,builtins.float,builtins.bool,builtins.complex,torch._C.dtype,torch._tensor.Tensor,torch._C.device,torch._C.memory_format,torch._C.layout,torch._ops.OpOverload]],None]]⁄
+ŒUnion[builtins.tuple[Any],builtins.list[Any],builtins.dict[builtins.str,Any],builtins.slice,builtins.range,torch.fx.node.Node,TypeAlias[Union[builtins.str,builtins.int,builtins.float,builtins.bool,builtins.complex,torch._C.dtype,torch._tensor.Tensor,torch._C.device,torch._C.memory_format,torch._C.layout,torch._ops.OpOverload]],None].
+builtins.tuple[Any]
+Any"builtins.tuple,
+builtins.list[Any]
+Any"builtins.listW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict 
+builtins.slice"builtins.slice 
+builtins.range"builtins.range(
+torch.fx.node.Node"torch.fx.node.Node’
+ TypeAlias[Union[builtins.str,builtins.int,builtins.float,builtins.bool,builtins.complex,torch._C.dtype,torch._tensor.Tensor,torch._C.device,torch._C.memory_format,torch._C.layout,torch._ops.OpOverload]]‚
+øUnion[builtins.str,builtins.int,builtins.float,builtins.bool,builtins.complex,torch._C.dtype,torch._tensor.Tensor,torch._C.device,torch._C.memory_format,torch._C.layout,torch._ops.OpOverload]
+builtins.str"builtins.str
+builtins.int"builtins.int 
+builtins.float"builtins.float
+builtins.bool"builtins.bool$
+builtins.complex"builtins.complex 
+torch._C.dtype"torch._C.dtype,
+torch._tensor.Tensor"torch._tensor.Tensor"
+torch._C.device"torch._C.device0
+torch._C.memory_format"torch._C.memory_format"
+torch._C.layout"torch._C.layout.
+torch._ops.OpOverload"torch._ops.OpOverload"torch.fx.node.BaseArgumentTypes
+None"torch.fx.node.Argument"builtins.tuple*c
+kwargsW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict0*á
+get_attr)torch.fx.interpreter.Transformer.get_attr",
+torch.fx.proxy.Proxy"torch.fx.proxy.Proxy*N
+selfD
+ torch.fx.interpreter.Transformer" torch.fx.interpreter.Transformer*ä
+target˝
+>TypeAlias[Union[CallableType[builtins.function],builtins.str]]¢
+3Union[CallableType[builtins.function],builtins.str]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+builtins.str"builtins.str"torch.fx.node.Target*›
+args“
+Èbuiltins.tuple[TypeAlias[Union[builtins.tuple[Any],builtins.list[Any],builtins.dict[builtins.str,Any],builtins.slice,builtins.range,torch.fx.node.Node,TypeAlias[Union[builtins.str,builtins.int,builtins.float,builtins.bool,builtins.complex,torch._C.dtype,torch._tensor.Tensor,torch._C.device,torch._C.memory_format,torch._C.layout,torch._ops.OpOverload]],None]]]”
+ŸTypeAlias[Union[builtins.tuple[Any],builtins.list[Any],builtins.dict[builtins.str,Any],builtins.slice,builtins.range,torch.fx.node.Node,TypeAlias[Union[builtins.str,builtins.int,builtins.float,builtins.bool,builtins.complex,torch._C.dtype,torch._tensor.Tensor,torch._C.device,torch._C.memory_format,torch._C.layout,torch._ops.OpOverload]],None]]⁄
+ŒUnion[builtins.tuple[Any],builtins.list[Any],builtins.dict[builtins.str,Any],builtins.slice,builtins.range,torch.fx.node.Node,TypeAlias[Union[builtins.str,builtins.int,builtins.float,builtins.bool,builtins.complex,torch._C.dtype,torch._tensor.Tensor,torch._C.device,torch._C.memory_format,torch._C.layout,torch._ops.OpOverload]],None].
+builtins.tuple[Any]
+Any"builtins.tuple,
+builtins.list[Any]
+Any"builtins.listW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict 
+builtins.slice"builtins.slice 
+builtins.range"builtins.range(
+torch.fx.node.Node"torch.fx.node.Node’
+ TypeAlias[Union[builtins.str,builtins.int,builtins.float,builtins.bool,builtins.complex,torch._C.dtype,torch._tensor.Tensor,torch._C.device,torch._C.memory_format,torch._C.layout,torch._ops.OpOverload]]‚
+øUnion[builtins.str,builtins.int,builtins.float,builtins.bool,builtins.complex,torch._C.dtype,torch._tensor.Tensor,torch._C.device,torch._C.memory_format,torch._C.layout,torch._ops.OpOverload]
+builtins.str"builtins.str
+builtins.int"builtins.int 
+builtins.float"builtins.float
+builtins.bool"builtins.bool$
+builtins.complex"builtins.complex 
+torch._C.dtype"torch._C.dtype,
+torch._tensor.Tensor"torch._tensor.Tensor"
+torch._C.device"torch._C.device0
+torch._C.memory_format"torch._C.memory_format"
+torch._C.layout"torch._C.layout.
+torch._ops.OpOverload"torch._ops.OpOverload"torch.fx.node.BaseArgumentTypes
+None"torch.fx.node.Argument"builtins.tuple*c
+kwargsW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict0*Ë
+call_module,torch.fx.interpreter.Transformer.call_module"
+Any*N
+selfD
+ torch.fx.interpreter.Transformer" torch.fx.interpreter.Transformer*ä
+target˝
+>TypeAlias[Union[CallableType[builtins.function],builtins.str]]¢
+3Union[CallableType[builtins.function],builtins.str]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+builtins.str"builtins.str"torch.fx.node.Target*›
+args“
+Èbuiltins.tuple[TypeAlias[Union[builtins.tuple[Any],builtins.list[Any],builtins.dict[builtins.str,Any],builtins.slice,builtins.range,torch.fx.node.Node,TypeAlias[Union[builtins.str,builtins.int,builtins.float,builtins.bool,builtins.complex,torch._C.dtype,torch._tensor.Tensor,torch._C.device,torch._C.memory_format,torch._C.layout,torch._ops.OpOverload]],None]]]”
+ŸTypeAlias[Union[builtins.tuple[Any],builtins.list[Any],builtins.dict[builtins.str,Any],builtins.slice,builtins.range,torch.fx.node.Node,TypeAlias[Union[builtins.str,builtins.int,builtins.float,builtins.bool,builtins.complex,torch._C.dtype,torch._tensor.Tensor,torch._C.device,torch._C.memory_format,torch._C.layout,torch._ops.OpOverload]],None]]⁄
+ŒUnion[builtins.tuple[Any],builtins.list[Any],builtins.dict[builtins.str,Any],builtins.slice,builtins.range,torch.fx.node.Node,TypeAlias[Union[builtins.str,builtins.int,builtins.float,builtins.bool,builtins.complex,torch._C.dtype,torch._tensor.Tensor,torch._C.device,torch._C.memory_format,torch._C.layout,torch._ops.OpOverload]],None].
+builtins.tuple[Any]
+Any"builtins.tuple,
+builtins.list[Any]
+Any"builtins.listW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict 
+builtins.slice"builtins.slice 
+builtins.range"builtins.range(
+torch.fx.node.Node"torch.fx.node.Node’
+ TypeAlias[Union[builtins.str,builtins.int,builtins.float,builtins.bool,builtins.complex,torch._C.dtype,torch._tensor.Tensor,torch._C.device,torch._C.memory_format,torch._C.layout,torch._ops.OpOverload]]‚
+øUnion[builtins.str,builtins.int,builtins.float,builtins.bool,builtins.complex,torch._C.dtype,torch._tensor.Tensor,torch._C.device,torch._C.memory_format,torch._C.layout,torch._ops.OpOverload]
+builtins.str"builtins.str
+builtins.int"builtins.int 
+builtins.float"builtins.float
+builtins.bool"builtins.bool$
+builtins.complex"builtins.complex 
+torch._C.dtype"torch._C.dtype,
+torch._tensor.Tensor"torch._tensor.Tensor"
+torch._C.device"torch._C.device0
+torch._C.memory_format"torch._C.memory_format"
+torch._C.layout"torch._C.layout.
+torch._ops.OpOverload"torch._ops.OpOverload"torch.fx.node.BaseArgumentTypes
+None"torch.fx.node.Argument"builtins.tuple*c
+kwargsW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict0*Ï
+call_function.torch.fx.interpreter.Transformer.call_function"
+Any*N
+selfD
+ torch.fx.interpreter.Transformer" torch.fx.interpreter.Transformer*ä
+target˝
+>TypeAlias[Union[CallableType[builtins.function],builtins.str]]¢
+3Union[CallableType[builtins.function],builtins.str]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+builtins.str"builtins.str"torch.fx.node.Target*›
+args“
+Èbuiltins.tuple[TypeAlias[Union[builtins.tuple[Any],builtins.list[Any],builtins.dict[builtins.str,Any],builtins.slice,builtins.range,torch.fx.node.Node,TypeAlias[Union[builtins.str,builtins.int,builtins.float,builtins.bool,builtins.complex,torch._C.dtype,torch._tensor.Tensor,torch._C.device,torch._C.memory_format,torch._C.layout,torch._ops.OpOverload]],None]]]”
+ŸTypeAlias[Union[builtins.tuple[Any],builtins.list[Any],builtins.dict[builtins.str,Any],builtins.slice,builtins.range,torch.fx.node.Node,TypeAlias[Union[builtins.str,builtins.int,builtins.float,builtins.bool,builtins.complex,torch._C.dtype,torch._tensor.Tensor,torch._C.device,torch._C.memory_format,torch._C.layout,torch._ops.OpOverload]],None]]⁄
+ŒUnion[builtins.tuple[Any],builtins.list[Any],builtins.dict[builtins.str,Any],builtins.slice,builtins.range,torch.fx.node.Node,TypeAlias[Union[builtins.str,builtins.int,builtins.float,builtins.bool,builtins.complex,torch._C.dtype,torch._tensor.Tensor,torch._C.device,torch._C.memory_format,torch._C.layout,torch._ops.OpOverload]],None].
+builtins.tuple[Any]
+Any"builtins.tuple,
+builtins.list[Any]
+Any"builtins.listW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict 
+builtins.slice"builtins.slice 
+builtins.range"builtins.range(
+torch.fx.node.Node"torch.fx.node.Node’
+ TypeAlias[Union[builtins.str,builtins.int,builtins.float,builtins.bool,builtins.complex,torch._C.dtype,torch._tensor.Tensor,torch._C.device,torch._C.memory_format,torch._C.layout,torch._ops.OpOverload]]‚
+øUnion[builtins.str,builtins.int,builtins.float,builtins.bool,builtins.complex,torch._C.dtype,torch._tensor.Tensor,torch._C.device,torch._C.memory_format,torch._C.layout,torch._ops.OpOverload]
+builtins.str"builtins.str
+builtins.int"builtins.int 
+builtins.float"builtins.float
+builtins.bool"builtins.bool$
+builtins.complex"builtins.complex 
+torch._C.dtype"torch._C.dtype,
+torch._tensor.Tensor"torch._tensor.Tensor"
+torch._C.device"torch._C.device0
+torch._C.memory_format"torch._C.memory_format"
+torch._C.layout"torch._C.layout.
+torch._ops.OpOverload"torch._ops.OpOverload"torch.fx.node.BaseArgumentTypes
+None"torch.fx.node.Argument"builtins.tuple*c
+kwargsW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict0*—
+	transform*torch.fx.interpreter.Transformer.transform"F
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*N
+selfD
+ torch.fx.interpreter.Transformer" torch.fx.interpreter.Transformer08r@
+	new_graph*torch.fx.interpreter.Transformer.new_graph
+Anyr:
+tracer'torch.fx.interpreter.Transformer.tracer
+Anyö
+TransformerTracer@442*torch.fx.interpreter.TransformerTracer@442"torch.fx._symbolic_trace.Tracer*Ê
+__init__3torch.fx.interpreter.TransformerTracer@442.__init__"
+None*b
+selfX
+*torch.fx.interpreter.TransformerTracer@442"*torch.fx.interpreter.TransformerTracer@442*7
+graph,
+torch.fx.graph.Graph"torch.fx.graph.Graph*
+is_leaf_module9torch.fx.interpreter.TransformerTracer@442.is_leaf_module"
+builtins.bool"builtins.bool*b
+selfX
+*torch.fx.interpreter.TransformerTracer@442"*torch.fx.interpreter.TransformerTracer@442*
+_
+Any*
+__
+Anyr◊
+tensor_attrs7torch.fx.interpreter.TransformerTracer@442.tensor_attrsç
+0builtins.dict[torch._tensor.Tensor,builtins.str],
+torch._tensor.Tensor"torch._tensor.Tensor
+builtins.str"builtins.str"builtins.dict*ê
+__annotations__$torch.fx.interpreter.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*$
+fx_tracebacktorch.fx.traceback *s
+__all__torch.fx.interpreter.__all__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list

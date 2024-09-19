@@ -1,0 +1,746 @@
+
+&torch._functorch._aot_autograd.schemasÙ
+
+OutputType1torch._functorch._aot_autograd.schemas.OutputType"	enum.EnumHrH
+	non_alias;torch._functorch._aot_autograd.schemas.OutputType.non_aliasrR
+alias_of_input@torch._functorch._aot_autograd.schemas.OutputType.alias_of_inputrF
+is_input:torch._functorch._aot_autograd.schemas.OutputType.is_inputr~
+$alias_of_intermediate_save_as_outputVtorch._functorch._aot_autograd.schemas.OutputType.alias_of_intermediate_save_as_outputr`
+alias_of_intermediateGtorch._functorch._aot_autograd.schemas.OutputType.alias_of_intermediaterˆ
+)alias_of_intermediate_base_is_user_output[torch._functorch._aot_autograd.schemas.OutputType.alias_of_intermediate_base_is_user_outputrX
+unsafe_view_aliasCtorch._functorch._aot_autograd.schemas.OutputType.unsafe_view_aliasr^
+custom_function_viewFtorch._functorch._aot_autograd.schemas.OutputType.custom_function_viewù
+OutputAliasInfo6torch._functorch._aot_autograd.schemas.OutputAliasInfo"builtins.object*®
+__init__?torch._functorch._aot_autograd.schemas.OutputAliasInfo.__init__"
+None*z
+selfp
+6torch._functorch._aot_autograd.schemas.OutputAliasInfo"6torch._functorch._aot_autograd.schemas.OutputAliasInfo*w
+output_typef
+1torch._functorch._aot_autograd.schemas.OutputType"1torch._functorch._aot_autograd.schemas.OutputType*,
+raw_type
+builtins.type"builtins.type*R
+base_idxD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None*
+dynamic_dims~
+&Union[builtins.set[builtins.int],None]H
+builtins.set[builtins.int]
+builtins.int"builtins.int"builtins.set
+None*1
+requires_grad
+builtins.bool"builtins.bool*™
+functional_tensorÿ
+VUnion[torch._functorch._aot_autograd.functional_utils.FunctionalTensorMetadataEq,None]˜
+Jtorch._functorch._aot_autograd.functional_utils.FunctionalTensorMetadataEq"Jtorch._functorch._aot_autograd.functional_utils.FunctionalTensorMetadataEq
+None 8r¹
+output_typeBtorch._functorch._aot_autograd.schemas.OutputAliasInfo.output_typef
+1torch._functorch._aot_autograd.schemas.OutputType"1torch._functorch._aot_autograd.schemas.OutputTyperk
+raw_type?torch._functorch._aot_autograd.schemas.OutputAliasInfo.raw_type
+builtins.type"builtins.typer‘
+base_idx?torch._functorch._aot_autograd.schemas.OutputAliasInfo.base_idxD
+Union[builtins.int,None]
+builtins.int"builtins.int
+NonerÓ
+dynamic_dimsCtorch._functorch._aot_autograd.schemas.OutputAliasInfo.dynamic_dims~
+&Union[builtins.set[builtins.int],None]H
+builtins.set[builtins.int]
+builtins.int"builtins.int"builtins.set
+Noneru
+requires_gradDtorch._functorch._aot_autograd.schemas.OutputAliasInfo.requires_grad
+builtins.bool"builtins.boolrß
+functional_tensorHtorch._functorch._aot_autograd.schemas.OutputAliasInfo.functional_tensorÿ
+VUnion[torch._functorch._aot_autograd.functional_utils.FunctionalTensorMetadataEq,None]˜
+Jtorch._functorch._aot_autograd.functional_utils.FunctionalTensorMetadataEq"Jtorch._functorch._aot_autograd.functional_utils.FunctionalTensorMetadataEq
+Nonerý
+__dataclass_fields__Ktorch._functorch._aot_autograd.schemas.OutputAliasInfo.__dataclass_fields__—
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dict°
+MutationType3torch._functorch._aot_autograd.schemas.MutationType"	enum.EnumHrl
+NOT_MUTATED?torch._functorch._aot_autograd.schemas.MutationType.NOT_MUTATED
+builtins.int"builtins.intrv
+MUTATED_IN_GRAPHDtorch._functorch._aot_autograd.schemas.MutationType.MUTATED_IN_GRAPH
+builtins.int"builtins.intrx
+MUTATED_OUT_GRAPHEtorch._functorch._aot_autograd.schemas.MutationType.MUTATED_OUT_GRAPH
+builtins.int"builtins.intÆ
+InputAliasInfo5torch._functorch._aot_autograd.schemas.InputAliasInfo"builtins.object*^
+__post_init__Ctorch._functorch._aot_autograd.schemas.InputAliasInfo.__post_init__*
+self*Ù
+mutation_typeCtorch._functorch._aot_autograd.schemas.InputAliasInfo.mutation_type"j
+3torch._functorch._aot_autograd.schemas.MutationType"3torch._functorch._aot_autograd.schemas.MutationType*x
+selfn
+5torch._functorch._aot_autograd.schemas.InputAliasInfo"5torch._functorch._aot_autograd.schemas.InputAliasInfo0:functools.cached_property`*ç
+__init__>torch._functorch._aot_autograd.schemas.InputAliasInfo.__init__"
+None*x
+selfn
+5torch._functorch._aot_autograd.schemas.InputAliasInfo"5torch._functorch._aot_autograd.schemas.InputAliasInfo*+
+is_leaf
+builtins.bool"builtins.bool*0
+mutates_data
+builtins.bool"builtins.bool*4
+mutates_metadata
+builtins.bool"builtins.bool*B
+mutations_hidden_from_autograd
+builtins.bool"builtins.bool*M
+)mutations_under_no_grad_or_inference_mode
+builtins.bool"builtins.bool*D
+ mutation_inductor_storage_resize
+builtins.bool"builtins.bool*<
+mutates_storage_metadata
+builtins.bool"builtins.bool*1
+requires_grad
+builtins.bool"builtins.bool*8
+keep_input_mutations
+builtins.bool"builtins.bool8rh
+is_leaf=torch._functorch._aot_autograd.schemas.InputAliasInfo.is_leaf
+builtins.bool"builtins.boolrr
+mutates_dataBtorch._functorch._aot_autograd.schemas.InputAliasInfo.mutates_data
+builtins.bool"builtins.boolrz
+mutates_metadataFtorch._functorch._aot_autograd.schemas.InputAliasInfo.mutates_metadata
+builtins.bool"builtins.boolr–
+mutations_hidden_from_autogradTtorch._functorch._aot_autograd.schemas.InputAliasInfo.mutations_hidden_from_autograd
+builtins.bool"builtins.boolr¬
+)mutations_under_no_grad_or_inference_mode_torch._functorch._aot_autograd.schemas.InputAliasInfo.mutations_under_no_grad_or_inference_mode
+builtins.bool"builtins.boolrš
+ mutation_inductor_storage_resizeVtorch._functorch._aot_autograd.schemas.InputAliasInfo.mutation_inductor_storage_resize
+builtins.bool"builtins.boolrŠ
+mutates_storage_metadataNtorch._functorch._aot_autograd.schemas.InputAliasInfo.mutates_storage_metadata
+builtins.bool"builtins.boolrt
+requires_gradCtorch._functorch._aot_autograd.schemas.InputAliasInfo.requires_grad
+builtins.bool"builtins.boolr‚
+keep_input_mutationsJtorch._functorch._aot_autograd.schemas.InputAliasInfo.keep_input_mutations
+builtins.bool"builtins.boolrü
+__dataclass_fields__Jtorch._functorch._aot_autograd.schemas.InputAliasInfo.__dataclass_fields__—
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictÕ
+SubclassCreationMeta;torch._functorch._aot_autograd.schemas.SubclassCreationMeta"builtins.object*­
+creation_fnGtorch._functorch._aot_autograd.schemas.SubclassCreationMeta.creation_fn"
+Any*„
+selfz
+;torch._functorch._aot_autograd.schemas.SubclassCreationMeta";torch._functorch._aot_autograd.schemas.SubclassCreationMeta*
+all_args
+Any*.
+
+is_runtime
+builtins.bool"builtins.bool*d
+__post_init__Itorch._functorch._aot_autograd.schemas.SubclassCreationMeta.__post_init__*
+self*›
+__init__Dtorch._functorch._aot_autograd.schemas.SubclassCreationMeta.__init__"
+None*„
+selfz
+;torch._functorch._aot_autograd.schemas.SubclassCreationMeta";torch._functorch._aot_autograd.schemas.SubclassCreationMeta*7
+flat_tensor_start_idx
+builtins.int"builtins.int*+
+	arg_count
+builtins.int"builtins.int*C
+original_subclass,
+torch._tensor.Tensor"torch._tensor.Tensor*
+meta
+Any*<
+
+inner_keys,
+builtins.list[Any]
+Any"builtins.list*\
+
+outer_sizeL
+builtins.tuple[builtins.int]
+builtins.int"builtins.int"builtins.tuple*^
+outer_strideL
+builtins.tuple[builtins.int]
+builtins.int"builtins.int"builtins.tuple8rˆ
+flat_tensor_start_idxQtorch._functorch._aot_autograd.schemas.SubclassCreationMeta.flat_tensor_start_idx
+builtins.int"builtins.intrp
+	arg_countEtorch._functorch._aot_autograd.schemas.SubclassCreationMeta.arg_count
+builtins.int"builtins.intr
+original_subclassMtorch._functorch._aot_autograd.schemas.SubclassCreationMeta.original_subclass,
+torch._tensor.Tensor"torch._tensor.TensorrQ
+meta@torch._functorch._aot_autograd.schemas.SubclassCreationMeta.meta
+Anyr‚
+
+inner_keysFtorch._functorch._aot_autograd.schemas.SubclassCreationMeta.inner_keys,
+builtins.list[Any]
+Any"builtins.listr¢
+
+outer_sizeFtorch._functorch._aot_autograd.schemas.SubclassCreationMeta.outer_sizeL
+builtins.tuple[builtins.int]
+builtins.int"builtins.int"builtins.tupler¦
+outer_strideHtorch._functorch._aot_autograd.schemas.SubclassCreationMeta.outer_strideL
+builtins.tuple[builtins.int]
+builtins.int"builtins.int"builtins.tupler‚
+__dataclass_fields__Ptorch._functorch._aot_autograd.schemas.SubclassCreationMeta.__dataclass_fields__—
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictðH
+ViewAndMutationMeta:torch._functorch._aot_autograd.schemas.ViewAndMutationMeta"builtins.object*c
+__post_init__Htorch._functorch._aot_autograd.schemas.ViewAndMutationMeta.__post_init__*
+self*™
+!tensors_saved_for_backwards_slice\torch._functorch._aot_autograd.schemas.ViewAndMutationMeta.tensors_saved_for_backwards_slice*
+self0:property`*™
+!symints_saved_for_backwards_slice\torch._functorch._aot_autograd.schemas.ViewAndMutationMeta.symints_saved_for_backwards_slice*
+self0:property`*O
+__eq__Atorch._functorch._aot_autograd.schemas.ViewAndMutationMeta.__eq__* * *‹
+__init__Ctorch._functorch._aot_autograd.schemas.ViewAndMutationMeta.__init__"
+None*‚
+selfx
+:torch._functorch._aot_autograd.schemas.ViewAndMutationMeta":torch._functorch._aot_autograd.schemas.ViewAndMutationMeta*Ö
+
+input_infoÅ
+Dbuiltins.list[torch._functorch._aot_autograd.schemas.InputAliasInfo]n
+5torch._functorch._aot_autograd.schemas.InputAliasInfo"5torch._functorch._aot_autograd.schemas.InputAliasInfo"builtins.list*Ú
+output_infoÈ
+Ebuiltins.list[torch._functorch._aot_autograd.schemas.OutputAliasInfo]p
+6torch._functorch._aot_autograd.schemas.OutputAliasInfo"6torch._functorch._aot_autograd.schemas.OutputAliasInfo"builtins.list*8
+num_intermediate_bases
+builtins.int"builtins.int*8
+keep_input_mutations
+builtins.bool"builtins.bool*A
+traced_tangents,
+builtins.list[Any]
+Any"builtins.list*÷
+subclass_inp_metaß
+^builtins.list[Union[builtins.int,torch._functorch._aot_autograd.schemas.SubclassCreationMeta]]í
+OUnion[builtins.int,torch._functorch._aot_autograd.schemas.SubclassCreationMeta]
+builtins.int"builtins.intz
+;torch._functorch._aot_autograd.schemas.SubclassCreationMeta";torch._functorch._aot_autograd.schemas.SubclassCreationMeta"builtins.list*€
+subclass_fw_graph_out_metaß
+^builtins.list[Union[builtins.int,torch._functorch._aot_autograd.schemas.SubclassCreationMeta]]í
+OUnion[builtins.int,torch._functorch._aot_autograd.schemas.SubclassCreationMeta]
+builtins.int"builtins.intz
+;torch._functorch._aot_autograd.schemas.SubclassCreationMeta";torch._functorch._aot_autograd.schemas.SubclassCreationMeta"builtins.list*û
+subclass_tangent_metaß
+^builtins.list[Union[builtins.int,torch._functorch._aot_autograd.schemas.SubclassCreationMeta]]í
+OUnion[builtins.int,torch._functorch._aot_autograd.schemas.SubclassCreationMeta]
+builtins.int"builtins.intz
+;torch._functorch._aot_autograd.schemas.SubclassCreationMeta";torch._functorch._aot_autograd.schemas.SubclassCreationMeta"builtins.list*.
+is_train
+builtins.bool"builtins.bool *d
+num_symints_saved_for_bwD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *d
+grad_enabled_mutationG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *\
+deterministicG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *j
+static_parameter_indicesJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list *}
+tokenso
+'builtins.dict[Any,torch._tensor.Tensor]
+Any,
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.dict 8r›
+
+input_infoEtorch._functorch._aot_autograd.schemas.ViewAndMutationMeta.input_infoÅ
+Dbuiltins.list[torch._functorch._aot_autograd.schemas.InputAliasInfo]n
+5torch._functorch._aot_autograd.schemas.InputAliasInfo"5torch._functorch._aot_autograd.schemas.InputAliasInfo"builtins.listr 
+output_infoFtorch._functorch._aot_autograd.schemas.ViewAndMutationMeta.output_infoÈ
+Ebuiltins.list[torch._functorch._aot_autograd.schemas.OutputAliasInfo]p
+6torch._functorch._aot_autograd.schemas.OutputAliasInfo"6torch._functorch._aot_autograd.schemas.OutputAliasInfo"builtins.listr‰
+num_intermediate_basesQtorch._functorch._aot_autograd.schemas.ViewAndMutationMeta.num_intermediate_bases
+builtins.int"builtins.intr‡
+keep_input_mutationsOtorch._functorch._aot_autograd.schemas.ViewAndMutationMeta.keep_input_mutations
+builtins.bool"builtins.boolr‹
+traced_tangentsJtorch._functorch._aot_autograd.schemas.ViewAndMutationMeta.traced_tangents,
+builtins.list[Any]
+Any"builtins.listrÃ
+subclass_inp_metaLtorch._functorch._aot_autograd.schemas.ViewAndMutationMeta.subclass_inp_metaß
+^builtins.list[Union[builtins.int,torch._functorch._aot_autograd.schemas.SubclassCreationMeta]]í
+OUnion[builtins.int,torch._functorch._aot_autograd.schemas.SubclassCreationMeta]
+builtins.int"builtins.intz
+;torch._functorch._aot_autograd.schemas.SubclassCreationMeta";torch._functorch._aot_autograd.schemas.SubclassCreationMeta"builtins.listrÕ
+subclass_fw_graph_out_metaUtorch._functorch._aot_autograd.schemas.ViewAndMutationMeta.subclass_fw_graph_out_metaß
+^builtins.list[Union[builtins.int,torch._functorch._aot_autograd.schemas.SubclassCreationMeta]]í
+OUnion[builtins.int,torch._functorch._aot_autograd.schemas.SubclassCreationMeta]
+builtins.int"builtins.intz
+;torch._functorch._aot_autograd.schemas.SubclassCreationMeta";torch._functorch._aot_autograd.schemas.SubclassCreationMeta"builtins.listrË
+subclass_tangent_metaPtorch._functorch._aot_autograd.schemas.ViewAndMutationMeta.subclass_tangent_metaß
+^builtins.list[Union[builtins.int,torch._functorch._aot_autograd.schemas.SubclassCreationMeta]]í
+OUnion[builtins.int,torch._functorch._aot_autograd.schemas.SubclassCreationMeta]
+builtins.int"builtins.intz
+;torch._functorch._aot_autograd.schemas.SubclassCreationMeta";torch._functorch._aot_autograd.schemas.SubclassCreationMeta"builtins.listro
+is_trainCtorch._functorch._aot_autograd.schemas.ViewAndMutationMeta.is_train
+builtins.bool"builtins.boolrµ
+num_symints_saved_for_bwStorch._functorch._aot_autograd.schemas.ViewAndMutationMeta.num_symints_saved_for_bwD
+Union[builtins.int,None]
+builtins.int"builtins.int
+Noner²
+grad_enabled_mutationPtorch._functorch._aot_autograd.schemas.ViewAndMutationMeta.grad_enabled_mutationG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+Noner¢
+deterministicHtorch._functorch._aot_autograd.schemas.ViewAndMutationMeta.deterministicG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+Noner»
+static_parameter_indicesStorch._functorch._aot_autograd.schemas.ViewAndMutationMeta.static_parameter_indicesJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.listr¼
+tokensAtorch._functorch._aot_autograd.schemas.ViewAndMutationMeta.tokenso
+'builtins.dict[Any,torch._tensor.Tensor]
+Any,
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.dictr‚
+mutated_graph_handled_indicesXtorch._functorch._aot_autograd.schemas.ViewAndMutationMeta.mutated_graph_handled_indices
+AnyrŠ
+!num_mutated_graph_handled_indices\torch._functorch._aot_autograd.schemas.ViewAndMutationMeta.num_mutated_graph_handled_indices
+Anyr¤
+.mutated_graph_handled_indices_seen_by_autograditorch._functorch._aot_autograd.schemas.ViewAndMutationMeta.mutated_graph_handled_indices_seen_by_autograd
+Anyr¬
+2num_mutated_graph_handled_indices_seen_by_autogradmtorch._functorch._aot_autograd.schemas.ViewAndMutationMeta.num_mutated_graph_handled_indices_seen_by_autograd
+Anyr~
+mutated_inp_runtime_indicesVtorch._functorch._aot_autograd.schemas.ViewAndMutationMeta.mutated_inp_runtime_indices
+Anyr†
+num_mutated_inp_runtime_indicesZtorch._functorch._aot_autograd.schemas.ViewAndMutationMeta.num_mutated_inp_runtime_indices
+Anyrn
+aliased_out_indicesNtorch._functorch._aot_autograd.schemas.ViewAndMutationMeta.aliased_out_indices
+Anyrv
+unsafe_view_out_indicesRtorch._functorch._aot_autograd.schemas.ViewAndMutationMeta.unsafe_view_out_indices
+Anyr^
+num_outputsFtorch._functorch._aot_autograd.schemas.ViewAndMutationMeta.num_outputs
+Anyrv
+num_outputs_non_aliasedRtorch._functorch._aot_autograd.schemas.ViewAndMutationMeta.num_outputs_non_aliased
+Anyr‚
+num_outputs_aliased_to_inputsXtorch._functorch._aot_autograd.schemas.ViewAndMutationMeta.num_outputs_aliased_to_inputs
+Anyrv
+num_unsafe_view_outputsRtorch._functorch._aot_autograd.schemas.ViewAndMutationMeta.num_unsafe_view_outputs
+Anyr
+$num_outputs_aliased_to_intermediates_torch._functorch._aot_autograd.schemas.ViewAndMutationMeta.num_outputs_aliased_to_intermediates
+Anyrn
+num_outputs_aliasedNtorch._functorch._aot_autograd.schemas.ViewAndMutationMeta.num_outputs_aliased
+Anyrf
+dynamic_outputsJtorch._functorch._aot_autograd.schemas.ViewAndMutationMeta.dynamic_outputs
+Anyr`
+output_typesGtorch._functorch._aot_autograd.schemas.ViewAndMutationMeta.output_types
+Anyrx
+is_rng_op_functionalizedStorch._functorch._aot_autograd.schemas.ViewAndMutationMeta.is_rng_op_functionalized
+Anyrt
+num_outputs_rng_offsetQtorch._functorch._aot_autograd.schemas.ViewAndMutationMeta.num_outputs_rng_offset
+Anyrn
+num_forward_returnsNtorch._functorch._aot_autograd.schemas.ViewAndMutationMeta.num_forward_returns
+Anyr^
+num_forwardFtorch._functorch._aot_autograd.schemas.ViewAndMutationMeta.num_forward
+Anyr
+__dataclass_fields__Otorch._functorch._aot_autograd.schemas.ViewAndMutationMeta.__dataclass_fields__—
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictª	
+SubclassMeta3torch._functorch._aot_autograd.schemas.SubclassMeta"builtins.object*R
+__init__<torch._functorch._aot_autograd.schemas.SubclassMeta.__init__*
+self8rÈ
+fw_metadata?torch._functorch._aot_autograd.schemas.SubclassMeta.fw_metadatax
+:torch._functorch._aot_autograd.schemas.ViewAndMutationMeta":torch._functorch._aot_autograd.schemas.ViewAndMutationMetarµ
+grad_input_metasDtorch._functorch._aot_autograd.schemas.SubclassMeta.grad_input_metasÚ
+jUnion[builtins.list[Union[builtins.int,torch._functorch._aot_autograd.schemas.SubclassCreationMeta]],None]ß
+^builtins.list[Union[builtins.int,torch._functorch._aot_autograd.schemas.SubclassCreationMeta]]í
+OUnion[builtins.int,torch._functorch._aot_autograd.schemas.SubclassCreationMeta]
+builtins.int"builtins.intz
+;torch._functorch._aot_autograd.schemas.SubclassCreationMeta";torch._functorch._aot_autograd.schemas.SubclassCreationMeta"builtins.list
+Nonerú
+__dataclass_fields__Htorch._functorch._aot_autograd.schemas.SubclassMeta.__dataclass_fields__—
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictÂ
+TensorAlias2torch._functorch._aot_autograd.schemas.TensorAlias"builtins.object*þ
+__init__;torch._functorch._aot_autograd.schemas.TensorAlias.__init__"
+None*r
+selfh
+2torch._functorch._aot_autograd.schemas.TensorAlias"2torch._functorch._aot_autograd.schemas.TensorAlias*7
+alias,
+torch._tensor.Tensor"torch._tensor.Tensor8ro
+alias8torch._functorch._aot_autograd.schemas.TensorAlias.alias,
+torch._tensor.Tensor"torch._tensor.Tensorrù
+__dataclass_fields__Gtorch._functorch._aot_autograd.schemas.TensorAlias.__dataclass_fields__—
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictÕ
+BackwardSignature8torch._functorch._aot_autograd.schemas.BackwardSignature"builtins.object*±
+__init__Atorch._functorch._aot_autograd.schemas.BackwardSignature.__init__"
+None*~
+selft
+8torch._functorch._aot_autograd.schemas.BackwardSignature"8torch._functorch._aot_autograd.schemas.BackwardSignature*’
+gradients_to_parametersu
+(builtins.dict[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.dict*“
+gradients_to_user_inputsu
+(builtins.dict[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.dict*-
+loss_output
+builtins.str"builtins.str8râ
+gradients_to_parametersPtorch._functorch._aot_autograd.schemas.BackwardSignature.gradients_to_parametersu
+(builtins.dict[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.dicträ
+gradients_to_user_inputsQtorch._functorch._aot_autograd.schemas.BackwardSignature.gradients_to_user_inputsu
+(builtins.dict[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.dictrq
+loss_outputDtorch._functorch._aot_autograd.schemas.BackwardSignature.loss_output
+builtins.str"builtins.strrÿ
+__dataclass_fields__Mtorch._functorch._aot_autograd.schemas.BackwardSignature.__dataclass_fields__—
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictÓ
+GraphOutputName6torch._functorch._aot_autograd.schemas.GraphOutputName"builtins.str*ù
+__init__?torch._functorch._aot_autograd.schemas.GraphOutputName.__init__"
+None*z
+selfp
+6torch._functorch._aot_autograd.schemas.GraphOutputName"6torch._functorch._aot_autograd.schemas.GraphOutputName*&
+item
+builtins.str"builtins.strÎ
+GraphInputName5torch._functorch._aot_autograd.schemas.GraphInputName"builtins.str*ö
+__init__>torch._functorch._aot_autograd.schemas.GraphInputName.__init__"
+None*x
+selfn
+5torch._functorch._aot_autograd.schemas.GraphInputName"5torch._functorch._aot_autograd.schemas.GraphInputName*&
+item
+builtins.str"builtins.str—
+FQN*torch._functorch._aot_autograd.schemas.FQN"builtins.str*Õ
+__init__3torch._functorch._aot_autograd.schemas.FQN.__init__"
+None*b
+selfX
+*torch._functorch._aot_autograd.schemas.FQN"*torch._functorch._aot_autograd.schemas.FQN*&
+item
+builtins.str"builtins.strÐG
+GraphSignature5torch._functorch._aot_autograd.schemas.GraphSignature"builtins.object*þ
+from_tracing_metadataKtorch._functorch._aot_autograd.schemas.GraphSignature.from_tracing_metadata"n
+5torch._functorch._aot_autograd.schemas.GraphSignature"5torch._functorch._aot_autograd.schemas.GraphSignature*¿
+clsµ
+;Type[torch._functorch._aot_autograd.schemas.GraphSignature]n
+5torch._functorch._aot_autograd.schemas.GraphSignature"5torch._functorch._aot_autograd.schemas.GraphSignature"type*I
+in_spec<
+torch.utils._pytree.TreeSpec"torch.utils._pytree.TreeSpec*J
+out_spec<
+torch.utils._pytree.TreeSpec"torch.utils._pytree.TreeSpec*a
+graph_input_namesJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*b
+graph_output_namesJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*”
+view_mutation_metadatax
+:torch._functorch._aot_autograd.schemas.ViewAndMutationMeta":torch._functorch._aot_autograd.schemas.ViewAndMutationMeta*`
+named_parametersJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*]
+named_buffersJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*1
+num_user_inputs
+builtins.int"builtins.int*2
+num_user_outputs
+builtins.int"builtins.int*T
+
+loss_indexD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None*á
+backward_signatureÈ
+DUnion[torch._functorch._aot_autograd.schemas.BackwardSignature,None]t
+8torch._functorch._aot_autograd.schemas.BackwardSignature"8torch._functorch._aot_autograd.schemas.BackwardSignature
+None0:classmethodp*ê
+__init__>torch._functorch._aot_autograd.schemas.GraphSignature.__init__"
+None*x
+selfn
+5torch._functorch._aot_autograd.schemas.GraphSignature"5torch._functorch._aot_autograd.schemas.GraphSignature*µ
+
+parameters¤
+9builtins.list[torch._functorch._aot_autograd.schemas.FQN]X
+*torch._functorch._aot_autograd.schemas.FQN"*torch._functorch._aot_autograd.schemas.FQN"builtins.list*²
+buffers¤
+9builtins.list[torch._functorch._aot_autograd.schemas.FQN]X
+*torch._functorch._aot_autograd.schemas.FQN"*torch._functorch._aot_autograd.schemas.FQN"builtins.list*×
+user_inputsÅ
+Dbuiltins.list[torch._functorch._aot_autograd.schemas.GraphInputName]n
+5torch._functorch._aot_autograd.schemas.GraphInputName"5torch._functorch._aot_autograd.schemas.GraphInputName"builtins.list*Û
+user_outputsÈ
+Ebuiltins.list[torch._functorch._aot_autograd.schemas.GraphOutputName]p
+6torch._functorch._aot_autograd.schemas.GraphOutputName"6torch._functorch._aot_autograd.schemas.GraphOutputName"builtins.list*å
+inputs_to_parametersÊ
+obuiltins.dict[torch._functorch._aot_autograd.schemas.GraphInputName,torch._functorch._aot_autograd.schemas.FQN]n
+5torch._functorch._aot_autograd.schemas.GraphInputName"5torch._functorch._aot_autograd.schemas.GraphInputNameX
+*torch._functorch._aot_autograd.schemas.FQN"*torch._functorch._aot_autograd.schemas.FQN"builtins.dict*â
+inputs_to_buffersÊ
+obuiltins.dict[torch._functorch._aot_autograd.schemas.GraphInputName,torch._functorch._aot_autograd.schemas.FQN]n
+5torch._functorch._aot_autograd.schemas.GraphInputName"5torch._functorch._aot_autograd.schemas.GraphInputNameX
+*torch._functorch._aot_autograd.schemas.FQN"*torch._functorch._aot_autograd.schemas.FQN"builtins.dict*å
+buffers_to_mutateÍ
+pbuiltins.dict[torch._functorch._aot_autograd.schemas.GraphOutputName,torch._functorch._aot_autograd.schemas.FQN]p
+6torch._functorch._aot_autograd.schemas.GraphOutputName"6torch._functorch._aot_autograd.schemas.GraphOutputNameX
+*torch._functorch._aot_autograd.schemas.FQN"*torch._functorch._aot_autograd.schemas.FQN"builtins.dict*Š
+user_inputs_to_mutateî
+{builtins.dict[torch._functorch._aot_autograd.schemas.GraphOutputName,torch._functorch._aot_autograd.schemas.GraphInputName]p
+6torch._functorch._aot_autograd.schemas.GraphOutputName"6torch._functorch._aot_autograd.schemas.GraphOutputNamen
+5torch._functorch._aot_autograd.schemas.GraphInputName"5torch._functorch._aot_autograd.schemas.GraphInputName"builtins.dict*I
+in_spec<
+torch.utils._pytree.TreeSpec"torch.utils._pytree.TreeSpec*J
+out_spec<
+torch.utils._pytree.TreeSpec"torch.utils._pytree.TreeSpec*á
+backward_signatureÈ
+DUnion[torch._functorch._aot_autograd.schemas.BackwardSignature,None]t
+8torch._functorch._aot_autograd.schemas.BackwardSignature"8torch._functorch._aot_autograd.schemas.BackwardSignature
+None*Ø
+input_tokensÅ
+Dbuiltins.list[torch._functorch._aot_autograd.schemas.GraphInputName]n
+5torch._functorch._aot_autograd.schemas.GraphInputName"5torch._functorch._aot_autograd.schemas.GraphInputName"builtins.list*Ü
+output_tokensÈ
+Ebuiltins.list[torch._functorch._aot_autograd.schemas.GraphOutputName]p
+6torch._functorch._aot_autograd.schemas.GraphOutputName"6torch._functorch._aot_autograd.schemas.GraphOutputName"builtins.list8rõ
+
+parameters@torch._functorch._aot_autograd.schemas.GraphSignature.parameters¤
+9builtins.list[torch._functorch._aot_autograd.schemas.FQN]X
+*torch._functorch._aot_autograd.schemas.FQN"*torch._functorch._aot_autograd.schemas.FQN"builtins.listrï
+buffers=torch._functorch._aot_autograd.schemas.GraphSignature.buffers¤
+9builtins.list[torch._functorch._aot_autograd.schemas.FQN]X
+*torch._functorch._aot_autograd.schemas.FQN"*torch._functorch._aot_autograd.schemas.FQN"builtins.listr˜
+user_inputsAtorch._functorch._aot_autograd.schemas.GraphSignature.user_inputsÅ
+Dbuiltins.list[torch._functorch._aot_autograd.schemas.GraphInputName]n
+5torch._functorch._aot_autograd.schemas.GraphInputName"5torch._functorch._aot_autograd.schemas.GraphInputName"builtins.listr
+user_outputsBtorch._functorch._aot_autograd.schemas.GraphSignature.user_outputsÈ
+Ebuiltins.list[torch._functorch._aot_autograd.schemas.GraphOutputName]p
+6torch._functorch._aot_autograd.schemas.GraphOutputName"6torch._functorch._aot_autograd.schemas.GraphOutputName"builtins.listr¯
+inputs_to_parametersJtorch._functorch._aot_autograd.schemas.GraphSignature.inputs_to_parametersÊ
+obuiltins.dict[torch._functorch._aot_autograd.schemas.GraphInputName,torch._functorch._aot_autograd.schemas.FQN]n
+5torch._functorch._aot_autograd.schemas.GraphInputName"5torch._functorch._aot_autograd.schemas.GraphInputNameX
+*torch._functorch._aot_autograd.schemas.FQN"*torch._functorch._aot_autograd.schemas.FQN"builtins.dictr©
+inputs_to_buffersGtorch._functorch._aot_autograd.schemas.GraphSignature.inputs_to_buffersÊ
+obuiltins.dict[torch._functorch._aot_autograd.schemas.GraphInputName,torch._functorch._aot_autograd.schemas.FQN]n
+5torch._functorch._aot_autograd.schemas.GraphInputName"5torch._functorch._aot_autograd.schemas.GraphInputNameX
+*torch._functorch._aot_autograd.schemas.FQN"*torch._functorch._aot_autograd.schemas.FQN"builtins.dictr¬
+buffers_to_mutateGtorch._functorch._aot_autograd.schemas.GraphSignature.buffers_to_mutateÍ
+pbuiltins.dict[torch._functorch._aot_autograd.schemas.GraphOutputName,torch._functorch._aot_autograd.schemas.FQN]p
+6torch._functorch._aot_autograd.schemas.GraphOutputName"6torch._functorch._aot_autograd.schemas.GraphOutputNameX
+*torch._functorch._aot_autograd.schemas.FQN"*torch._functorch._aot_autograd.schemas.FQN"builtins.dictrÕ
+user_inputs_to_mutateKtorch._functorch._aot_autograd.schemas.GraphSignature.user_inputs_to_mutateî
+{builtins.dict[torch._functorch._aot_autograd.schemas.GraphOutputName,torch._functorch._aot_autograd.schemas.GraphInputName]p
+6torch._functorch._aot_autograd.schemas.GraphOutputName"6torch._functorch._aot_autograd.schemas.GraphOutputNamen
+5torch._functorch._aot_autograd.schemas.GraphInputName"5torch._functorch._aot_autograd.schemas.GraphInputName"builtins.dictr†
+in_spec=torch._functorch._aot_autograd.schemas.GraphSignature.in_spec<
+torch.utils._pytree.TreeSpec"torch.utils._pytree.TreeSpecrˆ
+out_spec>torch._functorch._aot_autograd.schemas.GraphSignature.out_spec<
+torch.utils._pytree.TreeSpec"torch.utils._pytree.TreeSpecr©
+backward_signatureHtorch._functorch._aot_autograd.schemas.GraphSignature.backward_signatureÈ
+DUnion[torch._functorch._aot_autograd.schemas.BackwardSignature,None]t
+8torch._functorch._aot_autograd.schemas.BackwardSignature"8torch._functorch._aot_autograd.schemas.BackwardSignature
+Nonerš
+input_tokensBtorch._functorch._aot_autograd.schemas.GraphSignature.input_tokensÅ
+Dbuiltins.list[torch._functorch._aot_autograd.schemas.GraphInputName]n
+5torch._functorch._aot_autograd.schemas.GraphInputName"5torch._functorch._aot_autograd.schemas.GraphInputName"builtins.listrŸ
+output_tokensCtorch._functorch._aot_autograd.schemas.GraphSignature.output_tokensÈ
+Ebuiltins.list[torch._functorch._aot_autograd.schemas.GraphOutputName]p
+6torch._functorch._aot_autograd.schemas.GraphOutputName"6torch._functorch._aot_autograd.schemas.GraphOutputName"builtins.listrü
+__dataclass_fields__Jtorch._functorch._aot_autograd.schemas.GraphSignature.__dataclass_fields__—
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dict× 
+	AOTConfig0torch._functorch._aot_autograd.schemas.AOTConfig"builtins.object*Y
+__post_init__>torch._functorch._aot_autograd.schemas.AOTConfig.__post_init__*
+self*þ
+__init__9torch._functorch._aot_autograd.schemas.AOTConfig.__init__"
+None*n
+selfd
+0torch._functorch._aot_autograd.schemas.AOTConfig"0torch._functorch._aot_autograd.schemas.AOTConfig*\
+fw_compilerK
+CallableType[builtins.function]&
+builtins.function"builtins.function*\
+bw_compilerK
+CallableType[builtins.function]&
+builtins.function"builtins.function*]
+partition_fnK
+CallableType[builtins.function]&
+builtins.function"builtins.function*Ž
+decompositionsù
+Nbuiltins.dict[CallableType[builtins.function],CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.functionK
+CallableType[builtins.function]&
+builtins.function"builtins.function"builtins.dict*4
+num_params_buffers
+builtins.int"builtins.int*(
+aot_id
+builtins.int"builtins.int*B
+keep_inference_input_mutations
+builtins.bool"builtins.bool*/
+	is_export
+builtins.bool"builtins.bool *1
+no_tangents
+builtins.bool"builtins.bool *4
+dynamic_shapes
+builtins.bool"builtins.bool *È
+aot_autograd_arg_pos_to_source¡
+/Union[builtins.list[torch._guards.Source],None]b
+#builtins.list[torch._guards.Source],
+torch._guards.Source"torch._guards.Source"builtins.list
+None *¡
+inference_compiler†
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *0
+
+enable_log
+builtins.bool"builtins.bool *2
+pre_dispatch
+builtins.bool"builtins.bool 8r˜
+fw_compiler<torch._functorch._aot_autograd.schemas.AOTConfig.fw_compilerK
+CallableType[builtins.function]&
+builtins.function"builtins.functionr˜
+bw_compiler<torch._functorch._aot_autograd.schemas.AOTConfig.bw_compilerK
+CallableType[builtins.function]&
+builtins.function"builtins.functionrš
+partition_fn=torch._functorch._aot_autograd.schemas.AOTConfig.partition_fnK
+CallableType[builtins.function]&
+builtins.function"builtins.functionrÍ
+decompositions?torch._functorch._aot_autograd.schemas.AOTConfig.decompositionsù
+Nbuiltins.dict[CallableType[builtins.function],CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.functionK
+CallableType[builtins.function]&
+builtins.function"builtins.function"builtins.dictrw
+num_params_buffersCtorch._functorch._aot_autograd.schemas.AOTConfig.num_params_buffers
+builtins.int"builtins.intr_
+aot_id7torch._functorch._aot_autograd.schemas.AOTConfig.aot_id
+builtins.int"builtins.intr‘
+keep_inference_input_mutationsOtorch._functorch._aot_autograd.schemas.AOTConfig.keep_inference_input_mutations
+builtins.bool"builtins.boolrg
+	is_export:torch._functorch._aot_autograd.schemas.AOTConfig.is_export
+builtins.bool"builtins.boolrk
+no_tangents<torch._functorch._aot_autograd.schemas.AOTConfig.no_tangents
+builtins.bool"builtins.boolrq
+dynamic_shapes?torch._functorch._aot_autograd.schemas.AOTConfig.dynamic_shapes
+builtins.bool"builtins.boolr•
+aot_autograd_arg_pos_to_sourceOtorch._functorch._aot_autograd.schemas.AOTConfig.aot_autograd_arg_pos_to_source¡
+/Union[builtins.list[torch._guards.Source],None]b
+#builtins.list[torch._guards.Source],
+torch._guards.Source"torch._guards.Source"builtins.list
+Nonerâ
+inference_compilerCtorch._functorch._aot_autograd.schemas.AOTConfig.inference_compiler†
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+Noneri
+
+enable_log;torch._functorch._aot_autograd.schemas.AOTConfig.enable_log
+builtins.bool"builtins.boolrm
+pre_dispatch=torch._functorch._aot_autograd.schemas.AOTConfig.pre_dispatch
+builtins.bool"builtins.boolr÷
+__dataclass_fields__Etorch._functorch._aot_autograd.schemas.AOTConfig.__dataclass_fields__—
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dict”
+SubclassTracingInfo:torch._functorch._aot_autograd.schemas.SubclassTracingInfo"builtins.tuple*µ
+_replaceCtorch._functorch._aot_autograd.schemas.SubclassTracingInfo._replace"u
+>torch._functorch._aot_autograd.schemas.SubclassTracingInfo._NT1
+Tuple[Any,Any,Any]
+Any
+Any
+Any*€
+_selfu
+>torch._functorch._aot_autograd.schemas.SubclassTracingInfo._NT1
+Tuple[Any,Any,Any]
+Any
+Any
+Any*$
+plain_tensor_trace_fn
+Any * 
+plain_tensor_args
+Any *"
+maybe_subclass_meta
+Any *ý
+__new__Btorch._functorch._aot_autograd.schemas.SubclassTracingInfo.__new__"u
+>torch._functorch._aot_autograd.schemas.SubclassTracingInfo._NT1
+Tuple[Any,Any,Any]
+Any
+Any
+Any*Ð
+_clsÅ
+DType[torch._functorch._aot_autograd.schemas.SubclassTracingInfo._NT]u
+>torch._functorch._aot_autograd.schemas.SubclassTracingInfo._NT1
+Tuple[Any,Any,Any]
+Any
+Any
+Any"type*"
+plain_tensor_trace_fn
+Any*
+plain_tensor_args
+Any* 
+maybe_subclass_meta
+Any*©
+_asdictBtorch._functorch._aot_autograd.schemas.SubclassTracingInfo._asdict"W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*€
+_selfu
+>torch._functorch._aot_autograd.schemas.SubclassTracingInfo._NT1
+Tuple[Any,Any,Any]
+Any
+Any
+Any*Œ
+_make@torch._functorch._aot_autograd.schemas.SubclassTracingInfo._make"u
+>torch._functorch._aot_autograd.schemas.SubclassTracingInfo._NT1
+Tuple[Any,Any,Any]
+Any
+Any
+Any*Ð
+_clsÅ
+DType[torch._functorch._aot_autograd.schemas.SubclassTracingInfo._NT]u
+>torch._functorch._aot_autograd.schemas.SubclassTracingInfo._NT1
+Tuple[Any,Any,Any]
+Any
+Any
+Any"type*>
+iterable0
+typing.Iterable[Any]
+Any"typing.Iterable*
+new
+Any *
+len
+Any 0:classmethodprr
+plain_tensor_trace_fnPtorch._functorch._aot_autograd.schemas.SubclassTracingInfo.plain_tensor_trace_fn
+Anyrj
+plain_tensor_argsLtorch._functorch._aot_autograd.schemas.SubclassTracingInfo.plain_tensor_args
+Anyrn
+maybe_subclass_metaNtorch._functorch._aot_autograd.schemas.SubclassTracingInfo.maybe_subclass_meta
+AnyrÛ
+_fieldsBtorch._functorch._aot_autograd.schemas.SubclassTracingInfo._fields‹
+-Tuple[builtins.str,builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str
+builtins.str"builtins.strr°
+_field_typesGtorch._functorch._aot_autograd.schemas.SubclassTracingInfo._field_typesW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dictr¶
+_field_defaultsJtorch._functorch._aot_autograd.schemas.SubclassTracingInfo._field_defaultsW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dictrk
+_sourceBtorch._functorch._aot_autograd.schemas.SubclassTracingInfo._source
+builtins.str"builtins.strr¶
+__annotations__Jtorch._functorch._aot_autograd.schemas.SubclassTracingInfo.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*¢
+__annotations__6torch._functorch._aot_autograd.schemas.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*
+pytreetorch.utils._pytree *~
+zip*torch._functorch._aot_autograd.schemas.zipK
+CallableType[builtins.function]&
+builtins.function"builtins.function

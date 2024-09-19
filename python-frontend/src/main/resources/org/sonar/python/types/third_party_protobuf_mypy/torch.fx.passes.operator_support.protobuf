@@ -1,0 +1,104 @@
+
+ torch.fx.passes.operator_supportÙ
+OperatorSupportBase4torch.fx.passes.operator_support.OperatorSupportBase"abc.ABC*€
+is_node_supportedFtorch.fx.passes.operator_support.OperatorSupportBase.is_node_supported"
+builtins.bool"builtins.bool*v
+selfl
+4torch.fx.passes.operator_support.OperatorSupportBase"4torch.fx.passes.operator_support.OperatorSupportBase*¾
+
+submodules­
+;typing.Mapping[builtins.str,torch.nn.modules.module.Module]
+builtins.str"builtins.str@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"typing.Mapping*2
+node(
+torch.fx.node.Node"torch.fx.node.Node0:abc.abstractmethod@8Ã
+OperatorSupport0torch.fx.passes.operator_support.OperatorSupport"4torch.fx.passes.operator_support.OperatorSupportBase*œ
+__init__9torch.fx.passes.operator_support.OperatorSupport.__init__"
+None*n
+selfd
+0torch.fx.passes.operator_support.OperatorSupport"0torch.fx.passes.operator_support.OperatorSupport*Ú
+support_dictÅ
+¾Union[TypeAlias[typing.Mapping[builtins.str,TypeAlias[Union[Tuple[typing.Sequence[typing.Sequence[torch._C.dtype]],builtins.dict[builtins.str,typing.Sequence[torch._C.dtype]]],None]]]],None]õ	
+²TypeAlias[typing.Mapping[builtins.str,TypeAlias[Union[Tuple[typing.Sequence[typing.Sequence[torch._C.dtype]],builtins.dict[builtins.str,typing.Sequence[torch._C.dtype]]],None]]]]
+§typing.Mapping[builtins.str,TypeAlias[Union[Tuple[typing.Sequence[typing.Sequence[torch._C.dtype]],builtins.dict[builtins.str,typing.Sequence[torch._C.dtype]]],None]]]
+builtins.str"builtins.str²
+ŠTypeAlias[Union[Tuple[typing.Sequence[typing.Sequence[torch._C.dtype]],builtins.dict[builtins.str,typing.Sequence[torch._C.dtype]]],None]]æ
+Union[Tuple[typing.Sequence[typing.Sequence[torch._C.dtype]],builtins.dict[builtins.str,typing.Sequence[torch._C.dtype]]],None]Ö
+sTuple[typing.Sequence[typing.Sequence[torch._C.dtype]],builtins.dict[builtins.str,typing.Sequence[torch._C.dtype]]]™
+0typing.Sequence[typing.Sequence[torch._C.dtype]]T
+typing.Sequence[torch._C.dtype] 
+torch._C.dtype"torch._C.dtype"typing.Sequence"typing.SequenceÀ
+;builtins.dict[builtins.str,typing.Sequence[torch._C.dtype]]
+builtins.str"builtins.strT
+typing.Sequence[torch._C.dtype] 
+torch._C.dtype"torch._C.dtype"typing.Sequence"builtins.dict
+None"8torch.fx.passes.operator_support.SupportedArgumentDTypes"typing.Mapping",torch.fx.passes.operator_support.SupportDict
+None *Ü
+is_node_supportedBtorch.fx.passes.operator_support.OperatorSupport.is_node_supported"
+builtins.bool"builtins.bool*n
+selfd
+0torch.fx.passes.operator_support.OperatorSupport"0torch.fx.passes.operator_support.OperatorSupport*¾
+
+submodules­
+;typing.Mapping[builtins.str,torch.nn.modules.module.Module]
+builtins.str"builtins.str@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"typing.Mapping*2
+node(
+torch.fx.node.Node"torch.fx.node.Node8rÇ
+
+_support_dict>torch.fx.passes.operator_support.OperatorSupport._support_dictõ	
+²TypeAlias[typing.Mapping[builtins.str,TypeAlias[Union[Tuple[typing.Sequence[typing.Sequence[torch._C.dtype]],builtins.dict[builtins.str,typing.Sequence[torch._C.dtype]]],None]]]]
+§typing.Mapping[builtins.str,TypeAlias[Union[Tuple[typing.Sequence[typing.Sequence[torch._C.dtype]],builtins.dict[builtins.str,typing.Sequence[torch._C.dtype]]],None]]]
+builtins.str"builtins.str²
+ŠTypeAlias[Union[Tuple[typing.Sequence[typing.Sequence[torch._C.dtype]],builtins.dict[builtins.str,typing.Sequence[torch._C.dtype]]],None]]æ
+Union[Tuple[typing.Sequence[typing.Sequence[torch._C.dtype]],builtins.dict[builtins.str,typing.Sequence[torch._C.dtype]]],None]Ö
+sTuple[typing.Sequence[typing.Sequence[torch._C.dtype]],builtins.dict[builtins.str,typing.Sequence[torch._C.dtype]]]™
+0typing.Sequence[typing.Sequence[torch._C.dtype]]T
+typing.Sequence[torch._C.dtype] 
+torch._C.dtype"torch._C.dtype"typing.Sequence"typing.SequenceÀ
+;builtins.dict[builtins.str,typing.Sequence[torch._C.dtype]]
+builtins.str"builtins.strT
+typing.Sequence[torch._C.dtype] 
+torch._C.dtype"torch._C.dtype"typing.Sequence"builtins.dict
+None"8torch.fx.passes.operator_support.SupportedArgumentDTypes"typing.Mapping",torch.fx.passes.operator_support.SupportDictÝ
+
+OpSupports+torch.fx.passes.operator_support.OpSupports"builtins.object*¬
+decline_if_input_dtypeBtorch.fx.passes.operator_support.OpSupports.decline_if_input_dtype"l
+4torch.fx.passes.operator_support.OperatorSupportBase"4torch.fx.passes.operator_support.OperatorSupportBase*¡
+cls—
+1Type[torch.fx.passes.operator_support.OpSupports]Z
++torch.fx.passes.operator_support.OpSupports"+torch.fx.passes.operator_support.OpSupports"type*+
+dtype 
+torch._C.dtype"torch._C.dtype0:classmethodp*ß
+decline_if_node_in_namesDtorch.fx.passes.operator_support.OpSupports.decline_if_node_in_names"l
+4torch.fx.passes.operator_support.OperatorSupportBase"4torch.fx.passes.operator_support.OperatorSupportBase*¡
+cls—
+1Type[torch.fx.passes.operator_support.OpSupports]Z
++torch.fx.passes.operator_support.OpSupports"+torch.fx.passes.operator_support.OpSupports"type*Z
+disallow_setH
+builtins.set[builtins.str]
+builtins.str"builtins.str"builtins.set0:classmethodp8 
+FunctionalOperatorSupport@142>torch.fx.passes.operator_support.FunctionalOperatorSupport@142"4torch.fx.passes.operator_support.OperatorSupportBase*ˆ
+is_node_supportedPtorch.fx.passes.operator_support.FunctionalOperatorSupport@142.is_node_supported"
+builtins.bool"builtins.bool*‹
+self€
+>torch.fx.passes.operator_support.FunctionalOperatorSupport@142">torch.fx.passes.operator_support.FunctionalOperatorSupport@142*¾
+
+submodules­
+;typing.Mapping[builtins.str,torch.nn.modules.module.Module]
+builtins.str"builtins.str@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"typing.Mapping*2
+node(
+torch.fx.node.Node"torch.fx.node.Node}
+_get_arg_dtype/torch.fx.passes.operator_support._get_arg_dtype"
+Any*1
+arg(
+torch.fx.node.Node"torch.fx.node.Node*œ
+__annotations__0torch.fx.passes.operator_support.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*
+ttyping *
+__all__(torch.fx.passes.operator_support.__all__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list

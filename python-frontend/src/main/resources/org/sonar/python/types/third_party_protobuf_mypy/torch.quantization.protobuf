@@ -1,0 +1,970 @@
+
+torch.quantization‘%
+HistogramObserver0torch.ao.quantization.observer.HistogramObserver">torch.ao.quantization.observer.UniformQuantizationObserverBase*ó
+__init__9torch.ao.quantization.observer.HistogramObserver.__init__"
+None*n
+selfd
+0torch.ao.quantization.observer.HistogramObserver"0torch.ao.quantization.observer.HistogramObserver*(
+bins
+builtins.int"builtins.int *1
+upsample_rate
+builtins.int"builtins.int *-
+dtype 
+torch._C.dtype"torch._C.dtype *
+qscheme
+Any *
+reduce_range
+Any *
+	quant_min
+Any *
+	quant_max
+Any *
+factory_kwargs
+Any *
+eps
+Any *
+
+is_dynamic
+Any *
+kwargs
+Any*ú
+	_get_norm:torch.ao.quantization.observer.HistogramObserver._get_norm",
+torch._tensor.Tensor"torch._tensor.Tensor*n
+selfd
+0torch.ao.quantization.observer.HistogramObserver"0torch.ao.quantization.observer.HistogramObserver*=
+delta_begin,
+torch._tensor.Tensor"torch._tensor.Tensor*;
+	delta_end,
+torch._tensor.Tensor"torch._tensor.Tensor*9
+density,
+torch._tensor.Tensor"torch._tensor.Tensor*∆
+_compute_quantization_errorLtorch.ao.quantization.observer.HistogramObserver._compute_quantization_error"
+Any*n
+selfd
+0torch.ao.quantization.observer.HistogramObserver"0torch.ao.quantization.observer.HistogramObserver*0
+next_start_bin
+builtins.int"builtins.int*.
+next_end_bin
+builtins.int"builtins.int*Ë
+_non_linear_param_searchItorch.ao.quantization.observer.HistogramObserver._non_linear_param_search"ê
+0Tuple[torch._tensor.Tensor,torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor,
+torch._tensor.Tensor"torch._tensor.Tensor*n
+selfd
+0torch.ao.quantization.observer.HistogramObserver"0torch.ao.quantization.observer.HistogramObserver*›
+_adjust_min_max@torch.ao.quantization.observer.HistogramObserver._adjust_min_max"Ê
+JTuple[torch._tensor.Tensor,torch._tensor.Tensor,builtins.int,builtins.int],
+torch._tensor.Tensor"torch._tensor.Tensor,
+torch._tensor.Tensor"torch._tensor.Tensor
+builtins.int"builtins.int
+builtins.int"builtins.int*n
+selfd
+0torch.ao.quantization.observer.HistogramObserver"0torch.ao.quantization.observer.HistogramObserver*>
+combined_min,
+torch._tensor.Tensor"torch._tensor.Tensor*>
+combined_max,
+torch._tensor.Tensor"torch._tensor.Tensor*/
+upsample_rate
+builtins.int"builtins.int*¨
+_combine_histogramsDtorch.ao.quantization.observer.HistogramObserver._combine_histograms",
+torch._tensor.Tensor"torch._tensor.Tensor*n
+selfd
+0torch.ao.quantization.observer.HistogramObserver"0torch.ao.quantization.observer.HistogramObserver*;
+	orig_hist,
+torch._tensor.Tensor"torch._tensor.Tensor*:
+new_hist,
+torch._tensor.Tensor"torch._tensor.Tensor*/
+upsample_rate
+builtins.int"builtins.int*1
+downsample_rate
+builtins.int"builtins.int*+
+	start_idx
+builtins.int"builtins.int*'
+Nbins
+builtins.int"builtins.int*¯
+reset_histogram@torch.ao.quantization.observer.HistogramObserver.reset_histogram"
+None*n
+selfd
+0torch.ao.quantization.observer.HistogramObserver"0torch.ao.quantization.observer.HistogramObserver*3
+x,
+torch._tensor.Tensor"torch._tensor.Tensor*9
+min_val,
+torch._tensor.Tensor"torch._tensor.Tensor*9
+max_val,
+torch._tensor.Tensor"torch._tensor.Tensor*õ
+forward8torch.ao.quantization.observer.HistogramObserver.forward",
+torch._tensor.Tensor"torch._tensor.Tensor*n
+selfd
+0torch.ao.quantization.observer.HistogramObserver"0torch.ao.quantization.observer.HistogramObserver*8
+x_orig,
+torch._tensor.Tensor"torch._tensor.Tensor*u
+calculate_qparamsBtorch.ao.quantization.observer.HistogramObserver.calculate_qparams*
+self0:torch.jit.export*ë
+_save_to_state_dictDtorch.ao.quantization.observer.HistogramObserver._save_to_state_dict*
+self*
+destination*
+
+prefix*
+	keep_vars*‹
+_load_from_state_dictFtorch.ao.quantization.observer.HistogramObserver._load_from_state_dict*
+self*
+
+state_dict*
+
+prefix*
+local_metadata*
+
+strict*
+missing_keys*
+unexpected_keys*
+
+error_msgs*S
+
+extra_repr;torch.ao.quantization.observer.HistogramObserver.extra_repr*
+selfru
+	histogram:torch.ao.quantization.observer.HistogramObserver.histogram,
+torch._tensor.Tensor"torch._tensor.Tensorrq
+min_val8torch.ao.quantization.observer.HistogramObserver.min_val,
+torch._tensor.Tensor"torch._tensor.Tensorrq
+max_val8torch.ao.quantization.observer.HistogramObserver.max_val,
+torch._tensor.Tensor"torch._tensor.Tensorr[
+bins5torch.ao.quantization.observer.HistogramObserver.bins
+builtins.int"builtins.intrP
+	dst_nbins:torch.ao.quantization.observer.HistogramObserver.dst_nbins
+Anyrm
+upsample_rate>torch.ao.quantization.observer.HistogramObserver.upsample_rate
+builtins.int"builtins.int¢	
+MinMaxObserver-torch.ao.quantization.observer.MinMaxObserver">torch.ao.quantization.observer.UniformQuantizationObserverBase*ò
+__init__6torch.ao.quantization.observer.MinMaxObserver.__init__"
+None*h
+self^
+-torch.ao.quantization.observer.MinMaxObserver"-torch.ao.quantization.observer.MinMaxObserver*
+dtype
+Any *
+qscheme
+Any *
+reduce_range
+Any *
+	quant_min
+Any *
+	quant_max
+Any *
+factory_kwargs
+Any *
+eps
+Any *
+
+is_dynamic
+Any *
+kwargs
+Any*V
+forward5torch.ao.quantization.observer.MinMaxObserver.forward*
+self*
+
+x_orig*r
+calculate_qparams?torch.ao.quantization.observer.MinMaxObserver.calculate_qparams*
+self0:torch.jit.export*d
+
+extra_repr8torch.ao.quantization.observer.MinMaxObserver.extra_repr*
+self0:torch.jit.export*t
+reset_min_max_vals@torch.ao.quantization.observer.MinMaxObserver.reset_min_max_vals*
+self0:torch.jit.exportrn
+min_val5torch.ao.quantization.observer.MinMaxObserver.min_val,
+torch._tensor.Tensor"torch._tensor.Tensorrn
+max_val5torch.ao.quantization.observer.MinMaxObserver.max_val,
+torch._tensor.Tensor"torch._tensor.Tensor¢
+MovingAverageMinMaxObserver:torch.ao.quantization.observer.MovingAverageMinMaxObserver"-torch.ao.quantization.observer.MinMaxObserver*ƒ
+__init__Ctorch.ao.quantization.observer.MovingAverageMinMaxObserver.__init__"
+None*Ç
+selfx
+:torch.ao.quantization.observer.MovingAverageMinMaxObserver":torch.ao.quantization.observer.MovingAverageMinMaxObserver*!
+averaging_constant
+Any *
+dtype
+Any *
+qscheme
+Any *
+reduce_range
+Any *
+	quant_min
+Any *
+	quant_max
+Any *
+eps
+Any *
+
+is_dynamic
+Any *
+kwargs
+Any*c
+forwardBtorch.ao.quantization.observer.MovingAverageMinMaxObserver.forward*
+self*
+
+x_origrl
+averaging_constantMtorch.ao.quantization.observer.MovingAverageMinMaxObserver.averaging_constant
+Anyã
+%MovingAveragePerChannelMinMaxObserverDtorch.ao.quantization.observer.MovingAveragePerChannelMinMaxObserver"7torch.ao.quantization.observer.PerChannelMinMaxObserver*˚
+__init__Mtorch.ao.quantization.observer.MovingAveragePerChannelMinMaxObserver.__init__"
+None*ó
+selfå
+Dtorch.ao.quantization.observer.MovingAveragePerChannelMinMaxObserver"Dtorch.ao.quantization.observer.MovingAveragePerChannelMinMaxObserver*!
+averaging_constant
+Any *
+ch_axis
+Any *
+dtype
+Any *
+qscheme
+Any *
+reduce_range
+Any *
+	quant_min
+Any *
+	quant_max
+Any *
+eps
+Any *
+
+is_dynamic
+Any *
+kwargs
+Any*m
+forwardLtorch.ao.quantization.observer.MovingAveragePerChannelMinMaxObserver.forward*
+self*
+
+x_origrv
+averaging_constantWtorch.ao.quantization.observer.MovingAveragePerChannelMinMaxObserver.averaging_constant
+Any‡
+NoopObserver+torch.ao.quantization.observer.NoopObserver"+torch.ao.quantization.observer.ObserverBase*Â
+__init__4torch.ao.quantization.observer.NoopObserver.__init__"
+None*d
+selfZ
++torch.ao.quantization.observer.NoopObserver"+torch.ao.quantization.observer.NoopObserver*
+dtype
+Any *
+custom_op_name
+Any *O
+forward3torch.ao.quantization.observer.NoopObserver.forward*
+self*
+x*p
+calculate_qparams=torch.ao.quantization.observer.NoopObserver.calculate_qparams*
+self0:torch.jit.exportrK
+	custom_op5torch.ao.quantization.observer.NoopObserver.custom_op
+Any˝
+ObserverBase+torch.ao.quantization.observer.ObserverBase"torch.nn.modules.module.Module*g
+__init__4torch.ao.quantization.observer.ObserverBase.__init__*
+self*	
+dtype*
+
+is_dynamic *c
+forward3torch.ao.quantization.observer.ObserverBase.forward*
+self*
+x0:abstractmethod@*|
+calculate_qparams=torch.ao.quantization.observer.ObserverBase.calculate_qparams*
+self*
+
+kwargs0:abstractmethod@rï
+	with_args5torch.ao.quantization.observer.ObserverBase.with_argsQ
+%builtins.classmethod[Any,Unknown,Any]
+Any 
+Any"builtins.classmethodrß
+with_callable_args>torch.ao.quantization.observer.ObserverBase.with_callable_argsQ
+%builtins.classmethod[Any,Unknown,Any]
+Any 
+Any"builtins.classmethodrC
+dtype1torch.ao.quantization.observer.ObserverBase.dtype
+AnyrM
+
+is_dynamic6torch.ao.quantization.observer.ObserverBase.is_dynamic
+Anyπ
+PerChannelMinMaxObserver7torch.ao.quantization.observer.PerChannelMinMaxObserver">torch.ao.quantization.observer.UniformQuantizationObserverBase*Œ
+__init__@torch.ao.quantization.observer.PerChannelMinMaxObserver.__init__"
+None*|
+selfr
+7torch.ao.quantization.observer.PerChannelMinMaxObserver"7torch.ao.quantization.observer.PerChannelMinMaxObserver*
+ch_axis
+Any *
+dtype
+Any *
+qscheme
+Any *
+reduce_range
+Any *
+	quant_min
+Any *
+	quant_max
+Any *
+factory_kwargs
+Any *
+eps
+Any *
+
+is_dynamic
+Any *
+kwargs
+Any*`
+forward?torch.ao.quantization.observer.PerChannelMinMaxObserver.forward*
+self*
+
+x_orig*b
+_forward@torch.ao.quantization.observer.PerChannelMinMaxObserver._forward*
+self*
+
+x_orig*|
+calculate_qparamsItorch.ao.quantization.observer.PerChannelMinMaxObserver.calculate_qparams*
+self0:torch.jit.export*Z
+
+extra_reprBtorch.ao.quantization.observer.PerChannelMinMaxObserver.extra_repr*
+self*Ï
+_load_from_state_dictMtorch.ao.quantization.observer.PerChannelMinMaxObserver._load_from_state_dict"
+Any*|
+selfr
+7torch.ao.quantization.observer.PerChannelMinMaxObserver"7torch.ao.quantization.observer.PerChannelMinMaxObserver*g
+
+state_dictW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*(
+prefix
+builtins.str"builtins.str*¢
+local_metadataç
+0builtins.dict[builtins.str,torch._tensor.Tensor]
+builtins.str"builtins.str,
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.dict**
+strict
+builtins.bool"builtins.bool*\
+missing_keysJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*_
+unexpected_keysJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*Z
+
+error_msgsJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*˙
+_load_from_state_dict_scriptTtorch.ao.quantization.observer.PerChannelMinMaxObserver._load_from_state_dict_script"
+Any*|
+selfr
+7torch.ao.quantization.observer.PerChannelMinMaxObserver"7torch.ao.quantization.observer.PerChannelMinMaxObserver*g
+
+state_dictW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*(
+prefix
+builtins.str"builtins.str*¢
+local_metadataç
+0builtins.dict[builtins.str,torch._tensor.Tensor]
+builtins.str"builtins.str,
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.dict**
+strict
+builtins.bool"builtins.bool*\
+missing_keysJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*_
+unexpected_keysJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*Z
+
+error_msgsJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*~
+reset_min_max_valsJtorch.ao.quantization.observer.PerChannelMinMaxObserver.reset_min_max_vals*
+self0:torch.jit.exportrx
+min_val?torch.ao.quantization.observer.PerChannelMinMaxObserver.min_val,
+torch._tensor.Tensor"torch._tensor.Tensorrx
+max_val?torch.ao.quantization.observer.PerChannelMinMaxObserver.max_val,
+torch._tensor.Tensor"torch._tensor.TensorrS
+ch_axis?torch.ao.quantization.observer.PerChannelMinMaxObserver.ch_axis
+Any‹	
+PlaceholderObserver2torch.ao.quantization.observer.PlaceholderObserver"+torch.ao.quantization.observer.ObserverBase*ì
+__init__;torch.ao.quantization.observer.PlaceholderObserver.__init__"
+None*r
+selfh
+2torch.ao.quantization.observer.PlaceholderObserver"2torch.ao.quantization.observer.PlaceholderObserver*
+dtype
+Any *
+custom_op_name
+Any *
+compute_dtype
+Any *
+	quant_min
+Any *
+	quant_max
+Any *
+qscheme
+Any *
+eps
+Any *
+
+is_dynamic
+Any *V
+forward:torch.ao.quantization.observer.PlaceholderObserver.forward*
+self*
+x*i
+
+extra_repr=torch.ao.quantization.observer.PlaceholderObserver.extra_repr*
+self0:torch.jit.export*w
+calculate_qparamsDtorch.ao.quantization.observer.PlaceholderObserver.calculate_qparams*
+self0:torch.jit.exportrN
+qscheme:torch.ao.quantization.observer.PlaceholderObserver.qscheme
+AnyrR
+	quant_min<torch.ao.quantization.observer.PlaceholderObserver.quant_min
+AnyrR
+	quant_max<torch.ao.quantization.observer.PlaceholderObserver.quant_max
+AnyrF
+eps6torch.ao.quantization.observer.PlaceholderObserver.eps
+AnyrR
+	custom_op<torch.ao.quantization.observer.PlaceholderObserver.custom_op
+Anyï
+RecordingObserver0torch.ao.quantization.observer.RecordingObserver"+torch.ao.quantization.observer.ObserverBase*\
+__init__9torch.ao.quantization.observer.RecordingObserver.__init__*
+self*
+dtype *T
+forward8torch.ao.quantization.observer.RecordingObserver.forward*
+self*
+x*u
+calculate_qparamsBtorch.ao.quantization.observer.RecordingObserver.calculate_qparams*
+self0:torch.jit.export*s
+get_tensor_valueAtorch.ao.quantization.observer.RecordingObserver.get_tensor_value*
+self0:torch.jit.exportr¨
+__annotations__@torch.ao.quantization.observer.RecordingObserver.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dictrR
+
+tensor_val;torch.ao.quantization.observer.RecordingObserver.tensor_val
+Anyπ
+QConfig%torch.ao.quantization.qconfig.QConfig"(torch.ao.quantization.qconfig.QConfig@84*]
+__new__-torch.ao.quantization.qconfig.QConfig.__new__*
+cls*
+
+activation*
+
+weight‹
+QConfigDynamic,torch.ao.quantization.qconfig.QConfigDynamic"0torch.ao.quantization.qconfig.QConfigDynamic@115*h
+__new__4torch.ao.quantization.qconfig.QConfigDynamic.__new__*
+cls*
+
+activation *
+weight 8⁄
+FakeQuantize0torch.ao.quantization.fake_quantize.FakeQuantize"4torch.ao.quantization.fake_quantize.FakeQuantizeBase*®
+__init__9torch.ao.quantization.fake_quantize.FakeQuantize.__init__*
+self*
+observer *
+	quant_min *
+	quant_max *
+
+is_dynamic *
+observer_kwargs*u
+calculate_qparamsBtorch.ao.quantization.fake_quantize.FakeQuantize.calculate_qparams*
+self0:torch.jit.export*T
+forward8torch.ao.quantization.fake_quantize.FakeQuantize.forward*
+self*
+X*g
+
+extra_repr;torch.ao.quantization.fake_quantize.FakeQuantize.extra_repr*
+self0:torch.jit.export*ë
+_save_to_state_dictDtorch.ao.quantization.fake_quantize.FakeQuantize._save_to_state_dict*
+self*
+destination*
+
+prefix*
+	keep_vars*‹
+_load_from_state_dictFtorch.ao.quantization.fake_quantize.FakeQuantize._load_from_state_dict*
+self*
+
+state_dict*
+
+prefix*
+local_metadata*
+
+strict*
+missing_keys*
+unexpected_keys*
+
+error_msgsrm
+scale6torch.ao.quantization.fake_quantize.FakeQuantize.scale,
+torch._tensor.Tensor"torch._tensor.Tensorrw
+
+zero_point;torch.ao.quantization.fake_quantize.FakeQuantize.zero_point,
+torch._tensor.Tensor"torch._tensor.Tensorrl
+activation_post_processHtorch.ao.quantization.fake_quantize.FakeQuantize.activation_post_process
+AnyrP
+	quant_min:torch.ao.quantization.fake_quantize.FakeQuantize.quant_min
+AnyrP
+	quant_max:torch.ao.quantization.fake_quantize.FakeQuantize.quant_max
+AnyrR
+
+is_dynamic;torch.ao.quantization.fake_quantize.FakeQuantize.is_dynamic
+AnyrH
+dtype6torch.ao.quantization.fake_quantize.FakeQuantize.dtype
+AnyrL
+qscheme8torch.ao.quantization.fake_quantize.FakeQuantize.qscheme
+AnyrL
+ch_axis8torch.ao.quantization.fake_quantize.FakeQuantize.ch_axis
+AnyrZ
+is_per_channel?torch.ao.quantization.fake_quantize.FakeQuantize.is_per_channel
+Anyˇ
+FakeQuantizeBase4torch.ao.quantization.fake_quantize.FakeQuantizeBase"abc.ABC"torch.nn.modules.module.Module*S
+__init__=torch.ao.quantization.fake_quantize.FakeQuantizeBase.__init__*
+self*l
+forward<torch.ao.quantization.fake_quantize.FakeQuantizeBase.forward*
+self*
+x0:abstractmethod@*Ö
+calculate_qparamsFtorch.ao.quantization.fake_quantize.FakeQuantizeBase.calculate_qparams*
+self*
+
+kwargs0:abstractmethod@*†
+enable_fake_quantFtorch.ao.quantization.fake_quantize.FakeQuantizeBase.enable_fake_quant"
+None*v
+selfl
+4torch.ao.quantization.fake_quantize.FakeQuantizeBase"4torch.ao.quantization.fake_quantize.FakeQuantizeBase*-
+enabled
+builtins.bool"builtins.bool 0:torch.jit.export*{
+disable_fake_quantGtorch.ao.quantization.fake_quantize.FakeQuantizeBase.disable_fake_quant*
+self0:torch.jit.export*ú
+enable_observerDtorch.ao.quantization.fake_quantize.FakeQuantizeBase.enable_observer"
+None*v
+selfl
+4torch.ao.quantization.fake_quantize.FakeQuantizeBase"4torch.ao.quantization.fake_quantize.FakeQuantizeBase*-
+enabled
+builtins.bool"builtins.bool 0:torch.jit.export*w
+disable_observerEtorch.ao.quantization.fake_quantize.FakeQuantizeBase.disable_observer*
+self0:torch.jit.export*q
+	with_args>torch.ao.quantization.fake_quantize.FakeQuantizeBase.with_args*
+cls*
+
+kwargs0:classmethodprã
+fake_quant_enabledGtorch.ao.quantization.fake_quantize.FakeQuantizeBase.fake_quant_enabled,
+torch._tensor.Tensor"torch._tensor.Tensorrá
+observer_enabledEtorch.ao.quantization.fake_quantize.FakeQuantizeBase.observer_enabled,
+torch._tensor.Tensor"torch._tensor.Tensor‘
+FixedQParamsFakeQuantize<torch.ao.quantization.fake_quantize.FixedQParamsFakeQuantize"0torch.ao.quantization.fake_quantize.FakeQuantize*i
+__init__Etorch.ao.quantization.fake_quantize.FixedQParamsFakeQuantize.__init__*
+self*
+observer*Å
+calculate_qparamsNtorch.ao.quantization.fake_quantize.FixedQParamsFakeQuantize.calculate_qparams*
+self0:torch.jit.export*s
+
+extra_reprGtorch.ao.quantization.fake_quantize.FixedQParamsFakeQuantize.extra_repr*
+self0:torch.jit.exportrd
+_observer_ctrJtorch.ao.quantization.fake_quantize.FixedQParamsFakeQuantize._observer_ctr
+Anyƒ
+FusedMovingAvgObsFakeQuantizeAtorch.ao.quantization.fake_quantize.FusedMovingAvgObsFakeQuantize"0torch.ao.quantization.fake_quantize.FakeQuantize*â
+__init__Jtorch.ao.quantization.fake_quantize.FusedMovingAvgObsFakeQuantize.__init__"
+None*ë
+selfÜ
+Atorch.ao.quantization.fake_quantize.FusedMovingAvgObsFakeQuantize"Atorch.ao.quantization.fake_quantize.FusedMovingAvgObsFakeQuantize*
+observer
+Any *-
+	quant_min
+builtins.int"builtins.int *-
+	quant_max
+builtins.int"builtins.int *
+observer_kwargs
+Any*£
+calculate_qparamsStorch.ao.quantization.fake_quantize.FusedMovingAvgObsFakeQuantize.calculate_qparams"ê
+0Tuple[torch._tensor.Tensor,torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor,
+torch._tensor.Tensor"torch._tensor.Tensor*ë
+selfÜ
+Atorch.ao.quantization.fake_quantize.FusedMovingAvgObsFakeQuantize"Atorch.ao.quantization.fake_quantize.FusedMovingAvgObsFakeQuantize0:torch.jit.export*†
+
+extra_reprLtorch.ao.quantization.fake_quantize.FusedMovingAvgObsFakeQuantize.extra_repr"
+builtins.str"builtins.str*ë
+selfÜ
+Atorch.ao.quantization.fake_quantize.FusedMovingAvgObsFakeQuantize"Atorch.ao.quantization.fake_quantize.FusedMovingAvgObsFakeQuantize0:torch.jit.export*À
+forwardItorch.ao.quantization.fake_quantize.FusedMovingAvgObsFakeQuantize.forward",
+torch._tensor.Tensor"torch._tensor.Tensor*ë
+selfÜ
+Atorch.ao.quantization.fake_quantize.FusedMovingAvgObsFakeQuantize"Atorch.ao.quantization.fake_quantize.FusedMovingAvgObsFakeQuantize*3
+X,
+torch._tensor.Tensor"torch._tensor.Tensorrä
+is_symmetric_quantTtorch.ao.quantization.fake_quantize.FusedMovingAvgObsFakeQuantize.is_symmetric_quant
+builtins.bool"builtins.boolø
+DeQuantStub'torch.ao.quantization.stubs.DeQuantStub"torch.nn.modules.module.Module*U
+__init__0torch.ao.quantization.stubs.DeQuantStub.__init__*
+self*
+qconfig *K
+forward/torch.ao.quantization.stubs.DeQuantStub.forward*
+self*
+xrC
+qconfig/torch.ao.quantization.stubs.DeQuantStub.qconfig
+Anyµ
+	QuantStub%torch.ao.quantization.stubs.QuantStub"torch.nn.modules.module.Module*S
+__init__.torch.ao.quantization.stubs.QuantStub.__init__*
+self*
+qconfig *I
+forward-torch.ao.quantization.stubs.QuantStub.forward*
+self*
+xrA
+qconfig-torch.ao.quantization.stubs.QuantStub.qconfig
+Anyî
+QuantWrapper(torch.ao.quantization.stubs.QuantWrapper"torch.nn.modules.module.Module*S
+__init__1torch.ao.quantization.stubs.QuantWrapper.__init__*
+self*
+
+module*L
+forward0torch.ao.quantization.stubs.QuantWrapper.forward*
+self*
+Xrá
+quant.torch.ao.quantization.stubs.QuantWrapper.quantN
+%torch.ao.quantization.stubs.QuantStub"%torch.ao.quantization.stubs.QuantStubrè
+dequant0torch.ao.quantization.stubs.QuantWrapper.dequantR
+'torch.ao.quantization.stubs.DeQuantStub"'torch.ao.quantization.stubs.DeQuantStubr{
+module/torch.ao.quantization.stubs.QuantWrapper.module@
+torch.nn.modules.module.Module"torch.nn.modules.module.Moduleπ
+	QuantType*torch.ao.quantization.quant_type.QuantType"enum.IntEnumHr[
+DYNAMIC2torch.ao.quantization.quant_type.QuantType.DYNAMIC
+builtins.int"builtins.intrY
+STATIC1torch.ao.quantization.quant_type.QuantType.STATIC
+builtins.int"builtins.intrS
+QAT.torch.ao.quantization.quant_type.QuantType.QAT
+builtins.int"builtins.intrc
+WEIGHT_ONLY6torch.ao.quantization.quant_type.QuantType.WEIGHT_ONLY
+builtins.int"builtins.intQ
+add_quant_dequant0torch.ao.quantization.quantize.add_quant_dequant*
+
+module…
+convert&torch.ao.quantization.quantize.convert*
+
+module*
+mapping *
+inplace *
+remove_qconfig *
+is_reference * 
+convert_custom_config_dict * 
+use_precomputed_fake_quant §
+prepare&torch.ao.quantization.quantize.prepare*	
+model*
+inplace *
+
+allow_list *#
+observer_non_leaf_module_list * 
+prepare_custom_config_dict b
+prepare_qat*torch.ao.quantization.quantize.prepare_qat*	
+model*
+mapping *
+inplace â
+propagate_qconfig_1torch.ao.quantization.quantize.propagate_qconfig_*
+
+module*
+qconfig_dict * 
+prepare_custom_config_dict v
+quantize'torch.ao.quantization.quantize.quantize*	
+model*
+
+run_fn*
+run_args*
+mapping *
+inplace ç
+quantize_dynamic/torch.ao.quantization.quantize.quantize_dynamic*	
+model*
+qconfig_spec *
+dtype *
+mapping *
+inplace o
+quantize_qat+torch.ao.quantization.quantize.quantize_qat*	
+model*
+
+run_fn*
+run_args*
+inplace í
+swap_module*torch.ao.quantization.quantize.swap_module*
+mod*
+mapping*
+custom_module_class_mapping* 
+use_precomputed_fake_quant Z
+get_observer_state_dict6torch.ao.quantization.observer.get_observer_state_dict*
+modj
+load_observer_state_dict7torch.ao.quantization.observer.load_observer_state_dict*
+mod*
+obs_dictn
+get_default_qat_qconfig5torch.ao.quantization.qconfig.get_default_qat_qconfig*
+backend *
+version f
+get_default_qconfig1torch.ao.quantization.qconfig.get_default_qconfig*
+backend *
+version ﬂ
+qconfig_equals,torch.ao.quantization.qconfig.qconfig_equals"
+Any*â
+q1Ä
+0TypeAlias[Union[TypeAlias[Tuple[Any,Any]],None]]ü
+%Union[TypeAlias[Tuple[Any,Any]],None]j
+TypeAlias[Tuple[Any,Any]]$
+Tuple[Any,Any]
+Any
+Any"%torch.ao.quantization.qconfig.QConfig
+None"(torch.ao.quantization.qconfig.QConfigAny*â
+q2Ä
+0TypeAlias[Union[TypeAlias[Tuple[Any,Any]],None]]ü
+%Union[TypeAlias[Tuple[Any,Any]],None]j
+TypeAlias[Tuple[Any,Any]]$
+Tuple[Any,Any]
+Any
+Any"%torch.ao.quantization.qconfig.QConfig
+None"(torch.ao.quantization.qconfig.QConfigAnyU
+disable_fake_quant6torch.ao.quantization.fake_quantize.disable_fake_quant*
+modQ
+disable_observer4torch.ao.quantization.fake_quantize.disable_observer*
+modS
+enable_fake_quant5torch.ao.quantization.fake_quantize.enable_fake_quant*
+modO
+enable_observer3torch.ao.quantization.fake_quantize.enable_observer*
+modã
+convert_dynamic_jit6torch.ao.quantization.quantize_jit.convert_dynamic_jit*	
+model*
+inplace *
+debug *
+preserved_attrs {
+convert_jit.torch.ao.quantization.quantize_jit.convert_jit*	
+model*
+inplace *
+debug *
+preserved_attrs a
+fuse_conv_bn_jit3torch.ao.quantization.quantize_jit.fuse_conv_bn_jit*	
+model*
+inplace y
+prepare_dynamic_jit6torch.ao.quantization.quantize_jit.prepare_dynamic_jit*	
+model*
+qconfig_dict*
+inplace i
+prepare_jit.torch.ao.quantization.quantize_jit.prepare_jit*	
+model*
+qconfig_dict*
+inplace à
+quantize_dynamic_jit7torch.ao.quantization.quantize_jit.quantize_dynamic_jit*	
+model*
+qconfig_dict*
+inplace *
+debug í
+quantize_jit/torch.ao.quantization.quantize_jit.quantize_jit*	
+model*
+qconfig_dict*
+
+run_fn*
+run_args*
+inplace *
+debug P
+script_qconfig1torch.ao.quantization.quantize_jit.script_qconfig*
+qconfig_
+script_qconfig_dict6torch.ao.quantization.quantize_jit.script_qconfig_dict*
+qconfig_dictâ
+&get_default_compare_output_module_listRtorch.ao.quantization.quantization_mappings.get_default_compare_output_module_list"ä
+-builtins.set[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"builtins.setû
+)get_default_dynamic_quant_module_mappingsUtorch.ao.quantization.quantization_mappings.get_default_dynamic_quant_module_mappings"ô
+2builtins.dict[CallableType[builtins.function],Any]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+Any"builtins.dict¯
+0get_default_float_to_quantized_operator_mappings\torch.ao.quantization.quantization_mappings.get_default_float_to_quantized_operator_mappings"Â
+bbuiltins.dict[Union[CallableType[builtins.function],builtins.str],CallableType[builtins.function]]¢
+3Union[CallableType[builtins.function],builtins.str]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+builtins.str"builtins.strK
+CallableType[builtins.function]&
+builtins.function"builtins.function"builtins.dictä
+get_default_qat_module_mappingsKtorch.ao.quantization.quantization_mappings.get_default_qat_module_mappings"ô
+2builtins.dict[CallableType[builtins.function],Any]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+Any"builtins.dictÖ
+$get_default_qconfig_propagation_listPtorch.ao.quantization.quantization_mappings.get_default_qconfig_propagation_list"ä
+-builtins.set[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"builtins.setú
+(get_default_static_quant_module_mappingsTtorch.ao.quantization.quantization_mappings.get_default_static_quant_module_mappings"ô
+2builtins.dict[CallableType[builtins.function],Any]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+Any"builtins.dictÓ
+get_dynamic_quant_module_classJtorch.ao.quantization.quantization_mappings.get_dynamic_quant_module_class"
+Any*c
+float_module_classK
+CallableType[builtins.function]&
+builtins.function"builtins.function*ë
+ additional_dynamic_quant_mappingË
+>Union[builtins.dict[CallableType[builtins.function],Any],None]ô
+2builtins.dict[CallableType[builtins.function],Any]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+Any"builtins.dict
+None ›
+get_quantized_operatorBtorch.ao.quantization.quantization_mappings.get_quantized_operator"K
+CallableType[builtins.function]&
+builtins.function"builtins.function*±
+float_op¢
+3Union[CallableType[builtins.function],builtins.str]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+builtins.str"builtins.strü
+get_static_quant_module_classItorch.ao.quantization.quantization_mappings.get_static_quant_module_class"
+Any*c
+float_module_classK
+CallableType[builtins.function]&
+builtins.function"builtins.function*ê
+additional_static_quant_mappingË
+>Union[builtins.dict[CallableType[builtins.function],Any],None]ô
+2builtins.dict[CallableType[builtins.function],Any]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+Any"builtins.dict
+None *2
+is_reference
+builtins.bool"builtins.bool z
+no_observer_set;torch.ao.quantization.quantization_mappings.no_observer_set"*
+builtins.set[Any]
+Any"builtins.setf
+fuse_conv_bn8torch.ao.quantization.fuser_method_mappings.fuse_conv_bn*
+
+is_qat*
+conv*
+bnz
+fuse_conv_bn_relu=torch.ao.quantization.fuser_method_mappings.fuse_conv_bn_relu*
+
+is_qat*
+conv*
+bn*
+relul
+fuse_linear_bn:torch.ao.quantization.fuser_method_mappings.fuse_linear_bn*
+
+is_qat*
+
+linear*
+bnÑ
+get_fuser_method<torch.ao.quantization.fuser_method_mappings.get_fuser_method*
+op_list*%
+additional_fuser_method_mapping P
+default_eval_fn"torch.quantization.default_eval_fn*	
+model*
+
+calib_data*s
+__path__torch.quantization.__path__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*é
+__annotations__"torch.quantization.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*2
+ABC"torch.ao.quantization.observer.ABC
+Any*h
+default_dynamic_quant_observer=torch.ao.quantization.observer.default_dynamic_quant_observer
+Any*h
+default_float_qparams_observer=torch.ao.quantization.observer.default_float_qparams_observer
+Any*`
+default_histogram_observer9torch.ao.quantization.observer.default_histogram_observer
+Any*L
+default_observer/torch.ao.quantization.observer.default_observer
+Any*r
+#default_per_channel_weight_observerBtorch.ao.quantization.observer.default_per_channel_weight_observer
+Any*Z
+default_weight_observer6torch.ao.quantization.observer.default_weight_observer
+Any*Ü
+default_activation_only_qconfig=torch.ao.quantization.qconfig.default_activation_only_qconfig$
+Tuple[Any,Any]
+Any
+Any*r
+default_debug_qconfig3torch.ao.quantization.qconfig.default_debug_qconfig$
+Tuple[Any,Any]
+Any
+Any*v
+default_dynamic_qconfig5torch.ao.quantization.qconfig.default_dynamic_qconfig$
+Tuple[Any,Any]
+Any
+Any*~
+default_per_channel_qconfig9torch.ao.quantization.qconfig.default_per_channel_qconfig$
+Tuple[Any,Any]
+Any
+Any*n
+default_qat_qconfig1torch.ao.quantization.qconfig.default_qat_qconfig$
+Tuple[Any,Any]
+Any
+Any*t
+default_qat_qconfig_v24torch.ao.quantization.qconfig.default_qat_qconfig_v2$
+Tuple[Any,Any]
+Any
+Any*f
+default_qconfig-torch.ao.quantization.qconfig.default_qconfig$
+Tuple[Any,Any]
+Any
+Any*~
+default_weight_only_qconfig9torch.ao.quantization.qconfig.default_weight_only_qconfig$
+Tuple[Any,Any]
+Any
+Any*v
+float16_dynamic_qconfig5torch.ao.quantization.qconfig.float16_dynamic_qconfig$
+Tuple[Any,Any]
+Any
+Any*t
+float16_static_qconfig4torch.ao.quantization.qconfig.float16_static_qconfig$
+Tuple[Any,Any]
+Any
+Any*ä
+!float_qparams_weight_only_qconfig?torch.ao.quantization.qconfig.float_qparams_weight_only_qconfig$
+Tuple[Any,Any]
+Any
+Any*~
+per_channel_dynamic_qconfig9torch.ao.quantization.qconfig.per_channel_dynamic_qconfig$
+Tuple[Any,Any]
+Any
+Any*U
+default_fake_quant6torch.ao.quantization.fake_quantize.default_fake_quant
+Any*á
++default_fixed_qparams_range_0to1_fake_quantOtorch.ao.quantization.fake_quantize.default_fixed_qparams_range_0to1_fake_quant
+Any*ç
+.default_fixed_qparams_range_neg1to1_fake_quantRtorch.ao.quantization.fake_quantize.default_fixed_qparams_range_neg1to1_fake_quant
+Any*i
+default_fused_act_fake_quant@torch.ao.quantization.fake_quantize.default_fused_act_fake_quant
+Any*
+'default_fused_per_channel_wt_fake_quantKtorch.ao.quantization.fake_quantize.default_fused_per_channel_wt_fake_quant
+Any*g
+default_fused_wt_fake_quant?torch.ao.quantization.fake_quantize.default_fused_wt_fake_quant
+Any*i
+default_histogram_fake_quant@torch.ao.quantization.fake_quantize.default_histogram_fake_quant
+Any*{
+%default_per_channel_weight_fake_quantItorch.ao.quantization.fake_quantize.default_per_channel_weight_fake_quant
+Any*c
+default_weight_fake_quant=torch.ao.quantization.fake_quantize.default_weight_fake_quant
+Any*ñ
+%DEFAULT_DYNAMIC_QUANT_MODULE_MAPPINGSQtorch.ao.quantization.quantization_mappings.DEFAULT_DYNAMIC_QUANT_MODULE_MAPPINGSô
+2builtins.dict[CallableType[builtins.function],Any]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+Any"builtins.dict*
+,DEFAULT_FLOAT_TO_QUANTIZED_OPERATOR_MAPPINGSXtorch.ao.quantization.quantization_mappings.DEFAULT_FLOAT_TO_QUANTIZED_OPERATOR_MAPPINGSÂ
+bbuiltins.dict[Union[CallableType[builtins.function],builtins.str],CallableType[builtins.function]]¢
+3Union[CallableType[builtins.function],builtins.str]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+builtins.str"builtins.strK
+CallableType[builtins.function]&
+builtins.function"builtins.function"builtins.dict*
+"DEFAULT_MODULE_TO_ACT_POST_PROCESSNtorch.ao.quantization.quantization_mappings.DEFAULT_MODULE_TO_ACT_POST_PROCESS˘
+Nbuiltins.dict[CallableType[builtins.function],CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.functionK
+CallableType[builtins.function]&
+builtins.function"builtins.function"builtins.dict*Ç
+DEFAULT_QAT_MODULE_MAPPINGSGtorch.ao.quantization.quantization_mappings.DEFAULT_QAT_MODULE_MAPPINGSô
+2builtins.dict[CallableType[builtins.function],Any]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+Any"builtins.dict*®
+.DEFAULT_REFERENCE_STATIC_QUANT_MODULE_MAPPINGSZtorch.ao.quantization.quantization_mappings.DEFAULT_REFERENCE_STATIC_QUANT_MODULE_MAPPINGSô
+2builtins.dict[CallableType[builtins.function],Any]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+Any"builtins.dict*î
+$DEFAULT_STATIC_QUANT_MODULE_MAPPINGSPtorch.ao.quantization.quantization_mappings.DEFAULT_STATIC_QUANT_MODULE_MAPPINGSô
+2builtins.dict[CallableType[builtins.function],Any]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+Any"builtins.dict*q
+__all__torch.quantization.__all__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list

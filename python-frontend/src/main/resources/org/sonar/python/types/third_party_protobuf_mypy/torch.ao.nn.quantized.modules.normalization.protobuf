@@ -1,0 +1,244 @@
+
++torch.ao.nn.quantized.modules.normalization—	
+	LayerNorm5torch.ao.nn.quantized.modules.normalization.LayerNorm"(torch.nn.modules.normalization.LayerNorm*¦
+__init__>torch.ao.nn.quantized.modules.normalization.LayerNorm.__init__"
+None*x
+selfn
+5torch.ao.nn.quantized.modules.normalization.LayerNorm"5torch.ao.nn.quantized.modules.normalization.LayerNorm*
+normalized_shape
+Any*
+weight
+Any*
+bias
+Any*
+scale
+Any*
+
+zero_point
+Any*
+eps
+Any *!
+elementwise_affine
+Any *
+device
+Any *
+dtype
+Any *]
+forward=torch.ao.nn.quantized.modules.normalization.LayerNorm.forward*
+self*	
+input*V
+	_get_name?torch.ao.nn.quantized.modules.normalization.LayerNorm._get_name*
+self*“
+
+from_float@torch.ao.nn.quantized.modules.normalization.LayerNorm.from_float*
+cls*
+mod* 
+use_precomputed_fake_quant 0:classmethodp*”
+from_referenceDtorch.ao.nn.quantized.modules.normalization.LayerNorm.from_reference*
+cls*
+mod*	
+scale*
+
+zero_point0:classmethodprO
+weight<torch.ao.nn.quantized.modules.normalization.LayerNorm.weight
+AnyrK
+bias:torch.ao.nn.quantized.modules.normalization.LayerNorm.bias
+Any¬	
+	GroupNorm5torch.ao.nn.quantized.modules.normalization.GroupNorm"(torch.nn.modules.normalization.GroupNorm*¯
+__init__>torch.ao.nn.quantized.modules.normalization.GroupNorm.__init__"
+None*x
+selfn
+5torch.ao.nn.quantized.modules.normalization.GroupNorm"5torch.ao.nn.quantized.modules.normalization.GroupNorm*
+
+num_groups
+Any*
+num_channels
+Any*
+weight
+Any*
+bias
+Any*
+scale
+Any*
+
+zero_point
+Any*
+eps
+Any *
+affine
+Any *
+device
+Any *
+dtype
+Any *]
+forward=torch.ao.nn.quantized.modules.normalization.GroupNorm.forward*
+self*	
+input*V
+	_get_name?torch.ao.nn.quantized.modules.normalization.GroupNorm._get_name*
+self*“
+
+from_float@torch.ao.nn.quantized.modules.normalization.GroupNorm.from_float*
+cls*
+mod* 
+use_precomputed_fake_quant 0:classmethodpr 
+__constants__Ctorch.ao.nn.quantized.modules.normalization.GroupNorm.__constants__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.listrO
+weight<torch.ao.nn.quantized.modules.normalization.GroupNorm.weight
+AnyrK
+bias:torch.ao.nn.quantized.modules.normalization.GroupNorm.bias
+Any€
+
+InstanceNorm1d:torch.ao.nn.quantized.modules.normalization.InstanceNorm1d",torch.nn.modules.instancenorm.InstanceNorm1d*ã
+__init__Ctorch.ao.nn.quantized.modules.normalization.InstanceNorm1d.__init__"
+None*‚
+selfx
+:torch.ao.nn.quantized.modules.normalization.InstanceNorm1d":torch.ao.nn.quantized.modules.normalization.InstanceNorm1d*
+num_features
+Any*
+weight
+Any*
+bias
+Any*
+scale
+Any*
+
+zero_point
+Any*
+eps
+Any *
+momentum
+Any *
+affine
+Any *"
+track_running_stats
+Any *
+device
+Any *
+dtype
+Any *b
+forwardBtorch.ao.nn.quantized.modules.normalization.InstanceNorm1d.forward*
+self*	
+input*[
+	_get_nameDtorch.ao.nn.quantized.modules.normalization.InstanceNorm1d._get_name*
+self*˜
+
+from_floatEtorch.ao.nn.quantized.modules.normalization.InstanceNorm1d.from_float*
+cls*
+mod* 
+use_precomputed_fake_quant 0:classmethodp*™
+from_referenceItorch.ao.nn.quantized.modules.normalization.InstanceNorm1d.from_reference*
+cls*
+mod*	
+scale*
+
+zero_point0:classmethodprT
+weightAtorch.ao.nn.quantized.modules.normalization.InstanceNorm1d.weight
+AnyrP
+bias?torch.ao.nn.quantized.modules.normalization.InstanceNorm1d.bias
+Any€
+
+InstanceNorm2d:torch.ao.nn.quantized.modules.normalization.InstanceNorm2d",torch.nn.modules.instancenorm.InstanceNorm2d*ã
+__init__Ctorch.ao.nn.quantized.modules.normalization.InstanceNorm2d.__init__"
+None*‚
+selfx
+:torch.ao.nn.quantized.modules.normalization.InstanceNorm2d":torch.ao.nn.quantized.modules.normalization.InstanceNorm2d*
+num_features
+Any*
+weight
+Any*
+bias
+Any*
+scale
+Any*
+
+zero_point
+Any*
+eps
+Any *
+momentum
+Any *
+affine
+Any *"
+track_running_stats
+Any *
+device
+Any *
+dtype
+Any *b
+forwardBtorch.ao.nn.quantized.modules.normalization.InstanceNorm2d.forward*
+self*	
+input*[
+	_get_nameDtorch.ao.nn.quantized.modules.normalization.InstanceNorm2d._get_name*
+self*˜
+
+from_floatEtorch.ao.nn.quantized.modules.normalization.InstanceNorm2d.from_float*
+cls*
+mod* 
+use_precomputed_fake_quant 0:classmethodp*™
+from_referenceItorch.ao.nn.quantized.modules.normalization.InstanceNorm2d.from_reference*
+cls*
+mod*	
+scale*
+
+zero_point0:classmethodprT
+weightAtorch.ao.nn.quantized.modules.normalization.InstanceNorm2d.weight
+AnyrP
+bias?torch.ao.nn.quantized.modules.normalization.InstanceNorm2d.bias
+Any€
+
+InstanceNorm3d:torch.ao.nn.quantized.modules.normalization.InstanceNorm3d",torch.nn.modules.instancenorm.InstanceNorm3d*ã
+__init__Ctorch.ao.nn.quantized.modules.normalization.InstanceNorm3d.__init__"
+None*‚
+selfx
+:torch.ao.nn.quantized.modules.normalization.InstanceNorm3d":torch.ao.nn.quantized.modules.normalization.InstanceNorm3d*
+num_features
+Any*
+weight
+Any*
+bias
+Any*
+scale
+Any*
+
+zero_point
+Any*
+eps
+Any *
+momentum
+Any *
+affine
+Any *"
+track_running_stats
+Any *
+device
+Any *
+dtype
+Any *b
+forwardBtorch.ao.nn.quantized.modules.normalization.InstanceNorm3d.forward*
+self*	
+input*[
+	_get_nameDtorch.ao.nn.quantized.modules.normalization.InstanceNorm3d._get_name*
+self*˜
+
+from_floatEtorch.ao.nn.quantized.modules.normalization.InstanceNorm3d.from_float*
+cls*
+mod* 
+use_precomputed_fake_quant 0:classmethodp*™
+from_referenceItorch.ao.nn.quantized.modules.normalization.InstanceNorm3d.from_reference*
+cls*
+mod*	
+scale*
+
+zero_point0:classmethodprT
+weightAtorch.ao.nn.quantized.modules.normalization.InstanceNorm3d.weight
+AnyrP
+bias?torch.ao.nn.quantized.modules.normalization.InstanceNorm3d.bias
+Any*§
+__annotations__;torch.ao.nn.quantized.modules.normalization.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*Š
+__all__3torch.ao.nn.quantized.modules.normalization.__all__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list

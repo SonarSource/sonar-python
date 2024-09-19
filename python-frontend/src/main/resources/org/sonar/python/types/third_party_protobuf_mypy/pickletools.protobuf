@@ -1,0 +1,378 @@
+
+pickletoolsÉ
+ArgumentDescriptorpickletools.ArgumentDescriptor"builtins.object*ù
+__init__'pickletools.ArgumentDescriptor.__init__"
+None*J
+self@
+pickletools.ArgumentDescriptor"pickletools.ArgumentDescriptor*&
+name
+builtins.str"builtins.str*#
+n
+builtins.int"builtins.int*ù
+readerê
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"pickletools._Reader*%
+doc
+builtins.str"builtins.strrI
+name#pickletools.ArgumentDescriptor.name
+builtins.str"builtins.strrC
+n pickletools.ArgumentDescriptor.n
+builtins.int"builtins.intr¬
+reader%pickletools.ArgumentDescriptor.readerê
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"pickletools._ReaderrG
+doc"pickletools.ArgumentDescriptor.doc
+builtins.str"builtins.strÔ
+StackObjectpickletools.StackObject"builtins.object*Í
+__init__ pickletools.StackObject.__init__"
+None*<
+self2
+pickletools.StackObject"pickletools.StackObject*&
+name
+builtins.str"builtins.str*§
+obtypeó
+*Union[Type[Any],builtins.tuple[Type[Any]]]
+	Type[Any]
+Any"typeI
+builtins.tuple[Type[Any]]
+	Type[Any]
+Any"type"builtins.tuple*%
+doc
+builtins.str"builtins.strrB
+namepickletools.StackObject.name
+builtins.str"builtins.strr¬
+obtypepickletools.StackObject.obtypeó
+*Union[Type[Any],builtins.tuple[Type[Any]]]
+	Type[Any]
+Any"typeI
+builtins.tuple[Type[Any]]
+	Type[Any]
+Any"type"builtins.tupler@
+docpickletools.StackObject.doc
+builtins.str"builtins.strº
+
+OpcodeInfopickletools.OpcodeInfo"builtins.object*î
+__init__pickletools.OpcodeInfo.__init__"
+None*:
+self0
+pickletools.OpcodeInfo"pickletools.OpcodeInfo*&
+name
+builtins.str"builtins.str*&
+code
+builtins.str"builtins.str*É
+argz
+*Union[pickletools.ArgumentDescriptor,None]@
+pickletools.ArgumentDescriptor"pickletools.ArgumentDescriptor
+None*}
+stack_beforek
+&builtins.list[pickletools.StackObject]2
+pickletools.StackObject"pickletools.StackObject"builtins.list*|
+stack_afterk
+&builtins.list[pickletools.StackObject]2
+pickletools.StackObject"pickletools.StackObject"builtins.list*'
+proto
+builtins.int"builtins.int*%
+doc
+builtins.str"builtins.strrA
+namepickletools.OpcodeInfo.name
+builtins.str"builtins.strrA
+codepickletools.OpcodeInfo.code
+builtins.str"builtins.strrù
+argpickletools.OpcodeInfo.argz
+*Union[pickletools.ArgumentDescriptor,None]@
+pickletools.ArgumentDescriptor"pickletools.ArgumentDescriptor
+Noner†
+stack_before#pickletools.OpcodeInfo.stack_beforek
+&builtins.list[pickletools.StackObject]2
+pickletools.StackObject"pickletools.StackObject"builtins.listrû
+stack_after"pickletools.OpcodeInfo.stack_afterk
+&builtins.list[pickletools.StackObject]2
+pickletools.StackObject"pickletools.StackObject"builtins.listrC
+protopickletools.OpcodeInfo.proto
+builtins.int"builtins.intr?
+docpickletools.OpcodeInfo.doc
+builtins.str"builtins.strì
+
+read_uint1pickletools.read_uint1"
+builtins.int"builtins.int*O
+fH
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IOì
+
+read_uint2pickletools.read_uint2"
+builtins.int"builtins.int*O
+fH
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IOë
+	read_int4pickletools.read_int4"
+builtins.int"builtins.int*O
+fH
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IOì
+
+read_uint4pickletools.read_uint4"
+builtins.int"builtins.int*O
+fH
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IOì
+
+read_uint8pickletools.read_uint8"
+builtins.int"builtins.int*O
+fH
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IOƒ
+read_stringnlpickletools.read_stringnl"f
+"Union[builtins.bytes,builtins.str] 
+builtins.bytes"builtins.bytes
+builtins.str"builtins.str*O
+fH
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IO*,
+decode
+builtins.bool"builtins.bool *1
+stripquotes
+builtins.bool"builtins.bool ´
+read_stringnl_noescape"pickletools.read_stringnl_noescape"
+builtins.str"builtins.str*O
+fH
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IOµ
+read_stringnl_noescape_pair'pickletools.read_stringnl_noescape_pair"
+builtins.str"builtins.str*O
+fH
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IOó
+read_string1pickletools.read_string1"
+builtins.str"builtins.str*O
+fH
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IOó
+read_string4pickletools.read_string4"
+builtins.str"builtins.str*O
+fH
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IOô
+read_bytes1pickletools.read_bytes1" 
+builtins.bytes"builtins.bytes*O
+fH
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IOô
+read_bytes4pickletools.read_bytes4" 
+builtins.bytes"builtins.bytes*O
+fH
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IOô
+read_bytes8pickletools.read_bytes8" 
+builtins.bytes"builtins.bytes*O
+fH
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IOß
+read_unicodestringnl pickletools.read_unicodestringnl"
+builtins.str"builtins.str*O
+fH
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IO•
+read_unicodestring1pickletools.read_unicodestring1"
+builtins.str"builtins.str*O
+fH
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IO•
+read_unicodestring4pickletools.read_unicodestring4"
+builtins.str"builtins.str*O
+fH
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IO•
+read_unicodestring8pickletools.read_unicodestring8"
+builtins.str"builtins.str*O
+fH
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IOß
+read_decimalnl_short pickletools.read_decimalnl_short"
+builtins.int"builtins.int*O
+fH
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IO•
+read_decimalnl_longpickletools.read_decimalnl_long"
+builtins.int"builtins.int*O
+fH
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IOõ
+read_floatnlpickletools.read_floatnl" 
+builtins.float"builtins.float*O
+fH
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IOô
+read_float8pickletools.read_float8" 
+builtins.float"builtins.float*O
+fH
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IOì
+
+read_long1pickletools.read_long1"
+builtins.int"builtins.int*O
+fH
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IOì
+
+read_long4pickletools.read_long4"
+builtins.int"builtins.int*O
+fH
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IO‚
+genopspickletools.genops"◊
+Wtyping.Iterator[Tuple[pickletools.OpcodeInfo,Union[Any,None],Union[builtins.int,None]]]Í
+FTuple[pickletools.OpcodeInfo,Union[Any,None],Union[builtins.int,None]]0
+pickletools.OpcodeInfo"pickletools.OpcodeInfo&
+Union[Any,None]
+Any
+NoneD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None"typing.Iterator*È
+pickle‹
+BUnion[builtins.bytes,builtins.bytearray,typing.IO[builtins.bytes]] 
+builtins.bytes"builtins.bytes(
+builtins.bytearray"builtins.bytearrayH
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IO©
+optimizepickletools.optimize" 
+builtins.bytes"builtins.bytes*‰
+p‹
+BUnion[builtins.bytes,builtins.bytearray,typing.IO[builtins.bytes]] 
+builtins.bytes"builtins.bytes(
+builtins.bytearray"builtins.bytearrayH
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IO®
+dispickletools.dis"
+None*È
+pickle‹
+BUnion[builtins.bytes,builtins.bytearray,typing.IO[builtins.bytes]] 
+builtins.bytes"builtins.bytes(
+builtins.bytearray"builtins.bytearrayH
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IO*Ä
+outu
+#Union[typing.IO[builtins.str],None]B
+typing.IO[builtins.str]
+builtins.str"builtins.str"	typing.IO
+None *∑
+memo™
+3Union[typing.MutableMapping[builtins.int,Any],None]g
+'typing.MutableMapping[builtins.int,Any]
+builtins.int"builtins.int
+Any"typing.MutableMapping
+None */
+indentlevel
+builtins.int"builtins.int *,
+annotate
+builtins.int"builtins.int *á
+__annotations__pickletools.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*j
+__all__pickletools.__all__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*q
+bytes_typespickletools.bytes_typesI
+builtins.tuple[Type[Any]]
+	Type[Any]
+Any"type"builtins.tuple*H
+UP_TO_NEWLINEpickletools.UP_TO_NEWLINE
+builtins.int"builtins.int*V
+TAKEN_FROM_ARGUMENT1 pickletools.TAKEN_FROM_ARGUMENT1
+builtins.int"builtins.int*V
+TAKEN_FROM_ARGUMENT4 pickletools.TAKEN_FROM_ARGUMENT4
+builtins.int"builtins.int*X
+TAKEN_FROM_ARGUMENT4U!pickletools.TAKEN_FROM_ARGUMENT4U
+builtins.int"builtins.int*X
+TAKEN_FROM_ARGUMENT8U!pickletools.TAKEN_FROM_ARGUMENT8U
+builtins.int"builtins.int*\
+uint1pickletools.uint1@
+pickletools.ArgumentDescriptor"pickletools.ArgumentDescriptor*\
+uint2pickletools.uint2@
+pickletools.ArgumentDescriptor"pickletools.ArgumentDescriptor*Z
+int4pickletools.int4@
+pickletools.ArgumentDescriptor"pickletools.ArgumentDescriptor*\
+uint4pickletools.uint4@
+pickletools.ArgumentDescriptor"pickletools.ArgumentDescriptor*\
+uint8pickletools.uint8@
+pickletools.ArgumentDescriptor"pickletools.ArgumentDescriptor*b
+stringnlpickletools.stringnl@
+pickletools.ArgumentDescriptor"pickletools.ArgumentDescriptor*t
+stringnl_noescapepickletools.stringnl_noescape@
+pickletools.ArgumentDescriptor"pickletools.ArgumentDescriptor*~
+stringnl_noescape_pair"pickletools.stringnl_noescape_pair@
+pickletools.ArgumentDescriptor"pickletools.ArgumentDescriptor*`
+string1pickletools.string1@
+pickletools.ArgumentDescriptor"pickletools.ArgumentDescriptor*`
+string4pickletools.string4@
+pickletools.ArgumentDescriptor"pickletools.ArgumentDescriptor*^
+bytes1pickletools.bytes1@
+pickletools.ArgumentDescriptor"pickletools.ArgumentDescriptor*^
+bytes4pickletools.bytes4@
+pickletools.ArgumentDescriptor"pickletools.ArgumentDescriptor*^
+bytes8pickletools.bytes8@
+pickletools.ArgumentDescriptor"pickletools.ArgumentDescriptor*p
+unicodestringnlpickletools.unicodestringnl@
+pickletools.ArgumentDescriptor"pickletools.ArgumentDescriptor*n
+unicodestring1pickletools.unicodestring1@
+pickletools.ArgumentDescriptor"pickletools.ArgumentDescriptor*n
+unicodestring4pickletools.unicodestring4@
+pickletools.ArgumentDescriptor"pickletools.ArgumentDescriptor*n
+unicodestring8pickletools.unicodestring8@
+pickletools.ArgumentDescriptor"pickletools.ArgumentDescriptor*p
+decimalnl_shortpickletools.decimalnl_short@
+pickletools.ArgumentDescriptor"pickletools.ArgumentDescriptor*n
+decimalnl_longpickletools.decimalnl_long@
+pickletools.ArgumentDescriptor"pickletools.ArgumentDescriptor*`
+floatnlpickletools.floatnl@
+pickletools.ArgumentDescriptor"pickletools.ArgumentDescriptor*^
+float8pickletools.float8@
+pickletools.ArgumentDescriptor"pickletools.ArgumentDescriptor*\
+long1pickletools.long1@
+pickletools.ArgumentDescriptor"pickletools.ArgumentDescriptor*\
+long4pickletools.long4@
+pickletools.ArgumentDescriptor"pickletools.ArgumentDescriptor*N
+pyintpickletools.pyint2
+pickletools.StackObject"pickletools.StackObject*P
+pylongpickletools.pylong2
+pickletools.StackObject"pickletools.StackObject*f
+pyinteger_or_boolpickletools.pyinteger_or_bool2
+pickletools.StackObject"pickletools.StackObject*P
+pyboolpickletools.pybool2
+pickletools.StackObject"pickletools.StackObject*R
+pyfloatpickletools.pyfloat2
+pickletools.StackObject"pickletools.StackObject*`
+pybytes_or_strpickletools.pybytes_or_str2
+pickletools.StackObject"pickletools.StackObject*T
+pystringpickletools.pystring2
+pickletools.StackObject"pickletools.StackObject*R
+pybytespickletools.pybytes2
+pickletools.StackObject"pickletools.StackObject*V
+	pyunicodepickletools.pyunicode2
+pickletools.StackObject"pickletools.StackObject*P
+pynonepickletools.pynone2
+pickletools.StackObject"pickletools.StackObject*R
+pytuplepickletools.pytuple2
+pickletools.StackObject"pickletools.StackObject*P
+pylistpickletools.pylist2
+pickletools.StackObject"pickletools.StackObject*P
+pydictpickletools.pydict2
+pickletools.StackObject"pickletools.StackObject*N
+pysetpickletools.pyset2
+pickletools.StackObject"pickletools.StackObject*Z
+pyfrozensetpickletools.pyfrozenset2
+pickletools.StackObject"pickletools.StackObject*V
+	anyobjectpickletools.anyobject2
+pickletools.StackObject"pickletools.StackObject*X
+
+markobjectpickletools.markobject2
+pickletools.StackObject"pickletools.StackObject*X
+
+stackslicepickletools.stackslice2
+pickletools.StackObject"pickletools.StackObject*à
+opcodespickletools.opcodesh
+%builtins.list[pickletools.OpcodeInfo]0
+pickletools.OpcodeInfo"pickletools.OpcodeInfo"builtins.list

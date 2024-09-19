@@ -1,0 +1,379 @@
+
+packaging.specifiersN
+InvalidSpecifier%packaging.specifiers.InvalidSpecifier"builtins.ValueError¸
+BaseSpecifier"packaging.specifiers.BaseSpecifier"builtins.object*·
+__str__*packaging.specifiers.BaseSpecifier.__str__"
+builtins.str"builtins.str*JH
+"packaging.specifiers.BaseSpecifier""packaging.specifiers.BaseSpecifier0:abc.abstractmethod@*Á
+__hash__+packaging.specifiers.BaseSpecifier.__hash__"
+builtins.int"builtins.int*R
+selfH
+"packaging.specifiers.BaseSpecifier""packaging.specifiers.BaseSpecifier0:abc.abstractmethod@*İ
+__eq__)packaging.specifiers.BaseSpecifier.__eq__"
+builtins.bool"builtins.bool*JH
+"packaging.specifiers.BaseSpecifier""packaging.specifiers.BaseSpecifier*$"
+builtins.object"builtins.object0:abc.abstractmethod@*Ç
+contains+packaging.specifiers.BaseSpecifier.contains"
+builtins.bool"builtins.bool*R
+selfH
+"packaging.specifiers.BaseSpecifier""packaging.specifiers.BaseSpecifier*&
+item
+builtins.str"builtins.str*Z
+prereleasesG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None 0:abc.abstractmethod@*–
+filter)packaging.specifiers.BaseSpecifier.filter"ƒ
+8typing.Iterator[packaging.specifiers.UnparsedVersionVar]µ
+'packaging.specifiers.UnparsedVersionVar‡
+-Union[packaging.version.Version,builtins.str]6
+packaging.version.Version"packaging.version.Version
+builtins.str"builtins.str"typing.Iterator*R
+selfH
+"packaging.specifiers.BaseSpecifier""packaging.specifiers.BaseSpecifier*’
+iterableƒ
+8typing.Iterable[packaging.specifiers.UnparsedVersionVar]µ
+'packaging.specifiers.UnparsedVersionVar‡
+-Union[packaging.version.Version,builtins.str]6
+packaging.version.Version"packaging.version.Version
+builtins.str"builtins.str"typing.Iterable*Z
+prereleasesG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None 0:abc.abstractmethod@2¡
+prereleases.packaging.specifiers.BaseSpecifier.prereleases€
+prereleases.packaging.specifiers.BaseSpecifier.prereleases"G
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None*R
+selfH
+"packaging.specifiers.BaseSpecifier""packaging.specifiers.BaseSpecifier0:property:abc.abstractmethod@X`Ş
+prereleases.packaging.specifiers.BaseSpecifier.prereleases"
+None*R
+selfH
+"packaging.specifiers.BaseSpecifier""packaging.specifiers.BaseSpecifier*)
+value
+builtins.bool"builtins.bool0:prereleases.setter@@babc.ABCMetaî7
+	Specifierpackaging.specifiers.Specifier""packaging.specifiers.BaseSpecifier*
+__init__'packaging.specifiers.Specifier.__init__"
+None*J
+self@
+packaging.specifiers.Specifier"packaging.specifiers.Specifier*(
+spec
+builtins.str"builtins.str *Z
+prereleasesG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *«
+operator'packaging.specifiers.Specifier.operator"
+builtins.str"builtins.str*J
+self@
+packaging.specifiers.Specifier"packaging.specifiers.Specifier0:property`*©
+version&packaging.specifiers.Specifier.version"
+builtins.str"builtins.str*J
+self@
+packaging.specifiers.Specifier"packaging.specifiers.Specifier0:property`*•
+__repr__'packaging.specifiers.Specifier.__repr__"
+builtins.str"builtins.str*B@
+packaging.specifiers.Specifier"packaging.specifiers.Specifier*“
+__str__&packaging.specifiers.Specifier.__str__"
+builtins.str"builtins.str*B@
+packaging.specifiers.Specifier"packaging.specifiers.Specifier*ı
+_canonical_spec.packaging.specifiers.Specifier._canonical_spec"`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str*J
+self@
+packaging.specifiers.Specifier"packaging.specifiers.Specifier0:property`*
+__hash__'packaging.specifiers.Specifier.__hash__"
+builtins.int"builtins.int*J
+self@
+packaging.specifiers.Specifier"packaging.specifiers.Specifier*¹
+__eq__%packaging.specifiers.Specifier.__eq__"
+builtins.bool"builtins.bool*B@
+packaging.specifiers.Specifier"packaging.specifiers.Specifier*$"
+builtins.object"builtins.object*Ô
+_get_operator,packaging.specifiers.Specifier._get_operator"¢
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"%packaging.specifiers.CallableOperator*J
+self@
+packaging.specifiers.Specifier"packaging.specifiers.Specifier*$
+op
+builtins.str"builtins.str*¦
+_compare_compatible2packaging.specifiers.Specifier._compare_compatible"
+builtins.bool"builtins.bool*J
+self@
+packaging.specifiers.Specifier"packaging.specifiers.Specifier*G
+prospective6
+packaging.version.Version"packaging.version.Version*&
+spec
+builtins.str"builtins.str*œ
+_compare_equal-packaging.specifiers.Specifier._compare_equal"
+builtins.bool"builtins.bool*J
+self@
+packaging.specifiers.Specifier"packaging.specifiers.Specifier*G
+prospective6
+packaging.version.Version"packaging.version.Version*&
+spec
+builtins.str"builtins.str*¤
+_compare_not_equal1packaging.specifiers.Specifier._compare_not_equal"
+builtins.bool"builtins.bool*J
+self@
+packaging.specifiers.Specifier"packaging.specifiers.Specifier*G
+prospective6
+packaging.version.Version"packaging.version.Version*&
+spec
+builtins.str"builtins.str*°
+_compare_less_than_equal7packaging.specifiers.Specifier._compare_less_than_equal"
+builtins.bool"builtins.bool*J
+self@
+packaging.specifiers.Specifier"packaging.specifiers.Specifier*G
+prospective6
+packaging.version.Version"packaging.version.Version*&
+spec
+builtins.str"builtins.str*¶
+_compare_greater_than_equal:packaging.specifiers.Specifier._compare_greater_than_equal"
+builtins.bool"builtins.bool*J
+self@
+packaging.specifiers.Specifier"packaging.specifiers.Specifier*G
+prospective6
+packaging.version.Version"packaging.version.Version*&
+spec
+builtins.str"builtins.str*¨
+_compare_less_than1packaging.specifiers.Specifier._compare_less_than"
+builtins.bool"builtins.bool*J
+self@
+packaging.specifiers.Specifier"packaging.specifiers.Specifier*G
+prospective6
+packaging.version.Version"packaging.version.Version**
+spec_str
+builtins.str"builtins.str*®
+_compare_greater_than4packaging.specifiers.Specifier._compare_greater_than"
+builtins.bool"builtins.bool*J
+self@
+packaging.specifiers.Specifier"packaging.specifiers.Specifier*G
+prospective6
+packaging.version.Version"packaging.version.Version**
+spec_str
+builtins.str"builtins.str*¤
+_compare_arbitrary1packaging.specifiers.Specifier._compare_arbitrary"
+builtins.bool"builtins.bool*J
+self@
+packaging.specifiers.Specifier"packaging.specifiers.Specifier*G
+prospective6
+packaging.version.Version"packaging.version.Version*&
+spec
+builtins.str"builtins.str*¬
+__contains__+packaging.specifiers.Specifier.__contains__"
+builtins.bool"builtins.bool*B@
+packaging.specifiers.Specifier"packaging.specifiers.Specifier*Š‡
+-Union[builtins.str,packaging.version.Version]
+builtins.str"builtins.str6
+packaging.version.Version"packaging.version.Version*õ
+contains'packaging.specifiers.Specifier.contains"
+builtins.bool"builtins.bool*J
+self@
+packaging.specifiers.Specifier"packaging.specifiers.Specifier*÷
+itemì
+8TypeAlias[Union[packaging.version.Version,builtins.str]]‡
+-Union[packaging.version.Version,builtins.str]6
+packaging.version.Version"packaging.version.Version
+builtins.str"builtins.str"$packaging.specifiers.UnparsedVersion*Z
+prereleasesG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *ò
+filter%packaging.specifiers.Specifier.filter"ƒ
+8typing.Iterator[packaging.specifiers.UnparsedVersionVar]µ
+'packaging.specifiers.UnparsedVersionVar‡
+-Union[packaging.version.Version,builtins.str]6
+packaging.version.Version"packaging.version.Version
+builtins.str"builtins.str"typing.Iterator*J
+self@
+packaging.specifiers.Specifier"packaging.specifiers.Specifier*’
+iterableƒ
+8typing.Iterable[packaging.specifiers.UnparsedVersionVar]µ
+'packaging.specifiers.UnparsedVersionVar‡
+-Union[packaging.version.Version,builtins.str]6
+packaging.version.Version"packaging.version.Version
+builtins.str"builtins.str"typing.Iterable*Z
+prereleasesG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None 2Ä
+prereleases*packaging.specifiers.Specifier.prereleasesµ
+prereleases*packaging.specifiers.Specifier.prereleases"
+builtins.bool"builtins.bool*J
+self@
+packaging.specifiers.Specifier"packaging.specifiers.Specifier0:propertyX`Ğ
+prereleases*packaging.specifiers.Specifier.prereleases"
+None*J
+self@
+packaging.specifiers.Specifier"packaging.specifiers.Specifier*)
+value
+builtins.bool"builtins.bool0:prereleases.setterrg
+_operator_regex_str2packaging.specifiers.Specifier._operator_regex_str
+builtins.str"builtins.strre
+_version_regex_str1packaging.specifiers.Specifier._version_regex_str
+builtins.str"builtins.strru
+_regex%packaging.specifiers.Specifier._regexD
+re.Pattern[builtins.str]
+builtins.str"builtins.str"
+re.Patternr®
+
+_operators)packaging.specifiers.Specifier._operatorsu
+(builtins.dict[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.dictr
+_spec$packaging.specifiers.Specifier._spec`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.strr„
+_prereleases+packaging.specifiers.Specifier._prereleasesG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None‚#
+SpecifierSet!packaging.specifiers.SpecifierSet""packaging.specifiers.BaseSpecifier*
+__init__*packaging.specifiers.SpecifierSet.__init__"
+None*P
+selfF
+!packaging.specifiers.SpecifierSet"!packaging.specifiers.SpecifierSet*.
+
+specifiers
+builtins.str"builtins.str *Z
+prereleasesG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *
+__repr__*packaging.specifiers.SpecifierSet.__repr__"
+builtins.str"builtins.str*HF
+!packaging.specifiers.SpecifierSet"!packaging.specifiers.SpecifierSet*œ
+__str__)packaging.specifiers.SpecifierSet.__str__"
+builtins.str"builtins.str*HF
+!packaging.specifiers.SpecifierSet"!packaging.specifiers.SpecifierSet*¦
+__hash__*packaging.specifiers.SpecifierSet.__hash__"
+builtins.int"builtins.int*P
+selfF
+!packaging.specifiers.SpecifierSet"!packaging.specifiers.SpecifierSet*ë
+__and__)packaging.specifiers.SpecifierSet.__and__"F
+!packaging.specifiers.SpecifierSet"!packaging.specifiers.SpecifierSet*HF
+!packaging.specifiers.SpecifierSet"!packaging.specifiers.SpecifierSet*¢Ÿ
+5Union[packaging.specifiers.SpecifierSet,builtins.str]F
+!packaging.specifiers.SpecifierSet"!packaging.specifiers.SpecifierSet
+builtins.str"builtins.str*Â
+__eq__(packaging.specifiers.SpecifierSet.__eq__"
+builtins.bool"builtins.bool*HF
+!packaging.specifiers.SpecifierSet"!packaging.specifiers.SpecifierSet*$"
+builtins.object"builtins.object*œ
+__len__)packaging.specifiers.SpecifierSet.__len__"
+builtins.int"builtins.int*HF
+!packaging.specifiers.SpecifierSet"!packaging.specifiers.SpecifierSet*‡
+__iter__*packaging.specifiers.SpecifierSet.__iter__"„
+/typing.Iterator[packaging.specifiers.Specifier]@
+packaging.specifiers.Specifier"packaging.specifiers.Specifier"typing.Iterator*HF
+!packaging.specifiers.SpecifierSet"!packaging.specifiers.SpecifierSet*š
+__contains__.packaging.specifiers.SpecifierSet.__contains__"
+builtins.bool"builtins.bool*HF
+!packaging.specifiers.SpecifierSet"!packaging.specifiers.SpecifierSet*ïì
+8TypeAlias[Union[packaging.version.Version,builtins.str]]‡
+-Union[packaging.version.Version,builtins.str]6
+packaging.version.Version"packaging.version.Version
+builtins.str"builtins.str"$packaging.specifiers.UnparsedVersion*Ø
+contains*packaging.specifiers.SpecifierSet.contains"
+builtins.bool"builtins.bool*P
+selfF
+!packaging.specifiers.SpecifierSet"!packaging.specifiers.SpecifierSet*÷
+itemì
+8TypeAlias[Union[packaging.version.Version,builtins.str]]‡
+-Union[packaging.version.Version,builtins.str]6
+packaging.version.Version"packaging.version.Version
+builtins.str"builtins.str"$packaging.specifiers.UnparsedVersion*Z
+prereleasesG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *X
+	installedG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *û
+filter(packaging.specifiers.SpecifierSet.filter"ƒ
+8typing.Iterator[packaging.specifiers.UnparsedVersionVar]µ
+'packaging.specifiers.UnparsedVersionVar‡
+-Union[packaging.version.Version,builtins.str]6
+packaging.version.Version"packaging.version.Version
+builtins.str"builtins.str"typing.Iterator*P
+selfF
+!packaging.specifiers.SpecifierSet"!packaging.specifiers.SpecifierSet*’
+iterableƒ
+8typing.Iterable[packaging.specifiers.UnparsedVersionVar]µ
+'packaging.specifiers.UnparsedVersionVar‡
+-Union[packaging.version.Version,builtins.str]6
+packaging.version.Version"packaging.version.Version
+builtins.str"builtins.str"typing.Iterable*Z
+prereleasesG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None 2‚
+prereleases-packaging.specifiers.SpecifierSet.prereleasesç
+prereleases-packaging.specifiers.SpecifierSet.prereleases"G
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None*P
+selfF
+!packaging.specifiers.SpecifierSet"!packaging.specifiers.SpecifierSet0:propertyX`Ù
+prereleases-packaging.specifiers.SpecifierSet.prereleases"
+None*P
+selfF
+!packaging.specifiers.SpecifierSet"!packaging.specifiers.SpecifierSet*)
+value
+builtins.bool"builtins.bool0:prereleases.setterr¿
+_specs(packaging.specifiers.SpecifierSet._specsŠ
+2builtins.frozenset[packaging.specifiers.Specifier]@
+packaging.specifiers.Specifier"packaging.specifiers.Specifier"builtins.frozensetr‡
+_prereleases.packaging.specifiers.SpecifierSet._prereleasesG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+Noneì
+_coerce_version$packaging.specifiers._coerce_version"6
+packaging.version.Version"packaging.version.Version*ú
+versionì
+8TypeAlias[Union[packaging.version.Version,builtins.str]]‡
+-Union[packaging.version.Version,builtins.str]6
+packaging.version.Version"packaging.version.Version
+builtins.str"builtins.str"$packaging.specifiers.UnparsedVersion¬
+_version_split#packaging.specifiers._version_split"J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*)
+version
+builtins.str"builtins.str­
+_version_join"packaging.specifiers._version_join"
+builtins.str"builtins.str*Z
+
+componentsJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list€
+_is_not_suffix#packaging.specifiers._is_not_suffix"
+builtins.bool"builtins.bool*)
+segment
+builtins.str"builtins.str»
+_pad_version!packaging.specifiers._pad_version"Ú
+>Tuple[builtins.list[builtins.str],builtins.list[builtins.str]]J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.listJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*T
+leftJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*U
+rightJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*
+__annotations__$packaging.specifiers.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*y
+_prefix_regex"packaging.specifiers._prefix_regexD
+re.Pattern[builtins.str]
+builtins.str"builtins.str"
+re.Pattern

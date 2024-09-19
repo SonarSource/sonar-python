@@ -1,0 +1,605 @@
+
+torch.nn.modules.rnnÖ.
+RNNBasetorch.nn.modules.rnn.RNNBase"torch.nn.modules.module.Module*Ÿ
+__init__%torch.nn.modules.rnn.RNNBase.__init__"
+None*F
+self<
+torch.nn.modules.rnn.RNNBase"torch.nn.modules.rnn.RNNBase*&
+mode
+builtins.str"builtins.str*,
+
+input_size
+builtins.int"builtins.int*-
+hidden_size
+builtins.int"builtins.int*.
+
+num_layers
+builtins.int"builtins.int **
+bias
+builtins.bool"builtins.bool *1
+batch_first
+builtins.bool"builtins.bool */
+dropout 
+builtins.float"builtins.float *3
+bidirectional
+builtins.bool"builtins.bool *-
+	proj_size
+builtins.int"builtins.int *
+device
+Any *
+dtype
+Any *O
+_init_flat_weights/torch.nn.modules.rnn.RNNBase._init_flat_weights*
+self*V
+__setattr__(torch.nn.modules.rnn.RNNBase.__setattr__*
+self*
+attr*	
+value*ó
+flatten_parameters/torch.nn.modules.rnn.RNNBase.flatten_parameters"
+None*F
+self<
+torch.nn.modules.rnn.RNNBase"torch.nn.modules.rnn.RNNBase*N
+_apply#torch.nn.modules.rnn.RNNBase._apply*
+self*
+fn*
+recurse *ì
+reset_parameters-torch.nn.modules.rnn.RNNBase.reset_parameters"
+None*F
+self<
+torch.nn.modules.rnn.RNNBase"torch.nn.modules.rnn.RNNBase*±
+check_input(torch.nn.modules.rnn.RNNBase.check_input"
+None*F
+self<
+torch.nn.modules.rnn.RNNBase"torch.nn.modules.rnn.RNNBase*7
+input,
+torch._tensor.Tensor"torch._tensor.Tensor*m
+batch_sizes\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None*œ
+get_expected_hidden_size5torch.nn.modules.rnn.RNNBase.get_expected_hidden_size"ã
+-Tuple[builtins.int,builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int*F
+self<
+torch.nn.modules.rnn.RNNBase"torch.nn.modules.rnn.RNNBase*7
+input,
+torch._tensor.Tensor"torch._tensor.Tensor*m
+batch_sizes\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None*ù
+check_hidden_size.torch.nn.modules.rnn.RNNBase.check_hidden_size"
+None*F
+self<
+torch.nn.modules.rnn.RNNBase"torch.nn.modules.rnn.RNNBase*4
+hx,
+torch._tensor.Tensor"torch._tensor.Tensor*¶
+expected_hidden_sizeã
+-Tuple[builtins.int,builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int*'
+msg
+builtins.str"builtins.str *U
+_weights_have_changed2torch.nn.modules.rnn.RNNBase._weights_have_changed*
+self*¯
+check_forward_args/torch.nn.modules.rnn.RNNBase.check_forward_args"
+Any*F
+self<
+torch.nn.modules.rnn.RNNBase"torch.nn.modules.rnn.RNNBase*7
+input,
+torch._tensor.Tensor"torch._tensor.Tensor*8
+hidden,
+torch._tensor.Tensor"torch._tensor.Tensor*m
+batch_sizes\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None*≥
+permute_hidden+torch.nn.modules.rnn.RNNBase.permute_hidden"
+Any*F
+self<
+torch.nn.modules.rnn.RNNBase"torch.nn.modules.rnn.RNNBase*4
+hx,
+torch._tensor.Tensor"torch._tensor.Tensor*m
+permutation\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None*õ
+
+extra_repr'torch.nn.modules.rnn.RNNBase.extra_repr"
+builtins.str"builtins.str*F
+self<
+torch.nn.modules.rnn.RNNBase"torch.nn.modules.rnn.RNNBase*S
+_update_flat_weights1torch.nn.modules.rnn.RNNBase._update_flat_weights*
+self*C
+__getstate__)torch.nn.modules.rnn.RNNBase.__getstate__*
+self*J
+__setstate__)torch.nn.modules.rnn.RNNBase.__setstate__*
+self*
+d*◊
+all_weights(torch.nn.modules.rnn.RNNBase.all_weights"«
+:builtins.list[builtins.list[torch.nn.parameter.Parameter]]z
++builtins.list[torch.nn.parameter.Parameter]<
+torch.nn.parameter.Parameter"torch.nn.parameter.Parameter"builtins.list"builtins.list*F
+self<
+torch.nn.modules.rnn.RNNBase"torch.nn.modules.rnn.RNNBase0:property`*c
+_replicate_for_data_parallel9torch.nn.modules.rnn.RNNBase._replicate_for_data_parallel*
+selfrá
+__constants__*torch.nn.modules.rnn.RNNBase.__constants__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.listrü
+__jit_unused_properties__6torch.nn.modules.rnn.RNNBase.__jit_unused_properties__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.listrG
+mode!torch.nn.modules.rnn.RNNBase.mode
+builtins.str"builtins.strrS
+
+input_size'torch.nn.modules.rnn.RNNBase.input_size
+builtins.int"builtins.intrU
+hidden_size(torch.nn.modules.rnn.RNNBase.hidden_size
+builtins.int"builtins.intrS
+
+num_layers'torch.nn.modules.rnn.RNNBase.num_layers
+builtins.int"builtins.intrI
+bias!torch.nn.modules.rnn.RNNBase.bias
+builtins.bool"builtins.boolrW
+batch_first(torch.nn.modules.rnn.RNNBase.batch_first
+builtins.bool"builtins.boolrQ
+dropout$torch.nn.modules.rnn.RNNBase.dropout 
+builtins.float"builtins.floatr[
+bidirectional*torch.nn.modules.rnn.RNNBase.bidirectional
+builtins.bool"builtins.boolrQ
+	proj_size&torch.nn.modules.rnn.RNNBase.proj_size
+builtins.int"builtins.intrÜ
+_flat_weight_refs.torch.nn.modules.rnn.RNNBase._flat_weight_refs¿
+Obuiltins.list[Union[_weakref.ReferenceType[torch.nn.parameter.Parameter],None]]›
+@Union[_weakref.ReferenceType[torch.nn.parameter.Parameter],None]å
+4_weakref.ReferenceType[torch.nn.parameter.Parameter]<
+torch.nn.parameter.Parameter"torch.nn.parameter.Parameter"_weakref.ReferenceType
+None"builtins.listrì
+_flat_weights_names0torch.nn.modules.rnn.RNNBase._flat_weights_namesJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.listr√
+_all_weights)torch.nn.modules.rnn.RNNBase._all_weightsá
+*builtins.list[builtins.list[builtins.str]]J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list"builtins.listrD
+_flat_weights*torch.nn.modules.rnn.RNNBase._flat_weights
+Anyú
+RNNtorch.nn.modules.rnn.RNN"torch.nn.modules.rnn.RNNBase2√
+__init__!torch.nn.modules.rnn.RNN.__init__∂
+__init__!torch.nn.modules.rnn.RNN.__init__"
+None*>
+self4
+torch.nn.modules.rnn.RNN"torch.nn.modules.rnn.RNN*,
+
+input_size
+builtins.int"builtins.int*-
+hidden_size
+builtins.int"builtins.int*.
+
+num_layers
+builtins.int"builtins.int *0
+nonlinearity
+builtins.str"builtins.str **
+bias
+builtins.bool"builtins.bool *1
+batch_first
+builtins.bool"builtins.bool */
+dropout 
+builtins.float"builtins.float *3
+bidirectional
+builtins.bool"builtins.bool *
+device
+Any *
+dtype
+Any 0:overloadX[
+__init__!torch.nn.modules.rnn.RNN.__init__*
+self*
+args*
+
+kwargs0:overloadX2÷
+forward torch.nn.modules.rnn.RNN.forward”
+forward torch.nn.modules.rnn.RNN.forward"ê
+0Tuple[torch._tensor.Tensor,torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor,
+torch._tensor.Tensor"torch._tensor.Tensor*>
+self4
+torch.nn.modules.rnn.RNN"torch.nn.modules.rnn.RNN*7
+input,
+torch._tensor.Tensor"torch._tensor.Tensor*f
+hx\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None 0:overload:$torch._jit_internal._overload_methodX“
+forward torch.nn.modules.rnn.RNN.forward"Ñ
+ôTuple[TypeAlias[Tuple[torch._tensor.Tensor,torch._tensor.Tensor,Union[torch._tensor.Tensor,None],Union[torch._tensor.Tensor,None]]],torch._tensor.Tensor]µ
+}TypeAlias[Tuple[torch._tensor.Tensor,torch._tensor.Tensor,Union[torch._tensor.Tensor,None],Union[torch._tensor.Tensor,None]]]é
+rTuple[torch._tensor.Tensor,torch._tensor.Tensor,Union[torch._tensor.Tensor,None],Union[torch._tensor.Tensor,None]],
+torch._tensor.Tensor"torch._tensor.Tensor,
+torch._tensor.Tensor"torch._tensor.Tensor\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None"!torch.nn.utils.rnn.PackedSequence,
+torch._tensor.Tensor"torch._tensor.Tensor*>
+self4
+torch.nn.modules.rnn.RNN"torch.nn.modules.rnn.RNN*¡
+inputµ
+}TypeAlias[Tuple[torch._tensor.Tensor,torch._tensor.Tensor,Union[torch._tensor.Tensor,None],Union[torch._tensor.Tensor,None]]]é
+rTuple[torch._tensor.Tensor,torch._tensor.Tensor,Union[torch._tensor.Tensor,None],Union[torch._tensor.Tensor,None]],
+torch._tensor.Tensor"torch._tensor.Tensor,
+torch._tensor.Tensor"torch._tensor.Tensor\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None"!torch.nn.utils.rnn.PackedSequence*f
+hx\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None 0:overload:$torch._jit_internal._overload_methodXr>
+nonlinearity%torch.nn.modules.rnn.RNN.nonlinearity
+Any©&
+LSTMtorch.nn.modules.rnn.LSTM"torch.nn.modules.rnn.RNNBase*¬
+get_expected_cell_size0torch.nn.modules.rnn.LSTM.get_expected_cell_size"ã
+-Tuple[builtins.int,builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int*@
+self6
+torch.nn.modules.rnn.LSTM"torch.nn.modules.rnn.LSTM*7
+input,
+torch._tensor.Tensor"torch._tensor.Tensor*m
+batch_sizes\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None*’
+check_forward_args,torch.nn.modules.rnn.LSTM.check_forward_args"
+Any*@
+self6
+torch.nn.modules.rnn.LSTM"torch.nn.modules.rnn.LSTM*7
+input,
+torch._tensor.Tensor"torch._tensor.Tensor*ù
+hiddenê
+0Tuple[torch._tensor.Tensor,torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor,
+torch._tensor.Tensor"torch._tensor.Tensor*m
+batch_sizes\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None*ö
+permute_hidden(torch.nn.modules.rnn.LSTM.permute_hidden"ê
+0Tuple[torch._tensor.Tensor,torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor,
+torch._tensor.Tensor"torch._tensor.Tensor*@
+self6
+torch.nn.modules.rnn.LSTM"torch.nn.modules.rnn.LSTM*ô
+hxê
+0Tuple[torch._tensor.Tensor,torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor,
+torch._tensor.Tensor"torch._tensor.Tensor*m
+permutation\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None2≈
+__init__"torch.nn.modules.rnn.LSTM.__init__∂
+__init__"torch.nn.modules.rnn.LSTM.__init__"
+None*@
+self6
+torch.nn.modules.rnn.LSTM"torch.nn.modules.rnn.LSTM*,
+
+input_size
+builtins.int"builtins.int*-
+hidden_size
+builtins.int"builtins.int*.
+
+num_layers
+builtins.int"builtins.int **
+bias
+builtins.bool"builtins.bool *1
+batch_first
+builtins.bool"builtins.bool */
+dropout 
+builtins.float"builtins.float *3
+bidirectional
+builtins.bool"builtins.bool *-
+	proj_size
+builtins.int"builtins.int *
+device
+Any *
+dtype
+Any 0:overloadX\
+__init__"torch.nn.modules.rnn.LSTM.__init__*
+self*
+args*
+
+kwargs0:overloadX2Â
+forward!torch.nn.modules.rnn.LSTM.forward⁄
+forward!torch.nn.modules.rnn.LSTM.forward"ë
+LTuple[torch._tensor.Tensor,Tuple[torch._tensor.Tensor,torch._tensor.Tensor]],
+torch._tensor.Tensor"torch._tensor.Tensorê
+0Tuple[torch._tensor.Tensor,torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor,
+torch._tensor.Tensor"torch._tensor.Tensor*@
+self6
+torch.nn.modules.rnn.LSTM"torch.nn.modules.rnn.LSTM*7
+input,
+torch._tensor.Tensor"torch._tensor.Tensor*Ë
+hx›
+<Union[Tuple[torch._tensor.Tensor,torch._tensor.Tensor],None]ê
+0Tuple[torch._tensor.Tensor,torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor,
+torch._tensor.Tensor"torch._tensor.Tensor
+None 0:overload:$torch._jit_internal._overload_methodXŸ
+forward!torch.nn.modules.rnn.LSTM.forward"Ö
+µTuple[TypeAlias[Tuple[torch._tensor.Tensor,torch._tensor.Tensor,Union[torch._tensor.Tensor,None],Union[torch._tensor.Tensor,None]]],Tuple[torch._tensor.Tensor,torch._tensor.Tensor]]µ
+}TypeAlias[Tuple[torch._tensor.Tensor,torch._tensor.Tensor,Union[torch._tensor.Tensor,None],Union[torch._tensor.Tensor,None]]]é
+rTuple[torch._tensor.Tensor,torch._tensor.Tensor,Union[torch._tensor.Tensor,None],Union[torch._tensor.Tensor,None]],
+torch._tensor.Tensor"torch._tensor.Tensor,
+torch._tensor.Tensor"torch._tensor.Tensor\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None"!torch.nn.utils.rnn.PackedSequenceê
+0Tuple[torch._tensor.Tensor,torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor,
+torch._tensor.Tensor"torch._tensor.Tensor*@
+self6
+torch.nn.modules.rnn.LSTM"torch.nn.modules.rnn.LSTM*¡
+inputµ
+}TypeAlias[Tuple[torch._tensor.Tensor,torch._tensor.Tensor,Union[torch._tensor.Tensor,None],Union[torch._tensor.Tensor,None]]]é
+rTuple[torch._tensor.Tensor,torch._tensor.Tensor,Union[torch._tensor.Tensor,None],Union[torch._tensor.Tensor,None]],
+torch._tensor.Tensor"torch._tensor.Tensor,
+torch._tensor.Tensor"torch._tensor.Tensor\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None"!torch.nn.utils.rnn.PackedSequence*Ë
+hx›
+<Union[Tuple[torch._tensor.Tensor,torch._tensor.Tensor],None]ê
+0Tuple[torch._tensor.Tensor,torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor,
+torch._tensor.Tensor"torch._tensor.Tensor
+None 0:overload:$torch._jit_internal._overload_methodX™
+GRUtorch.nn.modules.rnn.GRU"torch.nn.modules.rnn.RNNBase2ë
+__init__!torch.nn.modules.rnn.GRU.__init__Ñ
+__init__!torch.nn.modules.rnn.GRU.__init__"
+None*>
+self4
+torch.nn.modules.rnn.GRU"torch.nn.modules.rnn.GRU*,
+
+input_size
+builtins.int"builtins.int*-
+hidden_size
+builtins.int"builtins.int*.
+
+num_layers
+builtins.int"builtins.int **
+bias
+builtins.bool"builtins.bool *1
+batch_first
+builtins.bool"builtins.bool */
+dropout 
+builtins.float"builtins.float *3
+bidirectional
+builtins.bool"builtins.bool *
+device
+Any *
+dtype
+Any 0:overloadX[
+__init__!torch.nn.modules.rnn.GRU.__init__*
+self*
+args*
+
+kwargs0:overloadX2÷
+forward torch.nn.modules.rnn.GRU.forward”
+forward torch.nn.modules.rnn.GRU.forward"ê
+0Tuple[torch._tensor.Tensor,torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor,
+torch._tensor.Tensor"torch._tensor.Tensor*>
+self4
+torch.nn.modules.rnn.GRU"torch.nn.modules.rnn.GRU*7
+input,
+torch._tensor.Tensor"torch._tensor.Tensor*f
+hx\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None 0:overload:$torch._jit_internal._overload_methodX“
+forward torch.nn.modules.rnn.GRU.forward"Ñ
+ôTuple[TypeAlias[Tuple[torch._tensor.Tensor,torch._tensor.Tensor,Union[torch._tensor.Tensor,None],Union[torch._tensor.Tensor,None]]],torch._tensor.Tensor]µ
+}TypeAlias[Tuple[torch._tensor.Tensor,torch._tensor.Tensor,Union[torch._tensor.Tensor,None],Union[torch._tensor.Tensor,None]]]é
+rTuple[torch._tensor.Tensor,torch._tensor.Tensor,Union[torch._tensor.Tensor,None],Union[torch._tensor.Tensor,None]],
+torch._tensor.Tensor"torch._tensor.Tensor,
+torch._tensor.Tensor"torch._tensor.Tensor\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None"!torch.nn.utils.rnn.PackedSequence,
+torch._tensor.Tensor"torch._tensor.Tensor*>
+self4
+torch.nn.modules.rnn.GRU"torch.nn.modules.rnn.GRU*¡
+inputµ
+}TypeAlias[Tuple[torch._tensor.Tensor,torch._tensor.Tensor,Union[torch._tensor.Tensor,None],Union[torch._tensor.Tensor,None]]]é
+rTuple[torch._tensor.Tensor,torch._tensor.Tensor,Union[torch._tensor.Tensor,None],Union[torch._tensor.Tensor,None]],
+torch._tensor.Tensor"torch._tensor.Tensor,
+torch._tensor.Tensor"torch._tensor.Tensor\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None"!torch.nn.utils.rnn.PackedSequence*f
+hx\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None 0:overload:$torch._jit_internal._overload_methodX‘
+RNNCellBase torch.nn.modules.rnn.RNNCellBase"torch.nn.modules.module.Module*Ò
+__init__)torch.nn.modules.rnn.RNNCellBase.__init__"
+None*N
+selfD
+ torch.nn.modules.rnn.RNNCellBase" torch.nn.modules.rnn.RNNCellBase*,
+
+input_size
+builtins.int"builtins.int*-
+hidden_size
+builtins.int"builtins.int*(
+bias
+builtins.bool"builtins.bool*,
+
+num_chunks
+builtins.int"builtins.int*
+device
+Any *
+dtype
+Any *ß
+
+extra_repr+torch.nn.modules.rnn.RNNCellBase.extra_repr"
+builtins.str"builtins.str*N
+selfD
+ torch.nn.modules.rnn.RNNCellBase" torch.nn.modules.rnn.RNNCellBase*ü
+reset_parameters1torch.nn.modules.rnn.RNNCellBase.reset_parameters"
+None*N
+selfD
+ torch.nn.modules.rnn.RNNCellBase" torch.nn.modules.rnn.RNNCellBaserã
+__constants__.torch.nn.modules.rnn.RNNCellBase.__constants__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.listrW
+
+input_size+torch.nn.modules.rnn.RNNCellBase.input_size
+builtins.int"builtins.intrY
+hidden_size,torch.nn.modules.rnn.RNNCellBase.hidden_size
+builtins.int"builtins.intrM
+bias%torch.nn.modules.rnn.RNNCellBase.bias
+builtins.bool"builtins.boolre
+	weight_ih*torch.nn.modules.rnn.RNNCellBase.weight_ih,
+torch._tensor.Tensor"torch._tensor.Tensorre
+	weight_hh*torch.nn.modules.rnn.RNNCellBase.weight_hh,
+torch._tensor.Tensor"torch._tensor.Tensorrq
+bias_ih(torch.nn.modules.rnn.RNNCellBase.bias_ih<
+torch.nn.parameter.Parameter"torch.nn.parameter.Parameterrq
+bias_hh(torch.nn.modules.rnn.RNNCellBase.bias_hh<
+torch.nn.parameter.Parameter"torch.nn.parameter.Parameter„
+RNNCelltorch.nn.modules.rnn.RNNCell" torch.nn.modules.rnn.RNNCellBase*Î
+__init__%torch.nn.modules.rnn.RNNCell.__init__"
+None*F
+self<
+torch.nn.modules.rnn.RNNCell"torch.nn.modules.rnn.RNNCell*,
+
+input_size
+builtins.int"builtins.int*-
+hidden_size
+builtins.int"builtins.int**
+bias
+builtins.bool"builtins.bool *0
+nonlinearity
+builtins.str"builtins.str *
+device
+Any *
+dtype
+Any *∆
+forward$torch.nn.modules.rnn.RNNCell.forward",
+torch._tensor.Tensor"torch._tensor.Tensor*F
+self<
+torch.nn.modules.rnn.RNNCell"torch.nn.modules.rnn.RNNCell*7
+input,
+torch._tensor.Tensor"torch._tensor.Tensor*f
+hx\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None rá
+__constants__*torch.nn.modules.rnn.RNNCell.__constants__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.listrW
+nonlinearity)torch.nn.modules.rnn.RNNCell.nonlinearity
+builtins.str"builtins.stræ
+LSTMCelltorch.nn.modules.rnn.LSTMCell" torch.nn.modules.rnn.RNNCellBase*º
+__init__&torch.nn.modules.rnn.LSTMCell.__init__"
+None*H
+self>
+torch.nn.modules.rnn.LSTMCell"torch.nn.modules.rnn.LSTMCell*,
+
+input_size
+builtins.int"builtins.int*-
+hidden_size
+builtins.int"builtins.int**
+bias
+builtins.bool"builtins.bool *
+device
+Any *
+dtype
+Any *±
+forward%torch.nn.modules.rnn.LSTMCell.forward"ê
+0Tuple[torch._tensor.Tensor,torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor,
+torch._tensor.Tensor"torch._tensor.Tensor*H
+self>
+torch.nn.modules.rnn.LSTMCell"torch.nn.modules.rnn.LSTMCell*7
+input,
+torch._tensor.Tensor"torch._tensor.Tensor*Ë
+hx›
+<Union[Tuple[torch._tensor.Tensor,torch._tensor.Tensor],None]ê
+0Tuple[torch._tensor.Tensor,torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor,
+torch._tensor.Tensor"torch._tensor.Tensor
+None Œ
+GRUCelltorch.nn.modules.rnn.GRUCell" torch.nn.modules.rnn.RNNCellBase*π
+__init__%torch.nn.modules.rnn.GRUCell.__init__"
+None*F
+self<
+torch.nn.modules.rnn.GRUCell"torch.nn.modules.rnn.GRUCell*,
+
+input_size
+builtins.int"builtins.int*-
+hidden_size
+builtins.int"builtins.int**
+bias
+builtins.bool"builtins.bool *
+device
+Any *
+dtype
+Any *∆
+forward$torch.nn.modules.rnn.GRUCell.forward",
+torch._tensor.Tensor"torch._tensor.Tensor*F
+self<
+torch.nn.modules.rnn.GRUCell"torch.nn.modules.rnn.GRUCell*7
+input,
+torch._tensor.Tensor"torch._tensor.Tensor*f
+hx\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None }
+"<subclass of "float" and "Number">7torch.nn.modules.rnn.<subclass of "float" and "Number">"builtins.float"numbers.Number
+#<subclass of "float" and "Number">18torch.nn.modules.rnn.<subclass of "float" and "Number">1"builtins.float"numbers.Numberç
+_apply_permutation'torch.nn.modules.rnn._apply_permutation",
+torch._tensor.Tensor"torch._tensor.Tensor*8
+tensor,
+torch._tensor.Tensor"torch._tensor.Tensor*=
+permutation,
+torch._tensor.Tensor"torch._tensor.Tensor*'
+dim
+builtins.int"builtins.int *ê
+__annotations__$torch.nn.modules.rnn.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*s
+__all__torch.nn.modules.rnn.__all__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*˙
+
+_rnn_implstorch.nn.modules.rnn._rnn_impls 
+;builtins.dict[builtins.str,CallableType[builtins.function]]
+builtins.str"builtins.str^
+CallableType[builtins.function]&
+builtins.function"builtins.function"builtins.function"builtins.dict

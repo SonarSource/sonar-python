@@ -1,0 +1,47 @@
+
+6torch.distributed.algorithms.model_averaging.averagers¼
+ModelAveragerDtorch.distributed.algorithms.model_averaging.averagers.ModelAverager"abc.ABC*x
+__init__Mtorch.distributed.algorithms.model_averaging.averagers.ModelAverager.__init__*
+self*
+process_group *—
+average_parametersWtorch.distributed.algorithms.model_averaging.averagers.ModelAverager.average_parameters*
+self*
+
+params0:abstractmethod@rl
+process_groupRtorch.distributed.algorithms.model_averaging.averagers.ModelAverager.process_group
+AnyrZ
+stepItorch.distributed.algorithms.model_averaging.averagers.ModelAverager.step
+Anyî
+
+PeriodicModelAveragerLtorch.distributed.algorithms.model_averaging.averagers.PeriodicModelAverager"Dtorch.distributed.algorithms.model_averaging.averagers.ModelAverager* 
+__init__Utorch.distributed.algorithms.model_averaging.averagers.PeriodicModelAverager.__init__*
+self*
+
+period*
+warmup_steps *
+process_group *Á
+average_parameters_torch.distributed.algorithms.model_averaging.averagers.PeriodicModelAverager.average_parameters"
+Any*§
+selfœ
+Ltorch.distributed.algorithms.model_averaging.averagers.PeriodicModelAverager"Ltorch.distributed.algorithms.model_averaging.averagers.PeriodicModelAverager*–
+params‰
+~Union[typing.Iterable[torch.nn.parameter.Parameter],typing.Iterable[builtins.dict[builtins.str,torch.nn.parameter.Parameter]]]~
+-typing.Iterable[torch.nn.parameter.Parameter]<
+torch.nn.parameter.Parameter"torch.nn.parameter.Parameter"typing.Iterable„
+Ityping.Iterable[builtins.dict[builtins.str,torch.nn.parameter.Parameter]]¥
+8builtins.dict[builtins.str,torch.nn.parameter.Parameter]
+builtins.str"builtins.str<
+torch.nn.parameter.Parameter"torch.nn.parameter.Parameter"builtins.dict"typing.Iterablerr
+warmup_stepsYtorch.distributed.algorithms.model_averaging.averagers.PeriodicModelAverager.warmup_steps
+Anyrf
+periodStorch.distributed.algorithms.model_averaging.averagers.PeriodicModelAverager.period
+Any*²
+__annotations__Ftorch.distributed.algorithms.model_averaging.averagers.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*
+disttorch.distributed *=
+utils2torch.distributed.algorithms.model_averaging.utils *•
+__all__>torch.distributed.algorithms.model_averaging.averagers.__all__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list

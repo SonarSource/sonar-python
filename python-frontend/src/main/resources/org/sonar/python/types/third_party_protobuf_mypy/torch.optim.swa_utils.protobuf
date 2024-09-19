@@ -1,0 +1,103 @@
+
+torch.optim.swa_utils°
+AveragedModel#torch.optim.swa_utils.AveragedModel"torch.nn.modules.module.Module*¿
+__init__,torch.optim.swa_utils.AveragedModel.__init__"
+None*T
+selfJ
+#torch.optim.swa_utils.AveragedModel"#torch.optim.swa_utils.AveragedModel*K
+model@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*Ü
+devicex
+(Union[builtins.int,torch._C.device,None]
+builtins.int"builtins.int"
+torch._C.device"torch._C.device
+None *ï
+avg_fnÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *õ
+multi_avg_fnÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *
+use_buffers
+Any *V
+forward+torch.optim.swa_utils.AveragedModel.forward*
+self*
+args*
+
+kwargs*ˆ
+update_parameters5torch.optim.swa_utils.AveragedModel.update_parameters"
+Any*T
+selfJ
+#torch.optim.swa_utils.AveragedModel"#torch.optim.swa_utils.AveragedModel*K
+model@
+torch.nn.modules.module.Module"torch.nn.modules.module.Modulerj
+
+n_averaged.torch.optim.swa_utils.AveragedModel.n_averaged,
+torch._tensor.Tensor"torch._tensor.Tensorrv
+module*torch.optim.swa_utils.AveragedModel.module@
+torch.nn.modules.module.Module"torch.nn.modules.module.ModulerΩ
+avg_fn*torch.optim.swa_utils.AveragedModel.avg_fnÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+Noner…
+multi_avg_fn0torch.optim.swa_utils.AveragedModel.multi_avg_fnÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+NonerG
+use_buffers/torch.optim.swa_utils.AveragedModel.use_buffers
+AnyÅ	
+SWALRtorch.optim.swa_utils.SWALR"$torch.optim.lr_scheduler.LRScheduler*˝
+__init__$torch.optim.swa_utils.SWALR.__init__"
+None*D
+self:
+torch.optim.swa_utils.SWALR"torch.optim.swa_utils.SWALR*Q
+	optimizerB
+torch.optim.optimizer.Optimizer"torch.optim.optimizer.Optimizer*,
+swa_lr 
+builtins.float"builtins.float*
+anneal_epochs
+Any *¿
+anneal_strategy®
+2Union[Literal[builtins.str],Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str *
+
+last_epoch
+Any *U
+_linear_anneal*torch.optim.swa_utils.SWALR._linear_anneal*
+t0:staticmethodh*U
+_cosine_anneal*torch.optim.swa_utils.SWALR._cosine_anneal*
+t0:staticmethodh*o
+_get_initial_lr+torch.optim.swa_utils.SWALR._get_initial_lr*
+lr*
+
+swa_lr*	
+alpha0:staticmethodh*6
+get_lr"torch.optim.swa_utils.SWALR.get_lr*
+selfrÉ
+anneal_func'torch.optim.swa_utils.SWALR.anneal_funcK
+CallableType[builtins.function]&
+builtins.function"builtins.functionrX
+anneal_epochs)torch.optim.swa_utils.SWALR.anneal_epochs
+builtins.int"builtins.intO
+get_ema_multi_avg_fn*torch.optim.swa_utils.get_ema_multi_avg_fn*
+decay B
+get_swa_multi_avg_fn*torch.optim.swa_utils.get_swa_multi_avg_fnC
+get_ema_avg_fn$torch.optim.swa_utils.get_ema_avg_fn*
+decay 6
+get_swa_avg_fn$torch.optim.swa_utils.get_swa_avg_fn*ë
+__annotations__%torch.optim.swa_utils.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*t
+__all__torch.optim.swa_utils.__all__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list

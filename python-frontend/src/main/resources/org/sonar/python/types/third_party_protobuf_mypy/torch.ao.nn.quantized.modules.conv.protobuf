@@ -1,0 +1,551 @@
+
+"torch.ao.nn.quantized.modules.convŸ
+_ConvNd*torch.ao.nn.quantized.modules.conv._ConvNd";torch.ao.nn.quantized.modules.utils.WeightedQuantizedModule*ó
+__init__3torch.ao.nn.quantized.modules.conv._ConvNd.__init__*
+self*
+in_channels*
+out_channels*
+kernel_size*
+stride *
+padding *
+dilation *
+groups *
+
+bias *
+padding_mode *
+device *
+dtype *à
+_init0torch.ao.nn.quantized.modules.conv._ConvNd._init"
+None*b
+selfX
+*torch.ao.nn.quantized.modules.conv._ConvNd"*torch.ao.nn.quantized.modules.conv._ConvNd*
+in_channels
+Any*
+out_channels
+Any*
+kernel_size
+Any*
+stride
+Any*
+padding
+Any*
+dilation
+Any*
+
+transposed
+Any*
+output_padding
+Any*
+groups
+Any*
+bias
+Any*
+padding_mode
+Any *
+device
+Any *
+dtype
+Any *t
+set_weight_bias:torch.ao.nn.quantized.modules.conv._ConvNd.set_weight_bias*
+self*
+qweight*
+
+bias_float*A
+bias/torch.ao.nn.quantized.modules.conv._ConvNd.bias*
+self*Q
+_weight_bias7torch.ao.nn.quantized.modules.conv._ConvNd._weight_bias*
+self*M
+
+extra_repr5torch.ao.nn.quantized.modules.conv._ConvNd.extra_repr*
+self*‹
+_save_to_state_dict>torch.ao.nn.quantized.modules.conv._ConvNd._save_to_state_dict*
+self*
+destination*
+
+prefix*
+	keep_vars*e
+__getstate__7torch.ao.nn.quantized.modules.conv._ConvNd.__getstate__*
+self0:torch.jit.export*Ö
+_load_from_state_dict@torch.ao.nn.quantized.modules.conv._ConvNd._load_from_state_dict*
+self*
+
+state_dict*
+
+prefix*
+local_metadata*
+
+strict*
+missing_keys*
+unexpected_keys*
+
+error_msgs*p
+__setstate__7torch.ao.nn.quantized.modules.conv._ConvNd.__setstate__*
+self*	
+state0:torch.jit.export*[
+__deepcopy__7torch.ao.nn.quantized.modules.conv._ConvNd.__deepcopy__*
+self*
+memo*I
+__copy__3torch.ao.nn.quantized.modules.conv._ConvNd.__copy__*
+self*œ
+	get_qconv4torch.ao.nn.quantized.modules.conv._ConvNd.get_qconv*
+cls*
+mod*
+activation_post_process*
+weight_post_process 0:classmethodp*‰
+
+from_float5torch.ao.nn.quantized.modules.conv._ConvNd.from_float*
+cls*
+mod* 
+use_precomputed_fake_quant 0:staticmethodh*
+from_reference9torch.ao.nn.quantized.modules.conv._ConvNd.from_reference*
+cls*
+	ref_qconv*
+output_scale*
+output_zero_point0:classmethodprN
+in_channels6torch.ao.nn.quantized.modules.conv._ConvNd.in_channels
+AnyrP
+out_channels7torch.ao.nn.quantized.modules.conv._ConvNd.out_channels
+AnyrN
+kernel_size6torch.ao.nn.quantized.modules.conv._ConvNd.kernel_size
+AnyrD
+stride1torch.ao.nn.quantized.modules.conv._ConvNd.stride
+AnyrF
+padding2torch.ao.nn.quantized.modules.conv._ConvNd.padding
+AnyrH
+dilation3torch.ao.nn.quantized.modules.conv._ConvNd.dilation
+AnyrL
+
+transposed5torch.ao.nn.quantized.modules.conv._ConvNd.transposed
+AnyrT
+output_padding9torch.ao.nn.quantized.modules.conv._ConvNd.output_padding
+AnyrD
+groups1torch.ao.nn.quantized.modules.conv._ConvNd.groups
+AnyrP
+padding_mode7torch.ao.nn.quantized.modules.conv._ConvNd.padding_mode
+Anyr[
+scale0torch.ao.nn.quantized.modules.conv._ConvNd.scale 
+builtins.float"builtins.floatra
+
+zero_point5torch.ao.nn.quantized.modules.conv._ConvNd.zero_point
+builtins.int"builtins.int­!
+Conv1d)torch.ao.nn.quantized.modules.conv.Conv1d"*torch.ao.nn.quantized.modules.conv._ConvNd*Š
+__init__2torch.ao.nn.quantized.modules.conv.Conv1d.__init__"
+None*`
+selfV
+)torch.ao.nn.quantized.modules.conv.Conv1d")torch.ao.nn.quantized.modules.conv.Conv1d*-
+in_channels
+builtins.int"builtins.int*.
+out_channels
+builtins.int"builtins.int*‘
+kernel_sizeÿ
+STypeAlias[TypeAlias[Union[torch.nn.common_types.T,Tuple[torch.nn.common_types.T]]]]„
+HTypeAlias[Union[torch.nn.common_types.T,Tuple[torch.nn.common_types.T]]]‰
+=Union[torch.nn.common_types.T,Tuple[torch.nn.common_types.T]]P
+torch.nn.common_types.T"
+builtins.object"builtins.object"builtins.objectt
+Tuple[torch.nn.common_types.T]P
+torch.nn.common_types.T"
+builtins.object"builtins.object"builtins.object"*torch.nn.common_types._scalar_or_tuple_1_t"torch.nn.common_types._size_1_t*Ž
+strideÿ
+STypeAlias[TypeAlias[Union[torch.nn.common_types.T,Tuple[torch.nn.common_types.T]]]]„
+HTypeAlias[Union[torch.nn.common_types.T,Tuple[torch.nn.common_types.T]]]‰
+=Union[torch.nn.common_types.T,Tuple[torch.nn.common_types.T]]P
+torch.nn.common_types.T"
+builtins.object"builtins.object"builtins.objectt
+Tuple[torch.nn.common_types.T]P
+torch.nn.common_types.T"
+builtins.object"builtins.object"builtins.object"*torch.nn.common_types._scalar_or_tuple_1_t"torch.nn.common_types._size_1_t *
+paddingÿ
+STypeAlias[TypeAlias[Union[torch.nn.common_types.T,Tuple[torch.nn.common_types.T]]]]„
+HTypeAlias[Union[torch.nn.common_types.T,Tuple[torch.nn.common_types.T]]]‰
+=Union[torch.nn.common_types.T,Tuple[torch.nn.common_types.T]]P
+torch.nn.common_types.T"
+builtins.object"builtins.object"builtins.objectt
+Tuple[torch.nn.common_types.T]P
+torch.nn.common_types.T"
+builtins.object"builtins.object"builtins.object"*torch.nn.common_types._scalar_or_tuple_1_t"torch.nn.common_types._size_1_t *
+dilationÿ
+STypeAlias[TypeAlias[Union[torch.nn.common_types.T,Tuple[torch.nn.common_types.T]]]]„
+HTypeAlias[Union[torch.nn.common_types.T,Tuple[torch.nn.common_types.T]]]‰
+=Union[torch.nn.common_types.T,Tuple[torch.nn.common_types.T]]P
+torch.nn.common_types.T"
+builtins.object"builtins.object"builtins.objectt
+Tuple[torch.nn.common_types.T]P
+torch.nn.common_types.T"
+builtins.object"builtins.object"builtins.object"*torch.nn.common_types._scalar_or_tuple_1_t"torch.nn.common_types._size_1_t **
+groups
+builtins.int"builtins.int **
+bias
+builtins.bool"builtins.bool *0
+padding_mode
+builtins.str"builtins.str *
+device
+Any *
+dtype
+Any *J
+	_get_name3torch.ao.nn.quantized.modules.conv.Conv1d._get_name*
+self*Ò
+set_weight_bias9torch.ao.nn.quantized.modules.conv.Conv1d.set_weight_bias"
+None*`
+selfV
+)torch.ao.nn.quantized.modules.conv.Conv1d")torch.ao.nn.quantized.modules.conv.Conv1d*3
+w,
+torch._tensor.Tensor"torch._tensor.Tensor*c
+b\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None*P
+_weight_bias6torch.ao.nn.quantized.modules.conv.Conv1d._weight_bias*
+self*D
+weight0torch.ao.nn.quantized.modules.conv.Conv1d.weight*
+self*@
+bias.torch.ao.nn.quantized.modules.conv.Conv1d.bias*
+self*Q
+forward1torch.ao.nn.quantized.modules.conv.Conv1d.forward*
+self*	
+input*‡
+
+from_float4torch.ao.nn.quantized.modules.conv.Conv1d.from_float*
+cls*
+mod* 
+use_precomputed_fake_quant 0:classmethodpr‰
+_FLOAT_MODULE7torch.ao.nn.quantized.modules.conv.Conv1d._FLOAT_MODULE?
+CallableType[builtins.type]
+builtins.type"builtins.typer›
+_NNIQAT_CONV_BN_MODULE@torch.ao.nn.quantized.modules.conv.Conv1d._NNIQAT_CONV_BN_MODULE?
+CallableType[builtins.type]
+builtins.type"builtins.typer™
+_NNI_CONV_RELU_MODULE?torch.ao.nn.quantized.modules.conv.Conv1d._NNI_CONV_RELU_MODULE?
+CallableType[builtins.type]
+builtins.type"builtins.typer`
+_NNI_CONV_ADD_MODULE>torch.ao.nn.quantized.modules.conv.Conv1d._NNI_CONV_ADD_MODULE
+Nonerj
+_NNI_CONV_ADD_RELU_MODULECtorch.ao.nn.quantized.modules.conv.Conv1d._NNI_CONV_ADD_RELU_MODULE
+NonerS
+_packed_params8torch.ao.nn.quantized.modules.conv.Conv1d._packed_params
+Any…
+Conv2d)torch.ao.nn.quantized.modules.conv.Conv2d"*torch.ao.nn.quantized.modules.conv._ConvNd*ò
+__init__2torch.ao.nn.quantized.modules.conv.Conv2d.__init__*
+self*
+in_channels*
+out_channels*
+kernel_size*
+stride *
+padding *
+dilation *
+groups *
+
+bias *
+padding_mode *
+device *
+dtype *J
+	_get_name3torch.ao.nn.quantized.modules.conv.Conv2d._get_name*
+self*Ò
+set_weight_bias9torch.ao.nn.quantized.modules.conv.Conv2d.set_weight_bias"
+None*`
+selfV
+)torch.ao.nn.quantized.modules.conv.Conv2d")torch.ao.nn.quantized.modules.conv.Conv2d*3
+w,
+torch._tensor.Tensor"torch._tensor.Tensor*c
+b\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None*P
+_weight_bias6torch.ao.nn.quantized.modules.conv.Conv2d._weight_bias*
+self*D
+weight0torch.ao.nn.quantized.modules.conv.Conv2d.weight*
+self*@
+bias.torch.ao.nn.quantized.modules.conv.Conv2d.bias*
+self*Q
+forward1torch.ao.nn.quantized.modules.conv.Conv2d.forward*
+self*	
+input*‡
+
+from_float4torch.ao.nn.quantized.modules.conv.Conv2d.from_float*
+cls*
+mod* 
+use_precomputed_fake_quant 0:classmethodpr‰
+_FLOAT_MODULE7torch.ao.nn.quantized.modules.conv.Conv2d._FLOAT_MODULE?
+CallableType[builtins.type]
+builtins.type"builtins.typer›
+_NNIQAT_CONV_BN_MODULE@torch.ao.nn.quantized.modules.conv.Conv2d._NNIQAT_CONV_BN_MODULE?
+CallableType[builtins.type]
+builtins.type"builtins.typer™
+_NNI_CONV_RELU_MODULE?torch.ao.nn.quantized.modules.conv.Conv2d._NNI_CONV_RELU_MODULE?
+CallableType[builtins.type]
+builtins.type"builtins.typer—
+_NNI_CONV_ADD_MODULE>torch.ao.nn.quantized.modules.conv.Conv2d._NNI_CONV_ADD_MODULE?
+CallableType[builtins.type]
+builtins.type"builtins.typer¡
+_NNI_CONV_ADD_RELU_MODULECtorch.ao.nn.quantized.modules.conv.Conv2d._NNI_CONV_ADD_RELU_MODULE?
+CallableType[builtins.type]
+builtins.type"builtins.typerS
+_packed_params8torch.ao.nn.quantized.modules.conv.Conv2d._packed_params
+Any•
+Conv3d)torch.ao.nn.quantized.modules.conv.Conv3d"*torch.ao.nn.quantized.modules.conv._ConvNd*ò
+__init__2torch.ao.nn.quantized.modules.conv.Conv3d.__init__*
+self*
+in_channels*
+out_channels*
+kernel_size*
+stride *
+padding *
+dilation *
+groups *
+
+bias *
+padding_mode *
+device *
+dtype *J
+	_get_name3torch.ao.nn.quantized.modules.conv.Conv3d._get_name*
+self*Ò
+set_weight_bias9torch.ao.nn.quantized.modules.conv.Conv3d.set_weight_bias"
+None*`
+selfV
+)torch.ao.nn.quantized.modules.conv.Conv3d")torch.ao.nn.quantized.modules.conv.Conv3d*3
+w,
+torch._tensor.Tensor"torch._tensor.Tensor*c
+b\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None*P
+_weight_bias6torch.ao.nn.quantized.modules.conv.Conv3d._weight_bias*
+self*D
+weight0torch.ao.nn.quantized.modules.conv.Conv3d.weight*
+self*@
+bias.torch.ao.nn.quantized.modules.conv.Conv3d.bias*
+self*Q
+forward1torch.ao.nn.quantized.modules.conv.Conv3d.forward*
+self*	
+input*‡
+
+from_float4torch.ao.nn.quantized.modules.conv.Conv3d.from_float*
+cls*
+mod* 
+use_precomputed_fake_quant 0:classmethodpr‰
+_FLOAT_MODULE7torch.ao.nn.quantized.modules.conv.Conv3d._FLOAT_MODULE?
+CallableType[builtins.type]
+builtins.type"builtins.typer›
+_NNIQAT_CONV_BN_MODULE@torch.ao.nn.quantized.modules.conv.Conv3d._NNIQAT_CONV_BN_MODULE?
+CallableType[builtins.type]
+builtins.type"builtins.typer™
+_NNI_CONV_RELU_MODULE?torch.ao.nn.quantized.modules.conv.Conv3d._NNI_CONV_RELU_MODULE?
+CallableType[builtins.type]
+builtins.type"builtins.typer`
+_NNI_CONV_ADD_MODULE>torch.ao.nn.quantized.modules.conv.Conv3d._NNI_CONV_ADD_MODULE
+Nonerj
+_NNI_CONV_ADD_RELU_MODULECtorch.ao.nn.quantized.modules.conv.Conv3d._NNI_CONV_ADD_RELU_MODULE
+NonerS
+_packed_params8torch.ao.nn.quantized.modules.conv.Conv3d._packed_params
+Anyê
+
+_ConvTransposeNd3torch.ao.nn.quantized.modules.conv._ConvTransposeNd"*torch.ao.nn.quantized.modules.conv._ConvNd*”
+__init__<torch.ao.nn.quantized.modules.conv._ConvTransposeNd.__init__*
+self*
+in_channels*
+out_channels*
+kernel_size*
+
+stride*
+padding*
+dilation*
+
+transposed*
+output_padding*
+
+groups*
+bias*
+padding_mode*
+device *
+dtype *¦
+_input_paddingBtorch.ao.nn.quantized.modules.conv._ConvTransposeNd._input_padding"J
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*t
+selfj
+3torch.ao.nn.quantized.modules.conv._ConvTransposeNd"3torch.ao.nn.quantized.modules.conv._ConvTransposeNd*[
+kernel_sizeJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*X
+dilationJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*W
+paddingJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*‘
+
+from_float>torch.ao.nn.quantized.modules.conv._ConvTransposeNd.from_float*
+cls*
+mod* 
+use_precomputed_fake_quant 0:classmethodp*¨
+from_referenceBtorch.ao.nn.quantized.modules.conv._ConvTransposeNd.from_reference*
+cls*
+
+ref_qconvt*
+output_scale*
+output_zero_point0:staticmethodhrv
+_FLOAT_MODULEAtorch.ao.nn.quantized.modules.conv._ConvTransposeNd._FLOAT_MODULE"
+builtins.object"builtins.objectÀ
+ConvTranspose1d2torch.ao.nn.quantized.modules.conv.ConvTranspose1d"3torch.ao.nn.quantized.modules.conv._ConvTransposeNd*‘
+__init__;torch.ao.nn.quantized.modules.conv.ConvTranspose1d.__init__*
+self*
+in_channels*
+out_channels*
+kernel_size*
+stride *
+padding *
+output_padding *
+groups *
+
+bias *
+dilation *
+padding_mode *
+device *
+dtype *S
+	_get_name<torch.ao.nn.quantized.modules.conv.ConvTranspose1d._get_name*
+self*í
+set_weight_biasBtorch.ao.nn.quantized.modules.conv.ConvTranspose1d.set_weight_bias"
+None*r
+selfh
+2torch.ao.nn.quantized.modules.conv.ConvTranspose1d"2torch.ao.nn.quantized.modules.conv.ConvTranspose1d*3
+w,
+torch._tensor.Tensor"torch._tensor.Tensor*c
+b\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None*Y
+_weight_bias?torch.ao.nn.quantized.modules.conv.ConvTranspose1d._weight_bias*
+self*M
+weight9torch.ao.nn.quantized.modules.conv.ConvTranspose1d.weight*
+self*I
+bias7torch.ao.nn.quantized.modules.conv.ConvTranspose1d.bias*
+self*Z
+forward:torch.ao.nn.quantized.modules.conv.ConvTranspose1d.forward*
+self*	
+input*¦
+from_referenceAtorch.ao.nn.quantized.modules.conv.ConvTranspose1d.from_reference*
+cls*
+
+ref_qconvt*
+output_scale*
+output_zero_point0:classmethodpr’
+_FLOAT_MODULE@torch.ao.nn.quantized.modules.conv.ConvTranspose1d._FLOAT_MODULE?
+CallableType[builtins.type]
+builtins.type"builtins.typer\
+_packed_paramsAtorch.ao.nn.quantized.modules.conv.ConvTranspose1d._packed_params
+AnyÀ
+ConvTranspose2d2torch.ao.nn.quantized.modules.conv.ConvTranspose2d"3torch.ao.nn.quantized.modules.conv._ConvTransposeNd*‘
+__init__;torch.ao.nn.quantized.modules.conv.ConvTranspose2d.__init__*
+self*
+in_channels*
+out_channels*
+kernel_size*
+stride *
+padding *
+output_padding *
+groups *
+
+bias *
+dilation *
+padding_mode *
+device *
+dtype *S
+	_get_name<torch.ao.nn.quantized.modules.conv.ConvTranspose2d._get_name*
+self*í
+set_weight_biasBtorch.ao.nn.quantized.modules.conv.ConvTranspose2d.set_weight_bias"
+None*r
+selfh
+2torch.ao.nn.quantized.modules.conv.ConvTranspose2d"2torch.ao.nn.quantized.modules.conv.ConvTranspose2d*3
+w,
+torch._tensor.Tensor"torch._tensor.Tensor*c
+b\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None*Y
+_weight_bias?torch.ao.nn.quantized.modules.conv.ConvTranspose2d._weight_bias*
+self*M
+weight9torch.ao.nn.quantized.modules.conv.ConvTranspose2d.weight*
+self*I
+bias7torch.ao.nn.quantized.modules.conv.ConvTranspose2d.bias*
+self*Z
+forward:torch.ao.nn.quantized.modules.conv.ConvTranspose2d.forward*
+self*	
+input*¦
+from_referenceAtorch.ao.nn.quantized.modules.conv.ConvTranspose2d.from_reference*
+cls*
+
+ref_qconvt*
+output_scale*
+output_zero_point0:classmethodpr’
+_FLOAT_MODULE@torch.ao.nn.quantized.modules.conv.ConvTranspose2d._FLOAT_MODULE?
+CallableType[builtins.type]
+builtins.type"builtins.typer\
+_packed_paramsAtorch.ao.nn.quantized.modules.conv.ConvTranspose2d._packed_params
+AnyÀ
+ConvTranspose3d2torch.ao.nn.quantized.modules.conv.ConvTranspose3d"3torch.ao.nn.quantized.modules.conv._ConvTransposeNd*‘
+__init__;torch.ao.nn.quantized.modules.conv.ConvTranspose3d.__init__*
+self*
+in_channels*
+out_channels*
+kernel_size*
+stride *
+padding *
+output_padding *
+groups *
+
+bias *
+dilation *
+padding_mode *
+device *
+dtype *S
+	_get_name<torch.ao.nn.quantized.modules.conv.ConvTranspose3d._get_name*
+self*í
+set_weight_biasBtorch.ao.nn.quantized.modules.conv.ConvTranspose3d.set_weight_bias"
+None*r
+selfh
+2torch.ao.nn.quantized.modules.conv.ConvTranspose3d"2torch.ao.nn.quantized.modules.conv.ConvTranspose3d*3
+w,
+torch._tensor.Tensor"torch._tensor.Tensor*c
+b\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None*Y
+_weight_bias?torch.ao.nn.quantized.modules.conv.ConvTranspose3d._weight_bias*
+self*M
+weight9torch.ao.nn.quantized.modules.conv.ConvTranspose3d.weight*
+self*I
+bias7torch.ao.nn.quantized.modules.conv.ConvTranspose3d.bias*
+self*Z
+forward:torch.ao.nn.quantized.modules.conv.ConvTranspose3d.forward*
+self*	
+input*¦
+from_referenceAtorch.ao.nn.quantized.modules.conv.ConvTranspose3d.from_reference*
+cls*
+
+ref_qconvt*
+output_scale*
+output_zero_point0:classmethodpr’
+_FLOAT_MODULE@torch.ao.nn.quantized.modules.conv.ConvTranspose3d._FLOAT_MODULE?
+CallableType[builtins.type]
+builtins.type"builtins.typer\
+_packed_paramsAtorch.ao.nn.quantized.modules.conv.ConvTranspose3d._packed_params
+Anyú
+_reverse_repeat_padding:torch.ao.nn.quantized.modules.conv._reverse_repeat_padding"J
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*W
+paddingJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*ž
+__annotations__2torch.ao.nn.quantized.modules.conv.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*
+nntorch.nn *
+Ftorch.nn.functional *
+nnitorch.ao.nn.intrinsic *%
+nniqattorch.ao.nn.intrinsic.qat *
+__all__*torch.ao.nn.quantized.modules.conv.__all__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*•
+_SUPPORTED_PADDING5torch.ao.nn.quantized.modules.conv._SUPPORTED_PADDINGH
+builtins.set[builtins.str]
+builtins.str"builtins.str"builtins.set

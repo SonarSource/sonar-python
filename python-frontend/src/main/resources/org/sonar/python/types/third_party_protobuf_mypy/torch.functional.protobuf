@@ -1,0 +1,356 @@
+
+torch.functional3
+overloadtorch._jit_internal._overload*
+funcD
+broadcast_tensors"torch.functional.broadcast_tensors*
+tensorsA
+broadcast_shapes!torch.functional.broadcast_shapes*
+
+shapes•
+splittorch.functional.split"d
+$builtins.tuple[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.tuple*8
+tensor,
+torch._tensor.Tensor"torch._tensor.Tensor*∫
+split_size_or_sectionsù
+/Union[builtins.int,builtins.list[builtins.int]]
+builtins.int"builtins.intJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*'
+dim
+builtins.int"builtins.int b
+einsumtorch.functional.einsum",
+torch._tensor.Tensor"torch._tensor.Tensor*
+args
+Any«
+meshgridtorch.functional.meshgrid"d
+$builtins.tuple[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.tuple*„
+tensors’
+?Union[torch._tensor.Tensor,builtins.list[torch._tensor.Tensor]],
+torch._tensor.Tensor"torch._tensor.Tensorb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*T
+indexingD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None ö
+	_meshgridtorch.functional._meshgrid"
+Any*
+tensors
+Any*R
+indexingD
+Union[builtins.str,None]
+builtins.str"builtins.str
+Noneè
+stfttorch.functional.stft",
+torch._tensor.Tensor"torch._tensor.Tensor*7
+input,
+torch._tensor.Tensor"torch._tensor.Tensor*'
+n_fft
+builtins.int"builtins.int*V
+
+hop_lengthD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *V
+
+win_lengthD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *j
+window\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None *,
+center
+builtins.bool"builtins.bool *,
+pad_mode
+builtins.str"builtins.str *0
+
+normalized
+builtins.bool"builtins.bool *W
+onesidedG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *]
+return_complexG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None ê
+_unique_impltorch.functional._unique_impl">
+TypeAlias[Any]
+Any"!torch.functional._unique_impl_out*7
+input,
+torch._tensor.Tensor"torch._tensor.Tensor*,
+sorted
+builtins.bool"builtins.bool *4
+return_inverse
+builtins.bool"builtins.bool *3
+return_counts
+builtins.bool"builtins.bool *O
+dimD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None ˙
+_unique_consecutive_impl)torch.functional._unique_consecutive_impl">
+TypeAlias[Any]
+Any"!torch.functional._unique_impl_out*7
+input,
+torch._tensor.Tensor"torch._tensor.Tensor*4
+return_inverse
+builtins.bool"builtins.bool *3
+return_counts
+builtins.bool"builtins.bool *O
+dimD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None Á
+_return_countstorch.functional._return_counts"ê
+0Tuple[torch._tensor.Tensor,torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor,
+torch._tensor.Tensor"torch._tensor.Tensor*7
+input,
+torch._tensor.Tensor"torch._tensor.Tensor*,
+sorted
+builtins.bool"builtins.bool *4
+return_inverse
+builtins.bool"builtins.bool *3
+return_counts
+builtins.bool"builtins.bool *O
+dimD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None Ç
+_return_outputtorch.functional._return_output",
+torch._tensor.Tensor"torch._tensor.Tensor*7
+input,
+torch._tensor.Tensor"torch._tensor.Tensor*,
+sorted
+builtins.bool"builtins.bool *4
+return_inverse
+builtins.bool"builtins.bool *3
+return_counts
+builtins.bool"builtins.bool *O
+dimD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None È
+_return_inverse torch.functional._return_inverse"ê
+0Tuple[torch._tensor.Tensor,torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor,
+torch._tensor.Tensor"torch._tensor.Tensor*7
+input,
+torch._tensor.Tensor"torch._tensor.Tensor*,
+sorted
+builtins.bool"builtins.bool *4
+return_inverse
+builtins.bool"builtins.bool *3
+return_counts
+builtins.bool"builtins.bool *O
+dimD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None —
+_consecutive_return_counts+torch.functional._consecutive_return_counts"ê
+0Tuple[torch._tensor.Tensor,torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor,
+torch._tensor.Tensor"torch._tensor.Tensor*7
+input,
+torch._tensor.Tensor"torch._tensor.Tensor*4
+return_inverse
+builtins.bool"builtins.bool *3
+return_counts
+builtins.bool"builtins.bool *O
+dimD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None Ï
+_consecutive_return_output+torch.functional._consecutive_return_output",
+torch._tensor.Tensor"torch._tensor.Tensor*7
+input,
+torch._tensor.Tensor"torch._tensor.Tensor*4
+return_inverse
+builtins.bool"builtins.bool *3
+return_counts
+builtins.bool"builtins.bool *O
+dimD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None ”
+_consecutive_return_inverse,torch.functional._consecutive_return_inverse"ê
+0Tuple[torch._tensor.Tensor,torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor,
+torch._tensor.Tensor"torch._tensor.Tensor*7
+input,
+torch._tensor.Tensor"torch._tensor.Tensor*4
+return_inverse
+builtins.bool"builtins.bool *3
+return_counts
+builtins.bool"builtins.bool *O
+dimD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None Œ
+	tensordottorch.functional.tensordot"
+Any*
+a
+Any*
+b
+Any*
+dims
+Any *g
+out\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None ö
+cartesian_prodtorch.functional.cartesian_prod",
+torch._tensor.Tensor"torch._tensor.Tensor*9
+tensors,
+torch._tensor.Tensor"torch._tensor.Tensor6
+
+block_diagtorch.functional.block_diag*
+tensorsñ
+cdisttorch.functional.cdist",
+torch._tensor.Tensor"torch._tensor.Tensor*4
+x1,
+torch._tensor.Tensor"torch._tensor.Tensor*4
+x2,
+torch._tensor.Tensor"torch._tensor.Tensor*)
+p 
+builtins.float"builtins.float *0
+compute_mode
+builtins.str"builtins.str 6
+
+atleast_1dtorch.functional.atleast_1d*
+tensors6
+
+atleast_2dtorch.functional.atleast_2d*
+tensors6
+
+atleast_3dtorch.functional.atleast_3d*
+tensorsê
+normtorch.functional.norm"
+Any*
+input
+Any*~
+pu
+'Union[builtins.float,builtins.str,None] 
+builtins.float"builtins.float
+builtins.str"builtins.str
+None *
+dim
+Any *
+keepdim
+Any *
+out
+Any *
+dtype
+Any ∞
+unravel_indextorch.functional.unravel_index"d
+$builtins.tuple[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.tuple*9
+indices,
+torch._tensor.Tensor"torch._tensor.Tensor*›
+shape—
+?Union[builtins.int,typing.Sequence[builtins.int],torch._C.Size]
+builtins.int"builtins.intN
+typing.Sequence[builtins.int]
+builtins.int"builtins.int"typing.Sequence
+torch._C.Size"torch._C.SizeÃ
+_unravel_indextorch.functional._unravel_index",
+torch._tensor.Tensor"torch._tensor.Tensor*9
+indices,
+torch._tensor.Tensor"torch._tensor.Tensor*Ø
+shape£
+1Union[builtins.int,typing.Sequence[builtins.int]]
+builtins.int"builtins.intN
+typing.Sequence[builtins.int]
+builtins.int"builtins.int"typing.SequenceF
+chain_matmultorch.functional.chain_matmul*
+matrices*	
+out ¢
+_lu_impltorch.functional._lu_impl"”
+ETuple[torch._tensor.Tensor,torch._tensor.Tensor,torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor,
+torch._tensor.Tensor"torch._tensor.Tensor,
+torch._tensor.Tensor"torch._tensor.Tensor*3
+A,
+torch._tensor.Tensor"torch._tensor.Tensor*+
+pivot
+builtins.bool"builtins.bool */
+	get_infos
+builtins.bool"builtins.bool *
+out
+Any ﬂ
+_check_list_size!torch.functional._check_list_size"
+None*)
+out_len
+builtins.int"builtins.int*-
+	get_infos
+builtins.bool"builtins.bool*√
+outπ
+0TypeAlias[typing.Sequence[torch._tensor.Tensor]]f
+%typing.Sequence[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"typing.Sequence"torch.functional._ListOrSeqﬁ
+_lu_with_infostorch.functional._lu_with_infos"”
+ETuple[torch._tensor.Tensor,torch._tensor.Tensor,torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor,
+torch._tensor.Tensor"torch._tensor.Tensor,
+torch._tensor.Tensor"torch._tensor.Tensor*3
+A,
+torch._tensor.Tensor"torch._tensor.Tensor*+
+pivot
+builtins.bool"builtins.bool */
+	get_infos
+builtins.bool"builtins.bool *¡
+outµ
+QUnion[Tuple[torch._tensor.Tensor,torch._tensor.Tensor,torch._tensor.Tensor],None]”
+ETuple[torch._tensor.Tensor,torch._tensor.Tensor,torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor,
+torch._tensor.Tensor"torch._tensor.Tensor,
+torch._tensor.Tensor"torch._tensor.Tensor
+None ø
+_lu_no_infostorch.functional._lu_no_infos"ê
+0Tuple[torch._tensor.Tensor,torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor,
+torch._tensor.Tensor"torch._tensor.Tensor*3
+A,
+torch._tensor.Tensor"torch._tensor.Tensor*+
+pivot
+builtins.bool"builtins.bool */
+	get_infos
+builtins.bool"builtins.bool *È
+out›
+<Union[Tuple[torch._tensor.Tensor,torch._tensor.Tensor],None]ê
+0Tuple[torch._tensor.Tensor,torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor,
+torch._tensor.Tensor"torch._tensor.Tensor
+None <
+align_tensorstorch.functional.align_tensors*
+tensors*å
+__annotations__ torch.functional.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*
+Ftorch.nn.functional *o
+__all__torch.functional.__all__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*l
+istfttorch.functional.istftK
+CallableType[builtins.function]&
+builtins.function"builtins.function*H
+_return_inverse_false&torch.functional._return_inverse_false
+Any*F
+_return_inverse_true%torch.functional._return_inverse_true
+Any**
+uniquetorch.functional.unique
+Any*`
+!_consecutive_return_inverse_false2torch.functional._consecutive_return_inverse_false
+Any*^
+ _consecutive_return_inverse_true1torch.functional._consecutive_return_inverse_true
+Any*B
+unique_consecutive#torch.functional.unique_consecutive
+Any*"
+lutorch.functional.lu
+Any

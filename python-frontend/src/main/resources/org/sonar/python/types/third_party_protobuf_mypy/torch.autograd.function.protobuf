@@ -1,0 +1,247 @@
+
+torch.autograd.function¹
+FunctionCtx#torch.autograd.function.FunctionCtx"builtins.object*ä
+save_for_backward5torch.autograd.function.FunctionCtx.save_for_backward"
+Any*T
+selfJ
+#torch.autograd.function.FunctionCtx"#torch.autograd.function.FunctionCtx*9
+tensors,
+torch._tensor.Tensor"torch._tensor.Tensor*â
+save_for_forward4torch.autograd.function.FunctionCtx.save_for_forward"
+Any*T
+selfJ
+#torch.autograd.function.FunctionCtx"#torch.autograd.function.FunctionCtx*9
+tensors,
+torch._tensor.Tensor"torch._tensor.Tensor*Ó
+
+mark_dirty.torch.autograd.function.FunctionCtx.mark_dirty"
+Any*T
+selfJ
+#torch.autograd.function.FunctionCtx"#torch.autograd.function.FunctionCtx*6
+args,
+torch._tensor.Tensor"torch._tensor.Tensor*e
+mark_shared_storage7torch.autograd.function.FunctionCtx.mark_shared_storage*
+self*	
+pairs0*í
+mark_non_differentiable;torch.autograd.function.FunctionCtx.mark_non_differentiable"
+Any*T
+selfJ
+#torch.autograd.function.FunctionCtx"#torch.autograd.function.FunctionCtx*6
+args,
+torch._tensor.Tensor"torch._tensor.Tensor*Ü
+set_materialize_grads9torch.autograd.function.FunctionCtx.set_materialize_grads"
+Any*T
+selfJ
+#torch.autograd.function.FunctionCtx"#torch.autograd.function.FunctionCtx*)
+value
+builtins.bool"builtins.boolrœ
+to_save+torch.autograd.function.FunctionCtx.to_saved
+$builtins.tuple[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.tupler°
+saved_for_forward5torch.autograd.function.FunctionCtx.saved_for_forwardd
+$builtins.tuple[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.tupler¨
+dirty_tensors1torch.autograd.function.FunctionCtx.dirty_tensorsd
+$builtins.tuple[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.tupler²
+non_differentiable6torch.autograd.function.FunctionCtx.non_differentiabled
+$builtins.tuple[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.tuplerj
+materialize_grads5torch.autograd.function.FunctionCtx.materialize_grads
+builtins.bool"builtins.bool¶
+
+_HookMixin"torch.autograd.function._HookMixin"builtins.object*s
+_register_hook1torch.autograd.function._HookMixin._register_hook*
+backward_hooks*
+hook0:staticmethodh©
+BackwardCFunction)torch.autograd.function.BackwardCFunction"torch._C._FunctionBase"#torch.autograd.function.FunctionCtx""torch.autograd.function._HookMixin*L
+apply/torch.autograd.function.BackwardCFunction.apply*
+self*
+args*T
+	apply_jvp3torch.autograd.function.BackwardCFunction.apply_jvp*
+self*
+args*d
+_compiled_autograd_key@torch.autograd.function.BackwardCFunction._compiled_autograd_key*
+selfõ
+FunctionMeta$torch.autograd.function.FunctionMeta"builtins.type*b
+__init__-torch.autograd.function.FunctionMeta.__init__*
+cls*
+name*	
+bases*	
+attrsrL
+_backward_cls2torch.autograd.function.FunctionMeta._backward_cls
+Any±
+_SingleLevelFunction,torch.autograd.function._SingleLevelFunction"torch._C._FunctionBase"#torch.autograd.function.FunctionCtx""torch.autograd.function._HookMixin*‚
+forward4torch.autograd.function._SingleLevelFunction.forward"
+Any*
+args
+Any*
+kwargs
+Any0:staticmethodh*É
+setup_context:torch.autograd.function._SingleLevelFunction.setup_context"
+Any*
+ctx
+Any*:
+inputs.
+builtins.tuple[Any]
+Any"builtins.tuple*
+output
+Any0:staticmethodh*‰
+backward5torch.autograd.function._SingleLevelFunction.backward"
+Any*
+ctx
+Any*
+grad_outputs
+Any0:staticmethodh*~
+jvp0torch.autograd.function._SingleLevelFunction.jvp"
+Any*
+ctx
+Any*
+grad_inputs
+Any0:staticmethodh@b$torch.autograd.function.FunctionMetar„
+vjp0torch.autograd.function._SingleLevelFunction.vjpK
+CallableType[builtins.function]&
+builtins.function"builtins.function¤
+Function torch.autograd.function.Function",torch.autograd.function._SingleLevelFunction*U
+__init__)torch.autograd.function.Function.__init__*
+self*
+args*
+
+kwargs*U
+__call__)torch.autograd.function.Function.__call__*
+self*
+args*
+
+kwargs*`
+vmap%torch.autograd.function.Function.vmap*
+info*
+in_dims*
+args0:staticmethodh*_
+apply&torch.autograd.function.Function.apply*
+cls*
+args*
+
+kwargs0:classmethodp*l
+_compiled_autograd_key7torch.autograd.function.Function._compiled_autograd_key*
+ctx0:staticmethodhri
+generate_vmap_rule3torch.autograd.function.Function.generate_vmap_rule
+builtins.bool"builtins.boolø
+InplaceFunction'torch.autograd.function.InplaceFunction" torch.autograd.function.Function*U
+__init__0torch.autograd.function.InplaceFunction.__init__*
+self*
+inplace rC
+inplace/torch.autograd.function.InplaceFunction.inplace
+AnyË
+NestedIOFunction(torch.autograd.function.NestedIOFunction" torch.autograd.function.Function*X
+_do_forward4torch.autograd.function.NestedIOFunction._do_forward*
+self*	
+input*t
+_do_backward5torch.autograd.function.NestedIOFunction._do_backward*
+self*
+	gradients*
+retain_variables*¾
+backward1torch.autograd.function.NestedIOFunction.backward"
+Any*^
+selfT
+(torch.autograd.function.NestedIOFunction"(torch.autograd.function.NestedIOFunction*
+	gradients
+Any*·
+forward0torch.autograd.function.NestedIOFunction.forward"
+Any*^
+selfT
+(torch.autograd.function.NestedIOFunction"(torch.autograd.function.NestedIOFunction*
+args
+Any*Ì
+save_for_backward:torch.autograd.function.NestedIOFunction.save_for_backward"
+None*^
+selfT
+(torch.autograd.function.NestedIOFunction"(torch.autograd.function.NestedIOFunction*
+args
+Any*_
+saved_tensors6torch.autograd.function.NestedIOFunction.saved_tensors*
+self0:property`*Ó
+
+mark_dirty3torch.autograd.function.NestedIOFunction.mark_dirty"
+None*^
+selfT
+(torch.autograd.function.NestedIOFunction"(torch.autograd.function.NestedIOFunction*
+args
+Any*
+kwargs
+Any*í
+mark_non_differentiable@torch.autograd.function.NestedIOFunction.mark_non_differentiable"
+None*^
+selfT
+(torch.autograd.function.NestedIOFunction"(torch.autograd.function.NestedIOFunction*
+args
+Any*
+kwargs
+Any*Ë
+forward_extended9torch.autograd.function.NestedIOFunction.forward_extended"
+None*^
+selfT
+(torch.autograd.function.NestedIOFunction"(torch.autograd.function.NestedIOFunction*
+input
+Any*Ó
+backward_extended:torch.autograd.function.NestedIOFunction.backward_extended"
+None*^
+selfT
+(torch.autograd.function.NestedIOFunction"(torch.autograd.function.NestedIOFunction*
+grad_output
+AnyrŠ
+__call__1torch.autograd.function.NestedIOFunction.__call__K
+CallableType[builtins.function]&
+builtins.function"builtins.functionrP
+_nested_input6torch.autograd.function.NestedIOFunction._nested_input
+AnyrV
+retain_variables9torch.autograd.function.NestedIOFunction.retain_variables
+AnyrR
+_nested_output7torch.autograd.function.NestedIOFunction._nested_output
+Anyr{
+_to_save_nested8torch.autograd.function.NestedIOFunction._to_save_nested.
+builtins.tuple[Any]
+Any"builtins.tupleV
+_is_setup_context_defined1torch.autograd.function._is_setup_context_defined*
+fnJ
+once_differentiable+torch.autograd.function.once_differentiable*
+fn^
+_nested_map#torch.autograd.function._nested_map*
+	condition*
+fn*
+condition_msg Q
+_jit_unwrap_structured.torch.autograd.function._jit_unwrap_structured*
+obj
+_iter_filter$torch.autograd.function._iter_filter*
+	condition*
+allow_unknown *
+condition_msg *
+
+conversion F
+
+_unflatten"torch.autograd.function._unflatten*	
+input*	
+proto*“
+__annotations__'torch.autograd.function.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*
+_Ctorch._C * 
+
+_functorchtorch._functorch *
+hookstorch.utils.hooks *v
+__all__torch.autograd.function.__all__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*ž
+AUTOGRAD_FUNCTION_COUNTER1torch.autograd.function.AUTOGRAD_FUNCTION_COUNTERN
+itertools.count[builtins.int]
+builtins.int"builtins.int"itertools.count*E
+_iter_jit_values(torch.autograd.function._iter_jit_values
+Any*?
+_iter_tensors%torch.autograd.function._iter_tensors
+Any*U
+_iter_tensors_permissive0torch.autograd.function._iter_tensors_permissive
+Any*I
+_iter_None_tensors*torch.autograd.function._iter_None_tensors
+Any*E
+_map_tensor_data(torch.autograd.function._map_tensor_data
+Any

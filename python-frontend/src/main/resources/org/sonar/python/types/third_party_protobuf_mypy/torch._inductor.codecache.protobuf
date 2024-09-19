@@ -1,0 +1,1338 @@
+
+torch._inductor.codecacheˆ
+
+	CacheBase#torch._inductor.codecache.CacheBase"builtins.object*ß
+
+get_system.torch._inductor.codecache.CacheBase.get_system"W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict0:staticmethodh*ü
+get_local_cache_path8torch._inductor.codecache.CacheBase.get_local_cache_path"
+pathlib.Path"pathlib.Path0:staticmethod:clear_on_fresh_inductor_cacheh*™
+get_global_cache_path9torch._inductor.codecache.CacheBase.get_global_cache_path"D
+Union[pathlib.Path,None]
+pathlib.Path"pathlib.Path
+None0:staticmethodh*ò
+__init__,torch._inductor.codecache.CacheBase.__init__"
+None*T
+selfJ
+#torch._inductor.codecache.CacheBase"#torch._inductor.codecache.CacheBase*ı
+get_local_cache3torch._inductor.codecache.CacheBase.get_local_cache"W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*T
+selfJ
+#torch._inductor.codecache.CacheBase"#torch._inductor.codecache.CacheBase*ñ
+update_local_cache6torch._inductor.codecache.CacheBase.update_local_cache"
+None*T
+selfJ
+#torch._inductor.codecache.CacheBase"#torch._inductor.codecache.CacheBase*h
+local_cacheW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dictrç
+system*torch._inductor.codecache.CacheBase.systemW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dictÄ
+
+LocalCache$torch._inductor.codecache.LocalCache"#torch._inductor.codecache.CacheBase* 
+lookup+torch._inductor.codecache.LocalCache.lookup"í
++Union[builtins.dict[builtins.str,Any],None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None*V
+selfL
+$torch._inductor.codecache.LocalCache"$torch._inductor.codecache.LocalCache*&
+keys
+builtins.str"builtins.str*Ÿ
+	set_value.torch._inductor.codecache.LocalCache.set_value"
+None*V
+selfL
+$torch._inductor.codecache.LocalCache"$torch._inductor.codecache.LocalCache*&
+keys
+builtins.str"builtins.str*
+value
+Anyê
+PersistentCache)torch._inductor.codecache.PersistentCache"#torch._inductor.codecache.CacheBase*Z
+get_global_cache:torch._inductor.codecache.PersistentCache.get_global_cache*
+self0*–
+lookup0torch._inductor.codecache.PersistentCache.lookup"¥
+=builtins.dict[torch._inductor.ir.ChoiceCaller,builtins.float]B
+torch._inductor.ir.ChoiceCaller"torch._inductor.ir.ChoiceCaller 
+builtins.float"builtins.float"builtins.dict*`
+selfV
+)torch._inductor.codecache.PersistentCache")torch._inductor.codecache.PersistentCache*ë
+choicesÉ
+.builtins.list[torch._inductor.ir.ChoiceCaller]B
+torch._inductor.ir.ChoiceCaller"torch._inductor.ir.ChoiceCaller"builtins.list*$
+op
+builtins.str"builtins.str*(
+inputs
+builtins.str"builtins.str*ñ
+	benchmarkÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+NoneÛ
+TensorMetadataAndValues1torch._inductor.codecache.TensorMetadataAndValues"builtins.object*Ô
+__init__:torch._inductor.codecache.TensorMetadataAndValues.__init__"
+None*p
+selff
+1torch._inductor.codecache.TensorMetadataAndValues"1torch._inductor.codecache.TensorMetadataAndValues*q
+tensor_metadata\
+,torch._subclasses.fake_tensor.TensorMetadata",torch._subclasses.fake_tensor.TensorMetadata*8
+values,
+builtins.list[Any]
+Any"builtins.list8r≤
+tensor_metadataAtorch._inductor.codecache.TensorMetadataAndValues.tensor_metadata\
+,torch._subclasses.fake_tensor.TensorMetadata",torch._subclasses.fake_tensor.TensorMetadatarp
+values8torch._inductor.codecache.TensorMetadataAndValues.values,
+builtins.list[Any]
+Any"builtins.listr¯
+__dataclass_fields__Ftorch._inductor.codecache.TensorMetadataAndValues.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictÚ	
+FxGraphCachePickler-torch._inductor.codecache.FxGraphCachePickler"pickle.Pickler*´
+dumps3torch._inductor.codecache.FxGraphCachePickler.dumps" 
+builtins.bytes"builtins.bytes*ß
+clsù
+3Type[torch._inductor.codecache.FxGraphCachePickler]^
+-torch._inductor.codecache.FxGraphCachePickler"-torch._inductor.codecache.FxGraphCachePickler"type*
+obj
+Any0:classmethodp*≠
+get_hash6torch._inductor.codecache.FxGraphCachePickler.get_hash"
+builtins.str"builtins.str*ß
+clsù
+3Type[torch._inductor.codecache.FxGraphCachePickler]^
+-torch._inductor.codecache.FxGraphCachePickler"-torch._inductor.codecache.FxGraphCachePickler"type*
+obj
+Any0:classmethodp*Ø
+	debug_str7torch._inductor.codecache.FxGraphCachePickler.debug_str"
+builtins.str"builtins.str*ß
+clsù
+3Type[torch._inductor.codecache.FxGraphCachePickler]^
+-torch._inductor.codecache.FxGraphCachePickler"-torch._inductor.codecache.FxGraphCachePickler"type*
+inp
+Any0:classmethodprã
+dispatch_table<torch._inductor.codecache.FxGraphCachePickler.dispatch_table∫
+<builtins.dict[builtins.type,CallableType[builtins.function]]
+builtins.type"builtins.typeK
+CallableType[builtins.function]&
+builtins.function"builtins.function"builtins.dictó
+OrderedSetHolder*torch._inductor.codecache.OrderedSetHolder"builtins.object*Ê
+__init__3torch._inductor.codecache.OrderedSetHolder.__init__"
+None*b
+selfX
+*torch._inductor.codecache.OrderedSetHolder"*torch._inductor.codecache.OrderedSetHolder*7
+items,
+builtins.list[Any]
+Any"builtins.list8rg
+items0torch._inductor.codecache.OrderedSetHolder.items,
+builtins.list[Any]
+Any"builtins.listrÒ
+__dataclass_fields__?torch._inductor.codecache.OrderedSetHolder.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictV
+BypassFxGraphCache,torch._inductor.codecache.BypassFxGraphCache"builtins.Exception¬
+FxGraphHashDetails,torch._inductor.codecache.FxGraphHashDetails"builtins.object*»
+__init__5torch._inductor.codecache.FxGraphHashDetails.__init__"
+None*f
+self\
+,torch._inductor.codecache.FxGraphHashDetails",torch._inductor.codecache.FxGraphHashDetails*N
+gmF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*v
+example_inputsb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*f
+	fx_kwargsW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*c
+inputs_to_checkN
+typing.Sequence[builtins.int]
+builtins.int"builtins.int"typing.Sequence*…
+	debug_str6torch._inductor.codecache.FxGraphHashDetails.debug_str"
+builtins.str"builtins.str*f
+self\
+,torch._inductor.codecache.FxGraphHashDetails",torch._inductor.codecache.FxGraphHashDetailsrõ
+EXCLUDED_KWARGS<torch._inductor.codecache.FxGraphHashDetails.EXCLUDED_KWARGSJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.listr}
+gm/torch._inductor.codecache.FxGraphHashDetails.gmF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModuler±
+example_inputs;torch._inductor.codecache.FxGraphHashDetails.example_inputsb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.listrï
+	fx_kwargs6torch._inductor.codecache.FxGraphHashDetails.fx_kwargsœ
+Fbuiltins.dict[builtins.str,torch._inductor.codecache.OrderedSetHolder]
+builtins.str"builtins.strX
+*torch._inductor.codecache.OrderedSetHolder"*torch._inductor.codecache.OrderedSetHolder"builtins.dictrü
+inputs_to_check<torch._inductor.codecache.FxGraphHashDetails.inputs_to_checkN
+typing.Sequence[builtins.int]
+builtins.int"builtins.int"typing.SequencerË
+!deterministic_algorithms_settingsNtorch._inductor.codecache.FxGraphHashDetails.deterministic_algorithms_settingss
+&Tuple[builtins.bool,builtins.bool,Any]
+builtins.bool"builtins.bool
+builtins.bool"builtins.bool
+Anyrå
+cuda_matmul_settingsAtorch._inductor.codecache.FxGraphHashDetails.cuda_matmul_settings1
+Tuple[Any,Any,Any]
+Any
+Any
+AnyrT
+torch_version:torch._inductor.codecache.FxGraphHashDetails.torch_version
+Anyr†
+system_info8torch._inductor.codecache.FxGraphHashDetails.system_infoW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dictrX
+inductor_config<torch._inductor.codecache.FxGraphHashDetails.inductor_config
+Any˛
+FxGraphCache&torch._inductor.codecache.FxGraphCache"builtins.object*s
+_get_tmp_dir3torch._inductor.codecache.FxGraphCache._get_tmp_dir"
+builtins.str"builtins.str0:staticmethodh*™
+_get_tmp_dir_for_key;torch._inductor.codecache.FxGraphCache._get_tmp_dir_for_key"
+builtins.str"builtins.str*%
+key
+builtins.str"builtins.str0:staticmethodh*Ô
+_filter_backed_symints=torch._inductor.codecache.FxGraphCache._filter_backed_symints"J
+builtins.list[torch.SymInt]
+torch.SymInt"torch.SymInt"builtins.list*8
+inputs,
+builtins.list[Any]
+Any"builtins.list0:staticmethodh*Ü
+_get_shape_env5torch._inductor.codecache.FxGraphCache._get_shape_env"™
+:Union[torch.fx.experimental.symbolic_shapes.ShapeEnv,None]`
+.torch.fx.experimental.symbolic_shapes.ShapeEnv".torch.fx.experimental.symbolic_shapes.ShapeEnv
+None0:staticmethodh*√
+_lookup_graph4torch._inductor.codecache.FxGraphCache._lookup_graph"õ
+5Union[torch._inductor.codecache.CompiledFxGraph,None]V
+)torch._inductor.codecache.CompiledFxGraph")torch._inductor.codecache.CompiledFxGraph
+None*%
+key
+builtins.str"builtins.str*v
+example_inputsb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*
+local
+Any*
+remote_cache
+Any0:staticmethodh*≤
+_save_graph2torch._inductor.codecache.FxGraphCache._save_graph"
+Any*%
+key
+builtins.str"builtins.str*j
+compiled_graphV
+)torch._inductor.codecache.CompiledFxGraph")torch._inductor.codecache.CompiledFxGraph*v
+example_inputsb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*
+time_taken_ns
+Any*
+local
+Any*
+remote_cache
+Any0:staticmethodh*∂
+_check_can_cache7torch._inductor.codecache.FxGraphCache._check_can_cache"
+Any*N
+gmF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule0:staticmethodh*ö
+load+torch._inductor.codecache.FxGraphCache.load"
+Any*^
+compile_fx_fnK
+CallableType[builtins.function]&
+builtins.function"builtins.function*N
+gmF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*v
+example_inputsb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*f
+	fx_kwargsW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*c
+inputs_to_checkN
+typing.Sequence[builtins.int]
+builtins.int"builtins.int"typing.Sequence*)
+local
+builtins.bool"builtins.bool**
+remote
+builtins.bool"builtins.bool0:staticmethodh*G
+clear,torch._inductor.codecache.FxGraphCache.clear0:staticmethodhﬁ 
+CompiledFxGraph)torch._inductor.codecache.CompiledFxGraph"builtins.object*ﬁ
+__init__2torch._inductor.codecache.CompiledFxGraph.__init__"
+None*`
+selfV
+)torch._inductor.codecache.CompiledFxGraph")torch._inductor.codecache.CompiledFxGraph*ù
+current_callableÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None*U
+graphJ
+#torch._inductor.graph.GraphLowering"#torch._inductor.graph.GraphLowering*‰
+output_stridesœ
+7builtins.list[Union[builtins.tuple[builtins.int],None]]Ñ
+(Union[builtins.tuple[builtins.int],None]L
+builtins.tuple[builtins.int]
+builtins.int"builtins.int"builtins.tuple
+None"builtins.list*d
+disabled_cudagraphs_reasonD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*n
+metrics_deltasZ
++torch._inductor.metrics.CachedMetricsDeltas"+torch._inductor.metrics.CachedMetricsDeltas*„
+__call__2torch._inductor.codecache.CompiledFxGraph.__call__"
+Any*`
+selfV
+)torch._inductor.codecache.CompiledFxGraph")torch._inductor.codecache.CompiledFxGraph*8
+inputs,
+builtins.list[Any]
+Any"builtins.list8r◊
+current_callable:torch._inductor.codecache.CompiledFxGraph.current_callableÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+Noner^
+	cache_key3torch._inductor.codecache.CompiledFxGraph.cache_key
+builtins.str"builtins.strrb
+source_code5torch._inductor.codecache.CompiledFxGraph.source_code
+builtins.str"builtins.strrπ
+cache_linemap7torch._inductor.codecache.CompiledFxGraph.cache_linemapÓ
+;Union[builtins.list[Tuple[builtins.int,builtins.str]],None]¢
+/builtins.list[Tuple[builtins.int,builtins.str]]`
+ Tuple[builtins.int,builtins.str]
+builtins.int"builtins.int
+builtins.str"builtins.str"builtins.list
+Nonerê
+device_types6torch._inductor.codecache.CompiledFxGraph.device_typesH
+builtins.set[builtins.str]
+builtins.str"builtins.str"builtins.setré
+device_idxs5torch._inductor.codecache.CompiledFxGraph.device_idxsH
+builtins.set[builtins.int]
+builtins.int"builtins.int"builtins.setrî
+mutated_inputs8torch._inductor.codecache.CompiledFxGraph.mutated_inputsH
+builtins.set[builtins.str]
+builtins.str"builtins.str"builtins.setrú
+mutated_input_idxs<torch._inductor.codecache.CompiledFxGraph.mutated_input_idxsH
+builtins.set[builtins.int]
+builtins.int"builtins.int"builtins.setr–
+	constants3torch._inductor.codecache.CompiledFxGraph.constantsç
+0builtins.dict[builtins.str,torch._tensor.Tensor]
+builtins.str"builtins.str,
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.dictrÁ
+torchbind_constants=torch._inductor.codecache.CompiledFxGraph.torchbind_constantsê
+1builtins.dict[builtins.str,torch._C.ScriptObject]
+builtins.str"builtins.str.
+torch._C.ScriptObject"torch._C.ScriptObject"builtins.dictr
+output_strides8torch._inductor.codecache.CompiledFxGraph.output_strides£
+CUnion[builtins.list[Union[builtins.tuple[builtins.int],None]],None]œ
+7builtins.list[Union[builtins.tuple[builtins.int],None]]Ñ
+(Union[builtins.tuple[builtins.int],None]L
+builtins.tuple[builtins.int]
+builtins.int"builtins.int"builtins.tuple
+None"builtins.list
+Noner®
+disabled_cudagraphs_reasonDtorch._inductor.codecache.CompiledFxGraph.disabled_cudagraphs_reasonD
+Union[builtins.str,None]
+builtins.str"builtins.str
+Noner¶
+metrics_deltas8torch._inductor.codecache.CompiledFxGraph.metrics_deltasZ
++torch._inductor.metrics.CachedMetricsDeltas"+torch._inductor.metrics.CachedMetricsDeltasrä
+guards_expr5torch._inductor.codecache.CompiledFxGraph.guards_exprD
+Union[builtins.str,None]
+builtins.str"builtins.str
+Nonerç
+_boxed_call5torch._inductor.codecache.CompiledFxGraph._boxed_callG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+Noner
+__dataclass_fields__>torch._inductor.codecache.CompiledFxGraph.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dict∆
+VecISA torch._inductor.codecache.VecISA"builtins.object*•
+	bit_width*torch._inductor.codecache.VecISA.bit_width"
+builtins.int"builtins.int*N
+selfD
+ torch._inductor.codecache.VecISA" torch._inductor.codecache.VecISA*‘
+	nelements*torch._inductor.codecache.VecISA.nelements"
+builtins.int"builtins.int*N
+selfD
+ torch._inductor.codecache.VecISA" torch._inductor.codecache.VecISA*-
+dtype 
+torch._C.dtype"torch._C.dtype *◊
+build_macro,torch._inductor.codecache.VecISA.build_macro"J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*N
+selfD
+ torch._inductor.codecache.VecISA" torch._inductor.codecache.VecISA*≥
+build_arch_flags1torch._inductor.codecache.VecISA.build_arch_flags"
+builtins.str"builtins.str*N
+selfD
+ torch._inductor.codecache.VecISA" torch._inductor.codecache.VecISA*£
+__hash__)torch._inductor.codecache.VecISA.__hash__"
+builtins.int"builtins.int*N
+selfD
+ torch._inductor.codecache.VecISA" torch._inductor.codecache.VecISA*ß
+__bool__)torch._inductor.codecache.VecISA.__bool__"
+builtins.bool"builtins.bool*N
+selfD
+ torch._inductor.codecache.VecISA" torch._inductor.codecache.VecISA0rW
+
+_bit_width+torch._inductor.codecache.VecISA._bit_width
+builtins.int"builtins.intr}
+_macro'torch._inductor.codecache.VecISA._macroJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.listrY
+_arch_flags,torch._inductor.codecache.VecISA._arch_flags
+builtins.str"builtins.strr¬
+_dtype_nelements1torch._inductor.codecache.VecISA._dtype_nelements{
+*builtins.dict[torch._C.dtype,builtins.int] 
+torch._C.dtype"torch._C.dtype
+builtins.int"builtins.int"builtins.dictrU
+	_avx_code*torch._inductor.codecache.VecISA._avx_code
+builtins.str"builtins.strr[
+_avx_py_load-torch._inductor.codecache.VecISA._avx_py_load
+builtins.str"builtins.strŒ
+
+VecNEON!torch._inductor.codecache.VecNEON" torch._inductor.codecache.VecISA*ú
+__str__)torch._inductor.codecache.VecNEON.__str__"
+builtins.str"builtins.str*HF
+!torch._inductor.codecache.VecNEON"!torch._inductor.codecache.VecNEON*Ô
+__init__*torch._inductor.codecache.VecNEON.__init__"
+None*P
+selfF
+!torch._inductor.codecache.VecNEON"!torch._inductor.codecache.VecNEON*[
+__hash__K
+CallableType[builtins.function]&
+builtins.function"builtins.function 8rX
+
+_bit_width,torch._inductor.codecache.VecNEON._bit_width
+builtins.int"builtins.intr~
+_macro(torch._inductor.codecache.VecNEON._macroJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.listrZ
+_arch_flags-torch._inductor.codecache.VecNEON._arch_flags
+builtins.str"builtins.strr√
+_dtype_nelements2torch._inductor.codecache.VecNEON._dtype_nelements{
+*builtins.dict[torch._C.dtype,builtins.int] 
+torch._C.dtype"torch._C.dtype
+builtins.int"builtins.int"builtins.dictrÉ
+__hash__*torch._inductor.codecache.VecNEON.__hash__K
+CallableType[builtins.function]&
+builtins.function"builtins.functionrË
+__dataclass_fields__6torch._inductor.codecache.VecNEON.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictÎ
+
+	VecAVX512#torch._inductor.codecache.VecAVX512" torch._inductor.codecache.VecISA*¢
+__str__+torch._inductor.codecache.VecAVX512.__str__"
+builtins.str"builtins.str*LJ
+#torch._inductor.codecache.VecAVX512"#torch._inductor.codecache.VecAVX512*ı
+__init__,torch._inductor.codecache.VecAVX512.__init__"
+None*T
+selfJ
+#torch._inductor.codecache.VecAVX512"#torch._inductor.codecache.VecAVX512*[
+__hash__K
+CallableType[builtins.function]&
+builtins.function"builtins.function 8rZ
+
+_bit_width.torch._inductor.codecache.VecAVX512._bit_width
+builtins.int"builtins.intrÄ
+_macro*torch._inductor.codecache.VecAVX512._macroJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.listr\
+_arch_flags/torch._inductor.codecache.VecAVX512._arch_flags
+builtins.str"builtins.strr≈
+_dtype_nelements4torch._inductor.codecache.VecAVX512._dtype_nelements{
+*builtins.dict[torch._C.dtype,builtins.int] 
+torch._C.dtype"torch._C.dtype
+builtins.int"builtins.int"builtins.dictrÖ
+__hash__,torch._inductor.codecache.VecAVX512.__hash__K
+CallableType[builtins.function]&
+builtins.function"builtins.functionrÍ
+__dataclass_fields__8torch._inductor.codecache.VecAVX512.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictŒ
+
+VecAVX2!torch._inductor.codecache.VecAVX2" torch._inductor.codecache.VecISA*ú
+__str__)torch._inductor.codecache.VecAVX2.__str__"
+builtins.str"builtins.str*HF
+!torch._inductor.codecache.VecAVX2"!torch._inductor.codecache.VecAVX2*Ô
+__init__*torch._inductor.codecache.VecAVX2.__init__"
+None*P
+selfF
+!torch._inductor.codecache.VecAVX2"!torch._inductor.codecache.VecAVX2*[
+__hash__K
+CallableType[builtins.function]&
+builtins.function"builtins.function 8rX
+
+_bit_width,torch._inductor.codecache.VecAVX2._bit_width
+builtins.int"builtins.intr~
+_macro(torch._inductor.codecache.VecAVX2._macroJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.listrZ
+_arch_flags-torch._inductor.codecache.VecAVX2._arch_flags
+builtins.str"builtins.strr√
+_dtype_nelements2torch._inductor.codecache.VecAVX2._dtype_nelements{
+*builtins.dict[torch._C.dtype,builtins.int] 
+torch._C.dtype"torch._C.dtype
+builtins.int"builtins.int"builtins.dictrÉ
+__hash__*torch._inductor.codecache.VecAVX2.__hash__K
+CallableType[builtins.function]&
+builtins.function"builtins.functionrË
+__dataclass_fields__6torch._inductor.codecache.VecAVX2.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dict˘
+
+
+VecZVECTOR$torch._inductor.codecache.VecZVECTOR" torch._inductor.codecache.VecISA*•
+__str__,torch._inductor.codecache.VecZVECTOR.__str__"
+builtins.str"builtins.str*NL
+$torch._inductor.codecache.VecZVECTOR"$torch._inductor.codecache.VecZVECTOR*¯
+__init__-torch._inductor.codecache.VecZVECTOR.__init__"
+None*V
+selfL
+$torch._inductor.codecache.VecZVECTOR"$torch._inductor.codecache.VecZVECTOR*[
+__hash__K
+CallableType[builtins.function]&
+builtins.function"builtins.function 8r[
+
+_bit_width/torch._inductor.codecache.VecZVECTOR._bit_width
+builtins.int"builtins.intrÅ
+_macro+torch._inductor.codecache.VecZVECTOR._macroJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.listr]
+_arch_flags0torch._inductor.codecache.VecZVECTOR._arch_flags
+builtins.str"builtins.strr∆
+_dtype_nelements5torch._inductor.codecache.VecZVECTOR._dtype_nelements{
+*builtins.dict[torch._C.dtype,builtins.int] 
+torch._C.dtype"torch._C.dtype
+builtins.int"builtins.int"builtins.dictrÜ
+__hash__-torch._inductor.codecache.VecZVECTOR.__hash__K
+CallableType[builtins.function]&
+builtins.function"builtins.functionrÎ
+__dataclass_fields__9torch._inductor.codecache.VecZVECTOR.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictÈ
+InvalidVecISA'torch._inductor.codecache.InvalidVecISA" torch._inductor.codecache.VecISA*Æ
+__str__/torch._inductor.codecache.InvalidVecISA.__str__"
+builtins.str"builtins.str*TR
+'torch._inductor.codecache.InvalidVecISA"'torch._inductor.codecache.InvalidVecISA*∫
+__bool__0torch._inductor.codecache.InvalidVecISA.__bool__"
+builtins.bool"builtins.bool*\
+selfR
+'torch._inductor.codecache.InvalidVecISA"'torch._inductor.codecache.InvalidVecISAr^
+
+_bit_width2torch._inductor.codecache.InvalidVecISA._bit_width
+builtins.int"builtins.intrÑ
+_macro.torch._inductor.codecache.InvalidVecISA._macroJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.listr`
+_arch_flags3torch._inductor.codecache.InvalidVecISA._arch_flags
+builtins.str"builtins.strr…
+_dtype_nelements8torch._inductor.codecache.InvalidVecISA._dtype_nelements{
+*builtins.dict[torch._C.dtype,builtins.int] 
+torch._C.dtype"torch._C.dtype
+builtins.int"builtins.int"builtins.dictrâ
+__hash__0torch._inductor.codecache.InvalidVecISA.__hash__K
+CallableType[builtins.function]&
+builtins.function"builtins.function∞
+CudaKernelParamCache.torch._inductor.codecache.CudaKernelParamCache"builtins.object*’
+set2torch._inductor.codecache.CudaKernelParamCache.set"
+None*™
+cls†
+4Type[torch._inductor.codecache.CudaKernelParamCache]`
+.torch._inductor.codecache.CudaKernelParamCache".torch._inductor.codecache.CudaKernelParamCache"type*%
+key
+builtins.str"builtins.str*Å
+paramsu
+(builtins.dict[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.dict*'
+cubin
+builtins.str"builtins.str0:classmethodp*⁄
+get2torch._inductor.codecache.CudaKernelParamCache.get"π
+4Union[builtins.dict[builtins.str,builtins.str],None]u
+(builtins.dict[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.dict
+None*™
+cls†
+4Type[torch._inductor.codecache.CudaKernelParamCache]`
+.torch._inductor.codecache.CudaKernelParamCache".torch._inductor.codecache.CudaKernelParamCache"type*%
+key
+builtins.str"builtins.str0:classmethodp*]
+get_keys7torch._inductor.codecache.CudaKernelParamCache.get_keys*
+cls0:classmethodp8r™
+cache4torch._inductor.codecache.CudaKernelParamCache.cacheÍ
+Dbuiltins.dict[builtins.str,builtins.dict[builtins.str,builtins.str]]
+builtins.str"builtins.stru
+(builtins.dict[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.dict"builtins.dictrì
+cache_clear:torch._inductor.codecache.CudaKernelParamCache.cache_clearH
+#builtins.staticmethod[Unknown,None] 
+None"builtins.staticmethodÛ
+AotCodeCompiler)torch._inductor.codecache.AotCodeCompiler"builtins.object*£
+compile1torch._inductor.codecache.AotCodeCompiler.compile"
+builtins.str"builtins.str*õ
+clsë
+/Type[torch._inductor.codecache.AotCodeCompiler]V
+)torch._inductor.codecache.AotCodeCompiler")torch._inductor.codecache.AotCodeCompiler"type*U
+graphJ
+#torch._inductor.graph.GraphLowering"#torch._inductor.graph.GraphLowering*-
+source_code
+builtins.str"builtins.str*h
+serialized_extern_kernel_nodesD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*(
+cuda
+builtins.bool"builtins.bool0:classmethodpı
+CppCodeCache&torch._inductor.codecache.CppCodeCache"builtins.object*ù
+_load_library_inner:torch._inductor.codecache.CppCodeCache._load_library_inner"i
+#Union[ctypes.CDLL,types.ModuleType]
+ctypes.CDLL"ctypes.CDLL$
+types.ModuleType"types.ModuleType*&
+path
+builtins.str"builtins.str*%
+key
+builtins.str"builtins.str0:staticmethodh*•
+_load_library4torch._inductor.codecache.CppCodeCache._load_library"i
+#Union[ctypes.CDLL,types.ModuleType]
+ctypes.CDLL"ctypes.CDLL$
+types.ModuleType"types.ModuleType*í
+clsà
+,Type[torch._inductor.codecache.CppCodeCache]P
+&torch._inductor.codecache.CppCodeCache"&torch._inductor.codecache.CppCodeCache"type*&
+path
+builtins.str"builtins.str*%
+key
+builtins.str"builtins.str0:classmethodp*Ë
+
+load_async1torch._inductor.codecache.CppCodeCache.load_async"
+Any*í
+clsà
+,Type[torch._inductor.codecache.CppCodeCache]P
+&torch._inductor.codecache.CppCodeCache"&torch._inductor.codecache.CppCodeCache"type*-
+source_code
+builtins.str"builtins.str*
+cuda
+Any *
+	submit_fn
+Any *
+extra_flags
+Any 0:classmethodp*Ω
+load+torch._inductor.codecache.CppCodeCache.load"
+Any*í
+clsà
+,Type[torch._inductor.codecache.CppCodeCache]P
+&torch._inductor.codecache.CppCodeCache"&torch._inductor.codecache.CppCodeCache"type*-
+source_code
+builtins.str"builtins.str**
+cuda
+builtins.bool"builtins.bool 0:classmethodp8rÔ
+cache,torch._inductor.codecache.CppCodeCache.cache∑
+;builtins.dict[builtins.str,CallableType[builtins.function]]
+builtins.str"builtins.strK
+CallableType[builtins.function]&
+builtins.function"builtins.function"builtins.dictrã
+cache_clear2torch._inductor.codecache.CppCodeCache.cache_clearH
+#builtins.staticmethod[Unknown,None] 
+None"builtins.staticmethodr∂
+cpp_compile_command_flags@torch._inductor.codecache.CppCodeCache.cpp_compile_command_flagsW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dictö
+CppPythonBindingsCodeCache4torch._inductor.codecache.CppPythonBindingsCodeCache"&torch._inductor.codecache.CppCodeCache*§
+_load_library_innerHtorch._inductor.codecache.CppPythonBindingsCodeCache._load_library_inner"$
+types.ModuleType"types.ModuleType*º
+cls≤
+:Type[torch._inductor.codecache.CppPythonBindingsCodeCache]l
+4torch._inductor.codecache.CppPythonBindingsCodeCache"4torch._inductor.codecache.CppPythonBindingsCodeCache"type*&
+path
+builtins.str"builtins.str*%
+key
+builtins.str"builtins.str0:classmethodp*÷
+load_pybinding_asyncItorch._inductor.codecache.CppPythonBindingsCodeCache.load_pybinding_async"
+Any*º
+cls≤
+:Type[torch._inductor.codecache.CppPythonBindingsCodeCache]l
+4torch._inductor.codecache.CppPythonBindingsCodeCache"4torch._inductor.codecache.CppPythonBindingsCodeCache"type*X
+argtypesJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*-
+source_code
+builtins.str"builtins.str**
+cuda
+builtins.bool"builtins.bool */
+num_outputs
+builtins.int"builtins.int *
+	submit_fn
+Any *
+extra_flags
+Any 0:classmethodp*÷
+load_pybindingCtorch._inductor.codecache.CppPythonBindingsCodeCache.load_pybinding"
+Any*º
+cls≤
+:Type[torch._inductor.codecache.CppPythonBindingsCodeCache]l
+4torch._inductor.codecache.CppPythonBindingsCodeCache"4torch._inductor.codecache.CppPythonBindingsCodeCache"type*
+args
+Any*
+kwargs
+Any0:classmethodp8r˝
+cache:torch._inductor.codecache.CppPythonBindingsCodeCache.cache∑
+;builtins.dict[builtins.str,CallableType[builtins.function]]
+builtins.str"builtins.strK
+CallableType[builtins.function]&
+builtins.function"builtins.function"builtins.dictrô
+cache_clear@torch._inductor.codecache.CppPythonBindingsCodeCache.cache_clearH
+#builtins.staticmethod[Unknown,None] 
+None"builtins.staticmethodrƒ
+cpp_compile_command_flagsNtorch._inductor.codecache.CppPythonBindingsCodeCache.cpp_compile_command_flagsW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dictrs
+entry_functionCtorch._inductor.codecache.CppPythonBindingsCodeCache.entry_function
+builtins.str"builtins.strr}
+call_entry_functionHtorch._inductor.codecache.CppPythonBindingsCodeCache.call_entry_function
+builtins.str"builtins.strru
+extra_parse_argDtorch._inductor.codecache.CppPythonBindingsCodeCache.extra_parse_arg
+builtins.str"builtins.strru
+suffix_templateDtorch._inductor.codecache.CppPythonBindingsCodeCache.suffix_template
+builtins.str"builtins.str†
+CppWrapperCodeCache-torch._inductor.codecache.CppWrapperCodeCache"4torch._inductor.codecache.CppPythonBindingsCodeCache8rˆ
+cache3torch._inductor.codecache.CppWrapperCodeCache.cache∑
+;builtins.dict[builtins.str,CallableType[builtins.function]]
+builtins.str"builtins.strK
+CallableType[builtins.function]&
+builtins.function"builtins.function"builtins.dictrí
+cache_clear9torch._inductor.codecache.CppWrapperCodeCache.cache_clearH
+#builtins.staticmethod[Unknown,None] 
+None"builtins.staticmethodrΩ
+cpp_compile_command_flagsGtorch._inductor.codecache.CppWrapperCodeCache.cpp_compile_command_flagsW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dictrl
+entry_function<torch._inductor.codecache.CppWrapperCodeCache.entry_function
+builtins.str"builtins.strrv
+call_entry_functionAtorch._inductor.codecache.CppWrapperCodeCache.call_entry_function
+builtins.str"builtins.strrn
+extra_parse_arg=torch._inductor.codecache.CppWrapperCodeCache.extra_parse_arg
+builtins.str"builtins.strÆ
+HalideCodeCache)torch._inductor.codecache.HalideCodeCache"4torch._inductor.codecache.CppPythonBindingsCodeCache*Ä
+_codegen_glue7torch._inductor.codecache.HalideCodeCache._codegen_glue*
+cls*
+argtypes*
+
+headerfile0:classmethodp*^
+config_hash5torch._inductor.codecache.HalideCodeCache.config_hash*
+cls0:classmethodp*\
+cpu_cache_size8torch._inductor.codecache.HalideCodeCache.cpu_cache_size0:staticmethodh*x
+_search_for_file:torch._inductor.codecache.HalideCodeCache._search_for_file*
+
+suffix*
+
+errmsg0:staticmethodh*r
+find_libautoschedule>torch._inductor.codecache.HalideCodeCache.find_libautoschedule*
+name0:staticmethodh*`
+find_header5torch._inductor.codecache.HalideCodeCache.find_header*
+name0:staticmethodh*∫
+generate_halide_async?torch._inductor.codecache.HalideCodeCache.generate_halide_async"
+Any*õ
+clsë
+/Type[torch._inductor.codecache.HalideCodeCache]V
+)torch._inductor.codecache.HalideCodeCache")torch._inductor.codecache.HalideCodeCache"type*ﬁ
+meta”
+ºTypeAlias[Tuple[builtins.list[TypeAlias[Tuple[builtins.str,builtins.str,Union[builtins.str,None]]]],builtins.str,builtins.str,builtins.dict[builtins.str,Union[builtins.int,builtins.str]]]]Â
+±Tuple[builtins.list[TypeAlias[Tuple[builtins.str,builtins.str,Union[builtins.str,None]]]],builtins.str,builtins.str,builtins.dict[builtins.str,Union[builtins.int,builtins.str]]]†
+Sbuiltins.list[TypeAlias[Tuple[builtins.str,builtins.str,Union[builtins.str,None]]]]π
+DTypeAlias[Tuple[builtins.str,builtins.str,Union[builtins.str,None]]]ø
+9Tuple[builtins.str,builtins.str,Union[builtins.str,None]]
+builtins.str"builtins.str
+builtins.str"builtins.strD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None"-torch._inductor.runtime.hints.HalideInputSpec"builtins.list
+builtins.str"builtins.str
+builtins.str"builtins.strÕ
+<builtins.dict[builtins.str,Union[builtins.int,builtins.str]]
+builtins.str"builtins.str`
+ Union[builtins.int,builtins.str]
+builtins.int"builtins.int
+builtins.str"builtins.str"builtins.dict"(torch._inductor.runtime.hints.HalideMeta*-
+source_code
+builtins.str"builtins.str*
+	submit_fn
+Any 0:classmethodp*|
+generate_halide9torch._inductor.codecache.HalideCodeCache.generate_halide*
+cls*
+args*
+
+kwargs0:classmethodp8rÚ
+cache/torch._inductor.codecache.HalideCodeCache.cache∑
+;builtins.dict[builtins.str,CallableType[builtins.function]]
+builtins.str"builtins.strK
+CallableType[builtins.function]&
+builtins.function"builtins.function"builtins.dictré
+cache_clear5torch._inductor.codecache.HalideCodeCache.cache_clearH
+#builtins.staticmethod[Unknown,None] 
+None"builtins.staticmethodrf
+glue_template7torch._inductor.codecache.HalideCodeCache.glue_template
+builtins.str"builtins.strÓ
+PyCodeCache%torch._inductor.codecache.PyCodeCache"builtins.object*ì
+write+torch._inductor.codecache.PyCodeCache.write"`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str*è
+clsÖ
++Type[torch._inductor.codecache.PyCodeCache]N
+%torch._inductor.codecache.PyCodeCache"%torch._inductor.codecache.PyCodeCache"type*-
+source_code
+builtins.str"builtins.str*)
+extra
+builtins.str"builtins.str 0:classmethodp*˘
+load*torch._inductor.codecache.PyCodeCache.load"$
+types.ModuleType"types.ModuleType*è
+clsÖ
++Type[torch._inductor.codecache.PyCodeCache]N
+%torch._inductor.codecache.PyCodeCache"%torch._inductor.codecache.PyCodeCache"type*-
+source_code
+builtins.str"builtins.str*)
+extra
+builtins.str"builtins.str *˛
+linemapÓ
+;Union[builtins.list[Tuple[builtins.int,builtins.str]],None]¢
+/builtins.list[Tuple[builtins.int,builtins.str]]`
+ Tuple[builtins.int,builtins.str]
+builtins.int"builtins.int
+builtins.str"builtins.str"builtins.list
+None *†
+attrsí
++Union[builtins.dict[builtins.str,Any],None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None 0:classmethodp*Ü
+load_by_key_path6torch._inductor.codecache.PyCodeCache.load_by_key_path"$
+types.ModuleType"types.ModuleType*è
+clsÖ
++Type[torch._inductor.codecache.PyCodeCache]N
+%torch._inductor.codecache.PyCodeCache"%torch._inductor.codecache.PyCodeCache"type*%
+key
+builtins.str"builtins.str*&
+path
+builtins.str"builtins.str*˛
+linemapÓ
+;Union[builtins.list[Tuple[builtins.int,builtins.str]],None]¢
+/builtins.list[Tuple[builtins.int,builtins.str]]`
+ Tuple[builtins.int,builtins.str]
+builtins.int"builtins.int
+builtins.str"builtins.str"builtins.list
+None *†
+attrsí
++Union[builtins.dict[builtins.str,Any],None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None 0:classmethodp*Ø
+stack_frames_for_code;torch._inductor.codecache.PyCodeCache.stack_frames_for_code"„
+:Union[builtins.list[builtins.dict[builtins.str,Any]],None]ò
+.builtins.list[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"builtins.list
+None*è
+clsÖ
++Type[torch._inductor.codecache.PyCodeCache]N
+%torch._inductor.codecache.PyCodeCache"%torch._inductor.codecache.PyCodeCache"type*&
+path
+builtins.str"builtins.str*(
+lineno
+builtins.int"builtins.int0:classmethodp8r∏
+cache+torch._inductor.codecache.PyCodeCache.cacheÅ
+,builtins.dict[builtins.str,types.ModuleType]
+builtins.str"builtins.str$
+types.ModuleType"types.ModuleType"builtins.dictrè
+linemaps.torch._inductor.codecache.PyCodeCache.linemaps“
+>builtins.dict[builtins.str,builtins.list[builtins.tuple[Any]]]
+builtins.str"builtins.strc
+"builtins.list[builtins.tuple[Any]].
+builtins.tuple[Any]
+Any"builtins.tuple"builtins.list"builtins.dicträ
+cache_clear1torch._inductor.codecache.PyCodeCache.cache_clearH
+#builtins.staticmethod[Unknown,None] 
+None"builtins.staticmethodπ
+TritonCodeCache)torch._inductor.codecache.TritonCodeCache"builtins.object*È
+load.torch._inductor.codecache.TritonCodeCache.load"$
+types.ModuleType"types.ModuleType*õ
+clsë
+/Type[torch._inductor.codecache.TritonCodeCache]V
+)torch._inductor.codecache.TritonCodeCache")torch._inductor.codecache.TritonCodeCache"type*-
+kernel_name
+builtins.str"builtins.str*-
+source_code
+builtins.str"builtins.str0:classmethodpê
+
+DLLWrapper$torch._inductor.codecache.DLLWrapper"builtins.object*«
+__init__-torch._inductor.codecache.DLLWrapper.__init__"
+None*V
+selfL
+$torch._inductor.codecache.DLLWrapper"$torch._inductor.codecache.DLLWrapper**
+lib_path
+builtins.str"builtins.str*=
+close*torch._inductor.codecache.DLLWrapper.close*
+self*C
+_dlclose-torch._inductor.codecache.DLLWrapper._dlclose*
+self*C
+__getattr__0torch._inductor.codecache.DLLWrapper.__getattr__* * *=
+	__enter__.torch._inductor.codecache.DLLWrapper.__enter__* *?
+__exit__-torch._inductor.codecache.DLLWrapper.__exit__* **9
+__del__,torch._inductor.codecache.DLLWrapper.__del__* rW
+lib_path-torch._inductor.codecache.DLLWrapper.lib_path
+builtins.str"builtins.strrW
+is_open,torch._inductor.codecache.DLLWrapper.is_open
+builtins.bool"builtins.boolrK
+DLL(torch._inductor.codecache.DLLWrapper.DLL
+ctypes.CDLL"ctypes.CDLLì
+CUDACodeCache'torch._inductor.codecache.CUDACodeCache"builtins.object*ˆ
+write-torch._inductor.codecache.CUDACodeCache.write"`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str*ï
+clsã
+-Type[torch._inductor.codecache.CUDACodeCache]R
+'torch._inductor.codecache.CUDACodeCache"'torch._inductor.codecache.CUDACodeCache"type*
+source_code
+Any*
+dst_file_ext
+Any0:classmethodp*Ω
+compile/torch._inductor.codecache.CUDACodeCache.compile"ã
+-Tuple[builtins.str,builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str
+builtins.str"builtins.str*ï
+clsã
+-Type[torch._inductor.codecache.CUDACodeCache]R
+'torch._inductor.codecache.CUDACodeCache"'torch._inductor.codecache.CUDACodeCache"type*
+source_code
+Any*
+dst_file_ext
+Any*î
+
+extra_argsÅ
+'Union[builtins.list[builtins.str],None]J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list
+None 0:classmethodp*Ë
+load,torch._inductor.codecache.CUDACodeCache.load"”
+ETuple[torch._inductor.codecache.DLLWrapper,builtins.str,builtins.str]L
+$torch._inductor.codecache.DLLWrapper"$torch._inductor.codecache.DLLWrapper
+builtins.str"builtins.str
+builtins.str"builtins.str*ï
+clsã
+-Type[torch._inductor.codecache.CUDACodeCache]R
+'torch._inductor.codecache.CUDACodeCache"'torch._inductor.codecache.CUDACodeCache"type*
+source_code
+Any*
+dst_file_ext
+Any0:classmethodp8r†
+cache-torch._inductor.codecache.CUDACodeCache.cacheÁ
+Nbuiltins.dict[builtins.str,torch._inductor.codecache.CUDACodeCache.CacheEntry]
+builtins.str"builtins.strh
+2torch._inductor.codecache.CUDACodeCache.CacheEntry"2torch._inductor.codecache.CUDACodeCache.CacheEntry"builtins.dictrå
+cache_clear3torch._inductor.codecache.CUDACodeCache.cache_clearH
+#builtins.staticmethod[Unknown,None] 
+None"builtins.staticmethodrp
+_SOURCE_CODE_SUFFIX;torch._inductor.codecache.CUDACodeCache._SOURCE_CODE_SUFFIX
+builtins.str"builtins.strì
+CodeCacheFuture)torch._inductor.codecache.CodeCacheFuture"builtins.object*D
+result0torch._inductor.codecache.CodeCacheFuture.result*
+self¢
+TritonFuture&torch._inductor.codecache.TritonFuture")torch._inductor.codecache.CodeCacheFuture*÷
+__init__/torch._inductor.codecache.TritonFuture.__init__"
+None*Z
+selfP
+&torch._inductor.codecache.TritonFuture"&torch._inductor.codecache.TritonFuture*
+kernel
+Any*ù
+futureê
+0Union[concurrent.futures._base.Future[Any],None]P
+$concurrent.futures._base.Future[Any]
+Any"concurrent.futures._base.Future
+None*π
+result-torch._inductor.codecache.TritonFuture.result"$
+types.ModuleType"types.ModuleType*Z
+selfP
+&torch._inductor.codecache.TritonFuture"&torch._inductor.codecache.TritonFuturer]
+kernel-torch._inductor.codecache.TritonFuture.kernel$
+types.ModuleType"types.ModuleTyper 
+future-torch._inductor.codecache.TritonFuture.futureê
+0Union[concurrent.futures._base.Future[Any],None]P
+$concurrent.futures._base.Future[Any]
+Any"concurrent.futures._base.Future
+None¬
+LambdaFuture&torch._inductor.codecache.LambdaFuture")torch._inductor.codecache.CodeCacheFuture*T
+__init__/torch._inductor.codecache.LambdaFuture.__init__*
+self*
+	result_fn*A
+result-torch._inductor.codecache.LambdaFuture.result*
+selfrF
+	result_fn0torch._inductor.codecache.LambdaFuture.result_fn
+Anyo
+$log_global_cache_errors-redefinition1torch._inductor.codecache.log_global_cache_errors*
+args*
+
+kwargsm
+#log_global_cache_stats-redefinition0torch._inductor.codecache.log_global_cache_stats*
+args*
+
+kwargsk
+"log_global_cache_vals-redefinition/torch._inductor.codecache.log_global_cache_vals*
+args*
+
+kwargsk
+use_global_cache-redefinition*torch._inductor.codecache.use_global_cache"
+builtins.bool"builtins.boolé
+cpp_wrapper_cache_dir/torch._inductor.codecache.cpp_wrapper_cache_dir"
+builtins.str"builtins.str*&
+name
+builtins.str"builtins.str\
+get_cpp_wrapper_cubin_path_name9torch._inductor.codecache.get_cpp_wrapper_cubin_path_nameT
+get_lock_dir&torch._inductor.codecache.get_lock_dir"
+builtins.str"builtins.str~
+sha256_hash%torch._inductor.codecache.sha256_hash"
+builtins.str"builtins.str**
+data 
+builtins.bytes"builtins.bytes÷
+	code_hash#torch._inductor.codecache.code_hash"
+Any*p
+codef
+"Union[builtins.str,builtins.bytes]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytes*)
+extra
+builtins.str"builtins.str »
+get_path"torch._inductor.codecache.get_path"ã
+-Tuple[builtins.str,builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str
+builtins.str"builtins.str**
+basename
+builtins.str"builtins.str*+
+	extension
+builtins.str"builtins.str*1
+specified_dir
+builtins.str"builtins.str Ü
+get_hash"torch._inductor.codecache.get_hash"
+Any*s
+contentf
+"Union[builtins.str,builtins.bytes]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytes*)
+extra
+builtins.str"builtins.str *-
+	hash_type
+builtins.str"builtins.str π
+writetorch._inductor.codecache.write"`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str*s
+contentf
+"Union[builtins.str,builtins.bytes]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytes*+
+	extension
+builtins.str"builtins.str*)
+extra
+builtins.str"builtins.str *-
+	hash_type
+builtins.str"builtins.str *1
+specified_dir
+builtins.str"builtins.str x
+
+write_text$torch._inductor.codecache.write_text"
+builtins.str"builtins.str*&
+text
+builtins.str"builtins.stré
+write_atomic&torch._inductor.codecache.write_atomic"
+None*&
+path
+builtins.str"builtins.str*s
+contentf
+"Union[builtins.str,builtins.bytes]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytes*/
+	make_dirs
+builtins.bool"builtins.bool C
+_ident torch._inductor.codecache._ident"
+Any*
+x
+Anyo
+%extract_tensor_metadata_for_cache_key?torch._inductor.codecache.extract_tensor_metadata_for_cache_key*
+tK
+_reduce_fake_tensor-torch._inductor.codecache._reduce_fake_tensor*
+tA
+_reduce_tensor(torch._inductor.codecache._reduce_tensor*
+tA
+_reduce_symint(torch._inductor.codecache._reduce_symint*
+sK
+_reduce_unsupported-torch._inductor.codecache._reduce_unsupported*
+s_
+build_code_hash)torch._inductor.codecache.build_code_hash*	
+roots*
+
+prefix*
+
+hasherV
+get_code_hash'torch._inductor.codecache.get_code_hash*	
+roots*
+extra_files @
+get_inductor_root+torch._inductor.codecache.get_inductor_root˝
+compiled_fx_graph_hash0torch._inductor.codecache.compiled_fx_graph_hash"
+builtins.str"builtins.str*N
+gmF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*v
+example_inputsb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*f
+	fx_kwargsW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*c
+inputs_to_checkN
+typing.Sequence[builtins.int]
+builtins.int"builtins.int"typing.SequenceT
+cpp_compiler&torch._inductor.codecache.cpp_compiler"
+builtins.str"builtins.strf
+install_gcc_via_conda/torch._inductor.codecache.install_gcc_via_conda"
+builtins.str"builtins.strJ
+is_gcc torch._inductor.codecache.is_gcc"
+builtins.bool"builtins.boolN
+is_clang"torch._inductor.codecache.is_clang"
+builtins.bool"builtins.bool^
+get_compiler_version_info3torch._inductor.codecache.get_compiler_version_info*
+compiler©
+ _get_isa_dry_compile_fingerprint:torch._inductor.codecache._get_isa_dry_compile_fingerprint"
+builtins.str"builtins.str*+
+	isa_flags
+builtins.str"builtins.strà
+x86_isa_checker)torch._inductor.codecache.x86_isa_checker"J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list|
+pick_vec_isa&torch._inductor.codecache.pick_vec_isa"D
+ torch._inductor.codecache.VecISA" torch._inductor.codecache.VecISAê
+get_compile_only*torch._inductor.codecache.get_compile_only"
+builtins.str"builtins.str*2
+compile_only
+builtins.bool"builtins.bool ≤
+
+get_shared$torch._inductor.codecache.get_shared"
+builtins.str"builtins.str*,
+shared
+builtins.bool"builtins.bool *2
+compile_only
+builtins.bool"builtins.bool ó
+get_warning_all_flag.torch._inductor.codecache.get_warning_all_flag"
+builtins.str"builtins.str*1
+warning_all
+builtins.bool"builtins.bool r
+get_glibcxx_abi_build_flags5torch._inductor.codecache.get_glibcxx_abi_build_flags"
+builtins.str"builtins.strN
+	cpp_flags#torch._inductor.codecache.cpp_flags"
+builtins.str"builtins.str^
+cpp_wrapper_flags+torch._inductor.codecache.cpp_wrapper_flags"
+builtins.str"builtins.str`
+optimization_flags,torch._inductor.codecache.optimization_flags"
+builtins.str"builtins.strr
+use_custom_generated_macros5torch._inductor.codecache.use_custom_generated_macros"
+builtins.str"builtins.strh
+use_fb_internal_macros0torch._inductor.codecache.use_fb_internal_macros"
+builtins.str"builtins.strt
+use_standard_sys_dir_headers6torch._inductor.codecache.use_standard_sys_dir_headers"
+builtins.str"builtins.strP
+_set_gpu_runtime_env.torch._inductor.codecache._set_gpu_runtime_env"
+NoneN
+_get_python_include_dirs2torch._inductor.codecache._get_python_include_dirsT
+_transform_cuda_paths/torch._inductor.codecache._transform_cuda_paths*
+
+lpaths·
+get_include_and_linking_paths7torch._inductor.codecache.get_include_and_linking_paths"û
+VTuple[builtins.list[builtins.str],builtins.str,builtins.str,builtins.str,builtins.str]J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list
+builtins.str"builtins.str
+builtins.str"builtins.str
+builtins.str"builtins.str
+builtins.str"builtins.str*5
+include_pytorch
+builtins.bool"builtins.bool *S
+vec_isaD
+ torch._inductor.codecache.VecISA" torch._inductor.codecache.VecISA **
+cuda
+builtins.bool"builtins.bool *.
+aot_mode
+builtins.bool"builtins.bool â
+cpp_compile_command-torch._inductor.codecache.cpp_compile_command"
+builtins.str"builtins.str*©
+inputù
+/Union[builtins.str,builtins.list[builtins.str]]
+builtins.str"builtins.strJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*(
+output
+builtins.str"builtins.str*1
+warning_all
+builtins.bool"builtins.bool *,
+shared
+builtins.bool"builtins.bool *5
+include_pytorch
+builtins.bool"builtins.bool *S
+vec_isaD
+ torch._inductor.codecache.VecISA" torch._inductor.codecache.VecISA **
+cuda
+builtins.bool"builtins.bool *.
+aot_mode
+builtins.bool"builtins.bool *2
+compile_only
+builtins.bool"builtins.bool *7
+use_absolute_path
+builtins.bool"builtins.bool *6
+use_mmap_weights
+builtins.bool"builtins.bool *a
+extra_flagsN
+typing.Sequence[builtins.str]
+builtins.str"builtins.str"typing.Sequence x
+run_command_and_check/torch._inductor.codecache.run_command_and_check"
+Any*%
+cmd
+builtins.str"builtins.strP
+
+cpp_prefix$torch._inductor.codecache.cpp_prefix"
+builtins.str"builtins.strÇ
+custom_op_wrapper+torch._inductor.codecache.custom_op_wrapper"
+Any*$
+op
+builtins.str"builtins.str*
+args
+Any}
+_worker_compile_cpp-torch._inductor.codecache._worker_compile_cpp*
+	lock_path*
+
+input_path*
+output_path*
+cmdù
+"_temp_validate_new_and_old_command<torch._inductor.codecache._temp_validate_new_and_old_command"
+Any*W
+new_cmdJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*W
+old_cmdJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list”
+_do_validate_cpp_commands3torch._inductor.codecache._do_validate_cpp_commands"
+Any*3
+include_pytorch
+builtins.bool"builtins.bool*(
+cuda
+builtins.bool"builtins.bool*0
+compile_only
+builtins.bool"builtins.bool*0
+mmap_weights
+builtins.bool"builtins.bool*5
+use_absolute_path
+builtins.bool"builtins.boolP
+validate_new_cpp_commands3torch._inductor.codecache.validate_new_cpp_commands\
+_worker_task_halide-torch._inductor.codecache._worker_task_halide*
+lockfile*
+jobs6
+touchtorch._inductor.codecache.touch*
+filenameÄ
+_cuda_compiler(torch._inductor.codecache._cuda_compiler"D
+Union[builtins.str,None]
+builtins.str"builtins.str
+Noneñ
+_cutlass_include_paths0torch._inductor.codecache._cutlass_include_paths"J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.listå
+_cuda_lib_options+torch._inductor.codecache._cuda_lib_options"J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list†
+_nvcc_host_compiler_options5torch._inductor.codecache._nvcc_host_compiler_options"J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.listñ
+_nvcc_compiler_options0torch._inductor.codecache._nvcc_compiler_options"J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list≤
+cuda_compile_command.torch._inductor.codecache.cuda_compile_command"
+builtins.str"builtins.str*Y
+	src_filesJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list**
+dst_file
+builtins.str"builtins.str*.
+dst_file_ext
+builtins.str"builtins.str*î
+
+extra_argsÅ
+'Union[builtins.list[builtins.str],None]J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list
+None *ï
+__annotations__)torch._inductor.codecache.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*F
+_HEREtorch._inductor.codecache._HERE
+builtins.str"builtins.str*R
+_TORCH_PATH%torch._inductor.codecache._TORCH_PATH
+builtins.str"builtins.str*X
+_LINKER_SCRIPT(torch._inductor.codecache._LINKER_SCRIPT
+builtins.str"builtins.str*T
+_IS_WINDOWS%torch._inductor.codecache._IS_WINDOWS
+builtins.bool"builtins.bool*=
+build_paths%torch._inductor.codecache.build_paths
+Any*K
+_run_build_command,torch._inductor.codecache._run_build_command
+Any*U
+log_global_cache_errors1torch._inductor.codecache.log_global_cache_errors
+Any*S
+log_global_cache_stats0torch._inductor.codecache.log_global_cache_stats
+Any*Q
+log_global_cache_vals/torch._inductor.codecache.log_global_cache_vals
+Any*G
+use_global_cache*torch._inductor.codecache.use_global_cache
+Any*E
+output_code_log)torch._inductor.codecache.output_code_log
+Any*T
+LOCK_TIMEOUT&torch._inductor.codecache.LOCK_TIMEOUT
+builtins.int"builtins.int*F
+logtorch._inductor.codecache.log 
+logging.Logger"logging.Logger*ê
+invalid_vec_isa)torch._inductor.codecache.invalid_vec_isaR
+'torch._inductor.codecache.InvalidVecISA"'torch._inductor.codecache.InvalidVecISA*”
+supported_vec_isa_list0torch._inductor.codecache.supported_vec_isa_listÜ
+/builtins.list[torch._inductor.codecache.VecISA]D
+ torch._inductor.codecache.VecISA" torch._inductor.codecache.VecISA"builtins.list*q
+_libgomp"torch._inductor.codecache._libgompA
+Union[ctypes.CDLL,None]
+ctypes.CDLL"ctypes.CDLL
+None

@@ -1,0 +1,91 @@
+
+%torch._inductor.fx_passes.joint_graphý
+UniformValueConstantFolder@torch._inductor.fx_passes.joint_graph.UniformValueConstantFolder"/torch._inductor.constant_folding.ConstantFolder*€
+__init__Itorch._inductor.fx_passes.joint_graph.UniformValueConstantFolder.__init__*
+self*
+gm*
+skip_constructors *Ú
+insertable_tensor_checkXtorch._inductor.fx_passes.joint_graph.UniformValueConstantFolder.insertable_tensor_check"
+builtins.bool"builtins.bool*
+self„
+@torch._inductor.fx_passes.joint_graph.UniformValueConstantFolder"@torch._inductor.fx_passes.joint_graph.UniformValueConstantFolder*3
+t,
+torch._tensor.Tensor"torch._tensor.Tensor*÷
+add_node_replacementUtorch._inductor.fx_passes.joint_graph.UniformValueConstantFolder.add_node_replacement"
+None*
+self„
+@torch._inductor.fx_passes.joint_graph.UniformValueConstantFolder"@torch._inductor.fx_passes.joint_graph.UniformValueConstantFolder*2
+node(
+torch.fx.node.Node"torch.fx.node.Node*8
+tensor,
+torch._tensor.Tensor"torch._tensor.Tensorró
+node_storages_ptrsStorch._inductor.fx_passes.joint_graph.UniformValueConstantFolder.node_storages_ptrs‡
+.builtins.dict[torch.fx.node.Node,builtins.int](
+torch.fx.node.Node"torch.fx.node.Node
+builtins.int"builtins.int"builtins.dictrÜ
+constant_data_ptrsStorch._inductor.fx_passes.joint_graph.UniformValueConstantFolder.constant_data_ptrsð
+Qbuiltins.dict[torch.fx.node.Node,torch.multiprocessing.reductions.StorageWeakRef](
+torch.fx.node.Node"torch.fx.node.Nodeb
+/torch.multiprocessing.reductions.StorageWeakRef"/torch.multiprocessing.reductions.StorageWeakRef"builtins.dictr¼
+node_replacements_shapesYtorch._inductor.fx_passes.joint_graph.UniformValueConstantFolder.node_replacements_shapesÄ
+=builtins.dict[torch.fx.node.Node,builtins.list[builtins.int]](
+torch.fx.node.Node"torch.fx.node.NodeJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list"builtins.dictª
+joint_graph_passes8torch._inductor.fx_passes.joint_graph.joint_graph_passes"
+Any*Q
+graphF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModuleŠ
+_partial_softmax_pattern>torch._inductor.fx_passes.joint_graph._partial_softmax_pattern*
+linear_func*
+reverse *
+to_dtype m
+_other_is_broadcasted_in_dimBtorch._inductor.fx_passes.joint_graph._other_is_broadcasted_in_dim*	
+match˜
+mul_softmax_pattern9torch._inductor.fx_passes.joint_graph.mul_softmax_pattern"
+Any*Y
+matchN
+%torch._inductor.pattern_matcher.Match"%torch._inductor.pattern_matcher.Match*
+inp
+Any*
+other
+Any*
+dim
+Any*
+keepdim
+Any*
+dtype
+Any ˜
+div_softmax_pattern9torch._inductor.fx_passes.joint_graph.div_softmax_pattern"
+Any*Y
+matchN
+%torch._inductor.pattern_matcher.Match"%torch._inductor.pattern_matcher.Match*
+inp
+Any*
+other
+Any*
+dim
+Any*
+keepdim
+Any*
+dtype
+Any *¡
+__annotations__5torch._inductor.fx_passes.joint_graph.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*R
+log)torch._inductor.fx_passes.joint_graph.log 
+logging.Logger"logging.Logger*¤
+patterns.torch._inductor.fx_passes.joint_graph.patternsh
+2torch._inductor.pattern_matcher.PatternMatcherPass"2torch._inductor.pattern_matcher.PatternMatcherPass*;
+aten*torch._inductor.fx_passes.joint_graph.aten
+Any*=
+prims+torch._inductor.fx_passes.joint_graph.prims
+Any*ƒ
+pass_patterns3torch._inductor.fx_passes.joint_graph.pass_patterns¼
+Abuiltins.list[torch._inductor.pattern_matcher.PatternMatcherPass]h
+2torch._inductor.pattern_matcher.PatternMatcherPass"2torch._inductor.pattern_matcher.PatternMatcherPass"builtins.list*X
+reverse-torch._inductor.fx_passes.joint_graph.reverse
+builtins.bool"builtins.bool*Z
+to_dtype.torch._inductor.fx_passes.joint_graph.to_dtype
+builtins.bool"builtins.bool

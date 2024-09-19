@@ -1,0 +1,1396 @@
+
+torch._inductor.pattern_matcherö
+SearchFn(torch._inductor.pattern_matcher.SearchFn"builtins.object*–
+__call__1torch._inductor.pattern_matcher.SearchFn.__call__"
+Any*^
+selfT
+(torch._inductor.pattern_matcher.SearchFn"(torch._inductor.pattern_matcher.SearchFn*
+args
+Any*
+kwargs
+Any@Xü
+	ReplaceFn)torch._inductor.pattern_matcher.ReplaceFn"builtins.object*”
+__call__2torch._inductor.pattern_matcher.ReplaceFn.__call__"
+Any*`
+selfV
+)torch._inductor.pattern_matcher.ReplaceFn")torch._inductor.pattern_matcher.ReplaceFn*
+args
+Any*
+kwargs
+Any@XÎ
+TraceFn'torch._inductor.pattern_matcher.TraceFn"builtins.object*£
+__call__0torch._inductor.pattern_matcher.TraceFn.__call__"F
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*\
+selfR
+'torch._inductor.pattern_matcher.TraceFn"'torch._inductor.pattern_matcher.TraceFn*î
+fnã
+YUnion[torch._inductor.pattern_matcher.SearchFn,torch._inductor.pattern_matcher.ReplaceFn]T
+(torch._inductor.pattern_matcher.SearchFn"(torch._inductor.pattern_matcher.SearchFnV
+)torch._inductor.pattern_matcher.ReplaceFn")torch._inductor.pattern_matcher.ReplaceFn*
+args
+Any*
+kwargs
+Any@XÔ
+Multiple(torch._inductor.pattern_matcher.Multiple"builtins.object*ß
+__init__1torch._inductor.pattern_matcher.Multiple.__init__"
+None*^
+selfT
+(torch._inductor.pattern_matcher.Multiple"(torch._inductor.pattern_matcher.Multiple„#
+Match%torch._inductor.pattern_matcher.Match"builtins.object*Ä
+__init__.torch._inductor.pattern_matcher.Match.__init__"
+None*X
+selfN
+%torch._inductor.pattern_matcher.Match"%torch._inductor.pattern_matcher.Match*e
+ctx\
+,torch._inductor.pattern_matcher.MatchContext",torch._inductor.pattern_matcher.MatchContext*g
+patternZ
++torch._inductor.pattern_matcher.PatternExpr"+torch._inductor.pattern_matcher.PatternExpr*l
+args`
+ Union[typing.Sequence[Any],None]0
+typing.Sequence[Any]
+Any"typing.Sequence
+None *°
+kwargsí
++Union[builtins.dict[builtins.str,Any],None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None * 
+graph+torch._inductor.pattern_matcher.Match.graph",
+torch.fx.graph.Graph"torch.fx.graph.Graph*X
+selfN
+%torch._inductor.pattern_matcher.Match"%torch._inductor.pattern_matcher.Match0:property`*ı
+extend,torch._inductor.pattern_matcher.Match.extend"
+None*X
+selfN
+%torch._inductor.pattern_matcher.Match"%torch._inductor.pattern_matcher.Match*Y
+otherN
+%torch._inductor.pattern_matcher.Match"%torch._inductor.pattern_matcher.Match*‡
+bundle,torch._inductor.pattern_matcher.Match.bundle"N
+%torch._inductor.pattern_matcher.Match"%torch._inductor.pattern_matcher.Match*X
+selfN
+%torch._inductor.pattern_matcher.Match"%torch._inductor.pattern_matcher.Match*™
+__repr__.torch._inductor.pattern_matcher.Match.__repr__"
+builtins.str"builtins.str*PN
+%torch._inductor.pattern_matcher.Match"%torch._inductor.pattern_matcher.Match*›
+erase_nodes1torch._inductor.pattern_matcher.Match.erase_nodes"
+None*X
+selfN
+%torch._inductor.pattern_matcher.Match"%torch._inductor.pattern_matcher.Match*7
+graph,
+torch.fx.graph.Graph"torch.fx.graph.Graph*µ
+output_nodes2torch._inductor.pattern_matcher.Match.output_nodes"ñ
+-builtins.list[Union[torch.fx.node.Node,None]]V
+Union[torch.fx.node.Node,None](
+torch.fx.node.Node"torch.fx.node.Node
+None"builtins.list*X
+selfN
+%torch._inductor.pattern_matcher.Match"%torch._inductor.pattern_matcher.Match*ƒ
+output_node1torch._inductor.pattern_matcher.Match.output_node"(
+torch.fx.node.Node"torch.fx.node.Node*X
+selfN
+%torch._inductor.pattern_matcher.Match"%torch._inductor.pattern_matcher.Match*≥
+replace_with_graph8torch._inductor.pattern_matcher.Match.replace_with_graph"
+None*X
+selfN
+%torch._inductor.pattern_matcher.Match"%torch._inductor.pattern_matcher.Match*C
+replacement_graph,
+torch.fx.graph.Graph"torch.fx.graph.Graph*:
+args0
+typing.Sequence[Any]
+Any"typing.Sequence*≤
+replace_by_example8torch._inductor.pattern_matcher.Match.replace_by_example"
+None*X
+selfN
+%torch._inductor.pattern_matcher.Match"%torch._inductor.pattern_matcher.Match*j
+replacement_fnV
+)torch._inductor.pattern_matcher.ReplaceFn")torch._inductor.pattern_matcher.ReplaceFn*:
+args0
+typing.Sequence[Any]
+Any"typing.Sequence*¶
+trace_fnï
+3Union[torch._inductor.pattern_matcher.TraceFn,None]R
+'torch._inductor.pattern_matcher.TraceFn"'torch._inductor.pattern_matcher.TraceFn
+None *-
+run_dce
+builtins.bool"builtins.bool rî
+pattern-torch._inductor.pattern_matcher.Match.patternZ
++torch._inductor.pattern_matcher.PatternExpr"+torch._inductor.pattern_matcher.PatternExprr`
+args*torch._inductor.pattern_matcher.Match.args,
+builtins.list[Any]
+Any"builtins.listrè
+kwargs,torch._inductor.pattern_matcher.Match.kwargsW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dictrí
+nodes+torch._inductor.pattern_matcher.Match.nodes\
+!builtins.list[torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node"builtins.listr°
+targets-torch._inductor.pattern_matcher.Match.targetsÊ
+ybuiltins.dict[torch._inductor.pattern_matcher._TargetExpr,TypeAlias[Union[CallableType[builtins.function],builtins.str]]]Z
++torch._inductor.pattern_matcher._TargetExpr"+torch._inductor.pattern_matcher._TargetExpr˝
+>TypeAlias[Union[CallableType[builtins.function],builtins.str]]¢
+3Union[CallableType[builtins.function],builtins.str]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+builtins.str"builtins.str"torch.fx.node.Target"builtins.dictré
+ctx)torch._inductor.pattern_matcher.Match.ctx\
+,torch._inductor.pattern_matcher.MatchContext",torch._inductor.pattern_matcher.MatchContextr™
+replacement_graph7torch._inductor.pattern_matcher.Match.replacement_graph\
+ Union[torch.fx.graph.Graph,None],
+torch.fx.graph.Graph"torch.fx.graph.Graph
+NoneÂ
+FailedMatch+torch._inductor.pattern_matcher.FailedMatch"builtins.RuntimeError*â
+__init__4torch._inductor.pattern_matcher.FailedMatch.__init__"
+None*d
+selfZ
++torch._inductor.pattern_matcher.FailedMatch"+torch._inductor.pattern_matcher.FailedMatch*/
+format_string
+builtins.str"builtins.str*
+args
+Any*
+kwargs
+Any*∫
+__str__3torch._inductor.pattern_matcher.FailedMatch.__str__"
+builtins.str"builtins.str*\Z
++torch._inductor.pattern_matcher.FailedMatch"+torch._inductor.pattern_matcher.FailedMatch*∆
+__bool__4torch._inductor.pattern_matcher.FailedMatch.__bool__"
+builtins.bool"builtins.bool*d
+selfZ
++torch._inductor.pattern_matcher.FailedMatch"+torch._inductor.pattern_matcher.FailedMatchrh
+format_string9torch._inductor.pattern_matcher.FailedMatch.format_string
+builtins.str"builtins.strrï
+kwargs2torch._inductor.pattern_matcher.FailedMatch.kwargsW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dictÑ
+MatchContext,torch._inductor.pattern_matcher.MatchContext"builtins.object*·
+__init__5torch._inductor.pattern_matcher.MatchContext.__init__"
+None*f
+self\
+,torch._inductor.pattern_matcher.MatchContext",torch._inductor.pattern_matcher.MatchContext*â
+outputs˚
+Fbuiltins.list[Union[torch._inductor.pattern_matcher.PatternExpr,None]]°
+7Union[torch._inductor.pattern_matcher.PatternExpr,None]Z
++torch._inductor.pattern_matcher.PatternExpr"+torch._inductor.pattern_matcher.PatternExpr
+None"builtins.list*Ê
+pattern_to_nodeŒ
+YUnion[builtins.dict[torch._inductor.pattern_matcher.PatternExpr,torch.fx.node.Node],None]‰
+Mbuiltins.dict[torch._inductor.pattern_matcher.PatternExpr,torch.fx.node.Node]Z
++torch._inductor.pattern_matcher.PatternExpr"+torch._inductor.pattern_matcher.PatternExpr(
+torch.fx.node.Node"torch.fx.node.Node"builtins.dict
+None *7
+graph,
+torch.fx.graph.Graph"torch.fx.graph.Graph*√
+match2torch._inductor.pattern_matcher.MatchContext.match"ü
+cTypeAlias[Union[torch._inductor.pattern_matcher.Match,torch._inductor.pattern_matcher.FailedMatch]]à
+XUnion[torch._inductor.pattern_matcher.Match,torch._inductor.pattern_matcher.FailedMatch]N
+%torch._inductor.pattern_matcher.Match"%torch._inductor.pattern_matcher.MatchZ
++torch._inductor.pattern_matcher.FailedMatch"+torch._inductor.pattern_matcher.FailedMatch"+torch._inductor.pattern_matcher.MatchResult*f
+self\
+,torch._inductor.pattern_matcher.MatchContext",torch._inductor.pattern_matcher.MatchContext*g
+patternZ
++torch._inductor.pattern_matcher.PatternExpr"+torch._inductor.pattern_matcher.PatternExpr*í
+nodeá
+3TypeAlias[Union[TypeAlias[Any],torch.fx.node.Node]]ù
+(Union[TypeAlias[Any],torch.fx.node.Node]E
+TypeAlias[Any]
+Any"(torch._inductor.pattern_matcher.Constant(
+torch.fx.node.Node"torch.fx.node.Node".torch._inductor.pattern_matcher.NodeOrConstant*¥
+filter_multi_user_patternsGtorch._inductor.pattern_matcher.MatchContext.filter_multi_user_patterns"‰
+Mbuiltins.dict[torch._inductor.pattern_matcher.PatternExpr,torch.fx.node.Node]Z
++torch._inductor.pattern_matcher.PatternExpr"+torch._inductor.pattern_matcher.PatternExpr(
+torch.fx.node.Node"torch.fx.node.Node"builtins.dict*f
+self\
+,torch._inductor.pattern_matcher.MatchContext",torch._inductor.pattern_matcher.MatchContextrΩ
+outputs4torch._inductor.pattern_matcher.MatchContext.outputs˚
+Fbuiltins.list[Union[torch._inductor.pattern_matcher.PatternExpr,None]]°
+7Union[torch._inductor.pattern_matcher.PatternExpr,None]Z
++torch._inductor.pattern_matcher.PatternExpr"+torch._inductor.pattern_matcher.PatternExpr
+None"builtins.listr
+pattern_to_node<torch._inductor.pattern_matcher.MatchContext.pattern_to_nodeû
+Ybuiltins.dict[torch._inductor.pattern_matcher.PatternExpr,Union[torch.fx.node.Node,None]]Z
++torch._inductor.pattern_matcher.PatternExpr"+torch._inductor.pattern_matcher.PatternExprV
+Union[torch.fx.node.Node,None](
+torch.fx.node.Node"torch.fx.node.Node
+None"builtins.dictri
+graph2torch._inductor.pattern_matcher.MatchContext.graph,
+torch.fx.graph.Graph"torch.fx.graph.Graphrµ
+exclusive_node_set?torch._inductor.pattern_matcher.MatchContext.exclusive_node_set›
+Bbuiltins.list[TypeAlias[Union[TypeAlias[Any],torch.fx.node.Node]]]á
+3TypeAlias[Union[TypeAlias[Any],torch.fx.node.Node]]ù
+(Union[TypeAlias[Any],torch.fx.node.Node]E
+TypeAlias[Any]
+Any"(torch._inductor.pattern_matcher.Constant(
+torch.fx.node.Node"torch.fx.node.Node".torch._inductor.pattern_matcher.NodeOrConstant"builtins.list¯
+PatternExpr+torch._inductor.pattern_matcher.PatternExpr"abc.ABC*Û
+_match2torch._inductor.pattern_matcher.PatternExpr._match"ü
+cTypeAlias[Union[torch._inductor.pattern_matcher.Match,torch._inductor.pattern_matcher.FailedMatch]]à
+XUnion[torch._inductor.pattern_matcher.Match,torch._inductor.pattern_matcher.FailedMatch]N
+%torch._inductor.pattern_matcher.Match"%torch._inductor.pattern_matcher.MatchZ
++torch._inductor.pattern_matcher.FailedMatch"+torch._inductor.pattern_matcher.FailedMatch"+torch._inductor.pattern_matcher.MatchResult*d
+selfZ
++torch._inductor.pattern_matcher.PatternExpr"+torch._inductor.pattern_matcher.PatternExpr*2
+node(
+torch.fx.node.Node"torch.fx.node.Node*e
+ctx\
+,torch._inductor.pattern_matcher.MatchContext",torch._inductor.pattern_matcher.MatchContext0:abstractmethod@*ˆ
+match1torch._inductor.pattern_matcher.PatternExpr.match"ü
+cTypeAlias[Union[torch._inductor.pattern_matcher.Match,torch._inductor.pattern_matcher.FailedMatch]]à
+XUnion[torch._inductor.pattern_matcher.Match,torch._inductor.pattern_matcher.FailedMatch]N
+%torch._inductor.pattern_matcher.Match"%torch._inductor.pattern_matcher.MatchZ
++torch._inductor.pattern_matcher.FailedMatch"+torch._inductor.pattern_matcher.FailedMatch"+torch._inductor.pattern_matcher.MatchResult*d
+selfZ
++torch._inductor.pattern_matcher.PatternExpr"+torch._inductor.pattern_matcher.PatternExpr*2
+node(
+torch.fx.node.Node"torch.fx.node.Node*⁄
+has_multiple_users>torch._inductor.pattern_matcher.PatternExpr.has_multiple_users"
+builtins.bool"builtins.bool*d
+selfZ
++torch._inductor.pattern_matcher.PatternExpr"+torch._inductor.pattern_matcher.PatternExpr*º
+__repr__4torch._inductor.pattern_matcher.PatternExpr.__repr__"
+builtins.str"builtins.str*\Z
++torch._inductor.pattern_matcher.PatternExpr"+torch._inductor.pattern_matcher.PatternExpr*∆
+find_anchor_nodes=torch._inductor.pattern_matcher.PatternExpr.find_anchor_nodes"∫
+:typing.Generator[Union[torch.fx.node.Node,None],None,None]V
+Union[torch.fx.node.Node,None](
+torch.fx.node.Node"torch.fx.node.Node
+None
+None
+None"typing.Generator*d
+selfZ
++torch._inductor.pattern_matcher.PatternExpr"+torch._inductor.pattern_matcher.PatternExpr*e
+ctx\
+,torch._inductor.pattern_matcher.MatchContext",torch._inductor.pattern_matcher.MatchContext*h
+searchedZ
+ builtins.set[torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node"builtins.set*ﬁ
+
+pattern_eq6torch._inductor.pattern_matcher.PatternExpr.pattern_eq"
+builtins.bool"builtins.bool*d
+selfZ
++torch._inductor.pattern_matcher.PatternExpr"+torch._inductor.pattern_matcher.PatternExpr*
+other
+AnyÇ
+Arg#torch._inductor.pattern_matcher.Arg"+torch._inductor.pattern_matcher.PatternExpr*®
+_match*torch._inductor.pattern_matcher.Arg._match"ü
+cTypeAlias[Union[torch._inductor.pattern_matcher.Match,torch._inductor.pattern_matcher.FailedMatch]]à
+XUnion[torch._inductor.pattern_matcher.Match,torch._inductor.pattern_matcher.FailedMatch]N
+%torch._inductor.pattern_matcher.Match"%torch._inductor.pattern_matcher.MatchZ
++torch._inductor.pattern_matcher.FailedMatch"+torch._inductor.pattern_matcher.FailedMatch"+torch._inductor.pattern_matcher.MatchResult*T
+selfJ
+#torch._inductor.pattern_matcher.Arg"#torch._inductor.pattern_matcher.Arg*í
+nodeá
+3TypeAlias[Union[TypeAlias[Any],torch.fx.node.Node]]ù
+(Union[TypeAlias[Any],torch.fx.node.Node]E
+TypeAlias[Any]
+Any"(torch._inductor.pattern_matcher.Constant(
+torch.fx.node.Node"torch.fx.node.Node".torch._inductor.pattern_matcher.NodeOrConstant*e
+ctx\
+,torch._inductor.pattern_matcher.MatchContext",torch._inductor.pattern_matcher.MatchContextÇ
+Ignored'torch._inductor.pattern_matcher.Ignored"+torch._inductor.pattern_matcher.PatternExpr*¥
+_match.torch._inductor.pattern_matcher.Ignored._match"ü
+cTypeAlias[Union[torch._inductor.pattern_matcher.Match,torch._inductor.pattern_matcher.FailedMatch]]à
+XUnion[torch._inductor.pattern_matcher.Match,torch._inductor.pattern_matcher.FailedMatch]N
+%torch._inductor.pattern_matcher.Match"%torch._inductor.pattern_matcher.MatchZ
++torch._inductor.pattern_matcher.FailedMatch"+torch._inductor.pattern_matcher.FailedMatch"+torch._inductor.pattern_matcher.MatchResult*\
+selfR
+'torch._inductor.pattern_matcher.Ignored"'torch._inductor.pattern_matcher.Ignored*í
+nodeá
+3TypeAlias[Union[TypeAlias[Any],torch.fx.node.Node]]ù
+(Union[TypeAlias[Any],torch.fx.node.Node]E
+TypeAlias[Any]
+Any"(torch._inductor.pattern_matcher.Constant(
+torch.fx.node.Node"torch.fx.node.Node".torch._inductor.pattern_matcher.NodeOrConstant*e
+ctx\
+,torch._inductor.pattern_matcher.MatchContext",torch._inductor.pattern_matcher.MatchContext*∞
+__repr__0torch._inductor.pattern_matcher.Ignored.__repr__"
+builtins.str"builtins.str*TR
+'torch._inductor.pattern_matcher.Ignored"'torch._inductor.pattern_matcher.Ignored*∂
+pretty_print4torch._inductor.pattern_matcher.Ignored.pretty_print"
+builtins.str"builtins.str*\
+selfR
+'torch._inductor.pattern_matcher.Ignored"'torch._inductor.pattern_matcher.Ignored*t
+ppl
+4torch._inductor.pattern_matcher.PatternPrettyPrinter"4torch._inductor.pattern_matcher.PatternPrettyPrinterÓ
+
+KeywordArg*torch._inductor.pattern_matcher.KeywordArg"+torch._inductor.pattern_matcher.PatternExpr*’
+__init__3torch._inductor.pattern_matcher.KeywordArg.__init__"
+None*b
+selfX
+*torch._inductor.pattern_matcher.KeywordArg"*torch._inductor.pattern_matcher.KeywordArg*&
+name
+builtins.str"builtins.str*π
+__repr__3torch._inductor.pattern_matcher.KeywordArg.__repr__"
+builtins.str"builtins.str*ZX
+*torch._inductor.pattern_matcher.KeywordArg"*torch._inductor.pattern_matcher.KeywordArg*Ω
+_match1torch._inductor.pattern_matcher.KeywordArg._match"ü
+cTypeAlias[Union[torch._inductor.pattern_matcher.Match,torch._inductor.pattern_matcher.FailedMatch]]à
+XUnion[torch._inductor.pattern_matcher.Match,torch._inductor.pattern_matcher.FailedMatch]N
+%torch._inductor.pattern_matcher.Match"%torch._inductor.pattern_matcher.MatchZ
++torch._inductor.pattern_matcher.FailedMatch"+torch._inductor.pattern_matcher.FailedMatch"+torch._inductor.pattern_matcher.MatchResult*b
+selfX
+*torch._inductor.pattern_matcher.KeywordArg"*torch._inductor.pattern_matcher.KeywordArg*í
+nodeá
+3TypeAlias[Union[TypeAlias[Any],torch.fx.node.Node]]ù
+(Union[TypeAlias[Any],torch.fx.node.Node]E
+TypeAlias[Any]
+Any"(torch._inductor.pattern_matcher.Constant(
+torch.fx.node.Node"torch.fx.node.Node".torch._inductor.pattern_matcher.NodeOrConstant*e
+ctx\
+,torch._inductor.pattern_matcher.MatchContext",torch._inductor.pattern_matcher.MatchContext*€
+
+pattern_eq5torch._inductor.pattern_matcher.KeywordArg.pattern_eq"
+builtins.bool"builtins.bool*b
+selfX
+*torch._inductor.pattern_matcher.KeywordArg"*torch._inductor.pattern_matcher.KeywordArg*
+other
+AnyrU
+name/torch._inductor.pattern_matcher.KeywordArg.name
+builtins.str"builtins.strı
+ExclusiveKeywordArg3torch._inductor.pattern_matcher.ExclusiveKeywordArg"+torch._inductor.pattern_matcher.PatternExpr*
+__init__<torch._inductor.pattern_matcher.ExclusiveKeywordArg.__init__"
+None*t
+selfj
+3torch._inductor.pattern_matcher.ExclusiveKeywordArg"3torch._inductor.pattern_matcher.ExclusiveKeywordArg*&
+name
+builtins.str"builtins.str*‘
+__repr__<torch._inductor.pattern_matcher.ExclusiveKeywordArg.__repr__"
+builtins.str"builtins.str*lj
+3torch._inductor.pattern_matcher.ExclusiveKeywordArg"3torch._inductor.pattern_matcher.ExclusiveKeywordArg*ÿ
+_match:torch._inductor.pattern_matcher.ExclusiveKeywordArg._match"ü
+cTypeAlias[Union[torch._inductor.pattern_matcher.Match,torch._inductor.pattern_matcher.FailedMatch]]à
+XUnion[torch._inductor.pattern_matcher.Match,torch._inductor.pattern_matcher.FailedMatch]N
+%torch._inductor.pattern_matcher.Match"%torch._inductor.pattern_matcher.MatchZ
++torch._inductor.pattern_matcher.FailedMatch"+torch._inductor.pattern_matcher.FailedMatch"+torch._inductor.pattern_matcher.MatchResult*t
+selfj
+3torch._inductor.pattern_matcher.ExclusiveKeywordArg"3torch._inductor.pattern_matcher.ExclusiveKeywordArg*í
+nodeá
+3TypeAlias[Union[TypeAlias[Any],torch.fx.node.Node]]ù
+(Union[TypeAlias[Any],torch.fx.node.Node]E
+TypeAlias[Any]
+Any"(torch._inductor.pattern_matcher.Constant(
+torch.fx.node.Node"torch.fx.node.Node".torch._inductor.pattern_matcher.NodeOrConstant*e
+ctx\
+,torch._inductor.pattern_matcher.MatchContext",torch._inductor.pattern_matcher.MatchContext*ˆ
+
+pattern_eq>torch._inductor.pattern_matcher.ExclusiveKeywordArg.pattern_eq"
+builtins.bool"builtins.bool*t
+selfj
+3torch._inductor.pattern_matcher.ExclusiveKeywordArg"3torch._inductor.pattern_matcher.ExclusiveKeywordArg*
+other
+Anyr^
+name8torch._inductor.pattern_matcher.ExclusiveKeywordArg.name
+builtins.str"builtins.strÈ'
+_TargetExpr+torch._inductor.pattern_matcher._TargetExpr"+torch._inductor.pattern_matcher.PatternExpr*∂
+__init__4torch._inductor.pattern_matcher._TargetExpr.__init__"
+None*d
+selfZ
++torch._inductor.pattern_matcher._TargetExpr"+torch._inductor.pattern_matcher._TargetExpr*æ
+fns¥
+}Union[TypeAlias[Union[TypeAlias[Union[CallableType[builtins.function],builtins.str]],builtins.str]],typing.Sequence[Unknown]]Å
+]TypeAlias[Union[TypeAlias[Union[CallableType[builtins.function],builtins.str]],builtins.str]]Ù
+RUnion[TypeAlias[Union[CallableType[builtins.function],builtins.str]],builtins.str]˝
+>TypeAlias[Union[CallableType[builtins.function],builtins.str]]¢
+3Union[CallableType[builtins.function],builtins.str]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+builtins.str"builtins.str"torch.fx.node.Target
+builtins.str"builtins.str"'torch._inductor.pattern_matcher.FnsType-
+typing.Sequence[Unknown] "typing.Sequence*¬
+users¥
+<Union[torch._inductor.pattern_matcher.Multiple,builtins.int]T
+(torch._inductor.pattern_matcher.Multiple"(torch._inductor.pattern_matcher.Multiple
+builtins.int"builtins.int *ÿ
+op.torch._inductor.pattern_matcher._TargetExpr.op"
+builtins.str"builtins.str*d
+selfZ
++torch._inductor.pattern_matcher._TargetExpr"+torch._inductor.pattern_matcher._TargetExpr0:property:abstractmethod@`*ƒ
+fns_repr4torch._inductor.pattern_matcher._TargetExpr.fns_repr"
+builtins.str"builtins.str*d
+selfZ
++torch._inductor.pattern_matcher._TargetExpr"+torch._inductor.pattern_matcher._TargetExpr*º
+__repr__4torch._inductor.pattern_matcher._TargetExpr.__repr__"
+builtins.str"builtins.str*\Z
++torch._inductor.pattern_matcher._TargetExpr"+torch._inductor.pattern_matcher._TargetExpr*⁄
+has_multiple_users>torch._inductor.pattern_matcher._TargetExpr.has_multiple_users"
+builtins.bool"builtins.bool*d
+selfZ
++torch._inductor.pattern_matcher._TargetExpr"+torch._inductor.pattern_matcher._TargetExpr*∆
+find_anchor_nodes=torch._inductor.pattern_matcher._TargetExpr.find_anchor_nodes"∫
+:typing.Generator[Union[torch.fx.node.Node,None],None,None]V
+Union[torch.fx.node.Node,None](
+torch.fx.node.Node"torch.fx.node.Node
+None
+None
+None"typing.Generator*d
+selfZ
++torch._inductor.pattern_matcher._TargetExpr"+torch._inductor.pattern_matcher._TargetExpr*e
+ctx\
+,torch._inductor.pattern_matcher.MatchContext",torch._inductor.pattern_matcher.MatchContext*h
+searchedZ
+ builtins.set[torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node"builtins.set*˛
+
+_match_fns6torch._inductor.pattern_matcher._TargetExpr._match_fns"
+builtins.bool"builtins.bool*d
+selfZ
++torch._inductor.pattern_matcher._TargetExpr"+torch._inductor.pattern_matcher._TargetExpr*2
+node(
+torch.fx.node.Node"torch.fx.node.Node*È
+_match_users8torch._inductor.pattern_matcher._TargetExpr._match_users"
+builtins.bool"builtins.bool*d
+selfZ
++torch._inductor.pattern_matcher._TargetExpr"+torch._inductor.pattern_matcher._TargetExpr*2
+node(
+torch.fx.node.Node"torch.fx.node.Node*e
+ctx\
+,torch._inductor.pattern_matcher.MatchContext",torch._inductor.pattern_matcher.MatchContext*ﬁ
+
+pattern_eq6torch._inductor.pattern_matcher._TargetExpr.pattern_eq"
+builtins.bool"builtins.bool*d
+selfZ
++torch._inductor.pattern_matcher._TargetExpr"+torch._inductor.pattern_matcher._TargetExpr*
+other
+Anyr∫
+fns/torch._inductor.pattern_matcher._TargetExpr.fnsÅ
+lbuiltins.list[TypeAlias[Union[TypeAlias[Union[CallableType[builtins.function],builtins.str]],builtins.str]]]Å
+]TypeAlias[Union[TypeAlias[Union[CallableType[builtins.function],builtins.str]],builtins.str]]Ù
+RUnion[TypeAlias[Union[CallableType[builtins.function],builtins.str]],builtins.str]˝
+>TypeAlias[Union[CallableType[builtins.function],builtins.str]]¢
+3Union[CallableType[builtins.function],builtins.str]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+builtins.str"builtins.str"torch.fx.node.Target
+builtins.str"builtins.str"'torch._inductor.pattern_matcher.FnsType"builtins.listr¿
+fns_set3torch._inductor.pattern_matcher._TargetExpr.fns_setˇ
+kbuiltins.set[TypeAlias[Union[TypeAlias[Union[CallableType[builtins.function],builtins.str]],builtins.str]]]Å
+]TypeAlias[Union[TypeAlias[Union[CallableType[builtins.function],builtins.str]],builtins.str]]Ù
+RUnion[TypeAlias[Union[CallableType[builtins.function],builtins.str]],builtins.str]˝
+>TypeAlias[Union[CallableType[builtins.function],builtins.str]]¢
+3Union[CallableType[builtins.function],builtins.str]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+builtins.str"builtins.str"torch.fx.node.Target
+builtins.str"builtins.str"'torch._inductor.pattern_matcher.FnsType"builtins.setrÒ
+users1torch._inductor.pattern_matcher._TargetExpr.users¥
+<Union[torch._inductor.pattern_matcher.Multiple,builtins.int]T
+(torch._inductor.pattern_matcher.Multiple"(torch._inductor.pattern_matcher.Multiple
+builtins.int"builtins.int‘)
+_TargetArgsExpr/torch._inductor.pattern_matcher._TargetArgsExpr"+torch._inductor.pattern_matcher._TargetExpr*Ú
+__init__8torch._inductor.pattern_matcher._TargetArgsExpr.__init__"
+None*l
+selfb
+/torch._inductor.pattern_matcher._TargetArgsExpr"/torch._inductor.pattern_matcher._TargetArgsExpr*≈
+fnsª
+gUnion[TypeAlias[Union[CallableType[builtins.function],builtins.str]],builtins.str,typing.Sequence[Any]]˝
+>TypeAlias[Union[CallableType[builtins.function],builtins.str]]¢
+3Union[CallableType[builtins.function],builtins.str]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+builtins.str"builtins.str"torch.fx.node.Target
+builtins.str"builtins.str0
+typing.Sequence[Any]
+Any"typing.Sequence*
+args
+Any*√
+_users¥
+<Union[builtins.int,torch._inductor.pattern_matcher.Multiple]
+builtins.int"builtins.intT
+(torch._inductor.pattern_matcher.Multiple"(torch._inductor.pattern_matcher.Multiple *
+kwargs
+Any*Ü
+simple_flatten>torch._inductor.pattern_matcher._TargetArgsExpr.simple_flatten"ú
+^Tuple[typing.Sequence[Any],Union[TypeAlias[builtins.tuple[Any]],torch.utils._pytree.TreeSpec]]0
+typing.Sequence[Any]
+Any"typing.SequenceÖ
+BUnion[TypeAlias[builtins.tuple[Any]],torch.utils._pytree.TreeSpec]
+TypeAlias[builtins.tuple[Any]].
+builtins.tuple[Any]
+Any"builtins.tuple"+torch._inductor.pattern_matcher._SimpleSpec<
+torch.utils._pytree.TreeSpec"torch.utils._pytree.TreeSpec*:
+args0
+typing.Sequence[Any]
+Any"typing.Sequence*G
+kwargs;
+typing.Mapping[Any,Any]
+Any
+Any"typing.Mapping0:staticmethodh*Ü
+pytree_flatten>torch._inductor.pattern_matcher._TargetArgsExpr.pytree_flatten"ú
+^Tuple[typing.Sequence[Any],Union[TypeAlias[builtins.tuple[Any]],torch.utils._pytree.TreeSpec]]0
+typing.Sequence[Any]
+Any"typing.SequenceÖ
+BUnion[TypeAlias[builtins.tuple[Any]],torch.utils._pytree.TreeSpec]
+TypeAlias[builtins.tuple[Any]].
+builtins.tuple[Any]
+Any"builtins.tuple"+torch._inductor.pattern_matcher._SimpleSpec<
+torch.utils._pytree.TreeSpec"torch.utils._pytree.TreeSpec*:
+args0
+typing.Sequence[Any]
+Any"typing.Sequence*G
+kwargs;
+typing.Mapping[Any,Any]
+Any
+Any"typing.Mapping0:staticmethodh*»
+__repr__8torch._inductor.pattern_matcher._TargetArgsExpr.__repr__"
+builtins.str"builtins.str*db
+/torch._inductor.pattern_matcher._TargetArgsExpr"/torch._inductor.pattern_matcher._TargetArgsExpr*Œ
+pretty_print<torch._inductor.pattern_matcher._TargetArgsExpr.pretty_print"
+builtins.str"builtins.str*l
+selfb
+/torch._inductor.pattern_matcher._TargetArgsExpr"/torch._inductor.pattern_matcher._TargetArgsExpr*t
+ppl
+4torch._inductor.pattern_matcher.PatternPrettyPrinter"4torch._inductor.pattern_matcher.PatternPrettyPrinter*Î
+_match6torch._inductor.pattern_matcher._TargetArgsExpr._match"ü
+cTypeAlias[Union[torch._inductor.pattern_matcher.Match,torch._inductor.pattern_matcher.FailedMatch]]à
+XUnion[torch._inductor.pattern_matcher.Match,torch._inductor.pattern_matcher.FailedMatch]N
+%torch._inductor.pattern_matcher.Match"%torch._inductor.pattern_matcher.MatchZ
++torch._inductor.pattern_matcher.FailedMatch"+torch._inductor.pattern_matcher.FailedMatch"+torch._inductor.pattern_matcher.MatchResult*l
+selfb
+/torch._inductor.pattern_matcher._TargetArgsExpr"/torch._inductor.pattern_matcher._TargetArgsExpr*2
+node(
+torch.fx.node.Node"torch.fx.node.Node*e
+ctx\
+,torch._inductor.pattern_matcher.MatchContext",torch._inductor.pattern_matcher.MatchContext*“
+find_anchor_nodesAtorch._inductor.pattern_matcher._TargetArgsExpr.find_anchor_nodes"∫
+:typing.Generator[Union[torch.fx.node.Node,None],None,None]V
+Union[torch.fx.node.Node,None](
+torch.fx.node.Node"torch.fx.node.Node
+None
+None
+None"typing.Generator*l
+selfb
+/torch._inductor.pattern_matcher._TargetArgsExpr"/torch._inductor.pattern_matcher._TargetArgsExpr*e
+ctx\
+,torch._inductor.pattern_matcher.MatchContext",torch._inductor.pattern_matcher.MatchContext*h
+searchedZ
+ builtins.set[torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node"builtins.set*Í
+
+pattern_eq:torch._inductor.pattern_matcher._TargetArgsExpr.pattern_eq"
+builtins.bool"builtins.bool*l
+selfb
+/torch._inductor.pattern_matcher._TargetArgsExpr"/torch._inductor.pattern_matcher._TargetArgsExpr*
+other
+Anyrl
+args4torch._inductor.pattern_matcher._TargetArgsExpr.args.
+builtins.tuple[Any]
+Any"builtins.tuplerô
+kwargs6torch._inductor.pattern_matcher._TargetArgsExpr.kwargsW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dictrè
+flatten7torch._inductor.pattern_matcher._TargetArgsExpr.flattenK
+CallableType[builtins.function]&
+builtins.function"builtins.functionrÛ
+flat_args_kwargs@torch._inductor.pattern_matcher._TargetArgsExpr.flat_args_kwargsú
+^Tuple[typing.Sequence[Any],Union[TypeAlias[builtins.tuple[Any]],torch.utils._pytree.TreeSpec]]0
+typing.Sequence[Any]
+Any"typing.SequenceÖ
+BUnion[TypeAlias[builtins.tuple[Any]],torch.utils._pytree.TreeSpec]
+TypeAlias[builtins.tuple[Any]].
+builtins.tuple[Any]
+Any"builtins.tuple"+torch._inductor.pattern_matcher._SimpleSpec<
+torch.utils._pytree.TreeSpec"torch.utils._pytree.TreeSpec¬
+CallFunction,torch._inductor.pattern_matcher.CallFunction"/torch._inductor.pattern_matcher._TargetArgsExprrS
+op/torch._inductor.pattern_matcher.CallFunction.op
+builtins.str"builtins.strº
+
+CallMethod*torch._inductor.pattern_matcher.CallMethod"/torch._inductor.pattern_matcher._TargetArgsExprrQ
+op-torch._inductor.pattern_matcher.CallMethod.op
+builtins.str"builtins.strº
+
+CallModule*torch._inductor.pattern_matcher.CallModule"/torch._inductor.pattern_matcher._TargetArgsExprrQ
+op-torch._inductor.pattern_matcher.CallModule.op
+builtins.str"builtins.strÏ
+_TargetExprVarArgs2torch._inductor.pattern_matcher._TargetExprVarArgs"+torch._inductor.pattern_matcher._TargetExpr*Ù
+_match9torch._inductor.pattern_matcher._TargetExprVarArgs._match"ü
+cTypeAlias[Union[torch._inductor.pattern_matcher.Match,torch._inductor.pattern_matcher.FailedMatch]]à
+XUnion[torch._inductor.pattern_matcher.Match,torch._inductor.pattern_matcher.FailedMatch]N
+%torch._inductor.pattern_matcher.Match"%torch._inductor.pattern_matcher.MatchZ
++torch._inductor.pattern_matcher.FailedMatch"+torch._inductor.pattern_matcher.FailedMatch"+torch._inductor.pattern_matcher.MatchResult*r
+selfh
+2torch._inductor.pattern_matcher._TargetExprVarArgs"2torch._inductor.pattern_matcher._TargetExprVarArgs*2
+node(
+torch.fx.node.Node"torch.fx.node.Node*e
+ctx\
+,torch._inductor.pattern_matcher.MatchContext",torch._inductor.pattern_matcher.MatchContext⁄
+CallFunctionVarArgs3torch._inductor.pattern_matcher.CallFunctionVarArgs"2torch._inductor.pattern_matcher._TargetExprVarArgsrZ
+op6torch._inductor.pattern_matcher.CallFunctionVarArgs.op
+builtins.str"builtins.str‘
+CallMethodVarArgs1torch._inductor.pattern_matcher.CallMethodVarArgs"2torch._inductor.pattern_matcher._TargetExprVarArgsrX
+op4torch._inductor.pattern_matcher.CallMethodVarArgs.op
+builtins.str"builtins.str‘
+CallModuleVarArgs1torch._inductor.pattern_matcher.CallModuleVarArgs"2torch._inductor.pattern_matcher._TargetExprVarArgsrX
+op4torch._inductor.pattern_matcher.CallModuleVarArgs.op
+builtins.str"builtins.strï
+ListOf&torch._inductor.pattern_matcher.ListOf"+torch._inductor.pattern_matcher.PatternExpr*π
+__init__/torch._inductor.pattern_matcher.ListOf.__init__"
+None*Z
+selfP
+&torch._inductor.pattern_matcher.ListOf"&torch._inductor.pattern_matcher.ListOf*g
+patternZ
++torch._inductor.pattern_matcher.PatternExpr"+torch._inductor.pattern_matcher.PatternExpr*-
+partial
+builtins.bool"builtins.bool *≠
+__repr__/torch._inductor.pattern_matcher.ListOf.__repr__"
+builtins.str"builtins.str*RP
+&torch._inductor.pattern_matcher.ListOf"&torch._inductor.pattern_matcher.ListOf*Ñ
+_match-torch._inductor.pattern_matcher.ListOf._match"ü
+cTypeAlias[Union[torch._inductor.pattern_matcher.Match,torch._inductor.pattern_matcher.FailedMatch]]à
+XUnion[torch._inductor.pattern_matcher.Match,torch._inductor.pattern_matcher.FailedMatch]N
+%torch._inductor.pattern_matcher.Match"%torch._inductor.pattern_matcher.MatchZ
++torch._inductor.pattern_matcher.FailedMatch"+torch._inductor.pattern_matcher.FailedMatch"+torch._inductor.pattern_matcher.MatchResult*Z
+selfP
+&torch._inductor.pattern_matcher.ListOf"&torch._inductor.pattern_matcher.ListOf*f
+node\
+!builtins.list[torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node"builtins.list*e
+ctx\
+,torch._inductor.pattern_matcher.MatchContext",torch._inductor.pattern_matcher.MatchContext*œ
+
+pattern_eq1torch._inductor.pattern_matcher.ListOf.pattern_eq"
+builtins.bool"builtins.bool*Z
+selfP
+&torch._inductor.pattern_matcher.ListOf"&torch._inductor.pattern_matcher.ListOf*
+other
+Anyrï
+pattern.torch._inductor.pattern_matcher.ListOf.patternZ
++torch._inductor.pattern_matcher.PatternExpr"+torch._inductor.pattern_matcher.PatternExprrY
+partial.torch._inductor.pattern_matcher.ListOf.partial
+builtins.bool"builtins.boolã#
+MultiOutputPattern2torch._inductor.pattern_matcher.MultiOutputPattern"+torch._inductor.pattern_matcher.PatternExpr*’
+__init__;torch._inductor.pattern_matcher.MultiOutputPattern.__init__"
+None*r
+selfh
+2torch._inductor.pattern_matcher.MultiOutputPattern"2torch._inductor.pattern_matcher.MultiOutputPattern*ç
+outputsˇ
+Htyping.Sequence[Union[torch._inductor.pattern_matcher.PatternExpr,None]]°
+7Union[torch._inductor.pattern_matcher.PatternExpr,None]Z
++torch._inductor.pattern_matcher.PatternExpr"+torch._inductor.pattern_matcher.PatternExpr
+None"typing.Sequence*´
+fns6torch._inductor.pattern_matcher.MultiOutputPattern.fns"È
+HUnion[CallableType[builtins.function],builtins.str,typing.Sequence[Any]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+builtins.str"builtins.str0
+typing.Sequence[Any]
+Any"typing.Sequence*r
+selfh
+2torch._inductor.pattern_matcher.MultiOutputPattern"2torch._inductor.pattern_matcher.MultiOutputPattern0:property`*—
+__repr__;torch._inductor.pattern_matcher.MultiOutputPattern.__repr__"
+builtins.str"builtins.str*jh
+2torch._inductor.pattern_matcher.MultiOutputPattern"2torch._inductor.pattern_matcher.MultiOutputPattern*◊
+pretty_print?torch._inductor.pattern_matcher.MultiOutputPattern.pretty_print"
+builtins.str"builtins.str*r
+selfh
+2torch._inductor.pattern_matcher.MultiOutputPattern"2torch._inductor.pattern_matcher.MultiOutputPattern*t
+ppl
+4torch._inductor.pattern_matcher.PatternPrettyPrinter"4torch._inductor.pattern_matcher.PatternPrettyPrinter*Ù
+_match9torch._inductor.pattern_matcher.MultiOutputPattern._match"ü
+cTypeAlias[Union[torch._inductor.pattern_matcher.Match,torch._inductor.pattern_matcher.FailedMatch]]à
+XUnion[torch._inductor.pattern_matcher.Match,torch._inductor.pattern_matcher.FailedMatch]N
+%torch._inductor.pattern_matcher.Match"%torch._inductor.pattern_matcher.MatchZ
++torch._inductor.pattern_matcher.FailedMatch"+torch._inductor.pattern_matcher.FailedMatch"+torch._inductor.pattern_matcher.MatchResult*r
+selfh
+2torch._inductor.pattern_matcher.MultiOutputPattern"2torch._inductor.pattern_matcher.MultiOutputPattern*2
+node(
+torch.fx.node.Node"torch.fx.node.Node*e
+ctx\
+,torch._inductor.pattern_matcher.MatchContext",torch._inductor.pattern_matcher.MatchContext*√
+_match_from_anchorsFtorch._inductor.pattern_matcher.MultiOutputPattern._match_from_anchors"ü
+cTypeAlias[Union[torch._inductor.pattern_matcher.Match,torch._inductor.pattern_matcher.FailedMatch]]à
+XUnion[torch._inductor.pattern_matcher.Match,torch._inductor.pattern_matcher.FailedMatch]N
+%torch._inductor.pattern_matcher.Match"%torch._inductor.pattern_matcher.MatchZ
++torch._inductor.pattern_matcher.FailedMatch"+torch._inductor.pattern_matcher.FailedMatch"+torch._inductor.pattern_matcher.MatchResult*r
+selfh
+2torch._inductor.pattern_matcher.MultiOutputPattern"2torch._inductor.pattern_matcher.MultiOutputPattern*g
+patternZ
++torch._inductor.pattern_matcher.PatternExpr"+torch._inductor.pattern_matcher.PatternExpr*e
+ctx\
+,torch._inductor.pattern_matcher.MatchContext",torch._inductor.pattern_matcher.MatchContext*ã
+match8torch._inductor.pattern_matcher.MultiOutputPattern.match"ü
+cTypeAlias[Union[torch._inductor.pattern_matcher.Match,torch._inductor.pattern_matcher.FailedMatch]]à
+XUnion[torch._inductor.pattern_matcher.Match,torch._inductor.pattern_matcher.FailedMatch]N
+%torch._inductor.pattern_matcher.Match"%torch._inductor.pattern_matcher.MatchZ
++torch._inductor.pattern_matcher.FailedMatch"+torch._inductor.pattern_matcher.FailedMatch"+torch._inductor.pattern_matcher.MatchResult*r
+selfh
+2torch._inductor.pattern_matcher.MultiOutputPattern"2torch._inductor.pattern_matcher.MultiOutputPattern*2
+node(
+torch.fx.node.Node"torch.fx.node.Node*Û
+
+pattern_eq=torch._inductor.pattern_matcher.MultiOutputPattern.pattern_eq"
+builtins.bool"builtins.bool*r
+selfh
+2torch._inductor.pattern_matcher.MultiOutputPattern"2torch._inductor.pattern_matcher.MultiOutputPattern*
+other
+Anyr√
+outputs:torch._inductor.pattern_matcher.MultiOutputPattern.outputs˚
+Fbuiltins.list[Union[torch._inductor.pattern_matcher.PatternExpr,None]]°
+7Union[torch._inductor.pattern_matcher.PatternExpr,None]Z
++torch._inductor.pattern_matcher.PatternExpr"+torch._inductor.pattern_matcher.PatternExpr
+None"builtins.listrY
+op5torch._inductor.pattern_matcher.MultiOutputPattern.op
+builtins.str"builtins.stré
+RepeatedExpr,torch._inductor.pattern_matcher.RepeatedExpr"+torch._inductor.pattern_matcher.PatternExpr*¢
+__init__5torch._inductor.pattern_matcher.RepeatedExpr.__init__"
+None*f
+self\
+,torch._inductor.pattern_matcher.RepeatedExpr",torch._inductor.pattern_matcher.RepeatedExpr*m
+inner_patternZ
++torch._inductor.pattern_matcher._TargetExpr"+torch._inductor.pattern_matcher._TargetExpr*µ
+fns0torch._inductor.pattern_matcher.RepeatedExpr.fns"Ö
+ntyping.Sequence[TypeAlias[Union[TypeAlias[Union[CallableType[builtins.function],builtins.str]],builtins.str]]]Å
+]TypeAlias[Union[TypeAlias[Union[CallableType[builtins.function],builtins.str]],builtins.str]]Ù
+RUnion[TypeAlias[Union[CallableType[builtins.function],builtins.str]],builtins.str]˝
+>TypeAlias[Union[CallableType[builtins.function],builtins.str]]¢
+3Union[CallableType[builtins.function],builtins.str]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+builtins.str"builtins.str"torch.fx.node.Target
+builtins.str"builtins.str"'torch._inductor.pattern_matcher.FnsType"typing.Sequence*f
+self\
+,torch._inductor.pattern_matcher.RepeatedExpr",torch._inductor.pattern_matcher.RepeatedExpr0:property`*‚
+_match3torch._inductor.pattern_matcher.RepeatedExpr._match"ü
+cTypeAlias[Union[torch._inductor.pattern_matcher.Match,torch._inductor.pattern_matcher.FailedMatch]]à
+XUnion[torch._inductor.pattern_matcher.Match,torch._inductor.pattern_matcher.FailedMatch]N
+%torch._inductor.pattern_matcher.Match"%torch._inductor.pattern_matcher.MatchZ
++torch._inductor.pattern_matcher.FailedMatch"+torch._inductor.pattern_matcher.FailedMatch"+torch._inductor.pattern_matcher.MatchResult*f
+self\
+,torch._inductor.pattern_matcher.RepeatedExpr",torch._inductor.pattern_matcher.RepeatedExpr*2
+node(
+torch.fx.node.Node"torch.fx.node.Node*e
+ctx\
+,torch._inductor.pattern_matcher.MatchContext",torch._inductor.pattern_matcher.MatchContext*·
+
+pattern_eq7torch._inductor.pattern_matcher.RepeatedExpr.pattern_eq"
+builtins.bool"builtins.bool*f
+self\
+,torch._inductor.pattern_matcher.RepeatedExpr",torch._inductor.pattern_matcher.RepeatedExpr*
+other
+Anyrß
+inner_pattern:torch._inductor.pattern_matcher.RepeatedExpr.inner_patternZ
++torch._inductor.pattern_matcher._TargetExpr"+torch._inductor.pattern_matcher._TargetExprrS
+op/torch._inductor.pattern_matcher.RepeatedExpr.op
+builtins.str"builtins.strÍ
+PatternPrettyPrinter4torch._inductor.pattern_matcher.PatternPrettyPrinter"builtins.object*À
+__init__=torch._inductor.pattern_matcher.PatternPrettyPrinter.__init__"
+None*v
+selfl
+4torch._inductor.pattern_matcher.PatternPrettyPrinter"4torch._inductor.pattern_matcher.PatternPrettyPrinter*Ö
+run8torch._inductor.pattern_matcher.PatternPrettyPrinter.run"
+builtins.str"builtins.str*c
+objZ
++torch._inductor.pattern_matcher.PatternExpr"+torch._inductor.pattern_matcher.PatternExpr*/
+output_name
+builtins.str"builtins.str 0:staticmethodh*˘
+pretty_printAtorch._inductor.pattern_matcher.PatternPrettyPrinter.pretty_print"
+builtins.str"builtins.str*v
+selfl
+4torch._inductor.pattern_matcher.PatternPrettyPrinter"4torch._inductor.pattern_matcher.PatternPrettyPrinter*
+obj
+Any* 
+memoize<torch._inductor.pattern_matcher.PatternPrettyPrinter.memoize"
+builtins.str"builtins.str*v
+selfl
+4torch._inductor.pattern_matcher.PatternPrettyPrinter"4torch._inductor.pattern_matcher.PatternPrettyPrinter*k
+objb
+/torch._inductor.pattern_matcher._TargetArgsExpr"/torch._inductor.pattern_matcher._TargetArgsExprrÉ
+	namespace>torch._inductor.pattern_matcher.PatternPrettyPrinter.namespace6
+torch.fx.graph._Namespace"torch.fx.graph._Namespacer¥
+memoized_objs_namesHtorch._inductor.pattern_matcher.PatternPrettyPrinter.memoized_objs_names“
+Gbuiltins.dict[torch._inductor.pattern_matcher.PatternExpr,builtins.str]Z
++torch._inductor.pattern_matcher.PatternExpr"+torch._inductor.pattern_matcher.PatternExpr
+builtins.str"builtins.str"builtins.dictrÆ
+memoized_objs_ppEtorch._inductor.pattern_matcher.PatternPrettyPrinter.memoized_objs_pp“
+Gbuiltins.dict[torch._inductor.pattern_matcher.PatternExpr,builtins.str]Z
++torch._inductor.pattern_matcher.PatternExpr"+torch._inductor.pattern_matcher.PatternExpr
+builtins.str"builtins.str"builtins.dict¨
+_PassDictsType.torch._inductor.pattern_matcher._PassDictsType"builtins.object*÷
+__getitem__:torch._inductor.pattern_matcher._PassDictsType.__getitem__"™
+;builtins.list[torch._inductor.pattern_matcher.PatternEntry]\
+,torch._inductor.pattern_matcher.PatternEntry",torch._inductor.pattern_matcher.PatternEntry"builtins.list*b`
+.torch._inductor.pattern_matcher._PassDictsType".torch._inductor.pattern_matcher._PassDictsType*˜Ù
+RTuple[builtins.str,TypeAlias[Union[CallableType[builtins.function],builtins.str]]]
+builtins.str"builtins.str˝
+>TypeAlias[Union[CallableType[builtins.function],builtins.str]]¢
+3Union[CallableType[builtins.function],builtins.str]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+builtins.str"builtins.str"torch.fx.node.Target@X‰
+PatternEntry,torch._inductor.pattern_matcher.PatternEntry"builtins.object*ı
+apply2torch._inductor.pattern_matcher.PatternEntry.apply"
+None*f
+self\
+,torch._inductor.pattern_matcher.PatternEntry",torch._inductor.pattern_matcher.PatternEntry*Y
+matchN
+%torch._inductor.pattern_matcher.Match"%torch._inductor.pattern_matcher.Match*7
+graph,
+torch.fx.graph.Graph"torch.fx.graph.Graph*2
+node(
+torch.fx.node.Node"torch.fx.node.Node*Ú
+register5torch._inductor.pattern_matcher.PatternEntry.register"
+None*f
+self\
+,torch._inductor.pattern_matcher.PatternEntry",torch._inductor.pattern_matcher.PatternEntry*£
+
+pass_dictsí
+uUnion[torch._inductor.pattern_matcher._PassDictsType,typing.Sequence[torch._inductor.pattern_matcher._PassDictsType]]`
+.torch._inductor.pattern_matcher._PassDictsType".torch._inductor.pattern_matcher._PassDictsType¥
+?typing.Sequence[torch._inductor.pattern_matcher._PassDictsType]`
+.torch._inductor.pattern_matcher._PassDictsType".torch._inductor.pattern_matcher._PassDictsType"typing.Sequence*Á
+targetÿ
+JUnion[TypeAlias[Union[CallableType[builtins.function],builtins.str]],None]˝
+>TypeAlias[Union[CallableType[builtins.function],builtins.str]]¢
+3Union[CallableType[builtins.function],builtins.str]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+builtins.str"builtins.str"torch.fx.node.Target
+None *-
+prepend
+builtins.bool"builtins.bool *˙
+__init__5torch._inductor.pattern_matcher.PatternEntry.__init__"
+None*f
+self\
+,torch._inductor.pattern_matcher.PatternEntry",torch._inductor.pattern_matcher.PatternEntry*g
+patternZ
++torch._inductor.pattern_matcher.PatternExpr"+torch._inductor.pattern_matcher.PatternExpr*\
+extra_checkK
+CallableType[builtins.function]&
+builtins.function"builtins.function8rõ
+pattern4torch._inductor.pattern_matcher.PatternEntry.patternZ
++torch._inductor.pattern_matcher.PatternExpr"+torch._inductor.pattern_matcher.PatternExprrî
+extra_check8torch._inductor.pattern_matcher.PatternEntry.extra_checkK
+CallableType[builtins.function]&
+builtins.function"builtins.functionrÛ
+__dataclass_fields__Atorch._inductor.pattern_matcher.PatternEntry.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictØ
+LoweringPatternEntry4torch._inductor.pattern_matcher.LoweringPatternEntry",torch._inductor.pattern_matcher.PatternEntry*ç
+apply:torch._inductor.pattern_matcher.LoweringPatternEntry.apply"
+None*v
+selfl
+4torch._inductor.pattern_matcher.LoweringPatternEntry"4torch._inductor.pattern_matcher.LoweringPatternEntry*Y
+matchN
+%torch._inductor.pattern_matcher.Match"%torch._inductor.pattern_matcher.Match*7
+graph,
+torch.fx.graph.Graph"torch.fx.graph.Graph*2
+node(
+torch.fx.node.Node"torch.fx.node.Node*Ï
+__init__=torch._inductor.pattern_matcher.LoweringPatternEntry.__init__"
+None*v
+selfl
+4torch._inductor.pattern_matcher.LoweringPatternEntry"4torch._inductor.pattern_matcher.LoweringPatternEntry*g
+patternZ
++torch._inductor.pattern_matcher.PatternExpr"+torch._inductor.pattern_matcher.PatternExpr*\
+extra_checkK
+CallableType[builtins.function]&
+builtins.function"builtins.function*X
+handlerK
+CallableType[builtins.function]&
+builtins.function"builtins.function8rî
+handler<torch._inductor.pattern_matcher.LoweringPatternEntry.handlerK
+CallableType[builtins.function]&
+builtins.function"builtins.functionrú
+extra_check@torch._inductor.pattern_matcher.LoweringPatternEntry.extra_checkK
+CallableType[builtins.function]&
+builtins.function"builtins.functionr˚
+__dataclass_fields__Itorch._inductor.pattern_matcher.LoweringPatternEntry.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dicté
+GraphPatternEntry1torch._inductor.pattern_matcher.GraphPatternEntry",torch._inductor.pattern_matcher.PatternEntry*Ñ
+apply7torch._inductor.pattern_matcher.GraphPatternEntry.apply"
+None*p
+selff
+1torch._inductor.pattern_matcher.GraphPatternEntry"1torch._inductor.pattern_matcher.GraphPatternEntry*Y
+matchN
+%torch._inductor.pattern_matcher.Match"%torch._inductor.pattern_matcher.Match*7
+graph,
+torch.fx.graph.Graph"torch.fx.graph.Graph*2
+node(
+torch.fx.node.Node"torch.fx.node.Node*„
+__init__:torch._inductor.pattern_matcher.GraphPatternEntry.__init__"
+None*p
+selff
+1torch._inductor.pattern_matcher.GraphPatternEntry"1torch._inductor.pattern_matcher.GraphPatternEntry*g
+patternZ
++torch._inductor.pattern_matcher.PatternExpr"+torch._inductor.pattern_matcher.PatternExpr*\
+extra_checkK
+CallableType[builtins.function]&
+builtins.function"builtins.function*X
+handlerK
+CallableType[builtins.function]&
+builtins.function"builtins.function8rë
+handler9torch._inductor.pattern_matcher.GraphPatternEntry.handlerK
+CallableType[builtins.function]&
+builtins.function"builtins.functionrô
+extra_check=torch._inductor.pattern_matcher.GraphPatternEntry.extra_checkK
+CallableType[builtins.function]&
+builtins.function"builtins.functionr¯
+__dataclass_fields__Ftorch._inductor.pattern_matcher.GraphPatternEntry.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dict∂
+ReplacementPatternEntry7torch._inductor.pattern_matcher.ReplacementPatternEntry",torch._inductor.pattern_matcher.PatternEntry*Œ
+replace_with_graphJtorch._inductor.pattern_matcher.ReplacementPatternEntry.replace_with_graph"
+None*Y
+matchN
+%torch._inductor.pattern_matcher.Match"%torch._inductor.pattern_matcher.Match*7
+graph,
+torch.fx.graph.Graph"torch.fx.graph.Graph*œ
+replacement_graph∑
+=Union[torch.fx.graph.Graph,torch.fx.graph_module.GraphModule],
+torch.fx.graph.Graph"torch.fx.graph.GraphF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*j
+args`
+#typing.Sequence[torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node"typing.Sequence0:staticmethodh*ñ
+apply=torch._inductor.pattern_matcher.ReplacementPatternEntry.apply"
+None*|
+selfr
+7torch._inductor.pattern_matcher.ReplacementPatternEntry"7torch._inductor.pattern_matcher.ReplacementPatternEntry*Y
+matchN
+%torch._inductor.pattern_matcher.Match"%torch._inductor.pattern_matcher.Match*7
+graph,
+torch.fx.graph.Graph"torch.fx.graph.Graph*2
+node(
+torch.fx.node.Node"torch.fx.node.Node*¸
+__init__@torch._inductor.pattern_matcher.ReplacementPatternEntry.__init__"
+None*|
+selfr
+7torch._inductor.pattern_matcher.ReplacementPatternEntry"7torch._inductor.pattern_matcher.ReplacementPatternEntry*g
+patternZ
++torch._inductor.pattern_matcher.PatternExpr"+torch._inductor.pattern_matcher.PatternExpr*\
+extra_checkK
+CallableType[builtins.function]&
+builtins.function"builtins.function*_
+normalize_argsK
+CallableType[builtins.function]&
+builtins.function"builtins.function8r•
+normalize_argsFtorch._inductor.pattern_matcher.ReplacementPatternEntry.normalize_argsK
+CallableType[builtins.function]&
+builtins.function"builtins.functionrü
+extra_checkCtorch._inductor.pattern_matcher.ReplacementPatternEntry.extra_checkK
+CallableType[builtins.function]&
+builtins.function"builtins.functionr˛
+__dataclass_fields__Ltorch._inductor.pattern_matcher.ReplacementPatternEntry.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictË
+PatternMatcherPass2torch._inductor.pattern_matcher.PatternMatcherPass"builtins.object*‚
+__init__;torch._inductor.pattern_matcher.PatternMatcherPass.__init__"
+None*r
+selfh
+2torch._inductor.pattern_matcher.PatternMatcherPass"2torch._inductor.pattern_matcher.PatternMatcherPass*D
+prevent_match_across_mutations
+builtins.bool"builtins.bool *U
+	pass_nameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *‡
+__getitem__>torch._inductor.pattern_matcher.PatternMatcherPass.__getitem__"™
+;builtins.list[torch._inductor.pattern_matcher.PatternEntry]\
+,torch._inductor.pattern_matcher.PatternEntry",torch._inductor.pattern_matcher.PatternEntry"builtins.list*jh
+2torch._inductor.pattern_matcher.PatternMatcherPass"2torch._inductor.pattern_matcher.PatternMatcherPass*˜Ù
+RTuple[builtins.str,TypeAlias[Union[CallableType[builtins.function],builtins.str]]]
+builtins.str"builtins.str˝
+>TypeAlias[Union[CallableType[builtins.function],builtins.str]]¢
+3Union[CallableType[builtins.function],builtins.str]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+builtins.str"builtins.str"torch.fx.node.Target*¶
+apply8torch._inductor.pattern_matcher.PatternMatcherPass.apply"
+builtins.int"builtins.int*r
+selfh
+2torch._inductor.pattern_matcher.PatternMatcherPass"2torch._inductor.pattern_matcher.PatternMatcherPass*Q
+graphF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*ø
+clear8torch._inductor.pattern_matcher.PatternMatcherPass.clear"
+None*r
+selfh
+2torch._inductor.pattern_matcher.PatternMatcherPass"2torch._inductor.pattern_matcher.PatternMatcherPassr±
+patterns;torch._inductor.pattern_matcher.PatternMatcherPass.patternsÁ
+ßcollections.defaultdict[Tuple[builtins.str,TypeAlias[Union[CallableType[builtins.function],builtins.str]]],builtins.list[torch._inductor.pattern_matcher.PatternEntry]]Ù
+RTuple[builtins.str,TypeAlias[Union[CallableType[builtins.function],builtins.str]]]
+builtins.str"builtins.str˝
+>TypeAlias[Union[CallableType[builtins.function],builtins.str]]¢
+3Union[CallableType[builtins.function],builtins.str]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+builtins.str"builtins.str"torch.fx.node.Target™
+;builtins.list[torch._inductor.pattern_matcher.PatternEntry]\
+,torch._inductor.pattern_matcher.PatternEntry",torch._inductor.pattern_matcher.PatternEntry"builtins.list"collections.defaultdictrì
+prevent_match_across_mutationsQtorch._inductor.pattern_matcher.PatternMatcherPass.prevent_match_across_mutations
+builtins.bool"builtins.boolrè
+	pass_name<torch._inductor.pattern_matcher.PatternMatcherPass.pass_nameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None§
+Replacer@1026-torch._inductor.pattern_matcher.Replacer@1026" torch.fx.interpreter.Interpreter*È
+run_node6torch._inductor.pattern_matcher.Replacer@1026.run_node"
+Any*h
+self^
+-torch._inductor.pattern_matcher.Replacer@1026"-torch._inductor.pattern_matcher.Replacer@1026*2
+node(
+torch.fx.node.Node"torch.fx.node.NoderH
+call_method9torch._inductor.pattern_matcher.Replacer@1026.call_methodrH
+call_module9torch._inductor.pattern_matcher.Replacer@1026.call_modulerB
+get_attr6torch._inductor.pattern_matcher.Replacer@1026.get_attrØ
+Converter@1741.torch._inductor.pattern_matcher.Converter@1741" torch.fx.interpreter.Interpreter*¥
+placeholder:torch._inductor.pattern_matcher.Converter@1741.placeholder"Ø
+eUnion[torch._inductor.pattern_matcher.ExclusiveKeywordArg,torch._inductor.pattern_matcher.KeywordArg]j
+3torch._inductor.pattern_matcher.ExclusiveKeywordArg"3torch._inductor.pattern_matcher.ExclusiveKeywordArgX
+*torch._inductor.pattern_matcher.KeywordArg"*torch._inductor.pattern_matcher.KeywordArg*j
+self`
+.torch._inductor.pattern_matcher.Converter@1741".torch._inductor.pattern_matcher.Converter@1741*(
+target
+builtins.str"builtins.str*:
+args0
+typing.Sequence[Any]
+Any"typing.Sequence*e
+kwargsY
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping*‚
+call_function<torch._inductor.pattern_matcher.Converter@1741.call_function"Z
++torch._inductor.pattern_matcher.PatternExpr"+torch._inductor.pattern_matcher.PatternExpr*j
+self`
+.torch._inductor.pattern_matcher.Converter@1741".torch._inductor.pattern_matcher.Converter@1741*(
+target
+builtins.str"builtins.str*:
+args0
+typing.Sequence[Any]
+Any"typing.Sequence*e
+kwargsY
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping*È
+run_node7torch._inductor.pattern_matcher.Converter@1741.run_node"
+Any*j
+self`
+.torch._inductor.pattern_matcher.Converter@1741".torch._inductor.pattern_matcher.Converter@1741*/
+n(
+torch.fx.node.Node"torch.fx.node.Noderñ
+call_method:torch._inductor.pattern_matcher.Converter@1741.call_methodK
+CallableType[builtins.function]&
+builtins.function"builtins.functionrñ
+call_module:torch._inductor.pattern_matcher.Converter@1741.call_moduleK
+CallableType[builtins.function]&
+builtins.function"builtins.functionrê
+get_attr7torch._inductor.pattern_matcher.Converter@1741.get_attrK
+CallableType[builtins.function]&
+builtins.function"builtins.functionˆ
+CopyGraph@1928.torch._inductor.pattern_matcher.CopyGraph@1928" torch.fx.interpreter.Transformer*ë
+run_node7torch._inductor.pattern_matcher.CopyGraph@1928.run_node"(
+torch.fx.node.Node"torch.fx.node.Node*j
+self`
+.torch._inductor.pattern_matcher.CopyGraph@1928".torch._inductor.pattern_matcher.CopyGraph@1928*6
+old_node(
+torch.fx.node.Node"torch.fx.node.Node˛
+is_match(torch._inductor.pattern_matcher.is_match"
+builtins.bool"builtins.bool*ß
+mü
+cTypeAlias[Union[torch._inductor.pattern_matcher.Match,torch._inductor.pattern_matcher.FailedMatch]]à
+XUnion[torch._inductor.pattern_matcher.Match,torch._inductor.pattern_matcher.FailedMatch]N
+%torch._inductor.pattern_matcher.Match"%torch._inductor.pattern_matcher.MatchZ
++torch._inductor.pattern_matcher.FailedMatch"+torch._inductor.pattern_matcher.FailedMatch"+torch._inductor.pattern_matcher.MatchResult∑
+_return_true,torch._inductor.pattern_matcher._return_true"
+builtins.bool"builtins.bool*Y
+matchN
+%torch._inductor.pattern_matcher.Match"%torch._inductor.pattern_matcher.Match„
+log_trace_failure1torch._inductor.pattern_matcher.log_trace_failure"
+None*Z
+	search_fnK
+CallableType[builtins.function]&
+builtins.function"builtins.function*5
+e.
+builtins.RuntimeError"builtins.RuntimeError›
+register_replacement4torch._inductor.pattern_matcher.register_replacement"
+builtins.bool"builtins.bool*c
+	search_fnT
+(torch._inductor.pattern_matcher.SearchFn"(torch._inductor.pattern_matcher.SearchFn*f
+
+replace_fnV
+)torch._inductor.pattern_matcher.ReplaceFn")torch._inductor.pattern_matcher.ReplaceFn*D
+example_inputs0
+typing.Iterable[Any]
+Any"typing.Iterable*`
+trace_fnR
+'torch._inductor.pattern_matcher.TraceFn"'torch._inductor.pattern_matcher.TraceFn*£
+
+pass_dictsí
+uUnion[torch._inductor.pattern_matcher._PassDictsType,typing.Sequence[torch._inductor.pattern_matcher._PassDictsType]]`
+.torch._inductor.pattern_matcher._PassDictsType".torch._inductor.pattern_matcher._PassDictsType¥
+?typing.Sequence[torch._inductor.pattern_matcher._PassDictsType]`
+.torch._inductor.pattern_matcher._PassDictsType".torch._inductor.pattern_matcher._PassDictsType"typing.Sequence*^
+extra_checkK
+CallableType[builtins.function]&
+builtins.function"builtins.function * 
+scalar_workaround∞
+JUnion[builtins.dict[builtins.str,Union[builtins.float,builtins.int]],None]’
+>builtins.dict[builtins.str,Union[builtins.float,builtins.int]]
+builtins.str"builtins.strf
+"Union[builtins.float,builtins.int] 
+builtins.float"builtins.float
+builtins.int"builtins.int"builtins.dict
+None *i
+exclusive_arg_namesN
+typing.Sequence[builtins.str]
+builtins.str"builtins.str"typing.Sequence *ª
+search_fn_pattern°
+7Union[torch._inductor.pattern_matcher.PatternExpr,None]Z
++torch._inductor.pattern_matcher.PatternExpr"+torch._inductor.pattern_matcher.PatternExpr
+None ´
+_serialize_pattern2torch._inductor.pattern_matcher._serialize_pattern"Z
++torch._inductor.pattern_matcher.PatternExpr"+torch._inductor.pattern_matcher.PatternExpr*-
+unique_name
+builtins.str"builtins.str*c
+	search_fnT
+(torch._inductor.pattern_matcher.SearchFn"(torch._inductor.pattern_matcher.SearchFn*D
+example_inputs0
+typing.Iterable[Any]
+Any"typing.Iterable*`
+trace_fnR
+'torch._inductor.pattern_matcher.TraceFn"'torch._inductor.pattern_matcher.TraceFn*»
+scalar_workaround∞
+JUnion[builtins.dict[builtins.str,Union[builtins.float,builtins.int]],None]’
+>builtins.dict[builtins.str,Union[builtins.float,builtins.int]]
+builtins.str"builtins.strf
+"Union[builtins.float,builtins.int] 
+builtins.float"builtins.float
+builtins.int"builtins.int"builtins.dict
+None˜
+gen_register_replacement8torch._inductor.pattern_matcher.gen_register_replacement"
+None*-
+unique_name
+builtins.str"builtins.str*c
+	search_fnT
+(torch._inductor.pattern_matcher.SearchFn"(torch._inductor.pattern_matcher.SearchFn*f
+
+replace_fnV
+)torch._inductor.pattern_matcher.ReplaceFn")torch._inductor.pattern_matcher.ReplaceFn*D
+example_inputs0
+typing.Iterable[Any]
+Any"typing.Iterable*`
+trace_fnR
+'torch._inductor.pattern_matcher.TraceFn"'torch._inductor.pattern_matcher.TraceFn*£
+
+pass_dictsí
+uUnion[torch._inductor.pattern_matcher._PassDictsType,typing.Sequence[torch._inductor.pattern_matcher._PassDictsType]]`
+.torch._inductor.pattern_matcher._PassDictsType".torch._inductor.pattern_matcher._PassDictsType¥
+?typing.Sequence[torch._inductor.pattern_matcher._PassDictsType]`
+.torch._inductor.pattern_matcher._PassDictsType".torch._inductor.pattern_matcher._PassDictsType"typing.Sequence*^
+extra_checkK
+CallableType[builtins.function]&
+builtins.function"builtins.function * 
+scalar_workaround∞
+JUnion[builtins.dict[builtins.str,Union[builtins.float,builtins.int]],None]’
+>builtins.dict[builtins.str,Union[builtins.float,builtins.int]]
+builtins.str"builtins.strf
+"Union[builtins.float,builtins.int] 
+builtins.float"builtins.float
+builtins.int"builtins.int"builtins.dict
+None *i
+exclusive_arg_namesN
+typing.Sequence[builtins.str]
+builtins.str"builtins.str"typing.Sequence *5
+skip_duplicates
+builtins.bool"builtins.bool å
+register_lowering_pattern9torch._inductor.pattern_matcher.register_lowering_pattern"K
+CallableType[builtins.function]&
+builtins.function"builtins.function*g
+patternZ
++torch._inductor.pattern_matcher.PatternExpr"+torch._inductor.pattern_matcher.PatternExpr*^
+extra_checkK
+CallableType[builtins.function]&
+builtins.function"builtins.function *o
+	pass_dict`
+.torch._inductor.pattern_matcher._PassDictsType".torch._inductor.pattern_matcher._PassDictsType*-
+prepend
+builtins.bool"builtins.bool Ü
+register_graph_pattern6torch._inductor.pattern_matcher.register_graph_pattern"K
+CallableType[builtins.function]&
+builtins.function"builtins.function*g
+patternZ
++torch._inductor.pattern_matcher.PatternExpr"+torch._inductor.pattern_matcher.PatternExpr*^
+extra_checkK
+CallableType[builtins.function]&
+builtins.function"builtins.function *o
+	pass_dict`
+.torch._inductor.pattern_matcher._PassDictsType".torch._inductor.pattern_matcher._PassDictsType*-
+prepend
+builtins.bool"builtins.bool Ÿ
+is_start_of_fx_graph4torch._inductor.pattern_matcher.is_start_of_fx_graph"
+builtins.bool"builtins.bool*7
+graph,
+torch.fx.graph.Graph"torch.fx.graph.Graph*2
+node(
+torch.fx.node.Node"torch.fx.node.Nodeî
+is_mutation_op.torch._inductor.pattern_matcher.is_mutation_op"
+builtins.bool"builtins.bool*2
+node(
+torch.fx.node.Node"torch.fx.node.Node€
+get_mutation_region_id6torch._inductor.pattern_matcher.get_mutation_region_id"
+builtins.int"builtins.int*7
+graph,
+torch.fx.graph.Graph"torch.fx.graph.Graph*2
+node(
+torch.fx.node.Node"torch.fx.node.Node€
+"should_compute_mutation_region_idsBtorch._inductor.pattern_matcher.should_compute_mutation_region_ids"
+builtins.bool"builtins.bool*Q
+graphF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule∑
+compute_mutation_region_ids;torch._inductor.pattern_matcher.compute_mutation_region_ids"
+None*Q
+graphF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModulez
+_not_implemented0torch._inductor.pattern_matcher._not_implemented"
+NoReturn
+*
+args
+Any*
+kwargs
+Any÷
+fx_to_pattern-torch._inductor.pattern_matcher.fx_to_pattern"Z
++torch._inductor.pattern_matcher.PatternExpr"+torch._inductor.pattern_matcher.PatternExpr*¿
+gm∑
+=Union[torch.fx.graph_module.GraphModule,torch.fx.graph.Graph]F
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule,
+torch.fx.graph.Graph"torch.fx.graph.Graph*_
+ignore_typesK
+typing.Sequence[Type[Any]]
+	Type[Any]
+Any"type"typing.Sequence *^
+argnamesN
+typing.Sequence[builtins.str]
+builtins.str"builtins.str"typing.Sequence * 
+scalar_workaround∞
+JUnion[builtins.dict[builtins.str,Union[builtins.float,builtins.int]],None]’
+>builtins.dict[builtins.str,Union[builtins.float,builtins.int]]
+builtins.str"builtins.strf
+"Union[builtins.float,builtins.int] 
+builtins.float"builtins.float
+builtins.int"builtins.int"builtins.dict
+None *i
+exclusive_arg_namesN
+typing.Sequence[builtins.str]
+builtins.str"builtins.str"typing.Sequence ≤
+_args%torch._inductor.pattern_matcher._args"–
+Ëbuiltins.list[TypeAlias[Union[builtins.tuple[Any],builtins.list[Any],builtins.dict[builtins.str,Any],builtins.slice,builtins.range,torch.fx.node.Node,TypeAlias[Union[builtins.str,builtins.int,builtins.float,builtins.bool,builtins.complex,torch._C.dtype,torch._tensor.Tensor,torch._C.device,torch._C.memory_format,torch._C.layout,torch._ops.OpOverload]],None]]]”
+ŸTypeAlias[Union[builtins.tuple[Any],builtins.list[Any],builtins.dict[builtins.str,Any],builtins.slice,builtins.range,torch.fx.node.Node,TypeAlias[Union[builtins.str,builtins.int,builtins.float,builtins.bool,builtins.complex,torch._C.dtype,torch._tensor.Tensor,torch._C.device,torch._C.memory_format,torch._C.layout,torch._ops.OpOverload]],None]]⁄
+ŒUnion[builtins.tuple[Any],builtins.list[Any],builtins.dict[builtins.str,Any],builtins.slice,builtins.range,torch.fx.node.Node,TypeAlias[Union[builtins.str,builtins.int,builtins.float,builtins.bool,builtins.complex,torch._C.dtype,torch._tensor.Tensor,torch._C.device,torch._C.memory_format,torch._C.layout,torch._ops.OpOverload]],None].
+builtins.tuple[Any]
+Any"builtins.tuple,
+builtins.list[Any]
+Any"builtins.listW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict 
+builtins.slice"builtins.slice 
+builtins.range"builtins.range(
+torch.fx.node.Node"torch.fx.node.Node’
+ TypeAlias[Union[builtins.str,builtins.int,builtins.float,builtins.bool,builtins.complex,torch._C.dtype,torch._tensor.Tensor,torch._C.device,torch._C.memory_format,torch._C.layout,torch._ops.OpOverload]]‚
+øUnion[builtins.str,builtins.int,builtins.float,builtins.bool,builtins.complex,torch._C.dtype,torch._tensor.Tensor,torch._C.device,torch._C.memory_format,torch._C.layout,torch._ops.OpOverload]
+builtins.str"builtins.str
+builtins.int"builtins.int 
+builtins.float"builtins.float
+builtins.bool"builtins.bool$
+builtins.complex"builtins.complex 
+torch._C.dtype"torch._C.dtype,
+torch._tensor.Tensor"torch._tensor.Tensor"
+torch._C.device"torch._C.device0
+torch._C.memory_format"torch._C.memory_format"
+torch._C.layout"torch._C.layout.
+torch._ops.OpOverload"torch._ops.OpOverload"torch.fx.node.BaseArgumentTypes
+None"torch.fx.node.Argument"builtins.list*/
+n(
+torch.fx.node.Node"torch.fx.node.Nodeï
+stable_topological_sort7torch._inductor.pattern_matcher.stable_topological_sort"
+None*7
+graph,
+torch.fx.graph.Graph"torch.fx.graph.GraphÍ
+init_once_fakemode2torch._inductor.pattern_matcher.init_once_fakemode"K
+CallableType[builtins.function]&
+builtins.function"builtins.function*S
+fnK
+CallableType[builtins.function]&
+builtins.function"builtins.functionØ
+config_flag+torch._inductor.pattern_matcher.config_flag"K
+CallableType[builtins.function]&
+builtins.function"builtins.function*&
+name
+builtins.str"builtins.str€
+clone_graph+torch._inductor.pattern_matcher.clone_graph"F
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*W
+input_graphF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModuleÅ
+get_arg_value-torch._inductor.pattern_matcher.get_arg_value"
+Any*2
+node(
+torch.fx.node.Node"torch.fx.node.Node*,
+
+arg_number
+builtins.int"builtins.int*V
+
+kwarg_nameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None ò
+filter_nodes,torch._inductor.pattern_matcher.filter_nodes"\
+!builtins.list[torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node"builtins.list*k
+nodes`
+#typing.Iterable[torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node"typing.Iterable*
+fn
+AnyÙ
+extract_target.torch._inductor.pattern_matcher.extract_target"˝
+>TypeAlias[Union[CallableType[builtins.function],builtins.str]]¢
+3Union[CallableType[builtins.function],builtins.str]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+builtins.str"builtins.str"torch.fx.node.Target*2
+node(
+torch.fx.node.Node"torch.fx.node.Node*õ
+__annotations__/torch._inductor.pattern_matcher.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*
+pytreetorch.utils._pytree *-
+functorch_configtorch._functorch.config *L
+log#torch._inductor.pattern_matcher.log 
+logging.Logger"logging.Logger*5
+aten$torch._inductor.pattern_matcher.aten
+Any*7
+prims%torch._inductor.pattern_matcher.prims
+Any*ä
+MULTIPLE(torch._inductor.pattern_matcher.MULTIPLET
+(torch._inductor.pattern_matcher.Multiple"(torch._inductor.pattern_matcher.Multiple*ñ
+_serialized_patterns4torch._inductor.pattern_matcher._serialized_patternsH
+builtins.set[builtins.str]
+builtins.str"builtins.str"builtins.set*p
+SERIALIZED_PATTERN_PATH7torch._inductor.pattern_matcher.SERIALIZED_PATTERN_PATH
+pathlib.Path"pathlib.Path*œ
+_known_precompiled_patterns;torch._inductor.pattern_matcher._known_precompiled_patternsÚ
+~builtins.list[Tuple[Any,typing.Iterable[Any],CallableType[builtins.function],Any,torch._inductor.pattern_matcher.PatternExpr]]‡
+oTuple[Any,typing.Iterable[Any],CallableType[builtins.function],Any,torch._inductor.pattern_matcher.PatternExpr]
+Any0
+typing.Iterable[Any]
+Any"typing.IterableK
+CallableType[builtins.function]&
+builtins.function"builtins.function
+AnyZ
++torch._inductor.pattern_matcher.PatternExpr"+torch._inductor.pattern_matcher.PatternExpr"builtins.list*à
+_mutation_op_re/torch._inductor.pattern_matcher._mutation_op_reD
+re.Pattern[builtins.str]
+builtins.str"builtins.str"
+re.Pattern*ä
+_seen_patterns.torch._inductor.pattern_matcher._seen_patternsH
+builtins.set[builtins.str]
+builtins.str"builtins.str"builtins.set

@@ -1,0 +1,147 @@
+
+torch._functorch.pyfunctorchè
+FuncTorchInterpreter1torch._functorch.pyfunctorch.FuncTorchInterpreter"abc.ABC*’
+__init__:torch._functorch.pyfunctorch.FuncTorchInterpreter.__init__"
+None*p
+selff
+1torch._functorch.pyfunctorch.FuncTorchInterpreter"1torch._functorch.pyfunctorch.FuncTorchInterpreter*
+cptr
+Any*Ä
+process9torch._functorch.pyfunctorch.FuncTorchInterpreter.process*
+self*
+op*
+args*
+
+kwargs0:abstractmethod@*J
+lower7torch._functorch.pyfunctorch.FuncTorchInterpreter.lower*
+self*J
+level7torch._functorch.pyfunctorch.FuncTorchInterpreter.level*
+self*F
+key5torch._functorch.pyfunctorch.FuncTorchInterpreter.key*
+self*R
+	get_state;torch._functorch.pyfunctorch.FuncTorchInterpreter.get_state*
+self*a
+check_state=torch._functorch.pyfunctorch.FuncTorchInterpreter.check_state*
+self*	
+staterI
+_cptr7torch._functorch.pyfunctorch.FuncTorchInterpreter._cptr
+AnyŸ
+VmapInterpreter,torch._functorch.pyfunctorch.VmapInterpreter"1torch._functorch.pyfunctorch.FuncTorchInterpreter*Ñ
+__init__5torch._functorch.pyfunctorch.VmapInterpreter.__init__"
+None*f
+self\
+,torch._functorch.pyfunctorch.VmapInterpreter",torch._functorch.pyfunctorch.VmapInterpreter*O
+cdataD
+ torch._C._functorch.CInterpreter" torch._C._functorch.CInterpreter*g
+process4torch._functorch.pyfunctorch.VmapInterpreter.process*
+self*
+op*
+args*
+
+kwargs*O
+
+batch_size7torch._functorch.pyfunctorch.VmapInterpreter.batch_size*
+self*O
+
+randomness7torch._functorch.pyfunctorch.VmapInterpreter.randomness*
+self*M
+	get_state6torch._functorch.pyfunctorch.VmapInterpreter.get_state*
+selfrÉ
+_cdata3torch._functorch.pyfunctorch.VmapInterpreter._cdataD
+ torch._C._functorch.CInterpreter" torch._C._functorch.CInterpreter≤
+GradInterpreter,torch._functorch.pyfunctorch.GradInterpreter"1torch._functorch.pyfunctorch.FuncTorchInterpreter*Ñ
+__init__5torch._functorch.pyfunctorch.GradInterpreter.__init__"
+None*f
+self\
+,torch._functorch.pyfunctorch.GradInterpreter",torch._functorch.pyfunctorch.GradInterpreter*O
+cdataD
+ torch._C._functorch.CInterpreter" torch._C._functorch.CInterpreter*Y
+lift1torch._functorch.pyfunctorch.GradInterpreter.lift*
+self*
+args*
+
+kwargs*g
+process4torch._functorch.pyfunctorch.GradInterpreter.process*
+self*
+op*
+args*
+
+kwargs*E
+lower2torch._functorch.pyfunctorch.GradInterpreter.lower*
+self*W
+prev_grad_mode;torch._functorch.pyfunctorch.GradInterpreter.prev_grad_mode*
+self*M
+	get_state6torch._functorch.pyfunctorch.GradInterpreter.get_state*
+selfrÉ
+_cdata3torch._functorch.pyfunctorch.GradInterpreter._cdataD
+ torch._C._functorch.CInterpreter" torch._C._functorch.CInterpreterØ
+JvpInterpreter+torch._functorch.pyfunctorch.JvpInterpreter"1torch._functorch.pyfunctorch.FuncTorchInterpreter*Å
+__init__4torch._functorch.pyfunctorch.JvpInterpreter.__init__"
+None*d
+selfZ
++torch._functorch.pyfunctorch.JvpInterpreter"+torch._functorch.pyfunctorch.JvpInterpreter*O
+cdataD
+ torch._C._functorch.CInterpreter" torch._C._functorch.CInterpreter*X
+lift0torch._functorch.pyfunctorch.JvpInterpreter.lift*
+self*
+args*
+
+kwargs*f
+process3torch._functorch.pyfunctorch.JvpInterpreter.process*
+self*
+op*
+args*
+
+kwargs*D
+lower1torch._functorch.pyfunctorch.JvpInterpreter.lower*
+self*^
+prev_fwd_grad_mode>torch._functorch.pyfunctorch.JvpInterpreter.prev_fwd_grad_mode*
+self*L
+	get_state5torch._functorch.pyfunctorch.JvpInterpreter.get_state*
+selfrÇ
+_cdata2torch._functorch.pyfunctorch.JvpInterpreter._cdataD
+ torch._C._functorch.CInterpreter" torch._C._functorch.CInterpreter˝
+FunctionalizeInterpreter5torch._functorch.pyfunctorch.FunctionalizeInterpreter"1torch._functorch.pyfunctorch.FuncTorchInterpreter*ü
+__init__>torch._functorch.pyfunctorch.FunctionalizeInterpreter.__init__"
+None*x
+selfn
+5torch._functorch.pyfunctorch.FunctionalizeInterpreter"5torch._functorch.pyfunctorch.FunctionalizeInterpreter*O
+cdataD
+ torch._C._functorch.CInterpreter" torch._C._functorch.CInterpreter*p
+process=torch._functorch.pyfunctorch.FunctionalizeInterpreter.process*
+self*
+op*
+args*
+
+kwargs*|
+functionalize_add_back_viewsRtorch._functorch.pyfunctorch.FunctionalizeInterpreter.functionalize_add_back_views*
+self*V
+	get_state?torch._functorch.pyfunctorch.FunctionalizeInterpreter.get_state*
+selfrå
+_cdata<torch._functorch.pyfunctorch.FunctionalizeInterpreter._cdataD
+ torch._C._functorch.CInterpreter" torch._C._functorch.CInterpreterá
+coerce_cinterpreter0torch._functorch.pyfunctorch.coerce_cinterpreter"f
+1torch._functorch.pyfunctorch.FuncTorchInterpreter"1torch._functorch.pyfunctorch.FuncTorchInterpreter*V
+cinterpreterD
+ torch._C._functorch.CInterpreter" torch._C._functorch.CInterpreter’
+&retrieve_current_functorch_interpreterCtorch._functorch.pyfunctorch.retrieve_current_functorch_interpreter"f
+1torch._functorch.pyfunctorch.FuncTorchInterpreter"1torch._functorch.pyfunctorch.FuncTorchInterpreter£
+#retrieve_all_functorch_interpreters@torch._functorch.pyfunctorch.retrieve_all_functorch_interpreters"π
+@builtins.list[torch._functorch.pyfunctorch.FuncTorchInterpreter]f
+1torch._functorch.pyfunctorch.FuncTorchInterpreter"1torch._functorch.pyfunctorch.FuncTorchInterpreter"builtins.list‡
+compare_functorch_state4torch._functorch.pyfunctorch.compare_functorch_state"
+builtins.bool"builtins.bool*o
+statesc
+"builtins.list[builtins.tuple[Any]].
+builtins.tuple[Any]
+Any"builtins.tuple"builtins.listc
+dispatch_functorch/torch._functorch.pyfunctorch.dispatch_functorch*
+op*
+args*
+
+kwargs*ò
+__annotations__,torch._functorch.pyfunctorch.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*
+pytreetorch.utils._pytree 

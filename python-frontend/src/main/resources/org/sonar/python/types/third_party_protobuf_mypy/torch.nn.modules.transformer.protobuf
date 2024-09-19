@@ -1,0 +1,513 @@
+
+torch.nn.modules.transformerÍ
+Transformer(torch.nn.modules.transformer.Transformer"torch.nn.modules.module.Module*ÿ
+__init__1torch.nn.modules.transformer.Transformer.__init__"
+None*^
+selfT
+(torch.nn.modules.transformer.Transformer"(torch.nn.modules.transformer.Transformer*+
+d_model
+builtins.int"builtins.int *)
+nhead
+builtins.int"builtins.int *6
+num_encoder_layers
+builtins.int"builtins.int *6
+num_decoder_layers
+builtins.int"builtins.int *3
+dim_feedforward
+builtins.int"builtins.int */
+dropout 
+builtins.float"builtins.float *µ
+
+activation¢
+3Union[builtins.str,CallableType[builtins.function]]
+builtins.str"builtins.strK
+CallableType[builtins.function]&
+builtins.function"builtins.function *<
+custom_encoder&
+Union[Any,None]
+Any
+None *<
+custom_decoder&
+Union[Any,None]
+Any
+None *6
+layer_norm_eps 
+builtins.float"builtins.float *1
+batch_first
+builtins.bool"builtins.bool *0
+
+norm_first
+builtins.bool"builtins.bool **
+bias
+builtins.bool"builtins.bool *
+device
+Any *
+dtype
+Any *é	
+forward0torch.nn.modules.transformer.Transformer.forward",
+torch._tensor.Tensor"torch._tensor.Tensor*^
+selfT
+(torch.nn.modules.transformer.Transformer"(torch.nn.modules.transformer.Transformer*5
+src,
+torch._tensor.Tensor"torch._tensor.Tensor*5
+tgt,
+torch._tensor.Tensor"torch._tensor.Tensor*l
+src_mask\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None *l
+tgt_mask\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None *o
+memory_mask\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None *x
+src_key_padding_mask\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None *x
+tgt_key_padding_mask\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None *{
+memory_key_padding_mask\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None *\
+src_is_causalG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *\
+tgt_is_causalG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *6
+memory_is_causal
+builtins.bool"builtins.bool *‡
+generate_square_subsequent_maskHtorch.nn.modules.transformer.Transformer.generate_square_subsequent_mask",
+torch._tensor.Tensor"torch._tensor.Tensor*$
+sz
+builtins.int"builtins.int*[
+deviceM
+Union[torch._C.device,None]"
+torch._C.device"torch._C.device
+None *W
+dtypeJ
+Union[torch._C.dtype,None] 
+torch._C.dtype"torch._C.dtype
+None 0:staticmethodh*Y
+_reset_parameters:torch.nn.modules.transformer.Transformer._reset_parameters*
+selfrD
+encoder0torch.nn.modules.transformer.Transformer.encoder
+AnyrD
+decoder0torch.nn.modules.transformer.Transformer.decoder
+AnyrY
+d_model0torch.nn.modules.transformer.Transformer.d_model
+builtins.int"builtins.intrU
+nhead.torch.nn.modules.transformer.Transformer.nhead
+builtins.int"builtins.intrc
+batch_first4torch.nn.modules.transformer.Transformer.batch_first
+builtins.bool"builtins.bool‹
+TransformerEncoder/torch.nn.modules.transformer.TransformerEncoder"torch.nn.modules.module.Module*â
+__init__8torch.nn.modules.transformer.TransformerEncoder.__init__"
+None*l
+selfb
+/torch.nn.modules.transformer.TransformerEncoder"/torch.nn.modules.transformer.TransformerEncoder*
+encoder_layerl
+4torch.nn.modules.transformer.TransformerEncoderLayer"4torch.nn.modules.transformer.TransformerEncoderLayer*,
+
+num_layers
+builtins.int"builtins.int*†
+normz
+*Union[torch.nn.modules.module.Module,None]@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module
+None *:
+enable_nested_tensor
+builtins.bool"builtins.bool *0
+
+mask_check
+builtins.bool"builtins.bool *Ó
+forward7torch.nn.modules.transformer.TransformerEncoder.forward",
+torch._tensor.Tensor"torch._tensor.Tensor*l
+selfb
+/torch.nn.modules.transformer.TransformerEncoder"/torch.nn.modules.transformer.TransformerEncoder*5
+src,
+torch._tensor.Tensor"torch._tensor.Tensor*h
+mask\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None *x
+src_key_padding_mask\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None *X
+	is_causalG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None rš
+__constants__=torch.nn.modules.transformer.TransformerEncoder.__constants__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.listrI
+layers6torch.nn.modules.transformer.TransformerEncoder.layers
+Anyrf
+
+num_layers:torch.nn.modules.transformer.TransformerEncoder.num_layers
+builtins.int"builtins.intr¸
+norm4torch.nn.modules.transformer.TransformerEncoder.normz
+*Union[torch.nn.modules.module.Module,None]@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module
+Noner|
+enable_nested_tensorDtorch.nn.modules.transformer.TransformerEncoder.enable_nested_tensor
+builtins.bool"builtins.boolrv
+use_nested_tensorAtorch.nn.modules.transformer.TransformerEncoder.use_nested_tensor
+builtins.bool"builtins.boolrh
+
+mask_check:torch.nn.modules.transformer.TransformerEncoder.mask_check
+builtins.bool"builtins.bool¥
+TransformerDecoder/torch.nn.modules.transformer.TransformerDecoder"torch.nn.modules.module.Module*ô
+__init__8torch.nn.modules.transformer.TransformerDecoder.__init__"
+None*l
+selfb
+/torch.nn.modules.transformer.TransformerDecoder"/torch.nn.modules.transformer.TransformerDecoder*
+decoder_layerl
+4torch.nn.modules.transformer.TransformerDecoderLayer"4torch.nn.modules.transformer.TransformerDecoderLayer*,
+
+num_layers
+builtins.int"builtins.int*†
+normz
+*Union[torch.nn.modules.module.Module,None]@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module
+None *»
+forward7torch.nn.modules.transformer.TransformerDecoder.forward",
+torch._tensor.Tensor"torch._tensor.Tensor*l
+selfb
+/torch.nn.modules.transformer.TransformerDecoder"/torch.nn.modules.transformer.TransformerDecoder*5
+tgt,
+torch._tensor.Tensor"torch._tensor.Tensor*8
+memory,
+torch._tensor.Tensor"torch._tensor.Tensor*l
+tgt_mask\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None *o
+memory_mask\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None *x
+tgt_key_padding_mask\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None *{
+memory_key_padding_mask\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None *\
+tgt_is_causalG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *6
+memory_is_causal
+builtins.bool"builtins.bool rš
+__constants__=torch.nn.modules.transformer.TransformerDecoder.__constants__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.listrI
+layers6torch.nn.modules.transformer.TransformerDecoder.layers
+Anyrf
+
+num_layers:torch.nn.modules.transformer.TransformerDecoder.num_layers
+builtins.int"builtins.intr¸
+norm4torch.nn.modules.transformer.TransformerDecoder.normz
+*Union[torch.nn.modules.module.Module,None]@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module
+None›!
+TransformerEncoderLayer4torch.nn.modules.transformer.TransformerEncoderLayer"torch.nn.modules.module.Module*³
+__init__=torch.nn.modules.transformer.TransformerEncoderLayer.__init__"
+None*v
+selfl
+4torch.nn.modules.transformer.TransformerEncoderLayer"4torch.nn.modules.transformer.TransformerEncoderLayer*)
+d_model
+builtins.int"builtins.int*'
+nhead
+builtins.int"builtins.int*3
+dim_feedforward
+builtins.int"builtins.int */
+dropout 
+builtins.float"builtins.float *µ
+
+activation¢
+3Union[builtins.str,CallableType[builtins.function]]
+builtins.str"builtins.strK
+CallableType[builtins.function]&
+builtins.function"builtins.function *6
+layer_norm_eps 
+builtins.float"builtins.float *1
+batch_first
+builtins.bool"builtins.bool *0
+
+norm_first
+builtins.bool"builtins.bool **
+bias
+builtins.bool"builtins.bool *
+device
+Any *
+dtype
+Any *f
+__setstate__Atorch.nn.modules.transformer.TransformerEncoderLayer.__setstate__*
+self*	
+state*½
+forward<torch.nn.modules.transformer.TransformerEncoderLayer.forward",
+torch._tensor.Tensor"torch._tensor.Tensor*v
+selfl
+4torch.nn.modules.transformer.TransformerEncoderLayer"4torch.nn.modules.transformer.TransformerEncoderLayer*5
+src,
+torch._tensor.Tensor"torch._tensor.Tensor*l
+src_mask\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None *x
+src_key_padding_mask\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None */
+	is_causal
+builtins.bool"builtins.bool *¸
+	_sa_block>torch.nn.modules.transformer.TransformerEncoderLayer._sa_block",
+torch._tensor.Tensor"torch._tensor.Tensor*v
+selfl
+4torch.nn.modules.transformer.TransformerEncoderLayer"4torch.nn.modules.transformer.TransformerEncoderLayer*3
+x,
+torch._tensor.Tensor"torch._tensor.Tensor*k
+	attn_mask\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None*r
+key_padding_mask\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None*/
+	is_causal
+builtins.bool"builtins.bool *¦
+	_ff_block>torch.nn.modules.transformer.TransformerEncoderLayer._ff_block",
+torch._tensor.Tensor"torch._tensor.Tensor*v
+selfl
+4torch.nn.modules.transformer.TransformerEncoderLayer"4torch.nn.modules.transformer.TransformerEncoderLayer*3
+x,
+torch._tensor.Tensor"torch._tensor.TensorrŸ
+__constants__Btorch.nn.modules.transformer.TransformerEncoderLayer.__constants__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.listr­
+	self_attn>torch.nn.modules.transformer.TransformerEncoderLayer.self_attn`
+.torch.nn.modules.activation.MultiheadAttention".torch.nn.modules.activation.MultiheadAttentionr‰
+linear1<torch.nn.modules.transformer.TransformerEncoderLayer.linear1@
+torch.nn.modules.linear.Linear"torch.nn.modules.linear.Linearr
+dropout<torch.nn.modules.transformer.TransformerEncoderLayer.dropoutD
+ torch.nn.modules.dropout.Dropout" torch.nn.modules.dropout.Dropoutr‰
+linear2<torch.nn.modules.transformer.TransformerEncoderLayer.linear2@
+torch.nn.modules.linear.Linear"torch.nn.modules.linear.Linearrm
+
+norm_first?torch.nn.modules.transformer.TransformerEncoderLayer.norm_first
+builtins.bool"builtins.boolr™
+norm1:torch.nn.modules.transformer.TransformerEncoderLayer.norm1T
+(torch.nn.modules.normalization.LayerNorm"(torch.nn.modules.normalization.LayerNormr™
+norm2:torch.nn.modules.transformer.TransformerEncoderLayer.norm2T
+(torch.nn.modules.normalization.LayerNorm"(torch.nn.modules.normalization.LayerNormr
+dropout1=torch.nn.modules.transformer.TransformerEncoderLayer.dropout1D
+ torch.nn.modules.dropout.Dropout" torch.nn.modules.dropout.Dropoutr
+dropout2=torch.nn.modules.transformer.TransformerEncoderLayer.dropout2D
+ torch.nn.modules.dropout.Dropout" torch.nn.modules.dropout.Dropoutr…
+activation_relu_or_geluLtorch.nn.modules.transformer.TransformerEncoderLayer.activation_relu_or_gelu
+builtins.int"builtins.intrš
+
+activation?torch.nn.modules.transformer.TransformerEncoderLayer.activationK
+CallableType[builtins.function]&
+builtins.function"builtins.functionÓ+
+TransformerDecoderLayer4torch.nn.modules.transformer.TransformerDecoderLayer"torch.nn.modules.module.Module*³
+__init__=torch.nn.modules.transformer.TransformerDecoderLayer.__init__"
+None*v
+selfl
+4torch.nn.modules.transformer.TransformerDecoderLayer"4torch.nn.modules.transformer.TransformerDecoderLayer*)
+d_model
+builtins.int"builtins.int*'
+nhead
+builtins.int"builtins.int*3
+dim_feedforward
+builtins.int"builtins.int */
+dropout 
+builtins.float"builtins.float *µ
+
+activation¢
+3Union[builtins.str,CallableType[builtins.function]]
+builtins.str"builtins.strK
+CallableType[builtins.function]&
+builtins.function"builtins.function *6
+layer_norm_eps 
+builtins.float"builtins.float *1
+batch_first
+builtins.bool"builtins.bool *0
+
+norm_first
+builtins.bool"builtins.bool **
+bias
+builtins.bool"builtins.bool *
+device
+Any *
+dtype
+Any *f
+__setstate__Atorch.nn.modules.transformer.TransformerDecoderLayer.__setstate__*
+self*	
+state*¡
+forward<torch.nn.modules.transformer.TransformerDecoderLayer.forward",
+torch._tensor.Tensor"torch._tensor.Tensor*v
+selfl
+4torch.nn.modules.transformer.TransformerDecoderLayer"4torch.nn.modules.transformer.TransformerDecoderLayer*5
+tgt,
+torch._tensor.Tensor"torch._tensor.Tensor*8
+memory,
+torch._tensor.Tensor"torch._tensor.Tensor*l
+tgt_mask\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None *o
+memory_mask\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None *x
+tgt_key_padding_mask\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None *{
+memory_key_padding_mask\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None *3
+tgt_is_causal
+builtins.bool"builtins.bool *6
+memory_is_causal
+builtins.bool"builtins.bool *¸
+	_sa_block>torch.nn.modules.transformer.TransformerDecoderLayer._sa_block",
+torch._tensor.Tensor"torch._tensor.Tensor*v
+selfl
+4torch.nn.modules.transformer.TransformerDecoderLayer"4torch.nn.modules.transformer.TransformerDecoderLayer*3
+x,
+torch._tensor.Tensor"torch._tensor.Tensor*k
+	attn_mask\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None*r
+key_padding_mask\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None*/
+	is_causal
+builtins.bool"builtins.bool *ñ
+
+_mha_block?torch.nn.modules.transformer.TransformerDecoderLayer._mha_block",
+torch._tensor.Tensor"torch._tensor.Tensor*v
+selfl
+4torch.nn.modules.transformer.TransformerDecoderLayer"4torch.nn.modules.transformer.TransformerDecoderLayer*3
+x,
+torch._tensor.Tensor"torch._tensor.Tensor*5
+mem,
+torch._tensor.Tensor"torch._tensor.Tensor*k
+	attn_mask\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None*r
+key_padding_mask\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None*/
+	is_causal
+builtins.bool"builtins.bool *¦
+	_ff_block>torch.nn.modules.transformer.TransformerDecoderLayer._ff_block",
+torch._tensor.Tensor"torch._tensor.Tensor*v
+selfl
+4torch.nn.modules.transformer.TransformerDecoderLayer"4torch.nn.modules.transformer.TransformerDecoderLayer*3
+x,
+torch._tensor.Tensor"torch._tensor.TensorrŸ
+__constants__Btorch.nn.modules.transformer.TransformerDecoderLayer.__constants__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.listr­
+	self_attn>torch.nn.modules.transformer.TransformerDecoderLayer.self_attn`
+.torch.nn.modules.activation.MultiheadAttention".torch.nn.modules.activation.MultiheadAttentionr·
+multihead_attnCtorch.nn.modules.transformer.TransformerDecoderLayer.multihead_attn`
+.torch.nn.modules.activation.MultiheadAttention".torch.nn.modules.activation.MultiheadAttentionr‰
+linear1<torch.nn.modules.transformer.TransformerDecoderLayer.linear1@
+torch.nn.modules.linear.Linear"torch.nn.modules.linear.Linearr
+dropout<torch.nn.modules.transformer.TransformerDecoderLayer.dropoutD
+ torch.nn.modules.dropout.Dropout" torch.nn.modules.dropout.Dropoutr‰
+linear2<torch.nn.modules.transformer.TransformerDecoderLayer.linear2@
+torch.nn.modules.linear.Linear"torch.nn.modules.linear.Linearrm
+
+norm_first?torch.nn.modules.transformer.TransformerDecoderLayer.norm_first
+builtins.bool"builtins.boolr™
+norm1:torch.nn.modules.transformer.TransformerDecoderLayer.norm1T
+(torch.nn.modules.normalization.LayerNorm"(torch.nn.modules.normalization.LayerNormr™
+norm2:torch.nn.modules.transformer.TransformerDecoderLayer.norm2T
+(torch.nn.modules.normalization.LayerNorm"(torch.nn.modules.normalization.LayerNormr™
+norm3:torch.nn.modules.transformer.TransformerDecoderLayer.norm3T
+(torch.nn.modules.normalization.LayerNorm"(torch.nn.modules.normalization.LayerNormr
+dropout1=torch.nn.modules.transformer.TransformerDecoderLayer.dropout1D
+ torch.nn.modules.dropout.Dropout" torch.nn.modules.dropout.Dropoutr
+dropout2=torch.nn.modules.transformer.TransformerDecoderLayer.dropout2D
+ torch.nn.modules.dropout.Dropout" torch.nn.modules.dropout.Dropoutr
+dropout3=torch.nn.modules.transformer.TransformerDecoderLayer.dropout3D
+ torch.nn.modules.dropout.Dropout" torch.nn.modules.dropout.Dropoutrš
+
+activation?torch.nn.modules.transformer.TransformerDecoderLayer.activationK
+CallableType[builtins.function]&
+builtins.function"builtins.functionë
+ _generate_square_subsequent_mask=torch.nn.modules.transformer._generate_square_subsequent_mask",
+torch._tensor.Tensor"torch._tensor.Tensor*$
+sz
+builtins.int"builtins.int*[
+deviceM
+Union[torch._C.device,None]"
+torch._C.device"torch._C.device
+None *W
+dtypeJ
+Union[torch._C.dtype,None] 
+torch._C.dtype"torch._C.dtype
+None ç
+_get_seq_len)torch.nn.modules.transformer._get_seq_len"D
+Union[builtins.int,None]
+builtins.int"builtins.int
+None*5
+src,
+torch._tensor.Tensor"torch._tensor.Tensor*/
+batch_first
+builtins.bool"builtins.boolJ
+_get_clones(torch.nn.modules.transformer._get_clones*
+
+module*
+NÀ
+_get_activation_fn/torch.nn.modules.transformer._get_activation_fn"K
+CallableType[builtins.function]&
+builtins.function"builtins.function*,
+
+activation
+builtins.str"builtins.str
+_detect_is_causal_mask3torch.nn.modules.transformer._detect_is_causal_mask"
+builtins.bool"builtins.bool*f
+mask\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None*X
+	is_causalG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *P
+sizeD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *˜
+__annotations__,torch.nn.modules.transformer.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*
+Ftorch.nn.functional *{
+__all__$torch.nn.modules.transformer.__all__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list

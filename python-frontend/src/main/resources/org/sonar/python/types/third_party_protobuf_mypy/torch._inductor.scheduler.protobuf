@@ -1,0 +1,1218 @@
+
+torch._inductor.schedulerú]
+BaseSchedulerNode+torch._inductor.scheduler.BaseSchedulerNode"builtins.object*Õ
+__init__4torch._inductor.scheduler.BaseSchedulerNode.__init__"
+None*d
+selfZ
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode*Y
+	schedulerJ
+#torch._inductor.scheduler.Scheduler"#torch._inductor.scheduler.Scheduler*@
+node6
+torch._inductor.ir.Buffer"torch._inductor.ir.Buffer*º
+__repr__4torch._inductor.scheduler.BaseSchedulerNode.__repr__"
+builtins.str"builtins.str*\Z
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode*∆
+	debug_str5torch._inductor.scheduler.BaseSchedulerNode.debug_str"
+builtins.str"builtins.str*d
+selfZ
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode*“
+debug_str_extra;torch._inductor.scheduler.BaseSchedulerNode.debug_str_extra"
+builtins.str"builtins.str*d
+selfZ
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode*∂
+log_details7torch._inductor.scheduler.BaseSchedulerNode.log_details"
+None*d
+selfZ
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode*Õ
+update_mutated_names@torch._inductor.scheduler.BaseSchedulerNode.update_mutated_names"
+None*d
+selfZ
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode*Ç
+renamesu
+(builtins.dict[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.dict*á
+add_fake_dep8torch._inductor.scheduler.BaseSchedulerNode.add_fake_dep"
+None*d
+selfZ
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode*M
+depD
+ torch._inductor.dependencies.Dep" torch._inductor.dependencies.Dep*Õ
+	set_users5torch._inductor.scheduler.BaseSchedulerNode.set_users"
+None*d
+selfZ
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode*ò
+userså
+1builtins.list[torch._inductor.scheduler.NodeUser]H
+"torch._inductor.scheduler.NodeUser""torch._inductor.scheduler.NodeUser"builtins.list*Ø
+set_last_usage:torch._inductor.scheduler.BaseSchedulerNode.set_last_usage"
+None*d
+selfZ
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode*a
+future_used_buffersH
+builtins.set[builtins.str]
+builtins.str"builtins.str"builtins.set*ç
+mutation_real_nameu
+(builtins.dict[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.dict*¸
+get_aliases7torch._inductor.scheduler.BaseSchedulerNode.get_aliases"N
+typing.Sequence[builtins.str]
+builtins.str"builtins.str"typing.Sequence*d
+selfZ
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode*¸
+get_mutations9torch._inductor.scheduler.BaseSchedulerNode.get_mutations"J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*d
+selfZ
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode*Ê
+has_aliasing_or_mutationDtorch._inductor.scheduler.BaseSchedulerNode.has_aliasing_or_mutation"
+builtins.bool"builtins.bool*d
+selfZ
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode*ö
+set_read_writes;torch._inductor.scheduler.BaseSchedulerNode.set_read_writes"
+None*d
+selfZ
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode*Z
+rwR
+'torch._inductor.dependencies.ReadWrites"'torch._inductor.dependencies.ReadWrites*Ä
+	op_counts5torch._inductor.scheduler.BaseSchedulerNode.op_counts"V
+!collections.Counter[builtins.str]
+builtins.str"builtins.str"collections.Counter*d
+selfZ
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode*Ç
+used_buffer_names=torch._inductor.scheduler.BaseSchedulerNode.used_buffer_names"H
+builtins.set[builtins.str]
+builtins.str"builtins.str"builtins.set*d
+selfZ
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode*ò
+used_or_aliased_buffer_namesHtorch._inductor.scheduler.BaseSchedulerNode.used_or_aliased_buffer_names"H
+builtins.set[builtins.str]
+builtins.str"builtins.str"builtins.set*d
+selfZ
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode*¥
+
+prune_deps6torch._inductor.scheduler.BaseSchedulerNode.prune_deps"
+None*d
+selfZ
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode*æ
+prune_weak_deps;torch._inductor.scheduler.BaseSchedulerNode.prune_weak_deps"
+None*d
+selfZ
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode*∂
+prune_redundant_deps@torch._inductor.scheduler.BaseSchedulerNode.prune_redundant_deps"
+None*d
+selfZ
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode*Î
+name_to_fused_node“
+Gbuiltins.dict[builtins.str,torch._inductor.scheduler.BaseSchedulerNode]
+builtins.str"builtins.strZ
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode"builtins.dict*ƒ
+get_name4torch._inductor.scheduler.BaseSchedulerNode.get_name"
+builtins.str"builtins.str*d
+selfZ
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode*–
+get_first_name:torch._inductor.scheduler.BaseSchedulerNode.get_first_name"
+builtins.str"builtins.str*d
+selfZ
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode*Ú
+	get_names5torch._inductor.scheduler.BaseSchedulerNode.get_names"H
+builtins.set[builtins.str]
+builtins.str"builtins.str"builtins.set*d
+selfZ
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode*÷
+	get_nodes5torch._inductor.scheduler.BaseSchedulerNode.get_nodes"´
+<typing.Sequence[torch._inductor.scheduler.BaseSchedulerNode]Z
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode"typing.Sequence*d
+selfZ
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode*Œ
+
+get_device6torch._inductor.scheduler.BaseSchedulerNode.get_device""
+torch._C.device"torch._C.device*d
+selfZ
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode*Œ
+is_reduction8torch._inductor.scheduler.BaseSchedulerNode.is_reduction"
+builtins.bool"builtins.bool*d
+selfZ
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode*–
+is_split_scan9torch._inductor.scheduler.BaseSchedulerNode.is_split_scan"
+builtins.bool"builtins.bool*d
+selfZ
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode*Ã
+is_template7torch._inductor.scheduler.BaseSchedulerNode.is_template"
+builtins.bool"builtins.bool*d
+selfZ
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode*»
+	is_extern5torch._inductor.scheduler.BaseSchedulerNode.is_extern"
+builtins.bool"builtins.bool*d
+selfZ
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode* 
+
+is_foreach6torch._inductor.scheduler.BaseSchedulerNode.is_foreach"
+builtins.bool"builtins.bool*d
+selfZ
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode*†
+can_inplace7torch._inductor.scheduler.BaseSchedulerNode.can_inplace"
+builtins.bool"builtins.bool*d
+selfZ
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode*R
+read_depD
+ torch._inductor.dependencies.Dep" torch._inductor.dependencies.Dep*÷
+has_side_effects<torch._inductor.scheduler.BaseSchedulerNode.has_side_effects"
+builtins.bool"builtins.bool*d
+selfZ
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode* 
+decide_inplace_updateAtorch._inductor.scheduler.BaseSchedulerNode.decide_inplace_update"
+None*d
+selfZ
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode*∞
+allocate4torch._inductor.scheduler.BaseSchedulerNode.allocate"
+None*d
+selfZ
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode*∆
+can_free4torch._inductor.scheduler.BaseSchedulerNode.can_free"
+builtins.bool"builtins.bool*d
+selfZ
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode*€
+codegen_originating_infoDtorch._inductor.scheduler.BaseSchedulerNode.codegen_originating_info"
+None*d
+selfZ
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode*X
+bufferL
+$torch._inductor.utils.IndentedBuffer"$torch._inductor.utils.IndentedBuffer*/
+	only_once
+builtins.bool"builtins.bool *Ï
+get_read_write_buffers_sizesHtorch._inductor.scheduler.BaseSchedulerNode.get_read_write_buffers_sizes"
+builtins.int"builtins.int*d
+selfZ
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode*‚
+get_estimated_runtimeAtorch._inductor.scheduler.BaseSchedulerNode.get_estimated_runtime" 
+builtins.float"builtins.float*d
+selfZ
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode*æ
+get_template_node=torch._inductor.scheduler.BaseSchedulerNode.get_template_node"É
+-Union[torch._inductor.ir.TemplateBuffer,None]F
+!torch._inductor.ir.TemplateBuffer"!torch._inductor.ir.TemplateBuffer
+None*d
+selfZ
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNoderÜ
+group1torch._inductor.scheduler.BaseSchedulerNode.group…
+:Tuple[torch._C.device,builtins.tuple[builtins.tuple[Any]]]"
+torch._C.device"torch._C.devicee
+#builtins.tuple[builtins.tuple[Any]].
+builtins.tuple[Any]
+Any"builtins.tuple"builtins.tuplerö
+read_writes7torch._inductor.scheduler.BaseSchedulerNode.read_writesR
+'torch._inductor.dependencies.ReadWrites"'torch._inductor.dependencies.ReadWritesr€
+unmet_dependencies>torch._inductor.scheduler.BaseSchedulerNode.unmet_dependenciesÑ
+.builtins.set[torch._inductor.dependencies.Dep]D
+ torch._inductor.dependencies.Dep" torch._inductor.dependencies.Dep"builtins.setré
+	scheduler5torch._inductor.scheduler.BaseSchedulerNode.schedulerJ
+#torch._inductor.scheduler.Scheduler"#torch._inductor.scheduler.Schedulerr•
+node0torch._inductor.scheduler.BaseSchedulerNode.nodek
+%Union[torch._inductor.ir.Buffer,None]6
+torch._inductor.ir.Buffer"torch._inductor.ir.Buffer
+Noner…
+users1torch._inductor.scheduler.BaseSchedulerNode.userså
+1builtins.list[torch._inductor.scheduler.NodeUser]H
+"torch._inductor.scheduler.NodeUser""torch._inductor.scheduler.NodeUser"builtins.listrÙ
+inverse_users9torch._inductor.scheduler.BaseSchedulerNode.inverse_usersß
+:builtins.list[torch._inductor.scheduler.BaseSchedulerNode]Z
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode"builtins.listrÓ
+
+node_users6torch._inductor.scheduler.BaseSchedulerNode.node_usersß
+:builtins.list[torch._inductor.scheduler.BaseSchedulerNode]Z
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode"builtins.listrå
+	ancestors5torch._inductor.scheduler.BaseSchedulerNode.ancestorsH
+builtins.set[builtins.str]
+builtins.str"builtins.str"builtins.setr`
+	min_order5torch._inductor.scheduler.BaseSchedulerNode.min_order
+builtins.int"builtins.intr`
+	max_order5torch._inductor.scheduler.BaseSchedulerNode.max_order
+builtins.int"builtins.intré
+
+last_usage6torch._inductor.scheduler.BaseSchedulerNode.last_usageH
+builtins.set[builtins.str]
+builtins.str"builtins.str"builtins.setr^
+written3torch._inductor.scheduler.BaseSchedulerNode.written
+builtins.bool"builtins.boolà
+	WhyNoFuse#torch._inductor.scheduler.WhyNoFuse"builtins.object*Ê
+__init__,torch._inductor.scheduler.WhyNoFuse.__init__"
+None*T
+selfJ
+#torch._inductor.scheduler.WhyNoFuse"#torch._inductor.scheduler.WhyNoFuse*e
+node1Z
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode*e
+node2Z
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode*’
+__call__,torch._inductor.scheduler.WhyNoFuse.__call__"
+None*T
+selfJ
+#torch._inductor.scheduler.WhyNoFuse"#torch._inductor.scheduler.WhyNoFuse*(
+reason
+builtins.str"builtins.str*
+args
+Any*¢
+__str__+torch._inductor.scheduler.WhyNoFuse.__str__"
+builtins.str"builtins.str*LJ
+#torch._inductor.scheduler.WhyNoFuse"#torch._inductor.scheduler.WhyNoFuserÜ
+	__slots__-torch._inductor.scheduler.WhyNoFuse.__slots__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.listrR
+reason*torch._inductor.scheduler.WhyNoFuse.reason
+builtins.str"builtins.strr`
+args(torch._inductor.scheduler.WhyNoFuse.args.
+builtins.tuple[Any]
+Any"builtins.tupleré
+node1)torch._inductor.scheduler.WhyNoFuse.node1Z
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNoderé
+node2)torch._inductor.scheduler.WhyNoFuse.node2Z
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNodeé
+
+OutputNode$torch._inductor.scheduler.OutputNode"builtins.object*Ú
+__init__-torch._inductor.scheduler.OutputNode.__init__"
+None*V
+selfL
+$torch._inductor.scheduler.OutputNode"$torch._inductor.scheduler.OutputNode*U
+depL
+$torch._inductor.dependencies.StarDep"$torch._inductor.dependencies.StarDep*π
+is_reduction1torch._inductor.scheduler.OutputNode.is_reduction"
+builtins.bool"builtins.bool*V
+selfL
+$torch._inductor.scheduler.OutputNode"$torch._inductor.scheduler.OutputNode*â
+get_inputs_that_alias_outputAtorch._inductor.scheduler.OutputNode.get_inputs_that_alias_output"N
+typing.Sequence[builtins.str]
+builtins.str"builtins.str"typing.Sequence*V
+selfL
+$torch._inductor.scheduler.OutputNode"$torch._inductor.scheduler.OutputNode*Ø
+get_name-torch._inductor.scheduler.OutputNode.get_name"
+builtins.str"builtins.str*V
+selfL
+$torch._inductor.scheduler.OutputNode"$torch._inductor.scheduler.OutputNoderÜ
+__repr__-torch._inductor.scheduler.OutputNode.__repr__K
+CallableType[builtins.function]&
+builtins.function"builtins.functionr‡
+unmet_dependencies7torch._inductor.scheduler.OutputNode.unmet_dependenciesê
+2builtins.set[torch._inductor.dependencies.StarDep]L
+$torch._inductor.dependencies.StarDep"$torch._inductor.dependencies.StarDep"builtins.setrÌ
+inverse_users2torch._inductor.scheduler.OutputNode.inverse_usersß
+:builtins.list[torch._inductor.scheduler.BaseSchedulerNode]Z
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode"builtins.listæ
+ExternKernelSchedulerNode3torch._inductor.scheduler.ExternKernelSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode*Í
+debug_str_extraCtorch._inductor.scheduler.ExternKernelSchedulerNode.debug_str_extra"
+builtins.str"builtins.str*t
+selfj
+3torch._inductor.scheduler.ExternKernelSchedulerNode"3torch._inductor.scheduler.ExternKernelSchedulerNode*‡
+	is_extern=torch._inductor.scheduler.ExternKernelSchedulerNode.is_extern"
+builtins.bool"builtins.bool*t
+selfj
+3torch._inductor.scheduler.ExternKernelSchedulerNode"3torch._inductor.scheduler.ExternKernelSchedulerNode*Ó
+has_side_effectsDtorch._inductor.scheduler.ExternKernelSchedulerNode.has_side_effects"
+builtins.bool"builtins.bool*t
+selfj
+3torch._inductor.scheduler.ExternKernelSchedulerNode"3torch._inductor.scheduler.ExternKernelSchedulerNodew
+NopKernelSchedulerNode0torch._inductor.scheduler.NopKernelSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode…%
+SchedulerNode'torch._inductor.scheduler.SchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode*Î
+__init__0torch._inductor.scheduler.SchedulerNode.__init__"
+None*\
+selfR
+'torch._inductor.scheduler.SchedulerNode"'torch._inductor.scheduler.SchedulerNode*Y
+	schedulerJ
+#torch._inductor.scheduler.Scheduler"#torch._inductor.scheduler.Scheduler*È
+nodeﬁ
+JUnion[torch._inductor.ir.ComputedBuffer,torch._inductor.ir.TemplateBuffer]F
+!torch._inductor.ir.ComputedBuffer"!torch._inductor.ir.ComputedBufferF
+!torch._inductor.ir.TemplateBuffer"!torch._inductor.ir.TemplateBuffer*¿
+_compute_attrs6torch._inductor.scheduler.SchedulerNode._compute_attrs"
+None*\
+selfR
+'torch._inductor.scheduler.SchedulerNode"'torch._inductor.scheduler.SchedulerNode*ç
+extra_indexing_constraintsÍ
+<Union[Tuple[builtins.dict[Any,Any],builtins.list[Any]],None]ù
+0Tuple[builtins.dict[Any,Any],builtins.list[Any]]9
+builtins.dict[Any,Any]
+Any
+Any"builtins.dict,
+builtins.list[Any]
+Any"builtins.list
+None *É
+recompute_size_and_body?torch._inductor.scheduler.SchedulerNode.recompute_size_and_body"
+None*\
+selfR
+'torch._inductor.scheduler.SchedulerNode"'torch._inductor.scheduler.SchedulerNode*æ
+extra_indexing_constraintsù
+0Tuple[builtins.dict[Any,Any],builtins.list[Any]]9
+builtins.dict[Any,Any]
+Any
+Any"builtins.dict,
+builtins.list[Any]
+Any"builtins.list*∆
+debug_str_extra7torch._inductor.scheduler.SchedulerNode.debug_str_extra"
+builtins.str"builtins.str*\
+selfR
+'torch._inductor.scheduler.SchedulerNode"'torch._inductor.scheduler.SchedulerNode*ä
+
+get_ranges2torch._inductor.scheduler.SchedulerNode.get_ranges"j
+%typing.Sequence[typing.Sequence[Any]]0
+typing.Sequence[Any]
+Any"typing.Sequence"typing.Sequence*\
+selfR
+'torch._inductor.scheduler.SchedulerNode"'torch._inductor.scheduler.SchedulerNode*¬
+is_reduction4torch._inductor.scheduler.SchedulerNode.is_reduction"
+builtins.bool"builtins.bool*\
+selfR
+'torch._inductor.scheduler.SchedulerNode"'torch._inductor.scheduler.SchedulerNode*ƒ
+is_split_scan5torch._inductor.scheduler.SchedulerNode.is_split_scan"
+builtins.bool"builtins.bool*\
+selfR
+'torch._inductor.scheduler.SchedulerNode"'torch._inductor.scheduler.SchedulerNode*¿
+is_template3torch._inductor.scheduler.SchedulerNode.is_template"
+builtins.bool"builtins.bool*\
+selfR
+'torch._inductor.scheduler.SchedulerNode"'torch._inductor.scheduler.SchedulerNode*≤
+get_template_node9torch._inductor.scheduler.SchedulerNode.get_template_node"É
+-Union[torch._inductor.ir.TemplateBuffer,None]F
+!torch._inductor.ir.TemplateBuffer"!torch._inductor.ir.TemplateBuffer
+None*\
+selfR
+'torch._inductor.scheduler.SchedulerNode"'torch._inductor.scheduler.SchedulerNode*‹
+run+torch._inductor.scheduler.SchedulerNode.run"
+None*\
+selfR
+'torch._inductor.scheduler.SchedulerNode"'torch._inductor.scheduler.SchedulerNode*@
+
+index_vars0
+typing.Sequence[Any]
+Any"typing.Sequence*§
+mark_run0torch._inductor.scheduler.SchedulerNode.mark_run"
+None*\
+selfR
+'torch._inductor.scheduler.SchedulerNode"'torch._inductor.scheduler.SchedulerNode*Ì
+ranges_from_index_vars>torch._inductor.scheduler.SchedulerNode.ranges_from_index_vars"9
+builtins.dict[Any,Any]
+Any
+Any"builtins.dict*\
+selfR
+'torch._inductor.scheduler.SchedulerNode"'torch._inductor.scheduler.SchedulerNode*z
+
+index_varsj
+%typing.Sequence[typing.Sequence[Any]]0
+typing.Sequence[Any]
+Any"typing.Sequence"typing.Sequence*û
+codegen/torch._inductor.scheduler.SchedulerNode.codegen"
+None*\
+selfR
+'torch._inductor.scheduler.SchedulerNode"'torch._inductor.scheduler.SchedulerNode*z
+
+index_varsj
+%typing.Sequence[typing.Sequence[Any]]0
+typing.Sequence[Any]
+Any"typing.Sequence"typing.Sequence*à
+pointwise_read_writes=torch._inductor.scheduler.SchedulerNode.pointwise_read_writes"R
+'torch._inductor.dependencies.ReadWrites"'torch._inductor.dependencies.ReadWrites*\
+selfR
+'torch._inductor.scheduler.SchedulerNode"'torch._inductor.scheduler.SchedulerNode*î
+can_inplace3torch._inductor.scheduler.SchedulerNode.can_inplace"
+builtins.bool"builtins.bool*\
+selfR
+'torch._inductor.scheduler.SchedulerNode"'torch._inductor.scheduler.SchedulerNode*R
+read_depD
+ torch._inductor.dependencies.Dep" torch._inductor.dependencies.Dep*ì
+_get_atomic_add_buffers?torch._inductor.scheduler.SchedulerNode._get_atomic_add_buffers"H
+builtins.set[builtins.str]
+builtins.str"builtins.str"builtins.set*\
+selfR
+'torch._inductor.scheduler.SchedulerNode"'torch._inductor.scheduler.SchedulerNode0:cache_on_selfrA
+_sizes.torch._inductor.scheduler.SchedulerNode._sizes
+Anyr?
+_body-torch._inductor.scheduler.SchedulerNode._body
+Any€?
+FusedSchedulerNode,torch._inductor.scheduler.FusedSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode*ù
+fuse1torch._inductor.scheduler.FusedSchedulerNode.fuse"\
+,torch._inductor.scheduler.FusedSchedulerNode",torch._inductor.scheduler.FusedSchedulerNode*§
+clsö
+2Type[torch._inductor.scheduler.FusedSchedulerNode]\
+,torch._inductor.scheduler.FusedSchedulerNode",torch._inductor.scheduler.FusedSchedulerNode"type*e
+node1Z
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode*e
+node2Z
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode0:classmethodp*…
+__init__5torch._inductor.scheduler.FusedSchedulerNode.__init__"
+None*f
+self\
+,torch._inductor.scheduler.FusedSchedulerNode",torch._inductor.scheduler.FusedSchedulerNode*Y
+	schedulerJ
+#torch._inductor.scheduler.Scheduler"#torch._inductor.scheduler.Scheduler*∏
+snodes´
+<typing.Sequence[torch._inductor.scheduler.BaseSchedulerNode]Z
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode"typing.Sequence*ÿ
+get_name5torch._inductor.scheduler.FusedSchedulerNode.get_name"
+builtins.str"builtins.str*f
+self\
+,torch._inductor.scheduler.FusedSchedulerNode",torch._inductor.scheduler.FusedSchedulerNode0:cache_on_self*”
+get_first_name;torch._inductor.scheduler.FusedSchedulerNode.get_first_name"
+builtins.str"builtins.str*f
+self\
+,torch._inductor.scheduler.FusedSchedulerNode",torch._inductor.scheduler.FusedSchedulerNode*Ü
+	get_names6torch._inductor.scheduler.FusedSchedulerNode.get_names"H
+builtins.set[builtins.str]
+builtins.str"builtins.str"builtins.set*f
+self\
+,torch._inductor.scheduler.FusedSchedulerNode",torch._inductor.scheduler.FusedSchedulerNode0:cache_on_self*’
+debug_str_extra<torch._inductor.scheduler.FusedSchedulerNode.debug_str_extra"
+builtins.str"builtins.str*f
+self\
+,torch._inductor.scheduler.FusedSchedulerNode",torch._inductor.scheduler.FusedSchedulerNode*≤
+set_last_usage;torch._inductor.scheduler.FusedSchedulerNode.set_last_usage"
+None*f
+self\
+,torch._inductor.scheduler.FusedSchedulerNode",torch._inductor.scheduler.FusedSchedulerNode*a
+future_used_buffersH
+builtins.set[builtins.str]
+builtins.str"builtins.str"builtins.set*ç
+mutation_real_nameu
+(builtins.dict[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.dict*ñ
+used_buffer_names>torch._inductor.scheduler.FusedSchedulerNode.used_buffer_names"H
+builtins.set[builtins.str]
+builtins.str"builtins.str"builtins.set*f
+self\
+,torch._inductor.scheduler.FusedSchedulerNode",torch._inductor.scheduler.FusedSchedulerNode0:cache_on_self*¨
+used_or_aliased_buffer_namesItorch._inductor.scheduler.FusedSchedulerNode.used_or_aliased_buffer_names"H
+builtins.set[builtins.str]
+builtins.str"builtins.str"builtins.set*f
+self\
+,torch._inductor.scheduler.FusedSchedulerNode",torch._inductor.scheduler.FusedSchedulerNode0:cache_on_self*Ÿ
+	get_nodes6torch._inductor.scheduler.FusedSchedulerNode.get_nodes"´
+<typing.Sequence[torch._inductor.scheduler.BaseSchedulerNode]Z
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode"typing.Sequence*f
+self\
+,torch._inductor.scheduler.FusedSchedulerNode",torch._inductor.scheduler.FusedSchedulerNode*ø
+__repr__5torch._inductor.scheduler.FusedSchedulerNode.__repr__"
+builtins.str"builtins.str*^\
+,torch._inductor.scheduler.FusedSchedulerNode",torch._inductor.scheduler.FusedSchedulerNode*‚
+is_reduction9torch._inductor.scheduler.FusedSchedulerNode.is_reduction"
+builtins.bool"builtins.bool*f
+self\
+,torch._inductor.scheduler.FusedSchedulerNode",torch._inductor.scheduler.FusedSchedulerNode0:cache_on_self*‰
+is_split_scan:torch._inductor.scheduler.FusedSchedulerNode.is_split_scan"
+builtins.bool"builtins.bool*f
+self\
+,torch._inductor.scheduler.FusedSchedulerNode",torch._inductor.scheduler.FusedSchedulerNode0:cache_on_self*‡
+is_template8torch._inductor.scheduler.FusedSchedulerNode.is_template"
+builtins.bool"builtins.bool*f
+self\
+,torch._inductor.scheduler.FusedSchedulerNode",torch._inductor.scheduler.FusedSchedulerNode0:cache_on_self*“
+get_template_node>torch._inductor.scheduler.FusedSchedulerNode.get_template_node"É
+-Union[torch._inductor.ir.TemplateBuffer,None]F
+!torch._inductor.ir.TemplateBuffer"!torch._inductor.ir.TemplateBuffer
+None*f
+self\
+,torch._inductor.scheduler.FusedSchedulerNode",torch._inductor.scheduler.FusedSchedulerNode0:cache_on_self*—
+
+get_device7torch._inductor.scheduler.FusedSchedulerNode.get_device""
+torch._C.device"torch._C.device*f
+self\
+,torch._inductor.scheduler.FusedSchedulerNode",torch._inductor.scheduler.FusedSchedulerNode*˙
+has_aliasing_or_mutationEtorch._inductor.scheduler.FusedSchedulerNode.has_aliasing_or_mutation"
+builtins.bool"builtins.bool*f
+self\
+,torch._inductor.scheduler.FusedSchedulerNode",torch._inductor.scheduler.FusedSchedulerNode0:cache_on_self*î
+	op_counts6torch._inductor.scheduler.FusedSchedulerNode.op_counts"V
+!collections.Counter[builtins.str]
+builtins.str"builtins.str"collections.Counter*f
+self\
+,torch._inductor.scheduler.FusedSchedulerNode",torch._inductor.scheduler.FusedSchedulerNode0:cache_on_self*–
+update_mutated_namesAtorch._inductor.scheduler.FusedSchedulerNode.update_mutated_names"
+None*f
+self\
+,torch._inductor.scheduler.FusedSchedulerNode",torch._inductor.scheduler.FusedSchedulerNode*Ç
+renamesu
+(builtins.dict[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.dict*ã
+add_fake_dep9torch._inductor.scheduler.FusedSchedulerNode.add_fake_dep"
+None*f
+self\
+,torch._inductor.scheduler.FusedSchedulerNode",torch._inductor.scheduler.FusedSchedulerNode*N
+nameD
+ torch._inductor.dependencies.Dep" torch._inductor.dependencies.Dep*–
+	set_users6torch._inductor.scheduler.FusedSchedulerNode.set_users"
+None*f
+self\
+,torch._inductor.scheduler.FusedSchedulerNode",torch._inductor.scheduler.FusedSchedulerNode*ò
+userså
+1builtins.list[torch._inductor.scheduler.NodeUser]H
+"torch._inductor.scheduler.NodeUser""torch._inductor.scheduler.NodeUser"builtins.list*ˇ
+get_aliases8torch._inductor.scheduler.FusedSchedulerNode.get_aliases"N
+typing.Sequence[builtins.str]
+builtins.str"builtins.str"typing.Sequence*f
+self\
+,torch._inductor.scheduler.FusedSchedulerNode",torch._inductor.scheduler.FusedSchedulerNode*ˇ
+get_mutations:torch._inductor.scheduler.FusedSchedulerNode.get_mutations"J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*f
+self\
+,torch._inductor.scheduler.FusedSchedulerNode",torch._inductor.scheduler.FusedSchedulerNode*£
+can_inplace8torch._inductor.scheduler.FusedSchedulerNode.can_inplace"
+builtins.bool"builtins.bool*f
+self\
+,torch._inductor.scheduler.FusedSchedulerNode",torch._inductor.scheduler.FusedSchedulerNode*R
+read_depD
+ torch._inductor.dependencies.Dep" torch._inductor.dependencies.Dep*≥
+allocate5torch._inductor.scheduler.FusedSchedulerNode.allocate"
+None*f
+self\
+,torch._inductor.scheduler.FusedSchedulerNode",torch._inductor.scheduler.FusedSchedulerNode*…
+can_free5torch._inductor.scheduler.FusedSchedulerNode.can_free"
+builtins.bool"builtins.bool*f
+self\
+,torch._inductor.scheduler.FusedSchedulerNode",torch._inductor.scheduler.FusedSchedulerNode*…
+	debug_str6torch._inductor.scheduler.FusedSchedulerNode.debug_str"
+builtins.str"builtins.str*f
+self\
+,torch._inductor.scheduler.FusedSchedulerNode",torch._inductor.scheduler.FusedSchedulerNoderÎ
+snodes3torch._inductor.scheduler.FusedSchedulerNode.snodes´
+<typing.Sequence[torch._inductor.scheduler.BaseSchedulerNode]Z
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode"typing.Sequencer 
+users2torch._inductor.scheduler.FusedSchedulerNode.userså
+1builtins.list[torch._inductor.scheduler.NodeUser]H
+"torch._inductor.scheduler.NodeUser""torch._inductor.scheduler.NodeUser"builtins.listä2
+ForeachKernelSchedulerNode4torch._inductor.scheduler.ForeachKernelSchedulerNode",torch._inductor.scheduler.FusedSchedulerNode*Ô
+get_consumer_subnode_forMtorch._inductor.scheduler.ForeachKernelSchedulerNode.get_consumer_subnode_for"°
+7Union[torch._inductor.scheduler.BaseSchedulerNode,None]Z
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode
+None*v
+selfl
+4torch._inductor.scheduler.ForeachKernelSchedulerNode"4torch._inductor.scheduler.ForeachKernelSchedulerNode*h
+producerZ
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode*Ô
+get_producer_subnode_forMtorch._inductor.scheduler.ForeachKernelSchedulerNode.get_producer_subnode_for"°
+7Union[torch._inductor.scheduler.BaseSchedulerNode,None]Z
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode
+None*v
+selfl
+4torch._inductor.scheduler.ForeachKernelSchedulerNode"4torch._inductor.scheduler.ForeachKernelSchedulerNode*h
+consumerZ
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode*ç
+can_fuse=torch._inductor.scheduler.ForeachKernelSchedulerNode.can_fuse"
+builtins.bool"builtins.bool*º
+cls≤
+:Type[torch._inductor.scheduler.ForeachKernelSchedulerNode]l
+4torch._inductor.scheduler.ForeachKernelSchedulerNode"4torch._inductor.scheduler.ForeachKernelSchedulerNode"type*h
+producerZ
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode*h
+consumerZ
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode0:classmethodp*”
+fuse9torch._inductor.scheduler.ForeachKernelSchedulerNode.fuse"l
+4torch._inductor.scheduler.ForeachKernelSchedulerNode"4torch._inductor.scheduler.ForeachKernelSchedulerNode*º
+cls≤
+:Type[torch._inductor.scheduler.ForeachKernelSchedulerNode]l
+4torch._inductor.scheduler.ForeachKernelSchedulerNode"4torch._inductor.scheduler.ForeachKernelSchedulerNode"type*h
+producerZ
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode*h
+consumerZ
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode0:classmethodp*–
+__init__=torch._inductor.scheduler.ForeachKernelSchedulerNode.__init__"
+None*v
+selfl
+4torch._inductor.scheduler.ForeachKernelSchedulerNode"4torch._inductor.scheduler.ForeachKernelSchedulerNode*Y
+	schedulerJ
+#torch._inductor.scheduler.Scheduler"#torch._inductor.scheduler.Scheduler*∑
+nodes´
+<typing.Sequence[torch._inductor.scheduler.BaseSchedulerNode]Z
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode"typing.Sequence*µ
+prev_node_1°
+7Union[torch._inductor.scheduler.BaseSchedulerNode,None]Z
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode
+None *µ
+prev_node_2°
+7Union[torch._inductor.scheduler.BaseSchedulerNode,None]Z
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode
+None *À
+mark_run=torch._inductor.scheduler.ForeachKernelSchedulerNode.mark_run"
+None*v
+selfl
+4torch._inductor.scheduler.ForeachKernelSchedulerNode"4torch._inductor.scheduler.ForeachKernelSchedulerNode*…
+codegen<torch._inductor.scheduler.ForeachKernelSchedulerNode.codegen"
+None*v
+selfl
+4torch._inductor.scheduler.ForeachKernelSchedulerNode"4torch._inductor.scheduler.ForeachKernelSchedulerNode*·
+can_free=torch._inductor.scheduler.ForeachKernelSchedulerNode.can_free"
+builtins.bool"builtins.bool*v
+selfl
+4torch._inductor.scheduler.ForeachKernelSchedulerNode"4torch._inductor.scheduler.ForeachKernelSchedulerNode*Â
+
+is_foreach?torch._inductor.scheduler.ForeachKernelSchedulerNode.is_foreach"
+builtins.bool"builtins.bool*v
+selfl
+4torch._inductor.scheduler.ForeachKernelSchedulerNode"4torch._inductor.scheduler.ForeachKernelSchedulerNode*Å
+get_subkernel_nodesHtorch._inductor.scheduler.ForeachKernelSchedulerNode.get_subkernel_nodes"ß
+:builtins.list[torch._inductor.scheduler.BaseSchedulerNode]Z
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode"builtins.list*v
+selfl
+4torch._inductor.scheduler.ForeachKernelSchedulerNode"4torch._inductor.scheduler.ForeachKernelSchedulerNode*Ò
+	get_nodes>torch._inductor.scheduler.ForeachKernelSchedulerNode.get_nodes"´
+<typing.Sequence[torch._inductor.scheduler.BaseSchedulerNode]Z
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode"typing.Sequence*v
+selfl
+4torch._inductor.scheduler.ForeachKernelSchedulerNode"4torch._inductor.scheduler.ForeachKernelSchedulerNode*Î
+get_first_nameCtorch._inductor.scheduler.ForeachKernelSchedulerNode.get_first_name"
+builtins.str"builtins.str*v
+selfl
+4torch._inductor.scheduler.ForeachKernelSchedulerNode"4torch._inductor.scheduler.ForeachKernelSchedulerNode*—
+prune_redundant_depsItorch._inductor.scheduler.ForeachKernelSchedulerNode.prune_redundant_deps"
+None*v
+selfl
+4torch._inductor.scheduler.ForeachKernelSchedulerNode"4torch._inductor.scheduler.ForeachKernelSchedulerNode*Î
+name_to_fused_node“
+Gbuiltins.dict[builtins.str,torch._inductor.scheduler.BaseSchedulerNode]
+builtins.str"builtins.strZ
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode"builtins.dictr¶
+read_to_nodeAtorch._inductor.scheduler.ForeachKernelSchedulerNode.read_to_node“
+Gbuiltins.dict[builtins.str,torch._inductor.scheduler.BaseSchedulerNode]
+builtins.str"builtins.strZ
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode"builtins.dictr¶
+name_to_nodeAtorch._inductor.scheduler.ForeachKernelSchedulerNode.name_to_node“
+Gbuiltins.dict[builtins.str,torch._inductor.scheduler.BaseSchedulerNode]
+builtins.str"builtins.strZ
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode"builtins.dictr“
+users:torch._inductor.scheduler.ForeachKernelSchedulerNode.userså
+1builtins.list[torch._inductor.scheduler.NodeUser]H
+"torch._inductor.scheduler.NodeUser""torch._inductor.scheduler.NodeUser"builtins.listr£
+origins<torch._inductor.scheduler.ForeachKernelSchedulerNode.originsZ
+ builtins.set[torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node"builtins.setÒ
+NodeUser"torch._inductor.scheduler.NodeUser"builtins.object*©
+__hash__+torch._inductor.scheduler.NodeUser.__hash__"
+builtins.int"builtins.int*R
+selfH
+"torch._inductor.scheduler.NodeUser""torch._inductor.scheduler.NodeUser*≈
+__eq__)torch._inductor.scheduler.NodeUser.__eq__"
+builtins.bool"builtins.bool*JH
+"torch._inductor.scheduler.NodeUser""torch._inductor.scheduler.NodeUser*$"
+builtins.object"builtins.object*©
+get_name+torch._inductor.scheduler.NodeUser.get_name"
+builtins.str"builtins.str*R
+selfH
+"torch._inductor.scheduler.NodeUser""torch._inductor.scheduler.NodeUser*§
+merge(torch._inductor.scheduler.NodeUser.merge"H
+"torch._inductor.scheduler.NodeUser""torch._inductor.scheduler.NodeUser*R
+selfH
+"torch._inductor.scheduler.NodeUser""torch._inductor.scheduler.NodeUser*S
+otherH
+"torch._inductor.scheduler.NodeUser""torch._inductor.scheduler.NodeUser*ä
+__init__+torch._inductor.scheduler.NodeUser.__init__"
+None*R
+selfH
+"torch._inductor.scheduler.NodeUser""torch._inductor.scheduler.NodeUser*ê
+nodeÖ
+WUnion[torch._inductor.scheduler.BaseSchedulerNode,torch._inductor.scheduler.OutputNode]Z
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNodeL
+$torch._inductor.scheduler.OutputNode"$torch._inductor.scheduler.OutputNode*1
+can_inplace
+builtins.bool"builtins.bool *-
+is_weak
+builtins.bool"builtins.bool 8r∑
+node'torch._inductor.scheduler.NodeUser.nodeÖ
+WUnion[torch._inductor.scheduler.BaseSchedulerNode,torch._inductor.scheduler.OutputNode]Z
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNodeL
+$torch._inductor.scheduler.OutputNode"$torch._inductor.scheduler.OutputNoder]
+can_inplace.torch._inductor.scheduler.NodeUser.can_inplace
+builtins.bool"builtins.boolrU
+is_weak*torch._inductor.scheduler.NodeUser.is_weak
+builtins.bool"builtins.boolrÈ
+__dataclass_fields__7torch._inductor.scheduler.NodeUser.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictöy
+	Scheduler#torch._inductor.scheduler.Scheduler"builtins.object*¶
+__init__,torch._inductor.scheduler.Scheduler.__init__"
+None*T
+selfJ
+#torch._inductor.scheduler.Scheduler"#torch._inductor.scheduler.Scheduler*|
+nodesq
+(builtins.list[torch._inductor.ir.Buffer]6
+torch._inductor.ir.Buffer"torch._inductor.ir.Buffer"builtins.list0:dynamo_timed*ÿ
+get_current_device_or_throw?torch._inductor.scheduler.Scheduler.get_current_device_or_throw""
+torch._C.device"torch._C.device*T
+selfJ
+#torch._inductor.scheduler.Scheduler"#torch._inductor.scheduler.Scheduler*®
+debug_draw_graph4torch._inductor.scheduler.Scheduler.debug_draw_graph"
+None*T
+selfJ
+#torch._inductor.scheduler.Scheduler"#torch._inductor.scheduler.Scheduler*”
+debug_print_nodes5torch._inductor.scheduler.Scheduler.debug_print_nodes"
+None*T
+selfJ
+#torch._inductor.scheduler.Scheduler"#torch._inductor.scheduler.Scheduler*'
+label
+builtins.str"builtins.str*∆
+create_scheduler_node9torch._inductor.scheduler.Scheduler.create_scheduler_node"Z
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode*T
+selfJ
+#torch._inductor.scheduler.Scheduler"#torch._inductor.scheduler.Scheduler*@
+node6
+torch._inductor.ir.Buffer"torch._inductor.ir.Buffer*∞
+create_foreach_nodes8torch._inductor.scheduler.Scheduler.create_foreach_nodes"
+None*T
+selfJ
+#torch._inductor.scheduler.Scheduler"#torch._inductor.scheduler.Scheduler*∞
+compute_dependencies8torch._inductor.scheduler.Scheduler.compute_dependencies"
+None*T
+selfJ
+#torch._inductor.scheduler.Scheduler"#torch._inductor.scheduler.Scheduler*¨
+compute_node_users6torch._inductor.scheduler.Scheduler.compute_node_users"
+None*T
+selfJ
+#torch._inductor.scheduler.Scheduler"#torch._inductor.scheduler.Scheduler*≤
+dead_node_elimination9torch._inductor.scheduler.Scheduler.dead_node_elimination"
+None*T
+selfJ
+#torch._inductor.scheduler.Scheduler"#torch._inductor.scheduler.Scheduler*∫
+topological_sort_schedule=torch._inductor.scheduler.Scheduler.topological_sort_schedule"
+None*T
+selfJ
+#torch._inductor.scheduler.Scheduler"#torch._inductor.scheduler.Scheduler*™
+compute_ancestors5torch._inductor.scheduler.Scheduler.compute_ancestors"
+None*T
+selfJ
+#torch._inductor.scheduler.Scheduler"#torch._inductor.scheduler.Scheduler*ú
+
+fuse_nodes.torch._inductor.scheduler.Scheduler.fuse_nodes"
+None*T
+selfJ
+#torch._inductor.scheduler.Scheduler"#torch._inductor.scheduler.Scheduler* 
+benchmark_fused_nodes9torch._inductor.scheduler.Scheduler.benchmark_fused_nodes"f
+"Tuple[builtins.float,builtins.str] 
+builtins.float"builtins.float
+builtins.str"builtins.str*T
+selfJ
+#torch._inductor.scheduler.Scheduler"#torch._inductor.scheduler.Scheduler*∑
+nodes´
+<typing.Sequence[torch._inductor.scheduler.BaseSchedulerNode]Z
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode"typing.Sequence*∆
+finalize_multi_template_buffersCtorch._inductor.scheduler.Scheduler.finalize_multi_template_buffers"
+None*T
+selfJ
+#torch._inductor.scheduler.Scheduler"#torch._inductor.scheduler.Scheduler*é
+speedup_by_fusion5torch._inductor.scheduler.Scheduler.speedup_by_fusion"
+builtins.bool"builtins.bool*T
+selfJ
+#torch._inductor.scheduler.Scheduler"#torch._inductor.scheduler.Scheduler*e
+node1Z
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode*e
+node2Z
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode*¶
+fuse_nodes_once3torch._inductor.scheduler.Scheduler.fuse_nodes_once"
+None*T
+selfJ
+#torch._inductor.scheduler.Scheduler"#torch._inductor.scheduler.Scheduler*∞
+prune_redundant_deps8torch._inductor.scheduler.Scheduler.prune_redundant_deps"
+None*T
+selfJ
+#torch._inductor.scheduler.Scheduler"#torch._inductor.scheduler.Scheduler*ƒ
+get_possible_fusions8torch._inductor.scheduler.Scheduler.get_possible_fusions"õ
+mbuiltins.list[Tuple[torch._inductor.scheduler.BaseSchedulerNode,torch._inductor.scheduler.BaseSchedulerNode]]ö
+^Tuple[torch._inductor.scheduler.BaseSchedulerNode,torch._inductor.scheduler.BaseSchedulerNode]Z
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNodeZ
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode"builtins.list*T
+selfJ
+#torch._inductor.scheduler.Scheduler"#torch._inductor.scheduler.Scheduler*ú
+will_fusion_create_cycle<torch._inductor.scheduler.Scheduler.will_fusion_create_cycle"
+builtins.bool"builtins.bool*T
+selfJ
+#torch._inductor.scheduler.Scheduler"#torch._inductor.scheduler.Scheduler*e
+node1Z
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode*e
+node2Z
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode*™
+can_fusion_increase_peak_memoryCtorch._inductor.scheduler.Scheduler.can_fusion_increase_peak_memory"
+builtins.bool"builtins.bool*T
+selfJ
+#torch._inductor.scheduler.Scheduler"#torch._inductor.scheduler.Scheduler*e
+node1Z
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode*e
+node2Z
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode*Ä
+decide_fusion_fail_reason=torch._inductor.scheduler.Scheduler.decide_fusion_fail_reason"
+builtins.str"builtins.str*T
+selfJ
+#torch._inductor.scheduler.Scheduler"#torch._inductor.scheduler.Scheduler*e
+node1Z
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode*e
+node2Z
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode*b
+common_buf_namesL
+builtins.tuple[builtins.str]
+builtins.str"builtins.str"builtins.tuple*¸
+can_fuse,torch._inductor.scheduler.Scheduler.can_fuse"
+builtins.bool"builtins.bool*T
+selfJ
+#torch._inductor.scheduler.Scheduler"#torch._inductor.scheduler.Scheduler*e
+node1Z
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode*e
+node2Z
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode*é
+can_fuse_vertical5torch._inductor.scheduler.Scheduler.can_fuse_vertical"
+builtins.bool"builtins.bool*T
+selfJ
+#torch._inductor.scheduler.Scheduler"#torch._inductor.scheduler.Scheduler*e
+node1Z
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode*e
+node2Z
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode*˜
+fusable_read_and_write:torch._inductor.scheduler.Scheduler.fusable_read_and_write"
+builtins.bool"builtins.bool*T
+selfJ
+#torch._inductor.scheduler.Scheduler"#torch._inductor.scheduler.Scheduler*N
+readD
+ torch._inductor.dependencies.Dep" torch._inductor.dependencies.Dep*[
+writeP
+&torch._inductor.dependencies.MemoryDep"&torch._inductor.dependencies.MemoryDep*£
+score_fusion0torch._inductor.scheduler.Scheduler.score_fusion"º
+<Tuple[builtins.bool,builtins.bool,builtins.int,builtins.int]
+builtins.bool"builtins.bool
+builtins.bool"builtins.bool
+builtins.int"builtins.int
+builtins.int"builtins.int*T
+selfJ
+#torch._inductor.scheduler.Scheduler"#torch._inductor.scheduler.Scheduler*e
+node1Z
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode*e
+node2Z
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode*Ö
+dep_size_hint1torch._inductor.scheduler.Scheduler.dep_size_hint"
+builtins.int"builtins.int*T
+selfJ
+#torch._inductor.scheduler.Scheduler"#torch._inductor.scheduler.Scheduler*M
+depD
+ torch._inductor.dependencies.Dep" torch._inductor.dependencies.Dep*ê
+score_fusion_memory7torch._inductor.scheduler.Scheduler.score_fusion_memory"
+builtins.int"builtins.int*T
+selfJ
+#torch._inductor.scheduler.Scheduler"#torch._inductor.scheduler.Scheduler*e
+node1Z
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode*e
+node2Z
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode*•
+*get_possible_fusions_with_highest_priorityNtorch._inductor.scheduler.Scheduler.get_possible_fusions_with_highest_priority"õ
+mbuiltins.list[Tuple[torch._inductor.scheduler.BaseSchedulerNode,torch._inductor.scheduler.BaseSchedulerNode]]ö
+^Tuple[torch._inductor.scheduler.BaseSchedulerNode,torch._inductor.scheduler.BaseSchedulerNode]Z
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNodeZ
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode"builtins.list*T
+selfJ
+#torch._inductor.scheduler.Scheduler"#torch._inductor.scheduler.Scheduler*≤
+possible_fusionsõ
+mbuiltins.list[Tuple[torch._inductor.scheduler.BaseSchedulerNode,torch._inductor.scheduler.BaseSchedulerNode]]ö
+^Tuple[torch._inductor.scheduler.BaseSchedulerNode,torch._inductor.scheduler.BaseSchedulerNode]Z
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNodeZ
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode"builtins.list*Ü
+score_fusion_key4torch._inductor.scheduler.Scheduler.score_fusion_key"º
+<Tuple[builtins.bool,builtins.bool,builtins.int,builtins.int]
+builtins.bool"builtins.bool
+builtins.bool"builtins.bool
+builtins.int"builtins.int
+builtins.int"builtins.int*T
+selfJ
+#torch._inductor.scheduler.Scheduler"#torch._inductor.scheduler.Scheduler*¶
+nodesö
+^Tuple[torch._inductor.scheduler.BaseSchedulerNode,torch._inductor.scheduler.BaseSchedulerNode]Z
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNodeZ
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode*¨
+compute_last_usage6torch._inductor.scheduler.Scheduler.compute_last_usage"
+None*T
+selfJ
+#torch._inductor.scheduler.Scheduler"#torch._inductor.scheduler.Scheduler*†
+free_buffers0torch._inductor.scheduler.Scheduler.free_buffers"
+None*T
+selfJ
+#torch._inductor.scheduler.Scheduler"#torch._inductor.scheduler.Scheduler*æ
+remove_kernel_local_buffers?torch._inductor.scheduler.Scheduler.remove_kernel_local_buffers"
+None*T
+selfJ
+#torch._inductor.scheduler.Scheduler"#torch._inductor.scheduler.Scheduler* 
+remove_buffer1torch._inductor.scheduler.Scheduler.remove_buffer"
+None*T
+selfJ
+#torch._inductor.scheduler.Scheduler"#torch._inductor.scheduler.Scheduler*&
+name
+builtins.str"builtins.str*⁄
+remove_inplace_buffer9torch._inductor.scheduler.Scheduler.remove_inplace_buffer"
+None*T
+selfJ
+#torch._inductor.scheduler.Scheduler"#torch._inductor.scheduler.Scheduler*&
+name
+builtins.str"builtins.str*í
+flush)torch._inductor.scheduler.Scheduler.flush"
+None*T
+selfJ
+#torch._inductor.scheduler.Scheduler"#torch._inductor.scheduler.Scheduler*Æ
+codegen_extern_call7torch._inductor.scheduler.Scheduler.codegen_extern_call"
+None*T
+selfJ
+#torch._inductor.scheduler.Scheduler"#torch._inductor.scheduler.Scheduler*~
+scheduler_nodej
+3torch._inductor.scheduler.ExternKernelSchedulerNode"3torch._inductor.scheduler.ExternKernelSchedulerNode*†
+create_backend2torch._inductor.scheduler.Scheduler.create_backend"T
+(torch._inductor.scheduler.BaseScheduling"(torch._inductor.scheduler.BaseScheduling*T
+selfJ
+#torch._inductor.scheduler.Scheduler"#torch._inductor.scheduler.Scheduler*.
+device"
+torch._C.device"torch._C.device*ö
+get_backend/torch._inductor.scheduler.Scheduler.get_backend"T
+(torch._inductor.scheduler.BaseScheduling"(torch._inductor.scheduler.BaseScheduling*T
+selfJ
+#torch._inductor.scheduler.Scheduler"#torch._inductor.scheduler.Scheduler*.
+device"
+torch._C.device"torch._C.device*à
+enter_context1torch._inductor.scheduler.Scheduler.enter_context"
+None*T
+selfJ
+#torch._inductor.scheduler.Scheduler"#torch._inductor.scheduler.Scheduler*d
+nodeZ
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode*¶
+codegen+torch._inductor.scheduler.Scheduler.codegen"
+None*T
+selfJ
+#torch._inductor.scheduler.Scheduler"#torch._inductor.scheduler.Scheduler0:dynamo_timed*Ñ
+get_buffer_layout5torch._inductor.scheduler.Scheduler.get_buffer_layout"6
+torch._inductor.ir.Layout"torch._inductor.ir.Layout*T
+selfJ
+#torch._inductor.scheduler.Scheduler"#torch._inductor.scheduler.Scheduler**
+buf_name
+builtins.str"builtins.strrÜ
+__dep_size_hint_cache9torch._inductor.scheduler.Scheduler.__dep_size_hint_cache±
+<builtins.dict[torch._inductor.dependencies.Dep,builtins.int]D
+ torch._inductor.dependencies.Dep" torch._inductor.dependencies.Dep
+builtins.int"builtins.int"builtins.dictrç
+backends,torch._inductor.scheduler.Scheduler.backends“
+Gbuiltins.dict[torch._C.device,torch._inductor.scheduler.BaseScheduling]"
+torch._C.device"torch._C.deviceT
+(torch._inductor.scheduler.BaseScheduling"(torch._inductor.scheduler.BaseScheduling"builtins.dictrj
+post_grad_graph_id6torch._inductor.scheduler.Scheduler.post_grad_graph_id
+builtins.int"builtins.intrû
+available_buffer_names:torch._inductor.scheduler.Scheduler.available_buffer_namesH
+builtins.set[builtins.str]
+builtins.str"builtins.str"builtins.setr‹
+nodes)torch._inductor.scheduler.Scheduler.nodesß
+:builtins.list[torch._inductor.scheduler.BaseSchedulerNode]Z
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode"builtins.listrï
+name_to_node0torch._inductor.scheduler.Scheduler.name_to_node“
+Gbuiltins.dict[builtins.str,torch._inductor.scheduler.BaseSchedulerNode]
+builtins.str"builtins.strZ
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode"builtins.dictr°
+name_to_fused_node6torch._inductor.scheduler.Scheduler.name_to_fused_node“
+Gbuiltins.dict[builtins.str,torch._inductor.scheduler.BaseSchedulerNode]
+builtins.str"builtins.strZ
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode"builtins.dictr√
+mutation_real_name6torch._inductor.scheduler.Scheduler.mutation_real_nameu
+(builtins.dict[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.dictrø
+mutation_renames4torch._inductor.scheduler.Scheduler.mutation_renamesu
+(builtins.dict[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.dictrb
+num_orig_nodes2torch._inductor.scheduler.Scheduler.num_orig_nodes
+builtins.int"builtins.intrÔ
+logged_slow_fusion6torch._inductor.scheduler.Scheduler.logged_slow_fusion†
+.builtins.set[Tuple[builtins.str,builtins.str]]`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.setrì
+current_device2torch._inductor.scheduler.Scheduler.current_deviceM
+Union[torch._C.device,None]"
+torch._C.device"torch._C.device
+Nonerö
+buffer_names_to_free8torch._inductor.scheduler.Scheduler.buffer_names_to_freeH
+builtins.set[builtins.str]
+builtins.str"builtins.str"builtins.setr–
+origin_to_index3torch._inductor.scheduler.Scheduler.origin_to_indexá
+.builtins.dict[torch.fx.node.Node,builtins.int](
+torch.fx.node.Node"torch.fx.node.Node
+builtins.int"builtins.int"builtins.dictÙ 
+BaseScheduling(torch._inductor.scheduler.BaseScheduling"builtins.object*ù
+can_fuse_vertical:torch._inductor.scheduler.BaseScheduling.can_fuse_vertical"
+builtins.bool"builtins.bool*^
+selfT
+(torch._inductor.scheduler.BaseScheduling"(torch._inductor.scheduler.BaseScheduling*e
+node1Z
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode*e
+node2Z
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode*°
+can_fuse_horizontal<torch._inductor.scheduler.BaseScheduling.can_fuse_horizontal"
+builtins.bool"builtins.bool*^
+selfT
+(torch._inductor.scheduler.BaseScheduling"(torch._inductor.scheduler.BaseScheduling*e
+node1Z
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode*e
+node2Z
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode*¡
+fuse-torch._inductor.scheduler.BaseScheduling.fuse"\
+,torch._inductor.scheduler.FusedSchedulerNode",torch._inductor.scheduler.FusedSchedulerNode*^
+selfT
+(torch._inductor.scheduler.BaseScheduling"(torch._inductor.scheduler.BaseScheduling*e
+node1Z
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode*e
+node2Z
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode*˚
+group_fn1torch._inductor.scheduler.BaseScheduling.group_fn"e
+#builtins.tuple[builtins.tuple[Any]].
+builtins.tuple[Any]
+Any"builtins.tuple"builtins.tuple*^
+selfT
+(torch._inductor.scheduler.BaseScheduling"(torch._inductor.scheduler.BaseScheduling*u
+sizesj
+%typing.Sequence[typing.Sequence[Any]]0
+typing.Sequence[Any]
+Any"typing.Sequence"typing.Sequence*•
+codegen_template9torch._inductor.scheduler.BaseScheduling.codegen_template"D
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*^
+selfT
+(torch._inductor.scheduler.BaseScheduling"(torch._inductor.scheduler.BaseScheduling*m
+template_nodeZ
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode*¿
+epilogue_nodes´
+<typing.Sequence[torch._inductor.scheduler.BaseSchedulerNode]Z
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode"typing.Sequence*Œ
+codegen_node5torch._inductor.scheduler.BaseScheduling.codegen_node"
+None*^
+selfT
+(torch._inductor.scheduler.BaseScheduling"(torch._inductor.scheduler.BaseScheduling*ú
+nodeë
+[Union[torch._inductor.scheduler.FusedSchedulerNode,torch._inductor.scheduler.SchedulerNode]\
+,torch._inductor.scheduler.FusedSchedulerNode",torch._inductor.scheduler.FusedSchedulerNodeR
+'torch._inductor.scheduler.SchedulerNode"'torch._inductor.scheduler.SchedulerNode*Ø
+codegen_sync5torch._inductor.scheduler.BaseScheduling.codegen_sync"
+None*^
+selfT
+(torch._inductor.scheduler.BaseScheduling"(torch._inductor.scheduler.BaseScheduling*…
+ready_to_flush7torch._inductor.scheduler.BaseScheduling.ready_to_flush"
+builtins.bool"builtins.bool*^
+selfT
+(torch._inductor.scheduler.BaseScheduling"(torch._inductor.scheduler.BaseScheduling*°
+flush.torch._inductor.scheduler.BaseScheduling.flush"
+None*^
+selfT
+(torch._inductor.scheduler.BaseScheduling"(torch._inductor.scheduler.BaseScheduling*Ÿ
+benchmark_fused_nodes>torch._inductor.scheduler.BaseScheduling.benchmark_fused_nodes"f
+"Tuple[builtins.float,builtins.str] 
+builtins.float"builtins.float
+builtins.str"builtins.str*^
+selfT
+(torch._inductor.scheduler.BaseScheduling"(torch._inductor.scheduler.BaseScheduling*∑
+nodes´
+<typing.Sequence[torch._inductor.scheduler.BaseSchedulerNode]Z
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode"typing.Sequence*©
+get_fusion_pair_priorityAtorch._inductor.scheduler.BaseScheduling.get_fusion_pair_priority"
+builtins.int"builtins.int*^
+selfT
+(torch._inductor.scheduler.BaseScheduling"(torch._inductor.scheduler.BaseScheduling*e
+node1Z
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode*e
+node2Z
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNodeÿ
+DedupList@1506(torch._inductor.scheduler.DedupList@1506"builtins.object*¿
+__init__1torch._inductor.scheduler.DedupList@1506.__init__"
+None*Ê
+self€
+Otorch._inductor.scheduler.DedupList@1506[torch._inductor.scheduler.Scheduler.T]^
+%torch._inductor.scheduler.Scheduler.T"
+builtins.object"builtins.object"builtins.object"(torch._inductor.scheduler.DedupList@1506*Ñ
+itemsˆ
+@Union[builtins.list[torch._inductor.scheduler.Scheduler.T],None]•
+4builtins.list[torch._inductor.scheduler.Scheduler.T]^
+%torch._inductor.scheduler.Scheduler.T"
+builtins.object"builtins.object"builtins.object"builtins.list
+None *Ü
+
+membershipÛ
+?Union[builtins.set[torch._inductor.scheduler.Scheduler.T],None]£
+3builtins.set[torch._inductor.scheduler.Scheduler.T]^
+%torch._inductor.scheduler.Scheduler.T"
+builtins.object"builtins.object"builtins.object"builtins.set
+None *õ
+append/torch._inductor.scheduler.DedupList@1506.append"
+None*Ê
+self€
+Otorch._inductor.scheduler.DedupList@1506[torch._inductor.scheduler.Scheduler.T]^
+%torch._inductor.scheduler.Scheduler.T"
+builtins.object"builtins.object"builtins.object"(torch._inductor.scheduler.DedupList@1506*m
+	node_user^
+%torch._inductor.scheduler.Scheduler.T"
+builtins.object"builtins.object"builtins.object*€
+__add__0torch._inductor.scheduler.DedupList@1506.__add__"€
+Otorch._inductor.scheduler.DedupList@1506[torch._inductor.scheduler.Scheduler.T]^
+%torch._inductor.scheduler.Scheduler.T"
+builtins.object"builtins.object"builtins.object"(torch._inductor.scheduler.DedupList@1506*ﬁ€
+Otorch._inductor.scheduler.DedupList@1506[torch._inductor.scheduler.Scheduler.T]^
+%torch._inductor.scheduler.Scheduler.T"
+builtins.object"builtins.object"builtins.object"(torch._inductor.scheduler.DedupList@1506*ﬁ€
+Otorch._inductor.scheduler.DedupList@1506[torch._inductor.scheduler.Scheduler.T]^
+%torch._inductor.scheduler.Scheduler.T"
+builtins.object"builtins.object"builtins.object"(torch._inductor.scheduler.DedupList@1506Prﬂ
+items.torch._inductor.scheduler.DedupList@1506.items•
+4builtins.list[torch._inductor.scheduler.Scheduler.T]^
+%torch._inductor.scheduler.Scheduler.T"
+builtins.object"builtins.object"builtins.object"builtins.listrÁ
+
+membership3torch._inductor.scheduler.DedupList@1506.membership£
+3builtins.set[torch._inductor.scheduler.Scheduler.T]^
+%torch._inductor.scheduler.Scheduler.T"
+builtins.object"builtins.object"builtins.object"builtins.set¶
+'<subclass of "Layout" and "NoneLayout">Atorch._inductor.scheduler.<subclass of "Layout" and "NoneLayout">"torch._inductor.ir.Layout"torch._inductor.ir.NoneLayout\
+pformat!torch._inductor.scheduler.pformat"
+builtins.str"builtins.str*
+obj
+Any¶
+_prune_redundant_deps/torch._inductor.scheduler._prune_redundant_deps"
+None*d
+nodeZ
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode*Î
+name_to_fused_node“
+Gbuiltins.dict[builtins.str,torch._inductor.scheduler.BaseSchedulerNode]
+builtins.str"builtins.strZ
++torch._inductor.scheduler.BaseSchedulerNode"+torch._inductor.scheduler.BaseSchedulerNode"builtins.dict¬
+pick_loop_order)torch._inductor.scheduler.pick_loop_order"J
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*ú
+stride_lengthsá
+*builtins.list[builtins.list[builtins.int]]J
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list"builtins.list*7
+sizes,
+builtins.list[Any]
+Any"builtins.list*`
+priority_idxL
+builtins.tuple[builtins.int]
+builtins.int"builtins.int"builtins.tuple ´
+debug_triton_code+torch._inductor.scheduler.debug_triton_code"J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*ú
+nodeë
+[Union[torch._inductor.scheduler.SchedulerNode,torch._inductor.scheduler.FusedSchedulerNode]R
+'torch._inductor.scheduler.SchedulerNode"'torch._inductor.scheduler.SchedulerNode\
+,torch._inductor.scheduler.FusedSchedulerNode",torch._inductor.scheduler.FusedSchedulerNode*ï
+__annotations__)torch._inductor.scheduler.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*1
+sympytorch._inductor.scheduler.sympy
+Any*F
+logtorch._inductor.scheduler.log 
+logging.Logger"logging.Logger*;
+
+fusion_log$torch._inductor.scheduler.fusion_log
+Any*ô
+kernel_name_to_op+torch._inductor.scheduler.kernel_name_to_opW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*û
+_post_grad_graph_counter2torch._inductor.scheduler._post_grad_graph_counterN
+itertools.count[builtins.int]
+builtins.int"builtins.int"itertools.count

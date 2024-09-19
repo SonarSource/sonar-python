@@ -1,0 +1,372 @@
+
+)torch._inductor.runtime.triton_heuristics˘
+autograd_profiler-redefinition;torch._inductor.runtime.triton_heuristics.autograd_profiler"builtins.objectrà
+_is_profiler_enabledPtorch._inductor.runtime.triton_heuristics.autograd_profiler._is_profiler_enabled
+builtins.bool"builtins.bool‘'
+CachingAutotuner:torch._inductor.runtime.triton_heuristics.CachingAutotuner"builtins.object*ß
+__init__Ctorch._inductor.runtime.triton_heuristics.CachingAutotuner.__init__"
+None*Ç
+selfx
+:torch._inductor.runtime.triton_heuristics.CachingAutotuner":torch._inductor.runtime.triton_heuristics.CachingAutotuner*
+fn
+Any*
+triton_meta
+Any*
+configs
+Any*
+save_cache_hook
+Any*
+mutated_arg_names
+Any*
+heuristic_type
+Any*
+
+size_hints
+Any *
+inductor_meta
+Any *
+custom_kernel
+Any *T
+filenameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *t
+
+precompileEtorch._inductor.runtime.triton_heuristics.CachingAutotuner.precompile*
+self*
+warm_cache_only *q
+get_device_interfaceOtorch._inductor.runtime.triton_heuristics.CachingAutotuner.get_device_interface*
+self*∏
+_precompile_configMtorch._inductor.runtime.triton_heuristics.CachingAutotuner._precompile_config"
+Any*Ç
+selfx
+:torch._inductor.runtime.triton_heuristics.CachingAutotuner":torch._inductor.runtime.triton_heuristics.CachingAutotuner*
+cfg
+Any*3
+warm_cache_only
+builtins.bool"builtins.bool*Å
+bench@torch._inductor.runtime.triton_heuristics.CachingAutotuner.bench*
+self*
+launcher*
+args*
+grid*
+
+kwargs*«
+
+clone_argsEtorch._inductor.runtime.triton_heuristics.CachingAutotuner.clone_args"ƒ
+9Tuple[builtins.list[Any],builtins.dict[builtins.str,Any]],
+builtins.list[Any]
+Any"builtins.listW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*Ç
+selfx
+:torch._inductor.runtime.triton_heuristics.CachingAutotuner":torch._inductor.runtime.triton_heuristics.CachingAutotuner*
+args
+Any*
+kwargs
+Any*ô
+benchmark_all_configsPtorch._inductor.runtime.triton_heuristics.CachingAutotuner.benchmark_all_configs*
+self*
+args*
+
+kwargs0:dynamo_timed*ã
+autotune_to_one_configQtorch._inductor.runtime.triton_heuristics.CachingAutotuner.autotune_to_one_config*
+self*
+args*
+
+kwargs*ç
+save_cuda_kernelKtorch._inductor.runtime.triton_heuristics.CachingAutotuner.save_cuda_kernel*
+self*
+grid*
+
+stream*
+launcher*ü
+coordinate_descent_tuningTtorch._inductor.runtime.triton_heuristics.CachingAutotuner.coordinate_descent_tuning*
+self*
+launcher*
+args*
+
+kwargs*{
+run>torch._inductor.runtime.triton_heuristics.CachingAutotuner.run*
+self*
+args*
+grid*
+
+stream*
+
+kwargsrL
+fn=torch._inductor.runtime.triton_heuristics.CachingAutotuner.fn
+Anyr∂
+device_propsGtorch._inductor.runtime.triton_heuristics.CachingAutotuner.device_props‹
+úTypeAlias[Tuple[builtins.str,builtins.int,builtins.int,Union[builtins.int,None],Union[builtins.int,None],Union[builtins.int,None],Union[builtins.int,None]]]à
+ëTuple[builtins.str,builtins.int,builtins.int,Union[builtins.int,None],Union[builtins.int,None],Union[builtins.int,None],Union[builtins.int,None]]
+builtins.str"builtins.str
+builtins.int"builtins.int
+builtins.int"builtins.intD
+Union[builtins.int,None]
+builtins.int"builtins.int
+NoneD
+Union[builtins.int,None]
+builtins.int"builtins.int
+NoneD
+Union[builtins.int,None]
+builtins.int"builtins.int
+NoneD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None".torch._inductor.runtime.hints.DevicePropertiesr’
+triton_metaFtorch._inductor.runtime.triton_heuristics.CachingAutotuner.triton_meta~
++builtins.dict[builtins.str,builtins.object]
+builtins.str"builtins.str"
+builtins.object"builtins.object"builtins.dictrb
+inductor_metaHtorch._inductor.runtime.triton_heuristics.CachingAutotuner.inductor_meta
+Anyrf
+save_cache_hookJtorch._inductor.runtime.triton_heuristics.CachingAutotuner.save_cache_hook
+Anyrj
+mutated_arg_namesLtorch._inductor.runtime.triton_heuristics.CachingAutotuner.mutated_arg_names
+AnyrV
+configsBtorch._inductor.runtime.triton_heuristics.CachingAutotuner.configs
+Anyrd
+heuristic_typeItorch._inductor.runtime.triton_heuristics.CachingAutotuner.heuristic_type
+Anyrb
+custom_kernelHtorch._inductor.runtime.triton_heuristics.CachingAutotuner.custom_kernel
+AnyrÅ
+cuda_kernel_savedLtorch._inductor.runtime.triton_heuristics.CachingAutotuner.cuda_kernel_saved
+builtins.bool"builtins.boolr
+	launchersDtorch._inductor.runtime.triton_heuristics.CachingAutotuner.launchers,
+builtins.list[Any]
+Any"builtins.listri
+lock?torch._inductor.runtime.triton_heuristics.CachingAutotuner.lock 
+threading.Lock"threading.Lockr\
+
+size_hintsEtorch._inductor.runtime.triton_heuristics.CachingAutotuner.size_hints
+Anyrﬁ
+coordesc_tunerItorch._inductor.runtime.triton_heuristics.CachingAutotuner.coordesc_tunerÄ
+>torch._inductor.runtime.coordinate_descent_tuner.CoordescTuner">torch._inductor.runtime.coordinate_descent_tuner.CoordescTunerrï
+filenameCtorch._inductor.runtime.triton_heuristics.CachingAutotuner.filenameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None≠
+DebugAutotuner8torch._inductor.runtime.triton_heuristics.DebugAutotuner":torch._inductor.runtime.triton_heuristics.CachingAutotuner*Å
+__init__Atorch._inductor.runtime.triton_heuristics.DebugAutotuner.__init__*
+self*
+args*
+regex_filter *
+
+kwargs*m
+run<torch._inductor.runtime.triton_heuristics.DebugAutotuner.run*
+self*
+args*
+grid*
+
+streamr^
+regex_filterEtorch._inductor.runtime.triton_heuristics.DebugAutotuner.regex_filter
+AnyrR
+cached?torch._inductor.runtime.triton_heuristics.DebugAutotuner.cached
+AnyÜ
+autotune_hints_to_configsCtorch._inductor.runtime.triton_heuristics.autotune_hints_to_configs",
+builtins.list[Any]
+Any"builtins.list*Æ
+hints¢
+8builtins.set[torch._inductor.runtime.hints.AutotuneHint]X
+*torch._inductor.runtime.hints.AutotuneHint"*torch._inductor.runtime.hints.AutotuneHint"builtins.set*
+
+size_hints
+Any*,
+
+block_size
+builtins.int"builtins.inty
+disable_pointwise_autotuningFtorch._inductor.runtime.triton_heuristics.disable_pointwise_autotuning*
+inductor_metaâ
+_dump_launch_params=torch._inductor.runtime.triton_heuristics._dump_launch_params*
+args*
+
+kwargs*
+launcher*
+kernel_nameM
+_find_names5torch._inductor.runtime.triton_heuristics._find_names*
+objD
+start_graph5torch._inductor.runtime.triton_heuristics.start_graphQ
+	end_graph3torch._inductor.runtime.triton_heuristics.end_graph*
+output_fileä
+hash_configs6torch._inductor.runtime.triton_heuristics.hash_configs"
+Any*9
+configs,
+builtins.list[Any]
+Any"builtins.list‘
+load_cached_autotuning@torch._inductor.runtime.triton_heuristics.load_cached_autotuning"
+Any*
+best_config
+Any*.
+configs_hash
+builtins.str"builtins.str*9
+configs,
+builtins.list[Any]
+Any"builtins.list*j
+inductor_metaW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dictÅ
+ should_use_remote_autotune_cacheJtorch._inductor.runtime.triton_heuristics.should_use_remote_autotune_cache*
+inductor_meta±
+cached_autotune9torch._inductor.runtime.triton_heuristics.cached_autotune"
+Any*í
+
+size_hintsÅ
+'Union[builtins.list[builtins.int],None]J
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list
+None*9
+configs,
+builtins.list[Any]
+Any"builtins.list*
+triton_meta
+Any*
+heuristic_type
+Any*
+filename
+Any *
+inductor_meta
+Any *
+custom_kernel
+Any é
+unique_configs8torch._inductor.runtime.triton_heuristics.unique_configs"
+Any*9
+configs,
+builtins.list[Any]
+Any"builtins.listy
+check_config6torch._inductor.runtime.triton_heuristics.check_config*
+cfg*
+xnumel *
+ynumel *
+znumel É
+triton_config7torch._inductor.runtime.triton_heuristics.triton_config"
+Any*
+
+size_hints
+Any*
+x
+Any*
+y
+Any *
+z
+Any *
+
+num_stages
+Any *$
+num_elements_per_warp
+Any *"
+min_elem_per_thread
+Any ”
+triton_config_reductionAtorch._inductor.runtime.triton_heuristics.triton_config_reduction"
+Any*
+
+size_hints
+Any*
+x
+Any*
+r
+Any*
+
+num_stages
+Any *
+	num_warps
+Any ü
+triton_config_tiled_reductionGtorch._inductor.runtime.triton_heuristics.triton_config_tiled_reduction*
+
+size_hints*
+x*
+y*
+r*
+
+num_stages ≤
+	pointwise3torch._inductor.runtime.triton_heuristics.pointwise*
+
+size_hints*
+triton_meta*
+	tile_hint *
+filename *
+min_elem_per_thread *
+inductor_meta »
+_reduction_configs<torch._inductor.runtime.triton_heuristics._reduction_configs",
+builtins.list[Any]
+Any"builtins.list*Z
+
+size_hintsJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*j
+inductor_metaW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dictû
+	reduction3torch._inductor.runtime.triton_heuristics.reduction*
+
+size_hints*
+reduction_hint *
+triton_meta *
+filename *
+inductor_meta ¥
+persistent_reduction>torch._inductor.runtime.triton_heuristics.persistent_reduction*
+
+size_hints*
+reduction_hint *
+triton_meta *
+filename *
+inductor_meta †
+
+split_scan4torch._inductor.runtime.triton_heuristics.split_scan*
+
+size_hints*
+reduction_hint *
+triton_meta *
+filename *
+inductor_meta ì
+template2torch._inductor.runtime.triton_heuristics.template*
+
+num_stages*
+	num_warps*
+triton_meta*
+filename *
+inductor_meta †
+user_autotune7torch._inductor.runtime.triton_heuristics.user_autotune*
+configs*
+triton_meta*
+filename *
+inductor_meta *
+custom_kernel Å
+foreach1torch._inductor.runtime.triton_heuristics.foreach*
+triton_meta*
+	num_warps*
+filename *
+inductor_meta B
+grid.torch._inductor.runtime.triton_heuristics.grid*
+
+numelsd
+split_scan_grid9torch._inductor.runtime.triton_heuristics.split_scan_grid*
+
+xnumel*
+
+rnumel*•
+__annotations__9torch._inductor.runtime.triton_heuristics.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*C
+triton0torch._inductor.runtime.triton_heuristics.triton
+Any*C
+Config0torch._inductor.runtime.triton_heuristics.Config
+Any*S
+OutOfResources8torch._inductor.runtime.triton_heuristics.OutOfResources
+Any*U
+KernelInterface9torch._inductor.runtime.triton_heuristics.KernelInterface
+Any*I
+	ASTSource3torch._inductor.runtime.triton_heuristics.ASTSource
+Any*I
+	GPUTarget3torch._inductor.runtime.triton_heuristics.GPUTarget
+Any*.
+autograd_profilertorch.autograd.profiler *V
+log-torch._inductor.runtime.triton_heuristics.log 
+logging.Logger"logging.Logger*z
+collected_calls9torch._inductor.runtime.triton_heuristics.collected_calls,
+builtins.list[Any]
+Any"builtins.list

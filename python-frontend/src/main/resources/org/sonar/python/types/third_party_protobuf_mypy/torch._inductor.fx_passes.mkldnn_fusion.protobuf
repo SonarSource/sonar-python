@@ -1,0 +1,198 @@
+
+'torch._inductor.fx_passes.mkldnn_fusionï
+	UnaryAttr1torch._inductor.fx_passes.mkldnn_fusion.UnaryAttr"builtins.object*©
+__init__:torch._inductor.fx_passes.mkldnn_fusion.UnaryAttr.__init__"
+None*p
+selff
+1torch._inductor.fx_passes.mkldnn_fusion.UnaryAttr"1torch._inductor.fx_passes.mkldnn_fusion.UnaryAttr*)
+op_name
+builtins.str"builtins.str*
+scalars_attr
+Any *
+algorithm_attr
+Any rb
+op_name9torch._inductor.fx_passes.mkldnn_fusion.UnaryAttr.op_name
+builtins.str"builtins.strrW
+scalars_attr>torch._inductor.fx_passes.mkldnn_fusion.UnaryAttr.scalars_attr
+Anyr[
+algorithm_attr@torch._inductor.fx_passes.mkldnn_fusion.UnaryAttr.algorithm_attr
+AnyM
+
+_conv_call2torch._inductor.fx_passes.mkldnn_fusion._conv_call*
+users Q
+_linear_call4torch._inductor.fx_passes.mkldnn_fusion._linear_call*
+users a
+_conv_transpose_call<torch._inductor.fx_passes.mkldnn_fusion._conv_transpose_call*
+users [
+	_to_float1torch._inductor.fx_passes.mkldnn_fusion._to_float*
+
+input_call*
+users L
+_to_bf160torch._inductor.fx_passes.mkldnn_fusion._to_bf16*
+
+input_callL
+_to_fp160torch._inductor.fx_passes.mkldnn_fusion._to_fp16*
+
+input_callê
+_unary_fusion_pattern=torch._inductor.fx_passes.mkldnn_fusion._unary_fusion_pattern*
+unary_fusion*
+call_fn*	
+users*
+
+lowp_dtype^
+_gelu_fusion_16torch._inductor.fx_passes.mkldnn_fusion._gelu_fusion_1*
+computation_call^
+_gelu_fusion_26torch._inductor.fx_passes.mkldnn_fusion._gelu_fusion_2*
+computation_calld
+_hardswish_fusion9torch._inductor.fx_passes.mkldnn_fusion._hardswish_fusion*
+computation_callZ
+_silu_fusion4torch._inductor.fx_passes.mkldnn_fusion._silu_fusion*
+computation_callh
+_hardsigmoid_fusion;torch._inductor.fx_passes.mkldnn_fusion._hardsigmoid_fusion*
+computation_callf
+_leaky_relu_fusion:torch._inductor.fx_passes.mkldnn_fusion._leaky_relu_fusion*
+computation_callb
+_hardtanh_fusion8torch._inductor.fx_passes.mkldnn_fusion._hardtanh_fusion*
+computation_callv
+_combined_fusion8torch._inductor.fx_passes.mkldnn_fusion._combined_fusion*
+computation_call*
+elementwise_ops
+_binary_fusion_v19torch._inductor.fx_passes.mkldnn_fusion._binary_fusion_v1*
+computation_call*
+	binary_fns
+_binary_fusion_v29torch._inductor.fx_passes.mkldnn_fusion._binary_fusion_v2*
+computation_call*
+	binary_fnÑ
+_is_single_computation_opAtorch._inductor.fx_passes.mkldnn_fusion._is_single_computation_op*
+computation_op*
+
+lowp_dtype ñ
+"_is_valid_computation_unary_fusionJtorch._inductor.fx_passes.mkldnn_fusion._is_valid_computation_unary_fusion*
+computation_op*
+
+lowp_dtype ≠
+_register_unary_fusion_loweringGtorch._inductor.fx_passes.mkldnn_fusion._register_unary_fusion_lowering*
+pattern*
+
+unary_attr*
+computation_op*
+
+lowp_dtype ß
+$_register_leaky_relu_fusion_loweringLtorch._inductor.fx_passes.mkldnn_fusion._register_leaky_relu_fusion_lowering*
+pattern*
+computation_op*
+
+lowp_dtype £
+"_register_hardtanh_fusion_loweringJtorch._inductor.fx_passes.mkldnn_fusion._register_hardtanh_fusion_lowering*
+pattern*
+computation_op*
+
+lowp_dtype _
+_is_valid_binary8torch._inductor.fx_passes.mkldnn_fusion._is_valid_binary*	
+match*
+fnö
+_is_valid_computation_binaryDtorch._inductor.fx_passes.mkldnn_fusion._is_valid_computation_binary*
+computation_op*
+	binary_op*
+other_index |
+_get_remaining_users<torch._inductor.fx_passes.mkldnn_fusion._get_remaining_users*
+extra_input_node*
+compute_node®
+$_is_valid_computation_binary_inplaceLtorch._inductor.fx_passes.mkldnn_fusion._is_valid_computation_binary_inplace*
+computation_op*
+	binary_op*
+other_index…
+&_register_binary_unary_fusion_loweringNtorch._inductor.fx_passes.mkldnn_fusion._register_binary_unary_fusion_lowering*
+pattern*
+computation_op*
+	binary_op*
+	fusion_op*
+
+unary_attr V
+_can_be_inplace7torch._inductor.fx_passes.mkldnn_fusion._can_be_inplace*
+
+_otherò
+4_register_binary_unary_maybe_inplace_fusion_lowering\torch._inductor.fx_passes.mkldnn_fusion._register_binary_unary_maybe_inplace_fusion_lowering*
+pattern*
+computation_op*
+	binary_op*
+inplace_fusion_op*
+outplace_fusion_op*
+
+unary_attr *
+other_index X
+_register_unary_fusion>torch._inductor.fx_passes.mkldnn_fusion._register_unary_fusion\
+_register_inplace_fusion@torch._inductor.fx_passes.mkldnn_fusion._register_inplace_fusionZ
+_register_binary_fusion?torch._inductor.fx_passes.mkldnn_fusion._register_binary_fusionf
+_register_binary_unary_fusionEtorch._inductor.fx_passes.mkldnn_fusion._register_binary_unary_fusionJ
+_recover_linear7torch._inductor.fx_passes.mkldnn_fusion._recover_linearq
+_is_packable_mkldnn_rnn_layerEtorch._inductor.fx_passes.mkldnn_fusion._is_packable_mkldnn_rnn_layer*	
+matchg
+_is_packable_convolution@torch._inductor.fx_passes.mkldnn_fusion._is_packable_convolution*	
+match]
+_is_packable_linear;torch._inductor.fx_passes.mkldnn_fusion._is_packable_linear*	
+match`
+_register_weight_pack_passBtorch._inductor.fx_passes.mkldnn_fusion._register_weight_pack_passv
+!_eliminate_duplicate_packed_nodesItorch._inductor.fx_passes.mkldnn_fusion._eliminate_duplicate_packed_nodes*
+gm*£
+__annotations__7torch._inductor.fx_passes.mkldnn_fusion.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*¸
+L"torch._inductor.lowering.lowerings“
+Dbuiltins.dict[torch._ops.OpOverload,CallableType[builtins.function]].
+torch._ops.OpOverload"torch._ops.OpOverloadK
+CallableType[builtins.function]&
+builtins.function"builtins.function"builtins.dict*=
+aten,torch._inductor.fx_passes.mkldnn_fusion.aten
+Any*A
+mkldnn.torch._inductor.fx_passes.mkldnn_fusion.mkldnn
+Any*?
+prims-torch._inductor.fx_passes.mkldnn_fusion.prims
+Any*“
+
+_conv_args2torch._inductor.fx_passes.mkldnn_fusion._conv_argsè
+2builtins.list[torch._inductor.pattern_matcher.Arg]J
+#torch._inductor.pattern_matcher.Arg"#torch._inductor.pattern_matcher.Arg"builtins.list*÷
+_linear_args4torch._inductor.fx_passes.mkldnn_fusion._linear_argsè
+2builtins.list[torch._inductor.pattern_matcher.Arg]J
+#torch._inductor.pattern_matcher.Arg"#torch._inductor.pattern_matcher.Arg"builtins.list*Ê
+_conv_transpose_args<torch._inductor.fx_passes.mkldnn_fusion._conv_transpose_argsè
+2builtins.list[torch._inductor.pattern_matcher.Arg]J
+#torch._inductor.pattern_matcher.Arg"#torch._inductor.pattern_matcher.Arg"builtins.list*ù
+_binary_attr4torch._inductor.fx_passes.mkldnn_fusion._binary_attrW
+builtins.dict[Any,builtins.str]
+Any
+builtins.str"builtins.str"builtins.dict*x
+computation_ops7torch._inductor.fx_passes.mkldnn_fusion.computation_ops,
+builtins.list[Any]
+Any"builtins.list*›
+_aten_conv_args7torch._inductor.fx_passes.mkldnn_fusion._aten_conv_argsê
+—Tuple[torch._inductor.pattern_matcher.Arg,torch._inductor.pattern_matcher.Arg,torch._inductor.pattern_matcher.Arg,torch._inductor.pattern_matcher.Arg,torch._inductor.pattern_matcher.Arg,torch._inductor.pattern_matcher.Arg,torch._inductor.pattern_matcher.KeywordArg,torch._inductor.pattern_matcher.Arg,torch._inductor.pattern_matcher.Arg]J
+#torch._inductor.pattern_matcher.Arg"#torch._inductor.pattern_matcher.ArgJ
+#torch._inductor.pattern_matcher.Arg"#torch._inductor.pattern_matcher.ArgJ
+#torch._inductor.pattern_matcher.Arg"#torch._inductor.pattern_matcher.ArgJ
+#torch._inductor.pattern_matcher.Arg"#torch._inductor.pattern_matcher.ArgJ
+#torch._inductor.pattern_matcher.Arg"#torch._inductor.pattern_matcher.ArgJ
+#torch._inductor.pattern_matcher.Arg"#torch._inductor.pattern_matcher.ArgX
+*torch._inductor.pattern_matcher.KeywordArg"*torch._inductor.pattern_matcher.KeywordArgJ
+#torch._inductor.pattern_matcher.Arg"#torch._inductor.pattern_matcher.ArgJ
+#torch._inductor.pattern_matcher.Arg"#torch._inductor.pattern_matcher.Arg*Ö
+_aten_mkldnn_rnn_layer_argsCtorch._inductor.fx_passes.mkldnn_fusion._aten_mkldnn_rnn_layer_args†
+ÕTuple[torch._inductor.pattern_matcher.Arg,torch._inductor.pattern_matcher.Arg,torch._inductor.pattern_matcher.Arg,torch._inductor.pattern_matcher.Arg,torch._inductor.pattern_matcher.Arg,torch._inductor.pattern_matcher.Arg,torch._inductor.pattern_matcher.Arg,torch._inductor.pattern_matcher.KeywordArg,torch._inductor.pattern_matcher.Arg,torch._inductor.pattern_matcher.Arg,torch._inductor.pattern_matcher.Arg,torch._inductor.pattern_matcher.Arg,torch._inductor.pattern_matcher.Arg,torch._inductor.pattern_matcher.Arg,torch._inductor.pattern_matcher.Arg,torch._inductor.pattern_matcher.Arg]J
+#torch._inductor.pattern_matcher.Arg"#torch._inductor.pattern_matcher.ArgJ
+#torch._inductor.pattern_matcher.Arg"#torch._inductor.pattern_matcher.ArgJ
+#torch._inductor.pattern_matcher.Arg"#torch._inductor.pattern_matcher.ArgJ
+#torch._inductor.pattern_matcher.Arg"#torch._inductor.pattern_matcher.ArgJ
+#torch._inductor.pattern_matcher.Arg"#torch._inductor.pattern_matcher.ArgJ
+#torch._inductor.pattern_matcher.Arg"#torch._inductor.pattern_matcher.ArgJ
+#torch._inductor.pattern_matcher.Arg"#torch._inductor.pattern_matcher.ArgX
+*torch._inductor.pattern_matcher.KeywordArg"*torch._inductor.pattern_matcher.KeywordArgJ
+#torch._inductor.pattern_matcher.Arg"#torch._inductor.pattern_matcher.ArgJ
+#torch._inductor.pattern_matcher.Arg"#torch._inductor.pattern_matcher.ArgJ
+#torch._inductor.pattern_matcher.Arg"#torch._inductor.pattern_matcher.ArgJ
+#torch._inductor.pattern_matcher.Arg"#torch._inductor.pattern_matcher.ArgJ
+#torch._inductor.pattern_matcher.Arg"#torch._inductor.pattern_matcher.ArgJ
+#torch._inductor.pattern_matcher.Arg"#torch._inductor.pattern_matcher.ArgJ
+#torch._inductor.pattern_matcher.Arg"#torch._inductor.pattern_matcher.ArgJ
+#torch._inductor.pattern_matcher.Arg"#torch._inductor.pattern_matcher.Arg

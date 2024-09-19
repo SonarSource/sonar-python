@@ -1,0 +1,209 @@
+
+&torch.distributed._tensor.ops.math_opsß
+	Reduction0torch.distributed._tensor.ops.math_ops.Reduction"	enum.EnumHr[
+NONE5torch.distributed._tensor.ops.math_ops.Reduction.NONE
+builtins.int"builtins.intr[
+MEAN5torch.distributed._tensor.ops.math_ops.Reduction.MEAN
+builtins.int"builtins.intrY
+SUM4torch.distributed._tensor.ops.math_ops.Reduction.SUM
+builtins.int"builtins.intª
+NormReduction4torch.distributed._tensor.ops.math_ops.NormReduction"builtins.object*ï
+__init__=torch.distributed._tensor.ops.math_ops.NormReduction.__init__"
+None*v
+selfl
+4torch.distributed._tensor.ops.math_ops.NormReduction"4torch.distributed._tensor.ops.math_ops.NormReduction*¡
+	norm_type‘
+/Union[builtins.int,builtins.float,builtins.str]
+builtins.int"builtins.int 
+builtins.float"builtins.float
+builtins.str"builtins.str8rß
+	norm_type>torch.distributed._tensor.ops.math_ops.NormReduction.norm_type‘
+/Union[builtins.int,builtins.float,builtins.str]
+builtins.int"builtins.int 
+builtins.float"builtins.float
+builtins.str"builtins.strrû
+__dataclass_fields__Itorch.distributed._tensor.ops.math_ops.NormReduction.__dataclass_fields__—
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictë
+_NormPartial3torch.distributed._tensor.ops.math_ops._NormPartial"1torch.distributed._tensor.placement_types.Partial*\
+__post_init__Atorch.distributed._tensor.ops.math_ops._NormPartial.__post_init__*
+self*Â
+_partition_valueDtorch.distributed._tensor.ops.math_ops._NormPartial._partition_value",
+torch._tensor.Tensor"torch._tensor.Tensor*t
+selfj
+3torch.distributed._tensor.ops.math_ops._NormPartial"3torch.distributed._tensor.ops.math_ops._NormPartial*8
+tensor,
+torch._tensor.Tensor"torch._tensor.Tensor*^
+meshT
+(torch.distributed.device_mesh.DeviceMesh"(torch.distributed.device_mesh.DeviceMesh**
+mesh_dim
+builtins.int"builtins.int*Ä
+_reduce_shard_valueGtorch.distributed._tensor.ops.math_ops._NormPartial._reduce_shard_value",
+torch._tensor.Tensor"torch._tensor.Tensor*t
+selfj
+3torch.distributed._tensor.ops.math_ops._NormPartial"3torch.distributed._tensor.ops.math_ops._NormPartial*8
+tensor,
+torch._tensor.Tensor"torch._tensor.Tensor*^
+meshT
+(torch.distributed.device_mesh.DeviceMesh"(torch.distributed.device_mesh.DeviceMesh**
+mesh_dim
+builtins.int"builtins.int*z
+
+shard_specj
+3torch.distributed._tensor.placement_types.Placement"3torch.distributed._tensor.placement_types.Placement*¼
+_reduce_valueAtorch.distributed._tensor.ops.math_ops._NormPartial._reduce_value",
+torch._tensor.Tensor"torch._tensor.Tensor*t
+selfj
+3torch.distributed._tensor.ops.math_ops._NormPartial"3torch.distributed._tensor.ops.math_ops._NormPartial*8
+tensor,
+torch._tensor.Tensor"torch._tensor.Tensor*^
+meshT
+(torch.distributed.device_mesh.DeviceMesh"(torch.distributed.device_mesh.DeviceMesh**
+mesh_dim
+builtins.int"builtins.int*À
+_pre_reduce_transformItorch.distributed._tensor.ops.math_ops._NormPartial._pre_reduce_transform",
+torch._tensor.Tensor"torch._tensor.Tensor*t
+selfj
+3torch.distributed._tensor.ops.math_ops._NormPartial"3torch.distributed._tensor.ops.math_ops._NormPartial*8
+tensor,
+torch._tensor.Tensor"torch._tensor.Tensor*Â
+_post_reduce_transformJtorch.distributed._tensor.ops.math_ops._NormPartial._post_reduce_transform",
+torch._tensor.Tensor"torch._tensor.Tensor*t
+selfj
+3torch.distributed._tensor.ops.math_ops._NormPartial"3torch.distributed._tensor.ops.math_ops._NormPartial*8
+tensor,
+torch._tensor.Tensor"torch._tensor.Tensor*ø
+__eq__:torch.distributed._tensor.ops.math_ops._NormPartial.__eq__"
+builtins.bool"builtins.bool*lj
+3torch.distributed._tensor.ops.math_ops._NormPartial"3torch.distributed._tensor.ops.math_ops._NormPartial*$"
+builtins.object"builtins.object*Ü
+__hash__<torch.distributed._tensor.ops.math_ops._NormPartial.__hash__"
+builtins.int"builtins.int*t
+selfj
+3torch.distributed._tensor.ops.math_ops._NormPartial"3torch.distributed._tensor.ops.math_ops._NormPartial*
+__init__<torch.distributed._tensor.ops.math_ops._NormPartial.__init__"
+None*t
+selfj
+3torch.distributed._tensor.ops.math_ops._NormPartial"3torch.distributed._tensor.ops.math_ops._NormPartial*-
+	reduce_op
+builtins.str"builtins.str *£
+	norm_type‘
+/Union[builtins.int,builtins.float,builtins.str]
+builtins.int"builtins.int 
+builtins.float"builtins.float
+builtins.str"builtins.str 8rÞ
+	norm_type=torch.distributed._tensor.ops.math_ops._NormPartial.norm_type‘
+/Union[builtins.int,builtins.float,builtins.str]
+builtins.int"builtins.int 
+builtins.float"builtins.float
+builtins.str"builtins.strrh
+	reduce_op=torch.distributed._tensor.ops.math_ops._NormPartial.reduce_op
+builtins.str"builtins.strrú
+__dataclass_fields__Htorch.distributed._tensor.ops.math_ops._NormPartial.__dataclass_fields__—
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dict³
+_infer_reduction_dims<torch.distributed._tensor.ops.math_ops._infer_reduction_dims"
+'Union[builtins.list[builtins.int],None]J
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list
+None*0
+dims_arg"
+builtins.object"builtins.object*&
+ndim
+builtins.int"builtins.intÊ
+_infer_reduce_dims_map=torch.distributed._tensor.ops.math_ops._infer_reduce_dims_map"J
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*^
+reduction_dimsJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*,
+
+input_ndim
+builtins.int"builtins.int*
+keep_dim
+Any ¥
+_replicate_dims_start_at?torch.distributed._tensor.ops.math_ops._replicate_dims_start_at"Á
+Cbuiltins.tuple[torch.distributed._tensor.placement_types.Placement]j
+3torch.distributed._tensor.placement_types.Placement"3torch.distributed._tensor.placement_types.Placement"builtins.tuple*Ô
+
+placementsÃ
+Dtyping.Sequence[torch.distributed._tensor.placement_types.Placement]j
+3torch.distributed._tensor.placement_types.Placement"3torch.distributed._tensor.placement_types.Placement"typing.Sequence*-
+	start_dim
+builtins.int"builtins.int …
+	_skip_dim0torch.distributed._tensor.ops.math_ops._skip_dim"Á
+Cbuiltins.tuple[torch.distributed._tensor.placement_types.Placement]j
+3torch.distributed._tensor.placement_types.Placement"3torch.distributed._tensor.placement_types.Placement"builtins.tuple*Ò
+
+placementsÁ
+Cbuiltins.tuple[torch.distributed._tensor.placement_types.Placement]j
+3torch.distributed._tensor.placement_types.Placement"3torch.distributed._tensor.placement_types.Placement"builtins.tuple*-
+skipped_dim
+builtins.int"builtins.intÔ
+replicate_reduction_dims?torch.distributed._tensor.ops.math_ops.replicate_reduction_dims"Á
+Cbuiltins.tuple[torch.distributed._tensor.placement_types.Placement]j
+3torch.distributed._tensor.placement_types.Placement"3torch.distributed._tensor.placement_types.Placement"builtins.tuple*Ò
+
+placementsÁ
+Cbuiltins.tuple[torch.distributed._tensor.placement_types.Placement]j
+3torch.distributed._tensor.placement_types.Placement"3torch.distributed._tensor.placement_types.Placement"builtins.tuple*^
+reduction_dimsJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.listÄ
+map_placements_after_reductionEtorch.distributed._tensor.ops.math_ops.map_placements_after_reduction"Á
+Cbuiltins.tuple[torch.distributed._tensor.placement_types.Placement]j
+3torch.distributed._tensor.placement_types.Placement"3torch.distributed._tensor.placement_types.Placement"builtins.tuple*Ò
+
+placementsÁ
+Cbuiltins.tuple[torch.distributed._tensor.placement_types.Placement]j
+3torch.distributed._tensor.placement_types.Placement"3torch.distributed._tensor.placement_types.Placement"builtins.tuple*^
+reduction_dimsJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*b
+reduction_dims_mapJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*ý
+reduction_opê
+STypeAlias[Union[torch.distributed._tensor.ops.math_ops.NormReduction,builtins.str]]Ø
+HUnion[torch.distributed._tensor.ops.math_ops.NormReduction,builtins.str]l
+4torch.distributed._tensor.ops.math_ops.NormReduction"4torch.distributed._tensor.ops.math_ops.NormReduction
+builtins.str"builtins.str"6torch.distributed._tensor.ops.math_ops.ReductionOpTypeÕ
+get_placement_from_reduction_opFtorch.distributed._tensor.ops.math_ops.get_placement_from_reduction_op"j
+3torch.distributed._tensor.placement_types.Placement"3torch.distributed._tensor.placement_types.Placement*ý
+reduction_opê
+STypeAlias[Union[torch.distributed._tensor.ops.math_ops.NormReduction,builtins.str]]Ø
+HUnion[torch.distributed._tensor.ops.math_ops.NormReduction,builtins.str]l
+4torch.distributed._tensor.ops.math_ops.NormReduction"4torch.distributed._tensor.ops.math_ops.NormReduction
+builtins.str"builtins.str"6torch.distributed._tensor.ops.math_ops.ReductionOpTypeà
+common_reduction_strategy@torch.distributed._tensor.ops.math_ops.common_reduction_strategy"b
+/torch.distributed._tensor._op_schema.OpStrategy"/torch.distributed._tensor._op_schema.OpStrategy*^
+meshT
+(torch.distributed.device_mesh.DeviceMesh"(torch.distributed.device_mesh.DeviceMesh*v
+input_strategyb
+/torch.distributed._tensor._op_schema.OpStrategy"/torch.distributed._tensor._op_schema.OpStrategy*[
+reduce_dimsJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*.
+keep_dim
+builtins.bool"builtins.bool *6
+reduction_linear
+builtins.bool"builtins.bool *ÿ
+reduction_opê
+STypeAlias[Union[torch.distributed._tensor.ops.math_ops.NormReduction,builtins.str]]Ø
+HUnion[torch.distributed._tensor.ops.math_ops.NormReduction,builtins.str]l
+4torch.distributed._tensor.ops.math_ops.NormReduction"4torch.distributed._tensor.ops.math_ops.NormReduction
+builtins.str"builtins.str"6torch.distributed._tensor.ops.math_ops.ReductionOpType *¢
+__annotations__6torch.distributed._tensor.ops.math_ops.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*<
+aten+torch.distributed._tensor.ops.math_ops.aten
+Any*²
+LINEAR_REDUCTION_OP_MAP>torch.distributed._tensor.ops.math_ops.LINEAR_REDUCTION_OP_MAPW
+builtins.dict[Any,builtins.str]
+Any
+builtins.str"builtins.str"builtins.dict

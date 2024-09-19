@@ -1,0 +1,225 @@
+
+ torch.ao.nn.quantized.functional¥
+
+avg_pool2d+torch.ao.nn.quantized.functional.avg_pool2d*	
+input*
+kernel_size*
+stride *
+padding *
+	ceil_mode *
+count_include_pad *
+divisor_override ¥
+
+avg_pool3d+torch.ao.nn.quantized.functional.avg_pool3d*	
+input*
+kernel_size*
+stride *
+padding *
+	ceil_mode *
+count_include_pad *
+divisor_override Ã
+adaptive_avg_pool2d4torch.ao.nn.quantized.functional.adaptive_avg_pool2d",
+torch._tensor.Tensor"torch._tensor.Tensor*7
+input,
+torch._tensor.Tensor"torch._tensor.Tensor*
+output_size
+AnyÃ
+adaptive_avg_pool3d4torch.ao.nn.quantized.functional.adaptive_avg_pool3d",
+torch._tensor.Tensor"torch._tensor.Tensor*7
+input,
+torch._tensor.Tensor"torch._tensor.Tensor*
+output_size
+AnyÕ
+conv1d'torch.ao.nn.quantized.functional.conv1d*	
+input*
+
+weight*
+bias*
+stride *
+padding *
+dilation *
+groups *
+padding_mode *
+scale *
+
+zero_point *
+dtype Õ
+conv2d'torch.ao.nn.quantized.functional.conv2d*	
+input*
+
+weight*
+bias*
+stride *
+padding *
+dilation *
+groups *
+padding_mode *
+scale *
+
+zero_point *
+dtype Õ
+conv3d'torch.ao.nn.quantized.functional.conv3d*	
+input*
+
+weight*
+bias*
+stride *
+padding *
+dilation *
+groups *
+padding_mode *
+scale *
+
+zero_point *
+dtype á
+interpolate,torch.ao.nn.quantized.functional.interpolate*	
+input*
+
+size *
+scale_factor *
+
+mode *
+align_corners Ì
+linear'torch.ao.nn.quantized.functional.linear",
+torch._tensor.Tensor"torch._tensor.Tensor*7
+input,
+torch._tensor.Tensor"torch._tensor.Tensor*8
+weight,
+torch._tensor.Tensor"torch._tensor.Tensor*h
+bias\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None *W
+scaleJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None *V
+
+zero_pointD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None ©
+
+max_pool1d+torch.ao.nn.quantized.functional.max_pool1d*	
+input*
+kernel_size*
+stride *
+padding *
+dilation *
+	ceil_mode *
+return_indices ©
+
+max_pool2d+torch.ao.nn.quantized.functional.max_pool2d*	
+input*
+kernel_size*
+stride *
+padding *
+dilation *
+	ceil_mode *
+return_indices û
+celu%torch.ao.nn.quantized.functional.celu",
+torch._tensor.Tensor"torch._tensor.Tensor*7
+input,
+torch._tensor.Tensor"torch._tensor.Tensor*+
+scale 
+builtins.float"builtins.float*,
+
+zero_point
+builtins.int"builtins.int*-
+alpha 
+builtins.float"builtins.float ì
+
+leaky_relu+torch.ao.nn.quantized.functional.leaky_relu"
+Any*7
+input,
+torch._tensor.Tensor"torch._tensor.Tensor*6
+negative_slope 
+builtins.float"builtins.float *-
+inplace
+builtins.bool"builtins.bool *W
+scaleJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None *V
+
+zero_pointD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None ≠
+hardtanh)torch.ao.nn.quantized.functional.hardtanh",
+torch._tensor.Tensor"torch._tensor.Tensor*7
+input,
+torch._tensor.Tensor"torch._tensor.Tensor*/
+min_val 
+builtins.float"builtins.float */
+max_val 
+builtins.float"builtins.float *-
+inplace
+builtins.bool"builtins.bool ˘
+	hardswish*torch.ao.nn.quantized.functional.hardswish",
+torch._tensor.Tensor"torch._tensor.Tensor*7
+input,
+torch._tensor.Tensor"torch._tensor.Tensor*+
+scale 
+builtins.float"builtins.float*,
+
+zero_point
+builtins.int"builtins.int¸
+	threshold*torch.ao.nn.quantized.functional.threshold",
+torch._tensor.Tensor"torch._tensor.Tensor*7
+input,
+torch._tensor.Tensor"torch._tensor.Tensor*/
+	threshold 
+builtins.float"builtins.float*+
+value 
+builtins.float"builtins.floatú
+elu$torch.ao.nn.quantized.functional.elu",
+torch._tensor.Tensor"torch._tensor.Tensor*7
+input,
+torch._tensor.Tensor"torch._tensor.Tensor*+
+scale 
+builtins.float"builtins.float*,
+
+zero_point
+builtins.int"builtins.int*-
+alpha 
+builtins.float"builtins.float —
+hardsigmoid,torch.ao.nn.quantized.functional.hardsigmoid",
+torch._tensor.Tensor"torch._tensor.Tensor*7
+input,
+torch._tensor.Tensor"torch._tensor.Tensor*-
+inplace
+builtins.bool"builtins.bool Ó
+clamp&torch.ao.nn.quantized.functional.clamp",
+torch._tensor.Tensor"torch._tensor.Tensor*7
+input,
+torch._tensor.Tensor"torch._tensor.Tensor**
+min_ 
+builtins.float"builtins.float**
+max_ 
+builtins.float"builtins.floatÅ
+upsample)torch.ao.nn.quantized.functional.upsample*	
+input*
+
+size *
+scale_factor *
+
+mode *
+align_corners r
+upsample_bilinear2torch.ao.nn.quantized.functional.upsample_bilinear*	
+input*
+
+size *
+scale_factor p
+upsample_nearest1torch.ao.nn.quantized.functional.upsample_nearest*	
+input*
+
+size *
+scale_factor *ú
+__annotations__0torch.ao.nn.quantized.functional.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*
+__all__(torch.ao.nn.quantized.functional.__all__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list

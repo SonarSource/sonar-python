@@ -1,0 +1,93 @@
+
+!torch.distributed.optim.optimizerî
+_ScriptLocalOptimizerInterface@torch.distributed.optim.optimizer._ScriptLocalOptimizerInterface"builtins.object*ú
+stepEtorch.distributed.optim.optimizer._ScriptLocalOptimizerInterface.step"
+None*è
+selfÑ
+@torch.distributed.optim.optimizer._ScriptLocalOptimizerInterface"@torch.distributed.optim.optimizer._ScriptLocalOptimizerInterface*1
+autograd_ctx_id
+builtins.int"builtins.int8æ
+_ScriptLocalOptimizer7torch.distributed.optim.optimizer._ScriptLocalOptimizer"torch.nn.modules.module.Module*í
+__init__@torch.distributed.optim.optimizer._ScriptLocalOptimizer.__init__*
+self*
+	optim_cls*
+local_params_rref*
+args*
+
+kwargs*å
+step<torch.distributed.optim.optimizer._ScriptLocalOptimizer.step"
+Any*|
+selfr
+7torch.distributed.optim.optimizer._ScriptLocalOptimizer"7torch.distributed.optim.optimizer._ScriptLocalOptimizer*1
+autograd_ctx_id
+builtins.int"builtins.int0:
+jit.exportrv
+compile_lockDtorch.distributed.optim.optimizer._ScriptLocalOptimizer.compile_lock 
+threading.Lock"threading.Lockr_
+_local_paramsEtorch.distributed.optim.optimizer._ScriptLocalOptimizer._local_params
+AnyrO
+optim=torch.distributed.optim.optimizer._ScriptLocalOptimizer.optim
+AnyŸ
+_LocalOptimizer1torch.distributed.optim.optimizer._LocalOptimizer"builtins.object*å
+__init__:torch.distributed.optim.optimizer._LocalOptimizer.__init__*
+self*
+	optim_cls*
+local_params_rref*
+args*
+
+kwargs*]
+step6torch.distributed.optim.optimizer._LocalOptimizer.step*
+self*
+autograd_ctx_idrn
+global_lock=torch.distributed.optim.optimizer._LocalOptimizer.global_lock 
+threading.Lock"threading.LockrY
+_local_params?torch.distributed.optim.optimizer._LocalOptimizer._local_params
+AnyrI
+optim7torch.distributed.optim.optimizer._LocalOptimizer.optim
+Any¶
+DistributedOptimizer6torch.distributed.optim.optimizer.DistributedOptimizer"builtins.object*ë
+__init__?torch.distributed.optim.optimizer.DistributedOptimizer.__init__*
+self*
+optimizer_class*
+params_rref*
+args*
+
+kwargs*]
+step;torch.distributed.optim.optimizer.DistributedOptimizer.step*
+self*
+
+context_idrj
+is_functional_optimJtorch.distributed.optim.optimizer.DistributedOptimizer.is_functional_optim
+Anyrf
+remote_optimizersHtorch.distributed.optim.optimizer.DistributedOptimizer.remote_optimizers
+Anyä
+_new_local_optimizer6torch.distributed.optim.optimizer._new_local_optimizer*
+	optim_cls*
+local_params_rref*
+args*
+
+kwargs{
+_local_optimizer_step7torch.distributed.optim.optimizer._local_optimizer_step*
+local_optim_rref*
+autograd_ctx_idò
+_new_script_local_optimizer=torch.distributed.optim.optimizer._new_script_local_optimizer*
+	optim_cls*
+local_params_rref*
+args*
+
+kwargsN
+_wait_for_all/torch.distributed.optim.optimizer._wait_for_all*
+rpc_futs*ù
+__annotations__1torch.distributed.optim.optimizer.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*-
+dist_autogradtorch.distributed.autograd *
+rpctorch.distributed.rpc *
+jit	torch.jit *
+nntorch.nn *Ä
+__all__)torch.distributed.optim.optimizer.__all__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*T
+logger(torch.distributed.optim.optimizer.logger 
+logging.Logger"logging.Logger

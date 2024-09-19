@@ -1,0 +1,134 @@
+
+torch._export.non_strict_utils×
+key_path_to_source1torch._export.non_strict_utils.key_path_to_source",
+torch._guards.Source"torch._guards.Source*ß
+kpÖ
+7TypeAlias[builtins.tuple[torch.utils._pytree.KeyEntry]]|
+,builtins.tuple[torch.utils._pytree.KeyEntry]<
+torch.utils._pytree.KeyEntry"torch.utils._pytree.KeyEntry"builtins.tuple"torch.utils._pytree.KeyPathT
+_is_constant_argument4torch._export.non_strict_utils._is_constant_argument*
+tœ
+fakify%torch._export.non_strict_utils.fakify"
+Any*f
+mode\
+,torch._subclasses.fake_tensor.FakeTensorMode",torch._subclasses.fake_tensor.FakeTensorMode*ß
+kpÖ
+7TypeAlias[builtins.tuple[torch.utils._pytree.KeyEntry]]|
+,builtins.tuple[torch.utils._pytree.KeyEntry]<
+torch.utils._pytree.KeyEntry"torch.utils._pytree.KeyEntry"builtins.tuple"torch.utils._pytree.KeyPath*
+t
+Any*Ì
+t_constraints¸
+ builtins.dict[builtins.int,builtins.dict[builtins.int,TypeAlias[Union[torch.export.dynamic_shapes._Constraint,torch.export.dynamic_shapes._DerivedConstraint]]]]
+builtins.int"builtins.intå
+„builtins.dict[builtins.int,TypeAlias[Union[torch.export.dynamic_shapes._Constraint,torch.export.dynamic_shapes._DerivedConstraint]]]
+builtins.int"builtins.int®
+hTypeAlias[Union[torch.export.dynamic_shapes._Constraint,torch.export.dynamic_shapes._DerivedConstraint]]—
+]Union[torch.export.dynamic_shapes._Constraint,torch.export.dynamic_shapes._DerivedConstraint]R
+'torch.export.dynamic_shapes._Constraint"'torch.export.dynamic_shapes._Constraint`
+.torch.export.dynamic_shapes._DerivedConstraint".torch.export.dynamic_shapes._DerivedConstraint"&torch.export.dynamic_shapes.Constraint"builtins.dict"builtins.dict*¸
+sourcesª
+Sbuiltins.dict[Tuple[builtins.int,builtins.int],builtins.list[torch._guards.Source]]`
+ Tuple[builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.intb
+#builtins.list[torch._guards.Source],
+torch._guards.Source"torch._guards.Source"builtins.list"builtins.dict–
+make_fake_params_buffers7torch._export.non_strict_utils.make_fake_params_buffers"®
+Tbuiltins.dict[builtins.str,Union[torch._tensor.Tensor,torch.nn.parameter.Parameter]]
+builtins.str"builtins.str¨
+8Union[torch._tensor.Tensor,torch.nn.parameter.Parameter],
+torch._tensor.Tensor"torch._tensor.Tensor<
+torch.nn.parameter.Parameter"torch.nn.parameter.Parameter"builtins.dict*k
+	fake_mode\
+,torch._subclasses.fake_tensor.FakeTensorMode",torch._subclasses.fake_tensor.FakeTensorMode*¢
+params_buffers
+0builtins.dict[builtins.str,torch._tensor.Tensor]
+builtins.str"builtins.str,
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.dictÇ
+make_fake_inputs/torch._export.non_strict_utils.make_fake_inputs*
+	nn_module*
+args*
+
+kwargs*
+dynamic_shapes*
+_is_torch_jit_trace *.
+(_allow_complex_guards_as_runtime_asserts ë
+_flatten_dynamic_shapes6torch._export.non_strict_utils._flatten_dynamic_shapes",
+builtins.list[Any]
+Any"builtins.list*j
+combined_argsW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*ý
+dynamic_shapesè
+DUnion[builtins.dict[builtins.str,Any],Tuple[Any],builtins.list[Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+
+Tuple[Any]
+Any,
+builtins.list[Any]
+Any"builtins.list¢
+$produce_guards_and_solve_constraintsCtorch._export.non_strict_utils.produce_guards_and_solve_constraints"
+Any*k
+	fake_mode\
+,torch._subclasses.fake_tensor.FakeTensorMode",torch._subclasses.fake_tensor.FakeTensorMode*N
+gmF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*Œ
+dynamic_shapes÷
+IUnion[builtins.dict[builtins.str,Any],Tuple[Any],builtins.list[Any],None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+
+Tuple[Any]
+Any,
+builtins.list[Any]
+Any"builtins.list
+None*‹
+equalities_inputst
+8torch.fx.experimental.symbolic_shapes.EqualityConstraint"8torch.fx.experimental.symbolic_shapes.EqualityConstraint*>
+original_signature&
+inspect.Signature"inspect.Signature*n
+_disable_forced_specializationsG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *"
+_is_torch_jit_trace
+Any ¹
+make_constraints/torch._export.non_strict_utils.make_constraints"
+Any*k
+	fake_mode\
+,torch._subclasses.fake_tensor.FakeTensorMode",torch._subclasses.fake_tensor.FakeTensorMode*N
+gmF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*j
+combined_argsW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*Œ
+dynamic_shapes÷
+IUnion[builtins.dict[builtins.str,Any],Tuple[Any],builtins.list[Any],None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+
+Tuple[Any]
+Any,
+builtins.list[Any]
+Any"builtins.list
+None*3
+num_lifted_inputs
+builtins.int"builtins.intŽ
+_gather_constant_attrs5torch._export.non_strict_utils._gather_constant_attrs"t
+8torch._export.passes.lift_constants_pass.ConstantAttrMap"8torch._export.passes.lift_constants_pass.ConstantAttrMap*G
+m@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*š
+__annotations__.torch._export.non_strict_utils.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*
+pytreetorch.utils._pytree *8
+Symbol%torch._export.non_strict_utils.Symbol
+Any

@@ -1,0 +1,124 @@
+
+9torch.distributed.algorithms.ddp_comm_hooks.powerSGD_hookö 
+PowerSGDStateGtorch.distributed.algorithms.ddp_comm_hooks.powerSGD_hook.PowerSGDState"builtins.object*í
+__init__Ptorch.distributed.algorithms.ddp_comm_hooks.powerSGD_hook.PowerSGDState.__init__"
+None*ù
+selfí
+Gtorch.distributed.algorithms.ddp_comm_hooks.powerSGD_hook.PowerSGDState"Gtorch.distributed.algorithms.ddp_comm_hooks.powerSGD_hook.PowerSGDState*
+process_group
+Any*(
+matrix_approximation_rank
+Any *"
+start_powerSGD_iter
+Any *#
+min_compression_rate
+Any *!
+use_error_feedback
+Any *
+
+warm_start
+Any *(
+orthogonalization_epsilon
+Any *
+random_seed
+Any *2
+#compression_stats_logging_frequency
+Any *C
+batch_tensors_with_same_shape
+builtins.bool"builtins.bool *n
+__getstate__Ttorch.distributed.algorithms.ddp_comm_hooks.powerSGD_hook.PowerSGDState.__getstate__*
+self*y
+__setstate__Ttorch.distributed.algorithms.ddp_comm_hooks.powerSGD_hook.PowerSGDState.__setstate__*
+self*	
+state*à
+maybe_increase_iter[torch.distributed.algorithms.ddp_comm_hooks.powerSGD_hook.PowerSGDState.maybe_increase_iter*
+self*
+
+bucket*x
+compression_statsYtorch.distributed.algorithms.ddp_comm_hooks.powerSGD_hook.PowerSGDState.compression_stats*
+selfr™
+	__slots__Qtorch.distributed.algorithms.ddp_comm_hooks.powerSGD_hook.PowerSGDState.__slots__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.listro
+process_groupUtorch.distributed.algorithms.ddp_comm_hooks.powerSGD_hook.PowerSGDState.process_group
+Anyrá
+matrix_approximation_rankatorch.distributed.algorithms.ddp_comm_hooks.powerSGD_hook.PowerSGDState.matrix_approximation_rank
+Anyr{
+start_powerSGD_iter[torch.distributed.algorithms.ddp_comm_hooks.powerSGD_hook.PowerSGDState.start_powerSGD_iter
+Anyr}
+min_compression_rate\torch.distributed.algorithms.ddp_comm_hooks.powerSGD_hook.PowerSGDState.min_compression_rate
+Anyry
+use_error_feedbackZtorch.distributed.algorithms.ddp_comm_hooks.powerSGD_hook.PowerSGDState.use_error_feedback
+Anyri
+
+warm_startRtorch.distributed.algorithms.ddp_comm_hooks.powerSGD_hook.PowerSGDState.warm_start
+Anyrá
+orthogonalization_epsilonatorch.distributed.algorithms.ddp_comm_hooks.powerSGD_hook.PowerSGDState.orthogonalization_epsilon
+Anyrñ
+rngKtorch.distributed.algorithms.ddp_comm_hooks.powerSGD_hook.PowerSGDState.rngB
+numpy.random.mtrand.RandomState"numpy.random.mtrand.RandomStater
+
+error_dictRtorch.distributed.algorithms.ddp_comm_hooks.powerSGD_hook.PowerSGDState.error_dictç
+0builtins.dict[builtins.int,torch._tensor.Tensor]
+builtins.int"builtins.int,
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.dictrˆ
+p_memory_dictUtorch.distributed.algorithms.ddp_comm_hooks.powerSGD_hook.PowerSGDState.p_memory_dictç
+0builtins.dict[builtins.int,torch._tensor.Tensor]
+builtins.int"builtins.int,
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.dictrˆ
+q_memory_dictUtorch.distributed.algorithms.ddp_comm_hooks.powerSGD_hook.PowerSGDState.q_memory_dictç
+0builtins.dict[builtins.int,torch._tensor.Tensor]
+builtins.int"builtins.int,
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.dictrr
+iterLtorch.distributed.algorithms.ddp_comm_hooks.powerSGD_hook.PowerSGDState.iter
+builtins.int"builtins.intr¶
+total_numel_before_compressionftorch.distributed.algorithms.ddp_comm_hooks.powerSGD_hook.PowerSGDState.total_numel_before_compression
+builtins.int"builtins.intr§
+total_numel_after_compressionetorch.distributed.algorithms.ddp_comm_hooks.powerSGD_hook.PowerSGDState.total_numel_after_compression
+builtins.int"builtins.intrõ
+#compression_stats_logging_frequencyktorch.distributed.algorithms.ddp_comm_hooks.powerSGD_hook.PowerSGDState.compression_stats_logging_frequency
+Anyrå
+next_stats_reportYtorch.distributed.algorithms.ddp_comm_hooks.powerSGD_hook.PowerSGDState.next_stats_report
+builtins.int"builtins.intr¶
+batch_tensors_with_same_shapeetorch.distributed.algorithms.ddp_comm_hooks.powerSGD_hook.PowerSGDState.batch_tensors_with_same_shape
+builtins.bool"builtins.boolw
+_orthogonalizeHtorch.distributed.algorithms.ddp_comm_hooks.powerSGD_hook._orthogonalize*
+matrices*
+epsilon ë
+_orthogonalize_gram_schmidtUtorch.distributed.algorithms.ddp_comm_hooks.powerSGD_hook._orthogonalize_gram_schmidt*
+matrices*
+epsilon ≥
+_should_compressJtorch.distributed.algorithms.ddp_comm_hooks.powerSGD_hook._should_compress*
+num_rows*
+num_cols*
+matrix_approximation_rank*
+min_compression_rateá
+_report_compression_statsStorch.distributed.algorithms.ddp_comm_hooks.powerSGD_hook._report_compression_stats*
+
+bucket*	
+state«
+powerSGD_hookGtorch.distributed.algorithms.ddp_comm_hooks.powerSGD_hook.powerSGD_hook"p
+*torch.futures.Future[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"torch.futures.Future*û
+stateí
+Gtorch.distributed.algorithms.ddp_comm_hooks.powerSGD_hook.PowerSGDState"Gtorch.distributed.algorithms.ddp_comm_hooks.powerSGD_hook.PowerSGDState*Z
+bucketN
+%torch._C._distributed_c10d.GradBucket"%torch._C._distributed_c10d.GradBucket◊
+batched_powerSGD_hookOtorch.distributed.algorithms.ddp_comm_hooks.powerSGD_hook.batched_powerSGD_hook"p
+*torch.futures.Future[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"torch.futures.Future*û
+stateí
+Gtorch.distributed.algorithms.ddp_comm_hooks.powerSGD_hook.PowerSGDState"Gtorch.distributed.algorithms.ddp_comm_hooks.powerSGD_hook.PowerSGDState*Z
+bucketN
+%torch._C._distributed_c10d.GradBucket"%torch._C._distributed_c10d.GradBucket*µ
+__annotations__Itorch.distributed.algorithms.ddp_comm_hooks.powerSGD_hook.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*
+disttorch.distributed *F
+default9torch.distributed.algorithms.ddp_comm_hooks.default_hooks *ò
+__all__Atorch.distributed.algorithms.ddp_comm_hooks.powerSGD_hook.__all__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*l
+logger@torch.distributed.algorithms.ddp_comm_hooks.powerSGD_hook.logger 
+logging.Logger"logging.Logger

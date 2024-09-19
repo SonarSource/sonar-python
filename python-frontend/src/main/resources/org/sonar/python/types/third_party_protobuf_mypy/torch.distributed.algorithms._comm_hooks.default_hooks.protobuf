@@ -1,0 +1,91 @@
+
+6torch.distributed.algorithms._comm_hooks.default_hooksœ
+DefaultStateCtorch.distributed.algorithms._comm_hooks.default_hooks.DefaultState"builtins.object*·
+__init__Ltorch.distributed.algorithms._comm_hooks.default_hooks.DefaultState.__init__"
+None*ï
+selfä
+Ctorch.distributed.algorithms._comm_hooks.default_hooks.DefaultState"Ctorch.distributed.algorithms._comm_hooks.default_hooks.DefaultState*e
+process_groupR
+'torch._C._distributed_c10d.ProcessGroup"'torch._C._distributed_c10d.ProcessGroup*Ê
+_get_gradient_predivide_factorbtorch.distributed.algorithms._comm_hooks.default_hooks.DefaultState._get_gradient_predivide_factor" 
+builtins.float"builtins.float*,
+
+world_size
+builtins.int"builtins.int0:staticmethodhr¶
+	__slots__Mtorch.distributed.algorithms._comm_hooks.default_hooks.DefaultState.__slots__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.listr∂
+process_groupQtorch.distributed.algorithms._comm_hooks.default_hooks.DefaultState.process_groupR
+'torch._C._distributed_c10d.ProcessGroup"'torch._C._distributed_c10d.ProcessGrouprz
+
+world_sizeNtorch.distributed.algorithms._comm_hooks.default_hooks.DefaultState.world_size
+builtins.int"builtins.intrú
+gradient_predivide_factor]torch.distributed.algorithms._comm_hooks.default_hooks.DefaultState.gradient_predivide_factor 
+builtins.float"builtins.floatrû
+gradient_postdivide_factor^torch.distributed.algorithms._comm_hooks.default_hooks.DefaultState.gradient_postdivide_factor 
+builtins.float"builtins.float◊
+LowPrecisionStateHtorch.distributed.algorithms._comm_hooks.default_hooks.LowPrecisionState"Ctorch.distributed.algorithms._comm_hooks.default_hooks.DefaultState*ê
+__init__Qtorch.distributed.algorithms._comm_hooks.default_hooks.LowPrecisionState.__init__*
+self*
+process_group*
+parameter_type r´
+	__slots__Rtorch.distributed.algorithms._comm_hooks.default_hooks.LowPrecisionState.__slots__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.listrr
+parameter_typeWtorch.distributed.algorithms._comm_hooks.default_hooks.LowPrecisionState.parameter_type
+Anyµ
+_decompressBtorch.distributed.algorithms._comm_hooks.default_hooks._decompress"
+Any*†
+stateî
+Htorch.distributed.algorithms._comm_hooks.default_hooks.LowPrecisionState"Htorch.distributed.algorithms._comm_hooks.default_hooks.LowPrecisionState*6
+grad,
+torch._tensor.Tensor"torch._tensor.Tensor±
+allreduce_hookEtorch.distributed.algorithms._comm_hooks.default_hooks.allreduce_hook"
+Any*ñ
+stateä
+Ctorch.distributed.algorithms._comm_hooks.default_hooks.DefaultState"Ctorch.distributed.algorithms._comm_hooks.default_hooks.DefaultState*6
+grad,
+torch._tensor.Tensor"torch._tensor.Tensorı
+reduce_scatter_hookJtorch.distributed.algorithms._comm_hooks.default_hooks.reduce_scatter_hook"
+Any*ñ
+stateä
+Ctorch.distributed.algorithms._comm_hooks.default_hooks.DefaultState"Ctorch.distributed.algorithms._comm_hooks.default_hooks.DefaultState*6
+grad,
+torch._tensor.Tensor"torch._tensor.Tensor*8
+output,
+torch._tensor.Tensor"torch._tensor.Tensor´
+_low_precision_hookJtorch.distributed.algorithms._comm_hooks.default_hooks._low_precision_hook"
+Any**
+prec 
+torch._C.dtype"torch._C.dtype*†
+stateî
+Htorch.distributed.algorithms._comm_hooks.default_hooks.LowPrecisionState"Htorch.distributed.algorithms._comm_hooks.default_hooks.LowPrecisionState*6
+grad,
+torch._tensor.Tensor"torch._tensor.Tensor*8
+output,
+torch._tensor.Tensor"torch._tensor.TensorØ
+fp16_compress_hookItorch.distributed.algorithms._comm_hooks.default_hooks.fp16_compress_hook"
+Any*†
+stateî
+Htorch.distributed.algorithms._comm_hooks.default_hooks.LowPrecisionState"Htorch.distributed.algorithms._comm_hooks.default_hooks.LowPrecisionState*6
+grad,
+torch._tensor.Tensor"torch._tensor.Tensor*j
+output\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None Ø
+bf16_compress_hookItorch.distributed.algorithms._comm_hooks.default_hooks.bf16_compress_hook"
+Any*†
+stateî
+Htorch.distributed.algorithms._comm_hooks.default_hooks.LowPrecisionState"Htorch.distributed.algorithms._comm_hooks.default_hooks.LowPrecisionState*6
+grad,
+torch._tensor.Tensor"torch._tensor.Tensor*j
+output\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None *≤
+__annotations__Ftorch.distributed.algorithms._comm_hooks.default_hooks.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*
+disttorch.distributed 

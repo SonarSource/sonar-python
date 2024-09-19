@@ -1,0 +1,300 @@
+
+torch.export.unflatten·
+	_AttrKind torch.export.unflatten._AttrKind"	enum.EnumHrU
+	PARAMETER*torch.export.unflatten._AttrKind.PARAMETER
+builtins.str"builtins.strrO
+BUFFER'torch.export.unflatten._AttrKind.BUFFER
+builtins.str"builtins.strrS
+CONSTANT)torch.export.unflatten._AttrKind.CONSTANT
+builtins.str"builtins.str—
+InterpreterModule(torch.export.unflatten.InterpreterModule"torch.nn.modules.module.Module*à
+__init__1torch.export.unflatten.InterpreterModule.__init__"
+None*^
+selfT
+(torch.export.unflatten.InterpreterModule"(torch.export.unflatten.InterpreterModule*7
+graph,
+torch.fx.graph.Graph"torch.fx.graph.Graph*[
+forward0torch.export.unflatten.InterpreterModule.forward*
+self*
+args*
+
+kwargs*G
+finalize1torch.export.unflatten.InterpreterModule.finalize*
+selfre
+graph.torch.export.unflatten.InterpreterModule.graph,
+torch.fx.graph.Graph"torch.fx.graph.GraphrH
+	arg_names2torch.export.unflatten.InterpreterModule.arg_names
+Any÷
+FlatArgsAdapter&torch.export.unflatten.FlatArgsAdapter"abc.ABC*²
+adapt,torch.export.unflatten.FlatArgsAdapter.adapt",
+builtins.list[Any]
+Any"builtins.list*Z
+selfP
+&torch.export.unflatten.FlatArgsAdapter"&torch.export.unflatten.FlatArgsAdapter*M
+target_spec<
+torch.utils._pytree.TreeSpec"torch.utils._pytree.TreeSpec*L
+
+input_spec<
+torch.utils._pytree.TreeSpec"torch.utils._pytree.TreeSpec*<
+
+input_args,
+builtins.list[Any]
+Any"builtins.list0:abc.abstractmethod@ë
+UnflattenedModule(torch.export.unflatten.UnflattenedModule"torch.nn.modules.module.Module*É
+__init__1torch.export.unflatten.UnflattenedModule.__init__"
+None*^
+selfT
+(torch.export.unflatten.UnflattenedModule"(torch.export.unflatten.UnflattenedModule*q
+export_module^
+-torch.export.exported_program.ExportedProgram"-torch.export.exported_program.ExportedProgram*¬
+flat_args_adapter’
+2Union[torch.export.unflatten.FlatArgsAdapter,None]P
+&torch.export.unflatten.FlatArgsAdapter"&torch.export.unflatten.FlatArgsAdapter
+None *O
+_print_graph5torch.export.unflatten.UnflattenedModule._print_graph*
+self*[
+forward0torch.export.unflatten.UnflattenedModule.forward*
+self*
+args*
+
+kwargsrT
+graph_signature8torch.export.unflatten.UnflattenedModule.graph_signature
+Anyr@
+graph.torch.export.unflatten.UnflattenedModule.graph
+AnyrX
+module_call_graph:torch.export.unflatten.UnflattenedModule.module_call_graph
+Anyrä
+flat_args_adapter:torch.export.unflatten.UnflattenedModule.flat_args_adapter’
+2Union[torch.export.unflatten.FlatArgsAdapter,None]P
+&torch.export.unflatten.FlatArgsAdapter"&torch.export.unflatten.FlatArgsAdapter
+Noner[
+adapted0torch.export.unflatten.UnflattenedModule.adapted
+builtins.bool"builtins.boolrX
+range_constraints:torch.export.unflatten.UnflattenedModule.range_constraints
+Anyrƒ
+equality_constraints=torch.export.unflatten.UnflattenedModule.equality_constraints,
+builtins.list[Any]
+Any"builtins.listr
+input_placeholders;torch.export.unflatten.UnflattenedModule.input_placeholders,
+builtins.list[Any]
+Any"builtins.listr{
+check_input_constraints@torch.export.unflatten.UnflattenedModule.check_input_constraints
+builtins.bool"builtins.boolŽ
+_ModuleFrame#torch.export.unflatten._ModuleFrame"builtins.object*Ë
+__init__,torch.export.unflatten._ModuleFrame.__init__"
+None*T
+selfJ
+#torch.export.unflatten._ModuleFrame"#torch.export.unflatten._ModuleFrame*
+
+flat_graph
+Any*
+nodes
+Any*
+
+seen_nodes
+Any*
+seen_modules
+Any*
+parent
+Any*
+module_stack
+Any*
+	module_id
+Any*ü
+module_call_graphä
+Mbuiltins.dict[builtins.str,torch.export.exported_program.ModuleCallSignature]
+builtins.str"builtins.strf
+1torch.export.exported_program.ModuleCallSignature"1torch.export.exported_program.ModuleCallSignature"builtins.dict*ˆ
+modulez
+*Union[torch.nn.modules.module.Module,None]@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module
+None *W
+add_placeholder3torch.export.unflatten._ModuleFrame.add_placeholder*
+self*
+x*O
+remap_input/torch.export.unflatten._ModuleFrame.remap_input*
+self*
+x*R
+finalize_outputs4torch.export.unflatten._ModuleFrame.finalize_outputs*
+self*N
+	copy_node-torch.export.unflatten._ModuleFrame.copy_node*
+self*
+node*D
+	run_outer-torch.export.unflatten._ModuleFrame.run_outer*
+self*R
+print)torch.export.unflatten._ModuleFrame.print*
+self*
+args*
+
+kwargs*P
+run_from,torch.export.unflatten._ModuleFrame.run_from*
+self*
+node_idxrE
+
+flat_graph.torch.export.unflatten._ModuleFrame.flat_graph
+Anyr;
+nodes)torch.export.unflatten._ModuleFrame.nodes
+AnyrE
+
+seen_nodes.torch.export.unflatten._ModuleFrame.seen_nodes
+AnyrI
+seen_modules0torch.export.unflatten._ModuleFrame.seen_modules
+Anyr=
+parent*torch.export.unflatten._ModuleFrame.parent
+AnyrI
+module_stack0torch.export.unflatten._ModuleFrame.module_stack
+AnyrC
+	module_id-torch.export.unflatten._ModuleFrame.module_id
+Anyr±
+module_call_graph5torch.export.unflatten._ModuleFrame.module_call_graphä
+Mbuiltins.dict[builtins.str,torch.export.exported_program.ModuleCallSignature]
+builtins.str"builtins.strf
+1torch.export.exported_program.ModuleCallSignature"1torch.export.exported_program.ModuleCallSignature"builtins.dictrV
+verbose+torch.export.unflatten._ModuleFrame.verbose
+builtins.bool"builtins.boolr7
+fqn'torch.export.unflatten._ModuleFrame.fqn
+Anyrv
+module*torch.export.unflatten._ModuleFrame.module@
+torch.nn.modules.module.Module"torch.nn.modules.module.ModulerW
+cached_graph_module7torch.export.unflatten._ModuleFrame.cached_graph_module
+Anyr;
+graph)torch.export.unflatten._ModuleFrame.graph
+AnyrÔ
+node_map,torch.export.unflatten._ModuleFrame.node_map™
+4builtins.dict[torch.fx.node.Node,torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node(
+torch.fx.node.Node"torch.fx.node.Node"builtins.dictr‰
+node_to_placeholder7torch.export.unflatten._ModuleFrame.node_to_placeholder9
+builtins.dict[Any,Any]
+Any
+Any"builtins.dictr¤
+parent_call_module6torch.export.unflatten._ModuleFrame.parent_call_moduleV
+Union[torch.fx.node.Node,None](
+torch.fx.node.Node"torch.fx.node.Node
+NoneÀ
+-<subclass of "Tensor" and "FakeScriptObject">Dtorch.export.unflatten.<subclass of "Tensor" and "FakeScriptObject">"torch._tensor.Tensor"3torch._library.fake_class_registry.FakeScriptObjectÍ
+3<subclass of "ScriptObject" and "FakeScriptObject">Jtorch.export.unflatten.<subclass of "ScriptObject" and "FakeScriptObject">"torch._C.ScriptObject"3torch._library.fake_class_registry.FakeScriptObjectã
+_assign_attr#torch.export.unflatten._assign_attr"
+Any*¢
+from_obj“
+1Union[torch._tensor.Tensor,torch._C.ScriptObject],
+torch._tensor.Tensor"torch._tensor.Tensor.
+torch._C.ScriptObject"torch._C.ScriptObject*O
+	to_module@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*(
+target
+builtins.str"builtins.str*S
+	attr_kindD
+ torch.export.unflatten._AttrKind" torch.export.unflatten._AttrKind*0
+
+persistent
+builtins.bool"builtins.bool ž
+	unflatten torch.export.unflatten.unflatten"T
+(torch.export.unflatten.UnflattenedModule"(torch.export.unflatten.UnflattenedModule*j
+module^
+-torch.export.exported_program.ExportedProgram"-torch.export.exported_program.ExportedProgram*¬
+flat_args_adapter’
+2Union[torch.export.unflatten.FlatArgsAdapter,None]P
+&torch.export.unflatten.FlatArgsAdapter"&torch.export.unflatten.FlatArgsAdapter
+None ®
+_inplace_buffer_mutations0torch.export.unflatten._inplace_buffer_mutations"
+None*7
+graph,
+torch.fx.graph.Graph"torch.fx.graph.Graph*
+graph_signature
+AnyJ
+
+_is_prefix!torch.export.unflatten._is_prefix*
+	candidate*
+
+target¶
+_compute_accessor(torch.export.unflatten._compute_accessor"
+builtins.str"builtins.str*,
+
+parent_fqn
+builtins.str"builtins.str*+
+	child_fqn
+builtins.str"builtins.strè
+_verify_graph_equivalence0torch.export.unflatten._verify_graph_equivalence"
+Any*G
+x@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*G
+y@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module¨
+	_add_spec torch.export.unflatten._add_spec"
+builtins.str"builtins.str*H
+gm@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*
+spec
+Any×
+_generate_flatten(torch.export.unflatten._generate_flatten"(
+torch.fx.node.Node"torch.fx.node.Node*H
+gm@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*
+node
+Any*
+spec
+AnyÜ
+_generate_unflatten*torch.export.unflatten._generate_unflatten"(
+torch.fx.node.Node"torch.fx.node.Node*H
+gm@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*
+nodes
+Any*
+spec
+Anyµ
+_get_submodule%torch.export.unflatten._get_submodule"
+Any*I
+mod@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*(
+target
+builtins.str"builtins.strŠ
+_add_submodule%torch.export.unflatten._add_submodule"
+Any*I
+mod@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*(
+target
+builtins.str"builtins.str*S
+module_to_add@
+torch.nn.modules.module.Module"torch.nn.modules.module.Moduleï
+_outline_submodules*torch.export.unflatten._outline_submodules"
+Any*<
+
+orig_graph,
+torch.fx.graph.Graph"torch.fx.graph.Graph*e
+root_moduleT
+(torch.export.unflatten.UnflattenedModule"(torch.export.unflatten.UnflattenedModuleË
+_reorder_submodules*torch.export.unflatten._reorder_submodules"
+Any*L
+parent@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*„
+	fqn_orderu
+(builtins.dict[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int"builtins.dict**
+prefix
+builtins.str"builtins.str ¬
+_sink_params#torch.export.unflatten._sink_params"
+Any*L
+module@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*È
+inputs_to_state²
+7builtins.dict[builtins.str,builtins.list[builtins.str]]
+builtins.str"builtins.strJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list"builtins.dict*U
+scopeJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.listW
+_recursive_getattr)torch.export.unflatten._recursive_getattr*
+obj*
+	attr_path*’
+__annotations__&torch.export.unflatten.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*
+	fx_pytreetorch.fx._pytree *
+pytreetorch.utils._pytree *u
+__all__torch.export.unflatten.__all__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list

@@ -1,0 +1,52 @@
+
+0torch._inductor.fx_passes.decompose_mem_bound_mm×
+check_device=torch._inductor.fx_passes.decompose_mem_bound_mm.check_device"
+builtins.bool"builtins.bool*3
+a,
+torch._tensor.Tensor"torch._tensor.Tensor*3
+b,
+torch._tensor.Tensor"torch._tensor.TensorÄ
+realize_inputs?torch._inductor.fx_passes.decompose_mem_bound_mm.realize_inputs"
+Any*h
+inputs\
+!builtins.list[torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node"builtins.list£
+should_decompose_bmmEtorch._inductor.fx_passes.decompose_mem_bound_mm.should_decompose_bmm"
+builtins.bool"builtins.bool*
+mat1
+Any*
+mat2
+Any¡
+should_decompose_mmDtorch._inductor.fx_passes.decompose_mem_bound_mm.should_decompose_mm"
+builtins.bool"builtins.bool*
+mat1
+Any*
+mat2
+Any–
+is_node_meta_validCtorch._inductor.fx_passes.decompose_mem_bound_mm.is_node_meta_valid"
+Any*2
+node(
+torch.fx.node.Node"torch.fx.node.Node±
+print_decompose_patternHtorch._inductor.fx_passes.decompose_mem_bound_mm.print_decompose_pattern"
+Any*Y
+matchN
+%torch._inductor.pattern_matcher.Match"%torch._inductor.pattern_matcher.Match*h
+inputs\
+!builtins.list[torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node"builtins.list*¬
+__annotations__@torch._inductor.fx_passes.decompose_mem_bound_mm.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*F
+aten5torch._inductor.fx_passes.decompose_mem_bound_mm.aten
+Any*]
+log4torch._inductor.fx_passes.decompose_mem_bound_mm.log 
+logging.Logger"logging.Logger*•
+!MIN_FIRST_DIMENSION_DECOMPOSITIONRtorch._inductor.fx_passes.decompose_mem_bound_mm.MIN_FIRST_DIMENSION_DECOMPOSITION
+builtins.int"builtins.int*•
+!MAX_OTHER_DIMENSION_DECOMPOSITIONRtorch._inductor.fx_passes.decompose_mem_bound_mm.MAX_OTHER_DIMENSION_DECOMPOSITION
+builtins.int"builtins.int*•
+!min_first_dimension_decompositionRtorch._inductor.fx_passes.decompose_mem_bound_mm.min_first_dimension_decomposition
+builtins.int"builtins.int*•
+!max_other_dimention_decompositionRtorch._inductor.fx_passes.decompose_mem_bound_mm.max_other_dimention_decomposition
+builtins.int"builtins.int

@@ -1,0 +1,246 @@
+
+torch.nn.modules.batchnorm§
+sync_batch_norm)torch.nn.modules._functions.SyncBatchNorm" torch.autograd.function.Function*÷
+forward1torch.nn.modules._functions.SyncBatchNorm.forward*
+self*	
+input*
+
+weight*
+bias*
+running_mean*
+running_var*
+eps*
+momentum*
+process_group*
+
+world_size0:staticmethodh*k
+backward2torch.nn.modules._functions.SyncBatchNorm.backward*
+self*
+grad_output0:staticmethodh„
+	_NormBase$torch.nn.modules.batchnorm._NormBase"torch.nn.modules.module.Module*Í
+__init__-torch.nn.modules.batchnorm._NormBase.__init__"
+None*V
+selfL
+$torch.nn.modules.batchnorm._NormBase"$torch.nn.modules.batchnorm._NormBase*.
+num_features
+builtins.int"builtins.int*+
+eps 
+builtins.float"builtins.float *Z
+momentumJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None *,
+affine
+builtins.bool"builtins.bool *9
+track_running_stats
+builtins.bool"builtins.bool *
+device
+Any *
+dtype
+Any *±
+reset_running_stats8torch.nn.modules.batchnorm._NormBase.reset_running_stats"
+None*V
+selfL
+$torch.nn.modules.batchnorm._NormBase"$torch.nn.modules.batchnorm._NormBase*´
+reset_parameters5torch.nn.modules.batchnorm._NormBase.reset_parameters"
+None*V
+selfL
+$torch.nn.modules.batchnorm._NormBase"$torch.nn.modules.batchnorm._NormBase*^
+_check_input_dim5torch.nn.modules.batchnorm._NormBase._check_input_dim*
+self*	
+input*G
+
+extra_repr/torch.nn.modules.batchnorm._NormBase.extra_repr*
+self*–
+_load_from_state_dict:torch.nn.modules.batchnorm._NormBase._load_from_state_dict*
+self*
+
+state_dict*
+
+prefix*
+local_metadata*
+
+strict*
+missing_keys*
+unexpected_keys*
+
+error_msgsrW
+_version-torch.nn.modules.batchnorm._NormBase._version
+builtins.int"builtins.intrè
+__constants__2torch.nn.modules.batchnorm._NormBase.__constants__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.listr_
+num_features1torch.nn.modules.batchnorm._NormBase.num_features
+builtins.int"builtins.intrQ
+eps(torch.nn.modules.batchnorm._NormBase.eps 
+builtins.float"builtins.floatrÖ
+momentum-torch.nn.modules.batchnorm._NormBase.momentumJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+NonerU
+affine+torch.nn.modules.batchnorm._NormBase.affine
+builtins.bool"builtins.boolro
+track_running_stats8torch.nn.modules.batchnorm._NormBase.track_running_stats
+builtins.bool"builtins.boolrs
+weight+torch.nn.modules.batchnorm._NormBase.weight<
+torch.nn.parameter.Parameter"torch.nn.parameter.Parameterro
+bias)torch.nn.modules.batchnorm._NormBase.bias<
+torch.nn.parameter.Parameter"torch.nn.parameter.Parameterrü
+running_mean1torch.nn.modules.batchnorm._NormBase.running_mean\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+Nonerù
+running_var0torch.nn.modules.batchnorm._NormBase.running_var\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+Noner≠
+num_batches_tracked8torch.nn.modules.batchnorm._NormBase.num_batches_tracked\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None≈
+
+_BatchNorm%torch.nn.modules.batchnorm._BatchNorm"$torch.nn.modules.batchnorm._NormBase*Ì
+__init__.torch.nn.modules.batchnorm._BatchNorm.__init__"
+None*X
+selfN
+%torch.nn.modules.batchnorm._BatchNorm"%torch.nn.modules.batchnorm._BatchNorm*.
+num_features
+builtins.int"builtins.int*+
+eps 
+builtins.float"builtins.float *Z
+momentumJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None *,
+affine
+builtins.bool"builtins.bool *9
+track_running_stats
+builtins.bool"builtins.bool *
+device
+Any *
+dtype
+Any *˘
+forward-torch.nn.modules.batchnorm._BatchNorm.forward",
+torch._tensor.Tensor"torch._tensor.Tensor*X
+selfN
+%torch.nn.modules.batchnorm._BatchNorm"%torch.nn.modules.batchnorm._BatchNorm*7
+input,
+torch._tensor.Tensor"torch._tensor.Tensor˚
+_LazyNormBase(torch.nn.modules.batchnorm._LazyNormBase"%torch.nn.modules.lazy.LazyModuleMixin"$torch.nn.modules.batchnorm._NormBase*º
+__init__1torch.nn.modules.batchnorm._LazyNormBase.__init__"
+None*^
+selfT
+(torch.nn.modules.batchnorm._LazyNormBase"(torch.nn.modules.batchnorm._LazyNormBase*
+eps
+Any *
+momentum
+Any *
+affine
+Any *"
+track_running_stats
+Any *
+device
+Any *
+dtype
+Any *∑
+reset_parameters9torch.nn.modules.batchnorm._LazyNormBase.reset_parameters"
+None*^
+selfT
+(torch.nn.modules.batchnorm._LazyNormBase"(torch.nn.modules.batchnorm._LazyNormBase*’
+initialize_parameters>torch.nn.modules.batchnorm._LazyNormBase.initialize_parameters"
+None*^
+selfT
+(torch.nn.modules.batchnorm._LazyNormBase"(torch.nn.modules.batchnorm._LazyNormBase*
+input
+Anyrë
+weight/torch.nn.modules.batchnorm._LazyNormBase.weightV
+)torch.nn.parameter.UninitializedParameter")torch.nn.parameter.UninitializedParameterrç
+bias-torch.nn.modules.batchnorm._LazyNormBase.biasV
+)torch.nn.parameter.UninitializedParameter")torch.nn.parameter.UninitializedParameteræ
+BatchNorm1d&torch.nn.modules.batchnorm.BatchNorm1d"%torch.nn.modules.batchnorm._BatchNorm*`
+_check_input_dim7torch.nn.modules.batchnorm.BatchNorm1d._check_input_dim*
+self*	
+inputÅ
+LazyBatchNorm1d*torch.nn.modules.batchnorm.LazyBatchNorm1d"(torch.nn.modules.batchnorm._LazyNormBase"%torch.nn.modules.batchnorm._BatchNorm*d
+_check_input_dim;torch.nn.modules.batchnorm.LazyBatchNorm1d._check_input_dim*
+self*	
+inputrä
+cls_to_become8torch.nn.modules.batchnorm.LazyBatchNorm1d.cls_to_become?
+CallableType[builtins.type]
+builtins.type"builtins.typeæ
+BatchNorm2d&torch.nn.modules.batchnorm.BatchNorm2d"%torch.nn.modules.batchnorm._BatchNorm*`
+_check_input_dim7torch.nn.modules.batchnorm.BatchNorm2d._check_input_dim*
+self*	
+inputÅ
+LazyBatchNorm2d*torch.nn.modules.batchnorm.LazyBatchNorm2d"(torch.nn.modules.batchnorm._LazyNormBase"%torch.nn.modules.batchnorm._BatchNorm*d
+_check_input_dim;torch.nn.modules.batchnorm.LazyBatchNorm2d._check_input_dim*
+self*	
+inputrä
+cls_to_become8torch.nn.modules.batchnorm.LazyBatchNorm2d.cls_to_become?
+CallableType[builtins.type]
+builtins.type"builtins.typeæ
+BatchNorm3d&torch.nn.modules.batchnorm.BatchNorm3d"%torch.nn.modules.batchnorm._BatchNorm*`
+_check_input_dim7torch.nn.modules.batchnorm.BatchNorm3d._check_input_dim*
+self*	
+inputÅ
+LazyBatchNorm3d*torch.nn.modules.batchnorm.LazyBatchNorm3d"(torch.nn.modules.batchnorm._LazyNormBase"%torch.nn.modules.batchnorm._BatchNorm*d
+_check_input_dim;torch.nn.modules.batchnorm.LazyBatchNorm3d._check_input_dim*
+self*	
+inputrä
+cls_to_become8torch.nn.modules.batchnorm.LazyBatchNorm3d.cls_to_become?
+CallableType[builtins.type]
+builtins.type"builtins.typeá
+SyncBatchNorm(torch.nn.modules.batchnorm.SyncBatchNorm"%torch.nn.modules.batchnorm._BatchNorm*≥
+__init__1torch.nn.modules.batchnorm.SyncBatchNorm.__init__"
+None*^
+selfT
+(torch.nn.modules.batchnorm.SyncBatchNorm"(torch.nn.modules.batchnorm.SyncBatchNorm*.
+num_features
+builtins.int"builtins.int*+
+eps 
+builtins.float"builtins.float *Z
+momentumJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None *,
+affine
+builtins.bool"builtins.bool *9
+track_running_stats
+builtins.bool"builtins.bool *;
+process_group&
+Union[Any,None]
+Any
+None *
+device
+Any *
+dtype
+Any *b
+_check_input_dim9torch.nn.modules.batchnorm.SyncBatchNorm._check_input_dim*
+self*	
+input*~
+_check_non_zero_input_channelsGtorch.nn.modules.batchnorm.SyncBatchNorm._check_non_zero_input_channels*
+self*	
+input*Ç
+forward0torch.nn.modules.batchnorm.SyncBatchNorm.forward",
+torch._tensor.Tensor"torch._tensor.Tensor*^
+selfT
+(torch.nn.modules.batchnorm.SyncBatchNorm"(torch.nn.modules.batchnorm.SyncBatchNorm*7
+input,
+torch._tensor.Tensor"torch._tensor.Tensor*î
+convert_sync_batchnorm?torch.nn.modules.batchnorm.SyncBatchNorm.convert_sync_batchnorm*
+cls*
+
+module*
+process_group 0:classmethodpro
+process_group6torch.nn.modules.batchnorm.SyncBatchNorm.process_group&
+Union[Any,None]
+Any
+None*ñ
+__annotations__*torch.nn.modules.batchnorm.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*
+Ftorch.nn.functional *y
+__all__"torch.nn.modules.batchnorm.__all__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list

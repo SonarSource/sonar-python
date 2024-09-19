@@ -1,0 +1,165 @@
+
+torch.fx.passes.graph_drawer¸,
+FxGraphDrawer*torch.fx.passes.graph_drawer.FxGraphDrawer"builtins.object*ˇ
+__init__3torch.fx.passes.graph_drawer.FxGraphDrawer.__init__"
+None*b
+selfX
+*torch.fx.passes.graph_drawer.FxGraphDrawer"*torch.fx.passes.graph_drawer.FxGraphDrawer*X
+graph_moduleF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*&
+name
+builtins.str"builtins.str*4
+ignore_getattr
+builtins.bool"builtins.bool *C
+ignore_parameters_and_buffers
+builtins.bool"builtins.bool *=
+skip_node_names_in_args
+builtins.bool"builtins.bool *7
+parse_stack_trace
+builtins.bool"builtins.bool *[
+dot_graph_shapeD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *“
+get_dot_graph8torch.fx.passes.graph_drawer.FxGraphDrawer.get_dot_graph"
+Any*b
+selfX
+*torch.fx.passes.graph_drawer.FxGraphDrawer"*torch.fx.passes.graph_drawer.FxGraphDrawer*
+submod_name
+Any *¿
+get_main_dot_graph=torch.fx.passes.graph_drawer.FxGraphDrawer.get_main_dot_graph"
+Any*b
+selfX
+*torch.fx.passes.graph_drawer.FxGraphDrawer"*torch.fx.passes.graph_drawer.FxGraphDrawer*ﬁ
+get_submod_dot_graph?torch.fx.passes.graph_drawer.FxGraphDrawer.get_submod_dot_graph"
+Any*b
+selfX
+*torch.fx.passes.graph_drawer.FxGraphDrawer"*torch.fx.passes.graph_drawer.FxGraphDrawer*
+submod_name
+Any*ê
+get_all_dot_graphs=torch.fx.passes.graph_drawer.FxGraphDrawer.get_all_dot_graphs"W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*b
+selfX
+*torch.fx.passes.graph_drawer.FxGraphDrawer"*torch.fx.passes.graph_drawer.FxGraphDrawer*‹
+_get_node_style:torch.fx.passes.graph_drawer.FxGraphDrawer._get_node_style"u
+(builtins.dict[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.dict*b
+selfX
+*torch.fx.passes.graph_drawer.FxGraphDrawer"*torch.fx.passes.graph_drawer.FxGraphDrawer*2
+node(
+torch.fx.node.Node"torch.fx.node.Node*Û
+_get_leaf_node9torch.fx.passes.graph_drawer.FxGraphDrawer._get_leaf_node"@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*b
+selfX
+*torch.fx.passes.graph_drawer.FxGraphDrawer"*torch.fx.passes.graph_drawer.FxGraphDrawer*L
+module@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*2
+node(
+torch.fx.node.Node"torch.fx.node.Node*ÿ
+	_typename4torch.fx.passes.graph_drawer.FxGraphDrawer._typename"
+builtins.str"builtins.str*b
+selfX
+*torch.fx.passes.graph_drawer.FxGraphDrawer"*torch.fx.passes.graph_drawer.FxGraphDrawer*
+target
+Any*™
+_shorten_file_name=torch.fx.passes.graph_drawer.FxGraphDrawer._shorten_file_name"
+Any*b
+selfX
+*torch.fx.passes.graph_drawer.FxGraphDrawer"*torch.fx.passes.graph_drawer.FxGraphDrawer*0
+full_file_name
+builtins.str"builtins.str*6
+truncate_to_last_n
+builtins.int"builtins.int *À
+_get_node_label:torch.fx.passes.graph_drawer.FxGraphDrawer._get_node_label"
+builtins.str"builtins.str*b
+selfX
+*torch.fx.passes.graph_drawer.FxGraphDrawer"*torch.fx.passes.graph_drawer.FxGraphDrawer*R
+moduleF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*2
+node(
+torch.fx.node.Node"torch.fx.node.Node*;
+skip_node_names_in_args
+builtins.bool"builtins.bool*5
+parse_stack_trace
+builtins.bool"builtins.bool*Ï
+_tensor_meta_to_label@torch.fx.passes.graph_drawer.FxGraphDrawer._tensor_meta_to_label"
+builtins.str"builtins.str*b
+selfX
+*torch.fx.passes.graph_drawer.FxGraphDrawer"*torch.fx.passes.graph_drawer.FxGraphDrawer*
+tm
+Any*˜
+_stringify_tensor_metaAtorch.fx.passes.graph_drawer.FxGraphDrawer._stringify_tensor_meta"
+builtins.str"builtins.str*b
+selfX
+*torch.fx.passes.graph_drawer.FxGraphDrawer"*torch.fx.passes.graph_drawer.FxGraphDrawer*ó
+tmé
+™TypeAlias[Tuple[torch._C.Size,torch._C.dtype,builtins.bool,builtins.tuple[builtins.int],Union[torch._C.memory_format,None],builtins.bool,builtins.dict[builtins.str,Any]]]±
+üTuple[torch._C.Size,torch._C.dtype,builtins.bool,builtins.tuple[builtins.int],Union[torch._C.memory_format,None],builtins.bool,builtins.dict[builtins.str,Any]]
+torch._C.Size"torch._C.Size 
+torch._C.dtype"torch._C.dtype
+builtins.bool"builtins.boolL
+builtins.tuple[builtins.int]
+builtins.int"builtins.int"builtins.tupleb
+"Union[torch._C.memory_format,None]0
+torch._C.memory_format"torch._C.memory_format
+None
+builtins.bool"builtins.boolW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict")torch.fx.passes.shape_prop.TensorMetadata*à
+_get_tensor_label<torch.fx.passes.graph_drawer.FxGraphDrawer._get_tensor_label"
+builtins.str"builtins.str*b
+selfX
+*torch.fx.passes.graph_drawer.FxGraphDrawer"*torch.fx.passes.graph_drawer.FxGraphDrawer*3
+t,
+torch._tensor.Tensor"torch._tensor.Tensor*ó
+_to_dot2torch.fx.passes.graph_drawer.FxGraphDrawer._to_dot"
+Any*b
+selfX
+*torch.fx.passes.graph_drawer.FxGraphDrawer"*torch.fx.passes.graph_drawer.FxGraphDrawer*X
+graph_moduleF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*&
+name
+builtins.str"builtins.str*2
+ignore_getattr
+builtins.bool"builtins.bool*A
+ignore_parameters_and_buffers
+builtins.bool"builtins.bool*;
+skip_node_names_in_args
+builtins.bool"builtins.bool*5
+parse_stack_trace
+builtins.bool"builtins.bool8rW
+_name0torch.fx.passes.graph_drawer.FxGraphDrawer._name
+builtins.str"builtins.strrk
+dot_graph_shape:torch.fx.passes.graph_drawer.FxGraphDrawer.dot_graph_shape
+builtins.str"builtins.strrû
+_dot_graphs6torch.fx.passes.graph_drawer.FxGraphDrawer._dot_graphsW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*ò
+__annotations__,torch.fx.passes.graph_drawer.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*{
+__all__$torch.fx.passes.graph_drawer.__all__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*4
+pydot"torch.fx.passes.graph_drawer.pydot
+Any*S
+	HAS_PYDOT&torch.fx.passes.graph_drawer.HAS_PYDOT
+builtins.bool"builtins.bool*¨
+
+_COLOR_MAP'torch.fx.passes.graph_drawer._COLOR_MAPu
+(builtins.dict[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.dict*ã
+_HASH_COLOR_MAP,torch.fx.passes.graph_drawer._HASH_COLOR_MAPJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*∏
+_WEIGHT_TEMPLATE-torch.fx.passes.graph_drawer._WEIGHT_TEMPLATEu
+(builtins.dict[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.dict

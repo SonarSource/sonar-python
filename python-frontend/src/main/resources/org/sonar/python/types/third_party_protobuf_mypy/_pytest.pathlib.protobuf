@@ -1,0 +1,268 @@
+
+_pytest.pathlibû
+
+ImportMode_pytest.pathlib.ImportMode"	enum.EnumHrK
+prepend"_pytest.pathlib.ImportMode.prepend
+builtins.str"builtins.strrI
+append!_pytest.pathlib.ImportMode.append
+builtins.str"builtins.strrO
+	importlib$_pytest.pathlib.ImportMode.importlib
+builtins.str"builtins.strX
+ImportPathMismatchError'_pytest.pathlib.ImportPathMismatchError"builtins.ImportError=
+_ignore_error_pytest.pathlib._ignore_error*
+	exceptionÏ
+get_lock_path_pytest.pathlib.get_lock_path"X
+_pytest.pathlib._AnyPurePath$
+pathlib.PurePath"pathlib.PurePath"pathlib.PurePath*b
+pathX
+_pytest.pathlib._AnyPurePath$
+pathlib.PurePath"pathlib.PurePath"pathlib.PurePathÀ
+on_rm_rf_error_pytest.pathlib.on_rm_rf_error"
+builtins.bool"builtins.bool*
+func
+Any*&
+path
+builtins.str"builtins.str*
+exc
+Any*,
+
+start_path
+pathlib.Path"pathlib.Pathê
+ensure_extended_length_path+_pytest.pathlib.ensure_extended_length_path"
+pathlib.Path"pathlib.Path*&
+path
+pathlib.Path"pathlib.Pathí
+get_extended_length_path_str,_pytest.pathlib.get_extended_length_path_str"
+builtins.str"builtins.str*&
+path
+builtins.str"builtins.strP
+rm_rf_pytest.pathlib.rm_rf"
+None*&
+path
+pathlib.Path"pathlib.Path–
+find_prefixed_pytest.pathlib.find_prefixed"N
+typing.Iterator[pathlib.Path]
+pathlib.Path"pathlib.Path"typing.Iterator*&
+root
+pathlib.Path"pathlib.Path*(
+prefix
+builtins.str"builtins.strî
+extract_suffixes _pytest.pathlib.extract_suffixes"N
+typing.Iterator[builtins.str]
+builtins.str"builtins.str"typing.Iterator*d
+iterZ
+!typing.Iterable[pathlib.PurePath]$
+pathlib.PurePath"pathlib.PurePath"typing.Iterable*(
+prefix
+builtins.str"builtins.str–
+find_suffixes_pytest.pathlib.find_suffixes"N
+typing.Iterator[builtins.str]
+builtins.str"builtins.str"typing.Iterator*&
+root
+pathlib.Path"pathlib.Path*(
+prefix
+builtins.str"builtins.str\
+	parse_num_pytest.pathlib.parse_num"
+builtins.int"builtins.int*
+	maybe_num
+AnyÀ
+_force_symlink_pytest.pathlib._force_symlink"
+None*&
+root
+pathlib.Path"pathlib.Path*x
+targetl
+$Union[builtins.str,pathlib.PurePath]
+builtins.str"builtins.str$
+pathlib.PurePath"pathlib.PurePath*m
+link_to`
+ Union[builtins.str,pathlib.Path]
+builtins.str"builtins.str
+pathlib.Path"pathlib.Path–
+make_numbered_dir!_pytest.pathlib.make_numbered_dir"
+pathlib.Path"pathlib.Path*&
+root
+pathlib.Path"pathlib.Path*(
+prefix
+builtins.str"builtins.str*(
+mode
+builtins.int"builtins.int }
+create_cleanup_lock#_pytest.pathlib.create_cleanup_lock"
+pathlib.Path"pathlib.Path*#
+p
+pathlib.Path"pathlib.Pathù
+register_cleanup_lock_removal-_pytest.pathlib.register_cleanup_lock_removal"
+Any*+
+	lock_path
+pathlib.Path"pathlib.Path*
+register
+Any |
+maybe_delete_a_numbered_dir+_pytest.pathlib.maybe_delete_a_numbered_dir"
+None*&
+path
+pathlib.Path"pathlib.Path»
+ensure_deletable _pytest.pathlib.ensure_deletable"
+builtins.bool"builtins.bool*&
+path
+pathlib.Path"pathlib.Path*J
+$consider_lock_dead_if_created_before 
+builtins.float"builtins.float®
+try_cleanup_pytest.pathlib.try_cleanup"
+None*&
+path
+pathlib.Path"pathlib.Path*J
+$consider_lock_dead_if_created_before 
+builtins.float"builtins.floatÇ
+cleanup_candidates"_pytest.pathlib.cleanup_candidates"N
+typing.Iterator[pathlib.Path]
+pathlib.Path"pathlib.Path"typing.Iterator*&
+root
+pathlib.Path"pathlib.Path*(
+prefix
+builtins.str"builtins.str*&
+keep
+builtins.int"builtins.intå
+cleanup_numbered_dir$_pytest.pathlib.cleanup_numbered_dir"
+None*&
+root
+pathlib.Path"pathlib.Path*(
+prefix
+builtins.str"builtins.str*&
+keep
+builtins.int"builtins.int*J
+$consider_lock_dead_if_created_before 
+builtins.float"builtins.floatƒ
+make_numbered_dir_with_cleanup._pytest.pathlib.make_numbered_dir_with_cleanup"
+pathlib.Path"pathlib.Path*&
+root
+pathlib.Path"pathlib.Path*(
+prefix
+builtins.str"builtins.str*&
+keep
+builtins.int"builtins.int*2
+lock_timeout 
+builtins.float"builtins.float*&
+mode
+builtins.int"builtins.intß
+resolve_from_str _pytest.pathlib.resolve_from_str"
+pathlib.Path"pathlib.Path*'
+input
+builtins.str"builtins.str**
+rootpath
+pathlib.Path"pathlib.Pathò
+
+fnmatch_ex_pytest.pathlib.fnmatch_ex"
+builtins.bool"builtins.bool*)
+pattern
+builtins.str"builtins.str*¢
+pathó
+-Union[builtins.str,os.PathLike[builtins.str]]
+builtins.str"builtins.strF
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLikeç
+parts_pytest.pathlib.parts"H
+builtins.set[builtins.str]
+builtins.str"builtins.str"builtins.set*#
+s
+builtins.str"builtins.strP
+symlink_or_skip_pytest.pathlib.symlink_or_skip*
+src*
+dst*
+
+kwargs¥
+import_path_pytest.pathlib.import_path"$
+types.ModuleType"types.ModuleType*ü
+pó
+-Union[builtins.str,os.PathLike[builtins.str]]
+builtins.str"builtins.strF
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLike*ó
+modeä
+.Union[builtins.str,_pytest.pathlib.ImportMode]
+builtins.str"builtins.str8
+_pytest.pathlib.ImportMode"_pytest.pathlib.ImportMode *&
+root
+pathlib.Path"pathlib.Pathê
+_is_same_pytest.pathlib._is_same"
+builtins.bool"builtins.bool*$
+f1
+builtins.str"builtins.str*$
+f2
+builtins.str"builtins.str¨
+module_name_from_path%_pytest.pathlib.module_name_from_path"
+builtins.str"builtins.str*&
+path
+pathlib.Path"pathlib.Path*&
+root
+pathlib.Path"pathlib.Pathã
+insert_missing_modules&_pytest.pathlib.insert_missing_modules"
+None*è
+modulesÅ
+,builtins.dict[builtins.str,types.ModuleType]
+builtins.str"builtins.str$
+types.ModuleType"types.ModuleType"builtins.dict*-
+module_name
+builtins.str"builtins.str™
+resolve_package_path$_pytest.pathlib.resolve_package_path"D
+Union[pathlib.Path,None]
+pathlib.Path"pathlib.Path
+None*&
+path
+pathlib.Path"pathlib.Path•
+visit_pytest.pathlib.visit"Ö
+*typing.Iterator[os.DirEntry[builtins.str]]F
+os.DirEntry[builtins.str]
+builtins.str"builtins.str"os.DirEntry"typing.Iterator*¢
+pathó
+-Union[builtins.str,os.PathLike[builtins.str]]
+builtins.str"builtins.strF
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLike*X
+recurseK
+CallableType[builtins.function]&
+builtins.function"builtins.function∂
+absolutepath_pytest.pathlib.absolutepath"
+pathlib.Path"pathlib.Path*j
+path`
+ Union[pathlib.Path,builtins.str]
+pathlib.Path"pathlib.Path
+builtins.str"builtins.str¿
+
+commonpath_pytest.pathlib.commonpath"D
+Union[pathlib.Path,None]
+pathlib.Path"pathlib.Path
+None*'
+path1
+pathlib.Path"pathlib.Path*'
+path2
+pathlib.Path"pathlib.Pathù
+bestrelpath_pytest.pathlib.bestrelpath"
+builtins.str"builtins.str*+
+	directory
+pathlib.Path"pathlib.Path*&
+dest
+pathlib.Path"pathlib.PathÇ
+copytree_pytest.pathlib.copytree"
+None*(
+source
+pathlib.Path"pathlib.Path*(
+target
+pathlib.Path"pathlib.Path*ã
+__annotations___pytest.pathlib.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*
+	importlib	importlib *8
+	posix_sepposixpath.sep
+builtins.str"builtins.str*J
+LOCK_TIMEOUT_pytest.pathlib.LOCK_TIMEOUT
+builtins.int"builtins.int*Î
+_IGNORED_ERRORS_pytest.pathlib._IGNORED_ERRORS∂
+:Tuple[builtins.int,builtins.int,builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int*ö
+_IGNORED_WINERRORS"_pytest.pathlib._IGNORED_WINERRORS`
+ Tuple[builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int

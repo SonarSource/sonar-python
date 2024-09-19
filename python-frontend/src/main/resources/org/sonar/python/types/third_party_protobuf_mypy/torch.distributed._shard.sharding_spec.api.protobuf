@@ -1,0 +1,110 @@
+
+*torch.distributed._shard.sharding_spec.apiR
+PlacementSpec8torch.distributed._shard.sharding_spec.api.PlacementSpec"abc.ABC’
+DevicePlacementSpec>torch.distributed._shard.sharding_spec.api.DevicePlacementSpec"8torch.distributed._shard.sharding_spec.api.PlacementSpec*g
+__post_init__Ltorch.distributed._shard.sharding_spec.api.DevicePlacementSpec.__post_init__*
+self*Ù
+__init__Gtorch.distributed._shard.sharding_spec.api.DevicePlacementSpec.__init__"
+None*‹
+self€
+>torch.distributed._shard.sharding_spec.api.DevicePlacementSpec">torch.distributed._shard.sharding_spec.api.DevicePlacementSpec*l
+device`
+.torch.distributed.remote_device._remote_device".torch.distributed.remote_device._remote_device8r±
+deviceEtorch.distributed._shard.sharding_spec.api.DevicePlacementSpec.device`
+.torch.distributed.remote_device._remote_device".torch.distributed.remote_device._remote_devicer…
+__dataclass_fields__Storch.distributed._shard.sharding_spec.api.DevicePlacementSpec.__dataclass_fields__—
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictü
+ShardingSpec7torch.distributed._shard.sharding_spec.api.ShardingSpec"abc.ABC*Ð
+build_metadataFtorch.distributed._shard.sharding_spec.api.ShardingSpec.build_metadata"
+Ftorch.distributed._shard.sharded_tensor.metadata.ShardedTensorMetadata"Ftorch.distributed._shard.sharded_tensor.metadata.ShardedTensorMetadata*|
+selfr
+7torch.distributed._shard.sharding_spec.api.ShardingSpec"7torch.distributed._shard.sharding_spec.api.ShardingSpec*0
+tensor_sizes
+torch._C.Size"torch._C.Size*ž
+tensor_properties†
+Atorch.distributed._shard.sharded_tensor.metadata.TensorProperties"Atorch.distributed._shard.sharded_tensor.metadata.TensorProperties0:abstractmethod@*Ö
+shard=torch.distributed._shard.sharding_spec.api.ShardingSpec.shard"v
+9torch.distributed._shard.sharded_tensor.api.ShardedTensor"9torch.distributed._shard.sharded_tensor.api.ShardedTensor*|
+selfr
+7torch.distributed._shard.sharding_spec.api.ShardingSpec"7torch.distributed._shard.sharding_spec.api.ShardingSpec*8
+tensor,
+torch._tensor.Tensor"torch._tensor.Tensor*,
+src_rank
+builtins.int"builtins.int *
+process_group
+Any 0:abstractmethod@–
+EnumerableShardingSpecAtorch.distributed._shard.sharding_spec.api.EnumerableShardingSpec"7torch.distributed._shard.sharding_spec.api.ShardingSpec*j
+__post_init__Otorch.distributed._shard.sharding_spec.api.EnumerableShardingSpec.__post_init__*
+self*Ü
+build_metadataPtorch.distributed._shard.sharding_spec.api.EnumerableShardingSpec.build_metadata"
+Ftorch.distributed._shard.sharded_tensor.metadata.ShardedTensorMetadata"Ftorch.distributed._shard.sharded_tensor.metadata.ShardedTensorMetadata*‘
+self†
+Atorch.distributed._shard.sharding_spec.api.EnumerableShardingSpec"Atorch.distributed._shard.sharding_spec.api.EnumerableShardingSpec*0
+tensor_sizes
+torch._C.Size"torch._C.Size*ž
+tensor_properties†
+Atorch.distributed._shard.sharded_tensor.metadata.TensorProperties"Atorch.distributed._shard.sharded_tensor.metadata.TensorProperties*â
+shardGtorch.distributed._shard.sharding_spec.api.EnumerableShardingSpec.shard"v
+9torch.distributed._shard.sharded_tensor.api.ShardedTensor"9torch.distributed._shard.sharded_tensor.api.ShardedTensor*‘
+self†
+Atorch.distributed._shard.sharding_spec.api.EnumerableShardingSpec"Atorch.distributed._shard.sharding_spec.api.EnumerableShardingSpec*8
+tensor,
+torch._tensor.Tensor"torch._tensor.Tensor*,
+src_rank
+builtins.int"builtins.int *
+process_group
+Any *·
+__init__Jtorch.distributed._shard.sharding_spec.api.EnumerableShardingSpec.__init__"
+None*‘
+self†
+Atorch.distributed._shard.sharding_spec.api.EnumerableShardingSpec"Atorch.distributed._shard.sharding_spec.api.EnumerableShardingSpec*À
+shards³
+>builtins.list[torch.distributed._shard.metadata.ShardMetadata]b
+/torch.distributed._shard.metadata.ShardMetadata"/torch.distributed._shard.metadata.ShardMetadata"builtins.list8rˆ
+shardsHtorch.distributed._shard.sharding_spec.api.EnumerableShardingSpec.shards³
+>builtins.list[torch.distributed._shard.metadata.ShardMetadata]b
+/torch.distributed._shard.metadata.ShardMetadata"/torch.distributed._shard.metadata.ShardMetadata"builtins.listrˆ
+__dataclass_fields__Vtorch.distributed._shard.sharding_spec.api.EnumerableShardingSpec.__dataclass_fields__—
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictf
+_has_custom_op9torch.distributed._shard.sharding_spec.api._has_custom_op*
+sharding_spec*
+op§
+_dispatch_custom_op>torch.distributed._shard.sharding_spec.api._dispatch_custom_op"
+Any*
+sharding_spec
+Any*S
+opK
+CallableType[builtins.function]&
+builtins.function"builtins.function*
+types
+Any*
+args
+Any*
+kwargs
+Any*
+process_group
+Any€
+custom_sharding_spec_opBtorch.distributed._shard.sharding_spec.api.custom_sharding_spec_op*
+sharding_spec_class*
+func–
+)_infer_sharding_spec_from_shards_metadataTtorch.distributed._shard.sharding_spec.api._infer_sharding_spec_from_shards_metadata*
+shards_metadata*¦
+__annotations__:torch.distributed._shard.sharding_spec.api.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*I
+sharded_tensor_meta0torch.distributed._shard.sharded_tensor.metadata *ù
+_CUSTOM_SHARDING_SPEC_OPSDtorch.distributed._shard.sharding_spec.api._CUSTOM_SHARDING_SPEC_OPS•
+jbuiltins.dict[builtins.str,builtins.dict[CallableType[builtins.function],CallableType[builtins.function]]]
+builtins.str"builtins.strù
+Nbuiltins.dict[CallableType[builtins.function],CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.functionK
+CallableType[builtins.function]&
+builtins.function"builtins.function"builtins.dict"builtins.dict

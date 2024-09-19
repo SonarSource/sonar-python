@@ -1,0 +1,343 @@
+
+tracemallocß
+
+BaseFiltertracemalloc.BaseFilter"builtins.object*†
+__init__tracemalloc.BaseFilter.__init__"
+None*:
+self0
+tracemalloc.BaseFilter"tracemalloc.BaseFilter*-
+	inclusive
+builtins.bool"builtins.boolrM
+	inclusive tracemalloc.BaseFilter.inclusive
+builtins.bool"builtins.bool´
+DomainFiltertracemalloc.DomainFilter"tracemalloc.BaseFilter*ï
+domaintracemalloc.DomainFilter.domain"
+builtins.int"builtins.int*>
+self4
+tracemalloc.DomainFilter"tracemalloc.DomainFilter0:property`*–
+__init__!tracemalloc.DomainFilter.__init__"
+None*>
+self4
+tracemalloc.DomainFilter"tracemalloc.DomainFilter*-
+	inclusive
+builtins.bool"builtins.bool*(
+domain
+builtins.int"builtins.intñ
+Filtertracemalloc.Filter"tracemalloc.BaseFilter*ó
+filename_pattern#tracemalloc.Filter.filename_pattern"
+builtins.str"builtins.str*2
+self(
+tracemalloc.Filter"tracemalloc.Filter0:property`*¢
+__init__tracemalloc.Filter.__init__"
+None*2
+self(
+tracemalloc.Filter"tracemalloc.Filter*-
+	inclusive
+builtins.bool"builtins.bool*2
+filename_pattern
+builtins.str"builtins.str*R
+linenoD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *0
+
+all_frames
+builtins.bool"builtins.bool *R
+domainD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None ri
+domaintracemalloc.Filter.domainD
+Union[builtins.int,None]
+builtins.int"builtins.int
+Noneri
+linenotracemalloc.Filter.linenoD
+Union[builtins.int,None]
+builtins.int"builtins.int
+NonerK
+
+all_framestracemalloc.Filter.all_frames
+builtins.bool"builtins.boolπ
+	Statistictracemalloc.Statistic"builtins.object*˛
+__init__tracemalloc.Statistic.__init__"
+None*8
+self.
+tracemalloc.Statistic"tracemalloc.Statistic*=
+	traceback.
+tracemalloc.Traceback"tracemalloc.Traceback*&
+size
+builtins.int"builtins.int*'
+count
+builtins.int"builtins.int*û
+__eq__tracemalloc.Statistic.__eq__"
+builtins.bool"builtins.bool*0.
+tracemalloc.Statistic"tracemalloc.Statistic*$"
+builtins.object"builtins.objectrB
+counttracemalloc.Statistic.count
+builtins.int"builtins.intr@
+sizetracemalloc.Statistic.size
+builtins.int"builtins.intr\
+	tracebacktracemalloc.Statistic.traceback.
+tracemalloc.Traceback"tracemalloc.Traceback‚
+StatisticDifftracemalloc.StatisticDiff"builtins.object*Â
+__init__"tracemalloc.StatisticDiff.__init__"
+None*@
+self6
+tracemalloc.StatisticDiff"tracemalloc.StatisticDiff*=
+	traceback.
+tracemalloc.Traceback"tracemalloc.Traceback*&
+size
+builtins.int"builtins.int*+
+	size_diff
+builtins.int"builtins.int*'
+count
+builtins.int"builtins.int*,
+
+count_diff
+builtins.int"builtins.int*™
+__eq__ tracemalloc.StatisticDiff.__eq__"
+builtins.bool"builtins.bool*86
+tracemalloc.StatisticDiff"tracemalloc.StatisticDiff*$"
+builtins.object"builtins.objectrF
+counttracemalloc.StatisticDiff.count
+builtins.int"builtins.intrP
+
+count_diff$tracemalloc.StatisticDiff.count_diff
+builtins.int"builtins.intrD
+sizetracemalloc.StatisticDiff.size
+builtins.int"builtins.intrN
+	size_diff#tracemalloc.StatisticDiff.size_diff
+builtins.int"builtins.intr`
+	traceback#tracemalloc.StatisticDiff.traceback.
+tracemalloc.Traceback"tracemalloc.TracebackÛ
+
+Frametracemalloc.Frame"builtins.object*Ñ
+filenametracemalloc.Frame.filename"
+builtins.str"builtins.str*0
+self&
+tracemalloc.Frame"tracemalloc.Frame0:property`*Ä
+linenotracemalloc.Frame.lineno"
+builtins.int"builtins.int*0
+self&
+tracemalloc.Frame"tracemalloc.Frame0:property`*õ
+__init__tracemalloc.Frame.__init__"
+None*0
+self&
+tracemalloc.Frame"tracemalloc.Frame*∂
+frame™
++TypeAlias[Tuple[builtins.str,builtins.int]]`
+ Tuple[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int"tracemalloc._FrameTuple*í
+__eq__tracemalloc.Frame.__eq__"
+builtins.bool"builtins.bool*(&
+tracemalloc.Frame"tracemalloc.Frame*$"
+builtins.object"builtins.object*ñ
+__lt__tracemalloc.Frame.__lt__"
+builtins.bool"builtins.bool*(&
+tracemalloc.Frame"tracemalloc.Frame*(&
+tracemalloc.Frame"tracemalloc.Frame*£
+__gt__tracemalloc.Frame.__gt__"
+builtins.bool"builtins.bool*(&
+tracemalloc.Frame"tracemalloc.Frame*(&
+tracemalloc.Frame"tracemalloc.Frame*
+Any *£
+__ge__tracemalloc.Frame.__ge__"
+builtins.bool"builtins.bool*(&
+tracemalloc.Frame"tracemalloc.Frame*(&
+tracemalloc.Frame"tracemalloc.Frame*
+Any *£
+__le__tracemalloc.Frame.__le__"
+builtins.bool"builtins.bool*(&
+tracemalloc.Frame"tracemalloc.Frame*(&
+tracemalloc.Frame"tracemalloc.Frame*
+Any Ù	
+Tracetracemalloc.Trace"builtins.object*Ä
+domaintracemalloc.Trace.domain"
+builtins.int"builtins.int*0
+self&
+tracemalloc.Trace"tracemalloc.Trace0:property`*|
+sizetracemalloc.Trace.size"
+builtins.int"builtins.int*0
+self&
+tracemalloc.Trace"tracemalloc.Trace0:property`*ò
+	tracebacktracemalloc.Trace.traceback".
+tracemalloc.Traceback"tracemalloc.Traceback*0
+self&
+tracemalloc.Trace"tracemalloc.Trace0:property`*ï
+__init__tracemalloc.Trace.__init__"
+None*0
+self&
+tracemalloc.Trace"tracemalloc.Trace*∞
+trace§
+hTypeAlias[Tuple[builtins.int,builtins.int,typing.Sequence[TypeAlias[Tuple[builtins.str,builtins.int]]]]]ú
+]Tuple[builtins.int,builtins.int,typing.Sequence[TypeAlias[Tuple[builtins.str,builtins.int]]]]
+builtins.int"builtins.int
+builtins.int"builtins.int¸
+<typing.Sequence[TypeAlias[Tuple[builtins.str,builtins.int]]]™
++TypeAlias[Tuple[builtins.str,builtins.int]]`
+ Tuple[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int"tracemalloc._FrameTuple"typing.Sequence"tracemalloc._TraceTuple*í
+__eq__tracemalloc.Trace.__eq__"
+builtins.bool"builtins.bool*(&
+tracemalloc.Trace"tracemalloc.Trace*$"
+builtins.object"builtins.objectú
+	Tracebacktracemalloc.Traceback"typing.Sequence*˙
+__init__tracemalloc.Traceback.__init__"
+None*8
+self.
+tracemalloc.Traceback"tracemalloc.Traceback*â
+frames¸
+<typing.Sequence[TypeAlias[Tuple[builtins.str,builtins.int]]]™
++TypeAlias[Tuple[builtins.str,builtins.int]]`
+ Tuple[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int"tracemalloc._FrameTuple"typing.Sequence*∏
+formattracemalloc.Traceback.format"J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*8
+self.
+tracemalloc.Traceback"tracemalloc.Traceback*Q
+limitD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *7
+most_recent_first
+builtins.bool"builtins.bool *Æ
+__contains__"tracemalloc.Traceback.__contains__"
+builtins.bool"builtins.bool*0.
+tracemalloc.Traceback"tracemalloc.Traceback*(&
+tracemalloc.Frame"tracemalloc.Frame*x
+__len__tracemalloc.Traceback.__len__"
+builtins.int"builtins.int*0.
+tracemalloc.Traceback"tracemalloc.Traceback*û
+__eq__tracemalloc.Traceback.__eq__"
+builtins.bool"builtins.bool*0.
+tracemalloc.Traceback"tracemalloc.Traceback*$"
+builtins.object"builtins.object*™
+__lt__tracemalloc.Traceback.__lt__"
+builtins.bool"builtins.bool*0.
+tracemalloc.Traceback"tracemalloc.Traceback*0.
+tracemalloc.Traceback"tracemalloc.Traceback*∑
+__gt__tracemalloc.Traceback.__gt__"
+builtins.bool"builtins.bool*0.
+tracemalloc.Traceback"tracemalloc.Traceback*0.
+tracemalloc.Traceback"tracemalloc.Traceback*
+Any *∑
+__ge__tracemalloc.Traceback.__ge__"
+builtins.bool"builtins.bool*0.
+tracemalloc.Traceback"tracemalloc.Traceback*0.
+tracemalloc.Traceback"tracemalloc.Traceback*
+Any *∑
+__le__tracemalloc.Traceback.__le__"
+builtins.bool"builtins.bool*0.
+tracemalloc.Traceback"tracemalloc.Traceback*0.
+tracemalloc.Traceback"tracemalloc.Traceback*
+Any 2á
+__getitem__!tracemalloc.Traceback.__getitem__ﬁ
+__getitem__!tracemalloc.Traceback.__getitem__"&
+tracemalloc.Frame"tracemalloc.Frame*0.
+tracemalloc.Traceback"tracemalloc.Traceback*DB
+typing_extensions.SupportsIndex"typing_extensions.SupportsIndex0:overloadXÛ
+__getitem__!tracemalloc.Traceback.__getitem__"]
+"typing.Sequence[tracemalloc.Frame]&
+tracemalloc.Frame"tracemalloc.Frame"typing.Sequence*0.
+tracemalloc.Traceback"tracemalloc.Traceback*" 
+builtins.slice"builtins.slice0:overloadX◊
+Snapshottracemalloc.Snapshot"builtins.object*·
+__init__tracemalloc.Snapshot.__init__"
+None*6
+self,
+tracemalloc.Snapshot"tracemalloc.Snapshot*¿
+traces≥
+ytyping.Sequence[TypeAlias[Tuple[builtins.int,builtins.int,typing.Sequence[TypeAlias[Tuple[builtins.str,builtins.int]]]]]]§
+hTypeAlias[Tuple[builtins.int,builtins.int,typing.Sequence[TypeAlias[Tuple[builtins.str,builtins.int]]]]]ú
+]Tuple[builtins.int,builtins.int,typing.Sequence[TypeAlias[Tuple[builtins.str,builtins.int]]]]
+builtins.int"builtins.int
+builtins.int"builtins.int¸
+<typing.Sequence[TypeAlias[Tuple[builtins.str,builtins.int]]]™
++TypeAlias[Tuple[builtins.str,builtins.int]]`
+ Tuple[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int"tracemalloc._FrameTuple"typing.Sequence"tracemalloc._TraceTuple"typing.Sequence*1
+traceback_limit
+builtins.int"builtins.int*ˆ
+
+compare_totracemalloc.Snapshot.compare_to"q
+(builtins.list[tracemalloc.StatisticDiff]6
+tracemalloc.StatisticDiff"tracemalloc.StatisticDiff"builtins.list*6
+self,
+tracemalloc.Snapshot"tracemalloc.Snapshot*>
+old_snapshot,
+tracemalloc.Snapshot"tracemalloc.Snapshot**
+key_type
+builtins.str"builtins.str*0
+
+cumulative
+builtins.bool"builtins.bool *è
+dumptracemalloc.Snapshot.dump"
+None*6
+self,
+tracemalloc.Snapshot"tracemalloc.Snapshot**
+filename
+builtins.str"builtins.str*ô
+filter_traces"tracemalloc.Snapshot.filter_traces",
+tracemalloc.Snapshot"tracemalloc.Snapshot*6
+self,
+tracemalloc.Snapshot"tracemalloc.Snapshot*˝
+filtersÔ
+Ctyping.Sequence[Union[tracemalloc.DomainFilter,tracemalloc.Filter]]ñ
+2Union[tracemalloc.DomainFilter,tracemalloc.Filter]4
+tracemalloc.DomainFilter"tracemalloc.DomainFilter(
+tracemalloc.Filter"tracemalloc.Filter"typing.Sequence*ç
+loadtracemalloc.Snapshot.load",
+tracemalloc.Snapshot"tracemalloc.Snapshot**
+filename
+builtins.str"builtins.str0:staticmethodh*™
+
+statisticstracemalloc.Snapshot.statistics"e
+$builtins.list[tracemalloc.Statistic].
+tracemalloc.Statistic"tracemalloc.Statistic"builtins.list*6
+self,
+tracemalloc.Snapshot"tracemalloc.Snapshot**
+key_type
+builtins.str"builtins.str*0
+
+cumulative
+builtins.bool"builtins.bool rU
+traceback_limit$tracemalloc.Snapshot.traceback_limit
+builtins.int"builtins.intrÑ
+tracestracemalloc.Snapshot.traces]
+"typing.Sequence[tracemalloc.Trace]&
+tracemalloc.Trace"tracemalloc.Trace"typing.Sequence3
+clear_traces_tracemalloc.clear_traces"
+NoneU
+get_traceback_limit _tracemalloc.get_traceback_limit"
+builtins.int"builtins.intï
+get_traced_memory_tracemalloc.get_traced_memory"`
+ Tuple[builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int[
+get_tracemalloc_memory#_tracemalloc.get_tracemalloc_memory"
+builtins.int"builtins.intE
+
+is_tracing_tracemalloc.is_tracing"
+builtins.bool"builtins.boolG
+start_tracemalloc.start"
+None* 
+builtins.int"builtins.int #
+stop_tracemalloc.stop"
+None∆
+get_object_traceback tracemalloc.get_object_traceback"_
+!Union[tracemalloc.Traceback,None].
+tracemalloc.Traceback"tracemalloc.Traceback
+None*+
+obj"
+builtins.object"builtins.objectX
+take_snapshottracemalloc.take_snapshot",
+tracemalloc.Snapshot"tracemalloc.Snapshot*á
+__annotations__tracemalloc.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict

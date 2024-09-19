@@ -1,0 +1,470 @@
+
+1torch.distributed.optim.zero_redundancy_optimizerü
+_ZeROJoinHook?torch.distributed.optim.zero_redundancy_optimizer._ZeROJoinHook"*torch.distributed.algorithms.join.JoinHook*h
+__init__Htorch.distributed.optim.zero_redundancy_optimizer._ZeROJoinHook.__init__*
+self*
+zero*`
+	main_hookItorch.distributed.optim.zero_redundancy_optimizer._ZeROJoinHook.main_hook*
+selfrU
+zeroDtorch.distributed.optim.zero_redundancy_optimizer._ZeROJoinHook.zero
+Anyπ
+
+_DDPBucketAssignmentFtorch.distributed.optim.zero_redundancy_optimizer._DDPBucketAssignment"builtins.object*—
+__init__Otorch.distributed.optim.zero_redundancy_optimizer._DDPBucketAssignment.__init__"
+None*õ
+selfê
+Ftorch.distributed.optim.zero_redundancy_optimizer._DDPBucketAssignment"Ftorch.distributed.optim.zero_redundancy_optimizer._DDPBucketAssignment*.
+bucket_index
+builtins.int"builtins.int*r
+
+parametersb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*(
+offset
+builtins.int"builtins.intrÅ
+bucket_indexStorch.distributed.optim.zero_redundancy_optimizer._DDPBucketAssignment.bucket_index
+builtins.int"builtins.intr√
+
+parametersQtorch.distributed.optim.zero_redundancy_optimizer._DDPBucketAssignment.parametersb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.listru
+offsetMtorch.distributed.optim.zero_redundancy_optimizer._DDPBucketAssignment.offset
+builtins.int"builtins.intr{
+deviceMtorch.distributed.optim.zero_redundancy_optimizer._DDPBucketAssignment.device"
+torch._C.device"torch._C.devicerµ
+tensorMtorch.distributed.optim.zero_redundancy_optimizer._DDPBucketAssignment.tensor\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None
+_OverlapStatus@torch.distributed.optim.zero_redundancy_optimizer._OverlapStatus"enum.IntEnumHr}
+UNINITIALIZEDNtorch.distributed.optim.zero_redundancy_optimizer._OverlapStatus.UNINITIALIZED
+builtins.int"builtins.intrë
+DDP_HAS_REBUILT_BUCKETSXtorch.distributed.optim.zero_redundancy_optimizer._OverlapStatus.DDP_HAS_REBUILT_BUCKETS
+builtins.int"builtins.intry
+INITIALIZEDLtorch.distributed.optim.zero_redundancy_optimizer._OverlapStatus.INITIALIZED
+builtins.int"builtins.int¯
+_OverlapInfo>torch.distributed.optim.zero_redundancy_optimizer._OverlapInfo"builtins.object*Ñ
+__init__Gtorch.distributed.optim.zero_redundancy_optimizer._OverlapInfo.__init__"
+None*ã
+selfÄ
+>torch.distributed.optim.zero_redundancy_optimizer._OverlapInfo">torch.distributed.optim.zero_redundancy_optimizer._OverlapInfo*
+
+world_size
+Any*Å
+wait_for_broadcastsRtorch.distributed.optim.zero_redundancy_optimizer._OverlapInfo.wait_for_broadcasts"
+None*ã
+selfÄ
+>torch.distributed.optim.zero_redundancy_optimizer._OverlapInfo">torch.distributed.optim.zero_redundancy_optimizer._OverlapInfo*Å
+clear_per_iter_infoRtorch.distributed.optim.zero_redundancy_optimizer._OverlapInfo.clear_per_iter_info"
+None*ã
+selfÄ
+>torch.distributed.optim.zero_redundancy_optimizer._OverlapInfo">torch.distributed.optim.zero_redundancy_optimizer._OverlapInfor÷
+statusEtorch.distributed.optim.zero_redundancy_optimizer._OverlapInfo.statusÑ
+@torch.distributed.optim.zero_redundancy_optimizer._OverlapStatus"@torch.distributed.optim.zero_redundancy_optimizer._OverlapStatusr}
+shard_bucketsLtorch.distributed.optim.zero_redundancy_optimizer._OverlapInfo.shard_buckets
+builtins.bool"builtins.boolrè
+params_per_bucketPtorch.distributed.optim.zero_redundancy_optimizer._OverlapInfo.params_per_bucketß
+2builtins.list[builtins.list[torch._tensor.Tensor]]b
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list"builtins.listrã
+params_per_rankNtorch.distributed.optim.zero_redundancy_optimizer._OverlapInfo.params_per_rankß
+2builtins.list[builtins.list[torch._tensor.Tensor]]b
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list"builtins.listr»
+offsetsFtorch.distributed.optim.zero_redundancy_optimizer._OverlapInfo.offsetsu
+(builtins.dict[builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int"builtins.dictr¸
+assigned_ranks_per_bucketXtorch.distributed.optim.zero_redundancy_optimizer._OverlapInfo.assigned_ranks_per_bucketÑ
+)builtins.list[builtins.set[builtins.int]]H
+builtins.set[builtins.int]
+builtins.int"builtins.int"builtins.set"builtins.listrç
+num_bucket_assignmentsUtorch.distributed.optim.zero_redundancy_optimizer._OverlapInfo.num_bucket_assignments
+builtins.int"builtins.intrù
+
+total_sizeItorch.distributed.optim.zero_redundancy_optimizer._OverlapInfo.total_sizeD
+Union[builtins.int,None]
+builtins.int"builtins.int
+Nonerì
+broadcast_handlesPtorch.distributed.optim.zero_redundancy_optimizer._OverlapInfo.broadcast_handles,
+builtins.list[Any]
+Any"builtins.listrµ
+bucket_indices_seenRtorch.distributed.optim.zero_redundancy_optimizer._OverlapInfo.bucket_indices_seenJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.listrí
+bucket_index_to_futureUtorch.distributed.optim.zero_redundancy_optimizer._OverlapInfo.bucket_index_to_future†
+5builtins.dict[builtins.int,torch.futures.Future[Any]]
+builtins.int"builtins.int:
+torch.futures.Future[Any]
+Any"torch.futures.Future"builtins.dictr≤
+bucket_index_to_bucketUtorch.distributed.optim.zero_redundancy_optimizer._OverlapInfo.bucket_index_to_bucket¿
+Abuiltins.dict[builtins.int,torch._C._distributed_c10d.GradBucket]
+builtins.int"builtins.intN
+%torch._C._distributed_c10d.GradBucket"%torch._C._distributed_c10d.GradBucket"builtins.dict´ñ
+ZeroRedundancyOptimizerItorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer"torch.optim.optimizer.Optimizer"*torch.distributed.algorithms.join.Joinable*˘
+__init__Rtorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer.__init__"
+None*°
+selfñ
+Itorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer"Itorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer*
+params
+Any*à
+optimizer_classs
+%Type[torch.optim.optimizer.Optimizer]B
+torch.optim.optimizer.Optimizer"torch.optim.optimizer.Optimizer"type*;
+process_group&
+Union[Any,None]
+Any
+None *?
+parameters_as_bucket_view
+builtins.bool"builtins.bool *6
+overlap_with_ddp
+builtins.bool"builtins.bool *
+defaults
+Any*î
+_clear_cacheVtorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer._clear_cache"
+None*°
+selfñ
+Itorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer"Itorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer*Ñ
+add_param_groupYtorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer.add_param_group"
+None*°
+selfñ
+Itorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer"Itorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer*h
+param_groupW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*–
+consolidate_state_dict`torch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer.consolidate_state_dict"
+None*°
+selfñ
+Itorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer"Itorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer*&
+to
+builtins.int"builtins.int *Í
+_verify_params_per_rankatorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer._verify_params_per_rank"
+None*°
+selfñ
+Itorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer"Itorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer*Ω
+params_per_rankß
+2builtins.list[builtins.list[torch._tensor.Tensor]]b
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list"builtins.list*“
+_partition_param_group`torch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer._partition_param_group"
+None*°
+selfñ
+Itorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer"Itorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer*h
+param_groupW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*Ω
+params_per_rankß
+2builtins.list[builtins.list[torch._tensor.Tensor]]b
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list"builtins.list*Ë
+_partition_parameters_torch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer._partition_parameters"∏
+4builtins.list[builtins.list[builtins.dict[Any,Any]]]q
+%builtins.list[builtins.dict[Any,Any]]9
+builtins.dict[Any,Any]
+Any
+Any"builtins.dict"builtins.list"builtins.list*°
+selfñ
+Itorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer"Itorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer*é
+params_per_rankˆ
+>Union[builtins.list[builtins.list[torch._tensor.Tensor]],None]ß
+2builtins.list[builtins.list[torch._tensor.Tensor]]b
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list"builtins.list
+None *¨
+_param_to_rankXtorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer._param_to_rank"ç
+0builtins.dict[torch._tensor.Tensor,builtins.int],
+torch._tensor.Tensor"torch._tensor.Tensor
+builtins.int"builtins.int"builtins.dict*°
+selfñ
+Itorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer"Itorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer0:property`*Æ
+_param_to_indexYtorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer._param_to_index"ç
+0builtins.dict[torch._tensor.Tensor,builtins.int],
+torch._tensor.Tensor"torch._tensor.Tensor
+builtins.int"builtins.int"builtins.dict*°
+selfñ
+Itorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer"Itorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer0:property`*Ç
+_index_to_paramYtorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer._index_to_param"b
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*°
+selfñ
+Itorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer"Itorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer0:property`*Ÿ
+_broadcast_params_from_ranketorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer._broadcast_params_from_rank"
+Any*°
+selfñ
+Itorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer"Itorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer*&
+rank
+builtins.int"builtins.int*p
+_sync_paramsVtorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer._sync_params*
+self*Á
+_device_to_params_per_rankdtorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer._device_to_params_per_rank"∞
+Qbuiltins.dict[torch._C.device,builtins.list[builtins.list[torch._tensor.Tensor]]]"
+torch._C.device"torch._C.deviceß
+2builtins.list[builtins.list[torch._tensor.Tensor]]b
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list"builtins.list"builtins.dict*°
+selfñ
+Itorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer"Itorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer0:property`*ü
+_get_min_indexXtorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer._get_min_index"
+builtins.int"builtins.int*°
+selfñ
+Itorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer"Itorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer*V
+valuesJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*ò
+disallowed_indices~
+&Union[builtins.set[builtins.int],None]H
+builtins.set[builtins.int]
+builtins.int"builtins.int"builtins.set
+None *Ê
+_assign_bucket_subset_to_rankgtorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer._assign_bucket_subset_to_rank"
+None*°
+selfñ
+Itorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer"Itorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer*.
+bucket_index
+builtins.int"builtins.int*u
+bucket_paramsb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*/
+bucket_offset
+builtins.int"builtins.int*/
+assigned_rank
+builtins.int"builtins.int*§
+assigned_ranks_per_bucketÑ
+)builtins.list[builtins.set[builtins.int]]H
+builtins.set[builtins.int]
+builtins.int"builtins.int"builtins.set"builtins.list*‰
+_bucket_assignments_per_rankftorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer._bucket_assignments_per_rank"©
+qbuiltins.list[builtins.dict[builtins.int,torch.distributed.optim.zero_redundancy_optimizer._DDPBucketAssignment]]§
+bbuiltins.dict[builtins.int,torch.distributed.optim.zero_redundancy_optimizer._DDPBucketAssignment]
+builtins.int"builtins.intê
+Ftorch.distributed.optim.zero_redundancy_optimizer._DDPBucketAssignment"Ftorch.distributed.optim.zero_redundancy_optimizer._DDPBucketAssignment"builtins.dict"builtins.list*°
+selfñ
+Itorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer"Itorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer0:property`*Å
+_local_stepUtorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer._local_step"J
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None*°
+selfñ
+Itorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer"Itorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer*¸
+	gradientsÍ
+;Union[builtins.list[Union[torch._tensor.Tensor,None]],None]û
+/builtins.list[Union[torch._tensor.Tensor,None]]\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None"builtins.list
+None *ñ
+closureÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *
+kwargs
+Any*Ù
+stepNtorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer.step"J
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None*°
+selfñ
+Itorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer"Itorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer*ñ
+closureÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *
+kwargs
+Any*v
+	join_hookStorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer.join_hook*
+self*
+
+kwargs*∫
+join_deviceUtorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer.join_device""
+torch._C.device"torch._C.device*°
+selfñ
+Itorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer"Itorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer0:property`*≠
+join_process_group\torch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer.join_process_group"
+Any*°
+selfñ
+Itorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer"Itorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer0:property`*É
+load_state_dictYtorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer.load_state_dict"
+None*°
+selfñ
+Itorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer"Itorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer*g
+
+state_dictW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*ﬂ
+
+state_dictTtorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer.state_dict"W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*°
+selfñ
+Itorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer"Itorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer*¢
+_sync_param_groups\torch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer._sync_param_groups"
+None*á
+src_param_groupsq
+%builtins.list[builtins.dict[Any,Any]]9
+builtins.dict[Any,Any]
+Any
+Any"builtins.dict"builtins.list*á
+dst_param_groupsq
+%builtins.list[builtins.dict[Any,Any]]9
+builtins.dict[Any,Any]
+Any
+Any"builtins.dict"builtins.list0:staticmethodh*§
+_build_param_buckets^torch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer._build_param_buckets"
+None*°
+selfñ
+Itorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer"Itorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer*¨
+_build_ddp_param_bucketsbtorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer._build_ddp_param_buckets"
+None*°
+selfñ
+Itorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer"Itorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer*„
+_verify_and_init_paramsatorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer._verify_and_init_params"´
+PUnion[builtins.list[torch._tensor.Tensor],builtins.list[builtins.dict[Any,Any]]]b
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.listq
+%builtins.list[builtins.dict[Any,Any]]9
+builtins.dict[Any,Any]
+Any
+Any"builtins.dict"builtins.list*°
+selfñ
+Itorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer"Itorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer*
+params
+Any*∂
+_verify_same_dense_param_typegtorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer._verify_same_dense_param_type"
+None*°
+selfñ
+Itorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer"Itorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer*Ì
+_get_is_trainable_mask`torch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer._get_is_trainable_mask"M
+builtins.list[builtins.bool]
+builtins.bool"builtins.bool"builtins.list*°
+selfñ
+Itorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer"Itorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer*¶
+_init_local_optimizer_torch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer._init_local_optimizer"
+None*°
+selfñ
+Itorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer"Itorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer*®
+_init_zero_for_overlap`torch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer._init_zero_for_overlap"
+None*°
+selfñ
+Itorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer"Itorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer*‰
+_get_assigned_rank\torch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer._get_assigned_rank"
+builtins.int"builtins.int*°
+selfñ
+Itorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer"Itorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer*.
+bucket_index
+builtins.int"builtins.int*å
+_check_overlap_initializeddtorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer._check_overlap_initialized*
+self*Õ
+_get_optimizer_constructordtorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer._get_optimizer_constructor"
+Any*°
+selfñ
+Itorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer"Itorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer*
+optimizer_class
+AnyrÑ
+initializedUtorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer.initialized
+builtins.bool"builtins.boolrÜ
+_param_to_rank_cache^torch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer._param_to_rank_cacheç
+0builtins.dict[torch._tensor.Tensor,builtins.int],
+torch._tensor.Tensor"torch._tensor.Tensor
+builtins.int"builtins.int"builtins.dictrà
+_param_to_index_cache_torch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer._param_to_index_cacheç
+0builtins.dict[torch._tensor.Tensor,builtins.int],
+torch._tensor.Tensor"torch._tensor.Tensor
+builtins.int"builtins.int"builtins.dictrø
+_partition_parameters_cacheetorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer._partition_parameters_cache∏
+4builtins.list[builtins.list[builtins.dict[Any,Any]]]q
+%builtins.list[builtins.dict[Any,Any]]9
+builtins.dict[Any,Any]
+Any
+Any"builtins.dict"builtins.list"builtins.listr‹
+_index_to_param_cache_torch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer._index_to_param_cacheb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.listr¡
+ _device_to_params_per_rank_cachejtorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer._device_to_params_per_rank_cache∞
+Qbuiltins.dict[torch._C.device,builtins.list[builtins.list[torch._tensor.Tensor]]]"
+torch._C.device"torch._C.deviceß
+2builtins.list[builtins.list[torch._tensor.Tensor]]b
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list"builtins.list"builtins.dictræ
+"_bucket_assignments_per_rank_cacheltorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer._bucket_assignments_per_rank_cache©
+qbuiltins.list[builtins.dict[builtins.int,torch.distributed.optim.zero_redundancy_optimizer._DDPBucketAssignment]]§
+bbuiltins.dict[builtins.int,torch.distributed.optim.zero_redundancy_optimizer._DDPBucketAssignment]
+builtins.int"builtins.intê
+Ftorch.distributed.optim.zero_redundancy_optimizer._DDPBucketAssignment"Ftorch.distributed.optim.zero_redundancy_optimizer._DDPBucketAssignment"builtins.dict"builtins.listr¡
+_is_trainable_mask\torch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer._is_trainable_maskM
+builtins.list[builtins.bool]
+builtins.bool"builtins.bool"builtins.listru
+_default_deviceYtorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer._default_device
+Anyrq
+process_groupWtorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer.process_group
+AnyrÄ
+
+world_sizeTtorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer.world_size
+builtins.int"builtins.intrt
+rankNtorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer.rank
+builtins.int"builtins.intrÇ
+global_rankUtorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer.global_rank
+builtins.int"builtins.intrê
+_overlap_with_ddp[torch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer._overlap_with_ddp
+builtins.bool"builtins.boolr≈
+_optim_defaultsYtorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer._optim_defaultsW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dictr{
+_optim_constructor\torch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer._optim_constructor
+AnyrÎ
+_overlap_infoWtorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer._overlap_infoÄ
+>torch.distributed.optim.zero_redundancy_optimizer._OverlapInfo">torch.distributed.optim.zero_redundancy_optimizer._OverlapInfor†
+parameters_as_bucket_viewctorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer.parameters_as_bucket_view
+builtins.bool"builtins.boolrà
+_bucketsRtorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer._bucketsß
+2builtins.list[builtins.list[torch._tensor.Tensor]]b
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list"builtins.listrâ
+_all_state_dictsZtorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer._all_state_dictsò
+.builtins.list[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"builtins.listrí
+_all_paramsUtorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer._all_params,
+builtins.list[Any]
+Any"builtins.listra
+optimOtorch.distributed.optim.zero_redundancy_optimizer.ZeroRedundancyOptimizer.optim
+AnyÁ
+_recursive_copy_to_deviceKtorch.distributed.optim.zero_redundancy_optimizer._recursive_copy_to_device"
+Any*
+value
+Any*0
+non_blocking
+builtins.bool"builtins.bool*.
+device"
+torch._C.device"torch._C.device©
+_is_trainable?torch.distributed.optim.zero_redundancy_optimizer._is_trainable"
+builtins.bool"builtins.bool*7
+param,
+torch._tensor.Tensor"torch._tensor.TensorÇ
+_broadcast_objectCtorch.distributed.optim.zero_redundancy_optimizer._broadcast_object"
+Any*
+obj
+Any**
+src_rank
+builtins.int"builtins.int*/
+group"
+builtins.object"builtins.object *0
+device"
+torch._C.device"torch._C.device *≠
+__annotations__Atorch.distributed.optim.zero_redundancy_optimizer.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*
+disttorch.distributed *d
+logger8torch.distributed.optim.zero_redundancy_optimizer.logger 
+logging.Logger"logging.Logger*ê
+__all__9torch.distributed.optim.zero_redundancy_optimizer.__all__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list

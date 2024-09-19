@@ -1,0 +1,242 @@
+
+torch.nn.modules.normalizationÜ
+_cross_map_lrn2d)torch.nn.modules._functions.CrossMapLRN2d" torch.autograd.function.Function*Ž
+forward1torch.nn.modules._functions.CrossMapLRN2d.forward*
+ctx*	
+input*
+size*
+alpha *
+
+beta *
+k 0:staticmethodh*j
+backward2torch.nn.modules._functions.CrossMapLRN2d.backward*
+ctx*
+grad_output0:staticmethodhã
+
+LocalResponseNorm0torch.nn.modules.normalization.LocalResponseNorm"torch.nn.modules.module.Module*ï
+__init__9torch.nn.modules.normalization.LocalResponseNorm.__init__"
+None*n
+selfd
+0torch.nn.modules.normalization.LocalResponseNorm"0torch.nn.modules.normalization.LocalResponseNorm*&
+size
+builtins.int"builtins.int*-
+alpha 
+builtins.float"builtins.float *,
+beta 
+builtins.float"builtins.float *)
+k 
+builtins.float"builtins.float *š
+forward8torch.nn.modules.normalization.LocalResponseNorm.forward",
+torch._tensor.Tensor"torch._tensor.Tensor*n
+selfd
+0torch.nn.modules.normalization.LocalResponseNorm"0torch.nn.modules.normalization.LocalResponseNorm*7
+input,
+torch._tensor.Tensor"torch._tensor.Tensor*S
+
+extra_repr;torch.nn.modules.normalization.LocalResponseNorm.extra_repr*
+selfr›
+__constants__>torch.nn.modules.normalization.LocalResponseNorm.__constants__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.listr[
+size5torch.nn.modules.normalization.LocalResponseNorm.size
+builtins.int"builtins.intra
+alpha6torch.nn.modules.normalization.LocalResponseNorm.alpha 
+builtins.float"builtins.floatr_
+beta5torch.nn.modules.normalization.LocalResponseNorm.beta 
+builtins.float"builtins.floatrY
+k2torch.nn.modules.normalization.LocalResponseNorm.k 
+builtins.float"builtins.floatŽ
+
+CrossMapLRN2d,torch.nn.modules.normalization.CrossMapLRN2d"torch.nn.modules.module.Module*ã
+__init__5torch.nn.modules.normalization.CrossMapLRN2d.__init__"
+None*f
+self\
+,torch.nn.modules.normalization.CrossMapLRN2d",torch.nn.modules.normalization.CrossMapLRN2d*&
+size
+builtins.int"builtins.int*-
+alpha 
+builtins.float"builtins.float *,
+beta 
+builtins.float"builtins.float *)
+k 
+builtins.float"builtins.float *Ž
+forward4torch.nn.modules.normalization.CrossMapLRN2d.forward",
+torch._tensor.Tensor"torch._tensor.Tensor*f
+self\
+,torch.nn.modules.normalization.CrossMapLRN2d",torch.nn.modules.normalization.CrossMapLRN2d*7
+input,
+torch._tensor.Tensor"torch._tensor.Tensor*Ë
+
+extra_repr7torch.nn.modules.normalization.CrossMapLRN2d.extra_repr"
+builtins.str"builtins.str*f
+self\
+,torch.nn.modules.normalization.CrossMapLRN2d",torch.nn.modules.normalization.CrossMapLRN2drW
+size1torch.nn.modules.normalization.CrossMapLRN2d.size
+builtins.int"builtins.intr]
+alpha2torch.nn.modules.normalization.CrossMapLRN2d.alpha 
+builtins.float"builtins.floatr[
+beta1torch.nn.modules.normalization.CrossMapLRN2d.beta 
+builtins.float"builtins.floatrU
+k.torch.nn.modules.normalization.CrossMapLRN2d.k 
+builtins.float"builtins.float‰
+	LayerNorm(torch.nn.modules.normalization.LayerNorm"torch.nn.modules.module.Module*Ä
+__init__1torch.nn.modules.normalization.LayerNorm.__init__"
+None*^
+selfT
+(torch.nn.modules.normalization.LayerNorm"(torch.nn.modules.normalization.LayerNorm*Ú
+normalized_shapeÃ
+HTypeAlias[Union[builtins.int,builtins.list[builtins.int],torch._C.Size]]Ë
+=Union[builtins.int,builtins.list[builtins.int],torch._C.Size]
+builtins.int"builtins.intJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list
+torch._C.Size"torch._C.Size"'torch.nn.modules.normalization._shape_t*+
+eps 
+builtins.float"builtins.float *8
+elementwise_affine
+builtins.bool"builtins.bool **
+bias
+builtins.bool"builtins.bool *
+device
+Any *
+dtype
+Any *·
+reset_parameters9torch.nn.modules.normalization.LayerNorm.reset_parameters"
+None*^
+selfT
+(torch.nn.modules.normalization.LayerNorm"(torch.nn.modules.normalization.LayerNorm*‚
+forward0torch.nn.modules.normalization.LayerNorm.forward",
+torch._tensor.Tensor"torch._tensor.Tensor*^
+selfT
+(torch.nn.modules.normalization.LayerNorm"(torch.nn.modules.normalization.LayerNorm*7
+input,
+torch._tensor.Tensor"torch._tensor.Tensor*¿
+
+extra_repr3torch.nn.modules.normalization.LayerNorm.extra_repr"
+builtins.str"builtins.str*^
+selfT
+(torch.nn.modules.normalization.LayerNorm"(torch.nn.modules.normalization.LayerNormr“
+__constants__6torch.nn.modules.normalization.LayerNorm.__constants__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.listr›
+normalized_shape9torch.nn.modules.normalization.LayerNorm.normalized_shapeL
+builtins.tuple[builtins.int]
+builtins.int"builtins.int"builtins.tuplerU
+eps,torch.nn.modules.normalization.LayerNorm.eps 
+builtins.float"builtins.floatrq
+elementwise_affine;torch.nn.modules.normalization.LayerNorm.elementwise_affine
+builtins.bool"builtins.boolrw
+weight/torch.nn.modules.normalization.LayerNorm.weight<
+torch.nn.parameter.Parameter"torch.nn.parameter.Parameterrs
+bias-torch.nn.modules.normalization.LayerNorm.bias<
+torch.nn.parameter.Parameter"torch.nn.parameter.Parameterâ
+	GroupNorm(torch.nn.modules.normalization.GroupNorm"torch.nn.modules.module.Module*
+__init__1torch.nn.modules.normalization.GroupNorm.__init__"
+None*^
+selfT
+(torch.nn.modules.normalization.GroupNorm"(torch.nn.modules.normalization.GroupNorm*,
+
+num_groups
+builtins.int"builtins.int*.
+num_channels
+builtins.int"builtins.int*+
+eps 
+builtins.float"builtins.float *,
+affine
+builtins.bool"builtins.bool *
+device
+Any *
+dtype
+Any *·
+reset_parameters9torch.nn.modules.normalization.GroupNorm.reset_parameters"
+None*^
+selfT
+(torch.nn.modules.normalization.GroupNorm"(torch.nn.modules.normalization.GroupNorm*‚
+forward0torch.nn.modules.normalization.GroupNorm.forward",
+torch._tensor.Tensor"torch._tensor.Tensor*^
+selfT
+(torch.nn.modules.normalization.GroupNorm"(torch.nn.modules.normalization.GroupNorm*7
+input,
+torch._tensor.Tensor"torch._tensor.Tensor*¿
+
+extra_repr3torch.nn.modules.normalization.GroupNorm.extra_repr"
+builtins.str"builtins.str*^
+selfT
+(torch.nn.modules.normalization.GroupNorm"(torch.nn.modules.normalization.GroupNormr“
+__constants__6torch.nn.modules.normalization.GroupNorm.__constants__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.listr_
+
+num_groups3torch.nn.modules.normalization.GroupNorm.num_groups
+builtins.int"builtins.intrc
+num_channels5torch.nn.modules.normalization.GroupNorm.num_channels
+builtins.int"builtins.intrU
+eps,torch.nn.modules.normalization.GroupNorm.eps 
+builtins.float"builtins.floatrY
+affine/torch.nn.modules.normalization.GroupNorm.affine
+builtins.bool"builtins.boolrw
+weight/torch.nn.modules.normalization.GroupNorm.weight<
+torch.nn.parameter.Parameter"torch.nn.parameter.Parameterrs
+bias-torch.nn.modules.normalization.GroupNorm.bias<
+torch.nn.parameter.Parameter"torch.nn.parameter.Parameter’
+RMSNorm&torch.nn.modules.normalization.RMSNorm"torch.nn.modules.module.Module*¼
+__init__/torch.nn.modules.normalization.RMSNorm.__init__"
+None*Z
+selfP
+&torch.nn.modules.normalization.RMSNorm"&torch.nn.modules.normalization.RMSNorm*Ú
+normalized_shapeÃ
+HTypeAlias[Union[builtins.int,builtins.list[builtins.int],torch._C.Size]]Ë
+=Union[builtins.int,builtins.list[builtins.int],torch._C.Size]
+builtins.int"builtins.intJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list
+torch._C.Size"torch._C.Size"'torch.nn.modules.normalization._shape_t*U
+epsJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None *8
+elementwise_affine
+builtins.bool"builtins.bool *
+device
+Any *
+dtype
+Any *±
+reset_parameters7torch.nn.modules.normalization.RMSNorm.reset_parameters"
+None*Z
+selfP
+&torch.nn.modules.normalization.RMSNorm"&torch.nn.modules.normalization.RMSNorm*ø
+forward.torch.nn.modules.normalization.RMSNorm.forward",
+torch._tensor.Tensor"torch._tensor.Tensor*Z
+selfP
+&torch.nn.modules.normalization.RMSNorm"&torch.nn.modules.normalization.RMSNorm*3
+x,
+torch._tensor.Tensor"torch._tensor.Tensor*¹
+
+extra_repr1torch.nn.modules.normalization.RMSNorm.extra_repr"
+builtins.str"builtins.str*Z
+selfP
+&torch.nn.modules.normalization.RMSNorm"&torch.nn.modules.normalization.RMSNormr‘
+__constants__4torch.nn.modules.normalization.RMSNorm.__constants__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.listr™
+normalized_shape7torch.nn.modules.normalization.RMSNorm.normalized_shapeL
+builtins.tuple[builtins.int]
+builtins.int"builtins.int"builtins.tupler}
+eps*torch.nn.modules.normalization.RMSNorm.epsJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+Nonero
+elementwise_affine9torch.nn.modules.normalization.RMSNorm.elementwise_affine
+builtins.bool"builtins.boolru
+weight-torch.nn.modules.normalization.RMSNorm.weight<
+torch.nn.parameter.Parameter"torch.nn.parameter.ParameterŠ
+#<subclass of "Size" and "Integral">Btorch.nn.modules.normalization.<subclass of "Size" and "Integral">"torch._C.Size"numbers.IntegralŒ
+$<subclass of "Size" and "Integral">1Ctorch.nn.modules.normalization.<subclass of "Size" and "Integral">1"torch._C.Size"numbers.Integral*š
+__annotations__.torch.nn.modules.normalization.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*
+Ftorch.nn.functional *}
+__all__&torch.nn.modules.normalization.__all__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list

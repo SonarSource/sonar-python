@@ -1,0 +1,270 @@
+
++torch._inductor.codegen.cpp_template_kernelü/
+CppTemplateKernel=torch._inductor.codegen.cpp_template_kernel.CppTemplateKernel"%torch._inductor.codegen.common.Kernel*m
+__init__Ftorch._inductor.codegen.cpp_template_kernel.CppTemplateKernel.__init__*
+self*
+kernel_name*r
+renderDtorch._inductor.codegen.cpp_template_kernel.CppTemplateKernel.render*
+self*
+template*
+
+kwargs*Ø
+
+def_kernelHtorch._inductor.codegen.cpp_template_kernel.CppTemplateKernel.def_kernel"
+builtins.str"builtins.str*ˆ
+self~
+=torch._inductor.codegen.cpp_template_kernel.CppTemplateKernel"=torch._inductor.codegen.cpp_template_kernel.CppTemplateKernel*©
+inputsœ
+5builtins.dict[builtins.str,torch._inductor.ir.Buffer]
+builtins.str"builtins.str6
+torch._inductor.ir.Buffer"torch._inductor.ir.Buffer"builtins.dict*ª
+outputsœ
+5builtins.dict[builtins.str,torch._inductor.ir.Buffer]
+builtins.str"builtins.str6
+torch._inductor.ir.Buffer"torch._inductor.ir.Buffer"builtins.dict*ì
+call_kernelItorch._inductor.codegen.cpp_template_kernel.CppTemplateKernel.call_kernel"
+Any*ˆ
+self~
+=torch._inductor.codegen.cpp_template_kernel.CppTemplateKernel"=torch._inductor.codegen.cpp_template_kernel.CppTemplateKernel*&
+name
+builtins.str"builtins.str*V
+nodeL
+$torch._inductor.ir.CppTemplateBuffer"$torch._inductor.ir.CppTemplateBuffer*·
+dtypeCtorch._inductor.codegen.cpp_template_kernel.CppTemplateKernel.dtype"
+builtins.str"builtins.str*ˆ
+self~
+=torch._inductor.codegen.cpp_template_kernel.CppTemplateKernel"=torch._inductor.codegen.cpp_template_kernel.CppTemplateKernel*@
+node6
+torch._inductor.ir.Buffer"torch._inductor.ir.Buffer*¿
+	acc_dtypeGtorch._inductor.codegen.cpp_template_kernel.CppTemplateKernel.acc_dtype"
+builtins.str"builtins.str*ˆ
+self~
+=torch._inductor.codegen.cpp_template_kernel.CppTemplateKernel"=torch._inductor.codegen.cpp_template_kernel.CppTemplateKernel*@
+node6
+torch._inductor.ir.Buffer"torch._inductor.ir.Buffer*Ü
+sizeBtorch._inductor.codegen.cpp_template_kernel.CppTemplateKernel.size"
+builtins.str"builtins.str*ˆ
+self~
+=torch._inductor.codegen.cpp_template_kernel.CppTemplateKernel"=torch._inductor.codegen.cpp_template_kernel.CppTemplateKernel*@
+node6
+torch._inductor.ir.Buffer"torch._inductor.ir.Buffer*%
+dim
+builtins.int"builtins.int*à
+strideDtorch._inductor.codegen.cpp_template_kernel.CppTemplateKernel.stride"
+builtins.str"builtins.str*ˆ
+self~
+=torch._inductor.codegen.cpp_template_kernel.CppTemplateKernel"=torch._inductor.codegen.cpp_template_kernel.CppTemplateKernel*@
+node6
+torch._inductor.ir.Buffer"torch._inductor.ir.Buffer*%
+dim
+builtins.int"builtins.int*ò
+indexCtorch._inductor.codegen.cpp_template_kernel.CppTemplateKernel.index"
+builtins.str"builtins.str*ˆ
+self~
+=torch._inductor.codegen.cpp_template_kernel.CppTemplateKernel"=torch._inductor.codegen.cpp_template_kernel.CppTemplateKernel*@
+node6
+torch._inductor.ir.Buffer"torch._inductor.ir.Buffer*9
+indices,
+builtins.list[Any]
+Any"builtins.list*œ
+slice_ndFtorch._inductor.codegen.cpp_template_kernel.CppTemplateKernel.slice_nd"H
+"torch._inductor.ir.ReinterpretView""torch._inductor.ir.ReinterpretView*ˆ
+self~
+=torch._inductor.codegen.cpp_template_kernel.CppTemplateKernel"=torch._inductor.codegen.cpp_template_kernel.CppTemplateKernel*
+node
+Any*`
+rangesT
+builtins.list[Tuple[Any,Any]]$
+Tuple[Any,Any]
+Any
+Any"builtins.list*Õ
+viewBtorch._inductor.codegen.cpp_template_kernel.CppTemplateKernel.view"2
+torch._inductor.ir.View"torch._inductor.ir.View*ˆ
+self~
+=torch._inductor.codegen.cpp_template_kernel.CppTemplateKernel"=torch._inductor.codegen.cpp_template_kernel.CppTemplateKernel*
+node
+Any*7
+sizes,
+builtins.list[Any]
+Any"builtins.list*n
+permuteEtorch._inductor.codegen.cpp_template_kernel.CppTemplateKernel.permute*
+self*
+node*
+dims*—
+assert_functionMtorch._inductor.codegen.cpp_template_kernel.CppTemplateKernel.assert_function"
+builtins.str"builtins.str*ˆ
+self~
+=torch._inductor.codegen.cpp_template_kernel.CppTemplateKernel"=torch._inductor.codegen.cpp_template_kernel.CppTemplateKernel0:property`*•
+maybe_codegen_profileStorch._inductor.codegen.cpp_template_kernel.CppTemplateKernel.maybe_codegen_profile"
+builtins.str"builtins.str*ˆ
+self~
+=torch._inductor.codegen.cpp_template_kernel.CppTemplateKernel"=torch._inductor.codegen.cpp_template_kernel.CppTemplateKernel*r
+unroll_pragmaKtorch._inductor.codegen.cpp_template_kernel.CppTemplateKernel.unroll_pragma*
+self*
+
+unroll*ç
+define_bufferKtorch._inductor.codegen.cpp_template_kernel.CppTemplateKernel.define_buffer"
+builtins.str"builtins.str*ˆ
+self~
+=torch._inductor.codegen.cpp_template_kernel.CppTemplateKernel"=torch._inductor.codegen.cpp_template_kernel.CppTemplateKernel*
+name
+Any*7
+sizes,
+builtins.list[Any]
+Any"builtins.list*
+dtype
+Any *Å
+store_outputJtorch._inductor.codegen.cpp_template_kernel.CppTemplateKernel.store_output"
+Any*ˆ
+self~
+=torch._inductor.codegen.cpp_template_kernel.CppTemplateKernel"=torch._inductor.codegen.cpp_template_kernel.CppTemplateKernel*?
+dst6
+torch._inductor.ir.Buffer"torch._inductor.ir.Buffer*?
+src6
+torch._inductor.ir.Buffer"torch._inductor.ir.Buffer*Ì
+epilogue_nodesµ
+4Union[builtins.list[torch._inductor.ir.IRNode],None]q
+(builtins.list[torch._inductor.ir.IRNode]6
+torch._inductor.ir.IRNode"torch._inductor.ir.IRNode"builtins.list
+None *i
+offsetsZ
+Union[builtins.list[Any],None],
+builtins.list[Any]
+Any"builtins.list
+None *˜
+	reindexer†
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None r•
+	overridesGtorch._inductor.codegen.cpp_template_kernel.CppTemplateKernel.overrides?
+CallableType[builtins.type]
+builtins.type"builtins.typerc
+render_hooksJtorch._inductor.codegen.cpp_template_kernel.CppTemplateKernel.render_hooks
+Anyre
+local_buffersKtorch._inductor.codegen.cpp_template_kernel.CppTemplateKernel.local_buffers
+Any¬7
+CppTemplateCaller=torch._inductor.codegen.cpp_template_kernel.CppTemplateCaller"torch._inductor.ir.ChoiceCaller*×
+__init__Ftorch._inductor.codegen.cpp_template_kernel.CppTemplateCaller.__init__"
+None*ˆ
+self~
+=torch._inductor.codegen.cpp_template_kernel.CppTemplateCaller"=torch._inductor.codegen.cpp_template_kernel.CppTemplateCaller*&
+name
+builtins.str"builtins.str**
+category
+builtins.str"builtins.str*‚
+input_nodesq
+(builtins.list[torch._inductor.ir.Buffer]6
+torch._inductor.ir.Buffer"torch._inductor.ir.Buffer"builtins.list*B
+layout6
+torch._inductor.ir.Layout"torch._inductor.ir.Layout*c
+make_kernel_renderK
+CallableType[builtins.function]&
+builtins.function"builtins.function*w
+bmreql
+4torch._inductor.autotune_process.CppBenchmarkRequest"4torch._inductor.autotune_process.CppBenchmarkRequest*
+template
+Any*Û
+info_kwargsÇ
+ÛUnion[builtins.dict[builtins.str,Union[TypeAlias[Union[builtins.int,builtins.float,builtins.bool,builtins.str,builtins.list[Union[builtins.int,builtins.str,builtins.float,builtins.bool]]]],builtins.list[Unknown]]],None]Ú	
+Ïbuiltins.dict[builtins.str,Union[TypeAlias[Union[builtins.int,builtins.float,builtins.bool,builtins.str,builtins.list[Union[builtins.int,builtins.str,builtins.float,builtins.bool]]]],builtins.list[Unknown]]]
+builtins.str"builtins.strØ
+³Union[TypeAlias[Union[builtins.int,builtins.float,builtins.bool,builtins.str,builtins.list[Union[builtins.int,builtins.str,builtins.float,builtins.bool]]]],builtins.list[Unknown]]ò
+•TypeAlias[Union[builtins.int,builtins.float,builtins.bool,builtins.str,builtins.list[Union[builtins.int,builtins.str,builtins.float,builtins.bool]]]]¯
+ŠUnion[builtins.int,builtins.float,builtins.bool,builtins.str,builtins.list[Union[builtins.int,builtins.str,builtins.float,builtins.bool]]]
+builtins.int"builtins.int 
+builtins.float"builtins.float
+builtins.bool"builtins.bool
+builtins.str"builtins.strŸ
+Lbuiltins.list[Union[builtins.int,builtins.str,builtins.float,builtins.bool]]¿
+=Union[builtins.int,builtins.str,builtins.float,builtins.bool]
+builtins.int"builtins.int
+builtins.str"builtins.str 
+builtins.float"builtins.float
+builtins.bool"builtins.bool"builtins.list"$torch._inductor.ir.PrimitiveInfoType)
+builtins.list[Unknown] "builtins.list"builtins.dict
+None *ë
+
+precompileHtorch._inductor.codegen.cpp_template_kernel.CppTemplateCaller.precompile"
+None*ˆ
+self~
+=torch._inductor.codegen.cpp_template_kernel.CppTemplateCaller"=torch._inductor.codegen.cpp_template_kernel.CppTemplateCaller*¦
+	benchmarkGtorch._inductor.codegen.cpp_template_kernel.CppTemplateCaller.benchmark" 
+builtins.float"builtins.float*ˆ
+self~
+=torch._inductor.codegen.cpp_template_kernel.CppTemplateCaller"=torch._inductor.codegen.cpp_template_kernel.CppTemplateCaller*
+args
+Any*
+out
+Any*û
+hash_keyFtorch._inductor.codegen.cpp_template_kernel.CppTemplateCaller.hash_key"
+builtins.str"builtins.str*ˆ
+self~
+=torch._inductor.codegen.cpp_template_kernel.CppTemplateCaller"=torch._inductor.codegen.cpp_template_kernel.CppTemplateCaller*¼
+	info_dictGtorch._inductor.codegen.cpp_template_kernel.CppTemplateCaller.info_dict"Ú	
+Ïbuiltins.dict[builtins.str,Union[TypeAlias[Union[builtins.int,builtins.float,builtins.bool,builtins.str,builtins.list[Union[builtins.int,builtins.str,builtins.float,builtins.bool]]]],builtins.list[Unknown]]]
+builtins.str"builtins.strØ
+³Union[TypeAlias[Union[builtins.int,builtins.float,builtins.bool,builtins.str,builtins.list[Union[builtins.int,builtins.str,builtins.float,builtins.bool]]]],builtins.list[Unknown]]ò
+•TypeAlias[Union[builtins.int,builtins.float,builtins.bool,builtins.str,builtins.list[Union[builtins.int,builtins.str,builtins.float,builtins.bool]]]]¯
+ŠUnion[builtins.int,builtins.float,builtins.bool,builtins.str,builtins.list[Union[builtins.int,builtins.str,builtins.float,builtins.bool]]]
+builtins.int"builtins.int 
+builtins.float"builtins.float
+builtins.bool"builtins.bool
+builtins.str"builtins.strŸ
+Lbuiltins.list[Union[builtins.int,builtins.str,builtins.float,builtins.bool]]¿
+=Union[builtins.int,builtins.str,builtins.float,builtins.bool]
+builtins.int"builtins.int
+builtins.str"builtins.str 
+builtins.float"builtins.float
+builtins.bool"builtins.bool"builtins.list"$torch._inductor.ir.PrimitiveInfoType)
+builtins.list[Unknown] "builtins.list"builtins.dict*ˆ
+self~
+=torch._inductor.codegen.cpp_template_kernel.CppTemplateCaller"=torch._inductor.codegen.cpp_template_kernel.CppTemplateCaller*¡
+output_nodeItorch._inductor.codegen.cpp_template_kernel.CppTemplateCaller.output_node"<
+torch._inductor.ir.TensorBox"torch._inductor.ir.TensorBox*ˆ
+self~
+=torch._inductor.codegen.cpp_template_kernel.CppTemplateCaller"=torch._inductor.codegen.cpp_template_kernel.CppTemplateCallerrp
+categoryFtorch._inductor.codegen.cpp_template_kernel.CppTemplateCaller.category
+builtins.str"builtins.strr³
+make_kernel_renderPtorch._inductor.codegen.cpp_template_kernel.CppTemplateCaller.make_kernel_renderK
+CallableType[builtins.function]&
+builtins.function"builtins.functionrº
+bmreqCtorch._inductor.codegen.cpp_template_kernel.CppTemplateCaller.bmreql
+4torch._inductor.autotune_process.CppBenchmarkRequest"4torch._inductor.autotune_process.CppBenchmarkRequestr[
+templateFtorch._inductor.codegen.cpp_template_kernel.CppTemplateCaller.template
+Anyr¢
+info_kwargsItorch._inductor.codegen.cpp_template_kernel.CppTemplateCaller.info_kwargsÇ
+ÛUnion[builtins.dict[builtins.str,Union[TypeAlias[Union[builtins.int,builtins.float,builtins.bool,builtins.str,builtins.list[Union[builtins.int,builtins.str,builtins.float,builtins.bool]]]],builtins.list[Unknown]]],None]Ú	
+Ïbuiltins.dict[builtins.str,Union[TypeAlias[Union[builtins.int,builtins.float,builtins.bool,builtins.str,builtins.list[Union[builtins.int,builtins.str,builtins.float,builtins.bool]]]],builtins.list[Unknown]]]
+builtins.str"builtins.strØ
+³Union[TypeAlias[Union[builtins.int,builtins.float,builtins.bool,builtins.str,builtins.list[Union[builtins.int,builtins.str,builtins.float,builtins.bool]]]],builtins.list[Unknown]]ò
+•TypeAlias[Union[builtins.int,builtins.float,builtins.bool,builtins.str,builtins.list[Union[builtins.int,builtins.str,builtins.float,builtins.bool]]]]¯
+ŠUnion[builtins.int,builtins.float,builtins.bool,builtins.str,builtins.list[Union[builtins.int,builtins.str,builtins.float,builtins.bool]]]
+builtins.int"builtins.int 
+builtins.float"builtins.float
+builtins.bool"builtins.bool
+builtins.str"builtins.strŸ
+Lbuiltins.list[Union[builtins.int,builtins.str,builtins.float,builtins.bool]]¿
+=Union[builtins.int,builtins.str,builtins.float,builtins.bool]
+builtins.int"builtins.int
+builtins.str"builtins.str 
+builtins.float"builtins.float
+builtins.bool"builtins.bool"builtins.list"$torch._inductor.ir.PrimitiveInfoType)
+builtins.list[Unknown] "builtins.list"builtins.dict
+Nonet
+parse_expr_with_index_symbolsItorch._inductor.codegen.cpp_template_kernel.parse_expr_with_index_symbols*
+expr§
+wrap_with_tensorbox?torch._inductor.codegen.cpp_template_kernel.wrap_with_tensorbox"<
+torch._inductor.ir.TensorBox"torch._inductor.ir.TensorBox*
+node
+Any*§
+__annotations__;torch._inductor.codegen.cpp_template_kernel.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*C
+sympy1torch._inductor.codegen.cpp_template_kernel.sympy
+Any*M
+
+parse_expr6torch._inductor.codegen.cpp_template_kernel.parse_expr
+Any*
+Ltorch._inductor.lowering 

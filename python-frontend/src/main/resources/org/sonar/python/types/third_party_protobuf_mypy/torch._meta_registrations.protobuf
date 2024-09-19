@@ -1,0 +1,511 @@
+
+torch._meta_registrationså
+GridSamplerInterpolation2torch._meta_registrations.GridSamplerInterpolation"	enum.EnumHre
+BILINEAR;torch._meta_registrations.GridSamplerInterpolation.BILINEAR
+builtins.int"builtins.intrc
+NEAREST:torch._meta_registrations.GridSamplerInterpolation.NEAREST
+builtins.int"builtins.intrc
+BICUBIC:torch._meta_registrations.GridSamplerInterpolation.BICUBIC
+builtins.int"builtins.int@
+register_meta'torch._meta_registrations.register_meta*
+op⁄
+elementwise_meta*torch._meta_registrations.elementwise_meta"
+Any*
+args
+Any*~
+type_promotionj
+3torch._prims_common.ELEMENTWISE_TYPE_PROMOTION_KIND"3torch._prims_common.ELEMENTWISE_TYPE_PROMOTION_KINDG
+toRealValueType)torch._meta_registrations.toRealValueType*	
+dtypel
+check_inplace_broadcast1torch._meta_registrations.check_inplace_broadcast*
+
+self_shape*
+
+args_shapeh
+	_exec_fft#torch._meta_registrations._exec_fft*
+out*
+self*
+	out_sizes*
+dim*
+forward_
+inferUnsqueezeGeometry0torch._meta_registrations.inferUnsqueezeGeometry*
+
+tensor*
+dim´
+squareCheckInputs+torch._meta_registrations.squareCheckInputs"
+Any*6
+self,
+torch._tensor.Tensor"torch._tensor.Tensor*(
+f_name
+builtins.str"builtins.strË
+linearSolveCheckInputs0torch._meta_registrations.linearSolveCheckInputs"
+Any*6
+self,
+torch._tensor.Tensor"torch._tensor.Tensor*3
+A,
+torch._tensor.Tensor"torch._tensor.Tensor*&
+name
+builtins.str"builtins.strÙ
+checkFloatingOrComplex0torch._meta_registrations.checkFloatingOrComplex"
+Any*3
+t,
+torch._tensor.Tensor"torch._tensor.Tensor*(
+f_name
+builtins.str"builtins.str*@
+allow_low_precision_dtypes
+builtins.bool"builtins.bool Œ
+checkIsMatrix'torch._meta_registrations.checkIsMatrix"
+Any*3
+A,
+torch._tensor.Tensor"torch._tensor.Tensor*(
+f_name
+builtins.str"builtins.str*,
+arg_name
+builtins.str"builtins.str á
+checkInputsSolver+torch._meta_registrations.checkInputsSolver"
+Any*3
+A,
+torch._tensor.Tensor"torch._tensor.Tensor*3
+B,
+torch._tensor.Tensor"torch._tensor.Tensor*(
+left
+builtins.bool"builtins.bool*(
+f_name
+builtins.str"builtins.strî
+checkSameDevice)torch._meta_registrations.checkSameDevice"
+Any*)
+fn_name
+builtins.str"builtins.str*8
+result,
+torch._tensor.Tensor"torch._tensor.Tensor*7
+input,
+torch._tensor.Tensor"torch._tensor.Tensor*/
+result_name
+builtins.str"builtins.str a
+	checkUplo#torch._meta_registrations.checkUplo"
+Any*&
+UPLO
+builtins.str"builtins.str±
+cloneBatchedColumnMajor1torch._meta_registrations.cloneBatchedColumnMajor",
+torch._tensor.Tensor"torch._tensor.Tensor*5
+src,
+torch._tensor.Tensor"torch._tensor.Tensor 
+_parse_qr_mode(torch._meta_registrations._parse_qr_mode"f
+"Tuple[builtins.bool,builtins.bool]
+builtins.bool"builtins.bool
+builtins.bool"builtins.bool*&
+mode
+builtins.str"builtins.str£
+_linalg_broadcast_batch_dims6torch._meta_registrations._linalg_broadcast_batch_dims"⁄
+>Tuple[builtins.list[builtins.int],builtins.list[builtins.int]]J
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.listJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*6
+arg1,
+torch._tensor.Tensor"torch._tensor.Tensor*6
+arg2,
+torch._tensor.Tensor"torch._tensor.Tensor≥
+!_linalg_broadcast_batch_dims_name;torch._meta_registrations._linalg_broadcast_batch_dims_name"ê
+0Tuple[torch._tensor.Tensor,torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor,
+torch._tensor.Tensor"torch._tensor.Tensor*6
+arg1,
+torch._tensor.Tensor"torch._tensor.Tensor*6
+arg2,
+torch._tensor.Tensor"torch._tensor.Tensor*N
+nameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None‰
+linalg_solve_is_vector_rhs4torch._meta_registrations.linalg_solve_is_vector_rhs"
+builtins.bool"builtins.bool*7
+input,
+torch._tensor.Tensor"torch._tensor.Tensor*7
+other,
+torch._tensor.Tensor"torch._tensor.Tensors
+_padding_check_valid_input4torch._meta_registrations._padding_check_valid_input*	
+input*
+padding*
+dimc
+_pad1d_common'torch._meta_registrations._pad1d_common*	
+input*
+padding*
+is_reflectionÜ
+_pad1d_backward_common0torch._meta_registrations._pad1d_backward_common*
+grad_output*	
+input*
+padding*
+is_reflectionc
+_pad2d_common'torch._meta_registrations._pad2d_common*	
+input*
+padding*
+is_reflectionc
+_pad3d_common'torch._meta_registrations._pad3d_common*	
+input*
+padding*
+is_reflectiono
+_compute_reduction_shape2torch._meta_registrations._compute_reduction_shape*
+self*
+dims*
+keepdimg
+device_hint%torch._meta_registrations.device_hint"
+builtins.str"builtins.str*
+tensor
+AnyÄ
+calc_conv_nd_return_shape3torch._meta_registrations.calc_conv_nd_return_shape"
+Any*>
+input_tensor,
+torch._tensor.Tensor"torch._tensor.Tensor*8
+weight,
+torch._tensor.Tensor"torch._tensor.Tensor*™
+strideù
+/Union[builtins.list[builtins.int],builtins.int]J
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list
+builtins.int"builtins.int*´
+paddingù
+/Union[builtins.list[builtins.int],builtins.int]J
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list
+builtins.int"builtins.int*¨
+dilationù
+/Union[builtins.list[builtins.int],builtins.int]J
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list
+builtins.int"builtins.int*1
+is_transposed
+builtins.bool"builtins.bool*(
+groups
+builtins.int"builtins.int*√
+output_padding¨
+4Union[builtins.list[builtins.int],builtins.int,None]J
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list
+builtins.int"builtins.int
+None G
+is_channels_last*torch._meta_registrations.is_channels_last*
+teng
+check_dim_size(torch._meta_registrations.check_dim_size*
+
+tensor*
+dim*
+dim_size*
+sizeú
+avg_pool2d_backward_shape_check9torch._meta_registrations.avg_pool2d_backward_shape_check*	
+input*
+
+gradOutput*
+
+nbatch*
+kH*
+kW*
+dH*
+dW*
+padH*
+padW*
+nInputPlane*
+inputHeight*
+
+inputWidth*
+outputHeight*
+outputWidth*
+
+mem_format‘
+!_adaptive_pool_empty_output_check;torch._meta_registrations._adaptive_pool_empty_output_check"
+Any*=
+grad_output,
+torch._tensor.Tensor"torch._tensor.Tensor**
+arg_name
+builtins.str"builtins.strw
+_get_reduction_dtype.torch._meta_registrations._get_reduction_dtype*	
+input*	
+dtype*
+promote_int_to_long `
+shift_dtype_check+torch._meta_registrations.shift_dtype_check*
+fn_name*
+self*
+valÑ
+common_meta_baddbmm_bmm1torch._meta_registrations.common_meta_baddbmm_bmm*
+
+batch1*
+
+batch2*
+
+is_bmm*
+self_baddbmm :
+div_rtn!torch._meta_registrations.div_rtn*
+x*
+y≤
+pooling_output_shape_pad_lr5torch._meta_registrations.pooling_output_shape_pad_lr*
+	inputSize*
+
+kernelSize*	
+pad_l*	
+pad_r*
+
+stride*
+dilation*
+	ceil_modeó
+pooling_output_shape.torch._meta_registrations.pooling_output_shape*
+	inputSize*
+
+kernelSize*
+pad*
+
+stride*
+dilation*
+	ceil_modeá
+pool2d_shape_check,torch._meta_registrations.pool2d_shape_check*	
+input*
+kH*
+kW*
+dH*
+dW*
+padH*
+padW*
+	dilationH*
+	dilationW*
+nInputPlane*
+inputHeight*
+
+inputWidth*
+outputHeight*
+outputWidth*
+memory_formatÎ
+pool3d_shape_check,torch._meta_registrations.pool3d_shape_check"
+Any*7
+input,
+torch._tensor.Tensor"torch._tensor.Tensor*)
+nslices
+builtins.int"builtins.int*$
+kT
+builtins.int"builtins.int*$
+kH
+builtins.int"builtins.int*$
+kW
+builtins.int"builtins.int*$
+dT
+builtins.int"builtins.int*$
+dH
+builtins.int"builtins.int*$
+dW
+builtins.int"builtins.int*$
+pT
+builtins.int"builtins.int*$
+pH
+builtins.int"builtins.int*$
+pW
+builtins.int"builtins.int*+
+	dilationT
+builtins.int"builtins.int*+
+	dilationH
+builtins.int"builtins.int*+
+	dilationW
+builtins.int"builtins.int*'
+itime
+builtins.int"builtins.int*)
+iheight
+builtins.int"builtins.int*(
+iwidth
+builtins.int"builtins.int*'
+otime
+builtins.int"builtins.int*)
+oheight
+builtins.int"builtins.int*(
+owidth
+builtins.int"builtins.int*)
+fn_name
+builtins.str"builtins.str*6
+check_input_size
+builtins.bool"builtins.bool ‹
+max_pool3d_backward_shape_check9torch._meta_registrations.max_pool3d_backward_shape_check*	
+input*
+grad_output*
+indices*
+nslices*
+kT*
+kH*
+kW*
+dT*
+dH*
+dW*
+pT*
+pH*
+pW*
+	dilationT*
+	dilationH*
+	dilationW*	
+itime*
+iheight*
+
+iwidth*	
+otime*
+oheight*
+
+owidth*
+fn_nameÖ
+avg_pool3d_backward_shape_check9torch._meta_registrations.avg_pool3d_backward_shape_check"
+Any*7
+input,
+torch._tensor.Tensor"torch._tensor.Tensor*=
+grad_output,
+torch._tensor.Tensor"torch._tensor.Tensor*)
+nslices
+builtins.int"builtins.int*$
+kT
+builtins.int"builtins.int*$
+kH
+builtins.int"builtins.int*$
+kW
+builtins.int"builtins.int*$
+dT
+builtins.int"builtins.int*$
+dH
+builtins.int"builtins.int*$
+dW
+builtins.int"builtins.int*$
+pT
+builtins.int"builtins.int*$
+pH
+builtins.int"builtins.int*$
+pW
+builtins.int"builtins.int*'
+itime
+builtins.int"builtins.int*)
+iheight
+builtins.int"builtins.int*(
+iwidth
+builtins.int"builtins.int*'
+otime
+builtins.int"builtins.int*)
+oheight
+builtins.int"builtins.int*(
+owidth
+builtins.int"builtins.int*)
+fn_name
+builtins.str"builtins.str∂
+#max_pool2d_checks_and_compute_shape=torch._meta_registrations.max_pool2d_checks_and_compute_shape*	
+input*
+kernel_size*
+
+stride*
+padding*
+dilation*
+	ceil_mode•
+_max_unpooling3d_shape_check6torch._meta_registrations._max_unpooling3d_shape_check*	
+input*
+indices*
+output_size*
+
+stride*
+padding*
+fn_name 
+check_grid_sampler_common3torch._meta_registrations.check_grid_sampler_common"
+Any*7
+input,
+torch._tensor.Tensor"torch._tensor.Tensor*6
+grid,
+torch._tensor.Tensor"torch._tensor.Tensor¯
+check_grid_sampler_3d/torch._meta_registrations.check_grid_sampler_3d"
+Any*7
+input,
+torch._tensor.Tensor"torch._tensor.Tensor*6
+grid,
+torch._tensor.Tensor"torch._tensor.Tensor*4
+interpolation_mode
+builtins.int"builtins.intŒ
+maybe_wrap_dim(torch._meta_registrations.maybe_wrap_dim"
+Any*%
+dim
+builtins.int"builtins.int*/
+dim_post_expr
+builtins.int"builtins.int*1
+wrap_scalar
+builtins.bool"builtins.bool V
+ensure_nonempty_size.torch._meta_registrations.ensure_nonempty_size*
+t*
+dim`
+gather_shape_check,torch._meta_registrations.gather_shape_check*
+self*
+dim*	
+indexd
+get_operator_enum+torch._meta_registrations.get_operator_enum*
+reduce_*
+use_new_options á
+scatter_gather_dtype_check4torch._meta_registrations.scatter_gather_dtype_check*
+method_name*
+self*	
+index*
+src_opt M
+ensure_nonempty_dim-torch._meta_registrations.ensure_nonempty_dim*
+dimq
+scatter_shape_check-torch._meta_registrations.scatter_shape_check*
+self*
+dim*	
+index*
+src_opt è
+scatter_meta_impl+torch._meta_registrations.scatter_meta_impl*
+self*
+dim*	
+index*	
+src *
+reduce_ *
+use_new_options H
+multiply_integers+torch._meta_registrations.multiply_integers*
+vs
+upsample_common_check/torch._meta_registrations.upsample_common_check*
+
+input_size*
+output_size*
+num_spatial_dims•
+rnn_cell_checkSizes-torch._meta_registrations.rnn_cell_checkSizes*
+input_gates*
+hidden_gates*
+
+input_bias*
+hidden_bias*
+
+factor*
+prev_hiddenh
+zero_numel_check_dims/torch._meta_registrations.zero_numel_check_dims*
+self*
+dim*
+fn_namea
+check_argmax_argmin-torch._meta_registrations.check_argmax_argmin*
+name*
+self*
+dimÉ
+checkLSTMBackwardSizes0torch._meta_registrations.checkLSTMBackwardSizes*
+grad_hy*
+grad_cy*
+cx*
+cy*
+	workspacek
+!_check_for_unsupported_isin_dtype;torch._meta_registrations._check_for_unsupported_isin_dtype*	
+dtypeb
+_create_unary_float_meta_func7torch._meta_registrations._create_unary_float_meta_func*
+funcd
+_create_binary_float_meta_func8torch._meta_registrations._create_binary_float_meta_func*
+func8
+activate_meta'torch._meta_registrations.activate_meta*ï
+__annotations__)torch._meta_registrations.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*
+utilstorch._prims_common *
+pytreetorch.utils._pytree */
+atentorch._meta_registrations.aten
+Any*ú
+'_meta_lib_dont_use_me_use_register_metaAtorch._meta_registrations._meta_lib_dont_use_me_use_register_meta.
+torch.library.Library"torch.library.Library*≤
+2_meta_lib_dont_use_me_use_register_meta_for_mkldnnLtorch._meta_registrations._meta_lib_dont_use_me_use_register_meta_for_mkldnn.
+torch.library.Library"torch.library.Library*¨
+/_meta_lib_dont_use_me_use_register_meta_for_mklItorch._meta_registrations._meta_lib_dont_use_me_use_register_meta_for_mkl.
+torch.library.Library"torch.library.Library*≤
+2_meta_lib_dont_use_me_use_register_meta_for_onednnLtorch._meta_registrations._meta_lib_dont_use_me_use_register_meta_for_onednn.
+torch.library.Library"torch.library.Library*∏
+5_meta_lib_dont_use_me_use_register_meta_for_quantizedOtorch._meta_registrations._meta_lib_dont_use_me_use_register_meta_for_quantized.
+torch.library.Library"torch.library.Library*é
+legacy_contiguous_memory_format9torch._meta_registrations.legacy_contiguous_memory_format0
+torch._C.memory_format"torch._C.memory_format

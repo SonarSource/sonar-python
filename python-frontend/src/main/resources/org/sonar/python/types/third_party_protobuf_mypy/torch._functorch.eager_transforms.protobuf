@@ -1,0 +1,180 @@
+
+!torch._functorch.eager_transformsX
+lazy_dynamo_disallow6torch._functorch.eager_transforms.lazy_dynamo_disallow*
+funcq
+_vjp_treespec_compare7torch._functorch.eager_transforms._vjp_treespec_compare*
+primals_out*
+
+cotangentsk
+_jvp_treespec_compare7torch._functorch.eager_transforms._jvp_treespec_compare*
+primals*
+tangentsw
+_linearize_treespec_compare=torch._functorch.eager_transforms._linearize_treespec_compare*
+primals*
+tangents_
+_set_tensor_requires_grad;torch._functorch.eager_transforms._set_tensor_requires_grad*
+xi
+_create_differentiable8torch._functorch.eager_transforms._create_differentiable*
+inps*
+level s
+_undo_create_differentiable=torch._functorch.eager_transforms._undo_create_differentiable*
+inps*
+level \
+_is_differentiable4torch._functorch.eager_transforms._is_differentiable*
+maybe_tensorl
+_any_differentiable5torch._functorch.eager_transforms._any_differentiable*
+tensor_or_tuple_of_tensorsm
+_wrap_tensor_for_grad7torch._functorch.eager_transforms._wrap_tensor_for_grad*
+maybe_tensor*	
+levelf
+_wrap_all_tensors3torch._functorch.eager_transforms._wrap_all_tensors*
+tensor_pytree*	
+levelA
+	_as_tuple+torch._functorch.eager_transforms._as_tuple*
+való
+_autograd_grad0torch._functorch.eager_transforms._autograd_grad*
+outputs*
+
+inputs*
+grad_outputs *
+retain_graph *
+create_graph H
+enter_jvp_nesting3torch._functorch.eager_transforms.enter_jvp_nestingF
+exit_jvp_nesting2torch._functorch.eager_transforms.exit_jvp_nestingM
+_safe_zero_index2torch._functorch.eager_transforms._safe_zero_index*
+xm
+error_if_complex2torch._functorch.eager_transforms.error_if_complex*
+	func_name*
+args*
+is_inputê
+_chunked_standard_basis_for_>torch._functorch.eager_transforms._chunked_standard_basis_for_*
+tensors*
+tensor_numels*
+
+chunk_size Ä
+_construct_standard_basis_for?torch._functorch.eager_transforms._construct_standard_basis_for*
+tensors*
+tensor_numelsr
+_validate_and_wrap_argnum;torch._functorch.eager_transforms._validate_and_wrap_argnum*
+
+argnum*
+num_argsa
+_check_unique_non_empty9torch._functorch.eager_transforms._check_unique_non_empty*
+argnumsi
+_replace_args/torch._functorch.eager_transforms._replace_args*
+old_args*
+new_args*
+argnumsu
+_validate_and_wrap_argnums<torch._functorch.eager_transforms._validate_and_wrap_argnums*
+argnums*
+num_argsi
+_slice_argnums0torch._functorch.eager_transforms._slice_argnums*
+args*
+argnums*
+as_tuple Õ
+assert_flat_tuple_of_tensors>torch._functorch.eager_transforms.assert_flat_tuple_of_tensors"
+None*
+elts
+Any*%
+api
+builtins.str"builtins.str*)
+argname
+builtins.str"builtins.strÕ
+assert_non_empty_tensor_output@torch._functorch.eager_transforms.assert_non_empty_tensor_output"
+None*8
+output,
+builtins.list[Any]
+Any"builtins.list*%
+api
+builtins.str"builtins.str∞
+"assert_output_is_tensor_or_tensorsDtorch._functorch.eager_transforms.assert_output_is_tensor_or_tensors"
+None*
+output
+Any*%
+api
+builtins.str"builtins.str≤
+ assert_non_empty_list_of_tensorsBtorch._functorch.eager_transforms.assert_non_empty_list_of_tensors"
+None*n
+outputb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*%
+api
+builtins.str"builtins.str*)
+argname
+builtins.str"builtins.str\
+safe_unpack_dual2torch._functorch.eager_transforms.safe_unpack_dual*
+dual*
+
+strictb
+safe_unflatten0torch._functorch.eager_transforms.safe_unflatten*
+
+tensor*
+dim*	
+shapeÇ
+	grad_impl+torch._functorch.eager_transforms.grad_impl"
+Any*U
+funcK
+CallableType[builtins.function]&
+builtins.function"builtins.function*í
+argnumsÑ
+;TypeAlias[Union[builtins.int,builtins.tuple[builtins.int]]]†
+0Union[builtins.int,builtins.tuple[builtins.int]]
+builtins.int"builtins.intL
+builtins.tuple[builtins.int]
+builtins.int"builtins.int"builtins.tuple" torch._functorch.utils.argnums_t*+
+has_aux
+builtins.bool"builtins.bool*
+args
+Any*
+kwargs
+Any’
+_maybe_wrap_functional_tensor?torch._functorch.eager_transforms._maybe_wrap_functional_tensor"
+Any*
+maybe_tensor
+Any*
+level
+Any*;
+_python_functionalize
+builtins.bool"builtins.bool ⁄
+_wrap_all_tensors_to_functionalAtorch._functorch.eager_transforms._wrap_all_tensors_to_functional"
+Any*
+tensor_pytree
+Any*
+level
+Any*;
+_python_functionalize
+builtins.bool"builtins.bool ª
+_maybe_unwrap_functional_tensorAtorch._functorch.eager_transforms._maybe_unwrap_functional_tensor"
+Any*
+maybe_tensor
+Any*1
+reapply_views
+builtins.bool"builtins.boolƒ
+#_unwrap_all_tensors_from_functionalEtorch._functorch.eager_transforms._unwrap_all_tensors_from_functional"
+Any*
+tensor_pytree
+Any*1
+reapply_views
+builtins.bool"builtins.bool*ù
+__annotations__1torch._functorch.eager_transforms.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*#
+fwADtorch.autograd.forward_ad *c
+_assert_wrapped_functional<torch._functorch.eager_transforms._assert_wrapped_functional
+Any*]
+_func_decrement_nesting9torch._functorch.eager_transforms._func_decrement_nesting
+Any*]
+_func_increment_nesting9torch._functorch.eager_transforms._func_increment_nesting
+Any*w
+$_propagate_functional_input_mutationFtorch._functorch.eager_transforms._propagate_functional_input_mutation
+Any*q
+!get_inplace_requires_grad_allowedCtorch._functorch.eager_transforms.get_inplace_requires_grad_allowed
+Any*q
+!set_inplace_requires_grad_allowedCtorch._functorch.eager_transforms.set_inplace_requires_grad_allowed
+Any*
+pytreetorch.utils._pytree *Z
+JVP_NESTING-torch._functorch.eager_transforms.JVP_NESTING
+builtins.int"builtins.int*R
+jvp_str)torch._functorch.eager_transforms.jvp_str
+builtins.str"builtins.str

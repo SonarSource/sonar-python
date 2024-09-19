@@ -1,0 +1,104 @@
+
+torch.ao.ns.fx.weight_utils»
+mod_weight_detach-torch.ao.ns.fx.weight_utils.mod_weight_detach",
+torch._tensor.Tensor"torch._tensor.Tensor*I
+mod@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module¿
+mod_0_weight_detach/torch.ao.ns.fx.weight_utils.mod_0_weight_detach",
+torch._tensor.Tensor"torch._tensor.Tensor*I
+mod@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module»
+mod_weight_bias_0-torch.ao.ns.fx.weight_utils.mod_weight_bias_0",
+torch._tensor.Tensor"torch._tensor.Tensor*I
+mod@
+torch.nn.modules.module.Module"torch.nn.modules.module.Moduleí
+get_lstm_weight+torch.ao.ns.fx.weight_utils.get_lstm_weight"b
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*I
+mod@
+torch.nn.modules.module.Module"torch.nn.modules.module.Moduleï
+get_qlstm_weight,torch.ao.ns.fx.weight_utils.get_qlstm_weight"b
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*I
+mod@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module¿
+get_conv_mod_weight/torch.ao.ns.fx.weight_utils.get_conv_mod_weight",
+torch._tensor.Tensor"torch._tensor.Tensor*I
+mod@
+torch.nn.modules.module.Module"torch.nn.modules.module.ModuleÃ
+get_linear_mod_weight1torch.ao.ns.fx.weight_utils.get_linear_mod_weight",
+torch._tensor.Tensor"torch._tensor.Tensor*I
+mod@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module÷
+get_lstm_mod_weights0torch.ao.ns.fx.weight_utils.get_lstm_mod_weights"b
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*I
+mod@
+torch.nn.modules.module.Module"torch.nn.modules.module.Moduleø
+get_conv_fun_weight/torch.ao.ns.fx.weight_utils.get_conv_fun_weight",
+torch._tensor.Tensor"torch._tensor.Tensor*2
+node(
+torch.fx.node.Node"torch.fx.node.Node*N
+gmF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModuleú
+get_qconv_fun_weight0torch.ao.ns.fx.weight_utils.get_qconv_fun_weight",
+torch._tensor.Tensor"torch._tensor.Tensor*2
+node(
+torch.fx.node.Node"torch.fx.node.Node*N
+gmF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModuleü
+get_linear_fun_weight1torch.ao.ns.fx.weight_utils.get_linear_fun_weight",
+torch._tensor.Tensor"torch._tensor.Tensor*2
+node(
+torch.fx.node.Node"torch.fx.node.Node*N
+gmF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModuleþ
+get_qlinear_fun_weight2torch.ao.ns.fx.weight_utils.get_qlinear_fun_weight",
+torch._tensor.Tensor"torch._tensor.Tensor*2
+node(
+torch.fx.node.Node"torch.fx.node.Node*N
+gmF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule„
+&get_op_to_type_to_weight_extraction_fnBtorch.ao.ns.fx.weight_utils.get_op_to_type_to_weight_extraction_fn"•
+jbuiltins.dict[builtins.str,builtins.dict[CallableType[builtins.function],CallableType[builtins.function]]]
+builtins.str"builtins.strù
+Nbuiltins.dict[CallableType[builtins.function],CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.functionK
+CallableType[builtins.function]&
+builtins.function"builtins.function"builtins.dict"builtins.dict›
+extract_weight_from_node4torch.ao.ns.fx.weight_utils.extract_weight_from_node"ú
+6Union[TypeAlias[builtins.dict[builtins.str,Any]],None]³
+*TypeAlias[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"*torch.ao.ns.fx.ns_types.NSSingleResultType
+None*2
+node(
+torch.fx.node.Node"torch.fx.node.Node*N
+gmF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*Ç
+"op_to_type_to_weight_extraction_fnœ
+vUnion[builtins.dict[builtins.str,builtins.dict[CallableType[builtins.function],CallableType[builtins.function]]],None]•
+jbuiltins.dict[builtins.str,builtins.dict[CallableType[builtins.function],CallableType[builtins.function]]]
+builtins.str"builtins.strù
+Nbuiltins.dict[CallableType[builtins.function],CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.functionK
+CallableType[builtins.function]&
+builtins.function"builtins.function"builtins.dict"builtins.dict
+None *—
+__annotations__+torch.ao.ns.fx.weight_utils.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*
+nntorch.nn *
+Ftorch.nn.functional *'
+nnqdtorch.ao.nn.quantized.dynamic *
+nnqtorch.ao.nn.quantized *%
+nniqattorch.ao.nn.intrinsic.qat *
+nnqattorch.ao.nn.qat *
+nnitorch.ao.nn.intrinsic *)
+nniqtorch.ao.nn.intrinsic.quantized */
+toqtorch.ao.ns.fx.weight_utils.toq
+Any

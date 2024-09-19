@@ -1,0 +1,256 @@
+
+ torch._inductor.fx_passes.pad_mmÛ
+fetch_fake_tensors3torch._inductor.fx_passes.pad_mm.fetch_fake_tensors"b
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*
+match
+Any*
+kwarg_names
+AnyT
+unwrap_fake_args1torch._inductor.fx_passes.pad_mm.unwrap_fake_args*
+	arg_namesœ
+get_alignment_size3torch._inductor.fx_passes.pad_mm.get_alignment_size"
+builtins.int"builtins.int*3
+x,
+torch._tensor.Tensor"torch._tensor.TensorÇ
+check_device-torch._inductor.fx_passes.pad_mm.check_device"
+builtins.bool"builtins.bool*3
+a,
+torch._tensor.Tensor"torch._tensor.Tensor*3
+b,
+torch._tensor.Tensor"torch._tensor.TensorÅ
+check_dtype,torch._inductor.fx_passes.pad_mm.check_dtype"
+builtins.bool"builtins.bool*3
+a,
+torch._tensor.Tensor"torch._tensor.Tensor*3
+b,
+torch._tensor.Tensor"torch._tensor.TensorÂ
+should_pad_common2torch._inductor.fx_passes.pad_mm.should_pad_common"
+builtins.bool"builtins.bool*6
+mat1,
+torch._tensor.Tensor"torch._tensor.Tensor*6
+mat2,
+torch._tensor.Tensor"torch._tensor.Tensor*i
+input\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None ë
+get_padded_length2torch._inductor.fx_passes.pad_mm.get_padded_length"
+builtins.int"builtins.int*g
+x`
+ Union[builtins.int,torch.SymInt]
+builtins.int"builtins.int
+torch.SymInt"torch.SymInt*
+alignment_size
+Anyî
+pad_dim(torch._inductor.fx_passes.pad_mm.pad_dim",
+torch._tensor.Tensor"torch._tensor.Tensor*3
+x,
+torch._tensor.Tensor"torch._tensor.Tensor*/
+padded_length
+builtins.int"builtins.int*%
+dim
+builtins.int"builtins.intï
+addmm_pattern.torch._inductor.fx_passes.pad_mm.addmm_pattern",
+torch._tensor.Tensor"torch._tensor.Tensor*7
+input,
+torch._tensor.Tensor"torch._tensor.Tensor*6
+mat1,
+torch._tensor.Tensor"torch._tensor.Tensor*6
+mat2,
+torch._tensor.Tensor"torch._tensor.Tensor**
+beta 
+builtins.float"builtins.float*+
+alpha 
+builtins.float"builtins.floatÀ
+should_pad_addmm1torch._inductor.fx_passes.pad_mm.should_pad_addmm"
+builtins.bool"builtins.bool*Y
+matchN
+%torch._inductor.pattern_matcher.Match"%torch._inductor.pattern_matcher.MatchË
+	pad_addmm*torch._inductor.fx_passes.pad_mm.pad_addmm"
+Any*g
+input\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None*6
+mat1,
+torch._tensor.Tensor"torch._tensor.Tensor*6
+mat2,
+torch._tensor.Tensor"torch._tensor.Tensor*1
+m_padded_length
+builtins.int"builtins.int*1
+k_padded_length
+builtins.int"builtins.int*1
+n_padded_length
+builtins.int"builtins.int*
+beta
+Any *
+alpha
+Any *5
+mat1_pre_padded
+builtins.bool"builtins.bool *5
+mat2_pre_padded
+builtins.bool"builtins.bool ñ
+addmm_replace.torch._inductor.fx_passes.pad_mm.addmm_replace",
+torch._tensor.Tensor"torch._tensor.Tensor*g
+input\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None*6
+mat1,
+torch._tensor.Tensor"torch._tensor.Tensor*6
+mat2,
+torch._tensor.Tensor"torch._tensor.Tensor*
+beta
+Any *
+alpha
+Any ‡
+is_mm_compute_bound4torch._inductor.fx_passes.pad_mm.is_mm_compute_bound"
+builtins.bool"builtins.bool*#
+M
+builtins.int"builtins.int*#
+K
+builtins.int"builtins.int*#
+N
+builtins.int"builtins.int*+
+dtype 
+torch._C.dtype"torch._C.dtype–
+get_cached_should_pad6torch._inductor.fx_passes.pad_mm.get_cached_should_pad"
+builtins.bool"builtins.bool*%
+key
+builtins.str"builtins.strª
+set_cached_should_pad6torch._inductor.fx_passes.pad_mm.set_cached_should_pad"
+Any*%
+key
+builtins.str"builtins.str*)
+value
+builtins.bool"builtins.bool°
+!get_cached_base_mm_benchmark_timeBtorch._inductor.fx_passes.pad_mm.get_cached_base_mm_benchmark_time" 
+builtins.float"builtins.float*%
+key
+builtins.str"builtins.strÄ
+!set_cached_base_mm_benchmark_timeBtorch._inductor.fx_passes.pad_mm.set_cached_base_mm_benchmark_time"
+Any*%
+key
+builtins.str"builtins.str*+
+value 
+builtins.float"builtins.floatŒ
+should_pad_bench_key5torch._inductor.fx_passes.pad_mm.should_pad_bench_key"
+builtins.str"builtins.str*
+match
+Any*6
+mat1,
+torch._tensor.Tensor"torch._tensor.Tensor*6
+mat2,
+torch._tensor.Tensor"torch._tensor.Tensor*
+op
+Any*i
+input\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None *
+is_base_time_key
+Any O
+get_non_view_def1torch._inductor.fx_passes.pad_mm.get_non_view_def*
+nodet
+should_exclude_padding_time<torch._inductor.fx_passes.pad_mm.should_exclude_padding_time*	
+match*
+arg_nameå
+should_pad_bench1torch._inductor.fx_passes.pad_mm.should_pad_bench"
+builtins.bool"builtins.bool*
+match
+Any*6
+mat1,
+torch._tensor.Tensor"torch._tensor.Tensor*6
+mat2,
+torch._tensor.Tensor"torch._tensor.Tensor*
+op
+Any*i
+input\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None ×
+
+mm_pattern+torch._inductor.fx_passes.pad_mm.mm_pattern",
+torch._tensor.Tensor"torch._tensor.Tensor*6
+mat1,
+torch._tensor.Tensor"torch._tensor.Tensor*6
+mat2,
+torch._tensor.Tensor"torch._tensor.Tensorº
+should_pad_mm.torch._inductor.fx_passes.pad_mm.should_pad_mm"
+builtins.bool"builtins.bool*Y
+matchN
+%torch._inductor.pattern_matcher.Match"%torch._inductor.pattern_matcher.Matchw
+pad_mat1)torch._inductor.fx_passes.pad_mm.pad_mat1*
+mat1*
+m_padded_length*
+k_padded_length*
+is_bmm w
+pad_mat2)torch._inductor.fx_passes.pad_mm.pad_mat2*
+mat2*
+k_padded_length*
+n_padded_length*
+is_bmm Ö
+pad_mm'torch._inductor.fx_passes.pad_mm.pad_mm",
+torch._tensor.Tensor"torch._tensor.Tensor*6
+mat1,
+torch._tensor.Tensor"torch._tensor.Tensor*6
+mat2,
+torch._tensor.Tensor"torch._tensor.Tensor*1
+m_padded_length
+builtins.int"builtins.int*1
+k_padded_length
+builtins.int"builtins.int*1
+n_padded_length
+builtins.int"builtins.int*5
+mat1_pre_padded
+builtins.bool"builtins.bool *5
+mat2_pre_padded
+builtins.bool"builtins.bool ×
+
+mm_replace+torch._inductor.fx_passes.pad_mm.mm_replace",
+torch._tensor.Tensor"torch._tensor.Tensor*6
+mat1,
+torch._tensor.Tensor"torch._tensor.Tensor*6
+mat2,
+torch._tensor.Tensor"torch._tensor.TensorÙ
+bmm_pattern,torch._inductor.fx_passes.pad_mm.bmm_pattern",
+torch._tensor.Tensor"torch._tensor.Tensor*6
+mat1,
+torch._tensor.Tensor"torch._tensor.Tensor*6
+mat2,
+torch._tensor.Tensor"torch._tensor.Tensor¼
+should_pad_bmm/torch._inductor.fx_passes.pad_mm.should_pad_bmm"
+builtins.bool"builtins.bool*Y
+matchN
+%torch._inductor.pattern_matcher.Match"%torch._inductor.pattern_matcher.MatchØ
+pad_bmm(torch._inductor.fx_passes.pad_mm.pad_bmm",
+torch._tensor.Tensor"torch._tensor.Tensor*6
+mat1,
+torch._tensor.Tensor"torch._tensor.Tensor*6
+mat2,
+torch._tensor.Tensor"torch._tensor.Tensor*1
+m_padded_length
+builtins.int"builtins.int*1
+k_padded_length
+builtins.int"builtins.int*1
+n_padded_length
+builtins.int"builtins.int*5
+mat1_pre_padded
+builtins.bool"builtins.bool *5
+mat2_pre_padded
+builtins.bool"builtins.bool Ù
+bmm_replace,torch._inductor.fx_passes.pad_mm.bmm_replace",
+torch._tensor.Tensor"torch._tensor.Tensor*6
+mat1,
+torch._tensor.Tensor"torch._tensor.Tensor*6
+mat2,
+torch._tensor.Tensor"torch._tensor.Tensor*œ
+__annotations__0torch._inductor.fx_passes.pad_mm.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*6
+aten%torch._inductor.fx_passes.pad_mm.aten
+Any*m
+_skip_do_bench_times5torch._inductor.fx_passes.pad_mm._skip_do_bench_times
+builtins.bool"builtins.bool

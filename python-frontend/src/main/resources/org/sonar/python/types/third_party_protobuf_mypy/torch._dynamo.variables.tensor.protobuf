@@ -1,0 +1,533 @@
+
+torch._dynamo.variables.tensor¸M
+TensorVariable-torch._dynamo.variables.tensor.TensorVariable",torch._dynamo.variables.base.VariableTracker*X
+get_real_value<torch._dynamo.variables.tensor.TensorVariable.get_real_value*
+self*¾
+__init__6torch._dynamo.variables.tensor.TensorVariable.__init__"
+None*h
+self^
+-torch._dynamo.variables.tensor.TensorVariable"-torch._dynamo.variables.tensor.TensorVariable*7
+proxy,
+torch.fx.proxy.Proxy"torch.fx.proxy.Proxy*
+dtype
+Any*
+device
+Any*
+layout
+Any*
+ndim
+Any*
+requires_grad
+Any*
+is_quantized
+Any*
+	is_sparse
+Any*
+
+class_type
+Any*
+has_grad_fn
+Any*
+size
+Any *
+stride
+Any *
+is_contiguous
+Any *
+_is_name_set
+Any *
+kwargs
+Any*P
+
+debug_repr8torch._dynamo.variables.tensor.TensorVariable.debug_repr*
+self*L
+as_proxy6torch._dynamo.variables.tensor.TensorVariable.as_proxy*
+self*R
+python_type9torch._dynamo.variables.tensor.TensorVariable.python_type*
+self*š
+
+specialize8torch._dynamo.variables.tensor.TensorVariable.specialize"
+Any*7
+value,
+torch._tensor.Tensor"torch._tensor.Tensor0:staticmethodh*l
+dynamic_getattr=torch._dynamo.variables.tensor.TensorVariable.dynamic_getattr*
+self*
+tx*
+name*d
+method_attr_ndim>torch._dynamo.variables.tensor.TensorVariable.method_attr_ndim*
+self*
+tx*f
+method_attr_dtype?torch._dynamo.variables.tensor.TensorVariable.method_attr_dtype*
+self*
+tx*h
+method_attr_device@torch._dynamo.variables.tensor.TensorVariable.method_attr_device*
+self*
+tx*h
+method_attr_layout@torch._dynamo.variables.tensor.TensorVariable.method_attr_layout*
+self*
+tx*j
+method_attr_is_cudaAtorch._dynamo.variables.tensor.TensorVariable.method_attr_is_cuda*
+self*
+tx*f
+method_attr_shape?torch._dynamo.variables.tensor.TensorVariable.method_attr_shape*
+self*
+tx*v
+method_attr_requires_gradGtorch._dynamo.variables.tensor.TensorVariable.method_attr_requires_grad*
+self*
+tx*t
+method_attr_is_quantizedFtorch._dynamo.variables.tensor.TensorVariable.method_attr_is_quantized*
+self*
+tx*n
+method_attr_is_sparseCtorch._dynamo.variables.tensor.TensorVariable.method_attr_is_sparse*
+self*
+tx*d
+method_attr_data>torch._dynamo.variables.tensor.TensorVariable.method_attr_data*
+self*
+tx*j
+method_attr_grad_fnAtorch._dynamo.variables.tensor.TensorVariable.method_attr_grad_fn*
+self*
+tx*l
+method_attr__versionBtorch._dynamo.variables.tensor.TensorVariable.method_attr__version*
+self*
+tx*d
+var_getattr9torch._dynamo.variables.tensor.TensorVariable.var_getattr*
+self*
+tx*
+name*r
+has_unpack_var_sequenceEtorch._dynamo.variables.tensor.TensorVariable.has_unpack_var_sequence*
+self*
+tx*w
+unpack_var_sequenceAtorch._dynamo.variables.tensor.TensorVariable.unpack_var_sequence*
+self*
+tx*
+idxes *j
+_strict_mode_banned_opsEtorch._dynamo.variables.tensor.TensorVariable._strict_mode_banned_ops*
+self*Ñ
+call_method9torch._dynamo.variables.tensor.TensorVariable.call_method"\
+,torch._dynamo.variables.base.VariableTracker",torch._dynamo.variables.base.VariableTracker*h
+self^
+-torch._dynamo.variables.tensor.TensorVariable"-torch._dynamo.variables.tensor.TensorVariable*
+tx
+Any*
+name
+Any*µ
+argsª
+;builtins.list[torch._dynamo.variables.base.VariableTracker]\
+,torch._dynamo.variables.base.VariableTracker",torch._dynamo.variables.base.VariableTracker"builtins.list*â
+kwargsÕ
+Hbuiltins.dict[builtins.str,torch._dynamo.variables.base.VariableTracker]
+builtins.str"builtins.str\
+,torch._dynamo.variables.base.VariableTracker",torch._dynamo.variables.base.VariableTracker"builtins.dict*h
+method_size9torch._dynamo.variables.tensor.TensorVariable.method_size*
+self*
+args*
+
+kwargs*l
+method_stride;torch._dynamo.variables.tensor.TensorVariable.method_stride*
+self*
+args*
+
+kwargs*w
+_method_size_strideAtorch._dynamo.variables.tensor.TensorVariable._method_size_stride*
+self*
+name*	
+dim *T
+method_numel:torch._dynamo.variables.tensor.TensorVariable.method_numel*
+self*P
+
+method_dim8torch._dynamo.variables.tensor.TensorVariable.method_dim*
+self*l
+method_is_floating_pointFtorch._dynamo.variables.tensor.TensorVariable.method_is_floating_point*
+self*^
+method_is_complex?torch._dynamo.variables.tensor.TensorVariable.method_is_complex*
+self*y
+method_is_contiguousBtorch._dynamo.variables.tensor.TensorVariable.method_is_contiguous*
+self*
+memory_format *
+method_type9torch._dynamo.variables.tensor.TensorVariable.method_type*
+self*
+dtype *
+non_blocking *
+
+kwargs*i
+method_as_subclass@torch._dynamo.variables.tensor.TensorVariable.method_as_subclass*
+self*
+cls*^
+method_get_device?torch._dynamo.variables.tensor.TensorVariable.method_get_device*
+self*b
+method_element_sizeAtorch._dynamo.variables.tensor.TensorVariable.method_element_size*
+self*a
+method_numpy:torch._dynamo.variables.tensor.TensorVariable.method_numpy*
+self*
+force *V
+method_tolist;torch._dynamo.variables.tensor.TensorVariable.method_tolist*
+self*p
+method_backward=torch._dynamo.variables.tensor.TensorVariable.method_backward*
+self*
+args*
+
+kwargs*p
+method_data_ptr=torch._dynamo.variables.tensor.TensorVariable.method_data_ptr*
+self*
+args*
+
+kwargs*h
+method_item9torch._dynamo.variables.tensor.TensorVariable.method_item*
+self*
+args*
+
+kwargs*|
+_warn_capture_scalar_outputsJtorch._dynamo.variables.tensor.TensorVariable._warn_capture_scalar_outputs0:staticmethodh*X
+method___len__<torch._dynamo.variables.tensor.TensorVariable.method___len__*
+self*t
+method___setitem__@torch._dynamo.variables.tensor.TensorVariable.method___setitem__*
+self*
+key*	
+value*n
+method_resize_<torch._dynamo.variables.tensor.TensorVariable.method_resize_*
+self*
+args*
+
+kwargs*t
+method_resize_as_?torch._dynamo.variables.tensor.TensorVariable.method_resize_as_*
+self*
+args*
+
+kwargs*|
+method_sparse_resize_Ctorch._dynamo.variables.tensor.TensorVariable.method_sparse_resize_*
+self*
+args*
+
+kwargs*
+method_sparse_resize_and_clear_Mtorch._dynamo.variables.tensor.TensorVariable.method_sparse_resize_and_clear_*
+self*
+args*
+
+kwargs*h
+method_set_9torch._dynamo.variables.tensor.TensorVariable.method_set_*
+self*
+args*
+
+kwargs*j
+method_add_9torch._dynamo.variables.tensor.TensorVariable.method_add_*
+self*	
+other*
+alpha *
+method_addcdiv_=torch._dynamo.variables.tensor.TensorVariable.method_addcdiv_*
+self*
+tensor1*
+tensor2*
+value *k
+method___contains__Atorch._dynamo.variables.tensor.TensorVariable.method___contains__*
+self*
+arg*x
+method_redistributeAtorch._dynamo.variables.tensor.TensorVariable.method_redistribute*
+self*
+args*
+
+kwargs*p
+method_to_local=torch._dynamo.variables.tensor.TensorVariable.method_to_local*
+self*
+args*
+
+kwargs*z
+method_register_hookBtorch._dynamo.variables.tensor.TensorVariable.method_register_hook*
+self*
+args*
+
+kwargs*¤
+)method_register_post_accumulate_grad_hookWtorch._dynamo.variables.tensor.TensorVariable.method_register_post_accumulate_grad_hook*
+self*
+args*
+
+kwargs*ß
+_method_register_hookCtorch._dynamo.variables.tensor.TensorVariable._method_register_hook"
+Any*h
+self^
+-torch._dynamo.variables.tensor.TensorVariable"-torch._dynamo.variables.tensor.TensorVariable*&
+name
+builtins.str"builtins.str*f
+hook\
+,torch._dynamo.variables.base.VariableTracker",torch._dynamo.variables.base.VariableTracker*{
+method_requires_grad_Ctorch._dynamo.variables.tensor.TensorVariable.method_requires_grad_*
+self*
+requires_grad *f
+
+method_new8torch._dynamo.variables.tensor.TensorVariable.method_new*
+self*
+args*
+
+kwargs*h
+method_untyped_storageDtorch._dynamo.variables.tensor.TensorVariable.method_untyped_storage*
+self*ç
+set_name_hint;torch._dynamo.variables.tensor.TensorVariable.set_name_hint"
+Any*h
+self^
+-torch._dynamo.variables.tensor.TensorVariable"-torch._dynamo.variables.tensor.TensorVariable*&
+name
+builtins.str"builtins.strr˜
+_nonvar_fields<torch._dynamo.variables.tensor.TensorVariable._nonvar_fieldsH
+builtins.set[builtins.str]
+builtins.str"builtins.str"builtins.setr
+method_nelement=torch._dynamo.variables.tensor.TensorVariable.method_nelementK
+CallableType[builtins.function]&
+builtins.function"builtins.functionr¡
+method_ndimension?torch._dynamo.variables.tensor.TensorVariable.method_ndimensionK
+CallableType[builtins.function]&
+builtins.function"builtins.functionrj
+proxy3torch._dynamo.variables.tensor.TensorVariable.proxy,
+torch.fx.proxy.Proxy"torch.fx.proxy.ProxyrE
+dtype3torch._dynamo.variables.tensor.TensorVariable.dtype
+AnyrG
+device4torch._dynamo.variables.tensor.TensorVariable.device
+AnyrG
+layout4torch._dynamo.variables.tensor.TensorVariable.layout
+AnyrC
+ndim2torch._dynamo.variables.tensor.TensorVariable.ndim
+AnyrC
+size2torch._dynamo.variables.tensor.TensorVariable.size
+AnyrG
+stride4torch._dynamo.variables.tensor.TensorVariable.stride
+AnyrU
+requires_grad;torch._dynamo.variables.tensor.TensorVariable.requires_grad
+AnyrS
+is_quantized:torch._dynamo.variables.tensor.TensorVariable.is_quantized
+AnyrU
+is_contiguous;torch._dynamo.variables.tensor.TensorVariable.is_contiguous
+AnyrM
+	is_sparse7torch._dynamo.variables.tensor.TensorVariable.is_sparse
+AnyrO
+
+class_type8torch._dynamo.variables.tensor.TensorVariable.class_type
+AnyrQ
+has_grad_fn9torch._dynamo.variables.tensor.TensorVariable.has_grad_fn
+Anyrj
+_is_name_set:torch._dynamo.variables.tensor.TensorVariable._is_name_set
+builtins.bool"builtins.bool…
+SymNodeVariable.torch._dynamo.variables.tensor.SymNodeVariable",torch._dynamo.variables.base.VariableTracker*Q
+
+debug_repr9torch._dynamo.variables.tensor.SymNodeVariable.debug_repr*
+self*ˆ
+create5torch._dynamo.variables.tensor.SymNodeVariable.create*
+cls*
+tx*	
+proxy*
+sym_num *
+options0:classmethodp*q
+__init__7torch._dynamo.variables.tensor.SymNodeVariable.__init__*
+self*	
+proxy*
+sym_num*
+
+kwargs*S
+python_type:torch._dynamo.variables.tensor.SymNodeVariable.python_type*
+self*M
+as_proxy7torch._dynamo.variables.tensor.SymNodeVariable.as_proxy*
+self*W
+	as_tensor8torch._dynamo.variables.tensor.SymNodeVariable.as_tensor*
+self*
+tx*k
+evaluate_expr<torch._dynamo.variables.tensor.SymNodeVariable.evaluate_expr*
+self*
+output_graph *Ô
+call_method:torch._dynamo.variables.tensor.SymNodeVariable.call_method"\
+,torch._dynamo.variables.base.VariableTracker",torch._dynamo.variables.base.VariableTracker*j
+self`
+.torch._dynamo.variables.tensor.SymNodeVariable".torch._dynamo.variables.tensor.SymNodeVariable*
+tx
+Any*
+name
+Any*µ
+argsª
+;builtins.list[torch._dynamo.variables.base.VariableTracker]\
+,torch._dynamo.variables.base.VariableTracker",torch._dynamo.variables.base.VariableTracker"builtins.list*â
+kwargsÕ
+Hbuiltins.dict[builtins.str,torch._dynamo.variables.base.VariableTracker]
+builtins.str"builtins.str\
+,torch._dynamo.variables.base.VariableTracker",torch._dynamo.variables.base.VariableTracker"builtins.dictr™
+_nonvar_fields=torch._dynamo.variables.tensor.SymNodeVariable._nonvar_fieldsH
+builtins.set[builtins.str]
+builtins.str"builtins.str"builtins.setrF
+proxy4torch._dynamo.variables.tensor.SymNodeVariable.proxy
+AnyrJ
+sym_num6torch._dynamo.variables.tensor.SymNodeVariable.sym_num
+AnyrR
+_tensor_var:torch._dynamo.variables.tensor.SymNodeVariable._tensor_var
+Anyž
+
+NumpyNdarrayVariable3torch._dynamo.variables.tensor.NumpyNdarrayVariable"-torch._dynamo.variables.tensor.TensorVariable*v
+create:torch._dynamo.variables.tensor.NumpyNdarrayVariable.create*
+tx*	
+proxy*
+options0:staticmethodh*j
+var_getattr?torch._dynamo.variables.tensor.NumpyNdarrayVariable.var_getattr*
+self*
+tx*
+name*~
+
+patch_args>torch._dynamo.variables.tensor.NumpyNdarrayVariable.patch_args*
+name*
+args*
+
+kwargs0:staticmethodh*ã
+call_method?torch._dynamo.variables.tensor.NumpyNdarrayVariable.call_method"\
+,torch._dynamo.variables.base.VariableTracker",torch._dynamo.variables.base.VariableTracker*t
+selfj
+3torch._dynamo.variables.tensor.NumpyNdarrayVariable"3torch._dynamo.variables.tensor.NumpyNdarrayVariable*
+tx
+Any*
+name
+Any*µ
+argsª
+;builtins.list[torch._dynamo.variables.base.VariableTracker]\
+,torch._dynamo.variables.base.VariableTracker",torch._dynamo.variables.base.VariableTracker"builtins.list*â
+kwargsÕ
+Hbuiltins.dict[builtins.str,torch._dynamo.variables.base.VariableTracker]
+builtins.str"builtins.str\
+,torch._dynamo.variables.base.VariableTracker",torch._dynamo.variables.base.VariableTracker"builtins.dict*X
+python_type?torch._dynamo.variables.tensor.NumpyNdarrayVariable.python_type*
+selfŒ
+UnspecializedPythonVariable:torch._dynamo.variables.tensor.UnspecializedPythonVariable"-torch._dynamo.variables.tensor.TensorVariable*â
+__init__Ctorch._dynamo.variables.tensor.UnspecializedPythonVariable.__init__"
+None*‚
+selfx
+:torch._dynamo.variables.tensor.UnspecializedPythonVariable":torch._dynamo.variables.tensor.UnspecializedPythonVariable*7
+proxy,
+torch.fx.proxy.Proxy"torch.fx.proxy.Proxy*
+	raw_value
+Any *
+need_unwrap
+Any *
+kwargs
+Any*¸
+from_tensor_variableOtorch._dynamo.variables.tensor.UnspecializedPythonVariable.from_tensor_variable*
+cls*
+tensor_variable*
+	raw_value*
+need_unwrap 0:classmethodpr¥
+_nonvar_fieldsItorch._dynamo.variables.tensor.UnspecializedPythonVariable._nonvar_fieldsH
+builtins.set[builtins.str]
+builtins.str"builtins.str"builtins.setrZ
+	raw_valueDtorch._dynamo.variables.tensor.UnspecializedPythonVariable.raw_value
+Anyr^
+need_unwrapFtorch._dynamo.variables.tensor.UnspecializedPythonVariable.need_unwrap
+Anyÿ
+FakeItemVariable/torch._dynamo.variables.tensor.FakeItemVariable"-torch._dynamo.variables.tensor.TensorVariable*Š
+__init__8torch._dynamo.variables.tensor.FakeItemVariable.__init__"
+None*l
+selfb
+/torch._dynamo.variables.tensor.FakeItemVariable"/torch._dynamo.variables.tensor.FakeItemVariable*7
+proxy,
+torch.fx.proxy.Proxy"torch.fx.proxy.Proxy*
+kwargs
+Any*‹
+from_tensor_variableDtorch._dynamo.variables.tensor.FakeItemVariable.from_tensor_variable*
+cls*
+tensor_variable0:classmethodprš
+_nonvar_fields>torch._dynamo.variables.tensor.FakeItemVariable._nonvar_fieldsH
+builtins.set[builtins.str]
+builtins.str"builtins.str"builtins.setrS
+need_unwrap;torch._dynamo.variables.tensor.FakeItemVariable.need_unwrap
+Anyæ	
+TensorSubclassVariable5torch._dynamo.variables.tensor.TensorSubclassVariable",torch._dynamo.variables.base.VariableTracker*u
+__init__>torch._dynamo.variables.tensor.TensorSubclassVariable.__init__*
+self*	
+value*
+args*
+
+kwargs*Ú
+call_functionCtorch._dynamo.variables.tensor.TensorSubclassVariable.call_function"\
+,torch._dynamo.variables.base.VariableTracker",torch._dynamo.variables.base.VariableTracker*x
+selfn
+5torch._dynamo.variables.tensor.TensorSubclassVariable"5torch._dynamo.variables.tensor.TensorSubclassVariable*
+tx
+Any*µ
+argsª
+;builtins.list[torch._dynamo.variables.base.VariableTracker]\
+,torch._dynamo.variables.base.VariableTracker",torch._dynamo.variables.base.VariableTracker"builtins.list*â
+kwargsÕ
+Hbuiltins.dict[builtins.str,torch._dynamo.variables.base.VariableTracker]
+builtins.str"builtins.str\
+,torch._dynamo.variables.base.VariableTracker",torch._dynamo.variables.base.VariableTracker"builtins.dict*h
+as_python_constantHtorch._dynamo.variables.tensor.TensorSubclassVariable.as_python_constant*
+self*Z
+python_typeAtorch._dynamo.variables.tensor.TensorSubclassVariable.python_type*
+selfrM
+value;torch._dynamo.variables.tensor.TensorSubclassVariable.value
+Anyå
+UntypedStorageVariable5torch._dynamo.variables.tensor.UntypedStorageVariable",torch._dynamo.variables.base.VariableTracker*¥
+__init__>torch._dynamo.variables.tensor.UntypedStorageVariable.__init__"
+None*x
+selfn
+5torch._dynamo.variables.tensor.UntypedStorageVariable"5torch._dynamo.variables.tensor.UntypedStorageVariable*o
+from_tensor^
+-torch._dynamo.variables.tensor.TensorVariable"-torch._dynamo.variables.tensor.TensorVariable*O
+example_value<
+torch.storage.UntypedStorage"torch.storage.UntypedStorage*
+kwargs
+Any*é
+call_methodAtorch._dynamo.variables.tensor.UntypedStorageVariable.call_method"\
+,torch._dynamo.variables.base.VariableTracker",torch._dynamo.variables.base.VariableTracker*x
+selfn
+5torch._dynamo.variables.tensor.UntypedStorageVariable"5torch._dynamo.variables.tensor.UntypedStorageVariable*
+tx
+Any*
+name
+Any*µ
+argsª
+;builtins.list[torch._dynamo.variables.base.VariableTracker]\
+,torch._dynamo.variables.base.VariableTracker",torch._dynamo.variables.base.VariableTracker"builtins.list*â
+kwargsÕ
+Hbuiltins.dict[builtins.str,torch._dynamo.variables.base.VariableTracker]
+builtins.str"builtins.str\
+,torch._dynamo.variables.base.VariableTracker",torch._dynamo.variables.base.VariableTracker"builtins.dict*g
+reconstructAtorch._dynamo.variables.tensor.UntypedStorageVariable.reconstruct*
+self*
+codegenr 
+_nonvar_fieldsDtorch._dynamo.variables.tensor.UntypedStorageVariable._nonvar_fieldsH
+builtins.set[builtins.str]
+builtins.str"builtins.str"builtins.setr°
+from_tensorAtorch._dynamo.variables.tensor.UntypedStorageVariable.from_tensor^
+-torch._dynamo.variables.tensor.TensorVariable"-torch._dynamo.variables.tensor.TensorVariabler’
+example_valueCtorch._dynamo.variables.tensor.UntypedStorageVariable.example_value<
+torch.storage.UntypedStorage"torch.storage.UntypedStorage*š
+__annotations__.torch._dynamo.variables.tensor.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*6
+sympy$torch._dynamo.variables.tensor.sympy
+Any*
+tnptorch._numpy *
+torchtorch *
+npnumpy *K
+log"torch._dynamo.variables.tensor.log 
+logging.Logger"logging.Logger*›
+supported_tensor_comparison_ops>torch._dynamo.variables.tensor.supported_tensor_comparison_ops·
+;builtins.dict[builtins.str,CallableType[builtins.function]]
+builtins.str"builtins.strK
+CallableType[builtins.function]&
+builtins.function"builtins.function"builtins.dict*™
+supported_const_comparison_ops=torch._dynamo.variables.tensor.supported_const_comparison_ops·
+;builtins.dict[builtins.str,CallableType[builtins.function]]
+builtins.str"builtins.strK
+CallableType[builtins.function]&
+builtins.function"builtins.function"builtins.dict*
+supported_comparison_ops7torch._dynamo.variables.tensor.supported_comparison_ops·
+;builtins.dict[builtins.str,CallableType[builtins.function]]
+builtins.str"builtins.strK
+CallableType[builtins.function]&
+builtins.function"builtins.function"builtins.dict*´
+%supported_tensor_comparison_op_valuesDtorch._dynamo.variables.tensor.supported_tensor_comparison_op_valuesÄ
+>builtins.dict[CallableType[builtins.function],Union[Any,None]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function&
+Union[Any,None]
+Any
+None"builtins.dict*²
+$supported_const_comparison_op_valuesCtorch._dynamo.variables.tensor.supported_const_comparison_op_valuesÄ
+>builtins.dict[CallableType[builtins.function],Union[Any,None]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function&
+Union[Any,None]
+Any
+None"builtins.dict

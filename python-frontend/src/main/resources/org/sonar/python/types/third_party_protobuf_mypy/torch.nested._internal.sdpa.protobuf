@@ -1,0 +1,152 @@
+
+torch.nested._internal.sdpa≥
+_validate_sdpa_input0torch.nested._internal.sdpa._validate_sdpa_input"
+Any*7
+query,
+torch._tensor.Tensor"torch._tensor.Tensor*5
+key,
+torch._tensor.Tensor"torch._tensor.Tensor*7
+value,
+torch._tensor.Tensor"torch._tensor.Tensor*m
+	attn_mask\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None *
+	dropout_p
+Any *
+	is_causal
+Any *
+scale
+Any ¿
+_check_batch_size_nested4torch.nested._internal.sdpa._check_batch_size_nested"
+builtins.bool"builtins.bool*8
+params,
+torch._C._SDPAParams"torch._C._SDPAParams*
+debug
+Any “
+!_check_head_dim_size_flash_nested=torch.nested._internal.sdpa._check_head_dim_size_flash_nested"
+builtins.bool"builtins.bool*8
+params,
+torch._C._SDPAParams"torch._C._SDPAParams*
+debug
+Any ±
+:_check_for_seq_len_0_and_consistent_head_dim_nested_helperVtorch.nested._internal.sdpa._check_for_seq_len_0_and_consistent_head_dim_nested_helper"
+builtins.bool"builtins.bool*7
+param,
+torch._tensor.Tensor"torch._tensor.Tensor*,
+
+param_name
+builtins.str"builtins.str*
+debug
+Any ‡
+_try_broadcast_param_size5torch.nested._internal.sdpa._try_broadcast_param_size"
+builtins.bool"builtins.bool*
+q_size
+Any*
+k_size
+Any*
+v_size
+Any*
+
+param_name
+Any*
+debug
+Any ∆
+_check_for_seq_len_0_nested7torch.nested._internal.sdpa._check_for_seq_len_0_nested"
+builtins.bool"builtins.bool*8
+params,
+torch._C._SDPAParams"torch._C._SDPAParams*
+debug
+Any ƒ
+_can_use_flash_sdpa_jagged6torch.nested._internal.sdpa._can_use_flash_sdpa_jagged"
+builtins.bool"builtins.bool*8
+params,
+torch._C._SDPAParams"torch._C._SDPAParams*
+debug
+Any Ã
+_can_use_efficient_sdpa_jagged:torch.nested._internal.sdpa._can_use_efficient_sdpa_jagged"
+builtins.bool"builtins.bool*8
+params,
+torch._C._SDPAParams"torch._C._SDPAParams*
+debug
+Any ¬
+_can_use_math_sdpa_jagged5torch.nested._internal.sdpa._can_use_math_sdpa_jagged"
+builtins.bool"builtins.bool*8
+params,
+torch._C._SDPAParams"torch._C._SDPAParams*
+debug
+Any ê
+_select_sdp_backend/torch.nested._internal.sdpa._select_sdp_backend*	
+query*
+key*	
+value*
+	attn_mask*
+dropout*
+	is_causalª
+_cumulative_and_max_seq_len_nnz;torch.nested._internal.sdpa._cumulative_and_max_seq_len_nnz"£
+5Tuple[torch._tensor.Tensor,builtins.int,builtins.int],
+torch._tensor.Tensor"torch._tensor.Tensor
+builtins.int"builtins.int
+builtins.int"builtins.int*5
+qkv,
+torch._tensor.Tensor"torch._tensor.Tensor•
+!_is_safe_to_get_storage_as_tensor=torch.nested._internal.sdpa._is_safe_to_get_storage_as_tensor"
+Any*8
+tensor,
+torch._tensor.Tensor"torch._tensor.Tensor§
+_view_as_dense*torch.nested._internal.sdpa._view_as_dense",
+torch._tensor.Tensor"torch._tensor.Tensor*8
+tensor,
+torch._tensor.Tensor"torch._tensor.Tensor*%
+Nnz
+builtins.int"builtins.int*+
+	num_heads
+builtins.int"builtins.int**
+head_dim
+builtins.int"builtins.ints
+_sdpa_nested_preprocessing6torch.nested._internal.sdpa._sdpa_nested_preprocessing*	
+query*
+key*	
+valueˇ
+_pad_last_dim)torch.nested._internal.sdpa._pad_last_dim",
+torch._tensor.Tensor"torch._tensor.Tensor*8
+tensor,
+torch._tensor.Tensor"torch._tensor.Tensor*0
+alignment_size
+builtins.int"builtins.int*)
+slice
+builtins.bool"builtins.boolV
+_calculate_scale,torch.nested._internal.sdpa._calculate_scale*	
+query*	
+scale™
+_post_process_flash_output6torch.nested._internal.sdpa._post_process_flash_output"
+Any*5
+out,
+torch._tensor.Tensor"torch._tensor.Tensor*
+og_size
+Any—
+#jagged_scaled_dot_product_attention?torch.nested._internal.sdpa.jagged_scaled_dot_product_attention"
+Any*7
+query,
+torch._tensor.Tensor"torch._tensor.Tensor*5
+key,
+torch._tensor.Tensor"torch._tensor.Tensor*7
+value,
+torch._tensor.Tensor"torch._tensor.Tensor*m
+	attn_mask\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None *
+	dropout_p
+Any *
+	is_causal
+Any *
+scale
+Any *ó
+__annotations__+torch.nested._internal.sdpa.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*
+Ftorch.nn.functional *H
+logtorch.nested._internal.sdpa.log 
+logging.Logger"logging.Logger

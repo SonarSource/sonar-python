@@ -1,0 +1,929 @@
+
+torch._export.serde.serializeU
+SerializeError,torch._export.serde.serialize.SerializeError"builtins.RuntimeError¨	
+SerializedArtifact0torch._export.serde.serialize.SerializedArtifact"builtins.object*ê
+__init__9torch._export.serde.serialize.SerializedArtifact.__init__"
+None*n
+selfd
+0torch._export.serde.serialize.SerializedArtifact"0torch._export.serde.serialize.SerializedArtifact*6
+exported_program 
+builtins.bytes"builtins.bytes*0
+
+state_dict 
+builtins.bytes"builtins.bytes*/
+	constants 
+builtins.bytes"builtins.bytes*4
+example_inputs 
+builtins.bytes"builtins.bytes8rw
+exported_programAtorch._export.serde.serialize.SerializedArtifact.exported_program 
+builtins.bytes"builtins.bytesrk
+
+state_dict;torch._export.serde.serialize.SerializedArtifact.state_dict 
+builtins.bytes"builtins.bytesri
+	constants:torch._export.serde.serialize.SerializedArtifact.constants 
+builtins.bytes"builtins.bytesrs
+example_inputs?torch._export.serde.serialize.SerializedArtifact.example_inputs 
+builtins.bytes"builtins.bytesr˜
+__dataclass_fields__Etorch._export.serde.serialize.SerializedArtifact.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictù
+
+_SerializedProgram0torch._export.serde.serialize._SerializedProgram"builtins.object*»
+__init__9torch._export.serde.serialize._SerializedProgram.__init__"
+None*n
+selfd
+0torch._export.serde.serialize._SerializedProgram"0torch._export.serde.serialize._SerializedProgram*n
+exported_programX
+*torch._export.serde.schema.ExportedProgram"*torch._export.serde.schema.ExportedProgram*0
+
+state_dict 
+builtins.bytes"builtins.bytes*/
+	constants 
+builtins.bytes"builtins.bytes*4
+example_inputs 
+builtins.bytes"builtins.bytes8rØ
+exported_programAtorch._export.serde.serialize._SerializedProgram.exported_programX
+*torch._export.serde.schema.ExportedProgram"*torch._export.serde.schema.ExportedProgramrk
+
+state_dict;torch._export.serde.serialize._SerializedProgram.state_dict 
+builtins.bytes"builtins.bytesri
+	constants:torch._export.serde.serialize._SerializedProgram.constants 
+builtins.bytes"builtins.bytesrs
+example_inputs?torch._export.serde.serialize._SerializedProgram.example_inputs 
+builtins.bytes"builtins.bytesr˜
+__dataclass_fields__Etorch._export.serde.serialize._SerializedProgram.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictÉ
+
+GraphState(torch._export.serde.serialize.GraphState"builtins.object*®
+__init__1torch._export.serde.serialize.GraphState.__init__"
+None*^
+selfT
+(torch._export.serde.serialize.GraphState"(torch._export.serde.serialize.GraphState*û
+inputsè
+2builtins.list[torch._export.serde.schema.Argument]J
+#torch._export.serde.schema.Argument"#torch._export.serde.schema.Argument"builtins.list *ü
+outputsè
+2builtins.list[torch._export.serde.schema.Argument]J
+#torch._export.serde.schema.Argument"#torch._export.serde.schema.Argument"builtins.list *ë
+nodesÉ
+.builtins.list[torch._export.serde.schema.Node]B
+torch._export.serde.schema.Node"torch._export.serde.schema.Node"builtins.list *÷
+tensor_values¿
+Abuiltins.dict[builtins.str,torch._export.serde.schema.TensorMeta]
+builtins.str"builtins.strN
+%torch._export.serde.schema.TensorMeta"%torch._export.serde.schema.TensorMeta"builtins.dict *À
+sym_int_values¥
+=builtins.dict[builtins.str,torch._export.serde.schema.SymInt]
+builtins.str"builtins.strF
+!torch._export.serde.schema.SymInt"!torch._export.serde.schema.SymInt"builtins.dict *œ
+sym_bool_values∑
+>builtins.dict[builtins.str,torch._export.serde.schema.SymBool]
+builtins.str"builtins.strH
+"torch._export.serde.schema.SymBool""torch._export.serde.schema.SymBool"builtins.dict *=
+is_single_tensor_return
+builtins.bool"builtins.bool *Ô
+custom_obj_values’
+Hbuiltins.dict[builtins.str,torch._export.serde.schema.CustomObjArgument]
+builtins.str"builtins.str\
+,torch._export.serde.schema.CustomObjArgument",torch._export.serde.schema.CustomObjArgument"builtins.dict 8rÀ
+inputs/torch._export.serde.serialize.GraphState.inputsè
+2builtins.list[torch._export.serde.schema.Argument]J
+#torch._export.serde.schema.Argument"#torch._export.serde.schema.Argument"builtins.listrÕ
+outputs0torch._export.serde.serialize.GraphState.outputsè
+2builtins.list[torch._export.serde.schema.Argument]J
+#torch._export.serde.schema.Argument"#torch._export.serde.schema.Argument"builtins.listrΩ
+nodes.torch._export.serde.serialize.GraphState.nodesÉ
+.builtins.list[torch._export.serde.schema.Node]B
+torch._export.serde.schema.Node"torch._export.serde.schema.Node"builtins.listrä
+tensor_values6torch._export.serde.serialize.GraphState.tensor_values¿
+Abuiltins.dict[builtins.str,torch._export.serde.schema.TensorMeta]
+builtins.str"builtins.strN
+%torch._export.serde.schema.TensorMeta"%torch._export.serde.schema.TensorMeta"builtins.dictrÄ
+sym_int_values7torch._export.serde.serialize.GraphState.sym_int_values¥
+=builtins.dict[builtins.str,torch._export.serde.schema.SymInt]
+builtins.str"builtins.strF
+!torch._export.serde.schema.SymInt"!torch._export.serde.schema.SymInt"builtins.dictrÖ
+sym_bool_values8torch._export.serde.serialize.GraphState.sym_bool_values∑
+>builtins.dict[builtins.str,torch._export.serde.schema.SymBool]
+builtins.str"builtins.strH
+"torch._export.serde.schema.SymBool""torch._export.serde.schema.SymBool"builtins.dictr{
+is_single_tensor_return@torch._export.serde.serialize.GraphState.is_single_tensor_return
+builtins.bool"builtins.boolrß
+custom_obj_values:torch._export.serde.serialize.GraphState.custom_obj_values’
+Hbuiltins.dict[builtins.str,torch._export.serde.schema.CustomObjArgument]
+builtins.str"builtins.str\
+,torch._export.serde.schema.CustomObjArgument",torch._export.serde.schema.CustomObjArgument"builtins.dictrÔ
+__dataclass_fields__=torch._export.serde.serialize.GraphState.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dict§
+Final#torch._export.serde.serialize.Final"builtins.type*g
+__new__+torch._export.serde.serialize.Final.__new__*
+metacls*
+name*	
+bases*
+	classdictÓf
+GraphModuleSerializer3torch._export.serde.serialize.GraphModuleSerializer"builtins.object*ç
+__init__<torch._export.serde.serialize.GraphModuleSerializer.__init__"
+None*t
+selfj
+3torch._export.serde.serialize.GraphModuleSerializer"3torch._export.serde.serialize.GraphModuleSerializer*{
+graph_signaturef
+1torch.export.graph_signature.ExportGraphSignature"1torch.export.graph_signature.ExportGraphSignature*≈
+module_call_graph≠
+<builtins.list[torch.export.exported_program.ModuleCallEntry]^
+-torch.export.exported_program.ModuleCallEntry"-torch.export.exported_program.ModuleCallEntry"builtins.list*t
+save_graph_stateDtorch._export.serde.serialize.GraphModuleSerializer.save_graph_state*
+self0:contextmanager*è
+handle_placeholderFtorch._export.serde.serialize.GraphModuleSerializer.handle_placeholder"
+Any*t
+selfj
+3torch._export.serde.serialize.GraphModuleSerializer"3torch._export.serde.serialize.GraphModuleSerializer*2
+node(
+torch.fx.node.Node"torch.fx.node.Node*Ö
+handle_outputAtorch._export.serde.serialize.GraphModuleSerializer.handle_output"
+Any*t
+selfj
+3torch._export.serde.serialize.GraphModuleSerializer"3torch._export.serde.serialize.GraphModuleSerializer*2
+node(
+torch.fx.node.Node"torch.fx.node.Node*Ö
+serialize_operatorFtorch._export.serde.serialize.GraphModuleSerializer.serialize_operator"
+builtins.str"builtins.str*t
+selfj
+3torch._export.serde.serialize.GraphModuleSerializer"3torch._export.serde.serialize.GraphModuleSerializer*
+target
+Any*ì
+handle_call_functionHtorch._export.serde.serialize.GraphModuleSerializer.handle_call_function"
+Any*t
+selfj
+3torch._export.serde.serialize.GraphModuleSerializer"3torch._export.serde.serialize.GraphModuleSerializer*2
+node(
+torch.fx.node.Node"torch.fx.node.Node*j
+handle_get_attrCtorch._export.serde.serialize.GraphModuleSerializer.handle_get_attr*
+self*
+node*Å
+_output_node_at_indexItorch._export.serde.serialize.GraphModuleSerializer._output_node_at_index*
+self*
+node*	
+index*˝
+serialize_metadataFtorch._export.serde.serialize.GraphModuleSerializer.serialize_metadata"u
+(builtins.dict[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.dict*t
+selfj
+3torch._export.serde.serialize.GraphModuleSerializer"3torch._export.serde.serialize.GraphModuleSerializer*2
+node(
+torch.fx.node.Node"torch.fx.node.Node*µ
+serialize_script_obj_metaMtorch._export.serde.serialize.GraphModuleSerializer.serialize_script_obj_meta"\
+,torch._export.serde.schema.CustomObjArgument",torch._export.serde.schema.CustomObjArgument*t
+selfj
+3torch._export.serde.serialize.GraphModuleSerializer"3torch._export.serde.serialize.GraphModuleSerializer*u
+script_obj_meta`
+.torch.export.graph_signature.CustomObjArgument".torch.export.graph_signature.CustomObjArgument*°
+serialize_sym_op_inputsKtorch._export.serde.serialize.GraphModuleSerializer.serialize_sym_op_inputs"û
+7builtins.list[torch._export.serde.schema.NamedArgument]T
+(torch._export.serde.schema.NamedArgument"(torch._export.serde.schema.NamedArgument"builtins.list*t
+selfj
+3torch._export.serde.serialize.GraphModuleSerializer"3torch._export.serde.serialize.GraphModuleSerializer*
+op
+Any*
+args
+Any*Æ
+serialize_inputsDtorch._export.serde.serialize.GraphModuleSerializer.serialize_inputs"û
+7builtins.list[torch._export.serde.schema.NamedArgument]T
+(torch._export.serde.schema.NamedArgument"(torch._export.serde.schema.NamedArgument"builtins.list*t
+selfj
+3torch._export.serde.serialize.GraphModuleSerializer"3torch._export.serde.serialize.GraphModuleSerializer*
+target
+Any*
+args
+Any*
+kwargs
+Any *ü
+serialize_hoo_inputsHtorch._export.serde.serialize.GraphModuleSerializer.serialize_hoo_inputs"û
+7builtins.list[torch._export.serde.schema.NamedArgument]T
+(torch._export.serde.schema.NamedArgument"(torch._export.serde.schema.NamedArgument"builtins.list*t
+selfj
+3torch._export.serde.serialize.GraphModuleSerializer"3torch._export.serde.serialize.GraphModuleSerializer*
+args
+Any*
+kwargs
+Any*¸
+is_sym_int_argBtorch._export.serde.serialize.GraphModuleSerializer.is_sym_int_arg"
+builtins.bool"builtins.bool*t
+selfj
+3torch._export.serde.serialize.GraphModuleSerializer"3torch._export.serde.serialize.GraphModuleSerializer*
+arg
+Any*˛
+is_sym_bool_argCtorch._export.serde.serialize.GraphModuleSerializer.is_sym_bool_arg"
+builtins.bool"builtins.bool*t
+selfj
+3torch._export.serde.serialize.GraphModuleSerializer"3torch._export.serde.serialize.GraphModuleSerializer*
+arg
+Any*è
+serialize_inputCtorch._export.serde.serialize.GraphModuleSerializer.serialize_input"J
+#torch._export.serde.schema.Argument"#torch._export.serde.schema.Argument*t
+selfj
+3torch._export.serde.serialize.GraphModuleSerializer"3torch._export.serde.serialize.GraphModuleSerializer*
+arg
+Any*c
+arg_typeS
+Union[torch._C.Argument,None]&
+torch._C.Argument"torch._C.Argument
+None *ﬁ
+serialize_tensor_outputKtorch._export.serde.serialize.GraphModuleSerializer.serialize_tensor_output"V
+)torch._export.serde.schema.TensorArgument")torch._export.serde.schema.TensorArgument*t
+selfj
+3torch._export.serde.serialize.GraphModuleSerializer"3torch._export.serde.serialize.GraphModuleSerializer*
+name
+Any*
+meta_val
+Any*‡
+serialize_sym_int_outputLtorch._export.serde.serialize.GraphModuleSerializer.serialize_sym_int_output"V
+)torch._export.serde.schema.SymIntArgument")torch._export.serde.schema.SymIntArgument*t
+selfj
+3torch._export.serde.serialize.GraphModuleSerializer"3torch._export.serde.serialize.GraphModuleSerializer*
+name
+Any*
+meta_val
+Any*‚
+serialize_sym_bool_outputMtorch._export.serde.serialize.GraphModuleSerializer.serialize_sym_bool_output"V
+)torch._export.serde.schema.SymIntArgument")torch._export.serde.schema.SymIntArgument*t
+selfj
+3torch._export.serde.serialize.GraphModuleSerializer"3torch._export.serde.serialize.GraphModuleSerializer*
+name
+Any*
+meta_val
+Any*Ä
+serialize_input_specHtorch._export.serde.serialize.GraphModuleSerializer.serialize_input_spec"L
+$torch._export.serde.schema.InputSpec"$torch._export.serde.schema.InputSpec*t
+selfj
+3torch._export.serde.serialize.GraphModuleSerializer"3torch._export.serde.serialize.GraphModuleSerializer*Z
+specP
+&torch.export.graph_signature.InputSpec"&torch.export.graph_signature.InputSpec*Ü
+serialize_output_specItorch._export.serde.serialize.GraphModuleSerializer.serialize_output_spec"N
+%torch._export.serde.schema.OutputSpec"%torch._export.serde.schema.OutputSpec*t
+selfj
+3torch._export.serde.serialize.GraphModuleSerializer"3torch._export.serde.serialize.GraphModuleSerializer*\
+specR
+'torch.export.graph_signature.OutputSpec"'torch.export.graph_signature.OutputSpec*ù
+serialize_signatureGtorch._export.serde.serialize.GraphModuleSerializer.serialize_signature"V
+)torch._export.serde.schema.GraphSignature")torch._export.serde.schema.GraphSignature*t
+selfj
+3torch._export.serde.serialize.GraphModuleSerializer"3torch._export.serde.serialize.GraphModuleSerializer*o
+sigf
+1torch.export.graph_signature.ExportGraphSignature"1torch.export.graph_signature.ExportGraphSignature*ñ
+
+serialize_argument_specKtorch._export.serde.serialize.GraphModuleSerializer.serialize_argument_spec"J
+#torch._export.serde.schema.Argument"#torch._export.serde.schema.Argument*t
+selfj
+3torch._export.serde.serialize.GraphModuleSerializer"3torch._export.serde.serialize.GraphModuleSerializer*Î
+x„
+ÒTypeAlias[Union[torch.export.graph_signature.TensorArgument,torch.export.graph_signature.SymIntArgument,torch.export.graph_signature.ConstantArgument,torch.export.graph_signature.CustomObjArgument,torch.export.graph_signature.TokenArgument]]ø
+ÊUnion[torch.export.graph_signature.TensorArgument,torch.export.graph_signature.SymIntArgument,torch.export.graph_signature.ConstantArgument,torch.export.graph_signature.CustomObjArgument,torch.export.graph_signature.TokenArgument]Z
++torch.export.graph_signature.TensorArgument"+torch.export.graph_signature.TensorArgumentZ
++torch.export.graph_signature.SymIntArgument"+torch.export.graph_signature.SymIntArgument^
+-torch.export.graph_signature.ConstantArgument"-torch.export.graph_signature.ConstantArgument`
+.torch.export.graph_signature.CustomObjArgument".torch.export.graph_signature.CustomObjArgumentX
+*torch.export.graph_signature.TokenArgument"*torch.export.graph_signature.TokenArgument")torch.export.graph_signature.ArgumentSpec*“
+serialize_module_call_signatureStorch._export.serde.serialize.GraphModuleSerializer.serialize_module_call_signature"`
+.torch._export.serde.schema.ModuleCallSignature".torch._export.serde.schema.ModuleCallSignature*t
+selfj
+3torch._export.serde.serialize.GraphModuleSerializer"3torch._export.serde.serialize.GraphModuleSerializer*Å
+module_call_signaturef
+1torch.export.exported_program.ModuleCallSignature"1torch.export.exported_program.ModuleCallSignature*”
+serialize_module_call_graphOtorch._export.serde.serialize.GraphModuleSerializer.serialize_module_call_graph"§
+9builtins.list[torch._export.serde.schema.ModuleCallEntry]X
+*torch._export.serde.schema.ModuleCallEntry"*torch._export.serde.schema.ModuleCallEntry"builtins.list*t
+selfj
+3torch._export.serde.serialize.GraphModuleSerializer"3torch._export.serde.serialize.GraphModuleSerializer*≈
+module_call_graph≠
+<builtins.list[torch.export.exported_program.ModuleCallEntry]^
+-torch.export.exported_program.ModuleCallEntry"-torch.export.exported_program.ModuleCallEntry"builtins.list*ñ
+serialize_outputsEtorch._export.serde.serialize.GraphModuleSerializer.serialize_outputs"è
+2builtins.list[torch._export.serde.schema.Argument]J
+#torch._export.serde.schema.Argument"#torch._export.serde.schema.Argument"builtins.list*t
+selfj
+3torch._export.serde.serialize.GraphModuleSerializer"3torch._export.serde.serialize.GraphModuleSerializer*2
+node(
+torch.fx.node.Node"torch.fx.node.Node*û
+serialize_hoo_outputsItorch._export.serde.serialize.GraphModuleSerializer.serialize_hoo_outputs"è
+2builtins.list[torch._export.serde.schema.Argument]J
+#torch._export.serde.schema.Argument"#torch._export.serde.schema.Argument"builtins.list*t
+selfj
+3torch._export.serde.serialize.GraphModuleSerializer"3torch._export.serde.serialize.GraphModuleSerializer*2
+node(
+torch.fx.node.Node"torch.fx.node.Node*Ÿ
+serialize_outputDtorch._export.serde.serialize.GraphModuleSerializer.serialize_output"J
+#torch._export.serde.schema.Argument"#torch._export.serde.schema.Argument*t
+selfj
+3torch._export.serde.serialize.GraphModuleSerializer"3torch._export.serde.serialize.GraphModuleSerializer*&
+name
+builtins.str"builtins.str*
+meta_val
+Any*∞
+_handle_getitem_usersItorch._export.serde.serialize.GraphModuleSerializer._handle_getitem_users"°
+8builtins.list[torch._export.serde.schema.TensorArgument]V
+)torch._export.serde.schema.TensorArgument")torch._export.serde.schema.TensorArgument"builtins.list*t
+selfj
+3torch._export.serde.serialize.GraphModuleSerializer"3torch._export.serde.serialize.GraphModuleSerializer*2
+node(
+torch.fx.node.Node"torch.fx.node.Node*Ï
+serialize_graphCtorch._export.serde.serialize.GraphModuleSerializer.serialize_graph"D
+ torch._export.serde.schema.Graph" torch._export.serde.schema.Graph*t
+selfj
+3torch._export.serde.serialize.GraphModuleSerializer"3torch._export.serde.serialize.GraphModuleSerializer*X
+graph_moduleF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*Ï
+	serialize=torch._export.serde.serialize.GraphModuleSerializer.serialize"P
+&torch._export.serde.schema.GraphModule"&torch._export.serde.schema.GraphModule*t
+selfj
+3torch._export.serde.serialize.GraphModuleSerializer"3torch._export.serde.serialize.GraphModuleSerializer*X
+graph_moduleF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule8@b#torch._export.serde.serialize.Finalr§
+graph_state?torch._export.serde.serialize.GraphModuleSerializer.graph_stateT
+(torch._export.serde.serialize.GraphState"(torch._export.serde.serialize.GraphStateræ
+graph_signatureCtorch._export.serde.serialize.GraphModuleSerializer.graph_signaturef
+1torch.export.graph_signature.ExportGraphSignature"1torch.export.graph_signature.ExportGraphSignaturerä
+module_call_graphEtorch._export.serde.serialize.GraphModuleSerializer.module_call_graph≠
+<builtins.list[torch.export.exported_program.ModuleCallEntry]^
+-torch.export.exported_program.ModuleCallEntry"-torch.export.exported_program.ModuleCallEntry"builtins.listr·
+custom_objs?torch._export.serde.serialize.GraphModuleSerializer.custom_objsê
+1builtins.dict[builtins.str,torch._C.ScriptObject]
+builtins.str"builtins.str.
+torch._C.ScriptObject"torch._C.ScriptObject"builtins.dictr›
+duplicate_getitem_nodesKtorch._export.serde.serialize.GraphModuleSerializer.duplicate_getitem_nodesu
+(builtins.dict[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.dict≤	
+ExportedProgramSerializer7torch._export.serde.serialize.ExportedProgramSerializer"builtins.object*¶
+__init__@torch._export.serde.serialize.ExportedProgramSerializer.__init__"
+None*|
+selfr
+7torch._export.serde.serialize.ExportedProgramSerializer"7torch._export.serde.serialize.ExportedProgramSerializer*œ
+opset_versionπ
+4Union[builtins.dict[builtins.str,builtins.int],None]u
+(builtins.dict[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int"builtins.dict
+None *®
+	serializeAtorch._export.serde.serialize.ExportedProgramSerializer.serialize"d
+0torch._export.serde.serialize._SerializedProgram"0torch._export.serde.serialize._SerializedProgram*|
+selfr
+7torch._export.serde.serialize.ExportedProgramSerializer"7torch._export.serde.serialize.ExportedProgramSerializer*t
+exported_program^
+-torch.export.exported_program.ExportedProgram"-torch.export.exported_program.ExportedProgram8@b#torch._export.serde.serialize.FinalrÕ
+opset_versionEtorch._export.serde.serialize.ExportedProgramSerializer.opset_versionu
+(builtins.dict[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int"builtins.dictòw
+GraphModuleDeserializer5torch._export.serde.serialize.GraphModuleDeserializer"builtins.object*T
+__init__>torch._export.serde.serialize.GraphModuleDeserializer.__init__*
+self*ú
+save_graph_moduleGtorch._export.serde.serialize.GraphModuleDeserializer.save_graph_module"2
+typing.Iterator[None]
+None"typing.Iterator*x
+selfn
+5torch._export.serde.serialize.GraphModuleDeserializer"5torch._export.serde.serialize.GraphModuleDeserializer0:contextmanager*ö
+deserialize_operatorJtorch._export.serde.serialize.GraphModuleDeserializer.deserialize_operator"
+Any*x
+selfn
+5torch._export.serde.serialize.GraphModuleDeserializer"5torch._export.serde.serialize.GraphModuleDeserializer*3
+serialized_target
+builtins.str"builtins.str*ã
+deserialize_sym_intItorch._export.serde.serialize.GraphModuleDeserializer.deserialize_sym_int"`
+ Union[builtins.int,torch.SymInt]
+builtins.int"builtins.int
+torch.SymInt"torch.SymInt*x
+selfn
+5torch._export.serde.serialize.GraphModuleDeserializer"5torch._export.serde.serialize.GraphModuleDeserializer*M
+sF
+!torch._export.serde.schema.SymInt"!torch._export.serde.schema.SymInt*ï
+deserialize_sym_boolJtorch._export.serde.serialize.GraphModuleDeserializer.deserialize_sym_bool"f
+"Union[builtins.bool,torch.SymBool]
+builtins.bool"builtins.bool
+torch.SymBool"torch.SymBool*x
+selfn
+5torch._export.serde.serialize.GraphModuleDeserializer"5torch._export.serde.serialize.GraphModuleDeserializer*O
+sH
+"torch._export.serde.schema.SymBool""torch._export.serde.schema.SymBool*ô
+deserialize_tensor_metaMtorch._export.serde.serialize.GraphModuleDeserializer.deserialize_tensor_meta"T
+(torch._subclasses.fake_tensor.FakeTensor"(torch._subclasses.fake_tensor.FakeTensor*x
+selfn
+5torch._export.serde.serialize.GraphModuleDeserializer"5torch._export.serde.serialize.GraphModuleDeserializer*_
+tensor_metaN
+%torch._export.serde.schema.TensorMeta"%torch._export.serde.schema.TensorMeta*ø
+deserialize_script_obj_metaQtorch._export.serde.serialize.GraphModuleDeserializer.deserialize_script_obj_meta"`
+.torch.export.graph_signature.CustomObjArgument".torch.export.graph_signature.CustomObjArgument*x
+selfn
+5torch._export.serde.serialize.GraphModuleDeserializer"5torch._export.serde.serialize.GraphModuleDeserializer*q
+script_obj_meta\
+,torch._export.serde.schema.CustomObjArgument",torch._export.serde.schema.CustomObjArgument*˝
+deserialize_graph_outputNtorch._export.serde.serialize.GraphModuleDeserializer.deserialize_graph_output"Å
++Union[torch.fx.node.Node,builtins.int,None](
+torch.fx.node.Node"torch.fx.node.Node
+builtins.int"builtins.int
+None*x
+selfn
+5torch._export.serde.serialize.GraphModuleDeserializer"5torch._export.serde.serialize.GraphModuleDeserializer*
+output
+Any*‡
+deserialize_graphGtorch._export.serde.serialize.GraphModuleDeserializer.deserialize_graph",
+torch.fx.graph.Graph"torch.fx.graph.Graph*x
+selfn
+5torch._export.serde.serialize.GraphModuleDeserializer"5torch._export.serde.serialize.GraphModuleDeserializer*Z
+serialized_graphD
+ torch._export.serde.schema.Graph" torch._export.serde.schema.Graph*ê
+deserialize_nodeFtorch._export.serde.serialize.GraphModuleDeserializer.deserialize_node"
+None*x
+selfn
+5torch._export.serde.serialize.GraphModuleDeserializer"5torch._export.serde.serialize.GraphModuleDeserializer*W
+serialized_nodeB
+torch._export.serde.schema.Node"torch._export.serde.schema.Node*W
+targetK
+CallableType[builtins.function]&
+builtins.function"builtins.function*á
+deserialize_input_specLtorch._export.serde.serialize.GraphModuleDeserializer.deserialize_input_spec"P
+&torch.export.graph_signature.InputSpec"&torch.export.graph_signature.InputSpec*x
+selfn
+5torch._export.serde.serialize.GraphModuleDeserializer"5torch._export.serde.serialize.GraphModuleDeserializer*S
+iL
+$torch._export.serde.schema.InputSpec"$torch._export.serde.schema.InputSpec*ç
+deserialize_output_specMtorch._export.serde.serialize.GraphModuleDeserializer.deserialize_output_spec"R
+'torch.export.graph_signature.OutputSpec"'torch.export.graph_signature.OutputSpec*x
+selfn
+5torch._export.serde.serialize.GraphModuleDeserializer"5torch._export.serde.serialize.GraphModuleDeserializer*U
+oN
+%torch._export.serde.schema.OutputSpec"%torch._export.serde.schema.OutputSpec*ß
+deserialize_signatureKtorch._export.serde.serialize.GraphModuleDeserializer.deserialize_signature"f
+1torch.export.graph_signature.ExportGraphSignature"1torch.export.graph_signature.ExportGraphSignature*x
+selfn
+5torch._export.serde.serialize.GraphModuleDeserializer"5torch._export.serde.serialize.GraphModuleDeserializer*_
+sigV
+)torch._export.serde.schema.GraphSignature")torch._export.serde.schema.GraphSignature*»
+deserializeAtorch._export.serde.serialize.GraphModuleDeserializer.deserialize"|
+<torch._export.serde.serialize.GraphModuleDeserializer.Result"<torch._export.serde.serialize.GraphModuleDeserializer.Result*x
+selfn
+5torch._export.serde.serialize.GraphModuleDeserializer"5torch._export.serde.serialize.GraphModuleDeserializer*m
+serialized_graph_moduleP
+&torch._export.serde.schema.GraphModule"&torch._export.serde.schema.GraphModule*ò
+serialized_state_dict¸
+FUnion[builtins.dict[builtins.str,torch._tensor.Tensor],builtins.bytes]ç
+0builtins.dict[builtins.str,torch._tensor.Tensor]
+builtins.str"builtins.str,
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.dict 
+builtins.bytes"builtins.bytes*ƒ
+	constants¥
+5Union[builtins.dict[builtins.str,Any],builtins.bytes]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict 
+builtins.bytes"builtins.bytes*æ
+example_inputsß
+fUnion[Tuple[builtins.tuple[torch._tensor.Tensor],builtins.dict[builtins.str,Any]],builtins.bytes,None]é
+KTuple[builtins.tuple[torch._tensor.Tensor],builtins.dict[builtins.str,Any]]d
+$builtins.tuple[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.tupleW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict 
+builtins.bytes"builtins.bytes
+None *Î
+symbol_name_to_rangeŒ
+XUnion[builtins.dict[builtins.str,torch.utils._sympy.value_ranges.ValueRanges[Any]],None]Â
+Lbuiltins.dict[builtins.str,torch.utils._sympy.value_ranges.ValueRanges[Any]]
+builtins.str"builtins.strh
+0torch.utils._sympy.value_ranges.ValueRanges[Any]
+Any"+torch.utils._sympy.value_ranges.ValueRanges"builtins.dict
+None *¥
+sync_fx_nodeBtorch._export.serde.serialize.GraphModuleDeserializer.sync_fx_node"
+Any*x
+selfn
+5torch._export.serde.serialize.GraphModuleDeserializer"5torch._export.serde.serialize.GraphModuleDeserializer*&
+name
+builtins.str"builtins.str*5
+fx_node(
+torch.fx.node.Node"torch.fx.node.Node*Ç
+deserialize_sym_op_inputsOtorch._export.serde.serialize.GraphModuleDeserializer.deserialize_sym_op_inputs*
+self*
+
+inputs*ˆ
+deserialize_inputsHtorch._export.serde.serialize.GraphModuleDeserializer.deserialize_inputs"
+Any*x
+selfn
+5torch._export.serde.serialize.GraphModuleDeserializer"5torch._export.serde.serialize.GraphModuleDeserializer*:
+target.
+torch._ops.OpOverload"torch._ops.OpOverload*W
+serialized_nodeB
+torch._export.serde.schema.Node"torch._export.serde.schema.Node*ó
+deserialize_hoo_inputsLtorch._export.serde.serialize.GraphModuleDeserializer.deserialize_hoo_inputs"
+Any*x
+selfn
+5torch._export.serde.serialize.GraphModuleDeserializer"5torch._export.serde.serialize.GraphModuleDeserializer*´
+inputsû
+7builtins.list[torch._export.serde.schema.NamedArgument]T
+(torch._export.serde.schema.NamedArgument"(torch._export.serde.schema.NamedArgument"builtins.list*¥
+deserialize_inputGtorch._export.serde.serialize.GraphModuleDeserializer.deserialize_input"
+Any*x
+selfn
+5torch._export.serde.serialize.GraphModuleDeserializer"5torch._export.serde.serialize.GraphModuleDeserializer*S
+inpJ
+#torch._export.serde.schema.Argument"#torch._export.serde.schema.Argument*–
+deserialize_constant_inputPtorch._export.serde.serialize.GraphModuleDeserializer.deserialize_constant_input"
+Any*x
+selfn
+5torch._export.serde.serialize.GraphModuleDeserializer"5torch._export.serde.serialize.GraphModuleDeserializer*]
+inpT
+(torch._export.serde.schema.ConstantValue"(torch._export.serde.schema.ConstantValue*Å
+deserialize_sym_argumentNtorch._export.serde.serialize.GraphModuleDeserializer.deserialize_sym_argument*
+self*
+sym_arg*Å
+deserialize_sym_op_outputsPtorch._export.serde.serialize.GraphModuleDeserializer.deserialize_sym_op_outputs"
+Any*x
+selfn
+5torch._export.serde.serialize.GraphModuleDeserializer"5torch._export.serde.serialize.GraphModuleDeserializer*W
+serialized_nodeB
+torch._export.serde.schema.Node"torch._export.serde.schema.Node*5
+fx_node(
+torch.fx.node.Node"torch.fx.node.Node*Û
+deserialize_outputsItorch._export.serde.serialize.GraphModuleDeserializer.deserialize_outputs"
+Any*x
+selfn
+5torch._export.serde.serialize.GraphModuleDeserializer"5torch._export.serde.serialize.GraphModuleDeserializer*W
+serialized_nodeB
+torch._export.serde.schema.Node"torch._export.serde.schema.Node*5
+fx_node(
+torch.fx.node.Node"torch.fx.node.Node*Ü
+deserialize_multiple_outputsRtorch._export.serde.serialize.GraphModuleDeserializer.deserialize_multiple_outputs"
+None*x
+selfn
+5torch._export.serde.serialize.GraphModuleDeserializer"5torch._export.serde.serialize.GraphModuleDeserializer*W
+serialized_nodeB
+torch._export.serde.schema.Node"torch._export.serde.schema.Node*5
+fx_node(
+torch.fx.node.Node"torch.fx.node.Node*ª
+deserialize_metadataJtorch._export.serde.serialize.GraphModuleDeserializer.deserialize_metadata"W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*x
+selfn
+5torch._export.serde.serialize.GraphModuleDeserializer"5torch._export.serde.serialize.GraphModuleDeserializer*É
+metadatau
+(builtins.dict[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.dict*ü
+
+deserialize_argument_specOtorch._export.serde.serialize.GraphModuleDeserializer.deserialize_argument_spec"„
+ÒTypeAlias[Union[torch.export.graph_signature.TensorArgument,torch.export.graph_signature.SymIntArgument,torch.export.graph_signature.ConstantArgument,torch.export.graph_signature.CustomObjArgument,torch.export.graph_signature.TokenArgument]]ø
+ÊUnion[torch.export.graph_signature.TensorArgument,torch.export.graph_signature.SymIntArgument,torch.export.graph_signature.ConstantArgument,torch.export.graph_signature.CustomObjArgument,torch.export.graph_signature.TokenArgument]Z
++torch.export.graph_signature.TensorArgument"+torch.export.graph_signature.TensorArgumentZ
++torch.export.graph_signature.SymIntArgument"+torch.export.graph_signature.SymIntArgument^
+-torch.export.graph_signature.ConstantArgument"-torch.export.graph_signature.ConstantArgument`
+.torch.export.graph_signature.CustomObjArgument".torch.export.graph_signature.CustomObjArgumentX
+*torch.export.graph_signature.TokenArgument"*torch.export.graph_signature.TokenArgument")torch.export.graph_signature.ArgumentSpec*x
+selfn
+5torch._export.serde.serialize.GraphModuleDeserializer"5torch._export.serde.serialize.GraphModuleDeserializer*Q
+xJ
+#torch._export.serde.schema.Argument"#torch._export.serde.schema.Argument*€
+!deserialize_module_call_signatureWtorch._export.serde.serialize.GraphModuleDeserializer.deserialize_module_call_signature"f
+1torch.export.exported_program.ModuleCallSignature"1torch.export.exported_program.ModuleCallSignature*x
+selfn
+5torch._export.serde.serialize.GraphModuleDeserializer"5torch._export.serde.serialize.GraphModuleDeserializer*{
+module_call_signature`
+.torch._export.serde.schema.ModuleCallSignature".torch._export.serde.schema.ModuleCallSignature*›
+deserialize_module_call_graphStorch._export.serde.serialize.GraphModuleDeserializer.deserialize_module_call_graph"≠
+<builtins.list[torch.export.exported_program.ModuleCallEntry]^
+-torch.export.exported_program.ModuleCallEntry"-torch.export.exported_program.ModuleCallEntry"builtins.list*x
+selfn
+5torch._export.serde.serialize.GraphModuleDeserializer"5torch._export.serde.serialize.GraphModuleDeserializer*º
+module_call_graph§
+9builtins.list[torch._export.serde.schema.ModuleCallEntry]X
+*torch._export.serde.schema.ModuleCallEntry"*torch._export.serde.schema.ModuleCallEntry"builtins.list8@b#torch._export.serde.serialize.FinalrÚ
+serialized_name_to_nodeMtorch._export.serde.serialize.GraphModuleDeserializer.serialized_name_to_nodeá
+.builtins.dict[builtins.str,torch.fx.node.Node]
+builtins.str"builtins.str(
+torch.fx.node.Node"torch.fx.node.Node"builtins.dictrı
+serialized_name_to_metaMtorch._export.serde.serialize.GraphModuleDeserializer.serialized_name_to_metaä
+ªbuiltins.dict[builtins.str,TypeAlias[Union[torch._subclasses.fake_tensor.FakeTensor,builtins.int,torch.SymInt,builtins.bool,torch.SymBool,torch.export.graph_signature.CustomObjArgument]]]
+builtins.str"builtins.strú
+üTypeAlias[Union[torch._subclasses.fake_tensor.FakeTensor,builtins.int,torch.SymInt,builtins.bool,torch.SymBool,torch.export.graph_signature.CustomObjArgument]]Õ
+îUnion[torch._subclasses.fake_tensor.FakeTensor,builtins.int,torch.SymInt,builtins.bool,torch.SymBool,torch.export.graph_signature.CustomObjArgument]T
+(torch._subclasses.fake_tensor.FakeTensor"(torch._subclasses.fake_tensor.FakeTensor
+builtins.int"builtins.int
+torch.SymInt"torch.SymInt
+builtins.bool"builtins.bool
+torch.SymBool"torch.SymBool`
+.torch.export.graph_signature.CustomObjArgument".torch.export.graph_signature.CustomObjArgument"&torch._export.serde.serialize.MetaType"builtins.dictrM
+graph;torch._export.serde.serialize.GraphModuleDeserializer.graph
+AnyrO
+module<torch._export.serde.serialize.GraphModuleDeserializer.module
+AnyrÆ
+	shape_env?torch._export.serde.serialize.GraphModuleDeserializer.shape_env`
+.torch.fx.experimental.symbolic_shapes.ShapeEnv".torch.fx.experimental.symbolic_shapes.ShapeEnvr∏
+fake_tensor_modeFtorch._export.serde.serialize.GraphModuleDeserializer.fake_tensor_mode\
+,torch._subclasses.fake_tensor.FakeTensorMode",torch._subclasses.fake_tensor.FakeTensorModerΩ
+symbol_name_to_symbolKtorch._export.serde.serialize.GraphModuleDeserializer.symbol_name_to_symbolW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dictrU
+	constants?torch._export.serde.serialize.GraphModuleDeserializer.constants
+Anyr¥
+	signature?torch._export.serde.serialize.GraphModuleDeserializer.signaturef
+1torch.export.graph_signature.ExportGraphSignature"1torch.export.graph_signature.ExportGraphSignaturer 
+symbol_name_to_rangeJtorch._export.serde.serialize.GraphModuleDeserializer.symbol_name_to_rangeÂ
+Lbuiltins.dict[builtins.str,torch.utils._sympy.value_ranges.ValueRanges[Any]]
+builtins.str"builtins.strh
+0torch.utils._sympy.value_ranges.ValueRanges[Any]
+Any"+torch.utils._sympy.value_ranges.ValueRanges"builtins.dictr_
+example_inputsDtorch._export.serde.serialize.GraphModuleDeserializer.example_inputs
+Any¯
+ExportedProgramDeserializer9torch._export.serde.serialize.ExportedProgramDeserializer"builtins.object*∂
+__init__Btorch._export.serde.serialize.ExportedProgramDeserializer.__init__"
+None*Ä
+selfv
+9torch._export.serde.serialize.ExportedProgramDeserializer"9torch._export.serde.serialize.ExportedProgramDeserializer*ÿ
+expected_opset_versionπ
+4Union[builtins.dict[builtins.str,builtins.int],None]u
+(builtins.dict[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int"builtins.dict
+None *º
+deserialize_range_constraintsWtorch._export.serde.serialize.ExportedProgramDeserializer.deserialize_range_constraints"«
+Cbuiltins.dict[Any,torch.utils._sympy.value_ranges.ValueRanges[Any]]
+Anyh
+0torch.utils._sympy.value_ranges.ValueRanges[Any]
+Any"+torch.utils._sympy.value_ranges.ValueRanges"builtins.dict*Ä
+selfv
+9torch._export.serde.serialize.ExportedProgramDeserializer"9torch._export.serde.serialize.ExportedProgramDeserializer*Ä
+symbol_name_to_rangeÂ
+Lbuiltins.dict[builtins.str,torch.utils._sympy.value_ranges.ValueRanges[Any]]
+builtins.str"builtins.strh
+0torch.utils._sympy.value_ranges.ValueRanges[Any]
+Any"+torch.utils._sympy.value_ranges.ValueRanges"builtins.dict*r
+symbol_name_to_symbolW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*á
+deserializeEtorch._export.serde.serialize.ExportedProgramDeserializer.deserialize"^
+-torch.export.exported_program.ExportedProgram"-torch.export.exported_program.ExportedProgram*Ä
+selfv
+9torch._export.serde.serialize.ExportedProgramDeserializer"9torch._export.serde.serialize.ExportedProgramDeserializer*n
+exported_programX
+*torch._export.serde.schema.ExportedProgram"*torch._export.serde.schema.ExportedProgram*ç
+
+state_dict¸
+FUnion[builtins.dict[builtins.str,torch._tensor.Tensor],builtins.bytes]ç
+0builtins.dict[builtins.str,torch._tensor.Tensor]
+builtins.str"builtins.str,
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.dict 
+builtins.bytes"builtins.bytes*å
+	constants¸
+FUnion[builtins.dict[builtins.str,torch._tensor.Tensor],builtins.bytes]ç
+0builtins.dict[builtins.str,torch._tensor.Tensor]
+builtins.str"builtins.str,
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.dict 
+builtins.bytes"builtins.bytes*æ
+example_inputsß
+fUnion[Tuple[builtins.tuple[torch._tensor.Tensor],builtins.dict[builtins.str,Any]],builtins.bytes,None]é
+KTuple[builtins.tuple[torch._tensor.Tensor],builtins.dict[builtins.str,Any]]d
+$builtins.tuple[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.tupleW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict 
+builtins.bytes"builtins.bytes
+None 8@b#torch._export.serde.serialize.Finalr·
+expected_opset_versionPtorch._export.serde.serialize.ExportedProgramDeserializer.expected_opset_versionu
+(builtins.dict[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int"builtins.dict£
+EnumEncoder)torch._export.serde.serialize.EnumEncoder"json.encoder.JSONEncoder*O
+default1torch._export.serde.serialize.EnumEncoder.default*
+self*
+obj
+CustomOpHandler-torch._export.serde.serialize.CustomOpHandler"builtins.object*^
+	namespace7torch._export.serde.serialize.CustomOpHandler.namespace*
+cls0:classmethodp*g
+op_name5torch._export.serde.serialize.CustomOpHandler.op_name*
+cls*
+op_type0:classmethodp*g
+op_type5torch._export.serde.serialize.CustomOpHandler.op_type*
+cls*
+op_name0:classmethodp*k
+	op_schema7torch._export.serde.serialize.CustomOpHandler.op_schema*
+cls*
+op_type0:classmethodpπ
+
+Edges@2428(torch._export.serde.serialize.Edges@2428"builtins.object*§
+__init__1torch._export.serde.serialize.Edges@2428.__init__"
+None*^
+selfT
+(torch._export.serde.serialize.Edges@2428"(torch._export.serde.serialize.Edges@2428*T
+outsJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*%
+ins
+builtins.int"builtins.int8rÅ
+outs-torch._export.serde.serialize.Edges@2428.outsJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.listrQ
+ins,torch._export.serde.serialize.Edges@2428.ins
+builtins.int"builtins.intrÔ
+__dataclass_fields__=torch._export.serde.serialize.Edges@2428.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dict¢
++<subclass of "Argument" and "OptionalType">Itorch._export.serde.serialize.<subclass of "Argument" and "OptionalType">"torch._C.Argument"torch._C.OptionalTypeñ
+'<subclass of "Argument" and "ListType">Etorch._export.serde.serialize.<subclass of "Argument" and "ListType">"torch._C.Argument"torch._C.ListTypeö
+_reverse_map*torch._export.serde.serialize._reverse_map"
+Any*U
+dN
+builtins.dict[Any,enum.Enum]
+Any
+	enum.Enum"	enum.Enum"builtins.dictπ
+deserialize_device0torch._export.serde.serialize.deserialize_device""
+torch._C.device"torch._C.device*M
+dF
+!torch._export.serde.schema.Device"!torch._export.serde.schema.Deviceı
+serialize_sym_int/torch._export.serde.serialize.serialize_sym_int"F
+!torch._export.serde.schema.SymInt"!torch._export.serde.schema.SymInt*g
+s`
+ Union[builtins.int,torch.SymInt]
+builtins.int"builtins.int
+torch.SymInt"torch.SymIntˇ
+serialize_sym_bool0torch._export.serde.serialize.serialize_sym_bool"H
+"torch._export.serde.schema.SymBool""torch._export.serde.schema.SymBool*m
+sf
+"Union[builtins.bool,torch.SymBool]
+builtins.bool"builtins.bool
+torch.SymBool"torch.SymBool—
+serialize_tensor_meta3torch._export.serde.serialize.serialize_tensor_meta"N
+%torch._export.serde.schema.TensorMeta"%torch._export.serde.schema.TensorMeta*3
+t,
+torch._tensor.Tensor"torch._tensor.Tensor∏
+_reduce_fake_tensor1torch._export.serde.serialize._reduce_fake_tensor"
+Any*e
+fake_tensorT
+(torch._subclasses.fake_tensor.FakeTensor"(torch._subclasses.fake_tensor.FakeTensorò
+_reconstruct_fake_tensor6torch._export.serde.serialize._reconstruct_fake_tensor"T
+(torch._subclasses.fake_tensor.FakeTensor"(torch._subclasses.fake_tensor.FakeTensor*<
+serialized_tensor_meta 
+builtins.bytes"builtins.bytes*0
+is_parameter
+builtins.bool"builtins.bool™
+serialize_torch_artifact6torch._export.serde.serialize.serialize_torch_artifact" 
+builtins.bytes"builtins.bytes*4
+artifact&
+Union[Any,None]
+Any
+NoneÎ
+deserialize_torch_artifact8torch._export.serde.serialize.deserialize_torch_artifact"
+Any*â
+
+serialized¯
+IUnion[builtins.dict[builtins.str,Any],builtins.tuple[Any],builtins.bytes]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict.
+builtins.tuple[Any]
+Any"builtins.tuple 
+builtins.bytes"builtins.bytesâ
+_sympy_int_to_int/torch._export.serde.serialize._sympy_int_to_int"
+Any*
+val
+Any*(
+adjust
+builtins.str"builtins.str_
+_int_to_sympy_int/torch._export.serde.serialize._int_to_sympy_int"
+Any*
+val
+Anyå
+serialize_range_constraints9torch._export.serde.serialize.serialize_range_constraints"œ
+Fbuiltins.dict[builtins.str,torch._export.serde.schema.RangeConstraint]
+builtins.str"builtins.strX
+*torch._export.serde.schema.RangeConstraint"*torch._export.serde.schema.RangeConstraint"builtins.dict*ﬂ
+range_constraints«
+Cbuiltins.dict[Any,torch.utils._sympy.value_ranges.ValueRanges[Any]]
+Anyh
+0torch.utils._sympy.value_ranges.ValueRanges[Any]
+Any"+torch.utils._sympy.value_ranges.ValueRanges"builtins.dict\
+_get_schema_from_target5torch._export.serde.serialize._get_schema_from_target*
+
+targetÆ
+_is_single_tensor_return6torch._export.serde.serialize._is_single_tensor_return"
+builtins.bool"builtins.bool*:
+target.
+torch._ops.OpOverload"torch._ops.OpOverloadë
+_is_single_tensor_list_return;torch._export.serde.serialize._is_single_tensor_list_return"
+builtins.bool"builtins.bool*
+target
+AnyO
+_dataclass_to_dict0torch._export.serde.serialize._dataclass_to_dict*
+obj‚
+	serialize'torch._export.serde.serialize.serialize"d
+0torch._export.serde.serialize.SerializedArtifact"0torch._export.serde.serialize.SerializedArtifact*t
+exported_program^
+-torch.export.exported_program.ExportedProgram"-torch.export.exported_program.ExportedProgram*œ
+opset_versionπ
+4Union[builtins.dict[builtins.str,builtins.int],None]u
+(builtins.dict[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int"builtins.dict
+None Y
+_dict_to_dataclass0torch._export.serde.serialize._dict_to_dataclass*
+cls*
+dataÁ
+deserialize)torch._export.serde.serialize.deserialize"^
+-torch.export.exported_program.ExportedProgram"-torch.export.exported_program.ExportedProgram*r
+artifactd
+0torch._export.serde.serialize.SerializedArtifact"0torch._export.serde.serialize.SerializedArtifact*ÿ
+expected_opset_versionπ
+4Union[builtins.dict[builtins.str,builtins.int],None]u
+(builtins.dict[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int"builtins.dict
+None ©
+_canonicalize_graph1torch._export.serde.serialize._canonicalize_graph"ë
+PTuple[torch._export.serde.schema.Graph,builtins.dict[builtins.str,builtins.str]]D
+ torch._export.serde.schema.Graph" torch._export.serde.schema.Graphu
+(builtins.dict[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.dict*
+sorted_inputs
+Any*
+sorted_outputs
+Any*
+graph
+Anyˆ
+canonicalize*torch._export.serde.serialize.canonicalize"X
+*torch._export.serde.schema.ExportedProgram"*torch._export.serde.schema.ExportedProgram*`
+epX
+*torch._export.serde.schema.ExportedProgram"*torch._export.serde.schema.ExportedProgram˙
+register_custom_op_handler8torch._export.serde.serialize.register_custom_op_handler"
+Any*n
+
+op_handler^
+-torch._export.serde.serialize.CustomOpHandler"-torch._export.serde.serialize.CustomOpHandler*)
+op_type
+	Type[Any]
+Any"typeX
+allowed_registered_op_types9torch._export.serde.serialize.allowed_registered_op_types*ô
+__annotations__-torch._export.serde.serialize.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*5
+sympy#torch._export.serde.serialize.sympy
+Any*%
+eptorch.export.exported_program *
+pytreetorch.utils._pytree *|
+__all__%torch._export.serde.serialize.__all__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*J
+log!torch._export.serde.serialize.log 
+logging.Logger"logging.Logger*X
+ST_DELIMITER*torch._export.serde.serialize.ST_DELIMITER
+builtins.str"builtins.str*ù
+_TORCH_TO_SERIALIZE_DTYPE7torch._export.serde.serialize._TORCH_TO_SERIALIZE_DTYPE∆
+Cbuiltins.dict[torch._C.dtype,torch._export.serde.schema.ScalarType] 
+torch._C.dtype"torch._C.dtypeN
+%torch._export.serde.schema.ScalarType"%torch._export.serde.schema.ScalarType"builtins.dict*]
+_SERIALIZE_TO_TORCH_DTYPE7torch._export.serde.serialize._SERIALIZE_TO_TORCH_DTYPE
+Any*Ô
+_TORCH_TO_SERIALIZE_LAYOUT8torch._export.serde.serialize._TORCH_TO_SERIALIZE_LAYOUTñ
+4builtins.dict[Any,torch._export.serde.schema.Layout]
+AnyF
+!torch._export.serde.schema.Layout"!torch._export.serde.schema.Layout"builtins.dict*_
+_SERIALIZE_TO_TORCH_LAYOUT8torch._export.serde.serialize._SERIALIZE_TO_TORCH_LAYOUT
+Any*À
+!_TORCH_TO_SERIALIZE_MEMORY_FORMAT?torch._export.serde.serialize._TORCH_TO_SERIALIZE_MEMORY_FORMAT‰
+Mbuiltins.dict[torch._C.memory_format,torch._export.serde.schema.MemoryFormat]0
+torch._C.memory_format"torch._C.memory_formatR
+'torch._export.serde.schema.MemoryFormat"'torch._export.serde.schema.MemoryFormat"builtins.dict*m
+!_SERIALIZE_TO_TORCH_MEMORY_FORMAT?torch._export.serde.serialize._SERIALIZE_TO_TORCH_MEMORY_FORMAT
+Any*f
+_SYM_INT_OPS*torch._export.serde.serialize._SYM_INT_OPS*
+builtins.set[Any]
+Any"builtins.set*ï
+_SYM_BOOL_OPS+torch._export.serde.serialize._SYM_BOOL_OPSW
+builtins.set[builtins.function]&
+builtins.function"builtins.function"builtins.set*é
+_CURRENT_DESERIALIZER3torch._export.serde.serialize._CURRENT_DESERIALIZERø
+AUnion[torch._export.serde.serialize.GraphModuleDeserializer,None]n
+5torch._export.serde.serialize.GraphModuleDeserializer"5torch._export.serde.serialize.GraphModuleDeserializer
+None*®
+_serialization_registry5torch._export.serde.serialize._serialization_registry’
+Fbuiltins.dict[Type[Any],torch._export.serde.serialize.CustomOpHandler]
+	Type[Any]
+Any"type^
+-torch._export.serde.serialize.CustomOpHandler"-torch._export.serde.serialize.CustomOpHandler"builtins.dict*Ø
+_deserialization_registry7torch._export.serde.serialize._deserialization_registryÿ
+Ibuiltins.dict[builtins.str,torch._export.serde.serialize.CustomOpHandler]
+builtins.str"builtins.str^
+-torch._export.serde.serialize.CustomOpHandler"-torch._export.serde.serialize.CustomOpHandler"builtins.dict

@@ -1,0 +1,156 @@
+
+'torch.distributed.fsdp._fsdp_extensions√
+FSDPExtensions6torch.distributed.fsdp._fsdp_extensions.FSDPExtensions"abc.ABC*∑
+pre_flatten_transformLtorch.distributed.fsdp._fsdp_extensions.FSDPExtensions.pre_flatten_transform"Ö
++Tuple[torch._tensor.Tensor,Union[Any,None]],
+torch._tensor.Tensor"torch._tensor.Tensor&
+Union[Any,None]
+Any
+None*z
+selfp
+6torch.distributed.fsdp._fsdp_extensions.FSDPExtensions"6torch.distributed.fsdp._fsdp_extensions.FSDPExtensions*8
+tensor,
+torch._tensor.Tensor"torch._tensor.Tensor0:abstractmethod@*Å
+post_unflatten_transformOtorch.distributed.fsdp._fsdp_extensions.FSDPExtensions.post_unflatten_transform",
+torch._tensor.Tensor"torch._tensor.Tensor*z
+selfp
+6torch.distributed.fsdp._fsdp_extensions.FSDPExtensions"6torch.distributed.fsdp._fsdp_extensions.FSDPExtensions*8
+tensor,
+torch._tensor.Tensor"torch._tensor.Tensor*
+param_extension
+Any0:abstractmethod@*í
+chunk_tensorCtorch.distributed.fsdp._fsdp_extensions.FSDPExtensions.chunk_tensor",
+torch._tensor.Tensor"torch._tensor.Tensor*z
+selfp
+6torch.distributed.fsdp._fsdp_extensions.FSDPExtensions"6torch.distributed.fsdp._fsdp_extensions.FSDPExtensions*8
+tensor,
+torch._tensor.Tensor"torch._tensor.Tensor*&
+rank
+builtins.int"builtins.int*,
+
+world_size
+builtins.int"builtins.int*6
+num_devices_per_node
+builtins.int"builtins.int*Z
+pgR
+'torch._C._distributed_c10d.ProcessGroup"'torch._C._distributed_c10d.ProcessGroup*[
+deviceM
+Union[torch._C.device,None]"
+torch._C.device"torch._C.device
+None 0:abstractmethod@*‹
+chunk_dtensorDtorch.distributed.fsdp._fsdp_extensions.FSDPExtensions.chunk_dtensor",
+torch._tensor.Tensor"torch._tensor.Tensor*z
+selfp
+6torch.distributed.fsdp._fsdp_extensions.FSDPExtensions"6torch.distributed.fsdp._fsdp_extensions.FSDPExtensions*8
+tensor,
+torch._tensor.Tensor"torch._tensor.Tensor*&
+rank
+builtins.int"builtins.int*e
+device_meshT
+(torch.distributed.device_mesh.DeviceMesh"(torch.distributed.device_mesh.DeviceMesh0:abstractmethod@*î
+pre_load_state_dict_transformTtorch.distributed.fsdp._fsdp_extensions.FSDPExtensions.pre_load_state_dict_transform"“
+^Tuple[torch._tensor.Tensor,builtins.list[torch.distributed._shard.sharded_tensor.shard.Shard]],
+torch._tensor.Tensor"torch._tensor.Tensorø
+Bbuiltins.list[torch.distributed._shard.sharded_tensor.shard.Shard]j
+3torch.distributed._shard.sharded_tensor.shard.Shard"3torch.distributed._shard.sharded_tensor.shard.Shard"builtins.list*z
+selfp
+6torch.distributed.fsdp._fsdp_extensions.FSDPExtensions"6torch.distributed.fsdp._fsdp_extensions.FSDPExtensions*8
+tensor,
+torch._tensor.Tensor"torch._tensor.Tensor0:abstractmethod@*¶
+all_gather_dtensorItorch.distributed.fsdp._fsdp_extensions.FSDPExtensions.all_gather_dtensor",
+torch._tensor.Tensor"torch._tensor.Tensor*z
+selfp
+6torch.distributed.fsdp._fsdp_extensions.FSDPExtensions"6torch.distributed.fsdp._fsdp_extensions.FSDPExtensions*Z
+tensorN
+%torch.distributed._tensor.api.DTensor"%torch.distributed._tensor.api.DTensor*™
+parent_meshò
+4Union[torch.distributed.device_mesh.DeviceMesh,None]T
+(torch.distributed.device_mesh.DeviceMesh"(torch.distributed.device_mesh.DeviceMesh
+None0:abstractmethod@ﬂ
+_set_fsdp_extensions<torch.distributed.fsdp._fsdp_extensions._set_fsdp_extensions"
+None*
+	flattenerp
+6torch.distributed.fsdp._fsdp_extensions.FSDPExtensions"6torch.distributed.fsdp._fsdp_extensions.FSDPExtensions˛
+_ext_pre_flatten_transformBtorch.distributed.fsdp._fsdp_extensions._ext_pre_flatten_transform"Ö
++Tuple[torch._tensor.Tensor,Union[Any,None]],
+torch._tensor.Tensor"torch._tensor.Tensor&
+Union[Any,None]
+Any
+None*8
+tensor,
+torch._tensor.Tensor"torch._tensor.Tensor*Ÿ
+fsdp_extension¬
+BUnion[torch.distributed.fsdp._fsdp_extensions.FSDPExtensions,None]p
+6torch.distributed.fsdp._fsdp_extensions.FSDPExtensions"6torch.distributed.fsdp._fsdp_extensions.FSDPExtensions
+None »
+_ext_post_unflatten_transformEtorch.distributed.fsdp._fsdp_extensions._ext_post_unflatten_transform",
+torch._tensor.Tensor"torch._tensor.Tensor*8
+tensor,
+torch._tensor.Tensor"torch._tensor.Tensor*
+param_extension
+Any*Ÿ
+fsdp_extension¬
+BUnion[torch.distributed.fsdp._fsdp_extensions.FSDPExtensions,None]p
+6torch.distributed.fsdp._fsdp_extensions.FSDPExtensions"6torch.distributed.fsdp._fsdp_extensions.FSDPExtensions
+None ¸
+_ext_chunk_tensor9torch.distributed.fsdp._fsdp_extensions._ext_chunk_tensor",
+torch._tensor.Tensor"torch._tensor.Tensor*8
+tensor,
+torch._tensor.Tensor"torch._tensor.Tensor*&
+rank
+builtins.int"builtins.int*,
+
+world_size
+builtins.int"builtins.int*6
+num_devices_per_node
+builtins.int"builtins.int*Z
+pgR
+'torch._C._distributed_c10d.ProcessGroup"'torch._C._distributed_c10d.ProcessGroup*Ÿ
+fsdp_extension¬
+BUnion[torch.distributed.fsdp._fsdp_extensions.FSDPExtensions,None]p
+6torch.distributed.fsdp._fsdp_extensions.FSDPExtensions"6torch.distributed.fsdp._fsdp_extensions.FSDPExtensions
+None £
+_ext_chunk_dtensor:torch.distributed.fsdp._fsdp_extensions._ext_chunk_dtensor",
+torch._tensor.Tensor"torch._tensor.Tensor*8
+tensor,
+torch._tensor.Tensor"torch._tensor.Tensor*&
+rank
+builtins.int"builtins.int*e
+device_meshT
+(torch.distributed.device_mesh.DeviceMesh"(torch.distributed.device_mesh.DeviceMesh*Ÿ
+fsdp_extension¬
+BUnion[torch.distributed.fsdp._fsdp_extensions.FSDPExtensions,None]p
+6torch.distributed.fsdp._fsdp_extensions.FSDPExtensions"6torch.distributed.fsdp._fsdp_extensions.FSDPExtensions
+None €
+"_ext_pre_load_state_dict_transformJtorch.distributed.fsdp._fsdp_extensions._ext_pre_load_state_dict_transform"“
+^Tuple[torch._tensor.Tensor,builtins.list[torch.distributed._shard.sharded_tensor.shard.Shard]],
+torch._tensor.Tensor"torch._tensor.Tensorø
+Bbuiltins.list[torch.distributed._shard.sharded_tensor.shard.Shard]j
+3torch.distributed._shard.sharded_tensor.shard.Shard"3torch.distributed._shard.sharded_tensor.shard.Shard"builtins.list*8
+tensor,
+torch._tensor.Tensor"torch._tensor.Tensor*Ÿ
+fsdp_extension¬
+BUnion[torch.distributed.fsdp._fsdp_extensions.FSDPExtensions,None]p
+6torch.distributed.fsdp._fsdp_extensions.FSDPExtensions"6torch.distributed.fsdp._fsdp_extensions.FSDPExtensions
+None Ì
+_ext_all_gather_dtensor?torch.distributed.fsdp._fsdp_extensions._ext_all_gather_dtensor",
+torch._tensor.Tensor"torch._tensor.Tensor*Z
+tensorN
+%torch.distributed._tensor.api.DTensor"%torch.distributed._tensor.api.DTensor*™
+parent_meshò
+4Union[torch.distributed.device_mesh.DeviceMesh,None]T
+(torch.distributed.device_mesh.DeviceMesh"(torch.distributed.device_mesh.DeviceMesh
+None*Ÿ
+fsdp_extension¬
+BUnion[torch.distributed.fsdp._fsdp_extensions.FSDPExtensions,None]p
+6torch.distributed.fsdp._fsdp_extensions.FSDPExtensions"6torch.distributed.fsdp._fsdp_extensions.FSDPExtensions
+None *£
+__annotations__7torch.distributed.fsdp._fsdp_extensions.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*
+disttorch.distributed *á
+_extensions3torch.distributed.fsdp._fsdp_extensions._extensions¬
+BUnion[torch.distributed.fsdp._fsdp_extensions.FSDPExtensions,None]p
+6torch.distributed.fsdp._fsdp_extensions.FSDPExtensions"6torch.distributed.fsdp._fsdp_extensions.FSDPExtensions
+None

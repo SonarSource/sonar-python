@@ -1,0 +1,321 @@
+
++torch.ao.nn.quantized.reference.modules.rnn–
+
+RNNCellBase7torch.ao.nn.quantized.reference.modules.rnn.RNNCellBase" torch.nn.modules.rnn.RNNCellBase*⁄
+__init__@torch.ao.nn.quantized.reference.modules.rnn.RNNCellBase.__init__"
+None*|
+selfr
+7torch.ao.nn.quantized.reference.modules.rnn.RNNCellBase"7torch.ao.nn.quantized.reference.modules.rnn.RNNCellBase*,
+
+input_size
+builtins.int"builtins.int*-
+hidden_size
+builtins.int"builtins.int*(
+bias
+builtins.bool"builtins.bool*,
+
+num_chunks
+builtins.int"builtins.int*
+device
+Any *
+dtype
+Any *"
+weight_qparams_dict
+Any *ù
+_init_weight_qparams_dictQtorch.ao.nn.quantized.reference.modules.rnn.RNNCellBase._init_weight_qparams_dict*
+self*
+weight_qparams_dict*
+
+device*X
+	_get_nameAtorch.ao.nn.quantized.reference.modules.rnn.RNNCellBase._get_name*
+self*t
+get_quantized_weight_ihOtorch.ao.nn.quantized.reference.modules.rnn.RNNCellBase.get_quantized_weight_ih*
+self*t
+get_quantized_weight_hhOtorch.ao.nn.quantized.reference.modules.rnn.RNNCellBase.get_quantized_weight_hh*
+self*`
+get_weight_ihEtorch.ao.nn.quantized.reference.modules.rnn.RNNCellBase.get_weight_ih*
+self*`
+get_weight_hhEtorch.ao.nn.quantized.reference.modules.rnn.RNNCellBase.get_weight_hh*
+selfr_
+is_decomposedEtorch.ao.nn.quantized.reference.modules.rnn.RNNCellBase.is_decomposed
+Any∫
+RNNCell3torch.ao.nn.quantized.reference.modules.rnn.RNNCell"7torch.ao.nn.quantized.reference.modules.rnn.RNNCellBase*·
+__init__<torch.ao.nn.quantized.reference.modules.rnn.RNNCell.__init__"
+None*t
+selfj
+3torch.ao.nn.quantized.reference.modules.rnn.RNNCell"3torch.ao.nn.quantized.reference.modules.rnn.RNNCell*,
+
+input_size
+builtins.int"builtins.int*-
+hidden_size
+builtins.int"builtins.int**
+bias
+builtins.bool"builtins.bool *0
+nonlinearity
+builtins.str"builtins.str *
+device
+Any *
+dtype
+Any *Æ
+weight_qparams_dictí
++Union[builtins.dict[builtins.str,Any],None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None *T
+	_get_name=torch.ao.nn.quantized.reference.modules.rnn.RNNCell._get_name*
+self*ã
+forward;torch.ao.nn.quantized.reference.modules.rnn.RNNCell.forward",
+torch._tensor.Tensor"torch._tensor.Tensor*t
+selfj
+3torch.ao.nn.quantized.reference.modules.rnn.RNNCell"3torch.ao.nn.quantized.reference.modules.rnn.RNNCell*7
+input,
+torch._tensor.Tensor"torch._tensor.Tensor*f
+hx\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None *à
+
+from_float>torch.ao.nn.quantized.reference.modules.rnn.RNNCell.from_float*
+cls*
+mod*
+weight_qparams_dict0:classmethodprn
+nonlinearity@torch.ao.nn.quantized.reference.modules.rnn.RNNCell.nonlinearity
+builtins.str"builtins.str¨
+LSTMCell4torch.ao.nn.quantized.reference.modules.rnn.LSTMCell"7torch.ao.nn.quantized.reference.modules.rnn.RNNCellBase*≤
+__init__=torch.ao.nn.quantized.reference.modules.rnn.LSTMCell.__init__"
+None*v
+selfl
+4torch.ao.nn.quantized.reference.modules.rnn.LSTMCell"4torch.ao.nn.quantized.reference.modules.rnn.LSTMCell*,
+
+input_size
+builtins.int"builtins.int*-
+hidden_size
+builtins.int"builtins.int**
+bias
+builtins.bool"builtins.bool *
+device
+Any *
+dtype
+Any *Æ
+weight_qparams_dictí
++Union[builtins.dict[builtins.str,Any],None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None *U
+	_get_name>torch.ao.nn.quantized.reference.modules.rnn.LSTMCell._get_name*
+self*ˆ
+forward<torch.ao.nn.quantized.reference.modules.rnn.LSTMCell.forward"ê
+0Tuple[torch._tensor.Tensor,torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor,
+torch._tensor.Tensor"torch._tensor.Tensor*v
+selfl
+4torch.ao.nn.quantized.reference.modules.rnn.LSTMCell"4torch.ao.nn.quantized.reference.modules.rnn.LSTMCell*7
+input,
+torch._tensor.Tensor"torch._tensor.Tensor*Ë
+hx›
+<Union[Tuple[torch._tensor.Tensor,torch._tensor.Tensor],None]ê
+0Tuple[torch._tensor.Tensor,torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor,
+torch._tensor.Tensor"torch._tensor.Tensor
+None *´
+
+from_float?torch.ao.nn.quantized.reference.modules.rnn.LSTMCell.from_float*
+cls*
+mod*
+weight_qparams_dict* 
+use_precomputed_fake_quant 0:classmethodpò
+
+GRUCell3torch.ao.nn.quantized.reference.modules.rnn.GRUCell"7torch.ao.nn.quantized.reference.modules.rnn.RNNCellBase*Ø
+__init__<torch.ao.nn.quantized.reference.modules.rnn.GRUCell.__init__"
+None*t
+selfj
+3torch.ao.nn.quantized.reference.modules.rnn.GRUCell"3torch.ao.nn.quantized.reference.modules.rnn.GRUCell*,
+
+input_size
+builtins.int"builtins.int*-
+hidden_size
+builtins.int"builtins.int**
+bias
+builtins.bool"builtins.bool *
+device
+Any *
+dtype
+Any *Æ
+weight_qparams_dictí
++Union[builtins.dict[builtins.str,Any],None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None *T
+	_get_name=torch.ao.nn.quantized.reference.modules.rnn.GRUCell._get_name*
+self*ã
+forward;torch.ao.nn.quantized.reference.modules.rnn.GRUCell.forward",
+torch._tensor.Tensor"torch._tensor.Tensor*t
+selfj
+3torch.ao.nn.quantized.reference.modules.rnn.GRUCell"3torch.ao.nn.quantized.reference.modules.rnn.GRUCell*7
+input,
+torch._tensor.Tensor"torch._tensor.Tensor*f
+hx\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None *à
+
+from_float>torch.ao.nn.quantized.reference.modules.rnn.GRUCell.from_float*
+cls*
+mod*
+weight_qparams_dict0:classmethodpß	
+RNNBase3torch.ao.nn.quantized.reference.modules.rnn.RNNBase"torch.nn.modules.rnn.RNNBase*œ
+__init__<torch.ao.nn.quantized.reference.modules.rnn.RNNBase.__init__"
+None*t
+selfj
+3torch.ao.nn.quantized.reference.modules.rnn.RNNBase"3torch.ao.nn.quantized.reference.modules.rnn.RNNBase*&
+mode
+builtins.str"builtins.str*,
+
+input_size
+builtins.int"builtins.int*-
+hidden_size
+builtins.int"builtins.int*.
+
+num_layers
+builtins.int"builtins.int **
+bias
+builtins.bool"builtins.bool *1
+batch_first
+builtins.bool"builtins.bool */
+dropout 
+builtins.float"builtins.float *3
+bidirectional
+builtins.bool"builtins.bool *-
+	proj_size
+builtins.int"builtins.int *
+device
+Any *
+dtype
+Any *Æ
+weight_qparams_dictí
++Union[builtins.dict[builtins.str,Any],None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None *ô
+_init_weight_qparams_dictMtorch.ao.nn.quantized.reference.modules.rnn.RNNBase._init_weight_qparams_dict*
+self*
+weight_qparams_dict*
+
+devicer[
+is_decomposedAtorch.ao.nn.quantized.reference.modules.rnn.RNNBase.is_decomposed
+Any˙
+LSTM0torch.ao.nn.quantized.reference.modules.rnn.LSTM"3torch.ao.nn.quantized.reference.modules.rnn.RNNBase*e
+__init__9torch.ao.nn.quantized.reference.modules.rnn.LSTM.__init__*
+self*
+args*
+
+kwargs*ﬂ
+permute_hidden?torch.ao.nn.quantized.reference.modules.rnn.LSTM.permute_hidden"ê
+0Tuple[torch._tensor.Tensor,torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor,
+torch._tensor.Tensor"torch._tensor.Tensor*n
+selfd
+0torch.ao.nn.quantized.reference.modules.rnn.LSTM"0torch.ao.nn.quantized.reference.modules.rnn.LSTM*ô
+hxê
+0Tuple[torch._tensor.Tensor,torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor,
+torch._tensor.Tensor"torch._tensor.Tensor*m
+permutation\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None*á
+get_expected_cell_sizeGtorch.ao.nn.quantized.reference.modules.rnn.LSTM.get_expected_cell_size"ã
+-Tuple[builtins.int,builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int*n
+selfd
+0torch.ao.nn.quantized.reference.modules.rnn.LSTM"0torch.ao.nn.quantized.reference.modules.rnn.LSTM*7
+input,
+torch._tensor.Tensor"torch._tensor.Tensor*m
+batch_sizes\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None*ö
+check_forward_argsCtorch.ao.nn.quantized.reference.modules.rnn.LSTM.check_forward_args"
+Any*n
+selfd
+0torch.ao.nn.quantized.reference.modules.rnn.LSTM"0torch.ao.nn.quantized.reference.modules.rnn.LSTM*7
+input,
+torch._tensor.Tensor"torch._tensor.Tensor*ù
+hiddenê
+0Tuple[torch._tensor.Tensor,torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor,
+torch._tensor.Tensor"torch._tensor.Tensor*m
+batch_sizes\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None*{
+get_quantized_weight_bias_dictOtorch.ao.nn.quantized.reference.modules.rnn.LSTM.get_quantized_weight_bias_dict*
+self*_
+get_flat_weightsAtorch.ao.nn.quantized.reference.modules.rnn.LSTM.get_flat_weights*
+self*b
+forward8torch.ao.nn.quantized.reference.modules.rnn.LSTM.forward*
+self*	
+input*
+hx *Q
+	_get_name:torch.ao.nn.quantized.reference.modules.rnn.LSTM._get_name*
+self*Ö
+
+from_float;torch.ao.nn.quantized.reference.modules.rnn.LSTM.from_float*
+cls*
+mod*
+weight_qparams_dict0:classmethodpÈ
+GRU/torch.ao.nn.quantized.reference.modules.rnn.GRU"3torch.ao.nn.quantized.reference.modules.rnn.RNNBase*d
+__init__8torch.ao.nn.quantized.reference.modules.rnn.GRU.__init__*
+self*
+args*
+
+kwargs*z
+get_quantized_weight_bias_dictNtorch.ao.nn.quantized.reference.modules.rnn.GRU.get_quantized_weight_bias_dict*
+self*^
+get_flat_weights@torch.ao.nn.quantized.reference.modules.rnn.GRU.get_flat_weights*
+self*a
+forward7torch.ao.nn.quantized.reference.modules.rnn.GRU.forward*
+self*	
+input*
+hx *P
+	_get_name9torch.ao.nn.quantized.reference.modules.rnn.GRU._get_name*
+self*Ñ
+
+from_float:torch.ao.nn.quantized.reference.modules.rnn.GRU.from_float*
+cls*
+mod*
+weight_qparams_dict0:classmethodp§
+_apply_permutation>torch.ao.nn.quantized.reference.modules.rnn._apply_permutation",
+torch._tensor.Tensor"torch._tensor.Tensor*8
+tensor,
+torch._tensor.Tensor"torch._tensor.Tensor*=
+permutation,
+torch._tensor.Tensor"torch._tensor.Tensor*'
+dim
+builtins.int"builtins.int ä
+#_get_weight_and_quantization_paramsOtorch.ao.nn.quantized.reference.modules.rnn._get_weight_and_quantization_params*
+
+module*
+wnl
+get_quantized_weight@torch.ao.nn.quantized.reference.modules.rnn.get_quantized_weight*
+
+module*
+wnå
+$_get_quantize_and_dequantized_weightPtorch.ao.nn.quantized.reference.modules.rnn._get_quantize_and_dequantized_weight*
+
+module*
+wn*ß
+__annotations__;torch.ao.nn.quantized.reference.modules.rnn.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*
+nntorch.nn *ä
+__all__3torch.ao.nn.quantized.reference.modules.rnn.__all__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list

@@ -1,0 +1,618 @@
+
+torch.onnx._internal.exporter‹
+ONNXFakeContext-torch.onnx._internal.exporter.ONNXFakeContext"builtins.object*À
+__init__6torch.onnx._internal.exporter.ONNXFakeContext.__init__"
+None*h
+self^
+-torch.onnx._internal.exporter.ONNXFakeContext"-torch.onnx._internal.exporter.ONNXFakeContext*k
+	fake_mode\
+,torch._subclasses.fake_tensor.FakeTensorMode",torch._subclasses.fake_tensor.FakeTensorMode*š
+state_dict_paths
+QUnion[Tuple[Union[builtins.str,io.BytesIO,builtins.dict[builtins.str,Any]]],None]Ÿ
+ETuple[Union[builtins.str,io.BytesIO,builtins.dict[builtins.str,Any]]]Ó
+>Union[builtins.str,io.BytesIO,builtins.dict[builtins.str,Any]]
+builtins.str"builtins.str
+
+io.BytesIO"
+io.BytesIOW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None 8r¢
+	fake_mode7torch.onnx._internal.exporter.ONNXFakeContext.fake_mode\
+,torch._subclasses.fake_tensor.FakeTensorMode",torch._subclasses.fake_tensor.FakeTensorModerÖ
+state_dict_paths>torch.onnx._internal.exporter.ONNXFakeContext.state_dict_paths
+QUnion[Tuple[Union[builtins.str,io.BytesIO,builtins.dict[builtins.str,Any]]],None]Ÿ
+ETuple[Union[builtins.str,io.BytesIO,builtins.dict[builtins.str,Any]]]Ó
+>Union[builtins.str,io.BytesIO,builtins.dict[builtins.str,Any]]
+builtins.str"builtins.str
+
+io.BytesIO"
+io.BytesIOW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+Nonerô
+__dataclass_fields__Btorch.onnx._internal.exporter.ONNXFakeContext.__dataclass_fields__—
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dict•
+OnnxRegistry*torch.onnx._internal.exporter.OnnxRegistry"builtins.object*­
+__init__3torch.onnx._internal.exporter.OnnxRegistry.__init__"
+None*b
+selfX
+*torch.onnx._internal.exporter.OnnxRegistry"*torch.onnx._internal.exporter.OnnxRegistry*Ù
+opset_version8torch.onnx._internal.exporter.OnnxRegistry.opset_version"
+builtins.int"builtins.int*b
+selfX
+*torch.onnx._internal.exporter.OnnxRegistry"*torch.onnx._internal.exporter.OnnxRegistry0:property`*ü
+ _initiate_registry_from_torchlibKtorch.onnx._internal.exporter.OnnxRegistry._initiate_registry_from_torchlib"
+Any*b
+selfX
+*torch.onnx._internal.exporter.OnnxRegistry"*torch.onnx._internal.exporter.OnnxRegistry*
+torchlib_registry
+Any*½
+	_register4torch.onnx._internal.exporter.OnnxRegistry._register"
+None*b
+selfX
+*torch.onnx._internal.exporter.OnnxRegistry"*torch.onnx._internal.exporter.OnnxRegistry*w
+internal_qualified_nameZ
++torch.onnx._internal.fx.registration.OpName"+torch.onnx._internal.fx.registration.OpName*}
+symbolic_functionf
+1torch.onnx._internal.fx.registration.ONNXFunction"1torch.onnx._internal.fx.registration.ONNXFunction0:_beartype.beartype*Ý
+register_op6torch.onnx._internal.exporter.OnnxRegistry.register_op"
+None*b
+selfX
+*torch.onnx._internal.exporter.OnnxRegistry"*torch.onnx._internal.exporter.OnnxRegistry*2
+function$
+Union[Any,Any]
+Any
+Any*+
+	namespace
+builtins.str"builtins.str*)
+op_name
+builtins.str"builtins.str*T
+overloadD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *0
+
+is_complex
+builtins.bool"builtins.bool 0:_beartype.beartype*
+get_op_functions;torch.onnx._internal.exporter.OnnxRegistry.get_op_functions"–
+LUnion[builtins.list[torch.onnx._internal.fx.registration.ONNXFunction],None]¹
+@builtins.list[torch.onnx._internal.fx.registration.ONNXFunction]f
+1torch.onnx._internal.fx.registration.ONNXFunction"1torch.onnx._internal.fx.registration.ONNXFunction"builtins.list
+None*b
+selfX
+*torch.onnx._internal.exporter.OnnxRegistry"*torch.onnx._internal.exporter.OnnxRegistry*+
+	namespace
+builtins.str"builtins.str*)
+op_name
+builtins.str"builtins.str*T
+overloadD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None 0:_beartype.beartype*—
+is_registered_op;torch.onnx._internal.exporter.OnnxRegistry.is_registered_op"
+builtins.bool"builtins.bool*b
+selfX
+*torch.onnx._internal.exporter.OnnxRegistry"*torch.onnx._internal.exporter.OnnxRegistry*+
+	namespace
+builtins.str"builtins.str*)
+op_name
+builtins.str"builtins.str*T
+overloadD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None 0:_beartype.beartype*™
+_all_registered_ops>torch.onnx._internal.exporter.OnnxRegistry._all_registered_ops"H
+builtins.set[builtins.str]
+builtins.str"builtins.str"builtins.set*b
+selfX
+*torch.onnx._internal.exporter.OnnxRegistry"*torch.onnx._internal.exporter.OnnxRegistry0:_beartype.beartyperè
+	_registry4torch.onnx._internal.exporter.OnnxRegistry._registry¤
+{builtins.dict[torch.onnx._internal.fx.registration.OpName,builtins.list[torch.onnx._internal.fx.registration.ONNXFunction]]Z
++torch.onnx._internal.fx.registration.OpName"+torch.onnx._internal.fx.registration.OpName¹
+@builtins.list[torch.onnx._internal.fx.registration.ONNXFunction]f
+1torch.onnx._internal.fx.registration.ONNXFunction"1torch.onnx._internal.fx.registration.ONNXFunction"builtins.list"builtins.dictri
+_opset_version9torch.onnx._internal.exporter.OnnxRegistry._opset_version
+builtins.int"builtins.intµ
+ExportOptions+torch.onnx._internal.exporter.ExportOptions"builtins.object*ö
+__init__4torch.onnx._internal.exporter.ExportOptions.__init__"
+None*d
+selfZ
++torch.onnx._internal.exporter.ExportOptions"+torch.onnx._internal.exporter.ExportOptions*]
+dynamic_shapesG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *]
+op_level_debugG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *¼
+fake_context§
+9Union[torch.onnx._internal.exporter.ONNXFakeContext,None]^
+-torch.onnx._internal.exporter.ONNXFakeContext"-torch.onnx._internal.exporter.ONNXFakeContext
+None *´
+onnx_registryž
+6Union[torch.onnx._internal.exporter.OnnxRegistry,None]X
+*torch.onnx._internal.exporter.OnnxRegistry"*torch.onnx._internal.exporter.OnnxRegistry
+None *ù
+diagnostic_optionsÞ
+KUnion[torch.onnx._internal.diagnostics.infra._infra.DiagnosticOptions,None]‚
+?torch.onnx._internal.diagnostics.infra._infra.DiagnosticOptions"?torch.onnx._internal.diagnostics.infra._infra.DiagnosticOptions
+None 0:_beartype.beartyper•
+dynamic_shapes:torch.onnx._internal.exporter.ExportOptions.dynamic_shapesG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+Noner•
+op_level_debug:torch.onnx._internal.exporter.ExportOptions.op_level_debugG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+NonerÙ
+diagnostic_options>torch.onnx._internal.exporter.ExportOptions.diagnostic_options‚
+?torch.onnx._internal.diagnostics.infra._infra.DiagnosticOptions"?torch.onnx._internal.diagnostics.infra._infra.DiagnosticOptionsrò
+fake_context8torch.onnx._internal.exporter.ExportOptions.fake_context§
+9Union[torch.onnx._internal.exporter.ONNXFakeContext,None]^
+-torch.onnx._internal.exporter.ONNXFakeContext"-torch.onnx._internal.exporter.ONNXFakeContext
+Nonerë
+onnx_registry9torch.onnx._internal.exporter.ExportOptions.onnx_registryž
+6Union[torch.onnx._internal.exporter.OnnxRegistry,None]X
+*torch.onnx._internal.exporter.OnnxRegistry"*torch.onnx._internal.exporter.OnnxRegistry
+None…
+ResolvedExportOptions3torch.onnx._internal.exporter.ResolvedExportOptions"+torch.onnx._internal.exporter.ExportOptions*§
+__init__<torch.onnx._internal.exporter.ResolvedExportOptions.__init__"
+None*t
+selfj
+3torch.onnx._internal.exporter.ResolvedExportOptions"3torch.onnx._internal.exporter.ResolvedExportOptions*À
+options²
+fUnion[torch.onnx._internal.exporter.ExportOptions,torch.onnx._internal.exporter.ResolvedExportOptions]Z
++torch.onnx._internal.exporter.ExportOptions"+torch.onnx._internal.exporter.ExportOptionsj
+3torch.onnx._internal.exporter.ResolvedExportOptions"3torch.onnx._internal.exporter.ResolvedExportOptions*ƒ
+modelõ
+xUnion[torch.nn.modules.module.Module,CallableType[builtins.function],torch.export.exported_program.ExportedProgram,None]@
+torch.nn.modules.module.Module"torch.nn.modules.module.ModuleK
+CallableType[builtins.function]&
+builtins.function"builtins.function^
+-torch.export.exported_program.ExportedProgram"-torch.export.exported_program.ExportedProgram
+None 0:_beartype.beartypert
+dynamic_shapesBtorch.onnx._internal.exporter.ResolvedExportOptions.dynamic_shapes
+builtins.bool"builtins.boolrt
+op_level_debugBtorch.onnx._internal.exporter.ResolvedExportOptions.op_level_debug
+builtins.bool"builtins.boolrá
+diagnostic_optionsFtorch.onnx._internal.exporter.ResolvedExportOptions.diagnostic_options‚
+?torch.onnx._internal.diagnostics.infra._infra.DiagnosticOptions"?torch.onnx._internal.diagnostics.infra._infra.DiagnosticOptionsr°
+fake_context@torch.onnx._internal.exporter.ResolvedExportOptions.fake_context^
+-torch.onnx._internal.exporter.ONNXFakeContext"-torch.onnx._internal.exporter.ONNXFakeContextr¬
+onnx_registryAtorch.onnx._internal.exporter.ResolvedExportOptions.onnx_registryX
+*torch.onnx._internal.exporter.OnnxRegistry"*torch.onnx._internal.exporter.OnnxRegistryr³
+decomposition_tableGtorch.onnx._internal.exporter.ResolvedExportOptions.decomposition_tableÒ
+Dbuiltins.dict[torch._ops.OpOverload,CallableType[builtins.function]].
+torch._ops.OpOverload"torch._ops.OpOverloadK
+CallableType[builtins.function]&
+builtins.function"builtins.function"builtins.dictrù
+onnxfunction_dispatcherKtorch.onnx._internal.exporter.ResolvedExportOptions.onnxfunction_dispatcher
+Ftorch.onnx._internal.fx.onnxfunction_dispatcher.OnnxFunctionDispatcher"Ftorch.onnx._internal.fx.onnxfunction_dispatcher.OnnxFunctionDispatcherr¬
+	fx_tracer=torch.onnx._internal.exporter.ResolvedExportOptions.fx_tracer`
+.torch.onnx._internal.exporter.FXGraphExtractor".torch.onnx._internal.exporter.FXGraphExtractorrÌ
+diagnostic_contextFtorch.onnx._internal.exporter.ResolvedExportOptions.diagnostic_contextn
+5torch.onnx._internal.fx.diagnostics.DiagnosticContext"5torch.onnx._internal.fx.diagnostics.DiagnosticContextÓ
+ONNXProgramSerializer3torch.onnx._internal.exporter.ONNXProgramSerializer"builtins.object*ï
+	serialize=torch.onnx._internal.exporter.ONNXProgramSerializer.serialize"
+None*t
+selfj
+3torch.onnx._internal.exporter.ONNXProgramSerializer"3torch.onnx._internal.exporter.ONNXProgramSerializer*h
+onnx_programV
+)torch.onnx._internal.exporter.ONNXProgram")torch.onnx._internal.exporter.ONNXProgram*7
+destination&
+io.BufferedIOBase"io.BufferedIOBase@8XŒ
+ProtobufONNXProgramSerializer;torch.onnx._internal.exporter.ProtobufONNXProgramSerializer"builtins.object*œ
+	serializeEtorch.onnx._internal.exporter.ProtobufONNXProgramSerializer.serialize"
+None*„
+selfz
+;torch.onnx._internal.exporter.ProtobufONNXProgramSerializer";torch.onnx._internal.exporter.ProtobufONNXProgramSerializer*h
+onnx_programV
+)torch.onnx._internal.exporter.ONNXProgram")torch.onnx._internal.exporter.ONNXProgram*7
+destination&
+io.BufferedIOBase"io.BufferedIOBase0:_beartype.beartypeÖ
+"LargeProtobufONNXProgramSerializer@torch.onnx._internal.exporter.LargeProtobufONNXProgramSerializer"builtins.object*¥
+__init__Itorch.onnx._internal.exporter.LargeProtobufONNXProgramSerializer.__init__"
+None*
+self„
+@torch.onnx._internal.exporter.LargeProtobufONNXProgramSerializer"@torch.onnx._internal.exporter.LargeProtobufONNXProgramSerializer*2
+destination_path
+builtins.str"builtins.str*¬
+	serializeJtorch.onnx._internal.exporter.LargeProtobufONNXProgramSerializer.serialize"
+None*
+self„
+@torch.onnx._internal.exporter.LargeProtobufONNXProgramSerializer"@torch.onnx._internal.exporter.LargeProtobufONNXProgramSerializer*h
+onnx_programV
+)torch.onnx._internal.exporter.ONNXProgram")torch.onnx._internal.exporter.ONNXProgram*7
+destination&
+io.BufferedIOBase"io.BufferedIOBase0:_beartype.beartyper…
+_destination_pathRtorch.onnx._internal.exporter.LargeProtobufONNXProgramSerializer._destination_path
+builtins.str"builtins.strÛ
+ONNXRuntimeOptions0torch.onnx._internal.exporter.ONNXRuntimeOptions"builtins.object*†
+__init__9torch.onnx._internal.exporter.ONNXRuntimeOptions.__init__"
+None*n
+selfd
+0torch.onnx._internal.exporter.ONNXRuntimeOptions"0torch.onnx._internal.exporter.ONNXRuntimeOptions*w
+session_options`
+ Union[typing.Sequence[Any],None]0
+typing.Sequence[Any]
+Any"typing.Sequence
+None *×
+execution_providers»
+[Union[typing.Sequence[Union[builtins.str,Tuple[builtins.str,builtins.dict[Any,Any]]]],None]Ï
+Otyping.Sequence[Union[builtins.str,Tuple[builtins.str,builtins.dict[Any,Any]]]]ê
+>Union[builtins.str,Tuple[builtins.str,builtins.dict[Any,Any]]]
+builtins.str"builtins.str‡
+*Tuple[builtins.str,builtins.dict[Any,Any]]
+builtins.str"builtins.str9
+builtins.dict[Any,Any]
+Any
+Any"builtins.dict"typing.Sequence
+None *Û
+execution_provider_options¸
+3Union[typing.Sequence[builtins.dict[Any,Any]],None]u
+'typing.Sequence[builtins.dict[Any,Any]]9
+builtins.dict[Any,Any]
+Any
+Any"builtins.dict"typing.Sequence
+None 0:_beartype.beartyperµ
+session_options@torch.onnx._internal.exporter.ONNXRuntimeOptions.session_options`
+ Union[typing.Sequence[Any],None]0
+typing.Sequence[Any]
+Any"typing.Sequence
+Noner™
+execution_providersDtorch.onnx._internal.exporter.ONNXRuntimeOptions.execution_providers»
+[Union[typing.Sequence[Union[builtins.str,Tuple[builtins.str,builtins.dict[Any,Any]]]],None]Ï
+Otyping.Sequence[Union[builtins.str,Tuple[builtins.str,builtins.dict[Any,Any]]]]ê
+>Union[builtins.str,Tuple[builtins.str,builtins.dict[Any,Any]]]
+builtins.str"builtins.str‡
+*Tuple[builtins.str,builtins.dict[Any,Any]]
+builtins.str"builtins.str9
+builtins.dict[Any,Any]
+Any
+Any"builtins.dict"typing.Sequence
+Noner¤
+execution_provider_optionsKtorch.onnx._internal.exporter.ONNXRuntimeOptions.execution_provider_options¸
+3Union[typing.Sequence[builtins.dict[Any,Any]],None]u
+'typing.Sequence[builtins.dict[Any,Any]]9
+builtins.dict[Any,Any]
+Any
+Any"builtins.dict"typing.Sequence
+NoneôG
+ONNXProgram)torch.onnx._internal.exporter.ONNXProgram"builtins.object*Ñ
+__init__2torch.onnx._internal.exporter.ONNXProgram.__init__"
+None*`
+selfV
+)torch.onnx._internal.exporter.ONNXProgram")torch.onnx._internal.exporter.ONNXProgram*
+model_proto
+Any*o
+input_adapter\
+,torch.onnx._internal.io_adapter.InputAdapter",torch.onnx._internal.io_adapter.InputAdapter*r
+output_adapter^
+-torch.onnx._internal.io_adapter.OutputAdapter"-torch.onnx._internal.io_adapter.OutputAdapter*†
+diagnostic_contextn
+5torch.onnx._internal.fx.diagnostics.DiagnosticContext"5torch.onnx._internal.fx.diagnostics.DiagnosticContext*¼
+fake_context§
+9Union[torch.onnx._internal.exporter.ONNXFakeContext,None]^
+-torch.onnx._internal.exporter.ONNXFakeContext"-torch.onnx._internal.exporter.ONNXFakeContext
+None *n
+export_exceptionV
+Union[builtins.Exception,None](
+builtins.Exception"builtins.Exception
+None *Ë
+model_signature³
+=Union[torch.export.graph_signature.ExportGraphSignature,None]f
+1torch.export.graph_signature.ExportGraphSignature"1torch.export.graph_signature.ExportGraphSignature
+None *‰
+model_torchõ
+xUnion[torch.nn.modules.module.Module,CallableType[builtins.function],torch.export.exported_program.ExportedProgram,None]@
+torch.nn.modules.module.Module"torch.nn.modules.module.ModuleK
+CallableType[builtins.function]&
+builtins.function"builtins.function^
+-torch.export.exported_program.ExportedProgram"-torch.export.exported_program.ExportedProgram
+None 0:_beartype.beartype*ª
+__call__2torch.onnx._internal.exporter.ONNXProgram.__call__"
+Any*`
+selfV
+)torch.onnx._internal.exporter.ONNXProgram")torch.onnx._internal.exporter.ONNXProgram*
+args
+Any*“
+model_with_state_dictõ
+xUnion[torch.nn.modules.module.Module,CallableType[builtins.function],torch.export.exported_program.ExportedProgram,None]@
+torch.nn.modules.module.Module"torch.nn.modules.module.ModuleK
+CallableType[builtins.function]&
+builtins.function"builtins.function^
+-torch.export.exported_program.ExportedProgram"-torch.export.exported_program.ExportedProgram
+None *À
+options°
+<Union[torch.onnx._internal.exporter.ONNXRuntimeOptions,None]d
+0torch.onnx._internal.exporter.ONNXRuntimeOptions"0torch.onnx._internal.exporter.ONNXRuntimeOptions
+None *
+kwargs
+Any*½
+model_proto5torch.onnx._internal.exporter.ONNXProgram.model_proto"
+Any*`
+selfV
+)torch.onnx._internal.exporter.ONNXProgram")torch.onnx._internal.exporter.ONNXProgram0:property`*ò
+model_signature9torch.onnx._internal.exporter.ONNXProgram.model_signature"³
+=Union[torch.export.graph_signature.ExportGraphSignature,None]f
+1torch.export.graph_signature.ExportGraphSignature"1torch.export.graph_signature.ExportGraphSignature
+None*`
+selfV
+)torch.onnx._internal.exporter.ONNXProgram")torch.onnx._internal.exporter.ONNXProgram0:property`*²
+diagnostic_context<torch.onnx._internal.exporter.ONNXProgram.diagnostic_context"n
+5torch.onnx._internal.fx.diagnostics.DiagnosticContext"5torch.onnx._internal.fx.diagnostics.DiagnosticContext*`
+selfV
+)torch.onnx._internal.exporter.ONNXProgram")torch.onnx._internal.exporter.ONNXProgram0:property`*à
+fake_context6torch.onnx._internal.exporter.ONNXProgram.fake_context"§
+9Union[torch.onnx._internal.exporter.ONNXFakeContext,None]^
+-torch.onnx._internal.exporter.ONNXFakeContext"-torch.onnx._internal.exporter.ONNXFakeContext
+None*`
+selfV
+)torch.onnx._internal.exporter.ONNXProgram")torch.onnx._internal.exporter.ONNXProgram0:property`*ª
+adapt_torch_inputs_to_onnxDtorch.onnx._internal.exporter.ONNXProgram.adapt_torch_inputs_to_onnx"ƒ
+etyping.Sequence[Union[torch._tensor.Tensor,builtins.int,builtins.float,builtins.bool,torch._C.dtype]]ˆ
+TUnion[torch._tensor.Tensor,builtins.int,builtins.float,builtins.bool,torch._C.dtype],
+torch._tensor.Tensor"torch._tensor.Tensor
+builtins.int"builtins.int 
+builtins.float"builtins.float
+builtins.bool"builtins.bool 
+torch._C.dtype"torch._C.dtype"typing.Sequence*`
+selfV
+)torch.onnx._internal.exporter.ONNXProgram")torch.onnx._internal.exporter.ONNXProgram*
+
+model_args
+Any*“
+model_with_state_dictõ
+xUnion[torch.nn.modules.module.Module,CallableType[builtins.function],torch.export.exported_program.ExportedProgram,None]@
+torch.nn.modules.module.Module"torch.nn.modules.module.ModuleK
+CallableType[builtins.function]&
+builtins.function"builtins.function^
+-torch.export.exported_program.ExportedProgram"-torch.export.exported_program.ExportedProgram
+None *
+model_kwargs
+Any0:_beartype.beartype*Ô
+adapt_torch_outputs_to_onnxEtorch.onnx._internal.exporter.ONNXProgram.adapt_torch_outputs_to_onnx"Ã
+Vtyping.Sequence[Union[torch._tensor.Tensor,builtins.int,builtins.float,builtins.bool]]×
+EUnion[torch._tensor.Tensor,builtins.int,builtins.float,builtins.bool],
+torch._tensor.Tensor"torch._tensor.Tensor
+builtins.int"builtins.int 
+builtins.float"builtins.float
+builtins.bool"builtins.bool"typing.Sequence*`
+selfV
+)torch.onnx._internal.exporter.ONNXProgram")torch.onnx._internal.exporter.ONNXProgram*
+model_outputs
+Any*“
+model_with_state_dictõ
+xUnion[torch.nn.modules.module.Module,CallableType[builtins.function],torch.export.exported_program.ExportedProgram,None]@
+torch.nn.modules.module.Module"torch.nn.modules.module.ModuleK
+CallableType[builtins.function]&
+builtins.function"builtins.function^
+-torch.export.exported_program.ExportedProgram"-torch.export.exported_program.ExportedProgram
+None 0:_beartype.beartype*š
+save.torch.onnx._internal.exporter.ONNXProgram.save"
+None*`
+selfV
+)torch.onnx._internal.exporter.ONNXProgram")torch.onnx._internal.exporter.ONNXProgram*€
+destinationo
+%Union[builtins.str,io.BufferedIOBase]
+builtins.str"builtins.str&
+io.BufferedIOBase"io.BufferedIOBase*:
+include_initializers
+builtins.bool"builtins.bool *Ñ
+model_state½
+8Union[builtins.dict[builtins.str,Any],builtins.str,None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+builtins.str"builtins.str
+None *Ì
+
+serializer¹
+?Union[torch.onnx._internal.exporter.ONNXProgramSerializer,None]j
+3torch.onnx._internal.exporter.ONNXProgramSerializer"3torch.onnx._internal.exporter.ONNXProgramSerializer
+None 0:_beartype.beartype*ÿ
+save_diagnostics:torch.onnx._internal.exporter.ONNXProgram.save_diagnostics"
+None*`
+selfV
+)torch.onnx._internal.exporter.ONNXProgram")torch.onnx._internal.exporter.ONNXProgram*-
+destination
+builtins.str"builtins.str0:_beartype.beartype*Ý
+_from_failure7torch.onnx._internal.exporter.ONNXProgram._from_failure"µ
+.torch.onnx._internal.exporter.ONNXProgram.SelfV
+)torch.onnx._internal.exporter.ONNXProgram")torch.onnx._internal.exporter.ONNXProgram")torch.onnx._internal.exporter.ONNXProgram*€
+clsö
+4Type[torch.onnx._internal.exporter.ONNXProgram.Self]µ
+.torch.onnx._internal.exporter.ONNXProgram.SelfV
+)torch.onnx._internal.exporter.ONNXProgram")torch.onnx._internal.exporter.ONNXProgram")torch.onnx._internal.exporter.ONNXProgram"type*>
+export_exception(
+builtins.Exception"builtins.Exception*†
+diagnostic_contextn
+5torch.onnx._internal.fx.diagnostics.DiagnosticContext"5torch.onnx._internal.fx.diagnostics.DiagnosticContext0:classmethodprO
+_model_proto6torch.onnx._internal.exporter.ONNXProgram._model_proto
+Anyr¨
+_input_adapter8torch.onnx._internal.exporter.ONNXProgram._input_adapter\
+,torch.onnx._internal.io_adapter.InputAdapter",torch.onnx._internal.io_adapter.InputAdapterr¬
+_output_adapter9torch.onnx._internal.exporter.ONNXProgram._output_adapter^
+-torch.onnx._internal.io_adapter.OutputAdapter"-torch.onnx._internal.io_adapter.OutputAdapterrÄ
+_diagnostic_context=torch.onnx._internal.exporter.ONNXProgram._diagnostic_contextn
+5torch.onnx._internal.fx.diagnostics.DiagnosticContext"5torch.onnx._internal.fx.diagnostics.DiagnosticContextrò
+_fake_context7torch.onnx._internal.exporter.ONNXProgram._fake_context§
+9Union[torch.onnx._internal.exporter.ONNXFakeContext,None]^
+-torch.onnx._internal.exporter.ONNXFakeContext"-torch.onnx._internal.exporter.ONNXFakeContext
+Noner¨
+_export_exception;torch.onnx._internal.exporter.ONNXProgram._export_exceptionV
+Union[builtins.Exception,None](
+builtins.Exception"builtins.Exception
+Noner„
+_model_signature:torch.onnx._internal.exporter.ONNXProgram._model_signature³
+=Union[torch.export.graph_signature.ExportGraphSignature,None]f
+1torch.export.graph_signature.ExportGraphSignature"1torch.export.graph_signature.ExportGraphSignature
+Noner¾
+_model_torch6torch.onnx._internal.exporter.ONNXProgram._model_torchõ
+xUnion[torch.nn.modules.module.Module,CallableType[builtins.function],torch.export.exported_program.ExportedProgram,None]@
+torch.nn.modules.module.Module"torch.nn.modules.module.ModuleK
+CallableType[builtins.function]&
+builtins.function"builtins.function^
+-torch.export.exported_program.ExportedProgram"-torch.export.exported_program.ExportedProgram
+Noneù
+FXGraphExtractor.torch.onnx._internal.exporter.FXGraphExtractor"abc.ABC*¹
+__init__7torch.onnx._internal.exporter.FXGraphExtractor.__init__"
+None*j
+self`
+.torch.onnx._internal.exporter.FXGraphExtractor".torch.onnx._internal.exporter.FXGraphExtractor*¤
+generate_fx:torch.onnx._internal.exporter.FXGraphExtractor.generate_fx"F
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*j
+self`
+.torch.onnx._internal.exporter.FXGraphExtractor".torch.onnx._internal.exporter.FXGraphExtractor*w
+optionsj
+3torch.onnx._internal.exporter.ResolvedExportOptions"3torch.onnx._internal.exporter.ResolvedExportOptions*ä
+modelØ
+EUnion[torch.nn.modules.module.Module,CallableType[builtins.function]]@
+torch.nn.modules.module.Module"torch.nn.modules.module.ModuleK
+CallableType[builtins.function]&
+builtins.function"builtins.function*@
+
+model_args0
+typing.Sequence[Any]
+Any"typing.Sequence*k
+model_kwargsY
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping0:abc.abstractmethod@*è
+pre_export_passes@torch.onnx._internal.exporter.FXGraphExtractor.pre_export_passes"
+Any*j
+self`
+.torch.onnx._internal.exporter.FXGraphExtractor".torch.onnx._internal.exporter.FXGraphExtractor*w
+optionsj
+3torch.onnx._internal.exporter.ResolvedExportOptions"3torch.onnx._internal.exporter.ResolvedExportOptions*í
+original_modelØ
+EUnion[torch.nn.modules.module.Module,CallableType[builtins.function]]@
+torch.nn.modules.module.Module"torch.nn.modules.module.ModuleK
+CallableType[builtins.function]&
+builtins.function"builtins.function*U
+	fx_moduleF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*D
+fx_module_args0
+typing.Sequence[Any]
+Any"typing.Sequence0:abc.abstractmethod@r«
+input_adapter<torch.onnx._internal.exporter.FXGraphExtractor.input_adapter\
+,torch.onnx._internal.io_adapter.InputAdapter",torch.onnx._internal.io_adapter.InputAdapterr¯
+output_adapter=torch.onnx._internal.exporter.FXGraphExtractor.output_adapter^
+-torch.onnx._internal.io_adapter.OutputAdapter"-torch.onnx._internal.io_adapter.OutputAdapterÌ
+Exporter&torch.onnx._internal.exporter.Exporter"builtins.object*Ô
+__init__/torch.onnx._internal.exporter.Exporter.__init__"
+None*Z
+selfP
+&torch.onnx._internal.exporter.Exporter"&torch.onnx._internal.exporter.Exporter*w
+optionsj
+3torch.onnx._internal.exporter.ResolvedExportOptions"3torch.onnx._internal.exporter.ResolvedExportOptions*ò
+modelæ
+sUnion[torch.nn.modules.module.Module,CallableType[builtins.function],torch.export.exported_program.ExportedProgram]@
+torch.nn.modules.module.Module"torch.nn.modules.module.ModuleK
+CallableType[builtins.function]&
+builtins.function"builtins.function^
+-torch.export.exported_program.ExportedProgram"-torch.export.exported_program.ExportedProgram*@
+
+model_args0
+typing.Sequence[Any]
+Any"typing.Sequence*k
+model_kwargsY
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping0:_beartype.beartype*ë
+export-torch.onnx._internal.exporter.Exporter.export"V
+)torch.onnx._internal.exporter.ONNXProgram")torch.onnx._internal.exporter.ONNXProgram*Z
+selfP
+&torch.onnx._internal.exporter.Exporter"&torch.onnx._internal.exporter.Exporter*e
+_assert_fake_tensor_mode?torch.onnx._internal.exporter.Exporter._assert_fake_tensor_mode*
+selfr¥
+options.torch.onnx._internal.exporter.Exporter.optionsj
+3torch.onnx._internal.exporter.ResolvedExportOptions"3torch.onnx._internal.exporter.ResolvedExportOptionsrž
+model,torch.onnx._internal.exporter.Exporter.modelæ
+sUnion[torch.nn.modules.module.Module,CallableType[builtins.function],torch.export.exported_program.ExportedProgram]@
+torch.nn.modules.module.Module"torch.nn.modules.module.ModuleK
+CallableType[builtins.function]&
+builtins.function"builtins.function^
+-torch.export.exported_program.ExportedProgram"-torch.export.exported_program.ExportedProgramrq
+
+model_args1torch.onnx._internal.exporter.Exporter.model_args0
+typing.Sequence[Any]
+Any"typing.Sequencerž
+model_kwargs3torch.onnx._internal.exporter.Exporter.model_kwargsY
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping—
+UnsatisfiedDependencyError8torch.onnx._internal.exporter.UnsatisfiedDependencyError"builtins.RuntimeError*²
+__init__Atorch.onnx._internal.exporter.UnsatisfiedDependencyError.__init__"
+None*~
+selft
+8torch.onnx._internal.exporter.UnsatisfiedDependencyError"8torch.onnx._internal.exporter.UnsatisfiedDependencyError*.
+package_name
+builtins.str"builtins.str*)
+message
+builtins.str"builtins.strrs
+package_nameEtorch.onnx._internal.exporter.UnsatisfiedDependencyError.package_name
+builtins.str"builtins.strÖ
+OnnxExporterError/torch.onnx._internal.exporter.OnnxExporterError"builtins.RuntimeError*Ñ
+__init__8torch.onnx._internal.exporter.OnnxExporterError.__init__"
+None*l
+selfb
+/torch.onnx._internal.exporter.OnnxExporterError"/torch.onnx._internal.exporter.OnnxExporterError*h
+onnx_programV
+)torch.onnx._internal.exporter.ONNXProgram")torch.onnx._internal.exporter.ONNXProgram*)
+message
+builtins.str"builtins.strr¤
+onnx_program<torch.onnx._internal.exporter.OnnxExporterError.onnx_programV
+)torch.onnx._internal.exporter.ONNXProgram")torch.onnx._internal.exporter.ONNXProgramk
+InvalidExportOptionsError7torch.onnx._internal.exporter.InvalidExportOptionsError"builtins.RuntimeErrorá
+common_pre_export_passes6torch.onnx._internal.exporter.common_pre_export_passes"
+Any*w
+optionsj
+3torch.onnx._internal.exporter.ResolvedExportOptions"3torch.onnx._internal.exporter.ResolvedExportOptions*í
+original_modelØ
+EUnion[torch.nn.modules.module.Module,CallableType[builtins.function]]@
+torch.nn.modules.module.Module"torch.nn.modules.module.ModuleK
+CallableType[builtins.function]&
+builtins.function"builtins.function*U
+	fx_moduleF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*D
+fx_module_args0
+typing.Sequence[Any]
+Any"typing.Sequence*™
+__annotations__-torch.onnx._internal.exporter.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*
+torch_exporttorch.export *
+pytreetorch.utils._pytree *,
+patchertorch.onnx._internal.fx.patcher *;
+fx_serialization%torch.onnx._internal.fx.serialization *3
+onnx"torch.onnx._internal.exporter.onnx
+Any*A
+onnxruntime)torch.onnx._internal.exporter.onnxruntime
+Any*?
+
+onnxscript(torch.onnx._internal.exporter.onnxscript
+Any*M
+torchlib_registry/torch.onnx._internal.exporter.torchlib_registry
+Any*l
+_DEFAULT_OPSET_VERSION4torch.onnx._internal.exporter._DEFAULT_OPSET_VERSION
+builtins.int"builtins.int*t
+_PYTORCH_GITHUB_ISSUES_URL8torch.onnx._internal.exporter._PYTORCH_GITHUB_ISSUES_URL
+builtins.str"builtins.str*Š
+%_DEFAULT_FAILED_EXPORT_SARIF_LOG_PATHCtorch.onnx._internal.exporter._DEFAULT_FAILED_EXPORT_SARIF_LOG_PATH
+builtins.str"builtins.str*p
+_PROTOBUF_SIZE_MAX_LIMIT6torch.onnx._internal.exporter._PROTOBUF_SIZE_MAX_LIMIT
+builtins.int"builtins.int*J
+log!torch.onnx._internal.exporter.log 
+logging.Logger"logging.Logger*|
+__all__%torch.onnx._internal.exporter.__all__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list

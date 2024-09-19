@@ -1,0 +1,662 @@
+
+torch.testing._comparisonø
+	ErrorMeta#torch.testing._comparison.ErrorMeta"builtins.Exception*—
+__init__,torch.testing._comparison.ErrorMeta.__init__"
+None*T
+selfJ
+#torch.testing._comparison.ErrorMeta"#torch.testing._comparison.ErrorMeta*V
+typeL
+Type[builtins.Exception](
+builtins.Exception"builtins.Exception"type*%
+msg
+builtins.str"builtins.str*8
+id.
+builtins.tuple[Any]
+Any"builtins.tuple *¯
+to_error,torch.testing._comparison.ErrorMeta.to_error"(
+builtins.Exception"builtins.Exception*T
+selfJ
+#torch.testing._comparison.ErrorMeta"#torch.testing._comparison.ErrorMeta*Ω
+msg±
+8Union[builtins.str,CallableType[builtins.function],None]
+builtins.str"builtins.strK
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None r~
+type(torch.testing._comparison.ErrorMeta.typeL
+Type[builtins.Exception](
+builtins.Exception"builtins.Exception"typerL
+msg'torch.testing._comparison.ErrorMeta.msg
+builtins.str"builtins.strr\
+id&torch.testing._comparison.ErrorMeta.id.
+builtins.tuple[Any]
+Any"builtins.tupleT
+UnsupportedInputs+torch.testing._comparison.UnsupportedInputs"builtins.Exception∫
+Pairtorch.testing._comparison.Pair"abc.ABC*ê
+__init__'torch.testing._comparison.Pair.__init__"
+None*J
+self@
+torch.testing._comparison.Pair"torch.testing._comparison.Pair*
+actual
+Any*
+expected
+Any*8
+id.
+builtins.tuple[Any]
+Any"builtins.tuple *
+unknown_parameters
+Any*m
+_inputs_not_supported4torch.testing._comparison.Pair._inputs_not_supported"
+NoReturn
+0:staticmethodh*ß
+_check_inputs_isinstance7torch.testing._comparison.Pair._check_inputs_isinstance"
+Any*
+inputs
+Any*°
+clsó
+*Union[Type[Any],builtins.tuple[Type[Any]]]
+	Type[Any]
+Any"typeI
+builtins.tuple[Type[Any]]
+	Type[Any]
+Any"type"builtins.tuple0:staticmethodh*¿
+_fail$torch.testing._comparison.Pair._fail"
+NoReturn
+*J
+self@
+torch.testing._comparison.Pair"torch.testing._comparison.Pair*V
+typeL
+Type[builtins.Exception](
+builtins.Exception"builtins.Exception"type*%
+msg
+builtins.str"builtins.str*8
+id.
+builtins.tuple[Any]
+Any"builtins.tuple *ü
+compare&torch.testing._comparison.Pair.compare"
+None*J
+self@
+torch.testing._comparison.Pair"torch.testing._comparison.Pair0:abc.abstractmethod@*È
+
+extra_repr)torch.testing._comparison.Pair.extra_repr"„
+<typing.Sequence[Union[builtins.str,Tuple[builtins.str,Any]]]ë
++Union[builtins.str,Tuple[builtins.str,Any]]
+builtins.str"builtins.strB
+Tuple[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Sequence*J
+self@
+torch.testing._comparison.Pair"torch.testing._comparison.Pair*ï
+__repr__'torch.testing._comparison.Pair.__repr__"
+builtins.str"builtins.str*B@
+torch.testing._comparison.Pair"torch.testing._comparison.Pairr8
+actual%torch.testing._comparison.Pair.actual
+Anyr<
+expected'torch.testing._comparison.Pair.expected
+AnyrW
+id!torch.testing._comparison.Pair.id.
+builtins.tuple[Any]
+Any"builtins.tupler¢
+_unknown_parameters2torch.testing._comparison.Pair._unknown_parametersW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dictÓ
+
+ObjectPair$torch.testing._comparison.ObjectPair"torch.testing._comparison.Pair*ô
+compare,torch.testing._comparison.ObjectPair.compare"
+None*V
+selfL
+$torch.testing._comparison.ObjectPair"$torch.testing._comparison.ObjectPair«
+NonePair"torch.testing._comparison.NonePair"torch.testing._comparison.Pair*‡
+__init__+torch.testing._comparison.NonePair.__init__"
+None*R
+selfH
+"torch.testing._comparison.NonePair""torch.testing._comparison.NonePair*
+actual
+Any*
+expected
+Any*
+other_parameters
+Any*ì
+compare*torch.testing._comparison.NonePair.compare"
+None*R
+selfH
+"torch.testing._comparison.NonePair""torch.testing._comparison.NonePairè
+BooleanPair%torch.testing._comparison.BooleanPair"torch.testing._comparison.Pair*°
+__init__.torch.testing._comparison.BooleanPair.__init__"
+None*X
+selfN
+%torch.testing._comparison.BooleanPair"%torch.testing._comparison.BooleanPair*
+actual
+Any*
+expected
+Any*6
+id.
+builtins.tuple[Any]
+Any"builtins.tuple*
+other_parameters
+Any*˝
+_supported_types6torch.testing._comparison.BooleanPair._supported_types"I
+builtins.tuple[Type[Any]]
+	Type[Any]
+Any"type"builtins.tuple*X
+selfN
+%torch.testing._comparison.BooleanPair"%torch.testing._comparison.BooleanPair0:property`*Ó
+_process_inputs5torch.testing._comparison.BooleanPair._process_inputs"f
+"Tuple[builtins.bool,builtins.bool]
+builtins.bool"builtins.bool
+builtins.bool"builtins.bool*X
+selfN
+%torch.testing._comparison.BooleanPair"%torch.testing._comparison.BooleanPair*
+actual
+Any*
+expected
+Any*6
+id.
+builtins.tuple[Any]
+Any"builtins.tuple*Ñ
+_to_bool.torch.testing._comparison.BooleanPair._to_bool"
+builtins.bool"builtins.bool*X
+selfN
+%torch.testing._comparison.BooleanPair"%torch.testing._comparison.BooleanPair*
+	bool_like
+Any*6
+id.
+builtins.tuple[Any]
+Any"builtins.tuple*ú
+compare-torch.testing._comparison.BooleanPair.compare"
+None*X
+selfN
+%torch.testing._comparison.BooleanPair"%torch.testing._comparison.BooleanPairñ
+
+NumberPair$torch.testing._comparison.NumberPair"torch.testing._comparison.Pair*¥
+__init__-torch.testing._comparison.NumberPair.__init__"
+None*V
+selfL
+$torch.testing._comparison.NumberPair"$torch.testing._comparison.NumberPair*
+actual
+Any*
+expected
+Any*8
+id.
+builtins.tuple[Any]
+Any"builtins.tuple *V
+rtolJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None *V
+atolJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None */
+	equal_nan
+builtins.bool"builtins.bool *1
+check_dtype
+builtins.bool"builtins.bool *
+other_parameters
+Any*˙
+_supported_types5torch.testing._comparison.NumberPair._supported_types"I
+builtins.tuple[Type[Any]]
+	Type[Any]
+Any"type"builtins.tuple*V
+selfL
+$torch.testing._comparison.NumberPair"$torch.testing._comparison.NumberPair0:property`*∏
+_process_inputs4torch.testing._comparison.NumberPair._process_inputs"≤
+nTuple[Union[builtins.int,builtins.float,builtins.complex],Union[builtins.int,builtins.float,builtins.complex]]ù
+3Union[builtins.int,builtins.float,builtins.complex]
+builtins.int"builtins.int 
+builtins.float"builtins.float$
+builtins.complex"builtins.complexù
+3Union[builtins.int,builtins.float,builtins.complex]
+builtins.int"builtins.int 
+builtins.float"builtins.float$
+builtins.complex"builtins.complex*V
+selfL
+$torch.testing._comparison.NumberPair"$torch.testing._comparison.NumberPair*
+actual
+Any*
+expected
+Any*6
+id.
+builtins.tuple[Any]
+Any"builtins.tuple*á
+
+_to_number/torch.testing._comparison.NumberPair._to_number"ù
+3Union[builtins.int,builtins.float,builtins.complex]
+builtins.int"builtins.int 
+builtins.float"builtins.float$
+builtins.complex"builtins.complex*V
+selfL
+$torch.testing._comparison.NumberPair"$torch.testing._comparison.NumberPair*
+number_like
+Any*6
+id.
+builtins.tuple[Any]
+Any"builtins.tuple*ô
+compare,torch.testing._comparison.NumberPair.compare"
+None*V
+selfL
+$torch.testing._comparison.NumberPair"$torch.testing._comparison.NumberPair*Â
+
+extra_repr/torch.testing._comparison.NumberPair.extra_repr"N
+typing.Sequence[builtins.str]
+builtins.str"builtins.str"typing.Sequence*V
+selfL
+$torch.testing._comparison.NumberPair"$torch.testing._comparison.NumberPairr≈
+_TYPE_TO_DTYPE3torch.testing._comparison.NumberPair._TYPE_TO_DTYPE~
++builtins.dict[builtins.type,torch._C.dtype]
+builtins.type"builtins.type 
+torch._C.dtype"torch._C.dtype"builtins.dictrî
+_NUMBER_TYPES2torch.testing._comparison.NumberPair._NUMBER_TYPESO
+builtins.tuple[builtins.type]
+builtins.type"builtins.type"builtins.tuplerS
+rtol)torch.testing._comparison.NumberPair.rtol 
+builtins.float"builtins.floatrS
+atol)torch.testing._comparison.NumberPair.atol 
+builtins.float"builtins.floatr[
+	equal_nan.torch.testing._comparison.NumberPair.equal_nan
+builtins.bool"builtins.boolr_
+check_dtype0torch.testing._comparison.NumberPair.check_dtype
+builtins.bool"builtins.boolô4
+TensorLikePair(torch.testing._comparison.TensorLikePair"torch.testing._comparison.Pair*î
+__init__1torch.testing._comparison.TensorLikePair.__init__"
+None*^
+selfT
+(torch.testing._comparison.TensorLikePair"(torch.testing._comparison.TensorLikePair*
+actual
+Any*
+expected
+Any*8
+id.
+builtins.tuple[Any]
+Any"builtins.tuple *6
+allow_subclasses
+builtins.bool"builtins.bool *V
+rtolJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None *V
+atolJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None */
+	equal_nan
+builtins.bool"builtins.bool *2
+check_device
+builtins.bool"builtins.bool *1
+check_dtype
+builtins.bool"builtins.bool *2
+check_layout
+builtins.bool"builtins.bool *2
+check_stride
+builtins.bool"builtins.bool *
+other_parameters
+Any*ÿ
+_process_inputs8torch.testing._comparison.TensorLikePair._process_inputs"ê
+0Tuple[torch._tensor.Tensor,torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor,
+torch._tensor.Tensor"torch._tensor.Tensor*^
+selfT
+(torch.testing._comparison.TensorLikePair"(torch.testing._comparison.TensorLikePair*
+actual
+Any*
+expected
+Any*6
+id.
+builtins.tuple[Any]
+Any"builtins.tuple*4
+allow_subclasses
+builtins.bool"builtins.bool*È
+
+_to_tensor3torch.testing._comparison.TensorLikePair._to_tensor",
+torch._tensor.Tensor"torch._tensor.Tensor*^
+selfT
+(torch.testing._comparison.TensorLikePair"(torch.testing._comparison.TensorLikePair*
+tensor_like
+Any*©
+_check_supported9torch.testing._comparison.TensorLikePair._check_supported"
+None*^
+selfT
+(torch.testing._comparison.TensorLikePair"(torch.testing._comparison.TensorLikePair*8
+tensor,
+torch._tensor.Tensor"torch._tensor.Tensor*6
+id.
+builtins.tuple[Any]
+Any"builtins.tuple*•
+compare0torch.testing._comparison.TensorLikePair.compare"
+None*^
+selfT
+(torch.testing._comparison.TensorLikePair"(torch.testing._comparison.TensorLikePair*≥
+_compare_attributes<torch.testing._comparison.TensorLikePair._compare_attributes"
+None*^
+selfT
+(torch.testing._comparison.TensorLikePair"(torch.testing._comparison.TensorLikePair*8
+actual,
+torch._tensor.Tensor"torch._tensor.Tensor*:
+expected,
+torch._tensor.Tensor"torch._tensor.Tensor*æ
+_equalize_attributes=torch.testing._comparison.TensorLikePair._equalize_attributes"ê
+0Tuple[torch._tensor.Tensor,torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor,
+torch._tensor.Tensor"torch._tensor.Tensor*^
+selfT
+(torch.testing._comparison.TensorLikePair"(torch.testing._comparison.TensorLikePair*8
+actual,
+torch._tensor.Tensor"torch._tensor.Tensor*:
+expected,
+torch._tensor.Tensor"torch._tensor.Tensor*´
+_compare_values8torch.testing._comparison.TensorLikePair._compare_values"
+None*^
+selfT
+(torch.testing._comparison.TensorLikePair"(torch.testing._comparison.TensorLikePair*8
+actual,
+torch._tensor.Tensor"torch._tensor.Tensor*:
+expected,
+torch._tensor.Tensor"torch._tensor.Tensor*∆
+_compare_quantized_valuesBtorch.testing._comparison.TensorLikePair._compare_quantized_values"
+None*^
+selfT
+(torch.testing._comparison.TensorLikePair"(torch.testing._comparison.TensorLikePair*8
+actual,
+torch._tensor.Tensor"torch._tensor.Tensor*:
+expected,
+torch._tensor.Tensor"torch._tensor.Tensor**
+rtol 
+builtins.float"builtins.float**
+atol 
+builtins.float"builtins.float*-
+	equal_nan
+builtins.bool"builtins.bool*»
+_compare_sparse_coo_valuesCtorch.testing._comparison.TensorLikePair._compare_sparse_coo_values"
+None*^
+selfT
+(torch.testing._comparison.TensorLikePair"(torch.testing._comparison.TensorLikePair*8
+actual,
+torch._tensor.Tensor"torch._tensor.Tensor*:
+expected,
+torch._tensor.Tensor"torch._tensor.Tensor**
+rtol 
+builtins.float"builtins.float**
+atol 
+builtins.float"builtins.float*-
+	equal_nan
+builtins.bool"builtins.bool*÷
+!_compare_sparse_compressed_valuesJtorch.testing._comparison.TensorLikePair._compare_sparse_compressed_values"
+None*^
+selfT
+(torch.testing._comparison.TensorLikePair"(torch.testing._comparison.TensorLikePair*8
+actual,
+torch._tensor.Tensor"torch._tensor.Tensor*:
+expected,
+torch._tensor.Tensor"torch._tensor.Tensor**
+rtol 
+builtins.float"builtins.float**
+atol 
+builtins.float"builtins.float*-
+	equal_nan
+builtins.bool"builtins.bool*ø
+_compare_regular_values_equalFtorch.testing._comparison.TensorLikePair._compare_regular_values_equal"
+None*^
+selfT
+(torch.testing._comparison.TensorLikePair"(torch.testing._comparison.TensorLikePair*8
+actual,
+torch._tensor.Tensor"torch._tensor.Tensor*:
+expected,
+torch._tensor.Tensor"torch._tensor.Tensor*/
+	equal_nan
+builtins.bool"builtins.bool *ƒ
+
+identifier±
+8Union[builtins.str,CallableType[builtins.function],None]
+builtins.str"builtins.strK
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *ï
+_compare_regular_values_closeFtorch.testing._comparison.TensorLikePair._compare_regular_values_close"
+None*^
+selfT
+(torch.testing._comparison.TensorLikePair"(torch.testing._comparison.TensorLikePair*8
+actual,
+torch._tensor.Tensor"torch._tensor.Tensor*:
+expected,
+torch._tensor.Tensor"torch._tensor.Tensor**
+rtol 
+builtins.float"builtins.float**
+atol 
+builtins.float"builtins.float*-
+	equal_nan
+builtins.bool"builtins.bool*ƒ
+
+identifier±
+8Union[builtins.str,CallableType[builtins.function],None]
+builtins.str"builtins.strK
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *Ò
+
+extra_repr3torch.testing._comparison.TensorLikePair.extra_repr"N
+typing.Sequence[builtins.str]
+builtins.str"builtins.str"typing.Sequence*^
+selfT
+(torch.testing._comparison.TensorLikePair"(torch.testing._comparison.TensorLikePairrW
+rtol-torch.testing._comparison.TensorLikePair.rtol 
+builtins.float"builtins.floatrW
+atol-torch.testing._comparison.TensorLikePair.atol 
+builtins.float"builtins.floatr_
+	equal_nan2torch.testing._comparison.TensorLikePair.equal_nan
+builtins.bool"builtins.boolre
+check_device5torch.testing._comparison.TensorLikePair.check_device
+builtins.bool"builtins.boolrc
+check_dtype4torch.testing._comparison.TensorLikePair.check_dtype
+builtins.bool"builtins.boolre
+check_layout5torch.testing._comparison.TensorLikePair.check_layout
+builtins.bool"builtins.boolre
+check_stride5torch.testing._comparison.TensorLikePair.check_stride
+builtins.bool"builtins.boolõ
+default_tolerances,torch.testing._comparison.default_tolerances"l
+$Tuple[builtins.float,builtins.float] 
+builtins.float"builtins.float 
+builtins.float"builtins.float*ä
+inputs~
+*Union[torch._tensor.Tensor,torch._C.dtype],
+torch._tensor.Tensor"torch._tensor.Tensor 
+torch._C.dtype"torch._C.dtype*€
+dtype_precisions¬
+NUnion[builtins.dict[torch._C.dtype,Tuple[builtins.float,builtins.float]],None]„
+Bbuiltins.dict[torch._C.dtype,Tuple[builtins.float,builtins.float]] 
+torch._C.dtype"torch._C.dtypel
+$Tuple[builtins.float,builtins.float] 
+builtins.float"builtins.float 
+builtins.float"builtins.float"builtins.dict
+None õ
+get_tolerances(torch.testing._comparison.get_tolerances"l
+$Tuple[builtins.float,builtins.float] 
+builtins.float"builtins.float 
+builtins.float"builtins.float*ä
+inputs~
+*Union[torch._tensor.Tensor,torch._C.dtype],
+torch._tensor.Tensor"torch._tensor.Tensor 
+torch._C.dtype"torch._C.dtype*T
+rtolJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None*T
+atolJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None*8
+id.
+builtins.tuple[Any]
+Any"builtins.tuple ˆ
+_make_mismatch_msg,torch.testing._comparison._make_mismatch_msg"
+builtins.str"builtins.str*4
+default_identifier
+builtins.str"builtins.str*ƒ
+
+identifier±
+8Union[builtins.str,CallableType[builtins.function],None]
+builtins.str"builtins.strK
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *Q
+extraD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *.
+abs_diff 
+builtins.float"builtins.float*ƒ
+abs_diff_idxØ
+5Union[builtins.int,builtins.tuple[builtins.int],None]
+builtins.int"builtins.intL
+builtins.tuple[builtins.int]
+builtins.int"builtins.int"builtins.tuple
+None **
+atol 
+builtins.float"builtins.float*.
+rel_diff 
+builtins.float"builtins.float*ƒ
+rel_diff_idxØ
+5Union[builtins.int,builtins.tuple[builtins.int],None]
+builtins.int"builtins.intL
+builtins.tuple[builtins.int]
+builtins.int"builtins.int"builtins.tuple
+None **
+rtol 
+builtins.float"builtins.float√
+make_scalar_mismatch_msg2torch.testing._comparison.make_scalar_mismatch_msg"
+builtins.str"builtins.str*ÿ
+actualÀ
+AUnion[builtins.bool,builtins.int,builtins.float,builtins.complex]
+builtins.bool"builtins.bool
+builtins.int"builtins.int 
+builtins.float"builtins.float$
+builtins.complex"builtins.complex*⁄
+expectedÀ
+AUnion[builtins.bool,builtins.int,builtins.float,builtins.complex]
+builtins.bool"builtins.bool
+builtins.int"builtins.int 
+builtins.float"builtins.float$
+builtins.complex"builtins.complex**
+rtol 
+builtins.float"builtins.float**
+atol 
+builtins.float"builtins.float*ƒ
+
+identifier±
+8Union[builtins.str,CallableType[builtins.function],None]
+builtins.str"builtins.strK
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None ß
+make_tensor_mismatch_msg2torch.testing._comparison.make_tensor_mismatch_msg"
+Any*8
+actual,
+torch._tensor.Tensor"torch._tensor.Tensor*:
+expected,
+torch._tensor.Tensor"torch._tensor.Tensor*9
+matches,
+torch._tensor.Tensor"torch._tensor.Tensor**
+rtol 
+builtins.float"builtins.float**
+atol 
+builtins.float"builtins.float*ƒ
+
+identifier±
+8Union[builtins.str,CallableType[builtins.function],None]
+builtins.str"builtins.strK
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None  
+originate_pairs)torch.testing._comparison.originate_pairs"Ä
+-builtins.list[torch.testing._comparison.Pair]@
+torch.testing._comparison.Pair"torch.testing._comparison.Pair"builtins.list*
+actual
+Any*
+expected
+Any*À
+
+pair_types∫
+5typing.Sequence[Type[torch.testing._comparison.Pair]]p
+$Type[torch.testing._comparison.Pair]@
+torch.testing._comparison.Pair"torch.testing._comparison.Pair"type"typing.Sequence*_
+sequence_typesI
+builtins.tuple[Type[Any]]
+	Type[Any]
+Any"type"builtins.tuple *^
+mapping_typesI
+builtins.tuple[Type[Any]]
+	Type[Any]
+Any"type"builtins.tuple *8
+id.
+builtins.tuple[Any]
+Any"builtins.tuple *
+options
+Any≠
+not_close_error_metas/torch.testing._comparison.not_close_error_metas"è
+2builtins.list[torch.testing._comparison.ErrorMeta]J
+#torch.testing._comparison.ErrorMeta"#torch.testing._comparison.ErrorMeta"builtins.list*
+actual
+Any*
+expected
+Any*Õ
+
+pair_types∫
+5typing.Sequence[Type[torch.testing._comparison.Pair]]p
+$Type[torch.testing._comparison.Pair]@
+torch.testing._comparison.Pair"torch.testing._comparison.Pair"type"typing.Sequence *_
+sequence_typesI
+builtins.tuple[Type[Any]]
+	Type[Any]
+Any"type"builtins.tuple *^
+mapping_typesI
+builtins.tuple[Type[Any]]
+	Type[Any]
+Any"type"builtins.tuple *
+options
+Anyì
+assert_close&torch.testing._comparison.assert_close"
+Any*
+actual
+Any*
+expected
+Any*6
+allow_subclasses
+builtins.bool"builtins.bool *V
+rtolJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None *V
+atolJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None */
+	equal_nan
+builtins.bool"builtins.bool *2
+check_device
+builtins.bool"builtins.bool *1
+check_dtype
+builtins.bool"builtins.bool *2
+check_layout
+builtins.bool"builtins.bool *2
+check_stride
+builtins.bool"builtins.bool *Ω
+msg±
+8Union[builtins.str,CallableType[builtins.function],None]
+builtins.str"builtins.strK
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *ï
+__annotations__)torch.testing._comparison.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*
+collectionscollections *
+npnumpy *\
+NUMPY_AVAILABLE)torch.testing._comparison.NUMPY_AVAILABLE
+builtins.bool"builtins.bool*¶
+_DTYPE_PRECISIONS+torch.testing._comparison._DTYPE_PRECISIONS„
+Bbuiltins.dict[torch._C.dtype,Tuple[builtins.float,builtins.float]] 
+torch._C.dtype"torch._C.dtypel
+$Tuple[builtins.float,builtins.float] 
+builtins.float"builtins.float 
+builtins.float"builtins.float"builtins.dict

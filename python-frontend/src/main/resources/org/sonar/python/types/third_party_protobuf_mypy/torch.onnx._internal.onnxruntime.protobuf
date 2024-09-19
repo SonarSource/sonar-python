@@ -1,0 +1,510 @@
+
+ torch.onnx._internal.onnxruntimeè
+OrtOperatorSupport3torch.onnx._internal.onnxruntime.OrtOperatorSupport"0torch.fx.passes.operator_support.OperatorSupport*÷
+__init__<torch.onnx._internal.onnxruntime.OrtOperatorSupport.__init__"
+None*t
+selfj
+3torch.onnx._internal.onnxruntime.OrtOperatorSupport"3torch.onnx._internal.onnxruntime.OrtOperatorSupport*<
+support_dict*
+builtins.set[Any]
+Any"builtins.set*o
+extra_support_dictW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*å
+is_node_supportedEtorch.onnx._internal.onnxruntime.OrtOperatorSupport.is_node_supported"
+builtins.bool"builtins.bool*t
+selfj
+3torch.onnx._internal.onnxruntime.OrtOperatorSupport"3torch.onnx._internal.onnxruntime.OrtOperatorSupport*¾
+
+submodules­
+;typing.Mapping[builtins.str,torch.nn.modules.module.Module]
+builtins.str"builtins.str@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"typing.Mapping*2
+node(
+torch.fx.node.Node"torch.fx.node.Noderˆ
+_onnx_support_dictFtorch.onnx._internal.onnxruntime.OrtOperatorSupport._onnx_support_dict*
+builtins.set[Any]
+Any"builtins.setÅ
+OrtExecutionInfoPerSession;torch.onnx._internal.onnxruntime.OrtExecutionInfoPerSession"builtins.object*½
+__init__Dtorch.onnx._internal.onnxruntime.OrtExecutionInfoPerSession.__init__"
+None*„
+selfz
+;torch.onnx._internal.onnxruntime.OrtExecutionInfoPerSession";torch.onnx._internal.onnxruntime.OrtExecutionInfoPerSession*
+session
+Any*]
+input_namesL
+builtins.tuple[builtins.str]
+builtins.str"builtins.str"builtins.tuple*E
+input_value_infos.
+builtins.tuple[Any]
+Any"builtins.tuple*^
+output_namesL
+builtins.tuple[builtins.str]
+builtins.str"builtins.str"builtins.tuple*F
+output_value_infos.
+builtins.tuple[Any]
+Any"builtins.tuple*A
+input_devices.
+builtins.tuple[Any]
+Any"builtins.tuple*B
+output_devices.
+builtins.tuple[Any]
+Any"builtins.tuple*î
+example_outputsØ
+@Union[builtins.tuple[torch._tensor.Tensor],torch._tensor.Tensor]d
+$builtins.tuple[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.tuple,
+torch._tensor.Tensor"torch._tensor.Tensor*l
+is_supportedHtorch.onnx._internal.onnxruntime.OrtExecutionInfoPerSession.is_supported*
+self*
+argsrW
+sessionCtorch.onnx._internal.onnxruntime.OrtExecutionInfoPerSession.session
+Anyr¤
+input_namesGtorch.onnx._internal.onnxruntime.OrtExecutionInfoPerSession.input_namesL
+builtins.tuple[builtins.str]
+builtins.str"builtins.str"builtins.tupler’
+input_value_infosMtorch.onnx._internal.onnxruntime.OrtExecutionInfoPerSession.input_value_infos.
+builtins.tuple[Any]
+Any"builtins.tupler¦
+output_namesHtorch.onnx._internal.onnxruntime.OrtExecutionInfoPerSession.output_namesL
+builtins.tuple[builtins.str]
+builtins.str"builtins.str"builtins.tupler”
+output_value_infosNtorch.onnx._internal.onnxruntime.OrtExecutionInfoPerSession.output_value_infos.
+builtins.tuple[Any]
+Any"builtins.tuplerŠ
+input_devicesItorch.onnx._internal.onnxruntime.OrtExecutionInfoPerSession.input_devices.
+builtins.tuple[Any]
+Any"builtins.tuplerŒ
+output_devicesJtorch.onnx._internal.onnxruntime.OrtExecutionInfoPerSession.output_devices.
+builtins.tuple[Any]
+Any"builtins.tupler¹
+example_outputsKtorch.onnx._internal.onnxruntime.OrtExecutionInfoPerSession.example_outputsØ
+@Union[builtins.tuple[torch._tensor.Tensor],torch._tensor.Tensor]d
+$builtins.tuple[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.tuple,
+torch._tensor.Tensor"torch._tensor.TensorÑ
+"OrtExecutionInfoForAllGraphModulesCtorch.onnx._internal.onnxruntime.OrtExecutionInfoForAllGraphModules"builtins.object*b
+__init__Ltorch.onnx._internal.onnxruntime.OrtExecutionInfoForAllGraphModules.__init__*
+self*¢
+&search_reusable_session_execution_infojtorch.onnx._internal.onnxruntime.OrtExecutionInfoForAllGraphModules.search_reusable_session_execution_info"
+Any*•
+selfŠ
+Ctorch.onnx._internal.onnxruntime.OrtExecutionInfoForAllGraphModules"Ctorch.onnx._internal.onnxruntime.OrtExecutionInfoForAllGraphModules*X
+graph_moduleF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*
+args
+Any*‚
+cache_session_execution_info`torch.onnx._internal.onnxruntime.OrtExecutionInfoForAllGraphModules.cache_session_execution_info"
+Any*•
+selfŠ
+Ctorch.onnx._internal.onnxruntime.OrtExecutionInfoForAllGraphModules"Ctorch.onnx._internal.onnxruntime.OrtExecutionInfoForAllGraphModules*X
+graph_moduleF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*„
+infoz
+;torch.onnx._internal.onnxruntime.OrtExecutionInfoPerSession";torch.onnx._internal.onnxruntime.OrtExecutionInfoPerSession8r·
+execution_info_per_graph_modulectorch.onnx._internal.onnxruntime.OrtExecutionInfoForAllGraphModules.execution_info_per_graph_module®
+{builtins.dict[torch.fx.graph_module.GraphModule,builtins.list[torch.onnx._internal.onnxruntime.OrtExecutionInfoPerSession]]F
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule×
+Jbuiltins.list[torch.onnx._internal.onnxruntime.OrtExecutionInfoPerSession]z
+;torch.onnx._internal.onnxruntime.OrtExecutionInfoPerSession";torch.onnx._internal.onnxruntime.OrtExecutionInfoPerSession"builtins.list"builtins.dictrŠ
+__dataclass_fields__Xtorch.onnx._internal.onnxruntime.OrtExecutionInfoForAllGraphModules.__dataclass_fields__—
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dict€*
+OrtBackendOptions2torch.onnx._internal.onnxruntime.OrtBackendOptions"builtins.object*›
+__init__;torch.onnx._internal.onnxruntime.OrtBackendOptions.__init__"
+None*r
+selfh
+2torch.onnx._internal.onnxruntime.OrtBackendOptions"2torch.onnx._internal.onnxruntime.OrtBackendOptions*Ð
+preferred_execution_providersª
+pUnion[typing.Sequence[TypeAlias[Union[builtins.str,Tuple[builtins.str,typing.Mapping[builtins.str,Any]]]]],None]©
+dtyping.Sequence[TypeAlias[Union[builtins.str,Tuple[builtins.str,typing.Mapping[builtins.str,Any]]]]]¯
+STypeAlias[Union[builtins.str,Tuple[builtins.str,typing.Mapping[builtins.str,Any]]]]ž
+HUnion[builtins.str,Tuple[builtins.str,typing.Mapping[builtins.str,Any]]]
+builtins.str"builtins.str±
+4Tuple[builtins.str,typing.Mapping[builtins.str,Any]]
+builtins.str"builtins.strY
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping"5torch.onnx._internal.onnxruntime.OrtExecutionProvider"typing.Sequence
+None *?
+infer_execution_providers
+builtins.bool"builtins.bool *Î
+default_execution_providersª
+pUnion[typing.Sequence[TypeAlias[Union[builtins.str,Tuple[builtins.str,typing.Mapping[builtins.str,Any]]]]],None]©
+dtyping.Sequence[TypeAlias[Union[builtins.str,Tuple[builtins.str,typing.Mapping[builtins.str,Any]]]]]¯
+STypeAlias[Union[builtins.str,Tuple[builtins.str,typing.Mapping[builtins.str,Any]]]]ž
+HUnion[builtins.str,Tuple[builtins.str,typing.Mapping[builtins.str,Any]]]
+builtins.str"builtins.str±
+4Tuple[builtins.str,typing.Mapping[builtins.str,Any]]
+builtins.str"builtins.strY
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping"5torch.onnx._internal.onnxruntime.OrtExecutionProvider"typing.Sequence
+None *8
+preallocate_output
+builtins.bool"builtins.bool *6
+use_aot_autograd
+builtins.bool"builtins.bool *¸
+export_options¡
+7Union[torch.onnx._internal.exporter.ExportOptions,None]Z
++torch.onnx._internal.exporter.ExportOptions"+torch.onnx._internal.exporter.ExportOptions
+None *A
+ort_session_options&
+Union[Any,None]
+Any
+None *þ
+pre_ort_model_transformsÝ
+<Union[typing.Sequence[CallableType[builtins.function]],None]
+0typing.Sequence[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"typing.Sequence
+None 8rž
+preferred_execution_providersPtorch.onnx._internal.onnxruntime.OrtBackendOptions.preferred_execution_providersª
+pUnion[typing.Sequence[TypeAlias[Union[builtins.str,Tuple[builtins.str,typing.Mapping[builtins.str,Any]]]]],None]©
+dtyping.Sequence[TypeAlias[Union[builtins.str,Tuple[builtins.str,typing.Mapping[builtins.str,Any]]]]]¯
+STypeAlias[Union[builtins.str,Tuple[builtins.str,typing.Mapping[builtins.str,Any]]]]ž
+HUnion[builtins.str,Tuple[builtins.str,typing.Mapping[builtins.str,Any]]]
+builtins.str"builtins.str±
+4Tuple[builtins.str,typing.Mapping[builtins.str,Any]]
+builtins.str"builtins.strY
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping"5torch.onnx._internal.onnxruntime.OrtExecutionProvider"typing.Sequence
+Noner‰
+infer_execution_providersLtorch.onnx._internal.onnxruntime.OrtBackendOptions.infer_execution_providers
+builtins.bool"builtins.boolrš
+default_execution_providersNtorch.onnx._internal.onnxruntime.OrtBackendOptions.default_execution_providersª
+pUnion[typing.Sequence[TypeAlias[Union[builtins.str,Tuple[builtins.str,typing.Mapping[builtins.str,Any]]]]],None]©
+dtyping.Sequence[TypeAlias[Union[builtins.str,Tuple[builtins.str,typing.Mapping[builtins.str,Any]]]]]¯
+STypeAlias[Union[builtins.str,Tuple[builtins.str,typing.Mapping[builtins.str,Any]]]]ž
+HUnion[builtins.str,Tuple[builtins.str,typing.Mapping[builtins.str,Any]]]
+builtins.str"builtins.str±
+4Tuple[builtins.str,typing.Mapping[builtins.str,Any]]
+builtins.str"builtins.strY
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping"5torch.onnx._internal.onnxruntime.OrtExecutionProvider"typing.Sequence
+Noner{
+preallocate_outputEtorch.onnx._internal.onnxruntime.OrtBackendOptions.preallocate_output
+builtins.bool"builtins.boolrw
+use_aot_autogradCtorch.onnx._internal.onnxruntime.OrtBackendOptions.use_aot_autograd
+builtins.bool"builtins.boolr÷
+export_optionsAtorch.onnx._internal.onnxruntime.OrtBackendOptions.export_options¡
+7Union[torch.onnx._internal.exporter.ExportOptions,None]Z
++torch.onnx._internal.exporter.ExportOptions"+torch.onnx._internal.exporter.ExportOptions
+Noner…
+ort_session_optionsFtorch.onnx._internal.onnxruntime.OrtBackendOptions.ort_session_options&
+Union[Any,None]
+Any
+NonerÇ
+pre_ort_model_transformsKtorch.onnx._internal.onnxruntime.OrtBackendOptions.pre_ort_model_transformsÝ
+<Union[typing.Sequence[CallableType[builtins.function]],None]
+0typing.Sequence[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"typing.Sequence
+Nonerù
+__dataclass_fields__Gtorch.onnx._internal.onnxruntime.OrtBackendOptions.__dataclass_fields__—
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictŒ%
+
+OrtBackend+torch.onnx._internal.onnxruntime.OrtBackend"builtins.object*ù
+__init__4torch.onnx._internal.onnxruntime.OrtBackend.__init__"
+None*d
+selfZ
++torch.onnx._internal.onnxruntime.OrtBackend"+torch.onnx._internal.onnxruntime.OrtBackend*Æ
+options¶
+>Union[torch.onnx._internal.onnxruntime.OrtBackendOptions,None]h
+2torch.onnx._internal.onnxruntime.OrtBackendOptions"2torch.onnx._internal.onnxruntime.OrtBackendOptions
+None *¨
+_select_eps7torch.onnx._internal.onnxruntime.OrtBackend._select_eps"Œ
+Etyping.Sequence[Tuple[builtins.str,typing.Mapping[builtins.str,Any]]]±
+4Tuple[builtins.str,typing.Mapping[builtins.str,Any]]
+builtins.str"builtins.strY
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping"typing.Sequence*d
+selfZ
++torch.onnx._internal.onnxruntime.OrtBackend"+torch.onnx._internal.onnxruntime.OrtBackend*X
+graph_moduleF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*
+args
+Any*É
+_ort_acclerated_call@torch.onnx._internal.onnxruntime.OrtBackend._ort_acclerated_call"
+Any*d
+selfZ
++torch.onnx._internal.onnxruntime.OrtBackend"+torch.onnx._internal.onnxruntime.OrtBackend*X
+graph_moduleF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*
+args
+Any*
+kwargs
+Any*Ù
+compile3torch.onnx._internal.onnxruntime.OrtBackend.compile"F
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*d
+selfZ
++torch.onnx._internal.onnxruntime.OrtBackend"+torch.onnx._internal.onnxruntime.OrtBackend*X
+graph_moduleF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*
+args
+Any*Û
+__call__4torch.onnx._internal.onnxruntime.OrtBackend.__call__"F
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*d
+selfZ
++torch.onnx._internal.onnxruntime.OrtBackend"+torch.onnx._internal.onnxruntime.OrtBackend*X
+graph_moduleF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*
+args
+Any*¡
+get_cached_instance_for_optionsKtorch.onnx._internal.onnxruntime.OrtBackend.get_cached_instance_for_options"Z
++torch.onnx._internal.onnxruntime.OrtBackend"+torch.onnx._internal.onnxruntime.OrtBackend*Â
+options²
+_Union[torch.onnx._internal.onnxruntime.OrtBackendOptions,typing.Mapping[builtins.str,Any],None]h
+2torch.onnx._internal.onnxruntime.OrtBackendOptions"2torch.onnx._internal.onnxruntime.OrtBackendOptionsY
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping
+None 0:staticmethodh*n
+clear_cached_instancesBtorch.onnx._internal.onnxruntime.OrtBackend.clear_cached_instances0:staticmethodh*j
+get_cached_instances@torch.onnx._internal.onnxruntime.OrtBackend.get_cached_instances0:staticmethodh8r‚
+__instance_cache_max_countFtorch.onnx._internal.onnxruntime.OrtBackend.__instance_cache_max_count
+builtins.int"builtins.intrú
+__instance_cache<torch.onnx._internal.onnxruntime.OrtBackend.__instance_cache§
+:builtins.list[torch.onnx._internal.onnxruntime.OrtBackend]Z
++torch.onnx._internal.onnxruntime.OrtBackend"+torch.onnx._internal.onnxruntime.OrtBackend"builtins.listrª
+_options4torch.onnx._internal.onnxruntime.OrtBackend._optionsh
+2torch.onnx._internal.onnxruntime.OrtBackendOptions"2torch.onnx._internal.onnxruntime.OrtBackendOptionsrw
+_resolved_onnx_exporter_optionsKtorch.onnx._internal.onnxruntime.OrtBackend._resolved_onnx_exporter_options
+Anyr¸
+_supported_ops:torch.onnx._internal.onnxruntime.OrtBackend._supported_opsj
+3torch.onnx._internal.onnxruntime.OrtOperatorSupport"3torch.onnx._internal.onnxruntime.OrtOperatorSupportrÊ
+_partitioner_cache>torch.onnx._internal.onnxruntime.OrtBackend._partitioner_cacheó
+Rbuiltins.dict[torch.fx.graph_module.GraphModule,torch.fx.graph_module.GraphModule]F
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModuleF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule"builtins.dictrë
+_all_ort_execution_infoCtorch.onnx._internal.onnxruntime.OrtBackend._all_ort_execution_infoŠ
+Ctorch.onnx._internal.onnxruntime.OrtExecutionInfoForAllGraphModules"Ctorch.onnx._internal.onnxruntime.OrtExecutionInfoForAllGraphModulesrˆ
+_assert_allclose_to_baselineHtorch.onnx._internal.onnxruntime.OrtBackend._assert_allclose_to_baseline
+builtins.bool"builtins.boolrl
+execution_count;torch.onnx._internal.onnxruntime.OrtBackend.execution_count
+builtins.int"builtins.intrƒ
+run/torch.onnx._internal.onnxruntime.OrtBackend.runK
+CallableType[builtins.function]&
+builtins.function"builtins.functionrt
+preallocate_output>torch.onnx._internal.onnxruntime.OrtBackend.preallocate_output
+builtins.bool"builtins.bool{
+is_onnxrt_backend_supported<torch.onnx._internal.onnxruntime.is_onnxrt_backend_supported"
+builtins.bool"builtins.bool²
+_dump_onnx_model1torch.onnx._internal.onnxruntime._dump_onnx_model"
+builtins.str"builtins.str*2
+model_string 
+builtins.bytes"builtins.bytes*˜
+graph_moduleƒ
+-Union[torch.fx.graph_module.GraphModule,None]F
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule
+None ™
+_infer_default_eps3torch.onnx._internal.onnxruntime._infer_default_eps"N
+typing.Sequence[builtins.str]
+builtins.str"builtins.str"typing.Sequencev
+_nvtx_range_push1torch.onnx._internal.onnxruntime._nvtx_range_push"
+Any*&
+name
+builtins.str"builtins.strC
+_nvtx_range_pop0torch.onnx._internal.onnxruntime._nvtx_range_pop…
+_get_ort_device_type5torch.onnx._internal.onnxruntime._get_ort_device_type"
+Any*-
+device_type
+builtins.str"builtins.str½
+_move_placeholder_to_front;torch.onnx._internal.onnxruntime._move_placeholder_to_front"
+None*X
+graph_moduleF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule°
+_infer_ep_from_device6torch.onnx._internal.onnxruntime._infer_ep_from_device"L
+builtins.tuple[builtins.str]
+builtins.str"builtins.str"builtins.tuple*
+args
+Anyç
+_extract_graph_module_inputs=torch.onnx._internal.onnxruntime._extract_graph_module_inputs".
+builtins.tuple[Any]
+Any"builtins.tuple*X
+graph_moduleF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModuleÂ
+_extract_graph_module_outputs>torch.onnx._internal.onnxruntime._extract_graph_module_outputs"
+Any*X
+graph_moduleF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModuleƒ
+_infer_ep_from_graph_module<torch.onnx._internal.onnxruntime._infer_ep_from_graph_module"L
+builtins.tuple[builtins.str]
+builtins.str"builtins.str"builtins.tuple*X
+graph_moduleF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModuleÜ
+	_sort_eps*torch.onnx._internal.onnxruntime._sort_eps"L
+builtins.tuple[builtins.str]
+builtins.str"builtins.str"builtins.tuple*U
+epsL
+builtins.tuple[builtins.str]
+builtins.str"builtins.str"builtins.tupleü
+_get_onnx_devices2torch.onnx._internal.onnxruntime._get_onnx_devices".
+builtins.tuple[Any]
+Any"builtins.tuple*‚
+valuesõ
+builtins.tuple[Union[torch._tensor.Tensor,torch.SymInt,builtins.int,torch.SymFloat,builtins.float,torch.SymBool,builtins.bool]]á
+oUnion[torch._tensor.Tensor,torch.SymInt,builtins.int,torch.SymFloat,builtins.float,torch.SymBool,builtins.bool],
+torch._tensor.Tensor"torch._tensor.Tensor
+torch.SymInt"torch.SymInt
+builtins.int"builtins.int 
+torch.SymFloat"torch.SymFloat 
+builtins.float"builtins.float
+torch.SymBool"torch.SymBool
+builtins.bool"builtins.bool"builtins.tupleý
+!_get_ortvalues_from_torch_tensorsBtorch.onnx._internal.onnxruntime._get_ortvalues_from_torch_tensors"d
+$builtins.tuple[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.tuple*q
+tensorsd
+$builtins.tuple[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.tuple*;
+devices.
+builtins.tuple[Any]
+Any"builtins.tupleÓ
+_to_real_tensor0torch.onnx._internal.onnxruntime._to_real_tensor",
+torch._tensor.Tensor"torch._tensor.Tensor*`
+tensorT
+(torch._subclasses.fake_tensor.FakeTensor"(torch._subclasses.fake_tensor.FakeTensor•
+_adjust_scalar_from_fx_to_onnx?torch.onnx._internal.onnxruntime._adjust_scalar_from_fx_to_onnx",
+torch._tensor.Tensor"torch._tensor.Tensor*ê
+dynamo_value×
+EUnion[torch._tensor.Tensor,builtins.int,builtins.float,builtins.bool],
+torch._tensor.Tensor"torch._tensor.Tensor
+builtins.int"builtins.int 
+builtins.float"builtins.float
+builtins.bool"builtins.bool*
+
+value_info
+Anyê
+_adjust_scalar_from_onnx_to_fx?torch.onnx._internal.onnxruntime._adjust_scalar_from_onnx_to_fx"×
+EUnion[torch._tensor.Tensor,builtins.int,builtins.float,builtins.bool],
+torch._tensor.Tensor"torch._tensor.Tensor
+builtins.int"builtins.int 
+builtins.float"builtins.float
+builtins.bool"builtins.bool*8
+tensor,
+torch._tensor.Tensor"torch._tensor.Tensor*ò
+
+prim_valueá
+oUnion[torch._tensor.Tensor,torch.SymInt,builtins.int,torch.SymFloat,builtins.float,torch.SymBool,builtins.bool],
+torch._tensor.Tensor"torch._tensor.Tensor
+torch.SymInt"torch.SymInt
+builtins.int"builtins.int 
+torch.SymFloat"torch.SymFloat 
+builtins.float"builtins.float
+torch.SymBool"torch.SymBool
+builtins.bool"builtins.bool†
+%_run_onnx_session_with_ortvaluevectorFtorch.onnx._internal.onnxruntime._run_onnx_session_with_ortvaluevector"Á
+Ubuiltins.tuple[Union[torch._tensor.Tensor,builtins.int,builtins.float,builtins.bool]]×
+EUnion[torch._tensor.Tensor,builtins.int,builtins.float,builtins.bool],
+torch._tensor.Tensor"torch._tensor.Tensor
+builtins.int"builtins.int 
+builtins.float"builtins.float
+builtins.bool"builtins.bool"builtins.tuple*
+sess
+Any*]
+input_namesL
+builtins.tuple[builtins.str]
+builtins.str"builtins.str"builtins.tuple*p
+inputsd
+$builtins.tuple[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.tuple*A
+input_devices.
+builtins.tuple[Any]
+Any"builtins.tuple*^
+output_namesL
+builtins.tuple[builtins.str]
+builtins.str"builtins.str"builtins.tuple*q
+outputsd
+$builtins.tuple[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.tuple*B
+output_devices.
+builtins.tuple[Any]
+Any"builtins.tuple*6
+preallocate_output
+builtins.bool"builtins.bool*E
+input_value_infos.
+builtins.tuple[Any]
+Any"builtins.tuple*“
+normalized_prim_outputsõ
+builtins.tuple[Union[torch._tensor.Tensor,torch.SymInt,builtins.int,torch.SymFloat,builtins.float,torch.SymBool,builtins.bool]]á
+oUnion[torch._tensor.Tensor,torch.SymInt,builtins.int,torch.SymFloat,builtins.float,torch.SymBool,builtins.bool],
+torch._tensor.Tensor"torch._tensor.Tensor
+torch.SymInt"torch.SymInt
+builtins.int"builtins.int 
+torch.SymFloat"torch.SymFloat 
+builtins.float"builtins.float
+torch.SymBool"torch.SymBool
+builtins.bool"builtins.bool"builtins.tupleô
+_run_onnx_session_with_fetch=torch.onnx._internal.onnxruntime._run_onnx_session_with_fetch"Á
+Ubuiltins.tuple[Union[torch._tensor.Tensor,builtins.int,builtins.float,builtins.bool]]×
+EUnion[torch._tensor.Tensor,builtins.int,builtins.float,builtins.bool],
+torch._tensor.Tensor"torch._tensor.Tensor
+builtins.int"builtins.int 
+builtins.float"builtins.float
+builtins.bool"builtins.bool"builtins.tuple*
+sess
+Any*]
+input_namesL
+builtins.tuple[builtins.str]
+builtins.str"builtins.str"builtins.tuple*p
+inputsd
+$builtins.tuple[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.tuple*A
+input_devices.
+builtins.tuple[Any]
+Any"builtins.tuple*^
+output_namesL
+builtins.tuple[builtins.str]
+builtins.str"builtins.str"builtins.tuple*q
+outputsd
+$builtins.tuple[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.tuple*B
+output_devices.
+builtins.tuple[Any]
+Any"builtins.tuple*6
+preallocate_output
+builtins.bool"builtins.bool*E
+input_value_infos.
+builtins.tuple[Any]
+Any"builtins.tuple*“
+normalized_prim_outputsõ
+builtins.tuple[Union[torch._tensor.Tensor,torch.SymInt,builtins.int,torch.SymFloat,builtins.float,torch.SymBool,builtins.bool]]á
+oUnion[torch._tensor.Tensor,torch.SymInt,builtins.int,torch.SymFloat,builtins.float,torch.SymBool,builtins.bool],
+torch._tensor.Tensor"torch._tensor.Tensor
+torch.SymInt"torch.SymInt
+builtins.int"builtins.int 
+torch.SymFloat"torch.SymFloat 
+builtins.float"builtins.float
+torch.SymBool"torch.SymBool
+builtins.bool"builtins.bool"builtins.tuple*œ
+__annotations__0torch.onnx._internal.onnxruntime.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*6
+onnx%torch.onnx._internal.onnxruntime.onnx
+Any*D
+onnxruntime,torch.onnx._internal.onnxruntime.onnxruntime
+Any*6
+ORTC%torch.onnx._internal.onnxruntime.ORTC
+Any*c
+_SUPPORT_ONNXRT0torch.onnx._internal.onnxruntime._SUPPORT_ONNXRT
+builtins.bool"builtins.bool*
+__all__(torch.onnx._internal.onnxruntime.__all__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*À
+_dumped_onnx_model3torch.onnx._internal.onnxruntime._dumped_onnx_modelu
+(builtins.dict[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int"builtins.dict*S
+logger'torch.onnx._internal.onnxruntime.logger 
+logging.Logger"logging.Logger

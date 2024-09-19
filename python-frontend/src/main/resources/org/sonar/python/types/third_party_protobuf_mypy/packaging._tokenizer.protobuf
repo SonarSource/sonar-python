@@ -1,0 +1,144 @@
+
+packaging._tokenizerÛ
+Tokenpackaging._tokenizer.Token"builtins.object*˘
+__init__#packaging._tokenizer.Token.__init__"
+None*B
+self8
+packaging._tokenizer.Token"packaging._tokenizer.Token*&
+name
+builtins.str"builtins.str*&
+text
+builtins.str"builtins.str**
+position
+builtins.int"builtins.int8rE
+namepackaging._tokenizer.Token.name
+builtins.str"builtins.strrE
+textpackaging._tokenizer.Token.text
+builtins.str"builtins.strrM
+position#packaging._tokenizer.Token.position
+builtins.int"builtins.intr·
+__dataclass_fields__/packaging._tokenizer.Token.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dict™
+ParserSyntaxError&packaging._tokenizer.ParserSyntaxError"builtins.Exception*‚
+__init__/packaging._tokenizer.ParserSyntaxError.__init__"
+None*Z
+selfP
+&packaging._tokenizer.ParserSyntaxError"&packaging._tokenizer.ParserSyntaxError*)
+message
+builtins.str"builtins.str*(
+source
+builtins.str"builtins.str*j
+span`
+ Tuple[builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int*´
+__str__.packaging._tokenizer.ParserSyntaxError.__str__"
+builtins.str"builtins.str*RP
+&packaging._tokenizer.ParserSyntaxError"&packaging._tokenizer.ParserSyntaxErrorrï
+span+packaging._tokenizer.ParserSyntaxError.span`
+ Tuple[builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.intrW
+message.packaging._tokenizer.ParserSyntaxError.message
+builtins.str"builtins.strrU
+source-packaging._tokenizer.ParserSyntaxError.source
+builtins.str"builtins.strÄ
+	Tokenizerpackaging._tokenizer.Tokenizer"builtins.object*–
+__init__'packaging._tokenizer.Tokenizer.__init__"
+None*J
+self@
+packaging._tokenizer.Tokenizer"packaging._tokenizer.Tokenizer*(
+source
+builtins.str"builtins.str*ö
+rulesé
+Hbuiltins.dict[builtins.str,Union[builtins.str,re.Pattern[builtins.str]]]
+builtins.str"builtins.strî
+,Union[builtins.str,re.Pattern[builtins.str]]
+builtins.str"builtins.strD
+re.Pattern[builtins.str]
+builtins.str"builtins.str"
+re.Pattern"builtins.dict*Ø
+consume&packaging._tokenizer.Tokenizer.consume"
+None*J
+self@
+packaging._tokenizer.Tokenizer"packaging._tokenizer.Tokenizer*&
+name
+builtins.str"builtins.str*Ì
+check$packaging._tokenizer.Tokenizer.check"
+builtins.bool"builtins.bool*J
+self@
+packaging._tokenizer.Tokenizer"packaging._tokenizer.Tokenizer*&
+name
+builtins.str"builtins.str**
+peek
+builtins.bool"builtins.bool *â
+expect%packaging._tokenizer.Tokenizer.expect"8
+packaging._tokenizer.Token"packaging._tokenizer.Token*J
+self@
+packaging._tokenizer.Tokenizer"packaging._tokenizer.Tokenizer*&
+name
+builtins.str"builtins.str**
+expected
+builtins.str"builtins.str*±
+read#packaging._tokenizer.Tokenizer.read"8
+packaging._tokenizer.Token"packaging._tokenizer.Token*J
+self@
+packaging._tokenizer.Tokenizer"packaging._tokenizer.Tokenizer*˙
+raise_syntax_error1packaging._tokenizer.Tokenizer.raise_syntax_error"
+NoReturn
+*J
+self@
+packaging._tokenizer.Tokenizer"packaging._tokenizer.Tokenizer*)
+message
+builtins.str"builtins.str*V
+
+span_startD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *T
+span_endD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *Á
+enclosing_tokens/packaging._tokenizer.Tokenizer.enclosing_tokens"2
+typing.Iterator[None]
+None"typing.Iterator*J
+self@
+packaging._tokenizer.Tokenizer"packaging._tokenizer.Tokenizer*,
+
+open_token
+builtins.str"builtins.str*-
+close_token
+builtins.str"builtins.str*(
+around
+builtins.str"builtins.str0:contextlib.contextmanagerrM
+source%packaging._tokenizer.Tokenizer.source
+builtins.str"builtins.strrŸ
+rules$packaging._tokenizer.Tokenizer.rules©
+4builtins.dict[builtins.str,re.Pattern[builtins.str]]
+builtins.str"builtins.strD
+re.Pattern[builtins.str]
+builtins.str"builtins.str"
+re.Pattern"builtins.dictrß
+
+next_token)packaging._tokenizer.Tokenizer.next_tokenn
+&Union[packaging._tokenizer.Token,None]8
+packaging._tokenizer.Token"packaging._tokenizer.Token
+NonerQ
+position'packaging._tokenizer.Tokenizer.position
+builtins.int"builtins.int*ê
+__annotations__$packaging._tokenizer.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*ƒ
+DEFAULT_RULES"packaging._tokenizer.DEFAULT_RULESé
+Hbuiltins.dict[builtins.str,Union[builtins.str,re.Pattern[builtins.str]]]
+builtins.str"builtins.strî
+,Union[builtins.str,re.Pattern[builtins.str]]
+builtins.str"builtins.strD
+re.Pattern[builtins.str]
+builtins.str"builtins.str"
+re.Pattern"builtins.dict

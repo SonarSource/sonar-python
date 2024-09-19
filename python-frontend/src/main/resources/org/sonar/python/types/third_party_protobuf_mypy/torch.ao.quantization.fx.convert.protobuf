@@ -1,0 +1,274 @@
+
+ torch.ao.quantization.fx.convertï
+:_replace_observer_with_quantize_dequantize_node_decomposed[torch.ao.quantization.fx.convert._replace_observer_with_quantize_dequantize_node_decomposed"
+None*Q
+modelF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*2
+node(
+torch.fx.node.Node"torch.fx.node.Node*¹
+modules«
+:builtins.dict[builtins.str,torch.nn.modules.module.Module]
+builtins.str"builtins.str@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"builtins.dict*ê
+node_name_to_scopeÑ
+=builtins.dict[builtins.str,Tuple[builtins.str,builtins.type]]
+builtins.str"builtins.strc
+!Tuple[builtins.str,builtins.type]
+builtins.str"builtins.str
+builtins.type"builtins.type"builtins.dict*™
+node_name_to_qconfigþ
+Lbuiltins.dict[builtins.str,TypeAlias[Union[TypeAlias[Tuple[Any,Any]],None]]]
+builtins.str"builtins.str€
+0TypeAlias[Union[TypeAlias[Tuple[Any,Any]],None]]Ÿ
+%Union[TypeAlias[Tuple[Any,Any]],None]j
+TypeAlias[Tuple[Any,Any]]$
+Tuple[Any,Any]
+Any
+Any"%torch.ao.quantization.qconfig.QConfig
+None"(torch.ao.quantization.qconfig.QConfigAny"builtins.dictÙ
+/_replace_observer_with_quantize_dequantize_nodePtorch.ao.quantization.fx.convert._replace_observer_with_quantize_dequantize_node"
+None*Q
+modelF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*2
+node(
+torch.fx.node.Node"torch.fx.node.Node*¹
+modules«
+:builtins.dict[builtins.str,torch.nn.modules.module.Module]
+builtins.str"builtins.str@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"builtins.dict*ê
+node_name_to_scopeÑ
+=builtins.dict[builtins.str,Tuple[builtins.str,builtins.type]]
+builtins.str"builtins.strc
+!Tuple[builtins.str,builtins.type]
+builtins.str"builtins.str
+builtins.type"builtins.type"builtins.dict*™
+node_name_to_qconfigþ
+Lbuiltins.dict[builtins.str,TypeAlias[Union[TypeAlias[Tuple[Any,Any]],None]]]
+builtins.str"builtins.str€
+0TypeAlias[Union[TypeAlias[Tuple[Any,Any]],None]]Ÿ
+%Union[TypeAlias[Tuple[Any,Any]],None]j
+TypeAlias[Tuple[Any,Any]]$
+Tuple[Any,Any]
+Any
+Any"%torch.ao.quantization.qconfig.QConfig
+None"(torch.ao.quantization.qconfig.QConfigAny"builtins.dictˆ
+6_replace_observer_or_dequant_stub_with_dequantize_nodeWtorch.ao.quantization.fx.convert._replace_observer_or_dequant_stub_with_dequantize_node"
+None*2
+node(
+torch.fx.node.Node"torch.fx.node.Node*7
+graph,
+torch.fx.graph.Graph"torch.fx.graph.GraphÔ
+_is_conversion_supported9torch.ao.quantization.fx.convert._is_conversion_supported"
+builtins.bool"builtins.bool*]
+activation_post_process@
+torch.nn.modules.module.Module"torch.nn.modules.module.Moduleä
+_has_none_qconfig2torch.ao.quantization.fx.convert._has_none_qconfig"
+builtins.bool"builtins.bool*Þ
+nodeÓ
+ÙTypeAlias[Union[builtins.tuple[Any],builtins.list[Any],builtins.dict[builtins.str,Any],builtins.slice,builtins.range,torch.fx.node.Node,TypeAlias[Union[builtins.str,builtins.int,builtins.float,builtins.bool,builtins.complex,torch._C.dtype,torch._tensor.Tensor,torch._C.device,torch._C.memory_format,torch._C.layout,torch._ops.OpOverload]],None]]Ú
+ÎUnion[builtins.tuple[Any],builtins.list[Any],builtins.dict[builtins.str,Any],builtins.slice,builtins.range,torch.fx.node.Node,TypeAlias[Union[builtins.str,builtins.int,builtins.float,builtins.bool,builtins.complex,torch._C.dtype,torch._tensor.Tensor,torch._C.device,torch._C.memory_format,torch._C.layout,torch._ops.OpOverload]],None].
+builtins.tuple[Any]
+Any"builtins.tuple,
+builtins.list[Any]
+Any"builtins.listW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict 
+builtins.slice"builtins.slice 
+builtins.range"builtins.range(
+torch.fx.node.Node"torch.fx.node.NodeÕ
+ÊTypeAlias[Union[builtins.str,builtins.int,builtins.float,builtins.bool,builtins.complex,torch._C.dtype,torch._tensor.Tensor,torch._C.device,torch._C.memory_format,torch._C.layout,torch._ops.OpOverload]]â
+¿Union[builtins.str,builtins.int,builtins.float,builtins.bool,builtins.complex,torch._C.dtype,torch._tensor.Tensor,torch._C.device,torch._C.memory_format,torch._C.layout,torch._ops.OpOverload]
+builtins.str"builtins.str
+builtins.int"builtins.int 
+builtins.float"builtins.float
+builtins.bool"builtins.bool$
+builtins.complex"builtins.complex 
+torch._C.dtype"torch._C.dtype,
+torch._tensor.Tensor"torch._tensor.Tensor"
+torch._C.device"torch._C.device0
+torch._C.memory_format"torch._C.memory_format"
+torch._C.layout"torch._C.layout.
+torch._ops.OpOverload"torch._ops.OpOverload"torch.fx.node.BaseArgumentTypes
+None"torch.fx.node.Argument*™
+node_name_to_qconfigþ
+Lbuiltins.dict[builtins.str,TypeAlias[Union[TypeAlias[Tuple[Any,Any]],None]]]
+builtins.str"builtins.str€
+0TypeAlias[Union[TypeAlias[Tuple[Any,Any]],None]]Ÿ
+%Union[TypeAlias[Tuple[Any,Any]],None]j
+TypeAlias[Tuple[Any,Any]]$
+Tuple[Any,Any]
+Any
+Any"%torch.ao.quantization.qconfig.QConfig
+None"(torch.ao.quantization.qconfig.QConfigAny"builtins.dictÍ
+_run_weight_observers6torch.ao.quantization.fx.convert._run_weight_observers"
+None*T
+observedF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*›
+backend_config†
+Atorch.ao.quantization.backend_config.backend_config.BackendConfig"Atorch.ao.quantization.backend_config.backend_config.BackendConfigò
+"_maybe_recursive_remove_dequantizeCtorch.ao.quantization.fx.convert._maybe_recursive_remove_dequantize"
+None*
+arg
+Any*2
+node(
+torch.fx.node.Node"torch.fx.node.Node*7
+graph,
+torch.fx.graph.Graph"torch.fx.graph.Graphþ
+_get_module_path_and_prefix<torch.ao.quantization.fx.convert._get_module_path_and_prefix"`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str*6
+obs_node(
+torch.fx.node.Node"torch.fx.node.Node*ê
+node_name_to_scopeÑ
+=builtins.dict[builtins.str,Tuple[builtins.str,builtins.type]]
+builtins.str"builtins.strc
+!Tuple[builtins.str,builtins.type]
+builtins.str"builtins.str
+builtins.type"builtins.type"builtins.dict*™
+node_name_to_qconfigþ
+Lbuiltins.dict[builtins.str,TypeAlias[Union[TypeAlias[Tuple[Any,Any]],None]]]
+builtins.str"builtins.str€
+0TypeAlias[Union[TypeAlias[Tuple[Any,Any]],None]]Ÿ
+%Union[TypeAlias[Tuple[Any,Any]],None]j
+TypeAlias[Tuple[Any,Any]]$
+Tuple[Any,Any]
+Any
+Any"%torch.ao.quantization.qconfig.QConfig
+None"(torch.ao.quantization.qconfig.QConfigAny"builtins.dictÊ
+_insert_dequantize_node8torch.ao.quantization.fx.convert._insert_dequantize_node"
+None*2
+node(
+torch.fx.node.Node"torch.fx.node.Node*7
+graph,
+torch.fx.graph.Graph"torch.fx.graph.GraphÉ
+_maybe_get_observer_for_node=torch.ao.quantization.fx.convert._maybe_get_observer_for_node"z
+*Union[torch.nn.modules.module.Module,None]@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module
+None*2
+node(
+torch.fx.node.Node"torch.fx.node.Node*¹
+modules«
+:builtins.dict[builtins.str,torch.nn.modules.module.Module]
+builtins.str"builtins.str@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"builtins.dictÒ
+convert_standalone_module:torch.ao.quantization.fx.convert.convert_standalone_module"
+None*2
+node(
+torch.fx.node.Node"torch.fx.node.Node*¹
+modules«
+:builtins.dict[builtins.str,torch.nn.modules.module.Module]
+builtins.str"builtins.str@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"builtins.dict*Q
+modelF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*0
+is_reference
+builtins.bool"builtins.bool*ù
+backend_configä
+MUnion[torch.ao.quantization.backend_config.backend_config.BackendConfig,None]†
+Atorch.ao.quantization.backend_config.backend_config.BackendConfig"Atorch.ao.quantization.backend_config.backend_config.BackendConfig
+NoneÓ
+convert_weighted_module8torch.ao.quantization.fx.convert.convert_weighted_module"
+None*2
+node(
+torch.fx.node.Node"torch.fx.node.Node*¹
+modules«
+:builtins.dict[builtins.str,torch.nn.modules.module.Module]
+builtins.str"builtins.str@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"builtins.dict*a
+observed_node_namesH
+builtins.set[builtins.str]
+builtins.str"builtins.str"builtins.set*™
+node_name_to_qconfigþ
+Lbuiltins.dict[builtins.str,TypeAlias[Union[TypeAlias[Tuple[Any,Any]],None]]]
+builtins.str"builtins.str€
+0TypeAlias[Union[TypeAlias[Tuple[Any,Any]],None]]Ÿ
+%Union[TypeAlias[Tuple[Any,Any]],None]j
+TypeAlias[Tuple[Any,Any]]$
+Tuple[Any,Any]
+Any
+Any"%torch.ao.quantization.qconfig.QConfig
+None"(torch.ao.quantization.qconfig.QConfigAny"builtins.dict*›
+backend_config†
+Atorch.ao.quantization.backend_config.backend_config.BackendConfig"Atorch.ao.quantization.backend_config.backend_config.BackendConfig*3
+is_decomposed
+builtins.bool"builtins.bool *2
+is_reference
+builtins.bool"builtins.bool ­
+,_remove_previous_dequantize_in_custom_moduleMtorch.ao.quantization.fx.convert._remove_previous_dequantize_in_custom_module"
+None*2
+node(
+torch.fx.node.Node"torch.fx.node.Node*7
+	prev_node(
+torch.fx.node.Node"torch.fx.node.Node*7
+graph,
+torch.fx.graph.Graph"torch.fx.graph.Graphê
+convert_custom_module6torch.ao.quantization.fx.convert.convert_custom_module"
+None*2
+node(
+torch.fx.node.Node"torch.fx.node.Node*7
+graph,
+torch.fx.graph.Graph"torch.fx.graph.Graph*¹
+modules«
+:builtins.dict[builtins.str,torch.nn.modules.module.Module]
+builtins.str"builtins.str@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"builtins.dict*Ú
+custom_module_class_mapping¸
+\builtins.dict[torch.ao.quantization.quant_type.QuantType,builtins.dict[Type[Any],Type[Any]]]X
+*torch.ao.quantization.quant_type.QuantType"*torch.ao.quantization.quant_type.QuantTypeo
+"builtins.dict[Type[Any],Type[Any]]
+	Type[Any]
+Any"type
+	Type[Any]
+Any"type"builtins.dict"builtins.dict*ˆ
+(statically_quantized_custom_module_nodesZ
+ builtins.set[torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node"builtins.setÞ
+convert(torch.ao.quantization.fx.convert.convert"F
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*Q
+modelF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*2
+is_reference
+builtins.bool"builtins.bool *å
+convert_custom_configÇ
+fUnion[torch.ao.quantization.fx.custom_config.ConvertCustomConfig,builtins.dict[builtins.str,Any],None]x
+:torch.ao.quantization.fx.custom_config.ConvertCustomConfig":torch.ao.quantization.fx.custom_config.ConvertCustomConfigW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None *:
+is_standalone_module
+builtins.bool"builtins.bool *:
+_remove_qconfig_flag
+builtins.bool"builtins.bool *Í
+qconfig_mappingµ
+`Union[torch.ao.quantization.qconfig_mapping.QConfigMapping,builtins.dict[builtins.str,Any],None]l
+4torch.ao.quantization.qconfig_mapping.QConfigMapping"4torch.ao.quantization.qconfig_mapping.QConfigMappingW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None *ô
+backend_configÝ
+mUnion[torch.ao.quantization.backend_config.backend_config.BackendConfig,builtins.dict[builtins.str,Any],None]†
+Atorch.ao.quantization.backend_config.backend_config.BackendConfig"Atorch.ao.quantization.backend_config.backend_config.BackendConfigW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None *3
+is_decomposed
+builtins.bool"builtins.bool *œ
+__annotations__0torch.ao.quantization.fx.convert.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*
+__all__(torch.ao.quantization.fx.convert.__all__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*™
+SUPPORTED_QDTYPES2torch.ao.quantization.fx.convert.SUPPORTED_QDTYPESP
+builtins.list[torch._C.dtype] 
+torch._C.dtype"torch._C.dtype"builtins.list*Ä
+_QSCHEME_TO_CHOOSE_QPARAMS_OP>torch.ao.quantization.fx.convert._QSCHEME_TO_CHOOSE_QPARAMS_OPc
+#builtins.dict[torch._C.qscheme,Any]$
+torch._C.qscheme"torch._C.qscheme
+Any"builtins.dict

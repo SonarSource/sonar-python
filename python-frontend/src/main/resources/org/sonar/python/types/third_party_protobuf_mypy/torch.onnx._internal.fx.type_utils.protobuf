@@ -1,0 +1,116 @@
+
+"torch.onnx._internal.fx.type_utilsÕ
+
+TensorLike-torch.onnx._internal.fx.type_utils.TensorLike"builtins.object*‚
+dtype3torch.onnx._internal.fx.type_utils.TensorLike.dtype"J
+Union[torch._C.dtype,None] 
+torch._C.dtype"torch._C.dtype
+None*h
+self^
+-torch.onnx._internal.fx.type_utils.TensorLike"-torch.onnx._internal.fx.type_utils.TensorLike0:property@`8X§
+is_torch_complex_dtype9torch.onnx._internal.fx.type_utils.is_torch_complex_dtype"
+builtins.bool"builtins.bool*2
+tensor_dtype 
+torch._C.dtype"torch._C.dtype 
+from_complex_to_float8torch.onnx._internal.fx.type_utils.from_complex_to_float" 
+torch._C.dtype"torch._C.dtype*+
+dtype 
+torch._C.dtype"torch._C.dtypeŸ
+from_sym_value_to_torch_dtype@torch.onnx._internal.fx.type_utils.from_sym_value_to_torch_dtype" 
+torch._C.dtype"torch._C.dtype*™
+	sym_value‰
+;TypeAlias[Union[torch.SymInt,torch.SymFloat,torch.SymBool]]”
+0Union[torch.SymInt,torch.SymFloat,torch.SymBool]
+torch.SymInt"torch.SymInt 
+torch.SymFloat"torch.SymFloat
+torch.SymBool"torch.SymBool"1torch.onnx._internal.fx.type_utils.SYM_VALUE_TYPE¬
+is_optional_onnx_dtype_str=torch.onnx._internal.fx.type_utils.is_optional_onnx_dtype_str"
+builtins.bool"builtins.bool*/
+onnx_type_str
+builtins.str"builtins.str«
+"from_torch_dtype_to_onnx_dtype_strEtorch.onnx._internal.fx.type_utils.from_torch_dtype_to_onnx_dtype_str"H
+builtins.set[builtins.str]
+builtins.str"builtins.str"builtins.set*t
+dtypei
+#Union[torch._C.dtype,builtins.type] 
+torch._C.dtype"torch._C.dtype
+builtins.type"builtins.typeû
+'from_python_type_to_onnx_attribute_typeJtorch.onnx._internal.fx.type_utils.from_python_type_to_onnx_attribute_type"&
+Union[Any,None]
+Any
+None*)
+dtype
+builtins.type"builtins.type*1
+is_sequence
+builtins.bool"builtins.bool ²
+,from_python_type_to_onnx_tensor_element_typeOtorch.onnx._internal.fx.type_utils.from_python_type_to_onnx_tensor_element_type"
+Any*(
+type
+builtins.type"builtins.type‡
+is_torch_symbolic_type9torch.onnx._internal.fx.type_utils.is_torch_symbolic_type"
+builtins.bool"builtins.bool*
+value
+AnyÌ
+from_torch_dtype_to_abbr;torch.onnx._internal.fx.type_utils.from_torch_dtype_to_abbr"
+builtins.str"builtins.str*U
+dtypeJ
+Union[torch._C.dtype,None] 
+torch._C.dtype"torch._C.dtype
+Noneâ
+from_scalar_type_to_torch_dtypeBtorch.onnx._internal.fx.type_utils.from_scalar_type_to_torch_dtype"J
+Union[torch._C.dtype,None] 
+torch._C.dtype"torch._C.dtype
+None*/
+scalar_type
+builtins.type"builtins.type*ž
+__annotations__2torch.onnx._internal.fx.type_utils.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*8
+onnx'torch.onnx._internal.fx.type_utils.onnx
+Any*•
+,_TORCH_DTYPE_TO_COMPATIBLE_ONNX_TYPE_STRINGSOtorch.onnx._internal.fx.type_utils._TORCH_DTYPE_TO_COMPATIBLE_ONNX_TYPE_STRINGS“
+Mbuiltins.dict[Union[torch._C.dtype,builtins.type],builtins.set[builtins.str]]i
+#Union[torch._C.dtype,builtins.type] 
+torch._C.dtype"torch._C.dtype
+builtins.type"builtins.typeH
+builtins.set[builtins.str]
+builtins.str"builtins.str"builtins.set"builtins.dict*¡
+_OPTIONAL_ONNX_DTYPE_STR;torch.onnx._internal.fx.type_utils._OPTIONAL_ONNX_DTYPE_STRH
+builtins.set[builtins.str]
+builtins.str"builtins.str"builtins.set*Ý
+_PYTHON_TYPE_TO_TORCH_DTYPE>torch.onnx._internal.fx.type_utils._PYTHON_TYPE_TO_TORCH_DTYPE~
++builtins.dict[builtins.type,torch._C.dtype]
+builtins.type"builtins.type 
+torch._C.dtype"torch._C.dtype"builtins.dict*Í
+_COMPLEX_TO_FLOAT4torch.onnx._internal.fx.type_utils._COMPLEX_TO_FLOAT
+,builtins.dict[torch._C.dtype,torch._C.dtype] 
+torch._C.dtype"torch._C.dtype 
+torch._C.dtype"torch._C.dtype"builtins.dict*‡
+_SYM_TYPE_TO_TORCH_DTYPE;torch.onnx._internal.fx.type_utils._SYM_TYPE_TO_TORCH_DTYPE­
+9builtins.dict[CallableType[builtins.type],torch._C.dtype]?
+CallableType[builtins.type]
+builtins.type"builtins.type 
+torch._C.dtype"torch._C.dtype"builtins.dict*×
+_SCALAR_TYPE_TO_TORCH_DTYPE>torch.onnx._internal.fx.type_utils._SCALAR_TYPE_TO_TORCH_DTYPEx
+'builtins.dict[Type[Any],torch._C.dtype]
+	Type[Any]
+Any"type 
+torch._C.dtype"torch._C.dtype"builtins.dict*Ü
+_TORCH_DTYPE_TO_ABBREVIATION?torch.onnx._internal.fx.type_utils._TORCH_DTYPE_TO_ABBREVIATION{
+*builtins.dict[torch._C.dtype,builtins.str] 
+torch._C.dtype"torch._C.dtype
+builtins.str"builtins.str"builtins.dict*
+_TORCH_DTYPE_TO_NUMPY_DTYPE>torch.onnx._internal.fx.type_utils._TORCH_DTYPE_TO_NUMPY_DTYPE­
+9builtins.dict[torch._C.dtype,CallableType[builtins.type]] 
+torch._C.dtype"torch._C.dtype?
+CallableType[builtins.type]
+builtins.type"builtins.type"builtins.dict*Ö
+(_ONNX_TENSOR_ELEMENT_TYPE_TO_TORCH_DTYPEKtorch.onnx._internal.fx.type_utils._ONNX_TENSOR_ELEMENT_TYPE_TO_TORCH_DTYPE]
+!builtins.dict[Any,torch._C.dtype]
+Any 
+torch._C.dtype"torch._C.dtype"builtins.dict*Ö
+(_TORCH_DTYPE_TO_ONNX_TENSOR_ELEMENT_TYPEKtorch.onnx._internal.fx.type_utils._TORCH_DTYPE_TO_ONNX_TENSOR_ELEMENT_TYPE]
+!builtins.dict[torch._C.dtype,Any] 
+torch._C.dtype"torch._C.dtype
+Any"builtins.dict

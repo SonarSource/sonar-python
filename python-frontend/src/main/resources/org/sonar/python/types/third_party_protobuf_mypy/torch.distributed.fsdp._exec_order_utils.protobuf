@@ -1,0 +1,150 @@
+
+(torch.distributed.fsdp._exec_order_utils˜
+_ExecOrderWarnStatus=torch.distributed.fsdp._exec_order_utils._ExecOrderWarnStatus"	enum.EnumHrb
+NONEBtorch.distributed.fsdp._exec_order_utils._ExecOrderWarnStatus.NONE
+	enum.auto"	enum.autorh
+WARNINGEtorch.distributed.fsdp._exec_order_utils._ExecOrderWarnStatus.WARNING
+	enum.auto"	enum.autorf
+WARNEDDtorch.distributed.fsdp._exec_order_utils._ExecOrderWarnStatus.WARNED
+	enum.auto"	enum.autoÔ=
+_ExecOrderData7torch.distributed.fsdp._exec_order_utils._ExecOrderData"builtins.object*ª
+__init__@torch.distributed.fsdp._exec_order_utils._ExecOrderData.__init__"
+None*|
+selfr
+7torch.distributed.fsdp._exec_order_utils._ExecOrderData"7torch.distributed.fsdp._exec_order_utils._ExecOrderData*_
+debug_levelN
+%torch._C._distributed_c10d.DebugLevel"%torch._C._distributed_c10d.DebugLevel*9
+backward_prefetch_limit
+builtins.int"builtins.int*8
+forward_prefetch_limit
+builtins.int"builtins.int*õ
+init<torch.distributed.fsdp._exec_order_utils._ExecOrderData.init"
+None*|
+selfr
+7torch.distributed.fsdp._exec_order_utils._ExecOrderData"7torch.distributed.fsdp._exec_order_utils._ExecOrderData*m
+stateb
+/torch.distributed.fsdp._common_utils._FSDPState"/torch.distributed.fsdp._common_utils._FSDPState*Q
+root_module@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*e
+process_groupR
+'torch._C._distributed_c10d.ProcessGroup"'torch._C._distributed_c10d.ProcessGroup*‚
+is_first_iterEtorch.distributed.fsdp._exec_order_utils._ExecOrderData.is_first_iter"
+builtins.bool"builtins.bool*|
+selfr
+7torch.distributed.fsdp._exec_order_utils._ExecOrderData"7torch.distributed.fsdp._exec_order_utils._ExecOrderData0:property`*¯
+get_handle_to_backward_prefetchWtorch.distributed.fsdp._exec_order_utils._ExecOrderData.get_handle_to_backward_prefetch"¶
+>Union[torch.distributed.fsdp._flat_param.FlatParamHandle,None]h
+2torch.distributed.fsdp._flat_param.FlatParamHandle"2torch.distributed.fsdp._flat_param.FlatParamHandle
+None*|
+selfr
+7torch.distributed.fsdp._exec_order_utils._ExecOrderData"7torch.distributed.fsdp._exec_order_utils._ExecOrderData*|
+current_handleh
+2torch.distributed.fsdp._flat_param.FlatParamHandle"2torch.distributed.fsdp._flat_param.FlatParamHandle*­
+get_handle_to_forward_prefetchVtorch.distributed.fsdp._exec_order_utils._ExecOrderData.get_handle_to_forward_prefetch"¶
+>Union[torch.distributed.fsdp._flat_param.FlatParamHandle,None]h
+2torch.distributed.fsdp._flat_param.FlatParamHandle"2torch.distributed.fsdp._flat_param.FlatParamHandle
+None*|
+selfr
+7torch.distributed.fsdp._exec_order_utils._ExecOrderData"7torch.distributed.fsdp._exec_order_utils._ExecOrderData*|
+current_handleh
+2torch.distributed.fsdp._flat_param.FlatParamHandle"2torch.distributed.fsdp._flat_param.FlatParamHandle*°
+record_post_forwardKtorch.distributed.fsdp._exec_order_utils._ExecOrderData.record_post_forward"
+None*|
+selfr
+7torch.distributed.fsdp._exec_order_utils._ExecOrderData"7torch.distributed.fsdp._exec_order_utils._ExecOrderData*Ã
+handle¶
+>Union[torch.distributed.fsdp._flat_param.FlatParamHandle,None]h
+2torch.distributed.fsdp._flat_param.FlatParamHandle"2torch.distributed.fsdp._flat_param.FlatParamHandle
+None*ß
+record_pre_forwardJtorch.distributed.fsdp._exec_order_utils._ExecOrderData.record_pre_forward"
+None*|
+selfr
+7torch.distributed.fsdp._exec_order_utils._ExecOrderData"7torch.distributed.fsdp._exec_order_utils._ExecOrderData*Ã
+handle¶
+>Union[torch.distributed.fsdp._flat_param.FlatParamHandle,None]h
+2torch.distributed.fsdp._flat_param.FlatParamHandle"2torch.distributed.fsdp._flat_param.FlatParamHandle
+None*/
+is_training
+builtins.bool"builtins.bool*ƒ
+_check_orderDtorch.distributed.fsdp._exec_order_utils._ExecOrderData._check_order"
+None*|
+selfr
+7torch.distributed.fsdp._exec_order_utils._ExecOrderData"7torch.distributed.fsdp._exec_order_utils._ExecOrderData*t
+handleh
+2torch.distributed.fsdp._flat_param.FlatParamHandle"2torch.distributed.fsdp._flat_param.FlatParamHandle*/
+is_training
+builtins.bool"builtins.bool*Ù
+_get_handle_indicesKtorch.distributed.fsdp._exec_order_utils._ExecOrderData._get_handle_indices"€
+(builtins.tuple[Union[builtins.int,None]]D
+Union[builtins.int,None]
+builtins.int"builtins.int
+None"builtins.tuple*|
+selfr
+7torch.distributed.fsdp._exec_order_utils._ExecOrderData"7torch.distributed.fsdp._exec_order_utils._ExecOrderData*t
+handleh
+2torch.distributed.fsdp._flat_param.FlatParamHandle"2torch.distributed.fsdp._flat_param.FlatParamHandle*â
+_get_names_from_handle_indicesVtorch.distributed.fsdp._exec_order_utils._ExecOrderData._get_names_from_handle_indices"‡
+*builtins.list[builtins.list[builtins.str]]J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list"builtins.list*|
+selfr
+7torch.distributed.fsdp._exec_order_utils._ExecOrderData"7torch.distributed.fsdp._exec_order_utils._ExecOrderData*`
+handle_indicesL
+builtins.tuple[builtins.int]
+builtins.int"builtins.int"builtins.tuple*è
+_get_names_from_handlesOtorch.distributed.fsdp._exec_order_utils._ExecOrderData._get_names_from_handles"‡
+*builtins.list[builtins.list[builtins.str]]J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list"builtins.list*|
+selfr
+7torch.distributed.fsdp._exec_order_utils._ExecOrderData"7torch.distributed.fsdp._exec_order_utils._ExecOrderData*t
+handleh
+2torch.distributed.fsdp._flat_param.FlatParamHandle"2torch.distributed.fsdp._flat_param.FlatParamHandle*X
+	next_iterAtorch.distributed.fsdp._exec_order_utils._ExecOrderData.next_iter*
+selfr­
+handles_pre_forward_orderQtorch.distributed.fsdp._exec_order_utils._ExecOrderData.handles_pre_forward_order¼
+Abuiltins.list[torch.distributed.fsdp._flat_param.FlatParamHandle]h
+2torch.distributed.fsdp._flat_param.FlatParamHandle"2torch.distributed.fsdp._flat_param.FlatParamHandle"builtins.listrŠ
+handles_post_forward_orderRtorch.distributed.fsdp._exec_order_utils._ExecOrderData.handles_post_forward_order—
+Mbuiltins.list[Union[torch.distributed.fsdp._flat_param.FlatParamHandle,None]]¶
+>Union[torch.distributed.fsdp._flat_param.FlatParamHandle,None]h
+2torch.distributed.fsdp._flat_param.FlatParamHandle"2torch.distributed.fsdp._flat_param.FlatParamHandle
+None"builtins.listrd
+_iter=torch.distributed.fsdp._exec_order_utils._ExecOrderData._iter
+builtins.int"builtins.intrŠ
+_backward_prefetch_limitPtorch.distributed.fsdp._exec_order_utils._ExecOrderData._backward_prefetch_limit
+builtins.int"builtins.intrˆ
+_forward_prefetch_limitOtorch.distributed.fsdp._exec_order_utils._ExecOrderData._forward_prefetch_limit
+builtins.int"builtins.intrz
+_checking_orderGtorch.distributed.fsdp._exec_order_utils._ExecOrderData._checking_order
+builtins.bool"builtins.boolrî
+process_groupEtorch.distributed.fsdp._exec_order_utils._ExecOrderData.process_group•
+3Union[torch._C._distributed_c10d.ProcessGroup,None]R
+'torch._C._distributed_c10d.ProcessGroup"'torch._C._distributed_c10d.ProcessGroup
+Noner–
+
+world_sizeBtorch.distributed.fsdp._exec_order_utils._ExecOrderData.world_sizeD
+Union[builtins.int,None]
+builtins.int"builtins.int
+Noner‘
+all_handlesCtorch.distributed.fsdp._exec_order_utils._ExecOrderData.all_handles¼
+Abuiltins.list[torch.distributed.fsdp._flat_param.FlatParamHandle]h
+2torch.distributed.fsdp._flat_param.FlatParamHandle"2torch.distributed.fsdp._flat_param.FlatParamHandle"builtins.listr¹
+param_to_fqnDtorch.distributed.fsdp._exec_order_utils._ExecOrderData.param_to_fqnâ
+Gbuiltins.dict[torch.nn.parameter.Parameter,builtins.list[builtins.str]]<
+torch.nn.parameter.Parameter"torch.nn.parameter.ParameterJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list"builtins.dictr€
+current_order_indexKtorch.distributed.fsdp._exec_order_utils._ExecOrderData.current_order_index
+builtins.int"builtins.intrÒ
+warn_statusCtorch.distributed.fsdp._exec_order_utils._ExecOrderData.warn_status~
+=torch.distributed.fsdp._exec_order_utils._ExecOrderWarnStatus"=torch.distributed.fsdp._exec_order_utils._ExecOrderWarnStatusrb
+rank<torch.distributed.fsdp._exec_order_utils._ExecOrderData.rank
+builtins.int"builtins.int*¤
+__annotations__8torch.distributed.fsdp._exec_order_utils.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*
+disttorch.distributed *<
+traversal_utils'torch.distributed.fsdp._traversal_utils *
+nntorch.nn 

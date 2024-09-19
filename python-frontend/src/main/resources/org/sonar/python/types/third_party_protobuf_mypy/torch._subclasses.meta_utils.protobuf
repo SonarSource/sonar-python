@@ -1,0 +1,550 @@
+
+torch._subclasses.meta_utilsŸ
+MetaTensorDescriber0torch._subclasses.meta_utils.MetaTensorDescriber"builtins.object*`
+__init__9torch._subclasses.meta_utils.MetaTensorDescriber.__init__*
+self*
+	copy_data *˝
+get_tensor_id>torch._subclasses.meta_utils.MetaTensorDescriber.get_tensor_id"
+Any*n
+selfd
+0torch._subclasses.meta_utils.MetaTensorDescriber"0torch._subclasses.meta_utils.MetaTensorDescriber*3
+t,
+torch._tensor.Tensor"torch._tensor.Tensor*è
+get_storage_id?torch._subclasses.meta_utils.MetaTensorDescriber.get_storage_id"
+Any*n
+selfd
+0torch._subclasses.meta_utils.MetaTensorDescriber"0torch._subclasses.meta_utils.MetaTensorDescriber*C
+s<
+torch.storage.UntypedStorage"torch.storage.UntypedStorage*¿
+describe_storageAtorch._subclasses.meta_utils.MetaTensorDescriber.describe_storage"
+Any*n
+selfd
+0torch._subclasses.meta_utils.MetaTensorDescriber"0torch._subclasses.meta_utils.MetaTensorDescriber*C
+s<
+torch.storage.UntypedStorage"torch.storage.UntypedStorage*+
+trace
+builtins.bool"builtins.bool *›
+describe_tensor@torch._subclasses.meta_utils.MetaTensorDescriber.describe_tensor"
+Any*n
+selfd
+0torch._subclasses.meta_utils.MetaTensorDescriber"0torch._subclasses.meta_utils.MetaTensorDescriber*3
+t,
+torch._tensor.Tensor"torch._tensor.Tensor*-
+recurse
+builtins.bool"builtins.bool *+
+trace
+builtins.bool"builtins.bool rB
+id3torch._subclasses.meta_utils.MetaTensorDescriber.id
+Anyro
+next_tensor_id?torch._subclasses.meta_utils.MetaTensorDescriber.next_tensor_id
+builtins.int"builtins.intrq
+next_storage_id@torch._subclasses.meta_utils.MetaTensorDescriber.next_storage_id
+builtins.int"builtins.intrX
+lookup_tensor>torch._subclasses.meta_utils.MetaTensorDescriber.lookup_tensor
+AnyrZ
+lookup_storage?torch._subclasses.meta_utils.MetaTensorDescriber.lookup_storage
+AnyrP
+	copy_data:torch._subclasses.meta_utils.MetaTensorDescriber.copy_data
+AnyrZ
+traced_tensors?torch._subclasses.meta_utils.MetaTensorDescriber.traced_tensors
+Anyr\
+traced_storages@torch._subclasses.meta_utils.MetaTensorDescriber.traced_storages
+Anyâ	
+MetaStorageDesc,torch._subclasses.meta_utils.MetaStorageDesc"builtins.object*[
+as_json4torch._subclasses.meta_utils.MetaStorageDesc.as_json*
+self*
+describer_id*Å
+__init__5torch._subclasses.meta_utils.MetaStorageDesc.__init__"
+None*f
+self\
+,torch._subclasses.meta_utils.MetaStorageDesc",torch._subclasses.meta_utils.MetaStorageDesc*$
+id
+builtins.int"builtins.int*&
+size
+builtins.int"builtins.int*~
+datat
+(Union[torch.storage.UntypedStorage,None]<
+torch.storage.UntypedStorage"torch.storage.UntypedStorage
+None8rS
+id/torch._subclasses.meta_utils.MetaStorageDesc.id
+builtins.int"builtins.intrW
+size1torch._subclasses.meta_utils.MetaStorageDesc.size
+builtins.int"builtins.intrØ
+data1torch._subclasses.meta_utils.MetaStorageDesc.datat
+(Union[torch.storage.UntypedStorage,None]<
+torch.storage.UntypedStorage"torch.storage.UntypedStorage
+NonerÛ
+__dataclass_fields__Atorch._subclasses.meta_utils.MetaStorageDesc.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dict˘i
+MetaTensorDesc+torch._subclasses.meta_utils.MetaTensorDesc"builtins.object*Z
+as_json3torch._subclasses.meta_utils.MetaTensorDesc.as_json*
+self*
+describer_id*R
+shape1torch._subclasses.meta_utils.MetaTensorDesc.shape*
+self0:property`*Ñ)
+__init__4torch._subclasses.meta_utils.MetaTensorDesc.__init__"
+None*d
+selfZ
++torch._subclasses.meta_utils.MetaTensorDesc"+torch._subclasses.meta_utils.MetaTensorDesc*$
+id
+builtins.int"builtins.int*&
+ndim
+builtins.int"builtins.int*+
+dtype 
+torch._C.dtype"torch._C.dtype*.
+device"
+torch._C.device"torch._C.device*V
+sizeL
+builtins.tuple[builtins.int]
+builtins.int"builtins.int"builtins.tuple*f
+dynamo_dynamic_indicesJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*0
+layout"
+torch._C.layout"torch._C.layout *2
+is_inference
+builtins.bool"builtins.bool *-
+is_leaf
+builtins.bool"builtins.bool *3
+requires_grad
+builtins.bool"builtins.bool */
+	is_sparse
+builtins.bool"builtins.bool */
+	is_mkldnn
+builtins.bool"builtins.bool *:
+is_functorch_wrapped
+builtins.bool"builtins.bool *6
+is_batchedtensor
+builtins.bool"builtins.bool *=
+is_legacy_batchedtensor
+builtins.bool"builtins.bool *;
+is_gradtrackingtensor
+builtins.bool"builtins.bool *-
+is_view
+builtins.bool"builtins.bool */
+	is_nested
+builtins.bool"builtins.bool *C
+is_traceable_wrapper_subclass
+builtins.bool"builtins.bool *3
+is_functional
+builtins.bool"builtins.bool *-
+is_conj
+builtins.bool"builtins.bool *,
+is_neg
+builtins.bool"builtins.bool *2
+is_parameter
+builtins.bool"builtins.bool *ì
+strideÑ
+(Union[builtins.tuple[builtins.int],None]L
+builtins.tuple[builtins.int]
+builtins.int"builtins.int"builtins.tuple
+None *2
+storage_offset
+builtins.int"builtins.int *¥
+storage§
+8Union[torch._subclasses.meta_utils.MetaStorageDesc,None]\
+,torch._subclasses.meta_utils.MetaStorageDesc",torch._subclasses.meta_utils.MetaStorageDesc
+None *V
+
+sparse_dimD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *U
+	dense_dimD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *[
+is_coalescedG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *∂
+crow_indices°
+7Union[torch._subclasses.meta_utils.MetaTensorDesc,None]Z
++torch._subclasses.meta_utils.MetaTensorDesc"+torch._subclasses.meta_utils.MetaTensorDesc
+None *µ
+col_indices°
+7Union[torch._subclasses.meta_utils.MetaTensorDesc,None]Z
++torch._subclasses.meta_utils.MetaTensorDesc"+torch._subclasses.meta_utils.MetaTensorDesc
+None *∂
+ccol_indices°
+7Union[torch._subclasses.meta_utils.MetaTensorDesc,None]Z
++torch._subclasses.meta_utils.MetaTensorDesc"+torch._subclasses.meta_utils.MetaTensorDesc
+None *µ
+row_indices°
+7Union[torch._subclasses.meta_utils.MetaTensorDesc,None]Z
++torch._subclasses.meta_utils.MetaTensorDesc"+torch._subclasses.meta_utils.MetaTensorDesc
+None *∞
+values°
+7Union[torch._subclasses.meta_utils.MetaTensorDesc,None]Z
++torch._subclasses.meta_utils.MetaTensorDesc"+torch._subclasses.meta_utils.MetaTensorDesc
+None *≥
+	unwrapped°
+7Union[torch._subclasses.meta_utils.MetaTensorDesc,None]Z
++torch._subclasses.meta_utils.MetaTensorDesc"+torch._subclasses.meta_utils.MetaTensorDesc
+None *P
+bdimD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *Æ
+base°
+7Union[torch._subclasses.meta_utils.MetaTensorDesc,None]Z
++torch._subclasses.meta_utils.MetaTensorDesc"+torch._subclasses.meta_utils.MetaTensorDesc
+None *ƒ
+attrs∂
+SUnion[builtins.dict[builtins.str,torch._subclasses.meta_utils.MetaTensorDesc],None]“
+Gbuiltins.dict[builtins.str,torch._subclasses.meta_utils.MetaTensorDesc]
+builtins.str"builtins.strZ
++torch._subclasses.meta_utils.MetaTensorDesc"+torch._subclasses.meta_utils.MetaTensorDesc"builtins.dict
+None *í
+creation_meta}
++Union[torch._C._autograd.CreationMeta,None]B
+torch._C._autograd.CreationMeta"torch._C._autograd.CreationMeta
+None *Æ
+grad°
+7Union[torch._subclasses.meta_utils.MetaTensorDesc,None]Z
++torch._subclasses.meta_utils.MetaTensorDesc"+torch._subclasses.meta_utils.MetaTensorDesc
+None *X
+ctxM
+Union[builtins.object,None]"
+builtins.object"builtins.object
+None *M
+typeA
+Union[Type[Any],None]
+	Type[Any]
+Any"type
+None *∂
+	fake_mode§
+8Union[torch._subclasses.fake_tensor.FakeTensorMode,None]\
+,torch._subclasses.fake_tensor.FakeTensorMode",torch._subclasses.fake_tensor.FakeTensorMode
+None *ò
+	view_funcÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *Q
+levelD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *Y
+current_levelD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *Í
+functorch_stack“
+;Union[builtins.list[torch._C._functorch.CInterpreter],None]Ü
+/builtins.list[torch._C._functorch.CInterpreter]D
+ torch._C._functorch.CInterpreter" torch._C._functorch.CInterpreter"builtins.list
+None *v
+autograd_meta_from\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None *h
+data\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None 8rR
+id.torch._subclasses.meta_utils.MetaTensorDesc.id
+builtins.int"builtins.intrV
+ndim0torch._subclasses.meta_utils.MetaTensorDesc.ndim
+builtins.int"builtins.intr\
+dtype1torch._subclasses.meta_utils.MetaTensorDesc.dtype 
+torch._C.dtype"torch._C.dtyper`
+device2torch._subclasses.meta_utils.MetaTensorDesc.device"
+torch._C.device"torch._C.devicerÜ
+size0torch._subclasses.meta_utils.MetaTensorDesc.sizeL
+builtins.tuple[builtins.int]
+builtins.int"builtins.int"builtins.tupler®
+dynamo_dynamic_indicesBtorch._subclasses.meta_utils.MetaTensorDesc.dynamo_dynamic_indicesJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.listr`
+layout2torch._subclasses.meta_utils.MetaTensorDesc.layout"
+torch._C.layout"torch._C.layoutrh
+is_inference8torch._subclasses.meta_utils.MetaTensorDesc.is_inference
+builtins.bool"builtins.boolr^
+is_leaf3torch._subclasses.meta_utils.MetaTensorDesc.is_leaf
+builtins.bool"builtins.boolrj
+requires_grad9torch._subclasses.meta_utils.MetaTensorDesc.requires_grad
+builtins.bool"builtins.boolrb
+	is_sparse5torch._subclasses.meta_utils.MetaTensorDesc.is_sparse
+builtins.bool"builtins.boolrb
+	is_mkldnn5torch._subclasses.meta_utils.MetaTensorDesc.is_mkldnn
+builtins.bool"builtins.boolrx
+is_functorch_wrapped@torch._subclasses.meta_utils.MetaTensorDesc.is_functorch_wrapped
+builtins.bool"builtins.boolrp
+is_batchedtensor<torch._subclasses.meta_utils.MetaTensorDesc.is_batchedtensor
+builtins.bool"builtins.boolr~
+is_legacy_batchedtensorCtorch._subclasses.meta_utils.MetaTensorDesc.is_legacy_batchedtensor
+builtins.bool"builtins.boolrz
+is_gradtrackingtensorAtorch._subclasses.meta_utils.MetaTensorDesc.is_gradtrackingtensor
+builtins.bool"builtins.boolr^
+is_view3torch._subclasses.meta_utils.MetaTensorDesc.is_view
+builtins.bool"builtins.boolrb
+	is_nested5torch._subclasses.meta_utils.MetaTensorDesc.is_nested
+builtins.bool"builtins.boolrä
+is_traceable_wrapper_subclassItorch._subclasses.meta_utils.MetaTensorDesc.is_traceable_wrapper_subclass
+builtins.bool"builtins.boolrj
+is_functional9torch._subclasses.meta_utils.MetaTensorDesc.is_functional
+builtins.bool"builtins.boolr^
+is_conj3torch._subclasses.meta_utils.MetaTensorDesc.is_conj
+builtins.bool"builtins.boolr\
+is_neg2torch._subclasses.meta_utils.MetaTensorDesc.is_neg
+builtins.bool"builtins.boolrh
+is_parameter8torch._subclasses.meta_utils.MetaTensorDesc.is_parameter
+builtins.bool"builtins.boolr√
+stride2torch._subclasses.meta_utils.MetaTensorDesc.strideÑ
+(Union[builtins.tuple[builtins.int],None]L
+builtins.tuple[builtins.int]
+builtins.int"builtins.int"builtins.tuple
+Nonerj
+storage_offset:torch._subclasses.meta_utils.MetaTensorDesc.storage_offset
+builtins.int"builtins.intrÂ
+storage3torch._subclasses.meta_utils.MetaTensorDesc.storage§
+8Union[torch._subclasses.meta_utils.MetaStorageDesc,None]\
+,torch._subclasses.meta_utils.MetaStorageDesc",torch._subclasses.meta_utils.MetaStorageDesc
+Nonerä
+
+sparse_dim6torch._subclasses.meta_utils.MetaTensorDesc.sparse_dimD
+Union[builtins.int,None]
+builtins.int"builtins.int
+Nonerà
+	dense_dim5torch._subclasses.meta_utils.MetaTensorDesc.dense_dimD
+Union[builtins.int,None]
+builtins.int"builtins.int
+Nonerë
+is_coalesced8torch._subclasses.meta_utils.MetaTensorDesc.is_coalescedG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+NonerÏ
+crow_indices8torch._subclasses.meta_utils.MetaTensorDesc.crow_indices°
+7Union[torch._subclasses.meta_utils.MetaTensorDesc,None]Z
++torch._subclasses.meta_utils.MetaTensorDesc"+torch._subclasses.meta_utils.MetaTensorDesc
+NonerÍ
+col_indices7torch._subclasses.meta_utils.MetaTensorDesc.col_indices°
+7Union[torch._subclasses.meta_utils.MetaTensorDesc,None]Z
++torch._subclasses.meta_utils.MetaTensorDesc"+torch._subclasses.meta_utils.MetaTensorDesc
+NonerÏ
+ccol_indices8torch._subclasses.meta_utils.MetaTensorDesc.ccol_indices°
+7Union[torch._subclasses.meta_utils.MetaTensorDesc,None]Z
++torch._subclasses.meta_utils.MetaTensorDesc"+torch._subclasses.meta_utils.MetaTensorDesc
+NonerÍ
+row_indices7torch._subclasses.meta_utils.MetaTensorDesc.row_indices°
+7Union[torch._subclasses.meta_utils.MetaTensorDesc,None]Z
++torch._subclasses.meta_utils.MetaTensorDesc"+torch._subclasses.meta_utils.MetaTensorDesc
+Noner‡
+values2torch._subclasses.meta_utils.MetaTensorDesc.values°
+7Union[torch._subclasses.meta_utils.MetaTensorDesc,None]Z
++torch._subclasses.meta_utils.MetaTensorDesc"+torch._subclasses.meta_utils.MetaTensorDesc
+NonerÊ
+	unwrapped5torch._subclasses.meta_utils.MetaTensorDesc.unwrapped°
+7Union[torch._subclasses.meta_utils.MetaTensorDesc,None]Z
++torch._subclasses.meta_utils.MetaTensorDesc"+torch._subclasses.meta_utils.MetaTensorDesc
+Noner~
+bdim0torch._subclasses.meta_utils.MetaTensorDesc.bdimD
+Union[builtins.int,None]
+builtins.int"builtins.int
+Noner‹
+base0torch._subclasses.meta_utils.MetaTensorDesc.base°
+7Union[torch._subclasses.meta_utils.MetaTensorDesc,None]Z
++torch._subclasses.meta_utils.MetaTensorDesc"+torch._subclasses.meta_utils.MetaTensorDesc
+NonerÛ
+attrs1torch._subclasses.meta_utils.MetaTensorDesc.attrs∂
+SUnion[builtins.dict[builtins.str,torch._subclasses.meta_utils.MetaTensorDesc],None]“
+Gbuiltins.dict[builtins.str,torch._subclasses.meta_utils.MetaTensorDesc]
+builtins.str"builtins.strZ
++torch._subclasses.meta_utils.MetaTensorDesc"+torch._subclasses.meta_utils.MetaTensorDesc"builtins.dict
+Noner…
+creation_meta9torch._subclasses.meta_utils.MetaTensorDesc.creation_meta}
++Union[torch._C._autograd.CreationMeta,None]B
+torch._C._autograd.CreationMeta"torch._C._autograd.CreationMeta
+Noner‹
+grad0torch._subclasses.meta_utils.MetaTensorDesc.grad°
+7Union[torch._subclasses.meta_utils.MetaTensorDesc,None]Z
++torch._subclasses.meta_utils.MetaTensorDesc"+torch._subclasses.meta_utils.MetaTensorDesc
+Nonerö
+_UNSERIALIZABLE;torch._subclasses.meta_utils.MetaTensorDesc._UNSERIALIZABLEJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.listrÖ
+ctx/torch._subclasses.meta_utils.MetaTensorDesc.ctxM
+Union[builtins.object,None]"
+builtins.object"builtins.object
+Noner{
+type0torch._subclasses.meta_utils.MetaTensorDesc.typeA
+Union[Type[Any],None]
+	Type[Any]
+Any"type
+NonerÈ
+	fake_mode5torch._subclasses.meta_utils.MetaTensorDesc.fake_mode§
+8Union[torch._subclasses.fake_tensor.FakeTensorMode,None]\
+,torch._subclasses.fake_tensor.FakeTensorMode",torch._subclasses.fake_tensor.FakeTensorMode
+NonerÀ
+	view_func5torch._subclasses.meta_utils.MetaTensorDesc.view_funcÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+NonerÄ
+level1torch._subclasses.meta_utils.MetaTensorDesc.levelD
+Union[builtins.int,None]
+builtins.int"builtins.int
+Nonerê
+current_level9torch._subclasses.meta_utils.MetaTensorDesc.current_levelD
+Union[builtins.int,None]
+builtins.int"builtins.int
+Noner£
+functorch_stack;torch._subclasses.meta_utils.MetaTensorDesc.functorch_stack“
+;Union[builtins.list[torch._C._functorch.CInterpreter],None]Ü
+/builtins.list[torch._C._functorch.CInterpreter]D
+ torch._C._functorch.CInterpreter" torch._C._functorch.CInterpreter"builtins.list
+Noner≤
+autograd_meta_from>torch._subclasses.meta_utils.MetaTensorDesc.autograd_meta_from\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+Nonerñ
+data0torch._subclasses.meta_utils.MetaTensorDesc.data\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+NonerÚ
+__dataclass_fields__@torch._subclasses.meta_utils.MetaTensorDesc.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dict÷
+MetaConverter*torch._subclasses.meta_utils.MetaConverter"builtins.object*ﬁ
+__init__3torch._subclasses.meta_utils.MetaConverter.__init__"
+None*b
+selfX
+*torch._subclasses.meta_utils.MetaConverter"*torch._subclasses.meta_utils.MetaConverter*/
+	copy_data
+builtins.bool"builtins.bool *M
+
+successful5torch._subclasses.meta_utils.MetaConverter.successful*
+self*ù
+get_tensor_memo:torch._subclasses.meta_utils.MetaConverter.get_tensor_memo"
+Any*b
+selfX
+*torch._subclasses.meta_utils.MetaConverter"*torch._subclasses.meta_utils.MetaConverter*a
+tZ
++torch._subclasses.meta_utils.MetaTensorDesc"+torch._subclasses.meta_utils.MetaTensorDesc*≠
+set_tensor_memo:torch._subclasses.meta_utils.MetaConverter.set_tensor_memo"
+Any*b
+selfX
+*torch._subclasses.meta_utils.MetaConverter"*torch._subclasses.meta_utils.MetaConverter*a
+tZ
++torch._subclasses.meta_utils.MetaTensorDesc"+torch._subclasses.meta_utils.MetaTensorDesc*
+v
+Any*°
+get_storage_memo;torch._subclasses.meta_utils.MetaConverter.get_storage_memo"
+Any*b
+selfX
+*torch._subclasses.meta_utils.MetaConverter"*torch._subclasses.meta_utils.MetaConverter*c
+s\
+,torch._subclasses.meta_utils.MetaStorageDesc",torch._subclasses.meta_utils.MetaStorageDesc*±
+set_storage_memo;torch._subclasses.meta_utils.MetaConverter.set_storage_memo"
+Any*b
+selfX
+*torch._subclasses.meta_utils.MetaConverter"*torch._subclasses.meta_utils.MetaConverter*c
+s\
+,torch._subclasses.meta_utils.MetaStorageDesc",torch._subclasses.meta_utils.MetaStorageDesc*
+v
+Any*∞
+meta_storage7torch._subclasses.meta_utils.MetaConverter.meta_storage"
+Any*b
+selfX
+*torch._subclasses.meta_utils.MetaConverter"*torch._subclasses.meta_utils.MetaConverter*c
+s\
+,torch._subclasses.meta_utils.MetaStorageDesc",torch._subclasses.meta_utils.MetaStorageDesc*
+callback
+Any*¥
+meta_tensor6torch._subclasses.meta_utils.MetaConverter.meta_tensor"
+Any*b
+selfX
+*torch._subclasses.meta_utils.MetaConverter"*torch._subclasses.meta_utils.MetaConverter*a
+tZ
++torch._subclasses.meta_utils.MetaTensorDesc"+torch._subclasses.meta_utils.MetaTensorDesc*º
+	shape_env™
+:Union[torch.fx.experimental.symbolic_shapes.ShapeEnv,None]`
+.torch.fx.experimental.symbolic_shapes.ShapeEnv".torch.fx.experimental.symbolic_shapes.ShapeEnv
+None *
+callback
+Any *j
+source\
+ Union[torch._guards.Source,None],
+torch._guards.Source"torch._guards.Source
+None *ÿ
+symbolic_contextø
+AUnion[torch.fx.experimental.symbolic_shapes.SymbolicContext,None]n
+5torch.fx.experimental.symbolic_shapes.SymbolicContext"5torch.fx.experimental.symbolic_shapes.SymbolicContext
+None *§
+__call__3torch._subclasses.meta_utils.MetaConverter.__call__*
+self*
+t*
+	shape_env *
+callback *
+source *
+symbolic_context *
+trace rû
+storage_memo7torch._subclasses.meta_utils.MetaConverter.storage_memoU
+$weakref.WeakValueDictionary[Any,Any]
+Any
+Any"weakref.WeakValueDictionaryrú
+tensor_memo6torch._subclasses.meta_utils.MetaConverter.tensor_memoU
+$weakref.WeakValueDictionary[Any,Any]
+Any
+Any"weakref.WeakValueDictionaryrS
+hit.torch._subclasses.meta_utils.MetaConverter.hit
+builtins.int"builtins.intrU
+miss/torch._subclasses.meta_utils.MetaConverter.miss
+builtins.int"builtins.intrI
+del_hook3torch._subclasses.meta_utils.MetaConverter.del_hook
+Noner[
+arg_cnt2torch._subclasses.meta_utils.MetaConverter.arg_cnt
+builtins.int"builtins.intra
+	copy_data4torch._subclasses.meta_utils.MetaConverter.copy_data
+builtins.bool"builtins.boolrß
+	describer4torch._subclasses.meta_utils.MetaConverter.describerd
+0torch._subclasses.meta_utils.MetaTensorDescriber"0torch._subclasses.meta_utils.MetaTensorDescriber@
+safe_is_leaf)torch._subclasses.meta_utils.safe_is_leaf*
+t:
+	safe_grad&torch._subclasses.meta_utils.safe_grad*
+tA
+	assert_eq&torch._subclasses.meta_utils.assert_eq*
+a*
+bµ
+assert_metadata_eq/torch._subclasses.meta_utils.assert_metadata_eq"
+Any*
+	assert_eq
+Any*ﬁ
+m1’
+GUnion[torch._subclasses.meta_utils.MetaTensorDesc,torch._tensor.Tensor]Z
++torch._subclasses.meta_utils.MetaTensorDesc"+torch._subclasses.meta_utils.MetaTensorDesc,
+torch._tensor.Tensor"torch._tensor.Tensor*4
+m2,
+torch._tensor.Tensor"torch._tensor.Tensor*
+skip_symbolic
+Any *
+	skip_leaf
+Any B
+is_sparse_coo*torch._subclasses.meta_utils.is_sparse_coo*
+tc
+is_sparse_compressed_layout8torch._subclasses.meta_utils.is_sparse_compressed_layout*
+
+layoutP
+is_sparse_compressed1torch._subclasses.meta_utils.is_sparse_compressed*
+tB
+is_sparse_any*torch._subclasses.meta_utils.is_sparse_any*
+tG
+
+_safe_copy'torch._subclasses.meta_utils._safe_copy*
+dst*
+src@
+_safe_clone(torch._subclasses.meta_utils._safe_clone*
+src*ò
+__annotations__,torch._subclasses.meta_utils.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*a
+DESCRIBER_NEXT_ID.torch._subclasses.meta_utils.DESCRIBER_NEXT_ID
+builtins.int"builtins.int*
+utilstorch._prims_common 

@@ -1,0 +1,425 @@
+
+torch.fx.passes.splitter_base⁄
+_SplitterSettingBase2torch.fx.passes.splitter_base._SplitterSettingBase"builtins.object*ó
+__init__;torch.fx.passes.splitter_base._SplitterSettingBase.__init__*
+self*
+min_acc_module_size *
+skip_fusion *
+allow_non_tensor r{
+min_acc_module_sizeFtorch.fx.passes.splitter_base._SplitterSettingBase.min_acc_module_size
+builtins.int"builtins.intrm
+skip_fusion>torch.fx.passes.splitter_base._SplitterSettingBase.skip_fusion
+builtins.bool"builtins.boolrw
+allow_non_tensorCtorch.fx.passes.splitter_base._SplitterSettingBase.allow_non_tensor
+builtins.bool"builtins.boolƒ
+FxNetAccNodesFinder1torch.fx.passes.splitter_base.FxNetAccNodesFinder"builtins.object*—
+__init__:torch.fx.passes.splitter_base.FxNetAccNodesFinder.__init__"
+None*p
+selff
+1torch.fx.passes.splitter_base.FxNetAccNodesFinder"1torch.fx.passes.splitter_base.FxNetAccNodesFinder*R
+moduleF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*Ç
+operator_supportl
+4torch.fx.passes.operator_support.OperatorSupportBase"4torch.fx.passes.operator_support.OperatorSupportBase*4
+allow_non_tensor
+builtins.bool"builtins.bool*Ã
+(reduce_acc_nodes_non_tensor_input_helperZtorch.fx.passes.splitter_base.FxNetAccNodesFinder.reduce_acc_nodes_non_tensor_input_helper"
+Any*p
+selff
+1torch.fx.passes.splitter_base.FxNetAccNodesFinder"1torch.fx.passes.splitter_base.FxNetAccNodesFinder*»
+cpu_worklistµ
+,TypeAlias[builtins.list[torch.fx.node.Node]]\
+!builtins.list[torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node"builtins.list"%torch.fx.passes.tools_common.NodeList*Ç
+!reduce_acc_nodes_non_tensor_inputStorch.fx.passes.splitter_base.FxNetAccNodesFinder.reduce_acc_nodes_non_tensor_input*
+self*Ñ
+"reduce_acc_nodes_non_tensor_outputTtorch.fx.passes.splitter_base.FxNetAccNodesFinder.reduce_acc_nodes_non_tensor_output*
+self*Ï
+__call__:torch.fx.passes.splitter_base.FxNetAccNodesFinder.__call__"±
++TypeAlias[builtins.set[torch.fx.node.Node]]Z
+ builtins.set[torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node"builtins.set"$torch.fx.passes.tools_common.NodeSet*p
+selff
+1torch.fx.passes.splitter_base.FxNetAccNodesFinder"1torch.fx.passes.splitter_base.FxNetAccNodesFinder8rä
+module8torch.fx.passes.splitter_base.FxNetAccNodesFinder.moduleF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModulerƒ
+operator_supportBtorch.fx.passes.splitter_base.FxNetAccNodesFinder.operator_supportl
+4torch.fx.passes.operator_support.OperatorSupportBase"4torch.fx.passes.operator_support.OperatorSupportBaserv
+allow_non_tensorBtorch.fx.passes.splitter_base.FxNetAccNodesFinder.allow_non_tensor
+builtins.bool"builtins.boolr¸
+	acc_nodes;torch.fx.passes.splitter_base.FxNetAccNodesFinder.acc_nodes±
++TypeAlias[builtins.set[torch.fx.node.Node]]Z
+ builtins.set[torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node"builtins.set"$torch.fx.passes.tools_common.NodeSetl
+FxNetSplitterInternalError8torch.fx.passes.splitter_base.FxNetSplitterInternalError"builtins.Exception8˛	
+Subgraph&torch.fx.passes.splitter_base.Subgraph"builtins.object*Ì
+__init__/torch.fx.passes.splitter_base.Subgraph.__init__"
+None*Z
+selfP
+&torch.fx.passes.splitter_base.Subgraph"&torch.fx.passes.splitter_base.Subgraph**
+is_acc
+builtins.bool"builtins.bool*¡
+nodesµ
+,TypeAlias[builtins.list[torch.fx.node.Node]]\
+!builtins.list[torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node"builtins.list"%torch.fx.passes.tools_common.NodeList*Z
+device_ordinalD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None 8rW
+is_acc-torch.fx.passes.splitter_base.Subgraph.is_acc
+builtins.bool"builtins.boolrÌ
+nodes,torch.fx.passes.splitter_base.Subgraph.nodesµ
+,TypeAlias[builtins.list[torch.fx.node.Node]]\
+!builtins.list[torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node"builtins.list"%torch.fx.passes.tools_common.NodeListrç
+device_ordinal5torch.fx.passes.splitter_base.Subgraph.device_ordinalD
+Union[builtins.int,None]
+builtins.int"builtins.int
+NonerÌ
+__dataclass_fields__;torch.fx.passes.splitter_base.Subgraph.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictä)
+SplitResult)torch.fx.passes.splitter_base.SplitResult"builtins.tuple*Û
+_replace2torch.fx.passes.splitter_base.SplitResult._replace"Ã
+-torch.fx.passes.splitter_base.SplitResult._NTò
+UTuple[torch.fx.graph_module.GraphModule,builtins.dict[builtins.str,Any],builtins.str]F
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModuleW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+builtins.str"builtins.str*ÿ
+_selfÃ
+-torch.fx.passes.splitter_base.SplitResult._NTò
+UTuple[torch.fx.graph_module.GraphModule,builtins.dict[builtins.str,Any],builtins.str]F
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModuleW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+builtins.str"builtins.str*Z
+split_moduleF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule *o
+submodule_inputsW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict *<
+non_acc_submodule_prefix
+builtins.str"builtins.str *™
+__new__1torch.fx.passes.splitter_base.SplitResult.__new__"Ã
+-torch.fx.passes.splitter_base.SplitResult._NTò
+UTuple[torch.fx.graph_module.GraphModule,builtins.dict[builtins.str,Any],builtins.str]F
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModuleW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+builtins.str"builtins.str*ó
+_clså
+3Type[torch.fx.passes.splitter_base.SplitResult._NT]Ã
+-torch.fx.passes.splitter_base.SplitResult._NTò
+UTuple[torch.fx.graph_module.GraphModule,builtins.dict[builtins.str,Any],builtins.str]F
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModuleW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+builtins.str"builtins.str"type*X
+split_moduleF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*m
+submodule_inputsW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*:
+non_acc_submodule_prefix
+builtins.str"builtins.str*
+_asdict1torch.fx.passes.splitter_base.SplitResult._asdict"W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*ÿ
+_selfÃ
+-torch.fx.passes.splitter_base.SplitResult._NTò
+UTuple[torch.fx.graph_module.GraphModule,builtins.dict[builtins.str,Any],builtins.str]F
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModuleW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+builtins.str"builtins.str*ö
+_make/torch.fx.passes.splitter_base.SplitResult._make"Ã
+-torch.fx.passes.splitter_base.SplitResult._NTò
+UTuple[torch.fx.graph_module.GraphModule,builtins.dict[builtins.str,Any],builtins.str]F
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModuleW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+builtins.str"builtins.str*ó
+_clså
+3Type[torch.fx.passes.splitter_base.SplitResult._NT]Ã
+-torch.fx.passes.splitter_base.SplitResult._NTò
+UTuple[torch.fx.graph_module.GraphModule,builtins.dict[builtins.str,Any],builtins.str]F
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModuleW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+builtins.str"builtins.str"type*>
+iterable0
+typing.Iterable[Any]
+Any"typing.Iterable*
+new
+Any *
+len
+Any 0:classmethodp8ré
+split_module6torch.fx.passes.splitter_base.SplitResult.split_moduleF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModulerß
+submodule_inputs:torch.fx.passes.splitter_base.SplitResult.submodule_inputsW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dictr|
+non_acc_submodule_prefixBtorch.fx.passes.splitter_base.SplitResult.non_acc_submodule_prefix
+builtins.str"builtins.strré
+split_module6torch.fx.passes.splitter_base.SplitResult.split_moduleF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModulerß
+submodule_inputs:torch.fx.passes.splitter_base.SplitResult.submodule_inputsW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dictr|
+non_acc_submodule_prefixBtorch.fx.passes.splitter_base.SplitResult.non_acc_submodule_prefix
+builtins.str"builtins.strr 
+_fields1torch.fx.passes.splitter_base.SplitResult._fieldsã
+-Tuple[builtins.str,builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str
+builtins.str"builtins.strrü
+_field_types6torch.fx.passes.splitter_base.SplitResult._field_typesW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dictr•
+_field_defaults9torch.fx.passes.splitter_base.SplitResult._field_defaultsW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dictrZ
+_source1torch.fx.passes.splitter_base.SplitResult._source
+builtins.str"builtins.strr•
+__annotations__9torch.fx.passes.splitter_base.SplitResult.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dictëS
+_SplitterBase+torch.fx.passes.splitter_base._SplitterBase"builtins.object*µ
+__init__4torch.fx.passes.splitter_base._SplitterBase.__init__"
+None*d
+selfZ
++torch.fx.passes.splitter_base._SplitterBase"+torch.fx.passes.splitter_base._SplitterBase*R
+moduleF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*B
+sample_input0
+typing.Sequence[Any]
+Any"typing.Sequence*Ç
+operator_supportl
+4torch.fx.passes.operator_support.OperatorSupportBase"4torch.fx.passes.operator_support.OperatorSupportBase*v
+settingsh
+2torch.fx.passes.splitter_base._SplitterSettingBase"2torch.fx.passes.splitter_base._SplitterSettingBase*:
+non_acc_submodule_name
+builtins.str"builtins.str *2
+return_tuple
+builtins.bool"builtins.bool *π
+get_node_submodule_mapBtorch.fx.passes.splitter_base._SplitterBase.get_node_submodule_map"u
+(builtins.dict[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.dict*d
+selfZ
++torch.fx.passes.splitter_base._SplitterBase"+torch.fx.passes.splitter_base._SplitterBase*Á
+	find_deps5torch.fx.passes.splitter_base._SplitterBase.find_deps"º
+Mbuiltins.dict[torch.fx.node.Node,TypeAlias[builtins.set[torch.fx.node.Node]]](
+torch.fx.node.Node"torch.fx.node.Node±
++TypeAlias[builtins.set[torch.fx.node.Node]]Z
+ builtins.set[torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node"builtins.set"$torch.fx.passes.tools_common.NodeSet"builtins.dict*d
+selfZ
++torch.fx.passes.splitter_base._SplitterBase"+torch.fx.passes.splitter_base._SplitterBase*h
+update_deps_for_fusionsCtorch.fx.passes.splitter_base._SplitterBase.update_deps_for_fusions*
+self*‚
+_lower_model_to_backendCtorch.fx.passes.splitter_base._SplitterBase._lower_model_to_backend"@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*d
+selfZ
++torch.fx.passes.splitter_base._SplitterBase"+torch.fx.passes.splitter_base._SplitterBase*O
+modF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*à
+inputs˚
+QTypeAlias[Union[Tuple[torch._tensor.Tensor],builtins.list[torch._tensor.Tensor]]]˝
+FUnion[Tuple[torch._tensor.Tensor],builtins.list[torch._tensor.Tensor]]M
+Tuple[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensorb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list"$torch.fx.passes.tools_common.Tensors*™
+_find_culprit9torch.fx.passes.splitter_base._SplitterBase._find_culprit"
+builtins.str"builtins.str*d
+selfZ
++torch.fx.passes.splitter_base._SplitterBase"+torch.fx.passes.splitter_base._SplitterBase*O
+modF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*à
+inputs˚
+QTypeAlias[Union[Tuple[torch._tensor.Tensor],builtins.list[torch._tensor.Tensor]]]˝
+FUnion[Tuple[torch._tensor.Tensor],builtins.list[torch._tensor.Tensor]]M
+Tuple[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensorb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list"$torch.fx.passes.tools_common.Tensors*Ä
+!_draw_graph_based_on_node_supportMtorch.fx.passes.splitter_base._SplitterBase._draw_graph_based_on_node_support"
+Any*d
+selfZ
++torch.fx.passes.splitter_base._SplitterBase"+torch.fx.passes.splitter_base._SplitterBase*O
+modF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*À
+supported_nodesµ
+,TypeAlias[builtins.list[torch.fx.node.Node]]\
+!builtins.list[torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node"builtins.list"%torch.fx.passes.tools_common.NodeList*˘
+node_support_preview@torch.fx.passes.splitter_base._SplitterBase.node_support_preview"
+Any*d
+selfZ
++torch.fx.passes.splitter_base._SplitterBase"+torch.fx.passes.splitter_base._SplitterBase*0
+
+dump_graph
+builtins.bool"builtins.bool *Î
+split_preview9torch.fx.passes.splitter_base._SplitterBase.split_preview"
+Any*d
+selfZ
++torch.fx.passes.splitter_base._SplitterBase"+torch.fx.passes.splitter_base._SplitterBase*0
+
+dump_graph
+builtins.bool"builtins.bool *À
+find_reverse_deps=torch.fx.passes.splitter_base._SplitterBase.find_reverse_deps"º
+Mbuiltins.dict[torch.fx.node.Node,TypeAlias[builtins.set[torch.fx.node.Node]]](
+torch.fx.node.Node"torch.fx.node.Node±
++TypeAlias[builtins.set[torch.fx.node.Node]]Z
+ builtins.set[torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node"builtins.set"$torch.fx.passes.tools_common.NodeSet"builtins.dict*d
+selfZ
++torch.fx.passes.splitter_base._SplitterBase"+torch.fx.passes.splitter_base._SplitterBase*R
+tag_idD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *ß
+update_reverse_deps_for_fusionsKtorch.fx.passes.splitter_base._SplitterBase.update_reverse_deps_for_fusions"
+Any*d
+selfZ
++torch.fx.passes.splitter_base._SplitterBase"+torch.fx.passes.splitter_base._SplitterBase*«
+depsº
+Mbuiltins.dict[torch.fx.node.Node,TypeAlias[builtins.set[torch.fx.node.Node]]](
+torch.fx.node.Node"torch.fx.node.Node±
++TypeAlias[builtins.set[torch.fx.node.Node]]Z
+ builtins.set[torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node"builtins.set"$torch.fx.passes.tools_common.NodeSet"builtins.dict*´
+find_parent_nodes_of_subgraphItorch.fx.passes.splitter_base._SplitterBase.find_parent_nodes_of_subgraph"±
++TypeAlias[builtins.set[torch.fx.node.Node]]Z
+ builtins.set[torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node"builtins.set"$torch.fx.passes.tools_common.NodeSet*d
+selfZ
++torch.fx.passes.splitter_base._SplitterBase"+torch.fx.passes.splitter_base._SplitterBase*%
+tag
+builtins.str"builtins.str*Ï
+extend_acc_subgraph?torch.fx.passes.splitter_base._SplitterBase.extend_acc_subgraph"
+Any*d
+selfZ
++torch.fx.passes.splitter_base._SplitterBase"+torch.fx.passes.splitter_base._SplitterBase*%
+tag
+builtins.str"builtins.str*≤
+starter_nodes9torch.fx.passes.splitter_base._SplitterBase.starter_nodes" *d
+selfZ
++torch.fx.passes.splitter_base._SplitterBase"+torch.fx.passes.splitter_base._SplitterBase*·
+put_nodes_into_subgraphsDtorch.fx.passes.splitter_base._SplitterBase.put_nodes_into_subgraphs"ò
+5builtins.list[torch.fx.passes.splitter_base.Subgraph]P
+&torch.fx.passes.splitter_base.Subgraph"&torch.fx.passes.splitter_base.Subgraph"builtins.list*d
+selfZ
++torch.fx.passes.splitter_base._SplitterBase"+torch.fx.passes.splitter_base._SplitterBase*ê
+remove_small_acc_subgraphsFtorch.fx.passes.splitter_base._SplitterBase.remove_small_acc_subgraphs"ò
+5builtins.list[torch.fx.passes.splitter_base.Subgraph]P
+&torch.fx.passes.splitter_base.Subgraph"&torch.fx.passes.splitter_base.Subgraph"builtins.list*d
+selfZ
++torch.fx.passes.splitter_base._SplitterBase"+torch.fx.passes.splitter_base._SplitterBase*®
+	subgraphsò
+5builtins.list[torch.fx.passes.splitter_base.Subgraph]P
+&torch.fx.passes.splitter_base.Subgraph"&torch.fx.passes.splitter_base.Subgraph"builtins.list*–
+tag/torch.fx.passes.splitter_base._SplitterBase.tag"
+Any*d
+selfZ
++torch.fx.passes.splitter_base._SplitterBase"+torch.fx.passes.splitter_base._SplitterBase*®
+	subgraphsò
+5builtins.list[torch.fx.passes.splitter_base.Subgraph]P
+&torch.fx.passes.splitter_base.Subgraph"&torch.fx.passes.splitter_base.Subgraph"builtins.list*ö
+split1torch.fx.passes.splitter_base._SplitterBase.split"F
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*d
+selfZ
++torch.fx.passes.splitter_base._SplitterBase"+torch.fx.passes.splitter_base._SplitterBase*0
+
+remove_tag
+builtins.bool"builtins.bool *Ó
+__call__4torch.fx.passes.splitter_base._SplitterBase.__call__"F
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*d
+selfZ
++torch.fx.passes.splitter_base._SplitterBase"+torch.fx.passes.splitter_base._SplitterBase*Ô
+generate_split_resultsBtorch.fx.passes.splitter_base._SplitterBase.generate_split_results"™
+`TypeAlias[Tuple[torch.fx.graph_module.GraphModule,builtins.dict[builtins.str,Any],builtins.str]]ò
+UTuple[torch.fx.graph_module.GraphModule,builtins.dict[builtins.str,Any],builtins.str]F
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModuleW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+builtins.str"builtins.str")torch.fx.passes.splitter_base.SplitResult*d
+selfZ
++torch.fx.passes.splitter_base._SplitterBase"+torch.fx.passes.splitter_base._SplitterBaser\
+PCIe_BW3torch.fx.passes.splitter_base._SplitterBase.PCIe_BW
+builtins.int"builtins.intrE
+module2torch.fx.passes.splitter_base._SplitterBase.module
+Anyr™
+settings4torch.fx.passes.splitter_base._SplitterBase.settingsh
+2torch.fx.passes.splitter_base._SplitterSettingBase"2torch.fx.passes.splitter_base._SplitterSettingBaseræ
+operator_support<torch.fx.passes.splitter_base._SplitterBase.operator_supportl
+4torch.fx.passes.operator_support.OperatorSupportBase"4torch.fx.passes.operator_support.OperatorSupportBaserz
+sample_input8torch.fx.passes.splitter_base._SplitterBase.sample_input0
+typing.Sequence[Any]
+Any"typing.Sequencerû
+	acc_nodes5torch.fx.passes.splitter_base._SplitterBase.acc_nodesZ
+ builtins.set[torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node"builtins.setr˝
+fusions3torch.fx.passes.splitter_base._SplitterBase.fusionsº
+Mbuiltins.dict[torch.fx.node.Node,TypeAlias[builtins.set[torch.fx.node.Node]]](
+torch.fx.node.Node"torch.fx.node.Node±
++TypeAlias[builtins.set[torch.fx.node.Node]]Z
+ builtins.set[torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node"builtins.set"$torch.fx.passes.tools_common.NodeSet"builtins.dictr˜
+deps0torch.fx.passes.splitter_base._SplitterBase.depsº
+Mbuiltins.dict[torch.fx.node.Node,TypeAlias[builtins.set[torch.fx.node.Node]]](
+torch.fx.node.Node"torch.fx.node.Node±
++TypeAlias[builtins.set[torch.fx.node.Node]]Z
+ builtins.set[torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node"builtins.set"$torch.fx.passes.tools_common.NodeSet"builtins.dictrz
+non_acc_submodule_nameBtorch.fx.passes.splitter_base._SplitterBase.non_acc_submodule_name
+builtins.str"builtins.strrÕ
+_node_submodule_map?torch.fx.passes.splitter_base._SplitterBase._node_submodule_mapu
+(builtins.dict[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.dictrj
+_return_tuple9torch.fx.passes.splitter_base._SplitterBase._return_tuple
+builtins.bool"builtins.boolrÑ
+tags0torch.fx.passes.splitter_base._SplitterBase.tagsJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list’
+CustomDrawer@424.torch.fx.passes.splitter_base.CustomDrawer@424"*torch.fx.passes.graph_drawer.FxGraphDrawer*e
+_get_node_style>torch.fx.passes.splitter_base.CustomDrawer@424._get_node_style*
+self*
+node*ô
+__annotations__-torch.fx.passes.splitter_base.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*|
+__all__%torch.fx.passes.splitter_base.__all__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*R
+_LOGGER%torch.fx.passes.splitter_base._LOGGER 
+logging.Logger"logging.Logger*v
+DEFAULT_MIN_ACC_MODULE_SIZE9torch.fx.passes.splitter_base.DEFAULT_MIN_ACC_MODULE_SIZE
+builtins.int"builtins.int*h
+DEFAULT_SKIP_FUSION1torch.fx.passes.splitter_base.DEFAULT_SKIP_FUSION
+builtins.bool"builtins.bool*r
+DEFAULT_ALLOW_NON_TENSOR6torch.fx.passes.splitter_base.DEFAULT_ALLOW_NON_TENSOR
+builtins.bool"builtins.bool

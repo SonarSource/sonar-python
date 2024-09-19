@@ -1,0 +1,386 @@
+
+torch.ao.nn.qatº
+Linear%torch.ao.nn.qat.modules.linear.Linear"torch.nn.modules.linear.Linear*≠
+__init__.torch.ao.nn.qat.modules.linear.Linear.__init__"
+None*X
+selfN
+%torch.ao.nn.qat.modules.linear.Linear"%torch.ao.nn.qat.modules.linear.Linear*
+in_features
+Any*
+out_features
+Any*
+bias
+Any *
+qconfig
+Any *
+device
+Any *
+dtype
+Any *M
+forward-torch.ao.nn.qat.modules.linear.Linear.forward*
+self*	
+input*É
+
+from_float0torch.ao.nn.qat.modules.linear.Linear.from_float*
+cls*
+mod* 
+use_precomputed_fake_quant 0:classmethodp*D
+to_float.torch.ao.nn.qat.modules.linear.Linear.to_float*
+selfrÖ
+_FLOAT_MODULE3torch.ao.nn.qat.modules.linear.Linear._FLOAT_MODULE?
+CallableType[builtins.type]
+builtins.type"builtins.typerA
+qconfig-torch.ao.nn.qat.modules.linear.Linear.qconfig
+AnyrU
+weight_fake_quant7torch.ao.nn.qat.modules.linear.Linear.weight_fake_quant
+Any™
+Conv1d#torch.ao.nn.qat.modules.conv.Conv1d"$torch.ao.nn.qat.modules.conv._ConvNd"torch.nn.modules.conv.Conv1d*ú
+__init__,torch.ao.nn.qat.modules.conv.Conv1d.__init__"
+None*T
+selfJ
+#torch.ao.nn.qat.modules.conv.Conv1d"#torch.ao.nn.qat.modules.conv.Conv1d*-
+in_channels
+builtins.int"builtins.int*.
+out_channels
+builtins.int"builtins.int*ë
+kernel_sizeˇ
+STypeAlias[TypeAlias[Union[torch.nn.common_types.T,Tuple[torch.nn.common_types.T]]]]Ñ
+HTypeAlias[Union[torch.nn.common_types.T,Tuple[torch.nn.common_types.T]]]â
+=Union[torch.nn.common_types.T,Tuple[torch.nn.common_types.T]]P
+torch.nn.common_types.T"
+builtins.object"builtins.object"builtins.objectt
+Tuple[torch.nn.common_types.T]P
+torch.nn.common_types.T"
+builtins.object"builtins.object"builtins.object"*torch.nn.common_types._scalar_or_tuple_1_t"torch.nn.common_types._size_1_t*é
+strideˇ
+STypeAlias[TypeAlias[Union[torch.nn.common_types.T,Tuple[torch.nn.common_types.T]]]]Ñ
+HTypeAlias[Union[torch.nn.common_types.T,Tuple[torch.nn.common_types.T]]]â
+=Union[torch.nn.common_types.T,Tuple[torch.nn.common_types.T]]P
+torch.nn.common_types.T"
+builtins.object"builtins.object"builtins.objectt
+Tuple[torch.nn.common_types.T]P
+torch.nn.common_types.T"
+builtins.object"builtins.object"builtins.object"*torch.nn.common_types._scalar_or_tuple_1_t"torch.nn.common_types._size_1_t *õ
+paddingã
+gUnion[builtins.str,TypeAlias[TypeAlias[Union[torch.nn.common_types.T,Tuple[torch.nn.common_types.T]]]]]
+builtins.str"builtins.strˇ
+STypeAlias[TypeAlias[Union[torch.nn.common_types.T,Tuple[torch.nn.common_types.T]]]]Ñ
+HTypeAlias[Union[torch.nn.common_types.T,Tuple[torch.nn.common_types.T]]]â
+=Union[torch.nn.common_types.T,Tuple[torch.nn.common_types.T]]P
+torch.nn.common_types.T"
+builtins.object"builtins.object"builtins.objectt
+Tuple[torch.nn.common_types.T]P
+torch.nn.common_types.T"
+builtins.object"builtins.object"builtins.object"*torch.nn.common_types._scalar_or_tuple_1_t"torch.nn.common_types._size_1_t *ê
+dilationˇ
+STypeAlias[TypeAlias[Union[torch.nn.common_types.T,Tuple[torch.nn.common_types.T]]]]Ñ
+HTypeAlias[Union[torch.nn.common_types.T,Tuple[torch.nn.common_types.T]]]â
+=Union[torch.nn.common_types.T,Tuple[torch.nn.common_types.T]]P
+torch.nn.common_types.T"
+builtins.object"builtins.object"builtins.objectt
+Tuple[torch.nn.common_types.T]P
+torch.nn.common_types.T"
+builtins.object"builtins.object"builtins.object"*torch.nn.common_types._scalar_or_tuple_1_t"torch.nn.common_types._size_1_t **
+groups
+builtins.int"builtins.int **
+bias
+builtins.bool"builtins.bool *0
+padding_mode
+builtins.str"builtins.str *
+qconfig
+Any *
+device
+Any *
+dtype
+Any *Å
+
+from_float.torch.ao.nn.qat.modules.conv.Conv1d.from_float*
+cls*
+mod* 
+use_precomputed_fake_quant 0:classmethodprÉ
+_FLOAT_MODULE1torch.ao.nn.qat.modules.conv.Conv1d._FLOAT_MODULE?
+CallableType[builtins.type]
+builtins.type"builtins.typerç
+_FLOAT_CONV_MODULE6torch.ao.nn.qat.modules.conv.Conv1d._FLOAT_CONV_MODULE?
+CallableType[builtins.type]
+builtins.type"builtins.type€
+Conv2d#torch.ao.nn.qat.modules.conv.Conv2d"$torch.ao.nn.qat.modules.conv._ConvNd"torch.nn.modules.conv.Conv2d*Ä
+__init__,torch.ao.nn.qat.modules.conv.Conv2d.__init__"
+None*T
+selfJ
+#torch.ao.nn.qat.modules.conv.Conv2d"#torch.ao.nn.qat.modules.conv.Conv2d*-
+in_channels
+builtins.int"builtins.int*.
+out_channels
+builtins.int"builtins.int*ƒ
+kernel_size≤
+kTypeAlias[TypeAlias[Union[torch.nn.common_types.T,Tuple[torch.nn.common_types.T,torch.nn.common_types.T]]]]ü
+`TypeAlias[Union[torch.nn.common_types.T,Tuple[torch.nn.common_types.T,torch.nn.common_types.T]]]å
+UUnion[torch.nn.common_types.T,Tuple[torch.nn.common_types.T,torch.nn.common_types.T]]P
+torch.nn.common_types.T"
+builtins.object"builtins.object"builtins.objectﬁ
+6Tuple[torch.nn.common_types.T,torch.nn.common_types.T]P
+torch.nn.common_types.T"
+builtins.object"builtins.object"builtins.objectP
+torch.nn.common_types.T"
+builtins.object"builtins.object"builtins.object"*torch.nn.common_types._scalar_or_tuple_2_t"torch.nn.common_types._size_2_t*¡
+stride≤
+kTypeAlias[TypeAlias[Union[torch.nn.common_types.T,Tuple[torch.nn.common_types.T,torch.nn.common_types.T]]]]ü
+`TypeAlias[Union[torch.nn.common_types.T,Tuple[torch.nn.common_types.T,torch.nn.common_types.T]]]å
+UUnion[torch.nn.common_types.T,Tuple[torch.nn.common_types.T,torch.nn.common_types.T]]P
+torch.nn.common_types.T"
+builtins.object"builtins.object"builtins.objectﬁ
+6Tuple[torch.nn.common_types.T,torch.nn.common_types.T]P
+torch.nn.common_types.T"
+builtins.object"builtins.object"builtins.objectP
+torch.nn.common_types.T"
+builtins.object"builtins.object"builtins.object"*torch.nn.common_types._scalar_or_tuple_2_t"torch.nn.common_types._size_2_t *Ê
+padding÷
+Union[builtins.str,TypeAlias[TypeAlias[Union[torch.nn.common_types.T,Tuple[torch.nn.common_types.T,torch.nn.common_types.T]]]]]
+builtins.str"builtins.str≤
+kTypeAlias[TypeAlias[Union[torch.nn.common_types.T,Tuple[torch.nn.common_types.T,torch.nn.common_types.T]]]]ü
+`TypeAlias[Union[torch.nn.common_types.T,Tuple[torch.nn.common_types.T,torch.nn.common_types.T]]]å
+UUnion[torch.nn.common_types.T,Tuple[torch.nn.common_types.T,torch.nn.common_types.T]]P
+torch.nn.common_types.T"
+builtins.object"builtins.object"builtins.objectﬁ
+6Tuple[torch.nn.common_types.T,torch.nn.common_types.T]P
+torch.nn.common_types.T"
+builtins.object"builtins.object"builtins.objectP
+torch.nn.common_types.T"
+builtins.object"builtins.object"builtins.object"*torch.nn.common_types._scalar_or_tuple_2_t"torch.nn.common_types._size_2_t *√
+dilation≤
+kTypeAlias[TypeAlias[Union[torch.nn.common_types.T,Tuple[torch.nn.common_types.T,torch.nn.common_types.T]]]]ü
+`TypeAlias[Union[torch.nn.common_types.T,Tuple[torch.nn.common_types.T,torch.nn.common_types.T]]]å
+UUnion[torch.nn.common_types.T,Tuple[torch.nn.common_types.T,torch.nn.common_types.T]]P
+torch.nn.common_types.T"
+builtins.object"builtins.object"builtins.objectﬁ
+6Tuple[torch.nn.common_types.T,torch.nn.common_types.T]P
+torch.nn.common_types.T"
+builtins.object"builtins.object"builtins.objectP
+torch.nn.common_types.T"
+builtins.object"builtins.object"builtins.object"*torch.nn.common_types._scalar_or_tuple_2_t"torch.nn.common_types._size_2_t **
+groups
+builtins.int"builtins.int **
+bias
+builtins.bool"builtins.bool *0
+padding_mode
+builtins.str"builtins.str *
+qconfig
+Any *
+device
+Any *
+dtype
+Any *K
+forward+torch.ao.nn.qat.modules.conv.Conv2d.forward*
+self*	
+input*Å
+
+from_float.torch.ao.nn.qat.modules.conv.Conv2d.from_float*
+cls*
+mod* 
+use_precomputed_fake_quant 0:classmethodprÉ
+_FLOAT_MODULE1torch.ao.nn.qat.modules.conv.Conv2d._FLOAT_MODULE?
+CallableType[builtins.type]
+builtins.type"builtins.typerç
+_FLOAT_CONV_MODULE6torch.ao.nn.qat.modules.conv.Conv2d._FLOAT_CONV_MODULE?
+CallableType[builtins.type]
+builtins.type"builtins.type¿%
+Conv3d#torch.ao.nn.qat.modules.conv.Conv3d"$torch.ao.nn.qat.modules.conv._ConvNd"torch.nn.modules.conv.Conv3d*Â 
+__init__,torch.ao.nn.qat.modules.conv.Conv3d.__init__"
+None*T
+selfJ
+#torch.ao.nn.qat.modules.conv.Conv3d"#torch.ao.nn.qat.modules.conv.Conv3d*-
+in_channels
+builtins.int"builtins.int*.
+out_channels
+builtins.int"builtins.int*˜
+kernel_sizeÂ
+ÉTypeAlias[TypeAlias[Union[torch.nn.common_types.T,Tuple[torch.nn.common_types.T,torch.nn.common_types.T,torch.nn.common_types.T]]]]π
+xTypeAlias[Union[torch.nn.common_types.T,Tuple[torch.nn.common_types.T,torch.nn.common_types.T,torch.nn.common_types.T]]]é
+mUnion[torch.nn.common_types.T,Tuple[torch.nn.common_types.T,torch.nn.common_types.T,torch.nn.common_types.T]]P
+torch.nn.common_types.T"
+builtins.object"builtins.object"builtins.object»
+NTuple[torch.nn.common_types.T,torch.nn.common_types.T,torch.nn.common_types.T]P
+torch.nn.common_types.T"
+builtins.object"builtins.object"builtins.objectP
+torch.nn.common_types.T"
+builtins.object"builtins.object"builtins.objectP
+torch.nn.common_types.T"
+builtins.object"builtins.object"builtins.object"*torch.nn.common_types._scalar_or_tuple_3_t"torch.nn.common_types._size_3_t*Ù
+strideÂ
+ÉTypeAlias[TypeAlias[Union[torch.nn.common_types.T,Tuple[torch.nn.common_types.T,torch.nn.common_types.T,torch.nn.common_types.T]]]]π
+xTypeAlias[Union[torch.nn.common_types.T,Tuple[torch.nn.common_types.T,torch.nn.common_types.T,torch.nn.common_types.T]]]é
+mUnion[torch.nn.common_types.T,Tuple[torch.nn.common_types.T,torch.nn.common_types.T,torch.nn.common_types.T]]P
+torch.nn.common_types.T"
+builtins.object"builtins.object"builtins.object»
+NTuple[torch.nn.common_types.T,torch.nn.common_types.T,torch.nn.common_types.T]P
+torch.nn.common_types.T"
+builtins.object"builtins.object"builtins.objectP
+torch.nn.common_types.T"
+builtins.object"builtins.object"builtins.objectP
+torch.nn.common_types.T"
+builtins.object"builtins.object"builtins.object"*torch.nn.common_types._scalar_or_tuple_3_t"torch.nn.common_types._size_3_t *≤
+padding¢
+óUnion[builtins.str,TypeAlias[TypeAlias[Union[torch.nn.common_types.T,Tuple[torch.nn.common_types.T,torch.nn.common_types.T,torch.nn.common_types.T]]]]]
+builtins.str"builtins.strÂ
+ÉTypeAlias[TypeAlias[Union[torch.nn.common_types.T,Tuple[torch.nn.common_types.T,torch.nn.common_types.T,torch.nn.common_types.T]]]]π
+xTypeAlias[Union[torch.nn.common_types.T,Tuple[torch.nn.common_types.T,torch.nn.common_types.T,torch.nn.common_types.T]]]é
+mUnion[torch.nn.common_types.T,Tuple[torch.nn.common_types.T,torch.nn.common_types.T,torch.nn.common_types.T]]P
+torch.nn.common_types.T"
+builtins.object"builtins.object"builtins.object»
+NTuple[torch.nn.common_types.T,torch.nn.common_types.T,torch.nn.common_types.T]P
+torch.nn.common_types.T"
+builtins.object"builtins.object"builtins.objectP
+torch.nn.common_types.T"
+builtins.object"builtins.object"builtins.objectP
+torch.nn.common_types.T"
+builtins.object"builtins.object"builtins.object"*torch.nn.common_types._scalar_or_tuple_3_t"torch.nn.common_types._size_3_t *ˆ
+dilationÂ
+ÉTypeAlias[TypeAlias[Union[torch.nn.common_types.T,Tuple[torch.nn.common_types.T,torch.nn.common_types.T,torch.nn.common_types.T]]]]π
+xTypeAlias[Union[torch.nn.common_types.T,Tuple[torch.nn.common_types.T,torch.nn.common_types.T,torch.nn.common_types.T]]]é
+mUnion[torch.nn.common_types.T,Tuple[torch.nn.common_types.T,torch.nn.common_types.T,torch.nn.common_types.T]]P
+torch.nn.common_types.T"
+builtins.object"builtins.object"builtins.object»
+NTuple[torch.nn.common_types.T,torch.nn.common_types.T,torch.nn.common_types.T]P
+torch.nn.common_types.T"
+builtins.object"builtins.object"builtins.objectP
+torch.nn.common_types.T"
+builtins.object"builtins.object"builtins.objectP
+torch.nn.common_types.T"
+builtins.object"builtins.object"builtins.object"*torch.nn.common_types._scalar_or_tuple_3_t"torch.nn.common_types._size_3_t **
+groups
+builtins.int"builtins.int **
+bias
+builtins.bool"builtins.bool *0
+padding_mode
+builtins.str"builtins.str *
+qconfig
+Any *
+device
+Any *
+dtype
+Any *K
+forward+torch.ao.nn.qat.modules.conv.Conv3d.forward*
+self*	
+input*Å
+
+from_float.torch.ao.nn.qat.modules.conv.Conv3d.from_float*
+cls*
+mod* 
+use_precomputed_fake_quant 0:classmethodprÉ
+_FLOAT_MODULE1torch.ao.nn.qat.modules.conv.Conv3d._FLOAT_MODULE?
+CallableType[builtins.type]
+builtins.type"builtins.typerç
+_FLOAT_CONV_MODULE6torch.ao.nn.qat.modules.conv.Conv3d._FLOAT_CONV_MODULE?
+CallableType[builtins.type]
+builtins.type"builtins.type
+EmbeddingBag2torch.ao.nn.qat.modules.embedding_ops.EmbeddingBag"$torch.nn.modules.sparse.EmbeddingBag*ù
+__init__;torch.ao.nn.qat.modules.embedding_ops.EmbeddingBag.__init__"
+None*r
+selfh
+2torch.ao.nn.qat.modules.embedding_ops.EmbeddingBag"2torch.ao.nn.qat.modules.embedding_ops.EmbeddingBag*
+num_embeddings
+Any*
+embedding_dim
+Any*
+max_norm
+Any *
+	norm_type
+Any *!
+scale_grad_by_freq
+Any *
+mode
+Any *
+sparse
+Any *
+_weight
+Any *"
+include_last_offset
+Any *
+padding_idx
+Any *
+qconfig
+Any *
+device
+Any *
+dtype
+Any *∂
+forward:torch.ao.nn.qat.modules.embedding_ops.EmbeddingBag.forward",
+torch._tensor.Tensor"torch._tensor.Tensor*r
+selfh
+2torch.ao.nn.qat.modules.embedding_ops.EmbeddingBag"2torch.ao.nn.qat.modules.embedding_ops.EmbeddingBag*
+input
+Any*
+offsets
+Any *!
+per_sample_weights
+Any *ê
+
+from_float=torch.ao.nn.qat.modules.embedding_ops.EmbeddingBag.from_float*
+cls*
+mod* 
+use_precomputed_fake_quant 0:classmethodp*Q
+to_float;torch.ao.nn.qat.modules.embedding_ops.EmbeddingBag.to_float*
+selfrí
+_FLOAT_MODULE@torch.ao.nn.qat.modules.embedding_ops.EmbeddingBag._FLOAT_MODULE?
+CallableType[builtins.type]
+builtins.type"builtins.typerN
+qconfig:torch.ao.nn.qat.modules.embedding_ops.EmbeddingBag.qconfig
+Anyrb
+weight_fake_quantDtorch.ao.nn.qat.modules.embedding_ops.EmbeddingBag.weight_fake_quant
+Any“
+
+	Embedding/torch.ao.nn.qat.modules.embedding_ops.Embedding"!torch.nn.modules.sparse.Embedding*€
+__init__8torch.ao.nn.qat.modules.embedding_ops.Embedding.__init__"
+None*l
+selfb
+/torch.ao.nn.qat.modules.embedding_ops.Embedding"/torch.ao.nn.qat.modules.embedding_ops.Embedding*
+num_embeddings
+Any*
+embedding_dim
+Any*
+padding_idx
+Any *
+max_norm
+Any *
+	norm_type
+Any *!
+scale_grad_by_freq
+Any *
+sparse
+Any *
+_weight
+Any *
+device
+Any *
+dtype
+Any *
+qconfig
+Any *Ú
+forward7torch.ao.nn.qat.modules.embedding_ops.Embedding.forward",
+torch._tensor.Tensor"torch._tensor.Tensor*l
+selfb
+/torch.ao.nn.qat.modules.embedding_ops.Embedding"/torch.ao.nn.qat.modules.embedding_ops.Embedding*
+input
+Any*ç
+
+from_float:torch.ao.nn.qat.modules.embedding_ops.Embedding.from_float*
+cls*
+mod* 
+use_precomputed_fake_quant 0:classmethodp*N
+to_float8torch.ao.nn.qat.modules.embedding_ops.Embedding.to_float*
+selfrè
+_FLOAT_MODULE=torch.ao.nn.qat.modules.embedding_ops.Embedding._FLOAT_MODULE?
+CallableType[builtins.type]
+builtins.type"builtins.typerK
+qconfig7torch.ao.nn.qat.modules.embedding_ops.Embedding.qconfig
+Anyr_
+weight_fake_quantAtorch.ao.nn.qat.modules.embedding_ops.Embedding.weight_fake_quant
+Any*p
+__path__torch.ao.nn.qat.__path__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*ã
+__annotations__torch.ao.nn.qat.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict

@@ -1,0 +1,290 @@
+
+torch.distributed.device_meshQ
+_DeviceMeshStub-torch.distributed.device_mesh._DeviceMeshStub"builtins.object—
+_MeshEnv&torch.distributed.device_mesh._MeshEnv"threading.local*°
+__init__/torch.distributed.device_mesh._MeshEnv.__init__"
+None*Z
+selfP
+&torch.distributed.device_mesh._MeshEnv"&torch.distributed.device_mesh._MeshEnv*˝
+get_current_mesh7torch.distributed.device_mesh._MeshEnv.get_current_mesh"T
+(torch.distributed.device_mesh.DeviceMesh"(torch.distributed.device_mesh.DeviceMesh*Z
+selfP
+&torch.distributed.device_mesh._MeshEnv"&torch.distributed.device_mesh._MeshEnv*À
+create_child_mesh8torch.distributed.device_mesh._MeshEnv.create_child_mesh"T
+(torch.distributed.device_mesh.DeviceMesh"(torch.distributed.device_mesh.DeviceMesh*Z
+selfP
+&torch.distributed.device_mesh._MeshEnv"&torch.distributed.device_mesh._MeshEnv*e
+parent_meshT
+(torch.distributed.device_mesh.DeviceMesh"(torch.distributed.device_mesh.DeviceMesh*c
+submesh_dim_namesL
+builtins.tuple[builtins.str]
+builtins.str"builtins.str"builtins.tuple*ß
+get_parent_mesh6torch.distributed.device_mesh._MeshEnv.get_parent_mesh"ò
+4Union[torch.distributed.device_mesh.DeviceMesh,None]T
+(torch.distributed.device_mesh.DeviceMesh"(torch.distributed.device_mesh.DeviceMesh
+None*Z
+selfP
+&torch.distributed.device_mesh._MeshEnv"&torch.distributed.device_mesh._MeshEnv*e
+device_meshT
+(torch.distributed.device_mesh.DeviceMesh"(torch.distributed.device_mesh.DeviceMesh*⁄
+get_parent_mesh_dim:torch.distributed.device_mesh._MeshEnv.get_parent_mesh_dim"D
+Union[builtins.int,None]
+builtins.int"builtins.int
+None*Z
+selfP
+&torch.distributed.device_mesh._MeshEnv"&torch.distributed.device_mesh._MeshEnv*e
+device_meshT
+(torch.distributed.device_mesh.DeviceMesh"(torch.distributed.device_mesh.DeviceMesh*≤
+num_devices_per_host;torch.distributed.device_mesh._MeshEnv.num_devices_per_host"
+builtins.int"builtins.int*-
+device_type
+builtins.str"builtins.str0:staticmethodh*ú
+	num_hosts0torch.distributed.device_mesh._MeshEnv.num_hosts"
+builtins.int"builtins.int*-
+device_type
+builtins.str"builtins.str0:staticmethodh*Â
+get_mesh_dim_by_name;torch.distributed.device_mesh._MeshEnv.get_mesh_dim_by_name"
+builtins.int"builtins.int*Z
+selfP
+&torch.distributed.device_mesh._MeshEnv"&torch.distributed.device_mesh._MeshEnv*e
+device_meshT
+(torch.distributed.device_mesh.DeviceMesh"(torch.distributed.device_mesh.DeviceMesh*/
+mesh_dim_name
+builtins.str"builtins.str*‹
+_set_mesh_dim_group_optionsBtorch.distributed.device_mesh._MeshEnv._set_mesh_dim_group_options"
+None*Z
+selfP
+&torch.distributed.device_mesh._MeshEnv"&torch.distributed.device_mesh._MeshEnv*%
+dim
+builtins.int"builtins.int*)
+backend
+builtins.str"builtins.str*¿
+
+pg_options≠
+;Union[torch._C._distributed_c10d.ProcessGroup.Options,None]b
+/torch._C._distributed_c10d.ProcessGroup.Options"/torch._C._distributed_c10d.ProcessGroup.Options
+None r‡
+
+mesh_stack1torch.distributed.device_mesh._MeshEnv.mesh_stackû
+7builtins.list[torch.distributed.device_mesh.DeviceMesh]T
+(torch.distributed.device_mesh.DeviceMesh"(torch.distributed.device_mesh.DeviceMesh"builtins.listr˘
+child_to_parent_mapping>torch.distributed.device_mesh._MeshEnv.child_to_parent_mappingù
+`builtins.dict[torch.distributed.device_mesh.DeviceMesh,torch.distributed.device_mesh.DeviceMesh]T
+(torch.distributed.device_mesh.DeviceMesh"(torch.distributed.device_mesh.DeviceMeshT
+(torch.distributed.device_mesh.DeviceMesh"(torch.distributed.device_mesh.DeviceMesh"builtins.dictrò
+mesh_dim_group_options=torch.distributed.device_mesh._MeshEnv.mesh_dim_group_optionsæ
+kbuiltins.dict[builtins.int,Tuple[builtins.str,Union[torch._C._distributed_c10d.ProcessGroup.Options,None]]]
+builtins.int"builtins.int°
+OTuple[builtins.str,Union[torch._C._distributed_c10d.ProcessGroup.Options,None]]
+builtins.str"builtins.str≠
+;Union[torch._C._distributed_c10d.ProcessGroup.Options,None]b
+/torch._C._distributed_c10d.ProcessGroup.Options"/torch._C._distributed_c10d.ProcessGroup.Options
+None"builtins.dictÆV
+
+DeviceMesh(torch.distributed.device_mesh.DeviceMesh"builtins.object*Ü
+__init__1torch.distributed.device_mesh.DeviceMesh.__init__"
+None*^
+selfT
+(torch.distributed.device_mesh.DeviceMesh"(torch.distributed.device_mesh.DeviceMesh*-
+device_type
+builtins.str"builtins.str*⁄
+meshœ
+ËUnion[torch._tensor.Tensor,TypeAlias[TypeAlias[Union[numpy._typing._array_like._SupportsArray[numpy._typing._array_like._DType],numpy._typing._nested_sequence._NestedSequence[numpy._typing._array_like._SupportsArray[numpy._typing._array_like._DType]],numpy._typing._array_like._T,numpy._typing._nested_sequence._NestedSequence[numpy._typing._array_like._T]]]]],
+torch._tensor.Tensor"torch._tensor.Tensor±
+ÃTypeAlias[TypeAlias[Union[numpy._typing._array_like._SupportsArray[numpy._typing._array_like._DType],numpy._typing._nested_sequence._NestedSequence[numpy._typing._array_like._SupportsArray[numpy._typing._array_like._DType]],numpy._typing._array_like._T,numpy._typing._nested_sequence._NestedSequence[numpy._typing._array_like._T]]]]∏
+¡TypeAlias[Union[numpy._typing._array_like._SupportsArray[numpy._typing._array_like._DType],numpy._typing._nested_sequence._NestedSequence[numpy._typing._array_like._SupportsArray[numpy._typing._array_like._DType]],numpy._typing._array_like._T,numpy._typing._nested_sequence._NestedSequence[numpy._typing._array_like._T]]]≈	
+∂Union[numpy._typing._array_like._SupportsArray[numpy._typing._array_like._DType],numpy._typing._nested_sequence._NestedSequence[numpy._typing._array_like._SupportsArray[numpy._typing._array_like._DType]],numpy._typing._array_like._T,numpy._typing._nested_sequence._NestedSequence[numpy._typing._array_like._T]]”
+Jnumpy._typing._array_like._SupportsArray[numpy._typing._array_like._DType][
+ numpy._typing._array_like._DType(
+numpy.dtype[Any]
+Any"numpy.dtype"numpy.dtype"(numpy._typing._array_like._SupportsArrayÇ
+znumpy._typing._nested_sequence._NestedSequence[numpy._typing._array_like._SupportsArray[numpy._typing._array_like._DType]]”
+Jnumpy._typing._array_like._SupportsArray[numpy._typing._array_like._DType][
+ numpy._typing._array_like._DType(
+numpy.dtype[Any]
+Any"numpy.dtype"numpy.dtype"(numpy._typing._array_like._SupportsArray".numpy._typing._nested_sequence._NestedSequenceU
+numpy._typing._array_like._T"
+builtins.object"builtins.object"builtins.object’
+Lnumpy._typing._nested_sequence._NestedSequence[numpy._typing._array_like._T]U
+numpy._typing._array_like._T"
+builtins.object"builtins.object"builtins.object".numpy._typing._nested_sequence._NestedSequence"(numpy._typing._array_like._DualArrayLike"#numpy._typing._array_like.ArrayLike*õ
+mesh_dim_namesÑ
+(Union[builtins.tuple[builtins.str],None]L
+builtins.tuple[builtins.str]
+builtins.str"builtins.str"builtins.tuple
+None *3
+_init_backend
+builtins.bool"builtins.bool *o
+_get_or_create_default_groupEtorch.distributed.device_mesh.DeviceMesh._get_or_create_default_group*
+self*_
+_init_process_groups=torch.distributed.device_mesh.DeviceMesh._init_process_groups*
+self*Ì
+	__enter__2torch.distributed.device_mesh.DeviceMesh.__enter__"T
+(torch.distributed.device_mesh.DeviceMesh"(torch.distributed.device_mesh.DeviceMesh*VT
+(torch.distributed.device_mesh.DeviceMesh"(torch.distributed.device_mesh.DeviceMesh*¿
+__exit__1torch.distributed.device_mesh.DeviceMesh.__exit__"
+None*VT
+(torch.distributed.device_mesh.DeviceMesh"(torch.distributed.device_mesh.DeviceMesh*	
+Any*	
+Any*	
+Any*≥
+__repr__1torch.distributed.device_mesh.DeviceMesh.__repr__"
+builtins.str"builtins.str*VT
+(torch.distributed.device_mesh.DeviceMesh"(torch.distributed.device_mesh.DeviceMesh*G
+__hash__1torch.distributed.device_mesh.DeviceMesh.__hash__*
+self*◊
+__eq__/torch.distributed.device_mesh.DeviceMesh.__eq__"
+builtins.bool"builtins.bool*VT
+(torch.distributed.device_mesh.DeviceMesh"(torch.distributed.device_mesh.DeviceMesh*$"
+builtins.object"builtins.object*ó
+__getitem__4torch.distributed.device_mesh.DeviceMesh.__getitem__"T
+(torch.distributed.device_mesh.DeviceMesh"(torch.distributed.device_mesh.DeviceMesh*VT
+(torch.distributed.device_mesh.DeviceMesh"(torch.distributed.device_mesh.DeviceMesh*£†
+0Union[builtins.str,builtins.tuple[builtins.str]]
+builtins.str"builtins.strL
+builtins.tuple[builtins.str]
+builtins.str"builtins.str"builtins.tuple*Ù
+	get_group2torch.distributed.device_mesh.DeviceMesh.get_group"R
+'torch._C._distributed_c10d.ProcessGroup"'torch._C._distributed_c10d.ProcessGroup*^
+selfT
+(torch.distributed.device_mesh.DeviceMesh"(torch.distributed.device_mesh.DeviceMesh*
+mesh_dimo
+%Union[builtins.int,builtins.str,None]
+builtins.int"builtins.int
+builtins.str"builtins.str
+None *«
+get_all_groups7torch.distributed.device_mesh.DeviceMesh.get_all_groups"õ
+6builtins.list[torch._C._distributed_c10d.ProcessGroup]R
+'torch._C._distributed_c10d.ProcessGroup"'torch._C._distributed_c10d.ProcessGroup"builtins.list*^
+selfT
+(torch.distributed.device_mesh.DeviceMesh"(torch.distributed.device_mesh.DeviceMesh*Œ
+
+from_group3torch.distributed.device_mesh.DeviceMesh.from_group"T
+(torch.distributed.device_mesh.DeviceMesh"(torch.distributed.device_mesh.DeviceMesh*Á
+group€
+eUnion[torch._C._distributed_c10d.ProcessGroup,builtins.list[torch._C._distributed_c10d.ProcessGroup]]R
+'torch._C._distributed_c10d.ProcessGroup"'torch._C._distributed_c10d.ProcessGroupõ
+6builtins.list[torch._C._distributed_c10d.ProcessGroup]R
+'torch._C._distributed_c10d.ProcessGroup"'torch._C._distributed_c10d.ProcessGroup"builtins.list*-
+device_type
+builtins.str"builtins.str*Î
+meshﬁ
+ÌUnion[torch._tensor.Tensor,TypeAlias[TypeAlias[Union[numpy._typing._array_like._SupportsArray[numpy._typing._array_like._DType],numpy._typing._nested_sequence._NestedSequence[numpy._typing._array_like._SupportsArray[numpy._typing._array_like._DType]],numpy._typing._array_like._T,numpy._typing._nested_sequence._NestedSequence[numpy._typing._array_like._T]]]],None],
+torch._tensor.Tensor"torch._tensor.Tensor±
+ÃTypeAlias[TypeAlias[Union[numpy._typing._array_like._SupportsArray[numpy._typing._array_like._DType],numpy._typing._nested_sequence._NestedSequence[numpy._typing._array_like._SupportsArray[numpy._typing._array_like._DType]],numpy._typing._array_like._T,numpy._typing._nested_sequence._NestedSequence[numpy._typing._array_like._T]]]]∏
+¡TypeAlias[Union[numpy._typing._array_like._SupportsArray[numpy._typing._array_like._DType],numpy._typing._nested_sequence._NestedSequence[numpy._typing._array_like._SupportsArray[numpy._typing._array_like._DType]],numpy._typing._array_like._T,numpy._typing._nested_sequence._NestedSequence[numpy._typing._array_like._T]]]≈	
+∂Union[numpy._typing._array_like._SupportsArray[numpy._typing._array_like._DType],numpy._typing._nested_sequence._NestedSequence[numpy._typing._array_like._SupportsArray[numpy._typing._array_like._DType]],numpy._typing._array_like._T,numpy._typing._nested_sequence._NestedSequence[numpy._typing._array_like._T]]”
+Jnumpy._typing._array_like._SupportsArray[numpy._typing._array_like._DType][
+ numpy._typing._array_like._DType(
+numpy.dtype[Any]
+Any"numpy.dtype"numpy.dtype"(numpy._typing._array_like._SupportsArrayÇ
+znumpy._typing._nested_sequence._NestedSequence[numpy._typing._array_like._SupportsArray[numpy._typing._array_like._DType]]”
+Jnumpy._typing._array_like._SupportsArray[numpy._typing._array_like._DType][
+ numpy._typing._array_like._DType(
+numpy.dtype[Any]
+Any"numpy.dtype"numpy.dtype"(numpy._typing._array_like._SupportsArray".numpy._typing._nested_sequence._NestedSequenceU
+numpy._typing._array_like._T"
+builtins.object"builtins.object"builtins.object’
+Lnumpy._typing._nested_sequence._NestedSequence[numpy._typing._array_like._T]U
+numpy._typing._array_like._T"
+builtins.object"builtins.object"builtins.object".numpy._typing._nested_sequence._NestedSequence"(numpy._typing._array_like._DualArrayLike"#numpy._typing._array_like.ArrayLike
+None *õ
+mesh_dim_namesÑ
+(Union[builtins.tuple[builtins.str],None]L
+builtins.tuple[builtins.str]
+builtins.str"builtins.str"builtins.tuple
+None 0:staticmethodh*â
+size-torch.distributed.device_mesh.DeviceMesh.size"
+builtins.int"builtins.int*^
+selfT
+(torch.distributed.device_mesh.DeviceMesh"(torch.distributed.device_mesh.DeviceMesh*T
+mesh_dimD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *¡
+ndim-torch.distributed.device_mesh.DeviceMesh.ndim"
+builtins.int"builtins.int*^
+selfT
+(torch.distributed.device_mesh.DeviceMesh"(torch.distributed.device_mesh.DeviceMesh0:property`*Û
+shape.torch.distributed.device_mesh.DeviceMesh.shape"L
+builtins.tuple[builtins.int]
+builtins.int"builtins.int"builtins.tuple*^
+selfT
+(torch.distributed.device_mesh.DeviceMesh"(torch.distributed.device_mesh.DeviceMesh0:property`*ª
+get_rank1torch.distributed.device_mesh.DeviceMesh.get_rank"
+builtins.int"builtins.int*^
+selfT
+(torch.distributed.device_mesh.DeviceMesh"(torch.distributed.device_mesh.DeviceMesh*»
+get_local_rank7torch.distributed.device_mesh.DeviceMesh.get_local_rank"
+builtins.int"builtins.int*^
+selfT
+(torch.distributed.device_mesh.DeviceMesh"(torch.distributed.device_mesh.DeviceMesh*
+mesh_dimo
+%Union[builtins.int,builtins.str,None]
+builtins.int"builtins.int
+builtins.str"builtins.str
+None *≠
+get_coordinate7torch.distributed.device_mesh.DeviceMesh.get_coordinate"Å
+'Union[builtins.list[builtins.int],None]J
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list
+None*^
+selfT
+(torch.distributed.device_mesh.DeviceMesh"(torch.distributed.device_mesh.DeviceMeshra
+device_type4torch.distributed.device_mesh.DeviceMesh.device_type
+builtins.str"builtins.strrc
+mesh-torch.distributed.device_mesh.DeviceMesh.mesh,
+torch._tensor.Tensor"torch._tensor.Tensorr–
+mesh_dim_names7torch.distributed.device_mesh.DeviceMesh.mesh_dim_namesÑ
+(Union[builtins.tuple[builtins.str],None]L
+builtins.tuple[builtins.str]
+builtins.str"builtins.str"builtins.tuple
+NonerÅ
+_flatten_mesh_list;torch.distributed.device_mesh.DeviceMesh._flatten_mesh_list.
+builtins.tuple[Any]
+Any"builtins.tupler‡
+_parent_mesh5torch.distributed.device_mesh.DeviceMesh._parent_meshò
+4Union[torch.distributed.device_mesh.DeviceMesh,None]T
+(torch.distributed.device_mesh.DeviceMesh"(torch.distributed.device_mesh.DeviceMesh
+Noner_
+
+_thread_id3torch.distributed.device_mesh.DeviceMesh._thread_id
+builtins.int"builtins.intr’
+_coordinate_on_dim;torch.distributed.device_mesh.DeviceMesh._coordinate_on_dimÅ
+'Union[builtins.list[builtins.int],None]J
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list
+NonerV
+_dim_group_infos9torch.distributed.device_mesh.DeviceMesh._dim_group_infos
+Anyr@
+_hash.torch.distributed.device_mesh.DeviceMesh._hash
+AnyN
+_init_device_mesh_stub4torch.distributed.device_mesh._init_device_mesh_stubÄ
+_get_device_handle0torch.distributed.device_mesh._get_device_handle"
+Any*/
+device_type
+builtins.str"builtins.str √
+init_device_mesh.torch.distributed.device_mesh.init_device_mesh"T
+(torch.distributed.device_mesh.DeviceMesh"(torch.distributed.device_mesh.DeviceMesh*-
+device_type
+builtins.str"builtins.str*\
+
+mesh_shapeL
+builtins.tuple[builtins.int]
+builtins.int"builtins.int"builtins.tuple*õ
+mesh_dim_namesÑ
+(Union[builtins.tuple[builtins.str],None]L
+builtins.tuple[builtins.str]
+builtins.str"builtins.str"builtins.tuple
+None *ô
+__annotations__-torch.distributed.device_mesh.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*|
+__all__%torch.distributed.device_mesh.__all__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*P
+logger$torch.distributed.device_mesh.logger 
+logging.Logger"logging.Logger*í
+_mesh_resources-torch.distributed.device_mesh._mesh_resourcesP
+&torch.distributed.device_mesh._MeshEnv"&torch.distributed.device_mesh._MeshEnv

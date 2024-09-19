@@ -1,0 +1,266 @@
+
+$torch._inductor.fx_passes.ddp_fusion‚
+	CommBlock.torch._inductor.fx_passes.ddp_fusion.CommBlock"builtins.object*Ó
+__init__7torch._inductor.fx_passes.ddp_fusion.CommBlock.__init__"
+None*j
+self`
+.torch._inductor.fx_passes.ddp_fusion.CommBlock".torch._inductor.fx_passes.ddp_fusion.CommBlock*°
+shape¤
+1Union[torch._C.Size,builtins.list[torch._C.Size]]
+torch._C.Size"torch._C.SizeM
+builtins.list[torch._C.Size]
+torch._C.Size"torch._C.Size"builtins.list*k
+	node_list\
+!builtins.list[torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node"builtins.list*h
+inputs\
+!builtins.list[torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node"builtins.list*l
+
+wait_nodes\
+!builtins.list[torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node"builtins.list*7
+	comm_node(
+torch.fx.node.Node"torch.fx.node.Node*g
+outputsZ
+ builtins.set[torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node"builtins.set8rä
+shape4torch._inductor.fx_passes.ddp_fusion.CommBlock.shape¤
+1Union[torch._C.Size,builtins.list[torch._C.Size]]
+torch._C.Size"torch._C.SizeM
+builtins.list[torch._C.Size]
+torch._C.Size"torch._C.Size"builtins.listr£
+	node_list8torch._inductor.fx_passes.ddp_fusion.CommBlock.node_list\
+!builtins.list[torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node"builtins.listr
+inputs5torch._inductor.fx_passes.ddp_fusion.CommBlock.inputs\
+!builtins.list[torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node"builtins.listr¥
+
+wait_nodes9torch._inductor.fx_passes.ddp_fusion.CommBlock.wait_nodes\
+!builtins.list[torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node"builtins.listro
+	comm_node8torch._inductor.fx_passes.ddp_fusion.CommBlock.comm_node(
+torch.fx.node.Node"torch.fx.node.Noder
+outputs6torch._inductor.fx_passes.ddp_fusion.CommBlock.outputsZ
+ builtins.set[torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node"builtins.setrõ
+__dataclass_fields__Ctorch._inductor.fx_passes.ddp_fusion.CommBlock.__dataclass_fields__—
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dict÷
+move_block_after5torch._inductor.fx_passes.ddp_fusion.move_block_after"
+None*g
+block\
+!builtins.list[torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node"builtins.list*9
+target_node(
+torch.fx.node.Node"torch.fx.node.Nodeù
+move_block_before6torch._inductor.fx_passes.ddp_fusion.move_block_before"
+None*g
+block\
+!builtins.list[torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node"builtins.list*9
+target_node(
+torch.fx.node.Node"torch.fx.node.Nodeá,
+call_function2torch._inductor.fx_passes.ddp_fusion.call_function"(
+torch.fx.node.Node"torch.fx.node.Node*7
+graph,
+torch.fx.graph.Graph"torch.fx.graph.Graph*¯
+target¢
+3Union[builtins.str,CallableType[builtins.function]]
+builtins.str"builtins.strK
+CallableType[builtins.function]&
+builtins.function"builtins.function*æ
+argsÙ
+õUnion[builtins.tuple[TypeAlias[Union[builtins.tuple[Any],builtins.list[Any],builtins.dict[builtins.str,Any],builtins.slice,builtins.range,torch.fx.node.Node,TypeAlias[Union[builtins.str,builtins.int,builtins.float,builtins.bool,builtins.complex,torch._C.dtype,torch._tensor.Tensor,torch._C.device,torch._C.memory_format,torch._C.layout,torch._ops.OpOverload]],None]]],None]Ò
+ébuiltins.tuple[TypeAlias[Union[builtins.tuple[Any],builtins.list[Any],builtins.dict[builtins.str,Any],builtins.slice,builtins.range,torch.fx.node.Node,TypeAlias[Union[builtins.str,builtins.int,builtins.float,builtins.bool,builtins.complex,torch._C.dtype,torch._tensor.Tensor,torch._C.device,torch._C.memory_format,torch._C.layout,torch._ops.OpOverload]],None]]]Ó
+ÙTypeAlias[Union[builtins.tuple[Any],builtins.list[Any],builtins.dict[builtins.str,Any],builtins.slice,builtins.range,torch.fx.node.Node,TypeAlias[Union[builtins.str,builtins.int,builtins.float,builtins.bool,builtins.complex,torch._C.dtype,torch._tensor.Tensor,torch._C.device,torch._C.memory_format,torch._C.layout,torch._ops.OpOverload]],None]]Ú
+ÎUnion[builtins.tuple[Any],builtins.list[Any],builtins.dict[builtins.str,Any],builtins.slice,builtins.range,torch.fx.node.Node,TypeAlias[Union[builtins.str,builtins.int,builtins.float,builtins.bool,builtins.complex,torch._C.dtype,torch._tensor.Tensor,torch._C.device,torch._C.memory_format,torch._C.layout,torch._ops.OpOverload]],None].
+builtins.tuple[Any]
+Any"builtins.tuple,
+builtins.list[Any]
+Any"builtins.listW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict 
+builtins.slice"builtins.slice 
+builtins.range"builtins.range(
+torch.fx.node.Node"torch.fx.node.NodeÕ
+ÊTypeAlias[Union[builtins.str,builtins.int,builtins.float,builtins.bool,builtins.complex,torch._C.dtype,torch._tensor.Tensor,torch._C.device,torch._C.memory_format,torch._C.layout,torch._ops.OpOverload]]â
+¿Union[builtins.str,builtins.int,builtins.float,builtins.bool,builtins.complex,torch._C.dtype,torch._tensor.Tensor,torch._C.device,torch._C.memory_format,torch._C.layout,torch._ops.OpOverload]
+builtins.str"builtins.str
+builtins.int"builtins.int 
+builtins.float"builtins.float
+builtins.bool"builtins.bool$
+builtins.complex"builtins.complex 
+torch._C.dtype"torch._C.dtype,
+torch._tensor.Tensor"torch._tensor.Tensor"
+torch._C.device"torch._C.device0
+torch._C.memory_format"torch._C.memory_format"
+torch._C.layout"torch._C.layout.
+torch._ops.OpOverload"torch._ops.OpOverload"torch.fx.node.BaseArgumentTypes
+None"torch.fx.node.Argument"builtins.tuple
+None *
+kwargsŽ
+Union[builtins.dict[builtins.str,TypeAlias[Union[builtins.tuple[Any],builtins.list[Any],builtins.dict[builtins.str,Any],builtins.slice,builtins.range,torch.fx.node.Node,TypeAlias[Union[builtins.str,builtins.int,builtins.float,builtins.bool,builtins.complex,torch._C.dtype,torch._tensor.Tensor,torch._C.device,torch._C.memory_format,torch._C.layout,torch._ops.OpOverload]],None]]],None]û
+õbuiltins.dict[builtins.str,TypeAlias[Union[builtins.tuple[Any],builtins.list[Any],builtins.dict[builtins.str,Any],builtins.slice,builtins.range,torch.fx.node.Node,TypeAlias[Union[builtins.str,builtins.int,builtins.float,builtins.bool,builtins.complex,torch._C.dtype,torch._tensor.Tensor,torch._C.device,torch._C.memory_format,torch._C.layout,torch._ops.OpOverload]],None]]]
+builtins.str"builtins.strÓ
+ÙTypeAlias[Union[builtins.tuple[Any],builtins.list[Any],builtins.dict[builtins.str,Any],builtins.slice,builtins.range,torch.fx.node.Node,TypeAlias[Union[builtins.str,builtins.int,builtins.float,builtins.bool,builtins.complex,torch._C.dtype,torch._tensor.Tensor,torch._C.device,torch._C.memory_format,torch._C.layout,torch._ops.OpOverload]],None]]Ú
+ÎUnion[builtins.tuple[Any],builtins.list[Any],builtins.dict[builtins.str,Any],builtins.slice,builtins.range,torch.fx.node.Node,TypeAlias[Union[builtins.str,builtins.int,builtins.float,builtins.bool,builtins.complex,torch._C.dtype,torch._tensor.Tensor,torch._C.device,torch._C.memory_format,torch._C.layout,torch._ops.OpOverload]],None].
+builtins.tuple[Any]
+Any"builtins.tuple,
+builtins.list[Any]
+Any"builtins.listW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict 
+builtins.slice"builtins.slice 
+builtins.range"builtins.range(
+torch.fx.node.Node"torch.fx.node.NodeÕ
+ÊTypeAlias[Union[builtins.str,builtins.int,builtins.float,builtins.bool,builtins.complex,torch._C.dtype,torch._tensor.Tensor,torch._C.device,torch._C.memory_format,torch._C.layout,torch._ops.OpOverload]]â
+¿Union[builtins.str,builtins.int,builtins.float,builtins.bool,builtins.complex,torch._C.dtype,torch._tensor.Tensor,torch._C.device,torch._C.memory_format,torch._C.layout,torch._ops.OpOverload]
+builtins.str"builtins.str
+builtins.int"builtins.int 
+builtins.float"builtins.float
+builtins.bool"builtins.bool$
+builtins.complex"builtins.complex 
+torch._C.dtype"torch._C.dtype,
+torch._tensor.Tensor"torch._tensor.Tensor"
+torch._C.device"torch._C.device0
+torch._C.memory_format"torch._C.memory_format"
+torch._C.layout"torch._C.layout.
+torch._ops.OpOverload"torch._ops.OpOverload"torch.fx.node.BaseArgumentTypes
+None"torch.fx.node.Argument"builtins.dict
+None «
+get_comm_block3torch._inductor.fx_passes.ddp_fusion.get_comm_block"ª
+:Union[torch._inductor.fx_passes.ddp_fusion.CommBlock,None]`
+.torch._inductor.fx_passes.ddp_fusion.CommBlock".torch._inductor.fx_passes.ddp_fusion.CommBlock
+None*7
+	comm_node(
+torch.fx.node.Node"torch.fx.node.NodeÏ
+get_all_comm_blocks8torch._inductor.fx_passes.ddp_fusion.get_all_comm_blocks"°
+=builtins.list[torch._inductor.fx_passes.ddp_fusion.CommBlock]`
+.torch._inductor.fx_passes.ddp_fusion.CommBlock".torch._inductor.fx_passes.ddp_fusion.CommBlock"builtins.list*7
+graph,
+torch.fx.graph.Graph"torch.fx.graph.Graph*u
+comm_opsg
+%builtins.tuple[torch._ops.OpOverload].
+torch._ops.OpOverload"torch._ops.OpOverload"builtins.tuple*š
+comm_filter†
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None Ÿ
+_fuse_allreduce_by_concat>torch._inductor.fx_passes.ddp_fusion._fuse_allreduce_by_concat"`
+.torch._inductor.fx_passes.ddp_fusion.CommBlock".torch._inductor.fx_passes.ddp_fusion.CommBlock*7
+graph,
+torch.fx.graph.Graph"torch.fx.graph.Graph*=
+last_input_node(
+torch.fx.node.Node"torch.fx.node.Node*q
+all_input_nodes\
+!builtins.list[torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node"builtins.list*u
+last_comm_block`
+.torch._inductor.fx_passes.ddp_fusion.CommBlock".torch._inductor.fx_passes.ddp_fusion.CommBlock›
+_fuse_with_coalesced_op<torch._inductor.fx_passes.ddp_fusion._fuse_with_coalesced_op"`
+.torch._inductor.fx_passes.ddp_fusion.CommBlock".torch._inductor.fx_passes.ddp_fusion.CommBlock*7
+graph,
+torch.fx.graph.Graph"torch.fx.graph.Graph*=
+last_input_node(
+torch.fx.node.Node"torch.fx.node.Node*q
+all_input_nodes\
+!builtins.list[torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node"builtins.list*u
+last_comm_block`
+.torch._inductor.fx_passes.ddp_fusion.CommBlock".torch._inductor.fx_passes.ddp_fusion.CommBlockÀ
+_scatter_fused_allreduce_waitsCtorch._inductor.fx_passes.ddp_fusion._scatter_fused_allreduce_waits"
+None*7
+graph,
+torch.fx.graph.Graph"torch.fx.graph.Graph*v
+fused_comm_block`
+.torch._inductor.fx_passes.ddp_fusion.CommBlock".torch._inductor.fx_passes.ddp_fusion.CommBlock*Ç
+orig_comm_blocks°
+=builtins.list[torch._inductor.fx_passes.ddp_fusion.CommBlock]`
+.torch._inductor.fx_passes.ddp_fusion.CommBlock".torch._inductor.fx_passes.ddp_fusion.CommBlock"builtins.list*š
+node_indices‡
+.builtins.dict[torch.fx.node.Node,builtins.int](
+torch.fx.node.Node"torch.fx.node.Node
+builtins.int"builtins.int"builtins.dict*7
+split_and_reshape
+builtins.bool"builtins.bool ô
+_fuse_allreduce4torch._inductor.fx_passes.ddp_fusion._fuse_allreduce"`
+.torch._inductor.fx_passes.ddp_fusion.CommBlock".torch._inductor.fx_passes.ddp_fusion.CommBlock*7
+graph,
+torch.fx.graph.Graph"torch.fx.graph.Graph*Â
+comm_blocks°
+=builtins.list[torch._inductor.fx_passes.ddp_fusion.CommBlock]`
+.torch._inductor.fx_passes.ddp_fusion.CommBlock".torch._inductor.fx_passes.ddp_fusion.CommBlock"builtins.list*š
+node_indices‡
+.builtins.dict[torch.fx.node.Node,builtins.int](
+torch.fx.node.Node"torch.fx.node.Node
+builtins.int"builtins.int"builtins.dict*.
+
+use_concat
+builtins.bool"builtins.bool¶
+_bucket_size_fusion8torch._inductor.fx_passes.ddp_fusion._bucket_size_fusion"´
+Ytyping.Generator[builtins.list[torch._inductor.fx_passes.ddp_fusion.CommBlock],None,None]°
+=builtins.list[torch._inductor.fx_passes.ddp_fusion.CommBlock]`
+.torch._inductor.fx_passes.ddp_fusion.CommBlock".torch._inductor.fx_passes.ddp_fusion.CommBlock"builtins.list
+None
+None"typing.Generator*7
+graph,
+torch.fx.graph.Graph"torch.fx.graph.Graph*Â
+comm_blocks°
+=builtins.list[torch._inductor.fx_passes.ddp_fusion.CommBlock]`
+.torch._inductor.fx_passes.ddp_fusion.CommBlock".torch._inductor.fx_passes.ddp_fusion.CommBlock"builtins.list*0
+bucket_size_mb
+builtins.int"builtins.intÕ
+_fuse_ddp_communication<torch._inductor.fx_passes.ddp_fusion._fuse_ddp_communication"
+None*7
+graph,
+torch.fx.graph.Graph"torch.fx.graph.Graph*]
+algorithm_fnK
+CallableType[builtins.function]&
+builtins.function"builtins.function*Z
+	fusion_fnK
+CallableType[builtins.function]&
+builtins.function"builtins.functionÒ
+fuse_ddp_with_coalesced_op?torch._inductor.fx_passes.ddp_fusion.fuse_ddp_with_coalesced_op"
+None*7
+graph,
+torch.fx.graph.Graph"torch.fx.graph.Graph*0
+bucket_size_mb
+builtins.int"builtins.intÌ
+fuse_ddp_with_concat_op<torch._inductor.fx_passes.ddp_fusion.fuse_ddp_with_concat_op"
+None*7
+graph,
+torch.fx.graph.Graph"torch.fx.graph.Graph*0
+bucket_size_mb
+builtins.int"builtins.int
+schedule_comm_wait7torch._inductor.fx_passes.ddp_fusion.schedule_comm_wait"
+None*7
+graph,
+torch.fx.graph.Graph"torch.fx.graph.GraphÒ
+fuse_ddp_communication;torch._inductor.fx_passes.ddp_fusion.fuse_ddp_communication"
+None*7
+graph,
+torch.fx.graph.Graph"torch.fx.graph.Graph*…
+passesø
+Bbuiltins.list[Union[CallableType[builtins.function],builtins.str]]¢
+3Union[CallableType[builtins.function],builtins.str]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+builtins.str"builtins.str"builtins.list*0
+bucket_size_mb
+builtins.int"builtins.int* 
+__annotations__4torch._inductor.fx_passes.ddp_fusion.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*
+fxtorch.fx *:
+aten)torch._inductor.fx_passes.ddp_fusion.aten
+Any*W
+logger+torch._inductor.fx_passes.ddp_fusion.logger 
+logging.Logger"logging.Logger

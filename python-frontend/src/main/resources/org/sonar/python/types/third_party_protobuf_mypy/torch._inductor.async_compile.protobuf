@@ -1,0 +1,130 @@
+
+torch._inductor.async_compileª"
+AsyncCompile*torch._inductor.async_compile.AsyncCompile"builtins.object*­
+__init__3torch._inductor.async_compile.AsyncCompile.__init__"
+None*b
+selfX
+*torch._inductor.async_compile.AsyncCompile"*torch._inductor.async_compile.AsyncCompile*§
+pool/torch._inductor.async_compile.AsyncCompile.pool"\
+,concurrent.futures.thread.ThreadPoolExecutor",concurrent.futures.thread.ThreadPoolExecutor0:staticmethodh*×
+process_pool7torch._inductor.async_compile.AsyncCompile.process_pool"û
+xTypeAlias[Union[concurrent.futures.process.ProcessPoolExecutor,torch._inductor.compile_worker.subproc_pool.SubprocPool]]Ç
+mUnion[concurrent.futures.process.ProcessPoolExecutor,torch._inductor.compile_worker.subproc_pool.SubprocPool]`
+.concurrent.futures.process.ProcessPoolExecutor".concurrent.futures.process.ProcessPoolExecutorr
+7torch._inductor.compile_worker.subproc_pool.SubprocPool"7torch._inductor.compile_worker.subproc_pool.SubprocPool"3torch._inductor.compile_worker.subproc_pool.AnyPool0:staticmethodh*ý
+	warm_pool4torch._inductor.async_compile.AsyncCompile.warm_pool"
+None*ž
+cls”
+0Type[torch._inductor.async_compile.AsyncCompile]X
+*torch._inductor.async_compile.AsyncCompile"*torch._inductor.async_compile.AsyncCompile"type0:classmethodp*Í
+submit1torch._inductor.async_compile.AsyncCompile.submit"
+Any*ž
+cls”
+0Type[torch._inductor.async_compile.AsyncCompile]X
+*torch._inductor.async_compile.AsyncCompile"*torch._inductor.async_compile.AsyncCompile"type*U
+taskK
+CallableType[builtins.function]&
+builtins.function"builtins.function0:classmethodp*¶
+triton1torch._inductor.async_compile.AsyncCompile.triton"
+Any*b
+selfX
+*torch._inductor.async_compile.AsyncCompile"*torch._inductor.async_compile.AsyncCompile*-
+kernel_name
+builtins.str"builtins.str*-
+source_code
+builtins.str"builtins.str*.
+
+device_str
+builtins.str"builtins.str *Ü
+multi_kernel7torch._inductor.async_compile.AsyncCompile.multi_kernel"
+Any*b
+selfX
+*torch._inductor.async_compile.AsyncCompile"*torch._inductor.async_compile.AsyncCompile*
+args
+Any*
+kwargs
+Any*Ñ
+cpp.torch._inductor.async_compile.AsyncCompile.cpp"
+Any*b
+selfX
+*torch._inductor.async_compile.AsyncCompile"*torch._inductor.async_compile.AsyncCompile*-
+source_code
+builtins.str"builtins.str*¿
+cpp_pybinding8torch._inductor.async_compile.AsyncCompile.cpp_pybinding"
+Any*b
+selfX
+*torch._inductor.async_compile.AsyncCompile"*torch._inductor.async_compile.AsyncCompile*X
+argtypesJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*-
+source_code
+builtins.str"builtins.str*d
+cuda/torch._inductor.async_compile.AsyncCompile.cuda*
+self*
+source_code*
+dst_file_ext*¸
+
+halide1torch._inductor.async_compile.AsyncCompile.halide"
+Any*b
+selfX
+*torch._inductor.async_compile.AsyncCompile"*torch._inductor.async_compile.AsyncCompile*Þ
+metaÓ
+¼TypeAlias[Tuple[builtins.list[TypeAlias[Tuple[builtins.str,builtins.str,Union[builtins.str,None]]]],builtins.str,builtins.str,builtins.dict[builtins.str,Union[builtins.int,builtins.str]]]]å
+±Tuple[builtins.list[TypeAlias[Tuple[builtins.str,builtins.str,Union[builtins.str,None]]]],builtins.str,builtins.str,builtins.dict[builtins.str,Union[builtins.int,builtins.str]]] 
+Sbuiltins.list[TypeAlias[Tuple[builtins.str,builtins.str,Union[builtins.str,None]]]]¹
+DTypeAlias[Tuple[builtins.str,builtins.str,Union[builtins.str,None]]]¿
+9Tuple[builtins.str,builtins.str,Union[builtins.str,None]]
+builtins.str"builtins.str
+builtins.str"builtins.strD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None"-torch._inductor.runtime.hints.HalideInputSpec"builtins.list
+builtins.str"builtins.str
+builtins.str"builtins.strÍ
+<builtins.dict[builtins.str,Union[builtins.int,builtins.str]]
+builtins.str"builtins.str`
+ Union[builtins.int,builtins.str]
+builtins.int"builtins.int
+builtins.str"builtins.str"builtins.dict"(torch._inductor.runtime.hints.HalideMeta*-
+source_code
+builtins.str"builtins.str*‰
+wait/torch._inductor.async_compile.AsyncCompile.wait"
+None*b
+selfX
+*torch._inductor.async_compile.AsyncCompile"*torch._inductor.async_compile.AsyncCompile*b
+scopeW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict>
+pre_fork_setup,torch._inductor.async_compile.pre_fork_setupT
+caching_device_properties7torch._inductor.async_compile.caching_device_propertiesH
+_compile_start,torch._inductor.async_compile._compile_start"
+NoneD
+_compile_end*torch._inductor.async_compile._compile_end"
+None\
+shutdown_compile_workers6torch._inductor.async_compile.shutdown_compile_workers"
+None6
+
+after_fork(torch._inductor.async_compile.after_fork*™
+__annotations__-torch._inductor.async_compile.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*t
+_cumulative_compile_time6torch._inductor.async_compile._cumulative_compile_time 
+builtins.float"builtins.float*t
+_t0!torch._inductor.async_compile._t0J
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None*I
+kernel_code_log-torch._inductor.async_compile.kernel_code_log
+Any*X
+_IS_WINDOWS)torch._inductor.async_compile._IS_WINDOWS
+builtins.bool"builtins.bool*J
+log!torch._inductor.async_compile.log 
+logging.Logger"logging.Logger*Ì
+	_pool_set'torch._inductor.async_compile._pool_set•
+†builtins.set[TypeAlias[Union[concurrent.futures.process.ProcessPoolExecutor,torch._inductor.compile_worker.subproc_pool.SubprocPool]]]û
+xTypeAlias[Union[concurrent.futures.process.ProcessPoolExecutor,torch._inductor.compile_worker.subproc_pool.SubprocPool]]Ç
+mUnion[concurrent.futures.process.ProcessPoolExecutor,torch._inductor.compile_worker.subproc_pool.SubprocPool]`
+.concurrent.futures.process.ProcessPoolExecutor".concurrent.futures.process.ProcessPoolExecutorr
+7torch._inductor.compile_worker.subproc_pool.SubprocPool"7torch._inductor.compile_worker.subproc_pool.SubprocPool"3torch._inductor.compile_worker.subproc_pool.AnyPool"builtins.set

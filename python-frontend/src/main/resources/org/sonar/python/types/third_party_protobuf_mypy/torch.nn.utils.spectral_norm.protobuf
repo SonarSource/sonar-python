@@ -1,0 +1,154 @@
+
+torch.nn.utils.spectral_normÅ
+SpectralNorm)torch.nn.utils.spectral_norm.SpectralNorm"builtins.object*â
+__init__2torch.nn.utils.spectral_norm.SpectralNorm.__init__"
+None*`
+selfV
+)torch.nn.utils.spectral_norm.SpectralNorm")torch.nn.utils.spectral_norm.SpectralNorm*(
+name
+builtins.str"builtins.str *6
+n_power_iterations
+builtins.int"builtins.int *'
+dim
+builtins.int"builtins.int *+
+eps 
+builtins.float"builtins.float *¨
+reshape_weight_to_matrixBtorch.nn.utils.spectral_norm.SpectralNorm.reshape_weight_to_matrix",
+torch._tensor.Tensor"torch._tensor.Tensor*`
+selfV
+)torch.nn.utils.spectral_norm.SpectralNorm")torch.nn.utils.spectral_norm.SpectralNorm*8
+weight,
+torch._tensor.Tensor"torch._tensor.Tensor*à
+compute_weight8torch.nn.utils.spectral_norm.SpectralNorm.compute_weight",
+torch._tensor.Tensor"torch._tensor.Tensor*`
+selfV
+)torch.nn.utils.spectral_norm.SpectralNorm")torch.nn.utils.spectral_norm.SpectralNorm*L
+module@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*6
+do_power_iteration
+builtins.bool"builtins.bool*ô
+remove0torch.nn.utils.spectral_norm.SpectralNorm.remove"
+None*`
+selfV
+)torch.nn.utils.spectral_norm.SpectralNorm")torch.nn.utils.spectral_norm.SpectralNorm*L
+module@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*
+__call__2torch.nn.utils.spectral_norm.SpectralNorm.__call__"
+None*`
+selfV
+)torch.nn.utils.spectral_norm.SpectralNorm")torch.nn.utils.spectral_norm.SpectralNorm*L
+module@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*
+inputs
+Any*‰
+_solve_v_and_rescale>torch.nn.utils.spectral_norm.SpectralNorm._solve_v_and_rescale*
+self*
+
+weight_mat*
+u*
+target_sigma* 
+apply/torch.nn.utils.spectral_norm.SpectralNorm.apply"V
+)torch.nn.utils.spectral_norm.SpectralNorm")torch.nn.utils.spectral_norm.SpectralNorm*L
+module@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*&
+name
+builtins.str"builtins.str*4
+n_power_iterations
+builtins.int"builtins.int*%
+dim
+builtins.int"builtins.int*)
+eps 
+builtins.float"builtins.float0:staticmethodhr\
+_version2torch.nn.utils.spectral_norm.SpectralNorm._version
+builtins.int"builtins.intrT
+name.torch.nn.utils.spectral_norm.SpectralNorm.name
+builtins.str"builtins.strrR
+dim-torch.nn.utils.spectral_norm.SpectralNorm.dim
+builtins.int"builtins.intrp
+n_power_iterations<torch.nn.utils.spectral_norm.SpectralNorm.n_power_iterations
+builtins.int"builtins.intrV
+eps-torch.nn.utils.spectral_norm.SpectralNorm.eps 
+builtins.float"builtins.floatÚ
+ SpectralNormLoadStateDictPreHook=torch.nn.utils.spectral_norm.SpectralNormLoadStateDictPreHook"builtins.object*ø
+__init__Ftorch.nn.utils.spectral_norm.SpectralNormLoadStateDictPreHook.__init__"
+None*ˆ
+self~
+=torch.nn.utils.spectral_norm.SpectralNormLoadStateDictPreHook"=torch.nn.utils.spectral_norm.SpectralNormLoadStateDictPreHook*
+fn
+Any*™
+__call__Ftorch.nn.utils.spectral_norm.SpectralNormLoadStateDictPreHook.__call__"
+None*ˆ
+self~
+=torch.nn.utils.spectral_norm.SpectralNormLoadStateDictPreHook"=torch.nn.utils.spectral_norm.SpectralNormLoadStateDictPreHook*
+
+state_dict
+Any*
+prefix
+Any*
+local_metadata
+Any*
+strict
+Any*
+missing_keys
+Any*
+unexpected_keys
+Any*
+
+error_msgs
+AnyrO
+fn@torch.nn.utils.spectral_norm.SpectralNormLoadStateDictPreHook.fn
+AnyÇ
+SpectralNormStateDictHook6torch.nn.utils.spectral_norm.SpectralNormStateDictHook"builtins.object*â
+__init__?torch.nn.utils.spectral_norm.SpectralNormStateDictHook.__init__"
+None*z
+selfp
+6torch.nn.utils.spectral_norm.SpectralNormStateDictHook"6torch.nn.utils.spectral_norm.SpectralNormStateDictHook*
+fn
+Any*±
+__call__?torch.nn.utils.spectral_norm.SpectralNormStateDictHook.__call__"
+None*z
+selfp
+6torch.nn.utils.spectral_norm.SpectralNormStateDictHook"6torch.nn.utils.spectral_norm.SpectralNormStateDictHook*
+module
+Any*
+
+state_dict
+Any*
+prefix
+Any*
+local_metadata
+AnyrH
+fn9torch.nn.utils.spectral_norm.SpectralNormStateDictHook.fn
+AnyÖ
+6<subclass of "Parameter" and "UninitializedParameter">Storch.nn.utils.spectral_norm.<subclass of "Parameter" and "UninitializedParameter">"torch.nn.parameter.Parameter")torch.nn.parameter.UninitializedParameterÄ
+spectral_norm*torch.nn.utils.spectral_norm.spectral_norm"‹
+%torch.nn.utils.spectral_norm.T_module@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"torch.nn.modules.module.Module*˜
+module‹
+%torch.nn.utils.spectral_norm.T_module@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"torch.nn.modules.module.Module*(
+name
+builtins.str"builtins.str *6
+n_power_iterations
+builtins.int"builtins.int *+
+eps 
+builtins.float"builtins.float *O
+dimD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None œ
+remove_spectral_norm1torch.nn.utils.spectral_norm.remove_spectral_norm"‹
+%torch.nn.utils.spectral_norm.T_module@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"torch.nn.modules.module.Module*˜
+module‹
+%torch.nn.utils.spectral_norm.T_module@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"torch.nn.modules.module.Module*(
+name
+builtins.str"builtins.str *˜
+__annotations__,torch.nn.utils.spectral_norm.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*{
+__all__$torch.nn.utils.spectral_norm.__all__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list

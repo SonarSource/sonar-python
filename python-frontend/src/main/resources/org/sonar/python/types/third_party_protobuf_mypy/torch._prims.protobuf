@@ -1,0 +1,1583 @@
+
+torch._prims”
+RETURN_TYPEtorch._prims_common.RETURN_TYPE"	enum.EnumHra
+NEW#torch._prims_common.RETURN_TYPE.NEW5
+Tuple[builtins.int]
+builtins.int"builtins.intrc
+VIEW$torch._prims_common.RETURN_TYPE.VIEW5
+Tuple[builtins.int]
+builtins.int"builtins.intri
+INPLACE'torch._prims_common.RETURN_TYPE.INPLACE5
+Tuple[builtins.int]
+builtins.int"builtins.intrc
+NONE$torch._prims_common.RETURN_TYPE.NONE5
+Tuple[builtins.int]
+builtins.int"builtins.intÅ
+$ELEMENTWISE_PRIM_TYPE_PROMOTION_KIND1torch._prims.ELEMENTWISE_PRIM_TYPE_PROMOTION_KIND"	enum.EnumHr{
+DEFAULT9torch._prims.ELEMENTWISE_PRIM_TYPE_PROMOTION_KIND.DEFAULT5
+Tuple[builtins.int]
+builtins.int"builtins.intrÖ
+INT_TO_FLOAT>torch._prims.ELEMENTWISE_PRIM_TYPE_PROMOTION_KIND.INT_TO_FLOAT5
+Tuple[builtins.int]
+builtins.int"builtins.intrÉ
+ALWAYS_BOOL=torch._prims.ELEMENTWISE_PRIM_TYPE_PROMOTION_KIND.ALWAYS_BOOL5
+Tuple[builtins.int]
+builtins.int"builtins.intrç
+COMPLEX_TO_FLOATBtorch._prims.ELEMENTWISE_PRIM_TYPE_PROMOTION_KIND.COMPLEX_TO_FLOAT5
+Tuple[builtins.int]
+builtins.int"builtins.intE
+register_debug_prims-torch._prims.debug_prims.register_debug_prims?
+register_rng_prims)torch._prims.rng_prims.register_rng_prims}
+type_to_dtype!torch._prims_common.type_to_dtype" 
+torch._C.dtype"torch._C.dtype*'
+typ
+builtins.type"builtins.typeY
+backwards_not_supported4torch._prims_common.wrappers.backwards_not_supported*
+prim∫
+
+
+TensorMetatorch._prims.TensorMeta"
+Any*˝
+
+tensorlikeÍ
+mUnion[TypeAlias[Union[builtins.bool,builtins.int,builtins.float,builtins.complex]],torch._tensor.Tensor,None]æ
+LTypeAlias[Union[builtins.bool,builtins.int,builtins.float,builtins.complex]]À
+AUnion[builtins.bool,builtins.int,builtins.float,builtins.complex]
+builtins.bool"builtins.bool
+builtins.int"builtins.int 
+builtins.float"builtins.float$
+builtins.complex"builtins.complex"torch._prims_common.NumberType,
+torch._tensor.Tensor"torch._tensor.Tensor
+None *®
+shapeö
+RUnion[torch._C.Size,builtins.list[builtins.int],builtins.tuple[builtins.int],None]
+torch._C.Size"torch._C.SizeJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.listL
+builtins.tuple[builtins.int]
+builtins.int"builtins.int"builtins.tuple
+None *¸
+stridesÏ
+DUnion[builtins.list[builtins.int],builtins.tuple[builtins.int],None]J
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.listL
+builtins.tuple[builtins.int]
+builtins.int"builtins.int"builtins.tuple
+None *W
+dtypeJ
+Union[torch._C.dtype,None] 
+torch._C.dtype"torch._C.dtype
+None *Ü
+devicex
+(Union[torch._C.device,builtins.str,None]"
+torch._C.device"torch._C.device
+builtins.str"builtins.str
+None ¬
+
+_make_primtorch._prims._make_prim"
+Any*(
+schema
+builtins.str"builtins.str*∏
+return_type¶
+VUnion[torch._prims_common.RETURN_TYPE,builtins.tuple[torch._prims_common.RETURN_TYPE]]B
+torch._prims_common.RETURN_TYPE"torch._prims_common.RETURN_TYPEÖ
+/builtins.tuple[torch._prims_common.RETURN_TYPE]B
+torch._prims_common.RETURN_TYPE"torch._prims_common.RETURN_TYPE"builtins.tuple*U
+metaK
+CallableType[builtins.function]&
+builtins.function"builtins.function*Z
+	impl_atenK
+CallableType[builtins.function]&
+builtins.function"builtins.function*%
+doc
+builtins.str"builtins.str*î
+tagsá
+)Union[typing.Sequence[torch._C.Tag],None]N
+typing.Sequence[torch._C.Tag]
+torch._C.Tag"torch._C.Tag"typing.Sequence
+None *<
+use_old_custom_ops_api
+builtins.bool"builtins.bool Ë
+_prim_elementwise_meta#torch._prims._prim_elementwise_meta"T
+(torch._subclasses.fake_tensor.FakeTensor"(torch._subclasses.fake_tensor.FakeTensor*
+args
+Any*z
+type_promotionf
+1torch._prims.ELEMENTWISE_PRIM_TYPE_PROMOTION_KIND"1torch._prims.ELEMENTWISE_PRIM_TYPE_PROMOTION_KIND*√
+args_with_fixed_dtypes§
+0Union[builtins.tuple[torch._tensor.Tensor],None]d
+$builtins.tuple[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.tuple
+None c
+_complex_only_elementwise_meta+torch._prims._complex_only_elementwise_meta*
+args*
+
+kwargsã
+_make_elementwise_unary_prim)torch._prims._make_elementwise_unary_prim"
+Any*&
+name
+builtins.str"builtins.str*z
+type_promotionf
+1torch._prims.ELEMENTWISE_PRIM_TYPE_PROMOTION_KIND"1torch._prims.ELEMENTWISE_PRIM_TYPE_PROMOTION_KIND*
+kwargs
+Anyç
+_make_elementwise_binary_prim*torch._prims._make_elementwise_binary_prim"
+Any*&
+name
+builtins.str"builtins.str*z
+type_promotionf
+1torch._prims.ELEMENTWISE_PRIM_TYPE_PROMOTION_KIND"1torch._prims.ELEMENTWISE_PRIM_TYPE_PROMOTION_KIND*
+kwargs
+Any9
+	_not_impltorch._prims._not_impl*
+args*
+
+kwargsà
+
+_cbrt_atentorch._prims._cbrt_aten",
+torch._tensor.Tensor"torch._tensor.Tensor*3
+a,
+torch._tensor.Tensor"torch._tensor.Tensorû
+_conj_physical_meta torch._prims._conj_physical_meta",
+torch._tensor.Tensor"torch._tensor.Tensor*7
+input,
+torch._tensor.Tensor"torch._tensor.Tensor’
+_clone_metatorch._prims._clone_meta",
+torch._tensor.Tensor"torch._tensor.Tensor*7
+input,
+torch._tensor.Tensor"torch._tensor.Tensor*E
+memory_format0
+torch._C.memory_format"torch._C.memory_format ’
+
+_fill_metatorch._prims._fill_meta",
+torch._tensor.Tensor"torch._tensor.Tensor*3
+a,
+torch._tensor.Tensor"torch._tensor.Tensor* 
+valueæ
+LTypeAlias[Union[builtins.bool,builtins.int,builtins.float,builtins.complex]]À
+AUnion[builtins.bool,builtins.int,builtins.float,builtins.complex]
+builtins.bool"builtins.bool
+builtins.int"builtins.int 
+builtins.float"builtins.float$
+builtins.complex"builtins.complex"torch._prims_common.NumberType1
+	_div_atentorch._prims._div_aten*
+a*
+b•
+_maximum_atentorch._prims._maximum_aten",
+torch._tensor.Tensor"torch._tensor.Tensor*„
+a€
+hUnion[torch._tensor.Tensor,TypeAlias[Union[builtins.bool,builtins.int,builtins.float,builtins.complex]]],
+torch._tensor.Tensor"torch._tensor.Tensoræ
+LTypeAlias[Union[builtins.bool,builtins.int,builtins.float,builtins.complex]]À
+AUnion[builtins.bool,builtins.int,builtins.float,builtins.complex]
+builtins.bool"builtins.bool
+builtins.int"builtins.int 
+builtins.float"builtins.float$
+builtins.complex"builtins.complex"torch._prims_common.NumberType*„
+b€
+hUnion[torch._tensor.Tensor,TypeAlias[Union[builtins.bool,builtins.int,builtins.float,builtins.complex]]],
+torch._tensor.Tensor"torch._tensor.Tensoræ
+LTypeAlias[Union[builtins.bool,builtins.int,builtins.float,builtins.complex]]À
+AUnion[builtins.bool,builtins.int,builtins.float,builtins.complex]
+builtins.bool"builtins.bool
+builtins.int"builtins.int 
+builtins.float"builtins.float$
+builtins.complex"builtins.complex"torch._prims_common.NumberType•
+_minimum_atentorch._prims._minimum_aten",
+torch._tensor.Tensor"torch._tensor.Tensor*„
+a€
+hUnion[torch._tensor.Tensor,TypeAlias[Union[builtins.bool,builtins.int,builtins.float,builtins.complex]]],
+torch._tensor.Tensor"torch._tensor.Tensoræ
+LTypeAlias[Union[builtins.bool,builtins.int,builtins.float,builtins.complex]]À
+AUnion[builtins.bool,builtins.int,builtins.float,builtins.complex]
+builtins.bool"builtins.bool
+builtins.int"builtins.int 
+builtins.float"builtins.float$
+builtins.complex"builtins.complex"torch._prims_common.NumberType*„
+b€
+hUnion[torch._tensor.Tensor,TypeAlias[Union[builtins.bool,builtins.int,builtins.float,builtins.complex]]],
+torch._tensor.Tensor"torch._tensor.Tensoræ
+LTypeAlias[Union[builtins.bool,builtins.int,builtins.float,builtins.complex]]À
+AUnion[builtins.bool,builtins.int,builtins.float,builtins.complex]
+builtins.bool"builtins.bool
+builtins.int"builtins.int 
+builtins.float"builtins.float$
+builtins.complex"builtins.complex"torch._prims_common.NumberTypeª
+_as_strided_metatorch._prims._as_strided_meta",
+torch._tensor.Tensor"torch._tensor.Tensor*3
+a,
+torch._tensor.Tensor"torch._tensor.Tensor*î
+sizeâ
+XTypeAlias[Union[torch._C.Size,builtins.list[builtins.int],builtins.tuple[builtins.int]]]ã
+MUnion[torch._C.Size,builtins.list[builtins.int],builtins.tuple[builtins.int]]
+torch._C.Size"torch._C.SizeJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.listL
+builtins.tuple[builtins.int]
+builtins.int"builtins.int"builtins.tuple"torch._prims_common.ShapeType*€
+strideŒ
+JTypeAlias[Union[builtins.list[builtins.int],builtins.tuple[builtins.int]]]›
+?Union[builtins.list[builtins.int],builtins.tuple[builtins.int]]J
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.listL
+builtins.tuple[builtins.int]
+builtins.int"builtins.int"builtins.tuple"torch._prims_common.StrideType*0
+storage_offset
+builtins.int"builtins.intª
+_as_strided_atentorch._prims._as_strided_aten",
+torch._tensor.Tensor"torch._tensor.Tensor*3
+a,
+torch._tensor.Tensor"torch._tensor.Tensor*î
+sizeâ
+XTypeAlias[Union[torch._C.Size,builtins.list[builtins.int],builtins.tuple[builtins.int]]]ã
+MUnion[torch._C.Size,builtins.list[builtins.int],builtins.tuple[builtins.int]]
+torch._C.Size"torch._C.SizeJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.listL
+builtins.tuple[builtins.int]
+builtins.int"builtins.int"builtins.tuple"torch._prims_common.ShapeType*€
+strideŒ
+JTypeAlias[Union[builtins.list[builtins.int],builtins.tuple[builtins.int]]]›
+?Union[builtins.list[builtins.int],builtins.tuple[builtins.int]]J
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.listL
+builtins.tuple[builtins.int]
+builtins.int"builtins.int"builtins.tuple"torch._prims_common.StrideType*0
+storage_offset
+builtins.int"builtins.int˝
+_broadcast_in_dim_meta#torch._prims._broadcast_in_dim_meta"
+Any*3
+a,
+torch._tensor.Tensor"torch._tensor.Tensor*ï
+shapeâ
+XTypeAlias[Union[torch._C.Size,builtins.list[builtins.int],builtins.tuple[builtins.int]]]ã
+MUnion[torch._C.Size,builtins.list[builtins.int],builtins.tuple[builtins.int]]
+torch._C.Size"torch._C.SizeJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.listL
+builtins.tuple[builtins.int]
+builtins.int"builtins.int"builtins.tuple"torch._prims_common.ShapeType*h
+broadcast_dimensionsN
+typing.Sequence[builtins.int]
+builtins.int"builtins.int"typing.Sequencei
+_broadcast_in_dim_aten#torch._prims._broadcast_in_dim_aten*
+a*	
+shape*
+broadcast_dimensionsŒ
+_validate_collapse_args$torch._prims._validate_collapse_args"
+None*3
+a,
+torch._tensor.Tensor"torch._tensor.Tensor*'
+start
+builtins.int"builtins.int*%
+end
+builtins.int"builtins.intÁ
+_collapsed_shapetorch._prims._collapsed_shape"L
+builtins.tuple[builtins.int]
+builtins.int"builtins.int"builtins.tuple*ï
+shapeâ
+XTypeAlias[Union[torch._C.Size,builtins.list[builtins.int],builtins.tuple[builtins.int]]]ã
+MUnion[torch._C.Size,builtins.list[builtins.int],builtins.tuple[builtins.int]]
+torch._C.Size"torch._C.SizeJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.listL
+builtins.tuple[builtins.int]
+builtins.int"builtins.int"builtins.tuple"torch._prims_common.ShapeType*'
+start
+builtins.int"builtins.int*%
+end
+builtins.int"builtins.intÚ
+_collapse_view_helper"torch._prims._collapse_view_helper"Ø
+ûTuple[Union[torch._C.Size,builtins.list[builtins.int],builtins.tuple[builtins.int],None],Union[builtins.list[builtins.int],builtins.tuple[builtins.int],None]]ö
+RUnion[torch._C.Size,builtins.list[builtins.int],builtins.tuple[builtins.int],None]
+torch._C.Size"torch._C.SizeJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.listL
+builtins.tuple[builtins.int]
+builtins.int"builtins.int"builtins.tuple
+NoneÏ
+DUnion[builtins.list[builtins.int],builtins.tuple[builtins.int],None]J
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.listL
+builtins.tuple[builtins.int]
+builtins.int"builtins.int"builtins.tuple
+None*3
+a,
+torch._tensor.Tensor"torch._tensor.Tensor*'
+start
+builtins.int"builtins.int*%
+end
+builtins.int"builtins.intÍ
+_collapse_view_meta torch._prims._collapse_view_meta",
+torch._tensor.Tensor"torch._tensor.Tensor*3
+a,
+torch._tensor.Tensor"torch._tensor.Tensor*'
+start
+builtins.int"builtins.int*%
+end
+builtins.int"builtins.intÍ
+_collapse_view_aten torch._prims._collapse_view_aten",
+torch._tensor.Tensor"torch._tensor.Tensor*3
+a,
+torch._tensor.Tensor"torch._tensor.Tensor*'
+start
+builtins.int"builtins.int*%
+end
+builtins.int"builtins.intà
+
+_conj_metatorch._prims._conj_meta",
+torch._tensor.Tensor"torch._tensor.Tensor*3
+a,
+torch._tensor.Tensor"torch._tensor.Tensorá
+expand_dimstorch._prims.expand_dims",
+torch._tensor.Tensor"torch._tensor.Tensor*3
+a,
+torch._tensor.Tensor"torch._tensor.Tensor*Â
+
+dimensions‘
+JTypeAlias[Union[builtins.list[builtins.int],builtins.tuple[builtins.int]]]›
+?Union[builtins.list[builtins.int],builtins.tuple[builtins.int]]J
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.listL
+builtins.tuple[builtins.int]
+builtins.int"builtins.int"builtins.tuple"$torch._prims_common.DimsSequenceType*
+ndim
+Any ﬂ
+_slice_metatorch._prims._slice_meta",
+torch._tensor.Tensor"torch._tensor.Tensor*3
+a,
+torch._tensor.Tensor"torch._tensor.Tensor*Ë
+start_indices‘
+JTypeAlias[Union[builtins.list[builtins.int],builtins.tuple[builtins.int]]]›
+?Union[builtins.list[builtins.int],builtins.tuple[builtins.int]]J
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.listL
+builtins.tuple[builtins.int]
+builtins.int"builtins.int"builtins.tuple"$torch._prims_common.DimsSequenceType*Ë
+limit_indices‘
+JTypeAlias[Union[builtins.list[builtins.int],builtins.tuple[builtins.int]]]›
+?Union[builtins.list[builtins.int],builtins.tuple[builtins.int]]J
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.listL
+builtins.tuple[builtins.int]
+builtins.int"builtins.int"builtins.tuple"$torch._prims_common.DimsSequenceType*¸
+stridesÏ
+DUnion[builtins.list[builtins.int],builtins.tuple[builtins.int],None]J
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.listL
+builtins.tuple[builtins.int]
+builtins.int"builtins.int"builtins.tuple
+None ﬂ
+_slice_atentorch._prims._slice_aten",
+torch._tensor.Tensor"torch._tensor.Tensor*3
+a,
+torch._tensor.Tensor"torch._tensor.Tensor*Ë
+start_indices‘
+JTypeAlias[Union[builtins.list[builtins.int],builtins.tuple[builtins.int]]]›
+?Union[builtins.list[builtins.int],builtins.tuple[builtins.int]]J
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.listL
+builtins.tuple[builtins.int]
+builtins.int"builtins.int"builtins.tuple"$torch._prims_common.DimsSequenceType*Ë
+limit_indices‘
+JTypeAlias[Union[builtins.list[builtins.int],builtins.tuple[builtins.int]]]›
+?Union[builtins.list[builtins.int],builtins.tuple[builtins.int]]J
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.listL
+builtins.tuple[builtins.int]
+builtins.int"builtins.int"builtins.tuple"$torch._prims_common.DimsSequenceType*¸
+stridesÏ
+DUnion[builtins.list[builtins.int],builtins.tuple[builtins.int],None]J
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.listL
+builtins.tuple[builtins.int]
+builtins.int"builtins.int"builtins.tuple
+None Ã
+_slice_in_dim_metatorch._prims._slice_in_dim_meta",
+torch._tensor.Tensor"torch._tensor.Tensor*3
+a,
+torch._tensor.Tensor"torch._tensor.Tensor*-
+start_index
+builtins.int"builtins.int*-
+limit_index
+builtins.int"builtins.int**
+stride
+builtins.int"builtins.int *(
+axis
+builtins.int"builtins.int Ã
+_slice_in_dim_atentorch._prims._slice_in_dim_aten",
+torch._tensor.Tensor"torch._tensor.Tensor*3
+a,
+torch._tensor.Tensor"torch._tensor.Tensor*-
+start_index
+builtins.int"builtins.int*-
+limit_index
+builtins.int"builtins.int**
+stride
+builtins.int"builtins.int *(
+axis
+builtins.int"builtins.int È
+_split_dim_metatorch._prims._split_dim_meta",
+torch._tensor.Tensor"torch._tensor.Tensor*3
+a,
+torch._tensor.Tensor"torch._tensor.Tensor*%
+dim
+builtins.int"builtins.int*.
+outer_length
+builtins.int"builtins.intÈ
+_split_dim_atentorch._prims._split_dim_aten",
+torch._tensor.Tensor"torch._tensor.Tensor*3
+a,
+torch._tensor.Tensor"torch._tensor.Tensor*%
+dim
+builtins.int"builtins.int*.
+outer_length
+builtins.int"builtins.int–
+_squeeze_metatorch._prims._squeeze_meta",
+torch._tensor.Tensor"torch._tensor.Tensor*3
+a,
+torch._tensor.Tensor"torch._tensor.Tensor*@
+
+dimensions0
+typing.Sequence[Any]
+Any"typing.Sequence˚
+_transpose_metatorch._prims._transpose_meta",
+torch._tensor.Tensor"torch._tensor.Tensor*3
+a,
+torch._tensor.Tensor"torch._tensor.Tensor*Ê
+permutation‘
+JTypeAlias[Union[builtins.list[builtins.int],builtins.tuple[builtins.int]]]›
+?Union[builtins.list[builtins.int],builtins.tuple[builtins.int]]J
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.listL
+builtins.tuple[builtins.int]
+builtins.int"builtins.int"builtins.tuple"$torch._prims_common.DimsSequenceType˚
+_transpose_atentorch._prims._transpose_aten",
+torch._tensor.Tensor"torch._tensor.Tensor*3
+a,
+torch._tensor.Tensor"torch._tensor.Tensor*Ê
+permutation‘
+JTypeAlias[Union[builtins.list[builtins.int],builtins.tuple[builtins.int]]]›
+?Union[builtins.list[builtins.int],builtins.tuple[builtins.int]]J
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.listL
+builtins.tuple[builtins.int]
+builtins.int"builtins.int"builtins.tuple"$torch._prims_common.DimsSequenceTypeé
+_view_of_metatorch._prims._view_of_meta",
+torch._tensor.Tensor"torch._tensor.Tensor*3
+a,
+torch._tensor.Tensor"torch._tensor.Tensoré
+_view_of_atentorch._prims._view_of_aten",
+torch._tensor.Tensor"torch._tensor.Tensor*3
+a,
+torch._tensor.Tensor"torch._tensor.Tensorœ
+_view_element_type_meta$torch._prims._view_element_type_meta",
+torch._tensor.Tensor"torch._tensor.Tensor*3
+a,
+torch._tensor.Tensor"torch._tensor.Tensor*+
+dtype 
+torch._C.dtype"torch._C.dtypeœ
+_view_element_type_aten$torch._prims._view_element_type_aten",
+torch._tensor.Tensor"torch._tensor.Tensor*3
+a,
+torch._tensor.Tensor"torch._tensor.Tensor*+
+dtype 
+torch._C.dtype"torch._C.dtypeÜ
+_as_strided_scatter_meta%torch._prims._as_strided_scatter_meta",
+torch._tensor.Tensor"torch._tensor.Tensor*7
+input,
+torch._tensor.Tensor"torch._tensor.Tensor*5
+src,
+torch._tensor.Tensor"torch._tensor.Tensor*î
+sizeâ
+XTypeAlias[Union[torch._C.Size,builtins.list[builtins.int],builtins.tuple[builtins.int]]]ã
+MUnion[torch._C.Size,builtins.list[builtins.int],builtins.tuple[builtins.int]]
+torch._C.Size"torch._C.SizeJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.listL
+builtins.tuple[builtins.int]
+builtins.int"builtins.int"builtins.tuple"torch._prims_common.ShapeType*€
+strideŒ
+JTypeAlias[Union[builtins.list[builtins.int],builtins.tuple[builtins.int]]]›
+?Union[builtins.list[builtins.int],builtins.tuple[builtins.int]]J
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.listL
+builtins.tuple[builtins.int]
+builtins.int"builtins.int"builtins.tuple"torch._prims_common.StrideType*0
+storage_offset
+builtins.int"builtins.int‡
+_collapse_metatorch._prims._collapse_meta",
+torch._tensor.Tensor"torch._tensor.Tensor*3
+a,
+torch._tensor.Tensor"torch._tensor.Tensor*'
+start
+builtins.int"builtins.int*%
+end
+builtins.int"builtins.int‡
+_collapse_atentorch._prims._collapse_aten",
+torch._tensor.Tensor"torch._tensor.Tensor*3
+a,
+torch._tensor.Tensor"torch._tensor.Tensor*'
+start
+builtins.int"builtins.int*%
+end
+builtins.int"builtins.intÌ
+	_cat_metatorch._prims._cat_meta",
+torch._tensor.Tensor"torch._tensor.Tensor*s
+tensorsf
+%typing.Sequence[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"typing.Sequence*%
+dim
+builtins.int"builtins.int¶
+	_cat_atentorch._prims._cat_aten",
+torch._tensor.Tensor"torch._tensor.Tensor*´
+tensorsù
+OUnion[builtins.tuple[torch._tensor.Tensor],builtins.list[torch._tensor.Tensor]]d
+$builtins.tuple[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.tupleb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*%
+dim
+builtins.int"builtins.intÅ
+_reshape_metatorch._prims._reshape_meta"
+Any*3
+a,
+torch._tensor.Tensor"torch._tensor.Tensor*ï
+shapeâ
+XTypeAlias[Union[torch._C.Size,builtins.list[builtins.int],builtins.tuple[builtins.int]]]ã
+MUnion[torch._C.Size,builtins.list[builtins.int],builtins.tuple[builtins.int]]
+torch._C.Size"torch._C.SizeJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.listL
+builtins.tuple[builtins.int]
+builtins.int"builtins.int"builtins.tuple"torch._prims_common.ShapeType¶
+_reshape_atentorch._prims._reshape_aten",
+torch._tensor.Tensor"torch._tensor.Tensor*3
+a,
+torch._tensor.Tensor"torch._tensor.Tensor*ï
+shapeâ
+XTypeAlias[Union[torch._C.Size,builtins.list[builtins.int],builtins.tuple[builtins.int]]]ã
+MUnion[torch._C.Size,builtins.list[builtins.int],builtins.tuple[builtins.int]]
+torch._C.Size"torch._C.SizeJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.listL
+builtins.tuple[builtins.int]
+builtins.int"builtins.int"builtins.tuple"torch._prims_common.ShapeTypeË
+	_rev_metatorch._prims._rev_meta",
+torch._tensor.Tensor"torch._tensor.Tensor*3
+a,
+torch._tensor.Tensor"torch._tensor.Tensor*ﬂ
+dims‘
+JTypeAlias[Union[builtins.list[builtins.int],builtins.tuple[builtins.int]]]›
+?Union[builtins.list[builtins.int],builtins.tuple[builtins.int]]J
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.listL
+builtins.tuple[builtins.int]
+builtins.int"builtins.int"builtins.tuple"$torch._prims_common.DimsSequenceType˜
+_where_metatorch._prims._where_meta",
+torch._tensor.Tensor"torch._tensor.Tensor*6
+pred,
+torch._tensor.Tensor"torch._tensor.Tensor*3
+a,
+torch._tensor.Tensor"torch._tensor.Tensor*3
+b,
+torch._tensor.Tensor"torch._tensor.Tensor’
+_convert_element_type_meta'torch._prims._convert_element_type_meta",
+torch._tensor.Tensor"torch._tensor.Tensor*3
+a,
+torch._tensor.Tensor"torch._tensor.Tensor*+
+dtype 
+torch._C.dtype"torch._C.dtype’
+_convert_element_type_aten'torch._prims._convert_element_type_aten",
+torch._tensor.Tensor"torch._tensor.Tensor*3
+a,
+torch._tensor.Tensor"torch._tensor.Tensor*+
+dtype 
+torch._C.dtype"torch._C.dtypeã
+_device_put_metatorch._prims._device_put_meta",
+torch._tensor.Tensor"torch._tensor.Tensor*3
+a,
+torch._tensor.Tensor"torch._tensor.Tensor*u
+devicei
+#Union[builtins.str,torch._C.device]
+builtins.str"builtins.str"
+torch._C.device"torch._C.deviceã
+_device_put_atentorch._prims._device_put_aten",
+torch._tensor.Tensor"torch._tensor.Tensor*3
+a,
+torch._tensor.Tensor"torch._tensor.Tensor*u
+devicei
+#Union[builtins.str,torch._C.device]
+builtins.str"builtins.str"
+torch._C.device"torch._C.device∞
+
+_item_metatorch._prims._item_meta"T
+(torch._subclasses.fake_tensor.FakeTensor"(torch._subclasses.fake_tensor.FakeTensor*3
+a,
+torch._tensor.Tensor"torch._tensor.Tensor∫
+_maximum_value_meta torch._prims._maximum_value_meta"T
+(torch._subclasses.fake_tensor.FakeTensor"(torch._subclasses.fake_tensor.FakeTensor*+
+dtype 
+torch._C.dtype"torch._C.dtypem
+_maximum_value_aten torch._prims._maximum_value_aten"
+Any*+
+dtype 
+torch._C.dtype"torch._C.dtype∫
+_minimum_value_meta torch._prims._minimum_value_meta"T
+(torch._subclasses.fake_tensor.FakeTensor"(torch._subclasses.fake_tensor.FakeTensor*+
+dtype 
+torch._C.dtype"torch._C.dtypem
+_minimum_value_aten torch._prims._minimum_value_aten"
+Any*+
+dtype 
+torch._C.dtype"torch._C.dtypeû
+_copy_to_metatorch._prims._copy_to_meta"
+Any*3
+a,
+torch._tensor.Tensor"torch._tensor.Tensor*3
+b,
+torch._tensor.Tensor"torch._tensor.Tensor√
+_copy_to_atentorch._prims._copy_to_aten",
+torch._tensor.Tensor"torch._tensor.Tensor*3
+a,
+torch._tensor.Tensor"torch._tensor.Tensor*3
+b,
+torch._tensor.Tensor"torch._tensor.Tensorå
+_copy_strided_metatorch._prims._copy_strided_meta"
+Any*3
+a,
+torch._tensor.Tensor"torch._tensor.Tensor*ñ
+strideâ
+XTypeAlias[Union[torch._C.Size,builtins.list[builtins.int],builtins.tuple[builtins.int]]]ã
+MUnion[torch._C.Size,builtins.list[builtins.int],builtins.tuple[builtins.int]]
+torch._C.Size"torch._C.SizeJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.listL
+builtins.tuple[builtins.int]
+builtins.int"builtins.int"builtins.tuple"torch._prims_common.ShapeType±
+_copy_strided_atentorch._prims._copy_strided_aten",
+torch._tensor.Tensor"torch._tensor.Tensor*3
+a,
+torch._tensor.Tensor"torch._tensor.Tensor*ñ
+strideâ
+XTypeAlias[Union[torch._C.Size,builtins.list[builtins.int],builtins.tuple[builtins.int]]]ã
+MUnion[torch._C.Size,builtins.list[builtins.int],builtins.tuple[builtins.int]]
+torch._C.Size"torch._C.SizeJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.listL
+builtins.tuple[builtins.int]
+builtins.int"builtins.int"builtins.tuple"torch._prims_common.ShapeTypeˇ
+_resize_metatorch._prims._resize_meta"
+Any*3
+a,
+torch._tensor.Tensor"torch._tensor.Tensor*ï
+shapeâ
+XTypeAlias[Union[torch._C.Size,builtins.list[builtins.int],builtins.tuple[builtins.int]]]ã
+MUnion[torch._C.Size,builtins.list[builtins.int],builtins.tuple[builtins.int]]
+torch._C.Size"torch._C.SizeJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.listL
+builtins.tuple[builtins.int]
+builtins.int"builtins.int"builtins.tuple"torch._prims_common.ShapeType§
+_resize_atentorch._prims._resize_aten",
+torch._tensor.Tensor"torch._tensor.Tensor*3
+a,
+torch._tensor.Tensor"torch._tensor.Tensor*ï
+shapeâ
+XTypeAlias[Union[torch._C.Size,builtins.list[builtins.int],builtins.tuple[builtins.int]]]ã
+MUnion[torch._C.Size,builtins.list[builtins.int],builtins.tuple[builtins.int]]
+torch._C.Size"torch._C.SizeJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.listL
+builtins.tuple[builtins.int]
+builtins.int"builtins.int"builtins.tuple"torch._prims_common.ShapeTypeV
+_reduction_metatorch._prims._reduction_meta*
+inp*
+dims*
+output_dtype Z
+_var_reduction_meta torch._prims._var_reduction_meta*
+inp*
+dims*
+
+correctionî
+_make_reduction_prim!torch._prims._make_reduction_prim"
+Any*&
+name
+builtins.str"builtins.str*
+	impl_aten
+Any*
+doc
+Anyú
+_make_var_reduction_prim%torch._prims._make_var_reduction_prim"
+Any*&
+name
+builtins.str"builtins.str*
+	impl_aten
+Any*
+doc
+Any„
+_xor_sum_atentorch._prims._xor_sum_aten",
+torch._tensor.Tensor"torch._tensor.Tensor*5
+inp,
+torch._tensor.Tensor"torch._tensor.Tensor*˜
+dimsÏ
+DUnion[builtins.list[builtins.int],builtins.tuple[builtins.int],None]J
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.listL
+builtins.tuple[builtins.int]
+builtins.int"builtins.int"builtins.tuple
+None*W
+dtypeJ
+Union[torch._C.dtype,None] 
+torch._C.dtype"torch._C.dtype
+None ›
+
+_prod_atentorch._prims._prod_aten",
+torch._tensor.Tensor"torch._tensor.Tensor*5
+inp,
+torch._tensor.Tensor"torch._tensor.Tensor*˜
+dimsÏ
+DUnion[builtins.list[builtins.int],builtins.tuple[builtins.int],None]J
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.listL
+builtins.tuple[builtins.int]
+builtins.int"builtins.int"builtins.tuple
+None*W
+dtypeJ
+Union[torch._C.dtype,None] 
+torch._C.dtype"torch._C.dtype
+None W
+	torch_vartorch._prims.torch_var*	
+input*	
+dim *
+
+correction *
+
+kwargsﬁ
+
+_iota_metatorch._prims._iota_meta",
+torch._tensor.Tensor"torch._tensor.Tensor*(
+length
+builtins.int"builtins.int*'
+start
+builtins.int"builtins.int*&
+step
+builtins.int"builtins.int*+
+dtype 
+torch._C.dtype"torch._C.dtype*.
+device"
+torch._C.device"torch._C.device*1
+requires_grad
+builtins.bool"builtins.boolﬁ
+
+_iota_atentorch._prims._iota_aten",
+torch._tensor.Tensor"torch._tensor.Tensor*(
+length
+builtins.int"builtins.int*'
+start
+builtins.int"builtins.int*&
+step
+builtins.int"builtins.int*+
+dtype 
+torch._C.dtype"torch._C.dtype*.
+device"
+torch._C.device"torch._C.device*1
+requires_grad
+builtins.bool"builtins.bool˝
+_empty_metatorch._prims._empty_meta",
+torch._tensor.Tensor"torch._tensor.Tensor*ï
+shapeâ
+XTypeAlias[Union[torch._C.Size,builtins.list[builtins.int],builtins.tuple[builtins.int]]]ã
+MUnion[torch._C.Size,builtins.list[builtins.int],builtins.tuple[builtins.int]]
+torch._C.Size"torch._C.SizeJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.listL
+builtins.tuple[builtins.int]
+builtins.int"builtins.int"builtins.tuple"torch._prims_common.ShapeType*+
+dtype 
+torch._C.dtype"torch._C.dtype*.
+device"
+torch._C.device"torch._C.device*1
+requires_grad
+builtins.bool"builtins.bool˝
+_empty_atentorch._prims._empty_aten",
+torch._tensor.Tensor"torch._tensor.Tensor*ï
+shapeâ
+XTypeAlias[Union[torch._C.Size,builtins.list[builtins.int],builtins.tuple[builtins.int]]]ã
+MUnion[torch._C.Size,builtins.list[builtins.int],builtins.tuple[builtins.int]]
+torch._C.Size"torch._C.SizeJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.listL
+builtins.tuple[builtins.int]
+builtins.int"builtins.int"builtins.tuple"torch._prims_common.ShapeType*+
+dtype 
+torch._C.dtype"torch._C.dtype*.
+device"
+torch._C.device"torch._C.device*1
+requires_grad
+builtins.bool"builtins.boolÏ
+_empty_strided_meta torch._prims._empty_strided_meta",
+torch._tensor.Tensor"torch._tensor.Tensor*ï
+shapeâ
+XTypeAlias[Union[torch._C.Size,builtins.list[builtins.int],builtins.tuple[builtins.int]]]ã
+MUnion[torch._C.Size,builtins.list[builtins.int],builtins.tuple[builtins.int]]
+torch._C.Size"torch._C.SizeJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.listL
+builtins.tuple[builtins.int]
+builtins.int"builtins.int"builtins.tuple"torch._prims_common.ShapeType*‹
+stridesŒ
+JTypeAlias[Union[builtins.list[builtins.int],builtins.tuple[builtins.int]]]›
+?Union[builtins.list[builtins.int],builtins.tuple[builtins.int]]J
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.listL
+builtins.tuple[builtins.int]
+builtins.int"builtins.int"builtins.tuple"torch._prims_common.StrideType*+
+dtype 
+torch._C.dtype"torch._C.dtype*.
+device"
+torch._C.device"torch._C.device*1
+requires_grad
+builtins.bool"builtins.bool¸
+_empty_permuted_meta!torch._prims._empty_permuted_meta",
+torch._tensor.Tensor"torch._tensor.Tensor*ï
+shapeâ
+XTypeAlias[Union[torch._C.Size,builtins.list[builtins.int],builtins.tuple[builtins.int]]]ã
+MUnion[torch._C.Size,builtins.list[builtins.int],builtins.tuple[builtins.int]]
+torch._C.Size"torch._C.SizeJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.listL
+builtins.tuple[builtins.int]
+builtins.int"builtins.int"builtins.tuple"torch._prims_common.ShapeType*Í
+physical_layout‘
+JTypeAlias[Union[builtins.list[builtins.int],builtins.tuple[builtins.int]]]›
+?Union[builtins.list[builtins.int],builtins.tuple[builtins.int]]J
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.listL
+builtins.tuple[builtins.int]
+builtins.int"builtins.int"builtins.tuple"$torch._prims_common.DimsSequenceType*+
+dtype 
+torch._C.dtype"torch._C.dtype*.
+device"
+torch._C.device"torch._C.device*1
+requires_grad
+builtins.bool"builtins.boolÕ
+
+_full_metatorch._prims._full_meta",
+torch._tensor.Tensor"torch._tensor.Tensor*ï
+shapeâ
+XTypeAlias[Union[torch._C.Size,builtins.list[builtins.int],builtins.tuple[builtins.int]]]ã
+MUnion[torch._C.Size,builtins.list[builtins.int],builtins.tuple[builtins.int]]
+torch._C.Size"torch._C.SizeJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.listL
+builtins.tuple[builtins.int]
+builtins.int"builtins.int"builtins.tuple"torch._prims_common.ShapeType*œ
+
+fill_valueæ
+LTypeAlias[Union[builtins.bool,builtins.int,builtins.float,builtins.complex]]À
+AUnion[builtins.bool,builtins.int,builtins.float,builtins.complex]
+builtins.bool"builtins.bool
+builtins.int"builtins.int 
+builtins.float"builtins.float$
+builtins.complex"builtins.complex"torch._prims_common.NumberType*+
+dtype 
+torch._C.dtype"torch._C.dtype*.
+device"
+torch._C.device"torch._C.device*1
+requires_grad
+builtins.bool"builtins.boolÕ
+
+_full_atentorch._prims._full_aten",
+torch._tensor.Tensor"torch._tensor.Tensor*ï
+shapeâ
+XTypeAlias[Union[torch._C.Size,builtins.list[builtins.int],builtins.tuple[builtins.int]]]ã
+MUnion[torch._C.Size,builtins.list[builtins.int],builtins.tuple[builtins.int]]
+torch._C.Size"torch._C.SizeJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.listL
+builtins.tuple[builtins.int]
+builtins.int"builtins.int"builtins.tuple"torch._prims_common.ShapeType*œ
+
+fill_valueæ
+LTypeAlias[Union[builtins.bool,builtins.int,builtins.float,builtins.complex]]À
+AUnion[builtins.bool,builtins.int,builtins.float,builtins.complex]
+builtins.bool"builtins.bool
+builtins.int"builtins.int 
+builtins.float"builtins.float$
+builtins.complex"builtins.complex"torch._prims_common.NumberType*+
+dtype 
+torch._C.dtype"torch._C.dtype*.
+device"
+torch._C.device"torch._C.device*1
+requires_grad
+builtins.bool"builtins.boolÙ
+_full_like_metatorch._prims._full_like_meta",
+torch._tensor.Tensor"torch._tensor.Tensor*3
+a,
+torch._tensor.Tensor"torch._tensor.Tensor*œ
+
+fill_valueæ
+LTypeAlias[Union[builtins.bool,builtins.int,builtins.float,builtins.complex]]À
+AUnion[builtins.bool,builtins.int,builtins.float,builtins.complex]
+builtins.bool"builtins.bool
+builtins.int"builtins.int 
+builtins.float"builtins.float$
+builtins.complex"builtins.complex"torch._prims_common.NumberType*+
+dtype 
+torch._C.dtype"torch._C.dtype*.
+device"
+torch._C.device"torch._C.device*1
+requires_grad
+builtins.bool"builtins.boolÙ
+_full_like_atentorch._prims._full_like_aten",
+torch._tensor.Tensor"torch._tensor.Tensor*3
+a,
+torch._tensor.Tensor"torch._tensor.Tensor*œ
+
+fill_valueæ
+LTypeAlias[Union[builtins.bool,builtins.int,builtins.float,builtins.complex]]À
+AUnion[builtins.bool,builtins.int,builtins.float,builtins.complex]
+builtins.bool"builtins.bool
+builtins.int"builtins.int 
+builtins.float"builtins.float$
+builtins.complex"builtins.complex"torch._prims_common.NumberType*+
+dtype 
+torch._C.dtype"torch._C.dtype*.
+device"
+torch._C.device"torch._C.device*1
+requires_grad
+builtins.bool"builtins.boolê
+_scalar_tensor_meta torch._prims._scalar_tensor_meta",
+torch._tensor.Tensor"torch._tensor.Tensor*À
+scalaræ
+LTypeAlias[Union[builtins.bool,builtins.int,builtins.float,builtins.complex]]À
+AUnion[builtins.bool,builtins.int,builtins.float,builtins.complex]
+builtins.bool"builtins.bool
+builtins.int"builtins.int 
+builtins.float"builtins.float$
+builtins.complex"builtins.complex"torch._prims_common.NumberType*+
+dtype 
+torch._C.dtype"torch._C.dtype*.
+device"
+torch._C.device"torch._C.deviceê
+_scalar_tensor_aten torch._prims._scalar_tensor_aten",
+torch._tensor.Tensor"torch._tensor.Tensor*À
+scalaræ
+LTypeAlias[Union[builtins.bool,builtins.int,builtins.float,builtins.complex]]À
+AUnion[builtins.bool,builtins.int,builtins.float,builtins.complex]
+builtins.bool"builtins.bool
+builtins.int"builtins.int 
+builtins.float"builtins.float$
+builtins.complex"builtins.complex"torch._prims_common.NumberType*+
+dtype 
+torch._C.dtype"torch._C.dtype*.
+device"
+torch._C.device"torch._C.device·
+	_svd_metatorch._prims._svd_meta"”
+ETuple[torch._tensor.Tensor,torch._tensor.Tensor,torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor,
+torch._tensor.Tensor"torch._tensor.Tensor,
+torch._tensor.Tensor"torch._tensor.Tensor*3
+A,
+torch._tensor.Tensor"torch._tensor.Tensor*1
+full_matrices
+builtins.bool"builtins.bool·
+	_svd_atentorch._prims._svd_aten"”
+ETuple[torch._tensor.Tensor,torch._tensor.Tensor,torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor,
+torch._tensor.Tensor"torch._tensor.Tensor,
+torch._tensor.Tensor"torch._tensor.Tensor*3
+A,
+torch._tensor.Tensor"torch._tensor.Tensor*1
+full_matrices
+builtins.bool"builtins.boolë
+_normal_metatorch._prims._normal_meta",
+torch._tensor.Tensor"torch._tensor.Tensor*ï
+shapeâ
+XTypeAlias[Union[torch._C.Size,builtins.list[builtins.int],builtins.tuple[builtins.int]]]ã
+MUnion[torch._C.Size,builtins.list[builtins.int],builtins.tuple[builtins.int]]
+torch._C.Size"torch._C.SizeJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.listL
+builtins.tuple[builtins.int]
+builtins.int"builtins.int"builtins.tuple"torch._prims_common.ShapeType*|
+meanr
+&Union[builtins.float,builtins.complex] 
+builtins.float"builtins.float$
+builtins.complex"builtins.complex*)
+std 
+builtins.float"builtins.float*+
+dtype 
+torch._C.dtype"torch._C.dtype*.
+device"
+torch._C.device"torch._C.device*1
+requires_grad
+builtins.bool"builtins.bool*g
+	generatorV
+Union[torch._C.Generator,None](
+torch._C.Generator"torch._C.Generator
+None ë
+_normal_atentorch._prims._normal_aten",
+torch._tensor.Tensor"torch._tensor.Tensor*ï
+shapeâ
+XTypeAlias[Union[torch._C.Size,builtins.list[builtins.int],builtins.tuple[builtins.int]]]ã
+MUnion[torch._C.Size,builtins.list[builtins.int],builtins.tuple[builtins.int]]
+torch._C.Size"torch._C.SizeJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.listL
+builtins.tuple[builtins.int]
+builtins.int"builtins.int"builtins.tuple"torch._prims_common.ShapeType*|
+meanr
+&Union[builtins.float,builtins.complex] 
+builtins.float"builtins.float$
+builtins.complex"builtins.complex*)
+std 
+builtins.float"builtins.float*+
+dtype 
+torch._C.dtype"torch._C.dtype*.
+device"
+torch._C.device"torch._C.device*1
+requires_grad
+builtins.bool"builtins.bool*g
+	generatorV
+Union[torch._C.Generator,None](
+torch._C.Generator"torch._C.Generator
+None é
+_uniform_metatorch._prims._uniform_meta",
+torch._tensor.Tensor"torch._tensor.Tensor*ï
+shapeâ
+XTypeAlias[Union[torch._C.Size,builtins.list[builtins.int],builtins.tuple[builtins.int]]]ã
+MUnion[torch._C.Size,builtins.list[builtins.int],builtins.tuple[builtins.int]]
+torch._C.Size"torch._C.SizeJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.listL
+builtins.tuple[builtins.int]
+builtins.int"builtins.int"builtins.tuple"torch._prims_common.ShapeType*)
+low 
+builtins.float"builtins.float**
+high 
+builtins.float"builtins.float*+
+dtype 
+torch._C.dtype"torch._C.dtype*.
+device"
+torch._C.device"torch._C.device*g
+	generatorV
+Union[torch._C.Generator,None](
+torch._C.Generator"torch._C.Generator
+None é
+_uniform_atentorch._prims._uniform_aten",
+torch._tensor.Tensor"torch._tensor.Tensor*ï
+shapeâ
+XTypeAlias[Union[torch._C.Size,builtins.list[builtins.int],builtins.tuple[builtins.int]]]ã
+MUnion[torch._C.Size,builtins.list[builtins.int],builtins.tuple[builtins.int]]
+torch._C.Size"torch._C.SizeJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.listL
+builtins.tuple[builtins.int]
+builtins.int"builtins.int"builtins.tuple"torch._prims_common.ShapeType*)
+low 
+builtins.float"builtins.float**
+high 
+builtins.float"builtins.float*+
+dtype 
+torch._C.dtype"torch._C.dtype*.
+device"
+torch._C.device"torch._C.device*g
+	generatorV
+Union[torch._C.Generator,None](
+torch._C.Generator"torch._C.Generator
+None °
+_fft_r2c_metatorch._prims._fft_r2c_meta",
+torch._tensor.Tensor"torch._tensor.Tensor*7
+input,
+torch._tensor.Tensor"torch._tensor.Tensor*ﬁ
+dim‘
+JTypeAlias[Union[builtins.list[builtins.int],builtins.tuple[builtins.int]]]›
+?Union[builtins.list[builtins.int],builtins.tuple[builtins.int]]J
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.listL
+builtins.tuple[builtins.int]
+builtins.int"builtins.int"builtins.tuple"$torch._prims_common.DimsSequenceType*,
+onesided
+builtins.bool"builtins.bool°
+_fft_r2c_atentorch._prims._fft_r2c_aten",
+torch._tensor.Tensor"torch._tensor.Tensor*7
+input,
+torch._tensor.Tensor"torch._tensor.Tensor*ﬁ
+dim‘
+JTypeAlias[Union[builtins.list[builtins.int],builtins.tuple[builtins.int]]]›
+?Union[builtins.list[builtins.int],builtins.tuple[builtins.int]]J
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.listL
+builtins.tuple[builtins.int]
+builtins.int"builtins.int"builtins.tuple"$torch._prims_common.DimsSequenceType*,
+onesided
+builtins.bool"builtins.bool†
+_fft_c2c_metatorch._prims._fft_c2c_meta",
+torch._tensor.Tensor"torch._tensor.Tensor*7
+input,
+torch._tensor.Tensor"torch._tensor.Tensor*ﬁ
+dim‘
+JTypeAlias[Union[builtins.list[builtins.int],builtins.tuple[builtins.int]]]›
+?Union[builtins.list[builtins.int],builtins.tuple[builtins.int]]J
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.listL
+builtins.tuple[builtins.int]
+builtins.int"builtins.int"builtins.tuple"$torch._prims_common.DimsSequenceType*+
+forward
+builtins.bool"builtins.bool†
+_fft_c2c_atentorch._prims._fft_c2c_aten",
+torch._tensor.Tensor"torch._tensor.Tensor*7
+input,
+torch._tensor.Tensor"torch._tensor.Tensor*ﬁ
+dim‘
+JTypeAlias[Union[builtins.list[builtins.int],builtins.tuple[builtins.int]]]›
+?Union[builtins.list[builtins.int],builtins.tuple[builtins.int]]J
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.listL
+builtins.tuple[builtins.int]
+builtins.int"builtins.int"builtins.tuple"$torch._prims_common.DimsSequenceType*+
+forward
+builtins.bool"builtins.bool§
+_fft_c2r_metatorch._prims._fft_c2r_meta",
+torch._tensor.Tensor"torch._tensor.Tensor*7
+input,
+torch._tensor.Tensor"torch._tensor.Tensor*ﬁ
+dim‘
+JTypeAlias[Union[builtins.list[builtins.int],builtins.tuple[builtins.int]]]›
+?Union[builtins.list[builtins.int],builtins.tuple[builtins.int]]J
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.listL
+builtins.tuple[builtins.int]
+builtins.int"builtins.int"builtins.tuple"$torch._prims_common.DimsSequenceType*/
+last_dim_size
+builtins.int"builtins.int§
+_fft_c2r_atentorch._prims._fft_c2r_aten",
+torch._tensor.Tensor"torch._tensor.Tensor*7
+input,
+torch._tensor.Tensor"torch._tensor.Tensor*ﬁ
+dim‘
+JTypeAlias[Union[builtins.list[builtins.int],builtins.tuple[builtins.int]]]›
+?Union[builtins.list[builtins.int],builtins.tuple[builtins.int]]J
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.listL
+builtins.tuple[builtins.int]
+builtins.int"builtins.int"builtins.tuple"$torch._prims_common.DimsSequenceType*/
+last_dim_size
+builtins.int"builtins.intÚ
+_frexp_metatorch._prims._frexp_meta"ê
+0Tuple[torch._tensor.Tensor,torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor,
+torch._tensor.Tensor"torch._tensor.Tensor*6
+self,
+torch._tensor.Tensor"torch._tensor.Tensor_
+_make_token_atentorch._prims._make_token_aten",
+torch._tensor.Tensor"torch._tensor.TensorR
+_sink_tokens_atentorch._prims._sink_tokens_aten"
+None*
+tokens
+Any*m
+__path__torch._prims.__path__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*à
+__annotations__torch._prims.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*
+utilstorch._prims_common *¸
+IntLiketorch._prims_common.IntLike”
+>Tuple[CallableType[builtins.type],CallableType[builtins.type]]N
+CallableType[builtins.type]
+builtins.type"builtins.type"builtins.type?
+CallableType[builtins.type]
+builtins.type"builtins.type*€
+Numbertorch._prims_common.Number¥
+ Tuple[CallableType[builtins.type],CallableType[builtins.type],CallableType[builtins.type],CallableType[builtins.type],CallableType[builtins.type],CallableType[builtins.type],CallableType[builtins.type]]?
+CallableType[builtins.type]
+builtins.type"builtins.typeN
+CallableType[builtins.type]
+builtins.type"builtins.type"builtins.type?
+CallableType[builtins.type]
+builtins.type"builtins.typeN
+CallableType[builtins.type]
+builtins.type"builtins.type"builtins.type?
+CallableType[builtins.type]
+builtins.type"builtins.type?
+CallableType[builtins.type]
+builtins.type"builtins.type?
+CallableType[builtins.type]
+builtins.type"builtins.type*I
+primtorch._prims.prim.
+torch.library.Library"torch.library.Library*S
+	prim_impltorch._prims.prim_impl.
+torch.library.Library"torch.library.Library*q
+prim_backend_select_impl%torch._prims.prim_backend_select_impl.
+torch.library.Library"torch.library.Library*e
+prim_autograd_impltorch._prims.prim_autograd_impl.
+torch.library.Library"torch.library.Library*]
+prim_meta_impltorch._prims.prim_meta_impl.
+torch.library.Library"torch.library.Library*k
+__all__torch._prims.__all__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list* 
+abstorch._prims.abs
+Any*"
+acostorch._prims.acos
+Any*$
+acoshtorch._prims.acosh
+Any*"
+asintorch._prims.asin
+Any*$
+asinhtorch._prims.asinh
+Any*"
+atantorch._prims.atan
+Any*$
+atanhtorch._prims.atanh
+Any* 
+costorch._prims.cos
+Any*"
+coshtorch._prims.cosh
+Any*,
+	bessel_j0torch._prims.bessel_j0
+Any*,
+	bessel_j1torch._prims.bessel_j1
+Any*,
+	bessel_i0torch._prims.bessel_i0
+Any*.
+
+bessel_i0etorch._prims.bessel_i0e
+Any*,
+	bessel_i1torch._prims.bessel_i1
+Any*.
+
+bessel_i1etorch._prims.bessel_i1e
+Any*0
+bitwise_nottorch._prims.bitwise_not
+Any*"
+cbrttorch._prims.cbrt
+Any*"
+ceiltorch._prims.ceil
+Any*4
+conj_physicaltorch._prims.conj_physical
+Any*$
+clonetorch._prims.clone
+Any*(
+digammatorch._prims.digamma
+Any* 
+erftorch._prims.erf
+Any*(
+erf_invtorch._prims.erf_inv
+Any*"
+erfctorch._prims.erfc
+Any*$
+erfcxtorch._prims.erfcx
+Any* 
+exptorch._prims.exp
+Any*$
+expm1torch._prims.expm1
+Any*"
+exp2torch._prims.exp2
+Any*"
+filltorch._prims.fill
+Any*$
+floortorch._prims.floor
+Any*"
+imagtorch._prims.imag
+Any**
+isfinitetorch._prims.isfinite
+Any*&
+lgammatorch._prims.lgamma
+Any* 
+logtorch._prims.log
+Any*$
+log1ptorch._prims.log1p
+Any*"
+log2torch._prims.log2
+Any*$
+log10torch._prims.log10
+Any*"
+realtorch._prims.real
+Any*.
+
+reciprocaltorch._prims.reciprocal
+Any*$
+ndtritorch._prims.ndtri
+Any* 
+negtorch._prims.neg
+Any*$
+roundtorch._prims.round
+Any*$
+rsqrttorch._prims.rsqrt
+Any*"
+signtorch._prims.sign
+Any*(
+signbittorch._prims.signbit
+Any* 
+sintorch._prims.sin
+Any*"
+sinhtorch._prims.sinh
+Any*@
+spherical_bessel_j0 torch._prims.spherical_bessel_j0
+Any*"
+sqrttorch._prims.sqrt
+Any* 
+tantorch._prims.tan
+Any*"
+tanhtorch._prims.tanh
+Any*$
+trunctorch._prims.trunc
+Any* 
+addtorch._prims.add
+Any*$
+atan2torch._prims.atan2
+Any*0
+bitwise_andtorch._prims.bitwise_and
+Any*.
+
+bitwise_ortorch._prims.bitwise_or
+Any*0
+bitwise_xortorch._prims.bitwise_xor
+Any* 
+divtorch._prims.div
+Any*
+eqtorch._prims.eq
+Any*"
+fmaxtorch._prims.fmax
+Any*"
+fmintorch._prims.fmin
+Any*"
+fmodtorch._prims.fmod
+Any* 
+gcdtorch._prims.gcd
+Any*
+getorch._prims.ge
+Any*
+gttorch._prims.gt
+Any*$
+hypottorch._prims.hypot
+Any*&
+igammatorch._prims.igamma
+Any*(
+igammactorch._prims.igammac
+Any*
+letorch._prims.le
+Any*
+lttorch._prims.lt
+Any*(
+maximumtorch._prims.maximum
+Any*(
+minimumtorch._prims.minimum
+Any* 
+multorch._prims.mul
+Any*
+netorch._prims.ne
+Any*,
+	nextaftertorch._prims.nextafter
+Any* 
+powtorch._prims.pow
+Any*,
+	remaindertorch._prims.remainder
+Any*.
+
+shift_lefttorch._prims.shift_left
+Any*F
+shift_right_arithmetic#torch._prims.shift_right_arithmetic
+Any*Ñ
+shift_right_logical torch._prims.shift_right_logicalK
+CallableType[builtins.function]&
+builtins.function"builtins.function* 
+subtorch._prims.sub
+Any*"
+zetatorch._prims.zeta
+Any*M
+_as_strided_doctorch._prims._as_strided_doc
+builtins.str"builtins.str*.
+
+as_stridedtorch._prims.as_strided
+Any*Y
+_broadcast_in_dim_doc"torch._prims._broadcast_in_dim_doc
+builtins.str"builtins.str*:
+broadcast_in_dimtorch._prims.broadcast_in_dim
+Any*S
+_collapse_view_doctorch._prims._collapse_view_doc
+builtins.str"builtins.str*4
+collapse_viewtorch._prims.collapse_view
+Any*A
+	_conj_doctorch._prims._conj_doc
+builtins.str"builtins.str*"
+conjtorch._prims.conj
+Any*a
+pyslicetorch._prims.pyslice@
+Type[builtins.slice] 
+builtins.slice"builtins.slice"type*C
+
+_slice_doctorch._prims._slice_doc
+builtins.str"builtins.str*$
+slicetorch._prims.slice
+Any*Q
+_slice_in_dim_doctorch._prims._slice_in_dim_doc
+builtins.str"builtins.str*2
+slice_in_dimtorch._prims.slice_in_dim
+Any*K
+_split_dim_doctorch._prims._split_dim_doc
+builtins.str"builtins.str*,
+	split_dimtorch._prims.split_dim
+Any*G
+_squeeze_doctorch._prims._squeeze_doc
+builtins.str"builtins.str*(
+squeezetorch._prims.squeeze
+Any*K
+_transpose_doctorch._prims._transpose_doc
+builtins.str"builtins.str*,
+	transposetorch._prims.transpose
+Any*G
+_view_of_doctorch._prims._view_of_doc
+builtins.str"builtins.str*(
+view_oftorch._prims.view_of
+Any*[
+_view_element_type_doc#torch._prims._view_element_type_doc
+builtins.str"builtins.str*<
+view_element_typetorch._prims.view_element_type
+Any*]
+_as_strided_scatter_doc$torch._prims._as_strided_scatter_doc
+builtins.str"builtins.str*>
+as_strided_scattertorch._prims.as_strided_scatter
+Any*I
+_collapse_doctorch._prims._collapse_doc
+builtins.str"builtins.str**
+collapsetorch._prims.collapse
+Any*?
+_cat_doctorch._prims._cat_doc
+builtins.str"builtins.str* 
+cattorch._prims.cat
+Any*G
+_reshape_doctorch._prims._reshape_doc
+builtins.str"builtins.str*(
+reshapetorch._prims.reshape
+Any*?
+_rev_doctorch._prims._rev_doc
+builtins.str"builtins.str* 
+revtorch._prims.rev
+Any*C
+
+_where_doctorch._prims._where_doc
+builtins.str"builtins.str*$
+wheretorch._prims.where
+Any*a
+_convert_element_type_doc&torch._prims._convert_element_type_doc
+builtins.str"builtins.str*B
+convert_element_type!torch._prims.convert_element_type
+Any*M
+_device_put_doctorch._prims._device_put_doc
+builtins.str"builtins.str*.
+
+device_puttorch._prims.device_put
+Any*A
+	_item_doctorch._prims._item_doc
+builtins.str"builtins.str*"
+itemtorch._prims.item
+Any*S
+_maximum_value_doctorch._prims._maximum_value_doc
+builtins.str"builtins.str*4
+maximum_valuetorch._prims.maximum_value
+Any*S
+_minimum_value_doctorch._prims._minimum_value_doc
+builtins.str"builtins.str*4
+minimum_valuetorch._prims.minimum_value
+Any*G
+_copy_to_doctorch._prims._copy_to_doc
+builtins.str"builtins.str*(
+copy_totorch._prims.copy_to
+Any*Q
+_copy_strided_doctorch._prims._copy_strided_doc
+builtins.str"builtins.str*2
+copy_stridedtorch._prims.copy_strided
+Any*E
+_resize_doctorch._prims._resize_doc
+builtins.str"builtins.str*&
+resizetorch._prims.resize
+Any*?
+_sum_doctorch._prims._sum_doc
+builtins.str"builtins.str*G
+_xor_sum_doctorch._prims._xor_sum_doc
+builtins.str"builtins.str*A
+	_prod_doctorch._prims._prod_doc
+builtins.str"builtins.str*A
+	_amax_doctorch._prims._amax_doc
+builtins.str"builtins.str*A
+	_amin_doctorch._prims._amin_doc
+builtins.str"builtins.str*?
+_var_doctorch._prims._var_doc
+builtins.str"builtins.str* 
+sumtorch._prims.sum
+Any*(
+xor_sumtorch._prims.xor_sum
+Any*"
+prodtorch._prims.prod
+Any* 
+vartorch._prims.var
+Any*"
+amaxtorch._prims.amax
+Any*"
+amintorch._prims.amin
+Any*A
+	_iota_doctorch._prims._iota_doc
+builtins.str"builtins.str*"
+iotatorch._prims.iota
+Any*C
+
+_empty_doctorch._prims._empty_doc
+builtins.str"builtins.str*$
+emptytorch._prims.empty
+Any*S
+_empty_strided_doctorch._prims._empty_strided_doc
+builtins.str"builtins.str*4
+empty_stridedtorch._prims.empty_strided
+Any*U
+_empty_permuted_doc torch._prims._empty_permuted_doc
+builtins.str"builtins.str*6
+empty_permutedtorch._prims.empty_permuted
+Any*A
+	_full_doctorch._prims._full_doc
+builtins.str"builtins.str*"
+fulltorch._prims.full
+Any*K
+_full_like_doctorch._prims._full_like_doc
+builtins.str"builtins.str*,
+	full_liketorch._prims.full_like
+Any*S
+_scalar_tensor_doctorch._prims._scalar_tensor_doc
+builtins.str"builtins.str*4
+scalar_tensortorch._prims.scalar_tensor
+Any*?
+_svd_doctorch._prims._svd_doc
+builtins.str"builtins.str* 
+svdtorch._prims.svd
+Any*E
+_normal_doctorch._prims._normal_doc
+builtins.str"builtins.str*&
+normaltorch._prims.normal
+Any*G
+_uniform_doctorch._prims._uniform_doc
+builtins.str"builtins.str*8
+_uniform_helpertorch._prims._uniform_helper
+Any*G
+_fft_r2c_doctorch._prims._fft_r2c_doc
+builtins.str"builtins.str*(
+fft_r2ctorch._prims.fft_r2c
+Any*G
+_fft_c2c_doctorch._prims._fft_c2c_doc
+builtins.str"builtins.str*(
+fft_c2ctorch._prims.fft_c2c
+Any*G
+_fft_c2r_doctorch._prims._fft_c2r_doc
+builtins.str"builtins.str*(
+fft_c2rtorch._prims.fft_c2r
+Any*$
+frexptorch._prims.frexp
+Any*0
+_make_tokentorch._prims._make_token
+Any*2
+_sink_tokenstorch._prims._sink_tokens
+Any

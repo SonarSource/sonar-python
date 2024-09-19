@@ -1,0 +1,141 @@
+
++torch.distributed._tensor._collective_utilsÃ
+MeshTopoInfo8torch.distributed._tensor._collective_utils.MeshTopoInfo"builtins.object*Ã
+build_from_meshHtorch.distributed._tensor._collective_utils.MeshTopoInfo.build_from_mesh"t
+8torch.distributed._tensor._collective_utils.MeshTopoInfo"8torch.distributed._tensor._collective_utils.MeshTopoInfo*^
+meshT
+(torch.distributed.device_mesh.DeviceMesh"(torch.distributed.device_mesh.DeviceMesh0:staticmethodh*ë
+__init__Atorch.distributed._tensor._collective_utils.MeshTopoInfo.__init__"
+None*~
+selft
+8torch.distributed._tensor._collective_utils.MeshTopoInfo"8torch.distributed._tensor._collective_utils.MeshTopoInfo*^
+meshT
+(torch.distributed.device_mesh.DeviceMesh"(torch.distributed.device_mesh.DeviceMesh*`
+mesh_dim_devicesJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*h
+mesh_dim_bandwidthP
+builtins.list[builtins.float] 
+builtins.float"builtins.float"builtins.list*f
+mesh_dim_latencyP
+builtins.list[builtins.float] 
+builtins.float"builtins.float"builtins.list8r›
+mesh=torch.distributed._tensor._collective_utils.MeshTopoInfo.meshT
+(torch.distributed.device_mesh.DeviceMesh"(torch.distributed.device_mesh.DeviceMeshr©
+mesh_dim_devicesItorch.distributed._tensor._collective_utils.MeshTopoInfo.mesh_dim_devicesJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.listr³
+mesh_dim_bandwidthKtorch.distributed._tensor._collective_utils.MeshTopoInfo.mesh_dim_bandwidthP
+builtins.list[builtins.float] 
+builtins.float"builtins.float"builtins.listr¯
+mesh_dim_latencyItorch.distributed._tensor._collective_utils.MeshTopoInfo.mesh_dim_latencyP
+builtins.list[builtins.float] 
+builtins.float"builtins.float"builtins.listrÿ
+__dataclass_fields__Mtorch.distributed._tensor._collective_utils.MeshTopoInfo.__dataclass_fields__—
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dict–
+shard_dim_alltoall>torch.distributed._tensor._collective_utils.shard_dim_alltoall*	
+input*
+
+gather_dim*
+	shard_dim*
+mesh*
+mesh_dimµ
+mesh_scatter8torch.distributed._tensor._collective_utils.mesh_scatter"}
++Union[torch._C._distributed_c10d.Work,None]B
+torch._C._distributed_c10d.Work"torch._C._distributed_c10d.Work
+None*8
+output,
+torch._tensor.Tensor"torch._tensor.Tensor*t
+scatter_listb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*^
+meshT
+(torch.distributed.device_mesh.DeviceMesh"(torch.distributed.device_mesh.DeviceMesh*,
+mesh_dim
+builtins.int"builtins.int *.
+async_op
+builtins.bool"builtins.bool Ã
+mesh_broadcast:torch.distributed._tensor._collective_utils.mesh_broadcast"}
++Union[torch._C._distributed_c10d.Work,None]B
+torch._C._distributed_c10d.Work"torch._C._distributed_c10d.Work
+None*8
+tensor,
+torch._tensor.Tensor"torch._tensor.Tensor*^
+meshT
+(torch.distributed.device_mesh.DeviceMesh"(torch.distributed.device_mesh.DeviceMesh*,
+mesh_dim
+builtins.int"builtins.int *.
+async_op
+builtins.bool"builtins.bool ƒ
+
+pad_tensor6torch.distributed._tensor._collective_utils.pad_tensor",
+torch._tensor.Tensor"torch._tensor.Tensor*8
+tensor,
+torch._tensor.Tensor"torch._tensor.Tensor*)
+pad_dim
+builtins.int"builtins.int**
+pad_size
+builtins.int"builtins.int‡
+unpad_tensor8torch.distributed._tensor._collective_utils.unpad_tensor",
+torch._tensor.Tensor"torch._tensor.Tensor*8
+tensor,
+torch._tensor.Tensor"torch._tensor.Tensor*)
+pad_dim
+builtins.int"builtins.int**
+pad_size
+builtins.int"builtins.intœ
+fill_empty_tensor_to_shardsGtorch.distributed._tensor._collective_utils.fill_empty_tensor_to_shards"b
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*n
+shardsb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*+
+	shard_dim
+builtins.int"builtins.int*3
+num_empty_tensors
+builtins.int"builtins.intâ
+spec_to_bytes9torch.distributed._tensor._collective_utils.spec_to_bytes"
+builtins.int"builtins.int*x
+specn
+5torch.distributed._tensor.placement_types.DTensorSpec"5torch.distributed._tensor.placement_types.DTensorSpecÐ
+allgather_cost:torch.distributed._tensor._collective_utils.allgather_cost" 
+builtins.float"builtins.float*.
+bytes_gb 
+builtins.float"builtins.float*ƒ
+	mesh_topot
+8torch.distributed._tensor._collective_utils.MeshTopoInfo"8torch.distributed._tensor._collective_utils.MeshTopoInfo**
+mesh_dim
+builtins.int"builtins.intÐ
+allreduce_cost:torch.distributed._tensor._collective_utils.allreduce_cost" 
+builtins.float"builtins.float*.
+bytes_gb 
+builtins.float"builtins.float*ƒ
+	mesh_topot
+8torch.distributed._tensor._collective_utils.MeshTopoInfo"8torch.distributed._tensor._collective_utils.MeshTopoInfo**
+mesh_dim
+builtins.int"builtins.intÚ
+reduce_scatter_cost?torch.distributed._tensor._collective_utils.reduce_scatter_cost" 
+builtins.float"builtins.float*.
+bytes_gb 
+builtins.float"builtins.float*ƒ
+	mesh_topot
+8torch.distributed._tensor._collective_utils.MeshTopoInfo"8torch.distributed._tensor._collective_utils.MeshTopoInfo**
+mesh_dim
+builtins.int"builtins.intø
+redistribute_cost=torch.distributed._tensor._collective_utils.redistribute_cost" 
+builtins.float"builtins.float*€
+current_specn
+5torch.distributed._tensor.placement_types.DTensorSpec"5torch.distributed._tensor.placement_types.DTensorSpec*
+target_specn
+5torch.distributed._tensor.placement_types.DTensorSpec"5torch.distributed._tensor.placement_types.DTensorSpec*§
+__annotations__;torch.distributed._tensor._collective_utils.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*5
+funcol)torch.distributed._functional_collectives *>
+placement_types)torch.distributed._tensor.placement_types *^
+logger2torch.distributed._tensor._collective_utils.logger 
+logging.Logger"logging.Logger

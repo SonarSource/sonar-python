@@ -1,0 +1,232 @@
+
+_pytest.hookspecÃ
+pytest_load_initial_conftests._pytest.hookspec.pytest_load_initial_conftests"
+None*@
+early_config.
+_pytest.config.Config"_pytest.config.Config*P
+parserD
+ _pytest.config.argparsing.Parser" _pytest.config.argparsing.Parser*T
+argsJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list¹
+pytest_collection_modifyitems._pytest.hookspec.pytest_collection_modifyitems"
+None*9
+session,
+_pytest.main.Session"_pytest.main.Session*:
+config.
+_pytest.config.Config"_pytest.config.Config*g
+items\
+!builtins.list[_pytest.nodes.Item](
+_pytest.nodes.Item"_pytest.nodes.Item"builtins.listŠ
+pytest_collection_finish)_pytest.hookspec.pytest_collection_finish"
+None*9
+session,
+_pytest.main.Session"_pytest.main.Session·
+pytest_collect_file$_pytest.hookspec.pytest_collect_file"e
+#Union[_pytest.nodes.Collector,None]2
+_pytest.nodes.Collector"_pytest.nodes.Collector
+None*+
+	file_path
+pathlib.Path"pathlib.Path*&
+path
+UnboundType[LEGACY_PATH]*>
+parent2
+_pytest.nodes.Collector"_pytest.nodes.Collectorˆ
+pytest_collectstart$_pytest.hookspec.pytest_collectstart"
+None*A
+	collector2
+_pytest.nodes.Collector"_pytest.nodes.Collector{
+pytest_itemcollected%_pytest.hookspec.pytest_itemcollected"
+None*2
+item(
+_pytest.nodes.Item"_pytest.nodes.Item“
+pytest_collectreport%_pytest.hookspec.pytest_collectreport"
+None*J
+report>
+_pytest.reports.CollectReport"_pytest.reports.CollectReport®
+pytest_deselected"_pytest.hookspec.pytest_deselected"
+None*k
+items`
+#typing.Sequence[_pytest.nodes.Item](
+_pytest.nodes.Item"_pytest.nodes.Item"typing.Sequence‹
+pytest_generate_tests&_pytest.hookspec.pytest_generate_tests"
+None*@
+metafunc2
+_pytest.python.Metafunc"_pytest.python.MetafuncÈ
+pytest_runtest_logstart(_pytest.hookspec.pytest_runtest_logstart"
+None*(
+nodeid
+builtins.str"builtins.str*Î
+location¿
+9Tuple[builtins.str,Union[builtins.int,None],builtins.str]
+builtins.str"builtins.strD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None
+builtins.str"builtins.strÊ
+pytest_runtest_logfinish)_pytest.hookspec.pytest_runtest_logfinish"
+None*(
+nodeid
+builtins.str"builtins.str*Î
+location¿
+9Tuple[builtins.str,Union[builtins.int,None],builtins.str]
+builtins.str"builtins.strD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None
+builtins.str"builtins.str{
+pytest_runtest_setup%_pytest.hookspec.pytest_runtest_setup"
+None*2
+item(
+_pytest.nodes.Item"_pytest.nodes.Itemy
+pytest_runtest_call$_pytest.hookspec.pytest_runtest_call"
+None*2
+item(
+_pytest.nodes.Item"_pytest.nodes.Itemç
+pytest_runtest_teardown(_pytest.hookspec.pytest_runtest_teardown"
+None*2
+item(
+_pytest.nodes.Item"_pytest.nodes.Item*d
+nextitemV
+Union[_pytest.nodes.Item,None](
+_pytest.nodes.Item"_pytest.nodes.Item
+None•
+pytest_runtest_logreport)_pytest.hookspec.pytest_runtest_logreport"
+None*D
+report8
+_pytest.reports.TestReport"_pytest.reports.TestReportü
+pytest_fixture_post_finalizer._pytest.hookspec.pytest_fixture_post_finalizer"
+None*X
+
+fixturedefH
+ _pytest.fixtures.FixtureDef[Any]
+Any"_pytest.fixtures.FixtureDef*G
+request:
+_pytest.fixtures.SubRequest"_pytest.fixtures.SubRequest€
+pytest_sessionstart$_pytest.hookspec.pytest_sessionstart"
+None*9
+session,
+_pytest.main.Session"_pytest.main.Session—
+pytest_sessionfinish%_pytest.hookspec.pytest_sessionfinish"
+None*9
+session,
+_pytest.main.Session"_pytest.main.Session*’
+
+exitstatus
++Union[builtins.int,_pytest.config.ExitCode]
+builtins.int"builtins.int2
+_pytest.config.ExitCode"_pytest.config.ExitCode
+pytest_unconfigure#_pytest.hookspec.pytest_unconfigure"
+None*:
+config.
+_pytest.config.Config"_pytest.config.ConfigŠ
+pytest_assertrepr_compare*_pytest.hookspec.pytest_assertrepr_compare"
+'Union[builtins.list[builtins.str],None]J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list
+None*:
+config.
+_pytest.config.Config"_pytest.config.Config*$
+op
+builtins.str"builtins.str*,
+left"
+builtins.object"builtins.object*-
+right"
+builtins.object"builtins.object÷
+pytest_assertion_pass&_pytest.hookspec.pytest_assertion_pass"
+None*2
+item(
+_pytest.nodes.Item"_pytest.nodes.Item*(
+lineno
+builtins.int"builtins.int*&
+orig
+builtins.str"builtins.str*&
+expl
+builtins.str"builtins.stró
+pytest_report_header%_pytest.hookspec.pytest_report_header"
+/Union[builtins.str,builtins.list[builtins.str]]
+builtins.str"builtins.strJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*:
+config.
+_pytest.config.Config"_pytest.config.Config*,
+
+start_path
+pathlib.Path"pathlib.Path**
+startdir
+UnboundType[LEGACY_PATH]ô
+pytest_report_collectionfinish/_pytest.hookspec.pytest_report_collectionfinish"
+/Union[builtins.str,builtins.list[builtins.str]]
+builtins.str"builtins.strJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*:
+config.
+_pytest.config.Config"_pytest.config.Config*,
+
+start_path
+pathlib.Path"pathlib.Path**
+startdir
+UnboundType[LEGACY_PATH]*k
+items`
+#typing.Sequence[_pytest.nodes.Item](
+_pytest.nodes.Item"_pytest.nodes.Item"typing.Sequence«
+pytest_terminal_summary(_pytest.hookspec.pytest_terminal_summary"
+None*\
+terminalreporterF
+!_pytest.terminal.TerminalReporter"!_pytest.terminal.TerminalReporter*B
+
+exitstatus2
+_pytest.config.ExitCode"_pytest.config.ExitCode*:
+config.
+_pytest.config.Config"_pytest.config.ConfigÜ
+pytest_markeval_namespace*_pytest.hookspec.pytest_markeval_namespace"W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*:
+config.
+_pytest.config.Config"_pytest.config.Configï
+pytest_internalerror%_pytest.hookspec.pytest_internalerror"G
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None*Q
+excreprD
+ _pytest._code.code.ExceptionRepr" _pytest._code.code.ExceptionRepr*
+excinfo
+Anyg
+pytest_keyboard_interrupt*_pytest.hookspec.pytest_keyboard_interrupt"
+None*
+excinfo
+Any‹
+pytest_exception_interact*_pytest.hookspec.pytest_exception_interact"
+None*ž
+node“
+1Union[_pytest.nodes.Item,_pytest.nodes.Collector](
+_pytest.nodes.Item"_pytest.nodes.Item2
+_pytest.nodes.Collector"_pytest.nodes.Collector*J
+call@
+_pytest.runner.CallInfo[Any]
+Any"_pytest.runner.CallInfo*Ê
+report½
+?Union[_pytest.reports.CollectReport,_pytest.reports.TestReport]>
+_pytest.reports.CollectReport"_pytest.reports.CollectReport8
+_pytest.reports.TestReport"_pytest.reports.TestReport˜
+pytest_enter_pdb!_pytest.hookspec.pytest_enter_pdb"
+None*:
+config.
+_pytest.config.Config"_pytest.config.Config*
+pdb
+pdb.Pdb"pdb.Pdb˜
+pytest_leave_pdb!_pytest.hookspec.pytest_leave_pdb"
+None*:
+config.
+_pytest.config.Config"_pytest.config.Config*
+pdb
+pdb.Pdb"pdb.Pdb*Œ
+__annotations__ _pytest.hookspec.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*8
+ExceptionInfo_pytest.hookspec.ExceptionInfo
+Any*c
+hookspec_pytest.hookspec.hookspec<
+pluggy._hooks.HookspecMarker"pluggy._hooks.HookspecMarker

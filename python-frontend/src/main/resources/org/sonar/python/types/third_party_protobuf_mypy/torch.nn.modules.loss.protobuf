@@ -1,0 +1,664 @@
+
+torch.nn.modules.loss¸
+_Losstorch.nn.modules.loss._Loss"torch.nn.modules.module.Module*„
+__init__$torch.nn.modules.loss._Loss.__init__"
+None*D
+self:
+torch.nn.modules.loss._Loss"torch.nn.modules.loss._Loss*
+size_average
+Any *
+reduce
+Any *-
+	reduction
+builtins.str"builtins.str rP
+	reduction%torch.nn.modules.loss._Loss.reduction
+builtins.str"builtins.str–
+_WeightedLoss#torch.nn.modules.loss._WeightedLoss"torch.nn.modules.loss._Loss*Á
+__init__,torch.nn.modules.loss._WeightedLoss.__init__"
+None*T
+selfJ
+#torch.nn.modules.loss._WeightedLoss"#torch.nn.modules.loss._WeightedLoss*j
+weight\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None *
+size_average
+Any *
+reduce
+Any *-
+	reduction
+builtins.str"builtins.str rí
+weight*torch.nn.modules.loss._WeightedLoss.weight\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None—
+L1Losstorch.nn.modules.loss.L1Loss"torch.nn.modules.loss._Loss*Ê
+__init__%torch.nn.modules.loss.L1Loss.__init__"
+None*F
+self<
+torch.nn.modules.loss.L1Loss"torch.nn.modules.loss.L1Loss*
+size_average
+Any *
+reduce
+Any *-
+	reduction
+builtins.str"builtins.str *ò
+forward$torch.nn.modules.loss.L1Loss.forward",
+torch._tensor.Tensor"torch._tensor.Tensor*F
+self<
+torch.nn.modules.loss.L1Loss"torch.nn.modules.loss.L1Loss*7
+input,
+torch._tensor.Tensor"torch._tensor.Tensor*8
+target,
+torch._tensor.Tensor"torch._tensor.Tensorrá
+__constants__*torch.nn.modules.loss.L1Loss.__constants__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list⁄
+NLLLosstorch.nn.modules.loss.NLLLoss"#torch.nn.modules.loss._WeightedLoss*á
+__init__&torch.nn.modules.loss.NLLLoss.__init__"
+None*H
+self>
+torch.nn.modules.loss.NLLLoss"torch.nn.modules.loss.NLLLoss*j
+weight\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None *
+size_average
+Any *0
+ignore_index
+builtins.int"builtins.int *
+reduce
+Any *-
+	reduction
+builtins.str"builtins.str *õ
+forward%torch.nn.modules.loss.NLLLoss.forward",
+torch._tensor.Tensor"torch._tensor.Tensor*H
+self>
+torch.nn.modules.loss.NLLLoss"torch.nn.modules.loss.NLLLoss*7
+input,
+torch._tensor.Tensor"torch._tensor.Tensor*8
+target,
+torch._tensor.Tensor"torch._tensor.Tensorrà
+__constants__+torch.nn.modules.loss.NLLLoss.__constants__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.listrX
+ignore_index*torch.nn.modules.loss.NLLLoss.ignore_index
+builtins.int"builtins.int›
+	NLLLoss2dtorch.nn.modules.loss.NLLLoss2d"torch.nn.modules.loss.NLLLoss*ç
+__init__(torch.nn.modules.loss.NLLLoss2d.__init__"
+None*L
+selfB
+torch.nn.modules.loss.NLLLoss2d"torch.nn.modules.loss.NLLLoss2d*j
+weight\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None *
+size_average
+Any *0
+ignore_index
+builtins.int"builtins.int *
+reduce
+Any *-
+	reduction
+builtins.str"builtins.str 8™	
+PoissonNLLLoss$torch.nn.modules.loss.PoissonNLLLoss"torch.nn.modules.loss._Loss*à
+__init__-torch.nn.modules.loss.PoissonNLLLoss.__init__"
+None*V
+selfL
+$torch.nn.modules.loss.PoissonNLLLoss"$torch.nn.modules.loss.PoissonNLLLoss*/
+	log_input
+builtins.bool"builtins.bool **
+full
+builtins.bool"builtins.bool *
+size_average
+Any *+
+eps 
+builtins.float"builtins.float *
+reduce
+Any *-
+	reduction
+builtins.str"builtins.str *¥
+forward,torch.nn.modules.loss.PoissonNLLLoss.forward",
+torch._tensor.Tensor"torch._tensor.Tensor*V
+selfL
+$torch.nn.modules.loss.PoissonNLLLoss"$torch.nn.modules.loss.PoissonNLLLoss*;
+	log_input,
+torch._tensor.Tensor"torch._tensor.Tensor*8
+target,
+torch._tensor.Tensor"torch._tensor.Tensorrè
+__constants__2torch.nn.modules.loss.PoissonNLLLoss.__constants__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.listr[
+	log_input.torch.nn.modules.loss.PoissonNLLLoss.log_input
+builtins.bool"builtins.boolrQ
+full)torch.nn.modules.loss.PoissonNLLLoss.full
+builtins.bool"builtins.boolrQ
+eps(torch.nn.modules.loss.PoissonNLLLoss.eps 
+builtins.float"builtins.float¶
+GaussianNLLLoss%torch.nn.modules.loss.GaussianNLLLoss"torch.nn.modules.loss._Loss*¶
+__init__.torch.nn.modules.loss.GaussianNLLLoss.__init__"
+None*X
+selfN
+%torch.nn.modules.loss.GaussianNLLLoss"%torch.nn.modules.loss.GaussianNLLLoss**
+full
+builtins.bool"builtins.bool *+
+eps 
+builtins.float"builtins.float *-
+	reduction
+builtins.str"builtins.str *Í
+forward-torch.nn.modules.loss.GaussianNLLLoss.forward",
+torch._tensor.Tensor"torch._tensor.Tensor*X
+selfN
+%torch.nn.modules.loss.GaussianNLLLoss"%torch.nn.modules.loss.GaussianNLLLoss*7
+input,
+torch._tensor.Tensor"torch._tensor.Tensor*8
+target,
+torch._tensor.Tensor"torch._tensor.Tensor*5
+var,
+torch._tensor.Tensor"torch._tensor.Tensorrê
+__constants__3torch.nn.modules.loss.GaussianNLLLoss.__constants__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.listrR
+full*torch.nn.modules.loss.GaussianNLLLoss.full
+builtins.bool"builtins.boolrR
+eps)torch.nn.modules.loss.GaussianNLLLoss.eps 
+builtins.float"builtins.float¯
+	KLDivLosstorch.nn.modules.loss.KLDivLoss"torch.nn.modules.loss._Loss*°
+__init__(torch.nn.modules.loss.KLDivLoss.__init__"
+None*L
+selfB
+torch.nn.modules.loss.KLDivLoss"torch.nn.modules.loss.KLDivLoss*
+size_average
+Any *
+reduce
+Any *-
+	reduction
+builtins.str"builtins.str *0
+
+log_target
+builtins.bool"builtins.bool *°
+forward'torch.nn.modules.loss.KLDivLoss.forward",
+torch._tensor.Tensor"torch._tensor.Tensor*L
+selfB
+torch.nn.modules.loss.KLDivLoss"torch.nn.modules.loss.KLDivLoss*7
+input,
+torch._tensor.Tensor"torch._tensor.Tensor*8
+target,
+torch._tensor.Tensor"torch._tensor.Tensorrä
+__constants__-torch.nn.modules.loss.KLDivLoss.__constants__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.listrX
+
+log_target*torch.nn.modules.loss.KLDivLoss.log_target
+builtins.bool"builtins.bool⁄
+MSELosstorch.nn.modules.loss.MSELoss"torch.nn.modules.loss._Loss*È
+__init__&torch.nn.modules.loss.MSELoss.__init__"
+None*H
+self>
+torch.nn.modules.loss.MSELoss"torch.nn.modules.loss.MSELoss*
+size_average
+Any *
+reduce
+Any *-
+	reduction
+builtins.str"builtins.str *õ
+forward%torch.nn.modules.loss.MSELoss.forward",
+torch._tensor.Tensor"torch._tensor.Tensor*H
+self>
+torch.nn.modules.loss.MSELoss"torch.nn.modules.loss.MSELoss*7
+input,
+torch._tensor.Tensor"torch._tensor.Tensor*8
+target,
+torch._tensor.Tensor"torch._tensor.Tensorrà
+__constants__+torch.nn.modules.loss.MSELoss.__constants__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.listŒ
+BCELosstorch.nn.modules.loss.BCELoss"#torch.nn.modules.loss._WeightedLoss*’
+__init__&torch.nn.modules.loss.BCELoss.__init__"
+None*H
+self>
+torch.nn.modules.loss.BCELoss"torch.nn.modules.loss.BCELoss*j
+weight\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None *
+size_average
+Any *
+reduce
+Any *-
+	reduction
+builtins.str"builtins.str *õ
+forward%torch.nn.modules.loss.BCELoss.forward",
+torch._tensor.Tensor"torch._tensor.Tensor*H
+self>
+torch.nn.modules.loss.BCELoss"torch.nn.modules.loss.BCELoss*7
+input,
+torch._tensor.Tensor"torch._tensor.Tensor*8
+target,
+torch._tensor.Tensor"torch._tensor.Tensorrà
+__constants__+torch.nn.modules.loss.BCELoss.__constants__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.listµ	
+BCEWithLogitsLoss'torch.nn.modules.loss.BCEWithLogitsLoss"torch.nn.modules.loss._Loss*„
+__init__0torch.nn.modules.loss.BCEWithLogitsLoss.__init__"
+None*\
+selfR
+'torch.nn.modules.loss.BCEWithLogitsLoss"'torch.nn.modules.loss.BCEWithLogitsLoss*j
+weight\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None *
+size_average
+Any *
+reduce
+Any *-
+	reduction
+builtins.str"builtins.str *n
+
+pos_weight\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None *π
+forward/torch.nn.modules.loss.BCEWithLogitsLoss.forward",
+torch._tensor.Tensor"torch._tensor.Tensor*\
+selfR
+'torch.nn.modules.loss.BCEWithLogitsLoss"'torch.nn.modules.loss.BCEWithLogitsLoss*7
+input,
+torch._tensor.Tensor"torch._tensor.Tensor*8
+target,
+torch._tensor.Tensor"torch._tensor.Tensorrñ
+weight.torch.nn.modules.loss.BCEWithLogitsLoss.weight\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+Nonerû
+
+pos_weight2torch.nn.modules.loss.BCEWithLogitsLoss.pos_weight\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None 
+HingeEmbeddingLoss(torch.nn.modules.loss.HingeEmbeddingLoss"torch.nn.modules.loss._Loss*∫
+__init__1torch.nn.modules.loss.HingeEmbeddingLoss.__init__"
+None*^
+selfT
+(torch.nn.modules.loss.HingeEmbeddingLoss"(torch.nn.modules.loss.HingeEmbeddingLoss*.
+margin 
+builtins.float"builtins.float *
+size_average
+Any *
+reduce
+Any *-
+	reduction
+builtins.str"builtins.str *º
+forward0torch.nn.modules.loss.HingeEmbeddingLoss.forward",
+torch._tensor.Tensor"torch._tensor.Tensor*^
+selfT
+(torch.nn.modules.loss.HingeEmbeddingLoss"(torch.nn.modules.loss.HingeEmbeddingLoss*7
+input,
+torch._tensor.Tensor"torch._tensor.Tensor*8
+target,
+torch._tensor.Tensor"torch._tensor.Tensorrì
+__constants__6torch.nn.modules.loss.HingeEmbeddingLoss.__constants__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.listr[
+margin/torch.nn.modules.loss.HingeEmbeddingLoss.margin 
+builtins.float"builtins.floatœ
+MultiLabelMarginLoss*torch.nn.modules.loss.MultiLabelMarginLoss"torch.nn.modules.loss._Loss*ê
+__init__3torch.nn.modules.loss.MultiLabelMarginLoss.__init__"
+None*b
+selfX
+*torch.nn.modules.loss.MultiLabelMarginLoss"*torch.nn.modules.loss.MultiLabelMarginLoss*
+size_average
+Any *
+reduce
+Any *-
+	reduction
+builtins.str"builtins.str *¬
+forward2torch.nn.modules.loss.MultiLabelMarginLoss.forward",
+torch._tensor.Tensor"torch._tensor.Tensor*b
+selfX
+*torch.nn.modules.loss.MultiLabelMarginLoss"*torch.nn.modules.loss.MultiLabelMarginLoss*7
+input,
+torch._tensor.Tensor"torch._tensor.Tensor*8
+target,
+torch._tensor.Tensor"torch._tensor.Tensorrï
+__constants__8torch.nn.modules.loss.MultiLabelMarginLoss.__constants__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.listà
+SmoothL1Loss"torch.nn.modules.loss.SmoothL1Loss"torch.nn.modules.loss._Loss*¶
+__init__+torch.nn.modules.loss.SmoothL1Loss.__init__"
+None*R
+selfH
+"torch.nn.modules.loss.SmoothL1Loss""torch.nn.modules.loss.SmoothL1Loss*
+size_average
+Any *
+reduce
+Any *-
+	reduction
+builtins.str"builtins.str *,
+beta 
+builtins.float"builtins.float *™
+forward*torch.nn.modules.loss.SmoothL1Loss.forward",
+torch._tensor.Tensor"torch._tensor.Tensor*R
+selfH
+"torch.nn.modules.loss.SmoothL1Loss""torch.nn.modules.loss.SmoothL1Loss*7
+input,
+torch._tensor.Tensor"torch._tensor.Tensor*8
+target,
+torch._tensor.Tensor"torch._tensor.Tensorrç
+__constants__0torch.nn.modules.loss.SmoothL1Loss.__constants__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.listrQ
+beta'torch.nn.modules.loss.SmoothL1Loss.beta 
+builtins.float"builtins.floatπ
+	HuberLosstorch.nn.modules.loss.HuberLoss"torch.nn.modules.loss._Loss*Í
+__init__(torch.nn.modules.loss.HuberLoss.__init__"
+None*L
+selfB
+torch.nn.modules.loss.HuberLoss"torch.nn.modules.loss.HuberLoss*-
+	reduction
+builtins.str"builtins.str *-
+delta 
+builtins.float"builtins.float *°
+forward'torch.nn.modules.loss.HuberLoss.forward",
+torch._tensor.Tensor"torch._tensor.Tensor*L
+selfB
+torch.nn.modules.loss.HuberLoss"torch.nn.modules.loss.HuberLoss*7
+input,
+torch._tensor.Tensor"torch._tensor.Tensor*8
+target,
+torch._tensor.Tensor"torch._tensor.Tensorrä
+__constants__-torch.nn.modules.loss.HuberLoss.__constants__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.listrP
+delta%torch.nn.modules.loss.HuberLoss.delta 
+builtins.float"builtins.floatô
+SoftMarginLoss$torch.nn.modules.loss.SoftMarginLoss"torch.nn.modules.loss._Loss*˛
+__init__-torch.nn.modules.loss.SoftMarginLoss.__init__"
+None*V
+selfL
+$torch.nn.modules.loss.SoftMarginLoss"$torch.nn.modules.loss.SoftMarginLoss*
+size_average
+Any *
+reduce
+Any *-
+	reduction
+builtins.str"builtins.str *∞
+forward,torch.nn.modules.loss.SoftMarginLoss.forward",
+torch._tensor.Tensor"torch._tensor.Tensor*V
+selfL
+$torch.nn.modules.loss.SoftMarginLoss"$torch.nn.modules.loss.SoftMarginLoss*7
+input,
+torch._tensor.Tensor"torch._tensor.Tensor*8
+target,
+torch._tensor.Tensor"torch._tensor.Tensorrè
+__constants__2torch.nn.modules.loss.SoftMarginLoss.__constants__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list⁄	
+CrossEntropyLoss&torch.nn.modules.loss.CrossEntropyLoss"#torch.nn.modules.loss._WeightedLoss*€
+__init__/torch.nn.modules.loss.CrossEntropyLoss.__init__"
+None*Z
+selfP
+&torch.nn.modules.loss.CrossEntropyLoss"&torch.nn.modules.loss.CrossEntropyLoss*j
+weight\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None *
+size_average
+Any *0
+ignore_index
+builtins.int"builtins.int *
+reduce
+Any *-
+	reduction
+builtins.str"builtins.str *7
+label_smoothing 
+builtins.float"builtins.float *∂
+forward.torch.nn.modules.loss.CrossEntropyLoss.forward",
+torch._tensor.Tensor"torch._tensor.Tensor*Z
+selfP
+&torch.nn.modules.loss.CrossEntropyLoss"&torch.nn.modules.loss.CrossEntropyLoss*7
+input,
+torch._tensor.Tensor"torch._tensor.Tensor*8
+target,
+torch._tensor.Tensor"torch._tensor.Tensorrë
+__constants__4torch.nn.modules.loss.CrossEntropyLoss.__constants__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.listra
+ignore_index3torch.nn.modules.loss.CrossEntropyLoss.ignore_index
+builtins.int"builtins.intrk
+label_smoothing6torch.nn.modules.loss.CrossEntropyLoss.label_smoothing 
+builtins.float"builtins.floatÁ
+MultiLabelSoftMarginLoss.torch.nn.modules.loss.MultiLabelSoftMarginLoss"#torch.nn.modules.loss._WeightedLoss*à
+__init__7torch.nn.modules.loss.MultiLabelSoftMarginLoss.__init__"
+None*j
+self`
+.torch.nn.modules.loss.MultiLabelSoftMarginLoss".torch.nn.modules.loss.MultiLabelSoftMarginLoss*j
+weight\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None *
+size_average
+Any *
+reduce
+Any *-
+	reduction
+builtins.str"builtins.str *Œ
+forward6torch.nn.modules.loss.MultiLabelSoftMarginLoss.forward",
+torch._tensor.Tensor"torch._tensor.Tensor*j
+self`
+.torch.nn.modules.loss.MultiLabelSoftMarginLoss".torch.nn.modules.loss.MultiLabelSoftMarginLoss*7
+input,
+torch._tensor.Tensor"torch._tensor.Tensor*8
+target,
+torch._tensor.Tensor"torch._tensor.Tensorrô
+__constants__<torch.nn.modules.loss.MultiLabelSoftMarginLoss.__constants__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.listè
+CosineEmbeddingLoss)torch.nn.modules.loss.CosineEmbeddingLoss"torch.nn.modules.loss._Loss*Ω
+__init__2torch.nn.modules.loss.CosineEmbeddingLoss.__init__"
+None*`
+selfV
+)torch.nn.modules.loss.CosineEmbeddingLoss")torch.nn.modules.loss.CosineEmbeddingLoss*.
+margin 
+builtins.float"builtins.float *
+size_average
+Any *
+reduce
+Any *-
+	reduction
+builtins.str"builtins.str *˙
+forward1torch.nn.modules.loss.CosineEmbeddingLoss.forward",
+torch._tensor.Tensor"torch._tensor.Tensor*`
+selfV
+)torch.nn.modules.loss.CosineEmbeddingLoss")torch.nn.modules.loss.CosineEmbeddingLoss*8
+input1,
+torch._tensor.Tensor"torch._tensor.Tensor*8
+input2,
+torch._tensor.Tensor"torch._tensor.Tensor*8
+target,
+torch._tensor.Tensor"torch._tensor.Tensorrî
+__constants__7torch.nn.modules.loss.CosineEmbeddingLoss.__constants__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.listr\
+margin0torch.nn.modules.loss.CosineEmbeddingLoss.margin 
+builtins.float"builtins.float˚
+MarginRankingLoss'torch.nn.modules.loss.MarginRankingLoss"torch.nn.modules.loss._Loss*∑
+__init__0torch.nn.modules.loss.MarginRankingLoss.__init__"
+None*\
+selfR
+'torch.nn.modules.loss.MarginRankingLoss"'torch.nn.modules.loss.MarginRankingLoss*.
+margin 
+builtins.float"builtins.float *
+size_average
+Any *
+reduce
+Any *-
+	reduction
+builtins.str"builtins.str *Ù
+forward/torch.nn.modules.loss.MarginRankingLoss.forward",
+torch._tensor.Tensor"torch._tensor.Tensor*\
+selfR
+'torch.nn.modules.loss.MarginRankingLoss"'torch.nn.modules.loss.MarginRankingLoss*8
+input1,
+torch._tensor.Tensor"torch._tensor.Tensor*8
+input2,
+torch._tensor.Tensor"torch._tensor.Tensor*8
+target,
+torch._tensor.Tensor"torch._tensor.Tensorrí
+__constants__5torch.nn.modules.loss.MarginRankingLoss.__constants__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.listrZ
+margin.torch.nn.modules.loss.MarginRankingLoss.margin 
+builtins.float"builtins.floatì	
+MultiMarginLoss%torch.nn.modules.loss.MultiMarginLoss"#torch.nn.modules.loss._WeightedLoss*ƒ
+__init__.torch.nn.modules.loss.MultiMarginLoss.__init__"
+None*X
+selfN
+%torch.nn.modules.loss.MultiMarginLoss"%torch.nn.modules.loss.MultiMarginLoss*%
+p
+builtins.int"builtins.int *.
+margin 
+builtins.float"builtins.float *j
+weight\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None *
+size_average
+Any *
+reduce
+Any *-
+	reduction
+builtins.str"builtins.str *≥
+forward-torch.nn.modules.loss.MultiMarginLoss.forward",
+torch._tensor.Tensor"torch._tensor.Tensor*X
+selfN
+%torch.nn.modules.loss.MultiMarginLoss"%torch.nn.modules.loss.MultiMarginLoss*7
+input,
+torch._tensor.Tensor"torch._tensor.Tensor*8
+target,
+torch._tensor.Tensor"torch._tensor.Tensorrê
+__constants__3torch.nn.modules.loss.MultiMarginLoss.__constants__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.listrX
+margin,torch.nn.modules.loss.MultiMarginLoss.margin 
+builtins.float"builtins.floatrJ
+p'torch.nn.modules.loss.MultiMarginLoss.p
+builtins.int"builtins.intÅ
+TripletMarginLoss'torch.nn.modules.loss.TripletMarginLoss"torch.nn.modules.loss._Loss*ª
+__init__0torch.nn.modules.loss.TripletMarginLoss.__init__"
+None*\
+selfR
+'torch.nn.modules.loss.TripletMarginLoss"'torch.nn.modules.loss.TripletMarginLoss*.
+margin 
+builtins.float"builtins.float *)
+p 
+builtins.float"builtins.float *+
+eps 
+builtins.float"builtins.float **
+swap
+builtins.bool"builtins.bool *
+size_average
+Any *
+reduce
+Any *-
+	reduction
+builtins.str"builtins.str *¯
+forward/torch.nn.modules.loss.TripletMarginLoss.forward",
+torch._tensor.Tensor"torch._tensor.Tensor*\
+selfR
+'torch.nn.modules.loss.TripletMarginLoss"'torch.nn.modules.loss.TripletMarginLoss*8
+anchor,
+torch._tensor.Tensor"torch._tensor.Tensor*:
+positive,
+torch._tensor.Tensor"torch._tensor.Tensor*:
+negative,
+torch._tensor.Tensor"torch._tensor.Tensorrí
+__constants__5torch.nn.modules.loss.TripletMarginLoss.__constants__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.listrZ
+margin.torch.nn.modules.loss.TripletMarginLoss.margin 
+builtins.float"builtins.floatrP
+p)torch.nn.modules.loss.TripletMarginLoss.p 
+builtins.float"builtins.floatrT
+eps+torch.nn.modules.loss.TripletMarginLoss.eps 
+builtins.float"builtins.floatrT
+swap,torch.nn.modules.loss.TripletMarginLoss.swap
+builtins.bool"builtins.bool⁄
+TripletMarginWithDistanceLoss3torch.nn.modules.loss.TripletMarginWithDistanceLoss"torch.nn.modules.loss._Loss*ˆ
+__init__<torch.nn.modules.loss.TripletMarginWithDistanceLoss.__init__"
+None*t
+selfj
+3torch.nn.modules.loss.TripletMarginWithDistanceLoss"3torch.nn.modules.loss.TripletMarginWithDistanceLoss*†
+distance_functionÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *.
+margin 
+builtins.float"builtins.float **
+swap
+builtins.bool"builtins.bool *-
+	reduction
+builtins.str"builtins.str *ú
+forward;torch.nn.modules.loss.TripletMarginWithDistanceLoss.forward",
+torch._tensor.Tensor"torch._tensor.Tensor*t
+selfj
+3torch.nn.modules.loss.TripletMarginWithDistanceLoss"3torch.nn.modules.loss.TripletMarginWithDistanceLoss*8
+anchor,
+torch._tensor.Tensor"torch._tensor.Tensor*:
+positive,
+torch._tensor.Tensor"torch._tensor.Tensor*:
+negative,
+torch._tensor.Tensor"torch._tensor.Tensorrû
+__constants__Atorch.nn.modules.loss.TripletMarginWithDistanceLoss.__constants__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.listrf
+margin:torch.nn.modules.loss.TripletMarginWithDistanceLoss.margin 
+builtins.float"builtins.floatr`
+swap8torch.nn.modules.loss.TripletMarginWithDistanceLoss.swap
+builtins.bool"builtins.boolr„
+distance_functionEtorch.nn.modules.loss.TripletMarginWithDistanceLoss.distance_functionÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None∏
+CTCLosstorch.nn.modules.loss.CTCLoss"torch.nn.modules.loss._Loss*ï
+__init__&torch.nn.modules.loss.CTCLoss.__init__"
+None*H
+self>
+torch.nn.modules.loss.CTCLoss"torch.nn.modules.loss.CTCLoss*)
+blank
+builtins.int"builtins.int *-
+	reduction
+builtins.str"builtins.str *3
+zero_infinity
+builtins.bool"builtins.bool *£
+forward%torch.nn.modules.loss.CTCLoss.forward",
+torch._tensor.Tensor"torch._tensor.Tensor*H
+self>
+torch.nn.modules.loss.CTCLoss"torch.nn.modules.loss.CTCLoss*;
+	log_probs,
+torch._tensor.Tensor"torch._tensor.Tensor*9
+targets,
+torch._tensor.Tensor"torch._tensor.Tensor*?
+input_lengths,
+torch._tensor.Tensor"torch._tensor.Tensor*@
+target_lengths,
+torch._tensor.Tensor"torch._tensor.Tensorrà
+__constants__+torch.nn.modules.loss.CTCLoss.__constants__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.listrJ
+blank#torch.nn.modules.loss.CTCLoss.blank
+builtins.int"builtins.intr\
+zero_infinity+torch.nn.modules.loss.CTCLoss.zero_infinity
+builtins.bool"builtins.bool*ë
+__annotations__%torch.nn.modules.loss.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*
+Ftorch.nn.functional *#
+
+_Reductiontorch.nn._reduction *t
+__all__torch.nn.modules.loss.__all__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list

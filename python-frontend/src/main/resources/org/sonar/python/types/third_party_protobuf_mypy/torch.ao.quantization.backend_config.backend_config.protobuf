@@ -1,0 +1,543 @@
+
+3torch.ao.quantization.backend_config.backend_config‹
+ObservationTypeCtorch.ao.quantization.backend_config.backend_config.ObservationType"	enum.EnumHr≤
+&OUTPUT_USE_DIFFERENT_OBSERVER_AS_INPUTjtorch.ao.quantization.backend_config.backend_config.ObservationType.OUTPUT_USE_DIFFERENT_OBSERVER_AS_INPUT
+builtins.int"builtins.intr¶
+ OUTPUT_SHARE_OBSERVER_WITH_INPUTdtorch.ao.quantization.backend_config.backend_config.ObservationType.OUTPUT_SHARE_OBSERVER_WITH_INPUT
+builtins.int"builtins.intrò
+INPUT_OUTPUT_NOT_OBSERVED]torch.ao.quantization.backend_config.backend_config.ObservationType.INPUT_OUTPUT_NOT_OBSERVED
+builtins.int"builtins.intÒ
+DTypeWithConstraintsHtorch.ao.quantization.backend_config.backend_config.DTypeWithConstraints"builtins.object*ˇ
+__init__Qtorch.ao.quantization.backend_config.backend_config.DTypeWithConstraints.__init__"
+None*ü
+selfî
+Htorch.ao.quantization.backend_config.backend_config.DTypeWithConstraints"Htorch.ao.quantization.backend_config.backend_config.DTypeWithConstraints*W
+dtypeJ
+Union[torch._C.dtype,None] 
+torch._C.dtype"torch._C.dtype
+None *í
+quant_min_lower_boundu
+'Union[builtins.int,builtins.float,None]
+builtins.int"builtins.int 
+builtins.float"builtins.float
+None *í
+quant_max_upper_boundu
+'Union[builtins.int,builtins.float,None]
+builtins.int"builtins.int 
+builtins.float"builtins.float
+None *í
+scale_min_lower_boundu
+'Union[builtins.int,builtins.float,None]
+builtins.int"builtins.int 
+builtins.float"builtins.float
+None *í
+scale_max_upper_boundu
+'Union[builtins.int,builtins.float,None]
+builtins.int"builtins.int 
+builtins.float"builtins.float
+None *c
+scale_exact_matchJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None *b
+zero_point_exact_matchD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None 8r£
+dtypeNtorch.ao.quantization.backend_config.backend_config.DTypeWithConstraints.dtypeJ
+Union[torch._C.dtype,None] 
+torch._C.dtype"torch._C.dtype
+NonerÓ
+quant_min_lower_bound^torch.ao.quantization.backend_config.backend_config.DTypeWithConstraints.quant_min_lower_boundu
+'Union[builtins.int,builtins.float,None]
+builtins.int"builtins.int 
+builtins.float"builtins.float
+NonerÓ
+quant_max_upper_bound^torch.ao.quantization.backend_config.backend_config.DTypeWithConstraints.quant_max_upper_boundu
+'Union[builtins.int,builtins.float,None]
+builtins.int"builtins.int 
+builtins.float"builtins.float
+NonerÓ
+scale_min_lower_bound^torch.ao.quantization.backend_config.backend_config.DTypeWithConstraints.scale_min_lower_boundu
+'Union[builtins.int,builtins.float,None]
+builtins.int"builtins.int 
+builtins.float"builtins.float
+NonerÓ
+scale_max_upper_bound^torch.ao.quantization.backend_config.backend_config.DTypeWithConstraints.scale_max_upper_boundu
+'Union[builtins.int,builtins.float,None]
+builtins.int"builtins.int 
+builtins.float"builtins.float
+Nonerª
+scale_exact_matchZtorch.ao.quantization.backend_config.backend_config.DTypeWithConstraints.scale_exact_matchJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+Nonerø
+zero_point_exact_match_torch.ao.quantization.backend_config.backend_config.DTypeWithConstraints.zero_point_exact_matchD
+Union[builtins.int,None]
+builtins.int"builtins.int
+Nonerè
+__dataclass_fields__]torch.ao.quantization.backend_config.backend_config.DTypeWithConstraints.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dict¡%
+DTypeConfig?torch.ao.quantization.backend_config.backend_config.DTypeConfig"builtins.object*Ï
+
+__init__Htorch.ao.quantization.backend_config.backend_config.DTypeConfig.__init__"
+None*ç
+selfÇ
+?torch.ao.quantization.backend_config.backend_config.DTypeConfig"?torch.ao.quantization.backend_config.backend_config.DTypeConfig*æ
+input_dtype™
+cUnion[torch._C.dtype,torch.ao.quantization.backend_config.backend_config.DTypeWithConstraints,None] 
+torch._C.dtype"torch._C.dtypeî
+Htorch.ao.quantization.backend_config.backend_config.DTypeWithConstraints"Htorch.ao.quantization.backend_config.backend_config.DTypeWithConstraints
+None *ø
+output_dtype™
+cUnion[torch._C.dtype,torch.ao.quantization.backend_config.backend_config.DTypeWithConstraints,None] 
+torch._C.dtype"torch._C.dtypeî
+Htorch.ao.quantization.backend_config.backend_config.DTypeWithConstraints"Htorch.ao.quantization.backend_config.backend_config.DTypeWithConstraints
+None *ø
+weight_dtype™
+cUnion[torch._C.dtype,torch.ao.quantization.backend_config.backend_config.DTypeWithConstraints,None] 
+torch._C.dtype"torch._C.dtypeî
+Htorch.ao.quantization.backend_config.backend_config.DTypeWithConstraints"Htorch.ao.quantization.backend_config.backend_config.DTypeWithConstraints
+None *\
+
+bias_dtypeJ
+Union[torch._C.dtype,None] 
+torch._C.dtype"torch._C.dtype
+None *Y
+
+is_dynamicG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *ƒ
+input_dtypeKtorch.ao.quantization.backend_config.backend_config.DTypeConfig.input_dtype"J
+Union[torch._C.dtype,None] 
+torch._C.dtype"torch._C.dtype
+None*ç
+selfÇ
+?torch.ao.quantization.backend_config.backend_config.DTypeConfig"?torch.ao.quantization.backend_config.backend_config.DTypeConfig0:property`*∆
+output_dtypeLtorch.ao.quantization.backend_config.backend_config.DTypeConfig.output_dtype"J
+Union[torch._C.dtype,None] 
+torch._C.dtype"torch._C.dtype
+None*ç
+selfÇ
+?torch.ao.quantization.backend_config.backend_config.DTypeConfig"?torch.ao.quantization.backend_config.backend_config.DTypeConfig0:property`*∆
+weight_dtypeLtorch.ao.quantization.backend_config.backend_config.DTypeConfig.weight_dtype"J
+Union[torch._C.dtype,None] 
+torch._C.dtype"torch._C.dtype
+None*ç
+selfÇ
+?torch.ao.quantization.backend_config.backend_config.DTypeConfig"?torch.ao.quantization.backend_config.backend_config.DTypeConfig0:property`*Ω
+	from_dictItorch.ao.quantization.backend_config.backend_config.DTypeConfig.from_dict"Ç
+?torch.ao.quantization.backend_config.backend_config.DTypeConfig"?torch.ao.quantization.backend_config.backend_config.DTypeConfig*ﬁ
+cls‘
+EType[torch.ao.quantization.backend_config.backend_config.DTypeConfig]Ç
+?torch.ao.quantization.backend_config.backend_config.DTypeConfig"?torch.ao.quantization.backend_config.backend_config.DTypeConfig"type*n
+dtype_config_dictW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict0:classmethodp*ª
+to_dictGtorch.ao.quantization.backend_config.backend_config.DTypeConfig.to_dict"W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*ç
+selfÇ
+?torch.ao.quantization.backend_config.backend_config.DTypeConfig"?torch.ao.quantization.backend_config.backend_config.DTypeConfig8rì
+input_dtype_with_constraints\torch.ao.quantization.backend_config.backend_config.DTypeConfig.input_dtype_with_constraintsî
+Htorch.ao.quantization.backend_config.backend_config.DTypeWithConstraints"Htorch.ao.quantization.backend_config.backend_config.DTypeWithConstraintsrï
+output_dtype_with_constraints]torch.ao.quantization.backend_config.backend_config.DTypeConfig.output_dtype_with_constraintsî
+Htorch.ao.quantization.backend_config.backend_config.DTypeWithConstraints"Htorch.ao.quantization.backend_config.backend_config.DTypeWithConstraintsrï
+weight_dtype_with_constraints]torch.ao.quantization.backend_config.backend_config.DTypeConfig.weight_dtype_with_constraintsî
+Htorch.ao.quantization.backend_config.backend_config.DTypeWithConstraints"Htorch.ao.quantization.backend_config.backend_config.DTypeWithConstraintsr§
+
+bias_dtypeJtorch.ao.quantization.backend_config.backend_config.DTypeConfig.bias_dtypeJ
+Union[torch._C.dtype,None] 
+torch._C.dtype"torch._C.dtype
+Noner°
+
+is_dynamicJtorch.ao.quantization.backend_config.backend_config.DTypeConfig.is_dynamicG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+NonerÜ
+__dataclass_fields__Ttorch.ao.quantization.backend_config.backend_config.DTypeConfig.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictΩ+
+BackendConfigAtorch.ao.quantization.backend_config.backend_config.BackendConfig"builtins.object*û
+__init__Jtorch.ao.quantization.backend_config.backend_config.BackendConfig.__init__"
+None*ë
+selfÜ
+Atorch.ao.quantization.backend_config.backend_config.BackendConfig"Atorch.ao.quantization.backend_config.backend_config.BackendConfig*(
+name
+builtins.str"builtins.str *X
+__repr__Jtorch.ao.quantization.backend_config.backend_config.BackendConfig.__repr__* *õ
+set_nameJtorch.ao.quantization.backend_config.backend_config.BackendConfig.set_name"Ü
+Atorch.ao.quantization.backend_config.backend_config.BackendConfig"Atorch.ao.quantization.backend_config.backend_config.BackendConfig*ë
+selfÜ
+Atorch.ao.quantization.backend_config.backend_config.BackendConfig"Atorch.ao.quantization.backend_config.backend_config.BackendConfig*&
+name
+builtins.str"builtins.str*ª
+set_backend_pattern_config\torch.ao.quantization.backend_config.backend_config.BackendConfig.set_backend_pattern_config"Ü
+Atorch.ao.quantization.backend_config.backend_config.BackendConfig"Atorch.ao.quantization.backend_config.backend_config.BackendConfig*ë
+selfÜ
+Atorch.ao.quantization.backend_config.backend_config.BackendConfig"Atorch.ao.quantization.backend_config.backend_config.BackendConfig*°
+configî
+Htorch.ao.quantization.backend_config.backend_config.BackendPatternConfig"Htorch.ao.quantization.backend_config.backend_config.BackendPatternConfig*©
+set_backend_pattern_configs]torch.ao.quantization.backend_config.backend_config.BackendConfig.set_backend_pattern_configs"Ü
+Atorch.ao.quantization.backend_config.backend_config.BackendConfig"Atorch.ao.quantization.backend_config.backend_config.BackendConfig*ë
+selfÜ
+Atorch.ao.quantization.backend_config.backend_config.BackendConfig"Atorch.ao.quantization.backend_config.backend_config.BackendConfig*ç
+configsˇ
+Wbuiltins.list[torch.ao.quantization.backend_config.backend_config.BackendPatternConfig]î
+Htorch.ao.quantization.backend_config.backend_config.BackendPatternConfig"Htorch.ao.quantization.backend_config.backend_config.BackendPatternConfig"builtins.list*¯
+configsItorch.ao.quantization.backend_config.backend_config.BackendConfig.configs"ˇ
+Wbuiltins.list[torch.ao.quantization.backend_config.backend_config.BackendPatternConfig]î
+Htorch.ao.quantization.backend_config.backend_config.BackendPatternConfig"Htorch.ao.quantization.backend_config.backend_config.BackendPatternConfig"builtins.list*ë
+selfÜ
+Atorch.ao.quantization.backend_config.backend_config.BackendConfig"Atorch.ao.quantization.backend_config.backend_config.BackendConfig0:property`*À
+	from_dictKtorch.ao.quantization.backend_config.backend_config.BackendConfig.from_dict"Ü
+Atorch.ao.quantization.backend_config.backend_config.BackendConfig"Atorch.ao.quantization.backend_config.backend_config.BackendConfig*‰
+cls⁄
+GType[torch.ao.quantization.backend_config.backend_config.BackendConfig]Ü
+Atorch.ao.quantization.backend_config.backend_config.BackendConfig"Atorch.ao.quantization.backend_config.backend_config.BackendConfig"type*p
+backend_config_dictW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict0:classmethodp*¡
+to_dictItorch.ao.quantization.backend_config.backend_config.BackendConfig.to_dict"W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*ë
+selfÜ
+Atorch.ao.quantization.backend_config.backend_config.BackendConfig"Atorch.ao.quantization.backend_config.backend_config.BackendConfigrl
+nameFtorch.ao.quantization.backend_config.backend_config.BackendConfig.name
+builtins.str"builtins.strrŸ
+!_pattern_complex_format_to_configctorch.ao.quantization.backend_config.backend_config.BackendConfig._pattern_complex_format_to_configŒ
+¬builtins.dict[TypeAlias[Union[CallableType[builtins.function],Tuple[CallableType[builtins.function],CallableType[builtins.function]],Tuple[CallableType[builtins.function],Tuple[CallableType[builtins.function],CallableType[builtins.function]]],Any]],torch.ao.quantization.backend_config.backend_config.BackendPatternConfig]‡	
+ÍTypeAlias[Union[CallableType[builtins.function],Tuple[CallableType[builtins.function],CallableType[builtins.function]],Tuple[CallableType[builtins.function],Tuple[CallableType[builtins.function],CallableType[builtins.function]]],Any]]…
+ﬂUnion[CallableType[builtins.function],Tuple[CallableType[builtins.function],CallableType[builtins.function]],Tuple[CallableType[builtins.function],Tuple[CallableType[builtins.function],CallableType[builtins.function]]],Any]K
+CallableType[builtins.function]&
+builtins.function"builtins.function‰
+FTuple[CallableType[builtins.function],CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.functionK
+CallableType[builtins.function]&
+builtins.function"builtins.function•
+mTuple[CallableType[builtins.function],Tuple[CallableType[builtins.function],CallableType[builtins.function]]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function‰
+FTuple[CallableType[builtins.function],CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.functionK
+CallableType[builtins.function]&
+builtins.function"builtins.function
+Any"#torch.ao.quantization.utils.Patternî
+Htorch.ao.quantization.backend_config.backend_config.BackendPatternConfig"Htorch.ao.quantization.backend_config.backend_config.BackendPatternConfig"builtins.dictìè
+BackendPatternConfigHtorch.ao.quantization.backend_config.backend_config.BackendPatternConfig"builtins.object*Ù	
+__init__Qtorch.ao.quantization.backend_config.backend_config.BackendPatternConfig.__init__"
+None*ü
+selfî
+Htorch.ao.quantization.backend_config.backend_config.BackendPatternConfig"Htorch.ao.quantization.backend_config.backend_config.BackendPatternConfig*Ë
+patternÿ
+‰Union[CallableType[builtins.function],Tuple[CallableType[builtins.function],CallableType[builtins.function]],Tuple[CallableType[builtins.function],Tuple[CallableType[builtins.function],CallableType[builtins.function]]],Any,None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function‰
+FTuple[CallableType[builtins.function],CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.functionK
+CallableType[builtins.function]&
+builtins.function"builtins.function•
+mTuple[CallableType[builtins.function],Tuple[CallableType[builtins.function],CallableType[builtins.function]]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function‰
+FTuple[CallableType[builtins.function],CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.functionK
+CallableType[builtins.function]&
+builtins.function"builtins.function
+Any
+None *_
+__repr__Qtorch.ao.quantization.backend_config.backend_config.BackendPatternConfig.__repr__* *ç
+set_patternTtorch.ao.quantization.backend_config.backend_config.BackendPatternConfig.set_pattern"î
+Htorch.ao.quantization.backend_config.backend_config.BackendPatternConfig"Htorch.ao.quantization.backend_config.backend_config.BackendPatternConfig*ü
+selfî
+Htorch.ao.quantization.backend_config.backend_config.BackendPatternConfig"Htorch.ao.quantization.backend_config.backend_config.BackendPatternConfig*Ó	
+pattern‡	
+ÍTypeAlias[Union[CallableType[builtins.function],Tuple[CallableType[builtins.function],CallableType[builtins.function]],Tuple[CallableType[builtins.function],Tuple[CallableType[builtins.function],CallableType[builtins.function]]],Any]]…
+ﬂUnion[CallableType[builtins.function],Tuple[CallableType[builtins.function],CallableType[builtins.function]],Tuple[CallableType[builtins.function],Tuple[CallableType[builtins.function],CallableType[builtins.function]]],Any]K
+CallableType[builtins.function]&
+builtins.function"builtins.function‰
+FTuple[CallableType[builtins.function],CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.functionK
+CallableType[builtins.function]&
+builtins.function"builtins.function•
+mTuple[CallableType[builtins.function],Tuple[CallableType[builtins.function],CallableType[builtins.function]]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function‰
+FTuple[CallableType[builtins.function],CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.functionK
+CallableType[builtins.function]&
+builtins.function"builtins.function
+Any"#torch.ao.quantization.utils.Pattern*“
+set_observation_type]torch.ao.quantization.backend_config.backend_config.BackendPatternConfig.set_observation_type"î
+Htorch.ao.quantization.backend_config.backend_config.BackendPatternConfig"Htorch.ao.quantization.backend_config.backend_config.BackendPatternConfig*ü
+selfî
+Htorch.ao.quantization.backend_config.backend_config.BackendPatternConfig"Htorch.ao.quantization.backend_config.backend_config.BackendPatternConfig*°
+observation_typeä
+Ctorch.ao.quantization.backend_config.backend_config.ObservationType"Ctorch.ao.quantization.backend_config.backend_config.ObservationType*æ
+add_dtype_configYtorch.ao.quantization.backend_config.backend_config.BackendPatternConfig.add_dtype_config"î
+Htorch.ao.quantization.backend_config.backend_config.BackendPatternConfig"Htorch.ao.quantization.backend_config.backend_config.BackendPatternConfig*ü
+selfî
+Htorch.ao.quantization.backend_config.backend_config.BackendPatternConfig"Htorch.ao.quantization.backend_config.backend_config.BackendPatternConfig*ï
+dtype_configÇ
+?torch.ao.quantization.backend_config.backend_config.DTypeConfig"?torch.ao.quantization.backend_config.backend_config.DTypeConfig*£
+set_dtype_configsZtorch.ao.quantization.backend_config.backend_config.BackendPatternConfig.set_dtype_configs"î
+Htorch.ao.quantization.backend_config.backend_config.BackendPatternConfig"Htorch.ao.quantization.backend_config.backend_config.BackendPatternConfig*ü
+selfî
+Htorch.ao.quantization.backend_config.backend_config.BackendPatternConfig"Htorch.ao.quantization.backend_config.backend_config.BackendPatternConfig*¯
+dtype_configs‰
+Nbuiltins.list[torch.ao.quantization.backend_config.backend_config.DTypeConfig]Ç
+?torch.ao.quantization.backend_config.backend_config.DTypeConfig"?torch.ao.quantization.backend_config.backend_config.DTypeConfig"builtins.list*®
+set_root_moduleXtorch.ao.quantization.backend_config.backend_config.BackendPatternConfig.set_root_module"î
+Htorch.ao.quantization.backend_config.backend_config.BackendPatternConfig"Htorch.ao.quantization.backend_config.backend_config.BackendPatternConfig*ü
+selfî
+Htorch.ao.quantization.backend_config.backend_config.BackendPatternConfig"Htorch.ao.quantization.backend_config.backend_config.BackendPatternConfig*Å
+root_modulep
+$Type[torch.nn.modules.module.Module]@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"type*•
+set_qat_moduleWtorch.ao.quantization.backend_config.backend_config.BackendPatternConfig.set_qat_module"î
+Htorch.ao.quantization.backend_config.backend_config.BackendPatternConfig"Htorch.ao.quantization.backend_config.backend_config.BackendPatternConfig*ü
+selfî
+Htorch.ao.quantization.backend_config.backend_config.BackendPatternConfig"Htorch.ao.quantization.backend_config.backend_config.BackendPatternConfig*Ä
+
+qat_modulep
+$Type[torch.nn.modules.module.Module]@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"type*’
+set_reference_quantized_modulegtorch.ao.quantization.backend_config.backend_config.BackendPatternConfig.set_reference_quantized_module"î
+Htorch.ao.quantization.backend_config.backend_config.BackendPatternConfig"Htorch.ao.quantization.backend_config.backend_config.BackendPatternConfig*ü
+selfî
+Htorch.ao.quantization.backend_config.backend_config.BackendPatternConfig"Htorch.ao.quantization.backend_config.backend_config.BackendPatternConfig*ê
+reference_quantized_modulep
+$Type[torch.nn.modules.module.Module]@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"type*´
+set_fused_moduleYtorch.ao.quantization.backend_config.backend_config.BackendPatternConfig.set_fused_module"î
+Htorch.ao.quantization.backend_config.backend_config.BackendPatternConfig"Htorch.ao.quantization.backend_config.backend_config.BackendPatternConfig*ü
+selfî
+Htorch.ao.quantization.backend_config.backend_config.BackendPatternConfig"Htorch.ao.quantization.backend_config.backend_config.BackendPatternConfig*Ç
+fused_modulep
+$Type[torch.nn.modules.module.Module]@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"type*Ö
+set_fuser_methodYtorch.ao.quantization.backend_config.backend_config.BackendPatternConfig.set_fuser_method"î
+Htorch.ao.quantization.backend_config.backend_config.BackendPatternConfig"Htorch.ao.quantization.backend_config.backend_config.BackendPatternConfig*ü
+selfî
+Htorch.ao.quantization.backend_config.backend_config.BackendPatternConfig"Htorch.ao.quantization.backend_config.backend_config.BackendPatternConfig*]
+fuser_methodK
+CallableType[builtins.function]&
+builtins.function"builtins.function*ì
+_set_root_node_getter^torch.ao.quantization.backend_config.backend_config.BackendPatternConfig._set_root_node_getter"î
+Htorch.ao.quantization.backend_config.backend_config.BackendPatternConfig"Htorch.ao.quantization.backend_config.backend_config.BackendPatternConfig*ü
+selfî
+Htorch.ao.quantization.backend_config.backend_config.BackendPatternConfig"Htorch.ao.quantization.backend_config.backend_config.BackendPatternConfig*a
+root_node_getterK
+CallableType[builtins.function]&
+builtins.function"builtins.function*ú
+_set_extra_inputs_getteratorch.ao.quantization.backend_config.backend_config.BackendPatternConfig._set_extra_inputs_getter"î
+Htorch.ao.quantization.backend_config.backend_config.BackendPatternConfig"Htorch.ao.quantization.backend_config.backend_config.BackendPatternConfig*ü
+selfî
+Htorch.ao.quantization.backend_config.backend_config.BackendPatternConfig"Htorch.ao.quantization.backend_config.backend_config.BackendPatternConfig*d
+extra_inputs_getterK
+CallableType[builtins.function]&
+builtins.function"builtins.function*û
+(_set_num_tensor_args_to_observation_typeqtorch.ao.quantization.backend_config.backend_config.BackendPatternConfig._set_num_tensor_args_to_observation_type"î
+Htorch.ao.quantization.backend_config.backend_config.BackendPatternConfig"Htorch.ao.quantization.backend_config.backend_config.BackendPatternConfig*ü
+selfî
+Htorch.ao.quantization.backend_config.backend_config.BackendPatternConfig"Htorch.ao.quantization.backend_config.backend_config.BackendPatternConfig*≈
+#num_tensor_args_to_observation_typeõ
+_builtins.dict[builtins.int,torch.ao.quantization.backend_config.backend_config.ObservationType]
+builtins.int"builtins.intä
+Ctorch.ao.quantization.backend_config.backend_config.ObservationType"Ctorch.ao.quantization.backend_config.backend_config.ObservationType"builtins.dict*«
+_set_input_type_to_indexatorch.ao.quantization.backend_config.backend_config.BackendPatternConfig._set_input_type_to_index"î
+Htorch.ao.quantization.backend_config.backend_config.BackendPatternConfig"Htorch.ao.quantization.backend_config.backend_config.BackendPatternConfig*ü
+selfî
+Htorch.ao.quantization.backend_config.backend_config.BackendPatternConfig"Htorch.ao.quantization.backend_config.backend_config.BackendPatternConfig*é
+input_type_to_indexu
+(builtins.dict[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int"builtins.dict*≠
+_set_pattern_complex_formatdtorch.ao.quantization.backend_config.backend_config.BackendPatternConfig._set_pattern_complex_format"î
+Htorch.ao.quantization.backend_config.backend_config.BackendPatternConfig"Htorch.ao.quantization.backend_config.backend_config.BackendPatternConfig*ü
+selfî
+Htorch.ao.quantization.backend_config.backend_config.BackendPatternConfig"Htorch.ao.quantization.backend_config.backend_config.BackendPatternConfig*Ó	
+pattern‡	
+ÍTypeAlias[Union[CallableType[builtins.function],Tuple[CallableType[builtins.function],CallableType[builtins.function]],Tuple[CallableType[builtins.function],Tuple[CallableType[builtins.function],CallableType[builtins.function]]],Any]]…
+ﬂUnion[CallableType[builtins.function],Tuple[CallableType[builtins.function],CallableType[builtins.function]],Tuple[CallableType[builtins.function],Tuple[CallableType[builtins.function],CallableType[builtins.function]]],Any]K
+CallableType[builtins.function]&
+builtins.function"builtins.function‰
+FTuple[CallableType[builtins.function],CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.functionK
+CallableType[builtins.function]&
+builtins.function"builtins.function•
+mTuple[CallableType[builtins.function],Tuple[CallableType[builtins.function],CallableType[builtins.function]]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function‰
+FTuple[CallableType[builtins.function],CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.functionK
+CallableType[builtins.function]&
+builtins.function"builtins.function
+Any"#torch.ao.quantization.utils.Pattern*˝
+	from_dictRtorch.ao.quantization.backend_config.backend_config.BackendPatternConfig.from_dict"î
+Htorch.ao.quantization.backend_config.backend_config.BackendPatternConfig"Htorch.ao.quantization.backend_config.backend_config.BackendPatternConfig*˘
+clsÔ
+NType[torch.ao.quantization.backend_config.backend_config.BackendPatternConfig]î
+Htorch.ao.quantization.backend_config.backend_config.BackendPatternConfig"Htorch.ao.quantization.backend_config.backend_config.BackendPatternConfig"type*x
+backend_pattern_config_dictW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict0:classmethodp*÷
+to_dictPtorch.ao.quantization.backend_config.backend_config.BackendPatternConfig.to_dict"W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*ü
+selfî
+Htorch.ao.quantization.backend_config.backend_config.BackendPatternConfig"Htorch.ao.quantization.backend_config.backend_config.BackendPatternConfigr∂
+patternPtorch.ao.quantization.backend_config.backend_config.BackendPatternConfig.patternÿ
+‰Union[CallableType[builtins.function],Tuple[CallableType[builtins.function],CallableType[builtins.function]],Tuple[CallableType[builtins.function],Tuple[CallableType[builtins.function],CallableType[builtins.function]]],Any,None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function‰
+FTuple[CallableType[builtins.function],CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.functionK
+CallableType[builtins.function]&
+builtins.function"builtins.function•
+mTuple[CallableType[builtins.function],Tuple[CallableType[builtins.function],CallableType[builtins.function]]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function‰
+FTuple[CallableType[builtins.function],CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.functionK
+CallableType[builtins.function]&
+builtins.function"builtins.function
+Any
+Noner˙
+observation_typeYtorch.ao.quantization.backend_config.backend_config.BackendPatternConfig.observation_typeä
+Ctorch.ao.quantization.backend_config.backend_config.ObservationType"Ctorch.ao.quantization.backend_config.backend_config.ObservationTyperŒ
+dtype_configsVtorch.ao.quantization.backend_config.backend_config.BackendPatternConfig.dtype_configs‰
+Nbuiltins.list[torch.ao.quantization.backend_config.backend_config.DTypeConfig]Ç
+?torch.ao.quantization.backend_config.backend_config.DTypeConfig"?torch.ao.quantization.backend_config.backend_config.DTypeConfig"builtins.listrñ
+root_moduleTtorch.ao.quantization.backend_config.backend_config.BackendPatternConfig.root_module∞
+0Union[Type[torch.nn.modules.module.Module],None]p
+$Type[torch.nn.modules.module.Module]@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"type
+Nonerî
+
+qat_moduleStorch.ao.quantization.backend_config.backend_config.BackendPatternConfig.qat_module∞
+0Union[Type[torch.nn.modules.module.Module],None]p
+$Type[torch.nn.modules.module.Module]@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"type
+Noner¥
+reference_quantized_modulectorch.ao.quantization.backend_config.backend_config.BackendPatternConfig.reference_quantized_module∞
+0Union[Type[torch.nn.modules.module.Module],None]p
+$Type[torch.nn.modules.module.Module]@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"type
+Nonerò
+fused_moduleUtorch.ao.quantization.backend_config.backend_config.BackendPatternConfig.fused_module∞
+0Union[Type[torch.nn.modules.module.Module],None]p
+$Type[torch.nn.modules.module.Module]@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"type
+NonerÓ
+fuser_methodUtorch.ao.quantization.backend_config.backend_config.BackendPatternConfig.fuser_methodÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+Noner¯
+_root_node_getterZtorch.ao.quantization.backend_config.backend_config.BackendPatternConfig._root_node_getterÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+Noner˛
+_extra_inputs_getter]torch.ao.quantization.backend_config.backend_config.BackendPatternConfig._extra_inputs_getterÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+Noner≥
+$_num_tensor_args_to_observation_typemtorch.ao.quantization.backend_config.backend_config.BackendPatternConfig._num_tensor_args_to_observation_typeõ
+_builtins.dict[builtins.int,torch.ao.quantization.backend_config.backend_config.ObservationType]
+builtins.int"builtins.intä
+Ctorch.ao.quantization.backend_config.backend_config.ObservationType"Ctorch.ao.quantization.backend_config.backend_config.ObservationType"builtins.dictrÏ
+_input_type_to_index]torch.ao.quantization.backend_config.backend_config.BackendPatternConfig._input_type_to_indexu
+(builtins.dict[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int"builtins.dictr÷
+_pattern_complex_format`torch.ao.quantization.backend_config.backend_config.BackendPatternConfig._pattern_complex_formatÿ
+‰Union[CallableType[builtins.function],Tuple[CallableType[builtins.function],CallableType[builtins.function]],Tuple[CallableType[builtins.function],Tuple[CallableType[builtins.function],CallableType[builtins.function]]],Any,None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function‰
+FTuple[CallableType[builtins.function],CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.functionK
+CallableType[builtins.function]&
+builtins.function"builtins.function•
+mTuple[CallableType[builtins.function],Tuple[CallableType[builtins.function],CallableType[builtins.function]]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function‰
+FTuple[CallableType[builtins.function],CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.functionK
+CallableType[builtins.function]&
+builtins.function"builtins.function
+Any
+None*Ø
+__annotations__Ctorch.ao.quantization.backend_config.backend_config.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*í
+__all__;torch.ao.quantization.backend_config.backend_config.__all__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*~
+INPUT_DTYPE_DICT_KEYHtorch.ao.quantization.backend_config.backend_config.INPUT_DTYPE_DICT_KEY
+builtins.str"builtins.str*Ä
+OUTPUT_DTYPE_DICT_KEYItorch.ao.quantization.backend_config.backend_config.OUTPUT_DTYPE_DICT_KEY
+builtins.str"builtins.str*Ä
+WEIGHT_DTYPE_DICT_KEYItorch.ao.quantization.backend_config.backend_config.WEIGHT_DTYPE_DICT_KEY
+builtins.str"builtins.str*|
+BIAS_DTYPE_DICT_KEYGtorch.ao.quantization.backend_config.backend_config.BIAS_DTYPE_DICT_KEY
+builtins.str"builtins.str*|
+IS_DYNAMIC_DICT_KEYGtorch.ao.quantization.backend_config.backend_config.IS_DYNAMIC_DICT_KEY
+builtins.str"builtins.str*p
+NAME_DICT_KEYAtorch.ao.quantization.backend_config.backend_config.NAME_DICT_KEY
+builtins.str"builtins.str*v
+CONFIGS_DICT_KEYDtorch.ao.quantization.backend_config.backend_config.CONFIGS_DICT_KEY
+builtins.str"builtins.str*v
+PATTERN_DICT_KEYDtorch.ao.quantization.backend_config.backend_config.PATTERN_DICT_KEY
+builtins.str"builtins.str*î
+PATTERN_COMPLEX_FORMAT_DICT_KEYStorch.ao.quantization.backend_config.backend_config.PATTERN_COMPLEX_FORMAT_DICT_KEY
+builtins.str"builtins.str*à
+OBSERVATION_TYPE_DICT_KEYMtorch.ao.quantization.backend_config.backend_config.OBSERVATION_TYPE_DICT_KEY
+builtins.str"builtins.str*Ç
+DTYPE_CONFIGS_DICT_KEYJtorch.ao.quantization.backend_config.backend_config.DTYPE_CONFIGS_DICT_KEY
+builtins.str"builtins.str*~
+ROOT_MODULE_DICT_KEYHtorch.ao.quantization.backend_config.backend_config.ROOT_MODULE_DICT_KEY
+builtins.str"builtins.str*|
+QAT_MODULE_DICT_KEYGtorch.ao.quantization.backend_config.backend_config.QAT_MODULE_DICT_KEY
+builtins.str"builtins.str*ú
+#REFERENCE_QUANTIZED_MODULE_DICT_KEYWtorch.ao.quantization.backend_config.backend_config.REFERENCE_QUANTIZED_MODULE_DICT_KEY
+builtins.str"builtins.str*Ä
+FUSED_MODULE_DICT_KEYItorch.ao.quantization.backend_config.backend_config.FUSED_MODULE_DICT_KEY
+builtins.str"builtins.str*Ä
+FUSER_METHOD_DICT_KEYItorch.ao.quantization.backend_config.backend_config.FUSER_METHOD_DICT_KEY
+builtins.str"builtins.str*à
+ROOT_NODE_GETTER_DICT_KEYMtorch.ao.quantization.backend_config.backend_config.ROOT_NODE_GETTER_DICT_KEY
+builtins.str"builtins.str*é
+EXTRA_INPUTS_GETTER_DICT_KEYPtorch.ao.quantization.backend_config.backend_config.EXTRA_INPUTS_GETTER_DICT_KEY
+builtins.str"builtins.str*Æ
+,NUM_TENSOR_ARGS_TO_OBSERVATION_TYPE_DICT_KEY`torch.ao.quantization.backend_config.backend_config.NUM_TENSOR_ARGS_TO_OBSERVATION_TYPE_DICT_KEY
+builtins.str"builtins.str*é
+INPUT_TYPE_TO_INDEX_DICT_KEYPtorch.ao.quantization.backend_config.backend_config.INPUT_TYPE_TO_INDEX_DICT_KEY
+builtins.str"builtins.str

@@ -1,0 +1,595 @@
+
+*torch.testing._internal.common_device_type⁄
+DeviceTypeTestBase=torch.testing._internal.common_device_type.DeviceTypeTestBase"-torch.testing._internal.common_utils.TestCase*Ä
+get_primary_devicePtorch.testing._internal.common_device_type.DeviceTypeTestBase.get_primary_device*
+cls0:classmethodp*î
+_init_and_get_primary_deviceZtorch.testing._internal.common_device_type.DeviceTypeTestBase._init_and_get_primary_device*
+cls0:classmethodp*z
+get_all_devicesMtorch.testing._internal.common_device_type.DeviceTypeTestBase.get_all_devices*
+cls0:classmethodp*|
+_get_dtypesItorch.testing._internal.common_device_type.DeviceTypeTestBase._get_dtypes*
+cls*
+test0:classmethodp*è
+_get_precision_overrideUtorch.testing._internal.common_device_type.DeviceTypeTestBase._get_precision_override*
+self*
+test*	
+dtype*è
+_get_tolerance_overrideUtorch.testing._internal.common_device_type.DeviceTypeTestBase._get_tolerance_override*
+self*
+test*	
+dtype*¨
+"_apply_precision_override_for_test`torch.testing._internal.common_device_type.DeviceTypeTestBase._apply_precision_override_for_test*
+self*
+test*
+param_kwargs*£
+instantiate_testNtorch.testing._internal.common_device_type.DeviceTypeTestBase.instantiate_test*
+cls*
+name*
+test*
+generic_cls 0:classmethodp*`
+runAtorch.testing._internal.common_device_type.DeviceTypeTestBase.run*
+self*
+result 2¬
+	precisionGtorch.testing._internal.common_device_type.DeviceTypeTestBase.precisionn
+	precisionGtorch.testing._internal.common_device_type.DeviceTypeTestBase.precision*
+self0:propertyX`|
+	precisionGtorch.testing._internal.common_device_type.DeviceTypeTestBase.precision*
+self*
+prec0:precision.setter2¥
+rel_tolEtorch.testing._internal.common_device_type.DeviceTypeTestBase.rel_tolj
+rel_tolEtorch.testing._internal.common_device_type.DeviceTypeTestBase.rel_tol*
+self0:propertyX`v
+rel_tolEtorch.testing._internal.common_device_type.DeviceTypeTestBase.rel_tol*
+self*
+prec0:rel_tol.setterrv
+device_typeItorch.testing._internal.common_device_type.DeviceTypeTestBase.device_type
+builtins.str"builtins.strrÇ
+_stop_test_suiteNtorch.testing._internal.common_device_type.DeviceTypeTestBase._stop_test_suite
+builtins.bool"builtins.boolrn
+_tlsBtorch.testing._internal.common_device_type.DeviceTypeTestBase._tls"
+threading.local"threading.localÍ
+CPUTestBase6torch.testing._internal.common_device_type.CPUTestBase"=torch.testing._internal.common_device_type.DeviceTypeTestBase*s
+_should_stop_test_suiteNtorch.testing._internal.common_device_type.CPUTestBase._should_stop_test_suite*
+selfro
+device_typeBtorch.testing._internal.common_device_type.CPUTestBase.device_type
+builtins.str"builtins.strç
+CUDATestBase7torch.testing._internal.common_device_type.CUDATestBase"=torch.testing._internal.common_device_type.DeviceTypeTestBase*X
+	has_cudnnAtorch.testing._internal.common_device_type.CUDATestBase.has_cudnn*
+self*z
+get_primary_deviceJtorch.testing._internal.common_device_type.CUDATestBase.get_primary_device*
+cls0:classmethodp*t
+get_all_devicesGtorch.testing._internal.common_device_type.CUDATestBase.get_all_devices*
+cls0:classmethodp*j
+
+setUpClassBtorch.testing._internal.common_device_type.CUDATestBase.setUpClass*
+cls0:classmethodprp
+device_typeCtorch.testing._internal.common_device_type.CUDATestBase.device_type
+builtins.str"builtins.strrê
+_do_cuda_memory_leak_checkRtorch.testing._internal.common_device_type.CUDATestBase._do_cuda_memory_leak_check
+builtins.bool"builtins.boolrí
+_do_cuda_non_default_streamStorch.testing._internal.common_device_type.CUDATestBase._do_cuda_non_default_stream
+builtins.bool"builtins.boolrv
+primary_deviceFtorch.testing._internal.common_device_type.CUDATestBase.primary_device
+builtins.str"builtins.strr_
+cudnn_versionEtorch.testing._internal.common_device_type.CUDATestBase.cudnn_version
+Anyrl
+no_magma@torch.testing._internal.common_device_type.CUDATestBase.no_magma
+builtins.bool"builtins.boolrl
+no_cudnn@torch.testing._internal.common_device_type.CUDATestBase.no_cudnn
+builtins.bool"builtins.bool⁄
+LazyTestBase7torch.testing._internal.common_device_type.LazyTestBase"=torch.testing._internal.common_device_type.DeviceTypeTestBase*t
+_should_stop_test_suiteOtorch.testing._internal.common_device_type.LazyTestBase._should_stop_test_suite*
+self*j
+
+setUpClassBtorch.testing._internal.common_device_type.LazyTestBase.setUpClass*
+cls0:classmethodprp
+device_typeCtorch.testing._internal.common_device_type.LazyTestBase.device_type
+builtins.str"builtins.strº
+MPSTestBase6torch.testing._internal.common_device_type.MPSTestBase"=torch.testing._internal.common_device_type.DeviceTypeTestBase*y
+get_primary_deviceItorch.testing._internal.common_device_type.MPSTestBase.get_primary_device*
+cls0:classmethodp*s
+get_all_devicesFtorch.testing._internal.common_device_type.MPSTestBase.get_all_devices*
+cls0:classmethodp*i
+
+setUpClassAtorch.testing._internal.common_device_type.MPSTestBase.setUpClass*
+cls0:classmethodp*s
+_should_stop_test_suiteNtorch.testing._internal.common_device_type.MPSTestBase._should_stop_test_suite*
+selfro
+device_typeBtorch.testing._internal.common_device_type.MPSTestBase.device_type
+builtins.str"builtins.strru
+primary_deviceEtorch.testing._internal.common_device_type.MPSTestBase.primary_device
+builtins.str"builtins.strº
+XPUTestBase6torch.testing._internal.common_device_type.XPUTestBase"=torch.testing._internal.common_device_type.DeviceTypeTestBase*y
+get_primary_deviceItorch.testing._internal.common_device_type.XPUTestBase.get_primary_device*
+cls0:classmethodp*s
+get_all_devicesFtorch.testing._internal.common_device_type.XPUTestBase.get_all_devices*
+cls0:classmethodp*i
+
+setUpClassAtorch.testing._internal.common_device_type.XPUTestBase.setUpClass*
+cls0:classmethodp*s
+_should_stop_test_suiteNtorch.testing._internal.common_device_type.XPUTestBase._should_stop_test_suite*
+selfro
+device_typeBtorch.testing._internal.common_device_type.XPUTestBase.device_type
+builtins.str"builtins.strru
+primary_deviceEtorch.testing._internal.common_device_type.XPUTestBase.primary_device
+builtins.str"builtins.str„
+PrivateUse1TestBase>torch.testing._internal.common_device_type.PrivateUse1TestBase"=torch.testing._internal.common_device_type.DeviceTypeTestBase*Å
+get_primary_deviceQtorch.testing._internal.common_device_type.PrivateUse1TestBase.get_primary_device*
+cls0:classmethodp*{
+get_all_devicesNtorch.testing._internal.common_device_type.PrivateUse1TestBase.get_all_devices*
+cls0:classmethodp*q
+
+setUpClassItorch.testing._internal.common_device_type.PrivateUse1TestBase.setUpClass*
+cls0:classmethodpr}
+primary_deviceMtorch.testing._internal.common_device_type.PrivateUse1TestBase.primary_device
+builtins.str"builtins.strra
+
+device_modItorch.testing._internal.common_device_type.PrivateUse1TestBase.device_mod
+Nonerw
+device_typeJtorch.testing._internal.common_device_type.PrivateUse1TestBase.device_type
+builtins.str"builtins.strÌ
+OpDTypes3torch.testing._internal.common_device_type.OpDTypes"	enum.EnumHrh
+	supported=torch.testing._internal.common_device_type.OpDTypes.supported
+builtins.int"builtins.intrl
+unsupported?torch.testing._internal.common_device_type.OpDTypes.unsupported
+builtins.int"builtins.intrz
+supported_backwardFtorch.testing._internal.common_device_type.OpDTypes.supported_backward
+builtins.int"builtins.intr~
+unsupported_backwardHtorch.testing._internal.common_device_type.OpDTypes.unsupported_backward
+builtins.int"builtins.intrd
+any_one;torch.testing._internal.common_device_type.OpDTypes.any_one
+builtins.int"builtins.intr^
+none8torch.testing._internal.common_device_type.OpDTypes.none
+builtins.int"builtins.intrÑ
+any_common_cpu_cuda_oneKtorch.testing._internal.common_device_type.OpDTypes.any_common_cpu_cuda_one
+builtins.int"builtins.intﬂ
+ops.torch.testing._internal.common_device_type.ops"6torch.testing._internal.common_utils._TestParametrizer*…
+__init__7torch.testing._internal.common_device_type.ops.__init__"
+None*j
+self`
+.torch.testing._internal.common_device_type.ops".torch.testing._internal.common_device_type.ops*
+op_list
+Any*Ø
+dtypes†
+ZUnion[torch.testing._internal.common_device_type.OpDTypes,typing.Sequence[torch._C.dtype]]j
+3torch.testing._internal.common_device_type.OpDTypes"3torch.testing._internal.common_device_type.OpDTypesT
+typing.Sequence[torch._C.dtype] 
+torch._C.dtype"torch._C.dtype"typing.Sequence *¶
+allowed_dtypesè
++Union[typing.Sequence[torch._C.dtype],None]T
+typing.Sequence[torch._C.dtype] 
+torch._C.dtype"torch._C.dtype"typing.Sequence
+None *
+skip_if_dynamo
+Any *ä
+_parametrize_test@torch.testing._internal.common_device_type.ops._parametrize_test*
+self*
+test*
+generic_cls*
+
+device_clsro
+op_list6torch.testing._internal.common_device_type.ops.op_list,
+builtins.list[Any]
+Any"builtins.listr
+opinfo_dtypes<torch.testing._internal.common_device_type.ops.opinfo_dtypes†
+ZUnion[torch.testing._internal.common_device_type.OpDTypes,typing.Sequence[torch._C.dtype]]j
+3torch.testing._internal.common_device_type.OpDTypes"3torch.testing._internal.common_device_type.OpDTypesT
+typing.Sequence[torch._C.dtype] 
+torch._C.dtype"torch._C.dtype"typing.Sequencerÿ
+allowed_dtypes=torch.testing._internal.common_device_type.ops.allowed_dtypesÜ
+(Union[builtins.set[torch._C.dtype],None]N
+builtins.set[torch._C.dtype] 
+torch._C.dtype"torch._C.dtype"builtins.set
+NonerX
+skip_if_dynamo=torch.testing._internal.common_device_type.ops.skip_if_dynamo
+Anyã
+skipIf1torch.testing._internal.common_device_type.skipIf"builtins.object*x
+__init__:torch.testing._internal.common_device_type.skipIf.__init__*
+self*
+dep*
+
+reason*
+device_type *X
+__call__:torch.testing._internal.common_device_type.skipIf.__call__*
+self*
+fnrE
+dep5torch.testing._internal.common_device_type.skipIf.dep
+AnyrK
+reason8torch.testing._internal.common_device_type.skipIf.reason
+AnyrU
+device_type=torch.testing._internal.common_device_type.skipIf.device_type
+Anyﬁ
+	skipCPUIf4torch.testing._internal.common_device_type.skipCPUIf"1torch.testing._internal.common_device_type.skipIf*h
+__init__=torch.testing._internal.common_device_type.skipCPUIf.__init__*
+self*
+dep*
+
+reason·
+
+skipCUDAIf5torch.testing._internal.common_device_type.skipCUDAIf"1torch.testing._internal.common_device_type.skipIf*i
+__init__>torch.testing._internal.common_device_type.skipCUDAIf.__init__*
+self*
+dep*
+
+reason·
+
+skipLazyIf5torch.testing._internal.common_device_type.skipLazyIf"1torch.testing._internal.common_device_type.skipIf*i
+__init__>torch.testing._internal.common_device_type.skipLazyIf.__init__*
+self*
+dep*
+
+reason·
+
+skipMetaIf5torch.testing._internal.common_device_type.skipMetaIf"1torch.testing._internal.common_device_type.skipIf*i
+__init__>torch.testing._internal.common_device_type.skipMetaIf.__init__*
+self*
+dep*
+
+reasonﬁ
+	skipMPSIf4torch.testing._internal.common_device_type.skipMPSIf"1torch.testing._internal.common_device_type.skipIf*h
+__init__=torch.testing._internal.common_device_type.skipMPSIf.__init__*
+self*
+dep*
+
+reasonﬁ
+	skipXLAIf4torch.testing._internal.common_device_type.skipXLAIf"1torch.testing._internal.common_device_type.skipIf*h
+__init__=torch.testing._internal.common_device_type.skipXLAIf.__init__*
+self*
+dep*
+
+reasonˆ
+skipPRIVATEUSE1If<torch.testing._internal.common_device_type.skipPRIVATEUSE1If"1torch.testing._internal.common_device_type.skipIf*p
+__init__Etorch.testing._internal.common_device_type.skipPRIVATEUSE1If.__init__*
+self*
+dep*
+
+reasonç
+expectedFailure:torch.testing._internal.common_device_type.expectedFailure"builtins.object*j
+__init__Ctorch.testing._internal.common_device_type.expectedFailure.__init__*
+self*
+device_type*a
+__call__Ctorch.testing._internal.common_device_type.expectedFailure.__call__*
+self*
+fnr^
+device_typeFtorch.testing._internal.common_device_type.expectedFailure.device_type
+Any‡
+onlyOn1torch.testing._internal.common_device_type.onlyOn"builtins.object*a
+__init__:torch.testing._internal.common_device_type.onlyOn.__init__*
+self*
+device_type*X
+__call__:torch.testing._internal.common_device_type.onlyOn.__call__*
+self*
+fnrU
+device_type=torch.testing._internal.common_device_type.onlyOn.device_type
+Any∑
+deviceCountAtLeast=torch.testing._internal.common_device_type.deviceCountAtLeast"builtins.object*v
+__init__Ftorch.testing._internal.common_device_type.deviceCountAtLeast.__init__*
+self*
+num_required_devices*d
+__call__Ftorch.testing._internal.common_device_type.deviceCountAtLeast.__call__*
+self*
+fnrs
+num_required_devicesRtorch.testing._internal.common_device_type.deviceCountAtLeast.num_required_devices
+Any˘
+precisionOverride<torch.testing._internal.common_device_type.precisionOverride"builtins.object*b
+__init__Etorch.testing._internal.common_device_type.precisionOverride.__init__*
+self*
+d*c
+__call__Etorch.testing._internal.common_device_type.precisionOverride.__call__*
+self*
+fnrL
+d>torch.testing._internal.common_device_type.precisionOverride.d
+Any—
+tol.torch.testing._internal.common_device_type.tol"builtins.tuple*¥
+_replace7torch.testing._internal.common_device_type.tol._replace"\
+2torch.testing._internal.common_device_type.tol._NT$
+Tuple[Any,Any]
+Any
+Any*g
+_self\
+2torch.testing._internal.common_device_type.tol._NT$
+Tuple[Any,Any]
+Any
+Any*
+atol
+Any *
+rtol
+Any *Û
+__new__6torch.testing._internal.common_device_type.tol.__new__"\
+2torch.testing._internal.common_device_type.tol._NT$
+Tuple[Any,Any]
+Any
+Any*´
+_cls†
+8Type[torch.testing._internal.common_device_type.tol._NT]\
+2torch.testing._internal.common_device_type.tol._NT$
+Tuple[Any,Any]
+Any
+Any"type*
+atol
+Any*
+rtol
+Any*É
+_asdict6torch.testing._internal.common_device_type.tol._asdict"W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*g
+_self\
+2torch.testing._internal.common_device_type.tol._NT$
+Tuple[Any,Any]
+Any
+Any*¬
+_make4torch.testing._internal.common_device_type.tol._make"\
+2torch.testing._internal.common_device_type.tol._NT$
+Tuple[Any,Any]
+Any
+Any*´
+_cls†
+8Type[torch.testing._internal.common_device_type.tol._NT]\
+2torch.testing._internal.common_device_type.tol._NT$
+Tuple[Any,Any]
+Any
+Any"type*>
+iterable0
+typing.Iterable[Any]
+Any"typing.Iterable*
+new
+Any *
+len
+Any 0:classmethodprD
+atol3torch.testing._internal.common_device_type.tol.atol
+AnyrD
+rtol3torch.testing._internal.common_device_type.tol.rtol
+Anyr£
+_fields6torch.testing._internal.common_device_type.tol._fields`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.strr§
+_field_types;torch.testing._internal.common_device_type.tol._field_typesW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dictr™
+_field_defaults>torch.testing._internal.common_device_type.tol._field_defaultsW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dictr_
+_source6torch.testing._internal.common_device_type.tol._source
+builtins.str"builtins.strr™
+__annotations__>torch.testing._internal.common_device_type.tol.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict˘
+toleranceOverride<torch.testing._internal.common_device_type.toleranceOverride"builtins.object*b
+__init__Etorch.testing._internal.common_device_type.toleranceOverride.__init__*
+self*
+d*c
+__call__Etorch.testing._internal.common_device_type.toleranceOverride.__call__*
+self*
+fnrL
+d>torch.testing._internal.common_device_type.toleranceOverride.d
+Anyµ
+dtypes1torch.testing._internal.common_device_type.dtypes"builtins.object*m
+__init__:torch.testing._internal.common_device_type.dtypes.__init__*
+self*
+args*
+device_type *X
+__call__:torch.testing._internal.common_device_type.dtypes.__call__*
+self*
+fnrG
+args6torch.testing._internal.common_device_type.dtypes.args
+AnyrU
+device_type=torch.testing._internal.common_device_type.dtypes.device_type
+AnyŸ
+dtypesIfCPU6torch.testing._internal.common_device_type.dtypesIfCPU"1torch.testing._internal.common_device_type.dtypes*_
+__init__?torch.testing._internal.common_device_type.dtypesIfCPU.__init__*
+self*
+args‹
+dtypesIfCUDA7torch.testing._internal.common_device_type.dtypesIfCUDA"1torch.testing._internal.common_device_type.dtypes*`
+__init__@torch.testing._internal.common_device_type.dtypesIfCUDA.__init__*
+self*
+argsŸ
+dtypesIfMPS6torch.testing._internal.common_device_type.dtypesIfMPS"1torch.testing._internal.common_device_type.dtypes*_
+__init__?torch.testing._internal.common_device_type.dtypesIfMPS.__init__*
+self*
+argsÒ
+dtypesIfPRIVATEUSE1>torch.testing._internal.common_device_type.dtypesIfPRIVATEUSE1"1torch.testing._internal.common_device_type.dtypes*g
+__init__Gtorch.testing._internal.common_device_type.dtypesIfPRIVATEUSE1.__init__*
+self*
+args_
+_dtype_test_suffix=torch.testing._internal.common_device_type._dtype_test_suffix*
+
+dtypes~
+_update_param_kwargs?torch.testing._internal.common_device_type._update_param_kwargs*
+param_kwargs*
+name*	
+valuec
+get_device_type_test_basesEtorch.testing._internal.common_device_type.get_device_type_test_bases£
+filter_desired_device_typesFtorch.testing._internal.common_device_type.filter_desired_device_types*
+device_type_test_bases*
+
+except_for *
+only_for ∫
+"get_desired_device_type_test_basesMtorch.testing._internal.common_device_type.get_desired_device_type_test_bases*
+
+except_for *
+only_for *
+include_lazy *
+	allow_mps ”
+instantiate_device_type_testsHtorch.testing._internal.common_device_type.instantiate_device_type_tests*
+generic_test_class*	
+scope*
+
+except_for *
+only_for *
+include_lazy *
+	allow_mps c
+_serialize_sample<torch.testing._internal.common_device_type._serialize_sample*
+sample_inputq
+_has_sufficient_memoryAtorch.testing._internal.common_device_type._has_sufficient_memory*
+
+device*
+sizee
+largeTensorTest:torch.testing._internal.common_device_type.largeTensorTest*
+size*
+device a
+onlyNativeDeviceTypes@torch.testing._internal.common_device_type.onlyNativeDeviceTypes*
+fnE
+onlyCPU2torch.testing._internal.common_device_type.onlyCPU*
+fnG
+onlyCUDA3torch.testing._internal.common_device_type.onlyCUDA*
+fnE
+onlyMPS2torch.testing._internal.common_device_type.onlyMPS*
+fnE
+onlyXPU2torch.testing._internal.common_device_type.onlyXPU*
+fnU
+onlyPRIVATEUSE1:torch.testing._internal.common_device_type.onlyPRIVATEUSE1*
+fnc
+onlyCUDAAndPRIVATEUSE1Atorch.testing._internal.common_device_type.onlyCUDAAndPRIVATEUSE1*
+fnO
+disablecuDNN7torch.testing._internal.common_device_type.disablecuDNN*
+fnQ
+disableMkldnn8torch.testing._internal.common_device_type.disableMkldnn*
+fn[
+expectedFailureCPU=torch.testing._internal.common_device_type.expectedFailureCPU*
+fn]
+expectedFailureCUDA>torch.testing._internal.common_device_type.expectedFailureCUDA*
+fn[
+expectedFailureXPU=torch.testing._internal.common_device_type.expectedFailureXPU*
+fn]
+expectedFailureMeta>torch.testing._internal.common_device_type.expectedFailureMeta*
+fn[
+expectedFailureXLA=torch.testing._internal.common_device_type.expectedFailureXLA*
+fnY
+skipCPUIfNoLapack<torch.testing._internal.common_device_type.skipCPUIfNoLapack*
+fnS
+skipCPUIfNoFFT9torch.testing._internal.common_device_type.skipCPUIfNoFFT*
+fnS
+skipCPUIfNoMkl9torch.testing._internal.common_device_type.skipCPUIfNoMkl*
+fn_
+skipCPUIfNoMklSparse?torch.testing._internal.common_device_type.skipCPUIfNoMklSparse*
+fnY
+skipCPUIfNoMkldnn<torch.testing._internal.common_device_type.skipCPUIfNoMkldnn*
+fnY
+skipCUDAIfNoMagma<torch.testing._internal.common_device_type.skipCUDAIfNoMagma*
+fnG
+has_cusolver7torch.testing._internal.common_device_type.has_cusolverI
+has_hipsolver8torch.testing._internal.common_device_type.has_hipsolver_
+skipCUDAIfNoCusolver?torch.testing._internal.common_device_type.skipCUDAIfNoCusolver*
+fns
+skipCUDAIfNoMagmaAndNoCusolverItorch.testing._internal.common_device_type.skipCUDAIfNoMagmaAndNoCusolver*
+fn{
+"skipCUDAIfNoMagmaAndNoLinalgsolverMtorch.testing._internal.common_device_type.skipCUDAIfNoMagmaAndNoLinalgsolver*
+fnb
+skipCUDAIfRocm9torch.testing._internal.common_device_type.skipCUDAIfRocm*
+
+func *	
+msg Y
+skipCUDAIfNotRocm<torch.testing._internal.common_device_type.skipCUDAIfNotRocm*
+fnx
+skipCUDAIfRocmVersionLessThanHtorch.testing._internal.common_device_type.skipCUDAIfRocmVersionLessThan*
+version s
+skipCUDAIfNotMiopenSuggestNHWCItorch.testing._internal.common_device_type.skipCUDAIfNotMiopenSuggestNHWC*
+fnê
+skipCUDAVersionIn<torch.testing._internal.common_device_type.skipCUDAVersionIn"
+Any*≥
+versions¢
+/builtins.list[Tuple[builtins.int,builtins.int]]`
+ Tuple[builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int"builtins.list ‹
+skipCUDAIfVersionLessThanDtorch.testing._internal.common_device_type.skipCUDAIfVersionLessThan"
+Any*p
+versions`
+ Tuple[builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int z
+skipCUDAIfCudnnVersionLessThanItorch.testing._internal.common_device_type.skipCUDAIfCudnnVersionLessThan*
+version m
+skipCUDAIfNoCusparseGenericFtorch.testing._internal.common_device_type.skipCUDAIfNoCusparseGeneric*
+fno
+skipCUDAIfNoHipsparseGenericGtorch.testing._internal.common_device_type.skipCUDAIfNoHipsparseGeneric*
+fni
+skipCUDAIfNoSparseGenericDtorch.testing._internal.common_device_type.skipCUDAIfNoSparseGeneric*
+fnY
+skipCUDAIfNoCudnn<torch.testing._internal.common_device_type.skipCUDAIfNoCudnn*
+fnW
+skipCUDAIfMiopen;torch.testing._internal.common_device_type.skipCUDAIfMiopen*
+fn[
+skipCUDAIfNoMiopen=torch.testing._internal.common_device_type.skipCUDAIfNoMiopen*
+fnG
+skipLazy3torch.testing._internal.common_device_type.skipLazy*
+fnG
+skipMeta3torch.testing._internal.common_device_type.skipMeta*
+fnE
+skipXLA2torch.testing._internal.common_device_type.skipXLA*
+fnE
+skipMPS2torch.testing._internal.common_device_type.skipMPS*
+fnU
+skipPRIVATEUSE1:torch.testing._internal.common_device_type.skipPRIVATEUSE1*
+fn£
+get_all_device_types?torch.testing._internal.common_device_type.get_all_device_types"J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*¶
+__annotations__:torch.testing._internal.common_device_type.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*T
+TEST_WITH_ROCM9torch.testing._internal.common_device_type.TEST_WITH_ROCM
+Any*T
+TEST_WITH_ASAN9torch.testing._internal.common_device_type.TEST_WITH_ASAN
+Any*V
+TEST_WITH_UBSAN:torch.testing._internal.common_device_type.TEST_WITH_UBSAN
+Any*T
+TEST_WITH_TSAN9torch.testing._internal.common_device_type.TEST_WITH_TSAN
+Any*R
+IS_SANDCASTLE8torch.testing._internal.common_device_type.IS_SANDCASTLE
+Any*J
+	IS_FBCODE4torch.testing._internal.common_device_type.IS_FBCODE
+Any*R
+IS_REMOTE_GPU8torch.testing._internal.common_device_type.IS_REMOTE_GPU
+Any*d
+PRINT_REPRO_ON_FAILUREAtorch.testing._internal.common_device_type.PRINT_REPRO_ON_FAILURE
+Any*f
+TEST_WITH_TORCHINDUCTORBtorch.testing._internal.common_device_type.TEST_WITH_TORCHINDUCTOR
+Any*D
+psutil1torch.testing._internal.common_device_type.psutil
+Any*c
+
+HAS_PSUTIL5torch.testing._internal.common_device_type.HAS_PSUTIL
+builtins.bool"builtins.bool*w
+lazy_ts_backend_init?torch.testing._internal.common_device_type.lazy_ts_backend_init
+builtins.bool"builtins.bool*d
+device_type_test_basesAtorch.testing._internal.common_device_type.device_type_test_bases
+Any*õ
+_TORCH_TEST_DEVICES>torch.testing._internal.common_device_type._TORCH_TEST_DEVICESD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*U
+path/torch.testing._internal.common_device_type.path
+builtins.str"builtins.str*é
+mod.torch.testing._internal.common_device_type.modW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*y
+PYTORCH_CUDA_MEMCHECK@torch.testing._internal.common_device_type.PYTORCH_CUDA_MEMCHECK
+builtins.bool"builtins.bool*ì
+#PYTORCH_TESTING_DEVICE_ONLY_FOR_KEYNtorch.testing._internal.common_device_type.PYTORCH_TESTING_DEVICE_ONLY_FOR_KEY
+builtins.str"builtins.str*ó
+%PYTORCH_TESTING_DEVICE_EXCEPT_FOR_KEYPtorch.testing._internal.common_device_type.PYTORCH_TESTING_DEVICE_EXCEPT_FOR_KEY
+builtins.str"builtins.str*ó
+%PYTORCH_TESTING_DEVICE_FOR_CUSTOM_KEYPtorch.testing._internal.common_device_type.PYTORCH_TESTING_DEVICE_FOR_CUSTOM_KEY
+builtins.str"builtins.str*ß
+ANY_DTYPE_ORDER:torch.testing._internal.common_device_type.ANY_DTYPE_ORDER◊
+∫Tuple[torch._C.dtype,torch._C.dtype,torch._C.dtype,torch._C.dtype,torch._C.dtype,torch._C.dtype,torch._C.dtype,torch._C.dtype,torch._C.dtype,torch._C.dtype,torch._C.dtype,torch._C.dtype] 
+torch._C.dtype"torch._C.dtype 
+torch._C.dtype"torch._C.dtype 
+torch._C.dtype"torch._C.dtype 
+torch._C.dtype"torch._C.dtype 
+torch._C.dtype"torch._C.dtype 
+torch._C.dtype"torch._C.dtype 
+torch._C.dtype"torch._C.dtype 
+torch._C.dtype"torch._C.dtype 
+torch._C.dtype"torch._C.dtype 
+torch._C.dtype"torch._C.dtype 
+torch._C.dtype"torch._C.dtype 
+torch._C.dtype"torch._C.dtype

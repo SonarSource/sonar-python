@@ -1,0 +1,793 @@
+
+torch._inductor.runtime.hints¿
+ReductionHint+torch._inductor.runtime.hints.ReductionHint"	enum.EnumHrX
+INNER1torch._inductor.runtime.hints.ReductionHint.INNER
+builtins.int"builtins.intrX
+OUTER1torch._inductor.runtime.hints.ReductionHint.OUTER
+builtins.int"builtins.intrb
+
+OUTER_TINY6torch._inductor.runtime.hints.ReductionHint.OUTER_TINY
+builtins.int"builtins.intr\
+DEFAULT3torch._inductor.runtime.hints.ReductionHint.DEFAULT
+builtins.int"builtins.intï
+TileHint&torch._inductor.runtime.hints.TileHint"	enum.EnumHrU
+SQUARE-torch._inductor.runtime.hints.TileHint.SQUARE
+builtins.int"builtins.intrW
+DEFAULT.torch._inductor.runtime.hints.TileHint.DEFAULT
+builtins.int"builtins.intÊ
+ instance_descriptor-redefinition1torch._inductor.runtime.hints.instance_descriptor"builtins.tuple*Å
+_replace:torch._inductor.runtime.hints.instance_descriptor._replace"y
+5torch._inductor.runtime.hints.instance_descriptor._NT>
+Tuple[Any,Any,Any,Any]
+Any
+Any
+Any
+Any*„
+_selfy
+5torch._inductor.runtime.hints.instance_descriptor._NT>
+Tuple[Any,Any,Any,Any]
+Any
+Any
+Any
+Any*
+divisible_by_16
+Any *
+
+equal_to_1
+Any *!
+ids_of_folded_args
+Any *
+divisible_by_8
+Any *Š
+__new__9torch._inductor.runtime.hints.instance_descriptor.__new__"y
+5torch._inductor.runtime.hints.instance_descriptor._NT>
+Tuple[Any,Any,Any,Any]
+Any
+Any
+Any
+Any*Ë
+_clsÀ
+;Type[torch._inductor.runtime.hints.instance_descriptor._NT]y
+5torch._inductor.runtime.hints.instance_descriptor._NT>
+Tuple[Any,Any,Any,Any]
+Any
+Any
+Any
+Any"type*
+divisible_by_16
+Any *
+
+equal_to_1
+Any *!
+ids_of_folded_args
+Any *
+divisible_by_8
+Any *¤
+_asdict9torch._inductor.runtime.hints.instance_descriptor._asdict"W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*„
+_selfy
+5torch._inductor.runtime.hints.instance_descriptor._NT>
+Tuple[Any,Any,Any,Any]
+Any
+Any
+Any
+Any*‚
+_make7torch._inductor.runtime.hints.instance_descriptor._make"y
+5torch._inductor.runtime.hints.instance_descriptor._NT>
+Tuple[Any,Any,Any,Any]
+Any
+Any
+Any
+Any*Ë
+_clsÀ
+;Type[torch._inductor.runtime.hints.instance_descriptor._NT]y
+5torch._inductor.runtime.hints.instance_descriptor._NT>
+Tuple[Any,Any,Any,Any]
+Any
+Any
+Any
+Any"type*>
+iterable0
+typing.Iterable[Any]
+Any"typing.Iterable*
+new
+Any *
+len
+Any 0:classmethodpr]
+divisible_by_16Atorch._inductor.runtime.hints.instance_descriptor.divisible_by_16
+AnyrS
+
+equal_to_1<torch._inductor.runtime.hints.instance_descriptor.equal_to_1
+Anyrc
+ids_of_folded_argsDtorch._inductor.runtime.hints.instance_descriptor.ids_of_folded_args
+Anyr[
+divisible_by_8@torch._inductor.runtime.hints.instance_descriptor.divisible_by_8
+Anyrý
+_fields9torch._inductor.runtime.hints.instance_descriptor._fields¶
+:Tuple[builtins.str,builtins.str,builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str
+builtins.str"builtins.str
+builtins.str"builtins.strr§
+_field_types>torch._inductor.runtime.hints.instance_descriptor._field_typesW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dictr­
+_field_defaultsAtorch._inductor.runtime.hints.instance_descriptor._field_defaultsW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dictrb
+_source9torch._inductor.runtime.hints.instance_descriptor._source
+builtins.str"builtins.strr­
+__annotations__Atorch._inductor.runtime.hints.instance_descriptor.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+HeuristicType+torch._inductor.runtime.hints.HeuristicType"	enum.EnumHrp
+PERSISTENT_REDUCTION@torch._inductor.runtime.hints.HeuristicType.PERSISTENT_REDUCTION
+	enum.auto"	enum.autorZ
+	POINTWISE5torch._inductor.runtime.hints.HeuristicType.POINTWISE
+	enum.auto"	enum.autorZ
+	REDUCTION5torch._inductor.runtime.hints.HeuristicType.REDUCTION
+	enum.auto"	enum.autor\
+
+SPLIT_SCAN6torch._inductor.runtime.hints.HeuristicType.SPLIT_SCAN
+	enum.auto"	enum.autorX
+TEMPLATE4torch._inductor.runtime.hints.HeuristicType.TEMPLATE
+	enum.auto"	enum.autorb
+USER_AUTOTUNE9torch._inductor.runtime.hints.HeuristicType.USER_AUTOTUNE
+	enum.auto"	enum.autoÍ
+AutotuneHint*torch._inductor.runtime.hints.AutotuneHint"	enum.EnumHru
+ELEMENTS_PER_WARP_32?torch._inductor.runtime.hints.AutotuneHint.ELEMENTS_PER_WARP_32
+builtins.int"builtins.intrŒ
+__repr__3torch._inductor.runtime.hints.AutotuneHint.__repr__K
+CallableType[builtins.function]&
+builtins.function"builtins.functionÏD
+DeviceProperties.torch._inductor.runtime.hints.DeviceProperties"builtins.tuple*e
+create5torch._inductor.runtime.hints.DeviceProperties.create*
+cls*
+
+device0:classmethodp*Ü
+_replace7torch._inductor.runtime.hints.DeviceProperties._replace"Á
+2torch._inductor.runtime.hints.DeviceProperties._NTˆ
+‘Tuple[builtins.str,builtins.int,builtins.int,Union[builtins.int,None],Union[builtins.int,None],Union[builtins.int,None],Union[builtins.int,None]]
+builtins.str"builtins.str
+builtins.int"builtins.int
+builtins.int"builtins.intD
+Union[builtins.int,None]
+builtins.int"builtins.int
+NoneD
+Union[builtins.int,None]
+builtins.int"builtins.int
+NoneD
+Union[builtins.int,None]
+builtins.int"builtins.int
+NoneD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None*Í
+_selfÁ
+2torch._inductor.runtime.hints.DeviceProperties._NTˆ
+‘Tuple[builtins.str,builtins.int,builtins.int,Union[builtins.int,None],Union[builtins.int,None],Union[builtins.int,None],Union[builtins.int,None]]
+builtins.str"builtins.str
+builtins.int"builtins.int
+builtins.int"builtins.intD
+Union[builtins.int,None]
+builtins.int"builtins.int
+NoneD
+Union[builtins.int,None]
+builtins.int"builtins.int
+NoneD
+Union[builtins.int,None]
+builtins.int"builtins.int
+NoneD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None*(
+type
+builtins.str"builtins.str *)
+index
+builtins.int"builtins.int *&
+cc
+builtins.int"builtins.int *Q
+majorD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *c
+regs_per_multiprocessorD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *k
+max_threads_per_multi_processorD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *a
+multi_processor_countD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *˜
+__new__6torch._inductor.runtime.hints.DeviceProperties.__new__"Á
+2torch._inductor.runtime.hints.DeviceProperties._NTˆ
+‘Tuple[builtins.str,builtins.int,builtins.int,Union[builtins.int,None],Union[builtins.int,None],Union[builtins.int,None],Union[builtins.int,None]]
+builtins.str"builtins.str
+builtins.int"builtins.int
+builtins.int"builtins.intD
+Union[builtins.int,None]
+builtins.int"builtins.int
+NoneD
+Union[builtins.int,None]
+builtins.int"builtins.int
+NoneD
+Union[builtins.int,None]
+builtins.int"builtins.int
+NoneD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None*‘
+_cls†
+8Type[torch._inductor.runtime.hints.DeviceProperties._NT]Á
+2torch._inductor.runtime.hints.DeviceProperties._NTˆ
+‘Tuple[builtins.str,builtins.int,builtins.int,Union[builtins.int,None],Union[builtins.int,None],Union[builtins.int,None],Union[builtins.int,None]]
+builtins.str"builtins.str
+builtins.int"builtins.int
+builtins.int"builtins.intD
+Union[builtins.int,None]
+builtins.int"builtins.int
+NoneD
+Union[builtins.int,None]
+builtins.int"builtins.int
+NoneD
+Union[builtins.int,None]
+builtins.int"builtins.int
+NoneD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None"type*&
+type
+builtins.str"builtins.str*'
+index
+builtins.int"builtins.int*$
+cc
+builtins.int"builtins.int*Q
+majorD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *c
+regs_per_multiprocessorD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *k
+max_threads_per_multi_processorD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *a
+multi_processor_countD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *ê
+_asdict6torch._inductor.runtime.hints.DeviceProperties._asdict"W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*Í
+_selfÁ
+2torch._inductor.runtime.hints.DeviceProperties._NTˆ
+‘Tuple[builtins.str,builtins.int,builtins.int,Union[builtins.int,None],Union[builtins.int,None],Union[builtins.int,None],Union[builtins.int,None]]
+builtins.str"builtins.str
+builtins.int"builtins.int
+builtins.int"builtins.intD
+Union[builtins.int,None]
+builtins.int"builtins.int
+NoneD
+Union[builtins.int,None]
+builtins.int"builtins.int
+NoneD
+Union[builtins.int,None]
+builtins.int"builtins.int
+NoneD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None*Ž
+_make4torch._inductor.runtime.hints.DeviceProperties._make"Á
+2torch._inductor.runtime.hints.DeviceProperties._NTˆ
+‘Tuple[builtins.str,builtins.int,builtins.int,Union[builtins.int,None],Union[builtins.int,None],Union[builtins.int,None],Union[builtins.int,None]]
+builtins.str"builtins.str
+builtins.int"builtins.int
+builtins.int"builtins.intD
+Union[builtins.int,None]
+builtins.int"builtins.int
+NoneD
+Union[builtins.int,None]
+builtins.int"builtins.int
+NoneD
+Union[builtins.int,None]
+builtins.int"builtins.int
+NoneD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None*‘
+_cls†
+8Type[torch._inductor.runtime.hints.DeviceProperties._NT]Á
+2torch._inductor.runtime.hints.DeviceProperties._NTˆ
+‘Tuple[builtins.str,builtins.int,builtins.int,Union[builtins.int,None],Union[builtins.int,None],Union[builtins.int,None],Union[builtins.int,None]]
+builtins.str"builtins.str
+builtins.int"builtins.int
+builtins.int"builtins.intD
+Union[builtins.int,None]
+builtins.int"builtins.int
+NoneD
+Union[builtins.int,None]
+builtins.int"builtins.int
+NoneD
+Union[builtins.int,None]
+builtins.int"builtins.int
+NoneD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None"type*>
+iterable0
+typing.Iterable[Any]
+Any"typing.Iterable*
+new
+Any *
+len
+Any 0:classmethodprY
+type3torch._inductor.runtime.hints.DeviceProperties.type
+builtins.str"builtins.strr[
+index4torch._inductor.runtime.hints.DeviceProperties.index
+builtins.int"builtins.intrU
+cc1torch._inductor.runtime.hints.DeviceProperties.cc
+builtins.int"builtins.intrƒ
+major4torch._inductor.runtime.hints.DeviceProperties.majorD
+Union[builtins.int,None]
+builtins.int"builtins.int
+Noner§
+regs_per_multiprocessorFtorch._inductor.runtime.hints.DeviceProperties.regs_per_multiprocessorD
+Union[builtins.int,None]
+builtins.int"builtins.int
+Noner·
+max_threads_per_multi_processorNtorch._inductor.runtime.hints.DeviceProperties.max_threads_per_multi_processorD
+Union[builtins.int,None]
+builtins.int"builtins.int
+Noner£
+multi_processor_countDtorch._inductor.runtime.hints.DeviceProperties.multi_processor_countD
+Union[builtins.int,None]
+builtins.int"builtins.int
+NonerY
+type3torch._inductor.runtime.hints.DeviceProperties.type
+builtins.str"builtins.strr[
+index4torch._inductor.runtime.hints.DeviceProperties.index
+builtins.int"builtins.intrU
+cc1torch._inductor.runtime.hints.DeviceProperties.cc
+builtins.int"builtins.intrƒ
+major4torch._inductor.runtime.hints.DeviceProperties.majorD
+Union[builtins.int,None]
+builtins.int"builtins.int
+Noner§
+regs_per_multiprocessorFtorch._inductor.runtime.hints.DeviceProperties.regs_per_multiprocessorD
+Union[builtins.int,None]
+builtins.int"builtins.int
+Noner·
+max_threads_per_multi_processorNtorch._inductor.runtime.hints.DeviceProperties.max_threads_per_multi_processorD
+Union[builtins.int,None]
+builtins.int"builtins.int
+Noner£
+multi_processor_countDtorch._inductor.runtime.hints.DeviceProperties.multi_processor_countD
+Union[builtins.int,None]
+builtins.int"builtins.int
+Nonerû
+_fields6torch._inductor.runtime.hints.DeviceProperties._fields·
+aTuple[builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str
+builtins.str"builtins.str
+builtins.str"builtins.str
+builtins.str"builtins.str
+builtins.str"builtins.str
+builtins.str"builtins.strr¤
+_field_types;torch._inductor.runtime.hints.DeviceProperties._field_typesW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dictrª
+_field_defaults>torch._inductor.runtime.hints.DeviceProperties._field_defaultsW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dictr_
+_source6torch._inductor.runtime.hints.DeviceProperties._source
+builtins.str"builtins.strrª
+__annotations__>torch._inductor.runtime.hints.DeviceProperties.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dictÕ"
+HalideInputSpec-torch._inductor.runtime.hints.HalideInputSpec"builtins.tuple*V
+bindings_type;torch._inductor.runtime.hints.HalideInputSpec.bindings_type*
+self*R
+halide_type9torch._inductor.runtime.hints.HalideInputSpec.halide_type*
+self*ê
+_replace6torch._inductor.runtime.hints.HalideInputSpec._replace"÷
+1torch._inductor.runtime.hints.HalideInputSpec._NT¿
+9Tuple[builtins.str,builtins.str,Union[builtins.str,None]]
+builtins.str"builtins.str
+builtins.str"builtins.strD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*ƒ
+_self÷
+1torch._inductor.runtime.hints.HalideInputSpec._NT¿
+9Tuple[builtins.str,builtins.str,Union[builtins.str,None]]
+builtins.str"builtins.str
+builtins.str"builtins.strD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*)
+ctype
+builtins.str"builtins.str *(
+name
+builtins.str"builtins.str *Q
+numelD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *§
+__new__5torch._inductor.runtime.hints.HalideInputSpec.__new__"÷
+1torch._inductor.runtime.hints.HalideInputSpec._NT¿
+9Tuple[builtins.str,builtins.str,Union[builtins.str,None]]
+builtins.str"builtins.str
+builtins.str"builtins.strD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*Æ
+_cls»
+7Type[torch._inductor.runtime.hints.HalideInputSpec._NT]÷
+1torch._inductor.runtime.hints.HalideInputSpec._NT¿
+9Tuple[builtins.str,builtins.str,Union[builtins.str,None]]
+builtins.str"builtins.str
+builtins.str"builtins.strD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None"type*'
+ctype
+builtins.str"builtins.str*&
+name
+builtins.str"builtins.str*Q
+numelD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *Ÿ
+_asdict5torch._inductor.runtime.hints.HalideInputSpec._asdict"W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*ƒ
+_self÷
+1torch._inductor.runtime.hints.HalideInputSpec._NT¿
+9Tuple[builtins.str,builtins.str,Union[builtins.str,None]]
+builtins.str"builtins.str
+builtins.str"builtins.strD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*ø
+_make3torch._inductor.runtime.hints.HalideInputSpec._make"÷
+1torch._inductor.runtime.hints.HalideInputSpec._NT¿
+9Tuple[builtins.str,builtins.str,Union[builtins.str,None]]
+builtins.str"builtins.str
+builtins.str"builtins.strD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*Æ
+_cls»
+7Type[torch._inductor.runtime.hints.HalideInputSpec._NT]÷
+1torch._inductor.runtime.hints.HalideInputSpec._NT¿
+9Tuple[builtins.str,builtins.str,Union[builtins.str,None]]
+builtins.str"builtins.str
+builtins.str"builtins.strD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None"type*>
+iterable0
+typing.Iterable[Any]
+Any"typing.Iterable*
+new
+Any *
+len
+Any 0:classmethodprZ
+ctype3torch._inductor.runtime.hints.HalideInputSpec.ctype
+builtins.str"builtins.strrX
+name2torch._inductor.runtime.hints.HalideInputSpec.name
+builtins.str"builtins.strr‚
+numel3torch._inductor.runtime.hints.HalideInputSpec.numelD
+Union[builtins.str,None]
+builtins.str"builtins.str
+NonerZ
+ctype3torch._inductor.runtime.hints.HalideInputSpec.ctype
+builtins.str"builtins.strrX
+name2torch._inductor.runtime.hints.HalideInputSpec.name
+builtins.str"builtins.strr‚
+numel3torch._inductor.runtime.hints.HalideInputSpec.numelD
+Union[builtins.str,None]
+builtins.str"builtins.str
+NonerÎ
+_fields5torch._inductor.runtime.hints.HalideInputSpec._fields‹
+-Tuple[builtins.str,builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str
+builtins.str"builtins.strr£
+_field_types:torch._inductor.runtime.hints.HalideInputSpec._field_typesW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dictr©
+_field_defaults=torch._inductor.runtime.hints.HalideInputSpec._field_defaultsW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dictr^
+_source5torch._inductor.runtime.hints.HalideInputSpec._source
+builtins.str"builtins.strr©
+__annotations__=torch._inductor.runtime.hints.HalideInputSpec.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dictÑY
+
+HalideMeta(torch._inductor.runtime.hints.HalideMeta"builtins.tuple*?
+args-torch._inductor.runtime.hints.HalideMeta.args*
+self*ö
+_replace1torch._inductor.runtime.hints.HalideMeta._replace"˜
+,torch._inductor.runtime.hints.HalideMeta._NTå
+±Tuple[builtins.list[TypeAlias[Tuple[builtins.str,builtins.str,Union[builtins.str,None]]]],builtins.str,builtins.str,builtins.dict[builtins.str,Union[builtins.int,builtins.str]]] 
+Sbuiltins.list[TypeAlias[Tuple[builtins.str,builtins.str,Union[builtins.str,None]]]]¹
+DTypeAlias[Tuple[builtins.str,builtins.str,Union[builtins.str,None]]]¿
+9Tuple[builtins.str,builtins.str,Union[builtins.str,None]]
+builtins.str"builtins.str
+builtins.str"builtins.strD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None"-torch._inductor.runtime.hints.HalideInputSpec"builtins.list
+builtins.str"builtins.str
+builtins.str"builtins.strÍ
+<builtins.dict[builtins.str,Union[builtins.int,builtins.str]]
+builtins.str"builtins.str`
+ Union[builtins.int,builtins.str]
+builtins.int"builtins.int
+builtins.str"builtins.str"builtins.dict*¤
+_self˜
+,torch._inductor.runtime.hints.HalideMeta._NTå
+±Tuple[builtins.list[TypeAlias[Tuple[builtins.str,builtins.str,Union[builtins.str,None]]]],builtins.str,builtins.str,builtins.dict[builtins.str,Union[builtins.int,builtins.str]]] 
+Sbuiltins.list[TypeAlias[Tuple[builtins.str,builtins.str,Union[builtins.str,None]]]]¹
+DTypeAlias[Tuple[builtins.str,builtins.str,Union[builtins.str,None]]]¿
+9Tuple[builtins.str,builtins.str,Union[builtins.str,None]]
+builtins.str"builtins.str
+builtins.str"builtins.strD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None"-torch._inductor.runtime.hints.HalideInputSpec"builtins.list
+builtins.str"builtins.str
+builtins.str"builtins.strÍ
+<builtins.dict[builtins.str,Union[builtins.int,builtins.str]]
+builtins.str"builtins.str`
+ Union[builtins.int,builtins.str]
+builtins.int"builtins.int
+builtins.str"builtins.str"builtins.dict*±
+argtypes 
+Sbuiltins.list[TypeAlias[Tuple[builtins.str,builtins.str,Union[builtins.str,None]]]]¹
+DTypeAlias[Tuple[builtins.str,builtins.str,Union[builtins.str,None]]]¿
+9Tuple[builtins.str,builtins.str,Union[builtins.str,None]]
+builtins.str"builtins.str
+builtins.str"builtins.strD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None"-torch._inductor.runtime.hints.HalideInputSpec"builtins.list **
+target
+builtins.str"builtins.str *-
+	scheduler
+builtins.str"builtins.str *å
+scheduler_flagsÍ
+<builtins.dict[builtins.str,Union[builtins.int,builtins.str]]
+builtins.str"builtins.str`
+ Union[builtins.int,builtins.str]
+builtins.int"builtins.int
+builtins.str"builtins.str"builtins.dict *ª
+__new__0torch._inductor.runtime.hints.HalideMeta.__new__"˜
+,torch._inductor.runtime.hints.HalideMeta._NTå
+±Tuple[builtins.list[TypeAlias[Tuple[builtins.str,builtins.str,Union[builtins.str,None]]]],builtins.str,builtins.str,builtins.dict[builtins.str,Union[builtins.int,builtins.str]]] 
+Sbuiltins.list[TypeAlias[Tuple[builtins.str,builtins.str,Union[builtins.str,None]]]]¹
+DTypeAlias[Tuple[builtins.str,builtins.str,Union[builtins.str,None]]]¿
+9Tuple[builtins.str,builtins.str,Union[builtins.str,None]]
+builtins.str"builtins.str
+builtins.str"builtins.strD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None"-torch._inductor.runtime.hints.HalideInputSpec"builtins.list
+builtins.str"builtins.str
+builtins.str"builtins.strÍ
+<builtins.dict[builtins.str,Union[builtins.int,builtins.str]]
+builtins.str"builtins.str`
+ Union[builtins.int,builtins.str]
+builtins.int"builtins.int
+builtins.str"builtins.str"builtins.dict*â
+_cls×
+2Type[torch._inductor.runtime.hints.HalideMeta._NT]˜
+,torch._inductor.runtime.hints.HalideMeta._NTå
+±Tuple[builtins.list[TypeAlias[Tuple[builtins.str,builtins.str,Union[builtins.str,None]]]],builtins.str,builtins.str,builtins.dict[builtins.str,Union[builtins.int,builtins.str]]] 
+Sbuiltins.list[TypeAlias[Tuple[builtins.str,builtins.str,Union[builtins.str,None]]]]¹
+DTypeAlias[Tuple[builtins.str,builtins.str,Union[builtins.str,None]]]¿
+9Tuple[builtins.str,builtins.str,Union[builtins.str,None]]
+builtins.str"builtins.str
+builtins.str"builtins.strD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None"-torch._inductor.runtime.hints.HalideInputSpec"builtins.list
+builtins.str"builtins.str
+builtins.str"builtins.strÍ
+<builtins.dict[builtins.str,Union[builtins.int,builtins.str]]
+builtins.str"builtins.str`
+ Union[builtins.int,builtins.str]
+builtins.int"builtins.int
+builtins.str"builtins.str"builtins.dict"type*¯
+argtypes 
+Sbuiltins.list[TypeAlias[Tuple[builtins.str,builtins.str,Union[builtins.str,None]]]]¹
+DTypeAlias[Tuple[builtins.str,builtins.str,Union[builtins.str,None]]]¿
+9Tuple[builtins.str,builtins.str,Union[builtins.str,None]]
+builtins.str"builtins.str
+builtins.str"builtins.strD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None"-torch._inductor.runtime.hints.HalideInputSpec"builtins.list*(
+target
+builtins.str"builtins.str*+
+	scheduler
+builtins.str"builtins.str*ã
+scheduler_flagsÍ
+<builtins.dict[builtins.str,Union[builtins.int,builtins.str]]
+builtins.str"builtins.str`
+ Union[builtins.int,builtins.str]
+builtins.int"builtins.int
+builtins.str"builtins.str"builtins.dict*»
+_asdict0torch._inductor.runtime.hints.HalideMeta._asdict"W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*¤
+_self˜
+,torch._inductor.runtime.hints.HalideMeta._NTå
+±Tuple[builtins.list[TypeAlias[Tuple[builtins.str,builtins.str,Union[builtins.str,None]]]],builtins.str,builtins.str,builtins.dict[builtins.str,Union[builtins.int,builtins.str]]] 
+Sbuiltins.list[TypeAlias[Tuple[builtins.str,builtins.str,Union[builtins.str,None]]]]¹
+DTypeAlias[Tuple[builtins.str,builtins.str,Union[builtins.str,None]]]¿
+9Tuple[builtins.str,builtins.str,Union[builtins.str,None]]
+builtins.str"builtins.str
+builtins.str"builtins.strD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None"-torch._inductor.runtime.hints.HalideInputSpec"builtins.list
+builtins.str"builtins.str
+builtins.str"builtins.strÍ
+<builtins.dict[builtins.str,Union[builtins.int,builtins.str]]
+builtins.str"builtins.str`
+ Union[builtins.int,builtins.str]
+builtins.int"builtins.int
+builtins.str"builtins.str"builtins.dict*°
+_make.torch._inductor.runtime.hints.HalideMeta._make"˜
+,torch._inductor.runtime.hints.HalideMeta._NTå
+±Tuple[builtins.list[TypeAlias[Tuple[builtins.str,builtins.str,Union[builtins.str,None]]]],builtins.str,builtins.str,builtins.dict[builtins.str,Union[builtins.int,builtins.str]]] 
+Sbuiltins.list[TypeAlias[Tuple[builtins.str,builtins.str,Union[builtins.str,None]]]]¹
+DTypeAlias[Tuple[builtins.str,builtins.str,Union[builtins.str,None]]]¿
+9Tuple[builtins.str,builtins.str,Union[builtins.str,None]]
+builtins.str"builtins.str
+builtins.str"builtins.strD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None"-torch._inductor.runtime.hints.HalideInputSpec"builtins.list
+builtins.str"builtins.str
+builtins.str"builtins.strÍ
+<builtins.dict[builtins.str,Union[builtins.int,builtins.str]]
+builtins.str"builtins.str`
+ Union[builtins.int,builtins.str]
+builtins.int"builtins.int
+builtins.str"builtins.str"builtins.dict*â
+_cls×
+2Type[torch._inductor.runtime.hints.HalideMeta._NT]˜
+,torch._inductor.runtime.hints.HalideMeta._NTå
+±Tuple[builtins.list[TypeAlias[Tuple[builtins.str,builtins.str,Union[builtins.str,None]]]],builtins.str,builtins.str,builtins.dict[builtins.str,Union[builtins.int,builtins.str]]] 
+Sbuiltins.list[TypeAlias[Tuple[builtins.str,builtins.str,Union[builtins.str,None]]]]¹
+DTypeAlias[Tuple[builtins.str,builtins.str,Union[builtins.str,None]]]¿
+9Tuple[builtins.str,builtins.str,Union[builtins.str,None]]
+builtins.str"builtins.str
+builtins.str"builtins.strD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None"-torch._inductor.runtime.hints.HalideInputSpec"builtins.list
+builtins.str"builtins.str
+builtins.str"builtins.strÍ
+<builtins.dict[builtins.str,Union[builtins.int,builtins.str]]
+builtins.str"builtins.str`
+ Union[builtins.int,builtins.str]
+builtins.int"builtins.int
+builtins.str"builtins.str"builtins.dict"type*>
+iterable0
+typing.Iterable[Any]
+Any"typing.Iterable*
+new
+Any *
+len
+Any 0:classmethodprà
+argtypes1torch._inductor.runtime.hints.HalideMeta.argtypes 
+Sbuiltins.list[TypeAlias[Tuple[builtins.str,builtins.str,Union[builtins.str,None]]]]¹
+DTypeAlias[Tuple[builtins.str,builtins.str,Union[builtins.str,None]]]¿
+9Tuple[builtins.str,builtins.str,Union[builtins.str,None]]
+builtins.str"builtins.str
+builtins.str"builtins.strD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None"-torch._inductor.runtime.hints.HalideInputSpec"builtins.listrW
+target/torch._inductor.runtime.hints.HalideMeta.target
+builtins.str"builtins.strr]
+	scheduler2torch._inductor.runtime.hints.HalideMeta.scheduler
+builtins.str"builtins.strr›
+scheduler_flags8torch._inductor.runtime.hints.HalideMeta.scheduler_flagsÍ
+<builtins.dict[builtins.str,Union[builtins.int,builtins.str]]
+builtins.str"builtins.str`
+ Union[builtins.int,builtins.str]
+builtins.int"builtins.int
+builtins.str"builtins.str"builtins.dictrà
+argtypes1torch._inductor.runtime.hints.HalideMeta.argtypes 
+Sbuiltins.list[TypeAlias[Tuple[builtins.str,builtins.str,Union[builtins.str,None]]]]¹
+DTypeAlias[Tuple[builtins.str,builtins.str,Union[builtins.str,None]]]¿
+9Tuple[builtins.str,builtins.str,Union[builtins.str,None]]
+builtins.str"builtins.str
+builtins.str"builtins.strD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None"-torch._inductor.runtime.hints.HalideInputSpec"builtins.listrW
+target/torch._inductor.runtime.hints.HalideMeta.target
+builtins.str"builtins.strr]
+	scheduler2torch._inductor.runtime.hints.HalideMeta.scheduler
+builtins.str"builtins.strr›
+scheduler_flags8torch._inductor.runtime.hints.HalideMeta.scheduler_flagsÍ
+<builtins.dict[builtins.str,Union[builtins.int,builtins.str]]
+builtins.str"builtins.str`
+ Union[builtins.int,builtins.str]
+builtins.int"builtins.int
+builtins.str"builtins.str"builtins.dictrô
+_fields0torch._inductor.runtime.hints.HalideMeta._fields¶
+:Tuple[builtins.str,builtins.str,builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str
+builtins.str"builtins.str
+builtins.str"builtins.strrž
+_field_types5torch._inductor.runtime.hints.HalideMeta._field_typesW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dictr¤
+_field_defaults8torch._inductor.runtime.hints.HalideMeta._field_defaultsW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dictrY
+_source0torch._inductor.runtime.hints.HalideMeta._source
+builtins.str"builtins.strr¤
+__annotations__8torch._inductor.runtime.hints.HalideMeta.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict¡
+instance_descriptor1torch._inductor.runtime.hints.instance_descriptor*
+divisible_by_16 *
+
+equal_to_1 *
+ids_of_folded_args *
+divisible_by_8 *™
+__annotations__-torch._inductor.runtime.hints.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*¹
+TRITON_MAX_BLOCK.torch._inductor.runtime.hints.TRITON_MAX_BLOCKu
+(builtins.dict[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int"builtins.dict*I
+AttrsDescriptor-torch._inductor.runtime.hints.AttrsDescriptor
+Any*v
+attrs_descriptor_available8torch._inductor.runtime.hints.attrs_descriptor_available
+builtins.bool"builtins.bool*Œ
+attr_desc_fields.torch._inductor.runtime.hints.attr_desc_fieldsH
+builtins.set[builtins.str]
+builtins.str"builtins.str"builtins.set*z
+ids_of_folded_args_available:torch._inductor.runtime.hints.ids_of_folded_args_available
+builtins.bool"builtins.bool*r
+divisible_by_8_available6torch._inductor.runtime.hints.divisible_by_8_available
+builtins.bool"builtins.bool*j
+_NUM_THREADS_PER_WARP3torch._inductor.runtime.hints._NUM_THREADS_PER_WARP
+builtins.int"builtins.int

@@ -1,0 +1,137 @@
+
+&torch.distributed._shard.sharding_specí
+DevicePlacementSpec>torch.distributed._shard.sharding_spec.api.DevicePlacementSpec"8torch.distributed._shard.sharding_spec.api.PlacementSpec*g
+__post_init__Ltorch.distributed._shard.sharding_spec.api.DevicePlacementSpec.__post_init__*
+self*Ÿ
+__init__Gtorch.distributed._shard.sharding_spec.api.DevicePlacementSpec.__init__"
+None*ã
+selfÄ
+>torch.distributed._shard.sharding_spec.api.DevicePlacementSpec">torch.distributed._shard.sharding_spec.api.DevicePlacementSpec*l
+device`
+.torch.distributed.remote_device._remote_device".torch.distributed.remote_device._remote_device8r±
+deviceEtorch.distributed._shard.sharding_spec.api.DevicePlacementSpec.device`
+.torch.distributed.remote_device._remote_device".torch.distributed.remote_device._remote_devicerÖ
+__dataclass_fields__Storch.distributed._shard.sharding_spec.api.DevicePlacementSpec.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictñ
+EnumerableShardingSpecAtorch.distributed._shard.sharding_spec.api.EnumerableShardingSpec"7torch.distributed._shard.sharding_spec.api.ShardingSpec*j
+__post_init__Otorch.distributed._shard.sharding_spec.api.EnumerableShardingSpec.__post_init__*
+self*‹
+build_metadataPtorch.distributed._shard.sharding_spec.api.EnumerableShardingSpec.build_metadata"ê
+Ftorch.distributed._shard.sharded_tensor.metadata.ShardedTensorMetadata"Ftorch.distributed._shard.sharded_tensor.metadata.ShardedTensorMetadata*ë
+selfÜ
+Atorch.distributed._shard.sharding_spec.api.EnumerableShardingSpec"Atorch.distributed._shard.sharding_spec.api.EnumerableShardingSpec*0
+tensor_sizes
+torch._C.Size"torch._C.Size*û
+tensor_propertiesÜ
+Atorch.distributed._shard.sharded_tensor.metadata.TensorProperties"Atorch.distributed._shard.sharded_tensor.metadata.TensorProperties*‚
+shardGtorch.distributed._shard.sharding_spec.api.EnumerableShardingSpec.shard"v
+9torch.distributed._shard.sharded_tensor.api.ShardedTensor"9torch.distributed._shard.sharded_tensor.api.ShardedTensor*ë
+selfÜ
+Atorch.distributed._shard.sharding_spec.api.EnumerableShardingSpec"Atorch.distributed._shard.sharding_spec.api.EnumerableShardingSpec*8
+tensor,
+torch._tensor.Tensor"torch._tensor.Tensor*,
+src_rank
+builtins.int"builtins.int *
+process_group
+Any *∑
+__init__Jtorch.distributed._shard.sharding_spec.api.EnumerableShardingSpec.__init__"
+None*ë
+selfÜ
+Atorch.distributed._shard.sharding_spec.api.EnumerableShardingSpec"Atorch.distributed._shard.sharding_spec.api.EnumerableShardingSpec*¿
+shards≥
+>builtins.list[torch.distributed._shard.metadata.ShardMetadata]b
+/torch.distributed._shard.metadata.ShardMetadata"/torch.distributed._shard.metadata.ShardMetadata"builtins.list8rà
+shardsHtorch.distributed._shard.sharding_spec.api.EnumerableShardingSpec.shards≥
+>builtins.list[torch.distributed._shard.metadata.ShardMetadata]b
+/torch.distributed._shard.metadata.ShardMetadata"/torch.distributed._shard.metadata.ShardMetadata"builtins.listrà
+__dataclass_fields__Vtorch.distributed._shard.sharding_spec.api.EnumerableShardingSpec.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictR
+PlacementSpec8torch.distributed._shard.sharding_spec.api.PlacementSpec"abc.ABC¸
+ShardingSpec7torch.distributed._shard.sharding_spec.api.ShardingSpec"abc.ABC*–
+build_metadataFtorch.distributed._shard.sharding_spec.api.ShardingSpec.build_metadata"ê
+Ftorch.distributed._shard.sharded_tensor.metadata.ShardedTensorMetadata"Ftorch.distributed._shard.sharded_tensor.metadata.ShardedTensorMetadata*|
+selfr
+7torch.distributed._shard.sharding_spec.api.ShardingSpec"7torch.distributed._shard.sharding_spec.api.ShardingSpec*0
+tensor_sizes
+torch._C.Size"torch._C.Size*û
+tensor_propertiesÜ
+Atorch.distributed._shard.sharded_tensor.metadata.TensorProperties"Atorch.distributed._shard.sharded_tensor.metadata.TensorProperties0:abstractmethod@*÷
+shard=torch.distributed._shard.sharding_spec.api.ShardingSpec.shard"v
+9torch.distributed._shard.sharded_tensor.api.ShardedTensor"9torch.distributed._shard.sharded_tensor.api.ShardedTensor*|
+selfr
+7torch.distributed._shard.sharding_spec.api.ShardingSpec"7torch.distributed._shard.sharding_spec.api.ShardingSpec*8
+tensor,
+torch._tensor.Tensor"torch._tensor.Tensor*,
+src_rank
+builtins.int"builtins.int *
+process_group
+Any 0:abstractmethod@·
+ChunkShardingSpecLtorch.distributed._shard.sharding_spec.chunk_sharding_spec.ChunkShardingSpec"7torch.distributed._shard.sharding_spec.api.ShardingSpec*u
+__post_init__Ztorch.distributed._shard.sharding_spec.chunk_sharding_spec.ChunkShardingSpec.__post_init__*
+self*Ç
+_verify_dimXtorch.distributed._shard.sharding_spec.chunk_sharding_spec.ChunkShardingSpec._verify_dim*
+dim0:staticmethodh*˝
+build_metadata[torch.distributed._shard.sharding_spec.chunk_sharding_spec.ChunkShardingSpec.build_metadata"ê
+Ftorch.distributed._shard.sharded_tensor.metadata.ShardedTensorMetadata"Ftorch.distributed._shard.sharded_tensor.metadata.ShardedTensorMetadata*ß
+selfú
+Ltorch.distributed._shard.sharding_spec.chunk_sharding_spec.ChunkShardingSpec"Ltorch.distributed._shard.sharding_spec.chunk_sharding_spec.ChunkShardingSpec*0
+tensor_sizes
+torch._C.Size"torch._C.Size*û
+tensor_propertiesÜ
+Atorch.distributed._shard.sharded_tensor.metadata.TensorProperties"Atorch.distributed._shard.sharded_tensor.metadata.TensorProperties*É
+shardRtorch.distributed._shard.sharding_spec.chunk_sharding_spec.ChunkShardingSpec.shard"v
+9torch.distributed._shard.sharded_tensor.api.ShardedTensor"9torch.distributed._shard.sharded_tensor.api.ShardedTensor*ß
+selfú
+Ltorch.distributed._shard.sharding_spec.chunk_sharding_spec.ChunkShardingSpec"Ltorch.distributed._shard.sharding_spec.chunk_sharding_spec.ChunkShardingSpec*8
+tensor,
+torch._tensor.Tensor"torch._tensor.Tensor*,
+src_rank
+builtins.int"builtins.int *
+process_group
+Any *Ã
+__init__Utorch.distributed._shard.sharding_spec.chunk_sharding_spec.ChunkShardingSpec.__init__"
+None*ß
+selfú
+Ltorch.distributed._shard.sharding_spec.chunk_sharding_spec.ChunkShardingSpec"Ltorch.distributed._shard.sharding_spec.chunk_sharding_spec.ChunkShardingSpec*ı
+dimÎ
++TypeAlias[Union[builtins.int,builtins.str]]`
+ Union[builtins.int,builtins.str]
+builtins.int"builtins.int
+builtins.str"builtins.str"Xtorch.distributed._shard.sharding_spec.chunk_sharding_spec.ChunkShardingSpec.ShardingDim*º
+
+placements´
+Qbuiltins.list[Union[torch.distributed.remote_device._remote_device,builtins.str]]∆
+BUnion[torch.distributed.remote_device._remote_device,builtins.str]`
+.torch.distributed.remote_device._remote_device".torch.distributed.remote_device._remote_device
+builtins.str"builtins.str"builtins.list8r≈
+dimPtorch.distributed._shard.sharding_spec.chunk_sharding_spec.ChunkShardingSpec.dimÎ
++TypeAlias[Union[builtins.int,builtins.str]]`
+ Union[builtins.int,builtins.str]
+builtins.int"builtins.int
+builtins.str"builtins.str"Xtorch.distributed._shard.sharding_spec.chunk_sharding_spec.ChunkShardingSpec.ShardingDimrì
+
+placementsWtorch.distributed._shard.sharding_spec.chunk_sharding_spec.ChunkShardingSpec.placements´
+Qbuiltins.list[Union[torch.distributed.remote_device._remote_device,builtins.str]]∆
+BUnion[torch.distributed.remote_device._remote_device,builtins.str]`
+.torch.distributed.remote_device._remote_device".torch.distributed.remote_device._remote_device
+builtins.str"builtins.str"builtins.listrì
+__dataclass_fields__atorch.distributed._shard.sharding_spec.chunk_sharding_spec.ChunkShardingSpec.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictñ
+)_infer_sharding_spec_from_shards_metadataTtorch.distributed._shard.sharding_spec.api._infer_sharding_spec_from_shards_metadata*
+shards_metadata*á
+__path__/torch.distributed._shard.sharding_spec.__path__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*¢
+__annotations__6torch.distributed._shard.sharding_spec.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict

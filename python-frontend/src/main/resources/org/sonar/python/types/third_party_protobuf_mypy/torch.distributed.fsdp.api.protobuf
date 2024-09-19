@@ -1,0 +1,247 @@
+
+torch.distributed.fsdp.api∫
+ShardingStrategy+torch.distributed.fsdp.api.ShardingStrategy"	enum.EnumHr\
+
+FULL_SHARD6torch.distributed.fsdp.api.ShardingStrategy.FULL_SHARD
+	enum.auto"	enum.autorb
+SHARD_GRAD_OP9torch.distributed.fsdp.api.ShardingStrategy.SHARD_GRAD_OP
+	enum.auto"	enum.autorX
+NO_SHARD4torch.distributed.fsdp.api.ShardingStrategy.NO_SHARD
+	enum.auto"	enum.autor`
+HYBRID_SHARD8torch.distributed.fsdp.api.ShardingStrategy.HYBRID_SHARD
+	enum.auto"	enum.autorn
+_HYBRID_SHARD_ZERO2?torch.distributed.fsdp.api.ShardingStrategy._HYBRID_SHARD_ZERO2
+	enum.auto"	enum.autoí
+BackwardPrefetch+torch.distributed.fsdp.api.BackwardPrefetch"	enum.EnumHr`
+BACKWARD_PRE8torch.distributed.fsdp.api.BackwardPrefetch.BACKWARD_PRE
+	enum.auto"	enum.autorb
+BACKWARD_POST9torch.distributed.fsdp.api.BackwardPrefetch.BACKWARD_POST
+	enum.auto"	enum.auto˙
+MixedPrecision)torch.distributed.fsdp.api.MixedPrecision"builtins.object*„
+__init__2torch.distributed.fsdp.api.MixedPrecision.__init__"
+None*`
+selfV
+)torch.distributed.fsdp.api.MixedPrecision")torch.distributed.fsdp.api.MixedPrecision*]
+param_dtypeJ
+Union[torch._C.dtype,None] 
+torch._C.dtype"torch._C.dtype
+None *^
+reduce_dtypeJ
+Union[torch._C.dtype,None] 
+torch._C.dtype"torch._C.dtype
+None *^
+buffer_dtypeJ
+Union[torch._C.dtype,None] 
+torch._C.dtype"torch._C.dtype
+None *>
+keep_low_precision_grads
+builtins.bool"builtins.bool *9
+cast_forward_inputs
+builtins.bool"builtins.bool *>
+cast_root_forward_inputs
+builtins.bool"builtins.bool *‹
+_module_classes_to_ignore∫
+5typing.Sequence[Type[torch.nn.modules.module.Module]]p
+$Type[torch.nn.modules.module.Module]@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"type"typing.Sequence 8rê
+param_dtype5torch.distributed.fsdp.api.MixedPrecision.param_dtypeJ
+Union[torch._C.dtype,None] 
+torch._C.dtype"torch._C.dtype
+Nonerí
+reduce_dtype6torch.distributed.fsdp.api.MixedPrecision.reduce_dtypeJ
+Union[torch._C.dtype,None] 
+torch._C.dtype"torch._C.dtype
+Nonerí
+buffer_dtype6torch.distributed.fsdp.api.MixedPrecision.buffer_dtypeJ
+Union[torch._C.dtype,None] 
+torch._C.dtype"torch._C.dtype
+Noner~
+keep_low_precision_gradsBtorch.distributed.fsdp.api.MixedPrecision.keep_low_precision_grads
+builtins.bool"builtins.boolrt
+cast_forward_inputs=torch.distributed.fsdp.api.MixedPrecision.cast_forward_inputs
+builtins.bool"builtins.boolr~
+cast_root_forward_inputsBtorch.distributed.fsdp.api.MixedPrecision.cast_root_forward_inputs
+builtins.bool"builtins.boolrù
+_module_classes_to_ignoreCtorch.distributed.fsdp.api.MixedPrecision._module_classes_to_ignore∫
+5typing.Sequence[Type[torch.nn.modules.module.Module]]p
+$Type[torch.nn.modules.module.Module]@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"type"typing.Sequencer
+__dataclass_fields__>torch.distributed.fsdp.api.MixedPrecision.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictÙ
+
+CPUOffload%torch.distributed.fsdp.api.CPUOffload"builtins.object*‘
+__init__.torch.distributed.fsdp.api.CPUOffload.__init__"
+None*X
+selfN
+%torch.distributed.fsdp.api.CPUOffload"%torch.distributed.fsdp.api.CPUOffload*4
+offload_params
+builtins.bool"builtins.bool 8rf
+offload_params4torch.distributed.fsdp.api.CPUOffload.offload_params
+builtins.bool"builtins.boolrÏ
+__dataclass_fields__:torch.distributed.fsdp.api.CPUOffload.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dict˝
+StateDictType(torch.distributed.fsdp.api.StateDictType"	enum.EnumHrc
+FULL_STATE_DICT8torch.distributed.fsdp.api.StateDictType.FULL_STATE_DICT
+	enum.auto"	enum.autore
+LOCAL_STATE_DICT9torch.distributed.fsdp.api.StateDictType.LOCAL_STATE_DICT
+	enum.auto"	enum.autori
+SHARDED_STATE_DICT;torch.distributed.fsdp.api.StateDictType.SHARDED_STATE_DICT
+	enum.auto"	enum.autoó
+StateDictConfig*torch.distributed.fsdp.api.StateDictConfig"builtins.object*„
+__init__3torch.distributed.fsdp.api.StateDictConfig.__init__"
+None*b
+selfX
+*torch.distributed.fsdp.api.StateDictConfig"*torch.distributed.fsdp.api.StateDictConfig*4
+offload_to_cpu
+builtins.bool"builtins.bool 8rk
+offload_to_cpu9torch.distributed.fsdp.api.StateDictConfig.offload_to_cpu
+builtins.bool"builtins.boolrÒ
+__dataclass_fields__?torch.distributed.fsdp.api.StateDictConfig.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dict¯
+FullStateDictConfig.torch.distributed.fsdp.api.FullStateDictConfig"*torch.distributed.fsdp.api.StateDictConfig*°
+__init__7torch.distributed.fsdp.api.FullStateDictConfig.__init__"
+None*j
+self`
+.torch.distributed.fsdp.api.FullStateDictConfig".torch.distributed.fsdp.api.FullStateDictConfig*4
+offload_to_cpu
+builtins.bool"builtins.bool *0
+
+rank0_only
+builtins.bool"builtins.bool 8rg
+
+rank0_only9torch.distributed.fsdp.api.FullStateDictConfig.rank0_only
+builtins.bool"builtins.boolrı
+__dataclass_fields__Ctorch.distributed.fsdp.api.FullStateDictConfig.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dict„
+LocalStateDictConfig/torch.distributed.fsdp.api.LocalStateDictConfig"*torch.distributed.fsdp.api.StateDictConfig*Ú
+__init__8torch.distributed.fsdp.api.LocalStateDictConfig.__init__"
+None*l
+selfb
+/torch.distributed.fsdp.api.LocalStateDictConfig"/torch.distributed.fsdp.api.LocalStateDictConfig*4
+offload_to_cpu
+builtins.bool"builtins.bool 8rˆ
+__dataclass_fields__Dtorch.distributed.fsdp.api.LocalStateDictConfig.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictì
+ShardedStateDictConfig1torch.distributed.fsdp.api.ShardedStateDictConfig"*torch.distributed.fsdp.api.StateDictConfig*¨
+__init__:torch.distributed.fsdp.api.ShardedStateDictConfig.__init__"
+None*p
+selff
+1torch.distributed.fsdp.api.ShardedStateDictConfig"1torch.distributed.fsdp.api.ShardedStateDictConfig*4
+offload_to_cpu
+builtins.bool"builtins.bool *2
+_use_dtensor
+builtins.bool"builtins.bool 8rn
+_use_dtensor>torch.distributed.fsdp.api.ShardedStateDictConfig._use_dtensor
+builtins.bool"builtins.boolr¯
+__dataclass_fields__Ftorch.distributed.fsdp.api.ShardedStateDictConfig.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dict∫
+OptimStateDictConfig/torch.distributed.fsdp.api.OptimStateDictConfig"builtins.object*Ú
+__init__8torch.distributed.fsdp.api.OptimStateDictConfig.__init__"
+None*l
+selfb
+/torch.distributed.fsdp.api.OptimStateDictConfig"/torch.distributed.fsdp.api.OptimStateDictConfig*4
+offload_to_cpu
+builtins.bool"builtins.bool 8rp
+offload_to_cpu>torch.distributed.fsdp.api.OptimStateDictConfig.offload_to_cpu
+builtins.bool"builtins.boolrˆ
+__dataclass_fields__Dtorch.distributed.fsdp.api.OptimStateDictConfig.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dict†
+FullOptimStateDictConfig3torch.distributed.fsdp.api.FullOptimStateDictConfig"/torch.distributed.fsdp.api.OptimStateDictConfig*∞
+__init__<torch.distributed.fsdp.api.FullOptimStateDictConfig.__init__"
+None*t
+selfj
+3torch.distributed.fsdp.api.FullOptimStateDictConfig"3torch.distributed.fsdp.api.FullOptimStateDictConfig*4
+offload_to_cpu
+builtins.bool"builtins.bool *0
+
+rank0_only
+builtins.bool"builtins.bool 8rl
+
+rank0_only>torch.distributed.fsdp.api.FullOptimStateDictConfig.rank0_only
+builtins.bool"builtins.boolr˙
+__dataclass_fields__Htorch.distributed.fsdp.api.FullOptimStateDictConfig.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dict˝
+LocalOptimStateDictConfig4torch.distributed.fsdp.api.LocalOptimStateDictConfig"/torch.distributed.fsdp.api.OptimStateDictConfig*Å
+__init__=torch.distributed.fsdp.api.LocalOptimStateDictConfig.__init__"
+None*v
+selfl
+4torch.distributed.fsdp.api.LocalOptimStateDictConfig"4torch.distributed.fsdp.api.LocalOptimStateDictConfig*4
+offload_to_cpu
+builtins.bool"builtins.bool 8ru
+offload_to_cpuCtorch.distributed.fsdp.api.LocalOptimStateDictConfig.offload_to_cpu
+builtins.bool"builtins.boolr˚
+__dataclass_fields__Itorch.distributed.fsdp.api.LocalOptimStateDictConfig.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictª
+ShardedOptimStateDictConfig6torch.distributed.fsdp.api.ShardedOptimStateDictConfig"/torch.distributed.fsdp.api.OptimStateDictConfig*ª
+__init__?torch.distributed.fsdp.api.ShardedOptimStateDictConfig.__init__"
+None*z
+selfp
+6torch.distributed.fsdp.api.ShardedOptimStateDictConfig"6torch.distributed.fsdp.api.ShardedOptimStateDictConfig*4
+offload_to_cpu
+builtins.bool"builtins.bool *2
+_use_dtensor
+builtins.bool"builtins.bool 8rs
+_use_dtensorCtorch.distributed.fsdp.api.ShardedOptimStateDictConfig._use_dtensor
+builtins.bool"builtins.boolr˝
+__dataclass_fields__Ktorch.distributed.fsdp.api.ShardedOptimStateDictConfig.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dict˚
+
+StateDictSettings,torch.distributed.fsdp.api.StateDictSettings"builtins.object*ê
+__init__5torch.distributed.fsdp.api.StateDictSettings.__init__"
+None*f
+self\
+,torch.distributed.fsdp.api.StateDictSettings",torch.distributed.fsdp.api.StateDictSettings*i
+state_dict_typeT
+(torch.distributed.fsdp.api.StateDictType"(torch.distributed.fsdp.api.StateDictType*o
+state_dict_configX
+*torch.distributed.fsdp.api.StateDictConfig"*torch.distributed.fsdp.api.StateDictConfig*
+optim_state_dict_configb
+/torch.distributed.fsdp.api.OptimStateDictConfig"/torch.distributed.fsdp.api.OptimStateDictConfig8r•
+state_dict_type<torch.distributed.fsdp.api.StateDictSettings.state_dict_typeT
+(torch.distributed.fsdp.api.StateDictType"(torch.distributed.fsdp.api.StateDictTyper≠
+state_dict_config>torch.distributed.fsdp.api.StateDictSettings.state_dict_configX
+*torch.distributed.fsdp.api.StateDictConfig"*torch.distributed.fsdp.api.StateDictConfigr√
+optim_state_dict_configDtorch.distributed.fsdp.api.StateDictSettings.optim_state_dict_configb
+/torch.distributed.fsdp.api.OptimStateDictConfig"/torch.distributed.fsdp.api.OptimStateDictConfigrÛ
+__dataclass_fields__Atorch.distributed.fsdp.api.StateDictSettings.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dict*ñ
+__annotations__*torch.distributed.fsdp.api.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*y
+__all__"torch.distributed.fsdp.api.__all__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list

@@ -1,0 +1,220 @@
+
+"torch.fx.experimental.optimizationß
+MklSubgraph.torch.fx.experimental.optimization.MklSubgraph"builtins.object*ı
+__init__7torch.fx.experimental.optimization.MklSubgraph.__init__"
+None*j
+self`
+.torch.fx.experimental.optimization.MklSubgraph".torch.fx.experimental.optimization.MklSubgraph*:
+fx_graph,
+torch.fx.graph.Graph"torch.fx.graph.Graphrq
+fx_graph7torch.fx.experimental.optimization.MklSubgraph.fx_graph,
+torch.fx.graph.Graph"torch.fx.graph.Graphrõ
+nodes4torch.fx.experimental.optimization.MklSubgraph.nodes\
+!builtins.list[torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node"builtins.listrß
+start_nodes:torch.fx.experimental.optimization.MklSubgraph.start_nodes\
+!builtins.list[torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node"builtins.listr£
+	end_nodes8torch.fx.experimental.optimization.MklSubgraph.end_nodes\
+!builtins.list[torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node"builtins.listû	
+	UnionFind,torch.fx.experimental.optimization.UnionFind"builtins.object*R
+__init__5torch.fx.experimental.optimization.UnionFind.__init__*
+self*
+n*◊
+make_set5torch.fx.experimental.optimization.UnionFind.make_set"
+Any*f
+self\
+,torch.fx.experimental.optimization.UnionFind",torch.fx.experimental.optimization.UnionFind*#
+v
+builtins.int"builtins.int*‰
+find1torch.fx.experimental.optimization.UnionFind.find"
+builtins.int"builtins.int*f
+self\
+,torch.fx.experimental.optimization.UnionFind",torch.fx.experimental.optimization.UnionFind*#
+v
+builtins.int"builtins.int*Ù
+join1torch.fx.experimental.optimization.UnionFind.join"
+Any*f
+self\
+,torch.fx.experimental.optimization.UnionFind",torch.fx.experimental.optimization.UnionFind*#
+a
+builtins.int"builtins.int*#
+b
+builtins.int"builtins.intrΩ
+parent3torch.fx.experimental.optimization.UnionFind.parent~
+'builtins.list[Union[builtins.int,None]]D
+Union[builtins.int,None]
+builtins.int"builtins.int
+None"builtins.listrÖ
+size1torch.fx.experimental.optimization.UnionFind.sizeJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.listê
+DropoutRemover@894torch.fx.experimental.optimization.DropoutRemover@89" torch.fx.interpreter.Transformer*¢
+call_module@torch.fx.experimental.optimization.DropoutRemover@89.call_module"
+Any*v
+selfl
+4torch.fx.experimental.optimization.DropoutRemover@89"4torch.fx.experimental.optimization.DropoutRemover@89*ä
+target˝
+>TypeAlias[Union[CallableType[builtins.function],builtins.str]]¢
+3Union[CallableType[builtins.function],builtins.str]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+builtins.str"builtins.str"torch.fx.node.Target*›
+args“
+Èbuiltins.tuple[TypeAlias[Union[builtins.tuple[Any],builtins.list[Any],builtins.dict[builtins.str,Any],builtins.slice,builtins.range,torch.fx.node.Node,TypeAlias[Union[builtins.str,builtins.int,builtins.float,builtins.bool,builtins.complex,torch._C.dtype,torch._tensor.Tensor,torch._C.device,torch._C.memory_format,torch._C.layout,torch._ops.OpOverload]],None]]]”
+ŸTypeAlias[Union[builtins.tuple[Any],builtins.list[Any],builtins.dict[builtins.str,Any],builtins.slice,builtins.range,torch.fx.node.Node,TypeAlias[Union[builtins.str,builtins.int,builtins.float,builtins.bool,builtins.complex,torch._C.dtype,torch._tensor.Tensor,torch._C.device,torch._C.memory_format,torch._C.layout,torch._ops.OpOverload]],None]]⁄
+ŒUnion[builtins.tuple[Any],builtins.list[Any],builtins.dict[builtins.str,Any],builtins.slice,builtins.range,torch.fx.node.Node,TypeAlias[Union[builtins.str,builtins.int,builtins.float,builtins.bool,builtins.complex,torch._C.dtype,torch._tensor.Tensor,torch._C.device,torch._C.memory_format,torch._C.layout,torch._ops.OpOverload]],None].
+builtins.tuple[Any]
+Any"builtins.tuple,
+builtins.list[Any]
+Any"builtins.listW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict 
+builtins.slice"builtins.slice 
+builtins.range"builtins.range(
+torch.fx.node.Node"torch.fx.node.Node’
+ TypeAlias[Union[builtins.str,builtins.int,builtins.float,builtins.bool,builtins.complex,torch._C.dtype,torch._tensor.Tensor,torch._C.device,torch._C.memory_format,torch._C.layout,torch._ops.OpOverload]]‚
+øUnion[builtins.str,builtins.int,builtins.float,builtins.bool,builtins.complex,torch._C.dtype,torch._tensor.Tensor,torch._C.device,torch._C.memory_format,torch._C.layout,torch._ops.OpOverload]
+builtins.str"builtins.str
+builtins.int"builtins.int 
+builtins.float"builtins.float
+builtins.bool"builtins.bool$
+builtins.complex"builtins.complex 
+torch._C.dtype"torch._C.dtype,
+torch._tensor.Tensor"torch._tensor.Tensor"
+torch._C.device"torch._C.device0
+torch._C.memory_format"torch._C.memory_format"
+torch._C.layout"torch._C.layout.
+torch._ops.OpOverload"torch._ops.OpOverload"torch.fx.node.BaseArgumentTypes
+None"torch.fx.node.Argument"builtins.tuple*c
+kwargsW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dictÍ
+MklSupport@2841torch.fx.experimental.optimization.MklSupport@284"	enum.EnumHrX
+NO4torch.fx.experimental.optimization.MklSupport@284.NO
+builtins.int"builtins.intrZ
+YES5torch.fx.experimental.optimization.MklSupport@284.YES
+builtins.int"builtins.intrb
+UNKNOWN9torch.fx.experimental.optimization.MklSupport@284.UNKNOWN
+builtins.int"builtins.intÀ
+_parent_name/torch.fx.experimental.optimization._parent_name"`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str*(
+target
+builtins.str"builtins.str–
+matches_module_pattern9torch.fx.experimental.optimization.matches_module_pattern"
+Any*X
+patternK
+typing.Iterable[Type[Any]]
+	Type[Any]
+Any"type"typing.Iterable*2
+node(
+torch.fx.node.Node"torch.fx.node.Node*d
+modulesW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict¬
+replace_node_module6torch.fx.experimental.optimization.replace_node_module"
+Any*2
+node(
+torch.fx.node.Node"torch.fx.node.Node*d
+modulesW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*P
+
+new_module@
+torch.nn.modules.module.Module"torch.nn.modules.module.ModuleÔ
+fuse'torch.fx.experimental.optimization.fuse"@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*K
+model@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*
+inplace
+Any *
+no_trace
+Any “
+remove_dropout1torch.fx.experimental.optimization.remove_dropout"@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*K
+model@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module·
+extract_subgraph3torch.fx.experimental.optimization.extract_subgraph"
+Any*Q
+orig_module@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*g
+nodes\
+!builtins.list[torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node"builtins.list*h
+inputs\
+!builtins.list[torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node"builtins.list*i
+outputs\
+!builtins.list[torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node"builtins.list˜
+modules_to_mkldnn4torch.fx.experimental.optimization.modules_to_mkldnn"
+Any*g
+nodes\
+!builtins.list[torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node"builtins.list*π
+modules´
+:builtins.dict[builtins.str,torch.nn.modules.module.Module]
+builtins.str"builtins.str@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"builtins.dictÂ
+reset_modules0torch.fx.experimental.optimization.reset_modules"
+Any*g
+nodes\
+!builtins.list[torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node"builtins.list*π
+modules´
+:builtins.dict[builtins.str,torch.nn.modules.module.Module]
+builtins.str"builtins.str@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"builtins.dict*Û
+old_modules·
+Lbuiltins.dict[torch.nn.modules.module.Module,torch.nn.modules.module.Module]@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"builtins.dictx
+gen_mkl_autotuner4torch.fx.experimental.optimization.gen_mkl_autotuner*
+example_inputs*
+iters *
+warmup –
+use_mkl_length1torch.fx.experimental.optimization.use_mkl_length"
+builtins.bool"builtins.bool*k
+graph`
+.torch.fx.experimental.optimization.MklSubgraph".torch.fx.experimental.optimization.MklSubgraphè
+optimize_for_inference9torch.fx.experimental.optimization.optimize_for_inference"@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*K
+model@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*¶
+pass_configí
++Union[builtins.dict[builtins.str,Any],None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None *Å
+tracers
+%Type[torch.fx._symbolic_trace.Tracer]B
+torch.fx._symbolic_trace.Tracer"torch.fx._symbolic_trace.Tracer"type *û
+__annotations__2torch.fx.experimental.optimization.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*
+fxtorch.fx *
+nntorch.nn *
+Ftorch.nn.functional *!
+	th_mkldnntorch.utils.mkldnn *ú
+mkldnn_supported3torch.fx.experimental.optimization.mkldnn_supportedS
+builtins.list[builtins.object]"
+builtins.object"builtins.object"builtins.list*Ê
+mkldnn_supported_unknown;torch.fx.experimental.optimization.mkldnn_supported_unknownå
+.builtins.list[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"builtins.list*¯
+
+mkldnn_map-torch.fx.experimental.optimization.mkldnn_map∫
+<builtins.dict[builtins.type,CallableType[builtins.function]]
+builtins.type"builtins.typeK
+CallableType[builtins.function]&
+builtins.function"builtins.function"builtins.dict

@@ -1,0 +1,155 @@
+
+&torch.distributed.tensor.parallel.loss÷
+_find_all_reduce_mesh_dim@torch.distributed.tensor.parallel.loss._find_all_reduce_mesh_dim"
+builtins.int"builtins.int*Ò
+
+placementsÁ
+Cbuiltins.tuple[torch.distributed._tensor.placement_types.Placement]j
+3torch.distributed._tensor.placement_types.Placement"3torch.distributed._tensor.placement_types.Placement"builtins.tuple*%
+dim
+builtins.int"builtins.intå
+_cast_to_dtensor7torch.distributed.tensor.parallel.loss._cast_to_dtensor"N
+%torch.distributed._tensor.api.DTensor"%torch.distributed._tensor.api.DTensor*
+tensor
+Any*Ò
+
+placementsÁ
+Cbuiltins.tuple[torch.distributed._tensor.placement_types.Placement]j
+3torch.distributed._tensor.placement_types.Placement"3torch.distributed._tensor.placement_types.Placement"builtins.tuple*^
+meshT
+(torch.distributed.device_mesh.DeviceMesh"(torch.distributed.device_mesh.DeviceMeshá
+_propagate_tensor_meta=torch.distributed.tensor.parallel.loss._propagate_tensor_meta"Ü
+KTypeAlias[Tuple[torch._C.Size,builtins.tuple[builtins.int],torch._C.dtype]]Ô
+@Tuple[torch._C.Size,builtins.tuple[builtins.int],torch._C.dtype]
+torch._C.Size"torch._C.SizeL
+builtins.tuple[builtins.int]
+builtins.int"builtins.int"builtins.tuple 
+torch._C.dtype"torch._C.dtype"4torch.distributed._tensor.placement_types.TensorMeta*;
+op_call.
+torch._ops.OpOverload"torch._ops.OpOverload*_
+argsU
+builtins.tuple[builtins.object]"
+builtins.object"builtins.object"builtins.tuple*Š
+kwargs~
++builtins.dict[builtins.str,builtins.object]
+builtins.str"builtins.str"
+builtins.object"builtins.object"builtins.dict~
+_log_softmax3torch.distributed.tensor.parallel.loss._log_softmax*
+x*
+dim*
+half_to_float*
+mesh*
+mesh_dim¢
+_log_softmax_handler;torch.distributed.tensor.parallel.loss._log_softmax_handler""
+builtins.object"builtins.object*;
+op_call.
+torch._ops.OpOverload"torch._ops.OpOverload*_
+argsU
+builtins.tuple[builtins.object]"
+builtins.object"builtins.object"builtins.tuple*Š
+kwargs~
++builtins.dict[builtins.str,builtins.object]
+builtins.str"builtins.str"
+builtins.object"builtins.object"builtins.dict´
+_log_softmax_backward_handlerDtorch.distributed.tensor.parallel.loss._log_softmax_backward_handler""
+builtins.object"builtins.object*;
+op_call.
+torch._ops.OpOverload"torch._ops.OpOverload*_
+argsU
+builtins.tuple[builtins.object]"
+builtins.object"builtins.object"builtins.tuple*Š
+kwargs~
++builtins.dict[builtins.str,builtins.object]
+builtins.str"builtins.str"
+builtins.object"builtins.object"builtins.dictÆ
+_nll_loss_forward8torch.distributed.tensor.parallel.loss._nll_loss_forward"
+0Tuple[torch._tensor.Tensor,torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor,
+torch._tensor.Tensor"torch._tensor.Tensor*3
+x,
+torch._tensor.Tensor"torch._tensor.Tensor*8
+target,
+torch._tensor.Tensor"torch._tensor.Tensor*h
+weight\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None*n
+local_weight\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None*+
+	reduction
+builtins.int"builtins.int*.
+ignore_index
+builtins.int"builtins.int*2
+channel_dim_size
+builtins.int"builtins.int*^
+meshT
+(torch.distributed.device_mesh.DeviceMesh"(torch.distributed.device_mesh.DeviceMesh**
+mesh_dim
+builtins.int"builtins.int¬
+_nll_loss_forward_handler@torch.distributed.tensor.parallel.loss._nll_loss_forward_handler""
+builtins.object"builtins.object*;
+op_call.
+torch._ops.OpOverload"torch._ops.OpOverload*_
+argsU
+builtins.tuple[builtins.object]"
+builtins.object"builtins.object"builtins.tuple*Š
+kwargs~
++builtins.dict[builtins.str,builtins.object]
+builtins.str"builtins.str"
+builtins.object"builtins.object"builtins.dict’
+"_nll_loss_and_log_softmax_backwardItorch.distributed.tensor.parallel.loss._nll_loss_and_log_softmax_backward",
+torch._tensor.Tensor"torch._tensor.Tensor*=
+grad_output,
+torch._tensor.Tensor"torch._tensor.Tensor*3
+x,
+torch._tensor.Tensor"torch._tensor.Tensor*8
+target,
+torch._tensor.Tensor"torch._tensor.Tensor*h
+weight\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None*+
+	reduction
+builtins.int"builtins.int*.
+ignore_index
+builtins.int"builtins.int*>
+total_weight,
+torch._tensor.Tensor"torch._tensor.Tensor*2
+channel_dim_size
+builtins.int"builtins.int*^
+meshT
+(torch.distributed.device_mesh.DeviceMesh"(torch.distributed.device_mesh.DeviceMesh**
+mesh_dim
+builtins.int"builtins.int®
+_nll_loss_backward_handlerAtorch.distributed.tensor.parallel.loss._nll_loss_backward_handler""
+builtins.object"builtins.object*;
+op_call.
+torch._ops.OpOverload"torch._ops.OpOverload*_
+argsU
+builtins.tuple[builtins.object]"
+builtins.object"builtins.object"builtins.tuple*Š
+kwargs~
++builtins.dict[builtins.str,builtins.object]
+builtins.str"builtins.str"
+builtins.object"builtins.object"builtins.dictY
+_enable_custom_loss_ops>torch.distributed.tensor.parallel.loss._enable_custom_loss_ops[
+_disable_custom_loss_ops?torch.distributed.tensor.parallel.loss._disable_custom_loss_ops*¢
+__annotations__6torch.distributed.tensor.parallel.loss.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*
+utilstorch._prims_common *5
+funcol)torch.distributed._functional_collectives *,
+c10d"torch.distributed.distributed_c10d *<
+aten+torch.distributed.tensor.parallel.loss.aten
+Any*…
+__all__.torch.distributed.tensor.parallel.loss.__all__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*í
+customized_loss_ops:torch.distributed.tensor.parallel.loss.customized_loss_ops™
+2builtins.dict[Any,CallableType[builtins.function]]
+AnyK
+CallableType[builtins.function]&
+builtins.function"builtins.function"builtins.dict

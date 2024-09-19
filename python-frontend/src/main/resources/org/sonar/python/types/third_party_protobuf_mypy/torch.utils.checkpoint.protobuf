@@ -1,0 +1,285 @@
+
+torch.utils.checkpointÕ
+DefaultDeviceType(torch.utils.checkpoint.DefaultDeviceType"builtins.object*’
+set_device_type8torch.utils.checkpoint.DefaultDeviceType.set_device_type"
+Any**
+device
+builtins.str"builtins.str 0:staticmethodh*{
+get_device_type8torch.utils.checkpoint.DefaultDeviceType.get_device_type"
+builtins.str"builtins.str0:staticmethodhrs
+_default_device_type=torch.utils.checkpoint.DefaultDeviceType._default_device_type
+builtins.str"builtins.strÔ
+CheckpointFunction)torch.utils.checkpoint.CheckpointFunction" torch.autograd.function.Function*‹
+forward1torch.utils.checkpoint.CheckpointFunction.forward*
+ctx*
+run_function*
+preserve_rng_state*
+args0:staticmethodh*c
+backward2torch.utils.checkpoint.CheckpointFunction.backward*
+ctx*
+args0:staticmethodh:
+_Handletorch.utils.checkpoint._Handle"builtins.object¡
+_Holdertorch.utils.checkpoint._Holder"builtins.object*=
+__init__'torch.utils.checkpoint._Holder.__init__*
+selfr¥
+handles&torch.utils.checkpoint._Holder.handlesñ
+Fbuiltins.dict[builtins.int,Union[torch.utils.checkpoint._Handle,None]]
+builtins.int"builtins.intz
+*Union[torch.utils.checkpoint._Handle,None]@
+torch.utils.checkpoint._Handle"torch.utils.checkpoint._Handle
+None"builtins.dictã
+_NoopSaveInputs&torch.utils.checkpoint._NoopSaveInputs" torch.autograd.function.Function*U
+forward.torch.utils.checkpoint._NoopSaveInputs.forward*
+args0:staticmethodh*Ä
+setup_context4torch.utils.checkpoint._NoopSaveInputs.setup_context"
+None*
+ctx
+Any*:
+inputs.
+builtins.tuple[Any]
+Any"builtins.tuple*
+output
+Any0:staticmethodh*h
+backward/torch.utils.checkpoint._NoopSaveInputs.backward*
+ctx*
+grad_outputs0:staticmethodh®
+_CheckpointFrame'torch.utils.checkpoint._CheckpointFrame"builtins.object*Ž
+__init__0torch.utils.checkpoint._CheckpointFrame.__init__*
+self*
+recompute_fn*
+
+early_stop*
+unpack_error_cb*
+metadata_fn*{
+check_recomputed_tensors_matchFtorch.utils.checkpoint._CheckpointFrame.check_recomputed_tensors_match*
+self*
+gidrM
+recompute_fn4torch.utils.checkpoint._CheckpointFrame.recompute_fn
+AnyrK
+input_saver3torch.utils.checkpoint._CheckpointFrame.input_saver
+AnyrÁ
+weak_holders4torch.utils.checkpoint._CheckpointFrame.weak_holders{
+*builtins.list[_weakref.ReferenceType[Any]]>
+_weakref.ReferenceType[Any]
+Any"_weakref.ReferenceType"builtins.listrÎ
+
+recomputed2torch.utils.checkpoint._CheckpointFrame.recomputed‹
+tcollections.defaultdict[builtins.int,weakref.WeakKeyDictionary[torch.utils.checkpoint._Handle,torch._tensor.Tensor]]
+builtins.int"builtins.intÛ
+Nweakref.WeakKeyDictionary[torch.utils.checkpoint._Handle,torch._tensor.Tensor]@
+torch.utils.checkpoint._Handle"torch.utils.checkpoint._Handle,
+torch._tensor.Tensor"torch._tensor.Tensor"weakref.WeakKeyDictionary"collections.defaultdictrÔ
+recomp_counter6torch.utils.checkpoint._CheckpointFrame.recomp_counter‰
+2collections.defaultdict[builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int"collections.defaultdictrÕ
+is_recomputed5torch.utils.checkpoint._CheckpointFrame.is_recomputedŒ
+3collections.defaultdict[builtins.int,builtins.bool]
+builtins.int"builtins.int
+builtins.bool"builtins.bool"collections.defaultdictrI
+
+early_stop2torch.utils.checkpoint._CheckpointFrame.early_stop
+AnyrK
+metadata_fn3torch.utils.checkpoint._CheckpointFrame.metadata_fn
+AnyrS
+unpack_error_cb7torch.utils.checkpoint._CheckpointFrame.unpack_error_cb
+AnyrK
+x_metadatas3torch.utils.checkpoint._CheckpointFrame.x_metadatas
+AnyrW
+forward_completed9torch.utils.checkpoint._CheckpointFrame.forward_completed
+Anyr_
+ignore_saved_mismatch=torch.utils.checkpoint._CheckpointFrame.ignore_saved_mismatch
+AnyP
+CheckpointError&torch.utils.checkpoint.CheckpointError"builtins.RuntimeError]
+_StopRecomputationError.torch.utils.checkpoint._StopRecomputationError"builtins.Exception˜
+_recomputation_hook*torch.utils.checkpoint._recomputation_hook"(torch.autograd.graph.saved_tensors_hooks*ª
+__init__3torch.utils.checkpoint._recomputation_hook.__init__"
+None*b
+selfX
+*torch.utils.checkpoint._recomputation_hook"*torch.utils.checkpoint._recomputation_hook*T
+target_frame_ref>
+_weakref.ReferenceType[Any]
+Any"_weakref.ReferenceType*%
+gid
+builtins.int"builtins.int¸
+_checkpoint_hook'torch.utils.checkpoint._checkpoint_hook"(torch.autograd.graph.saved_tensors_hooks*Q
+__init__0torch.utils.checkpoint._checkpoint_hook.__init__*
+self*	
+frameä
+_CachingTorchDispatchMode0torch.utils.checkpoint._CachingTorchDispatchMode".torch.utils._python_dispatch.TorchDispatchMode*k
+__init__9torch.utils.checkpoint._CachingTorchDispatchMode.__init__*
+self*
+	policy_fn*
+storage*Š
+push_into_storageBtorch.utils.checkpoint._CachingTorchDispatchMode.push_into_storage*
+self*
+out*
+func*
+args*
+
+kwargs*µ
+_handle_compile_in_forward_ctxOtorch.utils.checkpoint._CachingTorchDispatchMode._handle_compile_in_forward_ctx*
+self*
+should_not_recompute*
+func*
+args*
+
+kwargs*’
+__torch_dispatch__Ctorch.utils.checkpoint._CachingTorchDispatchMode.__torch_dispatch__*
+self*
+func*	
+types*
+
+args *
+kwargs rP
+	policy_fn:torch.utils.checkpoint._CachingTorchDispatchMode.policy_fn
+AnyrL
+storage8torch.utils.checkpoint._CachingTorchDispatchMode.storage
+AnyÔ
+_CachedTorchDispatchMode/torch.utils.checkpoint._CachedTorchDispatchMode".torch.utils._python_dispatch.TorchDispatchMode*j
+__init__8torch.utils.checkpoint._CachedTorchDispatchMode.__init__*
+self*
+	policy_fn*
+storage*~
+pop_from_storage@torch.utils.checkpoint._CachedTorchDispatchMode.pop_from_storage*
+self*
+func*
+args*
+
+kwargs*¸
+ _handle_compile_in_recompute_ctxPtorch.utils.checkpoint._CachedTorchDispatchMode._handle_compile_in_recompute_ctx*
+self*
+should_not_recompute*
+func*
+args*
+
+kwargs*‘
+__torch_dispatch__Btorch.utils.checkpoint._CachedTorchDispatchMode.__torch_dispatch__*
+self*
+func*	
+types*
+
+args *
+kwargs rO
+	policy_fn9torch.utils.checkpoint._CachedTorchDispatchMode.policy_fn
+AnyrK
+storage7torch.utils.checkpoint._CachedTorchDispatchMode.storage
+Anyè
+CaptureLogs@974&torch.utils.checkpoint.CaptureLogs@974"builtins.object*E
+__init__/torch.utils.checkpoint.CaptureLogs@974.__init__*
+self*[
+get_context_manager:torch.utils.checkpoint.CaptureLogs@974.get_context_manager*
+selfr<
+logs+torch.utils.checkpoint.CaptureLogs@974.logs
+Anyr:
+tbs*torch.utils.checkpoint.CaptureLogs@974.tbs
+AnyÛ
+detach_variable&torch.utils.checkpoint.detach_variable"d
+$builtins.tuple[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.tuple*:
+inputs.
+builtins.tuple[Any]
+Any"builtins.tuple‘
+check_backward_validity.torch.utils.checkpoint.check_backward_validity"
+None*<
+inputs0
+typing.Iterable[Any]
+Any"typing.IterableM
+_get_device_module)torch.utils.checkpoint._get_device_module*
+device I
+_infer_device_type)torch.utils.checkpoint._infer_device_type*
+argsÍ
+get_device_states(torch.utils.checkpoint.get_device_states"ú
+FTuple[builtins.list[builtins.int],builtins.list[torch._tensor.Tensor]]J
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.listb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*
+args
+Anyr
+set_device_states(torch.utils.checkpoint.set_device_states"
+None*
+devices
+Any*
+states
+AnyQ
+_get_autocast_kwargs+torch.utils.checkpoint._get_autocast_kwargs*
+device 9
+noop_context_fn&torch.utils.checkpoint.noop_context_fnŽ
+checkpoint_sequential,torch.utils.checkpoint.checkpoint_sequential*
+	functions*
+segments*	
+input*
+use_reentrant *
+
+kwargsE
+_internal_assert'torch.utils.checkpoint._internal_assert*
+cond´
+_get_debug_context_and_cb0torch.utils.checkpoint._get_debug_context_and_cb"ä
+FTuple[CallableType[builtins.function],CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.functionK
+CallableType[builtins.function]&
+builtins.function"builtins.function×
+_default_meta_extractor.torch.utils.checkpoint._default_meta_extractor"W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*3
+x,
+torch._tensor.Tensor"torch._tensor.TensorU
+_is_compiling$torch.utils.checkpoint._is_compiling*
+func*
+args*
+
+kwargs0
+_detachtorch.utils.checkpoint._detach*
+xz
+(_pt2_selective_checkpoint_context_fn_gen?torch.utils.checkpoint._pt2_selective_checkpoint_context_fn_gen*
+	policy_fn‘
+'_checkpoint_without_reentrant_generator>torch.utils.checkpoint._checkpoint_without_reentrant_generator"
+Any*
+fn
+Any*!
+preserve_rng_state
+Any *]
+
+context_fnK
+CallableType[builtins.function]&
+builtins.function"builtins.function *5
+determinism_check
+builtins.str"builtins.str *+
+debug
+builtins.bool"builtins.bool *
+args
+Any*
+kwargs
+Any*’
+__annotations__&torch.utils.checkpoint.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*$
+fx_tracebacktorch.fx.traceback *u
+__all__torch.utils.checkpoint.__all__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*k
+_DEFAULT_DETERMINISM_MODE0torch.utils.checkpoint._DEFAULT_DETERMINISM_MODE
+builtins.str"builtins.str*–
+_checkpoint_debug_enabled0torch.utils.checkpoint._checkpoint_debug_enabledG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None*u
+_enable_checkpoint_early_stop4torch.utils.checkpoint._enable_checkpoint_early_stop
+builtins.bool"builtins.bool*m
+_checkpoint_error_template1torch.utils.checkpoint._checkpoint_error_template
+builtins.str"builtins.str*™
+"_allowed_determinism_checks_to_fns9torch.utils.checkpoint._allowed_determinism_checks_to_fns·
+;builtins.dict[builtins.str,CallableType[builtins.function]]
+builtins.str"builtins.strK
+CallableType[builtins.function]&
+builtins.function"builtins.function"builtins.dict*q
+uidtorch.utils.checkpoint.uidN
+itertools.count[builtins.int]
+builtins.int"builtins.int"itertools.count*_
+_ignored_ops#torch.utils.checkpoint._ignored_ops*
+builtins.set[Any]
+Any"builtins.set

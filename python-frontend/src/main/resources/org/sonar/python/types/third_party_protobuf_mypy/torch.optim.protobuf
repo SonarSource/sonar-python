@@ -1,0 +1,931 @@
+
+torch.optimÙ
+Adadeltatorch.optim.adadelta.Adadelta"torch.optim.optimizer.Optimizer*∏
+__init__&torch.optim.adadelta.Adadelta.__init__"
+None*H
+self>
+torch.optim.adadelta.Adadelta"torch.optim.adadelta.Adadelta*É
+paramsˆ
+hTypeAlias[Union[typing.Iterable[torch._tensor.Tensor],typing.Iterable[builtins.dict[builtins.str,Any]]]]Ë
+]Union[typing.Iterable[torch._tensor.Tensor],typing.Iterable[builtins.dict[builtins.str,Any]]]f
+%typing.Iterable[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"typing.Iterableú
+0typing.Iterable[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"typing.Iterable"torch.optim.optimizer.ParamsT**
+lr 
+builtins.float"builtins.float *+
+rho 
+builtins.float"builtins.float *+
+eps 
+builtins.float"builtins.float *4
+weight_decay 
+builtins.float"builtins.float *V
+foreachG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *0
+
+capturable
+builtins.bool"builtins.bool *.
+maximize
+builtins.bool"builtins.bool *4
+differentiable
+builtins.bool"builtins.bool *O
+__setstate__*torch.optim.adadelta.Adadelta.__setstate__*
+self*	
+state*∂
+_init_group)torch.optim.adadelta.Adadelta._init_group"
+Any*H
+self>
+torch.optim.adadelta.Adadelta"torch.optim.adadelta.Adadelta*b
+groupW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*x
+params_with_gradb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*m
+gradsb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*s
+square_avgsb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*r
+
+acc_deltasb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*s
+state_stepsb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*c
+step"torch.optim.adadelta.Adadelta.step*
+self*
+closure 0:_use_grad_for_differentiable‰
+Adagradtorch.optim.adagrad.Adagrad"torch.optim.optimizer.Optimizer*û	
+__init__$torch.optim.adagrad.Adagrad.__init__"
+None*D
+self:
+torch.optim.adagrad.Adagrad"torch.optim.adagrad.Adagrad*É
+paramsˆ
+hTypeAlias[Union[typing.Iterable[torch._tensor.Tensor],typing.Iterable[builtins.dict[builtins.str,Any]]]]Ë
+]Union[typing.Iterable[torch._tensor.Tensor],typing.Iterable[builtins.dict[builtins.str,Any]]]f
+%typing.Iterable[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"typing.Iterableú
+0typing.Iterable[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"typing.Iterable"torch.optim.optimizer.ParamsT**
+lr 
+builtins.float"builtins.float *0
+lr_decay 
+builtins.float"builtins.float *4
+weight_decay 
+builtins.float"builtins.float *A
+initial_accumulator_value 
+builtins.float"builtins.float *+
+eps 
+builtins.float"builtins.float *V
+foreachG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *.
+maximize
+builtins.bool"builtins.bool *4
+differentiable
+builtins.bool"builtins.bool *T
+fusedG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *M
+__setstate__(torch.optim.adagrad.Adagrad.__setstate__*
+self*	
+state*B
+share_memory(torch.optim.adagrad.Adagrad.share_memory*
+self*ç
+_init_group'torch.optim.adagrad.Adagrad._init_group*
+self*	
+group*
+params_with_grad*	
+grads*
+
+state_sums*
+state_steps*a
+step torch.optim.adagrad.Adagrad.step*
+self*
+closure 0:_use_grad_for_differentiablert
+_step_supports_amp_scaling6torch.optim.adagrad.Adagrad._step_supports_amp_scaling
+builtins.bool"builtins.bool◊
+Adamtorch.optim.adam.Adam"torch.optim.optimizer.Optimizer*“
+
+__init__torch.optim.adam.Adam.__init__"
+None*8
+self.
+torch.optim.adam.Adam"torch.optim.adam.Adam*É
+paramsˆ
+hTypeAlias[Union[typing.Iterable[torch._tensor.Tensor],typing.Iterable[builtins.dict[builtins.str,Any]]]]Ë
+]Union[typing.Iterable[torch._tensor.Tensor],typing.Iterable[builtins.dict[builtins.str,Any]]]f
+%typing.Iterable[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"typing.Iterableú
+0typing.Iterable[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"typing.Iterable"torch.optim.optimizer.ParamsT*à
+lr~
+*Union[builtins.float,torch._tensor.Tensor] 
+builtins.float"builtins.float,
+torch._tensor.Tensor"torch._tensor.Tensor *y
+betasl
+$Tuple[builtins.float,builtins.float] 
+builtins.float"builtins.float 
+builtins.float"builtins.float *+
+eps 
+builtins.float"builtins.float *4
+weight_decay 
+builtins.float"builtins.float *-
+amsgrad
+builtins.bool"builtins.bool *V
+foreachG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *.
+maximize
+builtins.bool"builtins.bool *0
+
+capturable
+builtins.bool"builtins.bool *4
+differentiable
+builtins.bool"builtins.bool *T
+fusedG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *G
+__setstate__"torch.optim.adam.Adam.__setstate__*
+self*	
+state*´
+_init_group!torch.optim.adam.Adam._init_group*
+self*	
+group*
+params_with_grad*	
+grads*
+exp_avgs*
+exp_avg_sqs*
+max_exp_avg_sqs*
+state_steps*[
+steptorch.optim.adam.Adam.step*
+self*
+closure 0:_use_grad_for_differentiablern
+_step_supports_amp_scaling0torch.optim.adam.Adam._step_supports_amp_scaling
+builtins.bool"builtins.boolâ
+Adamaxtorch.optim.adamax.Adamax"torch.optim.optimizer.Optimizer*˙
+__init__"torch.optim.adamax.Adamax.__init__"
+None*@
+self6
+torch.optim.adamax.Adamax"torch.optim.adamax.Adamax*É
+paramsˆ
+hTypeAlias[Union[typing.Iterable[torch._tensor.Tensor],typing.Iterable[builtins.dict[builtins.str,Any]]]]Ë
+]Union[typing.Iterable[torch._tensor.Tensor],typing.Iterable[builtins.dict[builtins.str,Any]]]f
+%typing.Iterable[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"typing.Iterableú
+0typing.Iterable[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"typing.Iterable"torch.optim.optimizer.ParamsT**
+lr 
+builtins.float"builtins.float *y
+betasl
+$Tuple[builtins.float,builtins.float] 
+builtins.float"builtins.float 
+builtins.float"builtins.float *+
+eps 
+builtins.float"builtins.float *4
+weight_decay 
+builtins.float"builtins.float *V
+foreachG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *.
+maximize
+builtins.bool"builtins.bool *4
+differentiable
+builtins.bool"builtins.bool *0
+
+capturable
+builtins.bool"builtins.bool *K
+__setstate__&torch.optim.adamax.Adamax.__setstate__*
+self*	
+state*ó
+_init_group%torch.optim.adamax.Adamax._init_group*
+self*	
+group*
+params_with_grad*	
+grads*
+exp_avgs*
+exp_infs*
+state_steps*_
+steptorch.optim.adamax.Adamax.step*
+self*
+closure 0:_use_grad_for_differentiableı
+AdamWtorch.optim.adamw.AdamW"torch.optim.optimizer.Optimizer*ÿ
+
+__init__ torch.optim.adamw.AdamW.__init__"
+None*<
+self2
+torch.optim.adamw.AdamW"torch.optim.adamw.AdamW*É
+paramsˆ
+hTypeAlias[Union[typing.Iterable[torch._tensor.Tensor],typing.Iterable[builtins.dict[builtins.str,Any]]]]Ë
+]Union[typing.Iterable[torch._tensor.Tensor],typing.Iterable[builtins.dict[builtins.str,Any]]]f
+%typing.Iterable[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"typing.Iterableú
+0typing.Iterable[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"typing.Iterable"torch.optim.optimizer.ParamsT*à
+lr~
+*Union[builtins.float,torch._tensor.Tensor] 
+builtins.float"builtins.float,
+torch._tensor.Tensor"torch._tensor.Tensor *y
+betasl
+$Tuple[builtins.float,builtins.float] 
+builtins.float"builtins.float 
+builtins.float"builtins.float *+
+eps 
+builtins.float"builtins.float *4
+weight_decay 
+builtins.float"builtins.float *-
+amsgrad
+builtins.bool"builtins.bool *.
+maximize
+builtins.bool"builtins.bool *V
+foreachG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *0
+
+capturable
+builtins.bool"builtins.bool *4
+differentiable
+builtins.bool"builtins.bool *T
+fusedG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *I
+__setstate__$torch.optim.adamw.AdamW.__setstate__*
+self*	
+state*∫
+_init_group#torch.optim.adamw.AdamW._init_group*
+self*	
+group*
+params_with_grad*	
+grads*
+amsgrad*
+exp_avgs*
+exp_avg_sqs*
+max_exp_avg_sqs*
+state_steps*]
+steptorch.optim.adamw.AdamW.step*
+self*
+closure 0:_use_grad_for_differentiablerp
+_step_supports_amp_scaling2torch.optim.adamw.AdamW._step_supports_amp_scaling
+builtins.bool"builtins.boolÕ
+ASGDtorch.optim.asgd.ASGD"torch.optim.optimizer.Optimizer*–
+__init__torch.optim.asgd.ASGD.__init__"
+None*8
+self.
+torch.optim.asgd.ASGD"torch.optim.asgd.ASGD*É
+paramsˆ
+hTypeAlias[Union[typing.Iterable[torch._tensor.Tensor],typing.Iterable[builtins.dict[builtins.str,Any]]]]Ë
+]Union[typing.Iterable[torch._tensor.Tensor],typing.Iterable[builtins.dict[builtins.str,Any]]]f
+%typing.Iterable[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"typing.Iterableú
+0typing.Iterable[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"typing.Iterable"torch.optim.optimizer.ParamsT**
+lr 
+builtins.float"builtins.float *-
+lambd 
+builtins.float"builtins.float *-
+alpha 
+builtins.float"builtins.float **
+t0 
+builtins.float"builtins.float *4
+weight_decay 
+builtins.float"builtins.float *V
+foreachG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *.
+maximize
+builtins.bool"builtins.bool *4
+differentiable
+builtins.bool"builtins.bool *0
+
+capturable
+builtins.bool"builtins.bool *G
+__setstate__"torch.optim.asgd.ASGD.__setstate__*
+self*	
+state*ì
+_init_group!torch.optim.asgd.ASGD._init_group*
+self*	
+group*
+params_with_grad*	
+grads*
+mus*
+axs*
+etas*
+state_steps*[
+steptorch.optim.asgd.ASGD.step*
+self*
+closure 0:_use_grad_for_differentiableˆ
+LBFGStorch.optim.lbfgs.LBFGS"torch.optim.optimizer.Optimizer*™
+__init__ torch.optim.lbfgs.LBFGS.__init__"
+None*<
+self2
+torch.optim.lbfgs.LBFGS"torch.optim.lbfgs.LBFGS*É
+paramsˆ
+hTypeAlias[Union[typing.Iterable[torch._tensor.Tensor],typing.Iterable[builtins.dict[builtins.str,Any]]]]Ë
+]Union[typing.Iterable[torch._tensor.Tensor],typing.Iterable[builtins.dict[builtins.str,Any]]]f
+%typing.Iterable[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"typing.Iterableú
+0typing.Iterable[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"typing.Iterable"torch.optim.optimizer.ParamsT**
+lr 
+builtins.float"builtins.float *,
+max_iter
+builtins.int"builtins.int *T
+max_evalD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *6
+tolerance_grad 
+builtins.float"builtins.float *8
+tolerance_change 
+builtins.float"builtins.float *0
+history_size
+builtins.int"builtins.int *Z
+line_search_fnD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *2
+_numeltorch.optim.lbfgs.LBFGS._numel*
+self*H
+_gather_flat_grad)torch.optim.lbfgs.LBFGS._gather_flat_grad*
+self*S
+	_add_grad!torch.optim.lbfgs.LBFGS._add_grad*
+self*
+	step_size*
+
+update*>
+_clone_param$torch.optim.lbfgs.LBFGS._clone_param*
+self*K
+
+_set_param"torch.optim.lbfgs.LBFGS._set_param*
+self*
+params_data*r
+_directional_evaluate-torch.optim.lbfgs.LBFGS._directional_evaluate*
+self*
+closure*
+x*
+t*
+d*=
+steptorch.optim.lbfgs.LBFGS.step*
+self*
+closure0r3
+_paramstorch.optim.lbfgs.LBFGS._params
+Anyr>
+_numel_cache$torch.optim.lbfgs.LBFGS._numel_cache
+NoneÑ
+NAdamtorch.optim.nadam.NAdam"torch.optim.optimizer.Optimizer*Í	
+__init__ torch.optim.nadam.NAdam.__init__"
+None*<
+self2
+torch.optim.nadam.NAdam"torch.optim.nadam.NAdam*É
+paramsˆ
+hTypeAlias[Union[typing.Iterable[torch._tensor.Tensor],typing.Iterable[builtins.dict[builtins.str,Any]]]]Ë
+]Union[typing.Iterable[torch._tensor.Tensor],typing.Iterable[builtins.dict[builtins.str,Any]]]f
+%typing.Iterable[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"typing.Iterableú
+0typing.Iterable[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"typing.Iterable"torch.optim.optimizer.ParamsT**
+lr 
+builtins.float"builtins.float *y
+betasl
+$Tuple[builtins.float,builtins.float] 
+builtins.float"builtins.float 
+builtins.float"builtins.float *+
+eps 
+builtins.float"builtins.float *4
+weight_decay 
+builtins.float"builtins.float *6
+momentum_decay 
+builtins.float"builtins.float *<
+decoupled_weight_decay
+builtins.bool"builtins.bool *V
+foreachG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *.
+maximize
+builtins.bool"builtins.bool *0
+
+capturable
+builtins.bool"builtins.bool *4
+differentiable
+builtins.bool"builtins.bool *I
+__setstate__$torch.optim.nadam.NAdam.__setstate__*
+self*	
+state*©
+_init_group#torch.optim.nadam.NAdam._init_group*
+self*	
+group*
+params_with_grad*	
+grads*
+exp_avgs*
+exp_avg_sqs*
+mu_products*
+state_steps*]
+steptorch.optim.nadam.NAdam.step*
+self*
+closure 0:_use_grad_for_differentiable¶X
+	Optimizertorch.optim.optimizer.Optimizer"builtins.object*˘
+__init__(torch.optim.optimizer.Optimizer.__init__"
+None*L
+selfB
+torch.optim.optimizer.Optimizer"torch.optim.optimizer.Optimizer*É
+paramsˆ
+hTypeAlias[Union[typing.Iterable[torch._tensor.Tensor],typing.Iterable[builtins.dict[builtins.str,Any]]]]Ë
+]Union[typing.Iterable[torch._tensor.Tensor],typing.Iterable[builtins.dict[builtins.str,Any]]]f
+%typing.Iterable[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"typing.Iterableú
+0typing.Iterable[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"typing.Iterable"torch.optim.optimizer.ParamsT*e
+defaultsW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*„
+__getstate__,torch.optim.optimizer.Optimizer.__getstate__"W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*L
+selfB
+torch.optim.optimizer.Optimizer"torch.optim.optimizer.Optimizer*¯
+__setstate__,torch.optim.optimizer.Optimizer.__setstate__"
+None*L
+selfB
+torch.optim.optimizer.Optimizer"torch.optim.optimizer.Optimizer*b
+stateW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*ò
+__repr__(torch.optim.optimizer.Optimizer.__repr__"
+builtins.str"builtins.str*DB
+torch.optim.optimizer.Optimizer"torch.optim.optimizer.Optimizer*º
+ _cuda_graph_capture_health_check@torch.optim.optimizer.Optimizer._cuda_graph_capture_health_check"
+None*L
+selfB
+torch.optim.optimizer.Optimizer"torch.optim.optimizer.Optimizer*§
+_optimizer_step_code4torch.optim.optimizer.Optimizer._optimizer_step_code"
+None*L
+selfB
+torch.optim.optimizer.Optimizer"torch.optim.optimizer.Optimizer*¸
+profile_hook_step1torch.optim.optimizer.Optimizer.profile_hook_step"K
+CallableType[builtins.function]&
+builtins.function"builtins.function*U
+funcK
+CallableType[builtins.function]&
+builtins.function"builtins.function0:staticmethodh*ﬁ
+"_group_tensors_by_device_and_dtypeBtorch.optim.optimizer.Optimizer._group_tensors_by_device_and_dtype"Ñ	
+œUnion[builtins.dict[Tuple[None,None],Tuple[TypeAlias[builtins.list[builtins.list[torch._tensor.Tensor]]],TypeAlias[builtins.list[builtins.int]]]],builtins.dict[Tuple[torch._C.device,torch._C.dtype],Unknown]]Í
+ãbuiltins.dict[Tuple[None,None],Tuple[TypeAlias[builtins.list[builtins.list[torch._tensor.Tensor]]],TypeAlias[builtins.list[builtins.int]]]](
+Tuple[None,None]
+None
+None†
+kTuple[TypeAlias[builtins.list[builtins.list[torch._tensor.Tensor]]],TypeAlias[builtins.list[builtins.int]]]ë
+=TypeAlias[builtins.list[builtins.list[torch._tensor.Tensor]]]ß
+2builtins.list[builtins.list[torch._tensor.Tensor]]b
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list"builtins.list"$torch.optim.optimizer.TensorListListö
+&TypeAlias[builtins.list[builtins.int]]J
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list""torch.utils._foreach_utils.Indices"builtins.dict¿
+<builtins.dict[Tuple[torch._C.device,torch._C.dtype],Unknown]o
+%Tuple[torch._C.device,torch._C.dtype]"
+torch._C.device"torch._C.device 
+torch._C.dtype"torch._C.dtype "builtins.dict*¶
+tensorlistlistë
+=TypeAlias[builtins.list[builtins.list[torch._tensor.Tensor]]]ß
+2builtins.list[builtins.list[torch._tensor.Tensor]]b
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list"builtins.list"$torch.optim.optimizer.TensorListList*2
+with_indices
+builtins.bool"builtins.bool 0:staticmethodh*§
+_patch_step_function4torch.optim.optimizer.Optimizer._patch_step_function"
+None*L
+selfB
+torch.optim.optimizer.Optimizer"torch.optim.optimizer.Optimizer*°
+register_step_pre_hook6torch.optim.optimizer.Optimizer.register_step_pre_hook"F
+!torch.utils.hooks.RemovableHandle"!torch.utils.hooks.RemovableHandle*L
+selfB
+torch.optim.optimizer.Optimizer"torch.optim.optimizer.Optimizer*∏
+hook≠
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"0torch.optim.optimizer.Optimizer.OptimizerPreHook*§
+register_step_post_hook7torch.optim.optimizer.Optimizer.register_step_post_hook"F
+!torch.utils.hooks.RemovableHandle"!torch.utils.hooks.RemovableHandle*L
+selfB
+torch.optim.optimizer.Optimizer"torch.optim.optimizer.Optimizer*π
+hookÆ
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"1torch.optim.optimizer.Optimizer.OptimizerPostHook*¯
+register_state_dict_pre_hook<torch.optim.optimizer.Optimizer.register_state_dict_pre_hook"F
+!torch.utils.hooks.RemovableHandle"!torch.utils.hooks.RemovableHandle*L
+selfB
+torch.optim.optimizer.Optimizer"torch.optim.optimizer.Optimizer*U
+hookK
+CallableType[builtins.function]&
+builtins.function"builtins.function*-
+prepend
+builtins.bool"builtins.bool *˙
+register_state_dict_post_hook=torch.optim.optimizer.Optimizer.register_state_dict_post_hook"F
+!torch.utils.hooks.RemovableHandle"!torch.utils.hooks.RemovableHandle*L
+selfB
+torch.optim.optimizer.Optimizer"torch.optim.optimizer.Optimizer*U
+hookK
+CallableType[builtins.function]&
+builtins.function"builtins.function*-
+prepend
+builtins.bool"builtins.bool * 
+
+state_dict*torch.optim.optimizer.Optimizer.state_dict"®
+*TypeAlias[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"torch.optim.optimizer.StateDict*L
+selfB
+torch.optim.optimizer.Optimizer"torch.optim.optimizer.Optimizer0:torch._disable_dynamo*á
+(_process_value_according_to_param_policyHtorch.optim.optimizer.Optimizer._process_value_according_to_param_policy",
+torch._tensor.Tensor"torch._tensor.Tensor*7
+param,
+torch._tensor.Tensor"torch._tensor.Tensor*7
+value,
+torch._tensor.Tensor"torch._tensor.Tensor**
+param_id
+builtins.int"builtins.int*É
+param_groupsq
+%builtins.list[builtins.dict[Any,Any]]9
+builtins.dict[Any,Any]
+Any
+Any"builtins.dict"builtins.list*-
+key"
+typing.Hashable"typing.Hashable 0:staticmethodh*Ç
+!register_load_state_dict_pre_hookAtorch.optim.optimizer.Optimizer.register_load_state_dict_pre_hook"F
+!torch.utils.hooks.RemovableHandle"!torch.utils.hooks.RemovableHandle*L
+selfB
+torch.optim.optimizer.Optimizer"torch.optim.optimizer.Optimizer*U
+hookK
+CallableType[builtins.function]&
+builtins.function"builtins.function*-
+prepend
+builtins.bool"builtins.bool *Ñ
+"register_load_state_dict_post_hookBtorch.optim.optimizer.Optimizer.register_load_state_dict_post_hook"F
+!torch.utils.hooks.RemovableHandle"!torch.utils.hooks.RemovableHandle*L
+selfB
+torch.optim.optimizer.Optimizer"torch.optim.optimizer.Optimizer*U
+hookK
+CallableType[builtins.function]&
+builtins.function"builtins.function*-
+prepend
+builtins.bool"builtins.bool *Ô
+load_state_dict/torch.optim.optimizer.Optimizer.load_state_dict"
+None*L
+selfB
+torch.optim.optimizer.Optimizer"torch.optim.optimizer.Optimizer*π
+
+state_dict®
+*TypeAlias[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"torch.optim.optimizer.StateDict0:torch._disable_dynamo*⁄
+	zero_grad)torch.optim.optimizer.Optimizer.zero_grad"
+None*L
+selfB
+torch.optim.optimizer.Optimizer"torch.optim.optimizer.Optimizer*1
+set_to_none
+builtins.bool"builtins.bool 0:torch._disable_dynamo*ù
+add_param_group/torch.optim.optimizer.Optimizer.add_param_group"
+None*L
+selfB
+torch.optim.optimizer.Optimizer"torch.optim.optimizer.Optimizer*h
+param_groupW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict0:torch._disable_dynamo2·
+step$torch.optim.optimizer.Optimizer.step´
+step$torch.optim.optimizer.Optimizer.step"
+None*L
+selfB
+torch.optim.optimizer.Optimizer"torch.optim.optimizer.Optimizer*
+closure
+None 0:overloadXÑ
+step$torch.optim.optimizer.Optimizer.step" 
+builtins.float"builtins.float*L
+selfB
+torch.optim.optimizer.Optimizer"torch.optim.optimizer.Optimizer*X
+closureK
+CallableType[builtins.function]&
+builtins.function"builtins.function0:overloadXr˛
+_optimizer_step_pre_hooks9torch.optim.optimizer.Optimizer._optimizer_step_pre_hooks•
+Fbuiltins.dict[builtins.int,TypeAlias[CallableType[builtins.function]]]
+builtins.int"builtins.int≠
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"0torch.optim.optimizer.Optimizer.OptimizerPreHook"builtins.dictrÅ
+_optimizer_step_post_hooks:torch.optim.optimizer.Optimizer._optimizer_step_post_hooks¶
+Fbuiltins.dict[builtins.int,TypeAlias[CallableType[builtins.function]]]
+builtins.int"builtins.intÆ
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"1torch.optim.optimizer.Optimizer.OptimizerPostHook"builtins.dictr∞
+_optimizer_state_dict_pre_hooks?torch.optim.optimizer.Optimizer._optimizer_state_dict_pre_hooksÀ
+Ecollections.OrderedDict[builtins.int,CallableType[builtins.function]]
+builtins.int"builtins.intK
+CallableType[builtins.function]&
+builtins.function"builtins.function"collections.OrderedDictr≤
+ _optimizer_state_dict_post_hooks@torch.optim.optimizer.Optimizer._optimizer_state_dict_post_hooksÀ
+Ecollections.OrderedDict[builtins.int,CallableType[builtins.function]]
+builtins.int"builtins.intK
+CallableType[builtins.function]&
+builtins.function"builtins.function"collections.OrderedDictr∫
+$_optimizer_load_state_dict_pre_hooksDtorch.optim.optimizer.Optimizer._optimizer_load_state_dict_pre_hooksÀ
+Ecollections.OrderedDict[builtins.int,CallableType[builtins.function]]
+builtins.int"builtins.intK
+CallableType[builtins.function]&
+builtins.function"builtins.function"collections.OrderedDictrº
+%_optimizer_load_state_dict_post_hooksEtorch.optim.optimizer.Optimizer._optimizer_load_state_dict_post_hooksÀ
+Ecollections.OrderedDict[builtins.int,CallableType[builtins.function]]
+builtins.int"builtins.intK
+CallableType[builtins.function]&
+builtins.function"builtins.function"collections.OrderedDictrç
+defaults(torch.optim.optimizer.Optimizer.defaultsW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dictr¥
+state%torch.optim.optimizer.Optimizer.stateÉ
+1collections.defaultdict[torch._tensor.Tensor,Any],
+torch._tensor.Tensor"torch._tensor.Tensor
+Any"collections.defaultdictr◊
+param_groups,torch.optim.optimizer.Optimizer.param_groupsò
+.builtins.list[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"builtins.listrå
+$_warned_capturable_if_run_uncapturedDtorch.optim.optimizer.Optimizer._warned_capturable_if_run_uncaptured
+builtins.bool"builtins.boolrp
+_zero_grad_profile_name7torch.optim.optimizer.Optimizer._zero_grad_profile_name
+builtins.str"builtins.strª
+RAdamtorch.optim.radam.RAdam"torch.optim.optimizer.Optimizer*≤	
+__init__ torch.optim.radam.RAdam.__init__"
+None*<
+self2
+torch.optim.radam.RAdam"torch.optim.radam.RAdam*É
+paramsˆ
+hTypeAlias[Union[typing.Iterable[torch._tensor.Tensor],typing.Iterable[builtins.dict[builtins.str,Any]]]]Ë
+]Union[typing.Iterable[torch._tensor.Tensor],typing.Iterable[builtins.dict[builtins.str,Any]]]f
+%typing.Iterable[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"typing.Iterableú
+0typing.Iterable[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"typing.Iterable"torch.optim.optimizer.ParamsT**
+lr 
+builtins.float"builtins.float *y
+betasl
+$Tuple[builtins.float,builtins.float] 
+builtins.float"builtins.float 
+builtins.float"builtins.float *+
+eps 
+builtins.float"builtins.float *4
+weight_decay 
+builtins.float"builtins.float *<
+decoupled_weight_decay
+builtins.bool"builtins.bool *V
+foreachG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *.
+maximize
+builtins.bool"builtins.bool *0
+
+capturable
+builtins.bool"builtins.bool *4
+differentiable
+builtins.bool"builtins.bool *I
+__setstate__$torch.optim.radam.RAdam.__setstate__*
+self*	
+state*ò
+_init_group#torch.optim.radam.RAdam._init_group*
+self*	
+group*
+params_with_grad*	
+grads*
+exp_avgs*
+exp_avg_sqs*
+state_steps*]
+steptorch.optim.radam.RAdam.step*
+self*
+closure 0:_use_grad_for_differentiableû
+RMSproptorch.optim.rmsprop.RMSprop"torch.optim.optimizer.Optimizer*Ë
+__init__$torch.optim.rmsprop.RMSprop.__init__"
+None*D
+self:
+torch.optim.rmsprop.RMSprop"torch.optim.rmsprop.RMSprop*É
+paramsˆ
+hTypeAlias[Union[typing.Iterable[torch._tensor.Tensor],typing.Iterable[builtins.dict[builtins.str,Any]]]]Ë
+]Union[typing.Iterable[torch._tensor.Tensor],typing.Iterable[builtins.dict[builtins.str,Any]]]f
+%typing.Iterable[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"typing.Iterableú
+0typing.Iterable[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"typing.Iterable"torch.optim.optimizer.ParamsT**
+lr 
+builtins.float"builtins.float *-
+alpha 
+builtins.float"builtins.float *+
+eps 
+builtins.float"builtins.float *4
+weight_decay 
+builtins.float"builtins.float *0
+momentum 
+builtins.float"builtins.float *
+centered
+Any *
+
+capturable
+Any *V
+foreachG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *.
+maximize
+builtins.bool"builtins.bool *4
+differentiable
+builtins.bool"builtins.bool *M
+__setstate__(torch.optim.rmsprop.RMSprop.__setstate__*
+self*	
+state*∑
+_init_group'torch.optim.rmsprop.RMSprop._init_group*
+self*	
+group*
+params_with_grad*	
+grads*
+square_avgs*
+momentum_buffer_list*
+	grad_avgs*
+state_steps*a
+step torch.optim.rmsprop.RMSprop.step*
+self*
+closure 0:_use_grad_for_differentiableã
+Rproptorch.optim.rprop.Rprop"torch.optim.optimizer.Optimizer*ê	
+__init__ torch.optim.rprop.Rprop.__init__"
+None*<
+self2
+torch.optim.rprop.Rprop"torch.optim.rprop.Rprop*É
+paramsˆ
+hTypeAlias[Union[typing.Iterable[torch._tensor.Tensor],typing.Iterable[builtins.dict[builtins.str,Any]]]]Ë
+]Union[typing.Iterable[torch._tensor.Tensor],typing.Iterable[builtins.dict[builtins.str,Any]]]f
+%typing.Iterable[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"typing.Iterableú
+0typing.Iterable[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"typing.Iterable"torch.optim.optimizer.ParamsT**
+lr 
+builtins.float"builtins.float *x
+etasl
+$Tuple[builtins.float,builtins.float] 
+builtins.float"builtins.float 
+builtins.float"builtins.float *~
+
+step_sizesl
+$Tuple[builtins.float,builtins.float] 
+builtins.float"builtins.float 
+builtins.float"builtins.float *0
+
+capturable
+builtins.bool"builtins.bool *V
+foreachG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *.
+maximize
+builtins.bool"builtins.bool *4
+differentiable
+builtins.bool"builtins.bool *I
+__setstate__$torch.optim.rprop.Rprop.__setstate__*
+self*	
+state*ä
+_init_group#torch.optim.rprop.Rprop._init_group*
+self*	
+group*
+
+params*	
+grads*	
+prevs*
+
+step_sizes*
+state_steps*]
+steptorch.optim.rprop.Rprop.step*
+self*
+closure 0:_use_grad_for_differentiableµ
+SGDtorch.optim.sgd.SGD"torch.optim.optimizer.Optimizer*Ò
+__init__torch.optim.sgd.SGD.__init__"
+None*4
+self*
+torch.optim.sgd.SGD"torch.optim.sgd.SGD*
+params
+Any**
+lr 
+builtins.float"builtins.float *0
+momentum 
+builtins.float"builtins.float *1
+	dampening 
+builtins.float"builtins.float *4
+weight_decay 
+builtins.float"builtins.float *
+nesterov
+Any *.
+maximize
+builtins.bool"builtins.bool *V
+foreachG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *4
+differentiable
+builtins.bool"builtins.bool *T
+fusedG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *E
+__setstate__ torch.optim.sgd.SGD.__setstate__*
+self*	
+state*t
+_init_grouptorch.optim.sgd.SGD._init_group*
+self*	
+group*
+
+params*	
+grads*
+momentum_buffer_list*Y
+steptorch.optim.sgd.SGD.step*
+self*
+closure 0:_use_grad_for_differentiablerl
+_step_supports_amp_scaling.torch.optim.sgd.SGD._step_supports_amp_scaling
+builtins.bool"builtins.boolø
+
+SparseAdam"torch.optim.sparse_adam.SparseAdam"torch.optim.optimizer.Optimizer*ü
+__init__+torch.optim.sparse_adam.SparseAdam.__init__"
+None*R
+selfH
+"torch.optim.sparse_adam.SparseAdam""torch.optim.sparse_adam.SparseAdam*É
+paramsˆ
+hTypeAlias[Union[typing.Iterable[torch._tensor.Tensor],typing.Iterable[builtins.dict[builtins.str,Any]]]]Ë
+]Union[typing.Iterable[torch._tensor.Tensor],typing.Iterable[builtins.dict[builtins.str,Any]]]f
+%typing.Iterable[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"typing.Iterableú
+0typing.Iterable[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"typing.Iterable"torch.optim.optimizer.ParamsT**
+lr 
+builtins.float"builtins.float *y
+betasl
+$Tuple[builtins.float,builtins.float] 
+builtins.float"builtins.float 
+builtins.float"builtins.float *+
+eps 
+builtins.float"builtins.float *.
+maximize
+builtins.bool"builtins.bool *J
+step'torch.optim.sparse_adam.SparseAdam.step*
+self*
+closure 0*l
+__path__torch.optim.__path__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*á
+__annotations__torch.optim.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict**
+lr_schedulertorch.optim.lr_scheduler *$
+	swa_utilstorch.optim.swa_utils 

@@ -1,0 +1,149 @@
+
+torch.nn.utils­
+weight_norm&torch.nn.utils.weight_norm.weight_norm"‰
+#torch.nn.utils.weight_norm.T_module@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"torch.nn.modules.module.Module*–
+module‰
+#torch.nn.utils.weight_norm.T_module@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"torch.nn.modules.module.Module*(
+name
+builtins.str"builtins.str *'
+dim
+builtins.int"builtins.int ’
+remove_weight_norm-torch.nn.utils.weight_norm.remove_weight_norm"‰
+#torch.nn.utils.weight_norm.T_module@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"torch.nn.modules.module.Module*–
+module‰
+#torch.nn.utils.weight_norm.T_module@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"torch.nn.modules.module.Module*(
+name
+builtins.str"builtins.str ô
+parameters_to_vector6torch.nn.utils.convert_parameters.parameters_to_vector",
+torch._tensor.Tensor"torch._tensor.Tensor*v
+
+parametersf
+%typing.Iterable[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"typing.Iterable‡
+vector_to_parameters6torch.nn.utils.convert_parameters.vector_to_parameters"
+None*5
+vec,
+torch._tensor.Tensor"torch._tensor.Tensor*v
+
+parametersf
+%typing.Iterable[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"typing.IterableÄ
+spectral_norm*torch.nn.utils.spectral_norm.spectral_norm"‹
+%torch.nn.utils.spectral_norm.T_module@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"torch.nn.modules.module.Module*˜
+module‹
+%torch.nn.utils.spectral_norm.T_module@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"torch.nn.modules.module.Module*(
+name
+builtins.str"builtins.str *6
+n_power_iterations
+builtins.int"builtins.int *+
+eps 
+builtins.float"builtins.float *O
+dimD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None œ
+remove_spectral_norm1torch.nn.utils.spectral_norm.remove_spectral_norm"‹
+%torch.nn.utils.spectral_norm.T_module@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"torch.nn.modules.module.Module*˜
+module‹
+%torch.nn.utils.spectral_norm.T_module@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"torch.nn.modules.module.Module*(
+name
+builtins.str"builtins.str Ð
+fuse_conv_bn_eval'torch.nn.utils.fusion.fuse_conv_bn_eval"~
+torch.nn.utils.fusion.ConvT>
+torch.nn.modules.conv._ConvNd"torch.nn.modules.conv._ConvNd"torch.nn.modules.conv._ConvNd*ˆ
+conv~
+torch.nn.utils.fusion.ConvT>
+torch.nn.modules.conv._ConvNd"torch.nn.modules.conv._ConvNd"torch.nn.modules.conv._ConvNd*V
+bnN
+%torch.nn.modules.batchnorm._BatchNorm"%torch.nn.modules.batchnorm._BatchNorm*/
+	transpose
+builtins.bool"builtins.bool Ê
+fuse_conv_bn_weights*torch.nn.utils.fusion.fuse_conv_bn_weights"À
+@Tuple[torch.nn.parameter.Parameter,torch.nn.parameter.Parameter]<
+torch.nn.parameter.Parameter"torch.nn.parameter.Parameter<
+torch.nn.parameter.Parameter"torch.nn.parameter.Parameter*8
+conv_w,
+torch._tensor.Tensor"torch._tensor.Tensor*h
+conv_b\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None*7
+bn_rm,
+torch._tensor.Tensor"torch._tensor.Tensor*7
+bn_rv,
+torch._tensor.Tensor"torch._tensor.Tensor*,
+bn_eps 
+builtins.float"builtins.float*f
+bn_w\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None*f
+bn_b\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None*/
+	transpose
+builtins.bool"builtins.bool ±
+fuse_linear_bn_eval)torch.nn.utils.fusion.fuse_linear_bn_eval"ƒ
+torch.nn.utils.fusion.LinearT@
+torch.nn.modules.linear.Linear"torch.nn.modules.linear.Linear"torch.nn.modules.linear.Linear*
+linearƒ
+torch.nn.utils.fusion.LinearT@
+torch.nn.modules.linear.Linear"torch.nn.modules.linear.Linear"torch.nn.modules.linear.Linear*V
+bnN
+%torch.nn.modules.batchnorm._BatchNorm"%torch.nn.modules.batchnorm._BatchNormÁ
+fuse_linear_bn_weights,torch.nn.utils.fusion.fuse_linear_bn_weights"À
+@Tuple[torch.nn.parameter.Parameter,torch.nn.parameter.Parameter]<
+torch.nn.parameter.Parameter"torch.nn.parameter.Parameter<
+torch.nn.parameter.Parameter"torch.nn.parameter.Parameter*:
+linear_w,
+torch._tensor.Tensor"torch._tensor.Tensor*j
+linear_b\
+ Union[torch._tensor.Tensor,None],
+torch._tensor.Tensor"torch._tensor.Tensor
+None*7
+bn_rm,
+torch._tensor.Tensor"torch._tensor.Tensor*7
+bn_rv,
+torch._tensor.Tensor"torch._tensor.Tensor*,
+bn_eps 
+builtins.float"builtins.float*6
+bn_w,
+torch._tensor.Tensor"torch._tensor.Tensor*6
+bn_b,
+torch._tensor.Tensor"torch._tensor.Tensor†
+#convert_conv2d_weight_memory_format@torch.nn.utils.memory_format.convert_conv2d_weight_memory_format*
+
+module*
+memory_format†
+#convert_conv3d_weight_memory_format@torch.nn.utils.memory_format.convert_conv3d_weight_memory_format*
+
+module*
+memory_formatP
+	skip_inittorch.nn.utils.init.skip_init*
+
+module_cls*
+args*
+
+kwargs*o
+__path__torch.nn.utils.__path__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*Š
+__annotations__torch.nn.utils.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*
+rnntorch.nn.utils.rnn *5
+parametrizationstorch.nn.utils.parametrizations *'
+	statelesstorch.nn.utils.stateless *m
+__all__torch.nn.utils.__all__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list

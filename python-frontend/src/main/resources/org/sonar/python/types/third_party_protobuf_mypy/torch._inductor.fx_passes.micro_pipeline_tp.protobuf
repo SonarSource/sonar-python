@@ -1,0 +1,145 @@
+
++torch._inductor.fx_passes.micro_pipeline_tp«
+	_2DMatmul5torch._inductor.fx_passes.micro_pipeline_tp._2DMatmul"builtins.object*Ž
+replace_withBtorch._inductor.fx_passes.micro_pipeline_tp._2DMatmul.replace_with"
+None*x
+selfn
+5torch._inductor.fx_passes.micro_pipeline_tp._2DMatmul"5torch._inductor.fx_passes.micro_pipeline_tp._2DMatmul*6
+new_node(
+torch.fx.node.Node"torch.fx.node.Node*ª
+__init__>torch._inductor.fx_passes.micro_pipeline_tp._2DMatmul.__init__"
+None*x
+selfn
+5torch._inductor.fx_passes.micro_pipeline_tp._2DMatmul"5torch._inductor.fx_passes.micro_pipeline_tp._2DMatmul*2
+node(
+torch.fx.node.Node"torch.fx.node.Node*4
+B_node(
+torch.fx.node.Node"torch.fx.node.Node*p
+B_node_ancestorsZ
+ builtins.set[torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node"builtins.set8rl
+node:torch._inductor.fx_passes.micro_pipeline_tp._2DMatmul.node(
+torch.fx.node.Node"torch.fx.node.Noderp
+B_node<torch._inductor.fx_passes.micro_pipeline_tp._2DMatmul.B_node(
+torch.fx.node.Node"torch.fx.node.Noder¶
+B_node_ancestorsFtorch._inductor.fx_passes.micro_pipeline_tp._2DMatmul.B_node_ancestorsZ
+ builtins.set[torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node"builtins.setrü
+__dataclass_fields__Jtorch._inductor.fx_passes.micro_pipeline_tp._2DMatmul.__dataclass_fields__—
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dict—
+	_NDMatmul5torch._inductor.fx_passes.micro_pipeline_tp._NDMatmul"builtins.object*Ž
+replace_withBtorch._inductor.fx_passes.micro_pipeline_tp._NDMatmul.replace_with"
+None*x
+selfn
+5torch._inductor.fx_passes.micro_pipeline_tp._NDMatmul"5torch._inductor.fx_passes.micro_pipeline_tp._NDMatmul*6
+new_node(
+torch.fx.node.Node"torch.fx.node.Node*ß
+__init__>torch._inductor.fx_passes.micro_pipeline_tp._NDMatmul.__init__"
+None*x
+selfn
+5torch._inductor.fx_passes.micro_pipeline_tp._NDMatmul"5torch._inductor.fx_passes.micro_pipeline_tp._NDMatmul*g
+nodes\
+!builtins.list[torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node"builtins.list*4
+B_node(
+torch.fx.node.Node"torch.fx.node.Node*p
+B_node_ancestorsZ
+ builtins.set[torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node"builtins.set8r¢
+nodes;torch._inductor.fx_passes.micro_pipeline_tp._NDMatmul.nodes\
+!builtins.list[torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node"builtins.listrp
+B_node<torch._inductor.fx_passes.micro_pipeline_tp._NDMatmul.B_node(
+torch.fx.node.Node"torch.fx.node.Noder¶
+B_node_ancestorsFtorch._inductor.fx_passes.micro_pipeline_tp._NDMatmul.B_node_ancestorsZ
+ builtins.set[torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node"builtins.setrü
+__dataclass_fields__Jtorch._inductor.fx_passes.micro_pipeline_tp._NDMatmul.__dataclass_fields__—
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dict¡
+_is_backward8torch._inductor.fx_passes.micro_pipeline_tp._is_backward"
+builtins.bool"builtins.bool*7
+graph,
+torch.fx.graph.Graph"torch.fx.graph.Graph
+ _compute_mm_arithmetic_intensityLtorch._inductor.fx_passes.micro_pipeline_tp._compute_mm_arithmetic_intensity" 
+builtins.float"builtins.float*#
+M
+builtins.int"builtins.int*#
+N
+builtins.int"builtins.int*#
+K
+builtins.int"builtins.intº
+_filter_nodes_by_targetCtorch._inductor.fx_passes.micro_pipeline_tp._filter_nodes_by_target"\
+!builtins.list[torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node"builtins.list*g
+nodes\
+!builtins.list[torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node"builtins.list*
+target
+AnyÞ
+_find_ancestors;torch._inductor.fx_passes.micro_pipeline_tp._find_ancestors"Z
+ builtins.set[torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node"builtins.set*2
+node(
+torch.fx.node.Node"torch.fx.node.Nodeú
+_can_schedule_y_before_xDtorch._inductor.fx_passes.micro_pipeline_tp._can_schedule_y_before_x"µ
+5Tuple[builtins.bool,builtins.set[torch.fx.node.Node]]
+builtins.bool"builtins.boolZ
+ builtins.set[torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node"builtins.set*/
+x(
+torch.fx.node.Node"torch.fx.node.Node*/
+y(
+torch.fx.node.Node"torch.fx.node.Nodeÿ
+_find_consumer_matmulsBtorch._inductor.fx_passes.micro_pipeline_tp._find_consumer_matmuls"ì
+builtins.list[Union[torch._inductor.fx_passes.micro_pipeline_tp._2DMatmul,torch._inductor.fx_passes.micro_pipeline_tp._NDMatmul]]Ö
+rUnion[torch._inductor.fx_passes.micro_pipeline_tp._2DMatmul,torch._inductor.fx_passes.micro_pipeline_tp._NDMatmul]n
+5torch._inductor.fx_passes.micro_pipeline_tp._2DMatmul"5torch._inductor.fx_passes.micro_pipeline_tp._2DMatmuln
+5torch._inductor.fx_passes.micro_pipeline_tp._NDMatmul"5torch._inductor.fx_passes.micro_pipeline_tp._NDMatmul"builtins.list*2
+node(
+torch.fx.node.Node"torch.fx.node.Node‹
+ _find_all_gather_node_from_matchLtorch._inductor.fx_passes.micro_pipeline_tp._find_all_gather_node_from_match"„
+,Tuple[torch.fx.node.Node,torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node(
+torch.fx.node.Node"torch.fx.node.Node*
+match
+Any”
+fuse_all_gather_matmul_zero_dimKtorch._inductor.fx_passes.micro_pipeline_tp.fuse_all_gather_matmul_zero_dim*	
+match*	
+shard*
+
+group_name’
+fuse_all_gather_matmulBtorch._inductor.fx_passes.micro_pipeline_tp.fuse_all_gather_matmul*	
+match*	
+shard*
+
+gather_dim*
+
+group_name®
+#fuse_matmul_reduce_scatter_zero_dimOtorch._inductor.fx_passes.micro_pipeline_tp.fuse_matmul_reduce_scatter_zero_dim*	
+match*
+rs_input*
+	reduce_op*
+
+group_name­
+fuse_matmul_reduce_scatterFtorch._inductor.fx_passes.micro_pipeline_tp.fuse_matmul_reduce_scatter*	
+match*
+rs_input*
+	reduce_op*
+scatter_dim*
+
+group_nameP
+_register_passes<torch._inductor.fx_passes.micro_pipeline_tp._register_passes*§
+__annotations__;torch._inductor.fx_passes.micro_pipeline_tp.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*A
+aten0torch._inductor.fx_passes.micro_pipeline_tp.aten
+Any*ª
+patterns4torch._inductor.fx_passes.micro_pipeline_tp.patternsh
+2torch._inductor.pattern_matcher.PatternMatcherPass"2torch._inductor.pattern_matcher.PatternMatcherPass

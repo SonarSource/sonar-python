@@ -1,0 +1,774 @@
+
+torch._dynamo.sourceº
+LocalSource torch._dynamo.source.LocalSource"torch._guards.Source*R
+reconstruct,torch._dynamo.source.LocalSource.reconstruct*
+self*
+codegen*G
+guard_source-torch._dynamo.source.LocalSource.guard_source*
+self*7
+name%torch._dynamo.source.LocalSource.name*
+self*Ù
+__init__)torch._dynamo.source.LocalSource.__init__"
+None*N
+selfD
+ torch._dynamo.source.LocalSource" torch._dynamo.source.LocalSource*,
+
+local_name
+builtins.str"builtins.str*5
+cell_or_freevar
+builtins.bool"builtins.bool 8rW
+
+local_name+torch._dynamo.source.LocalSource.local_name
+builtins.str"builtins.strrc
+cell_or_freevar0torch._dynamo.source.LocalSource.cell_or_freevar
+builtins.bool"builtins.boolrÁ
+__dataclass_fields__5torch._dynamo.source.LocalSource.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dict˙
+SyntheticLocalSource)torch._dynamo.source.SyntheticLocalSource"torch._guards.Source*[
+reconstruct5torch._dynamo.source.SyntheticLocalSource.reconstruct*
+self*
+codegen*P
+guard_source6torch._dynamo.source.SyntheticLocalSource.guard_source*
+self*@
+name.torch._dynamo.source.SyntheticLocalSource.name*
+self*ÿ
+__init__2torch._dynamo.source.SyntheticLocalSource.__init__"
+None*`
+selfV
+)torch._dynamo.source.SyntheticLocalSource")torch._dynamo.source.SyntheticLocalSource*,
+
+local_name
+builtins.str"builtins.str8r`
+
+local_name4torch._dynamo.source.SyntheticLocalSource.local_name
+builtins.str"builtins.strr
+__dataclass_fields__>torch._dynamo.source.SyntheticLocalSource.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictÒ
+RandomValueSource&torch._dynamo.source.RandomValueSource"torch._guards.Source*M
+guard_source3torch._dynamo.source.RandomValueSource.guard_source*
+self*X
+reconstruct2torch._dynamo.source.RandomValueSource.reconstruct*
+self*
+codegen*=
+name+torch._dynamo.source.RandomValueSource.name*
+self*÷
+__init__/torch._dynamo.source.RandomValueSource.__init__"
+None*Z
+selfP
+&torch._dynamo.source.RandomValueSource"&torch._dynamo.source.RandomValueSource*3
+random_call_index
+builtins.int"builtins.int8rk
+random_call_index8torch._dynamo.source.RandomValueSource.random_call_index
+builtins.int"builtins.intrÌ
+__dataclass_fields__;torch._dynamo.source.RandomValueSource.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dict≠
+GlobalSource!torch._dynamo.source.GlobalSource"torch._guards.Source*S
+reconstruct-torch._dynamo.source.GlobalSource.reconstruct*
+self*
+codegen*H
+guard_source.torch._dynamo.source.GlobalSource.guard_source*
+self*8
+name&torch._dynamo.source.GlobalSource.name*
+self*¡
+__init__*torch._dynamo.source.GlobalSource.__init__"
+None*P
+selfF
+!torch._dynamo.source.GlobalSource"!torch._dynamo.source.GlobalSource*-
+global_name
+builtins.str"builtins.str8rZ
+global_name-torch._dynamo.source.GlobalSource.global_name
+builtins.str"builtins.strrË
+__dataclass_fields__6torch._dynamo.source.GlobalSource.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictÛ
+GlobalWeakRefSource(torch._dynamo.source.GlobalWeakRefSource"torch._guards.Source*Z
+reconstruct4torch._dynamo.source.GlobalWeakRefSource.reconstruct*
+self*
+codegen*O
+guard_source5torch._dynamo.source.GlobalWeakRefSource.guard_source*
+self*?
+name-torch._dynamo.source.GlobalWeakRefSource.name*
+self*÷
+__init__1torch._dynamo.source.GlobalWeakRefSource.__init__"
+None*^
+selfT
+(torch._dynamo.source.GlobalWeakRefSource"(torch._dynamo.source.GlobalWeakRefSource*-
+global_name
+builtins.str"builtins.str8ra
+global_name4torch._dynamo.source.GlobalWeakRefSource.global_name
+builtins.str"builtins.strrÔ
+__dataclass_fields__=torch._dynamo.source.GlobalWeakRefSource.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictÔ
+
+AttrSourcetorch._dynamo.source.AttrSource"torch._guards.ChainedSource*H
+__post_init__-torch._dynamo.source.AttrSource.__post_init__*
+self*Q
+reconstruct+torch._dynamo.source.AttrSource.reconstruct*
+self*
+codegen*F
+guard_source,torch._dynamo.source.AttrSource.guard_source*
+self*6
+name$torch._dynamo.source.AttrSource.name*
+self*Ó
+__init__(torch._dynamo.source.AttrSource.__init__"
+None*L
+selfB
+torch._dynamo.source.AttrSource"torch._dynamo.source.AttrSource*6
+base,
+torch._guards.Source"torch._guards.Source*(
+member
+builtins.str"builtins.str8rN
+member&torch._dynamo.source.AttrSource.member
+builtins.str"builtins.strrZ
+base$torch._dynamo.source.AttrSource.base,
+torch._guards.Source"torch._guards.SourcerÊ
+__dataclass_fields__4torch._dynamo.source.AttrSource.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictß
+
+GradSourcetorch._dynamo.source.GradSource"torch._guards.ChainedSource*Q
+reconstruct+torch._dynamo.source.GradSource.reconstruct*
+self*
+codegen*F
+guard_source,torch._dynamo.source.GradSource.guard_source*
+self*6
+name$torch._dynamo.source.GradSource.name*
+self*
+__init__(torch._dynamo.source.GradSource.__init__"
+None*L
+selfB
+torch._dynamo.source.GradSource"torch._dynamo.source.GradSource*6
+base,
+torch._guards.Source"torch._guards.Source**
+member
+builtins.str"builtins.str 8rN
+member&torch._dynamo.source.GradSource.member
+builtins.str"builtins.strrZ
+base$torch._dynamo.source.GradSource.base,
+torch._guards.Source"torch._guards.SourcerÊ
+__dataclass_fields__4torch._dynamo.source.GradSource.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dict›
+ParamBufferSource&torch._dynamo.source.ParamBufferSource"torch._dynamo.source.AttrSource*M
+guard_source3torch._dynamo.source.ParamBufferSource.guard_source*
+self*É
+__init__/torch._dynamo.source.ParamBufferSource.__init__"
+None*Z
+selfP
+&torch._dynamo.source.ParamBufferSource"&torch._dynamo.source.ParamBufferSource*6
+base,
+torch._guards.Source"torch._guards.Source*(
+member
+builtins.str"builtins.str8ra
+base+torch._dynamo.source.ParamBufferSource.base,
+torch._guards.Source"torch._guards.SourcerU
+member-torch._dynamo.source.ParamBufferSource.member
+builtins.str"builtins.strrÌ
+__dataclass_fields__;torch._dynamo.source.ParamBufferSource.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dict∆
+EphemeralSource$torch._dynamo.source.EphemeralSource"torch._guards.Source*K
+guard_source1torch._dynamo.source.EphemeralSource.guard_source*
+self*;
+name)torch._dynamo.source.EphemeralSource.name*
+self*G
+
+make_guard/torch._dynamo.source.EphemeralSource.make_guard*
+self*K
+is_ephemeral1torch._dynamo.source.EphemeralSource.is_ephemeral*
+self*Ì
+__init__-torch._dynamo.source.EphemeralSource.__init__"
+None*V
+selfL
+$torch._dynamo.source.EphemeralSource"$torch._dynamo.source.EphemeralSource*P
+descD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None 8rw
+desc)torch._dynamo.source.EphemeralSource.descD
+Union[builtins.str,None]
+builtins.str"builtins.str
+NonerÎ
+__dataclass_fields__9torch._dynamo.source.EphemeralSource.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictî
+TensorProperty#torch._dynamo.source.TensorProperty"	enum.Enum*H
+method_name/torch._dynamo.source.TensorProperty.method_name*
+selfHrN
+SIZE(torch._dynamo.source.TensorProperty.SIZE
+builtins.int"builtins.intrR
+STRIDE*torch._dynamo.source.TensorProperty.STRIDE
+builtins.int"builtins.intrb
+STORAGE_OFFSET2torch._dynamo.source.TensorProperty.STORAGE_OFFSET
+builtins.int"builtins.intã
+TensorPropertySource)torch._dynamo.source.TensorPropertySource"torch._guards.ChainedSource*R
+__post_init__7torch._dynamo.source.TensorPropertySource.__post_init__*
+self*[
+reconstruct5torch._dynamo.source.TensorPropertySource.reconstruct*
+self*
+codegen*P
+guard_source6torch._dynamo.source.TensorPropertySource.guard_source*
+self*@
+name.torch._dynamo.source.TensorPropertySource.name*
+self*â
+__init__2torch._dynamo.source.TensorPropertySource.__init__"
+None*`
+selfV
+)torch._dynamo.source.TensorPropertySource")torch._dynamo.source.TensorPropertySource*6
+base,
+torch._guards.Source"torch._guards.Source*T
+propJ
+#torch._dynamo.source.TensorProperty"#torch._dynamo.source.TensorProperty*O
+idxD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None 8rÇ
+prop.torch._dynamo.source.TensorPropertySource.propJ
+#torch._dynamo.source.TensorProperty"#torch._dynamo.source.TensorPropertyrz
+idx-torch._dynamo.source.TensorPropertySource.idxD
+Union[builtins.int,None]
+builtins.int"builtins.int
+Nonerd
+base.torch._dynamo.source.TensorPropertySource.base,
+torch._guards.Source"torch._guards.Sourcer
+__dataclass_fields__>torch._dynamo.source.TensorPropertySource.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictã
+NegateSource!torch._dynamo.source.NegateSource"torch._guards.ChainedSource*J
+__post_init__/torch._dynamo.source.NegateSource.__post_init__*
+self*S
+reconstruct-torch._dynamo.source.NegateSource.reconstruct*
+self*
+codegen*H
+guard_source.torch._dynamo.source.NegateSource.guard_source*
+self*8
+name&torch._dynamo.source.NegateSource.name*
+self* 
+__init__*torch._dynamo.source.NegateSource.__init__"
+None*P
+selfF
+!torch._dynamo.source.NegateSource"!torch._dynamo.source.NegateSource*6
+base,
+torch._guards.Source"torch._guards.Source8r\
+base&torch._dynamo.source.NegateSource.base,
+torch._guards.Source"torch._guards.SourcerË
+__dataclass_fields__6torch._dynamo.source.NegateSource.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dict∑
+ConvertIntSource%torch._dynamo.source.ConvertIntSource"torch._guards.ChainedSource*N
+__post_init__3torch._dynamo.source.ConvertIntSource.__post_init__*
+self*W
+reconstruct1torch._dynamo.source.ConvertIntSource.reconstruct*
+self*
+codegen*L
+guard_source2torch._dynamo.source.ConvertIntSource.guard_source*
+self*<
+name*torch._dynamo.source.ConvertIntSource.name*
+self*÷
+__init__.torch._dynamo.source.ConvertIntSource.__init__"
+None*X
+selfN
+%torch._dynamo.source.ConvertIntSource"%torch._dynamo.source.ConvertIntSource*6
+base,
+torch._guards.Source"torch._guards.Source8r`
+base*torch._dynamo.source.ConvertIntSource.base,
+torch._guards.Source"torch._guards.SourcerÏ
+__dataclass_fields__:torch._dynamo.source.ConvertIntSource.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictö
+FlattenScriptObjectSource.torch._dynamo.source.FlattenScriptObjectSource"torch._guards.ChainedSource*W
+__post_init__<torch._dynamo.source.FlattenScriptObjectSource.__post_init__*
+self*`
+reconstruct:torch._dynamo.source.FlattenScriptObjectSource.reconstruct*
+self*
+codegen*U
+guard_source;torch._dynamo.source.FlattenScriptObjectSource.guard_source*
+self*E
+name3torch._dynamo.source.FlattenScriptObjectSource.name*
+self*Ò
+__init__7torch._dynamo.source.FlattenScriptObjectSource.__init__"
+None*j
+self`
+.torch._dynamo.source.FlattenScriptObjectSource".torch._dynamo.source.FlattenScriptObjectSource*6
+base,
+torch._guards.Source"torch._guards.Source8ri
+base3torch._dynamo.source.FlattenScriptObjectSource.base,
+torch._guards.Source"torch._guards.Sourcerı
+__dataclass_fields__Ctorch._dynamo.source.FlattenScriptObjectSource.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dict‹
+ScriptObjectQualifiedNameSource4torch._dynamo.source.ScriptObjectQualifiedNameSource"torch._guards.ChainedSource*]
+__post_init__Btorch._dynamo.source.ScriptObjectQualifiedNameSource.__post_init__*
+self*f
+reconstruct@torch._dynamo.source.ScriptObjectQualifiedNameSource.reconstruct*
+self*
+codegen*[
+guard_sourceAtorch._dynamo.source.ScriptObjectQualifiedNameSource.guard_source*
+self*K
+name9torch._dynamo.source.ScriptObjectQualifiedNameSource.name*
+self*É
+__init__=torch._dynamo.source.ScriptObjectQualifiedNameSource.__init__"
+None*v
+selfl
+4torch._dynamo.source.ScriptObjectQualifiedNameSource"4torch._dynamo.source.ScriptObjectQualifiedNameSource*6
+base,
+torch._guards.Source"torch._guards.Source8ro
+base9torch._dynamo.source.ScriptObjectQualifiedNameSource.base,
+torch._guards.Source"torch._guards.Sourcer˚
+__dataclass_fields__Itorch._dynamo.source.ScriptObjectQualifiedNameSource.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dict–
+DefaultsSource#torch._dynamo.source.DefaultsSource"torch._guards.ChainedSource*L
+__post_init__1torch._dynamo.source.DefaultsSource.__post_init__*
+self*U
+reconstruct/torch._dynamo.source.DefaultsSource.reconstruct*
+self*
+codegen*J
+guard_source0torch._dynamo.source.DefaultsSource.guard_source*
+self*:
+name(torch._dynamo.source.DefaultsSource.name*
+self*Ï
+__init__,torch._dynamo.source.DefaultsSource.__init__"
+None*T
+selfJ
+#torch._dynamo.source.DefaultsSource"#torch._dynamo.source.DefaultsSource*6
+base,
+torch._guards.Source"torch._guards.Source*m
+idx_key`
+ Union[builtins.int,builtins.str]
+builtins.int"builtins.int
+builtins.str"builtins.str*+
+is_kw
+builtins.bool"builtins.bool 8rò
+idx_key+torch._dynamo.source.DefaultsSource.idx_key`
+ Union[builtins.int,builtins.str]
+builtins.int"builtins.int
+builtins.str"builtins.strrR
+is_kw)torch._dynamo.source.DefaultsSource.is_kw
+builtins.bool"builtins.boolrP
+field)torch._dynamo.source.DefaultsSource.field
+builtins.str"builtins.strrP
+_name)torch._dynamo.source.DefaultsSource._name
+builtins.str"builtins.strr^
+base(torch._dynamo.source.DefaultsSource.base,
+torch._guards.Source"torch._guards.SourcerÍ
+__dataclass_fields__8torch._dynamo.source.DefaultsSource.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictÃ	
+GetItemSource"torch._dynamo.source.GetItemSource"torch._guards.ChainedSource*K
+__post_init__0torch._dynamo.source.GetItemSource.__post_init__*
+self*T
+reconstruct.torch._dynamo.source.GetItemSource.reconstruct*
+self*
+codegen*I
+guard_source/torch._dynamo.source.GetItemSource.guard_source*
+self*I
+unpack_slice/torch._dynamo.source.GetItemSource.unpack_slice*
+self*9
+name'torch._dynamo.source.GetItemSource.name*
+self*ó
+__init__+torch._dynamo.source.GetItemSource.__init__"
+None*R
+selfH
+"torch._dynamo.source.GetItemSource""torch._dynamo.source.GetItemSource*6
+base,
+torch._guards.Source"torch._guards.Source*
+index
+Any*4
+index_is_slice
+builtins.bool"builtins.bool 8r:
+index(torch._dynamo.source.GetItemSource.index
+Anyrc
+index_is_slice1torch._dynamo.source.GetItemSource.index_is_slice
+builtins.bool"builtins.boolr]
+base'torch._dynamo.source.GetItemSource.base,
+torch._guards.Source"torch._guards.SourcerÈ
+__dataclass_fields__7torch._dynamo.source.GetItemSource.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictı
+ConstDictKeySource'torch._dynamo.source.ConstDictKeySource""torch._dynamo.source.GetItemSource*L
+is_dict_key3torch._dynamo.source.ConstDictKeySource.is_dict_key*
+self*Y
+reconstruct3torch._dynamo.source.ConstDictKeySource.reconstruct*
+self*
+codegen*>
+name,torch._dynamo.source.ConstDictKeySource.name*
+self*¶
+__init__0torch._dynamo.source.ConstDictKeySource.__init__"
+None*\
+selfR
+'torch._dynamo.source.ConstDictKeySource"'torch._dynamo.source.ConstDictKeySource*6
+base,
+torch._guards.Source"torch._guards.Source*
+index
+Any*4
+index_is_slice
+builtins.bool"builtins.bool 8rb
+base,torch._dynamo.source.ConstDictKeySource.base,
+torch._guards.Source"torch._guards.Sourcer?
+index-torch._dynamo.source.ConstDictKeySource.index
+Anyrh
+index_is_slice6torch._dynamo.source.ConstDictKeySource.index_is_slice
+builtins.bool"builtins.boolrÓ
+__dataclass_fields__<torch._dynamo.source.ConstDictKeySource.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictˇ
+TupleIteratorGetItemSource/torch._dynamo.source.TupleIteratorGetItemSource""torch._dynamo.source.GetItemSource*a
+reconstruct;torch._dynamo.source.TupleIteratorGetItemSource.reconstruct*
+self*
+codegen*F
+name4torch._dynamo.source.TupleIteratorGetItemSource.name*
+self*æ
+__init__8torch._dynamo.source.TupleIteratorGetItemSource.__init__"
+None*l
+selfb
+/torch._dynamo.source.TupleIteratorGetItemSource"/torch._dynamo.source.TupleIteratorGetItemSource*6
+base,
+torch._guards.Source"torch._guards.Source*
+index
+Any*4
+index_is_slice
+builtins.bool"builtins.bool 8rj
+base4torch._dynamo.source.TupleIteratorGetItemSource.base,
+torch._guards.Source"torch._guards.SourcerG
+index5torch._dynamo.source.TupleIteratorGetItemSource.index
+Anyrp
+index_is_slice>torch._dynamo.source.TupleIteratorGetItemSource.index_is_slice
+builtins.bool"builtins.boolrˆ
+__dataclass_fields__Dtorch._dynamo.source.TupleIteratorGetItemSource.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictı
+
+TypeSourcetorch._dynamo.source.TypeSource"torch._guards.ChainedSource*H
+__post_init__-torch._dynamo.source.TypeSource.__post_init__*
+self*Q
+reconstruct+torch._dynamo.source.TypeSource.reconstruct*
+self*
+codegen*F
+guard_source,torch._dynamo.source.TypeSource.guard_source*
+self*6
+name$torch._dynamo.source.TypeSource.name*
+self*ƒ
+__init__(torch._dynamo.source.TypeSource.__init__"
+None*L
+selfB
+torch._dynamo.source.TypeSource"torch._dynamo.source.TypeSource*6
+base,
+torch._guards.Source"torch._guards.Source8rZ
+base$torch._dynamo.source.TypeSource.base,
+torch._guards.Source"torch._guards.SourcerÊ
+__dataclass_fields__4torch._dynamo.source.TypeSource.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dict¢
+ODictGetItemSource'torch._dynamo.source.ODictGetItemSource"torch._guards.ChainedSource*P
+__post_init__5torch._dynamo.source.ODictGetItemSource.__post_init__*
+self*Y
+reconstruct3torch._dynamo.source.ODictGetItemSource.reconstruct*
+self*
+codegen*N
+guard_source4torch._dynamo.source.ODictGetItemSource.guard_source*
+self*>
+name,torch._dynamo.source.ODictGetItemSource.name*
+self*
+__init__0torch._dynamo.source.ODictGetItemSource.__init__"
+None*\
+selfR
+'torch._dynamo.source.ODictGetItemSource"'torch._dynamo.source.ODictGetItemSource*6
+base,
+torch._guards.Source"torch._guards.Source*
+index
+Any8r?
+index-torch._dynamo.source.ODictGetItemSource.index
+Anyrb
+base,torch._dynamo.source.ODictGetItemSource.base,
+torch._guards.Source"torch._guards.SourcerÓ
+__dataclass_fields__<torch._dynamo.source.ODictGetItemSource.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dict›
+OptimizerSource$torch._dynamo.source.OptimizerSource"torch._guards.ChainedSource*V
+reconstruct0torch._dynamo.source.OptimizerSource.reconstruct*
+self*
+codegen*K
+guard_source1torch._dynamo.source.OptimizerSource.guard_source*
+self*;
+name)torch._dynamo.source.OptimizerSource.name*
+self*”
+__init__-torch._dynamo.source.OptimizerSource.__init__"
+None*V
+selfL
+$torch._dynamo.source.OptimizerSource"$torch._dynamo.source.OptimizerSource*6
+base,
+torch._guards.Source"torch._guards.Source8r_
+base)torch._dynamo.source.OptimizerSource.base,
+torch._guards.Source"torch._guards.SourcerÎ
+__dataclass_fields__9torch._dynamo.source.OptimizerSource.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dict”
+NNModuleSource#torch._dynamo.source.NNModuleSource"torch._guards.ChainedSource*U
+reconstruct/torch._dynamo.source.NNModuleSource.reconstruct*
+self*
+codegen*J
+guard_source0torch._dynamo.source.NNModuleSource.guard_source*
+self*:
+name(torch._dynamo.source.NNModuleSource.name*
+self*–
+__init__,torch._dynamo.source.NNModuleSource.__init__"
+None*T
+selfJ
+#torch._dynamo.source.NNModuleSource"#torch._dynamo.source.NNModuleSource*6
+base,
+torch._guards.Source"torch._guards.Source8r^
+base(torch._dynamo.source.NNModuleSource.base,
+torch._guards.Source"torch._guards.SourcerÍ
+__dataclass_fields__8torch._dynamo.source.NNModuleSource.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dict‡
+NotNNModuleSource&torch._dynamo.source.NotNNModuleSource"#torch._dynamo.source.NNModuleSource*M
+guard_source3torch._dynamo.source.NotNNModuleSource.guard_source*
+self*Ÿ
+__init__/torch._dynamo.source.NotNNModuleSource.__init__"
+None*Z
+selfP
+&torch._dynamo.source.NotNNModuleSource"&torch._dynamo.source.NotNNModuleSource*6
+base,
+torch._guards.Source"torch._guards.Source8ra
+base+torch._dynamo.source.NotNNModuleSource.base,
+torch._guards.Source"torch._guards.SourcerÌ
+__dataclass_fields__;torch._dynamo.source.NotNNModuleSource.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictË
+FSDPNNModuleSource'torch._dynamo.source.FSDPNNModuleSource"#torch._dynamo.source.NNModuleSource*N
+guard_source4torch._dynamo.source.FSDPNNModuleSource.guard_source*
+self*‹
+__init__0torch._dynamo.source.FSDPNNModuleSource.__init__"
+None*\
+selfR
+'torch._dynamo.source.FSDPNNModuleSource"'torch._dynamo.source.FSDPNNModuleSource*6
+base,
+torch._guards.Source"torch._guards.Source8rb
+base,torch._dynamo.source.FSDPNNModuleSource.base,
+torch._guards.Source"torch._guards.SourcerÓ
+__dataclass_fields__<torch._dynamo.source.FSDPNNModuleSource.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dict—
+GlobalStateSource&torch._dynamo.source.GlobalStateSource"torch._guards.Source*=
+name+torch._dynamo.source.GlobalStateSource.name*
+self*M
+guard_source3torch._dynamo.source.GlobalStateSource.guard_source*
+self8rÌ
+__dataclass_fields__;torch._dynamo.source.GlobalStateSource.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictë
+ConstantSource#torch._dynamo.source.ConstantSource"torch._guards.Source*U
+reconstruct/torch._dynamo.source.ConstantSource.reconstruct*
+self*
+codegen*J
+guard_source0torch._dynamo.source.ConstantSource.guard_source*
+self*:
+name(torch._dynamo.source.ConstantSource.name*
+self*N
+
+make_guard.torch._dynamo.source.ConstantSource.make_guard*
+self*
+fn*«
+__init__,torch._dynamo.source.ConstantSource.__init__"
+None*T
+selfJ
+#torch._dynamo.source.ConstantSource"#torch._dynamo.source.ConstantSource*-
+source_name
+builtins.str"builtins.str8r\
+source_name/torch._dynamo.source.ConstantSource.source_name
+builtins.str"builtins.strrÍ
+__dataclass_fields__8torch._dynamo.source.ConstantSource.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dict‚
+NumpyTensorSource&torch._dynamo.source.NumpyTensorSource"torch._guards.ChainedSource*≠
+name+torch._dynamo.source.NumpyTensorSource.name"
+builtins.str"builtins.str*Z
+selfP
+&torch._dynamo.source.NumpyTensorSource"&torch._dynamo.source.NumpyTensorSource*M
+guard_source3torch._dynamo.source.NumpyTensorSource.guard_source*
+self*X
+reconstruct2torch._dynamo.source.NumpyTensorSource.reconstruct*
+self*
+codegen*Ÿ
+__init__/torch._dynamo.source.NumpyTensorSource.__init__"
+None*Z
+selfP
+&torch._dynamo.source.NumpyTensorSource"&torch._dynamo.source.NumpyTensorSource*6
+base,
+torch._guards.Source"torch._guards.Source8ra
+base+torch._dynamo.source.NumpyTensorSource.base,
+torch._guards.Source"torch._guards.SourcerÌ
+__dataclass_fields__;torch._dynamo.source.NumpyTensorSource.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictà
+FloatTensorSource&torch._dynamo.source.FloatTensorSource"torch._guards.ChainedSource*≠
+name+torch._dynamo.source.FloatTensorSource.name"
+builtins.str"builtins.str*Z
+selfP
+&torch._dynamo.source.FloatTensorSource"&torch._dynamo.source.FloatTensorSource*M
+guard_source3torch._dynamo.source.FloatTensorSource.guard_source*
+self*Ÿ
+__init__/torch._dynamo.source.FloatTensorSource.__init__"
+None*Z
+selfP
+&torch._dynamo.source.FloatTensorSource"&torch._dynamo.source.FloatTensorSource*6
+base,
+torch._guards.Source"torch._guards.Source8ra
+base+torch._dynamo.source.FloatTensorSource.base,
+torch._guards.Source"torch._guards.SourcerÌ
+__dataclass_fields__;torch._dynamo.source.FloatTensorSource.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dict©
+CallMethodItemSource)torch._dynamo.source.CallMethodItemSource"torch._guards.ChainedSource*∂
+name.torch._dynamo.source.CallMethodItemSource.name"
+builtins.str"builtins.str*`
+selfV
+)torch._dynamo.source.CallMethodItemSource")torch._dynamo.source.CallMethodItemSource*P
+guard_source6torch._dynamo.source.CallMethodItemSource.guard_source*
+self*‚
+__init__2torch._dynamo.source.CallMethodItemSource.__init__"
+None*`
+selfV
+)torch._dynamo.source.CallMethodItemSource")torch._dynamo.source.CallMethodItemSource*6
+base,
+torch._guards.Source"torch._guards.Source8rd
+base.torch._dynamo.source.CallMethodItemSource.base,
+torch._guards.Source"torch._guards.Sourcer
+__dataclass_fields__>torch._dynamo.source.CallMethodItemSource.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dict¬
+ShapeEnvSource#torch._dynamo.source.ShapeEnvSource"torch._guards.Source*:
+name(torch._dynamo.source.ShapeEnvSource.name*
+self*J
+guard_source0torch._dynamo.source.ShapeEnvSource.guard_source*
+self8rÍ
+__dataclass_fields__8torch._dynamo.source.ShapeEnvSource.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dict€
+BackwardStateSource(torch._dynamo.source.BackwardStateSource"torch._guards.Source*?
+name-torch._dynamo.source.BackwardStateSource.name*
+self*O
+guard_source5torch._dynamo.source.BackwardStateSource.guard_source*
+self8rÔ
+__dataclass_fields__=torch._dynamo.source.BackwardStateSource.__dataclass_fields__ó
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictI
+is_constant_source'torch._dynamo.source.is_constant_source*
+
+source˛
+reconstruct_getitem(torch._dynamo.source.reconstruct_getitem"
+Any*Ä
+sourceÛ
+QUnion[torch._dynamo.source.GetItemSource,torch._dynamo.source.ODictGetItemSource]H
+"torch._dynamo.source.GetItemSource""torch._dynamo.source.GetItemSourceR
+'torch._dynamo.source.ODictGetItemSource"'torch._dynamo.source.ODictGetItemSource*
+codegen
+Any*
+index_is_slice
+Any™
+is_from_local_source)torch._dynamo.source.is_from_local_source"
+Any*8
+source,
+torch._guards.Source"torch._guards.Source*$
+allow_cell_or_freevar
+Any §
+$is_from_flatten_script_object_source9torch._dynamo.source.is_from_flatten_script_object_source"
+Any*8
+source,
+torch._guards.Source"torch._guards.Sourceå
+is_from_optimizer_source-torch._dynamo.source.is_from_optimizer_source"
+Any*8
+source,
+torch._guards.Source"torch._guards.Source|
+is_from_defaults%torch._dynamo.source.is_from_defaults"
+Any*8
+source,
+torch._guards.Source"torch._guards.Source|
+is_cell_contents%torch._dynamo.source.is_cell_contents"
+Any*8
+source,
+torch._guards.Source"torch._guards.Source*ê
+__annotations__$torch._dynamo.source.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*ç
+_GUARD_SOURCE_NN_MODULE,torch._dynamo.source._GUARD_SOURCE_NN_MODULE√
+Bbuiltins.dict[torch._guards.GuardSource,torch._guards.GuardSource]6
+torch._guards.GuardSource"torch._guards.GuardSource6
+torch._guards.GuardSource"torch._guards.GuardSource"builtins.dict*ë
+_GUARD_SOURCE_FSDP_MODULE.torch._dynamo.source._GUARD_SOURCE_FSDP_MODULE√
+Bbuiltins.dict[torch._guards.GuardSource,torch._guards.GuardSource]6
+torch._guards.GuardSource"torch._guards.GuardSource6
+torch._guards.GuardSource"torch._guards.GuardSource"builtins.dict*ï
+_GUARD_SOURCE_NOT_NN_MODULE0torch._dynamo.source._GUARD_SOURCE_NOT_NN_MODULE√
+Bbuiltins.dict[torch._guards.GuardSource,torch._guards.GuardSource]6
+torch._guards.GuardSource"torch._guards.GuardSource6
+torch._guards.GuardSource"torch._guards.GuardSource"builtins.dict

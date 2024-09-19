@@ -1,0 +1,181 @@
+
+torch.distributed.utils˜
+_pack_kwargs$torch.distributed.utils._pack_kwargs"¹
+7Tuple[builtins.tuple[Any],builtins.tuple[builtins.str]].
+builtins.tuple[Any]
+Any"builtins.tupleL
+builtins.tuple[builtins.str]
+builtins.str"builtins.str"builtins.tuple*
+args
+Any*
+kwargs
+Anyé
+_cast_forward_inputs,torch.distributed.utils._cast_forward_inputs"$
+Tuple[Any,Any]
+Any
+Any*U
+dtypeJ
+Union[torch._C.dtype,None] 
+torch._C.dtype"torch._C.dtype
+None*
+args
+Any*
+kwargs
+AnyŸ
+_unpack_kwargs&torch.distributed.utils._unpack_kwargs"Ç
+:Tuple[builtins.tuple[Any],builtins.dict[builtins.str,Any]].
+builtins.tuple[Any]
+Any"builtins.tupleW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*=
+	flat_args.
+builtins.tuple[Any]
+Any"builtins.tuple*\
+
+kwarg_keysL
+builtins.tuple[builtins.str]
+builtins.str"builtins.str"builtins.tuple­
+	_p_assert!torch.distributed.utils._p_assert"
+None*
+cond
+Any*#
+s
+builtins.str"builtins.str*;
+raise_assertion_error
+builtins.bool"builtins.bool ¦
+_alloc_storage&torch.distributed.utils._alloc_storage"
+None*8
+tensor,
+torch._tensor.Tensor"torch._tensor.Tensor*(
+size
+torch._C.Size"torch._C.Sizey
+_free_storage%torch.distributed.utils._free_storage"
+Any*8
+tensor,
+torch._tensor.Tensor"torch._tensor.Tensorª
+
+_to_kwargs"torch.distributed.utils._to_kwargs"›
+JTuple[builtins.tuple[Any],builtins.tuple[builtins.dict[builtins.str,Any]]].
+builtins.tuple[Any]
+Any"builtins.tupleš
+/builtins.tuple[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"builtins.tuple*:
+inputs.
+builtins.tuple[Any]
+Any"builtins.tuple*Ÿ
+kwargs’
++Union[builtins.dict[builtins.str,Any],None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None*5
+target_device"
+torch._C.device"torch._C.device*E
+!use_side_stream_for_tensor_copies
+builtins.bool"builtins.boolÚ
+$_verify_param_shape_across_processes<torch.distributed.utils._verify_param_shape_across_processes"
+Any*e
+process_groupR
+'torch._C._distributed_c10d.ProcessGroup"'torch._C._distributed_c10d.ProcessGroup*o
+tensorsb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*’
+loggerƒ
+-Union[torch._C._distributed_c10d.Logger,None]F
+!torch._C._distributed_c10d.Logger"!torch._C._distributed_c10d.Logger
+None Ž
+_sync_module_states+torch.distributed.utils._sync_module_states"
+None*L
+module@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*e
+process_groupR
+'torch._C._distributed_c10d.ProcessGroup"'torch._C._distributed_c10d.ProcessGroup*7
+broadcast_bucket_size
+builtins.int"builtins.int*%
+src
+builtins.int"builtins.int*r
+params_and_buffers_to_ignoreP
+typing.Container[builtins.str]
+builtins.str"builtins.str"typing.Container*7
+broadcast_buffers
+builtins.bool"builtins.bool ”
+_sync_params_and_buffers0torch.distributed.utils._sync_params_and_buffers"
+None*e
+process_groupR
+'torch._C._distributed_c10d.ProcessGroup"'torch._C._distributed_c10d.ProcessGroup*u
+module_statesb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.list*7
+broadcast_bucket_size
+builtins.int"builtins.int*%
+src
+builtins.int"builtins.int
+_replace_by_prefix*torch.distributed.utils._replace_by_prefix"
+None*g
+
+state_dictW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*,
+
+old_prefix
+builtins.str"builtins.str*,
+
+new_prefix
+builtins.str"builtins.strœ
+_data_ptr_allocated+torch.distributed.utils._data_ptr_allocated"
+builtins.bool"builtins.bool*8
+tensor,
+torch._tensor.Tensor"torch._tensor.Tensor"Š
+_recursive_to%torch.distributed.utils._recursive_to²
+_recursive_to%torch.distributed.utils._recursive_to"
+(builtins.list[torch.distributed.utils.S]R
+torch.distributed.utils.S"
+builtins.object"builtins.object"builtins.object"builtins.list*^
+inputsR
+torch.distributed.utils.S"
+builtins.object"builtins.object"builtins.object*5
+target_device"
+torch._C.device"torch._C.device*E
+!use_side_stream_for_tensor_copies
+builtins.bool"builtins.bool0:overloadXœ
+_recursive_to%torch.distributed.utils._recursive_to"x
+ Tuple[torch.distributed.utils.T]R
+torch.distributed.utils.T"
+builtins.object"builtins.object"builtins.object*^
+inputsR
+torch.distributed.utils.T"
+builtins.object"builtins.object"builtins.object*5
+target_device"
+torch._C.device"torch._C.device*E
+!use_side_stream_for_tensor_copies
+builtins.bool"builtins.bool0:overloadX"Î
+_apply_to_tensors)torch.distributed.utils._apply_to_tensors²
+_apply_to_tensors)torch.distributed.utils._apply_to_tensors"R
+torch.distributed.utils.Q"
+builtins.object"builtins.object"builtins.object*S
+fnK
+CallableType[builtins.function]&
+builtins.function"builtins.function*;
+	container,
+torch._tensor.Tensor"torch._tensor.Tensor0:overloadXØ
+_apply_to_tensors)torch.distributed.utils._apply_to_tensors"R
+torch.distributed.utils.R"
+builtins.object"builtins.object"builtins.object*S
+fnK
+CallableType[builtins.function]&
+builtins.function"builtins.function*a
+	containerR
+torch.distributed.utils.R"
+builtins.object"builtins.object"builtins.object0:overloadX*“
+__annotations__'torch.distributed.utils.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*
+disttorch.distributed *X
+__all__torch.distributed.utils.__all__,
+builtins.list[Any]
+Any"builtins.list

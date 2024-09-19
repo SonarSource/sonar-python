@@ -1,0 +1,632 @@
+
+torch.nn.parallelñ'
+DataParallel,torch.nn.parallel.data_parallel.DataParallel"torch.nn.modules.module.Module*À
+__init__5torch.nn.parallel.data_parallel.DataParallel.__init__"
+None*î
+selfâ
+Otorch.nn.parallel.data_parallel.DataParallel[torch.nn.parallel.data_parallel.T]á
+!torch.nn.parallel.data_parallel.T@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"torch.nn.modules.module.Module",torch.nn.parallel.data_parallel.DataParallel*î
+moduleá
+!torch.nn.parallel.data_parallel.T@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"torch.nn.modules.module.Module*ñ
+
+device_idsÉ
+@Union[typing.Sequence[Union[builtins.int,torch._C.device]],None]≤
+4typing.Sequence[Union[builtins.int,torch._C.device]]i
+#Union[builtins.int,torch._C.device]
+builtins.int"builtins.int"
+torch._C.device"torch._C.device"typing.Sequence
+None *ç
+output_devicex
+(Union[builtins.int,torch._C.device,None]
+builtins.int"builtins.int"
+torch._C.device"torch._C.device
+None *'
+dim
+builtins.int"builtins.int *â
+forward4torch.nn.parallel.data_parallel.DataParallel.forward"
+Any*î
+selfâ
+Otorch.nn.parallel.data_parallel.DataParallel[torch.nn.parallel.data_parallel.T]á
+!torch.nn.parallel.data_parallel.T@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"torch.nn.modules.module.Module",torch.nn.parallel.data_parallel.DataParallel*
+inputs
+Any*
+kwargs
+Any*Ö
+	replicate6torch.nn.parallel.data_parallel.DataParallel.replicate"À
+0builtins.list[torch.nn.parallel.data_parallel.T]á
+!torch.nn.parallel.data_parallel.T@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"torch.nn.modules.module.Module"builtins.list*î
+selfâ
+Otorch.nn.parallel.data_parallel.DataParallel[torch.nn.parallel.data_parallel.T]á
+!torch.nn.parallel.data_parallel.T@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"torch.nn.modules.module.Module",torch.nn.parallel.data_parallel.DataParallel*î
+moduleá
+!torch.nn.parallel.data_parallel.T@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"torch.nn.modules.module.Module*√
+
+device_ids≤
+4typing.Sequence[Union[builtins.int,torch._C.device]]i
+#Union[builtins.int,torch._C.device]
+builtins.int"builtins.int"
+torch._C.device"torch._C.device"typing.Sequence*É
+scatter4torch.nn.parallel.data_parallel.DataParallel.scatter"
+Any*î
+selfâ
+Otorch.nn.parallel.data_parallel.DataParallel[torch.nn.parallel.data_parallel.T]á
+!torch.nn.parallel.data_parallel.T@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"torch.nn.modules.module.Module",torch.nn.parallel.data_parallel.DataParallel*:
+inputs.
+builtins.tuple[Any]
+Any"builtins.tuple*ü
+kwargsí
++Union[builtins.dict[builtins.str,Any],None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None*√
+
+device_ids≤
+4typing.Sequence[Union[builtins.int,torch._C.device]]i
+#Union[builtins.int,torch._C.device]
+builtins.int"builtins.int"
+torch._C.device"torch._C.device"typing.Sequence*∆
+parallel_apply;torch.nn.parallel.data_parallel.DataParallel.parallel_apply",
+builtins.list[Any]
+Any"builtins.list*î
+selfâ
+Otorch.nn.parallel.data_parallel.DataParallel[torch.nn.parallel.data_parallel.T]á
+!torch.nn.parallel.data_parallel.T@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"torch.nn.modules.module.Module",torch.nn.parallel.data_parallel.DataParallel*ﬁ
+replicasœ
+2typing.Sequence[torch.nn.parallel.data_parallel.T]á
+!torch.nn.parallel.data_parallel.T@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"torch.nn.modules.module.Module"typing.Sequence*<
+inputs0
+typing.Sequence[Any]
+Any"typing.Sequence*
+kwargs
+Any*Ò
+gather3torch.nn.parallel.data_parallel.DataParallel.gather"
+Any*î
+selfâ
+Otorch.nn.parallel.data_parallel.DataParallel[torch.nn.parallel.data_parallel.T]á
+!torch.nn.parallel.data_parallel.T@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"torch.nn.modules.module.Module",torch.nn.parallel.data_parallel.DataParallel*
+outputs
+Any*|
+output_devicei
+#Union[builtins.int,torch._C.device]
+builtins.int"builtins.int"
+torch._C.device"torch._C.devicePr«
+module3torch.nn.parallel.data_parallel.DataParallel.moduleá
+!torch.nn.parallel.data_parallel.T@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"torch.nn.modules.module.Modulerë
+
+device_ids7torch.nn.parallel.data_parallel.DataParallel.device_idsJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.listrU
+dim0torch.nn.parallel.data_parallel.DataParallel.dim
+builtins.int"builtins.intri
+output_device:torch.nn.parallel.data_parallel.DataParallel.output_device
+builtins.int"builtins.intrq
+src_device_obj;torch.nn.parallel.data_parallel.DataParallel.src_device_obj"
+torch._C.device"torch._C.device»Ñ
+DistributedDataParallel5torch.nn.parallel.distributed.DistributedDataParallel"torch.nn.modules.module.Module"*torch.distributed.algorithms.join.Joinable*œ
+__init__>torch.nn.parallel.distributed.DistributedDataParallel.__init__"
+None*x
+selfn
+5torch.nn.parallel.distributed.DistributedDataParallel"5torch.nn.parallel.distributed.DistributedDataParallel*
+module
+Any*
+
+device_ids
+Any *
+output_device
+Any *
+dim
+Any * 
+broadcast_buffers
+Any *
+process_group
+Any *
+bucket_cap_mb
+Any *%
+find_unused_parameters
+Any *
+check_reduction
+Any *&
+gradient_as_bucket_view
+Any *
+static_graph
+Any *,
+delay_all_reduce_named_params
+Any *'
+param_to_hook_all_reduce
+Any *ø
+mixed_precisionß
+9Union[torch.nn.parallel.distributed._MixedPrecision,None]^
+-torch.nn.parallel.distributed._MixedPrecision"-torch.nn.parallel.distributed._MixedPrecision
+None *
+device_mesh
+Any *v
+_register_accum_grad_hookOtorch.nn.parallel.distributed.DistributedDataParallel._register_accum_grad_hook*
+self*~
+_delayed_all_reduce_hookNtorch.nn.parallel.distributed.DistributedDataParallel._delayed_all_reduce_hook*
+self*
+grad*√
+_register_delay_all_reduce_hookUtorch.nn.parallel.distributed.DistributedDataParallel._register_delay_all_reduce_hook*
+self*
+bucket_cap_mb*
+param_to_hook_all_reduce*
+
+device_ids*~
+_setup_in_backward_optimizersStorch.nn.parallel.distributed.DistributedDataParallel._setup_in_backward_optimizers*
+self*è
+_fire_reducer_autograd_hookQtorch.nn.parallel.distributed.DistributedDataParallel._fire_reducer_autograd_hook*
+self*
+idx*
+
+unused*Ñ
+_root_copy_hookEtorch.nn.parallel.distributed.DistributedDataParallel._root_copy_hook"
+None*x
+selfn
+5torch.nn.parallel.distributed.DistributedDataParallel"5torch.nn.parallel.distributed.DistributedDataParallel*
+args
+Any*
+kwargs
+Any*Ø
+_module_wait_for_copy_hookPtorch.nn.parallel.distributed.DistributedDataParallel._module_wait_for_copy_hook"
+None*x
+selfn
+5torch.nn.parallel.distributed.DistributedDataParallel"5torch.nn.parallel.distributed.DistributedDataParallel*
+module
+Any*
+args
+Any*
+kwargs
+Any*{
+_log_and_throwDtorch.nn.parallel.distributed.DistributedDataParallel._log_and_throw*
+self*
+err_type*
+err_msg*Ω
+_ddp_init_helperFtorch.nn.parallel.distributed.DistributedDataParallel._ddp_init_helper*
+self*
+
+parameters*
+expect_sparse_gradient*
+param_to_name_mapping*
+static_graph*\
+__getstate__Btorch.nn.parallel.distributed.DistributedDataParallel.__getstate__*
+self*g
+__setstate__Btorch.nn.parallel.distributed.DistributedDataParallel.__setstate__*
+self*	
+state*v
+_build_params_for_reducerOtorch.nn.parallel.distributed.DistributedDataParallel._build_params_for_reducer*
+self*r
+_assign_modules_buffersMtorch.nn.parallel.distributed.DistributedDataParallel._assign_modules_buffers*
+self*ò
+"_build_debug_param_to_name_mappingXtorch.nn.parallel.distributed.DistributedDataParallel._build_debug_param_to_name_mapping*
+self*
+
+parameters*x
+_get_parametersEtorch.nn.parallel.distributed.DistributedDataParallel._get_parameters*
+self*
+m*
+recurse *l
+_check_default_groupJtorch.nn.parallel.distributed.DistributedDataParallel._check_default_group*
+self*d
+no_sync=torch.nn.parallel.distributed.DistributedDataParallel.no_sync*
+self0:contextmanager*Ä
+_get_active_ddp_moduleLtorch.nn.parallel.distributed.DistributedDataParallel._get_active_ddp_module*
+cls0:classmethodp*|
+_inside_ddp_forwardItorch.nn.parallel.distributed.DistributedDataParallel._inside_ddp_forward*
+self0:contextmanager*|
+_run_ddp_forwardFtorch.nn.parallel.distributed.DistributedDataParallel._run_ddp_forward*
+self*
+
+inputs*
+
+kwargs*h
+_clear_grad_bufferHtorch.nn.parallel.distributed.DistributedDataParallel._clear_grad_buffer*
+self*X
+
+_lazy_init@torch.nn.parallel.distributed.DistributedDataParallel._lazy_init*
+self*ä
+_should_disable_cpp_reducerQtorch.nn.parallel.distributed.DistributedDataParallel._should_disable_cpp_reducer"
+builtins.bool"builtins.bool*x
+selfn
+5torch.nn.parallel.distributed.DistributedDataParallel"5torch.nn.parallel.distributed.DistributedDataParallel*t
+_pre_forwardBtorch.nn.parallel.distributed.DistributedDataParallel._pre_forward*
+self*
+
+inputs*
+
+kwargs*j
+_post_forwardCtorch.nn.parallel.distributed.DistributedDataParallel._post_forward*
+self*
+
+output*j
+forward=torch.nn.parallel.distributed.DistributedDataParallel.forward*
+self*
+
+inputs*
+
+kwargs*z
+scatter=torch.nn.parallel.distributed.DistributedDataParallel.scatter*
+self*
+
+inputs*
+
+kwargs*
+
+device_ids*}
+	to_kwargs?torch.nn.parallel.distributed.DistributedDataParallel.to_kwargs*
+self*
+
+inputs*
+
+kwargs*
+	device_id*p
+gather<torch.nn.parallel.distributed.DistributedDataParallel.gather*
+self*
+outputs*
+output_device*Z
+train;torch.nn.parallel.distributed.DistributedDataParallel.train*
+self*
+
+mode *™
+)_check_global_requires_backward_grad_sync_torch.nn.parallel.distributed.DistributedDataParallel._check_global_requires_backward_grad_sync*
+self*
+is_joined_rank*Ä
+_check_and_sync_module_buffersTtorch.nn.parallel.distributed.DistributedDataParallel._check_and_sync_module_buffers*
+self*z
+_sync_final_modelGtorch.nn.parallel.distributed.DistributedDataParallel._sync_final_model*
+self*
+is_last_joiner*Ä
+_match_all_reduce_for_bwd_passTtorch.nn.parallel.distributed.DistributedDataParallel._match_all_reduce_for_bwd_pass*
+self*Ä
+_match_unused_params_allreduceTtorch.nn.parallel.distributed.DistributedDataParallel._match_unused_params_allreduce*
+self*˘
+join:torch.nn.parallel.distributed.DistributedDataParallel.join"
+Any*x
+selfn
+5torch.nn.parallel.distributed.DistributedDataParallel"5torch.nn.parallel.distributed.DistributedDataParallel*B
+divide_by_initial_world_size
+builtins.bool"builtins.bool *,
+enable
+builtins.bool"builtins.bool *@
+throw_on_early_termination
+builtins.bool"builtins.bool *b
+	join_hook?torch.nn.parallel.distributed.DistributedDataParallel.join_hook*
+self*
+
+kwargs*h
+join_deviceAtorch.nn.parallel.distributed.DistributedDataParallel.join_device*
+self0:property`*v
+join_process_groupHtorch.nn.parallel.distributed.DistributedDataParallel.join_process_group*
+self0:property`*ˇ
+_register_buffer_comm_hookPtorch.nn.parallel.distributed.DistributedDataParallel._register_buffer_comm_hook"
+Any*x
+selfn
+5torch.nn.parallel.distributed.DistributedDataParallel"5torch.nn.parallel.distributed.DistributedDataParallel*
+state
+Any*U
+hookK
+CallableType[builtins.function]&
+builtins.function"builtins.function*!
+comm_hook_location
+Any *Á
+register_comm_hookHtorch.nn.parallel.distributed.DistributedDataParallel.register_comm_hook"
+Any*x
+selfn
+5torch.nn.parallel.distributed.DistributedDataParallel"5torch.nn.parallel.distributed.DistributedDataParallel*-
+state"
+builtins.object"builtins.object*U
+hookK
+CallableType[builtins.function]&
+builtins.function"builtins.function*é
+_register_builtin_comm_hookQtorch.nn.parallel.distributed.DistributedDataParallel._register_builtin_comm_hook*
+self*
+comm_hook_type*’
+_register_fused_optimKtorch.nn.parallel.distributed.DistributedDataParallel._register_fused_optim"
+Any*x
+selfn
+5torch.nn.parallel.distributed.DistributedDataParallel"5torch.nn.parallel.distributed.DistributedDataParallel*'
+optim
+	Type[Any]
+Any"type*
+args
+Any*
+optim_params
+Any *
+kwargs
+Any*º
+ _distributed_broadcast_coalescedVtorch.nn.parallel.distributed.DistributedDataParallel._distributed_broadcast_coalesced*
+self*
+tensors*
+buffer_size*
+authoritative_rank *v
+_check_sync_bufs_post_fwdOtorch.nn.parallel.distributed.DistributedDataParallel._check_sync_bufs_post_fwd*
+self*t
+_check_sync_bufs_pre_fwdNtorch.nn.parallel.distributed.DistributedDataParallel._check_sync_bufs_pre_fwd*
+self*t
+will_sync_module_buffersNtorch.nn.parallel.distributed.DistributedDataParallel.will_sync_module_buffers*
+self*Ö
+_find_common_rankGtorch.nn.parallel.distributed.DistributedDataParallel._find_common_rank*
+self*
+
+input_rank*
+	rank_cond*^
+_sync_buffersCtorch.nn.parallel.distributed.DistributedDataParallel._sync_buffers*
+self*Ñ
+_sync_module_buffersJtorch.nn.parallel.distributed.DistributedDataParallel._sync_module_buffers*
+self*
+authoritative_rank*µ
+_default_broadcast_coalescedRtorch.nn.parallel.distributed.DistributedDataParallel._default_broadcast_coalesced*
+self*
+
+bufs *
+bucket_size *
+authoritative_rank *å
+_passing_sync_batchnorm_handleTtorch.nn.parallel.distributed.DistributedDataParallel._passing_sync_batchnorm_handle*
+self*
+
+module*n
+_check_comm_hookFtorch.nn.parallel.distributed.DistributedDataParallel._check_comm_hook*
+self*
+hook*t
+_distributed_rankGtorch.nn.parallel.distributed.DistributedDataParallel._distributed_rank*
+self0:property`*û
+_get_data_parallel_paramsOtorch.nn.parallel.distributed.DistributedDataParallel._get_data_parallel_params*
+
+module*
+named_params 0:staticmethodh*–
++_set_params_and_buffers_to_ignore_for_modelatorch.nn.parallel.distributed.DistributedDataParallel._set_params_and_buffers_to_ignore_for_model*
+
+module* 
+params_and_buffers_to_ignore0:staticmethodh*n
+_get_ddp_logging_dataKtorch.nn.parallel.distributed.DistributedDataParallel._get_ddp_logging_data*
+self*ù
+$_set_ddp_runtime_logging_sample_rateZtorch.nn.parallel.distributed.DistributedDataParallel._set_ddp_runtime_logging_sample_rate*
+self*
+sample_rate*f
+_set_static_graphGtorch.nn.parallel.distributed.DistributedDataParallel._set_static_graph*
+self*p
+_remove_autograd_hooksLtorch.nn.parallel.distributed.DistributedDataParallel._remove_autograd_hooks*
+self*t
+_check_reducer_finalizedNtorch.nn.parallel.distributed.DistributedDataParallel._check_reducer_finalized*
+self*É
+_set_sparse_metadataJtorch.nn.parallel.distributed.DistributedDataParallel._set_sparse_metadata*
+self*
+global_unique_ids*Ö
+_update_process_groupKtorch.nn.parallel.distributed.DistributedDataParallel._update_process_group*
+self*
+new_process_group*å
+_set_ddp_sink_cloneItorch.nn.parallel.distributed.DistributedDataParallel._set_ddp_sink_clone"
+Any*x
+selfn
+5torch.nn.parallel.distributed.DistributedDataParallel"5torch.nn.parallel.distributed.DistributedDataParallel*'
+val
+builtins.bool"builtins.boolr†
+_active_ddp_moduleHtorch.nn.parallel.distributed.DistributedDataParallel._active_ddp_moduleø
+AUnion[torch.nn.parallel.distributed.DistributedDataParallel,None]n
+5torch.nn.parallel.distributed.DistributedDataParallel"5torch.nn.parallel.distributed.DistributedDataParallel
+NonerP
+logger<torch.nn.parallel.distributed.DistributedDataParallel.logger
+Noner®
+process_groupCtorch.nn.parallel.distributed.DistributedDataParallel.process_groupR
+'torch._C._distributed_c10d.ProcessGroup"'torch._C._distributed_c10d.ProcessGrouprY
+device_meshAtorch.nn.parallel.distributed.DistributedDataParallel.device_mesh
+Anyrò
+_delay_all_reduce_paramsNtorch.nn.parallel.distributed.DistributedDataParallel._delay_all_reduce_params,
+builtins.list[Any]
+Any"builtins.listré
+parameters_to_ignoreJtorch.nn.parallel.distributed.DistributedDataParallel.parameters_to_ignore*
+builtins.set[Any]
+Any"builtins.setrå
+_module_parametersHtorch.nn.parallel.distributed.DistributedDataParallel._module_parameters,
+builtins.list[Any]
+Any"builtins.listrÜ
+is_multi_device_moduleLtorch.nn.parallel.distributed.DistributedDataParallel.is_multi_device_module
+builtins.bool"builtins.boolrY
+device_typeAtorch.nn.parallel.distributed.DistributedDataParallel.device_type
+Anyr“
+
+device_ids@torch.nn.parallel.distributed.DistributedDataParallel.device_idsÅ
+'Union[builtins.list[builtins.int],None]J
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list
+Nonerö
+output_deviceCtorch.nn.parallel.distributed.DistributedDataParallel.output_deviceD
+Union[builtins.int,None]
+builtins.int"builtins.int
+Nonerr
+static_graphBtorch.nn.parallel.distributed.DistributedDataParallel.static_graph
+builtins.bool"builtins.boolrI
+dim9torch.nn.parallel.distributed.DistributedDataParallel.dim
+AnyrO
+module<torch.nn.parallel.distributed.DistributedDataParallel.module
+AnyrO
+device<torch.nn.parallel.distributed.DistributedDataParallel.device
+Anyre
+broadcast_buffersGtorch.nn.parallel.distributed.DistributedDataParallel.broadcast_buffers
+Anyro
+find_unused_parametersLtorch.nn.parallel.distributed.DistributedDataParallel.find_unused_parameters
+Anyré
+require_backward_grad_syncPtorch.nn.parallel.distributed.DistributedDataParallel.require_backward_grad_sync
+builtins.bool"builtins.boolré
+require_forward_param_syncPtorch.nn.parallel.distributed.DistributedDataParallel.require_forward_param_sync
+builtins.bool"builtins.boolrq
+gradient_as_bucket_viewMtorch.nn.parallel.distributed.DistributedDataParallel.gradient_as_bucket_view
+AnyrÇ
+mixed_precisionEtorch.nn.parallel.distributed.DistributedDataParallel.mixed_precisionß
+9Union[torch.nn.parallel.distributed._MixedPrecision,None]^
+-torch.nn.parallel.distributed._MixedPrecision"-torch.nn.parallel.distributed._MixedPrecision
+NonerÇ
+broadcast_bucket_sizeKtorch.nn.parallel.distributed.DistributedDataParallel.broadcast_bucket_size
+builtins.int"builtins.inträ
+bucket_bytes_cap_defaultNtorch.nn.parallel.distributed.DistributedDataParallel.bucket_bytes_cap_default
+builtins.bool"builtins.boolrx
+bucket_bytes_capFtorch.nn.parallel.distributed.DistributedDataParallel.bucket_bytes_cap
+builtins.int"builtins.intrú
+!use_side_stream_for_tensor_copiesWtorch.nn.parallel.distributed.DistributedDataParallel.use_side_stream_for_tensor_copies
+builtins.bool"builtins.boolrh
+_delay_grad_bufferHtorch.nn.parallel.distributed.DistributedDataParallel._delay_grad_buffer
+Noner¿
+_delay_grad_viewsGtorch.nn.parallel.distributed.DistributedDataParallel._delay_grad_viewsb
+#builtins.list[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.listrí
+_delay_all_reduce_all_paramsRtorch.nn.parallel.distributed.DistributedDataParallel._delay_all_reduce_all_params
+builtins.bool"builtins.boolr◊
+_comm_hooksAtorch.nn.parallel.distributed.DistributedDataParallel._comm_hooksÑ
+Ebuiltins.list[Tuple[CallableType[builtins.function],builtins.object]]´
+6Tuple[CallableType[builtins.function],builtins.object]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"
+builtins.object"builtins.object"builtins.listrÜ
+
+_mp_stream@torch.nn.parallel.distributed.DistributedDataParallel._mp_stream6
+torch.cuda.streams.Stream"torch.cuda.streams.StreamrØ
+_submodule_to_eventItorch.nn.parallel.distributed.DistributedDataParallel._submodule_to_eventM
+ collections.defaultdict[Any,Any]
+Any
+Any"collections.defaultdictrÇ
+_has_rebuilt_bucketsJtorch.nn.parallel.distributed.DistributedDataParallel._has_rebuilt_buckets
+builtins.bool"builtins.boolrv
+_lazy_init_ranDtorch.nn.parallel.distributed.DistributedDataParallel._lazy_init_ran
+builtins.bool"builtins.boolrË
+_accum_grad_hooksGtorch.nn.parallel.distributed.DistributedDataParallel._accum_grad_hooksâ
+0builtins.list[torch.utils.hooks.RemovableHandle]F
+!torch.utils.hooks.RemovableHandle"!torch.utils.hooks.RemovableHandle"builtins.listrÄ
+_use_python_reducerItorch.nn.parallel.distributed.DistributedDataParallel._use_python_reducer
+builtins.bool"builtins.boolr}
+_force_to_disable_cpp_reducerStorch.nn.parallel.distributed.DistributedDataParallel._force_to_disable_cpp_reducer
+Anyrx
+_ddp_sink_cloneEtorch.nn.parallel.distributed.DistributedDataParallel._ddp_sink_clone
+builtins.bool"builtins.boolrQ
+reducer=torch.nn.parallel.distributed.DistributedDataParallel.reducer
+Anyra
+modules_buffersEtorch.nn.parallel.distributed.DistributedDataParallel.modules_buffers
+Anyrk
+named_module_buffersJtorch.nn.parallel.distributed.DistributedDataParallel.named_module_buffers
+Anyri
+_authoritative_rankItorch.nn.parallel.distributed.DistributedDataParallel._authoritative_rank
+Anyr∞
+buffer_hookAtorch.nn.parallel.distributed.DistributedDataParallel.buffer_hook^
+-torch.nn.parallel.distributed._BufferCommHook"-torch.nn.parallel.distributed._BufferCommHookrè
+&_static_graph_delay_allreduce_enqueued\torch.nn.parallel.distributed.DistributedDataParallel._static_graph_delay_allreduce_enqueued
+Any
+parallel_apply/torch.nn.parallel.parallel_apply.parallel_apply",
+builtins.list[Any]
+Any"builtins.list*í
+modulesÑ
+/typing.Sequence[torch.nn.modules.module.Module]@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"typing.Sequence*<
+inputs0
+typing.Sequence[Any]
+Any"typing.Sequence*¸
+
+kwargs_tupÈ
+<Union[typing.Sequence[builtins.dict[builtins.str,Any]],None]ú
+0typing.Sequence[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"typing.Sequence
+None *¨
+devicesú
+EUnion[typing.Sequence[Union[builtins.int,torch._C.device,None]],None]∆
+9typing.Sequence[Union[builtins.int,torch._C.device,None]]x
+(Union[builtins.int,torch._C.device,None]
+builtins.int"builtins.int"
+torch._C.device"torch._C.device
+None"typing.Sequence
+None ˝
+	replicate%torch.nn.parallel.replicate.replicate"√
+,builtins.list[torch.nn.parallel.replicate.T]É
+torch.nn.parallel.replicate.T@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"torch.nn.modules.module.Module"builtins.list*ë
+networkÉ
+torch.nn.parallel.replicate.T@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"torch.nn.modules.module.Module*¿
+devices≤
+4typing.Sequence[Union[builtins.int,torch._C.device]]i
+#Union[builtins.int,torch._C.device]
+builtins.int"builtins.int"
+torch._C.device"torch._C.device"typing.Sequence*,
+detach
+builtins.bool"builtins.bool ﬁ
+data_parallel-torch.nn.parallel.data_parallel.data_parallel",
+torch._tensor.Tensor"torch._tensor.Tensor*L
+module@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*
+inputs
+Any*ñ
+
+device_idsÉ
+@Union[typing.Sequence[Union[builtins.int,torch._C.device]],None]≤
+4typing.Sequence[Union[builtins.int,torch._C.device]]i
+#Union[builtins.int,torch._C.device]
+builtins.int"builtins.int"
+torch._C.device"torch._C.device"typing.Sequence
+None *ç
+output_devicex
+(Union[builtins.int,torch._C.device,None]
+builtins.int"builtins.int"
+torch._C.device"torch._C.device
+None *'
+dim
+builtins.int"builtins.int *;
+module_kwargs&
+Union[Any,None]
+Any
+None ˜
+gather'torch.nn.parallel.scatter_gather.gather"
+Any*
+outputs
+Any*|
+target_devicei
+#Union[builtins.int,torch._C.device]
+builtins.int"builtins.int"
+torch._C.device"torch._C.device*'
+dim
+builtins.int"builtins.int "∆
+scatter(torch.nn.parallel.scatter_gather.scatter—
+scatter(torch.nn.parallel.scatter_gather.scatter"d
+$builtins.tuple[torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor"builtins.tuple*8
+inputs,
+torch._tensor.Tensor"torch._tensor.Tensor*ƒ
+target_gpus≤
+4typing.Sequence[Union[builtins.int,torch._C.device]]i
+#Union[builtins.int,torch._C.device]
+builtins.int"builtins.int"
+torch._C.device"torch._C.device"typing.Sequence*'
+dim
+builtins.int"builtins.int 0:overloadXº
+scatter(torch.nn.parallel.scatter_gather.scatter"ü
+1builtins.list[torch.nn.parallel.scatter_gather.T][
+"torch.nn.parallel.scatter_gather.T"
+builtins.object"builtins.object"builtins.object"builtins.list*g
+inputs[
+"torch.nn.parallel.scatter_gather.T"
+builtins.object"builtins.object"builtins.object*ƒ
+target_gpus≤
+4typing.Sequence[Union[builtins.int,torch._C.device]]i
+#Union[builtins.int,torch._C.device]
+builtins.int"builtins.int"
+torch._C.device"torch._C.device"typing.Sequence*'
+dim
+builtins.int"builtins.int 0:overloadX*r
+__path__torch.nn.parallel.__path__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*ç
+__annotations__!torch.nn.parallel.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*p
+__all__torch.nn.parallel.__all__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list

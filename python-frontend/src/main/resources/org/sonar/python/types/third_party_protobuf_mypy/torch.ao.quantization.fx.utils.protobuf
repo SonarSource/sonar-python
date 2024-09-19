@@ -1,0 +1,444 @@
+
+torch.ao.quantization.fx.utils•$
+ObservedGraphModuleAttrs7torch.ao.quantization.fx.utils.ObservedGraphModuleAttrs"builtins.object*²
+__init__@torch.ao.quantization.fx.utils.ObservedGraphModuleAttrs.__init__"
+None*|
+selfr
+7torch.ao.quantization.fx.utils.ObservedGraphModuleAttrs"7torch.ao.quantization.fx.utils.ObservedGraphModuleAttrs*™
+node_name_to_qconfigþ
+Lbuiltins.dict[builtins.str,TypeAlias[Union[TypeAlias[Tuple[Any,Any]],None]]]
+builtins.str"builtins.str€
+0TypeAlias[Union[TypeAlias[Tuple[Any,Any]],None]]Ÿ
+%Union[TypeAlias[Tuple[Any,Any]],None]j
+TypeAlias[Tuple[Any,Any]]$
+Tuple[Any,Any]
+Any
+Any"%torch.ao.quantization.qconfig.QConfig
+None"(torch.ao.quantization.qconfig.QConfigAny"builtins.dict*ê
+node_name_to_scopeÑ
+=builtins.dict[builtins.str,Tuple[builtins.str,builtins.type]]
+builtins.str"builtins.strc
+!Tuple[builtins.str,builtins.type]
+builtins.str"builtins.str
+builtins.type"builtins.type"builtins.dict*“
+prepare_custom_configx
+:torch.ao.quantization.fx.custom_config.PrepareCustomConfig":torch.ao.quantization.fx.custom_config.PrepareCustomConfig*~
+!equalization_node_name_to_qconfigW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*
+qconfig_mappingl
+4torch.ao.quantization.qconfig_mapping.QConfigMapping"4torch.ao.quantization.qconfig_mapping.QConfigMapping**
+is_qat
+builtins.bool"builtins.bool*a
+observed_node_namesH
+builtins.set[builtins.str]
+builtins.str"builtins.str"builtins.set*C
+is_observed_standalone_module
+builtins.bool"builtins.bool *°
+&standalone_module_input_quantized_idxs
+'Union[builtins.list[builtins.int],None]J
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list
+None *±
+'standalone_module_output_quantized_idxs
+'Union[builtins.list[builtins.int],None]J
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list
+None 8rå
+node_name_to_qconfigLtorch.ao.quantization.fx.utils.ObservedGraphModuleAttrs.node_name_to_qconfigþ
+Lbuiltins.dict[builtins.str,TypeAlias[Union[TypeAlias[Tuple[Any,Any]],None]]]
+builtins.str"builtins.str€
+0TypeAlias[Union[TypeAlias[Tuple[Any,Any]],None]]Ÿ
+%Union[TypeAlias[Tuple[Any,Any]],None]j
+TypeAlias[Tuple[Any,Any]]$
+Tuple[Any,Any]
+Any
+Any"%torch.ao.quantization.qconfig.QConfig
+None"(torch.ao.quantization.qconfig.QConfigAny"builtins.dictr´
+node_name_to_scopeJtorch.ao.quantization.fx.utils.ObservedGraphModuleAttrs.node_name_to_scopeÑ
+=builtins.dict[builtins.str,Tuple[builtins.str,builtins.type]]
+builtins.str"builtins.strc
+!Tuple[builtins.str,builtins.type]
+builtins.str"builtins.str
+builtins.type"builtins.type"builtins.dictrà
+prepare_custom_configMtorch.ao.quantization.fx.utils.ObservedGraphModuleAttrs.prepare_custom_configx
+:torch.ao.quantization.fx.custom_config.PrepareCustomConfig":torch.ao.quantization.fx.custom_config.PrepareCustomConfigr×
+!equalization_node_name_to_qconfigYtorch.ao.quantization.fx.utils.ObservedGraphModuleAttrs.equalization_node_name_to_qconfigW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dictrÈ
+qconfig_mappingGtorch.ao.quantization.fx.utils.ObservedGraphModuleAttrs.qconfig_mappingl
+4torch.ao.quantization.qconfig_mapping.QConfigMapping"4torch.ao.quantization.qconfig_mapping.QConfigMappingrh
+is_qat>torch.ao.quantization.fx.utils.ObservedGraphModuleAttrs.is_qat
+builtins.bool"builtins.boolr¬
+observed_node_namesKtorch.ao.quantization.fx.utils.ObservedGraphModuleAttrs.observed_node_namesH
+builtins.set[builtins.str]
+builtins.str"builtins.str"builtins.setr–
+is_observed_standalone_moduleUtorch.ao.quantization.fx.utils.ObservedGraphModuleAttrs.is_observed_standalone_module
+builtins.bool"builtins.boolrŒ
+&standalone_module_input_quantized_idxs^torch.ao.quantization.fx.utils.ObservedGraphModuleAttrs.standalone_module_input_quantized_idxs
+'Union[builtins.list[builtins.int],None]J
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list
+NonerŽ
+'standalone_module_output_quantized_idxs_torch.ao.quantization.fx.utils.ObservedGraphModuleAttrs.standalone_module_output_quantized_idxs
+'Union[builtins.list[builtins.int],None]J
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list
+Nonerþ
+__dataclass_fields__Ltorch.ao.quantization.fx.utils.ObservedGraphModuleAttrs.__dataclass_fields__—
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictÃ
+NodeInfo'torch.ao.quantization.fx.utils.NodeInfo"builtins.tuple*Ÿ
+_replace0torch.ao.quantization.fx.utils.NodeInfo._replace"U
++torch.ao.quantization.fx.utils.NodeInfo._NT$
+Tuple[Any,Any]
+Any
+Any*`
+_selfU
++torch.ao.quantization.fx.utils.NodeInfo._NT$
+Tuple[Any,Any]
+Any
+Any*
+op
+Any *
+target
+Any *×
+__new__/torch.ao.quantization.fx.utils.NodeInfo.__new__"U
++torch.ao.quantization.fx.utils.NodeInfo._NT$
+Tuple[Any,Any]
+Any
+Any*
+_cls’
+1Type[torch.ao.quantization.fx.utils.NodeInfo._NT]U
++torch.ao.quantization.fx.utils.NodeInfo._NT$
+Tuple[Any,Any]
+Any
+Any"type*
+op
+Any*
+target
+Any*õ
+_asdict/torch.ao.quantization.fx.utils.NodeInfo._asdict"W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*`
+_selfU
++torch.ao.quantization.fx.utils.NodeInfo._NT$
+Tuple[Any,Any]
+Any
+Any*¦
+_make-torch.ao.quantization.fx.utils.NodeInfo._make"U
++torch.ao.quantization.fx.utils.NodeInfo._NT$
+Tuple[Any,Any]
+Any
+Any*
+_cls’
+1Type[torch.ao.quantization.fx.utils.NodeInfo._NT]U
++torch.ao.quantization.fx.utils.NodeInfo._NT$
+Tuple[Any,Any]
+Any
+Any"type*>
+iterable0
+typing.Iterable[Any]
+Any"typing.Iterable*
+new
+Any *
+len
+Any 0:classmethodpr9
+op*torch.ao.quantization.fx.utils.NodeInfo.op
+AnyrA
+target.torch.ao.quantization.fx.utils.NodeInfo.target
+Anyrœ
+_fields/torch.ao.quantization.fx.utils.NodeInfo._fields`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.strr
+_field_types4torch.ao.quantization.fx.utils.NodeInfo._field_typesW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dictr£
+_field_defaults7torch.ao.quantization.fx.utils.NodeInfo._field_defaultsW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dictrX
+_source/torch.ao.quantization.fx.utils.NodeInfo._source
+builtins.str"builtins.strr£
+__annotations__7torch.ao.quantization.fx.utils.NodeInfo.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict­
+node_arg_is_weight1torch.ao.quantization.fx.utils.node_arg_is_weight"
+builtins.bool"builtins.bool*2
+node(
+torch.fx.node.Node"torch.fx.node.Node*
+arg
+Any©
+node_arg_is_bias/torch.ao.quantization.fx.utils.node_arg_is_bias"
+builtins.bool"builtins.bool*2
+node(
+torch.fx.node.Node"torch.fx.node.Node*
+arg
+Anyà
+get_custom_module_class_keys;torch.ao.quantization.fx.utils.get_custom_module_class_keys",
+builtins.list[Any]
+Any"builtins.list*Ô
+custom_module_mapping¸
+\builtins.dict[torch.ao.quantization.quant_type.QuantType,builtins.dict[Type[Any],Type[Any]]]X
+*torch.ao.quantization.quant_type.QuantType"*torch.ao.quantization.quant_type.QuantTypeo
+"builtins.dict[Type[Any],Type[Any]]
+	Type[Any]
+Any"type
+	Type[Any]
+Any"type"builtins.dict"builtins.dictl
+get_linear_prepack_op_for_dtype>torch.ao.quantization.fx.utils.get_linear_prepack_op_for_dtype*	
+dtypeò
+get_qconv_prepack_op3torch.ao.quantization.fx.utils.get_qconv_prepack_op"K
+CallableType[builtins.function]&
+builtins.function"builtins.function*X
+conv_opK
+CallableType[builtins.function]&
+builtins.function"builtins.functionÔ
+get_new_attr_name_with_prefix<torch.ao.quantization.fx.utils.get_new_attr_name_with_prefix"K
+CallableType[builtins.function]&
+builtins.function"builtins.function*(
+prefix
+builtins.str"builtins.strŸ
+collect_producer_nodes5torch.ao.quantization.fx.utils.collect_producer_nodes"™
+-Union[builtins.list[torch.fx.node.Node],None]\
+!builtins.list[torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node"builtins.list
+None*2
+node(
+torch.fx.node.Node"torch.fx.node.Nodeï
+ graph_module_from_producer_nodes?torch.ao.quantization.fx.utils.graph_module_from_producer_nodes"F
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*P
+rootF
+!torch.fx.graph_module.GraphModule"!torch.fx.graph_module.GraphModule*p
+producer_nodes\
+!builtins.list[torch.fx.node.Node](
+torch.fx.node.Node"torch.fx.node.Node"builtins.list²
+assert_and_get_unique_device;torch.ao.quantization.fx.utils.assert_and_get_unique_device"
+Any*L
+module@
+torch.nn.modules.module.Module"torch.nn.modules.module.ModuleÄ
+create_getattr_from_value8torch.ao.quantization.fx.utils.create_getattr_from_value"(
+torch.fx.node.Node"torch.fx.node.Node*L
+module@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*7
+graph,
+torch.fx.graph.Graph"torch.fx.graph.Graph*(
+prefix
+builtins.str"builtins.str*
+value
+Any†
+all_node_args_have_no_tensors<torch.ao.quantization.fx.utils.all_node_args_have_no_tensors"
+builtins.bool"builtins.bool*2
+node(
+torch.fx.node.Node"torch.fx.node.Node*¹
+modules«
+:builtins.dict[builtins.str,torch.nn.modules.module.Module]
+builtins.str"builtins.str@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"builtins.dict*–
+cacheŠ
+/builtins.dict[torch.fx.node.Node,builtins.bool](
+torch.fx.node.Node"torch.fx.node.Node
+builtins.bool"builtins.bool"builtins.dict×
+all_node_args_except_first9torch.ao.quantization.fx.utils.all_node_args_except_first"J
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*2
+node(
+torch.fx.node.Node"torch.fx.node.Nodeë
+return_arg_list.torch.ao.quantization.fx.utils.return_arg_list"K
+CallableType[builtins.function]&
+builtins.function"builtins.function*[
+arg_indicesJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.listÅ
+(get_non_observable_arg_indexes_and_typesGtorch.ao.quantization.fx.utils.get_non_observable_arg_indexes_and_types"›
+Rbuiltins.dict[Union[builtins.type,torch._C.dtype],CallableType[builtins.function]]i
+#Union[builtins.type,torch._C.dtype]
+builtins.type"builtins.type 
+torch._C.dtype"torch._C.dtypeK
+CallableType[builtins.function]&
+builtins.function"builtins.function"builtins.dict*2
+node(
+torch.fx.node.Node"torch.fx.node.NodeŠ
+maybe_get_next_module4torch.ao.quantization.fx.utils.maybe_get_next_module"V
+Union[torch.fx.node.Node,None](
+torch.fx.node.Node"torch.fx.node.Node
+None*2
+node(
+torch.fx.node.Node"torch.fx.node.Node*¹
+modules«
+:builtins.dict[builtins.str,torch.nn.modules.module.Module]
+builtins.str"builtins.str@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"builtins.dict*Ë
+target_module_type°
+0Union[Type[torch.nn.modules.module.Module],None]p
+$Type[torch.nn.modules.module.Module]@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"type
+None *%
+target_functional_type
+Any Ü
+'create_node_from_old_node_preserve_metaFtorch.ao.quantization.fx.utils.create_node_from_old_node_preserve_meta"(
+torch.fx.node.Node"torch.fx.node.Node*A
+quantized_graph,
+torch.fx.graph.Graph"torch.fx.graph.Graph*D
+create_node_args.
+builtins.tuple[Any]
+Any"builtins.tuple*6
+old_node(
+torch.fx.node.Node"torch.fx.node.Node
+#get_skipped_module_name_and_classesBtorch.ao.quantization.fx.utils.get_skipped_module_name_and_classes"Ô
+;Tuple[builtins.list[builtins.str],builtins.list[Type[Any]]]J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.listG
+builtins.list[Type[Any]]
+	Type[Any]
+Any"type"builtins.list*“
+prepare_custom_configx
+:torch.ao.quantization.fx.custom_config.PrepareCustomConfig":torch.ao.quantization.fx.custom_config.PrepareCustomConfig*8
+is_standalone_module
+builtins.bool"builtins.bool°
+_is_custom_module_lstm5torch.ao.quantization.fx.utils._is_custom_module_lstm"
+builtins.bool"builtins.bool*2
+node(
+torch.fx.node.Node"torch.fx.node.Node*¿
+named_modules«
+:builtins.dict[builtins.str,torch.nn.modules.module.Module]
+builtins.str"builtins.str@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"builtins.dict*
+qconfig€
+0TypeAlias[Union[TypeAlias[Tuple[Any,Any]],None]]Ÿ
+%Union[TypeAlias[Tuple[Any,Any]],None]j
+TypeAlias[Tuple[Any,Any]]$
+Tuple[Any,Any]
+Any
+Any"%torch.ao.quantization.qconfig.QConfig
+None"(torch.ao.quantization.qconfig.QConfigAny *6
+qhandler&
+Union[Any,None]
+Any
+None ®
+_is_custom_module_mha4torch.ao.quantization.fx.utils._is_custom_module_mha"
+builtins.bool"builtins.bool*2
+node(
+torch.fx.node.Node"torch.fx.node.Node*¿
+named_modules«
+:builtins.dict[builtins.str,torch.nn.modules.module.Module]
+builtins.str"builtins.str@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"builtins.dict*
+qconfig€
+0TypeAlias[Union[TypeAlias[Tuple[Any,Any]],None]]Ÿ
+%Union[TypeAlias[Tuple[Any,Any]],None]j
+TypeAlias[Tuple[Any,Any]]$
+Tuple[Any,Any]
+Any
+Any"%torch.ao.quantization.qconfig.QConfig
+None"(torch.ao.quantization.qconfig.QConfigAny *6
+qhandler&
+Union[Any,None]
+Any
+None «
+_get_module*torch.ao.quantization.fx.utils._get_module"z
+*Union[torch.nn.modules.module.Module,None]@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module
+None*2
+node(
+torch.fx.node.Node"torch.fx.node.Node*¿
+named_modules«
+:builtins.dict[builtins.str,torch.nn.modules.module.Module]
+builtins.str"builtins.str@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"builtins.dictñ
+_insert_dequant_stub3torch.ao.quantization.fx.utils._insert_dequant_stub"(
+torch.fx.node.Node"torch.fx.node.Node*2
+node(
+torch.fx.node.Node"torch.fx.node.Node*K
+model@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*¿
+named_modules«
+:builtins.dict[builtins.str,torch.nn.modules.module.Module]
+builtins.str"builtins.str@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"builtins.dict*7
+graph,
+torch.fx.graph.Graph"torch.fx.graph.Graph¯
+3_insert_dequant_stubs_for_custom_module_lstm_outputRtorch.ao.quantization.fx.utils._insert_dequant_stubs_for_custom_module_lstm_output"(
+torch.fx.node.Node"torch.fx.node.Node*2
+node(
+torch.fx.node.Node"torch.fx.node.Node*K
+model@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*¿
+named_modules«
+:builtins.dict[builtins.str,torch.nn.modules.module.Module]
+builtins.str"builtins.str@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"builtins.dict*7
+graph,
+torch.fx.graph.Graph"torch.fx.graph.GraphÆ
++_maybe_get_custom_module_lstm_from_node_argJtorch.ao.quantization.fx.utils._maybe_get_custom_module_lstm_from_node_arg"V
+Union[torch.fx.node.Node,None](
+torch.fx.node.Node"torch.fx.node.Node
+None*1
+arg(
+torch.fx.node.Node"torch.fx.node.Node*¿
+named_modules«
+:builtins.dict[builtins.str,torch.nn.modules.module.Module]
+builtins.str"builtins.str@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"builtins.dict¡
+_reroute_tuple_getitem_pattern=torch.ao.quantization.fx.utils._reroute_tuple_getitem_pattern"
+Any*7
+graph,
+torch.fx.graph.Graph"torch.fx.graph.Graph©
+*_get_observer_from_activation_post_processItorch.ao.quantization.fx.utils._get_observer_from_activation_post_process"Z
++torch.ao.quantization.observer.ObserverBase"+torch.ao.quantization.observer.ObserverBase*Ó
+activation_post_processµ
+gUnion[torch.ao.quantization.observer.ObserverBase,torch.ao.quantization.fake_quantize.FakeQuantizeBase]Z
++torch.ao.quantization.observer.ObserverBase"+torch.ao.quantization.observer.ObserverBasel
+4torch.ao.quantization.fake_quantize.FakeQuantizeBase"4torch.ao.quantization.fake_quantize.FakeQuantizeBase“
++_qconfig_satisfies_dtype_config_constraintsJtorch.ao.quantization.fx.utils._qconfig_satisfies_dtype_config_constraints"
+builtins.bool"builtins.bool*Ž
+qconfig€
+0TypeAlias[Union[TypeAlias[Tuple[Any,Any]],None]]Ÿ
+%Union[TypeAlias[Tuple[Any,Any]],None]j
+TypeAlias[Tuple[Any,Any]]$
+Tuple[Any,Any]
+Any
+Any"%torch.ao.quantization.qconfig.QConfig
+None"(torch.ao.quantization.qconfig.QConfigAny*±
+dtype_with_constraints”
+Htorch.ao.quantization.backend_config.backend_config.DTypeWithConstraints"Htorch.ao.quantization.backend_config.backend_config.DTypeWithConstraints*3
+is_activation
+builtins.bool"builtins.bool *š
+__annotations__.torch.ao.quantization.fx.utils.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*
+nntorch.nn *}
+__all__&torch.ao.quantization.fx.utils.__all__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*°
+NON_QUANTIZABLE_WEIGHT_OPS9torch.ao.quantization.fx.utils.NON_QUANTIZABLE_WEIGHT_OPSW
+builtins.set[builtins.function]&
+builtins.function"builtins.function"builtins.set*ì
+NON_OBSERVABLE_ARG_DICT6torch.ao.quantization.fx.utils.NON_OBSERVABLE_ARG_DICT˜
+{builtins.dict[TypeAlias[Tuple[Any,Any]],builtins.dict[Union[builtins.type,torch._C.dtype],CallableType[builtins.function]]]l
+TypeAlias[Tuple[Any,Any]]$
+Tuple[Any,Any]
+Any
+Any"'torch.ao.quantization.fx.utils.NodeInfo›
+Rbuiltins.dict[Union[builtins.type,torch._C.dtype],CallableType[builtins.function]]i
+#Union[builtins.type,torch._C.dtype]
+builtins.type"builtins.type 
+torch._C.dtype"torch._C.dtypeK
+CallableType[builtins.function]&
+builtins.function"builtins.function"builtins.dict"builtins.dict*Ý
+EMPTY_ARG_DICT-torch.ao.quantization.fx.utils.EMPTY_ARG_DICT›
+Rbuiltins.dict[Union[builtins.type,torch._C.dtype],CallableType[builtins.function]]i
+#Union[builtins.type,torch._C.dtype]
+builtins.type"builtins.type 
+torch._C.dtype"torch._C.dtypeK
+CallableType[builtins.function]&
+builtins.function"builtins.function"builtins.dict

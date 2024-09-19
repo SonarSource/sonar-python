@@ -1,0 +1,124 @@
+
+torch._dynamo.bytecode_analysisÛ
+ReadsWrites+torch._dynamo.bytecode_analysis.ReadsWrites"builtins.object*Ø
+__init__4torch._dynamo.bytecode_analysis.ReadsWrites.__init__"
+None*d
+selfZ
++torch._dynamo.bytecode_analysis.ReadsWrites"+torch._dynamo.bytecode_analysis.ReadsWrites*5
+reads*
+builtins.set[Any]
+Any"builtins.set*6
+writes*
+builtins.set[Any]
+Any"builtins.set*7
+visited*
+builtins.set[Any]
+Any"builtins.set8rf
+reads1torch._dynamo.bytecode_analysis.ReadsWrites.reads*
+builtins.set[Any]
+Any"builtins.setrh
+writes2torch._dynamo.bytecode_analysis.ReadsWrites.writes*
+builtins.set[Any]
+Any"builtins.setrj
+visited3torch._dynamo.bytecode_analysis.ReadsWrites.visited*
+builtins.set[Any]
+Any"builtins.setrò
+__dataclass_fields__@torch._dynamo.bytecode_analysis.ReadsWrites.__dataclass_fields__—
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictŒ
+FixedPointBox-torch._dynamo.bytecode_analysis.FixedPointBox"builtins.object*ã
+__init__6torch._dynamo.bytecode_analysis.FixedPointBox.__init__"
+None*h
+self^
+-torch._dynamo.bytecode_analysis.FixedPointBox"-torch._dynamo.bytecode_analysis.FixedPointBox*+
+value
+builtins.bool"builtins.bool 8r\
+value3torch._dynamo.bytecode_analysis.FixedPointBox.value
+builtins.bool"builtins.boolrô
+__dataclass_fields__Btorch._dynamo.bytecode_analysis.FixedPointBox.__dataclass_fields__—
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dict¡
+	StackSize)torch._dynamo.bytecode_analysis.StackSize"builtins.object*@
+zero.torch._dynamo.bytecode_analysis.StackSize.zero*
+self*\
+	offset_of3torch._dynamo.bytecode_analysis.StackSize.offset_of*
+self*	
+other*
+n*[
+exn_tab_jump6torch._dynamo.bytecode_analysis.StackSize.exn_tab_jump*
+self*	
+depth*þ
+__init__2torch._dynamo.bytecode_analysis.StackSize.__init__"
+None*`
+selfV
+)torch._dynamo.bytecode_analysis.StackSize")torch._dynamo.bytecode_analysis.StackSize*o
+lowf
+"Union[builtins.int,builtins.float]
+builtins.int"builtins.int 
+builtins.float"builtins.float*p
+highf
+"Union[builtins.int,builtins.float]
+builtins.int"builtins.int 
+builtins.float"builtins.float*o
+fixed_point^
+-torch._dynamo.bytecode_analysis.FixedPointBox"-torch._dynamo.bytecode_analysis.FixedPointBox8rœ
+low-torch._dynamo.bytecode_analysis.StackSize.lowf
+"Union[builtins.int,builtins.float]
+builtins.int"builtins.int 
+builtins.float"builtins.floatrž
+high.torch._dynamo.bytecode_analysis.StackSize.highf
+"Union[builtins.int,builtins.float]
+builtins.int"builtins.int 
+builtins.float"builtins.floatr¤
+fixed_point5torch._dynamo.bytecode_analysis.StackSize.fixed_point^
+-torch._dynamo.bytecode_analysis.FixedPointBox"-torch._dynamo.bytecode_analysis.FixedPointBoxrð
+__dataclass_fields__>torch._dynamo.bytecode_analysis.StackSize.__dataclass_fields__—
+2builtins.dict[builtins.str,dataclasses.Field[Any]]
+builtins.str"builtins.str4
+dataclasses.Field[Any]
+Any"dataclasses.Field"builtins.dictE
+get_indexof+torch._dynamo.bytecode_analysis.get_indexof*	
+instsV
+remove_dead_code0torch._dynamo.bytecode_analysis.remove_dead_code*
+instructionsb
+remove_pointless_jumps6torch._dynamo.bytecode_analysis.remove_pointless_jumps*
+instructions\
+propagate_line_nums3torch._dynamo.bytecode_analysis.propagate_line_nums*
+instructionsb
+remove_extra_line_nums6torch._dynamo.bytecode_analysis.remove_extra_line_nums*
+instructionsi
+livevars_analysis1torch._dynamo.bytecode_analysis.livevars_analysis*
+instructions*
+instructionË
+stacksize_analysis2torch._dynamo.bytecode_analysis.stacksize_analysis"f
+"Union[builtins.int,builtins.float]
+builtins.int"builtins.int 
+builtins.float"builtins.float*
+instructions
+Any*›
+__annotations__/torch._dynamo.bytecode_analysis.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*Ž
+TERMINAL_OPCODES0torch._dynamo.bytecode_analysis.TERMINAL_OPCODESH
+builtins.set[builtins.int]
+builtins.int"builtins.int"builtins.set*†
+JUMP_OPCODES,torch._dynamo.bytecode_analysis.JUMP_OPCODESH
+builtins.set[builtins.int]
+builtins.int"builtins.int"builtins.set*†
+JUMP_OPNAMES,torch._dynamo.bytecode_analysis.JUMP_OPNAMESH
+builtins.set[builtins.str]
+builtins.str"builtins.str"builtins.set*~
+HASLOCAL(torch._dynamo.bytecode_analysis.HASLOCALH
+builtins.set[builtins.int]
+builtins.int"builtins.int"builtins.set*|
+HASFREE'torch._dynamo.bytecode_analysis.HASFREEH
+builtins.set[builtins.int]
+builtins.int"builtins.int"builtins.set*‰
+stack_effect,torch._dynamo.bytecode_analysis.stack_effectK
+CallableType[builtins.function]&
+builtins.function"builtins.function

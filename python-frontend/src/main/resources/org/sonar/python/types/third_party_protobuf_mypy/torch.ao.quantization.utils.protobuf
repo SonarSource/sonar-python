@@ -1,0 +1,177 @@
+
+torch.ao.quantization.utilsI
+MatchAllNode(torch.ao.quantization.utils.MatchAllNode"builtins.objectK
+
+check_node&torch.ao.quantization.utils.check_node*
+node*
+modulesi
+get_combined_dict-torch.ao.quantization.utils.get_combined_dict*
+default_dict*
+additional_dictG
+is_per_tensor)torch.ao.quantization.utils.is_per_tensor*
+qschemeI
+is_per_channel*torch.ao.quantization.utils.is_per_channel*
+qscheme‚
+getattr_from_fqn,torch.ao.quantization.utils.getattr_from_fqn"
+Any*
+obj
+Any*%
+fqn
+builtins.str"builtins.strR
+to_underlying_dtype/torch.ao.quantization.utils.to_underlying_dtype*
+
+qdtypeZ
+get_qparam_dict+torch.ao.quantization.utils.get_qparam_dict*
+observer_or_fake_quantŸ
+get_swapped_custom_module_class;torch.ao.quantization.utils.get_swapped_custom_module_class*
+custom_module*
+custom_module_class_mapping*
+qconfigM
+activation_dtype,torch.ao.quantization.utils.activation_dtype*
+qconfigE
+weight_dtype(torch.ao.quantization.utils.weight_dtype*
+qconfigq
+"activation_is_statically_quantized>torch.ao.quantization.utils.activation_is_statically_quantized*
+qconfigs
+#activation_is_dynamically_quantized?torch.ao.quantization.utils.activation_is_dynamically_quantized*
+qconfige
+activation_is_int8_quantized8torch.ao.quantization.utils.activation_is_int8_quantized*
+qconfigg
+activation_is_int32_quantized9torch.ao.quantization.utils.activation_is_int32_quantized*
+qconfigS
+weight_is_quantized/torch.ao.quantization.utils.weight_is_quantized*
+qconfigi
+weight_is_statically_quantized:torch.ao.quantization.utils.weight_is_statically_quantized*
+qconfig–
+ op_is_int8_dynamically_quantized<torch.ao.quantization.utils.op_is_int8_dynamically_quantized"
+builtins.bool"builtins.bool*
+qconfig
+AnyQ
+get_qconfig_dtypes.torch.ao.quantization.utils.get_qconfig_dtypes*
+qconfigI
+get_quant_type*torch.ao.quantization.utils.get_quant_type*
+qconfigÜ
+check_min_max_valid/torch.ao.quantization.utils.check_min_max_valid"
+builtins.bool"builtins.bool*9
+min_val,
+torch._tensor.Tensor"torch._tensor.Tensor*9
+max_val,
+torch._tensor.Tensor"torch._tensor.Tensorœ
+calculate_qmin_qmax/torch.ao.quantization.utils.calculate_qmin_qmax"`
+ Tuple[builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int*+
+	quant_min
+builtins.int"builtins.int*+
+	quant_max
+builtins.int"builtins.int*9
+has_customized_qrange
+builtins.bool"builtins.bool*+
+dtype 
+torch._C.dtype"torch._C.dtype*0
+reduce_range
+builtins.bool"builtins.boolD
+_parent_name(torch.ao.quantization.utils._parent_name*
+
+target~
+)has_no_children_ignoring_parametrizationsEtorch.ao.quantization.utils.has_no_children_ignoring_parametrizations*
+
+module©
+_get_path_of_module/torch.ao.quantization.utils._get_path_of_module"D
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*J
+root@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*O
+	submodule@
+torch.nn.modules.module.Module"torch.nn.modules.module.ModuleÙ
+_get_signature_locals1torch.ao.quantization.utils._get_signature_locals"W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*R
+fK
+CallableType[builtins.function]&
+builtins.function"builtins.function*`
+locW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict‡
+_get_default_kwargs/torch.ao.quantization.utils._get_default_kwargs"k
+)collections.OrderedDict[builtins.str,Any]
+builtins.str"builtins.str
+Any"collections.OrderedDict*R
+fK
+CallableType[builtins.function]&
+builtins.function"builtins.functionè
+_normalize_kwargs-torch.ao.quantization.utils._normalize_kwargs"k
+)collections.OrderedDict[builtins.str,Any]
+builtins.str"builtins.str
+Any"collections.OrderedDict*U
+funcK
+CallableType[builtins.function]&
+builtins.function"builtins.function*`
+locW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict¨
+validate_qmin_qmax.torch.ao.quantization.utils.validate_qmin_qmax"
+None*+
+	quant_min
+builtins.int"builtins.int*+
+	quant_max
+builtins.int"builtins.intù
+determine_qparams-torch.ao.quantization.utils.determine_qparams"
+0Tuple[torch._tensor.Tensor,torch._tensor.Tensor],
+torch._tensor.Tensor"torch._tensor.Tensor,
+torch._tensor.Tensor"torch._tensor.Tensor*9
+min_val,
+torch._tensor.Tensor"torch._tensor.Tensor*9
+max_val,
+torch._tensor.Tensor"torch._tensor.Tensor*+
+	quant_min
+builtins.int"builtins.int*+
+	quant_max
+builtins.int"builtins.int*+
+dtype 
+torch._C.dtype"torch._C.dtype*5
+eps,
+torch._tensor.Tensor"torch._tensor.Tensor*9
+has_customized_qrange
+builtins.bool"builtins.bool*3
+qscheme$
+torch._C.qscheme"torch._C.qscheme ´
+_get_num_pos_args-torch.ao.quantization.utils._get_num_pos_args"
+builtins.int"builtins.int*R
+fK
+CallableType[builtins.function]&
+builtins.function"builtins.functionô
+get_fqn_to_example_inputs5torch.ao.quantization.utils.get_fqn_to_example_inputs"Ž
+/builtins.dict[builtins.str,builtins.tuple[Any]]
+builtins.str"builtins.str.
+builtins.tuple[Any]
+Any"builtins.tuple"builtins.dict*K
+model@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*B
+example_inputs.
+builtins.tuple[Any]
+Any"builtins.tuple±
+_assert_and_get_unique_device9torch.ao.quantization.utils._assert_and_get_unique_device"
+Any*L
+module@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*—
+__annotations__+torch.ao.quantization.utils.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*
+module_type_list,torch.ao.quantization.utils.module_type_listK
+builtins.set[builtins.type]
+builtins.type"builtins.type"builtins.set*‹
+	func_list%torch.ao.quantization.utils.func_listW
+builtins.set[builtins.function]&
+builtins.function"builtins.function"builtins.set*‰
+method_list'torch.ao.quantization.utils.method_listQ
+builtins.set[builtins.object]"
+builtins.object"builtins.object"builtins.set*z
+__all__#torch.ao.quantization.utils.__all__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list

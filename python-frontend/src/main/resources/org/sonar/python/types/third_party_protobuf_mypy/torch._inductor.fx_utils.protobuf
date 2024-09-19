@@ -1,0 +1,70 @@
+
+torch._inductor.fx_utilsã
+FakeTensorUpdater*torch._inductor.fx_utils.FakeTensorUpdater"builtins.object*æ
+__init__3torch._inductor.fx_utils.FakeTensorUpdater.__init__"
+None*b
+selfX
+*torch._inductor.fx_utils.FakeTensorUpdater"*torch._inductor.fx_utils.FakeTensorUpdater*7
+graph,
+torch.fx.graph.Graph"torch.fx.graph.Graph*â
+	hash_node4torch._inductor.fx_utils.FakeTensorUpdater.hash_node"
+Any*b
+selfX
+*torch._inductor.fx_utils.FakeTensorUpdater"*torch._inductor.fx_utils.FakeTensorUpdater*2
+node(
+torch.fx.node.Node"torch.fx.node.Node*]
+incremental_update=torch._inductor.fx_utils.FakeTensorUpdater.incremental_update*
+selfr{
+processed_hashes;torch._inductor.fx_utils.FakeTensorUpdater.processed_hashes*
+builtins.set[Any]
+Any"builtins.setrg
+graph0torch._inductor.fx_utils.FakeTensorUpdater.graph,
+torch.fx.graph.Graph"torch.fx.graph.GraphŠ
+matches_module_function_pattern8torch._inductor.fx_utils.matches_module_function_pattern"
+builtins.bool"builtins.bool*œ
+patternŽ
+KTuple[Type[torch.nn.modules.module.Module],CallableType[builtins.function]]p
+$Type[torch.nn.modules.module.Module]@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"typeK
+CallableType[builtins.function]&
+builtins.function"builtins.function*2
+node(
+torch.fx.node.Node"torch.fx.node.Node*¹
+modules«
+:builtins.dict[builtins.str,torch.nn.modules.module.Module]
+builtins.str"builtins.str@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module"builtins.dict†
+get_storage$torch._inductor.fx_utils.get_storage"
+builtins.int"builtins.int*3
+t,
+torch._tensor.Tensor"torch._tensor.Tensor·
+get_node_storage)torch._inductor.fx_utils.get_node_storage"D
+Union[builtins.int,None]
+builtins.int"builtins.int
+None*2
+node(
+torch.fx.node.Node"torch.fx.node.Node4
+get_fake!torch._inductor.fx_utils.get_fake*
+xÎ
+get_fake_args_kwargs-torch._inductor.fx_utils.get_fake_args_kwargs"Õ
+?Tuple[builtins.bool,Tuple[Any],builtins.dict[builtins.str,Any]]
+builtins.bool"builtins.bool
+
+Tuple[Any]
+AnyW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*/
+x(
+torch.fx.node.Node"torch.fx.node.Node‘
+is_node_realized)torch._inductor.fx_utils.is_node_realized"
+builtins.bool"builtins.bool*2
+node(
+torch.fx.node.Node"torch.fx.node.Node*”
+__annotations__(torch._inductor.fx_utils.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*0
+sympytorch._inductor.fx_utils.sympy
+Any*
+pytreetorch.utils._pytree 
