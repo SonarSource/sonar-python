@@ -41,8 +41,9 @@ class CompliantModule(nn.Module):
 
 
 class CompliantModule(nn.Module):
-    def __init__(self):
-        pass
+    def __init__(self, fake_super):
+        fake_super().__init__()
+        super().not_init()
 
     def call_super(self):
         super().__init__()

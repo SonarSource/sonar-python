@@ -79,7 +79,7 @@ public class TorchModuleShouldCallInitCheck extends PythonSubscriptionCheck {
 
   private static boolean isMissingSuperCall(FunctionDef funcDef) {
     ClassDef parentClassDef = CheckUtils.getParentClassDef(funcDef);
-    return parentClassDef != null && !TreeUtils.hasDescendant(parentClassDef, t -> t.is(Tree.Kind.CALL_EXPR) && isSuperConstructorCall(((CallExpression) t)));
+    return parentClassDef != null && !TreeUtils.hasDescendant(parentClassDef, t -> t.is(Tree.Kind.CALL_EXPR) && isSuperConstructorCall((CallExpression) t));
   }
 
   private static boolean isSuperConstructorCall(CallExpression callExpr) {
