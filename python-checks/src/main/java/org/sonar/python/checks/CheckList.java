@@ -369,6 +369,7 @@ public final class CheckList {
       TorchAutogradVariableShouldNotBeUsedCheck.class,
       TorchLoadLeadsToUntrustedCodeExecutionCheck.class,
       TorchModuleModeShouldBeSetAfterLoadingCheck.class,
+      TorchModuleShouldCallInitCheck.class,
       TrailingCommentCheck.class,
       TrailingWhitespaceCheck.class,
       TypeAliasAnnotationCheck.class,

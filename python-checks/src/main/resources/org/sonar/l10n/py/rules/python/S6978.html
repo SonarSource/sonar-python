@@ -1,0 +1,41 @@
+<p>This rule raises an issue when a class is a Pytorch module and does not call the <code>super().__init__()</code> method in its constructor.</p>
+<h2>Why is this an issue?</h2>
+<p>To provide the AutoGrad functionality, the Pytorch library needs to set up the necessary data structures in the base class. If the
+<code>super().__init__()</code> method is not called, the module will not be able to keep track of its parameters and other attributes.</p>
+<p>For example, when trying to instantiate a module like <code>nn.Linear</code> without calling the <code>super().__init__()</code> method, the
+instantiation will fail when it tries to register it as a submodule of the parent module.</p>
+<pre>
+import torch.nn as nn
+
+class MyCustomModule(nn.Module):
+    def __init__(self, input_size, output_size):
+        self.fc = nn.Linear(input_size, output_size)
+
+model = MyCustomModule(10, 5) # AttributeError: cannot assign module before Module.__init__() call
+</pre>
+<h2>How to fix it</h2>
+<p>Add a call to <code>super().__init__()</code> at the beginning of the constructor of the class.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+import torch.nn as nn
+
+class MyCustomModule(nn.Module):
+    def __init__(self, input_size, output_size):
+        self.fc = nn.Linear(input_size, output_size) # Noncompliant: creating an nn.Linear without calling super().__init__()
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+import torch.nn as nn
+
+class MyCustomModule(nn.Module):
+    def __init__(self, input_size, output_size):
+        super().__init__()
+        self.fc = nn.Linear(input_size, output_size)
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Pytorch documentation - <a href="https://pytorch.org/docs/stable/generated/torch.nn.Module.html#torch.nn.Module">torch.nn.Module</a> </li>
+</ul>
+
