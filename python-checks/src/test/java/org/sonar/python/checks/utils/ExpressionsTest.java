@@ -22,7 +22,9 @@ package org.sonar.python.checks.utils;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Test;
+import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
+import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.Name;
@@ -37,6 +39,7 @@ import org.sonar.python.tree.PythonTreeMaker;
 import org.sonar.python.tree.TreeUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.sonar.python.checks.utils.Expressions.containsSpreadOperator;
 import static org.sonar.python.checks.utils.Expressions.getAssignedName;
 import static org.sonar.python.checks.utils.Expressions.isFalsy;
 import static org.sonar.python.checks.utils.Expressions.isTruthy;
@@ -211,6 +214,26 @@ class ExpressionsTest {
     assertThat(unescape(stringElement("'\\u000'"))).isEqualTo("\\u000");
     assertThat(unescape(stringElement("'\\U0000000'"))).isEqualTo("\\U0000000");
 
+  }
+
+  @Test
+  void testContainsSpreadOperator() {
+    assertThat(containsSpreadOperator(args("some(**some_dict)"))).isTrue();
+    assertThat(containsSpreadOperator(args("some(**{})"))).isTrue();
+    assertThat(containsSpreadOperator(args("some(1, test=True, **some_dict)"))).isTrue();
+    assertThat(containsSpreadOperator(args("some(*some_list)"))).isTrue();
+    assertThat(containsSpreadOperator(args("some(*[])"))).isTrue();
+    assertThat(containsSpreadOperator(args("some(1, test=True, *some_list)"))).isTrue();
+
+
+    assertThat(containsSpreadOperator(args("some(1, test=True)"))).isFalse();
+    assertThat(containsSpreadOperator(args("some()"))).isFalse();
+  }
+
+  private List<Argument> args(String source) {
+    Expression callExpr = exp(source);
+    assertThat(callExpr).isInstanceOf(CallExpression.class);
+    return ((CallExpression) callExpr).arguments();
   }
 
   private StringElement stringElement(String source) {
