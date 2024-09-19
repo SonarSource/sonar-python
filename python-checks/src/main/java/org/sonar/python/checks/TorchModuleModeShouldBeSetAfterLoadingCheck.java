@@ -103,11 +103,10 @@ public class TorchModuleModeShouldBeSetAfterLoadingCheck extends PythonSubscript
   }
 
   private static Optional<Name> getFunctionCallReceiverName(CallExpression callExpr) {
-    Expression calleeExpr = callExpr.callee();
-    if (calleeExpr instanceof QualifiedExpression qualifiedExpr) {
-      return Optional.of(qualifiedExpr.qualifier()).flatMap(TreeUtils.toOptionalInstanceOfMapper(Name.class));
-    }
-    return Optional.empty();
+    return Optional.ofNullable(callExpr.callee())
+      .flatMap(TreeUtils.toOptionalInstanceOfMapper(QualifiedExpression.class))
+      .flatMap(qualifiedExpr -> Optional.ofNullable(qualifiedExpr.qualifier()))
+      .flatMap(TreeUtils.toOptionalInstanceOfMapper(Name.class));
   }
 
   private static boolean hasEvalOrTrainUsage(List<Usage> usages) {
