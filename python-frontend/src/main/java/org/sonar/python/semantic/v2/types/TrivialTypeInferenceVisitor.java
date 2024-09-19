@@ -288,14 +288,20 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
     }
     FunctionType functionType = functionTypeBuilder.build();
 
-    if (owner instanceof ClassType classTypeOwner) {
-      if (functionDef.name().symbolV2().hasSingleBindingUsage()) {
-        classTypeOwner.members().add(new Member(functionType.name(), functionType));
-      } else {
-        classTypeOwner.members().add(new Member(functionType.name(), PythonType.UNKNOWN));
-      }
-    }
+    var memberType = functionDef.name().symbolV2().hasSingleBindingUsage()
+      ? functionType
+      : PythonType.UNKNOWN;
+    addMemberToClassOrModuleType(owner, functionDef.name().name(), memberType);
+
     return functionType;
+  }
+
+  private static void addMemberToClassOrModuleType(@Nullable PythonType target, String name, PythonType memberType) {
+    if (target instanceof ClassType classType) {
+      classType.members().add(new Member(name, memberType));
+    } else if (target instanceof ModuleType moduleType) {
+      moduleType.members().put(name, memberType);
+    }
   }
 
   @Override

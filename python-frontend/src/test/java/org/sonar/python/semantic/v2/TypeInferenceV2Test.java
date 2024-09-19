@@ -2528,6 +2528,19 @@ class TypeInferenceV2Test {
     Assertions.assertThat(type.unwrappedType()).isSameAs(STR_TYPE);
   }
 
+  @Test
+  void functionAddedToOwnerMembers() {
+    var fileInput = inferTypes("""
+      def foo(): ...
+      foo
+      """);
+
+    var fooFunc = (FunctionType) ((ExpressionStatement) fileInput.statements().statements().get(1)).expressions().get(0).typeV2();
+    var owner = ((ModuleType) fooFunc.owner());
+
+    assertThat(owner.members()).containsKey("foo");
+  }
+
   private static FileInput inferTypes(String lines) {
     return inferTypes(lines, PROJECT_LEVEL_TYPE_TABLE);
   }
