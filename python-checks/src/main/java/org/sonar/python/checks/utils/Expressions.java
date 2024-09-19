@@ -32,6 +32,7 @@ import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
+import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.DictionaryLiteral;
@@ -378,5 +379,9 @@ public class Expressions {
       .map(Symbol::fullyQualifiedName)
       .filter(TYPE_VAR_FQN::equals)
       .isPresent();
+  }
+
+  public static boolean containsSpreadOperator(List<Argument> arguments) {
+    return arguments.stream().anyMatch(UnpackingExpression.class::isInstance);
   }
 }
