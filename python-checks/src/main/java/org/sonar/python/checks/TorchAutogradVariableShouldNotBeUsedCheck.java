@@ -28,7 +28,7 @@ import org.sonar.plugins.python.api.tree.Tree;
 @Rule(key = "S6979")
 public class TorchAutogradVariableShouldNotBeUsedCheck extends PythonSubscriptionCheck {
   private static final String MESSAGE = "Replace this call with a call to \"torch.tensor\".";
-  private static final String TORCH_AUTOGRAD_VARIABLE = "torch.autograd.Variable";
+  private static final String TORCH_AUTOGRAD_VARIABLE = "torch.autograd.variable.Variable";
 
   @Override
   public void initialize(Context context) {
