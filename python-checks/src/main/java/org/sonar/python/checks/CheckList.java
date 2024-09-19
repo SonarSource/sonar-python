@@ -355,7 +355,7 @@ public final class CheckList {
       StringReplaceCheck.class,
       StrongCryptographicKeysCheck.class,
       SklearnCachedPipelineDontAccessTransformersCheck.class,
-      SklearnEstimatorHyperparametersCheck.class,
+      MissingHyperParameterCheck.class,
       SklearnPipelineSpecifyMemoryArgumentCheck.class,
       SklearnPipelineParameterAreCorrectCheck.class,
       SuperfluousCurlyBraceCheck.class,
