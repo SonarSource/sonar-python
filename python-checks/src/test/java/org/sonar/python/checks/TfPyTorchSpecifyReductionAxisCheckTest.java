@@ -24,14 +24,16 @@ import org.sonar.python.checks.quickfix.PythonQuickFixVerifier;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 class TfPyTorchSpecifyReductionAxisCheckTest {
+  private static final TfPyTorchSpecifyReductionAxisCheck CHECK_OBJECT = new TfPyTorchSpecifyReductionAxisCheck();
+
   @Test
   void testTensorFlow() {
-    PythonCheckVerifier.verify("src/test/resources/checks/tfSpecifyReductionAxis.py", new TfPyTorchSpecifyReductionAxisCheck());
+    PythonCheckVerifier.verify("src/test/resources/checks/tfSpecifyReductionAxis.py", CHECK_OBJECT);
   }
 
   @Test
   void testTensorFlowQuickFix() {
-    PythonQuickFixVerifier.verify(new TfPyTorchSpecifyReductionAxisCheck(),
+    PythonQuickFixVerifier.verify(CHECK_OBJECT,
       """
         from tensorflow import math
         math.reduce_all(input)
@@ -41,7 +43,7 @@ class TfPyTorchSpecifyReductionAxisCheckTest {
         math.reduce_all(input, axis=None)
         """);
 
-    PythonQuickFixVerifier.verify(new TfPyTorchSpecifyReductionAxisCheck(),
+    PythonQuickFixVerifier.verify(CHECK_OBJECT,
       """
         from tensorflow import math
         math.reduce_all(input, keepdims=True)
@@ -51,7 +53,7 @@ class TfPyTorchSpecifyReductionAxisCheckTest {
         math.reduce_all(input, keepdims=True, axis=None)
         """);
 
-    PythonQuickFixVerifier.verifyNoQuickFixes(new TfPyTorchSpecifyReductionAxisCheck(),
+    PythonQuickFixVerifier.verifyNoQuickFixes(CHECK_OBJECT,
         """
         from tensorflow import math
         math.reduce_all()
@@ -60,6 +62,6 @@ class TfPyTorchSpecifyReductionAxisCheckTest {
 
   @Test
   void testPyTorch() {
-    PythonCheckVerifier.verify("src/test/resources/checks/pyTorchSpecifyReductionDim.py", new TfPyTorchSpecifyReductionAxisCheck());
+    PythonCheckVerifier.verify("src/test/resources/checks/pyTorchSpecifyReductionDim.py", CHECK_OBJECT);
   }
 }
