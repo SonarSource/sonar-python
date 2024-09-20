@@ -37,22 +37,23 @@
 builtins.int"builtins.int"builtins.listré
 	stride_kv5torchvision.models.video.mvit.MSBlockConfig.stride_kvJ
 builtins.list[builtins.int]
-builtins.int"builtins.int"builtins.list‚
-Pool"torchvision.models.video.mvit.Pool"builtins.object*Ã
+builtins.int"builtins.int"builtins.list‘
+
+Pool"torchvision.models.video.mvit.Pool"torch.nn.modules.module.Module*Ø
 __init__+torchvision.models.video.mvit.Pool.__init__"
 None*R
 selfH
-"torchvision.models.video.mvit.Pool""torchvision.models.video.mvit.Pool*
-pool
-Any*0
-norm&
-Union[Any,None]
-Any
-None*8
+"torchvision.models.video.mvit.Pool""torchvision.models.video.mvit.Pool*J
+pool@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*Ñ
+normz
+*Union[torch.nn.modules.module.Module,None]@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module
+None*å
 
-activation&
-Union[Any,None]
-Any
+activationz
+*Union[torch.nn.modules.module.Module,None]@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module
 None *6
 norm_before_pool
 builtins.bool"builtins.bool *á
@@ -77,8 +78,8 @@ activation&
 norm_act+torchvision.models.video.mvit.Pool.norm_act
 AnyrP
 norm_before_pool3torchvision.models.video.mvit.Pool.norm_before_pool
-AnyØ
-MultiscaleAttention1torchvision.models.video.mvit.MultiscaleAttention"builtins.object*√
+Anyæ
+MultiscaleAttention1torchvision.models.video.mvit.MultiscaleAttention"torch.nn.modules.module.Module*√
 __init__:torchvision.models.video.mvit.MultiscaleAttention.__init__"
 None*p
 selff
@@ -164,8 +165,8 @@ output_dim<torchvision.models.video.mvit.MultiscaleAttention.output_dim
 	rel_pos_w;torchvision.models.video.mvit.MultiscaleAttention.rel_pos_w
 AnyrQ
 	rel_pos_t;torchvision.models.video.mvit.MultiscaleAttention.rel_pos_t
-Any‚
-MultiscaleBlock-torchvision.models.video.mvit.MultiscaleBlock"builtins.object*û
+AnyÒ
+MultiscaleBlock-torchvision.models.video.mvit.MultiscaleBlock"torch.nn.modules.module.Module*û
 __init__6torchvision.models.video.mvit.MultiscaleBlock.__init__"
 None*h
 self^
@@ -225,8 +226,9 @@ norm_layerK
 stochastic_depth>torchvision.models.video.mvit.MultiscaleBlock.stochastic_depth
 AnyrI
 project5torchvision.models.video.mvit.MultiscaleBlock.project
-Anyˆ	
-PositionalEncoding0torchvision.models.video.mvit.PositionalEncoding"builtins.object*≈
+AnyÖ
+
+PositionalEncoding0torchvision.models.video.mvit.PositionalEncoding"torch.nn.modules.module.Module*≈
 __init__9torchvision.models.video.mvit.PositionalEncoding.__init__"
 None*n
 selfd
@@ -259,8 +261,8 @@ embed_size
 temporal_pos=torchvision.models.video.mvit.PositionalEncoding.temporal_pos
 AnyrP
 	class_pos:torchvision.models.video.mvit.PositionalEncoding.class_pos
-AnyÇ
-MViT"torchvision.models.video.mvit.MViT"builtins.object*ﬂ
+Anyë
+MViT"torchvision.models.video.mvit.MViT"torch.nn.modules.module.Module*ﬂ
 __init__+torchvision.models.video.mvit.MViT.__init__"
 None*R
 selfH
@@ -414,9 +416,9 @@ out_planes
 builtins.int"builtins.int
 builtins.int"builtins.int*(
 stride
-builtins.int"builtins.int0:staticmethodhê	
+builtins.int"builtins.int0:staticmethodhÙ	
 
-BasicBlock*torchvision.models.video.resnet.BasicBlock"builtins.object*»
+BasicBlock*torchvision.models.video.resnet.BasicBlock"torch.nn.modules.module.Module*ù
 __init__3torchvision.models.video.resnet.BasicBlock.__init__"
 None*b
 selfX
@@ -429,11 +431,11 @@ BasicBlock*torchvision.models.video.resnet.BasicBlock"builtins.object*»
 CallableType[builtins.function]&
 builtins.function"builtins.function**
 stride
-builtins.int"builtins.int *8
+builtins.int"builtins.int *å
 
-downsample&
-Union[Any,None]
-Any
+downsamplez
+*Union[torch.nn.modules.module.Module,None]@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module
 None *∫
 forward2torchvision.models.video.resnet.BasicBlock.forward"
 Any*b
@@ -453,9 +455,10 @@ downsample&
 downsample5torchvision.models.video.resnet.BasicBlock.downsample
 AnyrD
 stride1torchvision.models.video.resnet.BasicBlock.stride
-Any‘	
+Any∏
 
-Bottleneck*torchvision.models.video.resnet.Bottleneck"builtins.object*»
+
+Bottleneck*torchvision.models.video.resnet.Bottleneck"torch.nn.modules.module.Module*ù
 __init__3torchvision.models.video.resnet.Bottleneck.__init__"
 None*b
 selfX
@@ -468,11 +471,11 @@ Bottleneck*torchvision.models.video.resnet.Bottleneck"builtins.object*»
 CallableType[builtins.function]&
 builtins.function"builtins.function**
 stride
-builtins.int"builtins.int *8
+builtins.int"builtins.int *å
 
-downsample&
-Union[Any,None]
-Any
+downsamplez
+*Union[torch.nn.modules.module.Module,None]@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module
 None *∫
 forward2torchvision.models.video.resnet.Bottleneck.forward"
 Any*b
@@ -504,8 +507,8 @@ downsample5torchvision.models.video.resnet.Bottleneck.downsample
 __init__5torchvision.models.video.resnet.R2Plus1dStem.__init__"
 None*f
 self\
-,torchvision.models.video.resnet.R2Plus1dStem",torchvision.models.video.resnet.R2Plus1dStemÆ
-VideoResNet+torchvision.models.video.resnet.VideoResNet"builtins.object*Ÿ
+,torchvision.models.video.resnet.R2Plus1dStem",torchvision.models.video.resnet.R2Plus1dStemΩ
+VideoResNet+torchvision.models.video.resnet.VideoResNet"torch.nn.modules.module.Module*Ÿ
 __init__4torchvision.models.video.resnet.VideoResNet.__init__"
 None*d
 selfZ
@@ -933,6 +936,5 @@ FUnion[torchvision.models.video.swin_transformer.Swin3D_B_Weights,None]x
 __annotations__(torchvision.models.video.__annotations__W
 builtins.dict[builtins.str,Any]
 builtins.str"builtins.str
-Any"builtins.dict*/
-nn torchvision.models.video.mvit.nn
-Any
+Any"builtins.dict*
+nntorch.nn 

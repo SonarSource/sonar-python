@@ -4,8 +4,8 @@
 COCO_V1=torchvision.models.detection.ssd.SSD300_VGG16_Weights.COCO_V1
 AnyrQ
 DEFAULT=torchvision.models.detection.ssd.SSD300_VGG16_Weights.DEFAULT
-Any∑
-SSDHead(torchvision.models.detection.ssd.SSDHead"builtins.object*ê
+Any∆
+SSDHead(torchvision.models.detection.ssd.SSDHead"torch.nn.modules.module.Module*ê
 __init__1torchvision.models.detection.ssd.SSDHead.__init__"
 None*^
 selfT
@@ -30,8 +30,8 @@
 classification_head<torchvision.models.detection.ssd.SSDHead.classification_head
 AnyrT
 regression_head8torchvision.models.detection.ssd.SSDHead.regression_head
-Anyı
-SSDScoringHead/torchvision.models.detection.ssd.SSDScoringHead"builtins.object*Ö
+AnyÑ
+SSDScoringHead/torchvision.models.detection.ssd.SSDScoringHead"torch.nn.modules.module.Module*Ö
 __init__8torchvision.models.detection.ssd.SSDScoringHead.__init__"
 None*l
 selfb
@@ -74,14 +74,15 @@
 builtins.int"builtins.int"builtins.list*[
 num_anchorsJ
 builtins.list[builtins.int]
-builtins.int"builtins.int"builtins.listÀ'
-SSD$torchvision.models.detection.ssd.SSD"builtins.object*∞	
+builtins.int"builtins.int"builtins.listË(
+SSD$torchvision.models.detection.ssd.SSD"torch.nn.modules.module.Module*æ
+
 __init__-torchvision.models.detection.ssd.SSD.__init__"
 None*V
 selfL
-$torchvision.models.detection.ssd.SSD"$torchvision.models.detection.ssd.SSD*
-backbone
-Any*î
+$torchvision.models.detection.ssd.SSD"$torchvision.models.detection.ssd.SSD*N
+backbone@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*î
 anchor_generator~
 =torchvision.models.detection.anchor_utils.DefaultBoxGenerator"=torchvision.models.detection.anchor_utils.DefaultBoxGenerator*j
 size`
@@ -100,10 +101,10 @@ image_meanâ
 )Union[builtins.list[builtins.float],None]P
 builtins.list[builtins.float] 
 builtins.float"builtins.float"builtins.list
-None *2
-head&
-Union[Any,None]
-Any
+None *Ü
+headz
+*Union[torch.nn.modules.module.Module,None]@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module
 None *4
 score_thresh 
 builtins.float"builtins.float *2
@@ -227,14 +228,14 @@ nms_thresh/torchvision.models.detection.ssd.SSD.nms_thresh
 topk_candidates4torchvision.models.detection.ssd.SSD.topk_candidates
 AnyrR
 neg_to_pos_ratio5torchvision.models.detection.ssd.SSD.neg_to_pos_ratio
-Any∏
-SSDFeatureExtractorVGG7torchvision.models.detection.ssd.SSDFeatureExtractorVGG"builtins.object*ò
+AnyÄ
+SSDFeatureExtractorVGG7torchvision.models.detection.ssd.SSDFeatureExtractorVGG"torch.nn.modules.module.Module*—
 __init__@torchvision.models.detection.ssd.SSDFeatureExtractorVGG.__init__"
 None*|
 selfr
-7torchvision.models.detection.ssd.SSDFeatureExtractorVGG"7torchvision.models.detection.ssd.SSDFeatureExtractorVGG*
-backbone
-Any*+
+7torchvision.models.detection.ssd.SSDFeatureExtractorVGG"7torchvision.models.detection.ssd.SSDFeatureExtractorVGG*N
+backbone@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*+
 highres
 builtins.bool"builtins.bool*±
 forward?torchvision.models.detection.ssd.SSDFeatureExtractorVGG.forward"W
@@ -278,6 +279,4 @@ $torchvision.models.vgg.VGG16_Weights"$torchvision.models.vgg.VGG16_Weights
 builtins.str"builtins.str
 Any"builtins.dict*:
 Tensor'torchvision.models.detection.ssd.Tensor
-Any*2
-nn#torchvision.models.detection.ssd.nn
 Any

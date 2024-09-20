@@ -1,6 +1,6 @@
 
-torchvision.models.optical_flow¸
-ResidualBlock2torchvision.models.optical_flow.raft.ResidualBlock"builtins.object*ı
+torchvision.models.optical_flowã
+ResidualBlock2torchvision.models.optical_flow.raft.ResidualBlock"torch.nn.modules.module.Module*ı
 __init__;torchvision.models.optical_flow.raft.ResidualBlock.__init__"
 None*r
 selfh
@@ -27,8 +27,8 @@ norm_layer
 downsample=torchvision.models.optical_flow.raft.ResidualBlock.downsample
 AnyrH
 relu7torchvision.models.optical_flow.raft.ResidualBlock.relu
-Any∏
-BottleneckBlock4torchvision.models.optical_flow.raft.BottleneckBlock"builtins.object*≈
+Any«
+BottleneckBlock4torchvision.models.optical_flow.raft.BottleneckBlock"torch.nn.modules.module.Module*≈
 __init__=torchvision.models.optical_flow.raft.BottleneckBlock.__init__"
 None*v
 selfl
@@ -55,8 +55,8 @@ norm_layer
 AnyrV
 
 downsample?torchvision.models.optical_flow.raft.BottleneckBlock.downsample
-Anyè
-FeatureEncoder3torchvision.models.optical_flow.raft.FeatureEncoder"builtins.object*é
+Anyû
+FeatureEncoder3torchvision.models.optical_flow.raft.FeatureEncoder"torch.nn.modules.module.Module*é
 __init__<torchvision.models.optical_flow.raft.FeatureEncoder.__init__*
 self*
 block *
@@ -81,8 +81,8 @@ norm_layer *W
 output_dim>torchvision.models.optical_flow.raft.FeatureEncoder.output_dim
 Anyrc
 downsample_factorEtorchvision.models.optical_flow.raft.FeatureEncoder.downsample_factor
-Anyá
-MotionEncoder2torchvision.models.optical_flow.raft.MotionEncoder"builtins.object*Œ
+Anyñ
+MotionEncoder2torchvision.models.optical_flow.raft.MotionEncoder"torch.nn.modules.module.Module*Œ
 __init__;torchvision.models.optical_flow.raft.MotionEncoder.__init__"
 None*r
 selfh
@@ -110,8 +110,8 @@ output_dim>torchvision.models.optical_flow.raft.FeatureEncoder.output_dim
 conv7torchvision.models.optical_flow.raft.MotionEncoder.conv
 AnyrX
 out_channels?torchvision.models.optical_flow.raft.MotionEncoder.out_channels
-Anyå
-ConvGRU,torchvision.models.optical_flow.raft.ConvGRU"builtins.object*ñ
+Anyõ
+ConvGRU,torchvision.models.optical_flow.raft.ConvGRU"torch.nn.modules.module.Module*ñ
 __init__5torchvision.models.optical_flow.raft.ConvGRU.__init__"
 None*f
 self\
@@ -134,8 +134,8 @@ input_size
 convr2torchvision.models.optical_flow.raft.ConvGRU.convr
 AnyrD
 convq2torchvision.models.optical_flow.raft.ConvGRU.convq
-AnyÁ
-RecurrentBlock3torchvision.models.optical_flow.raft.RecurrentBlock"builtins.object*Ø
+Anyˆ
+RecurrentBlock3torchvision.models.optical_flow.raft.RecurrentBlock"torch.nn.modules.module.Module*Ø
 __init__<torchvision.models.optical_flow.raft.RecurrentBlock.__init__"
 None*t
 selfj
@@ -158,8 +158,8 @@ input_size
 convgru2<torchvision.models.optical_flow.raft.RecurrentBlock.convgru2
 AnyrW
 hidden_size?torchvision.models.optical_flow.raft.RecurrentBlock.hidden_size
-Any›
-FlowHead-torchvision.models.optical_flow.raft.FlowHead"builtins.object*Í
+AnyÏ
+FlowHead-torchvision.models.optical_flow.raft.FlowHead"torch.nn.modules.module.Module*Í
 __init__6torchvision.models.optical_flow.raft.FlowHead.__init__"
 None*h
 self^
@@ -176,8 +176,8 @@ input_size
 conv23torchvision.models.optical_flow.raft.FlowHead.conv2
 AnyrC
 relu2torchvision.models.optical_flow.raft.FlowHead.relu
-Anyﬂ
-UpdateBlock0torchvision.models.optical_flow.raft.UpdateBlock"builtins.object*í
+AnyÓ
+UpdateBlock0torchvision.models.optical_flow.raft.UpdateBlock"torch.nn.modules.module.Module*í
 __init__9torchvision.models.optical_flow.raft.UpdateBlock.__init__"
 None*n
 selfd
@@ -201,8 +201,8 @@ input_size
 	flow_head:torchvision.models.optical_flow.raft.UpdateBlock.flow_head
 Anyr`
 hidden_state_sizeBtorchvision.models.optical_flow.raft.UpdateBlock.hidden_state_size
-AnyŒ
-MaskPredictor2torchvision.models.optical_flow.raft.MaskPredictor"builtins.object*≠
+Any›
+MaskPredictor2torchvision.models.optical_flow.raft.MaskPredictor"torch.nn.modules.module.Module*≠
 __init__;torchvision.models.optical_flow.raft.MaskPredictor.__init__"
 None*r
 selfh
@@ -223,8 +223,8 @@ multiplier
 AnyrT
 
 multiplier=torchvision.models.optical_flow.raft.MaskPredictor.multiplier
-Anyâ
-	CorrBlock.torchvision.models.optical_flow.raft.CorrBlock"builtins.object*ï
+Anyò
+	CorrBlock.torchvision.models.optical_flow.raft.CorrBlock"torch.nn.modules.module.Module*ï
 __init__7torchvision.models.optical_flow.raft.CorrBlock.__init__"
 None*j
 self`
@@ -253,8 +253,8 @@ num_levels9torchvision.models.optical_flow.raft.CorrBlock.num_levels
 corr_pyramid;torchvision.models.optical_flow.raft.CorrBlock.corr_pyramid
 AnyrT
 out_channels;torchvision.models.optical_flow.raft.CorrBlock.out_channels
-Any»
-RAFT)torchvision.models.optical_flow.raft.RAFT"builtins.object*ÿ
+Any◊
+RAFT)torchvision.models.optical_flow.raft.RAFT"torch.nn.modules.module.Module*ÿ
 __init__2torchvision.models.optical_flow.raft.RAFT.__init__"
 None*`
 selfV
@@ -343,6 +343,5 @@ CUnion[torchvision.models.optical_flow.raft.Raft_Small_Weights,None]r
 __annotations__/torchvision.models.optical_flow.__annotations__W
 builtins.dict[builtins.str,Any]
 builtins.str"builtins.str
-Any"builtins.dict*6
-nn'torchvision.models.optical_flow.raft.nn
-Any
+Any"builtins.dict*
+nntorch.nn 
