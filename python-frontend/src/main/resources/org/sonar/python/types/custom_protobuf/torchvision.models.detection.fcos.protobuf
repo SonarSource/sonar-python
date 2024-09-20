@@ -1,0 +1,312 @@
+
+!torchvision.models.detection.fcosÿ
+FCOSHead*torchvision.models.detection.fcos.FCOSHead"builtins.object*‘
+__init__3torchvision.models.detection.fcos.FCOSHead.__init__"
+None*b
+selfX
+*torchvision.models.detection.fcos.FCOSHead"*torchvision.models.detection.fcos.FCOSHead*-
+in_channels
+builtins.int"builtins.int*-
+num_anchors
+builtins.int"builtins.int*-
+num_classes
+builtins.int"builtins.int*U
+	num_convsD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *“
+compute_loss7torchvision.models.detection.fcos.FCOSHead.compute_loss"W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*b
+selfX
+*torchvision.models.detection.fcos.FCOSHead"*torchvision.models.detection.fcos.FCOSHead*¦
+targets˜
+.builtins.list[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"builtins.list*i
+head_outputsW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*9
+anchors,
+builtins.list[Any]
+Any"builtins.list*>
+matched_idxs,
+builtins.list[Any]
+Any"builtins.list*¯
+forward2torchvision.models.detection.fcos.FCOSHead.forward"W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*b
+selfX
+*torchvision.models.detection.fcos.FCOSHead"*torchvision.models.detection.fcos.FCOSHead*3
+x,
+builtins.list[Any]
+Any"builtins.listrV
+__annotations__:torchvision.models.detection.fcos.FCOSHead.__annotations__
+AnyrJ
+	box_coder4torchvision.models.detection.fcos.FCOSHead.box_coder
+Anyr^
+classification_head>torchvision.models.detection.fcos.FCOSHead.classification_head
+AnyrV
+regression_head:torchvision.models.detection.fcos.FCOSHead.regression_head
+AnyÄ
+
+FCOSClassificationHead8torchvision.models.detection.fcos.FCOSClassificationHead"builtins.object*ê
+__init__Atorchvision.models.detection.fcos.FCOSClassificationHead.__init__"
+None*~
+selft
+8torchvision.models.detection.fcos.FCOSClassificationHead"8torchvision.models.detection.fcos.FCOSClassificationHead*-
+in_channels
+builtins.int"builtins.int*-
+num_anchors
+builtins.int"builtins.int*-
+num_classes
+builtins.int"builtins.int*-
+	num_convs
+builtins.int"builtins.int *9
+prior_probability 
+builtins.float"builtins.float *™
+
+norm_layer†
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *‰
+forward@torchvision.models.detection.fcos.FCOSClassificationHead.forward"
+Any*~
+selft
+8torchvision.models.detection.fcos.FCOSClassificationHead"8torchvision.models.detection.fcos.FCOSClassificationHead*3
+x,
+builtins.list[Any]
+Any"builtins.listr\
+num_classesDtorchvision.models.detection.fcos.FCOSClassificationHead.num_classes
+Anyr\
+num_anchorsDtorchvision.models.detection.fcos.FCOSClassificationHead.num_anchors
+AnyrN
+conv=torchvision.models.detection.fcos.FCOSClassificationHead.conv
+AnyrZ
+
+cls_logitsCtorchvision.models.detection.fcos.FCOSClassificationHead.cls_logits
+Anyë
+FCOSRegressionHead4torchvision.models.detection.fcos.FCOSRegressionHead"builtins.object*ô
+__init__=torchvision.models.detection.fcos.FCOSRegressionHead.__init__"
+None*v
+selfl
+4torchvision.models.detection.fcos.FCOSRegressionHead"4torchvision.models.detection.fcos.FCOSRegressionHead*-
+in_channels
+builtins.int"builtins.int*-
+num_anchors
+builtins.int"builtins.int*-
+	num_convs
+builtins.int"builtins.int *™
+
+norm_layer†
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *š
+forward<torchvision.models.detection.fcos.FCOSRegressionHead.forward"$
+Tuple[Any,Any]
+Any
+Any*v
+selfl
+4torchvision.models.detection.fcos.FCOSRegressionHead"4torchvision.models.detection.fcos.FCOSRegressionHead*3
+x,
+builtins.list[Any]
+Any"builtins.listrJ
+conv9torchvision.models.detection.fcos.FCOSRegressionHead.conv
+AnyrR
+bbox_reg=torchvision.models.detection.fcos.FCOSRegressionHead.bbox_reg
+AnyrZ
+bbox_ctrnessAtorchvision.models.detection.fcos.FCOSRegressionHead.bbox_ctrness
+AnyÖ(
+FCOS&torchvision.models.detection.fcos.FCOS"builtins.object*Ç	
+__init__/torchvision.models.detection.fcos.FCOS.__init__"
+None*Z
+selfP
+&torchvision.models.detection.fcos.FCOS"&torchvision.models.detection.fcos.FCOS*
+backbone
+Any*-
+num_classes
+builtins.int"builtins.int*,
+min_size
+builtins.int"builtins.int *,
+max_size
+builtins.int"builtins.int *œ
+
+image_mean‰
+)Union[builtins.list[builtins.float],None]P
+builtins.list[builtins.float] 
+builtins.float"builtins.float"builtins.list
+None *›
+	image_std‰
+)Union[builtins.list[builtins.float],None]P
+builtins.list[builtins.float] 
+builtins.float"builtins.float"builtins.list
+None *ä
+anchor_generatorË
+EUnion[torchvision.models.detection.anchor_utils.AnchorGenerator,None]v
+9torchvision.models.detection.anchor_utils.AnchorGenerator"9torchvision.models.detection.anchor_utils.AnchorGenerator
+None *2
+head&
+Union[Any,None]
+Any
+None *>
+center_sampling_radius 
+builtins.float"builtins.float *4
+score_thresh 
+builtins.float"builtins.float *2
+
+nms_thresh 
+builtins.float"builtins.float *6
+detections_per_img
+builtins.int"builtins.int *3
+topk_candidates
+builtins.int"builtins.int *
+kwargs
+Any*‚
+eager_outputs4torchvision.models.detection.fcos.FCOS.eager_outputs"Í
+UTuple[builtins.dict[builtins.str,Any],builtins.list[builtins.dict[builtins.str,Any]]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict˜
+.builtins.list[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"builtins.list*Z
+selfP
+&torchvision.models.detection.fcos.FCOS"&torchvision.models.detection.fcos.FCOS*c
+lossesW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*©
+
+detections˜
+.builtins.list[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"builtins.list*®
+compute_loss3torchvision.models.detection.fcos.FCOS.compute_loss"W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*Z
+selfP
+&torchvision.models.detection.fcos.FCOS"&torchvision.models.detection.fcos.FCOS*¦
+targets˜
+.builtins.list[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"builtins.list*i
+head_outputsW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*9
+anchors,
+builtins.list[Any]
+Any"builtins.list*e
+num_anchors_per_levelJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*–
+postprocess_detections=torchvision.models.detection.fcos.FCOS.postprocess_detections"˜
+.builtins.list[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"builtins.list*Z
+selfP
+&torchvision.models.detection.fcos.FCOS"&torchvision.models.detection.fcos.FCOS*ž
+head_outputs‹
+.builtins.dict[builtins.str,builtins.list[Any]]
+builtins.str"builtins.str,
+builtins.list[Any]
+Any"builtins.list"builtins.dict*m
+anchors`
+!builtins.list[builtins.list[Any]],
+builtins.list[Any]
+Any"builtins.list"builtins.list*µ
+image_shapes¢
+/builtins.list[Tuple[builtins.int,builtins.int]]`
+ Tuple[builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int"builtins.list*•
+forward.torchvision.models.detection.fcos.FCOS.forward"Í
+UTuple[builtins.dict[builtins.str,Any],builtins.list[builtins.dict[builtins.str,Any]]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict˜
+.builtins.list[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"builtins.list*Z
+selfP
+&torchvision.models.detection.fcos.FCOS"&torchvision.models.detection.fcos.FCOS*8
+images,
+builtins.list[Any]
+Any"builtins.list*ó
+targetsã
+:Union[builtins.list[builtins.dict[builtins.str,Any]],None]˜
+.builtins.list[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"builtins.list
+None rR
+__annotations__6torchvision.models.detection.fcos.FCOS.__annotations__
+AnyrD
+backbone/torchvision.models.detection.fcos.FCOS.backbone
+AnyrT
+anchor_generator7torchvision.models.detection.fcos.FCOS.anchor_generator
+Anyr<
+head+torchvision.models.detection.fcos.FCOS.head
+AnyrF
+	box_coder0torchvision.models.detection.fcos.FCOS.box_coder
+AnyrF
+	transform0torchvision.models.detection.fcos.FCOS.transform
+Anyr`
+center_sampling_radius=torchvision.models.detection.fcos.FCOS.center_sampling_radius
+AnyrL
+score_thresh3torchvision.models.detection.fcos.FCOS.score_thresh
+AnyrH
+
+nms_thresh1torchvision.models.detection.fcos.FCOS.nms_thresh
+AnyrX
+detections_per_img9torchvision.models.detection.fcos.FCOS.detections_per_img
+AnyrR
+topk_candidates6torchvision.models.detection.fcos.FCOS.topk_candidates
+Any±
+FCOS_ResNet50_FPN_Weights;torchvision.models.detection.fcos.FCOS_ResNet50_FPN_Weights"#torchvision.models._api.WeightsEnumHrW
+COCO_V1Ctorchvision.models.detection.fcos.FCOS_ResNet50_FPN_Weights.COCO_V1
+AnyrW
+DEFAULTCtorchvision.models.detection.fcos.FCOS_ResNet50_FPN_Weights.DEFAULT
+Any½
+fcos_resnet50_fpn3torchvision.models.detection.fcos.fcos_resnet50_fpn"P
+&torchvision.models.detection.fcos.FCOS"&torchvision.models.detection.fcos.FCOS*á
+weightsÑ
+GUnion[torchvision.models.detection.fcos.FCOS_ResNet50_FPN_Weights,None]z
+;torchvision.models.detection.fcos.FCOS_ResNet50_FPN_Weights";torchvision.models.detection.fcos.FCOS_ResNet50_FPN_Weights
+None *.
+progress
+builtins.bool"builtins.bool *W
+num_classesD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *·
+weights_backbonež
+6Union[torchvision.models.resnet.ResNet50_Weights,None]X
+*torchvision.models.resnet.ResNet50_Weights"*torchvision.models.resnet.ResNet50_Weights
+None *e
+trainable_backbone_layersD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *
+kwargs
+Any*
+__annotations__1torchvision.models.detection.fcos.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*;
+Tensor(torchvision.models.detection.fcos.Tensor
+Any*3
+nn$torchvision.models.detection.fcos.nn
+Any

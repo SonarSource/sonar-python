@@ -1,0 +1,351 @@
+
+&torchvision.models.detection.roi_headsÛ5
+RoIHeads/torchvision.models.detection.roi_heads.RoIHeads"builtins.object*Ì
+__init__8torchvision.models.detection.roi_heads.RoIHeads.__init__"
+None*l
+selfb
+/torchvision.models.detection.roi_heads.RoIHeads"/torchvision.models.detection.roi_heads.RoIHeads*
+box_roi_pool
+Any*
+box_head
+Any*
+box_predictor
+Any*
+fg_iou_thresh
+Any*
+bg_iou_thresh
+Any*!
+batch_size_per_image
+Any*
+positive_fraction
+Any*
+bbox_reg_weights
+Any*
+score_thresh
+Any*
+
+nms_thresh
+Any*
+detections_per_img
+Any*;
+mask_roi_pool&
+Union[Any,None]
+Any
+None *7
+	mask_head&
+Union[Any,None]
+Any
+None *<
+mask_predictor&
+Union[Any,None]
+Any
+None *?
+keypoint_roi_pool&
+Union[Any,None]
+Any
+None *;
+keypoint_head&
+Union[Any,None]
+Any
+None *@
+keypoint_predictor&
+Union[Any,None]
+Any
+None *N
+has_mask8torchvision.models.detection.roi_heads.RoIHeads.has_mask*
+self*V
+has_keypoint<torchvision.models.detection.roi_heads.RoIHeads.has_keypoint*
+self*ù
+assign_targets_to_proposalsKtorchvision.models.detection.roi_heads.RoIHeads.assign_targets_to_proposals"å
+,Tuple[builtins.list[Any],builtins.list[Any]],
+builtins.list[Any]
+Any"builtins.list,
+builtins.list[Any]
+Any"builtins.list*l
+selfb
+/torchvision.models.detection.roi_heads.RoIHeads"/torchvision.models.detection.roi_heads.RoIHeads*;
+	proposals,
+builtins.list[Any]
+Any"builtins.list*:
+gt_boxes,
+builtins.list[Any]
+Any"builtins.list*;
+	gt_labels,
+builtins.list[Any]
+Any"builtins.list*ú
+	subsample9torchvision.models.detection.roi_heads.RoIHeads.subsample",
+builtins.list[Any]
+Any"builtins.list*l
+selfb
+/torchvision.models.detection.roi_heads.RoIHeads"/torchvision.models.detection.roi_heads.RoIHeads*8
+labels,
+builtins.list[Any]
+Any"builtins.list*È
+add_gt_proposals@torchvision.models.detection.roi_heads.RoIHeads.add_gt_proposals",
+builtins.list[Any]
+Any"builtins.list*l
+selfb
+/torchvision.models.detection.roi_heads.RoIHeads"/torchvision.models.detection.roi_heads.RoIHeads*;
+	proposals,
+builtins.list[Any]
+Any"builtins.list*:
+gt_boxes,
+builtins.list[Any]
+Any"builtins.list*∫
+check_targets=torchvision.models.detection.roi_heads.RoIHeads.check_targets"
+None*l
+selfb
+/torchvision.models.detection.roi_heads.RoIHeads"/torchvision.models.detection.roi_heads.RoIHeads*Ò
+targets„
+:Union[builtins.list[builtins.dict[builtins.str,Any]],None]ò
+.builtins.list[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"builtins.list
+None*í
+select_training_samplesGtorchvision.models.detection.roi_heads.RoIHeads.select_training_samples"é
+RTuple[builtins.list[Any],builtins.list[Any],builtins.list[Any],builtins.list[Any]],
+builtins.list[Any]
+Any"builtins.list,
+builtins.list[Any]
+Any"builtins.list,
+builtins.list[Any]
+Any"builtins.list,
+builtins.list[Any]
+Any"builtins.list*l
+selfb
+/torchvision.models.detection.roi_heads.RoIHeads"/torchvision.models.detection.roi_heads.RoIHeads*;
+	proposals,
+builtins.list[Any]
+Any"builtins.list*Ò
+targets„
+:Union[builtins.list[builtins.dict[builtins.str,Any]],None]ò
+.builtins.list[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"builtins.list
+None*À
+postprocess_detectionsFtorchvision.models.detection.roi_heads.RoIHeads.postprocess_detections"Õ
+?Tuple[builtins.list[Any],builtins.list[Any],builtins.list[Any]],
+builtins.list[Any]
+Any"builtins.list,
+builtins.list[Any]
+Any"builtins.list,
+builtins.list[Any]
+Any"builtins.list*l
+selfb
+/torchvision.models.detection.roi_heads.RoIHeads"/torchvision.models.detection.roi_heads.RoIHeads*
+class_logits
+Any*
+box_regression
+Any*;
+	proposals,
+builtins.list[Any]
+Any"builtins.list*µ
+image_shapes¢
+/builtins.list[Tuple[builtins.int,builtins.int]]`
+ Tuple[builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int"builtins.list*“
+forward7torchvision.models.detection.roi_heads.RoIHeads.forward"Õ
+UTuple[builtins.list[builtins.dict[builtins.str,Any]],builtins.dict[builtins.str,Any]]ò
+.builtins.list[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"builtins.listW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*l
+selfb
+/torchvision.models.detection.roi_heads.RoIHeads"/torchvision.models.detection.roi_heads.RoIHeads*e
+featuresW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*;
+	proposals,
+builtins.list[Any]
+Any"builtins.list*µ
+image_shapes¢
+/builtins.list[Tuple[builtins.int,builtins.int]]`
+ Tuple[builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int"builtins.list*Û
+targets„
+:Union[builtins.list[builtins.dict[builtins.str,Any]],None]ò
+.builtins.list[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"builtins.list
+None r[
+__annotations__?torchvision.models.detection.roi_heads.RoIHeads.__annotations__
+AnyrY
+box_similarity>torchvision.models.detection.roi_heads.RoIHeads.box_similarity
+Anyr]
+proposal_matcher@torchvision.models.detection.roi_heads.RoIHeads.proposal_matcher
+AnyrW
+fg_bg_sampler=torchvision.models.detection.roi_heads.RoIHeads.fg_bg_sampler
+AnyrO
+	box_coder9torchvision.models.detection.roi_heads.RoIHeads.box_coder
+AnyrU
+box_roi_pool<torchvision.models.detection.roi_heads.RoIHeads.box_roi_pool
+AnyrM
+box_head8torchvision.models.detection.roi_heads.RoIHeads.box_head
+AnyrW
+box_predictor=torchvision.models.detection.roi_heads.RoIHeads.box_predictor
+AnyrU
+score_thresh<torchvision.models.detection.roi_heads.RoIHeads.score_thresh
+AnyrQ
+
+nms_thresh:torchvision.models.detection.roi_heads.RoIHeads.nms_thresh
+Anyra
+detections_per_imgBtorchvision.models.detection.roi_heads.RoIHeads.detections_per_img
+AnyrW
+mask_roi_pool=torchvision.models.detection.roi_heads.RoIHeads.mask_roi_pool
+AnyrO
+	mask_head9torchvision.models.detection.roi_heads.RoIHeads.mask_head
+AnyrY
+mask_predictor>torchvision.models.detection.roi_heads.RoIHeads.mask_predictor
+Anyr_
+keypoint_roi_poolAtorchvision.models.detection.roi_heads.RoIHeads.keypoint_roi_pool
+AnyrW
+keypoint_head=torchvision.models.detection.roi_heads.RoIHeads.keypoint_head
+Anyra
+keypoint_predictorBtorchvision.models.detection.roi_heads.RoIHeads.keypoint_predictor
+Any£
+fastrcnn_loss4torchvision.models.detection.roi_heads.fastrcnn_loss"$
+Tuple[Any,Any]
+Any
+Any*
+class_logits
+Any*
+box_regression
+Any*8
+labels,
+builtins.list[Any]
+Any"builtins.list*D
+regression_targets,
+builtins.list[Any]
+Any"builtins.list«
+maskrcnn_inference9torchvision.models.detection.roi_heads.maskrcnn_inference",
+builtins.list[Any]
+Any"builtins.list*
+x
+Any*8
+labels,
+builtins.list[Any]
+Any"builtins.listÀ
+project_masks_on_boxes=torchvision.models.detection.roi_heads.project_masks_on_boxes"
+Any*
+gt_masks
+Any*
+boxes
+Any*
+matched_idxs
+Any*#
+M
+builtins.int"builtins.int„
+maskrcnn_loss4torchvision.models.detection.roi_heads.maskrcnn_loss"
+Any*
+mask_logits
+Any*;
+	proposals,
+builtins.list[Any]
+Any"builtins.list*:
+gt_masks,
+builtins.list[Any]
+Any"builtins.list*;
+	gt_labels,
+builtins.list[Any]
+Any"builtins.list*C
+mask_matched_idxs,
+builtins.list[Any]
+Any"builtins.list‘
+keypoints_to_heatmap;torchvision.models.detection.roi_heads.keypoints_to_heatmap"$
+Tuple[Any,Any]
+Any
+Any*
+	keypoints
+Any*
+rois
+Any*.
+heatmap_size
+builtins.int"builtins.inti
+heatmaps_to_keypoints<torchvision.models.detection.roi_heads.heatmaps_to_keypoints*
+maps*
+rois∫
+keypointrcnn_loss8torchvision.models.detection.roi_heads.keypointrcnn_loss"
+Any*
+keypoint_logits
+Any*;
+	proposals,
+builtins.list[Any]
+Any"builtins.list*>
+gt_keypoints,
+builtins.list[Any]
+Any"builtins.list*G
+keypoint_matched_idxs,
+builtins.list[Any]
+Any"builtins.listØ
+keypointrcnn_inference=torchvision.models.detection.roi_heads.keypointrcnn_inference"å
+,Tuple[builtins.list[Any],builtins.list[Any]],
+builtins.list[Any]
+Any"builtins.list,
+builtins.list[Any]
+Any"builtins.list*
+x
+Any*7
+boxes,
+builtins.list[Any]
+Any"builtins.listç
+expand_boxes3torchvision.models.detection.roi_heads.expand_boxes"
+Any*
+boxes
+Any*+
+scale 
+builtins.float"builtins.float—
+expand_masks_tracing_scaleAtorchvision.models.detection.roi_heads.expand_masks_tracing_scale" 
+builtins.float"builtins.float*#
+M
+builtins.int"builtins.int*)
+padding
+builtins.int"builtins.intÀ
+expand_masks3torchvision.models.detection.roi_heads.expand_masks"H
+Tuple[Any,builtins.float]
+Any 
+builtins.float"builtins.float*
+mask
+Any*)
+padding
+builtins.int"builtins.intœ
+paste_mask_in_image:torchvision.models.detection.roi_heads.paste_mask_in_image"
+Any*
+mask
+Any*
+box
+Any*&
+im_h
+builtins.int"builtins.int*&
+im_w
+builtins.int"builtins.int¢
+paste_masks_in_image;torchvision.models.detection.roi_heads.paste_masks_in_image"
+Any*
+masks
+Any*
+boxes
+Any*o
+	img_shape`
+ Tuple[builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int*+
+padding
+builtins.int"builtins.int *¢
+__annotations__6torchvision.models.detection.roi_heads.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*@
+Tensor-torchvision.models.detection.roi_heads.Tensor
+Any*8
+nn)torchvision.models.detection.roi_heads.nn
+Any*F
+	roi_align0torchvision.models.detection.roi_heads.roi_align
+Any

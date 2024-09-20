@@ -1,0 +1,152 @@
+
+)torchvision.models.segmentation.deeplabv3Å
+	DeepLabV33torchvision.models.segmentation.deeplabv3.DeepLabV3"?torchvision.models.segmentation._utils._SimpleSegmentationModelË
+DeepLabHead5torchvision.models.segmentation.deeplabv3.DeepLabHead"builtins.object*ê
+__init__>torchvision.models.segmentation.deeplabv3.DeepLabHead.__init__"
+None*x
+selfn
+5torchvision.models.segmentation.deeplabv3.DeepLabHead"5torchvision.models.segmentation.deeplabv3.DeepLabHead*-
+in_channels
+builtins.int"builtins.int*-
+num_classes
+builtins.int"builtins.int*b
+atrous_ratesN
+typing.Sequence[builtins.int]
+builtins.int"builtins.int"typing.Sequence ¢
+ASPPConv2torchvision.models.segmentation.deeplabv3.ASPPConv"builtins.object*–
+__init__;torchvision.models.segmentation.deeplabv3.ASPPConv.__init__"
+None*r
+selfh
+2torchvision.models.segmentation.deeplabv3.ASPPConv"2torchvision.models.segmentation.deeplabv3.ASPPConv*-
+in_channels
+builtins.int"builtins.int*.
+out_channels
+builtins.int"builtins.int**
+dilation
+builtins.int"builtins.int„
+ASPPPooling5torchvision.models.segmentation.deeplabv3.ASPPPooling"builtins.object*≠
+__init__>torchvision.models.segmentation.deeplabv3.ASPPPooling.__init__"
+None*x
+selfn
+5torchvision.models.segmentation.deeplabv3.ASPPPooling"5torchvision.models.segmentation.deeplabv3.ASPPPooling*-
+in_channels
+builtins.int"builtins.int*.
+out_channels
+builtins.int"builtins.int*€
+forward=torchvision.models.segmentation.deeplabv3.ASPPPooling.forward"
+Any*x
+selfn
+5torchvision.models.segmentation.deeplabv3.ASPPPooling"5torchvision.models.segmentation.deeplabv3.ASPPPooling*
+x
+Any£
+ASPP.torchvision.models.segmentation.deeplabv3.ASPP"builtins.object*¸
+__init__7torchvision.models.segmentation.deeplabv3.ASPP.__init__"
+None*j
+self`
+.torchvision.models.segmentation.deeplabv3.ASPP".torchvision.models.segmentation.deeplabv3.ASPP*-
+in_channels
+builtins.int"builtins.int*`
+atrous_ratesN
+typing.Sequence[builtins.int]
+builtins.int"builtins.int"typing.Sequence*0
+out_channels
+builtins.int"builtins.int *∆
+forward6torchvision.models.segmentation.deeplabv3.ASPP.forward"
+Any*j
+self`
+.torchvision.models.segmentation.deeplabv3.ASPP".torchvision.models.segmentation.deeplabv3.ASPP*
+x
+AnyrF
+convs4torchvision.models.segmentation.deeplabv3.ASPP.convs
+AnyrJ
+project6torchvision.models.segmentation.deeplabv3.ASPP.project
+AnyÓ
+DeepLabV3_ResNet50_WeightsDtorchvision.models.segmentation.deeplabv3.DeepLabV3_ResNet50_Weights"#torchvision.models._api.WeightsEnumHrÄ
+COCO_WITH_VOC_LABELS_V1\torchvision.models.segmentation.deeplabv3.DeepLabV3_ResNet50_Weights.COCO_WITH_VOC_LABELS_V1
+Anyr`
+DEFAULTLtorchvision.models.segmentation.deeplabv3.DeepLabV3_ResNet50_Weights.DEFAULT
+AnyÚ
+DeepLabV3_ResNet101_WeightsEtorchvision.models.segmentation.deeplabv3.DeepLabV3_ResNet101_Weights"#torchvision.models._api.WeightsEnumHrÅ
+COCO_WITH_VOC_LABELS_V1]torchvision.models.segmentation.deeplabv3.DeepLabV3_ResNet101_Weights.COCO_WITH_VOC_LABELS_V1
+Anyra
+DEFAULTMtorchvision.models.segmentation.deeplabv3.DeepLabV3_ResNet101_Weights.DEFAULT
+Anyñ
+$DeepLabV3_MobileNet_V3_Large_WeightsNtorchvision.models.segmentation.deeplabv3.DeepLabV3_MobileNet_V3_Large_Weights"#torchvision.models._api.WeightsEnumHrä
+COCO_WITH_VOC_LABELS_V1ftorchvision.models.segmentation.deeplabv3.DeepLabV3_MobileNet_V3_Large_Weights.COCO_WITH_VOC_LABELS_V1
+Anyrj
+DEFAULTVtorchvision.models.segmentation.deeplabv3.DeepLabV3_MobileNet_V3_Large_Weights.DEFAULT
+AnyÔ
+deeplabv3_resnet50<torchvision.models.segmentation.deeplabv3.deeplabv3_resnet50"j
+3torchvision.models.segmentation.deeplabv3.DeepLabV3"3torchvision.models.segmentation.deeplabv3.DeepLabV3*˝
+weightsÌ
+PUnion[torchvision.models.segmentation.deeplabv3.DeepLabV3_ResNet50_Weights,None]å
+Dtorchvision.models.segmentation.deeplabv3.DeepLabV3_ResNet50_Weights"Dtorchvision.models.segmentation.deeplabv3.DeepLabV3_ResNet50_Weights
+None *.
+progress
+builtins.bool"builtins.bool *W
+num_classesD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *W
+aux_lossG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *∑
+weights_backboneû
+6Union[torchvision.models.resnet.ResNet50_Weights,None]X
+*torchvision.models.resnet.ResNet50_Weights"*torchvision.models.resnet.ResNet50_Weights
+None *
+kwargs
+Any˜
+deeplabv3_resnet101=torchvision.models.segmentation.deeplabv3.deeplabv3_resnet101"j
+3torchvision.models.segmentation.deeplabv3.DeepLabV3"3torchvision.models.segmentation.deeplabv3.DeepLabV3*Ä
+weights
+QUnion[torchvision.models.segmentation.deeplabv3.DeepLabV3_ResNet101_Weights,None]é
+Etorchvision.models.segmentation.deeplabv3.DeepLabV3_ResNet101_Weights"Etorchvision.models.segmentation.deeplabv3.DeepLabV3_ResNet101_Weights
+None *.
+progress
+builtins.bool"builtins.bool *W
+num_classesD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *W
+aux_lossG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *∫
+weights_backbone°
+7Union[torchvision.models.resnet.ResNet101_Weights,None]Z
++torchvision.models.resnet.ResNet101_Weights"+torchvision.models.resnet.ResNet101_Weights
+None *
+kwargs
+AnyŒ
+deeplabv3_mobilenet_v3_largeFtorchvision.models.segmentation.deeplabv3.deeplabv3_mobilenet_v3_large"j
+3torchvision.models.segmentation.deeplabv3.DeepLabV3"3torchvision.models.segmentation.deeplabv3.DeepLabV3*õ
+weightsã
+ZUnion[torchvision.models.segmentation.deeplabv3.DeepLabV3_MobileNet_V3_Large_Weights,None]†
+Ntorchvision.models.segmentation.deeplabv3.DeepLabV3_MobileNet_V3_Large_Weights"Ntorchvision.models.segmentation.deeplabv3.DeepLabV3_MobileNet_V3_Large_Weights
+None *.
+progress
+builtins.bool"builtins.bool *W
+num_classesD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *W
+aux_lossG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *‰
+weights_backboneÀ
+EUnion[torchvision.models.mobilenetv3.MobileNet_V3_Large_Weights,None]v
+9torchvision.models.mobilenetv3.MobileNet_V3_Large_Weights"9torchvision.models.mobilenetv3.MobileNet_V3_Large_Weights
+None *
+kwargs
+Any*•
+__annotations__9torchvision.models.segmentation.deeplabv3.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*A
+torch/torchvision.models.segmentation.deeplabv3.torch
+Any*;
+nn,torchvision.models.segmentation.deeplabv3.nn
+Any

@@ -1,0 +1,497 @@
+
+torchvision.models.regnet„
+SimpleStemIN&torchvision.models.regnet.SimpleStemIN"builtins.object*º
+__init__/torchvision.models.regnet.SimpleStemIN.__init__"
+None*Z
+selfP
+&torchvision.models.regnet.SimpleStemIN"&torchvision.models.regnet.SimpleStemIN**
+width_in
+builtins.int"builtins.int*+
+	width_out
+builtins.int"builtins.int*[
+
+norm_layerK
+CallableType[builtins.function]&
+builtins.function"builtins.function*a
+activation_layerK
+CallableType[builtins.function]&
+builtins.function"builtins.function—
+BottleneckTransform-torchvision.models.regnet.BottleneckTransform"builtins.object*¿
+__init__6torchvision.models.regnet.BottleneckTransform.__init__"
+None*h
+self^
+-torchvision.models.regnet.BottleneckTransform"-torchvision.models.regnet.BottleneckTransform**
+width_in
+builtins.int"builtins.int*+
+	width_out
+builtins.int"builtins.int*(
+stride
+builtins.int"builtins.int*[
+
+norm_layerK
+CallableType[builtins.function]&
+builtins.function"builtins.function*a
+activation_layerK
+CallableType[builtins.function]&
+builtins.function"builtins.function*-
+group_width
+builtins.int"builtins.int*;
+bottleneck_multiplier 
+builtins.float"builtins.float*X
+se_ratioJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None­	
+ResBottleneckBlock,torchvision.models.regnet.ResBottleneckBlock"builtins.object*Â
+__init__5torchvision.models.regnet.ResBottleneckBlock.__init__"
+None*f
+self\
+,torchvision.models.regnet.ResBottleneckBlock",torchvision.models.regnet.ResBottleneckBlock**
+width_in
+builtins.int"builtins.int*+
+	width_out
+builtins.int"builtins.int*(
+stride
+builtins.int"builtins.int*[
+
+norm_layerK
+CallableType[builtins.function]&
+builtins.function"builtins.function*a
+activation_layerK
+CallableType[builtins.function]&
+builtins.function"builtins.function*/
+group_width
+builtins.int"builtins.int *=
+bottleneck_multiplier 
+builtins.float"builtins.float *Z
+se_ratioJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None *À
+forward4torchvision.models.regnet.ResBottleneckBlock.forward"
+Any*f
+self\
+,torchvision.models.regnet.ResBottleneckBlock",torchvision.models.regnet.ResBottleneckBlock*
+x
+AnyrB
+proj1torchvision.models.regnet.ResBottleneckBlock.proj
+Anyr<
+f.torchvision.models.regnet.ResBottleneckBlock.f
+AnyrN
+
+activation7torchvision.models.regnet.ResBottleneckBlock.activation
+Any 
+AnyStage"torchvision.models.regnet.AnyStage"builtins.object*Þ
+__init__+torchvision.models.regnet.AnyStage.__init__"
+None*R
+selfH
+"torchvision.models.regnet.AnyStage""torchvision.models.regnet.AnyStage**
+width_in
+builtins.int"builtins.int*+
+	width_out
+builtins.int"builtins.int*(
+stride
+builtins.int"builtins.int*'
+depth
+builtins.int"builtins.int*b
+block_constructorK
+CallableType[builtins.function]&
+builtins.function"builtins.function*[
+
+norm_layerK
+CallableType[builtins.function]&
+builtins.function"builtins.function*a
+activation_layerK
+CallableType[builtins.function]&
+builtins.function"builtins.function*-
+group_width
+builtins.int"builtins.int*;
+bottleneck_multiplier 
+builtins.float"builtins.float*Z
+se_ratioJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None */
+stage_index
+builtins.int"builtins.int ”
+BlockParams%torchvision.models.regnet.BlockParams"builtins.object*Ï
+__init__.torchvision.models.regnet.BlockParams.__init__"
+None*X
+selfN
+%torchvision.models.regnet.BlockParams"%torchvision.models.regnet.BlockParams*V
+depthsJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*V
+widthsJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*\
+group_widthsJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*l
+bottleneck_multipliersP
+builtins.list[builtins.float] 
+builtins.float"builtins.float"builtins.list*W
+stridesJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*Z
+se_ratioJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None *Â
+from_init_params6torchvision.models.regnet.BlockParams.from_init_params"N
+%torchvision.models.regnet.BlockParams"%torchvision.models.regnet.BlockParams*
+cls…
++Type[torchvision.models.regnet.BlockParams]N
+%torchvision.models.regnet.BlockParams"%torchvision.models.regnet.BlockParams"type*'
+depth
+builtins.int"builtins.int*%
+w_0
+builtins.int"builtins.int*)
+w_a 
+builtins.float"builtins.float*)
+w_m 
+builtins.float"builtins.float*-
+group_width
+builtins.int"builtins.int*=
+bottleneck_multiplier 
+builtins.float"builtins.float *Z
+se_ratioJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None *
+kwargs
+Any0:classmethodpr?
+depths,torchvision.models.regnet.BlockParams.depths
+Anyr?
+widths,torchvision.models.regnet.BlockParams.widths
+AnyrK
+group_widths2torchvision.models.regnet.BlockParams.group_widths
+Anyr_
+bottleneck_multipliers<torchvision.models.regnet.BlockParams.bottleneck_multipliers
+AnyrA
+strides-torchvision.models.regnet.BlockParams.strides
+AnyrC
+se_ratio.torchvision.models.regnet.BlockParams.se_ratio
+Any
+RegNet torchvision.models.regnet.RegNet"builtins.object*Á
+__init__)torchvision.models.regnet.RegNet.__init__"
+None*N
+selfD
+ torchvision.models.regnet.RegNet" torchvision.models.regnet.RegNet*`
+block_paramsN
+%torchvision.models.regnet.BlockParams"%torchvision.models.regnet.BlockParams*/
+num_classes
+builtins.int"builtins.int *.
+
+stem_width
+builtins.int"builtins.int *˜
+	stem_type†
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *™
+
+block_type†
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *™
+
+norm_layer†
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *™
+
+activation†
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *œ
+forward(torchvision.models.regnet.RegNet.forward"
+Any*N
+selfD
+ torchvision.models.regnet.RegNet" torchvision.models.regnet.RegNet*
+x
+Anyr6
+stem%torchvision.models.regnet.RegNet.stem
+AnyrF
+trunk_output-torchvision.models.regnet.RegNet.trunk_output
+Anyr<
+avgpool(torchvision.models.regnet.RegNet.avgpool
+Anyr2
+fc#torchvision.models.regnet.RegNet.fc
+Anyó
+RegNet_Y_400MF_Weights0torchvision.models.regnet.RegNet_Y_400MF_Weights"#torchvision.models._api.WeightsEnumHrX
+IMAGENET1K_V1>torchvision.models.regnet.RegNet_Y_400MF_Weights.IMAGENET1K_V1
+AnyrX
+IMAGENET1K_V2>torchvision.models.regnet.RegNet_Y_400MF_Weights.IMAGENET1K_V2
+AnyrL
+DEFAULT8torchvision.models.regnet.RegNet_Y_400MF_Weights.DEFAULT
+Anyó
+RegNet_Y_800MF_Weights0torchvision.models.regnet.RegNet_Y_800MF_Weights"#torchvision.models._api.WeightsEnumHrX
+IMAGENET1K_V1>torchvision.models.regnet.RegNet_Y_800MF_Weights.IMAGENET1K_V1
+AnyrX
+IMAGENET1K_V2>torchvision.models.regnet.RegNet_Y_800MF_Weights.IMAGENET1K_V2
+AnyrL
+DEFAULT8torchvision.models.regnet.RegNet_Y_800MF_Weights.DEFAULT
+Anyó
+RegNet_Y_1_6GF_Weights0torchvision.models.regnet.RegNet_Y_1_6GF_Weights"#torchvision.models._api.WeightsEnumHrX
+IMAGENET1K_V1>torchvision.models.regnet.RegNet_Y_1_6GF_Weights.IMAGENET1K_V1
+AnyrX
+IMAGENET1K_V2>torchvision.models.regnet.RegNet_Y_1_6GF_Weights.IMAGENET1K_V2
+AnyrL
+DEFAULT8torchvision.models.regnet.RegNet_Y_1_6GF_Weights.DEFAULT
+Anyó
+RegNet_Y_3_2GF_Weights0torchvision.models.regnet.RegNet_Y_3_2GF_Weights"#torchvision.models._api.WeightsEnumHrX
+IMAGENET1K_V1>torchvision.models.regnet.RegNet_Y_3_2GF_Weights.IMAGENET1K_V1
+AnyrX
+IMAGENET1K_V2>torchvision.models.regnet.RegNet_Y_3_2GF_Weights.IMAGENET1K_V2
+AnyrL
+DEFAULT8torchvision.models.regnet.RegNet_Y_3_2GF_Weights.DEFAULT
+Anyé
+RegNet_Y_8GF_Weights.torchvision.models.regnet.RegNet_Y_8GF_Weights"#torchvision.models._api.WeightsEnumHrV
+IMAGENET1K_V1<torchvision.models.regnet.RegNet_Y_8GF_Weights.IMAGENET1K_V1
+AnyrV
+IMAGENET1K_V2<torchvision.models.regnet.RegNet_Y_8GF_Weights.IMAGENET1K_V2
+AnyrJ
+DEFAULT6torchvision.models.regnet.RegNet_Y_8GF_Weights.DEFAULT
+AnyÊ
+RegNet_Y_16GF_Weights/torchvision.models.regnet.RegNet_Y_16GF_Weights"#torchvision.models._api.WeightsEnumHrW
+IMAGENET1K_V1=torchvision.models.regnet.RegNet_Y_16GF_Weights.IMAGENET1K_V1
+AnyrW
+IMAGENET1K_V2=torchvision.models.regnet.RegNet_Y_16GF_Weights.IMAGENET1K_V2
+Anyri
+IMAGENET1K_SWAG_E2E_V1Ftorchvision.models.regnet.RegNet_Y_16GF_Weights.IMAGENET1K_SWAG_E2E_V1
+Anyro
+IMAGENET1K_SWAG_LINEAR_V1Itorchvision.models.regnet.RegNet_Y_16GF_Weights.IMAGENET1K_SWAG_LINEAR_V1
+AnyrK
+DEFAULT7torchvision.models.regnet.RegNet_Y_16GF_Weights.DEFAULT
+AnyÊ
+RegNet_Y_32GF_Weights/torchvision.models.regnet.RegNet_Y_32GF_Weights"#torchvision.models._api.WeightsEnumHrW
+IMAGENET1K_V1=torchvision.models.regnet.RegNet_Y_32GF_Weights.IMAGENET1K_V1
+AnyrW
+IMAGENET1K_V2=torchvision.models.regnet.RegNet_Y_32GF_Weights.IMAGENET1K_V2
+Anyri
+IMAGENET1K_SWAG_E2E_V1Ftorchvision.models.regnet.RegNet_Y_32GF_Weights.IMAGENET1K_SWAG_E2E_V1
+Anyro
+IMAGENET1K_SWAG_LINEAR_V1Itorchvision.models.regnet.RegNet_Y_32GF_Weights.IMAGENET1K_SWAG_LINEAR_V1
+AnyrK
+DEFAULT7torchvision.models.regnet.RegNet_Y_32GF_Weights.DEFAULT
+Any
+RegNet_Y_128GF_Weights0torchvision.models.regnet.RegNet_Y_128GF_Weights"#torchvision.models._api.WeightsEnumHrj
+IMAGENET1K_SWAG_E2E_V1Gtorchvision.models.regnet.RegNet_Y_128GF_Weights.IMAGENET1K_SWAG_E2E_V1
+Anyrp
+IMAGENET1K_SWAG_LINEAR_V1Jtorchvision.models.regnet.RegNet_Y_128GF_Weights.IMAGENET1K_SWAG_LINEAR_V1
+AnyrL
+DEFAULT8torchvision.models.regnet.RegNet_Y_128GF_Weights.DEFAULT
+Anyó
+RegNet_X_400MF_Weights0torchvision.models.regnet.RegNet_X_400MF_Weights"#torchvision.models._api.WeightsEnumHrX
+IMAGENET1K_V1>torchvision.models.regnet.RegNet_X_400MF_Weights.IMAGENET1K_V1
+AnyrX
+IMAGENET1K_V2>torchvision.models.regnet.RegNet_X_400MF_Weights.IMAGENET1K_V2
+AnyrL
+DEFAULT8torchvision.models.regnet.RegNet_X_400MF_Weights.DEFAULT
+Anyó
+RegNet_X_800MF_Weights0torchvision.models.regnet.RegNet_X_800MF_Weights"#torchvision.models._api.WeightsEnumHrX
+IMAGENET1K_V1>torchvision.models.regnet.RegNet_X_800MF_Weights.IMAGENET1K_V1
+AnyrX
+IMAGENET1K_V2>torchvision.models.regnet.RegNet_X_800MF_Weights.IMAGENET1K_V2
+AnyrL
+DEFAULT8torchvision.models.regnet.RegNet_X_800MF_Weights.DEFAULT
+Anyó
+RegNet_X_1_6GF_Weights0torchvision.models.regnet.RegNet_X_1_6GF_Weights"#torchvision.models._api.WeightsEnumHrX
+IMAGENET1K_V1>torchvision.models.regnet.RegNet_X_1_6GF_Weights.IMAGENET1K_V1
+AnyrX
+IMAGENET1K_V2>torchvision.models.regnet.RegNet_X_1_6GF_Weights.IMAGENET1K_V2
+AnyrL
+DEFAULT8torchvision.models.regnet.RegNet_X_1_6GF_Weights.DEFAULT
+Anyó
+RegNet_X_3_2GF_Weights0torchvision.models.regnet.RegNet_X_3_2GF_Weights"#torchvision.models._api.WeightsEnumHrX
+IMAGENET1K_V1>torchvision.models.regnet.RegNet_X_3_2GF_Weights.IMAGENET1K_V1
+AnyrX
+IMAGENET1K_V2>torchvision.models.regnet.RegNet_X_3_2GF_Weights.IMAGENET1K_V2
+AnyrL
+DEFAULT8torchvision.models.regnet.RegNet_X_3_2GF_Weights.DEFAULT
+Anyé
+RegNet_X_8GF_Weights.torchvision.models.regnet.RegNet_X_8GF_Weights"#torchvision.models._api.WeightsEnumHrV
+IMAGENET1K_V1<torchvision.models.regnet.RegNet_X_8GF_Weights.IMAGENET1K_V1
+AnyrV
+IMAGENET1K_V2<torchvision.models.regnet.RegNet_X_8GF_Weights.IMAGENET1K_V2
+AnyrJ
+DEFAULT6torchvision.models.regnet.RegNet_X_8GF_Weights.DEFAULT
+Anyî
+RegNet_X_16GF_Weights/torchvision.models.regnet.RegNet_X_16GF_Weights"#torchvision.models._api.WeightsEnumHrW
+IMAGENET1K_V1=torchvision.models.regnet.RegNet_X_16GF_Weights.IMAGENET1K_V1
+AnyrW
+IMAGENET1K_V2=torchvision.models.regnet.RegNet_X_16GF_Weights.IMAGENET1K_V2
+AnyrK
+DEFAULT7torchvision.models.regnet.RegNet_X_16GF_Weights.DEFAULT
+Anyî
+RegNet_X_32GF_Weights/torchvision.models.regnet.RegNet_X_32GF_Weights"#torchvision.models._api.WeightsEnumHrW
+IMAGENET1K_V1=torchvision.models.regnet.RegNet_X_32GF_Weights.IMAGENET1K_V1
+AnyrW
+IMAGENET1K_V2=torchvision.models.regnet.RegNet_X_32GF_Weights.IMAGENET1K_V2
+AnyrK
+DEFAULT7torchvision.models.regnet.RegNet_X_32GF_Weights.DEFAULT
+Anyˆ
+regnet_y_400mf(torchvision.models.regnet.regnet_y_400mf"D
+ torchvision.models.regnet.RegNet" torchvision.models.regnet.RegNet*À
+weights°
+<Union[torchvision.models.regnet.RegNet_Y_400MF_Weights,None]d
+0torchvision.models.regnet.RegNet_Y_400MF_Weights"0torchvision.models.regnet.RegNet_Y_400MF_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+Anyˆ
+regnet_y_800mf(torchvision.models.regnet.regnet_y_800mf"D
+ torchvision.models.regnet.RegNet" torchvision.models.regnet.RegNet*À
+weights°
+<Union[torchvision.models.regnet.RegNet_Y_800MF_Weights,None]d
+0torchvision.models.regnet.RegNet_Y_800MF_Weights"0torchvision.models.regnet.RegNet_Y_800MF_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+Anyˆ
+regnet_y_1_6gf(torchvision.models.regnet.regnet_y_1_6gf"D
+ torchvision.models.regnet.RegNet" torchvision.models.regnet.RegNet*À
+weights°
+<Union[torchvision.models.regnet.RegNet_Y_1_6GF_Weights,None]d
+0torchvision.models.regnet.RegNet_Y_1_6GF_Weights"0torchvision.models.regnet.RegNet_Y_1_6GF_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+Anyˆ
+regnet_y_3_2gf(torchvision.models.regnet.regnet_y_3_2gf"D
+ torchvision.models.regnet.RegNet" torchvision.models.regnet.RegNet*À
+weights°
+<Union[torchvision.models.regnet.RegNet_Y_3_2GF_Weights,None]d
+0torchvision.models.regnet.RegNet_Y_3_2GF_Weights"0torchvision.models.regnet.RegNet_Y_3_2GF_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+Anyþ
+regnet_y_8gf&torchvision.models.regnet.regnet_y_8gf"D
+ torchvision.models.regnet.RegNet" torchvision.models.regnet.RegNet*º
+weightsª
+:Union[torchvision.models.regnet.RegNet_Y_8GF_Weights,None]`
+.torchvision.models.regnet.RegNet_Y_8GF_Weights".torchvision.models.regnet.RegNet_Y_8GF_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+Anyƒ
+regnet_y_16gf'torchvision.models.regnet.regnet_y_16gf"D
+ torchvision.models.regnet.RegNet" torchvision.models.regnet.RegNet*½
+weights­
+;Union[torchvision.models.regnet.RegNet_Y_16GF_Weights,None]b
+/torchvision.models.regnet.RegNet_Y_16GF_Weights"/torchvision.models.regnet.RegNet_Y_16GF_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+Anyƒ
+regnet_y_32gf'torchvision.models.regnet.regnet_y_32gf"D
+ torchvision.models.regnet.RegNet" torchvision.models.regnet.RegNet*½
+weights­
+;Union[torchvision.models.regnet.RegNet_Y_32GF_Weights,None]b
+/torchvision.models.regnet.RegNet_Y_32GF_Weights"/torchvision.models.regnet.RegNet_Y_32GF_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+Anyˆ
+regnet_y_128gf(torchvision.models.regnet.regnet_y_128gf"D
+ torchvision.models.regnet.RegNet" torchvision.models.regnet.RegNet*À
+weights°
+<Union[torchvision.models.regnet.RegNet_Y_128GF_Weights,None]d
+0torchvision.models.regnet.RegNet_Y_128GF_Weights"0torchvision.models.regnet.RegNet_Y_128GF_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+Anyˆ
+regnet_x_400mf(torchvision.models.regnet.regnet_x_400mf"D
+ torchvision.models.regnet.RegNet" torchvision.models.regnet.RegNet*À
+weights°
+<Union[torchvision.models.regnet.RegNet_X_400MF_Weights,None]d
+0torchvision.models.regnet.RegNet_X_400MF_Weights"0torchvision.models.regnet.RegNet_X_400MF_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+Anyˆ
+regnet_x_800mf(torchvision.models.regnet.regnet_x_800mf"D
+ torchvision.models.regnet.RegNet" torchvision.models.regnet.RegNet*À
+weights°
+<Union[torchvision.models.regnet.RegNet_X_800MF_Weights,None]d
+0torchvision.models.regnet.RegNet_X_800MF_Weights"0torchvision.models.regnet.RegNet_X_800MF_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+Anyˆ
+regnet_x_1_6gf(torchvision.models.regnet.regnet_x_1_6gf"D
+ torchvision.models.regnet.RegNet" torchvision.models.regnet.RegNet*À
+weights°
+<Union[torchvision.models.regnet.RegNet_X_1_6GF_Weights,None]d
+0torchvision.models.regnet.RegNet_X_1_6GF_Weights"0torchvision.models.regnet.RegNet_X_1_6GF_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+Anyˆ
+regnet_x_3_2gf(torchvision.models.regnet.regnet_x_3_2gf"D
+ torchvision.models.regnet.RegNet" torchvision.models.regnet.RegNet*À
+weights°
+<Union[torchvision.models.regnet.RegNet_X_3_2GF_Weights,None]d
+0torchvision.models.regnet.RegNet_X_3_2GF_Weights"0torchvision.models.regnet.RegNet_X_3_2GF_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+Anyþ
+regnet_x_8gf&torchvision.models.regnet.regnet_x_8gf"D
+ torchvision.models.regnet.RegNet" torchvision.models.regnet.RegNet*º
+weightsª
+:Union[torchvision.models.regnet.RegNet_X_8GF_Weights,None]`
+.torchvision.models.regnet.RegNet_X_8GF_Weights".torchvision.models.regnet.RegNet_X_8GF_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+Anyƒ
+regnet_x_16gf'torchvision.models.regnet.regnet_x_16gf"D
+ torchvision.models.regnet.RegNet" torchvision.models.regnet.RegNet*½
+weights­
+;Union[torchvision.models.regnet.RegNet_X_16GF_Weights,None]b
+/torchvision.models.regnet.RegNet_X_16GF_Weights"/torchvision.models.regnet.RegNet_X_16GF_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+Anyƒ
+regnet_x_32gf'torchvision.models.regnet.regnet_x_32gf"D
+ torchvision.models.regnet.RegNet" torchvision.models.regnet.RegNet*½
+weights­
+;Union[torchvision.models.regnet.RegNet_X_32GF_Weights,None]b
+/torchvision.models.regnet.RegNet_X_32GF_Weights"/torchvision.models.regnet.RegNet_X_32GF_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+Any*•
+__annotations__)torchvision.models.regnet.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*O
+Conv2dNormActivation.torchvision.models.regnet.Conv2dNormActivation
+Any*3
+Tensor torchvision.models.regnet.Tensor
+Any*+
+nntorchvision.models.regnet.nn
+Any

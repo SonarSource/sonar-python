@@ -1,0 +1,3993 @@
+
+torchvision.models•
+AlexNet"torchvision.models.alexnet.AlexNet"builtins.object*˜
+__init__+torchvision.models.alexnet.AlexNet.__init__"
+None*R
+selfH
+"torchvision.models.alexnet.AlexNet""torchvision.models.alexnet.AlexNet*/
+num_classes
+builtins.int"builtins.int */
+dropout 
+builtins.float"builtins.float *¢
+forward*torchvision.models.alexnet.AlexNet.forward"
+Any*R
+selfH
+"torchvision.models.alexnet.AlexNet""torchvision.models.alexnet.AlexNet*
+x
+Anyr@
+features+torchvision.models.alexnet.AlexNet.features
+Anyr>
+avgpool*torchvision.models.alexnet.AlexNet.avgpool
+AnyrD
+
+classifier-torchvision.models.alexnet.AlexNet.classifier
+AnyÄ
+AlexNet_Weights*torchvision.models.alexnet.AlexNet_Weights"#torchvision.models._api.WeightsEnumHrR
+IMAGENET1K_V18torchvision.models.alexnet.AlexNet_Weights.IMAGENET1K_V1
+AnyrF
+DEFAULT2torchvision.models.alexnet.AlexNet_Weights.DEFAULT
+Any˚
+LayerNorm2d'torchvision.models.convnext.LayerNorm2d"builtins.object*±
+forward/torchvision.models.convnext.LayerNorm2d.forward"
+Any*\
+selfR
+'torchvision.models.convnext.LayerNorm2d"'torchvision.models.convnext.LayerNorm2d*
+x
+Any˝
+CNBlock#torchvision.models.convnext.CNBlock"builtins.object*∂
+__init__,torchvision.models.convnext.CNBlock.__init__"
+None*T
+selfJ
+#torchvision.models.convnext.CNBlock"#torchvision.models.convnext.CNBlock*
+dim
+Any*1
+layer_scale 
+builtins.float"builtins.float*;
+stochastic_depth_prob 
+builtins.float"builtins.float*ô
+
+norm_layerÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *©
+forward+torchvision.models.convnext.CNBlock.forward"
+Any*T
+selfJ
+#torchvision.models.convnext.CNBlock"#torchvision.models.convnext.CNBlock*
+input
+Anyr;
+block)torchvision.models.convnext.CNBlock.block
+AnyrG
+layer_scale/torchvision.models.convnext.CNBlock.layer_scale
+AnyrQ
+stochastic_depth4torchvision.models.convnext.CNBlock.stochastic_depth
+Any£
+CNBlockConfig)torchvision.models.convnext.CNBlockConfig"builtins.object*‚
+__init__2torchvision.models.convnext.CNBlockConfig.__init__"
+None*`
+selfV
+)torchvision.models.convnext.CNBlockConfig")torchvision.models.convnext.CNBlockConfig*0
+input_channels
+builtins.int"builtins.int*V
+out_channelsD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None*,
+
+num_layers
+builtins.int"builtins.intrS
+input_channels8torchvision.models.convnext.CNBlockConfig.input_channels
+AnyrO
+out_channels6torchvision.models.convnext.CNBlockConfig.out_channels
+AnyrK
+
+num_layers4torchvision.models.convnext.CNBlockConfig.num_layers
+Any˝	
+ConvNeXt$torchvision.models.convnext.ConvNeXt"builtins.object*¿
+__init__-torchvision.models.convnext.ConvNeXt.__init__"
+None*V
+selfL
+$torchvision.models.convnext.ConvNeXt"$torchvision.models.convnext.ConvNeXt*µ
+block_setting°
+8builtins.list[torchvision.models.convnext.CNBlockConfig]V
+)torchvision.models.convnext.CNBlockConfig")torchvision.models.convnext.CNBlockConfig"builtins.list*=
+stochastic_depth_prob 
+builtins.float"builtins.float *3
+layer_scale 
+builtins.float"builtins.float */
+num_classes
+builtins.int"builtins.int *î
+blockÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *ô
+
+norm_layerÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *
+kwargs
+Any*®
+forward,torchvision.models.convnext.ConvNeXt.forward"
+Any*V
+selfL
+$torchvision.models.convnext.ConvNeXt"$torchvision.models.convnext.ConvNeXt*
+x
+AnyrB
+features-torchvision.models.convnext.ConvNeXt.features
+Anyr@
+avgpool,torchvision.models.convnext.ConvNeXt.avgpool
+AnyrF
+
+classifier/torchvision.models.convnext.ConvNeXt.classifier
+Anyõ
+ConvNeXt_Tiny_Weights1torchvision.models.convnext.ConvNeXt_Tiny_Weights"#torchvision.models._api.WeightsEnumHrY
+IMAGENET1K_V1?torchvision.models.convnext.ConvNeXt_Tiny_Weights.IMAGENET1K_V1
+AnyrM
+DEFAULT9torchvision.models.convnext.ConvNeXt_Tiny_Weights.DEFAULT
+Anyü
+ConvNeXt_Small_Weights2torchvision.models.convnext.ConvNeXt_Small_Weights"#torchvision.models._api.WeightsEnumHrZ
+IMAGENET1K_V1@torchvision.models.convnext.ConvNeXt_Small_Weights.IMAGENET1K_V1
+AnyrN
+DEFAULT:torchvision.models.convnext.ConvNeXt_Small_Weights.DEFAULT
+Anyõ
+ConvNeXt_Base_Weights1torchvision.models.convnext.ConvNeXt_Base_Weights"#torchvision.models._api.WeightsEnumHrY
+IMAGENET1K_V1?torchvision.models.convnext.ConvNeXt_Base_Weights.IMAGENET1K_V1
+AnyrM
+DEFAULT9torchvision.models.convnext.ConvNeXt_Base_Weights.DEFAULT
+Anyü
+ConvNeXt_Large_Weights2torchvision.models.convnext.ConvNeXt_Large_Weights"#torchvision.models._api.WeightsEnumHrZ
+IMAGENET1K_V1@torchvision.models.convnext.ConvNeXt_Large_Weights.IMAGENET1K_V1
+AnyrN
+DEFAULT:torchvision.models.convnext.ConvNeXt_Large_Weights.DEFAULT
+Anyï
+DenseNet$torchvision.models.densenet.DenseNet"builtins.object*ö
+__init__-torchvision.models.densenet.DenseNet.__init__"
+None*V
+selfL
+$torchvision.models.densenet.DenseNet"$torchvision.models.densenet.DenseNet*/
+growth_rate
+builtins.int"builtins.int *À
+block_config∂
+:Tuple[builtins.int,builtins.int,builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int *5
+num_init_features
+builtins.int"builtins.int *+
+bn_size
+builtins.int"builtins.int *1
+	drop_rate 
+builtins.float"builtins.float */
+num_classes
+builtins.int"builtins.int *6
+memory_efficient
+builtins.bool"builtins.bool *®
+forward,torchvision.models.densenet.DenseNet.forward"
+Any*V
+selfL
+$torchvision.models.densenet.DenseNet"$torchvision.models.densenet.DenseNet*
+x
+AnyrB
+features-torchvision.models.densenet.DenseNet.features
+AnyrF
+
+classifier/torchvision.models.densenet.DenseNet.classifier
+Anyì
+DenseNet121_Weights/torchvision.models.densenet.DenseNet121_Weights"#torchvision.models._api.WeightsEnumHrW
+IMAGENET1K_V1=torchvision.models.densenet.DenseNet121_Weights.IMAGENET1K_V1
+AnyrK
+DEFAULT7torchvision.models.densenet.DenseNet121_Weights.DEFAULT
+Anyì
+DenseNet161_Weights/torchvision.models.densenet.DenseNet161_Weights"#torchvision.models._api.WeightsEnumHrW
+IMAGENET1K_V1=torchvision.models.densenet.DenseNet161_Weights.IMAGENET1K_V1
+AnyrK
+DEFAULT7torchvision.models.densenet.DenseNet161_Weights.DEFAULT
+Anyì
+DenseNet169_Weights/torchvision.models.densenet.DenseNet169_Weights"#torchvision.models._api.WeightsEnumHrW
+IMAGENET1K_V1=torchvision.models.densenet.DenseNet169_Weights.IMAGENET1K_V1
+AnyrK
+DEFAULT7torchvision.models.densenet.DenseNet169_Weights.DEFAULT
+Anyì
+DenseNet201_Weights/torchvision.models.densenet.DenseNet201_Weights"#torchvision.models._api.WeightsEnumHrW
+IMAGENET1K_V1=torchvision.models.densenet.DenseNet201_Weights.IMAGENET1K_V1
+AnyrK
+DEFAULT7torchvision.models.densenet.DenseNet201_Weights.DEFAULT
+Anyˇ
+MBConvConfig,torchvision.models.efficientnet.MBConvConfig"-torchvision.models.efficientnet._MBConvConfig* 
+__init__5torchvision.models.efficientnet.MBConvConfig.__init__"
+None*f
+self\
+,torchvision.models.efficientnet.MBConvConfig",torchvision.models.efficientnet.MBConvConfig*2
+expand_ratio 
+builtins.float"builtins.float*(
+kernel
+builtins.int"builtins.int*(
+stride
+builtins.int"builtins.int*0
+input_channels
+builtins.int"builtins.int*.
+out_channels
+builtins.int"builtins.int*,
+
+num_layers
+builtins.int"builtins.int*2
+
+width_mult 
+builtins.float"builtins.float *2
+
+depth_mult 
+builtins.float"builtins.float *î
+blockÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *ƒ
+adjust_depth9torchvision.models.efficientnet.MBConvConfig.adjust_depth"
+Any*,
+
+num_layers
+builtins.int"builtins.int*0
+
+depth_mult 
+builtins.float"builtins.float0:staticmethodhÈ
+FusedMBConvConfig1torchvision.models.efficientnet.FusedMBConvConfig"-torchvision.models.efficientnet._MBConvConfig*Ò
+__init__:torchvision.models.efficientnet.FusedMBConvConfig.__init__"
+None*p
+selff
+1torchvision.models.efficientnet.FusedMBConvConfig"1torchvision.models.efficientnet.FusedMBConvConfig*2
+expand_ratio 
+builtins.float"builtins.float*(
+kernel
+builtins.int"builtins.int*(
+stride
+builtins.int"builtins.int*0
+input_channels
+builtins.int"builtins.int*.
+out_channels
+builtins.int"builtins.int*,
+
+num_layers
+builtins.int"builtins.int*î
+blockÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None ∞
+MBConv&torchvision.models.efficientnet.MBConv"builtins.object*ˇ
+__init__/torchvision.models.efficientnet.MBConv.__init__"
+None*Z
+selfP
+&torchvision.models.efficientnet.MBConv"&torchvision.models.efficientnet.MBConv*e
+cnf\
+,torchvision.models.efficientnet.MBConvConfig",torchvision.models.efficientnet.MBConvConfig*;
+stochastic_depth_prob 
+builtins.float"builtins.float*[
+
+norm_layerK
+CallableType[builtins.function]&
+builtins.function"builtins.function*[
+se_layerK
+CallableType[builtins.function]&
+builtins.function"builtins.function *≤
+forward.torchvision.models.efficientnet.MBConv.forward"
+Any*Z
+selfP
+&torchvision.models.efficientnet.MBConv"&torchvision.models.efficientnet.MBConv*
+input
+AnyrR
+use_res_connect6torchvision.models.efficientnet.MBConv.use_res_connect
+Anyr>
+block,torchvision.models.efficientnet.MBConv.block
+AnyrT
+stochastic_depth7torchvision.models.efficientnet.MBConv.stochastic_depth
+AnyrL
+out_channels3torchvision.models.efficientnet.MBConv.out_channels
+Anyô
+FusedMBConv+torchvision.models.efficientnet.FusedMBConv"builtins.object*ª
+__init__4torchvision.models.efficientnet.FusedMBConv.__init__"
+None*d
+selfZ
++torchvision.models.efficientnet.FusedMBConv"+torchvision.models.efficientnet.FusedMBConv*o
+cnff
+1torchvision.models.efficientnet.FusedMBConvConfig"1torchvision.models.efficientnet.FusedMBConvConfig*;
+stochastic_depth_prob 
+builtins.float"builtins.float*[
+
+norm_layerK
+CallableType[builtins.function]&
+builtins.function"builtins.function*¡
+forward3torchvision.models.efficientnet.FusedMBConv.forward"
+Any*d
+selfZ
++torchvision.models.efficientnet.FusedMBConv"+torchvision.models.efficientnet.FusedMBConv*
+input
+AnyrW
+use_res_connect;torchvision.models.efficientnet.FusedMBConv.use_res_connect
+AnyrC
+block1torchvision.models.efficientnet.FusedMBConv.block
+AnyrY
+stochastic_depth<torchvision.models.efficientnet.FusedMBConv.stochastic_depth
+AnyrQ
+out_channels8torchvision.models.efficientnet.FusedMBConv.out_channels
+Anyü
+EfficientNet,torchvision.models.efficientnet.EfficientNet"builtins.object*¶
+__init__5torchvision.models.efficientnet.EfficientNet.__init__"
+None*f
+self\
+,torchvision.models.efficientnet.EfficientNet",torchvision.models.efficientnet.EfficientNet*€
+inverted_residual_settingª
+vtyping.Sequence[Union[torchvision.models.efficientnet.MBConvConfig,torchvision.models.efficientnet.FusedMBConvConfig]]Ø
+eUnion[torchvision.models.efficientnet.MBConvConfig,torchvision.models.efficientnet.FusedMBConvConfig]\
+,torchvision.models.efficientnet.MBConvConfig",torchvision.models.efficientnet.MBConvConfigf
+1torchvision.models.efficientnet.FusedMBConvConfig"1torchvision.models.efficientnet.FusedMBConvConfig"typing.Sequence*-
+dropout 
+builtins.float"builtins.float*=
+stochastic_depth_prob 
+builtins.float"builtins.float */
+num_classes
+builtins.int"builtins.int *ô
+
+norm_layerÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *X
+last_channelD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *¿
+forward4torchvision.models.efficientnet.EfficientNet.forward"
+Any*f
+self\
+,torchvision.models.efficientnet.EfficientNet",torchvision.models.efficientnet.EfficientNet*
+x
+AnyrJ
+features5torchvision.models.efficientnet.EfficientNet.features
+AnyrH
+avgpool4torchvision.models.efficientnet.EfficientNet.avgpool
+AnyrN
+
+classifier7torchvision.models.efficientnet.EfficientNet.classifier
+AnyØ
+EfficientNet_B0_Weights7torchvision.models.efficientnet.EfficientNet_B0_Weights"#torchvision.models._api.WeightsEnumHr_
+IMAGENET1K_V1Etorchvision.models.efficientnet.EfficientNet_B0_Weights.IMAGENET1K_V1
+AnyrS
+DEFAULT?torchvision.models.efficientnet.EfficientNet_B0_Weights.DEFAULT
+Anyê
+EfficientNet_B1_Weights7torchvision.models.efficientnet.EfficientNet_B1_Weights"#torchvision.models._api.WeightsEnumHr_
+IMAGENET1K_V1Etorchvision.models.efficientnet.EfficientNet_B1_Weights.IMAGENET1K_V1
+Anyr_
+IMAGENET1K_V2Etorchvision.models.efficientnet.EfficientNet_B1_Weights.IMAGENET1K_V2
+AnyrS
+DEFAULT?torchvision.models.efficientnet.EfficientNet_B1_Weights.DEFAULT
+AnyØ
+EfficientNet_B2_Weights7torchvision.models.efficientnet.EfficientNet_B2_Weights"#torchvision.models._api.WeightsEnumHr_
+IMAGENET1K_V1Etorchvision.models.efficientnet.EfficientNet_B2_Weights.IMAGENET1K_V1
+AnyrS
+DEFAULT?torchvision.models.efficientnet.EfficientNet_B2_Weights.DEFAULT
+AnyØ
+EfficientNet_B3_Weights7torchvision.models.efficientnet.EfficientNet_B3_Weights"#torchvision.models._api.WeightsEnumHr_
+IMAGENET1K_V1Etorchvision.models.efficientnet.EfficientNet_B3_Weights.IMAGENET1K_V1
+AnyrS
+DEFAULT?torchvision.models.efficientnet.EfficientNet_B3_Weights.DEFAULT
+AnyØ
+EfficientNet_B4_Weights7torchvision.models.efficientnet.EfficientNet_B4_Weights"#torchvision.models._api.WeightsEnumHr_
+IMAGENET1K_V1Etorchvision.models.efficientnet.EfficientNet_B4_Weights.IMAGENET1K_V1
+AnyrS
+DEFAULT?torchvision.models.efficientnet.EfficientNet_B4_Weights.DEFAULT
+AnyØ
+EfficientNet_B5_Weights7torchvision.models.efficientnet.EfficientNet_B5_Weights"#torchvision.models._api.WeightsEnumHr_
+IMAGENET1K_V1Etorchvision.models.efficientnet.EfficientNet_B5_Weights.IMAGENET1K_V1
+AnyrS
+DEFAULT?torchvision.models.efficientnet.EfficientNet_B5_Weights.DEFAULT
+AnyØ
+EfficientNet_B6_Weights7torchvision.models.efficientnet.EfficientNet_B6_Weights"#torchvision.models._api.WeightsEnumHr_
+IMAGENET1K_V1Etorchvision.models.efficientnet.EfficientNet_B6_Weights.IMAGENET1K_V1
+AnyrS
+DEFAULT?torchvision.models.efficientnet.EfficientNet_B6_Weights.DEFAULT
+AnyØ
+EfficientNet_B7_Weights7torchvision.models.efficientnet.EfficientNet_B7_Weights"#torchvision.models._api.WeightsEnumHr_
+IMAGENET1K_V1Etorchvision.models.efficientnet.EfficientNet_B7_Weights.IMAGENET1K_V1
+AnyrS
+DEFAULT?torchvision.models.efficientnet.EfficientNet_B7_Weights.DEFAULT
+Any∑
+EfficientNet_V2_S_Weights9torchvision.models.efficientnet.EfficientNet_V2_S_Weights"#torchvision.models._api.WeightsEnumHra
+IMAGENET1K_V1Gtorchvision.models.efficientnet.EfficientNet_V2_S_Weights.IMAGENET1K_V1
+AnyrU
+DEFAULTAtorchvision.models.efficientnet.EfficientNet_V2_S_Weights.DEFAULT
+Any∑
+EfficientNet_V2_M_Weights9torchvision.models.efficientnet.EfficientNet_V2_M_Weights"#torchvision.models._api.WeightsEnumHra
+IMAGENET1K_V1Gtorchvision.models.efficientnet.EfficientNet_V2_M_Weights.IMAGENET1K_V1
+AnyrU
+DEFAULTAtorchvision.models.efficientnet.EfficientNet_V2_M_Weights.DEFAULT
+Any∑
+EfficientNet_V2_L_Weights9torchvision.models.efficientnet.EfficientNet_V2_L_Weights"#torchvision.models._api.WeightsEnumHra
+IMAGENET1K_V1Gtorchvision.models.efficientnet.EfficientNet_V2_L_Weights.IMAGENET1K_V1
+AnyrU
+DEFAULTAtorchvision.models.efficientnet.EfficientNet_V2_L_Weights.DEFAULT
+AnyÏ
+GoogLeNetOutputs-torchvision.models.googlenet.GoogLeNetOutputs"builtins.tuple*
+_replace6torchvision.models.googlenet.GoogLeNetOutputs._replace"h
+1torchvision.models.googlenet.GoogLeNetOutputs._NT1
+Tuple[Any,Any,Any]
+Any
+Any
+Any*s
+_selfh
+1torchvision.models.googlenet.GoogLeNetOutputs._NT1
+Tuple[Any,Any,Any]
+Any
+Any
+Any*
+logits
+Any *
+aux_logits2
+Any *
+aux_logits1
+Any *¨
+__new__5torchvision.models.googlenet.GoogLeNetOutputs.__new__"h
+1torchvision.models.googlenet.GoogLeNetOutputs._NT1
+Tuple[Any,Any,Any]
+Any
+Any
+Any*∂
+_cls´
+7Type[torchvision.models.googlenet.GoogLeNetOutputs._NT]h
+1torchvision.models.googlenet.GoogLeNetOutputs._NT1
+Tuple[Any,Any,Any]
+Any
+Any
+Any"type*
+logits
+Any*
+aux_logits2
+Any*
+aux_logits1
+Any*é
+_asdict5torchvision.models.googlenet.GoogLeNetOutputs._asdict"W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*s
+_selfh
+1torchvision.models.googlenet.GoogLeNetOutputs._NT1
+Tuple[Any,Any,Any]
+Any
+Any
+Any*ÿ
+_make3torchvision.models.googlenet.GoogLeNetOutputs._make"h
+1torchvision.models.googlenet.GoogLeNetOutputs._NT1
+Tuple[Any,Any,Any]
+Any
+Any
+Any*∂
+_cls´
+7Type[torchvision.models.googlenet.GoogLeNetOutputs._NT]h
+1torchvision.models.googlenet.GoogLeNetOutputs._NT1
+Tuple[Any,Any,Any]
+Any
+Any
+Any"type*>
+iterable0
+typing.Iterable[Any]
+Any"typing.Iterable*
+new
+Any *
+len
+Any 0:classmethodprG
+logits4torchvision.models.googlenet.GoogLeNetOutputs.logits
+AnyrQ
+aux_logits29torchvision.models.googlenet.GoogLeNetOutputs.aux_logits2
+AnyrQ
+aux_logits19torchvision.models.googlenet.GoogLeNetOutputs.aux_logits1
+AnyrG
+logits4torchvision.models.googlenet.GoogLeNetOutputs.logits
+AnyrQ
+aux_logits29torchvision.models.googlenet.GoogLeNetOutputs.aux_logits2
+AnyrQ
+aux_logits19torchvision.models.googlenet.GoogLeNetOutputs.aux_logits1
+AnyrŒ
+_fields5torchvision.models.googlenet.GoogLeNetOutputs._fieldsã
+-Tuple[builtins.str,builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str
+builtins.str"builtins.strr£
+_field_types:torchvision.models.googlenet.GoogLeNetOutputs._field_typesW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dictr©
+_field_defaults=torchvision.models.googlenet.GoogLeNetOutputs._field_defaultsW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dictr^
+_source5torchvision.models.googlenet.GoogLeNetOutputs._source
+builtins.str"builtins.strr©
+__annotations__=torchvision.models.googlenet.GoogLeNetOutputs.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dictã
+	GoogLeNet&torchvision.models.googlenet.GoogLeNet"builtins.object*Á
+__init__/torchvision.models.googlenet.GoogLeNet.__init__"
+None*Z
+selfP
+&torchvision.models.googlenet.GoogLeNet"&torchvision.models.googlenet.GoogLeNet*/
+num_classes
+builtins.int"builtins.int *0
+
+aux_logits
+builtins.bool"builtins.bool *5
+transform_input
+builtins.bool"builtins.bool *[
+init_weightsG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *Ê
+blocks◊
+:Union[builtins.list[CallableType[builtins.function]],None]å
+.builtins.list[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"builtins.list
+None */
+dropout 
+builtins.float"builtins.float *3
+dropout_aux 
+builtins.float"builtins.float *¸
+eager_outputs4torchvision.models.googlenet.GoogLeNet.eager_outputs"É
+TypeAlias[Tuple[Any,Any,Any]]1
+Tuple[Any,Any,Any]
+Any
+Any
+Any"-torchvision.models.googlenet.GoogLeNetOutputs*Z
+selfP
+&torchvision.models.googlenet.GoogLeNet"&torchvision.models.googlenet.GoogLeNet*
+x
+Any*
+aux2
+Any*0
+aux1&
+Union[Any,None]
+Any
+None*´
+forward.torchvision.models.googlenet.GoogLeNet.forward"É
+TypeAlias[Tuple[Any,Any,Any]]1
+Tuple[Any,Any,Any]
+Any
+Any
+Any"-torchvision.models.googlenet.GoogLeNetOutputs*Z
+selfP
+&torchvision.models.googlenet.GoogLeNet"&torchvision.models.googlenet.GoogLeNet*
+x
+AnyrN
+__constants__4torchvision.models.googlenet.GoogLeNet.__constants__
+AnyrH
+
+aux_logits1torchvision.models.googlenet.GoogLeNet.aux_logits
+AnyrR
+transform_input6torchvision.models.googlenet.GoogLeNet.transform_input
+Anyr>
+conv1,torchvision.models.googlenet.GoogLeNet.conv1
+AnyrD
+maxpool1/torchvision.models.googlenet.GoogLeNet.maxpool1
+Anyr>
+conv2,torchvision.models.googlenet.GoogLeNet.conv2
+Anyr>
+conv3,torchvision.models.googlenet.GoogLeNet.conv3
+AnyrD
+maxpool2/torchvision.models.googlenet.GoogLeNet.maxpool2
+AnyrJ
+inception3a2torchvision.models.googlenet.GoogLeNet.inception3a
+AnyrJ
+inception3b2torchvision.models.googlenet.GoogLeNet.inception3b
+AnyrD
+maxpool3/torchvision.models.googlenet.GoogLeNet.maxpool3
+AnyrJ
+inception4a2torchvision.models.googlenet.GoogLeNet.inception4a
+AnyrJ
+inception4b2torchvision.models.googlenet.GoogLeNet.inception4b
+AnyrJ
+inception4c2torchvision.models.googlenet.GoogLeNet.inception4c
+AnyrJ
+inception4d2torchvision.models.googlenet.GoogLeNet.inception4d
+AnyrJ
+inception4e2torchvision.models.googlenet.GoogLeNet.inception4e
+AnyrD
+maxpool4/torchvision.models.googlenet.GoogLeNet.maxpool4
+AnyrJ
+inception5a2torchvision.models.googlenet.GoogLeNet.inception5a
+AnyrJ
+inception5b2torchvision.models.googlenet.GoogLeNet.inception5b
+Anyr<
+aux1+torchvision.models.googlenet.GoogLeNet.aux1
+Anyr<
+aux2+torchvision.models.googlenet.GoogLeNet.aux2
+AnyrB
+avgpool.torchvision.models.googlenet.GoogLeNet.avgpool
+AnyrB
+dropout.torchvision.models.googlenet.GoogLeNet.dropout
+Anyr8
+fc)torchvision.models.googlenet.GoogLeNet.fc
+AnyÙ
+	Inception&torchvision.models.googlenet.Inception"builtins.object*Ï
+__init__/torchvision.models.googlenet.Inception.__init__"
+None*Z
+selfP
+&torchvision.models.googlenet.Inception"&torchvision.models.googlenet.Inception*-
+in_channels
+builtins.int"builtins.int*'
+ch1x1
+builtins.int"builtins.int**
+ch3x3red
+builtins.int"builtins.int*'
+ch3x3
+builtins.int"builtins.int**
+ch5x5red
+builtins.int"builtins.int*'
+ch5x5
+builtins.int"builtins.int*+
+	pool_proj
+builtins.int"builtins.int*ô
+
+conv_blockÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *Æ
+forward.torchvision.models.googlenet.Inception.forward"
+Any*Z
+selfP
+&torchvision.models.googlenet.Inception"&torchvision.models.googlenet.Inception*
+x
+AnyrB
+branch1.torchvision.models.googlenet.Inception.branch1
+AnyrB
+branch2.torchvision.models.googlenet.Inception.branch2
+AnyrB
+branch3.torchvision.models.googlenet.Inception.branch3
+AnyrB
+branch4.torchvision.models.googlenet.Inception.branch4
+Any‚
+InceptionAux)torchvision.models.googlenet.InceptionAux"builtins.object*’
+__init__2torchvision.models.googlenet.InceptionAux.__init__"
+None*`
+selfV
+)torchvision.models.googlenet.InceptionAux")torchvision.models.googlenet.InceptionAux*-
+in_channels
+builtins.int"builtins.int*-
+num_classes
+builtins.int"builtins.int*ô
+
+conv_blockÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None */
+dropout 
+builtins.float"builtins.float *∑
+forward1torchvision.models.googlenet.InceptionAux.forward"
+Any*`
+selfV
+)torchvision.models.googlenet.InceptionAux")torchvision.models.googlenet.InceptionAux*
+x
+Anyr?
+conv.torchvision.models.googlenet.InceptionAux.conv
+Anyr=
+fc1-torchvision.models.googlenet.InceptionAux.fc1
+Anyr=
+fc2-torchvision.models.googlenet.InceptionAux.fc2
+AnyrE
+dropout1torchvision.models.googlenet.InceptionAux.dropout
+Anyô
+BasicConv2d(torchvision.models.googlenet.BasicConv2d"builtins.object*õ
+__init__1torchvision.models.googlenet.BasicConv2d.__init__"
+None*^
+selfT
+(torchvision.models.googlenet.BasicConv2d"(torchvision.models.googlenet.BasicConv2d*-
+in_channels
+builtins.int"builtins.int*.
+out_channels
+builtins.int"builtins.int*
+kwargs
+Any*¥
+forward0torchvision.models.googlenet.BasicConv2d.forward"
+Any*^
+selfT
+(torchvision.models.googlenet.BasicConv2d"(torchvision.models.googlenet.BasicConv2d*
+x
+Anyr>
+conv-torchvision.models.googlenet.BasicConv2d.conv
+Anyr:
+bn+torchvision.models.googlenet.BasicConv2d.bn
+Anyé
+GoogLeNet_Weights.torchvision.models.googlenet.GoogLeNet_Weights"#torchvision.models._api.WeightsEnumHrV
+IMAGENET1K_V1<torchvision.models.googlenet.GoogLeNet_Weights.IMAGENET1K_V1
+AnyrJ
+DEFAULT6torchvision.models.googlenet.GoogLeNet_Weights.DEFAULT
+AnyÉ
+InceptionOutputs-torchvision.models.inception.InceptionOutputs"builtins.tuple*π
+_replace6torchvision.models.inception.InceptionOutputs._replace"[
+1torchvision.models.inception.InceptionOutputs._NT$
+Tuple[Any,Any]
+Any
+Any*f
+_self[
+1torchvision.models.inception.InceptionOutputs._NT$
+Tuple[Any,Any]
+Any
+Any*
+logits
+Any *
+
+aux_logits
+Any *˜
+__new__5torchvision.models.inception.InceptionOutputs.__new__"[
+1torchvision.models.inception.InceptionOutputs._NT$
+Tuple[Any,Any]
+Any
+Any*©
+_clsû
+7Type[torchvision.models.inception.InceptionOutputs._NT][
+1torchvision.models.inception.InceptionOutputs._NT$
+Tuple[Any,Any]
+Any
+Any"type*
+logits
+Any*
+
+aux_logits
+Any*Å
+_asdict5torchvision.models.inception.InceptionOutputs._asdict"W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*f
+_self[
+1torchvision.models.inception.InceptionOutputs._NT$
+Tuple[Any,Any]
+Any
+Any*æ
+_make3torchvision.models.inception.InceptionOutputs._make"[
+1torchvision.models.inception.InceptionOutputs._NT$
+Tuple[Any,Any]
+Any
+Any*©
+_clsû
+7Type[torchvision.models.inception.InceptionOutputs._NT][
+1torchvision.models.inception.InceptionOutputs._NT$
+Tuple[Any,Any]
+Any
+Any"type*>
+iterable0
+typing.Iterable[Any]
+Any"typing.Iterable*
+new
+Any *
+len
+Any 0:classmethodprG
+logits4torchvision.models.inception.InceptionOutputs.logits
+AnyrO
+
+aux_logits8torchvision.models.inception.InceptionOutputs.aux_logits
+AnyrG
+logits4torchvision.models.inception.InceptionOutputs.logits
+AnyrO
+
+aux_logits8torchvision.models.inception.InceptionOutputs.aux_logits
+Anyr¢
+_fields5torchvision.models.inception.InceptionOutputs._fields`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.strr£
+_field_types:torchvision.models.inception.InceptionOutputs._field_typesW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dictr©
+_field_defaults=torchvision.models.inception.InceptionOutputs._field_defaultsW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dictr^
+_source5torchvision.models.inception.InceptionOutputs._source
+builtins.str"builtins.strr©
+__annotations__=torchvision.models.inception.InceptionOutputs.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict·
+
+Inception3'torchvision.models.inception.Inception3"builtins.object*ø
+__init__0torchvision.models.inception.Inception3.__init__"
+None*\
+selfR
+'torchvision.models.inception.Inception3"'torchvision.models.inception.Inception3*/
+num_classes
+builtins.int"builtins.int *0
+
+aux_logits
+builtins.bool"builtins.bool *5
+transform_input
+builtins.bool"builtins.bool *
+inception_blocks◊
+:Union[builtins.list[CallableType[builtins.function]],None]å
+.builtins.list[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"builtins.list
+None *[
+init_weightsG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None */
+dropout 
+builtins.float"builtins.float *Ÿ
+eager_outputs5torchvision.models.inception.Inception3.eager_outputs"r
+TypeAlias[Tuple[Any,Any]]$
+Tuple[Any,Any]
+Any
+Any"-torchvision.models.inception.InceptionOutputs*\
+selfR
+'torchvision.models.inception.Inception3"'torchvision.models.inception.Inception3*
+x
+Any*/
+aux&
+Union[Any,None]
+Any
+None*ú
+forward/torchvision.models.inception.Inception3.forward"r
+TypeAlias[Tuple[Any,Any]]$
+Tuple[Any,Any]
+Any
+Any"-torchvision.models.inception.InceptionOutputs*\
+selfR
+'torchvision.models.inception.Inception3"'torchvision.models.inception.Inception3*
+x
+AnyrI
+
+aux_logits2torchvision.models.inception.Inception3.aux_logits
+AnyrS
+transform_input7torchvision.models.inception.Inception3.transform_input
+AnyrO
+Conv2d_1a_3x35torchvision.models.inception.Inception3.Conv2d_1a_3x3
+AnyrO
+Conv2d_2a_3x35torchvision.models.inception.Inception3.Conv2d_2a_3x3
+AnyrO
+Conv2d_2b_3x35torchvision.models.inception.Inception3.Conv2d_2b_3x3
+AnyrE
+maxpool10torchvision.models.inception.Inception3.maxpool1
+AnyrO
+Conv2d_3b_1x15torchvision.models.inception.Inception3.Conv2d_3b_1x1
+AnyrO
+Conv2d_4a_3x35torchvision.models.inception.Inception3.Conv2d_4a_3x3
+AnyrE
+maxpool20torchvision.models.inception.Inception3.maxpool2
+AnyrE
+Mixed_5b0torchvision.models.inception.Inception3.Mixed_5b
+AnyrE
+Mixed_5c0torchvision.models.inception.Inception3.Mixed_5c
+AnyrE
+Mixed_5d0torchvision.models.inception.Inception3.Mixed_5d
+AnyrE
+Mixed_6a0torchvision.models.inception.Inception3.Mixed_6a
+AnyrE
+Mixed_6b0torchvision.models.inception.Inception3.Mixed_6b
+AnyrE
+Mixed_6c0torchvision.models.inception.Inception3.Mixed_6c
+AnyrE
+Mixed_6d0torchvision.models.inception.Inception3.Mixed_6d
+AnyrE
+Mixed_6e0torchvision.models.inception.Inception3.Mixed_6e
+AnyrG
+	AuxLogits1torchvision.models.inception.Inception3.AuxLogits
+AnyrE
+Mixed_7a0torchvision.models.inception.Inception3.Mixed_7a
+AnyrE
+Mixed_7b0torchvision.models.inception.Inception3.Mixed_7b
+AnyrE
+Mixed_7c0torchvision.models.inception.Inception3.Mixed_7c
+AnyrC
+avgpool/torchvision.models.inception.Inception3.avgpool
+AnyrC
+dropout/torchvision.models.inception.Inception3.dropout
+Anyr9
+fc*torchvision.models.inception.Inception3.fc
+Any∆	
+
+InceptionA'torchvision.models.inception.InceptionA"builtins.object*†
+__init__0torchvision.models.inception.InceptionA.__init__"
+None*\
+selfR
+'torchvision.models.inception.InceptionA"'torchvision.models.inception.InceptionA*-
+in_channels
+builtins.int"builtins.int*/
+pool_features
+builtins.int"builtins.int*ô
+
+conv_blockÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *±
+forward/torchvision.models.inception.InceptionA.forward"
+Any*\
+selfR
+'torchvision.models.inception.InceptionA"'torchvision.models.inception.InceptionA*
+x
+AnyrG
+	branch1x11torchvision.models.inception.InceptionA.branch1x1
+AnyrK
+branch5x5_13torchvision.models.inception.InceptionA.branch5x5_1
+AnyrK
+branch5x5_23torchvision.models.inception.InceptionA.branch5x5_2
+AnyrQ
+branch3x3dbl_16torchvision.models.inception.InceptionA.branch3x3dbl_1
+AnyrQ
+branch3x3dbl_26torchvision.models.inception.InceptionA.branch3x3dbl_2
+AnyrQ
+branch3x3dbl_36torchvision.models.inception.InceptionA.branch3x3dbl_3
+AnyrK
+branch_pool3torchvision.models.inception.InceptionA.branch_pool
+AnyÆ
+
+InceptionB'torchvision.models.inception.InceptionB"builtins.object*Ô
+__init__0torchvision.models.inception.InceptionB.__init__"
+None*\
+selfR
+'torchvision.models.inception.InceptionB"'torchvision.models.inception.InceptionB*-
+in_channels
+builtins.int"builtins.int*ô
+
+conv_blockÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *±
+forward/torchvision.models.inception.InceptionB.forward"
+Any*\
+selfR
+'torchvision.models.inception.InceptionB"'torchvision.models.inception.InceptionB*
+x
+AnyrG
+	branch3x31torchvision.models.inception.InceptionB.branch3x3
+AnyrQ
+branch3x3dbl_16torchvision.models.inception.InceptionB.branch3x3dbl_1
+AnyrQ
+branch3x3dbl_26torchvision.models.inception.InceptionB.branch3x3dbl_2
+AnyrQ
+branch3x3dbl_36torchvision.models.inception.InceptionB.branch3x3dbl_3
+Any∏
+
+InceptionC'torchvision.models.inception.InceptionC"builtins.object*ü
+__init__0torchvision.models.inception.InceptionC.__init__"
+None*\
+selfR
+'torchvision.models.inception.InceptionC"'torchvision.models.inception.InceptionC*-
+in_channels
+builtins.int"builtins.int*.
+channels_7x7
+builtins.int"builtins.int*ô
+
+conv_blockÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *±
+forward/torchvision.models.inception.InceptionC.forward"
+Any*\
+selfR
+'torchvision.models.inception.InceptionC"'torchvision.models.inception.InceptionC*
+x
+AnyrG
+	branch1x11torchvision.models.inception.InceptionC.branch1x1
+AnyrK
+branch7x7_13torchvision.models.inception.InceptionC.branch7x7_1
+AnyrK
+branch7x7_23torchvision.models.inception.InceptionC.branch7x7_2
+AnyrK
+branch7x7_33torchvision.models.inception.InceptionC.branch7x7_3
+AnyrQ
+branch7x7dbl_16torchvision.models.inception.InceptionC.branch7x7dbl_1
+AnyrQ
+branch7x7dbl_26torchvision.models.inception.InceptionC.branch7x7dbl_2
+AnyrQ
+branch7x7dbl_36torchvision.models.inception.InceptionC.branch7x7dbl_3
+AnyrQ
+branch7x7dbl_46torchvision.models.inception.InceptionC.branch7x7dbl_4
+AnyrQ
+branch7x7dbl_56torchvision.models.inception.InceptionC.branch7x7dbl_5
+AnyrK
+branch_pool3torchvision.models.inception.InceptionC.branch_pool
+Any 
+
+InceptionD'torchvision.models.inception.InceptionD"builtins.object*Ô
+__init__0torchvision.models.inception.InceptionD.__init__"
+None*\
+selfR
+'torchvision.models.inception.InceptionD"'torchvision.models.inception.InceptionD*-
+in_channels
+builtins.int"builtins.int*ô
+
+conv_blockÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *±
+forward/torchvision.models.inception.InceptionD.forward"
+Any*\
+selfR
+'torchvision.models.inception.InceptionD"'torchvision.models.inception.InceptionD*
+x
+AnyrK
+branch3x3_13torchvision.models.inception.InceptionD.branch3x3_1
+AnyrK
+branch3x3_23torchvision.models.inception.InceptionD.branch3x3_2
+AnyrO
+branch7x7x3_15torchvision.models.inception.InceptionD.branch7x7x3_1
+AnyrO
+branch7x7x3_25torchvision.models.inception.InceptionD.branch7x7x3_2
+AnyrO
+branch7x7x3_35torchvision.models.inception.InceptionD.branch7x7x3_3
+AnyrO
+branch7x7x3_45torchvision.models.inception.InceptionD.branch7x7x3_4
+AnyΩ
+
+
+InceptionE'torchvision.models.inception.InceptionE"builtins.object*Ô
+__init__0torchvision.models.inception.InceptionE.__init__"
+None*\
+selfR
+'torchvision.models.inception.InceptionE"'torchvision.models.inception.InceptionE*-
+in_channels
+builtins.int"builtins.int*ô
+
+conv_blockÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *±
+forward/torchvision.models.inception.InceptionE.forward"
+Any*\
+selfR
+'torchvision.models.inception.InceptionE"'torchvision.models.inception.InceptionE*
+x
+AnyrG
+	branch1x11torchvision.models.inception.InceptionE.branch1x1
+AnyrK
+branch3x3_13torchvision.models.inception.InceptionE.branch3x3_1
+AnyrM
+branch3x3_2a4torchvision.models.inception.InceptionE.branch3x3_2a
+AnyrM
+branch3x3_2b4torchvision.models.inception.InceptionE.branch3x3_2b
+AnyrQ
+branch3x3dbl_16torchvision.models.inception.InceptionE.branch3x3dbl_1
+AnyrQ
+branch3x3dbl_26torchvision.models.inception.InceptionE.branch3x3dbl_2
+AnyrS
+branch3x3dbl_3a7torchvision.models.inception.InceptionE.branch3x3dbl_3a
+AnyrS
+branch3x3dbl_3b7torchvision.models.inception.InceptionE.branch3x3dbl_3b
+AnyrK
+branch_pool3torchvision.models.inception.InceptionE.branch_pool
+Anyö
+Inception_V3_Weights1torchvision.models.inception.Inception_V3_Weights"#torchvision.models._api.WeightsEnumHrY
+IMAGENET1K_V1?torchvision.models.inception.Inception_V3_Weights.IMAGENET1K_V1
+AnyrM
+DEFAULT9torchvision.models.inception.Inception_V3_Weights.DEFAULT
+Anyí
+MNASNet"torchvision.models.mnasnet.MNASNet"builtins.object*§
+__init__+torchvision.models.mnasnet.MNASNet.__init__"
+None*R
+selfH
+"torchvision.models.mnasnet.MNASNet""torchvision.models.mnasnet.MNASNet*+
+alpha 
+builtins.float"builtins.float*/
+num_classes
+builtins.int"builtins.int */
+dropout 
+builtins.float"builtins.float *¢
+forward*torchvision.models.mnasnet.MNASNet.forward"
+Any*R
+selfH
+"torchvision.models.mnasnet.MNASNet""torchvision.models.mnasnet.MNASNet*
+x
+Anyr:
+alpha(torchvision.models.mnasnet.MNASNet.alpha
+AnyrF
+num_classes.torchvision.models.mnasnet.MNASNet.num_classes
+Anyr<
+layers)torchvision.models.mnasnet.MNASNet.layers
+AnyrD
+
+classifier-torchvision.models.mnasnet.MNASNet.classifier
+Anyå
+MNASNet0_5_Weights-torchvision.models.mnasnet.MNASNet0_5_Weights"#torchvision.models._api.WeightsEnumHrU
+IMAGENET1K_V1;torchvision.models.mnasnet.MNASNet0_5_Weights.IMAGENET1K_V1
+AnyrI
+DEFAULT5torchvision.models.mnasnet.MNASNet0_5_Weights.DEFAULT
+Anyê
+MNASNet0_75_Weights.torchvision.models.mnasnet.MNASNet0_75_Weights"#torchvision.models._api.WeightsEnumHrV
+IMAGENET1K_V1<torchvision.models.mnasnet.MNASNet0_75_Weights.IMAGENET1K_V1
+AnyrJ
+DEFAULT6torchvision.models.mnasnet.MNASNet0_75_Weights.DEFAULT
+Anyå
+MNASNet1_0_Weights-torchvision.models.mnasnet.MNASNet1_0_Weights"#torchvision.models._api.WeightsEnumHrU
+IMAGENET1K_V1;torchvision.models.mnasnet.MNASNet1_0_Weights.IMAGENET1K_V1
+AnyrI
+DEFAULT5torchvision.models.mnasnet.MNASNet1_0_Weights.DEFAULT
+Anyå
+MNASNet1_3_Weights-torchvision.models.mnasnet.MNASNet1_3_Weights"#torchvision.models._api.WeightsEnumHrU
+IMAGENET1K_V1;torchvision.models.mnasnet.MNASNet1_3_Weights.IMAGENET1K_V1
+AnyrI
+DEFAULT5torchvision.models.mnasnet.MNASNet1_3_Weights.DEFAULT
+AnyÈ
+InvertedResidual/torchvision.models.mobilenetv2.InvertedResidual"builtins.object*Ä
+__init__8torchvision.models.mobilenetv2.InvertedResidual.__init__"
+None*l
+selfb
+/torchvision.models.mobilenetv2.InvertedResidual"/torchvision.models.mobilenetv2.InvertedResidual*%
+inp
+builtins.int"builtins.int*%
+oup
+builtins.int"builtins.int*(
+stride
+builtins.int"builtins.int*.
+expand_ratio
+builtins.int"builtins.int*ô
+
+norm_layerÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *…
+forward7torchvision.models.mobilenetv2.InvertedResidual.forward"
+Any*l
+selfb
+/torchvision.models.mobilenetv2.InvertedResidual"/torchvision.models.mobilenetv2.InvertedResidual*
+x
+AnyrI
+stride6torchvision.models.mobilenetv2.InvertedResidual.stride
+Anyr[
+use_res_connect?torchvision.models.mobilenetv2.InvertedResidual.use_res_connect
+AnyrE
+conv4torchvision.models.mobilenetv2.InvertedResidual.conv
+AnyrU
+out_channels<torchvision.models.mobilenetv2.InvertedResidual.out_channels
+Anyê
+MobileNetV2*torchvision.models.mobilenetv2.MobileNetV2"builtins.object*ú
+__init__3torchvision.models.mobilenetv2.MobileNetV2.__init__"
+None*b
+selfX
+*torchvision.models.mobilenetv2.MobileNetV2"*torchvision.models.mobilenetv2.MobileNetV2*/
+num_classes
+builtins.int"builtins.int *2
+
+width_mult 
+builtins.float"builtins.float *
+inverted_residual_settingŒ
+6Union[builtins.list[builtins.list[builtins.int]],None]á
+*builtins.list[builtins.list[builtins.int]]J
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list"builtins.list
+None *1
+round_nearest
+builtins.int"builtins.int *î
+blockÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *ô
+
+norm_layerÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None */
+dropout 
+builtins.float"builtins.float *∫
+forward2torchvision.models.mobilenetv2.MobileNetV2.forward"
+Any*b
+selfX
+*torchvision.models.mobilenetv2.MobileNetV2"*torchvision.models.mobilenetv2.MobileNetV2*
+x
+AnyrP
+last_channel7torchvision.models.mobilenetv2.MobileNetV2.last_channel
+AnyrH
+features3torchvision.models.mobilenetv2.MobileNetV2.features
+AnyrL
+
+classifier5torchvision.models.mobilenetv2.MobileNetV2.classifier
+Any˝
+MobileNet_V2_Weights3torchvision.models.mobilenetv2.MobileNet_V2_Weights"#torchvision.models._api.WeightsEnumHr[
+IMAGENET1K_V1Atorchvision.models.mobilenetv2.MobileNet_V2_Weights.IMAGENET1K_V1
+Anyr[
+IMAGENET1K_V2Atorchvision.models.mobilenetv2.MobileNet_V2_Weights.IMAGENET1K_V2
+AnyrO
+DEFAULT;torchvision.models.mobilenetv2.MobileNet_V2_Weights.DEFAULT
+AnyÊ
+InvertedResidualConfig5torchvision.models.mobilenetv3.InvertedResidualConfig"builtins.object*Ò
+__init__>torchvision.models.mobilenetv3.InvertedResidualConfig.__init__"
+None*x
+selfn
+5torchvision.models.mobilenetv3.InvertedResidualConfig"5torchvision.models.mobilenetv3.InvertedResidualConfig*0
+input_channels
+builtins.int"builtins.int*(
+kernel
+builtins.int"builtins.int*3
+expanded_channels
+builtins.int"builtins.int*.
+out_channels
+builtins.int"builtins.int**
+use_se
+builtins.bool"builtins.bool*,
+
+activation
+builtins.str"builtins.str*(
+stride
+builtins.int"builtins.int**
+dilation
+builtins.int"builtins.int*0
+
+width_mult 
+builtins.float"builtins.float*—
+adjust_channelsEtorchvision.models.mobilenetv3.InvertedResidualConfig.adjust_channels"
+Any**
+channels
+builtins.int"builtins.int*0
+
+width_mult 
+builtins.float"builtins.float0:staticmethodhr_
+input_channelsDtorchvision.models.mobilenetv3.InvertedResidualConfig.input_channels
+AnyrO
+kernel<torchvision.models.mobilenetv3.InvertedResidualConfig.kernel
+Anyre
+expanded_channelsGtorchvision.models.mobilenetv3.InvertedResidualConfig.expanded_channels
+Anyr[
+out_channelsBtorchvision.models.mobilenetv3.InvertedResidualConfig.out_channels
+AnyrO
+use_se<torchvision.models.mobilenetv3.InvertedResidualConfig.use_se
+AnyrO
+use_hs<torchvision.models.mobilenetv3.InvertedResidualConfig.use_hs
+AnyrO
+stride<torchvision.models.mobilenetv3.InvertedResidualConfig.stride
+AnyrS
+dilation>torchvision.models.mobilenetv3.InvertedResidualConfig.dilation
+AnyŸ
+
+MobileNetV3*torchvision.models.mobilenetv3.MobileNetV3"builtins.object*Ô
+__init__3torchvision.models.mobilenetv3.MobileNetV3.__init__"
+None*b
+selfX
+*torchvision.models.mobilenetv3.MobileNetV3"*torchvision.models.mobilenetv3.MobileNetV3*Â
+inverted_residual_setting≈
+Dbuiltins.list[torchvision.models.mobilenetv3.InvertedResidualConfig]n
+5torchvision.models.mobilenetv3.InvertedResidualConfig"5torchvision.models.mobilenetv3.InvertedResidualConfig"builtins.list*.
+last_channel
+builtins.int"builtins.int*/
+num_classes
+builtins.int"builtins.int *î
+blockÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *ô
+
+norm_layerÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None */
+dropout 
+builtins.float"builtins.float *
+kwargs
+Any*∫
+forward2torchvision.models.mobilenetv3.MobileNetV3.forward"
+Any*b
+selfX
+*torchvision.models.mobilenetv3.MobileNetV3"*torchvision.models.mobilenetv3.MobileNetV3*
+x
+AnyrH
+features3torchvision.models.mobilenetv3.MobileNetV3.features
+AnyrF
+avgpool2torchvision.models.mobilenetv3.MobileNetV3.avgpool
+AnyrL
+
+classifier5torchvision.models.mobilenetv3.MobileNetV3.classifier
+Anyõ
+MobileNet_V3_Large_Weights9torchvision.models.mobilenetv3.MobileNet_V3_Large_Weights"#torchvision.models._api.WeightsEnumHra
+IMAGENET1K_V1Gtorchvision.models.mobilenetv3.MobileNet_V3_Large_Weights.IMAGENET1K_V1
+Anyra
+IMAGENET1K_V2Gtorchvision.models.mobilenetv3.MobileNet_V3_Large_Weights.IMAGENET1K_V2
+AnyrU
+DEFAULTAtorchvision.models.mobilenetv3.MobileNet_V3_Large_Weights.DEFAULT
+Any∏
+MobileNet_V3_Small_Weights9torchvision.models.mobilenetv3.MobileNet_V3_Small_Weights"#torchvision.models._api.WeightsEnumHra
+IMAGENET1K_V1Gtorchvision.models.mobilenetv3.MobileNet_V3_Small_Weights.IMAGENET1K_V1
+AnyrU
+DEFAULTAtorchvision.models.mobilenetv3.MobileNet_V3_Small_Weights.DEFAULT
+AnyÑ
+SimpleStemIN&torchvision.models.regnet.SimpleStemIN"builtins.object*∫
+__init__/torchvision.models.regnet.SimpleStemIN.__init__"
+None*Z
+selfP
+&torchvision.models.regnet.SimpleStemIN"&torchvision.models.regnet.SimpleStemIN**
+width_in
+builtins.int"builtins.int*+
+	width_out
+builtins.int"builtins.int*[
+
+norm_layerK
+CallableType[builtins.function]&
+builtins.function"builtins.function*a
+activation_layerK
+CallableType[builtins.function]&
+builtins.function"builtins.functionó
+BottleneckTransform-torchvision.models.regnet.BottleneckTransform"builtins.object*ø
+__init__6torchvision.models.regnet.BottleneckTransform.__init__"
+None*h
+self^
+-torchvision.models.regnet.BottleneckTransform"-torchvision.models.regnet.BottleneckTransform**
+width_in
+builtins.int"builtins.int*+
+	width_out
+builtins.int"builtins.int*(
+stride
+builtins.int"builtins.int*[
+
+norm_layerK
+CallableType[builtins.function]&
+builtins.function"builtins.function*a
+activation_layerK
+CallableType[builtins.function]&
+builtins.function"builtins.function*-
+group_width
+builtins.int"builtins.int*;
+bottleneck_multiplier 
+builtins.float"builtins.float*X
+se_ratioJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None≠	
+ResBottleneckBlock,torchvision.models.regnet.ResBottleneckBlock"builtins.object*¬
+__init__5torchvision.models.regnet.ResBottleneckBlock.__init__"
+None*f
+self\
+,torchvision.models.regnet.ResBottleneckBlock",torchvision.models.regnet.ResBottleneckBlock**
+width_in
+builtins.int"builtins.int*+
+	width_out
+builtins.int"builtins.int*(
+stride
+builtins.int"builtins.int*[
+
+norm_layerK
+CallableType[builtins.function]&
+builtins.function"builtins.function*a
+activation_layerK
+CallableType[builtins.function]&
+builtins.function"builtins.function*/
+group_width
+builtins.int"builtins.int *=
+bottleneck_multiplier 
+builtins.float"builtins.float *Z
+se_ratioJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None *¿
+forward4torchvision.models.regnet.ResBottleneckBlock.forward"
+Any*f
+self\
+,torchvision.models.regnet.ResBottleneckBlock",torchvision.models.regnet.ResBottleneckBlock*
+x
+AnyrB
+proj1torchvision.models.regnet.ResBottleneckBlock.proj
+Anyr<
+f.torchvision.models.regnet.ResBottleneckBlock.f
+AnyrN
+
+activation7torchvision.models.regnet.ResBottleneckBlock.activation
+Any†
+AnyStage"torchvision.models.regnet.AnyStage"builtins.object*ﬁ
+__init__+torchvision.models.regnet.AnyStage.__init__"
+None*R
+selfH
+"torchvision.models.regnet.AnyStage""torchvision.models.regnet.AnyStage**
+width_in
+builtins.int"builtins.int*+
+	width_out
+builtins.int"builtins.int*(
+stride
+builtins.int"builtins.int*'
+depth
+builtins.int"builtins.int*b
+block_constructorK
+CallableType[builtins.function]&
+builtins.function"builtins.function*[
+
+norm_layerK
+CallableType[builtins.function]&
+builtins.function"builtins.function*a
+activation_layerK
+CallableType[builtins.function]&
+builtins.function"builtins.function*-
+group_width
+builtins.int"builtins.int*;
+bottleneck_multiplier 
+builtins.float"builtins.float*Z
+se_ratioJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None */
+stage_index
+builtins.int"builtins.int î
+BlockParams%torchvision.models.regnet.BlockParams"builtins.object*œ
+__init__.torchvision.models.regnet.BlockParams.__init__"
+None*X
+selfN
+%torchvision.models.regnet.BlockParams"%torchvision.models.regnet.BlockParams*V
+depthsJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*V
+widthsJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*\
+group_widthsJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*l
+bottleneck_multipliersP
+builtins.list[builtins.float] 
+builtins.float"builtins.float"builtins.list*W
+stridesJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*Z
+se_ratioJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None *¬
+from_init_params6torchvision.models.regnet.BlockParams.from_init_params"N
+%torchvision.models.regnet.BlockParams"%torchvision.models.regnet.BlockParams*è
+clsÖ
++Type[torchvision.models.regnet.BlockParams]N
+%torchvision.models.regnet.BlockParams"%torchvision.models.regnet.BlockParams"type*'
+depth
+builtins.int"builtins.int*%
+w_0
+builtins.int"builtins.int*)
+w_a 
+builtins.float"builtins.float*)
+w_m 
+builtins.float"builtins.float*-
+group_width
+builtins.int"builtins.int*=
+bottleneck_multiplier 
+builtins.float"builtins.float *Z
+se_ratioJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None *
+kwargs
+Any0:classmethodpr?
+depths,torchvision.models.regnet.BlockParams.depths
+Anyr?
+widths,torchvision.models.regnet.BlockParams.widths
+AnyrK
+group_widths2torchvision.models.regnet.BlockParams.group_widths
+Anyr_
+bottleneck_multipliers<torchvision.models.regnet.BlockParams.bottleneck_multipliers
+AnyrA
+strides-torchvision.models.regnet.BlockParams.strides
+AnyrC
+se_ratio.torchvision.models.regnet.BlockParams.se_ratio
+Anyê
+RegNet torchvision.models.regnet.RegNet"builtins.object*¡
+__init__)torchvision.models.regnet.RegNet.__init__"
+None*N
+selfD
+ torchvision.models.regnet.RegNet" torchvision.models.regnet.RegNet*`
+block_paramsN
+%torchvision.models.regnet.BlockParams"%torchvision.models.regnet.BlockParams*/
+num_classes
+builtins.int"builtins.int *.
+
+stem_width
+builtins.int"builtins.int *ò
+	stem_typeÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *ô
+
+block_typeÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *ô
+
+norm_layerÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *ô
+
+activationÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *ú
+forward(torchvision.models.regnet.RegNet.forward"
+Any*N
+selfD
+ torchvision.models.regnet.RegNet" torchvision.models.regnet.RegNet*
+x
+Anyr6
+stem%torchvision.models.regnet.RegNet.stem
+AnyrF
+trunk_output-torchvision.models.regnet.RegNet.trunk_output
+Anyr<
+avgpool(torchvision.models.regnet.RegNet.avgpool
+Anyr2
+fc#torchvision.models.regnet.RegNet.fc
+AnyÛ
+RegNet_Y_400MF_Weights0torchvision.models.regnet.RegNet_Y_400MF_Weights"#torchvision.models._api.WeightsEnumHrX
+IMAGENET1K_V1>torchvision.models.regnet.RegNet_Y_400MF_Weights.IMAGENET1K_V1
+AnyrX
+IMAGENET1K_V2>torchvision.models.regnet.RegNet_Y_400MF_Weights.IMAGENET1K_V2
+AnyrL
+DEFAULT8torchvision.models.regnet.RegNet_Y_400MF_Weights.DEFAULT
+AnyÛ
+RegNet_Y_800MF_Weights0torchvision.models.regnet.RegNet_Y_800MF_Weights"#torchvision.models._api.WeightsEnumHrX
+IMAGENET1K_V1>torchvision.models.regnet.RegNet_Y_800MF_Weights.IMAGENET1K_V1
+AnyrX
+IMAGENET1K_V2>torchvision.models.regnet.RegNet_Y_800MF_Weights.IMAGENET1K_V2
+AnyrL
+DEFAULT8torchvision.models.regnet.RegNet_Y_800MF_Weights.DEFAULT
+AnyÛ
+RegNet_Y_1_6GF_Weights0torchvision.models.regnet.RegNet_Y_1_6GF_Weights"#torchvision.models._api.WeightsEnumHrX
+IMAGENET1K_V1>torchvision.models.regnet.RegNet_Y_1_6GF_Weights.IMAGENET1K_V1
+AnyrX
+IMAGENET1K_V2>torchvision.models.regnet.RegNet_Y_1_6GF_Weights.IMAGENET1K_V2
+AnyrL
+DEFAULT8torchvision.models.regnet.RegNet_Y_1_6GF_Weights.DEFAULT
+AnyÛ
+RegNet_Y_3_2GF_Weights0torchvision.models.regnet.RegNet_Y_3_2GF_Weights"#torchvision.models._api.WeightsEnumHrX
+IMAGENET1K_V1>torchvision.models.regnet.RegNet_Y_3_2GF_Weights.IMAGENET1K_V1
+AnyrX
+IMAGENET1K_V2>torchvision.models.regnet.RegNet_Y_3_2GF_Weights.IMAGENET1K_V2
+AnyrL
+DEFAULT8torchvision.models.regnet.RegNet_Y_3_2GF_Weights.DEFAULT
+AnyÈ
+RegNet_Y_8GF_Weights.torchvision.models.regnet.RegNet_Y_8GF_Weights"#torchvision.models._api.WeightsEnumHrV
+IMAGENET1K_V1<torchvision.models.regnet.RegNet_Y_8GF_Weights.IMAGENET1K_V1
+AnyrV
+IMAGENET1K_V2<torchvision.models.regnet.RegNet_Y_8GF_Weights.IMAGENET1K_V2
+AnyrJ
+DEFAULT6torchvision.models.regnet.RegNet_Y_8GF_Weights.DEFAULT
+Any 
+RegNet_Y_16GF_Weights/torchvision.models.regnet.RegNet_Y_16GF_Weights"#torchvision.models._api.WeightsEnumHrW
+IMAGENET1K_V1=torchvision.models.regnet.RegNet_Y_16GF_Weights.IMAGENET1K_V1
+AnyrW
+IMAGENET1K_V2=torchvision.models.regnet.RegNet_Y_16GF_Weights.IMAGENET1K_V2
+Anyri
+IMAGENET1K_SWAG_E2E_V1Ftorchvision.models.regnet.RegNet_Y_16GF_Weights.IMAGENET1K_SWAG_E2E_V1
+Anyro
+IMAGENET1K_SWAG_LINEAR_V1Itorchvision.models.regnet.RegNet_Y_16GF_Weights.IMAGENET1K_SWAG_LINEAR_V1
+AnyrK
+DEFAULT7torchvision.models.regnet.RegNet_Y_16GF_Weights.DEFAULT
+Any 
+RegNet_Y_32GF_Weights/torchvision.models.regnet.RegNet_Y_32GF_Weights"#torchvision.models._api.WeightsEnumHrW
+IMAGENET1K_V1=torchvision.models.regnet.RegNet_Y_32GF_Weights.IMAGENET1K_V1
+AnyrW
+IMAGENET1K_V2=torchvision.models.regnet.RegNet_Y_32GF_Weights.IMAGENET1K_V2
+Anyri
+IMAGENET1K_SWAG_E2E_V1Ftorchvision.models.regnet.RegNet_Y_32GF_Weights.IMAGENET1K_SWAG_E2E_V1
+Anyro
+IMAGENET1K_SWAG_LINEAR_V1Itorchvision.models.regnet.RegNet_Y_32GF_Weights.IMAGENET1K_SWAG_LINEAR_V1
+AnyrK
+DEFAULT7torchvision.models.regnet.RegNet_Y_32GF_Weights.DEFAULT
+Anyù
+RegNet_Y_128GF_Weights0torchvision.models.regnet.RegNet_Y_128GF_Weights"#torchvision.models._api.WeightsEnumHrj
+IMAGENET1K_SWAG_E2E_V1Gtorchvision.models.regnet.RegNet_Y_128GF_Weights.IMAGENET1K_SWAG_E2E_V1
+Anyrp
+IMAGENET1K_SWAG_LINEAR_V1Jtorchvision.models.regnet.RegNet_Y_128GF_Weights.IMAGENET1K_SWAG_LINEAR_V1
+AnyrL
+DEFAULT8torchvision.models.regnet.RegNet_Y_128GF_Weights.DEFAULT
+AnyÛ
+RegNet_X_400MF_Weights0torchvision.models.regnet.RegNet_X_400MF_Weights"#torchvision.models._api.WeightsEnumHrX
+IMAGENET1K_V1>torchvision.models.regnet.RegNet_X_400MF_Weights.IMAGENET1K_V1
+AnyrX
+IMAGENET1K_V2>torchvision.models.regnet.RegNet_X_400MF_Weights.IMAGENET1K_V2
+AnyrL
+DEFAULT8torchvision.models.regnet.RegNet_X_400MF_Weights.DEFAULT
+AnyÛ
+RegNet_X_800MF_Weights0torchvision.models.regnet.RegNet_X_800MF_Weights"#torchvision.models._api.WeightsEnumHrX
+IMAGENET1K_V1>torchvision.models.regnet.RegNet_X_800MF_Weights.IMAGENET1K_V1
+AnyrX
+IMAGENET1K_V2>torchvision.models.regnet.RegNet_X_800MF_Weights.IMAGENET1K_V2
+AnyrL
+DEFAULT8torchvision.models.regnet.RegNet_X_800MF_Weights.DEFAULT
+AnyÛ
+RegNet_X_1_6GF_Weights0torchvision.models.regnet.RegNet_X_1_6GF_Weights"#torchvision.models._api.WeightsEnumHrX
+IMAGENET1K_V1>torchvision.models.regnet.RegNet_X_1_6GF_Weights.IMAGENET1K_V1
+AnyrX
+IMAGENET1K_V2>torchvision.models.regnet.RegNet_X_1_6GF_Weights.IMAGENET1K_V2
+AnyrL
+DEFAULT8torchvision.models.regnet.RegNet_X_1_6GF_Weights.DEFAULT
+AnyÛ
+RegNet_X_3_2GF_Weights0torchvision.models.regnet.RegNet_X_3_2GF_Weights"#torchvision.models._api.WeightsEnumHrX
+IMAGENET1K_V1>torchvision.models.regnet.RegNet_X_3_2GF_Weights.IMAGENET1K_V1
+AnyrX
+IMAGENET1K_V2>torchvision.models.regnet.RegNet_X_3_2GF_Weights.IMAGENET1K_V2
+AnyrL
+DEFAULT8torchvision.models.regnet.RegNet_X_3_2GF_Weights.DEFAULT
+AnyÈ
+RegNet_X_8GF_Weights.torchvision.models.regnet.RegNet_X_8GF_Weights"#torchvision.models._api.WeightsEnumHrV
+IMAGENET1K_V1<torchvision.models.regnet.RegNet_X_8GF_Weights.IMAGENET1K_V1
+AnyrV
+IMAGENET1K_V2<torchvision.models.regnet.RegNet_X_8GF_Weights.IMAGENET1K_V2
+AnyrJ
+DEFAULT6torchvision.models.regnet.RegNet_X_8GF_Weights.DEFAULT
+AnyÓ
+RegNet_X_16GF_Weights/torchvision.models.regnet.RegNet_X_16GF_Weights"#torchvision.models._api.WeightsEnumHrW
+IMAGENET1K_V1=torchvision.models.regnet.RegNet_X_16GF_Weights.IMAGENET1K_V1
+AnyrW
+IMAGENET1K_V2=torchvision.models.regnet.RegNet_X_16GF_Weights.IMAGENET1K_V2
+AnyrK
+DEFAULT7torchvision.models.regnet.RegNet_X_16GF_Weights.DEFAULT
+AnyÓ
+RegNet_X_32GF_Weights/torchvision.models.regnet.RegNet_X_32GF_Weights"#torchvision.models._api.WeightsEnumHrW
+IMAGENET1K_V1=torchvision.models.regnet.RegNet_X_32GF_Weights.IMAGENET1K_V1
+AnyrW
+IMAGENET1K_V2=torchvision.models.regnet.RegNet_X_32GF_Weights.IMAGENET1K_V2
+AnyrK
+DEFAULT7torchvision.models.regnet.RegNet_X_32GF_Weights.DEFAULT
+Any˝
+
+
+BasicBlock$torchvision.models.resnet.BasicBlock"builtins.object*˝
+__init__-torchvision.models.resnet.BasicBlock.__init__"
+None*V
+selfL
+$torchvision.models.resnet.BasicBlock"$torchvision.models.resnet.BasicBlock**
+inplanes
+builtins.int"builtins.int*(
+planes
+builtins.int"builtins.int**
+stride
+builtins.int"builtins.int *8
+
+downsample&
+Union[Any,None]
+Any
+None **
+groups
+builtins.int"builtins.int *.
+
+base_width
+builtins.int"builtins.int *,
+dilation
+builtins.int"builtins.int *ô
+
+norm_layerÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *®
+forward,torchvision.models.resnet.BasicBlock.forward"
+Any*V
+selfL
+$torchvision.models.resnet.BasicBlock"$torchvision.models.resnet.BasicBlock*
+x
+AnyrY
+	expansion.torchvision.models.resnet.BasicBlock.expansion
+builtins.int"builtins.intr<
+conv1*torchvision.models.resnet.BasicBlock.conv1
+Anyr8
+bn1(torchvision.models.resnet.BasicBlock.bn1
+Anyr:
+relu)torchvision.models.resnet.BasicBlock.relu
+Anyr<
+conv2*torchvision.models.resnet.BasicBlock.conv2
+Anyr8
+bn2(torchvision.models.resnet.BasicBlock.bn2
+AnyrF
+
+downsample/torchvision.models.resnet.BasicBlock.downsample
+Anyr>
+stride+torchvision.models.resnet.BasicBlock.stride
+Anyı
+
+Bottleneck$torchvision.models.resnet.Bottleneck"builtins.object*˝
+__init__-torchvision.models.resnet.Bottleneck.__init__"
+None*V
+selfL
+$torchvision.models.resnet.Bottleneck"$torchvision.models.resnet.Bottleneck**
+inplanes
+builtins.int"builtins.int*(
+planes
+builtins.int"builtins.int**
+stride
+builtins.int"builtins.int *8
+
+downsample&
+Union[Any,None]
+Any
+None **
+groups
+builtins.int"builtins.int *.
+
+base_width
+builtins.int"builtins.int *,
+dilation
+builtins.int"builtins.int *ô
+
+norm_layerÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *®
+forward,torchvision.models.resnet.Bottleneck.forward"
+Any*V
+selfL
+$torchvision.models.resnet.Bottleneck"$torchvision.models.resnet.Bottleneck*
+x
+AnyrY
+	expansion.torchvision.models.resnet.Bottleneck.expansion
+builtins.int"builtins.intr<
+conv1*torchvision.models.resnet.Bottleneck.conv1
+Anyr8
+bn1(torchvision.models.resnet.Bottleneck.bn1
+Anyr<
+conv2*torchvision.models.resnet.Bottleneck.conv2
+Anyr8
+bn2(torchvision.models.resnet.Bottleneck.bn2
+Anyr<
+conv3*torchvision.models.resnet.Bottleneck.conv3
+Anyr8
+bn3(torchvision.models.resnet.Bottleneck.bn3
+Anyr:
+relu)torchvision.models.resnet.Bottleneck.relu
+AnyrF
+
+downsample/torchvision.models.resnet.Bottleneck.downsample
+Anyr>
+stride+torchvision.models.resnet.Bottleneck.stride
+Anyƒ
+ResNet torchvision.models.resnet.ResNet"builtins.object*ı
+__init__)torchvision.models.resnet.ResNet.__init__"
+None*N
+selfD
+ torchvision.models.resnet.ResNet" torchvision.models.resnet.ResNet*ˆ
+blockÍ
+\Union[Type[torchvision.models.resnet.BasicBlock],Type[torchvision.models.resnet.Bottleneck]]Ç
+*Type[torchvision.models.resnet.BasicBlock]L
+$torchvision.models.resnet.BasicBlock"$torchvision.models.resnet.BasicBlock"typeÇ
+*Type[torchvision.models.resnet.Bottleneck]L
+$torchvision.models.resnet.Bottleneck"$torchvision.models.resnet.Bottleneck"type*V
+layersJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*/
+num_classes
+builtins.int"builtins.int *8
+zero_init_residual
+builtins.bool"builtins.bool **
+groups
+builtins.int"builtins.int *3
+width_per_group
+builtins.int"builtins.int *™
+replace_stride_with_dilationÖ
+(Union[builtins.list[builtins.bool],None]M
+builtins.list[builtins.bool]
+builtins.bool"builtins.bool"builtins.list
+None *ô
+
+norm_layerÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *ú
+forward(torchvision.models.resnet.ResNet.forward"
+Any*N
+selfD
+ torchvision.models.resnet.ResNet" torchvision.models.resnet.ResNet*
+x
+AnyrS
+inplanes)torchvision.models.resnet.ResNet.inplanes
+builtins.int"builtins.intrS
+dilation)torchvision.models.resnet.ResNet.dilation
+builtins.int"builtins.intr:
+groups'torchvision.models.resnet.ResNet.groups
+AnyrB
+
+base_width+torchvision.models.resnet.ResNet.base_width
+Anyr8
+conv1&torchvision.models.resnet.ResNet.conv1
+Anyr4
+bn1$torchvision.models.resnet.ResNet.bn1
+Anyr6
+relu%torchvision.models.resnet.ResNet.relu
+Anyr<
+maxpool(torchvision.models.resnet.ResNet.maxpool
+Anyr:
+layer1'torchvision.models.resnet.ResNet.layer1
+Anyr:
+layer2'torchvision.models.resnet.ResNet.layer2
+Anyr:
+layer3'torchvision.models.resnet.ResNet.layer3
+Anyr:
+layer4'torchvision.models.resnet.ResNet.layer4
+Anyr<
+avgpool(torchvision.models.resnet.ResNet.avgpool
+Anyr2
+fc#torchvision.models.resnet.ResNet.fc
+AnyÅ
+ResNet18_Weights*torchvision.models.resnet.ResNet18_Weights"#torchvision.models._api.WeightsEnumHrR
+IMAGENET1K_V18torchvision.models.resnet.ResNet18_Weights.IMAGENET1K_V1
+AnyrF
+DEFAULT2torchvision.models.resnet.ResNet18_Weights.DEFAULT
+AnyÅ
+ResNet34_Weights*torchvision.models.resnet.ResNet34_Weights"#torchvision.models._api.WeightsEnumHrR
+IMAGENET1K_V18torchvision.models.resnet.ResNet34_Weights.IMAGENET1K_V1
+AnyrF
+DEFAULT2torchvision.models.resnet.ResNet34_Weights.DEFAULT
+Any’
+ResNet50_Weights*torchvision.models.resnet.ResNet50_Weights"#torchvision.models._api.WeightsEnumHrR
+IMAGENET1K_V18torchvision.models.resnet.ResNet50_Weights.IMAGENET1K_V1
+AnyrR
+IMAGENET1K_V28torchvision.models.resnet.ResNet50_Weights.IMAGENET1K_V2
+AnyrF
+DEFAULT2torchvision.models.resnet.ResNet50_Weights.DEFAULT
+Any⁄
+ResNet101_Weights+torchvision.models.resnet.ResNet101_Weights"#torchvision.models._api.WeightsEnumHrS
+IMAGENET1K_V19torchvision.models.resnet.ResNet101_Weights.IMAGENET1K_V1
+AnyrS
+IMAGENET1K_V29torchvision.models.resnet.ResNet101_Weights.IMAGENET1K_V2
+AnyrG
+DEFAULT3torchvision.models.resnet.ResNet101_Weights.DEFAULT
+Any⁄
+ResNet152_Weights+torchvision.models.resnet.ResNet152_Weights"#torchvision.models._api.WeightsEnumHrS
+IMAGENET1K_V19torchvision.models.resnet.ResNet152_Weights.IMAGENET1K_V1
+AnyrS
+IMAGENET1K_V29torchvision.models.resnet.ResNet152_Weights.IMAGENET1K_V2
+AnyrG
+DEFAULT3torchvision.models.resnet.ResNet152_Weights.DEFAULT
+Any¯
+ResNeXt50_32X4D_Weights1torchvision.models.resnet.ResNeXt50_32X4D_Weights"#torchvision.models._api.WeightsEnumHrY
+IMAGENET1K_V1?torchvision.models.resnet.ResNeXt50_32X4D_Weights.IMAGENET1K_V1
+AnyrY
+IMAGENET1K_V2?torchvision.models.resnet.ResNeXt50_32X4D_Weights.IMAGENET1K_V2
+AnyrM
+DEFAULT9torchvision.models.resnet.ResNeXt50_32X4D_Weights.DEFAULT
+Any˝
+ResNeXt101_32X8D_Weights2torchvision.models.resnet.ResNeXt101_32X8D_Weights"#torchvision.models._api.WeightsEnumHrZ
+IMAGENET1K_V1@torchvision.models.resnet.ResNeXt101_32X8D_Weights.IMAGENET1K_V1
+AnyrZ
+IMAGENET1K_V2@torchvision.models.resnet.ResNeXt101_32X8D_Weights.IMAGENET1K_V2
+AnyrN
+DEFAULT:torchvision.models.resnet.ResNeXt101_32X8D_Weights.DEFAULT
+Any°
+ResNeXt101_64X4D_Weights2torchvision.models.resnet.ResNeXt101_64X4D_Weights"#torchvision.models._api.WeightsEnumHrZ
+IMAGENET1K_V1@torchvision.models.resnet.ResNeXt101_64X4D_Weights.IMAGENET1K_V1
+AnyrN
+DEFAULT:torchvision.models.resnet.ResNeXt101_64X4D_Weights.DEFAULT
+Any¯
+Wide_ResNet50_2_Weights1torchvision.models.resnet.Wide_ResNet50_2_Weights"#torchvision.models._api.WeightsEnumHrY
+IMAGENET1K_V1?torchvision.models.resnet.Wide_ResNet50_2_Weights.IMAGENET1K_V1
+AnyrY
+IMAGENET1K_V2?torchvision.models.resnet.Wide_ResNet50_2_Weights.IMAGENET1K_V2
+AnyrM
+DEFAULT9torchvision.models.resnet.Wide_ResNet50_2_Weights.DEFAULT
+Any˝
+Wide_ResNet101_2_Weights2torchvision.models.resnet.Wide_ResNet101_2_Weights"#torchvision.models._api.WeightsEnumHrZ
+IMAGENET1K_V1@torchvision.models.resnet.Wide_ResNet101_2_Weights.IMAGENET1K_V1
+AnyrZ
+IMAGENET1K_V2@torchvision.models.resnet.Wide_ResNet101_2_Weights.IMAGENET1K_V2
+AnyrN
+DEFAULT:torchvision.models.resnet.Wide_ResNet101_2_Weights.DEFAULT
+Anyê
+
+ShuffleNetV2,torchvision.models.shufflenetv2.ShuffleNetV2"builtins.object*è
+__init__5torchvision.models.shufflenetv2.ShuffleNetV2.__init__"
+None*f
+self\
+,torchvision.models.shufflenetv2.ShuffleNetV2",torchvision.models.shufflenetv2.ShuffleNetV2*^
+stages_repeatsJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*c
+stages_out_channelsJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*/
+num_classes
+builtins.int"builtins.int *d
+inverted_residualK
+CallableType[builtins.function]&
+builtins.function"builtins.function *¿
+forward4torchvision.models.shufflenetv2.ShuffleNetV2.forward"
+Any*f
+self\
+,torchvision.models.shufflenetv2.ShuffleNetV2",torchvision.models.shufflenetv2.ShuffleNetV2*
+x
+AnyrD
+conv12torchvision.models.shufflenetv2.ShuffleNetV2.conv1
+AnyrH
+maxpool4torchvision.models.shufflenetv2.ShuffleNetV2.maxpool
+AnyrF
+stage23torchvision.models.shufflenetv2.ShuffleNetV2.stage2
+AnyrF
+stage33torchvision.models.shufflenetv2.ShuffleNetV2.stage3
+AnyrF
+stage43torchvision.models.shufflenetv2.ShuffleNetV2.stage4
+AnyrD
+conv52torchvision.models.shufflenetv2.ShuffleNetV2.conv5
+Anyr>
+fc/torchvision.models.shufflenetv2.ShuffleNetV2.fc
+Anyª
+ShuffleNet_V2_X0_5_Weights:torchvision.models.shufflenetv2.ShuffleNet_V2_X0_5_Weights"#torchvision.models._api.WeightsEnumHrb
+IMAGENET1K_V1Htorchvision.models.shufflenetv2.ShuffleNet_V2_X0_5_Weights.IMAGENET1K_V1
+AnyrV
+DEFAULTBtorchvision.models.shufflenetv2.ShuffleNet_V2_X0_5_Weights.DEFAULT
+Anyª
+ShuffleNet_V2_X1_0_Weights:torchvision.models.shufflenetv2.ShuffleNet_V2_X1_0_Weights"#torchvision.models._api.WeightsEnumHrb
+IMAGENET1K_V1Htorchvision.models.shufflenetv2.ShuffleNet_V2_X1_0_Weights.IMAGENET1K_V1
+AnyrV
+DEFAULTBtorchvision.models.shufflenetv2.ShuffleNet_V2_X1_0_Weights.DEFAULT
+Anyª
+ShuffleNet_V2_X1_5_Weights:torchvision.models.shufflenetv2.ShuffleNet_V2_X1_5_Weights"#torchvision.models._api.WeightsEnumHrb
+IMAGENET1K_V1Htorchvision.models.shufflenetv2.ShuffleNet_V2_X1_5_Weights.IMAGENET1K_V1
+AnyrV
+DEFAULTBtorchvision.models.shufflenetv2.ShuffleNet_V2_X1_5_Weights.DEFAULT
+Anyª
+ShuffleNet_V2_X2_0_Weights:torchvision.models.shufflenetv2.ShuffleNet_V2_X2_0_Weights"#torchvision.models._api.WeightsEnumHrb
+IMAGENET1K_V1Htorchvision.models.shufflenetv2.ShuffleNet_V2_X2_0_Weights.IMAGENET1K_V1
+AnyrV
+DEFAULTBtorchvision.models.shufflenetv2.ShuffleNet_V2_X2_0_Weights.DEFAULT
+Any“
+Fire"torchvision.models.squeezenet.Fire"builtins.object*€
+__init__+torchvision.models.squeezenet.Fire.__init__"
+None*R
+selfH
+"torchvision.models.squeezenet.Fire""torchvision.models.squeezenet.Fire**
+inplanes
+builtins.int"builtins.int*0
+squeeze_planes
+builtins.int"builtins.int*2
+expand1x1_planes
+builtins.int"builtins.int*2
+expand3x3_planes
+builtins.int"builtins.int*¢
+forward*torchvision.models.squeezenet.Fire.forward"
+Any*R
+selfH
+"torchvision.models.squeezenet.Fire""torchvision.models.squeezenet.Fire*
+x
+Anyr@
+inplanes+torchvision.models.squeezenet.Fire.inplanes
+Anyr>
+squeeze*torchvision.models.squeezenet.Fire.squeeze
+AnyrT
+squeeze_activation5torchvision.models.squeezenet.Fire.squeeze_activation
+AnyrB
+	expand1x1,torchvision.models.squeezenet.Fire.expand1x1
+AnyrX
+expand1x1_activation7torchvision.models.squeezenet.Fire.expand1x1_activation
+AnyrB
+	expand3x3,torchvision.models.squeezenet.Fire.expand3x3
+AnyrX
+expand3x3_activation7torchvision.models.squeezenet.Fire.expand3x3_activation
+Anyô
+
+SqueezeNet(torchvision.models.squeezenet.SqueezeNet"builtins.object*∂
+__init__1torchvision.models.squeezenet.SqueezeNet.__init__"
+None*^
+selfT
+(torchvision.models.squeezenet.SqueezeNet"(torchvision.models.squeezenet.SqueezeNet*+
+version
+builtins.str"builtins.str */
+num_classes
+builtins.int"builtins.int */
+dropout 
+builtins.float"builtins.float *¥
+forward0torchvision.models.squeezenet.SqueezeNet.forward"
+Any*^
+selfT
+(torchvision.models.squeezenet.SqueezeNet"(torchvision.models.squeezenet.SqueezeNet*
+x
+AnyrL
+num_classes4torchvision.models.squeezenet.SqueezeNet.num_classes
+AnyrF
+features1torchvision.models.squeezenet.SqueezeNet.features
+AnyrJ
+
+classifier3torchvision.models.squeezenet.SqueezeNet.classifier
+Any°
+SqueezeNet1_0_Weights3torchvision.models.squeezenet.SqueezeNet1_0_Weights"#torchvision.models._api.WeightsEnumHr[
+IMAGENET1K_V1Atorchvision.models.squeezenet.SqueezeNet1_0_Weights.IMAGENET1K_V1
+AnyrO
+DEFAULT;torchvision.models.squeezenet.SqueezeNet1_0_Weights.DEFAULT
+Any°
+SqueezeNet1_1_Weights3torchvision.models.squeezenet.SqueezeNet1_1_Weights"#torchvision.models._api.WeightsEnumHr[
+IMAGENET1K_V1Atorchvision.models.squeezenet.SqueezeNet1_1_Weights.IMAGENET1K_V1
+AnyrO
+DEFAULT;torchvision.models.squeezenet.SqueezeNet1_1_Weights.DEFAULT
+Anyú
+VGGtorchvision.models.vgg.VGG"builtins.object*™
+__init__#torchvision.models.vgg.VGG.__init__"
+None*B
+self8
+torchvision.models.vgg.VGG"torchvision.models.vgg.VGG*
+features
+Any*/
+num_classes
+builtins.int"builtins.int *2
+init_weights
+builtins.bool"builtins.bool */
+dropout 
+builtins.float"builtins.float *ä
+forward"torchvision.models.vgg.VGG.forward"
+Any*B
+self8
+torchvision.models.vgg.VGG"torchvision.models.vgg.VGG*
+x
+Anyr8
+features#torchvision.models.vgg.VGG.features
+Anyr6
+avgpool"torchvision.models.vgg.VGG.avgpool
+Anyr<
+
+classifier%torchvision.models.vgg.VGG.classifier
+AnyÏ
+VGG11_Weights$torchvision.models.vgg.VGG11_Weights"#torchvision.models._api.WeightsEnumHrL
+IMAGENET1K_V12torchvision.models.vgg.VGG11_Weights.IMAGENET1K_V1
+Anyr@
+DEFAULT,torchvision.models.vgg.VGG11_Weights.DEFAULT
+Any¯
+VGG11_BN_Weights'torchvision.models.vgg.VGG11_BN_Weights"#torchvision.models._api.WeightsEnumHrO
+IMAGENET1K_V15torchvision.models.vgg.VGG11_BN_Weights.IMAGENET1K_V1
+AnyrC
+DEFAULT/torchvision.models.vgg.VGG11_BN_Weights.DEFAULT
+AnyÏ
+VGG13_Weights$torchvision.models.vgg.VGG13_Weights"#torchvision.models._api.WeightsEnumHrL
+IMAGENET1K_V12torchvision.models.vgg.VGG13_Weights.IMAGENET1K_V1
+Anyr@
+DEFAULT,torchvision.models.vgg.VGG13_Weights.DEFAULT
+Any¯
+VGG13_BN_Weights'torchvision.models.vgg.VGG13_BN_Weights"#torchvision.models._api.WeightsEnumHrO
+IMAGENET1K_V15torchvision.models.vgg.VGG13_BN_Weights.IMAGENET1K_V1
+AnyrC
+DEFAULT/torchvision.models.vgg.VGG13_BN_Weights.DEFAULT
+Any∆
+VGG16_Weights$torchvision.models.vgg.VGG16_Weights"#torchvision.models._api.WeightsEnumHrL
+IMAGENET1K_V12torchvision.models.vgg.VGG16_Weights.IMAGENET1K_V1
+AnyrX
+IMAGENET1K_FEATURES8torchvision.models.vgg.VGG16_Weights.IMAGENET1K_FEATURES
+Anyr@
+DEFAULT,torchvision.models.vgg.VGG16_Weights.DEFAULT
+Any¯
+VGG16_BN_Weights'torchvision.models.vgg.VGG16_BN_Weights"#torchvision.models._api.WeightsEnumHrO
+IMAGENET1K_V15torchvision.models.vgg.VGG16_BN_Weights.IMAGENET1K_V1
+AnyrC
+DEFAULT/torchvision.models.vgg.VGG16_BN_Weights.DEFAULT
+AnyÏ
+VGG19_Weights$torchvision.models.vgg.VGG19_Weights"#torchvision.models._api.WeightsEnumHrL
+IMAGENET1K_V12torchvision.models.vgg.VGG19_Weights.IMAGENET1K_V1
+Anyr@
+DEFAULT,torchvision.models.vgg.VGG19_Weights.DEFAULT
+Any¯
+VGG19_BN_Weights'torchvision.models.vgg.VGG19_BN_Weights"#torchvision.models._api.WeightsEnumHrO
+IMAGENET1K_V15torchvision.models.vgg.VGG19_BN_Weights.IMAGENET1K_V1
+AnyrC
+DEFAULT/torchvision.models.vgg.VGG19_BN_Weights.DEFAULT
+Any˝3
+ConvStemConfig4torchvision.models.vision_transformer.ConvStemConfig"builtins.tuple*ˆ	
+_replace=torchvision.models.vision_transformer.ConvStemConfig._replace"§
+8torchvision.models.vision_transformer.ConvStemConfig._NTÂ
+mTuple[builtins.int,builtins.int,builtins.int,CallableType[builtins.function],CallableType[builtins.function]]
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.intK
+CallableType[builtins.function]&
+builtins.function"builtins.functionK
+CallableType[builtins.function]&
+builtins.function"builtins.function*∞
+_self§
+8torchvision.models.vision_transformer.ConvStemConfig._NTÂ
+mTuple[builtins.int,builtins.int,builtins.int,CallableType[builtins.function],CallableType[builtins.function]]
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.intK
+CallableType[builtins.function]&
+builtins.function"builtins.functionK
+CallableType[builtins.function]&
+builtins.function"builtins.function*0
+out_channels
+builtins.int"builtins.int */
+kernel_size
+builtins.int"builtins.int **
+stride
+builtins.int"builtins.int *]
+
+norm_layerK
+CallableType[builtins.function]&
+builtins.function"builtins.function *c
+activation_layerK
+CallableType[builtins.function]&
+builtins.function"builtins.function *¥
+
+__new__<torchvision.models.vision_transformer.ConvStemConfig.__new__"§
+8torchvision.models.vision_transformer.ConvStemConfig._NTÂ
+mTuple[builtins.int,builtins.int,builtins.int,CallableType[builtins.function],CallableType[builtins.function]]
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.intK
+CallableType[builtins.function]&
+builtins.function"builtins.functionK
+CallableType[builtins.function]&
+builtins.function"builtins.function*˙
+_clsÔ
+>Type[torchvision.models.vision_transformer.ConvStemConfig._NT]§
+8torchvision.models.vision_transformer.ConvStemConfig._NTÂ
+mTuple[builtins.int,builtins.int,builtins.int,CallableType[builtins.function],CallableType[builtins.function]]
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.intK
+CallableType[builtins.function]&
+builtins.function"builtins.functionK
+CallableType[builtins.function]&
+builtins.function"builtins.function"type*.
+out_channels
+builtins.int"builtins.int*-
+kernel_size
+builtins.int"builtins.int*(
+stride
+builtins.int"builtins.int*[
+
+norm_layerK
+CallableType[builtins.function]&
+builtins.function"builtins.function*a
+activation_layerK
+CallableType[builtins.function]&
+builtins.function"builtins.function*”
+_asdict<torchvision.models.vision_transformer.ConvStemConfig._asdict"W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*∞
+_self§
+8torchvision.models.vision_transformer.ConvStemConfig._NTÂ
+mTuple[builtins.int,builtins.int,builtins.int,CallableType[builtins.function],CallableType[builtins.function]]
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.intK
+CallableType[builtins.function]&
+builtins.function"builtins.functionK
+CallableType[builtins.function]&
+builtins.function"builtins.function*‡
+_make:torchvision.models.vision_transformer.ConvStemConfig._make"§
+8torchvision.models.vision_transformer.ConvStemConfig._NTÂ
+mTuple[builtins.int,builtins.int,builtins.int,CallableType[builtins.function],CallableType[builtins.function]]
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.intK
+CallableType[builtins.function]&
+builtins.function"builtins.functionK
+CallableType[builtins.function]&
+builtins.function"builtins.function*˙
+_clsÔ
+>Type[torchvision.models.vision_transformer.ConvStemConfig._NT]§
+8torchvision.models.vision_transformer.ConvStemConfig._NTÂ
+mTuple[builtins.int,builtins.int,builtins.int,CallableType[builtins.function],CallableType[builtins.function]]
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.intK
+CallableType[builtins.function]&
+builtins.function"builtins.functionK
+CallableType[builtins.function]&
+builtins.function"builtins.function"type*>
+iterable0
+typing.Iterable[Any]
+Any"typing.Iterable*
+new
+Any *
+len
+Any 0:classmethodpro
+out_channelsAtorchvision.models.vision_transformer.ConvStemConfig.out_channels
+builtins.int"builtins.intrm
+kernel_size@torchvision.models.vision_transformer.ConvStemConfig.kernel_size
+builtins.int"builtins.intrc
+stride;torchvision.models.vision_transformer.ConvStemConfig.stride
+builtins.int"builtins.intrö
+
+norm_layer?torchvision.models.vision_transformer.ConvStemConfig.norm_layerK
+CallableType[builtins.function]&
+builtins.function"builtins.functionr¶
+activation_layerEtorchvision.models.vision_transformer.ConvStemConfig.activation_layerK
+CallableType[builtins.function]&
+builtins.function"builtins.functionro
+out_channelsAtorchvision.models.vision_transformer.ConvStemConfig.out_channels
+builtins.int"builtins.intrm
+kernel_size@torchvision.models.vision_transformer.ConvStemConfig.kernel_size
+builtins.int"builtins.intrc
+stride;torchvision.models.vision_transformer.ConvStemConfig.stride
+builtins.int"builtins.intrö
+
+norm_layer?torchvision.models.vision_transformer.ConvStemConfig.norm_layerK
+CallableType[builtins.function]&
+builtins.function"builtins.functionr¶
+activation_layerEtorchvision.models.vision_transformer.ConvStemConfig.activation_layerK
+CallableType[builtins.function]&
+builtins.function"builtins.functionr´
+_fields<torchvision.models.vision_transformer.ConvStemConfig._fields·
+GTuple[builtins.str,builtins.str,builtins.str,builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str
+builtins.str"builtins.str
+builtins.str"builtins.str
+builtins.str"builtins.strr™
+_field_typesAtorchvision.models.vision_transformer.ConvStemConfig._field_typesW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dictr∞
+_field_defaultsDtorchvision.models.vision_transformer.ConvStemConfig._field_defaultsW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dictre
+_source<torchvision.models.vision_transformer.ConvStemConfig._source
+builtins.str"builtins.strr∞
+__annotations__Dtorchvision.models.vision_transformer.ConvStemConfig.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dictã
+MLPBlock.torchvision.models.vision_transformer.MLPBlock"builtins.object*Ω
+__init__7torchvision.models.vision_transformer.MLPBlock.__init__"
+None*j
+self`
+.torchvision.models.vision_transformer.MLPBlock".torchvision.models.vision_transformer.MLPBlock*(
+in_dim
+builtins.int"builtins.int*)
+mlp_dim
+builtins.int"builtins.int*-
+dropout 
+builtins.float"builtins.floatü
+
+EncoderBlock2torchvision.models.vision_transformer.EncoderBlock"builtins.object*í
+__init__;torchvision.models.vision_transformer.EncoderBlock.__init__"
+None*r
+selfh
+2torchvision.models.vision_transformer.EncoderBlock"2torchvision.models.vision_transformer.EncoderBlock*+
+	num_heads
+builtins.int"builtins.int*,
+
+hidden_dim
+builtins.int"builtins.int*)
+mlp_dim
+builtins.int"builtins.int*-
+dropout 
+builtins.float"builtins.float*7
+attention_dropout 
+builtins.float"builtins.float*]
+
+norm_layerK
+CallableType[builtins.function]&
+builtins.function"builtins.function *÷
+forward:torchvision.models.vision_transformer.EncoderBlock.forward"
+Any*r
+selfh
+2torchvision.models.vision_transformer.EncoderBlock"2torchvision.models.vision_transformer.EncoderBlock*
+input
+AnyrR
+	num_heads<torchvision.models.vision_transformer.EncoderBlock.num_heads
+AnyrH
+ln_17torchvision.models.vision_transformer.EncoderBlock.ln_1
+Anyr\
+self_attentionAtorchvision.models.vision_transformer.EncoderBlock.self_attention
+AnyrN
+dropout:torchvision.models.vision_transformer.EncoderBlock.dropout
+AnyrH
+ln_27torchvision.models.vision_transformer.EncoderBlock.ln_2
+AnyrF
+mlp6torchvision.models.vision_transformer.EncoderBlock.mlp
+Any°	
+Encoder-torchvision.models.vision_transformer.Encoder"builtins.object*ﬂ
+__init__6torchvision.models.vision_transformer.Encoder.__init__"
+None*h
+self^
+-torchvision.models.vision_transformer.Encoder"-torchvision.models.vision_transformer.Encoder*,
+
+seq_length
+builtins.int"builtins.int*,
+
+num_layers
+builtins.int"builtins.int*+
+	num_heads
+builtins.int"builtins.int*,
+
+hidden_dim
+builtins.int"builtins.int*)
+mlp_dim
+builtins.int"builtins.int*-
+dropout 
+builtins.float"builtins.float*7
+attention_dropout 
+builtins.float"builtins.float*]
+
+norm_layerK
+CallableType[builtins.function]&
+builtins.function"builtins.function *«
+forward5torchvision.models.vision_transformer.Encoder.forward"
+Any*h
+self^
+-torchvision.models.vision_transformer.Encoder"-torchvision.models.vision_transformer.Encoder*
+input
+AnyrU
+pos_embedding;torchvision.models.vision_transformer.Encoder.pos_embedding
+AnyrI
+dropout5torchvision.models.vision_transformer.Encoder.dropout
+AnyrG
+layers4torchvision.models.vision_transformer.Encoder.layers
+Anyr?
+ln0torchvision.models.vision_transformer.Encoder.ln
+Any˝
+VisionTransformer7torchvision.models.vision_transformer.VisionTransformer"builtins.object*π
+__init__@torchvision.models.vision_transformer.VisionTransformer.__init__"
+None*|
+selfr
+7torchvision.models.vision_transformer.VisionTransformer"7torchvision.models.vision_transformer.VisionTransformer*,
+
+image_size
+builtins.int"builtins.int*,
+
+patch_size
+builtins.int"builtins.int*,
+
+num_layers
+builtins.int"builtins.int*+
+	num_heads
+builtins.int"builtins.int*,
+
+hidden_dim
+builtins.int"builtins.int*)
+mlp_dim
+builtins.int"builtins.int*/
+dropout 
+builtins.float"builtins.float *9
+attention_dropout 
+builtins.float"builtins.float */
+num_classes
+builtins.int"builtins.int *_
+representation_sizeD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *]
+
+norm_layerK
+CallableType[builtins.function]&
+builtins.function"builtins.function *ı
+conv_stem_configs€
+ìUnion[builtins.list[TypeAlias[Tuple[builtins.int,builtins.int,builtins.int,CallableType[builtins.function],CallableType[builtins.function]]]],None]∂
+ábuiltins.list[TypeAlias[Tuple[builtins.int,builtins.int,builtins.int,CallableType[builtins.function],CallableType[builtins.function]]]]ö
+xTypeAlias[Tuple[builtins.int,builtins.int,builtins.int,CallableType[builtins.function],CallableType[builtins.function]]]Â
+mTuple[builtins.int,builtins.int,builtins.int,CallableType[builtins.function],CallableType[builtins.function]]
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.intK
+CallableType[builtins.function]&
+builtins.function"builtins.functionK
+CallableType[builtins.function]&
+builtins.function"builtins.function"4torchvision.models.vision_transformer.ConvStemConfig"builtins.list
+None *·
+forward?torchvision.models.vision_transformer.VisionTransformer.forward"
+Any*|
+selfr
+7torchvision.models.vision_transformer.VisionTransformer"7torchvision.models.vision_transformer.VisionTransformer*
+x
+AnyrY
+
+image_sizeBtorchvision.models.vision_transformer.VisionTransformer.image_size
+AnyrY
+
+patch_sizeBtorchvision.models.vision_transformer.VisionTransformer.patch_size
+AnyrY
+
+hidden_dimBtorchvision.models.vision_transformer.VisionTransformer.hidden_dim
+AnyrS
+mlp_dim?torchvision.models.vision_transformer.VisionTransformer.mlp_dim
+Anyrg
+attention_dropoutItorchvision.models.vision_transformer.VisionTransformer.attention_dropout
+AnyrS
+dropout?torchvision.models.vision_transformer.VisionTransformer.dropout
+Anyr[
+num_classesCtorchvision.models.vision_transformer.VisionTransformer.num_classes
+Anyrk
+representation_sizeKtorchvision.models.vision_transformer.VisionTransformer.representation_size
+AnyrY
+
+norm_layerBtorchvision.models.vision_transformer.VisionTransformer.norm_layer
+AnyrW
+	conv_projAtorchvision.models.vision_transformer.VisionTransformer.conv_proj
+Anyr[
+class_tokenCtorchvision.models.vision_transformer.VisionTransformer.class_token
+AnyrS
+encoder?torchvision.models.vision_transformer.VisionTransformer.encoder
+AnyrY
+
+seq_lengthBtorchvision.models.vision_transformer.VisionTransformer.seq_length
+AnyrO
+heads=torchvision.models.vision_transformer.VisionTransformer.heads
+Anyè
+ViT_B_16_Weights6torchvision.models.vision_transformer.ViT_B_16_Weights"#torchvision.models._api.WeightsEnumHr^
+IMAGENET1K_V1Dtorchvision.models.vision_transformer.ViT_B_16_Weights.IMAGENET1K_V1
+Anyrp
+IMAGENET1K_SWAG_E2E_V1Mtorchvision.models.vision_transformer.ViT_B_16_Weights.IMAGENET1K_SWAG_E2E_V1
+Anyrv
+IMAGENET1K_SWAG_LINEAR_V1Ptorchvision.models.vision_transformer.ViT_B_16_Weights.IMAGENET1K_SWAG_LINEAR_V1
+AnyrR
+DEFAULT>torchvision.models.vision_transformer.ViT_B_16_Weights.DEFAULT
+Any•
+ViT_B_32_Weights6torchvision.models.vision_transformer.ViT_B_32_Weights"#torchvision.models._api.WeightsEnumHr^
+IMAGENET1K_V1Dtorchvision.models.vision_transformer.ViT_B_32_Weights.IMAGENET1K_V1
+AnyrR
+DEFAULT>torchvision.models.vision_transformer.ViT_B_32_Weights.DEFAULT
+Anyè
+ViT_L_16_Weights6torchvision.models.vision_transformer.ViT_L_16_Weights"#torchvision.models._api.WeightsEnumHr^
+IMAGENET1K_V1Dtorchvision.models.vision_transformer.ViT_L_16_Weights.IMAGENET1K_V1
+Anyrp
+IMAGENET1K_SWAG_E2E_V1Mtorchvision.models.vision_transformer.ViT_L_16_Weights.IMAGENET1K_SWAG_E2E_V1
+Anyrv
+IMAGENET1K_SWAG_LINEAR_V1Ptorchvision.models.vision_transformer.ViT_L_16_Weights.IMAGENET1K_SWAG_LINEAR_V1
+AnyrR
+DEFAULT>torchvision.models.vision_transformer.ViT_L_16_Weights.DEFAULT
+Any•
+ViT_L_32_Weights6torchvision.models.vision_transformer.ViT_L_32_Weights"#torchvision.models._api.WeightsEnumHr^
+IMAGENET1K_V1Dtorchvision.models.vision_transformer.ViT_L_32_Weights.IMAGENET1K_V1
+AnyrR
+DEFAULT>torchvision.models.vision_transformer.ViT_L_32_Weights.DEFAULT
+AnyØ
+ViT_H_14_Weights6torchvision.models.vision_transformer.ViT_H_14_Weights"#torchvision.models._api.WeightsEnumHrp
+IMAGENET1K_SWAG_E2E_V1Mtorchvision.models.vision_transformer.ViT_H_14_Weights.IMAGENET1K_SWAG_E2E_V1
+Anyrv
+IMAGENET1K_SWAG_LINEAR_V1Ptorchvision.models.vision_transformer.ViT_H_14_Weights.IMAGENET1K_SWAG_LINEAR_V1
+AnyrR
+DEFAULT>torchvision.models.vision_transformer.ViT_H_14_Weights.DEFAULT
+Any»
+PatchMerging0torchvision.models.swin_transformer.PatchMerging"builtins.object*≈
+__init__9torchvision.models.swin_transformer.PatchMerging.__init__"
+None*n
+selfd
+0torchvision.models.swin_transformer.PatchMerging"0torchvision.models.swin_transformer.PatchMerging*%
+dim
+builtins.int"builtins.int*]
+
+norm_layerK
+CallableType[builtins.function]&
+builtins.function"builtins.function *Ã
+forward8torchvision.models.swin_transformer.PatchMerging.forward"
+Any*n
+selfd
+0torchvision.models.swin_transformer.PatchMerging"0torchvision.models.swin_transformer.PatchMerging*
+x
+AnyrD
+dim4torchvision.models.swin_transformer.PatchMerging.dim
+AnyrP
+	reduction:torchvision.models.swin_transformer.PatchMerging.reduction
+AnyrF
+norm5torchvision.models.swin_transformer.PatchMerging.norm
+Anyﬁ
+PatchMergingV22torchvision.models.swin_transformer.PatchMergingV2"builtins.object*À
+__init__;torchvision.models.swin_transformer.PatchMergingV2.__init__"
+None*r
+selfh
+2torchvision.models.swin_transformer.PatchMergingV2"2torchvision.models.swin_transformer.PatchMergingV2*%
+dim
+builtins.int"builtins.int*]
+
+norm_layerK
+CallableType[builtins.function]&
+builtins.function"builtins.function *“
+forward:torchvision.models.swin_transformer.PatchMergingV2.forward"
+Any*r
+selfh
+2torchvision.models.swin_transformer.PatchMergingV2"2torchvision.models.swin_transformer.PatchMergingV2*
+x
+AnyrF
+dim6torchvision.models.swin_transformer.PatchMergingV2.dim
+AnyrR
+	reduction<torchvision.models.swin_transformer.PatchMergingV2.reduction
+AnyrH
+norm7torchvision.models.swin_transformer.PatchMergingV2.norm
+Anyπ
+ShiftedWindowAttention:torchvision.models.swin_transformer.ShiftedWindowAttention"builtins.object*∏
+__init__Ctorchvision.models.swin_transformer.ShiftedWindowAttention.__init__"
+None*Ç
+selfx
+:torchvision.models.swin_transformer.ShiftedWindowAttention":torchvision.models.swin_transformer.ShiftedWindowAttention*%
+dim
+builtins.int"builtins.int*[
+window_sizeJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*Z
+
+shift_sizeJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*+
+	num_heads
+builtins.int"builtins.int*.
+qkv_bias
+builtins.bool"builtins.bool */
+	proj_bias
+builtins.bool"builtins.bool *9
+attention_dropout 
+builtins.float"builtins.float */
+dropout 
+builtins.float"builtins.float *î
+#define_relative_position_bias_table^torchvision.models.swin_transformer.ShiftedWindowAttention.define_relative_position_bias_table"
+None*Ç
+selfx
+:torchvision.models.swin_transformer.ShiftedWindowAttention":torchvision.models.swin_transformer.ShiftedWindowAttention*ä
+define_relative_position_indexYtorchvision.models.swin_transformer.ShiftedWindowAttention.define_relative_position_index"
+None*Ç
+selfx
+:torchvision.models.swin_transformer.ShiftedWindowAttention":torchvision.models.swin_transformer.ShiftedWindowAttention*Å
+get_relative_position_biasUtorchvision.models.swin_transformer.ShiftedWindowAttention.get_relative_position_bias"
+Any*Ç
+selfx
+:torchvision.models.swin_transformer.ShiftedWindowAttention":torchvision.models.swin_transformer.ShiftedWindowAttention*Î
+forwardBtorchvision.models.swin_transformer.ShiftedWindowAttention.forward"
+Any*Ç
+selfx
+:torchvision.models.swin_transformer.ShiftedWindowAttention":torchvision.models.swin_transformer.ShiftedWindowAttention*
+x
+Anyr^
+window_sizeFtorchvision.models.swin_transformer.ShiftedWindowAttention.window_size
+Anyr\
+
+shift_sizeEtorchvision.models.swin_transformer.ShiftedWindowAttention.shift_size
+AnyrZ
+	num_headsDtorchvision.models.swin_transformer.ShiftedWindowAttention.num_heads
+Anyrj
+attention_dropoutLtorchvision.models.swin_transformer.ShiftedWindowAttention.attention_dropout
+AnyrV
+dropoutBtorchvision.models.swin_transformer.ShiftedWindowAttention.dropout
+AnyrN
+qkv>torchvision.models.swin_transformer.ShiftedWindowAttention.qkv
+AnyrP
+proj?torchvision.models.swin_transformer.ShiftedWindowAttention.proj
+AnyrÄ
+relative_position_bias_tableWtorchvision.models.swin_transformer.ShiftedWindowAttention.relative_position_bias_table
+Any¨
+ShiftedWindowAttentionV2<torchvision.models.swin_transformer.ShiftedWindowAttentionV2":torchvision.models.swin_transformer.ShiftedWindowAttention*æ
+__init__Etorchvision.models.swin_transformer.ShiftedWindowAttentionV2.__init__"
+None*Ü
+self|
+<torchvision.models.swin_transformer.ShiftedWindowAttentionV2"<torchvision.models.swin_transformer.ShiftedWindowAttentionV2*%
+dim
+builtins.int"builtins.int*[
+window_sizeJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*Z
+
+shift_sizeJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*+
+	num_heads
+builtins.int"builtins.int*.
+qkv_bias
+builtins.bool"builtins.bool */
+	proj_bias
+builtins.bool"builtins.bool *9
+attention_dropout 
+builtins.float"builtins.float */
+dropout 
+builtins.float"builtins.float *ö
+#define_relative_position_bias_table`torchvision.models.swin_transformer.ShiftedWindowAttentionV2.define_relative_position_bias_table"
+None*Ü
+self|
+<torchvision.models.swin_transformer.ShiftedWindowAttentionV2"<torchvision.models.swin_transformer.ShiftedWindowAttentionV2*á
+get_relative_position_biasWtorchvision.models.swin_transformer.ShiftedWindowAttentionV2.get_relative_position_bias"
+Any*Ü
+self|
+<torchvision.models.swin_transformer.ShiftedWindowAttentionV2"<torchvision.models.swin_transformer.ShiftedWindowAttentionV2*Ò
+forwardDtorchvision.models.swin_transformer.ShiftedWindowAttentionV2.forward"
+Any*Ü
+self|
+<torchvision.models.swin_transformer.ShiftedWindowAttentionV2"<torchvision.models.swin_transformer.ShiftedWindowAttentionV2*
+x
+Anyr`
+logit_scaleHtorchvision.models.swin_transformer.ShiftedWindowAttentionV2.logit_scale
+AnyrX
+cpb_mlpDtorchvision.models.swin_transformer.ShiftedWindowAttentionV2.cpb_mlp
+Anyı
+SwinTransformerBlock8torchvision.models.swin_transformer.SwinTransformerBlock"builtins.object*Ä
+__init__Atorchvision.models.swin_transformer.SwinTransformerBlock.__init__"
+None*~
+selft
+8torchvision.models.swin_transformer.SwinTransformerBlock"8torchvision.models.swin_transformer.SwinTransformerBlock*%
+dim
+builtins.int"builtins.int*+
+	num_heads
+builtins.int"builtins.int*[
+window_sizeJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*Z
+
+shift_sizeJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*1
+	mlp_ratio 
+builtins.float"builtins.float */
+dropout 
+builtins.float"builtins.float *9
+attention_dropout 
+builtins.float"builtins.float *=
+stochastic_depth_prob 
+builtins.float"builtins.float *]
+
+norm_layerK
+CallableType[builtins.function]&
+builtins.function"builtins.function *]
+
+attn_layerK
+CallableType[builtins.function]&
+builtins.function"builtins.function *‰
+forward@torchvision.models.swin_transformer.SwinTransformerBlock.forward"
+Any*~
+selft
+8torchvision.models.swin_transformer.SwinTransformerBlock"8torchvision.models.swin_transformer.SwinTransformerBlock*
+x
+AnyrP
+norm1>torchvision.models.swin_transformer.SwinTransformerBlock.norm1
+AnyrN
+attn=torchvision.models.swin_transformer.SwinTransformerBlock.attn
+Anyrf
+stochastic_depthItorchvision.models.swin_transformer.SwinTransformerBlock.stochastic_depth
+AnyrP
+norm2>torchvision.models.swin_transformer.SwinTransformerBlock.norm2
+AnyrL
+mlp<torchvision.models.swin_transformer.SwinTransformerBlock.mlp
+AnyÜ
+
+SwinTransformerBlockV2:torchvision.models.swin_transformer.SwinTransformerBlockV2"8torchvision.models.swin_transformer.SwinTransformerBlock*á
+__init__Ctorchvision.models.swin_transformer.SwinTransformerBlockV2.__init__"
+None*Ç
+selfx
+:torchvision.models.swin_transformer.SwinTransformerBlockV2":torchvision.models.swin_transformer.SwinTransformerBlockV2*%
+dim
+builtins.int"builtins.int*+
+	num_heads
+builtins.int"builtins.int*[
+window_sizeJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*Z
+
+shift_sizeJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*1
+	mlp_ratio 
+builtins.float"builtins.float */
+dropout 
+builtins.float"builtins.float *9
+attention_dropout 
+builtins.float"builtins.float *=
+stochastic_depth_prob 
+builtins.float"builtins.float *]
+
+norm_layerK
+CallableType[builtins.function]&
+builtins.function"builtins.function *]
+
+attn_layerK
+CallableType[builtins.function]&
+builtins.function"builtins.function *Î
+forwardBtorchvision.models.swin_transformer.SwinTransformerBlockV2.forward"
+Any*Ç
+selfx
+:torchvision.models.swin_transformer.SwinTransformerBlockV2":torchvision.models.swin_transformer.SwinTransformerBlockV2*
+x
+Any
+SwinTransformer3torchvision.models.swin_transformer.SwinTransformer"builtins.object*à
+
+__init__<torchvision.models.swin_transformer.SwinTransformer.__init__"
+None*t
+selfj
+3torchvision.models.swin_transformer.SwinTransformer"3torchvision.models.swin_transformer.SwinTransformer*Z
+
+patch_sizeJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*+
+	embed_dim
+builtins.int"builtins.int*V
+depthsJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*Y
+	num_headsJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*[
+window_sizeJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*1
+	mlp_ratio 
+builtins.float"builtins.float */
+dropout 
+builtins.float"builtins.float *9
+attention_dropout 
+builtins.float"builtins.float *=
+stochastic_depth_prob 
+builtins.float"builtins.float */
+num_classes
+builtins.int"builtins.int *ô
+
+norm_layerÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *î
+blockÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *c
+downsample_layerK
+CallableType[builtins.function]&
+builtins.function"builtins.function *W
+forward;torchvision.models.swin_transformer.SwinTransformer.forward*
+self*
+xrW
+num_classes?torchvision.models.swin_transformer.SwinTransformer.num_classes
+AnyrQ
+features<torchvision.models.swin_transformer.SwinTransformer.features
+AnyrI
+norm8torchvision.models.swin_transformer.SwinTransformer.norm
+AnyrO
+permute;torchvision.models.swin_transformer.SwinTransformer.permute
+AnyrO
+avgpool;torchvision.models.swin_transformer.SwinTransformer.avgpool
+AnyrO
+flatten;torchvision.models.swin_transformer.SwinTransformer.flatten
+AnyrI
+head8torchvision.models.swin_transformer.SwinTransformer.head
+Anyó
+Swin_T_Weights2torchvision.models.swin_transformer.Swin_T_Weights"#torchvision.models._api.WeightsEnumHrZ
+IMAGENET1K_V1@torchvision.models.swin_transformer.Swin_T_Weights.IMAGENET1K_V1
+AnyrN
+DEFAULT:torchvision.models.swin_transformer.Swin_T_Weights.DEFAULT
+Anyó
+Swin_S_Weights2torchvision.models.swin_transformer.Swin_S_Weights"#torchvision.models._api.WeightsEnumHrZ
+IMAGENET1K_V1@torchvision.models.swin_transformer.Swin_S_Weights.IMAGENET1K_V1
+AnyrN
+DEFAULT:torchvision.models.swin_transformer.Swin_S_Weights.DEFAULT
+Anyó
+Swin_B_Weights2torchvision.models.swin_transformer.Swin_B_Weights"#torchvision.models._api.WeightsEnumHrZ
+IMAGENET1K_V1@torchvision.models.swin_transformer.Swin_B_Weights.IMAGENET1K_V1
+AnyrN
+DEFAULT:torchvision.models.swin_transformer.Swin_B_Weights.DEFAULT
+Any£
+Swin_V2_T_Weights5torchvision.models.swin_transformer.Swin_V2_T_Weights"#torchvision.models._api.WeightsEnumHr]
+IMAGENET1K_V1Ctorchvision.models.swin_transformer.Swin_V2_T_Weights.IMAGENET1K_V1
+AnyrQ
+DEFAULT=torchvision.models.swin_transformer.Swin_V2_T_Weights.DEFAULT
+Any£
+Swin_V2_S_Weights5torchvision.models.swin_transformer.Swin_V2_S_Weights"#torchvision.models._api.WeightsEnumHr]
+IMAGENET1K_V1Ctorchvision.models.swin_transformer.Swin_V2_S_Weights.IMAGENET1K_V1
+AnyrQ
+DEFAULT=torchvision.models.swin_transformer.Swin_V2_S_Weights.DEFAULT
+Any£
+Swin_V2_B_Weights5torchvision.models.swin_transformer.Swin_V2_B_Weights"#torchvision.models._api.WeightsEnumHr]
+IMAGENET1K_V1Ctorchvision.models.swin_transformer.Swin_V2_B_Weights.IMAGENET1K_V1
+AnyrQ
+DEFAULT=torchvision.models.swin_transformer.Swin_V2_B_Weights.DEFAULT
+Anyè
+$RelativePositionalMultiHeadAttention>torchvision.models.maxvit.RelativePositionalMultiHeadAttention"builtins.object*Ú
+__init__Gtorchvision.models.maxvit.RelativePositionalMultiHeadAttention.__init__"
+None*ã
+selfÄ
+>torchvision.models.maxvit.RelativePositionalMultiHeadAttention">torchvision.models.maxvit.RelativePositionalMultiHeadAttention**
+feat_dim
+builtins.int"builtins.int**
+head_dim
+builtins.int"builtins.int*-
+max_seq_len
+builtins.int"builtins.int*í
+get_relative_positional_bias[torchvision.models.maxvit.RelativePositionalMultiHeadAttention.get_relative_positional_bias"
+Any*ã
+selfÄ
+>torchvision.models.maxvit.RelativePositionalMultiHeadAttention">torchvision.models.maxvit.RelativePositionalMultiHeadAttention*¯
+forwardFtorchvision.models.maxvit.RelativePositionalMultiHeadAttention.forward"
+Any*ã
+selfÄ
+>torchvision.models.maxvit.RelativePositionalMultiHeadAttention">torchvision.models.maxvit.RelativePositionalMultiHeadAttention*
+x
+AnyrZ
+n_headsFtorchvision.models.maxvit.RelativePositionalMultiHeadAttention.n_heads
+Anyr\
+head_dimGtorchvision.models.maxvit.RelativePositionalMultiHeadAttention.head_dim
+AnyrT
+sizeCtorchvision.models.maxvit.RelativePositionalMultiHeadAttention.size
+Anyrb
+max_seq_lenJtorchvision.models.maxvit.RelativePositionalMultiHeadAttention.max_seq_len
+AnyrX
+to_qkvEtorchvision.models.maxvit.RelativePositionalMultiHeadAttention.to_qkv
+Anyrd
+scale_factorKtorchvision.models.maxvit.RelativePositionalMultiHeadAttention.scale_factor
+AnyrV
+mergeDtorchvision.models.maxvit.RelativePositionalMultiHeadAttention.merge
+AnyrÑ
+relative_position_bias_table[torchvision.models.maxvit.RelativePositionalMultiHeadAttention.relative_position_bias_table
+AnyÆ
+SwapAxes"torchvision.models.maxvit.SwapAxes"builtins.object*ﬂ
+__init__+torchvision.models.maxvit.SwapAxes.__init__"
+None*R
+selfH
+"torchvision.models.maxvit.SwapAxes""torchvision.models.maxvit.SwapAxes*#
+a
+builtins.int"builtins.int*#
+b
+builtins.int"builtins.int*¢
+forward*torchvision.models.maxvit.SwapAxes.forward"
+Any*R
+selfH
+"torchvision.models.maxvit.SwapAxes""torchvision.models.maxvit.SwapAxes*
+x
+Anyr2
+a$torchvision.models.maxvit.SwapAxes.a
+Anyr2
+b$torchvision.models.maxvit.SwapAxes.b
+AnyŸ
+WindowPartition)torchvision.models.maxvit.WindowPartition"builtins.object*™
+__init__2torchvision.models.maxvit.WindowPartition.__init__"
+None*`
+selfV
+)torchvision.models.maxvit.WindowPartition")torchvision.models.maxvit.WindowPartition*‹
+forward1torchvision.models.maxvit.WindowPartition.forward"
+Any*`
+selfV
+)torchvision.models.maxvit.WindowPartition")torchvision.models.maxvit.WindowPartition*
+x
+Any*#
+p
+builtins.int"builtins.int…
+WindowDepartition+torchvision.models.maxvit.WindowDepartition"builtins.object*∞
+__init__4torchvision.models.maxvit.WindowDepartition.__init__"
+None*d
+selfZ
++torchvision.models.maxvit.WindowDepartition"+torchvision.models.maxvit.WindowDepartition*¬
+forward3torchvision.models.maxvit.WindowDepartition.forward"
+Any*d
+selfZ
++torchvision.models.maxvit.WindowDepartition"+torchvision.models.maxvit.WindowDepartition*
+x
+Any*#
+p
+builtins.int"builtins.int*.
+h_partitions
+builtins.int"builtins.int*.
+w_partitions
+builtins.int"builtins.int„
+PartitionAttentionLayer1torchvision.models.maxvit.PartitionAttentionLayer"builtins.object*á
+__init__:torchvision.models.maxvit.PartitionAttentionLayer.__init__"
+None*p
+selff
+1torchvision.models.maxvit.PartitionAttentionLayer"1torchvision.models.maxvit.PartitionAttentionLayer*-
+in_channels
+builtins.int"builtins.int**
+head_dim
+builtins.int"builtins.int*0
+partition_size
+builtins.int"builtins.int*0
+partition_type
+builtins.str"builtins.str*o
+	grid_size`
+ Tuple[builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int*+
+	mlp_ratio
+builtins.int"builtins.int*a
+activation_layerK
+CallableType[builtins.function]&
+builtins.function"builtins.function*[
+
+norm_layerK
+CallableType[builtins.function]&
+builtins.function"builtins.function*7
+attention_dropout 
+builtins.float"builtins.float*1
+mlp_dropout 
+builtins.float"builtins.float*:
+p_stochastic_dropout 
+builtins.float"builtins.float*œ
+forward9torchvision.models.maxvit.PartitionAttentionLayer.forward"
+Any*p
+selff
+1torchvision.models.maxvit.PartitionAttentionLayer"1torchvision.models.maxvit.PartitionAttentionLayer*
+x
+AnyrM
+n_heads9torchvision.models.maxvit.PartitionAttentionLayer.n_heads
+AnyrO
+head_dim:torchvision.models.maxvit.PartitionAttentionLayer.head_dim
+AnyrW
+n_partitions>torchvision.models.maxvit.PartitionAttentionLayer.n_partitions
+Anyr[
+partition_type@torchvision.models.maxvit.PartitionAttentionLayer.partition_type
+AnyrQ
+	grid_size;torchvision.models.maxvit.PartitionAttentionLayer.grid_size
+AnyrW
+partition_op>torchvision.models.maxvit.PartitionAttentionLayer.partition_op
+Anyr[
+departition_op@torchvision.models.maxvit.PartitionAttentionLayer.departition_op
+Anyr[
+partition_swap@torchvision.models.maxvit.PartitionAttentionLayer.partition_swap
+Anyr_
+departition_swapBtorchvision.models.maxvit.PartitionAttentionLayer.departition_swap
+AnyrS
+
+attn_layer<torchvision.models.maxvit.PartitionAttentionLayer.attn_layer
+AnyrQ
+	mlp_layer;torchvision.models.maxvit.PartitionAttentionLayer.mlp_layer
+Anyrc
+stochastic_dropoutDtorchvision.models.maxvit.PartitionAttentionLayer.stochastic_dropout
+AnyÆ
+
+MaxVitLayer%torchvision.models.maxvit.MaxVitLayer"builtins.object*˜
+__init__.torchvision.models.maxvit.MaxVitLayer.__init__"
+None*X
+selfN
+%torchvision.models.maxvit.MaxVitLayer"%torchvision.models.maxvit.MaxVitLayer*-
+in_channels
+builtins.int"builtins.int*.
+out_channels
+builtins.int"builtins.int*3
+squeeze_ratio 
+builtins.float"builtins.float*5
+expansion_ratio 
+builtins.float"builtins.float*(
+stride
+builtins.int"builtins.int*[
+
+norm_layerK
+CallableType[builtins.function]&
+builtins.function"builtins.function*a
+activation_layerK
+CallableType[builtins.function]&
+builtins.function"builtins.function**
+head_dim
+builtins.int"builtins.int*+
+	mlp_ratio
+builtins.int"builtins.int*1
+mlp_dropout 
+builtins.float"builtins.float*7
+attention_dropout 
+builtins.float"builtins.float*:
+p_stochastic_dropout 
+builtins.float"builtins.float*0
+partition_size
+builtins.int"builtins.int*o
+	grid_size`
+ Tuple[builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int*´
+forward-torchvision.models.maxvit.MaxVitLayer.forward"
+Any*X
+selfN
+%torchvision.models.maxvit.MaxVitLayer"%torchvision.models.maxvit.MaxVitLayer*
+x
+Anyr?
+layers,torchvision.models.maxvit.MaxVitLayer.layers
+Any•
+MaxVitBlock%torchvision.models.maxvit.MaxVitBlock"builtins.object*ß
+__init__.torchvision.models.maxvit.MaxVitBlock.__init__"
+None*X
+selfN
+%torchvision.models.maxvit.MaxVitBlock"%torchvision.models.maxvit.MaxVitBlock*-
+in_channels
+builtins.int"builtins.int*.
+out_channels
+builtins.int"builtins.int*3
+squeeze_ratio 
+builtins.float"builtins.float*5
+expansion_ratio 
+builtins.float"builtins.float*[
+
+norm_layerK
+CallableType[builtins.function]&
+builtins.function"builtins.function*a
+activation_layerK
+CallableType[builtins.function]&
+builtins.function"builtins.function**
+head_dim
+builtins.int"builtins.int*+
+	mlp_ratio
+builtins.int"builtins.int*1
+mlp_dropout 
+builtins.float"builtins.float*7
+attention_dropout 
+builtins.float"builtins.float*0
+partition_size
+builtins.int"builtins.int*u
+input_grid_size`
+ Tuple[builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int**
+n_layers
+builtins.int"builtins.int*b
+p_stochasticP
+builtins.list[builtins.float] 
+builtins.float"builtins.float"builtins.list*´
+forward-torchvision.models.maxvit.MaxVitBlock.forward"
+Any*X
+selfN
+%torchvision.models.maxvit.MaxVitBlock"%torchvision.models.maxvit.MaxVitBlock*
+x
+Anyr?
+layers,torchvision.models.maxvit.MaxVitBlock.layers
+AnyrE
+	grid_size/torchvision.models.maxvit.MaxVitBlock.grid_size
+Any≠
+MaxVit torchvision.models.maxvit.MaxVit"builtins.object*Ã	
+__init__)torchvision.models.maxvit.MaxVit.__init__"
+None*N
+selfD
+ torchvision.models.maxvit.MaxVit" torchvision.models.maxvit.MaxVit*p
+
+input_size`
+ Tuple[builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int*/
+stem_channels
+builtins.int"builtins.int*0
+partition_size
+builtins.int"builtins.int*^
+block_channelsJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*\
+block_layersJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list**
+head_dim
+builtins.int"builtins.int*;
+stochastic_depth_prob 
+builtins.float"builtins.float*ô
+
+norm_layerÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *c
+activation_layerK
+CallableType[builtins.function]&
+builtins.function"builtins.function *5
+squeeze_ratio 
+builtins.float"builtins.float *7
+expansion_ratio 
+builtins.float"builtins.float *-
+	mlp_ratio
+builtins.int"builtins.int *3
+mlp_dropout 
+builtins.float"builtins.float *9
+attention_dropout 
+builtins.float"builtins.float */
+num_classes
+builtins.int"builtins.int *ú
+forward(torchvision.models.maxvit.MaxVit.forward"
+Any*N
+selfD
+ torchvision.models.maxvit.MaxVit" torchvision.models.maxvit.MaxVit*
+x
+Anyr6
+stem%torchvision.models.maxvit.MaxVit.stem
+AnyrJ
+partition_size/torchvision.models.maxvit.MaxVit.partition_size
+Anyr:
+blocks'torchvision.models.maxvit.MaxVit.blocks
+AnyrB
+
+classifier+torchvision.models.maxvit.MaxVit.classifier
+AnyÅ
+MaxVit_T_Weights*torchvision.models.maxvit.MaxVit_T_Weights"#torchvision.models._api.WeightsEnumHrR
+IMAGENET1K_V18torchvision.models.maxvit.MaxVit_T_Weights.IMAGENET1K_V1
+AnyrF
+DEFAULT2torchvision.models.maxvit.MaxVit_T_Weights.DEFAULT
+AnyÜ
+Weightstorchvision.models._api.Weights"builtins.object*°
+__eq__&torchvision.models._api.Weights.__eq__"
+builtins.bool"builtins.bool*DB
+torchvision.models._api.Weights"torchvision.models._api.Weights*	
+Any* 
+__init__(torchvision.models._api.Weights.__init__"
+None*L
+selfB
+torchvision.models._api.Weights"torchvision.models._api.Weights*
+url
+Any*
+
+transforms
+Any*
+meta
+AnyrH
+url#torchvision.models._api.Weights.url
+builtins.str"builtins.strrÖ
+
+transforms*torchvision.models._api.Weights.transformsK
+CallableType[builtins.function]&
+builtins.function"builtins.functionrÖ
+meta$torchvision.models._api.Weights.metaW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dictµ
+WeightsEnum#torchvision.models._api.WeightsEnum"	enum.Enum*Î
+verify*torchvision.models._api.WeightsEnum.verify"
+Any*à
+cls
+)Type[torchvision.models._api.WeightsEnum]J
+#torchvision.models._api.WeightsEnum"#torchvision.models._api.WeightsEnum"type*
+obj
+Any0:classmethodp*ù
+get_state_dict2torchvision.models._api.WeightsEnum.get_state_dict"Y
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping*T
+selfJ
+#torchvision.models._api.WeightsEnum"#torchvision.models._api.WeightsEnum*
+args
+Any*
+kwargs
+Any*F
+url'torchvision.models._api.WeightsEnum.url*
+self0:property`*T
+
+transforms.torchvision.models._api.WeightsEnum.transforms*
+self0:property`*H
+meta(torchvision.models._api.WeightsEnum.meta*
+self0:property`HÌ
+alexnet"torchvision.models.alexnet.alexnet"H
+"torchvision.models.alexnet.AlexNet""torchvision.models.alexnet.AlexNet*Æ
+weightsû
+6Union[torchvision.models.alexnet.AlexNet_Weights,None]X
+*torchvision.models.alexnet.AlexNet_Weights"*torchvision.models.alexnet.AlexNet_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+Anyì
+convnext_tiny)torchvision.models.convnext.convnext_tiny"L
+$torchvision.models.convnext.ConvNeXt"$torchvision.models.convnext.ConvNeXt*√
+weights≥
+=Union[torchvision.models.convnext.ConvNeXt_Tiny_Weights,None]f
+1torchvision.models.convnext.ConvNeXt_Tiny_Weights"1torchvision.models.convnext.ConvNeXt_Tiny_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+Anyò
+convnext_small*torchvision.models.convnext.convnext_small"L
+$torchvision.models.convnext.ConvNeXt"$torchvision.models.convnext.ConvNeXt*∆
+weights∂
+>Union[torchvision.models.convnext.ConvNeXt_Small_Weights,None]h
+2torchvision.models.convnext.ConvNeXt_Small_Weights"2torchvision.models.convnext.ConvNeXt_Small_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+Anyì
+convnext_base)torchvision.models.convnext.convnext_base"L
+$torchvision.models.convnext.ConvNeXt"$torchvision.models.convnext.ConvNeXt*√
+weights≥
+=Union[torchvision.models.convnext.ConvNeXt_Base_Weights,None]f
+1torchvision.models.convnext.ConvNeXt_Base_Weights"1torchvision.models.convnext.ConvNeXt_Base_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+Anyò
+convnext_large*torchvision.models.convnext.convnext_large"L
+$torchvision.models.convnext.ConvNeXt"$torchvision.models.convnext.ConvNeXt*∆
+weights∂
+>Union[torchvision.models.convnext.ConvNeXt_Large_Weights,None]h
+2torchvision.models.convnext.ConvNeXt_Large_Weights"2torchvision.models.convnext.ConvNeXt_Large_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+Anyâ
+densenet121'torchvision.models.densenet.densenet121"L
+$torchvision.models.densenet.DenseNet"$torchvision.models.densenet.DenseNet*Ω
+weights≠
+;Union[torchvision.models.densenet.DenseNet121_Weights,None]b
+/torchvision.models.densenet.DenseNet121_Weights"/torchvision.models.densenet.DenseNet121_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+Anyâ
+densenet161'torchvision.models.densenet.densenet161"L
+$torchvision.models.densenet.DenseNet"$torchvision.models.densenet.DenseNet*Ω
+weights≠
+;Union[torchvision.models.densenet.DenseNet161_Weights,None]b
+/torchvision.models.densenet.DenseNet161_Weights"/torchvision.models.densenet.DenseNet161_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+Anyâ
+densenet169'torchvision.models.densenet.densenet169"L
+$torchvision.models.densenet.DenseNet"$torchvision.models.densenet.DenseNet*Ω
+weights≠
+;Union[torchvision.models.densenet.DenseNet169_Weights,None]b
+/torchvision.models.densenet.DenseNet169_Weights"/torchvision.models.densenet.DenseNet169_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+Anyâ
+densenet201'torchvision.models.densenet.densenet201"L
+$torchvision.models.densenet.DenseNet"$torchvision.models.densenet.DenseNet*Ω
+weights≠
+;Union[torchvision.models.densenet.DenseNet201_Weights,None]b
+/torchvision.models.densenet.DenseNet201_Weights"/torchvision.models.densenet.DenseNet201_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+AnyΩ
+efficientnet_b0/torchvision.models.efficientnet.efficientnet_b0"\
+,torchvision.models.efficientnet.EfficientNet",torchvision.models.efficientnet.EfficientNet*’
+weights≈
+CUnion[torchvision.models.efficientnet.EfficientNet_B0_Weights,None]r
+7torchvision.models.efficientnet.EfficientNet_B0_Weights"7torchvision.models.efficientnet.EfficientNet_B0_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+AnyΩ
+efficientnet_b1/torchvision.models.efficientnet.efficientnet_b1"\
+,torchvision.models.efficientnet.EfficientNet",torchvision.models.efficientnet.EfficientNet*’
+weights≈
+CUnion[torchvision.models.efficientnet.EfficientNet_B1_Weights,None]r
+7torchvision.models.efficientnet.EfficientNet_B1_Weights"7torchvision.models.efficientnet.EfficientNet_B1_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+AnyΩ
+efficientnet_b2/torchvision.models.efficientnet.efficientnet_b2"\
+,torchvision.models.efficientnet.EfficientNet",torchvision.models.efficientnet.EfficientNet*’
+weights≈
+CUnion[torchvision.models.efficientnet.EfficientNet_B2_Weights,None]r
+7torchvision.models.efficientnet.EfficientNet_B2_Weights"7torchvision.models.efficientnet.EfficientNet_B2_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+AnyΩ
+efficientnet_b3/torchvision.models.efficientnet.efficientnet_b3"\
+,torchvision.models.efficientnet.EfficientNet",torchvision.models.efficientnet.EfficientNet*’
+weights≈
+CUnion[torchvision.models.efficientnet.EfficientNet_B3_Weights,None]r
+7torchvision.models.efficientnet.EfficientNet_B3_Weights"7torchvision.models.efficientnet.EfficientNet_B3_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+AnyΩ
+efficientnet_b4/torchvision.models.efficientnet.efficientnet_b4"\
+,torchvision.models.efficientnet.EfficientNet",torchvision.models.efficientnet.EfficientNet*’
+weights≈
+CUnion[torchvision.models.efficientnet.EfficientNet_B4_Weights,None]r
+7torchvision.models.efficientnet.EfficientNet_B4_Weights"7torchvision.models.efficientnet.EfficientNet_B4_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+AnyΩ
+efficientnet_b5/torchvision.models.efficientnet.efficientnet_b5"\
+,torchvision.models.efficientnet.EfficientNet",torchvision.models.efficientnet.EfficientNet*’
+weights≈
+CUnion[torchvision.models.efficientnet.EfficientNet_B5_Weights,None]r
+7torchvision.models.efficientnet.EfficientNet_B5_Weights"7torchvision.models.efficientnet.EfficientNet_B5_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+AnyΩ
+efficientnet_b6/torchvision.models.efficientnet.efficientnet_b6"\
+,torchvision.models.efficientnet.EfficientNet",torchvision.models.efficientnet.EfficientNet*’
+weights≈
+CUnion[torchvision.models.efficientnet.EfficientNet_B6_Weights,None]r
+7torchvision.models.efficientnet.EfficientNet_B6_Weights"7torchvision.models.efficientnet.EfficientNet_B6_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+AnyΩ
+efficientnet_b7/torchvision.models.efficientnet.efficientnet_b7"\
+,torchvision.models.efficientnet.EfficientNet",torchvision.models.efficientnet.EfficientNet*’
+weights≈
+CUnion[torchvision.models.efficientnet.EfficientNet_B7_Weights,None]r
+7torchvision.models.efficientnet.EfficientNet_B7_Weights"7torchvision.models.efficientnet.EfficientNet_B7_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+Any«
+efficientnet_v2_s1torchvision.models.efficientnet.efficientnet_v2_s"\
+,torchvision.models.efficientnet.EfficientNet",torchvision.models.efficientnet.EfficientNet*€
+weightsÀ
+EUnion[torchvision.models.efficientnet.EfficientNet_V2_S_Weights,None]v
+9torchvision.models.efficientnet.EfficientNet_V2_S_Weights"9torchvision.models.efficientnet.EfficientNet_V2_S_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+Any«
+efficientnet_v2_m1torchvision.models.efficientnet.efficientnet_v2_m"\
+,torchvision.models.efficientnet.EfficientNet",torchvision.models.efficientnet.EfficientNet*€
+weightsÀ
+EUnion[torchvision.models.efficientnet.EfficientNet_V2_M_Weights,None]v
+9torchvision.models.efficientnet.EfficientNet_V2_M_Weights"9torchvision.models.efficientnet.EfficientNet_V2_M_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+Any«
+efficientnet_v2_l1torchvision.models.efficientnet.efficientnet_v2_l"\
+,torchvision.models.efficientnet.EfficientNet",torchvision.models.efficientnet.EfficientNet*€
+weightsÀ
+EUnion[torchvision.models.efficientnet.EfficientNet_V2_L_Weights,None]v
+9torchvision.models.efficientnet.EfficientNet_V2_L_Weights"9torchvision.models.efficientnet.EfficientNet_V2_L_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+Anyá
+	googlenet&torchvision.models.googlenet.googlenet"P
+&torchvision.models.googlenet.GoogLeNet"&torchvision.models.googlenet.GoogLeNet*∫
+weights™
+:Union[torchvision.models.googlenet.GoogLeNet_Weights,None]`
+.torchvision.models.googlenet.GoogLeNet_Weights".torchvision.models.googlenet.GoogLeNet_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+Anyò
+inception_v3)torchvision.models.inception.inception_v3"R
+'torchvision.models.inception.Inception3"'torchvision.models.inception.Inception3*√
+weights≥
+=Union[torchvision.models.inception.Inception_V3_Weights,None]f
+1torchvision.models.inception.Inception_V3_Weights"1torchvision.models.inception.Inception_V3_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+Any¸
+
+mnasnet0_5%torchvision.models.mnasnet.mnasnet0_5"H
+"torchvision.models.mnasnet.MNASNet""torchvision.models.mnasnet.MNASNet*∑
+weightsß
+9Union[torchvision.models.mnasnet.MNASNet0_5_Weights,None]^
+-torchvision.models.mnasnet.MNASNet0_5_Weights"-torchvision.models.mnasnet.MNASNet0_5_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+AnyÅ
+mnasnet0_75&torchvision.models.mnasnet.mnasnet0_75"H
+"torchvision.models.mnasnet.MNASNet""torchvision.models.mnasnet.MNASNet*∫
+weights™
+:Union[torchvision.models.mnasnet.MNASNet0_75_Weights,None]`
+.torchvision.models.mnasnet.MNASNet0_75_Weights".torchvision.models.mnasnet.MNASNet0_75_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+Any¸
+
+mnasnet1_0%torchvision.models.mnasnet.mnasnet1_0"H
+"torchvision.models.mnasnet.MNASNet""torchvision.models.mnasnet.MNASNet*∑
+weightsß
+9Union[torchvision.models.mnasnet.MNASNet1_0_Weights,None]^
+-torchvision.models.mnasnet.MNASNet1_0_Weights"-torchvision.models.mnasnet.MNASNet1_0_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+Any¸
+
+mnasnet1_3%torchvision.models.mnasnet.mnasnet1_3"H
+"torchvision.models.mnasnet.MNASNet""torchvision.models.mnasnet.MNASNet*∑
+weightsß
+9Union[torchvision.models.mnasnet.MNASNet1_3_Weights,None]^
+-torchvision.models.mnasnet.MNASNet1_3_Weights"-torchvision.models.mnasnet.MNASNet1_3_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+Any¶
+mobilenet_v2+torchvision.models.mobilenetv2.mobilenet_v2"X
+*torchvision.models.mobilenetv2.MobileNetV2"*torchvision.models.mobilenetv2.MobileNetV2*…
+weightsπ
+?Union[torchvision.models.mobilenetv2.MobileNet_V2_Weights,None]j
+3torchvision.models.mobilenetv2.MobileNet_V2_Weights"3torchvision.models.mobilenetv2.MobileNet_V2_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+Anyƒ
+mobilenet_v3_large1torchvision.models.mobilenetv3.mobilenet_v3_large"X
+*torchvision.models.mobilenetv3.MobileNetV3"*torchvision.models.mobilenetv3.MobileNetV3*€
+weightsÀ
+EUnion[torchvision.models.mobilenetv3.MobileNet_V3_Large_Weights,None]v
+9torchvision.models.mobilenetv3.MobileNet_V3_Large_Weights"9torchvision.models.mobilenetv3.MobileNet_V3_Large_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+Anyƒ
+mobilenet_v3_small1torchvision.models.mobilenetv3.mobilenet_v3_small"X
+*torchvision.models.mobilenetv3.MobileNetV3"*torchvision.models.mobilenetv3.MobileNetV3*€
+weightsÀ
+EUnion[torchvision.models.mobilenetv3.MobileNet_V3_Small_Weights,None]v
+9torchvision.models.mobilenetv3.MobileNet_V3_Small_Weights"9torchvision.models.mobilenetv3.MobileNet_V3_Small_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+Anyà
+regnet_y_400mf(torchvision.models.regnet.regnet_y_400mf"D
+ torchvision.models.regnet.RegNet" torchvision.models.regnet.RegNet*¿
+weights∞
+<Union[torchvision.models.regnet.RegNet_Y_400MF_Weights,None]d
+0torchvision.models.regnet.RegNet_Y_400MF_Weights"0torchvision.models.regnet.RegNet_Y_400MF_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+Anyà
+regnet_y_800mf(torchvision.models.regnet.regnet_y_800mf"D
+ torchvision.models.regnet.RegNet" torchvision.models.regnet.RegNet*¿
+weights∞
+<Union[torchvision.models.regnet.RegNet_Y_800MF_Weights,None]d
+0torchvision.models.regnet.RegNet_Y_800MF_Weights"0torchvision.models.regnet.RegNet_Y_800MF_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+Anyà
+regnet_y_1_6gf(torchvision.models.regnet.regnet_y_1_6gf"D
+ torchvision.models.regnet.RegNet" torchvision.models.regnet.RegNet*¿
+weights∞
+<Union[torchvision.models.regnet.RegNet_Y_1_6GF_Weights,None]d
+0torchvision.models.regnet.RegNet_Y_1_6GF_Weights"0torchvision.models.regnet.RegNet_Y_1_6GF_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+Anyà
+regnet_y_3_2gf(torchvision.models.regnet.regnet_y_3_2gf"D
+ torchvision.models.regnet.RegNet" torchvision.models.regnet.RegNet*¿
+weights∞
+<Union[torchvision.models.regnet.RegNet_Y_3_2GF_Weights,None]d
+0torchvision.models.regnet.RegNet_Y_3_2GF_Weights"0torchvision.models.regnet.RegNet_Y_3_2GF_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+Any˛
+regnet_y_8gf&torchvision.models.regnet.regnet_y_8gf"D
+ torchvision.models.regnet.RegNet" torchvision.models.regnet.RegNet*∫
+weights™
+:Union[torchvision.models.regnet.RegNet_Y_8GF_Weights,None]`
+.torchvision.models.regnet.RegNet_Y_8GF_Weights".torchvision.models.regnet.RegNet_Y_8GF_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+AnyÉ
+regnet_y_16gf'torchvision.models.regnet.regnet_y_16gf"D
+ torchvision.models.regnet.RegNet" torchvision.models.regnet.RegNet*Ω
+weights≠
+;Union[torchvision.models.regnet.RegNet_Y_16GF_Weights,None]b
+/torchvision.models.regnet.RegNet_Y_16GF_Weights"/torchvision.models.regnet.RegNet_Y_16GF_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+AnyÉ
+regnet_y_32gf'torchvision.models.regnet.regnet_y_32gf"D
+ torchvision.models.regnet.RegNet" torchvision.models.regnet.RegNet*Ω
+weights≠
+;Union[torchvision.models.regnet.RegNet_Y_32GF_Weights,None]b
+/torchvision.models.regnet.RegNet_Y_32GF_Weights"/torchvision.models.regnet.RegNet_Y_32GF_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+Anyà
+regnet_y_128gf(torchvision.models.regnet.regnet_y_128gf"D
+ torchvision.models.regnet.RegNet" torchvision.models.regnet.RegNet*¿
+weights∞
+<Union[torchvision.models.regnet.RegNet_Y_128GF_Weights,None]d
+0torchvision.models.regnet.RegNet_Y_128GF_Weights"0torchvision.models.regnet.RegNet_Y_128GF_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+Anyà
+regnet_x_400mf(torchvision.models.regnet.regnet_x_400mf"D
+ torchvision.models.regnet.RegNet" torchvision.models.regnet.RegNet*¿
+weights∞
+<Union[torchvision.models.regnet.RegNet_X_400MF_Weights,None]d
+0torchvision.models.regnet.RegNet_X_400MF_Weights"0torchvision.models.regnet.RegNet_X_400MF_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+Anyà
+regnet_x_800mf(torchvision.models.regnet.regnet_x_800mf"D
+ torchvision.models.regnet.RegNet" torchvision.models.regnet.RegNet*¿
+weights∞
+<Union[torchvision.models.regnet.RegNet_X_800MF_Weights,None]d
+0torchvision.models.regnet.RegNet_X_800MF_Weights"0torchvision.models.regnet.RegNet_X_800MF_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+Anyà
+regnet_x_1_6gf(torchvision.models.regnet.regnet_x_1_6gf"D
+ torchvision.models.regnet.RegNet" torchvision.models.regnet.RegNet*¿
+weights∞
+<Union[torchvision.models.regnet.RegNet_X_1_6GF_Weights,None]d
+0torchvision.models.regnet.RegNet_X_1_6GF_Weights"0torchvision.models.regnet.RegNet_X_1_6GF_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+Anyà
+regnet_x_3_2gf(torchvision.models.regnet.regnet_x_3_2gf"D
+ torchvision.models.regnet.RegNet" torchvision.models.regnet.RegNet*¿
+weights∞
+<Union[torchvision.models.regnet.RegNet_X_3_2GF_Weights,None]d
+0torchvision.models.regnet.RegNet_X_3_2GF_Weights"0torchvision.models.regnet.RegNet_X_3_2GF_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+Any˛
+regnet_x_8gf&torchvision.models.regnet.regnet_x_8gf"D
+ torchvision.models.regnet.RegNet" torchvision.models.regnet.RegNet*∫
+weights™
+:Union[torchvision.models.regnet.RegNet_X_8GF_Weights,None]`
+.torchvision.models.regnet.RegNet_X_8GF_Weights".torchvision.models.regnet.RegNet_X_8GF_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+AnyÉ
+regnet_x_16gf'torchvision.models.regnet.regnet_x_16gf"D
+ torchvision.models.regnet.RegNet" torchvision.models.regnet.RegNet*Ω
+weights≠
+;Union[torchvision.models.regnet.RegNet_X_16GF_Weights,None]b
+/torchvision.models.regnet.RegNet_X_16GF_Weights"/torchvision.models.regnet.RegNet_X_16GF_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+AnyÉ
+regnet_x_32gf'torchvision.models.regnet.regnet_x_32gf"D
+ torchvision.models.regnet.RegNet" torchvision.models.regnet.RegNet*Ω
+weights≠
+;Union[torchvision.models.regnet.RegNet_X_32GF_Weights,None]b
+/torchvision.models.regnet.RegNet_X_32GF_Weights"/torchvision.models.regnet.RegNet_X_32GF_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+AnyÍ
+resnet18"torchvision.models.resnet.resnet18"D
+ torchvision.models.resnet.ResNet" torchvision.models.resnet.ResNet*Æ
+weightsû
+6Union[torchvision.models.resnet.ResNet18_Weights,None]X
+*torchvision.models.resnet.ResNet18_Weights"*torchvision.models.resnet.ResNet18_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+AnyÍ
+resnet34"torchvision.models.resnet.resnet34"D
+ torchvision.models.resnet.ResNet" torchvision.models.resnet.ResNet*Æ
+weightsû
+6Union[torchvision.models.resnet.ResNet34_Weights,None]X
+*torchvision.models.resnet.ResNet34_Weights"*torchvision.models.resnet.ResNet34_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+AnyÍ
+resnet50"torchvision.models.resnet.resnet50"D
+ torchvision.models.resnet.ResNet" torchvision.models.resnet.ResNet*Æ
+weightsû
+6Union[torchvision.models.resnet.ResNet50_Weights,None]X
+*torchvision.models.resnet.ResNet50_Weights"*torchvision.models.resnet.ResNet50_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+AnyÔ
+	resnet101#torchvision.models.resnet.resnet101"D
+ torchvision.models.resnet.ResNet" torchvision.models.resnet.ResNet*±
+weights°
+7Union[torchvision.models.resnet.ResNet101_Weights,None]Z
++torchvision.models.resnet.ResNet101_Weights"+torchvision.models.resnet.ResNet101_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+AnyÔ
+	resnet152#torchvision.models.resnet.resnet152"D
+ torchvision.models.resnet.ResNet" torchvision.models.resnet.ResNet*±
+weights°
+7Union[torchvision.models.resnet.ResNet152_Weights,None]Z
++torchvision.models.resnet.ResNet152_Weights"+torchvision.models.resnet.ResNet152_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+Anyç
+resnext50_32x4d)torchvision.models.resnet.resnext50_32x4d"D
+ torchvision.models.resnet.ResNet" torchvision.models.resnet.ResNet*√
+weights≥
+=Union[torchvision.models.resnet.ResNeXt50_32X4D_Weights,None]f
+1torchvision.models.resnet.ResNeXt50_32X4D_Weights"1torchvision.models.resnet.ResNeXt50_32X4D_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+Anyí
+resnext101_32x8d*torchvision.models.resnet.resnext101_32x8d"D
+ torchvision.models.resnet.ResNet" torchvision.models.resnet.ResNet*∆
+weights∂
+>Union[torchvision.models.resnet.ResNeXt101_32X8D_Weights,None]h
+2torchvision.models.resnet.ResNeXt101_32X8D_Weights"2torchvision.models.resnet.ResNeXt101_32X8D_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+Anyí
+resnext101_64x4d*torchvision.models.resnet.resnext101_64x4d"D
+ torchvision.models.resnet.ResNet" torchvision.models.resnet.ResNet*∆
+weights∂
+>Union[torchvision.models.resnet.ResNeXt101_64X4D_Weights,None]h
+2torchvision.models.resnet.ResNeXt101_64X4D_Weights"2torchvision.models.resnet.ResNeXt101_64X4D_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+Anyç
+wide_resnet50_2)torchvision.models.resnet.wide_resnet50_2"D
+ torchvision.models.resnet.ResNet" torchvision.models.resnet.ResNet*√
+weights≥
+=Union[torchvision.models.resnet.Wide_ResNet50_2_Weights,None]f
+1torchvision.models.resnet.Wide_ResNet50_2_Weights"1torchvision.models.resnet.Wide_ResNet50_2_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+Anyí
+wide_resnet101_2*torchvision.models.resnet.wide_resnet101_2"D
+ torchvision.models.resnet.ResNet" torchvision.models.resnet.ResNet*∆
+weights∂
+>Union[torchvision.models.resnet.Wide_ResNet101_2_Weights,None]h
+2torchvision.models.resnet.Wide_ResNet101_2_Weights"2torchvision.models.resnet.Wide_ResNet101_2_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+AnyÃ
+shufflenet_v2_x0_52torchvision.models.shufflenetv2.shufflenet_v2_x0_5"\
+,torchvision.models.shufflenetv2.ShuffleNetV2",torchvision.models.shufflenetv2.ShuffleNetV2*ﬁ
+weightsŒ
+FUnion[torchvision.models.shufflenetv2.ShuffleNet_V2_X0_5_Weights,None]x
+:torchvision.models.shufflenetv2.ShuffleNet_V2_X0_5_Weights":torchvision.models.shufflenetv2.ShuffleNet_V2_X0_5_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+AnyÃ
+shufflenet_v2_x1_02torchvision.models.shufflenetv2.shufflenet_v2_x1_0"\
+,torchvision.models.shufflenetv2.ShuffleNetV2",torchvision.models.shufflenetv2.ShuffleNetV2*ﬁ
+weightsŒ
+FUnion[torchvision.models.shufflenetv2.ShuffleNet_V2_X1_0_Weights,None]x
+:torchvision.models.shufflenetv2.ShuffleNet_V2_X1_0_Weights":torchvision.models.shufflenetv2.ShuffleNet_V2_X1_0_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+AnyÃ
+shufflenet_v2_x1_52torchvision.models.shufflenetv2.shufflenet_v2_x1_5"\
+,torchvision.models.shufflenetv2.ShuffleNetV2",torchvision.models.shufflenetv2.ShuffleNetV2*ﬁ
+weightsŒ
+FUnion[torchvision.models.shufflenetv2.ShuffleNet_V2_X1_5_Weights,None]x
+:torchvision.models.shufflenetv2.ShuffleNet_V2_X1_5_Weights":torchvision.models.shufflenetv2.ShuffleNet_V2_X1_5_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+AnyÃ
+shufflenet_v2_x2_02torchvision.models.shufflenetv2.shufflenet_v2_x2_0"\
+,torchvision.models.shufflenetv2.ShuffleNetV2",torchvision.models.shufflenetv2.ShuffleNetV2*ﬁ
+weightsŒ
+FUnion[torchvision.models.shufflenetv2.ShuffleNet_V2_X2_0_Weights,None]x
+:torchvision.models.shufflenetv2.ShuffleNet_V2_X2_0_Weights":torchvision.models.shufflenetv2.ShuffleNet_V2_X2_0_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+Any£
+squeezenet1_0+torchvision.models.squeezenet.squeezenet1_0"T
+(torchvision.models.squeezenet.SqueezeNet"(torchvision.models.squeezenet.SqueezeNet*…
+weightsπ
+?Union[torchvision.models.squeezenet.SqueezeNet1_0_Weights,None]j
+3torchvision.models.squeezenet.SqueezeNet1_0_Weights"3torchvision.models.squeezenet.SqueezeNet1_0_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+Any£
+squeezenet1_1+torchvision.models.squeezenet.squeezenet1_1"T
+(torchvision.models.squeezenet.SqueezeNet"(torchvision.models.squeezenet.SqueezeNet*…
+weightsπ
+?Union[torchvision.models.squeezenet.SqueezeNet1_1_Weights,None]j
+3torchvision.models.squeezenet.SqueezeNet1_1_Weights"3torchvision.models.squeezenet.SqueezeNet1_1_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+Any√
+vgg11torchvision.models.vgg.vgg11"8
+torchvision.models.vgg.VGG"torchvision.models.vgg.VGG*ú
+weightså
+0Union[torchvision.models.vgg.VGG11_Weights,None]L
+$torchvision.models.vgg.VGG11_Weights"$torchvision.models.vgg.VGG11_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+Any“
+vgg11_bntorchvision.models.vgg.vgg11_bn"8
+torchvision.models.vgg.VGG"torchvision.models.vgg.VGG*•
+weightsï
+3Union[torchvision.models.vgg.VGG11_BN_Weights,None]R
+'torchvision.models.vgg.VGG11_BN_Weights"'torchvision.models.vgg.VGG11_BN_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+Any√
+vgg13torchvision.models.vgg.vgg13"8
+torchvision.models.vgg.VGG"torchvision.models.vgg.VGG*ú
+weightså
+0Union[torchvision.models.vgg.VGG13_Weights,None]L
+$torchvision.models.vgg.VGG13_Weights"$torchvision.models.vgg.VGG13_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+Any“
+vgg13_bntorchvision.models.vgg.vgg13_bn"8
+torchvision.models.vgg.VGG"torchvision.models.vgg.VGG*•
+weightsï
+3Union[torchvision.models.vgg.VGG13_BN_Weights,None]R
+'torchvision.models.vgg.VGG13_BN_Weights"'torchvision.models.vgg.VGG13_BN_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+Any√
+vgg16torchvision.models.vgg.vgg16"8
+torchvision.models.vgg.VGG"torchvision.models.vgg.VGG*ú
+weightså
+0Union[torchvision.models.vgg.VGG16_Weights,None]L
+$torchvision.models.vgg.VGG16_Weights"$torchvision.models.vgg.VGG16_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+Any“
+vgg16_bntorchvision.models.vgg.vgg16_bn"8
+torchvision.models.vgg.VGG"torchvision.models.vgg.VGG*•
+weightsï
+3Union[torchvision.models.vgg.VGG16_BN_Weights,None]R
+'torchvision.models.vgg.VGG16_BN_Weights"'torchvision.models.vgg.VGG16_BN_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+Any√
+vgg19torchvision.models.vgg.vgg19"8
+torchvision.models.vgg.VGG"torchvision.models.vgg.VGG*ú
+weightså
+0Union[torchvision.models.vgg.VGG19_Weights,None]L
+$torchvision.models.vgg.VGG19_Weights"$torchvision.models.vgg.VGG19_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+Any“
+vgg19_bntorchvision.models.vgg.vgg19_bn"8
+torchvision.models.vgg.VGG"torchvision.models.vgg.VGG*•
+weightsï
+3Union[torchvision.models.vgg.VGG19_BN_Weights,None]R
+'torchvision.models.vgg.VGG19_BN_Weights"'torchvision.models.vgg.VGG19_BN_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+Any»
+vit_b_16.torchvision.models.vision_transformer.vit_b_16"r
+7torchvision.models.vision_transformer.VisionTransformer"7torchvision.models.vision_transformer.VisionTransformer*“
+weights¬
+BUnion[torchvision.models.vision_transformer.ViT_B_16_Weights,None]p
+6torchvision.models.vision_transformer.ViT_B_16_Weights"6torchvision.models.vision_transformer.ViT_B_16_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+Any»
+vit_b_32.torchvision.models.vision_transformer.vit_b_32"r
+7torchvision.models.vision_transformer.VisionTransformer"7torchvision.models.vision_transformer.VisionTransformer*“
+weights¬
+BUnion[torchvision.models.vision_transformer.ViT_B_32_Weights,None]p
+6torchvision.models.vision_transformer.ViT_B_32_Weights"6torchvision.models.vision_transformer.ViT_B_32_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+Any»
+vit_l_16.torchvision.models.vision_transformer.vit_l_16"r
+7torchvision.models.vision_transformer.VisionTransformer"7torchvision.models.vision_transformer.VisionTransformer*“
+weights¬
+BUnion[torchvision.models.vision_transformer.ViT_L_16_Weights,None]p
+6torchvision.models.vision_transformer.ViT_L_16_Weights"6torchvision.models.vision_transformer.ViT_L_16_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+Any»
+vit_l_32.torchvision.models.vision_transformer.vit_l_32"r
+7torchvision.models.vision_transformer.VisionTransformer"7torchvision.models.vision_transformer.VisionTransformer*“
+weights¬
+BUnion[torchvision.models.vision_transformer.ViT_L_32_Weights,None]p
+6torchvision.models.vision_transformer.ViT_L_32_Weights"6torchvision.models.vision_transformer.ViT_L_32_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+Any»
+vit_h_14.torchvision.models.vision_transformer.vit_h_14"r
+7torchvision.models.vision_transformer.VisionTransformer"7torchvision.models.vision_transformer.VisionTransformer*“
+weights¬
+BUnion[torchvision.models.vision_transformer.ViT_H_14_Weights,None]p
+6torchvision.models.vision_transformer.ViT_H_14_Weights"6torchvision.models.vision_transformer.ViT_H_14_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+AnyÆ
+swin_t*torchvision.models.swin_transformer.swin_t"j
+3torchvision.models.swin_transformer.SwinTransformer"3torchvision.models.swin_transformer.SwinTransformer*∆
+weights∂
+>Union[torchvision.models.swin_transformer.Swin_T_Weights,None]h
+2torchvision.models.swin_transformer.Swin_T_Weights"2torchvision.models.swin_transformer.Swin_T_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+AnyÆ
+swin_s*torchvision.models.swin_transformer.swin_s"j
+3torchvision.models.swin_transformer.SwinTransformer"3torchvision.models.swin_transformer.SwinTransformer*∆
+weights∂
+>Union[torchvision.models.swin_transformer.Swin_S_Weights,None]h
+2torchvision.models.swin_transformer.Swin_S_Weights"2torchvision.models.swin_transformer.Swin_S_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+AnyÆ
+swin_b*torchvision.models.swin_transformer.swin_b"j
+3torchvision.models.swin_transformer.SwinTransformer"3torchvision.models.swin_transformer.SwinTransformer*∆
+weights∂
+>Union[torchvision.models.swin_transformer.Swin_B_Weights,None]h
+2torchvision.models.swin_transformer.Swin_B_Weights"2torchvision.models.swin_transformer.Swin_B_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+AnyΩ
+	swin_v2_t-torchvision.models.swin_transformer.swin_v2_t"j
+3torchvision.models.swin_transformer.SwinTransformer"3torchvision.models.swin_transformer.SwinTransformer*œ
+weightsø
+AUnion[torchvision.models.swin_transformer.Swin_V2_T_Weights,None]n
+5torchvision.models.swin_transformer.Swin_V2_T_Weights"5torchvision.models.swin_transformer.Swin_V2_T_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+AnyΩ
+	swin_v2_s-torchvision.models.swin_transformer.swin_v2_s"j
+3torchvision.models.swin_transformer.SwinTransformer"3torchvision.models.swin_transformer.SwinTransformer*œ
+weightsø
+AUnion[torchvision.models.swin_transformer.Swin_V2_S_Weights,None]n
+5torchvision.models.swin_transformer.Swin_V2_S_Weights"5torchvision.models.swin_transformer.Swin_V2_S_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+AnyΩ
+	swin_v2_b-torchvision.models.swin_transformer.swin_v2_b"j
+3torchvision.models.swin_transformer.SwinTransformer"3torchvision.models.swin_transformer.SwinTransformer*œ
+weightsø
+AUnion[torchvision.models.swin_transformer.Swin_V2_B_Weights,None]n
+5torchvision.models.swin_transformer.Swin_V2_B_Weights"5torchvision.models.swin_transformer.Swin_V2_B_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+AnyÍ
+maxvit_t"torchvision.models.maxvit.maxvit_t"D
+ torchvision.models.maxvit.MaxVit" torchvision.models.maxvit.MaxVit*Æ
+weightsû
+6Union[torchvision.models.maxvit.MaxVit_T_Weights,None]X
+*torchvision.models.maxvit.MaxVit_T_Weights"*torchvision.models.maxvit.MaxVit_T_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+Anyt
+	get_model!torchvision.models._api.get_model"
+Any*&
+name
+builtins.str"builtins.str*
+config
+Any≥
+get_model_builder)torchvision.models._api.get_model_builder"K
+CallableType[builtins.function]&
+builtins.function"builtins.function*&
+name
+builtins.str"builtins.strÔ
+get_model_weights)torchvision.models._api.get_model_weights"
+)Type[torchvision.models._api.WeightsEnum]J
+#torchvision.models._api.WeightsEnum"#torchvision.models._api.WeightsEnum"type*≠
+name¢
+3Union[CallableType[builtins.function],builtins.str]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+builtins.str"builtins.str§
+
+get_weight"torchvision.models._api.get_weight"J
+#torchvision.models._api.WeightsEnum"#torchvision.models._api.WeightsEnum*&
+name
+builtins.str"builtins.strË
+list_models#torchvision.models._api.list_models"J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*^
+moduleP
+Union[types.ModuleType,None]$
+types.ModuleType"types.ModuleType
+None *¬
+include≤
+6Union[typing.Iterable[builtins.str],builtins.str,None]N
+typing.Iterable[builtins.str]
+builtins.str"builtins.str"typing.Iterable
+builtins.str"builtins.str
+None *¬
+exclude≤
+6Union[typing.Iterable[builtins.str],builtins.str,None]N
+typing.Iterable[builtins.str]
+builtins.str"builtins.str"typing.Iterable
+builtins.str"builtins.str
+None *s
+__path__torchvision.models.__path__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*é
+__annotations__"torchvision.models.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*,
+nntorchvision.models.alexnet.nn
+Any*+
+	detectiontorchvision.models.detection *1
+optical_flowtorchvision.models.optical_flow *1
+quantizationtorchvision.models.quantization *1
+segmentationtorchvision.models.segmentation *#
+videotorchvision.models.video 

@@ -1,0 +1,186 @@
+
+&torchvision.models.detection.mask_rcnnÄ
+MaskRCNN/torchvision.models.detection.mask_rcnn.MaskRCNN"3torchvision.models.detection.faster_rcnn.FasterRCNN*ç
+__init__8torchvision.models.detection.mask_rcnn.MaskRCNN.__init__"
+None*l
+selfb
+/torchvision.models.detection.mask_rcnn.MaskRCNN"/torchvision.models.detection.mask_rcnn.MaskRCNN*
+backbone
+Any*9
+num_classes&
+Union[Any,None]
+Any
+None *,
+min_size
+builtins.int"builtins.int *,
+max_size
+builtins.int"builtins.int *8
+
+image_mean&
+Union[Any,None]
+Any
+None *7
+	image_std&
+Union[Any,None]
+Any
+None *B
+rpn_anchor_generator&
+Union[Any,None]
+Any
+None *6
+rpn_head&
+Union[Any,None]
+Any
+None *;
+rpn_pre_nms_top_n_train
+builtins.int"builtins.int *:
+rpn_pre_nms_top_n_test
+builtins.int"builtins.int *<
+rpn_post_nms_top_n_train
+builtins.int"builtins.int *;
+rpn_post_nms_top_n_test
+builtins.int"builtins.int *6
+rpn_nms_thresh 
+builtins.float"builtins.float *9
+rpn_fg_iou_thresh 
+builtins.float"builtins.float *9
+rpn_bg_iou_thresh 
+builtins.float"builtins.float *<
+rpn_batch_size_per_image
+builtins.int"builtins.int *=
+rpn_positive_fraction 
+builtins.float"builtins.float *8
+rpn_score_thresh 
+builtins.float"builtins.float *:
+box_roi_pool&
+Union[Any,None]
+Any
+None *6
+box_head&
+Union[Any,None]
+Any
+None *;
+box_predictor&
+Union[Any,None]
+Any
+None *8
+box_score_thresh 
+builtins.float"builtins.float *6
+box_nms_thresh 
+builtins.float"builtins.float *:
+box_detections_per_img
+builtins.int"builtins.int *9
+box_fg_iou_thresh 
+builtins.float"builtins.float *9
+box_bg_iou_thresh 
+builtins.float"builtins.float *<
+box_batch_size_per_image
+builtins.int"builtins.int *=
+box_positive_fraction 
+builtins.float"builtins.float *>
+bbox_reg_weights&
+Union[Any,None]
+Any
+None *;
+mask_roi_pool&
+Union[Any,None]
+Any
+None *7
+	mask_head&
+Union[Any,None]
+Any
+None *<
+mask_predictor&
+Union[Any,None]
+Any
+None *
+kwargs
+AnyÜ
+MaskRCNNHeads4torchvision.models.detection.mask_rcnn.MaskRCNNHeads"builtins.object*≠
+__init__=torchvision.models.detection.mask_rcnn.MaskRCNNHeads.__init__"
+None*v
+selfl
+4torchvision.models.detection.mask_rcnn.MaskRCNNHeads"4torchvision.models.detection.mask_rcnn.MaskRCNNHeads*
+in_channels
+Any*
+layers
+Any*
+dilation
+Any*ô
+
+norm_layerÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None Ü
+MaskRCNNPredictor8torchvision.models.detection.mask_rcnn.MaskRCNNPredictor"builtins.object*•
+__init__Atorchvision.models.detection.mask_rcnn.MaskRCNNPredictor.__init__"
+None*~
+selft
+8torchvision.models.detection.mask_rcnn.MaskRCNNPredictor"8torchvision.models.detection.mask_rcnn.MaskRCNNPredictor*
+in_channels
+Any*
+dim_reduced
+Any*
+num_classes
+Any–
+MaskRCNN_ResNet50_FPN_WeightsDtorchvision.models.detection.mask_rcnn.MaskRCNN_ResNet50_FPN_Weights"#torchvision.models._api.WeightsEnumHr`
+COCO_V1Ltorchvision.models.detection.mask_rcnn.MaskRCNN_ResNet50_FPN_Weights.COCO_V1
+Anyr`
+DEFAULTLtorchvision.models.detection.mask_rcnn.MaskRCNN_ResNet50_FPN_Weights.DEFAULT
+Any‹
+ MaskRCNN_ResNet50_FPN_V2_WeightsGtorchvision.models.detection.mask_rcnn.MaskRCNN_ResNet50_FPN_V2_Weights"#torchvision.models._api.WeightsEnumHrc
+COCO_V1Otorchvision.models.detection.mask_rcnn.MaskRCNN_ResNet50_FPN_V2_Weights.COCO_V1
+Anyrc
+DEFAULTOtorchvision.models.detection.mask_rcnn.MaskRCNN_ResNet50_FPN_V2_Weights.DEFAULT
+Any¯
+maskrcnn_resnet50_fpn<torchvision.models.detection.mask_rcnn.maskrcnn_resnet50_fpn"b
+/torchvision.models.detection.mask_rcnn.MaskRCNN"/torchvision.models.detection.mask_rcnn.MaskRCNN*˝
+weightsÌ
+PUnion[torchvision.models.detection.mask_rcnn.MaskRCNN_ResNet50_FPN_Weights,None]å
+Dtorchvision.models.detection.mask_rcnn.MaskRCNN_ResNet50_FPN_Weights"Dtorchvision.models.detection.mask_rcnn.MaskRCNN_ResNet50_FPN_Weights
+None *.
+progress
+builtins.bool"builtins.bool *W
+num_classesD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *∑
+weights_backboneû
+6Union[torchvision.models.resnet.ResNet50_Weights,None]X
+*torchvision.models.resnet.ResNet50_Weights"*torchvision.models.resnet.ResNet50_Weights
+None *e
+trainable_backbone_layersD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *
+kwargs
+Anyá
+maskrcnn_resnet50_fpn_v2?torchvision.models.detection.mask_rcnn.maskrcnn_resnet50_fpn_v2"b
+/torchvision.models.detection.mask_rcnn.MaskRCNN"/torchvision.models.detection.mask_rcnn.MaskRCNN*Ü
+weightsˆ
+SUnion[torchvision.models.detection.mask_rcnn.MaskRCNN_ResNet50_FPN_V2_Weights,None]í
+Gtorchvision.models.detection.mask_rcnn.MaskRCNN_ResNet50_FPN_V2_Weights"Gtorchvision.models.detection.mask_rcnn.MaskRCNN_ResNet50_FPN_V2_Weights
+None *.
+progress
+builtins.bool"builtins.bool *W
+num_classesD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *∑
+weights_backboneû
+6Union[torchvision.models.resnet.ResNet50_Weights,None]X
+*torchvision.models.resnet.ResNet50_Weights"*torchvision.models.resnet.ResNet50_Weights
+None *e
+trainable_backbone_layersD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *
+kwargs
+Any*¢
+__annotations__6torchvision.models.detection.mask_rcnn.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*8
+nn)torchvision.models.detection.mask_rcnn.nn
+Any

@@ -1,0 +1,104 @@
+
+torchvision.models.video.s3dà
+TemporalSeparableConv2torchvision.models.video.s3d.TemporalSeparableConv"builtins.object*
+__init__;torchvision.models.video.s3d.TemporalSeparableConv.__init__"
+None*r
+selfh
+2torchvision.models.video.s3d.TemporalSeparableConv"2torchvision.models.video.s3d.TemporalSeparableConv*+
+	in_planes
+builtins.int"builtins.int*,
+
+out_planes
+builtins.int"builtins.int*-
+kernel_size
+builtins.int"builtins.int*(
+stride
+builtins.int"builtins.int*)
+padding
+builtins.int"builtins.int*[
+
+norm_layerK
+CallableType[builtins.function]&
+builtins.function"builtins.function®
+SepInceptionBlock3D0torchvision.models.video.s3d.SepInceptionBlock3D"builtins.object*Å
+__init__9torchvision.models.video.s3d.SepInceptionBlock3D.__init__"
+None*n
+selfd
+0torchvision.models.video.s3d.SepInceptionBlock3D"0torchvision.models.video.s3d.SepInceptionBlock3D*+
+	in_planes
+builtins.int"builtins.int*(
+b0_out
+builtins.int"builtins.int*(
+b1_mid
+builtins.int"builtins.int*(
+b1_out
+builtins.int"builtins.int*(
+b2_mid
+builtins.int"builtins.int*(
+b2_out
+builtins.int"builtins.int*(
+b3_out
+builtins.int"builtins.int*[
+
+norm_layerK
+CallableType[builtins.function]&
+builtins.function"builtins.function*T
+forward8torchvision.models.video.s3d.SepInceptionBlock3D.forward*
+self*
+xrL
+branch08torchvision.models.video.s3d.SepInceptionBlock3D.branch0
+AnyrL
+branch18torchvision.models.video.s3d.SepInceptionBlock3D.branch1
+AnyrL
+branch28torchvision.models.video.s3d.SepInceptionBlock3D.branch2
+AnyrL
+branch38torchvision.models.video.s3d.SepInceptionBlock3D.branch3
+AnyÐ
+S3D torchvision.models.video.s3d.S3D"builtins.object*
+__init__)torchvision.models.video.s3d.S3D.__init__"
+None*N
+selfD
+ torchvision.models.video.s3d.S3D" torchvision.models.video.s3d.S3D*/
+num_classes
+builtins.int"builtins.int */
+dropout 
+builtins.float"builtins.float *™
+
+norm_layer†
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *D
+forward(torchvision.models.video.s3d.S3D.forward*
+self*
+xr>
+features)torchvision.models.video.s3d.S3D.features
+Anyr<
+avgpool(torchvision.models.video.s3d.S3D.avgpool
+AnyrB
+
+classifier+torchvision.models.video.s3d.S3D.classifier
+Anyø
+S3D_Weights(torchvision.models.video.s3d.S3D_Weights"#torchvision.models._api.WeightsEnumHrR
+KINETICS400_V17torchvision.models.video.s3d.S3D_Weights.KINETICS400_V1
+AnyrD
+DEFAULT0torchvision.models.video.s3d.S3D_Weights.DEFAULT
+AnyÝ
+s3d torchvision.models.video.s3d.s3d"D
+ torchvision.models.video.s3d.S3D" torchvision.models.video.s3d.S3D*¨
+weights˜
+4Union[torchvision.models.video.s3d.S3D_Weights,None]T
+(torchvision.models.video.s3d.S3D_Weights"(torchvision.models.video.s3d.S3D_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+Any*˜
+__annotations__,torchvision.models.video.s3d.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*4
+torch"torchvision.models.video.s3d.torch
+Any*.
+nntorchvision.models.video.s3d.nn
+Any

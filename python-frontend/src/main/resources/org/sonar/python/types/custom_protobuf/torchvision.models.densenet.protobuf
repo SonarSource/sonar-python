@@ -1,0 +1,197 @@
+
+torchvision.models.densenet˛
+_DenseLayer'torchvision.models.densenet._DenseLayer"builtins.object*ù
+__init__0torchvision.models.densenet._DenseLayer.__init__"
+None*\
+selfR
+'torchvision.models.densenet._DenseLayer"'torchvision.models.densenet._DenseLayer*4
+num_input_features
+builtins.int"builtins.int*-
+growth_rate
+builtins.int"builtins.int*)
+bn_size
+builtins.int"builtins.int*/
+	drop_rate 
+builtins.float"builtins.float*6
+memory_efficient
+builtins.bool"builtins.bool *„
+bn_function3torchvision.models.densenet._DenseLayer.bn_function"
+Any*\
+selfR
+'torchvision.models.densenet._DenseLayer"'torchvision.models.densenet._DenseLayer*8
+inputs,
+builtins.list[Any]
+Any"builtins.list*Ö
+any_requires_grad9torchvision.models.densenet._DenseLayer.any_requires_grad"
+builtins.bool"builtins.bool*\
+selfR
+'torchvision.models.densenet._DenseLayer"'torchvision.models.densenet._DenseLayer*7
+input,
+builtins.list[Any]
+Any"builtins.list*Ä
+call_checkpoint_bottleneckBtorchvision.models.densenet._DenseLayer.call_checkpoint_bottleneck"
+Any*\
+selfR
+'torchvision.models.densenet._DenseLayer"'torchvision.models.densenet._DenseLayer*7
+input,
+builtins.list[Any]
+Any"builtins.listr?
+norm1-torchvision.models.densenet._DenseLayer.norm1
+Anyr?
+relu1-torchvision.models.densenet._DenseLayer.relu1
+Anyr?
+conv1-torchvision.models.densenet._DenseLayer.conv1
+Anyr?
+norm2-torchvision.models.densenet._DenseLayer.norm2
+Anyr?
+relu2-torchvision.models.densenet._DenseLayer.relu2
+Anyr?
+conv2-torchvision.models.densenet._DenseLayer.conv2
+AnyrG
+	drop_rate1torchvision.models.densenet._DenseLayer.drop_rate
+AnyrU
+memory_efficient8torchvision.models.densenet._DenseLayer.memory_efficient
+Any’
+_DenseBlock'torchvision.models.densenet._DenseBlock"builtins.object*À
+__init__0torchvision.models.densenet._DenseBlock.__init__"
+None*\
+selfR
+'torchvision.models.densenet._DenseBlock"'torchvision.models.densenet._DenseBlock*,
+
+num_layers
+builtins.int"builtins.int*4
+num_input_features
+builtins.int"builtins.int*)
+bn_size
+builtins.int"builtins.int*-
+growth_rate
+builtins.int"builtins.int*/
+	drop_rate 
+builtins.float"builtins.float*6
+memory_efficient
+builtins.bool"builtins.bool *Ω
+forward/torchvision.models.densenet._DenseBlock.forward"
+Any*\
+selfR
+'torchvision.models.densenet._DenseBlock"'torchvision.models.densenet._DenseBlock*
+init_features
+Any◊
+_Transition'torchvision.models.densenet._Transition"builtins.object*ë
+__init__0torchvision.models.densenet._Transition.__init__"
+None*\
+selfR
+'torchvision.models.densenet._Transition"'torchvision.models.densenet._Transition*4
+num_input_features
+builtins.int"builtins.int*5
+num_output_features
+builtins.int"builtins.intr=
+norm,torchvision.models.densenet._Transition.norm
+Anyr=
+relu,torchvision.models.densenet._Transition.relu
+Anyr=
+conv,torchvision.models.densenet._Transition.conv
+Anyr=
+pool,torchvision.models.densenet._Transition.pool
+Anyï
+DenseNet$torchvision.models.densenet.DenseNet"builtins.object*ö
+__init__-torchvision.models.densenet.DenseNet.__init__"
+None*V
+selfL
+$torchvision.models.densenet.DenseNet"$torchvision.models.densenet.DenseNet*/
+growth_rate
+builtins.int"builtins.int *À
+block_config∂
+:Tuple[builtins.int,builtins.int,builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int *5
+num_init_features
+builtins.int"builtins.int *+
+bn_size
+builtins.int"builtins.int *1
+	drop_rate 
+builtins.float"builtins.float */
+num_classes
+builtins.int"builtins.int *6
+memory_efficient
+builtins.bool"builtins.bool *®
+forward,torchvision.models.densenet.DenseNet.forward"
+Any*V
+selfL
+$torchvision.models.densenet.DenseNet"$torchvision.models.densenet.DenseNet*
+x
+AnyrB
+features-torchvision.models.densenet.DenseNet.features
+AnyrF
+
+classifier/torchvision.models.densenet.DenseNet.classifier
+Anyì
+DenseNet121_Weights/torchvision.models.densenet.DenseNet121_Weights"#torchvision.models._api.WeightsEnumHrW
+IMAGENET1K_V1=torchvision.models.densenet.DenseNet121_Weights.IMAGENET1K_V1
+AnyrK
+DEFAULT7torchvision.models.densenet.DenseNet121_Weights.DEFAULT
+Anyì
+DenseNet161_Weights/torchvision.models.densenet.DenseNet161_Weights"#torchvision.models._api.WeightsEnumHrW
+IMAGENET1K_V1=torchvision.models.densenet.DenseNet161_Weights.IMAGENET1K_V1
+AnyrK
+DEFAULT7torchvision.models.densenet.DenseNet161_Weights.DEFAULT
+Anyì
+DenseNet169_Weights/torchvision.models.densenet.DenseNet169_Weights"#torchvision.models._api.WeightsEnumHrW
+IMAGENET1K_V1=torchvision.models.densenet.DenseNet169_Weights.IMAGENET1K_V1
+AnyrK
+DEFAULT7torchvision.models.densenet.DenseNet169_Weights.DEFAULT
+Anyì
+DenseNet201_Weights/torchvision.models.densenet.DenseNet201_Weights"#torchvision.models._api.WeightsEnumHrW
+IMAGENET1K_V1=torchvision.models.densenet.DenseNet201_Weights.IMAGENET1K_V1
+AnyrK
+DEFAULT7torchvision.models.densenet.DenseNet201_Weights.DEFAULT
+Anyâ
+densenet121'torchvision.models.densenet.densenet121"L
+$torchvision.models.densenet.DenseNet"$torchvision.models.densenet.DenseNet*Ω
+weights≠
+;Union[torchvision.models.densenet.DenseNet121_Weights,None]b
+/torchvision.models.densenet.DenseNet121_Weights"/torchvision.models.densenet.DenseNet121_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+Anyâ
+densenet161'torchvision.models.densenet.densenet161"L
+$torchvision.models.densenet.DenseNet"$torchvision.models.densenet.DenseNet*Ω
+weights≠
+;Union[torchvision.models.densenet.DenseNet161_Weights,None]b
+/torchvision.models.densenet.DenseNet161_Weights"/torchvision.models.densenet.DenseNet161_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+Anyâ
+densenet169'torchvision.models.densenet.densenet169"L
+$torchvision.models.densenet.DenseNet"$torchvision.models.densenet.DenseNet*Ω
+weights≠
+;Union[torchvision.models.densenet.DenseNet169_Weights,None]b
+/torchvision.models.densenet.DenseNet169_Weights"/torchvision.models.densenet.DenseNet169_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+Anyâ
+densenet201'torchvision.models.densenet.densenet201"L
+$torchvision.models.densenet.DenseNet"$torchvision.models.densenet.DenseNet*Ω
+weights≠
+;Union[torchvision.models.densenet.DenseNet201_Weights,None]b
+/torchvision.models.densenet.DenseNet201_Weights"/torchvision.models.densenet.DenseNet201_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+Any*ó
+__annotations__+torchvision.models.densenet.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*-
+nntorchvision.models.densenet.nn
+Any*5
+Tensor"torchvision.models.densenet.Tensor
+Any

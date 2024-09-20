@@ -1,0 +1,372 @@
+
+torchvision.models.video.mvit≠
+
+MSBlockConfig+torchvision.models.video.mvit.MSBlockConfig"builtins.object*·
+__init__4torchvision.models.video.mvit.MSBlockConfig.__init__"
+None*d
+selfZ
++torchvision.models.video.mvit.MSBlockConfig"+torchvision.models.video.mvit.MSBlockConfig*
+	num_heads
+Any*
+input_channels
+Any*
+output_channels
+Any*
+kernel_q
+Any*
+	kernel_kv
+Any*
+stride_q
+Any*
+	stride_kv
+Anyr`
+	num_heads5torchvision.models.video.mvit.MSBlockConfig.num_heads
+builtins.int"builtins.intrj
+input_channels:torchvision.models.video.mvit.MSBlockConfig.input_channels
+builtins.int"builtins.intrl
+output_channels;torchvision.models.video.mvit.MSBlockConfig.output_channels
+builtins.int"builtins.intrå
+kernel_q4torchvision.models.video.mvit.MSBlockConfig.kernel_qJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.listré
+	kernel_kv5torchvision.models.video.mvit.MSBlockConfig.kernel_kvJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.listrå
+stride_q4torchvision.models.video.mvit.MSBlockConfig.stride_qJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.listré
+	stride_kv5torchvision.models.video.mvit.MSBlockConfig.stride_kvJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list‚
+Pool"torchvision.models.video.mvit.Pool"builtins.object*Ã
+__init__+torchvision.models.video.mvit.Pool.__init__"
+None*R
+selfH
+"torchvision.models.video.mvit.Pool""torchvision.models.video.mvit.Pool*
+pool
+Any*0
+norm&
+Union[Any,None]
+Any
+None*8
+
+activation&
+Union[Any,None]
+Any
+None *6
+norm_before_pool
+builtins.bool"builtins.bool *á
+forward*torchvision.models.video.mvit.Pool.forward"”
+8Tuple[Any,Tuple[builtins.int,builtins.int,builtins.int]]
+Anyã
+-Tuple[builtins.int,builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int*R
+selfH
+"torchvision.models.video.mvit.Pool""torchvision.models.video.mvit.Pool*
+x
+Any*ï
+thwã
+-Tuple[builtins.int,builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.intr8
+pool'torchvision.models.video.mvit.Pool.pool
+Anyr@
+norm_act+torchvision.models.video.mvit.Pool.norm_act
+AnyrP
+norm_before_pool3torchvision.models.video.mvit.Pool.norm_before_pool
+AnyØ
+MultiscaleAttention1torchvision.models.video.mvit.MultiscaleAttention"builtins.object*√
+__init__:torchvision.models.video.mvit.MultiscaleAttention.__init__"
+None*p
+selff
+1torchvision.models.video.mvit.MultiscaleAttention"1torchvision.models.video.mvit.MultiscaleAttention*Z
+
+input_sizeJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*+
+	embed_dim
+builtins.int"builtins.int*,
+
+output_dim
+builtins.int"builtins.int*+
+	num_heads
+builtins.int"builtins.int*X
+kernel_qJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*Y
+	kernel_kvJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*X
+stride_qJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*Y
+	stride_kvJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*1
+residual_pool
+builtins.bool"builtins.bool*;
+residual_with_cls_embed
+builtins.bool"builtins.bool*1
+rel_pos_embed
+builtins.bool"builtins.bool*/
+dropout 
+builtins.float"builtins.float *]
+
+norm_layerK
+CallableType[builtins.function]&
+builtins.function"builtins.function *¥
+forward9torchvision.models.video.mvit.MultiscaleAttention.forward"”
+8Tuple[Any,Tuple[builtins.int,builtins.int,builtins.int]]
+Anyã
+-Tuple[builtins.int,builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int*p
+selff
+1torchvision.models.video.mvit.MultiscaleAttention"1torchvision.models.video.mvit.MultiscaleAttention*
+x
+Any*ï
+thwã
+-Tuple[builtins.int,builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.intrQ
+	embed_dim;torchvision.models.video.mvit.MultiscaleAttention.embed_dim
+AnyrS
+
+output_dim<torchvision.models.video.mvit.MultiscaleAttention.output_dim
+AnyrQ
+	num_heads;torchvision.models.video.mvit.MultiscaleAttention.num_heads
+AnyrO
+head_dim:torchvision.models.video.mvit.MultiscaleAttention.head_dim
+AnyrK
+scaler8torchvision.models.video.mvit.MultiscaleAttention.scaler
+AnyrY
+residual_pool?torchvision.models.video.mvit.MultiscaleAttention.residual_pool
+Anyrm
+residual_with_cls_embedItorchvision.models.video.mvit.MultiscaleAttention.residual_with_cls_embed
+AnyrE
+qkv5torchvision.models.video.mvit.MultiscaleAttention.qkv
+AnyrM
+project9torchvision.models.video.mvit.MultiscaleAttention.project
+AnyrK
+pool_q8torchvision.models.video.mvit.MultiscaleAttention.pool_q
+AnyrK
+pool_k8torchvision.models.video.mvit.MultiscaleAttention.pool_k
+AnyrK
+pool_v8torchvision.models.video.mvit.MultiscaleAttention.pool_v
+AnyrQ
+	rel_pos_h;torchvision.models.video.mvit.MultiscaleAttention.rel_pos_h
+AnyrQ
+	rel_pos_w;torchvision.models.video.mvit.MultiscaleAttention.rel_pos_w
+AnyrQ
+	rel_pos_t;torchvision.models.video.mvit.MultiscaleAttention.rel_pos_t
+Any‚
+MultiscaleBlock-torchvision.models.video.mvit.MultiscaleBlock"builtins.object*û
+__init__6torchvision.models.video.mvit.MultiscaleBlock.__init__"
+None*h
+self^
+-torchvision.models.video.mvit.MultiscaleBlock"-torchvision.models.video.mvit.MultiscaleBlock*Z
+
+input_sizeJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*c
+cnfZ
++torchvision.models.video.mvit.MSBlockConfig"+torchvision.models.video.mvit.MSBlockConfig*1
+residual_pool
+builtins.bool"builtins.bool*;
+residual_with_cls_embed
+builtins.bool"builtins.bool*1
+rel_pos_embed
+builtins.bool"builtins.bool*3
+proj_after_attn
+builtins.bool"builtins.bool*/
+dropout 
+builtins.float"builtins.float *=
+stochastic_depth_prob 
+builtins.float"builtins.float *]
+
+norm_layerK
+CallableType[builtins.function]&
+builtins.function"builtins.function *®
+forward5torchvision.models.video.mvit.MultiscaleBlock.forward"”
+8Tuple[Any,Tuple[builtins.int,builtins.int,builtins.int]]
+Anyã
+-Tuple[builtins.int,builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int*h
+self^
+-torchvision.models.video.mvit.MultiscaleBlock"-torchvision.models.video.mvit.MultiscaleBlock*
+x
+Any*ï
+thwã
+-Tuple[builtins.int,builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.intrY
+proj_after_attn=torchvision.models.video.mvit.MultiscaleBlock.proj_after_attn
+AnyrM
+	pool_skip7torchvision.models.video.mvit.MultiscaleBlock.pool_skip
+AnyrE
+norm13torchvision.models.video.mvit.MultiscaleBlock.norm1
+AnyrE
+norm23torchvision.models.video.mvit.MultiscaleBlock.norm2
+Anyr[
+needs_transposal>torchvision.models.video.mvit.MultiscaleBlock.needs_transposal
+AnyrC
+attn2torchvision.models.video.mvit.MultiscaleBlock.attn
+AnyrA
+mlp1torchvision.models.video.mvit.MultiscaleBlock.mlp
+Anyr[
+stochastic_depth>torchvision.models.video.mvit.MultiscaleBlock.stochastic_depth
+AnyrI
+project5torchvision.models.video.mvit.MultiscaleBlock.project
+Anyˆ	
+PositionalEncoding0torchvision.models.video.mvit.PositionalEncoding"builtins.object*≈
+__init__9torchvision.models.video.mvit.PositionalEncoding.__init__"
+None*n
+selfd
+0torchvision.models.video.mvit.PositionalEncoding"0torchvision.models.video.mvit.PositionalEncoding*,
+
+embed_size
+builtins.int"builtins.int*r
+spatial_size`
+ Tuple[builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int*/
+temporal_size
+builtins.int"builtins.int*1
+rel_pos_embed
+builtins.bool"builtins.bool*Ã
+forward8torchvision.models.video.mvit.PositionalEncoding.forward"
+Any*n
+selfd
+0torchvision.models.video.mvit.PositionalEncoding"0torchvision.models.video.mvit.PositionalEncoding*
+x
+AnyrV
+spatial_size=torchvision.models.video.mvit.PositionalEncoding.spatial_size
+AnyrX
+temporal_size>torchvision.models.video.mvit.PositionalEncoding.temporal_size
+AnyrT
+class_token<torchvision.models.video.mvit.PositionalEncoding.class_token
+AnyrT
+spatial_pos<torchvision.models.video.mvit.PositionalEncoding.spatial_pos
+AnyrV
+temporal_pos=torchvision.models.video.mvit.PositionalEncoding.temporal_pos
+AnyrP
+	class_pos:torchvision.models.video.mvit.PositionalEncoding.class_pos
+AnyÇ
+MViT"torchvision.models.video.mvit.MViT"builtins.object*ﬂ
+__init__+torchvision.models.video.mvit.MViT.__init__"
+None*R
+selfH
+"torchvision.models.video.mvit.MViT""torchvision.models.video.mvit.MViT*r
+spatial_size`
+ Tuple[builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int*/
+temporal_size
+builtins.int"builtins.int*ø
+block_setting´
+<typing.Sequence[torchvision.models.video.mvit.MSBlockConfig]Z
++torchvision.models.video.mvit.MSBlockConfig"+torchvision.models.video.mvit.MSBlockConfig"typing.Sequence*1
+residual_pool
+builtins.bool"builtins.bool*;
+residual_with_cls_embed
+builtins.bool"builtins.bool*1
+rel_pos_embed
+builtins.bool"builtins.bool*3
+proj_after_attn
+builtins.bool"builtins.bool*/
+dropout 
+builtins.float"builtins.float *9
+attention_dropout 
+builtins.float"builtins.float *=
+stochastic_depth_prob 
+builtins.float"builtins.float */
+num_classes
+builtins.int"builtins.int *î
+blockÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *ô
+
+norm_layerÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *¶
+patch_embed_kernelã
+-Tuple[builtins.int,builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int *¶
+patch_embed_strideã
+-Tuple[builtins.int,builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int *ß
+patch_embed_paddingã
+-Tuple[builtins.int,builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int *¢
+forward*torchvision.models.video.mvit.MViT.forward"
+Any*R
+selfH
+"torchvision.models.video.mvit.MViT""torchvision.models.video.mvit.MViT*
+x
+AnyrB
+	conv_proj,torchvision.models.video.mvit.MViT.conv_proj
+AnyrH
+pos_encoding/torchvision.models.video.mvit.MViT.pos_encoding
+Anyr<
+blocks)torchvision.models.video.mvit.MViT.blocks
+Anyr8
+norm'torchvision.models.video.mvit.MViT.norm
+Anyr8
+head'torchvision.models.video.mvit.MViT.head
+Anyì
+MViT_V1_B_Weights/torchvision.models.video.mvit.MViT_V1_B_Weights"#torchvision.models._api.WeightsEnumHrY
+KINETICS400_V1>torchvision.models.video.mvit.MViT_V1_B_Weights.KINETICS400_V1
+AnyrK
+DEFAULT7torchvision.models.video.mvit.MViT_V1_B_Weights.DEFAULT
+Anyì
+MViT_V2_S_Weights/torchvision.models.video.mvit.MViT_V2_S_Weights"#torchvision.models._api.WeightsEnumHrY
+KINETICS400_V1>torchvision.models.video.mvit.MViT_V2_S_Weights.KINETICS400_V1
+AnyrK
+DEFAULT7torchvision.models.video.mvit.MViT_V2_S_Weights.DEFAULT
+AnyÉ
+	mvit_v1_b'torchvision.models.video.mvit.mvit_v1_b"H
+"torchvision.models.video.mvit.MViT""torchvision.models.video.mvit.MViT*Ω
+weights≠
+;Union[torchvision.models.video.mvit.MViT_V1_B_Weights,None]b
+/torchvision.models.video.mvit.MViT_V1_B_Weights"/torchvision.models.video.mvit.MViT_V1_B_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+AnyÉ
+	mvit_v2_s'torchvision.models.video.mvit.mvit_v2_s"H
+"torchvision.models.video.mvit.MViT""torchvision.models.video.mvit.MViT*Ω
+weights≠
+;Union[torchvision.models.video.mvit.MViT_V2_S_Weights,None]b
+/torchvision.models.video.mvit.MViT_V2_S_Weights"/torchvision.models.video.mvit.MViT_V2_S_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+Any*ô
+__annotations__-torchvision.models.video.mvit.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*/
+nn torchvision.models.video.mvit.nn
+Any*5
+torch#torchvision.models.video.mvit.torch
+Any

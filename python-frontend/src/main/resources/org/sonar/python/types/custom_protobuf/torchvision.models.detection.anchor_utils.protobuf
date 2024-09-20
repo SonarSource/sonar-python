@@ -1,0 +1,152 @@
+
+)torchvision.models.detection.anchor_utils³
+	ImageList1torchvision.models.detection.image_list.ImageList"builtins.object*
+__init__:torchvision.models.detection.image_list.ImageList.__init__"
+None*p
+selff
+1torchvision.models.detection.image_list.ImageList"1torchvision.models.detection.image_list.ImageList*
+tensors
+Any*´
+image_sizes¢
+/builtins.list[Tuple[builtins.int,builtins.int]]`
+ Tuple[builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int"builtins.list*©
+to4torchvision.models.detection.image_list.ImageList.to"f
+1torchvision.models.detection.image_list.ImageList"1torchvision.models.detection.image_list.ImageList*p
+selff
+1torchvision.models.detection.image_list.ImageList"1torchvision.models.detection.image_list.ImageList*
+device
+AnyrM
+tensors9torchvision.models.detection.image_list.ImageList.tensors
+AnyrU
+image_sizes=torchvision.models.detection.image_list.ImageList.image_sizes
+Anyæ
+AnchorGenerator9torchvision.models.detection.anchor_utils.AnchorGenerator"builtins.object*
+__init__Btorchvision.models.detection.anchor_utils.AnchorGenerator.__init__"
+None*€
+selfv
+9torchvision.models.detection.anchor_utils.AnchorGenerator"9torchvision.models.detection.anchor_utils.AnchorGenerator*
+sizes
+Any *
+aspect_ratios
+Any *Ô
+generate_anchorsJtorchvision.models.detection.anchor_utils.AnchorGenerator.generate_anchors"
+Any*€
+selfv
+9torchvision.models.detection.anchor_utils.AnchorGenerator"9torchvision.models.detection.anchor_utils.AnchorGenerator*V
+scalesJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*c
+aspect_ratiosP
+builtins.list[builtins.float] 
+builtins.float"builtins.float"builtins.list*
+dtype
+Any *
+device
+Any *“
+set_cell_anchorsJtorchvision.models.detection.anchor_utils.AnchorGenerator.set_cell_anchors"
+Any*€
+selfv
+9torchvision.models.detection.anchor_utils.AnchorGenerator"9torchvision.models.detection.anchor_utils.AnchorGenerator*
+dtype
+Any*
+device
+Any*½
+num_anchors_per_locationRtorchvision.models.detection.anchor_utils.AnchorGenerator.num_anchors_per_location"J
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*€
+selfv
+9torchvision.models.detection.anchor_utils.AnchorGenerator"9torchvision.models.detection.anchor_utils.AnchorGenerator*‘
+grid_anchorsFtorchvision.models.detection.anchor_utils.AnchorGenerator.grid_anchors",
+builtins.list[Any]
+Any"builtins.list*€
+selfv
+9torchvision.models.detection.anchor_utils.AnchorGenerator"9torchvision.models.detection.anchor_utils.AnchorGenerator*˜
+
+grid_sizes‡
+*builtins.list[builtins.list[builtins.int]]J
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list"builtins.list*m
+strides`
+!builtins.list[builtins.list[Any]],
+builtins.list[Any]
+Any"builtins.list"builtins.list*µ
+forwardAtorchvision.models.detection.anchor_utils.AnchorGenerator.forward",
+builtins.list[Any]
+Any"builtins.list*€
+selfv
+9torchvision.models.detection.anchor_utils.AnchorGenerator"9torchvision.models.detection.anchor_utils.AnchorGenerator*v
+
+image_listf
+1torchvision.models.detection.image_list.ImageList"1torchvision.models.detection.image_list.ImageList*>
+feature_maps,
+builtins.list[Any]
+Any"builtins.listre
+__annotations__Itorchvision.models.detection.anchor_utils.AnchorGenerator.__annotations__
+AnyrQ
+sizes?torchvision.models.detection.anchor_utils.AnchorGenerator.sizes
+Anyra
+aspect_ratiosGtorchvision.models.detection.anchor_utils.AnchorGenerator.aspect_ratios
+Anyr_
+cell_anchorsFtorchvision.models.detection.anchor_utils.AnchorGenerator.cell_anchors
+Any¨
+DefaultBoxGenerator=torchvision.models.detection.anchor_utils.DefaultBoxGenerator"builtins.object*Ä
+__init__Ftorchvision.models.detection.anchor_utils.DefaultBoxGenerator.__init__"
+None*ˆ
+self~
+=torchvision.models.detection.anchor_utils.DefaultBoxGenerator"=torchvision.models.detection.anchor_utils.DefaultBoxGenerator*›
+aspect_ratios‡
+*builtins.list[builtins.list[builtins.int]]J
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list"builtins.list*1
+	min_ratio 
+builtins.float"builtins.float *1
+	max_ratio 
+builtins.float"builtins.float *˜
+scales‰
+)Union[builtins.list[builtins.float],None]P
+builtins.list[builtins.float] 
+builtins.float"builtins.float"builtins.list
+None *
+steps
+'Union[builtins.list[builtins.int],None]J
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list
+None **
+clip
+builtins.bool"builtins.bool *É
+num_anchors_per_locationVtorchvision.models.detection.anchor_utils.DefaultBoxGenerator.num_anchors_per_location"J
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*ˆ
+self~
+=torchvision.models.detection.anchor_utils.DefaultBoxGenerator"=torchvision.models.detection.anchor_utils.DefaultBoxGenerator*Á
+forwardEtorchvision.models.detection.anchor_utils.DefaultBoxGenerator.forward",
+builtins.list[Any]
+Any"builtins.list*ˆ
+self~
+=torchvision.models.detection.anchor_utils.DefaultBoxGenerator"=torchvision.models.detection.anchor_utils.DefaultBoxGenerator*v
+
+image_listf
+1torchvision.models.detection.image_list.ImageList"1torchvision.models.detection.image_list.ImageList*>
+feature_maps,
+builtins.list[Any]
+Any"builtins.listre
+aspect_ratiosKtorchvision.models.detection.anchor_utils.DefaultBoxGenerator.aspect_ratios
+AnyrU
+stepsCtorchvision.models.detection.anchor_utils.DefaultBoxGenerator.steps
+AnyrS
+clipBtorchvision.models.detection.anchor_utils.DefaultBoxGenerator.clip
+AnyrW
+scalesDtorchvision.models.detection.anchor_utils.DefaultBoxGenerator.scales
+Any*¥
+__annotations__9torchvision.models.detection.anchor_utils.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*A
+torch/torchvision.models.detection.anchor_utils.torch
+Any*C
+Tensor0torchvision.models.detection.anchor_utils.Tensor
+Any*;
+nn,torchvision.models.detection.anchor_utils.nn
+Any

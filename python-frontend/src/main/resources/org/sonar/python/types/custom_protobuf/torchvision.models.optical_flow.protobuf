@@ -1,0 +1,348 @@
+
+torchvision.models.optical_flowü
+ResidualBlock2torchvision.models.optical_flow.raft.ResidualBlock"builtins.object*õ
+__init__;torchvision.models.optical_flow.raft.ResidualBlock.__init__"
+None*r
+selfh
+2torchvision.models.optical_flow.raft.ResidualBlock"2torchvision.models.optical_flow.raft.ResidualBlock*
+in_channels
+Any*
+out_channels
+Any*
+
+norm_layer
+Any**
+stride
+builtins.int"builtins.int *4
+always_project
+builtins.bool"builtins.bool *V
+forward:torchvision.models.optical_flow.raft.ResidualBlock.forward*
+self*
+xrZ
+convnormrelu1@torchvision.models.optical_flow.raft.ResidualBlock.convnormrelu1
+AnyrZ
+convnormrelu2@torchvision.models.optical_flow.raft.ResidualBlock.convnormrelu2
+AnyrT
+
+downsample=torchvision.models.optical_flow.raft.ResidualBlock.downsample
+AnyrH
+relu7torchvision.models.optical_flow.raft.ResidualBlock.relu
+Any¸
+BottleneckBlock4torchvision.models.optical_flow.raft.BottleneckBlock"builtins.object*Å
+__init__=torchvision.models.optical_flow.raft.BottleneckBlock.__init__"
+None*v
+selfl
+4torchvision.models.optical_flow.raft.BottleneckBlock"4torchvision.models.optical_flow.raft.BottleneckBlock*
+in_channels
+Any*
+out_channels
+Any*
+
+norm_layer
+Any**
+stride
+builtins.int"builtins.int *X
+forward<torchvision.models.optical_flow.raft.BottleneckBlock.forward*
+self*
+xr\
+convnormrelu1Btorchvision.models.optical_flow.raft.BottleneckBlock.convnormrelu1
+Anyr\
+convnormrelu2Btorchvision.models.optical_flow.raft.BottleneckBlock.convnormrelu2
+Anyr\
+convnormrelu3Btorchvision.models.optical_flow.raft.BottleneckBlock.convnormrelu3
+AnyrJ
+relu9torchvision.models.optical_flow.raft.BottleneckBlock.relu
+AnyrV
+
+downsample?torchvision.models.optical_flow.raft.BottleneckBlock.downsample
+Any
+FeatureEncoder3torchvision.models.optical_flow.raft.FeatureEncoder"builtins.object*Ž
+__init__<torchvision.models.optical_flow.raft.FeatureEncoder.__init__*
+self*
+block *
+layers *
+strides *
+
+norm_layer *W
+forward;torchvision.models.optical_flow.raft.FeatureEncoder.forward*
+self*
+xrY
+convnormrelu@torchvision.models.optical_flow.raft.FeatureEncoder.convnormrelu
+AnyrM
+layer1:torchvision.models.optical_flow.raft.FeatureEncoder.layer1
+AnyrM
+layer2:torchvision.models.optical_flow.raft.FeatureEncoder.layer2
+AnyrM
+layer3:torchvision.models.optical_flow.raft.FeatureEncoder.layer3
+AnyrI
+conv8torchvision.models.optical_flow.raft.FeatureEncoder.conv
+AnyrU
+
+output_dim>torchvision.models.optical_flow.raft.FeatureEncoder.output_dim
+Anyrc
+downsample_factorEtorchvision.models.optical_flow.raft.FeatureEncoder.downsample_factor
+Any‡
+MotionEncoder2torchvision.models.optical_flow.raft.MotionEncoder"builtins.object*Î
+__init__;torchvision.models.optical_flow.raft.MotionEncoder.__init__"
+None*r
+selfh
+2torchvision.models.optical_flow.raft.MotionEncoder"2torchvision.models.optical_flow.raft.MotionEncoder*
+in_channels_corr
+Any*
+corr_layers
+Any *
+flow_layers
+Any *0
+out_channels
+builtins.int"builtins.int *l
+forward:torchvision.models.optical_flow.raft.MotionEncoder.forward*
+self*
+flow*
+corr_featuresrR
+	convcorr1<torchvision.models.optical_flow.raft.MotionEncoder.convcorr1
+AnyrR
+	convcorr2<torchvision.models.optical_flow.raft.MotionEncoder.convcorr2
+AnyrR
+	convflow1<torchvision.models.optical_flow.raft.MotionEncoder.convflow1
+AnyrR
+	convflow2<torchvision.models.optical_flow.raft.MotionEncoder.convflow2
+AnyrH
+conv7torchvision.models.optical_flow.raft.MotionEncoder.conv
+AnyrX
+out_channels?torchvision.models.optical_flow.raft.MotionEncoder.out_channels
+AnyŒ
+ConvGRU,torchvision.models.optical_flow.raft.ConvGRU"builtins.object*–
+__init__5torchvision.models.optical_flow.raft.ConvGRU.__init__"
+None*f
+self\
+,torchvision.models.optical_flow.raft.ConvGRU",torchvision.models.optical_flow.raft.ConvGRU*
+
+input_size
+Any*
+hidden_size
+Any*
+kernel_size
+Any*
+padding
+Any*W
+forward4torchvision.models.optical_flow.raft.ConvGRU.forward*
+self*
+h*
+xrD
+convz2torchvision.models.optical_flow.raft.ConvGRU.convz
+AnyrD
+convr2torchvision.models.optical_flow.raft.ConvGRU.convr
+AnyrD
+convq2torchvision.models.optical_flow.raft.ConvGRU.convq
+Anyç
+RecurrentBlock3torchvision.models.optical_flow.raft.RecurrentBlock"builtins.object*¯
+__init__<torchvision.models.optical_flow.raft.RecurrentBlock.__init__"
+None*t
+selfj
+3torchvision.models.optical_flow.raft.RecurrentBlock"3torchvision.models.optical_flow.raft.RecurrentBlock*
+
+input_size
+Any*
+hidden_size
+Any*
+kernel_size
+Any *
+padding
+Any *^
+forward;torchvision.models.optical_flow.raft.RecurrentBlock.forward*
+self*
+h*
+xrQ
+convgru1<torchvision.models.optical_flow.raft.RecurrentBlock.convgru1
+AnyrQ
+convgru2<torchvision.models.optical_flow.raft.RecurrentBlock.convgru2
+AnyrW
+hidden_size?torchvision.models.optical_flow.raft.RecurrentBlock.hidden_size
+AnyÝ
+FlowHead-torchvision.models.optical_flow.raft.FlowHead"builtins.object*ê
+__init__6torchvision.models.optical_flow.raft.FlowHead.__init__"
+None*h
+self^
+-torchvision.models.optical_flow.raft.FlowHead"-torchvision.models.optical_flow.raft.FlowHead*
+in_channels
+Any*
+hidden_size
+Any*Q
+forward5torchvision.models.optical_flow.raft.FlowHead.forward*
+self*
+xrE
+conv13torchvision.models.optical_flow.raft.FlowHead.conv1
+AnyrE
+conv23torchvision.models.optical_flow.raft.FlowHead.conv2
+AnyrC
+relu2torchvision.models.optical_flow.raft.FlowHead.relu
+Anyß
+UpdateBlock0torchvision.models.optical_flow.raft.UpdateBlock"builtins.object*’
+__init__9torchvision.models.optical_flow.raft.UpdateBlock.__init__"
+None*n
+selfd
+0torchvision.models.optical_flow.raft.UpdateBlock"0torchvision.models.optical_flow.raft.UpdateBlock*
+motion_encoder
+Any*
+recurrent_block
+Any*
+	flow_head
+Any*‰
+forward8torchvision.models.optical_flow.raft.UpdateBlock.forward*
+self*
+hidden_state*
+context*
+corr_features*
+flowrZ
+motion_encoder?torchvision.models.optical_flow.raft.UpdateBlock.motion_encoder
+Anyr\
+recurrent_block@torchvision.models.optical_flow.raft.UpdateBlock.recurrent_block
+AnyrP
+	flow_head:torchvision.models.optical_flow.raft.UpdateBlock.flow_head
+Anyr`
+hidden_state_sizeBtorchvision.models.optical_flow.raft.UpdateBlock.hidden_state_size
+AnyÎ
+MaskPredictor2torchvision.models.optical_flow.raft.MaskPredictor"builtins.object*­
+__init__;torchvision.models.optical_flow.raft.MaskPredictor.__init__"
+None*r
+selfh
+2torchvision.models.optical_flow.raft.MaskPredictor"2torchvision.models.optical_flow.raft.MaskPredictor*
+in_channels
+Any*
+hidden_size
+Any*2
+
+multiplier 
+builtins.float"builtins.float *V
+forward:torchvision.models.optical_flow.raft.MaskPredictor.forward*
+self*
+xrP
+convrelu;torchvision.models.optical_flow.raft.MaskPredictor.convrelu
+AnyrH
+conv7torchvision.models.optical_flow.raft.MaskPredictor.conv
+AnyrT
+
+multiplier=torchvision.models.optical_flow.raft.MaskPredictor.multiplier
+Any‰
+	CorrBlock.torchvision.models.optical_flow.raft.CorrBlock"builtins.object*•
+__init__7torchvision.models.optical_flow.raft.CorrBlock.__init__"
+None*j
+self`
+.torchvision.models.optical_flow.raft.CorrBlock".torchvision.models.optical_flow.raft.CorrBlock*.
+
+num_levels
+builtins.int"builtins.int **
+radius
+builtins.int"builtins.int *ë
+build_pyramid<torchvision.models.optical_flow.raft.CorrBlock.build_pyramid"
+None*j
+self`
+.torchvision.models.optical_flow.raft.CorrBlock".torchvision.models.optical_flow.raft.CorrBlock*
+fmap1
+Any*
+fmap2
+Any*m
+index_pyramid<torchvision.models.optical_flow.raft.CorrBlock.index_pyramid*
+self*
+centroids_coordsrP
+
+num_levels9torchvision.models.optical_flow.raft.CorrBlock.num_levels
+AnyrH
+radius5torchvision.models.optical_flow.raft.CorrBlock.radius
+AnyrT
+corr_pyramid;torchvision.models.optical_flow.raft.CorrBlock.corr_pyramid
+AnyrT
+out_channels;torchvision.models.optical_flow.raft.CorrBlock.out_channels
+AnyÈ
+RAFT)torchvision.models.optical_flow.raft.RAFT"builtins.object*Ø
+__init__2torchvision.models.optical_flow.raft.RAFT.__init__"
+None*`
+selfV
+)torchvision.models.optical_flow.raft.RAFT")torchvision.models.optical_flow.raft.RAFT*
+feature_encoder
+Any*
+context_encoder
+Any*
+
+corr_block
+Any*
+update_block
+Any*<
+mask_predictor&
+Union[Any,None]
+Any
+None *‡
+forward1torchvision.models.optical_flow.raft.RAFT.forward"
+Any*`
+selfV
+)torchvision.models.optical_flow.raft.RAFT")torchvision.models.optical_flow.raft.RAFT*
+image1
+Any*
+image2
+Any*4
+num_flow_updates
+builtins.int"builtins.int rU
+feature_encoder9torchvision.models.optical_flow.raft.RAFT.feature_encoder
+AnyrU
+context_encoder9torchvision.models.optical_flow.raft.RAFT.context_encoder
+AnyrK
+
+corr_block4torchvision.models.optical_flow.raft.RAFT.corr_block
+AnyrO
+update_block6torchvision.models.optical_flow.raft.RAFT.update_block
+AnyrS
+mask_predictor8torchvision.models.optical_flow.raft.RAFT.mask_predictor
+Anyë
+Raft_Large_Weights7torchvision.models.optical_flow.raft.Raft_Large_Weights"#torchvision.models._api.WeightsEnumHrQ
+C_T_V1>torchvision.models.optical_flow.raft.Raft_Large_Weights.C_T_V1
+AnyrQ
+C_T_V2>torchvision.models.optical_flow.raft.Raft_Large_Weights.C_T_V2
+Anyr[
+C_T_SKHT_V1Ctorchvision.models.optical_flow.raft.Raft_Large_Weights.C_T_SKHT_V1
+Anyr[
+C_T_SKHT_V2Ctorchvision.models.optical_flow.raft.Raft_Large_Weights.C_T_SKHT_V2
+Anyr_
+C_T_SKHT_K_V1Etorchvision.models.optical_flow.raft.Raft_Large_Weights.C_T_SKHT_K_V1
+Anyr_
+C_T_SKHT_K_V2Etorchvision.models.optical_flow.raft.Raft_Large_Weights.C_T_SKHT_K_V2
+AnyrS
+DEFAULT?torchvision.models.optical_flow.raft.Raft_Large_Weights.DEFAULT
+Anyï
+Raft_Small_Weights7torchvision.models.optical_flow.raft.Raft_Small_Weights"#torchvision.models._api.WeightsEnumHrQ
+C_T_V1>torchvision.models.optical_flow.raft.Raft_Small_Weights.C_T_V1
+AnyrQ
+C_T_V2>torchvision.models.optical_flow.raft.Raft_Small_Weights.C_T_V2
+AnyrS
+DEFAULT?torchvision.models.optical_flow.raft.Raft_Small_Weights.DEFAULT
+Any²
+
+raft_large/torchvision.models.optical_flow.raft.raft_large"V
+)torchvision.models.optical_flow.raft.RAFT")torchvision.models.optical_flow.raft.RAFT*Õ
+weightsÅ
+CUnion[torchvision.models.optical_flow.raft.Raft_Large_Weights,None]r
+7torchvision.models.optical_flow.raft.Raft_Large_Weights"7torchvision.models.optical_flow.raft.Raft_Large_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+Any²
+
+raft_small/torchvision.models.optical_flow.raft.raft_small"V
+)torchvision.models.optical_flow.raft.RAFT")torchvision.models.optical_flow.raft.RAFT*Õ
+weightsÅ
+CUnion[torchvision.models.optical_flow.raft.Raft_Small_Weights,None]r
+7torchvision.models.optical_flow.raft.Raft_Small_Weights"7torchvision.models.optical_flow.raft.Raft_Small_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+Any*€
+__path__(torchvision.models.optical_flow.__path__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*›
+__annotations__/torchvision.models.optical_flow.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*6
+nn'torchvision.models.optical_flow.raft.nn
+Any
