@@ -5,7 +5,7 @@ from sklearn.ensemble import (
         RandomForestClassifier, RandomForestRegressor,
         )
 from sklearn.linear_model import ElasticNet
-from sklearn.neighbors import NearestNeighbors, KNeighborsClassifier,KNeighborsRegressor 
+from sklearn.neighbors import NearestNeighbors, KNeighborsClassifier,KNeighborsRegressor
 from sklearn.svm import SVC, SVR, NuSVC, NuSVR
 from sklearn.tree import DecisionTreeClassifier, DecisionTreeRegressor
 from sklearn.neural_network import MLPClassifier, MLPRegressor
@@ -95,7 +95,10 @@ def compliant():
 
     pipe2 = Pipeline([('svc'), SVC()]) # FN
 
-    grid2 = GridSearchCV(pipe2, param_grid={'svc__C': [1, 10, 100]}) 
+    grid2 = GridSearchCV(pipe2, param_grid={'svc__C': [1, 10, 100]})
+
+    grid3 = GridSearchCV(make_pipeline(SVC()), param_grid={'svc__C': [1, 10, 100]})
+    grid4 = GridSearchCV(some_method(some_other_method(make_pipeline(SVC()))), param_grid={'svc__C': [1, 10, 100]})
 
     GridSearchCV(s, param_grid={'svc__C': [1, 10, 100]}) # FN
 

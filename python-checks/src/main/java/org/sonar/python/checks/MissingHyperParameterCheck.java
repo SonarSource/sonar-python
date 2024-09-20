@@ -178,10 +178,6 @@ public class MissingHyperParameterCheck extends PythonSubscriptionCheck {
       "sklearn.model_selection._search_successive_halving.HalvingRandomSearchCV",
       "sklearn.model_selection._search_successive_halving.HalvingGridSearchCV");
 
-    private static final Set<String> PIPELINE_FQNS = Set.of(
-      "sklearn.pipeline.make_pipeline",
-      "sklearn.pipeline.Pipeline");
-
     public static List<Param> getMissingParameters(String name, CallExpression callExpression) {
       return Optional.ofNullable(SK_LEARN_ESTIMATORS_AND_PARAMETERS_TO_CHECK.get(name))
         .filter(parameters -> !isDirectlyUsedInSearchCV(callExpression))
@@ -192,10 +188,14 @@ public class MissingHyperParameterCheck extends PythonSubscriptionCheck {
     }
 
     private static boolean isDirectlyUsedInSearchCV(CallExpression callExpression) {
-      return Optional.ofNullable(TreeUtils.firstAncestorOfKind(callExpression, REGULAR_ARGUMENT))
-        .flatMap(TreeUtils.toOptionalInstanceOfMapper(RegularArgument.class))
-        .map(SkLearnCheck::isArgumentPartOfSearchCV)
-        .orElse(false);
+      Tree current = callExpression;
+      do{
+        current = TreeUtils.firstAncestorOfKind(current, REGULAR_ARGUMENT);
+        if(current instanceof RegularArgument arg && isArgumentPartOfSearchCV(arg)) {
+          return true;
+        }
+      } while(current != null);
+      return false;
     }
 
     private static boolean isSetParamsCalled(CallExpression callExpression) {
@@ -220,8 +220,6 @@ public class MissingHyperParameterCheck extends PythonSubscriptionCheck {
     private static boolean isPartOfPipelineAndSearchCV(CallExpression callExpression) {
       return Expressions.getAssignedName(callExpression)
         .map(SkLearnCheck::isEstimatorUsedInSearchCV)
-        .or(() -> getPipelineAssignement(callExpression)
-          .map(SkLearnCheck::isEstimatorUsedInSearchCV))
         .orElse(false);
     }
 
@@ -244,16 +242,6 @@ public class MissingHyperParameterCheck extends PythonSubscriptionCheck {
         .map(Symbol::fullyQualifiedName)
         .map(SEARCH_CV_FQNS::contains)
         .orElse(false);
-    }
-
-    private static Optional<Name> getPipelineAssignement(CallExpression callExpression) {
-      return Optional.ofNullable(TreeUtils.firstAncestorOfKind(callExpression, CALL_EXPR))
-        .flatMap(TreeUtils.toOptionalInstanceOfMapper(CallExpression.class))
-        .filter(callExp -> Optional.ofNullable(callExp.calleeSymbol())
-          .map(Symbol::fullyQualifiedName)
-          .map(PIPELINE_FQNS::contains)
-          .orElse(false))
-        .flatMap(Expressions::getAssignedName);
     }
   }
 }
