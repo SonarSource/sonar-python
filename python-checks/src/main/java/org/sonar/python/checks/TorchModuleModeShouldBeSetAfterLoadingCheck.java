@@ -65,8 +65,9 @@ public class TorchModuleModeShouldBeSetAfterLoadingCheck extends PythonSubscript
     // To properly check if the correct load_state_dict is called, typeshed type information would be required.
     // Since this is currently not possible, we check if the parameter to load_state_dict is torch.load(...),
     // with the assumption that if torch.load is passed to this load_state_dict, it is probably the correct method
-    if(callExpr.callee() instanceof QualifiedExpression qualifiedExpr) {
-      return LOAD_STATE_DICT_NAME.equals(qualifiedExpr.name().name()) && containsTorchLoadCall(callExpr.arguments());
+    if (callExpr.callee() instanceof QualifiedExpression qualifiedExpr) {
+      return qualifiedExpr.qualifier().type().mustBeOrExtend("torch.nn.modules.module.Module")
+        && LOAD_STATE_DICT_NAME.equals(qualifiedExpr.name().name()) && containsTorchLoadCall(callExpr.arguments());
     }
     return false;
   }

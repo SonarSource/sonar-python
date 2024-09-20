@@ -7,25 +7,22 @@ def noncompliant():
    #^^^^^^^^^^^^^^^^^^^^^
     ...
 
-def noncompliant(model):
-    model.load_state_dict(torch.load('model_weights.pth')) # Noncompliant
+class CustomModule(torch.nn.Module):
+    pass
 
 def noncompliant():
-    model.load_state_dict(torch.load('model_weights.pth')) # Noncompliant
-
-def noncompliant():
-    get_model().load_state_dict(torch.load('model_weights.pth')) # Noncompliant
-
-def noncompliant(model):
-    weights = torch.load('model_weights.pth')
-    weights2 = weights
-    model.load_state_dict(weights2) # Noncompliant
+    model = CustomModule(...)
+    model.load_state_dict(torch.load('model_weights.pth')) # false negative
+    ...
 
 def noncompliant():
     model = models.vgg16()
     model.train()
     model.load_state_dict(torch.load('model_weights.pth')) # Noncompliant
     other_model = model
+
+def compliant(model):
+    model.load_state_dict(torch.load('model_weights.pth'))
 
 def compliant(model):
     weights = weights
