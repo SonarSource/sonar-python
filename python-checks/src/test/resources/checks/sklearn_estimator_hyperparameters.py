@@ -36,7 +36,7 @@ def non_compliant():
     SVC(random_state=42) # Noncompliant
     SVC(C=1) # Noncompliant
     SVR() # Noncompliant {{Add the missing hyperparameters C, kernel and gamma for this Scikit-learn estimator.}}
-    SVR(C=1.2, kernel="poly") # Noncompliant
+    SVR(C=1.2, kernel="poly") # Noncompliant {{Add the missing hyperparameter gamma for this Scikit-learn estimator.}}
     NuSVC() # Noncompliant
     NuSVR(gamma="scale", kernel="poly") # Noncompliant
 
