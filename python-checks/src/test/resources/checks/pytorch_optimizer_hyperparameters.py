@@ -15,7 +15,7 @@ def adadelta(param_dict, param_list, rho, eps):
     from torch.optim import Adadelta
     noncompliant = Adadelta() # Noncompliant {{Add the missing hyperparameters lr and weight_decay for this PyTorch optimizer.}}
     noncompliant = Adadelta(some_extra_variable=3) # Noncompliant {{Add the missing hyperparameters lr and weight_decay for this PyTorch optimizer.}}
-    noncompliant = Adadelta(model.parameters(), lr = 0.001) # Noncompliant
+    noncompliant = Adadelta(model.parameters(), lr = 0.001) # Noncompliant {{Add the missing hyperparameter weight_decay for this PyTorch optimizer.}}
     noncompliant = Adadelta(model.parameters(), weight_decay = 0.32) # Noncompliant
 
     optimizer = Adadelta(model.parameters(), 0.001, rho, eps, 0.23)

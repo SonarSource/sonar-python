@@ -19,6 +19,7 @@
  */
 package org.sonar.python.checks;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -74,19 +75,20 @@ public class MissingHyperParameterCheck extends PythonSubscriptionCheck {
   }
 
   private static void checkPyTorchOptimizer(String name, CallExpression callExpression, SubscriptionContext ctx) {
-    PyTorchCheck.getMissingParameters(name, callExpression)
-      .map(MissingHyperParameterCheck::toParameterNames)
-      .ifPresent(parameters -> ctx.addIssue(callExpression, formatMessage(parameters, PYTORCH_MESSAGE)));
+    List<String> missingParams = PyTorchCheck.getMissingParameters(name, callExpression).stream()
+      .map(Param::name)
+      .toList();
+
+    if (!missingParams.isEmpty()) {
+      ctx.addIssue(callExpression, formatMessage(missingParams, PYTORCH_MESSAGE));
+    }
   }
 
   private static void checkSkLearnEstimator(String name, CallExpression callExpression, SubscriptionContext ctx) {
-    SkLearnCheck.getMissingParameters(name, callExpression)
-      .map(MissingHyperParameterCheck::toParameterNames)
-      .ifPresent(parameters -> ctx.addIssue(callExpression, formatMessage(parameters, SKLEARN_MESSAGE)));
-  }
-
-  private static List<String> toParameterNames(List<Param> parameters) {
-    return parameters.stream().map(Param::name).toList();
+    List<String> missingParams = SkLearnCheck.getMissingParameters(name, callExpression).stream().map(Param::name).toList();
+    if(!missingParams.isEmpty()) {
+      ctx.addIssue(callExpression, formatMessage(missingParams, SKLEARN_MESSAGE));
+    }
   }
 
   private static String formatMessage(List<String> missingArgs, String formatString) {
@@ -101,12 +103,12 @@ public class MissingHyperParameterCheck extends PythonSubscriptionCheck {
 
 
   // common method used by both the PyTorchCheck class and SkLearnCheck class
-  private static boolean isMissingAHyperparameter(CallExpression callExpression, List<Param> parametersToCheck) {
+  private static List<Param> filterUsedHyperparameter(CallExpression callExpression, List<Param> parametersToCheck) {
     return parametersToCheck.stream()
-      .map(param -> param.position()
+      .filter(param -> param.position()
         .map(position -> TreeUtils.nthArgumentOrKeyword(position, param.name, callExpression.arguments()))
-        .orElse(TreeUtils.argumentByKeyword(param.name, callExpression.arguments())))
-      .anyMatch(Objects::isNull);
+        .orElse(TreeUtils.argumentByKeyword(param.name, callExpression.arguments())) == null)
+      .toList();
   }
 
   private static class PyTorchCheck {
@@ -130,10 +132,11 @@ public class MissingHyperParameterCheck extends PythonSubscriptionCheck {
       Map.entry("torch.optim.SGD", List.of(new Param(LR, 1), new Param("momentum", 2), new Param(WEIGHT_DECAY, 4)))
     );
 
-    public static Optional<List<Param>> getMissingParameters(String name, CallExpression callExpression) {
+    public static List<Param> getMissingParameters(String name, CallExpression callExpression) {
       return Optional.ofNullable(PY_TORCH_ESTIMATORS_AND_PARAMETERS_TO_CHECK.get(name))
         .filter(parameters -> !Expressions.containsSpreadOperator(callExpression.arguments()))
-        .filter(parameters -> isMissingAHyperparameter(callExpression, parameters));
+        .map(parameters -> filterUsedHyperparameter(callExpression, parameters))
+        .orElse(Collections.emptyList());
     }
   }
 
@@ -175,23 +178,24 @@ public class MissingHyperParameterCheck extends PythonSubscriptionCheck {
       "sklearn.model_selection._search_successive_halving.HalvingRandomSearchCV",
       "sklearn.model_selection._search_successive_halving.HalvingGridSearchCV");
 
-    private static final Set<String> PIPELINE_FQNS = Set.of(
-      "sklearn.pipeline.make_pipeline",
-      "sklearn.pipeline.Pipeline");
-
-    public static Optional<List<Param>> getMissingParameters(String name, CallExpression callExpression) {
+    public static List<Param> getMissingParameters(String name, CallExpression callExpression) {
       return Optional.ofNullable(SK_LEARN_ESTIMATORS_AND_PARAMETERS_TO_CHECK.get(name))
         .filter(parameters -> !isDirectlyUsedInSearchCV(callExpression))
         .filter(parameters -> !isSetParamsCalled(callExpression))
         .filter(parameters -> !isPartOfPipelineAndSearchCV(callExpression))
-        .filter(parameters -> isMissingAHyperparameter(callExpression, parameters));
+        .map(parameters -> filterUsedHyperparameter(callExpression, parameters))
+        .orElse(Collections.emptyList());
     }
 
     private static boolean isDirectlyUsedInSearchCV(CallExpression callExpression) {
-      return Optional.ofNullable(TreeUtils.firstAncestorOfKind(callExpression, REGULAR_ARGUMENT))
-        .flatMap(TreeUtils.toOptionalInstanceOfMapper(RegularArgument.class))
-        .map(SkLearnCheck::isArgumentPartOfSearchCV)
-        .orElse(false);
+      Tree current = callExpression;
+      do{
+        current = TreeUtils.firstAncestorOfKind(current, REGULAR_ARGUMENT);
+        if(current instanceof RegularArgument arg && isArgumentPartOfSearchCV(arg)) {
+          return true;
+        }
+      } while(current != null);
+      return false;
     }
 
     private static boolean isSetParamsCalled(CallExpression callExpression) {
@@ -216,8 +220,6 @@ public class MissingHyperParameterCheck extends PythonSubscriptionCheck {
     private static boolean isPartOfPipelineAndSearchCV(CallExpression callExpression) {
       return Expressions.getAssignedName(callExpression)
         .map(SkLearnCheck::isEstimatorUsedInSearchCV)
-        .or(() -> getPipelineAssignement(callExpression)
-          .map(SkLearnCheck::isEstimatorUsedInSearchCV))
         .orElse(false);
     }
 
@@ -240,16 +242,6 @@ public class MissingHyperParameterCheck extends PythonSubscriptionCheck {
         .map(Symbol::fullyQualifiedName)
         .map(SEARCH_CV_FQNS::contains)
         .orElse(false);
-    }
-
-    private static Optional<Name> getPipelineAssignement(CallExpression callExpression) {
-      return Optional.ofNullable(TreeUtils.firstAncestorOfKind(callExpression, CALL_EXPR))
-        .flatMap(TreeUtils.toOptionalInstanceOfMapper(CallExpression.class))
-        .filter(callExp -> Optional.ofNullable(callExp.calleeSymbol())
-          .map(Symbol::fullyQualifiedName)
-          .map(PIPELINE_FQNS::contains)
-          .orElse(false))
-        .flatMap(Expressions::getAssignedName);
     }
   }
 }
