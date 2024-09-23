@@ -27,12 +27,9 @@ import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
-import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.CallExpression;
-import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
-import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.cfg.fixpoint.ReachingDefinitionsAnalysis;
 import org.sonar.python.tree.TreeUtils;
@@ -40,10 +37,8 @@ import org.sonar.python.tree.TreeUtils;
 @Rule(key = "S6982")
 public class TorchModuleModeShouldBeSetAfterLoadingCheck extends PythonSubscriptionCheck {
   private static final Set<String> STATE_SETTING_FUNCTION_FQNS = Set.of("eval", "train");
-  private static final String TORCH_LOAD_FQN = "torch.load";
   private static final String LOAD_STATE_DICT_NAME = "load_state_dict";
   private static final String MESSAGE = "Set the module in training or evaluation mode.";
-  private static final int IS_TORCH_LOAD_CALL_MAX_RECURSIVE_COUNTER = 10;
 
   private ReachingDefinitionsAnalysis reachingDefinitionsAnalysis;
 
@@ -54,7 +49,7 @@ public class TorchModuleModeShouldBeSetAfterLoadingCheck extends PythonSubscript
 
     context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, ctx -> {
       CallExpression callExpr = (CallExpression) ctx.syntaxNode();
-      List<Usage> receiverUsages = getForwardUsages(callExpr);
+      List<Usage> receiverUsages = getForwardUsagesOfReceiver(callExpr);
       if (isLoadStateDictCall(callExpr) && !hasEvalOrTrainUsage(receiverUsages) && !isModelPassedOn(receiverUsages)) {
         ctx.addIssue(callExpr.callee(), MESSAGE);
       }
@@ -65,33 +60,14 @@ public class TorchModuleModeShouldBeSetAfterLoadingCheck extends PythonSubscript
     // To properly check if the correct load_state_dict is called, typeshed type information would be required.
     // Since this is currently not possible, we check if the parameter to load_state_dict is torch.load(...),
     // with the assumption that if torch.load is passed to this load_state_dict, it is probably the correct method
-    if(callExpr.callee() instanceof QualifiedExpression qualifiedExpr) {
-      return LOAD_STATE_DICT_NAME.equals(qualifiedExpr.name().name()) && containsTorchLoadCall(callExpr.arguments());
+    if (callExpr.callee() instanceof QualifiedExpression qualifiedExpr) {
+      return qualifiedExpr.qualifier().type().mustBeOrExtend("torch.nn.modules.module.Module")
+        && LOAD_STATE_DICT_NAME.equals(qualifiedExpr.name().name());
     }
     return false;
   }
 
-  private boolean containsTorchLoadCall(List<Argument> args) {
-    return args.stream()
-      .flatMap(TreeUtils.toStreamInstanceOfMapper(RegularArgument.class))
-      .anyMatch(arg -> isTorchLoadCall(arg.expression(), 0));
-  }
-
-  private boolean isTorchLoadCall(Expression expr, int recursiveCounter) {
-    if (recursiveCounter > IS_TORCH_LOAD_CALL_MAX_RECURSIVE_COUNTER) {
-      return false;
-    } else if (expr instanceof CallExpression callExpr) {
-      Symbol calleeSymbol = callExpr.calleeSymbol();
-      return calleeSymbol != null && TORCH_LOAD_FQN.equals(calleeSymbol.fullyQualifiedName());
-    } else if (expr instanceof Name name) {
-      return reachingDefinitionsAnalysis.valuesAtLocation(name).stream()
-        .anyMatch(definitionExpr -> isTorchLoadCall(definitionExpr, recursiveCounter + 1));
-    } else {
-      return false;
-    }
-  }
-
-  private static List<Usage> getForwardUsages(CallExpression callExpr) {
+  private static List<Usage> getForwardUsagesOfReceiver(CallExpression callExpr) {
     List<Usage> usages = getFunctionCallReceiverName(callExpr)
       .flatMap(name -> Optional.ofNullable(name.symbol()))
       .map(Symbol::usages)
