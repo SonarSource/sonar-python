@@ -1,0 +1,158 @@
+
++torchvision.models.detection.backbone_utilsµ
+WeightsEnum#torchvision.models._api.WeightsEnum"	enum.Enum*Î
+verify*torchvision.models._api.WeightsEnum.verify"
+Any*à
+cls
+)Type[torchvision.models._api.WeightsEnum]J
+#torchvision.models._api.WeightsEnum"#torchvision.models._api.WeightsEnum"type*
+obj
+Any0:classmethodp*ù
+get_state_dict2torchvision.models._api.WeightsEnum.get_state_dict"Y
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping*T
+selfJ
+#torchvision.models._api.WeightsEnum"#torchvision.models._api.WeightsEnum*
+args
+Any*
+kwargs
+Any*F
+url'torchvision.models._api.WeightsEnum.url*
+self0:property`*T
+
+transforms.torchvision.models._api.WeightsEnum.transforms*
+self0:property`*H
+meta(torchvision.models._api.WeightsEnum.meta*
+self0:property`H“
+IntermediateLayerGetter1torchvision.models._utils.IntermediateLayerGetter"builtins.object*·
+__init__:torchvision.models._utils.IntermediateLayerGetter.__init__"
+None*p
+selff
+1torchvision.models._utils.IntermediateLayerGetter"1torchvision.models._utils.IntermediateLayerGetter*
+model
+Any*à
+return_layersu
+(builtins.dict[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.dict*U
+forward9torchvision.models._utils.IntermediateLayerGetter.forward*
+self*
+xr]
+__annotations__Atorchvision.models._utils.IntermediateLayerGetter.__annotations__
+AnyrY
+return_layers?torchvision.models._utils.IntermediateLayerGetter.return_layers
+Anyﬂ
+BackboneWithFPN;torchvision.models.detection.backbone_utils.BackboneWithFPN"torch.nn.modules.module.Module*¶
+__init__Dtorchvision.models.detection.backbone_utils.BackboneWithFPN.__init__"
+None*Ñ
+selfz
+;torchvision.models.detection.backbone_utils.BackboneWithFPN";torchvision.models.detection.backbone_utils.BackboneWithFPN*N
+backbone@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*à
+return_layersu
+(builtins.dict[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.dict*`
+in_channels_listJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*.
+out_channels
+builtins.int"builtins.int*:
+extra_blocks&
+Union[Any,None]
+Any
+None *ô
+
+norm_layerÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *æ
+forwardCtorchvision.models.detection.backbone_utils.BackboneWithFPN.forward"W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*Ñ
+selfz
+;torchvision.models.detection.backbone_utils.BackboneWithFPN";torchvision.models.detection.backbone_utils.BackboneWithFPN*
+x
+AnyrQ
+body@torchvision.models.detection.backbone_utils.BackboneWithFPN.body
+AnyrO
+fpn?torchvision.models.detection.backbone_utils.BackboneWithFPN.fpn
+Anyra
+out_channelsHtorchvision.models.detection.backbone_utils.BackboneWithFPN.out_channels
+Anyõ
+handle_legacy_interface1torchvision.models._utils.handle_legacy_interface"
+Any*√
+weightsµ
+[Tuple[builtins.str,Union[torchvision.models._utils.W,None,CallableType[builtins.function]]]
+builtins.str"builtins.strµ
+GUnion[torchvision.models._utils.W,None,CallableType[builtins.function]]ê
+torchvision.models._utils.WJ
+#torchvision.models._api.WeightsEnum"#torchvision.models._api.WeightsEnum"#torchvision.models._api.WeightsEnum
+NoneK
+CallableType[builtins.function]&
+builtins.function"builtins.functionä
+resnet_fpn_backbone?torchvision.models.detection.backbone_utils.resnet_fpn_backbone"z
+;torchvision.models.detection.backbone_utils.BackboneWithFPN";torchvision.models.detection.backbone_utils.BackboneWithFPN*/
+backbone_name
+builtins.str"builtins.str*ó
+weightsâ
+/Union[torchvision.models._api.WeightsEnum,None]J
+#torchvision.models._api.WeightsEnum"#torchvision.models._api.WeightsEnum
+None*]
+
+norm_layerK
+CallableType[builtins.function]&
+builtins.function"builtins.function *4
+trainable_layers
+builtins.int"builtins.int *ô
+returned_layersÅ
+'Union[builtins.list[builtins.int],None]J
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list
+None *:
+extra_blocks&
+Union[Any,None]
+Any
+None ˜
+mobilenet_backbone>torchvision.models.detection.backbone_utils.mobilenet_backbone"@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module*/
+backbone_name
+builtins.str"builtins.str*ó
+weightsâ
+/Union[torchvision.models._api.WeightsEnum,None]J
+#torchvision.models._api.WeightsEnum"#torchvision.models._api.WeightsEnum
+None*'
+fpn
+builtins.bool"builtins.bool*]
+
+norm_layerK
+CallableType[builtins.function]&
+builtins.function"builtins.function *4
+trainable_layers
+builtins.int"builtins.int *ô
+returned_layersÅ
+'Union[builtins.list[builtins.int],None]J
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list
+None *:
+extra_blocks&
+Union[Any,None]
+Any
+None *ß
+__annotations__;torchvision.models.detection.backbone_utils.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*+
+	mobilenettorchvision.models.mobilenet *%
+resnettorchvision.models.resnet *E
+Tensor2torchvision.models.detection.backbone_utils.Tensor
+Any*S
+ExtraFPNBlock9torchvision.models.detection.backbone_utils.ExtraFPNBlock
+Any*c
+FeaturePyramidNetworkAtorchvision.models.detection.backbone_utils.FeaturePyramidNetwork
+Any*Y
+LastLevelMaxPool<torchvision.models.detection.backbone_utils.LastLevelMaxPool
+Any

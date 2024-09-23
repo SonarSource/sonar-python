@@ -1,0 +1,168 @@
+
+*torchvision.models.detection.keypoint_rcnn÷
+KeypointRCNN7torchvision.models.detection.keypoint_rcnn.KeypointRCNN"3torchvision.models.detection.faster_rcnn.FasterRCNN*ø
+__init__@torchvision.models.detection.keypoint_rcnn.KeypointRCNN.__init__"
+None*|
+selfr
+7torchvision.models.detection.keypoint_rcnn.KeypointRCNN"7torchvision.models.detection.keypoint_rcnn.KeypointRCNN*
+backbone
+Any*9
+num_classes&
+Union[Any,None]
+Any
+None *6
+min_size&
+Union[Any,None]
+Any
+None *,
+max_size
+builtins.int"builtins.int *8
+
+image_mean&
+Union[Any,None]
+Any
+None *7
+	image_std&
+Union[Any,None]
+Any
+None *B
+rpn_anchor_generator&
+Union[Any,None]
+Any
+None *6
+rpn_head&
+Union[Any,None]
+Any
+None *;
+rpn_pre_nms_top_n_train
+builtins.int"builtins.int *:
+rpn_pre_nms_top_n_test
+builtins.int"builtins.int *<
+rpn_post_nms_top_n_train
+builtins.int"builtins.int *;
+rpn_post_nms_top_n_test
+builtins.int"builtins.int *6
+rpn_nms_thresh 
+builtins.float"builtins.float *9
+rpn_fg_iou_thresh 
+builtins.float"builtins.float *9
+rpn_bg_iou_thresh 
+builtins.float"builtins.float *<
+rpn_batch_size_per_image
+builtins.int"builtins.int *=
+rpn_positive_fraction 
+builtins.float"builtins.float *8
+rpn_score_thresh 
+builtins.float"builtins.float *:
+box_roi_pool&
+Union[Any,None]
+Any
+None *6
+box_head&
+Union[Any,None]
+Any
+None *;
+box_predictor&
+Union[Any,None]
+Any
+None *8
+box_score_thresh 
+builtins.float"builtins.float *6
+box_nms_thresh 
+builtins.float"builtins.float *:
+box_detections_per_img
+builtins.int"builtins.int *9
+box_fg_iou_thresh 
+builtins.float"builtins.float *9
+box_bg_iou_thresh 
+builtins.float"builtins.float *<
+box_batch_size_per_image
+builtins.int"builtins.int *=
+box_positive_fraction 
+builtins.float"builtins.float *>
+bbox_reg_weights&
+Union[Any,None]
+Any
+None *?
+keypoint_roi_pool&
+Union[Any,None]
+Any
+None *;
+keypoint_head&
+Union[Any,None]
+Any
+None *@
+keypoint_predictor&
+Union[Any,None]
+Any
+None *;
+num_keypoints&
+Union[Any,None]
+Any
+None *
+kwargs
+Anyø
+KeypointRCNNHeads<torchvision.models.detection.keypoint_rcnn.KeypointRCNNHeads"builtins.object*“
+__init__Etorchvision.models.detection.keypoint_rcnn.KeypointRCNNHeads.__init__"
+None*†
+self|
+<torchvision.models.detection.keypoint_rcnn.KeypointRCNNHeads"<torchvision.models.detection.keypoint_rcnn.KeypointRCNNHeads*
+in_channels
+Any*
+layers
+AnyÖ
+KeypointRCNNPredictor@torchvision.models.detection.keypoint_rcnn.KeypointRCNNPredictor"torch.nn.modules.module.Module*§
+__init__Itorchvision.models.detection.keypoint_rcnn.KeypointRCNNPredictor.__init__"
+None*
+self„
+@torchvision.models.detection.keypoint_rcnn.KeypointRCNNPredictor"@torchvision.models.detection.keypoint_rcnn.KeypointRCNNPredictor*
+in_channels
+Any*
+num_keypoints
+Any*d
+forwardHtorchvision.models.detection.keypoint_rcnn.KeypointRCNNPredictor.forward*
+self*
+xrn
+kps_score_lowresQtorchvision.models.detection.keypoint_rcnn.KeypointRCNNPredictor.kps_score_lowres
+Anyrs
+up_scaleItorchvision.models.detection.keypoint_rcnn.KeypointRCNNPredictor.up_scale
+builtins.int"builtins.intrf
+out_channelsMtorchvision.models.detection.keypoint_rcnn.KeypointRCNNPredictor.out_channels
+AnyÞ
+!KeypointRCNN_ResNet50_FPN_WeightsLtorchvision.models.detection.keypoint_rcnn.KeypointRCNN_ResNet50_FPN_Weights"#torchvision.models._api.WeightsEnumHrp
+COCO_LEGACYXtorchvision.models.detection.keypoint_rcnn.KeypointRCNN_ResNet50_FPN_Weights.COCO_LEGACY
+Anyrh
+COCO_V1Ttorchvision.models.detection.keypoint_rcnn.KeypointRCNN_ResNet50_FPN_Weights.COCO_V1
+Anyrh
+DEFAULTTtorchvision.models.detection.keypoint_rcnn.KeypointRCNN_ResNet50_FPN_Weights.DEFAULT
+Any‡
+keypointrcnn_resnet50_fpnDtorchvision.models.detection.keypoint_rcnn.keypointrcnn_resnet50_fpn"r
+7torchvision.models.detection.keypoint_rcnn.KeypointRCNN"7torchvision.models.detection.keypoint_rcnn.KeypointRCNN*•
+weights…
+XUnion[torchvision.models.detection.keypoint_rcnn.KeypointRCNN_ResNet50_FPN_Weights,None]œ
+Ltorchvision.models.detection.keypoint_rcnn.KeypointRCNN_ResNet50_FPN_Weights"Ltorchvision.models.detection.keypoint_rcnn.KeypointRCNN_ResNet50_FPN_Weights
+None *.
+progress
+builtins.bool"builtins.bool *W
+num_classesD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *Y
+num_keypointsD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *·
+weights_backbonež
+6Union[torchvision.models.resnet.ResNet50_Weights,None]X
+*torchvision.models.resnet.ResNet50_Weights"*torchvision.models.resnet.ResNet50_Weights
+None *e
+trainable_backbone_layersD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *
+kwargs
+Any*¦
+__annotations__:torchvision.models.detection.keypoint_rcnn.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict

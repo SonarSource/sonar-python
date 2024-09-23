@@ -1,0 +1,368 @@
+
+&torchvision.models.detection.retinanetí
+RetinaNetHead4torchvision.models.detection.retinanet.RetinaNetHead"torch.nn.modules.module.Module*µ
+__init__=torchvision.models.detection.retinanet.RetinaNetHead.__init__"
+None*v
+selfl
+4torchvision.models.detection.retinanet.RetinaNetHead"4torchvision.models.detection.retinanet.RetinaNetHead*
+in_channels
+Any*
+num_anchors
+Any*
+num_classes
+Any*™
+
+norm_layer†
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *±
+compute_lossAtorchvision.models.detection.retinanet.RetinaNetHead.compute_loss"W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*v
+selfl
+4torchvision.models.detection.retinanet.RetinaNetHead"4torchvision.models.detection.retinanet.RetinaNetHead*¦
+targets˜
+.builtins.list[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"builtins.list*i
+head_outputsW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*9
+anchors,
+builtins.list[Any]
+Any"builtins.list*>
+matched_idxs,
+builtins.list[Any]
+Any"builtins.list*Í
+forward<torchvision.models.detection.retinanet.RetinaNetHead.forward"W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*v
+selfl
+4torchvision.models.detection.retinanet.RetinaNetHead"4torchvision.models.detection.retinanet.RetinaNetHead*3
+x,
+builtins.list[Any]
+Any"builtins.listrh
+classification_headHtorchvision.models.detection.retinanet.RetinaNetHead.classification_head
+Anyr`
+regression_headDtorchvision.models.detection.retinanet.RetinaNetHead.regression_head
+Any§
+RetinaNetClassificationHeadBtorchvision.models.detection.retinanet.RetinaNetClassificationHead"torch.nn.modules.module.Module*œ
+__init__Ktorchvision.models.detection.retinanet.RetinaNetClassificationHead.__init__"
+None*“
+selfˆ
+Btorchvision.models.detection.retinanet.RetinaNetClassificationHead"Btorchvision.models.detection.retinanet.RetinaNetClassificationHead*
+in_channels
+Any*
+num_anchors
+Any*
+num_classes
+Any*9
+prior_probability 
+builtins.float"builtins.float *™
+
+norm_layer†
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *Ò
+compute_lossOtorchvision.models.detection.retinanet.RetinaNetClassificationHead.compute_loss"
+Any*“
+selfˆ
+Btorchvision.models.detection.retinanet.RetinaNetClassificationHead"Btorchvision.models.detection.retinanet.RetinaNetClassificationHead*¦
+targets˜
+.builtins.list[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"builtins.list*i
+head_outputsW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*>
+matched_idxs,
+builtins.list[Any]
+Any"builtins.list*©
+forwardJtorchvision.models.detection.retinanet.RetinaNetClassificationHead.forward"
+Any*“
+selfˆ
+Btorchvision.models.detection.retinanet.RetinaNetClassificationHead"Btorchvision.models.detection.retinanet.RetinaNetClassificationHead*3
+x,
+builtins.list[Any]
+Any"builtins.listrX
+convGtorchvision.models.detection.retinanet.RetinaNetClassificationHead.conv
+Anyrd
+
+cls_logitsMtorchvision.models.detection.retinanet.RetinaNetClassificationHead.cls_logits
+Anyrf
+num_classesNtorchvision.models.detection.retinanet.RetinaNetClassificationHead.num_classes
+Anyrf
+num_anchorsNtorchvision.models.detection.retinanet.RetinaNetClassificationHead.num_anchors
+Anyrt
+BETWEEN_THRESHOLDSUtorchvision.models.detection.retinanet.RetinaNetClassificationHead.BETWEEN_THRESHOLDS
+AnyÛ
+RetinaNetRegressionHead>torchvision.models.detection.retinanet.RetinaNetRegressionHead"torch.nn.modules.module.Module*»
+__init__Gtorchvision.models.detection.retinanet.RetinaNetRegressionHead.__init__"
+None*‹
+self€
+>torchvision.models.detection.retinanet.RetinaNetRegressionHead">torchvision.models.detection.retinanet.RetinaNetRegressionHead*
+in_channels
+Any*
+num_anchors
+Any*™
+
+norm_layer†
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *
+compute_lossKtorchvision.models.detection.retinanet.RetinaNetRegressionHead.compute_loss"
+Any*‹
+self€
+>torchvision.models.detection.retinanet.RetinaNetRegressionHead">torchvision.models.detection.retinanet.RetinaNetRegressionHead*¦
+targets˜
+.builtins.list[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"builtins.list*i
+head_outputsW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*9
+anchors,
+builtins.list[Any]
+Any"builtins.list*>
+matched_idxs,
+builtins.list[Any]
+Any"builtins.list*
+forwardFtorchvision.models.detection.retinanet.RetinaNetRegressionHead.forward"
+Any*‹
+self€
+>torchvision.models.detection.retinanet.RetinaNetRegressionHead">torchvision.models.detection.retinanet.RetinaNetRegressionHead*3
+x,
+builtins.list[Any]
+Any"builtins.listrj
+__annotations__Ntorchvision.models.detection.retinanet.RetinaNetRegressionHead.__annotations__
+AnyrT
+convCtorchvision.models.detection.retinanet.RetinaNetRegressionHead.conv
+Anyr\
+bbox_regGtorchvision.models.detection.retinanet.RetinaNetRegressionHead.bbox_reg
+Anyr^
+	box_coderHtorchvision.models.detection.retinanet.RetinaNetRegressionHead.box_coder
+Anyí'
+	RetinaNet0torchvision.models.detection.retinanet.RetinaNet"torch.nn.modules.module.Module*Í
+__init__9torchvision.models.detection.retinanet.RetinaNet.__init__"
+None*n
+selfd
+0torchvision.models.detection.retinanet.RetinaNet"0torchvision.models.detection.retinanet.RetinaNet*
+backbone
+Any*
+num_classes
+Any*,
+min_size
+builtins.int"builtins.int *,
+max_size
+builtins.int"builtins.int *8
+
+image_mean&
+Union[Any,None]
+Any
+None *7
+	image_std&
+Union[Any,None]
+Any
+None *>
+anchor_generator&
+Union[Any,None]
+Any
+None *2
+head&
+Union[Any,None]
+Any
+None *>
+proposal_matcher&
+Union[Any,None]
+Any
+None *4
+score_thresh 
+builtins.float"builtins.float *2
+
+nms_thresh 
+builtins.float"builtins.float *6
+detections_per_img
+builtins.int"builtins.int *5
+fg_iou_thresh 
+builtins.float"builtins.float *5
+bg_iou_thresh 
+builtins.float"builtins.float *3
+topk_candidates
+builtins.int"builtins.int *
+kwargs
+Any* 
+eager_outputs>torchvision.models.detection.retinanet.RetinaNet.eager_outputs"Í
+UTuple[builtins.dict[builtins.str,Any],builtins.list[builtins.dict[builtins.str,Any]]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict˜
+.builtins.list[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"builtins.list*n
+selfd
+0torchvision.models.detection.retinanet.RetinaNet"0torchvision.models.detection.retinanet.RetinaNet*c
+lossesW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*©
+
+detections˜
+.builtins.list[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"builtins.list*å
+compute_loss=torchvision.models.detection.retinanet.RetinaNet.compute_loss"W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*n
+selfd
+0torchvision.models.detection.retinanet.RetinaNet"0torchvision.models.detection.retinanet.RetinaNet*¦
+targets˜
+.builtins.list[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"builtins.list*i
+head_outputsW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*9
+anchors,
+builtins.list[Any]
+Any"builtins.list*´
+postprocess_detectionsGtorchvision.models.detection.retinanet.RetinaNet.postprocess_detections"˜
+.builtins.list[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"builtins.list*n
+selfd
+0torchvision.models.detection.retinanet.RetinaNet"0torchvision.models.detection.retinanet.RetinaNet*ž
+head_outputs‹
+.builtins.dict[builtins.str,builtins.list[Any]]
+builtins.str"builtins.str,
+builtins.list[Any]
+Any"builtins.list"builtins.dict*m
+anchors`
+!builtins.list[builtins.list[Any]],
+builtins.list[Any]
+Any"builtins.list"builtins.list*µ
+image_shapes¢
+/builtins.list[Tuple[builtins.int,builtins.int]]`
+ Tuple[builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int"builtins.list*³
+forward8torchvision.models.detection.retinanet.RetinaNet.forward"Í
+UTuple[builtins.dict[builtins.str,Any],builtins.list[builtins.dict[builtins.str,Any]]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict˜
+.builtins.list[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"builtins.list*n
+selfd
+0torchvision.models.detection.retinanet.RetinaNet"0torchvision.models.detection.retinanet.RetinaNet*8
+images,
+builtins.list[Any]
+Any"builtins.list*ó
+targetsã
+:Union[builtins.list[builtins.dict[builtins.str,Any]],None]˜
+.builtins.list[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"builtins.list
+None r\
+__annotations__@torchvision.models.detection.retinanet.RetinaNet.__annotations__
+AnyrN
+backbone9torchvision.models.detection.retinanet.RetinaNet.backbone
+Anyr^
+anchor_generatorAtorchvision.models.detection.retinanet.RetinaNet.anchor_generator
+AnyrF
+head5torchvision.models.detection.retinanet.RetinaNet.head
+Anyr^
+proposal_matcherAtorchvision.models.detection.retinanet.RetinaNet.proposal_matcher
+AnyrP
+	box_coder:torchvision.models.detection.retinanet.RetinaNet.box_coder
+AnyrP
+	transform:torchvision.models.detection.retinanet.RetinaNet.transform
+AnyrV
+score_thresh=torchvision.models.detection.retinanet.RetinaNet.score_thresh
+AnyrR
+
+nms_thresh;torchvision.models.detection.retinanet.RetinaNet.nms_thresh
+Anyrb
+detections_per_imgCtorchvision.models.detection.retinanet.RetinaNet.detections_per_img
+Anyr\
+topk_candidates@torchvision.models.detection.retinanet.RetinaNet.topk_candidates
+AnyÔ
+RetinaNet_ResNet50_FPN_WeightsEtorchvision.models.detection.retinanet.RetinaNet_ResNet50_FPN_Weights"#torchvision.models._api.WeightsEnumHra
+COCO_V1Mtorchvision.models.detection.retinanet.RetinaNet_ResNet50_FPN_Weights.COCO_V1
+Anyra
+DEFAULTMtorchvision.models.detection.retinanet.RetinaNet_ResNet50_FPN_Weights.DEFAULT
+Anyà
+!RetinaNet_ResNet50_FPN_V2_WeightsHtorchvision.models.detection.retinanet.RetinaNet_ResNet50_FPN_V2_Weights"#torchvision.models._api.WeightsEnumHrd
+COCO_V1Ptorchvision.models.detection.retinanet.RetinaNet_ResNet50_FPN_V2_Weights.COCO_V1
+Anyrd
+DEFAULTPtorchvision.models.detection.retinanet.RetinaNet_ResNet50_FPN_V2_Weights.DEFAULT
+Anyÿ
+retinanet_resnet50_fpn=torchvision.models.detection.retinanet.retinanet_resnet50_fpn"d
+0torchvision.models.detection.retinanet.RetinaNet"0torchvision.models.detection.retinanet.RetinaNet*€
+weightsð
+QUnion[torchvision.models.detection.retinanet.RetinaNet_ResNet50_FPN_Weights,None]Ž
+Etorchvision.models.detection.retinanet.RetinaNet_ResNet50_FPN_Weights"Etorchvision.models.detection.retinanet.RetinaNet_ResNet50_FPN_Weights
+None *.
+progress
+builtins.bool"builtins.bool *W
+num_classesD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *·
+weights_backbonež
+6Union[torchvision.models.resnet.ResNet50_Weights,None]X
+*torchvision.models.resnet.ResNet50_Weights"*torchvision.models.resnet.ResNet50_Weights
+None *e
+trainable_backbone_layersD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *
+kwargs
+AnyŽ
+retinanet_resnet50_fpn_v2@torchvision.models.detection.retinanet.retinanet_resnet50_fpn_v2"d
+0torchvision.models.detection.retinanet.RetinaNet"0torchvision.models.detection.retinanet.RetinaNet*‰
+weightsù
+TUnion[torchvision.models.detection.retinanet.RetinaNet_ResNet50_FPN_V2_Weights,None]”
+Htorchvision.models.detection.retinanet.RetinaNet_ResNet50_FPN_V2_Weights"Htorchvision.models.detection.retinanet.RetinaNet_ResNet50_FPN_V2_Weights
+None *.
+progress
+builtins.bool"builtins.bool *W
+num_classesD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *·
+weights_backbonež
+6Union[torchvision.models.resnet.ResNet50_Weights,None]X
+*torchvision.models.resnet.ResNet50_Weights"*torchvision.models.resnet.ResNet50_Weights
+None *e
+trainable_backbone_layersD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *
+kwargs
+Any*¢
+__annotations__6torchvision.models.detection.retinanet.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*@
+Tensor-torchvision.models.detection.retinanet.Tensor
+Any

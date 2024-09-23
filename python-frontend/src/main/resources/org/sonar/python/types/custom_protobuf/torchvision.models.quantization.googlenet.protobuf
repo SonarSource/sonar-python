@@ -1,0 +1,119 @@
+
+)torchvision.models.quantization.googlenetÈ
+QuantizableBasicConv2d@torchvision.models.quantization.googlenet.QuantizableBasicConv2d"(torchvision.models.googlenet.BasicConv2d*™
+__init__Itorchvision.models.quantization.googlenet.QuantizableBasicConv2d.__init__"
+None*
+self„
+@torchvision.models.quantization.googlenet.QuantizableBasicConv2d"@torchvision.models.quantization.googlenet.QuantizableBasicConv2d*
+args
+Any*
+kwargs
+Any*þ
+forwardHtorchvision.models.quantization.googlenet.QuantizableBasicConv2d.forward"
+Any*
+self„
+@torchvision.models.quantization.googlenet.QuantizableBasicConv2d"@torchvision.models.quantization.googlenet.QuantizableBasicConv2d*
+x
+Any*Ì
+
+fuse_modelKtorchvision.models.quantization.googlenet.QuantizableBasicConv2d.fuse_model"
+None*
+self„
+@torchvision.models.quantization.googlenet.QuantizableBasicConv2d"@torchvision.models.quantization.googlenet.QuantizableBasicConv2d*U
+is_qatG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None rV
+reluEtorchvision.models.quantization.googlenet.QuantizableBasicConv2d.relu
+Anyã
+QuantizableInception>torchvision.models.quantization.googlenet.QuantizableInception"&torchvision.models.googlenet.Inception*“
+__init__Gtorchvision.models.quantization.googlenet.QuantizableInception.__init__"
+None*‹
+self€
+>torchvision.models.quantization.googlenet.QuantizableInception">torchvision.models.quantization.googlenet.QuantizableInception*
+args
+Any*
+kwargs
+Any*ø
+forwardFtorchvision.models.quantization.googlenet.QuantizableInception.forward"
+Any*‹
+self€
+>torchvision.models.quantization.googlenet.QuantizableInception">torchvision.models.quantization.googlenet.QuantizableInception*
+x
+AnyrR
+catBtorchvision.models.quantization.googlenet.QuantizableInception.cat
+Anyƒ
+QuantizableInceptionAuxAtorchvision.models.quantization.googlenet.QuantizableInceptionAux")torchvision.models.googlenet.InceptionAux*œ
+__init__Jtorchvision.models.quantization.googlenet.QuantizableInceptionAux.__init__"
+None*‘
+self†
+Atorchvision.models.quantization.googlenet.QuantizableInceptionAux"Atorchvision.models.quantization.googlenet.QuantizableInceptionAux*
+args
+Any*
+kwargs
+Any*
+forwardItorchvision.models.quantization.googlenet.QuantizableInceptionAux.forward"
+Any*‘
+self†
+Atorchvision.models.quantization.googlenet.QuantizableInceptionAux"Atorchvision.models.quantization.googlenet.QuantizableInceptionAux*
+x
+AnyrW
+reluFtorchvision.models.quantization.googlenet.QuantizableInceptionAux.relu
+Any‰
+
+QuantizableGoogLeNet>torchvision.models.quantization.googlenet.QuantizableGoogLeNet"&torchvision.models.googlenet.GoogLeNet*“
+__init__Gtorchvision.models.quantization.googlenet.QuantizableGoogLeNet.__init__"
+None*‹
+self€
+>torchvision.models.quantization.googlenet.QuantizableGoogLeNet">torchvision.models.quantization.googlenet.QuantizableGoogLeNet*
+args
+Any*
+kwargs
+Any*õ
+forwardFtorchvision.models.quantization.googlenet.QuantizableGoogLeNet.forward"ƒ
+TypeAlias[Tuple[Any,Any,Any]]1
+Tuple[Any,Any,Any]
+Any
+Any
+Any"-torchvision.models.googlenet.GoogLeNetOutputs*‹
+self€
+>torchvision.models.quantization.googlenet.QuantizableGoogLeNet">torchvision.models.quantization.googlenet.QuantizableGoogLeNet*
+x
+Any*Æ
+
+fuse_modelItorchvision.models.quantization.googlenet.QuantizableGoogLeNet.fuse_model"
+None*‹
+self€
+>torchvision.models.quantization.googlenet.QuantizableGoogLeNet">torchvision.models.quantization.googlenet.QuantizableGoogLeNet*U
+is_qatG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None rV
+quantDtorchvision.models.quantization.googlenet.QuantizableGoogLeNet.quant
+AnyrZ
+dequantFtorchvision.models.quantization.googlenet.QuantizableGoogLeNet.dequant
+Anyç
+GoogLeNet_QuantizedWeightsDtorchvision.models.quantization.googlenet.GoogLeNet_QuantizedWeights"#torchvision.models._api.WeightsEnumHrz
+IMAGENET1K_FBGEMM_V1Ytorchvision.models.quantization.googlenet.GoogLeNet_QuantizedWeights.IMAGENET1K_FBGEMM_V1
+Anyr`
+DEFAULTLtorchvision.models.quantization.googlenet.GoogLeNet_QuantizedWeights.DEFAULT
+AnyÉ
+	googlenet3torchvision.models.quantization.googlenet.googlenet"€
+>torchvision.models.quantization.googlenet.QuantizableGoogLeNet">torchvision.models.quantization.googlenet.QuantizableGoogLeNet*Ž
+weightsþ
+Union[torchvision.models.quantization.googlenet.GoogLeNet_QuantizedWeights,torchvision.models.googlenet.GoogLeNet_Weights,None]Œ
+Dtorchvision.models.quantization.googlenet.GoogLeNet_QuantizedWeights"Dtorchvision.models.quantization.googlenet.GoogLeNet_QuantizedWeights`
+.torchvision.models.googlenet.GoogLeNet_Weights".torchvision.models.googlenet.GoogLeNet_Weights
+None *.
+progress
+builtins.bool"builtins.bool *.
+quantize
+builtins.bool"builtins.bool *
+kwargs
+Any*¥
+__annotations__9torchvision.models.quantization.googlenet.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*C
+Tensor0torchvision.models.quantization.googlenet.Tensor
+Any

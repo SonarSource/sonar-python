@@ -1,0 +1,396 @@
+
+#torchvision.models.swin_transformerÈ
+PatchMerging0torchvision.models.swin_transformer.PatchMerging"builtins.object*Å
+__init__9torchvision.models.swin_transformer.PatchMerging.__init__"
+None*n
+selfd
+0torchvision.models.swin_transformer.PatchMerging"0torchvision.models.swin_transformer.PatchMerging*%
+dim
+builtins.int"builtins.int*]
+
+norm_layerK
+CallableType[builtins.function]&
+builtins.function"builtins.function *Ì
+forward8torchvision.models.swin_transformer.PatchMerging.forward"
+Any*n
+selfd
+0torchvision.models.swin_transformer.PatchMerging"0torchvision.models.swin_transformer.PatchMerging*
+x
+AnyrD
+dim4torchvision.models.swin_transformer.PatchMerging.dim
+AnyrP
+	reduction:torchvision.models.swin_transformer.PatchMerging.reduction
+AnyrF
+norm5torchvision.models.swin_transformer.PatchMerging.norm
+AnyÞ
+PatchMergingV22torchvision.models.swin_transformer.PatchMergingV2"builtins.object*Ë
+__init__;torchvision.models.swin_transformer.PatchMergingV2.__init__"
+None*r
+selfh
+2torchvision.models.swin_transformer.PatchMergingV2"2torchvision.models.swin_transformer.PatchMergingV2*%
+dim
+builtins.int"builtins.int*]
+
+norm_layerK
+CallableType[builtins.function]&
+builtins.function"builtins.function *Ò
+forward:torchvision.models.swin_transformer.PatchMergingV2.forward"
+Any*r
+selfh
+2torchvision.models.swin_transformer.PatchMergingV2"2torchvision.models.swin_transformer.PatchMergingV2*
+x
+AnyrF
+dim6torchvision.models.swin_transformer.PatchMergingV2.dim
+AnyrR
+	reduction<torchvision.models.swin_transformer.PatchMergingV2.reduction
+AnyrH
+norm7torchvision.models.swin_transformer.PatchMergingV2.norm
+Any¹
+ShiftedWindowAttention:torchvision.models.swin_transformer.ShiftedWindowAttention"builtins.object*¸
+__init__Ctorchvision.models.swin_transformer.ShiftedWindowAttention.__init__"
+None*‚
+selfx
+:torchvision.models.swin_transformer.ShiftedWindowAttention":torchvision.models.swin_transformer.ShiftedWindowAttention*%
+dim
+builtins.int"builtins.int*[
+window_sizeJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*Z
+
+shift_sizeJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*+
+	num_heads
+builtins.int"builtins.int*.
+qkv_bias
+builtins.bool"builtins.bool */
+	proj_bias
+builtins.bool"builtins.bool *9
+attention_dropout 
+builtins.float"builtins.float */
+dropout 
+builtins.float"builtins.float *”
+#define_relative_position_bias_table^torchvision.models.swin_transformer.ShiftedWindowAttention.define_relative_position_bias_table"
+None*‚
+selfx
+:torchvision.models.swin_transformer.ShiftedWindowAttention":torchvision.models.swin_transformer.ShiftedWindowAttention*Š
+define_relative_position_indexYtorchvision.models.swin_transformer.ShiftedWindowAttention.define_relative_position_index"
+None*‚
+selfx
+:torchvision.models.swin_transformer.ShiftedWindowAttention":torchvision.models.swin_transformer.ShiftedWindowAttention*
+get_relative_position_biasUtorchvision.models.swin_transformer.ShiftedWindowAttention.get_relative_position_bias"
+Any*‚
+selfx
+:torchvision.models.swin_transformer.ShiftedWindowAttention":torchvision.models.swin_transformer.ShiftedWindowAttention*ë
+forwardBtorchvision.models.swin_transformer.ShiftedWindowAttention.forward"
+Any*‚
+selfx
+:torchvision.models.swin_transformer.ShiftedWindowAttention":torchvision.models.swin_transformer.ShiftedWindowAttention*
+x
+Anyr^
+window_sizeFtorchvision.models.swin_transformer.ShiftedWindowAttention.window_size
+Anyr\
+
+shift_sizeEtorchvision.models.swin_transformer.ShiftedWindowAttention.shift_size
+AnyrZ
+	num_headsDtorchvision.models.swin_transformer.ShiftedWindowAttention.num_heads
+Anyrj
+attention_dropoutLtorchvision.models.swin_transformer.ShiftedWindowAttention.attention_dropout
+AnyrV
+dropoutBtorchvision.models.swin_transformer.ShiftedWindowAttention.dropout
+AnyrN
+qkv>torchvision.models.swin_transformer.ShiftedWindowAttention.qkv
+AnyrP
+proj?torchvision.models.swin_transformer.ShiftedWindowAttention.proj
+Anyr€
+relative_position_bias_tableWtorchvision.models.swin_transformer.ShiftedWindowAttention.relative_position_bias_table
+Any¬
+ShiftedWindowAttentionV2<torchvision.models.swin_transformer.ShiftedWindowAttentionV2":torchvision.models.swin_transformer.ShiftedWindowAttention*¾
+__init__Etorchvision.models.swin_transformer.ShiftedWindowAttentionV2.__init__"
+None*†
+self|
+<torchvision.models.swin_transformer.ShiftedWindowAttentionV2"<torchvision.models.swin_transformer.ShiftedWindowAttentionV2*%
+dim
+builtins.int"builtins.int*[
+window_sizeJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*Z
+
+shift_sizeJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*+
+	num_heads
+builtins.int"builtins.int*.
+qkv_bias
+builtins.bool"builtins.bool */
+	proj_bias
+builtins.bool"builtins.bool *9
+attention_dropout 
+builtins.float"builtins.float */
+dropout 
+builtins.float"builtins.float *š
+#define_relative_position_bias_table`torchvision.models.swin_transformer.ShiftedWindowAttentionV2.define_relative_position_bias_table"
+None*†
+self|
+<torchvision.models.swin_transformer.ShiftedWindowAttentionV2"<torchvision.models.swin_transformer.ShiftedWindowAttentionV2*‡
+get_relative_position_biasWtorchvision.models.swin_transformer.ShiftedWindowAttentionV2.get_relative_position_bias"
+Any*†
+self|
+<torchvision.models.swin_transformer.ShiftedWindowAttentionV2"<torchvision.models.swin_transformer.ShiftedWindowAttentionV2*ñ
+forwardDtorchvision.models.swin_transformer.ShiftedWindowAttentionV2.forward"
+Any*†
+self|
+<torchvision.models.swin_transformer.ShiftedWindowAttentionV2"<torchvision.models.swin_transformer.ShiftedWindowAttentionV2*
+x
+Anyr`
+logit_scaleHtorchvision.models.swin_transformer.ShiftedWindowAttentionV2.logit_scale
+AnyrX
+cpb_mlpDtorchvision.models.swin_transformer.ShiftedWindowAttentionV2.cpb_mlp
+Anyõ
+SwinTransformerBlock8torchvision.models.swin_transformer.SwinTransformerBlock"builtins.object*€
+__init__Atorchvision.models.swin_transformer.SwinTransformerBlock.__init__"
+None*~
+selft
+8torchvision.models.swin_transformer.SwinTransformerBlock"8torchvision.models.swin_transformer.SwinTransformerBlock*%
+dim
+builtins.int"builtins.int*+
+	num_heads
+builtins.int"builtins.int*[
+window_sizeJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*Z
+
+shift_sizeJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*1
+	mlp_ratio 
+builtins.float"builtins.float */
+dropout 
+builtins.float"builtins.float *9
+attention_dropout 
+builtins.float"builtins.float *=
+stochastic_depth_prob 
+builtins.float"builtins.float *]
+
+norm_layerK
+CallableType[builtins.function]&
+builtins.function"builtins.function *]
+
+attn_layerK
+CallableType[builtins.function]&
+builtins.function"builtins.function *ä
+forward@torchvision.models.swin_transformer.SwinTransformerBlock.forward"
+Any*~
+selft
+8torchvision.models.swin_transformer.SwinTransformerBlock"8torchvision.models.swin_transformer.SwinTransformerBlock*
+x
+AnyrP
+norm1>torchvision.models.swin_transformer.SwinTransformerBlock.norm1
+AnyrN
+attn=torchvision.models.swin_transformer.SwinTransformerBlock.attn
+Anyrf
+stochastic_depthItorchvision.models.swin_transformer.SwinTransformerBlock.stochastic_depth
+AnyrP
+norm2>torchvision.models.swin_transformer.SwinTransformerBlock.norm2
+AnyrL
+mlp<torchvision.models.swin_transformer.SwinTransformerBlock.mlp
+Any†
+
+SwinTransformerBlockV2:torchvision.models.swin_transformer.SwinTransformerBlockV2"8torchvision.models.swin_transformer.SwinTransformerBlock*‡
+__init__Ctorchvision.models.swin_transformer.SwinTransformerBlockV2.__init__"
+None*‚
+selfx
+:torchvision.models.swin_transformer.SwinTransformerBlockV2":torchvision.models.swin_transformer.SwinTransformerBlockV2*%
+dim
+builtins.int"builtins.int*+
+	num_heads
+builtins.int"builtins.int*[
+window_sizeJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*Z
+
+shift_sizeJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*1
+	mlp_ratio 
+builtins.float"builtins.float */
+dropout 
+builtins.float"builtins.float *9
+attention_dropout 
+builtins.float"builtins.float *=
+stochastic_depth_prob 
+builtins.float"builtins.float *]
+
+norm_layerK
+CallableType[builtins.function]&
+builtins.function"builtins.function *]
+
+attn_layerK
+CallableType[builtins.function]&
+builtins.function"builtins.function *ë
+forwardBtorchvision.models.swin_transformer.SwinTransformerBlockV2.forward"
+Any*‚
+selfx
+:torchvision.models.swin_transformer.SwinTransformerBlockV2":torchvision.models.swin_transformer.SwinTransformerBlockV2*
+x
+Anyð
+SwinTransformer3torchvision.models.swin_transformer.SwinTransformer"builtins.object*ˆ
+
+__init__<torchvision.models.swin_transformer.SwinTransformer.__init__"
+None*t
+selfj
+3torchvision.models.swin_transformer.SwinTransformer"3torchvision.models.swin_transformer.SwinTransformer*Z
+
+patch_sizeJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*+
+	embed_dim
+builtins.int"builtins.int*V
+depthsJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*Y
+	num_headsJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*[
+window_sizeJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*1
+	mlp_ratio 
+builtins.float"builtins.float */
+dropout 
+builtins.float"builtins.float *9
+attention_dropout 
+builtins.float"builtins.float *=
+stochastic_depth_prob 
+builtins.float"builtins.float */
+num_classes
+builtins.int"builtins.int *™
+
+norm_layer†
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *”
+block†
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *c
+downsample_layerK
+CallableType[builtins.function]&
+builtins.function"builtins.function *W
+forward;torchvision.models.swin_transformer.SwinTransformer.forward*
+self*
+xrW
+num_classes?torchvision.models.swin_transformer.SwinTransformer.num_classes
+AnyrQ
+features<torchvision.models.swin_transformer.SwinTransformer.features
+AnyrI
+norm8torchvision.models.swin_transformer.SwinTransformer.norm
+AnyrO
+permute;torchvision.models.swin_transformer.SwinTransformer.permute
+AnyrO
+avgpool;torchvision.models.swin_transformer.SwinTransformer.avgpool
+AnyrO
+flatten;torchvision.models.swin_transformer.SwinTransformer.flatten
+AnyrI
+head8torchvision.models.swin_transformer.SwinTransformer.head
+Any—
+Swin_T_Weights2torchvision.models.swin_transformer.Swin_T_Weights"#torchvision.models._api.WeightsEnumHrZ
+IMAGENET1K_V1@torchvision.models.swin_transformer.Swin_T_Weights.IMAGENET1K_V1
+AnyrN
+DEFAULT:torchvision.models.swin_transformer.Swin_T_Weights.DEFAULT
+Any—
+Swin_S_Weights2torchvision.models.swin_transformer.Swin_S_Weights"#torchvision.models._api.WeightsEnumHrZ
+IMAGENET1K_V1@torchvision.models.swin_transformer.Swin_S_Weights.IMAGENET1K_V1
+AnyrN
+DEFAULT:torchvision.models.swin_transformer.Swin_S_Weights.DEFAULT
+Any—
+Swin_B_Weights2torchvision.models.swin_transformer.Swin_B_Weights"#torchvision.models._api.WeightsEnumHrZ
+IMAGENET1K_V1@torchvision.models.swin_transformer.Swin_B_Weights.IMAGENET1K_V1
+AnyrN
+DEFAULT:torchvision.models.swin_transformer.Swin_B_Weights.DEFAULT
+Any£
+Swin_V2_T_Weights5torchvision.models.swin_transformer.Swin_V2_T_Weights"#torchvision.models._api.WeightsEnumHr]
+IMAGENET1K_V1Ctorchvision.models.swin_transformer.Swin_V2_T_Weights.IMAGENET1K_V1
+AnyrQ
+DEFAULT=torchvision.models.swin_transformer.Swin_V2_T_Weights.DEFAULT
+Any£
+Swin_V2_S_Weights5torchvision.models.swin_transformer.Swin_V2_S_Weights"#torchvision.models._api.WeightsEnumHr]
+IMAGENET1K_V1Ctorchvision.models.swin_transformer.Swin_V2_S_Weights.IMAGENET1K_V1
+AnyrQ
+DEFAULT=torchvision.models.swin_transformer.Swin_V2_S_Weights.DEFAULT
+Any£
+Swin_V2_B_Weights5torchvision.models.swin_transformer.Swin_V2_B_Weights"#torchvision.models._api.WeightsEnumHr]
+IMAGENET1K_V1Ctorchvision.models.swin_transformer.Swin_V2_B_Weights.IMAGENET1K_V1
+AnyrQ
+DEFAULT=torchvision.models.swin_transformer.Swin_V2_B_Weights.DEFAULT
+Any®
+swin_t*torchvision.models.swin_transformer.swin_t"j
+3torchvision.models.swin_transformer.SwinTransformer"3torchvision.models.swin_transformer.SwinTransformer*Æ
+weights¶
+>Union[torchvision.models.swin_transformer.Swin_T_Weights,None]h
+2torchvision.models.swin_transformer.Swin_T_Weights"2torchvision.models.swin_transformer.Swin_T_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+Any®
+swin_s*torchvision.models.swin_transformer.swin_s"j
+3torchvision.models.swin_transformer.SwinTransformer"3torchvision.models.swin_transformer.SwinTransformer*Æ
+weights¶
+>Union[torchvision.models.swin_transformer.Swin_S_Weights,None]h
+2torchvision.models.swin_transformer.Swin_S_Weights"2torchvision.models.swin_transformer.Swin_S_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+Any®
+swin_b*torchvision.models.swin_transformer.swin_b"j
+3torchvision.models.swin_transformer.SwinTransformer"3torchvision.models.swin_transformer.SwinTransformer*Æ
+weights¶
+>Union[torchvision.models.swin_transformer.Swin_B_Weights,None]h
+2torchvision.models.swin_transformer.Swin_B_Weights"2torchvision.models.swin_transformer.Swin_B_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+Any½
+	swin_v2_t-torchvision.models.swin_transformer.swin_v2_t"j
+3torchvision.models.swin_transformer.SwinTransformer"3torchvision.models.swin_transformer.SwinTransformer*Ï
+weights¿
+AUnion[torchvision.models.swin_transformer.Swin_V2_T_Weights,None]n
+5torchvision.models.swin_transformer.Swin_V2_T_Weights"5torchvision.models.swin_transformer.Swin_V2_T_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+Any½
+	swin_v2_s-torchvision.models.swin_transformer.swin_v2_s"j
+3torchvision.models.swin_transformer.SwinTransformer"3torchvision.models.swin_transformer.SwinTransformer*Ï
+weights¿
+AUnion[torchvision.models.swin_transformer.Swin_V2_S_Weights,None]n
+5torchvision.models.swin_transformer.Swin_V2_S_Weights"5torchvision.models.swin_transformer.Swin_V2_S_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+Any½
+	swin_v2_b-torchvision.models.swin_transformer.swin_v2_b"j
+3torchvision.models.swin_transformer.SwinTransformer"3torchvision.models.swin_transformer.SwinTransformer*Ï
+weights¿
+AUnion[torchvision.models.swin_transformer.Swin_V2_B_Weights,None]n
+5torchvision.models.swin_transformer.Swin_V2_B_Weights"5torchvision.models.swin_transformer.Swin_V2_B_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+Any*Ÿ
+__annotations__3torchvision.models.swin_transformer.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*;
+torch)torchvision.models.swin_transformer.torch
+Any*=
+Tensor*torchvision.models.swin_transformer.Tensor
+Any

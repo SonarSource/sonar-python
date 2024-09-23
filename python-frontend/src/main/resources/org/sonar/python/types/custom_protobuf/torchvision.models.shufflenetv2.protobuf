@@ -1,0 +1,143 @@
+
+torchvision.models.shufflenetv2Â	
+InvertedResidual0torchvision.models.shufflenetv2.InvertedResidual"torch.nn.modules.module.Module*·
+__init__9torchvision.models.shufflenetv2.InvertedResidual.__init__"
+None*n
+selfd
+0torchvision.models.shufflenetv2.InvertedResidual"0torchvision.models.shufflenetv2.InvertedResidual*%
+inp
+builtins.int"builtins.int*%
+oup
+builtins.int"builtins.int*(
+stride
+builtins.int"builtins.int*ê
+depthwise_conv?torchvision.models.shufflenetv2.InvertedResidual.depthwise_conv"
+Any*#
+i
+builtins.int"builtins.int*#
+o
+builtins.int"builtins.int*-
+kernel_size
+builtins.int"builtins.int**
+stride
+builtins.int"builtins.int *+
+padding
+builtins.int"builtins.int **
+bias
+builtins.bool"builtins.bool 0:staticmethodh*Ì
+forward8torchvision.models.shufflenetv2.InvertedResidual.forward"
+Any*n
+selfd
+0torchvision.models.shufflenetv2.InvertedResidual"0torchvision.models.shufflenetv2.InvertedResidual*
+x
+AnyrJ
+stride7torchvision.models.shufflenetv2.InvertedResidual.stride
+AnyrL
+branch18torchvision.models.shufflenetv2.InvertedResidual.branch1
+AnyrL
+branch28torchvision.models.shufflenetv2.InvertedResidual.branch2
+AnyŸ
+
+ShuffleNetV2,torchvision.models.shufflenetv2.ShuffleNetV2"torch.nn.modules.module.Module*
+__init__5torchvision.models.shufflenetv2.ShuffleNetV2.__init__"
+None*f
+self\
+,torchvision.models.shufflenetv2.ShuffleNetV2",torchvision.models.shufflenetv2.ShuffleNetV2*^
+stages_repeatsJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*c
+stages_out_channelsJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*/
+num_classes
+builtins.int"builtins.int *d
+inverted_residualK
+CallableType[builtins.function]&
+builtins.function"builtins.function *À
+forward4torchvision.models.shufflenetv2.ShuffleNetV2.forward"
+Any*f
+self\
+,torchvision.models.shufflenetv2.ShuffleNetV2",torchvision.models.shufflenetv2.ShuffleNetV2*
+x
+AnyrD
+conv12torchvision.models.shufflenetv2.ShuffleNetV2.conv1
+AnyrH
+maxpool4torchvision.models.shufflenetv2.ShuffleNetV2.maxpool
+AnyrF
+stage23torchvision.models.shufflenetv2.ShuffleNetV2.stage2
+AnyrF
+stage33torchvision.models.shufflenetv2.ShuffleNetV2.stage3
+AnyrF
+stage43torchvision.models.shufflenetv2.ShuffleNetV2.stage4
+AnyrD
+conv52torchvision.models.shufflenetv2.ShuffleNetV2.conv5
+Anyr>
+fc/torchvision.models.shufflenetv2.ShuffleNetV2.fc
+Any»
+ShuffleNet_V2_X0_5_Weights:torchvision.models.shufflenetv2.ShuffleNet_V2_X0_5_Weights"#torchvision.models._api.WeightsEnumHrb
+IMAGENET1K_V1Htorchvision.models.shufflenetv2.ShuffleNet_V2_X0_5_Weights.IMAGENET1K_V1
+AnyrV
+DEFAULTBtorchvision.models.shufflenetv2.ShuffleNet_V2_X0_5_Weights.DEFAULT
+Any»
+ShuffleNet_V2_X1_0_Weights:torchvision.models.shufflenetv2.ShuffleNet_V2_X1_0_Weights"#torchvision.models._api.WeightsEnumHrb
+IMAGENET1K_V1Htorchvision.models.shufflenetv2.ShuffleNet_V2_X1_0_Weights.IMAGENET1K_V1
+AnyrV
+DEFAULTBtorchvision.models.shufflenetv2.ShuffleNet_V2_X1_0_Weights.DEFAULT
+Any»
+ShuffleNet_V2_X1_5_Weights:torchvision.models.shufflenetv2.ShuffleNet_V2_X1_5_Weights"#torchvision.models._api.WeightsEnumHrb
+IMAGENET1K_V1Htorchvision.models.shufflenetv2.ShuffleNet_V2_X1_5_Weights.IMAGENET1K_V1
+AnyrV
+DEFAULTBtorchvision.models.shufflenetv2.ShuffleNet_V2_X1_5_Weights.DEFAULT
+Any»
+ShuffleNet_V2_X2_0_Weights:torchvision.models.shufflenetv2.ShuffleNet_V2_X2_0_Weights"#torchvision.models._api.WeightsEnumHrb
+IMAGENET1K_V1Htorchvision.models.shufflenetv2.ShuffleNet_V2_X2_0_Weights.IMAGENET1K_V1
+AnyrV
+DEFAULTBtorchvision.models.shufflenetv2.ShuffleNet_V2_X2_0_Weights.DEFAULT
+AnyÌ
+shufflenet_v2_x0_52torchvision.models.shufflenetv2.shufflenet_v2_x0_5"\
+,torchvision.models.shufflenetv2.ShuffleNetV2",torchvision.models.shufflenetv2.ShuffleNetV2*Þ
+weightsÎ
+FUnion[torchvision.models.shufflenetv2.ShuffleNet_V2_X0_5_Weights,None]x
+:torchvision.models.shufflenetv2.ShuffleNet_V2_X0_5_Weights":torchvision.models.shufflenetv2.ShuffleNet_V2_X0_5_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+AnyÌ
+shufflenet_v2_x1_02torchvision.models.shufflenetv2.shufflenet_v2_x1_0"\
+,torchvision.models.shufflenetv2.ShuffleNetV2",torchvision.models.shufflenetv2.ShuffleNetV2*Þ
+weightsÎ
+FUnion[torchvision.models.shufflenetv2.ShuffleNet_V2_X1_0_Weights,None]x
+:torchvision.models.shufflenetv2.ShuffleNet_V2_X1_0_Weights":torchvision.models.shufflenetv2.ShuffleNet_V2_X1_0_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+AnyÌ
+shufflenet_v2_x1_52torchvision.models.shufflenetv2.shufflenet_v2_x1_5"\
+,torchvision.models.shufflenetv2.ShuffleNetV2",torchvision.models.shufflenetv2.ShuffleNetV2*Þ
+weightsÎ
+FUnion[torchvision.models.shufflenetv2.ShuffleNet_V2_X1_5_Weights,None]x
+:torchvision.models.shufflenetv2.ShuffleNet_V2_X1_5_Weights":torchvision.models.shufflenetv2.ShuffleNet_V2_X1_5_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+AnyÌ
+shufflenet_v2_x2_02torchvision.models.shufflenetv2.shufflenet_v2_x2_0"\
+,torchvision.models.shufflenetv2.ShuffleNetV2",torchvision.models.shufflenetv2.ShuffleNetV2*Þ
+weightsÎ
+FUnion[torchvision.models.shufflenetv2.ShuffleNet_V2_X2_0_Weights,None]x
+:torchvision.models.shufflenetv2.ShuffleNet_V2_X2_0_Weights":torchvision.models.shufflenetv2.ShuffleNet_V2_X2_0_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+Any*›
+__annotations__/torchvision.models.shufflenetv2.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*
+nntorch.nn *9
+Tensor&torchvision.models.shufflenetv2.Tensor
+Any

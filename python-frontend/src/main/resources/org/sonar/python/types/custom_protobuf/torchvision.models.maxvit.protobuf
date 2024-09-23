@@ -1,0 +1,366 @@
+
+torchvision.models.maxvit£
+MBConv torchvision.models.maxvit.MBConv"builtins.object*‚
+__init__)torchvision.models.maxvit.MBConv.__init__"
+None*N
+selfD
+ torchvision.models.maxvit.MBConv" torchvision.models.maxvit.MBConv*-
+in_channels
+builtins.int"builtins.int*.
+out_channels
+builtins.int"builtins.int*5
+expansion_ratio 
+builtins.float"builtins.float*3
+squeeze_ratio 
+builtins.float"builtins.float*(
+stride
+builtins.int"builtins.int*a
+activation_layerK
+CallableType[builtins.function]&
+builtins.function"builtins.function*[
+
+norm_layerK
+CallableType[builtins.function]&
+builtins.function"builtins.function*<
+p_stochastic_dropout 
+builtins.float"builtins.float *œ
+forward(torchvision.models.maxvit.MBConv.forward"
+Any*N
+selfD
+ torchvision.models.maxvit.MBConv" torchvision.models.maxvit.MBConv*
+x
+Anyr6
+proj%torchvision.models.maxvit.MBConv.proj
+AnyrN
+stochastic_depth1torchvision.models.maxvit.MBConv.stochastic_depth
+Anyr:
+layers'torchvision.models.maxvit.MBConv.layers
+Any
+$RelativePositionalMultiHeadAttention>torchvision.models.maxvit.RelativePositionalMultiHeadAttention"builtins.object*ò
+__init__Gtorchvision.models.maxvit.RelativePositionalMultiHeadAttention.__init__"
+None*‹
+self€
+>torchvision.models.maxvit.RelativePositionalMultiHeadAttention">torchvision.models.maxvit.RelativePositionalMultiHeadAttention**
+feat_dim
+builtins.int"builtins.int**
+head_dim
+builtins.int"builtins.int*-
+max_seq_len
+builtins.int"builtins.int*’
+get_relative_positional_bias[torchvision.models.maxvit.RelativePositionalMultiHeadAttention.get_relative_positional_bias"
+Any*‹
+self€
+>torchvision.models.maxvit.RelativePositionalMultiHeadAttention">torchvision.models.maxvit.RelativePositionalMultiHeadAttention*ø
+forwardFtorchvision.models.maxvit.RelativePositionalMultiHeadAttention.forward"
+Any*‹
+self€
+>torchvision.models.maxvit.RelativePositionalMultiHeadAttention">torchvision.models.maxvit.RelativePositionalMultiHeadAttention*
+x
+AnyrZ
+n_headsFtorchvision.models.maxvit.RelativePositionalMultiHeadAttention.n_heads
+Anyr\
+head_dimGtorchvision.models.maxvit.RelativePositionalMultiHeadAttention.head_dim
+AnyrT
+sizeCtorchvision.models.maxvit.RelativePositionalMultiHeadAttention.size
+Anyrb
+max_seq_lenJtorchvision.models.maxvit.RelativePositionalMultiHeadAttention.max_seq_len
+AnyrX
+to_qkvEtorchvision.models.maxvit.RelativePositionalMultiHeadAttention.to_qkv
+Anyrd
+scale_factorKtorchvision.models.maxvit.RelativePositionalMultiHeadAttention.scale_factor
+AnyrV
+mergeDtorchvision.models.maxvit.RelativePositionalMultiHeadAttention.merge
+Anyr„
+relative_position_bias_table[torchvision.models.maxvit.RelativePositionalMultiHeadAttention.relative_position_bias_table
+Any®
+SwapAxes"torchvision.models.maxvit.SwapAxes"builtins.object*ß
+__init__+torchvision.models.maxvit.SwapAxes.__init__"
+None*R
+selfH
+"torchvision.models.maxvit.SwapAxes""torchvision.models.maxvit.SwapAxes*#
+a
+builtins.int"builtins.int*#
+b
+builtins.int"builtins.int*¢
+forward*torchvision.models.maxvit.SwapAxes.forward"
+Any*R
+selfH
+"torchvision.models.maxvit.SwapAxes""torchvision.models.maxvit.SwapAxes*
+x
+Anyr2
+a$torchvision.models.maxvit.SwapAxes.a
+Anyr2
+b$torchvision.models.maxvit.SwapAxes.b
+AnyÙ
+WindowPartition)torchvision.models.maxvit.WindowPartition"builtins.object*ª
+__init__2torchvision.models.maxvit.WindowPartition.__init__"
+None*`
+selfV
+)torchvision.models.maxvit.WindowPartition")torchvision.models.maxvit.WindowPartition*Ü
+forward1torchvision.models.maxvit.WindowPartition.forward"
+Any*`
+selfV
+)torchvision.models.maxvit.WindowPartition")torchvision.models.maxvit.WindowPartition*
+x
+Any*#
+p
+builtins.int"builtins.intÉ
+WindowDepartition+torchvision.models.maxvit.WindowDepartition"builtins.object*°
+__init__4torchvision.models.maxvit.WindowDepartition.__init__"
+None*d
+selfZ
++torchvision.models.maxvit.WindowDepartition"+torchvision.models.maxvit.WindowDepartition*Â
+forward3torchvision.models.maxvit.WindowDepartition.forward"
+Any*d
+selfZ
++torchvision.models.maxvit.WindowDepartition"+torchvision.models.maxvit.WindowDepartition*
+x
+Any*#
+p
+builtins.int"builtins.int*.
+h_partitions
+builtins.int"builtins.int*.
+w_partitions
+builtins.int"builtins.intã
+PartitionAttentionLayer1torchvision.models.maxvit.PartitionAttentionLayer"builtins.object*‡
+__init__:torchvision.models.maxvit.PartitionAttentionLayer.__init__"
+None*p
+selff
+1torchvision.models.maxvit.PartitionAttentionLayer"1torchvision.models.maxvit.PartitionAttentionLayer*-
+in_channels
+builtins.int"builtins.int**
+head_dim
+builtins.int"builtins.int*0
+partition_size
+builtins.int"builtins.int*0
+partition_type
+builtins.str"builtins.str*o
+	grid_size`
+ Tuple[builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int*+
+	mlp_ratio
+builtins.int"builtins.int*a
+activation_layerK
+CallableType[builtins.function]&
+builtins.function"builtins.function*[
+
+norm_layerK
+CallableType[builtins.function]&
+builtins.function"builtins.function*7
+attention_dropout 
+builtins.float"builtins.float*1
+mlp_dropout 
+builtins.float"builtins.float*:
+p_stochastic_dropout 
+builtins.float"builtins.float*Ï
+forward9torchvision.models.maxvit.PartitionAttentionLayer.forward"
+Any*p
+selff
+1torchvision.models.maxvit.PartitionAttentionLayer"1torchvision.models.maxvit.PartitionAttentionLayer*
+x
+AnyrM
+n_heads9torchvision.models.maxvit.PartitionAttentionLayer.n_heads
+AnyrO
+head_dim:torchvision.models.maxvit.PartitionAttentionLayer.head_dim
+AnyrW
+n_partitions>torchvision.models.maxvit.PartitionAttentionLayer.n_partitions
+Anyr[
+partition_type@torchvision.models.maxvit.PartitionAttentionLayer.partition_type
+AnyrQ
+	grid_size;torchvision.models.maxvit.PartitionAttentionLayer.grid_size
+AnyrW
+partition_op>torchvision.models.maxvit.PartitionAttentionLayer.partition_op
+Anyr[
+departition_op@torchvision.models.maxvit.PartitionAttentionLayer.departition_op
+Anyr[
+partition_swap@torchvision.models.maxvit.PartitionAttentionLayer.partition_swap
+Anyr_
+departition_swapBtorchvision.models.maxvit.PartitionAttentionLayer.departition_swap
+AnyrS
+
+attn_layer<torchvision.models.maxvit.PartitionAttentionLayer.attn_layer
+AnyrQ
+	mlp_layer;torchvision.models.maxvit.PartitionAttentionLayer.mlp_layer
+Anyrc
+stochastic_dropoutDtorchvision.models.maxvit.PartitionAttentionLayer.stochastic_dropout
+Any®
+
+MaxVitLayer%torchvision.models.maxvit.MaxVitLayer"builtins.object*÷
+__init__.torchvision.models.maxvit.MaxVitLayer.__init__"
+None*X
+selfN
+%torchvision.models.maxvit.MaxVitLayer"%torchvision.models.maxvit.MaxVitLayer*-
+in_channels
+builtins.int"builtins.int*.
+out_channels
+builtins.int"builtins.int*3
+squeeze_ratio 
+builtins.float"builtins.float*5
+expansion_ratio 
+builtins.float"builtins.float*(
+stride
+builtins.int"builtins.int*[
+
+norm_layerK
+CallableType[builtins.function]&
+builtins.function"builtins.function*a
+activation_layerK
+CallableType[builtins.function]&
+builtins.function"builtins.function**
+head_dim
+builtins.int"builtins.int*+
+	mlp_ratio
+builtins.int"builtins.int*1
+mlp_dropout 
+builtins.float"builtins.float*7
+attention_dropout 
+builtins.float"builtins.float*:
+p_stochastic_dropout 
+builtins.float"builtins.float*0
+partition_size
+builtins.int"builtins.int*o
+	grid_size`
+ Tuple[builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int*«
+forward-torchvision.models.maxvit.MaxVitLayer.forward"
+Any*X
+selfN
+%torchvision.models.maxvit.MaxVitLayer"%torchvision.models.maxvit.MaxVitLayer*
+x
+Anyr?
+layers,torchvision.models.maxvit.MaxVitLayer.layers
+Any¥
+MaxVitBlock%torchvision.models.maxvit.MaxVitBlock"builtins.object*§
+__init__.torchvision.models.maxvit.MaxVitBlock.__init__"
+None*X
+selfN
+%torchvision.models.maxvit.MaxVitBlock"%torchvision.models.maxvit.MaxVitBlock*-
+in_channels
+builtins.int"builtins.int*.
+out_channels
+builtins.int"builtins.int*3
+squeeze_ratio 
+builtins.float"builtins.float*5
+expansion_ratio 
+builtins.float"builtins.float*[
+
+norm_layerK
+CallableType[builtins.function]&
+builtins.function"builtins.function*a
+activation_layerK
+CallableType[builtins.function]&
+builtins.function"builtins.function**
+head_dim
+builtins.int"builtins.int*+
+	mlp_ratio
+builtins.int"builtins.int*1
+mlp_dropout 
+builtins.float"builtins.float*7
+attention_dropout 
+builtins.float"builtins.float*0
+partition_size
+builtins.int"builtins.int*u
+input_grid_size`
+ Tuple[builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int**
+n_layers
+builtins.int"builtins.int*b
+p_stochasticP
+builtins.list[builtins.float] 
+builtins.float"builtins.float"builtins.list*«
+forward-torchvision.models.maxvit.MaxVitBlock.forward"
+Any*X
+selfN
+%torchvision.models.maxvit.MaxVitBlock"%torchvision.models.maxvit.MaxVitBlock*
+x
+Anyr?
+layers,torchvision.models.maxvit.MaxVitBlock.layers
+AnyrE
+	grid_size/torchvision.models.maxvit.MaxVitBlock.grid_size
+Any­
+MaxVit torchvision.models.maxvit.MaxVit"builtins.object*Ì	
+__init__)torchvision.models.maxvit.MaxVit.__init__"
+None*N
+selfD
+ torchvision.models.maxvit.MaxVit" torchvision.models.maxvit.MaxVit*p
+
+input_size`
+ Tuple[builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int*/
+stem_channels
+builtins.int"builtins.int*0
+partition_size
+builtins.int"builtins.int*^
+block_channelsJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*\
+block_layersJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list**
+head_dim
+builtins.int"builtins.int*;
+stochastic_depth_prob 
+builtins.float"builtins.float*™
+
+norm_layer†
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *c
+activation_layerK
+CallableType[builtins.function]&
+builtins.function"builtins.function *5
+squeeze_ratio 
+builtins.float"builtins.float *7
+expansion_ratio 
+builtins.float"builtins.float *-
+	mlp_ratio
+builtins.int"builtins.int *3
+mlp_dropout 
+builtins.float"builtins.float *9
+attention_dropout 
+builtins.float"builtins.float */
+num_classes
+builtins.int"builtins.int *œ
+forward(torchvision.models.maxvit.MaxVit.forward"
+Any*N
+selfD
+ torchvision.models.maxvit.MaxVit" torchvision.models.maxvit.MaxVit*
+x
+Anyr6
+stem%torchvision.models.maxvit.MaxVit.stem
+AnyrJ
+partition_size/torchvision.models.maxvit.MaxVit.partition_size
+Anyr:
+blocks'torchvision.models.maxvit.MaxVit.blocks
+AnyrB
+
+classifier+torchvision.models.maxvit.MaxVit.classifier
+Any
+MaxVit_T_Weights*torchvision.models.maxvit.MaxVit_T_Weights"#torchvision.models._api.WeightsEnumHrR
+IMAGENET1K_V18torchvision.models.maxvit.MaxVit_T_Weights.IMAGENET1K_V1
+AnyrF
+DEFAULT2torchvision.models.maxvit.MaxVit_T_Weights.DEFAULT
+Anyê
+maxvit_t"torchvision.models.maxvit.maxvit_t"D
+ torchvision.models.maxvit.MaxVit" torchvision.models.maxvit.MaxVit*®
+weightsž
+6Union[torchvision.models.maxvit.MaxVit_T_Weights,None]X
+*torchvision.models.maxvit.MaxVit_T_Weights"*torchvision.models.maxvit.MaxVit_T_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+Any*•
+__annotations__)torchvision.models.maxvit.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*1
+torchtorchvision.models.maxvit.torch
+Any*3
+Tensor torchvision.models.maxvit.Tensor
+Any

@@ -1,0 +1,195 @@
+
+#torchvision.models.detection._utils—	
+BalancedPositiveNegativeSamplerCtorchvision.models.detection._utils.BalancedPositiveNegativeSampler"builtins.object*ë
+__init__Ltorchvision.models.detection._utils.BalancedPositiveNegativeSampler.__init__"
+None*•
+selfŠ
+Ctorchvision.models.detection._utils.BalancedPositiveNegativeSampler"Ctorchvision.models.detection._utils.BalancedPositiveNegativeSampler*6
+batch_size_per_image
+builtins.int"builtins.int*7
+positive_fraction 
+builtins.float"builtins.float*¿
+__call__Ltorchvision.models.detection._utils.BalancedPositiveNegativeSampler.__call__"Œ
+,Tuple[builtins.list[Any],builtins.list[Any]],
+builtins.list[Any]
+Any"builtins.list,
+builtins.list[Any]
+Any"builtins.list*•
+selfŠ
+Ctorchvision.models.detection._utils.BalancedPositiveNegativeSampler"Ctorchvision.models.detection._utils.BalancedPositiveNegativeSampler*>
+matched_idxs,
+builtins.list[Any]
+Any"builtins.listry
+batch_size_per_imageXtorchvision.models.detection._utils.BalancedPositiveNegativeSampler.batch_size_per_image
+Anyrs
+positive_fractionUtorchvision.models.detection._utils.BalancedPositiveNegativeSampler.positive_fraction
+Anyó
+BoxCoder,torchvision.models.detection._utils.BoxCoder"builtins.object*Ë
+__init__5torchvision.models.detection._utils.BoxCoder.__init__"
+None*f
+self\
+,torchvision.models.detection._utils.BoxCoder",torchvision.models.detection._utils.BoxCoder*Ü
+weightsÎ
+BTuple[builtins.float,builtins.float,builtins.float,builtins.float] 
+builtins.float"builtins.float 
+builtins.float"builtins.float 
+builtins.float"builtins.float 
+builtins.float"builtins.float*7
+bbox_xform_clip 
+builtins.float"builtins.float *Ó
+encode3torchvision.models.detection._utils.BoxCoder.encode",
+builtins.list[Any]
+Any"builtins.list*f
+self\
+,torchvision.models.detection._utils.BoxCoder",torchvision.models.detection._utils.BoxCoder*A
+reference_boxes,
+builtins.list[Any]
+Any"builtins.list*;
+	proposals,
+builtins.list[Any]
+Any"builtins.list*ò
+encode_single:torchvision.models.detection._utils.BoxCoder.encode_single"
+Any*f
+self\
+,torchvision.models.detection._utils.BoxCoder",torchvision.models.detection._utils.BoxCoder*
+reference_boxes
+Any*
+	proposals
+Any*ÿ
+decode3torchvision.models.detection._utils.BoxCoder.decode"
+Any*f
+self\
+,torchvision.models.detection._utils.BoxCoder",torchvision.models.detection._utils.BoxCoder*
+	rel_codes
+Any*7
+boxes,
+builtins.list[Any]
+Any"builtins.list*è
+decode_single:torchvision.models.detection._utils.BoxCoder.decode_single"
+Any*f
+self\
+,torchvision.models.detection._utils.BoxCoder",torchvision.models.detection._utils.BoxCoder*
+	rel_codes
+Any*
+boxes
+AnyrH
+weights4torchvision.models.detection._utils.BoxCoder.weights
+AnyrX
+bbox_xform_clip<torchvision.models.detection._utils.BoxCoder.bbox_xform_clip
+Any¢
+BoxLinearCoder2torchvision.models.detection._utils.BoxLinearCoder"builtins.object*þ
+__init__;torchvision.models.detection._utils.BoxLinearCoder.__init__"
+None*r
+selfh
+2torchvision.models.detection._utils.BoxLinearCoder"2torchvision.models.detection._utils.BoxLinearCoder*7
+normalize_by_size
+builtins.bool"builtins.bool *ö
+encode9torchvision.models.detection._utils.BoxLinearCoder.encode"
+Any*r
+selfh
+2torchvision.models.detection._utils.BoxLinearCoder"2torchvision.models.detection._utils.BoxLinearCoder*
+reference_boxes
+Any*
+	proposals
+Any*ì
+decode9torchvision.models.detection._utils.BoxLinearCoder.decode"
+Any*r
+selfh
+2torchvision.models.detection._utils.BoxLinearCoder"2torchvision.models.detection._utils.BoxLinearCoder*
+	rel_codes
+Any*
+boxes
+Anyrb
+normalize_by_sizeDtorchvision.models.detection._utils.BoxLinearCoder.normalize_by_size
+Anyý
+Matcher+torchvision.models.detection._utils.Matcher"builtins.object*Ü
+__init__4torchvision.models.detection._utils.Matcher.__init__"
+None*d
+selfZ
++torchvision.models.detection._utils.Matcher"+torchvision.models.detection._utils.Matcher*4
+high_threshold 
+builtins.float"builtins.float*3
+low_threshold 
+builtins.float"builtins.float*?
+allow_low_quality_matches
+builtins.bool"builtins.bool *Ò
+__call__4torchvision.models.detection._utils.Matcher.__call__"
+Any*d
+selfZ
++torchvision.models.detection._utils.Matcher"+torchvision.models.detection._utils.Matcher*!
+match_quality_matrix
+Any*£
+set_low_quality_matches_Dtorchvision.models.detection._utils.Matcher.set_low_quality_matches_"
+None*d
+selfZ
++torchvision.models.detection._utils.Matcher"+torchvision.models.detection._utils.Matcher*
+matches
+Any*
+all_matches
+Any*!
+match_quality_matrix
+Anyrt
+BELOW_LOW_THRESHOLD?torchvision.models.detection._utils.Matcher.BELOW_LOW_THRESHOLD
+builtins.int"builtins.intrr
+BETWEEN_THRESHOLDS>torchvision.models.detection._utils.Matcher.BETWEEN_THRESHOLDS
+builtins.int"builtins.intrW
+__annotations__;torchvision.models.detection._utils.Matcher.__annotations__
+AnyrU
+high_threshold:torchvision.models.detection._utils.Matcher.high_threshold
+AnyrS
+low_threshold9torchvision.models.detection._utils.Matcher.low_threshold
+Anyrk
+allow_low_quality_matchesEtorchvision.models.detection._utils.Matcher.allow_low_quality_matches
+Any´
+
+SSDMatcher.torchvision.models.detection._utils.SSDMatcher"+torchvision.models.detection._utils.Matcher*ê
+__init__7torchvision.models.detection._utils.SSDMatcher.__init__"
+None*j
+self`
+.torchvision.models.detection._utils.SSDMatcher".torchvision.models.detection._utils.SSDMatcher*/
+	threshold 
+builtins.float"builtins.float*Û
+__call__7torchvision.models.detection._utils.SSDMatcher.__call__"
+Any*j
+self`
+.torchvision.models.detection._utils.SSDMatcher".torchvision.models.detection._utils.SSDMatcher*!
+match_quality_matrix
+Any•
+encode_boxes0torchvision.models.detection._utils.encode_boxes"
+Any*
+reference_boxes
+Any*
+	proposals
+Any*
+weights
+Any‹
+overwrite_eps1torchvision.models.detection._utils.overwrite_eps"
+None*
+model
+Any*)
+eps 
+builtins.float"builtins.floatž
+retrieve_out_channels9torchvision.models.detection._utils.retrieve_out_channels"J
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*
+model
+Any*j
+size`
+ Tuple[builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int*Ÿ
+__annotations__3torchvision.models.detection._utils.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*=
+Tensor*torchvision.models.detection._utils.Tensor
+Any*
+nntorch.nn *S
+FrozenBatchNorm2d5torchvision.models.detection._utils.FrozenBatchNorm2d
+Any*[
+complete_box_iou_loss9torchvision.models.detection._utils.complete_box_iou_loss
+Any*[
+distance_box_iou_loss9torchvision.models.detection._utils.distance_box_iou_loss
+Any*a
+generalized_box_iou_loss<torchvision.models.detection._utils.generalized_box_iou_loss
+Any

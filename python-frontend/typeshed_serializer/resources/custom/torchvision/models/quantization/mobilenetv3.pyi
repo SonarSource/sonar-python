@@ -1,0 +1,29 @@
+from ...ops.misc import SqueezeExcitation
+from .._api import WeightsEnum
+from ..mobilenetv3 import InvertedResidual, MobileNetV3, MobileNet_V3_Large_Weights
+from torch import Tensor
+from typing import Any, Optional, Union
+
+class QuantizableSqueezeExcitation(SqueezeExcitation):
+    skip_mul: Any
+    def __init__(self, *args: Any, **kwargs: Any) -> None: ...
+    def forward(self, input: Tensor) -> Tensor: ...
+    def fuse_model(self, is_qat: Optional[bool] = ...) -> None: ...
+
+class QuantizableInvertedResidual(InvertedResidual):
+    skip_add: Any
+    def __init__(self, *args: Any, **kwargs: Any) -> None: ...
+    def forward(self, x: Tensor) -> Tensor: ...
+
+class QuantizableMobileNetV3(MobileNetV3):
+    quant: Any
+    dequant: Any
+    def __init__(self, *args: Any, **kwargs: Any) -> None: ...
+    def forward(self, x: Tensor) -> Tensor: ...
+    def fuse_model(self, is_qat: Optional[bool] = ...) -> None: ...
+
+class MobileNet_V3_Large_QuantizedWeights(WeightsEnum):
+    IMAGENET1K_QNNPACK_V1: Any
+    DEFAULT: Any
+
+def mobilenet_v3_large(*, weights: Optional[Union[MobileNet_V3_Large_QuantizedWeights, MobileNet_V3_Large_Weights]] = ..., progress: bool = ..., quantize: bool = ..., **kwargs: Any) -> QuantizableMobileNetV3: ...

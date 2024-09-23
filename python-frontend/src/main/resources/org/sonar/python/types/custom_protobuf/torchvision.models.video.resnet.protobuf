@@ -1,0 +1,270 @@
+
+torchvision.models.video.resnet∂
+Conv3DSimple,torchvision.models.video.resnet.Conv3DSimple"builtins.object*æ
+__init__5torchvision.models.video.resnet.Conv3DSimple.__init__"
+None*f
+self\
+,torchvision.models.video.resnet.Conv3DSimple",torchvision.models.video.resnet.Conv3DSimple*+
+	in_planes
+builtins.int"builtins.int*,
+
+out_planes
+builtins.int"builtins.int*U
+	midplanesD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None **
+stride
+builtins.int"builtins.int *+
+padding
+builtins.int"builtins.int *•
+get_downsample_strideBtorchvision.models.video.resnet.Conv3DSimple.get_downsample_stride"ã
+-Tuple[builtins.int,builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int*(
+stride
+builtins.int"builtins.int0:staticmethodhÜ
+Conv2Plus1D+torchvision.models.video.resnet.Conv2Plus1D"builtins.object*ë
+__init__4torchvision.models.video.resnet.Conv2Plus1D.__init__"
+None*d
+selfZ
++torchvision.models.video.resnet.Conv2Plus1D"+torchvision.models.video.resnet.Conv2Plus1D*+
+	in_planes
+builtins.int"builtins.int*,
+
+out_planes
+builtins.int"builtins.int*+
+	midplanes
+builtins.int"builtins.int**
+stride
+builtins.int"builtins.int *+
+padding
+builtins.int"builtins.int *§
+get_downsample_strideAtorchvision.models.video.resnet.Conv2Plus1D.get_downsample_stride"ã
+-Tuple[builtins.int,builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int*(
+stride
+builtins.int"builtins.int0:staticmethodhŒ
+Conv3DNoTemporal0torchvision.models.video.resnet.Conv3DNoTemporal"builtins.object* 
+__init__9torchvision.models.video.resnet.Conv3DNoTemporal.__init__"
+None*n
+selfd
+0torchvision.models.video.resnet.Conv3DNoTemporal"0torchvision.models.video.resnet.Conv3DNoTemporal*+
+	in_planes
+builtins.int"builtins.int*,
+
+out_planes
+builtins.int"builtins.int*U
+	midplanesD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None **
+stride
+builtins.int"builtins.int *+
+padding
+builtins.int"builtins.int *©
+get_downsample_strideFtorchvision.models.video.resnet.Conv3DNoTemporal.get_downsample_stride"ã
+-Tuple[builtins.int,builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int*(
+stride
+builtins.int"builtins.int0:staticmethodhÙ	
+
+BasicBlock*torchvision.models.video.resnet.BasicBlock"torch.nn.modules.module.Module*ù
+__init__3torchvision.models.video.resnet.BasicBlock.__init__"
+None*b
+selfX
+*torchvision.models.video.resnet.BasicBlock"*torchvision.models.video.resnet.BasicBlock**
+inplanes
+builtins.int"builtins.int*(
+planes
+builtins.int"builtins.int*]
+conv_builderK
+CallableType[builtins.function]&
+builtins.function"builtins.function**
+stride
+builtins.int"builtins.int *å
+
+downsamplez
+*Union[torch.nn.modules.module.Module,None]@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module
+None *∫
+forward2torchvision.models.video.resnet.BasicBlock.forward"
+Any*b
+selfX
+*torchvision.models.video.resnet.BasicBlock"*torchvision.models.video.resnet.BasicBlock*
+x
+Anyr_
+	expansion4torchvision.models.video.resnet.BasicBlock.expansion
+builtins.int"builtins.intrB
+conv10torchvision.models.video.resnet.BasicBlock.conv1
+AnyrB
+conv20torchvision.models.video.resnet.BasicBlock.conv2
+Anyr@
+relu/torchvision.models.video.resnet.BasicBlock.relu
+AnyrL
+
+downsample5torchvision.models.video.resnet.BasicBlock.downsample
+AnyrD
+stride1torchvision.models.video.resnet.BasicBlock.stride
+Any∏
+
+
+Bottleneck*torchvision.models.video.resnet.Bottleneck"torch.nn.modules.module.Module*ù
+__init__3torchvision.models.video.resnet.Bottleneck.__init__"
+None*b
+selfX
+*torchvision.models.video.resnet.Bottleneck"*torchvision.models.video.resnet.Bottleneck**
+inplanes
+builtins.int"builtins.int*(
+planes
+builtins.int"builtins.int*]
+conv_builderK
+CallableType[builtins.function]&
+builtins.function"builtins.function**
+stride
+builtins.int"builtins.int *å
+
+downsamplez
+*Union[torch.nn.modules.module.Module,None]@
+torch.nn.modules.module.Module"torch.nn.modules.module.Module
+None *∫
+forward2torchvision.models.video.resnet.Bottleneck.forward"
+Any*b
+selfX
+*torchvision.models.video.resnet.Bottleneck"*torchvision.models.video.resnet.Bottleneck*
+x
+Anyr_
+	expansion4torchvision.models.video.resnet.Bottleneck.expansion
+builtins.int"builtins.intrB
+conv10torchvision.models.video.resnet.Bottleneck.conv1
+AnyrB
+conv20torchvision.models.video.resnet.Bottleneck.conv2
+AnyrB
+conv30torchvision.models.video.resnet.Bottleneck.conv3
+Anyr@
+relu/torchvision.models.video.resnet.Bottleneck.relu
+AnyrL
+
+downsample5torchvision.models.video.resnet.Bottleneck.downsample
+AnyrD
+stride1torchvision.models.video.resnet.Bottleneck.stride
+AnyÙ
+	BasicStem)torchvision.models.video.resnet.BasicStem"builtins.object*™
+__init__2torchvision.models.video.resnet.BasicStem.__init__"
+None*`
+selfV
+)torchvision.models.video.resnet.BasicStem")torchvision.models.video.resnet.BasicStemÉ
+R2Plus1dStem,torchvision.models.video.resnet.R2Plus1dStem"builtins.object*≥
+__init__5torchvision.models.video.resnet.R2Plus1dStem.__init__"
+None*f
+self\
+,torchvision.models.video.resnet.R2Plus1dStem",torchvision.models.video.resnet.R2Plus1dStemΩ
+VideoResNet+torchvision.models.video.resnet.VideoResNet"torch.nn.modules.module.Module*Ÿ
+__init__4torchvision.models.video.resnet.VideoResNet.__init__"
+None*d
+selfZ
++torchvision.models.video.resnet.VideoResNet"+torchvision.models.video.resnet.VideoResNet*¶
+blockö
+hUnion[Type[torchvision.models.video.resnet.BasicBlock],Type[torchvision.models.video.resnet.Bottleneck]]î
+0Type[torchvision.models.video.resnet.BasicBlock]X
+*torchvision.models.video.resnet.BasicBlock"*torchvision.models.video.resnet.BasicBlock"typeî
+0Type[torchvision.models.video.resnet.Bottleneck]X
+*torchvision.models.video.resnet.Bottleneck"*torchvision.models.video.resnet.Bottleneck"type*„
+conv_makers—
+≥typing.Sequence[Union[Type[torchvision.models.video.resnet.Conv3DSimple],Type[torchvision.models.video.resnet.Conv3DNoTemporal],Type[torchvision.models.video.resnet.Conv2Plus1D]]]á
+¢Union[Type[torchvision.models.video.resnet.Conv3DSimple],Type[torchvision.models.video.resnet.Conv3DNoTemporal],Type[torchvision.models.video.resnet.Conv2Plus1D]]ö
+2Type[torchvision.models.video.resnet.Conv3DSimple]\
+,torchvision.models.video.resnet.Conv3DSimple",torchvision.models.video.resnet.Conv3DSimple"type¶
+6Type[torchvision.models.video.resnet.Conv3DNoTemporal]d
+0torchvision.models.video.resnet.Conv3DNoTemporal"0torchvision.models.video.resnet.Conv3DNoTemporal"typeó
+1Type[torchvision.models.video.resnet.Conv2Plus1D]Z
++torchvision.models.video.resnet.Conv2Plus1D"+torchvision.models.video.resnet.Conv2Plus1D"type"typing.Sequence*V
+layersJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*U
+stemK
+CallableType[builtins.function]&
+builtins.function"builtins.function*/
+num_classes
+builtins.int"builtins.int *8
+zero_init_residual
+builtins.bool"builtins.bool *Ω
+forward3torchvision.models.video.resnet.VideoResNet.forward"
+Any*d
+selfZ
++torchvision.models.video.resnet.VideoResNet"+torchvision.models.video.resnet.VideoResNet*
+x
+Anyr^
+inplanes4torchvision.models.video.resnet.VideoResNet.inplanes
+builtins.int"builtins.intrA
+stem0torchvision.models.video.resnet.VideoResNet.stem
+AnyrE
+layer12torchvision.models.video.resnet.VideoResNet.layer1
+AnyrE
+layer22torchvision.models.video.resnet.VideoResNet.layer2
+AnyrE
+layer32torchvision.models.video.resnet.VideoResNet.layer3
+AnyrE
+layer42torchvision.models.video.resnet.VideoResNet.layer4
+AnyrG
+avgpool3torchvision.models.video.resnet.VideoResNet.avgpool
+Anyr=
+fc.torchvision.models.video.resnet.VideoResNet.fc
+Anyç
+R3D_18_Weights.torchvision.models.video.resnet.R3D_18_Weights"#torchvision.models._api.WeightsEnumHrX
+KINETICS400_V1=torchvision.models.video.resnet.R3D_18_Weights.KINETICS400_V1
+AnyrJ
+DEFAULT6torchvision.models.video.resnet.R3D_18_Weights.DEFAULT
+Anyç
+MC3_18_Weights.torchvision.models.video.resnet.MC3_18_Weights"#torchvision.models._api.WeightsEnumHrX
+KINETICS400_V1=torchvision.models.video.resnet.MC3_18_Weights.KINETICS400_V1
+AnyrJ
+DEFAULT6torchvision.models.video.resnet.MC3_18_Weights.DEFAULT
+Any°
+R2Plus1D_18_Weights3torchvision.models.video.resnet.R2Plus1D_18_Weights"#torchvision.models._api.WeightsEnumHr]
+KINETICS400_V1Btorchvision.models.video.resnet.R2Plus1D_18_Weights.KINETICS400_V1
+AnyrO
+DEFAULT;torchvision.models.video.resnet.R2Plus1D_18_Weights.DEFAULT
+Anyé
+r3d_18&torchvision.models.video.resnet.r3d_18"Z
++torchvision.models.video.resnet.VideoResNet"+torchvision.models.video.resnet.VideoResNet*∫
+weights™
+:Union[torchvision.models.video.resnet.R3D_18_Weights,None]`
+.torchvision.models.video.resnet.R3D_18_Weights".torchvision.models.video.resnet.R3D_18_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+Anyé
+mc3_18&torchvision.models.video.resnet.mc3_18"Z
++torchvision.models.video.resnet.VideoResNet"+torchvision.models.video.resnet.VideoResNet*∫
+weights™
+:Union[torchvision.models.video.resnet.MC3_18_Weights,None]`
+.torchvision.models.video.resnet.MC3_18_Weights".torchvision.models.video.resnet.MC3_18_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+Anyß
+r2plus1d_18+torchvision.models.video.resnet.r2plus1d_18"Z
++torchvision.models.video.resnet.VideoResNet"+torchvision.models.video.resnet.VideoResNet*…
+weightsπ
+?Union[torchvision.models.video.resnet.R2Plus1D_18_Weights,None]j
+3torchvision.models.video.resnet.R2Plus1D_18_Weights"3torchvision.models.video.resnet.R2Plus1D_18_Weights
+None *.
+progress
+builtins.bool"builtins.bool *
+kwargs
+Any*õ
+__annotations__/torchvision.models.video.resnet.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*
+nntorch.nn *9
+Tensor&torchvision.models.video.resnet.Tensor
+Any

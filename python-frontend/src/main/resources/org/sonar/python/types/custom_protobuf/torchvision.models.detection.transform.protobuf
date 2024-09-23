@@ -1,0 +1,195 @@
+
+&torchvision.models.detection.transform≥
+	ImageList1torchvision.models.detection.image_list.ImageList"builtins.object*è
+__init__:torchvision.models.detection.image_list.ImageList.__init__"
+None*p
+selff
+1torchvision.models.detection.image_list.ImageList"1torchvision.models.detection.image_list.ImageList*
+tensors
+Any*¥
+image_sizes¢
+/builtins.list[Tuple[builtins.int,builtins.int]]`
+ Tuple[builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int"builtins.list*©
+to4torchvision.models.detection.image_list.ImageList.to"f
+1torchvision.models.detection.image_list.ImageList"1torchvision.models.detection.image_list.ImageList*p
+selff
+1torchvision.models.detection.image_list.ImageList"1torchvision.models.detection.image_list.ImageList*
+device
+AnyrM
+tensors9torchvision.models.detection.image_list.ImageList.tensors
+AnyrU
+image_sizes=torchvision.models.detection.image_list.ImageList.image_sizes
+Any‹*
+GeneralizedRCNNTransform?torchvision.models.detection.transform.GeneralizedRCNNTransform"builtins.object*Ñ
+__init__Htorchvision.models.detection.transform.GeneralizedRCNNTransform.__init__"
+None*ç
+selfÇ
+?torchvision.models.detection.transform.GeneralizedRCNNTransform"?torchvision.models.detection.transform.GeneralizedRCNNTransform**
+min_size
+builtins.int"builtins.int**
+max_size
+builtins.int"builtins.int*`
+
+image_meanP
+builtins.list[builtins.float] 
+builtins.float"builtins.float"builtins.list*_
+	image_stdP
+builtins.list[builtins.float] 
+builtins.float"builtins.float"builtins.list*2
+size_divisible
+builtins.int"builtins.int *Ø
+
+fixed_sizeú
+,Union[Tuple[builtins.int,builtins.int],None]`
+ Tuple[builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int
+None *
+kwargs
+Any*⁄
+forwardGtorchvision.models.detection.transform.GeneralizedRCNNTransform.forward"≈
+sTuple[torchvision.models.detection.image_list.ImageList,Union[builtins.list[builtins.dict[builtins.str,Any]],None]]f
+1torchvision.models.detection.image_list.ImageList"1torchvision.models.detection.image_list.ImageList„
+:Union[builtins.list[builtins.dict[builtins.str,Any]],None]ò
+.builtins.list[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"builtins.list
+None*ç
+selfÇ
+?torchvision.models.detection.transform.GeneralizedRCNNTransform"?torchvision.models.detection.transform.GeneralizedRCNNTransform*8
+images,
+builtins.list[Any]
+Any"builtins.list*Û
+targets„
+:Union[builtins.list[builtins.dict[builtins.str,Any]],None]ò
+.builtins.list[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"builtins.list
+None *É
+	normalizeItorchvision.models.detection.transform.GeneralizedRCNNTransform.normalize"
+Any*ç
+selfÇ
+?torchvision.models.detection.transform.GeneralizedRCNNTransform"?torchvision.models.detection.transform.GeneralizedRCNNTransform*
+image
+Any*›
+torch_choiceLtorchvision.models.detection.transform.GeneralizedRCNNTransform.torch_choice"
+builtins.int"builtins.int*ç
+selfÇ
+?torchvision.models.detection.transform.GeneralizedRCNNTransform"?torchvision.models.detection.transform.GeneralizedRCNNTransform*Q
+kJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*Û
+resizeFtorchvision.models.detection.transform.GeneralizedRCNNTransform.resize"ÿ
+6Tuple[Any,Union[builtins.dict[builtins.str,Any],None]]
+Anyí
++Union[builtins.dict[builtins.str,Any],None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None*ç
+selfÇ
+?torchvision.models.detection.transform.GeneralizedRCNNTransform"?torchvision.models.detection.transform.GeneralizedRCNNTransform*
+image
+Any*°
+targetí
++Union[builtins.dict[builtins.str,Any],None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None *œ
+max_by_axisKtorchvision.models.detection.transform.GeneralizedRCNNTransform.max_by_axis"J
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*ç
+selfÇ
+?torchvision.models.detection.transform.GeneralizedRCNNTransform"?torchvision.models.detection.transform.GeneralizedRCNNTransform*ñ
+the_listá
+*builtins.list[builtins.list[builtins.int]]J
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list"builtins.list*„
+batch_imagesLtorchvision.models.detection.transform.GeneralizedRCNNTransform.batch_images"
+Any*ç
+selfÇ
+?torchvision.models.detection.transform.GeneralizedRCNNTransform"?torchvision.models.detection.transform.GeneralizedRCNNTransform*8
+images,
+builtins.list[Any]
+Any"builtins.list*2
+size_divisible
+builtins.int"builtins.int *•
+postprocessKtorchvision.models.detection.transform.GeneralizedRCNNTransform.postprocess"ò
+.builtins.list[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"builtins.list*ç
+selfÇ
+?torchvision.models.detection.transform.GeneralizedRCNNTransform"?torchvision.models.detection.transform.GeneralizedRCNNTransform*•
+resultò
+.builtins.list[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"builtins.list*µ
+image_shapes¢
+/builtins.list[Tuple[builtins.int,builtins.int]]`
+ Tuple[builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int"builtins.list*Ω
+original_image_sizes¢
+/builtins.list[Tuple[builtins.int,builtins.int]]`
+ Tuple[builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int"builtins.listr]
+min_sizeHtorchvision.models.detection.transform.GeneralizedRCNNTransform.min_size
+Anyr]
+max_sizeHtorchvision.models.detection.transform.GeneralizedRCNNTransform.max_size
+Anyra
+
+image_meanJtorchvision.models.detection.transform.GeneralizedRCNNTransform.image_mean
+Anyr_
+	image_stdItorchvision.models.detection.transform.GeneralizedRCNNTransform.image_std
+Anyri
+size_divisibleNtorchvision.models.detection.transform.GeneralizedRCNNTransform.size_divisible
+Anyra
+
+fixed_sizeJtorchvision.models.detection.transform.GeneralizedRCNNTransform.fixed_size
+Any¢
+paste_masks_in_image;torchvision.models.detection.roi_heads.paste_masks_in_image"
+Any*
+masks
+Any*
+boxes
+Any*o
+	img_shape`
+ Tuple[builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int*+
+padding
+builtins.int"builtins.int •
+resize_keypoints7torchvision.models.detection.transform.resize_keypoints"
+Any*
+	keypoints
+Any*]
+original_sizeJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*X
+new_sizeJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.listô
+resize_boxes3torchvision.models.detection.transform.resize_boxes"
+Any*
+boxes
+Any*]
+original_sizeJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*X
+new_sizeJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list*¢
+__annotations__6torchvision.models.detection.transform.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*@
+Tensor-torchvision.models.detection.transform.Tensor
+Any
