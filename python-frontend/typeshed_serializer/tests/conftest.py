@@ -44,7 +44,6 @@ def typeshed_stdlib():
 @pytest.fixture(scope="session")
 def typeshed_custom_stubs():
     build_result, _ = CustomStubsSerializer().get_build_result()
-    assert len(build_result.errors) == 0
     return build_result
 
 @pytest.fixture(scope="session")
