@@ -19,22 +19,10 @@
  */
 package org.sonar.python.index;
 
-import javax.annotation.CheckForNull;
+public record UnknownDescriptor(String name, String fullyQualifiedName) implements Descriptor{
 
-public interface Descriptor {
-
-  String name();
-
-  @CheckForNull
-  String fullyQualifiedName();
-
-  Kind kind();
-
-  enum Kind {
-    FUNCTION,
-    CLASS,
-    VARIABLE,
-    AMBIGUOUS,
-    UNKNOWN
+  @Override
+  public Kind kind() {
+    return Kind.UNKNOWN;
   }
 }

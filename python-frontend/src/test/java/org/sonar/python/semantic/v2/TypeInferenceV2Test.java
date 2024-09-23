@@ -52,6 +52,7 @@ import org.sonar.plugins.python.api.tree.StatementList;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.PythonTestUtils;
+import org.sonar.python.index.FunctionDescriptor;
 import org.sonar.python.semantic.ClassSymbolImpl;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.semantic.SymbolUtils;
@@ -2596,6 +2597,57 @@ class TypeInferenceV2Test {
     FileInput fileInput = inferTypes(lines, projectLevelTypeTable);
     var sleepType = ((ExpressionStatement) fileInput.statements().statements().get(1)).expressions().get(0).typeV2();
     assertThat(sleepType.fullyQualifiedName()).isNull();
+  }
+
+  @Test
+  void typeToDescriptor1() {
+    var lines = """
+      class A:
+          some_field = 42
+          def __init__(self):
+              self.some_field = 42
+          def foo(self) -> dict: ...
+      def some_func(some_param1: A, some_param2: int = 0) -> str: ...
+      """;
+    FileInput fileInput = parse(lines);
+
+    var symbolTable = new SymbolTableBuilderV2(fileInput)
+      .build();
+    new TypeInferenceV2(PROJECT_LEVEL_TYPE_TABLE, pythonFile, symbolTable, "thisfile").inferTypes(fileInput);
+    var ret = symbolTable.convertScopeSymbolsToDescriptor(fileInput);
+
+    var someFuncDescriptor = ((FunctionDescriptor) ret.stream().filter(d -> d.name().equals("some_func")).findFirst().get());
+
+    assertThat(someFuncDescriptor.fullyQualifiedName()).isEqualTo("thisfile.some_func");
+    assertThat(someFuncDescriptor.decorators()).isEmpty();
+    assertThat(someFuncDescriptor.hasDecorators()).isFalse();
+    assertThat(someFuncDescriptor.isAsynchronous()).isFalse();
+    assertThat(someFuncDescriptor.isInstanceMethod()).isFalse();
+    assertThat(someFuncDescriptor.definitionLocation()).isNotNull();
+//    assertThat(someFuncDescriptor.annotatedReturnTypeName()).isEqualTo("str");
+
+    assertThat(someFuncDescriptor.parameters()).hasSize(2);
+    assertThat(someFuncDescriptor.parameters().get(0).name()).isEqualTo("some_param1");
+    assertThat(someFuncDescriptor.parameters().get(0).annotatedType()).isEqualTo("thisfile.A");
+    assertThat(someFuncDescriptor.parameters().get(0).hasDefaultValue()).isFalse();
+    assertThat(someFuncDescriptor.parameters().get(0).isKeywordOnly()).isFalse();
+    assertThat(someFuncDescriptor.parameters().get(0).isKeywordVariadic()).isFalse();
+    assertThat(someFuncDescriptor.parameters().get(0).isPositionalOnly()).isFalse();
+    assertThat(someFuncDescriptor.parameters().get(0).isPositionalVariadic()).isFalse();
+    // Value is just passed through, the actual location is already asserted in another test
+    assertThat(someFuncDescriptor.parameters().get(0).location()).isNotNull();
+
+    assertThat(someFuncDescriptor.parameters().get(1).name()).isEqualTo("some_param2");
+    assertThat(someFuncDescriptor.parameters().get(1).annotatedType()).isEqualTo("int");
+    assertThat(someFuncDescriptor.parameters().get(1).hasDefaultValue()).isTrue();
+    assertThat(someFuncDescriptor.parameters().get(1).isKeywordOnly()).isFalse();
+    assertThat(someFuncDescriptor.parameters().get(1).isKeywordVariadic()).isFalse();
+    assertThat(someFuncDescriptor.parameters().get(1).isPositionalOnly()).isFalse();
+    assertThat(someFuncDescriptor.parameters().get(1).isPositionalVariadic()).isFalse();
+    // Value is just passed through, the actual location is already asserted in another test
+    assertThat(someFuncDescriptor.parameters().get(1).location()).isNotNull();
+
+
   }
 
 

@@ -21,9 +21,13 @@ package org.sonar.python.semantic.v2;
 
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.index.Descriptor;
+import org.sonar.python.semantic.v2.converter.PythonTypeToDescriptorConverter;
 
 public record SymbolTable(Map<Tree, ScopeV2> scopesByRootTree) {
 
@@ -35,4 +39,35 @@ public record SymbolTable(Map<Tree, ScopeV2> scopesByRootTree) {
       .orElseGet(HashSet::new);
   }
 
+  Set<Descriptor> convertScopeSymbolsToDescriptor(Tree tree) {
+
+    var topLevelSymbols = getSymbolsByRootTree(tree);
+    var result = new HashSet<Descriptor>();
+
+    for (var symbol : topLevelSymbols) {
+//      symbol.usages().get(0).
+
+      var usages = symbol.usages()
+        .stream()
+        .filter(UsageV2::isBindingUsage)
+        .map(UsageV2::tree)
+        .map(tree1 -> {
+          if (tree1 instanceof Expression expression) {
+            return expression.typeV2();
+          }
+          return null;
+        })
+        .filter(Objects::nonNull)
+        .toList();
+
+      // Here, we assume that there is only 1 type
+      var type = usages.get(0);
+
+      var converted = PythonTypeToDescriptorConverter.convert(type, symbol);
+      if (converted != null) {
+        result.add(converted);
+      }
+    }
+    return result;
+  }
 }
