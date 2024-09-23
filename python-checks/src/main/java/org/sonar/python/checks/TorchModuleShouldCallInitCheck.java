@@ -41,7 +41,7 @@ import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S6978")
 public class TorchModuleShouldCallInitCheck extends PythonSubscriptionCheck {
-  private static final String TORCH_NN_MODULE = "torch.nn.Module";
+  private static final String TORCH_NN_MODULE = "torch.nn.modules.module.Module";
   private static final String MESSAGE = "Add a call to super().__init__().";
   private static final String SECONDARY_MESSAGE = "Inheritance happens here";
   public static final String QUICK_FIX_MESSAGE = "insert call to super constructor";

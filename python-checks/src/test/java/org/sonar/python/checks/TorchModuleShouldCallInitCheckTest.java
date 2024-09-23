@@ -33,13 +33,13 @@ class TorchModuleShouldCallInitCheckTest {
   void testQuickFix() {
     PythonQuickFixVerifier.verify(new TorchModuleShouldCallInitCheck(),
       """
-        import torch
+        import torch.nn
         class Test(torch.nn.Module):
           def __init__(self):
             some_method()
         """,
       """
-        import torch
+        import torch.nn
         class Test(torch.nn.Module):
           def __init__(self):
             super().__init__()
@@ -48,13 +48,13 @@ class TorchModuleShouldCallInitCheckTest {
 
     PythonQuickFixVerifier.verify(new TorchModuleShouldCallInitCheck(),
       """
-        import torch
+        import torch.nn
         class Test(torch.nn.Module):
           def __init__(self):
             ... 
         """,
       """
-        import torch
+        import torch.nn
         class Test(torch.nn.Module):
           def __init__(self):
             super().__init__()
@@ -63,14 +63,14 @@ class TorchModuleShouldCallInitCheckTest {
 
     PythonQuickFixVerifier.verifyNoQuickFixes(new TorchModuleShouldCallInitCheck(),
       """
-        import torch
+        import torch.nn
         class Test(torch.nn.Module):
           def __init__(self): some_method()
         """);
 
     PythonQuickFixVerifier.verifyNoQuickFixes(new TorchModuleShouldCallInitCheck(),
       """
-        import torch
+        import torch.nn
         class Test(torch.nn.Module):
           def __init__(self): pass
         """);
