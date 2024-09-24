@@ -11,20 +11,6 @@ from the file system, for example through a vulnerability in the service, they a
 <p>It’s recommended to encrypt SQS queues that contain sensitive information. Encryption and decryption are handled transparently by SQS, so no
 further modifications to the application are necessary.</p>
 <h2>Sensitive Code Example</h2>
-<p>For <a href="https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_sqs.Queue.html">aws_cdk.aws_sqs.Queue</a>:</p>
-<pre>
-from aws_cdk import (
-    aws_sqs as sqs
-)
-
-class QueueStack(Stack):
-    def __init__(self, scope: Construct, construct_id: str, **kwargs) -&gt; None:
-        super().__init__(scope, construct_id, **kwargs)
-        sqs.Queue( # Sensitive, unencrypted by default
-            self,
-            "example"
-        )
-</pre>
 <p>For <a href="https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_sqs.CfnQueue.html">aws_cdk.aws_sqs.CfnQueue</a>:</p>
 <pre>
 from aws_cdk import (
@@ -34,41 +20,26 @@ from aws_cdk import (
 class CfnQueueStack(Stack):
     def __init__(self, scope: Construct, construct_id: str, **kwargs) -&gt; None:
         super().__init__(scope, construct_id, **kwargs)
-        sqs.CfnQueue( # Sensitive, unencrypted by default
-            self,
-            "example"
-        )
-</pre>
-<h2>Compliant Solution</h2>
-<p>For <a href="https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_sqs.Queue.html">aws_cdk.aws_sqs.Queue</a>:</p>
-<pre>
-from aws_cdk import (
-    aws_sqs as sqs
-)
-
-class QueueStack(Stack):
-    def __init__(self, scope: Construct, construct_id: str, **kwargs) -&gt; None:
-        super().__init__(scope, construct_id, **kwargs)
-        sqs.Queue(
-            self,
-            "example",
-            encryption=sqs.QueueEncryption.KMS_MANAGED
-        )
-</pre>
-<p>For <a href="https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_sqs.CfnQueue.html">aws_cdk.aws_sqs.CfnQueue</a>:</p>
-<pre>
-from aws_cdk import (
-    aws_sqs as sqs
-)
-
-class CfnQueueStack(Stack):
-    def __init__(self, scope: Construct, construct_id: str, **kwargs) -&gt; None:
-        super().__init__(scope, construct_id, **kwargs)
-        my_key = kms.Key(self, "key")
         sqs.CfnQueue(
             self,
             "example",
-            kms_master_key_id=my_key.key_id
+            sqs_managed_sse_enabled=False # Sensitive, unencrypted
+        )
+</pre>
+<h2>Compliant Solution</h2>
+<p>For <a href="https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_sqs.CfnQueue.html">aws_cdk.aws_sqs.CfnQueue</a>:</p>
+<pre>
+from aws_cdk import (
+    aws_sqs as sqs
+)
+
+class CfnQueueStack(Stack):
+    def __init__(self, scope: Construct, construct_id: str, **kwargs) -&gt; None:
+        super().__init__(scope, construct_id, **kwargs)
+        sqs.CfnQueue(
+            self,
+            "example",
+            sqs_managed_sse_enabled=True
         )
 </pre>
 <h2>See</h2>

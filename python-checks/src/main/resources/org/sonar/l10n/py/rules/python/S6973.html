@@ -1,7 +1,7 @@
-<p>This rule raises an issue when a Scikit-learn model is instantiated without specifying the important hyperparameters.</p>
+<p>This rule raises an issue when a machine learning estimator or optimizer is instantiated without specifying the important hyperparameters.</p>
 <h2>Why is this an issue?</h2>
-<p>When instantiating a Scikit-learn estimator, it will use default values for the hyperparameters that are not specified. Relying on the default
-values can lead to non-reproducible results across diffferent versions of the library.</p>
+<p>When instantiating an estimator or an optimizer, default values for any hyperparameters that are not specified will be used. Relying on the default
+values can lead to non-reproducible results across different versions of the library.</p>
 <p>Furthermore, the default values might not be the best choice for the specific problem at hand and can lead to suboptimal performance.</p>
 <p>Here are the estimators and the parameters considered by this rule :</p>
 <table>
@@ -9,11 +9,13 @@ values can lead to non-reproducible results across diffferent versions of the li
     <col style="width: 50%;">
     <col style="width: 50%;">
   </colgroup>
-  <tbody>
+  <thead>
     <tr>
-      <td><p><strong>Estimator</strong></p></td>
-      <td><p><strong>Hyperparameters</strong></p></td>
+      <th>Scikit-learn - Estimator</th>
+      <th>Hyperparameters</th>
     </tr>
+  </thead>
+  <tbody>
     <tr>
       <td><p>AdaBoostClassifier</p></td>
       <td><p>learning_rate</p></td>
@@ -100,7 +102,73 @@ values can lead to non-reproducible results across diffferent versions of the li
     </tr>
   </tbody>
 </table>
-<h2>How to fix it</h2>
+<table>
+  <colgroup>
+    <col style="width: 50%;">
+    <col style="width: 50%;">
+  </colgroup>
+  <thead>
+    <tr>
+      <th>PyTorch - Optimizer</th>
+      <th>Hyperparameters</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><p>Adadelta</p></td>
+      <td><p>lr, weight_decay</p></td>
+    </tr>
+    <tr>
+      <td><p>Adagrad</p></td>
+      <td><p>lr, weight_decay</p></td>
+    </tr>
+    <tr>
+      <td><p>Adam</p></td>
+      <td><p>lr, weight_decay</p></td>
+    </tr>
+    <tr>
+      <td><p>AdamW</p></td>
+      <td><p>lr, weight_decay</p></td>
+    </tr>
+    <tr>
+      <td><p>SparseAdam</p></td>
+      <td><p>lr</p></td>
+    </tr>
+    <tr>
+      <td><p>Adamax</p></td>
+      <td><p>lr, weight_decay</p></td>
+    </tr>
+    <tr>
+      <td><p>ASGD</p></td>
+      <td><p>lr, weight_decay</p></td>
+    </tr>
+    <tr>
+      <td><p>LBFGS</p></td>
+      <td><p>lr</p></td>
+    </tr>
+    <tr>
+      <td><p>NAdam</p></td>
+      <td><p>lr, weight_decay, momentum_decay</p></td>
+    </tr>
+    <tr>
+      <td><p>RAdam</p></td>
+      <td><p>lr, weight_decay</p></td>
+    </tr>
+    <tr>
+      <td><p>RMSprop</p></td>
+      <td><p>lr, weight_decay, momentum</p></td>
+    </tr>
+    <tr>
+      <td><p>Rprop</p></td>
+      <td><p>lr</p></td>
+    </tr>
+    <tr>
+      <td><p>SGD</p></td>
+      <td><p>lr, weight_decay, momentum</p></td>
+    </tr>
+  </tbody>
+</table>
+<h2>How to fix it in Scikit-Learn</h2>
 <p>Specify the hyperparameters when instantiating the estimator.</p>
 <h3>Code examples</h3>
 <h4>Noncompliant code example</h4>
@@ -117,6 +185,23 @@ clf = KNeighborsClassifier( # Compliant
     n_neighbors=5
 )
 </pre>
+<h2>How to fix it in PyTorch</h2>
+<p>Specify the hyperparameters when instantiating the optimizer</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+from my_model import model
+from torch.optim import AdamW
+
+optimizer = AdamW(model.parameters(), lr = 0.001) # Noncompliant : weight_decay is not specified, different values can change the behaviour of the optimizer significantly
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="2" data-diff-type="compliant">
+from my_model import model
+from torch.optim import AdamW
+
+optimizer = AdamW(model.parameters(), lr = 0.001, weight_decay = 0.003) # Compliant
+</pre>
 <h2>Resources</h2>
 <h3>Articles &amp; blog posts</h3>
 <ul>
@@ -124,6 +209,10 @@ clf = KNeighborsClassifier( # Compliant
   Machine Learning Research, 20(53), 1-32. </li>
   <li> van Rijn, J. N., &amp; Hutter, F. (2018, July). Hyperparameter importance across datasets. In Proceedings of the 24th ACM SIGKDD International
   Conference on Knowledge Discovery &amp; Data Mining (pp. 2367-2376). </li>
+</ul>
+<h3>Documentation</h3>
+<ul>
+  <li> PyTorch Documentation - <a href="https://pytorch.org/docs/stable/optim.html">torch.optim</a> </li>
 </ul>
 <h3>External coding guidelines</h3>
 <ul>
