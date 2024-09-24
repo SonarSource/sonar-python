@@ -4,7 +4,9 @@
 <code>pickle</code> library to load the model and the weights. If the model comes from an untrusted source, an attacker could inject a malicious
 payload which would be executed during the deserialization.</p>
 <h2>How to fix it</h2>
-<p>Use a safer alternative to load the model, such as <code>safetensors.torch.load_model</code>.</p>
+<p>Use a safer alternative to load the model, such as <code>safetensors.torch.load_model</code>. Alternatively, PyTorch can be instructed to only load
+the weights by setting the parameter <code>weights_only=True</code>. This avoids the use of the <code>pickle</code> library and is therefore safe.
+Note that the use of <code>weights_only</code> requires saving only the <code>state_dict</code> of a model instead of the whole model.</p>
 <h3>Code examples</h3>
 <h4>Noncompliant code example</h4>
 <pre data-diff-id="1" data-diff-type="noncompliant">
