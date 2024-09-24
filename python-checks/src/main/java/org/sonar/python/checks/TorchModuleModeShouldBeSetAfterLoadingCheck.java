@@ -31,6 +31,7 @@ import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S6982")
@@ -56,8 +57,10 @@ public class TorchModuleModeShouldBeSetAfterLoadingCheck extends PythonSubscript
     // Since this is currently not possible, we check if the parameter to load_state_dict is torch.load(...),
     // with the assumption that if torch.load is passed to this load_state_dict, it is probably the correct method
     if (callExpr.callee() instanceof QualifiedExpression qualifiedExpr) {
-      return qualifiedExpr.qualifier().type().mustBeOrExtend("torch.nn.modules.module.Module")
-        && LOAD_STATE_DICT_NAME.equals(qualifiedExpr.name().name());
+      InferredType qualifierType = qualifiedExpr.qualifier().type();
+      boolean isModule = qualifierType.mustBeOrExtend("torch.nn.modules.module.Module")
+        || qualifierType.mustBeOrExtend("torch.nn.Module");
+      return isModule && LOAD_STATE_DICT_NAME.equals(qualifiedExpr.name().name());
     }
     return false;
   }
