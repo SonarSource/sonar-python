@@ -31,7 +31,6 @@ import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.python.cfg.fixpoint.ReachingDefinitionsAnalysis;
 import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S6982")
@@ -40,13 +39,9 @@ public class TorchModuleModeShouldBeSetAfterLoadingCheck extends PythonSubscript
   private static final String LOAD_STATE_DICT_NAME = "load_state_dict";
   private static final String MESSAGE = "Set the module in training or evaluation mode.";
 
-  private ReachingDefinitionsAnalysis reachingDefinitionsAnalysis;
 
   @Override
   public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, ctx -> reachingDefinitionsAnalysis =
-      new ReachingDefinitionsAnalysis(ctx.pythonFile()));
-
     context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, ctx -> {
       CallExpression callExpr = (CallExpression) ctx.syntaxNode();
       List<Usage> receiverUsages = getForwardUsagesOfReceiver(callExpr);
@@ -56,7 +51,7 @@ public class TorchModuleModeShouldBeSetAfterLoadingCheck extends PythonSubscript
     });
   }
 
-  private boolean isLoadStateDictCall(CallExpression callExpr) {
+  private static boolean isLoadStateDictCall(CallExpression callExpr) {
     // To properly check if the correct load_state_dict is called, typeshed type information would be required.
     // Since this is currently not possible, we check if the parameter to load_state_dict is torch.load(...),
     // with the assumption that if torch.load is passed to this load_state_dict, it is probably the correct method
