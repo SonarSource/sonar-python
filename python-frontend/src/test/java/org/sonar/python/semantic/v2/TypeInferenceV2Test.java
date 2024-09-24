@@ -52,6 +52,7 @@ import org.sonar.plugins.python.api.tree.StatementList;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.PythonTestUtils;
+import org.sonar.python.index.ClassDescriptor;
 import org.sonar.python.index.FunctionDescriptor;
 import org.sonar.python.semantic.ClassSymbolImpl;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
@@ -2647,11 +2648,37 @@ class TypeInferenceV2Test {
     // Value is just passed through, the actual location is already asserted in another test
     assertThat(someFuncDescriptor.parameters().get(1).location()).isNotNull();
 
+    var aDescriptor = ((ClassDescriptor) ret.stream().filter(d -> d.name().equals("A")).findFirst().get());
+    assertThat(aDescriptor.fullyQualifiedName()).isEqualTo("thisfile.A");
+
 
   }
 
+  @Test
+  void typeToDescriptor2() {
+    var lines = """
+      from otherfile import O
+      class Ancestor: ...
+      class A(Ancestor, O):
+          some_field = 42
+          def __init__(self):
+              self.some_field = 42
+          def foo(self) -> dict: ...
+      """;
+    FileInput fileInput = parse(lines);
 
-  private static FileInput inferTypes(String lines) {
+    var symbolTable = new SymbolTableBuilderV2(fileInput)
+      .build();
+    new TypeInferenceV2(PROJECT_LEVEL_TYPE_TABLE, pythonFile, symbolTable, "thisfile").inferTypes(fileInput);
+    var ret = symbolTable.convertScopeSymbolsToDescriptor(fileInput);
+
+
+    var aDescriptor = ((ClassDescriptor) ret.stream().filter(d -> d.name().equals("A")).findFirst().get());
+    assertThat(aDescriptor.fullyQualifiedName()).isEqualTo("thisfile.A");
+    assertThat(aDescriptor.superClasses()).containsExactly("thisfile.Ancestor"); // Can't resolve O
+
+  }
+    private static FileInput inferTypes(String lines) {
     return inferTypes(lines, PROJECT_LEVEL_TYPE_TABLE);
   }
 

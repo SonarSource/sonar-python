@@ -19,14 +19,19 @@
  */
 package org.sonar.python.semantic.v2.converter;
 
+import java.util.Objects;
+import java.util.stream.Collectors;
+import org.sonar.python.index.ClassDescriptor;
 import org.sonar.python.index.Descriptor;
 import org.sonar.python.index.FunctionDescriptor;
 import org.sonar.python.index.UnknownDescriptor;
 import org.sonar.python.semantic.v2.SymbolV2;
+import org.sonar.python.types.v2.ClassType;
 import org.sonar.python.types.v2.FunctionType;
 import org.sonar.python.types.v2.ObjectType;
 import org.sonar.python.types.v2.ParameterV2;
 import org.sonar.python.types.v2.PythonType;
+import org.sonar.python.types.v2.TypeWrapper;
 import org.sonar.python.types.v2.UnknownType;
 
 public class PythonTypeToDescriptorConverter {
@@ -54,6 +59,19 @@ public class PythonTypeToDescriptorConverter {
         .withParameters(functionType.parameters().stream().map(PythonTypeToDescriptorConverter::convertParameter).toList())
         .withDefinitionLocation(functionType.definitionLocation().orElse(null))
         .withAnnotatedReturnTypeName(functionType.returnType().fullyQualifiedName());
+      return builder.build();
+    }
+    if (pythonType instanceof ClassType classType) {
+      var builder = new ClassDescriptor.ClassDescriptorBuilder()
+        .withName(classType.name())
+        .withFullyQualifiedName(classType.fullyQualifiedName())
+        .withDefinitionLocation(classType.definitionLocation().orElse(null))
+        .withHasDecorators(classType.hasDecorators())
+        .withHasMetaClass(classType.hasMetaClass())
+        .withMetaclassFQN(classType.metaClasses().isEmpty() ? null : classType.metaClasses().get(0).fullyQualifiedName())
+        .withSupportsGenerics(!classType.attributes().isEmpty())
+        .withMembers(classType.members().stream().map(member -> convert(member.type(), null)).collect(Collectors.toSet()))
+        .withSuperClasses(classType.superClasses().stream().map(TypeWrapper::type).map(PythonType::fullyQualifiedName).filter(Objects::nonNull).toList());
       return builder.build();
     }
 
