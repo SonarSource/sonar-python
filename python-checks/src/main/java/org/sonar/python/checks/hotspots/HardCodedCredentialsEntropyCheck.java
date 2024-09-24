@@ -45,7 +45,7 @@ public class HardCodedCredentialsEntropyCheck extends PythonSubscriptionCheck {
 
   private static final String DEFAULT_SECRET_KEYWORDS = "api[_.-]?key,auth,credential,secret,token";
 
-  private static final String DEFAULT_RANDOMNESS_SENSIBILITY = "5.0";
+  private static final String DEFAULT_RANDOMNESS_SENSIBILITY = "3.0";
 
   private static final Pattern POSTVALIDATION_PATTERN = Pattern.compile("[a-zA-Z0-9_.+/~$-]([a-zA-Z0-9_.+/=~$-]|\\\\\\\\(?![ntr\"])){14,1022}[a-zA-Z0-9_.+/=~$-]");
 
