@@ -31,6 +31,7 @@ public interface Descriptor {
   Kind kind();
 
   enum Kind {
+    MODULE,
     FUNCTION,
     CLASS,
     VARIABLE,
