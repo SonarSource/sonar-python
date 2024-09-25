@@ -19,9 +19,6 @@
  */
 package org.sonar.python.checks;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.function.Predicate;
 import javax.annotation.Nullable;
 import org.sonar.check.Rule;
@@ -37,24 +34,20 @@ import org.sonar.plugins.python.api.tree.ExceptClause;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.quickfix.TextEditUtils;
 import org.sonar.python.tree.TreeUtils;
+import org.sonar.python.types.v2.PythonType;
+import org.sonar.python.types.v2.TriBool;
 
 import static org.sonar.plugins.python.api.symbols.Symbol.Kind.CLASS;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.EXCEPT_CLAUSE;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.EXCEPT_GROUP_CLAUSE;
 import static org.sonar.plugins.python.api.types.BuiltinTypes.BASE_EXCEPTION;
-import static org.sonar.plugins.python.api.types.BuiltinTypes.DICT;
-import static org.sonar.plugins.python.api.types.BuiltinTypes.LIST;
-import static org.sonar.plugins.python.api.types.BuiltinTypes.SET;
-import static org.sonar.plugins.python.api.types.BuiltinTypes.TUPLE;
 
 @Rule(key = "S5708")
 public class CaughtExceptionsCheck extends PythonSubscriptionCheck {
 
   private static final String MESSAGE = "Change this expression to be a class deriving from BaseException or a tuple of such classes.";
-  private static final Set<String> NON_COMPLIANT_TYPES = new HashSet<>(Arrays.asList(LIST, SET, DICT));
   public static final String QUICK_FIX_MESSAGE_FORMAT = "Make \"%s\" deriving from \"Exception\"";
 
   @Override
@@ -74,7 +67,7 @@ public class CaughtExceptionsCheck extends PythonSubscriptionCheck {
       var notInheritsFromBaseException = expressionSymbolOpt
         .filter(Predicate.not(CaughtExceptionsCheck::inheritsFromBaseException))
         .isPresent();
-      if (!canBeOrExtendBaseException(expression.type()) || notInheritsFromBaseException) {
+      if (!canBeOrExtendBaseException(expression, ctx) || notInheritsFromBaseException) {
         var issue = ctx.addIssue(expression, MESSAGE);
         expressionSymbolOpt.ifPresent(symbol -> addQuickFix(issue, symbol));
       }
@@ -111,21 +104,11 @@ public class CaughtExceptionsCheck extends PythonSubscriptionCheck {
       });
   }
 
-  private static boolean canBeOrExtendBaseException(InferredType type) {
-    if (NON_COMPLIANT_TYPES.stream().anyMatch(type::canOnlyBe)) {
-      // due to some limitations in type inference engine,
-      // type.canBeOrExtend("list" | "set" | "dict") returns true
-      return false;
-    }
-    if (type.canBeOrExtend(TUPLE)) {
-      // avoid FP on variables holding a tuple: SONARPY-713
-      return true;
-    }
-    if (type.canBeOrExtend("type")) {
-      // SONARPY-1666: Here we should only exclude type objects that represent Exception types
-      return true;
-    }
-    return type.canBeOrExtend(BASE_EXCEPTION);
+  private static boolean canBeOrExtendBaseException(Expression expression, SubscriptionContext ctx) {
+    PythonType pythonType = expression.typeV2();
+    TriBool isBaseException = ctx.typeChecker().typeCheckBuilder().isInstanceOf("BaseException").check(pythonType);
+    TriBool isTuple = ctx.typeChecker().typeCheckBuilder().isBuiltinWithName("tuple").check(pythonType);
+    return isBaseException != TriBool.FALSE || isTuple != TriBool.FALSE;
   }
 
   private static boolean inheritsFromBaseException(@Nullable Symbol symbol) {
