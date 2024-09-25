@@ -116,14 +116,26 @@ def hash_data(algorithm):
     hashlib.new(algorithm)  # OK
 
     hashlib.md5  # Noncompliant
+    hashlib.md5(usedforsecurity=False)
+    hashlib.md5(usedforsecurity=True) #Noncompliant
+    is_security = True
+    hashlib.md5(usedforsecurity=is_security) #Noncompliant
     hashlib.sha1() # Noncompliant
     hashlib.sha224() # Noncompliant
 
     alg = 'md5'
     hashlib.new(alg)  # Noncompliant
+    hashlib.new(alg, usedforsecurity=True)  # Noncompliant
+    hashlib.new(alg, usedforsecurity=False)
 
     md5  # Noncompliant
 
+def test_if_usedforsecurity_works_only_for_hashlib():
+    import Cryptodome
+    Cryptodome.Hash.MD2.new(usedforsecurity=False) # Noncompliant
+
+    import passlib.hash
+    passlib.hash.apr_md5_crypt(usedforsecurity=False)  # Noncompliant
 
 ############################################
 ###                Passlib               ###
