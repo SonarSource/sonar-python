@@ -113,15 +113,15 @@ public class HashingDataCheck extends AbstractCallExpressionCheck {
 
   @Override
   protected boolean isException(CallExpression callExpression) {
-    return hasSafeArgument(callExpression, "django.contrib.auth.hashers.make_password", 2, "hasher", questionableHashers) ||
-      hasSafeArgument(callExpression, "hashlib.new", 0, "name", unsafeAlgorithms) ||
-      hasSafeArgument(callExpression, "werkzeug.security.generate_password_hash", 1, "method", unsafeAlgorithms);
+    return isNotUsingUnsafeAlgorithms(callExpression, "django.contrib.auth.hashers.make_password", 2, "hasher", questionableHashers) ||
+      isNotUsingUnsafeAlgorithms(callExpression, "hashlib.new", 0, "name", unsafeAlgorithms) ||
+      isNotUsingUnsafeAlgorithms(callExpression, "werkzeug.security.generate_password_hash", 1, "method", unsafeAlgorithms);
   }
 
-  private static boolean hasSafeArgument(CallExpression callExpression, String fqn, int argPosition, String keyword, Set<String> unsafeAlgorithms) {
+  private static boolean isNotUsingUnsafeAlgorithms(CallExpression callExpression, String fqn, int argPosition, String argKeyword, Set<String> unsafeAlgorithms) {
     Symbol calleeSymbol = callExpression.calleeSymbol();
     if (calleeSymbol != null && fqn.equals(calleeSymbol.fullyQualifiedName())) {
-      RegularArgument argument = TreeUtils.nthArgumentOrKeyword(argPosition, keyword, callExpression.arguments());
+      RegularArgument argument = TreeUtils.nthArgumentOrKeyword(argPosition, argKeyword, callExpression.arguments());
       if (argument == null) {
         return true;
       }
