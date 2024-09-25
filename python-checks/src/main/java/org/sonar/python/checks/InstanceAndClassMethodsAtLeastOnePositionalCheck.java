@@ -82,7 +82,7 @@ public class InstanceAndClassMethodsAtLeastOnePositionalCheck extends PythonSubs
       .map(decorator -> TreeUtils.decoratorNameFromExpression(decorator.expression()))
       .filter(Objects::nonNull).toList();
 
-    if (decoratorNames.contains("staticmethod")) {
+    if (decoratorNames.contains("staticmethod") || decoratorNames.contains("abstractstaticmethod")) {
       return;
     }
 

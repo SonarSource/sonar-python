@@ -59,3 +59,30 @@ class EdgeCase:
 
 EdgeCase = 1
 
+
+def abc_tests():
+    from abc import ABC, abstractstaticmethod, abstractmethod, abstractclassmethod, abstractproperty
+
+    class MyAbstractClass(ABC):
+        @abstractproperty
+        def myproperty():  # Noncompliant
+            pass
+
+        @abstractclassmethod
+        def myclassmethod():  # Noncompliant
+            pass
+
+        @abstractmethod
+        def mymethod():  # Noncompliant
+            pass
+
+        @abstractstaticmethod
+        def mystaticmethod():
+            pass
+
+def not_abc_tests():
+    from not_abc import abstractstaticmethod
+    class MyAbstractClass(ABC):
+        @abstractstaticmethod
+        def mystaticmethod(): #FN
+            pass
