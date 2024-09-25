@@ -19,12 +19,15 @@
  */
 package org.sonar.python.checks;
 
+import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 
 @Rule(key = FunctionNameCheck.CHECK_KEY)
 public class FunctionNameCheck extends AbstractFunctionNameCheck {
   public static final String CHECK_KEY = "S1542";
+
+  private static final Set<String> WHITELIST = Set.of("setUpModule", "tearDownModule");
 
   @Override
   public String typeName() {
@@ -33,7 +36,7 @@ public class FunctionNameCheck extends AbstractFunctionNameCheck {
 
   @Override
   public boolean shouldCheckFunctionDeclaration(FunctionDef pyFunctionDefTree) {
-    return !pyFunctionDefTree.isMethodDefinition();
+    return !pyFunctionDefTree.isMethodDefinition() && !WHITELIST.contains(pyFunctionDefTree.name().name());
   }
 
 }
