@@ -25,7 +25,8 @@ class B(SuperClass):
 
 def db(): ...  # OK
 
-def setUpModule(): # FP
+def setUpModule():
     ...
-def tearDownModule(): # FP
+
+def tearDownModule():
     ...
