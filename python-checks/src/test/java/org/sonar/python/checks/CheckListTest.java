@@ -72,9 +72,9 @@ class CheckListTest {
    */
   @Test
   void test() {
-    Iterable<Class> checks = CheckList.getChecks();
+    Iterable<Class<?>> checks = CheckList.getChecks();
 
-    for (Class cls : checks) {
+    for (Class<?> cls : checks) {
       String testName = '/' + cls.getName().replace('.', '/') + "Test.class";
       assertThat(getClass().getResource(testName))
         .overridingErrorMessage("No test for " + cls.getSimpleName())

@@ -38,6 +38,6 @@ public interface PythonCustomRuleRepository {
   /**
    * List of the custom rules classes.
    */
-  List<Class> checkClasses();
+  List<Class<?>> checkClasses();
 
 }

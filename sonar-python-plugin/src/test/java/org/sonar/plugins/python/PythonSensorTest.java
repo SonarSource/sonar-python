@@ -148,7 +148,7 @@ class PythonSensorTest {
     }
 
     @Override
-    public List<Class> checkClasses() {
+    public List<Class<?>> checkClasses() {
       return List.of(MyCustomRule.class, RuleCrashingOnRegularScan.class);
     }
   }};

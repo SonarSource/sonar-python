@@ -47,7 +47,7 @@ public class CustomPythonRuleRepository implements RulesDefinition, PythonCustom
   }
 
   @Override
-  public List<Class> checkClasses() {
+  public List<Class<?>> checkClasses() {
     return Arrays.asList(CustomPythonVisitorCheck.class, CustomPythonSubscriptionCheck.class);
   }
 }

@@ -36,7 +36,7 @@ public class PythonChecks {
   PythonChecks(CheckFactory checkFactory) {
     this.checkFactory = checkFactory;
   }
-  public PythonChecks addChecks(String repositoryKey, Iterable<Class> checkClass) {
+  public PythonChecks addChecks(String repositoryKey, Iterable<Class<?>> checkClass) {
     checksByRepository.add(checkFactory.<PythonCheck>create(repositoryKey).addAnnotatedChecks(checkClass));
 
     return this;
