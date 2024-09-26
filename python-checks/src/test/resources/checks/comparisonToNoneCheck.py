@@ -24,7 +24,7 @@ def identity_check(param):
 
     import xml.etree.ElementTree as ET
     tree = ET.ElementTree()
-    if tree.getroot() is None: pass # Noncompliant
+    if tree.getroot() is None: pass # Ok as getroot can return None
 
 def equality_check(param):
     a = None
