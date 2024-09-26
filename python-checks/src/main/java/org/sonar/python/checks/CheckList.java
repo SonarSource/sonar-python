@@ -118,7 +118,7 @@ public final class CheckList {
   private CheckList() {
   }
 
-  public static Iterable<Class> getChecks() {
+  public static Iterable<Class<?>> getChecks() {
     return Collections.unmodifiableSet(new HashSet<>(Arrays.asList(
       AfterJumpStatementCheck.class,
       AllBranchesAreIdenticalCheck.class,
