@@ -47,36 +47,53 @@ class TypeShedDescriptorsProviderTest {
   }
 
   @Test
-  void builtinSymbolsTest() {
+  void builtinDescriptorsTest() {
     var provider = new TypeShedDescriptorsProvider(Set.of());
-    var builtinSymbols = provider.builtinSymbols();
-    Assertions.assertThat(builtinSymbols).isNotEmpty();
+    var builtinDescriptors = provider.builtinDescriptors();
+    Assertions.assertThat(builtinDescriptors).isNotEmpty();
 
-    var intDescriptor = builtinSymbols.get("int");
+    var intDescriptor = builtinDescriptors.get("int");
     Assertions.assertThat(intDescriptor.fullyQualifiedName()).isEqualTo("int");
+
+    Assertions.assertThat(provider.builtinDescriptors()).isSameAs(builtinDescriptors);
   }
 
   @Test
-  void builtin312SymbolsTest() {
+  void builtin312DescriptorsTest() {
     ProjectPythonVersion.setCurrentVersions(Set.of(PythonVersionUtils.Version.V_311));
     var provider = new TypeShedDescriptorsProvider(Set.of());
-    var builtinSymbols = provider.builtinSymbols();
+    var builtinDescriptors = provider.builtinDescriptors();
 
-    Assertions.assertThat(builtinSymbols).isNotEmpty();
+    Assertions.assertThat(builtinDescriptors).isNotEmpty();
   }
 
   @Test
-  void typingSymbolsTest() {
+  void typingDescriptorsTest() {
     var provider = new TypeShedDescriptorsProvider(Set.of());
-    var typing = provider.symbolsForModule("typing");
-
+    var typing = provider.descriptorsForModule("typing");
     Assertions.assertThat(typing).isNotEmpty();
   }
 
   @Test
-  void stdlib_symbols() {
+  void moduleMatchesCurrentProjectTest() {
+    var provider = new TypeShedDescriptorsProvider(Set.of("typing"));
+    var typing = provider.descriptorsForModule("typing");
+    Assertions.assertThat(typing).isEmpty();
+  }
+
+  @Test
+  void cacheTest() {
     var provider = new TypeShedDescriptorsProvider(Set.of());
-    var mathDescriptors = provider.symbolsForModule("math");
+    var typing1 = provider.descriptorsForModule("typing");
+    var typing2 = provider.descriptorsForModule("typing");
+    Assertions.assertThat(typing1).isSameAs(typing2);
+  }
+
+
+  @Test
+  void stdlibDescriptors() {
+    var provider = new TypeShedDescriptorsProvider(Set.of());
+    var mathDescriptors = provider.descriptorsForModule("math");
     var descriptor = mathDescriptors.get("acos");
     assertThat(descriptor.kind()).isEqualTo(Descriptor.Kind.AMBIGUOUS);
     var acosDescriptor = ((AmbiguousDescriptor) descriptor).alternatives().iterator().next();
@@ -84,32 +101,32 @@ class TypeShedDescriptorsProviderTest {
     assertThat(((FunctionDescriptor) acosDescriptor).parameters()).hasSize(1);
     assertThat(((FunctionDescriptor) acosDescriptor).annotatedReturnTypeName()).isEqualTo("float");
 
-    var threadingSymbols = provider.symbolsForModule("threading");
+    var threadingSymbols = provider.descriptorsForModule("threading");
     assertThat(threadingSymbols.get("Thread").kind()).isEqualTo(Descriptor.Kind.CLASS);
 
-    var imaplibSymbols = provider.symbolsForModule("imaplib");
+    var imaplibSymbols = provider.descriptorsForModule("imaplib");
     assertThat(imaplibSymbols).isNotEmpty();
   }
 
   @Test
-  void should_resolve_packages() {
+  void shouldResolvePackages() {
     var provider = new TypeShedDescriptorsProvider(Set.of());
-    assertThat(provider.symbolsForModule("urllib")).isNotEmpty();
-    assertThat(provider.symbolsForModule("ctypes")).isNotEmpty();
-    assertThat(provider.symbolsForModule("email")).isNotEmpty();
-    assertThat(provider.symbolsForModule("json")).isNotEmpty();
-    assertThat(provider.symbolsForModule("docutils")).isNotEmpty();
-    assertThat(provider.symbolsForModule("ctypes.util")).isNotEmpty();
-    assertThat(provider.symbolsForModule("lib2to3.pgen2.grammar")).isNotEmpty();
-    assertThat(provider.symbolsForModule("cryptography")).isNotEmpty();
+    assertThat(provider.descriptorsForModule("urllib")).isNotEmpty();
+    assertThat(provider.descriptorsForModule("ctypes")).isNotEmpty();
+    assertThat(provider.descriptorsForModule("email")).isNotEmpty();
+    assertThat(provider.descriptorsForModule("json")).isNotEmpty();
+    assertThat(provider.descriptorsForModule("docutils")).isNotEmpty();
+    assertThat(provider.descriptorsForModule("ctypes.util")).isNotEmpty();
+    assertThat(provider.descriptorsForModule("lib2to3.pgen2.grammar")).isNotEmpty();
+    assertThat(provider.descriptorsForModule("cryptography")).isNotEmpty();
     // resolved but still empty
-    assertThat(provider.symbolsForModule("kazoo")).isEmpty();
+    assertThat(provider.descriptorsForModule("kazoo")).isEmpty();
   }
 
   @Test
-  void unknown_module() {
+  void unknownModule() {
     var provider = new TypeShedDescriptorsProvider(Set.of());
-    var unknownModule = provider.symbolsForModule("unknown_module");
+    var unknownModule = provider.descriptorsForModule("unknown_module");
     assertThat(unknownModule).isEmpty();
   }
 

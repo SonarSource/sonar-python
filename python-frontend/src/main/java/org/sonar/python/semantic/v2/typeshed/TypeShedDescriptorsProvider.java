@@ -31,7 +31,6 @@ import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.sonar.plugins.python.api.ProjectPythonVersion;
 import org.sonar.python.index.ClassDescriptor;
 import org.sonar.python.index.Descriptor;
 import org.sonar.python.index.ModuleDescriptor;
@@ -56,7 +55,6 @@ public class TypeShedDescriptorsProvider {
   );
   private final ModuleSymbolToDescriptorConverter moduleConverter;
 
-  private Set<String> supportedPythonVersions;
   private Map<String, Descriptor> builtins;
   private final Set<String> projectBasePackages;
   private final Map<String, Map<String, Descriptor>> cachedDescriptors;
@@ -71,9 +69,8 @@ public class TypeShedDescriptorsProvider {
   // Public methods
   //================================================================================
 
-  public Map<String, Descriptor> builtinSymbols() {
+  public Map<String, Descriptor> builtinDescriptors() {
     if (builtins == null) {
-      supportedPythonVersions();
       Map<String, Descriptor> symbols = getModuleDescriptors(BUILTINS_FQN, PROTOBUF);
       symbols.put(NONE_TYPE, new ClassDescriptor.ClassDescriptorBuilder().withName(NONE_TYPE).withFullyQualifiedName(NONE_TYPE).build());
       builtins = Collections.unmodifiableMap(symbols);
@@ -84,28 +81,16 @@ public class TypeShedDescriptorsProvider {
   /**
    * Returns map of exported symbols by name for a given module
    */
-  public Map<String, Descriptor> symbolsForModule(String moduleName) {
+  public Map<String, Descriptor> descriptorsForModule(String moduleName) {
     if (searchedModuleMatchesCurrentProject(moduleName)) {
       return Collections.emptyMap();
     }
-    if (!cachedDescriptors.containsKey(moduleName)) {
-      var descriptors = searchTypeShedForModule(moduleName);
-      cachedDescriptors.put(moduleName, descriptors);
-      return descriptors;
-    }
-    return cachedDescriptors.get(moduleName);
+    return cachedDescriptors.computeIfAbsent(moduleName, this::searchTypeShedForModule);
   }
 
   //================================================================================
   // Private methods
   //================================================================================
-
-  private Set<String> supportedPythonVersions() {
-    if (supportedPythonVersions == null) {
-      supportedPythonVersions = ProjectPythonVersion.currentVersionValues();
-    }
-    return supportedPythonVersions;
-  }
 
   private boolean searchedModuleMatchesCurrentProject(String searchedModule) {
     return projectBasePackages.contains(searchedModule.split("\\.", 2)[0]);
