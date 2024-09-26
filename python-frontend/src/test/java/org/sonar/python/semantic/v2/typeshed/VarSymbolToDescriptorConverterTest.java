@@ -43,4 +43,21 @@ class VarSymbolToDescriptorConverterTest {
     Assertions.assertThat(descriptor.annotatedType()).isEqualTo("module.something_else");
   }
 
+  @Test
+  void builtinVarTest() {
+    var symbol = SymbolsProtos.VarSymbol.newBuilder()
+      .setName("int")
+      .setFullyQualifiedName("builtins.int")
+      .setTypeAnnotation(SymbolsProtos.Type.newBuilder()
+        .setFullyQualifiedName("builtins.int")
+        .build())
+      .build();
+    var converter = new VarSymbolToDescriptorConverter();
+
+    var descriptor = (VariableDescriptor) converter.convert(symbol);
+    Assertions.assertThat(descriptor.name()).isEqualTo("int");
+    Assertions.assertThat(descriptor.fullyQualifiedName()).isEqualTo("int");
+    Assertions.assertThat(descriptor.annotatedType()).isEqualTo("int");
+  }
+
 }

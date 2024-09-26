@@ -19,16 +19,14 @@
  */
 package org.sonar.python.semantic.v2.typeshed;
 
-import org.sonar.python.index.Descriptor;
-import org.sonar.python.index.VariableDescriptor;
-import org.sonar.python.types.protobuf.SymbolsProtos;
+public class TypeShedConstants {
+  public static final String BUILTINS_FQN = "builtins";
+  public static final String BUILTINS_PREFIX = BUILTINS_FQN + ".";
+  public static final String BUILTINS_TYPE_FQN = BUILTINS_PREFIX + "type";
+  public static final String BUILTINS_NONE_TYPE_FQN = BUILTINS_PREFIX + "NoneType";
+  public static final String BUILTINS_TUPLE_FQN = BUILTINS_PREFIX + "tuple";
+  public static final String BUILTINS_DICT_FQN = BUILTINS_PREFIX + "dict";
 
-public class VarSymbolToDescriptorConverter {
-
-  public Descriptor convert(SymbolsProtos.VarSymbol varSymbol) {
-    var fullyQualifiedName = TypeShedUtils.normalizedFqn(varSymbol.getFullyQualifiedName());
-    var typeAnnotation = TypeShedUtils.getTypesNormalizedFqn(varSymbol.getTypeAnnotation());
-    return new VariableDescriptor(varSymbol.getName(), fullyQualifiedName, typeAnnotation);
+  private TypeShedConstants() {
   }
-
 }
