@@ -36,7 +36,8 @@ public class AnyDescriptorToPythonTypeConverter {
     converters = new EnumMap<>(Map.of(
       Descriptor.Kind.CLASS, new ClassDescriptorToPythonTypeConverter(),
       Descriptor.Kind.FUNCTION, new FunctionDescriptorToPythonTypeConverter(),
-      Descriptor.Kind.VARIABLE, new VariableDescriptorToPythonTypeConverter()
+      Descriptor.Kind.VARIABLE, new VariableDescriptorToPythonTypeConverter(),
+      Descriptor.Kind.AMBIGUOUS, new AmbiguousDescriptorToPythonTypeConverter()
     ));
   }
 
