@@ -24,3 +24,9 @@ class B(SuperClass):
             pass
 
 def db(): ...  # OK
+
+def setUpModule():
+    ...
+
+def tearDownModule():
+    ...
