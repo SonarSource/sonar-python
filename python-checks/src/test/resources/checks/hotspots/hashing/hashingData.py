@@ -120,6 +120,11 @@ def hash_data(algorithm):
     hashlib.md5(usedforsecurity=True) #Noncompliant
     is_security = True
     hashlib.md5(usedforsecurity=is_security) #Noncompliant
+
+    # FP, looking at sourcegraph, a literal is used as the value of "usedforsecurity"
+    is_security2 = False
+    hashlib.md5(usedforsecurity=is_security2) #Noncompliant
+
     hashlib.sha1() # Noncompliant
     hashlib.sha224() # Noncompliant
 
