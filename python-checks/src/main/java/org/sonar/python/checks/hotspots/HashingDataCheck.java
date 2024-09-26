@@ -72,7 +72,7 @@ public class HashingDataCheck extends AbstractCallExpressionCheck {
     "Crypto.Hash.MD5.new",
     "Crypto.Hash.SHA1.new",
     "Crypto.Hash.SHA224.new"
-    );
+  );
   private static final Set<String> questionableHashlibAlgorithm = immutableSet(
     "hashlib.md5",
     "hashlib.sha1",
@@ -82,22 +82,22 @@ public class HashingDataCheck extends AbstractCallExpressionCheck {
   private static final Set<String> unsafeAlgorithms = immutableSet("sha1", "md5", "sha224");
 
   private static final Set<String> questionablePasslibAlgorithm = Stream.of(
-    "apr_md5_crypt", "bigcrypt", "bsd_nthash", "bsdi_crypt",
-    "cisco_asa", "cisco_pix", "cisco_type7", "crypt16",
-    "des_crypt", "django_des_crypt", "django_salted_md5",
-    "django_salted_sha1", "dlitz_pbkdf2_sha1",
-    "hex_md4", "hex_md5", "hex_sha1", "ldap_bsdi_crypt", "ldap_des_crypt", "ldap_hex_md5",
-    "ldap_plaintext", "ldap_salted_md5",
-    "ldap_salted_sha1", "ldap_sha1", "ldap_sha1_crypt", "lmhash", "md5_crypt", "mssql2000",
-    "mssql2005", "mysql323", "mysql41", "nthash", "oracle10", "plaintext",
-    "postgres_md5", "roundup_plaintext", "sha1_crypt", "sun_md5_crypt")
+      "apr_md5_crypt", "bigcrypt", "bsd_nthash", "bsdi_crypt",
+      "cisco_asa", "cisco_pix", "cisco_type7", "crypt16",
+      "des_crypt", "django_des_crypt", "django_salted_md5",
+      "django_salted_sha1", "dlitz_pbkdf2_sha1",
+      "hex_md4", "hex_md5", "hex_sha1", "ldap_bsdi_crypt", "ldap_des_crypt", "ldap_hex_md5",
+      "ldap_plaintext", "ldap_salted_md5",
+      "ldap_salted_sha1", "ldap_sha1", "ldap_sha1_crypt", "lmhash", "md5_crypt", "mssql2000",
+      "mssql2005", "mysql323", "mysql41", "nthash", "oracle10", "plaintext",
+      "postgres_md5", "roundup_plaintext", "sha1_crypt", "sun_md5_crypt")
     .map(hasher -> "passlib.hash." + hasher)
     .collect(Collectors.toSet());
 
 
   private static final Set<String> questionableDjangoHashers = Stream.of(
-    "SHA1PasswordHasher", "MD5PasswordHasher", "UnsaltedSHA1PasswordHasher",
-    "UnsaltedMD5PasswordHasher", "CryptPasswordHasher")
+      "SHA1PasswordHasher", "MD5PasswordHasher", "UnsaltedSHA1PasswordHasher",
+      "UnsaltedMD5PasswordHasher", "CryptPasswordHasher")
     .map(hasher -> "django.contrib.auth.hashers." + hasher)
     .collect(Collectors.toSet());
 
@@ -113,15 +113,17 @@ public class HashingDataCheck extends AbstractCallExpressionCheck {
 
   @Override
   protected boolean isException(CallExpression callExpression) {
-    return hasSafeArgument(callExpression, "django.contrib.auth.hashers.make_password", 2, "hasher", questionableHashers) ||
-      hasSafeArgument(callExpression, "hashlib.new", 0, "name", unsafeAlgorithms) ||
-      hasSafeArgument(callExpression, "werkzeug.security.generate_password_hash", 1, "method", unsafeAlgorithms);
+    return isNotUsingUnsafeAlgorithms(callExpression, "django.contrib.auth.hashers.make_password", 2, "hasher", questionableHashers) ||
+      isNotUsingUnsafeAlgorithms(callExpression, "hashlib.new", 0, "name", unsafeAlgorithms) ||
+      isNotUsingUnsafeAlgorithms(callExpression, "werkzeug.security.generate_password_hash", 1, "method", unsafeAlgorithms) ||
+      isHashlibUsedForSecurityArgSetToFalse(callExpression);
   }
 
-  private static boolean hasSafeArgument(CallExpression callExpression, String fqn, int argPosition, String keyword, Set<String> unsafeAlgorithms) {
+  private static boolean isNotUsingUnsafeAlgorithms(CallExpression callExpression, String fqn, int argPosition, String argKeyword,
+    Set<String> unsafeAlgorithms) {
     Symbol calleeSymbol = callExpression.calleeSymbol();
     if (calleeSymbol != null && fqn.equals(calleeSymbol.fullyQualifiedName())) {
-      RegularArgument argument = TreeUtils.nthArgumentOrKeyword(argPosition, keyword, callExpression.arguments());
+      RegularArgument argument = TreeUtils.nthArgumentOrKeyword(argPosition, argKeyword, callExpression.arguments());
       if (argument == null) {
         return true;
       }
@@ -129,6 +131,21 @@ public class HashingDataCheck extends AbstractCallExpressionCheck {
       return value == null || !unsafeAlgorithms.contains(value.trimmedQuotesValue());
     }
     return false;
+  }
+
+  private static boolean isHashlibUsedForSecurityArgSetToFalse(CallExpression callExpression) {
+    Symbol calleeSymbol = callExpression.calleeSymbol();
+    if (calleeSymbol == null) {
+      return false;
+    }
+    String fqn = calleeSymbol.fullyQualifiedName();
+    if (fqn != null && !fqn.startsWith("hashlib.")) {
+      return false;
+    }
+
+    RegularArgument usedForSecurityArg = TreeUtils.argumentByKeyword("usedforsecurity", callExpression.arguments());
+    return usedForSecurityArg != null
+      && Expressions.getAssignedName(usedForSecurityArg.expression()).filter(name -> "False".equals(name.name())).isPresent();
   }
 
   private static void checkOverwriteDjangoHashers(SubscriptionContext ctx) {
@@ -173,9 +190,9 @@ public class HashingDataCheck extends AbstractCallExpressionCheck {
   private static boolean isOverwritingDjangoHashers(List<ExpressionList> lhsExpressions, String filename) {
     // checks for `PASSWORD_HASHERS = []` in a global_settings.py file
     if (filename.equals("global_settings.py") &&
-        lhsExpressions.stream()
-          .flatMap(pelt -> pelt.expressions().stream())
-          .anyMatch(expression -> expression.firstToken().value().equals("PASSWORD_HASHERS"))) {
+      lhsExpressions.stream()
+        .flatMap(pelt -> pelt.expressions().stream())
+        .anyMatch(expression -> expression.firstToken().value().equals("PASSWORD_HASHERS"))) {
 
       return true;
     }
@@ -200,6 +217,12 @@ public class HashingDataCheck extends AbstractCallExpressionCheck {
     if (isWithinImport(name)) {
       return;
     }
+
+    Tree callTree = TreeUtils.firstAncestorOfKind(name, Tree.Kind.CALL_EXPR);
+    if (callTree instanceof CallExpression callExpr && isHashlibUsedForSecurityArgSetToFalse(callExpr)) {
+      return;
+    }
+
     String fullyQualifiedName = name.symbol() != null ? name.symbol().fullyQualifiedName() : "";
     if (questionableHashlibAlgorithm.contains(fullyQualifiedName) || questionablePasslibAlgorithm.contains(fullyQualifiedName)) {
       ctx.addIssue(name, MESSAGE);
