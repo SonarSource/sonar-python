@@ -20,7 +20,6 @@
 package org.sonar.python.checks;
 
 import org.junit.jupiter.api.Test;
-import org.sonar.api.internal.apachecommons.lang.StringUtils;
 import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.python.checks.quickfix.PythonQuickFixVerifier;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
@@ -105,6 +104,6 @@ class MissingDocstringCheckTest {
   }
 
   private static String module(String... lines) {
-    return "\"\"\"module docstring\"\"\"\n\n" + StringUtils.join(lines, '\n');
+    return "\"\"\"module docstring\"\"\"\n\n" + String.join("\n", lines);
   }
 }
