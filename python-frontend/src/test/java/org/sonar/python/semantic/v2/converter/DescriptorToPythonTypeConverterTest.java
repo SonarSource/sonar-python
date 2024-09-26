@@ -20,6 +20,7 @@
 package org.sonar.python.semantic.v2.converter;
 
 import java.util.List;
+import java.util.Set;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -37,8 +38,10 @@ import org.sonar.python.types.v2.LazyType;
 import org.sonar.python.types.v2.LazyTypeWrapper;
 import org.sonar.python.types.v2.Member;
 import org.sonar.python.types.v2.ObjectType;
+import org.sonar.python.types.v2.ParameterV2;
 import org.sonar.python.types.v2.PythonType;
 import org.sonar.python.types.v2.TypeWrapper;
+import org.sonar.python.types.v2.UnionType;
 
 class DescriptorToPythonTypeConverterTest {
 
@@ -56,11 +59,59 @@ class DescriptorToPythonTypeConverterTest {
   void ambiguousDescriptorConversionTest() {
     var lazyTypesContext = Mockito.mock(LazyTypesContext.class);
     var converter = new AnyDescriptorToPythonTypeConverter(lazyTypesContext);
+
+    var descriptorAlternative1 = Mockito.mock(FunctionDescriptor.class);
+
+    var returnTypeName = "Returned";
+    var resolvedReturnType = new ClassTypeBuilder().withName(returnTypeName).build();
+    Mockito.when(lazyTypesContext.resolveLazyType(Mockito.argThat(lt -> returnTypeName.equals(lt.fullyQualifiedName()))))
+      .thenReturn(resolvedReturnType);
+
+    Mockito.when(descriptorAlternative1.kind()).thenReturn(Descriptor.Kind.FUNCTION);
+    Mockito.when(descriptorAlternative1.name()).thenReturn("Sample");
+    Mockito.when(descriptorAlternative1.annotatedReturnTypeName()).thenReturn(returnTypeName);
+    Mockito.when(descriptorAlternative1.parameters()).thenReturn(List.of(
+      new FunctionDescriptor.Parameter(
+        "p1",
+        "Returned",
+        false,
+        false,
+        true,
+        false,
+        false,
+        new LocationInFile("m1", 1, 10,  1, 15))
+    ));
+
+    var descriptorAlternative2 = Mockito.mock(FunctionDescriptor.class);
+    Mockito.when(descriptorAlternative2.kind()).thenReturn(Descriptor.Kind.FUNCTION);
+    Mockito.when(descriptorAlternative2.name()).thenReturn("Sample");
+    Mockito.when(descriptorAlternative2.annotatedReturnTypeName()).thenReturn(returnTypeName);
+    Mockito.when(descriptorAlternative2.parameters()).thenReturn(List.of(
+      new FunctionDescriptor.Parameter(
+        "p2",
+        "Returned",
+        false,
+        false,
+        true,
+        false,
+        false,
+        new LocationInFile("m1", 2, 10,  2, 15))
+    ));
+
     var descriptor = Mockito.mock(AmbiguousDescriptor.class);
     Mockito.when(descriptor.kind()).thenReturn(Descriptor.Kind.AMBIGUOUS);
+    Mockito.when(descriptor.alternatives()).thenReturn(Set.of(descriptorAlternative1, descriptorAlternative2));
 
-    var type = converter.convert(descriptor);
-    Assertions.assertThat(type).isEqualTo(PythonType.UNKNOWN);
+    var type = (UnionType) converter.convert(descriptor);
+    Assertions.assertThat(type.candidates())
+      .hasSize(2);
+
+    Assertions.assertThat(type.candidates())
+      .extracting(FunctionType.class::cast)
+      .flatExtracting(FunctionType::parameters)
+      .extracting(ParameterV2::name)
+      .containsOnly("p1", "p2");
+
   }
 
   @Test
