@@ -33,7 +33,8 @@ class FunctionSymbolToDescriptorConverterTest {
       .setName("foo")
       .setFullyQualifiedName("module.foo")
       .setIsAsynchronous(false)
-      .setIsProperty(false)
+      .setIsClassMethod(false)
+      .setIsStatic(false)
       .setHasDecorators(true)
       .addResolvedDecoratorNames("decorator")
       .setReturnAnnotation(
@@ -57,6 +58,46 @@ class FunctionSymbolToDescriptorConverterTest {
     Assertions.assertThat(descriptor.annotatedReturnTypeName()).isEqualTo("int");
     Assertions.assertThat(descriptor.parameters()).hasSize(1);
     Assertions.assertThat(descriptor.parameters().get(0).name()).isEqualTo("p1");
+  }
+
+  @Test
+  void instanceMethodTest() {
+    var converter = new FunctionSymbolToDescriptorConverter();
+
+    var symbol = SymbolsProtos.FunctionSymbol.newBuilder()
+      .setIsClassMethod(false)
+      .setIsStatic(false)
+      .build();
+    var descriptor = converter.convert(symbol, true);
+    Assertions.assertThat(descriptor.isInstanceMethod()).isTrue();
+
+    symbol = SymbolsProtos.FunctionSymbol.newBuilder()
+      .setIsClassMethod(true)
+      .setIsStatic(false)
+      .build();
+    descriptor = converter.convert(symbol, true);
+    Assertions.assertThat(descriptor.isInstanceMethod()).isFalse();
+
+    symbol = SymbolsProtos.FunctionSymbol.newBuilder()
+      .setIsClassMethod(false)
+      .setIsStatic(true)
+      .build();
+    descriptor = converter.convert(symbol, true);
+    Assertions.assertThat(descriptor.isInstanceMethod()).isFalse();
+
+    symbol = SymbolsProtos.FunctionSymbol.newBuilder()
+      .setIsClassMethod(true)
+      .setIsStatic(true)
+      .build();
+    descriptor = converter.convert(symbol, true);
+    Assertions.assertThat(descriptor.isInstanceMethod()).isFalse();
+
+    symbol = SymbolsProtos.FunctionSymbol.newBuilder()
+      .setIsClassMethod(true)
+      .setIsStatic(true)
+      .build();
+    descriptor = converter.convert(symbol, false);
+    Assertions.assertThat(descriptor.isInstanceMethod()).isFalse();
   }
 
 }

@@ -20,9 +20,7 @@
 package org.sonar.python.semantic.v2.typeshed;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Stream;
 import org.sonar.python.index.FunctionDescriptor;
 import org.sonar.python.types.protobuf.SymbolsProtos;
 
@@ -35,6 +33,10 @@ public class FunctionSymbolToDescriptorConverter {
   }
 
   public FunctionDescriptor convert(SymbolsProtos.FunctionSymbol functionSymbol) {
+    return convert(functionSymbol, false);
+  }
+
+  public FunctionDescriptor convert(SymbolsProtos.FunctionSymbol functionSymbol, boolean isParentIsAClass) {
     var fullyQualifiedName = TypeShedUtils.normalizedFqn(functionSymbol.getFullyQualifiedName());
     var returnType = TypeShedUtils.getTypesNormalizedFqn(functionSymbol.getReturnAnnotation());
     var decorators = Optional.of(functionSymbol)
@@ -46,11 +48,12 @@ public class FunctionSymbolToDescriptorConverter {
     var parameters = functionSymbol.getParametersList().stream()
       .map(parameterConverter::convert)
       .toList();
+    var isInstanceMethod = isParentIsAClass && !functionSymbol.getIsStatic() && !functionSymbol.getIsClassMethod();
     return new FunctionDescriptor.FunctionDescriptorBuilder()
       .withName(functionSymbol.getName())
       .withFullyQualifiedName(fullyQualifiedName)
       .withIsAsynchronous(functionSymbol.getIsAsynchronous())
-      .withIsInstanceMethod(functionSymbol.getIsProperty())
+      .withIsInstanceMethod(isInstanceMethod)
       .withHasDecorators(functionSymbol.getHasDecorators())
       .withAnnotatedReturnTypeName(returnType)
       .withDecorators(decorators)
