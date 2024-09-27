@@ -31,4 +31,11 @@ public class TypeUtils {
     }
     return pythonType;
   }
+
+  public static PythonType ensureWrappedObjectType(PythonType pythonType) {
+    if (!(pythonType instanceof ObjectType)) {
+      return new ObjectType(pythonType);
+    }
+    return pythonType;
+  }
 }
