@@ -69,6 +69,14 @@ def nested_format():
     '{a:{0}{1}{b}}{1:{2}{2}}'.format('one', 'two', a='a', b='b') # Noncompliant {{Provide a value for field(s) with index 2.}}
     '{a:{b}{c}{d}}{:{}{e}}'.format('one', 'two', a='a', b='b', c='c', d='d', e='e') # OK
     '{a:{0}{1}{b}}{0:{2}{2}}'.format('one', 'two', 'three', a='a', b='b') # OK
+    "{value:0.{digits:{nested}}}".format(value=1.234, digits=3, nested=123) # Noncompliant {{Fix this formatted string's syntax; Deep nesting is not allowed.}}
+    "{value:0.{digits!z}}".format(value=1.234, digits=3)  # Noncompliant {{Fix this formatted string's syntax; !z is not a valid conversion flag.}}
+    "{value:0.{digits!{nested}}}".format(value=1.234, digits=3)  # Noncompliant {{Fix this formatted string's syntax; !{ is not a valid conversion flag.}}
+    "{value:0.{digits:d}}".format(value=1.234, digits=3)  # OK
+    "{value:0.{digits:d}}".format(value=1.234, digits=3)  # OK
+    "{value:0.{digits!a{nested}}}".format(value=1.234, digits=3)  # Noncompliant {{Fix this formatted string's syntax.}}
+    "{value:0.{digits!a:<}}".format(value=1.234, digits=3) # OK
+    "{value:0.{digits!a}}".format(value=1.234, digits=3) # OK
 
 def other():
     f1 = '{} {} {} {}'

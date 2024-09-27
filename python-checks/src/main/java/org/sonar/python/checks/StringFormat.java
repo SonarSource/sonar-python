@@ -172,7 +172,8 @@ public class StringFormat {
   }
 
   private enum ParseState {
-    INIT, LCURLY, RCURLY, FIELD, FLAG, FLAG_CHARACTER, FORMAT, FORMAT_LCURLY, FORMAT_FIELD
+    INIT, LCURLY, RCURLY, FIELD, FLAG, FLAG_CHARACTER, FORMAT, FORMAT_LCURLY, FORMAT_NESTED_FIELD, FORMAT_NESTED_CONVERSION,
+    FORMAT_NESTED_FLAG_CHARACTER, FORMAT_NESTED_FORMAT
   }
 
   private static class StrFormatParser {
@@ -237,8 +238,25 @@ public class StringFormat {
           case FORMAT_LCURLY:
             pos = parseFormatCurly(pos);
             break;
-          case FORMAT_FIELD:
-            if (!tryParseFormatSpecifierField(current)) {
+          case FORMAT_NESTED_FIELD:
+            if (!tryParseFormatNestedField(current)) {
+              return Optional.empty();
+            }
+            break;
+          case FORMAT_NESTED_CONVERSION:
+            if (FORMAT_VALID_CONVERSION_FLAGS.indexOf(current) == -1) {
+              issueReporter.accept(String.format("Fix this formatted string's syntax; !%c is not a valid conversion flag.", current));
+              return Optional.empty();
+            }
+            state = ParseState.FORMAT_NESTED_FLAG_CHARACTER;
+            break;
+          case FORMAT_NESTED_FLAG_CHARACTER:
+            if (!tryParseNestedFlagCharacter(current)) {
+              return Optional.empty();
+            }
+            break;
+          case FORMAT_NESTED_FORMAT:
+            if (!tryParseNestedFormat(current)) {
               return Optional.empty();
             }
             break;
@@ -255,6 +273,35 @@ public class StringFormat {
       return Optional.of(new StringFormat(result));
     }
 
+
+    private boolean tryParseNestedFlagCharacter(char current) {
+      if (current == '}') {
+        result.add(createField(currentFieldName));
+        nesting--;
+        state = ParseState.FORMAT;
+        return true;
+      } else if (current == ':') {
+        state = ParseState.FORMAT_NESTED_FORMAT;
+        return true;
+      } else {
+        issueReporter.accept(SYNTAX_ERROR_MESSAGE);
+        return false;
+      }
+    }
+
+    private boolean tryParseNestedFormat(char current) {
+      if (current == '{') {
+        issueReporter.accept("Fix this formatted string's syntax; Deep nesting is not allowed.");
+        return false;
+      } else if (current == '}') {
+        result.add(createField(currentFieldName));
+        nesting--;
+        state = ParseState.FORMAT;
+        return true;
+      }
+      return true;
+    }
+
     private boolean checkParserState() {
       if (nesting != 0 || state != ParseState.INIT) {
         issueReporter.accept(SYNTAX_ERROR_MESSAGE);
@@ -269,22 +316,28 @@ public class StringFormat {
       return true;
     }
 
-    private boolean tryParseFormatSpecifierField(char current) {
-      if (current != '}') {
+    private boolean tryParseFormatNestedField(char current) {
+      if (current == '!') {
+        state = ParseState.FORMAT_NESTED_CONVERSION;
+        return true;
+      } else if (current == ':') {
+        state = ParseState.FORMAT_NESTED_FORMAT;
+        return true;
+      } else if (current == '}') {
+        result.add(createField(nestedFieldName));
+        nesting--;
+        state = ParseState.FORMAT;
+        return true;
+      } else {
         issueReporter.accept(SYNTAX_ERROR_MESSAGE);
         return false;
       }
-
-      result.add(createField(nestedFieldName));
-      nesting--;
-      state = ParseState.FORMAT;
-      return true;
     }
 
     private int parseFormatCurly(int pos) {
       if (fieldContentMatcher.region(pos, value.length()).find()) {
         // This should always match (if nothing else, an empty string), but be defensive
-        state = ParseState.FORMAT_FIELD;
+        state = ParseState.FORMAT_NESTED_FIELD;
         nestedFieldName = fieldContentMatcher.group("name");
         pos = fieldContentMatcher.end() - 1;
       }
@@ -468,13 +521,15 @@ public class StringFormat {
     if (conversionType == 'c') {
       return (ctx, expression) -> {
         if (cannotBeOfType(expression, "int") && cannotBeSingleCharString(expression)) {
-          ctx.addIssue(expression, String.format("Replace this value with an integer or a single character string as \"%%%c\" requires.", conversionType));
+          ctx.addIssue(expression, String.format("Replace this value with an integer or a single character string as \"%%%c\" requires.",
+            conversionType));
         }
       };
     }
 
     // No case for '%s', '%r' and '%a' - anything can be formatted with those.
-    return (ctx, expression) -> {};
+    return (ctx, expression) -> {
+    };
   }
 
   private static boolean cannotBeOfType(Expression expression, String... types) {
