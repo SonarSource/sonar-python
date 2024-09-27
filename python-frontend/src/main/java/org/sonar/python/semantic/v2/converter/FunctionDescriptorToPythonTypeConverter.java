@@ -27,6 +27,7 @@ import org.sonar.python.semantic.v2.FunctionTypeBuilder;
 import org.sonar.python.types.v2.ParameterV2;
 import org.sonar.python.types.v2.PythonType;
 import org.sonar.python.types.v2.TypeOrigin;
+import org.sonar.python.types.v2.TypeUtils;
 
 public class FunctionDescriptorToPythonTypeConverter implements DescriptorToPythonTypeConverter {
 
@@ -44,6 +45,7 @@ public class FunctionDescriptorToPythonTypeConverter implements DescriptorToPyth
 
     var returnType = Optional.ofNullable(from.annotatedReturnTypeName())
       .map(fqn -> (PythonType) ctx.lazyTypesContext().getOrCreateLazyType(fqn))
+      .map(TypeUtils::ensureWrappedObjectType)
       .orElse(PythonType.UNKNOWN);
 
     var typeOrigin = TypeOrigin.STUB;
