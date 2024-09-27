@@ -58,5 +58,20 @@ class SklearnCachedPipelineDontAccessTransformersCheckTest {
         print(pipeline.named_steps["scaler"].center_)
         """
     );
+    PythonQuickFixVerifier.verifyQuickFixMessages(
+      new SklearnCachedPipelineDontAccessTransformersCheck(),
+      """
+        from sklearn.pipeline import Pipeline
+        scaler = RobustScaler()
+        knn = KNeighborsRegressor(n_neighbors=5)
+            
+        pipeline = Pipeline([
+            ('scaler', scaler),
+            ('knn', knn),
+        ], memory="cache")
+        print(scaler.center_)
+        """,
+      "Replace the direct access to the transformer with an access to the `named_steps` attribute of the pipeline."
+    );
   }
 }

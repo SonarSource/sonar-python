@@ -146,7 +146,7 @@ public class SklearnCachedPipelineDontAccessTransformersCheck extends PythonSubs
 
   private static Optional<PythonQuickFix> getQuickFix(Name pipelineBindingVariable, Tree name, QualifiedExpression qualifiedExpression, Map<Name, String> nameToStepName) {
     return Optional.ofNullable(nameToStepName.get(name))
-      .map(stepName -> PythonQuickFix.newQuickFix("Access the property through the ")
+      .map(stepName -> PythonQuickFix.newQuickFix("Replace the direct access to the transformer with an access to the `named_steps` attribute of the pipeline.")
         .addTextEdit(TextEditUtils.replace(qualifiedExpression.qualifier(), String.format("%s.named_steps[\"%s\"]", pipelineBindingVariable.name(), stepName)))
         .build());
   }
