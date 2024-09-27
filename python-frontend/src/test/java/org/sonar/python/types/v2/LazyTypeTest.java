@@ -24,7 +24,6 @@ import org.mockito.Mockito;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.semantic.v2.LazyTypesContext;
 import org.sonar.python.semantic.v2.ProjectLevelTypeTable;
-import org.sonar.python.semantic.v2.TypeShed;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -42,8 +41,6 @@ class LazyTypeTest {
     assertThat(lazyType.resolve()).isEqualTo(INT_TYPE);
     assertThatThrownBy(lazyType::unwrappedType).isInstanceOf(IllegalStateException.class).hasMessage("Lazy types should not be interacted with.");
     assertThatThrownBy(() -> lazyType.hasMember("__bool__")).isInstanceOf(IllegalStateException.class).hasMessage("Lazy types should not be interacted with.");
-    ObjectType objectContainingLazyType = new ObjectType(lazyType, TypeSource.EXACT);
-    assertThatThrownBy(() -> objectContainingLazyType.hasMember("__bool__")).isInstanceOf(IllegalStateException.class).hasMessage("Lazy types should not be interacted with.");
     assertThatThrownBy(lazyType::name).isInstanceOf(IllegalStateException.class).hasMessage("Lazy types should not be interacted with.");
     assertThatThrownBy(lazyType::instanceDisplayName).isInstanceOf(IllegalStateException.class).hasMessage("Lazy types should not be interacted with.");
     assertThatThrownBy(() -> lazyType.resolveMember("__bool__")).isInstanceOf(IllegalStateException.class).hasMessage("Lazy types should not be interacted with.");

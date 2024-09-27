@@ -257,7 +257,7 @@ def nested_recursive_try_finally():
 
 def call_non_callable_property():
     e = OSError()
-    e.errno()  # FN
+    e.errno()  # Noncompliant
 
 class MyClass:
     x = 42
