@@ -41,7 +41,7 @@ public final class ObjectType implements PythonType {
   }
 
   public ObjectType(PythonType type, List<PythonType> attributes, List<Member> members, TypeSource typeSource) {
-    this(new SimpleTypeWrapper(type), attributes, members, typeSource);
+    this(TypeWrapper.of(type), attributes, members, typeSource);
   }
 
   public ObjectType(PythonType type) {

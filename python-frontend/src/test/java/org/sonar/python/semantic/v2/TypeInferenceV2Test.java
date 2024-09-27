@@ -379,7 +379,6 @@ class TypeInferenceV2Test {
   }
 
   @Test
-  @Disabled
   void typeSourceOfCallExpressionResultDependsOnTypeSourceOfQualifier() {
     FileInput root = inferTypes("""
       def foo(x: int):
@@ -403,7 +402,6 @@ class TypeInferenceV2Test {
   }
 
   @Test
-  @Disabled
   void typeSourceOfCallExpressionResultDependsOnTypeSourceOfName() {
     FileInput fileInput = inferTypes("""
       from pyasn1.debug import Printer
@@ -2277,7 +2275,6 @@ class TypeInferenceV2Test {
   }
 
   @Test
-  @Disabled
   void resolveCustomTypeLazyType() {
     FileInput fileInput = inferTypes("""
       import ldap

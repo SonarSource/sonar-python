@@ -24,4 +24,8 @@ public interface TypeWrapper {
   PythonType type();
 
   TypeWrapper UNKNOWN_TYPE_WRAPPER = new SimpleTypeWrapper(PythonType.UNKNOWN);
+
+  static TypeWrapper of(PythonType type) {
+    return type instanceof LazyType ? new LazyTypeWrapper(type) : new SimpleTypeWrapper(type);
+  }
 }
