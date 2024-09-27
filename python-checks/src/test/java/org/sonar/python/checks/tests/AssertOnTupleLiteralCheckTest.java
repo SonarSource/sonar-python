@@ -41,6 +41,9 @@ class AssertOnTupleLiteralCheckTest {
       "    assert a, b";
     PythonQuickFixVerifier.verify(new AssertOnTupleLiteralCheck(), before, after);
     PythonQuickFixVerifier.verifyQuickFixMessages(new AssertOnTupleLiteralCheck(), before, AssertOnTupleLiteralCheck.QUICK_FIX_MESSAGE);
+
+    PythonQuickFixVerifier.verify(new AssertOnTupleLiteralCheck(), "assert (foo(),)", "assert foo()");
+    PythonQuickFixVerifier.verifyNoQuickFixes(new AssertOnTupleLiteralCheck(), "assert ()");
   }
 
   @Test

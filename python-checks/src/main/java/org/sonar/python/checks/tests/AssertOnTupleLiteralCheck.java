@@ -43,12 +43,18 @@ public class AssertOnTupleLiteralCheck extends PythonSubscriptionCheck {
 
         var issue = ctx.addIssue(tuple, MESSAGE);
 
-        if (tuple.leftParenthesis() != null && tuple.rightParenthesis() != null) {
+        if (tuple.leftParenthesis() != null && tuple.rightParenthesis() != null && !tuple.elements().isEmpty()) {
           // defensive condition
-          issue.addQuickFix(PythonQuickFix.newQuickFix(QUICK_FIX_MESSAGE)
-            .addTextEdit(TextEditUtils.remove(tuple.leftParenthesis()))
-            .addTextEdit(TextEditUtils.remove(tuple.rightParenthesis()))
-            .build());
+          var quickfixBuilder = PythonQuickFix.newQuickFix(QUICK_FIX_MESSAGE)
+            .addTextEdit(TextEditUtils.remove(tuple.leftParenthesis()));
+
+          if(tuple.elements().size() == 1 && !tuple.commas().isEmpty()) {
+            quickfixBuilder.addTextEdit(TextEditUtils.replaceRange(tuple.commas().get(0), tuple.rightParenthesis(), ""));
+          } else {
+            quickfixBuilder.addTextEdit(TextEditUtils.remove(tuple.rightParenthesis()));
+          }
+
+          issue.addQuickFix(quickfixBuilder.build());
         }
       }
     });
