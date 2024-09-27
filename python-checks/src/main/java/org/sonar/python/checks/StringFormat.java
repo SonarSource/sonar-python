@@ -204,62 +204,54 @@ public class StringFormat {
       while (pos < value.length()) {
         char current = value.charAt(pos);
         switch (state) {
-          case INIT:
-            pos = parseInitial(current, pos);
-            break;
-          case LCURLY:
-            pos = parseFieldName(current, pos);
-            break;
-          case FIELD:
+          case INIT -> pos = parseInitial(current, pos);
+          case LCURLY -> pos = parseFieldName(current, pos);
+          case FIELD -> {
             if (!tryParseField(current)) {
               return Optional.empty();
             }
-            break;
-          case RCURLY:
+          }
+          case RCURLY -> {
             if (current == '}') {
               state = ParseState.INIT;
             }
-            break;
-          case FLAG:
+          }
+          case FLAG -> {
             if (FORMAT_VALID_CONVERSION_FLAGS.indexOf(current) == -1) {
               issueReporter.accept(String.format("Fix this formatted string's syntax; !%c is not a valid conversion flag.", current));
               return Optional.empty();
             }
             state = ParseState.FLAG_CHARACTER;
-            break;
-          case FLAG_CHARACTER:
+          }
+          case FLAG_CHARACTER -> {
             if (!tryParseFlagCharacter(current)) {
               return Optional.empty();
             }
-            break;
-          case FORMAT:
-            parseFormatSpecifier(current);
-            break;
-          case FORMAT_LCURLY:
-            pos = parseFormatCurly(pos);
-            break;
-          case FORMAT_NESTED_FIELD:
+          }
+          case FORMAT -> parseFormatSpecifier(current);
+          case FORMAT_LCURLY -> pos = parseFormatCurly(pos);
+          case FORMAT_NESTED_FIELD -> {
             if (!tryParseFormatNestedField(current)) {
               return Optional.empty();
             }
-            break;
-          case FORMAT_NESTED_CONVERSION:
+          }
+          case FORMAT_NESTED_CONVERSION -> {
             if (FORMAT_VALID_CONVERSION_FLAGS.indexOf(current) == -1) {
               issueReporter.accept(String.format("Fix this formatted string's syntax; !%c is not a valid conversion flag.", current));
               return Optional.empty();
             }
             state = ParseState.FORMAT_NESTED_FLAG_CHARACTER;
-            break;
-          case FORMAT_NESTED_FLAG_CHARACTER:
+          }
+          case FORMAT_NESTED_FLAG_CHARACTER -> {
             if (!tryParseNestedFlagCharacter(current)) {
               return Optional.empty();
             }
-            break;
-          case FORMAT_NESTED_FORMAT:
+          }
+          case FORMAT_NESTED_FORMAT -> {
             if (!tryParseNestedFormat(current)) {
               return Optional.empty();
             }
-            break;
+          }
         }
 
         pos += 1;
