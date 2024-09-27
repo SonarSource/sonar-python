@@ -22,6 +22,10 @@ def identity_check(param):
     if obj is not None: pass # FN
     if None is obj: pass # FN
 
+    import xml.etree.ElementTree as ET
+    tree = ET.ElementTree()
+    if tree.getroot() is None: pass # Ok as getroot can return None
+
 def equality_check(param):
     a = None
     b = 42
@@ -45,3 +49,4 @@ def equality_check(param):
     obj = object()
     if obj == None: pass # FN
     if None == obj: pass # FN
+
