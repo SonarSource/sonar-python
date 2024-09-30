@@ -57,7 +57,7 @@ public class StringFormat {
   /**
    * Represents a named or positional replacement field inside a format string.
    */
-  public abstract static class ReplacementField {
+  public abstract static sealed class ReplacementField permits NamedField, PositionalField {
     private BiConsumer<SubscriptionContext, Expression> validator;
 
     private ReplacementField(BiConsumer<SubscriptionContext, Expression> validator) {
@@ -77,7 +77,7 @@ public class StringFormat {
     }
   }
 
-  public static class NamedField extends ReplacementField {
+  public final static class NamedField extends ReplacementField {
     private String name;
 
     public NamedField(BiConsumer<SubscriptionContext, Expression> validator, String name) {
@@ -106,7 +106,7 @@ public class StringFormat {
     }
   }
 
-  public static class PositionalField extends ReplacementField {
+  public final static class PositionalField extends ReplacementField {
     private int position;
 
     public PositionalField(BiConsumer<SubscriptionContext, Expression> validator, int position) {
@@ -172,76 +172,48 @@ public class StringFormat {
   }
 
   private enum ParseState {
-    INIT, LCURLY, RCURLY, FIELD, FLAG, FLAG_CHARACTER, FORMAT, FORMAT_LCURLY, FORMAT_FIELD
+    INIT, LCURLY, RCURLY
   }
-
   private static class StrFormatParser {
     private boolean hasManualNumbering = false;
     private boolean hasAutoNumbering = false;
     private int autoNumberingPos = 0;
 
-    private String currentFieldName = null;
-    private String nestedFieldName = null;
     private ParseState state = ParseState.INIT;
     private int nesting = 0;
     private List<ReplacementField> result;
 
     private Consumer<String> issueReporter;
     private String value;
-    private Matcher fieldContentMatcher;
+    private int pos = 0;
 
     public StrFormatParser(Consumer<String> issueReporter, String value) {
       this.issueReporter = issueReporter;
       this.value = value;
-      this.fieldContentMatcher = FORMAT_FIELD_PATTERN.matcher(this.value);
+      this.pos = 0;
     }
 
+
     public Optional<StringFormat> parse() {
-      int pos = 0;
+      pos = 0;
       result = new ArrayList<>();
 
       while (pos < value.length()) {
         char current = value.charAt(pos);
         switch (state) {
           case INIT:
-            pos = parseInitial(current, pos);
-            break;
-          case LCURLY:
-            pos = parseFieldName(current, pos);
-            break;
-          case FIELD:
-            if (!tryParseField(current)) {
+            if(!tryParsingInitial(current)) {
               return Optional.empty();
             }
             break;
           case RCURLY:
-            if (current == '}') {
-              state = ParseState.INIT;
-            }
-            break;
-          case FLAG:
-            if (FORMAT_VALID_CONVERSION_FLAGS.indexOf(current) == -1) {
-              issueReporter.accept(String.format("Fix this formatted string's syntax; !%c is not a valid conversion flag.", current));
+            if(current != '}') {
+              issueReporter.accept(SYNTAX_ERROR_MESSAGE);
               return Optional.empty();
             }
-            state = ParseState.FLAG_CHARACTER;
+            state = ParseState.INIT;
             break;
-          case FLAG_CHARACTER:
-            if (!tryParseFlagCharacter(current)) {
-              return Optional.empty();
-            }
-            break;
-          case FORMAT:
-            parseFormatSpecifier(current);
-            break;
-          case FORMAT_LCURLY:
-            pos = parseFormatCurly(pos);
-            break;
-          case FORMAT_FIELD:
-            if (!tryParseFormatSpecifierField(current)) {
-              return Optional.empty();
-            }
-            break;
+
         }
 
         pos += 1;
@@ -269,31 +241,9 @@ public class StringFormat {
       return true;
     }
 
-    private boolean tryParseFormatSpecifierField(char current) {
-      if (current != '}') {
-        issueReporter.accept(SYNTAX_ERROR_MESSAGE);
-        return false;
-      }
-
-      result.add(createField(nestedFieldName));
-      nesting--;
-      state = ParseState.FORMAT;
-      return true;
-    }
-
-    private int parseFormatCurly(int pos) {
-      if (fieldContentMatcher.region(pos, value.length()).find()) {
-        // This should always match (if nothing else, an empty string), but be defensive
-        state = ParseState.FORMAT_FIELD;
-        nestedFieldName = fieldContentMatcher.group("name");
-        pos = fieldContentMatcher.end() - 1;
-      }
-      return pos;
-    }
-
-    private int parseInitial(char current, int pos) {
+    private boolean tryParsingInitial(char current) {
       if (current == '{') {
-        state = ParseState.LCURLY;
+        return tryParsingField();
       } else if (current == '}') {
         state = ParseState.RCURLY;
       } else if (current == '\\') {
@@ -304,65 +254,23 @@ public class StringFormat {
         }
       }
 
-      return pos;
-    }
-
-    private void parseFormatSpecifier(char current) {
-      if (current == '{') {
-        nesting++;
-        state = ParseState.FORMAT_LCURLY;
-      } else if (current == '}') {
-        result.add(createField(currentFieldName));
-        nesting--;
-        state = ParseState.INIT;
-      }
-    }
-
-    private boolean tryParseFlagCharacter(char current) {
-      if (current == ':') {
-        state = ParseState.FORMAT;
-      } else if (current == '}') {
-        result.add(createField(currentFieldName));
-        nesting--;
-        state = ParseState.INIT;
-      } else {
-        issueReporter.accept(SYNTAX_ERROR_MESSAGE);
-        return false;
-      }
-
       return true;
     }
 
-    private boolean tryParseField(char current) {
-      if (current == '!') {
-        state = ParseState.FLAG;
-      } else if (current == ':') {
-        state = ParseState.FORMAT;
-      } else if (current == '}') {
-        nesting--;
-        result.add(createField(currentFieldName));
-        state = ParseState.INIT;
-      } else {
-        issueReporter.accept(SYNTAX_ERROR_MESSAGE);
-        return false;
-      }
-      return true;
+    private boolean tryParsingField() {
+      FieldParser fieldParser = new FieldParser(this, value.substring(pos), 0);
+      boolean successful = fieldParser.tryParse();
+      this.pos += fieldParser.getPos() - 1;
+      return successful;
     }
 
-    private int parseFieldName(char current, int pos) {
-      if (current == '{') {
-        state = ParseState.INIT;
-      } else {
-        state = ParseState.FIELD;
-        nesting++;
-        if (fieldContentMatcher.region(pos, value.length()).find()) {
-          // This should always match (if nothing else, an empty string), but be defensive
-          currentFieldName = fieldContentMatcher.group("name");
-          pos = fieldContentMatcher.end() - 1;
-        }
-      }
 
-      return pos;
+    public void reportIssue(String issue) {
+      issueReporter.accept(issue);
+    }
+
+    public void addField(@Nullable String name) {
+      result.add(createField(name));
     }
 
     private ReplacementField createField(@Nullable String name) {
@@ -378,7 +286,155 @@ public class StringFormat {
         return new NamedField(DO_NOTHING_VALIDATOR, name);
       }
     }
+
   }
+
+  private enum FieldParseState {
+    LCURLY, FIELD, FLAG, FLAG_CHARACTER, FORMAT, FINISHED
+  }
+  private static class FieldParser {
+    private StrFormatParser parent;
+
+    private String currentFieldName = null;
+    private FieldParseState state = FieldParseState.LCURLY;
+    private int nesting;
+
+    private String value;
+    private int pos;
+    private Matcher fieldContentMatcher;
+
+    public FieldParser(StrFormatParser parent, String value, int nesting) {
+      this.parent = parent;
+      this.value = value;
+      this.pos = 1;
+      this.fieldContentMatcher = FORMAT_FIELD_PATTERN.matcher(this.value);
+      this.nesting = nesting;
+    }
+
+    public int getPos() {
+      return pos;
+    }
+
+    public boolean tryParse() {
+      pos = 1;
+
+      while (pos < value.length()) {
+        char current = value.charAt(pos);
+        switch (state) {
+          case LCURLY:
+            pos = parseFieldName(current, pos);
+            break;
+          case FIELD:
+            if (!tryParseField(current)) {
+              return false;
+            }
+            break;
+          case FLAG:
+            if (FORMAT_VALID_CONVERSION_FLAGS.indexOf(current) == -1) {
+              parent.reportIssue(String.format("Fix this formatted string's syntax; !%c is not a valid conversion flag.", current));
+              return false;
+            }
+            state = FieldParseState.FLAG_CHARACTER;
+            break;
+          case FLAG_CHARACTER:
+            if (!tryParseFlagCharacter(current)) {
+              return false;
+            }
+            break;
+          case FORMAT:
+            if(!tryParseFormatSpecifier(current)) {
+              return false;
+            }
+            break;
+          case FINISHED:
+            return true;
+        }
+
+        pos += 1;
+      }
+
+      if(state != FieldParseState.FINISHED) {
+        parent.reportIssue(SYNTAX_ERROR_MESSAGE);
+        return false;
+      }
+      return true;
+    }
+
+
+
+    private boolean tryParseFormatSpecifier(char current) {
+      if (current == '{') {
+        if(!tryParsingField()) {
+          return false;
+        }
+      } else if (current == '}') {
+        addField();
+        state = FieldParseState.FINISHED;
+      }
+      return true;
+    }
+
+    private boolean tryParsingField() {
+      if(this.nesting > 0) {
+        parent.reportIssue("Fix this formatted string's syntax; Deep nesting is not allowed.");
+        return false;
+      }
+      FieldParser fieldParser = new FieldParser(parent, value.substring(pos), this.nesting + 1);
+
+      boolean successful = fieldParser.tryParse();
+      this.pos += fieldParser.getPos() - 1;
+      return successful;
+    }
+
+    private boolean tryParseFlagCharacter(char current) {
+      if (current == ':') {
+        state = FieldParseState.FORMAT;
+      } else if (current == '}') {
+        addField();
+        state = FieldParseState.FINISHED;
+      } else {
+        parent.reportIssue(SYNTAX_ERROR_MESSAGE);
+        return false;
+      }
+
+      return true;
+    }
+
+    private boolean tryParseField(char current) {
+      if (current == '!') {
+        state = FieldParseState.FLAG;
+      } else if (current == ':') {
+        state = FieldParseState.FORMAT;
+      } else if (current == '}') {
+        addField();
+        state = FieldParseState.FINISHED;
+      } else {
+        parent.reportIssue(SYNTAX_ERROR_MESSAGE);
+        return false;
+      }
+      return true;
+    }
+
+    private int parseFieldName(char current, int pos) {
+      if (current == '{') {
+        state = FieldParseState.FINISHED;
+      } else {
+        state = FieldParseState.FIELD;
+        if (fieldContentMatcher.region(pos, value.length()).find()) {
+          // This should always match (if nothing else, an empty string), but be defensive
+          currentFieldName = fieldContentMatcher.group("name");
+          pos = fieldContentMatcher.end() - 1;
+        }
+      }
+
+      return pos;
+    }
+
+    private void addField() {
+      parent.addField(currentFieldName);
+    }
+  }
+
 
   public static Optional<StringFormat> createFromStrFormatStyle(Consumer<String> issueReporter, String value) {
     // Format -> '{' [FieldName] ['!' Conversion] [':' FormatSpec*] '}'
