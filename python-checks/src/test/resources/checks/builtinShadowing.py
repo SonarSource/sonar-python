@@ -38,3 +38,6 @@ def ellipsis_test():
     ellipsis = "" # OK
     Ellipsis = 42 # Noncompliant {{Rename this variable; it shadows a builtin.}}
     ellipsis = "..." # OK
+
+def function_test():
+    function = "" # OK
