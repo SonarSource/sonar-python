@@ -29,6 +29,7 @@ import org.sonar.python.api.PythonPunctuator;
 import org.sonar.python.api.PythonTokenType;
 
 import static com.sonar.sslr.impl.channel.RegexpChannelBuilder.and;
+import static com.sonar.sslr.impl.channel.RegexpChannelBuilder.or;
 import static com.sonar.sslr.impl.channel.RegexpChannelBuilder.commentRegexp;
 import static com.sonar.sslr.impl.channel.RegexpChannelBuilder.o2n;
 import static com.sonar.sslr.impl.channel.RegexpChannelBuilder.regexp;
@@ -39,6 +40,7 @@ public final class PythonLexer {
   private static final String BYTES_PREFIX = "([bB][Rr]?|[rR][bB]?)";
   private static final String IMAGINARY_SUFFIX = "(j|J)";
   private static final String LONG_INTEGER_SUFFIX = "(l|L)";
+  private static final String UNICODE_CHAR = "[^\u0000-\u007F]";
   private static final String IDENTIFIER_START = "[\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}_]";
   private static final String IDENTIFIER_CONTINUE = "[" + IDENTIFIER_START + "\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}]";
 
@@ -101,7 +103,7 @@ public final class PythonLexer {
       .withChannel(regexp(PythonTokenType.NUMBER, "0(_?0)*+" + LONG_INTEGER_SUFFIX + "?+"))
 
       // http://docs.python.org/reference/lexical_analysis.html#identifiers
-      .withChannel(new IdentifierAndKeywordChannel(and(IDENTIFIER_START, o2n(IDENTIFIER_CONTINUE)), true, PythonKeyword.values()))
+      .withChannel(new IdentifierAndKeywordChannel(and(or(IDENTIFIER_START, UNICODE_CHAR), o2n(or(IDENTIFIER_CONTINUE,UNICODE_CHAR))), true, PythonKeyword.values()))
 
       // http://docs.python.org/reference/lexical_analysis.html#operators
       // http://docs.python.org/reference/lexical_analysis.html#delimiters
