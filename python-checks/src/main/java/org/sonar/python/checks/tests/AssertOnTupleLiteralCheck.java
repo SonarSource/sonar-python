@@ -45,11 +45,10 @@ public class AssertOnTupleLiteralCheck extends PythonSubscriptionCheck {
         var issue = ctx.addIssue(tuple, MESSAGE);
 
         if (isSingletonTupleWithParenthesis(tuple)) {
+          Token comma =  tuple.commas().get(0);
           var quickfixBuilder = PythonQuickFix.newQuickFix(QUICK_FIX_MESSAGE)
-            .addTextEdit(TextEditUtils.remove(tuple.leftParenthesis()));
-
-          Token lastComma =  tuple.commas().get(tuple.commas().size() - 1);
-          quickfixBuilder.addTextEdit(TextEditUtils.replaceRange(lastComma, tuple.rightParenthesis(), ""));
+            .addTextEdit(TextEditUtils.remove(tuple.leftParenthesis()))
+            .addTextEdit(TextEditUtils.replaceRange(comma, tuple.rightParenthesis(), ""));
 
           issue.addQuickFix(quickfixBuilder.build());
         }
