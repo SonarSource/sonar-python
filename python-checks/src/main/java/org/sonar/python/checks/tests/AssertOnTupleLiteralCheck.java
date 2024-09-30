@@ -21,10 +21,11 @@ package org.sonar.python.checks.tests;
 
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
+import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
 import org.sonar.plugins.python.api.tree.AssertStatement;
+import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tuple;
-import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
 import org.sonar.python.quickfix.TextEditUtils;
 
 @Rule(key = "S5905")
@@ -43,21 +44,21 @@ public class AssertOnTupleLiteralCheck extends PythonSubscriptionCheck {
 
         var issue = ctx.addIssue(tuple, MESSAGE);
 
-        if (tuple.leftParenthesis() != null && tuple.rightParenthesis() != null && !tuple.elements().isEmpty()) {
-          // defensive condition
+        if (isSingletonTupleWithParenthesis(tuple)) {
           var quickfixBuilder = PythonQuickFix.newQuickFix(QUICK_FIX_MESSAGE)
             .addTextEdit(TextEditUtils.remove(tuple.leftParenthesis()));
 
-          if(tuple.elements().size() == 1 && !tuple.commas().isEmpty()) {
-            quickfixBuilder.addTextEdit(TextEditUtils.replaceRange(tuple.commas().get(0), tuple.rightParenthesis(), ""));
-          } else {
-            quickfixBuilder.addTextEdit(TextEditUtils.remove(tuple.rightParenthesis()));
-          }
+          Token lastComma =  tuple.commas().get(tuple.commas().size() - 1);
+          quickfixBuilder.addTextEdit(TextEditUtils.replaceRange(lastComma, tuple.rightParenthesis(), ""));
 
           issue.addQuickFix(quickfixBuilder.build());
         }
       }
     });
+  }
+
+  private static boolean isSingletonTupleWithParenthesis(Tuple tuple) {
+    return tuple.leftParenthesis() != null && tuple.rightParenthesis() != null && tuple.elements().size() == 1;
   }
 
   @Override
