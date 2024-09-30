@@ -351,7 +351,7 @@ public class StringFormat {
 
     private boolean tryParseFormatSpecifier(char current) {
       if (current == '{') {
-        if(!tryParsingField()) {
+        if(!tryParsingNestedField()) {
           return false;
         }
       } else if (current == '}') {
@@ -361,7 +361,7 @@ public class StringFormat {
       return true;
     }
 
-    private boolean tryParsingField() {
+    private boolean tryParsingNestedField() {
       if(this.nesting > 0) {
         parent.reportIssue("Fix this formatted string's syntax; Deep nesting is not allowed.");
         return false;
