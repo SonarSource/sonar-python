@@ -21,10 +21,11 @@ package org.sonar.python.checks.tests;
 
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
+import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
 import org.sonar.plugins.python.api.tree.AssertStatement;
+import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tuple;
-import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
 import org.sonar.python.quickfix.TextEditUtils;
 
 @Rule(key = "S5905")
@@ -43,15 +44,20 @@ public class AssertOnTupleLiteralCheck extends PythonSubscriptionCheck {
 
         var issue = ctx.addIssue(tuple, MESSAGE);
 
-        if (tuple.leftParenthesis() != null && tuple.rightParenthesis() != null) {
-          // defensive condition
-          issue.addQuickFix(PythonQuickFix.newQuickFix(QUICK_FIX_MESSAGE)
+        if (isSingletonTupleWithParenthesis(tuple)) {
+          Token comma =  tuple.commas().get(0);
+          var quickfixBuilder = PythonQuickFix.newQuickFix(QUICK_FIX_MESSAGE)
             .addTextEdit(TextEditUtils.remove(tuple.leftParenthesis()))
-            .addTextEdit(TextEditUtils.remove(tuple.rightParenthesis()))
-            .build());
+            .addTextEdit(TextEditUtils.replaceRange(comma, tuple.rightParenthesis(), ""));
+
+          issue.addQuickFix(quickfixBuilder.build());
         }
       }
     });
+  }
+
+  private static boolean isSingletonTupleWithParenthesis(Tuple tuple) {
+    return tuple.leftParenthesis() != null && tuple.rightParenthesis() != null && tuple.elements().size() == 1;
   }
 
   @Override

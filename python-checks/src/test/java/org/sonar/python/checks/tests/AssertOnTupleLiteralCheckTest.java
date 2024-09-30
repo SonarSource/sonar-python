@@ -35,12 +35,11 @@ class AssertOnTupleLiteralCheckTest {
 
   @Test
   void quickFixTest() {
-    var before = "def foo():\n" +
-      "    assert (a, b)";
-    var after = "def foo():\n" +
-      "    assert a, b";
-    PythonQuickFixVerifier.verify(new AssertOnTupleLiteralCheck(), before, after);
-    PythonQuickFixVerifier.verifyQuickFixMessages(new AssertOnTupleLiteralCheck(), before, AssertOnTupleLiteralCheck.QUICK_FIX_MESSAGE);
+    PythonQuickFixVerifier.verifyQuickFixMessages(new AssertOnTupleLiteralCheck(), "assert (foo(),)", "Remove parentheses");
+    PythonQuickFixVerifier.verify(new AssertOnTupleLiteralCheck(), "assert (foo(),)", "assert foo()");
+    PythonQuickFixVerifier.verifyNoQuickFixes(new AssertOnTupleLiteralCheck(), "assert (foo(),b,)");
+    PythonQuickFixVerifier.verifyNoQuickFixes(new AssertOnTupleLiteralCheck(), "assert (foo(),b)");
+    PythonQuickFixVerifier.verifyNoQuickFixes(new AssertOnTupleLiteralCheck(), "assert ()");
   }
 
   @Test
