@@ -81,7 +81,7 @@ public final class PythonLexer {
 
       //https://docs.python.org/3.6/reference/lexical_analysis.html#formatted-string-literals
       .withChannel(new FStringChannel(lexerState))
-      
+
       // http://docs.python.org/release/3.2/reference/lexical_analysis.html#string-and-bytes-literals
       .withChannel(regexp(PythonTokenType.STRING, BYTES_PREFIX + SINGLE_QUOTE_STRING))
       .withChannel(regexp(PythonTokenType.STRING, BYTES_PREFIX + DOUBLE_QUOTES_STRING))
@@ -103,7 +103,9 @@ public final class PythonLexer {
       .withChannel(regexp(PythonTokenType.NUMBER, "0(_?0)*+" + LONG_INTEGER_SUFFIX + "?+"))
 
       // http://docs.python.org/reference/lexical_analysis.html#identifiers
-      .withChannel(new IdentifierAndKeywordChannel(and(or(IDENTIFIER_START, UNICODE_CHAR), o2n(or(IDENTIFIER_CONTINUE,UNICODE_CHAR))), true, PythonKeyword.values()))
+      .withChannel(new IdentifierAndKeywordChannel(and(
+        or(IDENTIFIER_START, UNICODE_CHAR),
+        o2n(or(IDENTIFIER_CONTINUE, UNICODE_CHAR))), true, PythonKeyword.values()))
 
       // http://docs.python.org/reference/lexical_analysis.html#operators
       // http://docs.python.org/reference/lexical_analysis.html#delimiters
