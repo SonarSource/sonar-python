@@ -317,40 +317,31 @@ public class StringFormat {
     public boolean tryParse() {
       pos = 1;
 
-      while (pos < value.length()) {
+      while (pos < value.length() && state != FieldParseState.FINISHED) {
         char current = value.charAt(pos);
-        switch (state) {
-          case LCURLY -> pos = parseFieldName(current, pos);
-          case FIELD -> {
-            if (!tryParseField(current)) {
-              return false;
-            }
+        boolean successful = switch (state) {
+          case LCURLY -> {
+            pos = parseFieldName(current, pos);
+            yield true;
           }
-          case FLAG -> {
-            if (FORMAT_VALID_CONVERSION_FLAGS.indexOf(current) == -1) {
-              parent.reportIssue(String.format("Fix this formatted string's syntax; !%c is not a valid conversion flag.", current));
-              return false;
-            }
-            state = FieldParseState.FLAG_CHARACTER;
-          }
-          case FLAG_CHARACTER -> {
-            if (!tryParseFlagCharacter(current)) {
-              return false;
-            }
-          }
-          case FORMAT -> {
-            if (!tryParseFormatSpecifier(current)) {
-              return false;
-            }
-          }
-          case FINISHED -> {
-            return true;
-          }
+          case FIELD -> tryParseField(current);
+          case FLAG -> tryParseFlag(current);
+          case FLAG_CHARACTER -> tryParseFlagCharacter(current);
+          case FORMAT -> tryParseFormatSpecifier(current);
+          case FINISHED -> throw new IllegalStateException("Unexpected value: " + state);
+        };
+
+        if(!successful) {
+          return false;
         }
 
         pos += 1;
       }
 
+      return checkParserState();
+    }
+
+    private boolean checkParserState() {
       if(state != FieldParseState.FINISHED) {
         parent.reportIssue(SYNTAX_ERROR_MESSAGE);
         return false;
@@ -408,6 +399,15 @@ public class StringFormat {
         parent.reportIssue(SYNTAX_ERROR_MESSAGE);
         return false;
       }
+      return true;
+    }
+
+    private boolean tryParseFlag(char current) {
+      if (FORMAT_VALID_CONVERSION_FLAGS.indexOf(current) == -1) {
+        parent.reportIssue(String.format("Fix this formatted string's syntax; !%c is not a valid conversion flag.", current));
+        return false;
+      }
+      state = FieldParseState.FLAG_CHARACTER;
       return true;
     }
 
