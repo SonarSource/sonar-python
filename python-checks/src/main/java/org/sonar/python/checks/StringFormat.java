@@ -57,7 +57,7 @@ public class StringFormat {
   /**
    * Represents a named or positional replacement field inside a format string.
    */
-  public abstract static sealed class ReplacementField permits NamedField, PositionalField {
+  public abstract static class ReplacementField {
     private BiConsumer<SubscriptionContext, Expression> validator;
 
     private ReplacementField(BiConsumer<SubscriptionContext, Expression> validator) {
@@ -77,7 +77,7 @@ public class StringFormat {
     }
   }
 
-  public final static class NamedField extends ReplacementField {
+  public static class NamedField extends ReplacementField {
     private String name;
 
     public NamedField(BiConsumer<SubscriptionContext, Expression> validator, String name) {
@@ -106,7 +106,7 @@ public class StringFormat {
     }
   }
 
-  public final static class PositionalField extends ReplacementField {
+  public static class PositionalField extends ReplacementField {
     private int position;
 
     public PositionalField(BiConsumer<SubscriptionContext, Expression> validator, int position) {
@@ -172,7 +172,7 @@ public class StringFormat {
   }
 
   private enum ParseState {
-    INIT, LCURLY, RCURLY
+    INIT, RCURLY
   }
   private static class StrFormatParser {
     private boolean hasManualNumbering = false;
@@ -201,19 +201,18 @@ public class StringFormat {
       while (pos < value.length()) {
         char current = value.charAt(pos);
         switch (state) {
-          case INIT:
-            if(!tryParsingInitial(current)) {
+          case INIT -> {
+            if (!tryParsingInitial(current)) {
               return Optional.empty();
             }
-            break;
-          case RCURLY:
-            if(current != '}') {
+          }
+          case RCURLY -> {
+            if (current != '}') {
               issueReporter.accept(SYNTAX_ERROR_MESSAGE);
               return Optional.empty();
             }
             state = ParseState.INIT;
-            break;
-
+          }
         }
 
         pos += 1;
@@ -321,33 +320,32 @@ public class StringFormat {
       while (pos < value.length()) {
         char current = value.charAt(pos);
         switch (state) {
-          case LCURLY:
-            pos = parseFieldName(current, pos);
-            break;
-          case FIELD:
+          case LCURLY -> pos = parseFieldName(current, pos);
+          case FIELD -> {
             if (!tryParseField(current)) {
               return false;
             }
-            break;
-          case FLAG:
+          }
+          case FLAG -> {
             if (FORMAT_VALID_CONVERSION_FLAGS.indexOf(current) == -1) {
               parent.reportIssue(String.format("Fix this formatted string's syntax; !%c is not a valid conversion flag.", current));
               return false;
             }
             state = FieldParseState.FLAG_CHARACTER;
-            break;
-          case FLAG_CHARACTER:
+          }
+          case FLAG_CHARACTER -> {
             if (!tryParseFlagCharacter(current)) {
               return false;
             }
-            break;
-          case FORMAT:
-            if(!tryParseFormatSpecifier(current)) {
+          }
+          case FORMAT -> {
+            if (!tryParseFormatSpecifier(current)) {
               return false;
             }
-            break;
-          case FINISHED:
+          }
+          case FINISHED -> {
             return true;
+          }
         }
 
         pos += 1;
@@ -360,15 +358,13 @@ public class StringFormat {
       return true;
     }
 
-
-
     private boolean tryParseFormatSpecifier(char current) {
       if (current == '{') {
         if(!tryParsingField()) {
           return false;
         }
       } else if (current == '}') {
-        addField();
+        addCurrentField();
         state = FieldParseState.FINISHED;
       }
       return true;
@@ -390,7 +386,7 @@ public class StringFormat {
       if (current == ':') {
         state = FieldParseState.FORMAT;
       } else if (current == '}') {
-        addField();
+        addCurrentField();
         state = FieldParseState.FINISHED;
       } else {
         parent.reportIssue(SYNTAX_ERROR_MESSAGE);
@@ -406,7 +402,7 @@ public class StringFormat {
       } else if (current == ':') {
         state = FieldParseState.FORMAT;
       } else if (current == '}') {
-        addField();
+        addCurrentField();
         state = FieldParseState.FINISHED;
       } else {
         parent.reportIssue(SYNTAX_ERROR_MESSAGE);
@@ -430,7 +426,7 @@ public class StringFormat {
       return pos;
     }
 
-    private void addField() {
+    private void addCurrentField() {
       parent.addField(currentFieldName);
     }
   }
