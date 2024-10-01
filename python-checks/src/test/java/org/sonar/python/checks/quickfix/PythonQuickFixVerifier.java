@@ -39,7 +39,6 @@ import org.sonar.python.SubscriptionVisitor;
 import org.sonar.python.caching.CacheContextImpl;
 import org.sonar.python.parser.PythonParser;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
-import org.sonar.python.semantic.v2.TypeShed;
 import org.sonar.python.tree.IPythonTreeMaker;
 import org.sonar.python.tree.PythonTreeMaker;
 
@@ -161,7 +160,7 @@ public class PythonQuickFixVerifier {
 
     return new PythonVisitorContext(fileInput,
       pythonFile, null, "",
-      ProjectLevelSymbolTable.empty(), new TypeShed(ProjectLevelSymbolTable.empty()), CacheContextImpl.dummyCache(), SonarProduct.SONARLINT);
+      ProjectLevelSymbolTable.empty(), CacheContextImpl.dummyCache(), SonarProduct.SONARLINT);
   }
 
   private static String applyQuickFix(String codeWithIssue, PythonQuickFix quickFix) {

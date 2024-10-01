@@ -33,10 +33,9 @@ class SymbolsModuleTypeProviderTest {
   @BeforeEach
   void setUp() {
     ProjectLevelSymbolTable empty = ProjectLevelSymbolTable.empty();
-    TypeShed typeShed = new TypeShed(empty);
-    ProjectLevelTypeTable projectLevelTypeTable = new ProjectLevelTypeTable(empty, typeShed);
+    ProjectLevelTypeTable projectLevelTypeTable = new ProjectLevelTypeTable(empty);
     LazyTypesContext lazyTypesContext = projectLevelTypeTable.lazyTypesContext();
-    symbolsModuleTypeProvider = new SymbolsModuleTypeProvider(empty, typeShed, lazyTypesContext);
+    symbolsModuleTypeProvider = new SymbolsModuleTypeProvider(empty, lazyTypesContext);
   }
 
   @Test
