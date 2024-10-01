@@ -46,7 +46,7 @@ public class FunctionDescriptorToPythonTypeConverter implements DescriptorToPyth
       .map(fqn -> (PythonType) ctx.lazyTypesContext().getOrCreateLazyType(fqn))
       .orElse(PythonType.UNKNOWN);
 
-    var typeOrigin = TypeOrigin.LOCAL;
+    var typeOrigin = TypeOrigin.STUB;
 
     var hasVariadicParameter = hasVariadicParameter(parameters);
 
