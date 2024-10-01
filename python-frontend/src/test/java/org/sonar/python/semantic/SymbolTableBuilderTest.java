@@ -657,5 +657,4 @@ class SymbolTableBuilderTest {
     }
     return res;
   }
-
 }
