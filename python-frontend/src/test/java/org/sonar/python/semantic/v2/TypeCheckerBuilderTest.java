@@ -44,7 +44,7 @@ class TypeCheckerBuilderTest {
   @Test
   void isInstanceOfTest() {
     var symbolTable = ProjectLevelSymbolTable.empty();
-    var table = new ProjectLevelTypeTable(symbolTable, new TypeShed(symbolTable));
+    var table = new ProjectLevelTypeTable(symbolTable);
     var builder = new TypeCheckBuilder(table).isInstanceOf("int");
 
     var intClassType = table.getType("int");

@@ -57,8 +57,7 @@ class LazyTypeTest {
   @Test
   void resolutionOfLazyTypeOfMethod() {
     ProjectLevelSymbolTable projectLevelSymbolTable = ProjectLevelSymbolTable.empty();
-    TypeShed typeShed = new TypeShed(projectLevelSymbolTable);
-    ProjectLevelTypeTable projectLevelTypeTable = new ProjectLevelTypeTable(projectLevelSymbolTable, typeShed);
+    ProjectLevelTypeTable projectLevelTypeTable = new ProjectLevelTypeTable(projectLevelSymbolTable);
     LazyTypesContext lazyTypesContext = projectLevelTypeTable.lazyTypesContext();
     LazyType lazyType = new LazyType("calendar.Calendar.iterweekdays", lazyTypesContext);
     PythonType pythonType = lazyType.resolve();
