@@ -43,14 +43,9 @@ public class ProjectLevelTypeTable {
     ))
   );
 
-
   public ProjectLevelTypeTable(ProjectLevelSymbolTable projectLevelSymbolTable) {
-    this(projectLevelSymbolTable, new TypeShed(projectLevelSymbolTable));
-  }
-
-  public ProjectLevelTypeTable(ProjectLevelSymbolTable projectLevelSymbolTable, TypeShed typeShed) {
     this.lazyTypesContext = new LazyTypesContext(this);
-    this.symbolsModuleTypeProvider = new SymbolsModuleTypeProvider(projectLevelSymbolTable, typeShed, lazyTypesContext);
+    this.symbolsModuleTypeProvider = new SymbolsModuleTypeProvider(projectLevelSymbolTable, lazyTypesContext);
     this.rootModule = this.symbolsModuleTypeProvider.createBuiltinModule();
   }
 

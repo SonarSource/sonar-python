@@ -32,7 +32,7 @@ class ProjectLevelTypeTableTest {
   @Test
   void getBuiltinTypeTest() {
     var symbolTable = ProjectLevelSymbolTable.empty();
-    var table = new ProjectLevelTypeTable(symbolTable, new TypeShed(symbolTable));
+    var table = new ProjectLevelTypeTable(symbolTable);
 
     var listClassType = table.getType("list");
     Assertions.assertThat(listClassType).isNotNull().isInstanceOf(ClassType.class);
@@ -47,7 +47,7 @@ class ProjectLevelTypeTableTest {
   @Test
   void getTypeshedTypeTest() {
     var symbolTable = ProjectLevelSymbolTable.empty();
-    var table = new ProjectLevelTypeTable(symbolTable, new TypeShed(symbolTable));
+    var table = new ProjectLevelTypeTable(symbolTable);
 
     var generatorClassType = table.getType("typing.Generator");
     Assertions.assertThat(generatorClassType).isNotNull().isInstanceOf(ClassType.class);
@@ -60,7 +60,7 @@ class ProjectLevelTypeTableTest {
   @Test
   void updateTypeTableDuringGetTypeTest() {
     var symbolTable = ProjectLevelSymbolTable.empty();
-    var table = new ProjectLevelTypeTable(symbolTable, new TypeShed(symbolTable));
+    var table = new ProjectLevelTypeTable(symbolTable);
 
     var rootModuleType = table.getType();
     Assertions.assertThat(rootModuleType.hasMember("typing")).isNotEqualTo(TriBool.TRUE);
