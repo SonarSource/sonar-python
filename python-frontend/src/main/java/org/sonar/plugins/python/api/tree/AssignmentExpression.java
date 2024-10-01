@@ -24,7 +24,7 @@ package org.sonar.plugins.python.api.tree;
  * {@link #lhsName()} := {@link #expression()}
  * </pre>
  *
- * See https://docs.python.org/3/reference/expressions.html#grammar-token-assignment-expression
+ * See https://docs.python.org/3/reference/expressions.html#grammar-token-python-grammar-assignment_expression
  */
 public interface AssignmentExpression extends Expression {
 

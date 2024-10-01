@@ -166,8 +166,12 @@ def parameter_default_value():
         foo = 43
 
 def assignment_expression():
-  if (b:=foo()) != 42:
-    bar(b)
+    if (b:=foo()) != 42:
+        bar(b)
+
+def assignment_expression_in_generator():
+    if any((comment := line) for line in lines):
+        something(comment)
 
 def importing_stdlib():
   import math

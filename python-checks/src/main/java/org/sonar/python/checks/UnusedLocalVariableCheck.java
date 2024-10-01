@@ -164,10 +164,10 @@ public class UnusedLocalVariableCheck extends PythonSubscriptionCheck {
           issue.addQuickFix(quickFix);
         });
 
-      AssignmentExpression assignmentExpression = ((AssignmentExpression) TreeUtils.firstAncestorOfKind(usage.tree(), Kind.ASSIGNMENT_EXPRESSION));
-      Optional.ofNullable(assignmentExpression).map(AssignmentExpression.class::cast).ifPresent(expr -> {
+      Tree assignmentTree = TreeUtils.firstAncestorOfKind(usage.tree(), Kind.ASSIGNMENT_EXPRESSION);
+      Optional.ofNullable(assignmentTree).map(AssignmentExpression.class::cast).ifPresent(assignmentExpr -> {
         PythonQuickFix quickFix = PythonQuickFix.newQuickFix(ASSIGNMENT_QUICK_FIX_MESSAGE,
-                createAssignmentExpressionQuickFix(usage, assignmentExpression));
+                createAssignmentExpressionQuickFix(usage, assignmentExpr));
         issue.addQuickFix(quickFix);
       });
     }
@@ -176,8 +176,8 @@ public class UnusedLocalVariableCheck extends PythonSubscriptionCheck {
   private static PythonTextEdit createAssignmentExpressionQuickFix(final Usage usage, final AssignmentExpression assignmentExpression) {
     var expression = assignmentExpression.expression();
     var parent = assignmentExpression.parent();
-    if (parent.is(Kind.PARENTHESIZED) && expression.is(Kind.NAME)) {
-      return TextEditUtils.replace(parent, ((Name) expression).name());
+    if (parent.is(Kind.PARENTHESIZED) && expression instanceof Name nameExpr) {
+      return TextEditUtils.replace(parent, nameExpr.name());
     } else {
       return TextEditUtils.removeUntil(usage.tree(), expression.firstToken());
     }

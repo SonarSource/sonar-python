@@ -76,9 +76,9 @@ class SymbolTableBuilderTest {
       "function_with_loops", "simple_parameter", "comprehension_reusing_name", "tuple_assignment", "function_with_comprehension",
       "binding_usages", "func_with_star_param", "multiple_assignment", "function_with_nested_nonlocal_var", "func_with_tuple_param",
       "function_with_lambdas", "var_with_usages_in_decorator", "fn_inside_comprehension_same_name", "with_instance", "exception_instance", "unpacking",
-      "using_builtin_symbol", "keyword_usage", "comprehension_vars", "parameter_default_value", "assignment_expression", "importing_stdlib", "importing_submodule",
-      "importing_submodule_as", "importing_submodule_after_parent", "importing_submodule_after_parent_nested", "importing_parent_after_submodule",
-      "importing_parent_after_submodule_2", "importing_submodule_twice", "importing_unknown_submodule", "type_params", "type_alias");
+      "using_builtin_symbol", "keyword_usage", "comprehension_vars", "parameter_default_value", "assignment_expression", "assignment_expression_in_generator",
+      "importing_stdlib", "importing_submodule", "importing_submodule_as", "importing_submodule_after_parent", "importing_submodule_after_parent_nested",
+      "importing_parent_after_submodule", "importing_parent_after_submodule_2", "importing_submodule_twice", "importing_unknown_submodule", "type_params", "type_alias");
 
     List<String> globalSymbols = new ArrayList<>(topLevelFunctions);
     globalSymbols.addAll(Arrays.asList("a", "global_x", "global_var"));
@@ -605,6 +605,17 @@ class SymbolTableBuilderTest {
     assertThat(b.fullyQualifiedName()).isNull();
     assertThat(b.usages()).hasSize(2);
     assertThat(b.usages()).extracting(Usage::kind).containsExactly(Usage.Kind.ASSIGNMENT_LHS, Usage.Kind.OTHER);
+  }
+
+  @Test
+  void assignment_expression_in_generator() {
+    FunctionDef functionDef = functionTreesByName.get("assignment_expression_in_generator");
+    assertThat(functionDef.localVariables()).hasSize(1);
+    Symbol comment = functionDef.localVariables().iterator().next();
+    assertThat(comment.name()).isEqualTo("comment");
+    assertThat(comment.fullyQualifiedName()).isNull();
+    assertThat(comment.usages()).hasSize(2);
+    assertThat(comment.usages()).extracting(Usage::kind).containsExactly(Usage.Kind.ASSIGNMENT_LHS, Usage.Kind.OTHER);
   }
 
   @Test
