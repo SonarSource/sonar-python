@@ -113,7 +113,6 @@ public class PythonScanner extends Scanner {
         getWorkingDirectory(context),
         indexer.packageName(inputFile),
         indexer.projectLevelSymbolTable(),
-        indexer.typeShed(),
         indexer.cacheContext(),
         context.runtime().getProduct());
       if (fileType == InputFile.Type.MAIN) {

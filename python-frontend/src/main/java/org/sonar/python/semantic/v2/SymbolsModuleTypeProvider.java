@@ -28,7 +28,6 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Function;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.symbols.AmbiguousSymbol;
@@ -38,6 +37,8 @@ import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.python.semantic.ClassSymbolImpl;
 import org.sonar.python.semantic.FunctionSymbolImpl;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
+import org.sonar.python.semantic.v2.converter.AnyDescriptorToPythonTypeConverter;
+import org.sonar.python.semantic.v2.typeshed.TypeShedDescriptorsProvider;
 import org.sonar.python.types.InferredTypes;
 import org.sonar.python.types.protobuf.SymbolsProtos;
 import org.sonar.python.types.v2.ClassType;
@@ -56,15 +57,22 @@ import org.sonar.python.types.v2.UnionType;
 public class SymbolsModuleTypeProvider {
   public static final String OBJECT_TYPE_FQN = "object";
   private final ProjectLevelSymbolTable projectLevelSymbolTable;
-  private final TypeShed typeShed;
-  private ModuleType rootModule;
-  private LazyTypesContext lazyTypesContext;
+  private final ModuleType rootModule;
+  private final LazyTypesContext lazyTypesContext;
+  private final TypeShedDescriptorsProvider typeShedDescriptorsProvider;
+  private final AnyDescriptorToPythonTypeConverter anyDescriptorToPythonTypeConverter;
 
-  public SymbolsModuleTypeProvider(ProjectLevelSymbolTable projectLevelSymbolTable, TypeShed typeShed, LazyTypesContext lazyTypeContext) {
+  public SymbolsModuleTypeProvider(ProjectLevelSymbolTable projectLevelSymbolTable, LazyTypesContext lazyTypeContext) {
     this.projectLevelSymbolTable = projectLevelSymbolTable;
-    this.typeShed = typeShed;
     this.lazyTypesContext = lazyTypeContext;
-    this.rootModule = createModuleFromSymbols(null, null, typeShed.builtinSymbols().values());
+    this.typeShedDescriptorsProvider = new TypeShedDescriptorsProvider(projectLevelSymbolTable.projectBasePackages());
+    this.anyDescriptorToPythonTypeConverter = new AnyDescriptorToPythonTypeConverter(lazyTypesContext);
+
+    var rootModuleMembers = typeShedDescriptorsProvider.builtinDescriptors()
+      .entrySet()
+      .stream()
+      .collect(Collectors.toMap(Map.Entry::getKey, e -> anyDescriptorToPythonTypeConverter.convert(e.getValue())));
+    this.rootModule = new ModuleType(null, null, rootModuleMembers);
   }
 
   public ModuleType createBuiltinModule() {
@@ -92,9 +100,11 @@ public class SymbolsModuleTypeProvider {
   }
 
   private Optional<ModuleType> createModuleTypeFromTypeShed(String moduleName, String moduleFqn, ModuleType parent) {
-    return Optional.ofNullable(typeShed.symbolsForModule(moduleFqn))
-      .filter(Predicate.not(Map::isEmpty))
-      .map(typeShedModuleSymbols -> createModuleFromSymbols(moduleName, parent, typeShedModuleSymbols.values()));
+    var moduleMembers = typeShedDescriptorsProvider.descriptorsForModule(moduleFqn)
+      .entrySet().stream()
+      .collect(Collectors.toMap(Map.Entry::getKey, e -> anyDescriptorToPythonTypeConverter.convert(e.getValue())));
+    return Optional.of(moduleMembers).filter(m -> !m.isEmpty())
+      .map(m -> new ModuleType(moduleName, parent, m));
   }
 
   private ModuleType createModuleFromSymbols(@Nullable String name, @Nullable ModuleType parent, Collection<Symbol> symbols) {

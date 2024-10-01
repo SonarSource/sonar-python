@@ -381,3 +381,10 @@ def no_fp_on_decorated_classes():
     unknown_decorated_class()  # OK
     employee = Employee("John Doe", 30, "Software Engineer")
     employee() # FN
+
+
+def fp_typed_dict():
+    from typing_extensions import TypedDict
+    # TypedDict is defined as "TypedDict: object" in typing_extensions.pyi
+    # Despite actually being a function
+    x = TypedDict('x', {'a': int, 'b': str}) # Noncompliant
