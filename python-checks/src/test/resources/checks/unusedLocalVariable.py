@@ -172,3 +172,26 @@ def unused_assignment_target_in_generator_expression():
     if any((comment := line).startswith('#') for line in lines): # Noncompliant {{Remove the unused local variable "comment".}}
 #           ^^^^^^^
         return
+
+def assignment_target_in_list_comprenhension():
+    if [last := i for i in range(5)]:
+        print(last)
+
+    if [unused_last := i for i in range(5)]: # Noncompliant
+        return
+
+def assignment_target_in_dict_comprenhension():
+    if {i: (last := i) for i in range(5)}:
+        print(last)
+
+
+    if {i: (used_last := i) for i in range(5)}: # Noncompliant
+        return
+
+def assignment_target_in_set_comprenhension():
+    if {(last := i) for i in range(5)}:
+        print(last)
+
+
+    if {(unused_last := i) for i in range(5)}: # Noncompliant
+        return

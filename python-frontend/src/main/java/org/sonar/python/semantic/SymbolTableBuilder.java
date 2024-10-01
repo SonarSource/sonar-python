@@ -553,7 +553,8 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     @Override
     public void visitAssignmentExpression(AssignmentExpression assignmentExpression) {
       final Scope scope = currentScope();
-      if (scope.rootTree.is(Kind.GENERATOR_EXPR)) {
+      Tree scopeRootTree = scope.rootTree;
+      if (scopeRootTree.is(Kind.GENERATOR_EXPR) || scopeRootTree instanceof ComprehensionExpression || scopeRootTree instanceof DictCompExpression) {
         scope.parent().addBindingUsage(assignmentExpression.lhsName(), Usage.Kind.ASSIGNMENT_LHS, null);
       } else {
         addBindingUsage(assignmentExpression.lhsName(), Usage.Kind.ASSIGNMENT_LHS);

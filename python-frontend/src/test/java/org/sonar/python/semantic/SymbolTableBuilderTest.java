@@ -31,6 +31,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.sonar.plugins.python.api.PythonVisitorContext;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
@@ -77,6 +79,7 @@ class SymbolTableBuilderTest {
       "binding_usages", "func_with_star_param", "multiple_assignment", "function_with_nested_nonlocal_var", "func_with_tuple_param",
       "function_with_lambdas", "var_with_usages_in_decorator", "fn_inside_comprehension_same_name", "with_instance", "exception_instance", "unpacking",
       "using_builtin_symbol", "keyword_usage", "comprehension_vars", "parameter_default_value", "assignment_expression", "assignment_expression_in_generator",
+      "assignment_expression_in_list_comprehension", "assignment_expression_in_set_comprehension", "assignment_expression_in_dict_comprehension",
       "importing_stdlib", "importing_submodule", "importing_submodule_as", "importing_submodule_after_parent", "importing_submodule_after_parent_nested",
       "importing_parent_after_submodule", "importing_parent_after_submodule_2", "importing_submodule_twice", "importing_unknown_submodule", "type_params", "type_alias");
 
@@ -607,12 +610,13 @@ class SymbolTableBuilderTest {
     assertThat(b.usages()).extracting(Usage::kind).containsExactly(Usage.Kind.ASSIGNMENT_LHS, Usage.Kind.OTHER);
   }
 
-  @Test
-  void assignment_expression_in_generator() {
-    FunctionDef functionDef = functionTreesByName.get("assignment_expression_in_generator");
+  @ValueSource(strings = {"assignment_expression_in_generator", "assignment_expression_in_list_comprehension", "assignment_expression_in_set_comprehension", "assignment_expression_in_dict_comprehension"})
+  @ParameterizedTest
+  void assignment_expression_in_comprehension(String functionName) {
+    FunctionDef functionDef = functionTreesByName.get(functionName);
     assertThat(functionDef.localVariables()).hasSize(1);
     Symbol comment = functionDef.localVariables().iterator().next();
-    assertThat(comment.name()).isEqualTo("comment");
+    assertThat(comment.name()).isEqualTo("last");
     assertThat(comment.fullyQualifiedName()).isNull();
     assertThat(comment.usages()).hasSize(2);
     assertThat(comment.usages()).extracting(Usage::kind).containsExactly(Usage.Kind.ASSIGNMENT_LHS, Usage.Kind.OTHER);

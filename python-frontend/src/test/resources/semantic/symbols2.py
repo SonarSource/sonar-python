@@ -170,8 +170,20 @@ def assignment_expression():
         bar(b)
 
 def assignment_expression_in_generator():
-    if any((comment := line) for line in lines):
-        something(comment)
+    if any((last := i) for i in range(5)):
+        something(last)
+
+def assignment_expression_in_list_comprehension():
+    if [last := i for i in range(5)]:
+        something(last)
+
+def assignment_expression_in_set_comprehension():
+    if {(last := i) for i in range(5)}:
+        something(last)
+
+def assignment_expression_in_dict_comprehension():
+    if {'test': (last := i) for i in range(5)}:
+        something(last)
 
 def importing_stdlib():
   import math
