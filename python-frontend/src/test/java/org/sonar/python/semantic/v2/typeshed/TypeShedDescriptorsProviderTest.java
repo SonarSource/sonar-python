@@ -22,12 +22,10 @@ package org.sonar.python.semantic.v2.typeshed;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.Set;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
 import org.slf4j.event.Level;
 import org.sonar.api.testfixtures.log.LogTesterJUnit5;
-import org.sonar.plugins.python.api.ProjectPythonVersion;
 import org.sonar.plugins.python.api.PythonVersionUtils;
 import org.sonar.python.index.AmbiguousDescriptor;
 import org.sonar.python.index.ClassDescriptor;
@@ -41,14 +39,17 @@ class TypeShedDescriptorsProviderTest {
   @RegisterExtension
   public LogTesterJUnit5 logTester = new LogTesterJUnit5().setLevel(Level.DEBUG);
 
-  @BeforeEach
-  void setup() {
-    ProjectPythonVersion.setCurrentVersions(PythonVersionUtils.allVersions());
+  private static TypeShedDescriptorsProvider typeshedDescriptorsProvider() {
+    return typeshedDescriptorsProvider(Set.of());
   }
 
+  private static TypeShedDescriptorsProvider typeshedDescriptorsProvider(Set<String> projectBasePackages) {
+    return new TypeShedDescriptorsProvider(projectBasePackages, PythonVersionUtils.allVersions());
+  }
+  
   @Test
   void builtinDescriptorsTest() {
-    var provider = new TypeShedDescriptorsProvider(Set.of());
+    var provider = typeshedDescriptorsProvider();
     var builtinDescriptors = provider.builtinDescriptors();
     assertThat(builtinDescriptors).isNotEmpty();
 
@@ -60,8 +61,7 @@ class TypeShedDescriptorsProviderTest {
 
   @Test
   void builtin312DescriptorsTest() {
-    ProjectPythonVersion.setCurrentVersions(Set.of(PythonVersionUtils.Version.V_311));
-    var provider = new TypeShedDescriptorsProvider(Set.of());
+    var provider = new TypeShedDescriptorsProvider(Set.of(), Set.of(PythonVersionUtils.Version.V_312));
     var builtinDescriptors = provider.builtinDescriptors();
 
     assertThat(builtinDescriptors).isNotEmpty();
@@ -69,7 +69,7 @@ class TypeShedDescriptorsProviderTest {
 
   @Test
   void builtinFloatDisambiguation() {
-    var provider = new TypeShedDescriptorsProvider(Set.of(), PythonVersionUtils.allVersions());
+    var provider = typeshedDescriptorsProvider();
     var builtinDescriptors = provider.builtinDescriptors();
     var floatDescriptor = builtinDescriptors.get("float");
     assertThat(floatDescriptor.kind()).isEqualTo(Descriptor.Kind.CLASS);
@@ -90,21 +90,21 @@ class TypeShedDescriptorsProviderTest {
 
   @Test
   void typingDescriptorsTest() {
-    var provider = new TypeShedDescriptorsProvider(Set.of());
+    var provider = typeshedDescriptorsProvider();
     var typing = provider.descriptorsForModule("typing");
     assertThat(typing).isNotEmpty();
   }
 
   @Test
   void moduleMatchesCurrentProjectTest() {
-    var provider = new TypeShedDescriptorsProvider(Set.of("typing"));
+    var provider = typeshedDescriptorsProvider(Set.of("typing"));
     var typing = provider.descriptorsForModule("typing");
     assertThat(typing).isEmpty();
   }
 
   @Test
   void cacheTest() {
-    var provider = new TypeShedDescriptorsProvider(Set.of());
+    var provider = typeshedDescriptorsProvider();
     var typing1 = provider.descriptorsForModule("typing");
     var typing2 = provider.descriptorsForModule("typing");
     assertThat(typing1).isSameAs(typing2);
@@ -113,7 +113,7 @@ class TypeShedDescriptorsProviderTest {
 
   @Test
   void stdlibDescriptors() {
-    var provider = new TypeShedDescriptorsProvider(Set.of());
+    var provider = typeshedDescriptorsProvider();
     var mathDescriptors = provider.descriptorsForModule("math");
     var descriptor = mathDescriptors.get("acos");
     assertThat(descriptor.kind()).isEqualTo(Descriptor.Kind.AMBIGUOUS);
@@ -131,7 +131,7 @@ class TypeShedDescriptorsProviderTest {
 
   @Test
   void shouldResolvePackages() {
-    var provider = new TypeShedDescriptorsProvider(Set.of());
+    var provider = typeshedDescriptorsProvider();
     assertThat(provider.descriptorsForModule("urllib")).isNotEmpty();
     assertThat(provider.descriptorsForModule("ctypes")).isNotEmpty();
     assertThat(provider.descriptorsForModule("email")).isNotEmpty();
@@ -146,7 +146,7 @@ class TypeShedDescriptorsProviderTest {
 
   @Test
   void unknownModule() {
-    var provider = new TypeShedDescriptorsProvider(Set.of());
+    var provider = typeshedDescriptorsProvider();
     var unknownModule = provider.descriptorsForModule("unknown_module");
     assertThat(unknownModule).isEmpty();
   }
