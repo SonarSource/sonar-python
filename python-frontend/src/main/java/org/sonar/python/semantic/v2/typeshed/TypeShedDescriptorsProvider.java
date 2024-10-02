@@ -31,6 +31,8 @@ import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.sonar.plugins.python.api.ProjectPythonVersion;
+import org.sonar.plugins.python.api.PythonVersionUtils;
 import org.sonar.python.index.ClassDescriptor;
 import org.sonar.python.index.Descriptor;
 import org.sonar.python.index.ModuleDescriptor;
@@ -60,7 +62,11 @@ public class TypeShedDescriptorsProvider {
   private final Map<String, Map<String, Descriptor>> cachedDescriptors;
 
   public TypeShedDescriptorsProvider(Set<String> projectBasePackages) {
-    moduleConverter = new ModuleSymbolToDescriptorConverter();
+    this(projectBasePackages, ProjectPythonVersion.currentVersions());
+  }
+
+  public TypeShedDescriptorsProvider(Set<String> projectBasePackages, Set<PythonVersionUtils.Version> projectPythonVersions) {
+    moduleConverter = new ModuleSymbolToDescriptorConverter(projectPythonVersions);
     cachedDescriptors = new HashMap<>();
     this.projectBasePackages = projectBasePackages;
   }

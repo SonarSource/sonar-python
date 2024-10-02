@@ -34,7 +34,7 @@ class ModuleSymbolToDescriptorConverterTest {
 
   @Test
   void test() {
-    var converter = new ModuleSymbolToDescriptorConverter();
+    var converter = new ModuleSymbolToDescriptorConverter(ProjectPythonVersion.currentVersions());
     var symbol = SymbolsProtos.ModuleSymbol.newBuilder()
       .setFullyQualifiedName("module")
       .addVars(SymbolsProtos.VarSymbol.newBuilder()
@@ -86,7 +86,7 @@ class ModuleSymbolToDescriptorConverterTest {
 
   @Test
   void nullSymbolTest() {
-    var converter = new ModuleSymbolToDescriptorConverter();
+    var converter = new ModuleSymbolToDescriptorConverter(ProjectPythonVersion.currentVersions());
     var descriptor = converter.convert(null);
     Assertions.assertThat(descriptor).isNull();
   }
@@ -94,7 +94,7 @@ class ModuleSymbolToDescriptorConverterTest {
   @Test
   void validForPythonVersionsTest() {
     ProjectPythonVersion.setCurrentVersions(Set.of(PythonVersionUtils.Version.V_312));
-    var converter = new ModuleSymbolToDescriptorConverter();
+    var converter = new ModuleSymbolToDescriptorConverter(ProjectPythonVersion.currentVersions());
     var symbol = SymbolsProtos.ModuleSymbol.newBuilder()
       .setFullyQualifiedName("module")
       .addVars(SymbolsProtos.VarSymbol.newBuilder()
@@ -114,7 +114,7 @@ class ModuleSymbolToDescriptorConverterTest {
     Assertions.assertThat(descriptor.members().get("v2")).isNull();
 
     ProjectPythonVersion.setCurrentVersions(Set.of(PythonVersionUtils.Version.V_39));
-    converter = new ModuleSymbolToDescriptorConverter();
+    converter = new ModuleSymbolToDescriptorConverter(ProjectPythonVersion.currentVersions());
     descriptor = converter.convert(symbol);
     Assertions.assertThat(descriptor).isNotNull();
     Assertions.assertThat(descriptor.members().get("v1")).isNull();
