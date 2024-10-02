@@ -26,7 +26,7 @@ import java.util.function.Consumer;
 import org.sonar.plugins.python.api.LocationInFile;
 import org.sonar.python.semantic.v2.LazyTypesContext;
 
-public class LazyType implements PythonType {
+public class LazyType implements PythonType, ResolvableType {
 
   String fullyQualifiedName;
   private final Queue<Consumer<PythonType>> consumers;

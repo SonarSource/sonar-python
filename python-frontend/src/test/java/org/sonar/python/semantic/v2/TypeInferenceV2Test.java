@@ -2373,8 +2373,8 @@ class TypeInferenceV2Test {
       """);
     FunctionType functionType = ((FunctionType) ((ExpressionStatement) fileInput.statements().statements().get(1)).expressions().get(0).typeV2());
     PythonType returnType = functionType.returnType();
-    // TODO: Missing assertions
-    assertThat(returnType.unwrappedType()).isInstanceOf(UnionType.class);
+    UnionType unionType = (UnionType) returnType.unwrappedType();
+    assertThat(unionType.candidates()).extracting(PythonType::name).containsExactlyInAnyOrder("function", "NoneType");
   }
 
   @Test

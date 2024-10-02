@@ -22,9 +22,10 @@ package org.sonar.python.semantic.v2.converter;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 import org.sonar.python.index.TypeAnnotationDescriptor;
+import org.sonar.python.types.v2.LazyUnionType;
 import org.sonar.python.types.v2.PythonType;
-import org.sonar.python.types.v2.UnionType;
 
 public class TypeAnnotationToPythonTypeConverter {
 
@@ -51,7 +52,7 @@ public class TypeAnnotationToPythonTypeConverter {
         // this should be handled as a function type - see SONARPY-953
         return context.lazyTypesContext().getOrCreateLazyType("function");
       case UNION:
-        return UnionType.or(type.args().stream().map(t -> convert(context, t)).toList());
+        return new LazyUnionType(type.args().stream().map(t -> convert(context, t)).collect(Collectors.toSet()));
       case TUPLE:
         return context.lazyTypesContext().getOrCreateLazyType("tuple");
       case NONE:
