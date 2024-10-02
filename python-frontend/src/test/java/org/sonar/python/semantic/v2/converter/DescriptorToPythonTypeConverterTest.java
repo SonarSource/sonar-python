@@ -29,6 +29,7 @@ import org.sonar.python.index.AmbiguousDescriptor;
 import org.sonar.python.index.ClassDescriptor;
 import org.sonar.python.index.Descriptor;
 import org.sonar.python.index.FunctionDescriptor;
+import org.sonar.python.index.TypeAnnotationDescriptor;
 import org.sonar.python.index.VariableDescriptor;
 import org.sonar.python.semantic.v2.ClassTypeBuilder;
 import org.sonar.python.semantic.v2.LazyTypesContext;
@@ -164,6 +165,12 @@ class DescriptorToPythonTypeConverterTest {
     Mockito.when(descriptor.kind()).thenReturn(Descriptor.Kind.FUNCTION);
     Mockito.when(descriptor.name()).thenReturn("Sample");
     Mockito.when(descriptor.annotatedReturnTypeName()).thenReturn(returnTypeName);
+
+    TypeAnnotationDescriptor typeAnnotationDescriptor = Mockito.mock(TypeAnnotationDescriptor.class);
+    Mockito.when(typeAnnotationDescriptor.kind()).thenReturn(TypeAnnotationDescriptor.TypeKind.INSTANCE);
+    Mockito.when(typeAnnotationDescriptor.fullyQualifiedName()).thenReturn(returnTypeName);
+    Mockito.when(descriptor.typeAnnotationDescriptor()).thenReturn(typeAnnotationDescriptor);
+
     Mockito.when(descriptor.parameters()).thenReturn(List.of(
       new FunctionDescriptor.Parameter(
         "p1",

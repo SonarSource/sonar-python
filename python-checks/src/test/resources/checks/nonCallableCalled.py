@@ -388,3 +388,14 @@ def fp_typed_dict():
     # TypedDict is defined as "TypedDict: object" in typing_extensions.pyi
     # Despite actually being a function
     x = TypedDict('x', {'a': int, 'b': str}) # Noncompliant
+
+
+def function_type_is_callable():
+    import unittest
+    # unittest.skip() returns a Callable
+    unittest.skip("reason")() # OK
+
+
+def object_typevar():
+    scheduled = []
+    scheduled.pop()()  # OK

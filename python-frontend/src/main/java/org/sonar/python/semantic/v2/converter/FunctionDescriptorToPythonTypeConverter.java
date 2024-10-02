@@ -32,9 +32,11 @@ import org.sonar.python.types.v2.TypeUtils;
 public class FunctionDescriptorToPythonTypeConverter implements DescriptorToPythonTypeConverter {
 
   private final ParameterConverter parameterConverter;
+  private final TypeAnnotationToPythonTypeConverter typeAnnotationConverter;
 
   public FunctionDescriptorToPythonTypeConverter() {
     parameterConverter = new ParameterConverter();
+    typeAnnotationConverter = new TypeAnnotationToPythonTypeConverter();
   }
 
   public PythonType convert(ConversionContext ctx, FunctionDescriptor from) {
@@ -43,8 +45,8 @@ public class FunctionDescriptorToPythonTypeConverter implements DescriptorToPyth
       .map(parameter -> parameterConverter.convert(ctx, parameter))
       .toList();
 
-    var returnType = Optional.ofNullable(from.annotatedReturnTypeName())
-      .map(fqn -> (PythonType) ctx.lazyTypesContext().getOrCreateLazyType(fqn))
+    PythonType returnType = Optional.ofNullable(from.typeAnnotationDescriptor())
+      .map(typeAnnotation -> typeAnnotationConverter.convert(ctx, typeAnnotation))
       .map(TypeUtils::ensureWrappedObjectType)
       .orElse(PythonType.UNKNOWN);
 

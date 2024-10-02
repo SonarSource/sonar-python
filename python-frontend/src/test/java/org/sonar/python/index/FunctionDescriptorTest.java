@@ -23,7 +23,6 @@ package org.sonar.python.index;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 
@@ -33,7 +32,6 @@ import static org.sonar.python.index.DescriptorToProtobufTestUtils.assertDescrip
 import static org.sonar.python.index.DescriptorsToProtobuf.fromProtobuf;
 import static org.sonar.python.index.DescriptorsToProtobuf.toProtobuf;
 import static org.sonar.python.index.DescriptorUtils.descriptor;
-import static org.sonar.python.index.DescriptorsToProtobuf.toProtobufModuleDescriptor;
 
 class FunctionDescriptorTest {
 
