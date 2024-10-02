@@ -64,6 +64,8 @@ def using_tuples():
     for (c, d) in foo():
         pass
 
+
+
 def for_loops():
     for _ in range(10):
         do_something()
@@ -195,3 +197,13 @@ def assignment_target_in_set_comprenhension():
 
     if {(unused_last := i) for i in range(5)}: # Noncompliant
         return
+
+def param_dict_union_assignment(values: dict):
+    values |= dict(b=2)
+
+def param_dict_assignment(values: dict):
+    values = dict(b=2) # Noncompliant
+
+def local_dict_union_assignment():
+    values = {} # Noncompliant
+    values |= dict(b=2)

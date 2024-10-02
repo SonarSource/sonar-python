@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Predicate;
 import java.util.regex.Pattern;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
@@ -36,6 +37,7 @@ import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.AnnotatedAssignment;
 import org.sonar.plugins.python.api.tree.AssignmentExpression;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
+import org.sonar.plugins.python.api.tree.CompoundAssignmentStatement;
 import org.sonar.plugins.python.api.tree.ComprehensionExpression;
 import org.sonar.plugins.python.api.tree.DictCompExpression;
 import org.sonar.plugins.python.api.tree.ExceptClause;
@@ -77,11 +79,16 @@ public class UnusedLocalVariableCheck extends PythonSubscriptionCheck {
   public void initialize(Context context) {
     pattern = Pattern.compile(format);
     context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, this::checkTemplateVariablesAccessEnabled);
-    context.registerSyntaxNodeConsumer(Kind.FUNCDEF, ctx -> checkLocalVars(ctx, ctx.syntaxNode(), ((FunctionDef) ctx.syntaxNode()).localVariables()));
-    context.registerSyntaxNodeConsumer(Kind.DICT_COMPREHENSION, ctx -> checkLocalVars(ctx, ctx.syntaxNode(), ((DictCompExpression) ctx.syntaxNode()).localVariables()));
-    context.registerSyntaxNodeConsumer(Kind.LIST_COMPREHENSION, ctx -> checkLocalVars(ctx, ctx.syntaxNode(), ((ComprehensionExpression) ctx.syntaxNode()).localVariables()));
-    context.registerSyntaxNodeConsumer(Kind.SET_COMPREHENSION, ctx -> checkLocalVars(ctx, ctx.syntaxNode(), ((ComprehensionExpression) ctx.syntaxNode()).localVariables()));
-    context.registerSyntaxNodeConsumer(Kind.GENERATOR_EXPR, ctx -> checkLocalVars(ctx, ctx.syntaxNode(), ((ComprehensionExpression) ctx.syntaxNode()).localVariables()));
+    context.registerSyntaxNodeConsumer(Kind.FUNCDEF, ctx -> checkLocalVars(ctx, ctx.syntaxNode(),
+      ((FunctionDef) ctx.syntaxNode()).localVariables()));
+    context.registerSyntaxNodeConsumer(Kind.DICT_COMPREHENSION, ctx -> checkLocalVars(ctx, ctx.syntaxNode(),
+      ((DictCompExpression) ctx.syntaxNode()).localVariables()));
+    context.registerSyntaxNodeConsumer(Kind.LIST_COMPREHENSION, ctx -> checkLocalVars(ctx, ctx.syntaxNode(),
+      ((ComprehensionExpression) ctx.syntaxNode()).localVariables()));
+    context.registerSyntaxNodeConsumer(Kind.SET_COMPREHENSION, ctx -> checkLocalVars(ctx, ctx.syntaxNode(),
+      ((ComprehensionExpression) ctx.syntaxNode()).localVariables()));
+    context.registerSyntaxNodeConsumer(Kind.GENERATOR_EXPR, ctx -> checkLocalVars(ctx, ctx.syntaxNode(),
+      ((ComprehensionExpression) ctx.syntaxNode()).localVariables()));
   }
 
   private void checkTemplateVariablesAccessEnabled(SubscriptionContext ctx) {
@@ -103,6 +110,7 @@ public class UnusedLocalVariableCheck extends PythonSubscriptionCheck {
     symbols.stream()
       .filter(s -> !pattern.matcher(s.name()).matches())
       .filter(UnusedLocalVariableCheck::hasOnlyBindingUsages)
+      .filter(UnusedLocalVariableCheck::isNotUpdatingParameterDict)
       .filter(symbol -> !isVariableAccessedInStringTemplate(symbol, stringLiteralValuesCollector))
       .forEach(symbol -> {
         var usages = symbol.usages().stream()
@@ -149,7 +157,8 @@ public class UnusedLocalVariableCheck extends PythonSubscriptionCheck {
 
   private static void createAssignmentQuickFix(Usage usage, PreciseIssue issue) {
     if (usage.kind().equals(Usage.Kind.ASSIGNMENT_LHS)) {
-      Statement assignmentStatement = ((Statement) TreeUtils.firstAncestorOfKind(usage.tree(), Kind.ASSIGNMENT_STMT, Kind.ANNOTATED_ASSIGNMENT));
+      Statement assignmentStatement = ((Statement) TreeUtils.firstAncestorOfKind(usage.tree(), Kind.ASSIGNMENT_STMT,
+        Kind.ANNOTATED_ASSIGNMENT));
 
       Optional.ofNullable(assignmentStatement).filter(stmt -> stmt.is(Kind.ASSIGNMENT_STMT)).map(AssignmentStatement.class::cast).ifPresent(stmt -> {
         PythonQuickFix quickFix = PythonQuickFix.newQuickFix(ASSIGNMENT_QUICK_FIX_MESSAGE,
@@ -167,7 +176,7 @@ public class UnusedLocalVariableCheck extends PythonSubscriptionCheck {
       Tree assignmentTree = TreeUtils.firstAncestorOfKind(usage.tree(), Kind.ASSIGNMENT_EXPRESSION);
       Optional.ofNullable(assignmentTree).map(AssignmentExpression.class::cast).ifPresent(assignmentExpr -> {
         PythonQuickFix quickFix = PythonQuickFix.newQuickFix(ASSIGNMENT_QUICK_FIX_MESSAGE,
-                createAssignmentExpressionQuickFix(usage, assignmentExpr));
+          createAssignmentExpressionQuickFix(usage, assignmentExpr));
         issue.addQuickFix(quickFix);
       });
     }
@@ -188,9 +197,11 @@ public class UnusedLocalVariableCheck extends PythonSubscriptionCheck {
     Tree searchTree = usage.kind().equals(Usage.Kind.LOOP_DECLARATION) ? ctx.syntaxNode() : null;
     while (foundUnderscoreSymbol == null && searchTree != null) {
       if (searchTree.is(Kind.FUNCDEF)) {
-        foundUnderscoreSymbol = ((FunctionDef) searchTree).localVariables().stream().filter(symbol1 -> "_".equals(symbol1.name())).findAny().orElse(null);
+        foundUnderscoreSymbol =
+          ((FunctionDef) searchTree).localVariables().stream().filter(symbol1 -> "_".equals(symbol1.name())).findAny().orElse(null);
       } else if (searchTree.is(Kind.FILE_INPUT)) {
-        foundUnderscoreSymbol = ((FileInputImpl) searchTree).globalVariables().stream().filter(symbol1 -> "_".equals(symbol1.name())).findAny().orElse(null);
+        foundUnderscoreSymbol =
+          ((FileInputImpl) searchTree).globalVariables().stream().filter(symbol1 -> "_".equals(symbol1.name())).findAny().orElse(null);
       }
       searchTree = TreeUtils.firstAncestor(searchTree, a -> a.is(Kind.FUNCDEF, Kind.FILE_INPUT));
     }
@@ -199,7 +210,8 @@ public class UnusedLocalVariableCheck extends PythonSubscriptionCheck {
 
   private static boolean isLoopIndex(Usage usage, Symbol symbol) {
     var allowedKinds = EnumSet.of(Usage.Kind.LOOP_DECLARATION, Usage.Kind.COMP_DECLARATION);
-    Optional<Symbol> optionalSymbol = Optional.of(usage).filter(u -> allowedKinds.contains(u.kind())).map(Usage::tree).map(a -> ((Name) a).symbol());
+    Optional<Symbol> optionalSymbol =
+      Optional.of(usage).filter(u -> allowedKinds.contains(u.kind())).map(Usage::tree).map(a -> ((Name) a).symbol());
     return optionalSymbol.map(value -> value.equals(symbol)).orElse(false);
   }
 
@@ -227,19 +239,39 @@ public class UnusedLocalVariableCheck extends PythonSubscriptionCheck {
       return false;
     }
     return usages.stream().noneMatch(usage -> usage.kind() == Usage.Kind.IMPORT)
-      && usages.stream().allMatch(Usage::isBindingUsage);
+           && usages.stream().allMatch(Usage::isBindingUsage);
+  }
+
+  private static boolean isNotUpdatingParameterDict(Symbol symbol) {
+    List<Usage> usages = symbol.usages();
+    return usages.stream().noneMatch(UnusedLocalVariableCheck::isDictAssignmentExpressionUsage) ||
+           usages.stream().noneMatch(usage -> usage.kind() == Usage.Kind.PARAMETER);
+  }
+
+  private static boolean isDictAssignmentExpressionUsage(Usage usage) {
+    Tree compoundAssignmentTree = TreeUtils.firstAncestorOfKind(usage.tree(), Kind.COMPOUND_ASSIGNMENT);
+    return compoundAssignmentTree instanceof CompoundAssignmentStatement compoundAssignmentStatement &&
+           "|=".equals(compoundAssignmentStatement.compoundAssignmentToken().value()) &&
+           compoundAssignmentStatement.lhsExpression().type().mustBeOrExtend("dict");
   }
 
   private static boolean isOnlyTypeAnnotation(List<Usage> usages) {
     return usages.size() == 1 && usages.get(0).isBindingUsage() &&
-      TreeUtils.firstAncestor(usages.get(0).tree(), t -> t.is(Kind.ANNOTATED_ASSIGNMENT) && ((AnnotatedAssignment) t).assignedValue() == null) != null;
+           TreeUtils.firstAncestor(usages.get(0).tree(),
+             t -> t.is(Kind.ANNOTATED_ASSIGNMENT) && ((AnnotatedAssignment) t).assignedValue() == null) != null;
   }
 
+  @SuppressWarnings("SuspiciousMethodCalls")
   private static boolean isTupleDeclaration(Usage usage) {
     var tree = usage.tree();
-    return !isSequenceUnpacking(usage) && TreeUtils.firstAncestor(tree, t -> t.is(Kind.TUPLE)
-      || (t.is(Kind.EXPRESSION_LIST) && ((ExpressionList) t).expressions().size() > 1)
-      || (t.is(Kind.FOR_STMT) && ((ForStatement) t).expressions().size() > 1 && ((ForStatement) t).expressions().contains(tree))) != null;
+
+    Predicate<Tree> isTupleDeclaration = t -> t.is(Kind.TUPLE)
+                                              || (t.is(Kind.EXPRESSION_LIST) && ((ExpressionList) t).expressions().size() > 1)
+                                              || (t.is(Kind.FOR_STMT)
+                                                  && ((ForStatement) t).expressions().size() > 1
+                                                  && ((ForStatement) t).expressions().contains(tree));
+
+    return !isSequenceUnpacking(usage) && TreeUtils.firstAncestor(tree, isTupleDeclaration) != null;
   }
 
   private static boolean isSequenceUnpacking(Usage usage) {
