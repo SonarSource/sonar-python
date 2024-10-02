@@ -2574,6 +2574,11 @@ class PythonTreeMakerTest extends RuleTest {
     assertThat(tree.children()).hasSize(6).containsExactly(tree.lCurlyBrace(), tree.elements().get(0), tree.commas().get(0),
       tree.elements().get(1), tree.commas().get(1), tree.rCurlyBrace());
 
+    tree = (SetLiteral) parse("{ first := x, second := y }", treeMaker::expression);
+    assertThat(tree.elements()).hasSize(2);
+    assertThat(tree.children()).hasSize(5).containsExactly(tree.lCurlyBrace(), tree.elements().get(0), tree.commas().get(0),
+      tree.elements().get(1), tree.rCurlyBrace());
+
     tree = (SetLiteral) parse("{ *x }", treeMaker::expression);
     assertThat(tree.elements()).hasSize(1);
     element = tree.elements().iterator().next();
@@ -2589,6 +2594,22 @@ class PythonTreeMakerTest extends RuleTest {
     assertThat(comprehension.lastToken().value()).isEqualTo("}");
     assertThat(comprehension.getKind()).isEqualTo(Tree.Kind.SET_COMPREHENSION);
     assertThat(comprehension.resultExpression().getKind()).isEqualTo(Tree.Kind.MINUS);
+    assertThat(comprehension.children()).hasSize(4);
+    assertThat(((Token) comprehension.children().get(0)).value()).isEqualTo("{");
+    assertThat(((Token) comprehension.children().get(3)).value()).isEqualTo("}");
+    assertThat(comprehension.firstToken().value()).isEqualTo("{");
+    assertThat(comprehension.lastToken().value()).isEqualTo("}");
+  }
+
+  @Test
+  void set_comprehension_with_walrus_operator() {
+    setRootRule(PythonGrammar.TEST);
+    ComprehensionExpression comprehension =
+      (ComprehensionExpression) parse("{last := x-1 for x in [42, 43]}", treeMaker::expression);
+    assertThat(comprehension.firstToken().value()).isEqualTo("{");
+    assertThat(comprehension.lastToken().value()).isEqualTo("}");
+    assertThat(comprehension.getKind()).isEqualTo(Tree.Kind.SET_COMPREHENSION);
+    assertThat(comprehension.resultExpression().getKind()).isEqualTo(Kind.ASSIGNMENT_EXPRESSION);
     assertThat(comprehension.children()).hasSize(4);
     assertThat(((Token) comprehension.children().get(0)).value()).isEqualTo("{");
     assertThat(((Token) comprehension.children().get(3)).value()).isEqualTo("}");

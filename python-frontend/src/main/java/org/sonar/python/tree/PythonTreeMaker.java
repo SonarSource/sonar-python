@@ -1339,7 +1339,7 @@ public class PythonTreeMaker {
         Expression valueExpression = expression(dictOrSetMaker.getLastChild(PythonGrammar.TEST));
         return new DictCompExpressionImpl(lCurlyBrace, keyExpression, toPyToken(colon.getToken()), valueExpression, compFor, rCurlyBrace);
       } else {
-        Expression resultExpression = expression(dictOrSetMaker.getFirstChild(PythonGrammar.TEST, PythonGrammar.STAR_EXPR));
+        Expression resultExpression = expression(dictOrSetMaker.getFirstChild(PythonGrammar.NAMED_EXPR_TEST, PythonGrammar.STAR_EXPR));
         return new ComprehensionExpressionImpl(Tree.Kind.SET_COMPREHENSION, lCurlyBrace, resultExpression, compFor, rCurlyBrace);
       }
     }
@@ -1360,7 +1360,7 @@ public class PythonTreeMaker {
       }
       return new DictionaryLiteralImpl(lCurlyBrace, commas, dictionaryLiteralElements, rCurlyBrace);
     }
-    List<Expression> expressions = dictOrSetMaker.getChildren(PythonGrammar.TEST, PythonGrammar.STAR_EXPR).stream().map(this::expression).toList();
+    List<Expression> expressions = dictOrSetMaker.getChildren(PythonGrammar.NAMED_EXPR_TEST, PythonGrammar.STAR_EXPR).stream().map(this::expression).toList();
     return new SetLiteralImpl(lCurlyBrace, expressions, commas, rCurlyBrace);
   }
 
