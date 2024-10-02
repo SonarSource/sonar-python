@@ -2356,6 +2356,16 @@ class TypeInferenceV2Test {
   }
 
   @Test
+  // TODO SONARPY-2176 ProjectLevelSymbolTable#getType should be able to resolve types when there is a conflict between a member and a subpackage
+  void import_conflict_between_member_and_submodule() {
+    var statement = lastExpression("""
+      import opentracing.tracer.Tracer as ottt
+      ottt
+      """);
+    assertThat(statement.typeV2()).isInstanceOf(UnknownType.class);
+  }
+
+  @Test
   void isInstanceTests() {
     var xType = lastExpression("""
       def foo(x: int):
