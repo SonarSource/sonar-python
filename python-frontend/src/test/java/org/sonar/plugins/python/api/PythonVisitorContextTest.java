@@ -39,7 +39,6 @@ import org.sonar.python.caching.CacheContextImpl;
 import org.sonar.python.parser.PythonParser;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.semantic.SymbolImpl;
-import org.sonar.python.semantic.v2.TypeShed;
 import org.sonar.python.tree.FileInputImpl;
 import org.sonar.python.tree.PythonTreeMaker;
 
@@ -96,7 +95,6 @@ class PythonVisitorContextTest {
   void sonar_product() {
     CacheContextImpl cacheContext = CacheContextImpl.dummyCache();
     ProjectLevelSymbolTable projectLevelSymbolTable = ProjectLevelSymbolTable.empty();
-    var typeShed = new TypeShed(ProjectLevelSymbolTable.empty());
     String myPackage = "my_package";
     File workingDirectory = null;
     PythonFile pythonFile = pythonFile("my_module.py");

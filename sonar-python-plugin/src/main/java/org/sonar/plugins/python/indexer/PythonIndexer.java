@@ -40,7 +40,6 @@ import org.sonar.plugins.python.api.caching.CacheContext;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.python.parser.PythonParser;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
-import org.sonar.python.semantic.v2.TypeShed;
 import org.sonar.python.tree.PythonTreeMaker;
 
 import static org.sonar.python.semantic.SymbolUtils.pythonPackageName;
@@ -54,15 +53,11 @@ public abstract class PythonIndexer {
   private final Map<URI, String> packageNames = new HashMap<>();
   private final PythonParser parser = PythonParser.create();
   private final ProjectLevelSymbolTable projectLevelSymbolTable = new ProjectLevelSymbolTable();
-  private final TypeShed typeShed = new TypeShed(projectLevelSymbolTable);
 
   public ProjectLevelSymbolTable projectLevelSymbolTable() {
     return projectLevelSymbolTable;
   }
 
-  public TypeShed typeShed() {
-    return typeShed;
-  }
 
   public String packageName(PythonInputFile inputFile) {
     if (!packageNames.containsKey(inputFile.wrappedFile().uri())) {
