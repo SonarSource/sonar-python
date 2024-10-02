@@ -25,6 +25,7 @@ import java.util.Optional;
 import java.util.stream.IntStream;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.types.v2.ModuleType;
+import org.sonar.python.types.v2.ObjectType;
 import org.sonar.python.types.v2.PythonType;
 
 public class ProjectLevelTypeTable {
@@ -65,6 +66,9 @@ public class ProjectLevelTypeTable {
     var parent = (PythonType) rootModule;
     for (int i = 0; i < typeFqnParts.size(); i++) {
       var part = typeFqnParts.get(i);
+      if (parent instanceof ObjectType) {
+        return PythonType.UNKNOWN;
+      }
       Optional<PythonType> resolvedMember = parent.resolveMember(part);
       if (resolvedMember.isPresent()) {
         parent = resolvedMember.get();
