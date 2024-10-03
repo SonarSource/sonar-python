@@ -26,7 +26,7 @@ package org.sonar.plugins.python.api.tree;
  *
  * Example: <pre>x += y</pre>
  *
- * See https://docs.python.org/3/reference/simple_stmts.html#grammar-token-augmented-assignment-stmt
+ * See https://docs.python.org/3/reference/simple_stmts.html#grammar-token-python-grammar-augmented_assignment_stmt
  */
 public interface CompoundAssignmentStatement extends Statement {
   Expression lhsExpression();
