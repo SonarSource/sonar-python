@@ -82,7 +82,7 @@ public class SklearnPipelineSpecifyMemoryArgumentCheck extends PythonSubscriptio
       Tree tree = u.tree();
       CallExpression callExpression = (CallExpression) TreeUtils.firstAncestorOfKind(tree, Tree.Kind.CALL_EXPR);
       while (callExpression != null) {
-        if (isPipelineCreation(callExpression) || isUsedBySklearnComposeEstimator(callExpression)) {
+        if (isUsedBySklearnComposeEstimatorOrPipelineCreation(callExpression)) {
           return true;
         }
         callExpression = (CallExpression) TreeUtils.firstAncestorOfKind(callExpression, Tree.Kind.CALL_EXPR);
@@ -94,15 +94,26 @@ public class SklearnPipelineSpecifyMemoryArgumentCheck extends PythonSubscriptio
   private static boolean isPipelineCreation(CallExpression callExpression) {
     return Optional.ofNullable(callExpression.calleeSymbol())
       .map(Symbol::fullyQualifiedName)
-      .map(fqn -> "sklearn.pipeline.Pipeline".equals(fqn) || "sklearn.pipeline.make_pipeline".equals(fqn))
+      .map(SklearnPipelineSpecifyMemoryArgumentCheck::isFullyQualifiedNameAPipelineCreation)
       .orElse(false);
   }
 
-  private static boolean isUsedBySklearnComposeEstimator(CallExpression callExpression) {
-    return Optional.ofNullable(callExpression.calleeSymbol())
-      .map(Symbol::fullyQualifiedName)
-      .map(fqn -> fqn.startsWith("sklearn.compose."))
-      .orElse(false);
+  private static boolean isUsedBySklearnComposeEstimatorOrPipelineCreation(CallExpression callExpression) {
+    Symbol calleeSymbol = callExpression.calleeSymbol();
+    if(calleeSymbol == null) return false;
+
+    String fqn = calleeSymbol.fullyQualifiedName();
+    if(fqn == null) return false;
+
+    return isFullyQualifiedNameAPipelineCreation(fqn) || isFullyQualifiedNameASklearnComposeEstimator(fqn);
+  }
+
+  private static boolean isFullyQualifiedNameAPipelineCreation(String fqn) {
+    return "sklearn.pipeline.Pipeline".equals(fqn) || "sklearn.pipeline.make_pipeline".equals(fqn);
+  }
+
+  private static boolean isFullyQualifiedNameASklearnComposeEstimator(String fqn) {
+    return fqn.startsWith("sklearn.compose.");
   }
 
 }
