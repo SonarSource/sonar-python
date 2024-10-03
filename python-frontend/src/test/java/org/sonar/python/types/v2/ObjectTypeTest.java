@@ -171,6 +171,13 @@ class ObjectTypeTest {
   }
 
   @Test
+  void function_is_callable() {
+      ClassType classType = new ClassType("function");
+      assertThat(classType.instancesHaveMember("__call__")).isEqualTo(TriBool.TRUE);
+      assertThat(classType.instancesHaveMember("other")).isEqualTo(TriBool.FALSE);
+  }
+
+  @Test
   void objectType_of_unknown() {
     // TODO SONARPY-1875: Ensure this is the behavior we want (do we even want it possible to have object of unknown? Maybe replace with UnionType when implemented
     ObjectType objectType = new ObjectType(PythonType.UNKNOWN, List.of(), List.of());

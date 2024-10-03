@@ -17,25 +17,24 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.types.v2;
+package org.sonar.python.semantic.v2.typeshed;
 
-public class TypeUtils {
+import java.util.List;
+import org.sonar.python.index.TypeAnnotationDescriptor;
+import org.sonar.python.types.protobuf.SymbolsProtos;
 
-  private TypeUtils() {
+public class TypeSymbolToDescriptorConverter {
 
-  }
-
-  static PythonType resolved(PythonType pythonType) {
-    if (pythonType instanceof ResolvableType resolvableType) {
-      return resolvableType.resolve();
-    }
-    return pythonType;
-  }
-
-  public static PythonType ensureWrappedObjectType(PythonType pythonType) {
-    if (!(pythonType instanceof ObjectType)) {
-      return new ObjectType(pythonType);
-    }
-    return pythonType;
+  TypeAnnotationDescriptor convert(SymbolsProtos.Type type) {
+    List<TypeAnnotationDescriptor> args = type.getArgsList().stream()
+      .map(this::convert)
+      .toList();
+    TypeAnnotationDescriptor.TypeKind kind = TypeAnnotationDescriptor.TypeKind.valueOf(type.getKind().name());
+    String normalizedFqn = TypeShedUtils.normalizedFqn(type.getFullyQualifiedName());
+    return new TypeAnnotationDescriptor(
+      type.getPrettyPrintedName(),
+      kind,
+      args,
+      normalizedFqn);
   }
 }

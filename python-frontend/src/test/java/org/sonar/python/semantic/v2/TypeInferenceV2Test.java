@@ -2366,6 +2366,18 @@ class TypeInferenceV2Test {
   }
 
   @Test
+  void returnTypeOfTypeshedSymbol() {
+    FileInput fileInput = inferTypes("""
+      from sys import gettrace
+      gettrace
+      """);
+    FunctionType functionType = ((FunctionType) ((ExpressionStatement) fileInput.statements().statements().get(1)).expressions().get(0).typeV2());
+    PythonType returnType = functionType.returnType();
+    UnionType unionType = (UnionType) returnType.unwrappedType();
+    assertThat(unionType.candidates()).extracting(PythonType::name).containsExactlyInAnyOrder("function", "NoneType");
+  }
+
+  @Test
   void isInstanceTests() {
     var xType = lastExpression("""
       def foo(x: int):

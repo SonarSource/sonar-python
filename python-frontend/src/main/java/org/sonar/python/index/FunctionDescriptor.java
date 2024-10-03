@@ -39,9 +39,18 @@ public class FunctionDescriptor implements Descriptor {
   private final LocationInFile definitionLocation;
   @Nullable
   private final String annotatedReturnTypeName;
+  @Nullable
+  private final TypeAnnotationDescriptor typeAnnotationDescriptor;
+
 
   public FunctionDescriptor(String name, @Nullable String fullyQualifiedName, List<Parameter> parameters, boolean isAsynchronous,
     boolean isInstanceMethod, List<String> decorators, boolean hasDecorators, @Nullable LocationInFile definitionLocation, @Nullable String annotatedReturnTypeName) {
+    this(name, fullyQualifiedName, parameters, isAsynchronous, isInstanceMethod, decorators, hasDecorators, definitionLocation, annotatedReturnTypeName, null);
+  }
+
+  public FunctionDescriptor(String name, @Nullable String fullyQualifiedName, List<Parameter> parameters, boolean isAsynchronous,
+    boolean isInstanceMethod, List<String> decorators, boolean hasDecorators, @Nullable LocationInFile definitionLocation,
+    @Nullable String annotatedReturnTypeName, @Nullable TypeAnnotationDescriptor typeAnnotationDescriptor) {
 
     this.name = name;
     this.fullyQualifiedName = fullyQualifiedName;
@@ -52,6 +61,7 @@ public class FunctionDescriptor implements Descriptor {
     this.hasDecorators = hasDecorators;
     this.definitionLocation = definitionLocation;
     this.annotatedReturnTypeName = annotatedReturnTypeName;
+    this.typeAnnotationDescriptor = typeAnnotationDescriptor;
   }
 
   @Override
@@ -97,6 +107,11 @@ public class FunctionDescriptor implements Descriptor {
   @CheckForNull
   public String annotatedReturnTypeName() {
     return annotatedReturnTypeName;
+  }
+
+  @CheckForNull
+  public TypeAnnotationDescriptor typeAnnotationDescriptor() {
+    return typeAnnotationDescriptor;
   }
 
   public static class Parameter  {
@@ -172,6 +187,7 @@ public class FunctionDescriptor implements Descriptor {
     private boolean hasDecorators = false;
     private LocationInFile definitionLocation = null;
     private String annotatedReturnTypeName = null;
+    private TypeAnnotationDescriptor typeAnnotationDescriptor = null;
 
     public FunctionDescriptorBuilder withName(String name) {
       this.name = name;
@@ -218,9 +234,14 @@ public class FunctionDescriptor implements Descriptor {
       return this;
     }
 
+    public FunctionDescriptorBuilder withTypeAnnotationDescriptor(@Nullable TypeAnnotationDescriptor typeAnnotationDescriptor) {
+      this.typeAnnotationDescriptor = typeAnnotationDescriptor;
+      return this;
+    }
+
     public FunctionDescriptor build() {
       return new FunctionDescriptor(name, fullyQualifiedName, parameters, isAsynchronous, isInstanceMethod, decorators,
-        hasDecorators, definitionLocation, annotatedReturnTypeName);
+        hasDecorators, definitionLocation, annotatedReturnTypeName, typeAnnotationDescriptor);
     }
   }
 }
