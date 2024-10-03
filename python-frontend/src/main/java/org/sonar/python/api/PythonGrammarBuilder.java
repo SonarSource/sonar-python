@@ -145,7 +145,7 @@ public class PythonGrammarBuilder {
       b.sequence(
         b.firstOf(b.sequence(TEST, ":", TEST), b.sequence("**", EXPR)),
         b.firstOf(COMP_FOR, b.sequence(b.zeroOrMore(",", b.firstOf(b.sequence(TEST, ":", TEST), b.sequence("**", EXPR))), b.optional(",")))),
-      b.sequence(b.firstOf(TEST, STAR_EXPR), b.firstOf(COMP_FOR, b.sequence(b.zeroOrMore(",", b.firstOf(TEST, STAR_EXPR)), b.optional(","))))));
+      b.sequence(STAR_NAMED_EXPRESSION, b.firstOf(COMP_FOR, b.sequence(b.zeroOrMore(",", STAR_NAMED_EXPRESSION), b.optional(","))))));
 
     b.rule(ARGLIST).is(ARGUMENT, b.zeroOrMore(",", ARGUMENT), b.optional(","));
     b.rule(ARGUMENT).is(b.firstOf(
