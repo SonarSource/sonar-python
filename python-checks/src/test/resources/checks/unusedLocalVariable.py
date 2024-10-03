@@ -207,3 +207,7 @@ def param_dict_assignment(values: dict):
 def local_dict_union_assignment():
     values = {} # Noncompliant
     values |= dict(b=2)
+
+def local_not_dict_union_assignment():
+    values = True #Noncompliant
+    values |= False

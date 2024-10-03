@@ -41,6 +41,7 @@ import org.sonar.plugins.python.api.tree.CompoundAssignmentStatement;
 import org.sonar.plugins.python.api.tree.ComprehensionExpression;
 import org.sonar.plugins.python.api.tree.DictCompExpression;
 import org.sonar.plugins.python.api.tree.ExceptClause;
+import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.ExpressionList;
 import org.sonar.plugins.python.api.tree.ForStatement;
 import org.sonar.plugins.python.api.tree.FunctionDef;
@@ -261,7 +262,6 @@ public class UnusedLocalVariableCheck extends PythonSubscriptionCheck {
              t -> t.is(Kind.ANNOTATED_ASSIGNMENT) && ((AnnotatedAssignment) t).assignedValue() == null) != null;
   }
 
-  @SuppressWarnings("SuspiciousMethodCalls")
   private static boolean isTupleDeclaration(Usage usage) {
     var tree = usage.tree();
 
@@ -269,7 +269,8 @@ public class UnusedLocalVariableCheck extends PythonSubscriptionCheck {
                                               || (t.is(Kind.EXPRESSION_LIST) && ((ExpressionList) t).expressions().size() > 1)
                                               || (t.is(Kind.FOR_STMT)
                                                   && ((ForStatement) t).expressions().size() > 1
-                                                  && ((ForStatement) t).expressions().contains(tree));
+                                                  && tree instanceof Expression treeExpr
+                                                  && ((ForStatement) t).expressions().contains(treeExpr));
 
     return !isSequenceUnpacking(usage) && TreeUtils.firstAncestor(tree, isTupleDeclaration) != null;
   }
