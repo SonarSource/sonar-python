@@ -120,6 +120,17 @@ def more_nested4():
                                                        #^^^^^^^^^^^^^
             r1 = make_pipeline(p5) # Noncompliant
 
+def more_nested5():
+    from sklearn.pipeline import Pipeline
+    from sklearn.compose import ColumnTransformer, make_column_selector
+    numeric_transformer = Pipeline(steps=[('scaler', StandardScaler())])
+
+    preprocessor = ColumnTransformer(transformers=[('num', numeric_transformer, list(X_train.columns.values))])
+    clf = Pipeline(steps=[('preprocessor', preprocessor),
+                          ('classifier', LogisticRegression())])
+
+    preprocessor = make_column_selector(transformers=[('num', clf, list(X_train.columns.values))])
+
 
 def other():
     from sklearn.pipeline import Pipeline, make_pipeline
