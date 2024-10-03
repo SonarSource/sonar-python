@@ -19,16 +19,13 @@
  */
 package org.sonar.python.semantic.v2.typeshed;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
-import org.sonar.plugins.python.api.ProjectPythonVersion;
 import org.sonar.plugins.python.api.PythonVersionUtils;
-import org.sonar.python.index.AmbiguousDescriptor;
 import org.sonar.python.index.Descriptor;
 import org.sonar.python.index.ModuleDescriptor;
 import org.sonar.python.types.protobuf.SymbolsProtos;
@@ -38,14 +35,14 @@ public class ModuleSymbolToDescriptorConverter {
   private final FunctionSymbolToDescriptorConverter functionConverter;
   private final VarSymbolToDescriptorConverter variableConverter;
   private final OverloadedFunctionSymbolToDescriptorConverter overloadedFunctionConverter;
-  private final Set<String> supportedPythonVersions;
+  private final Set<String> projectPythonVersions;
 
-  public ModuleSymbolToDescriptorConverter() {
+  public ModuleSymbolToDescriptorConverter(Set<PythonVersionUtils.Version> projectPythonVersions) {
+    this.projectPythonVersions = projectPythonVersions.stream().map(PythonVersionUtils.Version::serializedValue).collect(Collectors.toSet());
     functionConverter = new FunctionSymbolToDescriptorConverter();
     variableConverter = new VarSymbolToDescriptorConverter();
     overloadedFunctionConverter = new OverloadedFunctionSymbolToDescriptorConverter(functionConverter);
-    classConverter = new ClassSymbolToDescriptorConverter(variableConverter, functionConverter, overloadedFunctionConverter);
-    supportedPythonVersions = ProjectPythonVersion.currentVersionValues();
+    classConverter = new ClassSymbolToDescriptorConverter(variableConverter, functionConverter, overloadedFunctionConverter, this.projectPythonVersions);
   }
 
   @CheckForNull
@@ -62,56 +59,28 @@ public class ModuleSymbolToDescriptorConverter {
   }
 
   private Map<String, Descriptor> getModuleDescriptors(SymbolsProtos.ModuleSymbol moduleSymbol) {
-    Map<String, Set<Descriptor>> protoSymbolsByName = new HashMap<>();
-    moduleSymbol.getClassesList()
+    var classesStream = moduleSymbol.getClassesList()
       .stream()
-      .filter(d -> isValidForProjectPythonVersion(d.getValidForList()))
+      .filter(d -> ProtoUtils.isValidForPythonVersion(d.getValidForList(), projectPythonVersions))
       .map(classConverter::convert)
-      .forEach(descriptor -> protoSymbolsByName.computeIfAbsent(descriptor.name(), d -> new HashSet<>()).add(descriptor));
-    moduleSymbol.getFunctionsList()
+      .map(Descriptor.class::cast);
+    var functionsStream = moduleSymbol.getFunctionsList()
       .stream()
-      .filter(d -> isValidForProjectPythonVersion(d.getValidForList()))
+      .filter(d -> ProtoUtils.isValidForPythonVersion(d.getValidForList(), projectPythonVersions))
       .map(functionConverter::convert)
-      .forEach(descriptor -> protoSymbolsByName.computeIfAbsent(descriptor.name(), d -> new HashSet<>()).add(descriptor));
-    moduleSymbol.getOverloadedFunctionsList()
+      .map(Descriptor.class::cast);
+    var overloadedFunctionsStream = moduleSymbol.getOverloadedFunctionsList()
       .stream()
-      .filter(d -> isValidForProjectPythonVersion(d.getValidForList()))
+      .filter(d -> ProtoUtils.isValidForPythonVersion(d.getValidForList(), projectPythonVersions))
       .map(overloadedFunctionConverter::convert)
-      .forEach(descriptor -> protoSymbolsByName.computeIfAbsent(descriptor.name(), d -> new HashSet<>()).add(descriptor));
-    moduleSymbol.getVarsList()
+      .map(Descriptor.class::cast);
+    var variablesStream = moduleSymbol.getVarsList()
       .stream()
-      .filter(d -> isValidForProjectPythonVersion(d.getValidForList()))
+      .filter(d -> ProtoUtils.isValidForPythonVersion(d.getValidForList(), projectPythonVersions))
       .map(variableConverter::convert)
-      .forEach(descriptor -> protoSymbolsByName.computeIfAbsent(descriptor.name(), d -> new HashSet<>()).add(descriptor));
+      .map(Descriptor.class::cast);
 
-    var descriptorsByName = new HashMap<String, Descriptor>();
-
-    protoSymbolsByName.forEach((name, descriptors) -> {
-      Descriptor disambiguatedDescriptor = disambiguateSymbolsWithSameName(descriptors);
-      descriptorsByName.put(name, disambiguatedDescriptor);
-    });
-
-    return descriptorsByName;
-  }
-
-  private static Descriptor disambiguateSymbolsWithSameName(Set<Descriptor> descriptors) {
-    if (descriptors.size() > 1) {
-      return AmbiguousDescriptor.create(descriptors);
-    }
-    return descriptors.iterator().next();
-  }
-
-  private boolean isValidForProjectPythonVersion(List<String> validForPythonVersions) {
-    if (validForPythonVersions.isEmpty()) {
-      return true;
-    }
-    if (supportedPythonVersions.stream().allMatch(PythonVersionUtils.Version.V_312.serializedValue()::equals)
-        && validForPythonVersions.contains(PythonVersionUtils.Version.V_311.serializedValue())) {
-      return true;
-    }
-    HashSet<String> intersection = new HashSet<>(validForPythonVersions);
-    intersection.retainAll(supportedPythonVersions);
-    return !intersection.isEmpty();
+    return ProtoUtils.disambiguateByName(Stream.of(classesStream, functionsStream, overloadedFunctionsStream, variablesStream));
   }
 
 }

@@ -28,8 +28,8 @@ public class OverloadedFunctionSymbolToDescriptorConverter {
 
   private final FunctionSymbolToDescriptorConverter functionConverter;
 
-  public OverloadedFunctionSymbolToDescriptorConverter(FunctionSymbolToDescriptorConverter functionConverter2) {
-    functionConverter = functionConverter2;
+  public OverloadedFunctionSymbolToDescriptorConverter(FunctionSymbolToDescriptorConverter functionConverter) {
+    this.functionConverter = functionConverter;
   }
 
   public AmbiguousDescriptor convert(SymbolsProtos.OverloadedFunctionSymbol overloadedFunctionSymbol) {

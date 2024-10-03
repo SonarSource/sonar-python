@@ -22,7 +22,6 @@ package org.sonar.python.semantic.v2.typeshed;
 import java.util.Set;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.sonar.plugins.python.api.ProjectPythonVersion;
 import org.sonar.plugins.python.api.PythonVersionUtils;
 import org.sonar.python.index.AmbiguousDescriptor;
 import org.sonar.python.index.ClassDescriptor;
@@ -34,7 +33,7 @@ class ModuleSymbolToDescriptorConverterTest {
 
   @Test
   void test() {
-    var converter = new ModuleSymbolToDescriptorConverter();
+    var converter = new ModuleSymbolToDescriptorConverter(PythonVersionUtils.allVersions());
     var symbol = SymbolsProtos.ModuleSymbol.newBuilder()
       .setFullyQualifiedName("module")
       .addVars(SymbolsProtos.VarSymbol.newBuilder()
@@ -86,15 +85,14 @@ class ModuleSymbolToDescriptorConverterTest {
 
   @Test
   void nullSymbolTest() {
-    var converter = new ModuleSymbolToDescriptorConverter();
+    var converter = new ModuleSymbolToDescriptorConverter(PythonVersionUtils.allVersions());
     var descriptor = converter.convert(null);
     Assertions.assertThat(descriptor).isNull();
   }
 
   @Test
   void validForPythonVersionsTest() {
-    ProjectPythonVersion.setCurrentVersions(Set.of(PythonVersionUtils.Version.V_312));
-    var converter = new ModuleSymbolToDescriptorConverter();
+    var converter = new ModuleSymbolToDescriptorConverter(Set.of(PythonVersionUtils.Version.V_312));
     var symbol = SymbolsProtos.ModuleSymbol.newBuilder()
       .setFullyQualifiedName("module")
       .addVars(SymbolsProtos.VarSymbol.newBuilder()
@@ -113,8 +111,7 @@ class ModuleSymbolToDescriptorConverterTest {
     Assertions.assertThat(descriptor.members().get("v1")).isInstanceOf(VariableDescriptor.class);
     Assertions.assertThat(descriptor.members().get("v2")).isNull();
 
-    ProjectPythonVersion.setCurrentVersions(Set.of(PythonVersionUtils.Version.V_39));
-    converter = new ModuleSymbolToDescriptorConverter();
+    converter = new ModuleSymbolToDescriptorConverter(Set.of(PythonVersionUtils.Version.V_39));
     descriptor = converter.convert(symbol);
     Assertions.assertThat(descriptor).isNotNull();
     Assertions.assertThat(descriptor.members().get("v1")).isNull();
