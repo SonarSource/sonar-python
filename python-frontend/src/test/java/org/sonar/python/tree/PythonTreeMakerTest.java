@@ -2597,8 +2597,6 @@ class PythonTreeMakerTest extends RuleTest {
     assertThat(comprehension.children()).hasSize(4);
     assertThat(((Token) comprehension.children().get(0)).value()).isEqualTo("{");
     assertThat(((Token) comprehension.children().get(3)).value()).isEqualTo("}");
-    assertThat(comprehension.firstToken().value()).isEqualTo("{");
-    assertThat(comprehension.lastToken().value()).isEqualTo("}");
   }
 
   @Test
@@ -2610,11 +2608,10 @@ class PythonTreeMakerTest extends RuleTest {
     assertThat(comprehension.lastToken().value()).isEqualTo("}");
     assertThat(comprehension.getKind()).isEqualTo(Tree.Kind.SET_COMPREHENSION);
     assertThat(comprehension.resultExpression().getKind()).isEqualTo(Kind.ASSIGNMENT_EXPRESSION);
+    assertThat(((AssignmentExpression) comprehension.resultExpression()).operator().value()).isEqualTo(":=");
     assertThat(comprehension.children()).hasSize(4);
     assertThat(((Token) comprehension.children().get(0)).value()).isEqualTo("{");
     assertThat(((Token) comprehension.children().get(3)).value()).isEqualTo("}");
-    assertThat(comprehension.firstToken().value()).isEqualTo("{");
-    assertThat(comprehension.lastToken().value()).isEqualTo("}");
   }
 
   @Test
