@@ -188,6 +188,10 @@ public final class ClassType implements PythonType {
       // TODO: instances of NamedTuple are type
       return TriBool.TRUE;
     }
+    if ("function".equals(this.name) && "__call__".equals(memberName)) {
+      // __call__ is not formally defined on function, but is present
+      return TriBool.TRUE;
+    }
     return resolveMember(memberName).isPresent() ? TriBool.TRUE : TriBool.FALSE;
   }
 

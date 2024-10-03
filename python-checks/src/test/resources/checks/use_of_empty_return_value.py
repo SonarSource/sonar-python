@@ -67,3 +67,13 @@ def import_in_different_branch():
         import fcntl
     def lock():
         ret = fcntl.flock(..., ...)  # Noncompliant
+
+
+
+def smth():
+    import sys
+    options = trial.Options()
+    options.parseOptions(["--coverage"])
+    self.addCleanup(sys.settrace, sys.gettrace())
+    self.assertEqual(sys.gettrace(), options.tracer.globaltrace)
+

@@ -19,23 +19,25 @@
  */
 package org.sonar.python.types.v2;
 
-public class TypeUtils {
+import java.util.HashSet;
+import java.util.Set;
 
-  private TypeUtils() {
+public class LazyUnionType implements PythonType, ResolvableType {
 
+  Set<PythonType> candidates;
+
+  public LazyUnionType(Set<PythonType> candidates) {
+    this.candidates = candidates;
   }
 
-  static PythonType resolved(PythonType pythonType) {
-    if (pythonType instanceof ResolvableType resolvableType) {
-      return resolvableType.resolve();
+  public PythonType resolve() {
+    Set<PythonType> resolvedCandidates = new HashSet<>();
+    for (PythonType candidate : candidates) {
+      if (candidate instanceof LazyType lazyType) {
+        candidate = lazyType.resolve();
+      }
+      resolvedCandidates.add(candidate);
     }
-    return pythonType;
-  }
-
-  public static PythonType ensureWrappedObjectType(PythonType pythonType) {
-    if (!(pythonType instanceof ObjectType)) {
-      return new ObjectType(pythonType);
-    }
-    return pythonType;
+    return new UnionType(resolvedCandidates);
   }
 }

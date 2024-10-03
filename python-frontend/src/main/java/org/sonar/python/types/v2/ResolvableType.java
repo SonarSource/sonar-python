@@ -19,23 +19,6 @@
  */
 package org.sonar.python.types.v2;
 
-public class TypeUtils {
-
-  private TypeUtils() {
-
-  }
-
-  static PythonType resolved(PythonType pythonType) {
-    if (pythonType instanceof ResolvableType resolvableType) {
-      return resolvableType.resolve();
-    }
-    return pythonType;
-  }
-
-  public static PythonType ensureWrappedObjectType(PythonType pythonType) {
-    if (!(pythonType instanceof ObjectType)) {
-      return new ObjectType(pythonType);
-    }
-    return pythonType;
-  }
+public interface ResolvableType {
+  PythonType resolve();
 }
