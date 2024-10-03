@@ -19,11 +19,15 @@
  */
 package org.sonar.python.checks;
 
+import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.sonar.python.checks.quickfix.PythonQuickFixVerifier;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 class UnusedLocalVariableCheckTest {
+
 
   @Test
   void test() {
@@ -42,178 +46,289 @@ class UnusedLocalVariableCheckTest {
     PythonCheckVerifier.verify("src/test/resources/checks/unusedLocalVariableCustom.py", check);
   }
 
-  @Test
-  void tupleQuickFixTest() {
-    var check = new UnusedLocalVariableCheck();
 
-    var before = "def using_tuples():\n" +
-      "    x, y = (1, 2)\n" +
-      "    print x";
-    var after = "def using_tuples():\n" +
-      "    x, _ = (1, 2)\n" +
-      "    print x";
-
-    PythonQuickFixVerifier.verify(check, before, after);
-    PythonQuickFixVerifier.verifyQuickFixMessages(check, before, "Replace with \"_\"");
-
-    before = "def using_tuples():\n" +
-      "    x, y = (1, 2)\n" +
-      "    y = 5\n" +
-      "    print x";
-    after = "def using_tuples():\n" +
-      "    x, _ = (1, 2)\n" +
-      "    y = 5\n" +
-      "    print x";
-
-    PythonQuickFixVerifier.verify(check, before, after);
-    PythonQuickFixVerifier.verifyQuickFixMessages(check, before, "Replace with \"_\"");
+  private record QuickFixTestData(String scenario, String before, String after, String msg) {
+    public QuickFixTestData(String scenario, String before) {
+      this(scenario, before, before, "");
+    }
   }
 
-  @Test
-  void exceptClauseQuickFixTest() {
-    var check = new UnusedLocalVariableCheck();
-
-    var before = "def foo():\n" +
-      "  try:\n" +
-      "    ...\n" +
-      "  except Type as e:\n" +
-      "    ...";
-    var after = "def foo():\n" +
-      "  try:\n" +
-      "    ...\n" +
-      "  except Type:\n" +
-      "    ...";
-
-    PythonQuickFixVerifier.verify(check, before, after);
-    PythonQuickFixVerifier.verifyQuickFixMessages(check, before, "Remove the unused local variable");
+  public static Stream<QuickFixTestData> verifyQuickFixData() {
+    return Stream.of(
+      new QuickFixTestData(
+        "tuple1",
+        """
+          def using_tuples():
+            x, y = (1, 2)
+            print x
+          """,
+        """
+          def using_tuples():
+            x, _ = (1, 2)
+            print x 
+          """,
+        "Replace with \"_\""),
+      new QuickFixTestData(
+        "tuple2",
+        """
+          def using_tuples():
+              x, y = (1, 2)
+              y = 5
+              print x 
+          """,
+        """
+          def using_tuples():
+              x, _ = (1, 2)
+              y = 5
+              print x 
+          """,
+        "Replace with \"_\""
+      ),
+      new QuickFixTestData(
+        "exceptClause",
+        """
+          def foo():
+            try:
+              ...
+            except Type as e:
+              ...
+          """,
+        """
+          def foo():
+            try:
+              ...
+            except Type:
+              ...
+          """,
+        "Remove the unused local variable"
+      ),
+      new QuickFixTestData(
+        "loopIndex",
+        """
+          def loop_index():
+            for i in range(10):
+              print("Hello")
+          """,
+        """
+          def loop_index():
+            for _ in range(10):
+              print("Hello")
+          """,
+        "Replace with \"_\""
+      ),
+      new QuickFixTestData(
+        "loopIndexComprehension",
+        """
+          def loop_index():
+           return [True for i in range(10)]
+          """,
+        """
+          def loop_index():
+           return [True for _ in range(10)]
+          """,
+        "Replace with \"_\""
+      ),
+      new QuickFixTestData(
+        "loopIndexComprehensionClass",
+        """
+          class A():
+            _ = True
+            def __init__(self):
+              for i in range(5):
+                print("print")
+          """,
+        """
+          class A():
+            _ = True
+            def __init__(self):
+              for _ in range(5):
+                print("print")
+          """,
+        "Replace with \"_\""
+      ),
+      new QuickFixTestData(
+        "assignment",
+        """
+          def foo():
+            x = bar()
+            y = True
+            return y 
+          """,
+        """
+          def foo():
+            bar()
+            y = True
+            return y 
+          """,
+        "Remove assignment target"
+      ),
+      new QuickFixTestData(
+        "assignmentExpression1",
+        """
+          def foo():
+            if any((i := j) % 2 == 1 for j in range(3)):
+              return 
+          """,
+        """
+          def foo():
+            if any(j % 2 == 1 for j in range(3)):
+              return 
+          """,
+        "Remove assignment target"
+      ),
+      new QuickFixTestData("assignmentExpression2",
+        """
+          def foo():
+            if any((i := j*2) % 2 == 1 for j in range(3)):
+              return
+          """,
+        """
+          def foo():
+            if any((j*2) % 2 == 1 for j in range(3)):
+              return
+          """,
+        "Remove assignment target"
+      ),
+      new QuickFixTestData("assignmentExpression3",
+        """
+          def foo():
+            if (test := some_method()):
+              return
+          """,
+        """
+          def foo():
+            if (some_method()):
+              return
+          """,
+        "Remove assignment target"
+      ),
+      new QuickFixTestData("assignmentExpression4",
+        """
+          def foo():
+            if test := some_method():
+              return
+          """,
+        """
+          def foo():
+            if some_method():
+              return
+          """,
+        "Remove assignment target"
+      ),
+      new QuickFixTestData("setAssignmentExpression",
+        """
+          def foo():
+            if {(i := j*2) for j in range(3)}:
+              return
+          """,
+        """
+          def foo():
+            if {(j*2) for j in range(3)}:
+              return
+          """,
+        "Remove assignment target"
+      ),
+      new QuickFixTestData("dictAssignmentExpression1",
+        """
+          def foo():
+            if {'test':(i := j*2) for j in range(3)}:
+              return
+          """,
+        """
+          def foo():
+            if {'test':(j*2) for j in range(3)}:
+              return
+          """,
+        "Remove assignment target"
+      ),
+      new QuickFixTestData("dictAssignmentExpression2",
+        """
+          def foo():
+            if {(i := j*2):'test' for j in range(3)}:
+              return
+          """,
+        """
+          def foo():
+            if {(j*2):'test' for j in range(3)}:
+              return
+          """,
+        "Remove assignment target"
+      ),
+      new QuickFixTestData(
+        "multipleAssignment",
+        """
+          def foo():
+            x, y, z = bar(), True, False
+            return y, z 
+          """,
+        """
+          def foo():
+            _, y, z = bar(), True, False
+            return y, z 
+          """,
+        "Replace with \"_\""
+      ),
+      new QuickFixTestData(
+        "typeAnnotation",
+        """
+          def foo():
+            value: str = "hello"
+            return [int(value) for value in something()] 
+          """,
+        """
+          def foo():
+            "hello"
+            return [int(value) for value in something()] 
+          """,
+        "Remove assignment target")
+    );
   }
 
-  @Test
-  void loopIndexQuickFixTest() {
+  @ParameterizedTest
+  @MethodSource("verifyQuickFixData")
+  void verifyQuickFix(QuickFixTestData testData) {
     var check = new UnusedLocalVariableCheck();
-
-    var before = "def loop_index():\n"
-      + "  for i in range(10):\n" +
-      "    print(\"Hello\")";
-    var after = "def loop_index():\n"
-      + "  for _ in range(10):\n" +
-      "    print(\"Hello\")";
-
-    PythonQuickFixVerifier.verify(check, before, after);
-    PythonQuickFixVerifier.verifyQuickFixMessages(check, before, "Replace with \"_\"");
+    PythonQuickFixVerifier.verify(check, testData.before(), testData.after());
+    PythonQuickFixVerifier.verifyQuickFixMessages(check, testData.before(), testData.msg());
   }
 
-  @Test
-  void loopIndexComprehensionQuickFixTest() {
-    var check = new UnusedLocalVariableCheck();
-
-    var before = "def loop_index():\n" + " return [True for i in range(10)]\n";
-    var after = "def loop_index():\n" + " return [True for _ in range(10)]\n";
-
-    PythonQuickFixVerifier.verify(check, before, after);
-    PythonQuickFixVerifier.verifyQuickFixMessages(check, before, "Replace with \"_\"");
+  static Stream<QuickFixTestData> verifyNoQuickFixData() {
+    return Stream.of(
+      new QuickFixTestData("loopQuickFixIndexAlreadyTaken",
+        """
+          def a():
+              _ = 3
+              for i in range(10):
+                  ...
+              return _
+          """
+      ),
+      new QuickFixTestData("loopQuickFixIndexFileLevelAlreadyTaken",
+        """
+          _ = 42
+          def foo():
+            for i in range(5):
+              print("hello")
+            print(_)
+          foo()
+          """
+      ),
+      new QuickFixTestData(
+        "typeAnnotationSeparateDeclarationAssignmentNoQuickFix",
+        """
+          def foo():
+            value: str\s
+            value = "Hello"
+            return [int(value) for value in something()] 
+          """
+      )
+    );
   }
 
-  @Test
-  void loopQuickFixIndexAlreadyTakenTest() {
+  @ParameterizedTest
+  @MethodSource("verifyNoQuickFixData")
+  void verifyNoQuickFix(QuickFixTestData testData) {
     var check = new UnusedLocalVariableCheck();
-
-    var before = "def a():\n" +
-      "    _ = 3\n" +
-      "    for i in range(10):\n" +
-      "        ...\n" +
-      "    return _\n";
-    PythonQuickFixVerifier.verifyNoQuickFixes(check, before);
-  }
-
-  @Test
-  void loopQuickFixIndexFileLevelAlreadyTakenTest() {
-    var check = new UnusedLocalVariableCheck();
-
-    var before = "_ = 42\n" +
-      "def foo():\n" +
-      "  for i in range(5):\n" +
-      "    print(\"hello\")\n" +
-      "  print(_)\n" +
-      "foo()";
-    PythonQuickFixVerifier.verifyNoQuickFixes(check, before);
-  }
-
-  @Test
-  void loopIndexComprehensionClassQuickFixTest() {
-    var check = new UnusedLocalVariableCheck();
-
-    var before = "class A():\n" +
-      "  _ = True\n" +
-      "  def __init__(self):\n" +
-      "    for i in range(5):\n" +
-      "      print(\"print\")";
-    var after = "class A():\n" +
-      "  _ = True\n" +
-      "  def __init__(self):\n" +
-      "    for _ in range(5):\n" +
-      "      print(\"print\")";
-
-    PythonQuickFixVerifier.verify(check, before, after);
-    PythonQuickFixVerifier.verifyQuickFixMessages(check, before, "Replace with \"_\"");
-  }
-
-  @Test
-  void assignmentQuickFixTest() {
-    var check = new UnusedLocalVariableCheck();
-
-    var before = "def foo():\n" +
-      "  x = bar()\n" +
-      "  y = True\n" +
-      "  return y";
-    var after = "def foo():\n" +
-      "  bar()\n" +
-      "  y = True\n" +
-      "  return y";
-
-    PythonQuickFixVerifier.verify(check, before, after);
-    PythonQuickFixVerifier.verifyQuickFixMessages(check, before, "Remove assignment target");
-  }
-
-  @Test
-  void multipleAssignmentQuickFixTest() {
-    var check = new UnusedLocalVariableCheck();
-
-    var before = "def foo():\n" +
-      "  x, y, z = bar(), True, False\n" +
-      "  return y, z";
-    var after = "def foo():\n" +
-      "  _, y, z = bar(), True, False\n" +
-      "  return y, z";
-
-    PythonQuickFixVerifier.verify(check, before, after);
-    PythonQuickFixVerifier.verifyQuickFixMessages(check, before, "Replace with \"_\"");
-  }
-
-  @Test
-  void typeAnnotationQuickFixTest() {
-    var check = new UnusedLocalVariableCheck();
-
-    var before = "def foo():\n" +
-      "  value: str = \"hello\"\n" +
-      "  return [int(value) for value in something()]";
-    var after = "def foo():\n" +
-      "  \"hello\"\n" +
-      "  return [int(value) for value in something()]";
-
-    PythonQuickFixVerifier.verify(check, before, after);
-    PythonQuickFixVerifier.verifyQuickFixMessages(check, before, "Remove assignment target");
-  }
-
-  @Test
-  void typeAnnotationSeparateDeclarationAssignmentNoQuickFixTest() {
-    var check = new UnusedLocalVariableCheck();
-
-    var before = "def foo():\n" +
-      "  value: str \n" +
-      "  value = \"Hello\"\n" +
-      "  return [int(value) for value in something()]";
-
-    PythonQuickFixVerifier.verifyNoQuickFixes(check, before);
+    PythonQuickFixVerifier.verifyNoQuickFixes(check, testData.before());
   }
 }
