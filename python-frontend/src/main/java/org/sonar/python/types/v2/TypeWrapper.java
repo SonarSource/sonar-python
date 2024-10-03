@@ -26,6 +26,9 @@ public interface TypeWrapper {
   TypeWrapper UNKNOWN_TYPE_WRAPPER = new SimpleTypeWrapper(PythonType.UNKNOWN);
 
   static TypeWrapper of(PythonType type) {
-    return type instanceof LazyType ? new LazyTypeWrapper(type) : new SimpleTypeWrapper(type);
+    if (type instanceof ResolvableType) {
+      return new LazyTypeWrapper(type);
+    }
+    return new SimpleTypeWrapper(type);
   }
 }
