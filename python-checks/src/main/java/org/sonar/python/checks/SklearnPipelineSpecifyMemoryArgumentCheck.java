@@ -56,7 +56,11 @@ public class SklearnPipelineSpecifyMemoryArgumentCheck extends PythonSubscriptio
             return;
           }
 
-          if (getAssignedName(callExpression).map(SklearnPipelineSpecifyMemoryArgumentCheck::isUsedInAnotherPipeline).orElse(false)) {
+          boolean isUsedInAnotherPipeline = getAssignedName(callExpression)
+            .map(SklearnPipelineSpecifyMemoryArgumentCheck::isUsedInAnotherPipeline)
+            .orElse(false);
+
+          if (isUsedInAnotherPipeline) {
             return;
           }
 
@@ -72,21 +76,13 @@ public class SklearnPipelineSpecifyMemoryArgumentCheck extends PythonSubscriptio
     issue.addQuickFix(quickFix);
   }
 
-  private static boolean isPipelineCreation(CallExpression callExpression) {
-    return Optional.ofNullable(callExpression.calleeSymbol())
-      .map(Symbol::fullyQualifiedName)
-      .map(fqn -> "sklearn.pipeline.Pipeline".equals(fqn) || "sklearn.pipeline.make_pipeline".equals(fqn))
-      .orElse(false);
-  }
-
   private static boolean isUsedInAnotherPipeline(Name name) {
     Symbol symbol = name.symbol();
     return symbol != null && symbol.usages().stream().filter(usage -> !usage.isBindingUsage()).anyMatch(u -> {
       Tree tree = u.tree();
       CallExpression callExpression = (CallExpression) TreeUtils.firstAncestorOfKind(tree, Tree.Kind.CALL_EXPR);
       while (callExpression != null) {
-        Optional<String> fullyQualifiedName = Optional.ofNullable(callExpression.calleeSymbol()).map(Symbol::fullyQualifiedName);
-        if (fullyQualifiedName.isPresent() && isPipelineCreation(callExpression)) {
+        if (isUsedBySklearnComposeEstimatorOrPipelineCreation(callExpression)) {
           return true;
         }
         callExpression = (CallExpression) TreeUtils.firstAncestorOfKind(callExpression, Tree.Kind.CALL_EXPR);
@@ -94,4 +90,30 @@ public class SklearnPipelineSpecifyMemoryArgumentCheck extends PythonSubscriptio
       return false;
     });
   }
+
+  private static boolean isPipelineCreation(CallExpression callExpression) {
+    return Optional.ofNullable(callExpression.calleeSymbol())
+      .map(Symbol::fullyQualifiedName)
+      .map(SklearnPipelineSpecifyMemoryArgumentCheck::isFullyQualifiedNameAPipelineCreation)
+      .orElse(false);
+  }
+
+  private static boolean isUsedBySklearnComposeEstimatorOrPipelineCreation(CallExpression callExpression) {
+    Symbol calleeSymbol = callExpression.calleeSymbol();
+    if(calleeSymbol == null) return false;
+
+    String fqn = calleeSymbol.fullyQualifiedName();
+    if(fqn == null) return false;
+
+    return isFullyQualifiedNameAPipelineCreation(fqn) || isFullyQualifiedNameASklearnComposeEstimator(fqn);
+  }
+
+  private static boolean isFullyQualifiedNameAPipelineCreation(String fqn) {
+    return "sklearn.pipeline.Pipeline".equals(fqn) || "sklearn.pipeline.make_pipeline".equals(fqn);
+  }
+
+  private static boolean isFullyQualifiedNameASklearnComposeEstimator(String fqn) {
+    return fqn.startsWith("sklearn.compose.");
+  }
+
 }
