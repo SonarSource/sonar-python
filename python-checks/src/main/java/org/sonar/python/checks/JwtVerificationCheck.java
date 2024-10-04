@@ -189,30 +189,34 @@ public class JwtVerificationCheck extends PythonSubscriptionCheck {
   private static boolean accessOnlyAllowedHeaderKeys(CallExpression call) {
     Tree assignment = TreeUtils.firstAncestorOfKind(call, Tree.Kind.ASSIGNMENT_STMT);
     if (assignment != null) {
-      List<Expression> lhsExpressions = ((AssignmentStatement) assignment).lhsExpressions().stream().map(ExpressionList::expressions).flatMap(Collection::stream).toList();
-      if (lhsExpressions.size() == 1) {
+      List<Expression> lhsExpressions = ((AssignmentStatement) assignment).lhsExpressions().stream()
+        .map(ExpressionList::expressions)
+        .flatMap(Collection::stream).toList();
+      if (lhsExpressions.size() == 1 && lhsExpressions.get(0).is(Tree.Kind.NAME)) {
         Name name = (Name) lhsExpressions.get(0);
         var symbol = name.symbol();
         if (symbol != null) {
-          return areOnlyAllowedKeysAccessedThroughGet(symbol, call) || areAccessesThroughSubscriptionsOnlyForAllowedKeys(symbol, call);
+          var argumentsOfGet = argumentsAccessedByGet(symbol, call);
+          var argumentsOfSubscription = argumentsAccessedBySubscription(symbol, call);
+          return areStringLiteralsPartOfAllowedKeys(Stream.concat(argumentsOfGet, argumentsOfSubscription));
         }
       }
     }
     return false;
   }
 
-  private static boolean areStringLiteralsPartOfAllowedKeys(List<StringLiteral> literals) {
-    return !literals.isEmpty() && literals.stream().allMatch(str -> ALLOWED_KEYS_ACCESS.contains(str.trimmedQuotesValue()));
+  private static boolean areStringLiteralsPartOfAllowedKeys(Stream<StringLiteral> literals) {
+    var literalList = literals.toList();
+    return !literalList.isEmpty() && literalList.stream().allMatch(str -> ALLOWED_KEYS_ACCESS.contains(str.trimmedQuotesValue()));
   }
 
-  private static boolean areOnlyAllowedKeysAccessedThroughGet(Symbol symbol, CallExpression call) {
+  private static Stream<StringLiteral> argumentsAccessedByGet(Symbol symbol, CallExpression call) {
     var usages = getHeaderDictUsages(symbol, call);
     var parentOfUsages = usages.map(Usage::tree).map(Tree::parent);
     var callExpressionsFromUsages = getCallExprWhereDictIsAccessedWithGet(parentOfUsages);
     var callExpressionFromGetUnverifiedHeaders = getCallExprWhereDictIsAccessedWithGet(Stream.of(call.parent()));
     var arguments = Stream.concat(callExpressionsFromUsages, callExpressionFromGetUnverifiedHeaders).map(CallExpression::arguments).flatMap(Collection::stream);
-    var stringLiteralArguments = getStringLiteralArguments(arguments).toList();
-    return areStringLiteralsPartOfAllowedKeys(stringLiteralArguments);
+    return getStringLiteralArguments(arguments);
   }
 
   private static Stream<Usage> getHeaderDictUsages(Symbol symbol, CallExpression call) {
@@ -239,26 +243,26 @@ public class JwtVerificationCheck extends PythonSubscriptionCheck {
       .filter(Objects::nonNull);
   }
 
-  private static boolean areAccessesThroughSubscriptionsOnlyForAllowedKeys(Symbol symbol, CallExpression call) {
+  private static Stream<StringLiteral> argumentsAccessedBySubscription(Symbol symbol, CallExpression call) {
     var usages = getHeaderDictUsages(symbol, call);
     var parentFromUsages = usages.map(Usage::tree).map(Tree::parent);
     var subscriptionsFromUsages = getSubscriptions(parentFromUsages);
     var subscriptionFromGetUnverifiedHeaders = getSubscriptions(Stream.of(call.parent()));
-    var subsciptsStringLiteral = getSubscriptsStringLiteral(Stream.concat(subscriptionsFromUsages, subscriptionFromGetUnverifiedHeaders)).toList();
-    return areStringLiteralsPartOfAllowedKeys(subsciptsStringLiteral);
-  }
-
-  private static Stream<StringLiteral> getSubscriptsStringLiteral(Stream<SubscriptionExpression> subscriptions) {
-    return subscriptions.map(SubscriptionExpression::subscripts)
-      .map(ExpressionList::expressions)
-      .flatMap(Collection::stream)
-      .map(TreeUtils.toInstanceOfMapper(StringLiteral.class));
+    return getSubscriptsStringLiteral(Stream.concat(subscriptionsFromUsages, subscriptionFromGetUnverifiedHeaders));
   }
 
   private static Stream<SubscriptionExpression> getSubscriptions(Stream<Tree> subscriptions) {
     return subscriptions
       .filter(subscription -> subscription.is(Tree.Kind.SUBSCRIPTION))
       .map(TreeUtils.toInstanceOfMapper(SubscriptionExpression.class));
+  }
+
+  private static Stream<StringLiteral> getSubscriptsStringLiteral(Stream<SubscriptionExpression> subscriptions) {
+    return subscriptions.map(SubscriptionExpression::subscripts)
+      .map(ExpressionList::expressions)
+      .flatMap(Collection::stream)
+      .map(TreeUtils.toInstanceOfMapper(StringLiteral.class))
+      .filter(Objects::nonNull);
   }
 
 }
