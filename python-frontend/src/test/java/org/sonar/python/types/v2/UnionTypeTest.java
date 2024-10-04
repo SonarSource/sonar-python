@@ -22,6 +22,7 @@ package org.sonar.python.types.v2;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import org.assertj.core.api.InstanceOfAssertFactories;
 import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.tree.ExpressionStatement;
 import org.sonar.plugins.python.api.tree.FileInput;
@@ -143,7 +144,7 @@ class UnionTypeTest {
       .extracting(UnionType.class::cast)
       .extracting(UnionType::candidates)
       .extracting(ArrayList::new)
-      .asList()
+      .asInstanceOf(InstanceOfAssertFactories.LIST)
       .hasSize(2)
       .contains(candidate1, candidate2);
   }
