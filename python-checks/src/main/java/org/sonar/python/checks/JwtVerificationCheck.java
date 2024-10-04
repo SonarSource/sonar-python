@@ -43,6 +43,7 @@ import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.StringLiteral;
+import org.sonar.plugins.python.api.tree.SubscriptionExpression;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.plugins.python.api.tree.Tuple;
@@ -185,8 +186,6 @@ public class JwtVerificationCheck extends PythonSubscriptionCheck {
       .isPresent();
   }
 
-
-
   private static boolean accessOnlyAllowedHeaderKeys(CallExpression call) {
     Tree assignment = TreeUtils.firstAncestorOfKind(call, Tree.Kind.ASSIGNMENT_STMT);
     if (assignment != null) {
@@ -195,19 +194,24 @@ public class JwtVerificationCheck extends PythonSubscriptionCheck {
         Name name = (Name) lhsExpressions.get(0);
         var symbol = name.symbol();
         if (symbol != null) {
-          return areAccessedThroughGetOnlyForAllowedKeys(symbol, call) || areAccessesThroughSubscriptionsOnlyForAllowedKeys(symbol, call);
+          return areAccessesThroughGetOnlyForAllowedKeys(symbol, call) || areAccessesThroughSubscriptionsOnlyForAllowedKeys(symbol, call);
         }
       }
     }
     return false;
   }
 
-  private static boolean areAccessedThroughGetOnlyForAllowedKeys(Symbol symbol, CallExpression call) {
+  private static boolean areStringLiteralsPartOfAllowedKeys(List<StringLiteral> literals) {
+    return !literals.isEmpty() && literals.stream().allMatch(str -> ALLOWED_KEYS_ACCESS.contains(str.trimmedQuotesValue()));
+  }
+
+  private static boolean areAccessesThroughGetOnlyForAllowedKeys(Symbol symbol, CallExpression call) {
     var usages = getHeaderDictUsages(symbol, call);
-    var callExpressions = whereDictIsAccessedWithGet(usages);
+    var parentOfUsages = usages.map(Usage::tree).map(Tree::parent);
+    var callExpressions = getCallExprWhereDictIsAccessedWithGet(parentOfUsages);
     var arguments = callExpressions.map(CallExpression::arguments).flatMap(Collection::stream);
-    var stringLiteralArguments = whereArgumentAreStringLiterals(arguments).toList();
-    return !stringLiteralArguments.isEmpty() && stringLiteralArguments.stream().allMatch(str -> ALLOWED_KEYS_ACCESS.contains(str.trimmedQuotesValue()));
+    var stringLiteralArguments = getStringLiteralArguments(arguments).toList();
+    return areStringLiteralsPartOfAllowedKeys(stringLiteralArguments);
   }
 
   private static Stream<Usage> getHeaderDictUsages(Symbol symbol, CallExpression call) {
@@ -215,11 +219,9 @@ public class JwtVerificationCheck extends PythonSubscriptionCheck {
       .filter(usage -> usage.tree().firstToken().line() > call.callee().firstToken().line());
   }
 
-  private static Stream<CallExpression> whereDictIsAccessedWithGet(Stream<Usage> usages) {
-    return usages
-      .filter(usage -> usage.tree().parent().is(Tree.Kind.QUALIFIED_EXPR))
-      .map(Usage::tree)
-      .map(Tree::parent)
+  private static Stream<CallExpression> getCallExprWhereDictIsAccessedWithGet(Stream<Tree> parentQualifiedExpr) {
+    return parentQualifiedExpr
+      .filter(parent -> parent.is(Tree.Kind.QUALIFIED_EXPR))
       .map(TreeUtils.toInstanceOfMapper(QualifiedExpression.class))
       .filter(Objects::nonNull)
       .filter(expr -> expr.name().name().equals("get"))
@@ -228,16 +230,34 @@ public class JwtVerificationCheck extends PythonSubscriptionCheck {
       .map(TreeUtils.toInstanceOfMapper(CallExpression.class));
   }
 
-  private static Stream<StringLiteral> whereArgumentAreStringLiterals(Stream<Argument> arguments) {
+  private static Stream<StringLiteral> getStringLiteralArguments(Stream<Argument> arguments) {
     return arguments.filter(arg -> arg.is(Tree.Kind.REGULAR_ARGUMENT))
       .map(TreeUtils.toInstanceOfMapper(RegularArgument.class))
       .map(RegularArgument::expression)
       .map(TreeUtils.toInstanceOfMapper(StringLiteral.class))
       .filter(Objects::nonNull);
   }
+
   private static boolean areAccessesThroughSubscriptionsOnlyForAllowedKeys(Symbol symbol, CallExpression call) {
     var usages = getHeaderDictUsages(symbol, call);
-    return true;
+    var subscriptions = getSubscriptions(usages);
+    var subsciptsStringLiteral = getSubscriptsStringLiteral(subscriptions).toList();
+    return areStringLiteralsPartOfAllowedKeys(subsciptsStringLiteral);
+  }
+
+  private static Stream<StringLiteral> getSubscriptsStringLiteral(Stream<SubscriptionExpression> subscriptions) {
+    return subscriptions.map(SubscriptionExpression::subscripts)
+      .map(ExpressionList::expressions)
+      .flatMap(Collection::stream)
+      .map(TreeUtils.toInstanceOfMapper(StringLiteral.class));
+  }
+
+  private static Stream<SubscriptionExpression> getSubscriptions(Stream<Usage> usages) {
+    return usages
+      .filter(usage -> usage.tree().parent().is(Tree.Kind.SUBSCRIPTION))
+      .map(Usage::tree)
+      .map(Tree::parent)
+      .map(TreeUtils.toInstanceOfMapper(SubscriptionExpression.class));
   }
 
 }
