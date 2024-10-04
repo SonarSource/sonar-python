@@ -41,6 +41,7 @@ import org.sonar.python.index.AmbiguousDescriptor;
 import org.sonar.python.index.Descriptor;
 import org.sonar.python.index.DescriptorUtils;
 import org.sonar.python.index.VariableDescriptor;
+import org.sonar.python.semantic.v2.typeshed.TypeShedDescriptorsProvider;
 
 import static org.sonar.python.tree.TreeUtils.getSymbolFromTree;
 import static org.sonar.python.tree.TreeUtils.nthArgumentOrKeyword;
@@ -52,6 +53,7 @@ public class ProjectLevelSymbolTable {
   private final Set<String> djangoViewsFQN = new HashSet<>();
   private final Map<String, Set<String>> importsByModule = new HashMap<>();
   private final Set<String> projectBasePackages = new HashSet<>();
+  private TypeShedDescriptorsProvider typeShedDescriptorsProvider = null;
 
   public static ProjectLevelSymbolTable empty() {
     return new ProjectLevelSymbolTable(Collections.emptyMap());
@@ -185,6 +187,13 @@ public class ProjectLevelSymbolTable {
 
   public Set<String> projectBasePackages() {
     return projectBasePackages;
+  }
+
+  public TypeShedDescriptorsProvider typeShedDescriptorsProvider() {
+    if (typeShedDescriptorsProvider == null) {
+      typeShedDescriptorsProvider = new TypeShedDescriptorsProvider(projectBasePackages);
+    }
+    return typeShedDescriptorsProvider;
   }
 
   private class DjangoViewsVisitor extends BaseTreeVisitor {
