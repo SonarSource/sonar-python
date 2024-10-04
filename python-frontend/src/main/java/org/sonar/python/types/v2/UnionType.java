@@ -74,6 +74,7 @@ public record UnionType(Set<PythonType> candidates) implements PythonType {
 
   @Beta
   public static PythonType or(Collection<PythonType> candidates) {
+    ensureCandidatesAreNotLazyTypes(candidates);
     if (candidates.isEmpty()) {
       return PythonType.UNKNOWN;
     }
@@ -102,6 +103,7 @@ public record UnionType(Set<PythonType> candidates) implements PythonType {
     if (types.size() == 1) {
       return types.iterator().next();
     }
+    ensureCandidatesAreNotLazyTypes(types);
     return new UnionType(types);
   }
 
@@ -110,6 +112,12 @@ public record UnionType(Set<PythonType> candidates) implements PythonType {
       types.addAll(unionType.candidates());
     } else {
       types.add(type);
+    }
+  }
+
+  private static void ensureCandidatesAreNotLazyTypes(Collection<PythonType> types) {
+    if (types.stream().anyMatch(LazyType.class::isInstance)) {
+      throw new IllegalArgumentException("UnionType cannot contain Lazy types");
     }
   }
 }
