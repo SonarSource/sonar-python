@@ -44,3 +44,7 @@ def python2_multiple_expressions(cond):
         raise 42, BaseException
     else:
         raise BaseException, 42 # Noncompliant
+
+
+def no_issue_with_self_return_type():
+    raise MyException().with_traceback("foo")

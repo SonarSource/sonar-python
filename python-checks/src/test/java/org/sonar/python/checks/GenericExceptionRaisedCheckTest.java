@@ -19,6 +19,7 @@
  */
 package org.sonar.python.checks;
 
+import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
@@ -26,7 +27,18 @@ class GenericExceptionRaisedCheckTest {
 
   @Test
   void test() {
-    PythonCheckVerifier.verify("src/test/resources/checks/genericExceptionRaised.py", new GenericExceptionRaisedCheck());
+    PythonCheckVerifier.verify("src/test/resources/checks/genericException/genericExceptionRaised.py", new GenericExceptionRaisedCheck());
+  }
+
+  @Test
+  void test_multiple_files() {
+    PythonCheckVerifier.verify(
+      Arrays.asList(
+        "src/test/resources/checks/genericException/genericExceptionImported.py",
+        "src/test/resources/checks/genericException/genericExceptionImporter.py"
+      ),
+      new GenericExceptionRaisedCheck()
+    );
   }
 
 }
