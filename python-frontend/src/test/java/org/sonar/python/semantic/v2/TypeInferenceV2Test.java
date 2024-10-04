@@ -27,6 +27,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Stream;
 import org.assertj.core.api.Assertions;
+import org.assertj.core.api.InstanceOfAssertFactories;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -1648,7 +1649,7 @@ class TypeInferenceV2Test {
     Assertions.assertThat(lType)
       .extracting(ObjectType.class::cast)
       .extracting(ObjectType::attributes)
-      .asList()
+      .asInstanceOf(InstanceOfAssertFactories.LIST)
       .hasSize(1)
       .contains(PythonType.UNKNOWN);
 
