@@ -38,7 +38,8 @@ public class StringFormat {
 
   private static final String SYNTAX_ERROR_MESSAGE = "Fix this formatted string's syntax.";
 
-  private static final BiConsumer<SubscriptionContext, Expression> DO_NOTHING_VALIDATOR = (ctx, expr) -> {};
+  private static final BiConsumer<SubscriptionContext, Expression> DO_NOTHING_VALIDATOR = (ctx, expr) -> {
+  };
 
   // See https://docs.python.org/3/library/stdtypes.html#printf-style-string-formatting
   private static final Pattern PRINTF_PARAMETER_PATTERN = Pattern.compile(
@@ -193,26 +194,22 @@ public class StringFormat {
       this.pos = 0;
     }
 
-
     public Optional<StringFormat> parse() {
       pos = 0;
       result = new ArrayList<>();
 
       while (pos < value.length()) {
         char current = value.charAt(pos);
-        switch (state) {
-          case INIT -> {
-            if (!tryParsingInitial(current)) {
-              return Optional.empty();
-            }
+        if (state == ParseState.INIT) {
+          if (!tryParsingInitial(current)) {
+            return Optional.empty();
           }
-          case RCURLY -> {
-            if (current != '}') {
-              issueReporter.accept(SYNTAX_ERROR_MESSAGE);
-              return Optional.empty();
-            }
-            state = ParseState.INIT;
+        } else if (state == ParseState.RCURLY) {
+          if (current != '}') {
+            issueReporter.accept(SYNTAX_ERROR_MESSAGE);
+            return Optional.empty();
           }
+          state = ParseState.INIT;
         }
 
         pos += 1;
@@ -262,7 +259,6 @@ public class StringFormat {
       this.pos += fieldParser.getPos() - 1;
       return successful;
     }
-
 
     public void reportIssue(String issue) {
       issueReporter.accept(issue);
@@ -331,7 +327,7 @@ public class StringFormat {
           case FINISHED -> throw new IllegalStateException("Unexpected value: " + state);
         };
 
-        if(!successful) {
+        if (!successful) {
           return false;
         }
 
@@ -342,7 +338,7 @@ public class StringFormat {
     }
 
     private boolean checkParserState() {
-      if(state != FieldParseState.FINISHED) {
+      if (state != FieldParseState.FINISHED) {
         parent.reportIssue(SYNTAX_ERROR_MESSAGE);
         return false;
       }
@@ -351,7 +347,7 @@ public class StringFormat {
 
     private boolean tryParseFormatSpecifier(char current) {
       if (current == '{') {
-        if(!tryParsingNestedField()) {
+        if (!tryParsingNestedField()) {
           return false;
         }
       } else if (current == '}') {
@@ -362,7 +358,7 @@ public class StringFormat {
     }
 
     private boolean tryParsingNestedField() {
-      if(this.nesting > 0) {
+      if (this.nesting > 0) {
         parent.reportIssue("Fix this formatted string's syntax; Deep nesting is not allowed.");
         return false;
       }
@@ -430,7 +426,6 @@ public class StringFormat {
       parent.addField(currentFieldName);
     }
   }
-
 
   public static Optional<StringFormat> createFromStrFormatStyle(Consumer<String> issueReporter, String value) {
     // Format -> '{' [FieldName] ['!' Conversion] [':' FormatSpec*] '}'
@@ -526,7 +521,8 @@ public class StringFormat {
     }
 
     // No case for '%s', '%r' and '%a' - anything can be formatted with those.
-    return (ctx, expression) -> {};
+    return (ctx, expression) -> {
+    };
   }
 
   private static boolean cannotBeOfType(Expression expression, String... types) {
