@@ -64,8 +64,9 @@ def get_unverified_header_compliant(token: str, keys):
     header = jwt.get_unverified_header(token)  # Compliant: only "kid" is accessed
     kid = header.get("kid")
 
-    jwt.get_unverified_header(token).get("x5u")  # Compliant
+    x5u = jwt.get_unverified_header(token).get("x5u")  # Compliant
 
+    x5t  = jwt.get_unverified_header(token)["x5t"]  # Compliant
     header = jwt.get_unverified_header(token) # Compliant
     jku = header["jku"]
     key = keys[jku]
