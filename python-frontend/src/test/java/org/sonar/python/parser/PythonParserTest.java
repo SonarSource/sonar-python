@@ -19,6 +19,7 @@
  */
 package org.sonar.python.parser;
 
+import com.sonar.sslr.api.RecognitionException;
 import java.io.File;
 import java.nio.file.Files;
 import java.util.Collection;
@@ -27,6 +28,8 @@ import org.junit.jupiter.api.Test;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class PythonParserTest {
 
@@ -41,6 +44,21 @@ class PythonParserTest {
       String fileContent = new String(Files.readAllBytes(file.toPath()), UTF_8);
       assertDoesNotThrow(() -> parser.parse(fileContent));
     }
+  }
+
+  @Test
+  void test_lexing_exception() {
+    RecognitionException ex = assertThrows(RecognitionException.class, () -> parser.parse("""
+      f'{�'
+      def:
+      """));
+
+    assertEquals(0, ex.getLine());
+    assertEquals("""
+      Lexer error: Unable to lex string source code "f'{�'
+      def:
+      "\
+      """, ex.getMessage());
   }
 
   private static Collection<File> listFiles(String folderName) {

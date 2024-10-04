@@ -21,9 +21,11 @@ package org.sonar.python.parser;
 
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Grammar;
+import com.sonar.sslr.api.RecognitionException;
 import com.sonar.sslr.api.Rule;
 import com.sonar.sslr.api.Token;
 import com.sonar.sslr.impl.Lexer;
+import com.sonar.sslr.impl.LexerException;
 import com.sonar.sslr.impl.Parser;
 import com.sonar.sslr.impl.matcher.RuleDefinition;
 import java.util.ArrayList;
@@ -85,10 +87,14 @@ public final class PythonParser {
 
     @Override
     public AstNode parse(String source) {
-      lexerState.reset();
-      lexer.lex(source);
-      List<Token> tokens = tokens();
-      return super.parse(tokens);
+      try {
+        lexerState.reset();
+        lexer.lex(source);
+        List<Token> tokens = tokens();
+        return super.parse(tokens);
+      } catch (LexerException e) {
+        throw new RecognitionException(e);
+      }
     }
 
     private List<Token> tokens() {

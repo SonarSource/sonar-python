@@ -40,6 +40,7 @@ import org.sonar.api.SonarProduct;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.TextRange;
 import org.sonar.api.batch.sensor.SensorContext;
+import org.sonar.api.batch.sensor.error.NewAnalysisError;
 import org.sonar.api.batch.sensor.issue.NewIssue;
 import org.sonar.api.batch.sensor.issue.NewIssueLocation;
 import org.sonar.api.issue.NoSonarFilter;
@@ -122,21 +123,26 @@ public class PythonScanner extends Scanner {
     } catch (RecognitionException e) {
       visitorContext = new PythonVisitorContext(pythonFile, e, context.runtime().getProduct());
 
-      var line = (inputFile.kind() == PythonInputFile.Kind.IPYTHON) ? ((GeneratedIPythonFile) inputFile).locationMap().get(e.getLine()).line() : e.getLine();
+      var line = (inputFile.kind() == PythonInputFile.Kind.IPYTHON) ?
+        ((GeneratedIPythonFile) inputFile).locationMap().get(e.getLine()).line() : e.getLine();
       var newMessage = e.getMessage().replace("line " + e.getLine(), "line " + line);
 
-      LOG.error("Unable to parse file: " + inputFile);
+      LOG.error("Unable to parse file: {}", inputFile);
       LOG.error(newMessage);
-      context.newAnalysisError()
+
+      NewAnalysisError analysisError = context.newAnalysisError()
         .onFile(inputFile.wrappedFile())
-        .at(inputFile.wrappedFile().newPointer(line, 0))
-        .message(newMessage)
-        .save();
+        .message(newMessage);
+
+      if (line > 0) {
+        analysisError.at(inputFile.wrappedFile().newPointer(line, 0));
+      }
+      analysisError.save();
     }
     List<PythonSubscriptionCheck> checksBasedOnTree = new ArrayList<>();
     for (PythonCheck check : checks.all()) {
       if (!isCheckApplicable(check, fileType)
-        || checksExecutedWithoutParsingByFiles.getOrDefault(inputFile, Collections.emptySet()).contains(check)) {
+          || checksExecutedWithoutParsingByFiles.getOrDefault(inputFile, Collections.emptySet()).contains(check)) {
         continue;
       }
       if (check instanceof PythonSubscriptionCheck pythonSubscriptionCheck) {
@@ -155,11 +161,12 @@ public class PythonScanner extends Scanner {
   }
 
   private static PythonTreeMaker getTreeMaker(PythonInputFile inputFile) {
-    return Python.KEY.equals(inputFile.wrappedFile().language()) ? new PythonTreeMaker() : new IPythonTreeMaker(getOffsetLocations(inputFile));
+    return Python.KEY.equals(inputFile.wrappedFile().language()) ? new PythonTreeMaker() :
+      new IPythonTreeMaker(getOffsetLocations(inputFile));
   }
 
   private static Map<Integer, IPythonLocation> getOffsetLocations(PythonInputFile inputFile) {
-    if(inputFile.kind() == PythonInputFile.Kind.IPYTHON){
+    if (inputFile.kind() == PythonInputFile.Kind.IPYTHON) {
       return ((GeneratedIPythonFile) inputFile).locationMap();
     }
     return Map.of();
@@ -180,7 +187,8 @@ public class PythonScanner extends Scanner {
         continue;
       }
       PythonFile pythonFile = SonarQubePythonFile.create(inputFile.wrappedFile());
-      PythonInputFileContext inputFileContext = new PythonInputFileContext(pythonFile, context.fileSystem().workDir(), indexer.cacheContext(), context.runtime().getProduct());
+      PythonInputFileContext inputFileContext = new PythonInputFileContext(pythonFile, context.fileSystem().workDir(),
+        indexer.cacheContext(), context.runtime().getProduct());
       if (check.scanWithoutParsing(inputFileContext)) {
         Set<PythonCheck> executedChecks = checksExecutedWithoutParsingByFiles.getOrDefault(inputFile, new HashSet<>());
         executedChecks.add(check);
@@ -238,7 +246,8 @@ public class PythonScanner extends Scanner {
 
   @Override
   protected void reportStatistics(int numSkippedFiles, int numTotalFiles) {
-    LOG.info("The Python analyzer was able to leverage cached data from previous analyses for {} out of {} files. These files were not parsed.",
+    LOG.info("The Python analyzer was able to leverage cached data from previous analyses for {} out of {} files. These files were not " +
+             "parsed.",
       numSkippedFiles, numTotalFiles);
   }
 
@@ -285,8 +294,9 @@ public class PythonScanner extends Scanner {
 
   @CheckForNull
   private InputFile component(String fileId, SensorContext sensorContext) {
-    InputFile inputFile = Optional.ofNullable(sensorContext.fileSystem().inputFile(sensorContext.fileSystem().predicates().is(new File(fileId))))
-      .orElseGet(() -> indexer.getFileWithId(fileId));
+    InputFile inputFile =
+      Optional.ofNullable(sensorContext.fileSystem().inputFile(sensorContext.fileSystem().predicates().is(new File(fileId))))
+        .orElseGet(() -> indexer.getFileWithId(fileId));
     if (inputFile == null) {
       LOG.debug("Failed to find InputFile for {}", fileId);
     }
@@ -301,7 +311,8 @@ public class PythonScanner extends Scanner {
       if (location.startLineOffset() == IssueLocation.UNDEFINED_OFFSET) {
         range = inputFile.wrappedFile().selectLine(location.startLine());
       } else {
-        range = inputFile.wrappedFile().newRange(location.startLine(), location.startLineOffset(), location.endLine(), location.endLineOffset());
+        range = inputFile.wrappedFile().newRange(location.startLine(), location.startLineOffset(), location.endLine(),
+          location.endLineOffset());
       }
       newLocation.at(range);
     }
@@ -396,6 +407,7 @@ public class PythonScanner extends Scanner {
   }
 
   private static TextRange rangeFromTextSpan(InputFile file, PythonTextEdit pythonTextEdit) {
-    return file.newRange(pythonTextEdit.startLine(), pythonTextEdit.startLineOffset(), pythonTextEdit.endLine(), pythonTextEdit.endLineOffset());
+    return file.newRange(pythonTextEdit.startLine(), pythonTextEdit.startLineOffset(), pythonTextEdit.endLine(),
+      pythonTextEdit.endLineOffset());
   }
 }
