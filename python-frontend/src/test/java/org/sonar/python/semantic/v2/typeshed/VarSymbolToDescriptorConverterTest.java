@@ -60,4 +60,47 @@ class VarSymbolToDescriptorConverterTest {
     Assertions.assertThat(descriptor.annotatedType()).isEqualTo("int");
   }
 
+  @Test
+  void test_typed_dict_exception() {
+    var converter = new VarSymbolToDescriptorConverter();
+    var symbol = SymbolsProtos.VarSymbol.newBuilder()
+      .setName("TypedDict")
+      .setFullyQualifiedName("typing.TypedDict")
+      .setTypeAnnotation(SymbolsProtos.Type.newBuilder()
+        .setFullyQualifiedName("something")
+        .build())
+      .build();
+
+    var descriptor = (VariableDescriptor) converter.convert(symbol);
+    Assertions.assertThat(descriptor.name()).isEqualTo("TypedDict");
+    Assertions.assertThat(descriptor.fullyQualifiedName()).isEqualTo("typing.TypedDict");
+    Assertions.assertThat(descriptor.annotatedType()).isNull();
+
+    symbol = SymbolsProtos.VarSymbol.newBuilder()
+      .setName("TypedDict")
+      .setFullyQualifiedName("typing_extensions.TypedDict")
+      .setTypeAnnotation(SymbolsProtos.Type.newBuilder()
+        .setFullyQualifiedName("something")
+        .build())
+      .build();
+
+    descriptor = (VariableDescriptor) converter.convert(symbol);
+    Assertions.assertThat(descriptor.name()).isEqualTo("TypedDict");
+    Assertions.assertThat(descriptor.fullyQualifiedName()).isEqualTo("typing_extensions.TypedDict");
+    Assertions.assertThat(descriptor.annotatedType()).isNull();
+
+    symbol = SymbolsProtos.VarSymbol.newBuilder()
+      .setName("TypedDict")
+      .setFullyQualifiedName("unrelated.TypedDict")
+      .setTypeAnnotation(SymbolsProtos.Type.newBuilder()
+        .setFullyQualifiedName("something")
+        .build())
+      .build();
+
+    descriptor = (VariableDescriptor) converter.convert(symbol);
+    Assertions.assertThat(descriptor.name()).isEqualTo("TypedDict");
+    Assertions.assertThat(descriptor.fullyQualifiedName()).isEqualTo("unrelated.TypedDict");
+    Assertions.assertThat(descriptor.annotatedType()).isEqualTo("something");
+  }
+
 }

@@ -28,7 +28,15 @@ public class VarSymbolToDescriptorConverter {
   public Descriptor convert(SymbolsProtos.VarSymbol varSymbol) {
     var fullyQualifiedName = TypeShedUtils.normalizedFqn(varSymbol.getFullyQualifiedName());
     var typeAnnotation = TypeShedUtils.getTypesNormalizedFqn(varSymbol.getTypeAnnotation());
+    if (isTypeAnnotationKnownToBeIncorrect(fullyQualifiedName)) {
+      return new VariableDescriptor(varSymbol.getName(), fullyQualifiedName, null);
+    }
     return new VariableDescriptor(varSymbol.getName(), fullyQualifiedName, typeAnnotation);
+  }
+
+  private static boolean isTypeAnnotationKnownToBeIncorrect(String fullyQualifiedName) {
+    // TypedDict is defined to have type "object" in Typeshed, which is incorrect and leads to FPs
+    return "typing.TypedDict".equals(fullyQualifiedName) || "typing_extensions.TypedDict".equals(fullyQualifiedName);
   }
 
 }
