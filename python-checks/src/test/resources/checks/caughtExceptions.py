@@ -86,3 +86,10 @@ def reassigned_exception():
         ...
     except my_exception:
         ...
+
+
+def except_type():
+    try:
+        raise smth
+    except type(smth) as e:
+        ...
