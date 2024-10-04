@@ -38,7 +38,6 @@ import org.sonar.python.semantic.ClassSymbolImpl;
 import org.sonar.python.semantic.FunctionSymbolImpl;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.semantic.v2.converter.AnyDescriptorToPythonTypeConverter;
-import org.sonar.python.semantic.v2.typeshed.TypeShedDescriptorsProvider;
 import org.sonar.python.types.InferredTypes;
 import org.sonar.python.types.protobuf.SymbolsProtos;
 import org.sonar.python.types.v2.ClassType;
@@ -59,16 +58,14 @@ public class SymbolsModuleTypeProvider {
   private final ProjectLevelSymbolTable projectLevelSymbolTable;
   private final ModuleType rootModule;
   private final LazyTypesContext lazyTypesContext;
-  private final TypeShedDescriptorsProvider typeShedDescriptorsProvider;
   private final AnyDescriptorToPythonTypeConverter anyDescriptorToPythonTypeConverter;
 
   public SymbolsModuleTypeProvider(ProjectLevelSymbolTable projectLevelSymbolTable, LazyTypesContext lazyTypeContext) {
     this.projectLevelSymbolTable = projectLevelSymbolTable;
     this.lazyTypesContext = lazyTypeContext;
-    this.typeShedDescriptorsProvider = new TypeShedDescriptorsProvider(projectLevelSymbolTable.projectBasePackages());
     this.anyDescriptorToPythonTypeConverter = new AnyDescriptorToPythonTypeConverter(lazyTypesContext);
 
-    var rootModuleMembers = typeShedDescriptorsProvider.builtinDescriptors()
+    var rootModuleMembers = projectLevelSymbolTable.typeShedDescriptorsProvider().builtinDescriptors()
       .entrySet()
       .stream()
       .collect(Collectors.toMap(Map.Entry::getKey, e -> anyDescriptorToPythonTypeConverter.convert(e.getValue())));
@@ -100,7 +97,7 @@ public class SymbolsModuleTypeProvider {
   }
 
   private Optional<ModuleType> createModuleTypeFromTypeShed(String moduleName, String moduleFqn, ModuleType parent) {
-    var moduleMembers = typeShedDescriptorsProvider.descriptorsForModule(moduleFqn)
+    var moduleMembers = projectLevelSymbolTable.typeShedDescriptorsProvider().descriptorsForModule(moduleFqn)
       .entrySet().stream()
       .collect(Collectors.toMap(Map.Entry::getKey, e -> anyDescriptorToPythonTypeConverter.convert(e.getValue())));
     return Optional.of(moduleMembers).filter(m -> !m.isEmpty())
