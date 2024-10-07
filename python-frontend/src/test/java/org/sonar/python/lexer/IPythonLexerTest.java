@@ -30,7 +30,6 @@ import static com.sonar.sslr.test.lexer.LexerMatchers.hasToken;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.not;
 
-
 class IPythonLexerTest {
   private static TestLexer lexer;
 
@@ -50,9 +49,19 @@ class IPythonLexerTest {
   }
 
   @Test
-  void cellDelimiterTest() {
+  void sonarLintVSCodeCellDelimiterTest() {
     assertThat(lexer.lex("foo\n#SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER"), hasToken(PythonTokenType.IPYNB_CELL_DELIMITER));
     assertThat(lexer.lex("foo #SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER"), not(hasToken(PythonTokenType.IPYNB_CELL_DELIMITER)));
     assertThat(lexer.lex("if cond:\n  foo()\n#SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER"), hasToken(PythonTokenType.DEDENT));
+  }
+
+  @Test
+  void cellDelimiterTest() {
+    assertThat(lexer.lex("#%%\ndef foo():\n    pass\n#%%"), hasToken(PythonTokenType.IPYNB_CELL_DELIMITER));
+    assertThat(lexer.lex("#%% md\nthis is text ="), hasToken(PythonTokenType.IPYNB_CELL_DELIMITER));
+    assertThat(lexer.lex("foo\n#%%"), hasToken(PythonTokenType.IPYNB_CELL_DELIMITER));
+    assertThat(lexer.lex("foo\n# %%"), hasToken(PythonTokenType.IPYNB_CELL_DELIMITER));
+    assertThat(lexer.lex("foo #%% md"), not(hasToken(PythonTokenType.IPYNB_CELL_DELIMITER)));
+    assertThat(lexer.lex("if cond:\n  foo()\n# %% [markdown]"), hasToken(PythonTokenType.DEDENT));
   }
 }

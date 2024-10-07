@@ -30,7 +30,8 @@ import org.sonar.sslr.channel.CodeReader;
 public class IPynbCellDelimiterChannel extends Channel<Lexer> {
 
   private final StringBuilder tmpBuilder = new StringBuilder();
-  private final Matcher matcher = Pattern.compile("#SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER").matcher("");
+  private final Matcher sonarLintVSCodeCellDelimiter = Pattern.compile("#SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER").matcher("");
+  private final Matcher cellDelimiter = Pattern.compile("#\\h?%%(\\h+\\w+)?").matcher("");
   private final Token.Builder tokenBuilder = Token.builder();
   private final LexerState lexerState;
 
@@ -44,7 +45,7 @@ public class IPynbCellDelimiterChannel extends Channel<Lexer> {
       // Cell delimiters must be at the beginning of a line
       return false;
     }
-    if (code.popTo(matcher, tmpBuilder) > 0) {
+    if (code.popTo(sonarLintVSCodeCellDelimiter, tmpBuilder) > 0 || code.popTo(cellDelimiter, tmpBuilder) > 0) {
       resetIndentationLevel(code, lexer);
       String value = tmpBuilder.toString();
 
