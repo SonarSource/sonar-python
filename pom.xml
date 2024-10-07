@@ -87,7 +87,8 @@
     <commons.lang.version>2.6</commons.lang.version>
     <assertj-core.version>3.26.3</assertj-core.version>
     <junit.version>5.11.1</junit.version>
-    <logback.version>1.2.13</logback.version>
+    <logback.version>1.5.8</logback.version>
+    <slf4j.version>2.0.16</slf4j.version>
     <maven.project.version>2.2.1</maven.project.version>
     <mockito.version>4.11.0</mockito.version>
     <!--
@@ -157,6 +158,11 @@
         <groupId>com.google.code.gson</groupId>
         <artifactId>gson</artifactId>
         <version>${gson.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-api</artifactId>
+        <version>${slf4j.version}</version>
       </dependency>
       <!-- used by StaxParser, CoberturaParser and TestSuiteParser -->
       <dependency>
