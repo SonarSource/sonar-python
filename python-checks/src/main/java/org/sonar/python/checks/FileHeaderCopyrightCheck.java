@@ -64,13 +64,13 @@ public class FileHeaderCopyrightCheck extends PythonSubscriptionCheck {
         }
       }
 
+      if(headerFormat.isEmpty()) {
+        return;
+      }
+
       String header = getHeaderText(ctx);
       String fileContent = ctx.pythonFile().content();
       var fileContentWithoutShebang = shebangPattern.matcher(fileContent).replaceFirst("");
-
-      if(fileContentWithoutShebang.isEmpty()) {
-        return;
-      }
 
       if (header == null && !fileContentWithoutShebang.startsWith("#")) {
         ctx.addFileIssue(ADD_HEADER_MESSAGE);

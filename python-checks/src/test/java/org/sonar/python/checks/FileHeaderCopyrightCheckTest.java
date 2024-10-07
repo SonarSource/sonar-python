@@ -22,14 +22,18 @@ package org.sonar.python.checks;
 import java.io.File;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 import org.assertj.core.api.Assertions;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
+import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.PythonVisitorContext;
 import org.sonar.python.SubscriptionVisitor;
 import org.sonar.python.TestPythonVisitorRunner;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class FileHeaderCopyrightCheckTest {
 
@@ -55,6 +59,7 @@ class FileHeaderCopyrightCheckTest {
   void test_NoCopyright() {
     PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/fileHeaderCopyright/headerNoCopyright.py", new FileHeaderCopyrightCheck());
     PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/fileHeaderCopyright/emptyFileNoCopyright.py", new FileHeaderCopyrightCheck());
+    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/fileHeaderCopyright/emptyFileWithLineBreakNoCopyright.py", new FileHeaderCopyrightCheck());
   }
 
 
@@ -108,6 +113,9 @@ class FileHeaderCopyrightCheckTest {
        Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
       ""\"""";
     PythonCheckVerifier.verify("src/test/resources/checks/fileHeaderCopyright/docstringNonCompliant.py", fileHeaderCopyrightCheck);
+
+    List<PythonCheck.PreciseIssue> issues = PythonCheckVerifier.issues("src/test/resources/checks/fileHeaderCopyright/emptyFileNoCopyright.py", fileHeaderCopyrightCheck);
+    assertEquals(1, issues.size());
   }
 
   @Test
@@ -118,8 +126,10 @@ class FileHeaderCopyrightCheckTest {
     PythonCheckVerifier.verify("src/test/resources/checks/fileHeaderCopyright/copyrightNonCompliant.py", fileHeaderCopyrightCheck);
     PythonCheckVerifier.verify("src/test/resources/checks/fileHeaderCopyright/searchPatternNonCompliant.py", fileHeaderCopyrightCheck);
     PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/fileHeaderCopyright/searchPattern.py", fileHeaderCopyrightCheck);
-    fileHeaderCopyrightCheck.headerFormat = "";
-    PythonCheckVerifier.verify("src/test/resources/checks/fileHeaderCopyright/searchPatternNonCompliant.py", fileHeaderCopyrightCheck);
+
+    List<PythonCheck.PreciseIssue> issues = PythonCheckVerifier.issues("src/test/resources/checks/fileHeaderCopyright/emptyFileNoCopyright.py",
+      fileHeaderCopyrightCheck);
+    assertEquals(1, issues.size());
   }
 
   @Test
