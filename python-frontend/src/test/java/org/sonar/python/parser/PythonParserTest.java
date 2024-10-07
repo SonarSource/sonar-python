@@ -48,7 +48,6 @@ class PythonParserTest {
     return FileUtils.listFiles(dir, new String[]{"py"}, true);
   }
 
-
   @Test
   void test_notebook() throws Exception {
     Collection<File> files = listFiles("notebooks");
