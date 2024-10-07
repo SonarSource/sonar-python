@@ -122,6 +122,29 @@ class TokenEnricherTest {
   }
 
   @Test
+  void shouldComputeTabColCorrectly() {
+    var code = "\ta";
+    var expectedTokens = lexer.lex(code);
+    var escapedChars = new LinkedHashMap<Integer, Integer>();
+    escapedChars.put(0, 301);
+    var tokens = TokenEnricher.enrichTokens(expectedTokens, Map.of(1, new IPythonLocation(100, 300, escapedChars)));
+    var tabToken = tokens.get(0);
+    assertThat(tabToken.line()).isEqualTo(100);
+    assertThat(tabToken.column()).isEqualTo(300);
+    assertThat(tabToken.includedEscapeChars()).isEqualTo(1);
+
+    var idToken = tokens.get(1);
+    assertThat(idToken.line()).isEqualTo(100);
+    assertThat(idToken.column()).isEqualTo(301);
+    assertThat(idToken.includedEscapeChars()).isZero();
+
+    var eofToken = tokens.get(2);
+    assertThat(eofToken.line()).isEqualTo(100);
+    assertThat(eofToken.column()).isEqualTo(302);
+    assertThat(eofToken.includedEscapeChars()).isZero();
+  }
+
+  @Test
   void shouldComputeColCorrectlyForTrivia() {
     var code = "a = 3 # comment";
     var expectedTokens = lexer.lex(code);
