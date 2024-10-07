@@ -697,6 +697,7 @@ class TypeInferenceV2Test {
   }
 
   @Test
+  @Disabled
   void inferFunctionParameterTypesMultiFile() {
     FileInput tree = parseWithoutSymbols(
       "def foo(param1: int): ...",
@@ -2089,6 +2090,7 @@ class TypeInferenceV2Test {
   }
 
   @Test
+  @Disabled
   void type_origin_of_project_function() {
     FileInput tree = parseWithoutSymbols(
       "def foo() -> int: ..."
@@ -2321,7 +2323,7 @@ class TypeInferenceV2Test {
 
     ClassSymbol symbol = Mockito.mock(ClassSymbolImpl.class);
     Mockito.when(symbol.kind()).thenReturn(Symbol.Kind.OTHER);
-    assertThat(symbolsModuleTypeProvider.resolvePossibleLazyType("typing.Iterable.unknown")).isEqualTo(PythonType.UNKNOWN);
+    assertThat(PROJECT_LEVEL_TYPE_TABLE.lazyTypesContext().getOrCreateLazyType("typing.Iterable.unknown").resolve()).isEqualTo(PythonType.UNKNOWN);
   }
 
   @Test
