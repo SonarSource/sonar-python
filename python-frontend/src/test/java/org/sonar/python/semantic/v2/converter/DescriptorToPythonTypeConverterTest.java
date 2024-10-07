@@ -41,6 +41,7 @@ import org.sonar.python.types.v2.Member;
 import org.sonar.python.types.v2.ObjectType;
 import org.sonar.python.types.v2.ParameterV2;
 import org.sonar.python.types.v2.PythonType;
+import org.sonar.python.types.v2.TypeOrigin;
 import org.sonar.python.types.v2.TypeWrapper;
 import org.sonar.python.types.v2.UnionType;
 
@@ -59,7 +60,7 @@ class DescriptorToPythonTypeConverterTest {
   @Test
   void ambiguousDescriptorConversionTest() {
     var lazyTypesContext = Mockito.mock(LazyTypesContext.class);
-    var converter = new AnyDescriptorToPythonTypeConverter(lazyTypesContext);
+    var converter = new AnyDescriptorToPythonTypeConverter(lazyTypesContext, TypeOrigin.LOCAL);
 
     var descriptorAlternative1 = Mockito.mock(FunctionDescriptor.class);
 
@@ -118,7 +119,7 @@ class DescriptorToPythonTypeConverterTest {
   @Test
   void classDescriptorConversionTest() {
     var lazyTypesContext = Mockito.mock(LazyTypesContext.class);
-    var converter = new AnyDescriptorToPythonTypeConverter(lazyTypesContext);
+    var converter = new AnyDescriptorToPythonTypeConverter(lazyTypesContext, TypeOrigin.LOCAL);
     var descriptor = Mockito.mock(ClassDescriptor.class);
 
     var parentClassName = "Parent";
@@ -156,7 +157,7 @@ class DescriptorToPythonTypeConverterTest {
   @Test
   void functionDescriptorConversionTest() {
     var lazyTypesContext = Mockito.mock(LazyTypesContext.class);
-    var converter = new AnyDescriptorToPythonTypeConverter(lazyTypesContext);
+    var converter = new AnyDescriptorToPythonTypeConverter(lazyTypesContext, TypeOrigin.LOCAL);
     var descriptor = Mockito.mock(FunctionDescriptor.class);
 
     var returnTypeName = "Returned";
@@ -206,7 +207,7 @@ class DescriptorToPythonTypeConverterTest {
   @Test
   void variableDescriptorConversionTest() {
     var lazyTypesContext = Mockito.mock(LazyTypesContext.class);
-    var converter = new AnyDescriptorToPythonTypeConverter(lazyTypesContext);
+    var converter = new AnyDescriptorToPythonTypeConverter(lazyTypesContext, TypeOrigin.LOCAL);
     var descriptor = Mockito.mock(VariableDescriptor.class);
 
     var variableTypeName = "Returned";

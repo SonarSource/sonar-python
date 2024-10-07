@@ -24,25 +24,29 @@ import java.util.Map;
 import org.sonar.python.index.Descriptor;
 import org.sonar.python.semantic.v2.LazyTypesContext;
 import org.sonar.python.types.v2.PythonType;
+import org.sonar.python.types.v2.TypeOrigin;
 
 public class AnyDescriptorToPythonTypeConverter {
 
   private static final DescriptorToPythonTypeConverter UNKNOWN_DESCRIPTOR_CONVERTER = new UnknownDescriptorToPythonTypeConverter();
   private final Map<Descriptor.Kind, DescriptorToPythonTypeConverter> converters;
   private final LazyTypesContext lazyTypesContext;
+  private final TypeOrigin typeOrigin;
 
-  public AnyDescriptorToPythonTypeConverter(LazyTypesContext lazyTypesContext) {
+  public AnyDescriptorToPythonTypeConverter(LazyTypesContext lazyTypesContext, TypeOrigin typeOrigin) {
     this.lazyTypesContext = lazyTypesContext;
+    this.typeOrigin = typeOrigin;
     converters = new EnumMap<>(Map.of(
       Descriptor.Kind.CLASS, new ClassDescriptorToPythonTypeConverter(),
       Descriptor.Kind.FUNCTION, new FunctionDescriptorToPythonTypeConverter(),
       Descriptor.Kind.VARIABLE, new VariableDescriptorToPythonTypeConverter(),
       Descriptor.Kind.AMBIGUOUS, new AmbiguousDescriptorToPythonTypeConverter()
     ));
+
   }
 
   public PythonType convert(Descriptor from) {
-    var ctx = new ConversionContext(lazyTypesContext, this::convert);
+    var ctx = new ConversionContext(lazyTypesContext, this::convert, typeOrigin);
     return convert(ctx, from);
   }
 
