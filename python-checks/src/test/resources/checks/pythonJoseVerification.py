@@ -221,3 +221,52 @@ x = []
 class TestInfiniteRecursion():
     x = x
     payload = jwt.decode(token, None, options=x)
+
+def pyjwt_decode_unverified_header(token):
+    return jwt.get_unverified_header(token) # Noncompliant
+
+def get_unverified_header_access(token:str):
+    header = jwt.get_unverified_header(token)  # Noncompliant
+    print(f"Extra data in header: {header['extra']}")
+
+def get_unverified_header_return(token: str) -> Dict[str, str]:
+    header = jwt.get_unverified_header(token)  # Noncompliant
+    return header
+
+def get_unverified_header_sanity_checks(token: str, some_object) -> Dict[str, str]:
+    other = header = jwt.get_unverified_header(token)  # Noncompliant
+    other.get("kid")
+
+    some_object[0] = jwt.get_unverified_header(token)  # Noncompliant
+    header = jwt.get_unverified_header(token)  # Noncompliant
+    header.test("kid")
+    header.get
+    header.get()
+    header[slice(12)]
+    return header
+
+def get_unverified_header_used(token: str, do_other_things_with):
+    header = jwt.get_unverified_header(token)  # Noncompliant
+    return do_other_things_with(header)
+
+def get_unverified_header_disallowed_access(token: str):
+    header = jwt.get_unverified_header(token)  # Noncompliant
+    kid = header.get("kid")
+    not_kid = header.get("extra")
+
+    header = jwt.get_unverified_header(token)  # Noncompliant
+    kid = header.get("kid")
+    not_kid = header["extra"]
+
+def get_unverified_header_compliant(token: str, keys):
+    header = jwt.get_unverified_header(token)  # Compliant: only "kid" is accessed
+    kid = header.get("kid")
+
+    x5u = jwt.get_unverified_header(token).get("x5u")  # Compliant
+
+    x5t  = jwt.get_unverified_header(token)["x5t"]  # Compliant
+    header = jwt.get_unverified_header(token) # Compliant
+    jku = header["jku"]
+    key = keys[jku]
+    claims = jwt.decode(token, key, algorithms=["HS256"])
+    return claims
