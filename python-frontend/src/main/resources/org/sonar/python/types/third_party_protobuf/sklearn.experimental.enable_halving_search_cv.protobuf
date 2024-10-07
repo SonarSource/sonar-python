@@ -1,5 +1,204 @@
 
--sklearn.experimental.enable_halving_search_cvêd
+-sklearn.experimental.enable_halving_search_cv◊\
+HalvingGridSearchCVFsklearn.model_selection._search_successive_halving.HalvingGridSearchCV"Hsklearn.model_selection._search_successive_halving.BaseSuccessiveHalving*˚?
+__init__Osklearn.model_selection._search_successive_halving.HalvingGridSearchCV.__init__"
+None*õ
+selfê
+Fsklearn.model_selection._search_successive_halving.HalvingGridSearchCV"Fsklearn.model_selection._search_successive_halving.HalvingGridSearchCV*æ
+	estimatorÆ
+:Union[sklearn.base.BaseEstimator,sklearn.svm._classes.SVC]8
+sklearn.base.BaseEstimator"sklearn.base.BaseEstimator4
+sklearn.svm._classes.SVC"sklearn.svm._classes.SVC*ä
+
+param_grid˘
+îUnion[typing.Mapping[Any,Any],builtins.dict[builtins.str,builtins.list[Union[builtins.int,builtins.float]]],typing.Sequence[builtins.dict[Any,Any]]];
+typing.Mapping[Any,Any]
+Any
+Any"typing.Mapping©
+Mbuiltins.dict[builtins.str,builtins.list[Union[builtins.int,builtins.float]]]
+builtins.str"builtins.str™
+1builtins.list[Union[builtins.int,builtins.float]]f
+"Union[builtins.int,builtins.float]
+builtins.int"builtins.int 
+builtins.float"builtins.float"builtins.list"builtins.dictu
+'typing.Sequence[builtins.dict[Any,Any]]9
+builtins.dict[Any,Any]
+Any
+Any"builtins.dict"typing.Sequence*t
+factorf
+"Union[builtins.float,builtins.int] 
+builtins.float"builtins.float
+builtins.int"builtins.int *,
+resource
+builtins.str"builtins.str *≥
+max_resourcesù
+ÖUnion[builtins.str,TypeAlias[Union[builtins.int,TypeAlias[numpy.signedinteger[numpy._typing._8Bit]],TypeAlias[numpy.signedinteger[numpy._typing._16Bit]],TypeAlias[numpy.signedinteger[numpy._typing._32Bit]],TypeAlias[numpy.signedinteger[numpy._typing._64Bit]]]]]
+builtins.str"builtins.strÚ	
+ÒTypeAlias[Union[builtins.int,TypeAlias[numpy.signedinteger[numpy._typing._8Bit]],TypeAlias[numpy.signedinteger[numpy._typing._16Bit]],TypeAlias[numpy.signedinteger[numpy._typing._32Bit]],TypeAlias[numpy.signedinteger[numpy._typing._64Bit]]]]‰
+ÊUnion[builtins.int,TypeAlias[numpy.signedinteger[numpy._typing._8Bit]],TypeAlias[numpy.signedinteger[numpy._typing._16Bit]],TypeAlias[numpy.signedinteger[numpy._typing._32Bit]],TypeAlias[numpy.signedinteger[numpy._typing._64Bit]]]
+builtins.int"builtins.int∞
+3TypeAlias[numpy.signedinteger[numpy._typing._8Bit]]k
+(numpy.signedinteger[numpy._typing._8Bit]*
+numpy._typing._8Bit"numpy._typing._8Bit"numpy.signedinteger"
+numpy.int8µ
+4TypeAlias[numpy.signedinteger[numpy._typing._16Bit]]n
+)numpy.signedinteger[numpy._typing._16Bit],
+numpy._typing._16Bit"numpy._typing._16Bit"numpy.signedinteger"numpy.int16µ
+4TypeAlias[numpy.signedinteger[numpy._typing._32Bit]]n
+)numpy.signedinteger[numpy._typing._32Bit],
+numpy._typing._32Bit"numpy._typing._32Bit"numpy.signedinteger"numpy.int32µ
+4TypeAlias[numpy.signedinteger[numpy._typing._64Bit]]n
+)numpy.signedinteger[numpy._typing._64Bit],
+numpy._typing._64Bit"numpy._typing._64Bit"numpy.signedinteger"numpy.int64"sklearn._typing.Int *∏
+min_resources¢
+UUnion[builtins.int,Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]
+builtins.int"builtins.int7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str *<
+aggressive_elimination
+builtins.bool"builtins.bool *∂
+cv´
+äUnion[typing.Iterable[Any],builtins.int,sklearn.model_selection._split.BaseShuffleSplit,sklearn.model_selection._split.BaseCrossValidator]0
+typing.Iterable[Any]
+Any"typing.Iterable
+builtins.int"builtins.intb
+/sklearn.model_selection._split.BaseShuffleSplit"/sklearn.model_selection._split.BaseShuffleSplitf
+1sklearn.model_selection._split.BaseCrossValidator"1sklearn.model_selection._split.BaseCrossValidator *¡
+scoring±
+8Union[None,builtins.str,CallableType[builtins.function]]
+None
+builtins.str"builtins.strK
+CallableType[builtins.function]&
+builtins.function"builtins.function *+
+refit
+builtins.bool"builtins.bool *ö	
+error_scoreÜ	
+ƒUnion[builtins.str,TypeAlias[Union[builtins.float,TypeAlias[numpy.floating[numpy._typing._16Bit]],TypeAlias[numpy.floating[numpy._typing._32Bit]],TypeAlias[numpy.floating[numpy._typing._64Bit]]]]]
+builtins.str"builtins.strú
+∞TypeAlias[Union[builtins.float,TypeAlias[numpy.floating[numpy._typing._16Bit]],TypeAlias[numpy.floating[numpy._typing._32Bit]],TypeAlias[numpy.floating[numpy._typing._64Bit]]]]Õ
+•Union[builtins.float,TypeAlias[numpy.floating[numpy._typing._16Bit]],TypeAlias[numpy.floating[numpy._typing._32Bit]],TypeAlias[numpy.floating[numpy._typing._64Bit]]] 
+builtins.float"builtins.float®
+/TypeAlias[numpy.floating[numpy._typing._16Bit]]d
+$numpy.floating[numpy._typing._16Bit],
+numpy._typing._16Bit"numpy._typing._16Bit"numpy.floating"numpy.float16®
+/TypeAlias[numpy.floating[numpy._typing._32Bit]]d
+$numpy.floating[numpy._typing._32Bit],
+numpy._typing._32Bit"numpy._typing._32Bit"numpy.floating"numpy.float32®
+/TypeAlias[numpy.floating[numpy._typing._64Bit]]d
+$numpy.floating[numpy._typing._64Bit],
+numpy._typing._64Bit"numpy._typing._64Bit"numpy.floating"numpy.float64"sklearn._typing.Float *8
+return_train_score
+builtins.bool"builtins.bool *˙
+random_stateÂ
+ùUnion[numpy.random.mtrand.RandomState,None,TypeAlias[Union[builtins.int,TypeAlias[numpy.signedinteger[numpy._typing._8Bit]],TypeAlias[numpy.signedinteger[numpy._typing._16Bit]],TypeAlias[numpy.signedinteger[numpy._typing._32Bit]],TypeAlias[numpy.signedinteger[numpy._typing._64Bit]]]]]B
+numpy.random.mtrand.RandomState"numpy.random.mtrand.RandomState
+NoneÚ	
+ÒTypeAlias[Union[builtins.int,TypeAlias[numpy.signedinteger[numpy._typing._8Bit]],TypeAlias[numpy.signedinteger[numpy._typing._16Bit]],TypeAlias[numpy.signedinteger[numpy._typing._32Bit]],TypeAlias[numpy.signedinteger[numpy._typing._64Bit]]]]‰
+ÊUnion[builtins.int,TypeAlias[numpy.signedinteger[numpy._typing._8Bit]],TypeAlias[numpy.signedinteger[numpy._typing._16Bit]],TypeAlias[numpy.signedinteger[numpy._typing._32Bit]],TypeAlias[numpy.signedinteger[numpy._typing._64Bit]]]
+builtins.int"builtins.int∞
+3TypeAlias[numpy.signedinteger[numpy._typing._8Bit]]k
+(numpy.signedinteger[numpy._typing._8Bit]*
+numpy._typing._8Bit"numpy._typing._8Bit"numpy.signedinteger"
+numpy.int8µ
+4TypeAlias[numpy.signedinteger[numpy._typing._16Bit]]n
+)numpy.signedinteger[numpy._typing._16Bit],
+numpy._typing._16Bit"numpy._typing._16Bit"numpy.signedinteger"numpy.int16µ
+4TypeAlias[numpy.signedinteger[numpy._typing._32Bit]]n
+)numpy.signedinteger[numpy._typing._32Bit],
+numpy._typing._32Bit"numpy._typing._32Bit"numpy.signedinteger"numpy.int32µ
+4TypeAlias[numpy.signedinteger[numpy._typing._64Bit]]n
+)numpy.signedinteger[numpy._typing._64Bit],
+numpy._typing._64Bit"numpy._typing._64Bit"numpy.signedinteger"numpy.int64"sklearn._typing.Int *R
+n_jobsD
+Union[None,builtins.int]
+None
+builtins.int"builtins.int *Ç
+
+verboseÚ	
+ÒTypeAlias[Union[builtins.int,TypeAlias[numpy.signedinteger[numpy._typing._8Bit]],TypeAlias[numpy.signedinteger[numpy._typing._16Bit]],TypeAlias[numpy.signedinteger[numpy._typing._32Bit]],TypeAlias[numpy.signedinteger[numpy._typing._64Bit]]]]‰
+ÊUnion[builtins.int,TypeAlias[numpy.signedinteger[numpy._typing._8Bit]],TypeAlias[numpy.signedinteger[numpy._typing._16Bit]],TypeAlias[numpy.signedinteger[numpy._typing._32Bit]],TypeAlias[numpy.signedinteger[numpy._typing._64Bit]]]
+builtins.int"builtins.int∞
+3TypeAlias[numpy.signedinteger[numpy._typing._8Bit]]k
+(numpy.signedinteger[numpy._typing._8Bit]*
+numpy._typing._8Bit"numpy._typing._8Bit"numpy.signedinteger"
+numpy.int8µ
+4TypeAlias[numpy.signedinteger[numpy._typing._16Bit]]n
+)numpy.signedinteger[numpy._typing._16Bit],
+numpy._typing._16Bit"numpy._typing._16Bit"numpy.signedinteger"numpy.int16µ
+4TypeAlias[numpy.signedinteger[numpy._typing._32Bit]]n
+)numpy.signedinteger[numpy._typing._32Bit],
+numpy._typing._32Bit"numpy._typing._32Bit"numpy.signedinteger"numpy.int32µ
+4TypeAlias[numpy.signedinteger[numpy._typing._64Bit]]n
+)numpy.signedinteger[numpy._typing._64Bit],
+numpy._typing._64Bit"numpy._typing._64Bit"numpy.signedinteger"numpy.int64"sklearn._typing.Int r®
+feature_names_in_Xsklearn.model_selection._search_successive_halving.HalvingGridSearchCV.feature_names_in_9
+numpy.ndarray[Any,Any]
+Any
+Any"numpy.ndarrayrÖ
+n_features_in_Usklearn.model_selection._search_successive_halving.HalvingGridSearchCV.n_features_in_
+builtins.int"builtins.intrñ
+classes_Osklearn.model_selection._search_successive_halving.HalvingGridSearchCV.classes_9
+numpy.ndarray[Any,Any]
+Any
+Any"numpy.ndarrayrÉ
+multimetric_Ssklearn.model_selection._search_successive_halving.HalvingGridSearchCV.multimetric_
+builtins.bool"builtins.boolrÉ
+refit_time_Rsklearn.model_selection._search_successive_halving.HalvingGridSearchCV.refit_time_ 
+builtins.float"builtins.floatr{
+	n_splits_Psklearn.model_selection._search_successive_halving.HalvingGridSearchCV.n_splits_
+builtins.int"builtins.intr•
+scorer_Nsklearn.model_selection._search_successive_halving.HalvingGridSearchCV.scorer_…
+=Union[CallableType[builtins.function],builtins.dict[Any,Any]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function9
+builtins.dict[Any,Any]
+Any
+Any"builtins.dictr
+best_index_Rsklearn.model_selection._search_successive_halving.HalvingGridSearchCV.best_index_
+builtins.int"builtins.intrû
+best_params_Ssklearn.model_selection._search_successive_halving.HalvingGridSearchCV.best_params_9
+builtins.dict[Any,Any]
+Any
+Any"builtins.dictrÉ
+best_score_Rsklearn.model_selection._search_successive_halving.HalvingGridSearchCV.best_score_ 
+builtins.float"builtins.floatrù
+best_estimator_Vsklearn.model_selection._search_successive_halving.HalvingGridSearchCV.best_estimator_±
+8Union[sklearn.base.BaseEstimator,builtins.dict[Any,Any]]8
+sklearn.base.BaseEstimator"sklearn.base.BaseEstimator9
+builtins.dict[Any,Any]
+Any
+Any"builtins.dictrÄ
+cv_results_Rsklearn.model_selection._search_successive_halving.HalvingGridSearchCV.cv_results_ú
+2builtins.dict[builtins.str,numpy.ndarray[Any,Any]]
+builtins.str"builtins.str9
+numpy.ndarray[Any,Any]
+Any
+Any"numpy.ndarray"builtins.dictrï
+n_required_iterations_]sklearn.model_selection._search_successive_halving.HalvingGridSearchCV.n_required_iterations_
+builtins.int"builtins.intrï
+n_possible_iterations_]sklearn.model_selection._search_successive_halving.HalvingGridSearchCV.n_possible_iterations_
+builtins.int"builtins.intrÉ
+n_iterations_Tsklearn.model_selection._search_successive_halving.HalvingGridSearchCV.n_iterations_
+builtins.int"builtins.intrÖ
+min_resources_Usklearn.model_selection._search_successive_halving.HalvingGridSearchCV.min_resources_
+builtins.int"builtins.intrÖ
+max_resources_Usklearn.model_selection._search_successive_halving.HalvingGridSearchCV.max_resources_
+builtins.int"builtins.intró
+n_remaining_candidates_^sklearn.model_selection._search_successive_halving.HalvingGridSearchCV.n_remaining_candidates_
+builtins.int"builtins.intr±
+n_candidates_Tsklearn.model_selection._search_successive_halving.HalvingGridSearchCV.n_candidates_J
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.listrØ
+n_resources_Ssklearn.model_selection._search_successive_halving.HalvingGridSearchCV.n_resources_J
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.listr°
+_required_parameters[sklearn.model_selection._search_successive_halving.HalvingGridSearchCV._required_parameters,
+builtins.list[Any]
+Any"builtins.listêd
 HalvingRandomSearchCVHsklearn.model_selection._search_successive_halving.HalvingRandomSearchCV"Hsklearn.model_selection._search_successive_halving.BaseSuccessiveHalving*ÖG
 __init__Qsklearn.model_selection._search_successive_halving.HalvingRandomSearchCV.__init__"
 None*ü
@@ -202,205 +401,6 @@ numpy.int8µ
 builtins.list[builtins.int]
 builtins.int"builtins.int"builtins.listr£
 _required_parameters]sklearn.model_selection._search_successive_halving.HalvingRandomSearchCV._required_parameters,
-builtins.list[Any]
-Any"builtins.list◊\
-HalvingGridSearchCVFsklearn.model_selection._search_successive_halving.HalvingGridSearchCV"Hsklearn.model_selection._search_successive_halving.BaseSuccessiveHalving*˚?
-__init__Osklearn.model_selection._search_successive_halving.HalvingGridSearchCV.__init__"
-None*õ
-selfê
-Fsklearn.model_selection._search_successive_halving.HalvingGridSearchCV"Fsklearn.model_selection._search_successive_halving.HalvingGridSearchCV*æ
-	estimatorÆ
-:Union[sklearn.base.BaseEstimator,sklearn.svm._classes.SVC]8
-sklearn.base.BaseEstimator"sklearn.base.BaseEstimator4
-sklearn.svm._classes.SVC"sklearn.svm._classes.SVC*ä
-
-param_grid˘
-îUnion[typing.Mapping[Any,Any],builtins.dict[builtins.str,builtins.list[Union[builtins.int,builtins.float]]],typing.Sequence[builtins.dict[Any,Any]]];
-typing.Mapping[Any,Any]
-Any
-Any"typing.Mapping©
-Mbuiltins.dict[builtins.str,builtins.list[Union[builtins.int,builtins.float]]]
-builtins.str"builtins.str™
-1builtins.list[Union[builtins.int,builtins.float]]f
-"Union[builtins.int,builtins.float]
-builtins.int"builtins.int 
-builtins.float"builtins.float"builtins.list"builtins.dictu
-'typing.Sequence[builtins.dict[Any,Any]]9
-builtins.dict[Any,Any]
-Any
-Any"builtins.dict"typing.Sequence*t
-factorf
-"Union[builtins.float,builtins.int] 
-builtins.float"builtins.float
-builtins.int"builtins.int *,
-resource
-builtins.str"builtins.str *≥
-max_resourcesù
-ÖUnion[builtins.str,TypeAlias[Union[builtins.int,TypeAlias[numpy.signedinteger[numpy._typing._8Bit]],TypeAlias[numpy.signedinteger[numpy._typing._16Bit]],TypeAlias[numpy.signedinteger[numpy._typing._32Bit]],TypeAlias[numpy.signedinteger[numpy._typing._64Bit]]]]]
-builtins.str"builtins.strÚ	
-ÒTypeAlias[Union[builtins.int,TypeAlias[numpy.signedinteger[numpy._typing._8Bit]],TypeAlias[numpy.signedinteger[numpy._typing._16Bit]],TypeAlias[numpy.signedinteger[numpy._typing._32Bit]],TypeAlias[numpy.signedinteger[numpy._typing._64Bit]]]]‰
-ÊUnion[builtins.int,TypeAlias[numpy.signedinteger[numpy._typing._8Bit]],TypeAlias[numpy.signedinteger[numpy._typing._16Bit]],TypeAlias[numpy.signedinteger[numpy._typing._32Bit]],TypeAlias[numpy.signedinteger[numpy._typing._64Bit]]]
-builtins.int"builtins.int∞
-3TypeAlias[numpy.signedinteger[numpy._typing._8Bit]]k
-(numpy.signedinteger[numpy._typing._8Bit]*
-numpy._typing._8Bit"numpy._typing._8Bit"numpy.signedinteger"
-numpy.int8µ
-4TypeAlias[numpy.signedinteger[numpy._typing._16Bit]]n
-)numpy.signedinteger[numpy._typing._16Bit],
-numpy._typing._16Bit"numpy._typing._16Bit"numpy.signedinteger"numpy.int16µ
-4TypeAlias[numpy.signedinteger[numpy._typing._32Bit]]n
-)numpy.signedinteger[numpy._typing._32Bit],
-numpy._typing._32Bit"numpy._typing._32Bit"numpy.signedinteger"numpy.int32µ
-4TypeAlias[numpy.signedinteger[numpy._typing._64Bit]]n
-)numpy.signedinteger[numpy._typing._64Bit],
-numpy._typing._64Bit"numpy._typing._64Bit"numpy.signedinteger"numpy.int64"sklearn._typing.Int *∏
-min_resources¢
-UUnion[builtins.int,Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]
-builtins.int"builtins.int7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str7
-Literal[builtins.str]	
-builtins.str"builtins.str *<
-aggressive_elimination
-builtins.bool"builtins.bool *∂
-cv´
-äUnion[typing.Iterable[Any],builtins.int,sklearn.model_selection._split.BaseShuffleSplit,sklearn.model_selection._split.BaseCrossValidator]0
-typing.Iterable[Any]
-Any"typing.Iterable
-builtins.int"builtins.intb
-/sklearn.model_selection._split.BaseShuffleSplit"/sklearn.model_selection._split.BaseShuffleSplitf
-1sklearn.model_selection._split.BaseCrossValidator"1sklearn.model_selection._split.BaseCrossValidator *¡
-scoring±
-8Union[None,builtins.str,CallableType[builtins.function]]
-None
-builtins.str"builtins.strK
-CallableType[builtins.function]&
-builtins.function"builtins.function *+
-refit
-builtins.bool"builtins.bool *ö	
-error_scoreÜ	
-ƒUnion[builtins.str,TypeAlias[Union[builtins.float,TypeAlias[numpy.floating[numpy._typing._16Bit]],TypeAlias[numpy.floating[numpy._typing._32Bit]],TypeAlias[numpy.floating[numpy._typing._64Bit]]]]]
-builtins.str"builtins.strú
-∞TypeAlias[Union[builtins.float,TypeAlias[numpy.floating[numpy._typing._16Bit]],TypeAlias[numpy.floating[numpy._typing._32Bit]],TypeAlias[numpy.floating[numpy._typing._64Bit]]]]Õ
-•Union[builtins.float,TypeAlias[numpy.floating[numpy._typing._16Bit]],TypeAlias[numpy.floating[numpy._typing._32Bit]],TypeAlias[numpy.floating[numpy._typing._64Bit]]] 
-builtins.float"builtins.float®
-/TypeAlias[numpy.floating[numpy._typing._16Bit]]d
-$numpy.floating[numpy._typing._16Bit],
-numpy._typing._16Bit"numpy._typing._16Bit"numpy.floating"numpy.float16®
-/TypeAlias[numpy.floating[numpy._typing._32Bit]]d
-$numpy.floating[numpy._typing._32Bit],
-numpy._typing._32Bit"numpy._typing._32Bit"numpy.floating"numpy.float32®
-/TypeAlias[numpy.floating[numpy._typing._64Bit]]d
-$numpy.floating[numpy._typing._64Bit],
-numpy._typing._64Bit"numpy._typing._64Bit"numpy.floating"numpy.float64"sklearn._typing.Float *8
-return_train_score
-builtins.bool"builtins.bool *˙
-random_stateÂ
-ùUnion[numpy.random.mtrand.RandomState,None,TypeAlias[Union[builtins.int,TypeAlias[numpy.signedinteger[numpy._typing._8Bit]],TypeAlias[numpy.signedinteger[numpy._typing._16Bit]],TypeAlias[numpy.signedinteger[numpy._typing._32Bit]],TypeAlias[numpy.signedinteger[numpy._typing._64Bit]]]]]B
-numpy.random.mtrand.RandomState"numpy.random.mtrand.RandomState
-NoneÚ	
-ÒTypeAlias[Union[builtins.int,TypeAlias[numpy.signedinteger[numpy._typing._8Bit]],TypeAlias[numpy.signedinteger[numpy._typing._16Bit]],TypeAlias[numpy.signedinteger[numpy._typing._32Bit]],TypeAlias[numpy.signedinteger[numpy._typing._64Bit]]]]‰
-ÊUnion[builtins.int,TypeAlias[numpy.signedinteger[numpy._typing._8Bit]],TypeAlias[numpy.signedinteger[numpy._typing._16Bit]],TypeAlias[numpy.signedinteger[numpy._typing._32Bit]],TypeAlias[numpy.signedinteger[numpy._typing._64Bit]]]
-builtins.int"builtins.int∞
-3TypeAlias[numpy.signedinteger[numpy._typing._8Bit]]k
-(numpy.signedinteger[numpy._typing._8Bit]*
-numpy._typing._8Bit"numpy._typing._8Bit"numpy.signedinteger"
-numpy.int8µ
-4TypeAlias[numpy.signedinteger[numpy._typing._16Bit]]n
-)numpy.signedinteger[numpy._typing._16Bit],
-numpy._typing._16Bit"numpy._typing._16Bit"numpy.signedinteger"numpy.int16µ
-4TypeAlias[numpy.signedinteger[numpy._typing._32Bit]]n
-)numpy.signedinteger[numpy._typing._32Bit],
-numpy._typing._32Bit"numpy._typing._32Bit"numpy.signedinteger"numpy.int32µ
-4TypeAlias[numpy.signedinteger[numpy._typing._64Bit]]n
-)numpy.signedinteger[numpy._typing._64Bit],
-numpy._typing._64Bit"numpy._typing._64Bit"numpy.signedinteger"numpy.int64"sklearn._typing.Int *R
-n_jobsD
-Union[None,builtins.int]
-None
-builtins.int"builtins.int *Ç
-
-verboseÚ	
-ÒTypeAlias[Union[builtins.int,TypeAlias[numpy.signedinteger[numpy._typing._8Bit]],TypeAlias[numpy.signedinteger[numpy._typing._16Bit]],TypeAlias[numpy.signedinteger[numpy._typing._32Bit]],TypeAlias[numpy.signedinteger[numpy._typing._64Bit]]]]‰
-ÊUnion[builtins.int,TypeAlias[numpy.signedinteger[numpy._typing._8Bit]],TypeAlias[numpy.signedinteger[numpy._typing._16Bit]],TypeAlias[numpy.signedinteger[numpy._typing._32Bit]],TypeAlias[numpy.signedinteger[numpy._typing._64Bit]]]
-builtins.int"builtins.int∞
-3TypeAlias[numpy.signedinteger[numpy._typing._8Bit]]k
-(numpy.signedinteger[numpy._typing._8Bit]*
-numpy._typing._8Bit"numpy._typing._8Bit"numpy.signedinteger"
-numpy.int8µ
-4TypeAlias[numpy.signedinteger[numpy._typing._16Bit]]n
-)numpy.signedinteger[numpy._typing._16Bit],
-numpy._typing._16Bit"numpy._typing._16Bit"numpy.signedinteger"numpy.int16µ
-4TypeAlias[numpy.signedinteger[numpy._typing._32Bit]]n
-)numpy.signedinteger[numpy._typing._32Bit],
-numpy._typing._32Bit"numpy._typing._32Bit"numpy.signedinteger"numpy.int32µ
-4TypeAlias[numpy.signedinteger[numpy._typing._64Bit]]n
-)numpy.signedinteger[numpy._typing._64Bit],
-numpy._typing._64Bit"numpy._typing._64Bit"numpy.signedinteger"numpy.int64"sklearn._typing.Int r®
-feature_names_in_Xsklearn.model_selection._search_successive_halving.HalvingGridSearchCV.feature_names_in_9
-numpy.ndarray[Any,Any]
-Any
-Any"numpy.ndarrayrÖ
-n_features_in_Usklearn.model_selection._search_successive_halving.HalvingGridSearchCV.n_features_in_
-builtins.int"builtins.intrñ
-classes_Osklearn.model_selection._search_successive_halving.HalvingGridSearchCV.classes_9
-numpy.ndarray[Any,Any]
-Any
-Any"numpy.ndarrayrÉ
-multimetric_Ssklearn.model_selection._search_successive_halving.HalvingGridSearchCV.multimetric_
-builtins.bool"builtins.boolrÉ
-refit_time_Rsklearn.model_selection._search_successive_halving.HalvingGridSearchCV.refit_time_ 
-builtins.float"builtins.floatr{
-	n_splits_Psklearn.model_selection._search_successive_halving.HalvingGridSearchCV.n_splits_
-builtins.int"builtins.intr•
-scorer_Nsklearn.model_selection._search_successive_halving.HalvingGridSearchCV.scorer_…
-=Union[CallableType[builtins.function],builtins.dict[Any,Any]]K
-CallableType[builtins.function]&
-builtins.function"builtins.function9
-builtins.dict[Any,Any]
-Any
-Any"builtins.dictr
-best_index_Rsklearn.model_selection._search_successive_halving.HalvingGridSearchCV.best_index_
-builtins.int"builtins.intrû
-best_params_Ssklearn.model_selection._search_successive_halving.HalvingGridSearchCV.best_params_9
-builtins.dict[Any,Any]
-Any
-Any"builtins.dictrÉ
-best_score_Rsklearn.model_selection._search_successive_halving.HalvingGridSearchCV.best_score_ 
-builtins.float"builtins.floatrù
-best_estimator_Vsklearn.model_selection._search_successive_halving.HalvingGridSearchCV.best_estimator_±
-8Union[sklearn.base.BaseEstimator,builtins.dict[Any,Any]]8
-sklearn.base.BaseEstimator"sklearn.base.BaseEstimator9
-builtins.dict[Any,Any]
-Any
-Any"builtins.dictrÄ
-cv_results_Rsklearn.model_selection._search_successive_halving.HalvingGridSearchCV.cv_results_ú
-2builtins.dict[builtins.str,numpy.ndarray[Any,Any]]
-builtins.str"builtins.str9
-numpy.ndarray[Any,Any]
-Any
-Any"numpy.ndarray"builtins.dictrï
-n_required_iterations_]sklearn.model_selection._search_successive_halving.HalvingGridSearchCV.n_required_iterations_
-builtins.int"builtins.intrï
-n_possible_iterations_]sklearn.model_selection._search_successive_halving.HalvingGridSearchCV.n_possible_iterations_
-builtins.int"builtins.intrÉ
-n_iterations_Tsklearn.model_selection._search_successive_halving.HalvingGridSearchCV.n_iterations_
-builtins.int"builtins.intrÖ
-min_resources_Usklearn.model_selection._search_successive_halving.HalvingGridSearchCV.min_resources_
-builtins.int"builtins.intrÖ
-max_resources_Usklearn.model_selection._search_successive_halving.HalvingGridSearchCV.max_resources_
-builtins.int"builtins.intró
-n_remaining_candidates_^sklearn.model_selection._search_successive_halving.HalvingGridSearchCV.n_remaining_candidates_
-builtins.int"builtins.intr±
-n_candidates_Tsklearn.model_selection._search_successive_halving.HalvingGridSearchCV.n_candidates_J
-builtins.list[builtins.int]
-builtins.int"builtins.int"builtins.listrØ
-n_resources_Ssklearn.model_selection._search_successive_halving.HalvingGridSearchCV.n_resources_J
-builtins.list[builtins.int]
-builtins.int"builtins.int"builtins.listr°
-_required_parameters[sklearn.model_selection._search_successive_halving.HalvingGridSearchCV._required_parameters,
 builtins.list[Any]
 Any"builtins.list*©
 __annotations__=sklearn.experimental.enable_halving_search_cv.__annotations__W
