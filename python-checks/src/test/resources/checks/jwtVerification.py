@@ -51,17 +51,21 @@ def get_unverified_header_return(token: str) -> Dict[str, str]:
     header = jwt.get_unverified_header(token)  # Noncompliant
     return header
 
-def get_unverified_header_sanity_checks(token: str, some_object) -> Dict[str, str]:
+def get_unverified_header_non_compliant_sanity_check(token: str, some_object, other_call) -> Dict[str, str]:
     other = header = jwt.get_unverified_header(token)  # Noncompliant
     other.get("kid")
 
     some_object[0] = jwt.get_unverified_header(token)  # Noncompliant
     header = jwt.get_unverified_header(token)  # Noncompliant
+
+def get_unverified_header_sanity_checks(token: str , other_call) -> Dict[str, str]:
+    header = jwt.get_unverified_header(token)  # Noncompliant
     header.test("kid")
     header.get
     header.get()
     header[slice(12)]
-    return header
+    other_call(jwt.get_unverified_header(token).get("x5u"))
+    return jwt.get_unverified_header(token).get("kid")
 
 def get_unverified_header_used(token: str, do_other_things_with):
     header = jwt.get_unverified_header(token)  # Noncompliant
