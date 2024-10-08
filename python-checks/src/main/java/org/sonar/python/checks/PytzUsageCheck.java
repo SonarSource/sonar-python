@@ -36,7 +36,6 @@ import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S6890")
 public class PytzUsageCheck extends PythonSubscriptionCheck {
-  private static final PythonVersionUtils.Version REQUIRED_VERSION = PythonVersionUtils.Version.V_39;
   private static final String MESSAGE = "Don't use `pytz` module with Python 3.9 and later.";
 
   @Override
@@ -46,8 +45,7 @@ public class PytzUsageCheck extends PythonSubscriptionCheck {
   }
 
   private static boolean isRelevantPythonVersion(SubscriptionContext context) {
-    return context.sourcePythonVersions().stream()
-      .allMatch(version -> version.compare(REQUIRED_VERSION.major(), REQUIRED_VERSION.minor()) >= 0);
+    return PythonVersionUtils.areSourcePythonVersionsGreaterOrEqualThan(context.sourcePythonVersions(), PythonVersionUtils.Version.V_39);
   }
 
   private static void checkImport(SubscriptionContext context) {
