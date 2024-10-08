@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Predicate;
 import javax.annotation.CheckForNull;
 import org.mockito.Mockito;
@@ -195,5 +196,12 @@ public final class PythonTestUtils {
       return ((ClassDef) tree).name().symbol();
     }
     return ((FunctionDef) tree).name().symbol();
+  }
+
+  public static List<ColumnMapping> mapToColumnMappingList(Map<Integer, Integer> map) {
+    return map.entrySet().stream()
+      .sorted(Map.Entry.comparingByKey())
+      .map(entry -> new ColumnMapping(entry.getKey(), entry.getValue()))
+      .toList();
   }
 }

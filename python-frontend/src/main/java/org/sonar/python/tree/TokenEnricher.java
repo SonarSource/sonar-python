@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import org.sonar.plugins.python.api.tree.Trivia;
+import org.sonar.python.ColumnMapping;
 import org.sonar.python.IPythonLocation;
 
 public class TokenEnricher {
@@ -43,11 +44,11 @@ public class TokenEnricher {
       if (location == null) {
         throw new IllegalStateException(String.format("No IPythonLocation found for line %s", token.getLine()));
       }
-      Map<Integer, Integer> escapeCharsMap = location.colOffset();
+      List<ColumnMapping> columnMappings = location.colOffsets();
       int startCol = token.getColumn();
       int endCol = token.getColumn() + token.getValue().length();
-      int ipynbStartCol = computeColWithEscapes(location.column(), startCol, escapeCharsMap);
-      int escapedCharInToken = computeEscapeCharsInToken(escapeCharsMap, startCol, endCol);
+      int ipynbStartCol = computeColWithEscapes(location.column(), startCol, columnMappings);
+      int escapedCharInToken = computeEscapeCharsInToken(columnMappings, startCol, endCol);
       List<Trivia> trivia = token.getTrivia().stream()
         .map(t -> computeTriviaLocation(t, location.line(), ipynbStartCol, token.getLine(), offsetMap))
         .toList();
@@ -66,16 +67,16 @@ public class TokenEnricher {
     if (parentPythonLine != trivia.getToken().getLine()) {
       IPythonLocation location = offsetMap.get(trivia.getToken().getLine());
       line = location.line();
-      Map<Integer, Integer> escapeCharsMap = location.colOffset();
-      col = computeColWithEscapes(location.column(), trivia.getToken().getColumn(), escapeCharsMap);
+      List<ColumnMapping> columnMappings = location.colOffsets();
+      col = computeColWithEscapes(location.column(), trivia.getToken().getColumn(), columnMappings);
       isCompressed = location.isCompresssed();
     }
     return new TriviaImpl(new TokenImpl(trivia.getToken(), line, col,
       escapedCharInToken, List.of(), isCompressed));
   }
 
-  private static int computeColWithEscapes(int offsetColumn, int currentCol, Map<Integer, Integer> escapes) {
-    int escapedCharsOffset = computeEscapeCharsInToken(escapes, 0, currentCol);
+  private static int computeColWithEscapes(int offsetColumn, int currentCol, List<ColumnMapping> columnMappings) {
+    int escapedCharsOffset = computeEscapeCharsInToken(columnMappings, 0, currentCol);
     return offsetColumn + currentCol + escapedCharsOffset;
   }
 
@@ -84,13 +85,13 @@ public class TokenEnricher {
     Token token = trivia.getToken();
     int startCol = token.getColumn();
     int endCol = token.getColumn() + token.getValue().length();
-    return computeEscapeCharsInToken(location.colOffset(), startCol, endCol);
+    return computeEscapeCharsInToken(location.colOffsets(), startCol, endCol);
   }
 
-  private static int computeEscapeCharsInToken(Map<Integer, Integer> escapedMap, int startCol, int endCol) {
-    return escapedMap.entrySet().stream()
-      .filter(entry -> entry.getKey() >= startCol && entry.getKey() < endCol)
-      .mapToInt(Map.Entry::getValue)
+  private static int computeEscapeCharsInToken(List<ColumnMapping> columnMappings, int startCol, int endCol) {
+    return columnMappings.stream()
+      .filter(entry -> entry.inIpynbFile() >= startCol && entry.inIpynbFile() < endCol)
+      .mapToInt(ColumnMapping::charsSkipped)
       .sum();
   }
 

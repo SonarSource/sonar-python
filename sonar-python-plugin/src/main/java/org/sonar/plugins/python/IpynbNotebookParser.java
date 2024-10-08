@@ -26,10 +26,11 @@ import com.fasterxml.jackson.core.JsonToken;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import org.sonar.python.ColumnMapping;
 import org.sonar.python.IPythonLocation;
 
 public class IpynbNotebookParser {
@@ -37,6 +38,7 @@ public class IpynbNotebookParser {
   public static final String SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER = "#SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER";
 
   private static final Set<String> ACCEPTED_LANGUAGE = Set.of("python", "ipython");
+
 
   public static Optional<GeneratedIPythonFile> parseNotebook(PythonInputFile inputFile) {
     try {
@@ -204,7 +206,7 @@ public class IpynbNotebookParser {
 
     for (String line : sourceLine.lines().toList()) {
       var countEscapedChar = countEscapeCharacters(line);
-      var currentCount = countEscapedChar.get(-1);
+      var currentCount = countEscapedChar.stream().mapToInt(ColumnMapping::charsSkipped).sum();
       cellData.addLineToSource(line, new IPythonLocation(tokenLocation.getLineNr(),
         tokenLocation.getColumnNr() + previousLen + previousExtraChars, countEscapedChar, true));
       cellData.appendToSource("\n");
@@ -220,19 +222,16 @@ public class IpynbNotebookParser {
     return cellData;
   }
 
-  private static Map<Integer, Integer> countEscapeCharacters(String sourceLine) {
-    Map<Integer, Integer> colMap = new LinkedHashMap<>();
-    var numberOfExtraChars = 0;
+  private static List<ColumnMapping> countEscapeCharacters(String sourceLine) {
+    List<ColumnMapping> columnMappingList = new LinkedList<>();
     var arr = sourceLine.toCharArray();
     for (int col = 0; col < sourceLine.length(); ++col) {
       char c = arr[col];
       if (c == '"' || c == '\\' || c == '\t' || c == '\b' || c == '\f') {
-        numberOfExtraChars++;
-        colMap.put(col, 1);
+        columnMappingList.add(new ColumnMapping(col, 1));
         // we never encounter \n or \r as the lines are split at these characters
       }
     }
-    colMap.put(-1, numberOfExtraChars);
-    return colMap;
+    return columnMappingList;
   }
 }

@@ -34,6 +34,7 @@ import org.sonar.python.IPythonLocation;
 import org.sonar.python.TestPythonVisitorRunner;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.sonar.plugins.python.TestUtils.mapToColumnMappingList;
 
 class PythonHighlighterTest {
 
@@ -219,12 +220,12 @@ class PythonHighlighterTest {
       b = 3J
       #SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER""";
     var locations = Map.of(
-      1, new IPythonLocation(9, 5, Map.of(-1, 0)),
-      2, new IPythonLocation(10, 5, Map.of(-1, 0)),
-      3, new IPythonLocation(11, 5, Map.of(-1, 2, 4, 1, 9, 1)),
-      4, new IPythonLocation(12, 5, Map.of(-1, 3, 7, 1, 10, 1, 11, 1)),
-      5, new IPythonLocation(13, 5, Map.of(-1, 0)),
-      6, new IPythonLocation(13, 5, Map.of(-1, 0))); //EOF Token
+      1, new IPythonLocation(9, 5),
+      2, new IPythonLocation(10, 5),
+      3, new IPythonLocation(11, 5, mapToColumnMappingList(Map.of(-1, 2, 4, 1, 9, 1))),
+      4, new IPythonLocation(12, 5, mapToColumnMappingList(Map.of(-1, 3, 7, 1, 10, 1, 11, 1))),
+      5, new IPythonLocation(13, 5),
+      6, new IPythonLocation(13, 5)); //EOF Token
     PythonHighlighter pythonHighlighter = new PythonHighlighter(context, new GeneratedIPythonFile(notebookInputFile, pythonContent, locations));
     TestPythonVisitorRunner.scanNotebookFile(notebookFile, locations, pythonContent, pythonHighlighter);
     // def
@@ -245,10 +246,10 @@ class PythonHighlighterTest {
   void highlightingNotebooksSingleLine() {
     String pythonContent = "def foo():\n    pass\na = 2 # comment\n#SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER";
     var locations = Map.of(
-      1, new IPythonLocation(1, 93, Map.of(-1, 0), true),
-      2, new IPythonLocation(1, 108, Map.of(-1, 0), true),
-      3, new IPythonLocation(1, 121, Map.of(-1, 0), true),
-      4, new IPythonLocation(1, 93, Map.of(-1, 0), true)); //EOF Token
+      1, new IPythonLocation(1, 93, List.of(), true),
+      2, new IPythonLocation(1, 108, List.of(), true),
+      3, new IPythonLocation(1, 121, List.of(), true),
+      4, new IPythonLocation(1, 93, List.of(), true)); //EOF Token
     PythonHighlighter pythonHighlighter = new PythonHighlighter(context, new GeneratedIPythonFile(notebookInputFileSingleLine, pythonContent, locations));
     TestPythonVisitorRunner.scanNotebookFile(notebookFileSingleLine, locations, pythonContent, pythonHighlighter);
     // def

@@ -76,10 +76,10 @@ class FileLinesVisitorTest {
       def foo():
         return 3
       """;
-    var locations = Map.of(1, new IPythonLocation(1, 383, Map.of(-1, 0)),
-        2, new IPythonLocation(1, 390, Map.of(-1, 0)),
-        3, new IPythonLocation(1, 402, Map.of(-1, 0)), 
-        4, new IPythonLocation(1, 402, Map.of(-1, 0)));
+    var locations = Map.of(1, new IPythonLocation(1, 383),
+        2, new IPythonLocation(1, 390),
+        3, new IPythonLocation(1, 402),
+        4, new IPythonLocation(1, 402));
     TestPythonVisitorRunner.scanNotebookFile(new File(BASE_DIR, "notebook_locs_single_line.ipynb"), locations, content, visitor);
     assertThat(visitor.getExecutableLines()).isEmpty();
     assertThat(visitor.getLinesOfCode()).hasSize(3);
