@@ -97,6 +97,10 @@ class TokenEnricherTest {
     assertThat(stringToken.line()).isEqualTo(100);
     assertThat(stringToken.column()).isEqualTo(304);
     assertThat(stringToken.includedEscapeChars()).isEqualTo(2);
+
+    var eofToken = tokens.get(3);
+    assertThat(eofToken.line()).isEqualTo(100);
+    assertThat(eofToken.column()).isEqualTo(309);
   }
 
   @Test
@@ -186,8 +190,6 @@ class TokenEnricherTest {
     var code = "a = '1'";
     var expectedTokens = lexer.lex(code);
     var escapedChars = new LinkedHashMap<Integer, Integer>();
-    escapedChars.put(4, 1);
-    escapedChars.put(6, 1);
     var tokens = TokenEnricher.enrichTokens(expectedTokens, Map.of(1, new IPythonLocation(100, 300, escapedChars)));
     var stringToken = tokens.get(2);
     assertThat(stringToken.line()).isEqualTo(100);
