@@ -19,12 +19,15 @@
  */
 package org.sonar.plugins.python.api;
 
+import java.util.Set;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
 import org.slf4j.event.Level;
 import org.sonar.api.testfixtures.log.LogTesterJUnit5;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.sonar.plugins.python.api.PythonVersionUtils.Version.V_310;
 import static org.sonar.plugins.python.api.PythonVersionUtils.Version.V_311;
 import static org.sonar.plugins.python.api.PythonVersionUtils.Version.V_312;
@@ -75,4 +78,15 @@ class PythonVersionUtilsTest {
     assertThat(logTester.logs(Level.WARN))
       .contains("Error while parsing value of parameter 'sonar.python.version' (foo). Versions must be specified as MAJOR_VERSION.MINOR_VERSION (e.g. \"3.7, 3.8\")");
   }
+
+  @Test
+  void isPythonVersionGreaterOrEqualThan() {
+    assertFalse(PythonVersionUtils.areSourcePythonVersionsGreaterOrEqualThan(Set.of(), V_39));
+    assertFalse(PythonVersionUtils.areSourcePythonVersionsGreaterOrEqualThan(Set.of(V_36, V_38), V_39));
+    assertFalse(PythonVersionUtils.areSourcePythonVersionsGreaterOrEqualThan(Set.of(V_36, V_310), V_39));
+    assertTrue(PythonVersionUtils.areSourcePythonVersionsGreaterOrEqualThan(Set.of(V_39), V_39));
+    assertTrue(PythonVersionUtils.areSourcePythonVersionsGreaterOrEqualThan(Set.of(V_39, V_310), V_39));
+    assertTrue(PythonVersionUtils.areSourcePythonVersionsGreaterOrEqualThan(Set.of(V_312, V_310), V_39));
+  }
+  
 }
