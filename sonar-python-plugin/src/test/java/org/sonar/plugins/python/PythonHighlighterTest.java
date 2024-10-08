@@ -211,12 +211,18 @@ class PythonHighlighterTest {
 
   @Test
   void highlightingNotebooks() {
-    String pythonContent = "def foo():\n    pass\na = \"test\" # comment\n# test \\n \\\\n test\nb = 3J\n#SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER";
+    String pythonContent = """
+      def foo():
+          pass
+      a = "test" # comment
+      # test \\n \\\\n test
+      b = 3J
+      #SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER""";
     var locations = Map.of(
       1, new IPythonLocation(9, 5, Map.of(-1, 0)),
       2, new IPythonLocation(10, 5, Map.of(-1, 0)),
-      3, new IPythonLocation(11, 5, Map.of(-1, 2, 9, 10, 14, 16)),
-      4, new IPythonLocation(12, 5, Map.of(-1, 3, 7, 12, 10, 16, 11, 18)),
+      3, new IPythonLocation(11, 5, Map.of(-1, 2, 4, 1, 9, 1)),
+      4, new IPythonLocation(12, 5, Map.of(-1, 3, 7, 1, 10, 1, 11, 1)),
       5, new IPythonLocation(13, 5, Map.of(-1, 0)),
       6, new IPythonLocation(13, 5, Map.of(-1, 0))); //EOF Token
     PythonHighlighter pythonHighlighter = new PythonHighlighter(context, new GeneratedIPythonFile(notebookInputFile, pythonContent, locations));

@@ -224,16 +224,12 @@ public class IpynbNotebookParser {
     Map<Integer, Integer> colMap = new LinkedHashMap<>();
     var numberOfExtraChars = 0;
     var arr = sourceLine.toCharArray();
-    for (int i = 0; i < sourceLine.length(); ++i) {
-      char c = arr[i];
-      switch (c) {
-        case '"', '\\', '\t', '\b', '\f':
-          numberOfExtraChars++;
-          colMap.put(i, 1);
-          break;
-          // we never encounter \n or \r as the lines are split at these characters
-        default:
-          break;
+    for (int col = 0; col < sourceLine.length(); ++col) {
+      char c = arr[col];
+      if (c == '"' || c == '\\' || c == '\t' || c == '\b' || c == '\f') {
+        numberOfExtraChars++;
+        colMap.put(col, 1);
+        // we never encounter \n or \r as the lines are split at these characters
       }
     }
     colMap.put(-1, numberOfExtraChars);
