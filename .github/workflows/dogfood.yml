@@ -36,14 +36,14 @@ jobs:
         run: echo "The dogfood branch was `${{ steps.dogfood.outputs.dogfood-branch }}` and its HEAD SHA1 was `${{ steps.dogfood.outputs.sha1 }}`"
       #slack notifications
       - name: Notify success on Slack
-        uses: Ilshidur/action-slack@1.6.2
+        uses: Ilshidur/action-slack@689ad44a9c9092315abd286d0e3a9a74d31ab78a # 2.1.0
         env:
           SLACK_WEBHOOK: ${{ fromJSON(steps.secrets.outputs.vault).SLACK_WEBHOOK }}
           SLACK_OVERRIDE_MESSAGE: 'Dogfood build for `${{ steps.dogfood.outputs.sha1 }}`: *successful*'
         with:
           args: 'Succeed to build dogfood branch'
       - name: Notify failures on Slack
-        uses: Ilshidur/action-slack@1.6.2
+        uses: Ilshidur/action-slack@689ad44a9c9092315abd286d0e3a9a74d31ab78a # 2.1.0
         if: failure()
         env:
           SLACK_WEBHOOK: ${{ fromJSON(steps.secrets.outputs.vault).SLACK_WEBHOOK }}
