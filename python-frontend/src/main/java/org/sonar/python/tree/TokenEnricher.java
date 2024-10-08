@@ -55,7 +55,8 @@ public class TokenEnricher {
     return new TokenImpl(token);
   }
 
-  private static Trivia computeTriviaLocation(com.sonar.sslr.api.Trivia trivia, int parentLine, int parentCol, int parentPythonLine, Map<Integer, IPythonLocation> offsetMap) {
+  private static Trivia computeTriviaLocation(com.sonar.sslr.api.Trivia trivia, int parentLine, int parentCol, int parentPythonLine,
+    Map<Integer, IPythonLocation> offsetMap) {
     int escapedCharInToken = computeEscapeCharsInToken(trivia.getToken().getValue());
     var line = parentLine;
     var col = parentCol - escapedCharInToken - trivia.getToken().getValue().length();
@@ -83,7 +84,8 @@ public class TokenEnricher {
   }
 
   private static int computeColWithEscapes(int currentCol, Map<Integer, Integer> escapes, int offsetColumn) {
-    return (int) escapes.entrySet().stream().filter(entry -> entry.getKey() > 0 && entry.getKey() < currentCol).count() + offsetColumn + currentCol;
+    int escapedCharsOffset = escapes.entrySet().stream().filter(entry -> entry.getKey() > 0 && entry.getKey() < currentCol).mapToInt(Map.Entry::getValue).sum();
+    return escapedCharsOffset + offsetColumn + currentCol;
   }
 
 }

@@ -90,8 +90,8 @@ class TokenEnricherTest {
     var code = "a = \"1\"";
     var expectedTokens = lexer.lex(code);
     var escapedChars = new LinkedHashMap<Integer, Integer>();
-    escapedChars.put(4, 305);
-    escapedChars.put(6, 308);
+    escapedChars.put(4, 1);
+    escapedChars.put(6, 1);
     var tokens = TokenEnricher.enrichTokens(expectedTokens, Map.of(1, new IPythonLocation(100, 300, escapedChars)));
     var stringToken = tokens.get(2);
     assertThat(stringToken.line()).isEqualTo(100);
@@ -104,11 +104,11 @@ class TokenEnricherTest {
     var code = "a = f\"{b} \\n test\" + \"1\"";
     var expectedTokens = lexer.lex(code);
     var escapedChars = new LinkedHashMap<Integer, Integer>();
-    escapedChars.put(5, 305);
-    escapedChars.put(10, 311);
-    escapedChars.put(17, 319);
-    escapedChars.put(21, 324);
-    escapedChars.put(23, 327);
+    escapedChars.put(5, 1);
+    escapedChars.put(10, 1);
+    escapedChars.put(17, 1);
+    escapedChars.put(21, 1);
+    escapedChars.put(23, 1);
     var tokens = TokenEnricher.enrichTokens(expectedTokens, Map.of(1, new IPythonLocation(100, 300, escapedChars)));
     var stringToken = tokens.get(tokens.size() - 2);
     assertThat(stringToken.line()).isEqualTo(100);
@@ -126,7 +126,7 @@ class TokenEnricherTest {
     var code = "\ta";
     var expectedTokens = lexer.lex(code);
     var escapedChars = new LinkedHashMap<Integer, Integer>();
-    escapedChars.put(0, 301);
+    escapedChars.put(0, 1);
     var tokens = TokenEnricher.enrichTokens(expectedTokens, Map.of(1, new IPythonLocation(100, 300, escapedChars)));
     var tabToken = tokens.get(0);
     assertThat(tabToken.line()).isEqualTo(100);
@@ -160,7 +160,7 @@ class TokenEnricherTest {
   void shouldComputeColCorrectlyForTriviaWithEscapeChar() {
     var code = "a = 3 # test\\n";
     var expectedTokens = lexer.lex(code);
-    var tokens = TokenEnricher.enrichTokens(expectedTokens, Map.of(1, new IPythonLocation(100, 300, Map.of(-1, 1, 12, 13))));
+    var tokens = TokenEnricher.enrichTokens(expectedTokens, Map.of(1, new IPythonLocation(100, 300, Map.of(-1, 1, 12, 1))));
     var trivias = tokens.get(tokens.size() - 1).trivia();
     assertThat(trivias).hasSize(1);
     assertThat(trivias.get(0).token().line()).isEqualTo(100);
@@ -186,8 +186,8 @@ class TokenEnricherTest {
     var code = "a = '1'";
     var expectedTokens = lexer.lex(code);
     var escapedChars = new LinkedHashMap<Integer, Integer>();
-    escapedChars.put(4, 305);
-    escapedChars.put(6, 308);
+    escapedChars.put(4, 1);
+    escapedChars.put(6, 1);
     var tokens = TokenEnricher.enrichTokens(expectedTokens, Map.of(1, new IPythonLocation(100, 300, escapedChars)));
     var stringToken = tokens.get(2);
     assertThat(stringToken.line()).isEqualTo(100);

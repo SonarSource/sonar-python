@@ -230,7 +230,7 @@ public class IpynbNotebookParser {
       switch (c) {
         case '"', '\\':
           numberOfExtraChars++;
-          colMap.put(i, i + colOffSet + count + numberOfExtraChars);
+          colMap.put(i, 1);
           break;
         // we never encounter \n or \r as the lines are split at these characters
         case '\b', '\f', '\t':
