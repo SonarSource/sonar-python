@@ -19,8 +19,10 @@
  */
 package org.sonar.python.checks;
 
+import java.util.Objects;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
+import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
@@ -33,7 +35,8 @@ import org.sonar.plugins.python.api.tree.Tree;
 public class FileHeaderCopyrightCheck extends PythonSubscriptionCheck {
 
   private static final String DEFAULT_HEADER_FORMAT = "";
-  private static final String MESSAGE = "Add or update the header of this file.";
+  private static final String ADD_HEADER_MESSAGE = "Add a header to this file.";
+  private static final String UPDATE_HEADER_MESSAGE = "Update the header of this file to match the expected one.";
 
   @RuleProperty(
     key = "headerFormat",
@@ -61,38 +64,48 @@ public class FileHeaderCopyrightCheck extends PythonSubscriptionCheck {
         }
       }
 
-      var header = getHeaderText(ctx);
-      var headerWithoutShebang = shebangPattern.matcher(header).replaceFirst("");
+      if(headerFormat.isEmpty()) {
+        return;
+      }
 
-      if (isRegularExpression) {
-        checkRegularExpression(ctx, header, headerWithoutShebang);
-      } else if (!headerFormat.isEmpty()) {
-        var matches = Stream.of(header, headerWithoutShebang)
-          .anyMatch(h -> h.startsWith(headerFormat));
+      String header = getHeaderText(ctx);
+      String fileContent = ctx.pythonFile().content();
+      var fileContentWithoutShebang = shebangPattern.matcher(fileContent).replaceFirst("");
 
-        if (!matches) {
-          ctx.addFileIssue(MESSAGE);
-        }
+      if (header == null && !fileContentWithoutShebang.startsWith("#")) {
+        ctx.addFileIssue(ADD_HEADER_MESSAGE);
+      } else if (!isStartingWithCopyrightHeader(header, fileContentWithoutShebang)) {
+        ctx.addFileIssue(UPDATE_HEADER_MESSAGE);
       }
     });
   }
 
-  private static String getHeaderText(SubscriptionContext ctx) {
+  private static @Nullable String getHeaderText(SubscriptionContext ctx) {
     StringLiteral tokenDoc = ((FileInput) ctx.syntaxNode()).docstring();
     if (tokenDoc != null && tokenDoc.firstToken().line() == 1) {
       return tokenDoc.firstToken().value();
     }
-    return ctx.pythonFile().content();
+    return null;
   }
 
-  private void checkRegularExpression(SubscriptionContext ctx, String... fileContent) {
-    var matches = Stream.of(fileContent)
-      .map(searchPattern::matcher)
-      .anyMatch(matcher -> matcher.find() && matcher.start() == 0);
-
-    if (!matches) {
-      ctx.addFileIssue(MESSAGE);
+  private boolean isStartingWithCopyrightHeader(@Nullable String header, String fileContentWithoutShebang) {
+    if (isRegularExpression) {
+      return isStartingWithRegexSearchPattern(header, fileContentWithoutShebang);
+    } else {
+      return isStartingWithNormalSearchPattern(header, fileContentWithoutShebang);
     }
   }
 
+  private boolean isStartingWithRegexSearchPattern(String... fileContent) {
+    return Stream.of(fileContent)
+      .filter(Objects::nonNull)
+      .map(searchPattern::matcher)
+      .anyMatch(matcher -> matcher.find() && matcher.start() == 0);
+  }
+
+  private boolean isStartingWithNormalSearchPattern(String... fileContent) {
+    return Stream.of(fileContent)
+      .filter(Objects::nonNull)
+      .anyMatch(content -> content.startsWith(headerFormat));
+  }
 }

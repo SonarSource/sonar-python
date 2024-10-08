@@ -1,4 +1,4 @@
-# Noncompliant@-1
+# Noncompliant@-1 {{Update the header of this file to match the expected one.}}
 def fun():
   if expression:
     pass

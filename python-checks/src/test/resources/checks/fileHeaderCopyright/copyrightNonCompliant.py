@@ -1,6 +1,6 @@
 # Copyright BAR
 
-# Noncompliant@-3
+# Noncompliant@-3 {{Update the header of this file to match the expected one.}}
 def fun():
   if expression:
     pass

@@ -22,14 +22,18 @@ package org.sonar.python.checks;
 import java.io.File;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 import org.assertj.core.api.Assertions;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
+import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.PythonVisitorContext;
 import org.sonar.python.SubscriptionVisitor;
 import org.sonar.python.TestPythonVisitorRunner;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class FileHeaderCopyrightCheckTest {
 
@@ -55,57 +59,63 @@ class FileHeaderCopyrightCheckTest {
   void test_NoCopyright() {
     PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/fileHeaderCopyright/headerNoCopyright.py", new FileHeaderCopyrightCheck());
     PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/fileHeaderCopyright/emptyFileNoCopyright.py", new FileHeaderCopyrightCheck());
+    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/fileHeaderCopyright/emptyFileWithLineBreakNoCopyright.py", new FileHeaderCopyrightCheck());
   }
 
 
   @Test
   void test_copyright_docstring() {
     FileHeaderCopyrightCheck fileHeaderCopyrightCheck = new FileHeaderCopyrightCheck();
-    fileHeaderCopyrightCheck.headerFormat = "\"\"\"\n" +
-      " SonarQube, open source software quality management tool.\n" +
-      " Copyright (C) 2008-2018 SonarSource\n" +
-      " mailto:contact AT sonarsource DOT com\n" +
-      "\n" +
-      " SonarQube is free software; you can redistribute it and/or\n" +
-      " modify it under the terms of the GNU Lesser General Public\n" +
-      " License as published by the Free Software Foundation; either\n" +
-      " version 3 of the License, or (at your option) any later version.\n" +
-      "\n" +
-      " SonarQube is distributed in the hope that it will be useful,\n" +
-      " but WITHOUT ANY WARRANTY; without even the implied warranty of\n" +
-      " MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU\n" +
-      " Lesser General Public License for more details.\n" +
-      "\n" +
-      " You should have received a copy of the GNU Lesser General Public License\n" +
-      " along with this program; if not, write to the Free Software Foundation,\n" +
-      " Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.\n" +
-      "\"\"\"";
+    fileHeaderCopyrightCheck.headerFormat = """
+      ""\"
+       SonarQube, open source software quality management tool.
+       Copyright (C) 2008-2018 SonarSource
+       mailto:contact AT sonarsource DOT com
+      
+       SonarQube is free software; you can redistribute it and/or
+       modify it under the terms of the GNU Lesser General Public
+       License as published by the Free Software Foundation; either
+       version 3 of the License, or (at your option) any later version.
+      
+       SonarQube is distributed in the hope that it will be useful,
+       but WITHOUT ANY WARRANTY; without even the implied warranty of
+       MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+       Lesser General Public License for more details.
+      
+       You should have received a copy of the GNU Lesser General Public License
+       along with this program; if not, write to the Free Software Foundation,
+       Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+      ""\"""";
     PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/fileHeaderCopyright/docstring.py", fileHeaderCopyrightCheck);
   }
 
   @Test
   void test_copyright_docstring_noncompliant() {
     FileHeaderCopyrightCheck fileHeaderCopyrightCheck = new FileHeaderCopyrightCheck();
-    fileHeaderCopyrightCheck.headerFormat = "\"\"\"\n" +
-      " SonarQube, open source software quality management tool.\n" +
-      " Copyright (C) 2008-2018 SonarSource\n" +
-      " mailto:contact AT sonarsource DOT com\n" +
-      "\n" +
-      " SonarQube is free software; you can redistribute it and/or\n" +
-      " modify it under the terms of the GNU Lesser General Public\n" +
-      " License as published by the Free Software Foundation; either\n" +
-      " version 3 of the License, or (at your option) any later version.\n" +
-      "\n" +
-      " SonarQube is distributed in the hope that it will be useful,\n" +
-      " but WITHOUT ANY WARRANTY; without even the implied warranty of\n" +
-      " MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU\n" +
-      " Lesser General Public License for more details.\n" +
-      "\n" +
-      " You should have received a copy of the GNU Lesser General Public License\n" +
-      " along with this program; if not, write to the Free Software Foundation,\n" +
-      " Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.\n" +
-      "\"\"\"";
+    fileHeaderCopyrightCheck.headerFormat = """
+      ""\"
+       SonarQube, open source software quality management tool.
+       Copyright (C) 2008-2018 SonarSource
+       mailto:contact AT sonarsource DOT com
+      
+       SonarQube is free software; you can redistribute it and/or
+       modify it under the terms of the GNU Lesser General Public
+       License as published by the Free Software Foundation; either
+       version 3 of the License, or (at your option) any later version.
+      
+       SonarQube is distributed in the hope that it will be useful,
+       but WITHOUT ANY WARRANTY; without even the implied warranty of
+       MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+       Lesser General Public License for more details.
+      
+       You should have received a copy of the GNU Lesser General Public License
+       along with this program; if not, write to the Free Software Foundation,
+       Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+      ""\"""";
     PythonCheckVerifier.verify("src/test/resources/checks/fileHeaderCopyright/docstringNonCompliant.py", fileHeaderCopyrightCheck);
+
+    List<PythonCheck.PreciseIssue> issues = PythonCheckVerifier.issues("src/test/resources/checks/fileHeaderCopyright/emptyFileNoCopyright.py", fileHeaderCopyrightCheck);
+    assertEquals(1, issues.size());
   }
 
   @Test
@@ -116,8 +126,10 @@ class FileHeaderCopyrightCheckTest {
     PythonCheckVerifier.verify("src/test/resources/checks/fileHeaderCopyright/copyrightNonCompliant.py", fileHeaderCopyrightCheck);
     PythonCheckVerifier.verify("src/test/resources/checks/fileHeaderCopyright/searchPatternNonCompliant.py", fileHeaderCopyrightCheck);
     PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/fileHeaderCopyright/searchPattern.py", fileHeaderCopyrightCheck);
-    fileHeaderCopyrightCheck.headerFormat = "";
-    PythonCheckVerifier.verify("src/test/resources/checks/fileHeaderCopyright/searchPatternNonCompliant.py", fileHeaderCopyrightCheck);
+
+    List<PythonCheck.PreciseIssue> issues = PythonCheckVerifier.issues("src/test/resources/checks/fileHeaderCopyright/emptyFileNoCopyright.py",
+      fileHeaderCopyrightCheck);
+    assertEquals(1, issues.size());
   }
 
   @Test
