@@ -84,7 +84,7 @@ public class TokenEnricher {
   }
 
   private static int computeColWithEscapes(int currentCol, Map<Integer, Integer> escapes, int offsetColumn) {
-    int escapedCharsOffset = escapes.entrySet().stream().filter(entry -> entry.getKey() > 0 && entry.getKey() < currentCol).mapToInt(Map.Entry::getValue).sum();
+    int escapedCharsOffset = escapes.entrySet().stream().filter(entry -> entry.getKey() >= 0 && entry.getKey() < currentCol).mapToInt(Map.Entry::getValue).sum();
     return escapedCharsOffset + offsetColumn + currentCol;
   }
 

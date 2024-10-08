@@ -181,7 +181,7 @@ public class IpynbNotebookParser {
     while (jParser.nextToken() != JsonToken.END_ARRAY) {
       String sourceLine = jParser.getValueAsString();
       var newTokenLocation = jParser.currentTokenLocation();
-      var countEscapedChar = countEscapeCharacters(sourceLine, newTokenLocation.getColumnNr());
+      var countEscapedChar = countEscapeCharacters(sourceLine);
       cellData.addLineToSource(sourceLine, newTokenLocation.getLineNr(), newTokenLocation.getColumnNr(), countEscapedChar, isCompressed);
       lastSourceLine = sourceLine;
       tokenLocation = newTokenLocation;
@@ -203,7 +203,7 @@ public class IpynbNotebookParser {
     var isFirstLine = true;
 
     for (String line : sourceLine.lines().toList()) {
-      var countEscapedChar = countEscapeCharacters(line, previousLen + previousExtraChars + tokenLocation.getColumnNr());
+      var countEscapedChar = countEscapeCharacters(line);
       var currentCount = countEscapedChar.get(-1);
       cellData.addLineToSource(line, new IPythonLocation(tokenLocation.getLineNr(),
         tokenLocation.getColumnNr() + previousLen + previousExtraChars, countEscapedChar, true));
@@ -220,23 +220,18 @@ public class IpynbNotebookParser {
     return cellData;
   }
 
-  private static Map<Integer, Integer> countEscapeCharacters(String sourceLine, int colOffSet) {
+  private static Map<Integer, Integer> countEscapeCharacters(String sourceLine) {
     Map<Integer, Integer> colMap = new LinkedHashMap<>();
-    int count = 0;
     var numberOfExtraChars = 0;
     var arr = sourceLine.toCharArray();
     for (int i = 0; i < sourceLine.length(); ++i) {
       char c = arr[i];
       switch (c) {
-        case '"', '\\':
+        case '"', '\\', '\t', '\b', '\f':
           numberOfExtraChars++;
           colMap.put(i, 1);
           break;
-        // we never encounter \n or \r as the lines are split at these characters
-        case '\b', '\f', '\t':
-          // we increase the count of one char as we count the \ but not the t or b
-          count += 1;
-          break;
+          // we never encounter \n or \r as the lines are split at these characters
         default:
           break;
       }

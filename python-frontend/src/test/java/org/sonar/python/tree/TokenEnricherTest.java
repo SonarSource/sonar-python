@@ -135,12 +135,12 @@ class TokenEnricherTest {
 
     var idToken = tokens.get(1);
     assertThat(idToken.line()).isEqualTo(100);
-    assertThat(idToken.column()).isEqualTo(301);
+    assertThat(idToken.column()).isEqualTo(302);
     assertThat(idToken.includedEscapeChars()).isZero();
 
     var eofToken = tokens.get(2);
     assertThat(eofToken.line()).isEqualTo(100);
-    assertThat(eofToken.column()).isEqualTo(302);
+    assertThat(eofToken.column()).isEqualTo(303);
     assertThat(eofToken.includedEscapeChars()).isZero();
   }
 
