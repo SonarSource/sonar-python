@@ -60,10 +60,6 @@ public class UnionTypeExpressionCheck extends PythonSubscriptionCheck {
   }
 
   private static boolean supportsUnionTypeExpressions(SubscriptionContext ctx) {
-    PythonVersionUtils.Version required = PythonVersionUtils.Version.V_310;
-
-    // All versions must be greater than or equal to the required version.
-    return ctx.sourcePythonVersions().stream()
-      .allMatch(version -> version.compare(required.major(), required.minor()) >= 0);
+    return PythonVersionUtils.areSourcePythonVersionsGreaterOrEqualThan(ctx.sourcePythonVersions(), PythonVersionUtils.Version.V_310);
   }
 }

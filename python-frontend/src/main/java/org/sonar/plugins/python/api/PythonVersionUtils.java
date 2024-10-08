@@ -108,6 +108,7 @@ public class PythonVersionUtils {
   public static Set<Version> fromString(String propertyValue) {
     return fromStringArray(propertyValue.split(","));
   }
+
   public static Set<Version> fromStringArray(String[] versions) {
     if (versions.length == 0) {
       return allVersions();
@@ -166,6 +167,12 @@ public class PythonVersionUtils {
       return false;
     }
     return true;
+  }
+
+  public static boolean areSourcePythonVersionsGreaterOrEqualThan(Set<Version> sourcePythonVersions, Version required) {
+    // All versions must be greater than or equal to the required version.
+    return !sourcePythonVersions.isEmpty() && sourcePythonVersions.stream()
+      .allMatch(version -> version.compare(required.major(), required.minor()) >= 0);
   }
 
   private static void logErrorMessage(String propertyValue) {

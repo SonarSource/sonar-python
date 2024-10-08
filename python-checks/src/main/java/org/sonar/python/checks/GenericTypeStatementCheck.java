@@ -72,7 +72,6 @@ public class GenericTypeStatementCheck extends PythonSubscriptionCheck {
       return;
     }
     TypeAliasStatement typeStatement = (TypeAliasStatement) ctx.syntaxNode();
-    
     Set<Tree> typeVarAsTypeParameter = Optional.ofNullable(typeStatement.expression())
       .flatMap(TreeUtils.toOptionalInstanceOfMapper(SubscriptionExpression.class))
       .map(SubscriptionExpression::subscripts)
@@ -96,12 +95,7 @@ public class GenericTypeStatementCheck extends PythonSubscriptionCheck {
       .collect(Collectors.toSet());
   }
 
-
   private static boolean supportsTypeParameterSyntax(SubscriptionContext ctx) {
-    PythonVersionUtils.Version required = PythonVersionUtils.Version.V_312;
-
-    // All versions must be greater than or equal to the required version.
-    return ctx.sourcePythonVersions().stream()
-      .allMatch(version -> version.compare(required.major(), required.minor()) >= 0);
+    return PythonVersionUtils.areSourcePythonVersionsGreaterOrEqualThan(ctx.sourcePythonVersions(), PythonVersionUtils.Version.V_312);
   }
 }
