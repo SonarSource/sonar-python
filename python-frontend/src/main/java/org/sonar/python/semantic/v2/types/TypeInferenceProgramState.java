@@ -83,4 +83,8 @@ public class TypeInferenceProgramState implements ProgramState {
   public ProgramState copy() {
     return join(new TypeInferenceProgramState());
   }
+
+  public Map<SymbolV2, Set<PythonType>> typesBySymbol() {
+    return typesBySymbol;
+  }
 }

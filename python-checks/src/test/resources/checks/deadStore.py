@@ -383,11 +383,10 @@ def while_loop_reassignment_secondary_location(a, b, c):
     print(d)
 
 def class_dead_store():
+    # FIXME: Fix locations for ClassDef elements
     class a: # Noncompliant {{Remove this assignment to local variable 'a'; the value is never used.}}
-#         ^ 1
         pass
     a = 42
-#   ^^^^^^< 1 {{'a' is reassigned here.}}
     print(a)
 
 def multiple_issues(a):

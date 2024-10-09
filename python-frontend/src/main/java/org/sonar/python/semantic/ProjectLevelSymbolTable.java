@@ -41,6 +41,9 @@ import org.sonar.python.index.AmbiguousDescriptor;
 import org.sonar.python.index.Descriptor;
 import org.sonar.python.index.DescriptorUtils;
 import org.sonar.python.index.VariableDescriptor;
+import org.sonar.python.semantic.v2.ProjectLevelTypeTable;
+import org.sonar.python.semantic.v2.SymbolTableBuilderV2;
+import org.sonar.python.semantic.v2.TypeInferenceV2;
 import org.sonar.python.semantic.v2.typeshed.TypeShedDescriptorsProvider;
 
 import static org.sonar.python.tree.TreeUtils.getSymbolFromTree;
@@ -115,6 +118,15 @@ public class ProjectLevelSymbolTable {
     }
     DjangoViewsVisitor djangoViewsVisitor = new DjangoViewsVisitor();
     fileInput.accept(djangoViewsVisitor);
+
+    // TODO: here add V2
+    var symbolTable = new SymbolTableBuilderV2(fileInput).build();
+    // TODO: extract typeshed provider so that it is used without any notion of "ProjectLevelTypeTable"
+    var projectLevelTypeTable = new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty());
+    var typeInference = new TypeInferenceV2(projectLevelTypeTable, pythonFile, symbolTable);
+    typeInference.inferTypes(fileInput);
+    var types = typeInference.typesAtEndOfModule();
+    System.out.println("hello");
   }
 
   private void addModuleToGlobalSymbolsByFQN(Set<Descriptor> descriptors) {

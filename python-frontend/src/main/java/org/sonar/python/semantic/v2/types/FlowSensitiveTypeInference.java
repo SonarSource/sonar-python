@@ -25,6 +25,7 @@ import java.util.Optional;
 import java.util.Set;
 import org.sonar.plugins.python.api.tree.AnnotatedAssignment;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
+import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.CompoundAssignmentStatement;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.ForStatement;
@@ -92,6 +93,8 @@ public class FlowSensitiveTypeInference extends ForwardAnalysis {
       }
     } else if (element instanceof FunctionDef functionDef) {
       handleDefinitions(functionDef, state);
+    } else if (element instanceof ClassDef classDef) {
+      handleDefinitions(classDef, state);
     } else if (element instanceof ImportName importName) {
       handleDefinitions(importName, state);
     } else if (element instanceof ImportFrom importFrom) {
