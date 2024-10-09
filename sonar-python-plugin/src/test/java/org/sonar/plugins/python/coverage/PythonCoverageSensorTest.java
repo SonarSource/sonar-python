@@ -25,7 +25,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -45,7 +44,7 @@ import org.sonar.plugins.python.warnings.AnalysisWarningsWrapper;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.mockito.ArgumentMatchers.contains;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
@@ -284,13 +283,17 @@ class PythonCoverageSensorTest {
   @Test
   void should_fail_on_invalid_report() {
     settings.setProperty(PythonCoverageSensor.REPORT_PATHS_KEY, "invalid-coverage-result.xml");
-    assertThatThrownBy(() -> coverageSensor.execute(context)).isInstanceOf(IllegalStateException.class);
+    coverageSensor.execute(context);
+    verify(analysisWarnings).addUnique(contains("An error occurred while trying to import the coverage report: '"));
+    verify(analysisWarnings).addUnique(contains("invalid-coverage-result.xml"));
   }
 
   @Test
   void should_fail_on_unexpected_eof() {
     settings.setProperty(PythonCoverageSensor.REPORT_PATHS_KEY, "coverage_with_eof_error.xml");
-    assertThatThrownBy(() -> coverageSensor.execute(context)).isInstanceOf(IllegalStateException.class);
+    coverageSensor.execute(context);
+    verify(analysisWarnings).addUnique(contains("An error occurred while trying to import the coverage report: '"));
+    verify(analysisWarnings).addUnique(contains("coverage_with_eof_error.xml"));
   }
 
   @Test
