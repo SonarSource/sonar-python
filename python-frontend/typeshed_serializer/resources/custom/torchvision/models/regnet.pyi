@@ -2,6 +2,7 @@ from ..ops.misc import Conv2dNormActivation
 from ._api import WeightsEnum
 from torch import Tensor, nn
 from typing import Any, Callable, List, Optional
+from SonarPythonAnalyzerFakeStub import CustomStubBase
 
 class SimpleStemIN(Conv2dNormActivation):
     def __init__(self, width_in: int, width_out: int, norm_layer: Callable[..., nn.Module], activation_layer: Callable[..., nn.Module]) -> None: ...
@@ -19,7 +20,7 @@ class ResBottleneckBlock(nn.Module):
 class AnyStage(nn.Sequential):
     def __init__(self, width_in: int, width_out: int, stride: int, depth: int, block_constructor: Callable[..., nn.Module], norm_layer: Callable[..., nn.Module], activation_layer: Callable[..., nn.Module], group_width: int, bottleneck_multiplier: float, se_ratio: Optional[float] = ..., stage_index: int = ...) -> None: ...
 
-class BlockParams:
+class BlockParams(CustomStubBase):
     depths: Any
     widths: Any
     group_widths: Any
