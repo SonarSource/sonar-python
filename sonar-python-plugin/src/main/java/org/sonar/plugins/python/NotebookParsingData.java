@@ -20,8 +20,10 @@
 package org.sonar.plugins.python;
 
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import org.sonar.python.EscapeCharPositionInfo;
 import org.sonar.python.IPythonLocation;
 
 public class NotebookParsingData {
@@ -70,8 +72,8 @@ public class NotebookParsingData {
     aggregatedSource.append(str);
   }
 
-  public void addLineToSource(String sourceLine, int lineNr, int columnNr, Map<Integer, Integer> colOffset, boolean isCompressed) {
-    addLineToSource(sourceLine, new IPythonLocation(lineNr, columnNr, colOffset, isCompressed));
+  public void addLineToSource(String sourceLine, int lineNr, int columnNr, List<EscapeCharPositionInfo> colOffsets, boolean isCompressed) {
+    addLineToSource(sourceLine, new IPythonLocation(lineNr, columnNr, colOffsets, isCompressed));
   }
 
   private void appendLine(String line) {
@@ -90,7 +92,7 @@ public class NotebookParsingData {
   }
 
   public void addDefaultLocation(int line, int lineNr, int columnNr) {
-    locationMap.putIfAbsent(line, new IPythonLocation(lineNr, columnNr, Map.of(-1, 0)));
+    locationMap.putIfAbsent(line, new IPythonLocation(lineNr, columnNr));
   }
 
   public void removeTrailingExtraLine() {

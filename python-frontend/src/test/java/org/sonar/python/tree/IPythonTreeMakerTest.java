@@ -31,12 +31,14 @@ import org.sonar.plugins.python.api.tree.ExpressionStatement;
 import org.sonar.plugins.python.api.tree.LineMagic;
 import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.EscapeCharPositionInfo;
 import org.sonar.python.IPythonLocation;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.parser.RuleTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.sonar.python.PythonTestUtils.mapToColumnMappingList;
 
 class IPythonTreeMakerTest extends RuleTest {
 
@@ -308,7 +310,8 @@ class IPythonTreeMakerTest extends RuleTest {
 
   @Test
   void enrichTokens() {
-    var offsetMap = Map.of(1, new IPythonLocation(7, 10, Map.of(4, 15, 8, 20, -1, 2)));
+    List<EscapeCharPositionInfo> colOffsets = mapToColumnMappingList(Map.of(4, 1, 8, 1));
+    var offsetMap = Map.of(1, new IPythonLocation(7, 10, colOffsets));
     var statementList = parseIPython(
       "a = \"123\"", new IPythonTreeMaker(offsetMap)::fileInput).statements();
     assertThat(statementList).isNotNull();
@@ -319,7 +322,7 @@ class IPythonTreeMakerTest extends RuleTest {
     assertThat(stringLiteral.get(0).firstToken().line()).isEqualTo(7);
     assertThat(stringLiteral.get(0).firstToken().column()).isEqualTo(14);
 
-    offsetMap = Map.of(1, new IPythonLocation(7, 10, Map.of(-1, 0)), 2, new IPythonLocation(8, 10, Map.of(-1, 0)));
+    offsetMap = Map.of(1, new IPythonLocation(7, 10), 2, new IPythonLocation(8, 10));
     statementList = parseIPython(
       "def foo(): # comment \n    pass", new IPythonTreeMaker(offsetMap)::fileInput).statements();
     assertThat(statementList).isNotNull();

@@ -26,10 +26,11 @@ import com.fasterxml.jackson.core.JsonToken;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import org.sonar.python.EscapeCharPositionInfo;
 import org.sonar.python.IPythonLocation;
 
 public class IpynbNotebookParser {
@@ -37,6 +38,7 @@ public class IpynbNotebookParser {
   public static final String SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER = "#SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER";
 
   private static final Set<String> ACCEPTED_LANGUAGE = Set.of("python", "ipython");
+
 
   public static Optional<GeneratedIPythonFile> parseNotebook(PythonInputFile inputFile) {
     try {
@@ -181,7 +183,7 @@ public class IpynbNotebookParser {
     while (jParser.nextToken() != JsonToken.END_ARRAY) {
       String sourceLine = jParser.getValueAsString();
       var newTokenLocation = jParser.currentTokenLocation();
-      var countEscapedChar = countEscapeCharacters(sourceLine, newTokenLocation.getColumnNr());
+      var countEscapedChar = countEscapeCharacters(sourceLine);
       cellData.addLineToSource(sourceLine, newTokenLocation.getLineNr(), newTokenLocation.getColumnNr(), countEscapedChar, isCompressed);
       lastSourceLine = sourceLine;
       tokenLocation = newTokenLocation;
@@ -203,8 +205,8 @@ public class IpynbNotebookParser {
     var isFirstLine = true;
 
     for (String line : sourceLine.lines().toList()) {
-      var countEscapedChar = countEscapeCharacters(line, previousLen + previousExtraChars + tokenLocation.getColumnNr());
-      var currentCount = countEscapedChar.get(-1);
+      var countEscapedChar = countEscapeCharacters(line);
+      var currentCount = countEscapedChar.stream().mapToInt(EscapeCharPositionInfo::numberOfExtraChars).sum();
       cellData.addLineToSource(line, new IPythonLocation(tokenLocation.getLineNr(),
         tokenLocation.getColumnNr() + previousLen + previousExtraChars, countEscapedChar, true));
       cellData.appendToSource("\n");
@@ -220,28 +222,16 @@ public class IpynbNotebookParser {
     return cellData;
   }
 
-  private static Map<Integer, Integer> countEscapeCharacters(String sourceLine, int colOffSet) {
-    Map<Integer, Integer> colMap = new LinkedHashMap<>();
-    int count = 0;
-    var numberOfExtraChars = 0;
+  private static List<EscapeCharPositionInfo> countEscapeCharacters(String sourceLine) {
+    List<EscapeCharPositionInfo> escapeCharPositionInfoList = new LinkedList<>();
     var arr = sourceLine.toCharArray();
-    for (int i = 0; i < sourceLine.length(); ++i) {
-      char c = arr[i];
-      switch (c) {
-        case '"', '\\':
-          numberOfExtraChars++;
-          colMap.put(i, i + colOffSet + count + numberOfExtraChars);
-          break;
+    for (int col = 0; col < sourceLine.length(); ++col) {
+      char c = arr[col];
+      if (c == '"' || c == '\\' || c == '\t' || c == '\b' || c == '\f') {
+        escapeCharPositionInfoList.add(new EscapeCharPositionInfo(col, 1));
         // we never encounter \n or \r as the lines are split at these characters
-        case '\b', '\f', '\t':
-          // we increase the count of one char as we count the \ but not the t or b
-          count += 1;
-          break;
-        default:
-          break;
       }
     }
-    colMap.put(-1, numberOfExtraChars);
-    return colMap;
+    return escapeCharPositionInfoList;
   }
 }

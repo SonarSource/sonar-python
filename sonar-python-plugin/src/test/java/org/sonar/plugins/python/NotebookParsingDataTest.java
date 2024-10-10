@@ -45,7 +45,7 @@ class NotebookParsingDataTest {
   void testAddLineToSource() {
     var data = new NotebookParsingData(new StringBuilder().append("First line"), new LinkedHashMap<>(), 5);
 
-    data.addLineToSource("Test", new IPythonLocation(1, 2, Map.of(-1, 0)));
+    data.addLineToSource("Test", new IPythonLocation(1, 2));
     assertThat(data).extracting(d -> d.getAggregatedSource().toString()).isEqualTo("First lineTest");
     assertThat(data).extracting(d -> d.getAggregatedSourceLine()).isEqualTo(6);
     assertThat(data).extracting(d -> d.getLocationMap().size()).isEqualTo(1);
@@ -65,11 +65,11 @@ class NotebookParsingDataTest {
   @Test
   void testCombine() {
     var location1 = new LinkedHashMap<Integer, IPythonLocation>();
-    location1.put(1, new IPythonLocation(0, 1, Map.of()));
+    location1.put(1, new IPythonLocation(0, 1));
     var data = new NotebookParsingData(new StringBuilder().append("a"), location1, 4);
 
     var location2 = new LinkedHashMap<Integer, IPythonLocation>();
-    location2.put(3, new IPythonLocation(2, 1, Map.of()));
+    location2.put(3, new IPythonLocation(2, 1));
     var data2 = new NotebookParsingData(new StringBuilder().append("b"), location2, 3);
 
     data.combine(data2);

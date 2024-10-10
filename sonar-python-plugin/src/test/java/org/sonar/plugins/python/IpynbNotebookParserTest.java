@@ -21,6 +21,7 @@ package org.sonar.plugins.python;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.Test;
 import org.sonar.api.batch.fs.InputFile;
@@ -30,6 +31,7 @@ import org.sonar.python.IPythonLocation;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.sonar.plugins.python.TestUtils.createInputFile;
+import static org.sonar.plugins.python.TestUtils.mapToColumnMappingList;
 
 class IpynbNotebookParserTest {
   private final File baseDir = new File("src/test/resources/org/sonar/plugins/python").getAbsoluteFile();
@@ -48,22 +50,55 @@ class IpynbNotebookParserTest {
     assertThat(result.contents()).hasLineCount(27);
     assertThat(StringUtils.countMatches(result.contents(), IpynbNotebookParser.SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER))
       .isEqualTo(7);
-    assertThat(result.locationMap()).extracting(map -> map.get(1)).isEqualTo(new IPythonLocation(17, 5, Map.of(-1, 0)));
+    assertThat(result.locationMap()).extracting(map -> map.get(1)).isEqualTo(new IPythonLocation(17, 5));
     //"    print \"not none\"\n"
-    assertThat(result.locationMap()).extracting(map -> map.get(3)).isEqualTo(new IPythonLocation(19, 5, Map.of(10, 16, 19, 26, -1, 2)));
+    assertThat(result.locationMap()).extracting(map -> map.get(3)).isEqualTo(new IPythonLocation(19, 5,
+      mapToColumnMappingList(Map.of(10, 1, 19, 1))));
     //"source": "#Some code\nprint(\"hello world\\n\")",
-    assertThat(result.locationMap()).extracting(map -> map.get(16)).isEqualTo(new IPythonLocation(64, 14, Map.of(-1, 0), true));
-    assertThat(result.locationMap()).extracting(map -> map.get(17)).isEqualTo(new IPythonLocation(64, 27, Map.of(6, 34, 18, 47, 20, 50, -1, 3), true));
+    assertThat(result.locationMap()).extracting(map -> map.get(16)).isEqualTo(new IPythonLocation(64, 14, List.of(), true));
+    assertThat(result.locationMap()).extracting(map -> map.get(17)).isEqualTo(new IPythonLocation(64, 27, mapToColumnMappingList(Map.of(6
+      , 1, 18, 1, 20, 1)), true));
     //"source": "print(\"My\\ntext\")\nprint(\"Something else\\n\")"
-    assertThat(result.locationMap()).extracting(map -> map.get(22)).isEqualTo(new IPythonLocation(83, 14, Map.of(6, 21, 9, 25, 15, 32, -1, 3), true));
-    assertThat(result.locationMap()).extracting(map -> map.get(23)).isEqualTo(new IPythonLocation(83, 37, Map.of(6, 44, 21, 60, 23, 63, -1, 3), true));
+    assertThat(result.locationMap()).extracting(map -> map.get(22)).isEqualTo(new IPythonLocation(83, 14, mapToColumnMappingList(Map.of(6
+      , 1, 9, 1, 15, 1)), true));
+    assertThat(result.locationMap()).extracting(map -> map.get(23)).isEqualTo(new IPythonLocation(83, 37, mapToColumnMappingList(Map.of(6
+      , 1, 21, 1, 23, 1)), true));
 
     //"source": "a = \"A bunch of characters \\n \\f \\r \\  \"\nb = None"
     assertThat(result.locationMap()).extracting(map -> map.get(25))
-      .isEqualTo(new IPythonLocation(90, 14, Map.of(4,19, 27, 43, 30, 47, 33, 51, 36, 55, 39, 59, -1, 6), true));
-    assertThat(result.locationMap()).extracting(map -> map.get(26)).isEqualTo(new IPythonLocation(90, 63, Map.of(-1, 0), true));
-    // last line with the cell delimiter which contains the EOF token 
-    assertThat(result.locationMap()).extracting(map -> map.get(27)).isEqualTo(new IPythonLocation(90, 14, Map.of(-1, 0)));
+      .isEqualTo(new IPythonLocation(90, 14, mapToColumnMappingList(Map.of(4, 1, 27, 1, 30, 1, 33, 1, 36, 1, 39, 1)), true));
+    assertThat(result.locationMap()).extracting(map -> map.get(26)).isEqualTo(new IPythonLocation(90, 63, List.of(), true));
+    // last line with the cell delimiter which contains the EOF token
+    assertThat(result.locationMap()).extracting(map -> map.get(27)).isEqualTo(new IPythonLocation(90, 14, List.of()));
+  }
+
+  @Test
+  void testParseNotebookWithEscapedChars() throws IOException {
+    var inputFile = createInputFile(baseDir, "notebook_with_escaped_chars.ipynb", InputFile.Status.CHANGED, InputFile.Type.MAIN);
+
+    var resultOptional = IpynbNotebookParser.parseNotebook(inputFile);
+
+    assertThat(resultOptional).isPresent();
+
+    var result = resultOptional.get();
+
+    assertThat(result.locationMap().keySet()).hasSize(2);
+    assertThat(result.contents()).hasLineCount(2);
+    assertThat(StringUtils.countMatches(result.contents(), IpynbNotebookParser.SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER))
+      .isEqualTo(1);
+
+    //"source":  "\t \b \f \"\""
+    assertThat(result.locationMap()).extracting(map -> map.get(1))
+      .isEqualTo(new IPythonLocation(14, 15, mapToColumnMappingList(
+          Map.ofEntries(
+            Map.entry(0, 1),
+            Map.entry(2, 1),
+            Map.entry(4, 1),
+            Map.entry(6, 1),
+            Map.entry(7, 1)
+          )
+        ), true));
+
   }
 
   @Test
@@ -80,10 +115,10 @@ class IpynbNotebookParserTest {
     assertThat(result.contents()).hasLineCount(4);
     assertThat(StringUtils.countMatches(result.contents(), IpynbNotebookParser.SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER))
       .isEqualTo(1);
-    assertThat(result.locationMap()).extracting(map -> map.get(3)).isEqualTo(new IPythonLocation(11, 5, Map.of(-1, 0)));
+    assertThat(result.locationMap()).extracting(map -> map.get(3)).isEqualTo(new IPythonLocation(11, 5));
 
     // last line with the cell delimiter which contains the EOF token
-    assertThat(result.locationMap()).extracting(map -> map.get(4)).isEqualTo(new IPythonLocation(11, 5, Map.of(-1, 0)));
+    assertThat(result.locationMap()).extracting(map -> map.get(4)).isEqualTo(new IPythonLocation(11, 5));
   }
 
   @Test
@@ -141,12 +176,12 @@ class IpynbNotebookParserTest {
     assertThat(result.locationMap().get(4).column()).isEqualTo(452);
 
     // First and second line
-    assertThat(result.locationMap()).containsEntry(1, new IPythonLocation(1, 382, Map.of(-1, 0), true));
-    assertThat(result.locationMap()).containsEntry(2, new IPythonLocation(1, 429, Map.of(-1, 0), true));
+    assertThat(result.locationMap()).containsEntry(1, new IPythonLocation(1, 382, List.of(), true));
+    assertThat(result.locationMap()).containsEntry(2, new IPythonLocation(1, 429, List.of(), true));
 
-    assertThat(result.locationMap()).containsEntry(6, new IPythonLocation(1, 559, Map.of(-1, 3, 0, 560, 1, 562, 2, 564), true));
-    assertThat(result.locationMap()).containsEntry(7, new IPythonLocation(1, 610, Map.of(-1, 0), true));
-    assertThat(result.locationMap()).containsEntry(8, new IPythonLocation(1, 637, Map.of(-1, 3, 1, 640, 2, 642, 0, 638), true));
+    assertThat(result.locationMap()).containsEntry(6, new IPythonLocation(1, 559, mapToColumnMappingList(Map.of(0, 1, 1, 1, 2, 1)), true));
+    assertThat(result.locationMap()).containsEntry(7, new IPythonLocation(1, 610, List.of(), true));
+    assertThat(result.locationMap()).containsEntry(8, new IPythonLocation(1, 637, mapToColumnMappingList(Map.of(1, 1, 2, 1, 0, 1)), true));
   }
 
   @Test

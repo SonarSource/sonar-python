@@ -21,7 +21,6 @@ package org.sonar.python.tree;
 
 import com.sonar.sslr.api.Token;
 import com.sonar.sslr.impl.Lexer;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.BeforeAll;
@@ -32,6 +31,7 @@ import org.sonar.python.lexer.PythonLexer;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.sonar.python.PythonTestUtils.mapToColumnMappingList;
 
 class TokenEnricherTest {
   private static TestLexer lexer;
@@ -78,8 +78,8 @@ class TokenEnricherTest {
     //when the mapping is not present for the current line
     var code = "a = 1\n\nb=3";
     var offsetMap = Map.of(
-      1, new IPythonLocation(200, 23, Map.of()),
-      2, new IPythonLocation(201, 23, Map.of()));
+      1, new IPythonLocation(200, 23),
+      2, new IPythonLocation(201, 23));
     var originalTokens = lexer.lex(code);
     Throwable throwable = assertThrows(IllegalStateException.class, () -> TokenEnricher.enrichTokens(originalTokens, offsetMap));
     assertThat(throwable.getMessage()).isEqualTo("No IPythonLocation found for line 3");
@@ -89,26 +89,29 @@ class TokenEnricherTest {
   void shouldProvideOffsetForEscapeChar() {
     var code = "a = \"1\"";
     var expectedTokens = lexer.lex(code);
-    var escapedChars = new LinkedHashMap<Integer, Integer>();
-    escapedChars.put(4, 305);
-    escapedChars.put(6, 308);
+    var escapedChars = mapToColumnMappingList(Map.of(4, 1, 6, 1));
     var tokens = TokenEnricher.enrichTokens(expectedTokens, Map.of(1, new IPythonLocation(100, 300, escapedChars)));
     var stringToken = tokens.get(2);
     assertThat(stringToken.line()).isEqualTo(100);
     assertThat(stringToken.column()).isEqualTo(304);
     assertThat(stringToken.includedEscapeChars()).isEqualTo(2);
+
+    var eofToken = tokens.get(3);
+    assertThat(eofToken.line()).isEqualTo(100);
+    assertThat(eofToken.column()).isEqualTo(309);
   }
 
   @Test
   void shouldComputeColCorrectly() {
     var code = "a = f\"{b} \\n test\" + \"1\"";
     var expectedTokens = lexer.lex(code);
-    var escapedChars = new LinkedHashMap<Integer, Integer>();
-    escapedChars.put(5, 305);
-    escapedChars.put(10, 311);
-    escapedChars.put(17, 319);
-    escapedChars.put(21, 324);
-    escapedChars.put(23, 327);
+    var escapedChars = mapToColumnMappingList(Map.ofEntries(
+      Map.entry(5, 1),
+      Map.entry(10, 1),
+      Map.entry(17, 1),
+      Map.entry(21, 1),
+      Map.entry(23, 1)
+    ));
     var tokens = TokenEnricher.enrichTokens(expectedTokens, Map.of(1, new IPythonLocation(100, 300, escapedChars)));
     var stringToken = tokens.get(tokens.size() - 2);
     assertThat(stringToken.line()).isEqualTo(100);
@@ -122,10 +125,32 @@ class TokenEnricherTest {
   }
 
   @Test
+  void shouldComputeTabColCorrectly() {
+    var code = "\ta";
+    var expectedTokens = lexer.lex(code);
+    var escapedChars = mapToColumnMappingList(Map.of(0, 1));
+    var tokens = TokenEnricher.enrichTokens(expectedTokens, Map.of(1, new IPythonLocation(100, 300, escapedChars)));
+    var tabToken = tokens.get(0);
+    assertThat(tabToken.line()).isEqualTo(100);
+    assertThat(tabToken.column()).isEqualTo(300);
+    assertThat(tabToken.includedEscapeChars()).isEqualTo(1);
+
+    var idToken = tokens.get(1);
+    assertThat(idToken.line()).isEqualTo(100);
+    assertThat(idToken.column()).isEqualTo(302);
+    assertThat(idToken.includedEscapeChars()).isZero();
+
+    var eofToken = tokens.get(2);
+    assertThat(eofToken.line()).isEqualTo(100);
+    assertThat(eofToken.column()).isEqualTo(303);
+    assertThat(eofToken.includedEscapeChars()).isZero();
+  }
+
+  @Test
   void shouldComputeColCorrectlyForTrivia() {
     var code = "a = 3 # comment";
     var expectedTokens = lexer.lex(code);
-    var tokens = TokenEnricher.enrichTokens(expectedTokens, Map.of(1, new IPythonLocation(100, 300, Map.of(-1, 0))));
+    var tokens = TokenEnricher.enrichTokens(expectedTokens, Map.of(1, new IPythonLocation(100, 300)));
     var trivias = tokens.get(tokens.size() - 1).trivia();
     assertThat(trivias).hasSize(1);
     assertThat(trivias.get(0).token().line()).isEqualTo(100);
@@ -137,7 +162,8 @@ class TokenEnricherTest {
   void shouldComputeColCorrectlyForTriviaWithEscapeChar() {
     var code = "a = 3 # test\\n";
     var expectedTokens = lexer.lex(code);
-    var tokens = TokenEnricher.enrichTokens(expectedTokens, Map.of(1, new IPythonLocation(100, 300, Map.of(-1, 1, 12, 13))));
+    var escapedChars = mapToColumnMappingList(Map.of(12, 1));
+    var tokens = TokenEnricher.enrichTokens(expectedTokens, Map.of(1, new IPythonLocation(100, 300, escapedChars)));
     var trivias = tokens.get(tokens.size() - 1).trivia();
     assertThat(trivias).hasSize(1);
     assertThat(trivias.get(0).token().line()).isEqualTo(100);
@@ -149,7 +175,8 @@ class TokenEnricherTest {
   void shouldComputeColCorrectlyForTriviaOnDifferentLine() {
     var code = "# comment\na = 3";
     var expectedTokens = lexer.lex(code);
-    var tokens = TokenEnricher.enrichTokens(expectedTokens, Map.of(1, new IPythonLocation(100, 300, Map.of(-1, 0)), 2, new IPythonLocation(101, 300, Map.of(-1, 0))));
+    var tokens = TokenEnricher.enrichTokens(expectedTokens, Map.of(1, new IPythonLocation(100, 300), 2,
+      new IPythonLocation(101, 300)));
     assertThat(tokens.get(0).line()).isEqualTo(101);
     var trivias = tokens.get(0).trivia();
     assertThat(trivias).hasSize(1);
@@ -162,10 +189,7 @@ class TokenEnricherTest {
   void shouldComputeCorrectlyForSingleQuote() {
     var code = "a = '1'";
     var expectedTokens = lexer.lex(code);
-    var escapedChars = new LinkedHashMap<Integer, Integer>();
-    escapedChars.put(4, 305);
-    escapedChars.put(6, 308);
-    var tokens = TokenEnricher.enrichTokens(expectedTokens, Map.of(1, new IPythonLocation(100, 300, escapedChars)));
+    var tokens = TokenEnricher.enrichTokens(expectedTokens, Map.of(1, new IPythonLocation(100, 300)));
     var stringToken = tokens.get(2);
     assertThat(stringToken.line()).isEqualTo(100);
     assertThat(stringToken.column()).isEqualTo(304);

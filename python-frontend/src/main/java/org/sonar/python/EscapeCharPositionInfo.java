@@ -19,14 +19,5 @@
  */
 package org.sonar.python;
 
-import java.util.List;
-
-public record IPythonLocation(int line, int column, List<EscapeCharPositionInfo> colOffsets, boolean isCompresssed) {
-  public IPythonLocation(int line, int column, List<EscapeCharPositionInfo> colOffsets) {
-    this(line, column, colOffsets, false);
-  }
-
-  public IPythonLocation(int line, int column) {
-    this(line, column, List.of(), false);
-  }
+public record EscapeCharPositionInfo(int columnInIpynbFile, int numberOfExtraChars) {
 }
