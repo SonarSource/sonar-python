@@ -138,3 +138,14 @@ a = 1  # a = 1
 
 # abcfmt: off
 # abcpylint: disable=line-too-long
+
+# Databricks Magic Commands
+# MAGIC
+# MAGIC %md
+# MAGIC %sh
+# MAGIC %fs
+# MAGIC %r
+# MAGIC %python
+# MAGIC %scala
+# MAGIC %sql
+# MAGIC %run
