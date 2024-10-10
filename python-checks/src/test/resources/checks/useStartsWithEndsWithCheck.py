@@ -58,6 +58,7 @@ def f():
   foobar[10:] == 'bar' # Noncompliant
 
   foobar[3:6:1] == 'bar' # Compliant: Too much potential for FPs with step sizes != 1, too early stop indices, etc.
+  foobar[3:6:0x1] == 'bar' # Same
   foobar[-3:] == 'bar' # Noncompliant {{Use `endswith` here.}}
   foobar[:-3] == 'foo' # Noncompliant {{Use `startswith` here.}}
 
@@ -94,3 +95,4 @@ def f():
 
   foobar[:3:2] == 'fo' # Compliant: This is not a simple step 1 slice, not a prefix, or suffix, so the rule does not apply
   foobar[:3:-2] == 'r' # Same
+
