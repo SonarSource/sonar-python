@@ -2419,7 +2419,7 @@ class TypeInferenceV2Test {
       import opentracing.tracer.Tracer as ottt
       ottt
       """);
-    assertThat(statement.typeV2()).isInstanceOf(UnknownType.class);
+    assertThat(statement.typeV2()).isInstanceOf(UnresolvedImportType.class);
   }
 
   @Test
