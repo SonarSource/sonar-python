@@ -2019,6 +2019,8 @@ class PythonTreeMakerTest extends RuleTest {
     testNumericLiteral("0o777", 511L);
     testNumericLiteral("0O777", 511L);
     testNumericLiteral("0777", 511L);
+    testNumericLiteral("0x28", 0x28L);
+    testNumericLiteral("0X28", 0x28L);
   }
 
   private void testNumericLiteral(String code, Long expectedValue) {
