@@ -39,7 +39,7 @@ public abstract class ForwardAnalysis {
 
   protected final Map<CfgBlock, ProgramStateAtBlock> programStateByBlock = new HashMap<>();
 
-  public void compute(ControlFlowGraph cfg) {
+  public ProgramState compute(ControlFlowGraph cfg) {
     ProgramState initialState = initialState();
     Set<CfgBlock> blocks = cfg.blocks();
     blocks.forEach(block -> programStateByBlock.put(block, new ProgramStateAtBlock(block, initialState)));
@@ -52,6 +52,8 @@ public abstract class ForwardAnalysis {
         currentBlock.successors().forEach(workList::push);
       }
     }
+    // Return the final program state
+    return programStateByBlock.get(cfg.end()).out;
   }
 
   public abstract ProgramState initialState();

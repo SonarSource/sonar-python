@@ -70,6 +70,10 @@ public final class PythonTestUtils {
 
   public static FileInput parseWithoutSymbols(String... lines) {
     String code = String.join(System.getProperty("line.separator"), lines);
+    return parseWithoutSymbols(code);
+  }
+
+  public static FileInput parseWithoutSymbols(String code) {
     return pythonTreeMaker.fileInput(p.parse(code));
   }
 

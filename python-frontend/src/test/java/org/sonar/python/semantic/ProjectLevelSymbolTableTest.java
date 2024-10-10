@@ -1002,6 +1002,22 @@ class ProjectLevelSymbolTableTest {
   }
 
   @Test
+  void tt() {
+    FileInput tree = parseWithoutSymbols("""
+      u = "jj"
+      class A: ...
+      def foo(): ...
+      y = 1
+      if foo():
+        x = 42
+      else:
+        x = "hello"
+      """);
+    ProjectLevelSymbolTable projectLevelSymbolTable = new ProjectLevelSymbolTable();
+    projectLevelSymbolTable.addModule(tree, "", PythonTestUtils.pythonFile("mod.py"));
+  }
+
+  @Test
   void projectPackages() {
     ProjectLevelSymbolTable projectLevelSymbolTable = new ProjectLevelSymbolTable();
     projectLevelSymbolTable.addProjectPackage("first.package");

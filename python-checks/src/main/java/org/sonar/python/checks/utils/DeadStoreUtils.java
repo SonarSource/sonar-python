@@ -26,6 +26,7 @@ import java.util.ListIterator;
 import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.cfg.CfgBlock;
+import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.cfg.fixpoint.LiveVariablesAnalysis.LiveVariables;
