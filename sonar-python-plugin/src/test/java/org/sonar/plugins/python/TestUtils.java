@@ -33,7 +33,7 @@ import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.internal.SonarRuntimeImpl;
 import org.sonar.api.utils.Version;
-import org.sonar.python.ColumnMapping;
+import org.sonar.python.EscapeCharPositionInfo;
 
 public final class TestUtils {
 
@@ -62,10 +62,10 @@ public final class TestUtils {
       .build());
   }
 
-  public static List<ColumnMapping> mapToColumnMappingList(Map<Integer, Integer> map) {
+  public static List<EscapeCharPositionInfo> mapToColumnMappingList(Map<Integer, Integer> map) {
     return map.entrySet().stream()
       .sorted(Map.Entry.comparingByKey())
-      .map(entry -> new ColumnMapping(entry.getKey(), entry.getValue()))
+      .map(entry -> new EscapeCharPositionInfo(entry.getKey(), entry.getValue()))
       .toList();
   }
 

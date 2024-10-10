@@ -31,7 +31,7 @@ import org.sonar.plugins.python.api.tree.ExpressionStatement;
 import org.sonar.plugins.python.api.tree.LineMagic;
 import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.python.ColumnMapping;
+import org.sonar.python.EscapeCharPositionInfo;
 import org.sonar.python.IPythonLocation;
 import org.sonar.python.api.PythonGrammar;
 import org.sonar.python.parser.RuleTest;
@@ -310,7 +310,7 @@ class IPythonTreeMakerTest extends RuleTest {
 
   @Test
   void enrichTokens() {
-    List<ColumnMapping> colOffsets = mapToColumnMappingList(Map.of(4, 1, 8, 1));
+    List<EscapeCharPositionInfo> colOffsets = mapToColumnMappingList(Map.of(4, 1, 8, 1));
     var offsetMap = Map.of(1, new IPythonLocation(7, 10, colOffsets));
     var statementList = parseIPython(
       "a = \"123\"", new IPythonTreeMaker(offsetMap)::fileInput).statements();

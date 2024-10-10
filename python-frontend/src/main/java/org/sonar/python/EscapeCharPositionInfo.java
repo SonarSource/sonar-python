@@ -19,5 +19,5 @@
  */
 package org.sonar.python;
 
-public record ColumnMapping(int inIpynbFile, int charsSkipped) {
+public record EscapeCharPositionInfo(int columnInIpynbFile, int numberOfExtraChars) {
 }

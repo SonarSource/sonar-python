@@ -198,10 +198,10 @@ public final class PythonTestUtils {
     return ((FunctionDef) tree).name().symbol();
   }
 
-  public static List<ColumnMapping> mapToColumnMappingList(Map<Integer, Integer> map) {
+  public static List<EscapeCharPositionInfo> mapToColumnMappingList(Map<Integer, Integer> map) {
     return map.entrySet().stream()
       .sorted(Map.Entry.comparingByKey())
-      .map(entry -> new ColumnMapping(entry.getKey(), entry.getValue()))
+      .map(entry -> new EscapeCharPositionInfo(entry.getKey(), entry.getValue()))
       .toList();
   }
 }

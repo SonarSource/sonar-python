@@ -218,6 +218,7 @@ class PythonHighlighterTest {
       a = "test" # comment
       # test \\n \\\\n test
       b = 3J
+      c = \t4.2
       #SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER""";
     var locations = Map.of(
       1, new IPythonLocation(9, 5),
@@ -225,8 +226,10 @@ class PythonHighlighterTest {
       3, new IPythonLocation(11, 5, mapToColumnMappingList(Map.of(-1, 2, 4, 1, 9, 1))),
       4, new IPythonLocation(12, 5, mapToColumnMappingList(Map.of(-1, 3, 7, 1, 10, 1, 11, 1))),
       5, new IPythonLocation(13, 5),
-      6, new IPythonLocation(13, 5)); //EOF Token
-    PythonHighlighter pythonHighlighter = new PythonHighlighter(context, new GeneratedIPythonFile(notebookInputFile, pythonContent, locations));
+      6, new IPythonLocation(14, 5, mapToColumnMappingList(Map.of(4, 1))),
+      7, new IPythonLocation(14, 5)); //EOF Token
+    PythonHighlighter pythonHighlighter = new PythonHighlighter(context, new GeneratedIPythonFile(notebookInputFile, pythonContent,
+      locations));
     TestPythonVisitorRunner.scanNotebookFile(notebookFile, locations, pythonContent, pythonHighlighter);
     // def
     checkOnRange(9, 5, 3, notebookFile, TypeOfText.KEYWORD);
@@ -240,6 +243,8 @@ class PythonHighlighterTest {
     checkOnRange(12, 5, 21, notebookFile, TypeOfText.COMMENT);
     // 3J
     checkOnRange(13, 9, 2, notebookFile, TypeOfText.CONSTANT);
+    // 4.2
+    checkOnRange(14, 11, 3, notebookFile, TypeOfText.CONSTANT);
   }
 
   @Test
@@ -250,7 +255,8 @@ class PythonHighlighterTest {
       2, new IPythonLocation(1, 108, List.of(), true),
       3, new IPythonLocation(1, 121, List.of(), true),
       4, new IPythonLocation(1, 93, List.of(), true)); //EOF Token
-    PythonHighlighter pythonHighlighter = new PythonHighlighter(context, new GeneratedIPythonFile(notebookInputFileSingleLine, pythonContent, locations));
+    PythonHighlighter pythonHighlighter = new PythonHighlighter(context, new GeneratedIPythonFile(notebookInputFileSingleLine,
+      pythonContent, locations));
     TestPythonVisitorRunner.scanNotebookFile(notebookFileSingleLine, locations, pythonContent, pythonHighlighter);
     // def
     checkOnRange(1, 93, 3, notebookFileSingleLine, TypeOfText.KEYWORD);
@@ -259,7 +265,7 @@ class PythonHighlighterTest {
     // 2
     checkOnRange(1, 125, 1, notebookFileSingleLine, TypeOfText.CONSTANT);
     // # comment
-    checkOnRange(1, 127 , 9, notebookFileSingleLine, TypeOfText.COMMENT);
+    checkOnRange(1, 127, 9, notebookFileSingleLine, TypeOfText.COMMENT);
   }
 
   /**

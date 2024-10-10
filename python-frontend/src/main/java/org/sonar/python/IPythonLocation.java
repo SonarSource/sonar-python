@@ -21,8 +21,8 @@ package org.sonar.python;
 
 import java.util.List;
 
-public record IPythonLocation(int line, int column, List<ColumnMapping> colOffsets, boolean isCompresssed) {
-  public IPythonLocation(int line, int column, List<ColumnMapping> colOffsets) {
+public record IPythonLocation(int line, int column, List<EscapeCharPositionInfo> colOffsets, boolean isCompresssed) {
+  public IPythonLocation(int line, int column, List<EscapeCharPositionInfo> colOffsets) {
     this(line, column, colOffsets, false);
   }
 

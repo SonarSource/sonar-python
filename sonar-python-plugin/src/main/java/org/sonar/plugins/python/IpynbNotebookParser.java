@@ -30,7 +30,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-import org.sonar.python.ColumnMapping;
+import org.sonar.python.EscapeCharPositionInfo;
 import org.sonar.python.IPythonLocation;
 
 public class IpynbNotebookParser {
@@ -206,7 +206,7 @@ public class IpynbNotebookParser {
 
     for (String line : sourceLine.lines().toList()) {
       var countEscapedChar = countEscapeCharacters(line);
-      var currentCount = countEscapedChar.stream().mapToInt(ColumnMapping::charsSkipped).sum();
+      var currentCount = countEscapedChar.stream().mapToInt(EscapeCharPositionInfo::numberOfExtraChars).sum();
       cellData.addLineToSource(line, new IPythonLocation(tokenLocation.getLineNr(),
         tokenLocation.getColumnNr() + previousLen + previousExtraChars, countEscapedChar, true));
       cellData.appendToSource("\n");
@@ -222,16 +222,16 @@ public class IpynbNotebookParser {
     return cellData;
   }
 
-  private static List<ColumnMapping> countEscapeCharacters(String sourceLine) {
-    List<ColumnMapping> columnMappingList = new LinkedList<>();
+  private static List<EscapeCharPositionInfo> countEscapeCharacters(String sourceLine) {
+    List<EscapeCharPositionInfo> escapeCharPositionInfoList = new LinkedList<>();
     var arr = sourceLine.toCharArray();
     for (int col = 0; col < sourceLine.length(); ++col) {
       char c = arr[col];
       if (c == '"' || c == '\\' || c == '\t' || c == '\b' || c == '\f') {
-        columnMappingList.add(new ColumnMapping(col, 1));
+        escapeCharPositionInfoList.add(new EscapeCharPositionInfo(col, 1));
         // we never encounter \n or \r as the lines are split at these characters
       }
     }
-    return columnMappingList;
+    return escapeCharPositionInfoList;
   }
 }
