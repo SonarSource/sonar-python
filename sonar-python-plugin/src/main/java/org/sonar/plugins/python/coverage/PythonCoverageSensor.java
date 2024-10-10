@@ -29,19 +29,18 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 import javax.xml.stream.XMLStreamException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.Sensor;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonar.api.batch.sensor.coverage.NewCoverage;
 import org.sonar.api.config.Configuration;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.sonar.plugins.python.EmptyReportException;
 import org.sonar.plugins.python.Python;
+import org.sonar.plugins.python.PythonReportSensor;
 import org.sonar.plugins.python.warnings.AnalysisWarningsWrapper;
-
-import static org.sonar.plugins.python.PythonReportSensor.getReports;
 
 public class PythonCoverageSensor implements Sensor {
 
@@ -73,24 +72,38 @@ public class PythonCoverageSensor implements Sensor {
 
     warnDeprecatedPropertyUsage(config);
 
-    HashSet<InputFile> filesCovered = new HashSet<>();
-    List<File> reports = getCoverageReports(baseDir, config);
-    if (!reports.isEmpty()) {
-      LOG.info("Python test coverage");
-      for (File report : uniqueAbsolutePaths(reports)) {
-        Map<InputFile, NewCoverage> coverageMeasures = parseReport(report, context);
-        saveMeasures(coverageMeasures, filesCovered);
+    try {
+      HashSet<InputFile> filesCovered = new HashSet<>();
+      List<File> reports = getCoverageReports(baseDir, config);
+      if (!reports.isEmpty()) {
+        LOG.info("Python test coverage");
+        for (File report : uniqueAbsolutePaths(reports)) {
+          importReport(context, report, filesCovered);
+        }
       }
+    } catch (Exception e) {
+      LOG.warn("Cannot read coverage report, the following exception occurred: '{}'", e.getMessage());
+      analysisWarnings.addUnique("An error occurred while trying to import coverage report(s)");
+    }
+  }
+
+  private void importReport(SensorContext context, File report, HashSet<InputFile> filesCovered) {
+    try {
+      Map<InputFile, NewCoverage> coverageMeasures = parseReport(report, context);
+      saveMeasures(coverageMeasures, filesCovered);
+    } catch (Exception e) {
+      LOG.warn("Cannot read coverage report '{}', the following exception occurred: '{}'", report, e.getMessage());
+      analysisWarnings.addUnique(String.format("An error occurred while trying to import the coverage report: '%s'", report));
     }
   }
 
   private List<File> getCoverageReports(String baseDir, Configuration config) {
     if (!config.hasKey(REPORT_PATHS_KEY)) {
-      return getReports(config, baseDir, REPORT_PATHS_KEY, DEFAULT_REPORT_PATH, analysisWarnings);
+      return PythonReportSensor.getReports(config, baseDir, REPORT_PATHS_KEY, DEFAULT_REPORT_PATH, analysisWarnings);
     }
 
     return Arrays.stream(config.getStringArray(REPORT_PATHS_KEY))
-      .flatMap(path -> getReports(config, baseDir, REPORT_PATHS_KEY, path, analysisWarnings).stream())
+      .flatMap(path -> PythonReportSensor.getReports(config, baseDir, REPORT_PATHS_KEY, path, analysisWarnings).stream())
       .toList();
   }
 
@@ -115,7 +128,8 @@ public class PythonCoverageSensor implements Sensor {
       parser.parseReport(report, context, coverageMeasures);
       if (!parser.errors().isEmpty()) {
         String parseErrors = String.format(String.join("%n", parser.errors()));
-        analysisWarnings.addUnique(String.format("The following error(s) occurred while trying to import coverage report:%n%s", parseErrors));
+        analysisWarnings.addUnique(String.format("The following error(s) occurred while trying to import coverage report:%n%s",
+          parseErrors));
       }
     } catch (EmptyReportException e) {
       analysisWarnings.addUnique(String.format("The coverage report '%s' has been ignored because it seems to be empty.", report));

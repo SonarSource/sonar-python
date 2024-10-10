@@ -25,12 +25,13 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
 import org.junit.jupiter.api.io.TempDir;
+import org.mockito.MockedStatic;
+import org.mockito.Mockito;
 import org.slf4j.event.Level;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.InputFile.Type;
@@ -40,12 +41,14 @@ import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.config.internal.MapSettings;
 import org.sonar.api.testfixtures.log.LogTesterJUnit5;
+import org.sonar.plugins.python.PythonReportSensor;
 import org.sonar.plugins.python.TestUtils;
 import org.sonar.plugins.python.warnings.AnalysisWarningsWrapper;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.contains;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
@@ -284,13 +287,17 @@ class PythonCoverageSensorTest {
   @Test
   void should_fail_on_invalid_report() {
     settings.setProperty(PythonCoverageSensor.REPORT_PATHS_KEY, "invalid-coverage-result.xml");
-    assertThatThrownBy(() -> coverageSensor.execute(context)).isInstanceOf(IllegalStateException.class);
+    coverageSensor.execute(context);
+    verify(analysisWarnings).addUnique(contains("An error occurred while trying to import the coverage report: '"));
+    verify(analysisWarnings).addUnique(contains("invalid-coverage-result.xml"));
   }
 
   @Test
   void should_fail_on_unexpected_eof() {
     settings.setProperty(PythonCoverageSensor.REPORT_PATHS_KEY, "coverage_with_eof_error.xml");
-    assertThatThrownBy(() -> coverageSensor.execute(context)).isInstanceOf(IllegalStateException.class);
+    coverageSensor.execute(context);
+    verify(analysisWarnings).addUnique(contains("An error occurred while trying to import the coverage report: '"));
+    verify(analysisWarnings).addUnique(contains("coverage_with_eof_error.xml"));
   }
 
   @Test
@@ -299,6 +306,18 @@ class PythonCoverageSensorTest {
     coverageSensor.execute(context);
 
     assertThat(context.lineHits(FILE1_KEY, 1)).isNull();
+  }
+
+  @Test
+  void should_warn_on_invalid_basedir() {
+    try(MockedStatic<PythonReportSensor> pythonReportSensorMock = Mockito.mockStatic(PythonReportSensor.class)) {
+      pythonReportSensorMock
+        .when(() -> PythonReportSensor.getReports(any(), any(), any(), any(), any()))
+        .thenThrow(RuntimeException.class);
+      coverageSensor.execute(context);
+
+      verify(analysisWarnings).addUnique(contains("An error occurred while trying to import coverage report(s)"));
+    }
   }
 
   @Test
