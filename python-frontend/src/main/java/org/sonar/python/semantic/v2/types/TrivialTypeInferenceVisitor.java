@@ -82,6 +82,8 @@ import org.sonar.python.types.v2.PythonType;
 import org.sonar.python.types.v2.TypeOrigin;
 import org.sonar.python.types.v2.TypeSource;
 import org.sonar.python.types.v2.UnionType;
+import org.sonar.python.types.v2.UnknownType;
+import org.sonar.python.types.v2.UnresolvedImportType;
 
 import static org.sonar.python.semantic.SymbolUtils.pathOf;
 import static org.sonar.python.tree.TreeUtils.locationInFile;
@@ -307,17 +309,27 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
           .toList();
         var resolvedType = projectLevelTypeTable.getType(fqn);
 
-        if (!(resolvedType instanceof ModuleType module)) {
-          return;
-        }
-        if (aliasedName.alias() != null) {
-          setTypeToName(aliasedName.alias(), module);
-        } else {
-          for (int i = names.size() - 1; i >= 0; i--) {
-            setTypeToName(names.get(i), module);
-            module = Optional.ofNullable(module)
-              .map(ModuleType::parent)
-              .orElse(null);
+
+        if (resolvedType instanceof ModuleType module) {
+          if (aliasedName.alias() != null) {
+            setTypeToName(aliasedName.alias(), module);
+          } else {
+            for (int i = names.size() - 1; i >= 0; i--) {
+              setTypeToName(names.get(i), module);
+              module = Optional.ofNullable(module)
+                .map(ModuleType::parent)
+                .orElse(null);
+            }
+          }
+        } else if (resolvedType instanceof UnknownType || (resolvedType instanceof ObjectType objectType && objectType.type() instanceof UnknownType)) {
+          if (aliasedName.alias() != null) {
+            var unresolvedImportType = new UnresolvedImportType(String.join(".", fqn));
+            setTypeToName(aliasedName.alias(), unresolvedImportType);
+          } else {
+            for (int i = names.size() - 1; i >= 0; i--) {
+              var unresolvedImportType = new UnresolvedImportType(String.join(".", fqn.subList(i, fqn.size())));
+              setTypeToName(names.get(i), unresolvedImportType);
+            }
           }
         }
       });
@@ -345,6 +357,11 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
             var boundName = Optional.ofNullable(aliasedName.alias())
               .orElse(name);
 
+            if (type instanceof UnknownType) {
+              var fullFqn = new ArrayList<>(fqn);
+              fullFqn.add(name.name());
+              type = new UnresolvedImportType(String.join(".", fullFqn));
+            }
             setTypeToName(boundName, type);
           }));
       });
