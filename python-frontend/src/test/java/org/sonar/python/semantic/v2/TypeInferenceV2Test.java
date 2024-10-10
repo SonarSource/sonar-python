@@ -218,12 +218,26 @@ class TypeInferenceV2Test {
   @Test
   void randomTest() {
     FileInput root = inferTypes("""
+      import hellooo
       y = 1
       if foo():
         x = 42
       else:
         x = "hello"
       """);
+  }
+
+  @Test
+  void randomTest2() {
+    FileInput root = inferTypes("""
+      x = 1  # expected type: int
+      try:
+        x = "hello" # expected type: str
+      except:
+        x = False # expected type: union[int, str, bool]
+      # expected type: union[int, str, bool]
+      """);
+    Statement statement = root.statements().statements().get(0);
   }
 
   @Test
