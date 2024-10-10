@@ -1,6 +1,7 @@
 from ._api import WeightsEnum
 from torch import Tensor, nn
 from typing import Any, Callable, List, Optional
+from SonarPythonAnalyzerFakeStub import CustomStubBase
 
 class LayerNorm2d(nn.LayerNorm):
     def forward(self, x: Tensor) -> Tensor: ...
@@ -12,7 +13,7 @@ class CNBlock(nn.Module):
     def __init__(self, dim, layer_scale: float, stochastic_depth_prob: float, norm_layer: Optional[Callable[..., nn.Module]] = ...) -> None: ...
     def forward(self, input: Tensor) -> Tensor: ...
 
-class CNBlockConfig:
+class CNBlockConfig(CustomStubBase):
     input_channels: Any
     out_channels: Any
     num_layers: Any

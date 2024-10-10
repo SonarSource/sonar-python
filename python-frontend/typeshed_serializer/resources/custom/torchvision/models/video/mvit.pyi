@@ -2,8 +2,9 @@ import torch.nn as nn
 import torch.fx
 from .._api import WeightsEnum
 from typing import Any, Callable, List, Optional, Sequence, Tuple
+from SonarPythonAnalyzerFakeStub import CustomStubBase
 
-class MSBlockConfig:
+class MSBlockConfig(CustomStubBase):
     num_heads: int
     input_channels: int
     output_channels: int

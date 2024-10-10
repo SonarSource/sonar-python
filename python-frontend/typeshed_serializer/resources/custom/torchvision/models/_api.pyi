@@ -2,8 +2,9 @@ from enum import Enum
 from torch import nn
 from types import ModuleType
 from typing import Any, Callable, Dict, Iterable, List, Mapping, Optional, Type, TypeVar, Union
+from SonarPythonAnalyzerFakeStub import CustomStubBase
 
-class Weights:
+class Weights(CustomStubBase):
     url: str
     transforms: Callable
     meta: Dict[str, Any]

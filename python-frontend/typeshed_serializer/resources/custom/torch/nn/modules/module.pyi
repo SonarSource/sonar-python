@@ -4,12 +4,13 @@ from torch.nn.parameter import Parameter
 from torch.utils.hooks import RemovableHandle
 from typing import Any, Callable, Dict, Iterator, Mapping, Optional, Set, Tuple, TypeVar, Union, overload
 from typing_extensions import Self
+from SonarPythonAnalyzerFakeStub import CustomStubBase
 
 T = TypeVar('T', bound='Module')
 
-class _IncompatibleKeys: ...
+class _IncompatibleKeys(CustomStubBase): ...
 
-class _WrappedHook:
+class _WrappedHook(CustomStubBase):
     hook: Any
     with_module: bool
     module: Any
@@ -25,7 +26,7 @@ def register_module_backward_hook(hook: Callable[[Module, _grad_t, _grad_t], Uni
 def register_module_full_backward_pre_hook(hook: Callable[[Module, _grad_t], Union[None, _grad_t]]) -> RemovableHandle: ...
 def register_module_full_backward_hook(hook: Callable[[Module, _grad_t, _grad_t], Union[None, _grad_t]]) -> RemovableHandle: ...
 
-class Module:
+class Module(CustomStubBase):
     dump_patches: bool
     training: bool
     call_super_init: bool

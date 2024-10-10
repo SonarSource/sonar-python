@@ -1,8 +1,9 @@
 from ._api import WeightsEnum
 from torch import Tensor, nn
 from typing import Any, Callable, List, Optional
+from SonarPythonAnalyzerFakeStub import CustomStubBase
 
-class InvertedResidualConfig:
+class InvertedResidualConfig(CustomStubBase):
     input_channels: Any
     kernel: Any
     expanded_channels: Any

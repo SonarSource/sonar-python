@@ -1,8 +1,9 @@
 from torch import Tensor as Tensor, nn as nn
 from torchvision.ops import FrozenBatchNorm2d as FrozenBatchNorm2d, complete_box_iou_loss as complete_box_iou_loss, distance_box_iou_loss as distance_box_iou_loss, generalized_box_iou_loss as generalized_box_iou_loss
 from typing import Any, List, Tuple
+from SonarPythonAnalyzerFakeStub import CustomStubBase
 
-class BalancedPositiveNegativeSampler:
+class BalancedPositiveNegativeSampler(CustomStubBase):
     batch_size_per_image: Any
     positive_fraction: Any
     def __init__(self, batch_size_per_image: int, positive_fraction: float) -> None: ...
@@ -10,7 +11,7 @@ class BalancedPositiveNegativeSampler:
 
 def encode_boxes(reference_boxes: Tensor, proposals: Tensor, weights: Tensor) -> Tensor: ...
 
-class BoxCoder:
+class BoxCoder(CustomStubBase):
     weights: Any
     bbox_xform_clip: Any
     def __init__(self, weights: Tuple[float, float, float, float], bbox_xform_clip: float = ...) -> None: ...
@@ -19,13 +20,13 @@ class BoxCoder:
     def decode(self, rel_codes: Tensor, boxes: List[Tensor]) -> Tensor: ...
     def decode_single(self, rel_codes: Tensor, boxes: Tensor) -> Tensor: ...
 
-class BoxLinearCoder:
+class BoxLinearCoder(CustomStubBase):
     normalize_by_size: Any
     def __init__(self, normalize_by_size: bool = ...) -> None: ...
     def encode(self, reference_boxes: Tensor, proposals: Tensor) -> Tensor: ...
     def decode(self, rel_codes: Tensor, boxes: Tensor) -> Tensor: ...
 
-class Matcher:
+class Matcher(CustomStubBase):
     BELOW_LOW_THRESHOLD: int
     BETWEEN_THRESHOLDS: int
     __annotations__: Any
