@@ -49,6 +49,7 @@ public class CommentedCodeCheck extends PythonSubscriptionCheck {
   private static final Pattern IS_EMPTY_PATTERN = Pattern.compile("\\s*");
 
   private static final String DEFAULT_EXCEPTION_PATTERN = "(fmt|py\\w+):.*";
+  private static final Pattern DATABRICKS_MAGIC_COMMAND_PATTERN = Pattern.compile("^\\h*(MAGIC|COMMAND).*");
   private static final PythonParser parser = PythonParser.create();
 
   private Pattern exceptionPattern;
@@ -125,7 +126,8 @@ public class CommentedCodeCheck extends PythonSubscriptionCheck {
   }
 
   private boolean isException(String text) {
-    return exceptionPattern.matcher(text).matches();
+    boolean isDatabricksMagicCommand = DATABRICKS_MAGIC_COMMAND_PATTERN.matcher(text).matches();
+    return exceptionPattern.matcher(text).matches() || isDatabricksMagicCommand;
   }
 
   private static boolean isOneWord(String text) {

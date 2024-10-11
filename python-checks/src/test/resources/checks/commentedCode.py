@@ -138,3 +138,12 @@ a = 1  # a = 1
 
 # abcfmt: off
 # abcpylint: disable=line-too-long
+
+
+# Databricks notebooks
+# COMMAND ----------
+
+# MAGIC %md 
+# MAGIC ## Alter tables
+
+# COMMAND ----------
