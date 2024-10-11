@@ -65,7 +65,7 @@ class DescriptorToPythonTypeConverterTest {
 
     var returnTypeName = "Returned";
     var resolvedReturnType = new ClassTypeBuilder().withName(returnTypeName).build();
-    Mockito.when(lazyTypesContext.resolveLazyType(Mockito.argThat(lt -> returnTypeName.equals(lt.fullyQualifiedName()))))
+    Mockito.when(lazyTypesContext.resolveLazyType(Mockito.argThat(lt -> returnTypeName.equals(lt.importPath()))))
       .thenReturn(resolvedReturnType);
 
     Mockito.when(descriptorAlternative1.kind()).thenReturn(Descriptor.Kind.FUNCTION);
@@ -137,7 +137,7 @@ class DescriptorToPythonTypeConverterTest {
     Mockito.when(lazyTypesContext.getOrCreateLazyType(parentClassName))
       .thenReturn(new LazyType(parentClassName, lazyTypesContext));
 
-    Mockito.when(lazyTypesContext.resolveLazyType(Mockito.argThat(lt -> parentClassName.equals(lt.fullyQualifiedName()))))
+    Mockito.when(lazyTypesContext.resolveLazyType(Mockito.argThat(lt -> parentClassName.equals(lt.importPath()))))
       .thenReturn(resolvedParent);
 
     var type = (ClassType) converter.convert(descriptor);
@@ -186,7 +186,7 @@ class DescriptorToPythonTypeConverterTest {
     Mockito.when(lazyTypesContext.getOrCreateLazyType(returnTypeName))
       .thenReturn(new LazyType(returnTypeName, lazyTypesContext));
 
-    Mockito.when(lazyTypesContext.resolveLazyType(Mockito.argThat(lt -> returnTypeName.equals(lt.fullyQualifiedName()))))
+    Mockito.when(lazyTypesContext.resolveLazyType(Mockito.argThat(lt -> returnTypeName.equals(lt.importPath()))))
       .thenReturn(resolvedReturnType);
 
     var type = (FunctionType) converter.convert(descriptor);
@@ -219,7 +219,7 @@ class DescriptorToPythonTypeConverterTest {
     Mockito.when(lazyTypesContext.getOrCreateLazyTypeWrapper(variableTypeName))
       .thenReturn(new LazyTypeWrapper(new LazyType(variableTypeName, lazyTypesContext)));
 
-    Mockito.when(lazyTypesContext.resolveLazyType(Mockito.argThat(lt -> variableTypeName.equals(lt.fullyQualifiedName()))))
+    Mockito.when(lazyTypesContext.resolveLazyType(Mockito.argThat(lt -> variableTypeName.equals(lt.importPath()))))
       .thenReturn(resolvedVariableType);
 
     var type = (ObjectType) converter.convert(descriptor);

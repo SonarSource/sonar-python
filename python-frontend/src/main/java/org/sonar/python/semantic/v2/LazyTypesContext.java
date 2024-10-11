@@ -35,23 +35,23 @@ public class LazyTypesContext {
     this.projectLevelTypeTable = projectLevelTypeTable;
   }
 
-  public TypeWrapper getOrCreateLazyTypeWrapper(String fullyQualifiedName) {
-    return new LazyTypeWrapper(getOrCreateLazyType(fullyQualifiedName));
+  public TypeWrapper getOrCreateLazyTypeWrapper(String importPath) {
+    return new LazyTypeWrapper(getOrCreateLazyType(importPath));
   }
 
-  public LazyType getOrCreateLazyType(String fullyQualifiedName) {
-    if (lazyTypes.containsKey(fullyQualifiedName)) {
-      return lazyTypes.get(fullyQualifiedName);
+  public LazyType getOrCreateLazyType(String importPath) {
+    if (lazyTypes.containsKey(importPath)) {
+      return lazyTypes.get(importPath);
     }
-    var lazyType = new LazyType(fullyQualifiedName, this);
-    lazyTypes.put(fullyQualifiedName, lazyType);
+    var lazyType = new LazyType(importPath, this);
+    lazyTypes.put(importPath, lazyType);
     return lazyType;
   }
 
   public PythonType resolveLazyType(LazyType lazyType) {
-    PythonType resolved = projectLevelTypeTable.getType(lazyType.fullyQualifiedName());
+    PythonType resolved = projectLevelTypeTable.getType(lazyType.importPath());
     lazyType.resolve(resolved);
-    lazyTypes.remove(lazyType.fullyQualifiedName());
+    lazyTypes.remove(lazyType.importPath());
     return resolved;
   }
 }
