@@ -21,16 +21,20 @@ package org.sonar.python.checks;
 
 import java.util.Comparator;
 import java.util.EnumSet;
+import java.util.List;
 import java.util.regex.Pattern;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
-import org.sonar.plugins.python.api.tree.Expression;
-import org.sonar.plugins.python.api.tree.FunctionDef;
-import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
+import org.sonar.plugins.python.api.tree.AssignmentStatement;
+import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.FunctionDef;
+import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.tree.SubscriptionExpression;
+import org.sonar.plugins.python.api.tree.Tree;
 
 @Rule(key = "S117")
 public class LocalVariableAndParameterNameConventionCheck extends PythonSubscriptionCheck {
@@ -78,7 +82,42 @@ public class LocalVariableAndParameterNameConventionCheck extends PythonSubscrip
   }
 
   private static boolean isType(Symbol symbol) {
-    return symbol.usages().stream().map(Usage::tree).filter(Expression.class::isInstance).map(Expression.class::cast).anyMatch(e -> e.type().mustBeOrExtend("type"));
+    return isExtendingType(symbol) || isAssignedFromTyping(symbol);
+  }
+
+  private static boolean isExtendingType(Symbol symbol) {
+    return symbol.usages().stream().map(Usage::tree).filter(Expression.class::isInstance).map(Expression.class::cast).anyMatch(e -> e.type().mustBeOrExtend("type")) ||
+      (symbol.annotatedTypeName() != null && symbol.annotatedTypeName().startsWith("typing."));
+  }
+
+  private static boolean isAssignedFromTyping(Symbol symbol) {
+    List<Tree> assignmentNames = symbol.usages().stream().filter(u -> u.kind() == Usage.Kind.ASSIGNMENT_LHS).map(Usage::tree).toList();
+    for (Tree assignmentName : assignmentNames) {
+      Expression assignedValue = getAssignedValue(assignmentName);
+      if (assignedValue == null) {
+        continue;
+      }
+      if (assignedValue.is(Tree.Kind.SUBSCRIPTION)) {
+        SubscriptionExpression subscriptionExpression = (SubscriptionExpression) assignedValue;
+        if (subscriptionExpression.object().is(Tree.Kind.NAME)) {
+          Symbol assignedSymbol = ((Name) subscriptionExpression.object()).symbol();
+          if (assignedSymbol != null && isExtendingType(assignedSymbol)) {
+            return true;
+          }
+        }
+      }
+    }
+    return false;
+  }
+
+  private static Expression getAssignedValue(Tree assignmentName) {
+    while (assignmentName != null && !assignmentName.is(Tree.Kind.ASSIGNMENT_STMT)) {
+      assignmentName = assignmentName.parent();
+    }
+    if (assignmentName == null) {
+      return null;
+    }
+    return ((AssignmentStatement) assignmentName).assignedValue();
   }
 
   private void raiseIssueForNameAndUsage(SubscriptionContext ctx, String name, Usage usage) {
