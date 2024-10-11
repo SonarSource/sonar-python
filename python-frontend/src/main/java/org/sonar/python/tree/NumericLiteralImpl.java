@@ -36,6 +36,10 @@ public class NumericLiteralImpl extends PyTree implements NumericLiteral {
   private final Token token;
   private final InferredType type;
 
+  private static final String INT = "int";
+  private static final String FLOAT = "float";
+  private static final String COMPLEX = "complex";
+
   private PythonType typeV2 = PythonType.UNKNOWN;
 
   NumericLiteralImpl(Token token) {
@@ -91,17 +95,25 @@ public class NumericLiteralImpl extends PyTree implements NumericLiteral {
 
   // https://docs.python.org/3/reference/lexical_analysis.html#numeric-literals
   private InferredType computeType() {
+    return switch (numericKind()) {
+      case FLOAT -> InferredTypes.FLOAT;
+      case COMPLEX -> InferredTypes.COMPLEX;
+      default -> InferredTypes.INT;
+    };
+  }
+
+  public String numericKind() {
     String valueAsStringLowerCase = valueAsString.toLowerCase(Locale.ROOT);
     if (valueAsStringLowerCase.contains("j")) {
-      return InferredTypes.COMPLEX;
+      return COMPLEX;
     }
     if (valueAsStringLowerCase.startsWith("0x")) {
-      return InferredTypes.INT;
+      return INT;
     }
     if (valueAsString.contains(".") || valueAsStringLowerCase.contains("e")) {
-      return InferredTypes.FLOAT;
+      return FLOAT;
     }
-    return InferredTypes.INT;
+    return INT;
   }
 
   @Override

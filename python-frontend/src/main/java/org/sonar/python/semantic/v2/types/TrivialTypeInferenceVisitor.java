@@ -56,7 +56,6 @@ import org.sonar.plugins.python.api.tree.SubscriptionExpression;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tuple;
 import org.sonar.plugins.python.api.tree.TypeAnnotation;
-import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.semantic.v2.ClassTypeBuilder;
 import org.sonar.python.semantic.v2.FunctionTypeBuilder;
 import org.sonar.python.semantic.v2.ProjectLevelTypeTable;
@@ -72,7 +71,6 @@ import org.sonar.python.tree.NumericLiteralImpl;
 import org.sonar.python.tree.SetLiteralImpl;
 import org.sonar.python.tree.StringLiteralImpl;
 import org.sonar.python.tree.TupleImpl;
-import org.sonar.python.types.RuntimeType;
 import org.sonar.python.types.v2.ClassType;
 import org.sonar.python.types.v2.FunctionType;
 import org.sonar.python.types.v2.Member;
@@ -146,12 +144,10 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
   @Override
   public void visitNumericLiteral(NumericLiteral numericLiteral) {
     ModuleType builtins = this.projectLevelTypeTable.getBuiltinsModule();
-    InferredType type = numericLiteral.type();
-    String memberName = ((RuntimeType) type).getTypeClass().fullyQualifiedName();
-    if (memberName != null) {
-      PythonType pythonType = builtins.resolveMember(memberName).orElse(PythonType.UNKNOWN);
-      ((NumericLiteralImpl) numericLiteral).typeV2(new ObjectType(pythonType, new ArrayList<>(), new ArrayList<>()));
-    }
+    NumericLiteralImpl numericLiteralImpl = (NumericLiteralImpl) numericLiteral;
+    String numericKind = numericLiteralImpl.numericKind();
+    PythonType pythonType = builtins.resolveMember(numericKind).orElse(PythonType.UNKNOWN);
+    numericLiteralImpl.typeV2(new ObjectType(pythonType, new ArrayList<>(), new ArrayList<>()));
   }
 
   @Override
