@@ -104,7 +104,7 @@ import org.sonar.python.types.TypeShed;
 import org.sonarsource.sonarlint.core.analysis.api.ClientInputFile;
 import org.sonarsource.sonarlint.core.analysis.container.analysis.filesystem.FileMetadata;
 import org.sonarsource.sonarlint.core.analysis.container.analysis.filesystem.SonarLintInputFile;
-import org.sonarsource.sonarlint.core.commons.Language;
+import org.sonarsource.sonarlint.core.commons.api.SonarLanguage;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -1404,7 +1404,7 @@ class PythonSensorTest {
 
     SonarLintInputFile sonarFile = new SonarLintInputFile(clientFile, metadataGenerator);
     sonarFile.setType(Type.MAIN);
-    sonarFile.setLanguage(Language.PYTHON);
+    sonarFile.setLanguage(SonarLanguage.PYTHON);
 
     context.fileSystem().add(sonarFile);
     sensor().execute(context);

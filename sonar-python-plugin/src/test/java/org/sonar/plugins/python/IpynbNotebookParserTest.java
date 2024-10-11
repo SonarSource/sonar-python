@@ -25,7 +25,7 @@ import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.Test;
 import org.sonar.api.batch.fs.InputFile;
-import org.sonar.api.internal.apachecommons.lang.StringUtils;
+import org.sonar.api.internal.apachecommons.lang3.StringUtils;
 import org.sonar.python.IPythonLocation;
 
 import static org.assertj.core.api.Assertions.assertThat;
