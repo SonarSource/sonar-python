@@ -74,6 +74,16 @@ def type_variables_ok(MyTypeParameter: type):
     from typing import NamedTuple
     Employee = NamedTuple('Employee', [('name', str), ('id', int)])
 
+def type_aliases_from_typing_special_form():
+    from typing import Type, Union
+    class A: ...
+    MyType = Type[A] # OK
+    AliasType = Union[str, int] # OK
+
+    # Assigned from a subscription check, but not from a typing_SpecialForm
+    array = [1,2,3]
+    MyInt = array[1]  # Noncompliant
+    MyInt = [1,2,3][1] # Noncompliant
 
 def type_variables_fp():
     class MyClass:
