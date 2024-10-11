@@ -22,14 +22,11 @@ package org.sonar.python.tree;
 import com.sonar.sslr.api.Token;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import org.sonar.plugins.python.api.tree.Trivia;
 import org.sonar.python.EscapeCharPositionInfo;
 import org.sonar.python.IPythonLocation;
 
 public class TokenEnricher {
-
-  private static final Set<Character> ESCAPED_CHARS = Set.of('"', '\\', '\b', '\f', '\n', '\r', '\t');
 
   private TokenEnricher() {
   }
