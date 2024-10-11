@@ -56,18 +56,18 @@ class IpynbNotebookParserTest {
       mapToColumnMappingList(Map.of(10, 1, 19, 1))));
     //"source": "#Some code\nprint(\"hello world\\n\")",
     assertThat(result.locationMap()).extracting(map -> map.get(16)).isEqualTo(new IPythonLocation(64, 14, List.of(), true));
-    assertThat(result.locationMap()).extracting(map -> map.get(17)).isEqualTo(new IPythonLocation(64, 27, mapToColumnMappingList(Map.of(6
+    assertThat(result.locationMap()).extracting(map -> map.get(17)).isEqualTo(new IPythonLocation(64, 26, mapToColumnMappingList(Map.of(6
       , 1, 18, 1, 20, 1)), true));
     //"source": "print(\"My\\ntext\")\nprint(\"Something else\\n\")"
     assertThat(result.locationMap()).extracting(map -> map.get(22)).isEqualTo(new IPythonLocation(83, 14, mapToColumnMappingList(Map.of(6
       , 1, 9, 1, 15, 1)), true));
-    assertThat(result.locationMap()).extracting(map -> map.get(23)).isEqualTo(new IPythonLocation(83, 37, mapToColumnMappingList(Map.of(6
+    assertThat(result.locationMap()).extracting(map -> map.get(23)).isEqualTo(new IPythonLocation(83, 36, mapToColumnMappingList(Map.of(6
       , 1, 21, 1, 23, 1)), true));
 
     //"source": "a = \"A bunch of characters \\n \\f \\r \\  \"\nb = None"
     assertThat(result.locationMap()).extracting(map -> map.get(25))
       .isEqualTo(new IPythonLocation(90, 14, mapToColumnMappingList(Map.of(4, 1, 27, 1, 30, 1, 33, 1, 36, 1, 39, 1)), true));
-    assertThat(result.locationMap()).extracting(map -> map.get(26)).isEqualTo(new IPythonLocation(90, 63, List.of(), true));
+    assertThat(result.locationMap()).extracting(map -> map.get(26)).isEqualTo(new IPythonLocation(90, 62, List.of(), true));
     // last line with the cell delimiter which contains the EOF token
     assertThat(result.locationMap()).extracting(map -> map.get(27)).isEqualTo(new IPythonLocation(90, 14, List.of()));
   }
@@ -173,15 +173,15 @@ class IpynbNotebookParserTest {
     assertThat(result.locationMap()).hasSize(9);
     assertThat(result.contents()).hasLineCount(9);
     // position of variable t
-    assertThat(result.locationMap().get(4).column()).isEqualTo(452);
+    assertThat(result.locationMap().get(4).column()).isEqualTo(451);
 
     // First and second line
     assertThat(result.locationMap()).containsEntry(1, new IPythonLocation(1, 382, List.of(), true));
-    assertThat(result.locationMap()).containsEntry(2, new IPythonLocation(1, 429, List.of(), true));
+    assertThat(result.locationMap()).containsEntry(2, new IPythonLocation(1, 428, List.of(), true));
 
     assertThat(result.locationMap()).containsEntry(6, new IPythonLocation(1, 559, mapToColumnMappingList(Map.of(0, 1, 1, 1, 2, 1)), true));
-    assertThat(result.locationMap()).containsEntry(7, new IPythonLocation(1, 610, List.of(), true));
-    assertThat(result.locationMap()).containsEntry(8, new IPythonLocation(1, 637, mapToColumnMappingList(Map.of(1, 1, 2, 1, 0, 1)), true));
+    assertThat(result.locationMap()).containsEntry(7, new IPythonLocation(1, 609, List.of(), true));
+    assertThat(result.locationMap()).containsEntry(8, new IPythonLocation(1, 636, mapToColumnMappingList(Map.of(1, 1, 2, 1, 0, 1)), true));
   }
 
   @Test
