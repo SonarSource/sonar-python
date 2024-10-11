@@ -22,7 +22,6 @@ package org.sonar.python.checks;
 import java.util.Comparator;
 import java.util.EnumSet;
 import java.util.List;
-import java.util.Objects;
 import java.util.regex.Pattern;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
@@ -83,18 +82,18 @@ public class LocalVariableAndParameterNameConventionCheck extends PythonSubscrip
   }
 
   private static boolean isType(Symbol symbol) {
-    return isExtendingType(symbol) || isAssignedFromSpecialForm(symbol);
+    return isExtendingType(symbol) || isAssignedFromTyping(symbol);
   }
 
   private static boolean isExtendingType(Symbol symbol) {
     return symbol.usages().stream().map(Usage::tree).filter(Expression.class::isInstance).map(Expression.class::cast).anyMatch(e -> e.type().mustBeOrExtend("type")) ||
-      Objects.equals(symbol.annotatedTypeName(), "typing._SpecialForm");
+      (symbol.annotatedTypeName() != null && symbol.annotatedTypeName().startsWith("typing."));
   }
 
-  private static boolean isAssignedFromSpecialForm(Symbol symbol) {
-    List<Tree> assignmentTrees = symbol.usages().stream().filter(u -> u.kind() == Usage.Kind.ASSIGNMENT_LHS).map(Usage::tree).toList();
-    for (Tree assignmentTree : assignmentTrees) {
-      Expression assignedValue = getAssignedValue(assignmentTree);
+  private static boolean isAssignedFromTyping(Symbol symbol) {
+    List<Tree> assignmentNames = symbol.usages().stream().filter(u -> u.kind() == Usage.Kind.ASSIGNMENT_LHS).map(Usage::tree).toList();
+    for (Tree assignmentName : assignmentNames) {
+      Expression assignedValue = getAssignedValue(assignmentName);
       if (assignedValue == null) {
         continue;
       }
@@ -111,14 +110,14 @@ public class LocalVariableAndParameterNameConventionCheck extends PythonSubscrip
     return false;
   }
 
-  private static Expression getAssignedValue(Tree assignmentTree) {
-    while (assignmentTree != null && !assignmentTree.is(Tree.Kind.ASSIGNMENT_STMT)) {
-      assignmentTree = assignmentTree.parent();
+  private static Expression getAssignedValue(Tree assignmentName) {
+    while (assignmentName != null && !assignmentName.is(Tree.Kind.ASSIGNMENT_STMT)) {
+      assignmentName = assignmentName.parent();
     }
-    if (assignmentTree == null) {
+    if (assignmentName == null) {
       return null;
     }
-    return ((AssignmentStatement) assignmentTree).assignedValue();
+    return ((AssignmentStatement) assignmentName).assignedValue();
   }
 
   private void raiseIssueForNameAndUsage(SubscriptionContext ctx, String name, Usage usage) {
