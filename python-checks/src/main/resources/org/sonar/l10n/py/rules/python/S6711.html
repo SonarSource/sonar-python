@@ -400,16 +400,14 @@ may be created instead of mutating a global state.</p>
 <h4>Noncompliant code example</h4>
 <pre data-diff-id="1" data-diff-type="noncompliant">
 import numpy as np
-def foo():
-    np.random.seed(42)
-    x = np.random.randn()  # Noncompliant: this relies on numpy.random.RandomState, which is deprecated
+np.random.seed(42)
+x = np.random.randn()  # Noncompliant: this relies on numpy.random.RandomState, which is deprecated
 </pre>
 <h4>Compliant solution</h4>
 <pre data-diff-id="1" data-diff-type="compliant">
 import numpy as np
-def foo():
-    generator = np.random.default_rng(42)
-    x = generator.standard_normal()
+generator = np.random.default_rng(42)
+x = generator.standard_normal()
 </pre>
 <h2>Resources</h2>
 <h3>Documentation</h3>
