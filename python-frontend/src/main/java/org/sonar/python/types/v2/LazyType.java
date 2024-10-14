@@ -28,19 +28,19 @@ import org.sonar.python.semantic.v2.LazyTypesContext;
 
 public class LazyType implements PythonType, ResolvableType {
 
-  String fullyQualifiedName;
+  String importPath;
   private final Queue<Consumer<PythonType>> consumers;
   private final LazyTypesContext lazyTypesContext;
   private static final String INTERACTION_MESSAGE = "Lazy types should not be interacted with.";
 
-  public LazyType(String fullyQualifiedName, LazyTypesContext lazyTypesContext) {
-    this.fullyQualifiedName = fullyQualifiedName;
+  public LazyType(String importPath, LazyTypesContext lazyTypesContext) {
+    this.importPath = importPath;
     this.lazyTypesContext = lazyTypesContext;
     consumers = new ArrayDeque<>();
   }
 
-  public String fullyQualifiedName() {
-    return fullyQualifiedName;
+  public String importPath() {
+    return importPath;
   }
 
   public LazyType addConsumer(Consumer<PythonType> consumer) {
