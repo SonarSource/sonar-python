@@ -24,6 +24,7 @@ import java.util.Map;
 import org.sonar.python.index.Descriptor;
 import org.sonar.python.semantic.v2.LazyTypesContext;
 import org.sonar.python.types.v2.PythonType;
+import org.sonar.python.types.v2.TypeOrigin;
 
 public class AnyDescriptorToPythonTypeConverter {
 
@@ -39,10 +40,11 @@ public class AnyDescriptorToPythonTypeConverter {
       Descriptor.Kind.VARIABLE, new VariableDescriptorToPythonTypeConverter(),
       Descriptor.Kind.AMBIGUOUS, new AmbiguousDescriptorToPythonTypeConverter()
     ));
+
   }
 
-  public PythonType convert(Descriptor from) {
-    var ctx = new ConversionContext(lazyTypesContext, this::convert);
+  public PythonType convert(Descriptor from, TypeOrigin typeOrigin) {
+    var ctx = new ConversionContext(lazyTypesContext, this::convert, typeOrigin);
     return convert(ctx, from);
   }
 

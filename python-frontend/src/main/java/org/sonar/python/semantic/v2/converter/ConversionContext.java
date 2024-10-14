@@ -24,20 +24,27 @@ import java.util.Deque;
 import org.sonar.python.index.Descriptor;
 import org.sonar.python.semantic.v2.LazyTypesContext;
 import org.sonar.python.types.v2.PythonType;
+import org.sonar.python.types.v2.TypeOrigin;
 
 public class ConversionContext {
   private final LazyTypesContext lazyTypesContext;
   private final DescriptorToPythonTypeConverter converter;
   private final Deque<PythonType> parents;
+  private final TypeOrigin typeOrigin;
 
-  public ConversionContext(LazyTypesContext lazyTypesContext, DescriptorToPythonTypeConverter converter) {
+  public ConversionContext(LazyTypesContext lazyTypesContext, DescriptorToPythonTypeConverter converter, TypeOrigin typeOrigin) {
     this.lazyTypesContext = lazyTypesContext;
     this.converter = converter;
     this.parents = new ArrayDeque<>();
+    this.typeOrigin = typeOrigin;
   }
 
   public LazyTypesContext lazyTypesContext() {
     return lazyTypesContext;
+  }
+
+  public TypeOrigin typeOrigin() {
+    return typeOrigin;
   }
 
   public PythonType convert(Descriptor from) {

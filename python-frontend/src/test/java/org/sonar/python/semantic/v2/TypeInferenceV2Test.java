@@ -722,7 +722,7 @@ class TypeInferenceV2Test {
     assertThat(fooType.parameters().get(0).declaredType().type().unwrappedType()).isEqualTo(intType);
 
     FunctionType foo2Type = (FunctionType) ((ExpressionStatement) fileInput.statements().statements().get(2)).expressions().get(0).typeV2();
-    assertThat(foo2Type.parameters()).extracting(ParameterV2::declaredType).extracting(TypeWrapper::type).containsExactly(dictType, aType);
+    assertThat(foo2Type.parameters()).extracting(ParameterV2::declaredType).extracting(TypeWrapper::type).extracting(PythonType::unwrappedType).containsExactly(dictType, aType);
     assertThat(foo2Type.parameters()).extracting(ParameterV2::location).containsExactly(
       new LocationInFile(modFileId, 3, 9, 3, 17),
       new LocationInFile(modFileId, 3, 19, 3, 24));
@@ -2321,7 +2321,7 @@ class TypeInferenceV2Test {
 
     ClassSymbol symbol = Mockito.mock(ClassSymbolImpl.class);
     Mockito.when(symbol.kind()).thenReturn(Symbol.Kind.OTHER);
-    assertThat(symbolsModuleTypeProvider.resolvePossibleLazyType("typing.Iterable.unknown")).isEqualTo(PythonType.UNKNOWN);
+    assertThat(PROJECT_LEVEL_TYPE_TABLE.lazyTypesContext().getOrCreateLazyType("typing.Iterable.unknown").resolve()).isEqualTo(PythonType.UNKNOWN);
   }
 
   @Test

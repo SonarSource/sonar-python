@@ -164,6 +164,11 @@ public class ProjectLevelSymbolTable {
       .map(desc -> DescriptorUtils.symbolFromDescriptor(desc, this, null, createdSymbolsByDescriptor, createdSymbolsByFqn)).collect(Collectors.toSet());
   }
 
+  @CheckForNull
+  public Set<Descriptor> getDescriptorsFromModule(@Nullable String moduleName) {
+    return globalDescriptorsByModuleName.get(moduleName);
+  }
+
   public Map<String, Set<String>> importsByModule() {
     return Collections.unmodifiableMap(importsByModule);
   }
