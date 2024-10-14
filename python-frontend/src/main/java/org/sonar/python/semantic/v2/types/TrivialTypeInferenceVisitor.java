@@ -145,8 +145,8 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
   public void visitNumericLiteral(NumericLiteral numericLiteral) {
     ModuleType builtins = this.projectLevelTypeTable.getBuiltinsModule();
     NumericLiteralImpl numericLiteralImpl = (NumericLiteralImpl) numericLiteral;
-    String numericKind = numericLiteralImpl.numericKind();
-    PythonType pythonType = builtins.resolveMember(numericKind).orElse(PythonType.UNKNOWN);
+    NumericLiteralImpl.NumericKind numericKind = numericLiteralImpl.numericKind();
+    PythonType pythonType = builtins.resolveMember(numericKind.value()).orElse(PythonType.UNKNOWN);
     numericLiteralImpl.typeV2(new ObjectType(pythonType, new ArrayList<>(), new ArrayList<>()));
   }
 
