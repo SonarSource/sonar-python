@@ -61,10 +61,10 @@ import org.sonarsource.sonarlint.core.plugin.commons.PluginsLoader;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.tuple;
 
-class IPythonTest {
+class SonarLintIPythonTest {
 
   @TempDir
-  public static Path TEMP;
+  public static Path temp;
 
   private static AnalysisEngine sonarlintEngine;
   private final ProgressMonitor progressMonitor = new ProgressMonitor(null);
@@ -72,7 +72,7 @@ class IPythonTest {
   @BeforeAll
   static void prepare() {
     var sonarLintConfig = AnalysisEngineConfiguration.builder()
-      .setWorkDir(TEMP)
+      .setWorkDir(temp)
       .build();
     
     var logOutput = new LogOutput() {

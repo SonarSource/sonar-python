@@ -29,7 +29,7 @@ import org.junit.platform.suite.api.Suite;
   CPDTest.class,
   CustomRulesTest.class,
   Flake8ReportTest.class,
-  IPythonTest.class,
+  SonarLintIPythonTest.class,
   MetricsTest.class,
   MypyReportTest.class,
   NoSonarTest.class,

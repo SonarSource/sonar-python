@@ -65,7 +65,7 @@ import static org.assertj.core.api.Assertions.tuple;
 class SonarLintTest {
 
   @TempDir
-  public static Path TEMP;
+  public static Path temp;
 
   private static AnalysisEngine sonarlintEngine;
   private final ProgressMonitor progressMonitor = new ProgressMonitor(null);
@@ -75,7 +75,7 @@ class SonarLintTest {
   @BeforeAll
   static void prepare() {
     var sonarLintConfig = AnalysisEngineConfiguration.builder()
-      .setWorkDir(TEMP)
+      .setWorkDir(temp)
       .build();
 
     var logOutput = new LogOutput() {
@@ -91,7 +91,7 @@ class SonarLintTest {
     var pluginLoader = new PluginsLoader().load(pluginConfiguration, Set.of());
 
     sonarlintEngine = new AnalysisEngine(sonarLintConfig, pluginLoader.getLoadedPlugins(), logOutput);
-    baseDir = TEMP.toFile();
+    baseDir = temp.toFile();
   }
 
   @AfterAll
@@ -121,9 +121,7 @@ class SonarLintTest {
     LogOutput logOutput = new LogOutput() {
       @Override
       public void log(String formattedMessage, Level level, @Nullable String stacktrace) {
-        List<String> logs = logsByLevel.getOrDefault(level, new ArrayList<>());
-        logs.add(formattedMessage);
-        logsByLevel.putIfAbsent(level, logs);
+        logsByLevel.computeIfAbsent(level, k -> new ArrayList<>()).add(formattedMessage);
       }
     };
     ClientModuleFileSystem clientFileSystem = new ClientModuleFileSystem() {
