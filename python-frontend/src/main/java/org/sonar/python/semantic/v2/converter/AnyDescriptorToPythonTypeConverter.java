@@ -31,11 +31,9 @@ public class AnyDescriptorToPythonTypeConverter {
   private static final DescriptorToPythonTypeConverter UNKNOWN_DESCRIPTOR_CONVERTER = new UnknownDescriptorToPythonTypeConverter();
   private final Map<Descriptor.Kind, DescriptorToPythonTypeConverter> converters;
   private final LazyTypesContext lazyTypesContext;
-  private final TypeOrigin typeOrigin;
 
-  public AnyDescriptorToPythonTypeConverter(LazyTypesContext lazyTypesContext, TypeOrigin typeOrigin) {
+  public AnyDescriptorToPythonTypeConverter(LazyTypesContext lazyTypesContext) {
     this.lazyTypesContext = lazyTypesContext;
-    this.typeOrigin = typeOrigin;
     converters = new EnumMap<>(Map.of(
       Descriptor.Kind.CLASS, new ClassDescriptorToPythonTypeConverter(),
       Descriptor.Kind.FUNCTION, new FunctionDescriptorToPythonTypeConverter(),
@@ -45,7 +43,7 @@ public class AnyDescriptorToPythonTypeConverter {
 
   }
 
-  public PythonType convert(Descriptor from) {
+  public PythonType convert(Descriptor from, TypeOrigin typeOrigin) {
     var ctx = new ConversionContext(lazyTypesContext, this::convert, typeOrigin);
     return convert(ctx, from);
   }

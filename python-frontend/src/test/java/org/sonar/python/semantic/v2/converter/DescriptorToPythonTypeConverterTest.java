@@ -60,7 +60,7 @@ class DescriptorToPythonTypeConverterTest {
   @Test
   void ambiguousDescriptorConversionTest() {
     var lazyTypesContext = Mockito.mock(LazyTypesContext.class);
-    var converter = new AnyDescriptorToPythonTypeConverter(lazyTypesContext, TypeOrigin.LOCAL);
+    var converter = new AnyDescriptorToPythonTypeConverter(lazyTypesContext);
 
     var descriptorAlternative1 = Mockito.mock(FunctionDescriptor.class);
 
@@ -104,7 +104,7 @@ class DescriptorToPythonTypeConverterTest {
     Mockito.when(descriptor.kind()).thenReturn(Descriptor.Kind.AMBIGUOUS);
     Mockito.when(descriptor.alternatives()).thenReturn(Set.of(descriptorAlternative1, descriptorAlternative2));
 
-    var type = (UnionType) converter.convert(descriptor);
+    var type = (UnionType) converter.convert(descriptor, TypeOrigin.LOCAL);
     Assertions.assertThat(type.candidates())
       .hasSize(2);
 
@@ -119,7 +119,7 @@ class DescriptorToPythonTypeConverterTest {
   @Test
   void classDescriptorConversionTest() {
     var lazyTypesContext = Mockito.mock(LazyTypesContext.class);
-    var converter = new AnyDescriptorToPythonTypeConverter(lazyTypesContext, TypeOrigin.LOCAL);
+    var converter = new AnyDescriptorToPythonTypeConverter(lazyTypesContext);
     var descriptor = Mockito.mock(ClassDescriptor.class);
 
     var parentClassName = "Parent";
@@ -141,7 +141,7 @@ class DescriptorToPythonTypeConverterTest {
     Mockito.when(lazyTypesContext.resolveLazyType(Mockito.argThat(lt -> parentClassName.equals(lt.fullyQualifiedName()))))
       .thenReturn(resolvedParent);
 
-    var type = (ClassType) converter.convert(descriptor);
+    var type = (ClassType) converter.convert(descriptor, TypeOrigin.LOCAL);
     Assertions.assertThat(type.name()).isEqualTo("Sample");
     
     Assertions.assertThat(type.superClasses())
@@ -157,7 +157,7 @@ class DescriptorToPythonTypeConverterTest {
   @Test
   void functionDescriptorConversionTest() {
     var lazyTypesContext = Mockito.mock(LazyTypesContext.class);
-    var converter = new AnyDescriptorToPythonTypeConverter(lazyTypesContext, TypeOrigin.LOCAL);
+    var converter = new AnyDescriptorToPythonTypeConverter(lazyTypesContext);
     var descriptor = Mockito.mock(FunctionDescriptor.class);
 
     var returnTypeName = "Returned";
@@ -190,7 +190,7 @@ class DescriptorToPythonTypeConverterTest {
     Mockito.when(lazyTypesContext.resolveLazyType(Mockito.argThat(lt -> returnTypeName.equals(lt.fullyQualifiedName()))))
       .thenReturn(resolvedReturnType);
 
-    var type = (FunctionType) converter.convert(descriptor);
+    var type = (FunctionType) converter.convert(descriptor, TypeOrigin.LOCAL);
     Assertions.assertThat(type.name()).isEqualTo("Sample");
 
     Assertions.assertThat(type.parameters()).hasSize(1);
@@ -207,7 +207,7 @@ class DescriptorToPythonTypeConverterTest {
   @Test
   void variableDescriptorConversionTest() {
     var lazyTypesContext = Mockito.mock(LazyTypesContext.class);
-    var converter = new AnyDescriptorToPythonTypeConverter(lazyTypesContext, TypeOrigin.LOCAL);
+    var converter = new AnyDescriptorToPythonTypeConverter(lazyTypesContext);
     var descriptor = Mockito.mock(VariableDescriptor.class);
 
     var variableTypeName = "Returned";
@@ -223,7 +223,7 @@ class DescriptorToPythonTypeConverterTest {
     Mockito.when(lazyTypesContext.resolveLazyType(Mockito.argThat(lt -> variableTypeName.equals(lt.fullyQualifiedName()))))
       .thenReturn(resolvedVariableType);
 
-    var type = (ObjectType) converter.convert(descriptor);
+    var type = (ObjectType) converter.convert(descriptor, TypeOrigin.LOCAL);
     Assertions.assertThat(type)
       .extracting(PythonType::unwrappedType)
       .isSameAs(resolvedVariableType);

@@ -34,19 +34,17 @@ public class SymbolsModuleTypeProvider {
   private final ProjectLevelSymbolTable projectLevelSymbolTable;
   private final ModuleType rootModule;
   private final LazyTypesContext lazyTypesContext;
-  private final AnyDescriptorToPythonTypeConverter stubsDescriptorToPythonTypeConverter;
-  private final AnyDescriptorToPythonTypeConverter projectDescriptorToPythonTypeConverter;
+  private final AnyDescriptorToPythonTypeConverter anyDescriptorToPythonTypeConverter;
 
   public SymbolsModuleTypeProvider(ProjectLevelSymbolTable projectLevelSymbolTable, LazyTypesContext lazyTypeContext) {
     this.projectLevelSymbolTable = projectLevelSymbolTable;
     this.lazyTypesContext = lazyTypeContext;
-    this.stubsDescriptorToPythonTypeConverter = new AnyDescriptorToPythonTypeConverter(lazyTypesContext, TypeOrigin.STUB);
-    this.projectDescriptorToPythonTypeConverter = new AnyDescriptorToPythonTypeConverter(lazyTypesContext, TypeOrigin.LOCAL);
+    this.anyDescriptorToPythonTypeConverter = new AnyDescriptorToPythonTypeConverter(lazyTypesContext);
 
     var rootModuleMembers = projectLevelSymbolTable.typeShedDescriptorsProvider().builtinDescriptors()
       .entrySet()
       .stream()
-      .collect(Collectors.toMap(Map.Entry::getKey, e -> stubsDescriptorToPythonTypeConverter.convert(e.getValue())));
+      .collect(Collectors.toMap(Map.Entry::getKey, e -> anyDescriptorToPythonTypeConverter.convert(e.getValue(), TypeOrigin.STUB)));
     this.rootModule = new ModuleType(null, null, rootModuleMembers);
   }
 
@@ -74,14 +72,14 @@ public class SymbolsModuleTypeProvider {
     if (retrieved == null) {
       return Optional.empty();
     }
-    var members = retrieved.stream().collect(Collectors.toMap(Descriptor::name, projectDescriptorToPythonTypeConverter::convert));
+    var members = retrieved.stream().collect(Collectors.toMap(Descriptor::name, d -> anyDescriptorToPythonTypeConverter.convert(d, TypeOrigin.LOCAL)));
     return Optional.of(new ModuleType(moduleName, parent, members));
   }
 
   private Optional<ModuleType> createModuleTypeFromTypeShed(String moduleName, String moduleFqn, ModuleType parent) {
     var moduleMembers = projectLevelSymbolTable.typeShedDescriptorsProvider().descriptorsForModule(moduleFqn)
       .entrySet().stream()
-      .collect(Collectors.toMap(Map.Entry::getKey, e -> stubsDescriptorToPythonTypeConverter.convert(e.getValue())));
+      .collect(Collectors.toMap(Map.Entry::getKey, e -> anyDescriptorToPythonTypeConverter.convert(e.getValue(), TypeOrigin.STUB)));
     return Optional.of(moduleMembers).filter(m -> !m.isEmpty())
       .map(m -> new ModuleType(moduleName, parent, m));
   }
