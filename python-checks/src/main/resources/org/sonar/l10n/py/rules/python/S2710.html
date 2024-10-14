@@ -7,8 +7,9 @@ method will most probably fail. This rule also applies to methods <code>__init_s
 <code>__new__</code> as their first argument is always the class instead of "self".</p>
 <p>By default this rule accepts <code>cls</code> and <code>mcs</code>, which is sometime used in metaclasses, as valid names for class parameters. You
 can set your own list of accepted names via the parameter <code>classParameterNames</code>.</p>
-<h3>How to fix it</h3>
+<h2>How to fix it</h2>
 <p>Follow the naming convention for the first parameter name of a class method.</p>
+<h3>Code examples</h3>
 <h4>Noncompliant code example</h4>
 <pre data-diff-id="1" data-diff-type="noncompliant">
 class Rectangle(object):

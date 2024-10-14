@@ -1,7 +1,8 @@
-<p>This rule raises an issue when the axis argument is not provided to TensorFlow’s reduction operations.</p>
+<p>This rule raises an issue when the <code>axis</code>/<code>dim`</code> argument is not provided to reduction operations.</p>
 <h2>Why is this an issue?</h2>
-<p>The result of TensorFlow’s reduction operations (i.e. <code>tf.math.reduce_sum</code>, <code>tf.math.reduce_std</code>), highly depends on the
-shape of the Tensor provided.</p>
+<h3>TensorFlow</h3>
+<p>The result of reduction operations (i.e. <code>tf.math.reduce_sum</code>, <code>tf.math.reduce_std</code>, <code>torch.sum</code>,
+<code>torch.mean</code>, etc…​), highly depends on the shape of the Tensor provided.</p>
 <pre>
 import tensorflow as tf
 
@@ -42,7 +43,9 @@ tf.math.reduce_sum(x + y, axis=0)
 <p>In the example above, specifying the axis clarifies the intent, as the result now is <code>[5, 7]</code>. If the intent was to effectively reduce
 across all dimensions the user should provide the list of axis <code>axis=[0,1]</code> or clearly state the default behavior should be applied with
 <code>axis=None</code>.</p>
-<h2>How to fix it</h2>
+<h3>The PyTorch equivalent</h3>
+<p>The same behavior occurs in PyTorch, but the argument is called <code>dim</code> instead of <code>axis</code>.</p>
+<h2>How to fix it in TensorFlow</h2>
 <p>To fix this issue provide the axis argument when using a TensorFlow reduction operation such as <code>tf.math.reduce_sum</code>,
 <code>tf.math.reduce_prod</code>, <code>tf.math.reduce_mean</code>, etc…​</p>
 <h3>Code examples</h3>
@@ -60,6 +63,24 @@ import tensorflow as tf
 x = tf.constant([[1, 1, 1], [1, 1, 1]])
 tf.math.reduce_sum(x, axis=0) # Compliant: the reduction will happen only on the axis 0, resulting in `[2,2,2]`
 </pre>
+<h2>How to fix it in PyTorch</h2>
+<p>To fix this issue provide the dim argument when using a PyTorch reduction operation such as <code>torch.sum</code>, <code>torch.prod</code>,
+<code>torch.mean</code>, etc…​</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+import torch
+
+x = torch.tensor([[1, 1, 1], [1, 1, 1]])
+torch.sum(x) # Noncompliant: the dim argument defaults to None
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="2" data-diff-type="compliant">
+import torch
+
+x = torch.tensor([[1, 1, 1], [1, 1, 1]])
+torch.sum(x, dim=None) # Compliant: all dimensions will be reduced
+</pre>
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
@@ -71,6 +92,7 @@ tf.math.reduce_sum(x, axis=0) # Compliant: the reduction will happen only on the
   <li> TensorFlow Documentation - <a href="https://www.tensorflow.org/api_docs/python/tf/math/reduce_sum">tf.math.reduce_sum reference</a> </li>
   <li> TensorFlow Documentation - <a href="https://www.tensorflow.org/api_docs/python/tf/math/reduce_variance">tf.math.reduce_variance reference</a>
   </li>
+  <li> PyTorch Documentation - <a href="https://pytorch.org/docs/stable/torch.html#reduction-ops">Reduction operations</a> </li>
 </ul>
 <h3>Articles &amp; blog posts</h3>
 <ul>

@@ -1,17 +1,22 @@
 {
-  "title": "The axis argument should be specified when using TensorFlow\u0027s reduction operations",
+  "title": "The reduction axis\/dimension should be specified when using reduction operations",
   "type": "CODE_SMELL",
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",
     "constantCost": "5min"
   },
-  "tags": [],
+  "tags": [
+    "tensorflow",
+    "pytorch",
+    "machine-learning",
+    "scientific-computing"
+  ],
   "defaultSeverity": "Major",
   "ruleSpecification": "RSPEC-6929",
   "sqKey": "S6929",
   "scope": "All",
-  "quickfix": "unknown",
+  "quickfix": "targeted",
   "code": {
     "impacts": {
       "MAINTAINABILITY": "MEDIUM",
