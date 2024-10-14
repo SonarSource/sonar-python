@@ -91,17 +91,25 @@ public class NumericLiteralImpl extends PyTree implements NumericLiteral {
 
   // https://docs.python.org/3/reference/lexical_analysis.html#numeric-literals
   private InferredType computeType() {
+    return switch (numericKind()) {
+      case FLOAT -> InferredTypes.FLOAT;
+      case COMPLEX -> InferredTypes.COMPLEX;
+      default -> InferredTypes.INT;
+    };
+  }
+
+  public NumericKind numericKind() {
     String valueAsStringLowerCase = valueAsString.toLowerCase(Locale.ROOT);
     if (valueAsStringLowerCase.contains("j")) {
-      return InferredTypes.COMPLEX;
+      return NumericKind.COMPLEX;
     }
     if (valueAsStringLowerCase.startsWith("0x")) {
-      return InferredTypes.INT;
+      return NumericKind.INT;
     }
     if (valueAsString.contains(".") || valueAsStringLowerCase.contains("e")) {
-      return InferredTypes.FLOAT;
+      return NumericKind.FLOAT;
     }
-    return InferredTypes.INT;
+    return NumericKind.INT;
   }
 
   @Override
@@ -111,5 +119,19 @@ public class NumericLiteralImpl extends PyTree implements NumericLiteral {
 
   public void typeV2(PythonType type) {
     this.typeV2 = type;
+  }
+
+  public enum NumericKind {
+    INT("int"), FLOAT("float"), COMPLEX("complex");
+
+    private final String value;
+
+    NumericKind(String value) {
+      this.value = value;
+    }
+
+    public String value() {
+      return value;
+    }
   }
 }
