@@ -117,7 +117,6 @@ class ExpressionsTest {
     assertThat(removeParentheses(exp("(42)")).getKind()).isEqualTo(Kind.NUMERIC_LITERAL);
     assertThat(removeParentheses(exp("((42))")).getKind()).isEqualTo(Kind.NUMERIC_LITERAL);
     assertThat(removeParentheses(exp("((a))")).getKind()).isEqualTo(Kind.NAME);
-    assertThat(removeParentheses(null)).isNull();
   }
 
   @Test

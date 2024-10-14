@@ -89,10 +89,10 @@ public class RegexCheck extends PythonSubscriptionCheck {
   }
 
   private static Expression getExpression(@Nullable Expression expr) {
-    expr = Expressions.removeParentheses(expr);
     if (expr == null) {
       return null;
     }
+    expr = Expressions.removeParentheses(expr);
     if (expr.is(Tree.Kind.MODULO) || expr.is(Tree.Kind.PLUS)) {
       return getExpression(((BinaryExpression) expr).leftOperand());
     }
