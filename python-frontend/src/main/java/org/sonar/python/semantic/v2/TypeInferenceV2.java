@@ -21,7 +21,9 @@ package org.sonar.python.semantic.v2;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
@@ -40,6 +42,7 @@ import org.sonar.python.semantic.v2.types.Propagation;
 import org.sonar.python.semantic.v2.types.PropagationVisitor;
 import org.sonar.python.semantic.v2.types.TrivialTypeInferenceVisitor;
 import org.sonar.python.semantic.v2.types.TryStatementVisitor;
+import org.sonar.python.semantic.v2.types.TypeInferenceProgramState;
 import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.types.v2.PythonType;
 
@@ -48,6 +51,7 @@ public class TypeInferenceV2 {
   private final ProjectLevelTypeTable projectLevelTypeTable;
   private final SymbolTable symbolTable;
   private final PythonFile pythonFile;
+  private Map<SymbolV2, Set<PythonType>> typesBySymbol = new HashMap<>();
 
   public TypeInferenceV2(ProjectLevelTypeTable projectLevelTypeTable, PythonFile pythonFile, SymbolTable symbolTable) {
     this.projectLevelTypeTable = projectLevelTypeTable;
@@ -92,7 +96,7 @@ public class TypeInferenceV2 {
       .map(Parameter::name)
       .collect(Collectors.toSet());
     Set<SymbolV2> localVariables = symbolTable.getSymbolsByRootTree(functionDef);
-    inferTypesAndMemberAccessSymbols(
+    typesBySymbol = inferTypesAndMemberAccessSymbols(
       functionDef,
       functionDef.body(),
       localVariables,
@@ -102,7 +106,7 @@ public class TypeInferenceV2 {
   }
 
 
-  private void inferTypesAndMemberAccessSymbols(Tree scopeTree,
+  private Map<SymbolV2, Set<PythonType>> inferTypesAndMemberAccessSymbols(Tree scopeTree,
     StatementList statements,
     Set<SymbolV2> declaredVariables,
     Set<Name> annotatedParameterNames,
@@ -123,14 +127,17 @@ public class TypeInferenceV2 {
     } else {
       ControlFlowGraph cfg = controlFlowGraphSupplier.get();
       if (cfg == null) {
-        return;
+        // TODO SONARPY-2215: fix me
+        return Map.of();
       }
       assignedNames.addAll(annotatedParameterNames);
-      flowSensitiveTypeInference(cfg, getTrackedVars(declaredVariables, assignedNames), propagationVisitor);
+      return flowSensitiveTypeInference(cfg, getTrackedVars(declaredVariables, assignedNames), propagationVisitor);
     }
+    // TODO SONARPY-2190: fix try/except case
+    return Map.of();
   }
 
-  private void flowSensitiveTypeInference(ControlFlowGraph cfg, Set<SymbolV2> trackedVars, PropagationVisitor propagationVisitor) {
+  private Map<SymbolV2, Set<PythonType>> flowSensitiveTypeInference(ControlFlowGraph cfg, Set<SymbolV2> trackedVars, PropagationVisitor propagationVisitor) {
     // TODO: infer parameter type based on default value assignement
     var parameterTypes = trackedVars
       .stream()
@@ -147,7 +154,7 @@ public class TypeInferenceV2 {
       parameterTypes);
 
     flowSensitiveTypeInference.compute(cfg);
-    flowSensitiveTypeInference.compute(cfg);
+    return (flowSensitiveTypeInference.compute(cfg)).typesBySymbol();
   }
 
   private static PythonType getParameterType(SymbolV2 symbol) {

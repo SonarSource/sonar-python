@@ -23,8 +23,10 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import org.sonar.plugins.python.api.cfg.ControlFlowGraph;
 import org.sonar.plugins.python.api.tree.AnnotatedAssignment;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
+import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.CompoundAssignmentStatement;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.ForStatement;
@@ -92,6 +94,8 @@ public class FlowSensitiveTypeInference extends ForwardAnalysis {
       }
     } else if (element instanceof FunctionDef functionDef) {
       handleDefinitions(functionDef, state);
+    } else if (element instanceof ClassDef classDef) {
+      handleDefinitions(classDef, state);
     } else if (element instanceof ImportName importName) {
       handleDefinitions(importName, state);
     } else if (element instanceof ImportFrom importFrom) {
@@ -105,6 +109,11 @@ public class FlowSensitiveTypeInference extends ForwardAnalysis {
       element.accept(isInstanceVisitor);
       updateTree(element, state);
     }
+  }
+
+  @Override
+  public TypeInferenceProgramState compute(ControlFlowGraph cfg) {
+    return (TypeInferenceProgramState) super.compute(cfg);
   }
 
   private void handleParameter(Parameter parameter, TypeInferenceProgramState state) {

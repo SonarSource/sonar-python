@@ -1122,16 +1122,16 @@ class TypeInferenceV2Test {
       MyClass()
       """);
 
-    List<CallExpression> calls = PythonTestUtils.getAllDescendant(fileInput, tree -> tree.is(Tree.Kind.CALL_EXPR));
-    PythonType calleeType1 = calls.get(0).callee().typeV2();
-    PythonType calleeType2 = calls.get(1).callee().typeV2();
-    PythonType calleeType3 = calls.get(2).callee().typeV2();
-    PythonType calleeType4 = calls.get(3).callee().typeV2();
+    PythonType nonePythonType = new ObjectType(NONE_TYPE, List.of(), List.of());
+    PythonType myClassPythonType = ((ClassDef) fileInput.statements().statements().get(0)).name().typeV2();
 
-    assertThat(calleeType1).isEqualTo(PythonType.UNKNOWN);
-    assertThat(calleeType2).isEqualTo(PythonType.UNKNOWN);
-    assertThat(calleeType3).isEqualTo(PythonType.UNKNOWN);
-    assertThat(calleeType4).isEqualTo(PythonType.UNKNOWN);
+    List<CallExpression> calls = PythonTestUtils.getAllDescendant(fileInput, tree -> tree.is(Tree.Kind.CALL_EXPR));
+    for (CallExpression call : calls){
+      PythonType calleeType = call.callee().typeV2();
+      assertThat(calleeType).isInstanceOf(UnionType.class);
+      assertThat(calleeType.isCompatibleWith(nonePythonType)).isTrue();
+      assertThat(calleeType.isCompatibleWith(myClassPythonType)).isTrue();
+    }
   }
 
   @Test
