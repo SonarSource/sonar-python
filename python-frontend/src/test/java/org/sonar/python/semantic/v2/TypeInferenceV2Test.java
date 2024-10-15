@@ -89,7 +89,7 @@ import static org.sonar.python.types.v2.TypesTestUtils.STR_TYPE;
 import static org.sonar.python.types.v2.TypesTestUtils.TUPLE_TYPE;
 import static org.sonar.python.types.v2.TypesTestUtils.TYPE_TYPE;
 
-class TypeInferenceV2Test {
+public class TypeInferenceV2Test {
 
   static PythonFile pythonFile = PythonTestUtils.pythonFile("");
 
@@ -2546,11 +2546,11 @@ class TypeInferenceV2Test {
     Assertions.assertThat(type.unwrappedType()).isSameAs(STR_TYPE);
   }
 
-  private static FileInput inferTypes(String lines) {
+  public static FileInput inferTypes(String lines) {
     return inferTypes(lines, PROJECT_LEVEL_TYPE_TABLE);
   }
 
-  private static FileInput inferTypes(String lines, ProjectLevelTypeTable projectLevelTypeTable) {
+  public static FileInput inferTypes(String lines, ProjectLevelTypeTable projectLevelTypeTable) {
     FileInput root = parse(lines);
 
     var symbolTable = new SymbolTableBuilderV2(root)
