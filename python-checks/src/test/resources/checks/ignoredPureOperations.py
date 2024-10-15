@@ -9,7 +9,7 @@ def basic_calls():
     no_such_function(1)
 
 def string_calls():
-    "hello".capitalize() # Noncompliant
+    "hello".capitalize() # Noncompliant {{The return value of "str.capitalize" must be used.}}
     s0 = "hello".capitalize()
     s1 = "hello"
     s1.capitalize() # Noncompliant

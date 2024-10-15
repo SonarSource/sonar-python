@@ -25,15 +25,16 @@ import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
-import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.ExpressionStatement;
 import org.sonar.plugins.python.api.tree.InExpression;
 import org.sonar.plugins.python.api.tree.SubscriptionExpression;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.tree.TreeUtils;
+import org.sonar.python.types.v2.PythonType;
+import org.sonar.python.types.v2.TriBool;
+import org.sonar.python.types.v2.TypeChecker;
 
 @Rule(key = "S2201")
 public class IgnoredPureOperationsCheck extends PythonSubscriptionCheck {
@@ -293,27 +294,26 @@ public class IgnoredPureOperationsCheck extends PythonSubscriptionCheck {
   }
 
   private static void checkExpression(SubscriptionContext ctx, Expression expression) {
+    TypeChecker typeChecker = ctx.typeChecker();
     if (expression.is(Tree.Kind.CALL_EXPR)) {
       CallExpression callExpression = (CallExpression) expression;
-      Symbol symbol = callExpression.calleeSymbol();
-      if (symbol == null) {
-        return;
-      }
-
-      String fqn = symbol.fullyQualifiedName();
-      if (fqn != null && PURE_FUNCTIONS.contains(fqn)) {
-        ctx.addIssue(callExpression.callee(), String.format(MESSAGE_FORMAT, fqn));
-      }
+      PythonType pythonType = callExpression.callee().typeV2();
+      PURE_FUNCTIONS.stream()
+        .filter(f -> typeChecker.typeCheckBuilder().isTypeWithName(f).check(pythonType).equals(TriBool.TRUE))
+        .findFirst()
+        .ifPresent(result -> ctx.addIssue(callExpression.callee(), String.format(MESSAGE_FORMAT, result)));
     } else if (expression.is(Tree.Kind.SUBSCRIPTION)) {
       SubscriptionExpression subscriptionExpression = (SubscriptionExpression) expression;
-      InferredType type = subscriptionExpression.object().type();
-      if (PURE_GETITEM_TYPES.stream().anyMatch(type::canOnlyBe)) {
+      PythonType pythonType = subscriptionExpression.object().typeV2();
+      boolean isPureGetitemType = PURE_GETITEM_TYPES.stream().anyMatch(t -> typeChecker.typeCheckBuilder().isTypeWithName(t).check(pythonType).equals(TriBool.TRUE));
+      if (isPureGetitemType) {
         ctx.addIssue(subscriptionExpression, String.format(MESSAGE_FORMAT, "__getitem__"));
       }
     } else if (expression.is(Tree.Kind.IN)) {
       InExpression inExpression = (InExpression) expression;
-      InferredType type = inExpression.rightOperand().type();
-      if (PURE_CONTAINS_TYPES.stream().anyMatch(type::canOnlyBe)) {
+      PythonType pythonType = inExpression.rightOperand().typeV2();
+      boolean isPureContainsType = PURE_CONTAINS_TYPES.stream().anyMatch(t -> typeChecker.typeCheckBuilder().isTypeWithName(t).check(pythonType).equals(TriBool.TRUE));
+      if (isPureContainsType) {
         ctx.addIssue(inExpression, String.format(MESSAGE_FORMAT, "__contains__"));
       }
     }
