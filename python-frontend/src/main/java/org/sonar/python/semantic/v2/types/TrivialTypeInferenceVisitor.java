@@ -82,6 +82,7 @@ import org.sonar.python.types.v2.TypeOrigin;
 import org.sonar.python.types.v2.TypeSource;
 import org.sonar.python.types.v2.UnionType;
 import org.sonar.python.types.v2.UnknownType;
+import org.sonar.python.types.v2.UnresolvedImportType;
 
 import static org.sonar.python.semantic.SymbolUtils.pathOf;
 import static org.sonar.python.tree.TreeUtils.locationInFile;
@@ -312,7 +313,7 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
   }
 
   private static void generateNamesForImportAlias(AliasedName aliasedName, PythonType resolvedType, List<String> fqn) {
-    var aliasedNameType = resolvedType instanceof UnknownType ? new UnknownType.UnresolvedImportType(String.join(".", fqn)) : resolvedType;
+    var aliasedNameType = resolvedType instanceof UnknownType ? new UnresolvedImportType(String.join(".", fqn)) : resolvedType;
     setTypeToName(aliasedName.alias(), aliasedNameType);
   }
 
@@ -326,7 +327,7 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
       }
     } else if (resolvedType instanceof UnknownType) {
       for (int i = names.size() - 1; i >= 0; i--) {
-        UnknownType.UnresolvedImportType type = new UnknownType.UnresolvedImportType(String.join(".", fqn.subList(0, i + 1)));
+        UnresolvedImportType type = new UnresolvedImportType(String.join(".", fqn.subList(0, i + 1)));
         setTypeToName(names.get(i), type);
       }
     }
@@ -364,10 +365,10 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
     }
   }
 
-  private static UnknownType.UnresolvedImportType createUnresolvedImportType(List<String> moduleFqnList, Name name) {
+  private static UnresolvedImportType createUnresolvedImportType(List<String> moduleFqnList, Name name) {
     String fromModuleFqn = String.join(".", moduleFqnList);
     String fqn = fromModuleFqn + "." + name.name();
-    return new UnknownType.UnresolvedImportType(fqn);
+    return new UnresolvedImportType(fqn);
   }
 
   @Override
