@@ -694,6 +694,16 @@ class ControlFlowGraphTest {
     );
   }
 
+  @Test
+  void class_def_elements() {
+    ControlFlowGraph cfg = cfg(
+      "class Dec:",
+      "    ...");
+    List<Tree> elements = cfg.start().elements();
+    assertThat(elements).hasSize(2);
+    assertThat(elements).extracting(Tree::getKind).containsExactly(Kind.CLASSDEF, Kind.EXPRESSION_STMT);
+  }
+
   /**
    * Because the predecessors are constructed based on the successors, there is no need to have assertions on predecessors on all other CFG tests
    */
@@ -720,7 +730,7 @@ class ControlFlowGraphTest {
     );
     List<Tree> elements = cfg.start().elements();
     assertThat(elements).hasSize(5);
-    assertThat(elements).extracting(Tree::getKind).containsExactly(Kind.NAME, Kind.FUNCDEF, Kind.ASSIGNMENT_STMT, Kind.DECORATOR, Kind.FUNCDEF);
+    assertThat(elements).extracting(Tree::getKind).containsExactly(Kind.CLASSDEF, Kind.FUNCDEF, Kind.ASSIGNMENT_STMT, Kind.DECORATOR, Kind.FUNCDEF);
 
     cfg = cfg(
       "class Dec:",
@@ -732,7 +742,7 @@ class ControlFlowGraphTest {
     );
     elements = cfg.start().elements();
     assertThat(elements).hasSize(5);
-    assertThat(elements).extracting(Tree::getKind).containsExactly(Kind.NAME, Kind.FUNCDEF, Kind.DECORATOR, Kind.NAME, Kind.EXPRESSION_STMT);
+    assertThat(elements).extracting(Tree::getKind).containsExactly(Kind.CLASSDEF, Kind.FUNCDEF, Kind.DECORATOR, Kind.CLASSDEF, Kind.EXPRESSION_STMT);
   }
 
   @Test

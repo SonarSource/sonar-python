@@ -27,12 +27,14 @@ import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.cfg.CfgBlock;
 import org.sonar.plugins.python.api.cfg.ControlFlowGraph;
+import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.AnnotatedAssignment;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.CallExpression;
+import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.ExpressionStatement;
 import org.sonar.plugins.python.api.tree.FunctionDef;
@@ -44,7 +46,6 @@ import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.UnaryExpression;
 import org.sonar.python.cfg.fixpoint.LiveVariablesAnalysis;
-import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
 import org.sonar.python.checks.utils.DeadStoreUtils;
 import org.sonar.python.checks.utils.Expressions;
 import org.sonar.python.checks.utils.ImportedNamesCollector;
@@ -107,7 +108,12 @@ public class DeadStoreCheck extends PythonSubscriptionCheck {
   }
 
   private static void raiseIssue(SubscriptionContext ctx, DeadStoreUtils.UnnecessaryAssignment unnecessaryAssignment) {
-    Tree element = unnecessaryAssignment.element;
+    Tree element;
+    if (unnecessaryAssignment.element instanceof ClassDef classDefElement) {
+      element = classDefElement.name();
+    } else {
+      element = unnecessaryAssignment.element;
+    }
     String symbolName = unnecessaryAssignment.symbol.name();
     String message = String.format(MESSAGE_TEMPLATE, symbolName);
     Token lastRelevantToken = TreeUtils.getTreeSeparatorOrLastToken(element);
