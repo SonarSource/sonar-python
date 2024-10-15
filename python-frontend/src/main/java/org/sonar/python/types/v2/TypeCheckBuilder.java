@@ -79,6 +79,12 @@ public class TypeCheckBuilder {
     return this;
   }
 
+  public TypeCheckBuilder isTypeWithName(String expectedName) {
+    var expected = projectLevelTypeTable.getType(expectedName);
+    predicates.add(new IsSameAsTypePredicate(expected));
+    return this;
+  }
+
   interface TypePredicate {
     TriBool test(PythonType pythonType);
   }
