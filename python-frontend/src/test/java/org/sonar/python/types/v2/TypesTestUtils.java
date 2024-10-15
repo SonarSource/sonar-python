@@ -50,10 +50,13 @@ public class TypesTestUtils {
   }
 
   public static FileInput parseAndInferTypes(PythonFile pythonFile, String... code) {
+    return parseAndInferTypes(PROJECT_LEVEL_TYPE_TABLE, pythonFile, code);
+  }
+
+  public static FileInput parseAndInferTypes(ProjectLevelTypeTable typeTable, PythonFile pythonFile, String... code) {
     FileInput fileInput = PythonTestUtils.parseWithoutSymbols(code);
-    var symbolTable = new SymbolTableBuilderV2(fileInput)
-      .build();
-    new TypeInferenceV2(PROJECT_LEVEL_TYPE_TABLE, pythonFile, symbolTable).inferTypes(fileInput);
+    var symbolTable = new SymbolTableBuilderV2(fileInput).build();
+    new TypeInferenceV2(typeTable, pythonFile, symbolTable).inferTypes(fileInput);
     return fileInput;
   }
 }

@@ -30,14 +30,17 @@ import org.sonar.plugins.python.api.tree.NumericLiteral;
 import org.sonar.plugins.python.api.tree.StatementList;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.PythonTestUtils;
+import org.sonar.python.semantic.ProjectLevelSymbolTable;
+import org.sonar.python.semantic.v2.ProjectLevelTypeTable;
 import org.sonar.python.tree.TreeUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.sonar.python.PythonTestUtils.parseWithoutSymbols;
 import static org.sonar.python.types.v2.ClassTypeTest.classType;
 import static org.sonar.python.types.v2.TypesTestUtils.INT_TYPE;
 import static org.sonar.python.types.v2.TypesTestUtils.LIST_TYPE;
-import static org.sonar.python.types.v2.TypesTestUtils.SET_TYPE;
 import static org.sonar.python.types.v2.TypesTestUtils.PROJECT_LEVEL_TYPE_TABLE;
+import static org.sonar.python.types.v2.TypesTestUtils.SET_TYPE;
 import static org.sonar.python.types.v2.TypesTestUtils.parseAndInferTypes;
 
 
@@ -230,5 +233,63 @@ class TypeCheckerTest {
     assertThat(checker.check(xType)).isEqualTo(TriBool.TRUE);
     assertThat(checker.check(yType)).isEqualTo(TriBool.UNKNOWN);
     assertThat(checker.check(zType)).isEqualTo(TriBool.FALSE);
+  }
+
+
+  @Test
+  void isTypeWithNameStubNamesTest() {
+    FileInput fileInput = parseAndInferTypes("42");
+    NumericLiteral intLiteral = (NumericLiteral) TreeUtils.firstChild(fileInput, t -> t.is(Tree.Kind.NUMERIC_LITERAL)).get();
+    ObjectType intLiteralType = (ObjectType) intLiteral.typeV2();
+    assertThat(intLiteralType.unwrappedType()).isEqualTo(INT_TYPE);
+
+    assertThat(typeChecker.typeCheckBuilder().isTypeWithName("int").check(intLiteralType)).isEqualTo(TriBool.TRUE);
+    assertThat(typeChecker.typeCheckBuilder().isTypeWithName("str").check(intLiteralType)).isEqualTo(TriBool.FALSE);
+    assertThat(typeChecker.typeCheckBuilder().isTypeWithName("unknown").check(intLiteralType)).isEqualTo(TriBool.UNKNOWN);
+
+    fileInput = parseAndInferTypes("round(42.42)");
+    var roundType = ((CallExpression) ((ExpressionStatement) fileInput.statements().statements().get(0)).expressions().get(0)).callee().typeV2();
+    assertThat(typeChecker.typeCheckBuilder().isTypeWithName("round").check(roundType)).isEqualTo(TriBool.TRUE);
+
+    fileInput = parseAndInferTypes(
+      """
+        from flask import Response
+        Response()
+        """
+    );
+    var responseType = ((CallExpression) ((ExpressionStatement) fileInput.statements().statements().get(1)).expressions().get(0)).callee().typeV2();
+    assertThat(typeChecker.typeCheckBuilder().isTypeWithName("flask.Response").check(responseType)).isEqualTo(TriBool.TRUE);
+    // TODO: SONARPY-2209 this should return TriBool.TRUE
+    assertThat(typeChecker.typeCheckBuilder().isTypeWithName("flask.wrappers.Response").check(responseType)).isEqualTo(TriBool.FALSE);
+  }
+
+  @Test
+  void isTypeWithNameProjectNamesTest() {
+    ProjectLevelSymbolTable projectLevelSymbolTable = new ProjectLevelSymbolTable();
+
+    FileInput tree = parseWithoutSymbols(
+      """
+      class A: pass
+      class B: pass
+      """
+    );
+    PythonFile pythonFile = PythonTestUtils.pythonFile("mod.py");
+    projectLevelSymbolTable.addModule(tree, "my_package", pythonFile);
+    ProjectLevelTypeTable projectLevelTypeTable = new ProjectLevelTypeTable(projectLevelSymbolTable);
+    TypeChecker localTypeChecker = new TypeChecker(projectLevelTypeTable);
+
+    FileInput initTree = parseWithoutSymbols("");
+    PythonFile initFile = PythonTestUtils.pythonFile("__init__.py");
+    projectLevelSymbolTable.addModule(initTree, "my_package", initFile);
+
+    var fileInput = parseAndInferTypes(projectLevelTypeTable, pythonFile, """
+      from my_package.mod import A
+      A
+      """
+    );
+    var aType = ((ExpressionStatement) fileInput.statements().statements().get(1)).expressions().get(0).typeV2();
+    assertThat(localTypeChecker.typeCheckBuilder().isTypeWithName("my_package.mod.A").check(aType)).isEqualTo(TriBool.TRUE);
+    assertThat(localTypeChecker.typeCheckBuilder().isTypeWithName("my_package.mod.B").check(aType)).isEqualTo(TriBool.FALSE);
+    assertThat(localTypeChecker.typeCheckBuilder().isTypeWithName("my_package.unknown.A").check(aType)).isEqualTo(TriBool.UNKNOWN);
   }
 }
