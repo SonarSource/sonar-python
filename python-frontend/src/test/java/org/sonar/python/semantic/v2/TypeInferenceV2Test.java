@@ -1122,16 +1122,16 @@ class TypeInferenceV2Test {
       MyClass()
       """);
 
-    List<CallExpression> calls = PythonTestUtils.getAllDescendant(fileInput, tree -> tree.is(Tree.Kind.CALL_EXPR));
-    PythonType calleeType1 = calls.get(0).callee().typeV2();
-    PythonType calleeType2 = calls.get(1).callee().typeV2();
-    PythonType calleeType3 = calls.get(2).callee().typeV2();
-    PythonType calleeType4 = calls.get(3).callee().typeV2();
+    PythonType nonePythonType = new ObjectType(NONE_TYPE, List.of(), List.of());
+    PythonType myClassPythonType = ((ClassDef) fileInput.statements().statements().get(0)).name().typeV2();
 
-    assertThat(calleeType1).isEqualTo(PythonType.UNKNOWN);
-    assertThat(calleeType2).isEqualTo(PythonType.UNKNOWN);
-    assertThat(calleeType3).isEqualTo(PythonType.UNKNOWN);
-    assertThat(calleeType4).isEqualTo(PythonType.UNKNOWN);
+    List<CallExpression> calls = PythonTestUtils.getAllDescendant(fileInput, tree -> tree.is(Tree.Kind.CALL_EXPR));
+    for (CallExpression call : calls){
+      PythonType calleeType = call.callee().typeV2();
+      assertThat(calleeType).isInstanceOf(UnionType.class);
+      assertThat(calleeType.isCompatibleWith(nonePythonType)).isTrue();
+      assertThat(calleeType.isCompatibleWith(myClassPythonType)).isTrue();
+    }
   }
 
   @Test
@@ -2544,6 +2544,102 @@ class TypeInferenceV2Test {
 
     var type = literal.typeV2();
     Assertions.assertThat(type.unwrappedType()).isSameAs(STR_TYPE);
+  }
+
+
+  @Test
+  void typesBySymbol_function_def() {
+    var typesBySymbol = inferTypesBySymbol("""
+      def foo():
+        ...
+      """);
+    assertThat(typesBySymbol).hasSize(1);
+    SymbolV2 symbolV2 = typesBySymbol.keySet().iterator().next();
+    assertThat(symbolV2.name()).isEqualTo("foo");
+    Set<PythonType> types = typesBySymbol.get(symbolV2);
+    assertThat(types).hasSize(1);
+    PythonType type = types.iterator().next();
+    assertThat(type).isInstanceOf(FunctionType.class).extracting(PythonType::name).isEqualTo("foo");
+  }
+
+  @Test
+  void typesBySymbol_class_def() {
+    var typesBySymbol = inferTypesBySymbol("""
+      class A:
+        ...
+      """);
+    assertThat(typesBySymbol).hasSize(1);
+    SymbolV2 symbolV2 = typesBySymbol.keySet().iterator().next();
+    assertThat(symbolV2.name()).isEqualTo("A");
+    Set<PythonType> types = typesBySymbol.get(symbolV2);
+    assertThat(types).hasSize(1);
+    PythonType type = types.iterator().next();
+    assertThat(type).isInstanceOf(ClassType.class).extracting(PythonType::name).isEqualTo("A");
+  }
+
+  @Test
+  void typesBySymbol_variable() {
+    var typesBySymbol = inferTypesBySymbol("""
+      a = 10
+      """);
+    assertThat(typesBySymbol).hasSize(1);
+    SymbolV2 symbolV2 = typesBySymbol.keySet().iterator().next();
+    assertThat(symbolV2.name()).isEqualTo("a");
+    Set<PythonType> types = typesBySymbol.get(symbolV2);
+    assertThat(types).hasSize(1);
+    PythonType type = types.iterator().next();
+    assertThat(type).isInstanceOf(ObjectType.class).extracting(PythonType::unwrappedType).extracting(PythonType::name).isEqualTo("int");
+  }
+
+  @Test
+  void typesBySymbol_reassigned_variable() {
+    var typesBySymbol = inferTypesBySymbol("""
+      a = 10
+      if b:
+        a = "hello"
+      """);
+    assertThat(typesBySymbol).hasSize(1);
+    SymbolV2 symbolV2 = typesBySymbol.keySet().iterator().next();
+    assertThat(symbolV2.name()).isEqualTo("a");
+    Set<PythonType> types = typesBySymbol.get(symbolV2);
+    assertThat(types).hasSize(2);
+    assertThat(types).extracting(Object::getClass).extracting(Class.class::cast).containsOnly(ObjectType.class);
+    assertThat(types).extracting(PythonType::unwrappedType).extracting(PythonType::name).containsExactlyInAnyOrder("int", "str");
+  }
+
+  @Test
+  void typesBySymbol_class_def_overwrite_imported_type() {
+    var typesBySymbol = inferTypesBySymbol("""
+      from something import A
+      if b:
+        class A: ...
+      """);
+    assertThat(typesBySymbol).hasSize(1);
+    SymbolV2 symbolV2 = typesBySymbol.keySet().iterator().next();
+    assertThat(symbolV2.name()).isEqualTo("A");
+    Set<PythonType> types = typesBySymbol.get(symbolV2);
+    assertThat(types).hasSize(2);
+    assertThat(types).extracting(Object::getClass).extracting(Class.class::cast).containsOnly(ClassType.class, UnknownType.class);
+  }
+
+  @Test
+  void typesBySymbol_try_except() {
+    // SONARPY-2192 The typesBySymbol will be filled after this tiket is implemented
+    var typesBySymbol = inferTypesBySymbol("""
+      try:
+        class A: ...
+      except:
+        class A: ...
+      """);
+    assertThat(typesBySymbol).isEmpty();
+  }
+
+  private static Map<SymbolV2, Set<PythonType>> inferTypesBySymbol(String lines) {
+    FileInput root = parse(lines);
+    var symbolTable = new SymbolTableBuilderV2(root).build();
+    var typeInferenceV2 = new TypeInferenceV2(PROJECT_LEVEL_TYPE_TABLE, pythonFile, symbolTable);
+    typeInferenceV2.inferTypes(root);
+    return typeInferenceV2.getTypesBySymbol();
   }
 
   private static FileInput inferTypes(String lines) {
