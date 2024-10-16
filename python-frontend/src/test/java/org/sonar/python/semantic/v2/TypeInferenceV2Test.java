@@ -2624,12 +2624,29 @@ class TypeInferenceV2Test {
 
   @Test
   void typesBySymbol_try_except() {
-    // SONARPY-2192 The typesBySymbol will be filled after this tiket is implemented
     var typesBySymbol = inferTypesBySymbol("""
+      from something import A
+      A = 10
       try:
         class A: ...
       except:
-        class A: ...
+        def A():
+          b = 10
+      """);
+    assertThat(typesBySymbol).hasSize(1);
+    SymbolV2 symbolV2 = typesBySymbol.keySet().iterator().next();
+    assertThat(symbolV2.name()).isEqualTo("A");
+    Set<PythonType> types = typesBySymbol.get(symbolV2);
+    assertThat(types).hasSize(4);
+    assertThat(types).extracting(Object::getClass).extracting(Class.class::cast).containsOnly(UnknownType.class, ClassType.class, FunctionType.class, ObjectType.class);
+  }
+
+  @Test
+  void typesBySymbol_declaration_without_assignment() {
+    // SONARPY-2218 variable declaration without assignment is not supported
+    var typesBySymbol = inferTypesBySymbol("""
+      A : int
+      A = None
       """);
     assertThat(typesBySymbol).isEmpty();
   }

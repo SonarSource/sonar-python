@@ -119,4 +119,8 @@ public abstract class Propagation {
       .map(Expression::typeV2)
       .orElse(null);
   }
+
+  public SymbolV2 lhsSymbol() {
+    return lhsSymbol;
+  }
 }

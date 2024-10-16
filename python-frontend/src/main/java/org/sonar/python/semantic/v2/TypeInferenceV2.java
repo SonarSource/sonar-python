@@ -125,18 +125,16 @@ public class TypeInferenceV2 {
     statements.accept(tryStatementVisitor);
     if (tryStatementVisitor.hasTryStatement()) {
       // CFG doesn't model precisely try-except statements. Hence we fallback to AST based type inference
-      propagationVisitor.processPropagations(getTrackedVars(declaredVariables, assignedNames));
-    } else {
-      ControlFlowGraph cfg = controlFlowGraphSupplier.get();
-      if (cfg == null) {
-        // TODO SONARPY-2215: fix me
-        return Map.of();
-      }
-      assignedNames.addAll(annotatedParameterNames);
-      return flowSensitiveTypeInference(cfg, getTrackedVars(declaredVariables, assignedNames), propagationVisitor);
+      return propagationVisitor.processPropagations(getTrackedVars(declaredVariables, assignedNames));
     }
-    // TODO SONARPY-2190: fix try/except case
-    return Map.of();
+
+    ControlFlowGraph cfg = controlFlowGraphSupplier.get();
+    if (cfg == null) {
+      // TODO SONARPY-2215: fix me
+      return Map.of();
+    }
+    assignedNames.addAll(annotatedParameterNames);
+    return flowSensitiveTypeInference(cfg, getTrackedVars(declaredVariables, assignedNames), propagationVisitor);
   }
 
   private Map<SymbolV2, Set<PythonType>> flowSensitiveTypeInference(ControlFlowGraph cfg, Set<SymbolV2> trackedVars, PropagationVisitor propagationVisitor) {
