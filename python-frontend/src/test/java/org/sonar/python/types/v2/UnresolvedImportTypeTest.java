@@ -89,7 +89,6 @@ class UnresolvedImportTypeTest {
   }
 
   @Test
-  @Disabled("SONARPY-2216 Type of alias from import is not propagated")
   void import_from_as() {
     FileInput fileInput = inferTypesWithNoResolution("""
       from something import a_func as f
@@ -111,6 +110,49 @@ class UnresolvedImportTypeTest {
       """);
     var xType = ((ExpressionStatement) fileInput.statements().statements().get(2)).expressions().get(0).typeV2();
     assertThat(xType).isInstanceOf(UnknownType.class);
+  }
+
+  @Test
+  void all_imported_names_resolved() {
+    FileInput fileInput = inferTypesWithNoResolution("""
+      from a import b, c as cc
+      a
+      b
+      c
+      cc
+      """);
+    var aType = (((ExpressionStatement) fileInput.statements().statements().get(1)).expressions().get(0).typeV2());
+    var bType = ((UnresolvedImportType) ((ExpressionStatement) fileInput.statements().statements().get(2)).expressions().get(0).typeV2());
+    var cType = (((ExpressionStatement) fileInput.statements().statements().get(3)).expressions().get(0).typeV2());
+    var ccType = ((UnresolvedImportType) ((ExpressionStatement) fileInput.statements().statements().get(4)).expressions().get(0).typeV2());
+
+    assertThat(aType).isInstanceOf(UnknownType.class);
+    assertThat(bType.importPath()).isEqualTo("a.b");
+    assertThat(cType).isInstanceOf(UnknownType.class);
+    assertThat(ccType.importPath()).isEqualTo("a.c");
+  }
+
+  @Test
+  void all_imported_name_resolved_2() {
+    FileInput fileInput = inferTypesWithNoResolution("""
+      import a.b as c, d.e
+      a
+      b
+      c
+      d
+      e
+      """);
+    var aType = (((ExpressionStatement) fileInput.statements().statements().get(1)).expressions().get(0).typeV2());
+    var bType = (((ExpressionStatement) fileInput.statements().statements().get(2)).expressions().get(0).typeV2());
+    var cType = ((UnresolvedImportType) ((ExpressionStatement) fileInput.statements().statements().get(3)).expressions().get(0).typeV2());
+    var dType = (((ExpressionStatement) fileInput.statements().statements().get(4)).expressions().get(0).typeV2());
+    var eType = (((ExpressionStatement) fileInput.statements().statements().get(5)).expressions().get(0).typeV2());
+
+    assertThat(aType).isInstanceOf(UnknownType.class);
+    assertThat(bType).isInstanceOf(UnknownType.class);
+    assertThat(cType.importPath()).isEqualTo("a.b");
+    assertThat(dType).isInstanceOfSatisfying(UnresolvedImportType.class, t -> assertThat(t.importPath()).isEqualTo("d"));
+    assertThat(eType).isInstanceOf(UnknownType.class);
   }
 
   private static FileInput inferTypesWithNoResolution(String lines) {
