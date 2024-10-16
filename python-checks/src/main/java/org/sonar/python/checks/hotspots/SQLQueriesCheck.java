@@ -168,7 +168,7 @@ public class SQLQueriesCheck extends PythonSubscriptionCheck {
     return arg.equalToken() != null;
   }
 
-  private static Expression getExpression(@Nullable Expression expr) {
+  private static Expression getExpression(Expression expr) {
     expr = Expressions.removeParentheses(expr);
     if (expr.is(Tree.Kind.ASSIGNMENT_EXPRESSION)) {
       return getExpression(((AssignmentExpression) expr).expression());
