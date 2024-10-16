@@ -39,7 +39,9 @@ class LazyTypeWrapperTest {
     when(lazyTypesContext.resolveLazyType(Mockito.any())).thenReturn(INT_TYPE);
     LazyType lazyType = new LazyType("random", lazyTypesContext);
     LazyTypeWrapper lazyTypeWrapper = new LazyTypeWrapper(lazyType);
+    assertThat(lazyTypeWrapper.isResolved()).isFalse();
     assertThat(lazyTypeWrapper.type()).isEqualTo(INT_TYPE);
+    assertThat(lazyTypeWrapper.isResolved()).isTrue();
   }
 
   @Test

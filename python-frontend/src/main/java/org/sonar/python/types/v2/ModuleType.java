@@ -30,23 +30,42 @@ import org.sonar.api.Beta;
 public final class ModuleType implements PythonType {
   private final String name;
   private final ModuleType parent;
-  private final Map<String, PythonType> members;
+  private final Map<String, TypeWrapper> members;
+  private final Map<String, TypeWrapper> subModules = new HashMap<>();
 
-  public ModuleType(@Nullable String name, @Nullable ModuleType parent, Map<String, PythonType> members) {
+  public ModuleType(@Nullable String name, @Nullable ModuleType parent, Map<String, TypeWrapper> members) {
+    this(name, parent, members, false);
+  }
+
+  public ModuleType(@Nullable String name, @Nullable ModuleType parent, Map<String, TypeWrapper> members, boolean registerAsSubmoduleOfParent) {
     this.name = name;
     this.parent = parent;
     this.members = members;
-    registerAsMemberOfParent(parent);
+    if (!registerAsSubmoduleOfParent) {
+      registerAsMemberOfParent(parent);
+    } else {
+      registerAsSubmoduleOfParent(parent);
+    }
   }
 
   private void registerAsMemberOfParent(@Nullable ModuleType parent) {
     if (parent == null) {
       return;
     }
-    PythonType parentMember = parent.members.get(this.name);
-    if (parentMember == null || parentMember instanceof UnknownType) {
+    TypeWrapper parentMember = parent.members.get(this.name);
+    if (parentMember == null || parentMember.type() instanceof UnknownType) {
       // SONARPY-2037 We should update this heuristic with the correct Python resolution rules
-      parent.members.put(this.name, this);
+      parent.members.put(this.name, TypeWrapper.of(this));
+    }
+  }
+
+  private void registerAsSubmoduleOfParent(@Nullable ModuleType parent) {
+    if (parent == null) {
+      return;
+    }
+    TypeWrapper subModule = parent.subModules.get(this.name);
+    if (subModule == null) {
+      parent.subModules.put(this.name, TypeWrapper.of(this));
     }
   }
 
@@ -60,7 +79,11 @@ public final class ModuleType implements PythonType {
 
   @Override
   public Optional<PythonType> resolveMember(String memberName) {
-    return Optional.ofNullable(members.get(memberName));
+    return Optional.ofNullable(members.get(memberName)).map(TypeWrapper::type);
+  }
+
+  public Optional<PythonType> resolveSubmodule(String submoduleName) {
+    return Optional.ofNullable(subModules.get(submoduleName)).map(TypeWrapper::type);
   }
 
   @Override
@@ -90,7 +113,7 @@ public final class ModuleType implements PythonType {
     return parent;
   }
 
-  public Map<String, PythonType> members() {
+  public Map<String, TypeWrapper> members() {
     return members;
   }
 

@@ -259,8 +259,8 @@ class TypeCheckerTest {
     );
     var responseType = ((CallExpression) ((ExpressionStatement) fileInput.statements().statements().get(1)).expressions().get(0)).callee().typeV2();
     assertThat(typeChecker.typeCheckBuilder().isTypeWithName("flask.Response").check(responseType)).isEqualTo(TriBool.TRUE);
-    // TODO: SONARPY-2209 this should return TriBool.TRUE
-    assertThat(typeChecker.typeCheckBuilder().isTypeWithName("flask.wrappers.Response").check(responseType)).isEqualTo(TriBool.FALSE);
+    assertThat(typeChecker.typeCheckBuilder().isTypeWithName("flask.wrappers.Response").check(responseType)).isEqualTo(TriBool.TRUE);
+    assertThat(typeChecker.typeCheckBuilder().isTypeWithName("flask.app.Response").check(responseType)).isEqualTo(TriBool.UNKNOWN);
   }
 
   @Test

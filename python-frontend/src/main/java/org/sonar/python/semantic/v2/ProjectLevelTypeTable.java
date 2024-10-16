@@ -24,10 +24,12 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.IntStream;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
+import org.sonar.python.types.v2.LazyTypeWrapper;
 import org.sonar.python.types.v2.ModuleType;
 import org.sonar.python.types.v2.ObjectType;
 import org.sonar.python.types.v2.PythonType;
 import org.sonar.python.types.v2.UnknownType;
+import org.sonar.python.types.v2.TypeWrapper;
 
 public class ProjectLevelTypeTable {
 
@@ -67,16 +69,26 @@ public class ProjectLevelTypeTable {
     var parent = (PythonType) rootModule;
     for (int i = 0; i < typeFqnParts.size(); i++) {
       var part = typeFqnParts.get(i);
+      var moduleFqnParts = IntStream.rangeClosed(0, i)
+        .mapToObj(typeFqnParts::get)
+        .toList();
       if (parent instanceof ObjectType) {
         return PythonType.UNKNOWN;
+      }
+      if (parent instanceof ModuleType moduleType) {
+        TypeWrapper typeWrapper = moduleType.members().get(part);
+        if (typeWrapper instanceof LazyTypeWrapper lazyTypeWrapper && !lazyTypeWrapper.isResolved()) {
+          // The member of the module is a LazyType, which means it's a re-exported type from a submodule
+          // We try to resolve the submodule instead
+          // SONARPY-2176: We should actually either resolve the LazyType or look into the module and use the other as a fallback following Python import behavior more closely
+          parent = symbolsModuleTypeProvider.convertModuleType(moduleFqnParts, moduleType, true);
+          continue;
+        }
       }
       Optional<PythonType> resolvedMember = parent.resolveMember(part);
       if (resolvedMember.isPresent()) {
         parent = resolvedMember.get();
       } else if (parent instanceof ModuleType module) {
-        var moduleFqnParts = IntStream.rangeClosed(0, i)
-          .mapToObj(typeFqnParts::get)
-          .toList();
         parent = symbolsModuleTypeProvider.convertModuleType(moduleFqnParts, module);
         if (parent instanceof ModuleType moduleType) {
           addAliasMembers(moduleFqnParts, moduleType);
@@ -98,7 +110,7 @@ public class ProjectLevelTypeTable {
       .forEach((memberName, alias) -> {
         var pythonType = getType(alias);
         if (!(pythonType instanceof UnknownType)) {
-          moduleType.members().put(memberName, pythonType);
+          moduleType.members().put(memberName, TypeWrapper.of(pythonType));
         }
       });
   }
