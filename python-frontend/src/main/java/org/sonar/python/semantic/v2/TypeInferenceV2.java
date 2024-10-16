@@ -42,7 +42,6 @@ import org.sonar.python.semantic.v2.types.Propagation;
 import org.sonar.python.semantic.v2.types.PropagationVisitor;
 import org.sonar.python.semantic.v2.types.TrivialTypeInferenceVisitor;
 import org.sonar.python.semantic.v2.types.TryStatementVisitor;
-import org.sonar.python.semantic.v2.types.TypeInferenceProgramState;
 import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.types.v2.PythonType;
 
@@ -74,6 +73,9 @@ public class TypeInferenceV2 {
     });
   }
 
+  public Map<SymbolV2, Set<PythonType>> getTypesBySymbol() {
+    return typesBySymbol;
+  }
 
   private void inferTypesAndMemberAccessSymbols(FileInput fileInput) {
     StatementList statements = fileInput.statements();
@@ -82,7 +84,7 @@ public class TypeInferenceV2 {
     }
     var moduleSymbols = symbolTable.getSymbolsByRootTree(fileInput);
 
-    inferTypesAndMemberAccessSymbols(
+    typesBySymbol = inferTypesAndMemberAccessSymbols(
       fileInput,
       statements,
       moduleSymbols,
@@ -96,7 +98,7 @@ public class TypeInferenceV2 {
       .map(Parameter::name)
       .collect(Collectors.toSet());
     Set<SymbolV2> localVariables = symbolTable.getSymbolsByRootTree(functionDef);
-    typesBySymbol = inferTypesAndMemberAccessSymbols(
+    inferTypesAndMemberAccessSymbols(
       functionDef,
       functionDef.body(),
       localVariables,
