@@ -26,6 +26,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import org.sonar.plugins.python.api.tree.AliasedName;
 import org.sonar.plugins.python.api.tree.AnnotatedAssignment;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
@@ -119,42 +120,31 @@ public class PropagationVisitor extends BaseTreeVisitor {
   public void visitImportName(ImportName importName) {
     super.visitImportName(importName);
     importName.modules()
-      .forEach(aliasedName -> {
-        var names = aliasedName.dottedName().names();
-        Name alias = aliasedName.alias();
-        if (alias != null) {
-          SymbolV2 aliasSymbol = alias.symbolV2();
-          Definition definition = new Definition(aliasSymbol, alias);
-          definitionsByDefinitionStatement.computeIfAbsent(importName, k -> new HashSet<>()).add(definition);
-          propagationsByLhs.computeIfAbsent(aliasSymbol, s -> new HashSet<>()).add(definition);
-        } else {
-          for (int i = names.size() - 1; i >= 0; i--) {
-            Name name = names.get(i);
-            SymbolV2 symbolV2 = name.symbolV2();
-            if (symbolV2 != null) {
-              Definition definition = new Definition(symbolV2, name);
-              definitionsByDefinitionStatement.computeIfAbsent(importName, k -> new HashSet<>()).add(definition);
-              propagationsByLhs.computeIfAbsent(symbolV2, s -> new HashSet<>()).add(definition);
-            }
-          }
-        }
-      });
+      .forEach(aliasedName -> propagateImportToAliasedName(aliasedName, importName));
   }
 
   @Override
   public void visitImportFrom(ImportFrom importFrom) {
     super.visitImportFrom(importFrom);
     importFrom.importedNames()
-      .forEach(aliasedName -> aliasedName.dottedName().names().forEach(
-        name -> {
-          SymbolV2 symbolV2 = name.symbolV2();
-          if (symbolV2 != null) {
-            Definition definition = new Definition(symbolV2, name);
-            definitionsByDefinitionStatement.computeIfAbsent(importFrom, k -> new HashSet<>()).add(definition);
-            propagationsByLhs.computeIfAbsent(symbolV2, s -> new HashSet<>()).add(definition);
-          }
-        }
-      ));
+      .forEach(aliasedName -> propagateImportToAliasedName(aliasedName, importFrom));
+  }
+
+  public void propagateImportToAliasedName(AliasedName aliasedName, Statement importName) {
+    var alias = aliasedName.alias();
+    List<Name> names = alias == null ? aliasedName.dottedName().names() : List.of(alias);
+    for (Name name : names) {
+      propagateToName(importName, name);
+    }
+  }
+
+  private void propagateToName(Statement importName, Name name) {
+    SymbolV2 symbolV2 = name.symbolV2();
+    if (symbolV2 != null) {
+      Definition definition = new Definition(symbolV2, name);
+      definitionsByDefinitionStatement.computeIfAbsent(importName, k -> new HashSet<>()).add(definition);
+      propagationsByLhs.computeIfAbsent(symbolV2, s -> new HashSet<>()).add(definition);
+    }
   }
 
   @Override
