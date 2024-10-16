@@ -129,10 +129,7 @@ public class Expressions {
     return result;
   }
 
-  public static Expression removeParentheses(@Nullable Expression expression) {
-    if (expression == null) {
-      return null;
-    }
+  public static Expression removeParentheses(Expression expression) {
     Expression res = expression;
     while (res.is(Kind.PARENTHESIZED)) {
       res = ((ParenthesizedExpression) res).expression();
