@@ -71,6 +71,7 @@ import org.sonar.python.types.v2.TypeSource;
 import org.sonar.python.types.v2.TypeWrapper;
 import org.sonar.python.types.v2.UnionType;
 import org.sonar.python.types.v2.UnknownType;
+import org.sonar.python.types.v2.UnresolvedImportType;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.PythonTestUtils.parse;
@@ -143,10 +144,14 @@ public class TypeInferenceV2Test {
     var importedNames = importName.modules().get(0).dottedName().names();
     assertThat(importedNames.get(0))
       .extracting(Expression::typeV2)
-      .isEqualTo(PythonType.UNKNOWN);
+      .extracting(UnresolvedImportType.class::cast)
+      .extracting(UnresolvedImportType::importPath)
+      .isEqualTo("something");
     assertThat(importedNames.get(1))
       .extracting(Expression::typeV2)
-      .isEqualTo(PythonType.UNKNOWN);
+      .extracting(UnresolvedImportType.class::cast)
+      .extracting(UnresolvedImportType::importPath)
+      .isEqualTo("something.unknown");
   }
 
   @Test
@@ -2363,7 +2368,7 @@ public class TypeInferenceV2Test {
       import opentracing.tracer.Tracer as ottt
       ottt
       """);
-    assertThat(statement.typeV2()).isInstanceOf(UnknownType.class);
+    assertThat(((UnresolvedImportType) statement.typeV2())).extracting(UnresolvedImportType::importPath).isEqualTo("opentracing.tracer.Tracer");
   }
 
   @Test
