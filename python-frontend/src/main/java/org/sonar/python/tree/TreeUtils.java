@@ -477,6 +477,15 @@ public class TreeUtils {
       .map(Optional::get);
   }
 
+  public static List<Tree> allChildrenWithFilter(Tree tree, Predicate<Tree> filter) {
+    List<Tree> result = new ArrayList<>();
+    if (filter.test(tree)) {
+      result.add(tree);
+    }
+    tree.children().forEach(c -> result.addAll(allChildrenWithFilter(c, filter)));
+    return result;
+  }
+
   public static String treeToString(Tree tree, boolean renderMultiline) {
     if (!renderMultiline) {
       var firstLine = tree.firstToken().line();

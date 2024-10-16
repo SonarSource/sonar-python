@@ -1,7 +1,12 @@
 from django.views.decorators.http import require_http_methods, require_POST, require_GET, require_safe, other_decorator
+from django.http import HttpResponse
 
-def sensitive1(request):  # Noncompliant
-  ...
+def sensitive1(request)->HttpResponse:  # Noncompliant
+  if cond:
+      return None
+  else:
+      return HttpResponse("sensitive1")
+  return HttpResponse("sensitive1")
 
 @require_http_methods(["GET", "POST"])  # Noncompliant
 def sensitive2(request):

@@ -28,7 +28,6 @@ import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
-import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.CallExpression;
@@ -39,9 +38,11 @@ import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.ListLiteral;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.StringLiteral;
-import org.sonar.python.semantic.FunctionSymbolImpl;
-import org.sonar.python.tree.FunctionDefImpl;
+import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.plugins.python.api.types.InferredType;
+import org.sonar.python.tree.ReturnStatementImpl;
 import org.sonar.python.tree.TreeUtils;
+import org.sonar.python.types.InferredTypes;
 
 import static org.sonar.plugins.python.api.tree.Tree.Kind.CALL_EXPR;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.FILE_INPUT;
@@ -62,6 +63,7 @@ public class UnsafeHttpMethodsCheck extends PythonSubscriptionCheck {
     "django.views.decorators.http.require_GET",
     "django.views.decorators.http.require_safe"
   ));
+  private static final Set<String> EXTRA_DECORATORS = Set.of("django.views.decorators.http.require_http_methods");
   private static final String MESSAGE = "Make sure allowing safe and unsafe HTTP methods is safe here.";
 
   @Override
@@ -121,13 +123,44 @@ public class UnsafeHttpMethodsCheck extends PythonSubscriptionCheck {
     return hasSafeHttpMethod && hasUnsafeHttpMethod;
   }
 
+//  private static boolean isDjangoView(FunctionDef functionDef) {
+//    FunctionSymbol functionSymbol = ((FunctionDefImpl) functionDef).functionSymbol();
+//    return Optional.ofNullable(functionSymbol)
+//      .map(FunctionSymbolImpl.class::cast)
+//      .filter(FunctionSymbolImpl::isDjangoView)
+//      .isPresent();
+//  }
   private static boolean isDjangoView(FunctionDef functionDef) {
-    FunctionSymbol functionSymbol = ((FunctionDefImpl) functionDef).functionSymbol();
-    return Optional.ofNullable(functionSymbol)
-      .map(FunctionSymbolImpl.class::cast)
-      .filter(FunctionSymbolImpl::isDjangoView)
-      .isPresent();
-  }
+    var allReturnsInFuntion = TreeUtils.allChildrenWithFilter(functionDef, tree -> tree.is(Tree.Kind.RETURN_STMT));
+    var allReturnTypes = allReturnsInFuntion.stream().map(ReturnStatementImpl.class::cast)
+    .map(returnStatement -> {
+
+      var exp = returnStatement.expressions();
+      if(exp.size() == 1){
+        return exp.get(0).type();
+      }
+      return InferredTypes.anyType();
+
+    }).anyMatch(type -> ((InferredType) type).canBeOrExtend("django.http.HttpResponse"));
+
+
+
+    return allReturnTypes|| decoratorPresent(functionDef);
+}
+
+
+
+private static boolean decoratorPresent(FunctionDef functionDef) {
+  var decorators = functionDef.decorators().stream().map(Decorator::expression)
+    .flatMap(TreeUtils.toStreamInstanceOfMapper(CallExpression.class))
+    .map(CallExpression::calleeSymbol)
+    .filter(Objects::nonNull)
+    .map(Symbol::fullyQualifiedName)
+    .filter(fqn -> COMPLIANT_DECORATORS.contains(fqn) || EXTRA_DECORATORS.contains(fqn))
+    .findFirst();
+  return decorators.isPresent();
+}
+
 
   private static Optional<CallExpression> getFlaskViewDecorator(FunctionDef functionDef) {
     return functionDef.decorators().stream()
