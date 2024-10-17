@@ -26,6 +26,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 import org.sonar.plugins.python.api.tree.AnnotatedAssignment;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
@@ -41,6 +42,7 @@ import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.python.semantic.v2.SymbolV2;
 import org.sonar.python.tree.NameImpl;
+import org.sonar.python.types.v2.PythonType;
 
 public class PropagationVisitor extends BaseTreeVisitor {
   private final Map<SymbolV2, Set<Propagation>> propagationsByLhs;
@@ -202,7 +204,7 @@ public class PropagationVisitor extends BaseTreeVisitor {
     }
   }
 
-  public void processPropagations(Set<SymbolV2> trackedVars) {
+  public Map<SymbolV2, Set<PythonType>> processPropagations(Set<SymbolV2> trackedVars) {
     Set<Propagation> propagations = new HashSet<>();
     Set<SymbolV2> initializedVars = new HashSet<>();
 
@@ -218,6 +220,7 @@ public class PropagationVisitor extends BaseTreeVisitor {
 
     applyPropagations(propagations, initializedVars, true);
     applyPropagations(propagations, initializedVars, false);
+    return propagations.stream().collect(Collectors.groupingBy(Propagation::lhsSymbol, Collectors.mapping(Propagation::rhsType, Collectors.toSet())));
   }
 
   private static void applyPropagations(Set<Propagation> propagations, Set<SymbolV2> initializedVars, boolean checkDependenciesReadiness) {
