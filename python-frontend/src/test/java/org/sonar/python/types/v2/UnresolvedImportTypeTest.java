@@ -155,6 +155,32 @@ class UnresolvedImportTypeTest {
     assertThat(eType).isInstanceOf(UnknownType.class);
   }
 
+  @Test
+  void import_try_except(){
+    FileInput fileInput = inferTypesWithNoResolution("""
+      try:
+        import a as i
+      except ImportError:
+        import b as i
+      i
+      """);
+    var aType = (UnionType) (((ExpressionStatement) fileInput.statements().statements().get(1)).expressions().get(0).typeV2());
+    assertThat(aType.candidates()).extracting(UnresolvedImportType.class::cast).extracting(UnresolvedImportType::importPath).containsExactlyInAnyOrder("a", "b");
+  }
+
+  @Test
+  void import_from_try_except(){
+    FileInput fileInput = inferTypesWithNoResolution("""
+      try:
+        from a import aa as i
+      except ImportError:
+        from b import bb as i
+      i
+      """);
+    var aType = (UnionType) (((ExpressionStatement) fileInput.statements().statements().get(1)).expressions().get(0).typeV2());
+    assertThat(aType.candidates()).extracting(UnresolvedImportType.class::cast).extracting(UnresolvedImportType::importPath).containsExactlyInAnyOrder("a.aa", "b.bb");
+  }
+  
   private static FileInput inferTypesWithNoResolution(String lines) {
     var typeTable = new TestProjectLevelTypeTable(ProjectLevelSymbolTable.empty());
     return parseAndInferTypes(typeTable, PythonTestUtils.pythonFile(""), lines);
