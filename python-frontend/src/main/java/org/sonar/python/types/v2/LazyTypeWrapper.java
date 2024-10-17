@@ -42,6 +42,10 @@ public class LazyTypeWrapper implements TypeWrapper {
     this.type = pythonType;
   }
 
+  public boolean isResolved() {
+    return !(type instanceof LazyType);
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;

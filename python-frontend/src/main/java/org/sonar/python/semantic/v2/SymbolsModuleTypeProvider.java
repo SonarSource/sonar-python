@@ -29,6 +29,7 @@ import org.sonar.python.semantic.v2.converter.AnyDescriptorToPythonTypeConverter
 import org.sonar.python.types.v2.ModuleType;
 import org.sonar.python.types.v2.PythonType;
 import org.sonar.python.types.v2.TypeOrigin;
+import org.sonar.python.types.v2.TypeWrapper;
 
 public class SymbolsModuleTypeProvider {
   private final ProjectLevelSymbolTable projectLevelSymbolTable;
@@ -44,7 +45,7 @@ public class SymbolsModuleTypeProvider {
     var rootModuleMembers = projectLevelSymbolTable.typeShedDescriptorsProvider().builtinDescriptors()
       .entrySet()
       .stream()
-      .collect(Collectors.toMap(Map.Entry::getKey, e -> anyDescriptorToPythonTypeConverter.convert(e.getValue(), TypeOrigin.STUB)));
+      .collect(Collectors.toMap(Map.Entry::getKey, e -> TypeWrapper.of(anyDescriptorToPythonTypeConverter.convert(e.getValue(), TypeOrigin.STUB))));
     this.rootModule = new ModuleType(null, null, rootModuleMembers);
   }
 
@@ -53,10 +54,14 @@ public class SymbolsModuleTypeProvider {
   }
 
   public PythonType convertModuleType(List<String> moduleFqn, ModuleType parent) {
+    return convertModuleType(moduleFqn, parent, false);
+  }
+
+  public PythonType convertModuleType(List<String> moduleFqn, ModuleType parent, boolean registerAsSubmodule) {
     var moduleName = moduleFqn.get(moduleFqn.size() - 1);
     var moduleFqnString = getModuleFqnString(moduleFqn);
-    Optional<ModuleType> result =  createModuleTypeFromProjectLevelSymbolTable(moduleName, moduleFqnString, parent)
-      .or(() -> createModuleTypeFromTypeShed(moduleName, moduleFqnString, parent));
+    Optional<ModuleType> result =  createModuleTypeFromProjectLevelSymbolTable(moduleName, moduleFqnString, parent, registerAsSubmodule)
+      .or(() -> createModuleTypeFromTypeShed(moduleName, moduleFqnString, parent, registerAsSubmodule));
     if (result.isEmpty()) {
       return PythonType.UNKNOWN;
     }
@@ -67,21 +72,17 @@ public class SymbolsModuleTypeProvider {
     return String.join(".", moduleFqn);
   }
 
-  private Optional<ModuleType> createModuleTypeFromProjectLevelSymbolTable(String moduleName, String moduleFqn, ModuleType parent) {
+  private Optional<ModuleType> createModuleTypeFromProjectLevelSymbolTable(String moduleName, String moduleFqn, ModuleType parent, boolean registerAsSubmodule) {
     var retrieved = projectLevelSymbolTable.getDescriptorsFromModule(moduleFqn);
     if (retrieved == null) {
       return Optional.empty();
     }
-    var members = retrieved.stream().collect(Collectors.toMap(Descriptor::name, d -> anyDescriptorToPythonTypeConverter.convert(d, TypeOrigin.LOCAL)));
-    return Optional.of(new ModuleType(moduleName, parent, members));
+    var members = retrieved.stream().collect(Collectors.toMap(Descriptor::name, d -> TypeWrapper.of(anyDescriptorToPythonTypeConverter.convert(d, TypeOrigin.LOCAL))));
+    return Optional.of(new ModuleType(moduleName, parent, members, registerAsSubmodule));
   }
 
-  private Optional<ModuleType> createModuleTypeFromTypeShed(String moduleName, String moduleFqn, ModuleType parent) {
-    var moduleMembers = projectLevelSymbolTable.typeShedDescriptorsProvider().descriptorsForModule(moduleFqn)
-      .entrySet().stream()
-      .collect(Collectors.toMap(Map.Entry::getKey, e -> anyDescriptorToPythonTypeConverter.convert(e.getValue(), TypeOrigin.STUB)));
-    return Optional.of(moduleMembers).filter(m -> !m.isEmpty())
-      .map(m -> new ModuleType(moduleName, parent, m));
+  private Optional<ModuleType> createModuleTypeFromTypeShed(String moduleName, String moduleFqn, ModuleType parent, boolean registerAsSubmodule) {
+    Map<String, Descriptor> stringDescriptorMap = projectLevelSymbolTable.typeShedDescriptorsProvider().descriptorsForModule(moduleFqn);
+    return anyDescriptorToPythonTypeConverter.convertModuleType(moduleName, moduleFqn, parent, stringDescriptorMap, registerAsSubmodule);
   }
-
 }

@@ -19,6 +19,7 @@
  */
 package org.sonar.python.types.v2;
 
+import java.util.Map;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -29,7 +30,7 @@ class ModuleTypeTest {
   void resolveMemberTest() {
     var a = new ModuleType("a");
     var b = new ModuleType("b");
-    b.members().put("a", a);
+    b.members().put("a", TypeWrapper.of(a));
 
     Assertions.assertThat(b.resolveMember("a")).containsSame(a);
     Assertions.assertThat(b.resolveMember("b")).isNotPresent();
@@ -39,10 +40,41 @@ class ModuleTypeTest {
   @Test
   void replaceMemberIfUnknown() {
     var a = new ModuleType("a");
-    a.members().put("b", PythonType.UNKNOWN);
+    a.members().put("b", TypeWrapper.of(PythonType.UNKNOWN));
     Assertions.assertThat(a.resolveMember("b")).containsSame(PythonType.UNKNOWN);
     var b = new ModuleType("b", a);
     Assertions.assertThat(a.resolveMember("b")).containsSame(b);
+  }
+
+  @Test
+  void doNotReplaceKnownMember() {
+    var a = new ModuleType("a");
+    ClassType existingMember = new ClassType("b");
+    a.members().put("b", TypeWrapper.of(existingMember));
+    Assertions.assertThat(a.resolveMember("b")).containsSame(existingMember);
+    new ModuleType("b", a);
+    Assertions.assertThat(a.resolveMember("b")).containsSame(existingMember);
+  }
+
+  @Test
+  void registerAsSubmoduleTest() {
+    var a = new ModuleType("a");
+    a.members().put("b", TypeWrapper.of(PythonType.UNKNOWN));
+    Assertions.assertThat(a.resolveSubmodule("b")).isEmpty();
+    var b = new ModuleType("b", a, Map.of(), true);
+    Assertions.assertThat(a.resolveMember("b")).containsSame(PythonType.UNKNOWN);
+    Assertions.assertThat(a.resolveSubmodule("b")).containsSame(b);
+    // no parent: no effect
+    new ModuleType("c", null, Map.of(), true);
+  }
+
+  @Test
+  void doNotReplaceKnownSubmodule() {
+    var a = new ModuleType("a");
+    ModuleType existingSubmodule = new ModuleType("b", a, Map.of(), true);
+    Assertions.assertThat(a.resolveSubmodule("b")).containsSame(existingSubmodule);
+    new ModuleType("b", a, Map.of(), true);
+    Assertions.assertThat(a.resolveSubmodule("b")).containsSame(existingSubmodule);
   }
 
   @Test
