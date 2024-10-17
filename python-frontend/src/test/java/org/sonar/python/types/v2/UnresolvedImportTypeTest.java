@@ -28,6 +28,7 @@ import org.sonar.plugins.python.api.tree.ImportFrom;
 import org.sonar.python.PythonTestUtils;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.semantic.v2.ProjectLevelTypeTable;
+import org.sonar.python.types.v2.UnknownType.UnresolvedImportType;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.types.v2.TypesTestUtils.parseAndInferTypes;

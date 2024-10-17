@@ -71,7 +71,7 @@ import org.sonar.python.types.v2.TypeSource;
 import org.sonar.python.types.v2.TypeWrapper;
 import org.sonar.python.types.v2.UnionType;
 import org.sonar.python.types.v2.UnknownType;
-import org.sonar.python.types.v2.UnresolvedImportType;
+import org.sonar.python.types.v2.UnknownType.UnresolvedImportType;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.PythonTestUtils.parse;
