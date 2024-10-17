@@ -66,10 +66,6 @@ public class Assignment extends Propagation {
     return rhs.typeV2();
   }
 
-  public SymbolV2 lhsSymbol() {
-    return lhsSymbol;
-  }
-
   public Expression rhs() {
     return rhs;
   }
