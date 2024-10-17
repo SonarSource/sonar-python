@@ -35,10 +35,6 @@ public class Definition extends Propagation {
     super(symbol, name);
   }
 
-  public SymbolV2 lhsSymbol() {
-    return lhsSymbol;
-  }
-
   public Name lhsName() {
     return lhsName;
   }
