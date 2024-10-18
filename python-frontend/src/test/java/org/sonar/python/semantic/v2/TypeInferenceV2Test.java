@@ -71,6 +71,7 @@ import org.sonar.python.types.v2.TypeSource;
 import org.sonar.python.types.v2.TypeWrapper;
 import org.sonar.python.types.v2.UnionType;
 import org.sonar.python.types.v2.UnknownType;
+import org.sonar.python.types.v2.UnknownType.UnresolvedImportType;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.PythonTestUtils.parse;
@@ -89,7 +90,7 @@ import static org.sonar.python.types.v2.TypesTestUtils.STR_TYPE;
 import static org.sonar.python.types.v2.TypesTestUtils.TUPLE_TYPE;
 import static org.sonar.python.types.v2.TypesTestUtils.TYPE_TYPE;
 
-class TypeInferenceV2Test {
+public class TypeInferenceV2Test {
 
   static PythonFile pythonFile = PythonTestUtils.pythonFile("");
 
@@ -143,10 +144,14 @@ class TypeInferenceV2Test {
     var importedNames = importName.modules().get(0).dottedName().names();
     assertThat(importedNames.get(0))
       .extracting(Expression::typeV2)
-      .isEqualTo(PythonType.UNKNOWN);
+      .extracting(UnresolvedImportType.class::cast)
+      .extracting(UnresolvedImportType::importPath)
+      .isEqualTo("something");
     assertThat(importedNames.get(1))
       .extracting(Expression::typeV2)
-      .isEqualTo(PythonType.UNKNOWN);
+      .extracting(UnresolvedImportType.class::cast)
+      .extracting(UnresolvedImportType::importPath)
+      .isEqualTo("something.unknown");
   }
 
   @Test
@@ -2363,7 +2368,7 @@ class TypeInferenceV2Test {
       import opentracing.tracer.Tracer as ottt
       ottt
       """);
-    assertThat(statement.typeV2()).isInstanceOf(UnknownType.class);
+    assertThat(((UnresolvedImportType) statement.typeV2())).extracting(UnresolvedImportType::importPath).isEqualTo("opentracing.tracer.Tracer");
   }
 
   @Test
@@ -2619,7 +2624,7 @@ class TypeInferenceV2Test {
     assertThat(symbolV2.name()).isEqualTo("A");
     Set<PythonType> types = typesBySymbol.get(symbolV2);
     assertThat(types).hasSize(2);
-    assertThat(types).extracting(Object::getClass).extracting(Class.class::cast).containsOnly(ClassType.class, UnknownType.class);
+    assertThat(types).extracting(Object::getClass).extracting(Class.class::cast).containsOnly(ClassType.class, UnresolvedImportType.class);
   }
 
   @Test
@@ -2638,7 +2643,7 @@ class TypeInferenceV2Test {
     assertThat(symbolV2.name()).isEqualTo("A");
     Set<PythonType> types = typesBySymbol.get(symbolV2);
     assertThat(types).hasSize(4);
-    assertThat(types).extracting(Object::getClass).extracting(Class.class::cast).containsOnly(UnknownType.class, ClassType.class, FunctionType.class, ObjectType.class);
+    assertThat(types).extracting(Object::getClass).extracting(Class.class::cast).containsOnly(UnresolvedImportType.class, ClassType.class, FunctionType.class, ObjectType.class);
   }
 
   @Test

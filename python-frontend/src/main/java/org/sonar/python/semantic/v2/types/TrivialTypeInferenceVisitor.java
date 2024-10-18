@@ -28,6 +28,7 @@ import java.util.List;
 import java.util.Optional;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.PythonFile;
+import org.sonar.plugins.python.api.tree.AliasedName;
 import org.sonar.plugins.python.api.tree.ArgList;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
@@ -80,6 +81,7 @@ import org.sonar.python.types.v2.PythonType;
 import org.sonar.python.types.v2.TypeOrigin;
 import org.sonar.python.types.v2.TypeSource;
 import org.sonar.python.types.v2.UnionType;
+import org.sonar.python.types.v2.UnknownType;
 
 import static org.sonar.python.semantic.SymbolUtils.pathOf;
 import static org.sonar.python.tree.TreeUtils.locationInFile;
@@ -279,7 +281,7 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
     TypeAnnotation typeAnnotation = functionDef.returnTypeAnnotation();
     if (typeAnnotation != null) {
       PythonType returnType = typeAnnotation.expression().typeV2();
-      functionTypeBuilder.withReturnType(returnType == PythonType.UNKNOWN ? returnType : new ObjectType(returnType, TypeSource.TYPE_HINT));
+      functionTypeBuilder.withReturnType(returnType instanceof UnknownType ? returnType : new ObjectType(returnType, TypeSource.TYPE_HINT));
       functionTypeBuilder.withTypeOrigin(TypeOrigin.LOCAL);
     }
     FunctionType functionType = functionTypeBuilder.build();
@@ -297,53 +299,75 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
   public void visitImportName(ImportName importName) {
     importName.modules()
       .forEach(aliasedName -> {
-        var names = aliasedName.dottedName().names();
-        var fqn = names
-          .stream().map(Name::name)
-          .toList();
+        var dottedName = aliasedName.dottedName();
+        var fqn = dottedNameToPartFqn(dottedName);
         var resolvedType = projectLevelTypeTable.getType(fqn);
 
-        if (!(resolvedType instanceof ModuleType module)) {
-          return;
-        }
         if (aliasedName.alias() != null) {
-          setTypeToName(aliasedName.alias(), module);
+          generateNamesForImportAlias(aliasedName, resolvedType, fqn);
         } else {
-          for (int i = names.size() - 1; i >= 0; i--) {
-            setTypeToName(names.get(i), module);
-            module = Optional.ofNullable(module)
-              .map(ModuleType::parent)
-              .orElse(null);
-          }
+          generateNames(resolvedType, dottedName.names(), fqn);
         }
       });
+  }
+
+  private static void generateNamesForImportAlias(AliasedName aliasedName, PythonType resolvedType, List<String> fqn) {
+    var aliasedNameType = resolvedType instanceof UnknownType ? new UnknownType.UnresolvedImportType(String.join(".", fqn)) : resolvedType;
+    setTypeToName(aliasedName.alias(), aliasedNameType);
+  }
+
+  private static void generateNames(PythonType resolvedType, List<Name> names, List<String> fqn) {
+    if (resolvedType instanceof ModuleType module) {
+      for (int i = names.size() - 1; i >= 0; i--) {
+        setTypeToName(names.get(i), module);
+        module = Optional.ofNullable(module)
+          .map(ModuleType::parent)
+          .orElse(null);
+      }
+    } else if (resolvedType instanceof UnknownType) {
+      for (int i = names.size() - 1; i >= 0; i--) {
+        UnknownType.UnresolvedImportType type = new UnknownType.UnresolvedImportType(String.join(".", fqn.subList(0, i + 1)));
+        setTypeToName(names.get(i), type);
+      }
+    }
   }
 
   @Override
   public void visitImportFrom(ImportFrom importFrom) {
     Optional.of(importFrom)
       .map(ImportFrom::module)
-      .map(DottedName::names)
-      .ifPresent(names -> {
-        var fqn = names
-          .stream().map(Name::name)
-          .toList();
+      .map(TrivialTypeInferenceVisitor::dottedNameToPartFqn)
+      .ifPresent(fqn -> setTypeToImportFromStatement(importFrom, fqn));
+  }
 
-        var module = projectLevelTypeTable.getType(fqn);
-        importFrom.importedNames().forEach(aliasedName -> aliasedName
-          .dottedName()
-          .names()
-          .stream()
-          .findFirst()
-          .ifPresent(name -> {
-            var type = module.resolveMember(name.name()).orElse(PythonType.UNKNOWN);
+  private static List<String> dottedNameToPartFqn(DottedName dottedName) {
+    return dottedName.names()
+      .stream()
+      .map(Name::name)
+      .toList();
+  }
 
-            var boundName = Optional.ofNullable(aliasedName.alias())
-              .orElse(name);
+  private void setTypeToImportFromStatement(ImportFrom importFrom, List<String> fqn) {
+    var module = projectLevelTypeTable.getType(fqn);
+    for (var aliasedName : importFrom.importedNames()) {
+      aliasedName.dottedName().names()
+        .stream()
+        .findFirst()
+        .ifPresent(name -> {
+          var type = module.resolveMember(name.name()).orElseGet(() -> createUnresolvedImportType(fqn, name));
 
-            setTypeToName(boundName, type);
-          }));
-      });
+          var boundName = Optional.ofNullable(aliasedName.alias())
+            .orElse(name);
+
+          setTypeToName(boundName, type);
+        });
+    }
+  }
+
+  private static UnknownType.UnresolvedImportType createUnresolvedImportType(List<String> moduleFqnList, Name name) {
+    String fromModuleFqn = String.join(".", moduleFqnList);
+    String fqn = fromModuleFqn + "." + name.name();
+    return new UnknownType.UnresolvedImportType(fqn);
   }
 
   @Override
@@ -377,9 +401,9 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
   }
 
   private static PythonType resolveTypeAnnotationExpressionType(Expression expression) {
-    if (expression instanceof Name name && name.typeV2() != PythonType.UNKNOWN) {
+    if (expression instanceof Name name && !(name.typeV2() instanceof UnknownType)) {
       return new ObjectType(name.typeV2(), TypeSource.TYPE_HINT);
-    } else if (expression instanceof SubscriptionExpression subscriptionExpression && subscriptionExpression.object().typeV2() != PythonType.UNKNOWN) {
+    } else if (expression instanceof SubscriptionExpression subscriptionExpression && !(subscriptionExpression.object().typeV2() instanceof UnknownType)) {
       var candidateTypes = subscriptionExpression.subscripts()
         .expressions()
         .stream()

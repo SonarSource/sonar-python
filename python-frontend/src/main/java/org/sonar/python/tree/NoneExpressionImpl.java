@@ -31,7 +31,7 @@ import org.sonar.python.types.v2.PythonType;
 
 public class NoneExpressionImpl extends PyTree implements NoneExpression {
   private final Token none;
-  PythonType pythonType = PythonType.UNKNOWN;
+  private PythonType pythonType = PythonType.UNKNOWN;
 
   public NoneExpressionImpl(Token none) {
     this.none = none;

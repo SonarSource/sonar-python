@@ -91,7 +91,7 @@ public record UnionType(Set<PythonType> candidates) implements PythonType {
     if (type2 == null) {
       return type1;
     }
-    if (type1.equals(PythonType.UNKNOWN) || type2.equals(PythonType.UNKNOWN)) {
+    if (type1 == PythonType.UNKNOWN || type2 == PythonType.UNKNOWN) {
       return PythonType.UNKNOWN;
     }
     if (type1.equals(type2)) {
