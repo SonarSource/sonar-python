@@ -61,6 +61,31 @@ public class TypeCheckBuilder {
     return this;
   }
 
+  public TypeCheckBuilder isDjangoView() {
+    predicates.add(pythonType -> {
+      var viewsFqn = projectLevelTypeTable.djangoViews();
+      if (!(pythonType instanceof FunctionType functionType)) {
+        return TriBool.FALSE;
+      }
+      for (String viewFqn : viewsFqn) {
+        var expected = projectLevelTypeTable.getType(viewFqn);
+        // The comparison should be done with ==, but currently we cannot use getType to resolve something from the current file.
+        if (expected instanceof FunctionType expectedFunctionType && expectedFunctionType.name().equals(functionType.name())) {
+          return TriBool.TRUE;
+        }
+        if (expected instanceof UnionType unionType) {
+          for (PythonType candidate : unionType.candidates()) {
+            if (candidate instanceof FunctionType candidateFunctionType && candidateFunctionType.name().equals(functionType.name())) {
+              return TriBool.TRUE;
+            }
+          }
+        }
+      }
+      return TriBool.UNKNOWN;
+    });
+    return this;
+  }
+
   public TriBool check(PythonType pythonType) {
     TriBool result = TriBool.TRUE;
     for (TypePredicate predicate : predicates) {
