@@ -17,18 +17,20 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.semantic.v2;
+package org.sonar.python.types.v2;
 
 import java.util.List;
+import java.util.Set;
+import java.util.function.BiFunction;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.sonar.plugins.python.api.types.BuiltinTypes;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
-import org.sonar.python.types.v2.ObjectType;
-import org.sonar.python.types.v2.PythonType;
-import org.sonar.python.types.v2.TriBool;
-import org.sonar.python.types.v2.TypeCheckBuilder;
-import org.sonar.python.types.v2.TypeSource;
-import org.sonar.python.types.v2.UnionType;
+import org.sonar.python.semantic.v2.ClassTypeBuilder;
+import org.sonar.python.semantic.v2.ObjectTypeBuilder;
+import org.sonar.python.semantic.v2.ProjectLevelTypeTable;
+
+import static org.fest.assertions.Assertions.assertThat;
 
 class TypeCheckerBuilderTest {
 
@@ -134,4 +136,33 @@ class TypeCheckerBuilderTest {
       .hasMessage("Object type does not have definition location");
   }
 
+  @Test
+  void isCompatibleWithTest() {
+    var symbolTable = ProjectLevelSymbolTable.empty();
+    var table = new ProjectLevelTypeTable(symbolTable);
+    BiFunction<PythonType, PythonType, TriBool> isIdentityComparableWith = (a, b) -> new TypeCheckBuilder(table).isIdentityComparableWith(a).check(b);
+
+    var intType = table.getType(BuiltinTypes.INT);
+    var floatType = table.getType(BuiltinTypes.FLOAT);
+    assertThat(isIdentityComparableWith.apply(PythonType.UNKNOWN, PythonType.UNKNOWN)).isEqualTo(TriBool.UNKNOWN);
+    assertThat(isIdentityComparableWith.apply(intType, PythonType.UNKNOWN)).isEqualTo(TriBool.UNKNOWN);
+    assertThat(isIdentityComparableWith.apply(PythonType.UNKNOWN, intType)).isEqualTo(TriBool.UNKNOWN);
+
+    assertThat(isIdentityComparableWith.apply(intType, intType)).isEqualTo(TriBool.TRUE);
+
+    assertThat(isIdentityComparableWith.apply(intType, floatType)).isEqualTo(TriBool.FALSE);
+    assertThat(isIdentityComparableWith.apply(floatType, intType)).isEqualTo(TriBool.FALSE);
+
+    var unionType = UnionType.or(intType, floatType);
+    assertThat(isIdentityComparableWith.apply(unionType, floatType)).isEqualTo(TriBool.TRUE);
+    assertThat(isIdentityComparableWith.apply(floatType, unionType)).isEqualTo(TriBool.TRUE);
+    assertThat(isIdentityComparableWith.apply(unionType, unionType)).isEqualTo(TriBool.TRUE);
+
+    assertThat(isIdentityComparableWith.apply(unionType, PythonType.UNKNOWN)).isEqualTo(TriBool.UNKNOWN);
+    assertThat(isIdentityComparableWith.apply(PythonType.UNKNOWN, unionType)).isEqualTo(TriBool.UNKNOWN);
+
+    var unknownUnionType = new UnionType(Set.of(PythonType.UNKNOWN, intType));
+    assertThat(isIdentityComparableWith.apply(unknownUnionType, intType)).isEqualTo(TriBool.UNKNOWN);
+    assertThat(isIdentityComparableWith.apply(intType, unknownUnionType)).isEqualTo(TriBool.UNKNOWN);
+  }
 }

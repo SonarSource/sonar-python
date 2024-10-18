@@ -50,3 +50,9 @@ def equality_check(param):
     if obj == None: pass # FN
     if None == obj: pass # FN
 
+
+def next_in_loop(list_param):
+    while True:
+        p = next(list_param)
+        if p is None:
+            break
