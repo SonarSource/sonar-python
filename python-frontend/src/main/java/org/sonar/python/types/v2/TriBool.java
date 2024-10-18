@@ -27,6 +27,10 @@ public enum TriBool {
   FALSE,
   UNKNOWN;
 
+  public static TriBool valueOf(boolean bool) {
+    return bool ? TRUE : FALSE;
+  }
+
   public TriBool and(TriBool triBool) {
     if (this.equals(triBool)) {
       return this;
@@ -35,5 +39,15 @@ public enum TriBool {
       return UNKNOWN;
     }
     return FALSE;
+  }
+
+  public TriBool or(TriBool triBool) {
+    if (this.equals(triBool)) {
+      return this;
+    }
+    if (this.equals(UNKNOWN) || triBool.equals(UNKNOWN)) {
+      return UNKNOWN;
+    }
+    return TRUE;
   }
 }

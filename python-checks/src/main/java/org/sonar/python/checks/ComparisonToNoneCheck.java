@@ -27,26 +27,36 @@ import org.sonar.plugins.python.api.tree.IsExpression;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.plugins.python.api.types.BuiltinTypes;
-import org.sonar.plugins.python.api.types.InferredType;
-
-import static org.sonar.python.checks.utils.CheckUtils.isNone;
+import org.sonar.python.types.v2.PythonType;
+import org.sonar.python.types.v2.TriBool;
+import org.sonar.python.types.v2.TypeCheckBuilder;
+import org.sonar.python.types.v2.TypeChecker;
 
 @Rule(key = "S5727")
 public class ComparisonToNoneCheck extends PythonSubscriptionCheck {
+  private TypeCheckBuilder isNoneTypeCheck;
+  private TypeCheckBuilder isObjectTypeCheck;
+  private TypeChecker typeChecker;
 
   @Override
   public void initialize(Context context) {
+    context.registerSyntaxNodeConsumer(Kind.FILE_INPUT, ctx -> {
+      typeChecker = ctx.typeChecker();
+      isNoneTypeCheck = ctx.typeChecker().typeCheckBuilder().isBuiltinWithName(BuiltinTypes.NONE_TYPE);
+      isObjectTypeCheck = ctx.typeChecker().typeCheckBuilder().isBuiltinWithName(BuiltinTypes.OBJECT_TYPE);
+    });
+
     context.registerSyntaxNodeConsumer(Kind.IS, ctx -> checkIdentityComparison(ctx, (IsExpression) ctx.syntaxNode()));
     context.registerSyntaxNodeConsumer(Kind.COMPARISON, ctx -> checkEqualityComparison(ctx, (BinaryExpression) ctx.syntaxNode()));
   }
 
-  private static void checkEqualityComparison(SubscriptionContext ctx, BinaryExpression comparison) {
+  private void checkEqualityComparison(SubscriptionContext ctx, BinaryExpression comparison) {
     String operator = comparison.operator().value();
     if (!"==".equals(operator) && !"!=".equals(operator)) {
       return;
     }
-    InferredType left = comparison.leftOperand().type();
-    InferredType right = comparison.rightOperand().type();
+    PythonType left = comparison.leftOperand().typeV2();
+    PythonType right = comparison.rightOperand().typeV2();
     if (isNone(left) && isNone(right)) {
       addIssue(ctx, comparison, operator + " comparison", "==".equals(operator));
     } else if ((isNone(left) && cannotBeNone(right)) || (cannotBeNone(left) && isNone(right))) {
@@ -54,28 +64,35 @@ public class ComparisonToNoneCheck extends PythonSubscriptionCheck {
     }
   }
 
-  private static void checkIdentityComparison(SubscriptionContext ctx, IsExpression comparison) {
-    InferredType left = comparison.leftOperand().type();
-    InferredType right = comparison.rightOperand().type();
+  private void checkIdentityComparison(SubscriptionContext ctx, IsExpression comparison) {
+    PythonType left = comparison.leftOperand().typeV2();
+    PythonType right = comparison.rightOperand().typeV2();
     // `isObject` Removes FP when the return type of a function is an object
-    if (!left.isIdentityComparableWith(right) && (isNone(left) || isNone(right)) && !(isObject(left) || isObject(right))) {
+    if (isNotIdentityComparableWith(left, right) && (isNone(left) || isNone(right)) && !(isObject(left) || isObject(right))) {
       addIssue(ctx, comparison, "identity check", comparison.notToken() != null);
     } else if (isNone(left) && isNone(right)) {
       addIssue(ctx, comparison, "identity check", comparison.notToken() == null);
     }
   }
 
+  private boolean isNone(PythonType left) {
+    return isNoneTypeCheck.check(left) == TriBool.TRUE;
+  }
+
+  private boolean isNotIdentityComparableWith(PythonType left, PythonType right) {
+    return typeChecker.typeCheckBuilder().isIdentityComparableWith(left).check(right) == TriBool.FALSE;
+  }
+
+  private boolean cannotBeNone(PythonType type) {
+    return isNoneTypeCheck.check(type) == TriBool.FALSE && isObjectTypeCheck.check(type) == TriBool.FALSE;
+  }
+
+  private boolean isObject(PythonType type) {
+    return isObjectTypeCheck.check(type) == TriBool.TRUE;
+  }
+
   private static void addIssue(SubscriptionContext ctx, Tree tree, String comparisonKind, boolean result) {
     String resultAsString = result ? "True" : "False";
     ctx.addIssue(tree, String.format("Remove this %s; it will always be %s.", comparisonKind, resultAsString));
   }
-
-  private static boolean cannotBeNone(InferredType type) {
-    return !type.canBeOrExtend(BuiltinTypes.NONE_TYPE) && !isObject(type);
-  }
-
-  private static boolean isObject(InferredType type) {
-    return type.canOnlyBe(BuiltinTypes.OBJECT_TYPE);
-  }
-
 }

@@ -61,18 +61,6 @@ public class TypeCheckBuilder {
     return this;
   }
 
-  public TriBool check(PythonType pythonType) {
-    TriBool result = TriBool.TRUE;
-    for (TypePredicate predicate : predicates) {
-      TriBool partialResult = predicate.test(pythonType);
-      result = result.and(partialResult);
-      if (result == TriBool.UNKNOWN) {
-        return TriBool.UNKNOWN;
-      }
-    }
-    return result;
-  }
-
   public TypeCheckBuilder isInstanceOf(String fqn) {
     var expected = projectLevelTypeTable.getType(fqn);
     predicates.add(new IsInstanceOfPredicate(expected));
@@ -83,6 +71,23 @@ public class TypeCheckBuilder {
     var expected = projectLevelTypeTable.getType(expectedName);
     predicates.add(new IsSameAsTypePredicate(expected));
     return this;
+  }
+
+  public TypeCheckBuilder isIdentityComparableWith(PythonType expectedType) {
+    predicates.add(new IsIdentityComparableWith(expectedType));
+    return this;
+  }
+
+  public TriBool check(PythonType pythonType) {
+    TriBool result = TriBool.TRUE;
+    for (TypePredicate predicate : predicates) {
+      TriBool partialResult = predicate.test(pythonType);
+      result = result.and(partialResult);
+      if (result == TriBool.UNKNOWN) {
+        return TriBool.UNKNOWN;
+      }
+    }
+    return result;
   }
 
   interface TypePredicate {
@@ -146,7 +151,7 @@ public class TypeCheckBuilder {
     }
   }
 
-  record IsInstanceOfPredicate(PythonType expectedType)  implements TypePredicate {
+  record IsInstanceOfPredicate(PythonType expectedType) implements TypePredicate {
 
     @Override
     public TriBool test(PythonType pythonType) {
@@ -233,5 +238,39 @@ public class TypeCheckBuilder {
     }
   }
 
+  record IsIdentityComparableWith(PythonType expectedType) implements TypePredicate {
+    public IsIdentityComparableWith {
+      expectedType = expectedType.unwrappedType();
+    }
 
+    @Override
+    public TriBool test(PythonType otherMaybeWrappedType) {
+      PythonType otherType = otherMaybeWrappedType.unwrappedType();
+      TriBool isUnionTypeIdentityComparableWith = isUnionTypeIdentityComparableWith(expectedType, otherType).or(isUnionTypeIdentityComparableWith(otherType, expectedType));
+      if (isUnionTypeIdentityComparableWith != TriBool.FALSE) {
+        return isUnionTypeIdentityComparableWith;
+      }
+      return isIdentityComparableWith(otherType, expectedType);
+    }
+
+    private static TriBool isUnionTypeIdentityComparableWith(PythonType maybeUnionType, PythonType otherType) {
+      if (maybeUnionType instanceof UnionType unionType) {
+        return unionType.candidates().stream()
+          .map(type -> isIdentityComparableWith(type, otherType))
+          .reduce(TriBool::or)
+          .orElse(TriBool.UNKNOWN);
+      }
+      return TriBool.FALSE;
+    }
+
+    private static TriBool isIdentityComparableWith(PythonType thisType, PythonType otherType) {
+      thisType = thisType.unwrappedType();
+      otherType = otherType.unwrappedType();
+
+      if (thisType instanceof UnknownType || otherType instanceof UnknownType) {
+        return TriBool.UNKNOWN;
+      }
+      return TriBool.valueOf(thisType.equals(otherType));
+    }
+  }
 }
