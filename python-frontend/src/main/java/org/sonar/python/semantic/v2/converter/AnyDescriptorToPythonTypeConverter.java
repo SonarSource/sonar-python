@@ -22,10 +22,8 @@ package org.sonar.python.semantic.v2.converter;
 import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 import org.sonar.python.index.Descriptor;
 import org.sonar.python.semantic.v2.LazyTypesContext;
-import org.sonar.python.types.v2.ModuleType;
 import org.sonar.python.types.v2.PythonType;
 import org.sonar.python.types.v2.TypeOrigin;
 import org.sonar.python.types.v2.TypeWrapper;
@@ -47,8 +45,7 @@ public class AnyDescriptorToPythonTypeConverter {
 
   }
 
-  public Optional<ModuleType> convertModuleType(String moduleName, String moduleFqn,
-    ModuleType parent, Map<String, Descriptor> stringDescriptorMap, boolean registerAsSubmodule) {
+  public Map<String, TypeWrapper> convertModuleType(String moduleFqn, Map<String, Descriptor> stringDescriptorMap) {
     Map<String, TypeWrapper> moduleMembers = new HashMap<>();
     for (var entry : stringDescriptorMap.entrySet()) {
       var descriptor = entry.getValue();
@@ -64,7 +61,7 @@ public class AnyDescriptorToPythonTypeConverter {
       }
       moduleMembers.put(name, TypeWrapper.of(result));
     }
-    return Optional.of(moduleMembers).filter(m -> !m.isEmpty()).map(m -> new ModuleType(moduleName, parent, m, registerAsSubmodule));
+    return moduleMembers;
   }
 
   public PythonType convert(Descriptor from, TypeOrigin typeOrigin) {

@@ -301,7 +301,7 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
         var fqn = names
           .stream().map(Name::name)
           .toList();
-        var resolvedType = projectLevelTypeTable.getType(fqn);
+        var resolvedType = projectLevelTypeTable.getModuleType(fqn);
 
         if (!(resolvedType instanceof ModuleType module)) {
           return;
@@ -329,7 +329,7 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
           .stream().map(Name::name)
           .toList();
 
-        var module = projectLevelTypeTable.getType(fqn);
+        var module = projectLevelTypeTable.getModuleType(fqn);
         importFrom.importedNames().forEach(aliasedName -> aliasedName
           .dottedName()
           .names()
