@@ -301,7 +301,7 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
       .forEach(aliasedName -> {
         var dottedName = aliasedName.dottedName();
         var fqn = dottedNameToPartFqn(dottedName);
-        var resolvedType = projectLevelTypeTable.getType(fqn);
+        var resolvedType = projectLevelTypeTable.getModuleType(fqn);
 
         if (aliasedName.alias() != null) {
           generateNamesForImportAlias(aliasedName, resolvedType, fqn);
@@ -348,7 +348,7 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
   }
 
   private void setTypeToImportFromStatement(ImportFrom importFrom, List<String> fqn) {
-    var module = projectLevelTypeTable.getType(fqn);
+    var module = projectLevelTypeTable.getModuleType(fqn);
     for (var aliasedName : importFrom.importedNames()) {
       aliasedName.dottedName().names()
         .stream()

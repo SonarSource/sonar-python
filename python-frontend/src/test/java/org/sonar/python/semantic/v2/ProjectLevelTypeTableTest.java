@@ -116,8 +116,8 @@ class ProjectLevelTypeTableTest {
     ClassType isoparserClass = (ClassType) ((ExpressionStatement) fileInput.statements().statements().get(1)).expressions().get(0).typeV2();
     // With this import syntax, we expect to retrieve the class defined in "dateutil/parser/isoparser.pyi", as "dateutil.parser.isoparser" must refer to a module
     assertThat(isoparserClass.name()).isEqualTo("isoparser");
-    // Should be True
-    assertThat(typeChecker.typeCheckBuilder().isTypeWithName("dateutil.parser.isoparser.isoparser").check(isoparserClass)).isEqualTo(TriBool.FALSE);
+    assertThat(typeChecker.typeCheckBuilder().isTypeWithName("dateutil.parser.isoparser.isoparser").check(isoparserClass)).isEqualTo(TriBool.TRUE);
+    assertThat(typeChecker.typeCheckBuilder().isTypeWithName("dateutil.parser.isoparser").check(isoparserClass)).isEqualTo(TriBool.TRUE);
 
     fileInput = parseAndInferTypes(projectLevelTypeTable, pythonFile("main.py"), """
       import dateutil.parser as parser_module
@@ -136,8 +136,7 @@ class ProjectLevelTypeTableTest {
     PythonType isoparserClass2 = ((ExpressionStatement) fileInput.statements().statements().get(1)).expressions().get(0).typeV2();
     // We no longer resolve the class, now that the LazyType is resolved
     // SONARPY-2176: We should properly resolve either submodules or names from __init__.py depending on how the import is performed
-    assertThat(isoparserClass2).isInstanceOf(UnknownType.UnresolvedImportType.class);
-    assertThat(((UnknownType.UnresolvedImportType) isoparserClass2).importPath()).isEqualTo("dateutil.parser.isoparser.isoparser");
+    assertThat(isoparserClass2).isSameAs(isoparserClass);
   }
 
   @Test
@@ -164,7 +163,7 @@ class ProjectLevelTypeTableTest {
       """
     );
     var libType = ((ExpressionStatement) fileInput.statements().statements().get(1)).expressions().get(0).typeV2();
-    // SONARPY-2176 lib should be registered as a submodule of "my_package" and we should fall back to it when failing to find the member declared in "my_package"
+    // SONARPY-2230: lib should be registered as a member/submodule of "my_package" in project table and we should fall back to it when failing to find the member declared in "my_package"
     assertThat(libType).isInstanceOf(UnknownType.UnresolvedImportType.class);
     assertThat(((UnknownType.UnresolvedImportType) libType).importPath()).isEqualTo("my_package.lib");
 
@@ -207,7 +206,7 @@ class ProjectLevelTypeTableTest {
       """
     );
     var libType = ((ExpressionStatement) fileInput.statements().statements().get(1)).expressions().get(0).typeV2();
-    // SONARPY-2176 lib should be resolved as the renamed class "A" here
+    // SONARPY-2230 lib should be resolved as the renamed class "A" here (but not present in project table at all)
     assertThat(libType).isInstanceOf(UnknownType.UnresolvedImportType.class);
     assertThat(((UnknownType.UnresolvedImportType) libType).importPath()).isEqualTo("my_package.lib");
 
@@ -223,5 +222,35 @@ class ProjectLevelTypeTableTest {
     // SONARPY-2176 lib should be resolved as the renamed class "A" here
     assertThat(moduleLibType.members().values()).extracting(TypeWrapper::type).extracting(PythonType::name).containsExactly("A");
     assertThat(moduleLibType.members().values()).extracting(TypeWrapper::type).allMatch(t -> t instanceof ClassType);
+  }
+
+  @Test
+  void importingRedefinedSubmodules2Test() {
+    ProjectLevelSymbolTable projectLevelSymbolTable = new ProjectLevelSymbolTable();
+
+    FileInput libTree = parseWithoutSymbols(
+      """
+      class A: ...
+      """
+    );
+    PythonFile pythonFile = pythonFile("lib.py");
+    projectLevelSymbolTable.addModule(libTree, "my_package", pythonFile);
+    ProjectLevelTypeTable projectLevelTypeTable = new ProjectLevelTypeTable(projectLevelSymbolTable);
+
+    FileInput initTree = parseWithoutSymbols("""
+      class lib: ...
+      """);
+    PythonFile initFile = pythonFile("__init__.py");
+    projectLevelSymbolTable.addModule(initTree, "my_package", initFile);
+
+    PythonFile mainFile = pythonFile("main.py");
+    var fileInput = parseAndInferTypes(projectLevelTypeTable, mainFile, """
+      from my_package.lib import A
+      A
+      """
+    );
+    ClassType aType = (ClassType) ((ExpressionStatement) fileInput.statements().statements().get(1)).expressions().get(0).typeV2();
+    // SONARPY-2176 lib should be resolved as the renamed class "A" here
+    assertThat(aType.name()).isEqualTo("A");
   }
 }

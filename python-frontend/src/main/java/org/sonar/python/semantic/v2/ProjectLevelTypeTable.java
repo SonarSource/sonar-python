@@ -20,7 +20,6 @@
 package org.sonar.python.semantic.v2;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.stream.IntStream;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
@@ -28,7 +27,6 @@ import org.sonar.python.types.v2.LazyTypeWrapper;
 import org.sonar.python.types.v2.ModuleType;
 import org.sonar.python.types.v2.ObjectType;
 import org.sonar.python.types.v2.PythonType;
-import org.sonar.python.types.v2.UnknownType;
 import org.sonar.python.types.v2.TypeWrapper;
 
 public class ProjectLevelTypeTable {
@@ -36,16 +34,6 @@ public class ProjectLevelTypeTable {
   private final SymbolsModuleTypeProvider symbolsModuleTypeProvider;
   private final ModuleType rootModule;
   private final LazyTypesContext lazyTypesContext;
-  private final Map<String, Map<String, String>> aliasMembers = Map.ofEntries(
-    Map.entry("typing", Map.ofEntries(
-      Map.entry("List", "list"),
-      Map.entry("Tuple", "tuple"),
-      Map.entry("Dict", "dict"),
-      Map.entry("Set", "set"),
-      Map.entry("FrozenSet", "frozenset"),
-      Map.entry("Type", "type")
-    ))
-  );
 
   public ProjectLevelTypeTable(ProjectLevelSymbolTable projectLevelSymbolTable) {
     this.lazyTypesContext = new LazyTypesContext(this);
@@ -75,24 +63,26 @@ public class ProjectLevelTypeTable {
       if (parent instanceof ObjectType) {
         return PythonType.UNKNOWN;
       }
+      Optional<PythonType> resolvedMember;
       if (parent instanceof ModuleType moduleType) {
         TypeWrapper typeWrapper = moduleType.members().get(part);
         if (typeWrapper instanceof LazyTypeWrapper lazyTypeWrapper && !lazyTypeWrapper.isResolved()) {
+          if (i == typeFqnParts.size() - 1) {
+            // this is the name we are looking for, resolve it
+            return typeWrapper.type();
+          }
           // The member of the module is a LazyType, which means it's a re-exported type from a submodule
           // We try to resolve the submodule instead
-          // SONARPY-2176: We should actually either resolve the LazyType or look into the module and use the other as a fallback following Python import behavior more closely
-          parent = symbolsModuleTypeProvider.convertModuleType(moduleFqnParts, moduleType, true);
+          Optional<PythonType> subModule = moduleType.resolveSubmodule(part);
+          parent = subModule.orElseGet(() -> symbolsModuleTypeProvider.convertModuleType(moduleFqnParts, moduleType));
           continue;
         }
       }
-      Optional<PythonType> resolvedMember = parent.resolveMember(part);
+      resolvedMember = parent.resolveMember(part);
       if (resolvedMember.isPresent()) {
         parent = resolvedMember.get();
       } else if (parent instanceof ModuleType module) {
         parent = symbolsModuleTypeProvider.convertModuleType(moduleFqnParts, module);
-        if (parent instanceof ModuleType moduleType) {
-          addAliasMembers(moduleFqnParts, moduleType);
-        }
       } else {
         return PythonType.UNKNOWN;
       }
@@ -100,18 +90,28 @@ public class ProjectLevelTypeTable {
     return parent;
   }
 
-  public LazyTypesContext lazyTypesContext() {
-    return lazyTypesContext;
+  /**
+   * This method returns a module type for a given FQN, or unknown if it cannot be resolved.
+   * It is to be used to retrieve modules referenced in the "from" clause of an "import from" statement,
+   * as it will only consider submodules over package members in case of name conflict.
+   */
+  public PythonType getModuleType(List<String> typeFqnParts) {
+    var parent = (PythonType) rootModule;
+    for (int i = 0; i < typeFqnParts.size(); i++) {
+      var part = typeFqnParts.get(i);
+      var moduleFqnParts = IntStream.rangeClosed(0, i)
+        .mapToObj(typeFqnParts::get)
+        .toList();
+      if (!(parent instanceof ModuleType moduleType)) {
+        return PythonType.UNKNOWN;
+      }
+      Optional<PythonType> resolvedSubmodule = moduleType.resolveSubmodule(part);
+      parent = resolvedSubmodule.orElseGet(() -> symbolsModuleTypeProvider.convertModuleType(moduleFqnParts, moduleType));
+    }
+    return parent;
   }
 
-  public void addAliasMembers(List<String> moduleFqnParts, ModuleType moduleType) {
-    String moduleFqn = String.join(".", moduleFqnParts);
-    aliasMembers.getOrDefault(moduleFqn, Map.of())
-      .forEach((memberName, alias) -> {
-        var pythonType = getType(alias);
-        if (!(pythonType instanceof UnknownType)) {
-          moduleType.members().put(memberName, TypeWrapper.of(pythonType));
-        }
-      });
+  public LazyTypesContext lazyTypesContext() {
+    return lazyTypesContext;
   }
 }
