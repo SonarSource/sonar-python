@@ -20,11 +20,13 @@
 package org.sonar.python.semantic.v2.converter;
 
 import java.util.EnumMap;
+import java.util.HashMap;
 import java.util.Map;
 import org.sonar.python.index.Descriptor;
 import org.sonar.python.semantic.v2.LazyTypesContext;
 import org.sonar.python.types.v2.PythonType;
 import org.sonar.python.types.v2.TypeOrigin;
+import org.sonar.python.types.v2.TypeWrapper;
 
 public class AnyDescriptorToPythonTypeConverter {
 
@@ -41,6 +43,25 @@ public class AnyDescriptorToPythonTypeConverter {
       Descriptor.Kind.AMBIGUOUS, new AmbiguousDescriptorToPythonTypeConverter()
     ));
 
+  }
+
+  public Map<String, TypeWrapper> convertModuleType(String moduleFqn, Map<String, Descriptor> stringDescriptorMap) {
+    Map<String, TypeWrapper> moduleMembers = new HashMap<>();
+    for (var entry : stringDescriptorMap.entrySet()) {
+      var descriptor = entry.getValue();
+      var name = entry.getKey();
+      PythonType result;
+      String fullyQualifiedName = descriptor.fullyQualifiedName();
+      String reconstructedFqn = moduleFqn + "." + descriptor.name();
+      if (!reconstructedFqn.equals(fullyQualifiedName) && fullyQualifiedName != null) {
+        // We create lazy types for descriptors that are not local to the module
+        result = lazyTypesContext.getOrCreateLazyType(fullyQualifiedName);
+      } else {
+        result = this.convert(descriptor, TypeOrigin.STUB);
+      }
+      moduleMembers.put(name, TypeWrapper.of(result));
+    }
+    return moduleMembers;
   }
 
   public PythonType convert(Descriptor from, TypeOrigin typeOrigin) {
