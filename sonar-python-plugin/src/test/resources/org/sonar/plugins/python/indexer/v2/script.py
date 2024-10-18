@@ -1,0 +1,13 @@
+def foo(): ...
+
+class A:
+  def do_something(self):
+    ...
+
+
+if something:
+  class B:
+    def method_one(self): ...
+else:
+  class B:
+    def method_two(self): ...

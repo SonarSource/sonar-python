@@ -41,6 +41,7 @@ import org.sonar.python.cfg.fixpoint.ForwardAnalysis;
 import org.sonar.python.cfg.fixpoint.ProgramState;
 import org.sonar.python.semantic.v2.ProjectLevelTypeTable;
 import org.sonar.python.semantic.v2.SymbolV2;
+import org.sonar.python.semantic.v2.TypeTable;
 import org.sonar.python.types.v2.PythonType;
 
 public class FlowSensitiveTypeInference extends ForwardAnalysis {
@@ -51,7 +52,7 @@ public class FlowSensitiveTypeInference extends ForwardAnalysis {
   private final IsInstanceVisitor isInstanceVisitor;
 
   public FlowSensitiveTypeInference(
-    ProjectLevelTypeTable projectLevelTypeTable, Set<SymbolV2> trackedVars,
+    TypeTable projectLevelTypeTable, Set<SymbolV2> trackedVars,
     Map<Statement, Assignment> assignmentsByAssignmentStatement,
     Map<Statement, Set<Definition>> definitionsByDefinitionStatement,
     Map<String, PythonType> parameterTypesByName

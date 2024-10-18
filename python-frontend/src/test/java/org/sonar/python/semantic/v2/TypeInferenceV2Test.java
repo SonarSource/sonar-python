@@ -2655,8 +2655,7 @@ class TypeInferenceV2Test {
     FileInput root = parse(lines);
     var symbolTable = new SymbolTableBuilderV2(root).build();
     var typeInferenceV2 = new TypeInferenceV2(PROJECT_LEVEL_TYPE_TABLE, pythonFile, symbolTable);
-    typeInferenceV2.inferTypes(root);
-    return typeInferenceV2.getTypesBySymbol();
+    return typeInferenceV2.inferTypes(root);
   }
 
   private static FileInput inferTypes(String lines) {

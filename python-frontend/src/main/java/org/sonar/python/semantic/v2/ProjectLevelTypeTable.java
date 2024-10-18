@@ -28,7 +28,7 @@ import org.sonar.python.types.v2.ModuleType;
 import org.sonar.python.types.v2.ObjectType;
 import org.sonar.python.types.v2.PythonType;
 
-public class ProjectLevelTypeTable {
+public class ProjectLevelTypeTable implements TypeTable {
 
   private final SymbolsModuleTypeProvider symbolsModuleTypeProvider;
   private final ModuleType rootModule;
@@ -50,18 +50,22 @@ public class ProjectLevelTypeTable {
     this.rootModule = this.symbolsModuleTypeProvider.createBuiltinModule();
   }
 
+  @Override
   public ModuleType getBuiltinsModule() {
     return rootModule;
   }
 
+  @Override
   public PythonType getType(String typeFqn) {
     return getType(typeFqn.split("\\."));
   }
 
+  @Override
   public PythonType getType(String... typeFqnParts) {
     return getType(List.of(typeFqnParts));
   }
 
+  @Override
   public PythonType getType(List<String> typeFqnParts) {
     var parent = (PythonType) rootModule;
     for (int i = 0; i < typeFqnParts.size(); i++) {

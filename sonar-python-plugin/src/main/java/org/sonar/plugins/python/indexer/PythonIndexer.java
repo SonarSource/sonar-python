@@ -25,6 +25,8 @@ import java.net.URI;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.slf4j.Logger;
@@ -38,9 +40,19 @@ import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.SonarLintCache;
 import org.sonar.plugins.python.api.caching.CacheContext;
 import org.sonar.plugins.python.api.tree.FileInput;
+import org.sonar.python.index.Descriptor;
 import org.sonar.python.parser.PythonParser;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
+import org.sonar.python.semantic.SymbolUtils;
+import org.sonar.python.semantic.v2.BasicTypeTable;
+import org.sonar.python.semantic.v2.ProjectLevelTypeTable;
+import org.sonar.python.semantic.v2.SymbolTableBuilderV2;
+import org.sonar.python.semantic.v2.SymbolV2;
+import org.sonar.python.semantic.v2.TypeInferenceV2;
+import org.sonar.python.semantic.v2.converter.PythonTypeToDescriptorConverter;
 import org.sonar.python.tree.PythonTreeMaker;
+import org.sonar.python.types.TypeInference;
+import org.sonar.python.types.v2.PythonType;
 
 import static org.sonar.python.semantic.SymbolUtils.pythonPackageName;
 
@@ -94,6 +106,16 @@ public abstract class PythonIndexer {
     projectLevelSymbolTable.addProjectPackage(packageName);
     PythonFile pythonFile = SonarQubePythonFile.create(inputFile.wrappedFile());
     projectLevelSymbolTable.addModule(astRoot, packageName, pythonFile);
+
+    var symbolTable = new SymbolTableBuilderV2(astRoot).build();
+    var typeInferenceV2 = new TypeInferenceV2(new BasicTypeTable(), pythonFile, symbolTable);
+    var typesBySymbol = typeInferenceV2.inferTypes(astRoot);
+    var converter = new PythonTypeToDescriptorConverter();
+    var fullyQualifiedModuleName = SymbolUtils.fullyQualifiedModuleName(packageName, pythonFile.fileName());
+    var moduleDescriptors = typesBySymbol.entrySet()
+      .stream()
+      .map(entry -> converter.convert(fullyQualifiedModuleName, entry.getKey(), entry.getValue())).collect(Collectors.toSet());
+    projectLevelSymbolTable.addModule(fullyQualifiedModuleName, moduleDescriptors);
   }
 
   public abstract void buildOnce(SensorContext context);

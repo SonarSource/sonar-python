@@ -28,7 +28,7 @@ import org.sonar.plugins.python.api.LocationInFile;
  */
 @Beta
 public interface PythonType {
-  PythonType UNKNOWN = new UnknownType();
+  PythonType UNKNOWN = new UnknownType.UnknownTypeImpl();
 
   @Beta
   default String name() {

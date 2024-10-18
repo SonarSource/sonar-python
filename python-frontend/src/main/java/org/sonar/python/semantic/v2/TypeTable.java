@@ -1,4 +1,3 @@
-
 /*
  * SonarQube Python Plugin
  * Copyright (C) 2011-2024 SonarSource SA
@@ -18,29 +17,18 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.types.v2;
+package org.sonar.python.semantic.v2;
 
-import java.util.Optional;
-import org.sonar.api.Beta;
+import java.util.List;
+import org.sonar.python.types.v2.ModuleType;
+import org.sonar.python.types.v2.PythonType;
 
-@Beta
-public sealed interface UnknownType extends PythonType {
+public interface TypeTable {
+  ModuleType getBuiltinsModule();
 
-  @Override
-  default boolean isCompatibleWith(PythonType another) {
-    return true;
-  }
+  PythonType getType(String typeFqn);
 
-  final class UnknownTypeImpl implements UnknownType {
-    UnknownTypeImpl() {
-    }
-  }
+  PythonType getType(String... typeFqnParts);
 
-  record UnresolvedImportType(String importPath) implements UnknownType {
-
-    @Override
-    public Optional<PythonType> resolveMember(String memberName) {
-      return Optional.of(new UnresolvedImportType(importPath + "." + memberName));
-    }
-  }
+  PythonType getType(List<String> typeFqnParts);
 }
