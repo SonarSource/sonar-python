@@ -44,7 +44,7 @@ public final class ModuleType implements PythonType {
       return;
     }
     PythonType parentMember = parent.members.get(this.name);
-    if (parentMember == null || parentMember.equals(PythonType.UNKNOWN)) {
+    if (parentMember == null || parentMember instanceof UnknownType) {
       // SONARPY-2037 We should update this heuristic with the correct Python resolution rules
       parent.members.put(this.name, this);
     }

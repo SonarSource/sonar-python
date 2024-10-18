@@ -27,6 +27,7 @@ import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.types.v2.ModuleType;
 import org.sonar.python.types.v2.ObjectType;
 import org.sonar.python.types.v2.PythonType;
+import org.sonar.python.types.v2.UnknownType;
 
 public class ProjectLevelTypeTable {
 
@@ -96,7 +97,7 @@ public class ProjectLevelTypeTable {
     aliasMembers.getOrDefault(moduleFqn, Map.of())
       .forEach((memberName, alias) -> {
         var pythonType = getType(alias);
-        if (pythonType != PythonType.UNKNOWN) {
+        if (!(pythonType instanceof UnknownType)) {
           moduleType.members().put(memberName, pythonType);
         }
       });

@@ -281,7 +281,7 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
     TypeAnnotation typeAnnotation = functionDef.returnTypeAnnotation();
     if (typeAnnotation != null) {
       PythonType returnType = typeAnnotation.expression().typeV2();
-      functionTypeBuilder.withReturnType(returnType == PythonType.UNKNOWN ? returnType : new ObjectType(returnType, TypeSource.TYPE_HINT));
+      functionTypeBuilder.withReturnType(returnType instanceof UnknownType ? returnType : new ObjectType(returnType, TypeSource.TYPE_HINT));
       functionTypeBuilder.withTypeOrigin(TypeOrigin.LOCAL);
     }
     FunctionType functionType = functionTypeBuilder.build();
@@ -401,9 +401,9 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
   }
 
   private static PythonType resolveTypeAnnotationExpressionType(Expression expression) {
-    if (expression instanceof Name name && name.typeV2() != PythonType.UNKNOWN) {
+    if (expression instanceof Name name && !(name.typeV2() instanceof UnknownType)) {
       return new ObjectType(name.typeV2(), TypeSource.TYPE_HINT);
-    } else if (expression instanceof SubscriptionExpression subscriptionExpression && subscriptionExpression.object().typeV2() != PythonType.UNKNOWN) {
+    } else if (expression instanceof SubscriptionExpression subscriptionExpression && !(subscriptionExpression.object().typeV2() instanceof UnknownType)) {
       var candidateTypes = subscriptionExpression.subscripts()
         .expressions()
         .stream()

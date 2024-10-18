@@ -33,12 +33,6 @@ public sealed interface UnknownType extends PythonType {
   final class UnknownTypeImpl implements UnknownType {
     UnknownTypeImpl() {
     }
-
-    @Override
-    public String toString() {
-      return "UnknownTypeImpl[]";
-    }
-
   }
 
   record UnresolvedImportType(String importPath) implements UnknownType {
