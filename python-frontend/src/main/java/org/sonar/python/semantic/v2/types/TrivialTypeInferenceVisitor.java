@@ -280,8 +280,8 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
     if (typeAnnotation != null) {
       PythonType returnType = typeAnnotation.expression().typeV2();
       functionTypeBuilder.withReturnType(returnType == PythonType.UNKNOWN ? returnType : new ObjectType(returnType, TypeSource.TYPE_HINT));
-      functionTypeBuilder.withTypeOrigin(TypeOrigin.LOCAL);
     }
+    functionTypeBuilder.withTypeOrigin(TypeOrigin.LOCAL);
     FunctionType functionType = functionTypeBuilder.build();
     if (owner != null) {
       if (functionDef.name().symbolV2().hasSingleBindingUsage()) {

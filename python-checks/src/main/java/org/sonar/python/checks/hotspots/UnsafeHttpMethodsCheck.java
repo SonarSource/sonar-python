@@ -28,7 +28,6 @@ import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
-import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.CallExpression;
@@ -39,9 +38,8 @@ import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.ListLiteral;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.StringLiteral;
-import org.sonar.python.semantic.FunctionSymbolImpl;
-import org.sonar.python.tree.FunctionDefImpl;
 import org.sonar.python.tree.TreeUtils;
+import org.sonar.python.types.v2.TriBool;
 
 import static org.sonar.plugins.python.api.tree.Tree.Kind.CALL_EXPR;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.FILE_INPUT;
@@ -68,7 +66,7 @@ public class UnsafeHttpMethodsCheck extends PythonSubscriptionCheck {
   public void initialize(Context context) {
     context.registerSyntaxNodeConsumer(FUNCDEF, ctx -> {
       FunctionDef functionDef = (FunctionDef) ctx.syntaxNode();
-      if (isDjangoView(functionDef)) {
+      if (isDjangoView(functionDef, ctx)) {
         checkDjangoView(functionDef, ctx);
       } else {
         getFlaskViewDecorator(functionDef).ifPresent(callExpression -> checkFlaskView(callExpression, ctx));
@@ -121,12 +119,13 @@ public class UnsafeHttpMethodsCheck extends PythonSubscriptionCheck {
     return hasSafeHttpMethod && hasUnsafeHttpMethod;
   }
 
-  private static boolean isDjangoView(FunctionDef functionDef) {
-    FunctionSymbol functionSymbol = ((FunctionDefImpl) functionDef).functionSymbol();
-    return Optional.ofNullable(functionSymbol)
-      .map(FunctionSymbolImpl.class::cast)
-      .filter(FunctionSymbolImpl::isDjangoView)
-      .isPresent();
+  private boolean isDjangoView(FunctionDef functionDef, SubscriptionContext subscriptionContext) {
+    return subscriptionContext.typeChecker().typeCheckBuilder().isDjangoView().check(functionDef.name().typeV2()) == TriBool.TRUE;
+//    FunctionSymbol functionSymbol = ((FunctionDefImpl) functionDef).functionSymbol();
+//    return Optional.ofNullable(functionSymbol)
+//      .map(FunctionSymbolImpl.class::cast)
+//      .filter(FunctionSymbolImpl::isDjangoView)
+//      .isPresent();
   }
 
   private static Optional<CallExpression> getFlaskViewDecorator(FunctionDef functionDef) {

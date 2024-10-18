@@ -22,6 +22,7 @@ package org.sonar.python.semantic.v2;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.IntStream;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.types.v2.ModuleType;
@@ -44,9 +45,12 @@ public class ProjectLevelTypeTable {
     ))
   );
 
+  private final ProjectLevelSymbolTable projectLevelSymbolTable;
+
   public ProjectLevelTypeTable(ProjectLevelSymbolTable projectLevelSymbolTable) {
     this.lazyTypesContext = new LazyTypesContext(this);
-    this.symbolsModuleTypeProvider = new SymbolsModuleTypeProvider(projectLevelSymbolTable, lazyTypesContext);
+    this.projectLevelSymbolTable = projectLevelSymbolTable;
+    this.symbolsModuleTypeProvider = new SymbolsModuleTypeProvider(this.projectLevelSymbolTable, lazyTypesContext);
     this.rootModule = this.symbolsModuleTypeProvider.createBuiltinModule();
   }
 
@@ -100,5 +104,9 @@ public class ProjectLevelTypeTable {
           moduleType.members().put(memberName, pythonType);
         }
       });
+  }
+
+  public Set<String> djangoViews() {
+    return projectLevelSymbolTable.djangoViews();
   }
 }

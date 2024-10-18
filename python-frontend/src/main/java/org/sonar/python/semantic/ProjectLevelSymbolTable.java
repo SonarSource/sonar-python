@@ -186,6 +186,10 @@ public class ProjectLevelSymbolTable {
     return djangoViewsFQN.contains(fqn);
   }
 
+  public Set<String> djangoViews() {
+    return djangoViewsFQN;
+  }
+
   public void addProjectPackage(String projectPackage) {
     projectBasePackages.add(projectPackage.split("\\.", 2)[0]);
   }
