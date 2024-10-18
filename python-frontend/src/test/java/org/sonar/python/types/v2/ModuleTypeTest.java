@@ -43,7 +43,8 @@ class ModuleTypeTest {
     a.members().put("b", TypeWrapper.of(PythonType.UNKNOWN));
     Assertions.assertThat(a.resolveMember("b")).containsSame(PythonType.UNKNOWN);
     var b = new ModuleType("b", a);
-    Assertions.assertThat(a.resolveMember("b")).containsSame(b);
+    Assertions.assertThat(a.resolveMember("b")).containsSame(PythonType.UNKNOWN);
+    Assertions.assertThat(a.resolveSubmodule("b")).containsSame(b);
   }
 
   @Test
@@ -61,19 +62,19 @@ class ModuleTypeTest {
     var a = new ModuleType("a");
     a.members().put("b", TypeWrapper.of(PythonType.UNKNOWN));
     Assertions.assertThat(a.resolveSubmodule("b")).isEmpty();
-    var b = new ModuleType("b", a, Map.of(), true);
+    var b = new ModuleType("b", a, Map.of());
     Assertions.assertThat(a.resolveMember("b")).containsSame(PythonType.UNKNOWN);
     Assertions.assertThat(a.resolveSubmodule("b")).containsSame(b);
     // no parent: no effect
-    new ModuleType("c", null, Map.of(), true);
+    new ModuleType("c", null, Map.of());
   }
 
   @Test
   void doNotReplaceKnownSubmodule() {
     var a = new ModuleType("a");
-    ModuleType existingSubmodule = new ModuleType("b", a, Map.of(), true);
+    ModuleType existingSubmodule = new ModuleType("b", a, Map.of());
     Assertions.assertThat(a.resolveSubmodule("b")).containsSame(existingSubmodule);
-    new ModuleType("b", a, Map.of(), true);
+    new ModuleType("b", a, Map.of());
     Assertions.assertThat(a.resolveSubmodule("b")).containsSame(existingSubmodule);
   }
 

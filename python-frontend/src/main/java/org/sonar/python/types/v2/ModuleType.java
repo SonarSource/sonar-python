@@ -34,29 +34,10 @@ public final class ModuleType implements PythonType {
   private final Map<String, TypeWrapper> subModules = new HashMap<>();
 
   public ModuleType(@Nullable String name, @Nullable ModuleType parent, Map<String, TypeWrapper> members) {
-    this(name, parent, members, false);
-  }
-
-  public ModuleType(@Nullable String name, @Nullable ModuleType parent, Map<String, TypeWrapper> members, boolean registerAsSubmoduleOfParent) {
     this.name = name;
     this.parent = parent;
     this.members = members;
-    if (!registerAsSubmoduleOfParent) {
-      registerAsMemberOfParent(parent);
-    } else {
-      registerAsSubmoduleOfParent(parent);
-    }
-  }
-
-  private void registerAsMemberOfParent(@Nullable ModuleType parent) {
-    if (parent == null) {
-      return;
-    }
-    TypeWrapper parentMember = parent.members.get(this.name);
-    if (parentMember == null || parentMember.type().equals(PythonType.UNKNOWN)) {
-      // SONARPY-2037 We should update this heuristic with the correct Python resolution rules
-      parent.members.put(this.name, TypeWrapper.of(this));
-    }
+    registerAsSubmoduleOfParent(parent);
   }
 
   private void registerAsSubmoduleOfParent(@Nullable ModuleType parent) {
@@ -79,7 +60,7 @@ public final class ModuleType implements PythonType {
 
   @Override
   public Optional<PythonType> resolveMember(String memberName) {
-    return Optional.ofNullable(members.get(memberName)).map(TypeWrapper::type);
+    return Optional.ofNullable(members.get(memberName)).map(TypeWrapper::type).or(() -> resolveSubmodule(memberName));
   }
 
   public Optional<PythonType> resolveSubmodule(String submoduleName) {
