@@ -29,6 +29,10 @@ import org.sonar.python.types.v2.TriBool;
 import org.sonar.python.types.v2.TypeCheckBuilder;
 import org.sonar.python.types.v2.TypeSource;
 import org.sonar.python.types.v2.UnionType;
+import org.sonar.python.types.v2.UnknownType.UnresolvedImportType;
+
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
 
 class TypeCheckerBuilderTest {
 
@@ -80,6 +84,8 @@ class TypeCheckerBuilderTest {
       .withSuperClasses(UnionType.or(bClassType, aClassType))
       .build();
 
+    var unresolvedType = new UnresolvedImportType("unknown");
+
     var intObjectType = new ObjectType(intClassType);
     var strObjectType = new ObjectType(strClassType);
     var aObject = new ObjectType(aClassType);
@@ -92,6 +98,8 @@ class TypeCheckerBuilderTest {
     var hObject = UnionType.or(new ObjectType(intClassType), new ObjectType(aClassType));
     var iObject = new ObjectType(iClassType);
     var jObject = new ObjectType(jClassType);
+    var unresolvedObject = new ObjectType(unresolvedType);
+    var unresolvedUnionObject = new ObjectType(UnionType.or(intClassType, unresolvedType));
 
     Assertions.assertThat(
       List.of(
@@ -107,7 +115,9 @@ class TypeCheckerBuilderTest {
         builder.check(gObject),
         builder.check(hObject),
         builder.check(iObject),
-        builder.check(jObject)
+        builder.check(jObject),
+        builder.check(unresolvedObject),
+        builder.check(unresolvedUnionObject)
       )
     ).containsExactly(
       TriBool.TRUE,
@@ -122,6 +132,46 @@ class TypeCheckerBuilderTest {
       TriBool.TRUE,
       TriBool.TRUE,
       TriBool.TRUE,
+      TriBool.UNKNOWN,
+      TriBool.UNKNOWN,
+      TriBool.UNKNOWN
+    );
+  }
+
+  @Test
+  void unresolvedImportTypeIsSameType() {
+    var symbolTable = ProjectLevelSymbolTable.empty();
+    var table = spy(new ProjectLevelTypeTable(symbolTable));
+    when(table.getType("stubbed.unknown1")).thenReturn(new UnresolvedImportType("stubbed.unknown1"));
+    when(table.getType("stubbed.unknown2")).thenReturn(new UnresolvedImportType("stubbed.unknown2"));
+    var builder = new TypeCheckBuilder(table).isTypeWithName("stubbed.unknown1");
+
+    var unknown1 = new UnresolvedImportType("stubbed.unknown1");
+    var unknown2 = new UnresolvedImportType("stubbed.unknown2");
+
+    Assertions.assertThat(
+      List.of(
+        builder.check(unknown1),
+        builder.check(unknown2),
+        builder.check(PythonType.UNKNOWN)
+      )
+    ).containsExactly(
+      TriBool.TRUE,
+      TriBool.UNKNOWN,
+      TriBool.UNKNOWN
+    );
+
+    var builderUnknownType = new TypeCheckBuilder(table).isTypeWithName("unknown");
+
+    Assertions.assertThat(
+      List.of(
+        builderUnknownType.check(unknown1),
+        builderUnknownType.check(unknown2),
+        builderUnknownType.check(PythonType.UNKNOWN)
+      )
+    ).containsExactly(
+      TriBool.UNKNOWN,
+      TriBool.UNKNOWN,
       TriBool.UNKNOWN
     );
   }

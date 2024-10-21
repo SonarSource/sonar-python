@@ -139,6 +139,9 @@ public class TypeCheckBuilder {
       if (pythonType instanceof ObjectType objectType) {
         pythonType = objectType.unwrappedType();
       }
+      if (pythonType instanceof UnknownType.UnresolvedImportType unresolvedPythonType && expectedType instanceof UnknownType.UnresolvedImportType unresolvedExpectedType) {
+        return unresolvedPythonType.importPath().equals(unresolvedExpectedType.importPath()) ? TriBool.TRUE : TriBool.UNKNOWN;
+      }
       if (pythonType instanceof UnknownType || expectedType instanceof UnknownType) {
         return TriBool.UNKNOWN;
       }
