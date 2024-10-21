@@ -55,6 +55,7 @@ import org.sonar.python.types.v2.PythonType;
 import org.sonar.python.types.v2.TypeOrigin;
 import org.sonar.python.types.v2.TypeSource;
 import org.sonar.python.types.v2.UnionType;
+import org.sonar.python.types.v2.UnknownType;
 
 import static org.sonar.plugins.python.api.symbols.Symbol.Kind.CLASS;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.SUBSCRIPTION;
@@ -230,7 +231,7 @@ public class CallExpressionImpl extends PyTree implements CallExpression, HasTyp
       Set<PythonType> types = new HashSet<>();
       for (PythonType candidate : unionType.candidates()) {
         PythonType typeOfCandidate = returnTypeOfCall(candidate);
-        if (typeOfCandidate.equals(PythonType.UNKNOWN)) {
+        if (typeOfCandidate instanceof UnknownType) {
           return PythonType.UNKNOWN;
         }
         types.add(typeOfCandidate);

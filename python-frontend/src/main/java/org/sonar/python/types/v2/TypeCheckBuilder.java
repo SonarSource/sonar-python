@@ -139,7 +139,10 @@ public class TypeCheckBuilder {
       if (pythonType instanceof ObjectType objectType) {
         pythonType = objectType.unwrappedType();
       }
-      if (pythonType == PythonType.UNKNOWN || expectedType == PythonType.UNKNOWN) {
+      if (pythonType instanceof UnknownType.UnresolvedImportType unresolvedPythonType && expectedType instanceof UnknownType.UnresolvedImportType unresolvedExpectedType) {
+        return unresolvedPythonType.importPath().equals(unresolvedExpectedType.importPath()) ? TriBool.TRUE : TriBool.UNKNOWN;
+      }
+      if (pythonType instanceof UnknownType || expectedType instanceof UnknownType) {
         return TriBool.UNKNOWN;
       }
       return pythonType.equals(expectedType) ? TriBool.TRUE : TriBool.FALSE;
@@ -204,7 +207,7 @@ public class TypeCheckBuilder {
 
       if (types.contains(expectedClassType)) {
         return TriBool.TRUE;
-      } else if (types.contains(PythonType.UNKNOWN)) {
+      } else if (containsUnknown(types)) {
         return TriBool.UNKNOWN;
       } else {
         return TriBool.FALSE;
@@ -233,5 +236,8 @@ public class TypeCheckBuilder {
     }
   }
 
+  private static boolean containsUnknown(Set<PythonType> types) {
+    return types.stream().anyMatch(UnknownType.class::isInstance);
+  }
 
 }

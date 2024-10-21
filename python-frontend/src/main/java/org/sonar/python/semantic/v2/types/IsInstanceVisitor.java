@@ -30,6 +30,7 @@ import org.sonar.python.semantic.v2.ProjectLevelTypeTable;
 import org.sonar.python.semantic.v2.SymbolV2;
 import org.sonar.python.types.v2.PythonType;
 import org.sonar.python.types.v2.TypeSource;
+import org.sonar.python.types.v2.UnknownType;
 
 public class IsInstanceVisitor extends BaseTreeVisitor {
   private final PythonType isInstanceFunctionType;
@@ -60,7 +61,7 @@ public class IsInstanceVisitor extends BaseTreeVisitor {
     if (argument instanceof RegularArgument regularArgument
         && regularArgument.expression() instanceof Name variableName
         && state.getTypes(variableName.symbolV2()).stream()
-          .anyMatch(type -> type != PythonType.UNKNOWN && type.typeSource() == TypeSource.TYPE_HINT)) {
+          .anyMatch(type -> !(type instanceof UnknownType) && type.typeSource() == TypeSource.TYPE_HINT)) {
       return variableName.symbolV2();
     }
     return null;

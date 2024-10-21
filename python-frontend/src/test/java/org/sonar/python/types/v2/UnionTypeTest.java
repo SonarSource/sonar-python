@@ -29,6 +29,7 @@ import org.sonar.plugins.python.api.tree.ExpressionStatement;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.python.semantic.v2.FunctionTypeBuilder;
 import org.sonar.python.semantic.v2.LazyTypesContext;
+import org.sonar.python.types.v2.UnknownType.UnresolvedImportType;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -105,6 +106,16 @@ class UnionTypeTest {
 
     unknownUnion = UnionType.or(PythonType.UNKNOWN, intType);
     assertThat(unknownUnion).isEqualTo(PythonType.UNKNOWN);
+  }
+
+  @Test
+  void or_unresolevdImportType()  {
+    var unresolvedImportType = new UnresolvedImportType("unknown");
+    var unresolvedImportType2 = new UnresolvedImportType("unknown2");
+    var unionType = UnionType.or(unresolvedImportType, unresolvedImportType2);
+
+    assertThat(unionType).isInstanceOf(UnionType.class);
+    assertThat(((UnionType) unionType).candidates()).containsExactlyInAnyOrder(unresolvedImportType, unresolvedImportType2);
   }
 
   @Test

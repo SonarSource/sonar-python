@@ -23,11 +23,18 @@ package org.sonar.python.types.v2;
 import org.sonar.api.Beta;
 
 @Beta
-public record UnknownType() implements PythonType {
+public sealed interface UnknownType extends PythonType {
 
   @Override
-  public boolean isCompatibleWith(PythonType another) {
+  default boolean isCompatibleWith(PythonType another) {
     return true;
   }
 
+  final class UnknownTypeImpl implements UnknownType {
+    UnknownTypeImpl() {
+    }
+  }
+
+  record UnresolvedImportType(String importPath) implements UnknownType {
+  }
 }
