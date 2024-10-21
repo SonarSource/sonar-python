@@ -298,10 +298,12 @@ public class IgnoredPureOperationsCheck extends PythonSubscriptionCheck {
     if (expression.is(Tree.Kind.CALL_EXPR)) {
       CallExpression callExpression = (CallExpression) expression;
       PythonType pythonType = callExpression.callee().typeV2();
-      PURE_FUNCTIONS.stream()
-        .filter(f -> typeChecker.typeCheckBuilder().isTypeWithName(f).check(pythonType).equals(TriBool.TRUE))
-        .findFirst()
-        .ifPresent(result -> ctx.addIssue(callExpression.callee(), String.format(MESSAGE_FORMAT, result)));
+      if (typeChecker.typeCheckBuilder().isObjectType().check(pythonType) == TriBool.FALSE) {
+        PURE_FUNCTIONS.stream()
+          .filter(f -> typeChecker.typeCheckBuilder().isTypeWithName(f).check(pythonType).equals(TriBool.TRUE))
+          .findFirst()
+          .ifPresent(result -> ctx.addIssue(callExpression.callee(), String.format(MESSAGE_FORMAT, result)));
+      }
     } else if (expression.is(Tree.Kind.SUBSCRIPTION)) {
       SubscriptionExpression subscriptionExpression = (SubscriptionExpression) expression;
       PythonType pythonType = subscriptionExpression.object().typeV2();

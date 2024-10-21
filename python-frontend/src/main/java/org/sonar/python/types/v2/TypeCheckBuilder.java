@@ -79,6 +79,11 @@ public class TypeCheckBuilder {
     return this;
   }
 
+  public TypeCheckBuilder isObjectType() {
+    predicates.add(new IsTypeKindPredicate(ObjectType.class));
+    return this;
+  }
+
   public TypeCheckBuilder isTypeWithName(String expectedName) {
     var expected = projectLevelTypeTable.getType(expectedName);
     predicates.add(new IsSameAsTypePredicate(expected));
@@ -240,4 +245,16 @@ public class TypeCheckBuilder {
     return types.stream().anyMatch(UnknownType.class::isInstance);
   }
 
+  static class IsTypeKindPredicate implements TypePredicate {
+    Class<? extends PythonType> typeKind;
+
+    public IsTypeKindPredicate(Class<? extends PythonType> typeClass) {
+      this.typeKind = typeClass;
+    }
+
+    @Override
+    public TriBool test(PythonType pythonType) {
+      return typeKind.isInstance(pythonType) ? TriBool.TRUE : TriBool.FALSE;
+    }
+  }
 }
