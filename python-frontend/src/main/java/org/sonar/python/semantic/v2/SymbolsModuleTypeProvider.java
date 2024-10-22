@@ -29,12 +29,23 @@ import org.sonar.python.semantic.v2.converter.AnyDescriptorToPythonTypeConverter
 import org.sonar.python.types.v2.ModuleType;
 import org.sonar.python.types.v2.PythonType;
 import org.sonar.python.types.v2.TypeOrigin;
+import org.sonar.python.types.v2.TypeWrapper;
 
 public class SymbolsModuleTypeProvider {
   private final ProjectLevelSymbolTable projectLevelSymbolTable;
   private final ModuleType rootModule;
   private final LazyTypesContext lazyTypesContext;
   private final AnyDescriptorToPythonTypeConverter anyDescriptorToPythonTypeConverter;
+  private final Map<String, Map<String, String>> aliasMembers = Map.ofEntries(
+    Map.entry("typing", Map.ofEntries(
+      Map.entry("List", "list"),
+      Map.entry("Tuple", "tuple"),
+      Map.entry("Dict", "dict"),
+      Map.entry("Set", "set"),
+      Map.entry("FrozenSet", "frozenset"),
+      Map.entry("Type", "type")
+    ))
+  );
 
   public SymbolsModuleTypeProvider(ProjectLevelSymbolTable projectLevelSymbolTable, LazyTypesContext lazyTypeContext) {
     this.projectLevelSymbolTable = projectLevelSymbolTable;
@@ -44,7 +55,7 @@ public class SymbolsModuleTypeProvider {
     var rootModuleMembers = projectLevelSymbolTable.typeShedDescriptorsProvider().builtinDescriptors()
       .entrySet()
       .stream()
-      .collect(Collectors.toMap(Map.Entry::getKey, e -> anyDescriptorToPythonTypeConverter.convert(e.getValue(), TypeOrigin.STUB)));
+      .collect(Collectors.toMap(Map.Entry::getKey, e -> TypeWrapper.of(anyDescriptorToPythonTypeConverter.convert(e.getValue(), TypeOrigin.STUB))));
     this.rootModule = new ModuleType(null, null, rootModuleMembers);
   }
 
@@ -72,16 +83,27 @@ public class SymbolsModuleTypeProvider {
     if (retrieved == null) {
       return Optional.empty();
     }
-    var members = retrieved.stream().collect(Collectors.toMap(Descriptor::name, d -> anyDescriptorToPythonTypeConverter.convert(d, TypeOrigin.LOCAL)));
-    return Optional.of(new ModuleType(moduleName, parent, members));
+    var members = retrieved.stream().collect(Collectors.toMap(Descriptor::name, d -> TypeWrapper.of(anyDescriptorToPythonTypeConverter.convert(d, TypeOrigin.LOCAL))));
+    return Optional.of(createModuleType(moduleName, moduleFqn, parent, members));
   }
 
   private Optional<ModuleType> createModuleTypeFromTypeShed(String moduleName, String moduleFqn, ModuleType parent) {
-    var moduleMembers = projectLevelSymbolTable.typeShedDescriptorsProvider().descriptorsForModule(moduleFqn)
-      .entrySet().stream()
-      .collect(Collectors.toMap(Map.Entry::getKey, e -> anyDescriptorToPythonTypeConverter.convert(e.getValue(), TypeOrigin.STUB)));
-    return Optional.of(moduleMembers).filter(m -> !m.isEmpty())
-      .map(m -> new ModuleType(moduleName, parent, m));
+    Map<String, Descriptor> stringDescriptorMap = projectLevelSymbolTable.typeShedDescriptorsProvider().descriptorsForModule(moduleFqn);
+    Map<String, TypeWrapper> members = anyDescriptorToPythonTypeConverter.convertModuleType(moduleFqn, stringDescriptorMap);
+    return Optional.of(members).filter(m -> !m.isEmpty()).map(m -> createModuleType(moduleName, moduleFqn, parent, m));
   }
 
+  private ModuleType createModuleType(String moduleName, String moduleFqn, ModuleType parent, Map<String, TypeWrapper> members) {
+    addTypingAliases(moduleFqn, members);
+    return new ModuleType(moduleName, parent, members);
+  }
+
+  private void addTypingAliases(String moduleFqn, Map<String, TypeWrapper> members) {
+    aliasMembers.getOrDefault(moduleFqn, Map.of()).forEach((alias, original) -> {
+      var originalType = rootModule.members().get(original);
+      if (originalType != null) {
+        members.put(alias, originalType);
+      }
+    });
+  }
 }

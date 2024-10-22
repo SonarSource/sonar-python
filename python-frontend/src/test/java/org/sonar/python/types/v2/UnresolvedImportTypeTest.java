@@ -63,8 +63,10 @@ class UnresolvedImportTypeTest {
       import xml as a
       a
       """);
-    var etreeType = ((UnresolvedImportType) ((ExpressionStatement) fileInput.statements().statements().get(1)).expressions().get(0).typeV2());
-    assertThat(etreeType.importPath()).isEqualTo("xml");
+    var etreeType = ((ModuleType) ((ExpressionStatement) fileInput.statements().statements().get(1)).expressions().get(0).typeV2());
+    assertThat(etreeType.name()).isEqualTo("xml");
+    assertThat(etreeType.resolveSubmodule("etree")).isEmpty();
+    assertThat(etreeType.resolveMember("etree").get().unwrappedType()).isInstanceOf(UnknownType.UnknownTypeImpl.class);
   }
 
   @Test
