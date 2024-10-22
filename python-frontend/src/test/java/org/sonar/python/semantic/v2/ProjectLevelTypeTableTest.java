@@ -253,4 +253,14 @@ class ProjectLevelTypeTableTest {
     // SONARPY-2176 lib should be resolved as the renamed class "A" here
     assertThat(aType.name()).isEqualTo("A");
   }
+
+  @Test
+  void resolveCustomStub() {
+    var symbolTable = ProjectLevelSymbolTable.empty();
+    var table = new ProjectLevelTypeTable(symbolTable);
+
+    var nnModuleType = table.getType("torch.nn");
+
+    Assertions.assertThat(nnModuleType).isNotNull().isInstanceOf(ModuleType.class);
+  }
 }
