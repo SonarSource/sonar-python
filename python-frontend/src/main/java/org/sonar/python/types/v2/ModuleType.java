@@ -31,12 +31,13 @@ public final class ModuleType implements PythonType {
   private final String name;
   private final ModuleType parent;
   private final Map<String, TypeWrapper> members;
-  private final Map<String, TypeWrapper> subModules = new HashMap<>();
+  private final Map<String, TypeWrapper> subModules;
 
   public ModuleType(@Nullable String name, @Nullable ModuleType parent, Map<String, TypeWrapper> members) {
     this.name = name;
     this.parent = parent;
     this.members = members;
+    this.subModules = new HashMap<>();
     registerAsSubmoduleOfParent(parent);
   }
 

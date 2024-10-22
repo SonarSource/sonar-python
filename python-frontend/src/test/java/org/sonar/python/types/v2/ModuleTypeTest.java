@@ -40,7 +40,7 @@ class ModuleTypeTest {
   @Test
   void replaceMemberIfUnknown() {
     var a = new ModuleType("a");
-    a.members().put("b", TypeWrapper.of(PythonType.UNKNOWN));
+    a.members().put("b", TypeWrapper.UNKNOWN_TYPE_WRAPPER);
     Assertions.assertThat(a.resolveMember("b")).containsSame(PythonType.UNKNOWN);
     var b = new ModuleType("b", a);
     Assertions.assertThat(a.resolveMember("b")).containsSame(PythonType.UNKNOWN);
@@ -60,7 +60,7 @@ class ModuleTypeTest {
   @Test
   void registerAsSubmoduleTest() {
     var a = new ModuleType("a");
-    a.members().put("b", TypeWrapper.of(PythonType.UNKNOWN));
+    a.members().put("b", TypeWrapper.UNKNOWN_TYPE_WRAPPER);
     Assertions.assertThat(a.resolveSubmodule("b")).isEmpty();
     var b = new ModuleType("b", a, Map.of());
     Assertions.assertThat(a.resolveMember("b")).containsSame(PythonType.UNKNOWN);
