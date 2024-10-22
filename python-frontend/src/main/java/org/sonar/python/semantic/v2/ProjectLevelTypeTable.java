@@ -69,7 +69,9 @@ public class ProjectLevelTypeTable {
         if (typeWrapper instanceof LazyTypeWrapper lazyTypeWrapper && !lazyTypeWrapper.isResolved()) {
           if (i == typeFqnParts.size() - 1) {
             // this is the name we are looking for, resolve it
-            return typeWrapper.type();
+            if (!(typeWrapper instanceof LazyTypeWrapper && lazyTypeWrapper.unsafe_importPath().equals(String.join(".", typeFqnParts)))) {
+              return typeWrapper.type();
+            }
           }
           // The member of the module is a LazyType, which means it's a re-exported type from a submodule
           // We try to resolve the submodule instead

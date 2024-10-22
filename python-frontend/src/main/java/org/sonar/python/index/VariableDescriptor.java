@@ -26,11 +26,17 @@ public class VariableDescriptor implements Descriptor {
   private final String name;
   private final String fullyQualifiedName;
   private final String annotatedType;
+  private final boolean isImportedModule;
 
-  public VariableDescriptor(String name, @Nullable String fullyQualifiedName, @Nullable String annotatedType) {
+  public VariableDescriptor(String name, @Nullable String fullyQualifiedName, @Nullable String annotatedType, boolean isImportedModule) {
     this.name = name;
     this.fullyQualifiedName = fullyQualifiedName;
     this.annotatedType = annotatedType;
+    this.isImportedModule = isImportedModule;
+  }
+
+  public VariableDescriptor(String name, @Nullable String fullyQualifiedName, @Nullable String annotatedType) {
+    this(name, fullyQualifiedName, annotatedType, false);
   }
 
   @Override
@@ -51,5 +57,9 @@ public class VariableDescriptor implements Descriptor {
   @CheckForNull
   public String annotatedType() {
     return annotatedType;
+  }
+
+  public boolean isImportedModule() {
+    return isImportedModule;
   }
 }

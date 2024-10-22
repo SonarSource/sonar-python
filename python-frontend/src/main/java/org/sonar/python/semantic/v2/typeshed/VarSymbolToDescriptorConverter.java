@@ -28,10 +28,11 @@ public class VarSymbolToDescriptorConverter {
   public Descriptor convert(SymbolsProtos.VarSymbol varSymbol) {
     var fullyQualifiedName = TypeShedUtils.normalizedFqn(varSymbol.getFullyQualifiedName());
     var typeAnnotation = TypeShedUtils.getTypesNormalizedFqn(varSymbol.getTypeAnnotation());
+    var isImportedModule = varSymbol.getIsImportedModule();
     if (isTypeAnnotationKnownToBeIncorrect(fullyQualifiedName)) {
-      return new VariableDescriptor(varSymbol.getName(), fullyQualifiedName, null);
+      return new VariableDescriptor(varSymbol.getName(), fullyQualifiedName, null, isImportedModule);
     }
-    return new VariableDescriptor(varSymbol.getName(), fullyQualifiedName, typeAnnotation);
+    return new VariableDescriptor(varSymbol.getName(), fullyQualifiedName, typeAnnotation, isImportedModule);
   }
 
   private static boolean isTypeAnnotationKnownToBeIncorrect(String fullyQualifiedName) {

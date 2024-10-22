@@ -29,6 +29,9 @@ import org.sonar.python.types.v2.TypeWrapper;
 public class VariableDescriptorToPythonTypeConverter implements DescriptorToPythonTypeConverter {
 
   public PythonType convert(ConversionContext ctx, VariableDescriptor from) {
+    if (from.isImportedModule()) {
+      return ctx.lazyTypesContext().getOrCreateLazyType(from.fullyQualifiedName());
+    }
     var typeWrapper = Optional.ofNullable(from.annotatedType())
       .map(fqn -> ctx.lazyTypesContext().getOrCreateLazyTypeWrapper(fqn))
       .orElse(TypeWrapper.UNKNOWN_TYPE_WRAPPER);

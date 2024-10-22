@@ -46,6 +46,10 @@ public class LazyTypeWrapper implements TypeWrapper {
     return !(type instanceof LazyType);
   }
 
+  public String unsafe_importPath() {
+    return ((LazyType) type).importPath();
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
