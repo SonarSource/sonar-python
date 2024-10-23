@@ -155,6 +155,23 @@ public class TypeInferenceV2Test {
   }
 
   @Test
+  void testInheritanceFromUnresolvedImports() {
+    FileInput root = inferTypes("""
+      from unknown import Parent
+      class A(Parent): ...
+      """);
+
+    var classDef = (ClassDef) root.statements().statements().get(1);
+    assertThat(classDef.args().arguments().get(0))
+      .extracting(RegularArgument.class::cast)
+      .extracting(RegularArgument::expression)
+      .extracting(Expression::typeV2)
+      .extracting(UnresolvedImportType.class::cast)
+      .extracting(UnresolvedImportType::importPath)
+      .isEqualTo("unknown.Parent");
+  }
+
+  @Test
   void testProjectLevelSymbolTableImports() {
     var classSymbol = new ClassSymbolImpl("C", "something.known.C");
 
