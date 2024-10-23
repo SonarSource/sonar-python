@@ -27,7 +27,7 @@ def raise_a_nested_class_derived_from_BaseException():
   raise Enclosing.Nested() # OK
 
 def raise_a_nested_non_exception_class():
-  raise Enclosing.Nested2() # Noncompliant
+  raise Enclosing.Nested2() # FN SONARPY-2250
 
 def raise_a_nested_class_derived_from_python2_Exception():
   raise DerivedFromPython2Exception() # OK
