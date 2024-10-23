@@ -144,7 +144,7 @@ class TypeCheckerBuilderTest {
     var table = spy(new ProjectLevelTypeTable(symbolTable));
     when(table.getType("stubbed.unknown1")).thenReturn(new UnresolvedImportType("stubbed.unknown1"));
     when(table.getType("stubbed.unknown2")).thenReturn(new UnresolvedImportType("stubbed.unknown2"));
-    var builder = new TypeCheckBuilder(table).isTypeWithName("stubbed.unknown1");
+    var builder = new TypeCheckBuilder(table).isTypeOrInstanceWithName("stubbed.unknown1");
 
     var unknown1 = new UnresolvedImportType("stubbed.unknown1");
     var unknown2 = new UnresolvedImportType("stubbed.unknown2");
@@ -161,7 +161,7 @@ class TypeCheckerBuilderTest {
       TriBool.UNKNOWN
     );
 
-    var builderUnknownType = new TypeCheckBuilder(table).isTypeWithName("unknown");
+    var builderUnknownType = new TypeCheckBuilder(table).isTypeOrInstanceWithName("unknown");
 
     Assertions.assertThat(
       List.of(
