@@ -28,6 +28,7 @@ import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.python.semantic.v2.ProjectLevelTypeTable;
 import org.sonar.python.semantic.v2.SymbolV2;
+import org.sonar.python.semantic.v2.TypeTable;
 import org.sonar.python.types.v2.PythonType;
 import org.sonar.python.types.v2.TypeSource;
 import org.sonar.python.types.v2.UnknownType;
@@ -36,7 +37,7 @@ public class IsInstanceVisitor extends BaseTreeVisitor {
   private final PythonType isInstanceFunctionType;
   private TypeInferenceProgramState state;
 
-  public IsInstanceVisitor(ProjectLevelTypeTable projectLevelTypeTable) {
+  public IsInstanceVisitor(TypeTable projectLevelTypeTable) {
     isInstanceFunctionType = projectLevelTypeTable.getType("isinstance");
   }
 

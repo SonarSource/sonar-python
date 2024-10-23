@@ -59,8 +59,8 @@ import org.sonar.plugins.python.api.tree.Tuple;
 import org.sonar.plugins.python.api.tree.TypeAnnotation;
 import org.sonar.python.semantic.v2.ClassTypeBuilder;
 import org.sonar.python.semantic.v2.FunctionTypeBuilder;
-import org.sonar.python.semantic.v2.ProjectLevelTypeTable;
 import org.sonar.python.semantic.v2.SymbolV2;
+import org.sonar.python.semantic.v2.TypeTable;
 import org.sonar.python.semantic.v2.UsageV2;
 import org.sonar.python.tree.ComprehensionExpressionImpl;
 import org.sonar.python.tree.DictCompExpressionImpl;
@@ -88,12 +88,12 @@ import static org.sonar.python.tree.TreeUtils.locationInFile;
 
 public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
 
-  private final ProjectLevelTypeTable projectLevelTypeTable;
+  private final TypeTable projectLevelTypeTable;
   private final String fileId;
 
   private final Deque<PythonType> typeStack = new ArrayDeque<>();
 
-  public TrivialTypeInferenceVisitor(ProjectLevelTypeTable projectLevelTypeTable, PythonFile pythonFile) {
+  public TrivialTypeInferenceVisitor(TypeTable projectLevelTypeTable, PythonFile pythonFile) {
     this.projectLevelTypeTable = projectLevelTypeTable;
     Path path = pathOf(pythonFile);
     this.fileId = path != null ? path.toString() : pythonFile.toString();
