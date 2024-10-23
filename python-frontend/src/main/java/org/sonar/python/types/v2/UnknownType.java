@@ -20,6 +20,10 @@
  */
 package org.sonar.python.types.v2;
 
+import java.util.Optional;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import org.sonar.api.Beta;
 
 @Beta
@@ -36,5 +40,13 @@ public sealed interface UnknownType extends PythonType {
   }
 
   record UnresolvedImportType(String importPath) implements UnknownType {
+
+    @Override
+    public Optional<PythonType> resolveMember(String memberName) {
+      var memberFqn = Stream.of(importPath, memberName)
+        .filter(Predicate.not(String::isEmpty))
+        .collect(Collectors.joining("."));
+      return Optional.of(new UnresolvedImportType(memberFqn));
+    }
   }
 }

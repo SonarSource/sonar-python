@@ -24,6 +24,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -41,6 +42,11 @@ import org.sonar.python.index.AmbiguousDescriptor;
 import org.sonar.python.index.Descriptor;
 import org.sonar.python.index.DescriptorUtils;
 import org.sonar.python.index.VariableDescriptor;
+import org.sonar.python.semantic.v2.BasicTypeTable;
+import org.sonar.python.semantic.v2.SymbolTableBuilderV2;
+import org.sonar.python.semantic.v2.TypeInferenceV2;
+import org.sonar.python.semantic.v2.UsageV2;
+import org.sonar.python.semantic.v2.converter.PythonTypeToDescriptorConverter;
 import org.sonar.python.semantic.v2.typeshed.TypeShedDescriptorsProvider;
 
 import static org.sonar.python.tree.TreeUtils.getSymbolFromTree;
@@ -48,8 +54,11 @@ import static org.sonar.python.tree.TreeUtils.nthArgumentOrKeyword;
 
 public class ProjectLevelSymbolTable {
 
+  private final PythonTypeToDescriptorConverter pythonTypeToDescriptorConverter = new PythonTypeToDescriptorConverter();
   private final Map<String, Set<Descriptor>> globalDescriptorsByModuleName;
+  private final Map<String, Set<Descriptor>> globalDescriptorsByModuleNameV2;
   private Map<String, Descriptor> globalDescriptorsByFQN;
+  private Map<String, Descriptor> globalDescriptorsByFQNV2;
   private final Set<String> djangoViewsFQN = new HashSet<>();
   private final Map<String, Set<String>> importsByModule = new HashMap<>();
   private final Set<String> projectBasePackages = new HashSet<>();
@@ -65,15 +74,19 @@ public class ProjectLevelSymbolTable {
 
   public ProjectLevelSymbolTable() {
     this.globalDescriptorsByModuleName = new HashMap<>();
+    this.globalDescriptorsByModuleNameV2 = new HashMap<>();
   }
 
   private ProjectLevelSymbolTable(Map<String, Set<Symbol>> globalSymbolsByModuleName) {
     this.globalDescriptorsByModuleName = new HashMap<>();
+    this.globalDescriptorsByModuleNameV2 = new HashMap<>();
     globalSymbolsByModuleName.entrySet().forEach(entry -> {
       String moduleName = entry.getKey();
       Set<Symbol> symbols = entry.getValue();
       Set<Descriptor> globalDescriptors = symbols.stream().map(DescriptorUtils::descriptor).collect(Collectors.toSet());
       globalDescriptorsByModuleName.put(moduleName, globalDescriptors);
+      globalDescriptors = symbols.stream().map(DescriptorUtils::descriptor).collect(Collectors.toSet());
+      globalDescriptorsByModuleNameV2.put(moduleName, globalDescriptors);
     });
   }
 
@@ -82,6 +95,7 @@ public class ProjectLevelSymbolTable {
     globalDescriptorsByModuleName.remove(fullyQualifiedModuleName);
     // ensure globalDescriptorsByFQN is re-computed
     this.globalDescriptorsByFQN = null;
+    this.globalDescriptorsByFQNV2 = null;
   }
 
   public void addModule(FileInput fileInput, String packageName, PythonFile pythonFile) {
@@ -115,6 +129,7 @@ public class ProjectLevelSymbolTable {
     }
     DjangoViewsVisitor djangoViewsVisitor = new DjangoViewsVisitor();
     fileInput.accept(djangoViewsVisitor);
+    addModuleV2(fileInput, packageName, pythonFile);
   }
 
   private void addModuleToGlobalSymbolsByFQN(Set<Descriptor> descriptors) {
@@ -122,7 +137,6 @@ public class ProjectLevelSymbolTable {
       .filter(d -> d.fullyQualifiedName() != null)
       .collect(Collectors.toMap(Descriptor::fullyQualifiedName, Function.identity(), AmbiguousDescriptor::create));
     globalDescriptorsByFQN.putAll(moduleDescriptorsByFQN);
-
   }
 
   private Map<String, Descriptor> globalDescriptorsByFQN() {
@@ -169,6 +183,11 @@ public class ProjectLevelSymbolTable {
     return globalDescriptorsByModuleName.get(moduleName);
   }
 
+  @CheckForNull
+  public Set<Descriptor> getDescriptorsFromModuleV2(@Nullable String moduleName) {
+    return globalDescriptorsByModuleNameV2.get(moduleName);
+  }
+
   public Map<String, Set<String>> importsByModule() {
     return Collections.unmodifiableMap(importsByModule);
   }
@@ -199,6 +218,26 @@ public class ProjectLevelSymbolTable {
       typeShedDescriptorsProvider = new TypeShedDescriptorsProvider(projectBasePackages);
     }
     return typeShedDescriptorsProvider;
+  }
+
+
+  private void addModuleV2(FileInput astRoot, String packageName, PythonFile pythonFile) {
+    var fullyQualifiedModuleName = SymbolUtils.fullyQualifiedModuleName(packageName, pythonFile.fileName());
+    var symbolTable = new SymbolTableBuilderV2(astRoot).build();
+    var typeInferenceV2 = new TypeInferenceV2(new BasicTypeTable(), pythonFile, symbolTable);
+    var typesBySymbol = typeInferenceV2.inferTypes(astRoot);
+    var moduleDescriptors = typesBySymbol.entrySet()
+      .stream()
+      .map(entry -> {
+          var descriptor = pythonTypeToDescriptorConverter.convert(fullyQualifiedModuleName, entry.getKey(), entry.getValue());
+          return Map.entry(entry.getKey(), descriptor);
+        }
+      )
+      .filter(entry -> !(!Objects.requireNonNull(entry.getValue().fullyQualifiedName()).startsWith(fullyQualifiedModuleName)
+                         || entry.getKey().usages().stream().anyMatch(u -> u.kind().equals(UsageV2.Kind.IMPORT))))
+      .map(Map.Entry::getValue)
+      .collect(Collectors.toSet());
+    globalDescriptorsByModuleNameV2.put(fullyQualifiedModuleName, moduleDescriptors);
   }
 
   private class DjangoViewsVisitor extends BaseTreeVisitor {
