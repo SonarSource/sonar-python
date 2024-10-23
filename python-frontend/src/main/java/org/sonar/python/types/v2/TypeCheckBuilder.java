@@ -24,11 +24,13 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.function.BiFunction;
 import org.sonar.python.semantic.v2.ProjectLevelTypeTable;
+import org.sonar.python.types.v2.UnknownType.UnresolvedImportType;
 
 public class TypeCheckBuilder {
-
   ProjectLevelTypeTable projectLevelTypeTable;
+
   List<TypePredicate> predicates = new ArrayList<>();
 
   public TypeCheckBuilder(ProjectLevelTypeTable projectLevelTypeTable) {
@@ -55,9 +57,39 @@ public class TypeCheckBuilder {
     return this;
   }
 
-  public TypeCheckBuilder isBuiltinWithName(String name) {
+  public TypeCheckBuilder isBuiltinOrInstanceWithName(String name) {
     PythonType builtinType = projectLevelTypeTable.getBuiltinsModule().resolveMember(name).orElse(PythonType.UNKNOWN);
-    predicates.add(new IsSameAsTypePredicate(builtinType));
+    predicates.add(new IsSameAsTypePredicate(builtinType, TypeStrictness.NON_STRICT, TypeExactness.IS));
+    return this;
+  }
+
+
+  public TypeCheckBuilder canBeBuiltinWithName(String name) {
+    PythonType builtinType = projectLevelTypeTable.getBuiltinsModule().resolveMember(name).orElse(PythonType.UNKNOWN);
+    predicates.add(new IsSameAsTypePredicate(builtinType, TypeStrictness.STRICT, TypeExactness.CAN_BE));
+    return this;
+  }
+
+  public TypeCheckBuilder isIdentityComparableWith(PythonType expectedType) {
+    predicates.add(new IsIdentityComparableWith(expectedType));
+    return this;
+  }
+
+  public TypeCheckBuilder isInstanceOf(String fqn) {
+    var expected = projectLevelTypeTable.getType(fqn);
+    predicates.add(new IsInstanceOfPredicate(expected));
+    return this;
+  }
+
+  public TypeCheckBuilder isTypeOrInstanceWithName(String expectedName) {
+    var expected = projectLevelTypeTable.getType(expectedName);
+    predicates.add(new IsSameAsTypePredicate(expected, TypeStrictness.NON_STRICT, TypeExactness.IS));
+    return this;
+  }
+
+  public TypeCheckBuilder isTypeWithName(String expectedName) {
+    var expected = projectLevelTypeTable.getType(expectedName);
+    predicates.add(new IsSameAsTypePredicate(expected, TypeStrictness.STRICT, TypeExactness.IS));
     return this;
   }
 
@@ -73,29 +105,29 @@ public class TypeCheckBuilder {
     return result;
   }
 
-  public TypeCheckBuilder isInstanceOf(String fqn) {
-    var expected = projectLevelTypeTable.getType(fqn);
-    predicates.add(new IsInstanceOfPredicate(expected));
-    return this;
-  }
-
-  public TypeCheckBuilder isTypeOrInstanceWithName(String expectedName) {
-    var expected = projectLevelTypeTable.getType(expectedName);
-    predicates.add(new IsSameAsTypePredicate(expected, false));
-    return this;
-  }
-
-  public TypeCheckBuilder isTypeWithName(String expectedName) {
-    var expected = projectLevelTypeTable.getType(expectedName);
-    predicates.add(new IsSameAsTypePredicate(expected, true));
-    return this;
-  }
-
   interface TypePredicate {
     TriBool test(PythonType pythonType);
+
+  }
+  private enum TypeStrictness {
+    STRICT,
+    NON_STRICT
   }
 
+  private enum TypeExactness {
+    /**
+     * Checks if the type is exactly the same as the expected type
+     */
+    IS,
+    /**
+     * Checks if the type can be the expected type
+     */
+    CAN_BE
+  }
+
+
   static class HasMemberTypePredicate implements TypePredicate {
+
     String memberName;
 
     public HasMemberTypePredicate(String memberName) {
@@ -124,7 +156,7 @@ public class TypeCheckBuilder {
     }
   }
 
-  record TypeSourceMatcherTypePredicate(TypeSource typeSource) implements TypePredicate {
+  private record TypeSourceMatcherTypePredicate(TypeSource typeSource) implements TypePredicate {
 
     @Override
     public TriBool test(PythonType pythonType) {
@@ -132,36 +164,58 @@ public class TypeCheckBuilder {
     }
   }
 
-  static class IsSameAsTypePredicate implements TypePredicate {
-
+  private static class IsSameAsTypePredicate implements TypePredicate {
     PythonType expectedType;
-    boolean isStrictCheck;
+    TypeStrictness typeStrictness;
+    TypeExactness typeExactness;
 
-    public IsSameAsTypePredicate(PythonType expectedType) {
-      this(expectedType, false);
-    }
-
-    public IsSameAsTypePredicate(PythonType expectedType, boolean isStrictCheck) {
+    public IsSameAsTypePredicate(PythonType expectedType, TypeStrictness typeStrictness, TypeExactness typeExactness) {
       this.expectedType = expectedType;
-      this.isStrictCheck = isStrictCheck;
+      this.typeStrictness = typeStrictness;
+      this.typeExactness = typeExactness;
     }
 
     @Override
     public TriBool test(PythonType pythonType) {
-      if ((pythonType instanceof ObjectType objectType) && !isStrictCheck) {
-        pythonType = objectType.unwrappedType();
+      if (typeExactness == TypeExactness.IS) {
+        return test(expectedType, pythonType);
+      } else {
+        return checkWithAllEffectiveTypes(this::test, pythonType, expectedType);
       }
-      if (pythonType instanceof UnknownType.UnresolvedImportType unresolvedPythonType && expectedType instanceof UnknownType.UnresolvedImportType unresolvedExpectedType) {
-        return unresolvedPythonType.importPath().equals(unresolvedExpectedType.importPath()) ? TriBool.TRUE : TriBool.UNKNOWN;
+    }
+
+    private TriBool test(PythonType type1, PythonType type2) {
+      if (type2 instanceof ResolvableType resolvableType) {
+        type2 = resolvableType.resolve();
       }
-      if (pythonType instanceof UnknownType || expectedType instanceof UnknownType) {
+      if (type2 instanceof ObjectType objectType && typeStrictness == TypeStrictness.NON_STRICT) {
+        type2 = objectType.unwrappedType();
+      }
+      if (type1 instanceof UnresolvedImportType unresolvedType1 && type2 instanceof UnresolvedImportType unresolvedType2) {
+        return unresolvedType1.importPath().equals(unresolvedType2.importPath()) ? TriBool.TRUE : TriBool.UNKNOWN;
+      }
+      if (type2 == PythonType.UNKNOWN || type1 == PythonType.UNKNOWN) {
         return TriBool.UNKNOWN;
       }
-      return pythonType.equals(expectedType) ? TriBool.TRUE : TriBool.FALSE;
+      return type2.equals(type1) ? TriBool.TRUE : TriBool.FALSE;
+    }
+
+    private static TriBool checkWithAllEffectiveTypes(BiFunction<PythonType, PythonType, TriBool> checkFunction, PythonType
+      type1, PythonType type2) {
+      Set<PythonType> type1Set = TypeUtils.getNestedEffectiveTypes(type1);
+      Set<PythonType> type2Set = TypeUtils.getNestedEffectiveTypes(type2);
+      for (PythonType effectiveType1 : type1Set) {
+        for (PythonType effectiveType2 : type2Set) {
+          if (checkFunction.apply(effectiveType1, effectiveType2) == TriBool.TRUE) {
+            return TriBool.TRUE;
+          }
+        }
+      }
+      return checkFunction.apply(type1, type2);
     }
   }
 
-  record IsInstanceOfPredicate(PythonType expectedType)  implements TypePredicate {
+  private record IsInstanceOfPredicate(PythonType expectedType) implements TypePredicate {
 
     @Override
     public TriBool test(PythonType pythonType) {
@@ -245,6 +299,44 @@ public class TypeCheckBuilder {
         }
       }
       return result;
+    }
+  }
+
+  private record IsIdentityComparableWith(PythonType expectedType) implements TypePredicate {
+    public IsIdentityComparableWith {
+      expectedType = expectedType.unwrappedType();
+    }
+
+    @Override
+    public TriBool test(PythonType otherMaybeWrappedType) {
+      PythonType otherType = otherMaybeWrappedType.unwrappedType();
+
+      Set<PythonType> thisTypes = TypeUtils.getNestedEffectiveTypes(expectedType);
+      Set<PythonType> otherTypes = TypeUtils.getNestedEffectiveTypes(otherType);
+      TriBool result = isUnionTypeIdentityComparableWith(thisTypes, otherType).or(isUnionTypeIdentityComparableWith(otherTypes,
+        expectedType));
+      if (result != TriBool.FALSE) {
+        return result;
+      }
+
+      return isIdentityComparableWith(otherType, expectedType);
+    }
+
+    private static TriBool isUnionTypeIdentityComparableWith(Set<PythonType> candiates, PythonType otherType) {
+      return candiates.stream()
+        .map(type -> isIdentityComparableWith(type, otherType))
+        .reduce(TriBool::or)
+        .orElse(TriBool.FALSE);
+    }
+
+    private static TriBool isIdentityComparableWith(PythonType thisType, PythonType otherType) {
+      thisType = thisType.unwrappedType();
+      otherType = otherType.unwrappedType();
+
+      if (thisType instanceof UnknownType || otherType instanceof UnknownType) {
+        return TriBool.UNKNOWN;
+      }
+      return TriBool.valueOf(thisType.equals(otherType));
     }
   }
 

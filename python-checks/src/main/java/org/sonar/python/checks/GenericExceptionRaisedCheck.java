@@ -44,8 +44,8 @@ public class GenericExceptionRaisedCheck extends PythonSubscriptionCheck {
       }
       Expression expression = expressions.get(0);
       PythonType pythonType = expression.typeV2();
-      TriBool isException = ctx.typeChecker().typeCheckBuilder().isBuiltinWithName(EXCEPTION).check(pythonType);
-      TriBool isBaseException = ctx.typeChecker().typeCheckBuilder().isBuiltinWithName(BASE_EXCEPTION).check(pythonType);
+      TriBool isException = ctx.typeChecker().typeCheckBuilder().isBuiltinOrInstanceWithName(EXCEPTION).check(pythonType);
+      TriBool isBaseException = ctx.typeChecker().typeCheckBuilder().isBuiltinOrInstanceWithName(BASE_EXCEPTION).check(pythonType);
       if (isException == TriBool.TRUE || isBaseException == TriBool.TRUE) {
         ctx.addIssue(expression, "Replace this generic exception class with a more specific one.");
       }

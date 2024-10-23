@@ -49,7 +49,7 @@ public class UseOfEmptyReturnValueCheck extends PythonSubscriptionCheck {
     if (!expression.is(CALL_EXPR)) {
       return;
     }
-    TypeCheckBuilder typeCheckBuilder = ctx.typeChecker().typeCheckBuilder().isBuiltinWithName("NoneType");
+    TypeCheckBuilder typeCheckBuilder = ctx.typeChecker().typeCheckBuilder().isBuiltinOrInstanceWithName("NoneType");
     boolean noneType = typeCheckBuilder.check(expression.typeV2()) == TriBool.TRUE;
     if (noneType) {
       CallExpression callExpression = (CallExpression) expression;

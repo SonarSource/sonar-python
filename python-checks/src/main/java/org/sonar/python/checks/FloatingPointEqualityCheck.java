@@ -98,7 +98,7 @@ public class FloatingPointEqualityCheck extends PythonSubscriptionCheck {
   }
 
   private boolean isFloat(Expression expression) {
-    TriBool isTypeFloat = typeChecker.typeCheckBuilder().isBuiltinWithName("float").check(expression.typeV2());
+    TriBool isTypeFloat = typeChecker.typeCheckBuilder().isBuiltinOrInstanceWithName("float").check(expression.typeV2());
     return expression.is(Tree.Kind.NUMERIC_LITERAL) && isTypeFloat == TriBool.TRUE;
   }
 
