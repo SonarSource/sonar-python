@@ -18,6 +18,9 @@ def literal_comparison(param):
     (4, 5) is param # Noncompliant {{Replace this "is" operator with "=="; identity operator is not reliable here.}}
     #      ^^
 
+    param is -1 # Noncompliant
+    param is 1 + 1 # Noncompliant
+
 def literal_comparison_compliant(param):
     param is param # ok from the point of this rule
     param is someUnknownFunction(42) # ok
@@ -149,3 +152,7 @@ def comparison_to_none():
     "str" is None
     123 is None
     None is "str"
+
+def potential_null_symbols():
+    type(arr) is tuple
+    some_thing is other_thing
