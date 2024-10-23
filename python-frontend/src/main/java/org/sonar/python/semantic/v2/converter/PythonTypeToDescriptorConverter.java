@@ -126,7 +126,7 @@ public class PythonTypeToDescriptorConverter {
     );
   }
 
-  public FunctionDescriptor.Parameter convert(String moduleFqn, ParameterV2 parameter) {
+  private FunctionDescriptor.Parameter convert(String moduleFqn, ParameterV2 parameter) {
     var type = parameter.declaredType().type().unwrappedType();
     var annotatedType = typeFqn(moduleFqn, type);
 
