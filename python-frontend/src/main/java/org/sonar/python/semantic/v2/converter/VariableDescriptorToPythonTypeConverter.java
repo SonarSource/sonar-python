@@ -24,15 +24,14 @@ import org.sonar.python.index.Descriptor;
 import org.sonar.python.index.VariableDescriptor;
 import org.sonar.python.types.v2.ObjectType;
 import org.sonar.python.types.v2.PythonType;
-import org.sonar.python.types.v2.TypeWrapper;
 
 public class VariableDescriptorToPythonTypeConverter implements DescriptorToPythonTypeConverter {
 
   public PythonType convert(ConversionContext ctx, VariableDescriptor from) {
-    var typeWrapper = Optional.ofNullable(from.annotatedType())
+    return Optional.ofNullable(from.annotatedType())
       .map(fqn -> ctx.lazyTypesContext().getOrCreateLazyTypeWrapper(fqn))
-      .orElse(TypeWrapper.UNKNOWN_TYPE_WRAPPER);
-    return new ObjectType(typeWrapper);
+      .map(t -> (PythonType) new ObjectType(t))
+      .orElse(PythonType.UNKNOWN);
   }
 
   @Override
