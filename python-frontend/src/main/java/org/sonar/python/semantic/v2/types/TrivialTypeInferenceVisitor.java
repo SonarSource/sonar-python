@@ -54,9 +54,12 @@ import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.SetLiteral;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.SubscriptionExpression;
+import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tuple;
 import org.sonar.plugins.python.api.tree.TypeAnnotation;
+import org.sonar.plugins.python.api.tree.UnaryExpression;
+import org.sonar.plugins.python.api.types.BuiltinTypes;
 import org.sonar.python.semantic.v2.ClassTypeBuilder;
 import org.sonar.python.semantic.v2.FunctionTypeBuilder;
 import org.sonar.python.semantic.v2.ProjectLevelTypeTable;
@@ -72,6 +75,7 @@ import org.sonar.python.tree.NumericLiteralImpl;
 import org.sonar.python.tree.SetLiteralImpl;
 import org.sonar.python.tree.StringLiteralImpl;
 import org.sonar.python.tree.TupleImpl;
+import org.sonar.python.tree.UnaryExpressionImpl;
 import org.sonar.python.types.v2.ClassType;
 import org.sonar.python.types.v2.FunctionType;
 import org.sonar.python.types.v2.Member;
@@ -150,6 +154,23 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
     NumericLiteralImpl.NumericKind numericKind = numericLiteralImpl.numericKind();
     PythonType pythonType = builtins.resolveMember(numericKind.value()).orElse(PythonType.UNKNOWN);
     numericLiteralImpl.typeV2(new ObjectType(pythonType, new ArrayList<>(), new ArrayList<>()));
+  }
+
+  @Override
+  public void visitUnaryExpression(UnaryExpression unaryExpr) {
+    super.visitUnaryExpression(unaryExpr);
+
+    var builtins = this.projectLevelTypeTable.getBuiltinsModule();
+    Token op = unaryExpr.operator();
+    PythonType exprType = switch (op.value()) {
+      case "~" -> builtins.resolveMember(BuiltinTypes.INT).orElse(PythonType.UNKNOWN);
+      case "not" -> builtins.resolveMember(BuiltinTypes.BOOL).orElse(PythonType.UNKNOWN);
+      default ->  unaryExpr.expression().typeV2();
+    };
+
+    if(unaryExpr instanceof UnaryExpressionImpl unaryExprImpl) {
+      unaryExprImpl.typeV2(exprType);
+    }
   }
 
   @Override

@@ -19,9 +19,7 @@
  */
 package org.sonar.python.checks;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
@@ -56,21 +54,21 @@ public class IdentityComparisonWithCachedTypesCheck extends PythonSubscriptionCh
    * Fully qualified names of constructors and functions that would are guaranteed to create fresh objects with
    * references not shared anywhere else.
    * <p>
-   * If a reference arises from an call to one of these functions, and it does not escape anywhere else, then an
+   * If a reference arises from a call to one of these functions, and it does not escape anywhere else, then an
    * <code>is</code>-comparison with such a reference will always return <code>False</code>.
    * <p>
    * Note that these are fully qualified names of (value-level) expressions, not types.
    */
-  private static final Set<String> FQNS_CONSTRUCTORS_RETURNING_UNIQUE_REF = new HashSet<>(
-    asList("frozenset", "bytes", "int", "float", "str", "tuple", "hash"));
+  private static final List<String> FQNS_CONSTRUCTORS_RETURNING_UNIQUE_REF =
+    asList("frozenset", "bytes", "int", "float", "str", "tuple", "hash");
 
   /**
    * Names of types that usually should not be compared with <code>is</code>.
    * <p>
    * Note that these are names of types, not `fqn`s of expressions.
    */
-  private static final Set<String> NAMES_OF_TYPES_UNSUITABLE_FOR_COMPARISON = new HashSet<>(
-    asList("frozenset", "bytes", "int", "float", "tuple"));
+  private static final List<String> NAMES_OF_TYPES_UNSUITABLE_FOR_COMPARISON =
+    asList("frozenset", "bytes", "int", "float", "tuple");
 
   private TypeChecker typeChecker;
   private TypeCheckBuilder isNoneTypeChecker;
@@ -158,9 +156,9 @@ public class IdentityComparisonWithCachedTypesCheck extends PythonSubscriptionCh
   }
 
   private boolean isConstructorReturningUniqueRef(PythonType type) {
-    for(String constructorName : FQNS_CONSTRUCTORS_RETURNING_UNIQUE_REF) {
+    for (String constructorName : FQNS_CONSTRUCTORS_RETURNING_UNIQUE_REF) {
       TypeCheckBuilder constructorChecker = typeChecker.typeCheckBuilder().isTypeWithName(constructorName);
-      if(constructorChecker.check(type) == TriBool.TRUE) {
+      if (constructorChecker.check(type) == TriBool.TRUE) {
         return true;
       }
     }

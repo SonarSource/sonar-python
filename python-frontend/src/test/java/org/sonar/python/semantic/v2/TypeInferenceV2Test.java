@@ -25,6 +25,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Function;
 import java.util.stream.Stream;
 import org.assertj.core.api.Assertions;
 import org.assertj.core.api.InstanceOfAssertFactories;
@@ -77,6 +78,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.PythonTestUtils.parse;
 import static org.sonar.python.PythonTestUtils.parseWithoutSymbols;
 import static org.sonar.python.PythonTestUtils.pythonFile;
+import static org.sonar.python.types.v2.TypesTestUtils.BOOL_TYPE;
 import static org.sonar.python.types.v2.TypesTestUtils.DICT_TYPE;
 import static org.sonar.python.types.v2.TypesTestUtils.EXCEPTION_TYPE;
 import static org.sonar.python.types.v2.TypesTestUtils.FLOAT_TYPE;
@@ -2021,6 +2023,18 @@ public class TypeInferenceV2Test {
       a
       """
     ).typeV2().unwrappedType()).isEqualTo(NONE_TYPE);
+  }
+
+  @Test
+  void unary_expression() {
+    Function<Expression, PythonType> exprToType = expr -> expr.typeV2().unwrappedType();
+
+    assertThat(lastExpression("-1")).extracting(exprToType).isEqualTo(INT_TYPE);
+    assertThat(lastExpression("+1")).extracting(exprToType).isEqualTo(INT_TYPE);
+    assertThat(lastExpression("~1")).extracting(exprToType).isEqualTo(INT_TYPE);
+    assertThat(lastExpression("~True")).extracting(exprToType).isEqualTo(INT_TYPE);
+    assertThat(lastExpression("not True")).extracting(exprToType).isEqualTo(BOOL_TYPE);
+    assertThat(lastExpression("not 1")).extracting(exprToType).isEqualTo(BOOL_TYPE);
   }
 
   @Test
