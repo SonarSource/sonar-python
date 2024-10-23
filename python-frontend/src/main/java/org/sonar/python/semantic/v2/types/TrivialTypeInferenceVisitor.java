@@ -424,7 +424,7 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
   }
 
   private static PythonType resolveTypeAnnotationExpressionType(Expression expression) {
-    if (expression instanceof Name name && !(name.typeV2() instanceof UnknownType)) {
+    if (expression instanceof Name name && name.typeV2() != PythonType.UNKNOWN) {
       return new ObjectType(name.typeV2(), TypeSource.TYPE_HINT);
     } else if (expression instanceof SubscriptionExpression subscriptionExpression && !(subscriptionExpression.object().typeV2() instanceof UnknownType)) {
       var candidateTypes = subscriptionExpression.subscripts()
