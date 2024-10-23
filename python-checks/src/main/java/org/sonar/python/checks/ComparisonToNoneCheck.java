@@ -47,8 +47,8 @@ public class ComparisonToNoneCheck extends PythonSubscriptionCheck {
     context.registerSyntaxNodeConsumer(Kind.FILE_INPUT, ctx -> {
       typeChecker = ctx.typeChecker();
       canBeNoneTypeCheck = ctx.typeChecker().typeCheckBuilder().isExactTypeSource().canBeBuiltinWithName(BuiltinTypes.NONE_TYPE);
-      isNoneTypeCheck = ctx.typeChecker().typeCheckBuilder().isExactTypeSource().isBuiltinWithName(BuiltinTypes.NONE_TYPE);
-      isObjectTypeCheck = ctx.typeChecker().typeCheckBuilder().isBuiltinWithName(BuiltinTypes.OBJECT_TYPE);
+      isNoneTypeCheck = ctx.typeChecker().typeCheckBuilder().isExactTypeSource().isBuiltinOrInstanceWithName(BuiltinTypes.NONE_TYPE);
+      isObjectTypeCheck = ctx.typeChecker().typeCheckBuilder().isBuiltinOrInstanceWithName(BuiltinTypes.OBJECT_TYPE);
       isExactTypeSource = ctx.typeChecker().typeCheckBuilder().isExactTypeSource();
     });
 
