@@ -42,6 +42,7 @@ public class ProjectLevelTypeTable {
   }
 
   public ModuleType getBuiltinsModule() {
+  public PythonType getBuiltinsModule() {
     return rootModule;
   }
 
