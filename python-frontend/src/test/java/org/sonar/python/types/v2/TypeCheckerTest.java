@@ -55,18 +55,18 @@ class TypeCheckerTest {
     ObjectType intLiteralType = (ObjectType) intLiteral.typeV2();
     assertThat(intLiteralType.unwrappedType()).isEqualTo(INT_TYPE);
 
-    assertThat(typeChecker.typeCheckBuilder().isBuiltinWithName("int").check(intLiteralType)).isEqualTo(TriBool.TRUE);
-    assertThat(typeChecker.typeCheckBuilder().isBuiltinWithName("str").check(intLiteralType)).isEqualTo(TriBool.FALSE);
-    assertThat(typeChecker.typeCheckBuilder().isBuiltinWithName("unknown").check(intLiteralType)).isEqualTo(TriBool.UNKNOWN);
+    assertThat(typeChecker.typeCheckBuilder().isBuiltinOrInstanceWithName("int").check(intLiteralType)).isEqualTo(TriBool.TRUE);
+    assertThat(typeChecker.typeCheckBuilder().isBuiltinOrInstanceWithName("str").check(intLiteralType)).isEqualTo(TriBool.FALSE);
+    assertThat(typeChecker.typeCheckBuilder().isBuiltinOrInstanceWithName("unknown").check(intLiteralType)).isEqualTo(TriBool.UNKNOWN);
 
     fileInput = parseAndInferTypes("foo()");
     CallExpression callExpression = (CallExpression) TreeUtils.firstChild(fileInput, t -> t.is(Tree.Kind.CALL_EXPR)).get();
     PythonType callExpressionType = callExpression.typeV2();
     assertThat(callExpressionType).isEqualTo(PythonType.UNKNOWN);
-    assertThat(typeChecker.typeCheckBuilder().isBuiltinWithName("int").check(callExpressionType)).isEqualTo(TriBool.UNKNOWN);
-    assertThat(typeChecker.typeCheckBuilder().isBuiltinWithName("unknown").check(callExpressionType)).isEqualTo(TriBool.UNKNOWN);
+    assertThat(typeChecker.typeCheckBuilder().isBuiltinOrInstanceWithName("int").check(callExpressionType)).isEqualTo(TriBool.UNKNOWN);
+    assertThat(typeChecker.typeCheckBuilder().isBuiltinOrInstanceWithName("unknown").check(callExpressionType)).isEqualTo(TriBool.UNKNOWN);
 
-    assertThat(typeChecker.typeCheckBuilder().isBuiltinWithName("int").check(INT_TYPE)).isEqualTo(TriBool.TRUE);
+    assertThat(typeChecker.typeCheckBuilder().isBuiltinOrInstanceWithName("int").check(INT_TYPE)).isEqualTo(TriBool.TRUE);
   }
 
 

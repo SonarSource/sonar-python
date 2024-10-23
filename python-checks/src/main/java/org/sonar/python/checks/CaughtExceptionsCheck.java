@@ -107,8 +107,8 @@ public class CaughtExceptionsCheck extends PythonSubscriptionCheck {
   private static boolean canBeOrExtendBaseException(Expression expression, SubscriptionContext ctx) {
     PythonType pythonType = expression.typeV2();
     TriBool isBaseException = ctx.typeChecker().typeCheckBuilder().isInstanceOf("BaseException").check(pythonType);
-    TriBool isTuple = ctx.typeChecker().typeCheckBuilder().isBuiltinWithName("tuple").check(pythonType);
-    TriBool isType = ctx.typeChecker().typeCheckBuilder().isBuiltinWithName("type").check(pythonType);
+    TriBool isTuple = ctx.typeChecker().typeCheckBuilder().isBuiltinOrInstanceWithName("tuple").check(pythonType);
+    TriBool isType = ctx.typeChecker().typeCheckBuilder().isBuiltinOrInstanceWithName("type").check(pythonType);
     return isBaseException != TriBool.FALSE || isTuple != TriBool.FALSE || isType == TriBool.TRUE;
   }
 

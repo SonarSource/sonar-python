@@ -61,7 +61,7 @@ public class ExceptionCauseTypeCheck extends PythonSubscriptionCheck {
     }
     PythonType causeType = cause.typeV2();
     TriBool inheritsFromBaseException = ctx.typeChecker().typeCheckBuilder().isInstanceOf("BaseException").check(causeType);
-    TriBool isNoneType = ctx.typeChecker().typeCheckBuilder().isBuiltinWithName("NoneType").check(causeType);
+    TriBool isNoneType = ctx.typeChecker().typeCheckBuilder().isBuiltinOrInstanceWithName("NoneType").check(causeType);
     if (inheritsFromBaseException == TriBool.FALSE && isNoneType == TriBool.FALSE) {
       ctx.addIssue(cause, "Replace this expression with an exception or None");
     }
