@@ -74,5 +74,6 @@ print(s)
 
 
 def type_calls(param):
+    type(param) # Noncompliant
     X = type(param)
     X() # OK, class instantiation could have a side effect

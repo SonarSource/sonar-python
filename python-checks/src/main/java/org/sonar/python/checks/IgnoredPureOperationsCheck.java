@@ -298,23 +298,21 @@ public class IgnoredPureOperationsCheck extends PythonSubscriptionCheck {
     if (expression.is(Tree.Kind.CALL_EXPR)) {
       CallExpression callExpression = (CallExpression) expression;
       PythonType pythonType = callExpression.callee().typeV2();
-      if (typeChecker.typeCheckBuilder().isObjectType().check(pythonType) == TriBool.FALSE) {
-        PURE_FUNCTIONS.stream()
-          .filter(f -> typeChecker.typeCheckBuilder().isTypeWithName(f).check(pythonType).equals(TriBool.TRUE))
-          .findFirst()
-          .ifPresent(result -> ctx.addIssue(callExpression.callee(), String.format(MESSAGE_FORMAT, result)));
-      }
+      PURE_FUNCTIONS.stream()
+        .filter(f -> typeChecker.typeCheckBuilder().isTypeWithName(f).check(pythonType).equals(TriBool.TRUE))
+        .findFirst()
+        .ifPresent(result -> ctx.addIssue(callExpression.callee(), String.format(MESSAGE_FORMAT, result)));
     } else if (expression.is(Tree.Kind.SUBSCRIPTION)) {
       SubscriptionExpression subscriptionExpression = (SubscriptionExpression) expression;
       PythonType pythonType = subscriptionExpression.object().typeV2();
-      boolean isPureGetitemType = PURE_GETITEM_TYPES.stream().anyMatch(t -> typeChecker.typeCheckBuilder().isTypeWithName(t).check(pythonType).equals(TriBool.TRUE));
+      boolean isPureGetitemType = PURE_GETITEM_TYPES.stream().anyMatch(t -> typeChecker.typeCheckBuilder().isTypeOrInstanceWithName(t).check(pythonType).equals(TriBool.TRUE));
       if (isPureGetitemType) {
         ctx.addIssue(subscriptionExpression, String.format(MESSAGE_FORMAT, "__getitem__"));
       }
     } else if (expression.is(Tree.Kind.IN)) {
       InExpression inExpression = (InExpression) expression;
       PythonType pythonType = inExpression.rightOperand().typeV2();
-      boolean isPureContainsType = PURE_CONTAINS_TYPES.stream().anyMatch(t -> typeChecker.typeCheckBuilder().isTypeWithName(t).check(pythonType).equals(TriBool.TRUE));
+      boolean isPureContainsType = PURE_CONTAINS_TYPES.stream().anyMatch(t -> typeChecker.typeCheckBuilder().isTypeOrInstanceWithName(t).check(pythonType).equals(TriBool.TRUE));
       if (isPureContainsType) {
         ctx.addIssue(inExpression, String.format(MESSAGE_FORMAT, "__contains__"));
       }

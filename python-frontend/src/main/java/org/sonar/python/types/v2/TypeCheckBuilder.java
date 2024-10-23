@@ -79,14 +79,15 @@ public class TypeCheckBuilder {
     return this;
   }
 
-  public TypeCheckBuilder isObjectType() {
-    predicates.add(new IsTypeKindPredicate(ObjectType.class));
+  public TypeCheckBuilder isTypeOrInstanceWithName(String expectedName) {
+    var expected = projectLevelTypeTable.getType(expectedName);
+    predicates.add(new IsSameAsTypePredicate(expected, false));
     return this;
   }
 
   public TypeCheckBuilder isTypeWithName(String expectedName) {
     var expected = projectLevelTypeTable.getType(expectedName);
-    predicates.add(new IsSameAsTypePredicate(expected));
+    predicates.add(new IsSameAsTypePredicate(expected, true));
     return this;
   }
 
@@ -134,14 +135,20 @@ public class TypeCheckBuilder {
   static class IsSameAsTypePredicate implements TypePredicate {
 
     PythonType expectedType;
+    boolean isStrictCheck;
 
     public IsSameAsTypePredicate(PythonType expectedType) {
+      this(expectedType, false);
+    }
+
+    public IsSameAsTypePredicate(PythonType expectedType, boolean isStrictCheck) {
       this.expectedType = expectedType;
+      this.isStrictCheck = isStrictCheck;
     }
 
     @Override
     public TriBool test(PythonType pythonType) {
-      if (pythonType instanceof ObjectType objectType) {
+      if ((pythonType instanceof ObjectType objectType) && !isStrictCheck) {
         pythonType = objectType.unwrappedType();
       }
       if (pythonType instanceof UnknownType.UnresolvedImportType unresolvedPythonType && expectedType instanceof UnknownType.UnresolvedImportType unresolvedExpectedType) {
@@ -243,18 +250,5 @@ public class TypeCheckBuilder {
 
   private static boolean containsUnknown(Set<PythonType> types) {
     return types.stream().anyMatch(UnknownType.class::isInstance);
-  }
-
-  static class IsTypeKindPredicate implements TypePredicate {
-    Class<? extends PythonType> typeKind;
-
-    public IsTypeKindPredicate(Class<? extends PythonType> typeClass) {
-      this.typeKind = typeClass;
-    }
-
-    @Override
-    public TriBool test(PythonType pythonType) {
-      return typeKind.isInstance(pythonType) ? TriBool.TRUE : TriBool.FALSE;
-    }
   }
 }

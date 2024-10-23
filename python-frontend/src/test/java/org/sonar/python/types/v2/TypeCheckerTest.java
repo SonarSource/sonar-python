@@ -243,13 +243,15 @@ class TypeCheckerTest {
     ObjectType intLiteralType = (ObjectType) intLiteral.typeV2();
     assertThat(intLiteralType.unwrappedType()).isEqualTo(INT_TYPE);
 
-    assertThat(typeChecker.typeCheckBuilder().isTypeWithName("int").check(intLiteralType)).isEqualTo(TriBool.TRUE);
-    assertThat(typeChecker.typeCheckBuilder().isTypeWithName("str").check(intLiteralType)).isEqualTo(TriBool.FALSE);
-    assertThat(typeChecker.typeCheckBuilder().isTypeWithName("unknown").check(intLiteralType)).isEqualTo(TriBool.UNKNOWN);
+    assertThat(typeChecker.typeCheckBuilder().isTypeOrInstanceWithName("int").check(intLiteralType)).isEqualTo(TriBool.TRUE);
+    assertThat(typeChecker.typeCheckBuilder().isTypeOrInstanceWithName("str").check(intLiteralType)).isEqualTo(TriBool.FALSE);
+    assertThat(typeChecker.typeCheckBuilder().isTypeOrInstanceWithName("unknown").check(intLiteralType)).isEqualTo(TriBool.UNKNOWN);
+    assertThat(typeChecker.typeCheckBuilder().isTypeWithName("int").check(intLiteralType)).isEqualTo(TriBool.FALSE);
+    assertThat(typeChecker.typeCheckBuilder().isTypeWithName("int").check(intLiteralType.unwrappedType())).isEqualTo(TriBool.TRUE);
 
     fileInput = parseAndInferTypes("round(42.42)");
     var roundType = ((CallExpression) ((ExpressionStatement) fileInput.statements().statements().get(0)).expressions().get(0)).callee().typeV2();
-    assertThat(typeChecker.typeCheckBuilder().isTypeWithName("round").check(roundType)).isEqualTo(TriBool.TRUE);
+    assertThat(typeChecker.typeCheckBuilder().isTypeOrInstanceWithName("round").check(roundType)).isEqualTo(TriBool.TRUE);
 
     fileInput = parseAndInferTypes(
       """
@@ -258,9 +260,9 @@ class TypeCheckerTest {
         """
     );
     var responseType = ((CallExpression) ((ExpressionStatement) fileInput.statements().statements().get(1)).expressions().get(0)).callee().typeV2();
-    assertThat(typeChecker.typeCheckBuilder().isTypeWithName("flask.Response").check(responseType)).isEqualTo(TriBool.TRUE);
-    assertThat(typeChecker.typeCheckBuilder().isTypeWithName("flask.wrappers.Response").check(responseType)).isEqualTo(TriBool.TRUE);
-    assertThat(typeChecker.typeCheckBuilder().isTypeWithName("flask.app.Response").check(responseType)).isEqualTo(TriBool.UNKNOWN);
+    assertThat(typeChecker.typeCheckBuilder().isTypeOrInstanceWithName("flask.Response").check(responseType)).isEqualTo(TriBool.TRUE);
+    assertThat(typeChecker.typeCheckBuilder().isTypeOrInstanceWithName("flask.wrappers.Response").check(responseType)).isEqualTo(TriBool.TRUE);
+    assertThat(typeChecker.typeCheckBuilder().isTypeOrInstanceWithName("flask.app.Response").check(responseType)).isEqualTo(TriBool.UNKNOWN);
   }
 
   @Test
@@ -288,8 +290,8 @@ class TypeCheckerTest {
       """
     );
     var aType = ((ExpressionStatement) fileInput.statements().statements().get(1)).expressions().get(0).typeV2();
-    assertThat(localTypeChecker.typeCheckBuilder().isTypeWithName("my_package.mod.A").check(aType)).isEqualTo(TriBool.TRUE);
-    assertThat(localTypeChecker.typeCheckBuilder().isTypeWithName("my_package.mod.B").check(aType)).isEqualTo(TriBool.FALSE);
-    assertThat(localTypeChecker.typeCheckBuilder().isTypeWithName("my_package.unknown.A").check(aType)).isEqualTo(TriBool.UNKNOWN);
+    assertThat(localTypeChecker.typeCheckBuilder().isTypeOrInstanceWithName("my_package.mod.A").check(aType)).isEqualTo(TriBool.TRUE);
+    assertThat(localTypeChecker.typeCheckBuilder().isTypeOrInstanceWithName("my_package.mod.B").check(aType)).isEqualTo(TriBool.FALSE);
+    assertThat(localTypeChecker.typeCheckBuilder().isTypeOrInstanceWithName("my_package.unknown.A").check(aType)).isEqualTo(TriBool.UNKNOWN);
   }
 }

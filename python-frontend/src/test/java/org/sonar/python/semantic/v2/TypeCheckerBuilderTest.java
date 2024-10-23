@@ -22,10 +22,7 @@ package org.sonar.python.semantic.v2;
 import java.util.List;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
-import org.sonar.python.types.v2.ClassType;
-import org.sonar.python.types.v2.FunctionType;
 import org.sonar.python.types.v2.ObjectType;
 import org.sonar.python.types.v2.PythonType;
 import org.sonar.python.types.v2.TriBool;
@@ -147,7 +144,7 @@ class TypeCheckerBuilderTest {
     var table = spy(new ProjectLevelTypeTable(symbolTable));
     when(table.getType("stubbed.unknown1")).thenReturn(new UnresolvedImportType("stubbed.unknown1"));
     when(table.getType("stubbed.unknown2")).thenReturn(new UnresolvedImportType("stubbed.unknown2"));
-    var builder = new TypeCheckBuilder(table).isTypeWithName("stubbed.unknown1");
+    var builder = new TypeCheckBuilder(table).isTypeOrInstanceWithName("stubbed.unknown1");
 
     var unknown1 = new UnresolvedImportType("stubbed.unknown1");
     var unknown2 = new UnresolvedImportType("stubbed.unknown2");
@@ -164,7 +161,7 @@ class TypeCheckerBuilderTest {
       TriBool.UNKNOWN
     );
 
-    var builderUnknownType = new TypeCheckBuilder(table).isTypeWithName("unknown");
+    var builderUnknownType = new TypeCheckBuilder(table).isTypeOrInstanceWithName("unknown");
 
     Assertions.assertThat(
       List.of(
@@ -185,19 +182,6 @@ class TypeCheckerBuilderTest {
     Assertions.assertThatThrownBy(() -> objectTypeBuilder.withDefinitionLocation(null))
       .isInstanceOf(IllegalStateException.class)
       .hasMessage("Object type does not have definition location");
-  }
-
-  @Test
-  void isTypeKindTest() {
-    var symbolTable = ProjectLevelSymbolTable.empty();
-    var table = new ProjectLevelTypeTable(symbolTable);
-    var builder = new TypeCheckBuilder(table).isObjectType();
-    ObjectType objectType = Mockito.mock(ObjectType.class);
-    FunctionType functionType = Mockito.mock(FunctionType.class);
-    ClassType classType = Mockito.mock(ClassType.class);
-    Assertions.assertThat(builder.check(objectType)).isEqualTo(TriBool.TRUE);
-    Assertions.assertThat(builder.check(functionType)).isEqualTo(TriBool.FALSE);
-    Assertions.assertThat(builder.check(classType)).isEqualTo(TriBool.FALSE);
   }
 
 }

@@ -116,8 +116,8 @@ class ProjectLevelTypeTableTest {
     ClassType isoparserClass = (ClassType) ((ExpressionStatement) fileInput.statements().statements().get(1)).expressions().get(0).typeV2();
     // With this import syntax, we expect to retrieve the class defined in "dateutil/parser/isoparser.pyi", as "dateutil.parser.isoparser" must refer to a module
     assertThat(isoparserClass.name()).isEqualTo("isoparser");
-    assertThat(typeChecker.typeCheckBuilder().isTypeWithName("dateutil.parser.isoparser.isoparser").check(isoparserClass)).isEqualTo(TriBool.TRUE);
-    assertThat(typeChecker.typeCheckBuilder().isTypeWithName("dateutil.parser.isoparser").check(isoparserClass)).isEqualTo(TriBool.TRUE);
+    assertThat(typeChecker.typeCheckBuilder().isTypeOrInstanceWithName("dateutil.parser.isoparser.isoparser").check(isoparserClass)).isEqualTo(TriBool.TRUE);
+    assertThat(typeChecker.typeCheckBuilder().isTypeOrInstanceWithName("dateutil.parser.isoparser").check(isoparserClass)).isEqualTo(TriBool.TRUE);
 
     fileInput = parseAndInferTypes(projectLevelTypeTable, pythonFile("main.py"), """
       import dateutil.parser as parser_module
@@ -127,7 +127,7 @@ class ProjectLevelTypeTableTest {
     PythonType isoParserMember = parserModuleType.resolveMember("isoparser").get();
     assertThat(isoParserMember).isInstanceOf(ClassType.class);
     // Should be True
-    assertThat(typeChecker.typeCheckBuilder().isTypeWithName("dateutil.parser.isoparser.isoparser").check(isoParserMember)).isEqualTo(TriBool.UNKNOWN);
+    assertThat(typeChecker.typeCheckBuilder().isTypeOrInstanceWithName("dateutil.parser.isoparser.isoparser").check(isoParserMember)).isEqualTo(TriBool.UNKNOWN);
 
     fileInput = parseAndInferTypes(projectLevelTypeTable, pythonFile("main.py"), """
       from dateutil.parser.isoparser import isoparser
