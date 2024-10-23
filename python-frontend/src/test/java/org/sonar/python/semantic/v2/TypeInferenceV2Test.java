@@ -27,7 +27,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Stream;
 import org.assertj.core.api.Assertions;
-import org.assertj.core.api.InstanceOfAssertFactories;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -74,6 +73,7 @@ import org.sonar.python.types.v2.UnknownType;
 import org.sonar.python.types.v2.UnknownType.UnresolvedImportType;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.InstanceOfAssertFactories.LIST;
 import static org.sonar.python.PythonTestUtils.parse;
 import static org.sonar.python.PythonTestUtils.parseWithoutSymbols;
 import static org.sonar.python.PythonTestUtils.pythonFile;
@@ -1811,7 +1811,7 @@ public class TypeInferenceV2Test {
     Assertions.assertThat(lType)
       .extracting(ObjectType.class::cast)
       .extracting(ObjectType::attributes)
-      .asInstanceOf(InstanceOfAssertFactories.LIST)
+      .asInstanceOf(LIST)
       .hasSize(1)
       .contains(PythonType.UNKNOWN);
 
@@ -2654,6 +2654,27 @@ public class TypeInferenceV2Test {
       A = None
       """);
     assertThat(typesBySymbol).isEmpty();
+  }
+
+  @Test
+  @Disabled("SONARPY-2241 enable once classes defined after use are properly resolved")
+  void backwards_declaration() {
+    var root = inferTypes("""
+      def foo():
+        a = A()
+      class A: pass
+      """);
+
+
+    assertThat(root)
+      .extracting(fileInput -> fileInput.statements().statements().get(0))
+      .isInstanceOf(FunctionDef.class).extracting(FunctionDef.class::cast)
+      .extracting(funcDef -> funcDef.body().statements().get(0))
+      .isInstanceOf(AssignmentStatement.class).extracting(AssignmentStatement.class::cast)
+      .extracting(assignment -> assignment.assignedValue().typeV2())
+      .extracting(obj -> obj)
+      .extracting(type -> type.unwrappedType().name())
+      .isEqualTo("A");
   }
 
   private static Map<SymbolV2, Set<PythonType>> inferTypesBySymbol(String lines) {
