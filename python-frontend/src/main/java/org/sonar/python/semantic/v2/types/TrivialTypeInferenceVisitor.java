@@ -108,7 +108,7 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
 
   @Override
   public void visitStringLiteral(StringLiteral stringLiteral) {
-    ModuleType builtins = this.projectLevelTypeTable.getBuiltinsModule();
+    var builtins = this.projectLevelTypeTable.getBuiltinsModule();
     // TODO: SONARPY-1867 multiple object types to represent str instance?
     PythonType strType = builtins.resolveMember("str").orElse(PythonType.UNKNOWN);
     ((StringLiteralImpl) stringLiteral).typeV2(new ObjectType(strType, new ArrayList<>(), new ArrayList<>()));
@@ -122,7 +122,7 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
     if (contentTypes.size() == 1 && !contentTypes.get(0).equals(PythonType.UNKNOWN)) {
       attributes = contentTypes;
     }
-    ModuleType builtins = this.projectLevelTypeTable.getBuiltinsModule();
+    var builtins = this.projectLevelTypeTable.getBuiltinsModule();
     PythonType tupleType = builtins.resolveMember("tuple").orElse(PythonType.UNKNOWN);
     ((TupleImpl) tuple).typeV2(new ObjectType(tupleType, attributes, new ArrayList<>()));
   }
@@ -130,7 +130,7 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
   @Override
   public void visitDictionaryLiteral(DictionaryLiteral dictionaryLiteral) {
     super.visitDictionaryLiteral(dictionaryLiteral);
-    ModuleType builtins = this.projectLevelTypeTable.getBuiltinsModule();
+    var builtins = this.projectLevelTypeTable.getBuiltinsModule();
     PythonType dictType = builtins.resolveMember("dict").orElse(PythonType.UNKNOWN);
     ((DictionaryLiteralImpl) dictionaryLiteral).typeV2(new ObjectType(dictType, new ArrayList<>(), new ArrayList<>()));
   }
@@ -138,14 +138,14 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
   @Override
   public void visitSetLiteral(SetLiteral setLiteral) {
     super.visitSetLiteral(setLiteral);
-    ModuleType builtins = this.projectLevelTypeTable.getBuiltinsModule();
+    var builtins = this.projectLevelTypeTable.getBuiltinsModule();
     PythonType setType = builtins.resolveMember("set").orElse(PythonType.UNKNOWN);
     ((SetLiteralImpl) setLiteral).typeV2(new ObjectType(setType, new ArrayList<>(), new ArrayList<>()));
   }
 
   @Override
   public void visitNumericLiteral(NumericLiteral numericLiteral) {
-    ModuleType builtins = this.projectLevelTypeTable.getBuiltinsModule();
+    var builtins = this.projectLevelTypeTable.getBuiltinsModule();
     NumericLiteralImpl numericLiteralImpl = (NumericLiteralImpl) numericLiteral;
     NumericLiteralImpl.NumericKind numericKind = numericLiteralImpl.numericKind();
     PythonType pythonType = builtins.resolveMember(numericKind.value()).orElse(PythonType.UNKNOWN);
@@ -154,7 +154,7 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
 
   @Override
   public void visitNone(NoneExpression noneExpression) {
-    ModuleType builtins = this.projectLevelTypeTable.getBuiltinsModule();
+    var builtins = this.projectLevelTypeTable.getBuiltinsModule();
     // TODO: SONARPY-1867 multiple object types to represent str instance?
     PythonType noneType = builtins.resolveMember("NoneType").orElse(PythonType.UNKNOWN);
     ((NoneExpressionImpl) noneExpression).typeV2(new ObjectType(noneType, new ArrayList<>(), new ArrayList<>()));
