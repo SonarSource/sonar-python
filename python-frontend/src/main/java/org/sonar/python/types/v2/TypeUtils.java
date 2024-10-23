@@ -19,6 +19,9 @@
  */
 package org.sonar.python.types.v2;
 
+import java.util.Set;
+import java.util.stream.Collectors;
+
 public class TypeUtils {
 
   private TypeUtils() {
@@ -37,5 +40,37 @@ public class TypeUtils {
       return new ObjectType(pythonType);
     }
     return pythonType;
+  }
+
+
+  /**
+   * @param type the input type
+   * @return a set of all possible effective types. However, {@link ObjectType}s are not unwrapped, as they are used to represent an
+   * instance of a type, rather than a type itself, and this should be done explicitly.
+   */
+  public static Set<PythonType> getNestedEffectiveTypes(PythonType type) {
+    if (type instanceof ResolvableType resolvableType) {
+      type = resolvableType.resolve();
+    }
+    if (type instanceof UnionType unionType) {
+      return unionType.candidates().stream()
+        .map(TypeUtils::getNestedEffectiveTypes)
+        .flatMap(Set::stream)
+        .collect(Collectors.toSet());
+    }
+    return Set.of(type);
+  }
+
+  public static PythonType unwrapType(PythonType type) {
+    if (type instanceof ObjectType objectType) {
+      return unwrapType(objectType.unwrappedType());
+    }
+    if (type instanceof UnionType unionType) {
+      var newCandidates = unionType.candidates().stream()
+        .map(TypeUtils::unwrapType)
+        .collect(Collectors.toSet());
+      return UnionType.or(newCandidates);
+    }
+    return type;
   }
 }
