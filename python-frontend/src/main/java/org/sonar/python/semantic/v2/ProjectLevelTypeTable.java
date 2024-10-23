@@ -29,7 +29,7 @@ import org.sonar.python.types.v2.ObjectType;
 import org.sonar.python.types.v2.PythonType;
 import org.sonar.python.types.v2.TypeWrapper;
 
-public class ProjectLevelTypeTable {
+public class ProjectLevelTypeTable implements TypeTable {
 
   private final SymbolsModuleTypeProvider symbolsModuleTypeProvider;
   private final ModuleType rootModule;
@@ -41,19 +41,22 @@ public class ProjectLevelTypeTable {
     this.rootModule = this.symbolsModuleTypeProvider.createBuiltinModule();
   }
 
-  public ModuleType getBuiltinsModule() {
+  @Override
   public PythonType getBuiltinsModule() {
     return rootModule;
   }
 
+  @Override
   public PythonType getType(String typeFqn) {
     return getType(typeFqn.split("\\."));
   }
 
+  @Override
   public PythonType getType(String... typeFqnParts) {
     return getType(List.of(typeFqnParts));
   }
 
+  @Override
   public PythonType getType(List<String> typeFqnParts) {
     var parent = (PythonType) rootModule;
     for (int i = 0; i < typeFqnParts.size(); i++) {
@@ -102,6 +105,7 @@ public class ProjectLevelTypeTable {
    * It is to be used to retrieve modules referenced in the "from" clause of an "import from" statement,
    * as it will only consider submodules over package members in case of name conflict.
    */
+  @Override
   public PythonType getModuleType(List<String> typeFqnParts) {
     var parent = (PythonType) rootModule;
     for (int i = 0; i < typeFqnParts.size(); i++) {

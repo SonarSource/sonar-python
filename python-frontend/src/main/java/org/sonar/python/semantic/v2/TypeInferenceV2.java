@@ -46,12 +46,11 @@ import org.sonar.python.types.v2.PythonType;
 
 public class TypeInferenceV2 {
 
-  private final ProjectLevelTypeTable projectLevelTypeTable;
+  private final TypeTable projectLevelTypeTable;
   private final SymbolTable symbolTable;
   private final PythonFile pythonFile;
-  private Map<SymbolV2, Set<PythonType>> typesBySymbol = new HashMap<>();
 
-  public TypeInferenceV2(ProjectLevelTypeTable projectLevelTypeTable, PythonFile pythonFile, SymbolTable symbolTable) {
+  public TypeInferenceV2(TypeTable projectLevelTypeTable, PythonFile pythonFile, SymbolTable symbolTable) {
     this.projectLevelTypeTable = projectLevelTypeTable;
     this.symbolTable = symbolTable;
     this.pythonFile = pythonFile;
