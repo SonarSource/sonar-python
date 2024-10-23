@@ -30,7 +30,7 @@ import org.sonar.python.semantic.v2.TypeInferenceV2;
 public class TypesTestUtils {
 
   public static final ProjectLevelTypeTable PROJECT_LEVEL_TYPE_TABLE = new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty());
-  public static final ModuleType BUILTINS = PROJECT_LEVEL_TYPE_TABLE.getBuiltinsModule();
+  public static final PythonType BUILTINS = PROJECT_LEVEL_TYPE_TABLE.getBuiltinsModule();
 
   public static final PythonType INT_TYPE = BUILTINS.resolveMember("int").get();
   public static final PythonType FLOAT_TYPE = BUILTINS.resolveMember("float").get();
