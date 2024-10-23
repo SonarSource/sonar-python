@@ -2884,6 +2884,18 @@ public class TypeInferenceV2Test {
     assertThat(typesBySymbol).isEmpty();
   }
 
+  @Test
+  @Disabled("SONARPY-2248")
+  void typesBySymbol_global_statement() {
+    var typesBySymbol = inferTypesBySymbol("""
+      class C:
+        pass
+      global C
+      """);
+    Assertions.assertThat(typesBySymbol).isNotEmpty();
+    Assertions.assertThat(typesBySymbol.values().iterator().next()).isInstanceOf(ClassType.class);
+  }
+
   private static Map<SymbolV2, Set<PythonType>> inferTypesBySymbol(String lines) {
     FileInput root = parse(lines);
     var symbolTable = new SymbolTableBuilderV2(root).build();

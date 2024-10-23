@@ -19,6 +19,7 @@
  */
 package org.sonar.python.semantic.v2.converter;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -34,7 +35,6 @@ import org.sonar.python.types.v2.ClassType;
 import org.sonar.python.types.v2.FunctionType;
 import org.sonar.python.types.v2.ParameterV2;
 import org.sonar.python.types.v2.PythonType;
-import org.sonar.python.types.v2.TypeWrapper;
 import org.sonar.python.types.v2.UnionType;
 import org.sonar.python.types.v2.UnknownType;
 
@@ -100,14 +100,25 @@ public class PythonTypeToDescriptorConverter {
       .stream()
       .map(m -> convert(moduleFqn, symbolFqn, m.name(), m.type()))
       .collect(Collectors.toSet());
-    List<String> superClasses = type.superClasses().stream().map(TypeWrapper::type).map(t -> typeFqn(moduleFqn, t)).toList();
+
+    var hasSuperClassWithoutDescriptor = false;
+    var superClasses = new ArrayList<String>();
+    for (var superClassWrapper : type.superClasses()) {
+      var superClass = superClassWrapper.type();
+      if (superClass != PythonType.UNKNOWN) {
+        var superClassFqn = typeFqn(moduleFqn, superClass);
+        superClasses.add(superClassFqn);
+      } else {
+        hasSuperClassWithoutDescriptor = true;
+      }
+    }
 
     return new ClassDescriptor(symbolName, symbolFqn,
       superClasses,
       memberDescriptors,
       type.hasDecorators(),
       type.definitionLocation().orElse(null),
-      false,
+      hasSuperClassWithoutDescriptor,
       type.hasMetaClass(),
       null,
       false
