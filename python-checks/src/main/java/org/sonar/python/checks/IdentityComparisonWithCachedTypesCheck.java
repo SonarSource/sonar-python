@@ -19,24 +19,25 @@
  */
 package org.sonar.python.checks;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
-import org.sonar.plugins.python.api.symbols.Symbol;
-import org.sonar.plugins.python.api.symbols.Usage;
+import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.IsExpression;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Tree;
-import org.sonar.plugins.python.api.types.InferredType;
-import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
-import org.sonar.python.checks.utils.CheckUtils;
+import org.sonar.plugins.python.api.types.BuiltinTypes;
 import org.sonar.python.quickfix.TextEditUtils;
+import org.sonar.python.semantic.v2.SymbolV2;
+import org.sonar.python.semantic.v2.UsageV2;
 import org.sonar.python.tree.TreeUtils;
+import org.sonar.python.types.v2.PythonType;
+import org.sonar.python.types.v2.TriBool;
+import org.sonar.python.types.v2.TypeCheckBuilder;
+import org.sonar.python.types.v2.TypeChecker;
 
 import static java.util.Arrays.asList;
 
@@ -49,12 +50,40 @@ public class IdentityComparisonWithCachedTypesCheck extends PythonSubscriptionCh
   public static final String IS_QUICK_FIX_MESSAGE = "Replace with \"==\"";
   public static final String IS_NOT_QUICK_FIX_MESSAGE = "Replace with \"!=\"";
 
+  /**
+   * Fully qualified names of constructors and functions that are guaranteed to create fresh objects with
+   * references not shared anywhere else.
+   * <p>
+   * If a reference arises from a call to one of these functions, and it does not escape anywhere else, then an
+   * <code>is</code>-comparison with such a reference will always return <code>False</code>.
+   * <p>
+   * Note that these are fully qualified names of (value-level) expressions, not types.
+   */
+  private static final List<String> FQNS_CONSTRUCTORS_RETURNING_UNIQUE_REF =
+    asList("frozenset", "bytes", "int", "float", "str", "tuple", "hash");
+
+  /**
+   * Names of types that usually should not be compared with <code>is</code>.
+   * <p>
+   * Note that these are names of types, not `fqn`s of expressions.
+   */
+  private static final List<String> NAMES_OF_TYPES_UNSUITABLE_FOR_COMPARISON =
+    asList("frozenset", "bytes", "int", "float", "tuple");
+
+  private TypeChecker typeChecker;
+  private TypeCheckBuilder isNoneTypeChecker;
+
   @Override
   public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(Tree.Kind.IS, IdentityComparisonWithCachedTypesCheck::checkIsComparison);
+    context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, ctx -> {
+      typeChecker = ctx.typeChecker();
+      isNoneTypeChecker = ctx.typeChecker().typeCheckBuilder().isBuiltinWithName(BuiltinTypes.NONE_TYPE);
+    });
+
+    context.registerSyntaxNodeConsumer(Tree.Kind.IS, this::checkIsComparison);
   }
 
-  private static void checkIsComparison(SubscriptionContext ctx) {
+  private void checkIsComparison(SubscriptionContext ctx) {
     IsExpression isExpr = (IsExpression) ctx.syntaxNode();
 
     // Comparison to none is checked by S5727
@@ -83,60 +112,56 @@ public class IdentityComparisonWithCachedTypesCheck extends PythonSubscriptionCh
     }
   }
 
-  private static boolean isComparisonToNone(IsExpression isExpr) {
-    return CheckUtils.isNone(isExpr.leftOperand().type()) || CheckUtils.isNone(isExpr.rightOperand().type());
+  private boolean isComparisonToNone(IsExpression isExpr) {
+    return isNone(isExpr.leftOperand().typeV2()) || isNone(isExpr.rightOperand().typeV2());
   }
 
-  /**
-   * Fully qualified names of constructors and functions that would are guaranteed to create fresh objects with
-   * references not shared anywhere else.
-   *
-   * If a reference arises from an call to one of these functions, and it does not escape anywhere else, then an
-   * <code>is</code>-comparison with such a reference will always return <code>False</code>.
-   *
-   * Note that these are fully qualified names of (value-level) expressions, not types.
-   */
-  private static final Set<String> FQNS_CONSTRUCTORS_RETURNING_UNIQUE_REF = new HashSet<>(
-    asList("frozenset", "bytes", "int", "float", "str", "tuple", "hash"));
-
-  /**
-   * Names of types that usually should not be compared with <code>is</code>.
-   *
-   * Note that these are names of types, not `fqn`s of expressions.
-   */
-  private static final Set<String> NAMES_OF_TYPES_UNSUITABLE_FOR_COMPARISON = new HashSet<>(
-    asList("frozenset", "bytes", "int", "float", "tuple"));
+  private boolean isNone(PythonType type) {
+    return isNoneTypeChecker.check(type) == TriBool.TRUE;
+  }
 
   /**
    * Checks whether an expression is either of a type that should generally be compared with <code>==</code>, or
    * whether it holds a non-escaping reference that stems from a function that guarantees that the
    * returned reference is not shared anywhere.
    */
-  private static boolean isUnsuitableOperand(Expression expr) {
-    InferredType tpe = expr.type();
-    if (isUnsuitableType(tpe)) {
-      if (expr.is(Tree.Kind.NAME)) {
-        Symbol symb = ((Name) expr).symbol();
-        // Impossible to cover. If the type could be inferred, then the `symb` cannot be null.
-        return symb != null && !isVariableThatCanEscape(symb);
+  private boolean isUnsuitableOperand(Expression expr) {
+    PythonType type = expr.typeV2();
+    if (isUnsuitableType(type)) {
+      if (expr instanceof Name name) {
+        SymbolV2 symbol = name.symbolV2();
+        return symbol != null && !isVariableThatCanEscape(symbol);
       } else {
         return true;
       }
     }
     if (expr.is(Tree.Kind.STRING_LITERAL)) {
       return true;
-    } else if (expr.is(Tree.Kind.CALL_EXPR)) {
-      Symbol calleeSymbol = ((CallExpression) expr).calleeSymbol();
-      if (calleeSymbol != null) {
-        String calleeFqn = calleeSymbol.fullyQualifiedName();
-        return FQNS_CONSTRUCTORS_RETURNING_UNIQUE_REF.contains(calleeFqn);
+    } else if (expr instanceof CallExpression callExpr) {
+      PythonType calleeType = callExpr.callee().typeV2();
+      return isConstructorReturningUniqueRef(calleeType);
+    }
+    return false;
+  }
+
+  private boolean isUnsuitableType(PythonType type) {
+    for (String builtinName : NAMES_OF_TYPES_UNSUITABLE_FOR_COMPARISON) {
+      TypeCheckBuilder builtinWithNameChecker = typeChecker.typeCheckBuilder().isBuiltinWithName(builtinName);
+      if (builtinWithNameChecker.check(type) == TriBool.TRUE) {
+        return true;
       }
     }
     return false;
   }
 
-  private static boolean isUnsuitableType(InferredType tpe) {
-    return NAMES_OF_TYPES_UNSUITABLE_FOR_COMPARISON.stream().anyMatch(tpe::canOnlyBe);
+  private boolean isConstructorReturningUniqueRef(PythonType type) {
+    for (String constructorName : FQNS_CONSTRUCTORS_RETURNING_UNIQUE_REF) {
+      TypeCheckBuilder constructorChecker = typeChecker.typeCheckBuilder().isTypeWithName(constructorName);
+      if (constructorChecker.check(type) == TriBool.TRUE) {
+        return true;
+      }
+    }
+    return false;
   }
 
   /**
@@ -144,14 +169,14 @@ public class IdentityComparisonWithCachedTypesCheck extends PythonSubscriptionCh
    * assignment. In such cases, we say that the reference to the value of the variable could have escaped,
    * and don't raise an issue. We do not check whether it could actually arrive in the other operand.
    */
-  private static boolean isVariableThatCanEscape(Symbol symb) {
-    List<Usage> usages = symb.usages();
+  private static boolean isVariableThatCanEscape(SymbolV2 symb) {
+    List<UsageV2> usages = symb.usages();
     if (usages.size() > 2) {
       // Check whether there are any usages except assignments and `is`-comparisons.
       // (Assignments override, they don't let the reference escape. Comparisons with `is` also don't let it escape,
       // because they only compare, they don't copy the reference anywhere.)
       return usages.stream().anyMatch(u -> !u.isBindingUsage() &&
-        TreeUtils.firstAncestorOfKind(u.tree(), Tree.Kind.IS) == null);
+                                           TreeUtils.firstAncestorOfKind(u.tree(), Tree.Kind.IS) == null);
     }
     // Must be definition and usage within <code>is</code>-comparison itself.
     return false;
