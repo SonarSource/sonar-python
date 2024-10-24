@@ -2031,6 +2031,10 @@ public class TypeInferenceV2Test {
 
     assertThat(lastExpression("-1")).extracting(exprToType).isEqualTo(INT_TYPE);
     assertThat(lastExpression("+1")).extracting(exprToType).isEqualTo(INT_TYPE);
+    assertThat(lastExpression("-1.0")).extracting(exprToType).isEqualTo(FLOAT_TYPE);
+    assertThat(lastExpression("+1.0")).extracting(exprToType).isEqualTo(FLOAT_TYPE);
+    assertThat(lastExpression("-True")).extracting(exprToType).isEqualTo(INT_TYPE);
+    assertThat(lastExpression("+True")).extracting(exprToType).isEqualTo(INT_TYPE);
     assertThat(lastExpression("~1")).extracting(exprToType).isEqualTo(INT_TYPE);
     assertThat(lastExpression("~True")).extracting(exprToType).isEqualTo(INT_TYPE);
     assertThat(lastExpression("not True")).extracting(exprToType).isEqualTo(BOOL_TYPE);
