@@ -2656,6 +2656,16 @@ public class TypeInferenceV2Test {
     assertThat(typesBySymbol).isEmpty();
   }
 
+  @Test
+  void typeBySymbol_invalidCfg() {
+    // No types will be retrieved when the CFG is invalid
+    var typesBySymbol = inferTypesBySymbol("""
+      class A: ...
+      continue
+      """);
+    assertThat(typesBySymbol).isEmpty();
+  }
+
   private static Map<SymbolV2, Set<PythonType>> inferTypesBySymbol(String lines) {
     FileInput root = parse(lines);
     var symbolTable = new SymbolTableBuilderV2(root).build();
