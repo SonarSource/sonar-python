@@ -54,9 +54,12 @@ import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.SetLiteral;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.SubscriptionExpression;
+import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.Tuple;
 import org.sonar.plugins.python.api.tree.TypeAnnotation;
+import org.sonar.plugins.python.api.tree.UnaryExpression;
+import org.sonar.plugins.python.api.types.BuiltinTypes;
 import org.sonar.python.semantic.v2.ClassTypeBuilder;
 import org.sonar.python.semantic.v2.FunctionTypeBuilder;
 import org.sonar.python.semantic.v2.ProjectLevelTypeTable;
@@ -72,12 +75,15 @@ import org.sonar.python.tree.NumericLiteralImpl;
 import org.sonar.python.tree.SetLiteralImpl;
 import org.sonar.python.tree.StringLiteralImpl;
 import org.sonar.python.tree.TupleImpl;
+import org.sonar.python.tree.UnaryExpressionImpl;
 import org.sonar.python.types.v2.ClassType;
 import org.sonar.python.types.v2.FunctionType;
 import org.sonar.python.types.v2.Member;
 import org.sonar.python.types.v2.ModuleType;
 import org.sonar.python.types.v2.ObjectType;
 import org.sonar.python.types.v2.PythonType;
+import org.sonar.python.types.v2.TriBool;
+import org.sonar.python.types.v2.TypeCheckBuilder;
 import org.sonar.python.types.v2.TypeOrigin;
 import org.sonar.python.types.v2.TypeSource;
 import org.sonar.python.types.v2.UnionType;
@@ -150,6 +156,36 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
     NumericLiteralImpl.NumericKind numericKind = numericLiteralImpl.numericKind();
     PythonType pythonType = builtins.resolveMember(numericKind.value()).orElse(PythonType.UNKNOWN);
     numericLiteralImpl.typeV2(new ObjectType(pythonType, new ArrayList<>(), new ArrayList<>()));
+  }
+
+  @Override
+  public void visitUnaryExpression(UnaryExpression unaryExpr) {
+    super.visitUnaryExpression(unaryExpr);
+
+    var builtins = projectLevelTypeTable.getBuiltinsModule();
+    Token operator = unaryExpr.operator();
+    PythonType exprType = switch (operator.value()) {
+      case "~" -> builtins.resolveMember(BuiltinTypes.INT).orElse(PythonType.UNKNOWN);
+      case "not" -> builtins.resolveMember(BuiltinTypes.BOOL).orElse(PythonType.UNKNOWN);
+      case "+", "-" -> getTypeWhenUnaryPlusMinus(unaryExpr);
+      default -> unaryExpr.expression().typeV2();
+    };
+
+    if (unaryExpr instanceof UnaryExpressionImpl unaryExprImpl) {
+      unaryExprImpl.typeV2(exprType);
+    }
+  }
+
+  private PythonType getTypeWhenUnaryPlusMinus(UnaryExpression unaryExpr) {
+    var builtins = projectLevelTypeTable.getBuiltinsModule();
+    var isBooleanTypeCheck = new TypeCheckBuilder(projectLevelTypeTable).isBuiltinWithName(BuiltinTypes.BOOL);
+    var innerExprType = unaryExpr.expression().typeV2();
+
+    if (isBooleanTypeCheck.check(innerExprType) == TriBool.TRUE) {
+      return builtins.resolveMember(BuiltinTypes.INT).orElse(PythonType.UNKNOWN);
+    } else {
+      return innerExprType;
+    }
   }
 
   @Override
