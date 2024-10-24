@@ -172,6 +172,21 @@ public class TypeInferenceV2Test {
   }
 
   @Test
+  void testUnresolvedImportTypePropagationInsideFunctions() {
+    var fileInput = inferTypes("""
+      from a import b
+      def function():
+        f(b)
+      """);
+    var functionDef = (FunctionDef) fileInput.statements().statements().get(1);
+    var funcCall = ((ExpressionStatement) functionDef.body().statements().get(0)).expressions().get(0);
+    var arg = ((RegularArgument) ((CallExpression) funcCall).arguments().get(0));
+    var argType = arg.expression().typeV2();
+
+    assertThat(argType).isInstanceOfSatisfying(UnresolvedImportType.class, a -> assertThat(a.importPath()).isEqualTo("a.b")); // FAILS
+  }
+
+  @Test
   void testProjectLevelSymbolTableImports() {
     var classSymbol = new ClassSymbolImpl("C", "something.known.C");
 
