@@ -20,6 +20,7 @@
 package org.sonar.python.index;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -139,7 +140,8 @@ public class DescriptorUtils {
         AmbiguousSymbolImpl ambiguousSymbol = new AmbiguousSymbolImpl(symbolName, descriptor.fullyQualifiedName(), alternatives);
         createdSymbolsByDescriptor.put(descriptor, ambiguousSymbol);
         alternatives.addAll(((AmbiguousDescriptor) descriptor).alternatives().stream()
-          .map(a -> DescriptorUtils.symbolFromDescriptor(a, projectLevelSymbolTable, symbolName, createdSymbolsByDescriptor, createdSymbolsByFqn))
+          // Alternatives of ambiguous descriptors share the same FQN despite representing different possible symbols, so we don't rely on "createdSymbolsByFqn" for them
+          .map(a -> DescriptorUtils.symbolFromDescriptor(a, projectLevelSymbolTable, symbolName, createdSymbolsByDescriptor, new HashMap<>()))
           .collect(Collectors.toSet()));
         return ambiguousSymbol;
       default:

@@ -46,6 +46,8 @@ import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.PythonTestUtils;
+import org.sonar.python.index.AmbiguousDescriptor;
+import org.sonar.python.index.ClassDescriptor;
 import org.sonar.python.index.Descriptor;
 import org.sonar.python.index.DescriptorUtils;
 import org.sonar.python.index.VariableDescriptor;
@@ -902,6 +904,25 @@ class ProjectLevelSymbolTableTest {
     assertThat(localSymbol.fullyQualifiedName()).isEqualTo("foo.Ambiguous");
     assertThat(localSymbol.alternatives()).hasSize(2);
     assertThat(localSymbol.alternatives()).extracting(Symbol::kind).containsExactlyInAnyOrder(Symbol.Kind.CLASS, Symbol.Kind.OTHER);
+  }
+
+  @Test
+  void ambiguous_descriptor_alternatives_dont_rely_on_FQN_for_conversion() {
+    ProjectLevelSymbolTable projectLevelSymbolTable = new ProjectLevelSymbolTable();
+    Set<Descriptor> descriptors = new HashSet<>();
+    VariableDescriptor variableDescriptor = new VariableDescriptor("Ambiguous", "foo.Ambiguous", null);
+    ClassDescriptor classDescriptor = new ClassDescriptor("Ambiguous", "foo.Ambiguous", List.of(), Set.of(), false, null, false, false, null, false);
+    AmbiguousDescriptor ambiguousDescriptor = new AmbiguousDescriptor("Ambiguous", "foo.Ambiguous", Set.of(variableDescriptor, classDescriptor));
+    descriptors.add(ambiguousDescriptor);
+
+    projectLevelSymbolTable.insertEntry("foo", descriptors);
+    Set<Symbol> foo = projectLevelSymbolTable.getSymbolsFromModule("foo");
+
+    assertThat(foo).hasSize(1);
+    Symbol retrievedSymbol = foo.stream().findFirst().get();
+    assertThat(retrievedSymbol.kind()).isEqualTo(Symbol.Kind.AMBIGUOUS);
+    AmbiguousSymbol ambiguousSymbol = (AmbiguousSymbol) retrievedSymbol;
+    assertThat(ambiguousSymbol.alternatives()).hasSize(2);
   }
 
   @Test
