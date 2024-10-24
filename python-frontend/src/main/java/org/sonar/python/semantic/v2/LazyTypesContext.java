@@ -28,11 +28,11 @@ import org.sonar.python.types.v2.TypeWrapper;
 
 public class LazyTypesContext {
   private final Map<String, LazyType> lazyTypes;
-  private final ProjectLevelTypeTable projectLevelTypeTable;
+  private final TypeTable typeTable;
 
-  public LazyTypesContext(ProjectLevelTypeTable projectLevelTypeTable) {
+  public LazyTypesContext(ProjectLevelTypeTable typeTable) {
     this.lazyTypes = new HashMap<>();
-    this.projectLevelTypeTable = projectLevelTypeTable;
+    this.typeTable = typeTable;
   }
 
   public TypeWrapper getOrCreateLazyTypeWrapper(String importPath) {
@@ -49,7 +49,7 @@ public class LazyTypesContext {
   }
 
   public PythonType resolveLazyType(LazyType lazyType) {
-    PythonType resolved = projectLevelTypeTable.getType(lazyType.importPath());
+    PythonType resolved = typeTable.getType(lazyType.importPath());
     lazyType.resolve(resolved);
     lazyTypes.remove(lazyType.importPath());
     return resolved;
