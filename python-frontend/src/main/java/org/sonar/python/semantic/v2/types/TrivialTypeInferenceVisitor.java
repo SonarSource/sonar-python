@@ -204,15 +204,26 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
   public void visitClassDef(ClassDef classDef) {
     scan(classDef.args());
     Name name = classDef.name();
-    ClassTypeBuilder classTypeBuilder = new ClassTypeBuilder()
-      .withName(name.name())
-      .withHasDecorators(!classDef.decorators().isEmpty())
-      .withDefinitionLocation(locationInFile(classDef.name(), fileId));
-    resolveTypeHierarchy(classDef, classTypeBuilder);
-    ClassType type = classTypeBuilder.build();
+    ClassType type = buildClassType(classDef);
     ((NameImpl) name).typeV2(type);
 
     inTypeScope(type, () -> scan(classDef.body()));
+  }
+
+  private ClassType buildClassType(ClassDef classDef) {
+    Name className = classDef.name();
+    ClassTypeBuilder classTypeBuilder = new ClassTypeBuilder()
+      .withName(className.name())
+      .withHasDecorators(!classDef.decorators().isEmpty())
+      .withDefinitionLocation(locationInFile(className, fileId));
+    resolveTypeHierarchy(classDef, classTypeBuilder);
+    ClassType classType = classTypeBuilder.build();
+
+    if(currentType() instanceof ClassType ownerClass)  {
+      PythonType memberType = className.symbolV2().hasSingleBindingUsage() ? classType : PythonType.UNKNOWN;
+      ownerClass.members().add(new Member(classType.name(), memberType));
+    }
+    return classType;
   }
 
   static void resolveTypeHierarchy(ClassDef classDef, ClassTypeBuilder classTypeBuilder) {
