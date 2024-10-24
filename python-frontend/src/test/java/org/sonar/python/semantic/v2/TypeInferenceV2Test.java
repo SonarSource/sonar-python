@@ -297,6 +297,40 @@ public class TypeInferenceV2Test {
   }
 
   @Test
+  void nestedClassDefinitions() {
+    Expression expr = lastExpression("""
+      class A:
+        class B:
+          pass
+      A.B
+      """);
+    assertThat(expr.typeV2())
+      .isInstanceOf(ClassType.class)
+      .extracting(PythonType::name)
+      .isEqualTo("B");
+
+    Expression expr2 = lastExpression("""
+      class A:
+        class B:
+          class C:
+            pass
+      A.B.C
+      """);
+    assertThat(expr2.typeV2())
+      .isInstanceOf(ClassType.class)
+      .extracting(PythonType::name)
+      .isEqualTo("C");
+
+    Expression expr3 = lastExpression("""
+      class A:
+        class B:
+          pass
+        B = 42
+      A.B
+      """);
+    assertThat(expr3.typeV2()).isEqualTo(PythonType.UNKNOWN);
+  }
+  @Test
   void inferTypeForBuiltins() {
     FileInput root = inferTypes("""
       a = list
