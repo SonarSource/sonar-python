@@ -197,7 +197,7 @@ public class TypeInferenceV2Test {
     assertThat(importedNames)
       .flatExtracting(Expression::typeV2)
       .allMatch(PythonType.UNKNOWN::equals);
-    
+
     assertThat(aliasedName.alias())
       .extracting(Expression::typeV2)
       .isInstanceOf(ModuleType.class)
@@ -330,6 +330,29 @@ public class TypeInferenceV2Test {
       """);
     assertThat(expr3.typeV2()).isEqualTo(PythonType.UNKNOWN);
   }
+
+  @Test
+  void staticFieldsInClassDefinition() {
+    Expression expr = lastExpression("""
+      class A:
+        test = "hi"
+      A.test
+      """);
+    assertThat(expr.typeV2())
+      .isInstanceOf(ObjectType.class)
+      .extracting(PythonType::unwrappedType)
+      .isEqualTo(STR_TYPE);
+
+    Expression expr2 = lastExpression("""
+      class A:
+        test = "hi"
+        test = True
+      A.test
+      """);
+    assertThat(expr2.typeV2())
+      .isEqualTo(PythonType.UNKNOWN);
+  }
+
   @Test
   void inferTypeForBuiltins() {
     FileInput root = inferTypes("""
@@ -589,7 +612,7 @@ public class TypeInferenceV2Test {
     var functionDef = (FunctionDef) root.statements().statements().get(0);
     var lastExpressionStatement = (ExpressionStatement) functionDef.body().statements().get(functionDef.body().statements().size() -1);
     var type = (UnionType) lastExpressionStatement.expressions().get(0).typeV2();
-    
+
     Assertions.assertThat(type.candidates())
       .extracting(PythonType::unwrappedType)
       .containsOnly(INT_TYPE, STR_TYPE);
