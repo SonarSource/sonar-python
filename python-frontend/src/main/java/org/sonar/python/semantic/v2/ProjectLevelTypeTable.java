@@ -67,8 +67,8 @@ public class ProjectLevelTypeTable {
       if (parent instanceof ModuleType moduleType) {
         TypeWrapper typeWrapper = moduleType.members().get(part);
         if (typeWrapper instanceof LazyTypeWrapper lazyTypeWrapper && !lazyTypeWrapper.isResolved()) {
-          if (i == typeFqnParts.size() - 1 && !(lazyTypeWrapper.hasImportPath(String.join(".", typeFqnParts)))) {
-            // this is the name we are looking for, resolve it
+          if (i == typeFqnParts.size() - 1 && !fqnSameAsImportedPath(typeFqnParts, lazyTypeWrapper)) {
+            // this is the name we are looking for and its imported path is not the one we are trying to find, resolve it
             return typeWrapper.type();
           }
 
@@ -89,6 +89,10 @@ public class ProjectLevelTypeTable {
       }
     }
     return parent;
+  }
+
+  private static boolean fqnSameAsImportedPath(List<String> typeFqnParts, LazyTypeWrapper lazyTypeWrapper) {
+    return lazyTypeWrapper.hasImportPath(String.join(".", typeFqnParts));
   }
 
   /**

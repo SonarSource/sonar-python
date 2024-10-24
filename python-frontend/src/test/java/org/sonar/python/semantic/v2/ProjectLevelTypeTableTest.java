@@ -255,7 +255,7 @@ class ProjectLevelTypeTableTest {
   }
 
   @Test
-  void resolveCustomStub() {
+  void resolveStubsWithImportedModuleVariableDescriptor() {
     var symbolTable = ProjectLevelSymbolTable.empty();
     var table = new ProjectLevelTypeTable(symbolTable);
 
