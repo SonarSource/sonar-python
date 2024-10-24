@@ -130,7 +130,6 @@ public class TypeInferenceV2 {
 
     ControlFlowGraph cfg = controlFlowGraphSupplier.get();
     if (cfg == null) {
-      // TODO SONARPY-2215: fix me
       return Map.of();
     }
     assignedNames.addAll(annotatedParameterNames);
