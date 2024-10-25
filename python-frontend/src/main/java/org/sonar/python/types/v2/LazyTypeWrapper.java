@@ -46,6 +46,10 @@ public class LazyTypeWrapper implements TypeWrapper {
     return !(type instanceof LazyType);
   }
 
+  public boolean hasImportPath(String importPath) {
+    return ((LazyType) type).importPath().equals(importPath);
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;

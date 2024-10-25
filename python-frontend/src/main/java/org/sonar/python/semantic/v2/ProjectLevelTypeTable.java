@@ -67,10 +67,12 @@ public class ProjectLevelTypeTable {
       if (parent instanceof ModuleType moduleType) {
         TypeWrapper typeWrapper = moduleType.members().get(part);
         if (typeWrapper instanceof LazyTypeWrapper lazyTypeWrapper && !lazyTypeWrapper.isResolved()) {
-          if (i == typeFqnParts.size() - 1) {
-            // this is the name we are looking for, resolve it
+          if (shouldResolveImmediately(lazyTypeWrapper, typeFqnParts, i)) {
+            // We try to resolve the type of the member if it points to a different module.
+            // If it points to the same module, we try to resolve the submodule of the same name
             return typeWrapper.type();
           }
+
           // The member of the module is a LazyType, which means it's a re-exported type from a submodule
           // We try to resolve the submodule instead
           Optional<PythonType> subModule = moduleType.resolveSubmodule(part);
@@ -88,6 +90,10 @@ public class ProjectLevelTypeTable {
       }
     }
     return parent;
+  }
+
+  private static boolean shouldResolveImmediately(LazyTypeWrapper lazyTypeWrapper, List<String> typeFqnParts, int i) {
+    return i == typeFqnParts.size() - 1 && !(lazyTypeWrapper.hasImportPath(String.join(".", typeFqnParts)));
   }
 
   /**

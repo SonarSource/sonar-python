@@ -28,6 +28,12 @@ import org.sonar.python.types.v2.PythonType;
 public class VariableDescriptorToPythonTypeConverter implements DescriptorToPythonTypeConverter {
 
   public PythonType convert(ConversionContext ctx, VariableDescriptor from) {
+    if (from.isImportedModule()) {
+      var fqn = from.fullyQualifiedName();
+      if (fqn != null) {
+        return ctx.lazyTypesContext().getOrCreateLazyType(fqn);
+      }
+    }
     return Optional.ofNullable(from.annotatedType())
       .map(fqn -> ctx.lazyTypesContext().getOrCreateLazyTypeWrapper(fqn))
       .map(t -> (PythonType) new ObjectType(t))
