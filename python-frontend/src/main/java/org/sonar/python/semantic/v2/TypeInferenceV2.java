@@ -21,7 +21,6 @@ package org.sonar.python.semantic.v2;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -50,7 +49,6 @@ public class TypeInferenceV2 {
   private final ProjectLevelTypeTable projectLevelTypeTable;
   private final SymbolTable symbolTable;
   private final PythonFile pythonFile;
-  private Map<SymbolV2, Set<PythonType>> typesBySymbol = new HashMap<>();
 
   public TypeInferenceV2(ProjectLevelTypeTable projectLevelTypeTable, PythonFile pythonFile, SymbolTable symbolTable) {
     this.projectLevelTypeTable = projectLevelTypeTable;
@@ -58,11 +56,11 @@ public class TypeInferenceV2 {
     this.pythonFile = pythonFile;
   }
 
-  public void inferTypes(FileInput fileInput) {
+  public Map<SymbolV2, Set<PythonType>> inferTypes(FileInput fileInput) {
     TrivialTypeInferenceVisitor trivialTypeInferenceVisitor = new TrivialTypeInferenceVisitor(projectLevelTypeTable, pythonFile);
     fileInput.accept(trivialTypeInferenceVisitor);
 
-    inferTypesAndMemberAccessSymbols(fileInput);
+    var typesBySymbol = inferTypesAndMemberAccessSymbols(fileInput);
 
     fileInput.accept(new BaseTreeVisitor() {
       @Override
@@ -71,20 +69,17 @@ public class TypeInferenceV2 {
         inferTypesAndMemberAccessSymbols(funcDef);
       }
     });
-  }
-
-  public Map<SymbolV2, Set<PythonType>> getTypesBySymbol() {
     return typesBySymbol;
   }
 
-  private void inferTypesAndMemberAccessSymbols(FileInput fileInput) {
+  private Map<SymbolV2, Set<PythonType>> inferTypesAndMemberAccessSymbols(FileInput fileInput) {
     StatementList statements = fileInput.statements();
     if (statements == null) {
-      return;
+      return Map.of();
     }
     var moduleSymbols = symbolTable.getSymbolsByRootTree(fileInput);
 
-    typesBySymbol = inferTypesAndMemberAccessSymbols(
+    return inferTypesAndMemberAccessSymbols(
       fileInput,
       statements,
       moduleSymbols,
