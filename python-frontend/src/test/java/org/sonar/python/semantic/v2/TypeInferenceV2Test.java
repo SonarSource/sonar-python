@@ -183,7 +183,7 @@ public class TypeInferenceV2Test {
     var arg = ((RegularArgument) ((CallExpression) funcCall).arguments().get(0));
     var argType = arg.expression().typeV2();
 
-    assertThat(argType).isInstanceOfSatisfying(UnresolvedImportType.class, a -> assertThat(a.importPath()).isEqualTo("a.b")); // FAILS
+    assertThat(argType).isInstanceOfSatisfying(UnresolvedImportType.class, a -> assertThat(a.importPath()).isEqualTo("a.b"));
   }
 
   @Test
