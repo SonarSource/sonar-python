@@ -19,17 +19,19 @@
  */
 package org.sonar.python.checks;
 
-import java.util.Map;
 import java.util.Optional;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
-import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.CallExpression;
+import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.tree.TreeUtils;
+import org.sonar.python.types.v2.PythonType;
+import org.sonar.python.types.v2.TriBool;
+import org.sonar.python.types.v2.TypeCheckBuilder;
 
 @Rule(key = "S6740")
 public class PandasReadNoDataTypeCheck extends PythonSubscriptionCheck {
@@ -39,33 +41,47 @@ public class PandasReadNoDataTypeCheck extends PythonSubscriptionCheck {
   private static final String READ_CSV = "pandas.read_csv";
   private static final String READ_TABLE = "pandas.read_table";
 
-  private static final Map<String, String> READ_METHODS = Map.of(
-    READ_CSV, READ_CSV,
-    READ_TABLE, READ_TABLE,
-    "pandas.io.parsers.readers.read_csv", READ_CSV,
-    "pandas.io.parsers.readers.read_table", READ_TABLE
-  );
+  private TypeCheckBuilder isPandasReadCsv;
+  private TypeCheckBuilder isPandasReadTable;
 
   @Override
   public void initialize(Context context) {
-    context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, PandasReadNoDataTypeCheck::checkReadMethodCall);
+    context.registerSyntaxNodeConsumer(Tree.Kind.FILE_INPUT, ctx -> {
+      isPandasReadCsv = ctx.typeChecker().typeCheckBuilder().isTypeWithName(READ_CSV);
+      isPandasReadTable = ctx.typeChecker().typeCheckBuilder().isTypeWithName(READ_TABLE);
+    });
+    context.registerSyntaxNodeConsumer(Tree.Kind.CALL_EXPR, this::checkReadMethodCall);
   }
 
-  private static void checkReadMethodCall(SubscriptionContext subscriptionContext) {
+  private void checkReadMethodCall(SubscriptionContext subscriptionContext) {
     CallExpression callExpression = (CallExpression) subscriptionContext.syntaxNode();
     Optional.of(callExpression)
-      .filter(PandasReadNoDataTypeCheck::isReadCall)
+      .filter(this::isReadCall)
       .filter(ce -> TreeUtils.nthArgumentOrKeyword(1, "dtype", ce.arguments()) == null)
       .flatMap(PandasReadNoDataTypeCheck::getNameTree)
       .ifPresent(name -> subscriptionContext.addIssue(name, getMessage(callExpression)));
   }
 
-  private static boolean isReadCall(CallExpression callExpression) {
+  private boolean isReadCall(CallExpression callExpression) {
     return Optional.of(callExpression)
-      .map(CallExpression::calleeSymbol)
-      .map(Symbol::fullyQualifiedName)
-      .filter(PandasReadNoDataTypeCheck::isPandasReadCall)
+      .map(CallExpression::callee)
+      .map(Expression::typeV2)
+      .filter(this::isPandasReadCall)
       .isPresent();
+  }
+
+  private boolean isPandasReadCall(PythonType type) {
+    return getPandaReadCallName(type).isPresent();
+  }
+
+  private Optional<String> getPandaReadCallName(PythonType type) {
+    if(isPandasReadTable.check(type) == TriBool.TRUE) {
+      return Optional.of(READ_TABLE);
+    } else if (isPandasReadCsv.check(type) == TriBool.TRUE) {
+      return Optional.of(READ_CSV);
+    } else {
+      return Optional.empty();
+    }
   }
 
   private static Optional<Name> getNameTree(CallExpression expression) {
@@ -76,14 +92,10 @@ public class PandasReadNoDataTypeCheck extends PythonSubscriptionCheck {
         .flatMap(TreeUtils.toOptionalInstanceOfMapper(Name.class)));
   }
 
-  private static boolean isPandasReadCall(String fqn) {
-    return READ_METHODS.containsKey(fqn);
-  }
-
-  private static String getMessage(CallExpression ce) {
-    return Optional.ofNullable(ce.calleeSymbol())
-      .map(Symbol::fullyQualifiedName)
-      .map(READ_METHODS::get)
+  private  String getMessage(CallExpression ce) {
+    return Optional.ofNullable(ce.callee())
+      .map(Expression::typeV2)
+      .flatMap(this::getPandaReadCallName)
       .map(name -> String.format("%s \"%s\".", MESSAGE, name))
       .orElse("");
   }
