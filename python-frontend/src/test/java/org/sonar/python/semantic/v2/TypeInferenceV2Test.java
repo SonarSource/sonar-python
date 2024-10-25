@@ -155,6 +155,38 @@ public class TypeInferenceV2Test {
   }
 
   @Test
+  void testInheritanceFromUnresolvedImports() {
+    FileInput root = inferTypes("""
+      from unknown import Parent
+      class A(Parent): ...
+      """);
+
+    var classDef = (ClassDef) root.statements().statements().get(1);
+    assertThat(classDef.args().arguments().get(0))
+      .extracting(RegularArgument.class::cast)
+      .extracting(RegularArgument::expression)
+      .extracting(Expression::typeV2)
+      .extracting(UnresolvedImportType.class::cast)
+      .extracting(UnresolvedImportType::importPath)
+      .isEqualTo("unknown.Parent");
+  }
+
+  @Test
+  void testUnresolvedImportTypePropagationInsideFunctions() {
+    var fileInput = inferTypes("""
+      from a import b
+      def function():
+        f(b)
+      """);
+    var functionDef = (FunctionDef) fileInput.statements().statements().get(1);
+    var funcCall = ((ExpressionStatement) functionDef.body().statements().get(0)).expressions().get(0);
+    var arg = ((RegularArgument) ((CallExpression) funcCall).arguments().get(0));
+    var argType = arg.expression().typeV2();
+
+    assertThat(argType).isInstanceOfSatisfying(UnresolvedImportType.class, a -> assertThat(a.importPath()).isEqualTo("a.b"));
+  }
+
+  @Test
   void testProjectLevelSymbolTableImports() {
     var classSymbol = new ClassSymbolImpl("C", "something.known.C");
 

@@ -471,8 +471,15 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
       .map(Expression.class::cast)
       .map(Expression::typeV2)
       // TODO: classes (SONARPY-1829) and functions should be propagated like other types
-      .filter(t -> (t instanceof ClassType) || (t instanceof FunctionType) || (t instanceof ModuleType))
+      .filter(TrivialTypeInferenceVisitor::shouldTypeBeEagerlyPropagated)
       .ifPresent(type -> setTypeToName(name, type));
+  }
+
+  private static boolean shouldTypeBeEagerlyPropagated(PythonType t) {
+    return (t instanceof ClassType)
+           || (t instanceof FunctionType)
+           || (t instanceof ModuleType)
+           || (t instanceof UnknownType.UnresolvedImportType);
   }
 
   private PythonType currentType() {
