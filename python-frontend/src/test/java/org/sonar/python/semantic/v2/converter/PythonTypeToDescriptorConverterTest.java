@@ -109,8 +109,7 @@ class PythonTypeToDescriptorConverterTest {
     VariableDescriptor memberVariableDescriptor = (VariableDescriptor) memberDescriptor;
     assertThat(memberVariableDescriptor.name()).isEqualTo("aMember");
     assertThat(memberVariableDescriptor.annotatedType()).isEqualTo("int");
-    // TODO SONARPY-2222 expected fullyqualified name of the member is "foo.myClass.aMember"
-    assertThat(memberVariableDescriptor.fullyQualifiedName()).isEqualTo("foo.aMember");
+    assertThat(memberVariableDescriptor.fullyQualifiedName()).isEqualTo("foo.myClass.aMember");
 
     assertThat(classDescriptor.hasDecorators()).isTrue();
     assertThat(classDescriptor.definitionLocation()).isEqualTo(location);
