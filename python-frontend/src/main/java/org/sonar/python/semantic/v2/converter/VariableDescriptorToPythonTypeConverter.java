@@ -34,7 +34,7 @@ public class VariableDescriptorToPythonTypeConverter implements DescriptorToPyth
         return ctx.lazyTypesContext().getOrCreateLazyType(fqn);
       }
     }
-    var typeWrapper = Optional.ofNullable(from.annotatedType())
+    return Optional.ofNullable(from.annotatedType())
       .map(fqn -> ctx.lazyTypesContext().getOrCreateLazyTypeWrapper(fqn))
       .map(t -> (PythonType) new ObjectType(t))
       .orElse(PythonType.UNKNOWN);
