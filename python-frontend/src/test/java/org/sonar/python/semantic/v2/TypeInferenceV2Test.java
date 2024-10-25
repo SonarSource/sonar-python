@@ -197,7 +197,7 @@ public class TypeInferenceV2Test {
     assertThat(importedNames)
       .flatExtracting(Expression::typeV2)
       .allMatch(PythonType.UNKNOWN::equals);
-    
+
     assertThat(aliasedName.alias())
       .extracting(Expression::typeV2)
       .isInstanceOf(ModuleType.class)
@@ -424,6 +424,62 @@ public class TypeInferenceV2Test {
       """);
     assertThat(expr2.typeV2())
       .isEqualTo(PythonType.UNKNOWN);
+  }
+
+  @Test
+  void staticFieldsInInheritedClasses() {
+    Expression exprWithInheritance = lastExpression("""
+      class A:
+        test = "hi"
+      class B(A):
+        pass
+      B.test
+      """);
+    assertThat(exprWithInheritance.typeV2())
+      .isInstanceOf(ObjectType.class)
+      .extracting(PythonType::unwrappedType)
+      .isEqualTo(STR_TYPE);
+
+    Expression exprWithInheritance2 = lastExpression("""
+      class A:
+        test = True
+      class B(A):
+        test = "hi"
+      class C(B):
+        pass
+      C.test
+      """);
+    assertThat(exprWithInheritance2.typeV2())
+      .isInstanceOf(ObjectType.class)
+      .extracting(PythonType::unwrappedType)
+      .isEqualTo(STR_TYPE);
+
+    Expression exprWithMultiInheritance = lastExpression("""
+      class A:
+          test = "hi"
+      class B: pass
+      class C(A, B):
+        pass
+      C.test
+      """);
+    assertThat(exprWithMultiInheritance.typeV2())
+      .isInstanceOf(ObjectType.class)
+      .extracting(PythonType::unwrappedType)
+      .isEqualTo(STR_TYPE);
+
+    Expression exprWithMultiInheritance2 = lastExpression("""
+      class A:
+        pass
+      class B:
+        test = "hi"
+      class C(A, B):
+        pass
+      C.test
+      """);
+    assertThat(exprWithMultiInheritance2.typeV2())
+      .isInstanceOf(ObjectType.class)
+      .extracting(PythonType::unwrappedType)
+      .isEqualTo(STR_TYPE);
   }
 
   @Test
@@ -685,7 +741,7 @@ public class TypeInferenceV2Test {
     var functionDef = (FunctionDef) root.statements().statements().get(0);
     var lastExpressionStatement = (ExpressionStatement) functionDef.body().statements().get(functionDef.body().statements().size() -1);
     var type = (UnionType) lastExpressionStatement.expressions().get(0).typeV2();
-    
+
     Assertions.assertThat(type.candidates())
       .extracting(PythonType::unwrappedType)
       .containsOnly(INT_TYPE, STR_TYPE);
