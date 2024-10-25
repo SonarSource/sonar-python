@@ -42,7 +42,7 @@ public class PythonTypeToDescriptorConverter {
 
   public Descriptor convert(String moduleFqn, SymbolV2 symbol, Set<PythonType> types) {
     var candidates = types.stream()
-      .map(type -> convert(moduleFqn, symbol.name(), type))
+      .map(type -> convert(moduleFqn, moduleFqn, symbol.name(), type))
       .flatMap(candidate -> {
         if (candidate instanceof AmbiguousDescriptor ambiguousDescriptor) {
           return ambiguousDescriptor.alternatives().stream();
@@ -59,30 +59,30 @@ public class PythonTypeToDescriptorConverter {
     return new AmbiguousDescriptor(symbol.name(), symbolFqn(moduleFqn, symbol.name()), candidates);
   }
 
-  private Descriptor convert(String moduleFqn, String symbolName, PythonType type) {
+  private static Descriptor convert(String moduleFqn, String parentFqn, String symbolName, PythonType type) {
     if (type instanceof FunctionType functionType) {
-      return convert(moduleFqn, symbolName, functionType);
+      return convert(moduleFqn, parentFqn, symbolName, functionType);
     }
     if (type instanceof ClassType classType) {
-      return convert(moduleFqn, symbolName, classType);
+      return convert(moduleFqn, parentFqn, symbolName, classType);
     }
     if (type instanceof UnionType unionType) {
-      return convert(moduleFqn, symbolName, unionType);
+      return convert(moduleFqn, parentFqn, symbolName, unionType);
     }
     if (type instanceof UnknownType.UnresolvedImportType unresolvedImportType) {
-      return convert(moduleFqn, symbolName, unresolvedImportType);
+      return convert(parentFqn, symbolName, unresolvedImportType);
     }
-    return new VariableDescriptor(symbolName, symbolFqn(moduleFqn, symbolName), null);
+    return new VariableDescriptor(symbolName, symbolFqn(parentFqn, symbolName), null);
   }
 
-  private Descriptor convert(String moduleFqn, String symbolName, FunctionType type) {
+  private static Descriptor convert(String moduleFqn, String parentFqn, String symbolName, FunctionType type) {
 
     var parameters = type.parameters()
       .stream()
       .map(parameter -> convert(moduleFqn, parameter))
       .toList();
 
-    return new FunctionDescriptor(symbolName, symbolFqn(moduleFqn, symbolName),
+    return new FunctionDescriptor(symbolName, symbolFqn(parentFqn, symbolName),
       parameters,
       type.isAsynchronous(),
       type.isInstanceMethod(),
@@ -91,13 +91,18 @@ public class PythonTypeToDescriptorConverter {
       type.definitionLocation().orElse(null),
       null,
       null
-      );
+    );
   }
 
-  private Descriptor convert(String moduleFqn, String symbolName, ClassType type) {
-    Set<Descriptor> memberDescriptors = type.members().stream().map(m -> convert(moduleFqn, m.name(), m.type())).collect(Collectors.toSet());
+  private static Descriptor convert(String moduleFqn, String parentFqn, String symbolName, ClassType type) {
+    var symbolFqn = symbolFqn(parentFqn, symbolName);
+    var memberDescriptors = type.members()
+      .stream()
+      .map(m -> convert(moduleFqn, symbolFqn, m.name(), m.type()))
+      .collect(Collectors.toSet());
     List<String> superClasses = type.superClasses().stream().map(TypeWrapper::type).map(t -> typeFqn(moduleFqn, t)).toList();
-    return new ClassDescriptor(symbolName, symbolFqn(moduleFqn, symbolName),
+
+    return new ClassDescriptor(symbolName, symbolFqn,
       superClasses,
       memberDescriptors,
       type.hasDecorators(),
@@ -109,9 +114,9 @@ public class PythonTypeToDescriptorConverter {
     );
   }
 
-  private Descriptor convert(String moduleFqn, String symbolName, UnionType type) {
+  private static Descriptor convert(String moduleFqn, String parentFqn, String symbolName, UnionType type) {
     var candidates = type.candidates().stream()
-      .map(candidateType -> convert(moduleFqn, symbolName, candidateType))
+      .map(candidateType -> convert(moduleFqn, parentFqn, symbolName, candidateType))
       .collect(Collectors.toSet());
     return new AmbiguousDescriptor(symbolName,
       symbolFqn(moduleFqn, symbolName),
@@ -119,14 +124,14 @@ public class PythonTypeToDescriptorConverter {
     );
   }
 
-  private static Descriptor convert(String moduleFqn, String symbolName, UnknownType.UnresolvedImportType type) {
+  private static Descriptor convert(String parentFqn, String symbolName, UnknownType.UnresolvedImportType type) {
     return new VariableDescriptor(symbolName,
-      symbolFqn(moduleFqn, symbolName),
+      symbolFqn(parentFqn, symbolName),
       type.importPath()
     );
   }
 
-  private FunctionDescriptor.Parameter convert(String moduleFqn, ParameterV2 parameter) {
+  private static FunctionDescriptor.Parameter convert(String moduleFqn, ParameterV2 parameter) {
     var type = parameter.declaredType().type().unwrappedType();
     var annotatedType = typeFqn(moduleFqn, type);
 
@@ -135,8 +140,8 @@ public class PythonTypeToDescriptorConverter {
       parameter.hasDefaultValue(),
       parameter.isKeywordOnly(),
       parameter.isPositionalOnly(),
-      parameter.isKeywordVariadic(),
       parameter.isPositionalVariadic(),
+      parameter.isKeywordVariadic(),
       parameter.location());
   }
 
