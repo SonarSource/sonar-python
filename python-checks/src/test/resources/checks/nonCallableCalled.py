@@ -264,7 +264,7 @@ class MyClass:
 
 def foo():
     mc = MyClass()
-    mc.x()
+    mc.x() #Noncompliant
 
 def using_isinstance_with_runtime_type():
     my_non_callable = MyNonCallable()
