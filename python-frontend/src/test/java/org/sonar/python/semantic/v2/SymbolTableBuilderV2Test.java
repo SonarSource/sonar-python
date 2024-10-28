@@ -22,6 +22,7 @@ package org.sonar.python.semantic.v2;
 import java.util.List;
 import java.util.Set;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.FileInput;
@@ -40,23 +41,23 @@ class SymbolTableBuilderV2Test {
     FileInput fileInput = PythonTestUtils.parse(
       """
         import lib
-                
+        
         v = lib.foo()
         a = lib.A()
         b = a.do_something()
         x = 42
-                
+        
         def script_do_something(param):
             c = 42
             return c
-                
+        
         script_do_something()
         """
     );
 
     var symbolTable = new SymbolTableBuilderV2(fileInput)
       .build();
-    
+
     var moduleSymbols = symbolTable.getSymbolsByRootTree(fileInput);
     Assertions.assertThat(moduleSymbols)
       .hasSize(6)
@@ -97,7 +98,7 @@ class SymbolTableBuilderV2Test {
         def script_do_something(param):
             global b
             b = 42
-       
+        
         """
     );
 
@@ -130,7 +131,7 @@ class SymbolTableBuilderV2Test {
             nonlocal a
             a = "hello"
             print(a)
-       
+        
         """
     );
 
@@ -222,6 +223,44 @@ class SymbolTableBuilderV2Test {
     }
 
   }
+
+
+  @Test
+  @Disabled("SONARPY-2259 primitives do not have a symbol")
+  void primitives_have_symbol() {
+    FileInput fileInput = PythonTestUtils.parse("""
+      x = 3
+      x is int
+      
+      float(x)
+      """);
+
+    var symbolTable = new SymbolTableBuilderV2(fileInput)
+      .build();
+
+    var moduleSymbols = symbolTable.getSymbolsByRootTree(fileInput);
+    Assertions.assertThat(moduleSymbols)
+      .extracting(SymbolV2::name)
+      .containsExactlyInAnyOrder("x", "int", "float");
+  }
+
+  @Test
+  @Disabled("SONARPY-2260 variables which are never written to do not have a symbol")
+  void never_written_variables_have_symbol() {
+    FileInput fileInput = PythonTestUtils.parse("""
+      x + 3
+      if x == 3: pass
+      """);
+
+    var symbolTable = new SymbolTableBuilderV2(fileInput)
+      .build();
+
+    var moduleSymbols = symbolTable.getSymbolsByRootTree(fileInput);
+    Assertions.assertThat(moduleSymbols)
+      .extracting(SymbolV2::name)
+      .containsExactlyInAnyOrder("x");
+  }
+
 
   private static void assertNameSymbol(Name name, String expectedSymbolName, int expectedUsagesCount) {
     var symbol = name.symbolV2();
