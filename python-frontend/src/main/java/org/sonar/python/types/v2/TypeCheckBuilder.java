@@ -24,14 +24,14 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import org.sonar.python.semantic.v2.ProjectLevelTypeTable;
+import org.sonar.python.semantic.v2.TypeTable;
 
 public class TypeCheckBuilder {
 
-  ProjectLevelTypeTable projectLevelTypeTable;
+  TypeTable projectLevelTypeTable;
   List<TypePredicate> predicates = new ArrayList<>();
 
-  public TypeCheckBuilder(ProjectLevelTypeTable projectLevelTypeTable) {
+  public TypeCheckBuilder(TypeTable projectLevelTypeTable) {
     this.projectLevelTypeTable = projectLevelTypeTable;
   }
 

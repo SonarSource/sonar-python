@@ -19,6 +19,7 @@
  */
 package org.sonar.plugins.python.api.tree;
 
+import javax.annotation.CheckForNull;
 import org.sonar.api.Beta;
 import org.sonar.python.semantic.v2.SymbolV2;
 
@@ -33,5 +34,6 @@ public interface Name extends Expression, HasSymbol {
   boolean isVariable();
 
   @Beta
+  @CheckForNull
   SymbolV2 symbolV2();
 }
