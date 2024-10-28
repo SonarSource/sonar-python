@@ -150,11 +150,6 @@ public class ProjectLevelSymbolTable {
     return globalDescriptorsByModuleName.get(moduleName);
   }
 
-  @CheckForNull
-  public Set<Descriptor> getDescriptorsFromModuleV2(@Nullable String moduleName) {
-    return globalDescriptorsByModuleName.get(moduleName);
-  }
-
   public Map<String, Set<String>> importsByModule() {
     return Collections.unmodifiableMap(importsByModule);
   }
