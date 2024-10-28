@@ -25,11 +25,15 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Function;
 import java.util.stream.Stream;
 import org.assertj.core.api.Assertions;
 import org.assertj.core.api.InstanceOfAssertFactories;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.Mockito;
 import org.sonar.plugins.python.api.LocationInFile;
 import org.sonar.plugins.python.api.PythonFile;
@@ -77,6 +81,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.PythonTestUtils.parse;
 import static org.sonar.python.PythonTestUtils.parseWithoutSymbols;
 import static org.sonar.python.PythonTestUtils.pythonFile;
+import static org.sonar.python.types.v2.TypesTestUtils.BOOL_TYPE;
 import static org.sonar.python.types.v2.TypesTestUtils.DICT_TYPE;
 import static org.sonar.python.types.v2.TypesTestUtils.EXCEPTION_TYPE;
 import static org.sonar.python.types.v2.TypesTestUtils.FLOAT_TYPE;
@@ -2228,6 +2233,44 @@ public class TypeInferenceV2Test {
       """
     ).typeV2().unwrappedType()).isEqualTo(NONE_TYPE);
   }
+
+  @Test
+  void unary_expression() {
+    Function<Expression, PythonType> exprToType = expr -> expr.typeV2().unwrappedType();
+
+    assertThat(lastExpression("-1")).extracting(exprToType).isEqualTo(INT_TYPE);
+    assertThat(lastExpression("+1")).extracting(exprToType).isEqualTo(INT_TYPE);
+    assertThat(lastExpression("-1.0")).extracting(exprToType).isEqualTo(FLOAT_TYPE);
+    assertThat(lastExpression("+1.0")).extracting(exprToType).isEqualTo(FLOAT_TYPE);
+    assertThat(lastExpression("-True")).extracting(exprToType).isEqualTo(INT_TYPE);
+    assertThat(lastExpression("+True")).extracting(exprToType).isEqualTo(INT_TYPE);
+    assertThat(lastExpression("~1")).extracting(exprToType).isEqualTo(INT_TYPE);
+    assertThat(lastExpression("~True")).extracting(exprToType).isEqualTo(INT_TYPE);
+    assertThat(lastExpression("not True")).extracting(exprToType).isEqualTo(BOOL_TYPE);
+    assertThat(lastExpression("not 1")).extracting(exprToType).isEqualTo(BOOL_TYPE);
+  }
+
+  static Stream<Arguments> unary_expression_of_variables() {
+    return Stream.of(
+      Arguments.of("x = 1; -x", INT_TYPE),
+      Arguments.of("x = 1; +x", INT_TYPE),
+      Arguments.of("x = True; -x", INT_TYPE),
+      Arguments.of("x = True; +x", INT_TYPE),
+      Arguments.of("x = True; ~x", INT_TYPE),
+      Arguments.of("x = True; not x", BOOL_TYPE),
+      Arguments.of("x = 1; not x", BOOL_TYPE),
+
+      Arguments.of("x = 1; -(x + 1)", INT_TYPE)
+    );
+  }
+
+  @Disabled("SONARPY-2257 unary expressions of non-literals do not propagate their type")
+  @ParameterizedTest
+  @MethodSource("unary_expression_of_variables")
+  void unary_expression_of_variables(String code, PythonType expectedType) {
+    assertThat(lastExpression(code)).extracting(expr -> expr.typeV2().unwrappedType()).isEqualTo(expectedType);
+  }
+
 
   @Test
   void imported_ambiguous_symbol() {

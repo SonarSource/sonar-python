@@ -31,6 +31,7 @@ import org.sonar.plugins.python.api.tree.TreeVisitor;
 import org.sonar.plugins.python.api.tree.UnaryExpression;
 import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.types.InferredTypes;
+import org.sonar.python.types.v2.PythonType;
 
 public class UnaryExpressionImpl extends PyTree implements UnaryExpression {
 
@@ -39,6 +40,7 @@ public class UnaryExpressionImpl extends PyTree implements UnaryExpression {
   private final Kind kind;
   private final Token operator;
   private final Expression expression;
+  private PythonType type = PythonType.UNKNOWN;
 
   private static Map<String, Kind> kindsByOperator() {
     Map<String, Kind> map = new HashMap<>();
@@ -89,5 +91,15 @@ public class UnaryExpressionImpl extends PyTree implements UnaryExpression {
       return expression.type();
     }
     return InferredTypes.anyType();
+  }
+
+  public UnaryExpression typeV2(PythonType type) {
+    this.type = type;
+    return this;
+  }
+
+  @Override
+  public PythonType typeV2() {
+    return type;
   }
 }
