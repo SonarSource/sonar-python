@@ -60,7 +60,7 @@ public class FunctionTypeBuilder implements TypeBuilder<FunctionType> {
   private static final String CLASS_METHOD_DECORATOR = "classmethod";
   private static final String STATIC_METHOD_DECORATOR = "staticmethod";
 
-  public FunctionTypeBuilder fromFunctionDef(FunctionDef functionDef, @Nullable String fileId, ProjectLevelTypeTable projectLevelTypeTable) {
+  public FunctionTypeBuilder fromFunctionDef(FunctionDef functionDef, @Nullable String fileId, TypeTable projectLevelTypeTable) {
     this.name = functionDef.name().name();
     this.attributes = new ArrayList<>();
     this.parameters = new ArrayList<>();
@@ -155,7 +155,7 @@ public class FunctionTypeBuilder implements TypeBuilder<FunctionType> {
     return this;
   }
 
-  private void createParameterNames(List<AnyParameter> parameterTrees, @Nullable String fileId, ProjectLevelTypeTable projectLevelTypeTable) {
+  private void createParameterNames(List<AnyParameter> parameterTrees, @Nullable String fileId, TypeTable projectLevelTypeTable) {
     ParameterState parameterState = new ParameterState();
     parameterState.positionalOnly = parameterTrees.stream().anyMatch(param -> Optional.of(param)
       .filter(p -> p.is(Tree.Kind.PARAMETER))
@@ -174,7 +174,7 @@ public class FunctionTypeBuilder implements TypeBuilder<FunctionType> {
     }
   }
 
-  private void addParameter(Parameter parameter, @Nullable String fileId, ParameterState parameterState, ProjectLevelTypeTable projectLevelTypeTable) {
+  private void addParameter(Parameter parameter, @Nullable String fileId, ParameterState parameterState, TypeTable projectLevelTypeTable) {
     Name parameterName = parameter.name();
     Token starToken = parameter.starToken();
     if (parameterName != null) {
@@ -197,7 +197,7 @@ public class FunctionTypeBuilder implements TypeBuilder<FunctionType> {
     }
   }
 
-  private ParameterType getParameterType(Parameter parameter, ProjectLevelTypeTable projectLevelTypeTable) {
+  private ParameterType getParameterType(Parameter parameter, TypeTable projectLevelTypeTable) {
     boolean isPositionalVariadic = false;
     boolean isKeywordVariadic = false;
     Token starToken = parameter.starToken();

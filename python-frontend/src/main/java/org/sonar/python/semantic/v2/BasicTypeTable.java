@@ -1,4 +1,3 @@
-
 /*
  * SonarQube Python Plugin
  * Copyright (C) 2011-2024 SonarSource SA
@@ -18,34 +17,35 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.types.v2;
+package org.sonar.python.semantic.v2;
 
-import java.util.Optional;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-import org.sonar.api.Beta;
+import java.util.List;
+import org.sonar.python.types.v2.PythonType;
+import org.sonar.python.types.v2.UnknownType;
 
-@Beta
-public sealed interface UnknownType extends PythonType {
+public class BasicTypeTable implements TypeTable {
+  @Override
+  public PythonType getBuiltinsModule() {
+    return new UnknownType.UnresolvedImportType("");
+  }
 
   @Override
-  default boolean isCompatibleWith(PythonType another) {
-    return true;
+  public PythonType getType(String typeFqn) {
+    return new UnknownType.UnresolvedImportType(typeFqn);
   }
 
-  final class UnknownTypeImpl implements UnknownType {
-    UnknownTypeImpl() {
-    }
+  @Override
+  public PythonType getType(String... typeFqnParts) {
+    return new UnknownType.UnresolvedImportType(String.join(".", typeFqnParts));
   }
 
-  record UnresolvedImportType(String importPath) implements UnknownType {
-    @Override
-    public Optional<PythonType> resolveMember(String memberName) {
-      var memberFqn = Stream.of(importPath, memberName)
-        .filter(Predicate.not(String::isEmpty))
-        .collect(Collectors.joining("."));
-      return Optional.of(new UnresolvedImportType(memberFqn));
-    }
+  @Override
+  public PythonType getType(List<String> typeFqnParts) {
+    return new UnknownType.UnresolvedImportType(String.join(".", typeFqnParts));
+  }
+
+  @Override
+  public PythonType getModuleType(List<String> typeFqnParts) {
+    return new UnknownType.UnresolvedImportType(String.join(".", typeFqnParts));
   }
 }
