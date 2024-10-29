@@ -261,10 +261,12 @@ def call_non_callable_property():
 
 class MyClass:
     x = 42
+    my_classmethod = classmethod(...)
 
 def foo():
     mc = MyClass()
-    mc.x() #Noncompliant
+    mc.x() # FN
+    mc.my_classmethod() # OK
 
 def using_isinstance_with_runtime_type():
     my_non_callable = MyNonCallable()
