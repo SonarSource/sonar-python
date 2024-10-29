@@ -33,7 +33,6 @@ win_vm_definition: &WINDOWS_VM_DEFINITION
     platform: windows
     region: eu-central-1
     type: t3.xlarge
-    subnet_id: ${CIRRUS_AWS_SUBNET}
     use_ssd: true
 
 build_container_definition: &BUILD_CONTAINER_DEFINITION
@@ -45,7 +44,6 @@ build_container_definition: &BUILD_CONTAINER_DEFINITION
     builder_role: cirrus-builder
     builder_image: docker-builder-v*
     builder_instance_type: t3.small
-    builder_subnet_id: ${CIRRUS_AWS_SUBNET}
     region: eu-central-1
     namespace: default
     cpu: 2
