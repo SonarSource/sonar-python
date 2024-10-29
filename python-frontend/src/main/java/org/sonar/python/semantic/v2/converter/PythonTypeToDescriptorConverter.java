@@ -59,7 +59,7 @@ public class PythonTypeToDescriptorConverter {
     return new AmbiguousDescriptor(symbol.name(), symbolFqn(moduleFqn, symbol.name()), candidates);
   }
 
-  private Descriptor convert(String moduleFqn, String parentFqn, String symbolName, PythonType type) {
+  private static Descriptor convert(String moduleFqn, String parentFqn, String symbolName, PythonType type) {
     if (type instanceof FunctionType functionType) {
       return convert(moduleFqn, parentFqn, symbolName, functionType);
     }
@@ -75,7 +75,7 @@ public class PythonTypeToDescriptorConverter {
     return new VariableDescriptor(symbolName, symbolFqn(parentFqn, symbolName), null);
   }
 
-  private Descriptor convert(String moduleFqn, String parentFqn, String symbolName, FunctionType type) {
+  private static Descriptor convert(String moduleFqn, String parentFqn, String symbolName, FunctionType type) {
 
     var parameters = type.parameters()
       .stream()
@@ -94,7 +94,7 @@ public class PythonTypeToDescriptorConverter {
     );
   }
 
-  private Descriptor convert(String moduleFqn, String parentFqn, String symbolName, ClassType type) {
+  private static Descriptor convert(String moduleFqn, String parentFqn, String symbolName, ClassType type) {
     var symbolFqn = symbolFqn(parentFqn, symbolName);
     var memberDescriptors = type.members()
       .stream()
@@ -114,7 +114,7 @@ public class PythonTypeToDescriptorConverter {
     );
   }
 
-  private Descriptor convert(String moduleFqn, String parentFqn, String symbolName, UnionType type) {
+  private static Descriptor convert(String moduleFqn, String parentFqn, String symbolName, UnionType type) {
     var candidates = type.candidates().stream()
       .map(candidateType -> convert(moduleFqn, parentFqn, symbolName, candidateType))
       .collect(Collectors.toSet());
@@ -131,7 +131,7 @@ public class PythonTypeToDescriptorConverter {
     );
   }
 
-  private FunctionDescriptor.Parameter convert(String moduleFqn, ParameterV2 parameter) {
+  private static FunctionDescriptor.Parameter convert(String moduleFqn, ParameterV2 parameter) {
     var type = parameter.declaredType().type().unwrappedType();
     var annotatedType = typeFqn(moduleFqn, type);
 
