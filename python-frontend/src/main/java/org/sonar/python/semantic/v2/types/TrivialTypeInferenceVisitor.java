@@ -407,8 +407,7 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
 
   private void addStaticFieldToClass(Name name) {
     if (currentType() instanceof ClassType ownerClass) {
-      PythonType memberType = name.symbolV2().hasSingleBindingUsage() ? name.typeV2() : PythonType.UNKNOWN;
-      ownerClass.members().add(new Member(name.name(), memberType));
+      ownerClass.members().add(new Member(name.name(), PythonType.UNKNOWN));
     }
   }
 

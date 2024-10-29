@@ -418,9 +418,7 @@ public class TypeInferenceV2Test {
       D.B
       """);
     assertThat(exprWithMultiInheritance1.typeV2())
-      .isInstanceOf(ObjectType.class)
-      .extracting(PythonType::unwrappedType)
-      .isEqualTo(STR_TYPE);
+      .isInstanceOf(UnknownType.class);
 
     Expression exprWithMultiInheritance2 = lastExpression("""
       class A:
@@ -444,9 +442,7 @@ public class TypeInferenceV2Test {
       A.test
       """);
     assertThat(expr.typeV2())
-      .isInstanceOf(ObjectType.class)
-      .extracting(PythonType::unwrappedType)
-      .isEqualTo(STR_TYPE);
+      .isInstanceOf(UnknownType.class);
 
     Expression expr2 = lastExpression("""
       class A:
@@ -468,9 +464,7 @@ public class TypeInferenceV2Test {
       B.test
       """);
     assertThat(exprWithInheritance.typeV2())
-      .isInstanceOf(ObjectType.class)
-      .extracting(PythonType::unwrappedType)
-      .isEqualTo(STR_TYPE);
+      .isInstanceOf(UnknownType.class);
 
     Expression exprWithInheritance2 = lastExpression("""
       class A:
@@ -482,9 +476,7 @@ public class TypeInferenceV2Test {
       C.test
       """);
     assertThat(exprWithInheritance2.typeV2())
-      .isInstanceOf(ObjectType.class)
-      .extracting(PythonType::unwrappedType)
-      .isEqualTo(STR_TYPE);
+      .isInstanceOf(UnknownType.class);
 
     Expression exprWithMultiInheritance = lastExpression("""
       class A:
@@ -495,9 +487,7 @@ public class TypeInferenceV2Test {
       C.test
       """);
     assertThat(exprWithMultiInheritance.typeV2())
-      .isInstanceOf(ObjectType.class)
-      .extracting(PythonType::unwrappedType)
-      .isEqualTo(STR_TYPE);
+      .isInstanceOf(UnknownType.class);
 
     Expression exprWithMultiInheritance2 = lastExpression("""
       class A:
@@ -509,9 +499,7 @@ public class TypeInferenceV2Test {
       C.test
       """);
     assertThat(exprWithMultiInheritance2.typeV2())
-      .isInstanceOf(ObjectType.class)
-      .extracting(PythonType::unwrappedType)
-      .isEqualTo(STR_TYPE);
+      .isInstanceOf(UnknownType.class);
   }
 
   @Test
