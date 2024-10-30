@@ -34,6 +34,7 @@ import org.sonar.python.quickfix.TextEditUtils;
 import org.sonar.python.semantic.v2.SymbolV2;
 import org.sonar.python.semantic.v2.UsageV2;
 import org.sonar.python.tree.TreeUtils;
+import org.sonar.python.types.v2.ObjectType;
 import org.sonar.python.types.v2.PythonType;
 import org.sonar.python.types.v2.TriBool;
 import org.sonar.python.types.v2.TypeCheckBuilder;
@@ -147,7 +148,7 @@ public class IdentityComparisonWithCachedTypesCheck extends PythonSubscriptionCh
   private boolean isUnsuitableType(PythonType type) {
     for (String builtinName : NAMES_OF_TYPES_UNSUITABLE_FOR_COMPARISON) {
       TypeCheckBuilder builtinWithNameChecker = typeChecker.typeCheckBuilder().isBuiltinWithName(builtinName);
-      if (builtinWithNameChecker.check(type) == TriBool.TRUE) {
+      if (type instanceof ObjectType && builtinWithNameChecker.check(type) == TriBool.TRUE) {
         return true;
       }
     }
