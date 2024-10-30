@@ -61,6 +61,11 @@ public class TypeCheckBuilder {
     return this;
   }
 
+  public TypeCheckBuilder isInstance() {
+    predicates.add(new IsInstancePredicate());
+    return this;
+  }
+
   public TriBool check(PythonType pythonType) {
     TriBool result = TriBool.TRUE;
     for (TypePredicate predicate : predicates) {
@@ -161,7 +166,7 @@ public class TypeCheckBuilder {
     }
   }
 
-  record IsInstanceOfPredicate(PythonType expectedType)  implements TypePredicate {
+  record IsInstanceOfPredicate(PythonType expectedType) implements TypePredicate {
 
     @Override
     public TriBool test(PythonType pythonType) {
@@ -245,6 +250,22 @@ public class TypeCheckBuilder {
         }
       }
       return result;
+    }
+
+  }
+
+  record IsInstancePredicate() implements TypePredicate {
+
+    @Override
+    public TriBool test(PythonType pythonType) {
+      Set<PythonType> candiates = Set.of(pythonType);
+      if (pythonType instanceof UnionType unionType) {
+        candiates = unionType.candidates();
+      }
+      if (candiates.stream().allMatch(ObjectType.class::isInstance)) {
+        return TriBool.TRUE;
+      }
+      return TriBool.FALSE;
     }
   }
 

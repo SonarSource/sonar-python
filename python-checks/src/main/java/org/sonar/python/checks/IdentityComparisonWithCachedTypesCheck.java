@@ -146,7 +146,7 @@ public class IdentityComparisonWithCachedTypesCheck extends PythonSubscriptionCh
 
   private boolean isUnsuitableType(PythonType type) {
     for (String builtinName : NAMES_OF_TYPES_UNSUITABLE_FOR_COMPARISON) {
-      TypeCheckBuilder builtinWithNameChecker = typeChecker.typeCheckBuilder().isBuiltinWithName(builtinName);
+      TypeCheckBuilder builtinWithNameChecker = typeChecker.typeCheckBuilder().isInstance().isBuiltinWithName(builtinName);
       if (builtinWithNameChecker.check(type) == TriBool.TRUE) {
         return true;
       }

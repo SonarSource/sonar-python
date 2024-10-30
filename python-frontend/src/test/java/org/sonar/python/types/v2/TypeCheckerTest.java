@@ -294,4 +294,32 @@ class TypeCheckerTest {
     assertThat(localTypeChecker.typeCheckBuilder().isTypeOrInstanceWithName("my_package.mod.B").check(aType)).isEqualTo(TriBool.FALSE);
     assertThat(localTypeChecker.typeCheckBuilder().isTypeOrInstanceWithName("my_package.unknown.A").check(aType)).isEqualTo(TriBool.UNKNOWN);
   }
+
+
+  @Test
+  void testIsInstance() {
+    var symbolTable = ProjectLevelSymbolTable.empty();
+    var table = new ProjectLevelTypeTable(symbolTable);
+    var builder = new TypeCheckBuilder(table).isInstance();
+
+    var intType = table.getType("int");
+    var floatType = table.getType("float");
+
+    var unionOfAllObjects = UnionType.or(new ObjectType(intType), new ObjectType(floatType));
+    var unionOfSomeObjects = UnionType.or(new ObjectType(intType), floatType);
+    var unionOfNoObjects = UnionType.or(intType, floatType);
+
+    assertThat(builder.check(new ObjectType(intType)))
+      .isEqualTo(TriBool.TRUE);
+
+    assertThat(builder.check(intType))
+      .isEqualTo(TriBool.FALSE);
+
+    assertThat(builder.check(unionOfAllObjects))
+      .isEqualTo(TriBool.TRUE);
+    assertThat(builder.check(unionOfSomeObjects))
+      .isEqualTo(TriBool.FALSE);
+    assertThat(builder.check(unionOfNoObjects))
+      .isEqualTo(TriBool.FALSE);
+  }
 }
