@@ -14,6 +14,7 @@ jobs:
     if: |
         github.event.pull_request.head.repo.full_name == github.repository
         && github.event.sender.type != 'Bot'
+        && ${{ !startsWith(github.event.pull_request.title, 'NO-JIRA') }}
     steps:
       - id: secrets
         uses: SonarSource/vault-action-wrapper@v3
