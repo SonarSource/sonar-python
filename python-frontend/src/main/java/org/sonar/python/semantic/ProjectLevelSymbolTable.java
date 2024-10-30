@@ -150,11 +150,6 @@ public class ProjectLevelSymbolTable {
     return globalDescriptorsByModuleName.get(moduleName);
   }
 
-  @CheckForNull
-  public Set<Descriptor> getDescriptorsFromModuleV2(@Nullable String moduleName) {
-    return globalDescriptorsByModuleName.get(moduleName);
-  }
-
   public Map<String, Set<String>> importsByModule() {
     return Collections.unmodifiableMap(importsByModule);
   }
@@ -189,6 +184,7 @@ public class ProjectLevelSymbolTable {
 
 
   private void addModuleV2(FileInput astRoot, String packageName, PythonFile pythonFile) {
+    // TODO: inline in addModule
     var fullyQualifiedModuleName = SymbolUtils.fullyQualifiedModuleName(packageName, pythonFile.fileName());
     var symbolTable = new SymbolTableBuilderV2(astRoot).build();
     var typeInferenceV2 = new TypeInferenceV2(new BasicTypeTable(), pythonFile, symbolTable, packageName);

@@ -54,7 +54,7 @@ class SonarLintPythonIndexerProjectLevelSymbolTableBuildingTest {
   void single_file_simple_test() throws IOException {
     var projectLevelSymbolTable = buildProjectLevelSymbolTable("script.py");
     assertThat(projectLevelSymbolTable.getDescriptorsFromModule("script")).hasSize(4);
-    Set<Descriptor> moduleDescriptors = projectLevelSymbolTable.getDescriptorsFromModuleV2("script");
+    Set<Descriptor> moduleDescriptors = projectLevelSymbolTable.getDescriptorsFromModule("script");
     assertThat(moduleDescriptors).hasSize(4);
 
     var aClassDescriptor = moduleDescriptors
@@ -83,7 +83,7 @@ class SonarLintPythonIndexerProjectLevelSymbolTableBuildingTest {
   void multiple_files_simple_test() throws IOException {
     var projectLevelSymbolTable = buildProjectLevelSymbolTable("mod1.py", "mod2.py");
     assertThat(projectLevelSymbolTable.getDescriptorsFromModule("mod1")).hasSize(1);
-    assertThat(projectLevelSymbolTable.getDescriptorsFromModuleV2("mod2")).hasSize(1);
+    assertThat(projectLevelSymbolTable.getDescriptorsFromModule("mod2")).hasSize(1);
   }
 
   private ProjectLevelSymbolTable buildProjectLevelSymbolTable(String... files) throws IOException {
