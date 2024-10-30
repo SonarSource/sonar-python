@@ -214,3 +214,20 @@ def logging_api():
 def foo(day, tz):
     b = datetime.date.fromordinal(day).replace(tzinfo=tz) # FN SONARPY-1472
     a = datetime.datetime.fromordinal(day).replace(tzinfo=tz) # OK
+
+
+def bound_and_unbound_methods():
+    class ClassWithMethod:
+        def some_method(self, param): ...
+
+    unbound_method = ClassWithMethod.some_method
+    bound_method = ClassWithMethod().some_method
+
+    unbound_method(1, 2) # OK
+    bound_method(1) # OK
+
+    unbound_method() # FN SONARPY-2285
+    unbound_method(1) # FN SONARPY-2285
+    unbound_method(1, 2, 3) # FN SONARPY-2285
+    bound_method() # FN SONARPY-2285
+    bound_method(1, 2) # FN SONARPY-2285
