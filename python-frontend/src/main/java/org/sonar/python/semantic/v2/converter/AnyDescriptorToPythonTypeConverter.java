@@ -57,15 +57,15 @@ public class AnyDescriptorToPythonTypeConverter {
         // We create lazy types for descriptors that are not local to the module
         result = lazyTypesContext.getOrCreateLazyType(fullyQualifiedName);
       } else {
-        result = this.convert(descriptor, TypeOrigin.STUB);
+        result = this.convert(moduleFqn, descriptor, TypeOrigin.STUB);
       }
       moduleMembers.put(name, TypeWrapper.of(result));
     }
     return moduleMembers;
   }
 
-  public PythonType convert(Descriptor from, TypeOrigin typeOrigin) {
-    var ctx = new ConversionContext(lazyTypesContext, this::convert, typeOrigin);
+  public PythonType convert(String moduleFqn, Descriptor from, TypeOrigin typeOrigin) {
+    var ctx = new ConversionContext(moduleFqn, lazyTypesContext, this::convert, typeOrigin);
     return convert(ctx, from);
   }
 

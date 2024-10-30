@@ -27,12 +27,14 @@ import org.sonar.python.types.v2.PythonType;
 import org.sonar.python.types.v2.TypeOrigin;
 
 public class ConversionContext {
+  private final String moduleFqn;
   private final LazyTypesContext lazyTypesContext;
   private final DescriptorToPythonTypeConverter converter;
   private final Deque<PythonType> parents;
   private final TypeOrigin typeOrigin;
 
-  public ConversionContext(LazyTypesContext lazyTypesContext, DescriptorToPythonTypeConverter converter, TypeOrigin typeOrigin) {
+  public ConversionContext(String moduleFqn, LazyTypesContext lazyTypesContext, DescriptorToPythonTypeConverter converter, TypeOrigin typeOrigin) {
+    this.moduleFqn = moduleFqn;
     this.lazyTypesContext = lazyTypesContext;
     this.converter = converter;
     this.parents = new ArrayDeque<>();
@@ -61,5 +63,9 @@ public class ConversionContext {
 
   public PythonType pollParent() {
     return parents.poll();
+  }
+
+  public String moduleFqn() {
+    return moduleFqn;
   }
 }
