@@ -33,7 +33,7 @@ class ConversionContextTest {
   void lazyTypeContextTest() {
     var expectedLazyTypeContext = Mockito.mock(LazyTypesContext.class);
     var rootConverter = Mockito.mock(DescriptorToPythonTypeConverter.class);
-    var ctx = new ConversionContext(expectedLazyTypeContext, rootConverter, TypeOrigin.LOCAL);
+    var ctx = new ConversionContext("", expectedLazyTypeContext, rootConverter, TypeOrigin.LOCAL);
     var lazyTypesContext = ctx.lazyTypesContext();
     Assertions.assertSame(expectedLazyTypeContext, lazyTypesContext);
   }
@@ -42,7 +42,7 @@ class ConversionContextTest {
   void parentsTest() {
     var expectedLazyTypeContext = Mockito.mock(LazyTypesContext.class);
     var rootConverter = Mockito.mock(DescriptorToPythonTypeConverter.class);
-    var ctx = new ConversionContext(expectedLazyTypeContext, rootConverter, TypeOrigin.LOCAL);
+    var ctx = new ConversionContext("", expectedLazyTypeContext, rootConverter, TypeOrigin.LOCAL);
     var firstParent = Mockito.mock(PythonType.class);
     var secondParent = Mockito.mock(PythonType.class);
 
@@ -64,7 +64,7 @@ class ConversionContextTest {
 
     var lazyTypeContext = Mockito.mock(LazyTypesContext.class);
     var rootConverter = Mockito.mock(DescriptorToPythonTypeConverter.class);
-    var ctx = new ConversionContext(lazyTypeContext, rootConverter, TypeOrigin.LOCAL);
+    var ctx = new ConversionContext("", lazyTypeContext, rootConverter, TypeOrigin.LOCAL);
 
     Mockito.when(rootConverter.convert(ctx, descriptor))
       .thenReturn(expectedType);

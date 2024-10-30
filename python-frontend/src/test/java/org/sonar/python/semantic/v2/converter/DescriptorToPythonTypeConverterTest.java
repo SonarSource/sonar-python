@@ -104,7 +104,7 @@ class DescriptorToPythonTypeConverterTest {
     Mockito.when(descriptor.kind()).thenReturn(Descriptor.Kind.AMBIGUOUS);
     Mockito.when(descriptor.alternatives()).thenReturn(Set.of(descriptorAlternative1, descriptorAlternative2));
 
-    var type = (UnionType) converter.convert(descriptor, TypeOrigin.LOCAL);
+    var type = (UnionType) converter.convert("", descriptor, TypeOrigin.LOCAL);
     Assertions.assertThat(type.candidates())
       .hasSize(2);
 
@@ -141,7 +141,7 @@ class DescriptorToPythonTypeConverterTest {
     Mockito.when(lazyTypesContext.resolveLazyType(Mockito.argThat(lt -> parentClassName.equals(lt.importPath()))))
       .thenReturn(resolvedParent);
 
-    var type = (ClassType) converter.convert(descriptor, TypeOrigin.LOCAL);
+    var type = (ClassType) converter.convert("", descriptor, TypeOrigin.LOCAL);
     Assertions.assertThat(type.name()).isEqualTo("Sample");
     
     Assertions.assertThat(type.superClasses())
@@ -190,7 +190,7 @@ class DescriptorToPythonTypeConverterTest {
     Mockito.when(lazyTypesContext.resolveLazyType(Mockito.argThat(lt -> returnTypeName.equals(lt.importPath()))))
       .thenReturn(resolvedReturnType);
 
-    var type = (FunctionType) converter.convert(descriptor, TypeOrigin.LOCAL);
+    var type = (FunctionType) converter.convert("", descriptor, TypeOrigin.LOCAL);
     Assertions.assertThat(type.name()).isEqualTo("Sample");
 
     Assertions.assertThat(type.parameters()).hasSize(1);
@@ -223,7 +223,7 @@ class DescriptorToPythonTypeConverterTest {
     Mockito.when(lazyTypesContext.resolveLazyType(Mockito.argThat(lt -> variableTypeName.equals(lt.importPath()))))
       .thenReturn(resolvedVariableType);
 
-    var type = (ObjectType) converter.convert(descriptor, TypeOrigin.LOCAL);
+    var type = (ObjectType) converter.convert("", descriptor, TypeOrigin.LOCAL);
     Assertions.assertThat(type)
       .extracting(PythonType::unwrappedType)
       .isSameAs(resolvedVariableType);

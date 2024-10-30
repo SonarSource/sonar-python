@@ -55,7 +55,7 @@ public class SymbolsModuleTypeProvider {
     var rootModuleMembers = projectLevelSymbolTable.typeShedDescriptorsProvider().builtinDescriptors()
       .entrySet()
       .stream()
-      .collect(Collectors.toMap(Map.Entry::getKey, e -> TypeWrapper.of(anyDescriptorToPythonTypeConverter.convert(e.getValue(), TypeOrigin.STUB))));
+      .collect(Collectors.toMap(Map.Entry::getKey, e -> TypeWrapper.of(anyDescriptorToPythonTypeConverter.convert("", e.getValue(), TypeOrigin.STUB))));
     this.rootModule = new ModuleType(null, null, rootModuleMembers);
   }
 
@@ -83,7 +83,10 @@ public class SymbolsModuleTypeProvider {
     if (retrieved == null) {
       return Optional.empty();
     }
-    var members = retrieved.stream().collect(Collectors.toMap(Descriptor::name, d -> TypeWrapper.of(anyDescriptorToPythonTypeConverter.convert(d, TypeOrigin.LOCAL))));
+    var members = retrieved.stream()
+      .collect(Collectors.toMap(Descriptor::name,
+        d -> TypeWrapper.of(anyDescriptorToPythonTypeConverter.convert(moduleFqn, d, TypeOrigin.LOCAL))
+      ));
     return Optional.of(createModuleType(moduleName, moduleFqn, parent, members));
   }
 

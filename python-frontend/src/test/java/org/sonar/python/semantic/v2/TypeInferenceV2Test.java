@@ -652,7 +652,7 @@ public class TypeInferenceV2Test {
 
     CallExpression callExpressionSpy = Mockito.spy(callExpression);
     Expression calleeSpy = Mockito.spy(callExpression.callee());
-    FunctionType functionType = new FunctionType("foo", List.of(), List.of(), new SimpleTypeWrapper(new ObjectType(INT_TYPE)), TypeOrigin.STUB, false, false, false, false, null, null);
+    FunctionType functionType = new FunctionType("foo", List.of(), List.of(), List.of(), new SimpleTypeWrapper(new ObjectType(INT_TYPE)), TypeOrigin.STUB, false, false, false, false, null, null);
     Mockito.when(calleeSpy.typeV2()).thenReturn(functionType);
     Mockito.when(callExpressionSpy.callee()).thenReturn(calleeSpy);
 
@@ -2913,6 +2913,75 @@ public class TypeInferenceV2Test {
       continue
       """);
     assertThat(typesBySymbol).isEmpty();
+  }
+
+  @Test
+  void functionTypeUnknownDecoratorsTest() {
+    var fileInput = inferTypes("""
+      @unknown
+      def foo(): ...
+      """);
+
+    var fooName = TreeUtils.firstChild(fileInput, FunctionDef.class::isInstance)
+      .map(FunctionDef.class::cast)
+      .map(FunctionDef::name)
+      .get();
+
+    var type = fooName.typeV2();
+    assertThat(type).isInstanceOfSatisfying(FunctionType.class, functionType -> {
+      assertThat(functionType.decorators()).hasSize(1)
+        .extracting(TypeWrapper::type)
+        .containsOnly(PythonType.UNKNOWN);
+    });
+  }
+
+  @Test
+  void functionTypeLocallyDefinedDecoratorTest() {
+    var fileInput = inferTypes("""
+      def known_decorator(): ...
+      @known_decorator
+      def foo(): ...
+      """);
+
+    var knownDecoratorName = TreeUtils.firstChild(fileInput.statements().statements().get(0), FunctionDef.class::isInstance)
+      .map(FunctionDef.class::cast)
+      .map(FunctionDef::name)
+      .get();
+
+    var knownDecoratorType = knownDecoratorName.typeV2();
+
+    var fooName = TreeUtils.firstChild(fileInput.statements().statements().get(1), FunctionDef.class::isInstance)
+      .map(FunctionDef.class::cast)
+      .map(FunctionDef::name)
+      .get();
+
+    var fooType = fooName.typeV2();
+    assertThat(fooType).isInstanceOfSatisfying(FunctionType.class, functionType -> {
+      assertThat(functionType.decorators()).hasSize(1)
+        .extracting(TypeWrapper::type)
+        .containsOnly(knownDecoratorType);
+    });
+  }
+
+  @Test
+  void functionTypeQualifiedExpressionDecoratorTest() {
+    var fileInput = inferTypes("""
+      import lib.unknown
+      @lib.unknown.known_decorator
+      def foo(): ...
+      """);
+
+    var fooName = TreeUtils.firstChild(fileInput.statements().statements().get(1), FunctionDef.class::isInstance)
+      .map(FunctionDef.class::cast)
+      .map(FunctionDef::name)
+      .get();
+
+    var fooType = fooName.typeV2();
+    assertThat(fooType).isInstanceOfSatisfying(FunctionType.class, functionType -> assertThat(functionType.decorators()).hasSize(1)
+      .extracting(TypeWrapper::type)
+      .extracting(UnresolvedImportType.class::cast)
+      .extracting(UnresolvedImportType::importPath)
+      .containsOnly("lib.unknown.known_decorator"));
   }
 
   private static Map<SymbolV2, Set<PythonType>> inferTypesBySymbol(String lines) {

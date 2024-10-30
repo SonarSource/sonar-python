@@ -21,12 +21,16 @@ package org.sonar.python.semantic.v2.converter;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import org.sonar.python.index.Descriptor;
 import org.sonar.python.index.FunctionDescriptor;
 import org.sonar.python.semantic.v2.FunctionTypeBuilder;
 import org.sonar.python.types.v2.ParameterV2;
 import org.sonar.python.types.v2.PythonType;
 import org.sonar.python.types.v2.TypeUtils;
+import org.sonar.python.types.v2.TypeWrapper;
 
 public class FunctionDescriptorToPythonTypeConverter implements DescriptorToPythonTypeConverter {
 
@@ -49,6 +53,15 @@ public class FunctionDescriptorToPythonTypeConverter implements DescriptorToPyth
       .map(TypeUtils::ensureWrappedObjectType)
       .orElse(PythonType.UNKNOWN);
 
+    var decorators = from.decorators()
+      .stream()
+      .map(decoratorName -> Stream.of(ctx.moduleFqn(), decoratorName)
+        .filter(Predicate.not(String::isEmpty))
+        .collect(Collectors.joining(".")))
+      .map(ctx.lazyTypesContext()::getOrCreateLazyType)
+      .map(TypeWrapper::of)
+      .toList();
+
     var typeOrigin = ctx.typeOrigin();
 
     var hasVariadicParameter = hasVariadicParameter(parameters);
@@ -57,6 +70,7 @@ public class FunctionDescriptorToPythonTypeConverter implements DescriptorToPyth
       .withOwner(ctx.currentParent())
       .withName(from.name())
       .withParameters(parameters)
+      .withDecorators(decorators)
       .withReturnType(returnType)
       .withTypeOrigin(typeOrigin)
       .withAsynchronous(from.isAsynchronous())
