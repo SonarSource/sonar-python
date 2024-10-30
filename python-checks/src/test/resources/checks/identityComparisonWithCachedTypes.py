@@ -157,6 +157,6 @@ def potential_null_symbols():
     type(arr) is tuple
     some_thing is other_thing
 
-def unknown_is_not_type(arg):
+def comparison_to_class(arg):
     import typing
     arg is not typing.Tuple

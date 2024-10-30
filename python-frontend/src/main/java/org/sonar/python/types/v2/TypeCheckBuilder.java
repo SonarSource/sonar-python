@@ -61,6 +61,11 @@ public class TypeCheckBuilder {
     return this;
   }
 
+  public TypeCheckBuilder isInstance() {
+    predicates.add(new IsInstancePredicate());
+    return this;
+  }
+
   public TriBool check(PythonType pythonType) {
     TriBool result = TriBool.TRUE;
     for (TypePredicate predicate : predicates) {
@@ -245,6 +250,18 @@ public class TypeCheckBuilder {
         }
       }
       return result;
+    }
+
+  }
+
+  record IsInstancePredicate() implements TypePredicate {
+
+    @Override
+    public TriBool test(PythonType pythonType) {
+      if (pythonType instanceof ObjectType) {
+        return TriBool.TRUE;
+      }
+      return TriBool.FALSE;
     }
   }
 
