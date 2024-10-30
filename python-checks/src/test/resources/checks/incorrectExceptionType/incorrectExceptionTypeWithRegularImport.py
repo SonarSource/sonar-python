@@ -38,7 +38,7 @@ def raise_nested_non_exception_class():
   raise Enclsoing.Nested() # FN as only top-level imported symbols are considered
 
 def raise_RedefinedBaseExceptionChild():
-  raise RedefinedBaseExceptionChild() # FN
+  raise RedefinedBaseExceptionChild() # Noncompliant
 
 def raise_ChildOfActualException():
   raise ChildOfActualException() # OK
