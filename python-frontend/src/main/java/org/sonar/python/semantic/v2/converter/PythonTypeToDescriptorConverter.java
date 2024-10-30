@@ -31,6 +31,7 @@ import org.sonar.python.index.Descriptor;
 import org.sonar.python.index.FunctionDescriptor;
 import org.sonar.python.index.VariableDescriptor;
 import org.sonar.python.semantic.v2.SymbolV2;
+import org.sonar.python.semantic.v2.UsageV2;
 import org.sonar.python.types.v2.ClassType;
 import org.sonar.python.types.v2.FunctionType;
 import org.sonar.python.types.v2.ParameterV2;
@@ -42,7 +43,7 @@ public class PythonTypeToDescriptorConverter {
 
   public Descriptor convert(String moduleFqn, SymbolV2 symbol, Set<PythonType> types) {
     var candidates = types.stream()
-      .map(type -> convert(moduleFqn, moduleFqn, symbol.name(), type))
+      .map(type -> convert(moduleFqn, moduleFqn, symbol.name(), type, symbol.usages()))
       .flatMap(candidate -> {
         if (candidate instanceof AmbiguousDescriptor ambiguousDescriptor) {
           return ambiguousDescriptor.alternatives().stream();
@@ -59,8 +60,12 @@ public class PythonTypeToDescriptorConverter {
     return new AmbiguousDescriptor(symbol.name(), symbolFqn(moduleFqn, symbol.name()), candidates);
   }
 
-  private static Descriptor convert(String moduleFqn, String parentFqn, String symbolName, PythonType type) {
+  private static Descriptor convert(String moduleFqn, String parentFqn, String symbolName, PythonType type, List<UsageV2> symbolUsages) {
     if (type instanceof FunctionType functionType) {
+      if (usagesContainAssignment(symbolUsages)) {
+        // Avoid possible FPs in case of assigned bound method (SONARPY-2285)
+        return new VariableDescriptor(symbolName, symbolFqn(parentFqn, symbolName), null);
+      }
       return convert(moduleFqn, parentFqn, symbolName, functionType);
     }
     if (type instanceof ClassType classType) {
@@ -98,7 +103,7 @@ public class PythonTypeToDescriptorConverter {
     var symbolFqn = symbolFqn(parentFqn, symbolName);
     var memberDescriptors = type.members()
       .stream()
-      .map(m -> convert(moduleFqn, symbolFqn, m.name(), m.type()))
+      .map(m -> convert(moduleFqn, symbolFqn, m.name(), m.type(), List.of()))
       .collect(Collectors.toSet());
 
     var hasSuperClassWithoutDescriptor = false;
@@ -127,7 +132,7 @@ public class PythonTypeToDescriptorConverter {
 
   private static Descriptor convert(String moduleFqn, String parentFqn, String symbolName, UnionType type) {
     var candidates = type.candidates().stream()
-      .map(candidateType -> convert(moduleFqn, parentFqn, symbolName, candidateType))
+      .map(candidateType -> convert(moduleFqn, parentFqn, symbolName, candidateType, List.of()))
       .collect(Collectors.toSet());
     return new AmbiguousDescriptor(symbolName,
       symbolFqn(moduleFqn, symbolName),
@@ -170,4 +175,7 @@ public class PythonTypeToDescriptorConverter {
     return moduleFqn + "." + symbolName;
   }
 
+  private static boolean usagesContainAssignment(List<UsageV2> symbolUsages) {
+    return symbolUsages.stream().anyMatch(u -> u.kind().equals(UsageV2.Kind.ASSIGNMENT_LHS));
+  }
 }
