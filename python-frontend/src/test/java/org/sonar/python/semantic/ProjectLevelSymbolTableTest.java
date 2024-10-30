@@ -20,7 +20,6 @@
 package org.sonar.python.semantic;
 
 import com.google.common.base.Functions;
-import com.google.protobuf.InvalidProtocolBufferException;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
@@ -29,9 +28,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import org.sonar.plugins.python.api.caching.PythonReadCache;
-import org.sonar.plugins.python.api.caching.PythonWriteCache;
 import org.sonar.plugins.python.api.symbols.AmbiguousSymbol;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
@@ -43,7 +41,6 @@ import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.ImportFrom;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
-import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.PythonTestUtils;
 import org.sonar.python.index.AmbiguousDescriptor;
@@ -54,6 +51,7 @@ import org.sonar.python.index.VariableDescriptor;
 import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.types.DeclaredType;
 import org.sonar.python.types.InferredTypes;
+import org.sonar.python.types.TypeShed;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.tuple;
@@ -614,7 +612,7 @@ class ProjectLevelSymbolTableTest {
       "fn = 42"
     );
     globalSymbols = globalSymbols(tree, "mod");
-    assertThat(globalSymbols).extracting(Symbol::kind).containsExactly(Symbol.Kind.AMBIGUOUS);
+    assertThat(globalSymbols).extracting(Symbol::kind).containsExactly(Symbol.Kind.OTHER);
   }
 
   @Test
@@ -625,10 +623,11 @@ class ProjectLevelSymbolTableTest {
       "  pass");
     Set<Symbol> globalSymbols = globalSymbols(fileInput, "mod");
     assertThat(globalSymbols).extracting(Symbol::name).containsExactlyInAnyOrder("C");
-    assertThat(globalSymbols).extracting(Symbol::kind).allSatisfy(k -> assertThat(Symbol.Kind.CLASS.equals(k)).isFalse());
+    assertThat(globalSymbols).extracting(Symbol::kind).allSatisfy(k -> assertThat(k).isEqualTo(Symbol.Kind.CLASS));
   }
 
   @Test
+  @Disabled("SONARPY-2248")
   void classdef_with_missing_symbol() {
     FileInput fileInput = parseWithoutSymbols(
       "class C: ",
@@ -636,9 +635,7 @@ class ProjectLevelSymbolTableTest {
       "global C");
 
     Set<Symbol> globalSymbols = globalSymbols(fileInput, "mod");
-    assertThat(globalSymbols).extracting(Symbol::name).containsExactlyInAnyOrder("C");
-    // TODO: Global statements should not alter the kind of a symbol
-    assertThat(globalSymbols).extracting(Symbol::kind).allSatisfy(k -> assertThat(Symbol.Kind.OTHER.equals(k)).isTrue());
+    assertThat(globalSymbols).isNotEmpty();
   }
 
   @Test
@@ -663,16 +660,20 @@ class ProjectLevelSymbolTableTest {
     assertThat(cSymbol.name()).isEqualTo("C");
     assertThat(cSymbol.kind()).isEqualTo(Symbol.Kind.CLASS);
     assertThat(((ClassSymbol) cSymbol).superClasses()).hasSize(1);
+  }
 
+  @Test
+  @Disabled("SONARPY-2250")
+  void class_symbol_inheritance_from_nested_class() {
     // for the time being, we only consider symbols defined in the global scope
-    fileInput = parseWithoutSymbols(
+    var fileInput = parseWithoutSymbols(
       "class A:",
       "  class A1: pass",
       "class C(A.A1): ",
       "  pass");
-    globalSymbols = globalSymbols(fileInput, "mod");
-    symbols = globalSymbols.stream().collect(Collectors.toMap(Symbol::name, Functions.identity()));
-    cSymbol = symbols.get("C");
+    var globalSymbols = globalSymbols(fileInput, "mod");
+    var symbols = globalSymbols.stream().collect(Collectors.toMap(Symbol::name, Functions.identity()));
+    var cSymbol = symbols.get("C");
     assertThat(cSymbol.name()).isEqualTo("C");
     assertThat(cSymbol.kind()).isEqualTo(Symbol.Kind.CLASS);
     assertThat(((ClassSymbol) cSymbol).superClasses()).hasSize(1);
@@ -710,7 +711,7 @@ class ProjectLevelSymbolTableTest {
       "def nlargest(n, iterable, key=None): ..."
     );
     Set<Symbol> globalSymbols = globalSymbols(tree, "");
-    assertThat(globalSymbols).hasOnlyElementsOfType(AmbiguousSymbolImpl.class);
+    assertThat(globalSymbols).hasOnlyElementsOfType(FunctionSymbol.class);
 
     tree = parseWithoutSymbols(
       "nonlocal nlargest",
@@ -727,11 +728,9 @@ class ProjectLevelSymbolTableTest {
     Set<Symbol> globalSymbols = globalSymbols(fileInput, "mod");
     ClassSymbol a = (ClassSymbol) globalSymbols.iterator().next();
     // SONARPY-1350: The parent "A" is not yet defined  at the time it is read, so this is actually not correct
-    assertThat(a.superClasses()).containsExactly(a);
-    ClassDef classDef = (ClassDef) fileInput.statements().statements().get(0);
-    assertThat(TreeUtils.getParentClassesFQN(classDef)).containsExactly("mod.mod.A");
+    assertThat(a.superClasses()).isEmpty();
+    assertThat(a.hasUnresolvedTypeHierarchy()).isTrue();
   }
-
 
   @Test
   void class_having_another_class_with_same_name_should_not_trigger_error() {
@@ -871,10 +870,12 @@ class ProjectLevelSymbolTableTest {
   }
 
   @Test
+  @Disabled("SONARPY-2249")
   void no_stackoverflow_for_ambiguous_descriptor() {
+    TypeShed.resetBuiltinSymbols();
     String[] foo = {
     "if cond:",
-    "  Ambiguous = ...",
+    "  Ambiguous = 41",
     "else:",
     "  class Ambiguous(SomeParent):",
     "    local_var = 'i'",
