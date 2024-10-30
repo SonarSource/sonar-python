@@ -34,6 +34,7 @@ public final class FunctionType implements PythonType {
   private final String name;
   private final List<PythonType> attributes;
   private final List<ParameterV2> parameters;
+  private final List<TypeWrapper> decorators;
   private TypeWrapper returnType;
   private final TypeOrigin typeOrigin;
   private final boolean isAsynchronous;
@@ -50,6 +51,7 @@ public final class FunctionType implements PythonType {
     String name,
     List<PythonType> attributes,
     List<ParameterV2> parameters,
+    List<TypeWrapper> decorators,
     TypeWrapper returnType,
     TypeOrigin typeOrigin,
     boolean isAsynchronous,
@@ -62,6 +64,7 @@ public final class FunctionType implements PythonType {
     this.name = name;
     this.attributes = attributes;
     this.parameters = parameters;
+    this.decorators = decorators;
     this.returnType = returnType;
     this.typeOrigin = typeOrigin;
     this.isAsynchronous = isAsynchronous;
@@ -110,6 +113,10 @@ public final class FunctionType implements PythonType {
 
   public boolean hasDecorators() {
     return hasDecorators;
+  }
+
+  public List<TypeWrapper> decorators() {
+    return decorators;
   }
 
   public boolean isInstanceMethod() {

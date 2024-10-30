@@ -26,6 +26,8 @@ import java.util.Optional;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.LocationInFile;
 import org.sonar.plugins.python.api.tree.AnyParameter;
+import org.sonar.plugins.python.api.tree.Decorator;
+import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Parameter;
@@ -49,6 +51,7 @@ public class FunctionTypeBuilder implements TypeBuilder<FunctionType> {
   private String name;
   private List<PythonType> attributes;
   private List<ParameterV2> parameters;
+  private List<TypeWrapper> decorators;
   private boolean isAsynchronous;
   private boolean hasDecorators;
   private boolean isInstanceMethod;
@@ -66,6 +69,12 @@ public class FunctionTypeBuilder implements TypeBuilder<FunctionType> {
     this.parameters = new ArrayList<>();
     isAsynchronous = functionDef.asyncKeyword() != null;
     hasDecorators = !functionDef.decorators().isEmpty();
+    this.decorators = functionDef.decorators()
+      .stream()
+      .map(Decorator::expression)
+      .map(Expression::typeV2)
+      .map(TypeWrapper::of)
+      .toList();
     isInstanceMethod = isInstanceMethod(functionDef);
     ParameterList parameterList = functionDef.parameters();
     if (parameterList != null) {
@@ -98,6 +107,11 @@ public class FunctionTypeBuilder implements TypeBuilder<FunctionType> {
 
   public FunctionTypeBuilder withParameters(List<ParameterV2> parameters) {
     this.parameters = parameters;
+    return this;
+  }
+
+  public FunctionTypeBuilder withDecorators(List<TypeWrapper> decorators) {
+    this.decorators = decorators;
     return this;
   }
 
@@ -139,7 +153,7 @@ public class FunctionTypeBuilder implements TypeBuilder<FunctionType> {
 
   public FunctionType build() {
     return new FunctionType(
-      name, attributes, parameters, returnType, typeOrigin, isAsynchronous, hasDecorators, isInstanceMethod, hasVariadicParameter, owner, definitionLocation
+      name, attributes, parameters, decorators, returnType, typeOrigin, isAsynchronous, hasDecorators, isInstanceMethod, hasVariadicParameter, owner, definitionLocation
     );
   }
 

@@ -27,6 +27,7 @@ import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.types.v2.ClassType;
 import org.sonar.python.types.v2.FunctionType;
+import org.sonar.python.types.v2.LazyTypeWrapper;
 import org.sonar.python.types.v2.ModuleType;
 import org.sonar.python.types.v2.PythonType;
 import org.sonar.python.types.v2.TriBool;
@@ -262,5 +263,62 @@ class ProjectLevelTypeTableTest {
     var nnModuleType = table.getType("torch.nn");
 
     Assertions.assertThat(nnModuleType).isNotNull().isInstanceOf(ModuleType.class);
+  }
+
+  @Test
+  void importFunctionWithDecorators() {
+    var projectLevelSymbolTable = new ProjectLevelSymbolTable();
+    var libTree = parseWithoutSymbols(
+      """
+      def lib_decorator(): ...
+      @lib_decorator
+      def foo(): ...
+      """
+    );
+    projectLevelSymbolTable.addModule(libTree, "", pythonFile("lib.py"));
+
+    var projectLevelTypeTable = new ProjectLevelTypeTable(projectLevelSymbolTable);
+    var mainFile = pythonFile("main.py");
+    var fileInput = parseAndInferTypes(projectLevelTypeTable, mainFile, """
+      from lib import foo
+      foo
+      """
+    );
+    var fooType = (FunctionType) ((ExpressionStatement) fileInput.statements().statements().get(1)).expressions().get(0).typeV2();
+    var typeWrapper = (LazyTypeWrapper) fooType.decorators().get(0);
+    assertThat(typeWrapper.hasImportPath("lib.lib_decorator")).isTrue();
+    var decoratorType = typeWrapper.type();
+    assertThat(decoratorType).isInstanceOfSatisfying(FunctionType.class, functionType -> assertThat(functionType.name()).isEqualTo("lib_decorator"));
+  }
+
+  @Test
+  void importFunctionWithImportedDecorators() {
+    var projectLevelSymbolTable = new ProjectLevelSymbolTable();
+    var libTree = parseWithoutSymbols(
+      """
+      def lib_decorator(): ...
+      """
+    );
+    projectLevelSymbolTable.addModule(libTree, "", pythonFile("lib.py"));
+    var lib2Tree = parseWithoutSymbols(
+      """
+      import lib
+      
+      @lib.lib_decorator
+      def foo(): ...
+      """
+    );
+    projectLevelSymbolTable.addModule(lib2Tree, "", pythonFile("lib2.py"));
+
+    var projectLevelTypeTable = new ProjectLevelTypeTable(projectLevelSymbolTable);
+    var mainFile = pythonFile("main.py");
+    var fileInput = parseAndInferTypes(projectLevelTypeTable, mainFile, """
+      from lib2 import foo
+      foo
+      """
+    );
+    var fooType = (FunctionType) ((ExpressionStatement) fileInput.statements().statements().get(1)).expressions().get(0).typeV2();
+    var typeWrapper = (LazyTypeWrapper) fooType.decorators().get(0);
+    assertThat(typeWrapper.hasImportPath("lib2.lib.lib_decorator")).isTrue();
   }
 }
