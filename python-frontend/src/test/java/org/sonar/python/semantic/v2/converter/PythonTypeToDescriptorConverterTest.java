@@ -23,6 +23,9 @@ import java.util.List;
 import java.util.Set;
 import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.LocationInFile;
+import org.sonar.plugins.python.api.tree.ExpressionStatement;
+import org.sonar.plugins.python.api.tree.FileInput;
+import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.python.index.AmbiguousDescriptor;
 import org.sonar.python.index.ClassDescriptor;
 import org.sonar.python.index.Descriptor;
@@ -40,8 +43,10 @@ import org.sonar.python.types.v2.Member;
 import org.sonar.python.types.v2.ModuleType;
 import org.sonar.python.types.v2.ObjectType;
 import org.sonar.python.types.v2.ParameterV2;
+import org.sonar.python.types.v2.PythonType;
 import org.sonar.python.types.v2.TypeOrigin;
 import org.sonar.python.types.v2.TypeWrapper;
+import org.sonar.python.types.v2.TypesTestUtils;
 import org.sonar.python.types.v2.UnionType;
 import org.sonar.python.types.v2.UnknownType;
 
@@ -220,6 +225,32 @@ class PythonTypeToDescriptorConverterTest {
     assertThat(ambiguousDescriptor.alternatives()).hasSize(3);
     assertThat(ambiguousDescriptor.alternatives()).extracting(Descriptor::name).allMatch(s -> s.equals("myUnionType"));
     assertThat(ambiguousDescriptor.alternatives()).extracting(Object::getClass).allMatch(c -> c == ClassDescriptor.class);
+  }
+
+  @Test
+  void testReassignedFunctionIsNotConverted() {
+    FileInput fileInput = TypesTestUtils.parseAndInferTypes("""
+      def foo(): ...
+      my_var = foo
+      foo
+      my_var
+      """);
+    Name fooName = (Name) ((ExpressionStatement) fileInput.statements().statements().get(2)).expressions().get(0);
+    PythonType fooType = fooName.typeV2();
+    SymbolV2 fooSymbol = fooName.symbolV2();
+    Name myVarName = (Name) ((ExpressionStatement) fileInput.statements().statements().get(3)).expressions().get(0);
+    PythonType myVarType = myVarName.typeV2();
+    SymbolV2 myVarSymbol = myVarName.symbolV2();
+
+    Descriptor fooDescriptor = converter.convert("mod", fooSymbol, Set.of(fooType));
+    Descriptor myVarDescriptor = converter.convert("mod", myVarSymbol, Set.of(myVarType));
+    assertThat(fooDescriptor).isInstanceOf(FunctionDescriptor.class);
+    assertThat(myVarDescriptor).isInstanceOf(VariableDescriptor.class);
+    assertThat(((VariableDescriptor) myVarDescriptor)).satisfies(d -> {
+      assertThat(d.name()).isEqualTo("my_var");
+      assertThat(d.fullyQualifiedName()).isEqualTo("mod.my_var");
+      assertThat(d.annotatedType()).isNull();
+    });
   }
 
 }
