@@ -79,7 +79,7 @@ public class SymbolsModuleTypeProvider {
   }
 
   private Optional<ModuleType> createModuleTypeFromProjectLevelSymbolTable(String moduleName, String moduleFqn, ModuleType parent) {
-    var retrieved = projectLevelSymbolTable.getDescriptorsFromModule(moduleFqn);
+    var retrieved = projectLevelSymbolTable.getDescriptorsFromModuleV2(moduleFqn);
     if (retrieved == null) {
       return Optional.empty();
     }
