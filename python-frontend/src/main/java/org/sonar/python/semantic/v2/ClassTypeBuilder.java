@@ -65,7 +65,7 @@ public class ClassTypeBuilder implements TypeBuilder<ClassType> {
   }
 
   public ClassTypeBuilder addSuperClass(PythonType type) {
-    superClasses.add(new LazyTypeWrapper(type));
+    superClasses.add(TypeWrapper.of(type));
     return this;
   }
 
