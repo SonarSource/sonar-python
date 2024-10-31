@@ -96,13 +96,15 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
 
   private final TypeTable projectLevelTypeTable;
   private final String fileId;
+  private final String fullyQualifiedModuleName;
 
   private final Deque<PythonType> typeStack = new ArrayDeque<>();
 
-  public TrivialTypeInferenceVisitor(TypeTable projectLevelTypeTable, PythonFile pythonFile) {
+  public TrivialTypeInferenceVisitor(TypeTable projectLevelTypeTable, PythonFile pythonFile, String fullyQualifiedModuleName) {
     this.projectLevelTypeTable = projectLevelTypeTable;
     Path path = pathOf(pythonFile);
     this.fileId = path != null ? path.toString() : pythonFile.toString();
+    this.fullyQualifiedModuleName = fullyQualifiedModuleName;
   }
 
 

@@ -59,7 +59,7 @@ public final class PythonTestUtils {
   }
 
   public static FileInput parse(String... lines) {
-    return parse(new SymbolTableBuilder(pythonFile("")), lines);
+    return parse(new SymbolTableBuilder(pythonFile("mod")), lines);
   }
 
   public static FileInput parse(SymbolTableBuilder symbolTableBuilder, String... lines) {

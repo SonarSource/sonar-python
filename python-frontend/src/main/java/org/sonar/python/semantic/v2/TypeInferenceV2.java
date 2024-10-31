@@ -36,6 +36,7 @@ import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.StatementList;
 import org.sonar.plugins.python.api.tree.Tree;
+import org.sonar.python.semantic.SymbolUtils;
 import org.sonar.python.semantic.v2.types.FlowSensitiveTypeInference;
 import org.sonar.python.semantic.v2.types.Propagation;
 import org.sonar.python.semantic.v2.types.PropagationVisitor;
@@ -49,15 +50,17 @@ public class TypeInferenceV2 {
   private final TypeTable projectLevelTypeTable;
   private final SymbolTable symbolTable;
   private final PythonFile pythonFile;
+  private final String fullyQualifiedModuleName;
 
-  public TypeInferenceV2(TypeTable projectLevelTypeTable, PythonFile pythonFile, SymbolTable symbolTable) {
+  public TypeInferenceV2(TypeTable projectLevelTypeTable, PythonFile pythonFile, SymbolTable symbolTable, String packageName) {
     this.projectLevelTypeTable = projectLevelTypeTable;
     this.symbolTable = symbolTable;
     this.pythonFile = pythonFile;
+    this.fullyQualifiedModuleName = SymbolUtils.fullyQualifiedModuleName(packageName, pythonFile.fileName());
   }
 
   public Map<SymbolV2, Set<PythonType>> inferTypes(FileInput fileInput) {
-    TrivialTypeInferenceVisitor trivialTypeInferenceVisitor = new TrivialTypeInferenceVisitor(projectLevelTypeTable, pythonFile);
+    TrivialTypeInferenceVisitor trivialTypeInferenceVisitor = new TrivialTypeInferenceVisitor(projectLevelTypeTable, pythonFile, fullyQualifiedModuleName);
     fileInput.accept(trivialTypeInferenceVisitor);
 
     var typesBySymbol = inferTypesAndMemberAccessSymbols(fileInput);
