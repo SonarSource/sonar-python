@@ -987,6 +987,59 @@ class ProjectLevelSymbolTableTest {
     assertThat(bar.isDjangoView()).isFalse();
   }
 
+  @Test
+  void django_views_local_functions() {
+    String content = """
+      from django.urls import path
+      
+      def foo(): ...
+      urlpatterns = [path('foo', foo, name='foo')]
+      
+      class MyClass:
+        def bar(): ...
+      
+      urlpatterns.append(path('bar', MyClass.bar, name='bar'))
+      
+      class MyOtherClass:
+        class MyNestedClass:
+          def qix(): ...
+      urlpatterns.append(path('bar', MyOtherClass.MyNestedClass.qix, name='bar'))
+      """;
+
+    ProjectLevelSymbolTable projectSymbolTable = new ProjectLevelSymbolTable();
+    projectSymbolTable.addModule(parseWithoutSymbols(content), "my_package", pythonFile("urls.py"));
+    assertThat(projectSymbolTable.isDjangoView("my_package.urls.foo")).isTrue();
+    assertThat(projectSymbolTable.isDjangoView("my_package.urls.MyClass.bar")).isTrue();
+    assertThat(projectSymbolTable.isDjangoView("my_package.urls.MyOtherClass.MyNestedClass.qix")).isTrue();
+  }
+
+  @Test
+  void django_views_ambiguous() {
+    String content = """
+      from django.urls import path
+      if x:
+        def ambiguous(): ...
+      else:
+        def ambiguous(): ...
+      urlpatterns = [path('bar', ambiguous, name='bar')]
+      """;
+    ProjectLevelSymbolTable projectSymbolTable = new ProjectLevelSymbolTable();
+    projectSymbolTable.addModule(parseWithoutSymbols(content), "my_package", pythonFile("urls.py"));
+    assertThat(projectSymbolTable.isDjangoView("my_package.urls.ambiguous")).isFalse();
+  }
+
+  @Test
+  void django_views_conf_import() {
+    String content = """
+      from django.urls import conf
+      import views
+      urlpatterns = [conf.path('foo', views.foo, name='foo'), conf.path('baz')]
+      """;
+    ProjectLevelSymbolTable projectSymbolTable = new ProjectLevelSymbolTable();
+    projectSymbolTable.addModule(parseWithoutSymbols(content), "my_package", pythonFile("urls.py"));
+    assertThat(projectSymbolTable.isDjangoView("views.foo")).isTrue();
+  }
+
   /**
    * The variable `foo` which is assigned in the decorator of the function should belong to the global scope not the function scope
    */
