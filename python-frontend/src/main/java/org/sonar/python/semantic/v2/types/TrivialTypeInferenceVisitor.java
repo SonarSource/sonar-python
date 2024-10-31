@@ -22,10 +22,12 @@ package org.sonar.python.semantic.v2.types;
 import java.nio.file.Path;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Deque;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Stream;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.tree.AliasedName;
@@ -383,10 +385,23 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
 
   @Override
   public void visitImportFrom(ImportFrom importFrom) {
-    Optional.of(importFrom)
-      .map(ImportFrom::module)
+    List<String> fromModuleFqn;
+    List<Token> dotPrefixTokens = importFrom.dottedPrefixForModule();
+
+    List<String> dottedPart = Optional.ofNullable(importFrom.module())
       .map(TrivialTypeInferenceVisitor::dottedNameToPartFqn)
-      .ifPresent(fqn -> setTypeToImportFromStatement(importFrom, fqn));
+      .orElse(new ArrayList<>());
+
+    List<String> moduleFqnElements = new ArrayList<>(Arrays.stream(fullyQualifiedModuleName.split("\\.")).toList());
+    if (!dotPrefixTokens.isEmpty()) {
+      // Relative import: we start from the current module FQN and go up as many levels as there are dots in the import statement
+      int sizeLimit = Math.max(0, moduleFqnElements.size() - dotPrefixTokens.size());
+      fromModuleFqn = Stream.concat(moduleFqnElements.stream().limit(sizeLimit), dottedPart.stream()).toList();
+    } else {
+      // Absolute import: we start from the root module and don't use the current module FQN
+      fromModuleFqn = dottedPart;
+    }
+    setTypeToImportFromStatement(importFrom, fromModuleFqn);
   }
 
   private static List<String> dottedNameToPartFqn(DottedName dottedName) {
@@ -415,7 +430,7 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
 
   private static UnknownType.UnresolvedImportType createUnresolvedImportType(List<String> moduleFqnList, Name name) {
     String fromModuleFqn = String.join(".", moduleFqnList);
-    String fqn = fromModuleFqn + "." + name.name();
+    String fqn = fromModuleFqn.isEmpty() ? name.name() : String.join(".", fromModuleFqn, name.name());
     return new UnknownType.UnresolvedImportType(fqn);
   }
 
