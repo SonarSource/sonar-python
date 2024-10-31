@@ -192,6 +192,42 @@ public class TypeInferenceV2Test {
   }
 
   @Test
+  void testRelativeImport() {
+    FileInput fileInput = inferTypes("""
+      from . import module
+      module
+      """);
+
+    PythonType pythonType = ((ExpressionStatement) fileInput.statements().statements().get(1)).expressions().get(0).typeV2();
+    assertThat(pythonType).isInstanceOf(UnresolvedImportType.class);
+    assertThat(((UnresolvedImportType) pythonType).importPath()).isEqualTo("my_package.module");
+
+    fileInput = inferTypes("""
+      from .. import module
+      module
+      """);
+    pythonType = ((ExpressionStatement) fileInput.statements().statements().get(1)).expressions().get(0).typeV2();
+    assertThat(pythonType).isInstanceOf(UnresolvedImportType.class);
+    assertThat(((UnresolvedImportType) pythonType).importPath()).isEqualTo("module");
+
+    fileInput = inferTypes("""
+      from .hello import module
+      module
+      """);
+    pythonType = ((ExpressionStatement) fileInput.statements().statements().get(1)).expressions().get(0).typeV2();
+    assertThat(pythonType).isInstanceOf(UnresolvedImportType.class);
+    assertThat(((UnresolvedImportType) pythonType).importPath()).isEqualTo("my_package.hello.module");
+
+    fileInput = inferTypes("""
+      from ..second_hello import module
+      module
+      """);
+    pythonType = ((ExpressionStatement) fileInput.statements().statements().get(1)).expressions().get(0).typeV2();
+    assertThat(pythonType).isInstanceOf(UnresolvedImportType.class);
+    assertThat(((UnresolvedImportType) pythonType).importPath()).isEqualTo("second_hello.module");
+  }
+
+  @Test
   void testProjectLevelSymbolTableImports() {
     var classSymbol = new ClassSymbolImpl("C", "something.known.C");
 
