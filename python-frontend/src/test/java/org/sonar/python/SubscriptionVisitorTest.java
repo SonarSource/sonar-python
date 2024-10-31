@@ -62,7 +62,7 @@ class SubscriptionVisitorTest {
     };
 
     FileInput fileInput = PythonTestUtils.parse("'.*'");
-    PythonVisitorContext context = new PythonVisitorContext(fileInput, PythonTestUtils.pythonFile("file"), null, null);
+    PythonVisitorContext context = new PythonVisitorContext(fileInput, PythonTestUtils.pythonFile("file"), null, "");
     SubscriptionVisitor.analyze(Collections.singleton(check), context);
   }
 
@@ -100,7 +100,7 @@ class SubscriptionVisitorTest {
     };
 
     FileInput fileInput = PythonTestUtils.parse("class A:\n  def foo(self): ...");
-    PythonVisitorContext context = new PythonVisitorContext(fileInput, PythonTestUtils.pythonFile("file"), null, null);
+    PythonVisitorContext context = new PythonVisitorContext(fileInput, PythonTestUtils.pythonFile("file"), null, "");
     SubscriptionVisitor.analyze(Collections.singleton(check), context);
   }
 }

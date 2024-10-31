@@ -97,7 +97,7 @@ import static org.sonar.python.types.v2.TypesTestUtils.TYPE_TYPE;
 
 public class TypeInferenceV2Test {
 
-  static PythonFile pythonFile = PythonTestUtils.pythonFile("");
+  static PythonFile pythonFile = PythonTestUtils.pythonFile("mod");
 
   @Test
   void testTypeshedImports() {
@@ -2999,7 +2999,7 @@ public class TypeInferenceV2Test {
   private static Map<SymbolV2, Set<PythonType>> inferTypesBySymbol(String lines) {
     FileInput root = parse(lines);
     var symbolTable = new SymbolTableBuilderV2(root).build();
-    var typeInferenceV2 = new TypeInferenceV2(PROJECT_LEVEL_TYPE_TABLE, pythonFile, symbolTable);
+    var typeInferenceV2 = new TypeInferenceV2(PROJECT_LEVEL_TYPE_TABLE, pythonFile, symbolTable, "");
     return typeInferenceV2.inferTypes(root);
   }
 
@@ -3012,7 +3012,7 @@ public class TypeInferenceV2Test {
 
     var symbolTable = new SymbolTableBuilderV2(root)
       .build();
-    new TypeInferenceV2(projectLevelTypeTable, pythonFile, symbolTable).inferTypes(root);
+    new TypeInferenceV2(projectLevelTypeTable, pythonFile, symbolTable, "my_package").inferTypes(root);
     return root;
   }
 

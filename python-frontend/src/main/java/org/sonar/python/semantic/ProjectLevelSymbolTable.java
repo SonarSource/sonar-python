@@ -187,7 +187,7 @@ public class ProjectLevelSymbolTable {
     // TODO: inline in addModule
     var fullyQualifiedModuleName = SymbolUtils.fullyQualifiedModuleName(packageName, pythonFile.fileName());
     var symbolTable = new SymbolTableBuilderV2(astRoot).build();
-    var typeInferenceV2 = new TypeInferenceV2(new BasicTypeTable(), pythonFile, symbolTable);
+    var typeInferenceV2 = new TypeInferenceV2(new BasicTypeTable(), pythonFile, symbolTable, packageName);
     var typesBySymbol = typeInferenceV2.inferTypes(astRoot);
     var moduleDescriptors = typesBySymbol.entrySet()
       .stream()

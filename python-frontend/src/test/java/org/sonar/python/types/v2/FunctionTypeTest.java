@@ -175,7 +175,7 @@ class FunctionTypeTest {
     );
     var symbolTable = new SymbolTableBuilderV2(fileInput)
       .build();
-    new TypeInferenceV2(PROJECT_LEVEL_TYPE_TABLE, pythonFile, symbolTable).inferTypes(fileInput);
+    new TypeInferenceV2(PROJECT_LEVEL_TYPE_TABLE, pythonFile, symbolTable, "").inferTypes(fileInput);
 
     ClassDef classDef = (ClassDef) PythonTestUtils.getAllDescendant(fileInput, t -> t.is(Tree.Kind.CLASSDEF)).get(0);
     FunctionDef functionDef = (FunctionDef) PythonTestUtils.getAllDescendant(fileInput, t -> t.is(Tree.Kind.FUNCDEF)).get(0);
@@ -201,7 +201,7 @@ class FunctionTypeTest {
     FileInput fileInput = parseWithoutSymbols(code);
     var symbolTable = new SymbolTableBuilderV2(fileInput)
       .build();
-    new TypeInferenceV2(PROJECT_LEVEL_TYPE_TABLE, pythonFile, symbolTable).inferTypes(fileInput);
+    new TypeInferenceV2(PROJECT_LEVEL_TYPE_TABLE, pythonFile, symbolTable, "").inferTypes(fileInput);
     FunctionDef functionDef = (FunctionDef) PythonTestUtils.getAllDescendant(fileInput, t -> t.is(Tree.Kind.FUNCDEF)).get(0);
     return (FunctionType) functionDef.name().typeV2();
   }
