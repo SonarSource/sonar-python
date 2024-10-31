@@ -45,9 +45,12 @@ import org.sonar.python.semantic.v2.TypeInferenceV2;
 import org.sonar.python.semantic.v2.UsageV2;
 import org.sonar.python.semantic.v2.converter.PythonTypeToDescriptorConverter;
 import org.sonar.python.semantic.v2.typeshed.TypeShedDescriptorsProvider;
+import org.sonar.python.types.v2.FunctionType;
+import org.sonar.python.types.v2.PythonType;
+import org.sonar.python.types.v2.TriBool;
+import org.sonar.python.types.v2.TypeChecker;
 import org.sonar.python.types.v2.UnknownType;
 
-import static org.sonar.python.tree.TreeUtils.getSymbolFromTree;
 import static org.sonar.python.tree.TreeUtils.nthArgumentOrKeyword;
 
 public class ProjectLevelSymbolTable {
@@ -93,10 +96,11 @@ public class ProjectLevelSymbolTable {
     SymbolTableBuilder symbolTableBuilder = new SymbolTableBuilder(packageName, pythonFile);
     String fullyQualifiedModuleName = SymbolUtils.fullyQualifiedModuleName(packageName, pythonFile.fileName());
     fileInput.accept(symbolTableBuilder);
+
     importsByModule.put(fullyQualifiedModuleName, symbolTableBuilder.importedModulesFQN());
-    DjangoViewsVisitor djangoViewsVisitor = new DjangoViewsVisitor();
-    fileInput.accept(djangoViewsVisitor);
     addModuleV2(fileInput, packageName, pythonFile);
+    DjangoViewsVisitor djangoViewsVisitor = new DjangoViewsVisitor(fullyQualifiedModuleName);
+    fileInput.accept(djangoViewsVisitor);
   }
 
   private void addModuleToGlobalSymbolsByFQN(Set<Descriptor> descriptors) {
@@ -206,20 +210,35 @@ public class ProjectLevelSymbolTable {
   }
 
   private class DjangoViewsVisitor extends BaseTreeVisitor {
+
+    String fullyQualifiedModuleName;
+
+    public DjangoViewsVisitor(String fullyQualifiedModuleName) {
+      this.fullyQualifiedModuleName = fullyQualifiedModuleName;
+    }
+
     @Override
     public void visitCallExpression(CallExpression callExpression) {
-      Symbol calleeSymbol = callExpression.calleeSymbol();
-      if (calleeSymbol == null) {
-        return;
-      }
-      if ("django.urls.conf.path".equals(calleeSymbol.fullyQualifiedName())) {
+      super.visitCallExpression(callExpression);
+      if (isCallRegisteringDjangoView(callExpression)) {
         RegularArgument viewArgument = nthArgumentOrKeyword(1, "view", callExpression.arguments());
         if (viewArgument != null) {
-          getSymbolFromTree(viewArgument.expression())
-            .filter(symbol -> symbol.fullyQualifiedName() != null)
-            .ifPresent(symbol -> djangoViewsFQN.add(symbol.fullyQualifiedName()));
+          PythonType pythonType = viewArgument.expression().typeV2();
+          if (pythonType instanceof UnknownType.UnresolvedImportType unresolvedImportType) {
+            String importPath = unresolvedImportType.importPath();
+            djangoViewsFQN.add(importPath);
+          } else if (pythonType instanceof FunctionType functionType) {
+            djangoViewsFQN.add(functionType.fullyQualifiedName());
+          }
         }
       }
+    }
+
+    private static boolean isCallRegisteringDjangoView(CallExpression callExpression) {
+      TypeChecker typeChecker = new TypeChecker(new BasicTypeTable());
+      TriBool isConfPathCall = typeChecker.typeCheckBuilder().isTypeWithName("django.urls.conf.path").check(callExpression.callee().typeV2());
+      TriBool isPathCall = typeChecker.typeCheckBuilder().isTypeWithName("django.urls.path").check(callExpression.callee().typeV2());
+      return isConfPathCall.equals(TriBool.TRUE) || isPathCall.equals(TriBool.TRUE);
     }
   }
 }
