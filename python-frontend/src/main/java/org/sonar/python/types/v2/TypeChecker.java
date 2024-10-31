@@ -19,13 +19,13 @@
  */
 package org.sonar.python.types.v2;
 
-import org.sonar.python.semantic.v2.ProjectLevelTypeTable;
+import org.sonar.python.semantic.v2.TypeTable;
 
 public class TypeChecker {
 
-  private ProjectLevelTypeTable projectLevelTypeTable;
+  private TypeTable projectLevelTypeTable;
 
-  public TypeChecker(ProjectLevelTypeTable projectLevelTypeTable) {
+  public TypeChecker(TypeTable projectLevelTypeTable) {
     this.projectLevelTypeTable = projectLevelTypeTable;
   }
 
