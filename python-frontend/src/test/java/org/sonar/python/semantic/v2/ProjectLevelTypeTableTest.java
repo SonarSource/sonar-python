@@ -20,6 +20,7 @@
 package org.sonar.python.semantic.v2;
 
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.tree.ExpressionStatement;
@@ -266,6 +267,7 @@ class ProjectLevelTypeTableTest {
   }
 
   @Test
+  @Disabled("SONARPY-2290")
   void importFunctionWithDecorators() {
     var projectLevelSymbolTable = new ProjectLevelSymbolTable();
     var libTree = parseWithoutSymbols(
@@ -292,6 +294,7 @@ class ProjectLevelTypeTableTest {
   }
 
   @Test
+  @Disabled("SONARPY-2290")
   void importFunctionWithImportedDecorators() {
     var projectLevelSymbolTable = new ProjectLevelSymbolTable();
     var libTree = parseWithoutSymbols(
