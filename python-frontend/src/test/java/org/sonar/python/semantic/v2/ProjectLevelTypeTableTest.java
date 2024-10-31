@@ -267,7 +267,6 @@ class ProjectLevelTypeTableTest {
   }
 
   @Test
-  @Disabled("SONARPY-2290")
   void importFunctionWithDecorators() {
     var projectLevelSymbolTable = new ProjectLevelSymbolTable();
     var libTree = parseWithoutSymbols(
@@ -294,7 +293,6 @@ class ProjectLevelTypeTableTest {
   }
 
   @Test
-  @Disabled("SONARPY-2290")
   void importFunctionWithImportedDecorators() {
     var projectLevelSymbolTable = new ProjectLevelSymbolTable();
     var libTree = parseWithoutSymbols(
@@ -305,9 +303,9 @@ class ProjectLevelTypeTableTest {
     projectLevelSymbolTable.addModule(libTree, "", pythonFile("lib.py"));
     var lib2Tree = parseWithoutSymbols(
       """
-      import lib
+      import lib as l
       
-      @lib.lib_decorator
+      @l.lib_decorator
       def foo(): ...
       """
     );
@@ -322,7 +320,7 @@ class ProjectLevelTypeTableTest {
     );
     var fooType = (FunctionType) ((ExpressionStatement) fileInput.statements().statements().get(1)).expressions().get(0).typeV2();
     var typeWrapper = (LazyTypeWrapper) fooType.decorators().get(0);
-    assertThat(typeWrapper.hasImportPath("lib2.lib.lib_decorator")).isTrue();
+    assertThat(typeWrapper.hasImportPath("lib.lib_decorator")).isTrue();
   }
 
   @Test

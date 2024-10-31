@@ -21,6 +21,7 @@ package org.sonar.python.semantic.v2.converter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -36,6 +37,7 @@ import org.sonar.python.types.v2.ClassType;
 import org.sonar.python.types.v2.FunctionType;
 import org.sonar.python.types.v2.ParameterV2;
 import org.sonar.python.types.v2.PythonType;
+import org.sonar.python.types.v2.TypeWrapper;
 import org.sonar.python.types.v2.UnionType;
 import org.sonar.python.types.v2.UnknownType;
 
@@ -87,13 +89,20 @@ public class PythonTypeToDescriptorConverter {
       .map(parameter -> convert(moduleFqn, parameter))
       .toList();
 
+    var decorators = type.decorators()
+      .stream()
+      .map(TypeWrapper::type)
+      .map(decorator -> typeFqn(moduleFqn, decorator))
+      .filter(Objects::nonNull)
+      .toList();
+
     // Using FunctionType#name and FunctionType#fullyQualifiedName instead of symbol is only accurate if the function has not been reassigned
     // This logic should be revisited when tackling SONARPY-2285
     return new FunctionDescriptor(type.name(), type.fullyQualifiedName(),
       parameters,
       type.isAsynchronous(),
       type.isInstanceMethod(),
-      List.of(),
+      decorators,
       type.hasDecorators(),
       type.definitionLocation().orElse(null),
       null,
@@ -167,8 +176,10 @@ public class PythonTypeToDescriptorConverter {
   private static String typeFqn(String moduleFqn, PythonType type) {
     if (type instanceof UnknownType.UnresolvedImportType importType) {
       return importType.importPath();
-    } else if (type instanceof ClassType classType) {
-      return moduleFqn + "." + classType.name();
+    } else if (type instanceof ClassType) {
+      return moduleFqn + "." + type.name();
+    } else if (type instanceof FunctionType functionType) {
+      return functionType.fullyQualifiedName();
     }
     return null;
   }
