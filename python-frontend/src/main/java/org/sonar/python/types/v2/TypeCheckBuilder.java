@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 import org.sonar.python.semantic.v2.TypeTable;
 
 public class TypeCheckBuilder {
@@ -88,6 +89,16 @@ public class TypeCheckBuilder {
   public TypeCheckBuilder isTypeWithName(String expectedName) {
     var expected = projectLevelTypeTable.getType(expectedName);
     predicates.add(new IsSameAsTypePredicate(expected, true));
+    return this;
+  }
+
+  public TypeCheckBuilder inheritsFrom(String fqn) {
+    var expected = projectLevelTypeTable.getType(fqn);
+    if (expected instanceof ClassType expectedClassType) {
+      predicates.add(new InheritsFrom(expectedClassType));
+    } else {
+      throw new IllegalArgumentException("Expected type does not resolve to a class type");
+    }
     return this;
   }
 
@@ -246,6 +257,39 @@ public class TypeCheckBuilder {
       }
       return result;
     }
+  }
+
+  record InheritsFrom(ClassType expectedClassType) implements TypePredicate {
+
+    @Override
+    public TriBool test(PythonType pythonType) {
+      if (!(pythonType instanceof ClassType classType)) {
+        return TriBool.FALSE;
+      }
+      var superClasses = classType.superClasses().stream().map(TypeWrapper::type).collect(Collectors.toSet());
+      if (superClasses.stream().anyMatch(expectedClassType::equals)) {
+        return TriBool.TRUE;
+      } else if (containsUnknown(superClasses)) {
+        return TriBool.UNKNOWN;
+      } else {
+        return classType.hasUnresolvedHierarchy() ? TriBool.UNKNOWN : TriBool.FALSE;
+      }
+    }
+
+    // private static Set<PythonType> collectSuperclasses(ClassType classType) {
+    // var candidates = new HashSet<>(classType.superClasses().stream().map(TypeWrapper::type).toList());
+    // var result = new HashSet<PythonType>();
+    // while (!candidates.isEmpty()) {
+    // var current = candidates.iterator().next();
+    // candidates.remove(current);
+    // if (current instanceof ClassType currentClassType) {
+    // result.add(currentClassType);
+    // candidates.addAll(currentClassType.superClasses().stream().map(TypeWrapper::type).toList());
+    // }
+    // }
+    //
+    // return result;
+    // }
   }
 
   private static boolean containsUnknown(Set<PythonType> types) {

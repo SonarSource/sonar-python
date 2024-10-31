@@ -26,15 +26,11 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.regex.Pattern;
-import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
-import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
-import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.CallExpression;
-import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.ExpressionStatement;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Parameter;
@@ -46,11 +42,13 @@ import org.sonar.plugins.python.api.tree.Tree.Kind;
 import org.sonar.plugins.python.api.tree.Trivia;
 import org.sonar.python.checks.utils.CheckUtils;
 import org.sonar.python.checks.utils.StringLiteralValuesCollector;
-import org.sonar.python.semantic.ClassSymbolImpl;
-import org.sonar.python.semantic.FunctionSymbolImpl;
 import org.sonar.python.semantic.SymbolUtils;
-import org.sonar.python.tree.FunctionDefImpl;
+import org.sonar.python.semantic.v2.SymbolV2;
+import org.sonar.python.semantic.v2.UsageV2;
 import org.sonar.python.tree.TreeUtils;
+import org.sonar.python.types.v2.ClassType;
+import org.sonar.python.types.v2.FunctionType;
+import org.sonar.python.types.v2.TriBool;
 
 @Rule(key = "S1172")
 public class UnusedFunctionParameterCheck extends PythonSubscriptionCheck {
@@ -96,26 +94,25 @@ public class UnusedFunctionParameterCheck extends PythonSubscriptionCheck {
   }
 
   private static boolean isException(SubscriptionContext ctx, FunctionDef functionDef) {
-    FunctionSymbol functionSymbol = ((FunctionDefImpl) functionDef).functionSymbol();
     return CheckUtils.containsCallToLocalsFunction(functionDef) ||
-      SymbolUtils.canBeAnOverridingMethod(functionSymbol) ||
+      SymbolUtils.canBeAnOverridingMethod(((FunctionType) functionDef.name().typeV2()), functionDef.name().firstToken().line()) ||
       isInterfaceMethod(functionDef) ||
-      isNotImplemented(functionDef) ||
+      isNotImplemented(functionDef, ctx) ||
       !functionDef.decorators().isEmpty() ||
       isSpecialMethod(functionDef) ||
-      hasNonCallUsages(functionSymbol) ||
+      hasNonCallUsages(functionDef) ||
       isTestFunction(ctx, functionDef) ||
-      isAbstractClass(functionDef);
+      isAbstractClass(functionDef, ctx);
   }
 
-  private static boolean isAbstractClass(FunctionDef functionDef) {
-    FunctionSymbol functionSymbol = ((FunctionDefImpl) functionDef).functionSymbol();
-    if (functionSymbol == null) {
+  private static boolean isAbstractClass(FunctionDef functionDef, SubscriptionContext ctx) {
+    var parentClassDef = CheckUtils.getParentClassDef(functionDef);
+    if (parentClassDef == null) {
       return false;
     }
-    Symbol owner = ((FunctionSymbolImpl) functionSymbol).owner();
-    return owner != null && ((((ClassSymbolImpl) owner).superClasses().stream().anyMatch(symbol -> "abc.ABC".equals(symbol.fullyQualifiedName())))
-      || (((ClassSymbolImpl) owner).hasMetaClass()));
+    var typeChecker = ctx.typeChecker().typeCheckBuilder().inheritsFrom("abc.ABC");
+    return ((parentClassDef.name().typeV2() instanceof ClassType parentClassType) && parentClassType.hasMetaClass())
+      || (typeChecker.check(parentClassDef.name().typeV2()) == TriBool.TRUE);
   }
 
   private static boolean isInterfaceMethod(FunctionDef functionDef) {
@@ -125,13 +122,13 @@ public class UnusedFunctionParameterCheck extends PythonSubscriptionCheck {
   }
 
   // Note that this will also exclude method containing only a return statement that returns nothing
-  private static boolean isNotImplemented(FunctionDef functionDef) {
+  private static boolean isNotImplemented(FunctionDef functionDef, SubscriptionContext subscriptionContext) {
     List<Statement> statements = functionDef.body().statements();
     if (statements.size() != 1) return false;
     if (!statements.get(0).is(Kind.RETURN_STMT)) return false;
     ReturnStatement returnStatement = (ReturnStatement) statements.get(0);
-    return returnStatement.expressions().stream().allMatch(retValue ->
-      TreeUtils.getSymbolFromTree(retValue).filter(s -> "NotImplemented".equals(s.fullyQualifiedName())).isPresent());
+    var typeChecker = subscriptionContext.typeChecker().typeCheckBuilder().isTypeWithName("NotImplemented");
+    return returnStatement.expressions().stream().allMatch(expr -> typeChecker.check(expr.typeV2()) == TriBool.TRUE);
   }
 
   private static boolean isStringExpressionOrEllipsis(ExpressionStatement stmt) {
@@ -143,10 +140,24 @@ public class UnusedFunctionParameterCheck extends PythonSubscriptionCheck {
     return name.startsWith("__") && name.endsWith("__");
   }
 
-  private static boolean hasNonCallUsages(@Nullable FunctionSymbol functionSymbol) {
-    return Optional.ofNullable(functionSymbol)
-      .filter(fs -> fs.usages().stream().anyMatch(usage -> usage.kind() != Usage.Kind.FUNC_DECLARATION && !isFunctionCall(usage)))
+  private static boolean hasNonCallUsages(FunctionDef functionDef) {
+    return Optional.ofNullable(functionDef.name().symbolV2()).map(SymbolV2::usages)
+      .filter(usages -> usages.stream().anyMatch(usage -> usage.kind() != UsageV2.Kind.FUNC_DECLARATION && !isFunctionCall(usage)))
       .isPresent();
+  }
+
+  private static boolean isFunctionCall(UsageV2 usage) {
+    if (usage.kind() != UsageV2.Kind.OTHER) {
+      return false;
+    }
+    var tree = usage.tree();
+    var callExpression = ((CallExpression) TreeUtils.firstAncestorOfKind(tree, Kind.CALL_EXPR));
+    if (callExpression == null) {
+      return false;
+    }
+    var callee = callExpression.callee();
+    return callee == tree || TreeUtils.hasDescendant(callee, t -> t == tree);
+
   }
 
   private static boolean isTestFunction(SubscriptionContext ctx, FunctionDef functionDef) {
@@ -155,15 +166,6 @@ public class UnusedFunctionParameterCheck extends PythonSubscriptionCheck {
       return true;
     }
     return functionDef.name().name().startsWith("test");
-  }
-
-  private static boolean isFunctionCall(Usage usage) {
-    if (usage.kind() != Usage.Kind.OTHER) return false;
-    Tree tree = usage.tree();
-    CallExpression callExpression = ((CallExpression) TreeUtils.firstAncestorOfKind(tree, Kind.CALL_EXPR));
-    if (callExpression == null) return false;
-    Expression callee = callExpression.callee();
-    return callee == tree || TreeUtils.hasDescendant(callee, t -> t == tree);
   }
 
   private static List<String> collectComments(Tree element) {

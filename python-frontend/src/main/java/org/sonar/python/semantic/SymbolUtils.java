@@ -62,6 +62,10 @@ import org.sonar.plugins.python.api.tree.UnpackingExpression;
 import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.types.InferredTypes;
 import org.sonar.python.types.TypeShed;
+import org.sonar.python.types.v2.ClassType;
+import org.sonar.python.types.v2.FunctionType;
+import org.sonar.python.types.v2.TriBool;
+import org.sonar.python.types.v2.TypeWrapper;
 
 import static org.sonar.plugins.python.api.symbols.Symbol.Kind.CLASS;
 import static org.sonar.python.tree.TreeUtils.getSymbolFromTree;
@@ -335,6 +339,19 @@ public class SymbolUtils {
       }
     }
     return false;
+  }
+
+  public static boolean canBeAnOverridingMethod(FunctionType functionType, int line) {
+    var owner = functionType.owner();
+    if (!(owner instanceof ClassType ownerClassType)) {
+      return false;
+    }
+    if (ownerClassType.hasUnresolvedHierarchy()) {
+      return true;
+    }
+    var superClasses = ownerClassType.superClasses().stream().map(TypeWrapper::type).filter(ClassType.class::isInstance).map(
+      ClassType.class::cast).toList();
+    return superClasses.stream().anyMatch(superClass -> superClass.hasMember(functionType.name()) == TriBool.TRUE);
   }
 
   public static Symbol typeshedSymbolWithFQN(String fullyQualifiedName) {

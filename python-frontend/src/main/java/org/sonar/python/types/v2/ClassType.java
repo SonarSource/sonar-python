@@ -167,6 +167,10 @@ public final class ClassType implements PythonType {
       return TriBool.UNKNOWN;
     }
     // TODO: Not correct, we should look at what the actual type is instead (SONARPY-1666)
+    // Still not quite correct, but is a good start
+    if (this.members().stream().anyMatch(m -> m.name().equals(memberName))) {
+      return TriBool.TRUE;
+    }
     return TriBool.UNKNOWN;
   }
 
