@@ -74,6 +74,9 @@ public class PropagationVisitor extends BaseTreeVisitor {
     super.visitFunctionDef(functionDef);
     Name name = functionDef.name();
     var symbol = name.symbolV2();
+    if (symbol == null) {
+      return;
+    }
     Definition definition = new Definition(symbol, name);
     definitionsByDefinitionStatement.computeIfAbsent(functionDef, k -> new HashSet<>()).add(definition);
     propagationsByLhs.computeIfAbsent(symbol, s -> new HashSet<>()).add(definition);
@@ -84,6 +87,9 @@ public class PropagationVisitor extends BaseTreeVisitor {
     super.visitClassDef(classDef);
     var name = classDef.name();
     var symbol = name.symbolV2();
+    if (symbol == null) {
+      return;
+    }
     var definition = new Definition(symbol, name);
     definitionsByDefinitionStatement.computeIfAbsent(classDef, k -> new HashSet<>()).add(definition);
     propagationsByLhs.computeIfAbsent(symbol, s -> new HashSet<>()).add(definition);
@@ -186,8 +192,11 @@ public class PropagationVisitor extends BaseTreeVisitor {
   }
 
   private void processAssignment(Statement assignmentStatement, Expression lhsExpression, Expression rhsExpression){
-    if (lhsExpression instanceof Name lhs && lhs.symbolV2() != null) {
+    if (lhsExpression instanceof Name lhs) {
       var symbol = lhs.symbolV2();
+      if (symbol == null) {
+        return;
+      }
       var assignment = new Assignment(symbol, lhs, rhsExpression, propagationsByLhs);
       assignmentsByAssignmentStatement.put(assignmentStatement, assignment);
       propagationsByLhs.computeIfAbsent(symbol, s -> new HashSet<>()).add(assignment);
