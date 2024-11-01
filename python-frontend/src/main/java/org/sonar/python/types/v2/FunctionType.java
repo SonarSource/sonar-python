@@ -32,6 +32,7 @@ import org.sonar.plugins.python.api.LocationInFile;
 @Beta
 public final class FunctionType implements PythonType {
   private final String name;
+  private final String fullyQualifiedName;
   private final List<PythonType> attributes;
   private final List<ParameterV2> parameters;
   private final List<TypeWrapper> decorators;
@@ -49,6 +50,7 @@ public final class FunctionType implements PythonType {
    */
   public FunctionType(
     String name,
+    String fullyQualifiedName,
     List<PythonType> attributes,
     List<ParameterV2> parameters,
     List<TypeWrapper> decorators,
@@ -62,6 +64,7 @@ public final class FunctionType implements PythonType {
     @Nullable LocationInFile locationInFile
   ) {
     this.name = name;
+    this.fullyQualifiedName = fullyQualifiedName;
     this.attributes = attributes;
     this.parameters = parameters;
     this.decorators = decorators;
@@ -134,5 +137,9 @@ public final class FunctionType implements PythonType {
 
   public TypeOrigin typeOrigin() {
     return typeOrigin;
+  }
+
+  public String fullyQualifiedName() {
+    return fullyQualifiedName;
   }
 }
