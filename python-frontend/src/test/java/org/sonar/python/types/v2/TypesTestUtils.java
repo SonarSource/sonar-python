@@ -56,7 +56,7 @@ public class TypesTestUtils {
   public static FileInput parseAndInferTypes(ProjectLevelTypeTable typeTable, PythonFile pythonFile, String... code) {
     FileInput fileInput = PythonTestUtils.parseWithoutSymbols(code);
     var symbolTable = new SymbolTableBuilderV2(fileInput).build();
-    new TypeInferenceV2(typeTable, pythonFile, symbolTable).inferTypes(fileInput);
+    new TypeInferenceV2(typeTable, pythonFile, symbolTable, "my_package").inferTypes(fileInput);
     return fileInput;
   }
 }

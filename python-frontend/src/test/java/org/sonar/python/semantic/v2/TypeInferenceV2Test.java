@@ -97,7 +97,7 @@ import static org.sonar.python.types.v2.TypesTestUtils.TYPE_TYPE;
 
 public class TypeInferenceV2Test {
 
-  static PythonFile pythonFile = PythonTestUtils.pythonFile("");
+  static PythonFile pythonFile = PythonTestUtils.pythonFile("mod");
 
   @Test
   void testTypeshedImports() {
@@ -189,6 +189,42 @@ public class TypeInferenceV2Test {
     var argType = arg.expression().typeV2();
 
     assertThat(argType).isInstanceOfSatisfying(UnresolvedImportType.class, a -> assertThat(a.importPath()).isEqualTo("a.b"));
+  }
+
+  @Test
+  void testRelativeImport() {
+    FileInput fileInput = inferTypes("""
+      from . import module
+      module
+      """);
+
+    PythonType pythonType = ((ExpressionStatement) fileInput.statements().statements().get(1)).expressions().get(0).typeV2();
+    assertThat(pythonType).isInstanceOf(UnresolvedImportType.class);
+    assertThat(((UnresolvedImportType) pythonType).importPath()).isEqualTo("my_package.module");
+
+    fileInput = inferTypes("""
+      from .. import module
+      module
+      """);
+    pythonType = ((ExpressionStatement) fileInput.statements().statements().get(1)).expressions().get(0).typeV2();
+    assertThat(pythonType).isInstanceOf(UnresolvedImportType.class);
+    assertThat(((UnresolvedImportType) pythonType).importPath()).isEqualTo("module");
+
+    fileInput = inferTypes("""
+      from .hello import module
+      module
+      """);
+    pythonType = ((ExpressionStatement) fileInput.statements().statements().get(1)).expressions().get(0).typeV2();
+    assertThat(pythonType).isInstanceOf(UnresolvedImportType.class);
+    assertThat(((UnresolvedImportType) pythonType).importPath()).isEqualTo("my_package.hello.module");
+
+    fileInput = inferTypes("""
+      from ..second_hello import module
+      module
+      """);
+    pythonType = ((ExpressionStatement) fileInput.statements().statements().get(1)).expressions().get(0).typeV2();
+    assertThat(pythonType).isInstanceOf(UnresolvedImportType.class);
+    assertThat(((UnresolvedImportType) pythonType).importPath()).isEqualTo("second_hello.module");
   }
 
   @Test
@@ -2987,7 +3023,7 @@ public class TypeInferenceV2Test {
   private static Map<SymbolV2, Set<PythonType>> inferTypesBySymbol(String lines) {
     FileInput root = parse(lines);
     var symbolTable = new SymbolTableBuilderV2(root).build();
-    var typeInferenceV2 = new TypeInferenceV2(PROJECT_LEVEL_TYPE_TABLE, pythonFile, symbolTable);
+    var typeInferenceV2 = new TypeInferenceV2(PROJECT_LEVEL_TYPE_TABLE, pythonFile, symbolTable, "");
     return typeInferenceV2.inferTypes(root);
   }
 
@@ -3000,7 +3036,7 @@ public class TypeInferenceV2Test {
 
     var symbolTable = new SymbolTableBuilderV2(root)
       .build();
-    new TypeInferenceV2(projectLevelTypeTable, pythonFile, symbolTable).inferTypes(root);
+    new TypeInferenceV2(projectLevelTypeTable, pythonFile, symbolTable, "my_package").inferTypes(root);
     return root;
   }
 

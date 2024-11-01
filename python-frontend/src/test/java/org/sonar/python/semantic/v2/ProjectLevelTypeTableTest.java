@@ -321,4 +321,35 @@ class ProjectLevelTypeTableTest {
     var typeWrapper = (LazyTypeWrapper) fooType.decorators().get(0);
     assertThat(typeWrapper.hasImportPath("lib2.lib.lib_decorator")).isTrue();
   }
+
+  @Test
+  void relativeImports() {
+    var projectLevelSymbolTable = new ProjectLevelSymbolTable();
+    FileInput initTree = parseWithoutSymbols("");
+    PythonFile initFile = pythonFile("__init__.py");
+    projectLevelSymbolTable.addModule(initTree, "my_package", initFile);
+
+    var libTree = parseWithoutSymbols(
+      """
+      def foo(): ...
+      """
+    );
+    projectLevelSymbolTable.addModule(libTree, "my_package", pythonFile("lib.py"));
+
+    var projectLevelTypeTable = new ProjectLevelTypeTable(projectLevelSymbolTable);
+    var mainFile = pythonFile("main.py");
+    var fileInput = parseAndInferTypes(projectLevelTypeTable, mainFile, """
+      from .lib import foo
+      from . import lib
+      foo
+      lib
+      """
+    );
+    PythonType fooType = ((ExpressionStatement) fileInput.statements().statements().get(2)).expressions().get(0).typeV2();
+    assertThat(fooType).isInstanceOf(FunctionType.class);
+    assertThat(fooType.name()).isEqualTo("foo");
+    PythonType libType = ((ExpressionStatement) fileInput.statements().statements().get(3)).expressions().get(0).typeV2();
+    assertThat(libType).isInstanceOf(ModuleType.class);
+    assertThat(libType.name()).isEqualTo("lib");
+  }
 }

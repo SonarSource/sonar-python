@@ -43,15 +43,15 @@ public class PythonVisitorContext extends PythonInputFileContext {
   private List<PreciseIssue> issues = new ArrayList<>();
   private final TypeChecker typeChecker;
 
-  public PythonVisitorContext(FileInput rootTree, PythonFile pythonFile, @Nullable File workingDirectory, @Nullable String packageName) {
+  public PythonVisitorContext(FileInput rootTree, PythonFile pythonFile, @Nullable File workingDirectory, String packageName) {
     super(pythonFile, workingDirectory, CacheContextImpl.dummyCache());
     this.rootTree = rootTree;
     this.parsingException = null;
-    SymbolTableBuilder symbolTableBuilder = packageName != null ? new SymbolTableBuilder(packageName, pythonFile) : new SymbolTableBuilder(pythonFile);
+    SymbolTableBuilder symbolTableBuilder = new SymbolTableBuilder(packageName, pythonFile);
     symbolTableBuilder.visitFileInput(rootTree);
     var symbolTable = new SymbolTableBuilderV2(rootTree).build();
     var projectLevelTypeTable = new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty());
-    new TypeInferenceV2(projectLevelTypeTable, pythonFile, symbolTable).inferTypes(rootTree);
+    new TypeInferenceV2(projectLevelTypeTable, pythonFile, symbolTable, packageName).inferTypes(rootTree);
     this.typeChecker = new TypeChecker(projectLevelTypeTable);
   }
 
@@ -65,7 +65,7 @@ public class PythonVisitorContext extends PythonInputFileContext {
     var symbolTable = new SymbolTableBuilderV2(rootTree)
       .build();
     var projectLevelTypeTable = new ProjectLevelTypeTable(projectLevelSymbolTable);
-    new TypeInferenceV2(projectLevelTypeTable, pythonFile, symbolTable).inferTypes(rootTree);
+    new TypeInferenceV2(projectLevelTypeTable, pythonFile, symbolTable, packageName).inferTypes(rootTree);
     this.typeChecker = new TypeChecker(projectLevelTypeTable);
   }
 
@@ -78,7 +78,7 @@ public class PythonVisitorContext extends PythonInputFileContext {
     var symbolTable = new SymbolTableBuilderV2(rootTree)
       .build();
     var projectLevelTypeTable = new ProjectLevelTypeTable(projectLevelSymbolTable);
-    new TypeInferenceV2(projectLevelTypeTable, pythonFile, symbolTable).inferTypes(rootTree);
+    new TypeInferenceV2(projectLevelTypeTable, pythonFile, symbolTable, packageName).inferTypes(rootTree);
     this.typeChecker = new TypeChecker(projectLevelTypeTable);
   }
 
