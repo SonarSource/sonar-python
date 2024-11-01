@@ -263,6 +263,13 @@ class TypeCheckerTest {
     assertThat(typeChecker.typeCheckBuilder().isTypeOrInstanceWithName("flask.Response").check(responseType)).isEqualTo(TriBool.TRUE);
     assertThat(typeChecker.typeCheckBuilder().isTypeOrInstanceWithName("flask.wrappers.Response").check(responseType)).isEqualTo(TriBool.TRUE);
     assertThat(typeChecker.typeCheckBuilder().isTypeOrInstanceWithName("flask.app.Response").check(responseType)).isEqualTo(TriBool.UNKNOWN);
+
+    FunctionType maxCookieSize = (FunctionType) responseType.resolveMember("max_cookie_size").get();
+    assertThat(maxCookieSize.fullyQualifiedName()).isEqualTo("flask.wrappers.Response.max_cookie_size");
+    assertThat(typeChecker.typeCheckBuilder().isTypeWithName("flask.wrappers.Response.max_cookie_size").check(maxCookieSize)).isEqualTo(TriBool.TRUE);
+    assertThat(typeChecker.typeCheckBuilder().isTypeWithName("flask.Response.max_cookie_size").check(maxCookieSize)).isEqualTo(TriBool.TRUE);
+    assertThat(typeChecker.typeCheckBuilder().isTypeWithName("flask.Response.unknown.max_cookie_size").check(maxCookieSize)).isEqualTo(TriBool.UNKNOWN);
+    assertThat(typeChecker.typeCheckBuilder().isTypeWithName("flask.Response.autocorrect_location_header").check(maxCookieSize)).isEqualTo(TriBool.FALSE);
   }
 
   @Test

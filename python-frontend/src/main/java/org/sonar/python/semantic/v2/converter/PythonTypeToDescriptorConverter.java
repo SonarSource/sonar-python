@@ -66,7 +66,7 @@ public class PythonTypeToDescriptorConverter {
         // Avoid possible FPs in case of assigned bound method (SONARPY-2285)
         return new VariableDescriptor(symbolName, symbolFqn(parentFqn, symbolName), null);
       }
-      return convert(moduleFqn, parentFqn, symbolName, functionType);
+      return convert(moduleFqn, functionType);
     }
     if (type instanceof ClassType classType) {
       return convert(moduleFqn, parentFqn, symbolName, classType);
@@ -80,14 +80,16 @@ public class PythonTypeToDescriptorConverter {
     return new VariableDescriptor(symbolName, symbolFqn(parentFqn, symbolName), null);
   }
 
-  private static Descriptor convert(String moduleFqn, String parentFqn, String symbolName, FunctionType type) {
+  private static Descriptor convert(String moduleFqn, FunctionType type) {
 
     var parameters = type.parameters()
       .stream()
       .map(parameter -> convert(moduleFqn, parameter))
       .toList();
 
-    return new FunctionDescriptor(symbolName, symbolFqn(parentFqn, symbolName),
+    // Using FunctionType#name and FunctionType#fullyQualifiedName instead of symbol is only accurate if the function has not been reassigned
+    // This logic should be revisited when tackling SONARPY-2285
+    return new FunctionDescriptor(type.name(), type.fullyQualifiedName(),
       parameters,
       type.isAsynchronous(),
       type.isInstanceMethod(),

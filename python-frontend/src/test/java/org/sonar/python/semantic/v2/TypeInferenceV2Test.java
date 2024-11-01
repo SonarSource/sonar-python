@@ -688,7 +688,7 @@ public class TypeInferenceV2Test {
 
     CallExpression callExpressionSpy = Mockito.spy(callExpression);
     Expression calleeSpy = Mockito.spy(callExpression.callee());
-    FunctionType functionType = new FunctionType("foo", List.of(), List.of(), List.of(), new SimpleTypeWrapper(new ObjectType(INT_TYPE)), TypeOrigin.STUB, false, false, false, false, null, null);
+    FunctionType functionType = new FunctionType("foo", "my_package.foo", List.of(), List.of(), List.of(), new SimpleTypeWrapper(new ObjectType(INT_TYPE)), TypeOrigin.STUB, false, false, false, false, null, null);
     Mockito.when(calleeSpy.typeV2()).thenReturn(functionType);
     Mockito.when(callExpressionSpy.callee()).thenReturn(calleeSpy);
 
@@ -2663,6 +2663,7 @@ public class TypeInferenceV2Test {
       gettrace
       """);
     FunctionType functionType = ((FunctionType) ((ExpressionStatement) fileInput.statements().statements().get(1)).expressions().get(0).typeV2());
+    assertThat(functionType.fullyQualifiedName()).isEqualTo("sys.gettrace");
     PythonType returnType = functionType.returnType();
     UnionType unionType = (UnionType) returnType.unwrappedType();
     assertThat(unionType.candidates()).extracting(PythonType::name).containsExactlyInAnyOrder("function", "NoneType");
