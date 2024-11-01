@@ -503,7 +503,7 @@ class ProjectLevelSymbolTableTest {
     assertThat(projectLevelSymbolTable.importsByModule()).containsOnly(
       Map.entry("mod", Set.of("A")),
       Map.entry("mod2", Set.of("A", "B")),
-      Map.entry("mod3", Set.of("C.D.foo", "C.D.bar"))
+      Map.entry("mod3", Set.of("C.D"))
     );
     assertThat(projectLevelSymbolTable.getSymbol("mod2.B")).isNull();
 
@@ -515,7 +515,7 @@ class ProjectLevelSymbolTableTest {
     assertThat(projectLevelSymbolTable.importsByModule()).containsOnly(
       Map.entry("mod", Set.of("A")),
       Map.entry("mod2", Set.of("A", "B")),
-      Map.entry("mod3", Set.of("C.D.foo", "C.D.bar")),
+      Map.entry("mod3", Set.of("C.D")),
       Map.entry("mod4", Set.of("E"))
     );
 
@@ -526,9 +526,9 @@ class ProjectLevelSymbolTableTest {
     assertThat(projectLevelSymbolTable.importsByModule()).containsOnly(
       Map.entry("mod", Set.of("A")),
       Map.entry("mod2", Set.of("A", "B")),
-      Map.entry("mod3", Set.of("C.D.foo", "C.D.bar")),
+      Map.entry("mod3", Set.of("C.D")),
       Map.entry("mod4", Set.of("E")),
-      Map.entry("mod5", Collections.emptySet())
+      Map.entry("mod5", Set.of("F"))
     );
 
     tree = parseWithoutSymbols(
@@ -538,10 +538,10 @@ class ProjectLevelSymbolTableTest {
     assertThat(projectLevelSymbolTable.importsByModule()).containsOnly(
       Map.entry("mod", Set.of("A")),
       Map.entry("mod2", Set.of("A", "B")),
-      Map.entry("mod3", Set.of("C.D.foo", "C.D.bar")),
+      Map.entry("mod3", Set.of("C.D")),
       Map.entry("mod4", Set.of("E")),
-      Map.entry("mod5", Collections.emptySet()),
-      Map.entry("my_package.my_subpackage.mod6", Set.of("my_package.F", "my_package.F.G"))
+      Map.entry("mod5", Set.of("F")),
+      Map.entry("my_package.my_subpackage.mod6", Set.of("my_package.F"))
     );
   }
 
