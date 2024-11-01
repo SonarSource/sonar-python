@@ -20,9 +20,11 @@
 package org.sonar.python.semantic.v2.types;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Stream;
+import javax.annotation.CheckForNull;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Tree;
@@ -108,9 +110,12 @@ public abstract class Propagation {
 
   public abstract PythonType rhsType();
 
+  @CheckForNull
   static PythonType currentType(Name lhsName) {
-    return lhsName.symbolV2().usages()
+    return Optional.ofNullable(lhsName.symbolV2())
       .stream()
+      .map(SymbolV2::usages)
+      .flatMap(List::stream)
       .filter(u -> !SymbolV2Utils.isDeclaration(u))
       .map(UsageV2::tree)
       .filter(Expression.class::isInstance)
