@@ -385,21 +385,15 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
 
   @Override
   public void visitImportFrom(ImportFrom importFrom) {
-    List<String> fromModuleFqn;
-    List<Token> dotPrefixTokens = importFrom.dottedPrefixForModule();
-
-    List<String> dottedPart = Optional.ofNullable(importFrom.module())
+    List<String> fromModuleFqn = Optional.ofNullable(importFrom.module())
       .map(TrivialTypeInferenceVisitor::dottedNameToPartFqn)
       .orElse(new ArrayList<>());
-
-    List<String> moduleFqnElements = new ArrayList<>(Arrays.stream(fullyQualifiedModuleName.split("\\.")).toList());
+    List<Token> dotPrefixTokens = importFrom.dottedPrefixForModule();
     if (!dotPrefixTokens.isEmpty()) {
       // Relative import: we start from the current module FQN and go up as many levels as there are dots in the import statement
+      List<String> moduleFqnElements = List.of(fullyQualifiedModuleName.split("\\."));
       int sizeLimit = Math.max(0, moduleFqnElements.size() - dotPrefixTokens.size());
-      fromModuleFqn = Stream.concat(moduleFqnElements.stream().limit(sizeLimit), dottedPart.stream()).toList();
-    } else {
-      // Absolute import: we start from the root module and don't use the current module FQN
-      fromModuleFqn = dottedPart;
+      fromModuleFqn = Stream.concat(moduleFqnElements.stream().limit(sizeLimit), fromModuleFqn.stream()).toList();
     }
     setTypeToImportFromStatement(importFrom, fromModuleFqn);
   }
