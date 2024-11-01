@@ -62,13 +62,13 @@ class PythonTypeToDescriptorConverterTest {
   @Test
   void testConvertFunctionTypeWithoutDecorator() {
     ParameterV2 parameterV2 = new ParameterV2("param", TypeWrapper.of(intTypeWrapper.type()), false, true, false, false, false, location);
-    FunctionType functionType = new FunctionType("functionType", List.of(new ModuleType("bar")), List.of(parameterV2), List.of(), floatTypeWrapper, TypeOrigin.LOCAL, true, false, true, false, null, location);
+    FunctionType functionType = new FunctionType("functionType", "my_package.foo.functionType", List.of(new ModuleType("bar")), List.of(parameterV2), List.of(), floatTypeWrapper, TypeOrigin.LOCAL, true, false, true, false, null, location);
     Descriptor descriptor = converter.convert("foo", new SymbolV2("myFunction"), Set.of(functionType));
 
     assertThat(descriptor).isInstanceOf(FunctionDescriptor.class);
     FunctionDescriptor functionDescriptor = (FunctionDescriptor) descriptor;
-    assertThat(functionDescriptor.name()).isEqualTo("myFunction");
-    assertThat(functionDescriptor.fullyQualifiedName()).isEqualTo("foo.myFunction");
+    assertThat(functionDescriptor.name()).isEqualTo("functionType");
+    assertThat(functionDescriptor.fullyQualifiedName()).isEqualTo("my_package.foo.functionType");
     assertThat(functionDescriptor.kind()).isEqualTo(Descriptor.Kind.FUNCTION);
     assertThat(functionDescriptor.isAsynchronous()).isTrue();
     assertThat(functionDescriptor.isInstanceMethod()).isTrue();
@@ -196,7 +196,7 @@ class PythonTypeToDescriptorConverterTest {
   @Test
   void testConvertManyTypes() {
     ClassType classType = new ClassType("classType", Set.of(new Member("aMember", intTypeWrapper.type())), List.of(), List.of(floatTypeWrapper), List.of(intTypeWrapper.type()), true, location);
-    FunctionType functionType = new FunctionType("functionType", List.of(new ModuleType("bar")), List.of(), List.of(), floatTypeWrapper, TypeOrigin.LOCAL, true, false, true, false, null, location);
+    FunctionType functionType = new FunctionType("functionType", "my_package.functionType", List.of(new ModuleType("bar")), List.of(), List.of(), floatTypeWrapper, TypeOrigin.LOCAL, true, false, true, false, null, location);
     Descriptor descriptor = converter.convert("foo", new SymbolV2("myUnionType"), Set.of(functionType, classType));
 
     assertThat(descriptor).isInstanceOf(AmbiguousDescriptor.class);

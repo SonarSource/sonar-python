@@ -98,12 +98,16 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
   private final TypeTable projectLevelTypeTable;
   private final String fileId;
   private final String fullyQualifiedModuleName;
+  private final String moduleName;
 
-  private final Deque<PythonType> typeStack = new ArrayDeque<>();
+  private final Deque<Scope> typeStack = new ArrayDeque<>();
+
+  private record Scope(PythonType type, String scopeFullyQualifiedName) {}
 
   public TrivialTypeInferenceVisitor(TypeTable projectLevelTypeTable, PythonFile pythonFile, String fullyQualifiedModuleName) {
     this.projectLevelTypeTable = projectLevelTypeTable;
     Path path = pathOf(pythonFile);
+    this.moduleName = pythonFile.fileName();
     this.fileId = path != null ? path.toString() : pythonFile.toString();
     this.fullyQualifiedModuleName = fullyQualifiedModuleName;
   }
@@ -111,7 +115,7 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
 
   @Override
   public void visitFileInput(FileInput fileInput) {
-    var type = new ModuleType("somehow get its name");
+    var type = new ModuleType(moduleName);
     inTypeScope(type, () -> super.visitFileInput(fileInput));
   }
 
@@ -321,8 +325,9 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
   }
 
   private FunctionType buildFunctionType(FunctionDef functionDef) {
+    String fullyQualifiedName = currentScopeFullyQualifiedName() + "." + functionDef.name().name();
     FunctionTypeBuilder functionTypeBuilder = new FunctionTypeBuilder()
-      .fromFunctionDef(functionDef, fileId, projectLevelTypeTable)
+      .fromFunctionDef(functionDef, fullyQualifiedName, fileId, projectLevelTypeTable)
       .withDefinitionLocation(locationInFile(functionDef.name(), fileId));
     ClassType owner = null;
     if (currentType() instanceof ClassType classType) {
@@ -555,11 +560,19 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
   }
 
   private PythonType currentType() {
-    return typeStack.peek();
+    return typeStack.peek().type();
+  }
+
+  private String currentScopeFullyQualifiedName() {
+    return typeStack.peek().scopeFullyQualifiedName();
   }
 
   private void inTypeScope(PythonType pythonType, Runnable runnable) {
-    this.typeStack.push(pythonType);
+    String newScopeFullyQualifiedName = Optional.ofNullable(typeStack.peek())
+      .map(Scope::scopeFullyQualifiedName)
+      .map(s -> s + "." + pythonType.name())
+      .orElse(fullyQualifiedModuleName);
+    this.typeStack.push(new Scope(pythonType, newScopeFullyQualifiedName));
     runnable.run();
     this.typeStack.poll();
   }

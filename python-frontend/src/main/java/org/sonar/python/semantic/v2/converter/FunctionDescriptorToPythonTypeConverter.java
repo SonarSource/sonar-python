@@ -69,6 +69,7 @@ public class FunctionDescriptorToPythonTypeConverter implements DescriptorToPyth
     var toBuilder = new FunctionTypeBuilder()
       .withOwner(ctx.currentParent())
       .withName(from.name())
+      .withFullyQualifiedName(from.fullyQualifiedName())
       .withParameters(parameters)
       .withDecorators(decorators)
       .withReturnType(returnType)

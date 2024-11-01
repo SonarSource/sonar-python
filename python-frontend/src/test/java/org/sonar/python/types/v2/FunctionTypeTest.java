@@ -35,10 +35,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.PythonTestUtils.parseWithoutSymbols;
 import static org.sonar.python.types.v2.TypesTestUtils.INT_TYPE;
 import static org.sonar.python.types.v2.TypesTestUtils.PROJECT_LEVEL_TYPE_TABLE;
+import static org.sonar.python.types.v2.TypesTestUtils.parseAndInferTypes;
 
 class FunctionTypeTest {
 
-  static PythonFile pythonFile = PythonTestUtils.pythonFile("");
+  static PythonFile pythonFile = PythonTestUtils.pythonFile("mod");
 
   @Test
   void arity() {
@@ -142,6 +143,37 @@ class FunctionTypeTest {
   }
 
   @Test
+  void fullyQualifiedName() {
+    FunctionType functionType = functionType("def foo(): ...");
+    assertThat(functionType.name()).isEqualTo("foo");
+    assertThat(functionType.fullyQualifiedName()).isEqualTo("my_package.mod.foo");
+
+    functionType = functionType("""
+      class MyClass:
+        def bar(): ...
+      """);
+    assertThat(functionType.name()).isEqualTo("bar");
+    assertThat(functionType.fullyQualifiedName()).isEqualTo("my_package.mod.MyClass.bar");
+
+    functionType = functionType("""
+      class MyClass:
+        class MyNestedClass:
+          def qix(): ...
+      """);
+    assertThat(functionType.name()).isEqualTo("qix");
+    assertThat(functionType.fullyQualifiedName()).isEqualTo("my_package.mod.MyClass.MyNestedClass.qix");
+
+    FileInput fileInput = parseAndInferTypes(pythonFile, """
+      def baz():
+        def nested(): ...
+      """);
+    FunctionDef functionDef = (FunctionDef) PythonTestUtils.getAllDescendant(fileInput, t -> t.is(Tree.Kind.FUNCDEF)).get(1);
+    functionType = (FunctionType) functionDef.name().typeV2();
+    assertThat(functionType.name()).isEqualTo("nested");
+    assertThat(functionType.fullyQualifiedName()).isEqualTo("my_package.mod.baz.nested");
+  }
+
+  @Test
   void declaredTypes() {
     // TODO: SONARPY-1776 handle declared return type
     FunctionType functionType = functionType("def fn(p1: int): pass");
@@ -201,7 +233,7 @@ class FunctionTypeTest {
     FileInput fileInput = parseWithoutSymbols(code);
     var symbolTable = new SymbolTableBuilderV2(fileInput)
       .build();
-    new TypeInferenceV2(PROJECT_LEVEL_TYPE_TABLE, pythonFile, symbolTable, "").inferTypes(fileInput);
+    new TypeInferenceV2(PROJECT_LEVEL_TYPE_TABLE, pythonFile, symbolTable, "my_package").inferTypes(fileInput);
     FunctionDef functionDef = (FunctionDef) PythonTestUtils.getAllDescendant(fileInput, t -> t.is(Tree.Kind.FUNCDEF)).get(0);
     return (FunctionType) functionDef.name().typeV2();
   }
