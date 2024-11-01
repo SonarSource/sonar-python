@@ -49,6 +49,7 @@ public class FunctionTypeBuilder implements TypeBuilder<FunctionType> {
 
   private boolean hasVariadicParameter;
   private String name;
+  private String fullyQualifiedName;
   private List<PythonType> attributes;
   private List<ParameterV2> parameters;
   private List<TypeWrapper> decorators;
@@ -63,8 +64,9 @@ public class FunctionTypeBuilder implements TypeBuilder<FunctionType> {
   private static final String CLASS_METHOD_DECORATOR = "classmethod";
   private static final String STATIC_METHOD_DECORATOR = "staticmethod";
 
-  public FunctionTypeBuilder fromFunctionDef(FunctionDef functionDef, @Nullable String fileId, TypeTable projectLevelTypeTable) {
+  public FunctionTypeBuilder fromFunctionDef(FunctionDef functionDef, String fullyQualifiedName, @Nullable String fileId, TypeTable projectLevelTypeTable) {
     this.name = functionDef.name().name();
+    this.fullyQualifiedName = fullyQualifiedName;
     this.attributes = new ArrayList<>();
     this.parameters = new ArrayList<>();
     isAsynchronous = functionDef.asyncKeyword() != null;
@@ -92,6 +94,11 @@ public class FunctionTypeBuilder implements TypeBuilder<FunctionType> {
 
   public FunctionTypeBuilder withName(String name) {
     this.name = name;
+    return this;
+  }
+
+  public FunctionTypeBuilder withFullyQualifiedName(String fullyQualifiedName) {
+    this.fullyQualifiedName = fullyQualifiedName;
     return this;
   }
 
@@ -153,7 +160,8 @@ public class FunctionTypeBuilder implements TypeBuilder<FunctionType> {
 
   public FunctionType build() {
     return new FunctionType(
-      name, attributes, parameters, decorators, returnType, typeOrigin, isAsynchronous, hasDecorators, isInstanceMethod, hasVariadicParameter, owner, definitionLocation
+      name, fullyQualifiedName, attributes, parameters, decorators, returnType, typeOrigin,
+      isAsynchronous, hasDecorators, isInstanceMethod, hasVariadicParameter, owner, definitionLocation
     );
   }
 
