@@ -1,3 +1,0 @@
-from typing import List
-
-def func2(a : List): ...
