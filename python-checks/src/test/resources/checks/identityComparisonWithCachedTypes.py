@@ -160,3 +160,10 @@ def potential_null_symbols():
 def comparison_to_class(arg):
     import typing
     arg is not typing.Tuple
+
+def resolved_integer_variables(arg):
+    import logging
+    import subprocess
+
+    arg is logging.INFO # Noncompliant
+    arg is subprocess.STDOUT # Noncompliant
