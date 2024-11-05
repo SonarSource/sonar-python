@@ -43,6 +43,7 @@ import static org.sonar.plugins.python.api.tree.Tree.Kind.FUNCDEF;
 public class ChangeMethodContractCheck extends PythonSubscriptionCheck {
 
   private static final Set<String> IGNORING_DECORATORS = Set.of(
+    "abc.abstractmethod",
     "abstractmethod",
     "overload"
   );
