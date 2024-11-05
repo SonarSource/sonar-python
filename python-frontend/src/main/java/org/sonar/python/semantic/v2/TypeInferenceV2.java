@@ -51,6 +51,7 @@ public class TypeInferenceV2 {
   private final SymbolTable symbolTable;
   private final PythonFile pythonFile;
   private final String fullyQualifiedModuleName;
+  private Set<String> importedModulesFQN;
 
   public TypeInferenceV2(TypeTable projectLevelTypeTable, PythonFile pythonFile, SymbolTable symbolTable, String packageName) {
     this.projectLevelTypeTable = projectLevelTypeTable;
@@ -61,6 +62,7 @@ public class TypeInferenceV2 {
 
   public Map<SymbolV2, Set<PythonType>> inferTypes(FileInput fileInput) {
     TrivialTypeInferenceVisitor trivialTypeInferenceVisitor = new TrivialTypeInferenceVisitor(projectLevelTypeTable, pythonFile, fullyQualifiedModuleName);
+    this.importedModulesFQN = trivialTypeInferenceVisitor.importedModulesFQN();
     fileInput.accept(trivialTypeInferenceVisitor);
 
     var typesBySymbol = inferTypesAndMemberAccessSymbols(fileInput);
@@ -180,4 +182,7 @@ public class TypeInferenceV2 {
     return trackedVars;
   }
 
+  public Set<String> importedModulesFQN() {
+    return importedModulesFQN;
+  }
 }

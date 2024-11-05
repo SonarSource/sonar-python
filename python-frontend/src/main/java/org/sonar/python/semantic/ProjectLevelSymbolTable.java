@@ -94,11 +94,28 @@ public class ProjectLevelSymbolTable {
 
   public void addModule(FileInput fileInput, String packageName, PythonFile pythonFile) {
     SymbolTableBuilder symbolTableBuilder = new SymbolTableBuilder(packageName, pythonFile);
-    String fullyQualifiedModuleName = SymbolUtils.fullyQualifiedModuleName(packageName, pythonFile.fileName());
     fileInput.accept(symbolTableBuilder);
 
-    importsByModule.put(fullyQualifiedModuleName, symbolTableBuilder.importedModulesFQN());
-    addModuleV2(fileInput, packageName, pythonFile);
+    String fullyQualifiedModuleName = SymbolUtils.fullyQualifiedModuleName(packageName, pythonFile.fileName());
+    var symbolTable = new SymbolTableBuilderV2(fileInput).build();
+    var typeInferenceV2 = new TypeInferenceV2(new BasicTypeTable(), pythonFile, symbolTable, packageName);
+    var typesBySymbol = typeInferenceV2.inferTypes(fileInput);
+    importsByModule.put(fullyQualifiedModuleName, typeInferenceV2.importedModulesFQN());
+    var moduleDescriptors = typesBySymbol.entrySet()
+      .stream()
+      .filter(entry -> entry.getValue().stream().noneMatch(UnknownType.UnresolvedImportType.class::isInstance))
+      .map(entry -> {
+          var descriptor = pythonTypeToDescriptorConverter.convert(fullyQualifiedModuleName, entry.getKey(), entry.getValue());
+          return Map.entry(entry.getKey(), descriptor);
+        }
+      )
+      .filter(entry -> !(!Objects.requireNonNull(entry.getValue().fullyQualifiedName()).startsWith(fullyQualifiedModuleName)
+        || entry.getKey().usages().stream().anyMatch(u -> u.kind().equals(UsageV2.Kind.IMPORT))))
+      .map(Map.Entry::getValue)
+      .collect(Collectors.toSet());
+    globalDescriptorsByModuleName.put(fullyQualifiedModuleName, moduleDescriptors);
+    addModuleToGlobalSymbolsByFQN(moduleDescriptors);
+
     DjangoViewsVisitor djangoViewsVisitor = new DjangoViewsVisitor(fullyQualifiedModuleName);
     fileInput.accept(djangoViewsVisitor);
   }
@@ -184,29 +201,6 @@ public class ProjectLevelSymbolTable {
       typeShedDescriptorsProvider = new TypeShedDescriptorsProvider(projectBasePackages);
     }
     return typeShedDescriptorsProvider;
-  }
-
-
-  private void addModuleV2(FileInput astRoot, String packageName, PythonFile pythonFile) {
-    // TODO: inline in addModule
-    var fullyQualifiedModuleName = SymbolUtils.fullyQualifiedModuleName(packageName, pythonFile.fileName());
-    var symbolTable = new SymbolTableBuilderV2(astRoot).build();
-    var typeInferenceV2 = new TypeInferenceV2(new BasicTypeTable(), pythonFile, symbolTable, packageName);
-    var typesBySymbol = typeInferenceV2.inferTypes(astRoot);
-    var moduleDescriptors = typesBySymbol.entrySet()
-      .stream()
-      .filter(entry -> entry.getValue().stream().noneMatch(UnknownType.UnresolvedImportType.class::isInstance))
-      .map(entry -> {
-          var descriptor = pythonTypeToDescriptorConverter.convert(fullyQualifiedModuleName, entry.getKey(), entry.getValue());
-          return Map.entry(entry.getKey(), descriptor);
-        }
-      )
-      .filter(entry -> !(!Objects.requireNonNull(entry.getValue().fullyQualifiedName()).startsWith(fullyQualifiedModuleName)
-                         || entry.getKey().usages().stream().anyMatch(u -> u.kind().equals(UsageV2.Kind.IMPORT))))
-      .map(Map.Entry::getValue)
-      .collect(Collectors.toSet());
-    globalDescriptorsByModuleName.put(fullyQualifiedModuleName, moduleDescriptors);
-    addModuleToGlobalSymbolsByFQN(moduleDescriptors);
   }
 
   private class DjangoViewsVisitor extends BaseTreeVisitor {
