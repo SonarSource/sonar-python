@@ -191,7 +191,6 @@ class FunctionTypeTest {
 
   @Test
   void decorators() {
-    // TODO: SONARPY-1772 Handle decorators
     FunctionType functionType = functionType("@something\ndef fn(p1, *args): pass");
     assertThat(functionType.hasDecorators()).isTrue();
 

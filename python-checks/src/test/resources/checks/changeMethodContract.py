@@ -129,3 +129,22 @@ class MyTZInfo(datetime.tzinfo):
 class MyDictionary(dict):
     def get(self, key):
         ...
+
+from abc import abstractmethod
+import abc
+
+class AbstractSuperclass:
+  @abstractmethod
+  def foo(self, a: int):
+    ...
+
+  @abc.abstractmethod
+  def bar(self, a: int):
+    ...
+
+class InheritedFromAbstractSuperclass(AbstractSuperclass):
+  def foo(self): # Noncompliant
+    ...
+
+  def bar(self): # Noncompliant
+    ...

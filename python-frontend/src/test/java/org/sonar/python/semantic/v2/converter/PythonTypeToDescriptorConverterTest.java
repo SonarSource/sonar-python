@@ -62,7 +62,19 @@ class PythonTypeToDescriptorConverterTest {
   @Test
   void testConvertFunctionTypeWithoutDecorator() {
     ParameterV2 parameterV2 = new ParameterV2("param", TypeWrapper.of(intTypeWrapper.type()), false, true, false, false, false, location);
-    FunctionType functionType = new FunctionType("functionType", "my_package.foo.functionType", List.of(new ModuleType("bar")), List.of(parameterV2), List.of(), floatTypeWrapper, TypeOrigin.LOCAL, true, false, true, false, null, location);
+    FunctionType functionType = new FunctionType("functionType",
+      "my_package.foo.functionType",
+      List.of(new ModuleType("bar")),
+      List.of(parameterV2),
+      List.of(TypeWrapper.of(new UnknownType.UnresolvedImportType("abc.abstractmethod"))),
+      floatTypeWrapper,
+      TypeOrigin.LOCAL,
+      true,
+      true,
+      true,
+      false,
+      null,
+      location);
     Descriptor descriptor = converter.convert("foo", new SymbolV2("myFunction"), Set.of(functionType));
 
     assertThat(descriptor).isInstanceOf(FunctionDescriptor.class);
@@ -79,9 +91,8 @@ class PythonTypeToDescriptorConverterTest {
     // TODO SONARPY-2223 support for type annotation is missing in FunctionType
     assertThat(functionDescriptor.typeAnnotationDescriptor()).isNull();
 
-    // TODO SONARPY-2223 support for decorators is missing in FunctionType
-    assertThat(functionDescriptor.hasDecorators()).isFalse();
-    assertThat(functionDescriptor.decorators()).isEmpty();
+    assertThat(functionDescriptor.hasDecorators()).isTrue();
+    assertThat(functionDescriptor.decorators()).isNotEmpty().containsOnly("abc.abstractmethod");
     assertThat(functionDescriptor.definitionLocation()).isEqualTo(location);
 
     assertThat(functionDescriptor.parameters()).hasSize(1);
