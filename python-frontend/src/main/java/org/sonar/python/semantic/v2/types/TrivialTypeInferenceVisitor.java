@@ -24,8 +24,10 @@ import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Deque;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Stream;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.PythonFile;
@@ -101,6 +103,7 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
   private final String moduleName;
 
   private final Deque<Scope> typeStack = new ArrayDeque<>();
+  private final Set<String> importedModulesFQN = new HashSet<>();
 
   private record Scope(PythonType type, String scopeFullyQualifiedName) {}
 
@@ -112,6 +115,9 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
     this.fullyQualifiedModuleName = fullyQualifiedModuleName;
   }
 
+  public Set<String> importedModulesFQN() {
+    return importedModulesFQN;
+  }
 
   @Override
   public void visitFileInput(FileInput fileInput) {
@@ -361,7 +367,7 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
         var dottedName = aliasedName.dottedName();
         var fqn = dottedNameToPartFqn(dottedName);
         var resolvedType = projectLevelTypeTable.getModuleType(fqn);
-
+        importedModulesFQN.add(String.join(".", fqn));
         if (aliasedName.alias() != null) {
           generateNamesForImportAlias(aliasedName, resolvedType, fqn);
         } else {
@@ -403,6 +409,7 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
       int sizeLimit = Math.max(0, moduleFqnElements.size() - dotPrefixTokens.size());
       fromModuleFqn = Stream.concat(moduleFqnElements.stream().limit(sizeLimit), fromModuleFqn.stream()).toList();
     }
+    importedModulesFQN.add(String.join(".", fromModuleFqn));
     setTypeToImportFromStatement(importFrom, fromModuleFqn);
   }
 
