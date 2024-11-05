@@ -302,9 +302,9 @@ class ProjectLevelTypeTableTest {
     projectLevelSymbolTable.addModule(libTree, "", pythonFile("lib.py"));
     var lib2Tree = parseWithoutSymbols(
       """
-      import lib
+      import lib as l
       
-      @lib.lib_decorator
+      @l.lib_decorator
       def foo(): ...
       """
     );
@@ -319,7 +319,39 @@ class ProjectLevelTypeTableTest {
     );
     var fooType = (FunctionType) ((ExpressionStatement) fileInput.statements().statements().get(1)).expressions().get(0).typeV2();
     var typeWrapper = (LazyTypeWrapper) fooType.decorators().get(0);
-    assertThat(typeWrapper.hasImportPath("lib2.lib.lib_decorator")).isTrue();
+    assertThat(typeWrapper.hasImportPath("lib.lib_decorator")).isTrue();
+  }
+  
+  @Test
+  void importedFunctionDecoratorNamesTest() {
+    var projectLevelSymbolTable = new ProjectLevelSymbolTable();
+    var libTree = parseWithoutSymbols(
+      """
+      from abc import abstractmethod
+      
+      class A:
+        @abstractmethod
+        def foo(self): ...
+      """
+    );
+    projectLevelSymbolTable.addModule(libTree, "", pythonFile("lib.py"));
+
+    var projectLevelTypeTable = new ProjectLevelTypeTable(projectLevelSymbolTable);
+    var mainFile = pythonFile("main.py");
+    var fileInput = parseAndInferTypes(projectLevelTypeTable, mainFile, """
+      from lib import A
+      from datetime import tzinfo
+      A.foo
+      tzinfo.tzname
+      """
+    );
+    var fooType = (FunctionType) ((ExpressionStatement) fileInput.statements().statements().get(2)).expressions().get(0).typeV2();
+    var typeWrapper = (LazyTypeWrapper) fooType.decorators().get(0);
+    assertThat(typeWrapper.hasImportPath("abc.abstractmethod")).isTrue();
+    var tznameType = (FunctionType) ((ExpressionStatement) fileInput.statements().statements().get(3)).expressions().get(0).typeV2();
+    typeWrapper = (LazyTypeWrapper) tznameType.decorators().get(0);
+    // SONARPY-2300 - need to fix serializer to use fully qualified names
+    assertThat(typeWrapper.hasImportPath("abstractmethod")).isTrue();
   }
 
   @Test
