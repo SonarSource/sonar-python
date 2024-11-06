@@ -36,8 +36,10 @@ public class TypeCheckerPoc {
   interface InnerPredicateBuilder<I extends TypeCheckerBuilder<? extends I>, O extends TypeCheckerBuilder<? extends O>> {
     O construct(I input, TypeCheckerBuilderContext typeCheckerBuilderContext);
 
-    default InnerPredicateBuilder<I, O> anyMatch() {
-      return this;
+    default InnerPredicateBuilder<I, O> anyCandidate() {
+      return (builder, ctx) -> {
+        return this.construct(builder, ctx);
+      };
     }
   }
 

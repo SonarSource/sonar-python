@@ -19,14 +19,18 @@
  */
 package org.sonar.python.types.v3;
 
+import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.semantic.v2.ClassTypeBuilder;
 import org.sonar.python.semantic.v2.ObjectTypeBuilder;
 import org.sonar.python.semantic.v2.ProjectLevelTypeTable;
 import org.sonar.python.types.v2.TypeUtils;
+import org.sonar.python.types.v2.UnionType;
+import org.sonar.python.types.v3.TypeCheckerPoc.UnspecializedTypeCheckerBuilder;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.sonar.python.types.v3.TypeCheckerPocPredicates.isObject;
 
 class TypeCheckerPocTest {
 
@@ -34,7 +38,7 @@ class TypeCheckerPocTest {
   void simpleClassType() {
     var projectLeveLTypeTable = new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty());
     var builderContext = new TypeCheckerPoc.TypeCheckerBuilderContext(projectLeveLTypeTable);
-    var typeChecker = new TypeCheckerPoc.UnspecializedTypeCheckerBuilder(builderContext)
+    var typeChecker = new UnspecializedTypeCheckerBuilder(builderContext)
       .with(TypeCheckerPocPredicates.isClass())
       .build();
 
@@ -49,8 +53,8 @@ class TypeCheckerPocTest {
   void simpleIsObject() {
     var projectLeveLTypeTable = new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty());
     var builderContext = new TypeCheckerPoc.TypeCheckerBuilderContext(projectLeveLTypeTable);
-    var typeChecker = new TypeCheckerPoc.UnspecializedTypeCheckerBuilder(builderContext)
-      .with(TypeCheckerPocPredicates.isObject("builtins.float"))
+    var typeChecker = new UnspecializedTypeCheckerBuilder(builderContext)
+      .with(isObject("builtins.float"))
       .build();
 
     var floatType = TypeUtils.ensureWrappedObjectType(projectLeveLTypeTable.getType("builtins.float"));
@@ -59,4 +63,26 @@ class TypeCheckerPocTest {
     assertThat(typeChecker.isTrue(floatType)).isTrue();
     assertThat(typeChecker.isTrue(classType)).isFalse();
   }
+
+  @Test
+  void simpleAnyCandidate() {
+    var projectLeveLTypeTable = new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty());
+    var builderContext = new TypeCheckerPoc.TypeCheckerBuilderContext(projectLeveLTypeTable);
+    var typeCheckerAny = new UnspecializedTypeCheckerBuilder(builderContext)
+      .with(isObject("builtins.float").anyCandidate())
+      .build();
+    var typeCheckerDefault = new UnspecializedTypeCheckerBuilder(builderContext)
+      .with(isObject("builtins.float"))
+      .build();
+
+    var objType1 = TypeUtils.ensureWrappedObjectType(projectLeveLTypeTable.getType("NoneType"));
+    var objFloat = TypeUtils.ensureWrappedObjectType(projectLeveLTypeTable.getType("builtins.float"));
+    var objType2 = TypeUtils.ensureWrappedObjectType(projectLeveLTypeTable.getType("builtins.int"));
+
+    var unionType = UnionType.or(List.of(objType1, objFloat, objType2));
+
+    assertThat(typeCheckerAny.isTrue(unionType)).isTrue();
+    assertThat(typeCheckerDefault.isTrue(unionType)).isFalse();
+  }
+
 }
