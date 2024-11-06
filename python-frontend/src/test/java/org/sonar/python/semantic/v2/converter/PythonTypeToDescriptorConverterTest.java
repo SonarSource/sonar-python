@@ -30,6 +30,7 @@ import org.sonar.python.index.AmbiguousDescriptor;
 import org.sonar.python.index.ClassDescriptor;
 import org.sonar.python.index.Descriptor;
 import org.sonar.python.index.FunctionDescriptor;
+import org.sonar.python.index.TypeAnnotationDescriptor;
 import org.sonar.python.index.VariableDescriptor;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.semantic.v2.LazyTypesContext;
@@ -85,11 +86,11 @@ class PythonTypeToDescriptorConverterTest {
     assertThat(functionDescriptor.isAsynchronous()).isTrue();
     assertThat(functionDescriptor.isInstanceMethod()).isTrue();
 
-    // TODO SONARPY-2223 support for return type is missing in FunctionType
-    assertThat(functionDescriptor.annotatedReturnTypeName()).isNull();
-
-    // TODO SONARPY-2223 support for type annotation is missing in FunctionType
-    assertThat(functionDescriptor.typeAnnotationDescriptor()).isNull();
+    assertThat(functionDescriptor.annotatedReturnTypeName()).isEqualTo("float");
+    assertThat(functionDescriptor.typeAnnotationDescriptor())
+      .isNotNull()
+      .extracting(TypeAnnotationDescriptor::fullyQualifiedName)
+      .isEqualTo("float");
 
     assertThat(functionDescriptor.hasDecorators()).isTrue();
     assertThat(functionDescriptor.decorators()).isNotEmpty().containsOnly("abc.abstractmethod");

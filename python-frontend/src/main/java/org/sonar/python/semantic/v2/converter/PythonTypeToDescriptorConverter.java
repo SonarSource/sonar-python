@@ -30,6 +30,7 @@ import org.sonar.python.index.AmbiguousDescriptor;
 import org.sonar.python.index.ClassDescriptor;
 import org.sonar.python.index.Descriptor;
 import org.sonar.python.index.FunctionDescriptor;
+import org.sonar.python.index.TypeAnnotationDescriptor;
 import org.sonar.python.index.VariableDescriptor;
 import org.sonar.python.semantic.v2.SymbolV2;
 import org.sonar.python.semantic.v2.UsageV2;
@@ -96,6 +97,10 @@ public class PythonTypeToDescriptorConverter {
       .filter(Objects::nonNull)
       .toList();
 
+    var returnType = type.returnType();
+    var annotatedReturnTypeName = typeFqn(moduleFqn, returnType);
+    var typeAnnotationDescriptor = convertReturnType(moduleFqn, returnType);
+
     // Using FunctionType#name and FunctionType#fullyQualifiedName instead of symbol is only accurate if the function has not been reassigned
     // This logic should be revisited when tackling SONARPY-2285
     return new FunctionDescriptor(type.name(), type.fullyQualifiedName(),
@@ -105,9 +110,18 @@ public class PythonTypeToDescriptorConverter {
       decorators,
       type.hasDecorators(),
       type.definitionLocation().orElse(null),
-      null,
-      null
+      annotatedReturnTypeName,
+      typeAnnotationDescriptor
     );
+  }
+
+  @CheckForNull
+  private static TypeAnnotationDescriptor convertReturnType(String moduleFqn, PythonType returnType) {
+    if (returnType.unwrappedType() != PythonType.UNKNOWN) {
+      var typeAnnotationDescriptor = new TypeAnnotationDescriptor(typeFqn(moduleFqn, returnType.unwrappedType()), TypeAnnotationDescriptor.TypeKind.INSTANCE, List.of(), typeFqn(moduleFqn, returnType.unwrappedType()));
+      return typeAnnotationDescriptor;
+    }
+    return null;
   }
 
   private static Descriptor convert(String moduleFqn, String parentFqn, String symbolName, ClassType type) {

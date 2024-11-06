@@ -20,7 +20,6 @@
 package org.sonar.python.semantic.v2;
 
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.tree.ExpressionStatement;
@@ -30,6 +29,7 @@ import org.sonar.python.types.v2.ClassType;
 import org.sonar.python.types.v2.FunctionType;
 import org.sonar.python.types.v2.LazyTypeWrapper;
 import org.sonar.python.types.v2.ModuleType;
+import org.sonar.python.types.v2.ObjectType;
 import org.sonar.python.types.v2.PythonType;
 import org.sonar.python.types.v2.TriBool;
 import org.sonar.python.types.v2.TypeChecker;
@@ -353,6 +353,28 @@ class ProjectLevelTypeTableTest {
     typeWrapper = (LazyTypeWrapper) tznameType.decorators().get(0);
     // SONARPY-2300 - need to fix serializer to use fully qualified names
     assertThat(typeWrapper.hasImportPath("abstractmethod")).isTrue();
+  }
+
+  @Test
+  void importedFunctionReturnTypeTest() {
+    var projectLevelSymbolTable = new ProjectLevelSymbolTable();
+    var libTree = parseWithoutSymbols(
+      """
+      def foo() -> int: ...
+      """
+    );
+    projectLevelSymbolTable.addModule(libTree, "", pythonFile("lib.py"));
+
+    var projectLevelTypeTable = new ProjectLevelTypeTable(projectLevelSymbolTable);
+    var mainFile = pythonFile("main.py");
+    var fileInput = parseAndInferTypes(projectLevelTypeTable, mainFile, """
+      from lib import foo
+      foo
+      """
+    );
+    var fooType = (FunctionType) ((ExpressionStatement) fileInput.statements().statements().get(1)).expressions().get(0).typeV2();
+    assertThat(fooType.returnType()).isInstanceOf(ObjectType.class).extracting(PythonType::unwrappedType)
+      .isInstanceOfSatisfying(ClassType.class, returnClassType -> assertThat(returnClassType.name()).isEqualTo("int"));
   }
 
   @Test

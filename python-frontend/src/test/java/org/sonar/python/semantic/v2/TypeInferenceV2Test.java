@@ -2398,7 +2398,7 @@ public class TypeInferenceV2Test {
     assertThat(fooType.typeOrigin()).isEqualTo(TypeOrigin.LOCAL);
     PythonType xType = ((ExpressionStatement) fileInput.statements().statements().get(3)).expressions().get(0).typeV2();
     // Declared return types of local functions are currently not stored in the project level symbol table
-    assertThat(xType).isEqualTo(PythonType.UNKNOWN);
+    assertThat(xType.unwrappedType()).isSameAs(projectLevelTypeTable.getBuiltinsModule().resolveMember("int").get());
   }
 
   @Test
