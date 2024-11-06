@@ -27,6 +27,7 @@ class MyInterface:
         raise NotImplementedError("This object should be subclassed")
 
 class Parent:
+    self.foo = 1
     # Noncompliant@+2 {{Remove the unused function parameter "a".}}
     'Issues are not raised when the variable is mentioned in a comment related to the function'
     def do_something(self, a, b):
@@ -40,6 +41,11 @@ class Parent:
 class Child(Parent):
     def do_something_else(self, a, b):
         return compute(a)
+
+    # FP when a member field in the parent class has the same name as a function in derived class
+    def foo(self, a): # Noncompliant
+        #         ^
+        return 42
 
 
 class AnotherChild(UnknownParent):
