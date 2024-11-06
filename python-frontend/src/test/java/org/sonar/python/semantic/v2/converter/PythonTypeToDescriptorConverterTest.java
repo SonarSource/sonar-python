@@ -85,10 +85,10 @@ class PythonTypeToDescriptorConverterTest {
     assertThat(functionDescriptor.isAsynchronous()).isTrue();
     assertThat(functionDescriptor.isInstanceMethod()).isTrue();
 
-    // TODO SONARPY-2223 support for return type is missing in FunctionType
+    // SONARPY-2306 support for return type is missing in FunctionType
     assertThat(functionDescriptor.annotatedReturnTypeName()).isNull();
 
-    // TODO SONARPY-2223 support for type annotation is missing in FunctionType
+    // SONARPY-2306 support for type annotation is missing in FunctionType
     assertThat(functionDescriptor.typeAnnotationDescriptor()).isNull();
 
     assertThat(functionDescriptor.hasDecorators()).isTrue();
@@ -131,11 +131,11 @@ class PythonTypeToDescriptorConverterTest {
     assertThat(classDescriptor.definitionLocation()).isEqualTo(location);
     assertThat(classDescriptor.hasMetaClass()).isTrue();
 
-    // TODO SONARPY-2222 support for superClass is missing in ClassType
+    // SONARPY-2307 support for superClass is missing in ClassType
     assertThat(classDescriptor.hasSuperClassWithoutDescriptor()).isFalse();
-    // TODO SONARPY-2222 support for metaclassFQN is missing in ClassType
+    // SONARPY-2307 support for metaclassFQN is missing in ClassType
     assertThat(classDescriptor.metaclassFQN()).isNull();
-    // TODO SONARPY-2222 support for generics is missing in ClassType
+    // SONARPY-2307 support for generics is missing in ClassType
     assertThat(classDescriptor.supportsGenerics()).isFalse();
   }
 
@@ -198,7 +198,7 @@ class PythonTypeToDescriptorConverterTest {
     assertThat(ambiguousDescriptor.name()).isEqualTo("myUnionType");
     assertThat(ambiguousDescriptor.fullyQualifiedName()).isEqualTo("foo.myUnionType");
     assertThat(ambiguousDescriptor.kind()).isEqualTo(Descriptor.Kind.AMBIGUOUS);
-    // TODO SONARPY-2225 the two class types in the union are rigorously the same but the converter creates an ambigouous symbol
+    // SONARPY-2307 the two class types in the union are rigorously the same but the converter creates an ambigouous symbol
     assertThat(ambiguousDescriptor.alternatives()).hasSize(2);
     assertThat(ambiguousDescriptor.alternatives()).extracting(Descriptor::name).containsExactlyInAnyOrder("myUnionType", "myUnionType");
     assertThat(ambiguousDescriptor.alternatives()).extracting(Object::getClass).allMatch(c -> c == ClassDescriptor.class);
@@ -232,7 +232,7 @@ class PythonTypeToDescriptorConverterTest {
     assertThat(ambiguousDescriptor.name()).isEqualTo("myUnionType");
     assertThat(ambiguousDescriptor.fullyQualifiedName()).isEqualTo("foo.myUnionType");
     assertThat(ambiguousDescriptor.kind()).isEqualTo(Descriptor.Kind.AMBIGUOUS);
-    // TODO SONARPY-2225 the two class types in the union are rigorously the same but the converter creates an ambigouous descriptor
+    // SONARPY-2307 the two class types in the union are rigorously the same but the converter creates an ambigouous descriptor
     assertThat(ambiguousDescriptor.alternatives()).hasSize(3);
     assertThat(ambiguousDescriptor.alternatives()).extracting(Descriptor::name).allMatch(s -> s.equals("myUnionType"));
     assertThat(ambiguousDescriptor.alternatives()).extracting(Object::getClass).allMatch(c -> c == ClassDescriptor.class);
