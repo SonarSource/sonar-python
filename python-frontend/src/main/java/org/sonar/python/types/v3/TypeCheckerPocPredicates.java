@@ -35,7 +35,7 @@ public class TypeCheckerPocPredicates {
   static InnerPredicateBuilder<UnspecializedTypeCheckerBuilder, ClassTypeBuilder> isClass() {
     return (builder, ctx) -> {
       ctx.addPredicate(new IsClassTypeInnerPredicate());
-      return new ClassTypeBuilder(builder);
+      return new ClassTypeBuilder(ctx);
     };
   }
 
@@ -53,7 +53,7 @@ public class TypeCheckerPocPredicates {
         throw new IllegalStateException("Tried to match UnknownType");
       }
       ctx.addPredicate(new ObjectIsInnerPredicate(resolvedType));
-      return new ObjectTypeBuilder(builder);
+      return new ObjectTypeBuilder(ctx);
     };
   }
 

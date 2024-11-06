@@ -20,7 +20,10 @@
 package org.sonar.python.types.v3;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Stream;
 import org.sonar.python.semantic.v2.ProjectLevelTypeTable;
 import org.sonar.python.types.v2.PythonType;
 import org.sonar.python.types.v2.TriBool;
@@ -31,6 +34,8 @@ public class TypeCheckerPoc {
   // INTERFACES
   interface TypeCheckerBuilder<SELF extends TypeCheckerBuilder<SELF>> {
     <O extends TypeCheckerBuilder<O>> O with(InnerPredicateBuilder<SELF, O> predicate);
+
+    SELF or(Function<SELF, ? extends TypeCheckerBuilder<?>> firstPredicate, Function<SELF, ? extends TypeCheckerBuilder<?>>... otherPredicates);
 
     TypeChecker build();
   }
@@ -122,11 +127,7 @@ public class TypeCheckerPoc {
   }
 
   abstract static class AbstractTypeCheckerBuilder<SELF extends AbstractTypeCheckerBuilder<SELF>> implements TypeCheckerBuilder<SELF> {
-    private final TypeCheckerBuilderContext context;
-
-    protected AbstractTypeCheckerBuilder(AbstractTypeCheckerBuilder<?> input) {
-      this.context = input.context;
-    }
+    private TypeCheckerBuilderContext context;
 
     private AbstractTypeCheckerBuilder(TypeCheckerBuilderContext context) {
       this.context = context;
@@ -138,7 +139,26 @@ public class TypeCheckerPoc {
       return predicate.construct((SELF) this, context);
     }
 
+    @Override
+    public final SELF or(Function<SELF, ? extends TypeCheckerBuilder<?>> firstPredicate, Function<SELF, ? extends TypeCheckerBuilder<?>>... otherPredicates) {
+      List<List<InnerPredicate>> stuff = Stream.concat(Stream.of(firstPredicate), Arrays.stream(otherPredicates))
+        .map(builder -> {
+          var newCtx = FakeTypeCheckBuilderContext.fromRealContext(context);
+          builder.apply(clone(newCtx)).build();
+          return newCtx.getPredicates();
+        }).toList();
+
+      // TODO fix generics (if possible)
+      return (SELF) this;
+    }
+
+    protected abstract SELF clone(TypeCheckerBuilderContext context);
+
+    @Override
     public TypeChecker build() {
+      if (context.predicates.isEmpty()) {
+        throw new IllegalStateException("No predicates were added");
+      }
       return new TypeChecker(context.predicates);
     }
   }
@@ -147,17 +167,33 @@ public class TypeCheckerPoc {
     public UnspecializedTypeCheckerBuilder(TypeCheckerBuilderContext projectLevelTypeTable) {
       super(projectLevelTypeTable);
     }
-  }
 
-  static class ObjectTypeBuilder extends AbstractTypeCheckerBuilder<ObjectTypeBuilder> {
-    public ObjectTypeBuilder(AbstractTypeCheckerBuilder<?> builder) {
-      super(builder);
+    @Override
+    protected UnspecializedTypeCheckerBuilder clone(TypeCheckerBuilderContext context) {
+      return new UnspecializedTypeCheckerBuilder(context);
     }
   }
 
+  static class ObjectTypeBuilder extends AbstractTypeCheckerBuilder<ObjectTypeBuilder> {
+    public ObjectTypeBuilder(TypeCheckerBuilderContext context) {
+      super(context);
+    }
+
+    @Override
+    protected ObjectTypeBuilder clone(TypeCheckerBuilderContext context) {
+      return new ObjectTypeBuilder(context);
+    }
+
+  }
+
   static class ClassTypeBuilder extends AbstractTypeCheckerBuilder<ClassTypeBuilder> {
-    public ClassTypeBuilder(AbstractTypeCheckerBuilder<?> builder) {
-      super(builder);
+    public ClassTypeBuilder(TypeCheckerBuilderContext context) {
+      super(context);
+    }
+
+    @Override
+    protected ClassTypeBuilder clone(TypeCheckerBuilderContext context) {
+      return new ClassTypeBuilder(context);
     }
   }
 
