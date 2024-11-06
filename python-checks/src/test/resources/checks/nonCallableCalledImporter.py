@@ -6,7 +6,7 @@ imported_non_callable_alias = nonCallableCalledImported.MyNonCallableClassAlias(
 imported_callable = MyCallableClass()
 
 imported_non_callable()  # Noncompliant
-imported_non_callable_alias()  # FN : this is non callable
+imported_non_callable_alias()  # Noncompliant
 imported_callable()
 
 
