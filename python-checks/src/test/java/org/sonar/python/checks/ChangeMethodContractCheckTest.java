@@ -19,6 +19,7 @@
  */
 package org.sonar.python.checks;
 
+import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
@@ -26,6 +27,9 @@ class ChangeMethodContractCheckTest {
 
   @Test
   void test() {
-    PythonCheckVerifier.verify("src/test/resources/checks/changeMethodContract.py", new ChangeMethodContractCheck());
+    PythonCheckVerifier.verify(
+      List.of("src/test/resources/checks/changeMethodContract.py", "src/test/resources/checks/changeMethodContractParent.py"),
+      new ChangeMethodContractCheck()
+    );
   }
 }
