@@ -1,42 +1,26 @@
 package org.sonar.python.types.v3;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Predicate;
+import java.util.function.Function;
+import org.sonar.python.types.v2.ClassType;
 import org.sonar.python.types.v2.PythonType;
-import org.sonar.python.types.v2.TypeSource;
+import org.sonar.python.types.v2.TriBool;
 
 public class TypeCheckerPoc {
-  void test() {
-    typeChecker()
-      .with(isInstanceOf("AClass"))
-      .with(typeSource(TypeSource.EXACT));
-  }
-
   // METHODS
-
-  static InnerPredicateBuilder<UnspecializedTypeCheckerBuilder, ObjectTypeBuilder> isInstanceOf(String type) {
-    return null;
-  }
-
-  static InnerPredicateBuilder<ObjectTypeBuilder, ObjectTypeBuilder> typeSource(TypeSource typeSource) {
+  static InnerPredicateBuilder<UnspecializedTypeCheckerBuilder, ClassTypeBuilder> isClass() {
     return builder -> {
-      return null;
+      builder.addPredicate(type -> type instanceof ClassType ? TriBool.TRUE : TriBool.FALSE);
+      return new ClassTypeBuilder(builder);
     };
-  }
-
-  static InnerPredicateBuilder<UnspecializedTypeCheckerBuilder, ClassTypeBuilder> inheritsFrom(String type) {
-    return builder -> {
-      return null;
-    };
-  }
-
-  static UnspecializedTypeCheckerBuilder typeChecker() {
-    return null;
   }
 
   // INTERFACES
-  interface TypeCheckerBuilder<T extends TypeCheckerBuilder<T>> {
-    <O extends TypeCheckerBuilder<O>> O with(InnerPredicateBuilder<T, O> predicate);
+  interface TypeCheckerBuilder<SELF extends TypeCheckerBuilder<SELF>> {
+    <O extends TypeCheckerBuilder<O>> O with(InnerPredicateBuilder<SELF, O> predicate);
+
+    TypeChecker build();
   }
   interface InnerPredicateBuilder<I extends TypeCheckerBuilder<? extends I>, O extends TypeCheckerBuilder<? extends  O>> {
     O construct(I input);
@@ -48,32 +32,55 @@ public class TypeCheckerPoc {
 
   // CLASSES
 
-  abstract class AbstractTypeCheckerBuilder<T extends AbstractTypeCheckerBuilder<T>> implements TypeCheckerBuilder<T> {
-    private List<Predicate<PythonType>> predicates;
+  abstract static class AbstractTypeCheckerBuilder<SELF extends AbstractTypeCheckerBuilder<SELF>> implements TypeCheckerBuilder<SELF> {
+    private List<Function<PythonType, TriBool>> predicates = new ArrayList<>();
 
-    public void addPredicate(Predicate<PythonType> predicate) {
+    protected AbstractTypeCheckerBuilder(AbstractTypeCheckerBuilder<?> input) {
+      this.predicates = new ArrayList<>(input.predicates);
+    }
+
+    private AbstractTypeCheckerBuilder() {
+    }
+
+    public void addPredicate(Function<PythonType, TriBool> predicate) {
       predicates.add(predicate);
     }
 
     @Override
-    public <O extends TypeCheckerBuilder<O>> O with(InnerPredicateBuilder<T, O> predicate) {
-      return null;
+    public <O extends TypeCheckerBuilder<O>> O with(InnerPredicateBuilder<SELF, O> predicate) {
+      // TODO fix generics (if possible)
+      return predicate.construct((SELF) this);
+    }
+
+    public TypeChecker build() {
+      return new TypeChecker(predicates);
     }
   }
 
-  class UnspecializedTypeCheckerBuilder extends AbstractTypeCheckerBuilder<UnspecializedTypeCheckerBuilder> {
+  static class UnspecializedTypeCheckerBuilder extends AbstractTypeCheckerBuilder<UnspecializedTypeCheckerBuilder> {
   }
 
-  class ObjectTypeBuilder extends AbstractTypeCheckerBuilder<ObjectTypeBuilder>  {
-  }
-
-  class ClassTypeBuilder extends AbstractTypeCheckerBuilder<ClassTypeBuilder>  {
-
-    public FunctionTypeBuilder withMethod(String name) {
-      return null;
+  static class ObjectTypeBuilder extends AbstractTypeCheckerBuilder<ObjectTypeBuilder> {
+    public ObjectTypeBuilder(AbstractTypeCheckerBuilder<?> builder) {
+      super(builder);
     }
   }
-  class FunctionTypeBuilder extends AbstractTypeCheckerBuilder<FunctionTypeBuilder>  {
 
+  static class ClassTypeBuilder extends AbstractTypeCheckerBuilder<ClassTypeBuilder> {
+    public ClassTypeBuilder(AbstractTypeCheckerBuilder<?> builder) {
+      super(builder);
+    }
+  }
+
+  static class TypeChecker {
+    private final List<Function<PythonType, TriBool>> predicates;
+
+    public TypeChecker(List<Function<PythonType, TriBool>> predicates) {
+      this.predicates = new ArrayList<>(predicates);
+    }
+
+    boolean isTrue(PythonType pythonType) {
+      return predicates.stream().allMatch(predicate -> predicate.apply(pythonType) == TriBool.TRUE);
+    }
   }
 }
