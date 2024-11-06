@@ -85,4 +85,17 @@ class TypeCheckerPocTest {
     assertThat(typeCheckerDefault.isTrue(unionType)).isFalse();
   }
 
+  @Test
+  void anyCandidateNotUnion() {
+    var projectLeveLTypeTable = new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty());
+    var builderContext = new TypeCheckerPoc.TypeCheckerBuilderContext(projectLeveLTypeTable);
+    var typeCheckerAny = new UnspecializedTypeCheckerBuilder(builderContext)
+      .with(isObject("NoneType").anyCandidate())
+      .build();
+
+    var objectType = TypeUtils.ensureWrappedObjectType(projectLeveLTypeTable.getType("NoneType"));
+
+    assertThat(typeCheckerAny.isTrue(objectType)).isTrue();
+  }
+
 }

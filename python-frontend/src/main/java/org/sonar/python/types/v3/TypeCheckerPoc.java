@@ -24,6 +24,7 @@ import java.util.List;
 import org.sonar.python.semantic.v2.ProjectLevelTypeTable;
 import org.sonar.python.types.v2.PythonType;
 import org.sonar.python.types.v2.TriBool;
+import org.sonar.python.types.v2.UnionType;
 
 public class TypeCheckerPoc {
 
@@ -38,8 +39,46 @@ public class TypeCheckerPoc {
 
     default InnerPredicateBuilder<I, O> anyCandidate() {
       return (builder, ctx) -> {
-        return this.construct(builder, ctx);
+        var wrappedContext = FakeTypeCheckBuilderContext.fromRealContext(ctx);
+        var outputBuilder = this.construct(builder, wrappedContext);
+        ctx.addPredicate(new AnyCandiateInnerPredicate(wrappedContext.getPredicates()));
+        return outputBuilder;
       };
+    }
+  }
+
+  private static class AnyCandiateInnerPredicate implements InnerPredicate {
+
+    private final List<InnerPredicate> predicates;
+
+    public AnyCandiateInnerPredicate(List<InnerPredicate> predicates) {
+      this.predicates = predicates;
+    }
+
+    @Override
+    public TriBool apply(PythonType pythonType) {
+      if (pythonType instanceof UnionType unionType) {
+        TriBool latestResut = TriBool.FALSE;
+        for (PythonType candidate : unionType.candidates()) {
+          var result = applyPredicates(candidate);
+          if (result == TriBool.TRUE) {
+            return TriBool.TRUE;
+          } else if (result == TriBool.UNKNOWN) {
+            latestResut = TriBool.UNKNOWN;
+          }
+        }
+        return latestResut;
+      } else {
+        return applyPredicates(pythonType);
+      }
+    }
+
+    private TriBool applyPredicates(PythonType pythonType) {
+      TriBool result = TriBool.TRUE;
+      for (InnerPredicate predicate : predicates) {
+        result = result.and(predicate.apply(pythonType));
+      }
+      return result;
     }
   }
 
@@ -51,7 +90,8 @@ public class TypeCheckerPoc {
 
   // TODO maybe move to interface
   static class TypeCheckerBuilderContext {
-    private ProjectLevelTypeTable projectLevelTypeTable;
+    private final ProjectLevelTypeTable projectLevelTypeTable;
+    protected final List<InnerPredicate> predicates = new ArrayList<>();
 
     TypeCheckerBuilderContext(ProjectLevelTypeTable projectLevelTypeTable) {
       this.projectLevelTypeTable = projectLevelTypeTable;
@@ -61,23 +101,35 @@ public class TypeCheckerPoc {
       return projectLevelTypeTable;
     }
 
+    public void addPredicate(InnerPredicate predicate) {
+      predicates.add(predicate);
+    }
+  }
+
+  static class FakeTypeCheckBuilderContext extends TypeCheckerBuilderContext {
+
+    private FakeTypeCheckBuilderContext(ProjectLevelTypeTable projectLevelTypeTable) {
+      super(projectLevelTypeTable);
+    }
+
+    public List<InnerPredicate> getPredicates() {
+      return predicates;
+    }
+
+    static FakeTypeCheckBuilderContext fromRealContext(TypeCheckerBuilderContext ctx) {
+      return new FakeTypeCheckBuilderContext(ctx.getProjectLevelTypeTable());
+    }
   }
 
   abstract static class AbstractTypeCheckerBuilder<SELF extends AbstractTypeCheckerBuilder<SELF>> implements TypeCheckerBuilder<SELF> {
     private final TypeCheckerBuilderContext context;
-    private List<InnerPredicate> predicates = new ArrayList<>();
 
     protected AbstractTypeCheckerBuilder(AbstractTypeCheckerBuilder<?> input) {
-      this.predicates = new ArrayList<>(input.predicates);
       this.context = input.context;
     }
 
     private AbstractTypeCheckerBuilder(TypeCheckerBuilderContext context) {
       this.context = context;
-    }
-
-    public void addPredicate(InnerPredicate predicate) {
-      predicates.add(predicate);
     }
 
     @Override
@@ -87,7 +139,7 @@ public class TypeCheckerPoc {
     }
 
     public TypeChecker build() {
-      return new TypeChecker(predicates);
+      return new TypeChecker(context.predicates);
     }
   }
 
