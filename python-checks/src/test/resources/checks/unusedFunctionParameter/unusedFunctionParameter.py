@@ -42,7 +42,6 @@ class Child(Parent):
     def do_something_else(self, a, b):
         return compute(a)
 
-    # FP when a member field in the parent class has the same name as a function in derived class
     def foo(self, a): # Noncompliant
         #         ^
         return 42
