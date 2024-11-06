@@ -267,7 +267,6 @@ class ProjectLevelTypeTableTest {
   }
 
   @Test
-  @Disabled("SONARPY-2290")
   void importFunctionWithDecorators() {
     var projectLevelSymbolTable = new ProjectLevelSymbolTable();
     var libTree = parseWithoutSymbols(
@@ -294,7 +293,6 @@ class ProjectLevelTypeTableTest {
   }
 
   @Test
-  @Disabled("SONARPY-2290")
   void importFunctionWithImportedDecorators() {
     var projectLevelSymbolTable = new ProjectLevelSymbolTable();
     var libTree = parseWithoutSymbols(
