@@ -103,7 +103,7 @@ public class ProjectLevelSymbolTable {
     importsByModule.put(fullyQualifiedModuleName, typeInferenceV2.importedModulesFQN());
     var moduleDescriptors = typesBySymbol.entrySet()
       .stream()
-      .filter(entry -> entry.getValue().stream().noneMatch(UnknownType.UnresolvedImportType.class::isInstance))
+      .filter(entry -> isNotMissingType(entry.getValue()))
       .map(entry -> {
           var descriptor = pythonTypeToDescriptorConverter.convert(fullyQualifiedModuleName, entry.getKey(), entry.getValue());
           return Map.entry(entry.getKey(), descriptor);
@@ -118,6 +118,10 @@ public class ProjectLevelSymbolTable {
 
     DjangoViewsVisitor djangoViewsVisitor = new DjangoViewsVisitor(fullyQualifiedModuleName);
     fileInput.accept(djangoViewsVisitor);
+  }
+
+  private static boolean isNotMissingType(Set<PythonType> types) {
+    return !types.isEmpty() && types.stream().noneMatch(UnknownType.UnresolvedImportType.class::isInstance);
   }
 
   private void addModuleToGlobalSymbolsByFQN(Set<Descriptor> descriptors) {

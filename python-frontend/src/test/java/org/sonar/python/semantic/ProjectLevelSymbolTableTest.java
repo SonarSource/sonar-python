@@ -747,6 +747,17 @@ class ProjectLevelSymbolTableTest {
   }
 
   @Test
+  void symbols_with_missing_type_are_not_exported() {
+    FileInput fileInput = parseWithoutSymbols("""
+      builtin_str = str
+      str = str
+      """
+    );
+    Set<Symbol> symbols = globalSymbols(fileInput, "my_package");
+    assertThat(symbols).isEmpty();
+  }
+
+  @Test
   void global_symbols_stdlib_imports() {
     FileInput tree = parseWithoutSymbols(
       "from time import time",
