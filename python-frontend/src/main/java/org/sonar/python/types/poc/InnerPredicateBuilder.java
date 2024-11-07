@@ -31,12 +31,12 @@ public interface InnerPredicateBuilder<I extends TypeCheckerBuilder<I>, O extend
     return (builder, ctx) -> {
       var wrappedContext = TypeCheckerBuilderContext.FakeTypeCheckBuilderContext.fromRealContext(ctx);
       var outputBuilder = this.construct(builder, wrappedContext);
-      ctx.addPredicate(new AnyCandiateInnerPredicate(wrappedContext.getPredicates()));
+      ctx.addPredicate(new AnyCandidateInnerPredicate(wrappedContext.getPredicates()));
       return outputBuilder.rebind(ctx);
     };
   }
 
-  record AnyCandiateInnerPredicate(List<RawInnerPredicate> predicates) implements RawInnerPredicate {
+  record AnyCandidateInnerPredicate(List<RawInnerPredicate> predicates) implements RawInnerPredicate {
 
     @Override
     public TriBool rawApply(PythonType pythonType) {
