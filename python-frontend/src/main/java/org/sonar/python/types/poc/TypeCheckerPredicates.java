@@ -17,21 +17,23 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.types.v3;
+package org.sonar.python.types.poc;
 
 import org.sonar.python.types.v2.ClassType;
 import org.sonar.python.types.v2.ObjectType;
 import org.sonar.python.types.v2.PythonType;
 import org.sonar.python.types.v2.TriBool;
 import org.sonar.python.types.v2.UnknownType;
-import org.sonar.python.types.v3.TypeCheckerPoc.ClassTypeBuilder;
-import org.sonar.python.types.v3.TypeCheckerPoc.InnerPredicate;
-import org.sonar.python.types.v3.TypeCheckerPoc.InnerPredicateBuilder;
-import org.sonar.python.types.v3.TypeCheckerPoc.ObjectTypeBuilder;
-import org.sonar.python.types.v3.TypeCheckerPoc.UnspecializedTypeCheckerBuilder;
+import org.sonar.python.types.poc.typechecker.ClassTypeBuilder;
+import org.sonar.python.types.poc.typechecker.ObjectTypeBuilder;
+import org.sonar.python.types.poc.typechecker.UnspecializedTypeCheckerBuilder;
 
-public class TypeCheckerPocPredicates {
-  // METHODS
+public class TypeCheckerPredicates {
+
+  private TypeCheckerPredicates() {
+    // utility class
+  }
+
   static InnerPredicateBuilder<UnspecializedTypeCheckerBuilder, ClassTypeBuilder> isClass() {
     return (builder, ctx) -> {
       ctx.addPredicate(new IsClassTypeInnerPredicate());
@@ -57,13 +59,7 @@ public class TypeCheckerPocPredicates {
     };
   }
 
-  private static class ObjectIsInnerPredicate implements InnerPredicate {
-
-    private final PythonType resolvedType;
-
-    private ObjectIsInnerPredicate(PythonType resolvedType) {
-      this.resolvedType = resolvedType;
-    }
+  private record ObjectIsInnerPredicate(PythonType resolvedType) implements InnerPredicate {
 
     @Override
     public TriBool apply(PythonType type) {
@@ -80,5 +76,4 @@ public class TypeCheckerPocPredicates {
       return type.equals(resolvedType) ? TriBool.TRUE : TriBool.FALSE;
     }
   }
-
 }

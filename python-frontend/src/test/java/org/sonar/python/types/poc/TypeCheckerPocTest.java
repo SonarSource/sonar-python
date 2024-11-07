@@ -17,7 +17,7 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.python.types.v3;
+package org.sonar.python.types.poc;
 
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
@@ -28,10 +28,10 @@ import org.sonar.python.semantic.v2.ObjectTypeBuilder;
 import org.sonar.python.semantic.v2.ProjectLevelTypeTable;
 import org.sonar.python.types.v2.TypeUtils;
 import org.sonar.python.types.v2.UnionType;
-import org.sonar.python.types.v3.TypeCheckerPoc.UnspecializedTypeCheckerBuilder;
+import org.sonar.python.types.poc.typechecker.UnspecializedTypeCheckerBuilder;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.sonar.python.types.v3.TypeCheckerPocPredicates.isObject;
+import static org.sonar.python.types.poc.TypeCheckerPredicates.isObject;
 
 class TypeCheckerPocTest {
 
@@ -43,14 +43,14 @@ class TypeCheckerPocTest {
   }
 
   UnspecializedTypeCheckerBuilder typeChecker() {
-    var builderContext = new TypeCheckerPoc.TypeCheckerBuilderContext(projectLeveLTypeTable);
+    var builderContext = new TypeCheckerBuilderContext(projectLeveLTypeTable);
     return new UnspecializedTypeCheckerBuilder(builderContext);
   }
 
   @Test
   void simpleClassType() {
     var typeChecker = typeChecker()
-      .with(TypeCheckerPocPredicates.isClass())
+      .with(TypeCheckerPredicates.isClass())
       .build();
 
     var classType = new ClassTypeBuilder().withName("MyClass").build();
