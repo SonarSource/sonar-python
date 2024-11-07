@@ -120,9 +120,8 @@ public class PythonTypeToDescriptorConverter {
     var hasSuperClassWithoutDescriptor = false;
     var superClasses = new ArrayList<String>();
     for (var superClassWrapper : type.superClasses()) {
-      var superClass = superClassWrapper.type();
-      if (superClass != PythonType.UNKNOWN) {
-        var superClassFqn = typeFqn(moduleFqn, superClass);
+      var superClassFqn = typeFqn(moduleFqn, superClassWrapper.type());
+      if (superClassFqn != null) {
         superClasses.add(superClassFqn);
       } else {
         hasSuperClassWithoutDescriptor = true;

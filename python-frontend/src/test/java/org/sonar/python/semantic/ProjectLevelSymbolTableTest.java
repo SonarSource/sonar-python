@@ -1077,6 +1077,29 @@ class ProjectLevelSymbolTableTest {
   }
 
   @Test
+  void superclasses_without_descriptor() {
+    var code = """
+      class MetaField: ...
+      class Field(MetaField()): ...
+      """;
+
+    ProjectLevelSymbolTable projectSymbolTable = new ProjectLevelSymbolTable();
+    projectSymbolTable.addModule(parseWithoutSymbols(code), "", pythonFile("mod.py"));
+
+    var descriptors = projectSymbolTable.getDescriptorsFromModule("mod");
+    assertThat(descriptors).hasSize(2);
+
+    var fieldClassDescriptor = descriptors.stream().filter(d -> "Field".equals(d.name()))
+      .map(ClassDescriptor.class::cast)
+      .findFirst()
+      .orElse(null);
+    assertThat(fieldClassDescriptor).isNotNull();
+    assertThat(fieldClassDescriptor.superClasses()).isEmpty();
+    assertThat(fieldClassDescriptor.hasSuperClassWithoutDescriptor()).isTrue();
+  }
+
+
+  @Test
   void projectPackages() {
     ProjectLevelSymbolTable projectLevelSymbolTable = new ProjectLevelSymbolTable();
     projectLevelSymbolTable.addProjectPackage("first.package");
