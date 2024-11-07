@@ -1083,7 +1083,7 @@ class ProjectLevelSymbolTableTest {
       class Field(MetaField()): ...
       """;
 
-    ProjectLevelSymbolTable projectSymbolTable = new ProjectLevelSymbolTable();
+    var projectSymbolTable = new ProjectLevelSymbolTable();
     projectSymbolTable.addModule(parseWithoutSymbols(code), "", pythonFile("mod.py"));
 
     var descriptors = projectSymbolTable.getDescriptorsFromModule("mod");
@@ -1096,6 +1096,22 @@ class ProjectLevelSymbolTableTest {
     assertThat(fieldClassDescriptor).isNotNull();
     assertThat(fieldClassDescriptor.superClasses()).isEmpty();
     assertThat(fieldClassDescriptor.hasSuperClassWithoutDescriptor()).isTrue();
+    var symbol = (ClassSymbol) projectSymbolTable.getSymbol("mod.Field");
+    assertThat(symbol.superClasses()).isEmpty();
+    assertThat(symbol.hasUnresolvedTypeHierarchy()).isTrue();
+  }
+
+  @Test
+  void superclasses_without_descriptor_unresolved_import() {
+    var code = """
+      from unknown import MetaField
+      class Field(MetaField): ...
+      """;
+
+    var projectSymbolTable = new ProjectLevelSymbolTable();
+    projectSymbolTable.addModule(parseWithoutSymbols(code), "", pythonFile("mod.py"));
+    var symbol = (ClassSymbol) projectSymbolTable.getSymbol("mod.Field");
+    assertThat(symbol.hasUnresolvedTypeHierarchy()).isTrue();
   }
 
 
