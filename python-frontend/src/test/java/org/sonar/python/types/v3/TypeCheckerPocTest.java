@@ -36,17 +36,20 @@ import static org.sonar.python.types.v3.TypeCheckerPocPredicates.isObject;
 class TypeCheckerPocTest {
 
   private ProjectLevelTypeTable projectLeveLTypeTable;
-  private TypeCheckerPoc.TypeCheckerBuilderContext builderContext;
 
   @BeforeEach
   void setup() {
     projectLeveLTypeTable = new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty());
-    builderContext = new TypeCheckerPoc.TypeCheckerBuilderContext(projectLeveLTypeTable);
+  }
+
+  UnspecializedTypeCheckerBuilder typeChecker() {
+    var builderContext = new TypeCheckerPoc.TypeCheckerBuilderContext(projectLeveLTypeTable);
+    return new UnspecializedTypeCheckerBuilder(builderContext);
   }
 
   @Test
   void simpleClassType() {
-    var typeChecker = new UnspecializedTypeCheckerBuilder(builderContext)
+    var typeChecker = typeChecker()
       .with(TypeCheckerPocPredicates.isClass())
       .build();
 
@@ -59,7 +62,7 @@ class TypeCheckerPocTest {
 
   @Test
   void simpleIsObject() {
-    var typeChecker = new UnspecializedTypeCheckerBuilder(builderContext)
+    var typeChecker = typeChecker()
       .with(isObject("builtins.float"))
       .build();
 
@@ -72,10 +75,10 @@ class TypeCheckerPocTest {
 
   @Test
   void simpleAnyCandidate() {
-    var typeCheckerAny = new UnspecializedTypeCheckerBuilder(builderContext)
+    var typeCheckerAny = typeChecker()
       .with(isObject("builtins.float").anyCandidate())
       .build();
-    var typeCheckerDefault = new UnspecializedTypeCheckerBuilder(builderContext)
+    var typeCheckerDefault = typeChecker()
       .with(isObject("builtins.float"))
       .build();
 
@@ -91,7 +94,7 @@ class TypeCheckerPocTest {
 
   @Test
   void anyCandidateNotUnion() {
-    var typeCheckerAny = new UnspecializedTypeCheckerBuilder(builderContext)
+    var typeCheckerAny = typeChecker()
       .with(isObject("NoneType").anyCandidate())
       .build();
 
@@ -102,7 +105,7 @@ class TypeCheckerPocTest {
 
   @Test
   void simpleOr() {
-    var typeCheckerAny = new UnspecializedTypeCheckerBuilder(builderContext)
+    var typeCheckerAny = typeChecker()
       .or(
         checker -> checker.with(isObject("builtins.float")),
         checker -> checker.with(isObject("builtins.int")))

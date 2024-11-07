@@ -38,8 +38,11 @@ public class TypeCheckerPoc {
     SELF or(Function<SELF, ? extends TypeCheckerBuilder<?>> firstPredicate, Function<SELF, ? extends TypeCheckerBuilder<?>>... otherPredicates);
 
     TypeChecker build();
+
+    SELF rebind(TypeCheckerBuilderContext context);
+
   }
-  interface InnerPredicateBuilder<I extends TypeCheckerBuilder<? extends I>, O extends TypeCheckerBuilder<? extends O>> {
+  interface InnerPredicateBuilder<I extends TypeCheckerBuilder<I>, O extends TypeCheckerBuilder<O>> {
     O construct(I input, TypeCheckerBuilderContext typeCheckerBuilderContext);
 
     default InnerPredicateBuilder<I, O> anyCandidate() {
@@ -47,7 +50,7 @@ public class TypeCheckerPoc {
         var wrappedContext = FakeTypeCheckBuilderContext.fromRealContext(ctx);
         var outputBuilder = this.construct(builder, wrappedContext);
         ctx.addPredicate(new AnyCandiateInnerPredicate(wrappedContext.getPredicates()));
-        return outputBuilder;
+        return outputBuilder.rebind(ctx);
       };
     }
   }
@@ -139,12 +142,13 @@ public class TypeCheckerPoc {
       return predicate.construct((SELF) this, context);
     }
 
+    @SafeVarargs
     @Override
     public final SELF or(Function<SELF, ? extends TypeCheckerBuilder<?>> firstPredicate, Function<SELF, ? extends TypeCheckerBuilder<?>>... otherPredicates) {
       List<List<InnerPredicate>> stuff = Stream.concat(Stream.of(firstPredicate), Arrays.stream(otherPredicates))
         .map(builder -> {
           var newCtx = FakeTypeCheckBuilderContext.fromRealContext(context);
-          builder.apply(clone(newCtx)).build();
+          builder.apply(rebind(newCtx)).build();
           return newCtx.getPredicates();
         }).toList();
 
@@ -152,7 +156,6 @@ public class TypeCheckerPoc {
       return (SELF) this;
     }
 
-    protected abstract SELF clone(TypeCheckerBuilderContext context);
 
     @Override
     public TypeChecker build() {
@@ -169,7 +172,7 @@ public class TypeCheckerPoc {
     }
 
     @Override
-    protected UnspecializedTypeCheckerBuilder clone(TypeCheckerBuilderContext context) {
+    public UnspecializedTypeCheckerBuilder rebind(TypeCheckerBuilderContext context) {
       return new UnspecializedTypeCheckerBuilder(context);
     }
   }
@@ -180,7 +183,7 @@ public class TypeCheckerPoc {
     }
 
     @Override
-    protected ObjectTypeBuilder clone(TypeCheckerBuilderContext context) {
+    public ObjectTypeBuilder rebind(TypeCheckerBuilderContext context) {
       return new ObjectTypeBuilder(context);
     }
 
@@ -192,7 +195,7 @@ public class TypeCheckerPoc {
     }
 
     @Override
-    protected ClassTypeBuilder clone(TypeCheckerBuilderContext context) {
+    public ClassTypeBuilder rebind(TypeCheckerBuilderContext context) {
       return new ClassTypeBuilder(context);
     }
   }
