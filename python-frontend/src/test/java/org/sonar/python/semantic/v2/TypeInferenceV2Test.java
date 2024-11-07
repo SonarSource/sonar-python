@@ -902,6 +902,35 @@ public class TypeInferenceV2Test {
   }
 
   @Test
+  void missingTypePropagationWhenBuiltinIsReassigned() {
+    FileInput fileInput = inferTypes(
+      """
+        builtin_str = str
+        builtin_str
+        str
+        """
+    );
+    PythonType builtinStrType = ((ExpressionStatement) fileInput.statements().statements().get(1)).expressions().get(0).typeV2();
+    PythonType strType = ((ExpressionStatement) fileInput.statements().statements().get(2)).expressions().get(0).typeV2();
+    assertThat(builtinStrType).isEqualTo(STR_TYPE);
+    assertThat(strType).isEqualTo(STR_TYPE);
+
+    // SONARPY-2312: the reassigned "str = str" prevents the propagation of the built-in class type
+    fileInput = inferTypes(
+      """
+        builtin_str = str
+        str = str
+        builtin_str
+        str
+        """
+    );
+    builtinStrType = ((ExpressionStatement) fileInput.statements().statements().get(2)).expressions().get(0).typeV2();
+    strType = ((ExpressionStatement) fileInput.statements().statements().get(3)).expressions().get(0).typeV2();
+    assertThat(builtinStrType).isInstanceOf(UnknownType.class);
+    assertThat(strType).isInstanceOf(UnknownType.class);
+  }
+
+  @Test
   void inferFunctionParameterTypes5() {
     FileInput root = inferTypes("""
       my_alias = int

@@ -51,6 +51,7 @@ import org.sonar.python.types.v2.UnionType;
 import org.sonar.python.types.v2.UnknownType;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class PythonTypeToDescriptorConverterTest {
 
@@ -264,4 +265,12 @@ class PythonTypeToDescriptorConverterTest {
     });
   }
 
+  @Test
+  void testMissingCandidatesThrowsException() {
+    SymbolV2 symbol = new SymbolV2("mySymbol");
+    Set<PythonType> emptySet = Set.of();
+    assertThatThrownBy(() -> converter.convert("foo", symbol, emptySet))
+      .isInstanceOf(IllegalStateException.class)
+      .hasMessage("No candidate found for descriptor mySymbol");
+  }
 }
