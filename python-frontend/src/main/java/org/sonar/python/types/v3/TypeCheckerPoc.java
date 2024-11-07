@@ -145,15 +145,45 @@ public class TypeCheckerPoc {
     @SafeVarargs
     @Override
     public final SELF or(Function<SELF, ? extends TypeCheckerBuilder<?>> firstPredicate, Function<SELF, ? extends TypeCheckerBuilder<?>>... otherPredicates) {
-      List<List<InnerPredicate>> stuff = Stream.concat(Stream.of(firstPredicate), Arrays.stream(otherPredicates))
+      // TODO (maybe) refactor the List<List<...>>
+      List<List<InnerPredicate>> predicatesByOr = Stream.concat(Stream.of(firstPredicate), Arrays.stream(otherPredicates))
         .map(builder -> {
           var newCtx = FakeTypeCheckBuilderContext.fromRealContext(context);
           builder.apply(rebind(newCtx)).build();
           return newCtx.getPredicates();
         }).toList();
 
+      context.addPredicate(new OrInnerPredicate(predicatesByOr));
+
       // TODO fix generics (if possible)
       return (SELF) this;
+    }
+
+    private static class OrInnerPredicate implements InnerPredicate {
+      private final List<List<InnerPredicate>> predicatesByOr;
+
+      public OrInnerPredicate(List<List<InnerPredicate>> predicatesByOr) {
+        this.predicatesByOr = predicatesByOr;
+      }
+
+      @Override
+      public TriBool apply(PythonType type) {
+        var result = TriBool.FALSE;
+        // Logic should be checked again on implementation
+        for (List<InnerPredicate> predicates : predicatesByOr) {
+          var currentResult = TriBool.TRUE;
+          for (InnerPredicate predicate : predicates) {
+            currentResult = currentResult.and(predicate.apply(type));
+          }
+          if (currentResult == TriBool.TRUE) {
+            return TriBool.TRUE;
+          } else if (currentResult == TriBool.UNKNOWN) {
+            result = TriBool.UNKNOWN;
+          }
+
+        }
+        return result;
+      }
     }
 
 
