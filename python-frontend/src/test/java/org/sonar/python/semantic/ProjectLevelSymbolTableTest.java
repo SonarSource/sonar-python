@@ -1088,6 +1088,45 @@ class ProjectLevelSymbolTableTest {
   }
 
   @Test
+  void superclasses_without_descriptor() {
+    var code = """
+      class MetaField: ...
+      class Field(MetaField()): ...
+      """;
+
+    var projectSymbolTable = new ProjectLevelSymbolTable();
+    projectSymbolTable.addModule(parseWithoutSymbols(code), "", pythonFile("mod.py"));
+
+    var descriptors = projectSymbolTable.getDescriptorsFromModule("mod");
+    assertThat(descriptors).hasSize(2);
+
+    var fieldClassDescriptor = descriptors.stream().filter(d -> "Field".equals(d.name()))
+      .map(ClassDescriptor.class::cast)
+      .findFirst()
+      .orElse(null);
+    assertThat(fieldClassDescriptor).isNotNull();
+    assertThat(fieldClassDescriptor.superClasses()).isEmpty();
+    assertThat(fieldClassDescriptor.hasSuperClassWithoutDescriptor()).isTrue();
+    var symbol = (ClassSymbol) projectSymbolTable.getSymbol("mod.Field");
+    assertThat(symbol.superClasses()).isEmpty();
+    assertThat(symbol.hasUnresolvedTypeHierarchy()).isTrue();
+  }
+
+  @Test
+  void superclasses_without_descriptor_unresolved_import() {
+    var code = """
+      from unknown import MetaField
+      class Field(MetaField): ...
+      """;
+
+    var projectSymbolTable = new ProjectLevelSymbolTable();
+    projectSymbolTable.addModule(parseWithoutSymbols(code), "", pythonFile("mod.py"));
+    var symbol = (ClassSymbol) projectSymbolTable.getSymbol("mod.Field");
+    assertThat(symbol.hasUnresolvedTypeHierarchy()).isTrue();
+  }
+
+
+  @Test
   void projectPackages() {
     ProjectLevelSymbolTable projectLevelSymbolTable = new ProjectLevelSymbolTable();
     projectLevelSymbolTable.addProjectPackage("first.package");
