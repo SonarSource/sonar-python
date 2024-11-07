@@ -45,7 +45,7 @@ public abstract class AbstractTypeCheckerBuilder<SELF extends AbstractTypeChecke
   public final SELF or(Function<SELF, ? extends TypeCheckerBuilder<?>> firstPredicate,
     Function<SELF, ? extends TypeCheckerBuilder<?>>... otherPredicates) {
     // TODO (maybe) refactor the List<List<...>>
-    List<List<InnerPredicate>> predicatesByOr = Stream.concat(Stream.of(firstPredicate), Arrays.stream(otherPredicates))
+    List<List<RawInnerPredicate>> predicatesByOr = Stream.concat(Stream.of(firstPredicate), Arrays.stream(otherPredicates))
       .map(builder -> {
         var newCtx = FakeTypeCheckBuilderContext.fromRealContext(context);
         builder.apply(rebind(newCtx)).build();
@@ -58,15 +58,15 @@ public abstract class AbstractTypeCheckerBuilder<SELF extends AbstractTypeChecke
     return (SELF) this;
   }
 
-  private record OrInnerPredicate(List<List<InnerPredicate>> predicatesByOr) implements InnerPredicate {
+  private record OrInnerPredicate(List<List<RawInnerPredicate>> predicatesByOr) implements RawInnerPredicate {
     @Override
-    public TriBool apply(PythonType type) {
+    public TriBool rawApply(PythonType type) {
       var result = TriBool.FALSE;
       // Logic should be checked again on implementation
-      for (List<InnerPredicate> predicates : predicatesByOr) {
+      for (List<RawInnerPredicate> predicates : predicatesByOr) {
         var currentResult = TriBool.TRUE;
-        for (InnerPredicate predicate : predicates) {
-          currentResult = currentResult.and(predicate.apply(type));
+        for (RawInnerPredicate predicate : predicates) {
+          currentResult = currentResult.and(predicate.rawApply(type));
         }
         if (currentResult == TriBool.TRUE) {
           return TriBool.TRUE;

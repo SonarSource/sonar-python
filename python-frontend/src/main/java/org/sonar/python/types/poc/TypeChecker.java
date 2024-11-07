@@ -25,13 +25,13 @@ import org.sonar.python.types.v2.PythonType;
 import org.sonar.python.types.v2.TriBool;
 
 public class TypeChecker {
-  private final List<InnerPredicate> predicates;
+  private final List<RawInnerPredicate> predicates;
 
-  public TypeChecker(List<InnerPredicate> predicates) {
+  public TypeChecker(List<RawInnerPredicate> predicates) {
     this.predicates = new ArrayList<>(predicates);
   }
 
   boolean isTrue(PythonType pythonType) {
-    return predicates.stream().allMatch(predicate -> predicate.apply(pythonType) == TriBool.TRUE);
+    return predicates.stream().allMatch(predicate -> predicate.rawApply(pythonType) == TriBool.TRUE);
   }
 }

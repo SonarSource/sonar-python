@@ -25,7 +25,7 @@ import org.sonar.python.semantic.v2.ProjectLevelTypeTable;
 
 public class TypeCheckerBuilderContext {
   private final ProjectLevelTypeTable projectLevelTypeTable;
-  protected final List<InnerPredicate> predicates = new ArrayList<>();
+  protected final List<RawInnerPredicate> predicates = new ArrayList<>();
 
   TypeCheckerBuilderContext(ProjectLevelTypeTable projectLevelTypeTable) {
     this.projectLevelTypeTable = projectLevelTypeTable;
@@ -35,7 +35,7 @@ public class TypeCheckerBuilderContext {
     return projectLevelTypeTable;
   }
 
-  public void addPredicate(InnerPredicate predicate) {
+  public void addPredicate(RawInnerPredicate predicate) {
     predicates.add(predicate);
   }
 
@@ -45,7 +45,7 @@ public class TypeCheckerBuilderContext {
       super(projectLevelTypeTable);
     }
 
-    public List<InnerPredicate> getPredicates() {
+    public List<RawInnerPredicate> getPredicates() {
       return predicates;
     }
 

@@ -36,16 +36,13 @@ public interface InnerPredicateBuilder<I extends TypeCheckerBuilder<I>, O extend
     };
   }
 
-  class AnyCandiateInnerPredicate implements InnerPredicate {
-
-    private final List<InnerPredicate> predicates;
-
-    public AnyCandiateInnerPredicate(List<InnerPredicate> predicates) {
-      this.predicates = predicates;
-    }
+  record AnyCandiateInnerPredicate(List<RawInnerPredicate> predicates) implements RawInnerPredicate {
 
     @Override
-    public TriBool apply(PythonType pythonType) {
+    public TriBool rawApply(PythonType pythonType) {
+      if (predicates.isEmpty()) {
+        throw new IllegalStateException("Empty predicates list");
+      }
       if (pythonType instanceof UnionType unionType) {
         TriBool latestResut = TriBool.FALSE;
         for (PythonType candidate : unionType.candidates()) {
@@ -64,8 +61,8 @@ public interface InnerPredicateBuilder<I extends TypeCheckerBuilder<I>, O extend
 
     private TriBool applyPredicates(PythonType pythonType) {
       TriBool result = TriBool.TRUE;
-      for (InnerPredicate predicate : predicates) {
-        result = result.and(predicate.apply(pythonType));
+      for (RawInnerPredicate predicate : predicates) {
+        result = result.and(predicate.rawApply(pythonType));
       }
       return result;
     }

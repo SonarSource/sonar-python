@@ -43,7 +43,7 @@ public class TypeCheckerPredicates {
 
   private static class IsClassTypeInnerPredicate implements InnerPredicate {
     @Override
-    public TriBool apply(PythonType type) {
+    public TriBool applyOn(PythonType type) {
       return type instanceof ClassType ? TriBool.TRUE : TriBool.FALSE;
     }
   }
@@ -62,7 +62,7 @@ public class TypeCheckerPredicates {
   private record ObjectIsInnerPredicate(PythonType resolvedType) implements InnerPredicate {
 
     @Override
-    public TriBool apply(PythonType type) {
+    public TriBool applyOn(PythonType type) {
       if (!(type instanceof ObjectType)) {
         return TriBool.FALSE;
       }

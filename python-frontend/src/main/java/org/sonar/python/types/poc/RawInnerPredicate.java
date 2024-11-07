@@ -21,27 +21,7 @@ package org.sonar.python.types.poc;
 
 import org.sonar.python.types.v2.PythonType;
 import org.sonar.python.types.v2.TriBool;
-import org.sonar.python.types.v2.UnionType;
 
-public interface InnerPredicate extends RawInnerPredicate {
-  // This interface could be made into a class.
-  // However, this would have the consequences that implementations are no longer able to be records.
-  default TriBool rawApply(PythonType pythonType) {
-    if (pythonType instanceof UnionType unionType) {
-      for (PythonType candidate : unionType.candidates()) {
-        var result = applyOn(candidate);
-        if (result.equals(TriBool.UNKNOWN)) {
-          return TriBool.UNKNOWN;
-        }
-        if (result.equals(TriBool.FALSE)) {
-          return TriBool.FALSE;
-        }
-      }
-      return TriBool.TRUE;
-    } else {
-      return applyOn(pythonType);
-    }
-  }
-
-  TriBool applyOn(PythonType pythonType);
+public interface RawInnerPredicate {
+  TriBool rawApply(PythonType pythonType);
 }
