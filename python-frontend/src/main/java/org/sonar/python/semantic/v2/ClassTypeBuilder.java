@@ -27,7 +27,6 @@ import java.util.Set;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.LocationInFile;
 import org.sonar.python.types.v2.ClassType;
-import org.sonar.python.types.v2.LazyTypeWrapper;
 import org.sonar.python.types.v2.TypeWrapper;
 import org.sonar.python.types.v2.Member;
 import org.sonar.python.types.v2.PythonType;

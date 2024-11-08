@@ -22,7 +22,6 @@ package org.sonar.python.semantic.v2.converter;
 import org.sonar.python.index.ClassDescriptor;
 import org.sonar.python.index.Descriptor;
 import org.sonar.python.semantic.v2.ClassTypeBuilder;
-import org.sonar.python.types.v2.LazyTypeWrapper;
 import org.sonar.python.types.v2.Member;
 import org.sonar.python.types.v2.PythonType;
 import org.sonar.python.types.v2.TypeWrapper;
