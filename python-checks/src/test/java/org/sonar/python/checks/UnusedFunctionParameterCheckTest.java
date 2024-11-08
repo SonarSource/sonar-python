@@ -28,7 +28,7 @@ class UnusedFunctionParameterCheckTest {
   @Test
   void test() {
     PythonCheckVerifier.verify(
-      List.of("src/test/resources/checks/unusedFunctionParameter/unusedFunctionParameter.py", "src/test/resources/checks/unusedFunctionParameter/unusedFunctionParameterParent.py"),
+      "src/test/resources/checks/unusedFunctionParameter/unusedFunctionParameter.py",
       new UnusedFunctionParameterCheck()
     );
   }
