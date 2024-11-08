@@ -26,8 +26,10 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
+import org.assertj.core.groups.Tuple;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.symbols.AmbiguousSymbol;
@@ -677,6 +679,30 @@ class ProjectLevelSymbolTableTest {
     assertThat(cSymbol.name()).isEqualTo("C");
     assertThat(cSymbol.kind()).isEqualTo(Symbol.Kind.CLASS);
     assertThat(((ClassSymbol) cSymbol).superClasses()).hasSize(1);
+  }
+
+  @Test
+  void child_class_method_call_is_not_a_member_of_parent_class() {
+    ProjectLevelSymbolTable projectLevelSymbolTable = new ProjectLevelSymbolTable();
+    FileInput importedFileInput = parseWithoutSymbols(
+      "class A:",
+      "  def meth(self): ",
+      "    return self.foo()"
+    );
+    FileInput importFileInput = parseWithoutSymbols(
+      "from mod import A",
+      "class B(A): ",
+      "  def foo(self):",
+      "    pass"
+    );
+    projectLevelSymbolTable.addModule(importFileInput, "packageName", pythonFile("mod2.py"));
+    projectLevelSymbolTable.addModule(importedFileInput, "packageName", pythonFile("mod.py"));
+    Set<Symbol> globalSymbols = projectLevelSymbolTable.getSymbolsFromModule("packageName.mod");
+    Optional<ClassSymbol> classA = globalSymbols.stream().filter(s -> s.name().equals("A")).map(ClassSymbol.class::cast).findFirst();
+    assertThat(classA).isPresent();
+    // SONARPY-2327 The method call to foo() in class A is not considered as a member of A, while A was defined in the same file as B, it will be.
+    assertThat(classA.get().canHaveMember("foo")).isFalse();
+    assertThat(classA.get().declaredMembers()).extracting("kind", "name").containsExactlyInAnyOrder(Tuple.tuple(Symbol.Kind.FUNCTION, "meth"));
   }
 
   @Test

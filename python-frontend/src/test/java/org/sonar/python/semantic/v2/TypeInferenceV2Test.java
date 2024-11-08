@@ -24,11 +24,13 @@ import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Stream;
 import org.assertj.core.api.Assertions;
 import org.assertj.core.api.InstanceOfAssertFactories;
+import org.assertj.core.groups.Tuple;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -347,6 +349,25 @@ public class TypeInferenceV2Test {
 
     assertThat(firstCall.callee().typeV2()).isEqualTo(firstFunctionType);
     assertThat(secondCall.callee().typeV2()).isEqualTo(secondFunctionType);
+  }
+
+  @Test
+  void child_class_method_call_is_not_a_member_of_parent_class() {
+    FileInput fileInput = inferTypes("""
+      class A:
+        def meth(self):
+          return self.foo()
+      class B(A):
+        def foo(self):
+          ...
+      """
+    );
+    Optional<ClassSymbol> classA = fileInput.globalVariables().stream().filter(s -> s.name().equals("A")).map(ClassSymbol.class::cast).findFirst();
+    assertThat(classA).isPresent();
+    // SONARPY-2327 The method call to foo() in class A is considered as a member of A, while if A was defined in another file than B, it won't be.
+    assertThat(classA.get().canHaveMember("foo")).isTrue();
+    assertThat(classA.get().declaredMembers()).extracting("kind", "name")
+      .containsExactlyInAnyOrder(Tuple.tuple(Symbol.Kind.FUNCTION, "meth"), Tuple.tuple(Symbol.Kind.OTHER, "foo"));
   }
 
   @Test
