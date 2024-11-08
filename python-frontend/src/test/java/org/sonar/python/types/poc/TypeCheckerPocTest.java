@@ -26,12 +26,11 @@ import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.semantic.v2.ClassTypeBuilder;
 import org.sonar.python.semantic.v2.ObjectTypeBuilder;
 import org.sonar.python.semantic.v2.ProjectLevelTypeTable;
+import org.sonar.python.types.poc.typechecker.UnspecializedTypeCheckerBuilder;
 import org.sonar.python.types.v2.TypeUtils;
 import org.sonar.python.types.v2.UnionType;
-import org.sonar.python.types.poc.typechecker.UnspecializedTypeCheckerBuilder;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.sonar.python.types.poc.TypeCheckerPredicates.isObject;
 
 class TypeCheckerPocTest {
 
@@ -50,7 +49,7 @@ class TypeCheckerPocTest {
   @Test
   void simpleClassType() {
     var typeChecker = typeChecker()
-      .with(TypeCheckerPredicates.isClass())
+      .isClass()
       .build();
 
     var classType = new ClassTypeBuilder().withName("MyClass").build();
@@ -63,7 +62,7 @@ class TypeCheckerPocTest {
   @Test
   void simpleIsObject() {
     var typeChecker = typeChecker()
-      .with(isObject("builtins.float"))
+      .isObject("builtins.float")
       .build();
 
     var floatType = TypeUtils.ensureWrappedObjectType(projectLeveLTypeTable.getType("builtins.float"));
@@ -76,10 +75,11 @@ class TypeCheckerPocTest {
   @Test
   void simpleAnyCandidate() {
     var typeCheckerAny = typeChecker()
-      .with(isObject("builtins.float").anyCandidate())
+      .withAnyCandidate(checker -> checker.isObject("builtins.float"))
       .build();
+
     var typeCheckerDefault = typeChecker()
-      .with(isObject("builtins.float"))
+      .isObject("builtins.float")
       .build();
 
     var objType1 = TypeUtils.ensureWrappedObjectType(projectLeveLTypeTable.getType("NoneType"));
@@ -95,7 +95,7 @@ class TypeCheckerPocTest {
   @Test
   void anyCandidateNotUnion() {
     var typeCheckerAny = typeChecker()
-      .with(isObject("NoneType").anyCandidate())
+      .withAnyCandidate(checker -> checker.isObject("NoneType"))
       .build();
 
     var objectType = TypeUtils.ensureWrappedObjectType(projectLeveLTypeTable.getType("NoneType"));
@@ -107,8 +107,8 @@ class TypeCheckerPocTest {
   void simpleOr() {
     var typeCheckerAny = typeChecker()
       .or(
-        checker -> checker.with(isObject("builtins.float")),
-        checker -> checker.with(isObject("builtins.int")))
+        checker -> checker.isObject("builtins.float"),
+        checker -> checker.isObject("builtins.int"))
       .build();
 
     var floatType = TypeUtils.ensureWrappedObjectType(projectLeveLTypeTable.getType("builtins.float"));

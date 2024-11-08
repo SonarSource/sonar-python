@@ -26,18 +26,13 @@ import java.util.stream.Stream;
 import org.sonar.python.types.poc.TypeCheckerBuilderContext.FakeTypeCheckBuilderContext;
 import org.sonar.python.types.v2.PythonType;
 import org.sonar.python.types.v2.TriBool;
+import org.sonar.python.types.v2.UnionType;
 
 public abstract class AbstractTypeCheckerBuilder<SELF extends AbstractTypeCheckerBuilder<SELF>> implements TypeCheckerBuilder<SELF> {
   private final TypeCheckerBuilderContext context;
 
   protected AbstractTypeCheckerBuilder(TypeCheckerBuilderContext context) {
     this.context = context;
-  }
-
-  @Override
-  public <O extends TypeCheckerBuilder<O>> O with(InnerPredicateBuilder<SELF, O> predicate) {
-    // TODO fix generics (if possible)
-    return predicate.construct((SELF) this, context);
   }
 
   @SafeVarargs
@@ -56,6 +51,47 @@ public abstract class AbstractTypeCheckerBuilder<SELF extends AbstractTypeChecke
 
     // TODO fix generics (if possible)
     return (SELF) this;
+  }
+
+  @Override
+  public <T extends TypeCheckerBuilder<T>> T withAnyCandidate(Function<SELF, T> builder) {
+    var newCtx = FakeTypeCheckBuilderContext.fromRealContext(getContext());
+    SELF rebindedSelf = rebind(newCtx);
+    T newBuilder = builder.apply(rebindedSelf);
+    context.addPredicate(new AnyCandidatePredicate(newCtx.getPredicates()));
+    return newBuilder.rebind(context);
+  }
+
+  private record AnyCandidatePredicate(List<RawInnerPredicate> predicates) implements RawInnerPredicate {
+
+    @Override
+    public TriBool rawApply(PythonType pythonType) {
+      if (predicates.isEmpty()) {
+        throw new IllegalStateException("Empty predicates list");
+      }
+      if (pythonType instanceof UnionType unionType) {
+        TriBool latestResut = TriBool.FALSE;
+        for (PythonType candidate : unionType.candidates()) {
+          var result = applyPredicates(candidate);
+          if (result == TriBool.TRUE) {
+            return TriBool.TRUE;
+          } else if (result == TriBool.UNKNOWN) {
+            latestResut = TriBool.UNKNOWN;
+          }
+        }
+        return latestResut;
+      } else {
+        return applyPredicates(pythonType);
+      }
+    }
+
+    private TriBool applyPredicates(PythonType pythonType) {
+      TriBool result = TriBool.TRUE;
+      for (RawInnerPredicate predicate : predicates) {
+        result = result.and(predicate.rawApply(pythonType));
+      }
+      return result;
+    }
   }
 
   private record OrInnerPredicate(List<List<RawInnerPredicate>> predicatesByOr) implements RawInnerPredicate {
@@ -85,5 +121,9 @@ public abstract class AbstractTypeCheckerBuilder<SELF extends AbstractTypeChecke
       throw new IllegalStateException("No predicates were added");
     }
     return new TypeChecker(context.predicates);
+  }
+
+  protected TypeCheckerBuilderContext getContext() {
+    return context;
   }
 }

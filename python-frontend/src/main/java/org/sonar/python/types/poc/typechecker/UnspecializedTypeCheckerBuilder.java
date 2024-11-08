@@ -20,7 +20,13 @@
 package org.sonar.python.types.poc.typechecker;
 
 import org.sonar.python.types.poc.AbstractTypeCheckerBuilder;
+import org.sonar.python.types.poc.InnerPredicate;
 import org.sonar.python.types.poc.TypeCheckerBuilderContext;
+import org.sonar.python.types.v2.ClassType;
+import org.sonar.python.types.v2.ObjectType;
+import org.sonar.python.types.v2.PythonType;
+import org.sonar.python.types.v2.TriBool;
+import org.sonar.python.types.v2.UnknownType;
 
 public class UnspecializedTypeCheckerBuilder extends AbstractTypeCheckerBuilder<UnspecializedTypeCheckerBuilder> {
   public UnspecializedTypeCheckerBuilder(TypeCheckerBuilderContext projectLevelTypeTable) {
@@ -31,4 +37,44 @@ public class UnspecializedTypeCheckerBuilder extends AbstractTypeCheckerBuilder<
   public UnspecializedTypeCheckerBuilder rebind(TypeCheckerBuilderContext context) {
     return new UnspecializedTypeCheckerBuilder(context);
   }
+
+  public ClassTypeBuilder isClass() {
+    getContext().addPredicate(new IsClassPredicate());
+    return new ClassTypeBuilder(getContext());
+  }
+
+  private static class IsClassPredicate implements InnerPredicate {
+    @Override
+    public TriBool applyOn(PythonType type) {
+      return type instanceof ClassType ? TriBool.TRUE : TriBool.FALSE;
+    }
+  }
+
+  public ObjectTypeBuilder isObject(String fqn) {
+    PythonType resolvedType = getContext().getProjectLevelTypeTable().getType(fqn);
+    if (resolvedType instanceof UnknownType.UnknownTypeImpl) {
+      throw new IllegalStateException("Tried to match UnknownType");
+    }
+    getContext().addPredicate(new ObjectIsInnerPredicate(resolvedType));
+    return new ObjectTypeBuilder(getContext());
+  }
+
+  private record ObjectIsInnerPredicate(PythonType resolvedType) implements InnerPredicate {
+
+    @Override
+    public TriBool applyOn(PythonType type) {
+      if (!(type instanceof ObjectType)) {
+        return TriBool.FALSE;
+      }
+      type = type.unwrappedType();
+      if (type instanceof UnknownType.UnresolvedImportType unresolvedPythonType && resolvedType instanceof UnknownType.UnresolvedImportType unresolvedExpectedType) {
+        return unresolvedPythonType.importPath().equals(unresolvedExpectedType.importPath()) ? TriBool.TRUE : TriBool.UNKNOWN;
+      }
+      if (type instanceof UnknownType || resolvedType instanceof UnknownType) {
+        return TriBool.UNKNOWN;
+      }
+      return type.equals(resolvedType) ? TriBool.TRUE : TriBool.FALSE;
+    }
+  }
+
 }

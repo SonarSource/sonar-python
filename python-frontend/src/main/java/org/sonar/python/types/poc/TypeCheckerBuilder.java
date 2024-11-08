@@ -23,11 +23,12 @@ import java.util.function.Function;
 
 // INTERFACES
 public interface TypeCheckerBuilder<SELF extends TypeCheckerBuilder<SELF>> {
-  <O extends TypeCheckerBuilder<O>> O with(InnerPredicateBuilder<SELF, O> predicate);
 
   @SuppressWarnings("unchecked")
   SELF or(Function<SELF, ? extends TypeCheckerBuilder<?>> firstPredicate,
     Function<SELF, ? extends TypeCheckerBuilder<?>>... otherPredicates);
+
+  <T extends TypeCheckerBuilder<T>> T withAnyCandidate(Function<SELF, T> builder);
 
   TypeChecker build();
 
