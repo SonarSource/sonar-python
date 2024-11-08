@@ -1,5 +1,5 @@
-class A:
+class ClassWithFieldOnly:
   v : int = 10
 
-class B:
+class ClassWithMethodOnly:
     def foo(self): ...
