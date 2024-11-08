@@ -1,4 +1,5 @@
 from typing import SupportsFloat, List, Iterable, Generator, Set, Union, Type, TypedDict
+from inconsistentTypeHintImported import ClassWithFieldOnly, ClassWithMethodOnly
 
 def assigned_directly():
   foo : int = None # Noncompliant {{Replace the type hint "int" with "Optional[int]" or don't assign "None" to "foo"}}
@@ -8,6 +9,8 @@ def assigned_directly():
   my_str_ok: str = 42  # Noncompliant
   my_int_ok: int = 42  # OK
   my_str_ok: str = "hello"  # OK
+  a : ClassWithFieldOnly = None # FN
+  b : ClassWithMethodOnly = None # Noncompliant
 
 def return_union() -> Union[str, float]:
   ...
