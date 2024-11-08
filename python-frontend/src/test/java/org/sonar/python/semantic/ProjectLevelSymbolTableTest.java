@@ -26,8 +26,10 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
+import org.assertj.core.groups.Tuple;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.symbols.AmbiguousSymbol;
@@ -677,6 +679,20 @@ class ProjectLevelSymbolTableTest {
     assertThat(cSymbol.name()).isEqualTo("C");
     assertThat(cSymbol.kind()).isEqualTo(Symbol.Kind.CLASS);
     assertThat(((ClassSymbol) cSymbol).superClasses()).hasSize(1);
+  }
+
+  @Test
+  void child_class_method_call_is_not_a_member_of_parent_class() {
+    FileInput fileInput = parseWithoutSymbols(
+      "class A:",
+      "  def meth(self): " +
+      "    return self.foo()",
+      "class B(A): ",
+      "  def foo(self): pass");
+    Set<Symbol> globalSymbols = globalSymbols(fileInput, "mod");
+    Optional<ClassSymbol> classA = globalSymbols.stream().filter(s -> s.name().equals("A")).map(ClassSymbol.class::cast).findFirst();
+    assertThat(classA).isPresent();
+    assertThat(classA.get().declaredMembers()).extracting("kind", "name").containsExactlyInAnyOrder(Tuple.tuple(Symbol.Kind.FUNCTION, "meth"));
   }
 
   @Test

@@ -19,6 +19,7 @@
  */
 package org.sonar.python.checks;
 
+import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
@@ -26,7 +27,10 @@ class UnusedFunctionParameterCheckTest {
 
   @Test
   void test() {
-    PythonCheckVerifier.verify("src/test/resources/checks/unusedFunctionParameter/unusedFunctionParameter.py", new UnusedFunctionParameterCheck());
+    PythonCheckVerifier.verify(
+      List.of("src/test/resources/checks/unusedFunctionParameter/unusedFunctionParameter.py", "src/test/resources/checks/unusedFunctionParameter/unusedFunctionParameterParent.py"),
+      new UnusedFunctionParameterCheck()
+    );
   }
 
   @Test
