@@ -19,6 +19,7 @@
  */
 package org.sonar.python.checks.tests;
 
+import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
@@ -29,7 +30,15 @@ class UnconditionalAssertionCheckTest {
 
   @Test
   void test() {
-    PythonCheckVerifier.verify("src/test/resources/checks/tests/unconditionalAssertion.py", new UnconditionalAssertionCheck());
+    PythonCheckVerifier.verify("src/test/resources/checks/unconditionalAssertion/unconditionalAssertion.py", new UnconditionalAssertionCheck());
+  }
+
+  @Test
+  void test_import() {
+    PythonCheckVerifier.verify(
+      List.of("src/test/resources/checks/unconditionalAssertion/unconditionalAssertionImport.py", "src/test/resources/checks/unconditionalAssertion/unconditionalAssertionImported.py"),
+      new UnconditionalAssertionCheck()
+    );
   }
 
   @Test

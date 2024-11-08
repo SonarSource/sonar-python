@@ -1,0 +1,6 @@
+class ClassWithProperty:
+
+    def method(self): ...
+
+    @property
+    def my_property(self): ...
