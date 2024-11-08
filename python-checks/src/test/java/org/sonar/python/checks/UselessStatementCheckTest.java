@@ -19,6 +19,7 @@
  */
 package org.sonar.python.checks;
 
+import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
@@ -26,12 +27,7 @@ class UselessStatementCheckTest {
 
   @Test
   void test() {
-    PythonCheckVerifier.verify("src/test/resources/checks/uselessStatement.py", new UselessStatementCheck());
-  }
-
-  @Test
-  void test_ignore_manifest() {
-    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/__manifest__.py", new UselessStatementCheck());
+    PythonCheckVerifier.verify("src/test/resources/checks/uselessStatement/uselessStatement.py", new UselessStatementCheck());
   }
 
   @Test
@@ -39,6 +35,19 @@ class UselessStatementCheckTest {
     UselessStatementCheck check = new UselessStatementCheck();
     check.reportOnStrings = true;
     check.ignoredOperators = "<<,+";
-    PythonCheckVerifier.verify("src/test/resources/checks/uselessStatementCustom.py", check);
+    PythonCheckVerifier.verify("src/test/resources/checks/uselessStatement/uselessStatementCustom.py", check);
+  }
+
+  @Test
+  void test_import() {
+    PythonCheckVerifier.verify(
+      List.of("src/test/resources/checks/uselessStatement/uselessStatementImported.py", "src/test/resources/checks/uselessStatement/uselessStatementImport.py"),
+      new UselessStatementCheck()
+    );
+  }
+
+  @Test
+  void test_ignore_manifest() {
+    PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/__manifest__.py", new UselessStatementCheck());
   }
 }
