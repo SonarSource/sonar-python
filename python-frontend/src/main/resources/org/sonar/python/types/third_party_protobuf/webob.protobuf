@@ -1,0 +1,615 @@
+
+webobÅ
+
+LegacyRequestwebob.request.LegacyRequest"webob.request.BaseRequest*³
+encget"webob.request.LegacyRequest.encget"
+Any*D
+self:
+webob.request.LegacyRequest"webob.request.LegacyRequest*%
+key
+builtins.str"builtins.str*
+default
+Any *S
+encattrD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None z36z37z38z39z310z311z312z3132Ö
+uscript_name(webob.request.LegacyRequest.uscript_name¬
+uscript_name(webob.request.LegacyRequest.uscript_name"
+builtins.str"builtins.str*D
+self:
+webob.request.LegacyRequest"webob.request.LegacyRequest0:propertyX`È
+uscript_name(webob.request.LegacyRequest.uscript_name"
+None*D
+self:
+webob.request.LegacyRequest"webob.request.LegacyRequest*'
+value
+builtins.str"builtins.str0:uscript_name.setter"36"37"38"39"310"311"312"3132È
+
+upath_info&webob.request.LegacyRequest.upath_info¨
+
+upath_info&webob.request.LegacyRequest.upath_info"
+builtins.str"builtins.str*D
+self:
+webob.request.LegacyRequest"webob.request.LegacyRequest0:propertyX`Â
+
+upath_info&webob.request.LegacyRequest.upath_info"
+None*D
+self:
+webob.request.LegacyRequest"webob.request.LegacyRequest*'
+value
+builtins.str"builtins.str0:upath_info.setter"36"37"38"39"310"311"312"313j36j37j38j39j310j311j312j313×
+Requestwebob.request.Request"webob.request.AdhocAttrMixin"webob.request.BaseRequestj36j37j38j39j310j311j312j313rX
+__call__webob.request.Request.__call__
+None*36*37*38*39*310*311*312*313™À
+Responsewebob.response.Response"builtins.object*ø
+__init__ webob.response.Response.__init__"
+None*<
+self2
+webob.response.Response"webob.response.Response*
+bodyu
+'Union[builtins.bytes,builtins.str,None] 
+builtins.bytes"builtins.bytes
+builtins.str"builtins.str
+None *R
+statusD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *å
+
+headerlistÒ
+FUnion[builtins.list[TypeAlias[Tuple[builtins.str,builtins.str]]],None]û
+:builtins.list[TypeAlias[Tuple[builtins.str,builtins.str]]]­
++TypeAlias[Tuple[builtins.str,builtins.str]]`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"webob.response._HTTPHeader"builtins.list
+None * 
+app_iter
++Union[typing.Iterator[builtins.bytes],None]T
+typing.Iterator[builtins.bytes] 
+builtins.bytes"builtins.bytes"typing.Iterator
+None *X
+content_typeD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *c
+conditional_responseG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *+
+charset
+builtins.str"builtins.str *
+kw
+Anyz36z37z38z39z310z311z312z313*É
+	from_file!webob.response.Response.from_file"2
+webob.response.Response"webob.response.Response*d
+cls[
+Type[webob.response.Response]2
+webob.response.Response"webob.response.Response"type*J
+fpB
+typing.IO[builtins.str]
+builtins.str"builtins.str"	typing.IO0:classmethodpz36z37z38z39z310z311z312z313*º
+copywebob.response.Response.copy"2
+webob.response.Response"webob.response.Response*<
+self2
+webob.response.Response"webob.response.Responsez36z37z38z39z310z311z312z313*¼
+has_body webob.response.Response.has_body"
+builtins.bool"builtins.bool*<
+self2
+webob.response.Response"webob.response.Response0:property`z36z37z38z39z310z311z312z313*„
+writewebob.response.Response.write"
+None*<
+self2
+webob.response.Response"webob.response.Response*p
+textf
+"Union[builtins.str,builtins.bytes]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytesz36z37z38z39z310z311z312z313*è
+etag_strong#webob.response.Response.etag_strong"D
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*<
+self2
+webob.response.Response"webob.response.Response0:property`z36z37z38z39z310z311z312z313*ç
+
+set_cookie"webob.response.Response.set_cookie"
+None*<
+self2
+webob.response.Response"webob.response.Response*&
+name
+builtins.str"builtins.str*Q
+valueD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *‘
+max_age
++Union[builtins.int,datetime.timedelta,None]
+builtins.int"builtins.int(
+datetime.timedelta"datetime.timedelta
+None *(
+path
+builtins.str"builtins.str *R
+domainD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *,
+secure
+builtins.bool"builtins.bool *.
+httponly
+builtins.bool"builtins.bool *S
+commentD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None */
+	overwrite
+builtins.bool"builtins.bool *t
+samesited
+Union[TypeAlias[Any],None]:
+TypeAlias[Any]
+Any"webob.cookies._SameSitePolicy
+None z36z37*í
+
+set_cookie"webob.response.Response.set_cookie"
+None*<
+self2
+webob.response.Response"webob.response.Response*&
+name
+builtins.str"builtins.str*Q
+valueD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *‘
+max_age
++Union[builtins.int,datetime.timedelta,None]
+builtins.int"builtins.int(
+datetime.timedelta"datetime.timedelta
+None *(
+path
+builtins.str"builtins.str *R
+domainD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *,
+secure
+builtins.bool"builtins.bool *.
+httponly
+builtins.bool"builtins.bool *S
+commentD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None */
+	overwrite
+builtins.bool"builtins.bool *å
+samesiteÔ
+¡Union[TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]],None]¡
+•TypeAlias[Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]]å
+ŠUnion[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str"webob.cookies._SameSitePolicy
+None z38z39z310z311z312z313*È
+delete_cookie%webob.response.Response.delete_cookie"
+None*<
+self2
+webob.response.Response"webob.response.Response*&
+name
+builtins.str"builtins.str*(
+path
+builtins.str"builtins.str *R
+domainD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None z36z37z38z39z310z311z312z313*ö
+unset_cookie$webob.response.Response.unset_cookie"
+None*<
+self2
+webob.response.Response"webob.response.Response*&
+name
+builtins.str"builtins.str*,
+strict
+builtins.bool"builtins.bool z36z37z38z39z310z311z312z313*À
+merge_cookies%webob.response.Response.merge_cookies"
+None*<
+self2
+webob.response.Response"webob.response.Response*ª
+respŸ
+IUnion[webob.response.Response,TypeAlias[CallableType[builtins.function]]]2
+webob.response.Response"webob.response.Response›
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"_typeshed.wsgi.WSGIApplicationz36z37z38z39z310*¹
+merge_cookies%webob.response.Response.merge_cookies"
+None*<
+self2
+webob.response.Response"webob.response.Response*©
+respž
+IUnion[webob.response.Response,TypeAlias[CallableType[builtins.function]]]2
+webob.response.Response"webob.response.Responseš
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"wsgiref.types.WSGIApplicationz311z312z313*Í
+encode_content&webob.response.Response.encode_content"
+None*<
+self2
+webob.response.Response"webob.response.Response*
+encoding
+Any **
+lazy
+builtins.bool"builtins.bool z36z37*„
+encode_content&webob.response.Response.encode_content"
+None*<
+self2
+webob.response.Response"webob.response.Response*¹
+encoding¨
+2Union[Literal[builtins.str],Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str **
+lazy
+builtins.bool"builtins.bool z38z39z310z311z312z313*¤
+decode_content&webob.response.Response.decode_content"
+None*<
+self2
+webob.response.Response"webob.response.Responsez36z37z38z39z310z311z312z313*§
+md5_etag webob.response.Response.md5_etag"
+None*<
+self2
+webob.response.Response"webob.response.Response*V
+bodyJ
+Union[builtins.bytes,None] 
+builtins.bytes"builtins.bytes
+None *5
+set_content_md5
+builtins.bool"builtins.bool z36z37z38z39z310z311z312z313*ß
+__call__ webob.response.Response.__call__"T
+typing.Iterable[builtins.bytes] 
+builtins.bytes"builtins.bytes"typing.Iterable*<
+self2
+webob.response.Response"webob.response.Response*µ
+environ§
+*TypeAlias[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"_typeshed.wsgi.WSGIEnvironment*P
+start_response<
+_typeshed.wsgi.StartResponse"_typeshed.wsgi.StartResponsez36z37z38z39z310*Ö
+__call__ webob.response.Response.__call__"T
+typing.Iterable[builtins.bytes] 
+builtins.bytes"builtins.bytes"typing.Iterable*<
+self2
+webob.response.Response"webob.response.Response*´
+environ¦
+*TypeAlias[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"wsgiref.types.WSGIEnvironment*N
+start_response:
+wsgiref.types.StartResponse"wsgiref.types.StartResponsez311z312z313*ÿ
+conditional_response_app0webob.response.Response.conditional_response_app"T
+typing.Iterable[builtins.bytes] 
+builtins.bytes"builtins.bytes"typing.Iterable*<
+self2
+webob.response.Response"webob.response.Response*µ
+environ§
+*TypeAlias[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"_typeshed.wsgi.WSGIEnvironment*P
+start_response<
+_typeshed.wsgi.StartResponse"_typeshed.wsgi.StartResponsez36z37z38z39z310*ö
+conditional_response_app0webob.response.Response.conditional_response_app"T
+typing.Iterable[builtins.bytes] 
+builtins.bytes"builtins.bytes"typing.Iterable*<
+self2
+webob.response.Response"webob.response.Response*´
+environ¦
+*TypeAlias[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"wsgiref.types.WSGIEnvironment*N
+start_response:
+wsgiref.types.StartResponse"wsgiref.types.StartResponsez311z312z313*Ï
+app_iter_range&webob.response.Response.app_iter_range":
+webob.response.AppIterRange"webob.response.AppIterRange*<
+self2
+webob.response.Response"webob.response.Response*'
+start
+builtins.int"builtins.int*N
+stopD
+Union[builtins.int,None]
+builtins.int"builtins.int
+Nonez36z37z38z39z310z311z312z313*Æ
+__str__webob.response.Response.__str__"
+builtins.str"builtins.str*42
+webob.response.Response"webob.response.Response*"
+builtins.bool"builtins.bool z36z37z38z39z310z311z312z313j36j37j38j39j310j311j312j313r†
+default_content_type,webob.response.Response.default_content_type
+builtins.str"builtins.str*36*37*38*39*310*311*312*313r|
+default_charset'webob.response.Response.default_charset
+builtins.str"builtins.str*36*37*38*39*310*311*312*313rz
+unicode_errors&webob.response.Response.unicode_errors
+builtins.str"builtins.str*36*37*38*39*310*311*312*313r˜
+default_conditional_response4webob.response.Response.default_conditional_response
+builtins.bool"builtins.bool*36*37*38*39*310*311*312*313rˆ
+default_body_encoding-webob.response.Response.default_body_encoding
+builtins.str"builtins.str*36*37*38*39*310*311*312*313r¯
+requestwebob.response.Response.request_
+!Union[webob.request.Request,None].
+webob.request.Request"webob.request.Request
+None*36*37*38*39*310*311*312*313r°
+environwebob.response.Response.environî
+6Union[TypeAlias[builtins.dict[builtins.str,Any]],None]§
+*TypeAlias[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"_typeshed.wsgi.WSGIEnvironment
+None*36*37*38*39*310r©
+environwebob.response.Response.environí
+6Union[TypeAlias[builtins.dict[builtins.str,Any]],None]¦
+*TypeAlias[builtins.dict[builtins.str,Any]]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict"wsgiref.types.WSGIEnvironment
+None*311*312*313rj
+statuswebob.response.Response.status
+builtins.str"builtins.str*36*37*38*39*310*311*312*313rˆ
+conditional_response,webob.response.Response.conditional_response
+builtins.bool"builtins.bool*36*37*38*39*310*311*312*313rt
+status_code#webob.response.Response.status_code
+builtins.int"builtins.int*36*37*38*39*310*311*312*313rr
+
+status_int"webob.response.Response.status_int
+builtins.int"builtins.int*36*37*38*39*310*311*312*313rÛ
+
+headerlist"webob.response.Response.headerlist„
+¾webob.descriptors._AsymmetricPropertyWithDelete[builtins.list[TypeAlias[Tuple[builtins.str,builtins.str]]],Union[typing.Iterable[Unknown],_typeshed.SupportsItems[builtins.str,builtins.str]]]û
+:builtins.list[TypeAlias[Tuple[builtins.str,builtins.str]]]­
++TypeAlias[Tuple[builtins.str,builtins.str]]`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"webob.response._HTTPHeader"builtins.list‘
+RUnion[typing.Iterable[Unknown],_typeshed.SupportsItems[builtins.str,builtins.str]]-
+typing.Iterable[Unknown] "typing.Iterable‰
+2_typeshed.SupportsItems[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"_typeshed.SupportsItems"/webob.descriptors._AsymmetricPropertyWithDelete*36*37*38*39*310*311*312*313r’
+headerswebob.response.Response.headersÁ
+°webob.descriptors._AsymmetricProperty[webob.headers.ResponseHeaders,Union[_typeshed.SupportsItems[builtins.str,builtins.str],typing.Iterable[Tuple[builtins.str,builtins.str]]]]>
+webob.headers.ResponseHeaders"webob.headers.ResponseHeaders¤
+kUnion[_typeshed.SupportsItems[builtins.str,builtins.str],typing.Iterable[Tuple[builtins.str,builtins.str]]]‰
+2_typeshed.SupportsItems[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"_typeshed.SupportsItems¦
+1typing.Iterable[Tuple[builtins.str,builtins.str]]`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"typing.Iterable"%webob.descriptors._AsymmetricProperty*36*37*38*39*310*311*312*313rj
+bodywebob.response.Response.body 
+builtins.bytes"builtins.bytes*36*37*38*39*310*311*312*313rQ
+jsonwebob.response.Response.json
+Any*36*37*38*39*310*311*312*313r[
+	json_body!webob.response.Response.json_body
+Any*36*37*38*39*310*311*312*313rf
+textwebob.response.Response.text
+builtins.str"builtins.str*36*37*38*39*310*311*312*313rv
+unicode_body$webob.response.Response.unicode_body
+builtins.str"builtins.str*36*37*38*39*310*311*312*313rh
+ubodywebob.response.Response.ubody
+builtins.str"builtins.str*36*37*38*39*310*311*312*313r§
+	body_file!webob.response.Response.body_fileÒ
+wwebob.descriptors._AsymmetricPropertyWithDelete[webob.response.ResponseBodyFile,_typeshed.SupportsRead[builtins.bytes]]B
+webob.response.ResponseBodyFile"webob.response.ResponseBodyFileb
+&_typeshed.SupportsRead[builtins.bytes] 
+builtins.bytes"builtins.bytes"_typeshed.SupportsRead"/webob.descriptors._AsymmetricPropertyWithDelete*36*37*38*39*310*311*312*313r¢
+content_length&webob.response.Response.content_lengthD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None*36*37*38*39*310*311*312*313r¦
+app_iter webob.response.Response.app_iterT
+typing.Iterator[builtins.bytes] 
+builtins.bytes"builtins.bytes"typing.Iterator*36*37*38*39*310*311*312*313rŽ
+allowwebob.response.Response.allowB
+webob.descriptors._ListProperty"webob.descriptors._ListProperty*36*37*38*39*310*311*312*313rŒ
+varywebob.response.Response.varyB
+webob.descriptors._ListProperty"webob.descriptors._ListProperty*36*37*38*39*310*311*312*313r¦
+content_encoding(webob.response.Response.content_encodingD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*36*37*38*39*310*311*312*313r¤
+content_language(webob.response.Response.content_languageB
+webob.descriptors._ListProperty"webob.descriptors._ListProperty*36*37*38*39*310*311*312*313r¦
+content_location(webob.response.Response.content_locationD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*36*37*38*39*310*311*312*313rœ
+content_md5#webob.response.Response.content_md5D
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*36*37*38*39*310*311*312*313r¬
+content_disposition+webob.response.Response.content_dispositionD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*36*37*38*39*310*311*312*313r 
+accept_ranges%webob.response.Response.accept_rangesD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*36*37*38*39*310*311*312*313rÑ
+content_range%webob.response.Response.content_rangeô
+ˆwebob.descriptors._AsymmetricPropertyWithDelete[Union[webob.byterange.ContentRange,None],TypeAlias[Union[webob.byterange.ContentRange,builtins.list[builtins.int],builtins.list[None],builtins.list[Union[builtins.int,None]],Tuple[builtins.int,builtins.int],Tuple[None,None],Tuple[builtins.int,builtins.int,Union[builtins.int,None]],Tuple[None,None,Union[builtins.int,None]],builtins.str,None]]]t
+(Union[webob.byterange.ContentRange,None]<
+webob.byterange.ContentRange"webob.byterange.ContentRange
+None¿
+®TypeAlias[Union[webob.byterange.ContentRange,builtins.list[builtins.int],builtins.list[None],builtins.list[Union[builtins.int,None]],Tuple[builtins.int,builtins.int],Tuple[None,None],Tuple[builtins.int,builtins.int,Union[builtins.int,None]],Tuple[None,None,Union[builtins.int,None]],builtins.str,None]]â
+£Union[webob.byterange.ContentRange,builtins.list[builtins.int],builtins.list[None],builtins.list[Union[builtins.int,None]],Tuple[builtins.int,builtins.int],Tuple[None,None],Tuple[builtins.int,builtins.int,Union[builtins.int,None]],Tuple[None,None,Union[builtins.int,None]],builtins.str,None]<
+webob.byterange.ContentRange"webob.byterange.ContentRangeJ
+builtins.list[builtins.int]
+builtins.int"builtins.int"builtins.list.
+builtins.list[None]
+None"builtins.list~
+'builtins.list[Union[builtins.int,None]]D
+Union[builtins.int,None]
+builtins.int"builtins.int
+None"builtins.list`
+ Tuple[builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int(
+Tuple[None,None]
+None
+None¿
+9Tuple[builtins.int,builtins.int,Union[builtins.int,None]]
+builtins.int"builtins.int
+builtins.int"builtins.intD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None‡
+)Tuple[None,None,Union[builtins.int,None]]
+None
+NoneD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None
+builtins.str"builtins.str
+None"%webob.descriptors._ContentRangeParams"/webob.descriptors._AsymmetricPropertyWithDelete*36*37*38*39*310*311*312*313rŒ
+datewebob.response.Response.dateB
+webob.descriptors._DateProperty"webob.descriptors._DateProperty*36*37*38*39*310*311*312*313r’
+expireswebob.response.Response.expiresB
+webob.descriptors._DateProperty"webob.descriptors._DateProperty*36*37*38*39*310*311*312*313rž
+last_modified%webob.response.Response.last_modifiedB
+webob.descriptors._DateProperty"webob.descriptors._DateProperty*36*37*38*39*310*311*312*313r—
+etagwebob.response.Response.etagÌ
+„webob.descriptors._AsymmetricPropertyWithDelete[Union[builtins.str,None],Union[Tuple[builtins.str,builtins.bool],builtins.str,None]]D
+Union[builtins.str,None]
+builtins.str"builtins.str
+NoneË
+:Union[Tuple[builtins.str,builtins.bool],builtins.str,None]c
+!Tuple[builtins.str,builtins.bool]
+builtins.str"builtins.str
+builtins.bool"builtins.bool
+builtins.str"builtins.str
+None"/webob.descriptors._AsymmetricPropertyWithDelete*36*37*38*39*310*311*312*313r–
+location webob.response.Response.locationD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*36*37*38*39*310*311*312*313r’
+pragmawebob.response.Response.pragmaD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*36*37*38*39*310*311*312*313rŒ
+agewebob.response.Response.ageD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None*36*37*38*39*310*311*312*313rš
+retry_after#webob.response.Response.retry_afterB
+webob.descriptors._DateProperty"webob.descriptors._DateProperty*36*37*38*39*310*311*312*313r’
+serverwebob.response.Response.serverD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*36*37*38*39*310*311*312*313r›
+www_authenticate(webob.response.Response.www_authenticate¸
+•webob.descriptors._AsymmetricPropertyWithDelete[Union[TypeAlias[Tuple[builtins.str,Union[builtins.dict[builtins.str,builtins.str],builtins.str]]],None],Union[Tuple[builtins.str,Union[builtins.str,builtins.dict[builtins.str,builtins.str]]],builtins.list[Any],builtins.str,None]]Æ
+gUnion[TypeAlias[Tuple[builtins.str,Union[builtins.dict[builtins.str,builtins.str],builtins.str]]],None]Î
+[TypeAlias[Tuple[builtins.str,Union[builtins.dict[builtins.str,builtins.str],builtins.str]]]Ê
+PTuple[builtins.str,Union[builtins.dict[builtins.str,builtins.str],builtins.str]]
+builtins.str"builtins.strÕ
+<Union[builtins.dict[builtins.str,builtins.str],builtins.str]u
+(builtins.dict[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.dict
+builtins.str"builtins.str" webob.descriptors._authorization
+None£
+|Union[Tuple[builtins.str,Union[builtins.str,builtins.dict[builtins.str,builtins.str]]],builtins.list[Any],builtins.str,None]Ê
+PTuple[builtins.str,Union[builtins.str,builtins.dict[builtins.str,builtins.str]]]
+builtins.str"builtins.strÕ
+<Union[builtins.str,builtins.dict[builtins.str,builtins.str]]
+builtins.str"builtins.stru
+(builtins.dict[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.dict,
+builtins.list[Any]
+Any"builtins.list
+builtins.str"builtins.str
+None"/webob.descriptors._AsymmetricPropertyWithDelete*36*37*38*39*310*311*312*313r”
+charsetwebob.response.Response.charsetD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*36*37*38*39*310*311*312*313rž
+content_type$webob.response.Response.content_typeD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*36*37*38*39*310*311*312*313r‡
+content_type_params+webob.response.Response.content_type_paramsž
+˜webob.descriptors._AsymmetricPropertyWithDelete[builtins.dict[builtins.str,builtins.str],Union[_typeshed.SupportsItems[builtins.str,builtins.str],None]]u
+(builtins.dict[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.dictØ
+>Union[_typeshed.SupportsItems[builtins.str,builtins.str],None]‰
+2_typeshed.SupportsItems[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"_typeshed.SupportsItems
+None"/webob.descriptors._AsymmetricPropertyWithDelete*36*37*38*39*310*311*312*313rÀ
+cache_control%webob.response.Response.cache_controlÿ
+ºwebob.descriptors._AsymmetricProperty[webob.cachecontrol._ResponseCacheControl,Union[webob.cachecontrol._ResponseCacheControl,webob.response._ResponseCacheControlDict,builtins.str,None]]T
+(webob.cachecontrol._ResponseCacheControl"(webob.cachecontrol._ResponseCacheControlÂ
+jUnion[webob.cachecontrol._ResponseCacheControl,webob.response._ResponseCacheControlDict,builtins.str,None]T
+(webob.cachecontrol._ResponseCacheControl"(webob.cachecontrol._ResponseCacheControlT
+(webob.response._ResponseCacheControlDict"(webob.response._ResponseCacheControlDict
+builtins.str"builtins.str
+None"%webob.descriptors._AsymmetricProperty*36*37r©
+cache_control%webob.response.Response.cache_controlÔ
+¦webob.descriptors._AsymmetricProperty[webob.cachecontrol._ResponseCacheControl,Union[webob.cachecontrol._ResponseCacheControl,TypeAlias[TypedDict],builtins.str,None]]T
+(webob.cachecontrol._ResponseCacheControl"(webob.cachecontrol._ResponseCacheControl«
+VUnion[webob.cachecontrol._ResponseCacheControl,TypeAlias[TypedDict],builtins.str,None]T
+(webob.cachecontrol._ResponseCacheControl"(webob.cachecontrol._ResponseCacheControlQ
+TypeAlias[TypedDict]
+	TypedDict"(webob.response._ResponseCacheControlDict
+builtins.str"builtins.str
+None"%webob.descriptors._AsymmetricProperty*38*39*310*311*312*313rŒ
+cache_expires%webob.response.Response.cache_expires¯
+…webob.descriptors._AsymmetricProperty[webob.response._ResponseCacheExpires,Union[datetime.timedelta,builtins.int,builtins.bool,None]]L
+$webob.response._ResponseCacheExpires"$webob.response._ResponseCacheExpires¯
+9Union[datetime.timedelta,builtins.int,builtins.bool,None](
+datetime.timedelta"datetime.timedelta
+builtins.int"builtins.int
+builtins.bool"builtins.bool
+None"%webob.descriptors._AsymmetricProperty*36*37*38*39*310*311*312*313˜
+html_escapewebob.util.html_escape"
+builtins.str"builtins.str*®
+s¦
+6Union[builtins.str,builtins.bytes,webob.util._HasHTML]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytes*
+webob.util._HasHTML"webob.util._HasHTMLz36z37z38z39z310z311z312z313*Š
+__path__webob.__path__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*36*37*38*39*310*311*312*313*¥
+__annotations__webob.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*36*37*38*39*310*311*312*313*{
+UTCwebob.datetime_utils.UTC6
+webob.datetime_utils._UTC"webob.datetime_utils._UTC*36*37*38*39*310*311*312*313*m
+daywebob.datetime_utils.day(
+datetime.timedelta"datetime.timedelta*36*37*38*39*310*311*312*313*o
+hourwebob.datetime_utils.hour(
+datetime.timedelta"datetime.timedelta*36*37*38*39*310*311*312*313*s
+minutewebob.datetime_utils.minute(
+datetime.timedelta"datetime.timedelta*36*37*38*39*310*311*312*313*q
+monthwebob.datetime_utils.month(
+datetime.timedelta"datetime.timedelta*36*37*38*39*310*311*312*313*s
+secondwebob.datetime_utils.second(
+datetime.timedelta"datetime.timedelta*36*37*38*39*310*311*312*313*o
+weekwebob.datetime_utils.week(
+datetime.timedelta"datetime.timedelta*36*37*38*39*310*311*312*313*o
+yearwebob.datetime_utils.year(
+datetime.timedelta"datetime.timedelta*36*37*38*39*310*311*312*313

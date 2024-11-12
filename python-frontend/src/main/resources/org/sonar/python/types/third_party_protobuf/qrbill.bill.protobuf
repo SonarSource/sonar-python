@@ -1,0 +1,789 @@
+
+qrbill.billÇ
+Addressqrbill.bill.Address"builtins.object*Ù
+parse_country!qrbill.bill.Address.parse_country"
+builtins.str"builtins.str*Q
+countryD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None0:staticmethodhz36z37z38z39z310z311z312z3132•
+createqrbill.bill.Address.createø
+createqrbill.bill.Address.create":
+qrbill.bill.CombinedAddress"qrbill.bill.CombinedAddress*X
+clsO
+Type[qrbill.bill.Address]*
+qrbill.bill.Address"qrbill.bill.Address"type*P
+nameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *'
+line1
+builtins.str"builtins.str*Q
+line2D
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *Q
+countryD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None0:overload:classmethodXpø
+createqrbill.bill.Address.create":
+qrbill.bill.CombinedAddress"qrbill.bill.CombinedAddress*X
+clsO
+Type[qrbill.bill.Address]*
+qrbill.bill.Address"qrbill.bill.Address"type*P
+nameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *Q
+line1D
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *'
+line2
+builtins.str"builtins.str*Q
+countryD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None0:overload:classmethodXpÔ
+createqrbill.bill.Address.create">
+qrbill.bill.StructuredAddress"qrbill.bill.StructuredAddress*X
+clsO
+Type[qrbill.bill.Address]*
+qrbill.bill.Address"qrbill.bill.Address"type*&
+name
+builtins.str"builtins.str*R
+streetD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *U
+	house_numD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *'
+pcode
+builtins.str"builtins.str*&
+city
+builtins.str"builtins.str*S
+countryD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None 0:overload:classmethodXp"36"37"38"39"310"311"312"313j36j37j38j39j310j311j312j313Õ
+CombinedAddressqrbill.bill.CombinedAddress"qrbill.bill.Address*ñ
+__init__$qrbill.bill.CombinedAddress.__init__"
+None*D
+self:
+qrbill.bill.CombinedAddress"qrbill.bill.CombinedAddress*P
+nameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *Q
+line1D
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *Q
+line2D
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *S
+countryD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None z36z37z38z39z310z311z312z313*è
+	data_list%qrbill.bill.CombinedAddress.data_list"J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*D
+self:
+qrbill.bill.CombinedAddress"qrbill.bill.CombinedAddressz36z37z38z39z310z311z312z313*¡
+as_paragraph(qrbill.bill.CombinedAddress.as_paragraph"N
+typing.Iterator[builtins.str]
+builtins.str"builtins.str"typing.Iterator*D
+self:
+qrbill.bill.CombinedAddress"qrbill.bill.CombinedAddress*-
+	max_chars
+builtins.int"builtins.int z36z37z38z39z310z311z312z313j36j37j38j39j310j311j312j313rA
+combined$qrbill.bill.CombinedAddress.combined
+Any*36*37rl
+combined$qrbill.bill.CombinedAddress.combined
+builtins.bool"builtins.bool*38*39*310*311*312*313rj
+name qrbill.bill.CombinedAddress.name
+builtins.str"builtins.str*36*37*38*39*310*311*312*313rl
+line1!qrbill.bill.CombinedAddress.line1
+builtins.str"builtins.str*36*37*38*39*310*311*312*313rl
+line2!qrbill.bill.CombinedAddress.line2
+builtins.str"builtins.str*36*37*38*39*310*311*312*313rp
+country#qrbill.bill.CombinedAddress.country
+builtins.str"builtins.str*36*37*38*39*310*311*312*313‰
+StructuredAddressqrbill.bill.StructuredAddress"qrbill.bill.Address*¡
+__init__&qrbill.bill.StructuredAddress.__init__"
+None*H
+self>
+qrbill.bill.StructuredAddress"qrbill.bill.StructuredAddress*P
+nameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *R
+streetD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *U
+	house_numD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *Q
+pcodeD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *P
+cityD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *S
+countryD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None z36z37z38z39z310z311z312z313*î
+	data_list'qrbill.bill.StructuredAddress.data_list"J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*H
+self>
+qrbill.bill.StructuredAddress"qrbill.bill.StructuredAddressz36z37z38z39z310z311z312z313*§
+as_paragraph*qrbill.bill.StructuredAddress.as_paragraph"N
+typing.Iterator[builtins.str]
+builtins.str"builtins.str"typing.Iterator*H
+self>
+qrbill.bill.StructuredAddress"qrbill.bill.StructuredAddress*-
+	max_chars
+builtins.int"builtins.int z36z37z38z39z310z311z312z313j36j37j38j39j310j311j312j313rC
+combined&qrbill.bill.StructuredAddress.combined
+Any*36*37rn
+combined&qrbill.bill.StructuredAddress.combined
+builtins.bool"builtins.bool*38*39*310*311*312*313rl
+name"qrbill.bill.StructuredAddress.name
+builtins.str"builtins.str*36*37*38*39*310*311*312*313rp
+street$qrbill.bill.StructuredAddress.street
+builtins.str"builtins.str*36*37*38*39*310*311*312*313rv
+	house_num'qrbill.bill.StructuredAddress.house_num
+builtins.str"builtins.str*36*37*38*39*310*311*312*313rn
+pcode#qrbill.bill.StructuredAddress.pcode
+builtins.str"builtins.str*36*37*38*39*310*311*312*313rl
+city"qrbill.bill.StructuredAddress.city
+builtins.str"builtins.str*36*37*38*39*310*311*312*313rr
+country%qrbill.bill.StructuredAddress.country
+builtins.str"builtins.str*36*37*38*39*310*311*312*313ã‰
+QRBillqrbill.bill.QRBill"builtins.object*ô
+title_font_info"qrbill.bill.QRBill.title_font_info"W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*2
+self(
+qrbill.bill.QRBill"qrbill.bill.QRBill0:property`z36z37z38z39z310z311z312z313*è
+	font_infoqrbill.bill.QRBill.font_info"W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*2
+self(
+qrbill.bill.QRBill"qrbill.bill.QRBill0:property`z36z37z38z39z310z311z312z313*¶
+head_font_info!qrbill.bill.QRBill.head_font_info"W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*2
+self(
+qrbill.bill.QRBill"qrbill.bill.QRBill*P
+partD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None z36z37z38z39z310z311z312z313*ò
+proc_font_info!qrbill.bill.QRBill.proc_font_info"W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*2
+self(
+qrbill.bill.QRBill"qrbill.bill.QRBill0:property`z36z37z38z39z310z311z312z313*›
+qr_dataqrbill.bill.QRBill.qr_data"
+builtins.str"builtins.str*2
+self(
+qrbill.bill.QRBill"qrbill.bill.QRBillz36z37z38z39z310z311z312z313*¿
+qr_imageqrbill.bill.QRBill.qr_image">
+qrcode.image.svg.SvgPathImage"qrcode.image.svg.SvgPathImage*2
+self(
+qrbill.bill.QRBill"qrbill.bill.QRBillz36z37z38z39z310z311z312z313*»
+draw_swiss_cross#qrbill.bill.QRBill.draw_swiss_cross"
+None*2
+self(
+qrbill.bill.QRBill"qrbill.bill.QRBill*=
+dwg4
+TypeAlias[Any]
+Any"qrbill.bill._SvgDrawing*;
+grp2
+TypeAlias[Any]
+Any"qrbill.bill._SvgGroup*x
+originl
+$Tuple[builtins.float,builtins.float] 
+builtins.float"builtins.float 
+builtins.float"builtins.float**
+size 
+builtins.float"builtins.floatz36z37z38z39z310z311z312z313*À
+draw_blank_rect"qrbill.bill.QRBill.draw_blank_rect"
+None*2
+self(
+qrbill.bill.QRBill"qrbill.bill.QRBill*=
+dwg4
+TypeAlias[Any]
+Any"qrbill.bill._SvgDrawing*;
+grp2
+TypeAlias[Any]
+Any"qrbill.bill._SvgGroup*'
+x 
+builtins.float"builtins.float*'
+y 
+builtins.float"builtins.float*+
+width 
+builtins.float"builtins.float*,
+height 
+builtins.float"builtins.floatz36z37z38z39z310z311z312z313*¾
+labelqrbill.bill.QRBill.label"
+builtins.str"builtins.str*2
+self(
+qrbill.bill.QRBill"qrbill.bill.QRBill*%
+txt
+builtins.str"builtins.strz36z37z38z39z310z311z312z313*®
+as_svgqrbill.bill.QRBill.as_svg"
+None*2
+self(
+qrbill.bill.QRBill"qrbill.bill.QRBill*õ
+file_outæ
+FUnion[builtins.str,pathlib.Path,_typeshed.SupportsWrite[builtins.str]]
+builtins.str"builtins.str
+pathlib.Path"pathlib.Path^
+%_typeshed.SupportsWrite[builtins.str]
+builtins.str"builtins.str"_typeshed.SupportsWrite*/
+	full_page
+builtins.bool"builtins.bool z36z37z38z39z310z311z312z313*¢
+transform_to_full_page)qrbill.bill.QRBill.transform_to_full_page"
+None*2
+self(
+qrbill.bill.QRBill"qrbill.bill.QRBill*=
+dwg4
+TypeAlias[Any]
+Any"qrbill.bill._SvgDrawing*<
+bill2
+TypeAlias[Any]
+Any"qrbill.bill._SvgGroupz36z37z38z39z310z311z312z313*ª
+	draw_billqrbill.bill.QRBill.draw_bill"2
+TypeAlias[Any]
+Any"qrbill.bill._SvgGroup*2
+self(
+qrbill.bill.QRBill"qrbill.bill.QRBill*=
+dwg4
+TypeAlias[Any]
+Any"qrbill.bill._SvgDrawing*4
+horiz_scissors
+builtins.bool"builtins.bool z36z37z38z39z310z311z312z3132è)
+__init__qrbill.bill.QRBill.__init__æ
+__init__qrbill.bill.QRBill.__init__"
+None*2
+self(
+qrbill.bill.QRBill"qrbill.bill.QRBill*)
+account
+builtins.str"builtins.str*›
+creditorŒ
+@TypeAlias[typing.Mapping[builtins.str,Union[builtins.str,None]]]«
+5typing.Mapping[builtins.str,Union[builtins.str,None]]
+builtins.str"builtins.strD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None"typing.Mapping"qrbill.bill._AddressDict*
+final_creditor
+None *‰
+amount{
+)Union[_decimal.Decimal,builtins.str,None]$
+_decimal.Decimal"_decimal.Decimal
+builtins.str"builtins.str
+None *
+currency
+Any *ø
+debtoré
+LUnion[TypeAlias[typing.Mapping[builtins.str,Union[builtins.str,None]]],None]Œ
+@TypeAlias[typing.Mapping[builtins.str,Union[builtins.str,None]]]«
+5typing.Mapping[builtins.str,Union[builtins.str,None]]
+builtins.str"builtins.strD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None"typing.Mapping"qrbill.bill._AddressDict
+None *
+
+ref_number
+None *\
+reference_numberD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *
+extra_infos
+Any *:
+additional_information
+builtins.str"builtins.str *ç
+	alt_procsÕ
+_Union[builtins.list[builtins.str],Tuple[],Tuple[builtins.str],Tuple[builtins.str,builtins.str]]J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list
+Tuple[]5
+Tuple[builtins.str]
+builtins.str"builtins.str`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str *
+language
+Any *.
+top_line
+builtins.bool"builtins.bool *2
+payment_line
+builtins.bool"builtins.bool */
+font_factor
+builtins.int"builtins.int 0:overloadXÑ
+__init__qrbill.bill.QRBill.__init__"
+None*2
+self(
+qrbill.bill.QRBill"qrbill.bill.QRBill*)
+account
+builtins.str"builtins.str*›
+creditorŒ
+@TypeAlias[typing.Mapping[builtins.str,Union[builtins.str,None]]]«
+5typing.Mapping[builtins.str,Union[builtins.str,None]]
+builtins.str"builtins.strD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None"typing.Mapping"qrbill.bill._AddressDict*
+final_creditor
+None *‰
+amount{
+)Union[_decimal.Decimal,builtins.str,None]$
+_decimal.Decimal"_decimal.Decimal
+builtins.str"builtins.str
+None *
+currency
+Any *ø
+debtoré
+LUnion[TypeAlias[typing.Mapping[builtins.str,Union[builtins.str,None]]],None]Œ
+@TypeAlias[typing.Mapping[builtins.str,Union[builtins.str,None]]]«
+5typing.Mapping[builtins.str,Union[builtins.str,None]]
+builtins.str"builtins.strD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None"typing.Mapping"qrbill.bill._AddressDict
+None *,
+
+ref_number
+builtins.str"builtins.str* 
+reference_number
+None */
+extra_infos
+builtins.str"builtins.str *:
+additional_information
+builtins.str"builtins.str *ç
+	alt_procsÕ
+_Union[builtins.list[builtins.str],Tuple[],Tuple[builtins.str],Tuple[builtins.str,builtins.str]]J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list
+Tuple[]5
+Tuple[builtins.str]
+builtins.str"builtins.str`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str *
+language
+Any *.
+top_line
+builtins.bool"builtins.bool *2
+payment_line
+builtins.bool"builtins.bool */
+font_factor
+builtins.int"builtins.int 0:overloadXù
+__init__qrbill.bill.QRBill.__init__"
+None*2
+self(
+qrbill.bill.QRBill"qrbill.bill.QRBill*)
+account
+builtins.str"builtins.str*›
+creditorŒ
+@TypeAlias[typing.Mapping[builtins.str,Union[builtins.str,None]]]«
+5typing.Mapping[builtins.str,Union[builtins.str,None]]
+builtins.str"builtins.strD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None"typing.Mapping"qrbill.bill._AddressDict*
+final_creditor
+None *‰
+amount{
+)Union[_decimal.Decimal,builtins.str,None]$
+_decimal.Decimal"_decimal.Decimal
+builtins.str"builtins.str
+None *
+currency
+Any *ø
+debtoré
+LUnion[TypeAlias[typing.Mapping[builtins.str,Union[builtins.str,None]]],None]Œ
+@TypeAlias[typing.Mapping[builtins.str,Union[builtins.str,None]]]«
+5typing.Mapping[builtins.str,Union[builtins.str,None]]
+builtins.str"builtins.strD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None"typing.Mapping"qrbill.bill._AddressDict
+None *
+
+ref_number
+None *\
+reference_numberD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *-
+extra_infos
+builtins.str"builtins.str*:
+additional_information
+builtins.str"builtins.str *ç
+	alt_procsÕ
+_Union[builtins.list[builtins.str],Tuple[],Tuple[builtins.str],Tuple[builtins.str,builtins.str]]J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list
+Tuple[]5
+Tuple[builtins.str]
+builtins.str"builtins.str`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str *
+language
+Any *.
+top_line
+builtins.bool"builtins.bool *2
+payment_line
+builtins.bool"builtins.bool */
+font_factor
+builtins.int"builtins.int 0:overloadX"36"372Ø5
+__init__qrbill.bill.QRBill.__init__ú
+__init__qrbill.bill.QRBill.__init__"
+None*2
+self(
+qrbill.bill.QRBill"qrbill.bill.QRBill*)
+account
+builtins.str"builtins.str*›
+creditorŒ
+@TypeAlias[typing.Mapping[builtins.str,Union[builtins.str,None]]]«
+5typing.Mapping[builtins.str,Union[builtins.str,None]]
+builtins.str"builtins.strD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None"typing.Mapping"qrbill.bill._AddressDict*
+final_creditor
+None *‰
+amount{
+)Union[_decimal.Decimal,builtins.str,None]$
+_decimal.Decimal"_decimal.Decimal
+builtins.str"builtins.str
+None *¹
+currency¨
+2Union[Literal[builtins.str],Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str *ø
+debtoré
+LUnion[TypeAlias[typing.Mapping[builtins.str,Union[builtins.str,None]]],None]Œ
+@TypeAlias[typing.Mapping[builtins.str,Union[builtins.str,None]]]«
+5typing.Mapping[builtins.str,Union[builtins.str,None]]
+builtins.str"builtins.strD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None"typing.Mapping"qrbill.bill._AddressDict
+None *
+
+ref_number
+None *\
+reference_numberD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *J
+extra_infos7
+Literal[builtins.str]	
+builtins.str"builtins.str *:
+additional_information
+builtins.str"builtins.str *ç
+	alt_procsÕ
+_Union[builtins.list[builtins.str],Tuple[],Tuple[builtins.str],Tuple[builtins.str,builtins.str]]J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list
+Tuple[]5
+Tuple[builtins.str]
+builtins.str"builtins.str`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str *×
+languageÆ
+^Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str *.
+top_line
+builtins.bool"builtins.bool *2
+payment_line
+builtins.bool"builtins.bool */
+font_factor
+builtins.int"builtins.int 0:overloadXµ
+__init__qrbill.bill.QRBill.__init__"
+None*2
+self(
+qrbill.bill.QRBill"qrbill.bill.QRBill*)
+account
+builtins.str"builtins.str*›
+creditorŒ
+@TypeAlias[typing.Mapping[builtins.str,Union[builtins.str,None]]]«
+5typing.Mapping[builtins.str,Union[builtins.str,None]]
+builtins.str"builtins.strD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None"typing.Mapping"qrbill.bill._AddressDict*
+final_creditor
+None *‰
+amount{
+)Union[_decimal.Decimal,builtins.str,None]$
+_decimal.Decimal"_decimal.Decimal
+builtins.str"builtins.str
+None *¹
+currency¨
+2Union[Literal[builtins.str],Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str *ø
+debtoré
+LUnion[TypeAlias[typing.Mapping[builtins.str,Union[builtins.str,None]]],None]Œ
+@TypeAlias[typing.Mapping[builtins.str,Union[builtins.str,None]]]«
+5typing.Mapping[builtins.str,Union[builtins.str,None]]
+builtins.str"builtins.strD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None"typing.Mapping"qrbill.bill._AddressDict
+None *,
+
+ref_number
+builtins.str"builtins.str* 
+reference_number
+None */
+extra_infos
+builtins.str"builtins.str *:
+additional_information
+builtins.str"builtins.str *ç
+	alt_procsÕ
+_Union[builtins.list[builtins.str],Tuple[],Tuple[builtins.str],Tuple[builtins.str,builtins.str]]J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list
+Tuple[]5
+Tuple[builtins.str]
+builtins.str"builtins.str`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str *×
+languageÆ
+^Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str *.
+top_line
+builtins.bool"builtins.bool *2
+payment_line
+builtins.bool"builtins.bool */
+font_factor
+builtins.int"builtins.int 0:overloadXÝ
+__init__qrbill.bill.QRBill.__init__"
+None*2
+self(
+qrbill.bill.QRBill"qrbill.bill.QRBill*)
+account
+builtins.str"builtins.str*›
+creditorŒ
+@TypeAlias[typing.Mapping[builtins.str,Union[builtins.str,None]]]«
+5typing.Mapping[builtins.str,Union[builtins.str,None]]
+builtins.str"builtins.strD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None"typing.Mapping"qrbill.bill._AddressDict*
+final_creditor
+None *‰
+amount{
+)Union[_decimal.Decimal,builtins.str,None]$
+_decimal.Decimal"_decimal.Decimal
+builtins.str"builtins.str
+None *¹
+currency¨
+2Union[Literal[builtins.str],Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str *ø
+debtoré
+LUnion[TypeAlias[typing.Mapping[builtins.str,Union[builtins.str,None]]],None]Œ
+@TypeAlias[typing.Mapping[builtins.str,Union[builtins.str,None]]]«
+5typing.Mapping[builtins.str,Union[builtins.str,None]]
+builtins.str"builtins.strD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None"typing.Mapping"qrbill.bill._AddressDict
+None *
+
+ref_number
+None *\
+reference_numberD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *-
+extra_infos
+builtins.str"builtins.str*:
+additional_information
+builtins.str"builtins.str *ç
+	alt_procsÕ
+_Union[builtins.list[builtins.str],Tuple[],Tuple[builtins.str],Tuple[builtins.str,builtins.str]]J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list
+Tuple[]5
+Tuple[builtins.str]
+builtins.str"builtins.str`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str *×
+languageÆ
+^Union[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str *.
+top_line
+builtins.bool"builtins.bool *2
+payment_line
+builtins.bool"builtins.bool */
+font_factor
+builtins.int"builtins.int 0:overloadX"38"39"310"311"312"313j36j37j38j39j310j311j312j313rg
+qr_typeqrbill.bill.QRBill.qr_type
+builtins.str"builtins.str*36*37*38*39*310*311*312*313rg
+versionqrbill.bill.QRBill.version
+builtins.str"builtins.str*36*37*38*39*310*311*312*313re
+codingqrbill.bill.QRBill.coding
+builtins.int"builtins.int*36*37*38*39*310*311*312*313ri
+allowed_currencies%qrbill.bill.QRBill.allowed_currencies$
+Tuple[Any,Any]
+Any
+Any*36*37r‚
+allowed_currencies%qrbill.bill.QRBill.allowed_currencies¨
+2Tuple[Literal[builtins.str],Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str*38*39*310*311*312*313ro
+font_familyqrbill.bill.QRBill.font_family
+builtins.str"builtins.str*36*37*38*39*310*311*312*313rŽ
+creditorqrbill.bill.QRBill.creditorÀ
+@Union[qrbill.bill.CombinedAddress,qrbill.bill.StructuredAddress]:
+qrbill.bill.CombinedAddress"qrbill.bill.CombinedAddress>
+qrbill.bill.StructuredAddress"qrbill.bill.StructuredAddress*36*37*38*39*310*311*312*313r©
+final_creditor!qrbill.bill.QRBill.final_creditorÏ
+EUnion[qrbill.bill.CombinedAddress,qrbill.bill.StructuredAddress,None]:
+qrbill.bill.CombinedAddress"qrbill.bill.CombinedAddress>
+qrbill.bill.StructuredAddress"qrbill.bill.StructuredAddress
+None*36*37*38*39*310*311*312*313r™
+debtorqrbill.bill.QRBill.debtorÏ
+EUnion[qrbill.bill.CombinedAddress,qrbill.bill.StructuredAddress,None]:
+qrbill.bill.CombinedAddress"qrbill.bill.CombinedAddress>
+qrbill.bill.StructuredAddress"qrbill.bill.StructuredAddress
+None*36*37*38*39*310*311*312*313r¡
+reference_number#qrbill.bill.QRBill.reference_numberD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*36*37*38*39*310*311*312*313Ó
+add_mmqrbill.bill.add_mm" 
+builtins.float"builtins.float*o
+mmsf
+"Union[builtins.str,builtins.float]
+builtins.str"builtins.str 
+builtins.float"builtins.floatz36z37z38z39z310z311z312z313Ë
+mmqrbill.bill.mm" 
+builtins.float"builtins.float*o
+valf
+"Union[builtins.str,builtins.float]
+builtins.str"builtins.str 
+builtins.float"builtins.floatz36z37z38z39z310z311z312z313¨
+format_ref_numberqrbill.bill.format_ref_number"
+builtins.str"builtins.str*2
+bill(
+qrbill.bill.QRBill"qrbill.bill.QRBillz36z37z38z39z310z311z312z313á
+format_amountqrbill.bill.format_amount"
+builtins.str"builtins.str*s
+amount_f
+"Union[builtins.str,builtins.float]
+builtins.str"builtins.str 
+builtins.float"builtins.floatz36z37z38z39z310z311z312z313ó
+
+wrap_infosqrbill.bill.wrap_infos"N
+typing.Iterator[builtins.str]
+builtins.str"builtins.str"typing.Iterator*Y
+infosN
+typing.Iterable[builtins.str]
+builtins.str"builtins.str"typing.Iterablez36z37z38z39z310z311z312z313Æ
+replace_linebreaksqrbill.bill.replace_linebreaks"
+builtins.str"builtins.str*N
+textD
+Union[builtins.str,None]
+builtins.str"builtins.str
+Nonez36z37z38z39z310z311z312z313*«
+__annotations__qrbill.bill.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*36*37*38*39*310*311*312*313*+
+Finalqrbill.bill.Final
+Any*36*37*/
+Literalqrbill.bill.Literal
+Any*36*37*¬
+IBAN_ALLOWED_COUNTRIES"qrbill.bill.IBAN_ALLOWED_COUNTRIESJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*36*37*38*39*310*311*312*313*·
+QR_IIDqrbill.bill.QR_IIDu
+(builtins.dict[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int"builtins.dict*36*37*38*39*310*311*312*313*j
+AMOUNT_REGEXqrbill.bill.AMOUNT_REGEX
+builtins.str"builtins.str*36*37*38*39*310*311*312*313*f
+MM_TO_UUqrbill.bill.MM_TO_UU 
+builtins.float"builtins.float*36*37*38*39*310*311*312*313*h
+BILL_HEIGHTqrbill.bill.BILL_HEIGHT
+builtins.int"builtins.int*36*37*38*39*310*311*312*313*l
+RECEIPT_WIDTHqrbill.bill.RECEIPT_WIDTH
+builtins.str"builtins.str*36*37*38*39*310*311*312*313*l
+PAYMENT_WIDTHqrbill.bill.PAYMENT_WIDTH
+builtins.str"builtins.str*36*37*38*39*310*311*312*313*~
+MAX_CHARS_PAYMENT_LINE"qrbill.bill.MAX_CHARS_PAYMENT_LINE
+builtins.int"builtins.int*36*37*38*39*310*311*312*313*~
+MAX_CHARS_RECEIPT_LINE"qrbill.bill.MAX_CHARS_RECEIPT_LINE
+builtins.int"builtins.int*36*37*38*39*310*311*312*313*š
+A4qrbill.bill.A4`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str*36*37*38*39*310*311*312*313*­
+LABELSqrbill.bill.LABELSê
+Dbuiltins.dict[builtins.str,builtins.dict[builtins.str,builtins.str]]
+builtins.str"builtins.stru
+(builtins.dict[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.dict"builtins.dict*36*37*38*39*310*311*312*313*t
+SCISSORS_SVG_PATHqrbill.bill.SCISSORS_SVG_PATH
+builtins.str"builtins.str*36*37*38*39*310*311*312*313

@@ -1,0 +1,265 @@
+
+paramiko.auth_strategy´
+
+AuthSource!paramiko.auth_strategy.AuthSource"builtins.object*‚
+__init__*paramiko.auth_strategy.AuthSource.__init__"
+None*P
+selfF
+!paramiko.auth_strategy.AuthSource"!paramiko.auth_strategy.AuthSource**
+username
+builtins.str"builtins.strz36z37z38z39z310z311z312z313*Â
+authenticate.paramiko.auth_strategy.AuthSource.authenticate"J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*P
+selfF
+!paramiko.auth_strategy.AuthSource"!paramiko.auth_strategy.AuthSource*K
+	transport<
+paramiko.transport.Transport"paramiko.transport.Transport0:abc.abstractmethod@z36z37z38z39z310z311z312z313j36j37j38j39j310j311j312j313rx
+username*paramiko.auth_strategy.AuthSource.username
+builtins.str"builtins.str*36*37*38*39*310*311*312*313º
+NoneAuthparamiko.auth_strategy.NoneAuth"!paramiko.auth_strategy.AuthSource*«
+authenticate,paramiko.auth_strategy.NoneAuth.authenticate"J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*L
+selfB
+paramiko.auth_strategy.NoneAuth"paramiko.auth_strategy.NoneAuth*K
+	transport<
+paramiko.transport.Transport"paramiko.transport.Transportz36z37z38z39z310z311z312z313j36j37j38j39j310j311j312j313≥
+Passwordparamiko.auth_strategy.Password"!paramiko.auth_strategy.AuthSource*æ
+__init__(paramiko.auth_strategy.Password.__init__"
+None*L
+selfB
+paramiko.auth_strategy.Password"paramiko.auth_strategy.Password**
+username
+builtins.str"builtins.str*`
+password_getterK
+CallableType[builtins.function]&
+builtins.function"builtins.functionz36z37z38z39z310z311z312z313*«
+authenticate,paramiko.auth_strategy.Password.authenticate"J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*L
+selfB
+paramiko.auth_strategy.Password"paramiko.auth_strategy.Password*K
+	transport<
+paramiko.transport.Transport"paramiko.transport.Transportz36z37z38z39z310z311z312z313j36j37j38j39j310j311j312j313r≥
+password_getter/paramiko.auth_strategy.Password.password_getterK
+CallableType[builtins.function]&
+builtins.function"builtins.function*36*37*38*39*310*311*312*313∆
+
+PrivateKey!paramiko.auth_strategy.PrivateKey"!paramiko.auth_strategy.AuthSource*Õ
+authenticate.paramiko.auth_strategy.PrivateKey.authenticate"J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*P
+selfF
+!paramiko.auth_strategy.PrivateKey"!paramiko.auth_strategy.PrivateKey*K
+	transport<
+paramiko.transport.Transport"paramiko.transport.Transportz36z37z38z39z310z311z312z313j36j37j38j39j310j311j312j313æ
+InMemoryPrivateKey)paramiko.auth_strategy.InMemoryPrivateKey"!paramiko.auth_strategy.PrivateKey*Æ
+__init__2paramiko.auth_strategy.InMemoryPrivateKey.__init__"
+None*`
+selfV
+)paramiko.auth_strategy.InMemoryPrivateKey")paramiko.auth_strategy.InMemoryPrivateKey**
+username
+builtins.str"builtins.str*2
+pkey(
+paramiko.pkey.PKey"paramiko.pkey.PKeyz36z37z38z39z310z311z312z313j36j37j38j39j310j311j312j313rÑ
+pkey.paramiko.auth_strategy.InMemoryPrivateKey.pkey(
+paramiko.pkey.PKey"paramiko.pkey.PKey*36*37*38*39*310*311*312*313¯
+OnDiskPrivateKey'paramiko.auth_strategy.OnDiskPrivateKey"!paramiko.auth_strategy.PrivateKey*˙
+__init__0paramiko.auth_strategy.OnDiskPrivateKey.__init__"
+None*\
+selfR
+'paramiko.auth_strategy.OnDiskPrivateKey"'paramiko.auth_strategy.OnDiskPrivateKey**
+username
+builtins.str"builtins.str*(
+source
+builtins.str"builtins.str*&
+path
+pathlib.Path"pathlib.Path*2
+pkey(
+paramiko.pkey.PKey"paramiko.pkey.PKeyz36z37z38z39z310z311z312z313j36j37j38j39j310j311j312j313rz
+source.paramiko.auth_strategy.OnDiskPrivateKey.source
+builtins.str"builtins.str*36*37*38*39*310*311*312*313rv
+path,paramiko.auth_strategy.OnDiskPrivateKey.path
+pathlib.Path"pathlib.Path*36*37*38*39*310*311*312*313rÇ
+pkey,paramiko.auth_strategy.OnDiskPrivateKey.pkey(
+paramiko.pkey.PKey"paramiko.pkey.PKey*36*37*38*39*310*311*312*313’-
+SourceResult#paramiko.auth_strategy.SourceResult"builtins.tuple*ô	
+_replace,paramiko.auth_strategy.SourceResult._replace"ä
+'paramiko.auth_strategy.SourceResult._NT‹
+^Tuple[paramiko.auth_strategy.AuthSource,Union[builtins.list[builtins.str],builtins.Exception]]F
+!paramiko.auth_strategy.AuthSource"!paramiko.auth_strategy.AuthSourceØ
+5Union[builtins.list[builtins.str],builtins.Exception]J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list(
+builtins.Exception"builtins.Exception*ñ
+_selfä
+'paramiko.auth_strategy.SourceResult._NT‹
+^Tuple[paramiko.auth_strategy.AuthSource,Union[builtins.list[builtins.str],builtins.Exception]]F
+!paramiko.auth_strategy.AuthSource"!paramiko.auth_strategy.AuthSourceØ
+5Union[builtins.list[builtins.str],builtins.Exception]J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list(
+builtins.Exception"builtins.Exception*T
+sourceF
+!paramiko.auth_strategy.AuthSource"!paramiko.auth_strategy.AuthSource *æ
+resultØ
+5Union[builtins.list[builtins.str],builtins.Exception]J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list(
+builtins.Exception"builtins.Exception z36z37z38z39z310z311z312z313*Ã	
+__new__+paramiko.auth_strategy.SourceResult.__new__"ä
+'paramiko.auth_strategy.SourceResult._NT‹
+^Tuple[paramiko.auth_strategy.AuthSource,Union[builtins.list[builtins.str],builtins.Exception]]F
+!paramiko.auth_strategy.AuthSource"!paramiko.auth_strategy.AuthSourceØ
+5Union[builtins.list[builtins.str],builtins.Exception]J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list(
+builtins.Exception"builtins.Exception*œ
+_clsƒ
+-Type[paramiko.auth_strategy.SourceResult._NT]ä
+'paramiko.auth_strategy.SourceResult._NT‹
+^Tuple[paramiko.auth_strategy.AuthSource,Union[builtins.list[builtins.str],builtins.Exception]]F
+!paramiko.auth_strategy.AuthSource"!paramiko.auth_strategy.AuthSourceØ
+5Union[builtins.list[builtins.str],builtins.Exception]J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list(
+builtins.Exception"builtins.Exception"type*R
+sourceF
+!paramiko.auth_strategy.AuthSource"!paramiko.auth_strategy.AuthSource*º
+resultØ
+5Union[builtins.list[builtins.str],builtins.Exception]J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list(
+builtins.Exception"builtins.Exceptionz36z37z38z39z310z311z312z313*Ã
+_asdict+paramiko.auth_strategy.SourceResult._asdict"W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*ñ
+_selfä
+'paramiko.auth_strategy.SourceResult._NT‹
+^Tuple[paramiko.auth_strategy.AuthSource,Union[builtins.list[builtins.str],builtins.Exception]]F
+!paramiko.auth_strategy.AuthSource"!paramiko.auth_strategy.AuthSourceØ
+5Union[builtins.list[builtins.str],builtins.Exception]J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list(
+builtins.Exception"builtins.Exceptionz36z37z38z39z310z311z312z313*Æ
+_make)paramiko.auth_strategy.SourceResult._make"ä
+'paramiko.auth_strategy.SourceResult._NT‹
+^Tuple[paramiko.auth_strategy.AuthSource,Union[builtins.list[builtins.str],builtins.Exception]]F
+!paramiko.auth_strategy.AuthSource"!paramiko.auth_strategy.AuthSourceØ
+5Union[builtins.list[builtins.str],builtins.Exception]J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list(
+builtins.Exception"builtins.Exception*œ
+_clsƒ
+-Type[paramiko.auth_strategy.SourceResult._NT]ä
+'paramiko.auth_strategy.SourceResult._NT‹
+^Tuple[paramiko.auth_strategy.AuthSource,Union[builtins.list[builtins.str],builtins.Exception]]F
+!paramiko.auth_strategy.AuthSource"!paramiko.auth_strategy.AuthSourceØ
+5Union[builtins.list[builtins.str],builtins.Exception]J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list(
+builtins.Exception"builtins.Exception"type*>
+iterable0
+typing.Iterable[Any]
+Any"typing.Iterable*
+new
+Any *
+len
+Any 0:classmethodpz36z37z38z39z310z311z312z313j36j37j38j39j310j311j312j313rƒ
+source*paramiko.auth_strategy.SourceResult.sourceF
+!paramiko.auth_strategy.AuthSource"!paramiko.auth_strategy.AuthSource*36*36*37*37*38*38*39*39*310*310*311*311*312*312*313*313rÆ
+result*paramiko.auth_strategy.SourceResult.resultØ
+5Union[builtins.list[builtins.str],builtins.Exception]J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list(
+builtins.Exception"builtins.Exception*36*36*37*37*38*38*39*39*310*310*311*311*312*312*313*313rº
+_fields+paramiko.auth_strategy.SourceResult._fields`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str*36*37*38*39*310*311*312*313rΩ
+_field_types0paramiko.auth_strategy.SourceResult._field_typesW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*36*37*38*39*310*311*312*313r√
+_field_defaults3paramiko.auth_strategy.SourceResult._field_defaultsW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*36*37*38*39*310*311*312*313rx
+_source+paramiko.auth_strategy.SourceResult._source
+builtins.str"builtins.str*36*37*38*39*310*311*312*313r√
+__annotations__3paramiko.auth_strategy.SourceResult.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*36*37*38*39*310*311*312*313rÉ
+__match_args__2paramiko.auth_strategy.SourceResult.__match_args__®
+2Tuple[Literal[builtins.str],Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str*310*311*312*313Õ
+
+AuthResult!paramiko.auth_strategy.AuthResult"builtins.list*ø
+__init__*paramiko.auth_strategy.AuthResult.__init__"
+None*P
+selfF
+!paramiko.auth_strategy.AuthResult"!paramiko.auth_strategy.AuthResult*X
+strategyJ
+#paramiko.auth_strategy.AuthStrategy"#paramiko.auth_strategy.AuthStrategy*¸
+argsÒ
+iTypeAlias[Tuple[paramiko.auth_strategy.AuthSource,Union[builtins.list[builtins.str],builtins.Exception]]]‹
+^Tuple[paramiko.auth_strategy.AuthSource,Union[builtins.list[builtins.str],builtins.Exception]]F
+!paramiko.auth_strategy.AuthSource"!paramiko.auth_strategy.AuthSourceØ
+5Union[builtins.list[builtins.str],builtins.Exception]J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list(
+builtins.Exception"builtins.Exception"#paramiko.auth_strategy.SourceResult*.
+kwargs"
+builtins.object"builtins.objectz36z37z38z39z310z311z312z313j36j37j38j39j310j311j312j313r¶
+strategy*paramiko.auth_strategy.AuthResult.strategyJ
+#paramiko.auth_strategy.AuthStrategy"#paramiko.auth_strategy.AuthStrategy*36*37*38*39*310*311*312*313∑
+AuthFailure"paramiko.auth_strategy.AuthFailure".paramiko.ssh_exception.AuthenticationException*ç
+__init__+paramiko.auth_strategy.AuthFailure.__init__"
+None*R
+selfH
+"paramiko.auth_strategy.AuthFailure""paramiko.auth_strategy.AuthFailure*R
+resultF
+!paramiko.auth_strategy.AuthResult"!paramiko.auth_strategy.AuthResultz36z37z38z39z310z311z312z313j36j37j38j39j310j311j312j313rü
+result)paramiko.auth_strategy.AuthFailure.resultF
+!paramiko.auth_strategy.AuthResult"!paramiko.auth_strategy.AuthResult*36*37*38*39*310*311*312*313Ì
+AuthStrategy#paramiko.auth_strategy.AuthStrategy"builtins.object*Ñ
+__init__,paramiko.auth_strategy.AuthStrategy.__init__"
+None*T
+selfJ
+#paramiko.auth_strategy.AuthStrategy"#paramiko.auth_strategy.AuthStrategy*F
+
+ssh_config6
+paramiko.config.SSHConfig"paramiko.config.SSHConfigz36z37z38z39z310z311z312z313*‡
+get_sources/paramiko.auth_strategy.AuthStrategy.get_sources"ç
+2typing.Iterator[paramiko.auth_strategy.AuthSource]F
+!paramiko.auth_strategy.AuthSource"!paramiko.auth_strategy.AuthSource"typing.Iterator*T
+selfJ
+#paramiko.auth_strategy.AuthStrategy"#paramiko.auth_strategy.AuthStrategy0:abc.abstractmethod@z36z37z38z39z310z311z312z313*á
+authenticate0paramiko.auth_strategy.AuthStrategy.authenticate"˝
+xbuiltins.list[TypeAlias[Tuple[paramiko.auth_strategy.AuthSource,Union[builtins.list[builtins.str],builtins.Exception]]]]Ò
+iTypeAlias[Tuple[paramiko.auth_strategy.AuthSource,Union[builtins.list[builtins.str],builtins.Exception]]]‹
+^Tuple[paramiko.auth_strategy.AuthSource,Union[builtins.list[builtins.str],builtins.Exception]]F
+!paramiko.auth_strategy.AuthSource"!paramiko.auth_strategy.AuthSourceØ
+5Union[builtins.list[builtins.str],builtins.Exception]J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list(
+builtins.Exception"builtins.Exception"#paramiko.auth_strategy.SourceResult"builtins.list*T
+selfJ
+#paramiko.auth_strategy.AuthStrategy"#paramiko.auth_strategy.AuthStrategy*K
+	transport<
+paramiko.transport.Transport"paramiko.transport.Transportz36z37z38z39z310z311z312z313j36j37j38j39j310j311j312j313rò
+
+ssh_config.paramiko.auth_strategy.AuthStrategy.ssh_config6
+paramiko.config.SSHConfig"paramiko.config.SSHConfig*36*37*38*39*310*311*312*313rt
+log'paramiko.auth_strategy.AuthStrategy.log 
+logging.Logger"logging.Logger*36*37*38*39*310*311*312*313*∂
+__annotations__&paramiko.auth_strategy.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*36*37*38*39*310*311*312*313

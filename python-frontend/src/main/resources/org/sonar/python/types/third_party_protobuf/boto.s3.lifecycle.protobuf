@@ -1,225 +1,0 @@
-
-boto.s3.lifecycleª
-Ruleboto.s3.lifecycle.Rule"builtins.object*¶
-__init__boto.s3.lifecycle.Rule.__init__"
-None*:
-self0
-boto.s3.lifecycle.Rule"boto.s3.lifecycle.Rule*e
-id[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *i
-prefix[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *i
-status[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *m
-
-expiration[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *m
-
-transition[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z36z37z38z39z310z311*|
-startElement#boto.s3.lifecycle.Rule.startElement*
-self*
-name*	
-attrs*
-
-connectionz36z37z38z39z310z311*x
-
-endElement!boto.s3.lifecycle.Rule.endElement*
-self*
-name*	
-value*
-
-connectionz36z37z38z39z310z311*K
-to_xmlboto.s3.lifecycle.Rule.to_xml*
-selfz36z37z38z39z310z311j36j37j38j39j310j311rB
-idboto.s3.lifecycle.Rule.id
-Any*36*37*38*39*310*311rJ
-prefixboto.s3.lifecycle.Rule.prefix
-Any*36*37*38*39*310*311rJ
-statusboto.s3.lifecycle.Rule.status
-Any*36*37*38*39*310*311rR
-
-expiration!boto.s3.lifecycle.Rule.expiration
-Any*36*37*38*39*310*311rR
-
-transition!boto.s3.lifecycle.Rule.transition
-Any*36*37*38*39*310*311ª
-
-Expirationboto.s3.lifecycle.Expiration"builtins.object*Ô
-__init__%boto.s3.lifecycle.Expiration.__init__"
-None*F
-self<
-boto.s3.lifecycle.Expiration"boto.s3.lifecycle.Expiration*g
-days[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *g
-date[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z36z37z38z39z310z311*Ç
-startElement)boto.s3.lifecycle.Expiration.startElement*
-self*
-name*	
-attrs*
-
-connectionz36z37z38z39z310z311*~
-
-endElement'boto.s3.lifecycle.Expiration.endElement*
-self*
-name*	
-value*
-
-connectionz36z37z38z39z310z311*Q
-to_xml#boto.s3.lifecycle.Expiration.to_xml*
-selfz36z37z38z39z310z311j36j37j38j39j310j311rL
-days!boto.s3.lifecycle.Expiration.days
-Any*36*37*38*39*310*311rL
-date!boto.s3.lifecycle.Expiration.date
-Any*36*37*38*39*310*311à
-
-Transitionboto.s3.lifecycle.Transition"builtins.object*·
-__init__%boto.s3.lifecycle.Transition.__init__"
-None*F
-self<
-boto.s3.lifecycle.Transition"boto.s3.lifecycle.Transition*g
-days[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *g
-date[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *p
-storage_class[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z36z37z38z39z310z311*Q
-to_xml#boto.s3.lifecycle.Transition.to_xml*
-selfz36z37z38z39z310z311j36j37j38j39j310j311rL
-days!boto.s3.lifecycle.Transition.days
-Any*36*37*38*39*310*311rL
-date!boto.s3.lifecycle.Transition.date
-Any*36*37*38*39*310*311r^
-storage_class*boto.s3.lifecycle.Transition.storage_class
-Any*36*37*38*39*310*311®
-Transitionsboto.s3.lifecycle.Transitions"builtins.list*†
-__init__&boto.s3.lifecycle.Transitions.__init__"
-None*H
-self>
-boto.s3.lifecycle.Transitions"boto.s3.lifecycle.Transitionsz36z37z38z39z310z311*É
-startElement*boto.s3.lifecycle.Transitions.startElement*
-self*
-name*	
-attrs*
-
-connectionz36z37z38z39z310z311*
-
-endElement(boto.s3.lifecycle.Transitions.endElement*
-self*
-name*	
-value*
-
-connectionz36z37z38z39z310z311*R
-to_xml$boto.s3.lifecycle.Transitions.to_xml*
-selfz36z37z38z39z310z311*Ô
-add_transition,boto.s3.lifecycle.Transitions.add_transition"
-Any*H
-self>
-boto.s3.lifecycle.Transitions"boto.s3.lifecycle.Transitions*g
-days[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *g
-date[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *p
-storage_class[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z36z37z38z39z310z311*\
-days"boto.s3.lifecycle.Transitions.days*
-self0:property`z36z37z38z39z310z311*\
-date"boto.s3.lifecycle.Transitions.date*
-self0:property`z36z37z38z39z310z311*n
-storage_class+boto.s3.lifecycle.Transitions.storage_class*
-self0:property`z36z37z38z39z310z311j36j37j38j39j310j311rÑ
-transition_properties3boto.s3.lifecycle.Transitions.transition_properties
-builtins.int"builtins.int*36*37*38*39*310*311rê
-current_transition_property9boto.s3.lifecycle.Transitions.current_transition_property
-builtins.int"builtins.int*36*37*38*39*310*311rW
-	temp_days'boto.s3.lifecycle.Transitions.temp_days
-Any*36*37*38*39*310*311rW
-	temp_date'boto.s3.lifecycle.Transitions.temp_date
-Any*36*37*38*39*310*311ri
-temp_storage_class0boto.s3.lifecycle.Transitions.temp_storage_class
-Any*36*37*38*39*310*311ﬂ
-	Lifecycleboto.s3.lifecycle.Lifecycle"builtins.list*Å
-startElement(boto.s3.lifecycle.Lifecycle.startElement*
-self*
-name*	
-attrs*
-
-connectionz36z37z38z39z310z311*}
-
-endElement&boto.s3.lifecycle.Lifecycle.endElement*
-self*
-name*	
-value*
-
-connectionz36z37z38z39z310z311*P
-to_xml"boto.s3.lifecycle.Lifecycle.to_xml*
-selfz36z37z38z39z310z311*∂
-add_rule$boto.s3.lifecycle.Lifecycle.add_rule"
-Any*D
-self:
-boto.s3.lifecycle.Lifecycle"boto.s3.lifecycle.Lifecycle*e
-id[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None **
-prefix
-builtins.str"builtins.str **
-status
-builtins.str"builtins.str *m
-
-expiration[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *m
-
-transition[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z36z37z38z39z310z311j36j37j38j39j310j311*ß
-__annotations__!boto.s3.lifecycle.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*36*37*38*39*310*311

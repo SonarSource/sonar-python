@@ -1,5 +1,5 @@
 
-redis.utils”
+redis.utils›
 pipelineredis.utils.pipeline"¿
 Ocontextlib.AbstractContextManager[redis.client.Pipeline[redis.client._StrType]]…
 ,redis.client.Pipeline[redis.client._StrType]Å
@@ -12,17 +12,17 @@ Ocontextlib.AbstractContextManager[redis.client.Pipeline[redis.client._StrType]]
 redis.client._StrTypef
 "Union[builtins.str,builtins.bytes]
 builtins.str"builtins.str 
-builtins.bytes"builtins.bytes"redis.client.Redisz36z37z38z39z310z311”
+builtins.bytes"builtins.bytes"redis.client.Redisz36z37z38z39z310z311z312z313›
 str_if_bytesredis.utils.str_if_bytes"
 builtins.str"builtins.str*q
 valuef
 "Union[builtins.str,builtins.bytes]
 builtins.str"builtins.str 
-builtins.bytes"builtins.bytesz36z37z38z39z310z311á
+builtins.bytes"builtins.bytesz36z37z38z39z310z311z312z313ë
 safe_strredis.utils.safe_str"
 builtins.str"builtins.str*-
 value"
-builtins.object"builtins.objectz36z37z38z39z310z311ñ
+builtins.object"builtins.objectz36z37z38z39z310z311z312z313†
 
 dict_mergeredis.utils.dict_merge"¢
 *builtins.dict[builtins.str,redis.utils._T]
@@ -33,10 +33,10 @@ dict_mergeredis.utils.dict_merge"¢
 +typing.Mapping[builtins.str,redis.utils._T]
 builtins.str"builtins.strG
 redis.utils._T"
-builtins.object"builtins.object"builtins.object"typing.Mappingz36z37z38z39z310z311h
+builtins.object"builtins.object"builtins.object"typing.Mappingz36z37z38z39z310z311z312z313r
 list_keys_to_dictredis.utils.list_keys_to_dict*
 key_list*
-callbackz36z37z38z39z310z311ƒ
+callbackz36z37z38z39z310z311z312z313Œ
 merge_resultredis.utils.merge_result"w
 builtins.list[redis.utils._T]G
 redis.utils._T"
@@ -48,7 +48,30 @@ dict_mergeredis.utils.dict_merge"¢
 Any{
 typing.Iterable[redis.utils._T]G
 redis.utils._T"
-builtins.object"builtins.object"builtins.object"typing.Iterable"typing.Mappingz36z37z38z39z310z311"º
+builtins.object"builtins.object"builtins.object"typing.Iterable"typing.Mappingz36z37z38z39z310z311z312z313"ƒ
+from_urlredis.utils.from_urlá
+from_urlredis.utils.from_url"T
+ redis.client.Redis[builtins.str]
+builtins.str"builtins.str"redis.client.Redis*%
+url
+builtins.str"builtins.str*&
+db
+builtins.int"builtins.int *
+decode_responses
+Any*
+kwargs
+Any0:overloadXè
+from_urlredis.utils.from_url"Z
+"redis.client.Redis[builtins.bytes] 
+builtins.bytes"builtins.bytes"redis.client.Redis*%
+url
+builtins.str"builtins.str*&
+db
+builtins.int"builtins.int *
+decode_responses
+Any *
+kwargs
+Any0:overloadX"36"37"æ
 from_urlredis.utils.from_url∫
 from_urlredis.utils.from_url"T
  redis.client.Redis[builtins.str]
@@ -73,12 +96,14 @@ dict_mergeredis.utils.dict_merge"¢
 Literal[builtins.bool]	
 builtins.bool"builtins.bool *
 kwargs
-Any0:overloadX"36"37"38"39"310"311*°
+Any0:overloadX"38"39"310"311"312"313*´
 __annotations__redis.utils.__annotations__W
 builtins.dict[builtins.str,Any]
 builtins.str"builtins.str
-Any"builtins.dict*36*37*38*39*310*311*l
+Any"builtins.dict*36*37*38*39*310*311*312*313*/
+Literalredis.utils.Literal
+Any*36*37*v
 HIREDIS_AVAILABLEredis.utils.HIREDIS_AVAILABLE
-builtins.bool"builtins.bool*36*37*38*39*310*311*v
+builtins.bool"builtins.bool*36*37*38*39*310*311*312*313*Ä
 CRYPTOGRAPHY_AVAILABLE"redis.utils.CRYPTOGRAPHY_AVAILABLE
-builtins.bool"builtins.bool*36*37*38*39*310*311
+builtins.bool"builtins.bool*36*37*38*39*310*311*312*313

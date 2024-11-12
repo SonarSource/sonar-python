@@ -1,47 +1,68 @@
 
-requests.exceptions[
-BaseHTTPErrorurllib3.exceptions.HTTPError"builtins.Exceptionj36j37j38j39j310j311˛
-RequestException$requests.exceptions.RequestException"builtins.OSError*›
+requests.exceptionse
+BaseHTTPErrorurllib3.exceptions.HTTPError"builtins.Exceptionj36j37j38j39j310j311j312j313®	
+RequestException$requests.exceptions.RequestException"builtins.OSError*√
 __init__-requests.exceptions.RequestException.__init__"
 None*V
 selfL
-$requests.exceptions.RequestException"$requests.exceptions.RequestException*
-args
-Any*
-kwargs
-Anyz36z37z38z39z310z311j36j37j38j39j310j311r\
-response-requests.exceptions.RequestException.response
-Any*36*37*38*39*310*311rZ
-request,requests.exceptions.RequestException.request
-Any*36*37*38*39*310*311x
-InvalidJSONError$requests.exceptions.InvalidJSONError"$requests.exceptions.RequestExceptionj36j37j38j39j310j311v
-JSONDecodeError#requests.exceptions.JSONDecodeError"$requests.exceptions.InvalidJSONErrorj36j37j38j39j310j311j
-	HTTPErrorrequests.exceptions.HTTPError"$requests.exceptions.RequestExceptionj36j37j38j39j310j311v
-ConnectionError#requests.exceptions.ConnectionError"$requests.exceptions.RequestExceptionj36j37j38j39j310j311k
+$requests.exceptions.RequestException"$requests.exceptions.RequestException*,
+args"
+builtins.object"builtins.object*Ÿ
+request…
+CUnion[requests.models.Request,requests.models.PreparedRequest,None]2
+requests.models.Request"requests.models.RequestB
+requests.models.PreparedRequest"requests.models.PreparedRequest
+None *x
+responseh
+$Union[requests.models.Response,None]4
+requests.models.Response"requests.models.Response
+None z36z37z38z39z310z311z312z313j36j37j38j39j310j311j312j313r«
+response-requests.exceptions.RequestException.responseh
+$Union[requests.models.Response,None]4
+requests.models.Response"requests.models.Response
+None*36*37*38*39*310*311*312*313rß
+request,requests.exceptions.RequestException.request…
+CUnion[requests.models.Request,requests.models.PreparedRequest,None]2
+requests.models.Request"requests.models.RequestB
+requests.models.PreparedRequest"requests.models.PreparedRequest
+None*36*37*38*39*310*311*312*313Ç
+InvalidJSONError$requests.exceptions.InvalidJSONError"$requests.exceptions.RequestExceptionj36j37j38j39j310j311j312j313Ä
+JSONDecodeError#requests.exceptions.JSONDecodeError"$requests.exceptions.InvalidJSONErrorj36j37j38j39j310j311j312j313÷
+	HTTPErrorrequests.exceptions.HTTPError"$requests.exceptions.RequestExceptionj36j37j38j39j310j311j312j313rû
+request%requests.exceptions.HTTPError.request«
+BUnion[requests.models.Request,requests.models.PreparedRequest,Any]2
+requests.models.Request"requests.models.RequestB
+requests.models.PreparedRequest"requests.models.PreparedRequest
+Any*36*37*38*39*310*311*312*313ræ
+response&requests.exceptions.HTTPError.responsef
+#Union[requests.models.Response,Any]4
+requests.models.Response"requests.models.Response
+Any*36*37*38*39*310*311*312*313Ä
+ConnectionError#requests.exceptions.ConnectionError"$requests.exceptions.RequestExceptionj36j37j38j39j310j311j312j313u
 
-ProxyErrorrequests.exceptions.ProxyError"#requests.exceptions.ConnectionErrorj36j37j38j39j310j311g
-SSLErrorrequests.exceptions.SSLError"#requests.exceptions.ConnectionErrorj36j37j38j39j310j311f
-Timeoutrequests.exceptions.Timeout"$requests.exceptions.RequestExceptionj36j37j38j39j310j311ê
-ConnectTimeout"requests.exceptions.ConnectTimeout"#requests.exceptions.ConnectionError"requests.exceptions.Timeoutj36j37j38j39j310j311e
-ReadTimeoutrequests.exceptions.ReadTimeout"requests.exceptions.Timeoutj36j37j38j39j310j311n
-URLRequiredrequests.exceptions.URLRequired"$requests.exceptions.RequestExceptionj36j37j38j39j310j311x
-TooManyRedirects$requests.exceptions.TooManyRedirects"$requests.exceptions.RequestExceptionj36j37j38j39j310j311á
-MissingSchema!requests.exceptions.MissingSchema"$requests.exceptions.RequestException"builtins.ValueErrorj36j37j38j39j310j311á
-InvalidSchema!requests.exceptions.InvalidSchema"$requests.exceptions.RequestException"builtins.ValueErrorj36j37j38j39j310j311Å
+ProxyErrorrequests.exceptions.ProxyError"#requests.exceptions.ConnectionErrorj36j37j38j39j310j311j312j313q
+SSLErrorrequests.exceptions.SSLError"#requests.exceptions.ConnectionErrorj36j37j38j39j310j311j312j313p
+Timeoutrequests.exceptions.Timeout"$requests.exceptions.RequestExceptionj36j37j38j39j310j311j312j313ö
+ConnectTimeout"requests.exceptions.ConnectTimeout"#requests.exceptions.ConnectionError"requests.exceptions.Timeoutj36j37j38j39j310j311j312j313o
+ReadTimeoutrequests.exceptions.ReadTimeout"requests.exceptions.Timeoutj36j37j38j39j310j311j312j313x
+URLRequiredrequests.exceptions.URLRequired"$requests.exceptions.RequestExceptionj36j37j38j39j310j311j312j313Ç
+TooManyRedirects$requests.exceptions.TooManyRedirects"$requests.exceptions.RequestExceptionj36j37j38j39j310j311j312j313ë
+MissingSchema!requests.exceptions.MissingSchema"$requests.exceptions.RequestException"builtins.ValueErrorj36j37j38j39j310j311j312j313ë
+InvalidSchema!requests.exceptions.InvalidSchema"$requests.exceptions.RequestException"builtins.ValueErrorj36j37j38j39j310j311j312j313ã
 
-InvalidURLrequests.exceptions.InvalidURL"$requests.exceptions.RequestException"builtins.ValueErrorj36j37j38j39j310j311á
-InvalidHeader!requests.exceptions.InvalidHeader"$requests.exceptions.RequestException"builtins.ValueErrorj36j37j38j39j310j311p
-InvalidProxyURL#requests.exceptions.InvalidProxyURL"requests.exceptions.InvalidURLj36j37j38j39j310j311Ä
-ChunkedEncodingError(requests.exceptions.ChunkedEncodingError"$requests.exceptions.RequestExceptionj36j37j38j39j310j311û
-ContentDecodingError(requests.exceptions.ContentDecodingError"$requests.exceptions.RequestException"urllib3.exceptions.HTTPErrorj36j37j38j39j310j311í
-StreamConsumedError'requests.exceptions.StreamConsumedError"$requests.exceptions.RequestException"builtins.TypeErrorj36j37j38j39j310j311l
+InvalidURLrequests.exceptions.InvalidURL"$requests.exceptions.RequestException"builtins.ValueErrorj36j37j38j39j310j311j312j313ë
+InvalidHeader!requests.exceptions.InvalidHeader"$requests.exceptions.RequestException"builtins.ValueErrorj36j37j38j39j310j311j312j313z
+InvalidProxyURL#requests.exceptions.InvalidProxyURL"requests.exceptions.InvalidURLj36j37j38j39j310j311j312j313ä
+ChunkedEncodingError(requests.exceptions.ChunkedEncodingError"$requests.exceptions.RequestExceptionj36j37j38j39j310j311j312j313®
+ContentDecodingError(requests.exceptions.ContentDecodingError"$requests.exceptions.RequestException"urllib3.exceptions.HTTPErrorj36j37j38j39j310j311j312j313ú
+StreamConsumedError'requests.exceptions.StreamConsumedError"$requests.exceptions.RequestException"builtins.TypeErrorj36j37j38j39j310j311j312j313v
 
-RetryErrorrequests.exceptions.RetryError"$requests.exceptions.RequestExceptionj36j37j38j39j310j311Ç
-UnrewindableBodyError)requests.exceptions.UnrewindableBodyError"$requests.exceptions.RequestExceptionj36j37j38j39j310j311b
-RequestsWarning#requests.exceptions.RequestsWarning"builtins.Warningj36j37j38j39j310j311í
-FileModeWarning#requests.exceptions.FileModeWarning"#requests.exceptions.RequestsWarning"builtins.DeprecationWarningj36j37j38j39j310j311â
-RequestsDependencyWarning-requests.exceptions.RequestsDependencyWarning"#requests.exceptions.RequestsWarningj36j37j38j39j310j311*©
+RetryErrorrequests.exceptions.RetryError"$requests.exceptions.RequestExceptionj36j37j38j39j310j311j312j313å
+UnrewindableBodyError)requests.exceptions.UnrewindableBodyError"$requests.exceptions.RequestExceptionj36j37j38j39j310j311j312j313l
+RequestsWarning#requests.exceptions.RequestsWarning"builtins.Warningj36j37j38j39j310j311j312j313ú
+FileModeWarning#requests.exceptions.FileModeWarning"#requests.exceptions.RequestsWarning"builtins.DeprecationWarningj36j37j38j39j310j311j312j313ì
+RequestsDependencyWarning-requests.exceptions.RequestsDependencyWarning"#requests.exceptions.RequestsWarningj36j37j38j39j310j311j312j313*≥
 __annotations__#requests.exceptions.__annotations__W
 builtins.dict[builtins.str,Any]
 builtins.str"builtins.str
-Any"builtins.dict*36*37*38*39*310*311
+Any"builtins.dict*36*37*38*39*310*311*312*313

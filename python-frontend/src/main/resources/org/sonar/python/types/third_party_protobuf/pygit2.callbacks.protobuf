@@ -1,0 +1,284 @@
+
+pygit2.callbacksô
+Payloadpygit2.callbacks.Payload"builtins.object*Ç
+__init__!pygit2.callbacks.Payload.__init__"
+None*>
+self4
+pygit2.callbacks.Payload"pygit2.callbacks.Payload**
+kw"
+builtins.object"builtins.objectz36z37z38z39z310z311z312z313*Ï
+check_error$pygit2.callbacks.Payload.check_error"
+None*>
+self4
+pygit2.callbacks.Payload"pygit2.callbacks.Payload*,
+
+error_code
+builtins.int"builtins.intz36z37z38z39z310z311z312z313j36j37j38j39j310j311j312j313©	
+_Credentialspygit2.callbacks._Credentials"builtins.object*ø
+credential_type-pygit2.callbacks._Credentials.credential_type":
+pygit2.enums.CredentialType"pygit2.enums.CredentialType*H
+self>
+pygit2.callbacks._Credentials"pygit2.callbacks._Credentials0:property`z36z37z38z39z310z311z312z313*Œ
+credential_tuple.pygit2.callbacks._Credentials.credential_tuple"L
+builtins.tuple[builtins.str]
+builtins.str"builtins.str"builtins.tuple*H
+self>
+pygit2.callbacks._Credentials"pygit2.callbacks._Credentials0:property`z36z37z38z39z310z311z312z313*¸
+__call__&pygit2.callbacks._Credentials.__call__"…
+"pygit2.callbacks._Credentials.Self>
+pygit2.callbacks._Credentials"pygit2.callbacks._Credentials"pygit2.callbacks._Credentials*
+self…
+"pygit2.callbacks._Credentials.Self>
+pygit2.callbacks._Credentials"pygit2.callbacks._Credentials"pygit2.callbacks._Credentials*&
+_url
+builtins.str"builtins.str*S
+	_usernameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*H
+_allowed:
+pygit2.enums.CredentialType"pygit2.enums.CredentialTypez36z37z38z39z310z311z312z313Xj36j37j38j39j310j311j312j313¼
+RemoteCallbacks pygit2.callbacks.RemoteCallbacks"pygit2.callbacks.Payload*¼
+__init__)pygit2.callbacks.RemoteCallbacks.__init__"
+None*N
+selfD
+ pygit2.callbacks.RemoteCallbacks" pygit2.callbacks.RemoteCallbacks*Š
+credentialsw
+)Union[pygit2.callbacks._Credentials,None]>
+pygit2.callbacks._Credentials"pygit2.callbacks._Credentials
+None *z
+certificateg
+Union[TypeAlias[None],None]<
+TypeAlias[None]
+None"pygit2.callbacks._Certificate
+None z36z37z38z39z310z311z312z313*ï
+sideband_progress2pygit2.callbacks.RemoteCallbacks.sideband_progress"
+None*N
+selfD
+ pygit2.callbacks.RemoteCallbacks" pygit2.callbacks.RemoteCallbacks*(
+string
+builtins.str"builtins.strz36z37z38z39z310z311z312z313*Â
+credentials,pygit2.callbacks.RemoteCallbacks.credentials">
+pygit2.callbacks._Credentials"pygit2.callbacks._Credentials*N
+selfD
+ pygit2.callbacks.RemoteCallbacks" pygit2.callbacks.RemoteCallbacks*%
+url
+builtins.str"builtins.str*[
+username_from_urlD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*M
+allowed_types:
+pygit2.enums.CredentialType"pygit2.enums.CredentialTypez36z37z38z39z310z311z312z313*ý
+certificate_check2pygit2.callbacks.RemoteCallbacks.certificate_check"
+builtins.bool"builtins.bool*N
+selfD
+ pygit2.callbacks.RemoteCallbacks" pygit2.callbacks.RemoteCallbacks*M
+certificate<
+TypeAlias[None]
+None"pygit2.callbacks._Certificate*)
+valid
+builtins.bool"builtins.bool*&
+host
+builtins.str"builtins.strz36z37z38z39z310z311z312z313*”
+transfer_progress2pygit2.callbacks.RemoteCallbacks.transfer_progress"
+None*N
+selfD
+ pygit2.callbacks.RemoteCallbacks" pygit2.callbacks.RemoteCallbacks*M
+statsB
+pygit2.remotes.TransferProgress"pygit2.remotes.TransferProgressz36z37z38z39z310z311z312z313*Ê
+update_tips,pygit2.callbacks.RemoteCallbacks.update_tips"
+None*N
+selfD
+ pygit2.callbacks.RemoteCallbacks" pygit2.callbacks.RemoteCallbacks*)
+refname
+builtins.str"builtins.str*1
+old(
+pygit2._pygit2.Oid"pygit2._pygit2.Oid*1
+new(
+pygit2._pygit2.Oid"pygit2._pygit2.Oidz36z37z38z39z310z311z312z313*£
+push_update_reference6pygit2.callbacks.RemoteCallbacks.push_update_reference"
+None*N
+selfD
+ pygit2.callbacks.RemoteCallbacks" pygit2.callbacks.RemoteCallbacks*)
+refname
+builtins.str"builtins.str*)
+message
+builtins.str"builtins.strz36z37z38z39z310z311z312z313j36j37j38j39j310j311j312j313rÈ
+certificate,pygit2.callbacks.RemoteCallbacks.certificateg
+Union[TypeAlias[None],None]<
+TypeAlias[None]
+None"pygit2.callbacks._Certificate
+None*36*37*38*39*310*311*312*313¤
+CheckoutCallbacks"pygit2.callbacks.CheckoutCallbacks"pygit2.callbacks.Payload*¹
+__init__+pygit2.callbacks.CheckoutCallbacks.__init__"
+None*R
+selfH
+"pygit2.callbacks.CheckoutCallbacks""pygit2.callbacks.CheckoutCallbacksz36z37z38z39z310z311z312z313*…
+checkout_notify_flags8pygit2.callbacks.CheckoutCallbacks.checkout_notify_flags":
+pygit2.enums.CheckoutNotify"pygit2.enums.CheckoutNotify*R
+selfH
+"pygit2.callbacks.CheckoutCallbacks""pygit2.callbacks.CheckoutCallbacksz36z37z38z39z310z311z312z313*
+checkout_notify2pygit2.callbacks.CheckoutCallbacks.checkout_notify"
+None*R
+selfH
+"pygit2.callbacks.CheckoutCallbacks""pygit2.callbacks.CheckoutCallbacks*C
+why:
+pygit2.enums.CheckoutNotify"pygit2.enums.CheckoutNotify*&
+path
+builtins.str"builtins.str*s
+baselinee
+#Union[pygit2._pygit2.DiffFile,None]2
+pygit2._pygit2.DiffFile"pygit2._pygit2.DiffFile
+None*q
+targete
+#Union[pygit2._pygit2.DiffFile,None]2
+pygit2._pygit2.DiffFile"pygit2._pygit2.DiffFile
+None*r
+workdire
+#Union[pygit2._pygit2.DiffFile,None]2
+pygit2._pygit2.DiffFile"pygit2._pygit2.DiffFile
+Nonez36z37z38z39z310z311z312z313*Õ
+checkout_progress4pygit2.callbacks.CheckoutCallbacks.checkout_progress"
+None*R
+selfH
+"pygit2.callbacks.CheckoutCallbacks""pygit2.callbacks.CheckoutCallbacks*&
+path
+builtins.str"builtins.str*1
+completed_steps
+builtins.int"builtins.int*-
+total_steps
+builtins.int"builtins.intz36z37z38z39z310z311z312z313j36j37j38j39j310j311j312j313¯
+StashApplyCallbacks$pygit2.callbacks.StashApplyCallbacks""pygit2.callbacks.CheckoutCallbacks*©
+stash_apply_progress9pygit2.callbacks.StashApplyCallbacks.stash_apply_progress"
+None*V
+selfL
+$pygit2.callbacks.StashApplyCallbacks"$pygit2.callbacks.StashApplyCallbacks*P
+progressB
+pygit2.enums.StashApplyProgress"pygit2.enums.StashApplyProgressz36z37z38z39z310z311z312z313j36j37j38j39j310j311j312j313­
+git_clone_options"pygit2.callbacks.git_clone_options"–
+;contextlib.AbstractContextManager[pygit2.callbacks.Payload]4
+pygit2.callbacks.Payload"pygit2.callbacks.Payload"!contextlib.AbstractContextManager*A
+payload4
+pygit2.callbacks.Payload"pygit2.callbacks.Payload*t
+optsh
+$Union[_cffi_backend._CDataBase,None]4
+_cffi_backend._CDataBase"_cffi_backend._CDataBase
+None z36z37z38z39z310z311z312z313­
+git_fetch_options"pygit2.callbacks.git_fetch_options"–
+;contextlib.AbstractContextManager[pygit2.callbacks.Payload]4
+pygit2.callbacks.Payload"pygit2.callbacks.Payload"!contextlib.AbstractContextManager*A
+payload4
+pygit2.callbacks.Payload"pygit2.callbacks.Payload*t
+optsh
+$Union[_cffi_backend._CDataBase,None]4
+_cffi_backend._CDataBase"_cffi_backend._CDataBase
+None z36z37z38z39z310z311z312z313«
+git_push_options!pygit2.callbacks.git_push_options"–
+;contextlib.AbstractContextManager[pygit2.callbacks.Payload]4
+pygit2.callbacks.Payload"pygit2.callbacks.Payload"!contextlib.AbstractContextManager*A
+payload4
+pygit2.callbacks.Payload"pygit2.callbacks.Payload*t
+optsh
+$Union[_cffi_backend._CDataBase,None]4
+_cffi_backend._CDataBase"_cffi_backend._CDataBase
+None z36z37z38z39z310z311z312z313½
+git_remote_callbacks%pygit2.callbacks.git_remote_callbacks"–
+;contextlib.AbstractContextManager[pygit2.callbacks.Payload]4
+pygit2.callbacks.Payload"pygit2.callbacks.Payload"!contextlib.AbstractContextManager*A
+payload4
+pygit2.callbacks.Payload"pygit2.callbacks.Payloadz36z37z38z39z310z311z312z313ú
+libgit2_callback!pygit2.callbacks.libgit2_callback"K
+CallableType[builtins.function]&
+builtins.function"builtins.function*R
+fK
+CallableType[builtins.function]&
+builtins.function"builtins.functionz36z37z38z39z310z311z312z313„
+libgit2_callback_void&pygit2.callbacks.libgit2_callback_void"K
+CallableType[builtins.function]&
+builtins.function"builtins.function*R
+fK
+CallableType[builtins.function]&
+builtins.function"builtins.functionz36z37z38z39z310z311z312z313
+get_credentials pygit2.callbacks.get_credentials"4
+_cffi_backend._CDataBase"_cffi_backend._CDataBase*¥
+fnœ
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"pygit2.callbacks._CredentialsFn*=
+url4
+_cffi_backend._CDataBase"_cffi_backend._CDataBase*B
+username4
+_cffi_backend._CDataBase"_cffi_backend._CDataBase*G
+allowed:
+pygit2.enums.CredentialType"pygit2.enums.CredentialTypez36z37z38z39z310z311z312z313¶
+git_checkout_options%pygit2.callbacks.git_checkout_options"–
+;contextlib.AbstractContextManager[pygit2.callbacks.Payload]4
+pygit2.callbacks.Payload"pygit2.callbacks.Payload"!contextlib.AbstractContextManager*˜
+	callbacks†
+.Union[pygit2.callbacks.CheckoutCallbacks,None]H
+"pygit2.callbacks.CheckoutCallbacks""pygit2.callbacks.CheckoutCallbacks
+None *‡
+strategyw
+)Union[pygit2.enums.CheckoutStrategy,None]>
+pygit2.enums.CheckoutStrategy"pygit2.enums.CheckoutStrategy
+None *È
+	directory¶
+oUnion[TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]],None]¶
+cTypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]²
+XUnion[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytesF
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLikeL
+os.PathLike[builtins.bytes] 
+builtins.bytes"builtins.bytes"os.PathLike"_typeshed.StrOrBytesPath
+None *É
+paths»
+fTypeAlias[Union[builtins.list[TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]],Unknown,None]]²
+[Union[builtins.list[TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]],Unknown,None]Ä
+Gbuiltins.list[TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]]é
+8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]—
+-Union[builtins.str,os.PathLike[builtins.str]]
+builtins.str"builtins.strF
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLike"_typeshed.StrPath"builtins.list 
+None"pygit2.utils._IntoStrArray z36z37z38z39z310z311z312z313ù
+git_stash_apply_options(pygit2.callbacks.git_stash_apply_options"–
+;contextlib.AbstractContextManager[pygit2.callbacks.Payload]4
+pygit2.callbacks.Payload"pygit2.callbacks.Payload"!contextlib.AbstractContextManager*ž
+	callbacksŒ
+0Union[pygit2.callbacks.StashApplyCallbacks,None]L
+$pygit2.callbacks.StashApplyCallbacks"$pygit2.callbacks.StashApplyCallbacks
+None *5
+reinstate_index
+builtins.bool"builtins.bool *‡
+strategyw
+)Union[pygit2.enums.CheckoutStrategy,None]>
+pygit2.enums.CheckoutStrategy"pygit2.enums.CheckoutStrategy
+None *È
+	directory¶
+oUnion[TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]],None]¶
+cTypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]²
+XUnion[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytesF
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLikeL
+os.PathLike[builtins.bytes] 
+builtins.bytes"builtins.bytes"os.PathLike"_typeshed.StrOrBytesPath
+None *É
+paths»
+fTypeAlias[Union[builtins.list[TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]],Unknown,None]]²
+[Union[builtins.list[TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]],Unknown,None]Ä
+Gbuiltins.list[TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]]é
+8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]—
+-Union[builtins.str,os.PathLike[builtins.str]]
+builtins.str"builtins.strF
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLike"_typeshed.StrPath"builtins.list 
+None"pygit2.utils._IntoStrArray z36z37z38z39z310z311z312z313*°
+__annotations__ pygit2.callbacks.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*36*37*38*39*310*311*312*313

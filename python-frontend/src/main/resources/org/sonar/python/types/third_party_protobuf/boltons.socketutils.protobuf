@@ -1,0 +1,412 @@
+
+boltons.socketutils­k
+BufferedSocket"boltons.socketutils.BufferedSocket"builtins.object*ë
+__init__+boltons.socketutils.BufferedSocket.__init__"
+None*R
+selfH
+"boltons.socketutils.BufferedSocket""boltons.socketutils.BufferedSocket*(
+sock
+socket.socket"socket.socket*+
+timeout
+builtins.int"builtins.int *+
+maxsize
+builtins.int"builtins.int *,
+recvsize
+builtins.int"builtins.int z36z37z38z39z310z311z312z313*ì
+
+settimeout-boltons.socketutils.BufferedSocket.settimeout"
+None*R
+selfH
+"boltons.socketutils.BufferedSocket""boltons.socketutils.BufferedSocket*-
+timeout 
+builtins.float"builtins.floatz36z37z38z39z310z311z312z313*Õ
+
+gettimeout-boltons.socketutils.BufferedSocket.gettimeout" 
+builtins.float"builtins.float*R
+selfH
+"boltons.socketutils.BufferedSocket""boltons.socketutils.BufferedSocketz36z37z38z39z310z311z312z313*í
+setblocking.boltons.socketutils.BufferedSocket.setblocking"
+None*R
+selfH
+"boltons.socketutils.BufferedSocket""boltons.socketutils.BufferedSocket*,
+blocking
+builtins.bool"builtins.boolz36z37z38z39z310z311z312z313*Ó
+
+setmaxsize-boltons.socketutils.BufferedSocket.setmaxsize"
+None*R
+selfH
+"boltons.socketutils.BufferedSocket""boltons.socketutils.BufferedSocket*
+maxsize
+Anyz36z37z38z39z310z311z312z313*Û
+getrecvbuffer0boltons.socketutils.BufferedSocket.getrecvbuffer" 
+builtins.bytes"builtins.bytes*R
+selfH
+"boltons.socketutils.BufferedSocket""boltons.socketutils.BufferedSocketz36z37z38z39z310z311z312z313*Û
+getsendbuffer0boltons.socketutils.BufferedSocket.getsendbuffer" 
+builtins.bytes"builtins.bytes*R
+selfH
+"boltons.socketutils.BufferedSocket""boltons.socketutils.BufferedSocketz36z37z38z39z310z311z312z313*Í
+recv'boltons.socketutils.BufferedSocket.recv" 
+builtins.bytes"builtins.bytes*R
+selfH
+"boltons.socketutils.BufferedSocket""boltons.socketutils.BufferedSocket*&
+size
+builtins.int"builtins.int*)
+flags
+builtins.int"builtins.int */
+timeout 
+builtins.float"builtins.float z36z37z38z39z310z311z312z313*¢
+peek'boltons.socketutils.BufferedSocket.peek" 
+builtins.bytes"builtins.bytes*R
+selfH
+"boltons.socketutils.BufferedSocket""boltons.socketutils.BufferedSocket*&
+size
+builtins.int"builtins.int*/
+timeout 
+builtins.float"builtins.float z36z37z38z39z310z311z312z313*³
+
+recv_close-boltons.socketutils.BufferedSocket.recv_close" 
+builtins.bytes"builtins.bytes*R
+selfH
+"boltons.socketutils.BufferedSocket""boltons.socketutils.BufferedSocket*/
+timeout 
+builtins.float"builtins.float *+
+maxsize
+builtins.int"builtins.int z36z37z38z39z310z311z312z313*¹
+
+recv_until-boltons.socketutils.BufferedSocket.recv_until" 
+builtins.bytes"builtins.bytes*R
+selfH
+"boltons.socketutils.BufferedSocket""boltons.socketutils.BufferedSocket*é
+	delimiterÙ
+‚TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData]]]]µ
+wUnion[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData]]] 
+builtins.bytes"builtins.bytes•
+aTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData]]’
+VUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData](
+builtins.bytearray"builtins.bytearray*
+builtins.memoryview"builtins.memoryview(
+array.array[Any]
+Any"array.array
+	mmap.mmap"	mmap.mmap
+ctypes._CData"ctypes._CData"_typeshed.WriteableBuffer"_typeshed.ReadableBuffer*/
+timeout 
+builtins.float"builtins.float *+
+maxsize
+builtins.int"builtins.int *4
+with_delimiter
+builtins.bool"builtins.bool z36z37*Ê	
+
+recv_until-boltons.socketutils.BufferedSocket.recv_until" 
+builtins.bytes"builtins.bytes*R
+selfH
+"boltons.socketutils.BufferedSocket""boltons.socketutils.BufferedSocket*æ
+	delimiterÖ
+–TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]ž
+‹Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]] 
+builtins.bytes"builtins.bytesé
+uTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]Ò
+jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer](
+builtins.bytearray"builtins.bytearray*
+builtins.memoryview"builtins.memoryview(
+array.array[Any]
+Any"array.array
+	mmap.mmap"	mmap.mmap
+ctypes._CData"ctypes._CData*
+pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer"_typeshed.ReadableBuffer*/
+timeout 
+builtins.float"builtins.float *+
+maxsize
+builtins.int"builtins.int *4
+with_delimiter
+builtins.bool"builtins.bool z38z39z310z311z312z313*¬
+	recv_size,boltons.socketutils.BufferedSocket.recv_size" 
+builtins.bytes"builtins.bytes*R
+selfH
+"boltons.socketutils.BufferedSocket""boltons.socketutils.BufferedSocket*&
+size
+builtins.int"builtins.int*/
+timeout 
+builtins.float"builtins.float z36z37z38z39z310z311z312z313*È
+send'boltons.socketutils.BufferedSocket.send"
+builtins.str"builtins.str*R
+selfH
+"boltons.socketutils.BufferedSocket""boltons.socketutils.BufferedSocket*¤
+data™
+bTypeAlias[Union[builtins.bytes,builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap]]•
+WUnion[builtins.bytes,builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap] 
+builtins.bytes"builtins.bytes(
+builtins.bytearray"builtins.bytearray*
+builtins.memoryview"builtins.memoryview(
+array.array[Any]
+Any"array.array
+	mmap.mmap"	mmap.mmap"_typeshed.SliceableBuffer*)
+flags
+builtins.int"builtins.int */
+timeout 
+builtins.float"builtins.float z36z37z38z39z310z311z312z313*Î
+sendall*boltons.socketutils.BufferedSocket.sendall"
+builtins.str"builtins.str*R
+selfH
+"boltons.socketutils.BufferedSocket""boltons.socketutils.BufferedSocket*¤
+data™
+bTypeAlias[Union[builtins.bytes,builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap]]•
+WUnion[builtins.bytes,builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap] 
+builtins.bytes"builtins.bytes(
+builtins.bytearray"builtins.bytearray*
+builtins.memoryview"builtins.memoryview(
+array.array[Any]
+Any"array.array
+	mmap.mmap"	mmap.mmap"_typeshed.SliceableBuffer*)
+flags
+builtins.int"builtins.int */
+timeout 
+builtins.float"builtins.float z36z37z38z39z310z311z312z313*³
+flush(boltons.socketutils.BufferedSocket.flush"
+None*R
+selfH
+"boltons.socketutils.BufferedSocket""boltons.socketutils.BufferedSocketz36z37z38z39z310z311z312z313*Ü
+buffer)boltons.socketutils.BufferedSocket.buffer"
+None*R
+selfH
+"boltons.socketutils.BufferedSocket""boltons.socketutils.BufferedSocket*¤
+data™
+bTypeAlias[Union[builtins.bytes,builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap]]•
+WUnion[builtins.bytes,builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap] 
+builtins.bytes"builtins.bytes(
+builtins.bytearray"builtins.bytearray*
+builtins.memoryview"builtins.memoryview(
+array.array[Any]
+Any"array.array
+	mmap.mmap"	mmap.mmap"_typeshed.SliceableBufferz36z37z38z39z310z311z312z313*Ó
+getsockname.boltons.socketutils.BufferedSocket.getsockname"
+builtins.str"builtins.str*R
+selfH
+"boltons.socketutils.BufferedSocket""boltons.socketutils.BufferedSocketz36z37z38z39z310z311z312z313*Ó
+getpeername.boltons.socketutils.BufferedSocket.getpeername"
+builtins.str"builtins.str*R
+selfH
+"boltons.socketutils.BufferedSocket""boltons.socketutils.BufferedSocketz36z37z38z39z310z311z312z313*Ã
+
+getsockopt-boltons.socketutils.BufferedSocket.getsockopt"f
+"Union[builtins.bytes,builtins.int] 
+builtins.bytes"builtins.bytes
+builtins.int"builtins.int*R
+selfH
+"boltons.socketutils.BufferedSocket""boltons.socketutils.BufferedSocket*'
+level
+builtins.int"builtins.int*)
+optname
+builtins.int"builtins.int*R
+buflenD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None z36z37z38z39z310z311z312z313*†
+
+
+setsockopt-boltons.socketutils.BufferedSocket.setsockopt"f
+"Union[builtins.bytes,builtins.int] 
+builtins.bytes"builtins.bytes
+builtins.int"builtins.int*R
+selfH
+"boltons.socketutils.BufferedSocket""boltons.socketutils.BufferedSocket*'
+level
+builtins.int"builtins.int*)
+optname
+builtins.int"builtins.int*°
+value¤
+›Union[builtins.int,TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData]]]],None]
+builtins.int"builtins.intÙ
+‚TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData]]]]µ
+wUnion[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData]]] 
+builtins.bytes"builtins.bytes•
+aTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData]]’
+VUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData](
+builtins.bytearray"builtins.bytearray*
+builtins.memoryview"builtins.memoryview(
+array.array[Any]
+Any"array.array
+	mmap.mmap"	mmap.mmap
+ctypes._CData"ctypes._CData"_typeshed.WriteableBuffer"_typeshed.ReadableBuffer
+Nonez36z37*«
+
+setsockopt-boltons.socketutils.BufferedSocket.setsockopt"f
+"Union[builtins.bytes,builtins.int] 
+builtins.bytes"builtins.bytes
+builtins.int"builtins.int*R
+selfH
+"boltons.socketutils.BufferedSocket""boltons.socketutils.BufferedSocket*'
+level
+builtins.int"builtins.int*)
+optname
+builtins.int"builtins.int*Á
+valueµ
+¯Union[builtins.int,TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]],None]
+builtins.int"builtins.intÖ
+–TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]ž
+‹Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]] 
+builtins.bytes"builtins.bytesé
+uTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]Ò
+jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer](
+builtins.bytearray"builtins.bytearray*
+builtins.memoryview"builtins.memoryview(
+array.array[Any]
+Any"array.array
+	mmap.mmap"	mmap.mmap
+ctypes._CData"ctypes._CData*
+pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer"_typeshed.ReadableBuffer
+Nonez38z39z310z311z312z313*Ó
+type'boltons.socketutils.BufferedSocket.type"
+builtins.int"builtins.int*R
+selfH
+"boltons.socketutils.BufferedSocket""boltons.socketutils.BufferedSocket0:property`z36z37z38z39z310z311z312z313*×
+family)boltons.socketutils.BufferedSocket.family"
+builtins.int"builtins.int*R
+selfH
+"boltons.socketutils.BufferedSocket""boltons.socketutils.BufferedSocket0:property`z36z37z38z39z310z311z312z313*Õ
+proto(boltons.socketutils.BufferedSocket.proto"
+builtins.int"builtins.int*R
+selfH
+"boltons.socketutils.BufferedSocket""boltons.socketutils.BufferedSocket0:property`z36z37z38z39z310z311z312z313*É
+fileno)boltons.socketutils.BufferedSocket.fileno"
+builtins.int"builtins.int*R
+selfH
+"boltons.socketutils.BufferedSocket""boltons.socketutils.BufferedSocketz36z37z38z39z310z311z312z313*³
+close(boltons.socketutils.BufferedSocket.close"
+None*R
+selfH
+"boltons.socketutils.BufferedSocket""boltons.socketutils.BufferedSocketz36z37z38z39z310z311z312z313*à
+shutdown+boltons.socketutils.BufferedSocket.shutdown"
+None*R
+selfH
+"boltons.socketutils.BufferedSocket""boltons.socketutils.BufferedSocket*%
+how
+builtins.int"builtins.intz36z37z38z39z310z311z312z313j36j37j38j39j310j311j312j313rs
+sock'boltons.socketutils.BufferedSocket.sock
+socket.socket"socket.socket*36*37*38*39*310*311*312*313ru
+rbuf'boltons.socketutils.BufferedSocket.rbuf 
+builtins.bytes"builtins.bytes*36*37*38*39*310*311*312*313rô
+sbuf'boltons.socketutils.BufferedSocket.sbufž
+qbuiltins.list[TypeAlias[Union[builtins.bytes,builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap]]]™
+bTypeAlias[Union[builtins.bytes,builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap]]•
+WUnion[builtins.bytes,builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap] 
+builtins.bytes"builtins.bytes(
+builtins.bytearray"builtins.bytearray*
+builtins.memoryview"builtins.memoryview(
+array.array[Any]
+Any"array.array
+	mmap.mmap"	mmap.mmap"_typeshed.SliceableBuffer"builtins.list*36*37*38*39*310*311*312*313rw
+maxsize*boltons.socketutils.BufferedSocket.maxsize
+builtins.int"builtins.int*36*37*38*39*310*311*312*313rw
+timeout*boltons.socketutils.BufferedSocket.timeout
+builtins.int"builtins.int*36*37*38*39*310*311*312*313r‹
+rbuf_unconsumed2boltons.socketutils.BufferedSocket.rbuf_unconsumed 
+builtins.bytes"builtins.bytes*36*37*38*39*310*311*312*313X
+Errorboltons.socketutils.Error"builtins.OSErrorj36j37j38j39j310j311j312j313w
+ConnectionClosed$boltons.socketutils.ConnectionClosed"boltons.socketutils.Errorj36j37j38j39j310j311j312j313Þ
+MessageTooLong"boltons.socketutils.MessageTooLong"boltons.socketutils.Error*è
+__init__+boltons.socketutils.MessageTooLong.__init__"
+None*R
+selfH
+"boltons.socketutils.MessageTooLong""boltons.socketutils.MessageTooLong*V
+
+bytes_readD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *U
+	delimiterD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None z36z37z38z39z310z311z312z313j36j37j38j39j310j311j312j313Ï
+Timeoutboltons.socketutils.Timeout"_socket.timeout"boltons.socketutils.Error*ê
+__init__$boltons.socketutils.Timeout.__init__"
+None*D
+self:
+boltons.socketutils.Timeout"boltons.socketutils.Timeout*-
+timeout 
+builtins.float"builtins.float*)
+extra
+builtins.str"builtins.str z36z37z38z39j36j37j38j39Ý
+Timeoutboltons.socketutils.Timeout"builtins.TimeoutError"boltons.socketutils.Error*î
+__init__$boltons.socketutils.Timeout.__init__"
+None*D
+self:
+boltons.socketutils.Timeout"boltons.socketutils.Timeout*-
+timeout 
+builtins.float"builtins.float*)
+extra
+builtins.str"builtins.str z310z311z312z313j310j311j312j313„
+NetstringSocket#boltons.socketutils.NetstringSocket"builtins.object*Ä
+__init__,boltons.socketutils.NetstringSocket.__init__"
+None*T
+selfJ
+#boltons.socketutils.NetstringSocket"#boltons.socketutils.NetstringSocket*(
+sock
+socket.socket"socket.socket*/
+timeout 
+builtins.float"builtins.float *+
+maxsize
+builtins.int"builtins.int z36z37z38z39z310z311z312z313*Ì
+fileno*boltons.socketutils.NetstringSocket.fileno"
+builtins.int"builtins.int*T
+selfJ
+#boltons.socketutils.NetstringSocket"#boltons.socketutils.NetstringSocketz36z37z38z39z310z311z312z313*ï
+
+settimeout.boltons.socketutils.NetstringSocket.settimeout"
+None*T
+selfJ
+#boltons.socketutils.NetstringSocket"#boltons.socketutils.NetstringSocket*-
+timeout 
+builtins.float"builtins.floatz36z37z38z39z310z311z312z313*ë
+
+setmaxsize.boltons.socketutils.NetstringSocket.setmaxsize"
+None*T
+selfJ
+#boltons.socketutils.NetstringSocket"#boltons.socketutils.NetstringSocket*)
+maxsize
+builtins.int"builtins.intz36z37z38z39z310z311z312z313*—
+read_ns+boltons.socketutils.NetstringSocket.read_ns"
+Any*T
+selfJ
+#boltons.socketutils.NetstringSocket"#boltons.socketutils.NetstringSocket*/
+timeout 
+builtins.float"builtins.float *+
+maxsize
+builtins.int"builtins.int z36z37z38z39z310z311z312z313*ë
+write_ns,boltons.socketutils.NetstringSocket.write_ns"
+None*T
+selfJ
+#boltons.socketutils.NetstringSocket"#boltons.socketutils.NetstringSocket*-
+payload 
+builtins.bytes"builtins.bytesz36z37z38z39z310z311z312z313j36j37j38j39j310j311j312j313r 
+bsock)boltons.socketutils.NetstringSocket.bsockH
+"boltons.socketutils.BufferedSocket""boltons.socketutils.BufferedSocket*36*37*38*39*310*311*312*313r|
+timeout+boltons.socketutils.NetstringSocket.timeout 
+builtins.float"builtins.float*36*37*38*39*310*311*312*313rx
+maxsize+boltons.socketutils.NetstringSocket.maxsize
+builtins.int"builtins.int*36*37*38*39*310*311*312*313ƒ
+NetstringProtocolError*boltons.socketutils.NetstringProtocolError"boltons.socketutils.Errorj36j37j38j39j310j311j312j313…
+NetstringInvalidSize(boltons.socketutils.NetstringInvalidSize"*boltons.socketutils.NetstringProtocolError*ò
+__init__1boltons.socketutils.NetstringInvalidSize.__init__"
+None*^
+selfT
+(boltons.socketutils.NetstringInvalidSize"(boltons.socketutils.NetstringInvalidSize*%
+msg
+builtins.str"builtins.strz36z37z38z39z310z311z312z313j36j37j38j39j310j311j312j313À
+NetstringMessageTooLong+boltons.socketutils.NetstringMessageTooLong"*boltons.socketutils.NetstringProtocolError*§
+__init__4boltons.socketutils.NetstringMessageTooLong.__init__"
+None*d
+selfZ
++boltons.socketutils.NetstringMessageTooLong"+boltons.socketutils.NetstringMessageTooLong*&
+size
+builtins.int"builtins.int*)
+maxsize
+builtins.int"builtins.intz36z37z38z39z310z311z312z313j36j37j38j39j310j311j312j313*³
+__annotations__#boltons.socketutils.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*36*37*38*39*310*311*312*313*x
+DEFAULT_TIMEOUT#boltons.socketutils.DEFAULT_TIMEOUT
+builtins.int"builtins.int*36*37*38*39*310*311*312*313*x
+DEFAULT_MAXSIZE#boltons.socketutils.DEFAULT_MAXSIZE
+builtins.int"builtins.int*36*37*38*39*310*311*312*313

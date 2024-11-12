@@ -1,0 +1,724 @@
+
+fanstatic.coreÖ
+UnknownResourceExtensionError,fanstatic.core.UnknownResourceExtensionError"builtins.Exceptionj36j37j38j39j310j311j312j313Å
+ModeResourceDependencyError*fanstatic.core.ModeResourceDependencyError"builtins.Exceptionj36j37j38j39j310j311j312j313s
+UnknownResourceError#fanstatic.core.UnknownResourceError"builtins.Exceptionj36j37j38j39j310j311j312j313o
+ConfigurationError!fanstatic.core.ConfigurationError"builtins.Exceptionj36j37j38j39j310j311j312j313Å
+LibraryDependencyCycleError*fanstatic.core.LibraryDependencyCycleError"builtins.Exceptionj36j37j38j39j310j311j312j313]
+	SlotErrorfanstatic.core.SlotError"builtins.Exceptionj36j37j38j39j310j311j312j313Œ
+Libraryfanstatic.core.Library"builtins.object*Ë
+__init__fanstatic.core.Library.__init__"
+None*:
+self0
+fanstatic.core.Library"fanstatic.core.Library*&
+name
+builtins.str"builtins.str**
+rootpath
+builtins.str"builtins.str*ë
+ignoresÅ
+'Union[builtins.list[builtins.str],None]J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list
+None *S
+versionD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *à
+	compilersˆ
+CUnion[builtins.dict[builtins.str,fanstatic.compiler.Compiler],None]¢
+7builtins.dict[builtins.str,fanstatic.compiler.Compiler]
+builtins.str"builtins.str:
+fanstatic.compiler.Compiler"fanstatic.compiler.Compiler"builtins.dict
+None *à
+	minifiersˆ
+CUnion[builtins.dict[builtins.str,fanstatic.compiler.Minifier],None]¢
+7builtins.dict[builtins.str,fanstatic.compiler.Minifier]
+builtins.str"builtins.str:
+fanstatic.compiler.Minifier"fanstatic.compiler.Minifier"builtins.dict
+None z36z37z38z39z310z311z312z313*Û
+check_dependency_cycle-fanstatic.core.Library.check_dependency_cycle"
+None*:
+self0
+fanstatic.core.Library"fanstatic.core.Library*@
+resource2
+fanstatic.core.Resource"fanstatic.core.Resourcez36z37z38z39z310z311z312z313*◊
+registerfanstatic.core.Library.register"
+None*:
+self0
+fanstatic.core.Library"fanstatic.core.Library*@
+resource2
+fanstatic.core.Resource"fanstatic.core.Resourcez36z37z38z39z310z311z312z313*É
+	signature fanstatic.core.Library.signature"
+builtins.str"builtins.str*:
+self0
+fanstatic.core.Library"fanstatic.core.Library*6
+recompute_hashes
+builtins.bool"builtins.bool *ù
+version_methodÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None z36z37z38z39z310z311z312z313j36j37j38j39j310j311j312j313re
+pathfanstatic.core.Library.path
+builtins.str"builtins.str*36*37*38*39*310*311*312*313re
+namefanstatic.core.Library.name
+builtins.str"builtins.str*36*37*38*39*310*311*312*313rm
+rootpathfanstatic.core.Library.rootpath
+builtins.str"builtins.str*36*37*38*39*310*311*312*313rô
+ignoresfanstatic.core.Library.ignoresJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*36*37*38*39*310*311*312*313rì
+versionfanstatic.core.Library.versionD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*36*37*38*39*310*311*312*313rˆ
+known_resources&fanstatic.core.Library.known_resourcesñ
+3builtins.dict[builtins.str,fanstatic.core.Resource]
+builtins.str"builtins.str2
+fanstatic.core.Resource"fanstatic.core.Resource"builtins.dict*36*37*38*39*310*311*312*313rÁ
+known_assets#fanstatic.core.Library.known_assetsç
+0builtins.dict[builtins.str,fanstatic.core.Asset]
+builtins.str"builtins.str,
+fanstatic.core.Asset"fanstatic.core.Asset"builtins.dict*36*37*38*39*310*311*312*313rq
+modulefanstatic.core.Library.module$
+types.ModuleType"types.ModuleType*36*37*38*39*310*311*312*313rˆ
+	compilers fanstatic.core.Library.compilers¢
+7builtins.dict[builtins.str,fanstatic.compiler.Compiler]
+builtins.str"builtins.str:
+fanstatic.compiler.Compiler"fanstatic.compiler.Compiler"builtins.dict*36*37*38*39*310*311*312*313rˆ
+	minifiers fanstatic.core.Library.minifiers¢
+7builtins.dict[builtins.str,fanstatic.compiler.Minifier]
+builtins.str"builtins.str:
+fanstatic.compiler.Minifier"fanstatic.compiler.Minifier"builtins.dict*36*37*38*39*310*311*312*313 
+InclusionRenderers!fanstatic.core.InclusionRenderers"builtins.dict*›
+register*fanstatic.core.InclusionRenderers.register"
+None*P
+selfF
+!fanstatic.core.InclusionRenderers"!fanstatic.core.InclusionRenderers*+
+	extension
+builtins.str"builtins.str*§
+rendererï
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"fanstatic.core._Renderer*Q
+orderD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None z36z37z38z39z310z311z312z313j36j37j38j39j310j311j312j313–
+
+Renderablefanstatic.core.Renderable"builtins.object*Ò
+render fanstatic.core.Renderable.render"
+builtins.str"builtins.str*@
+self6
+fanstatic.core.Renderable"fanstatic.core.Renderable*-
+library_url
+builtins.str"builtins.str0:abstractmethod@z36z37z38z39z310z311z312z313j36j37j38j39j310j311j312j313à
+
+Dependablefanstatic.core.Dependable"builtins.object*ß
+	resources#fanstatic.core.Dependable.resources"o
+'builtins.set[fanstatic.core.Dependable]6
+fanstatic.core.Dependable"fanstatic.core.Dependable"builtins.set*@
+self6
+fanstatic.core.Dependable"fanstatic.core.Dependable0:property:abstractmethod@`z36z37z38z39z310z311z312z313*£
+depends!fanstatic.core.Dependable.depends"o
+'builtins.set[fanstatic.core.Dependable]6
+fanstatic.core.Dependable"fanstatic.core.Dependable"builtins.set*@
+self6
+fanstatic.core.Dependable"fanstatic.core.Dependable0:property:abstractmethod@`z36z37z38z39z310z311z312z313*•
+supports"fanstatic.core.Dependable.supports"o
+'builtins.set[fanstatic.core.Dependable]6
+fanstatic.core.Dependable"fanstatic.core.Dependable"builtins.set*@
+self6
+fanstatic.core.Dependable"fanstatic.core.Dependable0:property:abstractmethod@`z36z37z38z39z310z311z312z313*Ú
+add_dependency(fanstatic.core.Dependable.add_dependency"
+None*@
+self6
+fanstatic.core.Dependable"fanstatic.core.Dependable*F
+
+dependency6
+fanstatic.core.Dependable"fanstatic.core.Dependablez36z37z38z39z310z311z312z313*ì
+set_dependencies*fanstatic.core.Dependable.set_dependencies"
+None*@
+self6
+fanstatic.core.Dependable"fanstatic.core.Dependable*Œ
+dependenciesª
+6Union[typing.Iterable[fanstatic.core.Dependable],None]u
+*typing.Iterable[fanstatic.core.Dependable]6
+fanstatic.core.Dependable"fanstatic.core.Dependable"typing.Iterable
+None0:abstractmethod@z36z37z38z39z310z311z312z313*ê
+list_assets%fanstatic.core.Dependable.list_assets"`
+"builtins.set[fanstatic.core.Asset],
+fanstatic.core.Asset"fanstatic.core.Asset"builtins.set*@
+self6
+fanstatic.core.Dependable"fanstatic.core.Dependable0:abstractmethod@z36z37z38z39z310z311z312z313*ì
+list_supporting)fanstatic.core.Dependable.list_supporting"o
+'builtins.set[fanstatic.core.Dependable]6
+fanstatic.core.Dependable"fanstatic.core.Dependable"builtins.set*@
+self6
+fanstatic.core.Dependable"fanstatic.core.Dependablez36z37z38z39z310z311z312z313j36j37j38j39j310j311j312j313õ
+Assetfanstatic.core.Asset"fanstatic.core.Dependable*ú
+__init__fanstatic.core.Asset.__init__"
+None*6
+self,
+fanstatic.core.Asset"fanstatic.core.Asset*=
+library0
+fanstatic.core.Library"fanstatic.core.Library*À
+dependsª
+6Union[typing.Iterable[fanstatic.core.Dependable],None]u
+*typing.Iterable[fanstatic.core.Dependable]6
+fanstatic.core.Dependable"fanstatic.core.Dependable"typing.Iterable
+None z36z37z38z39z310z311z312z313*Î
+set_dependencies%fanstatic.core.Asset.set_dependencies"
+None*6
+self,
+fanstatic.core.Asset"fanstatic.core.Asset*…
+dependsª
+6Union[typing.Iterable[fanstatic.core.Dependable],None]u
+*typing.Iterable[fanstatic.core.Dependable]6
+fanstatic.core.Dependable"fanstatic.core.Dependable"typing.Iterable
+Nonez36z37z38z39z310z311z312z313*Ì
+list_assets fanstatic.core.Asset.list_assets"`
+"builtins.set[fanstatic.core.Asset],
+fanstatic.core.Asset"fanstatic.core.Asset"builtins.set*6
+self,
+fanstatic.core.Asset"fanstatic.core.Assetz36z37z38z39z310z311z312z313j36j37j38j39j310j311j312j313r¿
+	resourcesfanstatic.core.Asset.resourceso
+'builtins.set[fanstatic.core.Dependable]6
+fanstatic.core.Dependable"fanstatic.core.Dependable"builtins.set*36*37*38*39*310*311*312*313rº
+dependsfanstatic.core.Asset.dependso
+'builtins.set[fanstatic.core.Dependable]6
+fanstatic.core.Dependable"fanstatic.core.Dependable"builtins.set*36*37*38*39*310*311*312*313ræ
+supportsfanstatic.core.Asset.supportso
+'builtins.set[fanstatic.core.Dependable]6
+fanstatic.core.Dependable"fanstatic.core.Dependable"builtins.set*36*37*38*39*310*311*312*313r}
+libraryfanstatic.core.Asset.library0
+fanstatic.core.Library"fanstatic.core.Library*36*37*38*39*310*311*312*313µ
+_NothingTypefanstatic.core._NothingType"builtins.object*“
+__init__$fanstatic.core._NothingType.__init__"
+None*D
+self:
+fanstatic.core._NothingType"fanstatic.core._NothingType*,
+item"
+builtins.object"builtins.objectz36z37z38z39z310z311z312z313j36j37j38j39j310j311j312j313⁄*
+Resourcefanstatic.core.Resource"fanstatic.core.Renderable"fanstatic.core.Asset*Ú
+__init__ fanstatic.core.Resource.__init__"
+None*<
+self2
+fanstatic.core.Resource"fanstatic.core.Resource*=
+library0
+fanstatic.core.Library"fanstatic.core.Library*)
+relpath
+builtins.str"builtins.str*À
+dependsª
+6Union[typing.Iterable[fanstatic.core.Dependable],None]u
+*typing.Iterable[fanstatic.core.Dependable]6
+fanstatic.core.Dependable"fanstatic.core.Dependable"typing.Iterable
+None *¿
+
+supersedes≠
+2Union[builtins.list[fanstatic.core.Resource],None]k
+&builtins.list[fanstatic.core.Resource]2
+fanstatic.core.Resource"fanstatic.core.Resource"builtins.list
+None *,
+bottom
+builtins.bool"builtins.bool *Ì
+renderer‹
+6Union[TypeAlias[CallableType[builtins.function]],None]ï
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"fanstatic.core._Renderer
+None *û
+debugê
+0Union[builtins.str,fanstatic.core.Resource,None]
+builtins.str"builtins.str2
+fanstatic.core.Resource"fanstatic.core.Resource
+None *1
+dont_bundle
+builtins.bool"builtins.bool *°
+minifiedê
+0Union[builtins.str,fanstatic.core.Resource,None]
+builtins.str"builtins.str2
+fanstatic.core.Resource"fanstatic.core.Resource
+None *À
+minifier∫
+>Union[fanstatic.compiler.Minifier,fanstatic.core._NothingType]:
+fanstatic.compiler.Minifier"fanstatic.compiler.Minifier:
+fanstatic.core._NothingType"fanstatic.core._NothingType *À
+compiler∫
+>Union[fanstatic.compiler.Compiler,fanstatic.core._NothingType]:
+fanstatic.compiler.Compiler"fanstatic.compiler.Compiler:
+fanstatic.core._NothingType"fanstatic.core._NothingType *R
+sourceD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *W
+mode_parentD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None z36z37z38z39z310z311z312z313*˛
+fullpath fanstatic.core.Resource.fullpath"
+builtins.str"builtins.str*<
+self2
+fanstatic.core.Resource"fanstatic.core.Resource*P
+pathD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None z36z37z38z39z310z311z312z313*√
+compilefanstatic.core.Resource.compile"
+None*<
+self2
+fanstatic.core.Resource"fanstatic.core.Resource*+
+force
+builtins.bool"builtins.bool z36z37z38z39z310z311z312z313*◊
+renderfanstatic.core.Resource.render"
+builtins.str"builtins.str*<
+self2
+fanstatic.core.Resource"fanstatic.core.Resource*-
+library_url
+builtins.str"builtins.strz36z37z38z39z310z311z312z313*ä
+modefanstatic.core.Resource.mode"2
+fanstatic.core.Resource"fanstatic.core.Resource*<
+self2
+fanstatic.core.Resource"fanstatic.core.Resource*N
+modeD
+Union[builtins.str,None]
+builtins.str"builtins.str
+Nonez36z37z38z39z310z311z312z313*£
+needfanstatic.core.Resource.need"
+None*<
+self2
+fanstatic.core.Resource"fanstatic.core.Resource*ê
+slotsÇ
+FUnion[builtins.dict[fanstatic.core.Slot,fanstatic.core.Resource],None]´
+:builtins.dict[fanstatic.core.Slot,fanstatic.core.Resource]*
+fanstatic.core.Slot"fanstatic.core.Slot2
+fanstatic.core.Resource"fanstatic.core.Resource"builtins.dict
+None z36z37z38z39z310z311z312z313j36j37j38j39j310j311j312j313rl
+relpathfanstatic.core.Resource.relpath
+builtins.str"builtins.str*36*37*38*39*310*311*312*313rd
+extfanstatic.core.Resource.ext
+builtins.str"builtins.str*36*37*38*39*310*311*312*313rú
+mode_parent#fanstatic.core.Resource.mode_parentD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*36*37*38*39*310*311*312*313rå
+compiler fanstatic.core.Resource.compiler:
+fanstatic.compiler.Compiler"fanstatic.compiler.Compiler*36*37*38*39*310*311*312*313rí
+sourcefanstatic.core.Resource.sourceD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*36*37*38*39*310*311*312*313rå
+minifier fanstatic.core.Resource.minifier:
+fanstatic.compiler.Minifier"fanstatic.compiler.Minifier*36*37*38*39*310*311*312*313r∑
+minified fanstatic.core.Resource.minifiede
+#Union[fanstatic.core.Resource,None]2
+fanstatic.core.Resource"fanstatic.core.Resource
+None*36*37*38*39*310*311*312*313rl
+bottomfanstatic.core.Resource.bottom
+builtins.bool"builtins.bool*36*37*38*39*310*311*312*313rv
+dont_bundle#fanstatic.core.Resource.dont_bundle
+builtins.bool"builtins.bool*36*37*38*39*310*311*312*313rË
+renderer fanstatic.core.Resource.rendererï
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"fanstatic.core._Renderer*36*37*38*39*310*311*312*313r„
+modesfanstatic.core.Resource.modesñ
+3builtins.dict[builtins.str,fanstatic.core.Resource]
+builtins.str"builtins.str2
+fanstatic.core.Resource"fanstatic.core.Resource"builtins.dict*36*37*38*39*310*311*312*313r¡
+
+supersedes"fanstatic.core.Resource.supersedesk
+&builtins.list[fanstatic.core.Resource]2
+fanstatic.core.Resource"fanstatic.core.Resource"builtins.list*36*37*38*39*310*311*312*313rª
+rollupsfanstatic.core.Resource.rollupsk
+&builtins.list[fanstatic.core.Resource]2
+fanstatic.core.Resource"fanstatic.core.Resource"builtins.list*36*37*38*39*310*311*312*313˚
+_RequiredDefaultMarkerType)fanstatic.core._RequiredDefaultMarkerType"builtins.object*¸
+__init__2fanstatic.core._RequiredDefaultMarkerType.__init__"
+None*`
+selfV
+)fanstatic.core._RequiredDefaultMarkerType")fanstatic.core._RequiredDefaultMarkerType*,
+item"
+builtins.object"builtins.objectz36z37z38z39z310z311z312z313j36j37j38j39j310j311j312j313Ê	
+Slotfanstatic.core.Slot"fanstatic.core.Asset*ä
+__init__fanstatic.core.Slot.__init__"
+None*4
+self*
+fanstatic.core.Slot"fanstatic.core.Slot*=
+library0
+fanstatic.core.Library"fanstatic.core.Library*+
+	extension
+builtins.str"builtins.str*À
+dependsª
+6Union[typing.Iterable[fanstatic.core.Dependable],None]u
+*typing.Iterable[fanstatic.core.Dependable]6
+fanstatic.core.Dependable"fanstatic.core.Dependable"typing.Iterable
+None *À
+required∫
+>Union[builtins.bool,fanstatic.core._RequiredDefaultMarkerType]
+builtins.bool"builtins.boolV
+)fanstatic.core._RequiredDefaultMarkerType")fanstatic.core._RequiredDefaultMarkerType *t
+defaulte
+#Union[fanstatic.core.Resource,None]2
+fanstatic.core.Resource"fanstatic.core.Resource
+None z36z37z38z39z310z311z312z313j36j37j38j39j310j311j312j313r±
+defaultfanstatic.core.Slot.defaulte
+#Union[fanstatic.core.Resource,None]2
+fanstatic.core.Resource"fanstatic.core.Resource
+None*36*37*38*39*310*311*312*313r`
+extfanstatic.core.Slot.ext
+builtins.str"builtins.str*36*37*38*39*310*311*312*313rl
+requiredfanstatic.core.Slot.required
+builtins.bool"builtins.bool*36*37*38*39*310*311*312*313ï
+
+FilledSlotfanstatic.core.FilledSlot"fanstatic.core.Renderable*ñ
+__init__"fanstatic.core.FilledSlot.__init__"
+None*@
+self6
+fanstatic.core.FilledSlot"fanstatic.core.FilledSlot*4
+slot*
+fanstatic.core.Slot"fanstatic.core.Slot*@
+resource2
+fanstatic.core.Resource"fanstatic.core.Resourcez36z37z38z39z310z311z312z313*›
+render fanstatic.core.FilledSlot.render"
+builtins.str"builtins.str*@
+self6
+fanstatic.core.FilledSlot"fanstatic.core.FilledSlot*-
+library_url
+builtins.str"builtins.strz36z37z38z39z310z311z312z313*…
+compile!fanstatic.core.FilledSlot.compile"
+None*@
+self6
+fanstatic.core.FilledSlot"fanstatic.core.FilledSlot*+
+force
+builtins.bool"builtins.bool z36z37z38z39z310z311z312z313*î
+modefanstatic.core.FilledSlot.mode"6
+fanstatic.core.FilledSlot"fanstatic.core.FilledSlot*@
+self6
+fanstatic.core.FilledSlot"fanstatic.core.FilledSlot*N
+modeD
+Union[builtins.str,None]
+builtins.str"builtins.str
+Nonez36z37z38z39z310z311z312z313j36j37j38j39j310j311j312j313rÜ
+filledby"fanstatic.core.FilledSlot.filledby2
+fanstatic.core.Resource"fanstatic.core.Resource*36*37*38*39*310*311*312*313rÇ
+library!fanstatic.core.FilledSlot.library0
+fanstatic.core.Library"fanstatic.core.Library*36*37*38*39*310*311*312*313rn
+relpath!fanstatic.core.FilledSlot.relpath
+builtins.str"builtins.str*36*37*38*39*310*311*312*313rn
+bottom fanstatic.core.FilledSlot.bottom
+builtins.bool"builtins.bool*36*37*38*39*310*311*312*313rΩ
+rollups!fanstatic.core.FilledSlot.rollupsk
+&builtins.list[fanstatic.core.Resource]2
+fanstatic.core.Resource"fanstatic.core.Resource"builtins.list*36*37*38*39*310*311*312*313rx
+dont_bundle%fanstatic.core.FilledSlot.dont_bundle
+builtins.bool"builtins.bool*36*37*38*39*310*311*312*313rf
+extfanstatic.core.FilledSlot.ext
+builtins.str"builtins.str*36*37*38*39*310*311*312*313rj
+orderfanstatic.core.FilledSlot.order
+builtins.int"builtins.int*36*37*38*39*310*311*312*313rÍ
+renderer"fanstatic.core.FilledSlot.rendererï
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"fanstatic.core._Renderer*36*37*38*39*310*311*312*313rz
+dependency_nr'fanstatic.core.FilledSlot.dependency_nr
+builtins.int"builtins.int*36*37*38*39*310*311*312*313rÎ
+modesfanstatic.core.FilledSlot.modesú
+5builtins.dict[builtins.str,fanstatic.core.FilledSlot]
+builtins.str"builtins.str6
+fanstatic.core.FilledSlot"fanstatic.core.FilledSlot"builtins.dict*36*37*38*39*310*311*312*313Í
+Groupfanstatic.core.Group"fanstatic.core.Dependable*î
+__init__fanstatic.core.Group.__init__"
+None*6
+self,
+fanstatic.core.Group"fanstatic.core.Group*Ç
+dependsu
+*typing.Iterable[fanstatic.core.Dependable]6
+fanstatic.core.Dependable"fanstatic.core.Dependable"typing.Iterablez36z37z38z39z310z311z312z313*§
+set_dependencies%fanstatic.core.Group.set_dependencies"
+None*6
+self,
+fanstatic.core.Group"fanstatic.core.Group*Ç
+dependsu
+*typing.Iterable[fanstatic.core.Dependable]6
+fanstatic.core.Dependable"fanstatic.core.Dependable"typing.Iterablez36z37z38z39z310z311z312z313*Ì
+list_assets fanstatic.core.Group.list_assets"`
+"builtins.set[fanstatic.core.Asset],
+fanstatic.core.Asset"fanstatic.core.Asset"builtins.set*6
+self,
+fanstatic.core.Group"fanstatic.core.Groupz36z37z38z39z310z311z312z313*ö
+needfanstatic.core.Group.need"
+None*6
+self,
+fanstatic.core.Group"fanstatic.core.Group*ê
+slotsÇ
+FUnion[builtins.dict[fanstatic.core.Slot,fanstatic.core.Resource],None]´
+:builtins.dict[fanstatic.core.Slot,fanstatic.core.Resource]*
+fanstatic.core.Slot"fanstatic.core.Slot2
+fanstatic.core.Resource"fanstatic.core.Resource"builtins.dict
+None z36z37z38z39z310z311z312z313j36j37j38j39j310j311j312j313r¿
+	resourcesfanstatic.core.Group.resourceso
+'builtins.set[fanstatic.core.Dependable]6
+fanstatic.core.Dependable"fanstatic.core.Dependable"builtins.set*36*37*38*39*310*311*312*313rº
+dependsfanstatic.core.Group.dependso
+'builtins.set[fanstatic.core.Dependable]6
+fanstatic.core.Dependable"fanstatic.core.Dependable"builtins.set*36*37*38*39*310*311*312*313ræ
+supportsfanstatic.core.Group.supportso
+'builtins.set[fanstatic.core.Dependable]6
+fanstatic.core.Dependable"fanstatic.core.Dependable"builtins.set*36*37*38*39*310*311*312*313õ
+NeededResourcesfanstatic.core.NeededResources"builtins.object*â
+__init__'fanstatic.core.NeededResources.__init__"
+None*J
+self@
+fanstatic.core.NeededResources"fanstatic.core.NeededResources*0
+
+versioning
+builtins.bool"builtins.bool *8
+versioning_use_md5
+builtins.bool"builtins.bool *6
+recompute_hashes
+builtins.bool"builtins.bool *T
+base_urlD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *W
+script_nameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *7
+publisher_signature
+builtins.str"builtins.str *Õ
+	resourcesª
+6Union[typing.Iterable[fanstatic.core.Dependable],None]u
+*typing.Iterable[fanstatic.core.Dependable]6
+fanstatic.core.Dependable"fanstatic.core.Dependable"typing.Iterable
+None z36z37z38z39z310z311z312z313*Õ
+has_resources,fanstatic.core.NeededResources.has_resources"
+builtins.bool"builtins.bool*J
+self@
+fanstatic.core.NeededResources"fanstatic.core.NeededResourcesz36z37z38z39z310z311z312z313*À
+has_base_url+fanstatic.core.NeededResources.has_base_url"
+builtins.bool"builtins.bool*J
+self@
+fanstatic.core.NeededResources"fanstatic.core.NeededResourcesz36z37z38z39z310z311z312z313*‹
+set_base_url+fanstatic.core.NeededResources.set_base_url"
+None*J
+self@
+fanstatic.core.NeededResources"fanstatic.core.NeededResources*%
+url
+builtins.str"builtins.strz36z37z38z39z310z311z312z313*„
+need#fanstatic.core.NeededResources.need"
+None*J
+self@
+fanstatic.core.NeededResources"fanstatic.core.NeededResources*®
+resourceô
+3Union[fanstatic.core.Resource,fanstatic.core.Group]2
+fanstatic.core.Resource"fanstatic.core.Resource,
+fanstatic.core.Group"fanstatic.core.Group*ê
+slotsÇ
+FUnion[builtins.dict[fanstatic.core.Slot,fanstatic.core.Resource],None]´
+:builtins.dict[fanstatic.core.Slot,fanstatic.core.Resource]*
+fanstatic.core.Slot"fanstatic.core.Slot2
+fanstatic.core.Resource"fanstatic.core.Resource"builtins.dict
+None z36z37z38z39z310z311z312z313*ê
+	resources(fanstatic.core.NeededResources.resources"i
+%builtins.set[fanstatic.core.Resource]2
+fanstatic.core.Resource"fanstatic.core.Resource"builtins.set*J
+self@
+fanstatic.core.NeededResources"fanstatic.core.NeededResourcesz36z37z38z39z310z311z312z313*ß
+clear$fanstatic.core.NeededResources.clear"
+None*J
+self@
+fanstatic.core.NeededResources"fanstatic.core.NeededResourcesz36z37z38z39z310z311z312z313*Ü
+library_url*fanstatic.core.NeededResources.library_url"
+builtins.str"builtins.str*J
+self@
+fanstatic.core.NeededResources"fanstatic.core.NeededResources*=
+library0
+fanstatic.core.Library"fanstatic.core.Libraryz36z37z38z39z310z311z312z313j36j37j38j39j310j311j312j313Ñ	
+DummyNeededResources#fanstatic.core.DummyNeededResources"builtins.object*Ú
+need(fanstatic.core.DummyNeededResources.need"
+None*T
+selfJ
+#fanstatic.core.DummyNeededResources"#fanstatic.core.DummyNeededResources*®
+resourceô
+3Union[fanstatic.core.Resource,fanstatic.core.Group]2
+fanstatic.core.Resource"fanstatic.core.Resource,
+fanstatic.core.Group"fanstatic.core.Group*ê
+slotsÇ
+FUnion[builtins.dict[fanstatic.core.Slot,fanstatic.core.Resource],None]´
+:builtins.dict[fanstatic.core.Slot,fanstatic.core.Resource]*
+fanstatic.core.Slot"fanstatic.core.Slot2
+fanstatic.core.Resource"fanstatic.core.Resource"builtins.dict
+None z36z37z38z39z310z311z312z313*©
+has_resources1fanstatic.core.DummyNeededResources.has_resources"
+Any*T
+selfJ
+#fanstatic.core.DummyNeededResources"#fanstatic.core.DummyNeededResourcesz36z37*
+has_resources1fanstatic.core.DummyNeededResources.has_resources":
+Literal[builtins.bool]	
+builtins.bool"builtins.bool*T
+selfJ
+#fanstatic.core.DummyNeededResources"#fanstatic.core.DummyNeededResourcesz38z39z310z311z312z313j36j37j38j39j310j311j312j313§
+Bundlefanstatic.core.Bundle"fanstatic.core.Renderable*í
+__init__fanstatic.core.Bundle.__init__"
+None*8
+self.
+fanstatic.core.Bundle"fanstatic.core.Bundlez36z37z38z39z310z311z312z313*≤
+dirnamefanstatic.core.Bundle.dirname"
+builtins.str"builtins.str*8
+self.
+fanstatic.core.Bundle"fanstatic.core.Bundle0:property`z36z37z38z39z310z311z312z313*∆
+libraryfanstatic.core.Bundle.library"0
+fanstatic.core.Library"fanstatic.core.Library*8
+self.
+fanstatic.core.Bundle"fanstatic.core.Bundle0:property`z36z37z38z39z310z311z312z313*Æ
+rendererfanstatic.core.Bundle.renderer"ï
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"fanstatic.core._Renderer*8
+self.
+fanstatic.core.Bundle"fanstatic.core.Bundle0:property`z36z37z38z39z310z311z312z313*™
+extfanstatic.core.Bundle.ext"
+builtins.str"builtins.str*8
+self.
+fanstatic.core.Bundle"fanstatic.core.Bundle0:property`z36z37z38z39z310z311z312z313*≤
+relpathfanstatic.core.Bundle.relpath"
+builtins.str"builtins.str*8
+self.
+fanstatic.core.Bundle"fanstatic.core.Bundle0:property`z36z37z38z39z310z311z312z313*˜
+	resourcesfanstatic.core.Bundle.resources"k
+&builtins.list[fanstatic.core.Resource]2
+fanstatic.core.Resource"fanstatic.core.Resource"builtins.list*8
+self.
+fanstatic.core.Bundle"fanstatic.core.Bundlez36z37z38z39z310z311z312z313*—
+renderfanstatic.core.Bundle.render"
+builtins.str"builtins.str*8
+self.
+fanstatic.core.Bundle"fanstatic.core.Bundle*-
+library_url
+builtins.str"builtins.strz36z37z38z39z310z311z312z313*‚
+fitsfanstatic.core.Bundle.fits"
+builtins.bool"builtins.bool*8
+self.
+fanstatic.core.Bundle"fanstatic.core.Bundle*@
+resource2
+fanstatic.core.Resource"fanstatic.core.Resourcez36z37z38z39z310z311z312z313*–
+appendfanstatic.core.Bundle.append"
+None*8
+self.
+fanstatic.core.Bundle"fanstatic.core.Bundle*@
+resource2
+fanstatic.core.Resource"fanstatic.core.Resourcez36z37z38z39z310z311z312z313*ó
+add_to_list!fanstatic.core.Bundle.add_to_list"
+None*8
+self.
+fanstatic.core.Bundle"fanstatic.core.Bundle*}
+resultq
+(builtins.list[fanstatic.core.Renderable]6
+fanstatic.core.Renderable"fanstatic.core.Renderable"builtins.listz36z37z38z39z310z311z312z313j36j37j38j39j310j311j312j313∞
+$set_resource_file_existence_checking3fanstatic.core.set_resource_file_existence_checking"
+None*%
+v
+builtins.bool"builtins.boolz36z37z38z39z310z311z312z313ö
+set_auto_register_library(fanstatic.core.set_auto_register_library"
+None*%
+v
+builtins.bool"builtins.boolz36z37z38z39z310z311z312z313i
+
+caller_dirfanstatic.core.caller_dir"
+builtins.str"builtins.strz36z37z38z39z310z311z312z313û
+register_inclusion_renderer*fanstatic.core.register_inclusion_renderer"
+None*+
+	extension
+builtins.str"builtins.str*§
+rendererï
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"fanstatic.core._Renderer*Q
+orderD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None z36z37z38z39z310z311z312z313ê
+
+render_icofanstatic.core.render_ico"
+builtins.str"builtins.str*%
+url
+builtins.str"builtins.strz36z37z38z39z310z311z312z313ê
+
+render_cssfanstatic.core.render_css"
+builtins.str"builtins.str*%
+url
+builtins.str"builtins.strz36z37z38z39z310z311z312z313é
+	render_jsfanstatic.core.render_js"
+builtins.str"builtins.str*%
+url
+builtins.str"builtins.strz36z37z38z39z310z311z312z313ú
+render_print_cssfanstatic.core.render_print_css"
+builtins.str"builtins.str*%
+url
+builtins.str"builtins.strz36z37z38z39z310z311z312z313û
+render_screen_css fanstatic.core.render_screen_css"
+builtins.str"builtins.str*%
+url
+builtins.str"builtins.strz36z37z38z39z310z311z312z313Î
+init_neededfanstatic.core.init_needed"@
+fanstatic.core.NeededResources"fanstatic.core.NeededResources*0
+
+versioning
+builtins.bool"builtins.bool *8
+versioning_use_md5
+builtins.bool"builtins.bool *6
+recompute_hashes
+builtins.bool"builtins.bool *T
+base_urlD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *W
+script_nameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *7
+publisher_signature
+builtins.str"builtins.str *Õ
+	resourcesª
+6Union[typing.Iterable[fanstatic.core.Dependable],None]u
+*typing.Iterable[fanstatic.core.Dependable]6
+fanstatic.core.Dependable"fanstatic.core.Dependable"typing.Iterable
+None z36z37z38z39z310z311z312z313U
+
+del_neededfanstatic.core.del_needed"
+Nonez36z37z38z39z310z311z312z313©
+
+get_neededfanstatic.core.get_needed"€
+IUnion[fanstatic.core.NeededResources,fanstatic.core.DummyNeededResources]@
+fanstatic.core.NeededResources"fanstatic.core.NeededResourcesJ
+#fanstatic.core.DummyNeededResources"#fanstatic.core.DummyNeededResourcesz36z37z38z39z310z311z312z313Y
+clear_neededfanstatic.core.clear_needed"
+Nonez36z37z38z39z310z311z312z313*Æ
+__annotations__fanstatic.core.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*36*37*38*39*310*311*312*313*2
+Literalfanstatic.core.Literal
+Any*36*37*w
+DEFAULT_SIGNATURE fanstatic.core.DEFAULT_SIGNATURE
+builtins.str"builtins.str*36*37*38*39*310*311*312*313*q
+VERSION_PREFIXfanstatic.core.VERSION_PREFIX
+builtins.str"builtins.str*36*37*38*39*310*311*312*313*o
+BUNDLE_PREFIXfanstatic.core.BUNDLE_PREFIX
+builtins.str"builtins.str*36*37*38*39*310*311*312*313*a
+NEEDEDfanstatic.core.NEEDED
+builtins.str"builtins.str*36*37*38*39*310*311*312*313*_
+DEBUGfanstatic.core.DEBUG
+builtins.str"builtins.str*36*37*38*39*310*311*312*313*e
+MINIFIEDfanstatic.core.MINIFIED
+builtins.str"builtins.str*36*37*38*39*310*311*312*313*•
+inclusion_renderers"fanstatic.core.inclusion_renderersF
+!fanstatic.core.InclusionRenderers"!fanstatic.core.InclusionRenderers*36*37*38*39*310*311*312*313*Å
+NOTHINGfanstatic.core.NOTHING:
+fanstatic.core._NothingType"fanstatic.core._NothingType*36*37*38*39*310*311*312*313*Ω
+REQUIRED_DEFAULT_MARKER&fanstatic.core.REQUIRED_DEFAULT_MARKERV
+)fanstatic.core._RequiredDefaultMarkerType")fanstatic.core._RequiredDefaultMarkerType*36*37*38*39*310*311*312*313*ã
+thread_local_needed_data'fanstatic.core.thread_local_needed_data"
+threading.local"threading.local*36*37*38*39*310*311*312*313

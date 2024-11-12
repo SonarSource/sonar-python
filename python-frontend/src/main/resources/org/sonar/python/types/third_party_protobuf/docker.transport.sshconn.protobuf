@@ -1,0 +1,167 @@
+
+docker.transport.sshconnÁ
+	SSHSocket"docker.transport.sshconn.SSHSocket"socket.socket*Ã
+__init__+docker.transport.sshconn.SSHSocket.__init__"
+None*R
+selfH
+"docker.transport.sshconn.SSHSocket""docker.transport.sshconn.SSHSocket*
+host
+Anyz36z37z38z39z310z311z312z313*Ã
+connect*docker.transport.sshconn.SSHSocket.connect"
+None*R
+selfH
+"docker.transport.sshconn.SSHSocket""docker.transport.sshconn.SSHSocket*
+kwargs
+Anyz36z37z38z39z310z311z312z313* 
+sendall*docker.transport.sshconn.SSHSocket.sendall"
+None*R
+selfH
+"docker.transport.sshconn.SSHSocket""docker.transport.sshconn.SSHSocket*
+data
+Anyz36z37z38z39z310z311z312z313*g
+send'docker.transport.sshconn.SSHSocket.send*
+self*
+dataz36z37z38z39z310z311z312z313*d
+recv'docker.transport.sshconn.SSHSocket.recv*
+self*
+nz36z37z38z39z310z311z312z313*o
+makefile+docker.transport.sshconn.SSHSocket.makefile*
+self*
+modez36z37z38z39z310z311z312z313*≥
+close(docker.transport.sshconn.SSHSocket.close"
+None*R
+selfH
+"docker.transport.sshconn.SSHSocket""docker.transport.sshconn.SSHSocketz36z37z38z39z310z311z312z313j36j37j38j39j310j311j312j313rÜ
+host'docker.transport.sshconn.SSHSocket.host1
+TypeAlias[Any]
+Any"_typeshed.Incomplete*36*37*38*39*310*311*312*313rÜ
+port'docker.transport.sshconn.SSHSocket.port1
+TypeAlias[Any]
+Any"_typeshed.Incomplete*36*37*38*39*310*311*312*313rÜ
+user'docker.transport.sshconn.SSHSocket.user1
+TypeAlias[Any]
+Any"_typeshed.Incomplete*36*37*38*39*310*311*312*313rÜ
+proc'docker.transport.sshconn.SSHSocket.proc1
+TypeAlias[Any]
+Any"_typeshed.Incomplete*36*37*38*39*310*311*312*313Ë
+
+SSHConnection&docker.transport.sshconn.SSHConnection"!urllib3.connection.HTTPConnection*Õ
+__init__/docker.transport.sshconn.SSHConnection.__init__"
+None*Z
+selfP
+&docker.transport.sshconn.SSHConnection"&docker.transport.sshconn.SSHConnection*p
+ssh_transport[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *+
+timeout
+builtins.int"builtins.int *g
+host[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None z36z37z38z39z310z311z312z313*√
+connect.docker.transport.sshconn.SSHConnection.connect"
+None*Z
+selfP
+&docker.transport.sshconn.SSHConnection"&docker.transport.sshconn.SSHConnectionz36z37z38z39z310z311z312z313j36j37j38j39j310j311j312j313rú
+ssh_transport4docker.transport.sshconn.SSHConnection.ssh_transport1
+TypeAlias[Any]
+Any"_typeshed.Incomplete*36*37*38*39*310*311*312*313rê
+timeout.docker.transport.sshconn.SSHConnection.timeout1
+TypeAlias[Any]
+Any"_typeshed.Incomplete*36*37*38*39*310*311*312*313rí
+ssh_host/docker.transport.sshconn.SSHConnection.ssh_host1
+TypeAlias[Any]
+Any"_typeshed.Incomplete*36*37*38*39*310*311*312*313rä
+sock+docker.transport.sshconn.SSHConnection.sock1
+TypeAlias[Any]
+Any"_typeshed.Incomplete*36*37*38*39*310*311*312*313Ê	
+SSHConnectionPool*docker.transport.sshconn.SSHConnectionPool")urllib3.connectionpool.HTTPConnectionPool*É
+__init__3docker.transport.sshconn.SSHConnectionPool.__init__"
+None*b
+selfX
+*docker.transport.sshconn.SSHConnectionPool"*docker.transport.sshconn.SSHConnectionPool*m
+
+ssh_client[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *+
+timeout
+builtins.int"builtins.int *+
+maxsize
+builtins.int"builtins.int *g
+host[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None z36z37z38z39z310z311z312z313j36j37j38j39j310j311j312j313r}
+scheme1docker.transport.sshconn.SSHConnectionPool.scheme
+builtins.str"builtins.str*36*37*38*39*310*311*312*313r†
+ssh_transport8docker.transport.sshconn.SSHConnectionPool.ssh_transport1
+TypeAlias[Any]
+Any"_typeshed.Incomplete*36*37*38*39*310*311*312*313rî
+timeout2docker.transport.sshconn.SSHConnectionPool.timeout1
+TypeAlias[Any]
+Any"_typeshed.Incomplete*36*37*38*39*310*311*312*313rñ
+ssh_host3docker.transport.sshconn.SSHConnectionPool.ssh_host1
+TypeAlias[Any]
+Any"_typeshed.Incomplete*36*37*38*39*310*311*312*313≥
+SSHHTTPAdapter'docker.transport.sshconn.SSHHTTPAdapter"0docker.transport.basehttpadapter.BaseHTTPAdapter*¸
+__init__0docker.transport.sshconn.SSHHTTPAdapter.__init__"
+None*\
+selfR
+'docker.transport.sshconn.SSHHTTPAdapter"'docker.transport.sshconn.SSHHTTPAdapter*
+base_url
+Any*+
+timeout
+builtins.int"builtins.int *
+pool_connections
+Any *
+max_pool_size
+Any */
+	shell_out
+builtins.bool"builtins.bool z36z37z38z39z310z311z312z313*—
+get_connection6docker.transport.sshconn.SSHHTTPAdapter.get_connection"
+Any*\
+selfR
+'docker.transport.sshconn.SSHHTTPAdapter"'docker.transport.sshconn.SSHHTTPAdapter*
+url
+Any*j
+proxies[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None z36z37z38z39z310z311z312z313*¬
+close-docker.transport.sshconn.SSHHTTPAdapter.close"
+None*\
+selfR
+'docker.transport.sshconn.SSHHTTPAdapter"'docker.transport.sshconn.SSHHTTPAdapterz36z37z38z39z310z311z312z313j36j37j38j39j310j311j312j313rï
+	__attrs__1docker.transport.sshconn.SSHHTTPAdapter.__attrs__1
+TypeAlias[Any]
+Any"_typeshed.Incomplete*36*37*38*39*310*311*312*313ró
+
+ssh_client2docker.transport.sshconn.SSHHTTPAdapter.ssh_client1
+TypeAlias[Any]
+Any"_typeshed.Incomplete*36*37*38*39*310*311*312*313rì
+ssh_host0docker.transport.sshconn.SSHHTTPAdapter.ssh_host1
+TypeAlias[Any]
+Any"_typeshed.Incomplete*36*37*38*39*310*311*312*313rë
+timeout/docker.transport.sshconn.SSHHTTPAdapter.timeout1
+TypeAlias[Any]
+Any"_typeshed.Incomplete*36*37*38*39*310*311*312*313rù
+max_pool_size5docker.transport.sshconn.SSHHTTPAdapter.max_pool_size1
+TypeAlias[Any]
+Any"_typeshed.Incomplete*36*37*38*39*310*311*312*313rç
+pools-docker.transport.sshconn.SSHHTTPAdapter.pools1
+TypeAlias[Any]
+Any"_typeshed.Incomplete*36*37*38*39*310*311*312*313*∏
+__annotations__(docker.transport.sshconn.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*36*37*38*39*310*311*312*313*û
+RecentlyUsedContainer.docker.transport.sshconn.RecentlyUsedContainer1
+TypeAlias[Any]
+Any"_typeshed.Incomplete*36*37*38*39*310*311*312*313

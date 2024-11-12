@@ -1,0 +1,244 @@
+
+seaborn._core.data¸&
+DataFrameProtocol4pandas.core.interchange.dataframe_protocol.DataFrame"abc.ABC*Ò
+__dataframe__Bpandas.core.interchange.dataframe_protocol.DataFrame.__dataframe__"
+Any*v
+selfl
+4pandas.core.interchange.dataframe_protocol.DataFrame"4pandas.core.interchange.dataframe_protocol.DataFrame*1
+nan_as_null
+builtins.bool"builtins.bool *0
+
+allow_copy
+builtins.bool"builtins.bool 0:abstractmethod@z36z37z38z39z310z311z312z313*ﬁ
+metadata=pandas.core.interchange.dataframe_protocol.DataFrame.metadata"W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*v
+selfl
+4pandas.core.interchange.dataframe_protocol.DataFrame"4pandas.core.interchange.dataframe_protocol.DataFrame0:property:abstractmethod@`z36z37z38z39z310z311z312z313*ù
+num_columns@pandas.core.interchange.dataframe_protocol.DataFrame.num_columns"
+builtins.int"builtins.int*v
+selfl
+4pandas.core.interchange.dataframe_protocol.DataFrame"4pandas.core.interchange.dataframe_protocol.DataFrame0:abstractmethod@z36z37z38z39z310z311z312z313*ø
+num_rows=pandas.core.interchange.dataframe_protocol.DataFrame.num_rows"D
+Union[builtins.int,None]
+builtins.int"builtins.int
+None*v
+selfl
+4pandas.core.interchange.dataframe_protocol.DataFrame"4pandas.core.interchange.dataframe_protocol.DataFrame0:abstractmethod@z36z37z38z39z310z311z312z313*õ
+
+num_chunks?pandas.core.interchange.dataframe_protocol.DataFrame.num_chunks"
+builtins.int"builtins.int*v
+selfl
+4pandas.core.interchange.dataframe_protocol.DataFrame"4pandas.core.interchange.dataframe_protocol.DataFrame0:abstractmethod@z36z37z38z39z310z311z312z313*—
+column_namesApandas.core.interchange.dataframe_protocol.DataFrame.column_names"N
+typing.Iterable[builtins.str]
+builtins.str"builtins.str"typing.Iterable*v
+selfl
+4pandas.core.interchange.dataframe_protocol.DataFrame"4pandas.core.interchange.dataframe_protocol.DataFrame0:abstractmethod@z36z37z38z39z310z311z312z313*ä
+
+get_column?pandas.core.interchange.dataframe_protocol.DataFrame.get_column"f
+1pandas.core.interchange.dataframe_protocol.Column"1pandas.core.interchange.dataframe_protocol.Column*v
+selfl
+4pandas.core.interchange.dataframe_protocol.DataFrame"4pandas.core.interchange.dataframe_protocol.DataFrame*#
+i
+builtins.int"builtins.int0:abstractmethod@z36z37z38z39z310z311z312z313*ù
+get_column_by_nameGpandas.core.interchange.dataframe_protocol.DataFrame.get_column_by_name"f
+1pandas.core.interchange.dataframe_protocol.Column"1pandas.core.interchange.dataframe_protocol.Column*v
+selfl
+4pandas.core.interchange.dataframe_protocol.DataFrame"4pandas.core.interchange.dataframe_protocol.DataFrame*&
+name
+builtins.str"builtins.str0:abstractmethod@z36z37z38z39z310z311z312z313*ø
+get_columns@pandas.core.interchange.dataframe_protocol.DataFrame.get_columns"Ω
+Btyping.Iterable[pandas.core.interchange.dataframe_protocol.Column]f
+1pandas.core.interchange.dataframe_protocol.Column"1pandas.core.interchange.dataframe_protocol.Column"typing.Iterable*v
+selfl
+4pandas.core.interchange.dataframe_protocol.DataFrame"4pandas.core.interchange.dataframe_protocol.DataFrame0:abstractmethod@z36z37z38z39z310z311z312z313*–
+select_columnsCpandas.core.interchange.dataframe_protocol.DataFrame.select_columns"l
+4pandas.core.interchange.dataframe_protocol.DataFrame"4pandas.core.interchange.dataframe_protocol.DataFrame*v
+selfl
+4pandas.core.interchange.dataframe_protocol.DataFrame"4pandas.core.interchange.dataframe_protocol.DataFrame*[
+indicesN
+typing.Sequence[builtins.int]
+builtins.int"builtins.int"typing.Sequence0:abstractmethod@z36z37z38z39z310z311z312z313*ﬁ
+select_columns_by_nameKpandas.core.interchange.dataframe_protocol.DataFrame.select_columns_by_name"l
+4pandas.core.interchange.dataframe_protocol.DataFrame"4pandas.core.interchange.dataframe_protocol.DataFrame*v
+selfl
+4pandas.core.interchange.dataframe_protocol.DataFrame"4pandas.core.interchange.dataframe_protocol.DataFrame*Y
+namesN
+typing.Sequence[builtins.str]
+builtins.str"builtins.str"typing.Sequence0:abstractmethod@z36z37z38z39z310z311z312z313*ú
+
+get_chunks?pandas.core.interchange.dataframe_protocol.DataFrame.get_chunks"∆
+Etyping.Iterable[pandas.core.interchange.dataframe_protocol.DataFrame]l
+4pandas.core.interchange.dataframe_protocol.DataFrame"4pandas.core.interchange.dataframe_protocol.DataFrame"typing.Iterable*v
+selfl
+4pandas.core.interchange.dataframe_protocol.DataFrame"4pandas.core.interchange.dataframe_protocol.DataFrame*T
+n_chunksD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None 0:abstractmethod@z36z37z38z39z310z311z312z313@babc.ABCMetaj36j37j38j39j310j311j312j313râ
+version<pandas.core.interchange.dataframe_protocol.DataFrame.version
+builtins.int"builtins.int*36*37*38*39*310*311*312*313®Y
+PlotDataseaborn._core.data.PlotData"builtins.object*ï
+__init__$seaborn._core.data.PlotData.__init__"
+None*D
+self:
+seaborn._core.data.PlotData"seaborn._core.data.PlotData*Æ
+data£
+|TypeAlias[Union[pandas.core.frame.DataFrame,seaborn._core.typing.SupportsDataFrame,typing.Mapping[Any,TypeAlias[Any]],None]]ˇ
+qUnion[pandas.core.frame.DataFrame,seaborn._core.typing.SupportsDataFrame,typing.Mapping[Any,TypeAlias[Any]],None]:
+pandas.core.frame.DataFrame"pandas.core.frame.DataFrameP
+&seaborn._core.typing.SupportsDataFrame"&seaborn._core.typing.SupportsDataFramep
+"typing.Mapping[Any,TypeAlias[Any]]
+Any1
+TypeAlias[Any]
+Any"_typeshed.Incomplete"typing.Mapping
+None"seaborn._core.typing.DataSource*Ω
+	variables≠
+builtins.dict[builtins.str,TypeAlias[Union[TypeAlias[Union[builtins.str,builtins.bytes,datetime.date,datetime.datetime,datetime.timedelta,builtins.bool,builtins.complex,pandas._libs.tslibs.timestamps.Timestamp,pandas._libs.tslibs.timedeltas.Timedelta]],TypeAlias[Union[pandas.core.series.Series[Any],pandas.core.indexes.base.Index[Any],numpy.ndarray[Any,Any]]],None]]]
+builtins.str"builtins.strä
+‘TypeAlias[Union[TypeAlias[Union[builtins.str,builtins.bytes,datetime.date,datetime.datetime,datetime.timedelta,builtins.bool,builtins.complex,pandas._libs.tslibs.timestamps.Timestamp,pandas._libs.tslibs.timedeltas.Timedelta]],TypeAlias[Union[pandas.core.series.Series[Any],pandas.core.indexes.base.Index[Any],numpy.ndarray[Any,Any]]],None]]ã
+…Union[TypeAlias[Union[builtins.str,builtins.bytes,datetime.date,datetime.datetime,datetime.timedelta,builtins.bool,builtins.complex,pandas._libs.tslibs.timestamps.Timestamp,pandas._libs.tslibs.timedeltas.Timedelta]],TypeAlias[Union[pandas.core.series.Series[Any],pandas.core.indexes.base.Index[Any],numpy.ndarray[Any,Any]]],None]È
+—TypeAlias[Union[builtins.str,builtins.bytes,datetime.date,datetime.datetime,datetime.timedelta,builtins.bool,builtins.complex,pandas._libs.tslibs.timestamps.Timestamp,pandas._libs.tslibs.timedeltas.Timedelta]]Ô
+∆Union[builtins.str,builtins.bytes,datetime.date,datetime.datetime,datetime.timedelta,builtins.bool,builtins.complex,pandas._libs.tslibs.timestamps.Timestamp,pandas._libs.tslibs.timedeltas.Timedelta]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytes
+datetime.date"datetime.date&
+datetime.datetime"datetime.datetime(
+datetime.timedelta"datetime.timedelta
+builtins.bool"builtins.bool$
+builtins.complex"builtins.complexT
+(pandas._libs.tslibs.timestamps.Timestamp"(pandas._libs.tslibs.timestamps.TimestampT
+(pandas._libs.tslibs.timedeltas.Timedelta"(pandas._libs.tslibs.timedeltas.Timedelta"seaborn._core.typing.ColumnNameƒ
+kTypeAlias[Union[pandas.core.series.Series[Any],pandas.core.indexes.base.Index[Any],numpy.ndarray[Any,Any]]]µ
+`Union[pandas.core.series.Series[Any],pandas.core.indexes.base.Index[Any],numpy.ndarray[Any,Any]]D
+pandas.core.series.Series[Any]
+Any"pandas.core.series.SeriesN
+#pandas.core.indexes.base.Index[Any]
+Any"pandas.core.indexes.base.Index9
+numpy.ndarray[Any,Any]
+Any
+Any"numpy.ndarray"seaborn._core.typing.Vector
+None"!seaborn._core.typing.VariableSpec"builtins.dictz36z37z38z39z310z311z312z313*⁄
+__contains__(seaborn._core.data.PlotData.__contains__"
+builtins.bool"builtins.bool*<:
+seaborn._core.data.PlotData"seaborn._core.data.PlotData*
+builtins.str"builtins.strz36z37z38z39z310z311z312z313*Õ
+join seaborn._core.data.PlotData.join":
+seaborn._core.data.PlotData"seaborn._core.data.PlotData*D
+self:
+seaborn._core.data.PlotData"seaborn._core.data.PlotData*Æ
+data£
+|TypeAlias[Union[pandas.core.frame.DataFrame,seaborn._core.typing.SupportsDataFrame,typing.Mapping[Any,TypeAlias[Any]],None]]ˇ
+qUnion[pandas.core.frame.DataFrame,seaborn._core.typing.SupportsDataFrame,typing.Mapping[Any,TypeAlias[Any]],None]:
+pandas.core.frame.DataFrame"pandas.core.frame.DataFrameP
+&seaborn._core.typing.SupportsDataFrame"&seaborn._core.typing.SupportsDataFramep
+"typing.Mapping[Any,TypeAlias[Any]]
+Any1
+TypeAlias[Any]
+Any"_typeshed.Incomplete"typing.Mapping
+None"seaborn._core.typing.DataSource*À
+	variablesª
+¸Union[builtins.dict[builtins.str,TypeAlias[Union[TypeAlias[Union[builtins.str,builtins.bytes,datetime.date,datetime.datetime,datetime.timedelta,builtins.bool,builtins.complex,pandas._libs.tslibs.timestamps.Timestamp,pandas._libs.tslibs.timedeltas.Timedelta]],TypeAlias[Union[pandas.core.series.Series[Any],pandas.core.indexes.base.Index[Any],numpy.ndarray[Any,Any]]],None]]],None]≠
+builtins.dict[builtins.str,TypeAlias[Union[TypeAlias[Union[builtins.str,builtins.bytes,datetime.date,datetime.datetime,datetime.timedelta,builtins.bool,builtins.complex,pandas._libs.tslibs.timestamps.Timestamp,pandas._libs.tslibs.timedeltas.Timedelta]],TypeAlias[Union[pandas.core.series.Series[Any],pandas.core.indexes.base.Index[Any],numpy.ndarray[Any,Any]]],None]]]
+builtins.str"builtins.strä
+‘TypeAlias[Union[TypeAlias[Union[builtins.str,builtins.bytes,datetime.date,datetime.datetime,datetime.timedelta,builtins.bool,builtins.complex,pandas._libs.tslibs.timestamps.Timestamp,pandas._libs.tslibs.timedeltas.Timedelta]],TypeAlias[Union[pandas.core.series.Series[Any],pandas.core.indexes.base.Index[Any],numpy.ndarray[Any,Any]]],None]]ã
+…Union[TypeAlias[Union[builtins.str,builtins.bytes,datetime.date,datetime.datetime,datetime.timedelta,builtins.bool,builtins.complex,pandas._libs.tslibs.timestamps.Timestamp,pandas._libs.tslibs.timedeltas.Timedelta]],TypeAlias[Union[pandas.core.series.Series[Any],pandas.core.indexes.base.Index[Any],numpy.ndarray[Any,Any]]],None]È
+—TypeAlias[Union[builtins.str,builtins.bytes,datetime.date,datetime.datetime,datetime.timedelta,builtins.bool,builtins.complex,pandas._libs.tslibs.timestamps.Timestamp,pandas._libs.tslibs.timedeltas.Timedelta]]Ô
+∆Union[builtins.str,builtins.bytes,datetime.date,datetime.datetime,datetime.timedelta,builtins.bool,builtins.complex,pandas._libs.tslibs.timestamps.Timestamp,pandas._libs.tslibs.timedeltas.Timedelta]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytes
+datetime.date"datetime.date&
+datetime.datetime"datetime.datetime(
+datetime.timedelta"datetime.timedelta
+builtins.bool"builtins.bool$
+builtins.complex"builtins.complexT
+(pandas._libs.tslibs.timestamps.Timestamp"(pandas._libs.tslibs.timestamps.TimestampT
+(pandas._libs.tslibs.timedeltas.Timedelta"(pandas._libs.tslibs.timedeltas.Timedelta"seaborn._core.typing.ColumnNameƒ
+kTypeAlias[Union[pandas.core.series.Series[Any],pandas.core.indexes.base.Index[Any],numpy.ndarray[Any,Any]]]µ
+`Union[pandas.core.series.Series[Any],pandas.core.indexes.base.Index[Any],numpy.ndarray[Any,Any]]D
+pandas.core.series.Series[Any]
+Any"pandas.core.series.SeriesN
+#pandas.core.indexes.base.Index[Any]
+Any"pandas.core.indexes.base.Index9
+numpy.ndarray[Any,Any]
+Any
+Any"numpy.ndarray"seaborn._core.typing.Vector
+None"!seaborn._core.typing.VariableSpec"builtins.dict
+Nonez36z37z38z39z310z311z312z313j36j37j38j39j310j311j312j313rä
+frame!seaborn._core.data.PlotData.frame:
+pandas.core.frame.DataFrame"pandas.core.frame.DataFrame*36*37*38*39*310*311*312*313rÕ
+frames"seaborn._core.data.PlotData.frames˙
+Kbuiltins.dict[Tuple[builtins.str,builtins.str],pandas.core.frame.DataFrame]`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str:
+pandas.core.frame.DataFrame"pandas.core.frame.DataFrame"builtins.dict*36*37*38*39*310*311*312*313r˙
+names!seaborn._core.data.PlotData.names©
+4builtins.dict[builtins.str,Union[builtins.str,None]]
+builtins.str"builtins.strD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None"builtins.dict*36*37*38*39*310*311*312*313rö
+idsseaborn._core.data.PlotData.idsÕ
+<builtins.dict[builtins.str,Union[builtins.str,builtins.int]]
+builtins.str"builtins.str`
+ Union[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int"builtins.dict*36*37*38*39*310*311*312*313rÄ
+source_data'seaborn._core.data.PlotData.source_data£
+|TypeAlias[Union[pandas.core.frame.DataFrame,seaborn._core.typing.SupportsDataFrame,typing.Mapping[Any,TypeAlias[Any]],None]]ˇ
+qUnion[pandas.core.frame.DataFrame,seaborn._core.typing.SupportsDataFrame,typing.Mapping[Any,TypeAlias[Any]],None]:
+pandas.core.frame.DataFrame"pandas.core.frame.DataFrameP
+&seaborn._core.typing.SupportsDataFrame"&seaborn._core.typing.SupportsDataFramep
+"typing.Mapping[Any,TypeAlias[Any]]
+Any1
+TypeAlias[Any]
+Any"_typeshed.Incomplete"typing.Mapping
+None"seaborn._core.typing.DataSource*36*37*38*39*310*311*312*313rä
+source_vars'seaborn._core.data.PlotData.source_vars≠
+builtins.dict[builtins.str,TypeAlias[Union[TypeAlias[Union[builtins.str,builtins.bytes,datetime.date,datetime.datetime,datetime.timedelta,builtins.bool,builtins.complex,pandas._libs.tslibs.timestamps.Timestamp,pandas._libs.tslibs.timedeltas.Timedelta]],TypeAlias[Union[pandas.core.series.Series[Any],pandas.core.indexes.base.Index[Any],numpy.ndarray[Any,Any]]],None]]]
+builtins.str"builtins.strä
+‘TypeAlias[Union[TypeAlias[Union[builtins.str,builtins.bytes,datetime.date,datetime.datetime,datetime.timedelta,builtins.bool,builtins.complex,pandas._libs.tslibs.timestamps.Timestamp,pandas._libs.tslibs.timedeltas.Timedelta]],TypeAlias[Union[pandas.core.series.Series[Any],pandas.core.indexes.base.Index[Any],numpy.ndarray[Any,Any]]],None]]ã
+…Union[TypeAlias[Union[builtins.str,builtins.bytes,datetime.date,datetime.datetime,datetime.timedelta,builtins.bool,builtins.complex,pandas._libs.tslibs.timestamps.Timestamp,pandas._libs.tslibs.timedeltas.Timedelta]],TypeAlias[Union[pandas.core.series.Series[Any],pandas.core.indexes.base.Index[Any],numpy.ndarray[Any,Any]]],None]È
+—TypeAlias[Union[builtins.str,builtins.bytes,datetime.date,datetime.datetime,datetime.timedelta,builtins.bool,builtins.complex,pandas._libs.tslibs.timestamps.Timestamp,pandas._libs.tslibs.timedeltas.Timedelta]]Ô
+∆Union[builtins.str,builtins.bytes,datetime.date,datetime.datetime,datetime.timedelta,builtins.bool,builtins.complex,pandas._libs.tslibs.timestamps.Timestamp,pandas._libs.tslibs.timedeltas.Timedelta]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytes
+datetime.date"datetime.date&
+datetime.datetime"datetime.datetime(
+datetime.timedelta"datetime.timedelta
+builtins.bool"builtins.bool$
+builtins.complex"builtins.complexT
+(pandas._libs.tslibs.timestamps.Timestamp"(pandas._libs.tslibs.timestamps.TimestampT
+(pandas._libs.tslibs.timedeltas.Timedelta"(pandas._libs.tslibs.timedeltas.Timedelta"seaborn._core.typing.ColumnNameƒ
+kTypeAlias[Union[pandas.core.series.Series[Any],pandas.core.indexes.base.Index[Any],numpy.ndarray[Any,Any]]]µ
+`Union[pandas.core.series.Series[Any],pandas.core.indexes.base.Index[Any],numpy.ndarray[Any,Any]]D
+pandas.core.series.Series[Any]
+Any"pandas.core.series.SeriesN
+#pandas.core.indexes.base.Index[Any]
+Any"pandas.core.indexes.base.Index9
+numpy.ndarray[Any,Any]
+Any
+Any"numpy.ndarray"seaborn._core.typing.Vector
+None"!seaborn._core.typing.VariableSpec"builtins.dict*36*37*38*39*310*311*312*313€
+convert_dataframe_to_pandas.seaborn._core.data.convert_dataframe_to_pandas":
+pandas.core.frame.DataFrame"pandas.core.frame.DataFrame*,
+data"
+builtins.object"builtins.objectz36z37z38z39z310z311z312z313"’
+handle_data_source%seaborn._core.data.handle_data_sourceÛ
+handle_data_source%seaborn._core.data.handle_data_source"N
+seaborn._core.data._T"
+builtins.object"builtins.object"builtins.object*X
+dataN
+seaborn._core.data._T"
+builtins.object"builtins.object"builtins.object0:overloadX˝
+handle_data_source%seaborn._core.data.handle_data_source":
+pandas.core.frame.DataFrame"pandas.core.frame.DataFrame*v
+datal
+4pandas.core.interchange.dataframe_protocol.DataFrame"4pandas.core.interchange.dataframe_protocol.DataFrame0:overloadX"36"37"38"39"310"311"312"313*≤
+__annotations__"seaborn._core.data.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*36*37*38*39*310*311*312*313

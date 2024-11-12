@@ -1,27 +1,76 @@
 
-simplejson.encoder§
-JSONEncodersimplejson.encoder.JSONEncoder"builtins.object*À
+simplejson.encoderŒ%
+JSONEncodersimplejson.encoder.JSONEncoder"builtins.object*ú
 __init__'simplejson.encoder.JSONEncoder.__init__"
 None*J
 self@
-simplejson.encoder.JSONEncoder"simplejson.encoder.JSONEncoder*
-args
-Any*
-kwargs
-Anyz36z37z38z39z310z311*√
+simplejson.encoder.JSONEncoder"simplejson.encoder.JSONEncoder*.
+skipkeys
+builtins.bool"builtins.bool *2
+ensure_ascii
+builtins.bool"builtins.bool *4
+check_circular
+builtins.bool"builtins.bool */
+	allow_nan
+builtins.bool"builtins.bool */
+	sort_keys
+builtins.bool"builtins.bool *}
+indento
+%Union[builtins.str,builtins.int,None]
+builtins.str"builtins.str
+builtins.int"builtins.int
+None *Ø
+
+separatorsú
+,Union[Tuple[builtins.str,builtins.str],None]`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str
+None *,
+encoding
+builtins.str"builtins.str *ñ
+defaultÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *1
+use_decimal
+builtins.bool"builtins.bool *:
+namedtuple_as_object
+builtins.bool"builtins.bool *4
+tuple_as_array
+builtins.bool"builtins.bool *6
+bigint_as_string
+builtins.bool"builtins.bool *ú
+item_sort_keyÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *.
+for_json
+builtins.bool"builtins.bool *0
+
+ignore_nan
+builtins.bool"builtins.bool *b
+int_as_string_bitcountD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *7
+iterable_as_array
+builtins.bool"builtins.bool z36z37z38z39z310z311z312z313*Õ
 encode%simplejson.encoder.JSONEncoder.encode"
 builtins.str"builtins.str*J
 self@
 simplejson.encoder.JSONEncoder"simplejson.encoder.JSONEncoder*
 o
-Anyz36z37z38z39z310z311*µ
+Anyz36z37z38z39z310z311z312z313*ø
 default&simplejson.encoder.JSONEncoder.default"
 NoReturn
 *J
 self@
 simplejson.encoder.JSONEncoder"simplejson.encoder.JSONEncoder*
 o
-Anyz36z37z38z39z310z311*˝
+Anyz36z37z38z39z310z311z312z313*á
 
 iterencode)simplejson.encoder.JSONEncoder.iterencode"N
 typing.Iterator[builtins.str]
@@ -29,9 +78,112 @@ iterencode)simplejson.encoder.JSONEncoder.iterencode"N
 self@
 simplejson.encoder.JSONEncoder"simplejson.encoder.JSONEncoder*
 o
-Anyz36z37z38z39z310z311j36j37j38j39j310j311u
-JSONEncoderForHTML%simplejson.encoder.JSONEncoderForHTML"simplejson.encoder.JSONEncoderj36j37j38j39j310j311*®
+Anyz36z37z38z39z310z311z312z313j36j37j38j39j310j311j312j313rÅ
+item_separator-simplejson.encoder.JSONEncoder.item_separator
+builtins.str"builtins.str*36*37*38*39*310*311*312*313r
+key_separator,simplejson.encoder.JSONEncoder.key_separator
+builtins.str"builtins.str*36*37*38*39*310*311*312*313rw
+skipkeys'simplejson.encoder.JSONEncoder.skipkeys
+builtins.bool"builtins.bool*36*37*38*39*310*311*312*313r
+ensure_ascii+simplejson.encoder.JSONEncoder.ensure_ascii
+builtins.bool"builtins.bool*36*37*38*39*310*311*312*313rÉ
+check_circular-simplejson.encoder.JSONEncoder.check_circular
+builtins.bool"builtins.bool*36*37*38*39*310*311*312*313ry
+	allow_nan(simplejson.encoder.JSONEncoder.allow_nan
+builtins.bool"builtins.bool*36*37*38*39*310*311*312*313ry
+	sort_keys(simplejson.encoder.JSONEncoder.sort_keys
+builtins.bool"builtins.bool*36*37*38*39*310*311*312*313rq
+indent%simplejson.encoder.JSONEncoder.indent
+builtins.str"builtins.str*36*37*38*39*310*311*312*313ru
+encoding'simplejson.encoder.JSONEncoder.encoding
+builtins.str"builtins.str*36*37*38*39*310*311*312*313r}
+use_decimal*simplejson.encoder.JSONEncoder.use_decimal
+builtins.bool"builtins.bool*36*37*38*39*310*311*312*313rè
+namedtuple_as_object3simplejson.encoder.JSONEncoder.namedtuple_as_object
+builtins.bool"builtins.bool*36*37*38*39*310*311*312*313rÉ
+tuple_as_array-simplejson.encoder.JSONEncoder.tuple_as_array
+builtins.bool"builtins.bool*36*37*38*39*310*311*312*313rá
+bigint_as_string/simplejson.encoder.JSONEncoder.bigint_as_string
+builtins.bool"builtins.bool*36*37*38*39*310*311*312*313rÍ
+item_sort_key,simplejson.encoder.JSONEncoder.item_sort_keyÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None*36*37*38*39*310*311*312*313rw
+for_json'simplejson.encoder.JSONEncoder.for_json
+builtins.bool"builtins.bool*36*37*38*39*310*311*312*313r{
+
+ignore_nan)simplejson.encoder.JSONEncoder.ignore_nan
+builtins.bool"builtins.bool*36*37*38*39*310*311*312*313rπ
+int_as_string_bitcount5simplejson.encoder.JSONEncoder.int_as_string_bitcountD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None*36*37*38*39*310*311*312*313râ
+iterable_as_array0simplejson.encoder.JSONEncoder.iterable_as_array
+builtins.bool"builtins.bool*36*37*38*39*310*311*312*313
+JSONEncoderForHTML%simplejson.encoder.JSONEncoderForHTML"simplejson.encoder.JSONEncoderj36j37j38j39j310j311j312j313ã
+encode_basestring$simplejson.encoder.encode_basestring"
+builtins.str"builtins.str*m
+sf
+"Union[builtins.str,builtins.bytes]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytes*
+_PY3
+Any *&
+_q
+builtins.str"builtins.str z36z37“
+encode_basestring$simplejson.encoder.encode_basestring"
+builtins.str"builtins.str*m
+sf
+"Union[builtins.str,builtins.bytes]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytes*F
+_PY3:
+Literal[builtins.bool]	
+builtins.bool"builtins.bool *&
+_q
+builtins.str"builtins.str z38z39z310z311z312z313Ô
+encode_basestring_ascii*simplejson.encoder.encode_basestring_ascii"
+builtins.str"builtins.str*m
+sf
+"Union[builtins.str,builtins.bytes]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytes*
+_PY3
+Any z36z37∂
+encode_basestring_ascii*simplejson.encoder.encode_basestring_ascii"
+builtins.str"builtins.str*m
+sf
+"Union[builtins.str,builtins.bytes]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytes*F
+_PY3:
+Literal[builtins.bool]	
+builtins.bool"builtins.bool z38z39z310z311z312z313*≤
 __annotations__"simplejson.encoder.__annotations__W
 builtins.dict[builtins.str,Any]
 builtins.str"builtins.str
-Any"builtins.dict*36*37*38*39*310*311
+Any"builtins.dict*36*37*38*39*310*311*312*313*6
+Literalsimplejson.encoder.Literal
+Any*36*37*ç
+ESCAPEsimplejson.encoder.ESCAPED
+re.Pattern[builtins.str]
+builtins.str"builtins.str"
+re.Pattern*36*37*38*39*310*311*312*313*ô
+ESCAPE_ASCIIsimplejson.encoder.ESCAPE_ASCIID
+re.Pattern[builtins.str]
+builtins.str"builtins.str"
+re.Pattern*36*37*38*39*310*311*312*313*ë
+HAS_UTF8simplejson.encoder.HAS_UTF8D
+re.Pattern[builtins.str]
+builtins.str"builtins.str"
+re.Pattern*36*37*38*39*310*311*312*313*∆
+
+ESCAPE_DCTsimplejson.encoder.ESCAPE_DCTu
+(builtins.dict[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.dict*36*37*38*39*310*311*312*313*ú
+
+FLOAT_REPRsimplejson.encoder.FLOAT_REPRK
+CallableType[builtins.function]&
+builtins.function"builtins.function*36*37*38*39*310*311*312*313

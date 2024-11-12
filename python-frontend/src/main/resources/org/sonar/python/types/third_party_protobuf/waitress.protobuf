@@ -1,60 +1,317 @@
 
-waitress⁄
-create_serverwaitress.server.create_server"’
-GUnion[waitress.server.MultiSocketServer,waitress.server.BaseWSGIServer]F
-!waitress.server.MultiSocketServer"!waitress.server.MultiSocketServer@
-waitress.server.BaseWSGIServer"waitress.server.BaseWSGIServer*
-application
-Any*f
-map[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
+waitressØH
+BaseWSGIServerwaitress.server.BaseWSGIServer"waitress.wasyncore.dispatcher*Ë
+__init__'waitress.server.BaseWSGIServer.__init__"
+None*J
+self@
+waitress.server.BaseWSGIServer"waitress.server.BaseWSGIServer*≠
+applicationõ
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"_typeshed.wsgi.WSGIApplication*≤
+map¶
+AUnion[TypeAlias[typing.Mapping[builtins.int,socket.socket]],None]‘
+5TypeAlias[typing.Mapping[builtins.int,socket.socket]]z
+*typing.Mapping[builtins.int,socket.socket]
+builtins.int"builtins.int
+socket.socket"socket.socket"typing.Mapping"waitress.wasyncore._SocketMap
 None *,
 _start
 builtins.bool"builtins.bool *T
 _sockG
 Union[socket.socket,None]
 socket.socket"socket.socket
-None *†
-_dispatcherå
+None *ü
+
+dispatcherå
 0Union[waitress.task.ThreadedTaskDispatcher,None]L
 $waitress.task.ThreadedTaskDispatcher"$waitress.task.ThreadedTaskDispatcher
-None *
-kw
-Anyz36z37z38z39z310z311^
-servewaitress.serve"
-None*
-app
-Any*
-kw
-Anyz36z37z38z39z310z311ò
-serve_pastewaitress.serve_paste"
-builtins.int"builtins.int*
-app
-Any*
-global_conf
-Any*
-kw
-Anyz36z37z38z39z310z311á
-profilewaitress.profile"
-None*
-cmd
-Any*
-globals
-Any*
-locals
-Any*\
+None *å
+adjÄ
+,Union[waitress.adjustments.Adjustments,None]D
+ waitress.adjustments.Adjustments" waitress.adjustments.Adjustments
+None *ˆ
+sockinfoÂ
+TUnion[Tuple[builtins.int,builtins.int,Union[builtins.int,None],TypeAlias[Any]],None]Ä
+HTuple[builtins.int,builtins.int,Union[builtins.int,None],TypeAlias[Any]]
+builtins.int"builtins.int
+builtins.int"builtins.intD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None0
+TypeAlias[Any]
+Any"_socket._RetAddress
+None *1
+bind_socket
+builtins.bool"builtins.bool *Å
+kwy
+TypeAlias[TypeAlias[Any]]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete"'waitress.adjustments._AdjustmentsParamsz36z37z38z39z310*·
+__init__'waitress.server.BaseWSGIServer.__init__"
+None*J
+self@
+waitress.server.BaseWSGIServer"waitress.server.BaseWSGIServer*¨
+applicationö
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"wsgiref.types.WSGIApplication*≤
+map¶
+AUnion[TypeAlias[typing.Mapping[builtins.int,socket.socket]],None]‘
+5TypeAlias[typing.Mapping[builtins.int,socket.socket]]z
+*typing.Mapping[builtins.int,socket.socket]
+builtins.int"builtins.int
+socket.socket"socket.socket"typing.Mapping"waitress.wasyncore._SocketMap
+None *,
+_start
+builtins.bool"builtins.bool *T
+_sockG
+Union[socket.socket,None]
+socket.socket"socket.socket
+None *ü
 
-sort_orderL
-builtins.tuple[builtins.str]
-builtins.str"builtins.str"builtins.tuple*+
+dispatcherå
+0Union[waitress.task.ThreadedTaskDispatcher,None]L
+$waitress.task.ThreadedTaskDispatcher"$waitress.task.ThreadedTaskDispatcher
+None *å
+adjÄ
+,Union[waitress.adjustments.Adjustments,None]D
+ waitress.adjustments.Adjustments" waitress.adjustments.Adjustments
+None *ˆ
+sockinfoÂ
+TUnion[Tuple[builtins.int,builtins.int,Union[builtins.int,None],TypeAlias[Any]],None]Ä
+HTuple[builtins.int,builtins.int,Union[builtins.int,None],TypeAlias[Any]]
+builtins.int"builtins.int
+builtins.int"builtins.intD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None0
+TypeAlias[Any]
+Any"_socket._RetAddress
+None *1
+bind_socket
+builtins.bool"builtins.bool *Å
+kwy
+TypeAlias[TypeAlias[Any]]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete"'waitress.adjustments._AdjustmentsParamsz311z312z313*¡
+bind_server_socket1waitress.server.BaseWSGIServer.bind_server_socket"
+None*J
+self@
+waitress.server.BaseWSGIServer"waitress.server.BaseWSGIServerz36z37z38z39z310z311z312z313*ã
+getsockname*waitress.server.BaseWSGIServer.getsockname"`
+ Tuple[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str*J
+self@
+waitress.server.BaseWSGIServer"waitress.server.BaseWSGIServerz36z37z38z39z310z311z312z313*¡
+accept_connections1waitress.server.BaseWSGIServer.accept_connections"
+None*J
+self@
+waitress.server.BaseWSGIServer"waitress.server.BaseWSGIServerz36z37z38z39z310z311z312z313*·
+add_task'waitress.server.BaseWSGIServer.add_task"
+None*J
+self@
+waitress.server.BaseWSGIServer"waitress.server.BaseWSGIServer*2
+task(
+waitress.task.Task"waitress.task.Taskz36z37z38z39z310z311z312z313*√
+readable'waitress.server.BaseWSGIServer.readable"
+builtins.bool"builtins.bool*J
+self@
+waitress.server.BaseWSGIServer"waitress.server.BaseWSGIServerz36z37z38z39z310z311z312z313*√
+writable'waitress.server.BaseWSGIServer.writable"
+builtins.bool"builtins.bool*J
+self@
+waitress.server.BaseWSGIServer"waitress.server.BaseWSGIServerz36z37z38z39z310z311z312z313*≥
+handle_read*waitress.server.BaseWSGIServer.handle_read"
+None*J
+self@
+waitress.server.BaseWSGIServer"waitress.server.BaseWSGIServerz36z37z38z39z310z311z312z313*π
+handle_connect-waitress.server.BaseWSGIServer.handle_connect"
+None*J
+self@
+waitress.server.BaseWSGIServer"waitress.server.BaseWSGIServerz36z37z38z39z310z311z312z313*∑
+handle_accept,waitress.server.BaseWSGIServer.handle_accept"
+None*J
+self@
+waitress.server.BaseWSGIServer"waitress.server.BaseWSGIServerz36z37z38z39z310z311z312z313*£
+run"waitress.server.BaseWSGIServer.run"
+None*J
+self@
+waitress.server.BaseWSGIServer"waitress.server.BaseWSGIServerz36z37z38z39z310z311z312z313*µ
+pull_trigger+waitress.server.BaseWSGIServer.pull_trigger"
+None*J
+self@
+waitress.server.BaseWSGIServer"waitress.server.BaseWSGIServerz36z37z38z39z310z311z312z313*Î
+set_socket_options1waitress.server.BaseWSGIServer.set_socket_options"
+None*J
+self@
+waitress.server.BaseWSGIServer"waitress.server.BaseWSGIServer*(
+conn
+socket.socket"socket.socketz36z37z38z39z310z311z312z313*ë
+fix_addr'waitress.server.BaseWSGIServer.fix_addr"0
+TypeAlias[Any]
+Any"_socket._RetAddress*J
+self@
+waitress.server.BaseWSGIServer"waitress.server.BaseWSGIServer*:
+addr0
+TypeAlias[Any]
+Any"_socket._RetAddressz36z37z38z39z310z311z312z313*⁄
+maintenance*waitress.server.BaseWSGIServer.maintenance"
+None*J
+self@
+waitress.server.BaseWSGIServer"waitress.server.BaseWSGIServer*%
+now
+builtins.int"builtins.intz36z37z38z39z310z311z312z313*„
+print_listen+waitress.server.BaseWSGIServer.print_listen"
+None*J
+self@
+waitress.server.BaseWSGIServer"waitress.server.BaseWSGIServer*,
+
+format_str
+builtins.str"builtins.strz36z37z38z39z310z311z312z313*ß
+close$waitress.server.BaseWSGIServer.close"
+None*J
+self@
+waitress.server.BaseWSGIServer"waitress.server.BaseWSGIServerz36z37z38z39z310z311z312z313j36j37j38j39j310j311j312j313rÕ
+channel_class,waitress.server.BaseWSGIServer.channel_classj
+"Type[waitress.channel.HTTPChannel]<
+waitress.channel.HTTPChannel"waitress.channel.HTTPChannel"type*36*37*38*39*310*311*312*313rç
+next_channel_cleanup3waitress.server.BaseWSGIServer.next_channel_cleanup
+builtins.int"builtins.int*36*37*38*39*310*311*312*313ry
+	socketmod(waitress.server.BaseWSGIServer.socketmod
+socket.socket"socket.socket*36*37*38*39*310*311*312*313rì
+in_connection_overflow5waitress.server.BaseWSGIServer.in_connection_overflow
+builtins.bool"builtins.bool*36*37*38*39*310*311*312*313r⁄
+sockinfo'waitress.server.BaseWSGIServer.sockinfoÄ
+HTuple[builtins.int,builtins.int,Union[builtins.int,None],TypeAlias[Any]]
+builtins.int"builtins.int
+builtins.int"builtins.intD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None0
+TypeAlias[Any]
+Any"_socket._RetAddress*36*37*38*39*310*311*312*313rq
+family%waitress.server.BaseWSGIServer.family
+builtins.int"builtins.int*36*37*38*39*310*311*312*313ru
+socktype'waitress.server.BaseWSGIServer.socktype
+builtins.int"builtins.int*36*37*38*39*310*311*312*313rÏ
+application*waitress.server.BaseWSGIServer.applicationõ
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"_typeshed.wsgi.WSGIApplication*36*37*38*39*310rÂ
+application*waitress.server.BaseWSGIServer.applicationö
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"wsgiref.types.WSGIApplication*311*312*313rì
+adj"waitress.server.BaseWSGIServer.adjD
+ waitress.adjustments.Adjustments" waitress.adjustments.Adjustments*36*37*38*39*310*311*312*313rs
+trigger&waitress.server.BaseWSGIServer.trigger
+builtins.int"builtins.int*36*37*38*39*310*311*312*313r≥
+task_dispatcher.waitress.server.BaseWSGIServer.task_dispatcherL
+$waitress.task.ThreadedTaskDispatcher"$waitress.task.ThreadedTaskDispatcher*36*37*38*39*310*311*312*313r{
+server_name*waitress.server.BaseWSGIServer.server_name
+builtins.str"builtins.str*36*37*38*39*310*311*312*313r£
+active_channels.waitress.server.BaseWSGIServer.active_channels<
+waitress.channel.HTTPChannel"waitress.channel.HTTPChannel*36*37*38*39*310*311*312*313ry
+	accepting(waitress.server.BaseWSGIServer.accepting
+builtins.bool"builtins.bool*36*37*38*39*310*311*312*313ú
+servewaitress.serve"
+None*•
+appõ
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"_typeshed.wsgi.WSGIApplication*Z
+_serverK
+CallableType[builtins.function]&
+builtins.function"builtins.function *,
+_quiet
+builtins.bool"builtins.bool *.
+_profile
+builtins.bool"builtins.bool *Å
+kwy
+TypeAlias[TypeAlias[Any]]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete"'waitress.adjustments._AdjustmentsParamsz36z37z38z39z310ï
+servewaitress.serve"
+None*§
+appö
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"wsgiref.types.WSGIApplication*Z
+_serverK
+CallableType[builtins.function]&
+builtins.function"builtins.function *,
+_quiet
+builtins.bool"builtins.bool *.
+_profile
+builtins.bool"builtins.bool *Å
+kwy
+TypeAlias[TypeAlias[Any]]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete"'waitress.adjustments._AdjustmentsParamsz311z312z313ï
+serve_pastewaitress.serve_paste"
+Any*•
+appõ
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"_typeshed.wsgi.WSGIApplication*3
+global_conf"
+builtins.object"builtins.object*Å
+kwy
+TypeAlias[TypeAlias[Any]]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete"'waitress.adjustments._AdjustmentsParamsz36z37 
+serve_pastewaitress.serve_paste"7
+Literal[builtins.int]	
+builtins.int"builtins.int*•
+appõ
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"_typeshed.wsgi.WSGIApplication*3
+global_conf"
+builtins.object"builtins.object*Å
+kwy
+TypeAlias[TypeAlias[Any]]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete"'waitress.adjustments._AdjustmentsParamsz38z39z310À
+serve_pastewaitress.serve_paste"7
+Literal[builtins.int]	
+builtins.int"builtins.int*§
+appö
+*TypeAlias[CallableType[builtins.function]]K
+CallableType[builtins.function]&
+builtins.function"builtins.function"wsgiref.types.WSGIApplication*3
+global_conf"
+builtins.object"builtins.object*Å
+kwy
+TypeAlias[TypeAlias[Any]]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete"'waitress.adjustments._AdjustmentsParamsz311z312z313 
+profilewaitress.profile"
+None*%
+cmd
+builtins.str"builtins.str*d
+globalsW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*e
+localsY
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping*^
+
+sort_orderN
+typing.Iterable[builtins.str]
+builtins.str"builtins.str"typing.Iterable*+
 callers
-builtins.bool"builtins.boolz36z37z38z39z310z311*É
+builtins.bool"builtins.boolz36z37z38z39z310z311z312z313*ç
 __path__waitress.__path__J
 builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list*36*37*38*39*310*311*û
+builtins.str"builtins.str"builtins.list*36*37*38*39*310*311*312*313*®
 __annotations__waitress.__annotations__W
 builtins.dict[builtins.str,Any]
 builtins.str"builtins.str
-Any"builtins.dict*36*37*38*39*310*311
+Any"builtins.dict*36*37*38*39*310*311*312*313*,
+Literalwaitress.Literal
+Any*36*37

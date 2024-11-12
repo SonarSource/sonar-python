@@ -1,88 +1,152 @@
 
-redis.typing‰
-AsyncConnectionPool'redis.asyncio.connection.ConnectionPool"builtins.object*è
-from_url0redis.asyncio.connection.ConnectionPool.from_url"R
-'redis.asyncio.connection.ConnectionPool"'redis.asyncio.connection.ConnectionPool*ï
-clsã
--Type[redis.asyncio.connection.ConnectionPool]R
-'redis.asyncio.connection.ConnectionPool"'redis.asyncio.connection.ConnectionPool"type*%
+redis.typingΩ?
+AsyncConnectionPool'redis.asyncio.connection.ConnectionPool"builtins.object*ê
+from_url0redis.asyncio.connection.ConnectionPool.from_url"ä
+,redis.asyncio.connection.ConnectionPool.SelfÆ
+Nredis.asyncio.connection.ConnectionPool[redis.asyncio.connection._ConnectionT]≤
+%redis.asyncio.connection._ConnectionTZ
++redis.asyncio.connection.AbstractConnection"+redis.asyncio.connection.AbstractConnection"+redis.asyncio.connection.AbstractConnection"'redis.asyncio.connection.ConnectionPool"'redis.asyncio.connection.ConnectionPool*”
+cls…
+2Type[redis.asyncio.connection.ConnectionPool.Self]ä
+,redis.asyncio.connection.ConnectionPool.SelfÆ
+Nredis.asyncio.connection.ConnectionPool[redis.asyncio.connection._ConnectionT]≤
+%redis.asyncio.connection._ConnectionTZ
++redis.asyncio.connection.AbstractConnection"+redis.asyncio.connection.AbstractConnection"+redis.asyncio.connection.AbstractConnection"'redis.asyncio.connection.ConnectionPool"'redis.asyncio.connection.ConnectionPool"type*%
 url
 builtins.str"builtins.str*
 kwargs
-Any0:classmethodpz36z37z38z39z310z311*’
+Any0:classmethodpz36z37z38z39z310z311z312z313*†
+reset-redis.asyncio.connection.ConnectionPool.reset"
+None*π
+selfÆ
+Nredis.asyncio.connection.ConnectionPool[redis.asyncio.connection._ConnectionT]≤
+%redis.asyncio.connection._ConnectionTZ
++redis.asyncio.connection.AbstractConnection"+redis.asyncio.connection.AbstractConnection"+redis.asyncio.connection.AbstractConnection"'redis.asyncio.connection.ConnectionPoolz36z37z38z39z310z311z312z313*‹
+get_connection6redis.asyncio.connection.ConnectionPool.get_connection"ö
+?typing.Coroutine[Any,Any,redis.asyncio.connection._ConnectionT]
+Any
+Any≤
+%redis.asyncio.connection._ConnectionTZ
++redis.asyncio.connection.AbstractConnection"+redis.asyncio.connection.AbstractConnection"+redis.asyncio.connection.AbstractConnection"typing.Coroutine*π
+selfÆ
+Nredis.asyncio.connection.ConnectionPool[redis.asyncio.connection._ConnectionT]≤
+%redis.asyncio.connection._ConnectionTZ
++redis.asyncio.connection.AbstractConnection"+redis.asyncio.connection.AbstractConnection"+redis.asyncio.connection.AbstractConnection"'redis.asyncio.connection.ConnectionPool*4
+command_name"
+builtins.object"builtins.object*,
+keys"
+builtins.object"builtins.object*/
+options"
+builtins.object"builtins.objectHz36z37z38z39z310z311z312z313*Ë
+get_encoder3redis.asyncio.connection.ConnectionPool.get_encoder"D
+ redis.asyncio.connection.Encoder" redis.asyncio.connection.Encoder*π
+selfÆ
+Nredis.asyncio.connection.ConnectionPool[redis.asyncio.connection._ConnectionT]≤
+%redis.asyncio.connection._ConnectionTZ
++redis.asyncio.connection.AbstractConnection"+redis.asyncio.connection.AbstractConnection"+redis.asyncio.connection.AbstractConnection"'redis.asyncio.connection.ConnectionPoolz36z37z38z39z310z311z312z313*ﬂ
+make_connection7redis.asyncio.connection.ConnectionPool.make_connection"≤
+%redis.asyncio.connection._ConnectionTZ
++redis.asyncio.connection.AbstractConnection"+redis.asyncio.connection.AbstractConnection"+redis.asyncio.connection.AbstractConnection*π
+selfÆ
+Nredis.asyncio.connection.ConnectionPool[redis.asyncio.connection._ConnectionT]≤
+%redis.asyncio.connection._ConnectionTZ
++redis.asyncio.connection.AbstractConnection"+redis.asyncio.connection.AbstractConnection"+redis.asyncio.connection.AbstractConnection"'redis.asyncio.connection.ConnectionPoolz36z37z38z39z310z311z312z313*ÿ
+release/redis.asyncio.connection.ConnectionPool.release"N
+typing.Coroutine[Any,Any,None]
+Any
+Any
+None"typing.Coroutine*π
+selfÆ
+Nredis.asyncio.connection.ConnectionPool[redis.asyncio.connection._ConnectionT]≤
+%redis.asyncio.connection._ConnectionTZ
++redis.asyncio.connection.AbstractConnection"+redis.asyncio.connection.AbstractConnection"+redis.asyncio.connection.AbstractConnection"'redis.asyncio.connection.ConnectionPool*j
+
+connectionZ
++redis.asyncio.connection.AbstractConnection"+redis.asyncio.connection.AbstractConnectionHz36z37z38z39z310z311z312z313*∂
+owns_connection7redis.asyncio.connection.ConnectionPool.owns_connection"
+builtins.bool"builtins.bool*π
+selfÆ
+Nredis.asyncio.connection.ConnectionPool[redis.asyncio.connection._ConnectionT]≤
+%redis.asyncio.connection._ConnectionTZ
++redis.asyncio.connection.AbstractConnection"+redis.asyncio.connection.AbstractConnection"+redis.asyncio.connection.AbstractConnection"'redis.asyncio.connection.ConnectionPool*j
+
+connectionZ
++redis.asyncio.connection.AbstractConnection"+redis.asyncio.connection.AbstractConnectionz36z37z38z39z310z311z312z313*´
+
+disconnect2redis.asyncio.connection.ConnectionPool.disconnect"N
+typing.Coroutine[Any,Any,None]
+Any
+Any
+None"typing.Coroutine*π
+selfÆ
+Nredis.asyncio.connection.ConnectionPool[redis.asyncio.connection._ConnectionT]≤
+%redis.asyncio.connection._ConnectionTZ
++redis.asyncio.connection.AbstractConnection"+redis.asyncio.connection.AbstractConnection"+redis.asyncio.connection.AbstractConnection"'redis.asyncio.connection.ConnectionPool*7
+inuse_connections
+builtins.bool"builtins.bool Hz36z37z38z39z310z311z312z313*Î
+	set_retry1redis.asyncio.connection.ConnectionPool.set_retry"
+None*π
+selfÆ
+Nredis.asyncio.connection.ConnectionPool[redis.asyncio.connection._ConnectionT]≤
+%redis.asyncio.connection._ConnectionTZ
++redis.asyncio.connection.AbstractConnection"+redis.asyncio.connection.AbstractConnection"+redis.asyncio.connection.AbstractConnection"'redis.asyncio.connection.ConnectionPool*A
+retry6
+redis.asyncio.retry.Retry"redis.asyncio.retry.Retryz36z37z38z39z310z311z312z3132ô
+
+__init__0redis.asyncio.connection.ConnectionPool.__init__ë
 __init__0redis.asyncio.connection.ConnectionPool.__init__"
-None*\
-selfR
-'redis.asyncio.connection.ConnectionPool"'redis.asyncio.connection.ConnectionPool*ó
-connection_class
-)Type[redis.asyncio.connection.Connection]J
-#redis.asyncio.connection.Connection"#redis.asyncio.connection.Connection"type *[
+None*π
+selfÆ
+Nredis.asyncio.connection.ConnectionPool[redis.asyncio.connection._ConnectionT]≤
+%redis.asyncio.connection._ConnectionTZ
++redis.asyncio.connection.AbstractConnection"+redis.asyncio.connection.AbstractConnection"+redis.asyncio.connection.AbstractConnection"'redis.asyncio.connection.ConnectionPool*Å
+connection_classÍ
++Type[redis.asyncio.connection._ConnectionT]≤
+%redis.asyncio.connection._ConnectionTZ
++redis.asyncio.connection.AbstractConnection"+redis.asyncio.connection.AbstractConnection"+redis.asyncio.connection.AbstractConnection"type*[
 max_connectionsD
 Union[builtins.int,None]
 builtins.int"builtins.int
 None *
 connection_kwargs
-Anyz36z37z38z39z310z311*∏
-reset-redis.asyncio.connection.ConnectionPool.reset"
-None*\
-selfR
-'redis.asyncio.connection.ConnectionPool"'redis.asyncio.connection.ConnectionPoolz36z37z38z39z310z311*ó
-get_connection6redis.asyncio.connection.ConnectionPool.get_connection*
-self*
-command_name*
-keys*
-optionsHz36z37z38z39z310z311*f
-get_encoder3redis.asyncio.connection.ConnectionPool.get_encoder*
-selfz36z37z38z39z310z311*n
-make_connection7redis.asyncio.connection.ConnectionPool.make_connection*
-selfz36z37z38z39z310z311*ﬁ
-release/redis.asyncio.connection.ConnectionPool.release"L
-typing.Coroutine[Any,Any,Any]
-Any
-Any
-Any"typing.Coroutine*\
-selfR
-'redis.asyncio.connection.ConnectionPool"'redis.asyncio.connection.ConnectionPool*Z
-
-connectionJ
-#redis.asyncio.connection.Connection"#redis.asyncio.connection.ConnectionHz36z37z38z39z310z311*ß
-owns_connection7redis.asyncio.connection.ConnectionPool.owns_connection"
-Any*\
-selfR
-'redis.asyncio.connection.ConnectionPool"'redis.asyncio.connection.ConnectionPool*Z
-
-connectionJ
-#redis.asyncio.connection.Connection"#redis.asyncio.connection.Connectionz36z37z38z39z310z311*¡
-
-disconnect2redis.asyncio.connection.ConnectionPool.disconnect"L
-typing.Coroutine[Any,Any,Any]
-Any
-Any
-Any"typing.Coroutine*\
-selfR
-'redis.asyncio.connection.ConnectionPool"'redis.asyncio.connection.ConnectionPool*7
-inuse_connections
-builtins.bool"builtins.bool Hz36z37z38z39z310z311j36j37j38j39j310j311ro
-connection_class8redis.asyncio.connection.ConnectionPool.connection_class
-Any*36*37*38*39*310*311rq
-connection_kwargs9redis.asyncio.connection.ConnectionPool.connection_kwargs
-Any*36*37*38*39*310*311rm
-max_connections7redis.asyncio.connection.ConnectionPool.max_connections
-Any*36*37*38*39*310*311ri
-encoder_class5redis.asyncio.connection.ConnectionPool.encoder_class
-Any*36*37*38*39*310*311rU
-pid+redis.asyncio.connection.ConnectionPool.pid
-Any*36*37*38*39*310*311•
-CommandsProtocolredis.typing.CommandsProtocol"builtins.object*{
+Any0:overloadX¢
+__init__0redis.asyncio.connection.ConnectionPool.__init__"
+None*Œ
+self√
+Lredis.asyncio.connection.ConnectionPool[redis.asyncio.connection.Connection]J
+#redis.asyncio.connection.Connection"#redis.asyncio.connection.Connection"'redis.asyncio.connection.ConnectionPool*[
+max_connectionsD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *
+connection_kwargs
+Any0:overloadX"36"37"38"39"310"311"312"313Pj36j37j38j39j310j311j312j313r›
+connection_class8redis.asyncio.connection.ConnectionPool.connection_classÍ
++Type[redis.asyncio.connection._ConnectionT]≤
+%redis.asyncio.connection._ConnectionTZ
++redis.asyncio.connection.AbstractConnection"+redis.asyncio.connection.AbstractConnection"+redis.asyncio.connection.AbstractConnection"type*36*37*38*39*310*311*312*313rÕ
+connection_kwargs9redis.asyncio.connection.ConnectionPool.connection_kwargsY
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping*36*37*38*39*310*311*312*313rå
+max_connections7redis.asyncio.connection.ConnectionPool.max_connections
+builtins.int"builtins.int*36*37*38*39*310*311*312*313r‚
+encoder_class5redis.asyncio.connection.ConnectionPool.encoder_classv
+&Type[redis.asyncio.connection.Encoder]D
+ redis.asyncio.connection.Encoder" redis.asyncio.connection.Encoder"type*36*37*38*39*310*311*312*313rt
+pid+redis.asyncio.connection.ConnectionPool.pid
+builtins.int"builtins.int*36*37*38*39*310*311*312*313◊
+CommandsProtocolredis.typing.CommandsProtocol"builtins.object*Ö
 execute_command-redis.typing.CommandsProtocol.execute_command*
 self*
 args*
-optionsz36z37z38z39z310z311Xj36j37j38j39j310j311r«
-connection_pool-redis.typing.CommandsProtocol.connection_poolÍ
-NUnion[redis.asyncio.connection.ConnectionPool,redis.connection.ConnectionPool]R
-'redis.asyncio.connection.ConnectionPool"'redis.asyncio.connection.ConnectionPoolB
-redis.connection.ConnectionPool"redis.connection.ConnectionPool*36*37*38*39*310*311*¢
+optionsz36z37z38z39z310z311z312z313Xj36j37j38j39j310j311j312j313r‰
+connection_pool-redis.typing.CommandsProtocol.connection_pool˝
+SUnion[redis.asyncio.connection.ConnectionPool[Any],redis.connection.ConnectionPool]`
+,redis.asyncio.connection.ConnectionPool[Any]
+Any"'redis.asyncio.connection.ConnectionPoolB
+redis.connection.ConnectionPool"redis.connection.ConnectionPool*36*37*38*39*310*311*312*313*¨
 __annotations__redis.typing.__annotations__W
 builtins.dict[builtins.str,Any]
 builtins.str"builtins.str
-Any"builtins.dict*36*37*38*39*310*311
+Any"builtins.dict*36*37*38*39*310*311*312*313

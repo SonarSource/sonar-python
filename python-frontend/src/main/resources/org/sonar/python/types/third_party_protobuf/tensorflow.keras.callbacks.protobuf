@@ -1,0 +1,918 @@
+
+tensorflow.keras.callbacksŸH
+Callback#tensorflow.keras.callbacks.Callback"builtins.object*•
+
+set_params.tensorflow.keras.callbacks.Callback.set_params"
+None*T
+selfJ
+#tensorflow.keras.callbacks.Callback"#tensorflow.keras.callbacks.Callback*c
+paramsW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dictz36z37z38z39z310z311z312z313*§
+	set_model-tensorflow.keras.callbacks.Callback.set_model"
+None*T
+selfJ
+#tensorflow.keras.callbacks.Callback"#tensorflow.keras.callbacks.Callback*d
+modelY
+&tensorflow.keras.models.Model[Any,Any]
+Any
+Any"tensorflow.keras.models.Modelz36z37z38z39z310z311z312z313*ï
+model)tensorflow.keras.callbacks.Callback.model"Y
+&tensorflow.keras.models.Model[Any,Any]
+Any
+Any"tensorflow.keras.models.Model*T
+selfJ
+#tensorflow.keras.callbacks.Callback"#tensorflow.keras.callbacks.Callback0:property`z36z37z38z39z310z311z312z313*á
+on_batch_begin2tensorflow.keras.callbacks.Callback.on_batch_begin"
+None*T
+selfJ
+#tensorflow.keras.callbacks.Callback"#tensorflow.keras.callbacks.Callback*'
+batch
+builtins.int"builtins.int*ì
+logsÜ
+;TypeAlias[Union[typing.Mapping[builtins.str,Any],None,Any]]¢
+0Union[typing.Mapping[builtins.str,Any],None,Any]Y
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping
+None
+Any" tensorflow.keras.callbacks._Logs z36z37z38z39z310z311z312z313*É
+on_batch_end0tensorflow.keras.callbacks.Callback.on_batch_end"
+None*T
+selfJ
+#tensorflow.keras.callbacks.Callback"#tensorflow.keras.callbacks.Callback*'
+batch
+builtins.int"builtins.int*ì
+logsÜ
+;TypeAlias[Union[typing.Mapping[builtins.str,Any],None,Any]]¢
+0Union[typing.Mapping[builtins.str,Any],None,Any]Y
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping
+None
+Any" tensorflow.keras.callbacks._Logs z36z37z38z39z310z311z312z313*á
+on_epoch_begin2tensorflow.keras.callbacks.Callback.on_epoch_begin"
+None*T
+selfJ
+#tensorflow.keras.callbacks.Callback"#tensorflow.keras.callbacks.Callback*'
+epoch
+builtins.int"builtins.int*ì
+logsÜ
+;TypeAlias[Union[typing.Mapping[builtins.str,Any],None,Any]]¢
+0Union[typing.Mapping[builtins.str,Any],None,Any]Y
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping
+None
+Any" tensorflow.keras.callbacks._Logs z36z37z38z39z310z311z312z313*É
+on_epoch_end0tensorflow.keras.callbacks.Callback.on_epoch_end"
+None*T
+selfJ
+#tensorflow.keras.callbacks.Callback"#tensorflow.keras.callbacks.Callback*'
+epoch
+builtins.int"builtins.int*ì
+logsÜ
+;TypeAlias[Union[typing.Mapping[builtins.str,Any],None,Any]]¢
+0Union[typing.Mapping[builtins.str,Any],None,Any]Y
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping
+None
+Any" tensorflow.keras.callbacks._Logs z36z37z38z39z310z311z312z313*ì
+on_train_batch_begin8tensorflow.keras.callbacks.Callback.on_train_batch_begin"
+None*T
+selfJ
+#tensorflow.keras.callbacks.Callback"#tensorflow.keras.callbacks.Callback*'
+batch
+builtins.int"builtins.int*ì
+logsÜ
+;TypeAlias[Union[typing.Mapping[builtins.str,Any],None,Any]]¢
+0Union[typing.Mapping[builtins.str,Any],None,Any]Y
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping
+None
+Any" tensorflow.keras.callbacks._Logs z36z37z38z39z310z311z312z313*è
+on_train_batch_end6tensorflow.keras.callbacks.Callback.on_train_batch_end"
+None*T
+selfJ
+#tensorflow.keras.callbacks.Callback"#tensorflow.keras.callbacks.Callback*'
+batch
+builtins.int"builtins.int*ì
+logsÜ
+;TypeAlias[Union[typing.Mapping[builtins.str,Any],None,Any]]¢
+0Union[typing.Mapping[builtins.str,Any],None,Any]Y
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping
+None
+Any" tensorflow.keras.callbacks._Logs z36z37z38z39z310z311z312z313*ë
+on_test_batch_begin7tensorflow.keras.callbacks.Callback.on_test_batch_begin"
+None*T
+selfJ
+#tensorflow.keras.callbacks.Callback"#tensorflow.keras.callbacks.Callback*'
+batch
+builtins.int"builtins.int*ì
+logsÜ
+;TypeAlias[Union[typing.Mapping[builtins.str,Any],None,Any]]¢
+0Union[typing.Mapping[builtins.str,Any],None,Any]Y
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping
+None
+Any" tensorflow.keras.callbacks._Logs z36z37z38z39z310z311z312z313*ç
+on_test_batch_end5tensorflow.keras.callbacks.Callback.on_test_batch_end"
+None*T
+selfJ
+#tensorflow.keras.callbacks.Callback"#tensorflow.keras.callbacks.Callback*'
+batch
+builtins.int"builtins.int*ì
+logsÜ
+;TypeAlias[Union[typing.Mapping[builtins.str,Any],None,Any]]¢
+0Union[typing.Mapping[builtins.str,Any],None,Any]Y
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping
+None
+Any" tensorflow.keras.callbacks._Logs z36z37z38z39z310z311z312z313*ó
+on_predict_batch_begin:tensorflow.keras.callbacks.Callback.on_predict_batch_begin"
+None*T
+selfJ
+#tensorflow.keras.callbacks.Callback"#tensorflow.keras.callbacks.Callback*'
+batch
+builtins.int"builtins.int*ì
+logsÜ
+;TypeAlias[Union[typing.Mapping[builtins.str,Any],None,Any]]¢
+0Union[typing.Mapping[builtins.str,Any],None,Any]Y
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping
+None
+Any" tensorflow.keras.callbacks._Logs z36z37z38z39z310z311z312z313*ì
+on_predict_batch_end8tensorflow.keras.callbacks.Callback.on_predict_batch_end"
+None*T
+selfJ
+#tensorflow.keras.callbacks.Callback"#tensorflow.keras.callbacks.Callback*'
+batch
+builtins.int"builtins.int*ì
+logsÜ
+;TypeAlias[Union[typing.Mapping[builtins.str,Any],None,Any]]¢
+0Union[typing.Mapping[builtins.str,Any],None,Any]Y
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping
+None
+Any" tensorflow.keras.callbacks._Logs z36z37z38z39z310z311z312z313*ﬁ
+on_train_begin2tensorflow.keras.callbacks.Callback.on_train_begin"
+None*T
+selfJ
+#tensorflow.keras.callbacks.Callback"#tensorflow.keras.callbacks.Callback*ì
+logsÜ
+;TypeAlias[Union[typing.Mapping[builtins.str,Any],None,Any]]¢
+0Union[typing.Mapping[builtins.str,Any],None,Any]Y
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping
+None
+Any" tensorflow.keras.callbacks._Logs z36z37z38z39z310z311z312z313*⁄
+on_train_end0tensorflow.keras.callbacks.Callback.on_train_end"
+None*T
+selfJ
+#tensorflow.keras.callbacks.Callback"#tensorflow.keras.callbacks.Callback*ì
+logsÜ
+;TypeAlias[Union[typing.Mapping[builtins.str,Any],None,Any]]¢
+0Union[typing.Mapping[builtins.str,Any],None,Any]Y
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping
+None
+Any" tensorflow.keras.callbacks._Logs z36z37z38z39z310z311z312z313*‹
+on_test_begin1tensorflow.keras.callbacks.Callback.on_test_begin"
+None*T
+selfJ
+#tensorflow.keras.callbacks.Callback"#tensorflow.keras.callbacks.Callback*ì
+logsÜ
+;TypeAlias[Union[typing.Mapping[builtins.str,Any],None,Any]]¢
+0Union[typing.Mapping[builtins.str,Any],None,Any]Y
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping
+None
+Any" tensorflow.keras.callbacks._Logs z36z37z38z39z310z311z312z313*ÿ
+on_test_end/tensorflow.keras.callbacks.Callback.on_test_end"
+None*T
+selfJ
+#tensorflow.keras.callbacks.Callback"#tensorflow.keras.callbacks.Callback*ì
+logsÜ
+;TypeAlias[Union[typing.Mapping[builtins.str,Any],None,Any]]¢
+0Union[typing.Mapping[builtins.str,Any],None,Any]Y
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping
+None
+Any" tensorflow.keras.callbacks._Logs z36z37z38z39z310z311z312z313*‚
+on_predict_begin4tensorflow.keras.callbacks.Callback.on_predict_begin"
+None*T
+selfJ
+#tensorflow.keras.callbacks.Callback"#tensorflow.keras.callbacks.Callback*ì
+logsÜ
+;TypeAlias[Union[typing.Mapping[builtins.str,Any],None,Any]]¢
+0Union[typing.Mapping[builtins.str,Any],None,Any]Y
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping
+None
+Any" tensorflow.keras.callbacks._Logs z36z37z38z39z310z311z312z313*ﬁ
+on_predict_end2tensorflow.keras.callbacks.Callback.on_predict_end"
+None*T
+selfJ
+#tensorflow.keras.callbacks.Callback"#tensorflow.keras.callbacks.Callback*ì
+logsÜ
+;TypeAlias[Union[typing.Mapping[builtins.str,Any],None,Any]]¢
+0Union[typing.Mapping[builtins.str,Any],None,Any]Y
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping
+None
+Any" tensorflow.keras.callbacks._Logs z36z37z38z39z310z311z312z313j36j37j38j39j310j311j312j313r±
+params*tensorflow.keras.callbacks.Callback.paramsW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*36*37*38*39*310*311*312*313ÏL
+CallbackList'tensorflow.keras.callbacks.CallbackList"#tensorflow.keras.callbacks.Callback*Ë
+__init__0tensorflow.keras.callbacks.CallbackList.__init__"
+None*\
+selfR
+'tensorflow.keras.callbacks.CallbackList"'tensorflow.keras.callbacks.CallbackList*ˆ
+	callbacks‰
+@Union[typing.Sequence[tensorflow.keras.callbacks.Callback],None]ì
+4typing.Sequence[tensorflow.keras.callbacks.Callback]J
+#tensorflow.keras.callbacks.Callback"#tensorflow.keras.callbacks.Callback"typing.Sequence
+None *1
+add_history
+builtins.bool"builtins.bool *1
+add_progbar
+builtins.bool"builtins.bool *©
+modelõ
+2Union[tensorflow.keras.models.Model[Any,Any],None]Y
+&tensorflow.keras.models.Model[Any,Any]
+Any
+Any"tensorflow.keras.models.Model
+None *
+params
+Anyz36z37z38z39z310z311z312z313*±
+
+set_params2tensorflow.keras.callbacks.CallbackList.set_params"
+None*\
+selfR
+'tensorflow.keras.callbacks.CallbackList"'tensorflow.keras.callbacks.CallbackList*c
+paramsW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dictz36z37z38z39z310z311z312z313*∞
+	set_model1tensorflow.keras.callbacks.CallbackList.set_model"
+None*\
+selfR
+'tensorflow.keras.callbacks.CallbackList"'tensorflow.keras.callbacks.CallbackList*d
+modelY
+&tensorflow.keras.models.Model[Any,Any]
+Any
+Any"tensorflow.keras.models.Modelz36z37z38z39z310z311z312z313*ì
+on_batch_begin6tensorflow.keras.callbacks.CallbackList.on_batch_begin"
+None*\
+selfR
+'tensorflow.keras.callbacks.CallbackList"'tensorflow.keras.callbacks.CallbackList*'
+batch
+builtins.int"builtins.int*ì
+logsÜ
+;TypeAlias[Union[typing.Mapping[builtins.str,Any],None,Any]]¢
+0Union[typing.Mapping[builtins.str,Any],None,Any]Y
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping
+None
+Any" tensorflow.keras.callbacks._Logs z36z37z38z39z310z311z312z313*è
+on_batch_end4tensorflow.keras.callbacks.CallbackList.on_batch_end"
+None*\
+selfR
+'tensorflow.keras.callbacks.CallbackList"'tensorflow.keras.callbacks.CallbackList*'
+batch
+builtins.int"builtins.int*ì
+logsÜ
+;TypeAlias[Union[typing.Mapping[builtins.str,Any],None,Any]]¢
+0Union[typing.Mapping[builtins.str,Any],None,Any]Y
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping
+None
+Any" tensorflow.keras.callbacks._Logs z36z37z38z39z310z311z312z313*ì
+on_epoch_begin6tensorflow.keras.callbacks.CallbackList.on_epoch_begin"
+None*\
+selfR
+'tensorflow.keras.callbacks.CallbackList"'tensorflow.keras.callbacks.CallbackList*'
+epoch
+builtins.int"builtins.int*ì
+logsÜ
+;TypeAlias[Union[typing.Mapping[builtins.str,Any],None,Any]]¢
+0Union[typing.Mapping[builtins.str,Any],None,Any]Y
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping
+None
+Any" tensorflow.keras.callbacks._Logs z36z37z38z39z310z311z312z313*è
+on_epoch_end4tensorflow.keras.callbacks.CallbackList.on_epoch_end"
+None*\
+selfR
+'tensorflow.keras.callbacks.CallbackList"'tensorflow.keras.callbacks.CallbackList*'
+epoch
+builtins.int"builtins.int*ì
+logsÜ
+;TypeAlias[Union[typing.Mapping[builtins.str,Any],None,Any]]¢
+0Union[typing.Mapping[builtins.str,Any],None,Any]Y
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping
+None
+Any" tensorflow.keras.callbacks._Logs z36z37z38z39z310z311z312z313*ü
+on_train_batch_begin<tensorflow.keras.callbacks.CallbackList.on_train_batch_begin"
+None*\
+selfR
+'tensorflow.keras.callbacks.CallbackList"'tensorflow.keras.callbacks.CallbackList*'
+batch
+builtins.int"builtins.int*ì
+logsÜ
+;TypeAlias[Union[typing.Mapping[builtins.str,Any],None,Any]]¢
+0Union[typing.Mapping[builtins.str,Any],None,Any]Y
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping
+None
+Any" tensorflow.keras.callbacks._Logs z36z37z38z39z310z311z312z313*õ
+on_train_batch_end:tensorflow.keras.callbacks.CallbackList.on_train_batch_end"
+None*\
+selfR
+'tensorflow.keras.callbacks.CallbackList"'tensorflow.keras.callbacks.CallbackList*'
+batch
+builtins.int"builtins.int*ì
+logsÜ
+;TypeAlias[Union[typing.Mapping[builtins.str,Any],None,Any]]¢
+0Union[typing.Mapping[builtins.str,Any],None,Any]Y
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping
+None
+Any" tensorflow.keras.callbacks._Logs z36z37z38z39z310z311z312z313*ù
+on_test_batch_begin;tensorflow.keras.callbacks.CallbackList.on_test_batch_begin"
+None*\
+selfR
+'tensorflow.keras.callbacks.CallbackList"'tensorflow.keras.callbacks.CallbackList*'
+batch
+builtins.int"builtins.int*ì
+logsÜ
+;TypeAlias[Union[typing.Mapping[builtins.str,Any],None,Any]]¢
+0Union[typing.Mapping[builtins.str,Any],None,Any]Y
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping
+None
+Any" tensorflow.keras.callbacks._Logs z36z37z38z39z310z311z312z313*ô
+on_test_batch_end9tensorflow.keras.callbacks.CallbackList.on_test_batch_end"
+None*\
+selfR
+'tensorflow.keras.callbacks.CallbackList"'tensorflow.keras.callbacks.CallbackList*'
+batch
+builtins.int"builtins.int*ì
+logsÜ
+;TypeAlias[Union[typing.Mapping[builtins.str,Any],None,Any]]¢
+0Union[typing.Mapping[builtins.str,Any],None,Any]Y
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping
+None
+Any" tensorflow.keras.callbacks._Logs z36z37z38z39z310z311z312z313*£
+on_predict_batch_begin>tensorflow.keras.callbacks.CallbackList.on_predict_batch_begin"
+None*\
+selfR
+'tensorflow.keras.callbacks.CallbackList"'tensorflow.keras.callbacks.CallbackList*'
+batch
+builtins.int"builtins.int*ì
+logsÜ
+;TypeAlias[Union[typing.Mapping[builtins.str,Any],None,Any]]¢
+0Union[typing.Mapping[builtins.str,Any],None,Any]Y
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping
+None
+Any" tensorflow.keras.callbacks._Logs z36z37z38z39z310z311z312z313*ü
+on_predict_batch_end<tensorflow.keras.callbacks.CallbackList.on_predict_batch_end"
+None*\
+selfR
+'tensorflow.keras.callbacks.CallbackList"'tensorflow.keras.callbacks.CallbackList*'
+batch
+builtins.int"builtins.int*ì
+logsÜ
+;TypeAlias[Union[typing.Mapping[builtins.str,Any],None,Any]]¢
+0Union[typing.Mapping[builtins.str,Any],None,Any]Y
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping
+None
+Any" tensorflow.keras.callbacks._Logs z36z37z38z39z310z311z312z313*Í
+on_train_begin6tensorflow.keras.callbacks.CallbackList.on_train_begin"
+None*\
+selfR
+'tensorflow.keras.callbacks.CallbackList"'tensorflow.keras.callbacks.CallbackList*ì
+logsÜ
+;TypeAlias[Union[typing.Mapping[builtins.str,Any],None,Any]]¢
+0Union[typing.Mapping[builtins.str,Any],None,Any]Y
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping
+None
+Any" tensorflow.keras.callbacks._Logs z36z37z38z39z310z311z312z313*Ê
+on_train_end4tensorflow.keras.callbacks.CallbackList.on_train_end"
+None*\
+selfR
+'tensorflow.keras.callbacks.CallbackList"'tensorflow.keras.callbacks.CallbackList*ì
+logsÜ
+;TypeAlias[Union[typing.Mapping[builtins.str,Any],None,Any]]¢
+0Union[typing.Mapping[builtins.str,Any],None,Any]Y
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping
+None
+Any" tensorflow.keras.callbacks._Logs z36z37z38z39z310z311z312z313*Ë
+on_test_begin5tensorflow.keras.callbacks.CallbackList.on_test_begin"
+None*\
+selfR
+'tensorflow.keras.callbacks.CallbackList"'tensorflow.keras.callbacks.CallbackList*ì
+logsÜ
+;TypeAlias[Union[typing.Mapping[builtins.str,Any],None,Any]]¢
+0Union[typing.Mapping[builtins.str,Any],None,Any]Y
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping
+None
+Any" tensorflow.keras.callbacks._Logs z36z37z38z39z310z311z312z313*‰
+on_test_end3tensorflow.keras.callbacks.CallbackList.on_test_end"
+None*\
+selfR
+'tensorflow.keras.callbacks.CallbackList"'tensorflow.keras.callbacks.CallbackList*ì
+logsÜ
+;TypeAlias[Union[typing.Mapping[builtins.str,Any],None,Any]]¢
+0Union[typing.Mapping[builtins.str,Any],None,Any]Y
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping
+None
+Any" tensorflow.keras.callbacks._Logs z36z37z38z39z310z311z312z313*Ó
+on_predict_begin8tensorflow.keras.callbacks.CallbackList.on_predict_begin"
+None*\
+selfR
+'tensorflow.keras.callbacks.CallbackList"'tensorflow.keras.callbacks.CallbackList*ì
+logsÜ
+;TypeAlias[Union[typing.Mapping[builtins.str,Any],None,Any]]¢
+0Union[typing.Mapping[builtins.str,Any],None,Any]Y
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping
+None
+Any" tensorflow.keras.callbacks._Logs z36z37z38z39z310z311z312z313*Í
+on_predict_end6tensorflow.keras.callbacks.CallbackList.on_predict_end"
+None*\
+selfR
+'tensorflow.keras.callbacks.CallbackList"'tensorflow.keras.callbacks.CallbackList*ì
+logsÜ
+;TypeAlias[Union[typing.Mapping[builtins.str,Any],None,Any]]¢
+0Union[typing.Mapping[builtins.str,Any],None,Any]Y
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping
+None
+Any" tensorflow.keras.callbacks._Logs z36z37z38z39z310z311z312z313j36j37j38j39j310j311j312j313ı
+BackupAndRestore+tensorflow.keras.callbacks.BackupAndRestore"#tensorflow.keras.callbacks.Callback*Í
+__init__4tensorflow.keras.callbacks.BackupAndRestore.__init__"
+None*d
+selfZ
++tensorflow.keras.callbacks.BackupAndRestore"+tensorflow.keras.callbacks.BackupAndRestore*,
+
+backup_dir
+builtins.str"builtins.str*-
+	save_freq
+builtins.str"builtins.str *7
+delete_checkpoint
+builtins.bool"builtins.bool z36z37z38z39z310z311z312z313j36j37j38j39j310j311j312j313≈
+	CSVLogger$tensorflow.keras.callbacks.CSVLogger"#tensorflow.keras.callbacks.Callback*»
+__init__-tensorflow.keras.callbacks.CSVLogger.__init__"
+None*V
+selfL
+$tensorflow.keras.callbacks.CSVLogger"$tensorflow.keras.callbacks.CSVLogger**
+filename
+builtins.str"builtins.str*-
+	separator
+builtins.str"builtins.str *,
+append
+builtins.bool"builtins.bool z36z37z38z39z310z311z312z313j36j37j38j39j310j311j312j313ë
+EarlyStopping(tensorflow.keras.callbacks.EarlyStopping"#tensorflow.keras.callbacks.Callback*∏
+__init__1tensorflow.keras.callbacks.EarlyStopping.__init__"
+None*^
+selfT
+(tensorflow.keras.callbacks.EarlyStopping"(tensorflow.keras.callbacks.EarlyStopping*+
+monitor
+builtins.str"builtins.str *1
+	min_delta 
+builtins.float"builtins.float *,
+patience
+builtins.int"builtins.int *
+verbose
+Any *
+mode
+Any *Z
+baselineJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None *:
+restore_best_weights
+builtins.bool"builtins.bool *4
+start_from_epoch
+builtins.int"builtins.int z36z37*·
+__init__1tensorflow.keras.callbacks.EarlyStopping.__init__"
+None*^
+selfT
+(tensorflow.keras.callbacks.EarlyStopping"(tensorflow.keras.callbacks.EarlyStopping*+
+monitor
+builtins.str"builtins.str *1
+	min_delta 
+builtins.float"builtins.float *,
+patience
+builtins.int"builtins.int *∏
+verbose®
+2Union[Literal[builtins.int],Literal[builtins.int]]7
+Literal[builtins.int]	
+builtins.int"builtins.int7
+Literal[builtins.int]	
+builtins.int"builtins.int *Ñ
+mode˜
+HUnion[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str *Z
+baselineJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None *:
+restore_best_weights
+builtins.bool"builtins.bool *4
+start_from_epoch
+builtins.int"builtins.int z38z39z310z311z312z313j36j37j38j39j310j311j312j313rn
+
+monitor_op3tensorflow.keras.callbacks.EarlyStopping.monitor_op
+Any*36*37*38*39*310*311*312*313‡
+History"tensorflow.keras.callbacks.History"#tensorflow.keras.callbacks.Callbackj36j37j38j39j310j311j312j313rÁ
+history*tensorflow.keras.callbacks.History.historyã
+.builtins.dict[builtins.str,builtins.list[Any]]
+builtins.str"builtins.str,
+builtins.list[Any]
+Any"builtins.list"builtins.dict*36*37*38*39*310*311*312*313∞
+
+LambdaCallback)tensorflow.keras.callbacks.LambdaCallback"#tensorflow.keras.callbacks.Callback*©	
+__init__2tensorflow.keras.callbacks.LambdaCallback.__init__"
+None*`
+selfV
+)tensorflow.keras.callbacks.LambdaCallback")tensorflow.keras.callbacks.LambdaCallback*ù
+on_epoch_beginÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *õ
+on_epoch_endÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *ù
+on_train_beginÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *õ
+on_train_endÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *£
+on_train_batch_beginÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *°
+on_train_batch_endÜ
++Union[CallableType[builtins.function],None]K
+CallableType[builtins.function]&
+builtins.function"builtins.function
+None *
+kwargs
+Anyz36z37z38z39z310z311z312z313j36j37j38j39j310j311j312j313Â
+LearningRateScheduler0tensorflow.keras.callbacks.LearningRateScheduler"#tensorflow.keras.callbacks.Callback*ã
+__init__9tensorflow.keras.callbacks.LearningRateScheduler.__init__"
+None*n
+selfd
+0tensorflow.keras.callbacks.LearningRateScheduler"0tensorflow.keras.callbacks.LearningRateScheduler*©
+scheduleö
+ÅUnion[tensorflow.keras.optimizers.schedules.LearningRateSchedule,CallableType[builtins.function],CallableType[builtins.function]]x
+:tensorflow.keras.optimizers.schedules.LearningRateSchedule":tensorflow.keras.optimizers.schedules.LearningRateScheduleK
+CallableType[builtins.function]&
+builtins.function"builtins.functionK
+CallableType[builtins.function]&
+builtins.function"builtins.function*
+verbose
+Any z36z37*¬
+__init__9tensorflow.keras.callbacks.LearningRateScheduler.__init__"
+None*n
+selfd
+0tensorflow.keras.callbacks.LearningRateScheduler"0tensorflow.keras.callbacks.LearningRateScheduler*©
+scheduleö
+ÅUnion[tensorflow.keras.optimizers.schedules.LearningRateSchedule,CallableType[builtins.function],CallableType[builtins.function]]x
+:tensorflow.keras.optimizers.schedules.LearningRateSchedule":tensorflow.keras.optimizers.schedules.LearningRateScheduleK
+CallableType[builtins.function]&
+builtins.function"builtins.functionK
+CallableType[builtins.function]&
+builtins.function"builtins.function*∏
+verbose®
+2Union[Literal[builtins.int],Literal[builtins.int]]7
+Literal[builtins.int]	
+builtins.int"builtins.int7
+Literal[builtins.int]	
+builtins.int"builtins.int z38z39z310z311z312z313j36j37j38j39j310j311j312j313£
+ModelCheckpoint*tensorflow.keras.callbacks.ModelCheckpoint"#tensorflow.keras.callbacks.Callback*à
+__init__3tensorflow.keras.callbacks.ModelCheckpoint.__init__"
+None*b
+selfX
+*tensorflow.keras.callbacks.ModelCheckpoint"*tensorflow.keras.callbacks.ModelCheckpoint**
+filepath
+builtins.str"builtins.str*+
+monitor
+builtins.str"builtins.str *
+verbose
+Any *4
+save_best_only
+builtins.bool"builtins.bool *7
+save_weights_only
+builtins.bool"builtins.bool *
+mode
+Any *q
+	save_freq`
+ Union[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int *i
+initial_value_thresholdJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None z36z37*±
+__init__3tensorflow.keras.callbacks.ModelCheckpoint.__init__"
+None*b
+selfX
+*tensorflow.keras.callbacks.ModelCheckpoint"*tensorflow.keras.callbacks.ModelCheckpoint**
+filepath
+builtins.str"builtins.str*+
+monitor
+builtins.str"builtins.str *∏
+verbose®
+2Union[Literal[builtins.int],Literal[builtins.int]]7
+Literal[builtins.int]	
+builtins.int"builtins.int7
+Literal[builtins.int]	
+builtins.int"builtins.int *4
+save_best_only
+builtins.bool"builtins.bool *7
+save_weights_only
+builtins.bool"builtins.bool *Ñ
+mode˜
+HUnion[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str *q
+	save_freq`
+ Union[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int *i
+initial_value_thresholdJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None z38z39z310z311z312z313*Â
+_save_model6tensorflow.keras.callbacks.ModelCheckpoint._save_model"
+None*b
+selfX
+*tensorflow.keras.callbacks.ModelCheckpoint"*tensorflow.keras.callbacks.ModelCheckpoint*'
+epoch
+builtins.int"builtins.int*O
+batchD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None*ë
+logsÜ
+;TypeAlias[Union[typing.Mapping[builtins.str,Any],None,Any]]¢
+0Union[typing.Mapping[builtins.str,Any],None,Any]Y
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping
+None
+Any" tensorflow.keras.callbacks._Logsz36z37z38z39z310z311z312z313j36j37j38j39j310j311j312j313rp
+
+monitor_op5tensorflow.keras.callbacks.ModelCheckpoint.monitor_op
+Any*36*37*38*39*310*311*312*313rÅ
+filepath3tensorflow.keras.callbacks.ModelCheckpoint.filepath
+builtins.str"builtins.str*36*37*38*39*310*311*312*313÷
+ProgbarLogger(tensorflow.keras.callbacks.ProgbarLogger"#tensorflow.keras.callbacks.Callback*À
+__init__1tensorflow.keras.callbacks.ProgbarLogger.__init__"
+None*^
+selfT
+(tensorflow.keras.callbacks.ProgbarLogger"(tensorflow.keras.callbacks.ProgbarLoggerz36z37z38z39z310z311z312z313j36j37j38j39j310j311j312j313rÉ
+	use_steps2tensorflow.keras.callbacks.ProgbarLogger.use_steps
+builtins.bool"builtins.bool*36*37*38*39*310*311*312*313·
+ReduceLROnPlateau,tensorflow.keras.callbacks.ReduceLROnPlateau"#tensorflow.keras.callbacks.Callback*ô
+__init__5tensorflow.keras.callbacks.ReduceLROnPlateau.__init__"
+None*f
+self\
+,tensorflow.keras.callbacks.ReduceLROnPlateau",tensorflow.keras.callbacks.ReduceLROnPlateau*+
+monitor
+builtins.str"builtins.str *.
+factor 
+builtins.float"builtins.float *,
+patience
+builtins.int"builtins.int *
+verbose
+Any *
+mode
+Any *1
+	min_delta 
+builtins.float"builtins.float *,
+cooldown
+builtins.int"builtins.int *.
+min_lr 
+builtins.float"builtins.float *
+kwargs
+Anyz36z37*¬
+__init__5tensorflow.keras.callbacks.ReduceLROnPlateau.__init__"
+None*f
+self\
+,tensorflow.keras.callbacks.ReduceLROnPlateau",tensorflow.keras.callbacks.ReduceLROnPlateau*+
+monitor
+builtins.str"builtins.str *.
+factor 
+builtins.float"builtins.float *,
+patience
+builtins.int"builtins.int *∏
+verbose®
+2Union[Literal[builtins.int],Literal[builtins.int]]7
+Literal[builtins.int]	
+builtins.int"builtins.int7
+Literal[builtins.int]	
+builtins.int"builtins.int *Ñ
+mode˜
+HUnion[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str]]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str *1
+	min_delta 
+builtins.float"builtins.float *,
+cooldown
+builtins.int"builtins.int *.
+min_lr 
+builtins.float"builtins.float *
+kwargs
+Anyz38z39z310z311z312z313*Û
+in_cooldown8tensorflow.keras.callbacks.ReduceLROnPlateau.in_cooldown"
+builtins.bool"builtins.bool*f
+self\
+,tensorflow.keras.callbacks.ReduceLROnPlateau",tensorflow.keras.callbacks.ReduceLROnPlateauz36z37z38z39z310z311z312z313j36j37j38j39j310j311j312j313·
+RemoteMonitor(tensorflow.keras.callbacks.RemoteMonitor"#tensorflow.keras.callbacks.Callback*‹
+__init__1tensorflow.keras.callbacks.RemoteMonitor.__init__"
+None*^
+selfT
+(tensorflow.keras.callbacks.RemoteMonitor"(tensorflow.keras.callbacks.RemoteMonitor*(
+root
+builtins.str"builtins.str *(
+path
+builtins.str"builtins.str *)
+field
+builtins.str"builtins.str *€
+headersÀ
+[Union[TypeAlias[typing.Mapping[builtins.str,Union[builtins.str,builtins.bytes,None]]],None]ﬂ
+OTypeAlias[typing.Mapping[builtins.str,Union[builtins.str,builtins.bytes,None]]]Î
+Dtyping.Mapping[builtins.str,Union[builtins.str,builtins.bytes,None]]
+builtins.str"builtins.stru
+'Union[builtins.str,builtins.bytes,None]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytes
+None"typing.Mapping"requests.api._HeadersMapping
+None *2
+send_as_json
+builtins.bool"builtins.bool z36z37z38z39z310z311z312z313j36j37j38j39j310j311j312j313Ü
+TensorBoard&tensorflow.keras.callbacks.TensorBoard"#tensorflow.keras.callbacks.Callback*¿
+__init__/tensorflow.keras.callbacks.TensorBoard.__init__"
+None*Z
+selfP
+&tensorflow.keras.callbacks.TensorBoard"&tensorflow.keras.callbacks.TensorBoard*+
+log_dir
+builtins.str"builtins.str *2
+histogram_freq
+builtins.int"builtins.int *1
+write_graph
+builtins.bool"builtins.bool *2
+write_images
+builtins.bool"builtins.bool *<
+write_steps_per_second
+builtins.bool"builtins.bool *U
+update_freqB
+Union[builtins.int,Any]
+builtins.int"builtins.int
+Any *Œ
+profile_batch∏
+4Union[builtins.int,Tuple[builtins.int,builtins.int]]
+builtins.int"builtins.int`
+ Tuple[builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int *3
+embeddings_freq
+builtins.int"builtins.int *±
+embeddings_metadataï
+,Union[builtins.dict[builtins.str,None],None]Y
+ builtins.dict[builtins.str,None]
+builtins.str"builtins.str
+None"builtins.dict
+None z36z37*ò
+__init__/tensorflow.keras.callbacks.TensorBoard.__init__"
+None*Z
+selfP
+&tensorflow.keras.callbacks.TensorBoard"&tensorflow.keras.callbacks.TensorBoard*+
+log_dir
+builtins.str"builtins.str *2
+histogram_freq
+builtins.int"builtins.int *1
+write_graph
+builtins.bool"builtins.bool *2
+write_images
+builtins.bool"builtins.bool *<
+write_steps_per_second
+builtins.bool"builtins.bool *ò
+update_freqÑ
+)Union[builtins.int,Literal[builtins.str]]
+builtins.int"builtins.int7
+Literal[builtins.str]	
+builtins.str"builtins.str *Œ
+profile_batch∏
+4Union[builtins.int,Tuple[builtins.int,builtins.int]]
+builtins.int"builtins.int`
+ Tuple[builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int *3
+embeddings_freq
+builtins.int"builtins.int *±
+embeddings_metadataï
+,Union[builtins.dict[builtins.str,None],None]Y
+ builtins.dict[builtins.str,None]
+builtins.str"builtins.str
+None"builtins.dict
+None z38z39z310z311z312z313*Ò
+_write_keras_model_train_graphEtensorflow.keras.callbacks.TensorBoard._write_keras_model_train_graph"
+None*Z
+selfP
+&tensorflow.keras.callbacks.TensorBoard"&tensorflow.keras.callbacks.TensorBoardz36z37z38z39z310z311z312z313*û
+_stop_trace2tensorflow.keras.callbacks.TensorBoard._stop_trace"
+None*Z
+selfP
+&tensorflow.keras.callbacks.TensorBoard"&tensorflow.keras.callbacks.TensorBoard*Q
+batchD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None z36z37z38z39z310z311z312z313j36j37j38j39j310j311j312j313rõ
+write_steps_per_second=tensorflow.keras.callbacks.TensorBoard.write_steps_per_second
+builtins.bool"builtins.bool*36*37*38*39*310*311*312*313rç
+update_freq2tensorflow.keras.callbacks.TensorBoard.update_freqB
+Union[builtins.int,Any]
+builtins.int"builtins.int
+Any*36*37r‰
+update_freq2tensorflow.keras.callbacks.TensorBoard.update_freqÑ
+)Union[builtins.int,Literal[builtins.str]]
+builtins.int"builtins.int7
+Literal[builtins.str]	
+builtins.str"builtins.str*38*39*310*311*312*313Ñ
+TerminateOnNaN)tensorflow.keras.callbacks.TerminateOnNaN"#tensorflow.keras.callbacks.Callbackj36j37j38j39j310j311j312j313*∫
+__annotations__*tensorflow.keras.callbacks.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*36*37*38*39*310*311*312*313*>
+Literal"tensorflow.keras.callbacks.Literal
+Any*36*37*6
+tf
+tensorflow *36*37*38*39*310*311*312*313

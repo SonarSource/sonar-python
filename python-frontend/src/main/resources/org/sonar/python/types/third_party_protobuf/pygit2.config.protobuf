@@ -1,0 +1,208 @@
+
+pygit2.config¹
+
+ConfigIteratorpygit2.config.ConfigIterator"builtins.object*¨
+__init__%pygit2.config.ConfigIterator.__init__"
+None*F
+self<
+pygit2.config.ConfigIterator"pygit2.config.ConfigIterator*@
+config4
+_cffi_backend._CDataBase"_cffi_backend._CDataBase*=
+ptr4
+_cffi_backend._CDataBase"_cffi_backend._CDataBasez36z37z38z39z310z311z312z313*
+__del__$pygit2.config.ConfigIterator.__del__"
+None*><
+pygit2.config.ConfigIterator"pygit2.config.ConfigIteratorz36z37z38z39z310z311z312z313*à
+__iter__%pygit2.config.ConfigIterator.__iter__"
+!pygit2.config.ConfigIterator.Self<
+pygit2.config.ConfigIterator"pygit2.config.ConfigIterator"pygit2.config.ConfigIterator*„
+!pygit2.config.ConfigIterator.Self<
+pygit2.config.ConfigIterator"pygit2.config.ConfigIterator"pygit2.config.ConfigIteratorz36z37z38z39z310z311z312z313*Í
+next!pygit2.config.ConfigIterator.next"6
+pygit2.config.ConfigEntry"pygit2.config.ConfigEntry*F
+self<
+pygit2.config.ConfigIterator"pygit2.config.ConfigIteratorz36z37z38z39z310z311z312z313*Õ
+__next__%pygit2.config.ConfigIterator.__next__"6
+pygit2.config.ConfigEntry"pygit2.config.ConfigEntry*F
+self<
+pygit2.config.ConfigIterator"pygit2.config.ConfigIteratorz36z37z38z39z310z311z312z313j36j37j38j39j310j311j312j313Ö
+ConfigMultivarIterator$pygit2.config.ConfigMultivarIterator"pygit2.config.ConfigIterator*Ó
+__next__-pygit2.config.ConfigMultivarIterator.__next__"
+builtins.str"builtins.str*V
+selfL
+$pygit2.config.ConfigMultivarIterator"$pygit2.config.ConfigMultivarIteratorz36z37z38z39z310z311z312z313j36j37j38j39j310j311j312j313›-
+Configpygit2.config.Config"builtins.object*á
+__init__pygit2.config.Config.__init__"
+None*6
+self,
+pygit2.config.Config"pygit2.config.Config*P
+pathD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None z36z37z38z39z310z311z312z313*ä
+from_cpygit2.config.Config.from_c",
+pygit2.config.Config"pygit2.config.Config*[
+clsR
+Type[pygit2.config.Config],
+pygit2.config.Config"pygit2.config.Config"type*>
+repo4
+_cffi_backend._CDataBase"_cffi_backend._CDataBase*=
+ptr4
+_cffi_backend._CDataBase"_cffi_backend._CDataBase0:classmethodpz36z37z38z39z310z311z312z313*…
+__del__pygit2.config.Config.__del__"
+None*.,
+pygit2.config.Config"pygit2.config.Configz36z37z38z39z310z311z312z313*Å
+__contains__!pygit2.config.Config.__contains__"
+builtins.bool"builtins.bool*.,
+pygit2.config.Config"pygit2.config.Config*
+builtins.str"builtins.strz36z37z38z39z310z311z312z313*Á
+__getitem__ pygit2.config.Config.__getitem__"
+builtins.str"builtins.str*.,
+pygit2.config.Config"pygit2.config.Config*
+builtins.str"builtins.strz36z37z38z39z310z311z312z313*’
+__setitem__ pygit2.config.Config.__setitem__"
+None*.,
+pygit2.config.Config"pygit2.config.Config*
+builtins.str"builtins.str*âß
+£Union[builtins.bool,builtins.int,_cffi_backend._CDataBase,TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]],None]
+builtins.bool"builtins.bool
+builtins.int"builtins.int4
+_cffi_backend._CDataBase"_cffi_backend._CDataBase¶
+cTypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]²
+XUnion[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytesF
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLikeL
+os.PathLike[builtins.bytes] 
+builtins.bytes"builtins.bytes"os.PathLike"_typeshed.StrOrBytesPath
+Nonez36z37z38z39z310z311z312z313*­
+__delitem__ pygit2.config.Config.__delitem__"
+None*.,
+pygit2.config.Config"pygit2.config.Config*
+builtins.str"builtins.strz36z37z38z39z310z311z312z313*»
+__iter__pygit2.config.Config.__iter__"<
+pygit2.config.ConfigIterator"pygit2.config.ConfigIterator*.,
+pygit2.config.Config"pygit2.config.Configz36z37z38z39z310z311z312z313*Ö
+get_multivar!pygit2.config.Config.get_multivar"L
+$pygit2.config.ConfigMultivarIterator"$pygit2.config.ConfigMultivarIterator*6
+self,
+pygit2.config.Config"pygit2.config.Config*&
+name
+builtins.str"builtins.str*Q
+regexD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None z36z37z38z39z310z311z312z313*‘
+set_multivar!pygit2.config.Config.set_multivar"
+None*6
+self,
+pygit2.config.Config"pygit2.config.Config*&
+name
+builtins.str"builtins.str*'
+regex
+builtins.str"builtins.str*'
+value
+builtins.str"builtins.strz36z37z38z39z310z311z312z313*î
+delete_multivar$pygit2.config.Config.delete_multivar"
+None*6
+self,
+pygit2.config.Config"pygit2.config.Config*&
+name
+builtins.str"builtins.str*'
+regex
+builtins.str"builtins.strz36z37z38z39z310z311z312z313*Ì
+get_boolpygit2.config.Config.get_bool"
+builtins.bool"builtins.bool*6
+self,
+pygit2.config.Config"pygit2.config.Config*%
+key
+builtins.str"builtins.strz36z37z38z39z310z311z312z313*È
+get_intpygit2.config.Config.get_int"
+builtins.int"builtins.int*6
+self,
+pygit2.config.Config"pygit2.config.Config*%
+key
+builtins.str"builtins.strz36z37z38z39z310z311z312z313*©
+add_filepygit2.config.Config.add_file"
+None*6
+self,
+pygit2.config.Config"pygit2.config.Config*Á
+path¶
+cTypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]²
+XUnion[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytesF
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLikeL
+os.PathLike[builtins.bytes] 
+builtins.bytes"builtins.bytes"os.PathLike"_typeshed.StrOrBytesPath*)
+level
+builtins.int"builtins.int *)
+force
+builtins.int"builtins.int z36z37z38z39z310z311z312z313*³
+snapshotpygit2.config.Config.snapshot",
+pygit2.config.Config"pygit2.config.Config*6
+self,
+pygit2.config.Config"pygit2.config.Configz36z37z38z39z310z311z312z313*Õ
+
+parse_boolpygit2.config.Config.parse_bool"
+builtins.bool"builtins.bool*Ï
+textÄ
+@Union[_cffi_backend._CDataBase,builtins.bytes,builtins.str,None]4
+_cffi_backend._CDataBase"_cffi_backend._CDataBase 
+builtins.bytes"builtins.bytes
+builtins.str"builtins.str
+None0:staticmethodhz36z37z38z39z310z311z312z313*Ñ
+	parse_intpygit2.config.Config.parse_int"
+builtins.int"builtins.int*Ï
+textÄ
+@Union[_cffi_backend._CDataBase,builtins.bytes,builtins.str,None]4
+_cffi_backend._CDataBase"_cffi_backend._CDataBase 
+builtins.bytes"builtins.bytes
+builtins.str"builtins.str
+None0:staticmethodhz36z37z38z39z310z311z312z313*Ÿ
+get_system_config&pygit2.config.Config.get_system_config",
+pygit2.config.Config"pygit2.config.Config0:staticmethodhz36z37z38z39z310z311z312z313*Ÿ
+get_global_config&pygit2.config.Config.get_global_config",
+pygit2.config.Config"pygit2.config.Config0:staticmethodhz36z37z38z39z310z311z312z313*™
+get_xdg_config#pygit2.config.Config.get_xdg_config",
+pygit2.config.Config"pygit2.config.Config0:staticmethodhz36z37z38z39z310z311z312z313j36j37j38j39j310j311j312j313’
+ConfigEntrypygit2.config.ConfigEntry"builtins.object*”
+__del__!pygit2.config.ConfigEntry.__del__"
+None*86
+pygit2.config.ConfigEntry"pygit2.config.ConfigEntryz36z37z38z39z310z311z312z313*Ö
+c_value!pygit2.config.ConfigEntry.c_value"4
+_cffi_backend._CDataBase"_cffi_backend._CDataBase*@
+self6
+pygit2.config.ConfigEntry"pygit2.config.ConfigEntry0:property`z36z37z38z39z310z311z312z313*Ä
+raw_name"pygit2.config.ConfigEntry.raw_name" 
+builtins.bytes"builtins.bytes*@
+self6
+pygit2.config.ConfigEntry"pygit2.config.ConfigEntry0:property`z36z37z38z39z310z311z312z313*Æ
+	raw_value#pygit2.config.ConfigEntry.raw_value" 
+builtins.bytes"builtins.bytes*@
+self6
+pygit2.config.ConfigEntry"pygit2.config.ConfigEntry0:property`z36z37z38z39z310z311z312z313*º
+levelpygit2.config.ConfigEntry.level"
+builtins.int"builtins.int*@
+self6
+pygit2.config.ConfigEntry"pygit2.config.ConfigEntry0:property`z36z37z38z39z310z311z312z313*¸
+namepygit2.config.ConfigEntry.name"
+builtins.str"builtins.str*@
+self6
+pygit2.config.ConfigEntry"pygit2.config.ConfigEntry0:property`z36z37z38z39z310z311z312z313*º
+valuepygit2.config.ConfigEntry.value"
+builtins.str"builtins.str*@
+self6
+pygit2.config.ConfigEntry"pygit2.config.ConfigEntry0:property`z36z37z38z39z310z311z312z313j36j37j38j39j310j311j312j313Ç
+str_to_bytespygit2.config.str_to_bytes" 
+builtins.bytes"builtins.bytes*'
+value
+builtins.str"builtins.str*,
+name"
+builtins.object"builtins.objectz36z37z38z39z310z311z312z313*­
+__annotations__pygit2.config.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*36*37*38*39*310*311*312*313

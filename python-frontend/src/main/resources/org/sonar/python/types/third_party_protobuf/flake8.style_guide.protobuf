@@ -1,0 +1,236 @@
+
+flake8.style_guideÈ
+Selectedflake8.style_guide.Selected"	enum.EnumHj36j37j38j39j310j311j312j313rv
+
+Explicitly&flake8.style_guide.Selected.Explicitly
+builtins.str"builtins.str*36*37*38*39*310*311*312*313rv
+
+Implicitly&flake8.style_guide.Selected.Implicitly
+builtins.str"builtins.str*36*37*38*39*310*311*312*313Ä
+Ignoredflake8.style_guide.Ignored"	enum.EnumHj36j37j38j39j310j311j312j313ru
+
+Explicitly%flake8.style_guide.Ignored.Explicitly
+builtins.str"builtins.str*36*37*38*39*310*311*312*313ru
+
+Implicitly%flake8.style_guide.Ignored.Implicitly
+builtins.str"builtins.str*36*37*38*39*310*311*312*313¾
+Decisionflake8.style_guide.Decision"	enum.EnumHj36j37j38j39j310j311j312j313rp
+Ignored#flake8.style_guide.Decision.Ignored
+builtins.str"builtins.str*36*37*38*39*310*311*312*313rr
+Selected$flake8.style_guide.Decision.Selected
+builtins.str"builtins.str*36*37*38*39*310*311*312*313²
+DecisionEngine!flake8.style_guide.DecisionEngine"builtins.object*í
+__init__*flake8.style_guide.DecisionEngine.__init__"
+None*P
+selfF
+!flake8.style_guide.DecisionEngine"!flake8.style_guide.DecisionEngine*5
+options(
+argparse.Namespace"argparse.Namespacez36z37z38z39z310z311z312z313*–
+was_selected.flake8.style_guide.DecisionEngine.was_selected"·
+=Union[flake8.style_guide.Selected,flake8.style_guide.Ignored]:
+flake8.style_guide.Selected"flake8.style_guide.Selected8
+flake8.style_guide.Ignored"flake8.style_guide.Ignored*P
+selfF
+!flake8.style_guide.DecisionEngine"!flake8.style_guide.DecisionEngine*&
+code
+builtins.str"builtins.strz36z37z38z39z310z311z312z313*”
+was_ignored-flake8.style_guide.DecisionEngine.was_ignored"·
+=Union[flake8.style_guide.Selected,flake8.style_guide.Ignored]:
+flake8.style_guide.Selected"flake8.style_guide.Selected8
+flake8.style_guide.Ignored"flake8.style_guide.Ignored*P
+selfF
+!flake8.style_guide.DecisionEngine"!flake8.style_guide.DecisionEngine*&
+code
+builtins.str"builtins.strz36z37z38z39z310z311z312z313*š
+make_decision/flake8.style_guide.DecisionEngine.make_decision":
+flake8.style_guide.Decision"flake8.style_guide.Decision*P
+selfF
+!flake8.style_guide.DecisionEngine"!flake8.style_guide.DecisionEngine*&
+code
+builtins.str"builtins.strz36z37z38z39z310z311z312z313*˜
+decision_for.flake8.style_guide.DecisionEngine.decision_for":
+flake8.style_guide.Decision"flake8.style_guide.Decision*P
+selfF
+!flake8.style_guide.DecisionEngine"!flake8.style_guide.DecisionEngine*&
+code
+builtins.str"builtins.strz36z37z38z39z310z311z312z313j36j37j38j39j310j311j312j313r‡
+cache'flake8.style_guide.DecisionEngine.cache1
+TypeAlias[Any]
+Any"_typeshed.Incomplete*36*37*38*39*310*311*312*313r£
+selected_explicitly5flake8.style_guide.DecisionEngine.selected_explicitly1
+TypeAlias[Any]
+Any"_typeshed.Incomplete*36*37*38*39*310*311*312*313r¡
+ignored_explicitly4flake8.style_guide.DecisionEngine.ignored_explicitly1
+TypeAlias[Any]
+Any"_typeshed.Incomplete*36*37*38*39*310*311*312*313r
+selected*flake8.style_guide.DecisionEngine.selected1
+TypeAlias[Any]
+Any"_typeshed.Incomplete*36*37*38*39*310*311*312*313r‹
+ignored)flake8.style_guide.DecisionEngine.ignored1
+TypeAlias[Any]
+Any"_typeshed.Incomplete*36*37*38*39*310*311*312*313å
+StyleGuideManager$flake8.style_guide.StyleGuideManager"builtins.object*é
+__init__-flake8.style_guide.StyleGuideManager.__init__"
+None*V
+selfL
+$flake8.style_guide.StyleGuideManager"$flake8.style_guide.StyleGuideManager*5
+options(
+argparse.Namespace"argparse.Namespace*[
+	formatterL
+$flake8.formatting.base.BaseFormatter"$flake8.formatting.base.BaseFormatter*“
+deciderƒ
+-Union[flake8.style_guide.DecisionEngine,None]F
+!flake8.style_guide.DecisionEngine"!flake8.style_guide.DecisionEngine
+None z36z37z38z39z310z311z312z313*´
+populate_style_guides_with?flake8.style_guide.StyleGuideManager.populate_style_guides_with"¡
+9typing.Generator[flake8.style_guide.StyleGuide,None,None]>
+flake8.style_guide.StyleGuide"flake8.style_guide.StyleGuide
+None
+None"typing.Generator*V
+selfL
+$flake8.style_guide.StyleGuideManager"$flake8.style_guide.StyleGuideManager*5
+options(
+argparse.Namespace"argparse.Namespacez36z37z38z39z310z311z312z313*“
+processing_file4flake8.style_guide.StyleGuideManager.processing_file"¡
+9typing.Generator[flake8.style_guide.StyleGuide,None,None]>
+flake8.style_guide.StyleGuide"flake8.style_guide.StyleGuide
+None
+None"typing.Generator*V
+selfL
+$flake8.style_guide.StyleGuideManager"$flake8.style_guide.StyleGuideManager**
+filename
+builtins.str"builtins.strz36z37z38z39z310z311z312z313*’
+handle_error1flake8.style_guide.StyleGuideManager.handle_error"
+builtins.int"builtins.int*V
+selfL
+$flake8.style_guide.StyleGuideManager"$flake8.style_guide.StyleGuideManager*&
+code
+builtins.str"builtins.str**
+filename
+builtins.str"builtins.str*-
+line_number
+builtins.int"builtins.int*/
+column_number
+builtins.int"builtins.int*&
+text
+builtins.str"builtins.str*Y
+physical_lineD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None z36z37z38z39z310z311z312z313j36j37j38j39j310j311j312j313rŽ
+options,flake8.style_guide.StyleGuideManager.options1
+TypeAlias[Any]
+Any"_typeshed.Incomplete*36*37*38*39*310*311*312*313r’
+	formatter.flake8.style_guide.StyleGuideManager.formatter1
+TypeAlias[Any]
+Any"_typeshed.Incomplete*36*37*38*39*310*311*312*313rŠ
+stats*flake8.style_guide.StyleGuideManager.stats1
+TypeAlias[Any]
+Any"_typeshed.Incomplete*36*37*38*39*310*311*312*313rŽ
+decider,flake8.style_guide.StyleGuideManager.decider1
+TypeAlias[Any]
+Any"_typeshed.Incomplete*36*37*38*39*310*311*312*313r˜
+style_guides1flake8.style_guide.StyleGuideManager.style_guides1
+TypeAlias[Any]
+Any"_typeshed.Incomplete*36*37*38*39*310*311*312*313r¦
+default_style_guide8flake8.style_guide.StyleGuideManager.default_style_guide1
+TypeAlias[Any]
+Any"_typeshed.Incomplete*36*37*38*39*310*311*312*313rž
+style_guide_for4flake8.style_guide.StyleGuideManager.style_guide_for1
+TypeAlias[Any]
+Any"_typeshed.Incomplete*36*37*38*39*310*311*312*313ñ
+
+StyleGuideflake8.style_guide.StyleGuide"builtins.object*ó
+__init__&flake8.style_guide.StyleGuide.__init__"
+None*H
+self>
+flake8.style_guide.StyleGuide"flake8.style_guide.StyleGuide*5
+options(
+argparse.Namespace"argparse.Namespace*[
+	formatterL
+$flake8.formatting.base.BaseFormatter"$flake8.formatting.base.BaseFormatter*G
+stats<
+flake8.statistics.Statistics"flake8.statistics.Statistics*T
+filenameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *“
+deciderƒ
+-Union[flake8.style_guide.DecisionEngine,None]F
+!flake8.style_guide.DecisionEngine"!flake8.style_guide.DecisionEngine
+None z36z37z38z39z310z311z312z313*Ó
+copy"flake8.style_guide.StyleGuide.copy">
+flake8.style_guide.StyleGuide"flake8.style_guide.StyleGuide*H
+self>
+flake8.style_guide.StyleGuide"flake8.style_guide.StyleGuide*T
+filenameD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *¢
+extend_ignore_with‡
+)Union[typing.Sequence[builtins.str],None]N
+typing.Sequence[builtins.str]
+builtins.str"builtins.str"typing.Sequence
+None z36z37z38z39z310z311z312z313*þ
+processing_file-flake8.style_guide.StyleGuide.processing_file"¡
+9typing.Generator[flake8.style_guide.StyleGuide,None,None]>
+flake8.style_guide.StyleGuide"flake8.style_guide.StyleGuide
+None
+None"typing.Generator*H
+self>
+flake8.style_guide.StyleGuide"flake8.style_guide.StyleGuide**
+filename
+builtins.str"builtins.strz36z37z38z39z310z311z312z313*ð
+
+applies_to(flake8.style_guide.StyleGuide.applies_to"
+builtins.bool"builtins.bool*H
+self>
+flake8.style_guide.StyleGuide"flake8.style_guide.StyleGuide**
+filename
+builtins.str"builtins.strz36z37z38z39z310z311z312z313*š
+should_report_error1flake8.style_guide.StyleGuide.should_report_error":
+flake8.style_guide.Decision"flake8.style_guide.Decision*H
+self>
+flake8.style_guide.StyleGuide"flake8.style_guide.StyleGuide*&
+code
+builtins.str"builtins.strz36z37z38z39z310z311z312z313*ý
+handle_error*flake8.style_guide.StyleGuide.handle_error"
+builtins.int"builtins.int*H
+self>
+flake8.style_guide.StyleGuide"flake8.style_guide.StyleGuide*&
+code
+builtins.str"builtins.str**
+filename
+builtins.str"builtins.str*-
+line_number
+builtins.int"builtins.int*/
+column_number
+builtins.int"builtins.int*&
+text
+builtins.str"builtins.str*Y
+physical_lineD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None z36z37z38z39z310z311z312z313j36j37j38j39j310j311j312j313r‡
+options%flake8.style_guide.StyleGuide.options1
+TypeAlias[Any]
+Any"_typeshed.Incomplete*36*37*38*39*310*311*312*313r‹
+	formatter'flake8.style_guide.StyleGuide.formatter1
+TypeAlias[Any]
+Any"_typeshed.Incomplete*36*37*38*39*310*311*312*313rƒ
+stats#flake8.style_guide.StyleGuide.stats1
+TypeAlias[Any]
+Any"_typeshed.Incomplete*36*37*38*39*310*311*312*313r‡
+decider%flake8.style_guide.StyleGuide.decider1
+TypeAlias[Any]
+Any"_typeshed.Incomplete*36*37*38*39*310*311*312*313r‰
+filename&flake8.style_guide.StyleGuide.filename1
+TypeAlias[Any]
+Any"_typeshed.Incomplete*36*37*38*39*310*311*312*313*²
+__annotations__"flake8.style_guide.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*36*37*38*39*310*311*312*313*€
+__all__flake8.style_guide.__all__5
+Tuple[builtins.str]
+builtins.str"builtins.str*36*37*38*39*310*311*312*313

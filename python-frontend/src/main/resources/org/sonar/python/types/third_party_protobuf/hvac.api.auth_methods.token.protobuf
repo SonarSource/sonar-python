@@ -1,0 +1,278 @@
+
+hvac.api.auth_methods.token§8
+Token!hvac.api.auth_methods.token.Token"$hvac.api.vault_api_base.VaultApiBase*‚
+create(hvac.api.auth_methods.token.Token.create"
+Any*P
+selfF
+!hvac.api.auth_methods.token.Token"!hvac.api.auth_methods.token.Token*e
+id[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *l
+	role_name[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *k
+policies[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *g
+meta[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None */
+	no_parent
+builtins.bool"builtins.bool *7
+no_default_policy
+builtins.bool"builtins.bool */
+	renewable
+builtins.bool"builtins.bool *f
+ttl[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *g
+type[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *s
+explicit_max_ttl[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *0
+display_name
+builtins.str"builtins.str *,
+num_uses
+builtins.int"builtins.int *i
+period[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *o
+entity_alias[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *k
+wrap_ttl[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *
+mount_point
+Any z36z37z38z39z310z311z312z313*ß
+create_orphan/hvac.api.auth_methods.token.Token.create_orphan"
+Any*P
+selfF
+!hvac.api.auth_methods.token.Token"!hvac.api.auth_methods.token.Token*e
+id[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *l
+	role_name[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *k
+policies[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *g
+meta[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *7
+no_default_policy
+builtins.bool"builtins.bool */
+	renewable
+builtins.bool"builtins.bool *f
+ttl[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *g
+type[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *s
+explicit_max_ttl[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *0
+display_name
+builtins.str"builtins.str *,
+num_uses
+builtins.int"builtins.int *i
+period[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *o
+entity_alias[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *k
+wrap_ttl[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *
+mount_point
+Any z36z37z38z39z310z311z312z313*ƒ
+list_accessors0hvac.api.auth_methods.token.Token.list_accessors*
+self*
+mount_point z36z37z38z39z310z311z312z313*~
+lookup(hvac.api.auth_methods.token.Token.lookup*
+self*	
+token*
+mount_point z36z37z38z39z310z311z312z313*}
+lookup_self-hvac.api.auth_methods.token.Token.lookup_self*
+self*
+mount_point z36z37z38z39z310z311z312z313*“
+lookup_accessor1hvac.api.auth_methods.token.Token.lookup_accessor*
+self*
+accessor*
+mount_point z36z37z38z39z310z311z312z313*º
+renew'hvac.api.auth_methods.token.Token.renew"
+Any*P
+selfF
+!hvac.api.auth_methods.token.Token"!hvac.api.auth_methods.token.Token*
+token
+Any*l
+	increment[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *k
+wrap_ttl[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *
+mount_point
+Any z36z37z38z39z310z311z312z313*°
+
+renew_self,hvac.api.auth_methods.token.Token.renew_self"
+Any*P
+selfF
+!hvac.api.auth_methods.token.Token"!hvac.api.auth_methods.token.Token*l
+	increment[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *k
+wrap_ttl[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *
+mount_point
+Any z36z37z38z39z310z311z312z313*Ï
+renew_accessor0hvac.api.auth_methods.token.Token.renew_accessor"
+Any*P
+selfF
+!hvac.api.auth_methods.token.Token"!hvac.api.auth_methods.token.Token*
+accessor
+Any*l
+	increment[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *k
+wrap_ttl[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *
+mount_point
+Any z36z37z38z39z310z311z312z313*~
+revoke(hvac.api.auth_methods.token.Token.revoke*
+self*	
+token*
+mount_point z36z37z38z39z310z311z312z313*}
+revoke_self-hvac.api.auth_methods.token.Token.revoke_self*
+self*
+mount_point z36z37z38z39z310z311z312z313*“
+revoke_accessor1hvac.api.auth_methods.token.Token.revoke_accessor*
+self*
+accessor*
+mount_point z36z37z38z39z310z311z312z313*¦
+revoke_and_orphan_children<hvac.api.auth_methods.token.Token.revoke_and_orphan_children*
+self*	
+token*
+mount_point z36z37z38z39z310z311z312z313*ˆ
+	read_role+hvac.api.auth_methods.token.Token.read_role*
+self*
+	role_name*
+mount_point z36z37z38z39z310z311z312z313*{
+
+list_roles,hvac.api.auth_methods.token.Token.list_roles*
+self*
+mount_point z36z37z38z39z310z311z312z313*¦
+create_or_update_role7hvac.api.auth_methods.token.Token.create_or_update_role"
+Any*P
+selfF
+!hvac.api.auth_methods.token.Token"!hvac.api.auth_methods.token.Token*
+	role_name
+Any*s
+allowed_policies[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *v
+disallowed_policies[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *,
+orphan
+builtins.bool"builtins.bool */
+	renewable
+builtins.bool"builtins.bool *n
+path_suffix[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *y
+allowed_entity_aliases[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *
+mount_point
+Any *o
+token_period[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *y
+token_explicit_max_ttl[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None z36z37z38z39z310z311z312z313*Œ
+delete_role-hvac.api.auth_methods.token.Token.delete_role*
+self*
+	role_name*
+mount_point z36z37z38z39z310z311z312z313*o
+tidy&hvac.api.auth_methods.token.Token.tidy*
+self*
+mount_point z36z37z38z39z310z311z312z313j36j37j38j39j310j311j312j313*»
+__annotations__+hvac.api.auth_methods.token.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*36*37*38*39*310*311*312*313*ˆ
+DEFAULT_MOUNT_POINT/hvac.api.auth_methods.token.DEFAULT_MOUNT_POINT
+builtins.str"builtins.str*36*37*38*39*310*311*312*313

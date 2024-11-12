@@ -1,0 +1,163 @@
+
+_lzma“
+LZMADecompressor_lzma.LZMADecompressor"builtins.object*¡
+__init___lzma.LZMADecompressor.__init__"
+None*:
+self0
+_lzma.LZMADecompressor"_lzma.LZMADecompressor*R
+formatD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *T
+memlimitD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *ß
+filtersÏ
+HUnion[TypeAlias[typing.Sequence[typing.Mapping[builtins.str,Any]]],None]ö
+<TypeAlias[typing.Sequence[typing.Mapping[builtins.str,Any]]]Ÿ
+1typing.Sequence[typing.Mapping[builtins.str,Any]]Y
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping"typing.Sequence"_lzma._FilterChain
+None z36z37z38z39z310z311z312z313*—
+
+decompress!_lzma.LZMADecompressor.decompress" 
+builtins.bytes"builtins.bytes*:
+self0
+_lzma.LZMADecompressor"_lzma.LZMADecompressor*>
+data4
+typing_extensions.Buffer"typing_extensions.Buffer*.
+
+max_length
+builtins.int"builtins.int z36z37z38z39z310z311*…
+
+decompress!_lzma.LZMADecompressor.decompress" 
+builtins.bytes"builtins.bytes*:
+self0
+_lzma.LZMADecompressor"_lzma.LZMADecompressor*<
+data2
+_collections_abc.Buffer"_collections_abc.Buffer*.
+
+max_length
+builtins.int"builtins.int z312z313*±
+check_lzma.LZMADecompressor.check"
+builtins.int"builtins.int*:
+self0
+_lzma.LZMADecompressor"_lzma.LZMADecompressor0:property`z36z37z38z39z310z311z312z313*¯
+eof_lzma.LZMADecompressor.eof"
+builtins.bool"builtins.bool*:
+self0
+_lzma.LZMADecompressor"_lzma.LZMADecompressor0:property`z36z37z38z39z310z311z312z313*Á
+unused_data"_lzma.LZMADecompressor.unused_data" 
+builtins.bytes"builtins.bytes*:
+self0
+_lzma.LZMADecompressor"_lzma.LZMADecompressor0:property`z36z37z38z39z310z311z312z313*¿
+needs_input"_lzma.LZMADecompressor.needs_input"
+builtins.bool"builtins.bool*:
+self0
+_lzma.LZMADecompressor"_lzma.LZMADecompressor0:property`z36z37z38z39z310z311z312z3138j36j37j38j39j310j311j312j313Ö
+
+LZMACompressor_lzma.LZMACompressor"builtins.object*Ä
+__init___lzma.LZMACompressor.__init__"
+None*6
+self,
+_lzma.LZMACompressor"_lzma.LZMACompressor*R
+formatD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *)
+check
+builtins.int"builtins.int *R
+presetD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *ß
+filtersÏ
+HUnion[TypeAlias[typing.Sequence[typing.Mapping[builtins.str,Any]]],None]ö
+<TypeAlias[typing.Sequence[typing.Mapping[builtins.str,Any]]]Ÿ
+1typing.Sequence[typing.Mapping[builtins.str,Any]]Y
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping"typing.Sequence"_lzma._FilterChain
+None z36z37z38z39z310z311z312z313*Í
+compress_lzma.LZMACompressor.compress" 
+builtins.bytes"builtins.bytes*.,
+_lzma.LZMACompressor"_lzma.LZMACompressor*64
+typing_extensions.Buffer"typing_extensions.Bufferz36z37z38z39z310z311*»
+compress_lzma.LZMACompressor.compress" 
+builtins.bytes"builtins.bytes*.,
+_lzma.LZMACompressor"_lzma.LZMACompressor*42
+_collections_abc.Buffer"_collections_abc.Bufferz312z313*¡
+flush_lzma.LZMACompressor.flush" 
+builtins.bytes"builtins.bytes*6
+self,
+_lzma.LZMACompressor"_lzma.LZMACompressorz36z37z38z39z310z311z312z3138j36j37j38j39j310j311j312j313T
+	LZMAError_lzma.LZMAError"builtins.Exceptionj36j37j38j39j310j311j312j313’
+is_check_supported_lzma.is_check_supported"
+builtins.bool"builtins.bool*
+builtins.int"builtins.intz36z37z38z39z310z311z312z313*¥
+__annotations___lzma.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*36*37*38*39*310*311*312*313*b
+FORMAT_AUTO_lzma.FORMAT_AUTO
+builtins.int"builtins.int*36*37*38*39*310*311*312*313*^
+	FORMAT_XZ_lzma.FORMAT_XZ
+builtins.int"builtins.int*36*37*38*39*310*311*312*313*d
+FORMAT_ALONE_lzma.FORMAT_ALONE
+builtins.int"builtins.int*36*37*38*39*310*311*312*313*`
+
+FORMAT_RAW_lzma.FORMAT_RAW
+builtins.int"builtins.int*36*37*38*39*310*311*312*313*`
+
+CHECK_NONE_lzma.CHECK_NONE
+builtins.int"builtins.int*36*37*38*39*310*311*312*313*b
+CHECK_CRC32_lzma.CHECK_CRC32
+builtins.int"builtins.int*36*37*38*39*310*311*312*313*b
+CHECK_CRC64_lzma.CHECK_CRC64
+builtins.int"builtins.int*36*37*38*39*310*311*312*313*d
+CHECK_SHA256_lzma.CHECK_SHA256
+builtins.int"builtins.int*36*37*38*39*310*311*312*313*d
+CHECK_ID_MAX_lzma.CHECK_ID_MAX
+builtins.int"builtins.int*36*37*38*39*310*311*312*313*f
+CHECK_UNKNOWN_lzma.CHECK_UNKNOWN
+builtins.int"builtins.int*36*37*38*39*310*311*312*313*d
+FILTER_LZMA1_lzma.FILTER_LZMA1
+builtins.int"builtins.int*36*37*38*39*310*311*312*313*d
+FILTER_LZMA2_lzma.FILTER_LZMA2
+builtins.int"builtins.int*36*37*38*39*310*311*312*313*d
+FILTER_DELTA_lzma.FILTER_DELTA
+builtins.int"builtins.int*36*37*38*39*310*311*312*313*`
+
+FILTER_X86_lzma.FILTER_X86
+builtins.int"builtins.int*36*37*38*39*310*311*312*313*b
+FILTER_IA64_lzma.FILTER_IA64
+builtins.int"builtins.int*36*37*38*39*310*311*312*313*`
+
+FILTER_ARM_lzma.FILTER_ARM
+builtins.int"builtins.int*36*37*38*39*310*311*312*313*j
+FILTER_ARMTHUMB_lzma.FILTER_ARMTHUMB
+builtins.int"builtins.int*36*37*38*39*310*311*312*313*d
+FILTER_SPARC_lzma.FILTER_SPARC
+builtins.int"builtins.int*36*37*38*39*310*311*312*313*h
+FILTER_POWERPC_lzma.FILTER_POWERPC
+builtins.int"builtins.int*36*37*38*39*310*311*312*313*X
+MF_HC3_lzma.MF_HC3
+builtins.int"builtins.int*36*37*38*39*310*311*312*313*X
+MF_HC4_lzma.MF_HC4
+builtins.int"builtins.int*36*37*38*39*310*311*312*313*X
+MF_BT2_lzma.MF_BT2
+builtins.int"builtins.int*36*37*38*39*310*311*312*313*X
+MF_BT3_lzma.MF_BT3
+builtins.int"builtins.int*36*37*38*39*310*311*312*313*X
+MF_BT4_lzma.MF_BT4
+builtins.int"builtins.int*36*37*38*39*310*311*312*313*^
+	MODE_FAST_lzma.MODE_FAST
+builtins.int"builtins.int*36*37*38*39*310*311*312*313*b
+MODE_NORMAL_lzma.MODE_NORMAL
+builtins.int"builtins.int*36*37*38*39*310*311*312*313*h
+PRESET_DEFAULT_lzma.PRESET_DEFAULT
+builtins.int"builtins.int*36*37*38*39*310*311*312*313*h
+PRESET_EXTREME_lzma.PRESET_EXTREME
+builtins.int"builtins.int*36*37*38*39*310*311*312*313

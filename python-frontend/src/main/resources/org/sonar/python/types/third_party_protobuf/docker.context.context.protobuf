@@ -1,0 +1,212 @@
+
+docker.context.contextî
+_StorageData#docker.context.context._StorageData"builtins.object8j36j37rf
+MetadataPath0docker.context.context._StorageData.MetadataPath
+builtins.str"builtins.str*36*37r\
+TLSPath+docker.context.context._StorageData.TLSPath
+builtins.str"builtins.str*36*37d
+_StorageData#docker.context.context._StorageData"typing._TypedDict8j38j39j310j311j312j313œ
+_Storagedocker.context.context._Storage"builtins.object8j36j37rÜ
+Storage'docker.context.context._Storage.StorageJ
+#docker.context.context._StorageData"#docker.context.context._StorageData*36*37\
+_Storagedocker.context.context._Storage"typing._TypedDict8j38j39j310j311j312j313Ü
+	_Endpoint docker.context.context._Endpoint"builtins.object8j36j37rS
+Host%docker.context.context._Endpoint.Host
+builtins.str"builtins.str*36*37rg
+SkipTLSVerify.docker.context.context._Endpoint.SkipTLSVerify
+builtins.bool"builtins.bool*36*37^
+	_Endpoint docker.context.context._Endpoint"typing._TypedDict8j38j39j310j311j312j313Ñ
+_TLSMaterial#docker.context.context._TLSMaterial"builtins.object8j36j37j38j39j310j311j312j313ró
+TLSMaterial/docker.context.context._TLSMaterial.TLSMaterial≤
+7builtins.dict[builtins.str,builtins.list[builtins.str]]
+builtins.str"builtins.strJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list"builtins.dict*36*37*38*39*310*311*312*313√
+_MetaMetaData$docker.context.context._MetaMetaData"builtins.object8j36j37rq
+StackOrchestrator6docker.context.context._MetaMetaData.StackOrchestrator
+builtins.str"builtins.str*36*37f
+_MetaMetaData$docker.context.context._MetaMetaData"typing._TypedDict8j38j39j310j311j312j313£
+	_Metadata docker.context.context._Metadata"builtins.object8j36j37rS
+Name%docker.context.context._Metadata.Name
+builtins.str"builtins.str*36*37rã
+Metadata)docker.context.context._Metadata.MetadataL
+$docker.context.context._MetaMetaData"$docker.context.context._MetaMetaData*36*37rı
+	Endpoints*docker.context.context._Metadata.Endpoints≥
+=typing.Mapping[builtins.str,docker.context.context._Endpoint]
+builtins.str"builtins.strD
+ docker.context.context._Endpoint" docker.context.context._Endpoint"typing.Mapping*36*37^
+	_Metadata docker.context.context._Metadata"typing._TypedDict8j38j39j310j311j312j313¬6
+Contextdocker.context.context.Context"builtins.object*≤
+__init__'docker.context.context.Context.__init__"
+None*J
+self@
+docker.context.context.Context"docker.context.context.Context*&
+name
+builtins.str"builtins.str*X
+orchestratorD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *P
+hostD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *ü
+	endpointsç
+IUnion[typing.Mapping[builtins.str,docker.context.context._Endpoint],None]≥
+=typing.Mapping[builtins.str,docker.context.context._Endpoint]
+builtins.str"builtins.strD
+ docker.context.context._Endpoint" docker.context.context._Endpoint"typing.Mapping
+None *)
+tls
+builtins.bool"builtins.bool z36z37*≥
+__init__'docker.context.context.Context.__init__"
+None*J
+self@
+docker.context.context.Context"docker.context.context.Context*&
+name
+builtins.str"builtins.str*X
+orchestratorD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *P
+hostD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *å
+	endpoints˙
+=Union[typing.Mapping[builtins.str,TypeAlias[TypedDict]],None]¨
+1typing.Mapping[builtins.str,TypeAlias[TypedDict]]
+builtins.str"builtins.strI
+TypeAlias[TypedDict]
+	TypedDict" docker.context.context._Endpoint"typing.Mapping
+None *)
+tls
+builtins.bool"builtins.bool z38z39z310z311z312z313*Î
+set_endpoint+docker.context.context.Context.set_endpoint"
+None*J
+self@
+docker.context.context.Context"docker.context.context.Context*(
+name
+builtins.str"builtins.str *P
+hostD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *•
+tls_cfgï
+,Union[typing.Mapping[builtins.str,Any],None]Y
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping
+None *5
+skip_tls_verify
+builtins.bool"builtins.bool *Y
+def_namespaceD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None z36z37z38z39z310z311z312z313*¸
+inspect&docker.context.context.Context.inspect"Y
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping*J
+self@
+docker.context.context.Context"docker.context.context.Contextz36z37z38z39z310z311z312z313*è
+load_context+docker.context.context.Context.load_context"z
+*Union[docker.context.context.Context,None]@
+docker.context.context.Context"docker.context.context.Context
+None*y
+clsp
+$Type[docker.context.context.Context]@
+docker.context.context.Context"docker.context.context.Context"type*&
+name
+builtins.str"builtins.str0:classmethodpz36z37z38z39z310z311z312z313*•
+save#docker.context.context.Context.save"
+None*J
+self@
+docker.context.context.Context"docker.context.context.Contextz36z37z38z39z310z311z312z313*©
+remove%docker.context.context.Context.remove"
+None*J
+self@
+docker.context.context.Context"docker.context.context.Contextz36z37z38z39z310z311z312z313*˛
+__call__'docker.context.context.Context.__call__"Y
+ typing.Mapping[builtins.str,Any]
+builtins.str"builtins.str
+Any"typing.Mapping*J
+self@
+docker.context.context.Context"docker.context.context.Contextz36z37z38z39z310z311z312z313*œ
+is_docker_host-docker.context.context.Context.is_docker_host"
+builtins.bool"builtins.bool*J
+self@
+docker.context.context.Context"docker.context.context.Contextz36z37z38z39z310z311z312z313*«
+Name#docker.context.context.Context.Name"
+builtins.str"builtins.str*J
+self@
+docker.context.context.Context"docker.context.context.Context0:property`z36z37z38z39z310z311z312z313*Ô
+Host#docker.context.context.Context.Host"D
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*J
+self@
+docker.context.context.Context"docker.context.context.Context0:property`z36z37z38z39z310z311z312z313*◊
+Orchestrator+docker.context.context.Context.Orchestrator"
+builtins.str"builtins.str*J
+self@
+docker.context.context.Context"docker.context.context.Context0:property`z36z37z38z39z310z311z312z313*€
+Metadata'docker.context.context.Context.Metadata"D
+ docker.context.context._Metadata" docker.context.context._Metadata*J
+self@
+docker.context.context.Context"docker.context.context.Context0:property`z36z37*Ù
+Metadata'docker.context.context.Context.Metadata"I
+TypeAlias[TypedDict]
+	TypedDict" docker.context.context._Metadata*J
+self@
+docker.context.context.Context"docker.context.context.Context0:property`z38z39z310z311z312z313*º
+	TLSConfig(docker.context.context.Context.TLSConfig"
+Any*J
+self@
+docker.context.context.Context"docker.context.context.Context0:property`z36z37z38z39z310z311z312z313*É
+TLSMaterial*docker.context.context.Context.TLSMaterial"J
+#docker.context.context._TLSMaterial"#docker.context.context._TLSMaterial*J
+self@
+docker.context.context.Context"docker.context.context.Context0:property`z36z37z38z39z310z311z312z313*◊
+Storage&docker.context.context.Context.Storage"B
+docker.context.context._Storage"docker.context.context._Storage*J
+self@
+docker.context.context.Context"docker.context.context.Context0:property`z36z37*Ò
+Storage&docker.context.context.Context.Storage"H
+TypeAlias[TypedDict]
+	TypedDict"docker.context.context._Storage*J
+self@
+docker.context.context.Context"docker.context.context.Context0:property`z38z39z310z311z312z313j36j37j38j39j310j311j312j313rm
+name#docker.context.context.Context.name
+builtins.str"builtins.str*36*37*38*39*310*311*312*313r•
+context_type+docker.context.context.Context.context_typeD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*36*37*38*39*310*311*312*313r•
+orchestrator+docker.context.context.Context.orchestratorD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*36*37*38*39*310*311*312*313rÒ
+	endpoints(docker.context.context.Context.endpoints±
+<builtins.dict[builtins.str,docker.context.context._Endpoint]
+builtins.str"builtins.strD
+ docker.context.context._Endpoint" docker.context.context._Endpoint"builtins.dict*36*37r˛
+	endpoints(docker.context.context.Context.endpoints™
+0builtins.dict[builtins.str,TypeAlias[TypedDict]]
+builtins.str"builtins.strI
+TypeAlias[TypedDict]
+	TypedDict" docker.context.context._Endpoint"builtins.dict*38*39*310*311*312*313rÆ
+tls_cfg&docker.context.context.Context.tls_cfgW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*36*37*38*39*310*311*312*313rw
+	meta_path(docker.context.context.Context.meta_path
+builtins.str"builtins.str*36*37*38*39*310*311*312*313ru
+tls_path'docker.context.context.Context.tls_path
+builtins.str"builtins.str*36*37*38*39*310*311*312*313*∂
+__annotations__&docker.context.context.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*36*37*38*39*310*311*312*313*>
+	TypedDict docker.context.context.TypedDict
+Any*36*37

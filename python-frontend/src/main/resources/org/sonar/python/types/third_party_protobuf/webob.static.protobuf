@@ -1,0 +1,151 @@
+
+webob.staticä
+FileAppwebob.static.FileApp"builtins.object*è
+__init__webob.static.FileApp.__init__"
+None*6
+self,
+webob.static.FileApp"webob.static.FileApp*Å
+filename¶
+cTypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]²
+XUnion[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytesF
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLikeL
+os.PathLike[builtins.bytes] 
+builtins.bytes"builtins.bytes"os.PathLike"_typeshed.StrOrBytesPath*
+kw
+Anyz36z37z38z39z310z311z312z313*ü
+__call__webob.static.FileApp.__call__"2
+webob.response.Response"webob.response.Response*6
+self,
+webob.static.FileApp"webob.static.FileApp*7
+req.
+webob.request.Request"webob.request.Request0:wsgifyz36z37z38z39z310z311z312z313j36j37j38j39j310j311j312j313r†
+filenamewebob.static.FileApp.filename¶
+cTypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]²
+XUnion[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytesF
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLikeL
+os.PathLike[builtins.bytes] 
+builtins.bytes"builtins.bytes"os.PathLike"_typeshed.StrOrBytesPath*36*37*38*39*310*311*312*313rš
+kwwebob.static.FileApp.kwW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*36*37*38*39*310*311*312*313Ú
+FileIterwebob.static.FileIter"builtins.object*æ
+__init__webob.static.FileIter.__init__"
+None*8
+self.
+webob.static.FileIter"webob.static.FileIter*R
+fileH
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IOz36z37z38z39z310z311z312z313*ç
+app_iter_range$webob.static.FileIter.app_iter_range"T
+typing.Iterator[builtins.bytes] 
+builtins.bytes"builtins.bytes"typing.Iterator*8
+self.
+webob.static.FileIter"webob.static.FileIter*P
+seekD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *Q
+limitD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *V
+
+block_sizeD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None z36z37z38z39z310z311z312z313j36j37j38j39j310j311j312j313r
+filewebob.static.FileIter.fileH
+typing.IO[builtins.bytes] 
+builtins.bytes"builtins.bytes"	typing.IO*36*37*38*39*310*311*312*313r›
+__iter__webob.static.FileIter.__iter__K
+CallableType[builtins.function]&
+builtins.function"builtins.function*36*37*38*39*310*311*312*313
+DirectoryAppwebob.static.DirectoryApp"builtins.object*ã
+__init__"webob.static.DirectoryApp.__init__"
+None*@
+self6
+webob.static.DirectoryApp"webob.static.DirectoryApp*Á
+path¶
+cTypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]²
+XUnion[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytesF
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLikeL
+os.PathLike[builtins.bytes] 
+builtins.bytes"builtins.bytes"os.PathLike"_typeshed.StrOrBytesPath*.
+
+index_page
+builtins.str"builtins.str *>
+hide_index_with_redirect
+builtins.bool"builtins.bool *
+kw
+Anyz36z37z38z39z310z311z312z313*Ž
+make_fileapp&webob.static.DirectoryApp.make_fileapp",
+webob.static.FileApp"webob.static.FileApp*@
+self6
+webob.static.DirectoryApp"webob.static.DirectoryApp*Á
+path¶
+cTypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]²
+XUnion[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytesF
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLikeL
+os.PathLike[builtins.bytes] 
+builtins.bytes"builtins.bytes"os.PathLike"_typeshed.StrOrBytesPathz36z37z38z39z310z311z312z313*ó
+__call__"webob.static.DirectoryApp.__call__"™
+3Union[webob.response.Response,webob.static.FileApp]2
+webob.response.Response"webob.response.Response,
+webob.static.FileApp"webob.static.FileApp*@
+self6
+webob.static.DirectoryApp"webob.static.DirectoryApp*7
+req.
+webob.request.Request"webob.request.Request0:wsgifyz36z37z38z39z310z311z312z313*§
+indexwebob.static.DirectoryApp.index"™
+3Union[webob.response.Response,webob.static.FileApp]2
+webob.response.Response"webob.response.Response,
+webob.static.FileApp"webob.static.FileApp*@
+self6
+webob.static.DirectoryApp"webob.static.DirectoryApp*7
+req.
+webob.request.Request"webob.request.Request*Á
+path¶
+cTypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]²
+XUnion[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytesF
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLikeL
+os.PathLike[builtins.bytes] 
+builtins.bytes"builtins.bytes"os.PathLike"_typeshed.StrOrBytesPathz36z37z38z39z310z311z312z313j36j37j38j39j310j311j312j313r²
+pathwebob.static.DirectoryApp.pathf
+"Union[builtins.str,builtins.bytes]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytes*36*37*38*39*310*311*312*313rœ
+
+index_page$webob.static.DirectoryApp.index_pageD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*36*37*38*39*310*311*312*313r’
+hide_index_with_redirect2webob.static.DirectoryApp.hide_index_with_redirect
+builtins.bool"builtins.bool*36*37*38*39*310*311*312*313r¯
+
+fileapp_kw$webob.static.DirectoryApp.fileapp_kwW
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*36*37*38*39*310*311*312*313*¬
+__annotations__webob.static.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*36*37*38*39*310*311*312*313*g
+
+BLOCK_SIZEwebob.static.BLOCK_SIZE
+builtins.int"builtins.int*36*37*38*39*310*311*312*313

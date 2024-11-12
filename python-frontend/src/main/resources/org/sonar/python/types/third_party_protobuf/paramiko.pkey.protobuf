@@ -1,6 +1,29 @@
 
-paramiko.pkeyß#
-PKeyparamiko.pkey.PKey"builtins.object*Æ
+paramiko.pkeyÎ;
+PKeyparamiko.pkey.PKey"builtins.object*Ó
+	from_pathparamiko.pkey.PKey.from_path"(
+paramiko.pkey.PKey"paramiko.pkey.PKey*j
+path`
+ Union[pathlib.Path,builtins.str]
+pathlib.Path"pathlib.Path
+builtins.str"builtins.str*\
+
+passphraseJ
+Union[builtins.bytes,None] 
+builtins.bytes"builtins.bytes
+None 0:staticmethodhz36z37z38z39z310z311z312z313*ô
+from_type_string#paramiko.pkey.PKey.from_type_string"(
+paramiko.pkey.PKey"paramiko.pkey.PKey**
+key_type
+builtins.str"builtins.str*/
+	key_bytes 
+builtins.bytes"builtins.bytes0:staticmethodhz36z37z38z39z310z311z312z313*…
+identifiersparamiko.pkey.PKey.identifiers"J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*U
+clsL
+Type[paramiko.pkey.PKey](
+paramiko.pkey.PKey"paramiko.pkey.PKey"type0:classmethodpz36z37z38z39z310z311z312z313*Ð
 __init__paramiko.pkey.PKey.__init__"
 None*2
 self(
@@ -12,40 +35,52 @@ $Union[paramiko.message.Message,None]4
 dataD
 Union[builtins.str,None]
 builtins.str"builtins.str
-None z36z37z38z39z310z311*•
+None z36z37z38z39z310z311z312z313*Ÿ
 asbytesparamiko.pkey.PKey.asbytes" 
 builtins.bytes"builtins.bytes*2
 self(
-paramiko.pkey.PKey"paramiko.pkey.PKeyz36z37z38z39z310z311*™
+paramiko.pkey.PKey"paramiko.pkey.PKeyz36z37z38z39z310z311z312z313*£
 	__bytes__paramiko.pkey.PKey.__bytes__" 
 builtins.bytes"builtins.bytes*2
 self(
-paramiko.pkey.PKey"paramiko.pkey.PKeyz36z37z38z39z310z311*¯
+paramiko.pkey.PKey"paramiko.pkey.PKeyz36z37z38z39z310z311z312z313*¹
 __eq__paramiko.pkey.PKey.__eq__"
 builtins.bool"builtins.bool**(
 paramiko.pkey.PKey"paramiko.pkey.PKey*$"
-builtins.object"builtins.objectz36z37z38z39z310z311*“
+builtins.object"builtins.objectz36z37z38z39z310z311z312z313*
+__hash__paramiko.pkey.PKey.__hash__"
+builtins.int"builtins.int*2
+self(
+paramiko.pkey.PKey"paramiko.pkey.PKeyz36z37z38z39z310z311z312z313*
 get_nameparamiko.pkey.PKey.get_name"
 builtins.str"builtins.str*2
 self(
-paramiko.pkey.PKey"paramiko.pkey.PKeyz36z37z38z39z310z311*“
+paramiko.pkey.PKey"paramiko.pkey.PKeyz36z37z38z39z310z311z312z313*·
+algorithm_name!paramiko.pkey.PKey.algorithm_name"
+builtins.str"builtins.str*2
+self(
+paramiko.pkey.PKey"paramiko.pkey.PKey0:property`z36z37z38z39z310z311z312z313*
 get_bitsparamiko.pkey.PKey.get_bits"
 builtins.int"builtins.int*2
 self(
-paramiko.pkey.PKey"paramiko.pkey.PKeyz36z37z38z39z310z311*•
+paramiko.pkey.PKey"paramiko.pkey.PKeyz36z37z38z39z310z311z312z313*Ÿ
 can_signparamiko.pkey.PKey.can_sign"
 builtins.bool"builtins.bool*2
 self(
-paramiko.pkey.PKey"paramiko.pkey.PKeyz36z37z38z39z310z311*¥
+paramiko.pkey.PKey"paramiko.pkey.PKeyz36z37z38z39z310z311z312z313*¯
 get_fingerprint"paramiko.pkey.PKey.get_fingerprint" 
 builtins.bytes"builtins.bytes*2
 self(
-paramiko.pkey.PKey"paramiko.pkey.PKeyz36z37z38z39z310z311*—
+paramiko.pkey.PKey"paramiko.pkey.PKeyz36z37z38z39z310z311z312z313*±
+fingerprintparamiko.pkey.PKey.fingerprint"
+builtins.str"builtins.str*2
+self(
+paramiko.pkey.PKey"paramiko.pkey.PKey0:property`z36z37z38z39z310z311z312z313*¡
 
 get_base64paramiko.pkey.PKey.get_base64"
 builtins.str"builtins.str*2
 self(
-paramiko.pkey.PKey"paramiko.pkey.PKeyz36z37z38z39z310z311*¸
+paramiko.pkey.PKey"paramiko.pkey.PKeyz36z37z38z39z310z311z312z313*Â
 sign_ssh_data paramiko.pkey.PKey.sign_ssh_data"4
 paramiko.message.Message"paramiko.message.Message*2
 self(
@@ -55,7 +90,7 @@ get_base64paramiko.pkey.PKey.get_base64"
 	algorithmD
 Union[builtins.str,None]
 builtins.str"builtins.str
-None z36z37z38z39z310z311*Œ
+None z36z37z38z39z310z311z312z313*–
 verify_ssh_sig!paramiko.pkey.PKey.verify_ssh_sig"
 builtins.bool"builtins.bool*2
 self(
@@ -63,20 +98,30 @@ get_base64paramiko.pkey.PKey.get_base64"
 data 
 builtins.bytes"builtins.bytes*=
 msg4
-paramiko.message.Message"paramiko.message.Messagez36z37z38z39z310z311*Ø
+paramiko.message.Message"paramiko.message.Messagez36z37z38z39z310z311z312z313*Ä	
 from_private_key_file(paramiko.pkey.PKey.from_private_key_file"Y
 paramiko.pkey.PKey.Self(
 paramiko.pkey.PKey"paramiko.pkey.PKey"paramiko.pkey.PKey*Œ
 cls‚
 Type[paramiko.pkey.PKey.Self]Y
 paramiko.pkey.PKey.Self(
-paramiko.pkey.PKey"paramiko.pkey.PKey"paramiko.pkey.PKey"type**
-filename
-builtins.str"builtins.str*T
+paramiko.pkey.PKey"paramiko.pkey.PKey"paramiko.pkey.PKey"type*‹
+filenameü
+‚TypeAlias[Union[builtins.int,TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]]]Ò
+wUnion[builtins.int,TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]]
+builtins.int"builtins.int¶
+cTypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]²
+XUnion[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytesF
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLikeL
+os.PathLike[builtins.bytes] 
+builtins.bytes"builtins.bytes"os.PathLike"_typeshed.StrOrBytesPath"_typeshed.FileDescriptorOrPath*T
 passwordD
 Union[builtins.str,None]
 builtins.str"builtins.str
-None 0:classmethodpz36z37z38z39z310z311*ô
+None 0:classmethodpz36z37z38z39z310z311z312z313*þ
 from_private_key#paramiko.pkey.PKey.from_private_key"Y
 paramiko.pkey.PKey.Self(
 paramiko.pkey.PKey"paramiko.pkey.PKey"paramiko.pkey.PKey*Œ
@@ -90,17 +135,27 @@ get_base64paramiko.pkey.PKey.get_base64"
 passwordD
 Union[builtins.str,None]
 builtins.str"builtins.str
-None 0:classmethodpz36z37z38z39z310z311*
+None 0:classmethodpz36z37z38z39z310z311z312z313*‰
 write_private_key_file)paramiko.pkey.PKey.write_private_key_file"
 None*2
 self(
-paramiko.pkey.PKey"paramiko.pkey.PKey**
-filename
-builtins.str"builtins.str*T
+paramiko.pkey.PKey"paramiko.pkey.PKey*‹
+filenameü
+‚TypeAlias[Union[builtins.int,TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]]]Ò
+wUnion[builtins.int,TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]]
+builtins.int"builtins.int¶
+cTypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]²
+XUnion[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytesF
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLikeL
+os.PathLike[builtins.bytes] 
+builtins.bytes"builtins.bytes"os.PathLike"_typeshed.StrOrBytesPath"_typeshed.FileDescriptorOrPath*T
 passwordD
 Union[builtins.str,None]
 builtins.str"builtins.str
-None z36z37z38z39z310z311*¹
+None z36z37z38z39z310z311z312z313*Ã
 write_private_key$paramiko.pkey.PKey.write_private_key"
 None*2
 self(
@@ -111,7 +166,7 @@ get_base64paramiko.pkey.PKey.get_base64"
 passwordD
 Union[builtins.str,None]
 builtins.str"builtins.str
-None z36z37z38z39z310z311*¢
+None z36z37z38z39z310z311z312z313*¬
 load_certificate#paramiko.pkey.PKey.load_certificate"
 None*2
 self(
@@ -119,21 +174,21 @@ get_base64paramiko.pkey.PKey.get_base64"
 value„
 ,Union[paramiko.message.Message,builtins.str]4
 paramiko.message.Message"paramiko.message.Message
-builtins.str"builtins.strz36z37z38z39z310z311j36j37j38j39j310j311r±
+builtins.str"builtins.strz36z37z38z39z310z311z312z313j36j37j38j39j310j311j312j313r»
 public_blobparamiko.pkey.PKey.public_blobh
 $Union[paramiko.pkey.PublicBlob,None]4
 paramiko.pkey.PublicBlob"paramiko.pkey.PublicBlob
-None*36*37*38*39*310*311r‰
+None*36*37*38*39*310*311*312*313r“
 	BEGIN_TAGparamiko.pkey.PKey.BEGIN_TAGD
 re.Pattern[builtins.str]
 builtins.str"builtins.str"
-re.Pattern*36*37*38*39*310*311r…
+re.Pattern*36*37*38*39*310*311*312*313r
 END_TAGparamiko.pkey.PKey.END_TAGD
 re.Pattern[builtins.str]
 builtins.str"builtins.str"
-re.Pattern*36*37*38*39*310*311è
+re.Pattern*36*37*38*39*310*311*312*313®
 
-PublicBlobparamiko.pkey.PublicBlob"builtins.object*»
+PublicBlobparamiko.pkey.PublicBlob"builtins.object*Å
 __init__!paramiko.pkey.PublicBlob.__init__"
 None*>
 self4
@@ -145,16 +200,26 @@ PublicBlobparamiko.pkey.PublicBlob"builtins.object*»
 commentD
 Union[builtins.str,None]
 builtins.str"builtins.str
-None z36z37z38z39z310z311*¦
+None z36z37z38z39z310z311z312z313*’	
 	from_file"paramiko.pkey.PublicBlob.from_file"q
 paramiko.pkey.PublicBlob.Self4
 paramiko.pkey.PublicBlob"paramiko.pkey.PublicBlob"paramiko.pkey.PublicBlob*ª
 cls 
 #Type[paramiko.pkey.PublicBlob.Self]q
 paramiko.pkey.PublicBlob.Self4
-paramiko.pkey.PublicBlob"paramiko.pkey.PublicBlob"paramiko.pkey.PublicBlob"type**
-filename
-builtins.str"builtins.str0:classmethodpz36z37z38z39z310z311*¨
+paramiko.pkey.PublicBlob"paramiko.pkey.PublicBlob"paramiko.pkey.PublicBlob"type*‹
+filenameü
+‚TypeAlias[Union[builtins.int,TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]]]Ò
+wUnion[builtins.int,TypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]]
+builtins.int"builtins.int¶
+cTypeAlias[Union[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]]²
+XUnion[builtins.str,builtins.bytes,os.PathLike[builtins.str],os.PathLike[builtins.bytes]]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytesF
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLikeL
+os.PathLike[builtins.bytes] 
+builtins.bytes"builtins.bytes"os.PathLike"_typeshed.StrOrBytesPath"_typeshed.FileDescriptorOrPath0:classmethodpz36z37z38z39z310z311z312z313*²
 from_string$paramiko.pkey.PublicBlob.from_string"q
 paramiko.pkey.PublicBlob.Self4
 paramiko.pkey.PublicBlob"paramiko.pkey.PublicBlob"paramiko.pkey.PublicBlob*ª
@@ -163,7 +228,7 @@ PublicBlobparamiko.pkey.PublicBlob"builtins.object*»
 paramiko.pkey.PublicBlob.Self4
 paramiko.pkey.PublicBlob"paramiko.pkey.PublicBlob"paramiko.pkey.PublicBlob"type*(
 string
-builtins.str"builtins.str0:classmethodpz36z37z38z39z310z311*Ã
+builtins.str"builtins.str0:classmethodpz36z37z38z39z310z311z312z313*Í
 from_message%paramiko.pkey.PublicBlob.from_message"q
 paramiko.pkey.PublicBlob.Self4
 paramiko.pkey.PublicBlob"paramiko.pkey.PublicBlob"paramiko.pkey.PublicBlob*ª
@@ -172,21 +237,21 @@ PublicBlobparamiko.pkey.PublicBlob"builtins.object*»
 paramiko.pkey.PublicBlob.Self4
 paramiko.pkey.PublicBlob"paramiko.pkey.PublicBlob"paramiko.pkey.PublicBlob"type*A
 message4
-paramiko.message.Message"paramiko.message.Message0:classmethodpz36z37z38z39z310z311*Á
+paramiko.message.Message"paramiko.message.Message0:classmethodpz36z37z38z39z310z311z312z313*Ë
 __eq__paramiko.pkey.PublicBlob.__eq__"
 builtins.bool"builtins.bool*64
 paramiko.pkey.PublicBlob"paramiko.pkey.PublicBlob*$"
-builtins.object"builtins.objectz36z37z38z39z310z311*Á
+builtins.object"builtins.objectz36z37z38z39z310z311z312z313*Ë
 __ne__paramiko.pkey.PublicBlob.__ne__"
 builtins.bool"builtins.bool*64
 paramiko.pkey.PublicBlob"paramiko.pkey.PublicBlob*$"
-builtins.object"builtins.objectz36z37z38z39z310z311j36j37j38j39j310j311re
+builtins.object"builtins.objectz36z37z38z39z310z311z312z313j36j37j38j39j310j311j312j313ro
 key_type!paramiko.pkey.PublicBlob.key_type
-builtins.str"builtins.str*36*37*38*39*310*311ri
+builtins.str"builtins.str*36*37*38*39*310*311*312*313rs
 key_blob!paramiko.pkey.PublicBlob.key_blob 
-builtins.bytes"builtins.bytes*36*37*38*39*310*311rc
+builtins.bytes"builtins.bytes*36*37*38*39*310*311*312*313rm
 comment paramiko.pkey.PublicBlob.comment
-builtins.str"builtins.str*36*37*38*39*310*311ÿ
+builtins.str"builtins.str*36*37*38*39*310*311*312*313‰
 _unpad_opensshparamiko.pkey._unpad_openssh"“
 paramiko.pkey._BytesTx
 (Union[builtins.bytes,builtins.bytearray] 
@@ -196,10 +261,10 @@ PublicBlobparamiko.pkey.PublicBlob"builtins.object*»
 paramiko.pkey._BytesTx
 (Union[builtins.bytes,builtins.bytearray] 
 builtins.bytes"builtins.bytes(
-builtins.bytearray"builtins.bytearrayz36z37z38z39z310z311*£
+builtins.bytearray"builtins.bytearrayz36z37z38z39z310z311z312z313*­
 __annotations__paramiko.pkey.__annotations__W
 builtins.dict[builtins.str,Any]
 builtins.str"builtins.str
-Any"builtins.dict*36*37*38*39*310*311*r
+Any"builtins.dict*36*37*38*39*310*311*312*313*|
 OPENSSH_AUTH_MAGIC paramiko.pkey.OPENSSH_AUTH_MAGIC 
-builtins.bytes"builtins.bytes*36*37*38*39*310*311
+builtins.bytes"builtins.bytes*36*37*38*39*310*311*312*313

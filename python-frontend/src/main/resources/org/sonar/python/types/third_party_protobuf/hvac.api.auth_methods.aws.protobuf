@@ -1,0 +1,515 @@
+
+hvac.api.auth_methods.aws≤u
+Awshvac.api.auth_methods.aws.Aws"$hvac.api.vault_api_base.VaultApiBase*–
+	configure'hvac.api.auth_methods.aws.Aws.configure"
+Any*H
+self>
+hvac.api.auth_methods.aws.Aws"hvac.api.auth_methods.aws.Aws*n
+max_retries[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *m
+
+access_key[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *m
+
+secret_key[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *k
+endpoint[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *o
+iam_endpoint[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *o
+sts_endpoint[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *}
+iam_server_id_header_value[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None */
+mount_point
+builtins.str"builtins.str *V
+
+sts_regionD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None z36z37z38z39z310z311z312z313*‡
+read_config)hvac.api.auth_methods.aws.Aws.read_config"
+Any*H
+self>
+hvac.api.auth_methods.aws.Aws"hvac.api.auth_methods.aws.Aws*/
+mount_point
+builtins.str"builtins.str z36z37z38z39z310z311z312z313*‰
+delete_config+hvac.api.auth_methods.aws.Aws.delete_config"
+Any*H
+self>
+hvac.api.auth_methods.aws.Aws"hvac.api.auth_methods.aws.Aws*/
+mount_point
+builtins.str"builtins.str z36z37z38z39z310z311z312z313*Í
+configure_identity_integration<hvac.api.auth_methods.aws.Aws.configure_identity_integration"
+Any*H
+self>
+hvac.api.auth_methods.aws.Aws"hvac.api.auth_methods.aws.Aws*l
+	iam_alias[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *l
+	ec2_alias[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None */
+mount_point
+builtins.str"builtins.str *¡
+iam_metadata¨
+4Union[builtins.str,builtins.list[builtins.str],None]
+builtins.str"builtins.strJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list
+None *¡
+ec2_metadata¨
+4Union[builtins.str,builtins.list[builtins.str],None]
+builtins.str"builtins.strJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list
+None z36z37z38z39z310z311z312z313*¸
+read_identity_integration7hvac.api.auth_methods.aws.Aws.read_identity_integration"
+Any*H
+self>
+hvac.api.auth_methods.aws.Aws"hvac.api.auth_methods.aws.Aws*/
+mount_point
+builtins.str"builtins.str z36z37z38z39z310z311z312z313*≤
+ create_certificate_configuration>hvac.api.auth_methods.aws.Aws.create_certificate_configuration"
+Any*H
+self>
+hvac.api.auth_methods.aws.Aws"hvac.api.auth_methods.aws.Aws*
+	cert_name
+Any*
+aws_public_cert
+Any*p
+document_type[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None */
+mount_point
+builtins.str"builtins.str z36z37z38z39z310z311z312z313*û
+read_certificate_configuration<hvac.api.auth_methods.aws.Aws.read_certificate_configuration"
+Any*H
+self>
+hvac.api.auth_methods.aws.Aws"hvac.api.auth_methods.aws.Aws*
+	cert_name
+Any*/
+mount_point
+builtins.str"builtins.str z36z37z38z39z310z311z312z313*¢
+ delete_certificate_configuration>hvac.api.auth_methods.aws.Aws.delete_certificate_configuration"
+Any*H
+self>
+hvac.api.auth_methods.aws.Aws"hvac.api.auth_methods.aws.Aws*
+	cert_name
+Any*/
+mount_point
+builtins.str"builtins.str z36z37z38z39z310z311z312z313*à
+list_certificate_configurations=hvac.api.auth_methods.aws.Aws.list_certificate_configurations"
+Any*H
+self>
+hvac.api.auth_methods.aws.Aws"hvac.api.auth_methods.aws.Aws*/
+mount_point
+builtins.str"builtins.str z36z37z38z39z310z311z312z313*ò
+create_sts_role-hvac.api.auth_methods.aws.Aws.create_sts_role"
+Any*H
+self>
+hvac.api.auth_methods.aws.Aws"hvac.api.auth_methods.aws.Aws*
+
+account_id
+Any*
+sts_role
+Any*/
+mount_point
+builtins.str"builtins.str z36z37z38z39z310z311z312z313*˝
+read_sts_role+hvac.api.auth_methods.aws.Aws.read_sts_role"
+Any*H
+self>
+hvac.api.auth_methods.aws.Aws"hvac.api.auth_methods.aws.Aws*
+
+account_id
+Any*/
+mount_point
+builtins.str"builtins.str z36z37z38z39z310z311z312z313*Ê
+list_sts_roles,hvac.api.auth_methods.aws.Aws.list_sts_roles"
+Any*H
+self>
+hvac.api.auth_methods.aws.Aws"hvac.api.auth_methods.aws.Aws*/
+mount_point
+builtins.str"builtins.str z36z37z38z39z310z311z312z313*Å
+delete_sts_role-hvac.api.auth_methods.aws.Aws.delete_sts_role"
+Any*H
+self>
+hvac.api.auth_methods.aws.Aws"hvac.api.auth_methods.aws.Aws*
+
+account_id
+Any*/
+mount_point
+builtins.str"builtins.str z36z37z38z39z310z311z312z313*¯
+!configure_identity_whitelist_tidy?hvac.api.auth_methods.aws.Aws.configure_identity_whitelist_tidy"
+Any*H
+self>
+hvac.api.auth_methods.aws.Aws"hvac.api.auth_methods.aws.Aws*p
+safety_buffer[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *x
+disable_periodic_tidy[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None */
+mount_point
+builtins.str"builtins.str z36z37z38z39z310z311z312z313*Ç
+read_identity_whitelist_tidy:hvac.api.auth_methods.aws.Aws.read_identity_whitelist_tidy"
+Any*H
+self>
+hvac.api.auth_methods.aws.Aws"hvac.api.auth_methods.aws.Aws*/
+mount_point
+builtins.str"builtins.str z36z37z38z39z310z311z312z313*Ü
+delete_identity_whitelist_tidy<hvac.api.auth_methods.aws.Aws.delete_identity_whitelist_tidy"
+Any*H
+self>
+hvac.api.auth_methods.aws.Aws"hvac.api.auth_methods.aws.Aws*/
+mount_point
+builtins.str"builtins.str z36z37z38z39z310z311z312z313*¯
+!configure_role_tag_blacklist_tidy?hvac.api.auth_methods.aws.Aws.configure_role_tag_blacklist_tidy"
+Any*H
+self>
+hvac.api.auth_methods.aws.Aws"hvac.api.auth_methods.aws.Aws*p
+safety_buffer[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *x
+disable_periodic_tidy[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None */
+mount_point
+builtins.str"builtins.str z36z37z38z39z310z311z312z313*Ç
+read_role_tag_blacklist_tidy:hvac.api.auth_methods.aws.Aws.read_role_tag_blacklist_tidy"
+Any*H
+self>
+hvac.api.auth_methods.aws.Aws"hvac.api.auth_methods.aws.Aws*/
+mount_point
+builtins.str"builtins.str z36z37z38z39z310z311z312z313*Ü
+delete_role_tag_blacklist_tidy<hvac.api.auth_methods.aws.Aws.delete_role_tag_blacklist_tidy"
+Any*H
+self>
+hvac.api.auth_methods.aws.Aws"hvac.api.auth_methods.aws.Aws*/
+mount_point
+builtins.str"builtins.str z36z37z38z39z310z311z312z313*é
+create_role)hvac.api.auth_methods.aws.Aws.create_role"
+Any*H
+self>
+hvac.api.auth_methods.aws.Aws"hvac.api.auth_methods.aws.Aws*
+role
+Any*l
+	auth_type[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *o
+bound_ami_id[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *s
+bound_account_id[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *o
+bound_region[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *o
+bound_vpc_id[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *r
+bound_subnet_id[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *u
+bound_iam_role_arn[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *Å
+bound_iam_instance_profile_arn[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *x
+bound_ec2_instance_id[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *k
+role_tag[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *z
+bound_iam_principal_arn[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *w
+inferred_entity_type[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *v
+inferred_aws_region[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *y
+resolve_aws_unique_ids[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *f
+ttl[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *j
+max_ttl[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *i
+period[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *k
+policies[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *{
+allow_instance_migration[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *|
+disallow_reauthentication[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None */
+mount_point
+builtins.str"builtins.str z36z37z38z39z310z311z312z313*Ô
+	read_role'hvac.api.auth_methods.aws.Aws.read_role"
+Any*H
+self>
+hvac.api.auth_methods.aws.Aws"hvac.api.auth_methods.aws.Aws*
+role
+Any*/
+mount_point
+builtins.str"builtins.str z36z37z38z39z310z311z312z313*ﬁ
+
+list_roles(hvac.api.auth_methods.aws.Aws.list_roles"
+Any*H
+self>
+hvac.api.auth_methods.aws.Aws"hvac.api.auth_methods.aws.Aws*/
+mount_point
+builtins.str"builtins.str z36z37z38z39z310z311z312z313*Û
+delete_role)hvac.api.auth_methods.aws.Aws.delete_role"
+Any*H
+self>
+hvac.api.auth_methods.aws.Aws"hvac.api.auth_methods.aws.Aws*
+role
+Any*/
+mount_point
+builtins.str"builtins.str z36z37z38z39z310z311z312z313*¡
+create_role_tags.hvac.api.auth_methods.aws.Aws.create_role_tags"
+Any*H
+self>
+hvac.api.auth_methods.aws.Aws"hvac.api.auth_methods.aws.Aws*
+role
+Any*k
+policies[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *j
+max_ttl[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *n
+instance_id[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *{
+allow_instance_migration[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *|
+disallow_reauthentication[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None */
+mount_point
+builtins.str"builtins.str z36z37z38z39z310z311z312z313*∑
+	iam_login'hvac.api.auth_methods.aws.Aws.iam_login"
+Any*H
+self>
+hvac.api.auth_methods.aws.Aws"hvac.api.auth_methods.aws.Aws*
+
+access_key
+Any*
+
+secret_key
+Any*p
+session_token[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *o
+header_value[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *g
+role[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None */
+	use_token
+builtins.bool"builtins.bool **
+region
+builtins.str"builtins.str */
+mount_point
+builtins.str"builtins.str z36z37z38z39z310z311z312z313*Ù
+	ec2_login'hvac.api.auth_methods.aws.Aws.ec2_login"
+Any*H
+self>
+hvac.api.auth_methods.aws.Aws"hvac.api.auth_methods.aws.Aws*
+pkcs7
+Any*h
+nonce[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *g
+role[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None */
+	use_token
+builtins.bool"builtins.bool */
+mount_point
+builtins.str"builtins.str z36z37z38z39z310z311z312z313*ô
+place_role_tags_in_blacklist:hvac.api.auth_methods.aws.Aws.place_role_tags_in_blacklist"
+Any*H
+self>
+hvac.api.auth_methods.aws.Aws"hvac.api.auth_methods.aws.Aws*
+role_tag
+Any*/
+mount_point
+builtins.str"builtins.str z36z37z38z39z310z311z312z313*è
+read_role_tag_blacklist5hvac.api.auth_methods.aws.Aws.read_role_tag_blacklist"
+Any*H
+self>
+hvac.api.auth_methods.aws.Aws"hvac.api.auth_methods.aws.Aws*
+role_tag
+Any*/
+mount_point
+builtins.str"builtins.str z36z37z38z39z310z311z312z313*
+list_blacklist_tags1hvac.api.auth_methods.aws.Aws.list_blacklist_tags"
+Any*H
+self>
+hvac.api.auth_methods.aws.Aws"hvac.api.auth_methods.aws.Aws*/
+mount_point
+builtins.str"builtins.str z36z37z38z39z310z311z312z313*ã
+delete_blacklist_tags3hvac.api.auth_methods.aws.Aws.delete_blacklist_tags"
+Any*H
+self>
+hvac.api.auth_methods.aws.Aws"hvac.api.auth_methods.aws.Aws*
+role_tag
+Any*/
+mount_point
+builtins.str"builtins.str z36z37z38z39z310z311z312z313*£
+tidy_blacklist_tags1hvac.api.auth_methods.aws.Aws.tidy_blacklist_tags"
+Any*H
+self>
+hvac.api.auth_methods.aws.Aws"hvac.api.auth_methods.aws.Aws*1
+safety_buffer
+builtins.str"builtins.str */
+mount_point
+builtins.str"builtins.str z36z37z38z39z310z311z312z313*í
+read_identity_whitelist5hvac.api.auth_methods.aws.Aws.read_identity_whitelist"
+Any*H
+self>
+hvac.api.auth_methods.aws.Aws"hvac.api.auth_methods.aws.Aws*
+instance_id
+Any*/
+mount_point
+builtins.str"builtins.str z36z37z38z39z310z311z312z313*¯
+list_identity_whitelist5hvac.api.auth_methods.aws.Aws.list_identity_whitelist"
+Any*H
+self>
+hvac.api.auth_methods.aws.Aws"hvac.api.auth_methods.aws.Aws*/
+mount_point
+builtins.str"builtins.str z36z37z38z39z310z311z312z313*¶
+!delete_identity_whitelist_entries?hvac.api.auth_methods.aws.Aws.delete_identity_whitelist_entries"
+Any*H
+self>
+hvac.api.auth_methods.aws.Aws"hvac.api.auth_methods.aws.Aws*
+instance_id
+Any*/
+mount_point
+builtins.str"builtins.str z36z37z38z39z310z311z312z313*ª
+tidy_identity_whitelist_entries=hvac.api.auth_methods.aws.Aws.tidy_identity_whitelist_entries"
+Any*H
+self>
+hvac.api.auth_methods.aws.Aws"hvac.api.auth_methods.aws.Aws*1
+safety_buffer
+builtins.str"builtins.str */
+mount_point
+builtins.str"builtins.str z36z37z38z39z310z311z312z313j36j37j38j39j310j311j312j313*π
+__annotations__)hvac.api.auth_methods.aws.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*36*37*38*39*310*311*312*313*Å
+logger hvac.api.auth_methods.aws.logger1
+TypeAlias[Any]
+Any"_typeshed.Incomplete*36*37*38*39*310*311*312*313

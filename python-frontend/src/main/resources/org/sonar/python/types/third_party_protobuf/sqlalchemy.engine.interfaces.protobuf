@@ -1,1026 +1,0 @@
-
-sqlalchemy.engine.interfaces∫
-Compiled sqlalchemy.sql.compiler.Compiled"builtins.object*Æ
-__init__)sqlalchemy.sql.compiler.Compiled.__init__"
-None*N
-selfD
- sqlalchemy.sql.compiler.Compiled" sqlalchemy.sql.compiler.Compiled*
-dialect
-Any*
-	statement
-Any*w
-schema_translate_map[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *=
-render_schema_translate
-builtins.bool"builtins.bool *
-compile_kwargs
-Any z36z37z38z39z310z311*˚
-visit_unsupported_compilation>sqlalchemy.sql.compiler.Compiled.visit_unsupported_compilation"
-None*N
-selfD
- sqlalchemy.sql.compiler.Compiled" sqlalchemy.sql.compiler.Compiled*
-element
-Any*
-err
-Anyz36z37z38z39z310z311*ø
-sql_compiler-sqlalchemy.sql.compiler.Compiled.sql_compiler"
-None*N
-selfD
- sqlalchemy.sql.compiler.Compiled" sqlalchemy.sql.compiler.Compiled0:property`z36z37z38z39z310z311*l
-process(sqlalchemy.sql.compiler.Compiled.process*
-self*
-obj*
-
-kwargsz36z37z38z39z310z311*—
-construct_params1sqlalchemy.sql.compiler.Compiled.construct_params"
-None*N
-selfD
- sqlalchemy.sql.compiler.Compiled" sqlalchemy.sql.compiler.Compiled*i
-params[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *w
-extracted_parameters[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *2
-escape_names
-builtins.bool"builtins.bool z36z37z38z39z310z311*c
-params'sqlalchemy.sql.compiler.Compiled.params*
-self0:property`z36z37z38z39z310z311j36j37j38j39j310j311rö
-schema_translate_map5sqlalchemy.sql.compiler.Compiled.schema_translate_map1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*36*37*38*39*310*311rî
-execution_options2sqlalchemy.sql.compiler.Compiled.execution_options1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*36*37*38*39*310*311rå
-compile_state.sqlalchemy.sql.compiler.Compiled.compile_state1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*36*37*38*39*310*311r‰
-dml_compile_state2sqlalchemy.sql.compiler.Compiled.dml_compile_stateÄ
-,Union[sqlalchemy.sql.base.CompileState,None]D
- sqlalchemy.sql.base.CompileState" sqlalchemy.sql.base.CompileState
-None*36*37*38*39*310*311rÑ
-	cache_key*sqlalchemy.sql.compiler.Compiled.cache_key1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*36*37*38*39*310*311rÄ
-dialect(sqlalchemy.sql.compiler.Compiled.dialect1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*36*37*38*39*310*311rÇ
-preparer)sqlalchemy.sql.compiler.Compiled.preparer1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*36*37*38*39*310*311rÑ
-	statement*sqlalchemy.sql.compiler.Compiled.statement1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*36*37*38*39*310*311rà
-can_execute,sqlalchemy.sql.compiler.Compiled.can_execute1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*36*37*38*39*310*311r~
-string'sqlalchemy.sql.compiler.Compiled.string1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*36*37*38*39*310*311È
-TypeCompiler$sqlalchemy.sql.compiler.TypeCompiler"builtins.object*À
-__init__-sqlalchemy.sql.compiler.TypeCompiler.__init__"
-None*V
-selfL
-$sqlalchemy.sql.compiler.TypeCompiler"$sqlalchemy.sql.compiler.TypeCompiler*
-dialect
-Anyz36z37z38z39z310z311*n
-process,sqlalchemy.sql.compiler.TypeCompiler.process*
-self*	
-type_*
-kwz36z37z38z39z310z311*ò
-visit_unsupported_compilationBsqlalchemy.sql.compiler.TypeCompiler.visit_unsupported_compilation"
-None*V
-selfL
-$sqlalchemy.sql.compiler.TypeCompiler"$sqlalchemy.sql.compiler.TypeCompiler*
-element
-Any*
-err
-Any*
-kw
-Anyz36z37z38z39z310z311@b+sqlalchemy.util.langhelpers.EnsureKWArgTypej36j37j38j39j310j311ry
-ensure_kwarg1sqlalchemy.sql.compiler.TypeCompiler.ensure_kwarg
-builtins.str"builtins.str*36*37*38*39*310*311rÑ
-dialect,sqlalchemy.sql.compiler.TypeCompiler.dialect1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*36*37*38*39*310*311·ü
-Dialect$sqlalchemy.engine.interfaces.Dialect"builtins.object*≤
-create_connect_args8sqlalchemy.engine.interfaces.Dialect.create_connect_args"
-None*V
-selfL
-$sqlalchemy.engine.interfaces.Dialect"$sqlalchemy.engine.interfaces.Dialect*–
-
-url∆
-
-íTypeAlias[Tuple[builtins.str,Union[builtins.str,None],Union[builtins.str,builtins.object,None],Union[builtins.str,None],Union[builtins.int,None],Union[builtins.str,None],sqlalchemy.cimmutabledict.immutabledict[builtins.str,Union[builtins.str,builtins.tuple[builtins.str]]]]]ë
-áTuple[builtins.str,Union[builtins.str,None],Union[builtins.str,builtins.object,None],Union[builtins.str,None],Union[builtins.int,None],Union[builtins.str,None],sqlalchemy.cimmutabledict.immutabledict[builtins.str,Union[builtins.str,builtins.tuple[builtins.str]]]]
-builtins.str"builtins.strD
-Union[builtins.str,None]
-builtins.str"builtins.str
-Nonex
-(Union[builtins.str,builtins.object,None]
-builtins.str"builtins.str"
-builtins.object"builtins.object
-NoneD
-Union[builtins.str,None]
-builtins.str"builtins.str
-NoneD
-Union[builtins.int,None]
-builtins.int"builtins.int
-NoneD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None“
-fsqlalchemy.cimmutabledict.immutabledict[builtins.str,Union[builtins.str,builtins.tuple[builtins.str]]]
-builtins.str"builtins.str†
-0Union[builtins.str,builtins.tuple[builtins.str]]
-builtins.str"builtins.strL
-builtins.tuple[builtins.str]
-builtins.str"builtins.str"builtins.tuple"'sqlalchemy.cimmutabledict.immutabledict"sqlalchemy.engine.url.URL0:abstractmethod@z36z37z38z39z310z311*“
-
-initialize/sqlalchemy.engine.interfaces.Dialect.initialize"
-None*V
-selfL
-$sqlalchemy.engine.interfaces.Dialect"$sqlalchemy.engine.interfaces.Dialect*
-
-connection
-Anyz36z37z38z39z310z311*“
-on_connect_url3sqlalchemy.engine.interfaces.Dialect.on_connect_url"Ü
-+Union[CallableType[builtins.function],None]K
-CallableType[builtins.function]&
-builtins.function"builtins.function
-None*V
-selfL
-$sqlalchemy.engine.interfaces.Dialect"$sqlalchemy.engine.interfaces.Dialect*
-url
-Anyz36z37z38z39z310z311*∏
-
-on_connect/sqlalchemy.engine.interfaces.Dialect.on_connect"Ü
-+Union[CallableType[builtins.function],None]K
-CallableType[builtins.function]&
-builtins.function"builtins.function
-None*V
-selfL
-$sqlalchemy.engine.interfaces.Dialect"$sqlalchemy.engine.interfaces.Dialectz36z37z38z39z310z311*°
-type_descriptor4sqlalchemy.engine.interfaces.Dialect.type_descriptor"
-None*å
-clsÇ
-*Type[sqlalchemy.engine.interfaces.Dialect]L
-$sqlalchemy.engine.interfaces.Dialect"$sqlalchemy.engine.interfaces.Dialect"type*
-typeobj
-Any0:classmethodpz36z37z38z39z310z311*È
-get_columns0sqlalchemy.engine.interfaces.Dialect.get_columns"
-None*V
-selfL
-$sqlalchemy.engine.interfaces.Dialect"$sqlalchemy.engine.interfaces.Dialect*
-
-connection
-Any*
-
-table_name
-Any*i
-schema[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *
-kw
-Anyz36z37z38z39z310z311*ı
-get_pk_constraint6sqlalchemy.engine.interfaces.Dialect.get_pk_constraint"
-None*V
-selfL
-$sqlalchemy.engine.interfaces.Dialect"$sqlalchemy.engine.interfaces.Dialect*
-
-connection
-Any*
-
-table_name
-Any*i
-schema[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *
-kw
-Anyz36z37z38z39z310z311*Û
-get_foreign_keys5sqlalchemy.engine.interfaces.Dialect.get_foreign_keys"
-None*V
-selfL
-$sqlalchemy.engine.interfaces.Dialect"$sqlalchemy.engine.interfaces.Dialect*
-
-connection
-Any*
-
-table_name
-Any*i
-schema[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *
-kw
-Anyz36z37z38z39z310z311*ÿ
-get_table_names4sqlalchemy.engine.interfaces.Dialect.get_table_names"
-None*V
-selfL
-$sqlalchemy.engine.interfaces.Dialect"$sqlalchemy.engine.interfaces.Dialect*
-
-connection
-Any*i
-schema[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *
-kw
-Anyz36z37z38z39z310z311*‚
-get_temp_table_names9sqlalchemy.engine.interfaces.Dialect.get_temp_table_names"
-None*V
-selfL
-$sqlalchemy.engine.interfaces.Dialect"$sqlalchemy.engine.interfaces.Dialect*
-
-connection
-Any*i
-schema[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *
-kw
-Anyz36z37z38z39z310z311*÷
-get_view_names3sqlalchemy.engine.interfaces.Dialect.get_view_names"
-None*V
-selfL
-$sqlalchemy.engine.interfaces.Dialect"$sqlalchemy.engine.interfaces.Dialect*
-
-connection
-Any*i
-schema[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *
-kw
-Anyz36z37z38z39z310z311*ﬁ
-get_sequence_names7sqlalchemy.engine.interfaces.Dialect.get_sequence_names"
-None*V
-selfL
-$sqlalchemy.engine.interfaces.Dialect"$sqlalchemy.engine.interfaces.Dialect*
-
-connection
-Any*i
-schema[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *
-kw
-Anyz36z37z38z39z310z311*‡
-get_temp_view_names8sqlalchemy.engine.interfaces.Dialect.get_temp_view_names"
-None*V
-selfL
-$sqlalchemy.engine.interfaces.Dialect"$sqlalchemy.engine.interfaces.Dialect*
-
-connection
-Any*i
-schema[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *
-kw
-Anyz36z37z38z39z310z311*¯
-get_view_definition8sqlalchemy.engine.interfaces.Dialect.get_view_definition"
-None*V
-selfL
-$sqlalchemy.engine.interfaces.Dialect"$sqlalchemy.engine.interfaces.Dialect*
-
-connection
-Any*
-	view_name
-Any*i
-schema[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *
-kw
-Anyz36z37z38z39z310z311*È
-get_indexes0sqlalchemy.engine.interfaces.Dialect.get_indexes"
-None*V
-selfL
-$sqlalchemy.engine.interfaces.Dialect"$sqlalchemy.engine.interfaces.Dialect*
-
-connection
-Any*
-
-table_name
-Any*i
-schema[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *
-kw
-Anyz36z37z38z39z310z311*ˇ
-get_unique_constraints;sqlalchemy.engine.interfaces.Dialect.get_unique_constraints"
-None*V
-selfL
-$sqlalchemy.engine.interfaces.Dialect"$sqlalchemy.engine.interfaces.Dialect*
-
-connection
-Any*
-
-table_name
-Any*i
-schema[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *
-kw
-Anyz36z37z38z39z310z311*˝
-get_check_constraints:sqlalchemy.engine.interfaces.Dialect.get_check_constraints"
-None*V
-selfL
-$sqlalchemy.engine.interfaces.Dialect"$sqlalchemy.engine.interfaces.Dialect*
-
-connection
-Any*
-
-table_name
-Any*i
-schema[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *
-kw
-Anyz36z37z38z39z310z311*ı
-get_table_comment6sqlalchemy.engine.interfaces.Dialect.get_table_comment"
-None*V
-selfL
-$sqlalchemy.engine.interfaces.Dialect"$sqlalchemy.engine.interfaces.Dialect*
-
-connection
-Any*
-
-table_name
-Any*i
-schema[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *
-kw
-Anyz36z37z38z39z310z311*‘
-normalize_name3sqlalchemy.engine.interfaces.Dialect.normalize_name"
-None*V
-selfL
-$sqlalchemy.engine.interfaces.Dialect"$sqlalchemy.engine.interfaces.Dialect*
-name
-Anyz36z37z38z39z310z311*ÿ
-denormalize_name5sqlalchemy.engine.interfaces.Dialect.denormalize_name"
-None*V
-selfL
-$sqlalchemy.engine.interfaces.Dialect"$sqlalchemy.engine.interfaces.Dialect*
-name
-Anyz36z37z38z39z310z311*Â
-	has_table.sqlalchemy.engine.interfaces.Dialect.has_table"
-None*V
-selfL
-$sqlalchemy.engine.interfaces.Dialect"$sqlalchemy.engine.interfaces.Dialect*
-
-connection
-Any*
-
-table_name
-Any*i
-schema[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *
-kw
-Anyz36z37z38z39z310z311*Ì
-	has_index.sqlalchemy.engine.interfaces.Dialect.has_index"
-None*V
-selfL
-$sqlalchemy.engine.interfaces.Dialect"$sqlalchemy.engine.interfaces.Dialect*
-
-connection
-Any*
-
-table_name
-Any*
-
-index_name
-Any*i
-schema[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z36z37z38z39z310z311*Ó
-has_sequence1sqlalchemy.engine.interfaces.Dialect.has_sequence"
-None*V
-selfL
-$sqlalchemy.engine.interfaces.Dialect"$sqlalchemy.engine.interfaces.Dialect*
-
-connection
-Any*
-sequence_name
-Any*i
-schema[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *
-kw
-Anyz36z37z38z39z310z311*‘
-do_begin-sqlalchemy.engine.interfaces.Dialect.do_begin"
-None*V
-selfL
-$sqlalchemy.engine.interfaces.Dialect"$sqlalchemy.engine.interfaces.Dialect*
-dbapi_connection
-Anyz36z37z38z39z310z311*⁄
-do_rollback0sqlalchemy.engine.interfaces.Dialect.do_rollback"
-None*V
-selfL
-$sqlalchemy.engine.interfaces.Dialect"$sqlalchemy.engine.interfaces.Dialect*
-dbapi_connection
-Anyz36z37z38z39z310z311*÷
-	do_commit.sqlalchemy.engine.interfaces.Dialect.do_commit"
-None*V
-selfL
-$sqlalchemy.engine.interfaces.Dialect"$sqlalchemy.engine.interfaces.Dialect*
-dbapi_connection
-Anyz36z37z38z39z310z311*‹
-do_terminate1sqlalchemy.engine.interfaces.Dialect.do_terminate"
-None*V
-selfL
-$sqlalchemy.engine.interfaces.Dialect"$sqlalchemy.engine.interfaces.Dialect*
-dbapi_connection
-Anyz36z37z38z39z310z311*‘
-do_close-sqlalchemy.engine.interfaces.Dialect.do_close"
-None*V
-selfL
-$sqlalchemy.engine.interfaces.Dialect"$sqlalchemy.engine.interfaces.Dialect*
-dbapi_connection
-Anyz36z37z38z39z310z311*ë
-do_set_input_sizes7sqlalchemy.engine.interfaces.Dialect.do_set_input_sizes"
-None*V
-selfL
-$sqlalchemy.engine.interfaces.Dialect"$sqlalchemy.engine.interfaces.Dialect*
-cursor
-Any*
-list_of_tuples
-Any*
-context
-Anyz36z37z38z39z310z311*π
-
-create_xid/sqlalchemy.engine.interfaces.Dialect.create_xid"
-None*V
-selfL
-$sqlalchemy.engine.interfaces.Dialect"$sqlalchemy.engine.interfaces.Dialectz36z37z38z39z310z311*È
-do_savepoint1sqlalchemy.engine.interfaces.Dialect.do_savepoint"
-None*V
-selfL
-$sqlalchemy.engine.interfaces.Dialect"$sqlalchemy.engine.interfaces.Dialect*
-
-connection
-Any*
-name
-Anyz36z37z38z39z310z311*Å
-do_rollback_to_savepoint=sqlalchemy.engine.interfaces.Dialect.do_rollback_to_savepoint"
-None*V
-selfL
-$sqlalchemy.engine.interfaces.Dialect"$sqlalchemy.engine.interfaces.Dialect*
-
-connection
-Any*
-name
-Anyz36z37z38z39z310z311*˘
-do_release_savepoint9sqlalchemy.engine.interfaces.Dialect.do_release_savepoint"
-None*V
-selfL
-$sqlalchemy.engine.interfaces.Dialect"$sqlalchemy.engine.interfaces.Dialect*
-
-connection
-Any*
-name
-Anyz36z37z38z39z310z311*Ú
-do_begin_twophase6sqlalchemy.engine.interfaces.Dialect.do_begin_twophase"
-None*V
-selfL
-$sqlalchemy.engine.interfaces.Dialect"$sqlalchemy.engine.interfaces.Dialect*
-
-connection
-Any*
-xid
-Anyz36z37z38z39z310z311*ˆ
-do_prepare_twophase8sqlalchemy.engine.interfaces.Dialect.do_prepare_twophase"
-None*V
-selfL
-$sqlalchemy.engine.interfaces.Dialect"$sqlalchemy.engine.interfaces.Dialect*
-
-connection
-Any*
-xid
-Anyz36z37z38z39z310z311*⁄
-do_rollback_twophase9sqlalchemy.engine.interfaces.Dialect.do_rollback_twophase"
-None*V
-selfL
-$sqlalchemy.engine.interfaces.Dialect"$sqlalchemy.engine.interfaces.Dialect*
-
-connection
-Any*
-xid
-Any*1
-is_prepared
-builtins.bool"builtins.bool *-
-recover
-builtins.bool"builtins.bool z36z37z38z39z310z311*÷
-do_commit_twophase7sqlalchemy.engine.interfaces.Dialect.do_commit_twophase"
-None*V
-selfL
-$sqlalchemy.engine.interfaces.Dialect"$sqlalchemy.engine.interfaces.Dialect*
-
-connection
-Any*
-xid
-Any*1
-is_prepared
-builtins.bool"builtins.bool *-
-recover
-builtins.bool"builtins.bool z36z37z38z39z310z311*‰
-do_recover_twophase8sqlalchemy.engine.interfaces.Dialect.do_recover_twophase"
-None*V
-selfL
-$sqlalchemy.engine.interfaces.Dialect"$sqlalchemy.engine.interfaces.Dialect*
-
-connection
-Anyz36z37z38z39z310z311*Û
-do_executemany3sqlalchemy.engine.interfaces.Dialect.do_executemany"
-None*V
-selfL
-$sqlalchemy.engine.interfaces.Dialect"$sqlalchemy.engine.interfaces.Dialect*
-cursor
-Any*
-	statement
-Any*
-
-parameters
-Any*j
-context[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z36z37z38z39z310z311*Î
-
-do_execute/sqlalchemy.engine.interfaces.Dialect.do_execute"
-None*V
-selfL
-$sqlalchemy.engine.interfaces.Dialect"$sqlalchemy.engine.interfaces.Dialect*
-cursor
-Any*
-	statement
-Any*
-
-parameters
-Any*j
-context[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z36z37z38z39z310z311*ˇ
-do_execute_no_params9sqlalchemy.engine.interfaces.Dialect.do_execute_no_params"
-None*V
-selfL
-$sqlalchemy.engine.interfaces.Dialect"$sqlalchemy.engine.interfaces.Dialect*
-cursor
-Any*
-	statement
-Any*
-
-parameters
-Any*j
-context[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z36z37z38z39z310z311*˝
-is_disconnect2sqlalchemy.engine.interfaces.Dialect.is_disconnect"
-None*V
-selfL
-$sqlalchemy.engine.interfaces.Dialect"$sqlalchemy.engine.interfaces.Dialect*
-e
-Any*
-
-connection
-Any*
-cursor
-Anyz36z37z38z39z310z311*ó
-connect,sqlalchemy.engine.interfaces.Dialect.connect"B
-_typeshed.dbapi.DBAPIConnection"_typeshed.dbapi.DBAPIConnection*V
-selfL
-$sqlalchemy.engine.interfaces.Dialect"$sqlalchemy.engine.interfaces.Dialect*
-cargs
-Any*
-cparams
-Anyz36z37z38z39z310z311*Ë
-reset_isolation_level:sqlalchemy.engine.interfaces.Dialect.reset_isolation_level"
-None*V
-selfL
-$sqlalchemy.engine.interfaces.Dialect"$sqlalchemy.engine.interfaces.Dialect*
-
-dbapi_conn
-Anyz36z37z38z39z310z311*¯
-set_isolation_level8sqlalchemy.engine.interfaces.Dialect.set_isolation_level"
-None*V
-selfL
-$sqlalchemy.engine.interfaces.Dialect"$sqlalchemy.engine.interfaces.Dialect*
-
-dbapi_conn
-Any*
-level
-Anyz36z37z38z39z310z311*‰
-get_isolation_level8sqlalchemy.engine.interfaces.Dialect.get_isolation_level"
-None*V
-selfL
-$sqlalchemy.engine.interfaces.Dialect"$sqlalchemy.engine.interfaces.Dialect*
-
-dbapi_conn
-Anyz36z37z38z39z310z311*Ù
-get_default_isolation_level@sqlalchemy.engine.interfaces.Dialect.get_default_isolation_level"
-None*V
-selfL
-$sqlalchemy.engine.interfaces.Dialect"$sqlalchemy.engine.interfaces.Dialect*
-
-dbapi_conn
-Anyz36z37z38z39z310z311*Ñ
-get_dialect_cls4sqlalchemy.engine.interfaces.Dialect.get_dialect_cls*
-cls*
-url0:classmethodpz36z37z38z39z310z311*è
-load_provisioning6sqlalchemy.engine.interfaces.Dialect.load_provisioning"
-None*å
-clsÇ
-*Type[sqlalchemy.engine.interfaces.Dialect]L
-$sqlalchemy.engine.interfaces.Dialect"$sqlalchemy.engine.interfaces.Dialect"type0:classmethodpz36z37z38z39z310z311*û
-engine_created3sqlalchemy.engine.interfaces.Dialect.engine_created"
-None*å
-clsÇ
-*Type[sqlalchemy.engine.interfaces.Dialect]L
-$sqlalchemy.engine.interfaces.Dialect"$sqlalchemy.engine.interfaces.Dialect"type*
-engine
-Any0:classmethodpz36z37z38z39z310z311*Ë
-get_driver_connection:sqlalchemy.engine.interfaces.Dialect.get_driver_connection"
-None*V
-selfL
-$sqlalchemy.engine.interfaces.Dialect"$sqlalchemy.engine.interfaces.Dialect*
-
-connection
-Anyz36z37z38z39z310z311j36j37j38j39j310j311ri
-name)sqlalchemy.engine.interfaces.Dialect.name
-builtins.str"builtins.str*36*37*38*39*310*311rm
-driver+sqlalchemy.engine.interfaces.Dialect.driver
-builtins.str"builtins.str*36*37*38*39*310*311rw
-
-positional/sqlalchemy.engine.interfaces.Dialect.positional
-builtins.bool"builtins.bool*36*37*38*39*310*311ru
-
-paramstyle/sqlalchemy.engine.interfaces.Dialect.paramstyle
-builtins.str"builtins.str*36*37*38*39*310*311rq
-encoding-sqlalchemy.engine.interfaces.Dialect.encoding
-builtins.str"builtins.str*36*37*38*39*310*311r≠
-statement_compiler7sqlalchemy.engine.interfaces.Dialect.statement_compilerD
- sqlalchemy.sql.compiler.Compiled" sqlalchemy.sql.compiler.Compiled*36*37*38*39*310*311r°
-ddl_compiler1sqlalchemy.engine.interfaces.Dialect.ddl_compilerD
- sqlalchemy.sql.compiler.Compiled" sqlalchemy.sql.compiler.Compiled*36*37*38*39*310*311rô
-server_version_info8sqlalchemy.engine.interfaces.Dialect.server_version_info.
-builtins.tuple[Any]
-Any"builtins.tuple*36*37*38*39*310*311rÖ
-execution_ctx_cls6sqlalchemy.engine.interfaces.Dialect.execution_ctx_clsù
-3Type[sqlalchemy.engine.interfaces.ExecutionContext]^
--sqlalchemy.engine.interfaces.ExecutionContext"-sqlalchemy.engine.interfaces.ExecutionContext"type*36*37*38*39*310*311rØ
-execute_sequence_format<sqlalchemy.engine.interfaces.Dialect.execute_sequence_formatª
-0Union[Type[Tuple[Any]],Type[builtins.list[Any]]]3
-Type[Tuple[Any]]
-
-Tuple[Any]
-Any"typeP
-Type[builtins.list[Any]],
-builtins.list[Any]
-Any"builtins.list"type*36*37*38*39*310*311r≠
-preparer-sqlalchemy.engine.interfaces.Dialect.preparerX
-*sqlalchemy.sql.compiler.IdentifierPreparer"*sqlalchemy.sql.compiler.IdentifierPreparer*36*37*38*39*310*311r
-supports_alter3sqlalchemy.engine.interfaces.Dialect.supports_alter
-builtins.bool"builtins.bool*36*37*38*39*310*311rã
-max_identifier_length:sqlalchemy.engine.interfaces.Dialect.max_identifier_length
-builtins.int"builtins.int*36*37*38*39*310*311rè
-supports_sane_rowcount;sqlalchemy.engine.interfaces.Dialect.supports_sane_rowcount
-builtins.bool"builtins.bool*36*37*38*39*310*311rõ
-supports_sane_multi_rowcountAsqlalchemy.engine.interfaces.Dialect.supports_sane_multi_rowcount
-builtins.bool"builtins.bool*36*37*38*39*310*311rß
-"preexecute_autoincrement_sequencesGsqlalchemy.engine.interfaces.Dialect.preexecute_autoincrement_sequences
-builtins.bool"builtins.bool*36*37*38*39*310*311rá
-implicit_returning7sqlalchemy.engine.interfaces.Dialect.implicit_returning
-builtins.bool"builtins.bool*36*37*38*39*310*311ré
-colspecs-sqlalchemy.engine.interfaces.Dialect.colspecs9
-builtins.dict[Any,Any]
-Any
-Any"builtins.dict*36*37*38*39*310*311rë
-supports_default_values<sqlalchemy.engine.interfaces.Dialect.supports_default_values
-builtins.bool"builtins.bool*36*37*38*39*310*311rá
-supports_sequences7sqlalchemy.engine.interfaces.Dialect.supports_sequences
-builtins.bool"builtins.bool*36*37*38*39*310*311rá
-sequences_optional7sqlalchemy.engine.interfaces.Dialect.sequences_optional
-builtins.bool"builtins.bool*36*37*38*39*310*311rã
-supports_native_enum9sqlalchemy.engine.interfaces.Dialect.supports_native_enum
-builtins.bool"builtins.bool*36*37*38*39*310*311rë
-supports_native_boolean<sqlalchemy.engine.interfaces.Dialect.supports_native_boolean
-builtins.bool"builtins.bool*36*37*38*39*310*311rº
-dbapi_exception_translation_mapDsqlalchemy.engine.interfaces.Dialect.dbapi_exception_translation_map9
-builtins.dict[Any,Any]
-Any
-Any"builtins.dict*36*37*38*39*310*311rì
-supports_statement_cache=sqlalchemy.engine.interfaces.Dialect.supports_statement_cache
-builtins.bool"builtins.bool*36*37*38*39*310*311rÜ
-dispatch-sqlalchemy.engine.interfaces.Dialect.dispatch1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*36*37*38*39*310*311˛ 
-CreateEnginePlugin/sqlalchemy.engine.interfaces.CreateEnginePlugin"builtins.object*æ
-__init__8sqlalchemy.engine.interfaces.CreateEnginePlugin.__init__"
-None*l
-selfb
-/sqlalchemy.engine.interfaces.CreateEnginePlugin"/sqlalchemy.engine.interfaces.CreateEnginePlugin*–
-
-url∆
-
-íTypeAlias[Tuple[builtins.str,Union[builtins.str,None],Union[builtins.str,builtins.object,None],Union[builtins.str,None],Union[builtins.int,None],Union[builtins.str,None],sqlalchemy.cimmutabledict.immutabledict[builtins.str,Union[builtins.str,builtins.tuple[builtins.str]]]]]ë
-áTuple[builtins.str,Union[builtins.str,None],Union[builtins.str,builtins.object,None],Union[builtins.str,None],Union[builtins.int,None],Union[builtins.str,None],sqlalchemy.cimmutabledict.immutabledict[builtins.str,Union[builtins.str,builtins.tuple[builtins.str]]]]
-builtins.str"builtins.strD
-Union[builtins.str,None]
-builtins.str"builtins.str
-Nonex
-(Union[builtins.str,builtins.object,None]
-builtins.str"builtins.str"
-builtins.object"builtins.object
-NoneD
-Union[builtins.str,None]
-builtins.str"builtins.str
-NoneD
-Union[builtins.int,None]
-builtins.int"builtins.int
-NoneD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None“
-fsqlalchemy.cimmutabledict.immutabledict[builtins.str,Union[builtins.str,builtins.tuple[builtins.str]]]
-builtins.str"builtins.str†
-0Union[builtins.str,builtins.tuple[builtins.str]]
-builtins.str"builtins.strL
-builtins.tuple[builtins.str]
-builtins.str"builtins.str"builtins.tuple"'sqlalchemy.cimmutabledict.immutabledict"sqlalchemy.engine.url.URL*
-kwargs
-Anyz36z37z38z39z310z311*Ï
-
-update_url:sqlalchemy.engine.interfaces.CreateEnginePlugin.update_url"
-None*l
-selfb
-/sqlalchemy.engine.interfaces.CreateEnginePlugin"/sqlalchemy.engine.interfaces.CreateEnginePlugin*
-url
-Anyz36z37z38z39z310z311*•
-handle_dialect_kwargsEsqlalchemy.engine.interfaces.CreateEnginePlugin.handle_dialect_kwargs"
-None*l
-selfb
-/sqlalchemy.engine.interfaces.CreateEnginePlugin"/sqlalchemy.engine.interfaces.CreateEnginePlugin*
-dialect_cls
-Any*
-dialect_args
-Anyz36z37z38z39z310z311*ô
-handle_pool_kwargsBsqlalchemy.engine.interfaces.CreateEnginePlugin.handle_pool_kwargs"
-None*l
-selfb
-/sqlalchemy.engine.interfaces.CreateEnginePlugin"/sqlalchemy.engine.interfaces.CreateEnginePlugin*
-pool_cls
-Any*
-	pool_args
-Anyz36z37z38z39z310z311*˜
-engine_created>sqlalchemy.engine.interfaces.CreateEnginePlugin.engine_created"
-None*l
-selfb
-/sqlalchemy.engine.interfaces.CreateEnginePlugin"/sqlalchemy.engine.interfaces.CreateEnginePlugin*
-engine
-Anyz36z37z38z39z310z311j36j37j38j39j310j311rù
-url3sqlalchemy.engine.interfaces.CreateEnginePlugin.url∆
-
-íTypeAlias[Tuple[builtins.str,Union[builtins.str,None],Union[builtins.str,builtins.object,None],Union[builtins.str,None],Union[builtins.int,None],Union[builtins.str,None],sqlalchemy.cimmutabledict.immutabledict[builtins.str,Union[builtins.str,builtins.tuple[builtins.str]]]]]ë
-áTuple[builtins.str,Union[builtins.str,None],Union[builtins.str,builtins.object,None],Union[builtins.str,None],Union[builtins.int,None],Union[builtins.str,None],sqlalchemy.cimmutabledict.immutabledict[builtins.str,Union[builtins.str,builtins.tuple[builtins.str]]]]
-builtins.str"builtins.strD
-Union[builtins.str,None]
-builtins.str"builtins.str
-Nonex
-(Union[builtins.str,builtins.object,None]
-builtins.str"builtins.str"
-builtins.object"builtins.object
-NoneD
-Union[builtins.str,None]
-builtins.str"builtins.str
-NoneD
-Union[builtins.int,None]
-builtins.int"builtins.int
-NoneD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None“
-fsqlalchemy.cimmutabledict.immutabledict[builtins.str,Union[builtins.str,builtins.tuple[builtins.str]]]
-builtins.str"builtins.str†
-0Union[builtins.str,builtins.tuple[builtins.str]]
-builtins.str"builtins.strL
-builtins.tuple[builtins.str]
-builtins.str"builtins.str"builtins.tuple"'sqlalchemy.cimmutabledict.immutabledict"sqlalchemy.engine.url.URL*36*37*38*39*310*311Œ
-ExecutionContext-sqlalchemy.engine.interfaces.ExecutionContext"builtins.object*⁄
-create_cursor;sqlalchemy.engine.interfaces.ExecutionContext.create_cursor"
-None*h
-self^
--sqlalchemy.engine.interfaces.ExecutionContext"-sqlalchemy.engine.interfaces.ExecutionContextz36z37z38z39z310z311*–
-pre_exec6sqlalchemy.engine.interfaces.ExecutionContext.pre_exec"
-None*h
-self^
--sqlalchemy.engine.interfaces.ExecutionContext"-sqlalchemy.engine.interfaces.ExecutionContextz36z37z38z39z310z311*é
-get_out_parameter_valuesFsqlalchemy.engine.interfaces.ExecutionContext.get_out_parameter_values"
-None*h
-self^
--sqlalchemy.engine.interfaces.ExecutionContext"-sqlalchemy.engine.interfaces.ExecutionContext*
-out_param_names
-Anyz36z37z38z39z310z311*“
-	post_exec7sqlalchemy.engine.interfaces.ExecutionContext.post_exec"
-None*h
-self^
--sqlalchemy.engine.interfaces.ExecutionContext"-sqlalchemy.engine.interfaces.ExecutionContextz36z37z38z39z310z311*¸
-handle_dbapi_exceptionDsqlalchemy.engine.interfaces.ExecutionContext.handle_dbapi_exception"
-None*h
-self^
--sqlalchemy.engine.interfaces.ExecutionContext"-sqlalchemy.engine.interfaces.ExecutionContext*
-e
-Anyz36z37z38z39z310z311*Ñ
-should_autocommit_textDsqlalchemy.engine.interfaces.ExecutionContext.should_autocommit_text"
-None*h
-self^
--sqlalchemy.engine.interfaces.ExecutionContext"-sqlalchemy.engine.interfaces.ExecutionContext*
-	statement
-Anyz36z37z38z39z310z311*Ë
-lastrow_has_defaultsBsqlalchemy.engine.interfaces.ExecutionContext.lastrow_has_defaults"
-None*h
-self^
--sqlalchemy.engine.interfaces.ExecutionContext"-sqlalchemy.engine.interfaces.ExecutionContextz36z37z38z39z310z311*ÿ
-get_rowcount:sqlalchemy.engine.interfaces.ExecutionContext.get_rowcount"
-None*h
-self^
--sqlalchemy.engine.interfaces.ExecutionContext"-sqlalchemy.engine.interfaces.ExecutionContextz36z37z38z39z310z311j36j37j38j39j310j311°
-Connectable(sqlalchemy.engine.interfaces.Connectable"builtins.object*¶
-connect0sqlalchemy.engine.interfaces.Connectable.connect"F
-!sqlalchemy.engine.base.Connection"!sqlalchemy.engine.base.Connection*^
-selfT
-(sqlalchemy.engine.interfaces.Connectable"(sqlalchemy.engine.interfaces.Connectable*
-kwargs
-Any0:abstractmethod@z36z37z38z39z310z311*∫
-engine/sqlalchemy.engine.interfaces.Connectable.engine"w
-)Union[sqlalchemy.engine.base.Engine,None]>
-sqlalchemy.engine.base.Engine"sqlalchemy.engine.base.Engine
-None*^
-selfT
-(sqlalchemy.engine.interfaces.Connectable"(sqlalchemy.engine.interfaces.Connectable0:property`z36z37z38z39z310z3112Ì
-execute0sqlalchemy.engine.interfaces.Connectable.execute€
-execute0sqlalchemy.engine.interfaces.Connectable.execute"N
-%sqlalchemy.engine.cursor.CursorResult"%sqlalchemy.engine.cursor.CursorResult*^
-selfT
-(sqlalchemy.engine.interfaces.Connectable"(sqlalchemy.engine.interfaces.Connectable*Ã
-object_æ
-ªUnion[sqlalchemy.sql.elements.ClauseElement,sqlalchemy.sql.functions.FunctionElement,sqlalchemy.sql.ddl.DDLElement,sqlalchemy.sql.schema.DefaultGenerator,sqlalchemy.sql.compiler.Compiled]N
-%sqlalchemy.sql.elements.ClauseElement"%sqlalchemy.sql.elements.ClauseElementT
-(sqlalchemy.sql.functions.FunctionElement"(sqlalchemy.sql.functions.FunctionElement>
-sqlalchemy.sql.ddl.DDLElement"sqlalchemy.sql.ddl.DDLElementP
-&sqlalchemy.sql.schema.DefaultGenerator"&sqlalchemy.sql.schema.DefaultGeneratorD
- sqlalchemy.sql.compiler.Compiled" sqlalchemy.sql.compiler.Compiled*j
-multiparamsY
- typing.Mapping[builtins.str,Any]
-builtins.str"builtins.str
-Any"typing.Mapping*
-params
-Any0:abstractmethod:overload@X∑
-execute0sqlalchemy.engine.interfaces.Connectable.execute"N
-%sqlalchemy.engine.cursor.CursorResult"%sqlalchemy.engine.cursor.CursorResult*^
-selfT
-(sqlalchemy.engine.interfaces.Connectable"(sqlalchemy.engine.interfaces.Connectable*)
-object_
-builtins.str"builtins.str*È
-multiparams◊
-?Union[Any,builtins.tuple[Any],typing.Mapping[builtins.str,Any]]
-Any.
-builtins.tuple[Any]
-Any"builtins.tupleY
- typing.Mapping[builtins.str,Any]
-builtins.str"builtins.str
-Any"typing.Mapping*
-params
-Any0:abstractmethod:overload@X"36"37"38"39"310"3112Ÿ
-scalar/sqlalchemy.engine.interfaces.Connectable.scalarí
-scalar/sqlalchemy.engine.interfaces.Connectable.scalar"
-Any*^
-selfT
-(sqlalchemy.engine.interfaces.Connectable"(sqlalchemy.engine.interfaces.Connectable*Ã
-object_æ
-ªUnion[sqlalchemy.sql.elements.ClauseElement,sqlalchemy.sql.functions.FunctionElement,sqlalchemy.sql.ddl.DDLElement,sqlalchemy.sql.schema.DefaultGenerator,sqlalchemy.sql.compiler.Compiled]N
-%sqlalchemy.sql.elements.ClauseElement"%sqlalchemy.sql.elements.ClauseElementT
-(sqlalchemy.sql.functions.FunctionElement"(sqlalchemy.sql.functions.FunctionElement>
-sqlalchemy.sql.ddl.DDLElement"sqlalchemy.sql.ddl.DDLElementP
-&sqlalchemy.sql.schema.DefaultGenerator"&sqlalchemy.sql.schema.DefaultGeneratorD
- sqlalchemy.sql.compiler.Compiled" sqlalchemy.sql.compiler.Compiled*j
-multiparamsY
- typing.Mapping[builtins.str,Any]
-builtins.str"builtins.str
-Any"typing.Mapping*
-params
-Any0:abstractmethod:overload@XÓ
-scalar/sqlalchemy.engine.interfaces.Connectable.scalar"
-Any*^
-selfT
-(sqlalchemy.engine.interfaces.Connectable"(sqlalchemy.engine.interfaces.Connectable*)
-object_
-builtins.str"builtins.str*È
-multiparams◊
-?Union[Any,builtins.tuple[Any],typing.Mapping[builtins.str,Any]]
-Any.
-builtins.tuple[Any]
-Any"builtins.tupleY
- typing.Mapping[builtins.str,Any]
-builtins.str"builtins.str
-Any"typing.Mapping*
-params
-Any0:abstractmethod:overload@X"36"37"38"39"310"311j36j37j38j39j310j311rä
-dispatch1sqlalchemy.engine.interfaces.Connectable.dispatch1
-TypeAlias[Any]
-Any"_typeshed.Incomplete*36*37*38*39*310*311˚
-ExceptionContext-sqlalchemy.engine.interfaces.ExceptionContext"builtins.objectj36j37j38j39j310j311rÊ
-
-connection8sqlalchemy.engine.interfaces.ExceptionContext.connectionÉ
--Union[sqlalchemy.engine.base.Connection,None]F
-!sqlalchemy.engine.base.Connection"!sqlalchemy.engine.base.Connection
-None*36*37*38*39*310*311r—
-engine4sqlalchemy.engine.interfaces.ExceptionContext.enginew
-)Union[sqlalchemy.engine.base.Engine,None]>
-sqlalchemy.engine.base.Engine"sqlalchemy.engine.base.Engine
-None*36*37*38*39*310*311rÀ
-cursor4sqlalchemy.engine.interfaces.ExceptionContext.cursorq
-'Union[_typeshed.dbapi.DBAPICursor,None]:
-_typeshed.dbapi.DBAPICursor"_typeshed.dbapi.DBAPICursor
-None*36*37*38*39*310*311r§
-	statement7sqlalchemy.engine.interfaces.ExceptionContext.statementD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*36*37*38*39*310*311r»
-
-parameters8sqlalchemy.engine.interfaces.ExceptionContext.parametersf
-"Union[typing.Collection[Any],None]4
-typing.Collection[Any]
-Any"typing.Collection
-None*36*37*38*39*310*311r‘
-original_exception@sqlalchemy.engine.interfaces.ExceptionContext.original_exceptionb
-"Union[builtins.BaseException,None]0
-builtins.BaseException"builtins.BaseException
-None*36*37*38*39*310*311rÌ
-sqlalchemy_exceptionBsqlalchemy.engine.interfaces.ExceptionContext.sqlalchemy_exceptionw
-)Union[sqlalchemy.exc.StatementError,None]>
-sqlalchemy.exc.StatementError"sqlalchemy.exc.StatementError
-None*36*37*38*39*310*311r“
-chained_exception?sqlalchemy.engine.interfaces.ExceptionContext.chained_exceptionb
-"Union[builtins.BaseException,None]0
-builtins.BaseException"builtins.BaseException
-None*36*37*38*39*310*311rò
-execution_context?sqlalchemy.engine.interfaces.ExceptionContext.execution_contextß
-9Union[sqlalchemy.engine.interfaces.ExecutionContext,None]^
--sqlalchemy.engine.interfaces.ExecutionContext"-sqlalchemy.engine.interfaces.ExecutionContext
-None*36*37*38*39*310*311rØ
-is_disconnect;sqlalchemy.engine.interfaces.ExceptionContext.is_disconnectG
-Union[builtins.bool,None]
-builtins.bool"builtins.bool
-None*36*37*38*39*310*311r¶
-invalidate_pool_on_disconnectKsqlalchemy.engine.interfaces.ExceptionContext.invalidate_pool_on_disconnect
-builtins.bool"builtins.bool*36*37*38*39*310*311Î
-AdaptedConnection.sqlalchemy.engine.interfaces.AdaptedConnection"builtins.object*á
-driver_connection@sqlalchemy.engine.interfaces.AdaptedConnection.driver_connection*
-self0:property`z36z37z38z39z310z311*q
-	run_async8sqlalchemy.engine.interfaces.AdaptedConnection.run_async*
-self*
-fnz36z37z38z39z310z311j36j37j38j39j310j311*≤
-__annotations__,sqlalchemy.engine.interfaces.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*36*37*38*39*310*311

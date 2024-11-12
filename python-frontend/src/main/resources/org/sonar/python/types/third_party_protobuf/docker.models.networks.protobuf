@@ -1,0 +1,207 @@
+
+docker.models.networksÒ
+Networkdocker.models.networks.Network"docker.models.resource.Model*Ô
+name#docker.models.networks.Network.name"D
+Union[builtins.str,None]
+builtins.str"builtins.str
+None*J
+self@
+docker.models.networks.Network"docker.models.networks.Network0:property`z36z37z38z39z310z311z312z313*ƒ
+
+containers)docker.models.networks.Network.containers"å
+1builtins.list[docker.models.containers.Container]H
+"docker.models.containers.Container""docker.models.containers.Container"builtins.list*J
+self@
+docker.models.networks.Network"docker.models.networks.Network0:property`z36z37z38z39z310z311z312z313*à
+connect&docker.models.networks.Network.connect"
+None*J
+self@
+docker.models.networks.Network"docker.models.networks.Network*≤
+	container¢
+6Union[builtins.str,docker.models.containers.Container]
+builtins.str"builtins.strH
+"docker.models.containers.Container""docker.models.containers.Container*
+args
+Any*
+kwargs
+Anyz36z37z38z39z310z311z312z313*ì
+
+disconnect)docker.models.networks.Network.disconnect"
+None*J
+self@
+docker.models.networks.Network"docker.models.networks.Network*≤
+	container¢
+6Union[builtins.str,docker.models.containers.Container]
+builtins.str"builtins.strH
+"docker.models.containers.Container""docker.models.containers.Container*+
+force
+builtins.bool"builtins.bool z36z37z38z39z310z311z312z313*©
+remove%docker.models.networks.Network.remove"
+None*J
+self@
+docker.models.networks.Network"docker.models.networks.Networkz36z37z38z39z310z311z312z313j36j37j38j39j310j311j312j313Â&
+NetworkCollection(docker.models.networks.NetworkCollection"!docker.models.resource.Collection*„	
+create/docker.models.networks.NetworkCollection.create"@
+docker.models.networks.Network"docker.models.networks.Network*^
+selfT
+(docker.models.networks.NetworkCollection"(docker.models.networks.NetworkCollection*&
+name
+builtins.str"builtins.str*R
+driverD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *¢
+optionsí
++Union[builtins.dict[builtins.str,Any],None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None *ç
+ipamÄ
+,Union[docker.types.networks.IPAMConfig,None]D
+ docker.types.networks.IPAMConfig" docker.types.networks.IPAMConfig
+None *^
+check_duplicateG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *.
+internal
+builtins.bool"builtins.bool *°
+labelsí
++Union[builtins.dict[builtins.str,Any],None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None *1
+enable_ipv6
+builtins.bool"builtins.bool *Y
+
+attachableG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *3
+scope&
+Union[Any,None]
+Any
+None *V
+ingressG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None z36z37*Ÿ
+create/docker.models.networks.NetworkCollection.create"@
+docker.models.networks.Network"docker.models.networks.Network*^
+selfT
+(docker.models.networks.NetworkCollection"(docker.models.networks.NetworkCollection*&
+name
+builtins.str"builtins.str*R
+driverD
+Union[builtins.str,None]
+builtins.str"builtins.str
+None *¢
+optionsí
++Union[builtins.dict[builtins.str,Any],None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None *ç
+ipamÄ
+,Union[docker.types.networks.IPAMConfig,None]D
+ docker.types.networks.IPAMConfig" docker.types.networks.IPAMConfig
+None *^
+check_duplicateG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *.
+internal
+builtins.bool"builtins.bool *°
+labelsí
++Union[builtins.dict[builtins.str,Any],None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None *1
+enable_ipv6
+builtins.bool"builtins.bool *Y
+
+attachableG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *î
+scopeÜ
+MUnion[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],None]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str
+None *V
+ingressG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None z38z39z310z311z312z313*ò
+get,docker.models.networks.NetworkCollection.get"@
+docker.models.networks.Network"docker.models.networks.Network*^
+selfT
+(docker.models.networks.NetworkCollection"(docker.models.networks.NetworkCollection*,
+
+network_id
+builtins.str"builtins.str*V
+verboseG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *3
+scope&
+Union[Any,None]
+Any
+None z36z37*é
+get,docker.models.networks.NetworkCollection.get"@
+docker.models.networks.Network"docker.models.networks.Network*^
+selfT
+(docker.models.networks.NetworkCollection"(docker.models.networks.NetworkCollection*,
+
+network_id
+builtins.str"builtins.str*V
+verboseG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *î
+scopeÜ
+MUnion[Literal[builtins.str],Literal[builtins.str],Literal[builtins.str],None]7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str7
+Literal[builtins.str]	
+builtins.str"builtins.str
+None z38z39z310z311z312z313*‰
+list-docker.models.networks.NetworkCollection.list"Ä
+-builtins.list[docker.models.networks.Network]@
+docker.models.networks.Network"docker.models.networks.Network"builtins.list*^
+selfT
+(docker.models.networks.NetworkCollection"(docker.models.networks.NetworkCollection*
+args
+Any*
+kwargs
+Anyz36z37z38z39z310z311z312z313*π
+prune.docker.models.networks.NetworkCollection.prune"W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*^
+selfT
+(docker.models.networks.NetworkCollection"(docker.models.networks.NetworkCollection*¢
+filtersí
++Union[builtins.dict[builtins.str,Any],None]W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict
+None z36z37z38z39z310z311z312z313j36j37j38j39j310j311j312j313rÕ
+model.docker.models.networks.NetworkCollection.modelp
+$Type[docker.models.networks.Network]@
+docker.models.networks.Network"docker.models.networks.Network"type*36*37*38*39*310*311*312*313*∂
+__annotations__&docker.models.networks.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*36*37*38*39*310*311*312*313*:
+Literaldocker.models.networks.Literal
+Any*36*37

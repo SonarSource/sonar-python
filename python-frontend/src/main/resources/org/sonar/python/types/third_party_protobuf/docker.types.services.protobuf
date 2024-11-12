@@ -1,0 +1,541 @@
+
+docker.types.services 
+TaskTemplate"docker.types.services.TaskTemplate"builtins.dict*Ú
+__init__+docker.types.services.TaskTemplate.__init__"
+None*R
+selfH
+"docker.types.services.TaskTemplate""docker.types.services.TaskTemplate*
+container_spec
+Any*l
+	resources[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *q
+restart_policy[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *l
+	placement[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *m
+
+log_driver[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *k
+networks[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *o
+force_update[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None z36z37z38z39z310z311z312z313*
+container_spec1docker.types.services.TaskTemplate.container_spec*
+self0:property`z36z37z38z39z310z311z312z313*u
+	resources,docker.types.services.TaskTemplate.resources*
+self0:property`z36z37z38z39z310z311z312z313*
+restart_policy1docker.types.services.TaskTemplate.restart_policy*
+self0:property`z36z37z38z39z310z311z312z313*u
+	placement,docker.types.services.TaskTemplate.placement*
+self0:property`z36z37z38z39z310z311z312z313j36j37j38j39j310j311j312j313—
+ContainerSpec#docker.types.services.ContainerSpec"builtins.dict*Á
+__init__,docker.types.services.ContainerSpec.__init__"
+None*T
+selfJ
+#docker.types.services.ContainerSpec"#docker.types.services.ContainerSpec*
+image
+Any*j
+command[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *g
+args[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *k
+hostname[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *f
+env[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *j
+workdir[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *g
+user[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *i
+labels[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *i
+mounts[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *t
+stop_grace_period[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *j
+secrets[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *f
+tty[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *i
+groups[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *m
+
+open_stdin[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *l
+	read_only[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *n
+stop_signal[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *n
+healthcheck[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *h
+hosts[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *m
+
+dns_config[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *j
+configs[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *m
+
+privileges[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *l
+	isolation[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *g
+init[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *j
+cap_add[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *k
+cap_drop[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *j
+sysctls[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None z36z37z38z39z310z311z312z313j36j37j38j39j310j311j312j313ﬁ	
+Mountdocker.types.services.Mount"builtins.dict*Û
+__init__$docker.types.services.Mount.__init__"
+None*D
+self:
+docker.types.services.Mount"docker.types.services.Mount*
+target
+Any*
+source
+Any*(
+type
+builtins.str"builtins.str */
+	read_only
+builtins.bool"builtins.bool *n
+consistency[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *n
+propagation[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *-
+no_copy
+builtins.bool"builtins.bool *i
+labels[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *p
+driver_config[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *m
+
+tmpfs_size[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *m
+
+tmpfs_mode[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None z36z37z38z39z310z311z312z313*é
+parse_mount_string.docker.types.services.Mount.parse_mount_string*
+cls*
+
+string0:classmethodpz36z37z38z39z310z311z312z313j36j37j38j39j310j311j312j313Ã
+	Resourcesdocker.types.services.Resources"builtins.dict*Í
+__init__(docker.types.services.Resources.__init__"
+None*L
+selfB
+docker.types.services.Resources"docker.types.services.Resources*l
+	cpu_limit[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *l
+	mem_limit[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *r
+cpu_reservation[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *r
+mem_reservation[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *t
+generic_resources[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None z36z37z38z39z310z311z312z313j36j37j38j39j310j311j312j313º
+UpdateConfig"docker.types.services.UpdateConfig"builtins.dict*‘
+__init__+docker.types.services.UpdateConfig.__init__"
+None*R
+selfH
+"docker.types.services.UpdateConfig""docker.types.services.UpdateConfig*/
+parallelism
+builtins.int"builtins.int *h
+delay[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *2
+failure_action
+builtins.str"builtins.str *j
+monitor[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *t
+max_failure_ratio[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *h
+order[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None z36z37z38z39z310z311z312z313j36j37j38j39j310j311j312j313~
+RollbackConfig$docker.types.services.RollbackConfig""docker.types.services.UpdateConfigj36j37j38j39j310j311j312j313Õ
+RestartConditionTypesEnum/docker.types.services.RestartConditionTypesEnum"builtins.objectj36j37j38j39j310j311j312j313rì
+NONE4docker.types.services.RestartConditionTypesEnum.NONE1
+TypeAlias[Any]
+Any"_typeshed.Incomplete*36*37*38*39*310*311*312*313rü
+
+ON_FAILURE:docker.types.services.RestartConditionTypesEnum.ON_FAILURE1
+TypeAlias[Any]
+Any"_typeshed.Incomplete*36*37*38*39*310*311*312*313rë
+ANY3docker.types.services.RestartConditionTypesEnum.ANY1
+TypeAlias[Any]
+Any"_typeshed.Incomplete*36*37*38*39*310*311*312*313‹
+RestartPolicy#docker.types.services.RestartPolicy"builtins.dict*ﬂ
+__init__,docker.types.services.RestartPolicy.__init__"
+None*T
+selfJ
+#docker.types.services.RestartPolicy"#docker.types.services.RestartPolicy*
+	condition
+Any *)
+delay
+builtins.int"builtins.int *0
+max_attempts
+builtins.int"builtins.int **
+window
+builtins.int"builtins.int z36z37z38z39z310z311z312z313j36j37j38j39j310j311j312j313rê
+condition_types3docker.types.services.RestartPolicy.condition_types£
+5Type[docker.types.services.RestartConditionTypesEnum]b
+/docker.types.services.RestartConditionTypesEnum"/docker.types.services.RestartConditionTypesEnum"type*36*37*38*39*310*311*312*313†
+DriverConfig"docker.types.services.DriverConfig"builtins.dict*∏
+__init__+docker.types.services.DriverConfig.__init__"
+None*R
+selfH
+"docker.types.services.DriverConfig""docker.types.services.DriverConfig*
+name
+Any*j
+options[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None z36z37z38z39z310z311z312z313j36j37j38j39j310j311j312j313Ù
+EndpointSpec"docker.types.services.EndpointSpec"builtins.dict*å
+__init__+docker.types.services.EndpointSpec.__init__"
+None*R
+selfH
+"docker.types.services.EndpointSpec""docker.types.services.EndpointSpec*g
+mode[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *h
+ports[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None z36z37z38z39z310z311z312z313j36j37j38j39j310j311j312j313à
+ServiceMode!docker.types.services.ServiceMode"builtins.dict*¶
+__init__*docker.types.services.ServiceMode.__init__"
+None*P
+selfF
+!docker.types.services.ServiceMode"!docker.types.services.ServiceMode*
+mode
+Any*k
+replicas[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *n
+concurrency[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None z36z37z38z39z310z311z312z313*r
+replicas*docker.types.services.ServiceMode.replicas*
+self0:property`z36z37z38z39z310z311z312z313j36j37j38j39j310j311j312j313rÖ
+mode&docker.types.services.ServiceMode.mode1
+TypeAlias[Any]
+Any"_typeshed.Incomplete*36*37*38*39*310*311*312*313…
+SecretReference%docker.types.services.SecretReference"builtins.dict*€
+__init__.docker.types.services.SecretReference.__init__"
+None*X
+selfN
+%docker.types.services.SecretReference"%docker.types.services.SecretReference*
+	secret_id
+Any*
+secret_name
+Any*k
+filename[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *f
+uid[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *f
+gid[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *(
+mode
+builtins.int"builtins.int z36z37z38z39z310z311z312z313j36j37j38j39j310j311j312j313…
+ConfigReference%docker.types.services.ConfigReference"builtins.dict*€
+__init__.docker.types.services.ConfigReference.__init__"
+None*X
+selfN
+%docker.types.services.ConfigReference"%docker.types.services.ConfigReference*
+	config_id
+Any*
+config_name
+Any*k
+filename[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *f
+uid[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *f
+gid[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *(
+mode
+builtins.int"builtins.int z36z37z38z39z310z311z312z313j36j37j38j39j310j311j312j313–
+	Placementdocker.types.services.Placement"builtins.dict*Ó
+__init__(docker.types.services.Placement.__init__"
+None*L
+selfB
+docker.types.services.Placement"docker.types.services.Placement*n
+constraints[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *n
+preferences[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *l
+	platforms[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *n
+maxreplicas[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None z36z37z38z39z310z311z312z313j36j37j38j39j310j311j312j313Ù
+PlacementPreference)docker.types.services.PlacementPreference"builtins.dict*˛
+__init__2docker.types.services.PlacementPreference.__init__"
+None*`
+selfV
+)docker.types.services.PlacementPreference")docker.types.services.PlacementPreference*
+strategy
+Any*
+
+descriptor
+Anyz36z37z38z39z310z311z312z313j36j37j38j39j310j311j312j313Ÿ
+	DNSConfigdocker.types.services.DNSConfig"builtins.dict*˜
+__init__(docker.types.services.DNSConfig.__init__"
+None*L
+selfB
+docker.types.services.DNSConfig"docker.types.services.DNSConfig*n
+nameservers[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *i
+search[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *j
+options[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None z36z37z38z39z310z311z312z313j36j37j38j39j310j311j312j313ƒ
+
+Privileges docker.types.services.Privileges"builtins.dict*‡
+__init__)docker.types.services.Privileges.__init__"
+None*N
+selfD
+ docker.types.services.Privileges" docker.types.services.Privileges*v
+credentialspec_file[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *z
+credentialspec_registry[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *r
+selinux_disable[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *o
+selinux_user[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *o
+selinux_role[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *o
+selinux_type[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *p
+selinux_level[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None z36z37z38z39z310z311z312z313j36j37j38j39j310j311j312j313≈
+NetworkAttachmentConfig-docker.types.services.NetworkAttachmentConfig"builtins.dict*«
+__init__6docker.types.services.NetworkAttachmentConfig.__init__"
+None*h
+self^
+-docker.types.services.NetworkAttachmentConfig"-docker.types.services.NetworkAttachmentConfig*
+target
+Any*j
+aliases[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None *j
+options[
+Union[TypeAlias[Any],None]1
+TypeAlias[Any]
+Any"_typeshed.Incomplete
+None z36z37z38z39z310z311z312z313j36j37j38j39j310j311j312j313s
+convert_service_ports+docker.types.services.convert_service_ports*	
+portsz36z37z38z39z310z311z312z313*µ
+__annotations__%docker.types.services.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*36*37*38*39*310*311*312*313

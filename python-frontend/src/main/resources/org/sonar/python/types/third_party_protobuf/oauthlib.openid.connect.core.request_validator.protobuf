@@ -1,327 +1,392 @@
 
-.oauthlib.openid.connect.core.request_validator—H
-OAuth2RequestValidator:oauthlib.oauth2.rfc6749.request_validator.RequestValidator"builtins.object*Â
-client_authentication_requiredYoauthlib.oauth2.rfc6749.request_validator.RequestValidator.client_authentication_required*
-self*
-request*
-args*
-
-kwargsz36z37z38z39z310z311*Ì
-authenticate_clientNoauthlib.oauth2.rfc6749.request_validator.RequestValidator.authenticate_client"
-None*‚
+.oauthlib.openid.connect.core.request_validatorÜw
+OAuth2RequestValidator:oauthlib.oauth2.rfc6749.request_validator.RequestValidator"builtins.object*­
+client_authentication_requiredYoauthlib.oauth2.rfc6749.request_validator.RequestValidator.client_authentication_required"
+builtins.bool"builtins.bool*‚
 selfx
-:oauthlib.oauth2.rfc6749.request_validator.RequestValidator":oauthlib.oauth2.rfc6749.request_validator.RequestValidator*
-request
-Any*
+:oauthlib.oauth2.rfc6749.request_validator.RequestValidator":oauthlib.oauth2.rfc6749.request_validator.RequestValidator*?
+request2
+oauthlib.common.Request"oauthlib.common.Request*
 args
 Any*
 kwargs
-Anyz36z37z38z39z310z311*ê
-authenticate_client_idQoauthlib.oauth2.rfc6749.request_validator.RequestValidator.authenticate_client_id"
-None*‚
+Anyz36z37z38z39z310z311z312z313*—
+authenticate_clientNoauthlib.oauth2.rfc6749.request_validator.RequestValidator.authenticate_client"
+builtins.bool"builtins.bool*‚
 selfx
-:oauthlib.oauth2.rfc6749.request_validator.RequestValidator":oauthlib.oauth2.rfc6749.request_validator.RequestValidator*
-	client_id
-Any*
-request
-Any*
+:oauthlib.oauth2.rfc6749.request_validator.RequestValidator":oauthlib.oauth2.rfc6749.request_validator.RequestValidator*?
+request2
+oauthlib.common.Request"oauthlib.common.Request*
 args
 Any*
 kwargs
-Anyz36z37z38z39z310z311*©
-confirm_redirect_uriOoauthlib.oauth2.rfc6749.request_validator.RequestValidator.confirm_redirect_uri"
-None*‚
+Anyz36z37z38z39z310z311z312z313*Ê
+authenticate_client_idQoauthlib.oauth2.rfc6749.request_validator.RequestValidator.authenticate_client_id"
+builtins.bool"builtins.bool*‚
 selfx
-:oauthlib.oauth2.rfc6749.request_validator.RequestValidator":oauthlib.oauth2.rfc6749.request_validator.RequestValidator*
-	client_id
-Any*
-code
-Any*
-redirect_uri
-Any*
-client
-Any*
-request
-Any*
+:oauthlib.oauth2.rfc6749.request_validator.RequestValidator":oauthlib.oauth2.rfc6749.request_validator.RequestValidator*+
+	client_id
+builtins.str"builtins.str*?
+request2
+oauthlib.common.Request"oauthlib.common.Request*
 args
 Any*
 kwargs
-Anyz36z37z38z39z310z311*î
-get_default_redirect_uriSoauthlib.oauth2.rfc6749.request_validator.RequestValidator.get_default_redirect_uri"
-None*‚
+Anyz36z37z38z39z310z311z312z313*†
+confirm_redirect_uriOoauthlib.oauth2.rfc6749.request_validator.RequestValidator.confirm_redirect_uri"
+builtins.bool"builtins.bool*‚
 selfx
-:oauthlib.oauth2.rfc6749.request_validator.RequestValidator":oauthlib.oauth2.rfc6749.request_validator.RequestValidator*
-	client_id
-Any*
-request
-Any*
+:oauthlib.oauth2.rfc6749.request_validator.RequestValidator":oauthlib.oauth2.rfc6749.request_validator.RequestValidator*+
+	client_id
+builtins.str"builtins.str*&
+code
+builtins.str"builtins.str*.
+redirect_uri
+builtins.str"builtins.str*f
+clientZ
++oauthlib.oauth2.rfc6749.clients.base.Client"+oauthlib.oauth2.rfc6749.clients.base.Client*?
+request2
+oauthlib.common.Request"oauthlib.common.Request*
 args
 Any*
 kwargs
-Anyz36z37z38z39z310z311*â
-get_default_scopesMoauthlib.oauth2.rfc6749.request_validator.RequestValidator.get_default_scopes"
-None*‚
+Anyz36z37z38z39z310z311z312z313*Ì
+get_default_redirect_uriSoauthlib.oauth2.rfc6749.request_validator.RequestValidator.get_default_redirect_uri"
+builtins.str"builtins.str*‚
 selfx
-:oauthlib.oauth2.rfc6749.request_validator.RequestValidator":oauthlib.oauth2.rfc6749.request_validator.RequestValidator*
-	client_id
-Any*
-request
-Any*
+:oauthlib.oauth2.rfc6749.request_validator.RequestValidator":oauthlib.oauth2.rfc6749.request_validator.RequestValidator*+
+	client_id
+builtins.str"builtins.str*?
+request2
+oauthlib.common.Request"oauthlib.common.Request*
 args
 Any*
 kwargs
-Anyz36z37z38z39z310z311*è
-get_original_scopesNoauthlib.oauth2.rfc6749.request_validator.RequestValidator.get_original_scopes"
-None*‚
+Anyz36z37z38z39z310z311z312z313*î
+get_default_scopesMoauthlib.oauth2.rfc6749.request_validator.RequestValidator.get_default_scopes"J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*‚
 selfx
-:oauthlib.oauth2.rfc6749.request_validator.RequestValidator":oauthlib.oauth2.rfc6749.request_validator.RequestValidator*
-refresh_token
-Any*
-request
-Any*
+:oauthlib.oauth2.rfc6749.request_validator.RequestValidator":oauthlib.oauth2.rfc6749.request_validator.RequestValidator*+
+	client_id
+builtins.str"builtins.str*?
+request2
+oauthlib.common.Request"oauthlib.common.Request*
 args
 Any*
 kwargs
-Anyz36z37z38z39z310z311*Ý
-is_within_original_scopeSoauthlib.oauth2.rfc6749.request_validator.RequestValidator.is_within_original_scope*
-self*
-request_scopes*
-refresh_token*
-request*
-args*
-
-kwargsz36z37z38z39z310z311*ø
-introspect_tokenKoauthlib.oauth2.rfc6749.request_validator.RequestValidator.introspect_token"
-None*‚
+Anyz36z37z38z39z310z311z312z313*ô
+get_original_scopesNoauthlib.oauth2.rfc6749.request_validator.RequestValidator.get_original_scopes"J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*‚
 selfx
-:oauthlib.oauth2.rfc6749.request_validator.RequestValidator":oauthlib.oauth2.rfc6749.request_validator.RequestValidator*
-token
-Any*
-token_type_hint
-Any*
-request
-Any*
+:oauthlib.oauth2.rfc6749.request_validator.RequestValidator":oauthlib.oauth2.rfc6749.request_validator.RequestValidator*/
+refresh_token
+builtins.str"builtins.str*?
+request2
+oauthlib.common.Request"oauthlib.common.Request*
 args
 Any*
 kwargs
-Anyz36z37z38z39z310z311*‹
+Anyz36z37z38z39z310z311z312z313*²
+is_within_original_scopeSoauthlib.oauth2.rfc6749.request_validator.RequestValidator.is_within_original_scope"
+builtins.bool"builtins.bool*‚
+selfx
+:oauthlib.oauth2.rfc6749.request_validator.RequestValidator":oauthlib.oauth2.rfc6749.request_validator.RequestValidator*^
+request_scopesJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*/
+refresh_token
+builtins.str"builtins.str*?
+request2
+oauthlib.common.Request"oauthlib.common.Request*
+args
+Any*
+kwargs
+Anyz36z37z38z39z310z311z312z313*—
+introspect_tokenKoauthlib.oauth2.rfc6749.request_validator.RequestValidator.introspect_token"Ç
+dUnion[builtins.dict[builtins.str,Union[builtins.int,builtins.str,builtins.list[builtins.str]]],None]Ò
+Xbuiltins.dict[builtins.str,Union[builtins.int,builtins.str,builtins.list[builtins.str]]]
+builtins.str"builtins.strÈ
+<Union[builtins.int,builtins.str,builtins.list[builtins.str]]
+builtins.int"builtins.int
+builtins.str"builtins.strJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list"builtins.dict
+None*‚
+selfx
+:oauthlib.oauth2.rfc6749.request_validator.RequestValidator":oauthlib.oauth2.rfc6749.request_validator.RequestValidator*'
+token
+builtins.str"builtins.str*1
+token_type_hint
+builtins.str"builtins.str*?
+request2
+oauthlib.common.Request"oauthlib.common.Request*
+args
+Any*
+kwargs
+Anyz36z37z38z39z310z311z312z313*ê
 invalidate_authorization_codeXoauthlib.oauth2.rfc6749.request_validator.RequestValidator.invalidate_authorization_code"
 None*‚
 selfx
-:oauthlib.oauth2.rfc6749.request_validator.RequestValidator":oauthlib.oauth2.rfc6749.request_validator.RequestValidator*
-	client_id
-Any*
-code
-Any*
-request
-Any*
+:oauthlib.oauth2.rfc6749.request_validator.RequestValidator":oauthlib.oauth2.rfc6749.request_validator.RequestValidator*+
+	client_id
+builtins.str"builtins.str*&
+code
+builtins.str"builtins.str*?
+request2
+oauthlib.common.Request"oauthlib.common.Request*
 args
 Any*
 kwargs
-Anyz36z37z38z39z310z311*ð
+Anyz36z37z38z39z310z311z312z313*Ï
 revoke_tokenGoauthlib.oauth2.rfc6749.request_validator.RequestValidator.revoke_token"
 None*‚
 selfx
-:oauthlib.oauth2.rfc6749.request_validator.RequestValidator":oauthlib.oauth2.rfc6749.request_validator.RequestValidator*
-token
-Any*
-token_type_hint
-Any*
-request
-Any*
+:oauthlib.oauth2.rfc6749.request_validator.RequestValidator":oauthlib.oauth2.rfc6749.request_validator.RequestValidator*'
+token
+builtins.str"builtins.str*1
+token_type_hint
+builtins.str"builtins.str*?
+request2
+oauthlib.common.Request"oauthlib.common.Request*
 args
 Any*
 kwargs
-Anyz36z37z38z39z310z311*˜
-rotate_refresh_tokenOoauthlib.oauth2.rfc6749.request_validator.RequestValidator.rotate_refresh_token*
-self*
-requestz36z37z38z39z310z311*ÿ
+Anyz36z37z38z39z310z311z312z313*ñ
+rotate_refresh_tokenOoauthlib.oauth2.rfc6749.request_validator.RequestValidator.rotate_refresh_token"
+builtins.bool"builtins.bool*‚
+selfx
+:oauthlib.oauth2.rfc6749.request_validator.RequestValidator":oauthlib.oauth2.rfc6749.request_validator.RequestValidator*?
+request2
+oauthlib.common.Request"oauthlib.common.Requestz36z37z38z39z310z311z312z313*£
 save_authorization_codeRoauthlib.oauth2.rfc6749.request_validator.RequestValidator.save_authorization_code"
 None*‚
 selfx
-:oauthlib.oauth2.rfc6749.request_validator.RequestValidator":oauthlib.oauth2.rfc6749.request_validator.RequestValidator*
-	client_id
-Any*
-code
-Any*
-request
-Any*
+:oauthlib.oauth2.rfc6749.request_validator.RequestValidator":oauthlib.oauth2.rfc6749.request_validator.RequestValidator*+
+	client_id
+builtins.str"builtins.str*†
+code|
+<oauthlib.oauth2.rfc6749.request_validator._AuthorizationCode"<oauthlib.oauth2.rfc6749.request_validator._AuthorizationCode*?
+request2
+oauthlib.common.Request"oauthlib.common.Request*
 args
 Any*
 kwargs
-Anyz36z37z38z39z310z311*¥
+Anyz36z37*Ÿ
+save_authorization_codeRoauthlib.oauth2.rfc6749.request_validator.RequestValidator.save_authorization_code"
+None*‚
+selfx
+:oauthlib.oauth2.rfc6749.request_validator.RequestValidator":oauthlib.oauth2.rfc6749.request_validator.RequestValidator*+
+	client_id
+builtins.str"builtins.str*o
+codee
+TypeAlias[TypedDict]
+	TypedDict"<oauthlib.oauth2.rfc6749.request_validator._AuthorizationCode*?
+request2
+oauthlib.common.Request"oauthlib.common.Request*
+args
+Any*
+kwargs
+Anyz38z39z310z311z312z313*˜
 
-save_tokenEoauthlib.oauth2.rfc6749.request_validator.RequestValidator.save_token*
-self*	
-token*
-request*
-args*
+save_tokenEoauthlib.oauth2.rfc6749.request_validator.RequestValidator.save_token""
+builtins.object"builtins.object*‚
+selfx
+:oauthlib.oauth2.rfc6749.request_validator.RequestValidator":oauthlib.oauth2.rfc6749.request_validator.RequestValidator*Œ
+token€
+,typing.Mapping[builtins.str,builtins.object]
+builtins.str"builtins.str"
+builtins.object"builtins.object"typing.Mapping*?
+request2
+oauthlib.common.Request"oauthlib.common.Request*
+args
+Any*
+kwargs
+Anyz36z37z38z39z310z311z312z313*ø
+save_bearer_tokenLoauthlib.oauth2.rfc6749.request_validator.RequestValidator.save_bearer_token""
+builtins.object"builtins.object*‚
+selfx
+:oauthlib.oauth2.rfc6749.request_validator.RequestValidator":oauthlib.oauth2.rfc6749.request_validator.RequestValidator*{
+tokenp
+6oauthlib.oauth2.rfc6749.request_validator._BearerToken"6oauthlib.oauth2.rfc6749.request_validator._BearerToken*?
+request2
+oauthlib.common.Request"oauthlib.common.Request*
+args
+Any*
+kwargs
+Anyz36z37*û
+save_bearer_tokenLoauthlib.oauth2.rfc6749.request_validator.RequestValidator.save_bearer_token""
+builtins.object"builtins.object*‚
+selfx
+:oauthlib.oauth2.rfc6749.request_validator.RequestValidator":oauthlib.oauth2.rfc6749.request_validator.RequestValidator*j
+token_
+TypeAlias[TypedDict]
+	TypedDict"6oauthlib.oauth2.rfc6749.request_validator._BearerToken*?
+request2
+oauthlib.common.Request"oauthlib.common.Request*
+args
+Any*
+kwargs
+Anyz38z39z310z311z312z313*ô
+validate_bearer_tokenPoauthlib.oauth2.rfc6749.request_validator.RequestValidator.validate_bearer_token"
+builtins.bool"builtins.bool*‚
+selfx
+:oauthlib.oauth2.rfc6749.request_validator.RequestValidator":oauthlib.oauth2.rfc6749.request_validator.RequestValidator*'
+token
+builtins.str"builtins.str*V
+scopesJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*?
+request2
+oauthlib.common.Request"oauthlib.common.Requestz36z37z38z39z310z311z312z313*Â
+validate_client_idMoauthlib.oauth2.rfc6749.request_validator.RequestValidator.validate_client_id"
+builtins.bool"builtins.bool*‚
+selfx
+:oauthlib.oauth2.rfc6749.request_validator.RequestValidator":oauthlib.oauth2.rfc6749.request_validator.RequestValidator*+
+	client_id
+builtins.str"builtins.str*?
+request2
+oauthlib.common.Request"oauthlib.common.Request*
+args
+Any*
+kwargs
+Anyz36z37z38z39z310z311z312z313*È
+validate_codeHoauthlib.oauth2.rfc6749.request_validator.RequestValidator.validate_code"
+builtins.bool"builtins.bool*‚
+selfx
+:oauthlib.oauth2.rfc6749.request_validator.RequestValidator":oauthlib.oauth2.rfc6749.request_validator.RequestValidator*+
+	client_id
+builtins.str"builtins.str*&
+code
+builtins.str"builtins.str*f
+clientZ
++oauthlib.oauth2.rfc6749.clients.base.Client"+oauthlib.oauth2.rfc6749.clients.base.Client*?
+request2
+oauthlib.common.Request"oauthlib.common.Request*
+args
+Any*
+kwargs
+Anyz36z37z38z39z310z311z312z313*Ú
+validate_grant_typeNoauthlib.oauth2.rfc6749.request_validator.RequestValidator.validate_grant_type"
+builtins.bool"builtins.bool*‚
+selfx
+:oauthlib.oauth2.rfc6749.request_validator.RequestValidator":oauthlib.oauth2.rfc6749.request_validator.RequestValidator*+
+	client_id
+builtins.str"builtins.str*,
 
-kwargsz36z37z38z39z310z311*Ü
-save_bearer_tokenLoauthlib.oauth2.rfc6749.request_validator.RequestValidator.save_bearer_token"
-None*‚
-selfx
-:oauthlib.oauth2.rfc6749.request_validator.RequestValidator":oauthlib.oauth2.rfc6749.request_validator.RequestValidator*
-token
-Any*
-request
-Any*
+grant_type
+builtins.str"builtins.str*f
+clientZ
++oauthlib.oauth2.rfc6749.clients.base.Client"+oauthlib.oauth2.rfc6749.clients.base.Client*?
+request2
+oauthlib.common.Request"oauthlib.common.Request*
 args
 Any*
 kwargs
-Anyz36z37z38z39z310z311*Ñ
-validate_bearer_tokenPoauthlib.oauth2.rfc6749.request_validator.RequestValidator.validate_bearer_token"
-None*‚
+Anyz36z37z38z39z310z311z312z313*ø
+validate_redirect_uriPoauthlib.oauth2.rfc6749.request_validator.RequestValidator.validate_redirect_uri"
+builtins.bool"builtins.bool*‚
 selfx
-:oauthlib.oauth2.rfc6749.request_validator.RequestValidator":oauthlib.oauth2.rfc6749.request_validator.RequestValidator*
-token
-Any*
-scopes
-Any*
-request
-Anyz36z37z38z39z310z311*â
-validate_client_idMoauthlib.oauth2.rfc6749.request_validator.RequestValidator.validate_client_id"
-None*‚
-selfx
-:oauthlib.oauth2.rfc6749.request_validator.RequestValidator":oauthlib.oauth2.rfc6749.request_validator.RequestValidator*
-	client_id
-Any*
-request
-Any*
+:oauthlib.oauth2.rfc6749.request_validator.RequestValidator":oauthlib.oauth2.rfc6749.request_validator.RequestValidator*+
+	client_id
+builtins.str"builtins.str*.
+redirect_uri
+builtins.str"builtins.str*?
+request2
+oauthlib.common.Request"oauthlib.common.Request*
 args
 Any*
 kwargs
-Anyz36z37z38z39z310z311*€
-validate_codeHoauthlib.oauth2.rfc6749.request_validator.RequestValidator.validate_code"
-None*‚
+Anyz36z37z38z39z310z311z312z313*¶
+validate_refresh_tokenQoauthlib.oauth2.rfc6749.request_validator.RequestValidator.validate_refresh_token"
+builtins.bool"builtins.bool*‚
 selfx
-:oauthlib.oauth2.rfc6749.request_validator.RequestValidator":oauthlib.oauth2.rfc6749.request_validator.RequestValidator*
-	client_id
-Any*
-code
-Any*
-client
-Any*
-request
-Any*
+:oauthlib.oauth2.rfc6749.request_validator.RequestValidator":oauthlib.oauth2.rfc6749.request_validator.RequestValidator*/
+refresh_token
+builtins.str"builtins.str*f
+clientZ
++oauthlib.oauth2.rfc6749.clients.base.Client"+oauthlib.oauth2.rfc6749.clients.base.Client*?
+request2
+oauthlib.common.Request"oauthlib.common.Request*
 args
 Any*
 kwargs
-Anyz36z37z38z39z310z311*’
-validate_grant_typeNoauthlib.oauth2.rfc6749.request_validator.RequestValidator.validate_grant_type"
-None*‚
+Anyz36z37z38z39z310z311z312z313*ã
+validate_response_typeQoauthlib.oauth2.rfc6749.request_validator.RequestValidator.validate_response_type"
+builtins.bool"builtins.bool*‚
 selfx
-:oauthlib.oauth2.rfc6749.request_validator.RequestValidator":oauthlib.oauth2.rfc6749.request_validator.RequestValidator*
-	client_id
-Any*
-
-grant_type
-Any*
-client
-Any*
-request
-Any*
+:oauthlib.oauth2.rfc6749.request_validator.RequestValidator":oauthlib.oauth2.rfc6749.request_validator.RequestValidator*+
+	client_id
+builtins.str"builtins.str*/
+response_type
+builtins.str"builtins.str*f
+clientZ
++oauthlib.oauth2.rfc6749.clients.base.Client"+oauthlib.oauth2.rfc6749.clients.base.Client*?
+request2
+oauthlib.common.Request"oauthlib.common.Request*
 args
 Any*
 kwargs
-Anyz36z37z38z39z310z311*ƒ
-validate_redirect_uriPoauthlib.oauth2.rfc6749.request_validator.RequestValidator.validate_redirect_uri"
-None*‚
+Anyz36z37z38z39z310z311z312z313*ü
+validate_scopesJoauthlib.oauth2.rfc6749.request_validator.RequestValidator.validate_scopes"
+builtins.bool"builtins.bool*‚
 selfx
-:oauthlib.oauth2.rfc6749.request_validator.RequestValidator":oauthlib.oauth2.rfc6749.request_validator.RequestValidator*
-	client_id
-Any*
-redirect_uri
-Any*
-request
-Any*
+:oauthlib.oauth2.rfc6749.request_validator.RequestValidator":oauthlib.oauth2.rfc6749.request_validator.RequestValidator*+
+	client_id
+builtins.str"builtins.str*V
+scopesJ
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*f
+clientZ
++oauthlib.oauth2.rfc6749.clients.base.Client"+oauthlib.oauth2.rfc6749.clients.base.Client*?
+request2
+oauthlib.common.Request"oauthlib.common.Request*
 args
 Any*
 kwargs
-Anyz36z37z38z39z310z311*ƒ
-validate_refresh_tokenQoauthlib.oauth2.rfc6749.request_validator.RequestValidator.validate_refresh_token"
-None*‚
+Anyz36z37z38z39z310z311z312z313*Ë
+validate_userHoauthlib.oauth2.rfc6749.request_validator.RequestValidator.validate_user"
+builtins.bool"builtins.bool*‚
 selfx
-:oauthlib.oauth2.rfc6749.request_validator.RequestValidator":oauthlib.oauth2.rfc6749.request_validator.RequestValidator*
-refresh_token
-Any*
-client
-Any*
-request
-Any*
+:oauthlib.oauth2.rfc6749.request_validator.RequestValidator":oauthlib.oauth2.rfc6749.request_validator.RequestValidator**
+username
+builtins.str"builtins.str**
+password
+builtins.str"builtins.str*f
+clientZ
++oauthlib.oauth2.rfc6749.clients.base.Client"+oauthlib.oauth2.rfc6749.clients.base.Client*?
+request2
+oauthlib.common.Request"oauthlib.common.Request*
 args
 Any*
 kwargs
-Anyz36z37z38z39z310z311*›
-validate_response_typeQoauthlib.oauth2.rfc6749.request_validator.RequestValidator.validate_response_type"
-None*‚
+Anyz36z37z38z39z310z311z312z313*–
+is_pkce_requiredKoauthlib.oauth2.rfc6749.request_validator.RequestValidator.is_pkce_required"
+builtins.bool"builtins.bool*‚
 selfx
-:oauthlib.oauth2.rfc6749.request_validator.RequestValidator":oauthlib.oauth2.rfc6749.request_validator.RequestValidator*
-	client_id
-Any*
-response_type
-Any*
-client
-Any*
-request
-Any*
-args
-Any*
-kwargs
-Anyz36z37z38z39z310z311*†
-validate_scopesJoauthlib.oauth2.rfc6749.request_validator.RequestValidator.validate_scopes"
-None*‚
+:oauthlib.oauth2.rfc6749.request_validator.RequestValidator":oauthlib.oauth2.rfc6749.request_validator.RequestValidator*+
+	client_id
+builtins.str"builtins.str*?
+request2
+oauthlib.common.Request"oauthlib.common.Requestz36z37z38z39z310z311z312z313*“
+get_code_challengeMoauthlib.oauth2.rfc6749.request_validator.RequestValidator.get_code_challenge"
+builtins.str"builtins.str*‚
 selfx
-:oauthlib.oauth2.rfc6749.request_validator.RequestValidator":oauthlib.oauth2.rfc6749.request_validator.RequestValidator*
-	client_id
-Any*
-scopes
-Any*
-client
-Any*
-request
-Any*
-args
-Any*
-kwargs
-Anyz36z37z38z39z310z311*ƒ
-validate_userHoauthlib.oauth2.rfc6749.request_validator.RequestValidator.validate_user"
-None*‚
+:oauthlib.oauth2.rfc6749.request_validator.RequestValidator":oauthlib.oauth2.rfc6749.request_validator.RequestValidator*&
+code
+builtins.str"builtins.str*?
+request2
+oauthlib.common.Request"oauthlib.common.Requestz36z37z38z39z310z311z312z313*¡
+get_code_challenge_methodToauthlib.oauth2.rfc6749.request_validator.RequestValidator.get_code_challenge_method"
+builtins.str"builtins.str*‚
 selfx
-:oauthlib.oauth2.rfc6749.request_validator.RequestValidator":oauthlib.oauth2.rfc6749.request_validator.RequestValidator*
-username
-Any*
-password
-Any*
-client
-Any*
-request
-Any*
-args
-Any*
-kwargs
-Anyz36z37z38z39z310z311*Ÿ
-is_pkce_requiredKoauthlib.oauth2.rfc6749.request_validator.RequestValidator.is_pkce_required*
-self*
-	client_id*
-requestz36z37z38z39z310z311*µ
-get_code_challengeMoauthlib.oauth2.rfc6749.request_validator.RequestValidator.get_code_challenge"
-None*‚
-selfx
-:oauthlib.oauth2.rfc6749.request_validator.RequestValidator":oauthlib.oauth2.rfc6749.request_validator.RequestValidator*
-code
-Any*
-request
-Anyz36z37z38z39z310z311*Ã
-get_code_challenge_methodToauthlib.oauth2.rfc6749.request_validator.RequestValidator.get_code_challenge_method"
-None*‚
-selfx
-:oauthlib.oauth2.rfc6749.request_validator.RequestValidator":oauthlib.oauth2.rfc6749.request_validator.RequestValidator*
-code
-Any*
-request
-Anyz36z37z38z39z310z311j36j37j38j39j310j311‡ 
-RequestValidator?oauthlib.openid.connect.core.request_validator.RequestValidator":oauthlib.oauth2.rfc6749.request_validator.RequestValidator*Ž
+:oauthlib.oauth2.rfc6749.request_validator.RequestValidator":oauthlib.oauth2.rfc6749.request_validator.RequestValidator*&
+code
+builtins.str"builtins.str*?
+request2
+oauthlib.common.Request"oauthlib.common.Requestz36z37z38z39z310z311z312z313j36j37j38j39j310j311j312j313ÿ 
+RequestValidator?oauthlib.openid.connect.core.request_validator.RequestValidator":oauthlib.oauth2.rfc6749.request_validator.RequestValidator*˜
 get_authorization_code_scopes]oauthlib.openid.connect.core.request_validator.RequestValidator.get_authorization_code_scopes"
 None*
 self‚
@@ -333,7 +398,7 @@ grant_type
 redirect_uri
 Any*
 request
-Anyz36z37z38z39z310z311*Œ
+Anyz36z37z38z39z310z311z312z313*–
 get_authorization_code_nonce\oauthlib.openid.connect.core.request_validator.RequestValidator.get_authorization_code_nonce"
 None*
 self‚
@@ -345,7 +410,7 @@ grant_type
 redirect_uri
 Any*
 request
-Anyz36z37z38z39z310z311*æ
+Anyz36z37z38z39z310z311z312z313*ð
 get_jwt_bearer_tokenToauthlib.openid.connect.core.request_validator.RequestValidator.get_jwt_bearer_token"
 None*
 self‚
@@ -355,7 +420,7 @@ grant_type
 token_handler
 Any*
 request
-Anyz36z37z38z39z310z311*Ö
+Anyz36z37z38z39z310z311z312z313*à
 get_id_tokenLoauthlib.openid.connect.core.request_validator.RequestValidator.get_id_token"
 None*
 self‚
@@ -365,7 +430,7 @@ grant_type
 token_handler
 Any*
 request
-Anyz36z37z38z39z310z311*÷
+Anyz36z37z38z39z310z311z312z313*
 finalize_id_tokenQoauthlib.openid.connect.core.request_validator.RequestValidator.finalize_id_token"
 None*
 self‚
@@ -377,7 +442,7 @@ grant_type
 token_handler
 Any*
 request
-Anyz36z37z38z39z310z311*é
+Anyz36z37z38z39z310z311z312z313*ó
 validate_jwt_bearer_tokenYoauthlib.openid.connect.core.request_validator.RequestValidator.validate_jwt_bearer_token"
 None*
 self‚
@@ -387,7 +452,7 @@ grant_type
 scopes
 Any*
 request
-Anyz36z37z38z39z310z311*Ù
+Anyz36z37z38z39z310z311z312z313*ã
 validate_id_tokenQoauthlib.openid.connect.core.request_validator.RequestValidator.validate_id_token"
 None*
 self‚
@@ -397,19 +462,19 @@ grant_type
 scopes
 Any*
 request
-Anyz36z37z38z39z310z311*È
+Anyz36z37z38z39z310z311z312z313*Ò
 validate_silent_authorization]oauthlib.openid.connect.core.request_validator.RequestValidator.validate_silent_authorization"
 None*
 self‚
 ?oauthlib.openid.connect.core.request_validator.RequestValidator"?oauthlib.openid.connect.core.request_validator.RequestValidator*
 request
-Anyz36z37z38z39z310z311*¸
+Anyz36z37z38z39z310z311z312z313*Â
 validate_silent_loginUoauthlib.openid.connect.core.request_validator.RequestValidator.validate_silent_login"
 None*
 self‚
 ?oauthlib.openid.connect.core.request_validator.RequestValidator"?oauthlib.openid.connect.core.request_validator.RequestValidator*
 request
-Anyz36z37z38z39z310z311*ú
+Anyz36z37z38z39z310z311z312z313*„
 validate_user_matchSoauthlib.openid.connect.core.request_validator.RequestValidator.validate_user_match"
 None*
 self‚
@@ -421,16 +486,16 @@ grant_type
 claims
 Any*
 request
-Anyz36z37z38z39z310z311*´
+Anyz36z37z38z39z310z311z312z313*¾
 get_userinfo_claimsSoauthlib.openid.connect.core.request_validator.RequestValidator.get_userinfo_claims"
 None*
 self‚
 ?oauthlib.openid.connect.core.request_validator.RequestValidator"?oauthlib.openid.connect.core.request_validator.RequestValidator*
 request
-Anyz36z37z38z39z310z311j36j37j38j39j310j311*Ä
+Anyz36z37z38z39z310z311z312z313j36j37j38j39j310j311j312j313*Î
 __annotations__>oauthlib.openid.connect.core.request_validator.__annotations__W
 builtins.dict[builtins.str,Any]
 builtins.str"builtins.str
-Any"builtins.dict*36*37*38*39*310*311*\
+Any"builtins.dict*36*37*38*39*310*311*312*313*f
 log2oauthlib.openid.connect.core.request_validator.log
-Any*36*37*38*39*310*311
+Any*36*37*38*39*310*311*312*313

@@ -1,291 +1,0 @@
-
-sqlalchemy.exc—
-HasDescriptionCode!sqlalchemy.exc.HasDescriptionCode"builtins.object*¡
-__init__*sqlalchemy.exc.HasDescriptionCode.__init__"
-None*P
-selfF
-!sqlalchemy.exc.HasDescriptionCode"!sqlalchemy.exc.HasDescriptionCode*
-arg
-Any*P
-codeD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None *
-kw
-Anyz36z37z38z39z310z311j36j37j38j39j310j311rŽ
-code&sqlalchemy.exc.HasDescriptionCode.codeD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*36*37*38*39*310*311Â
-SQLAlchemyErrorsqlalchemy.exc.SQLAlchemyError"!sqlalchemy.exc.HasDescriptionCode"builtins.Exception*½
-__unicode__*sqlalchemy.exc.SQLAlchemyError.__unicode__"
-builtins.str"builtins.str*J
-self@
-sqlalchemy.exc.SQLAlchemyError"sqlalchemy.exc.SQLAlchemyErrorz36z37z38z39z310z311j36j37j38j39j310j311g
-ArgumentErrorsqlalchemy.exc.ArgumentError"sqlalchemy.exc.SQLAlchemyErrorj36j37j38j39j310j311”
-ObjectNotExecutableError'sqlalchemy.exc.ObjectNotExecutableError"sqlalchemy.exc.ArgumentError*Ó
-__init__0sqlalchemy.exc.ObjectNotExecutableError.__init__"
-None*\
-selfR
-'sqlalchemy.exc.ObjectNotExecutableError"'sqlalchemy.exc.ObjectNotExecutableError*
-target
-Anyz36z37z38z39z310z311*d
-
-__reduce__2sqlalchemy.exc.ObjectNotExecutableError.__reduce__*
-selfz36z37z38z39z310z311j36j37j38j39j310j311r[
-target.sqlalchemy.exc.ObjectNotExecutableError.target
-Any*36*37*38*39*310*311m
-NoSuchModuleError sqlalchemy.exc.NoSuchModuleError"sqlalchemy.exc.ArgumentErrorj36j37j38j39j310j311o
-NoForeignKeysError!sqlalchemy.exc.NoForeignKeysError"sqlalchemy.exc.ArgumentErrorj36j37j38j39j310j311}
-AmbiguousForeignKeysError(sqlalchemy.exc.AmbiguousForeignKeysError"sqlalchemy.exc.ArgumentErrorj36j37j38j39j310j311ä
-CircularDependencyError&sqlalchemy.exc.CircularDependencyError"sqlalchemy.exc.SQLAlchemyError*Ë
-__init__/sqlalchemy.exc.CircularDependencyError.__init__"
-None*Z
-selfP
-&sqlalchemy.exc.CircularDependencyError"&sqlalchemy.exc.CircularDependencyError*
-message
-Any*
-cycles
-Any*
-edges
-Any*f
-msg[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *g
-code[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z36z37z38z39z310z311*c
-
-__reduce__1sqlalchemy.exc.CircularDependencyError.__reduce__*
-selfz36z37z38z39z310z311j36j37j38j39j310j311rZ
-cycles-sqlalchemy.exc.CircularDependencyError.cycles
-Any*36*37*38*39*310*311rX
-edges,sqlalchemy.exc.CircularDependencyError.edges
-Any*36*37*38*39*310*311e
-CompileErrorsqlalchemy.exc.CompileError"sqlalchemy.exc.SQLAlchemyErrorj36j37j38j39j310j311›
-UnsupportedCompilationError*sqlalchemy.exc.UnsupportedCompilationError"sqlalchemy.exc.CompileError*Î
-__init__3sqlalchemy.exc.UnsupportedCompilationError.__init__"
-None*b
-selfX
-*sqlalchemy.exc.UnsupportedCompilationError"*sqlalchemy.exc.UnsupportedCompilationError*
-compiler
-Any*
-element_type
-Any*S
-messageD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None z36z37z38z39z310z311*g
-
-__reduce__5sqlalchemy.exc.UnsupportedCompilationError.__reduce__*
-selfz36z37z38z39z310z311j36j37j38j39j310j311ro
-code/sqlalchemy.exc.UnsupportedCompilationError.code
-builtins.str"builtins.str*36*37*38*39*310*311rb
-compiler3sqlalchemy.exc.UnsupportedCompilationError.compiler
-Any*36*37*38*39*310*311rj
-element_type7sqlalchemy.exc.UnsupportedCompilationError.element_type
-Any*36*37*38*39*310*311r
-message2sqlalchemy.exc.UnsupportedCompilationError.messageD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*36*37*38*39*310*311k
-IdentifierErrorsqlalchemy.exc.IdentifierError"sqlalchemy.exc.SQLAlchemyErrorj36j37j38j39j310j311ñ
-DisconnectionError!sqlalchemy.exc.DisconnectionError"sqlalchemy.exc.SQLAlchemyErrorj36j37j38j39j310j311r~
-invalidate_pool1sqlalchemy.exc.DisconnectionError.invalidate_pool
-builtins.bool"builtins.bool*36*37*38*39*310*311÷
-InvalidatePoolError"sqlalchemy.exc.InvalidatePoolError"!sqlalchemy.exc.DisconnectionErrorj36j37j38j39j310j311r
-invalidate_pool2sqlalchemy.exc.InvalidatePoolError.invalidate_pool
-builtins.bool"builtins.bool*36*37*38*39*310*311e
-TimeoutErrorsqlalchemy.exc.TimeoutError"sqlalchemy.exc.SQLAlchemyErrorj36j37j38j39j310j311s
-InvalidRequestError"sqlalchemy.exc.InvalidRequestError"sqlalchemy.exc.SQLAlchemyErrorj36j37j38j39j310j311{
-NoInspectionAvailable$sqlalchemy.exc.NoInspectionAvailable""sqlalchemy.exc.InvalidRequestErrorj36j37j38j39j310j311y
-PendingRollbackError#sqlalchemy.exc.PendingRollbackError""sqlalchemy.exc.InvalidRequestErrorj36j37j38j39j310j311w
-ResourceClosedError"sqlalchemy.exc.ResourceClosedError""sqlalchemy.exc.InvalidRequestErrorj36j37j38j39j310j311†
-NoSuchColumnError sqlalchemy.exc.NoSuchColumnError""sqlalchemy.exc.InvalidRequestError"builtins.KeyErrorj36j37j38j39j310j311k
-NoResultFoundsqlalchemy.exc.NoResultFound""sqlalchemy.exc.InvalidRequestErrorj36j37j38j39j310j311y
-MultipleResultsFound#sqlalchemy.exc.MultipleResultsFound""sqlalchemy.exc.InvalidRequestErrorj36j37j38j39j310j311q
-NoReferenceErrorsqlalchemy.exc.NoReferenceError""sqlalchemy.exc.InvalidRequestErrorj36j37j38j39j310j311Î
-AwaitRequiredsqlalchemy.exc.AwaitRequired""sqlalchemy.exc.InvalidRequestErrorj36j37j38j39j310j311ra
-code!sqlalchemy.exc.AwaitRequired.code
-builtins.str"builtins.str*36*37*38*39*310*311Ô
-MissingGreenletsqlalchemy.exc.MissingGreenlet""sqlalchemy.exc.InvalidRequestErrorj36j37j38j39j310j311rc
-code#sqlalchemy.exc.MissingGreenlet.code
-builtins.str"builtins.str*36*37*38*39*310*311¦
-NoReferencedTableError%sqlalchemy.exc.NoReferencedTableError"sqlalchemy.exc.NoReferenceError*â
-__init__.sqlalchemy.exc.NoReferencedTableError.__init__"
-None*X
-selfN
-%sqlalchemy.exc.NoReferencedTableError"%sqlalchemy.exc.NoReferencedTableError*
-message
-Any*
-tname
-Anyz36z37z38z39z310z311*b
-
-__reduce__0sqlalchemy.exc.NoReferencedTableError.__reduce__*
-selfz36z37z38z39z310z311j36j37j38j39j310j311ra
-
-table_name0sqlalchemy.exc.NoReferencedTableError.table_name
-Any*36*37*38*39*310*311§
-NoReferencedColumnError&sqlalchemy.exc.NoReferencedColumnError"sqlalchemy.exc.NoReferenceError*ù
-__init__/sqlalchemy.exc.NoReferencedColumnError.__init__"
-None*Z
-selfP
-&sqlalchemy.exc.NoReferencedColumnError"&sqlalchemy.exc.NoReferencedColumnError*
-message
-Any*
-tname
-Any*
-cname
-Anyz36z37z38z39z310z311*c
-
-__reduce__1sqlalchemy.exc.NoReferencedColumnError.__reduce__*
-selfz36z37z38z39z310z311j36j37j38j39j310j311rb
-
-table_name1sqlalchemy.exc.NoReferencedColumnError.table_name
-Any*36*37*38*39*310*311rd
-column_name2sqlalchemy.exc.NoReferencedColumnError.column_name
-Any*36*37*38*39*310*311q
-NoSuchTableErrorsqlalchemy.exc.NoSuchTableError""sqlalchemy.exc.InvalidRequestErrorj36j37j38j39j310j311
-UnreflectableTableError&sqlalchemy.exc.UnreflectableTableError""sqlalchemy.exc.InvalidRequestErrorj36j37j38j39j310j311{
-UnboundExecutionError$sqlalchemy.exc.UnboundExecutionError""sqlalchemy.exc.InvalidRequestErrorj36j37j38j39j310j311X
-DontWrapMixinsqlalchemy.exc.DontWrapMixin"builtins.objectj36j37j38j39j310j311‹
-StatementErrorsqlalchemy.exc.StatementError"sqlalchemy.exc.SQLAlchemyError*‚
-__init__&sqlalchemy.exc.StatementError.__init__"
-None*H
-self>
-sqlalchemy.exc.StatementError"sqlalchemy.exc.StatementError*
-message
-Any*
-	statement
-Any*
-params
-Any*
-orig
-Any*5
-hide_parameters
-builtins.bool"builtins.bool *g
-code[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *j
-ismulti[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z36z37z38z39z310z311*¶
-
-add_detail(sqlalchemy.exc.StatementError.add_detail"
-None*H
-self>
-sqlalchemy.exc.StatementError"sqlalchemy.exc.StatementError*
-msg
-Anyz36z37z38z39z310z311*Z
-
-__reduce__(sqlalchemy.exc.StatementError.__reduce__*
-selfz36z37z38z39z310z311j36j37j38j39j310j311rW
-	statement'sqlalchemy.exc.StatementError.statement
-Any*36*37*38*39*310*311rQ
-params$sqlalchemy.exc.StatementError.params
-Any*36*37*38*39*310*311rM
-orig"sqlalchemy.exc.StatementError.orig
-Any*36*37*38*39*310*311rS
-ismulti%sqlalchemy.exc.StatementError.ismulti
-Any*36*37*38*39*310*311rc
-hide_parameters-sqlalchemy.exc.StatementError.hide_parameters
-Any*36*37*38*39*310*311rQ
-detail$sqlalchemy.exc.StatementError.detail
-Any*36*37*38*39*310*311£
-
-DBAPIErrorsqlalchemy.exc.DBAPIError"sqlalchemy.exc.StatementError*ø
-instance"sqlalchemy.exc.DBAPIError.instance"
-Any*j
-clsa
-Type[sqlalchemy.exc.DBAPIError]6
-sqlalchemy.exc.DBAPIError"sqlalchemy.exc.DBAPIError"type*
-	statement
-Any*
-params
-Any*
-orig
-Any*
-dbapi_base_err
-Any*5
-hide_parameters
-builtins.bool"builtins.bool *<
-connection_invalidated
-builtins.bool"builtins.bool *j
-dialect[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *j
-ismulti[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None 0:classmethodpz36z37z38z39z310z311*V
-
-__reduce__$sqlalchemy.exc.DBAPIError.__reduce__*
-selfz36z37z38z39z310z311*ž
-__init__"sqlalchemy.exc.DBAPIError.__init__"
-None*@
-self6
-sqlalchemy.exc.DBAPIError"sqlalchemy.exc.DBAPIError*
-	statement
-Any*
-params
-Any*
-orig
-Any*5
-hide_parameters
-builtins.bool"builtins.bool *<
-connection_invalidated
-builtins.bool"builtins.bool *g
-code[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None *j
-ismulti[
-Union[TypeAlias[Any],None]1
-TypeAlias[Any]
-Any"_typeshed.Incomplete
-None z36z37z38z39z310z311j36j37j38j39j310j311r^
-codesqlalchemy.exc.DBAPIError.code
-builtins.str"builtins.str*36*37*38*39*310*311rm
-connection_invalidated0sqlalchemy.exc.DBAPIError.connection_invalidated
-Any*36*37*38*39*310*311d
-InterfaceErrorsqlalchemy.exc.InterfaceError"sqlalchemy.exc.DBAPIErrorj36j37j38j39j310j311b
-DatabaseErrorsqlalchemy.exc.DatabaseError"sqlalchemy.exc.DBAPIErrorj36j37j38j39j310j311]
-	DataErrorsqlalchemy.exc.DataError"sqlalchemy.exc.DatabaseErrorj36j37j38j39j310j311k
-OperationalErrorsqlalchemy.exc.OperationalError"sqlalchemy.exc.DatabaseErrorj36j37j38j39j310j311g
-IntegrityErrorsqlalchemy.exc.IntegrityError"sqlalchemy.exc.DatabaseErrorj36j37j38j39j310j311e
-InternalErrorsqlalchemy.exc.InternalError"sqlalchemy.exc.DatabaseErrorj36j37j38j39j310j311k
-ProgrammingErrorsqlalchemy.exc.ProgrammingError"sqlalchemy.exc.DatabaseErrorj36j37j38j39j310j311m
-NotSupportedError sqlalchemy.exc.NotSupportedError"sqlalchemy.exc.DatabaseErrorj36j37j38j39j310j311À
-SADeprecationWarning#sqlalchemy.exc.SADeprecationWarning"!sqlalchemy.exc.HasDescriptionCode"builtins.DeprecationWarningj36j37j38j39j310j311r¨
-deprecated_since4sqlalchemy.exc.SADeprecationWarning.deprecated_sinceD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*36*37*38*39*310*311‰
-Base20DeprecationWarning'sqlalchemy.exc.Base20DeprecationWarning"#sqlalchemy.exc.SADeprecationWarningj36j37j38j39j310j311r„
-deprecated_since8sqlalchemy.exc.Base20DeprecationWarning.deprecated_since
-builtins.str"builtins.str*36*37*38*39*310*311v
-LegacyAPIWarningsqlalchemy.exc.LegacyAPIWarning"'sqlalchemy.exc.Base20DeprecationWarningj36j37j38j39j310j311z
-RemovedIn20Warning!sqlalchemy.exc.RemovedIn20Warning"'sqlalchemy.exc.Base20DeprecationWarningj36j37j38j39j310j311p
-MovedIn20Warningsqlalchemy.exc.MovedIn20Warning"!sqlalchemy.exc.RemovedIn20Warningj36j37j38j39j310j311¹
-SAPendingDeprecationWarning*sqlalchemy.exc.SAPendingDeprecationWarning""builtins.PendingDeprecationWarningj36j37j38j39j310j311r¯
-deprecated_since;sqlalchemy.exc.SAPendingDeprecationWarning.deprecated_sinceD
-Union[builtins.str,None]
-builtins.str"builtins.str
-None*36*37*38*39*310*311{
-	SAWarningsqlalchemy.exc.SAWarning"!sqlalchemy.exc.HasDescriptionCode"builtins.RuntimeWarningj36j37j38j39j310j311*¤
-__annotations__sqlalchemy.exc.__annotations__W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*36*37*38*39*310*311

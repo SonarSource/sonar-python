@@ -1,0 +1,169 @@
+
+importlib.readersÉ
+
+FileReaderimportlib.readers.FileReader""importlib.abc.TraversableResources*¬
+__init__%importlib.readers.FileReader.__init__"
+None*F
+self<
+importlib.readers.FileReader"importlib.readers.FileReader*
+loader
+Anyz310z311z312z313*°
+resource_path*importlib.readers.FileReader.resource_path"
+builtins.str"builtins.str*F
+self<
+importlib.readers.FileReader"importlib.readers.FileReader*ø
+resourceé
+8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]—
+-Union[builtins.str,os.PathLike[builtins.str]]
+builtins.str"builtins.strF
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLike"_typeshed.StrPathz310z311z312z313*¥
+files"importlib.readers.FileReader.files"
+pathlib.Path"pathlib.Path*F
+self<
+importlib.readers.FileReader"importlib.readers.FileReaderz310z311z312z313j310j311j312j313r[
+path!importlib.readers.FileReader.path
+pathlib.Path"pathlib.Path*310*311*312*313æ
+	ZipReaderimportlib.readers.ZipReader""importlib.abc.TraversableResources*Ó
+__init__$importlib.readers.ZipReader.__init__"
+None*D
+self:
+importlib.readers.ZipReader"importlib.readers.ZipReader*
+loader
+Any*(
+module
+builtins.str"builtins.strz310z311z312z313*ê
+open_resource)importlib.readers.ZipReader.open_resource"(
+_io.BufferedReader"_io.BufferedReader*D
+self:
+importlib.readers.ZipReader"importlib.readers.ZipReader**
+resource
+builtins.str"builtins.strz310z311z312z313*§
+is_resource'importlib.readers.ZipReader.is_resource"
+builtins.bool"builtins.bool*D
+self:
+importlib.readers.ZipReader"importlib.readers.ZipReader*ô
+pathé
+8TypeAlias[Union[builtins.str,os.PathLike[builtins.str]]]—
+-Union[builtins.str,os.PathLike[builtins.str]]
+builtins.str"builtins.strF
+os.PathLike[builtins.str]
+builtins.str"builtins.str"os.PathLike"_typeshed.StrPathz310z311z312z313*˜
+files!importlib.readers.ZipReader.files"
+zipfile.Path"zipfile.Path*D
+self:
+importlib.readers.ZipReader"importlib.readers.ZipReaderz310z311*¤
+files!importlib.readers.ZipReader.files"(
+zipfile._path.Path"zipfile._path.Path*D
+self:
+importlib.readers.ZipReader"importlib.readers.ZipReaderz312z313j310j311j312j313r^
+prefix"importlib.readers.ZipReader.prefix
+builtins.str"builtins.str*310*311*312*313ru
+archive#importlib.readers.ZipReader.archive1
+TypeAlias[Any]
+Any"_typeshed.Incomplete*310*311*312*313Ç
+MultiplexedPath!importlib.readers.MultiplexedPath"importlib.abc.Traversable*é
+__init__*importlib.readers.MultiplexedPath.__init__"
+None*P
+selfF
+!importlib.readers.MultiplexedPath"!importlib.readers.MultiplexedPath*A
+paths6
+importlib.abc.Traversable"importlib.abc.Traversablez310z311z312z313*‘
+iterdir)importlib.readers.MultiplexedPath.iterdir"u
+*typing.Iterator[importlib.abc.Traversable]6
+importlib.abc.Traversable"importlib.abc.Traversable"typing.Iterator*P
+selfF
+!importlib.readers.MultiplexedPath"!importlib.readers.MultiplexedPathz310z311z312z313*®
+
+read_bytes,importlib.readers.MultiplexedPath.read_bytes"
+NoReturn
+*P
+selfF
+!importlib.readers.MultiplexedPath"!importlib.readers.MultiplexedPathz310z311z312z313*Þ
+	read_text+importlib.readers.MultiplexedPath.read_text"
+NoReturn
+*P
+selfF
+!importlib.readers.MultiplexedPath"!importlib.readers.MultiplexedPath*
+args
+NoReturn
+*
+kwargs
+NoReturn
+z310z311z312z313*Ô
+is_dir(importlib.readers.MultiplexedPath.is_dir":
+Literal[builtins.bool]	
+builtins.bool"builtins.bool*P
+selfF
+!importlib.readers.MultiplexedPath"!importlib.readers.MultiplexedPathz310z311z312z313*Ö
+is_file)importlib.readers.MultiplexedPath.is_file":
+Literal[builtins.bool]	
+builtins.bool"builtins.bool*P
+selfF
+!importlib.readers.MultiplexedPath"!importlib.readers.MultiplexedPathz310z311z312z313*ó
+joinpath*importlib.readers.MultiplexedPath.joinpath"6
+importlib.abc.Traversable"importlib.abc.Traversable*P
+selfF
+!importlib.readers.MultiplexedPath"!importlib.readers.MultiplexedPath*'
+child
+builtins.str"builtins.strz310z311*ù
+joinpath*importlib.readers.MultiplexedPath.joinpath"6
+importlib.abc.Traversable"importlib.abc.Traversable*P
+selfF
+!importlib.readers.MultiplexedPath"!importlib.readers.MultiplexedPath*-
+descendants
+builtins.str"builtins.strz312z313*Ô
+open&importlib.readers.MultiplexedPath.open"
+NoReturn
+*P
+selfF
+!importlib.readers.MultiplexedPath"!importlib.readers.MultiplexedPath*
+args
+NoReturn
+*
+kwargs
+NoReturn
+z310z311z312z313*À
+name&importlib.readers.MultiplexedPath.name"
+builtins.str"builtins.str*P
+selfF
+!importlib.readers.MultiplexedPath"!importlib.readers.MultiplexedPath0:property`z310z311z312z313j310j311j312j313r“
+__truediv__-importlib.readers.MultiplexedPath.__truediv__K
+CallableType[builtins.function]&
+builtins.function"builtins.function*310*311“
+NamespaceReader!importlib.readers.NamespaceReader""importlib.abc.TraversableResources*Ã
+__init__*importlib.readers.NamespaceReader.__init__"
+None*P
+selfF
+!importlib.readers.NamespaceReader"!importlib.readers.NamespaceReader*
+namespace_path
+Anyz310z311z312z313*ð
+resource_path/importlib.readers.NamespaceReader.resource_path"
+builtins.str"builtins.str*P
+selfF
+!importlib.readers.NamespaceReader"!importlib.readers.NamespaceReader**
+resource
+builtins.str"builtins.strz310z311z312z313*Þ
+files'importlib.readers.NamespaceReader.files"F
+!importlib.readers.MultiplexedPath"!importlib.readers.MultiplexedPath*P
+selfF
+!importlib.readers.NamespaceReader"!importlib.readers.NamespaceReaderz310z311z312z313j310j311j312j313rŠ
+path&importlib.readers.NamespaceReader.pathF
+!importlib.readers.MultiplexedPath"!importlib.readers.MultiplexedPath*310*311*312*313Ý
+remove_duplicates#importlib.readers.remove_duplicates"‡
+%typing.Iterator[importlib.readers._T]M
+importlib.readers._T"
+builtins.object"builtins.object"builtins.object"typing.Iterator*“
+items‡
+%typing.Iterable[importlib.readers._T]M
+importlib.readers._T"
+builtins.object"builtins.object"builtins.object"typing.Iterablez310*±
+__annotations__!importlib.readers.__annotations__W
+builtins.dict[builtins.str,Any]
+builtins.str"builtins.str
+Any"builtins.dict*36*37*38*39*310*311*312*313*+
+abcimportlib.abc *36*37*38*39*310*/
+abcimportlib.resources.abc *311*312*313*
+__all__importlib.readers.__all__J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list*311*312*313

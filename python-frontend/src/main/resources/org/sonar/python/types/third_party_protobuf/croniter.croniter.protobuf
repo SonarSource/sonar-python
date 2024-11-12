@@ -1,12 +1,13 @@
 
-croniter.croniter_
-CroniterErrorcroniter.croniter.CroniterError"builtins.ValueErrorj36j37j38j39j310j311v
-CroniterBadTypeRangeError+croniter.croniter.CroniterBadTypeRangeError"builtins.TypeErrorj36j37j38j39j310j311y
-CroniterBadCronError&croniter.croniter.CroniterBadCronError"croniter.croniter.CroniterErrorj36j37j38j39j310j311î
-CroniterUnsupportedSyntaxError0croniter.croniter.CroniterUnsupportedSyntaxError"&croniter.croniter.CroniterBadCronErrorj36j37j38j39j310j311y
-CroniterBadDateError&croniter.croniter.CroniterBadDateError"croniter.croniter.CroniterErrorj36j37j38j39j310j311{
-CroniterNotAlphaError'croniter.croniter.CroniterNotAlphaError"croniter.croniter.CroniterErrorj36j37j38j39j310j311êX
-cronitercroniter.croniter.croniter"typing.Iterator*ø
+croniter.croniteri
+CroniterErrorcroniter.croniter.CroniterError"builtins.ValueErrorj36j37j38j39j310j311j312j313Ä
+CroniterBadTypeRangeError+croniter.croniter.CroniterBadTypeRangeError"builtins.TypeErrorj36j37j38j39j310j311j312j313É
+CroniterBadCronError&croniter.croniter.CroniterBadCronError"croniter.croniter.CroniterErrorj36j37j38j39j310j311j312j313û
+CroniterUnsupportedSyntaxError0croniter.croniter.CroniterUnsupportedSyntaxError"&croniter.croniter.CroniterBadCronErrorj36j37j38j39j310j311j312j313É
+CroniterBadDateError&croniter.croniter.CroniterBadDateError"croniter.croniter.CroniterErrorj36j37j38j39j310j311j312j313Ö
+CroniterNotAlphaError'croniter.croniter.CroniterNotAlphaError"croniter.croniter.CroniterErrorj36j37j38j39j310j311j312j313©É
+cronitercroniter.croniter.croniter"typing.Iterator*•
+
 __init__#croniter.croniter.croniter.__init__"
 None*B
 self8
@@ -40,7 +41,15 @@ JUnion[TypeAlias[Union[Type[builtins.float],Type[datetime.datetime]]],None]•
 'Union[builtins.str,builtins.bytes,None]
 builtins.str"builtins.str 
 builtins.bytes"builtins.bytes
-None z36z37z38z39z310z311*ƒ
+None *8
+implement_cron_bug
+builtins.bool"builtins.bool *b
+second_at_beginningG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None *<
+expand_from_start_time
+builtins.bool"builtins.bool z36z37z38z39z310z311z312z313*Ñ
 get_next#croniter.croniter.croniter.get_next"
 Any*B
 self8
@@ -59,7 +68,9 @@ start_timeÑ
 ,Union[builtins.float,datetime.datetime,None] 
 builtins.float"builtins.float&
 datetime.datetime"datetime.datetime
-None z36z37z38z39z310z311*™
+None *4
+update_current
+builtins.bool"builtins.bool z36z37z38z39z310z311z312z313*Ñ
 get_prev#croniter.croniter.croniter.get_prev"
 Any*B
 self8
@@ -72,7 +83,15 @@ JUnion[TypeAlias[Union[Type[builtins.float],Type[datetime.datetime]]],None]•
 builtins.float"builtins.float"typeI
 Type[datetime.datetime]&
 datetime.datetime"datetime.datetime"type"croniter.croniter._RetType
-None z36z37z38z39z310z311*∞
+None *ó
+
+start_timeÑ
+,Union[builtins.float,datetime.datetime,None] 
+builtins.float"builtins.float&
+datetime.datetime"datetime.datetime
+None *4
+update_current
+builtins.bool"builtins.bool z36z37z38z39z310z311z312z313*∫
 get_current&croniter.croniter.croniter.get_current"
 Any*B
 self8
@@ -85,7 +104,7 @@ JUnion[TypeAlias[Union[Type[builtins.float],Type[datetime.datetime]]],None]•
 builtins.float"builtins.float"typeI
 Type[datetime.datetime]&
 datetime.datetime"datetime.datetime"type"croniter.croniter._RetType
-None z36z37z38z39z310z311*˙
+None z36z37z38z39z310z311z312z313*Ñ
 set_current&croniter.croniter.croniter.set_current" 
 builtins.float"builtins.float*B
 self8
@@ -97,12 +116,12 @@ start_timeÑ
 datetime.datetime"datetime.datetime
 None*+
 force
-builtins.bool"builtins.bool z36z37z38z39z310z311*¡
+builtins.bool"builtins.bool z36z37z38z39z310z311z312z313*À
 __iter__#croniter.croniter.croniter.__iter__"y
 croniter.croniter.croniter.Self8
 croniter.croniter.croniter"croniter.croniter.croniter"croniter.croniter.croniter*{y
 croniter.croniter.croniter.Self8
-croniter.croniter.croniter"croniter.croniter.croniter"croniter.croniter.croniterz36z37z38z39z310z311*î
+croniter.croniter.croniter"croniter.croniter.croniter"croniter.croniter.croniterz36z37z38z39z310z311z312z313*˝
 nextcroniter.croniter.croniter.next"
 Any*B
 self8
@@ -125,7 +144,11 @@ start_timeÑ
 is_prevG
 Union[builtins.bool,None]
 builtins.bool"builtins.bool
-None z36z37z38z39z310z311*”
+None *]
+update_currentG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None z36z37z38z39z310z311z312z313*÷
 all_next#croniter.croniter.croniter.all_next"0
 typing.Iterator[Any]
 Any"typing.Iterator*B
@@ -139,7 +162,17 @@ JUnion[TypeAlias[Union[Type[builtins.float],Type[datetime.datetime]]],None]•
 builtins.float"builtins.float"typeI
 Type[datetime.datetime]&
 datetime.datetime"datetime.datetime"type"croniter.croniter._RetType
-None z36z37z38z39z310z311*”
+None *ó
+
+start_timeÑ
+,Union[builtins.float,datetime.datetime,None] 
+builtins.float"builtins.float&
+datetime.datetime"datetime.datetime
+None *]
+update_currentG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None z36z37z38z39z310z311z312z313*÷
 all_prev#croniter.croniter.croniter.all_prev"0
 typing.Iterator[Any]
 Any"typing.Iterator*B
@@ -153,7 +186,17 @@ JUnion[TypeAlias[Union[Type[builtins.float],Type[datetime.datetime]]],None]•
 builtins.float"builtins.float"typeI
 Type[datetime.datetime]&
 datetime.datetime"datetime.datetime"type"croniter.croniter._RetType
-None z36z37z38z39z310z311*À
+None *ó
+
+start_timeÑ
+,Union[builtins.float,datetime.datetime,None] 
+builtins.float"builtins.float&
+datetime.datetime"datetime.datetime
+None *]
+update_currentG
+Union[builtins.bool,None]
+builtins.bool"builtins.bool
+None z36z37z38z39z310z311z312z313*’
 itercroniter.croniter.croniter.iter"0
 typing.Iterator[Any]
 Any"typing.Iterator*B
@@ -167,31 +210,37 @@ JUnion[TypeAlias[Union[Type[builtins.float],Type[datetime.datetime]]],None]•
 builtins.float"builtins.float"typeI
 Type[datetime.datetime]&
 datetime.datetime"datetime.datetime"type"croniter.croniter._RetType
-None z36z37z38z39z310z311*”
+None z36z37z38z39z310z311z312z313*›
 is_leap"croniter.croniter.croniter.is_leap"
 builtins.bool"builtins.bool*B
 self8
 croniter.croniter.croniter"croniter.croniter.croniter*&
 year
-builtins.int"builtins.intz36z37z38z39z310z311*∂
-expand!croniter.croniter.croniter.expand"∏
-QTuple[builtins.list[builtins.list[builtins.str]],builtins.dict[builtins.str,Any]]á
+builtins.int"builtins.intz36z37z38z39z310z311z312z313*°
+expand!croniter.croniter.croniter.expand"®
+hTuple[builtins.list[builtins.list[builtins.str]],builtins.dict[builtins.str,builtins.set[builtins.int]]]á
 *builtins.list[builtins.list[builtins.str]]J
 builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list"builtins.listW
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*m
+builtins.str"builtins.str"builtins.list"builtins.listØ
+6builtins.dict[builtins.str,builtins.set[builtins.int]]
+builtins.str"builtins.strH
+builtins.set[builtins.int]
+builtins.int"builtins.int"builtins.set"builtins.dict*m
 clsd
  Type[croniter.croniter.croniter]8
 croniter.croniter.croniter"croniter.croniter.croniter"type*-
 expr_format
-builtins.str"builtins.str*Ñ
-hash_idu
-'Union[builtins.str,builtins.bytes,None]
-builtins.str"builtins.str 
+builtins.str"builtins.str*Y
+hash_idJ
+Union[builtins.bytes,None] 
 builtins.bytes"builtins.bytes
-None 0:classmethodpz36z37z38z39z310z311*û
+None *9
+second_at_beginning
+builtins.bool"builtins.bool *`
+from_timestampJ
+Union[builtins.float,None] 
+builtins.float"builtins.float
+None 0:classmethodpz36z37z38z39z310z311z312z313*Â
 is_valid#croniter.croniter.croniter.is_valid"
 builtins.bool"builtins.bool*m
 clsd
@@ -199,12 +248,15 @@ QTuple[builtins.list[builtins.list[builtins.str]],builtins.dict[builtins.str,Any
 croniter.croniter.croniter"croniter.croniter.croniter"type*,
 
 expression
-builtins.str"builtins.str*Ñ
-hash_idu
-'Union[builtins.str,builtins.bytes,None]
-builtins.str"builtins.str 
+builtins.str"builtins.str*Y
+hash_idJ
+Union[builtins.bytes,None] 
 builtins.bytes"builtins.bytes
-None 0:classmethodpz36z37z38z39z310z311*⁄
+None *,
+encoding
+builtins.str"builtins.str *9
+second_at_beginning
+builtins.bool"builtins.bool 0:classmethodpz36z37z38z39z310z311z312z313*ü
 match croniter.croniter.croniter.match"
 builtins.bool"builtins.bool*m
 clsd
@@ -218,15 +270,55 @@ expression
 datetime.datetime"datetime.datetime
 None*,
 day_or
-builtins.bool"builtins.bool 0:classmethodpz36z37z38z39z310z311j36j37j38j39j310j311ré
-MONTHS_IN_YEAR)croniter.croniter.croniter.MONTHS_IN_YEAR7
-Literal[builtins.int]	
-builtins.int"builtins.int*36*37*38*39*310*311rÏ
-RANGES!croniter.croniter.croniter.RANGES§
-0builtins.tuple[Tuple[builtins.int,builtins.int]]`
+builtins.bool"builtins.bool *9
+second_at_beginning
+builtins.bool"builtins.bool 0:classmethodpz36z37z38z39z310z311z312z313*â
+match_range&croniter.croniter.croniter.match_range"
+builtins.bool"builtins.bool*m
+clsd
+ Type[croniter.croniter.croniter]8
+croniter.croniter.croniter"croniter.croniter.croniter"type*1
+cron_expression
+builtins.str"builtins.str*9
+from_datetime&
+datetime.datetime"datetime.datetime*7
+to_datetime&
+datetime.datetime"datetime.datetime*,
+day_or
+builtins.bool"builtins.bool *9
+second_at_beginning
+builtins.bool"builtins.bool 0:classmethodpz36z37z38z39z310z311z312z313j36j37j38j39j310j311j312j313rL
+MONTHS_IN_YEAR)croniter.croniter.croniter.MONTHS_IN_YEAR
+Any*36*37ru
+MONTHS_IN_YEAR)croniter.croniter.croniter.MONTHS_IN_YEAR
+builtins.int"builtins.int*38*39*310*311*312*313r<
+RANGES!croniter.croniter.croniter.RANGES
+Any*36*37rÍ
+RANGES!croniter.croniter.croniter.RANGES†
+ÌTuple[Tuple[builtins.int,builtins.int],Tuple[builtins.int,builtins.int],Tuple[builtins.int,builtins.int],Tuple[builtins.int,builtins.int],Tuple[builtins.int,builtins.int],Tuple[builtins.int,builtins.int],Tuple[builtins.int,builtins.int]]`
  Tuple[builtins.int,builtins.int]
 builtins.int"builtins.int
-builtins.int"builtins.int"builtins.tuple*36*37*38*39*310*311rÉ
+builtins.int"builtins.int`
+ Tuple[builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int`
+ Tuple[builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int`
+ Tuple[builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int`
+ Tuple[builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int`
+ Tuple[builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int`
+ Tuple[builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int*38*39*310*311*312*313r8
+DAYScroniter.croniter.croniter.DAYS
+Any*36*37rÖ
 DAYScroniter.croniter.croniter.DAYSø
 éTuple[Literal[builtins.int],Literal[builtins.int],Literal[builtins.int],Literal[builtins.int],Literal[builtins.int],Literal[builtins.int],Literal[builtins.int],Literal[builtins.int],Literal[builtins.int],Literal[builtins.int],Literal[builtins.int],Literal[builtins.int]]7
 Literal[builtins.int]	
@@ -252,52 +344,124 @@ expression
 Literal[builtins.int]	
 builtins.int"builtins.int7
 Literal[builtins.int]	
-builtins.int"builtins.int*36*37*38*39*310*311rË
-	ALPHACONV$croniter.croniter.croniter.ALPHACONVö
-/builtins.tuple[builtins.dict[builtins.str,Any]]W
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict"builtins.tuple*36*37*38*39*310*311r‚
-LOWMAP!croniter.croniter.croniter.LOWMAPö
-/builtins.tuple[builtins.dict[builtins.int,Any]]W
-builtins.dict[builtins.int,Any]
-builtins.int"builtins.int
-Any"builtins.dict"builtins.tuple*36*37*38*39*310*311r°
-LEN_MEANS_ALL(croniter.croniter.croniter.LEN_MEANS_ALLL
-builtins.tuple[builtins.int]
-builtins.int"builtins.int"builtins.tuple*36*37*38*39*310*311rk
+builtins.int"builtins.int*38*39*310*311*312*313rB
+	ALPHACONV$croniter.croniter.croniter.ALPHACONV
+Any*36*37r˚
+	ALPHACONV$croniter.croniter.croniter.ALPHACONV´
+ÖTuple[builtins.dict[NoReturn,NoReturn],builtins.dict[NoReturn,NoReturn],builtins.dict[builtins.str,builtins.str],builtins.dict[builtins.str,builtins.int],builtins.dict[builtins.str,builtins.int],builtins.dict[NoReturn,NoReturn],builtins.dict[NoReturn,NoReturn]]M
+ builtins.dict[NoReturn,NoReturn]
+NoReturn
+
+NoReturn
+"builtins.dictM
+ builtins.dict[NoReturn,NoReturn]
+NoReturn
+
+NoReturn
+"builtins.dictu
+(builtins.dict[builtins.str,builtins.str]
+builtins.str"builtins.str
+builtins.str"builtins.str"builtins.dictu
+(builtins.dict[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int"builtins.dictu
+(builtins.dict[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.int"builtins.dictM
+ builtins.dict[NoReturn,NoReturn]
+NoReturn
+
+NoReturn
+"builtins.dictM
+ builtins.dict[NoReturn,NoReturn]
+NoReturn
+
+NoReturn
+"builtins.dict*38*39*310*311*312*313r<
+LOWMAP!croniter.croniter.croniter.LOWMAP
+Any*36*37rı
+LOWMAP!croniter.croniter.croniter.LOWMAP´
+ÖTuple[builtins.dict[NoReturn,NoReturn],builtins.dict[NoReturn,NoReturn],builtins.dict[builtins.int,builtins.int],builtins.dict[builtins.int,builtins.int],builtins.dict[builtins.int,builtins.int],builtins.dict[NoReturn,NoReturn],builtins.dict[NoReturn,NoReturn]]M
+ builtins.dict[NoReturn,NoReturn]
+NoReturn
+
+NoReturn
+"builtins.dictM
+ builtins.dict[NoReturn,NoReturn]
+NoReturn
+
+NoReturn
+"builtins.dictu
+(builtins.dict[builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int"builtins.dictu
+(builtins.dict[builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int"builtins.dictu
+(builtins.dict[builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int"builtins.dictM
+ builtins.dict[NoReturn,NoReturn]
+NoReturn
+
+NoReturn
+"builtins.dictM
+ builtins.dict[NoReturn,NoReturn]
+NoReturn
+
+NoReturn
+"builtins.dict*38*39*310*311*312*313rJ
+LEN_MEANS_ALL(croniter.croniter.croniter.LEN_MEANS_ALL
+Any*36*37rè
+LEN_MEANS_ALL(croniter.croniter.croniter.LEN_MEANS_ALL∑
+aTuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int*38*39*310*311*312*313rD
+
+bad_length%croniter.croniter.croniter.bad_length
+Any*36*37rm
 
 bad_length%croniter.croniter.croniter.bad_length
-builtins.str"builtins.str*36*37*38*39*310*311rî
+builtins.str"builtins.str*38*39*310*311*312*313rû
 tzinfo!croniter.croniter.croniter.tzinfoM
 Union[datetime.tzinfo,None]"
 datetime.tzinfo"datetime.tzinfo
-None*36*37*38*39*310*311ra
+None*36*37*38*39*310*311*312*313ry
+
+start_time%croniter.croniter.croniter.start_time 
+builtins.float"builtins.float*36*37*38*39*310*311*312*313rÅ
+dst_start_time)croniter.croniter.croniter.dst_start_time 
+builtins.float"builtins.float*36*37*38*39*310*311*312*313rk
 curcroniter.croniter.croniter.cur 
-builtins.float"builtins.float*36*37*38*39*310*311r”
+builtins.float"builtins.float*36*37*38*39*310*311*312*313r›
 expanded#croniter.croniter.croniter.expandedá
 *builtins.list[builtins.list[builtins.str]]J
 builtins.list[builtins.str]
-builtins.str"builtins.str"builtins.list"builtins.list*36*37*38*39*310*311ro
-
-start_time%croniter.croniter.croniter.start_time 
-builtins.float"builtins.float*36*37*38*39*310*311rw
-dst_start_time)croniter.croniter.croniter.dst_start_time 
-builtins.float"builtins.float*36*37*38*39*310*311r∫
-nth_weekday_of_month/croniter.croniter.croniter.nth_weekday_of_monthW
-builtins.dict[builtins.str,Any]
-builtins.str"builtins.str
-Any"builtins.dict*36*37*38*39*310*311rñ
+builtins.str"builtins.str"builtins.list"builtins.list*36*37*38*39*310*311*312*313rù
+nth_weekday_of_month/croniter.croniter.croniter.nth_weekday_of_monthØ
+6builtins.dict[builtins.str,builtins.set[builtins.int]]
+builtins.str"builtins.strH
+builtins.set[builtins.int]
+builtins.int"builtins.int"builtins.set"builtins.dict*36*37*38*39*310*311*312*313rÚ
+expressions&croniter.croniter.croniter.expressionsñ
+&TypeAlias[builtins.list[builtins.str]]J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list"croniter.croniter._Expressions*36*37*38*39*310*311*312*313r†
 __next__#croniter.croniter.croniter.__next__K
 CallableType[builtins.function]&
-builtins.function"builtins.function*36*37*38*39*310*311ÄN
-HashExpandercroniter.croniter.HashExpander"builtins.object*È
+builtins.function"builtins.function*36*37*38*39*310*311*312*313ô(
+HashExpandercroniter.croniter.HashExpander"builtins.object*Û
 __init__'croniter.croniter.HashExpander.__init__"
 None*J
 self@
 croniter.croniter.HashExpander"croniter.croniter.HashExpander*D
 cronit8
-croniter.croniter.croniter"croniter.croniter.croniterz36z37z38z39z310z311*Ë
+croniter.croniter.croniter"croniter.croniter.croniterz36z37z38z39z310z311z312z313*ö
 match$croniter.croniter.HashExpander.match"r
 "Union[re.Match[builtins.str],None]@
 re.Match[builtins.str]
@@ -310,11 +474,13 @@ start_time%croniter.croniter.croniter.start_time
 idx"
 builtins.object"builtins.object*&
 expr
-builtins.str"builtins.str*1
-hash_id"
-builtins.object"builtins.object **
+builtins.str"builtins.str*Y
+hash_idJ
+Union[builtins.bytes,None] 
+builtins.bytes"builtins.bytes
+None **
 kw"
-builtins.object"builtins.objectz36z37z38z39z310z311*ß
+builtins.object"builtins.objectz36z37z38z39z310z311z312z313*≥
 expand%croniter.croniter.HashExpander.expand"
 builtins.str"builtins.str*J
 self@
@@ -324,30 +490,19 @@ start_time%croniter.croniter.croniter.start_time
 idx
 builtins.int"builtins.int*&
 expr
-builtins.str"builtins.str*â
-hash_id˘
-éUnion[TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData]]]],None]Ÿ
-ÇTypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData]]]]µ
-wUnion[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData]]] 
-builtins.bytes"builtins.bytesï
-aTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData]]í
-VUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData](
-builtins.bytearray"builtins.bytearray*
-builtins.memoryview"builtins.memoryview(
-array.array[Any]
-Any"array.array
-	mmap.mmap"	mmap.mmap
-ctypes._CData"ctypes._CData"_typeshed.WriteableBuffer"_typeshed.ReadableBuffer
-None *œ
-match¡
-8Union[re.Match[builtins.str],None,Literal[builtins.str]]@
+builtins.str"builtins.str*Y
+hash_idJ
+Union[builtins.bytes,None] 
+builtins.bytes"builtins.bytes
+None *å
+match
+&Union[re.Match[builtins.str],None,Any]@
 re.Match[builtins.str]
 builtins.str"builtins.str"re.Match
-None7
-Literal[builtins.str]	
-builtins.str"builtins.str **
+None
+Any **
 kw"
-builtins.object"builtins.objectz36z37*¬
+builtins.object"builtins.objectz36z37*ä
 expand%croniter.croniter.HashExpander.expand"
 builtins.str"builtins.str*J
 self@
@@ -357,21 +512,10 @@ VUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes.
 idx
 builtins.int"builtins.int*&
 expr
-builtins.str"builtins.str*ö
-hash_idä
-¢Union[TypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]],None]÷
-ñTypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]û
-ãUnion[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]] 
-builtins.bytes"builtins.bytesÈ
-uTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]“
-jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer](
-builtins.bytearray"builtins.bytearray*
-builtins.memoryview"builtins.memoryview(
-array.array[Any]
-Any"array.array
-	mmap.mmap"	mmap.mmap
-ctypes._CData"ctypes._CData*
-pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer"_typeshed.ReadableBuffer
+builtins.str"builtins.str*Y
+hash_idJ
+Union[builtins.bytes,None] 
+builtins.bytes"builtins.bytes
 None *œ
 match¡
 8Union[re.Match[builtins.str],None,Literal[builtins.str]]@
@@ -381,7 +525,62 @@ jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes.
 Literal[builtins.str]	
 builtins.str"builtins.str **
 kw"
-builtins.object"builtins.objectz38z39z310z3112´
+builtins.object"builtins.objectz38z39z310z311z312z3132Ö
+do!croniter.croniter.HashExpander.doß
+do!croniter.croniter.HashExpander.do"
+builtins.int"builtins.int*J
+self@
+croniter.croniter.HashExpander"croniter.croniter.HashExpander*%
+idx
+builtins.int"builtins.int*
+	hash_type
+Any*
+hash_id
+None *U
+	range_endD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *W
+range_beginD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None 0:overloadX“
+do!croniter.croniter.HashExpander.do"
+builtins.int"builtins.int*J
+self@
+croniter.croniter.HashExpander"croniter.croniter.HashExpander*%
+idx
+builtins.int"builtins.int*+
+	hash_type
+builtins.str"builtins.str*-
+hash_id 
+builtins.bytes"builtins.bytes*U
+	range_endD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *W
+range_beginD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None 0:overloadX‘
+do!croniter.croniter.HashExpander.do"
+builtins.int"builtins.int*J
+self@
+croniter.croniter.HashExpander"croniter.croniter.HashExpander*%
+idx
+builtins.int"builtins.int*-
+	hash_type
+builtins.str"builtins.str *-
+hash_id 
+builtins.bytes"builtins.bytes*U
+	range_endD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None *W
+range_beginD
+Union[builtins.int,None]
+builtins.int"builtins.int
+None 0:overloadX"36"372…
 do!croniter.croniter.HashExpander.do◊
 do!croniter.croniter.HashExpander.do"
 builtins.int"builtins.int*J
@@ -401,7 +600,7 @@ jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes.
 range_beginD
 Union[builtins.int,None]
 builtins.int"builtins.int
-None 0:overloadXç	
+None 0:overloadX“
 do!croniter.croniter.HashExpander.do"
 builtins.int"builtins.int*J
 self@
@@ -409,19 +608,9 @@ jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes.
 idx
 builtins.int"builtins.int*+
 	hash_type
-builtins.str"builtins.str*Á
-hash_idŸ
-ÇTypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData]]]]µ
-wUnion[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData]]] 
-builtins.bytes"builtins.bytesï
-aTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData]]í
-VUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData](
-builtins.bytearray"builtins.bytearray*
-builtins.memoryview"builtins.memoryview(
-array.array[Any]
-Any"array.array
-	mmap.mmap"	mmap.mmap
-ctypes._CData"ctypes._CData"_typeshed.WriteableBuffer"_typeshed.ReadableBuffer*U
+builtins.str"builtins.str*-
+hash_id 
+builtins.bytes"builtins.bytes*U
 	range_endD
 Union[builtins.int,None]
 builtins.int"builtins.int
@@ -429,7 +618,7 @@ VUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes.
 range_beginD
 Union[builtins.int,None]
 builtins.int"builtins.int
-None 0:overloadXè	
+None 0:overloadX‘
 do!croniter.croniter.HashExpander.do"
 builtins.int"builtins.int*J
 self@
@@ -437,19 +626,9 @@ VUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes.
 idx
 builtins.int"builtins.int*-
 	hash_type
-builtins.str"builtins.str *Á
-hash_idŸ
-ÇTypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData]]]]µ
-wUnion[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData]]] 
-builtins.bytes"builtins.bytesï
-aTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData]]í
-VUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData](
-builtins.bytearray"builtins.bytearray*
-builtins.memoryview"builtins.memoryview(
-array.array[Any]
-Any"array.array
-	mmap.mmap"	mmap.mmap
-ctypes._CData"ctypes._CData"_typeshed.WriteableBuffer"_typeshed.ReadableBuffer*U
+builtins.str"builtins.str *-
+hash_id 
+builtins.bytes"builtins.bytes*U
 	range_endD
 Union[builtins.int,None]
 builtins.int"builtins.int
@@ -457,97 +636,19 @@ VUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes.
 range_beginD
 Union[builtins.int,None]
 builtins.int"builtins.int
-None 0:overloadX"36"372Ø
-do!croniter.croniter.HashExpander.do◊
-do!croniter.croniter.HashExpander.do"
-builtins.int"builtins.int*J
-self@
-croniter.croniter.HashExpander"croniter.croniter.HashExpander*%
-idx
-builtins.int"builtins.int*F
-	hash_type7
-Literal[builtins.str]	
-builtins.str"builtins.str*
-hash_id
-None *U
-	range_endD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *W
-range_beginD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None 0:overloadXä
-
-do!croniter.croniter.HashExpander.do"
-builtins.int"builtins.int*J
-self@
-croniter.croniter.HashExpander"croniter.croniter.HashExpander*%
-idx
-builtins.int"builtins.int*+
-	hash_type
-builtins.str"builtins.str*‰
-hash_id÷
-ñTypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]û
-ãUnion[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]] 
-builtins.bytes"builtins.bytesÈ
-uTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]“
-jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer](
-builtins.bytearray"builtins.bytearray*
-builtins.memoryview"builtins.memoryview(
-array.array[Any]
-Any"array.array
-	mmap.mmap"	mmap.mmap
-ctypes._CData"ctypes._CData*
-pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer"_typeshed.ReadableBuffer*U
-	range_endD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *W
-range_beginD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None 0:overloadXå
-
-do!croniter.croniter.HashExpander.do"
-builtins.int"builtins.int*J
-self@
-croniter.croniter.HashExpander"croniter.croniter.HashExpander*%
-idx
-builtins.int"builtins.int*-
-	hash_type
-builtins.str"builtins.str *‰
-hash_id÷
-ñTypeAlias[Union[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]]]û
-ãUnion[builtins.bytes,TypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]] 
-builtins.bytes"builtins.bytesÈ
-uTypeAlias[Union[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer]]“
-jUnion[builtins.bytearray,builtins.memoryview,array.array[Any],mmap.mmap,ctypes._CData,pickle.PickleBuffer](
-builtins.bytearray"builtins.bytearray*
-builtins.memoryview"builtins.memoryview(
-array.array[Any]
-Any"array.array
-	mmap.mmap"	mmap.mmap
-ctypes._CData"ctypes._CData*
-pickle.PickleBuffer"pickle.PickleBuffer"_typeshed.WriteableBuffer"_typeshed.ReadableBuffer*U
-	range_endD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None *W
-range_beginD
-Union[builtins.int,None]
-builtins.int"builtins.int
-None 0:overloadX"38"39"310"311j36j37j38j39j310j311r
+None 0:overloadX"38"39"310"311"312"313j36j37j38j39j310j311j312j313râ
 cron#croniter.croniter.HashExpander.cron8
-croniter.croniter.croniter"croniter.croniter.croniter*36*37*38*39*310*311¨
+croniter.croniter.croniter"croniter.croniter.croniter*36*37*38*39*310*311*312*313j
+is_32bitcroniter.croniter.is_32bit"
+builtins.bool"builtins.boolz36z37z38z39z310z311z312z313∂
 timedelta_to_seconds&croniter.croniter.timedelta_to_seconds" 
 builtins.float"builtins.float*0
 td(
-datetime.timedelta"datetime.timedeltaz36z37z38z39z310z311´
+datetime.timedelta"datetime.timedeltaz36z37z38z39z310z311z312z313µ
 datetime_to_timestamp'croniter.croniter.datetime_to_timestamp" 
 builtins.float"builtins.float*-
 d&
-datetime.datetime"datetime.datetimez36z37z38z39z310z311‹
+datetime.datetime"datetime.datetimez36z37z38z39z310z311z312z313ﬂ	
 croniter_range croniter.croniter.croniter_range"0
 typing.Iterator[Any]
 Any"typing.Iterator*Ä
@@ -578,52 +679,192 @@ JUnion[TypeAlias[Union[Type[builtins.float],Type[datetime.datetime]]],None]•
 ,Union[Type[croniter.croniter.croniter],None]d
  Type[croniter.croniter.croniter]8
 croniter.croniter.croniter"croniter.croniter.croniter"type
-None z36z37z38z39z310z311*ß
+None *9
+second_at_beginning
+builtins.bool"builtins.bool *<
+expand_from_start_time
+builtins.bool"builtins.bool z36z37z38z39z310z311z312z313*±
 __annotations__!croniter.croniter.__annotations__W
 builtins.dict[builtins.str,Any]
 builtins.str"builtins.str
-Any"builtins.dict*36*37*38*39*310*311*í
-step_search_re croniter.croniter.step_search_reD
-re.Pattern[builtins.str]
-builtins.str"builtins.str"
-re.Pattern*36*37*38*39*310*311*å
-only_int_recroniter.croniter.only_int_reD
-re.Pattern[builtins.str]
-builtins.str"builtins.str"
-re.Pattern*36*37*38*39*310*311*í
-star_or_int_re croniter.croniter.star_or_int_reD
-re.Pattern[builtins.str]
-builtins.str"builtins.str"
-re.Pattern*36*37*38*39*310*311*í
-special_dow_re croniter.croniter.special_dow_reD
-re.Pattern[builtins.str]
-builtins.str"builtins.str"
-re.Pattern*36*37*38*39*310*311*ö
-hash_expression_re$croniter.croniter.hash_expression_reD
-re.Pattern[builtins.str]
-builtins.str"builtins.str"
-re.Pattern*36*37*38*39*310*311*§
-VALID_LEN_EXPRESSION&croniter.croniter.VALID_LEN_EXPRESSIONJ
-builtins.list[builtins.int]
-builtins.int"builtins.int"builtins.list*36*37*38*39*310*311*≥
-ALPHAScroniter.croniter.ALPHASu
+Any"builtins.dict*36*37*38*39*310*311*312*313*1
+Finalcroniter.croniter.Final
+Any*36*37*5
+Literalcroniter.croniter.Literal
+Any*36*37*G
+OVERFLOW32B_MODE"croniter.croniter.OVERFLOW32B_MODE
+Any*36*37*r
+OVERFLOW32B_MODE"croniter.croniter.OVERFLOW32B_MODE
+builtins.bool"builtins.bool*38*39*310*311*312*313*1
+EPOCHcroniter.croniter.EPOCH
+Any*36*37*d
+EPOCHcroniter.croniter.EPOCH&
+datetime.datetime"datetime.datetime*38*39*310*311*312*313*7
+M_ALPHAScroniter.croniter.M_ALPHAS
+Any*36*37*π
+M_ALPHAScroniter.croniter.M_ALPHASu
 (builtins.dict[builtins.str,builtins.int]
 builtins.str"builtins.str
-builtins.int"builtins.int"builtins.dict*36*37*38*39*310*311*ª
+builtins.int"builtins.int"builtins.dict*38*39*310*311*312*313*;
+
+DOW_ALPHAScroniter.croniter.DOW_ALPHAS
+Any*36*37*Ω
 
 DOW_ALPHAScroniter.croniter.DOW_ALPHASu
 (builtins.dict[builtins.str,builtins.int]
 builtins.str"builtins.str
-builtins.int"builtins.int"builtins.dict*36*37*38*39*310*311*Z
-MONTHScroniter.croniter.MONTHS
-builtins.str"builtins.str*36*37*38*39*310*311*∑
-M_ALPHAScroniter.croniter.M_ALPHASu
+builtins.int"builtins.int"builtins.dict*38*39*310*311*312*313*3
+ALPHAScroniter.croniter.ALPHAS
+Any*36*37*µ
+ALPHAScroniter.croniter.ALPHASu
 (builtins.dict[builtins.str,builtins.int]
 builtins.str"builtins.str
-builtins.int"builtins.int"builtins.dict*36*37*38*39*310*311*^
+builtins.int"builtins.int"builtins.dict*38*39*310*311*312*313*C
+step_search_re croniter.croniter.step_search_re
+Any*36*37*î
+step_search_re croniter.croniter.step_search_reD
+re.Pattern[builtins.str]
+builtins.str"builtins.str"
+re.Pattern*38*39*310*311*312*313*=
+only_int_recroniter.croniter.only_int_re
+Any*36*37*é
+only_int_recroniter.croniter.only_int_reD
+re.Pattern[builtins.str]
+builtins.str"builtins.str"
+re.Pattern*38*39*310*311*312*313*7
+WEEKDAYScroniter.croniter.WEEKDAYS
+Any*36*37*`
 WEEKDAYScroniter.croniter.WEEKDAYS
-builtins.str"builtins.str*36*37*38*39*310*311*Ñ
+builtins.str"builtins.str*38*39*310*311*312*313*3
+MONTHScroniter.croniter.MONTHS
+Any*36*37*\
+MONTHScroniter.croniter.MONTHS
+builtins.str"builtins.str*38*39*310*311*312*313*C
+star_or_int_re croniter.croniter.star_or_int_re
+Any*36*37*î
+star_or_int_re croniter.croniter.star_or_int_reD
+re.Pattern[builtins.str]
+builtins.str"builtins.str"
+re.Pattern*38*39*310*311*312*313*C
+special_dow_re croniter.croniter.special_dow_re
+Any*36*37*î
+special_dow_re croniter.croniter.special_dow_reD
+re.Pattern[builtins.str]
+builtins.str"builtins.str"
+re.Pattern*38*39*310*311*312*313*5
+re_starcroniter.croniter.re_star
+Any*36*37*Ü
+re_starcroniter.croniter.re_starD
+re.Pattern[builtins.str]
+builtins.str"builtins.str"
+re.Pattern*38*39*310*311*312*313*K
+hash_expression_re$croniter.croniter.hash_expression_re
+Any*36*37*ú
+hash_expression_re$croniter.croniter.hash_expression_reD
+re.Pattern[builtins.str]
+builtins.str"builtins.str"
+re.Pattern*38*39*310*311*312*313*?
+MINUTE_FIELDcroniter.croniter.MINUTE_FIELD
+Any*36*37*h
+MINUTE_FIELDcroniter.croniter.MINUTE_FIELD
+builtins.int"builtins.int*38*39*310*311*312*313*;
+
+HOUR_FIELDcroniter.croniter.HOUR_FIELD
+Any*36*37*d
+
+HOUR_FIELDcroniter.croniter.HOUR_FIELD
+builtins.int"builtins.int*38*39*310*311*312*313*9
+	DAY_FIELDcroniter.croniter.DAY_FIELD
+Any*36*37*b
+	DAY_FIELDcroniter.croniter.DAY_FIELD
+builtins.int"builtins.int*38*39*310*311*312*313*=
+MONTH_FIELDcroniter.croniter.MONTH_FIELD
+Any*36*37*f
+MONTH_FIELDcroniter.croniter.MONTH_FIELD
+builtins.int"builtins.int*38*39*310*311*312*313*9
+	DOW_FIELDcroniter.croniter.DOW_FIELD
+Any*36*37*b
+	DOW_FIELDcroniter.croniter.DOW_FIELD
+builtins.int"builtins.int*38*39*310*311*312*313*?
+SECOND_FIELDcroniter.croniter.SECOND_FIELD
+Any*36*37*h
+SECOND_FIELDcroniter.croniter.SECOND_FIELD
+builtins.int"builtins.int*38*39*310*311*312*313*A
+UNIX_CRON_LENcroniter.croniter.UNIX_CRON_LEN
+Any*36*37*j
+UNIX_CRON_LENcroniter.croniter.UNIX_CRON_LEN
+builtins.int"builtins.int*38*39*310*311*312*313*;
+
+YEAR_FIELDcroniter.croniter.YEAR_FIELD
+Any*36*37*d
+
+YEAR_FIELDcroniter.croniter.YEAR_FIELD
+builtins.int"builtins.int*38*39*310*311*312*313*E
+SECOND_CRON_LEN!croniter.croniter.SECOND_CRON_LEN
+Any*36*37*n
+SECOND_CRON_LEN!croniter.croniter.SECOND_CRON_LEN
+builtins.int"builtins.int*38*39*310*311*312*313*A
+YEAR_CRON_LENcroniter.croniter.YEAR_CRON_LEN
+Any*36*37*j
+YEAR_CRON_LENcroniter.croniter.YEAR_CRON_LEN
+builtins.int"builtins.int*38*39*310*311*312*313*A
+SECOND_FIELDScroniter.croniter.SECOND_FIELDS
+Any*36*37*€
+SECOND_FIELDScroniter.croniter.SECOND_FIELDSå
+TTuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int*38*39*310*311*312*313*=
+UNIX_FIELDScroniter.croniter.UNIX_FIELDS
+Any*36*37*¨
+UNIX_FIELDScroniter.croniter.UNIX_FIELDS·
+GTuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int*38*39*310*311*312*313*=
+YEAR_FIELDScroniter.croniter.YEAR_FIELDS
+Any*36*37*Ç
+YEAR_FIELDScroniter.croniter.YEAR_FIELDS∑
+aTuple[builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int,builtins.int]
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int
+builtins.int"builtins.int*38*39*310*311*312*313*=
+CRON_FIELDScroniter.croniter.CRON_FIELDS
+Any*36*37*ÿ
+CRON_FIELDScroniter.croniter.CRON_FIELDSç
+Lbuiltins.dict[Union[builtins.str,builtins.int],builtins.tuple[builtins.int]]`
+ Union[builtins.str,builtins.int]
+builtins.str"builtins.str
+builtins.int"builtins.intL
+builtins.tuple[builtins.int]
+builtins.int"builtins.int"builtins.tuple"builtins.dict*38*39*310*311*312*313*O
+VALID_LEN_EXPRESSION&croniter.croniter.VALID_LEN_EXPRESSION
+Any*36*37*§
+VALID_LEN_EXPRESSION&croniter.croniter.VALID_LEN_EXPRESSIONH
+builtins.set[builtins.int]
+builtins.int"builtins.int"builtins.set*38*39*310*311*312*313*Ω
+EXPRESSIONScroniter.croniter.EXPRESSIONSÍ
+Xbuiltins.dict[Tuple[builtins.str,builtins.bytes],TypeAlias[builtins.list[builtins.str]]]f
+"Tuple[builtins.str,builtins.bytes]
+builtins.str"builtins.str 
+builtins.bytes"builtins.bytesñ
+&TypeAlias[builtins.list[builtins.str]]J
+builtins.list[builtins.str]
+builtins.str"builtins.str"builtins.list"croniter.croniter._Expressions"builtins.dict*36*37*38*39*310*311*312*313*3
+UTC_DTcroniter.croniter.UTC_DT
+Any*36*37*f
+UTC_DTcroniter.croniter.UTC_DT&
+datetime.timezone"datetime.timezone*38*39*310*311*312*313*é
 	EXPANDERScroniter.croniter.EXPANDERSø
 Dcollections.OrderedDict[builtins.str,croniter.croniter.HashExpander]
 builtins.str"builtins.str@
-croniter.croniter.HashExpander"croniter.croniter.HashExpander"collections.OrderedDict*36*37*38*39*310*311
+croniter.croniter.HashExpander"croniter.croniter.HashExpander"collections.OrderedDict*36*37*38*39*310*311*312*313
