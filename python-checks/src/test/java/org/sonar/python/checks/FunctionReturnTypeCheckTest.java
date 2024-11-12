@@ -19,6 +19,7 @@
  */
 package org.sonar.python.checks;
 
+import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
@@ -33,4 +34,13 @@ class FunctionReturnTypeCheckTest {
   void additionalTest() {
     PythonCheckVerifier.verifyNoIssue("src/test/resources/checks/functionReturnTypeAdditionalTests.py", new FunctionReturnTypeCheck());
   }
+
+  @Test
+  void importedTypesTest() {
+    PythonCheckVerifier.verify(List.of(
+      "src/test/resources/checks/functionReturnTypeImported.py",
+      "src/test/resources/checks/functionReturnTypeImporting.py"
+    ), new FunctionReturnTypeCheck());
+  }
+  
 }
