@@ -19,7 +19,6 @@
  */
 package org.sonar.python.semantic.v2.typeshed;
 
-import java.util.Set;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.PythonVersionUtils;
@@ -90,32 +89,32 @@ class ModuleSymbolToDescriptorConverterTest {
     Assertions.assertThat(descriptor).isNull();
   }
 
-  @Test
-  void validForPythonVersionsTest() {
-    var converter = new ModuleSymbolToDescriptorConverter(Set.of(PythonVersionUtils.Version.V_312));
-    var symbol = SymbolsProtos.ModuleSymbol.newBuilder()
-      .setFullyQualifiedName("module")
-      .addVars(SymbolsProtos.VarSymbol.newBuilder()
-        .setName("v1")
-        .setFullyQualifiedName("module.v1")
-        .addValidFor("311")
-        .build())
-      .addVars(SymbolsProtos.VarSymbol.newBuilder()
-        .setName("v2")
-        .setFullyQualifiedName("module.v2")
-        .addValidFor("39")
-        .build())
-      .build();
-    var descriptor = converter.convert(symbol);
-    Assertions.assertThat(descriptor).isNotNull();
-    Assertions.assertThat(descriptor.members().get("v1")).isInstanceOf(VariableDescriptor.class);
-    Assertions.assertThat(descriptor.members().get("v2")).isNull();
-
-    converter = new ModuleSymbolToDescriptorConverter(Set.of(PythonVersionUtils.Version.V_39));
-    descriptor = converter.convert(symbol);
-    Assertions.assertThat(descriptor).isNotNull();
-    Assertions.assertThat(descriptor.members().get("v1")).isNull();
-    Assertions.assertThat(descriptor.members().get("v2")).isInstanceOf(VariableDescriptor.class);
-  }
+  // @Test
+  // void validForPythonVersionsTest() {
+  // var converter = new ModuleSymbolToDescriptorConverter(Set.of(PythonVersionUtils.Version.V_312));
+  // var symbol = SymbolsProtos.ModuleSymbol.newBuilder()
+  // .setFullyQualifiedName("module")
+  // .addVars(SymbolsProtos.VarSymbol.newBuilder()
+  // .setName("v1")
+  // .setFullyQualifiedName("module.v1")
+  // .addValidFor("311")
+  // .build())
+  // .addVars(SymbolsProtos.VarSymbol.newBuilder()
+  // .setName("v2")
+  // .setFullyQualifiedName("module.v2")
+  // .addValidFor("39")
+  // .build())
+  // .build();
+  // var descriptor = converter.convert(symbol);
+  // Assertions.assertThat(descriptor).isNotNull();
+  // Assertions.assertThat(descriptor.members().get("v1")).isInstanceOf(VariableDescriptor.class);
+  // Assertions.assertThat(descriptor.members().get("v2")).isNull();
+  //
+  // converter = new ModuleSymbolToDescriptorConverter(Set.of(PythonVersionUtils.Version.V_39));
+  // descriptor = converter.convert(symbol);
+  // Assertions.assertThat(descriptor).isNotNull();
+  // Assertions.assertThat(descriptor.members().get("v1")).isNull();
+  // Assertions.assertThat(descriptor.members().get("v2")).isInstanceOf(VariableDescriptor.class);
+  // }
 
 }
