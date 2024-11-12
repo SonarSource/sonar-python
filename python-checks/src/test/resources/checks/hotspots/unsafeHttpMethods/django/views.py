@@ -49,3 +49,13 @@ def sensitive_other_dec(request): # Noncompliant
 
 def other(request):
   ...
+
+
+from django.urls import path
+
+class SameClassView:
+  def chosen_view(self):  # FN SONARPY-2322
+    ...
+
+  def get_urlpatterns(self):
+    return [path("something", self.chosen_view, name="something")]
