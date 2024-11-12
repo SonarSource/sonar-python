@@ -19,6 +19,7 @@
  */
 package org.sonar.python.checks;
 
+import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
@@ -32,5 +33,16 @@ class ArgumentTypeCheckTest {
   @Test
   void test_overloaded_functions() {
     PythonCheckVerifier.verify("src/test/resources/checks/argumentType_overloaded_functions.py", new ArgumentTypeCheck());
+  }
+
+  @Test
+  void importedTypesTest() {
+    PythonCheckVerifier.verify(
+      List.of(
+        "src/test/resources/checks/argumentTypeImporting.py",
+        "src/test/resources/checks/argumentTypeImported.py"
+      ),
+      new ArgumentTypeCheck()
+    );
   }
 }
