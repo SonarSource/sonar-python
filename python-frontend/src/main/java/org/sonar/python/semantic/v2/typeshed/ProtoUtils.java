@@ -25,7 +25,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import org.sonar.plugins.python.api.PythonVersionUtils;
 import org.sonar.python.index.AmbiguousDescriptor;
 import org.sonar.python.index.Descriptor;
 
@@ -53,11 +52,11 @@ public class ProtoUtils {
     if (validForPythonVersions.isEmpty()) {
       return true;
     }
-    // TODO: SONARPY-1522 - remove this workaround when we will have all the stubs for Python 3.12.
-    if (supportedPythonVersions.stream().allMatch(PythonVersionUtils.Version.V_312.serializedValue()::equals)
-      && validForPythonVersions.contains(PythonVersionUtils.Version.V_311.serializedValue())) {
-      return true;
-    }
+    // // TODO: SONARPY-1522 - remove this workaround when we will have all the stubs for Python 3.12.
+    // if (supportedPythonVersions.stream().allMatch(PythonVersionUtils.Version.V_312.serializedValue()::equals)
+    // && validForPythonVersions.contains(PythonVersionUtils.Version.V_311.serializedValue())) {
+    // return true;
+    // }
     HashSet<String> intersection = new HashSet<>(validForPythonVersions);
     intersection.retainAll(supportedPythonVersions);
     return !intersection.isEmpty();
