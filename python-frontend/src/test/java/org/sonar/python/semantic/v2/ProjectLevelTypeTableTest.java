@@ -384,4 +384,26 @@ class ProjectLevelTypeTableTest {
     assertThat(libType).isInstanceOf(ModuleType.class);
     assertThat(libType.name()).isEqualTo("lib");
   }
+
+  @Test
+  void importFunctionWithUnresolvedImportParameterTypes() {
+    var projectLevelSymbolTable = new ProjectLevelSymbolTable();
+    var libTree = parseWithoutSymbols(
+      """
+      def imported_function(params: list[str]): ...
+      """
+    );
+    projectLevelSymbolTable.addModule(libTree, "", pythonFile("lib.py"));
+
+    var projectLevelTypeTable = new ProjectLevelTypeTable(projectLevelSymbolTable);
+    var mainFile = pythonFile("main.py");
+    var fileInput = parseAndInferTypes(projectLevelTypeTable, mainFile, """
+      from lib import imported_function
+      imported_function
+      """
+    );
+    var importedFunctionType = (FunctionType) ((ExpressionStatement) fileInput.statements().statements().get(1)).expressions().get(0).typeV2();
+    var parameterType = importedFunctionType.parameters().get(0).declaredType().type().unwrappedType();
+    assertThat(parameterType).isInstanceOfSatisfying(ClassType.class, parameterClassType -> assertThat(parameterClassType.name()).isEqualTo("list"));
+  }
 }
