@@ -134,8 +134,7 @@ class PythonTypeToDescriptorConverterTest {
 
     // SONARPY-2307 support for superClass is missing in ClassType
     assertThat(classDescriptor.hasSuperClassWithoutDescriptor()).isFalse();
-    // SONARPY-2307 support for metaclassFQN is missing in ClassType
-    assertThat(classDescriptor.metaclassFQN()).isNull();
+    assertThat(classDescriptor.metaclassFQN()).isEqualTo("int");
     // SONARPY-2307 support for generics is missing in ClassType
     assertThat(classDescriptor.supportsGenerics()).isFalse();
   }

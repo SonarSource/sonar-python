@@ -129,6 +129,12 @@ public class PythonTypeToDescriptorConverter {
       }
     }
 
+    var metaclassFQN = type.metaClasses()
+      .stream()
+      .map(metaClass -> typeFqn(moduleFqn, metaClass))
+      .findFirst()
+      .orElse(null);
+
     return new ClassDescriptor(symbolName, symbolFqn,
       superClasses,
       memberDescriptors,
@@ -136,7 +142,7 @@ public class PythonTypeToDescriptorConverter {
       type.definitionLocation().orElse(null),
       hasSuperClassWithoutDescriptor,
       type.hasMetaClass(),
-      null,
+      metaclassFQN,
       false
     );
   }

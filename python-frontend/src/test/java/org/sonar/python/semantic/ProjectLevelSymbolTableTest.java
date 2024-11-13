@@ -1125,6 +1125,18 @@ class ProjectLevelSymbolTableTest {
     assertThat(symbol.hasUnresolvedTypeHierarchy()).isTrue();
   }
 
+  @Test
+  void class_wth_metaclass() {
+    var code = """
+      from abc import ABCMeta
+      class WithMetaclass(metaclass=ABCMeta): ...
+      """;
+
+    var projectSymbolTable = new ProjectLevelSymbolTable();
+    projectSymbolTable.addModule(parseWithoutSymbols(code), "", pythonFile("mod.py"));
+    var symbol = (ClassSymbolImpl) projectSymbolTable.getSymbol("mod.WithMetaclass");
+    assertThat(symbol.metaclassFQN()).isEqualTo("abc.ABCMeta");
+  }
 
   @Test
   void projectPackages() {
