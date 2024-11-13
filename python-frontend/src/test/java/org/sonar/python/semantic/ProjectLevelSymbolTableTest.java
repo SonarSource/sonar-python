@@ -698,9 +698,9 @@ class ProjectLevelSymbolTableTest {
     projectLevelSymbolTable.addModule(importFileInput, "packageName", pythonFile("mod2.py"));
     projectLevelSymbolTable.addModule(importedFileInput, "packageName", pythonFile("mod.py"));
     Set<Symbol> globalSymbols = projectLevelSymbolTable.getSymbolsFromModule("packageName.mod");
+    // SONARPY-2327 The method call to foo() in class A is not a member of ClassSymbol A because the symbol is created from the ClassType through the Descriptor
     Optional<ClassSymbol> classA = globalSymbols.stream().filter(s -> s.name().equals("A")).map(ClassSymbol.class::cast).findFirst();
     assertThat(classA).isPresent();
-    // SONARPY-2327 The method call to foo() in class A is not considered as a member of A, while A was defined in the same file as B, it will be.
     assertThat(classA.get().canHaveMember("foo")).isFalse();
     assertThat(classA.get().declaredMembers()).extracting("kind", "name").containsExactlyInAnyOrder(Tuple.tuple(Symbol.Kind.FUNCTION, "meth"));
   }

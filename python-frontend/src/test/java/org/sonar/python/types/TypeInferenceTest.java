@@ -807,7 +807,7 @@ class TypeInferenceTest {
   }
 
   @Test
-  void child_class_method_call_is_not_a_member_of_parent_class() {
+  void child_class_method_call_is_a_member_of_parent_class() {
     ClassSymbol classA = lastClassSymbolWithName("A", """
       class A:
         def meth(self):

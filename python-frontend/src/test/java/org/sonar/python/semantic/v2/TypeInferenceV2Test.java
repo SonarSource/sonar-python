@@ -352,7 +352,7 @@ public class TypeInferenceV2Test {
   }
 
   @Test
-  void child_class_method_call_is_not_a_member_of_parent_class() {
+  void child_class_method_call_is_not_a_member_of_parent_class_type() {
     FileInput fileInput = inferTypes("""
       class A:
         def meth(self):
@@ -362,12 +362,16 @@ public class TypeInferenceV2Test {
           ...
       """
     );
-    Optional<ClassSymbol> classA = fileInput.globalVariables().stream().filter(s -> s.name().equals("A")).map(ClassSymbol.class::cast).findFirst();
-    assertThat(classA).isPresent();
-    // SONARPY-2327 The method call to foo() in class A is considered as a member of A, while if A was defined in another file than B, it won't be.
-    assertThat(classA.get().canHaveMember("foo")).isTrue();
-    assertThat(classA.get().declaredMembers()).extracting("kind", "name")
+    // SONARPY-2327 The method call to foo() in class A is a member of ClassSymbol A but not a member of ClassType A.
+    Optional<ClassSymbol> classSymbolA = fileInput.globalVariables().stream().filter(s -> s.name().equals("A")).map(ClassSymbol.class::cast).findFirst();
+    assertThat(classSymbolA).isPresent();
+    assertThat(classSymbolA.get().canHaveMember("foo")).isTrue();
+    assertThat(classSymbolA.get().declaredMembers()).extracting("kind", "name")
       .containsExactlyInAnyOrder(Tuple.tuple(Symbol.Kind.FUNCTION, "meth"), Tuple.tuple(Symbol.Kind.OTHER, "foo"));
+
+    ClassType classTypeA = (ClassType) ((ClassDef) fileInput.statements().statements().get(0)).name().typeV2();
+    assertThat(classTypeA.members().stream().anyMatch(m -> m.name().equals("foo"))).isFalse();
+    assertThat(classTypeA.members().stream().anyMatch(m -> m.name().equals("meth"))).isTrue();
   }
 
   @Test
