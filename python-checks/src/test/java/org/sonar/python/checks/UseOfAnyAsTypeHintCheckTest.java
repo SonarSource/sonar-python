@@ -28,6 +28,7 @@ class UseOfAnyAsTypeHintCheckTest {
   void useOfAny() {
     PythonCheckVerifier.verify("src/test/resources/checks/useOfAnyAsTypeHint.py", new UseOfAnyAsTypeHintCheck());
   }
+
   @Test
   void useOfTypingAny() {
     PythonCheckVerifier.verify("src/test/resources/checks/useOftypingAnyAsTypeHint.py", new UseOfAnyAsTypeHintCheck());
@@ -41,5 +42,16 @@ class UseOfAnyAsTypeHintCheckTest {
   @Test
   void useOfOverrideOrOverloadDecorator() {
     PythonCheckVerifier.verify(List.of("src/test/resources/checks/useOfOverrideOrOverloadDecorator.py", "src/test/resources/checks/reexport_typing_overload_override.py"), new UseOfAnyAsTypeHintCheck());
+  }
+
+  @Test
+  void useOfAnyImpored() {
+    PythonCheckVerifier.verify(
+      List.of(
+        "src/test/resources/checks/useOfAnyAsTypeHintImported.py",
+        "src/test/resources/checks/useOfAnyAsTypeHintImporting.py"
+      ),
+      new UseOfAnyAsTypeHintCheck()
+    );
   }
 }

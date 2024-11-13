@@ -1,0 +1,3 @@
+from abc import ABCMeta
+
+class ImportedParentWithMetaClass(metaclass=ABCMeta): ...
