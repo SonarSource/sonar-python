@@ -406,4 +406,41 @@ class ProjectLevelTypeTableTest {
     var parameterType = importedFunctionType.parameters().get(0).declaredType().type().unwrappedType();
     assertThat(parameterType).isInstanceOfSatisfying(ClassType.class, parameterClassType -> assertThat(parameterClassType.name()).isEqualTo("list"));
   }
+
+  @Test
+  void classTypeAndAlias() {
+    var projectLevelSymbolTable = new ProjectLevelSymbolTable();
+    var libTree = parseWithoutSymbols(
+      """
+      class MyClass():
+        def foo(self): ...
+      my_alias = MyClass
+      """
+    );
+    projectLevelSymbolTable.addModule(libTree, "", pythonFile("lib.py"));
+
+    var projectLevelTypeTable = new ProjectLevelTypeTable(projectLevelSymbolTable);
+    var mainFile = pythonFile("main.py");
+    var fileInput = parseAndInferTypes(projectLevelTypeTable, mainFile, """
+      from lib import MyClass, my_alias
+      MyClass
+      my_alias
+      """
+    );
+    PythonType myClassType = ((ExpressionStatement) fileInput.statements().statements().get(1)).expressions().get(0).typeV2();
+    PythonType myAliasType = ((ExpressionStatement) fileInput.statements().statements().get(2)).expressions().get(0).typeV2();
+    assertThat(myClassType).isInstanceOfSatisfying(ClassType.class, ct -> {
+      assertThat(ct.name()).isEqualTo("MyClass");
+      assertThat(ct.fullyQualifiedName()).isEqualTo("lib.MyClass");
+      }
+    );
+    // SONARPY-2352: my_alias should be resolved as an alias to MyClass
+    assertThat(myAliasType).isInstanceOfSatisfying(ClassType.class, ct -> {
+        assertThat(ct.name()).isEqualTo("my_alias");
+        assertThat(ct.fullyQualifiedName()).isEqualTo("lib.my_alias");
+      }
+    );
+    TypeChecker typeChecker = new TypeChecker(projectLevelTypeTable);
+    assertThat(typeChecker.typeCheckBuilder().isInstanceOf("lib.MyClass").check(myAliasType)).isEqualTo(TriBool.UNKNOWN);
+  }
 }

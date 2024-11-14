@@ -586,21 +586,13 @@ public class ClassTypeTest {
 
   @Test
   void builder() {
-    ClassTypeBuilder classTypeBuilder = new ClassTypeBuilder().withName("A");
+    ClassTypeBuilder classTypeBuilder = new ClassTypeBuilder("A", "mod.A");
     assertThat(classTypeBuilder.build()).extracting(ClassType::name).isEqualTo("A");
   }
 
   @Test
   void displayName() {
-    ClassType classType = new ClassType("...");
-    assertThat(classType.instanceDisplayName()).contains("...");
-    assertThat(classType.displayName()).contains("type");
-
-    classType = new ClassType("MyClass");
-    assertThat(classType.instanceDisplayName()).contains("MyClass");
-    assertThat(classType.displayName()).contains("type");
-
-    classType = new ClassType("mymod.MyClass");
+    ClassType classType = new ClassType("MyClass", "mymod.MyClass");
     assertThat(classType.instanceDisplayName()).contains("MyClass");
     assertThat(classType.displayName()).contains("type");
   }

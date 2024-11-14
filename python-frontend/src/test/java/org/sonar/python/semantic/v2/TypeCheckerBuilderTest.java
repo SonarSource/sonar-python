@@ -54,33 +54,27 @@ class TypeCheckerBuilderTest {
     var intClassType = table.getType("int");
     var strClassType = table.getType("str");
 
-    var aClassType = new ClassTypeBuilder()
-      .withName("A")
+    var aClassType = new ClassTypeBuilder("A", "mod.A")
       .withSuperClasses(intClassType)
       .build();
 
-    var bClassType = new ClassTypeBuilder()
-      .withName("B")
+    var bClassType = new ClassTypeBuilder("B", "mod.B")
       .withSuperClasses(strClassType)
       .build();
 
-    var cClassType = new ClassTypeBuilder()
-      .withName("C")
+    var cClassType = new ClassTypeBuilder("C", "mod.C")
       .withSuperClasses(PythonType.UNKNOWN, intClassType)
       .build();
 
-    var dClassType = new ClassTypeBuilder()
-      .withName("D")
+    var dClassType = new ClassTypeBuilder("D", "mod.D")
       .withSuperClasses(PythonType.UNKNOWN, strClassType)
       .build();
 
-    var iClassType = new ClassTypeBuilder()
-      .withName("I")
+    var iClassType = new ClassTypeBuilder("I", "mod.I")
       .withSuperClasses(aClassType, intClassType)
       .build();
 
-    var jClassType = new ClassTypeBuilder()
-      .withName("J")
+    var jClassType = new ClassTypeBuilder("J", "mod.J")
       .withSuperClasses(UnionType.or(bClassType, aClassType))
       .build();
 

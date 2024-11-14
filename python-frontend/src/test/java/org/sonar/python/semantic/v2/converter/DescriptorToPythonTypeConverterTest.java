@@ -65,7 +65,8 @@ class DescriptorToPythonTypeConverterTest {
     var descriptorAlternative1 = Mockito.mock(FunctionDescriptor.class);
 
     var returnTypeName = "Returned";
-    var resolvedReturnType = new ClassTypeBuilder().withName(returnTypeName).build();
+    String fullyQualifiedName = "returned.ReturnTypeName";
+    var resolvedReturnType = new ClassTypeBuilder(returnTypeName, fullyQualifiedName).build();
     Mockito.when(lazyTypesContext.resolveLazyType(Mockito.argThat(lt -> returnTypeName.equals(lt.importPath()))))
       .thenReturn(resolvedReturnType);
 
@@ -123,7 +124,8 @@ class DescriptorToPythonTypeConverterTest {
     var descriptor = Mockito.mock(ClassDescriptor.class);
 
     var parentClassName = "Parent";
-    var resolvedParent = new ClassTypeBuilder().withName(parentClassName).build();
+    String parentClassFqn = "parent.Parent";
+    var resolvedParent = new ClassTypeBuilder(parentClassName, parentClassFqn).build();
 
     var member = Mockito.mock(AmbiguousDescriptor.class);
     Mockito.when(member.kind()).thenReturn(Descriptor.Kind.AMBIGUOUS);
@@ -161,7 +163,8 @@ class DescriptorToPythonTypeConverterTest {
     var descriptor = Mockito.mock(FunctionDescriptor.class);
 
     var returnTypeName = "Returned";
-    var resolvedReturnType = new ClassTypeBuilder().withName(returnTypeName).build();
+    String returnTypeFqn = "returned.Returned";
+    var resolvedReturnType = new ClassTypeBuilder(returnTypeName, returnTypeFqn).build();
 
     Mockito.when(descriptor.kind()).thenReturn(Descriptor.Kind.FUNCTION);
     Mockito.when(descriptor.name()).thenReturn("Sample");
@@ -211,7 +214,8 @@ class DescriptorToPythonTypeConverterTest {
     var descriptor = Mockito.mock(VariableDescriptor.class);
 
     var variableTypeName = "Returned";
-    var resolvedVariableType = new ClassTypeBuilder().withName(variableTypeName).build();
+    String variableTypeFqn = "returned.Returned";
+    var resolvedVariableType = new ClassTypeBuilder(variableTypeName, variableTypeFqn).build();
 
     Mockito.when(descriptor.kind()).thenReturn(Descriptor.Kind.VARIABLE);
     Mockito.when(descriptor.name()).thenReturn("variable");

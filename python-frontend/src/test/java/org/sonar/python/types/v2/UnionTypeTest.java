@@ -144,11 +144,11 @@ class UnionTypeTest {
 
   @Test
   void unionTypeCandidatesResolution() {
-    var candidate1 = new ClassType("candidate", Set.of(
+    var candidate1 = new ClassType("candidate", "mymod.candidate", Set.of(
       new Member("a", new FunctionTypeBuilder("a").build())
     ), List.of(), List.of(), List.of(), false, null);
 
-    var candidate2 = new ClassType("candidate", Set.of(
+    var candidate2 = new ClassType("candidate", "mymod.candidate", Set.of(
       new Member("a", new FunctionTypeBuilder("a").build())
     ), List.of(), List.of(), List.of(), false, null);
 

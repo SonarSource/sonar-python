@@ -172,7 +172,7 @@ class ObjectTypeTest {
 
   @Test
   void function_is_callable() {
-      ClassType classType = new ClassType("function");
+      ClassType classType = new ClassType("function", "builtins.function");
       assertThat(classType.instancesHaveMember("__call__")).isEqualTo(TriBool.TRUE);
       assertThat(classType.instancesHaveMember("other")).isEqualTo(TriBool.FALSE);
   }
