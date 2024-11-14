@@ -21,9 +21,6 @@ package org.sonar.python.semantic.v2.converter;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import org.sonar.python.index.Descriptor;
 import org.sonar.python.index.FunctionDescriptor;
 import org.sonar.python.semantic.v2.FunctionTypeBuilder;
