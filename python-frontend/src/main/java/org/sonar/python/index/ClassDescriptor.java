@@ -22,6 +22,7 @@ package org.sonar.python.index;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.LocationInFile;
 
@@ -94,6 +95,7 @@ public class ClassDescriptor implements Descriptor {
     return hasMetaClass;
   }
 
+  @CheckForNull
   public String metaclassFQN() {
     return metaclassFQN;
   }

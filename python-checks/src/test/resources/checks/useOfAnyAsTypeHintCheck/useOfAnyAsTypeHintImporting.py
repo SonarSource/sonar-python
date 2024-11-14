@@ -12,5 +12,5 @@ class ImportedWithoutMetaClassInherited(ImportedParentWithoutMetaClass):
     def imported_inherited_foo(self) -> Any: # Noncompliant
         ...
 class ImportedWithMetaClassInherited(ImportedParentWithMetaClass):
-    def imported_inherited_foo(self) -> Any: # FN SONARPY-2331
+    def imported_inherited_foo(self) -> Any: # Noncompliant
         ...
