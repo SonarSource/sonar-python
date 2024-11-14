@@ -38,6 +38,7 @@ import org.sonar.plugins.python.api.LocationInFile;
 public final class ClassType implements PythonType {
 
   private final String name;
+  private final String fullyQualifiedName;
   private final Set<Member> members;
   private final List<PythonType> attributes;
   private final List<TypeWrapper> superClasses;
@@ -47,6 +48,7 @@ public final class ClassType implements PythonType {
 
   public ClassType(
     String name,
+    String fullyQualifiedName,
     Set<Member> members,
     List<PythonType> attributes,
     List<TypeWrapper> superClasses,
@@ -54,6 +56,7 @@ public final class ClassType implements PythonType {
     boolean hasDecorators,
     @Nullable LocationInFile locationInFile) {
     this.name = name;
+    this.fullyQualifiedName = fullyQualifiedName;
     this.members = members;
     this.attributes = attributes;
     this.superClasses = superClasses;
@@ -62,12 +65,8 @@ public final class ClassType implements PythonType {
     this.locationInFile = locationInFile;
   }
 
-  public ClassType(String name) {
-    this(name, new HashSet<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), false, null);
-  }
-
-  public ClassType(String name, @Nullable LocationInFile locationInFile) {
-    this(name, new HashSet<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), false, locationInFile);
+  public ClassType(String name, String fullyQualifiedName) {
+    this(name, fullyQualifiedName, new HashSet<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), false, null);
   }
 
   @Override
@@ -208,6 +207,10 @@ public final class ClassType implements PythonType {
   @Override
   public String name() {
     return name;
+  }
+
+  public String fullyQualifiedName() {
+    return fullyQualifiedName;
   }
 
   public Set<Member> members() {

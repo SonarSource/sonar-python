@@ -29,8 +29,7 @@ import org.sonar.python.types.v2.TypeWrapper;
 public class ClassDescriptorToPythonTypeConverter implements DescriptorToPythonTypeConverter {
 
   private static PythonType convert(ConversionContext ctx, ClassDescriptor from) {
-    var typeBuilder = new ClassTypeBuilder()
-      .withName(from.name())
+    var typeBuilder = new ClassTypeBuilder(from.name(), from.fullyQualifiedName())
       .withDefinitionLocation(from.definitionLocation());
 
     from.superClasses().stream()

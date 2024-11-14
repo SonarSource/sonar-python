@@ -50,7 +50,7 @@ class ModuleTypeTest {
   @Test
   void doNotReplaceKnownMember() {
     var a = new ModuleType("a");
-    ClassType existingMember = new ClassType("b");
+    ClassType existingMember = new ClassType("b", "mymod.b");
     a.members().put("b", TypeWrapper.of(existingMember));
     Assertions.assertThat(a.resolveMember("b")).containsSame(existingMember);
     new ModuleType("b", a);

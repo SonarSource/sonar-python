@@ -183,8 +183,8 @@ public class PythonTypeToDescriptorConverter {
   private static String typeFqn(String moduleFqn, PythonType type) {
     if (type instanceof UnknownType.UnresolvedImportType importType) {
       return importType.importPath();
-    } else if (type instanceof ClassType) {
-      return moduleFqn + "." + type.name();
+    } else if (type instanceof ClassType classType) {
+      return classType.fullyQualifiedName();
     } else if (type instanceof FunctionType functionType) {
       return functionType.fullyQualifiedName();
     }

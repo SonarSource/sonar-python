@@ -33,8 +33,8 @@ import org.sonar.python.types.v2.PythonType;
 
 public class ClassTypeBuilder implements TypeBuilder<ClassType> {
 
-
-  String name;
+  private final String name;
+  private final String fullyQualifiedName;
   Set<Member> members = new HashSet<>();
   List<PythonType> attributes = new ArrayList<>();
   List<TypeWrapper> superClasses = new ArrayList<>();
@@ -44,12 +44,12 @@ public class ClassTypeBuilder implements TypeBuilder<ClassType> {
 
   @Override
   public ClassType build() {
-    return new ClassType(name, members, attributes, superClasses, metaClasses, hasDecorators, definitionLocation);
+    return new ClassType(name, fullyQualifiedName, members, attributes, superClasses, metaClasses, hasDecorators, definitionLocation);
   }
 
-  public ClassTypeBuilder withName(String name) {
+  public ClassTypeBuilder(String name, String fullyQualifiedName) {
     this.name = name;
-    return this;
+    this.fullyQualifiedName = fullyQualifiedName;
   }
 
   public ClassTypeBuilder withHasDecorators(boolean hasDecorators) {
