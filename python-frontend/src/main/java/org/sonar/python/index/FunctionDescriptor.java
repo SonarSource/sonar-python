@@ -22,7 +22,6 @@ package org.sonar.python.index;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.CheckForNull;
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.LocationInFile;
 
