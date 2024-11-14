@@ -43,7 +43,6 @@ import org.sonar.python.semantic.SymbolTableBuilder;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.PythonTestUtils.getLastDescendant;
-import static org.sonar.python.PythonTestUtils.lastClassSymbolWithName;
 import static org.sonar.python.PythonTestUtils.lastExpression;
 import static org.sonar.python.PythonTestUtils.lastExpressionInFunction;
 import static org.sonar.python.PythonTestUtils.lastStatement;
@@ -808,14 +807,15 @@ class TypeInferenceTest {
 
   @Test
   void child_class_method_call_is_a_member_of_parent_class() {
-    ClassSymbol classA = lastClassSymbolWithName("A", """
+    ClassSymbol classA = ((ClassSymbol) ((Name) lastExpression("A", """
       class A:
         def meth(self):
           return self.foo()
       class B(A):
         def foo(self): pass
+      A
       """
-    );
+    )).symbol());
     assertThat(classA.canHaveMember("foo")).isTrue();
     assertThat(classA.declaredMembers()).extracting("kind", "name")
       .containsExactlyInAnyOrder(Tuple.tuple(Symbol.Kind.FUNCTION, "meth"), Tuple.tuple(Symbol.Kind.OTHER, "foo"));

@@ -100,6 +100,7 @@ public class DescriptorsToProtobuf {
     }
     DescriptorsProtos.ClassDescriptor.Builder builder = DescriptorsProtos.ClassDescriptor.newBuilder()
       .setName(classDescriptor.name())
+      .setFullyQualifiedName(classDescriptor.fullyQualifiedName())
       .addAllSuperClasses(classDescriptor.superClasses())
       .addAllFunctionMembers(functionMembers)
       .addAllVarMembers(variableMembers)
@@ -110,9 +111,6 @@ public class DescriptorsToProtobuf {
       .setHasMetaClass(classDescriptor.hasMetaClass())
       .setSupportsGenerics(classDescriptor.supportsGenerics());
     LocationInFile definitionLocation = classDescriptor.definitionLocation();
-    if (classDescriptor.fullyQualifiedName() != null) {
-      builder.setFullyQualifiedName(classDescriptor.fullyQualifiedName());
-    }
     if (definitionLocation != null) {
       builder.setDefinitionLocation(toProtobuf(definitionLocation));
     }
@@ -126,6 +124,7 @@ public class DescriptorsToProtobuf {
   public static DescriptorsProtos.FunctionDescriptor toProtobuf(FunctionDescriptor functionDescriptor) {
     DescriptorsProtos.FunctionDescriptor.Builder builder = DescriptorsProtos.FunctionDescriptor.newBuilder()
       .setName(functionDescriptor.name())
+      .setFullyQualifiedName(functionDescriptor.fullyQualifiedName())
       .addAllParameters(functionDescriptor.parameters().stream().map(DescriptorsToProtobuf::toProtobuf).toList())
       .setIsAsynchronous(functionDescriptor.isAsynchronous())
       .setIsInstanceMethod(functionDescriptor.isInstanceMethod())
@@ -134,10 +133,6 @@ public class DescriptorsToProtobuf {
     String annotatedReturnTypeName = functionDescriptor.annotatedReturnTypeName();
     if (annotatedReturnTypeName != null) {
       builder.setAnnotatedReturnType(annotatedReturnTypeName);
-    }
-    String fullyQualifiedName = functionDescriptor.fullyQualifiedName();
-    if (fullyQualifiedName != null) {
-      builder.setFullyQualifiedName(functionDescriptor.fullyQualifiedName());
     }
     LocationInFile definitionLocation = functionDescriptor.definitionLocation();
     if (definitionLocation != null) {
@@ -216,7 +211,7 @@ public class DescriptorsToProtobuf {
   public static ClassDescriptor fromProtobuf(DescriptorsProtos.ClassDescriptor classDescriptorProto) {
     String metaclassFQN = classDescriptorProto.hasMetaClassFQN() ? classDescriptorProto.getMetaClassFQN() : null;
     LocationInFile definitionLocation = classDescriptorProto.hasDefinitionLocation() ? fromProtobuf(classDescriptorProto.getDefinitionLocation()) : null;
-    String fullyQualifiedName = classDescriptorProto.hasFullyQualifiedName() ? classDescriptorProto.getFullyQualifiedName() : null;
+    String fullyQualifiedName = classDescriptorProto.getFullyQualifiedName();
     Set<Descriptor> members = new HashSet<>();
     classDescriptorProto.getClassMembersList().forEach(proto -> members.add(fromProtobuf(proto)));
     classDescriptorProto.getFunctionMembersList().forEach(proto -> members.add(fromProtobuf(proto)));
@@ -237,7 +232,7 @@ public class DescriptorsToProtobuf {
   }
 
   public static FunctionDescriptor fromProtobuf(DescriptorsProtos.FunctionDescriptor functionDescriptorProto) {
-    String fullyQualifiedName = functionDescriptorProto.hasFullyQualifiedName() ? functionDescriptorProto.getFullyQualifiedName() : null;
+    String fullyQualifiedName = functionDescriptorProto.getFullyQualifiedName();
     List<FunctionDescriptor.Parameter> parameters = new ArrayList<>();
     functionDescriptorProto.getParametersList().forEach(proto -> parameters.add(fromProtobuf(proto)));
     LocationInFile definitionLocation = functionDescriptorProto.hasDefinitionLocation() ? fromProtobuf(functionDescriptorProto.getDefinitionLocation()) : null;

@@ -23,15 +23,16 @@ package org.sonar.python.index;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 import org.junit.jupiter.api.Test;
-import org.sonar.plugins.python.api.symbols.FunctionSymbol;
+import org.sonar.plugins.python.api.tree.FunctionDef;
+import org.sonar.python.semantic.v2.SymbolV2;
+import org.sonar.python.semantic.v2.converter.PythonTypeToDescriptorConverter;
+import org.sonar.python.types.v2.FunctionType;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.sonar.python.PythonTestUtils.lastFunctionSymbol;
 import static org.sonar.python.index.DescriptorToProtobufTestUtils.assertDescriptorToProtobuf;
-import static org.sonar.python.index.DescriptorsToProtobuf.fromProtobuf;
-import static org.sonar.python.index.DescriptorsToProtobuf.toProtobuf;
-import static org.sonar.python.index.DescriptorUtils.descriptor;
+import static org.sonar.python.types.v2.TypesTestUtils.lastFunctionDef;
 
 class FunctionDescriptorTest {
 
@@ -110,12 +111,28 @@ class FunctionDescriptorTest {
   }
 
   @Test
-  void decorators() {
+  void unknown_decorators_have_no_name() {
     FunctionDescriptor functionDescriptor = lastFunctionDescriptor(
       "@bar",
       "def foo(x): ...");
     assertThat(functionDescriptor.hasDecorators()).isTrue();
-    assertThat(functionDescriptor.decorators()).containsExactly("bar");
+    // Empty decorator name due to it not being resolved
+    assertThat(functionDescriptor.decorators()).isEmpty();
+    assertDescriptorToProtobuf(functionDescriptor);
+  }
+
+  @Test
+  void decorator_from_function() {
+    FunctionDescriptor functionDescriptor = lastFunctionDescriptor(
+      """
+        def bar(): ...
+        
+        @bar
+        def foo(x): ...
+        """
+    );
+    assertThat(functionDescriptor.hasDecorators()).isTrue();
+    assertThat(functionDescriptor.decorators()).containsExactly("my_package.mod.bar");
     assertDescriptorToProtobuf(functionDescriptor);
   }
 
@@ -155,13 +172,18 @@ class FunctionDescriptorTest {
   }
 
   public static FunctionDescriptor lastFunctionDescriptor(String... code) {
-    FunctionSymbol functionSymbol = lastFunctionSymbol(code);
-    FunctionDescriptor functionDescriptor = (FunctionDescriptor) descriptor(functionSymbol);
+    FunctionDef functionDef = lastFunctionDef(code);
+    SymbolV2 symbol = functionDef.name().symbolV2();
+    FunctionType functionType = (FunctionType) functionDef.name().typeV2();
+
+    PythonTypeToDescriptorConverter converter = new PythonTypeToDescriptorConverter();
+    FunctionDescriptor functionDescriptor = (FunctionDescriptor) converter.convert("my_package.mod", symbol, Set.of(functionType));
+
     assertThat(functionDescriptor.kind()).isEqualTo(Descriptor.Kind.FUNCTION);
-    assertThat(functionDescriptor.name()).isEqualTo(functionSymbol.name());
-    assertThat(functionDescriptor.fullyQualifiedName()).isEqualTo(functionSymbol.fullyQualifiedName());
+    assertThat(functionDescriptor.name()).isEqualTo(symbol.name());
+    assertThat(functionDescriptor.fullyQualifiedName()).isEqualTo(functionType.fullyQualifiedName());
     assertThat(functionDescriptor.definitionLocation()).isNotNull();
-    assertThat(functionDescriptor.definitionLocation()).isEqualTo(functionSymbol.definitionLocation());
+    assertThat(functionType.definitionLocation()).contains(functionDescriptor.definitionLocation());
     return functionDescriptor;
   }
 }

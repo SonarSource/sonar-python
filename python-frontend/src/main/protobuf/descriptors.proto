@@ -31,7 +31,7 @@ message AmbiguousDescriptor {
 
 message ClassDescriptor {
     string name = 1;
-    optional string fullyQualifiedName = 2;
+    string fullyQualifiedName = 2;
     repeated string superClasses = 3;
     repeated FunctionDescriptor functionMembers = 4;
     repeated VarDescriptor varMembers = 5;
@@ -58,7 +58,7 @@ message ParameterDescriptor {
 
 message FunctionDescriptor {
     optional string name = 1;
-    optional string fullyQualifiedName = 2;
+    string fullyQualifiedName = 2;
     repeated ParameterDescriptor parameters = 3;
     bool isAsynchronous = 4;
     bool isInstanceMethod = 5;
