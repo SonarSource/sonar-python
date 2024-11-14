@@ -200,7 +200,7 @@ class Flag(Enum):
 
 class ComparingTypeAndEnum(unittest.TestCase):
     def test_type_of_enum_and_enum_class(self):
-        Perm = Flag(...)
-        e = Perm(v)
-        # FP SONARPY-2332: Perm is a proper "type" object as an instance of "Flag", due to it being an Enum
-        self.assertIs(type(e), Perm)  # Noncompliant
+        FlagType = Flag(...)
+        flag = FlagType(...)
+        # FP SONARPY-2332: FlagType is a proper "type" object as an instance of "Flag", due to it being an Enum
+        self.assertIs(type(flag), FlagType)  # Noncompliant
