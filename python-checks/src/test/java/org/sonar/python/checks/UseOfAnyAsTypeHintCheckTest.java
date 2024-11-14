@@ -26,20 +26,40 @@ import org.sonar.python.checks.utils.PythonCheckVerifier;
 class UseOfAnyAsTypeHintCheckTest {
   @Test
   void useOfAny() {
-    PythonCheckVerifier.verify("src/test/resources/checks/useOfAnyAsTypeHint.py", new UseOfAnyAsTypeHintCheck());
+    PythonCheckVerifier.verify("src/test/resources/checks/useOfAnyAsTypeHintCheck/useOfAnyAsTypeHint.py", new UseOfAnyAsTypeHintCheck());
   }
+
   @Test
   void useOfTypingAny() {
-    PythonCheckVerifier.verify("src/test/resources/checks/useOftypingAnyAsTypeHint.py", new UseOfAnyAsTypeHintCheck());
+    PythonCheckVerifier.verify("src/test/resources/checks/useOfAnyAsTypeHintCheck/useOftypingAnyAsTypeHint.py",
+      new UseOfAnyAsTypeHintCheck());
   }
 
   @Test
   void useOfUserDefinedTypeCalledAny() {
-    PythonCheckVerifier.verify("src/test/resources/checks/useOfUserDefinedTypeAnyAsTypeHint.py", new UseOfAnyAsTypeHintCheck());
+    PythonCheckVerifier.verify("src/test/resources/checks/useOfAnyAsTypeHintCheck/useOfUserDefinedTypeAnyAsTypeHint.py",
+      new UseOfAnyAsTypeHintCheck());
   }
 
   @Test
   void useOfOverrideOrOverloadDecorator() {
-    PythonCheckVerifier.verify(List.of("src/test/resources/checks/useOfOverrideOrOverloadDecorator.py", "src/test/resources/checks/reexport_typing_overload_override.py"), new UseOfAnyAsTypeHintCheck());
+    PythonCheckVerifier.verify(
+      List.of(
+        "src/test/resources/checks/useOfAnyAsTypeHintCheck/useOfOverrideOrOverloadDecorator.py",
+        "src/test/resources/checks/useOfAnyAsTypeHintCheck/reexport_typing_overload_override.py"
+      ),
+      new UseOfAnyAsTypeHintCheck()
+    );
+  }
+
+  @Test
+  void useOfAnyImported() {
+    PythonCheckVerifier.verify(
+      List.of(
+        "src/test/resources/checks/useOfAnyAsTypeHintCheck/useOfAnyAsTypeHintImported.py",
+        "src/test/resources/checks/useOfAnyAsTypeHintCheck/useOfAnyAsTypeHintImporting.py"
+      ),
+      new UseOfAnyAsTypeHintCheck()
+    );
   }
 }
