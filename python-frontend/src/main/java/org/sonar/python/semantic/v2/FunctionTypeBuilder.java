@@ -97,7 +97,7 @@ public class FunctionTypeBuilder implements TypeBuilder<FunctionType> {
     return this;
   }
 
-  public FunctionTypeBuilder withFullyQualifiedName(String fullyQualifiedName) {
+  public FunctionTypeBuilder withFullyQualifiedName(@Nullable String fullyQualifiedName) {
     this.fullyQualifiedName = fullyQualifiedName;
     return this;
   }
