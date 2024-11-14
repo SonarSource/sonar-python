@@ -1126,7 +1126,7 @@ class ProjectLevelSymbolTableTest {
   }
 
   @Test
-  void class_wth_metaclass() {
+  void class_wth_imported_metaclass() {
     var code = """
       from abc import ABCMeta
       class WithMetaclass(metaclass=ABCMeta): ...
@@ -1136,6 +1136,32 @@ class ProjectLevelSymbolTableTest {
     projectSymbolTable.addModule(parseWithoutSymbols(code), "", pythonFile("mod.py"));
     var symbol = (ClassSymbolImpl) projectSymbolTable.getSymbol("mod.WithMetaclass");
     assertThat(symbol.metaclassFQN()).isEqualTo("abc.ABCMeta");
+  }
+
+  @Test
+  void class_wth_locally_defined_metaclass() {
+    var code = """
+      class LocalMetaClass: ...
+      class WithMetaclass(metaclass=LocalMetaClass): ...
+      """;
+
+    var projectSymbolTable = new ProjectLevelSymbolTable();
+    projectSymbolTable.addModule(parseWithoutSymbols(code), "", pythonFile("mod.py"));
+    var symbol = (ClassSymbolImpl) projectSymbolTable.getSymbol("mod.WithMetaclass");
+    assertThat(symbol.metaclassFQN()).isEqualTo("mod.LocalMetaClass");
+  }
+
+  @Test
+  void class_wth_unresolved_import_metaclass() {
+    var code = """
+      from unknown import UnresolvedMetaClass
+      class WithMetaclass(metaclass=UnresolvedMetaClass): ...
+      """;
+
+    var projectSymbolTable = new ProjectLevelSymbolTable();
+    projectSymbolTable.addModule(parseWithoutSymbols(code), "", pythonFile("mod.py"));
+    var symbol = (ClassSymbolImpl) projectSymbolTable.getSymbol("mod.WithMetaclass");
+    assertThat(symbol.metaclassFQN()).isEqualTo("unknown.UnresolvedMetaClass");
   }
 
   @Test
