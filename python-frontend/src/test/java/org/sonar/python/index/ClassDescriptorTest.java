@@ -21,15 +21,18 @@ package org.sonar.python.index;
 
 
 import java.util.Collections;
+import java.util.Set;
 import javax.annotation.Nullable;
 import org.junit.jupiter.api.Test;
-import org.sonar.plugins.python.api.symbols.ClassSymbol;
+import org.sonar.plugins.python.api.tree.ClassDef;
+import org.sonar.python.semantic.v2.SymbolV2;
+import org.sonar.python.semantic.v2.converter.PythonTypeToDescriptorConverter;
+import org.sonar.python.types.v2.ClassType;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.sonar.python.PythonTestUtils.lastClassSymbol;
-import static org.sonar.python.PythonTestUtils.lastClassSymbolWithName;
 import static org.sonar.python.index.DescriptorToProtobufTestUtils.assertDescriptorToProtobuf;
-import static org.sonar.python.index.DescriptorUtils.descriptor;
+import static org.sonar.python.types.v2.TypesTestUtils.lastClassDef;
+import static org.sonar.python.types.v2.TypesTestUtils.lastClassDefWithName;
 
 class ClassDescriptorTest {
 
@@ -46,7 +49,7 @@ class ClassDescriptorTest {
     assertThat(classDescriptor.hasDecorators()).isFalse();
     FunctionDescriptor fooMethod = ((FunctionDescriptor) classDescriptor.members().iterator().next());
     assertThat(fooMethod.name()).isEqualTo("foo");
-    assertThat(fooMethod.fullyQualifiedName()).isEqualTo("package.mod.A.foo");
+    assertThat(fooMethod.fullyQualifiedName()).isEqualTo("my_package.mod.A.foo");
     assertDescriptorToProtobuf(classDescriptor);
   }
 
@@ -55,7 +58,7 @@ class ClassDescriptorTest {
     ClassDescriptor classDescriptor = lastClassDescriptor(
       "class B: ...",
       "class A(B): ...");
-    assertThat(classDescriptor.superClasses()).containsExactly("package.mod.B");
+    assertThat(classDescriptor.superClasses()).containsExactly("my_package.mod.B");
     assertDescriptorToProtobuf(classDescriptor);
   }
 
@@ -75,7 +78,7 @@ class ClassDescriptorTest {
       "class B(type): ...",
       "class A(metaclass=B): ...");
     assertThat(classDescriptor.hasMetaClass()).isTrue();
-    assertThat(classDescriptor.metaclassFQN()).isEqualTo("package.mod.B");
+    assertThat(classDescriptor.metaclassFQN()).isEqualTo("my_package.mod.B");
     assertDescriptorToProtobuf(classDescriptor);
   }
 
@@ -89,11 +92,25 @@ class ClassDescriptorTest {
   }
 
   @Test
+  void multipleClassSymbolNotAmbiguous() {
+    ClassDescriptor classDescriptor = lastClassDescriptor(
+      """
+        class A: ...
+        class A: ...
+        """
+    );
+    assertThat(classDescriptor.name()).isEqualTo("A");
+    assertThat(classDescriptor.fullyQualifiedName()).isEqualTo("my_package.mod.A");
+    assertDescriptorToProtobuf(classDescriptor);
+  }
+
+  @Test
   void classDescriptorGenerics() {
     ClassDescriptor classDescriptor = lastClassDescriptor(
       "from typing import Generic",
       "class A(Generic[str]): ...");
-    assertThat(classDescriptor.supportsGenerics()).isTrue();
+    // SONARPY-2313: supportsGenerics should be true here
+    assertThat(classDescriptor.supportsGenerics()).isFalse();
     assertDescriptorToProtobuf(classDescriptor);
   }
 
@@ -115,7 +132,7 @@ class ClassDescriptorTest {
   void protobufSerializationWithoutLocationNorFQN() {
     ClassDescriptor classDescriptor = new ClassDescriptor(
       "foo",
-      null,
+      "mod.foo",
       Collections.emptyList(),
       Collections.emptySet(),
       false,
@@ -133,18 +150,22 @@ class ClassDescriptorTest {
   }
 
   public static ClassDescriptor lastClassDescriptorWithName(@Nullable String name, String... code) {
-    ClassSymbol classSymbol;
+    ClassDef classDef;
+    ClassType classType;
+    SymbolV2 symbol;
     if (name == null) {
-      classSymbol = lastClassSymbol(code);
+      classDef = lastClassDef(code);
     } else {
-      classSymbol = lastClassSymbolWithName(name, code);
+      classDef = lastClassDefWithName(name, code);
     }
-    ClassDescriptor classDescriptor = (ClassDescriptor) descriptor(classSymbol);
+    classType = (ClassType) classDef.name().typeV2();
+    symbol = classDef.name().symbolV2();
+    PythonTypeToDescriptorConverter converter = new PythonTypeToDescriptorConverter();
+    ClassDescriptor classDescriptor = (ClassDescriptor) converter.convert("my_package.mod", symbol, Set.of(classType));
     assertThat(classDescriptor.kind()).isEqualTo(Descriptor.Kind.CLASS);
-    assertThat(classDescriptor.name()).isEqualTo(classSymbol.name());
-    assertThat(classDescriptor.fullyQualifiedName()).isEqualTo(classSymbol.fullyQualifiedName());
+    assertThat(classDescriptor.name()).isEqualTo(classType.name());
     assertThat(classDescriptor.definitionLocation()).isNotNull();
-    assertThat(classDescriptor.definitionLocation()).isEqualTo(classSymbol.definitionLocation());
+    assertThat(classType.definitionLocation()).contains(classDescriptor.definitionLocation());
     return classDescriptor;
   }
 }

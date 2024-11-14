@@ -20,16 +20,18 @@
 package org.sonar.python.index;
 
 
+import java.util.Set;
 import org.junit.jupiter.api.Test;
-import org.sonar.plugins.python.api.symbols.Symbol;
-import org.sonar.python.tree.TreeUtils;
+import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.python.semantic.v2.SymbolV2;
+import org.sonar.python.semantic.v2.converter.PythonTypeToDescriptorConverter;
+import org.sonar.python.types.v2.PythonType;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.sonar.python.PythonTestUtils.lastExpression;
 import static org.sonar.python.index.DescriptorToProtobufTestUtils.assertDescriptorToProtobuf;
 import static org.sonar.python.index.DescriptorsToProtobuf.fromProtobuf;
 import static org.sonar.python.index.DescriptorsToProtobuf.toProtobuf;
-import static org.sonar.python.index.DescriptorUtils.descriptor;
+import static org.sonar.python.types.v2.TypesTestUtils.lastName;
 
 class VariableDescriptorTest {
 
@@ -50,12 +52,14 @@ class VariableDescriptorTest {
   }
 
   private VariableDescriptor lastVariableDescriptor(String... code) {
-    Symbol symbol = TreeUtils.getSymbolFromTree(lastExpression(code)).get();
-
-    VariableDescriptor variableDescriptor = (VariableDescriptor) descriptor(symbol);
+    Name name = lastName(code);
+    PythonType pythonType = name.typeV2();
+    SymbolV2 symbol = name.symbolV2();
+    PythonTypeToDescriptorConverter converter = new PythonTypeToDescriptorConverter();
+    VariableDescriptor variableDescriptor = (VariableDescriptor) converter.convert("my_package.mod", symbol, Set.of(pythonType));
     assertThat(variableDescriptor.kind()).isEqualTo(Descriptor.Kind.VARIABLE);
     assertThat(variableDescriptor.name()).isEqualTo(symbol.name());
-    assertThat(variableDescriptor.fullyQualifiedName()).isEqualTo(symbol.fullyQualifiedName());
+    assertThat(variableDescriptor.fullyQualifiedName()).isEqualTo("my_package.mod." + symbol.name());
     return variableDescriptor;
   }
 

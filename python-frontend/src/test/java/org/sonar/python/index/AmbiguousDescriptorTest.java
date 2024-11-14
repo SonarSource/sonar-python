@@ -22,52 +22,72 @@ package org.sonar.python.index;
 import java.util.Collections;
 import java.util.Set;
 import org.junit.jupiter.api.Test;
-import org.sonar.plugins.python.api.symbols.AmbiguousSymbol;
-import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.python.semantic.SymbolImpl;
+import org.sonar.python.semantic.v2.SymbolV2;
+import org.sonar.python.semantic.v2.converter.PythonTypeToDescriptorConverter;
+import org.sonar.python.types.v2.PythonType;
+import org.sonar.python.types.v2.UnionType;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.sonar.python.PythonTestUtils.lastSymbolFromDef;
 import static org.sonar.python.index.ClassDescriptorTest.lastClassDescriptor;
 import static org.sonar.python.index.DescriptorToProtobufTestUtils.assertDescriptorToProtobuf;
-import static org.sonar.python.index.DescriptorsToProtobuf.fromProtobuf;
 import static org.sonar.python.index.DescriptorUtils.descriptor;
-import static org.sonar.python.index.DescriptorsToProtobuf.toProtobufModuleDescriptor;
 import static org.sonar.python.index.FunctionDescriptorTest.lastFunctionDescriptor;
+import static org.sonar.python.types.v2.TypesTestUtils.lastName;
 
 class AmbiguousDescriptorTest {
 
   @Test
   void test_basic_ambiguous_descriptor() {
     AmbiguousDescriptor ambiguousDescriptor = lastAmbiguousDescriptor(
-      "class A: ...",
-      "class A: ...");
+      """
+        if x:
+          class A: ...
+        else:
+          class A: ...
+        A
+        """
+    );
     assertThat(ambiguousDescriptor.alternatives()).extracting(Descriptor::name).containsExactly("A", "A");
-    assertThat(ambiguousDescriptor.alternatives()).extracting(Descriptor::fullyQualifiedName).containsExactly("package.mod.A", "package.mod.A");
+    assertThat(ambiguousDescriptor.alternatives()).extracting(Descriptor::fullyQualifiedName).containsExactly("my_package.mod.A", "my_package.mod.A");
     assertDescriptorToProtobuf(ambiguousDescriptor);
   }
 
   @Test
   void test_ambiguous_descriptor_different_kinds() {
     AmbiguousDescriptor ambiguousDescriptor = lastAmbiguousDescriptor(
-      "class A: ...",
-      "A: int = 42",
-      "def A(): ...");
+      """
+        if foo:
+          class A: ...
+        elif bar:
+          A: int = 42
+        else:
+          def A(): ...
+        A
+        """
+    );
     assertThat(ambiguousDescriptor.alternatives()).extracting(Descriptor::name).containsExactly("A", "A", "A");
-    assertThat(ambiguousDescriptor.alternatives()).extracting(Descriptor::fullyQualifiedName).containsExactly("package.mod.A", "package.mod.A", "package.mod.A");
+    assertThat(ambiguousDescriptor.alternatives()).extracting(Descriptor::fullyQualifiedName).containsExactly("my_package.mod.A", "my_package.mod.A", "my_package.mod.A");
     assertDescriptorToProtobuf(ambiguousDescriptor);
   }
 
   @Test
   void test_flattened_ambiguous_descriptor() {
     AmbiguousDescriptor firstAmbiguousSymbol = lastAmbiguousDescriptor(
-      "class A: ...",
-      "class A: ...");
+      """
+        if x:
+          class A: ...
+        else:
+          class A: ...
+        A
+        """
+    );
     ClassDescriptor classDescriptor = lastClassDescriptor("class A: ...");
     AmbiguousDescriptor ambiguousDescriptor = AmbiguousDescriptor.create(firstAmbiguousSymbol, classDescriptor);
     assertThat(ambiguousDescriptor.alternatives()).extracting(Descriptor::name).containsExactly("A", "A", "A");
-    assertThat(ambiguousDescriptor.alternatives()).extracting(Descriptor::fullyQualifiedName).containsExactly("package.mod.A", "package.mod.A", "package.mod.A");
+    assertThat(ambiguousDescriptor.alternatives()).extracting(Descriptor::fullyQualifiedName).containsExactly("my_package.mod.A", "my_package.mod.A", "my_package.mod.A");
     assertDescriptorToProtobuf(ambiguousDescriptor);
   }
 
@@ -101,13 +121,16 @@ class AmbiguousDescriptorTest {
   }
 
   private AmbiguousDescriptor lastAmbiguousDescriptor(String... code) {
-    Symbol ambiguousSymbol = lastSymbolFromDef(code);
-    if (!(ambiguousSymbol instanceof AmbiguousSymbol)) {
+    Name name = lastName(code);
+    PythonType pythonType = name.typeV2();
+    if (!(pythonType instanceof UnionType unionType)) {
       throw new AssertionError("Symbol is not ambiguous.");
     }
-    AmbiguousDescriptor ambiguousDescriptor = (AmbiguousDescriptor) descriptor(ambiguousSymbol);
-    assertThat(ambiguousDescriptor.name()).isEqualTo(ambiguousSymbol.name());
-    assertThat(ambiguousDescriptor.fullyQualifiedName()).isEqualTo(ambiguousSymbol.fullyQualifiedName());
+    SymbolV2 symbol = name.symbolV2();
+    PythonTypeToDescriptorConverter converter = new PythonTypeToDescriptorConverter();
+    AmbiguousDescriptor ambiguousDescriptor = (AmbiguousDescriptor) converter.convert("my_package.mod", symbol, Set.of(unionType));
+    assertThat(ambiguousDescriptor.name()).isEqualTo(name.name());
+    assertThat(ambiguousDescriptor.fullyQualifiedName()).isEqualTo("my_package.mod." + symbol.name());
     return ambiguousDescriptor;
   }
 }

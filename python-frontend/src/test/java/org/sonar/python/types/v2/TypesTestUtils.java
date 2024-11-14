@@ -20,7 +20,11 @@
 package org.sonar.python.types.v2;
 
 import org.sonar.plugins.python.api.PythonFile;
+import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.FileInput;
+import org.sonar.plugins.python.api.tree.FunctionDef;
+import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.PythonTestUtils;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.semantic.v2.ProjectLevelTypeTable;
@@ -46,7 +50,7 @@ public class TypesTestUtils {
   public static final PythonType EXCEPTION_TYPE = BUILTINS.resolveMember("Exception").get();
 
   public static FileInput parseAndInferTypes(String... code) {
-    return parseAndInferTypes(PythonTestUtils.pythonFile(""), code);
+    return parseAndInferTypes(PythonTestUtils.pythonFile("mod"), code);
   }
 
   public static FileInput parseAndInferTypes(PythonFile pythonFile, String... code) {
@@ -59,4 +63,26 @@ public class TypesTestUtils {
     new TypeInferenceV2(typeTable, pythonFile, symbolTable, "my_package").inferTypes(fileInput);
     return fileInput;
   }
+
+  public static ClassDef lastClassDef(String... code) {
+    FileInput fileInput = parseAndInferTypes(code);
+    return PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Tree.Kind.CLASSDEF));
+  }
+
+  public static FunctionDef lastFunctionDef(String... code) {
+    FileInput fileInput = parseAndInferTypes(code);
+    return PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Tree.Kind.FUNCDEF));
+  }
+
+  public static ClassDef lastClassDefWithName(String name, String... code) {
+    FileInput fileInput = parseAndInferTypes(code);
+    return PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Tree.Kind.CLASSDEF) && ((ClassDef) t).name().name().equals(name));
+  }
+
+  public static Name lastName(String... code) {
+    FileInput fileInput = parseAndInferTypes(code);
+    Tree tree = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Tree.Kind.NAME));
+    return (Name) tree;
+  }
+
 }
