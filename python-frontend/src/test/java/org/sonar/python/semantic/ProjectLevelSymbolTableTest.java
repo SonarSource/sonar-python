@@ -1191,6 +1191,20 @@ class ProjectLevelSymbolTableTest {
   }
 
   @Test
+  void class_wth_call_result_metaclass() {
+    var code = """
+      def foo(): ...
+      class WithMetaclass(metaclass=foo()): ...
+      """;
+
+    var projectSymbolTable = new ProjectLevelSymbolTable();
+    projectSymbolTable.addModule(parseWithoutSymbols(code), "", pythonFile("mod.py"));
+    var symbol = (ClassSymbolImpl) projectSymbolTable.getSymbol("mod.WithMetaclass");
+    assertThat(symbol.hasMetaClass()).isTrue();
+    assertThat(symbol.metaclassFQN()).isNull();
+  }
+
+  @Test
   void projectPackages() {
     ProjectLevelSymbolTable projectLevelSymbolTable = new ProjectLevelSymbolTable();
     projectLevelSymbolTable.addProjectPackage("first.package");

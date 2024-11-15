@@ -132,6 +132,7 @@ public class PythonTypeToDescriptorConverter {
     var metaclassFQN = type.metaClasses()
       .stream()
       .map(metaClass -> typeFqn(moduleFqn, metaClass))
+      .filter(Objects::nonNull)
       .findFirst()
       .orElse(null);
 
