@@ -1050,6 +1050,29 @@ class PythonTreeMakerTest extends RuleTest {
   }
 
   @Test
+  void classdef_with_expresssion_args() {
+    setRootRule(PythonGrammar.CLASSDEF);
+    var astNode = p.parse("""
+      class name_2((name_4 for name_5 in name_0 if name_3), name_2 if name_3 else name_0):
+        pass
+      """);
+    var classDefNode = treeMaker.classDefStatement(astNode);
+
+    assertThat(classDefNode.name().name()).isEqualTo("name_2");
+
+    var args = classDefNode.args().arguments();
+    assertThat(args).hasSize(2);
+
+    assertThat(args.get(0)).isInstanceOfSatisfying(RegularArgument.class, arg -> {
+      assertThat(arg.expression()).isInstanceOf(ComprehensionExpression.class);
+    });
+
+    assertThat(args.get(1)).isInstanceOfSatisfying(RegularArgument.class, arg -> {
+      assertThat(arg.expression()).isInstanceOf(ConditionalExpression.class);
+    });
+  }
+
+  @Test
   void for_statement() {
     setRootRule(PythonGrammar.FOR_STMT);
     AstNode astNode = p.parse("for foo in bar: pass");
@@ -2902,6 +2925,18 @@ class PythonTreeMakerTest extends RuleTest {
     assertThat(typeAlias.expression()).isNotNull();
     assertThat(typeAlias.expression().is(Kind.NAME)).isTrue();
     assertThat(((Name) typeAlias.expression()).name()).isEqualTo("str");
+  }
+
+  @Test
+  void typeAliasWithComprehensions() {
+    setRootRule(PythonGrammar.TYPE_ALIAS_STMT);
+    var astNode = p.parse("type A = [i for i in range(3)]");
+    var statementWithSeparator = new StatementWithSeparator(astNode, null);
+    var typeAlias = treeMaker.typeAliasStatement(statementWithSeparator);
+
+    assertThat(typeAlias.expression()).isInstanceOf(ComprehensionExpression.class);
+    ComprehensionExpression comprehensionExpr = (ComprehensionExpression) typeAlias.expression();
+    assertThat(comprehensionExpr.getKind()).isEqualTo(Tree.Kind.LIST_COMPREHENSION);
   }
 
   public String fileContent(File file) {
