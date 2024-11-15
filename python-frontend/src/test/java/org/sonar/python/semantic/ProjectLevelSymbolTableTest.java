@@ -1077,6 +1077,24 @@ class ProjectLevelSymbolTableTest {
     assertThat(projectSymbolTable.isDjangoView("views.foo")).isTrue();
   }
 
+  @Test
+  void django_views_same_class() {
+    String content = """
+      from django.urls import path
+
+      class ClassWithViews:
+        def view_method(self):
+          ...
+
+        def get_urlpatterns(self):
+          return [path("something", self.view_method, name="something")]
+      """;
+    ProjectLevelSymbolTable projectSymbolTable = new ProjectLevelSymbolTable();
+    projectSymbolTable.addModule(parseWithoutSymbols(content), "my_package", pythonFile("mod.py"));
+    // SONARPY-2322: should be true
+    assertThat(projectSymbolTable.isDjangoView("my_package.mod.ClassWithViews.view_method")).isFalse();
+  }
+
   /**
    * The variable `foo` which is assigned in the decorator of the function should belong to the global scope not the function scope
    */
