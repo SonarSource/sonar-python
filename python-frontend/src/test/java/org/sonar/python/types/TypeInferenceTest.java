@@ -20,8 +20,10 @@
 package org.sonar.python.types;
 
 import java.util.List;
+import org.assertj.core.groups.Tuple;
 import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
+import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Decorator;
@@ -41,6 +43,7 @@ import org.sonar.python.semantic.SymbolTableBuilder;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonar.python.PythonTestUtils.getLastDescendant;
+import static org.sonar.python.PythonTestUtils.lastClassSymbolWithName;
 import static org.sonar.python.PythonTestUtils.lastExpression;
 import static org.sonar.python.PythonTestUtils.lastExpressionInFunction;
 import static org.sonar.python.PythonTestUtils.lastStatement;
@@ -801,6 +804,21 @@ class TypeInferenceTest {
       "  e.attr = 'hello'",
       "  e.attr"
     ).type()).isEqualTo(DECL_INT);
+  }
+
+  @Test
+  void child_class_method_call_is_a_member_of_parent_class() {
+    ClassSymbol classA = lastClassSymbolWithName("A", """
+      class A:
+        def meth(self):
+          return self.foo()
+      class B(A):
+        def foo(self): pass
+      """
+    );
+    assertThat(classA.canHaveMember("foo")).isTrue();
+    assertThat(classA.declaredMembers()).extracting("kind", "name")
+      .containsExactlyInAnyOrder(Tuple.tuple(Symbol.Kind.FUNCTION, "meth"), Tuple.tuple(Symbol.Kind.OTHER, "foo"));
   }
 
   @Test
