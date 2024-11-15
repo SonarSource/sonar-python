@@ -1,5 +1,4 @@
-from changeMethodContractIntermediate import IntermediateClass, IntermediateWithAnyClass
-from changeMethodContractParent import ParentClass
+from changeMethodContractParent import ParentClass, IntermediateWithGenericParentClass, IntermediateClass
 from typing import Any
 
 class ChildClass(ParentClass):
@@ -15,7 +14,7 @@ class ChildClass(ParentClass):
   def attr(self): ...
   def using_tuple(self, (a, b, c)): ... # FN
 
-class ChildClassWithAny(ParentClass[Any]):
+class ChildWithGenericParentClass(ParentClass[Any]):
   def __init__(p1, p2, p3): ... # OK
   def compliant(self, param1): ...
   def with_keyword_only(self, param1, param2, param3): ... # Noncompliant
@@ -41,7 +40,7 @@ class ChildFromIntermediateClass(IntermediateClass):
   def attr(self): ...
   def using_tuple(self, (a, b, c)): ... # FN
 
-class ChildFromIntermediateWithAnyClass(IntermediateWithAnyClass):
+class ChildFromIntermediateWithGenericParentClass(IntermediateWithGenericParentClass):
   def __init__(p1, p2, p3): ... # OK
   def compliant(self, param1): ...
   def with_keyword_only(self, param1, param2, param3): ... # FN SONARPY-2344
