@@ -9,7 +9,7 @@ def assigned_directly():
   my_str_ok: str = 42  # Noncompliant
   my_int_ok: int = 42  # OK
   my_str_ok: str = "hello"  # OK
-  a : ClassWithFieldOnly = None # FN
+  a : ClassWithFieldOnly = None # Noncompliant
   b : ClassWithMethodOnly = None # Noncompliant
 
 def return_union() -> Union[str, float]:

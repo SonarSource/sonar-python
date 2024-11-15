@@ -2,7 +2,7 @@ from typing import NamedTuple
 from functionReturnTypeImported import ImportedFieldMembersOnlyNamedTuple, ImportedMethodMembersOnlyNamedTuple
 
 def get_imported_field_members_only_named_tuple() -> ImportedFieldMembersOnlyNamedTuple:
-  return None # FN SONARPY-2316
+  return None # Noncompliant
 
 def get_imported_method_members_only_named_tuple() -> ImportedMethodMembersOnlyNamedTuple:
   return None # Noncompliant
