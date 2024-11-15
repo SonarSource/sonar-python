@@ -36,6 +36,14 @@ class UnsafeHttpMethodsCheckTest {
   }
 
   @Test
+  void test_django_views_and_urls_same_file() {
+    PythonCheckVerifier.verify(
+      "src/test/resources/checks/hotspots/unsafeHttpMethods/django/views_and_urls_same_file.py",
+      new UnsafeHttpMethodsCheck()
+    );
+  }
+
+  @Test
   void test_flask() {
     PythonCheckVerifier.verify(Arrays.asList(
       "src/test/resources/checks/hotspots/unsafeHttpMethods/flask/views.py",

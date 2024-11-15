@@ -1056,17 +1056,17 @@ class ProjectLevelSymbolTableTest {
     String content = """
       from django.urls import path
 
-      class SameClassView:
-        def chosen_view(self):
+      class ClassWithViews:
+        def view_method(self):
           ...
 
         def get_urlpatterns(self):
-          return [path("something", self.chosen_view, name="something")]
+          return [path("something", self.view_method, name="something")]
       """;
     ProjectLevelSymbolTable projectSymbolTable = new ProjectLevelSymbolTable();
     projectSymbolTable.addModule(parseWithoutSymbols(content), "my_package", pythonFile("mod.py"));
     // SONARPY-2322: should be true
-    assertThat(projectSymbolTable.isDjangoView("my_package.mod.SameClassView.chosen_view")).isFalse();
+    assertThat(projectSymbolTable.isDjangoView("my_package.mod.ClassWithViews.view_method")).isFalse();
   }
 
   /**
