@@ -20,8 +20,12 @@
 package org.sonar.python.semantic.v2.typeshed;
 
 import java.util.Set;
+import java.util.stream.Stream;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.sonar.plugins.python.api.PythonVersionUtils;
 import org.sonar.python.index.AmbiguousDescriptor;
 import org.sonar.python.index.ClassDescriptor;
@@ -30,7 +34,6 @@ import org.sonar.python.index.VariableDescriptor;
 import org.sonar.python.types.protobuf.SymbolsProtos;
 
 class ModuleSymbolToDescriptorConverterTest {
-
   @Test
   void test() {
     var converter = new ModuleSymbolToDescriptorConverter(PythonVersionUtils.allVersions());
@@ -90,9 +93,18 @@ class ModuleSymbolToDescriptorConverterTest {
     Assertions.assertThat(descriptor).isNull();
   }
 
-  @Test
-  void validForPythonVersionsTest() {
-    var converter = new ModuleSymbolToDescriptorConverter(Set.of(PythonVersionUtils.Version.V_312));
+
+  static Stream<Arguments> versionsToTest() {
+    return Stream.of(
+      Arguments.of(PythonVersionUtils.Version.V_312),
+      Arguments.of(PythonVersionUtils.Version.V_313)
+    );
+  }
+
+  @ParameterizedTest
+  @MethodSource("versionsToTest")
+  void validForPythonVersionsTest(PythonVersionUtils.Version requestedVersion) {
+    var converter = new ModuleSymbolToDescriptorConverter(Set.of(requestedVersion));
     var symbol = SymbolsProtos.ModuleSymbol.newBuilder()
       .setFullyQualifiedName("module")
       .addVars(SymbolsProtos.VarSymbol.newBuilder()

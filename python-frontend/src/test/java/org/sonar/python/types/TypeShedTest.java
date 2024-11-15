@@ -476,6 +476,10 @@ class TypeShedTest {
     intSymbol = TypeShed.typeShedClass("int");
     assertThat(intSymbol.resolveMember("bit_count")).isNotEmpty();
 
+    setPythonVersions(PythonVersionUtils.fromString("3.13"));
+    intSymbol = TypeShed.typeShedClass("int");
+    assertThat(intSymbol.resolveMember("bit_count")).isNotEmpty();
+
     setPythonVersions(PythonVersionUtils.allVersions());
   }
 
