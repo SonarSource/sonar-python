@@ -178,6 +178,13 @@ public class PythonVersionUtils {
       .allMatch(version -> version.compare(required.major(), required.minor()) >= 0);
   }
 
+  /**
+   * @return the set of versions which are supported but not serialized due to SONARPY-1522
+   */
+  public static Set<Version> getNotSerializedVersions() {
+    return EnumSet.of(V_312, V_313);
+  }
+
   private static void logErrorMessage(String propertyValue) {
     LOG.warn(
       "Error while parsing value of parameter '{}' ({}). Versions must be specified as MAJOR_VERSION.MINOR_VERSION (e.g. \"3.7, 3.8\")",
