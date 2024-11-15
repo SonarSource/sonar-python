@@ -28,7 +28,10 @@ class ChangeMethodContractCheckTest {
   @Test
   void test() {
     PythonCheckVerifier.verify(
-      List.of("src/test/resources/checks/changeMethodContract.py", "src/test/resources/checks/changeMethodContractParent.py"),
+      List.of(
+        "src/test/resources/checks/changeMethodContract/changeMethodContract.py",
+        "src/test/resources/checks/changeMethodContract/changeMethodContractParent.py"
+      ),
       new ChangeMethodContractCheck()
     );
   }
