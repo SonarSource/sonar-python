@@ -33,7 +33,10 @@ class UnusedFunctionParameterCheckTest {
   @Test
   void test_import() {
     PythonCheckVerifier.verify(
-      List.of("src/test/resources/checks/unusedFunctionParameter/unusedFunctionParameterImport.py","src/test/resources/checks/unusedFunctionParameter/unusedFunctionParameterImported.py"),
+      List.of(
+        "src/test/resources/checks/unusedFunctionParameter/unusedFunctionParameterImport.py",
+        "src/test/resources/checks/unusedFunctionParameter/unusedFunctionParameterImported.py"
+      ),
       new UnusedFunctionParameterCheck()
     );
   }
