@@ -46,6 +46,7 @@ import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.Decorator;
+import org.sonar.plugins.python.api.tree.DottedName;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.HasSymbol;
@@ -505,6 +506,14 @@ public class TreeUtils {
       valueBuilder.append(token.value());
     }
     return valueBuilder.toString();
+  }
+
+
+  public static List<String> dottedNameToPartFqn(DottedName dottedName) {
+    return dottedName.names()
+      .stream()
+      .map(Name::name)
+      .toList();
   }
 
 }
