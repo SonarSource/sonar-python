@@ -64,6 +64,7 @@ import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.semantic.SymbolUtils;
 import org.sonar.python.tree.ExpressionStatementImpl;
 import org.sonar.python.tree.TreeUtils;
+import org.sonar.python.tree.TupleImpl;
 import org.sonar.python.types.v2.ClassType;
 import org.sonar.python.types.v2.FunctionType;
 import org.sonar.python.types.v2.LazyType;
@@ -3174,6 +3175,139 @@ public class TypeInferenceV2Test {
       """);
     Assertions.assertThat(typesBySymbol).isNotEmpty();
     Assertions.assertThat(typesBySymbol.values().iterator().next()).isInstanceOf(ClassType.class);
+
+  @Test
+  void wildCardImportsMultiFile() {
+    FileInput tree = parseWithoutSymbols("""
+      def foo(): pass
+      def bar(): pass
+      """);
+    ProjectLevelSymbolTable projectLevelSymbolTable = new ProjectLevelSymbolTable();
+    var modFile = pythonFile("mod.py");
+    projectLevelSymbolTable.addModule(tree, "", modFile);
+    ProjectLevelTypeTable projectLevelTypeTable = new ProjectLevelTypeTable(projectLevelSymbolTable);
+
+    var lines = """
+      from mod import *
+      from mod import foo as imported_foo
+      (foo, imported_foo)
+      """;
+    TupleImpl tupleExpr = (TupleImpl) lastExpression(lines, projectLevelTypeTable);
+    List<Expression> tupleExpressions = tupleExpr.elements();
+    Expression fooExpr = tupleExpressions.get(0);
+    Expression importedFooExpr = tupleExpressions.get(1);
+
+    assertThat(fooExpr.typeV2()).isInstanceOf(FunctionType.class);
+    assertThat(importedFooExpr.typeV2()).isInstanceOf(FunctionType.class);
+  }
+
+  @Test
+  void conflictingWildCardImportsMultiFile() {
+    TupleImpl tupleExpr = (TupleImpl) new TestProject()
+      .addModule("mod1.py", "def foo(): pass")
+      .addModule("mod2.py", "def foo(): pass")
+      .lastExpression("""
+        from mod1 import *
+        from mod2 import *
+        from mod1 import foo as incorrect_foo
+        from mod2 import foo as correct_foo
+        (foo, incorrect_foo, correct_foo)
+        """);
+
+    List<Expression> tupleExpressions = tupleExpr.elements();
+    Expression fooExpr = tupleExpressions.get(0);
+    Expression incorrectFoo = tupleExpressions.get(1);
+    Expression correctFoo = tupleExpressions.get(2);
+
+    assertThat(fooExpr.typeV2())
+      .isInstanceOf(FunctionType.class)
+      .isEqualTo(correctFoo.typeV2())
+      .isNotEqualTo(incorrectFoo.typeV2());
+  }
+
+  public static Stream<Arguments> wildCardImportConflictsWithOtherImportMultiFileSource() {
+    return Stream.of(
+      Arguments.argumentSet("wildcard first", """
+        from mod1 import *
+        from mod2 import foo
+        import mod1
+        import mod2
+        (foo, mod1.foo, mod2.foo)
+        """),
+      // foo should be mod2.foo, not mod1.foo. Since wildcard imports are only assigned to names without a symbol, foo will be equal to mod1.foo. See SONARPY-2357
+      Arguments.argumentSet("wildcard second", """
+        from mod1 import foo
+        from mod2 import *
+        import mod1
+        import mod2
+        (foo, mod2.foo, mod1.foo)
+        """)
+    );
+  }
+
+  @MethodSource("wildCardImportConflictsWithOtherImportMultiFileSource")
+  @ParameterizedTest
+  void wildCardImportConflictsWithOtherImportMultiFile(String sourcecode) {
+    TupleImpl tupleExpr = (TupleImpl) new TestProject()
+      .addModule("mod1.py", "def foo(): pass")
+      .addModule("mod2.py", "def foo(): pass")
+      .lastExpression(sourcecode);
+
+    List<Expression> tupleExpressions = tupleExpr.elements();
+    Expression fooExpr = tupleExpressions.get(0);
+    Expression incorrectFoo = tupleExpressions.get(1);
+    Expression correctFoo = tupleExpressions.get(2);
+
+    assertThat(fooExpr.typeV2())
+      .isInstanceOf(FunctionType.class)
+      .isEqualTo(correctFoo.typeV2())
+      .isNotEqualTo(incorrectFoo.typeV2());
+  }
+
+  @Test
+  void wildCardInInnerScopeMultiFile() {
+    Expression fooExpr = new TestProject()
+      .addModule("mod.py", "def foo(): pass")
+      .lastExpression("""
+        def bar():
+          from mod import *
+        foo
+        """);
+
+    // foo should be UNKNOWN, but is resolved to foo because wildcard imports don't respect scoping. See SONARPY-2357
+    assertThat(fooExpr.typeV2()).isNotEqualTo(PythonType.UNKNOWN);
+  }
+
+  @Test
+  void wildCardAfterUseMultiFile() {
+    Expression vExpr = new TestProject()
+      .addModule("mod.py", "def foo(): pass")
+      .lastExpression("""
+        v = foo
+        from mod import *
+        v
+        """);
+
+    assertThat(vExpr.typeV2()).isEqualTo(PythonType.UNKNOWN);
+  }
+
+  @Test
+  void reexportedWildcardImport() {
+    TupleImpl tupleExpr = new TestProject()
+      .addModule("mod1.py", "def foo(): pass")
+      .addModule("mod2.py", "from mod1 import *")
+      .lastExpressionAsTuple("""
+        import mod2
+        from mod1 import foo as actual_foo
+        (mod2.foo, actual_foo)
+        """);
+
+    var importedFoo = tupleExpr.elements().get(0);
+    var actualFoo = tupleExpr.elements().get(1);
+
+    assertThat(importedFoo.typeV2())
+      .isEqualTo(PythonType.UNKNOWN)
+      .isNotEqualTo(actualFoo.typeV2());
   }
 
   private static Map<SymbolV2, Set<PythonType>> inferTypesBySymbol(String lines) {
@@ -3197,7 +3331,11 @@ public class TypeInferenceV2Test {
   }
 
   public static Expression lastExpression(String lines) {
-    FileInput fileInput = inferTypes(lines);
+    return lastExpression(lines, PROJECT_LEVEL_TYPE_TABLE);
+  }
+
+  public static Expression lastExpression(String lines, ProjectLevelTypeTable projectLevelTypeTable) {
+    FileInput fileInput = inferTypes(lines, projectLevelTypeTable);
     Statement statement = lastStatement(fileInput.statements());
     if (!(statement instanceof ExpressionStatement)) {
       assertThat(statement).isInstanceOf(FunctionDef.class);
@@ -3212,5 +3350,26 @@ public class TypeInferenceV2Test {
   private static Statement lastStatement(StatementList statementList) {
     List<Statement> statements = statementList.statements();
     return statements.get(statements.size() - 1);
+  }
+
+  private static class TestProject {
+    private final ProjectLevelSymbolTable projectLevelSymbolTable = new ProjectLevelSymbolTable();
+
+    public TestProject addModule(String moduleName, String code) {
+      FileInput tree = parseWithoutSymbols(code);
+      projectLevelSymbolTable.addModule(tree, "", pythonFile(moduleName));
+      return this;
+    }
+
+    public Expression lastExpression(String code) {
+      ProjectLevelTypeTable projectLevelTypeTable = new ProjectLevelTypeTable(projectLevelSymbolTable);
+      return TypeInferenceV2Test.lastExpression(code, projectLevelTypeTable);
+    }
+
+    public TupleImpl lastExpressionAsTuple(String code) {
+      Expression lastExpr = lastExpression(code);
+      assertThat(lastExpr).isInstanceOf(TupleImpl.class);
+      return (TupleImpl) lastExpr;
+    }
   }
 }

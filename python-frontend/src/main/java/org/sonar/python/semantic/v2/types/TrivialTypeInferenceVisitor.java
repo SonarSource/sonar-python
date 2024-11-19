@@ -24,8 +24,10 @@ import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Deque;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
@@ -91,6 +93,7 @@ import org.sonar.python.types.v2.TriBool;
 import org.sonar.python.types.v2.TypeCheckBuilder;
 import org.sonar.python.types.v2.TypeOrigin;
 import org.sonar.python.types.v2.TypeSource;
+import org.sonar.python.types.v2.TypeWrapper;
 import org.sonar.python.types.v2.UnionType;
 import org.sonar.python.types.v2.UnknownType;
 
@@ -106,6 +109,8 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
 
   private final Deque<Scope> typeStack = new ArrayDeque<>();
   private final Set<String> importedModulesFQN = new HashSet<>();
+
+  private final Map<String, TypeWrapper> wildcardImportedTypes = new HashMap<>();
 
   private record Scope(PythonType type, String scopeFullyQualifiedName) {}
 
@@ -413,6 +418,17 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
     }
     importedModulesFQN.add(String.join(".", fromModuleFqn));
     setTypeToImportFromStatement(importFrom, fromModuleFqn);
+
+    if(importFrom.isWildcardImport()) {
+      collectWildcardImportedSymbols(fromModuleFqn);
+    }
+  }
+
+  private void collectWildcardImportedSymbols(List<String> moduleFqn) {
+    PythonType resolvedModuleType = projectLevelTypeTable.getModuleType(moduleFqn);
+    if(resolvedModuleType instanceof ModuleType moduleType) {
+      wildcardImportedTypes.putAll(moduleType.members());
+    }
   }
 
   private static List<String> dottedNameToPartFqn(DottedName dottedName) {
@@ -551,8 +567,15 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
     SymbolV2 symbolV2 = name.symbolV2();
     if (symbolV2 == null) {
 //    This part could be affected by SONARPY-1802
-      projectLevelTypeTable.getBuiltinsModule().resolveMember(name.name())
-        .ifPresent(type -> setTypeToName(name, type));
+      var builtInType = projectLevelTypeTable.getBuiltinsModule().resolveMember(name.name());
+      if (builtInType.isPresent()) {
+        setTypeToName(name, builtInType.get());
+      } else {
+        TypeWrapper wildcardImportedType = wildcardImportedTypes.get(name.name());
+        if (wildcardImportedType != null) {
+          setTypeToName(name, wildcardImportedType.type());
+        }
+      }
       return;
     }
 
@@ -581,6 +604,7 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
       // TODO: classes (SONARPY-1829) and functions should be propagated like other types
       .filter(TrivialTypeInferenceVisitor::shouldTypeBeEagerlyPropagated)
       .ifPresent(type -> setTypeToName(name, type));
+
   }
 
   private static boolean shouldTypeBeEagerlyPropagated(PythonType t) {
