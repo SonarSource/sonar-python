@@ -31,6 +31,7 @@ import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.tree.AnyParameter;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.ClassDef;
+import org.sonar.plugins.python.api.tree.DottedName;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
@@ -668,6 +669,25 @@ class TreeUtilsTest {
     statements = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Kind.STATEMENT_LIST));
     result = TreeUtils.treeToString(statements, false);
     assertThat(result).isEqualTo(input);
+  }
+
+  @Test
+  void dottedNameToPart() {
+    var input = "import a.b";
+    var fileInput = PythonTestUtils.parse(input);
+    var statements = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Kind.DOTTED_NAME));
+    var result = TreeUtils.dottedNameToPartFqn((DottedName) statements);
+    assertThat(result).hasSameElementsAs(List.of("a", "b"));
+    input = "import mod";
+    fileInput = PythonTestUtils.parse(input);
+    statements = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Kind.DOTTED_NAME));
+    result = TreeUtils.dottedNameToPartFqn((DottedName) statements);
+    assertThat(result).hasSameElementsAs(List.of("mod"));
+    input = "from a import *";
+    fileInput = PythonTestUtils.parse(input);
+    statements = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Kind.DOTTED_NAME));
+    result = TreeUtils.dottedNameToPartFqn((DottedName) statements);
+    assertThat(result).hasSameElementsAs(List.of("a"));
   }
 
   private static boolean isOuterFunction(Tree tree) {
