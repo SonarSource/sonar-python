@@ -194,13 +194,34 @@ class ComparingTypeAndClass(unittest.TestCase):
 
 
 from enum import Enum
-
-class Flag(Enum):
-    ...
-
 class ComparingTypeAndEnum(unittest.TestCase):
     def test_type_of_enum_and_enum_class(self):
-        FlagType = Flag(...)
-        flag = FlagType(...)
-        # FP SONARPY-2332: FlagType is a proper "type" object as an instance of "Flag", due to it being an Enum
-        self.assertIs(type(flag), FlagType)  # Noncompliant
+        EnumType = Enum("EnumType", names=["one", "two"])
+        enum_member = EnumType(1)
+        # FP SONARPY-2332: EnumType is a proper "type" object as an instance of "Flag", due to it being an Enum
+        self.assertIs(type(enum_member), EnumType) # Noncompliant
+
+class DerivedEnumWithMembers(Enum):
+    ONE = 1
+    TWO = 2
+
+class ComparingTypeAndDerivedEnumWithMembers(unittest.TestCase):
+    def test_type_of_derived_enum_and_derived_enum_class(self):
+        derived_enum_member = DerivedEnumWithMembers(1)
+        self.assertIs(type(enum_member), EnumType)
+
+class DerivedEnumWithoutMembers(Enum):
+    ...
+
+from collections import OrderedDict
+class ComparingTypeAndDerivedEnumWithoutMembers(unittest.TestCase):
+    def test_type_of_derived_enum_and_derived_enum_class(self):
+        DerivedEnumType = DerivedEnumWithoutMembers("DerivedEnumType", names=["one", "two"])
+        derived_enum_member = DerivedEnumType(1)
+        # FP SONARPY-2332: DerivedEnumType is a proper "type" object as an instance of "DerivedEnumWithoutMembers", due to it being an Enum
+        self.assertIs(type(derived_enum_member), DerivedEnumType) # Noncompliant
+
+        DerivedEnumTypeFromDict = DerivedEnumWithoutMembers("DerivedEnumType", OrderedDict([("one", 1), ("two", 2)]))
+        derived_enum_member_from_dict = DerivedEnumTypeFromDict(1)
+        # FP SONARPY-2332: DerivedEnumTypeFromDict is a proper "type" object as an instance of "DerivedEnumWithoutMembers", due to it being an Enum
+        self.assertIs(type(derived_enum_member_from_dict), DerivedEnumTypeFromDict) # Noncompliant
