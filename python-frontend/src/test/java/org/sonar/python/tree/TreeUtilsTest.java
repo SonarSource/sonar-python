@@ -132,8 +132,8 @@ class TreeUtilsTest {
     assertThat(TreeUtils.getSymbolFromTree(null)).isEmpty();
 
     Expression expression = lastExpression(
-            "x = 42",
-            "x");
+      "x = 42",
+      "x");
     assertThat(TreeUtils.getSymbolFromTree(expression)).contains(((HasSymbol) expression).symbol());
 
     expression = lastExpression("foo()");
@@ -152,8 +152,7 @@ class TreeUtilsTest {
     fileInput = PythonTestUtils.parse(
       "class A:",
       "    pass",
-      "A = 42"
-    );
+      "A = 42");
     classDef = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Kind.CLASSDEF));
     assertThat(TreeUtils.getClassSymbolFromDef(classDef)).isNull();
   }
@@ -211,8 +210,7 @@ class TreeUtilsTest {
     fileInput = PythonTestUtils.parse(
       "def foo():",
       "    pass",
-      "foo = 42"
-    );
+      "foo = 42");
     functionDef = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Kind.FUNCDEF));
     assertThat(TreeUtils.getFunctionSymbolFromDef(functionDef)).isNull();
   }
@@ -262,8 +260,7 @@ class TreeUtilsTest {
     functionDef = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Kind.FUNCDEF));
     List<AnyParameter> parameters = functionDef.parameters().all();
     assertThat(TreeUtils.positionalParameters(functionDef)).isEqualTo(
-      Arrays.asList(parameters.get(0), parameters.get(2)
-    ));
+      Arrays.asList(parameters.get(0), parameters.get(2)));
   }
 
   @Test
@@ -275,8 +272,7 @@ class TreeUtilsTest {
       "    if x:",
       "        def bar(self, x): return 1",
       "    else:",
-      "        def baz(self, x, y): return x + y"
-    );
+      "        def baz(self, x, y): return x + y");
 
     ClassDef classDef = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Kind.CLASSDEF));
     List<FunctionDef> functionDefs = PythonTestUtils.getAllDescendant(fileInput, t -> t.is(Kind.FUNCDEF));
@@ -290,8 +286,7 @@ class TreeUtilsTest {
       "        def foo2(x, y): return x + y",
       "        return foo2(1, 1)",
       "    class B:",
-      "        def bar(self): pass"
-    );
+      "        def bar(self): pass");
     classDef = PythonTestUtils.getFirstChild(fileInput, t -> t.is(Kind.CLASSDEF));
     FunctionDef fooDef = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Kind.FUNCDEF) && ((FunctionDef) t).name().name().equals("foo"));
 
@@ -302,8 +297,7 @@ class TreeUtilsTest {
   void test_nthArgumentOrKeyword() {
     FileInput fileInput = PythonTestUtils.parse(
       "def foo(p0, p1, p2): ...",
-      "foo(1, 2, p2 = 3)"
-    );
+      "foo(1, 2, p2 = 3)");
     CallExpression callExpr = PythonTestUtils.getLastDescendant(fileInput, tree -> tree.is(Kind.CALL_EXPR));
     RegularArgument p1 = TreeUtils.nthArgumentOrKeyword(1, "p1", callExpr.arguments());
     assertThat(p1.expression().is(Kind.NUMERIC_LITERAL)).isTrue();
@@ -319,8 +313,7 @@ class TreeUtilsTest {
     FileInput fileInput = PythonTestUtils.parse(
       "def foo(p0, p1, p2): ...",
       "args = [1, 2, 3]",
-      "foo(*args)"
-    );
+      "foo(*args)");
 
     CallExpression callExpr = PythonTestUtils.getLastDescendant(fileInput, tree -> tree.is(Kind.CALL_EXPR));
     RegularArgument p1 = TreeUtils.nthArgumentOrKeyword(1, "p1", callExpr.arguments());
@@ -331,8 +324,7 @@ class TreeUtilsTest {
   void test_nthArgumentOrKeyword_no_positional() {
     FileInput fileInput = PythonTestUtils.parse(
       "def foo(p0, p1 = 2, p2 = 3): ...",
-      "foo(0, p2 = 4)"
-    );
+      "foo(0, p2 = 4)");
 
     CallExpression callExpr = PythonTestUtils.getLastDescendant(fileInput, tree -> tree.is(Kind.CALL_EXPR));
     RegularArgument p1 = TreeUtils.nthArgumentOrKeyword(1, "p1", callExpr.arguments());
@@ -343,8 +335,7 @@ class TreeUtilsTest {
   void test_argumentByKeyword() {
     FileInput fileInput = PythonTestUtils.parse(
       "def foo(p0, p1, p2): ...",
-      "foo(p1 = 1, p2 = 2)"
-    );
+      "foo(p1 = 1, p2 = 2)");
     CallExpression callExpr = PythonTestUtils.getLastDescendant(fileInput, tree -> tree.is(Kind.CALL_EXPR));
     RegularArgument p1 = TreeUtils.argumentByKeyword("p1", callExpr.arguments());
     assertThat(p1.expression().is(Kind.NUMERIC_LITERAL)).isTrue();
@@ -386,22 +377,19 @@ class TreeUtilsTest {
   void test_fullyQualifiedNameFromQualifiedExpression() {
     FileInput fileInput = PythonTestUtils.parse(
       "from third_party_lib import (element as alias)",
-      "a = alias.attribute"
-    );
+      "a = alias.attribute");
     QualifiedExpression qualifiedExpression = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Kind.QUALIFIED_EXPR));
     assertThat(TreeUtils.fullyQualifiedNameFromQualifiedExpression(qualifiedExpression)).contains("third_party_lib.element.attribute");
 
     fileInput = PythonTestUtils.parse(
       "from third_party_lib import (element as alias)",
-      "a = alias().attribute"
-    );
+      "a = alias().attribute");
     qualifiedExpression = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Kind.QUALIFIED_EXPR));
     assertThat(TreeUtils.fullyQualifiedNameFromQualifiedExpression(qualifiedExpression)).contains("third_party_lib.element.attribute");
 
     fileInput = PythonTestUtils.parse(
       "from third_party_lib import (element as alias)",
-      "a = alias.attr"
-    );
+      "a = alias.attr");
     qualifiedExpression = PythonTestUtils.getLastDescendant(fileInput, t -> t.is(Kind.QUALIFIED_EXPR));
     assertThat(TreeUtils.fullyQualifiedNameFromQualifiedExpression(qualifiedExpression)).contains("third_party_lib.element.attr");
   }
@@ -429,8 +417,7 @@ class TreeUtilsTest {
         @some_module.some_decorator
         def foo():
           ...
-        """
-    );
+        """);
     assertThat(TreeUtils.isFunctionWithGivenDecoratorFQN(fileInput, "some_module.some_decorator")).isFalse();
     FunctionDef functionDef = ((FunctionDef) fileInput.statements().statements().get(1));
     assertThat(TreeUtils.isFunctionWithGivenDecoratorFQN(functionDef, "some_module.some_decorator")).isTrue();
@@ -477,8 +464,7 @@ class TreeUtilsTest {
       "        def foo2(x, y): return x + y",
       "        return foo2(1, 1)",
       "    class B:",
-      "        def bar(self): pass"
-    );
+      "        def bar(self): pass");
     Tree tree = PythonTestUtils.getFirstChild(fileInput, t -> t.is(Kind.CLASSDEF));
 
     boolean classPresent = TreeUtils.toOptionalInstanceOf(ClassDef.class, tree)
@@ -501,8 +487,7 @@ class TreeUtilsTest {
       "        def foo2(x, y): return x + y",
       "        return foo2(1, 1)",
       "    class B:",
-      "        def bar(self): pass"
-    );
+      "        def bar(self): pass");
     Tree tree = PythonTestUtils.getFirstChild(fileInput, t -> t.is(Kind.CLASSDEF));
 
     boolean classPresent = Optional.of(tree)
@@ -527,8 +512,7 @@ class TreeUtilsTest {
       "        def foo2(x, y): return x + y",
       "        return foo2(1, 1)",
       "    class B:",
-      "        def bar(self): pass"
-    );
+      "        def bar(self): pass");
     Tree tree = PythonTestUtils.getFirstChild(fileInput, t -> t.is(Kind.CLASSDEF));
 
     boolean classPresent = Optional.of(tree)
@@ -553,8 +537,7 @@ class TreeUtilsTest {
       "        def foo2(x, y): return x + y",
       "        return foo2(1, 1)",
       "    class B:",
-      "        def bar(self): pass"
-    );
+      "        def bar(self): pass");
     Tree tree = PythonTestUtils.getFirstChild(fileInput, t -> t.is(Kind.CLASSDEF));
 
     boolean classPresent = Stream.of(tree)
@@ -569,6 +552,7 @@ class TreeUtilsTest {
 
     assertThat(funcDefPresent).isFalse();
   }
+
   @Test
   void test_findIndentationSize() {
     var fileInput = PythonTestUtils.parse("def foo():\n" +
@@ -634,7 +618,7 @@ class TreeUtilsTest {
   }
 
   @Test
-  void  test_firstChild() {
+  void test_firstChild() {
     var fileInput = PythonTestUtils.parse(
       "class A:",
       "    x = True",
@@ -642,8 +626,7 @@ class TreeUtilsTest {
       "        def foo2(x, y): return x + y",
       "        return foo2(1, 1)",
       "    class B:",
-      "        def bar(self): pass"
-    );
+      "        def bar(self): pass");
     var functionOpt = TreeUtils.firstChild(fileInput, t -> t.is(Kind.FUNCDEF));
     assertThat(functionOpt).isPresent();
 
