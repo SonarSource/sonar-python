@@ -142,6 +142,104 @@ public class TypeInferenceV2Test {
   }
 
   @Test
+  void builtinGenericType() {
+    Expression expression = lastExpression(
+      """
+        x = list[str]()
+        x
+        """
+    );
+    assertThat(expression.typeV2().unwrappedType()).isEqualTo(LIST_TYPE);
+  }
+
+  @Test
+  void userDefinedGenericType() {
+    FileInput fileInput = inferTypes(
+      """
+        from typing import Generic
+        class MyClass(Generic[T]): ...
+        x = MyClass[str]()
+        x
+        """
+    );
+    PythonType classType = ((ClassDef) fileInput.statements().statements().get(1)).name().typeV2();
+    ObjectType xType = (ObjectType) ((ExpressionStatement) fileInput.statements().statements().get(3)).expressions().get(0).typeV2();
+    assertThat(xType.unwrappedType()).isEqualTo(classType);
+    // SONARPY-2356: Instantiation of specialized classes
+    assertThat(xType.attributes()).isEmpty();
+  }
+
+  @Test
+  void inheritedGenericType() {
+    FileInput fileInput = inferTypes(
+      """
+        from typing import Generic
+        class MyClass(Generic[T]): ...
+        class MyOtherClass(MyClass[T]): ...
+        x = MyOtherClass[str]()
+        x
+        """
+    );
+    ClassType myOtherClassType = (ClassType) ((ClassDef) fileInput.statements().statements().get(2)).name().typeV2();
+    assertThat(myOtherClassType.isGeneric()).isTrue();
+    PythonType xType = ((ExpressionStatement) fileInput.statements().statements().get(4)).expressions().get(0).typeV2();
+    assertThat(xType.unwrappedType()).isEqualTo(myOtherClassType);
+  }
+
+  @Test
+  void inheritedGenericTypeNoSubscription() {
+    FileInput fileInput = inferTypes(
+      """
+        from typing import Generic
+        class MyClass(Generic[T]): ...
+        class MyOtherClass(MyClass): ...
+        # Note: this actually throws a TypeError
+        x = MyOtherClass[str]()
+        x
+        """
+    );
+    ClassType myOtherClassType = (ClassType) ((ClassDef) fileInput.statements().statements().get(2)).name().typeV2();
+    // MyOtherClass can no longer be considered generic (non-generic subclass)
+    assertThat(myOtherClassType.isGeneric()).isFalse();
+    PythonType xType = ((ExpressionStatement) fileInput.statements().statements().get(4)).expressions().get(0).typeV2();
+    assertThat(xType.unwrappedType()).isInstanceOf(UnknownType.UnknownTypeImpl.class);
+  }
+
+  @Test
+  void inheritedGenericTypeConcreteType() {
+    FileInput fileInput = inferTypes(
+      """
+        from typing import Generic
+        class MyClass(Generic[T]): ...
+        class MyOtherClass(MyClass[str]): ...
+        # Note: this instantiation actually throws a TypeError
+        x = MyOtherClass[str]()
+        x
+        """
+    );
+    ClassType myOtherClassType = (ClassType) ((ClassDef) fileInput.statements().statements().get(2)).name().typeV2();
+    // SONARPY-2356: MyOtherClass can no longer be considered generic (specialized version of MyClass)
+    assertThat(myOtherClassType.isGeneric()).isTrue();
+    PythonType xType = ((ExpressionStatement) fileInput.statements().statements().get(4)).expressions().get(0).typeV2();
+    assertThat(xType.unwrappedType()).isEqualTo(myOtherClassType);
+  }
+
+  @Test
+  void basicGenericTypeParameter() {
+    FileInput fileInput = inferTypes(
+      """
+        class MyClass[T](): ...
+        x = MyClass[str]()
+        x
+        """
+    );
+    ClassType myOtherClassType = (ClassType) ((ClassDef) fileInput.statements().statements().get(0)).name().typeV2();
+    assertThat(myOtherClassType.isGeneric()).isTrue();
+    PythonType xType = ((ExpressionStatement) fileInput.statements().statements().get(2)).expressions().get(0).typeV2();
+    assertThat(xType.unwrappedType()).isEqualTo(myOtherClassType);
+  }
+
+  @Test
   void testUnresolvedImports() {
     FileInput root = inferTypes("""
       import something.unknown

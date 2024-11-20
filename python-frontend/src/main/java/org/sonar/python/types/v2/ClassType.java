@@ -44,6 +44,7 @@ public final class ClassType implements PythonType {
   private final List<TypeWrapper> superClasses;
   private final List<PythonType> metaClasses;
   private final boolean hasDecorators;
+  private final boolean isGeneric;
   private final LocationInFile locationInFile;
 
   public ClassType(
@@ -54,6 +55,7 @@ public final class ClassType implements PythonType {
     List<TypeWrapper> superClasses,
     List<PythonType> metaClasses,
     boolean hasDecorators,
+    boolean isGeneric,
     @Nullable LocationInFile locationInFile) {
     this.name = name;
     this.fullyQualifiedName = fullyQualifiedName;
@@ -62,11 +64,12 @@ public final class ClassType implements PythonType {
     this.superClasses = superClasses;
     this.metaClasses = metaClasses;
     this.hasDecorators = hasDecorators;
+    this.isGeneric = isGeneric;
     this.locationInFile = locationInFile;
   }
 
   public ClassType(String name, String fullyQualifiedName) {
-    this(name, fullyQualifiedName, new HashSet<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), false, null);
+    this(name, fullyQualifiedName, new HashSet<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), false, false, null);
   }
 
   @Override
@@ -231,5 +234,9 @@ public final class ClassType implements PythonType {
 
   public boolean hasDecorators() {
     return hasDecorators;
+  }
+
+  public boolean isGeneric() {
+    return isGeneric;
   }
 }

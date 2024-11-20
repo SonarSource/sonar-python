@@ -19,6 +19,7 @@
  */
 package org.sonar.python.semantic.v2.typeshed;
 
+import javax.annotation.Nullable;
 import org.sonar.python.index.Descriptor;
 import org.sonar.python.index.VariableDescriptor;
 import org.sonar.python.types.protobuf.SymbolsProtos;
@@ -27,15 +28,16 @@ public class VarSymbolToDescriptorConverter {
 
   public Descriptor convert(SymbolsProtos.VarSymbol varSymbol) {
     var fullyQualifiedName = TypeShedUtils.normalizedFqn(varSymbol.getFullyQualifiedName());
-    var typeAnnotation = TypeShedUtils.getTypesNormalizedFqn(varSymbol.getTypeAnnotation());
+    SymbolsProtos.Type protoTypeAnnotation = varSymbol.getTypeAnnotation();
     var isImportedModule = varSymbol.getIsImportedModule();
+    var typeAnnotation = TypeShedUtils.getTypesNormalizedFqn(protoTypeAnnotation);
     if (isTypeAnnotationKnownToBeIncorrect(fullyQualifiedName)) {
       return new VariableDescriptor(varSymbol.getName(), fullyQualifiedName, null, isImportedModule);
     }
     return new VariableDescriptor(varSymbol.getName(), fullyQualifiedName, typeAnnotation, isImportedModule);
   }
 
-  private static boolean isTypeAnnotationKnownToBeIncorrect(String fullyQualifiedName) {
+  private static boolean isTypeAnnotationKnownToBeIncorrect(@Nullable String fullyQualifiedName) {
     // TypedDict is defined to have type "object" in Typeshed, which is incorrect and leads to FPs
     return "typing.TypedDict".equals(fullyQualifiedName) || "typing_extensions.TypedDict".equals(fullyQualifiedName);
   }

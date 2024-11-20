@@ -110,7 +110,7 @@ class PythonTypeToDescriptorConverterTest {
 
   @Test
   void testConvertClassType() {
-    ClassType classType = new ClassType("classType", "my_package.classType", Set.of(new Member("aMember", intTypeWrapper.type())), List.of(), List.of(floatTypeWrapper), List.of(intTypeWrapper.type()), true, location);
+    ClassType classType = new ClassType("classType", "my_package.classType", Set.of(new Member("aMember", intTypeWrapper.type())), List.of(), List.of(floatTypeWrapper), List.of(intTypeWrapper.type()), true, false, location);
     Descriptor descriptor = converter.convert("foo", new SymbolV2("myClass"), Set.of(classType));
 
     assertThat(descriptor).isInstanceOf(ClassDescriptor.class);
@@ -188,8 +188,8 @@ class PythonTypeToDescriptorConverterTest {
 
   @Test
   void testConvertUnionType() {
-    ClassType classType = new ClassType("classType", "my_package.classType", Set.of(new Member("aMember", intTypeWrapper.type())), List.of(), List.of(floatTypeWrapper), List.of(intTypeWrapper.type()), true, location);
-    ClassType anotherClassType = new ClassType("classType", "my_package.classType", Set.of(new Member("aMember", intTypeWrapper.type())), List.of(), List.of(floatTypeWrapper), List.of(intTypeWrapper.type()), true, location);
+    ClassType classType = new ClassType("classType", "my_package.classType", Set.of(new Member("aMember", intTypeWrapper.type())), List.of(), List.of(floatTypeWrapper), List.of(intTypeWrapper.type()), true, false, location);
+    ClassType anotherClassType = new ClassType("classType", "my_package.classType", Set.of(new Member("aMember", intTypeWrapper.type())), List.of(), List.of(floatTypeWrapper), List.of(intTypeWrapper.type()), true, false, location);
     UnionType unionType = new UnionType(Set.of(classType, anotherClassType));
     Descriptor descriptor = converter.convert("foo", new SymbolV2("myUnionType"), Set.of(unionType));
 
@@ -206,7 +206,7 @@ class PythonTypeToDescriptorConverterTest {
 
   @Test
   void testConvertManyTypes() {
-    ClassType classType = new ClassType("classType", "my_package.classType", Set.of(new Member("aMember", intTypeWrapper.type())), List.of(), List.of(floatTypeWrapper), List.of(intTypeWrapper.type()), true, location);
+    ClassType classType = new ClassType("classType", "my_package.classType", Set.of(new Member("aMember", intTypeWrapper.type())), List.of(), List.of(floatTypeWrapper), List.of(intTypeWrapper.type()), true, false, location);
     FunctionType functionType = new FunctionType("functionType", "my_package.functionType", List.of(new ModuleType("bar")), List.of(), List.of(), floatTypeWrapper, TypeOrigin.LOCAL, true, false, true, false, null, location);
     Descriptor descriptor = converter.convert("foo", new SymbolV2("myUnionType"), Set.of(functionType, classType));
 
@@ -221,8 +221,8 @@ class PythonTypeToDescriptorConverterTest {
 
   @Test
   void testConvertManyTypesWithUnionType() {
-    ClassType classType = new ClassType("classType", "my_package.classType", Set.of(new Member("aMember", intTypeWrapper.type())), List.of(), List.of(floatTypeWrapper), List.of(intTypeWrapper.type()), true, location);
-    ClassType anotherClassType = new ClassType("classType", "my_package.classType", Set.of(new Member("aMember", intTypeWrapper.type())), List.of(), List.of(floatTypeWrapper), List.of(intTypeWrapper.type()), true, location);
+    ClassType classType = new ClassType("classType", "my_package.classType", Set.of(new Member("aMember", intTypeWrapper.type())), List.of(), List.of(floatTypeWrapper), List.of(intTypeWrapper.type()), true, false, location);
+    ClassType anotherClassType = new ClassType("classType", "my_package.classType", Set.of(new Member("aMember", intTypeWrapper.type())), List.of(), List.of(floatTypeWrapper), List.of(intTypeWrapper.type()), true, false, location);
 
     UnionType unionType = new UnionType(Set.of(classType, anotherClassType));
     Descriptor descriptor = converter.convert("foo", new SymbolV2("myUnionType"), Set.of(unionType, classType));

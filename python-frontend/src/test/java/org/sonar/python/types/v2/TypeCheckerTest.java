@@ -20,6 +20,7 @@
 package org.sonar.python.types.v2;
 
 import java.util.List;
+import java.util.Set;
 import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.tree.CallExpression;
@@ -328,5 +329,33 @@ class TypeCheckerTest {
       .isEqualTo(TriBool.FALSE);
     assertThat(builder.check(unionOfNoObjects))
       .isEqualTo(TriBool.FALSE);
+  }
+
+
+  @Test
+  void isGenericTest() {
+    var symbolTable = ProjectLevelSymbolTable.empty();
+    var table = new ProjectLevelTypeTable(symbolTable);
+    var builder = new TypeCheckBuilder(table).isGeneric();
+
+    var typingGenericType = table.getType("typing.Generic");
+    var typingUnionType = table.getType("typing.Union");
+
+    assertThat(builder.check(typingGenericType)).isEqualTo(TriBool.TRUE);
+    assertThat(builder.check(typingUnionType)).isEqualTo(TriBool.UNKNOWN);
+
+    var unresolvedTypingGeneric = new UnknownType.UnresolvedImportType("typing.Generic");
+    var unresolvedTypingUnion = new UnknownType.UnresolvedImportType("typing.Union");
+    assertThat(builder.check(unresolvedTypingGeneric)).isEqualTo(TriBool.TRUE);
+    assertThat(builder.check(unresolvedTypingUnion)).isEqualTo(TriBool.UNKNOWN);
+
+    var intType = table.getType("int");
+    assertThat(builder.check(intType)).isEqualTo(TriBool.UNKNOWN);
+
+    var basicClassType = new ClassType("MyClass", "mod.MyClass");
+    assertThat(builder.check(basicClassType)).isEqualTo(TriBool.UNKNOWN);
+
+    var genericClassType = new ClassType("MyClass", "mod.MyClass", Set.of(), List.of(), List.of(), List.of(), false, true, null);
+    assertThat(builder.check(genericClassType)).isEqualTo(TriBool.TRUE);
   }
 }

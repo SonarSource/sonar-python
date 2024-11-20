@@ -55,13 +55,6 @@ public class TypeShedUtils {
     switch (type.getKind()) {
       case INSTANCE:
         String typeName = type.getFullyQualifiedName();
-        // _SpecialForm is the type used for some special types, like Callable, Union, TypeVar, ...
-        // It comes from CPython impl: https://github.com/python/cpython/blob/e39ae6bef2c357a88e232dcab2e4b4c0f367544b/Lib/typing.py#L439
-        // This doesn't seem to be very precisely specified in typeshed, because it has special semantic.
-        // To avoid FPs, we treat it as ANY
-        if ("typing._SpecialForm".equals(typeName)) {
-          return null;
-        }
         return typeName.isEmpty() ? null : typeName;
       case TYPE_ALIAS:
         return getTypesFqn(type.getArgs(0));

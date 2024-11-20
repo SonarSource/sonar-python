@@ -66,6 +66,11 @@ public class TypeCheckBuilder {
     return this;
   }
 
+  public TypeCheckBuilder isGeneric() {
+    predicates.add(new IsGenericPredicate());
+    return this;
+  }
+
   public TriBool check(PythonType pythonType) {
     TriBool result = TriBool.TRUE;
     for (TypePredicate predicate : predicates) {
@@ -266,6 +271,27 @@ public class TypeCheckBuilder {
         return TriBool.TRUE;
       }
       return TriBool.FALSE;
+    }
+  }
+
+  record IsGenericPredicate() implements TypePredicate {
+
+    @Override
+    public TriBool test(PythonType pythonType) {
+      return isGeneric(pythonType);
+    }
+
+    private static TriBool isGeneric(PythonType pythonType) {
+      if (pythonType instanceof ClassType classType && classType.isGeneric()) {
+        return TriBool.TRUE;
+      }
+      if (pythonType instanceof SpecialFormType specialFormType) {
+        return "typing.Generic".equals(specialFormType.fullyQualifiedName()) ? TriBool.TRUE : TriBool.UNKNOWN;
+      }
+      if (pythonType instanceof UnknownType.UnresolvedImportType unresolvedImportType && "typing.Generic".equals(unresolvedImportType.importPath())) {
+        return TriBool.TRUE;
+      }
+      return TriBool.UNKNOWN;
     }
   }
 

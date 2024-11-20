@@ -83,6 +83,18 @@ class TypeInferenceTest {
   }
 
   @Test
+  void genericsInV1() {
+    Expression expression = lastExpression(
+      """
+        x = list[str]()
+        x
+        """
+    );
+    InferredType type = expression.type();
+    assertThat(type.canOnlyBe("list")).isTrue();
+  }
+
+  @Test
   void call_expression() {
     assertThat(lastExpression(
       "f()").type()).isEqualTo(anyType());

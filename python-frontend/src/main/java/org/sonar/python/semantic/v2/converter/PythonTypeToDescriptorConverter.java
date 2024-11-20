@@ -152,7 +152,7 @@ public class PythonTypeToDescriptorConverter {
       hasSuperClassWithoutDescriptor,
       type.hasMetaClass(),
       metaclassFQN,
-      false
+      type.isGeneric()
     );
   }
 
