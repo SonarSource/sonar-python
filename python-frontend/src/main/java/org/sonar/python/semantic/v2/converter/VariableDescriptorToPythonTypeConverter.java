@@ -19,25 +19,30 @@
  */
 package org.sonar.python.semantic.v2.converter;
 
-import java.util.Optional;
 import org.sonar.python.index.Descriptor;
 import org.sonar.python.index.VariableDescriptor;
 import org.sonar.python.types.v2.ObjectType;
 import org.sonar.python.types.v2.PythonType;
+import org.sonar.python.types.v2.SpecialFormType;
+import org.sonar.python.types.v2.TypeWrapper;
 
 public class VariableDescriptorToPythonTypeConverter implements DescriptorToPythonTypeConverter {
 
   public PythonType convert(ConversionContext ctx, VariableDescriptor from) {
-    if (from.isImportedModule()) {
-      var fqn = from.fullyQualifiedName();
-      if (fqn != null) {
-        return ctx.lazyTypesContext().getOrCreateLazyType(fqn);
-      }
+    String fullyQualifiedName = from.fullyQualifiedName();
+    if (from.isImportedModule() && fullyQualifiedName != null) {
+      return ctx.lazyTypesContext().getOrCreateLazyType(fullyQualifiedName);
     }
-    return Optional.ofNullable(from.annotatedType())
-      .map(fqn -> ctx.lazyTypesContext().getOrCreateLazyTypeWrapper(fqn))
-      .map(t -> (PythonType) new ObjectType(t))
-      .orElse(PythonType.UNKNOWN);
+    String annotatedType = from.annotatedType();
+    if (annotatedType != null) {
+      if ("typing._SpecialForm".equals(annotatedType) && fullyQualifiedName != null) {
+        // Defensive null check on fullyQualifiedName: it should never be null for SpecialForm
+        return new SpecialFormType(fullyQualifiedName);
+      }
+      TypeWrapper typeWrapper = ctx.lazyTypesContext().getOrCreateLazyTypeWrapper(annotatedType);
+      return new ObjectType(typeWrapper);
+    }
+    return PythonType.UNKNOWN;
   }
 
   @Override

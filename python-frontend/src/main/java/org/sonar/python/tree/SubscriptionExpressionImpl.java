@@ -28,6 +28,7 @@ import org.sonar.plugins.python.api.tree.SubscriptionExpression;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TreeVisitor;
+import org.sonar.python.types.v2.PythonType;
 
 public class SubscriptionExpressionImpl extends PyTree implements SubscriptionExpression {
 
@@ -35,6 +36,7 @@ public class SubscriptionExpressionImpl extends PyTree implements SubscriptionEx
   private final Token lBracket;
   private final ExpressionList subscripts;
   private final Token rBracket;
+  private PythonType pythonType = PythonType.UNKNOWN;
 
   public SubscriptionExpressionImpl(Expression object, Token lBracket, ExpressionList subscripts, Token rBracket) {
     this.object = object;
@@ -61,6 +63,16 @@ public class SubscriptionExpressionImpl extends PyTree implements SubscriptionEx
   @Override
   public Token rightBracket() {
     return rBracket;
+  }
+
+  @Override
+  public PythonType typeV2() {
+    return pythonType;
+  }
+
+  public SubscriptionExpression typeV2(PythonType pythonType) {
+    this.pythonType = pythonType;
+    return this;
   }
 
   @Override

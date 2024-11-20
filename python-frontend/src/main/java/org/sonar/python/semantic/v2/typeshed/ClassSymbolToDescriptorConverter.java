@@ -72,6 +72,7 @@ public class ClassSymbolToDescriptorConverter {
       .withMetaclassFQN(metaclassName)
       .withHasMetaClass(classSymbol.getHasMetaclass())
       .withHasDecorators(classSymbol.getHasDecorators())
+      .withSupportsGenerics(classSymbol.getIsGeneric())
       .withMembers(members)
       .build();
   }
