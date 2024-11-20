@@ -60,7 +60,7 @@ class TypeShedUtilsTest {
         .setKind(SymbolsProtos.TypeKind.INSTANCE)
         .setFullyQualifiedName("typing._SpecialForm")
         .build()))
-      .isNull();
+      .isEqualTo("typing._SpecialForm");
 
     Assertions.assertThat(TypeShedUtils.getTypesNormalizedFqn(SymbolsProtos.Type.newBuilder()
         .setKind(SymbolsProtos.TypeKind.INSTANCE)

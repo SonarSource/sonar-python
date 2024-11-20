@@ -77,6 +77,7 @@ import org.sonar.python.tree.NoneExpressionImpl;
 import org.sonar.python.tree.NumericLiteralImpl;
 import org.sonar.python.tree.SetLiteralImpl;
 import org.sonar.python.tree.StringLiteralImpl;
+import org.sonar.python.tree.SubscriptionExpressionImpl;
 import org.sonar.python.tree.TupleImpl;
 import org.sonar.python.tree.UnaryExpressionImpl;
 import org.sonar.python.types.v2.ClassType;
@@ -85,8 +86,10 @@ import org.sonar.python.types.v2.Member;
 import org.sonar.python.types.v2.ModuleType;
 import org.sonar.python.types.v2.ObjectType;
 import org.sonar.python.types.v2.PythonType;
+import org.sonar.python.types.v2.SpecialFormType;
 import org.sonar.python.types.v2.TriBool;
 import org.sonar.python.types.v2.TypeCheckBuilder;
+import org.sonar.python.types.v2.TypeChecker;
 import org.sonar.python.types.v2.TypeOrigin;
 import org.sonar.python.types.v2.TypeSource;
 import org.sonar.python.types.v2.UnionType;
@@ -104,6 +107,7 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
 
   private final Deque<Scope> typeStack = new ArrayDeque<>();
   private final Set<String> importedModulesFQN = new HashSet<>();
+  private final TypeChecker typeChecker;
 
   private record Scope(PythonType type, String scopeFullyQualifiedName) {}
 
@@ -113,6 +117,7 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
     this.moduleName = pythonFile.fileName();
     this.fileId = path != null ? path.toString() : pythonFile.toString();
     this.fullyQualifiedModuleName = fullyQualifiedModuleName;
+    this.typeChecker = new TypeChecker(projectLevelTypeTable);
   }
 
   public Set<String> importedModulesFQN() {
@@ -266,6 +271,9 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
       .withHasDecorators(!classDef.decorators().isEmpty())
       .withDefinitionLocation(locationInFile(className, fileId));
     resolveTypeHierarchy(classDef, classTypeBuilder);
+    if (classDef.typeParams() != null) {
+      classTypeBuilder.withIsGeneric(true);
+    }
     ClassType classType = classTypeBuilder.build();
 
     if (currentType() instanceof ClassType ownerClass) {
@@ -278,7 +286,7 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
     return classType;
   }
 
-  static void resolveTypeHierarchy(ClassDef classDef, ClassTypeBuilder classTypeBuilder) {
+  void resolveTypeHierarchy(ClassDef classDef, ClassTypeBuilder classTypeBuilder) {
     Optional.of(classDef)
       .map(ClassDef::args)
       .map(ArgList::arguments)
@@ -286,14 +294,14 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
       .flatMap(Collection::stream)
       .forEach(argument -> {
         if (argument instanceof RegularArgument regularArgument) {
-          addParentClass(classTypeBuilder, regularArgument);
+          this.addParentClass(classTypeBuilder, regularArgument);
         } else {
           classTypeBuilder.addSuperClass(PythonType.UNKNOWN);
         }
       });
   }
 
-  private static void addParentClass(ClassTypeBuilder classTypeBuilder, RegularArgument regularArgument) {
+  private void addParentClass(ClassTypeBuilder classTypeBuilder, RegularArgument regularArgument) {
     Name keyword = regularArgument.keywordArgument();
     // TODO: SONARPY-1871 store names if not resolved properly
     if (keyword != null) {
@@ -305,7 +313,10 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
     }
     PythonType argumentType = getTypeV2FromArgument(regularArgument);
     classTypeBuilder.addSuperClass(argumentType);
-    // TODO: SONARPY-1869 handle generics
+    if (typeChecker.typeCheckBuilder().isGeneric().check(argumentType) == TriBool.TRUE && regularArgument.expression().is(Tree.Kind.SUBSCRIPTION)) {
+      // SONARPY-2356: checking that we have a subscription only is too naive (e.g. specialized classes)
+      classTypeBuilder.withIsGeneric(true);
+    }
   }
 
   private static PythonType getTypeV2FromArgument(RegularArgument regularArgument) {
@@ -521,6 +532,14 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
     }
   }
 
+  @Override
+  public void visitSubscriptionExpression(SubscriptionExpression subscriptionExpression) {
+    super.visitSubscriptionExpression(subscriptionExpression);
+    PythonType pythonType = subscriptionExpression.object().typeV2();
+    if (typeChecker.typeCheckBuilder().isGeneric().check(pythonType) == TriBool.TRUE) {
+      ((SubscriptionExpressionImpl) subscriptionExpression).typeV2(pythonType);
+    }
+  }
 
   @Override
   public void visitName(Name name) {
@@ -563,7 +582,8 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
     return (t instanceof ClassType)
            || (t instanceof FunctionType)
            || (t instanceof ModuleType)
-           || (t instanceof UnknownType.UnresolvedImportType);
+           || (t instanceof UnknownType.UnresolvedImportType)
+           || (t instanceof SpecialFormType);
   }
 
   private PythonType currentType() {

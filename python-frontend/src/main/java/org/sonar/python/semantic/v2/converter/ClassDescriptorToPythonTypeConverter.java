@@ -30,6 +30,7 @@ public class ClassDescriptorToPythonTypeConverter implements DescriptorToPythonT
 
   private static PythonType convert(ConversionContext ctx, ClassDescriptor from) {
     var typeBuilder = new ClassTypeBuilder(from.name(), from.fullyQualifiedName())
+      .withIsGeneric(from.supportsGenerics())
       .withDefinitionLocation(from.definitionLocation());
 
     from.superClasses().stream()

@@ -40,11 +40,12 @@ public class ClassTypeBuilder implements TypeBuilder<ClassType> {
   List<TypeWrapper> superClasses = new ArrayList<>();
   List<PythonType> metaClasses = new ArrayList<>();
   boolean hasDecorators = false;
+  boolean isGeneric = false;
   LocationInFile definitionLocation;
 
   @Override
   public ClassType build() {
-    return new ClassType(name, fullyQualifiedName, members, attributes, superClasses, metaClasses, hasDecorators, definitionLocation);
+    return new ClassType(name, fullyQualifiedName, members, attributes, superClasses, metaClasses, hasDecorators, isGeneric, definitionLocation);
   }
 
   public ClassTypeBuilder(String name, String fullyQualifiedName) {
@@ -54,6 +55,11 @@ public class ClassTypeBuilder implements TypeBuilder<ClassType> {
 
   public ClassTypeBuilder withHasDecorators(boolean hasDecorators) {
     this.hasDecorators = hasDecorators;
+    return this;
+  }
+
+  public ClassTypeBuilder withIsGeneric(boolean isGeneric) {
+    this.isGeneric = isGeneric;
     return this;
   }
 

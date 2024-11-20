@@ -109,8 +109,7 @@ class ClassDescriptorTest {
     ClassDescriptor classDescriptor = lastClassDescriptor(
       "from typing import Generic",
       "class A(Generic[str]): ...");
-    // SONARPY-2313: supportsGenerics should be true here
-    assertThat(classDescriptor.supportsGenerics()).isFalse();
+    assertThat(classDescriptor.supportsGenerics()).isTrue();
     assertDescriptorToProtobuf(classDescriptor);
   }
 
