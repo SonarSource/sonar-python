@@ -65,6 +65,34 @@ class RuntimeTypeTest {
   }
 
   @Test
+  void isIdentityComparableWithMetaclass() {
+    RuntimeType typeType = new RuntimeType(new ClassSymbolImpl("type", "type"));
+
+    ClassSymbolImpl metaclassSymbol = new ClassSymbolImpl("Meta", "Meta");
+    metaclassSymbol.setHasMetaClass();
+    RuntimeType metaClassType = new RuntimeType(metaclassSymbol);
+
+    ClassSymbolImpl classSymbolWithSuperMetaClass = new ClassSymbolImpl("SuperMeta", "SuperMeta");
+    classSymbolWithSuperMetaClass.addSuperClass(metaclassSymbol);
+    RuntimeType superMetaClassType = new RuntimeType(classSymbolWithSuperMetaClass);
+
+    UnknownClassType unknownClassType = new UnknownClassType(metaclassSymbol);
+
+    assertThat(typeType.isIdentityComparableWith(typeType)).isTrue();
+    assertThat(typeType.isIdentityComparableWith(metaClassType)).isTrue();
+    assertThat(typeType.isIdentityComparableWith(superMetaClassType)).isTrue();
+    assertThat(typeType.isIdentityComparableWith(unknownClassType)).isFalse();
+
+    assertThat(metaClassType.isIdentityComparableWith(typeType)).isTrue();
+    assertThat(metaClassType.isIdentityComparableWith(metaClassType)).isTrue();
+    assertThat(metaClassType.isIdentityComparableWith(superMetaClassType)).isFalse();
+
+    assertThat(superMetaClassType.isIdentityComparableWith(typeType)).isTrue();
+    assertThat(superMetaClassType.isIdentityComparableWith(metaClassType)).isFalse();
+    assertThat(superMetaClassType.isIdentityComparableWith(superMetaClassType)).isTrue();
+  }
+
+  @Test
   void member() {
     ClassSymbolImpl x = new ClassSymbolImpl("x", "x");
     SymbolImpl foo = new SymbolImpl("foo", null);

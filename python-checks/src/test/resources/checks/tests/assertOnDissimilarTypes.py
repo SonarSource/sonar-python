@@ -198,8 +198,8 @@ class ComparingTypeAndEnum(unittest.TestCase):
     def test_type_of_enum_and_enum_class(self):
         EnumType = Enum("EnumType", names=["one", "two"])
         enum_member = EnumType(1)
-        # FP SONARPY-2332: EnumType is a proper "type" object since the Enum constructor with argument creates a new Enum type
-        self.assertIs(type(enum_member), EnumType) # Noncompliant
+        # EnumType is a proper "type" object since the Enum constructor with argument creates a new Enum type
+        self.assertIs(type(enum_member), EnumType)
 
 class DerivedEnumWithMembers(Enum):
     ONE = 1
@@ -208,7 +208,7 @@ class DerivedEnumWithMembers(Enum):
 class ComparingTypeAndDerivedEnumWithMembers(unittest.TestCase):
     def test_type_of_derived_enum_and_derived_enum_class(self):
         derived_enum_member = DerivedEnumWithMembers(1)
-        self.assertIs(type(enum_member), EnumType)
+        self.assertIs(type(derived_enum_member), EnumType)
 
 class DerivedEnumWithoutMembers(Enum):
     ...
@@ -218,12 +218,12 @@ class ComparingTypeAndDerivedEnumWithoutMembers(unittest.TestCase):
     def test_type_of_derived_enum_and_derived_enum_class(self):
         DerivedEnumType = DerivedEnumWithoutMembers("DerivedEnumType", names=["one", "two"])
         derived_enum_member = DerivedEnumType(1)
-        # FP SONARPY-2332: DerivedEnumType is a proper "type" object because `DerivedEnumWithoutMembers(str, list)` will create a new enum,
+        # DerivedEnumType is a proper "type" object because `DerivedEnumWithoutMembers(str, list)` will create a new enum,
         # just like `Enum(str, list)` would
-        self.assertIs(type(derived_enum_member), DerivedEnumType) # Noncompliant
+        self.assertIs(type(derived_enum_member), DerivedEnumType)
 
         DerivedEnumTypeFromDict = DerivedEnumWithoutMembers("DerivedEnumType", OrderedDict([("one", 1), ("two", 2)]))
         derived_enum_member_from_dict = DerivedEnumTypeFromDict(1)
-        # FP SONARPY-2332: DerivedEnumTypeFromDict is a proper "type" object because `DerivedEnumWithoutMembers(str, list)` will create a new enum,
+        # DerivedEnumTypeFromDict is a proper "type" object because `DerivedEnumWithoutMembers(str, list)` will create a new enum,
         # just like `Enum(str, list)`
-        self.assertIs(type(derived_enum_member_from_dict), DerivedEnumTypeFromDict) # Noncompliant
+        self.assertIs(type(derived_enum_member_from_dict), DerivedEnumTypeFromDict)
