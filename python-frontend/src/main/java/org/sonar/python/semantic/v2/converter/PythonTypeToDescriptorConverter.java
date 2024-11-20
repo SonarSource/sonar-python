@@ -35,6 +35,7 @@ import org.sonar.python.semantic.v2.SymbolV2;
 import org.sonar.python.semantic.v2.UsageV2;
 import org.sonar.python.types.v2.ClassType;
 import org.sonar.python.types.v2.FunctionType;
+import org.sonar.python.types.v2.ObjectType;
 import org.sonar.python.types.v2.ParameterV2;
 import org.sonar.python.types.v2.PythonType;
 import org.sonar.python.types.v2.TypeWrapper;
@@ -80,7 +81,14 @@ public class PythonTypeToDescriptorConverter {
     if (type instanceof UnknownType.UnresolvedImportType unresolvedImportType) {
       return convert(parentFqn, symbolName, unresolvedImportType);
     }
+    if (type instanceof ObjectType objectType && !moduleFqn.equals(parentFqn)) {
+      return convert(moduleFqn, parentFqn, symbolName, objectType);
+    }
     return new VariableDescriptor(symbolName, symbolFqn(parentFqn, symbolName), null);
+  }
+
+  private static Descriptor convert(String moduleFqn, String parentFqn, String symbolName, ObjectType objectType) {
+    return new VariableDescriptor(symbolName, symbolFqn(parentFqn, symbolName), typeFqn(moduleFqn, objectType.unwrappedType()));
   }
 
   private static Descriptor convert(String moduleFqn, FunctionType type) {

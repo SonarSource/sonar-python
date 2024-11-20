@@ -65,8 +65,13 @@ public class SymbolImpl implements Symbol {
   protected Set<String> validForPythonVersions = Collections.emptySet();
 
   public SymbolImpl(String name, @Nullable String fullyQualifiedName) {
+    this(name, fullyQualifiedName, null);
+  }
+
+  public SymbolImpl(String name, @Nullable String fullyQualifiedName, @Nullable String annotatedTypeName) {
     this.name = name;
     this.fullyQualifiedName = fullyQualifiedName;
+    this.annotatedTypeName = annotatedTypeName;
     this.kind = Kind.OTHER;
   }
 

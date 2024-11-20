@@ -501,23 +501,103 @@ public class TypeInferenceV2Test {
   }
 
   @Test
+  void annotatedClassFieldsInClassDefinition() {
+    var expression = lastExpression(
+      """
+        class A:
+          a : str = "hi"
+          b : int
+        A
+        """
+    );
+    assertThat(expression.typeV2()).isInstanceOfSatisfying(ClassType.class, classType -> {
+      assertThat(classType.members()).hasSize(2);
+      var aFieldMember = classType.members().stream().filter(m -> "a".equals(m.name())).findFirst().get();
+      var bFieldMember = classType.members().stream().filter(m -> "b".equals(m.name())).findFirst().get();
+      assertThat(aFieldMember.name()).isEqualTo("a");
+      assertThat(aFieldMember.type()).isInstanceOf(ObjectType.class).extracting(PythonType::unwrappedType).isEqualTo(STR_TYPE);
+      assertThat(bFieldMember.name()).isEqualTo("b");
+      assertThat(bFieldMember.type()).isInstanceOf(ObjectType.class).extracting(PythonType::unwrappedType).isEqualTo(INT_TYPE);
+    });
+  }
+
+  @Test
+  void annotatedClassFieldsInClassDefinitionSymbol() {
+    var tree = parseWithoutSymbols(
+      """
+        class A:
+          a : str = "hi"
+          b : int
+        """
+    );
+    var projectLevelSymbolTable = new ProjectLevelSymbolTable();
+    projectLevelSymbolTable.addModule(tree, "", pythonFile("mod.py"));
+
+    var symbol = (ClassSymbol) projectLevelSymbolTable.getSymbol("mod.A");
+    var aFieldSymbol = symbol.resolveMember("a").get();
+    var bFieldSymbol = symbol.resolveMember("b").get();
+    assertThat(aFieldSymbol.name()).isEqualTo("a");
+    assertThat(aFieldSymbol.annotatedTypeName()).isEqualTo("str");
+    assertThat(bFieldSymbol.name()).isEqualTo("b");
+    assertThat(bFieldSymbol.annotatedTypeName()).isEqualTo("int");
+  }
+
+  @Test
+  void annotatedClassFieldOverrideInClassDefinition() {
+    var expression = lastExpression(
+      """
+        class A:
+          a : str
+          a : int
+        A
+        """
+    );
+    assertThat(expression.typeV2()).isInstanceOfSatisfying(ClassType.class, classType -> {
+      assertThat(classType.members()).hasSize(1);
+      var aFieldMember = classType.members().stream().filter(m -> "a".equals(m.name())).findFirst().get();
+      assertThat(aFieldMember.name()).isEqualTo("a");
+      assertThat(aFieldMember.type()).isInstanceOf(ObjectType.class).extracting(PythonType::unwrappedType).isEqualTo(INT_TYPE);
+    });
+  }
+
+  @Test
   void staticFieldsInClassDefinition() {
     Expression expr = lastExpression("""
       class A:
         test = "hi"
-      A.test
+      A
       """);
-    assertThat(expr.typeV2())
-      .isInstanceOf(UnknownType.class);
+    assertThat(expr.typeV2()).isInstanceOfSatisfying(ClassType.class, classType -> {
+      assertThat(classType.members()).hasSize(1);
+      var member = classType.members().iterator().next();
+      assertThat(member.name()).isEqualTo("test");
+      assertThat(member.type()).isEqualTo(PythonType.UNKNOWN);
+    });
 
     Expression expr2 = lastExpression("""
       class A:
         test = "hi"
         test = True
-      A.test
+      A
       """);
-    assertThat(expr2.typeV2())
-      .isEqualTo(PythonType.UNKNOWN);
+    assertThat(expr2.typeV2()).isInstanceOfSatisfying(ClassType.class, classType -> {
+      assertThat(classType.members()).hasSize(1);
+      var member = classType.members().iterator().next();
+      assertThat(member.name()).isEqualTo("test");
+      assertThat(member.type()).isEqualTo(PythonType.UNKNOWN);
+    });
+
+    Expression expr3 = lastExpression("""
+      class A:
+        test = classmethod(...)
+      A
+      """);
+    assertThat(expr3.typeV2()).isInstanceOfSatisfying(ClassType.class, classType -> {
+      assertThat(classType.members()).hasSize(1);
+      var member = classType.members().iterator().next();
+      assertThat(member.name()).isEqualTo("test");
+      assertThat(member.type()).isEqualTo(PythonType.UNKNOWN);
+    });
   }
 
   @Test
@@ -527,10 +607,12 @@ public class TypeInferenceV2Test {
         test = "hi"
       class B(A):
         pass
-      B.test
+      B
       """);
-    assertThat(exprWithInheritance.typeV2())
-      .isInstanceOf(UnknownType.class);
+    assertThat(exprWithInheritance.typeV2()).isInstanceOfSatisfying(ClassType.class, classType -> {
+      var member = classType.resolveMember("test").get();
+      assertThat(member).isEqualTo(PythonType.UNKNOWN);
+    });
 
     Expression exprWithInheritance2 = lastExpression("""
       class A:
@@ -539,10 +621,12 @@ public class TypeInferenceV2Test {
         test = "hi"
       class C(B):
         pass
-      C.test
+      C
       """);
-    assertThat(exprWithInheritance2.typeV2())
-      .isInstanceOf(UnknownType.class);
+    assertThat(exprWithInheritance2.typeV2()).isInstanceOfSatisfying(ClassType.class, classType -> {
+      var member = classType.resolveMember("test").get();
+      assertThat(member).isEqualTo(PythonType.UNKNOWN);
+    });
 
     Expression exprWithMultiInheritance = lastExpression("""
       class A:
@@ -550,10 +634,12 @@ public class TypeInferenceV2Test {
       class B: pass
       class C(A, B):
         pass
-      C.test
+      C
       """);
-    assertThat(exprWithMultiInheritance.typeV2())
-      .isInstanceOf(UnknownType.class);
+    assertThat(exprWithMultiInheritance.typeV2()).isInstanceOfSatisfying(ClassType.class, classType -> {
+      var member = classType.resolveMember("test").get();
+      assertThat(member).isEqualTo(PythonType.UNKNOWN);
+    });
 
     Expression exprWithMultiInheritance2 = lastExpression("""
       class A:
@@ -562,10 +648,13 @@ public class TypeInferenceV2Test {
         test = "hi"
       class C(A, B):
         pass
-      C.test
+      C
       """);
-    assertThat(exprWithMultiInheritance2.typeV2())
-      .isInstanceOf(UnknownType.class);
+    assertThat(exprWithMultiInheritance2.typeV2()).isInstanceOfSatisfying(ClassType.class, classType -> {
+      var member = classType.resolveMember("test").get();
+      assertThat(member).isEqualTo(PythonType.UNKNOWN);
+    });
+
   }
 
   @Test

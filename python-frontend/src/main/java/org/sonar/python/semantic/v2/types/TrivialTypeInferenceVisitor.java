@@ -28,10 +28,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Predicate;
 import java.util.stream.Stream;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.tree.AliasedName;
+import org.sonar.plugins.python.api.tree.AnnotatedAssignment;
 import org.sonar.plugins.python.api.tree.ArgList;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
@@ -451,8 +453,27 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
     getFirstAssignmentName(assignmentStatement).ifPresent(lhsName -> {
       var assignedValueType = assignmentStatement.assignedValue().typeV2();
       lhsName.typeV2(assignedValueType);
-      addStaticFieldToClass(lhsName);
+      addStaticFieldToClass(lhsName, PythonType.UNKNOWN);
     });
+  }
+
+  @Override
+  public void visitAnnotatedAssignment(AnnotatedAssignment assignmentStatement) {
+    super.visitAnnotatedAssignment(assignmentStatement);
+    Optional.ofNullable(assignmentStatement.variable())
+      .filter(NameImpl.class::isInstance)
+      .map(NameImpl.class::cast)
+      .ifPresent(lhsName -> {
+        if (currentType() instanceof ClassType) {
+          Optional.ofNullable(assignmentStatement.annotation())
+            .map(TypeAnnotation::expression)
+            .map(Expression::typeV2)
+            .filter(Predicate.not(PythonType.UNKNOWN::equals))
+            .map(t -> new ObjectType(t, TypeSource.TYPE_HINT))
+            .ifPresent(lhsName::typeV2);
+          addStaticFieldToClass(lhsName, lhsName.typeV2());
+        }
+      });
   }
 
   private static Optional<NameImpl> getFirstAssignmentName(AssignmentStatement assignmentStatement) {
@@ -467,9 +488,12 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
       .map(NameImpl.class::cast);
   }
 
-  private void addStaticFieldToClass(Name name) {
+  private void addStaticFieldToClass(Name name, PythonType type) {
     if (currentType() instanceof ClassType ownerClass) {
-      ownerClass.members().add(new Member(name.name(), PythonType.UNKNOWN));
+      var memberName = name.name();
+      var toRemove = ownerClass.members().stream().filter(member -> memberName.equals(member.name())).toList();
+      ownerClass.members().removeAll(toRemove);
+      ownerClass.members().add(new Member(memberName, type));
     }
   }
 

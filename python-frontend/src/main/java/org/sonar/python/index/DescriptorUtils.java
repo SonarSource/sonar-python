@@ -134,7 +134,8 @@ public class DescriptorUtils {
       case FUNCTION:
         return createFunctionSymbol((FunctionDescriptor) descriptor, projectLevelSymbolTable, createdSymbolsByDescriptor, createdSymbolsByFqn, symbolName);
       case VARIABLE:
-        return new SymbolImpl(symbolName, descriptor.fullyQualifiedName());
+        var variableDescriptor = (VariableDescriptor) descriptor;
+        return new SymbolImpl(symbolName, descriptor.fullyQualifiedName(), variableDescriptor.annotatedType());
       case AMBIGUOUS:
         Set<Symbol> alternatives = new HashSet<>();
         AmbiguousSymbolImpl ambiguousSymbol = new AmbiguousSymbolImpl(symbolName, descriptor.fullyQualifiedName(), alternatives);
