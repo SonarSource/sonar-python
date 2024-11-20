@@ -19,6 +19,7 @@
  */
 package org.sonar.python.checks;
 
+import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
@@ -27,5 +28,16 @@ class GenericTypeWithoutArgumentCheckTest {
   @Test
   void test() {
     PythonCheckVerifier.verify("src/test/resources/checks/genericTypeWithoutArgument.py", new GenericTypeWithoutArgumentCheck());
+  }
+
+  @Test
+  void test_cross_file() {
+    PythonCheckVerifier.verify(
+      List.of(
+        "src/test/resources/checks/genericTypeWithoutArgumentImported.py",
+        "src/test/resources/checks/genericTypeWithoutArgumentImporting.py"
+      ),
+      new GenericTypeWithoutArgumentCheck()
+    );
   }
 }
