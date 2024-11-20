@@ -43,12 +43,12 @@ class ChildFromIntermediateClass(IntermediateClass):
 class ChildFromIntermediateWithGenericParentClass(IntermediateWithGenericParentClass):
   def __init__(p1, p2, p3): ... # OK
   def compliant(self, param1): ...
-  def with_keyword_only(self, param1, param2, param3): ... # FN SONARPY-2344
+  def with_keyword_only(self, param1, param2, param3): ... # Noncompliant
   def with_decorator(self): ... # OK
   def with_default(self, param1=1): ... # OK
-  def my_method(self, param1, param2): ... # FN SONARPY-2344
+  def my_method(self, param1, param2): ... # Noncompliant
   def with_kwargs(self, param1): ... # OK
-  def __private_method(self, param1): ... # FN SONARPY-2344
+  def __private_method(self, param1): ... # Noncompliant
   def attr(self): ...
   def using_tuple(self, (a, b, c)): ... # FN
 
