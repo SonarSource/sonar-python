@@ -78,6 +78,12 @@ class SymbolImplTest {
     assertThat(copiedSymbol.inferredType()).isEqualTo(InferredTypes.INT);
   }
 
+  @Test
+  void annotated_type_name_null_by_default_test() {
+    var x = new SymbolImpl("x", "module.x");
+    assertThat(x.annotatedTypeName()).isNull();
+  }
+
   private Map<String, Symbol> symbols(String... code) {
     FileInput fileInput = parse(new SymbolTableBuilder("", PythonTestUtils.pythonFile("foo")), code);
     return fileInput.globalVariables().stream().collect(Collectors.toMap(Symbol::name, Function.identity()));

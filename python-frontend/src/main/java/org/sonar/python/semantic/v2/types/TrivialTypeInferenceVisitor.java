@@ -459,10 +459,7 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
 
   @Override
   public void visitAnnotatedAssignment(AnnotatedAssignment assignmentStatement) {
-    scan(assignmentStatement.assignedValue());
-    scan(assignmentStatement.annotation());
-    scan(assignmentStatement.variable());
-
+    super.visitAnnotatedAssignment(assignmentStatement);
     Optional.ofNullable(assignmentStatement.variable())
       .filter(NameImpl.class::isInstance)
       .map(NameImpl.class::cast)

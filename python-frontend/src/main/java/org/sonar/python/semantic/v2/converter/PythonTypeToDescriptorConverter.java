@@ -81,7 +81,7 @@ public class PythonTypeToDescriptorConverter {
     if (type instanceof UnknownType.UnresolvedImportType unresolvedImportType) {
       return convert(parentFqn, symbolName, unresolvedImportType);
     }
-    if (type instanceof ObjectType objectType) {
+    if (type instanceof ObjectType objectType && !moduleFqn.equals(parentFqn)) {
       return convert(moduleFqn, parentFqn, symbolName, objectType);
     }
     return new VariableDescriptor(symbolName, symbolFqn(parentFqn, symbolName), null);

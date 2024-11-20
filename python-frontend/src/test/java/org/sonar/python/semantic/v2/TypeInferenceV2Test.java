@@ -542,6 +542,23 @@ public class TypeInferenceV2Test {
     assertThat(bFieldSymbol.annotatedTypeName()).isEqualTo("int");
   }
 
+  @Test
+  void annotatedClassFieldOverrideInClassDefinition() {
+    var expression = lastExpression(
+      """
+        class A:
+          a : str
+          a : int
+        A
+        """
+    );
+    assertThat(expression.typeV2()).isInstanceOfSatisfying(ClassType.class, classType -> {
+      assertThat(classType.members()).hasSize(1);
+      var aFieldMember = classType.members().stream().filter(m -> "a".equals(m.name())).findFirst().get();
+      assertThat(aFieldMember.name()).isEqualTo("a");
+      assertThat(aFieldMember.type()).isInstanceOf(ObjectType.class).extracting(PythonType::unwrappedType).isEqualTo(INT_TYPE);
+    });
+  }
 
   @Test
   void staticFieldsInClassDefinition() {
