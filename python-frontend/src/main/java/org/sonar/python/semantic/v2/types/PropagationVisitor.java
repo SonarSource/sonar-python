@@ -212,7 +212,7 @@ public class PropagationVisitor extends BaseTreeVisitor {
         props.stream()
           .filter(Assignment.class::isInstance)
           .map(Assignment.class::cast)
-          .forEach(a -> a.computeDependencies(a.rhs(), trackedVars));
+          .forEach(a -> a.computeDependencies(trackedVars));
         propagations.addAll(props);
       }
     });

@@ -40,9 +40,9 @@ public class Assignment extends Propagation {
     this.propagationsByLhs = propagationsByLhs;
   }
 
-  void computeDependencies(Expression expression, Set<SymbolV2> trackedVars) {
+  void computeDependencies(Set<SymbolV2> trackedVars) {
     Deque<Expression> workList = new ArrayDeque<>();
-    workList.push(expression);
+    workList.push(rhs);
     while (!workList.isEmpty()) {
       Expression e = workList.pop();
       if (e instanceof Name name) {
