@@ -32,10 +32,13 @@ import java.util.stream.Stream;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.PythonFile;
 import org.sonar.plugins.python.api.tree.AliasedName;
+import org.sonar.plugins.python.api.tree.AnnotatedAssignment;
 import org.sonar.plugins.python.api.tree.ArgList;
+import org.sonar.plugins.python.api.tree.AssignmentExpression;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.BinaryExpression;
+import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.ComprehensionExpression;
 import org.sonar.plugins.python.api.tree.DictCompExpression;
@@ -78,6 +81,7 @@ import org.sonar.python.tree.NumericLiteralImpl;
 import org.sonar.python.tree.SetLiteralImpl;
 import org.sonar.python.tree.StringLiteralImpl;
 import org.sonar.python.tree.SubscriptionExpressionImpl;
+import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.tree.TupleImpl;
 import org.sonar.python.tree.UnaryExpressionImpl;
 import org.sonar.python.types.v2.ClassType;
@@ -108,6 +112,7 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
   private final Deque<Scope> typeStack = new ArrayDeque<>();
   private final Set<String> importedModulesFQN = new HashSet<>();
   private final TypeChecker typeChecker;
+  private final List<String> typeVarNames = new ArrayList<>();
 
   private record Scope(PythonType type, String scopeFullyQualifiedName) {}
 
@@ -313,10 +318,15 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
     }
     PythonType argumentType = getTypeV2FromArgument(regularArgument);
     classTypeBuilder.addSuperClass(argumentType);
-    if (typeChecker.typeCheckBuilder().isGeneric().check(argumentType) == TriBool.TRUE && regularArgument.expression().is(Tree.Kind.SUBSCRIPTION)) {
-      // SONARPY-2356: checking that we have a subscription only is too naive (e.g. specialized classes)
-      classTypeBuilder.withIsGeneric(true);
+    if (isParentAGenericClass(regularArgument, argumentType)) {
+        classTypeBuilder.withIsGeneric(true);
     }
+  }
+
+  private boolean isParentAGenericClass(RegularArgument regularArgument, PythonType argumentType) {
+    return typeChecker.typeCheckBuilder().isGeneric().check(argumentType) == TriBool.TRUE
+      && regularArgument.expression() instanceof SubscriptionExpression subscriptionExpression
+      && subscriptionExpression.subscripts().expressions().stream().anyMatch(expression -> expression instanceof Name name && typeVarNames.contains(name.name()));
   }
 
   private static PythonType getTypeV2FromArgument(RegularArgument regularArgument) {
@@ -464,6 +474,44 @@ public class TrivialTypeInferenceVisitor extends BaseTreeVisitor {
       lhsName.typeV2(assignedValueType);
       addStaticFieldToClass(lhsName);
     });
+  }
+
+  @Override
+  public void visitCallExpression(CallExpression callExpression) {
+    super.visitCallExpression(callExpression);
+    assignPossibleTypeVar(callExpression);
+  }
+
+  private void assignPossibleTypeVar(CallExpression callExpression) {
+    PythonType pythonType = callExpression.callee().typeV2();
+    TriBool check = typeChecker.typeCheckBuilder().isTypeWithName("typing.TypeVar").check(pythonType);
+    if (check == TriBool.TRUE) {
+      Tree parent = TreeUtils.firstAncestor(callExpression, t -> t.is(Tree.Kind.ASSIGNMENT_STMT, Tree.Kind.ANNOTATED_ASSIGNMENT, Tree.Kind.ASSIGNMENT_EXPRESSION));
+      Optional<Name> assignedName = Optional.empty();
+      if (parent instanceof AssignmentStatement assignmentStatement) {
+        assignedName = extractAssignedName(assignmentStatement);
+      }
+      if (parent instanceof AnnotatedAssignment annotatedAssignment) {
+        assignedName = extractAssignedName(annotatedAssignment);
+      }
+      if (parent instanceof AssignmentExpression assignmentExpression) {
+        assignedName = extractAssignedName(assignmentExpression);
+      }
+      assignedName.ifPresent(name -> typeVarNames.add(name.name()));
+    }
+  }
+
+  private static Optional<Name> extractAssignedName(AssignmentExpression assignmentExpression) {
+    return Optional.of(assignmentExpression.lhsName()).map(Name.class::cast);
+  }
+
+  private static Optional<Name> extractAssignedName(AnnotatedAssignment annotatedAssignment) {
+    return Optional.of(annotatedAssignment.variable()).filter(v -> v.is(Tree.Kind.NAME)).map(Name.class::cast);
+  }
+
+  private static Optional<Name> extractAssignedName(AssignmentStatement assignmentStatement) {
+    return assignmentStatement.lhsExpressions().stream().findFirst()
+      .map(ExpressionList::expressions).stream().flatMap(List::stream).findFirst().filter(v -> v.is(Tree.Kind.NAME)).map(Name.class::cast);
   }
 
   private static Optional<NameImpl> getFirstAssignmentName(AssignmentStatement assignmentStatement) {
