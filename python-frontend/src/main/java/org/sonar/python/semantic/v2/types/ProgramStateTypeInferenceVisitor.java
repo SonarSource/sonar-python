@@ -65,11 +65,7 @@ public class ProgramStateTypeInferenceVisitor extends BaseTreeVisitor {
     }
   }
 
-  private static PythonType or(PythonType t1, PythonType t2) {
-    return UnionType.or(t1, t2);
-  }
-
   private static PythonType union(Stream<PythonType> types) {
-    return types.reduce(ProgramStateTypeInferenceVisitor::or).orElse(PythonType.UNKNOWN);
+    return types.reduce(UnionType::or).orElse(PythonType.UNKNOWN);
   }
 }

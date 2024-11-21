@@ -111,12 +111,8 @@ public abstract class Propagation {
   static PythonType currentType(Name lhsName) {
     return Optional.ofNullable(lhsName.symbolV2())
       .stream()
-      .map(SymbolV2::usages)
-      .flatMap(List::stream)
-      .filter(u -> !SymbolV2Utils.isDeclaration(u))
-      .map(UsageV2::tree)
-      .filter(Expression.class::isInstance)
-      .map(Expression.class::cast)
+      .flatMap(Propagation::getSymbolNonDeclarationUsageTrees)
+      .flatMap(TreeUtils.toStreamInstanceOfMapper(Expression.class))
       .findFirst()
       .map(Expression::typeV2)
       .orElse(null);
