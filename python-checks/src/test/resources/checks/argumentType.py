@@ -270,13 +270,12 @@ def no_fp_on_enum_types():
 
 def fp_decorated_types():
   import dataclasses
-
   @dataclasses.dataclass
   class DecoratedClass:
     x : int
 
   def decorated_type_expecting_foo(data: DecoratedClass): ...
+  data = dataclasses.replace(DecoratedClass(42))
 
-  data = dataclasses.replace(...)
   # FP SONARPY-2359
   decorated_type_expecting_foo(data)  # Noncompliant
