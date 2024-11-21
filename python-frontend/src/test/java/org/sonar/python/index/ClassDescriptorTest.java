@@ -109,7 +109,7 @@ class ClassDescriptorTest {
     ClassDescriptor classDescriptor = lastClassDescriptor(
       "from typing import Generic",
       "class A(Generic[str]): ...");
-    assertThat(classDescriptor.supportsGenerics()).isTrue();
+    assertThat(classDescriptor.supportsGenerics()).isFalse();
     assertDescriptorToProtobuf(classDescriptor);
   }
 

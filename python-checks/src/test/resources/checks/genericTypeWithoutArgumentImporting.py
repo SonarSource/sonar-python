@@ -1,5 +1,11 @@
-# mod.py
-from genericTypeWithoutArgumentImported import SomeGeneric, SomeGenericWithTypeParam, MyImportedGenericTypeVarChild, MyImportedNonGenericChild, MyImportedConcreteChild
+from genericTypeWithoutArgumentImported import (
+    SomeGeneric,
+    SomeGenericWithTypeParam,
+    MyImportedGenericTypeVarChild,
+    MyImportedNonGenericChild,
+    MyImportedConcreteChild,
+    SomeGenericIncorrectlyDefined
+)
 
 def local_generic():
     from typing import Generic
@@ -16,8 +22,7 @@ def bar() -> SomeGenericWithTypeParam: # Noncompliant
 
 def returning_imported_child() -> MyImportedGenericTypeVarChild: ... # Noncompliant
 def returning_imported_non_generic_child() -> MyImportedNonGenericChild: ... # OK
-# FP SONARPY-2356: MyImportedConcreteChild is not actually generic (specialized class)
-def returning_imported_concrete_child() -> MyImportedConcreteChild: ... # Noncompliant
+def returning_imported_concrete_child() -> MyImportedConcreteChild: ... # OK
 
 class MyChild(SomeGeneric[T]): ...
 def returning_my_child() -> MyChild: # FN
@@ -29,4 +34,7 @@ def returning_my_non_generic_child() -> MyNonGenericChild: # OK
 
 class MyConcreteChild(SomeGeneric[str]): ...
 def returning_my_concrete_chil3() -> MyConcreteChild: # OK
+    ...
+
+def returning_incorrect_generic() -> SomeGenericIncorrectlyDefined:
     ...
