@@ -267,3 +267,14 @@ def no_fp_on_enum_types():
         C = 3
 
     len(EnumA)
+
+import dataclasses
+@dataclasses.dataclass
+class DecoratedDataClass:
+  x : int
+
+def decorated_dataclass_expected(data: DecoratedDataClass): ...
+data = dataclasses.replace(DecoratedDataClass(42))
+
+# FP SONARPY-2359
+decorated_dataclass_expected(data)  # Noncompliant
