@@ -44,17 +44,17 @@ SetMonitorXlib.ext.randr.SetMonitor"Xlib.protocol.rq.Requestj36j37j38j39j
 ScreenChangeNotify!Xlib.ext.randr.ScreenChangeNotify"Xlib.protocol.rq.Eventj36j37j38j39j310j311e
 CrtcChangeNotifyXlib.ext.randr.CrtcChangeNotify"Xlib.protocol.rq.Eventj36j37j38j39j310j311i
 OutputChangeNotify!Xlib.ext.randr.OutputChangeNotify"Xlib.protocol.rq.Eventj36j37j38j39j310j311m
-OutputPropertyNotify#Xlib.ext.randr.OutputPropertyNotify"Xlib.protocol.rq.Eventj36j37j38j39j310j311¿
+OutputPropertyNotify#Xlib.ext.randr.OutputPropertyNotify"Xlib.protocol.rq.Eventj36j37j38j39j310j311é
 query_versionXlib.ext.randr.query_version":
-Xlib.ext.randr.QueryVersion"Xlib.ext.randr.QueryVersion*¹
-self®
-:Union[Xlib.display.Display,Xlib.xobject.resource.Resource],
-Xlib.display.Display"Xlib.display.Display@
-Xlib.xobject.resource.Resource"Xlib.xobject.resource.Resourcez36z37z38z39z310z311Á
+Xlib.ext.randr.QueryVersion"Xlib.ext.randr.QueryVersion*d
+selfZ
+Union[Xlib.display.Display,Any],
+Xlib.display.Display"Xlib.display.Display
+Anyz36z37z38z39z310z311ˆ
 set_screen_config Xlib.ext.randr.set_screen_config"@
-Xlib.ext.randr.SetScreenConfig"Xlib.ext.randr.SetScreenConfig*J
-self@
-Xlib.xobject.drawable.Drawable"Xlib.xobject.drawable.Drawable*)
+Xlib.ext.randr.SetScreenConfig"Xlib.ext.randr.SetScreenConfig*
+self
+Any*)
 size_id
 builtins.int"builtins.int**
 rotation
@@ -64,25 +64,25 @@ SetMonitorXlib.ext.randr.SetMonitor"Xlib.protocol.rq.Requestj36j37j38j39j
 rate
 builtins.int"builtins.int *-
 	timestamp
-builtins.int"builtins.int z36z37z38z39z310z311ï
+builtins.int"builtins.int z36z37z38z39z310z311º
 select_inputXlib.ext.randr.select_input"8
-Xlib.ext.randr.SelectInput"Xlib.ext.randr.SelectInput*F
-self<
-Xlib.xobject.drawable.Window"Xlib.xobject.drawable.Window*&
+Xlib.ext.randr.SelectInput"Xlib.ext.randr.SelectInput*
+self
+Any*&
 mask
-builtins.int"builtins.intz36z37z38z39z310z311Ñ
+builtins.int"builtins.intz36z37z38z39z310z311œ
 get_screen_infoXlib.ext.randr.get_screen_info"<
-Xlib.ext.randr.GetScreenInfo"Xlib.ext.randr.GetScreenInfo*F
-self<
-Xlib.xobject.drawable.Window"Xlib.xobject.drawable.Windowz36z37z38z39z310z311ç
+Xlib.ext.randr.GetScreenInfo"Xlib.ext.randr.GetScreenInfo*
+self
+Anyz36z37z38z39z310z311²
 get_screen_size_range$Xlib.ext.randr.get_screen_size_range"F
-!Xlib.ext.randr.GetScreenSizeRange"!Xlib.ext.randr.GetScreenSizeRange*F
-self<
-Xlib.xobject.drawable.Window"Xlib.xobject.drawable.Windowz36z37z38z39z310z311é
+!Xlib.ext.randr.GetScreenSizeRange"!Xlib.ext.randr.GetScreenSizeRange*
+self
+Anyz36z37z38z39z310z311´
 set_screen_sizeXlib.ext.randr.set_screen_size"<
-Xlib.ext.randr.SetScreenSize"Xlib.ext.randr.SetScreenSize*F
-self<
-Xlib.xobject.drawable.Window"Xlib.xobject.drawable.Window*'
+Xlib.ext.randr.SetScreenSize"Xlib.ext.randr.SetScreenSize*
+self
+Any*'
 width
 builtins.int"builtins.int*(
 height
@@ -94,55 +94,55 @@ SetMonitorXlib.ext.randr.SetMonitor"Xlib.protocol.rq.Requestj36j37j38j39j
 height_in_millimetersD
 Union[builtins.int,None]
 builtins.int"builtins.int
-None z36z37z38z39z310z311å
+None z36z37z38z39z310z311°
 get_screen_resources#Xlib.ext.randr.get_screen_resources"F
-!Xlib.ext.randr.GetScreenResources"!Xlib.ext.randr.GetScreenResources*F
-self<
-Xlib.xobject.drawable.Window"Xlib.xobject.drawable.Windowz36z37z38z39z310z311£
+!Xlib.ext.randr.GetScreenResources"!Xlib.ext.randr.GetScreenResources*
+self
+Anyz36z37z38z39z310z311Í
 get_output_infoXlib.ext.randr.get_output_info"<
-Xlib.ext.randr.GetOutputInfo"Xlib.ext.randr.GetOutputInfo*¹
-self®
-:Union[Xlib.display.Display,Xlib.xobject.resource.Resource],
-Xlib.display.Display"Xlib.display.Display@
-Xlib.xobject.resource.Resource"Xlib.xobject.resource.Resource*(
+Xlib.ext.randr.GetOutputInfo"Xlib.ext.randr.GetOutputInfo*d
+selfZ
+Union[Xlib.display.Display,Any],
+Xlib.display.Display"Xlib.display.Display
+Any*(
 output
 builtins.int"builtins.int*2
 config_timestamp
-builtins.int"builtins.intz36z37z38z39z310z311‹
+builtins.int"builtins.intz36z37z38z39z310z311µ
 list_output_properties%Xlib.ext.randr.list_output_properties"J
-#Xlib.ext.randr.ListOutputProperties"#Xlib.ext.randr.ListOutputProperties*¹
-self®
-:Union[Xlib.display.Display,Xlib.xobject.resource.Resource],
-Xlib.display.Display"Xlib.display.Display@
-Xlib.xobject.resource.Resource"Xlib.xobject.resource.Resource*(
+#Xlib.ext.randr.ListOutputProperties"#Xlib.ext.randr.ListOutputProperties*d
+selfZ
+Union[Xlib.display.Display,Any],
+Xlib.display.Display"Xlib.display.Display
+Any*(
 output
-builtins.int"builtins.intz36z37z38z39z310z311³
+builtins.int"builtins.intz36z37z38z39z310z311Ý
 query_output_property$Xlib.ext.randr.query_output_property"H
-"Xlib.ext.randr.QueryOutputProperty""Xlib.ext.randr.QueryOutputProperty*¹
-self®
-:Union[Xlib.display.Display,Xlib.xobject.resource.Resource],
-Xlib.display.Display"Xlib.display.Display@
-Xlib.xobject.resource.Resource"Xlib.xobject.resource.Resource*(
+"Xlib.ext.randr.QueryOutputProperty""Xlib.ext.randr.QueryOutputProperty*d
+selfZ
+Union[Xlib.display.Display,Any],
+Xlib.display.Display"Xlib.display.Display
+Any*(
 output
 builtins.int"builtins.int**
 property
-builtins.int"builtins.intz36z37z38z39z310z311Ã
+builtins.int"builtins.intz36z37z38z39z310z311í
 configure_output_property(Xlib.ext.randr.configure_output_property"P
-&Xlib.ext.randr.ConfigureOutputProperty"&Xlib.ext.randr.ConfigureOutputProperty*¹
-self®
-:Union[Xlib.display.Display,Xlib.xobject.resource.Resource],
-Xlib.display.Display"Xlib.display.Display@
-Xlib.xobject.resource.Resource"Xlib.xobject.resource.Resource*(
+&Xlib.ext.randr.ConfigureOutputProperty"&Xlib.ext.randr.ConfigureOutputProperty*d
+selfZ
+Union[Xlib.display.Display,Any],
+Xlib.display.Display"Xlib.display.Display
+Any*(
 output
 builtins.int"builtins.int**
 property
-builtins.int"builtins.intz36z37z38z39z310z311„
+builtins.int"builtins.intz36z37z38z39z310z311®
 change_output_property%Xlib.ext.randr.change_output_property"J
-#Xlib.ext.randr.ChangeOutputProperty"#Xlib.ext.randr.ChangeOutputProperty*¹
-self®
-:Union[Xlib.display.Display,Xlib.xobject.resource.Resource],
-Xlib.display.Display"Xlib.display.Display@
-Xlib.xobject.resource.Resource"Xlib.xobject.resource.Resource*(
+#Xlib.ext.randr.ChangeOutputProperty"#Xlib.ext.randr.ChangeOutputProperty*d
+selfZ
+Union[Xlib.display.Display,Any],
+Xlib.display.Display"Xlib.display.Display
+Any*(
 output
 builtins.int"builtins.int**
 property
@@ -156,23 +156,23 @@ DUnion[typing.Sequence[builtins.float],typing.Sequence[builtins.str]]T
 typing.Sequence[builtins.float] 
 builtins.float"builtins.float"typing.SequenceN
 typing.Sequence[builtins.str]
-builtins.str"builtins.str"typing.Sequencez36z37z38z39z310z311·
+builtins.str"builtins.str"typing.Sequencez36z37z38z39z310z311á
 delete_output_property%Xlib.ext.randr.delete_output_property"J
-#Xlib.ext.randr.DeleteOutputProperty"#Xlib.ext.randr.DeleteOutputProperty*¹
-self®
-:Union[Xlib.display.Display,Xlib.xobject.resource.Resource],
-Xlib.display.Display"Xlib.display.Display@
-Xlib.xobject.resource.Resource"Xlib.xobject.resource.Resource*(
+#Xlib.ext.randr.DeleteOutputProperty"#Xlib.ext.randr.DeleteOutputProperty*d
+selfZ
+Union[Xlib.display.Display,Any],
+Xlib.display.Display"Xlib.display.Display
+Any*(
 output
 builtins.int"builtins.int**
 property
-builtins.int"builtins.intz36z37z38z39z310z311Ž
+builtins.int"builtins.intz36z37z38z39z310z311¸
 get_output_property"Xlib.ext.randr.get_output_property"D
- Xlib.ext.randr.GetOutputProperty" Xlib.ext.randr.GetOutputProperty*¹
-self®
-:Union[Xlib.display.Display,Xlib.xobject.resource.Resource],
-Xlib.display.Display"Xlib.display.Display@
-Xlib.xobject.resource.Resource"Xlib.xobject.resource.Resource*(
+ Xlib.ext.randr.GetOutputProperty" Xlib.ext.randr.GetOutputProperty*d
+selfZ
+Union[Xlib.display.Display,Any],
+Xlib.display.Display"Xlib.display.Display
+Any*(
 output
 builtins.int"builtins.int**
 property
@@ -186,61 +186,61 @@ DUnion[typing.Sequence[builtins.float],typing.Sequence[builtins.str]]T
 delete
 builtins.bool"builtins.bool *-
 pending
-builtins.bool"builtins.bool z36z37z38z39z310z311¡
+builtins.bool"builtins.bool z36z37z38z39z310z311ì
 create_modeXlib.ext.randr.create_mode"6
-Xlib.ext.randr.CreateMode"Xlib.ext.randr.CreateMode*F
-self<
-Xlib.xobject.drawable.Window"Xlib.xobject.drawable.Window*³
+Xlib.ext.randr.CreateMode"Xlib.ext.randr.CreateMode*
+self
+Any*³
 mode¨
 (TypeAlias[typing.Sequence[builtins.int]]N
 typing.Sequence[builtins.int]
 builtins.int"builtins.int"typing.Sequence"*Xlib.ext.randr._RandRModeInfo13IntSequence*&
 name
-builtins.str"builtins.strz36z37z38z39z310z311ã
+builtins.str"builtins.strz36z37z38z39z310z311
 destroy_modeXlib.ext.randr.destroy_mode"8
-Xlib.ext.randr.DestroyMode"Xlib.ext.randr.DestroyMode*¹
-self®
-:Union[Xlib.display.Display,Xlib.xobject.resource.Resource],
-Xlib.display.Display"Xlib.display.Display@
-Xlib.xobject.resource.Resource"Xlib.xobject.resource.Resource*&
+Xlib.ext.randr.DestroyMode"Xlib.ext.randr.DestroyMode*d
+selfZ
+Union[Xlib.display.Display,Any],
+Xlib.display.Display"Xlib.display.Display
+Any*&
 mode
-builtins.int"builtins.intz36z37z38z39z310z311—
+builtins.int"builtins.intz36z37z38z39z310z311Á
 add_output_modeXlib.ext.randr.add_output_mode"<
-Xlib.ext.randr.AddOutputMode"Xlib.ext.randr.AddOutputMode*¹
-self®
-:Union[Xlib.display.Display,Xlib.xobject.resource.Resource],
-Xlib.display.Display"Xlib.display.Display@
-Xlib.xobject.resource.Resource"Xlib.xobject.resource.Resource*(
+Xlib.ext.randr.AddOutputMode"Xlib.ext.randr.AddOutputMode*d
+selfZ
+Union[Xlib.display.Display,Any],
+Xlib.display.Display"Xlib.display.Display
+Any*(
 output
 builtins.int"builtins.int*&
 mode
-builtins.int"builtins.intz36z37z38z39z310z311£
+builtins.int"builtins.intz36z37z38z39z310z311Í
 delete_output_mode!Xlib.ext.randr.delete_output_mode"B
-Xlib.ext.randr.DeleteOutputMode"Xlib.ext.randr.DeleteOutputMode*¹
-self®
-:Union[Xlib.display.Display,Xlib.xobject.resource.Resource],
-Xlib.display.Display"Xlib.display.Display@
-Xlib.xobject.resource.Resource"Xlib.xobject.resource.Resource*(
+Xlib.ext.randr.DeleteOutputMode"Xlib.ext.randr.DeleteOutputMode*d
+selfZ
+Union[Xlib.display.Display,Any],
+Xlib.display.Display"Xlib.display.Display
+Any*(
 output
 builtins.int"builtins.int*&
 mode
-builtins.int"builtins.intz36z37z38z39z310z311™
+builtins.int"builtins.intz36z37z38z39z310z311Ã
 get_crtc_infoXlib.ext.randr.get_crtc_info"8
-Xlib.ext.randr.GetCrtcInfo"Xlib.ext.randr.GetCrtcInfo*¹
-self®
-:Union[Xlib.display.Display,Xlib.xobject.resource.Resource],
-Xlib.display.Display"Xlib.display.Display@
-Xlib.xobject.resource.Resource"Xlib.xobject.resource.Resource*&
+Xlib.ext.randr.GetCrtcInfo"Xlib.ext.randr.GetCrtcInfo*d
+selfZ
+Union[Xlib.display.Display,Any],
+Xlib.display.Display"Xlib.display.Display
+Any*&
 crtc
 builtins.int"builtins.int*2
 config_timestamp
-builtins.int"builtins.intz36z37z38z39z310z311Ë
+builtins.int"builtins.intz36z37z38z39z310z311õ
 set_crtc_configXlib.ext.randr.set_crtc_config"<
-Xlib.ext.randr.SetCrtcConfig"Xlib.ext.randr.SetCrtcConfig*¹
-self®
-:Union[Xlib.display.Display,Xlib.xobject.resource.Resource],
-Xlib.display.Display"Xlib.display.Display@
-Xlib.xobject.resource.Resource"Xlib.xobject.resource.Resource*&
+Xlib.ext.randr.SetCrtcConfig"Xlib.ext.randr.SetCrtcConfig*d
+selfZ
+Union[Xlib.display.Display,Any],
+Xlib.display.Display"Xlib.display.Display
+Any*&
 crtc
 builtins.int"builtins.int*2
 config_timestamp
@@ -257,29 +257,29 @@ DUnion[typing.Sequence[builtins.float],typing.Sequence[builtins.str]]T
 typing.Sequence[builtins.int]
 builtins.int"builtins.int"typing.Sequence*-
 	timestamp
-builtins.int"builtins.int z36z37z38z39z310z311û
+builtins.int"builtins.int z36z37z38z39z310z311¥
 get_crtc_gamma_size"Xlib.ext.randr.get_crtc_gamma_size"B
-Xlib.ext.randr.GetCrtcGammaSize"Xlib.ext.randr.GetCrtcGammaSize*¹
-self®
-:Union[Xlib.display.Display,Xlib.xobject.resource.Resource],
-Xlib.display.Display"Xlib.display.Display@
-Xlib.xobject.resource.Resource"Xlib.xobject.resource.Resource*&
+Xlib.ext.randr.GetCrtcGammaSize"Xlib.ext.randr.GetCrtcGammaSize*d
+selfZ
+Union[Xlib.display.Display,Any],
+Xlib.display.Display"Xlib.display.Display
+Any*&
 crtc
-builtins.int"builtins.intz36z37z38z39z310z311é
+builtins.int"builtins.intz36z37z38z39z310z311“
 get_crtc_gammaXlib.ext.randr.get_crtc_gamma":
-Xlib.ext.randr.GetCrtcGamma"Xlib.ext.randr.GetCrtcGamma*¹
-self®
-:Union[Xlib.display.Display,Xlib.xobject.resource.Resource],
-Xlib.display.Display"Xlib.display.Display@
-Xlib.xobject.resource.Resource"Xlib.xobject.resource.Resource*&
+Xlib.ext.randr.GetCrtcGamma"Xlib.ext.randr.GetCrtcGamma*d
+selfZ
+Union[Xlib.display.Display,Any],
+Xlib.display.Display"Xlib.display.Display
+Any*&
 crtc
-builtins.int"builtins.intz36z37z38z39z310z311Ÿ
+builtins.int"builtins.intz36z37z38z39z310z311É
 set_crtc_gammaXlib.ext.randr.set_crtc_gamma":
-Xlib.ext.randr.SetCrtcGamma"Xlib.ext.randr.SetCrtcGamma*¹
-self®
-:Union[Xlib.display.Display,Xlib.xobject.resource.Resource],
-Xlib.display.Display"Xlib.display.Display@
-Xlib.xobject.resource.Resource"Xlib.xobject.resource.Resource*&
+Xlib.ext.randr.SetCrtcGamma"Xlib.ext.randr.SetCrtcGamma*d
+selfZ
+Union[Xlib.display.Display,Any],
+Xlib.display.Display"Xlib.display.Display
+Any*&
 crtc
 builtins.int"builtins.int*&
 size
@@ -292,44 +292,44 @@ DUnion[typing.Sequence[builtins.float],typing.Sequence[builtins.str]]T
 builtins.int"builtins.int"typing.Sequence*X
 blueN
 typing.Sequence[builtins.int]
-builtins.int"builtins.int"typing.Sequencez36z37z38z39z310z311ƒ
+builtins.int"builtins.int"typing.Sequencez36z37z38z39z310z311Î
 get_screen_resources_current+Xlib.ext.randr.get_screen_resources_current"T
-(Xlib.ext.randr.GetScreenResourcesCurrent"(Xlib.ext.randr.GetScreenResourcesCurrent*F
-self<
-Xlib.xobject.drawable.Window"Xlib.xobject.drawable.Windowz36z37z38z39z310z311Ý
+(Xlib.ext.randr.GetScreenResourcesCurrent"(Xlib.ext.randr.GetScreenResourcesCurrent*
+self
+Anyz36z37z38z39z310z311‡
 set_crtc_transform!Xlib.ext.randr.set_crtc_transform"B
-Xlib.ext.randr.SetCrtcTransform"Xlib.ext.randr.SetCrtcTransform*¹
-self®
-:Union[Xlib.display.Display,Xlib.xobject.resource.Resource],
-Xlib.display.Display"Xlib.display.Display@
-Xlib.xobject.resource.Resource"Xlib.xobject.resource.Resource*&
+Xlib.ext.randr.SetCrtcTransform"Xlib.ext.randr.SetCrtcTransform*d
+selfZ
+Union[Xlib.display.Display,Any],
+Xlib.display.Display"Xlib.display.Display
+Any*&
 crtc
 builtins.int"builtins.int*b
 n_bytes_filterN
 typing.Sequence[builtins.int]
-builtins.int"builtins.int"typing.Sequencez36z37z38z39z310z311ù
+builtins.int"builtins.int"typing.Sequencez36z37z38z39z310z311£
 get_crtc_transform!Xlib.ext.randr.get_crtc_transform"B
-Xlib.ext.randr.GetCrtcTransform"Xlib.ext.randr.GetCrtcTransform*¹
-self®
-:Union[Xlib.display.Display,Xlib.xobject.resource.Resource],
-Xlib.display.Display"Xlib.display.Display@
-Xlib.xobject.resource.Resource"Xlib.xobject.resource.Resource*&
+Xlib.ext.randr.GetCrtcTransform"Xlib.ext.randr.GetCrtcTransform*d
+selfZ
+Union[Xlib.display.Display,Any],
+Xlib.display.Display"Xlib.display.Display
+Any*&
 crtc
-builtins.int"builtins.intz36z37z38z39z310z311ß
+builtins.int"builtins.intz36z37z38z39z310z311‰
 get_panningXlib.ext.randr.get_panning"6
-Xlib.ext.randr.GetPanning"Xlib.ext.randr.GetPanning*¹
-self®
-:Union[Xlib.display.Display,Xlib.xobject.resource.Resource],
-Xlib.display.Display"Xlib.display.Display@
-Xlib.xobject.resource.Resource"Xlib.xobject.resource.Resource*&
+Xlib.ext.randr.GetPanning"Xlib.ext.randr.GetPanning*d
+selfZ
+Union[Xlib.display.Display,Any],
+Xlib.display.Display"Xlib.display.Display
+Any*&
 crtc
-builtins.int"builtins.intz36z37z38z39z310z311¨
+builtins.int"builtins.intz36z37z38z39z310z311Ò
 set_panningXlib.ext.randr.set_panning"6
-Xlib.ext.randr.SetPanning"Xlib.ext.randr.SetPanning*¹
-self®
-:Union[Xlib.display.Display,Xlib.xobject.resource.Resource],
-Xlib.display.Display"Xlib.display.Display@
-Xlib.xobject.resource.Resource"Xlib.xobject.resource.Resource*&
+Xlib.ext.randr.SetPanning"Xlib.ext.randr.SetPanning*d
+selfZ
+Union[Xlib.display.Display,Any],
+Xlib.display.Display"Xlib.display.Display
+Any*&
 crtc
 builtins.int"builtins.int*&
 left
@@ -359,27 +359,27 @@ border_top
 border_height
 builtins.int"builtins.int*-
 	timestamp
-builtins.int"builtins.int z36z37z38z39z310z311‡
+builtins.int"builtins.int z36z37z38z39z310z311Ò
 set_output_primary!Xlib.ext.randr.set_output_primary"B
-Xlib.ext.randr.SetOutputPrimary"Xlib.ext.randr.SetOutputPrimary*F
-self<
-Xlib.xobject.drawable.Window"Xlib.xobject.drawable.Window*(
+Xlib.ext.randr.SetOutputPrimary"Xlib.ext.randr.SetOutputPrimary*
+self
+Any*(
 output
-builtins.int"builtins.intz36z37z38z39z310z311Ý
+builtins.int"builtins.intz36z37z38z39z310z311¨
 get_output_primary!Xlib.ext.randr.get_output_primary"B
-Xlib.ext.randr.GetOutputPrimary"Xlib.ext.randr.GetOutputPrimary*F
-self<
-Xlib.xobject.drawable.Window"Xlib.xobject.drawable.Windowz36z37z38z39z310z311ø
+Xlib.ext.randr.GetOutputPrimary"Xlib.ext.randr.GetOutputPrimary*
+self
+Anyz36z37z38z39z310z311Ã
 get_monitorsXlib.ext.randr.get_monitors"8
-Xlib.ext.randr.GetMonitors"Xlib.ext.randr.GetMonitors*F
-self<
-Xlib.xobject.drawable.Window"Xlib.xobject.drawable.Window*/
+Xlib.ext.randr.GetMonitors"Xlib.ext.randr.GetMonitors*
+self
+Any*/
 	is_active
-builtins.bool"builtins.bool z36z37z38z39z310z311°
+builtins.bool"builtins.bool z36z37z38z39z310z311û
 set_monitorXlib.ext.randr.set_monitor"6
-Xlib.ext.randr.SetMonitor"Xlib.ext.randr.SetMonitor*F
-self<
-Xlib.xobject.drawable.Window"Xlib.xobject.drawable.Window*ê
+Xlib.ext.randr.SetMonitor"Xlib.ext.randr.SetMonitor*
+self
+Any*ê
 monitor_info×
 ŽTuple[builtins.int,builtins.bool,builtins.bool,typing.Sequence[builtins.int],builtins.int,builtins.int,builtins.int,builtins.int,builtins.int]
 builtins.int"builtins.int
@@ -391,13 +391,13 @@ border_top
 builtins.int"builtins.int
 builtins.int"builtins.int
 builtins.int"builtins.int
-builtins.int"builtins.intz36z37z38z39z310z311ë
+builtins.int"builtins.intz36z37z38z39z310z311•
 delete_monitorXlib.ext.randr.delete_monitor"<
-Xlib.ext.randr.DeleteMonitor"Xlib.ext.randr.DeleteMonitor*¹
-self®
-:Union[Xlib.display.Display,Xlib.xobject.resource.Resource],
-Xlib.display.Display"Xlib.display.Display@
-Xlib.xobject.resource.Resource"Xlib.xobject.resource.Resource*&
+Xlib.ext.randr.DeleteMonitor"Xlib.ext.randr.DeleteMonitor*d
+selfZ
+Union[Xlib.display.Display,Any],
+Xlib.display.Display"Xlib.display.Display
+Any*&
 name
 builtins.str"builtins.strz36z37z38z39z310z311Ï
 initXlib.ext.randr.init"
