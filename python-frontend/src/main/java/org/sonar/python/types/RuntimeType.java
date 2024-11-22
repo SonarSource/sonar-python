@@ -31,9 +31,6 @@ import org.sonar.python.semantic.ClassSymbolImpl;
 
 public class RuntimeType implements InferredType {
 
-  // Name of the type returned by the type() function
-  private static final String TYPE_CLASS_NAME = "type";
-
   private ClassSymbol typeClass;
   private String builtinFullyQualifiedName;
   private Set<String> typeClassSuperClassesFQN = null;
@@ -55,25 +52,21 @@ public class RuntimeType implements InferredType {
     if (other instanceof UnionType) {
       return other.isIdentityComparableWith(this);
     }
-    if (isComparingTypeWithMetaclass(other)) {
-      return true;
-    }
-    return this.equals(other);
+    return isComparingTypeWithMetaclass(other) || this.equals(other);
   }
 
   private boolean isComparingTypeWithMetaclass(InferredType other) {
     if (other instanceof RuntimeType otherRuntimeType) {
-      boolean hasOtherMetaClass = hasMetaclassInHierarchy(otherRuntimeType);
-      boolean hasThisMetaClass = hasMetaclassInHierarchy(this);
-      return (TYPE_CLASS_NAME.equals(getTypeClass().name()) && hasOtherMetaClass)
-        || (hasThisMetaClass && TYPE_CLASS_NAME.equals(otherRuntimeType.getTypeClass().name()));
+      boolean hasOtherMetaClass = hasMetaclassInHierarchy(otherRuntimeType.getTypeClass());
+      boolean hasThisMetaClass = hasMetaclassInHierarchy(getTypeClass());
+      return (InferredTypes.TYPE.equals(this) && hasOtherMetaClass)
+        || (hasThisMetaClass && InferredTypes.TYPE.equals(otherRuntimeType));
     }
     return false;
   }
 
-  private static boolean hasMetaclassInHierarchy(RuntimeType runtimeType) {
-    return runtimeType.getTypeClass().hasMetaClass()
-      || runtimeType.getTypeClass().superClasses().stream().filter(ClassSymbol.class::isInstance).anyMatch(c -> ((ClassSymbol) c).hasMetaClass());
+  private static boolean hasMetaclassInHierarchy(ClassSymbol classSymbol) {
+    return classSymbol.hasMetaClass() || classSymbol.superClasses().stream().filter(ClassSymbol.class::isInstance).anyMatch(c -> hasMetaclassInHierarchy((ClassSymbol) c));
   }
 
   @Override
