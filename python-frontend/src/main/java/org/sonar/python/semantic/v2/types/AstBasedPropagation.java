@@ -22,19 +22,30 @@ package org.sonar.python.semantic.v2.types;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import javax.annotation.CheckForNull;
+import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.Name;
+import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.semantic.v2.SymbolV2;
+import org.sonar.python.semantic.v2.SymbolV2Utils;
 import org.sonar.python.semantic.v2.TypeTable;
+import org.sonar.python.semantic.v2.UsageV2;
+import org.sonar.python.tree.NameImpl;
+import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.types.v2.PythonType;
+import org.sonar.python.types.v2.UnionType;
 
 public class AstBasedPropagation {
   private final Map<SymbolV2, Set<Propagation>> propagationsByLhs;
-  private final TypeTable typeTable;
+  private final Propagator propagator;
 
   public AstBasedPropagation(Map<SymbolV2, Set<Propagation>> propagationsByLhs, TypeTable typeTable) {
     this.propagationsByLhs = propagationsByLhs;
-    this.typeTable = typeTable;
+    this.propagator = new Propagator(typeTable);
   }
 
   public Map<SymbolV2, Set<PythonType>> processPropagations(Set<SymbolV2> trackedVars) {
@@ -56,18 +67,76 @@ public class AstBasedPropagation {
     return propagations.stream().collect(Collectors.groupingBy(Propagation::lhsSymbol, Collectors.mapping(Propagation::rhsType, Collectors.toSet())));
   }
 
-  private static void applyPropagations(Set<Propagation> propagations, Set<SymbolV2> initializedVars, boolean checkDependenciesReadiness) {
+  private void applyPropagations(Set<Propagation> propagations, Set<SymbolV2> initializedVars, boolean checkDependenciesReadiness) {
     Set<Propagation> workSet = new HashSet<>(propagations);
     while (!workSet.isEmpty()) {
       Iterator<Propagation> iterator = workSet.iterator();
       Propagation propagation = iterator.next();
       iterator.remove();
       if (!checkDependenciesReadiness || propagation.areDependenciesReady(initializedVars)) {
-        boolean learnt = propagation.propagate(initializedVars);
+        boolean learnt = propagator.propagate(propagation, initializedVars);
         if (learnt) {
           workSet.addAll(propagation.dependents());
         }
       }
     }
   }
+
+  private record Propagator(TypeTable typeTable) {
+    /**
+     * @return true if the propagation effectively changed the inferred type of assignment LHS
+     */
+    public boolean propagate(Propagation propagation, Set<SymbolV2> initializedVars) {
+      PythonType rhsType = propagation.rhsType();
+      Name lhsName = propagation.lhsName();
+      SymbolV2 lhsSymbol = propagation.lhsSymbol();
+      if (initializedVars.add(lhsSymbol)) {
+        propagateTypeToUsages(propagation, rhsType);
+        return true;
+      } else {
+        PythonType currentType = currentType(lhsName);
+        if (currentType == null) {
+          return false;
+        }
+        PythonType newType = UnionType.or(rhsType, currentType);
+        propagateTypeToUsages(propagation, newType);
+        return !newType.equals(currentType);
+      }
+    }
+
+    private void propagateTypeToUsages(Propagation propagation, PythonType newType) {
+      Tree scopeTree = propagation.scopeTree(propagation.lhsName());
+      getSymbolNonDeclarationUsageTrees(propagation.lhsSymbol)
+        .filter(NameImpl.class::isInstance)
+        .map(NameImpl.class::cast)
+        // Avoid propagation to usages in nested scopes, as this may lead to FPs
+        .filter(n -> isInSameScope(propagation, n, scopeTree))
+        .forEach(n -> n.typeV2(newType));
+    }
+
+    @CheckForNull
+    private static PythonType currentType(Name lhsName) {
+      return Optional.ofNullable(lhsName.symbolV2())
+        .stream()
+        .flatMap(Propagator::getSymbolNonDeclarationUsageTrees)
+        .flatMap(TreeUtils.toStreamInstanceOfMapper(Expression.class))
+        .findFirst()
+        .map(Expression::typeV2)
+        .orElse(null);
+    }
+
+    public static Stream<Tree> getSymbolNonDeclarationUsageTrees(SymbolV2 symbol) {
+      return symbol.usages()
+        .stream()
+        // Function and class definition names will always have FunctionType and ClassType respectively
+        // so they are filtered out of type propagation
+        .filter(u -> !SymbolV2Utils.isDeclaration(u))
+        .map(UsageV2::tree);
+    }
+
+    private boolean isInSameScope(Propagation propagation, Name n, Tree scopeTree) {
+      return Optional.ofNullable(propagation.scopeTree(n)).filter(scopeTree::equals).isPresent();
+    }
+  }
+
 }
