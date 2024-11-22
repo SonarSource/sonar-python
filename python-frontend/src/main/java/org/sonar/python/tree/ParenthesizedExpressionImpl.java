@@ -29,6 +29,7 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TreeVisitor;
 import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.types.HasTypeDependencies;
+import org.sonar.python.types.v2.PythonType;
 
 public class ParenthesizedExpressionImpl extends PyTree implements ParenthesizedExpression, HasTypeDependencies {
 
@@ -75,6 +76,11 @@ public class ParenthesizedExpressionImpl extends PyTree implements Parenthesized
   @Override
   public InferredType type() {
     return expression.type();
+  }
+
+  @Override
+  public PythonType typeV2() {
+    return expression.typeV2();
   }
 
   @Override

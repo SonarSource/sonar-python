@@ -1,0 +1,97 @@
+/*
+ * SonarQube Python Plugin
+ * Copyright (C) 2011-2024 SonarSource SA
+ * mailto:info AT sonarsource DOT com
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ */
+package org.sonar.python.semantic.v2.types;
+
+import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
+import org.sonar.plugins.python.api.tree.Token;
+import org.sonar.plugins.python.api.tree.UnaryExpression;
+import org.sonar.plugins.python.api.types.BuiltinTypes;
+import org.sonar.python.semantic.v2.TypeTable;
+import org.sonar.python.tree.UnaryExpressionImpl;
+import org.sonar.python.types.v2.ObjectType;
+import org.sonar.python.types.v2.PythonType;
+import org.sonar.python.types.v2.TriBool;
+import org.sonar.python.types.v2.TypeCheckBuilder;
+import org.sonar.python.types.v2.TypeUtils;
+
+public class TrivialTypePropagationVisitor extends BaseTreeVisitor {
+  private TypeCheckBuilder isBooleanTypeCheck;
+  private TypeCheckBuilder isIntTypeCheck;
+  private TypeCheckBuilder isFloatTypeCheck;
+  private TypeCheckBuilder isComplexTypeCheck;
+
+  private PythonType intType;
+  private PythonType boolType;
+
+  public TrivialTypePropagationVisitor(TypeTable typeTable) {
+    this.isBooleanTypeCheck = new TypeCheckBuilder(typeTable).isBuiltinWithName(BuiltinTypes.BOOL);
+    this.isIntTypeCheck = new TypeCheckBuilder(typeTable).isBuiltinWithName(BuiltinTypes.INT);
+    this.isFloatTypeCheck = new TypeCheckBuilder(typeTable).isBuiltinWithName(BuiltinTypes.FLOAT);
+    this.isComplexTypeCheck = new TypeCheckBuilder(typeTable).isBuiltinWithName(BuiltinTypes.COMPLEX);
+
+    var builtins = typeTable.getBuiltinsModule();
+    this.intType = builtins.resolveMember(BuiltinTypes.INT).orElse(PythonType.UNKNOWN);
+    this.boolType = builtins.resolveMember(BuiltinTypes.BOOL).orElse(PythonType.UNKNOWN);
+  }
+
+  @Override
+  public void visitUnaryExpression(UnaryExpression unaryExpr) {
+    super.visitUnaryExpression(unaryExpr);
+
+    Token operator = unaryExpr.operator();
+    PythonType exprType = switch (operator.value()) {
+      case "~" -> intType;
+      case "not" -> boolType;
+      case "+", "-" -> getTypeWhenUnaryPlusMinus(unaryExpr);
+      default -> PythonType.UNKNOWN;
+    };
+
+    if (unaryExpr instanceof UnaryExpressionImpl unaryExprImpl) {
+      unaryExprImpl.typeV2(toObjectType(exprType));
+    }
+  }
+
+  private PythonType getTypeWhenUnaryPlusMinus(UnaryExpression unaryExpr) {
+    var innerExprType = unaryExpr.expression().typeV2();
+    return TypeUtils.map(innerExprType, this::mapUnaryPlusMinusType);
+  }
+
+  private PythonType mapUnaryPlusMinusType(PythonType type) {
+    if (isNumber(type)) {
+      return type;
+    } else if(isBooleanTypeCheck.check(type) == TriBool.TRUE) {
+      return toObjectType(intType);
+    }
+    return PythonType.UNKNOWN;
+  }
+
+  private boolean isNumber(PythonType type)  {
+    return isIntTypeCheck.check(type) == TriBool.TRUE
+      || isFloatTypeCheck.check(type) == TriBool.TRUE
+      || isComplexTypeCheck.check(type) == TriBool.TRUE;
+  }
+
+  private static PythonType toObjectType(PythonType type) {
+    if(type instanceof ObjectType || type == PythonType.UNKNOWN) {
+      return type;
+    }
+    return new ObjectType(type);
+  }
+}

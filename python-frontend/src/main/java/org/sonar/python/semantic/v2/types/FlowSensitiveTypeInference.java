@@ -48,10 +48,13 @@ public class FlowSensitiveTypeInference extends ForwardAnalysis {
   private final Map<Statement, Assignment> assignmentsByAssignmentStatement;
   private final Map<Statement, Set<Definition>> definitionsByDefinitionStatement;
   private final Map<String, PythonType> parameterTypesByName;
+
+  private final TypeTable typeTable;
   private final IsInstanceVisitor isInstanceVisitor;
 
+
   public FlowSensitiveTypeInference(
-    TypeTable projectLevelTypeTable, Set<SymbolV2> trackedVars,
+    TypeTable typeTable, Set<SymbolV2> trackedVars,
     Map<Statement, Assignment> assignmentsByAssignmentStatement,
     Map<Statement, Set<Definition>> definitionsByDefinitionStatement,
     Map<String, PythonType> parameterTypesByName
@@ -60,7 +63,9 @@ public class FlowSensitiveTypeInference extends ForwardAnalysis {
     this.assignmentsByAssignmentStatement = assignmentsByAssignmentStatement;
     this.definitionsByDefinitionStatement = definitionsByDefinitionStatement;
     this.parameterTypesByName = parameterTypesByName;
-    this.isInstanceVisitor = new IsInstanceVisitor(projectLevelTypeTable);
+
+    this.typeTable = typeTable;
+    this.isInstanceVisitor = new IsInstanceVisitor(typeTable);
   }
 
   @Override
@@ -132,8 +137,8 @@ public class FlowSensitiveTypeInference extends ForwardAnalysis {
     updateTree(name, state);
   }
 
-  private static void updateTree(Tree tree, TypeInferenceProgramState state) {
-    tree.accept(new ProgramStateTypeInferenceVisitor(state));
+  private void updateTree(Tree tree, TypeInferenceProgramState state) {
+    tree.accept(new ProgramStateTypeInferenceVisitor(state, typeTable));
   }
 
 
