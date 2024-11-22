@@ -95,7 +95,9 @@ public class AstBasedPropagation {
     }
   }
 
+
   private record Propagator(TypeTable typeTable) {
+
     /**
      * @return true if the propagation effectively changed the inferred type of assignment LHS
      */
@@ -125,6 +127,13 @@ public class AstBasedPropagation {
         // Avoid propagation to usages in nested scopes, as this may lead to FPs
         .filter(n -> isInSameScope(propagation, n, scopeTree))
         .forEach(n -> n.typeV2(newType));
+
+      updateTree(propagation);
+    }
+
+    private void updateTree(Propagation propagation) {
+      Tree scopeTree = propagation.scopeTree(propagation.lhsName());
+      scopeTree.accept(new TrivialTypePropagationVisitor(typeTable));
     }
 
     @CheckForNull

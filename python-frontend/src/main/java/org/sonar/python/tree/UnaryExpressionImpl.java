@@ -27,10 +27,11 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TreeVisitor;
 import org.sonar.plugins.python.api.tree.UnaryExpression;
 import org.sonar.plugins.python.api.types.InferredType;
+import org.sonar.python.types.HasTypeDependencies;
 import org.sonar.python.types.InferredTypes;
 import org.sonar.python.types.v2.PythonType;
 
-public class UnaryExpressionImpl extends PyTree implements UnaryExpression {
+public class UnaryExpressionImpl extends PyTree implements UnaryExpression, HasTypeDependencies {
 
   private static final Map<String, Kind> KINDS_BY_OPERATOR = kindsByOperator();
 
@@ -98,5 +99,10 @@ public class UnaryExpressionImpl extends PyTree implements UnaryExpression {
   @Override
   public PythonType typeV2() {
     return type;
+  }
+
+  @Override
+  public List<Expression> typeDependencies() {
+    return List.of(expression);
   }
 }

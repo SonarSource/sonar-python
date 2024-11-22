@@ -2610,6 +2610,18 @@ public class TypeInferenceV2Test {
       Arguments.of("x = True; ~x", INT_TYPE),
       Arguments.of("x = True; not x", BOOL_TYPE),
       Arguments.of("x = 1; not x", BOOL_TYPE),
+      Arguments.of("x = 1; y = -x; -y", INT_TYPE),
+      Arguments.of("x = 1; x = 1; y = -x; -y", INT_TYPE),
+      Arguments.of("x = 1; y = 1; y = -x; -y", INT_TYPE),
+
+      Arguments.of("""
+        if someCond:
+          x = 1
+        else:
+          x = True
+        y = x
+        -y
+        """, INT_TYPE),
 
       Arguments.of("x = 1; -(x + 1)", INT_TYPE)
     );
@@ -2618,9 +2630,19 @@ public class TypeInferenceV2Test {
   @ParameterizedTest
   @MethodSource("unary_expression_of_variables")
   void unary_expression_of_variables(String code, PythonType expectedType) {
-    assertThat(lastExpression(code)).extracting(expr -> expr.typeV2().unwrappedType()).isEqualTo(expectedType);
+    assertThat(lastExpression(code).typeV2()).isInstanceOf(ObjectType.class).extracting(PythonType::unwrappedType).isEqualTo(expectedType);
   }
 
+
+  @ParameterizedTest
+  @MethodSource("unary_expression_of_variables")
+  void unary_expression_of_variables_with_try_except(String code, PythonType expectedType) {
+    var codeWithTryCatch = """
+      try: pass
+      except: pass
+      """ + code;
+    assertThat(lastExpression(codeWithTryCatch)).extracting(expr -> expr.typeV2().unwrappedType()).isEqualTo(expectedType);
+  }
 
   @Test
   void imported_ambiguous_symbol() {
