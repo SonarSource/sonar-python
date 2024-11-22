@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
@@ -190,18 +191,22 @@
           <plugin>
             <groupId>com.mycila</groupId>
             <artifactId>license-maven-plugin</artifactId>
-                <!-- This plugin is already configured in parent pom, however we want a configuration specific to this project -->
+            <!-- This plugin is already configured in parent pom, however we want a configuration specific to this project -->
             <configuration>
-              <includes>
-                <include>src/*/java/**/*.java</include>
-                <include>typeshed_serializer/serializer/**/*.py</include>
-                <include>typeshed_serializer/runners/**/*.py</include>
-                <include>typeshed_serializer/tests/**/*.py</include>
-              </includes>
-              <excludes>
-                <exclude>typeshed_serializer/serializer/proto_out/**</exclude>
-                <exclude>src/test/resources/**</exclude>
-              </excludes>
+              <licenseSets>
+                <licenseSet>
+                  <includes>
+                    <include>src/*/java/**/*.java</include>
+                    <include>typeshed_serializer/serializer/**/*.py</include>
+                    <include>typeshed_serializer/runners/**/*.py</include>
+                    <include>typeshed_serializer/tests/**/*.py</include>
+                  </includes>
+                  <excludes>
+                    <exclude>typeshed_serializer/serializer/proto_out/**</exclude>
+                    <exclude>src/test/resources/**</exclude>
+                  </excludes>
+                </licenseSet>
+              </licenseSets>
             </configuration>
           </plugin>
         </plugins>
