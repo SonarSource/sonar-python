@@ -19,11 +19,11 @@ package org.sonar.python.semantic.v2.types;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Stream;
-import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.QualifiedExpression;
+import org.sonar.python.semantic.v2.TypeTable;
 import org.sonar.python.tree.NameImpl;
 import org.sonar.python.types.v2.PythonType;
 import org.sonar.python.types.v2.UnionType;
@@ -31,10 +31,11 @@ import org.sonar.python.types.v2.UnionType;
 /**
  * Used in FlowSensitiveTypeInference to update name types based on program state
  */
-public class ProgramStateTypeInferenceVisitor extends BaseTreeVisitor {
+public class ProgramStateTypeInferenceVisitor extends TrivialTypePropagationVisitor {
   private final TypeInferenceProgramState state;
 
-  public ProgramStateTypeInferenceVisitor(TypeInferenceProgramState state) {
+  public ProgramStateTypeInferenceVisitor(TypeInferenceProgramState state, TypeTable typeTable) {
+    super(typeTable);
     this.state = state;
   }
 

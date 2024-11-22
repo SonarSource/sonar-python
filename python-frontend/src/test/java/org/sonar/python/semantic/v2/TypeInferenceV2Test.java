@@ -2603,6 +2603,7 @@ public class TypeInferenceV2Test {
   static Stream<Arguments> unary_expression_of_variables() {
     return Stream.of(
       Arguments.of("x = 1; -x", INT_TYPE),
+      Arguments.of("x = 1; -(-x)", INT_TYPE),
       Arguments.of("x = 1; +x", INT_TYPE),
       Arguments.of("x = True; -x", INT_TYPE),
       Arguments.of("x = True; +x", INT_TYPE),
@@ -2614,7 +2615,6 @@ public class TypeInferenceV2Test {
     );
   }
 
-  @Disabled("SONARPY-2257 unary expressions of non-literals do not propagate their type")
   @ParameterizedTest
   @MethodSource("unary_expression_of_variables")
   void unary_expression_of_variables(String code, PythonType expectedType) {
