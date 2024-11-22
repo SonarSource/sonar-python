@@ -52,7 +52,21 @@ public class RuntimeType implements InferredType {
     if (other instanceof UnionType) {
       return other.isIdentityComparableWith(this);
     }
-    return this.equals(other);
+    return isComparingTypeWithMetaclass(other) || this.equals(other);
+  }
+
+  private boolean isComparingTypeWithMetaclass(InferredType other) {
+    if (other instanceof RuntimeType otherRuntimeType) {
+      boolean hasOtherMetaClass = hasMetaclassInHierarchy(otherRuntimeType.getTypeClass());
+      boolean hasThisMetaClass = hasMetaclassInHierarchy(getTypeClass());
+      return (InferredTypes.TYPE.equals(this) && hasOtherMetaClass)
+        || (hasThisMetaClass && InferredTypes.TYPE.equals(otherRuntimeType));
+    }
+    return false;
+  }
+
+  private static boolean hasMetaclassInHierarchy(ClassSymbol classSymbol) {
+    return classSymbol.hasMetaClass() || classSymbol.superClasses().stream().filter(ClassSymbol.class::isInstance).anyMatch(c -> hasMetaclassInHierarchy((ClassSymbol) c));
   }
 
   @Override
