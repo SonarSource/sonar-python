@@ -10,3 +10,7 @@ class DuplicatedParent:
 
 class ParentWithDuplicatedParent(DuplicatedParent):
     ...
+
+from typing import Callable
+class MyClassWithAnnotatedMember:
+    my_member: Callable[[str, int],str]

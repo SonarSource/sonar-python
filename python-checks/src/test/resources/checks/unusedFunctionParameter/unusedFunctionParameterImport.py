@@ -1,4 +1,4 @@
-from unusedFunctionParameterImported import ImportedParent, ParentWithDuplicatedParent
+from unusedFunctionParameterImported import ImportedParent, ParentWithDuplicatedParent, MyClassWithAnnotatedMember
 
 class ChildFromImported(ImportedParent):
 
@@ -16,3 +16,6 @@ class ChildFromDuplicated(ParentWithDuplicatedParent):
     def do_something(self, a): # FN SONARPY-1829 ChildFromDuplicated has an unresolved type hierarchy, because of the duplicated parent classes
         return compute()
 
+class MyChild(MyClassWithAnnotatedMember):
+    def my_member(self, param, other_param): # OK, respecting contract defined in parent
+        return compute()
