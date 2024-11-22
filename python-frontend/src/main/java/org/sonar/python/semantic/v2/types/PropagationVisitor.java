@@ -21,12 +21,10 @@ package org.sonar.python.semantic.v2.types;
 
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
-import java.util.stream.Collectors;
 import org.sonar.plugins.python.api.tree.AliasedName;
 import org.sonar.plugins.python.api.tree.AnnotatedAssignment;
 import org.sonar.plugins.python.api.tree.AssignmentStatement;
@@ -43,7 +41,6 @@ import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.Statement;
 import org.sonar.python.semantic.v2.SymbolV2;
 import org.sonar.python.tree.NameImpl;
-import org.sonar.python.types.v2.PythonType;
 
 public class PropagationVisitor extends BaseTreeVisitor {
   private final Map<SymbolV2, Set<Propagation>> propagationsByLhs;
@@ -203,37 +200,5 @@ public class PropagationVisitor extends BaseTreeVisitor {
     }
   }
 
-  public Map<SymbolV2, Set<PythonType>> processPropagations(Set<SymbolV2> trackedVars) {
-    Set<Propagation> propagations = new HashSet<>();
-    Set<SymbolV2> initializedVars = new HashSet<>();
 
-    propagationsByLhs.forEach((lhs, props) -> {
-      if (trackedVars.contains(lhs)) {
-        props.stream()
-          .filter(Assignment.class::isInstance)
-          .map(Assignment.class::cast)
-          .forEach(a -> a.computeDependencies(trackedVars));
-        propagations.addAll(props);
-      }
-    });
-
-    applyPropagations(propagations, initializedVars, true);
-    applyPropagations(propagations, initializedVars, false);
-    return propagations.stream().collect(Collectors.groupingBy(Propagation::lhsSymbol, Collectors.mapping(Propagation::rhsType, Collectors.toSet())));
-  }
-
-  private static void applyPropagations(Set<Propagation> propagations, Set<SymbolV2> initializedVars, boolean checkDependenciesReadiness) {
-    Set<Propagation> workSet = new HashSet<>(propagations);
-    while (!workSet.isEmpty()) {
-      Iterator<Propagation> iterator = workSet.iterator();
-      Propagation propagation = iterator.next();
-      iterator.remove();
-      if (!checkDependenciesReadiness || propagation.areDependenciesReady(initializedVars)) {
-        boolean learnt = propagation.propagate(initializedVars);
-        if (learnt) {
-          workSet.addAll(propagation.dependents());
-        }
-      }
-    }
-  }
 }
