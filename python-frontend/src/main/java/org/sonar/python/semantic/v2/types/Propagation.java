@@ -64,7 +64,7 @@ public abstract class Propagation {
     return lhsSymbol;
   }
 
-  public void addVariableDependencies(SymbolV2 dependency) {
+  public void addVariableDependency(SymbolV2 dependency) {
     variableDependencies.add(dependency);
   }
 
