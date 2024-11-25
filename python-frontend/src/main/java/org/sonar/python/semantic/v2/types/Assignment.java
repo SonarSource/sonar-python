@@ -19,14 +19,11 @@
  */
 package org.sonar.python.semantic.v2.types;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
 import java.util.Map;
 import java.util.Set;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.python.semantic.v2.SymbolV2;
-import org.sonar.python.types.HasTypeDependencies;
 import org.sonar.python.types.v2.PythonType;
 
 public class Assignment extends Propagation {
@@ -40,22 +37,6 @@ public class Assignment extends Propagation {
     this.propagationsByLhs = propagationsByLhs;
   }
 
-  void computeDependencies(Set<SymbolV2> trackedVars) {
-    Deque<Expression> workList = new ArrayDeque<>();
-    workList.push(rhs);
-    while (!workList.isEmpty()) {
-      Expression e = workList.pop();
-      if (e instanceof Name name) {
-        SymbolV2 symbol = name.symbolV2();
-        if (symbol != null && trackedVars.contains(symbol)) {
-          variableDependencies.add(symbol);
-          propagationsByLhs.get(symbol).forEach(a -> a.dependents.add(this));
-        }
-      } else if (e instanceof HasTypeDependencies hasTypeDependencies) {
-        workList.addAll(hasTypeDependencies.typeDependencies());
-      }
-    }
-  }
 
   public Name lhsName() {
     return lhsName;
