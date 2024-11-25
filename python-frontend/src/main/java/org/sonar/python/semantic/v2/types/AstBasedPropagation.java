@@ -49,22 +49,35 @@ public class AstBasedPropagation {
   }
 
   public Map<SymbolV2, Set<PythonType>> processPropagations(Set<SymbolV2> trackedVars) {
-    Set<Propagation> propagations = new HashSet<>();
-    Set<SymbolV2> initializedVars = new HashSet<>();
+    computePropagationDependencies(trackedVars);
 
+    Set<SymbolV2> initializedVars = new HashSet<>();
+    Set<Propagation> propagations = getTrackedPropagation(trackedVars);
+
+    applyPropagations(propagations, initializedVars, true);
+    applyPropagations(propagations, initializedVars, false);
+    return propagations.stream().collect(Collectors.groupingBy(Propagation::lhsSymbol, Collectors.mapping(Propagation::rhsType, Collectors.toSet())));
+  }
+
+  private void computePropagationDependencies(Set<SymbolV2> trackedVars) {
     propagationsByLhs.forEach((lhs, props) -> {
       if (trackedVars.contains(lhs)) {
         props.stream()
           .filter(Assignment.class::isInstance)
           .map(Assignment.class::cast)
           .forEach(a -> a.computeDependencies(trackedVars));
-        propagations.addAll(props);
       }
     });
+  }
 
-    applyPropagations(propagations, initializedVars, true);
-    applyPropagations(propagations, initializedVars, false);
-    return propagations.stream().collect(Collectors.groupingBy(Propagation::lhsSymbol, Collectors.mapping(Propagation::rhsType, Collectors.toSet())));
+  private Set<Propagation> getTrackedPropagation(Set<SymbolV2> trackedVars) {
+    Set<Propagation> trackedPropagations = new HashSet<>();
+    propagationsByLhs.forEach((lhs, propagations) -> {
+      if (trackedVars.contains(lhs)) {
+        trackedPropagations.addAll(propagations);
+      }
+    });
+    return trackedPropagations;
   }
 
   private void applyPropagations(Set<Propagation> propagations, Set<SymbolV2> initializedVars, boolean checkDependenciesReadiness) {
