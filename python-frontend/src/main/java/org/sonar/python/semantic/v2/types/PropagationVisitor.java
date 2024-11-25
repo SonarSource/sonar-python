@@ -175,9 +175,9 @@ public class PropagationVisitor extends BaseTreeVisitor {
             .findFirst()
             .filter(NameImpl.class::isInstance)
             .map(NameImpl.class::cast)
-            .ifPresent(i -> {
-              var symbol = i.symbolV2();
-              var assignment = new LoopAssignment(symbol, i, rhsExpression, propagationsByLhs);
+            .ifPresent(name -> {
+              var symbol = name.symbolV2();
+              var assignment = new LoopAssignment(symbol, name, rhsExpression);
               assignmentsByAssignmentStatement.put(forStatement, assignment);
               propagationsByLhs.computeIfAbsent(symbol, s -> new HashSet<>()).add(assignment);
             })
@@ -194,7 +194,7 @@ public class PropagationVisitor extends BaseTreeVisitor {
       if (symbol == null) {
         return;
       }
-      var assignment = new Assignment(symbol, lhs, rhsExpression, propagationsByLhs);
+      var assignment = new Assignment(symbol, lhs, rhsExpression);
       assignmentsByAssignmentStatement.put(assignmentStatement, assignment);
       propagationsByLhs.computeIfAbsent(symbol, s -> new HashSet<>()).add(assignment);
     }

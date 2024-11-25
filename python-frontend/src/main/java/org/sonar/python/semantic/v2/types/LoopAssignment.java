@@ -20,9 +20,7 @@
 package org.sonar.python.semantic.v2.types;
 
 import java.util.Collection;
-import java.util.Map;
 import java.util.Optional;
-import java.util.Set;
 import java.util.stream.Stream;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Name;
@@ -32,8 +30,8 @@ import org.sonar.python.types.v2.PythonType;
 import org.sonar.python.types.v2.TriBool;
 
 public class LoopAssignment extends Assignment {
-  public LoopAssignment(SymbolV2 lhsSymbol, Name lhsName, Expression rhs, Map<SymbolV2, Set<Propagation>> propagationsByLhs) {
-    super(lhsSymbol, lhsName, rhs, propagationsByLhs);
+  public LoopAssignment(SymbolV2 lhsSymbol, Name lhsName, Expression rhs) {
+    super(lhsSymbol, lhsName, rhs);
   }
 
   @Override

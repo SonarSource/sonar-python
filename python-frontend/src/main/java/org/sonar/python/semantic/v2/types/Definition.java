@@ -35,17 +35,14 @@ public class Definition extends Propagation {
     super(symbol, name);
   }
 
-  public Name lhsName() {
-    return lhsName;
-  }
 
   @Override
   public PythonType rhsType() {
-    return lhsName.typeV2();
+    return lhsName().typeV2();
   }
 
   @Override
   Tree scopeTree(Name name) {
-    return TreeUtils.firstAncestor(name, t -> !t.equals(lhsName.parent()) && t.is(Tree.Kind.FUNCDEF, Tree.Kind.FILE_INPUT, Tree.Kind.CLASSDEF));
+    return TreeUtils.firstAncestor(name, t -> !t.equals(lhsName().parent()) && t.is(Tree.Kind.FUNCDEF, Tree.Kind.FILE_INPUT, Tree.Kind.CLASSDEF));
   }
 }

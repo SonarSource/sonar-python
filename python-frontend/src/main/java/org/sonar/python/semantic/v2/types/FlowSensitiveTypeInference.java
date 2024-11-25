@@ -183,7 +183,7 @@ public class FlowSensitiveTypeInference extends ForwardAnalysis {
       .ifPresent(definitions -> definitions.forEach(d -> {
         SymbolV2 symbol = d.lhsSymbol();
         if (trackedVars.contains(symbol)) {
-          programState.setTypes(symbol, Set.of(d.lhsName.typeV2()));
+          programState.setTypes(symbol, Set.of(d.lhsName().typeV2()));
         }
       }));
   }

@@ -28,12 +28,11 @@ import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.types.v2.PythonType;
 
 public abstract class Propagation {
+  private final Set<SymbolV2> variableDependencies;
+  private final Set<Propagation> dependents;
 
-  final Set<SymbolV2> variableDependencies;
-  final Set<Propagation> dependents;
-
-  final SymbolV2 lhsSymbol;
-  final Name lhsName;
+  private final SymbolV2 lhsSymbol;
+  private final Name lhsName;
 
   protected Propagation(SymbolV2 lhsSymbol, Name lhsName) {
     this.lhsSymbol = lhsSymbol;
@@ -55,7 +54,9 @@ public abstract class Propagation {
     return dependents;
   }
 
-  public abstract Name lhsName();
+  public Name lhsName() {
+    return lhsName;
+  }
 
   public abstract PythonType rhsType();
 
