@@ -19,6 +19,8 @@
  */
 package org.sonar.python.semantic.v2.types;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
@@ -36,6 +38,7 @@ import org.sonar.python.semantic.v2.TypeTable;
 import org.sonar.python.semantic.v2.UsageV2;
 import org.sonar.python.tree.NameImpl;
 import org.sonar.python.tree.TreeUtils;
+import org.sonar.python.types.HasTypeDependencies;
 import org.sonar.python.types.v2.PythonType;
 import org.sonar.python.types.v2.UnionType;
 
@@ -65,9 +68,26 @@ public class AstBasedPropagation {
         props.stream()
           .filter(Assignment.class::isInstance)
           .map(Assignment.class::cast)
-          .forEach(a -> a.computeDependencies(trackedVars));
+          .forEach(assignment -> computeDependencies(assignment, trackedVars));
       }
     });
+  }
+
+  private void computeDependencies(Assignment assignment, Set<SymbolV2> trackedVars) {
+    Deque<Expression> workList = new ArrayDeque<>();
+    workList.push(assignment.rhs());
+    while (!workList.isEmpty()) {
+      Expression e = workList.pop();
+      if (e instanceof Name name) {
+        SymbolV2 symbol = name.symbolV2();
+        if (symbol != null && trackedVars.contains(symbol)) {
+          assignment.addVariableDependencies(symbol);
+          propagationsByLhs.get(symbol).forEach(propagation -> propagation.addDependent(assignment));
+        }
+      } else if (e instanceof HasTypeDependencies hasTypeDependencies) {
+        workList.addAll(hasTypeDependencies.typeDependencies());
+      }
+    }
   }
 
   private Set<Propagation> getTrackedPropagation(Set<SymbolV2> trackedVars) {
