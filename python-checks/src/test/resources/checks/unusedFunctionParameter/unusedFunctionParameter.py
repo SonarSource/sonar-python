@@ -201,3 +201,12 @@ class FakeMetaclass(type):
 class ClassWithFakeMetaClass(metaclass=FakeMetaclass):
     def execute(self, name):
         print("Execute")
+
+
+from typing import Callable
+class LocalClassWithAnnotatedMember:
+  my_member: Callable[[str, int],str]
+
+class LocalClassChild(LocalClassWithAnnotatedMember):
+  def my_member(self, param, other_param): # OK, respecting contract defined in parent
+    print("Execute")
