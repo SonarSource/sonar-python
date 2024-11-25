@@ -26,10 +26,6 @@ public class ParameterDefinition extends Propagation {
     super(lhsSymbol, lhsName);
   }
 
-  @Override
-  public Name lhsName() {
-    return lhsName;
-  }
 
   @Override
   public PythonType rhsType() {

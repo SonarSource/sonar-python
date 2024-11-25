@@ -141,7 +141,7 @@ public class AstBasedPropagation {
 
     private void propagateTypeToUsages(Propagation propagation, PythonType newType) {
       Tree scopeTree = propagation.scopeTree(propagation.lhsName());
-      getSymbolNonDeclarationUsageTrees(propagation.lhsSymbol)
+      getSymbolNonDeclarationUsageTrees(propagation.lhsSymbol())
         .filter(NameImpl.class::isInstance)
         .map(NameImpl.class::cast)
         // Avoid propagation to usages in nested scopes, as this may lead to FPs

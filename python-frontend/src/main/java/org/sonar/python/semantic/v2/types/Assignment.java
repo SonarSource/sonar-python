@@ -16,8 +16,6 @@
  */
 package org.sonar.python.semantic.v2.types;
 
-import java.util.Map;
-import java.util.Set;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.python.semantic.v2.SymbolV2;
@@ -25,18 +23,11 @@ import org.sonar.python.types.v2.PythonType;
 
 public class Assignment extends Propagation {
 
-  Expression rhs;
-  Map<SymbolV2, Set<Propagation>> propagationsByLhs;
+  private Expression rhs;
 
-  public Assignment(SymbolV2 lhsSymbol, Name lhsName, Expression rhs, Map<SymbolV2, Set<Propagation>> propagationsByLhs) {
+  public Assignment(SymbolV2 lhsSymbol, Name lhsName, Expression rhs) {
     super(lhsSymbol, lhsName);
     this.rhs = rhs;
-    this.propagationsByLhs = propagationsByLhs;
-  }
-
-
-  public Name lhsName() {
-    return lhsName;
   }
 
   @Override
