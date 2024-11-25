@@ -32,13 +32,13 @@ import org.sonar.python.types.v2.TypeCheckBuilder;
 import org.sonar.python.types.v2.TypeUtils;
 
 public class TrivialTypePropagationVisitor extends BaseTreeVisitor {
-  private TypeCheckBuilder isBooleanTypeCheck;
-  private TypeCheckBuilder isIntTypeCheck;
-  private TypeCheckBuilder isFloatTypeCheck;
-  private TypeCheckBuilder isComplexTypeCheck;
+  private final TypeCheckBuilder isBooleanTypeCheck;
+  private final TypeCheckBuilder isIntTypeCheck;
+  private final TypeCheckBuilder isFloatTypeCheck;
+  private final TypeCheckBuilder isComplexTypeCheck;
 
-  private PythonType intType;
-  private PythonType boolType;
+  private final PythonType intType;
+  private final PythonType boolType;
 
   public TrivialTypePropagationVisitor(TypeTable typeTable) {
     this.isBooleanTypeCheck = new TypeCheckBuilder(typeTable).isBuiltinWithName(BuiltinTypes.BOOL);
@@ -76,20 +76,20 @@ public class TrivialTypePropagationVisitor extends BaseTreeVisitor {
   private PythonType mapUnaryPlusMinusType(PythonType type) {
     if (isNumber(type)) {
       return type;
-    } else if(isBooleanTypeCheck.check(type) == TriBool.TRUE) {
+    } else if (isBooleanTypeCheck.check(type) == TriBool.TRUE) {
       return toObjectType(intType);
     }
     return PythonType.UNKNOWN;
   }
 
-  private boolean isNumber(PythonType type)  {
+  private boolean isNumber(PythonType type) {
     return isIntTypeCheck.check(type) == TriBool.TRUE
       || isFloatTypeCheck.check(type) == TriBool.TRUE
       || isComplexTypeCheck.check(type) == TriBool.TRUE;
   }
 
   private static PythonType toObjectType(PythonType type) {
-    if(type instanceof ObjectType || type == PythonType.UNKNOWN) {
+    if (type instanceof ObjectType || type == PythonType.UNKNOWN) {
       return type;
     }
     return new ObjectType(type);

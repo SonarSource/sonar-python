@@ -81,7 +81,7 @@ public class AstBasedPropagation {
       if (e instanceof Name name) {
         SymbolV2 symbol = name.symbolV2();
         if (symbol != null && trackedVars.contains(symbol)) {
-          assignment.addVariableDependencies(symbol);
+          assignment.addVariableDependency(symbol);
           propagationsByLhs.get(symbol).forEach(propagation -> propagation.addDependent(assignment));
         }
       } else if (e instanceof HasTypeDependencies hasTypeDependencies) {
