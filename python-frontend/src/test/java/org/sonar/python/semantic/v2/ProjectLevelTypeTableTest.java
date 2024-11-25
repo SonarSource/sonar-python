@@ -178,7 +178,7 @@ class ProjectLevelTypeTableTest {
     ModuleType moduleLibType = (ModuleType) ((ExpressionStatement) fileInput.statements().statements().get(1)).expressions().get(0).typeV2();
     assertThat(moduleLibType.name()).isEqualTo("lib");
     assertThat(moduleLibType.members().values()).extracting(TypeWrapper::type).extracting(PythonType::name).containsExactly("A");
-    assertThat(moduleLibType.members().values()).extracting(TypeWrapper::type).allMatch(t -> t instanceof ClassType);
+    assertThat(moduleLibType.members().values()).extracting(TypeWrapper::type).allMatch(ClassType.class::isInstance);
   }
 
   @Test
@@ -222,7 +222,7 @@ class ProjectLevelTypeTableTest {
     assertThat(moduleLibType.name()).isEqualTo("lib");
     // SONARPY-2176 lib should be resolved as the renamed class "A" here
     assertThat(moduleLibType.members().values()).extracting(TypeWrapper::type).extracting(PythonType::name).containsExactly("A");
-    assertThat(moduleLibType.members().values()).extracting(TypeWrapper::type).allMatch(t -> t instanceof ClassType);
+    assertThat(moduleLibType.members().values()).extracting(TypeWrapper::type).allMatch(ClassType.class::isInstance);
   }
 
   @Test
