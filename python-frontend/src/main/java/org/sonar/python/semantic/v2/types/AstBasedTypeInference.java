@@ -167,7 +167,7 @@ public class AstBasedTypeInference {
         .orElse(null);
     }
 
-    public static Stream<Tree> getSymbolNonDeclarationUsageTrees(SymbolV2 symbol) {
+    private static Stream<Tree> getSymbolNonDeclarationUsageTrees(SymbolV2 symbol) {
       return symbol.usages()
         .stream()
         // Function and class definition names will always have FunctionType and ClassType respectively
