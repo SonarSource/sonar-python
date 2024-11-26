@@ -34,7 +34,7 @@ import org.sonar.plugins.python.api.tree.Parameter;
 import org.sonar.plugins.python.api.tree.StatementList;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.semantic.SymbolUtils;
-import org.sonar.python.semantic.v2.types.AstBasedPropagation;
+import org.sonar.python.semantic.v2.types.AstBasedTypeInference;
 import org.sonar.python.semantic.v2.types.FlowSensitiveTypeInference;
 import org.sonar.python.semantic.v2.types.Propagation;
 import org.sonar.python.semantic.v2.types.PropagationVisitor;
@@ -123,8 +123,8 @@ public class TypeInferenceV2 {
     statements.accept(tryStatementVisitor);
     if (tryStatementVisitor.hasTryStatement()) {
       // CFG doesn't model precisely try-except statements. Hence we fallback to AST based type inference
-      return new AstBasedPropagation(propagationVisitor.propagationsByLhs(), projectLevelTypeTable)
-        .processPropagations(getTrackedVars(declaredVariables, assignedNames));
+      return new AstBasedTypeInference(propagationVisitor.propagationsByLhs(), projectLevelTypeTable)
+        .process(getTrackedVars(declaredVariables, assignedNames));
     }
 
     ControlFlowGraph cfg = controlFlowGraphSupplier.get();

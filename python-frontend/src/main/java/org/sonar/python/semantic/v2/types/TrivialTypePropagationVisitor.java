@@ -89,8 +89,10 @@ public class TrivialTypePropagationVisitor extends BaseTreeVisitor {
   }
 
   private static PythonType toObjectType(PythonType type) {
-    if (type instanceof ObjectType || type == PythonType.UNKNOWN) {
+    if (type == PythonType.UNKNOWN) {
       return type;
+    } else if(type instanceof ObjectType objectType) {
+      return new ObjectType(objectType.typeWrapper(), objectType.attributes(), objectType.members(), objectType.typeSource());
     }
     return new ObjectType(type);
   }

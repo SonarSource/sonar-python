@@ -42,16 +42,16 @@ import org.sonar.python.types.HasTypeDependencies;
 import org.sonar.python.types.v2.PythonType;
 import org.sonar.python.types.v2.UnionType;
 
-public class AstBasedPropagation {
+public class AstBasedTypeInference {
   private final Map<SymbolV2, Set<Propagation>> propagationsByLhs;
   private final Propagator propagator;
 
-  public AstBasedPropagation(Map<SymbolV2, Set<Propagation>> propagationsByLhs, TypeTable typeTable) {
+  public AstBasedTypeInference(Map<SymbolV2, Set<Propagation>> propagationsByLhs, TypeTable typeTable) {
     this.propagationsByLhs = propagationsByLhs;
     this.propagator = new Propagator(typeTable);
   }
 
-  public Map<SymbolV2, Set<PythonType>> processPropagations(Set<SymbolV2> trackedVars) {
+  public Map<SymbolV2, Set<PythonType>> process(Set<SymbolV2> trackedVars) {
     computePropagationDependencies(trackedVars);
 
     Set<SymbolV2> initializedVars = new HashSet<>();
