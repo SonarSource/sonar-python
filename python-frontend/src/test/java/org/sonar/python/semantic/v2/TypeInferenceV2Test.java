@@ -2636,7 +2636,6 @@ public class TypeInferenceV2Test {
     assertThat(lastExpression(code).typeV2()).isInstanceOf(ObjectType.class).extracting(PythonType::unwrappedType).isEqualTo(expectedType);
   }
 
-
   @ParameterizedTest
   @MethodSource("unary_expression_of_variables")
   void unary_expression_of_variables_with_try_except(String code, PythonType expectedType) {
