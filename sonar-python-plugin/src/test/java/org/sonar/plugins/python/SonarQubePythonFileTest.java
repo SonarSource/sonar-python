@@ -47,4 +47,12 @@ class SonarQubePythonFileTest {
     assertThatThrownBy(pythonFile::content).isInstanceOf(IllegalStateException.class);
   }
 
+  @Test
+  void unknown_file_create() throws Exception {
+    var pythonInputFile = mock(PythonInputFile.class);
+    when(pythonInputFile.kind()).thenReturn(PythonInputFile.Kind.IPYTHON);
+    when(pythonInputFile.contents()).thenThrow(new FileNotFoundException());
+    assertThatThrownBy(() -> SonarQubePythonFile.create(pythonInputFile)).isInstanceOf(IllegalStateException.class);
+  }
+
 }

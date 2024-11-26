@@ -94,7 +94,7 @@ public class TestPythonVisitorRunner {
     return projectLevelSymbolTable;
   }
 
-  private static FileInput parseNotebookFile(Map<Integer, IPythonLocation> locations, String content) {
+  public static FileInput parseNotebookFile(Map<Integer, IPythonLocation> locations, String content) {
     var parser = PythonParser.createIPythonParser();
     var treeMaker = new IPythonTreeMaker(locations);
     var astNode = parser.parse(content);

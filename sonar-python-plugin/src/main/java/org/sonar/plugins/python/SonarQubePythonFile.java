@@ -33,6 +33,18 @@ public abstract class SonarQubePythonFile implements PythonFile {
     return new Sq62File(inputFile);
   }
 
+  public static PythonFile create(PythonInputFile pythonInputFile) {
+    if (pythonInputFile.kind() == PythonInputFile.Kind.PYTHON) {
+      return new Sq62File(pythonInputFile.wrappedFile());
+    } else {
+      try {
+        return new IpynbFile(pythonInputFile);
+      } catch (IOException e) {
+        throw new IllegalStateException("Cannot read " + pythonInputFile, e);
+      }
+    }
+  }
+
   @Override
   public String fileName() {
     return inputFile.filename();
@@ -70,6 +82,22 @@ public abstract class SonarQubePythonFile implements PythonFile {
       } catch (IOException e) {
         throw new IllegalStateException("Could not read content of input file " + inputFile(), e);
       }
+    }
+
+  }
+
+  public static class IpynbFile extends SonarQubePythonFile {
+
+    private final String contents;
+
+    private IpynbFile(PythonInputFile inputFile) throws IOException {
+      super(inputFile.wrappedFile());
+      contents = inputFile.contents();
+    }
+
+    @Override
+    public String content() {
+      return contents;
     }
 
   }

@@ -23,7 +23,10 @@ import java.util.Map;
 import org.junit.jupiter.api.Test;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.internal.apachecommons.lang3.StringUtils;
+import org.sonar.plugins.python.api.PythonVisitorContext;
 import org.sonar.python.IPythonLocation;
+import org.sonar.python.TestPythonVisitorRunner;
+import org.sonar.python.checks.TrailingWhitespaceCheck;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -192,5 +195,20 @@ class IpynbNotebookParserTest {
     var result = resultOptional.get();
     assertThat(result.locationMap()).isEmpty();
     assertThat(result.contents()).isEmpty();
+  }
+
+  @Test
+  void trailing_whitespace() throws IOException {
+    var inputFile = createInputFile(baseDir, "notebook_trailing_whitespace.ipynb", InputFile.Status.CHANGED, InputFile.Type.MAIN);
+    var result = IpynbNotebookParser.parseNotebook(inputFile).get();
+    var check = new TrailingWhitespaceCheck();
+    var context = new PythonVisitorContext(
+      TestPythonVisitorRunner.parseNotebookFile(result.locationMap(), result.contents()),
+      SonarQubePythonFile.create(result),
+      null,
+      "");
+    check.scanFile(context);
+    var issues = context.getIssues();
+    assertThat(issues).hasSize(3);
   }
 }
