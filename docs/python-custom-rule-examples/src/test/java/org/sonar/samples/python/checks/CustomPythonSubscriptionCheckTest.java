@@ -6,7 +6,6 @@ package org.sonar.samples.python.checks;
 
 import org.junit.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
-import org.sonar.samples.python.checks.CustomPythonSubscriptionCheck;
 
 public class CustomPythonSubscriptionCheckTest {
   @Test

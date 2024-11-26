@@ -4,10 +4,8 @@
  */
 package org.sonar.samples.python.checks;
 
-
 import org.junit.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
-import org.sonar.samples.python.checks.CustomPythonVisitorCheck;
 
 public class CustomPythonVisitorCheckTest {
   @Test
