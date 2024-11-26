@@ -35,7 +35,7 @@ class SonarQubePythonFileTest {
     when(inputFile.contents()).thenReturn("Hello 6.2!");
     PythonFile pythonFile = SonarQubePythonFile.create(inputFile);
     assertThat(pythonFile.content()).isEqualTo("Hello 6.2!");
-    assertThat(pythonFile.toString()).isEqualTo(inputFile.toString());
+    assertThat(pythonFile).hasToString(inputFile.toString());
     assertThat(pythonFile.uri()).isEqualTo(inputFile.uri());
     assertThat(pythonFile.key()).isEqualTo(inputFile.key());
   }
@@ -47,4 +47,35 @@ class SonarQubePythonFileTest {
     assertThatThrownBy(pythonFile::content).isInstanceOf(IllegalStateException.class);
   }
 
+  @Test
+  void unknown_file_create() throws Exception {
+    var pythonInputFile = mock(GeneratedIPythonFile.class);
+    when(pythonInputFile.kind()).thenReturn(PythonInputFile.Kind.IPYTHON);
+    when(pythonInputFile.contents()).thenThrow(new FileNotFoundException());
+    var sqFile = SonarQubePythonFile.create(pythonInputFile);
+    assertThatThrownBy(sqFile::content).isInstanceOf(IllegalStateException.class);
+  }
+
+  @Test
+  void regular_file_create() throws Exception {
+    var wrappedFile = mock(InputFile.class);
+    when(wrappedFile.contents()).thenReturn("Hello 6.2!");
+    var pythonInputFile = mock(PythonInputFile.class);
+    when(pythonInputFile.kind()).thenReturn(PythonInputFile.Kind.PYTHON);
+    when(pythonInputFile.wrappedFile()).thenReturn(wrappedFile);
+    PythonFile pythonFile = SonarQubePythonFile.create(pythonInputFile);
+    assertThat(pythonFile.content()).isEqualTo("Hello 6.2!");
+  }
+
+  @Test
+  void ipynb_file_create() throws Exception {
+    var wrappedFile = mock(InputFile.class);
+    when(wrappedFile.contents()).thenReturn("Hello wrapped file!");
+    var pythonInputFile = mock(GeneratedIPythonFile.class);
+    when(pythonInputFile.kind()).thenReturn(PythonInputFile.Kind.IPYTHON);
+    when(pythonInputFile.wrappedFile()).thenReturn(wrappedFile);
+    when(pythonInputFile.contents()).thenReturn("Hello IPython!");
+    PythonFile pythonFile = SonarQubePythonFile.create(pythonInputFile);
+    assertThat(pythonFile.content()).isEqualTo("Hello IPython!");
+  }
 }

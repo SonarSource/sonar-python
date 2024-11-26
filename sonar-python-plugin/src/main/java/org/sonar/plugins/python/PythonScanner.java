@@ -98,7 +98,7 @@ public class PythonScanner extends Scanner {
 
   @Override
   protected void scanFile(PythonInputFile inputFile) throws IOException {
-    PythonFile pythonFile = SonarQubePythonFile.create(inputFile.wrappedFile());
+    var pythonFile = SonarQubePythonFile.create(inputFile);
     PythonVisitorContext visitorContext;
     InputFile.Type fileType = inputFile.wrappedFile().type();
     try {
