@@ -118,3 +118,11 @@ class Child2(Parent2, object):
     @my_annotation[42]
     def some_annotated_method(self, text: Any):  # Noncompliant
         ...
+
+from typing import Callable
+class LocalClassWithAnnotatedMember:
+  my_member: Callable[[Any],Any] # No issue on nested values of "Callable"
+
+class LocalClassChild(LocalClassWithAnnotatedMember):
+  def my_member(self, param: Any) -> Any: # OK, defined in parent
+    ...
