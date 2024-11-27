@@ -23,6 +23,7 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
@@ -57,6 +58,11 @@ class TypeShedTest {
   void setPythonVersions() {
     ProjectPythonVersion.setCurrentVersions(PythonVersionUtils.allVersions());
     TypeShed.resetBuiltinSymbols();
+  }
+
+  @AfterEach
+  void resetPythonVersions() {
+    ProjectPythonVersion.setCurrentVersions(PythonVersionUtils.allVersions());
   }
 
   private void setPythonVersions(Set<PythonVersionUtils.Version> pythonVersions) {
@@ -120,14 +126,15 @@ class TypeShedTest {
 
   @Test
   void stdlib_symbols() {
-    Map<String, Symbol> mathSymbols = symbolsForModule("math");
-    Symbol symbol = mathSymbols.get("acos");
+    Map<String, Symbol> mathSymbols = symbolsForModule("os.path");
+    Symbol symbol = mathSymbols.get("realpath");
     assertThat(symbol.kind()).isEqualTo(Symbol.Kind.AMBIGUOUS);
     Symbol acosSymbol = ((AmbiguousSymbolImpl) symbol).alternatives().iterator().next();
     assertThat(acosSymbol.kind()).isEqualTo(Kind.FUNCTION);
-    assertThat(((FunctionSymbolImpl) acosSymbol).parameters()).hasSize(1);
-    assertThat(((FunctionSymbolImpl) acosSymbol).declaredReturnType().canOnlyBe("float")).isTrue();
-    assertThat(TypeShed.symbolWithFQN("math", "math.acos")).isSameAs(symbol);
+    FunctionSymbolImpl acosFunctionsymbol = (FunctionSymbolImpl) acosSymbol;
+    assertThat(acosFunctionsymbol.parameters()).hasSizeBetween(1, 2);
+    assertThat(acosFunctionsymbol.declaredReturnType()).isInstanceOf(AnyType.class);
+    assertThat(TypeShed.symbolWithFQN("os.path", "os.path.realpath")).isSameAs(symbol);
     assertThat(mathSymbols.values()).allMatch(s -> s.usages().isEmpty());
 
     Map<String, Symbol> threadingSymbols = symbolsForModule("threading");
@@ -450,7 +457,7 @@ class TypeShedTest {
   @Test
   void pythonVersions() {
     Symbol range = TypeShed.builtinSymbols().get("range");
-    assertThat(((SymbolImpl) range).validForPythonVersions()).containsExactlyInAnyOrder(  "36", "37", "38", "39", "310", "311");
+    assertThat(((SymbolImpl) range).validForPythonVersions()).containsExactlyInAnyOrder(  "38", "39", "310", "311", "312", "313");
     assertThat(range.kind()).isEqualTo(Kind.CLASS);
 
     // python 2
@@ -462,7 +469,7 @@ class TypeShedTest {
     // python 3
     setPythonVersions(PythonVersionUtils.fromString("3.8"));
     range = TypeShed.builtinSymbols().get("range");
-    assertThat(((SymbolImpl) range).validForPythonVersions()).containsExactlyInAnyOrder("36", "37", "38", "39", "310", "311");
+    assertThat(((SymbolImpl) range).validForPythonVersions()).containsExactlyInAnyOrder("38", "39", "310", "311", "312", "313");
     assertThat(range.kind()).isEqualTo(Kind.CLASS);
 
     setPythonVersions(PythonVersionUtils.fromString("3.10"));
@@ -476,6 +483,17 @@ class TypeShedTest {
     setPythonVersions(PythonVersionUtils.fromString("3.13"));
     intSymbol = TypeShed.typeShedClass("int");
     assertThat(intSymbol.resolveMember("bit_count")).isNotEmpty();
+
+    setPythonVersions(PythonVersionUtils.allVersions());
+  }
+
+  @Test
+  void testEolVersion() {
+    setPythonVersions(PythonVersionUtils.fromString("3.7"));
+    var intSymbol = TypeShed.typeShedClass("int");
+    assertThat(intSymbol.resolveMember("bit_length")).isNotEmpty();
+
+    assertThat(TypeShed.builtinSymbols().get("range")).isNotNull();
 
     setPythonVersions(PythonVersionUtils.allVersions());
   }

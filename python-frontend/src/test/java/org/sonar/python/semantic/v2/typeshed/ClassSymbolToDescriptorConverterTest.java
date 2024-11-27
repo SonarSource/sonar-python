@@ -16,17 +16,11 @@
  */
 package org.sonar.python.semantic.v2.typeshed;
 
-import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
 import org.sonar.plugins.python.api.ProjectPythonVersion;
-import org.sonar.plugins.python.api.PythonVersionUtils;
 import org.sonar.python.index.AmbiguousDescriptor;
 import org.sonar.python.index.Descriptor;
 import org.sonar.python.index.FunctionDescriptor;
@@ -99,84 +93,6 @@ class ClassSymbolToDescriptorConverterTest {
       .extracting(FunctionDescriptor.class::cast)
       .extracting(FunctionDescriptor::isInstanceMethod)
       .containsOnly(true, true);
-  }
-
-  static Stream<Arguments> versionsToTest() {
-    return Stream.of(
-      Arguments.of(PythonVersionUtils.Version.V_312),
-      Arguments.of(PythonVersionUtils.Version.V_313)
-    );
-  }
-
-  @ParameterizedTest
-  @MethodSource("versionsToTest")
-  void validForPythonVersionsTest(PythonVersionUtils.Version version) {
-    var functionConverter = new FunctionSymbolToDescriptorConverter();
-    var variableConverter = new VarSymbolToDescriptorConverter();
-    var overloadedFunctionConverter = new OverloadedFunctionSymbolToDescriptorConverter(functionConverter);
-    var converter = new ClassSymbolToDescriptorConverter(variableConverter, functionConverter, overloadedFunctionConverter, Set.of(version.serializedValue()));
-
-    var symbol = SymbolsProtos.ClassSymbol.newBuilder()
-      .setName("MyClass")
-      .addAttributes(SymbolsProtos.VarSymbol.newBuilder()
-        .setName("v1")
-        .addValidFor("311")
-        .build())
-      .addAttributes(SymbolsProtos.VarSymbol.newBuilder()
-        .setName("v2")
-        .addValidFor("39")
-        .build())
-      .addMethods(SymbolsProtos.FunctionSymbol.newBuilder()
-        .setName("foo1")
-        .addValidFor("311")
-        .build())
-      .addMethods(SymbolsProtos.FunctionSymbol.newBuilder()
-        .setName("foo2")
-        .addValidFor("39")
-        .build())
-      .addOverloadedMethods(SymbolsProtos.OverloadedFunctionSymbol.newBuilder()
-        .setName("overloaded_foo1")
-        .addValidFor("311")
-        .setFullname("module.MyClass.overloaded_foo1")
-        .addDefinitions(SymbolsProtos.FunctionSymbol.newBuilder()
-          .setName("overloaded_foo1")
-          .addValidFor("311")
-          .build())
-        .addDefinitions(SymbolsProtos.FunctionSymbol.newBuilder()
-          .setName("overloaded_foo1")
-          .addValidFor("311")
-          .build())
-        .build())
-      .addOverloadedMethods(SymbolsProtos.OverloadedFunctionSymbol.newBuilder()
-        .setName("overloaded_foo2")
-        .addValidFor("39")
-        .setFullname("module.MyClass.overloaded_foo2")
-        .addDefinitions(SymbolsProtos.FunctionSymbol.newBuilder()
-          .setName("overloaded_foo2")
-          .addValidFor("39")
-          .build())
-        .addDefinitions(SymbolsProtos.FunctionSymbol.newBuilder()
-          .setName("overloaded_foo2")
-          .addValidFor("39")
-          .build())
-        .build())
-      .build();
-
-    var descriptor = converter.convert(symbol);
-
-    Assertions.assertThat(descriptor.members()).hasSize(3);
-
-    var membersByName = descriptor.members()
-      .stream()
-      .collect(Collectors.toMap(Descriptor::name, Function.identity()));
-
-    Assertions.assertThat(membersByName).hasSize(3);
-    Assertions.assertThat(membersByName.get("v1")).isInstanceOf(VariableDescriptor.class);
-    Assertions.assertThat(membersByName.get("v2")).isNull();
-    Assertions.assertThat(membersByName.get("foo1")).isInstanceOf(FunctionDescriptor.class);
-    Assertions.assertThat(membersByName.get("foo2")).isNull();
-    Assertions.assertThat(membersByName.get("overloaded_foo1")).isInstanceOf(AmbiguousDescriptor.class);
-    Assertions.assertThat(membersByName.get("overloaded_foo2")).isNull();
   }
 
   @Test

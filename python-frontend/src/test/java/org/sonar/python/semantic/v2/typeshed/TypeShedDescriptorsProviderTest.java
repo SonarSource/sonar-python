@@ -65,23 +65,23 @@ class TypeShedDescriptorsProviderTest {
   }
 
   @Test
-  void builtinFloatDisambiguation() {
+  void builtinDisambiguation() {
     var provider = typeshedDescriptorsProvider();
     var builtinDescriptors = provider.builtinDescriptors();
-    var floatDescriptor = builtinDescriptors.get("float");
+    var floatDescriptor = builtinDescriptors.get("int");
     assertThat(floatDescriptor.kind()).isEqualTo(Descriptor.Kind.CLASS);
-    var newMember = ((ClassDescriptor) floatDescriptor).members().stream().filter(m -> m.name().equals("__new__")).findFirst().get();
+    var newMember = ((ClassDescriptor) floatDescriptor).members().stream().filter(m -> m.name().equals("to_bytes")).findFirst().get();
     assertThat(newMember.kind()).isEqualTo(Descriptor.Kind.AMBIGUOUS);
     assertThat(((AmbiguousDescriptor) newMember).alternatives()).hasSize(2);
   }
 
   @Test
-  void builtinFloatNoDisambiguation() {
+  void builtinNoDisambiguation() {
     var provider = new TypeShedDescriptorsProvider(Set.of(), Set.of(PythonVersionUtils.Version.V_312));
     var builtinDescriptors = provider.builtinDescriptors();
-    var floatDescriptor = builtinDescriptors.get("float");
+    var floatDescriptor = builtinDescriptors.get("int");
     assertThat(floatDescriptor.kind()).isEqualTo(Descriptor.Kind.CLASS);
-    var newMember = ((ClassDescriptor) floatDescriptor).members().stream().filter(m -> m.name().equals("__new__")).findFirst().get();
+    var newMember = ((ClassDescriptor) floatDescriptor).members().stream().filter(m -> m.name().equals("to_bytes")).findFirst().get();
     assertThat(newMember.kind()).isEqualTo(Descriptor.Kind.FUNCTION);
   }
 
@@ -111,19 +111,28 @@ class TypeShedDescriptorsProviderTest {
   @Test
   void stdlibDescriptors() {
     var provider = typeshedDescriptorsProvider();
-    var mathDescriptors = provider.descriptorsForModule("math");
-    var descriptor = mathDescriptors.get("acos");
+    var osPathDescriptor = provider.descriptorsForModule("os.path");
+    var descriptor = osPathDescriptor.get("realpath");
     assertThat(descriptor.kind()).isEqualTo(Descriptor.Kind.AMBIGUOUS);
-    var acosDescriptor = ((AmbiguousDescriptor) descriptor).alternatives().iterator().next();
-    assertThat(acosDescriptor.kind()).isEqualTo(Descriptor.Kind.FUNCTION);
-    assertThat(((FunctionDescriptor) acosDescriptor).parameters()).hasSize(1);
-    assertThat(((FunctionDescriptor) acosDescriptor).annotatedReturnTypeName()).isEqualTo("float");
+    var realPathDescriptor = ((AmbiguousDescriptor) descriptor).alternatives().iterator().next();
+    assertThat(realPathDescriptor.kind()).isEqualTo(Descriptor.Kind.FUNCTION);
+    assertThat(((FunctionDescriptor) realPathDescriptor).parameters()).hasSizeBetween(1, 2);
+    assertThat(((FunctionDescriptor) realPathDescriptor).annotatedReturnTypeName()).isNull();
 
     var threadingSymbols = provider.descriptorsForModule("threading");
     assertThat(threadingSymbols.get("Thread").kind()).isEqualTo(Descriptor.Kind.CLASS);
 
     var imaplibSymbols = provider.descriptorsForModule("imaplib");
     assertThat(imaplibSymbols).isNotEmpty();
+  }
+
+  @Test
+  void testAnnotatedReturnTypeName() {
+    var provider = typeshedDescriptorsProvider();
+    var mathDescriptor = provider.descriptorsForModule("math");
+    var acosDescriptor = mathDescriptor.get("acos");
+    assertThat(acosDescriptor.kind()).isEqualTo(Descriptor.Kind.FUNCTION);
+    assertThat(((FunctionDescriptor) acosDescriptor).annotatedReturnTypeName()).isEqualTo("float");
   }
 
   @Test
