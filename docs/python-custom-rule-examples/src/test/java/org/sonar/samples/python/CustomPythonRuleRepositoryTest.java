@@ -27,8 +27,9 @@ public class CustomPythonRuleRepositoryTest {
   }
 
   @Test
-  public void test_unfound_resource(){
-    assertThatThrownBy(() -> new CustomPythonRuleRepository().loadResource("/unknown"))
+  public void test_unfound_resource() {
+    CustomPythonRuleRepository repository =  new CustomPythonRuleRepository();
+    assertThatThrownBy(() -> repository.loadResource("/unknown"))
       .isInstanceOf(IllegalStateException.class)
       .hasMessage("Resource not found: /unknown");
   }
