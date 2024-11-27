@@ -27,7 +27,7 @@ public class IPynbProfile implements BuiltInQualityProfilesDefinition {
 
   static final String PROFILE_NAME = "Sonar way";
   static final String PROFILE_LOCATION = RESOURCE_FOLDER + "/Sonar_way_profile.json";
-  static final Set<String> DISABLED_RULES = Set.of("S905", "S2201", "S5754", "S1481");
+  static final Set<String> DISABLED_RULES = Set.of("S139", "S905", "S2201", "S5754", "S1481");
 
   @Override
   public void define(Context context) {
