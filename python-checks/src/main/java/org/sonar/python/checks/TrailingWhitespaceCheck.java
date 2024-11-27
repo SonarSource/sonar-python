@@ -16,6 +16,7 @@
  */
 package org.sonar.python.checks;
 
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.sonar.check.Rule;
@@ -23,7 +24,10 @@ import org.sonar.plugins.python.api.IssueLocation;
 import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.PythonVisitorContext;
 import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
+import org.sonar.plugins.python.api.tree.FileInput;
+import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.quickfix.TextEditUtils;
+import org.sonar.python.tree.TreeUtils;
 
 @Rule(key = "S1131")
 public class TrailingWhitespaceCheck implements PythonCheck {
@@ -38,15 +42,29 @@ public class TrailingWhitespaceCheck implements PythonCheck {
       Matcher matcher = TRAILING_WS.matcher(lines[i]);
       if (matcher.find()) {
         int lineNumber = i + 1;
-        PreciseIssue issue = new PreciseIssue(this, IssueLocation.atLineLevel(MESSAGE, lineNumber));
+        int r;
+        if (!ctx.pythonFile().fileName().endsWith(".ipynb")) {
+          r = lineNumber;
+        } else {
+          var rOpt = findPythonLineFromPhysicalLine(lineNumber, ctx.rootTree());
+          if (rOpt.isEmpty()) {
+            continue;
+          }
+          r = findPythonLineFromPhysicalLine(lineNumber, ctx.rootTree()).get().firstToken().line();
+        }
+        PreciseIssue issue = new PreciseIssue(this, IssueLocation.atLineLevel(MESSAGE, r));
 
         issue.addQuickFix(PythonQuickFix.newQuickFix("Remove trailing whitespaces")
-            .addTextEdit(TextEditUtils.removeRange(lineNumber, matcher.start(), lineNumber, matcher.end()))
+          .addTextEdit(TextEditUtils.removeRange(r, matcher.start(), r, matcher.end()))
           .build());
 
         ctx.addIssue(issue);
       }
     }
+  }
+
+  private Optional<Tree> findPythonLineFromPhysicalLine(int physicalLine, FileInput fileInput) {
+    return TreeUtils.firstChild(fileInput, t -> t.firstToken().pythonLine() == physicalLine);
   }
 }
 

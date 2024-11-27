@@ -209,6 +209,7 @@ class IpynbNotebookParserTest {
       "");
     check.scanFile(context);
     var issues = context.getIssues();
-    assertThat(issues).hasSize(3);
+    assertThat(issues).hasSize(2);
+    assertThat(issues).extracting(input -> input.primaryLocation().startLine()).containsExactly(14, 20);
   }
 }
