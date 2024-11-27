@@ -4,16 +4,11 @@
  */
 package org.sonar.samples.python.checks;
 
-import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonVisitorCheck;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 
-@Rule(
-  key = CustomPythonVisitorCheck.RULE_KEY,
-  priority = Priority.MINOR,
-  name = "Python visitor check",
-  description = "desc")
+@Rule(key = CustomPythonVisitorCheck.RULE_KEY)
 public class CustomPythonVisitorCheck extends PythonVisitorCheck {
 
   public static final String RULE_KEY = "visitor";
