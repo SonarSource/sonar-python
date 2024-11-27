@@ -46,11 +46,15 @@ public class CustomPythonRuleRepository implements RulesDefinition, PythonCustom
     return Arrays.asList(CustomPythonVisitorCheck.class, CustomPythonSubscriptionCheck.class);
   }
 
-  private String loadResource(String path) {
+  String loadResource(String path) {
     URL resource = getClass().getResource(path);
     if (resource == null) {
       throw new IllegalStateException("Resource not found: " + path);
     }
+    return readResource(resource);
+  }
+
+  static String readResource(URL resource) {
     ByteArrayOutputStream result = new ByteArrayOutputStream();
     try (InputStream in = resource.openStream()) {
       byte[] buffer = new byte[1024];
@@ -59,7 +63,7 @@ public class CustomPythonRuleRepository implements RulesDefinition, PythonCustom
       }
       return new String(result.toByteArray(), StandardCharsets.UTF_8);
     } catch (IOException e) {
-      throw new IllegalStateException("Failed to read resource: " + path, e);
+      throw new IllegalStateException("Failed to read resource: " + resource, e);
     }
   }
 }
