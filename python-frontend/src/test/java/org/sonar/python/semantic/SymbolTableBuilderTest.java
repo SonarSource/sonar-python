@@ -273,8 +273,8 @@ class SymbolTableBuilderTest {
     FunctionDef functionDef = functionTreesByName.get("importing_stdlib");
     Map<String, Symbol> symbolByName = getSymbolByName(functionDef);
 
-    assertThat(symbolByName.keySet()).containsOnly("math");
-    assertThat(symbolByName.get("math").usages()).extracting(Usage::kind).containsExactly(Usage.Kind.IMPORT, Usage.Kind.OTHER);
+    assertThat(symbolByName).containsOnlyKeys("os");
+    assertThat(symbolByName.get("os").usages()).extracting(Usage::kind).containsExactly(Usage.Kind.IMPORT, Usage.Kind.OTHER);
 
     CallExpression callExpression = (CallExpression) ((ExpressionStatement) functionDef.body().statements().get(1)).expressions().get(0);
     Symbol qualifiedExpressionSymbol = callExpression.calleeSymbol();
@@ -282,7 +282,6 @@ class SymbolTableBuilderTest {
     assertThat(qualifiedExpressionSymbol.kind()).isEqualTo(Symbol.Kind.AMBIGUOUS);
     Symbol symbol = ((AmbiguousSymbolImpl) qualifiedExpressionSymbol).alternatives().iterator().next();
     assertThat(symbol.kind()).isEqualTo(Symbol.Kind.FUNCTION);
-    assertThat(((FunctionSymbolImpl)symbol).declaredReturnType().canOnlyBe("float")).isTrue();
   }
 
   @Test

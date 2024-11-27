@@ -231,11 +231,8 @@ public class TypeShed {
     if (validForPythonVersions.isEmpty()) {
       return true;
     }
-    // TODO: SONARPY-1522 - remove this workaround when we will have all the stubs for Python 3.12.
-    Set<String> notSerializedVersions = PythonVersionUtils.getNotSerializedVersions().stream().map(PythonVersionUtils.Version::serializedValue).collect(Collectors.toSet());
-    if (notSerializedVersions.containsAll(supportedPythonVersions)
-        && validForPythonVersions.contains(PythonVersionUtils.Version.V_311.serializedValue())) {
-      return true;
+    if(supportedPythonVersions == null) {
+      throw new IllegalStateException("supportedPythonVersion is uninitialized. Call builtinSymbols() first");
     }
     HashSet<String> intersection = new HashSet<>(validForPythonVersions);
     intersection.retainAll(supportedPythonVersions);

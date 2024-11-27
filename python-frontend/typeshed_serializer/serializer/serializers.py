@@ -37,7 +37,7 @@ CUSTOM_STUBS_PATH = "../resources/custom"
 SONAR_CUSTOM_BASE_STUB_MODULE = "SonarPythonAnalyzerFakeStub"
 IMPORTER_FILE_NAME = "../resources/importer/sonar_third_party_libs.py"
 IMPORTER_FQN = "sonar_third_party_libs"
-SUPPORTED_PYTHON_VERSIONS = ((3, 6), (3, 7), (3, 8), (3, 9), (3, 10), (3, 11))
+SUPPORTED_PYTHON_VERSIONS = ((3, 8), (3, 9), (3, 10), (3, 11), (3, 12), (3, 13))
 
 
 def get_options(python_version=(3, 8)):

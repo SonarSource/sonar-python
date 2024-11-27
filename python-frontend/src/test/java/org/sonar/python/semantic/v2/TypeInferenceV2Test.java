@@ -2646,48 +2646,49 @@ public class TypeInferenceV2Test {
   @Test
   void imported_ambiguous_symbol() {
     FileInput fileInput = inferTypes("""
-      from math import acos, atan
-      acos
-      atan
+      from os.path import realpath
+      realpath
       """);
-    UnionType acosType = (UnionType) ((ExpressionStatement) fileInput.statements().statements().get(1)).expressions().get(0).typeV2();
-    assertThat(acosType.candidates()).allMatch(p -> p instanceof FunctionType);
-    assertThat(acosType.candidates()).extracting(PythonType::name).containsExactly("acos", "acos");
-    assertThat(acosType.candidates()).map(FunctionType.class::cast).extracting(FunctionType::returnType).extracting(PythonType::unwrappedType).containsExactly(FLOAT_TYPE,
-      FLOAT_TYPE);
-
-    UnionType atanType = (UnionType) ((ExpressionStatement) fileInput.statements().statements().get(2)).expressions().get(0).typeV2();
-    assertThat(atanType.candidates()).allMatch(p -> p instanceof FunctionType);
-    assertThat(atanType.candidates()).extracting(PythonType::name).containsExactly("atan", "atan");
-    assertThat(atanType.candidates()).map(FunctionType.class::cast).extracting(FunctionType::returnType).extracting(PythonType::unwrappedType).containsExactly(FLOAT_TYPE,
-      FLOAT_TYPE);
+    UnionType realpathType = (UnionType) ((ExpressionStatement) fileInput.statements().statements().get(1)).expressions().get(0).typeV2();
+    assertThat(realpathType.candidates()).allMatch(FunctionType.class::isInstance);
+    assertThat(realpathType.candidates()).extracting(PythonType::name).containsExactly("realpath", "realpath", "realpath", "realpath");
+    assertThat(realpathType.candidates())
+      .map(FunctionType.class::cast)
+      .extracting(FunctionType::returnType)
+      .extracting(PythonType::unwrappedType)
+      .containsExactly(PythonType.UNKNOWN, PythonType.UNKNOWN, PythonType.UNKNOWN, PythonType.UNKNOWN);
   }
 
   @Test
   void imported_ambiguous_symbol_try_except() {
     FileInput fileInput = inferTypes("""
       try:
-          from math import acos
-          acos
+          from os.path import realpath
+          realpath
       except:
           ...
-      acos
+      realpath
       """);
     Expression acosExpr1 = TreeUtils.firstChild(fileInput.statements().statements().get(0), ExpressionStatement.class::isInstance)
       .map(ExpressionStatement.class::cast)
       .map(ExpressionStatement::expressions)
       .map(expressions -> expressions.get(0))
-      .map(Expression.class::cast)
       .get();
     UnionType acosType1 = (UnionType) acosExpr1.typeV2();
     assertThat(acosType1.candidates()).allMatch(p -> p instanceof FunctionType);
-    assertThat(acosType1.candidates()).map(FunctionType.class::cast).extracting(FunctionType::returnType).extracting(PythonType::unwrappedType).containsExactly(FLOAT_TYPE,
-      FLOAT_TYPE);
+    assertThat(acosType1.candidates())
+      .map(FunctionType.class::cast)
+      .extracting(FunctionType::returnType)
+      .extracting(PythonType::unwrappedType)
+      .containsExactly(PythonType.UNKNOWN, PythonType.UNKNOWN, PythonType.UNKNOWN, PythonType.UNKNOWN);
 
     UnionType acosType2 = (UnionType) ((ExpressionStatement) fileInput.statements().statements().get(1)).expressions().get(0).typeV2();
     assertThat(acosType2.candidates()).allMatch(p -> p instanceof FunctionType);
-    assertThat(acosType2.candidates()).map(FunctionType.class::cast).extracting(FunctionType::returnType).extracting(PythonType::unwrappedType).containsExactly(FLOAT_TYPE,
-      FLOAT_TYPE);
+    assertThat(acosType2.candidates())
+      .map(FunctionType.class::cast)
+      .extracting(FunctionType::returnType)
+      .extracting(PythonType::unwrappedType)
+      .containsExactly(PythonType.UNKNOWN, PythonType.UNKNOWN, PythonType.UNKNOWN, PythonType.UNKNOWN);
   }
 
   @Test
@@ -2971,18 +2972,18 @@ public class TypeInferenceV2Test {
   void basic_imported_symbols() {
     FileInput fileInput = inferTypes(
       """
-        import fcntl, math
+        import fcntl, os.path
         fcntl
-        math
+        os.path
         """
     );
     PythonType fnctlModule = ((ExpressionStatement) fileInput.statements().statements().get(1)).expressions().get(0).typeV2();
     assertThat(fnctlModule).isInstanceOf(ModuleType.class);
     assertThat(fnctlModule.name()).isEqualTo("fcntl");
-    PythonType mathModule = ((ExpressionStatement) fileInput.statements().statements().get(2)).expressions().get(0).typeV2();
-    assertThat(mathModule).isInstanceOf(ModuleType.class);
-    assertThat(mathModule.name()).isEqualTo("math");
-    assertThat(((UnionType) mathModule.resolveMember("acos").get()).candidates()).allMatch(FunctionType.class::isInstance);
+    PythonType osPathModule = ((ExpressionStatement) fileInput.statements().statements().get(2)).expressions().get(0).typeV2();
+    assertThat(osPathModule).isInstanceOf(ModuleType.class);
+    assertThat(osPathModule.name()).isEqualTo("path");
+    assertThat(((UnionType) osPathModule.resolveMember("realpath").get()).candidates()).allMatch(FunctionType.class::isInstance);
   }
 
   // TODO SONARPY-2176 ProjectLevelSymbolTable#getType should be able to resolve types when there is a conflict between a member and a subpackage

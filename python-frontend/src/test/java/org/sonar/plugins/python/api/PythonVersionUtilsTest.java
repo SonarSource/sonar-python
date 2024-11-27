@@ -30,17 +30,15 @@ import static org.sonar.plugins.python.api.PythonVersionUtils.Version.V_310;
 import static org.sonar.plugins.python.api.PythonVersionUtils.Version.V_311;
 import static org.sonar.plugins.python.api.PythonVersionUtils.Version.V_312;
 import static org.sonar.plugins.python.api.PythonVersionUtils.Version.V_313;
-import static org.sonar.plugins.python.api.PythonVersionUtils.Version.V_36;
-import static org.sonar.plugins.python.api.PythonVersionUtils.Version.V_37;
-import static org.sonar.plugins.python.api.PythonVersionUtils.Version.V_38;
 import static org.sonar.plugins.python.api.PythonVersionUtils.Version.V_39;
+import static org.sonar.plugins.python.api.PythonVersionUtils.Version.V_38;
 
 class PythonVersionUtilsTest {
 
   @RegisterExtension
   public LogTesterJUnit5 logTester = new LogTesterJUnit5().setLevel(Level.DEBUG);
 
-  private static final List<PythonVersionUtils.Version> allVersions = List.of(V_36, V_37, V_38, V_39, V_310, V_311, V_312, V_313);
+  private static final List<PythonVersionUtils.Version> allVersions = List.of(V_38, V_39, V_310, V_311, V_312, V_313);
 
   @Test
   void supportedVersions() {
@@ -49,7 +47,7 @@ class PythonVersionUtilsTest {
     assertThat(PythonVersionUtils.fromString("2.7")).hasSameElementsAs(allVersions);
     assertThat(PythonVersionUtils.fromString("2")).hasSameElementsAs(allVersions);
     assertThat(PythonVersionUtils.fromString("3")).hasSameElementsAs(allVersions);
-    assertThat(PythonVersionUtils.fromString("3.8, 3.9")).containsExactlyInAnyOrder(V_38, V_39);
+    assertThat(PythonVersionUtils.fromString("3.9, 3.10")).containsExactlyInAnyOrder(V_39, V_310);
     assertThat(PythonVersionUtils.fromString("2.7, 3.9")).hasSameElementsAs(allVersions);
     assertThat(PythonVersionUtils.fromString("3.10")).containsExactlyInAnyOrder(V_310);
   }
@@ -67,8 +65,8 @@ class PythonVersionUtilsTest {
 
   @Test
   void bugfix_versions() {
-    assertThat(PythonVersionUtils.fromString("3.8.1")).containsExactlyInAnyOrder(V_38);
-    assertThat(logTester.logs(Level.WARN)).contains("No explicit support for version 3.8.1. Python version has been set to 3.8.");
+    assertThat(PythonVersionUtils.fromString("3.9.1")).containsExactlyInAnyOrder(V_39);
+    assertThat(logTester.logs(Level.WARN)).contains("No explicit support for version 3.9.1. Python version has been set to 3.9.");
     assertThat(PythonVersionUtils.fromString("3.11.1")).containsExactlyInAnyOrder(V_311);
     assertThat(PythonVersionUtils.fromString("3.12.1")).containsExactlyInAnyOrder(V_312);
   }
@@ -83,8 +81,8 @@ class PythonVersionUtilsTest {
   @Test
   void isPythonVersionGreaterOrEqualThan() {
     assertFalse(PythonVersionUtils.areSourcePythonVersionsGreaterOrEqualThan(Set.of(), V_39));
-    assertFalse(PythonVersionUtils.areSourcePythonVersionsGreaterOrEqualThan(Set.of(V_36, V_38), V_39));
-    assertFalse(PythonVersionUtils.areSourcePythonVersionsGreaterOrEqualThan(Set.of(V_36, V_310), V_39));
+    assertFalse(PythonVersionUtils.areSourcePythonVersionsGreaterOrEqualThan(Set.of(V_311, V_312), V_313));
+    assertFalse(PythonVersionUtils.areSourcePythonVersionsGreaterOrEqualThan(Set.of(V_310, V_312), V_311));
     assertTrue(PythonVersionUtils.areSourcePythonVersionsGreaterOrEqualThan(Set.of(V_39), V_39));
     assertTrue(PythonVersionUtils.areSourcePythonVersionsGreaterOrEqualThan(Set.of(V_39, V_310), V_39));
     assertTrue(PythonVersionUtils.areSourcePythonVersionsGreaterOrEqualThan(Set.of(V_312, V_310), V_39));

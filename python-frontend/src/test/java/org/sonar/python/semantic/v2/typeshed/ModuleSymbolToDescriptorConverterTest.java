@@ -16,13 +16,8 @@
  */
 package org.sonar.python.semantic.v2.typeshed;
 
-import java.util.Set;
-import java.util.stream.Stream;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
 import org.sonar.plugins.python.api.PythonVersionUtils;
 import org.sonar.python.index.AmbiguousDescriptor;
 import org.sonar.python.index.ClassDescriptor;
@@ -89,42 +84,4 @@ class ModuleSymbolToDescriptorConverterTest {
     var descriptor = converter.convert(null);
     Assertions.assertThat(descriptor).isNull();
   }
-
-
-  static Stream<Arguments> versionsToTest() {
-    return Stream.of(
-      Arguments.of(PythonVersionUtils.Version.V_312),
-      Arguments.of(PythonVersionUtils.Version.V_313)
-    );
-  }
-
-  @ParameterizedTest
-  @MethodSource("versionsToTest")
-  void validForPythonVersionsTest(PythonVersionUtils.Version requestedVersion) {
-    var converter = new ModuleSymbolToDescriptorConverter(Set.of(requestedVersion));
-    var symbol = SymbolsProtos.ModuleSymbol.newBuilder()
-      .setFullyQualifiedName("module")
-      .addVars(SymbolsProtos.VarSymbol.newBuilder()
-        .setName("v1")
-        .setFullyQualifiedName("module.v1")
-        .addValidFor("311")
-        .build())
-      .addVars(SymbolsProtos.VarSymbol.newBuilder()
-        .setName("v2")
-        .setFullyQualifiedName("module.v2")
-        .addValidFor("39")
-        .build())
-      .build();
-    var descriptor = converter.convert(symbol);
-    Assertions.assertThat(descriptor).isNotNull();
-    Assertions.assertThat(descriptor.members().get("v1")).isInstanceOf(VariableDescriptor.class);
-    Assertions.assertThat(descriptor.members().get("v2")).isNull();
-
-    converter = new ModuleSymbolToDescriptorConverter(Set.of(PythonVersionUtils.Version.V_39));
-    descriptor = converter.convert(symbol);
-    Assertions.assertThat(descriptor).isNotNull();
-    Assertions.assertThat(descriptor.members().get("v1")).isNull();
-    Assertions.assertThat(descriptor.members().get("v2")).isInstanceOf(VariableDescriptor.class);
-  }
-
 }

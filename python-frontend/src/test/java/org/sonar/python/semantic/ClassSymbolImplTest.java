@@ -19,6 +19,7 @@ package org.sonar.python.semantic;
 import com.google.protobuf.TextFormat;
 import java.util.Collections;
 import java.util.HashSet;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.symbols.AmbiguousSymbol;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
@@ -36,6 +37,10 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.sonar.python.PythonTestUtils.parse;
 
 class ClassSymbolImplTest {
+  @BeforeEach
+  void setup() {
+    TypeShed.resetBuiltinSymbols();
+  }
 
   @Test
   void hasUnresolvedTypeHierarchy() {
@@ -228,13 +233,14 @@ class ClassSymbolImplTest {
 
   @Test
   void from_protobuf() throws TextFormat.ParseException {
-    String protobuf =
-      "name: \"A\"\n" +
-      "fully_qualified_name: \"mod.A\"\n" +
-      "super_classes: \"builtins.object\"\n" +
-      "has_decorators: true\n" +
-      "has_metaclass: true\n" +
-      "metaclass_name: \"abc.ABCMeta\"";
+    String protobuf = """
+      name: "A"
+      fully_qualified_name: "mod.A"
+      super_classes: "builtins.object"
+      has_decorators: true
+      has_metaclass: true
+      metaclass_name: "abc.ABCMeta"
+      """;
     ClassSymbolImpl classSymbol = new ClassSymbolImpl(classSymbol(protobuf), "mod");
     assertThat(classSymbol.name()).isEqualTo("A");
     assertThat(classSymbol.fullyQualifiedName()).isEqualTo("mod.A");
@@ -246,19 +252,20 @@ class ClassSymbolImplTest {
 
   @Test
   void from_protobuf_instance_method() throws TextFormat.ParseException {
-    String protobuf =
-      "name: \"A\"\n" +
-        "fully_qualified_name: \"mod.A\"\n" +
-        "super_classes: \"builtins.object\"\n" +
-        "methods {\n" +
-        "  name: \"foo\"\n" +
-        "  fully_qualified_name: \"mod.A.foo\"\n" +
-        "  parameters {\n" +
-        "    name: \"self\"\n" +
-        "    kind: POSITIONAL_OR_KEYWORD\n" +
-        "  }\n" +
-        "  has_decorators: true\n" +
-        "}";
+    String protobuf = """
+      name: "A"
+      fully_qualified_name: "mod.A"
+      super_classes: "builtins.object"
+      methods {
+        name: "foo"
+        fully_qualified_name: "mod.A.foo"
+        parameters {
+          name: "self"
+          kind: POSITIONAL_OR_KEYWORD
+        }
+        has_decorators: true
+      }
+      """;
     ClassSymbolImpl classSymbol = new ClassSymbolImpl(classSymbol(protobuf), "mod");
     FunctionSymbol foo = (FunctionSymbol) classSymbol.declaredMembers().iterator().next();
     assertThat(foo.isInstanceMethod()).isTrue();
@@ -266,20 +273,21 @@ class ClassSymbolImplTest {
 
   @Test
   void from_protobuf_class_method() throws TextFormat.ParseException {
-    String protobuf =
-      "name: \"A\"\n" +
-      "fully_qualified_name: \"mod.A\"\n" +
-      "super_classes: \"builtins.object\"\n" +
-      "methods {\n" +
-      "  name: \"foo\"\n" +
-      "  fully_qualified_name: \"mod.A.foo\"\n" +
-      "  parameters {\n" +
-      "    name: \"cls\"\n" +
-      "    kind: POSITIONAL_OR_KEYWORD\n" +
-      "  }\n" +
-      "  has_decorators: true\n" +
-      "  is_class_method: true\n" +
-      "}";
+    String protobuf = """
+      name: "A"
+      fully_qualified_name: "mod.A"
+      super_classes: "builtins.object"
+      methods {
+        name: "foo"
+        fully_qualified_name: "mod.A.foo"
+        parameters {
+          name: "cls"
+          kind: POSITIONAL_OR_KEYWORD
+        }
+        has_decorators: true
+        is_class_method: true
+      }
+      """;
     ClassSymbolImpl classSymbol = new ClassSymbolImpl(classSymbol(protobuf), "mod");
     FunctionSymbol foo = (FunctionSymbol) classSymbol.declaredMembers().iterator().next();
     assertThat(foo.isInstanceMethod()).isFalse();
@@ -287,20 +295,21 @@ class ClassSymbolImplTest {
 
   @Test
   void from_protobuf_static_method() throws TextFormat.ParseException {
-    String protobuf =
-      "name: \"A\"\n" +
-        "fully_qualified_name: \"mod.A\"\n" +
-        "super_classes: \"builtins.object\"\n" +
-        "methods {\n" +
-        "  name: \"foo\"\n" +
-        "  fully_qualified_name: \"mod.A.foo\"\n" +
-        "  parameters {\n" +
-        "    name: \"x\"\n" +
-        "    kind: POSITIONAL_OR_KEYWORD\n" +
-        "  }\n" +
-        "  has_decorators: true\n" +
-        "  is_static: true\n" +
-        "}";
+    String protobuf = """
+      name: "A"
+      fully_qualified_name: "mod.A"
+      super_classes: "builtins.object"
+      methods {
+        name: "foo"
+        fully_qualified_name: "mod.A.foo"
+        parameters {
+          name: "x"
+          kind: POSITIONAL_OR_KEYWORD
+        }
+        has_decorators: true
+        is_static: true
+      }
+      """;
     ClassSymbolImpl classSymbol = new ClassSymbolImpl(classSymbol(protobuf), "mod");
     FunctionSymbol foo = (FunctionSymbol) classSymbol.declaredMembers().iterator().next();
     assertThat(foo.isInstanceMethod()).isFalse();
@@ -308,33 +317,35 @@ class ClassSymbolImplTest {
 
   @Test
   void overloaded_methods() throws TextFormat.ParseException {
-    String protobuf =
-        "name: \"A\"\n" +
-        "fully_qualified_name: \"mod.A\"\n" +
-        "super_classes: \"builtins.object\"\n" +
-        "methods {\n" +
-        "  name: \"foo\"\n" +
-        "  fully_qualified_name: \"mod.A.foo\"\n" +
-        "  valid_for: \"36\"\n" +
-        "}\n" +
-        "overloaded_methods {\n" +
-        "  name: \"foo\"\n" +
-        "  fullname: \"mod.A.foo\"\n" +
-        "  valid_for: \"39\"\n" +
-        "  definitions {\n" +
-        "    name: \"foo\"\n" +
-        "    fully_qualified_name: \"mod.A.foo\"\n" +
-        "    has_decorators: true\n" +
-        "  }\n" +
-        "  definitions {\n" +
-        "    name: \"foo\"\n" +
-        "    fully_qualified_name: \"mod.A.foo\"\n" +
-        "  }\n" +
-        "}\n";
+    String protobuf = """
+      name: "A"
+      fully_qualified_name: "mod.A"
+      super_classes: "builtins.object"
+      methods {
+        name: "foo"
+        fully_qualified_name: "mod.A.foo"
+        valid_for: "39"
+      }
+      overloaded_methods {
+        name: "foo"
+        fullname: "mod.A.foo"
+        valid_for: "310"
+        definitions {
+          name: "foo"
+          fully_qualified_name: "mod.A.foo"
+          has_decorators: true
+        }
+        definitions {
+          name: "foo"
+          fully_qualified_name: "mod.A.foo"
+        }
+      }
+      
+      """;
     ClassSymbolImpl classSymbol = new ClassSymbolImpl(classSymbol(protobuf), "mod");
     Symbol foo = classSymbol.resolveMember("foo").get();
     assertThat(foo.is(Symbol.Kind.AMBIGUOUS)).isTrue();
-    assertThat(((SymbolImpl) foo).validForPythonVersions()).containsExactlyInAnyOrder("36", "39");
+    assertThat(((SymbolImpl) foo).validForPythonVersions()).containsExactlyInAnyOrder("39", "310");
   }
 
   private static SymbolsProtos.ClassSymbol classSymbol(String protobuf) throws TextFormat.ParseException {

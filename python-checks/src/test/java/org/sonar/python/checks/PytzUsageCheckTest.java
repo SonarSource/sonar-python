@@ -22,17 +22,7 @@ import org.sonar.plugins.python.api.ProjectPythonVersion;
 import org.sonar.plugins.python.api.PythonVersionUtils;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 class PytzUsageCheckTest {
-  @Test
-  void test_38() {
-    ProjectPythonVersion.setCurrentVersions(EnumSet.of(PythonVersionUtils.Version.V_38));
-    var issues = PythonCheckVerifier.issues("src/test/resources/checks/pytzUsage.py", new PytzUsageCheck());
-    assertThat(issues)
-      .isEmpty();
-  }
-
   @Test
   void test_39_310_311_312() {
     ProjectPythonVersion

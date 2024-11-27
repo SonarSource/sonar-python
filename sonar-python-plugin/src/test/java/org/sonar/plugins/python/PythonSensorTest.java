@@ -680,9 +680,9 @@ class PythonSensorTest {
 
     activeRules = new ActiveRulesBuilder().build();
 
-    context.setSettings(new MapSettings().setProperty("sonar.python.version", "3.8"));
+    context.setSettings(new MapSettings().setProperty("sonar.python.version", "3.13"));
     sensor().execute(context);
-    assertThat(ProjectPythonVersion.currentVersions()).containsExactly(PythonVersionUtils.Version.V_38);
+    assertThat(ProjectPythonVersion.currentVersions()).containsExactly(PythonVersionUtils.Version.V_313);
     assertThat(logTester.logs(Level.WARN)).doesNotContain(PythonSensor.UNSET_VERSION_WARNING);
     verify(analysisWarning, times(0)).addUnique(PythonSensor.UNSET_VERSION_WARNING);
   }

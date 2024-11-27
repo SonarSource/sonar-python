@@ -186,8 +186,8 @@ def assignment_expression_in_dict_comprehension():
         something(last)
 
 def importing_stdlib():
-  import math
-  math.acos(0)
+  import os.path
+  os.path.realpath("")
 
 
 def importing_submodule():
