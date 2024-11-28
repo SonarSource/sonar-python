@@ -41,7 +41,7 @@ class CustomRulesExampleTest {
   @BeforeAll
   static void prepare() {
     orchestrator.getServer().provisionProject(PROJECT_KEY, PROJECT_NAME);
-    orchestrator.getServer().associateProjectToQualityProfile(PROJECT_KEY, "py", "python-custom-rule-examples-profile");
+    orchestrator.getServer().associateProjectToQualityProfile(PROJECT_KEY, "py", "python-custom-rules-example-profile");
     SonarScanner build = SonarScanner.create()
       .setProjectDir(new File("projects/custom_rules"))
       .setProjectKey(PROJECT_KEY)
@@ -53,13 +53,13 @@ class CustomRulesExampleTest {
 
   @Test
   void base_tree_visitor_check() {
-    List<Issues.Issue> issues = issues("python-custom-rule-examples:visitor");
+    List<Issues.Issue> issues = issues("python-custom-rules-example:visitor");
     assertSingleIssue(issues, 4, "Function def.", "5min");
   }
 
   @Test
   void subscription_base_visitor_check() {
-    List<Issues.Issue> issues = issues("python-custom-rule-examples:subscription");
+    List<Issues.Issue> issues = issues("python-custom-rules-example:subscription");
     assertSingleIssue(issues, 7, "For statement.", "10min");
   }
 

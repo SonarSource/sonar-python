@@ -13,7 +13,7 @@ import org.sonarsource.analyzer.commons.RuleMetadataLoader;
 
 public class CustomPythonRuleRepository implements RulesDefinition, PythonCustomRuleRepository {
   public static final String RESOURCE_BASE_PATH = "/org/sonar/l10n/python/rules/python";
-  public static final String REPOSITORY_KEY = "python-custom-rule-examples";
+  public static final String REPOSITORY_KEY = "python-custom-rules-example";
   public static final String REPOSITORY_NAME = "MyCompany Custom Repository";
 
   private final SonarRuntime runtime;
