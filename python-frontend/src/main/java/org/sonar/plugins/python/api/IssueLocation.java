@@ -49,10 +49,13 @@ public abstract class IssueLocation {
       var begin = mapping.get(lineNumber);
       Path path = pathOf(ipynbFile);
       String fileId = path != null ? path.toString() : ipynbFile.toString();
+      LocationInFile locationInFile;
       if (begin.isCompresssed()) {
-        throw new IllegalStateException("");
+        var next = mapping.get(lineNumber + 1);
+        locationInFile = new LocationInFile(fileId, begin.line(), begin.column(), next.line(), next.column());
+      } else {
+        locationInFile = new LocationInFile(fileId, begin.line(), UNDEFINED_OFFSET, begin.line(), UNDEFINED_OFFSET);
       }
-      var locationInFile = new LocationInFile(fileId, begin.line(), UNDEFINED_OFFSET, begin.line(), UNDEFINED_OFFSET);
       return new PreciseIssueLocation(locationInFile, message);
     }
 

@@ -228,5 +228,35 @@ class IpynbNotebookParserTest {
     assertThat(issues.get(2).primaryLocation().startLineOffset()).isEqualTo(IssueLocation.UNDEFINED_OFFSET);
     assertThat(issues.get(2).primaryLocation().endLineOffset()).isEqualTo(IssueLocation.UNDEFINED_OFFSET);
   }
+
+  @Test
+  void trailing_whitespace_compressed() throws IOException {
+    var inputFile = createInputFile(baseDir, "notebook_trailing_whitespace_compressed.ipynb", InputFile.Status.CHANGED, InputFile.Type.MAIN);
+    var result = IpynbNotebookParser.parseNotebook(inputFile).get();
+    var check = new TrailingWhitespaceCheck();
+    var context = new PythonVisitorContext(
+      TestPythonVisitorRunner.parseNotebookFile(result.locationMap(), result.contents()),
+      SonarQubePythonFile.create(result),
+      null,
+      "");
+    check.scanFile(context);
+
+    var issues = context.getIssues();
+    assertThat(issues).hasSize(3);
+
+    assertThat(issues.get(0).primaryLocation().startLine()).isEqualTo(1);
+    assertThat(issues.get(0).primaryLocation().endLine()).isEqualTo(1);
+    assertThat(issues.get(0).primaryLocation().startLineOffset()).isEqualTo(142);
+    assertThat(issues.get(0).primaryLocation().endLineOffset()).isEqualTo(157); // Should be 154
+
+    assertThat(issues.get(1).primaryLocation().startLine()).isEqualTo(1);
+    assertThat(issues.get(1).primaryLocation().endLine()).isEqualTo(1);
+    assertThat(issues.get(1).primaryLocation().startLineOffset()).isEqualTo(199);
+    assertThat(issues.get(1).primaryLocation().endLineOffset()).isEqualTo(207); // Should be 204
+
+    assertThat(issues.get(2).primaryLocation().startLine()).isEqualTo(1);
+    assertThat(issues.get(2).primaryLocation().endLine()).isEqualTo(1);
+    assertThat(issues.get(2).primaryLocation().startLineOffset()).isEqualTo(249);
+    assertThat(issues.get(2).primaryLocation().endLineOffset()).isEqualTo(249); // Should be 255
   }
 }
