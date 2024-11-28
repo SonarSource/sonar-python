@@ -89,9 +89,11 @@ public abstract class SonarQubePythonFile implements PythonFile {
   public static class IpynbFile extends SonarQubePythonFile {
 
     private final String contents;
+    private final PythonInputFile pythonInputFile;
 
     private IpynbFile(PythonInputFile inputFile) throws IOException {
       super(inputFile.wrappedFile());
+      pythonInputFile = inputFile;
       contents = inputFile.contents();
     }
 
@@ -100,6 +102,9 @@ public abstract class SonarQubePythonFile implements PythonFile {
       return contents;
     }
 
+    public PythonInputFile pythonInputFile() {
+      return pythonInputFile;
+    }
   }
 
 }

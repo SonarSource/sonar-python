@@ -16,11 +16,16 @@
  */
 package org.sonar.plugins.python.api;
 
+import java.nio.file.Path;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
+import org.sonar.plugins.python.GeneratedIPythonFile;
+import org.sonar.plugins.python.SonarQubePythonFile;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.TokenLocation;
+
+import static org.sonar.python.semantic.SymbolUtils.pathOf;
 
 public abstract class IssueLocation {
 
@@ -40,6 +45,20 @@ public abstract class IssueLocation {
 
   public static IssueLocation atLineLevel(String message, int lineNumber) {
     return new LineLevelIssueLocation(message, lineNumber);
+  }
+
+  public static IssueLocation atLineLevel(String message, int lineNumber, PythonFile pythonInputFile) {
+    if (pythonInputFile instanceof SonarQubePythonFile.IpynbFile ipynbFile && ipynbFile.pythonInputFile() instanceof GeneratedIPythonFile generatedPythonFile) {
+      var mapping = generatedPythonFile.locationMap();
+      var begin = mapping.get(lineNumber);
+      var end = mapping.get(lineNumber + 1);
+      Path path = pathOf(ipynbFile);
+      String fileId = path != null ? path.toString() : ipynbFile.toString();
+      var locationInFile = new LocationInFile(fileId, begin.line(), 0, end.line(), 0);
+      return new PreciseIssueLocation(locationInFile, message);
+    }
+
+    return atLineLevel(message, lineNumber);
   }
 
   public static IssueLocation preciseLocation(Tree tree, @Nullable String message) {
