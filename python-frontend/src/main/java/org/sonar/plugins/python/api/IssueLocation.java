@@ -33,7 +33,7 @@ public abstract class IssueLocation {
 
   public static final int UNDEFINED_LINE = 0;
 
-  private String message;
+  private final String message;
 
   private IssueLocation(@Nullable String message) {
     this.message = message;
@@ -47,10 +47,12 @@ public abstract class IssueLocation {
     if (pythonInputFile instanceof SonarQubePythonFile.IpynbFile ipynbFile && ipynbFile.pythonInputFile() instanceof GeneratedIPythonFile generatedPythonFile) {
       var mapping = generatedPythonFile.locationMap();
       var begin = mapping.get(lineNumber);
-      var end = mapping.get(lineNumber + 1);
       Path path = pathOf(ipynbFile);
       String fileId = path != null ? path.toString() : ipynbFile.toString();
-      var locationInFile = new LocationInFile(fileId, begin.line(), 0, end.line(), 0);
+      if (begin.isCompresssed()) {
+        throw new IllegalStateException("");
+      }
+      var locationInFile = new LocationInFile(fileId, begin.line(), UNDEFINED_OFFSET, begin.line(), UNDEFINED_OFFSET);
       return new PreciseIssueLocation(locationInFile, message);
     }
 

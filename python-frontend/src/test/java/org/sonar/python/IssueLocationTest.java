@@ -17,7 +17,12 @@
 package org.sonar.python;
 
 import com.sonar.sslr.api.AstNode;
+import java.util.Map;
 import org.junit.jupiter.api.Test;
+import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
+import org.sonar.plugins.python.GeneratedIPythonFile;
+import org.sonar.plugins.python.PythonInputFile;
+import org.sonar.plugins.python.SonarQubePythonFile;
 import org.sonar.plugins.python.api.IssueLocation;
 import org.sonar.plugins.python.api.LocationInFile;
 import org.sonar.python.api.PythonPunctuator;
@@ -42,6 +47,18 @@ class IssueLocationTest {
     assertThat(issueLocation.startLineOffset()).isEqualTo(IssueLocation.UNDEFINED_OFFSET);
     assertThat(issueLocation.endLineOffset()).isEqualTo(IssueLocation.UNDEFINED_OFFSET);
     assertThat(issueLocation.fileId()).isNull();
+  }
+
+  @Test
+  void line_level_notebook() {
+    var wrappedInputFile = TestInputFileBuilder.create("foo.ipynb", "foo").build();
+    PythonInputFile pythonInputFile = new GeneratedIPythonFile(wrappedInputFile, "", Map.of(
+      1, new IPythonLocation(1, 1),
+      2, new IPythonLocation(2, 2),
+      3, new IPythonLocation(3, 3)));
+    var inputFile = SonarQubePythonFile.create(pythonInputFile);
+    var issueLocation = IssueLocation.atLineLevel(MESSAGE, 2, inputFile);
+    assertThat(issueLocation.message()).isEqualTo(MESSAGE);
   }
 
   @Test
