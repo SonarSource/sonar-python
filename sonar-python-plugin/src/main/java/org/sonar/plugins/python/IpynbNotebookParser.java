@@ -36,7 +36,6 @@ public class IpynbNotebookParser {
 
   private static final Set<String> ACCEPTED_LANGUAGE = Set.of("python", "ipython");
 
-
   public static Optional<GeneratedIPythonFile> parseNotebook(PythonInputFile inputFile) {
     try {
       return new IpynbNotebookParser(inputFile).parse();
@@ -187,6 +186,14 @@ public class IpynbNotebookParser {
     }
     if (!lastSourceLine.endsWith("\n")) {
       cellData.appendToSource("\n");
+    } else {
+      // if the last string of the array ends with a newline character we should add this new line to our representation
+      var newLineLocation = new IPythonLocation(
+        tokenLocation.getLineNr(),
+        tokenLocation.getColumnNr(),
+        List.of(new EscapeCharPositionInfo(tokenLocation.getColumnNr(), 1)),
+        false);
+      cellData.addLineToSource("\n", newLineLocation);
     }
     // Account for the last cell delimiter
     cellData.addDelimiterToSource(SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER + "\n", tokenLocation.getLineNr(), tokenLocation.getColumnNr());
@@ -209,8 +216,14 @@ public class IpynbNotebookParser {
       previousLen += line.length() + 2;
       previousExtraChars += currentCount;
     }
+
+    if (sourceLine.endsWith("\n")) {
+      var column = tokenLocation.getColumnNr() + previousExtraChars + previousLen;
+      cellData.addLineToSource("\n", new IPythonLocation(tokenLocation.getLineNr(), column, List.of(new EscapeCharPositionInfo(column, 1)), true));
+      previousLen += 2;
+    }
     // Account for the last cell delimiter
-    cellData.addDelimiterToSource(SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER + "\n", tokenLocation.getLineNr(), tokenLocation.getColumnNr());
+    cellData.addDelimiterToSource(SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER + "\n", tokenLocation.getLineNr(), tokenLocation.getColumnNr() + previousExtraChars + previousLen);
     return cellData;
   }
 

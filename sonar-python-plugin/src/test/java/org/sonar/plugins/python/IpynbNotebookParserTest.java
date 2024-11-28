@@ -47,26 +47,26 @@ class IpynbNotebookParserTest {
     assertThat(result.contents()).hasLineCount(27);
     assertThat(StringUtils.countMatches(result.contents(), IpynbNotebookParser.SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER))
       .isEqualTo(7);
-    assertThat(result.locationMap()).extracting(map -> map.get(1)).isEqualTo(new IPythonLocation(17, 5));
+    assertThat(result.locationMap()).extractingByKey(1).isEqualTo(new IPythonLocation(17, 5));
     //"    print \"not none\"\n"
-    assertThat(result.locationMap()).extracting(map -> map.get(3)).isEqualTo(new IPythonLocation(19, 5,
+    assertThat(result.locationMap()).extractingByKey(3).isEqualTo(new IPythonLocation(19, 5,
       mapToColumnMappingList(Map.of(10, 1, 19, 1))));
     //"source": "#Some code\nprint(\"hello world\\n\")",
-    assertThat(result.locationMap()).extracting(map -> map.get(16)).isEqualTo(new IPythonLocation(64, 14, List.of(), true));
-    assertThat(result.locationMap()).extracting(map -> map.get(17)).isEqualTo(new IPythonLocation(64, 26, mapToColumnMappingList(Map.of(6
+    assertThat(result.locationMap()).extractingByKey(16).isEqualTo(new IPythonLocation(64, 14, List.of(), true));
+    assertThat(result.locationMap()).extractingByKey(17).isEqualTo(new IPythonLocation(64, 26, mapToColumnMappingList(Map.of(6
       , 1, 18, 1, 20, 1)), true));
     //"source": "print(\"My\\ntext\")\nprint(\"Something else\\n\")"
-    assertThat(result.locationMap()).extracting(map -> map.get(22)).isEqualTo(new IPythonLocation(83, 14, mapToColumnMappingList(Map.of(6
+    assertThat(result.locationMap()).extractingByKey(22).isEqualTo(new IPythonLocation(83, 14, mapToColumnMappingList(Map.of(6
       , 1, 9, 1, 15, 1)), true));
-    assertThat(result.locationMap()).extracting(map -> map.get(23)).isEqualTo(new IPythonLocation(83, 36, mapToColumnMappingList(Map.of(6
+    assertThat(result.locationMap()).extractingByKey(23).isEqualTo(new IPythonLocation(83, 36, mapToColumnMappingList(Map.of(6
       , 1, 21, 1, 23, 1)), true));
 
     //"source": "a = \"A bunch of characters \\n \\f \\r \\  \"\nb = None"
-    assertThat(result.locationMap()).extracting(map -> map.get(25))
+    assertThat(result.locationMap()).extractingByKey(25)
       .isEqualTo(new IPythonLocation(90, 14, mapToColumnMappingList(Map.of(4, 1, 27, 1, 30, 1, 33, 1, 36, 1, 39, 1)), true));
-    assertThat(result.locationMap()).extracting(map -> map.get(26)).isEqualTo(new IPythonLocation(90, 62, List.of(), true));
-    // last line with the cell delimiter which contains the EOF token
-    assertThat(result.locationMap()).extracting(map -> map.get(27)).isEqualTo(new IPythonLocation(90, 14, List.of()));
+    assertThat(result.locationMap()).extractingByKey(26).isEqualTo(new IPythonLocation(90, 62, List.of(), true));
+    // last line with the cell delimiter which contains the EOF token the column of this token should be at the end of the previous line 
+    assertThat(result.locationMap()).extractingByKey(27).isEqualTo(new IPythonLocation(90, 72, List.of(), false));
   }
 
   @Test
@@ -108,14 +108,15 @@ class IpynbNotebookParserTest {
 
     var result = resultOptional.get();
 
-    assertThat(result.locationMap().keySet()).hasSize(4);
-    assertThat(result.contents()).hasLineCount(4);
+    assertThat(result.locationMap().keySet()).hasSize(5);
+    assertThat(result.contents()).hasLineCount(5);
     assertThat(StringUtils.countMatches(result.contents(), IpynbNotebookParser.SONAR_PYTHON_NOTEBOOK_CELL_DELIMITER))
       .isEqualTo(1);
-    assertThat(result.locationMap()).extracting(map -> map.get(3)).isEqualTo(new IPythonLocation(11, 5));
+    assertThat(result.locationMap()).extractingByKey(4).extracting(IPythonLocation::line).isEqualTo(11);
+    assertThat(result.locationMap()).extractingByKey(4).extracting(IPythonLocation::column).isEqualTo(5);
 
     // last line with the cell delimiter which contains the EOF token
-    assertThat(result.locationMap()).extracting(map -> map.get(4)).isEqualTo(new IPythonLocation(11, 5));
+    assertThat(result.locationMap()).extractingByKey(5).isEqualTo(new IPythonLocation(11, 5));
   }
 
   @Test
@@ -146,7 +147,25 @@ class IpynbNotebookParserTest {
   }
 
   @Test
-  void testParseNotebookWithExtraLineEndInArray() throws IOException {
+  void testDifferentJsonRepresentationOfEmptyLine() throws IOException {
+    var inputFile = createInputFile(baseDir, "notebook_extra_line.ipynb", InputFile.Status.CHANGED, InputFile.Type.MAIN);
+    var inputFileExtraLineExplicit = createInputFile(baseDir, "notebook_extra_line_explicit.ipynb", InputFile.Status.CHANGED, InputFile.Type.MAIN);
+    var inputFileExtraLineExplicitSingleLine = createInputFile(baseDir, "notebook_extra_line_compressed.ipynb", InputFile.Status.CHANGED, InputFile.Type.MAIN);
+
+    var notebook = IpynbNotebookParser.parseNotebook(inputFile);
+    var notebookExtraLineExplicit = IpynbNotebookParser.parseNotebook(inputFileExtraLineExplicit);
+    var notebookExtraLineExplicitSingleLine = IpynbNotebookParser.parseNotebook(inputFileExtraLineExplicitSingleLine);
+
+    assertThat(notebook).isPresent();
+    assertThat(notebookExtraLineExplicit).isPresent();
+    assertThat(notebookExtraLineExplicitSingleLine).isPresent();
+
+    assertThat(notebook.get().contents()).isEqualTo(notebookExtraLineExplicit.get().contents());
+    assertThat(notebook.get().contents()).isEqualTo(notebookExtraLineExplicitSingleLine.get().contents());
+  }
+
+  @Test
+  void testParseNotebookEndingWithEmptyLine() throws IOException {
     var inputFile = createInputFile(baseDir, "notebook_extra_line.ipynb", InputFile.Status.CHANGED, InputFile.Type.MAIN);
 
     var resultOptional = IpynbNotebookParser.parseNotebook(inputFile);
@@ -154,8 +173,29 @@ class IpynbNotebookParserTest {
     assertThat(resultOptional).isPresent();
 
     var result = resultOptional.get();
-    assertThat(result.locationMap()).hasSize(3);
-    assertThat(result.contents()).hasLineCount(3);
+    assertThat(result.locationMap()).hasSize(4);
+    assertThat(result.contents()).hasLineCount(4);
+    // The empty line
+    assertThat(result.locationMap()).extractingByKey(3).extracting(IPythonLocation::line).isEqualTo(19);
+    assertThat(result.locationMap()).extractingByKey(3).extracting(IPythonLocation::column).isEqualTo(5);
+    // The delimiter
+    assertThat(result.locationMap()).extractingByKey(4).extracting(IPythonLocation::line).isEqualTo(19);
+    assertThat(result.locationMap()).extractingByKey(4).extracting(IPythonLocation::column).isEqualTo(5);
+      
+    inputFile = createInputFile(baseDir, "notebook_extra_line_compressed.ipynb", InputFile.Status.CHANGED, InputFile.Type.MAIN);
+    resultOptional = IpynbNotebookParser.parseNotebook(inputFile);
+
+    assertThat(resultOptional).isPresent();
+
+    result = resultOptional.get();
+    assertThat(result.locationMap()).hasSize(4);
+    assertThat(result.contents()).hasLineCount(4);
+    // The empty line
+    assertThat(result.locationMap()).extractingByKey(3).extracting(IPythonLocation::line).isEqualTo(1);
+    assertThat(result.locationMap()).extractingByKey(3).extracting(IPythonLocation::column).isEqualTo(317);
+    // The delimiter is added after the empty line
+    assertThat(result.locationMap()).extractingByKey(4).extracting(IPythonLocation::line).isEqualTo(1);
+    assertThat(result.locationMap()).extractingByKey(4).extracting(IPythonLocation::column).isEqualTo(319);
   }
 
   @Test
