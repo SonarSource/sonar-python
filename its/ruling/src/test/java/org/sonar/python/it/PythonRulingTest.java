@@ -23,7 +23,6 @@ import java.io.File;
 import java.nio.file.Files;
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -55,7 +54,7 @@ class PythonRulingTest {
     String serverUrl = ORCHESTRATOR.getServer().getUrl();
     File profileFile = ProfileGenerator.generateProfile(serverUrl, "py", "python", parameters, Collections.emptySet());
     ORCHESTRATOR.getServer().restoreProfile(FileLocation.of(profileFile));
-    File iPythonProfileFile = ProfileGenerator.generateProfile(serverUrl, "ipynb", "ipython", parameters, Set.of("S139"));
+    File iPythonProfileFile = ProfileGenerator.generateProfile(serverUrl, "ipynb", "ipython", parameters, Collections.emptySet());
     ORCHESTRATOR.getServer().restoreProfile(FileLocation.of(iPythonProfileFile));
   }
 
