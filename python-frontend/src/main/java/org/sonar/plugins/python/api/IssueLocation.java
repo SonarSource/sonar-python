@@ -43,10 +43,6 @@ public abstract class IssueLocation {
     return new FileLevelIssueLocation(message);
   }
 
-  private static IssueLocation atLineLevel(String message, int lineNumber) {
-    return new LineLevelIssueLocation(message, lineNumber);
-  }
-
   public static IssueLocation atLineLevel(String message, int lineNumber, PythonFile pythonInputFile) {
     if (pythonInputFile instanceof SonarQubePythonFile.IpynbFile ipynbFile && ipynbFile.pythonInputFile() instanceof GeneratedIPythonFile generatedPythonFile) {
       var mapping = generatedPythonFile.locationMap();
@@ -58,7 +54,7 @@ public abstract class IssueLocation {
       return new PreciseIssueLocation(locationInFile, message);
     }
 
-    return atLineLevel(message, lineNumber);
+    return new LineLevelIssueLocation(message, lineNumber);
   }
 
   public static IssueLocation preciseLocation(Tree tree, @Nullable String message) {
