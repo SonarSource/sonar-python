@@ -22,7 +22,7 @@ class CustomPythonRuleRepositoryTest {
     CustomPythonRuleRepository customPythonRuleRepository = new CustomPythonRuleRepository(sonarRuntime);
     RulesDefinition.Context context = new RulesDefinition.Context();
     customPythonRuleRepository.define(context);
-    assertThat(customPythonRuleRepository.repositoryKey()).isEqualTo("python-custom-rules");
+    assertThat(customPythonRuleRepository.repositoryKey()).isEqualTo("python-custom-rule-examples");
     assertThat(context.repositories()).hasSize(1).extracting("key").containsExactly(customPythonRuleRepository.repositoryKey());
     var rules = context.repositories().get(0).rules();
     assertThat(rules).hasSize(2);

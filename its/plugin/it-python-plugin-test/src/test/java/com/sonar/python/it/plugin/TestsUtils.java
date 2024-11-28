@@ -52,6 +52,8 @@ public final class TestsUtils {
     .addPlugin(PLUGIN_LOCATION)
     // Custom rules plugin
     .addPlugin(FileLocation.byWildcardMavenFilename(new File("../python-custom-rules-plugin/target"), "python-custom-rules-plugin-*.jar"))
+    .addPlugin(FileLocation.byWildcardMavenFilename(new File("../../../docs/python-custom-rule-examples/target"), "python-custom-rule-examples-*.jar"))
+    .restoreProfileAtStartup(FileLocation.of("profiles/profile-python-custom-rule-examples.xml"))
     .restoreProfileAtStartup(FileLocation.of("profiles/profile-python-custom-rules.xml"))
     .restoreProfileAtStartup(FileLocation.of("profiles/profile-python-test-rules.xml"))
     .restoreProfileAtStartup(FileLocation.of("profiles/no_rule.xml"))

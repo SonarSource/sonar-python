@@ -12,9 +12,8 @@ import org.sonar.plugins.python.api.PythonCustomRuleRepository;
 import org.sonarsource.analyzer.commons.RuleMetadataLoader;
 
 public class CustomPythonRuleRepository implements RulesDefinition, PythonCustomRuleRepository {
-
-  public static final String RESOURCE_BASE_PATH = "/org/sonar/l10n/python/rules/python/";
-  public static final String REPOSITORY_KEY = "python-custom-rules";
+  public static final String RESOURCE_BASE_PATH = "/org/sonar/l10n/python/rules/python";
+  public static final String REPOSITORY_KEY = "python-custom-rule-examples";
   public static final String REPOSITORY_NAME = "MyCompany Custom Repository";
 
   private final SonarRuntime runtime;
@@ -25,7 +24,7 @@ public class CustomPythonRuleRepository implements RulesDefinition, PythonCustom
 
   @Override
   public void define(Context context) {
-    NewRepository repository = context.createRepository(REPOSITORY_KEY, "java").setName(REPOSITORY_NAME);
+    NewRepository repository = context.createRepository(REPOSITORY_KEY, "py").setName(REPOSITORY_NAME);
     RuleMetadataLoader ruleMetadataLoader = new RuleMetadataLoader(RESOURCE_BASE_PATH, runtime);
     ruleMetadataLoader.addRulesByAnnotatedClass(repository, new ArrayList<>(RulesList.getChecks()));
     repository.done();

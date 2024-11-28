@@ -4,6 +4,7 @@
  */
 package org.sonar.samples.python;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 import org.sonar.plugins.python.api.PythonCheck;
@@ -16,27 +17,27 @@ public final class RulesList {
   }
 
   public static List<Class<? extends PythonCheck>> getChecks() {
-    return Stream.concat(
+    return new ArrayList<>(Stream.concat(
       getPythonChecks().stream(),
       getPythonTestChecks().stream()
-    ).toList();
+    ).toList());
   }
 
   /**
    * These rules are going to target MAIN code only
    */
   public static List<Class<? extends PythonCheck>> getPythonChecks() {
-    return List.of(
+    return new ArrayList<>(List.of(
       CustomPythonSubscriptionCheck.class
-    );
+    ));
   }
 
   /**
    * These rules are going to target TEST code only
    */
   public static List<Class<? extends PythonCheck>> getPythonTestChecks() {
-    return List.of(
+    return new ArrayList<>(List.of(
       CustomPythonVisitorCheck.class
-    );
+    ));
   }
 }

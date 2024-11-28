@@ -22,36 +22,28 @@
     <dependency>
       <groupId>org.sonarsource.api.plugin</groupId>
       <artifactId>sonar-plugin-api</artifactId>
-      <version>10.12.0.2522</version>
       <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.sonarsource.analyzer-commons</groupId>
+      <artifactId>sonar-analyzer-commons</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.sonarsource.sonarqube</groupId>
+      <artifactId>sonar-plugin-api-impl</artifactId>
+      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.sonarsource.python</groupId>
       <artifactId>sonar-python-plugin</artifactId>
       <type>sonar-plugin</type>
-      <version>${sonar.python.version}</version>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-api</artifactId>
+      <version>${project.version}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.sonarsource.python</groupId>
       <artifactId>python-checks-testkit</artifactId>
-      <version>${sonar.python.version}</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.sonarsource.sonarqube</groupId>
-      <artifactId>sonar-plugin-api-impl</artifactId>
-      <version>10.7.0.96327</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.sonarsource.api.plugin</groupId>
-      <artifactId>sonar-plugin-api-test-fixtures</artifactId>
+      <version>${project.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -64,11 +56,6 @@
       <artifactId>junit-jupiter-api</artifactId>
       <scope>test</scope>
     </dependency>
-    <dependency>
-      <groupId>org.mockito</groupId>
-      <artifactId>mockito-core</artifactId>
-      <scope>test</scope>
-    </dependency>
   </dependencies>
 
   <build>
@@ -76,15 +63,12 @@
       <plugin>
         <groupId>org.sonarsource.sonar-packaging-maven-plugin</groupId>
         <artifactId>sonar-packaging-maven-plugin</artifactId>
-        <version>1.21.0.505</version>
         <extensions>true</extensions>
         <configuration>
-          <pluginKey>python-custom</pluginKey>
-          <pluginName>Python Custom Rules</pluginName>
           <pluginClass>org.sonar.samples.python.CustomPythonRulesPlugin</pluginClass>
-          <requirePlugins>python:${sonar.python.version}</requirePlugins>
-          <sonarLintSupported>true</sonarLintSupported>
-          <skipDependenciesPackaging>true</skipDependenciesPackaging>
+          <requirePlugins>python:${project.version}</requirePlugins>
+          <pluginApiMinVersion>${pluginApiMinVersion}</pluginApiMinVersion>
+          <requiredForLanguages>py,ipynb</requiredForLanguages>
         </configuration>
       </plugin>
 
