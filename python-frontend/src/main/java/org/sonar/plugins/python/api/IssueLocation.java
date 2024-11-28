@@ -43,7 +43,7 @@ public abstract class IssueLocation {
     return new FileLevelIssueLocation(message);
   }
 
-  public static IssueLocation atLineLevel(String message, int lineNumber) {
+  private static IssueLocation atLineLevel(String message, int lineNumber) {
     return new LineLevelIssueLocation(message, lineNumber);
   }
 

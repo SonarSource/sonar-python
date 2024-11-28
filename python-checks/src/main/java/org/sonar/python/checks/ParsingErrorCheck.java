@@ -29,7 +29,7 @@ public class ParsingErrorCheck implements PythonCheck {
   public void scanFile(PythonVisitorContext context) {
     RecognitionException parsingException = context.parsingException();
     if (parsingException != null) {
-      context.addIssue(new PreciseIssue(this, IssueLocation.atLineLevel(parsingException.getMessage(), parsingException.getLine())));
+      context.addIssue(new PreciseIssue(this, IssueLocation.atLineLevel(parsingException.getMessage(), parsingException.getLine(), context.pythonFile())));
     }
   }
 

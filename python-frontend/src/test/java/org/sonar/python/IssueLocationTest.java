@@ -45,17 +45,6 @@ class IssueLocationTest {
   }
 
   @Test
-  void line_level() {
-    IssueLocation issueLocation = IssueLocation.atLineLevel(MESSAGE, 42);
-    assertThat(issueLocation.message()).isEqualTo(MESSAGE);
-    assertThat(issueLocation.startLine()).isEqualTo(42);
-    assertThat(issueLocation.endLine()).isEqualTo(42);
-    assertThat(issueLocation.startLineOffset()).isEqualTo(IssueLocation.UNDEFINED_OFFSET);
-    assertThat(issueLocation.endLineOffset()).isEqualTo(IssueLocation.UNDEFINED_OFFSET);
-    assertThat(issueLocation.fileId()).isNull();
-  }
-
-  @Test
   void precise_issue_location() {
     LocationInFile locationInFile = new LocationInFile("foo.py", 1, 1, 1, 10);
     IssueLocation issueLocation = IssueLocation.preciseLocation(locationInFile, "foo");
