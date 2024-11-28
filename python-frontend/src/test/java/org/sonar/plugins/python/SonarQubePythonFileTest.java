@@ -55,4 +55,15 @@ class SonarQubePythonFileTest {
     assertThatThrownBy(() -> SonarQubePythonFile.create(pythonInputFile)).isInstanceOf(IllegalStateException.class);
   }
 
+  @Test
+  void regular_file_create() throws Exception {
+    var wrappedFile = mock(InputFile.class);
+    when(wrappedFile.contents()).thenReturn("Hello 6.2!");
+    var pythonInputFile = mock(PythonInputFile.class);
+    when(pythonInputFile.kind()).thenReturn(PythonInputFile.Kind.PYTHON);
+    when(pythonInputFile.wrappedFile()).thenReturn(wrappedFile);
+    PythonFile pythonFile = SonarQubePythonFile.create(pythonInputFile);
+    assertThat(pythonFile.content()).isEqualTo("Hello 6.2!");
+  }
+
 }
