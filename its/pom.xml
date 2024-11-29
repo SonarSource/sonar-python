@@ -68,6 +68,27 @@
                   <overWriteSnapshots>true</overWriteSnapshots>
                 </configuration>
               </execution>
+              <execution>
+                <id>copy-python-custom-rules-example</id>
+                <phase>generate-test-resources</phase>
+                <goals>
+                  <goal>copy</goal>
+                </goals>
+                <configuration>
+                  <artifactItems>
+                    <artifactItem>
+                      <groupId>${project.groupId}</groupId>
+                      <artifactId>python-custom-rules-example</artifactId>
+                      <version>${project.version}</version>
+                      <type>sonar-plugin</type>
+                      <overWrite>true</overWrite>
+                    </artifactItem>
+                  </artifactItems>
+                  <outputDirectory>../../docs/python-custom-rules-example/target</outputDirectory>
+                  <overWriteReleases>true</overWriteReleases>
+                  <overWriteSnapshots>true</overWriteSnapshots>
+                </configuration>
+              </execution>
             </executions>
           </plugin>
         </plugins>
