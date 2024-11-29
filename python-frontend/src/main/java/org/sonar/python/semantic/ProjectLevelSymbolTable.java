@@ -61,25 +61,23 @@ public class ProjectLevelSymbolTable {
   private TypeShedDescriptorsProvider typeShedDescriptorsProvider = null;
 
   public static ProjectLevelSymbolTable empty() {
-    return new ProjectLevelSymbolTable(Collections.emptyMap());
+    return new ProjectLevelSymbolTable();
   }
 
-  public static ProjectLevelSymbolTable from(Map<String, Set<Symbol>> globalSymbolsByModuleName) {
-    return new ProjectLevelSymbolTable(globalSymbolsByModuleName);
+  public static ProjectLevelSymbolTable from(Map<String, Set<Descriptor>> globalDescriptorsByModuleName) {
+    var projectLevelSymbolTable = new ProjectLevelSymbolTable();
+
+    for (var entry : globalDescriptorsByModuleName.entrySet()) {
+      var descriptors = entry.getValue();
+      projectLevelSymbolTable.globalDescriptorsByModuleName.put(entry.getKey(), descriptors);
+      projectLevelSymbolTable.addModuleToGlobalSymbolsByFQN(descriptors);
+    }
+
+    return projectLevelSymbolTable;
   }
 
   public ProjectLevelSymbolTable() {
     this.globalDescriptorsByModuleName = new HashMap<>();
-  }
-
-  private ProjectLevelSymbolTable(Map<String, Set<Symbol>> globalSymbolsByModuleName) {
-    this.globalDescriptorsByModuleName = new HashMap<>();
-    globalSymbolsByModuleName.entrySet().forEach(entry -> {
-      String moduleName = entry.getKey();
-      Set<Symbol> symbols = entry.getValue();
-      Set<Descriptor> globalDescriptors = symbols.stream().map(DescriptorUtils::descriptor).collect(Collectors.toSet());
-      globalDescriptorsByModuleName.put(moduleName, globalDescriptors);
-    });
   }
 
   public void removeModule(String packageName, String fileName) {

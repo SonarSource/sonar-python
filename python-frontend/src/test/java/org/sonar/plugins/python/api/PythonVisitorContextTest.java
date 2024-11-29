@@ -18,10 +18,7 @@ package org.sonar.plugins.python.api;
 
 import com.sonar.sslr.api.RecognitionException;
 import java.io.File;
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import org.junit.jupiter.api.Test;
@@ -33,9 +30,10 @@ import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.PythonTestUtils;
 import org.sonar.python.caching.CacheContextImpl;
+import org.sonar.python.index.Descriptor;
+import org.sonar.python.index.VariableDescriptor;
 import org.sonar.python.parser.PythonParser;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
-import org.sonar.python.semantic.SymbolImpl;
 import org.sonar.python.tree.FileInputImpl;
 import org.sonar.python.tree.PythonTreeMaker;
 
@@ -82,9 +80,11 @@ class PythonVisitorContextTest {
     String code = "from mod import a, b";
     FileInput fileInput = new PythonTreeMaker().fileInput(PythonParser.create().parse(code));
     PythonFile pythonFile = pythonFile("my_module.py");
-    List<Symbol> modSymbols = Arrays.asList(new SymbolImpl("a", null), new SymbolImpl("b", null));
-    Map<String, Set<Symbol>> globalSymbols = Collections.singletonMap("mod", new HashSet<>(modSymbols));
-    new PythonVisitorContext(fileInput, pythonFile, null, "my_package", ProjectLevelSymbolTable.from(globalSymbols), null);
+
+    Set<Descriptor> descriptors = Set.of(new VariableDescriptor("a", "mod.a", null), new VariableDescriptor("b", "mod.b", null));
+    Map<String, Set<Descriptor>> globalDescriptors = Collections.singletonMap("mod", descriptors);
+
+    new PythonVisitorContext(fileInput, pythonFile, null, "my_package", ProjectLevelSymbolTable.from(globalDescriptors), CacheContextImpl.dummyCache());
     assertThat(fileInput.globalVariables()).extracting(Symbol::name).containsExactlyInAnyOrder("a", "b");
   }
 
