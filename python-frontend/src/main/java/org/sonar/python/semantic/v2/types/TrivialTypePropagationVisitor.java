@@ -17,7 +17,6 @@
 package org.sonar.python.semantic.v2.types;
 
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
-import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.UnaryExpression;
 import org.sonar.plugins.python.api.types.BuiltinTypes;
 import org.sonar.python.semantic.v2.TypeTable;
@@ -52,22 +51,32 @@ public class TrivialTypePropagationVisitor extends BaseTreeVisitor {
   public void visitUnaryExpression(UnaryExpression unaryExpr) {
     super.visitUnaryExpression(unaryExpr);
 
-    Token operator = unaryExpr.operator();
-    PythonType exprType = switch (operator.value()) {
-      case "~" -> intType;
-      case "not" -> boolType;
-      case "+", "-" -> getTypeWhenUnaryPlusMinus(unaryExpr);
-      default -> PythonType.UNKNOWN;
-    };
-
+    PythonType exprType = calculateUnaryExprType(unaryExpr);
     if (unaryExpr instanceof UnaryExpressionImpl unaryExprImpl) {
       unaryExprImpl.typeV2(toObjectType(exprType));
     }
   }
 
-  private PythonType getTypeWhenUnaryPlusMinus(UnaryExpression unaryExpr) {
-    var innerExprType = unaryExpr.expression().typeV2();
-    return TypeUtils.map(innerExprType, this::mapUnaryPlusMinusType);
+  private PythonType calculateUnaryExprType(UnaryExpression unaryExpr) {
+    String operator = unaryExpr.operator().value();
+    return TypeUtils.map(unaryExpr.expression().typeV2(), type -> mapUnaryExprType(operator, type));
+  }
+
+  private PythonType mapUnaryExprType(String operator, PythonType type) {
+    return switch (operator) {
+      case "~" -> mapInvertExprType(type);
+      // not cannot be overloaded and always returns a boolean
+      case "not" -> boolType;
+      case "+", "-" -> mapUnaryPlusMinusType(type);
+      default -> PythonType.UNKNOWN;
+    };
+  }
+
+  private PythonType mapInvertExprType(PythonType type) {
+    if(isIntTypeCheck.check(type) == TriBool.TRUE || isBooleanTypeCheck.check(type) == TriBool.TRUE) {
+      return intType;
+    }
+    return PythonType.UNKNOWN;
   }
 
   private PythonType mapUnaryPlusMinusType(PythonType type) {
