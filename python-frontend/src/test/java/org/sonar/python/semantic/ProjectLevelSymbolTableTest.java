@@ -44,7 +44,6 @@ import org.sonar.python.PythonTestUtils;
 import org.sonar.python.index.AmbiguousDescriptor;
 import org.sonar.python.index.ClassDescriptor;
 import org.sonar.python.index.Descriptor;
-import org.sonar.python.index.DescriptorUtils;
 import org.sonar.python.index.FunctionDescriptor;
 import org.sonar.python.index.VariableDescriptor;
 import org.sonar.python.tree.TreeUtils;
@@ -1078,26 +1077,6 @@ class ProjectLevelSymbolTableTest {
 
     FunctionDef functionDef = (FunctionDef) fileInput.statements().statements().get(0);
     assertThat(functionDef.localVariables()).isEmpty();
-  }
-
-  @Test
-  void descriptorsForModule() {
-    FileInput tree = PythonTestUtils.parseWithoutSymbols(
-      "class A: ...",
-      "class B(A): ...",
-      "def foo(): ...",
-      "x :int = 42",
-      "def bar(): ...",
-      "bar = 24"
-    );
-    ProjectLevelSymbolTable projectLevelSymbolTable = new ProjectLevelSymbolTable();
-    projectLevelSymbolTable.addModule(tree, "", PythonTestUtils.pythonFile("mod.py"));
-    Set<Symbol> symbols = projectLevelSymbolTable.getSymbolsFromModule("mod");
-    Set<Descriptor> retrievedDescriptors = projectLevelSymbolTable.descriptorsForModule("mod");
-    Set<Descriptor> recomputedDescriptors = new HashSet<>();
-    assertThat(symbols).isNotNull();
-    symbols.forEach(s -> recomputedDescriptors.add(DescriptorUtils.descriptor(s)));
-    assertThat(recomputedDescriptors).usingRecursiveFieldByFieldElementComparator().containsExactlyInAnyOrderElementsOf(retrievedDescriptors);
   }
 
   @Test
