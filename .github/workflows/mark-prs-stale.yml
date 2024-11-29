@@ -11,7 +11,7 @@ jobs:
     permissions:
       pull-requests: write
     steps:
-      - uses: actions/stale@v9
+      - uses: actions/stale@28ca1036281a5e5922ead5184a1bbf96e5fc984e # v9
         with:
           stale-pr-message: 'This PR is stale because it has been open 7 days with no activity. If there is no activity in the next 7 days it will be closed automatically'
           stale-pr-label: 'stale'
