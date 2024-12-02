@@ -272,7 +272,7 @@ class TypeCheckerTest {
 
   @Test
   void isTypeWithNameProjectNamesTest() {
-    ProjectLevelSymbolTable projectLevelSymbolTable = new ProjectLevelSymbolTable();
+    ProjectLevelSymbolTable projectLevelSymbolTable = ProjectLevelSymbolTable.empty();
 
     FileInput tree = parseWithoutSymbols(
       """

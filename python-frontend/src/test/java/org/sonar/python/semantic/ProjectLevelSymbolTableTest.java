@@ -400,7 +400,7 @@ class ProjectLevelSymbolTableTest {
   }
 
   private static Set<Symbol> globalSymbols(FileInput fileInput, String packageName) {
-    ProjectLevelSymbolTable projectLevelSymbolTable = new ProjectLevelSymbolTable();
+    ProjectLevelSymbolTable projectLevelSymbolTable = empty();
     projectLevelSymbolTable.addModule(fileInput, packageName, pythonFile("mod.py"));
     return projectLevelSymbolTable.getSymbolsFromModule(packageName.isEmpty() ? "mod" : packageName + ".mod");
   }
@@ -410,7 +410,7 @@ class ProjectLevelSymbolTableTest {
     FileInput tree = parseWithoutSymbols(
       "class A: pass"
     );
-    ProjectLevelSymbolTable projectLevelSymbolTable = new ProjectLevelSymbolTable();
+    ProjectLevelSymbolTable projectLevelSymbolTable = empty();
     projectLevelSymbolTable.addModule(tree, "", pythonFile("mod.py"));
     assertThat(projectLevelSymbolTable.getSymbolsFromModule("mod")).extracting(Symbol::name).containsExactlyInAnyOrder("A");
     projectLevelSymbolTable.removeModule("", "mod.py");
@@ -419,7 +419,7 @@ class ProjectLevelSymbolTableTest {
 
   @Test
   void test_insert_entry() {
-    ProjectLevelSymbolTable projectLevelSymbolTable = new ProjectLevelSymbolTable();
+    ProjectLevelSymbolTable projectLevelSymbolTable = empty();
     VariableDescriptor variableDescriptor = new VariableDescriptor("x", "mod.x", null);
     projectLevelSymbolTable.insertEntry("mod", Set.of(variableDescriptor));
     assertThat(projectLevelSymbolTable.descriptorsForModule("mod")).containsExactly(variableDescriptor);
@@ -431,7 +431,7 @@ class ProjectLevelSymbolTableTest {
     FileInput tree = parseWithoutSymbols(
       "class A: pass"
     );
-    ProjectLevelSymbolTable projectLevelSymbolTable = new ProjectLevelSymbolTable();
+    ProjectLevelSymbolTable projectLevelSymbolTable = empty();
     projectLevelSymbolTable.addModule(tree, "", pythonFile("mod.py"));
     assertThat(projectLevelSymbolTable.getSymbolsFromModule("mod")).extracting(Symbol::name).containsExactlyInAnyOrder("A");
     assertThat(projectLevelSymbolTable.getSymbolsFromModule("mod2")).isNull();
@@ -452,7 +452,7 @@ class ProjectLevelSymbolTableTest {
     FileInput tree = parseWithoutSymbols(
       "import A"
     );
-    ProjectLevelSymbolTable projectLevelSymbolTable = new ProjectLevelSymbolTable();
+    ProjectLevelSymbolTable projectLevelSymbolTable = empty();
     projectLevelSymbolTable.addModule(tree, "", pythonFile("mod.py"));
     assertThat(projectLevelSymbolTable.importsByModule()).containsExactly(Map.entry("mod", Set.of("A")));
     assertThat(projectLevelSymbolTable.getSymbolsFromModule("mod2")).isNull();
@@ -651,7 +651,7 @@ class ProjectLevelSymbolTableTest {
 
   @Test
   void child_class_method_call_is_not_a_member_of_parent_class() {
-    ProjectLevelSymbolTable projectLevelSymbolTable = new ProjectLevelSymbolTable();
+    ProjectLevelSymbolTable projectLevelSymbolTable = empty();
     FileInput importedFileInput = parseWithoutSymbols(
       "class A:",
       "  def meth(self): ",
@@ -797,7 +797,7 @@ class ProjectLevelSymbolTableTest {
       "class B(A): ..."
     };
 
-    ProjectLevelSymbolTable projectSymbolTable = new ProjectLevelSymbolTable();
+    ProjectLevelSymbolTable projectSymbolTable = empty();
     projectSymbolTable.addModule(parseWithoutSymbols(foo), "", pythonFile("foo.py"));
     projectSymbolTable.addModule(parseWithoutSymbols(bar), "", pythonFile("bar.py"));
 
@@ -838,7 +838,7 @@ class ProjectLevelSymbolTableTest {
       "class A: ...",
              "class B(A): ..."
     );
-    ProjectLevelSymbolTable projectLevelSymbolTable = new ProjectLevelSymbolTable();
+    ProjectLevelSymbolTable projectLevelSymbolTable = empty();
     projectLevelSymbolTable.addModule(tree, "", pythonFile("mod.py"));
     Set<Symbol> mod = projectLevelSymbolTable.getSymbolsFromModule("mod");
     assertThat(mod).extracting(Symbol::name).containsExactlyInAnyOrder("A", "B");
@@ -890,7 +890,7 @@ class ProjectLevelSymbolTableTest {
     String[] bar = {
       "from foo import *\n",
     };
-    ProjectLevelSymbolTable projectSymbolTable = new ProjectLevelSymbolTable();
+    ProjectLevelSymbolTable projectSymbolTable = empty();
     projectSymbolTable.addModule(parseWithoutSymbols(foo), "", pythonFile("foo.py"));
     projectSymbolTable.addModule(parseWithoutSymbols(bar), "", pythonFile("bar.py"));
 
@@ -914,7 +914,7 @@ class ProjectLevelSymbolTableTest {
 
   @Test
   void ambiguous_descriptor_alternatives_dont_rely_on_FQN_for_conversion() {
-    ProjectLevelSymbolTable projectLevelSymbolTable = new ProjectLevelSymbolTable();
+    ProjectLevelSymbolTable projectLevelSymbolTable = empty();
     Set<Descriptor> descriptors = new HashSet<>();
     VariableDescriptor variableDescriptor = new VariableDescriptor("Ambiguous", "foo.Ambiguous", null);
     ClassDescriptor classDescriptor = new ClassDescriptor("Ambiguous", "foo.Ambiguous", List.of(), Set.of(), false, null, false, false, null, false);
@@ -946,7 +946,7 @@ class ProjectLevelSymbolTableTest {
       "  def my_B_other_method(param: B): ..."
     };
 
-    ProjectLevelSymbolTable projectSymbolTable = new ProjectLevelSymbolTable();
+    ProjectLevelSymbolTable projectSymbolTable = empty();
     projectSymbolTable.addModule(parseWithoutSymbols(foo), "", pythonFile("foo.py"));
     projectSymbolTable.addModule(parseWithoutSymbols(bar), "", pythonFile("bar.py"));
 
@@ -979,7 +979,7 @@ class ProjectLevelSymbolTableTest {
       "def bar(): ..."
     };
 
-    ProjectLevelSymbolTable projectSymbolTable = new ProjectLevelSymbolTable();
+    ProjectLevelSymbolTable projectSymbolTable = empty();
     projectSymbolTable.addModule(parseWithoutSymbols(urls), "", pythonFile("urls.py"));
 
     assertThat(projectSymbolTable.isDjangoView("views.foo")).isTrue();
@@ -1011,7 +1011,7 @@ class ProjectLevelSymbolTableTest {
       urlpatterns.append(path('bar', MyOtherClass.MyNestedClass.qix, name='bar'))
       """;
 
-    ProjectLevelSymbolTable projectSymbolTable = new ProjectLevelSymbolTable();
+    ProjectLevelSymbolTable projectSymbolTable = empty();
     projectSymbolTable.addModule(parseWithoutSymbols(content), "my_package", pythonFile("urls.py"));
     assertThat(projectSymbolTable.isDjangoView("my_package.urls.foo")).isTrue();
     assertThat(projectSymbolTable.isDjangoView("my_package.urls.MyClass.bar")).isTrue();
@@ -1028,7 +1028,7 @@ class ProjectLevelSymbolTableTest {
         def ambiguous(): ...
       urlpatterns = [path('bar', ambiguous, name='bar')]
       """;
-    ProjectLevelSymbolTable projectSymbolTable = new ProjectLevelSymbolTable();
+    ProjectLevelSymbolTable projectSymbolTable = empty();
     projectSymbolTable.addModule(parseWithoutSymbols(content), "my_package", pythonFile("urls.py"));
     assertThat(projectSymbolTable.isDjangoView("my_package.urls.ambiguous")).isFalse();
   }
@@ -1040,7 +1040,7 @@ class ProjectLevelSymbolTableTest {
       import views
       urlpatterns = [conf.path('foo', views.foo, name='foo'), conf.path('baz')]
       """;
-    ProjectLevelSymbolTable projectSymbolTable = new ProjectLevelSymbolTable();
+    ProjectLevelSymbolTable projectSymbolTable = empty();
     projectSymbolTable.addModule(parseWithoutSymbols(content), "my_package", pythonFile("urls.py"));
     assertThat(projectSymbolTable.isDjangoView("views.foo")).isTrue();
   }
@@ -1057,7 +1057,7 @@ class ProjectLevelSymbolTableTest {
         def get_urlpatterns(self):
           return [path("something", self.view_method, name="something")]
       """;
-    ProjectLevelSymbolTable projectSymbolTable = new ProjectLevelSymbolTable();
+    ProjectLevelSymbolTable projectSymbolTable = empty();
     projectSymbolTable.addModule(parseWithoutSymbols(content), "my_package", pythonFile("mod.py"));
     // SONARPY-2322: should be true
     assertThat(projectSymbolTable.isDjangoView("my_package.mod.ClassWithViews.view_method")).isFalse();
@@ -1086,7 +1086,7 @@ class ProjectLevelSymbolTableTest {
       class Field(MetaField()): ...
       """;
 
-    var projectSymbolTable = new ProjectLevelSymbolTable();
+    var projectSymbolTable = empty();
     projectSymbolTable.addModule(parseWithoutSymbols(code), "", pythonFile("mod.py"));
 
     var descriptors = projectSymbolTable.getDescriptorsFromModule("mod");
@@ -1111,7 +1111,7 @@ class ProjectLevelSymbolTableTest {
       class Field(MetaField): ...
       """;
 
-    var projectSymbolTable = new ProjectLevelSymbolTable();
+    var projectSymbolTable = empty();
     projectSymbolTable.addModule(parseWithoutSymbols(code), "", pythonFile("mod.py"));
     var symbol = (ClassSymbol) projectSymbolTable.getSymbol("mod.Field");
     assertThat(symbol.hasUnresolvedTypeHierarchy()).isTrue();
@@ -1124,7 +1124,7 @@ class ProjectLevelSymbolTableTest {
       class WithMetaclass(metaclass=ABCMeta): ...
       """;
 
-    var projectSymbolTable = new ProjectLevelSymbolTable();
+    var projectSymbolTable = empty();
     projectSymbolTable.addModule(parseWithoutSymbols(code), "", pythonFile("mod.py"));
     var symbol = (ClassSymbolImpl) projectSymbolTable.getSymbol("mod.WithMetaclass");
     assertThat(symbol.metaclassFQN()).isEqualTo("abc.ABCMeta");
@@ -1137,7 +1137,7 @@ class ProjectLevelSymbolTableTest {
       class WithMetaclass(metaclass=LocalMetaClass): ...
       """;
 
-    var projectSymbolTable = new ProjectLevelSymbolTable();
+    var projectSymbolTable = empty();
     projectSymbolTable.addModule(parseWithoutSymbols(code), "", pythonFile("mod.py"));
     var symbol = (ClassSymbolImpl) projectSymbolTable.getSymbol("mod.WithMetaclass");
     assertThat(symbol.metaclassFQN()).isEqualTo("mod.LocalMetaClass");
@@ -1150,7 +1150,7 @@ class ProjectLevelSymbolTableTest {
       class WithMetaclass(metaclass=UnresolvedMetaClass): ...
       """;
 
-    var projectSymbolTable = new ProjectLevelSymbolTable();
+    var projectSymbolTable = empty();
     projectSymbolTable.addModule(parseWithoutSymbols(code), "", pythonFile("mod.py"));
     var symbol = (ClassSymbolImpl) projectSymbolTable.getSymbol("mod.WithMetaclass");
     assertThat(symbol.metaclassFQN()).isEqualTo("unknown.UnresolvedMetaClass");
@@ -1163,7 +1163,7 @@ class ProjectLevelSymbolTableTest {
       class WithMetaclass(metaclass=foo()): ...
       """;
 
-    var projectSymbolTable = new ProjectLevelSymbolTable();
+    var projectSymbolTable = empty();
     projectSymbolTable.addModule(parseWithoutSymbols(code), "", pythonFile("mod.py"));
     var symbol = (ClassSymbolImpl) projectSymbolTable.getSymbol("mod.WithMetaclass");
     assertThat(symbol.hasMetaClass()).isTrue();
@@ -1172,7 +1172,7 @@ class ProjectLevelSymbolTableTest {
 
   @Test
   void projectPackages() {
-    ProjectLevelSymbolTable projectLevelSymbolTable = new ProjectLevelSymbolTable();
+    ProjectLevelSymbolTable projectLevelSymbolTable = empty();
     projectLevelSymbolTable.addProjectPackage("first.package");
     projectLevelSymbolTable.addProjectPackage("second.package");
     projectLevelSymbolTable.addProjectPackage("third");

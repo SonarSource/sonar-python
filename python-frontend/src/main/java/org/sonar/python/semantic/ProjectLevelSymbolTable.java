@@ -65,7 +65,7 @@ public class ProjectLevelSymbolTable {
   }
 
   public static ProjectLevelSymbolTable from(Map<String, Set<Descriptor>> globalDescriptorsByModuleName) {
-    var projectLevelSymbolTable = new ProjectLevelSymbolTable();
+    var projectLevelSymbolTable = ProjectLevelSymbolTable.empty();
 
     for (var entry : globalDescriptorsByModuleName.entrySet()) {
       var descriptors = entry.getValue();
@@ -75,7 +75,7 @@ public class ProjectLevelSymbolTable {
     return projectLevelSymbolTable;
   }
 
-  public ProjectLevelSymbolTable() {
+  private ProjectLevelSymbolTable() {
     this.globalDescriptorsByModuleName = new HashMap<>();
   }
 

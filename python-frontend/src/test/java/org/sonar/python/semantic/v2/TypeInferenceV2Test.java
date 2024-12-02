@@ -699,7 +699,7 @@ public class TypeInferenceV2Test {
           b : int
         """
     );
-    var projectLevelSymbolTable = new ProjectLevelSymbolTable();
+    var projectLevelSymbolTable = ProjectLevelSymbolTable.empty();
     projectLevelSymbolTable.addModule(tree, "", pythonFile("mod.py"));
 
     var symbol = (ClassSymbol) projectLevelSymbolTable.getSymbol("mod.A");
@@ -1268,7 +1268,7 @@ public class TypeInferenceV2Test {
       "class A: ...",
       "def foo2(p1: dict, p2: A): ..."
     );
-    ProjectLevelSymbolTable projectLevelSymbolTable = new ProjectLevelSymbolTable();
+    ProjectLevelSymbolTable projectLevelSymbolTable = ProjectLevelSymbolTable.empty();
     var modFile = pythonFile("mod.py");
     projectLevelSymbolTable.addModule(tree, "", modFile);
     ProjectLevelTypeTable projectLevelTypeTable = new ProjectLevelTypeTable(projectLevelSymbolTable);
@@ -2722,7 +2722,7 @@ public class TypeInferenceV2Test {
     FileInput tree = parseWithoutSymbols(
       "def foo() -> int: ..."
     );
-    ProjectLevelSymbolTable projectLevelSymbolTable = new ProjectLevelSymbolTable();
+    ProjectLevelSymbolTable projectLevelSymbolTable = ProjectLevelSymbolTable.empty();
     projectLevelSymbolTable.addModule(tree, "", pythonFile("mod.py"));
     ProjectLevelTypeTable projectLevelTypeTable = new ProjectLevelTypeTable(projectLevelSymbolTable);
 
@@ -3378,7 +3378,7 @@ public class TypeInferenceV2Test {
       def foo(): pass
       def bar(): pass
       """);
-    ProjectLevelSymbolTable projectLevelSymbolTable = new ProjectLevelSymbolTable();
+    ProjectLevelSymbolTable projectLevelSymbolTable = ProjectLevelSymbolTable.empty();
     var modFile = pythonFile("mod.py");
     projectLevelSymbolTable.addModule(tree, "", modFile);
     ProjectLevelTypeTable projectLevelTypeTable = new ProjectLevelTypeTable(projectLevelSymbolTable);
@@ -3549,7 +3549,7 @@ public class TypeInferenceV2Test {
   }
 
   private static class TestProject {
-    private final ProjectLevelSymbolTable projectLevelSymbolTable = new ProjectLevelSymbolTable();
+    private final ProjectLevelSymbolTable projectLevelSymbolTable = ProjectLevelSymbolTable.empty();
 
     public TestProject addModule(String moduleName, String code) {
       FileInput tree = parseWithoutSymbols(code);

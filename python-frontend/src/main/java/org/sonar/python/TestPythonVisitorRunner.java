@@ -81,7 +81,7 @@ public class TestPythonVisitorRunner {
   }
 
   public static ProjectLevelSymbolTable globalSymbols(List<File> files, File baseDir) {
-    ProjectLevelSymbolTable projectLevelSymbolTable = new ProjectLevelSymbolTable();
+    ProjectLevelSymbolTable projectLevelSymbolTable = ProjectLevelSymbolTable.empty();
     for (File file : files) {
       var pythonFile = new TestPythonFile(file);
       if (pythonFile.isIPython()) {
