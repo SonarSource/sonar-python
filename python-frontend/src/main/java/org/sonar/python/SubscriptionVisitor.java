@@ -145,7 +145,7 @@ public class SubscriptionVisitor {
 
     @Override
     public PythonCheck.PreciseIssue addLineIssue(String message, int lineNumber) {
-      return addIssue(IssueLocation.atLineLevel(message, lineNumber));
+      return addIssue(IssueLocation.atLineLevel(message, lineNumber, pythonFile()));
     }
 
     private PythonCheck.PreciseIssue addIssue(IssueLocation issueLocation) {

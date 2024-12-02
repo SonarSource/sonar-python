@@ -38,10 +38,10 @@ public class TrailingWhitespaceCheck implements PythonCheck {
       Matcher matcher = TRAILING_WS.matcher(lines[i]);
       if (matcher.find()) {
         int lineNumber = i + 1;
-        PreciseIssue issue = new PreciseIssue(this, IssueLocation.atLineLevel(MESSAGE, lineNumber));
+        PreciseIssue issue = new PreciseIssue(this, IssueLocation.atLineLevel(MESSAGE, lineNumber, ctx.pythonFile()));
 
         issue.addQuickFix(PythonQuickFix.newQuickFix("Remove trailing whitespaces")
-            .addTextEdit(TextEditUtils.removeRange(lineNumber, matcher.start(), lineNumber, matcher.end()))
+          .addTextEdit(TextEditUtils.removeRange(lineNumber, matcher.start(), lineNumber, matcher.end()))
           .build());
 
         ctx.addIssue(issue);

@@ -16,11 +16,15 @@
  */
 package org.sonar.plugins.python.api;
 
+import java.nio.file.Path;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
+import org.sonar.plugins.python.SonarQubePythonFile;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.TokenLocation;
+
+import static org.sonar.python.semantic.SymbolUtils.pathOf;
 
 public abstract class IssueLocation {
 
@@ -28,7 +32,7 @@ public abstract class IssueLocation {
 
   public static final int UNDEFINED_LINE = 0;
 
-  private String message;
+  private final String message;
 
   private IssueLocation(@Nullable String message) {
     this.message = message;
@@ -38,7 +42,26 @@ public abstract class IssueLocation {
     return new FileLevelIssueLocation(message);
   }
 
-  public static IssueLocation atLineLevel(String message, int lineNumber) {
+  public static IssueLocation atLineLevel(String message, int lineNumber, PythonFile pythonInputFile) {
+    if (pythonInputFile instanceof SonarQubePythonFile.IpynbFile ipynbFile) {
+      var generatedPythonFile = ipynbFile.pythonInputFile();
+      var mapping = generatedPythonFile.locationMap();
+      var begin = mapping.get(lineNumber);
+      Path path = pathOf(ipynbFile);
+      String fileId = path != null ? path.toString() : ipynbFile.toString();
+      LocationInFile locationInFile;
+      if (begin.isCompresssed()) {
+        var next = mapping.get(lineNumber + 1);
+        if (next == null) {
+          throw new IllegalStateException("No mapping for line " + (lineNumber + 1) + " in " + ipynbFile);
+        }
+        locationInFile = new LocationInFile(fileId, begin.line(), begin.column(), next.line(), next.column());
+      } else {
+        locationInFile = new LocationInFile(fileId, begin.line(), UNDEFINED_OFFSET, begin.line(), UNDEFINED_OFFSET);
+      }
+      return new PreciseIssueLocation(locationInFile, message);
+    }
+
     return new LineLevelIssueLocation(message, lineNumber);
   }
 

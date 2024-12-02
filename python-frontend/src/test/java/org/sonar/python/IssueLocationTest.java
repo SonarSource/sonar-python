@@ -17,7 +17,13 @@
 package org.sonar.python;
 
 import com.sonar.sslr.api.AstNode;
+import java.util.List;
+import java.util.Map;
 import org.junit.jupiter.api.Test;
+import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
+import org.sonar.plugins.python.GeneratedIPythonFile;
+import org.sonar.plugins.python.PythonInputFile;
+import org.sonar.plugins.python.SonarQubePythonFile;
 import org.sonar.plugins.python.api.IssueLocation;
 import org.sonar.plugins.python.api.LocationInFile;
 import org.sonar.python.api.PythonPunctuator;
@@ -26,6 +32,7 @@ import org.sonar.python.parser.PythonParser;
 import org.sonar.python.tree.TokenImpl;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class IssueLocationTest {
 
@@ -45,14 +52,46 @@ class IssueLocationTest {
   }
 
   @Test
-  void line_level() {
-    IssueLocation issueLocation = IssueLocation.atLineLevel(MESSAGE, 42);
+  void line_level_notebook() {
+    var wrappedInputFile = TestInputFileBuilder.create("foo.ipynb", "foo").build();
+    PythonInputFile pythonInputFile = new GeneratedIPythonFile(wrappedInputFile, "", Map.of(
+      1, new IPythonLocation(1, 1),
+      2, new IPythonLocation(2, 2),
+      3, new IPythonLocation(3, 3)));
+    var inputFile = SonarQubePythonFile.create(pythonInputFile);
+    var issueLocation = IssueLocation.atLineLevel(MESSAGE, 2, inputFile);
     assertThat(issueLocation.message()).isEqualTo(MESSAGE);
-    assertThat(issueLocation.startLine()).isEqualTo(42);
-    assertThat(issueLocation.endLine()).isEqualTo(42);
+    assertThat(issueLocation.startLine()).isEqualTo(2);
     assertThat(issueLocation.startLineOffset()).isEqualTo(IssueLocation.UNDEFINED_OFFSET);
+    assertThat(issueLocation.endLine()).isEqualTo(2);
     assertThat(issueLocation.endLineOffset()).isEqualTo(IssueLocation.UNDEFINED_OFFSET);
-    assertThat(issueLocation.fileId()).isNull();
+  }
+
+  @Test
+  void line_level_notebook_compressed() {
+    var wrappedInputFile = TestInputFileBuilder.create("foo.ipynb", "foo").build();
+    PythonInputFile pythonInputFile = new GeneratedIPythonFile(wrappedInputFile, "", Map.of(
+      1, new IPythonLocation(1, 1, List.of(), true),
+      2, new IPythonLocation(1, 10, List.of(), true),
+      3, new IPythonLocation(1, 25, List.of(), true)));
+    var inputFile = SonarQubePythonFile.create(pythonInputFile);
+    var issueLocation = IssueLocation.atLineLevel(MESSAGE, 2, inputFile);
+    assertThat(issueLocation.message()).isEqualTo(MESSAGE);
+    assertThat(issueLocation.startLine()).isEqualTo(1);
+    assertThat(issueLocation.startLineOffset()).isEqualTo(10);
+    assertThat(issueLocation.endLine()).isEqualTo(1);
+    assertThat(issueLocation.endLineOffset()).isEqualTo(25);
+  }
+
+  @Test
+  void line_level_notebook_compressed_fail() {
+    var wrappedInputFile = TestInputFileBuilder.create("foo.ipynb", "foo").build();
+    PythonInputFile pythonInputFile = new GeneratedIPythonFile(wrappedInputFile, "", Map.of(
+      1, new IPythonLocation(1, 1, List.of(), true),
+      2, new IPythonLocation(1, 10, List.of(), true)));
+    var inputFile = SonarQubePythonFile.create(pythonInputFile);
+    assertThatThrownBy(() -> IssueLocation.atLineLevel(MESSAGE, 2, inputFile))
+      .isInstanceOf(IllegalStateException.class);
   }
 
   @Test

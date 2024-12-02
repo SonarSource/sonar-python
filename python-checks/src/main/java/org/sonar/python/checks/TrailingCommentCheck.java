@@ -61,7 +61,7 @@ public class TrailingCommentCheck extends PythonSubscriptionCheck {
           String comment = commentToken.value();
           if (!pattern.matcher(comment).matches()) {
             var issue = ctx.addIssue(commentToken, MESSAGE);
-            String line = getLines(ctx).get(commentToken.line() - 1);
+            String line = getLines(ctx).get(commentToken.pythonLine() - 1);
             addQuickFix(issue, commentToken, line);
           }
         }
@@ -72,10 +72,10 @@ public class TrailingCommentCheck extends PythonSubscriptionCheck {
 
   private static void addQuickFix(PreciseIssue issue, Token commentToken, String line) {
     String indent = calculateIndent(line);
-    PythonTextEdit insertComment = TextEditUtils.insertAtPosition(commentToken.line(), 0, indent + commentToken.value() + "\n");
+    PythonTextEdit insertComment = TextEditUtils.insertAtPosition(commentToken.pythonLine(), 0, indent + commentToken.value() + "\n");
 
     int startColumnRemove = calculateStartColumnToRemove(commentToken, line);
-    PythonTextEdit removeTrailingComment = TextEditUtils.removeRange(commentToken.line(), startColumnRemove, commentToken.line(), line.length());
+    PythonTextEdit removeTrailingComment = TextEditUtils.removeRange(commentToken.pythonLine(), startColumnRemove, commentToken.pythonLine(), line.length());
 
     PythonQuickFix fix = PythonQuickFix.newQuickFix(MESSAGE, removeTrailingComment, insertComment);
     issue.addQuickFix(fix);
@@ -95,7 +95,7 @@ public class TrailingCommentCheck extends PythonSubscriptionCheck {
   }
 
   private static int calculateStartColumnToRemove(Token commentToken, String line) {
-    return line.substring(0, commentToken.column()).stripTrailing().length();
+    return line.substring(0, commentToken.pythonColumn()).stripTrailing().length();
   }
 }
 
