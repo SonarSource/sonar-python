@@ -70,7 +70,6 @@ public class ProjectLevelSymbolTable {
     for (var entry : globalDescriptorsByModuleName.entrySet()) {
       var descriptors = entry.getValue();
       projectLevelSymbolTable.globalDescriptorsByModuleName.put(entry.getKey(), descriptors);
-      projectLevelSymbolTable.addModuleToGlobalSymbolsByFQN(descriptors);
     }
 
     return projectLevelSymbolTable;

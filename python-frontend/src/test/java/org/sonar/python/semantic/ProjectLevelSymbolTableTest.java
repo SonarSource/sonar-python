@@ -71,7 +71,7 @@ class ProjectLevelSymbolTableTest {
       Set.of(
         new VariableDescriptor("a", "mod.a", null),
         new VariableDescriptor("b", "mod.b", null),
-        new ClassDescriptor("C", "mod.C", Set.of(), Set.of(), false, null, false, false, null, false)));
+        new ClassDescriptor.ClassDescriptorBuilder().withName("C").withFullyQualifiedName("mod.C").build()));
 
     FileInput tree = parse(
       new SymbolTableBuilder("my_package", pythonFile("my_module.py"), from(globalDescriptors)),
@@ -226,8 +226,8 @@ class ProjectLevelSymbolTableTest {
 
   @Test
   void type_hierarchy() {
-    var classADescriptor = new ClassDescriptor("A", "mod1.A", Collections.singleton("mod2.B"), Set.of(), false, null, false, false, null, false);
-    var classBDescriptor = new ClassDescriptor("B", "mod2.B", List.of(), Set.of(), false, null, false, false, null, false);
+    var classADescriptor = new ClassDescriptor.ClassDescriptorBuilder().withName("A").withFullyQualifiedName("mod1.A").withSuperClasses(Set.of("mod2.B")).build();
+    var classBDescriptor = new ClassDescriptor.ClassDescriptorBuilder().withName("B").withFullyQualifiedName("mod2.B").build();
     Map<String, Set<Descriptor>> globalDescriptors = new HashMap<>();
     globalDescriptors.put("mod1", Set.of(classADescriptor));
     globalDescriptors.put("mod2", Set.of(classBDescriptor));
@@ -297,7 +297,7 @@ class ProjectLevelSymbolTableTest {
   void builtin_symbol_in_super_class() {
     Map<String, Set<Descriptor>> globalDescriptors = Collections.singletonMap("mod1",
       Collections.singleton(
-        new ClassDescriptor("A", "mod1.A", Collections.singleton("BaseException"), Set.of(), false, null, false, false, null, false)));
+        new ClassDescriptor.ClassDescriptorBuilder().withName("A").withFullyQualifiedName("mod1.A").withSuperClasses(Set.of("BaseException")).build()));
     FileInput tree = parse(
       new SymbolTableBuilder("my_package", pythonFile("my_module.py"), from(globalDescriptors)),
       "from mod1 import A");
@@ -312,9 +312,9 @@ class ProjectLevelSymbolTableTest {
 
   @Test
   void multi_level_type_hierarchy() {
-    ClassDescriptor classADescriptor = new ClassDescriptor("A", "mod1.A", Collections.singleton("mod2.B"), Set.of(), false, null, false, false, null, false);
-    ClassDescriptor classBDescriptor = new ClassDescriptor("B", "mod2.B", Collections.singleton("mod3.C"), Set.of(), false, null, false, false, null, false);
-    ClassDescriptor classCDescriptor = new ClassDescriptor("C", "mod3.C", Set.of(), Set.of(), false, null, false, false, null, false);
+    var classADescriptor = new ClassDescriptor.ClassDescriptorBuilder().withName("A").withFullyQualifiedName("mod1.A").withSuperClasses(Set.of("mod2.B")).build();
+    var classBDescriptor = new ClassDescriptor.ClassDescriptorBuilder().withName("B").withFullyQualifiedName("mod2.B").withSuperClasses(Set.of("mod3.C")).build();
+    var classCDescriptor = new ClassDescriptor.ClassDescriptorBuilder().withName("C").withFullyQualifiedName("mod3.C").build();
 
     Map<String, Set<Descriptor>> globalDescriptors = new HashMap<>();
     globalDescriptors.put("mod1", Set.of(classADescriptor));
