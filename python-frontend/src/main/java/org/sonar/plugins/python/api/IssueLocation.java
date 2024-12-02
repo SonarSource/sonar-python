@@ -52,6 +52,9 @@ public abstract class IssueLocation {
       LocationInFile locationInFile;
       if (begin.isCompresssed()) {
         var next = mapping.get(lineNumber + 1);
+        if (next == null) {
+          throw new IllegalStateException("No mapping for line " + (lineNumber + 1) + " in " + ipynbFile);
+        }
         locationInFile = new LocationInFile(fileId, begin.line(), begin.column(), next.line(), next.column());
       } else {
         locationInFile = new LocationInFile(fileId, begin.line(), UNDEFINED_OFFSET, begin.line(), UNDEFINED_OFFSET);

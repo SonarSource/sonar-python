@@ -32,6 +32,7 @@ import org.sonar.python.parser.PythonParser;
 import org.sonar.python.tree.TokenImpl;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class IssueLocationTest {
 
@@ -80,6 +81,17 @@ class IssueLocationTest {
     assertThat(issueLocation.startLineOffset()).isEqualTo(10);
     assertThat(issueLocation.endLine()).isEqualTo(1);
     assertThat(issueLocation.endLineOffset()).isEqualTo(25);
+  }
+
+  @Test
+  void line_level_notebook_compressed_fail() {
+    var wrappedInputFile = TestInputFileBuilder.create("foo.ipynb", "foo").build();
+    PythonInputFile pythonInputFile = new GeneratedIPythonFile(wrappedInputFile, "", Map.of(
+      1, new IPythonLocation(1, 1, List.of(), true),
+      2, new IPythonLocation(1, 10, List.of(), true)));
+    var inputFile = SonarQubePythonFile.create(pythonInputFile);
+    assertThatThrownBy(() -> IssueLocation.atLineLevel(MESSAGE, 2, inputFile))
+      .isInstanceOf(IllegalStateException.class);
   }
 
   @Test
