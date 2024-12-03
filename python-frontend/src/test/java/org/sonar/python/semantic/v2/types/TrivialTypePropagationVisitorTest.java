@@ -22,11 +22,15 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.sonar.python.tree.TokenImpl;
+import org.sonar.python.tree.UnaryExpressionImpl;
 import org.sonar.python.types.v2.ObjectType;
 import org.sonar.python.types.v2.PythonType;
 import org.sonar.python.types.v2.TypesTestUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 import static org.sonar.python.PythonTestUtils.lastExpression;
 import static org.sonar.python.PythonTestUtils.pythonFile;
 import static org.sonar.python.types.v2.TypesTestUtils.PROJECT_LEVEL_TYPE_TABLE;
@@ -54,15 +58,13 @@ class TrivialTypePropagationVisitorTest {
       Arguments.of("+(True)", TypesTestUtils.INT_TYPE),
 
       Arguments.of("~1", TypesTestUtils.INT_TYPE),
-      Arguments.of("~1.0", TypesTestUtils.INT_TYPE),
-      Arguments.of("~(3+2j)", TypesTestUtils.INT_TYPE),
-      Arguments.of("~(1j)", TypesTestUtils.INT_TYPE),
       Arguments.of("~(True)", TypesTestUtils.INT_TYPE),
 
       Arguments.of("not 1", TypesTestUtils.BOOL_TYPE),
       Arguments.of("not 1.0", TypesTestUtils.BOOL_TYPE),
       Arguments.of("not (2j)", TypesTestUtils.BOOL_TYPE),
-      Arguments.of("not (True)", TypesTestUtils.BOOL_TYPE)
+      Arguments.of("not (True)", TypesTestUtils.BOOL_TYPE),
+      Arguments.of("not x", TypesTestUtils.BOOL_TYPE)
     );
   }
 
@@ -77,12 +79,32 @@ class TrivialTypePropagationVisitorTest {
         assertThat(objectType.type()).isEqualTo(expectedType));
   }
 
+  static Stream<Arguments> testUnknownReturnSources() {
+    return Stream.of(
+      Arguments.of("~x"),
+      Arguments.of("~1.0"),
+      Arguments.of("~(1j)"),
+      Arguments.of("~(3+2j)"),
+      Arguments.of("-x"),
+      Arguments.of("+x")
+    );
+  }
+
+  @ParameterizedTest
+  @MethodSource("testUnknownReturnSources")
+  void testUnknownReturn(String code) {
+    var expr = lastExpression(code);
+    expr.accept(trivialTypeInferenceVisitor);
+    expr.accept(trivialTypePropagationVisitor);
+    assertThat(expr.typeV2()).isEqualTo(PythonType.UNKNOWN);
+  }
+
   static Stream<Arguments> customNumberClassTestSource() {
     return Stream.of(
       Arguments.of("+(MyNum())", PythonType.UNKNOWN),
       Arguments.of("-(MyNum())", PythonType.UNKNOWN),
       Arguments.of("not (MyNum())", new ObjectType(TypesTestUtils.BOOL_TYPE)),
-      Arguments.of("~(MyNum())", new ObjectType(TypesTestUtils.INT_TYPE))
+      Arguments.of("~(MyNum())", PythonType.UNKNOWN)
     );
   }
 
@@ -105,4 +127,16 @@ class TrivialTypePropagationVisitorTest {
     assertThat(expr.typeV2()).isInstanceOfSatisfying(ObjectType.class, objectType ->
       assertThat(objectType.type()).isEqualTo(TypesTestUtils.BOOL_TYPE));
   }
+
+  @Test
+  void testUnknownOperator() {
+    var operator = mock(TokenImpl.class);
+    when(operator.value()).thenReturn("invalid_operator");
+    UnaryExpressionImpl expr = new UnaryExpressionImpl(operator, lastExpression("1"));
+    expr.typeV2(TypesTestUtils.INT_TYPE);
+
+    expr.accept(trivialTypePropagationVisitor);
+    assertThat(expr.typeV2()).isEqualTo(PythonType.UNKNOWN);
+  }
+
 }
