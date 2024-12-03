@@ -21,8 +21,6 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.util.List;
-import java.util.Map;
 import org.sonar.api.SonarEdition;
 import org.sonar.api.SonarQubeSide;
 import org.sonar.api.SonarRuntime;
@@ -30,7 +28,6 @@ import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.internal.SonarRuntimeImpl;
 import org.sonar.api.utils.Version;
-import org.sonar.python.EscapeCharPositionInfo;
 
 public final class TestUtils {
 
@@ -57,13 +54,6 @@ public final class TestUtils {
       .setLanguage(Python.KEY)
       .initMetadata(TestUtils.fileContent(new File(baseDir, name), StandardCharsets.UTF_8))
       .build());
-  }
-
-  public static List<EscapeCharPositionInfo> mapToColumnMappingList(Map<Integer, Integer> map) {
-    return map.entrySet().stream()
-      .sorted(Map.Entry.comparingByKey())
-      .map(entry -> new EscapeCharPositionInfo(entry.getKey(), entry.getValue()))
-      .toList();
   }
 
 }

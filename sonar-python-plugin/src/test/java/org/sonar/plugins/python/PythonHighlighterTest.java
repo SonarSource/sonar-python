@@ -31,7 +31,7 @@ import org.sonar.python.IPythonLocation;
 import org.sonar.python.TestPythonVisitorRunner;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.sonar.plugins.python.TestUtils.mapToColumnMappingList;
+import static org.sonar.plugins.python.NotebookTestUtils.mapToColumnMappingList;
 
 class PythonHighlighterTest {
 
