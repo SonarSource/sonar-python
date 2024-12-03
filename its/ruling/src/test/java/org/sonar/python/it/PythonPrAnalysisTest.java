@@ -45,7 +45,7 @@ import static org.sonar.python.it.RulingHelper.getOrchestrator;
 class PythonPrAnalysisTest {
 
   @RegisterExtension
-  public static final OrchestratorExtension ORCHESTRATOR = getOrchestrator(Edition.DEVELOPER);
+  public static final OrchestratorExtension ORCHESTRATOR = getOrchestrator(Edition.ENTERPRISE);
 
   private static final String PR_ANALYSIS_PROJECT_KEY = "prAnalysis";
   private static final String INCREMENTAL_ANALYSIS_PROFILE = "incrementalPrAnalysis";
