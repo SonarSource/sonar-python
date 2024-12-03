@@ -37,7 +37,7 @@ import static java.util.Collections.singletonList;
 class RulingHelper {
 
   private static final String SQ_VERSION_PROPERTY = "sonar.runtimeVersion";
-  private static final String DEFAULT_SQ_VERSION = "DEV";
+  private static final String DEFAULT_SQ_VERSION = "LATEST_RELEASE";
 
   static OrchestratorExtension getOrchestrator(Edition sonarEdition) {
     var builder = OrchestratorExtension.builderEnv()
