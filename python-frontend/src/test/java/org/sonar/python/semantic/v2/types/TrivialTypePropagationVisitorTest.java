@@ -138,4 +138,5 @@ class TrivialTypePropagationVisitorTest {
     expr.accept(trivialTypePropagationVisitor);
     assertThat(expr.typeV2()).isEqualTo(PythonType.UNKNOWN);
   }
+
 }
