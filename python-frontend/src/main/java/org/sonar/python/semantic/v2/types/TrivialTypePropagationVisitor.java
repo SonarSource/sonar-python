@@ -17,15 +17,21 @@
 package org.sonar.python.semantic.v2.types;
 
 import org.sonar.plugins.python.api.tree.BaseTreeVisitor;
+import org.sonar.plugins.python.api.tree.BinaryExpression;
+import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.UnaryExpression;
 import org.sonar.plugins.python.api.types.BuiltinTypes;
 import org.sonar.python.semantic.v2.TypeTable;
+import org.sonar.python.tree.BinaryExpressionImpl;
 import org.sonar.python.tree.UnaryExpressionImpl;
+import org.sonar.python.types.v2.ClassType;
 import org.sonar.python.types.v2.ObjectType;
 import org.sonar.python.types.v2.PythonType;
 import org.sonar.python.types.v2.TriBool;
 import org.sonar.python.types.v2.TypeCheckBuilder;
+import org.sonar.python.types.v2.TypeSource;
 import org.sonar.python.types.v2.TypeUtils;
+import org.sonar.python.types.v2.UnionType;
 
 public class TrivialTypePropagationVisitor extends BaseTreeVisitor {
   private final TypeCheckBuilder isBooleanTypeCheck;
@@ -55,6 +61,33 @@ public class TrivialTypePropagationVisitor extends BaseTreeVisitor {
     if (unaryExpr instanceof UnaryExpressionImpl unaryExprImpl) {
       unaryExprImpl.typeV2(toObjectType(exprType));
     }
+  }
+
+  @Override
+  public void visitBinaryExpression(BinaryExpression binaryExpression) {
+    super.visitBinaryExpression(binaryExpression);
+    if (binaryExpression instanceof BinaryExpressionImpl binaryExpressionImpl) {
+      var type = calculateBinaryExpressionType(binaryExpression);
+      binaryExpressionImpl.typeV2(type);
+    }
+  }
+
+  private static PythonType calculateBinaryExpressionType(BinaryExpression binaryExpression) {
+    var kind = binaryExpression.getKind();
+    var leftOperand = binaryExpression.leftOperand();
+    var rightOperand = binaryExpression.rightOperand();
+    if (binaryExpression.is(Tree.Kind.AND, Tree.Kind.OR)) {
+      return UnionType.or(leftOperand.typeV2(), rightOperand.typeV2());
+    }
+    if (TypeDependenciesCalculator.SAME_TYPE_PRODUCING_BINARY_EXPRESSION_KINDS.contains(kind)
+        && leftOperand.typeV2() instanceof ObjectType leftObjectType
+        && leftObjectType.unwrappedType() instanceof ClassType leftClassType
+        && rightOperand.typeV2() instanceof ObjectType rightObjectType
+        && rightObjectType.unwrappedType() instanceof ClassType rightClassType
+        && leftClassType == rightClassType) {
+      return new ObjectType(leftClassType, TypeSource.min(leftObjectType.typeSource(), rightObjectType.typeSource()));
+    }
+    return PythonType.UNKNOWN;
   }
 
   private PythonType calculateUnaryExprType(UnaryExpression unaryExpr) {

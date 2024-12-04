@@ -35,17 +35,18 @@ import org.sonar.python.semantic.v2.TypeTable;
 import org.sonar.python.semantic.v2.UsageV2;
 import org.sonar.python.tree.NameImpl;
 import org.sonar.python.tree.TreeUtils;
-import org.sonar.python.types.HasTypeDependencies;
 import org.sonar.python.types.v2.PythonType;
 import org.sonar.python.types.v2.UnionType;
 
 public class AstBasedTypeInference {
   private final Map<SymbolV2, Set<Propagation>> propagationsByLhs;
   private final Propagator propagator;
+  private final TypeDependenciesCalculator typeDependenciesCalculator;
 
   public AstBasedTypeInference(Map<SymbolV2, Set<Propagation>> propagationsByLhs, TypeTable typeTable) {
     this.propagationsByLhs = propagationsByLhs;
     this.propagator = new Propagator(typeTable);
+    this.typeDependenciesCalculator = new TypeDependenciesCalculator();
   }
 
   public Map<SymbolV2, Set<PythonType>> process(Set<SymbolV2> trackedVars) {
@@ -81,8 +82,8 @@ public class AstBasedTypeInference {
           assignment.addVariableDependency(symbol);
           propagationsByLhs.get(symbol).forEach(propagation -> propagation.addDependent(assignment));
         }
-      } else if (e instanceof HasTypeDependencies hasTypeDependencies) {
-        workList.addAll(hasTypeDependencies.typeDependencies());
+      } else if (typeDependenciesCalculator.hasTypeDependencies(e)) {
+        workList.addAll(typeDependenciesCalculator.getTypeDependencies(e));
       }
     }
   }

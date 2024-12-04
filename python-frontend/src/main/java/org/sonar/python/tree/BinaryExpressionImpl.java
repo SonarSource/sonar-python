@@ -18,7 +18,6 @@ package org.sonar.python.tree;
 
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -31,11 +30,7 @@ import org.sonar.plugins.python.api.tree.TreeVisitor;
 import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.types.HasTypeDependencies;
 import org.sonar.python.types.InferredTypes;
-import org.sonar.python.types.v2.ClassType;
-import org.sonar.python.types.v2.ObjectType;
 import org.sonar.python.types.v2.PythonType;
-import org.sonar.python.types.v2.TypeSource;
-import org.sonar.python.types.v2.UnionType;
 
 import static org.sonar.python.types.InferredTypes.DECL_INT;
 import static org.sonar.python.types.InferredTypes.DECL_STR;
@@ -44,39 +39,38 @@ import static org.sonar.python.types.InferredTypes.STR;
 
 public class BinaryExpressionImpl extends PyTree implements BinaryExpression, HasTypeDependencies {
 
-  private static final Map<String, Kind> KINDS_BY_OPERATOR = kindsByOperator();
+  private static final Map<String, Kind> KINDS_BY_OPERATOR = Map.ofEntries(
+    Map.entry("+", Kind.PLUS),
+    Map.entry("-", Kind.MINUS),
+    Map.entry("*", Kind.MULTIPLICATION),
+    Map.entry("/", Kind.DIVISION),
+    Map.entry("//", Kind.FLOOR_DIVISION),
+    Map.entry("%", Kind.MODULO),
+    Map.entry("**", Kind.POWER),
+    Map.entry("@", Kind.MATRIX_MULTIPLICATION),
+    Map.entry(">>", Kind.SHIFT_EXPR),
+    Map.entry("<<", Kind.SHIFT_EXPR),
+    Map.entry("&", Kind.BITWISE_AND),
+    Map.entry("|", Kind.BITWISE_OR),
+    Map.entry("^", Kind.BITWISE_XOR),
+    Map.entry("and", Kind.AND),
+    Map.entry("or", Kind.OR),
+    Map.entry("==", Kind.COMPARISON),
+    Map.entry("<=", Kind.COMPARISON),
+    Map.entry(">=", Kind.COMPARISON),
+    Map.entry("<", Kind.COMPARISON),
+    Map.entry(">", Kind.COMPARISON),
+    Map.entry("!=", Kind.COMPARISON),
+    Map.entry("<>", Kind.COMPARISON),
+    Map.entry("in", Kind.IN),
+    Map.entry("is", Kind.IS)
+  );
 
   private final Kind kind;
   private final Expression leftOperand;
   private final Token operator;
   private final Expression rightOperand;
-
-  private static Map<String, Kind> kindsByOperator() {
-    Map<String, Kind> map = new HashMap<>();
-    map.put("+", Kind.PLUS);
-    map.put("-", Kind.MINUS);
-    map.put("*", Kind.MULTIPLICATION);
-    map.put("/", Kind.DIVISION);
-    map.put("//", Kind.FLOOR_DIVISION);
-    map.put("%", Kind.MODULO);
-    map.put("**", Kind.POWER);
-    map.put("@", Kind.MATRIX_MULTIPLICATION);
-    map.put(">>", Kind.SHIFT_EXPR);
-    map.put("<<", Kind.SHIFT_EXPR);
-    map.put("&", Kind.BITWISE_AND);
-    map.put("|", Kind.BITWISE_OR);
-    map.put("^", Kind.BITWISE_XOR);
-    map.put("and", Kind.AND);
-    map.put("or", Kind.OR);
-    map.put("==", Kind.COMPARISON);
-    map.put("<=", Kind.COMPARISON);
-    map.put(">=", Kind.COMPARISON);
-    map.put("<", Kind.COMPARISON);
-    map.put(">", Kind.COMPARISON);
-    map.put("!=", Kind.COMPARISON);
-    map.put("<>", Kind.COMPARISON);
-    return map;
-  }
+  private PythonType type = PythonType.UNKNOWN;
 
   public BinaryExpressionImpl(Expression leftOperand, Token operator, Expression rightOperand) {
     this.kind = KINDS_BY_OPERATOR.get(operator.value());
@@ -141,18 +135,12 @@ public class BinaryExpressionImpl extends PyTree implements BinaryExpression, Ha
 
   @Override
   public PythonType typeV2() {
-    if (is(Kind.AND, Kind.OR)) {
-      return UnionType.or(leftOperand.typeV2(), rightOperand.typeV2());
-    }
-    if (is(Kind.PLUS)
-        && leftOperand.typeV2() instanceof ObjectType leftObjectType
-        && leftObjectType.unwrappedType() instanceof ClassType leftClassType
-        && rightOperand.typeV2() instanceof ObjectType rightObjectType
-        && rightObjectType.unwrappedType() instanceof ClassType rightClassType
-        && leftClassType == rightClassType) {
-      return new ObjectType(leftClassType, TypeSource.min(leftObjectType.typeSource(), rightObjectType.typeSource()));
-    }
-    return PythonType.UNKNOWN;
+    return type;
+  }
+
+  public BinaryExpressionImpl typeV2(PythonType type) {
+    this.type = type;
+    return this;
   }
 
   private static boolean shouldReturnDeclaredStr(InferredType leftType, InferredType rightType) {
