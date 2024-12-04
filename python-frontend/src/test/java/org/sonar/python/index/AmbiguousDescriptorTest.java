@@ -20,7 +20,6 @@ import java.util.Collections;
 import java.util.Set;
 import org.junit.jupiter.api.Test;
 import org.sonar.plugins.python.api.tree.Name;
-import org.sonar.python.semantic.SymbolImpl;
 import org.sonar.python.semantic.v2.SymbolV2;
 import org.sonar.python.semantic.v2.converter.PythonTypeToDescriptorConverter;
 import org.sonar.python.types.v2.PythonType;
@@ -30,7 +29,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.sonar.python.index.ClassDescriptorTest.lastClassDescriptor;
 import static org.sonar.python.index.DescriptorToProtobufTestUtils.assertDescriptorToProtobuf;
-import static org.sonar.python.index.DescriptorUtils.descriptor;
 import static org.sonar.python.index.FunctionDescriptorTest.lastFunctionDescriptor;
 import static org.sonar.python.types.v2.TypesTestUtils.lastName;
 
@@ -110,10 +108,8 @@ class AmbiguousDescriptorTest {
 
   @Test
   void ambiguous_descriptor_creation_different_name_same_fqn() {
-    SymbolImpl foo = new SymbolImpl("foo", "mod.bar");
-    SymbolImpl bar = new SymbolImpl("bar", "mod.bar");
-    Descriptor fooDesc = descriptor(foo);
-    Descriptor barDesc = descriptor(bar);
+    Descriptor fooDesc = new VariableDescriptor("foo", "mod.bar", null, false);
+    Descriptor barDesc = new VariableDescriptor("bar", "mod.bar", null, false);
     assertThatThrownBy(() -> AmbiguousDescriptor.create(fooDesc, barDesc)).isInstanceOf(IllegalArgumentException.class);
   }
 

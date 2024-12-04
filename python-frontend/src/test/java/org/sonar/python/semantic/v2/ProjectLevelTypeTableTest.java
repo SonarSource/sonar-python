@@ -139,7 +139,7 @@ class ProjectLevelTypeTableTest {
 
   @Test
   void importingSubmodulesTest() {
-    ProjectLevelSymbolTable projectLevelSymbolTable = new ProjectLevelSymbolTable();
+    ProjectLevelSymbolTable projectLevelSymbolTable = ProjectLevelSymbolTable.empty();
 
     FileInput libTree = parseWithoutSymbols(
       """
@@ -180,7 +180,7 @@ class ProjectLevelTypeTableTest {
 
   @Test
   void importingRedefinedSubmodulesTest() {
-    ProjectLevelSymbolTable projectLevelSymbolTable = new ProjectLevelSymbolTable();
+    ProjectLevelSymbolTable projectLevelSymbolTable = ProjectLevelSymbolTable.empty();
 
     FileInput libTree = parseWithoutSymbols(
       """
@@ -224,7 +224,7 @@ class ProjectLevelTypeTableTest {
 
   @Test
   void importingRedefinedSubmodules2Test() {
-    ProjectLevelSymbolTable projectLevelSymbolTable = new ProjectLevelSymbolTable();
+    ProjectLevelSymbolTable projectLevelSymbolTable = ProjectLevelSymbolTable.empty();
 
     FileInput libTree = parseWithoutSymbols(
       """
@@ -264,7 +264,7 @@ class ProjectLevelTypeTableTest {
 
   @Test
   void importFunctionWithDecorators() {
-    var projectLevelSymbolTable = new ProjectLevelSymbolTable();
+    var projectLevelSymbolTable = ProjectLevelSymbolTable.empty();
     var libTree = parseWithoutSymbols(
       """
       def lib_decorator(): ...
@@ -290,7 +290,7 @@ class ProjectLevelTypeTableTest {
 
   @Test
   void importFunctionWithImportedDecorators() {
-    var projectLevelSymbolTable = new ProjectLevelSymbolTable();
+    var projectLevelSymbolTable = ProjectLevelSymbolTable.empty();
     var libTree = parseWithoutSymbols(
       """
       def lib_decorator(): ...
@@ -321,7 +321,7 @@ class ProjectLevelTypeTableTest {
   
   @Test
   void importedFunctionDecoratorNamesTest() {
-    var projectLevelSymbolTable = new ProjectLevelSymbolTable();
+    var projectLevelSymbolTable = ProjectLevelSymbolTable.empty();
     var libTree = parseWithoutSymbols(
       """
       from abc import abstractmethod
@@ -353,7 +353,7 @@ class ProjectLevelTypeTableTest {
 
   @Test
   void relativeImports() {
-    var projectLevelSymbolTable = new ProjectLevelSymbolTable();
+    var projectLevelSymbolTable = ProjectLevelSymbolTable.empty();
     FileInput initTree = parseWithoutSymbols("");
     PythonFile initFile = pythonFile("__init__.py");
     projectLevelSymbolTable.addModule(initTree, "my_package", initFile);
@@ -384,7 +384,7 @@ class ProjectLevelTypeTableTest {
 
   @Test
   void importFunctionWithUnresolvedImportParameterTypes() {
-    var projectLevelSymbolTable = new ProjectLevelSymbolTable();
+    var projectLevelSymbolTable = ProjectLevelSymbolTable.empty();
     var libTree = parseWithoutSymbols(
       """
       def imported_function(params: list[str]): ...
@@ -406,7 +406,7 @@ class ProjectLevelTypeTableTest {
 
   @Test
   void classTypeAndAlias() {
-    var projectLevelSymbolTable = new ProjectLevelSymbolTable();
+    var projectLevelSymbolTable = ProjectLevelSymbolTable.empty();
     var libTree = parseWithoutSymbols(
       """
       class MyClass():

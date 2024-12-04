@@ -19,15 +19,10 @@ package org.sonar.python.index;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 import javax.annotation.Nullable;
-import org.sonar.plugins.python.api.symbols.AmbiguousSymbol;
-import org.sonar.plugins.python.api.symbols.ClassSymbol;
-import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.types.InferredType;
 import org.sonar.python.semantic.AmbiguousSymbolImpl;
@@ -44,76 +39,6 @@ import static org.sonar.python.types.InferredTypes.anyType;
 public class DescriptorUtils {
 
   private DescriptorUtils() {}
-
-  public static Descriptor descriptor(Symbol symbol) {
-    switch (symbol.kind()) {
-      case FUNCTION:
-        return functionDescriptor(((FunctionSymbol) symbol));
-      case CLASS:
-        return classDescriptor((ClassSymbol) symbol);
-      case AMBIGUOUS:
-        return ambiguousDescriptor((AmbiguousSymbol) symbol);
-      default:
-        return new VariableDescriptor(symbol.name(), symbol.fullyQualifiedName(), symbol.annotatedTypeName());
-    }
-  }
-
-  private static ClassDescriptor classDescriptor(ClassSymbol classSymbol) {
-    ClassDescriptor.ClassDescriptorBuilder classDescriptor = new ClassDescriptor.ClassDescriptorBuilder()
-      .withName(classSymbol.name())
-      .withFullyQualifiedName(classSymbol.fullyQualifiedName())
-      .withMembers(classSymbol.declaredMembers().stream().map(DescriptorUtils::descriptor).collect(Collectors.toSet()))
-      .withSuperClasses(classSymbol.superClasses().stream().map(Symbol::fullyQualifiedName).filter(Objects::nonNull).toList())
-      .withDefinitionLocation(classSymbol.definitionLocation())
-      .withHasMetaClass(((ClassSymbolImpl) classSymbol).hasMetaClass())
-      .withHasSuperClassWithoutDescriptor(((ClassSymbolImpl) classSymbol).hasSuperClassWithoutSymbol() ||
-        // Setting hasSuperClassWithoutDescriptor if a parent has a null FQN as it would be impossible to retrieve it without one, even if the parent exists.
-        classSymbol.superClasses().stream().anyMatch(s -> s.fullyQualifiedName() == null))
-      .withMetaclassFQN(((ClassSymbolImpl) classSymbol).metaclassFQN())
-      .withHasDecorators(classSymbol.hasDecorators())
-      .withSupportsGenerics(((ClassSymbolImpl) classSymbol).supportsGenerics());
-
-    return classDescriptor.build();
-  }
-
-  private static FunctionDescriptor functionDescriptor(FunctionSymbol functionSymbol) {
-    return new FunctionDescriptor.FunctionDescriptorBuilder()
-      .withName(functionSymbol.name())
-      .withFullyQualifiedName(functionSymbol.fullyQualifiedName())
-      .withParameters(parameters(functionSymbol.parameters()))
-      .withHasDecorators(functionSymbol.hasDecorators())
-      .withDecorators(functionSymbol.decorators())
-      .withIsAsynchronous(functionSymbol.isAsynchronous())
-      .withIsInstanceMethod(functionSymbol.isInstanceMethod())
-      .withAnnotatedReturnTypeName(functionSymbol.annotatedReturnTypeName())
-      .withDefinitionLocation(functionSymbol.definitionLocation())
-      .build();
-  }
-
-  private static AmbiguousDescriptor ambiguousDescriptor(AmbiguousSymbol ambiguousSymbol) {
-    return ambiguousDescriptor(ambiguousSymbol, null);
-  }
-
-  public static AmbiguousDescriptor ambiguousDescriptor(AmbiguousSymbol ambiguousSymbol, @Nullable String overriddenFQN) {
-                                                        String fullyQualifiedName = overriddenFQN != null ? overriddenFQN : ambiguousSymbol.fullyQualifiedName();
-    Set<Descriptor> alternatives = ambiguousSymbol.alternatives().stream()
-      .map(DescriptorUtils::descriptor)
-      .collect(Collectors.toSet());
-    return new AmbiguousDescriptor(ambiguousSymbol.name(), fullyQualifiedName, alternatives);
-  }
-
-  private static List<FunctionDescriptor.Parameter> parameters(List<FunctionSymbol.Parameter> parameters) {
-    return parameters.stream().map(parameter -> new FunctionDescriptor.Parameter(
-      parameter.name(),
-      ((FunctionSymbolImpl.ParameterImpl) parameter).annotatedTypeName(),
-      parameter.hasDefaultValue(),
-      parameter.isKeywordOnly(),
-      parameter.isPositionalOnly(),
-      parameter.isPositionalVariadic(),
-      parameter.isKeywordVariadic(),
-      parameter.location()
-    )).toList();
-  }
 
   // TODO SONARPY-958: Cleanup the symbol construction from descriptors by extracting this logic in a builder class
   public static Symbol symbolFromDescriptor(Descriptor descriptor, ProjectLevelSymbolTable projectLevelSymbolTable,

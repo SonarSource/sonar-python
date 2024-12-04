@@ -49,7 +49,7 @@ public abstract class PythonIndexer {
 
   private final Map<URI, String> packageNames = new HashMap<>();
   private final PythonParser parser = PythonParser.create();
-  private final ProjectLevelSymbolTable projectLevelSymbolTable = new ProjectLevelSymbolTable();
+  private final ProjectLevelSymbolTable projectLevelSymbolTable = ProjectLevelSymbolTable.empty();
 
   public ProjectLevelSymbolTable projectLevelSymbolTable() {
     return projectLevelSymbolTable;

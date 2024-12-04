@@ -17,8 +17,8 @@
 package org.sonar.python.semantic.v2;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -55,6 +55,7 @@ import org.sonar.plugins.python.api.tree.StatementList;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.PythonTestUtils;
+import org.sonar.python.index.ClassDescriptor;
 import org.sonar.python.semantic.ClassSymbolImpl;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.semantic.SymbolUtils;
@@ -400,11 +401,10 @@ public class TypeInferenceV2Test {
 
   @Test
   void testProjectLevelSymbolTableImports() {
-    var classSymbol = new ClassSymbolImpl("C", "something.known.C");
-
     ProjectLevelTypeTable projectLevelTypeTable = new ProjectLevelTypeTable(ProjectLevelSymbolTable.from(
-      Map.of("something", new HashSet<>(), "something.known", Set.of(classSymbol)))
-    );
+      Map.of("something.known", Collections.singleton(new ClassDescriptor.ClassDescriptorBuilder().withName("C").withFullyQualifiedName("something.known.C").build()), "something",
+        Set.of())));
+
     var root = inferTypes("""
       import something.known
       """, projectLevelTypeTable);
@@ -699,7 +699,7 @@ public class TypeInferenceV2Test {
           b : int
         """
     );
-    var projectLevelSymbolTable = new ProjectLevelSymbolTable();
+    var projectLevelSymbolTable = ProjectLevelSymbolTable.empty();
     projectLevelSymbolTable.addModule(tree, "", pythonFile("mod.py"));
 
     var symbol = (ClassSymbol) projectLevelSymbolTable.getSymbol("mod.A");
@@ -1268,7 +1268,7 @@ public class TypeInferenceV2Test {
       "class A: ...",
       "def foo2(p1: dict, p2: A): ..."
     );
-    ProjectLevelSymbolTable projectLevelSymbolTable = new ProjectLevelSymbolTable();
+    ProjectLevelSymbolTable projectLevelSymbolTable = ProjectLevelSymbolTable.empty();
     var modFile = pythonFile("mod.py");
     projectLevelSymbolTable.addModule(tree, "", modFile);
     ProjectLevelTypeTable projectLevelTypeTable = new ProjectLevelTypeTable(projectLevelSymbolTable);
@@ -2722,7 +2722,7 @@ public class TypeInferenceV2Test {
     FileInput tree = parseWithoutSymbols(
       "def foo() -> int: ..."
     );
-    ProjectLevelSymbolTable projectLevelSymbolTable = new ProjectLevelSymbolTable();
+    ProjectLevelSymbolTable projectLevelSymbolTable = ProjectLevelSymbolTable.empty();
     projectLevelSymbolTable.addModule(tree, "", pythonFile("mod.py"));
     ProjectLevelTypeTable projectLevelTypeTable = new ProjectLevelTypeTable(projectLevelSymbolTable);
 
@@ -3378,7 +3378,7 @@ public class TypeInferenceV2Test {
       def foo(): pass
       def bar(): pass
       """);
-    ProjectLevelSymbolTable projectLevelSymbolTable = new ProjectLevelSymbolTable();
+    ProjectLevelSymbolTable projectLevelSymbolTable = ProjectLevelSymbolTable.empty();
     var modFile = pythonFile("mod.py");
     projectLevelSymbolTable.addModule(tree, "", modFile);
     ProjectLevelTypeTable projectLevelTypeTable = new ProjectLevelTypeTable(projectLevelSymbolTable);
@@ -3549,7 +3549,7 @@ public class TypeInferenceV2Test {
   }
 
   private static class TestProject {
-    private final ProjectLevelSymbolTable projectLevelSymbolTable = new ProjectLevelSymbolTable();
+    private final ProjectLevelSymbolTable projectLevelSymbolTable = ProjectLevelSymbolTable.empty();
 
     public TestProject addModule(String moduleName, String code) {
       FileInput tree = parseWithoutSymbols(code);
