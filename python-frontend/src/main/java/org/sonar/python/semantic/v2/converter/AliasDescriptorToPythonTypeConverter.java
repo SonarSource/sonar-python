@@ -14,25 +14,16 @@
  * You should have received a copy of the Sonar Source-Available License
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
-package org.sonar.python.index;
+package org.sonar.python.semantic.v2.converter;
 
-import javax.annotation.CheckForNull;
+import org.sonar.python.index.AliasDescriptor;
+import org.sonar.python.index.Descriptor;
+import org.sonar.python.types.v2.PythonType;
 
-public interface Descriptor {
-
-  String name();
-
-  @CheckForNull
-  String fullyQualifiedName();
-
-  Kind kind();
-
-  enum Kind {
-    MODULE,
-    FUNCTION,
-    CLASS,
-    VARIABLE,
-    AMBIGUOUS,
-    ALIAS
+public class AliasDescriptorToPythonTypeConverter implements DescriptorToPythonTypeConverter {
+  @Override
+  public PythonType convert(ConversionContext ctx, Descriptor from) {
+    // We should try to retrieve the original type if possible, instead of recreating it
+    return ctx.convert(((AliasDescriptor) from).originalDescriptor());
   }
 }

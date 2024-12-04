@@ -23,6 +23,7 @@ import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.plugins.python.api.PythonVersionUtils;
+import org.sonar.python.index.AliasDescriptor;
 import org.sonar.python.index.Descriptor;
 import org.sonar.python.index.ModuleDescriptor;
 import org.sonar.python.types.protobuf.SymbolsProtos;
@@ -60,11 +61,13 @@ public class ModuleSymbolToDescriptorConverter {
       .stream()
       .filter(d -> ProtoUtils.isValidForPythonVersion(d.getValidForList(), projectPythonVersions))
       .map(classConverter::convert)
+      .map(d -> wrapInAliasIfNeeded(d, moduleSymbol.getFullyQualifiedName()))
       .map(Descriptor.class::cast);
     var functionsStream = moduleSymbol.getFunctionsList()
       .stream()
       .filter(d -> ProtoUtils.isValidForPythonVersion(d.getValidForList(), projectPythonVersions))
       .map(functionConverter::convert)
+      .map(d -> wrapInAliasIfNeeded(d, moduleSymbol.getFullyQualifiedName()))
       .map(Descriptor.class::cast);
     var overloadedFunctionsStream = moduleSymbol.getOverloadedFunctionsList()
       .stream()
@@ -78,6 +81,22 @@ public class ModuleSymbolToDescriptorConverter {
       .map(Descriptor.class::cast);
 
     return ProtoUtils.disambiguateByName(Stream.of(classesStream, functionsStream, overloadedFunctionsStream, variablesStream));
+  }
+
+  private static Descriptor wrapInAliasIfNeeded(Descriptor descriptor, String moduleFullyQualifiedName) {
+    String normalizedModuleFqn = moduleFullyQualifiedName;
+    if (moduleFullyQualifiedName.startsWith("builtins")) {
+      normalizedModuleFqn = moduleFullyQualifiedName.substring("builtins".length());
+    }
+    String descriptorFqn = descriptor.fullyQualifiedName();
+    if (descriptorFqn == null) {
+      return descriptor;
+    }
+    if (!descriptorFqn.startsWith(normalizedModuleFqn)) {
+      String aliasFqn = normalizedModuleFqn + "." + descriptor.name();
+      return new AliasDescriptor(descriptor.name(), aliasFqn, descriptor);
+    }
+    return descriptor;
   }
 
 }
