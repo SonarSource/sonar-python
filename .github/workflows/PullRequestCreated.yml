@@ -18,6 +18,14 @@ jobs:
         && ${{ !startsWith(github.head_ref, 'renovate/') }}
         && ${{ !contains(github.event.pull_request.labels.*.name, 'dependencies') }}
     steps:
+      # Add step that prints all the if conditions
+      - name: Print all if conditions
+        run: |
+          echo "github.event.pull_request.head.repo.full_name == github.repository: ${{ github.event.pull_request.head.repo.full_name == github.repository }}"
+          echo "github.event.sender.type != 'Bot': ${{ github.event.sender.type != 'Bot' }}"
+          echo "startsWith(github.event.pull_request.title, 'NO-JIRA'): ${{ startsWith(github.event.pull_request.title, 'NO-JIRA') }}"
+          echo "startsWith(github.head_ref, 'renovate/'): ${{ startsWith(github.head_ref, 'renovate/') }}"
+          echo "contains(github.event.pull_request.labels.*.name, 'dependencies'): ${{ contains(github.event.pull_request.labels.*.name, 'dependencies') }}"
       - id: secrets
         uses: SonarSource/vault-action-wrapper@v3
         with:
