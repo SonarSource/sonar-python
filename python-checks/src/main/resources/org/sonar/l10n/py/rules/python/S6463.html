@@ -1,6 +1,8 @@
 <p>Allowing unrestricted outbound communications can lead to data leaks.</p>
-<p>A restrictive security group is an additional layer of protection that might prevent the abuse or exploitation of a resource. For example, it
-complicates the exfiltration of data in the case of a successfully exploited vulnerability.</p>
+<p>When a security group allows all outbound communications, applications or services within the security group can send data to any external IP
+address or port without restriction. If a resource within the security group becomes compromised, attackers could send malicious traffic or exfiltrate
+data to external servers. This could happen even if the resource is not directly exposed to the internet, such as in case of a supply chain
+attack.</p>
 <p>When deciding if outgoing connections should be limited, consider that limiting the connections results in additional administration and
 maintenance work.</p>
 <h2>Ask Yourself Whether</h2>
@@ -10,7 +12,9 @@ maintenance work.</p>
 </ul>
 <p>There is a risk if you answered yes to any of those questions.</p>
 <h2>Recommended Secure Coding Practices</h2>
-<p>It is recommended to restrict outgoing connections to a set of trusted destinations.</p>
+<p>The principles of defence-in-depth and least privilege suggest that outbound connections should be restricted to a set of trusted destinations.</p>
+<p>Consider restricting the security group egress rules so that it can only contact specific locations, such as trusted IP address ranges or other
+security groups. If any resources require unrestricted outbound access, place them in their own security group.</p>
 <h2>Sensitive Code Example</h2>
 <p>For <a href="https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_ec2.SecurityGroup.html">aws_cdk.aws_ec2.SecurityGroup</a>:</p>
 <pre>
