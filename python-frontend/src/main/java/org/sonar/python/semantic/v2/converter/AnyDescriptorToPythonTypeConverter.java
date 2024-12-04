@@ -37,7 +37,8 @@ public class AnyDescriptorToPythonTypeConverter {
       Descriptor.Kind.CLASS, new ClassDescriptorToPythonTypeConverter(),
       Descriptor.Kind.FUNCTION, new FunctionDescriptorToPythonTypeConverter(),
       Descriptor.Kind.VARIABLE, new VariableDescriptorToPythonTypeConverter(),
-      Descriptor.Kind.AMBIGUOUS, new AmbiguousDescriptorToPythonTypeConverter()
+      Descriptor.Kind.AMBIGUOUS, new AmbiguousDescriptorToPythonTypeConverter(),
+      Descriptor.Kind.ALIAS, new AliasDescriptorToPythonTypeConverter()
     ));
 
   }

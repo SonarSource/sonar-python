@@ -2961,6 +2961,28 @@ public class TypeInferenceV2Test {
   }
 
   @Test
+  void convertTypeshedModuleWithAliases() {
+    ProjectLevelSymbolTable empty = ProjectLevelSymbolTable.empty();
+    ProjectLevelTypeTable projectLevelTypeTable = new ProjectLevelTypeTable(empty);
+    LazyTypesContext lazyTypesContext = projectLevelTypeTable.lazyTypesContext();
+    SymbolsModuleTypeProvider symbolsModuleTypeProvider = new SymbolsModuleTypeProvider(empty, lazyTypesContext);
+    ModuleType builtinModule = symbolsModuleTypeProvider.createBuiltinModule();
+    PythonType responses = symbolsModuleTypeProvider.convertModuleType(List.of("fastapi", "responses"), builtinModule);
+    assertThat(responses.resolveMember("FileResponse")).containsInstanceOf(ClassType.class);
+    PythonType concurrency = symbolsModuleTypeProvider.convertModuleType(List.of("fastapi", "concurrency"), builtinModule);
+    assertThat(concurrency.resolveMember("iterate_in_threadpool")).containsInstanceOf(FunctionType.class);
+
+    List<Symbol> fileResponseSymbols = empty.typeShedDescriptorsProvider()
+      .stubFilesSymbols(empty).stream().filter(s -> "fastapi.responses.FileResponse".equals(s.fullyQualifiedName())).toList();
+    assertThat(fileResponseSymbols).hasSize(1);
+    assertThat(fileResponseSymbols.get(0).kind()).isEqualTo(Symbol.Kind.CLASS);
+    List<Symbol> runInThreadPoolSymbols = empty.typeShedDescriptorsProvider()
+      .stubFilesSymbols(empty).stream().filter(s -> "fastapi.concurrency.run_in_threadpool".equals(s.fullyQualifiedName())).toList();
+    assertThat(runInThreadPoolSymbols).hasSize(1);
+    assertThat(runInThreadPoolSymbols.get(0).kind()).isEqualTo(Symbol.Kind.FUNCTION);
+  }
+
+  @Test
   void imported_symbol_in_different_branch() {
     FileInput fileInput = inferTypes("""
       if x:

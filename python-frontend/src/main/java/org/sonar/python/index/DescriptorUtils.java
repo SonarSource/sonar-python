@@ -67,9 +67,55 @@ public class DescriptorUtils {
           .map(a -> DescriptorUtils.symbolFromDescriptor(a, projectLevelSymbolTable, symbolName, createdSymbolsByDescriptor, new HashMap<>()))
           .collect(Collectors.toSet()));
         return ambiguousSymbol;
+      case ALIAS:
+        Descriptor recreatedDescriptor = recreateDescriptorFromAlias((AliasDescriptor) descriptor);
+        return symbolFromDescriptor(recreatedDescriptor, projectLevelSymbolTable, symbolName, createdSymbolsByDescriptor, createdSymbolsByFqn);
       default:
         throw new IllegalStateException(String.format("Error while creating a Symbol from a Descriptor: Unexpected descriptor kind: %s", descriptor.kind()));
     }
+  }
+
+  private static Descriptor recreateDescriptorFromAlias(AliasDescriptor aliasDescriptor) {
+    Descriptor originalDescriptor = aliasDescriptor.originalDescriptor();
+    if (originalDescriptor instanceof FunctionDescriptor functionDescriptor) {
+      return recreateFunctionDescriptor(aliasDescriptor, functionDescriptor);
+    } else if (originalDescriptor instanceof ClassDescriptor classDescriptor) {
+      return recreateClassDescriptor(aliasDescriptor, classDescriptor);
+    }
+    throw new IllegalStateException(String.format("Error while recreating a descriptor from an alias: Unexpected alias kind: %s", originalDescriptor.kind()));
+  }
+
+  private static Descriptor recreateFunctionDescriptor(AliasDescriptor aliasDescriptor, FunctionDescriptor originalDescriptor) {
+    // here we recreate the function descriptor from the original descriptor, only changing the name and FQN for its alias
+    FunctionDescriptor.FunctionDescriptorBuilder builder = new FunctionDescriptor.FunctionDescriptorBuilder();
+    return builder.withName(aliasDescriptor.name())
+      .withFullyQualifiedName(aliasDescriptor.fullyQualifiedName())
+      .withParameters(originalDescriptor.parameters())
+      .withAnnotatedReturnTypeName(originalDescriptor.annotatedReturnTypeName())
+      .withDefinitionLocation(originalDescriptor.definitionLocation())
+      .withHasDecorators(originalDescriptor.hasDecorators())
+      .withTypeAnnotationDescriptor(originalDescriptor.typeAnnotationDescriptor())
+      .withDecorators(originalDescriptor.decorators())
+      .withIsAsynchronous(originalDescriptor.isAsynchronous())
+      .withIsInstanceMethod(originalDescriptor.isInstanceMethod())
+      .build();
+  }
+
+  private static ClassDescriptor recreateClassDescriptor(AliasDescriptor aliasDescriptor, ClassDescriptor originalDescriptor) {
+    ClassDescriptor.ClassDescriptorBuilder builder = new ClassDescriptor.ClassDescriptorBuilder();
+    // here we recreate the class descriptor from the original descriptor, only changing the name and FQN for its alias
+    return builder
+      .withName(aliasDescriptor.name())
+      .withFullyQualifiedName(aliasDescriptor.fullyQualifiedName())
+      .withMembers(new HashSet<>(originalDescriptor.members()))
+      .withSuperClasses(originalDescriptor.superClasses())
+      .withDefinitionLocation(originalDescriptor.definitionLocation())
+      .withHasMetaClass(originalDescriptor.hasMetaClass())
+      .withHasSuperClassWithoutDescriptor(originalDescriptor.hasSuperClassWithoutDescriptor())
+      .withMetaclassFQN(originalDescriptor.metaclassFQN())
+      .withHasDecorators(originalDescriptor.hasDecorators())
+      .withSupportsGenerics(originalDescriptor.supportsGenerics())
+      .build();
   }
 
   private static ClassSymbolImpl createClassSymbol(Descriptor descriptor, ProjectLevelSymbolTable projectLevelSymbolTable, Map<Descriptor, Symbol> createdSymbolsByDescriptor,

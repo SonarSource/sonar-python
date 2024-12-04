@@ -16,23 +16,37 @@
  */
 package org.sonar.python.index;
 
-import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
 
-public interface Descriptor {
+public class AliasDescriptor implements Descriptor {
 
-  String name();
+  private final String name;
+  private final String fullyQualifiedName;
+  private final Descriptor originalDescriptor;
 
-  @CheckForNull
-  String fullyQualifiedName();
+  public AliasDescriptor(String name, String fullyQualifiedName, Descriptor originalDescriptor) {
+    this.name = name;
+    this.fullyQualifiedName = fullyQualifiedName;
+    this.originalDescriptor = originalDescriptor;
+  }
 
-  Kind kind();
+  @Override
+  public String name() {
+    return this.name;
+  }
 
-  enum Kind {
-    MODULE,
-    FUNCTION,
-    CLASS,
-    VARIABLE,
-    AMBIGUOUS,
-    ALIAS
+  @Override
+  @Nonnull
+  public String fullyQualifiedName() {
+    return fullyQualifiedName;
+  }
+
+  public Descriptor originalDescriptor() {
+    return this.originalDescriptor;
+  }
+
+  @Override
+  public Kind kind() {
+    return Kind.ALIAS;
   }
 }
