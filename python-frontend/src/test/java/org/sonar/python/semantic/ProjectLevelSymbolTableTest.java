@@ -34,7 +34,6 @@ import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
 import org.sonar.plugins.python.api.tree.CallExpression;
-import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.ImportFrom;
@@ -46,7 +45,6 @@ import org.sonar.python.index.ClassDescriptor;
 import org.sonar.python.index.Descriptor;
 import org.sonar.python.index.FunctionDescriptor;
 import org.sonar.python.index.VariableDescriptor;
-import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.types.DeclaredType;
 import org.sonar.python.types.InferredTypes;
 import org.sonar.python.types.TypeShed;
@@ -516,6 +514,17 @@ class ProjectLevelSymbolTableTest {
   }
 
   @Test
+  void importedStubModules() {
+    FileInput tree = parseWithoutSymbols("""
+      import math
+      import os
+      """);
+    ProjectLevelSymbolTable projectLevelSymbolTable = ProjectLevelSymbolTable.empty();
+    projectLevelSymbolTable.addModule(tree, "my_package", pythonFile("mod.py"));
+    assertThat(projectLevelSymbolTable.typeShedDescriptorsProvider().stubModules()).containsExactlyInAnyOrder("math", "os");
+  }
+
+  @Test
   void global_symbols() {
     FileInput tree = parseWithoutSymbols(
       "obj1 = 42",
@@ -732,11 +741,12 @@ class ProjectLevelSymbolTableTest {
       "class A:",
       "  class B(B): pass"
     );
-    globalSymbols(fileInput, "mod");
-    ClassDef outerClassDef = (ClassDef) fileInput.statements().statements().get(1);
-    ClassDef innerClassDef = (ClassDef) outerClassDef.body().statements().get(0);
-    // SONARPY-1350: Parent should be external.B
-    assertThat(TreeUtils.getParentClassesFQN(innerClassDef)).containsExactly("mod.mod.A.B");
+    Set<Symbol> symbols = globalSymbols(fileInput, "mod");
+    // SONARPY-1829: Parent should be external.B
+    ClassSymbol outerClassSymbol = ((ClassSymbol) symbols.stream().findFirst().get());
+    ClassSymbol innerClassSymbol = (ClassSymbol) outerClassSymbol.resolveMember("B").get();
+    assertThat(innerClassSymbol.superClasses()).isEmpty();
+    assertThat(innerClassSymbol.hasUnresolvedTypeHierarchy()).isTrue();
   }
 
   @Test

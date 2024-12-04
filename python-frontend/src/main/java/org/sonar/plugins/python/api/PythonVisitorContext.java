@@ -41,7 +41,7 @@ public class PythonVisitorContext extends PythonInputFileContext {
   private final TypeChecker typeChecker;
 
   public PythonVisitorContext(FileInput rootTree, PythonFile pythonFile, @Nullable File workingDirectory, String packageName) {
-    super(pythonFile, workingDirectory, CacheContextImpl.dummyCache());
+    super(pythonFile, workingDirectory, CacheContextImpl.dummyCache(), ProjectLevelSymbolTable.empty());
     this.rootTree = rootTree;
     this.parsingException = null;
     SymbolTableBuilder symbolTableBuilder = new SymbolTableBuilder(packageName, pythonFile);
@@ -54,7 +54,7 @@ public class PythonVisitorContext extends PythonInputFileContext {
 
   public PythonVisitorContext(FileInput rootTree, PythonFile pythonFile, @Nullable File workingDirectory, String packageName,
     ProjectLevelSymbolTable projectLevelSymbolTable, CacheContext cacheContext) {
-    super(pythonFile, workingDirectory, cacheContext);
+    super(pythonFile, workingDirectory, cacheContext, projectLevelSymbolTable);
     this.rootTree = rootTree;
     this.parsingException = null;
     new SymbolTableBuilder(packageName, pythonFile, projectLevelSymbolTable).visitFileInput(rootTree);
@@ -68,7 +68,7 @@ public class PythonVisitorContext extends PythonInputFileContext {
 
   public PythonVisitorContext(FileInput rootTree, PythonFile pythonFile, @Nullable File workingDirectory, String packageName,
     ProjectLevelSymbolTable projectLevelSymbolTable, CacheContext cacheContext, SonarProduct sonarProduct) {
-    super(pythonFile, workingDirectory, cacheContext, sonarProduct);
+    super(pythonFile, workingDirectory, cacheContext, sonarProduct, projectLevelSymbolTable);
     this.rootTree = rootTree;
     this.parsingException = null;
     new SymbolTableBuilder(packageName, pythonFile, projectLevelSymbolTable).visitFileInput(rootTree);
@@ -80,14 +80,14 @@ public class PythonVisitorContext extends PythonInputFileContext {
   }
 
   public PythonVisitorContext(PythonFile pythonFile, RecognitionException parsingException) {
-    super(pythonFile, null, CacheContextImpl.dummyCache());
+    super(pythonFile, null, CacheContextImpl.dummyCache(), ProjectLevelSymbolTable.empty());
     this.rootTree = null;
     this.parsingException = parsingException;
     this.typeChecker = new TypeChecker(new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty()));
   }
 
   public PythonVisitorContext(PythonFile pythonFile, RecognitionException parsingException, SonarProduct sonarProduct) {
-    super(pythonFile, null, CacheContextImpl.dummyCache(), sonarProduct);
+    super(pythonFile, null, CacheContextImpl.dummyCache(), sonarProduct, ProjectLevelSymbolTable.empty());
     this.rootTree = null;
     this.parsingException = parsingException;
     this.typeChecker = new TypeChecker(new ProjectLevelTypeTable(ProjectLevelSymbolTable.empty()));

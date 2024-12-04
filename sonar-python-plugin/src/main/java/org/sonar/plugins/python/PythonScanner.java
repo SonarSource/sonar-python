@@ -176,7 +176,13 @@ public class PythonScanner extends Scanner {
         continue;
       }
       PythonFile pythonFile = SonarQubePythonFile.create(inputFile.wrappedFile());
-      PythonInputFileContext inputFileContext = new PythonInputFileContext(pythonFile, context.fileSystem().workDir(), indexer.cacheContext(), context.runtime().getProduct());
+      PythonInputFileContext inputFileContext = new PythonInputFileContext(
+        pythonFile,
+        context.fileSystem().workDir(),
+        indexer.cacheContext(),
+        context.runtime().getProduct(),
+        indexer.projectLevelSymbolTable()
+      );
       if (check.scanWithoutParsing(inputFileContext)) {
         Set<PythonCheck> executedChecks = checksExecutedWithoutParsingByFiles.getOrDefault(inputFile, new HashSet<>());
         executedChecks.add(check);
@@ -199,6 +205,7 @@ public class PythonScanner extends Scanner {
 
   @Override
   public void endOfAnalysis() {
+    indexer.postAnalysis(context);
     checks.all().stream()
       .filter(EndOfAnalysis.class::isInstance)
       .map(EndOfAnalysis.class::cast)

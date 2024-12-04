@@ -36,7 +36,7 @@ import org.sonar.plugins.python.caching.Caching;
 import org.sonar.python.index.Descriptor;
 import org.sonar.python.semantic.DependencyGraph;
 import org.sonar.python.semantic.SymbolUtils;
-import org.sonar.python.types.TypeShed;
+import org.sonar.python.semantic.v2.typeshed.TypeShedDescriptorsProvider;
 import org.sonarsource.performance.measure.PerformanceMeasure;
 
 import static org.sonar.plugins.python.api.PythonVersionUtils.PYTHON_VERSION_KEY;
@@ -79,6 +79,16 @@ public class SonarQubePythonIndexer extends PythonIndexer {
     duration.stop();
   }
 
+  @Override
+  public void postAnalysis(SensorContext context) {
+    if (caching.isCacheEnabled()) {
+      Set<String> stubModules = projectLevelSymbolTable().typeShedDescriptorsProvider().stubModules();
+      if (!stubModules.isEmpty()) {
+        caching.writeTypeshedModules(stubModules);
+      }
+    }
+  }
+
   private boolean shouldOptimizeAnalysis(SensorContext context) {
     return caching.isCacheEnabled()
       && (context.canSkipUnchangedFiles() || context.config().getBoolean(SONAR_CAN_SKIP_UNCHANGED_FILES_KEY).orElse(false))
@@ -87,6 +97,7 @@ public class SonarQubePythonIndexer extends PythonIndexer {
 
   private void computeGlobalSymbolsUsingCache(SensorContext context) {
     loadTypeshedSymbols();
+    projectLevelSymbolTable().typeShedDescriptorsProvider();
     LOG.info("Using cached data to retrieve global symbols.");
     Set<String> currentProjectModulesFQNs = new HashSet<>(inputFileToFQN.values());
     Set<String> deletedModulesFQNs = deletedModulesFQNs(currentProjectModulesFQNs);
@@ -127,9 +138,9 @@ public class SonarQubePythonIndexer extends PythonIndexer {
    * For that reason, we load all symbols that were used in the previous analysis upfront, even if the file using them will not be parsed.
    */
   private void loadTypeshedSymbols() {
-    TypeShed.builtinSymbols();
+    TypeShedDescriptorsProvider typeshedReader = projectLevelSymbolTable().typeShedDescriptorsProvider();
     Set<String> typeShedModules = caching.readTypeshedModules();
-    typeShedModules.forEach(TypeShed::symbolsForModule);
+    typeShedModules.forEach(typeshedReader::descriptorsForModule);
   }
 
   private boolean tryToUseCache(Map<String, Set<String>> importsByModule, PythonInputFile inputFile, String currFQN) {
@@ -172,10 +183,7 @@ public class SonarQubePythonIndexer extends PythonIndexer {
     if (caching.isCacheEnabled()) {
       saveGlobalSymbolsInCache(files);
       saveMainFilesListInCache(new HashSet<>(inputFileToFQN.values()));
-      Set<String> stubModules = TypeShed.stubModules();
-      if (!stubModules.isEmpty()) {
-        caching.writeTypeshedModules(stubModules);
-      }
+      // Information on used Typeshed stubs needs to be done at the end of the analysis, as it is not computed during indexing anymore
       caching.writeCacheVersion();
     }
   }

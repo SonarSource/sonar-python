@@ -2972,12 +2972,10 @@ public class TypeInferenceV2Test {
     PythonType concurrency = symbolsModuleTypeProvider.convertModuleType(List.of("fastapi", "concurrency"), builtinModule);
     assertThat(concurrency.resolveMember("iterate_in_threadpool")).containsInstanceOf(FunctionType.class);
 
-    List<Symbol> fileResponseSymbols = empty.typeShedDescriptorsProvider()
-      .stubFilesSymbols(empty).stream().filter(s -> "fastapi.responses.FileResponse".equals(s.fullyQualifiedName())).toList();
+    List<Symbol> fileResponseSymbols = empty.stubFilesSymbols().stream().filter(s -> "fastapi.responses.FileResponse".equals(s.fullyQualifiedName())).toList();
     assertThat(fileResponseSymbols).hasSize(1);
     assertThat(fileResponseSymbols.get(0).kind()).isEqualTo(Symbol.Kind.CLASS);
-    List<Symbol> runInThreadPoolSymbols = empty.typeShedDescriptorsProvider()
-      .stubFilesSymbols(empty).stream().filter(s -> "fastapi.concurrency.run_in_threadpool".equals(s.fullyQualifiedName())).toList();
+    List<Symbol> runInThreadPoolSymbols = empty.stubFilesSymbols().stream().filter(s -> "fastapi.concurrency.run_in_threadpool".equals(s.fullyQualifiedName())).toList();
     assertThat(runInThreadPoolSymbols).hasSize(1);
     assertThat(runInThreadPoolSymbols.get(0).kind()).isEqualTo(Symbol.Kind.FUNCTION);
   }

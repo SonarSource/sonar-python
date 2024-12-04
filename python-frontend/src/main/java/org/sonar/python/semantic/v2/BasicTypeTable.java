@@ -21,28 +21,41 @@ import org.sonar.python.types.v2.PythonType;
 import org.sonar.python.types.v2.UnknownType;
 
 public class BasicTypeTable implements TypeTable {
+
+  private final ProjectLevelTypeTable projectLevelTypeTable;
+
+  public BasicTypeTable(ProjectLevelTypeTable fakeTypeTable) {
+    // used to trigger typeshed resolutions
+    this.projectLevelTypeTable = fakeTypeTable;
+  }
+
   @Override
   public PythonType getBuiltinsModule() {
+    this.projectLevelTypeTable.getBuiltinsModule();
     return new UnknownType.UnresolvedImportType("");
   }
 
   @Override
   public PythonType getType(String typeFqn) {
+    this.projectLevelTypeTable.getType(typeFqn);
     return new UnknownType.UnresolvedImportType(typeFqn);
   }
 
   @Override
   public PythonType getType(String... typeFqnParts) {
+    this.projectLevelTypeTable.getType(typeFqnParts);
     return new UnknownType.UnresolvedImportType(String.join(".", typeFqnParts));
   }
 
   @Override
   public PythonType getType(List<String> typeFqnParts) {
+    this.projectLevelTypeTable.getType(typeFqnParts);
     return new UnknownType.UnresolvedImportType(String.join(".", typeFqnParts));
   }
 
   @Override
   public PythonType getModuleType(List<String> typeFqnParts) {
+    this.projectLevelTypeTable.getModuleType(typeFqnParts);
     return new UnknownType.UnresolvedImportType(String.join(".", typeFqnParts));
   }
 }

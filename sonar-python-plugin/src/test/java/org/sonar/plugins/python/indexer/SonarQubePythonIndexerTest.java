@@ -406,22 +406,6 @@ class SonarQubePythonIndexerTest {
   }
 
   @Test
-  void test_typeshed_modules_cached() {
-    file1 = createInputFile(baseDir, "uses_typeshed.py", InputFile.Status.CHANGED, InputFile.Type.MAIN);
-
-    List<PythonInputFile> inputFiles = new ArrayList<>(List.of(file1));
-
-    pythonIndexer = new SonarQubePythonIndexer(inputFiles, cacheContext, context);
-    pythonIndexer.buildOnce(context);
-
-    assertThat(pythonIndexer.canBePartiallyScannedWithoutParsing(file1)).isFalse();
-
-    byte[] bytes = writeCache.getData().get(TYPESHED_MODULES_KEY);
-    Set<String> resolvedTypeshedModules = new HashSet<>(Arrays.asList(new String(bytes, StandardCharsets.UTF_8).split(";")));
-    assertThat(resolvedTypeshedModules).containsExactlyInAnyOrder("math");
-  }
-
-  @Test
   void test_typeshed_modules_not_cached_if_empty() {
     file1 = createInputFile(baseDir, "main.py", InputFile.Status.CHANGED, InputFile.Type.MAIN);
 

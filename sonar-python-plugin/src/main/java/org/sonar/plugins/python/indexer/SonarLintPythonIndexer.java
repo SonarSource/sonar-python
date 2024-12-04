@@ -79,6 +79,11 @@ public class SonarLintPythonIndexer extends PythonIndexer implements ModuleFileL
     globalSymbolsStep.execute(files, context);
   }
 
+  @Override
+  public void postAnalysis(SensorContext context) {
+    // no op
+  }
+
   // SonarLintCache has to be set lazily because SonarLintPythonIndex is injected in the PythonSensor
   @Override
   public void setSonarLintCache(@Nullable SonarLintCache sonarLintCache) {

@@ -37,6 +37,7 @@ import org.sonar.python.index.AmbiguousDescriptor;
 import org.sonar.python.index.Descriptor;
 import org.sonar.python.index.DescriptorUtils;
 import org.sonar.python.semantic.v2.BasicTypeTable;
+import org.sonar.python.semantic.v2.ProjectLevelTypeTable;
 import org.sonar.python.semantic.v2.SymbolTableBuilderV2;
 import org.sonar.python.semantic.v2.TypeInferenceV2;
 import org.sonar.python.semantic.v2.UsageV2;
@@ -59,6 +60,7 @@ public class ProjectLevelSymbolTable {
   private final Map<String, Set<String>> importsByModule = new HashMap<>();
   private final Set<String> projectBasePackages = new HashSet<>();
   private TypeShedDescriptorsProvider typeShedDescriptorsProvider = null;
+  private Set<Symbol> cachedSymbols = null;
 
   public static ProjectLevelSymbolTable empty() {
     return new ProjectLevelSymbolTable();
@@ -87,12 +89,9 @@ public class ProjectLevelSymbolTable {
   }
 
   public void addModule(FileInput fileInput, String packageName, PythonFile pythonFile) {
-    SymbolTableBuilder symbolTableBuilder = new SymbolTableBuilder(packageName, pythonFile);
-    fileInput.accept(symbolTableBuilder);
-
     String fullyQualifiedModuleName = SymbolUtils.fullyQualifiedModuleName(packageName, pythonFile.fileName());
     var symbolTable = new SymbolTableBuilderV2(fileInput).build();
-    var typeInferenceV2 = new TypeInferenceV2(new BasicTypeTable(), pythonFile, symbolTable, packageName);
+    var typeInferenceV2 = new TypeInferenceV2(new BasicTypeTable(new ProjectLevelTypeTable(this)), pythonFile, symbolTable, packageName);
     var typesBySymbol = typeInferenceV2.inferTypes(fileInput);
     importsByModule.put(fullyQualifiedModuleName, typeInferenceV2.importedModulesFQN());
     var moduleDescriptors = typesBySymbol.entrySet()
@@ -201,6 +200,26 @@ public class ProjectLevelSymbolTable {
     return typeShedDescriptorsProvider;
   }
 
+  /**
+   * Returns stub symbols to be used by SonarSecurity.
+   * Ambiguous symbols that only contain class symbols are disambiguated with latest Python version.
+   */
+  public Collection<Symbol> stubFilesSymbols() {
+    if (cachedSymbols != null) {
+      return cachedSymbols;
+    }
+    Map<String, Symbol> symbolsByFqn = new HashMap<>();
+    cachedSymbols = new HashSet<>();
+    for (Descriptor descriptor : typeShedDescriptorsProvider.stubFilesDescriptors()) {
+      if (descriptor.fullyQualifiedName() != null) {
+        Symbol symbol = symbolsByFqn.computeIfAbsent(descriptor.fullyQualifiedName(), k ->
+          DescriptorUtils.symbolFromDescriptor(descriptor, this, null, new HashMap<>(), new HashMap<>()));
+        cachedSymbols.add(symbol);
+      }
+    }
+    return cachedSymbols;
+  }
+
   private class DjangoViewsVisitor extends BaseTreeVisitor {
 
     String fullyQualifiedModuleName;
@@ -226,8 +245,8 @@ public class ProjectLevelSymbolTable {
       }
     }
 
-    private static boolean isCallRegisteringDjangoView(CallExpression callExpression) {
-      TypeChecker typeChecker = new TypeChecker(new BasicTypeTable());
+    private boolean isCallRegisteringDjangoView(CallExpression callExpression) {
+      TypeChecker typeChecker = new TypeChecker(new BasicTypeTable(new ProjectLevelTypeTable(ProjectLevelSymbolTable.this)));
       TriBool isConfPathCall = typeChecker.typeCheckBuilder().isTypeWithName("django.urls.conf.path").check(callExpression.callee().typeV2());
       TriBool isPathCall = typeChecker.typeCheckBuilder().isTypeWithName("django.urls.path").check(callExpression.callee().typeV2());
       return isConfPathCall.equals(TriBool.TRUE) || isPathCall.equals(TriBool.TRUE);
