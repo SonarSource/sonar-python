@@ -24,7 +24,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import javax.annotation.Nullable;
 import org.sonar.api.Beta;
 
@@ -97,46 +99,39 @@ public class UnionType implements PythonType {
     return displayName().orElse(super.toString());
   }
 
-  @Beta
-  public static PythonType or(Collection<PythonType> candidates) {
-    ensureCandidatesAreNotLazyTypes(candidates);
-    if (candidates.isEmpty()) {
-      return PythonType.UNKNOWN;
+  public static PythonType or(@Nullable PythonType type1, @Nullable PythonType type2, @Nullable PythonType ...types) {
+    if(types == null) {
+      types = new PythonType[0];
     }
-    return candidates
-      .stream()
-      .reduce(new UnionType(new HashSet<>()), UnionType::or);
+    Set<PythonType> typeSet = new HashSet<>();
+    typeSet.add(type1);
+    typeSet.add(type2);
+    typeSet.addAll(Set.of(types));
+    return or(typeSet);
   }
 
-  @Beta
-  public static PythonType or(@Nullable PythonType type1, @Nullable PythonType type2) {
-    if (type1 == null) {
-      return type2;
-    }
-    if (type2 == null) {
-      return type1;
-    }
-    if (type1 == PythonType.UNKNOWN || type2 == PythonType.UNKNOWN) {
+  public static PythonType or(Collection<PythonType> types) {
+    types = types.stream().filter(Objects::nonNull).collect(Collectors.toSet());
+    if(types.isEmpty()) {
       return PythonType.UNKNOWN;
     }
-    if (type1.equals(type2)) {
-      return type1;
-    }
-    Set<PythonType> types = new HashSet<>();
-    addTypes(type1, types);
-    addTypes(type2, types);
-    if (types.size() == 1) {
+    if(types.size() == 1) {
       return types.iterator().next();
     }
-    ensureCandidatesAreNotLazyTypes(types);
-    return new UnionType(types);
+
+    Set<PythonType> flatTypes = types.stream().flatMap(UnionType::flattenPythonType).collect(Collectors.toSet());
+    if(flatTypes.stream().anyMatch(type -> type == PythonType.UNKNOWN)) {
+      return PythonType.UNKNOWN;
+    }
+    ensureCandidatesAreNotLazyTypes(flatTypes);
+    return new UnionType(flatTypes);
   }
 
-  private static void addTypes(PythonType type, Set<PythonType> types) {
-    if (type instanceof UnionType unionType) {
-      types.addAll(unionType.candidates());
+  private static Stream<PythonType> flattenPythonType(PythonType type) {
+    if(type instanceof UnionType unionType) {
+      return unionType.candidates().stream();
     } else {
-      types.add(type);
+      return Stream.of(type);
     }
   }
 

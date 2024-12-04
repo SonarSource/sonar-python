@@ -17,6 +17,7 @@
 package org.sonar.python.types.v2;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import org.assertj.core.api.InstanceOfAssertFactories;
@@ -86,6 +87,9 @@ class UnionTypeTest {
     assertThat(type).isEqualTo(INT_TYPE);
     type = UnionType.or(null, INT_TYPE);
     assertThat(type).isEqualTo(INT_TYPE);
+
+    type = UnionType.or(null, INT_TYPE, (PythonType[]) null);
+    assertThat(type).isEqualTo(INT_TYPE);
   }
 
   @Test
@@ -114,6 +118,19 @@ class UnionTypeTest {
 
     assertThat(unionType).isInstanceOf(UnionType.class);
     assertThat(((UnionType) unionType).candidates()).containsExactlyInAnyOrder(unresolvedImportType, unresolvedImportType2);
+  }
+
+  @Test
+  void or_emptySet() {
+    assertThat(UnionType.or(Collections.emptyList())).isEqualTo(PythonType.UNKNOWN);
+  }
+
+  @Test
+  void or_singletonSet() {
+    assertThat(UnionType.or(Set.of(INT_TYPE))).isSameAs(INT_TYPE);
+
+    var union = UnionType.or(INT_TYPE, FLOAT_TYPE);
+    assertThat(UnionType.or(Set.of(union))).isSameAs(union);
   }
 
   @Test
