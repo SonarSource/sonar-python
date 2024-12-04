@@ -21,6 +21,7 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -28,7 +29,17 @@ import javax.annotation.Nullable;
 import org.sonar.api.Beta;
 
 @Beta
-public record UnionType(Set<PythonType> candidates) implements PythonType {
+public class UnionType implements PythonType {
+
+  private final Set<PythonType> candidates = new HashSet<>();
+
+  private UnionType(Set<PythonType> candidates) {
+    this.candidates.addAll(candidates);
+  }
+
+  public Set<PythonType> candidates() {
+    return candidates;
+  }
 
   @Override
   public Optional<String> displayName() {
@@ -67,6 +78,23 @@ public record UnionType(Set<PythonType> candidates) implements PythonType {
     return candidates.stream().map(PythonType::typeSource)
       .min(Comparator.comparing(TypeSource::score))
       .orElse(TypeSource.EXACT);
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (o == null || getClass() != o.getClass()) return false;
+    UnionType unionType = (UnionType) o;
+    return Objects.equals(candidates, unionType.candidates);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hashCode(candidates);
+  }
+
+  @Override
+  public String toString() {
+    return displayName().orElse(super.toString());
   }
 
   @Beta

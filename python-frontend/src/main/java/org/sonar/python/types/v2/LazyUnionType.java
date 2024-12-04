@@ -21,10 +21,10 @@ import java.util.Set;
 
 public class LazyUnionType implements PythonType, ResolvableType {
 
-  Set<PythonType> candidates;
+  private final Set<PythonType> candidates = new HashSet<>();
 
   public LazyUnionType(Set<PythonType> candidates) {
-    this.candidates = candidates;
+    this.candidates.addAll(candidates);
   }
 
   public PythonType resolve() {
@@ -35,6 +35,6 @@ public class LazyUnionType implements PythonType, ResolvableType {
       }
       resolvedCandidates.add(candidate);
     }
-    return new UnionType(resolvedCandidates);
+    return UnionType.or(resolvedCandidates);
   }
 }

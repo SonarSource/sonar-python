@@ -187,7 +187,7 @@ class PythonTypeToDescriptorConverterTest {
   void testConvertUnionType() {
     ClassType classType = new ClassType("classType", "my_package.classType", Set.of(new Member("aMember", intTypeWrapper.type())), List.of(), List.of(floatTypeWrapper), List.of(intTypeWrapper.type()), true, false, location);
     ClassType anotherClassType = new ClassType("classType", "my_package.classType", Set.of(new Member("aMember", intTypeWrapper.type())), List.of(), List.of(floatTypeWrapper), List.of(intTypeWrapper.type()), true, false, location);
-    UnionType unionType = new UnionType(Set.of(classType, anotherClassType));
+    PythonType unionType = UnionType.or(classType, anotherClassType);
     Descriptor descriptor = converter.convert("foo", new SymbolV2("myUnionType"), Set.of(unionType));
 
     assertThat(descriptor).isInstanceOf(AmbiguousDescriptor.class);
@@ -221,7 +221,7 @@ class PythonTypeToDescriptorConverterTest {
     ClassType classType = new ClassType("classType", "my_package.classType", Set.of(new Member("aMember", intTypeWrapper.type())), List.of(), List.of(floatTypeWrapper), List.of(intTypeWrapper.type()), true, false, location);
     ClassType anotherClassType = new ClassType("classType", "my_package.classType", Set.of(new Member("aMember", intTypeWrapper.type())), List.of(), List.of(floatTypeWrapper), List.of(intTypeWrapper.type()), true, false, location);
 
-    UnionType unionType = new UnionType(Set.of(classType, anotherClassType));
+    PythonType unionType = UnionType.or(classType, anotherClassType);
     Descriptor descriptor = converter.convert("foo", new SymbolV2("myUnionType"), Set.of(unionType, classType));
 
     assertThat(descriptor).isInstanceOf(AmbiguousDescriptor.class);

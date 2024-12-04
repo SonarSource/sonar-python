@@ -31,6 +31,7 @@ import org.sonar.python.types.v2.UnknownType.UnresolvedImportType;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.sonar.python.types.v2.TypesTestUtils.BOOL_TYPE;
+import static org.sonar.python.types.v2.TypesTestUtils.FLOAT_TYPE;
 import static org.sonar.python.types.v2.TypesTestUtils.INT_TYPE;
 import static org.sonar.python.types.v2.TypesTestUtils.STR_TYPE;
 import static org.sonar.python.types.v2.TypesTestUtils.parseAndInferTypes;
@@ -44,7 +45,7 @@ class UnionTypeTest {
     PythonType intType = ((ExpressionStatement) fileInput.statements().statements().get(0)).expressions().get(0).typeV2();
     PythonType strType = ((ExpressionStatement) fileInput.statements().statements().get(1)).expressions().get(0).typeV2();
 
-    UnionType unionType = new UnionType(Set.of(intType, strType));
+    PythonType unionType = UnionType.or(intType, strType);
 
     assertThat(unionType.isCompatibleWith(intType)).isTrue();
     assertThat(unionType.isCompatibleWith(strType)).isTrue();
@@ -60,7 +61,7 @@ class UnionTypeTest {
     FileInput fileInput = parseAndInferTypes("42;foo()");
     PythonType intType = ((ExpressionStatement) fileInput.statements().statements().get(0)).expressions().get(0).typeV2();
     PythonType strType = ((ExpressionStatement) fileInput.statements().statements().get(1)).expressions().get(0).typeV2();
-    UnionType unionType = new UnionType(Set.of(intType, strType));
+    PythonType unionType = UnionType.or(intType, strType);
 
     assertThat(unionType.displayName()).isEmpty();
     assertThat(unionType.instanceDisplayName()).isEmpty();
@@ -166,5 +167,14 @@ class UnionTypeTest {
     assertThatThrownBy(() -> UnionType.or(INT_TYPE, lazyType))
       .isInstanceOf(IllegalArgumentException.class)
       .hasMessage("UnionType cannot contain Lazy types");
+  }
+
+  @Test
+  void testEquality() {
+    var union1 = UnionType.or(INT_TYPE, FLOAT_TYPE);
+    var union2 = UnionType.or(INT_TYPE, FLOAT_TYPE);
+    assertThat(union1)
+      .isEqualTo(union2)
+      .hasSameHashCodeAs(union2);
   }
 }
