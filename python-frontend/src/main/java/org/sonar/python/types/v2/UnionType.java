@@ -140,4 +140,9 @@ public class UnionType implements PythonType {
       throw new IllegalArgumentException("UnionType cannot contain Lazy types");
     }
   }
+
+  public static Collector<PythonType, ?, PythonType> toUnionType() {
+    return Collectors.collectingAndThen(Collectors.toSet(), UnionType::or);
+  }
+
 }

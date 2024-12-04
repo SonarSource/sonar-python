@@ -18,7 +18,6 @@ package org.sonar.python.semantic.v2.types;
 
 import java.util.Optional;
 import java.util.Set;
-import java.util.stream.Stream;
 import org.sonar.plugins.python.api.tree.Expression;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.Name;
@@ -44,7 +43,7 @@ public class ProgramStateTypeInferenceVisitor extends TrivialTypePropagationVisi
     Optional.ofNullable(name.symbolV2()).ifPresent(symbol -> {
       Set<PythonType> pythonTypes = state.getTypes(symbol);
       if (!pythonTypes.isEmpty()) {
-        ((NameImpl) name).typeV2(union(pythonTypes.stream()));
+        ((NameImpl) name).typeV2(union(pythonTypes));
       }
     });
     super.visitName(name);
@@ -66,7 +65,7 @@ public class ProgramStateTypeInferenceVisitor extends TrivialTypePropagationVisi
     }
   }
 
-  private static PythonType union(Stream<PythonType> types) {
-    return types.reduce(UnionType::or).orElse(PythonType.UNKNOWN);
+  private static PythonType union(Set<PythonType> types) {
+    return types.stream().collect(UnionType.toUnionType());
   }
 }

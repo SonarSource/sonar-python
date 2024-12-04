@@ -40,7 +40,7 @@ public class TypeUtils {
 
   public static PythonType map(PythonType type, UnaryOperator<PythonType> mapper) {
     if (type instanceof UnionType unionType) {
-      return unionType.candidates().stream().map(mapper).reduce(UnionType::or).orElse(PythonType.UNKNOWN);
+      return unionType.candidates().stream().map(mapper).collect(UnionType.toUnionType());
     } else {
       return mapper.apply(type);
     }
