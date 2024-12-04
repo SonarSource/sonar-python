@@ -24,7 +24,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.sonar.plugins.python.api.IssueLocation;
 import org.sonar.plugins.python.api.PythonCheck;
 import org.sonar.plugins.python.api.PythonCheck.PreciseIssue;
@@ -41,7 +40,6 @@ import org.sonar.plugins.python.api.tree.Name;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.caching.CacheContextImpl;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
-import org.sonar.python.types.TypeShed;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
@@ -158,16 +156,16 @@ class PythonVisitorCheckTest {
 
   @Test
   void stubFilesSymbols() {
-    PythonVisitorContext context = TestPythonVisitorRunner.createContext(FILE);
-
+    ProjectLevelSymbolTable projectLevelSymbolTable = ProjectLevelSymbolTable.empty();
+    PythonVisitorContext context = TestPythonVisitorRunner.createContext(FILE, null, "my_package", projectLevelSymbolTable, CacheContextImpl.dummyCache());
     SymbolsRecordingCheck check = new SymbolsRecordingCheck();
+
     check.scanFile(context);
     SubscriptionVisitor.analyze(Collections.singletonList(check), context);
 
-    assertThat(check.symbols).isEqualTo(TypeShed.stubFilesSymbols());
-
-    PythonInputFileContext inputFileContext = new PythonInputFileContext(mock(PythonFile.class), null, CacheContextImpl.dummyCache());
-    assertThat(inputFileContext.stubFilesSymbols()).isEqualTo(TypeShed.stubFilesSymbols());
+    PythonInputFileContext inputFileContext = new PythonInputFileContext(mock(PythonFile.class), null, CacheContextImpl.dummyCache(), projectLevelSymbolTable);
+    assertThat(check.symbols).isEqualTo(inputFileContext.stubFilesSymbols());
+    assertThat(inputFileContext.stubFilesSymbols()).isEqualTo(projectLevelSymbolTable.stubFilesSymbols());
   }
 
   private static class TestPythonCheck extends PythonVisitorCheck {

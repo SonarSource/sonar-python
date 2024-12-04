@@ -166,7 +166,7 @@ public class SubscriptionVisitor {
 
     @Override
     public Collection<Symbol> stubFilesSymbols() {
-      return TypeShed.stubFilesSymbols();
+      return pythonVisitorContext.stubFilesSymbols();
     }
 
     @Override

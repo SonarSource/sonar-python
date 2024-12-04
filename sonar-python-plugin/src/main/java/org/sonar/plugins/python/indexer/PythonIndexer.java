@@ -95,6 +95,8 @@ public abstract class PythonIndexer {
 
   public abstract void buildOnce(SensorContext context);
 
+  public abstract void postAnalysis(SensorContext context);
+
   public void setSonarLintCache(@Nullable SonarLintCache sonarLintCache) {
     // no op by default
   }

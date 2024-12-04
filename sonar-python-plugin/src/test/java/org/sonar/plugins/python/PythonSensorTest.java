@@ -27,6 +27,7 @@ import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -116,6 +117,7 @@ import static org.sonar.plugins.python.caching.Caching.CPD_TOKENS_CACHE_KEY_PREF
 import static org.sonar.plugins.python.caching.Caching.CPD_TOKENS_STRING_TABLE_KEY_PREFIX;
 import static org.sonar.plugins.python.caching.Caching.IMPORTS_MAP_CACHE_KEY_PREFIX;
 import static org.sonar.plugins.python.caching.Caching.PROJECT_SYMBOL_TABLE_CACHE_KEY_PREFIX;
+import static org.sonar.plugins.python.caching.Caching.TYPESHED_MODULES_KEY;
 import static org.sonar.plugins.python.caching.Caching.fileContentHashCacheKey;
 import static org.sonar.plugins.python.caching.Caching.importsMapCacheKey;
 import static org.sonar.plugins.python.caching.Caching.projectSymbolTableCacheKey;
@@ -125,6 +127,7 @@ class PythonSensorTest {
 
   private static final String FILE_1 = "file1.py";
   private static final String FILE_2 = "file2.py";
+  private static final String FILE_USING_TYPESHED = "uses_typeshed.py";
   private static final String FILE_QUICKFIX = "file_quickfix.py";
   private static final String FILE_TEST_FILE = "test_file.py";
   private static final String FILE_INVALID_SYNTAX = "invalid_syntax.py";
@@ -857,6 +860,116 @@ class PythonSensorTest {
     assertThat(context.allIssues()).isEmpty();
     assertThat(logTester.logs(Level.INFO))
       .contains("The Python analyzer was able to leverage cached data from previous analyses for 1 out of 1 files. These files were not parsed.");
+  }
+
+  @Test
+  void test_typeshed_stubs_information_is_saved_to_cache() {
+    activeRules = new ActiveRulesBuilder()
+      .addRule(new NewActiveRule.Builder()
+        .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, ONE_STATEMENT_PER_LINE_RULE_KEY))
+        .build())
+      .build();
+
+    PythonInputFile inputFile = inputFile(FILE_USING_TYPESHED, Type.MAIN, InputFile.Status.CHANGED);
+    TestReadCache readCache = getValidReadCache();
+    TestWriteCache writeCache = new TestWriteCache();
+    writeCache.bind(readCache);
+
+    context.setPreviousCache(readCache);
+    context.setNextCache(writeCache);
+    context.setCacheEnabled(true);
+    context.setSettings(new MapSettings().setProperty("sonar.python.skipUnchanged", true));
+    sensor().execute(context);
+
+    assertThat(context.allIssues()).hasSize(1);
+    Issue issue = context.allIssues().iterator().next();
+    assertThat(issue.primaryLocation().inputComponent()).isEqualTo(inputFile.wrappedFile());
+    assertThat(issue.ruleKey().rule()).isEqualTo(ONE_STATEMENT_PER_LINE_RULE_KEY);
+
+    byte[] bytes = writeCache.getData().get(TYPESHED_MODULES_KEY);
+    Set<String> resolvedTypeshedModules = new HashSet<>(Arrays.asList(new String(bytes, StandardCharsets.UTF_8).split(";")));
+    // typing comes from TypeCheckBuilder querying the ProjectLevelType table (by looking for TypeVar) in its checks, which then queries & cache info in TypeShedDescriptorsProvider
+    assertThat(resolvedTypeshedModules).containsExactlyInAnyOrder(
+      "typing", "math",
+      "django", "django.urls.conf", "django.urls",
+      "fastapi", "fastapi.responses"
+    );
+  }
+
+  @Test
+  void typeshed_symbols_are_read_from_cache() {
+    activeRules = new ActiveRulesBuilder()
+      .addRule(new NewActiveRule.Builder()
+        .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, ONE_STATEMENT_PER_LINE_RULE_KEY))
+        .build())
+      .addRule(new NewActiveRule.Builder()
+        .setRuleKey(RuleKey.of(CUSTOM_REPOSITORY_KEY, CUSTOM_RULE_KEY))
+        .build())
+      .build();
+
+    PythonInputFile inputFile = inputFile(FILE_2, Type.MAIN, InputFile.Status.CHANGED);
+    TestReadCache readCache = getValidReadCache();
+    TestWriteCache writeCache = new TestWriteCache();
+    writeCache.bind(readCache);
+
+    context.setPreviousCache(readCache);
+    List<String> typeshedModules = List.of("typing", "math",
+      "django", "django.urls.conf", "django.urls",
+      "fastapi", "fastapi.responses");
+    readCache.put(TYPESHED_MODULES_KEY, String.join(";", typeshedModules).getBytes(StandardCharsets.UTF_8));
+    context.setNextCache(writeCache);
+    context.setCacheEnabled(true);
+    context.setSettings(new MapSettings().setProperty("sonar.python.skipUnchanged", true));
+    sensor().execute(context);
+
+    assertThat(context.allIssues()).hasSize(1);
+    Issue issue = context.allIssues().iterator().next();
+    assertThat(issue.primaryLocation().inputComponent()).isEqualTo(inputFile.wrappedFile());
+    assertThat(issue.ruleKey().rule()).isEqualTo(ONE_STATEMENT_PER_LINE_RULE_KEY);
+
+    byte[] bytes = writeCache.getData().get(TYPESHED_MODULES_KEY);
+    Set<String> resolvedTypeshedModules = new HashSet<>(Arrays.asList(new String(bytes, StandardCharsets.UTF_8).split(";")));
+    assertThat(resolvedTypeshedModules).containsExactlyInAnyOrder(
+      "typing", "math",
+      "django", "django.urls.conf", "django.urls",
+      "fastapi", "fastapi.responses"
+    );
+  }
+
+  @Test
+  void test_typeshed_stub_cache_information_is_propagated() throws IOException {
+    activeRules = new ActiveRulesBuilder()
+      .addRule(new NewActiveRule.Builder()
+        .setRuleKey(RuleKey.of(CheckList.REPOSITORY_KEY, ONE_STATEMENT_PER_LINE_RULE_KEY))
+        .build())
+      .build();
+
+    PythonInputFile inputFile = inputFile(FILE_USING_TYPESHED, Type.MAIN, InputFile.Status.SAME);
+    TestReadCache readCache = getValidReadCache();
+    TestWriteCache writeCache = new TestWriteCache();
+    writeCache.bind(readCache);
+
+    byte[] serializedSymbolTable = toProtobufModuleDescriptor(Set.of(new VariableDescriptor("x", "main.x", null))).toByteArray();
+    CpdSerializer.SerializationResult cpdTokens = CpdSerializer.serialize(Collections.emptyList());
+    readCache.put(importsMapCacheKey(inputFile.wrappedFile().key()), String.join(";", Collections.emptyList()).getBytes(StandardCharsets.UTF_8));
+    readCache.put(TYPESHED_MODULES_KEY, String.join(";", List.of("math")).getBytes(StandardCharsets.UTF_8));
+    readCache.put(projectSymbolTableCacheKey(inputFile.wrappedFile().key()), serializedSymbolTable);
+    readCache.put(CPD_TOKENS_CACHE_KEY_PREFIX + inputFile.wrappedFile().key(), cpdTokens.data);
+    readCache.put(CPD_TOKENS_STRING_TABLE_KEY_PREFIX + inputFile.wrappedFile().key(), cpdTokens.stringTable);
+    readCache.put(fileContentHashCacheKey(inputFile.wrappedFile().key()), inputFile.wrappedFile().md5Hash().getBytes(UTF_8));
+
+    context.setPreviousCache(readCache);
+    context.setNextCache(writeCache);
+    context.setCacheEnabled(true);
+    context.setSettings(new MapSettings().setProperty("sonar.python.skipUnchanged", true));
+    sensor().execute(context);
+
+    assertThat(context.allIssues()).isEmpty();
+    assertThat(logTester.logs(Level.INFO))
+      .contains("The Python analyzer was able to leverage cached data from previous analyses for 1 out of 1 files. These files were not parsed.");
+    byte[] bytes = writeCache.getData().get(TYPESHED_MODULES_KEY);
+    Set<String> resolvedTypeshedModules = new HashSet<>(Arrays.asList(new String(bytes, StandardCharsets.UTF_8).split(";")));
+    assertThat(resolvedTypeshedModules).containsExactlyInAnyOrder("math");
   }
 
   @Test

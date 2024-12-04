@@ -18,11 +18,14 @@ package org.sonar.python.semantic.v2.typeshed;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.TreeMap;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 import javax.annotation.CheckForNull;
@@ -91,6 +94,10 @@ public class TypeShedDescriptorsProvider {
     return cachedDescriptors.computeIfAbsent(moduleName, this::searchTypeShedForModule);
   }
 
+  public Set<String> stubModules() {
+    return cachedDescriptors.keySet();
+  }
+
   //================================================================================
   // Private methods
   //================================================================================
@@ -128,4 +135,9 @@ public class TypeShedDescriptorsProvider {
     }
   }
 
+  public List<Descriptor> stubFilesDescriptors() {
+    List<Descriptor> descriptors = new ArrayList<>(new TreeMap<>(builtinDescriptors()).values());
+    new TreeMap<>(cachedDescriptors).values().forEach(entry -> descriptors.addAll(new TreeMap<>(entry).values()));
+    return descriptors;
+  }
 }

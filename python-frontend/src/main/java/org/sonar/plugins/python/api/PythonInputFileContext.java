@@ -24,6 +24,7 @@ import org.sonar.api.Beta;
 import org.sonar.api.SonarProduct;
 import org.sonar.plugins.python.api.caching.CacheContext;
 import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.python.semantic.ProjectLevelSymbolTable;
 import org.sonar.python.types.TypeShed;
 
 public class PythonInputFileContext {
@@ -33,19 +34,23 @@ public class PythonInputFileContext {
   private final CacheContext cacheContext;
 
   private final SonarProduct sonarProduct;
+  private final ProjectLevelSymbolTable projectLevelSymbolTable;
 
-  public PythonInputFileContext(PythonFile pythonFile, @Nullable File workingDirectory, CacheContext cacheContext, SonarProduct sonarProduct) {
+  public PythonInputFileContext(PythonFile pythonFile, @Nullable File workingDirectory, CacheContext cacheContext,
+    SonarProduct sonarProduct, ProjectLevelSymbolTable projectLevelSymbolTable) {
     this.pythonFile = pythonFile;
     this.workingDirectory = workingDirectory;
     this.cacheContext = cacheContext;
     this.sonarProduct = sonarProduct;
+    this.projectLevelSymbolTable = projectLevelSymbolTable;
   }
 
-  public PythonInputFileContext(PythonFile pythonFile, @Nullable File workingDirectory, CacheContext cacheContext) {
+  public PythonInputFileContext(PythonFile pythonFile, @Nullable File workingDirectory, CacheContext cacheContext, ProjectLevelSymbolTable projectLevelSymbolTable) {
     this.pythonFile = pythonFile;
     this.workingDirectory = workingDirectory;
     this.cacheContext = cacheContext;
     this.sonarProduct = SonarProduct.SONARQUBE;
+    this.projectLevelSymbolTable = projectLevelSymbolTable;
   }
 
   public PythonFile pythonFile() {
@@ -59,7 +64,7 @@ public class PythonInputFileContext {
 
   @Beta
   public Collection<Symbol> stubFilesSymbols() {
-    return TypeShed.stubFilesSymbols();
+    return projectLevelSymbolTable.stubFilesSymbols();
   }
 
   @CheckForNull
