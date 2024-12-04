@@ -407,3 +407,6 @@ def function_type_is_callable():
 def object_typevar():
     scheduled = []
     scheduled.pop()()  # OK
+
+def uncallable_lambda_are_non_compliant():
+    uncallable_lambda = lambda:(print("something"))() # Noncompliant
