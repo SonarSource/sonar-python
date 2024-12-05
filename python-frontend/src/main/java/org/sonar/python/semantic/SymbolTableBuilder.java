@@ -302,7 +302,6 @@ public class SymbolTableBuilder extends BaseTreeVisitor {
     /**
      * The scope of the decorator should be the parent scope of the function or class to which the decorator is assigned.
      * So we have to leave the function or class scope, visit the decorator and enter the previous scope.
-     * See <a href="https://sonarsource.atlassian.net/browse/SONARPY-990">SONARPY-990</a>
      */
     @Override
     public void visitDecorator(Decorator tree) {

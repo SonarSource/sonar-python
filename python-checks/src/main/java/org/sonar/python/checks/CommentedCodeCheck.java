@@ -135,7 +135,7 @@ public class CommentedCodeCheck extends PythonSubscriptionCheck {
     return IS_EMPTY_PATTERN.matcher(text).matches();
   }
 
-  // "source code encoding" comments (e.g. # coding=utf8) should be excluded (SONARPY-465)
+  // "source code encoding" comments (e.g. # coding=utf8) should be excluded
   // Note that encoding must be on line 1 or 2
   private static boolean isEncoding(Trivia trivia, String text) {
     return trivia.token().line() < 3 && ENCODING_PATTERN.matcher(text).matches();

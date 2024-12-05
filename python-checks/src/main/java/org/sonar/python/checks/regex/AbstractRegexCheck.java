@@ -212,7 +212,7 @@ public abstract class AbstractRegexCheck extends PythonSubscriptionCheck {
     if (reportedRegexTrees.add(regexTree)) {
       PreciseIssue issue = regexContext.addIssue(regexTree, message);
       secondaries.stream().map(PythonRegexIssueLocation::preciseLocation).forEach(issue::secondary);
-      // TODO: Add cost to the issue SONARPY-893
+      // TODO: Add cost to the issue
       return issue;
     }
     return null;

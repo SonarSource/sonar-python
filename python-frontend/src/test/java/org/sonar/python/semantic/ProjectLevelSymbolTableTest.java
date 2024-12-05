@@ -633,7 +633,6 @@ class ProjectLevelSymbolTableTest {
   }
 
   @Test
-  @Disabled("SONARPY-2250")
   void class_symbol_inheritance_from_nested_class() {
     // for the time being, we only consider symbols defined in the global scope
     var fileInput = parseWithoutSymbols(
@@ -875,7 +874,6 @@ class ProjectLevelSymbolTableTest {
   }
 
   @Test
-  @Disabled("SONARPY-2249")
   void no_stackoverflow_for_ambiguous_descriptor() {
     TypeShed.resetBuiltinSymbols();
     String[] foo = {

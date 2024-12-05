@@ -56,9 +56,7 @@ import org.sonar.python.tree.TreeUtils;
 
 import static java.util.Optional.ofNullable;
 
-// https://jira.sonarsource.com/browse/SONARPY-357
 // https://jira.sonarsource.com/browse/RSPEC-4830
-// https://jira.sonarsource.com/browse/MMF-1872
 @Rule(key = "S4830")
 public class VerifiedSslTlsCertificateCheck extends PythonSubscriptionCheck {
 

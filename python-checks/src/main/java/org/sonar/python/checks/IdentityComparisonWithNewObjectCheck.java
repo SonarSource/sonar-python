@@ -41,7 +41,6 @@ import static java.util.Arrays.asList;
 import static org.sonar.plugins.python.api.types.BuiltinTypes.NONE_TYPE;
 
 // https://jira.sonarsource.com/browse/RSPEC-5796
-// https://jira.sonarsource.com/browse/SONARPY-674
 @Rule(key = "S5796")
 public class IdentityComparisonWithNewObjectCheck extends PythonSubscriptionCheck {
   private static final String MESSAGE_IS = "Replace this \"is\" operator with \"==\".";

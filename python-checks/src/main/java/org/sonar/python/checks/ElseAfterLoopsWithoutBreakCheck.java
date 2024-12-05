@@ -25,7 +25,6 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.WhileStatement;
 
 // https://jira.sonarsource.com/browse/RSPEC-2836
-// https://jira.sonarsource.com/browse/SONARPY-650
 @Rule(key = "S2836")
 public class ElseAfterLoopsWithoutBreakCheck extends PythonSubscriptionCheck {
   private static final String MESSAGE = "Add a \"break\" statement or remove this \"else\" clause.";
