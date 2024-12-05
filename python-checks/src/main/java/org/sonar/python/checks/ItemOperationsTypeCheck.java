@@ -62,7 +62,7 @@ public class ItemOperationsTypeCheck extends ItemOperationsType {
         return true;
       }
       if (symbol.is(FUNCTION, CLASS)) {
-        return isInvalidSubscriptionSymbol(symbol, subscriptionObject, secondaries, requiredMethod, classRequiredMethod);
+        return isValidSubscriptionSymbol(symbol, subscriptionObject, secondaries, requiredMethod, classRequiredMethod);
       }
     }
 
@@ -73,7 +73,7 @@ public class ItemOperationsTypeCheck extends ItemOperationsType {
     return type.canHaveMember(requiredMethod);
   }
 
-  private static boolean isInvalidSubscriptionSymbol(Symbol symbol, Expression subscriptionObject, Map<LocationInFile, String> secondaries, String requiredMethod,
+  private static boolean isValidSubscriptionSymbol(Symbol symbol, Expression subscriptionObject, Map<LocationInFile, String> secondaries, String requiredMethod,
     @Nullable String classRequiredMethod) {
     LocationInFile locationInFile = symbol.is(FUNCTION) ? ((FunctionSymbol) symbol).definitionLocation() : ((ClassSymbol) symbol).definitionLocation();
     secondaries.put(locationInFile, SECONDARY_MESSAGE.formatted(symbol.name()));
