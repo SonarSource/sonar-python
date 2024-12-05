@@ -25,7 +25,7 @@ import org.sonar.plugins.python.api.tree.QualifiedExpression;
 import org.sonar.python.semantic.v2.TypeTable;
 import org.sonar.python.tree.NameImpl;
 import org.sonar.python.types.v2.PythonType;
-import org.sonar.python.types.v2.UnionType;
+import org.sonar.python.types.v2.TypeUtils;
 
 /**
  * Used in FlowSensitiveTypeInference to update name types based on program state
@@ -66,6 +66,6 @@ public class ProgramStateTypeInferenceVisitor extends TrivialTypePropagationVisi
   }
 
   private static PythonType union(Set<PythonType> types) {
-    return types.stream().collect(UnionType.toUnionType());
+    return types.stream().collect(TypeUtils.toUnionType());
   }
 }
