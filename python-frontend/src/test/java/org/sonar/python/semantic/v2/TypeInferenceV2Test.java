@@ -3073,30 +3073,36 @@ public class TypeInferenceV2Test {
     return Stream.of(
       Arguments.of("""
         1 + 2
-        """, INT_TYPE),
+        """, new ObjectType(INT_TYPE)),
       Arguments.of("""
         1 - 2
-        """, INT_TYPE),
+        """, new ObjectType(INT_TYPE)),
       Arguments.of("""
         1 * 2
-        """, INT_TYPE),
+        """, new ObjectType(INT_TYPE)),
       Arguments.of("""
         1 / 2
-        """, INT_TYPE),
+        """, new ObjectType(INT_TYPE)),
       Arguments.of("""
         '1' + '2'
-        """, STR_TYPE),
+        """, new ObjectType(STR_TYPE)),
+      Arguments.of("""
+        1 + '2'
+        """, PythonType.UNKNOWN),
+      Arguments.of("""
+        1 + 2.0
+        """, PythonType.UNKNOWN),
       Arguments.of("""
         a = 1
         b = 2
         a + b
-        """, INT_TYPE),
+        """, new ObjectType(INT_TYPE)),
       Arguments.of("""
         a = 1
         b = 2
         c = a - b
         c
-        """, INT_TYPE),
+        """, new ObjectType(INT_TYPE)),
       Arguments.of("""
         try:
           ...
@@ -3106,14 +3112,14 @@ public class TypeInferenceV2Test {
         b = 2
         c = a - b
         c
-        """, INT_TYPE)
+        """, new ObjectType(INT_TYPE))
     );
   }
 
   @ParameterizedTest
   @MethodSource("binaryExpressionsSource")
   void binaryExpressionTest(String code, PythonType expectedType) {
-    assertThat(lastExpression(code).typeV2()).isInstanceOf(ObjectType.class).extracting(PythonType::unwrappedType).isEqualTo(expectedType);
+    assertThat(lastExpression(code).typeV2()).isEqualTo(expectedType);
   }
 
   @Test

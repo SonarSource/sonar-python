@@ -43,6 +43,11 @@ public class TypeDependenciesCalculator {
     if (expression instanceof BinaryExpression binaryExpression) {
       return calculateBinaryExpressionTypeDependencies(binaryExpression);
     } else if (expression instanceof HasTypeDependencies hasTypeDependencies) {
+      // SONARPY-2417 Once we get rid of v1 type inference -
+      // we won’t need a HasTypeDependencies interface implemented by a tree model classes.
+      // The implementation of the logic is still needed for v2 type inference
+      // but to keep tree model decoupled from the type inference and type model -
+      // the logic should be moved here as it is done for BinaryExpression
       return hasTypeDependencies.typeDependencies();
     }
     return List.of();
