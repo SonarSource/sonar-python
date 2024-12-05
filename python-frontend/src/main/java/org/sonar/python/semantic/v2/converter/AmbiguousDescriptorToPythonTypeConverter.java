@@ -26,7 +26,7 @@ public class AmbiguousDescriptorToPythonTypeConverter implements DescriptorToPyt
 
   public PythonType convert(ConversionContext ctx, AmbiguousDescriptor from) {
     var candidates = from.alternatives().stream().map(ctx::convert).collect(Collectors.toSet());
-    return new UnionType(candidates);
+    return UnionType.or(candidates);
   }
 
   @Override

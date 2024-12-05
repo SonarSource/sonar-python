@@ -17,6 +17,8 @@
 package org.sonar.python.types.v2;
 
 import java.util.function.UnaryOperator;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 public class TypeUtils {
 
@@ -40,9 +42,13 @@ public class TypeUtils {
 
   public static PythonType map(PythonType type, UnaryOperator<PythonType> mapper) {
     if (type instanceof UnionType unionType) {
-      return unionType.candidates().stream().map(mapper).reduce(UnionType::or).orElse(PythonType.UNKNOWN);
+      return unionType.candidates().stream().map(mapper).collect(toUnionType());
     } else {
       return mapper.apply(type);
     }
+  }
+
+  public static Collector<PythonType, ?, PythonType> toUnionType() {
+    return Collectors.collectingAndThen(Collectors.toSet(), UnionType::or);
   }
 }

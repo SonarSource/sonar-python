@@ -2789,7 +2789,9 @@ public class TypeInferenceV2Test {
     CallExpression callExpressionSpy = Mockito.spy(callExpression);
 
     // Inconsistent union type, should not happen
-    UnionType unionType = new UnionType(Set.of(PythonType.UNKNOWN));
+    UnionType unionType = Mockito.mock(UnionType.class);
+    Mockito.when(unionType.candidates()).thenReturn(Set.of(PythonType.UNKNOWN));
+
     Name mock = Mockito.mock(Name.class);
     Mockito.when(mock.typeV2()).thenReturn(unionType);
     Mockito.doReturn(mock).when(callExpressionSpy).callee();
@@ -2808,7 +2810,9 @@ public class TypeInferenceV2Test {
     CallExpression callExpressionSpy = Mockito.spy(callExpression);
 
     // Inconsistent union type, should not happen
-    UnionType unionType = new UnionType(Set.of());
+    UnionType unionType = Mockito.mock(UnionType.class);
+    Mockito.when(unionType.candidates()).thenReturn(Set.of());
+
     Name mock = Mockito.mock(Name.class);
     Mockito.when(mock.typeV2()).thenReturn(unionType);
     Mockito.doReturn(mock).when(callExpressionSpy).callee();
@@ -2827,7 +2831,9 @@ public class TypeInferenceV2Test {
     CallExpression callExpressionSpy = Mockito.spy(callExpression);
 
     // Inconsistent union type, should not happen
-    UnionType unionType = new UnionType(Set.of(INT_TYPE));
+    UnionType unionType = Mockito.mock(UnionType.class);
+    Mockito.when(unionType.candidates()).thenReturn(Set.of(INT_TYPE));
+
     Name mock = Mockito.mock(Name.class);
     Mockito.when(mock.typeV2()).thenReturn(unionType);
     Mockito.doReturn(mock).when(callExpressionSpy).callee();

@@ -21,14 +21,26 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import javax.annotation.Nullable;
 import org.sonar.api.Beta;
 
 @Beta
-public record UnionType(Set<PythonType> candidates) implements PythonType {
+public class UnionType implements PythonType {
+
+  private final Set<PythonType> candidates = new HashSet<>();
+
+  private UnionType(Set<PythonType> candidates) {
+    this.candidates.addAll(candidates);
+  }
+
+  public Set<PythonType> candidates() {
+    return candidates;
+  }
 
   @Override
   public Optional<String> displayName() {
@@ -69,46 +81,56 @@ public record UnionType(Set<PythonType> candidates) implements PythonType {
       .orElse(TypeSource.EXACT);
   }
 
-  @Beta
-  public static PythonType or(Collection<PythonType> candidates) {
-    ensureCandidatesAreNotLazyTypes(candidates);
-    if (candidates.isEmpty()) {
-      return PythonType.UNKNOWN;
-    }
-    return candidates
-      .stream()
-      .reduce(new UnionType(new HashSet<>()), UnionType::or);
+  @Override
+  public boolean equals(Object o) {
+    if (o == null || getClass() != o.getClass()) return false;
+    UnionType unionType = (UnionType) o;
+    return Objects.equals(candidates, unionType.candidates);
   }
 
-  @Beta
-  public static PythonType or(@Nullable PythonType type1, @Nullable PythonType type2) {
-    if (type1 == null) {
-      return type2;
+  @Override
+  public int hashCode() {
+    return Objects.hashCode(candidates);
+  }
+
+  @Override
+  public String toString() {
+    return displayName().orElse(super.toString());
+  }
+
+  public static PythonType or(@Nullable PythonType type1, @Nullable PythonType type2, @Nullable PythonType ...types) {
+    if(types == null) {
+      types = new PythonType[0];
     }
-    if (type2 == null) {
-      return type1;
-    }
-    if (type1 == PythonType.UNKNOWN || type2 == PythonType.UNKNOWN) {
+    Set<PythonType> typeSet = new HashSet<>();
+    typeSet.add(type1);
+    typeSet.add(type2);
+    typeSet.addAll(Set.of(types));
+    return or(typeSet);
+  }
+
+  public static PythonType or(Collection<PythonType> types) {
+    types = types.stream().filter(Objects::nonNull).collect(Collectors.toSet());
+    if(types.isEmpty()) {
       return PythonType.UNKNOWN;
     }
-    if (type1.equals(type2)) {
-      return type1;
-    }
-    Set<PythonType> types = new HashSet<>();
-    addTypes(type1, types);
-    addTypes(type2, types);
-    if (types.size() == 1) {
+    if(types.size() == 1) {
       return types.iterator().next();
     }
-    ensureCandidatesAreNotLazyTypes(types);
-    return new UnionType(types);
+
+    Set<PythonType> flatTypes = types.stream().flatMap(UnionType::flattenPythonType).collect(Collectors.toSet());
+    if(flatTypes.stream().anyMatch(type -> type == PythonType.UNKNOWN)) {
+      return PythonType.UNKNOWN;
+    }
+    ensureCandidatesAreNotLazyTypes(flatTypes);
+    return new UnionType(flatTypes);
   }
 
-  private static void addTypes(PythonType type, Set<PythonType> types) {
-    if (type instanceof UnionType unionType) {
-      types.addAll(unionType.candidates());
+  private static Stream<PythonType> flattenPythonType(PythonType type) {
+    if(type instanceof UnionType unionType) {
+      return unionType.candidates().stream();
     } else {
-      types.add(type);
+      return Stream.of(type);
     }
   }
 
