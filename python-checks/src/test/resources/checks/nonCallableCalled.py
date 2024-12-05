@@ -408,5 +408,6 @@ def object_typevar():
     scheduled = []
     scheduled.pop()()  # OK
 
-def uncallable_lambda_are_non_compliant():
-    uncallable_lambda = lambda:(print("something"))() # Noncompliant
+def uncallable_inside_lambda_are_non_compliant():
+    lambda_call = (lambda : print("something"))() # OK
+    uncallable_inside_lambda = lambda:(print("something"))() # Noncompliant
