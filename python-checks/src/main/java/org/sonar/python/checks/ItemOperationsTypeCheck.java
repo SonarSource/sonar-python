@@ -54,12 +54,16 @@ public class ItemOperationsTypeCheck extends ItemOperationsType {
       return false;
     }
 
-    var symbol = TreeUtils.getSymbolFromTree(subscriptionObject)
-      .filter(s -> s.is(FUNCTION, CLASS))
-      .orElse(null);
+    var symbolOptional = TreeUtils.getSymbolFromTree(subscriptionObject);
 
-    if (symbol != null) {
-      return isInvalidSubscriptionSymbol(symbol, subscriptionObject, secondaries, requiredMethod, classRequiredMethod);
+    if (symbolOptional.isPresent()) {
+      var symbol = symbolOptional.get();
+      if (isTypingOrCollectionsSymbol(symbol)) {
+        return true;
+      }
+      if (symbol.is(FUNCTION, CLASS)) {
+        return isInvalidSubscriptionSymbol(symbol, subscriptionObject, secondaries, requiredMethod, classRequiredMethod);
+      }
     }
 
     InferredType type = subscriptionObject.type();
@@ -71,9 +75,6 @@ public class ItemOperationsTypeCheck extends ItemOperationsType {
 
   private static boolean isInvalidSubscriptionSymbol(Symbol symbol, Expression subscriptionObject, Map<LocationInFile, String> secondaries, String requiredMethod,
     @Nullable String classRequiredMethod) {
-    if (isTypingOrCollectionsSymbol(symbol)) {
-      return true;
-    }
     LocationInFile locationInFile = symbol.is(FUNCTION) ? ((FunctionSymbol) symbol).definitionLocation() : ((ClassSymbol) symbol).definitionLocation();
     secondaries.put(locationInFile, SECONDARY_MESSAGE.formatted(symbol.name()));
     return isSubscriptionInClassArg(subscriptionObject) || canHaveMethod(symbol, requiredMethod, classRequiredMethod);
