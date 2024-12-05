@@ -83,9 +83,11 @@ public class HardCodedCredentialsCheck extends PythonSubscriptionCheck {
       sensitiveArgumentByFQN.put("mysql.connector.connect", 2);
       sensitiveArgumentByFQN.put("mysql.connector.connection.MySQLConnection", 2);
       sensitiveArgumentByFQN.put("pymysql.connect", 2);
+      sensitiveArgumentByFQN.put("pymysql.connections.connect", 2);
       sensitiveArgumentByFQN.put("pymysql.connections.Connection", 2);
       sensitiveArgumentByFQN.put("psycopg2.connect", 2);
       sensitiveArgumentByFQN.put("pgdb.connect", 2);
+      sensitiveArgumentByFQN.put("pgdb.connect.connect", 2);
       sensitiveArgumentByFQN.put("pg.DB", 5);
       sensitiveArgumentByFQN.put("pg.connect", 5);
       sensitiveArgumentByFQN = Collections.unmodifiableMap(sensitiveArgumentByFQN);

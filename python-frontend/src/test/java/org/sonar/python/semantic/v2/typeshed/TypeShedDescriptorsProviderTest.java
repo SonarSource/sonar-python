@@ -151,6 +151,19 @@ class TypeShedDescriptorsProviderTest {
   }
 
   @Test
+  void customDbStubs() {
+    var provider = typeshedDescriptorsProvider();
+    var pgdb = provider.descriptorsForModule("pgdb");
+    assertThat(pgdb.get("connect")).isInstanceOf(FunctionDescriptor.class);
+
+    var mysql = provider.descriptorsForModule("mysql.connector");
+    assertThat(mysql.get("connect")).isInstanceOf(FunctionDescriptor.class);
+
+    var pymysql = provider.descriptorsForModule("pymysql");
+    assertThat(pymysql.get("connect")).isInstanceOf(FunctionDescriptor.class);
+  }
+
+  @Test
   void unknownModule() {
     var provider = typeshedDescriptorsProvider();
     var unknownModule = provider.descriptorsForModule("unknown_module");

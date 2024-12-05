@@ -313,7 +313,7 @@ class TypeShedTest {
   @Test
   void package_sqlite3_connect_type_in_ambiguous_symbol() {
     Map<String, Symbol> sqlite3Symbols = symbolsForModule("sqlite3");
-    ClassSymbol connectionSymbol =  (ClassSymbol) sqlite3Symbols.get("Connection");
+    ClassSymbol connectionSymbol = (ClassSymbol) sqlite3Symbols.get("Connection");
     AmbiguousSymbol cursorFunction = connectionSymbol.declaredMembers().stream().filter(m -> "cursor".equals(m.name())).findFirst().map(AmbiguousSymbol.class::cast).get();
     Set<Symbol> alternatives = cursorFunction.alternatives();
     assertThat(alternatives)
@@ -378,21 +378,21 @@ class TypeShedTest {
   void class_symbols_from_protobuf() throws TextFormat.ParseException {
     SymbolsProtos.ModuleSymbol moduleSymbol = moduleSymbol(
       "fully_qualified_name: \"mod\"\n" +
-      "classes {\n" +
-      "  name: \"Base\"\n" +
-      "  fully_qualified_name: \"mod.Base\"\n" +
-      "  super_classes: \"builtins.object\"\n" +
-      "}\n" +
-      "classes {\n" +
-      "  name: \"C\"\n" +
-      "  fully_qualified_name: \"mod.C\"\n" +
-      "  super_classes: \"builtins.str\"\n" +
-      "}\n" +
-      "classes {\n" +
-      "  name: \"D\"\n" +
-      "  fully_qualified_name: \"mod.D\"\n" +
-      "  super_classes: \"NOT_EXISTENT\"\n" +
-      "}");
+        "classes {\n" +
+        "  name: \"Base\"\n" +
+        "  fully_qualified_name: \"mod.Base\"\n" +
+        "  super_classes: \"builtins.object\"\n" +
+        "}\n" +
+        "classes {\n" +
+        "  name: \"C\"\n" +
+        "  fully_qualified_name: \"mod.C\"\n" +
+        "  super_classes: \"builtins.str\"\n" +
+        "}\n" +
+        "classes {\n" +
+        "  name: \"D\"\n" +
+        "  fully_qualified_name: \"mod.D\"\n" +
+        "  super_classes: \"NOT_EXISTENT\"\n" +
+        "}");
     Map<String, Symbol> symbols = TypeShed.getSymbolsFromProtobufModule(moduleSymbol);
     assertThat(symbols.values()).extracting(Symbol::kind, Symbol::fullyQualifiedName)
       .containsExactlyInAnyOrder(tuple(Kind.CLASS, "mod.Base"), tuple(Kind.CLASS, "mod.C"), tuple(Kind.CLASS, "mod.D"));
@@ -408,44 +408,44 @@ class TypeShedTest {
   void function_symbols_from_protobuf() throws TextFormat.ParseException {
     SymbolsProtos.ModuleSymbol moduleSymbol = moduleSymbol(
       "fully_qualified_name: \"mod\"\n" +
-      "functions {\n" +
-      "  name: \"foo\"\n" +
-      "  fully_qualified_name: \"mod.foo\"\n" +
-      "  parameters {\n" +
-      "    name: \"p\"\n" +
-      "    kind: POSITIONAL_OR_KEYWORD\n" +
-      "  }\n" +
-      "}\n" +
-      "overloaded_functions {\n" +
-      "  name: \"bar\"\n" +
-      "  fullname: \"mod.bar\"\n" +
-      "  definitions {\n" +
-      "    name: \"bar\"\n" +
-      "    fully_qualified_name: \"mod.bar\"\n" +
-      "    parameters {\n" +
-      "      name: \"x\"\n" +
-      "      kind: POSITIONAL_OR_KEYWORD\n" +
-      "    }\n" +
-      "    has_decorators: true\n" +
-      "    resolved_decorator_names: \"typing.overload\"\n" +
-      "    is_overload: true\n" +
-      "  }\n" +
-      "  definitions {\n" +
-      "    name: \"bar\"\n" +
-      "    fully_qualified_name: \"mod.bar\"\n" +
-      "    parameters {\n" +
-      "      name: \"x\"\n" +
-      "      kind: POSITIONAL_OR_KEYWORD\n" +
-      "    }\n" +
-      "    parameters {\n" +
-      "      name: \"y\"\n" +
-      "      kind: POSITIONAL_OR_KEYWORD\n" +
-      "    }\n" +
-      "    has_decorators: true\n" +
-      "    resolved_decorator_names: \"typing.overload\"\n" +
-      "    is_overload: true\n" +
-      "  }\n" +
-      "}\n");
+        "functions {\n" +
+        "  name: \"foo\"\n" +
+        "  fully_qualified_name: \"mod.foo\"\n" +
+        "  parameters {\n" +
+        "    name: \"p\"\n" +
+        "    kind: POSITIONAL_OR_KEYWORD\n" +
+        "  }\n" +
+        "}\n" +
+        "overloaded_functions {\n" +
+        "  name: \"bar\"\n" +
+        "  fullname: \"mod.bar\"\n" +
+        "  definitions {\n" +
+        "    name: \"bar\"\n" +
+        "    fully_qualified_name: \"mod.bar\"\n" +
+        "    parameters {\n" +
+        "      name: \"x\"\n" +
+        "      kind: POSITIONAL_OR_KEYWORD\n" +
+        "    }\n" +
+        "    has_decorators: true\n" +
+        "    resolved_decorator_names: \"typing.overload\"\n" +
+        "    is_overload: true\n" +
+        "  }\n" +
+        "  definitions {\n" +
+        "    name: \"bar\"\n" +
+        "    fully_qualified_name: \"mod.bar\"\n" +
+        "    parameters {\n" +
+        "      name: \"x\"\n" +
+        "      kind: POSITIONAL_OR_KEYWORD\n" +
+        "    }\n" +
+        "    parameters {\n" +
+        "      name: \"y\"\n" +
+        "      kind: POSITIONAL_OR_KEYWORD\n" +
+        "    }\n" +
+        "    has_decorators: true\n" +
+        "    resolved_decorator_names: \"typing.overload\"\n" +
+        "    is_overload: true\n" +
+        "  }\n" +
+        "}\n");
     Map<String, Symbol> symbols = TypeShed.getSymbolsFromProtobufModule(moduleSymbol);
     assertThat(symbols.values()).extracting(Symbol::kind, Symbol::fullyQualifiedName)
       .containsExactlyInAnyOrder(tuple(Kind.FUNCTION, "mod.foo"), tuple(Kind.AMBIGUOUS, "mod.bar"));
@@ -457,7 +457,7 @@ class TypeShedTest {
   @Test
   void pythonVersions() {
     Symbol range = TypeShed.builtinSymbols().get("range");
-    assertThat(((SymbolImpl) range).validForPythonVersions()).containsExactlyInAnyOrder(  "38", "39", "310", "311", "312", "313");
+    assertThat(((SymbolImpl) range).validForPythonVersions()).containsExactlyInAnyOrder("38", "39", "310", "311", "312", "313");
     assertThat(range.kind()).isEqualTo(Kind.CLASS);
 
     // python 2
@@ -524,7 +524,7 @@ class TypeShedTest {
   @Test
   void variables_from_protobuf() throws TextFormat.ParseException {
     SymbolsProtos.ModuleSymbol moduleSymbol = moduleSymbol(
-        "fully_qualified_name: \"mod\"\n" +
+      "fully_qualified_name: \"mod\"\n" +
         "vars {\n" +
         "  name: \"foo\"\n" +
         "  fully_qualified_name: \"mod.foo\"\n" +
@@ -564,7 +564,7 @@ class TypeShedTest {
   }
 
   @Test
-  void typeshed_private_modules_should_not_affect_fqn()  {
+  void typeshed_private_modules_should_not_affect_fqn() {
     Map<String, Symbol> socketModule = symbolsForModule("socket");
     ClassSymbol socket = (ClassSymbol) socketModule.get("socket");
     assertThat(socket.declaredMembers()).extracting(Symbol::name, Symbol::fullyQualifiedName).contains(tuple("connect", "socket.socket.connect"));
@@ -572,7 +572,7 @@ class TypeShedTest {
   }
 
   @Test
-  void overloaded_function_alias_has_function_annotated_type()  {
+  void overloaded_function_alias_has_function_annotated_type() {
     Map<String, Symbol> gettextModule = symbolsForModule("gettext");
     Symbol translation = gettextModule.get("translation");
     Symbol catalog = gettextModule.get("Catalog");
@@ -586,5 +586,17 @@ class TypeShedTest {
     // however third party symbols don't have validForPythonVersions field set
     symbolsForModule("six");
     assertThat(TypeShed.stubFilesSymbols()).doesNotContainNull();
+  }
+
+  @Test
+  void customDbStubs() {
+    var pgdb = symbolsForModule("pgdb");
+    assertThat(pgdb.get("connect")).isInstanceOf(FunctionSymbol.class);
+
+    var mysql = symbolsForModule("mysql.connector");
+    assertThat(mysql.get("connect")).isInstanceOf(FunctionSymbol.class);
+
+    var pymysql = symbolsForModule("pymysql");
+    assertThat(pymysql.get("connect")).isInstanceOf(FunctionSymbol.class);
   }
 }

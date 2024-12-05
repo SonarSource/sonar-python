@@ -52,9 +52,9 @@ public class DbNoPasswordCheck extends PythonSubscriptionCheck {
   private static final List<String> CONNECT_METHODS = Arrays.asList(
     "mysql.connector.connect",
     "mysql.connector.connection.MySQLConnection",
-    "pymysql.connect",
+    "pymysql.connections.connect",
     "psycopg2.connect",
-    "pgdb.connect",
+    "pgdb.connect.connect",
     "pg.DB",
     "pg.connect"
   );
