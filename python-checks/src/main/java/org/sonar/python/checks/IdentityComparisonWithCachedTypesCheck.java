@@ -39,7 +39,6 @@ import org.sonar.python.types.v2.TypeChecker;
 import static java.util.Arrays.asList;
 
 // https://jira.sonarsource.com/browse/RSPEC-5795
-// https://jira.sonarsource.com/browse/SONARPY-673
 @Rule(key = "S5795")
 public class IdentityComparisonWithCachedTypesCheck extends PythonSubscriptionCheck {
   private static final String MESSAGE_IS = "Replace this \"is\" operator with \"==\"; identity operator is not reliable here.";

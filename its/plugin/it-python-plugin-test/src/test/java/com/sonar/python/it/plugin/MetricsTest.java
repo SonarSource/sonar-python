@@ -161,9 +161,6 @@ class MetricsTest {
     assertThat(getFileMeasureAsInt(VIOLATIONS)).isZero();
   }
 
-  /**
-   * SONARPLUGINS-2184
-   */
   @Test
   void should_be_compatible_with_DevCockpit() {
     // TODO probably bug in Sonar: order might depend on JVM

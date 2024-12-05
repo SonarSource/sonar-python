@@ -50,7 +50,8 @@ import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.python.checks.utils.Expressions;
 import org.sonar.python.tree.TreeUtils;
 
-// https://jira.sonarsource.com/browse/SONARPY-668
+// for an overview of how this rule works, see the following ticket describing the implementation(keep in mind that the rule might have changed since the ticket was last
+// updated (06.05.2020)): https://jira.sonarsource.com/browse/SONARPY-668
 // https://jira.sonarsource.com/browse/RSPEC-5792
 @Rule(key = "S4502")
 public class CsrfDisabledCheck extends PythonSubscriptionCheck {

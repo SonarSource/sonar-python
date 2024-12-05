@@ -35,7 +35,6 @@ import org.sonar.python.quickfix.TextEditUtils;
 import org.sonar.python.semantic.BuiltinSymbols;
 
 // https://jira.sonarsource.com/browse/RSPEC-3984
-// https://jira.sonarsource.com/browse/SONARPY-666
 @Rule(key = "S3984")
 public class ExceptionNotThrownCheck extends PythonSubscriptionCheck {
   private static final String MESSAGE = "Raise this exception or remove this useless statement.";
