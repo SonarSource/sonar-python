@@ -16,18 +16,24 @@
  */
 package org.sonar.python.checks;
 
+import java.util.Collection;
 import java.util.Map;
+import java.util.Optional;
 import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.LocationInFile;
 import org.sonar.plugins.python.api.symbols.ClassSymbol;
 import org.sonar.plugins.python.api.symbols.FunctionSymbol;
 import org.sonar.plugins.python.api.symbols.Symbol;
+import org.sonar.plugins.python.api.tree.ArgList;
 import org.sonar.plugins.python.api.tree.CallExpression;
+import org.sonar.plugins.python.api.tree.ClassDef;
 import org.sonar.plugins.python.api.tree.Expression;
-import org.sonar.plugins.python.api.tree.HasSymbol;
+import org.sonar.plugins.python.api.tree.RegularArgument;
+import org.sonar.plugins.python.api.tree.SubscriptionExpression;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.types.InferredType;
+import org.sonar.python.tree.TreeUtils;
 import org.sonar.python.types.InferredTypes;
 
 import static org.sonar.plugins.python.api.symbols.Symbol.Kind.CLASS;
@@ -39,35 +45,60 @@ public class ItemOperationsTypeCheck extends ItemOperationsType {
 
   @Override
   public boolean isValidSubscription(Expression subscriptionObject, String requiredMethod, @Nullable String classRequiredMethod,
-                                     Map<LocationInFile, String> secondaries) {
+    Map<LocationInFile, String> secondaries) {
 
     if (subscriptionObject.is(Tree.Kind.GENERATOR_EXPR)) {
       return false;
     }
-    if (subscriptionObject.is(Tree.Kind.CALL_EXPR)) {
-      Symbol subscriptionCalleeSymbol = ((CallExpression) subscriptionObject).calleeSymbol();
-      if (subscriptionCalleeSymbol != null && subscriptionCalleeSymbol.is(FUNCTION) && ((FunctionSymbol) subscriptionCalleeSymbol).isAsynchronous()) {
-        FunctionSymbol functionSymbol = (FunctionSymbol) subscriptionCalleeSymbol;
-        secondaries.put(functionSymbol.definitionLocation(), String.format(SECONDARY_MESSAGE, functionSymbol.name()));
-        return false;
-      }
+    if (isInvalidSubscriptionCallExpr(subscriptionObject, secondaries)) {
+      return false;
     }
-    if (subscriptionObject instanceof HasSymbol hasSymbol) {
-      Symbol symbol = hasSymbol.symbol();
-      if (symbol == null || isTypingOrCollectionsSymbol(symbol)) {
+
+    var symbolOptional = TreeUtils.getSymbolFromTree(subscriptionObject);
+
+    if (symbolOptional.isPresent()) {
+      var symbol = symbolOptional.get();
+      if (isTypingOrCollectionsSymbol(symbol)) {
         return true;
       }
       if (symbol.is(FUNCTION, CLASS)) {
-        secondaries.put(symbol.is(FUNCTION) ?
-          ((FunctionSymbol) symbol).definitionLocation() : ((ClassSymbol) symbol).definitionLocation(), String.format(SECONDARY_MESSAGE, symbol.name()));
-        return canHaveMethod(symbol, requiredMethod, classRequiredMethod);
+        return isValidSubscriptionSymbol(symbol, subscriptionObject, secondaries, requiredMethod, classRequiredMethod);
       }
     }
+
     InferredType type = subscriptionObject.type();
     String typeName = InferredTypes.typeName(type);
     String secondaryMessage = typeName != null ? String.format(SECONDARY_MESSAGE, typeName) : DEFAULT_SECONDARY_MESSAGE;
     secondaries.put(typeClassLocation(type), secondaryMessage);
     return type.canHaveMember(requiredMethod);
+  }
+
+  private static boolean isValidSubscriptionSymbol(Symbol symbol, Expression subscriptionObject, Map<LocationInFile, String> secondaries, String requiredMethod,
+    @Nullable String classRequiredMethod) {
+    LocationInFile locationInFile = symbol.is(FUNCTION) ? ((FunctionSymbol) symbol).definitionLocation() : ((ClassSymbol) symbol).definitionLocation();
+    secondaries.put(locationInFile, SECONDARY_MESSAGE.formatted(symbol.name()));
+    return isSubscriptionInClassArg(subscriptionObject) || canHaveMethod(symbol, requiredMethod, classRequiredMethod);
+  }
+
+  private static boolean isInvalidSubscriptionCallExpr(Expression expression, Map<LocationInFile, String> secondaries) {
+    if (expression instanceof CallExpression callExpression
+      && callExpression.calleeSymbol() instanceof FunctionSymbol functionSymbol
+      && functionSymbol.isAsynchronous()) {
+      secondaries.put(functionSymbol.definitionLocation(), SECONDARY_MESSAGE.formatted(functionSymbol.name()));
+      return true;
+    }
+    return false;
+  }
+
+  private static boolean isSubscriptionInClassArg(Expression subscriptionObject) {
+    return Optional.ofNullable(((ClassDef) TreeUtils.firstAncestorOfKind(subscriptionObject, Tree.Kind.CLASSDEF))).map(ClassDef::args).map(ArgList::arguments)
+      .stream()
+      .flatMap(Collection::stream)
+      .flatMap(TreeUtils.toStreamInstanceOfMapper(RegularArgument.class))
+      .map(RegularArgument::expression)
+      .flatMap(TreeUtils.toStreamInstanceOfMapper(SubscriptionExpression.class))
+      .map(SubscriptionExpression::object)
+      .anyMatch(subscriptionObject::equals);
   }
 
   @Override

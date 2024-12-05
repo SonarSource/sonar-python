@@ -216,3 +216,8 @@ def mocks():
 
     def custom_mock():
         a = ExtendedMock()[42]
+
+
+class MyGenericClass[T]: ...
+
+class MyGenericSubType(MyGenericClass[str]): ...
