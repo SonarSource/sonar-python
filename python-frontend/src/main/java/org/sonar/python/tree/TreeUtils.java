@@ -270,8 +270,8 @@ public class TreeUtils {
       .map(child -> {
 
         var childToken = child.firstToken();
-        if (childToken.line() > parentToken.line() && childToken.column() > parentToken.column()) {
-          return childToken.column() - parentToken.column();
+        if (childToken.pythonLine() > parentToken.pythonLine() && childToken.pythonColumn() > parentToken.pythonColumn()) {
+          return childToken.pythonColumn() - parentToken.pythonColumn();
         } else  {
           return findIndentDownTree(child);
         }
