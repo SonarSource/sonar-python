@@ -46,9 +46,7 @@ class MetricsTest {
   private static final String DUPLICATED_LINES = "duplicated_lines";
   private static final String DUPLICATED_LINES_DENSITY = "duplicated_lines_density";
   private static final String EXECUTABLE_LINES_DATA = "executable_lines_data";
-  private static final String FILE_COMPLEXITY = "file_complexity";
   private static final String FILES = "files";
-  private static final String FUNCTION_COMPLEXITY = "function_complexity";
   private static final String FUNCTIONS = "functions";
   private static final String LINES = "lines";
   private static final String NCLOC = "ncloc";
@@ -95,8 +93,6 @@ class MetricsTest {
     // Complexity
     assertThat(getProjectMeasureAsDouble(COMPLEXITY)).isEqualTo(3.0, OFFSET);
     assertThat(getProjectMeasureAsDouble(COGNITIVE_COMPLEXITY)).isEqualTo(3.0, OFFSET);
-    assertThat(getProjectMeasureAsDouble(FUNCTION_COMPLEXITY)).isNull();
-    assertThat(getProjectMeasureAsDouble(FILE_COMPLEXITY)).isEqualTo(1.5, OFFSET);
     // Duplication
     assertThat(getProjectMeasureAsDouble(DUPLICATED_LINES)).isEqualTo(0.0, OFFSET);
     assertThat(getProjectMeasureAsDouble(DUPLICATED_BLOCKS)).isEqualTo(0.0, OFFSET);
@@ -124,8 +120,6 @@ class MetricsTest {
     // Complexity
     assertThat(getDirectoryMeasureAsDouble(COMPLEXITY)).isEqualTo(3.0, OFFSET);
     assertThat(getDirectoryMeasureAsDouble(COGNITIVE_COMPLEXITY)).isEqualTo(3.0, OFFSET);
-    assertThat(getDirectoryMeasureAsDouble(FUNCTION_COMPLEXITY)).isNull();
-    assertThat(getDirectoryMeasureAsDouble(FILE_COMPLEXITY)).isEqualTo(1.5, OFFSET);
     // Duplication
     assertThat(getDirectoryMeasureAsDouble(DUPLICATED_LINES)).isEqualTo(0.0, OFFSET);
     assertThat(getDirectoryMeasureAsDouble(DUPLICATED_BLOCKS)).isEqualTo(0.0, OFFSET);
@@ -150,8 +144,6 @@ class MetricsTest {
     // Complexity
     assertThat(getFileMeasureAsDouble(COMPLEXITY)).isEqualTo(2.0, OFFSET);
     assertThat(getFileMeasureAsDouble(COGNITIVE_COMPLEXITY)).isEqualTo(1.0, OFFSET);
-    assertThat(getFileMeasureAsDouble(FUNCTION_COMPLEXITY)).isNull();
-    assertThat(getFileMeasureAsDouble(FILE_COMPLEXITY)).isEqualTo(2.0, OFFSET);
     // Duplication
     assertThat(getFileMeasureAsInt(DUPLICATED_LINES)).isZero();
     assertThat(getFileMeasureAsInt(DUPLICATED_BLOCKS)).isZero();
