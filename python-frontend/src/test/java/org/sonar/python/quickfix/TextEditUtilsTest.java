@@ -19,6 +19,7 @@ package org.sonar.python.quickfix;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import org.sonar.plugins.python.api.PythonLine;
 import org.sonar.plugins.python.api.quickfix.PythonTextEdit;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.FileInput;
@@ -237,7 +238,9 @@ class TextEditUtilsTest {
 
     when(token.value()).thenReturn(value);
     when(token.line()).thenReturn(line);
+    when(token.pythonLine()).thenReturn(new PythonLine(line));
     when(token.column()).thenReturn(column);
+    when(token.pythonColumn()).thenReturn(column);
 
     return token;
   }

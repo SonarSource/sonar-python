@@ -20,6 +20,7 @@ import com.sonar.sslr.api.TokenType;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import org.sonar.plugins.python.api.PythonLine;
 import org.sonar.plugins.python.api.tree.Token;
 import org.sonar.plugins.python.api.tree.Tree;
 import org.sonar.plugins.python.api.tree.TreeVisitor;
@@ -56,7 +57,7 @@ public class TokenImpl extends PyTree implements Token {
 
   @Override
   public int line() {
-    return line != null ? line : pythonLine();
+    return line != null ? line : pythonLine().line();
   }
 
   @Override
@@ -65,8 +66,8 @@ public class TokenImpl extends PyTree implements Token {
   }
 
   @Override
-  public int pythonLine() {
-    return token.getLine();
+  public PythonLine pythonLine() {
+    return new PythonLine(token.getLine());
   }
 
   @Override
