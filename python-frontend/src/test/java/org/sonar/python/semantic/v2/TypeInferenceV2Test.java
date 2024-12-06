@@ -3075,6 +3075,59 @@ public class TypeInferenceV2Test {
     assertThat(yType.typeSource()).isSameAs(TypeSource.TYPE_HINT);
   }
 
+  public static Stream<Arguments> binaryExpressionsSource() {
+    return Stream.of(
+      Arguments.of("""
+        1 + 2
+        """, new ObjectType(INT_TYPE)),
+      Arguments.of("""
+        1 - 2
+        """, new ObjectType(INT_TYPE)),
+      Arguments.of("""
+        1 * 2
+        """, new ObjectType(INT_TYPE)),
+      Arguments.of("""
+        1 / 2
+        """, new ObjectType(INT_TYPE)),
+      Arguments.of("""
+        '1' + '2'
+        """, new ObjectType(STR_TYPE)),
+      Arguments.of("""
+        1 + '2'
+        """, PythonType.UNKNOWN),
+      Arguments.of("""
+        1 + 2.0
+        """, PythonType.UNKNOWN),
+      Arguments.of("""
+        a = 1
+        b = 2
+        a + b
+        """, new ObjectType(INT_TYPE)),
+      Arguments.of("""
+        a = 1
+        b = 2
+        c = a - b
+        c
+        """, new ObjectType(INT_TYPE)),
+      Arguments.of("""
+        try:
+          ...
+        except:
+          ...
+        a = 1
+        b = 2
+        c = a - b
+        c
+        """, new ObjectType(INT_TYPE))
+    );
+  }
+
+  @ParameterizedTest
+  @MethodSource("binaryExpressionsSource")
+  void binaryExpressionTest(String code, PythonType expectedType) {
+    assertThat(lastExpression(code).typeV2()).isEqualTo(expectedType);
+  }
+
   @Test
   void assignmentPlusTest() {
     var fileInput = inferTypes("""
@@ -3165,7 +3218,7 @@ public class TypeInferenceV2Test {
       .orElseGet(List::of);
 
     var fType = ((ExpressionStatement) statements.get(statements.size() - 1)).expressions().get(0).typeV2();
-    assertThat(fType).isSameAs(PythonType.UNKNOWN);
+    assertThat(fType).isInstanceOf(ObjectType.class).extracting(PythonType::unwrappedType).isSameAs(INT_TYPE);
   }
 
   @Test
