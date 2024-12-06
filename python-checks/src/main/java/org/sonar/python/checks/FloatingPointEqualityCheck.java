@@ -20,6 +20,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import org.sonar.check.Rule;
+import org.sonar.plugins.python.api.PythonLine;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
@@ -130,7 +131,7 @@ public class FloatingPointEqualityCheck extends PythonSubscriptionCheck {
     quickFix.addTextEdit(TextEditUtils.replace(binaryExpression, quickFixTextWithModuleName));
 
     if (MATH_MODULE.equals(isCloseModuleName) && !isMathImported) {
-      quickFix.addTextEdit(TextEditUtils.insertAtPosition(0, 0, "import math\n"));
+      quickFix.addTextEdit(TextEditUtils.insertAtPosition(new PythonLine(0), 0, "import math\n"));
     }
 
     return quickFix.build();

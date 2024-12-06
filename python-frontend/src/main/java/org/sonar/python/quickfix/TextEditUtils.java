@@ -19,6 +19,7 @@ package org.sonar.python.quickfix;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import org.sonar.plugins.python.api.PythonLine;
 import org.sonar.plugins.python.api.quickfix.PythonTextEdit;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.plugins.python.api.symbols.Usage;
@@ -55,22 +56,22 @@ public class TextEditUtils {
   }
 
   private static String offset(Tree referenceTree) {
-    return " ".repeat(referenceTree.firstToken().column());
+    return " ".repeat(referenceTree.firstToken().pythonColumn());
   }
 
   public static PythonTextEdit insertBefore(Tree tree, String textToInsert) {
     Token token = tree.firstToken();
-    return insertAtPosition(token.line(), token.column(), textToInsert);
+    return insertAtPosition(token.pythonLine(), token.pythonColumn(), textToInsert);
   }
 
   public static PythonTextEdit insertAfter(Tree tree, String textToInsert) {
     Token token = tree.firstToken();
     int lengthToken = token.value().length();
-    return insertAtPosition(token.line(), token.column() + lengthToken, textToInsert);
+    return insertAtPosition(token.pythonLine(), token.pythonColumn() + lengthToken, textToInsert);
   }
 
-  public static PythonTextEdit insertAtPosition(int line, int column, String textToInsert) {
-    return new PythonTextEdit(textToInsert, line, column, line, column);
+  public static PythonTextEdit insertAtPosition(PythonLine pythonLine, int column, String textToInsert) {
+    return new PythonTextEdit(textToInsert, pythonLine.line(), column, pythonLine.line(), column);
   }
 
   public static PythonTextEdit replace(Tree toReplace, String replacementText) {
@@ -103,14 +104,14 @@ public class TextEditUtils {
   public static List<PythonTextEdit> shiftLeft(Tree tree, int offset) {
     return TreeUtils.tokens(tree).stream()
       .filter(token -> token.column() >= offset)
-      .map(Token::line)
+      .map(Token::pythonLine)
       .distinct()
       .map(line -> removeRange(line, 0, line, offset))
       .toList();
   }
 
-  public static PythonTextEdit removeRange(int startLine, int startColumn, int endLine, int endColumn) {
-    return new PythonTextEdit("", startLine, startColumn, endLine, endColumn);
+  public static PythonTextEdit removeRange(PythonLine startLine, int startColumn, PythonLine endLine, int endColumn) {
+    return new PythonTextEdit("", startLine.line(), startColumn, endLine.line(), endColumn);
   }
 
   /**
@@ -118,7 +119,7 @@ public class TextEditUtils {
    * This is useful to remove and shift multiple statement over multiple lines.
    */
   public static PythonTextEdit removeUntil(Tree start, Tree until) {
-    return removeRange(start.firstToken().line(), start.firstToken().column(), until.firstToken().line(), until.firstToken().column());
+    return removeRange(start.firstToken().pythonLine(), start.firstToken().column(), until.firstToken().pythonLine(), until.firstToken().column());
   }
 
   public static PythonTextEdit removeStatement(Statement statement) {
@@ -143,17 +144,17 @@ public class TextEditUtils {
       // Statement is first on the line or between at least two statements
       // Remove from first token to last toke of statement
       Token firstNextToken = next.firstToken();
-      return removeRange(firstTokenOfStmt.line(), firstTokenOfStmt.column(), firstNextToken.line(), firstNextToken.column());
+      return removeRange(firstTokenOfStmt.pythonLine(), firstTokenOfStmt.column(), firstNextToken.pythonLine(), firstNextToken.column());
     } else if (hasPreviousSiblingOnLine) {
       // Statement is last on the line and has one or more previous statement on the line
       // Remove from last token or separator of previous statement to avoid trailing white spaces
       // Keep the line break to ensure elements on the next line don't get pushed to the current line
       Token lastPreviousToken = TreeUtils.getTreeSeparatorOrLastToken(previous);
-      return removeRange(lastPreviousToken.line(), getEndColumn(lastPreviousToken), lastPreviousToken.line(), getEndColumn(lastTokenOfStmt) - 1);
+      return removeRange(lastPreviousToken.pythonLine(), getEndColumn(lastPreviousToken), lastPreviousToken.pythonLine(), getEndColumn(lastTokenOfStmt) - 1);
     } else {
       // Statement is single on the line
       // Remove the entire line including indent and line break
-      return removeRange(firstTokenOfStmt.line(), 0, lastTokenOfStmt.line(), getEndColumn(lastTokenOfStmt));
+      return removeRange(firstTokenOfStmt.pythonLine(), 0, lastTokenOfStmt.pythonLine(), getEndColumn(lastTokenOfStmt));
     }
   }
 

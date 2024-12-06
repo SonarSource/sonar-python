@@ -69,9 +69,9 @@ public class NeedlessPassCheck extends PythonSubscriptionCheck {
       var removeFrom = TreeUtils.getTreeSeparatorOrLastToken(previous);
       var removeTo = TreeUtils.getTreeSeparatorOrLastToken(toRemove);
       return TextEditUtils.removeRange(
-        removeFrom.line(),
+        removeFrom.pythonLine(),
         removeFrom.column(),
-        removeTo.line(),
+        removeTo.pythonLine(),
         removeTo.column());
     } else {
       return TextEditUtils.removeUntil(toRemove, statements.get(removeIndex + 1));

@@ -18,6 +18,7 @@ package org.sonar.python.checks;
 
 import javax.annotation.CheckForNull;
 import org.sonar.check.Rule;
+import org.sonar.plugins.python.api.PythonLine;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
 import org.sonar.plugins.python.api.tree.ClassDef;
@@ -118,7 +119,7 @@ public class MissingDocstringCheck extends PythonSubscriptionCheck {
     PythonQuickFix.Builder quickFix = PythonQuickFix.newQuickFix("Add docstring");
 
     if (type == DeclarationType.MODULE) {
-      quickFix.addTextEdit(TextEditUtils.insertAtPosition(1, 0, EMPTY_DOCSTRING));
+      quickFix.addTextEdit(TextEditUtils.insertAtPosition(new PythonLine(1), 0, EMPTY_DOCSTRING));
     } else if (type == DeclarationType.CLASS) {
       ClassDef classDef = (ClassDef) tree;
       quickFix.addTextEdit(TextEditUtils.insertLineAfter(classDef.colon(), classDef.body(), EMPTY_DOCSTRING));

@@ -21,6 +21,7 @@ import java.util.regex.Pattern;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.IssueLocation;
 import org.sonar.plugins.python.api.PythonCheck;
+import org.sonar.plugins.python.api.PythonLine;
 import org.sonar.plugins.python.api.PythonVisitorContext;
 import org.sonar.plugins.python.api.quickfix.PythonQuickFix;
 import org.sonar.python.quickfix.TextEditUtils;
@@ -37,11 +38,11 @@ public class TrailingWhitespaceCheck implements PythonCheck {
     for (int i = 0; i < lines.length; i++) {
       Matcher matcher = TRAILING_WS.matcher(lines[i]);
       if (matcher.find()) {
-        int lineNumber = i + 1;
-        PreciseIssue issue = new PreciseIssue(this, IssueLocation.atLineLevel(MESSAGE, lineNumber, ctx.pythonFile()));
+        var pythonLineNumber = new PythonLine(i + 1);
+        PreciseIssue issue = new PreciseIssue(this, IssueLocation.atLineLevel(MESSAGE, pythonLineNumber.line(), ctx.pythonFile()));
 
         issue.addQuickFix(PythonQuickFix.newQuickFix("Remove trailing whitespaces")
-          .addTextEdit(TextEditUtils.removeRange(lineNumber, matcher.start(), lineNumber, matcher.end()))
+          .addTextEdit(TextEditUtils.removeRange(pythonLineNumber, matcher.start(), pythonLineNumber, matcher.end()))
           .build());
 
         ctx.addIssue(issue);
