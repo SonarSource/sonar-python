@@ -16,14 +16,18 @@
  */
 package org.sonar.python.checks.hotspots;
 
+import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.sonar.python.checks.utils.PythonCheckVerifier;
 
 class CsrfDisabledCheckTest {
-
   private static void testFile(String relPath) {
-    String path = "src/test/resources/checks/hotspots/csrfDisabledCheck/" + relPath;
-    PythonCheckVerifier.verify(path, new CsrfDisabledCheck());
+    testFile(List.of(relPath));
+  }
+
+  private static void testFile(List<String> relPaths) {
+    List<String> absolutePaths = relPaths.stream().map(path -> "src/test/resources/checks/hotspots/csrfDisabledCheck/" + path).toList();
+    PythonCheckVerifier.verify(absolutePaths, new CsrfDisabledCheck());
   }
 
   @Test
@@ -53,7 +57,7 @@ class CsrfDisabledCheckTest {
 
   @Test
   void testExemptDecorators() {
-    testFile("flask/flaskExempt.py");
+    testFile(List.of("flask/flaskExempt.py", "flask/exportedCsrfProtect.py"));
     testFile("django/djangoExempt.py");
   }
 

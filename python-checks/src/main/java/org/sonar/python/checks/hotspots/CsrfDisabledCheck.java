@@ -124,9 +124,6 @@ public class CsrfDisabledCheck extends PythonSubscriptionCheck {
       .filter(Objects::nonNull)
       .flatMap(s -> Arrays.stream(s.split("\\.")))
       .toList();
-    // This is a temporary workaround until symbol resolution works for decorators.
-    // Use the actual functions with FQNs from DANGEROUS_DECORATORS once that's fixed.
-    // Related ticket: https://jira.sonarsource.com/browse/SONARPY-681
     boolean isDangerous = names.stream().anyMatch(s -> s.toLowerCase(Locale.US).contains("csrf")) &&
       names.stream().anyMatch(s -> s.toLowerCase(Locale.US).contains("exempt"));
     if (isDangerous) {
