@@ -61,7 +61,7 @@ public class TrailingCommentCheck extends PythonSubscriptionCheck {
           String comment = commentToken.value();
           if (!pattern.matcher(comment).matches()) {
             var issue = ctx.addIssue(commentToken, MESSAGE);
-            String line = getLines(ctx).get(commentToken.pythonLine() - 1);
+            String line = getLines(ctx).get(commentToken.pythonLine().line() - 1);
             addQuickFix(issue, commentToken, line);
           }
         }
