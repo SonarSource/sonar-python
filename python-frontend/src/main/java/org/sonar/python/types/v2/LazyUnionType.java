@@ -20,6 +20,7 @@ import com.google.common.annotations.VisibleForTesting;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class LazyUnionType implements PythonType, ResolvableType {
@@ -27,7 +28,7 @@ public class LazyUnionType implements PythonType, ResolvableType {
   private final Set<PythonType> candidates;
 
   public LazyUnionType(Set<PythonType> candidates) {
-    this.candidates = candidates.stream().flatMap(LazyUnionType::flattenLazyUnionTypes).collect(HashSet::new, HashSet::add, HashSet::addAll);
+    this.candidates = candidates.stream().flatMap(LazyUnionType::flattenLazyUnionTypes).collect(Collectors.toCollection(HashSet::new));
   }
 
   public PythonType resolve() {
