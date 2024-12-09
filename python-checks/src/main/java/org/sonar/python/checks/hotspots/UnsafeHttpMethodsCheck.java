@@ -140,7 +140,7 @@ public class UnsafeHttpMethodsCheck extends PythonSubscriptionCheck {
     if (calleeSymbol == null) {
       return false;
     }
-    return calleeSymbol.name().equals("route");
+    return "route".equals(calleeSymbol.name());
   }
 
   private static void checkFlaskView(CallExpression callExpression, SubscriptionContext ctx) {
@@ -151,8 +151,6 @@ public class UnsafeHttpMethodsCheck extends PythonSubscriptionCheck {
   }
 
   private static boolean isFlaskImported(CallExpression callExpression) {
-    // When SONARPY-834 will be implemented we can have a cleaner implementation
-    // checking decorator fqn to be equal to flask.blueprints.Blueprint.route
     return Optional.ofNullable(TreeUtils.firstAncestorOfKind(callExpression, FILE_INPUT))
       .filter(fileInput -> ((FileInput) fileInput).globalVariables().stream()
           .map(Symbol::fullyQualifiedName)
