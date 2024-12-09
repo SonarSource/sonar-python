@@ -19,6 +19,7 @@ package org.sonar.python.checks.hotspots;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import org.sonar.check.Rule;
@@ -30,14 +31,17 @@ import org.sonar.plugins.python.api.tree.Argument;
 import org.sonar.plugins.python.api.tree.CallExpression;
 import org.sonar.plugins.python.api.tree.Decorator;
 import org.sonar.plugins.python.api.tree.Expression;
+import org.sonar.plugins.python.api.tree.FileInput;
 import org.sonar.plugins.python.api.tree.FunctionDef;
 import org.sonar.plugins.python.api.tree.ListLiteral;
 import org.sonar.plugins.python.api.tree.RegularArgument;
 import org.sonar.plugins.python.api.tree.StringLiteral;
 import org.sonar.python.semantic.FunctionSymbolImpl;
 import org.sonar.python.tree.FunctionDefImpl;
+import org.sonar.python.tree.TreeUtils;
 
 import static org.sonar.plugins.python.api.tree.Tree.Kind.CALL_EXPR;
+import static org.sonar.plugins.python.api.tree.Tree.Kind.FILE_INPUT;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.FUNCDEF;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.LIST_LITERAL;
 import static org.sonar.plugins.python.api.tree.Tree.Kind.REGULAR_ARGUMENT;
@@ -133,13 +137,25 @@ public class UnsafeHttpMethodsCheck extends PythonSubscriptionCheck {
 
   private static boolean isFlaskRouteDecorator(CallExpression callExpression) {
     Symbol calleeSymbol = callExpression.calleeSymbol();
-    return calleeSymbol != null && "flask.scaffold.Scaffold.route".equals(calleeSymbol.fullyQualifiedName());
+    if (calleeSymbol == null) {
+      return false;
+    }
+    return "route".equals(calleeSymbol.name());
   }
 
   private static void checkFlaskView(CallExpression callExpression, SubscriptionContext ctx) {
     RegularArgument methodsArg = argumentByKeyword("methods", callExpression.arguments());
-    if (methodsArg != null && hasBothUnsafeAndSafeHttpMethods(methodsArg)) {
+    if (methodsArg != null && hasBothUnsafeAndSafeHttpMethods(methodsArg) && isFlaskImported(callExpression)) {
       ctx.addIssue(callExpression, MESSAGE);
     }
+  }
+
+  private static boolean isFlaskImported(CallExpression callExpression) {
+    return Optional.ofNullable(TreeUtils.firstAncestorOfKind(callExpression, FILE_INPUT))
+      .filter(fileInput -> ((FileInput) fileInput).globalVariables().stream()
+          .map(Symbol::fullyQualifiedName)
+          .filter(Objects::nonNull)
+          .anyMatch(fqn -> fqn.contains("flask")))
+      .isPresent();
   }
 }

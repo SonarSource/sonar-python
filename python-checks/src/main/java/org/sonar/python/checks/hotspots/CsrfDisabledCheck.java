@@ -20,10 +20,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.regex.Pattern;
+import java.util.stream.Stream;
 import org.sonar.check.Rule;
 import org.sonar.plugins.python.api.PythonSubscriptionCheck;
 import org.sonar.plugins.python.api.SubscriptionContext;
@@ -114,14 +117,16 @@ public class CsrfDisabledCheck extends PythonSubscriptionCheck {
     "django.views.decorators.csrf.csrf_exempt",
     "flask_wtf.csrf.CSRFProtect.exempt"));
 
-  private static boolean isDangerousDecorator(Decorator expression) {
-    return DANGEROUS_DECORATORS.stream().anyMatch(dangerousFqn -> TreeUtils.isDecoratorWithFQN(expression, dangerousFqn));
-  }
-
   /** Raises issue whenever a decorator with something about "CSRF" and "exempt" in the combined name is found. */
   private static void decoratorCsrfExemptCheck(SubscriptionContext subscriptionContext) {
     Decorator decorator = (Decorator) subscriptionContext.syntaxNode();
-    if(isDangerousDecorator(decorator)) {
+    List<String> names = Stream.of(TreeUtils.decoratorNameFromExpression(decorator.expression()))
+      .filter(Objects::nonNull)
+      .flatMap(s -> Arrays.stream(s.split("\\.")))
+      .toList();
+    boolean isDangerous = names.stream().anyMatch(s -> s.toLowerCase(Locale.US).contains("csrf")) &&
+      names.stream().anyMatch(s -> s.toLowerCase(Locale.US).contains("exempt"));
+    if (isDangerous) {
       subscriptionContext.addIssue(decorator.lastToken(), MESSAGE);
     }
   }
