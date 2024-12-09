@@ -10,10 +10,15 @@ def exemptExample():
   @app.route('/csrftest1/', methods=['POST'])
   @csrfProtect.exempt # Noncompliant {{Make sure disabling CSRF protection is safe here.}}
   #            ^^^^^^
-  def csrftestpost():
+  def csrftestpost1():
       pass
 
   @app.route('/csrftest1/', methods=['POST'])
   @exported_csrf_protect.exempt # Noncompliant
-  def csrftestpost_rexported():
+  def csrftestpost2():
+      pass
+
+  @app.route('/csrftest1/', methods=['POST'])
+  @exported_csrf_protect.something_else
+  def csrftestpost3():
       pass

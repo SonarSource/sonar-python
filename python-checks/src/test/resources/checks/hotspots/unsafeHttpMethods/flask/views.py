@@ -14,14 +14,9 @@ def sensitive1():
 def sensitive1_other_routes():
     return Response("Method: " + request.method, 200)
 
-# 127.0.0.1:5000/methods/sensitive1
-@methods.route('/sensitive1', methods=['GET', 'POST'])  # Noncompliant
-def sensitive1():
-    return Response("Method: " + request.method, 200)
-
-# 127.0.0.1:5000/methods/sensitive1
-@other_routes.route('/sensitive1', methods=['GET', 'POST'])  # Noncompliant
-def sensitive1_other_routes():
+# 127.0.0.1:5000/methods/compliant1
+@other_routes.route('/compliant1')  # Compliant
+def compliant1_other_routes():
     return Response("Method: " + request.method, 200)
 
 # 127.0.0.1:5000/methods/compliant1
