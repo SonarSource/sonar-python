@@ -22,14 +22,14 @@ import com.sonar.orchestrator.locator.FileLocation;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.util.List;
+import java.util.Collections;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
+import org.sonarsource.analyzer.commons.ProfileGenerator;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.sonar.python.it.RulingHelper.bugRuleKeys;
 import static org.sonar.python.it.RulingHelper.getOrchestrator;
 
 // Ruling test for bug rules, to ensure they are properly tested without slowing down the CI
@@ -38,15 +38,18 @@ class PythonExtendedRulingTest {
   @RegisterExtension
   public static final OrchestratorExtension ORCHESTRATOR = getOrchestrator();
 
-  private static final String PROFILE_NAME = "customProfile";
+  private static final String PROFILE_NAME = "rules";
 
   @BeforeAll
   static void prepare_quality_profile() throws IOException {
-    List<String> ruleKeys = bugRuleKeys();
-    String pythonProfile = RulingHelper.profile(PROFILE_NAME, "py", "python", ruleKeys);
-    RulingHelper.loadProfile(ORCHESTRATOR, pythonProfile);
-    String iPythonProfile = RulingHelper.profile(PROFILE_NAME, "ipynb", "python", ruleKeys);
-    RulingHelper.loadProfile(ORCHESTRATOR, iPythonProfile);
+    ProfileGenerator.RulesConfiguration parameters = new ProfileGenerator.RulesConfiguration()
+      .add("CommentRegularExpression", "message", "The regular expression matches this comment")
+      .add("S1451", "headerFormat", "# Copyright 2004 by Harry Zuzan. All rights reserved.");
+    String serverUrl = ORCHESTRATOR.getServer().getUrl();
+    File profileFile = ProfileGenerator.generateProfile(serverUrl, "py", "python", parameters, Collections.emptySet());
+    ORCHESTRATOR.getServer().restoreProfile(FileLocation.of(profileFile));
+    File iPythonProfileFile = ProfileGenerator.generateProfile(serverUrl, "ipynb", "ipython", parameters, Collections.emptySet());
+    ORCHESTRATOR.getServer().restoreProfile(FileLocation.of(iPythonProfileFile));
   }
 
   @Test
