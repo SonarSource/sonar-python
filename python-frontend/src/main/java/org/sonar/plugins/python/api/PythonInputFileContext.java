@@ -25,7 +25,6 @@ import org.sonar.api.SonarProduct;
 import org.sonar.plugins.python.api.caching.CacheContext;
 import org.sonar.plugins.python.api.symbols.Symbol;
 import org.sonar.python.semantic.ProjectLevelSymbolTable;
-import org.sonar.python.types.TypeShed;
 
 public class PythonInputFileContext {
 
