@@ -96,7 +96,7 @@ public class TreeUtils {
   }
 
   public static Comparator<Tree> getTreeByPositionComparator() {
-    return Comparator.comparing((Tree t) -> t.firstToken().pythonLine()).thenComparing((Tree t) -> t.firstToken().pythonColumn());
+    return Comparator.comparing((Tree t) -> t.firstToken().pythonLine().line()).thenComparing((Tree t) -> t.firstToken().pythonColumn());
   }
 
   public static List<Token> tokens(Tree tree) {
@@ -256,7 +256,7 @@ public class TreeUtils {
     var treeToken = tree.firstToken();
     var parentToken = parent.firstToken();
 
-    if (treeToken.pythonLine() != parentToken.pythonLine()) {
+    if (treeToken.pythonLine().line() != parentToken.pythonLine().line()) {
       return treeToken.pythonColumn() - parentToken.pythonColumn();
     } else {
       return findIndentationSize(parent);
@@ -270,7 +270,7 @@ public class TreeUtils {
       .map(child -> {
 
         var childToken = child.firstToken();
-        if (childToken.pythonLine() > parentToken.pythonLine() && childToken.pythonColumn() > parentToken.pythonColumn()) {
+        if (childToken.pythonLine().line() > parentToken.pythonLine().line() && childToken.pythonColumn() > parentToken.pythonColumn()) {
           return childToken.pythonColumn() - parentToken.pythonColumn();
         } else  {
           return findIndentDownTree(child);
@@ -477,8 +477,8 @@ public class TreeUtils {
 
   public static String treeToString(Tree tree, boolean renderMultiline) {
     if (!renderMultiline) {
-      var firstLine = tree.firstToken().pythonLine();
-      var lastLine = tree.lastToken().pythonLine();
+      var firstLine = tree.firstToken().pythonLine().line();
+      var lastLine = tree.lastToken().pythonLine().line();
 
       // We decided to not support multiline default parameters
       // because it requires indents calculation for place where the value should be copied.
