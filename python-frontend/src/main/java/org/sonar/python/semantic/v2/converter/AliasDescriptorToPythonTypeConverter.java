@@ -23,7 +23,7 @@ import org.sonar.python.types.v2.PythonType;
 public class AliasDescriptorToPythonTypeConverter implements DescriptorToPythonTypeConverter {
   @Override
   public PythonType convert(ConversionContext ctx, Descriptor from) {
-    // We should try to retrieve the original type if possible, instead of recreating it
+    // SONARPY-2423: We should try to retrieve the original type if possible, instead of recreating it
     return ctx.convert(((AliasDescriptor) from).originalDescriptor());
   }
 }
