@@ -1,0 +1,405 @@
+{
+"airflow:airflow/api/common/mark_tasks.py": [
+79
+],
+"airflow:airflow/api/common/trigger_dag.py": [
+32
+],
+"airflow:airflow/api_connexion/endpoints/log_endpoint.py": [
+44
+],
+"airflow:airflow/api_connexion/endpoints/pool_endpoint.py": [
+79
+],
+"airflow:airflow/api_connexion/endpoints/user_endpoint.py": [
+118
+],
+"airflow:airflow/cli/cli_parser.py": [
+59
+],
+"airflow:airflow/cli/commands/cheat_sheet_command.py": [
+30
+],
+"airflow:airflow/cli/commands/connection_command.py": [
+158
+],
+"airflow:airflow/cli/commands/dag_command.py": [
+55
+],
+"airflow:airflow/cli/commands/info_command.py": [
+85
+],
+"airflow:airflow/cli/commands/kubernetes_command.py": [
+72
+],
+"airflow:airflow/cli/commands/user_command.py": [
+177
+],
+"airflow:airflow/cli/commands/webserver_command.py": [
+317
+],
+"airflow:airflow/configuration.py": [
+550,
+831
+],
+"airflow:airflow/dag_processing/manager.py": [
+506,
+944
+],
+"airflow:airflow/dag_processing/processor.py": [
+355
+],
+"airflow:airflow/executors/kubernetes_executor.py": [
+553
+],
+"airflow:airflow/jobs/backfill_job.py": [
+380,
+746
+],
+"airflow:airflow/jobs/local_task_job.py": [
+185
+],
+"airflow:airflow/jobs/scheduler_job.py": [
+232,
+533
+],
+"airflow:airflow/jobs/triggerer_job.py": [
+286
+],
+"airflow:airflow/kubernetes/pod_generator_deprecated.py": [
+118
+],
+"airflow:airflow/kubernetes/pod_launcher_deprecated.py": [
+137
+],
+"airflow:airflow/listeners/events.py": [
+29
+],
+"airflow:airflow/migrations/versions/2c6edca13270_resource_based_permissions.py": [
+287,
+312
+],
+"airflow:airflow/migrations/versions/92c57b58940d_add_fab_tables.py": [
+152
+],
+"airflow:airflow/migrations/versions/a13f7613ad25_resource_based_permissions_for_default_.py": [
+139,
+164
+],
+"airflow:airflow/migrations/versions/cc1e65623dc7_add_max_tries_column_to_task_instance.py": [
+57
+],
+"airflow:airflow/models/base.py": [
+85
+],
+"airflow:airflow/models/baseoperator.py": [
+119,
+534,
+1087
+],
+"airflow:airflow/models/connection.py": [
+174
+],
+"airflow:airflow/models/dag.py": [
+302,
+1391,
+1698,
+1970,
+2257,
+2355
+],
+"airflow:airflow/models/dagbag.py": [
+166,
+338,
+425
+],
+"airflow:airflow/models/dagrun.py": [
+486,
+767
+],
+"airflow:airflow/models/taskinstance.py": [
+181,
+1144,
+1298,
+1486,
+1579,
+1705,
+1798
+],
+"airflow:airflow/models/taskmixin.py": [
+150
+],
+"airflow:airflow/operators/sql.py": [
+504
+],
+"airflow:airflow/operators/trigger_dagrun.py": [
+122
+],
+"airflow:airflow/plugins_manager.py": [
+481
+],
+"airflow:airflow/providers/amazon/aws/hooks/base_aws.py": [
+586
+],
+"airflow:airflow/providers/amazon/aws/hooks/elasticache_replication_group.py": [
+159
+],
+"airflow:airflow/providers/amazon/aws/hooks/sagemaker.py": [
+536
+],
+"airflow:airflow/providers/amazon/aws/operators/ecs.py": [
+428
+],
+"airflow:airflow/providers/amazon/aws/transfers/ftp_to_s3.py": [
+109
+],
+"airflow:airflow/providers/apache/beam/operators/beam.py": [
+385
+],
+"airflow:airflow/providers/apache/hive/hooks/hive.py": [
+262,
+837
+],
+"airflow:airflow/providers/apache/hive/transfers/s3_to_hive.py": [
+135
+],
+"airflow:airflow/providers/apache/kylin/operators/kylin_cube.py": [
+136
+],
+"airflow:airflow/providers/apache/livy/hooks/livy.py": [
+312
+],
+"airflow:airflow/providers/apache/pinot/hooks/pinot.py": [
+103
+],
+"airflow:airflow/providers/apache/spark/hooks/spark_sql.py": [
+112
+],
+"airflow:airflow/providers/apache/spark/hooks/spark_submit.py": [
+253,
+443,
+606
+],
+"airflow:airflow/providers/apache/sqoop/hooks/sqoop.py": [
+115,
+288
+],
+"airflow:airflow/providers/cncf/kubernetes/operators/kubernetes_pod.py": [
+156,
+574
+],
+"airflow:airflow/providers/databricks/hooks/databricks.py": [
+181,
+294
+],
+"airflow:airflow/providers/databricks/operators/databricks.py": [
+253
+],
+"airflow:airflow/providers/docker/operators/docker.py": [
+341
+],
+"airflow:airflow/providers/google/cloud/hooks/bigquery.py": [
+1263,
+1529,
+1923,
+2757
+],
+"airflow:airflow/providers/google/cloud/hooks/cloud_sql.py": [
+518,
+819
+],
+"airflow:airflow/providers/google/cloud/hooks/compute_ssh.py": [
+136
+],
+"airflow:airflow/providers/google/cloud/hooks/gcs.py": [
+54,
+435
+],
+"airflow:airflow/providers/google/cloud/hooks/mlengine.py": [
+369
+],
+"airflow:airflow/providers/google/cloud/hooks/pubsub.py": [
+138
+],
+"airflow:airflow/providers/google/cloud/hooks/stackdriver.py": [
+213
+],
+"airflow:airflow/providers/google/cloud/operators/bigquery.py": [
+999
+],
+"airflow:airflow/providers/google/cloud/operators/dataproc.py": [
+312
+],
+"airflow:airflow/providers/google/cloud/operators/gcs.py": [
+738
+],
+"airflow:airflow/providers/google/cloud/operators/mlengine.py": [
+1149
+],
+"airflow:airflow/providers/google/cloud/transfers/gcs_to_bigquery.py": [
+228
+],
+"airflow:airflow/providers/google/cloud/transfers/gcs_to_gcs.py": [
+371
+],
+"airflow:airflow/providers/google/cloud/transfers/s3_to_gcs.py": [
+156
+],
+"airflow:airflow/providers/google/cloud/transfers/sql_to_gcs.py": [
+164
+],
+"airflow:airflow/providers/google/cloud/utils/field_sanitizer.py": [
+123
+],
+"airflow:airflow/providers/google/cloud/utils/field_validator.py": [
+309
+],
+"airflow:airflow/providers/google/cloud/utils/mlengine_operator_utils.py": [
+40
+],
+"airflow:airflow/providers/hashicorp/_internal_client/vault_client.py": [
+92
+],
+"airflow:airflow/providers/hashicorp/hooks/vault.py": [
+105
+],
+"airflow:airflow/providers/http/hooks/http.py": [
+59
+],
+"airflow:airflow/providers/jira/hooks/jira.py": [
+47
+],
+"airflow:airflow/providers/microsoft/azure/hooks/wasb.py": [
+111
+],
+"airflow:airflow/providers/microsoft/azure/operators/batch.py": [
+180
+],
+"airflow:airflow/providers/microsoft/azure/operators/container_instances.py": [
+183,
+283
+],
+"airflow:airflow/providers/microsoft/psrp/hooks/psrp.py": [
+159
+],
+"airflow:airflow/providers/microsoft/winrm/hooks/winrm.py": [
+125
+],
+"airflow:airflow/providers/microsoft/winrm/operators/winrm.py": [
+78
+],
+"airflow:airflow/providers/mysql/hooks/mysql.py": [
+90
+],
+"airflow:airflow/providers/odbc/hooks/odbc.py": [
+119
+],
+"airflow:airflow/providers/oracle/hooks/oracle.py": [
+54,
+151
+],
+"airflow:airflow/providers/plexus/operators/job.py": [
+59
+],
+"airflow:airflow/providers/sendgrid/utils/emailer.py": [
+49
+],
+"airflow:airflow/providers/sftp/hooks/sftp.py": [
+72,
+141
+],
+"airflow:airflow/providers/singularity/operators/singularity.py": [
+98
+],
+"airflow:airflow/providers/snowflake/hooks/snowflake.py": [
+146
+],
+"airflow:airflow/providers/ssh/hooks/ssh.py": [
+102
+],
+"airflow:airflow/providers/ssh/operators/ssh.py": [
+136
+],
+"airflow:airflow/providers/zendesk/hooks/zendesk.py": [
+55
+],
+"airflow:airflow/providers_manager.py": [
+489,
+621
+],
+"airflow:airflow/security/kerberos.py": [
+50
+],
+"airflow:airflow/sensors/base.py": [
+223
+],
+"airflow:airflow/sensors/smart_sensor.py": [
+485
+],
+"airflow:airflow/serialization/serialized_objects.py": [
+296,
+355,
+635,
+930
+],
+"airflow:airflow/settings.py": [
+480
+],
+"airflow:airflow/ti_deps/deps/not_previously_skipped_dep.py": [
+31
+],
+"airflow:airflow/ti_deps/deps/trigger_rule_dep.py": [
+86
+],
+"airflow:airflow/utils/cli.py": [
+113
+],
+"airflow:airflow/utils/dag_cycle_tester.py": [
+47
+],
+"airflow:airflow/utils/dates.py": [
+38
+],
+"airflow:airflow/utils/db.py": [
+906
+],
+"airflow:airflow/utils/email.py": [
+183
+],
+"airflow:airflow/utils/helpers.py": [
+315
+],
+"airflow:airflow/utils/log/file_task_handler.py": [
+98
+],
+"airflow:airflow/utils/operator_helpers.py": [
+58
+],
+"airflow:airflow/utils/process_utils.py": [
+52
+],
+"airflow:airflow/utils/retries.py": [
+47
+],
+"airflow:airflow/utils/task_group.py": [
+69
+],
+"airflow:airflow/www/fab_security/manager.py": [
+650,
+955,
+1209,
+1382,
+1444
+],
+"airflow:airflow/www/security.py": [
+293,
+643
+],
+"airflow:airflow/www/views.py": [
+391,
+630,
+1142,
+1726,
+2573
+]
+}

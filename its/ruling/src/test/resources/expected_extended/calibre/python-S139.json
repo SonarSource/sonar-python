@@ -1,0 +1,2576 @@
+{
+"calibre:src/calibre/__init__.py": [
+456
+],
+"calibre:src/calibre/customize/__init__.py": [
+391,
+409
+],
+"calibre:src/calibre/customize/conversion.py": [
+138,
+287
+],
+"calibre:src/calibre/customize/profiles.py": [
+48,
+246,
+302,
+303
+],
+"calibre:src/calibre/customize/ui.py": [
+168
+],
+"calibre:src/calibre/customize/zipplugin.py": [
+105,
+112
+],
+"calibre:src/calibre/db/__init__.py": [
+74
+],
+"calibre:src/calibre/db/adding.py": [
+254,
+264,
+296
+],
+"calibre:src/calibre/db/backend.py": [
+390,
+407,
+941,
+947,
+953,
+955,
+1272,
+1336,
+1354,
+1432,
+1552,
+1572,
+1667,
+1722,
+1968,
+1974,
+1976,
+2095
+],
+"calibre:src/calibre/db/cache.py": [
+210,
+215,
+269,
+272,
+285,
+290,
+1069,
+1233,
+1465,
+1494,
+1802,
+2148
+],
+"calibre:src/calibre/db/categories.py": [
+16,
+265
+],
+"calibre:src/calibre/db/cli/cmd_add.py": [
+25
+],
+"calibre:src/calibre/db/cli/cmd_add_custom_column.py": [
+12
+],
+"calibre:src/calibre/db/cli/cmd_add_format.py": [
+11
+],
+"calibre:src/calibre/db/cli/cmd_backup_metadata.py": [
+8
+],
+"calibre:src/calibre/db/cli/cmd_catalog.py": [
+11
+],
+"calibre:src/calibre/db/cli/cmd_check_library.py": [
+14
+],
+"calibre:src/calibre/db/cli/cmd_clone.py": [
+12
+],
+"calibre:src/calibre/db/cli/cmd_custom_columns.py": [
+11
+],
+"calibre:src/calibre/db/cli/cmd_embed_metadata.py": [
+10
+],
+"calibre:src/calibre/db/cli/cmd_export.py": [
+15
+],
+"calibre:src/calibre/db/cli/cmd_list.py": [
+16
+],
+"calibre:src/calibre/db/cli/cmd_list_categories.py": [
+13
+],
+"calibre:src/calibre/db/cli/cmd_remove.py": [
+11
+],
+"calibre:src/calibre/db/cli/cmd_remove_custom_column.py": [
+10
+],
+"calibre:src/calibre/db/cli/cmd_remove_format.py": [
+9
+],
+"calibre:src/calibre/db/cli/cmd_restore_database.py": [
+9
+],
+"calibre:src/calibre/db/cli/cmd_saved_searches.py": [
+6
+],
+"calibre:src/calibre/db/cli/cmd_search.py": [
+8
+],
+"calibre:src/calibre/db/cli/cmd_set_custom.py": [
+10
+],
+"calibre:src/calibre/db/cli/cmd_set_metadata.py": [
+15,
+43,
+170
+],
+"calibre:src/calibre/db/cli/cmd_show_metadata.py": [
+12
+],
+"calibre:src/calibre/db/copy_to_library.py": [
+94
+],
+"calibre:src/calibre/db/fields.py": [
+597
+],
+"calibre:src/calibre/db/legacy.py": [
+252
+],
+"calibre:src/calibre/db/restore.py": [
+282
+],
+"calibre:src/calibre/db/search.py": [
+55,
+328,
+331,
+338,
+341
+],
+"calibre:src/calibre/db/tables.py": [
+157
+],
+"calibre:src/calibre/db/tests/filesystem.py": [
+121
+],
+"calibre:src/calibre/db/tests/legacy.py": [
+269,
+444,
+447,
+448,
+449
+],
+"calibre:src/calibre/db/tests/reading.py": [
+402,
+404,
+581,
+586
+],
+"calibre:src/calibre/db/tests/writing.py": [
+808,
+907
+],
+"calibre:src/calibre/db/utils.py": [
+109,
+110,
+111,
+112,
+113,
+114,
+156
+],
+"calibre:src/calibre/debug.py": [
+218
+],
+"calibre:src/calibre/devices/android/driver.py": [
+61,
+141,
+190
+],
+"calibre:src/calibre/devices/cli.py": [
+22,
+96,
+105,
+125,
+191
+],
+"calibre:src/calibre/devices/eb600/driver.py": [
+64
+],
+"calibre:src/calibre/devices/folder_device/driver.py": [
+46
+],
+"calibre:src/calibre/devices/jetbook/driver.py": [
+122
+],
+"calibre:src/calibre/devices/kobo/bookmark.py": [
+19,
+22,
+31,
+114
+],
+"calibre:src/calibre/devices/kobo/books.py": [
+43,
+70,
+151,
+203,
+254,
+260
+],
+"calibre:src/calibre/devices/kobo/driver.py": [
+333,
+337,
+422,
+629,
+634,
+664,
+665,
+926,
+1376,
+1384,
+1385,
+1386,
+1387,
+1400,
+1704,
+1707,
+1710,
+1746,
+1810,
+1834,
+1857,
+1873,
+1919,
+1920,
+1921,
+2041,
+2084,
+2094,
+2400,
+2562,
+2804,
+2867,
+2955,
+3066,
+3155,
+3240,
+3392,
+3396,
+3658
+],
+"calibre:src/calibre/devices/misc.py": [
+237,
+238,
+239,
+240,
+241,
+242,
+243
+],
+"calibre:src/calibre/devices/mtp/driver.py": [
+219,
+259
+],
+"calibre:src/calibre/devices/mtp/filesystem_cache.py": [
+229
+],
+"calibre:src/calibre/devices/mtp/unix/driver.py": [
+291
+],
+"calibre:src/calibre/devices/mtp/windows/driver.py": [
+220,
+242
+],
+"calibre:src/calibre/devices/nook/driver.py": [
+28,
+85,
+86,
+87,
+88,
+89
+],
+"calibre:src/calibre/devices/paladin/driver.py": [
+39
+],
+"calibre:src/calibre/devices/prs505/driver.py": [
+34,
+118
+],
+"calibre:src/calibre/devices/prs505/sony_cache.py": [
+638,
+645
+],
+"calibre:src/calibre/devices/prst1/driver.py": [
+46,
+50
+],
+"calibre:src/calibre/devices/scanner.py": [
+207
+],
+"calibre:src/calibre/devices/smart_device_app/driver.py": [
+235,
+239,
+596,
+604,
+632,
+684,
+1941
+],
+"calibre:src/calibre/devices/usbms/books.py": [
+63,
+225,
+254,
+260
+],
+"calibre:src/calibre/devices/usbms/device.py": [
+296,
+310,
+383
+],
+"calibre:src/calibre/devices/usbms/deviceconfig.py": [
+34
+],
+"calibre:src/calibre/devices/usbms/driver.py": [
+258,
+307,
+340
+],
+"calibre:src/calibre/ebooks/comic/input.py": [
+98
+],
+"calibre:src/calibre/ebooks/compression/palmdoc.py": [
+79,
+80
+],
+"calibre:src/calibre/ebooks/conversion/plugins/fb2_output.py": [
+19,
+27,
+30,
+32,
+33,
+35,
+36,
+37,
+38,
+39,
+45,
+46,
+47,
+49,
+50,
+52,
+53,
+54,
+55,
+61,
+62,
+63,
+66,
+69,
+70,
+80,
+81,
+82,
+87,
+88,
+91,
+107,
+116,
+119,
+127,
+134,
+138,
+140
+],
+"calibre:src/calibre/ebooks/conversion/plugins/mobi_output.py": [
+189
+],
+"calibre:src/calibre/ebooks/conversion/plumber.py": [
+1060
+],
+"calibre:src/calibre/ebooks/conversion/preprocess.py": [
+149,
+150,
+151
+],
+"calibre:src/calibre/ebooks/conversion/utils.py": [
+253,
+255,
+256,
+258,
+260,
+262,
+495,
+496
+],
+"calibre:src/calibre/ebooks/djvu/djvu.py": [
+29
+],
+"calibre:src/calibre/ebooks/djvu/djvubzzdec.py": [
+96,
+97,
+98,
+99,
+100,
+101,
+102,
+103,
+104,
+105,
+106,
+107,
+108,
+109,
+110,
+111,
+112,
+113,
+114,
+115,
+116,
+117,
+118,
+119,
+120,
+121,
+122,
+123,
+124,
+125,
+126,
+127,
+128,
+129,
+130,
+131,
+132,
+133,
+134,
+135,
+136,
+137,
+138,
+139,
+140,
+141,
+142,
+143,
+144,
+145,
+146,
+147,
+148,
+149,
+150,
+151,
+152,
+153,
+154,
+155,
+156,
+157,
+158,
+159,
+160,
+161,
+162,
+163,
+164,
+165,
+166,
+167,
+168,
+169,
+170,
+171,
+172,
+173,
+174,
+175,
+176,
+177,
+178,
+179,
+180,
+181,
+182,
+183,
+184,
+185,
+186,
+187,
+188,
+189,
+190,
+191,
+192,
+193,
+194,
+195,
+196,
+197,
+198,
+199,
+200,
+201,
+202,
+203,
+204,
+205,
+206,
+207,
+208,
+209,
+210,
+211,
+212,
+213,
+214,
+215,
+216,
+217,
+218,
+219,
+220,
+221,
+222,
+223,
+224,
+225,
+226,
+227,
+228,
+229,
+230,
+231,
+232,
+233,
+234,
+235,
+236,
+237,
+238,
+239,
+240,
+241,
+242,
+243,
+244,
+245,
+246,
+247,
+248,
+249,
+250,
+251,
+252,
+253,
+254,
+255,
+256,
+257,
+258,
+259,
+260,
+261,
+262,
+263,
+264,
+265,
+266,
+267,
+268,
+269,
+270,
+271,
+272,
+273,
+274,
+275,
+276,
+277,
+278,
+279,
+280,
+281,
+282,
+283,
+284,
+285,
+286,
+287,
+288,
+289,
+290,
+291,
+292,
+293,
+294,
+295,
+296,
+297,
+298,
+299,
+300,
+301,
+302,
+303,
+304,
+305,
+306,
+307,
+308,
+309,
+310,
+311,
+312,
+313,
+314,
+315,
+316,
+317,
+318,
+319,
+320,
+321,
+322,
+323,
+324,
+325,
+326,
+327,
+328,
+329,
+330,
+331,
+332,
+333,
+334,
+335,
+336,
+337,
+338,
+339,
+340,
+341,
+342,
+343,
+344,
+345,
+346,
+448,
+488,
+497
+],
+"calibre:src/calibre/ebooks/docx/container.py": [
+58
+],
+"calibre:src/calibre/ebooks/docx/fields.py": [
+45,
+46,
+47,
+153
+],
+"calibre:src/calibre/ebooks/docx/lcid.py": [
+8,
+9,
+10,
+11,
+12,
+13,
+14,
+15,
+16,
+17,
+18,
+19,
+20,
+21,
+22,
+23,
+24,
+25,
+26,
+27,
+29,
+30,
+33,
+34,
+35,
+39,
+40,
+41,
+42,
+43,
+44,
+46,
+50,
+51,
+53,
+54,
+55,
+56,
+57,
+58,
+59,
+60,
+61,
+62,
+63,
+64,
+65,
+66,
+67,
+68,
+69,
+70,
+73,
+76,
+77,
+78,
+79,
+80,
+81,
+82,
+83,
+84,
+85,
+86,
+87,
+88,
+89,
+90,
+91,
+92,
+93,
+94,
+95,
+96,
+99,
+100,
+101,
+102,
+103,
+105,
+107,
+108,
+112,
+114,
+117,
+118,
+121,
+123,
+128,
+133,
+134,
+138,
+140,
+141,
+143,
+144,
+145,
+151,
+152,
+154,
+155,
+156,
+157,
+160,
+162,
+163,
+166,
+167,
+168,
+169,
+170,
+175,
+176,
+177,
+178,
+179,
+180,
+181,
+182,
+183,
+184,
+185,
+186,
+187,
+188,
+189,
+190,
+191,
+192,
+193,
+194,
+195,
+196,
+197,
+200,
+203,
+204,
+209,
+210,
+211,
+212,
+217,
+220,
+221,
+222
+],
+"calibre:src/calibre/ebooks/docx/styles.py": [
+24,
+273
+],
+"calibre:src/calibre/ebooks/docx/tables.py": [
+578,
+598
+],
+"calibre:src/calibre/ebooks/docx/writer/container.py": [
+49
+],
+"calibre:src/calibre/ebooks/docx/writer/from_html.py": [
+378,
+515,
+562,
+591,
+623
+],
+"calibre:src/calibre/ebooks/docx/writer/styles.py": [
+213,
+226,
+382,
+395,
+397,
+399,
+401,
+462,
+467,
+597,
+612
+],
+"calibre:src/calibre/ebooks/epub/cfi/parse.py": [
+159,
+233
+],
+"calibre:src/calibre/ebooks/epub/pages.py": [
+60
+],
+"calibre:src/calibre/ebooks/html/input.py": [
+187
+],
+"calibre:src/calibre/ebooks/lit/mssha1.py": [
+116,
+117,
+118,
+119
+],
+"calibre:src/calibre/ebooks/lit/reader.py": [
+581,
+591
+],
+"calibre:src/calibre/ebooks/lrf/__init__.py": [
+27,
+28,
+29,
+30,
+31
+],
+"calibre:src/calibre/ebooks/lrf/html/convert_from.py": [
+223,
+225,
+226,
+227,
+228,
+229,
+230,
+231,
+233,
+236,
+237,
+238,
+239,
+240,
+242,
+257,
+291,
+380,
+383,
+408,
+527,
+939,
+945,
+992,
+1191,
+1339,
+1404,
+1450,
+1507,
+1713,
+1719,
+1725,
+1816
+],
+"calibre:src/calibre/ebooks/lrf/html/table.py": [
+136,
+177,
+178,
+355
+],
+"calibre:src/calibre/ebooks/lrf/lrs/convert_from.py": [
+112
+],
+"calibre:src/calibre/ebooks/lrf/meta.py": [
+25,
+26,
+27,
+28,
+248,
+734
+],
+"calibre:src/calibre/ebooks/lrf/objects.py": [
+254,
+255,
+836,
+845,
+851,
+1047,
+1048
+],
+"calibre:src/calibre/ebooks/lrf/pylrs/pylrf.py": [
+185,
+187,
+318,
+630,
+640,
+724,
+725,
+729,
+731
+],
+"calibre:src/calibre/ebooks/lrf/pylrs/pylrs.py": [
+50,
+51,
+243,
+393,
+434,
+643,
+1461,
+2195
+],
+"calibre:src/calibre/ebooks/metadata/__init__.py": [
+161,
+174,
+299
+],
+"calibre:src/calibre/ebooks/metadata/author_mapper.py": [
+114
+],
+"calibre:src/calibre/ebooks/metadata/book/__init__.py": [
+14,
+15,
+16,
+17,
+18,
+33,
+37,
+38,
+43,
+50,
+51,
+52,
+75,
+76,
+77,
+78,
+82,
+83,
+84
+],
+"calibre:src/calibre/ebooks/metadata/book/base.py": [
+100,
+564,
+654,
+665,
+668
+],
+"calibre:src/calibre/ebooks/metadata/book/json_codec.py": [
+166
+],
+"calibre:src/calibre/ebooks/metadata/ereader.py": [
+89,
+90,
+91
+],
+"calibre:src/calibre/ebooks/metadata/html.py": [
+139
+],
+"calibre:src/calibre/ebooks/metadata/imp.py": [
+33
+],
+"calibre:src/calibre/ebooks/metadata/kfx.py": [
+38,
+190,
+326
+],
+"calibre:src/calibre/ebooks/metadata/mobi.py": [
+271,
+436
+],
+"calibre:src/calibre/ebooks/metadata/odt.py": [
+118,
+163,
+295
+],
+"calibre:src/calibre/ebooks/metadata/opf2.py": [
+112
+],
+"calibre:src/calibre/ebooks/metadata/sources/amazon.py": [
+129,
+1612,
+1618,
+1624,
+1631,
+1640,
+1648,
+1668,
+1740,
+1745,
+1751,
+1794,
+1799,
+1805
+],
+"calibre:src/calibre/ebooks/metadata/sources/base.py": [
+240
+],
+"calibre:src/calibre/ebooks/metadata/sources/covers.py": [
+109
+],
+"calibre:src/calibre/ebooks/metadata/sources/edelweiss.py": [
+317,
+383,
+389
+],
+"calibre:src/calibre/ebooks/metadata/sources/google.py": [
+427,
+436
+],
+"calibre:src/calibre/ebooks/metadata/sources/google_images.py": [
+75,
+110
+],
+"calibre:src/calibre/ebooks/metadata/sources/identify.py": [
+636,
+650,
+657,
+666,
+672
+],
+"calibre:src/calibre/ebooks/metadata/tag_mapper.py": [
+100
+],
+"calibre:src/calibre/ebooks/metadata/toc.py": [
+152
+],
+"calibre:src/calibre/ebooks/metadata/xmp.py": [
+78,
+83,
+486
+],
+"calibre:src/calibre/ebooks/mobi/debug/headers.py": [
+177,
+178,
+180,
+181,
+194,
+197,
+399
+],
+"calibre:src/calibre/ebooks/mobi/debug/mobi6.py": [
+622
+],
+"calibre:src/calibre/ebooks/mobi/reader/headers.py": [
+76,
+86,
+156,
+172,
+225,
+284
+],
+"calibre:src/calibre/ebooks/mobi/reader/index.py": [
+187
+],
+"calibre:src/calibre/ebooks/mobi/reader/markup.py": [
+136,
+357
+],
+"calibre:src/calibre/ebooks/mobi/reader/mobi6.py": [
+128,
+537,
+837,
+838
+],
+"calibre:src/calibre/ebooks/mobi/reader/mobi8.py": [
+353,
+427
+],
+"calibre:src/calibre/ebooks/mobi/reader/ncx.py": [
+27,
+28,
+29,
+30
+],
+"calibre:src/calibre/ebooks/mobi/utils.py": [
+19,
+113,
+144,
+182,
+477,
+602
+],
+"calibre:src/calibre/ebooks/mobi/writer2/indexer.py": [
+519,
+560,
+735
+],
+"calibre:src/calibre/ebooks/mobi/writer2/main.py": [
+190,
+231,
+233,
+234,
+235,
+238,
+355,
+412,
+417,
+421,
+456
+],
+"calibre:src/calibre/ebooks/mobi/writer8/exth.py": [
+230
+],
+"calibre:src/calibre/ebooks/mobi/writer8/header.py": [
+30
+],
+"calibre:src/calibre/ebooks/mobi/writer8/index.py": [
+139,
+187,
+387
+],
+"calibre:src/calibre/ebooks/mobi/writer8/main.py": [
+53,
+54,
+155,
+438,
+491
+],
+"calibre:src/calibre/ebooks/mobi/writer8/mobi.py": [
+278
+],
+"calibre:src/calibre/ebooks/mobi/writer8/skeleton.py": [
+173,
+266,
+281,
+329,
+330,
+331,
+368
+],
+"calibre:src/calibre/ebooks/mobi/writer8/tbs.py": [
+63,
+184
+],
+"calibre:src/calibre/ebooks/odt/input.py": [
+112,
+253
+],
+"calibre:src/calibre/ebooks/oeb/base.py": [
+596,
+1035
+],
+"calibre:src/calibre/ebooks/oeb/iterator/spine.py": [
+145
+],
+"calibre:src/calibre/ebooks/oeb/parse_utils.py": [
+102,
+186,
+332
+],
+"calibre:src/calibre/ebooks/oeb/polish/check/fonts.py": [
+109
+],
+"calibre:src/calibre/ebooks/oeb/polish/check/links.py": [
+263,
+324
+],
+"calibre:src/calibre/ebooks/oeb/polish/check/parsing.py": [
+455
+],
+"calibre:src/calibre/ebooks/oeb/polish/container.py": [
+998
+],
+"calibre:src/calibre/ebooks/oeb/polish/import_book.py": [
+38
+],
+"calibre:src/calibre/ebooks/oeb/polish/parsing.py": [
+44,
+63
+],
+"calibre:src/calibre/ebooks/oeb/polish/pretty.py": [
+86
+],
+"calibre:src/calibre/ebooks/oeb/polish/replace.py": [
+202
+],
+"calibre:src/calibre/ebooks/oeb/polish/report.py": [
+84,
+270
+],
+"calibre:src/calibre/ebooks/oeb/polish/tests/container.py": [
+157
+],
+"calibre:src/calibre/ebooks/oeb/polish/tests/parsing.py": [
+119
+],
+"calibre:src/calibre/ebooks/oeb/polish/tests/structure.py": [
+93
+],
+"calibre:src/calibre/ebooks/oeb/polish/upgrade.py": [
+43
+],
+"calibre:src/calibre/ebooks/oeb/polish/utils.py": [
+62
+],
+"calibre:src/calibre/ebooks/oeb/reader.py": [
+303
+],
+"calibre:src/calibre/ebooks/oeb/stylizer.py": [
+67,
+123,
+342,
+459
+],
+"calibre:src/calibre/ebooks/oeb/transforms/flatcss.py": [
+443
+],
+"calibre:src/calibre/ebooks/oeb/transforms/metadata.py": [
+188
+],
+"calibre:src/calibre/ebooks/oeb/transforms/split.py": [
+126
+],
+"calibre:src/calibre/ebooks/oeb/transforms/structure.py": [
+190,
+235
+],
+"calibre:src/calibre/ebooks/pdb/ereader/writer.py": [
+193,
+215,
+216,
+217,
+218,
+219,
+220,
+221,
+222,
+223,
+224,
+225,
+226,
+227,
+228,
+229,
+230,
+231,
+232,
+233,
+234,
+235,
+236,
+237,
+238,
+239,
+240,
+241
+],
+"calibre:src/calibre/ebooks/pdb/palmdoc/writer.py": [
+66,
+67,
+68,
+69,
+70,
+71
+],
+"calibre:src/calibre/ebooks/pdb/ztxt/writer.py": [
+70,
+71,
+72,
+73,
+74,
+75,
+76,
+77,
+78,
+79,
+80,
+81
+],
+"calibre:src/calibre/ebooks/pdf/pageoptions.py": [
+23,
+24,
+25,
+26,
+27,
+28,
+29,
+30,
+31,
+32,
+33,
+34,
+35,
+36,
+37,
+38,
+39,
+40,
+41,
+42,
+43,
+44,
+45,
+46,
+47,
+48,
+49,
+50,
+51,
+52
+],
+"calibre:src/calibre/ebooks/pdf/render/common.py": [
+110,
+116
+],
+"calibre:src/calibre/ebooks/pdf/render/fonts.py": [
+135
+],
+"calibre:src/calibre/ebooks/pdf/render/serialize.py": [
+22,
+454
+],
+"calibre:src/calibre/ebooks/rb/reader.py": [
+80
+],
+"calibre:src/calibre/ebooks/readability/cleaners.py": [
+11
+],
+"calibre:src/calibre/ebooks/readability/readability.py": [
+153,
+378
+],
+"calibre:src/calibre/ebooks/rtf2xml/ParseRtf.py": [
+168,
+218
+],
+"calibre:src/calibre/ebooks/rtf2xml/configure_txt.py": [
+86,
+87,
+88,
+89,
+90,
+92
+],
+"calibre:src/calibre/ebooks/rtf2xml/field_strings.py": [
+543,
+731,
+756
+],
+"calibre:src/calibre/ebooks/rtf2xml/fields_large.py": [
+141,
+142,
+143,
+145,
+146,
+147,
+148
+],
+"calibre:src/calibre/ebooks/rtf2xml/fonts.py": [
+132
+],
+"calibre:src/calibre/ebooks/rtf2xml/footnote.py": [
+110
+],
+"calibre:src/calibre/ebooks/rtf2xml/headings_to_sections.py": [
+68,
+69
+],
+"calibre:src/calibre/ebooks/rtf2xml/hex_2_utf8.py": [
+467
+],
+"calibre:src/calibre/ebooks/rtf2xml/inline.py": [
+81,
+89,
+180,
+185
+],
+"calibre:src/calibre/ebooks/rtf2xml/make_lists.py": [
+151,
+300,
+302,
+316,
+319
+],
+"calibre:src/calibre/ebooks/rtf2xml/paragraph_def.py": [
+265,
+266,
+267,
+268,
+619
+],
+"calibre:src/calibre/ebooks/rtf2xml/paragraphs.py": [
+73,
+74,
+75,
+76,
+83,
+84,
+87,
+88,
+89,
+90,
+91,
+92,
+93,
+94,
+105,
+166,
+184,
+188,
+213,
+217
+],
+"calibre:src/calibre/ebooks/rtf2xml/preamble_div.py": [
+122
+],
+"calibre:src/calibre/ebooks/rtf2xml/process_tokens.py": [
+614,
+615,
+616,
+769
+],
+"calibre:src/calibre/ebooks/rtf2xml/styles.py": [
+495
+],
+"calibre:src/calibre/ebooks/snb/snbml.py": [
+177
+],
+"calibre:src/calibre/ebooks/textile/functions.py": [
+244,
+250,
+253,
+254,
+256,
+257,
+258
+],
+"calibre:src/calibre/ebooks/txt/textileml.py": [
+167
+],
+"calibre:src/calibre/ebooks/unihandecode/__init__.py": [
+37
+],
+"calibre:src/calibre/ebooks/unihandecode/pykakasi/jisyo.py": [
+40
+],
+"calibre:src/calibre/gui2/__init__.py": [
+956,
+1071,
+1078,
+1208,
+1323,
+1497
+],
+"calibre:src/calibre/gui2/actions/catalog.py": [
+102
+],
+"calibre:src/calibre/gui2/actions/choose_library.py": [
+441
+],
+"calibre:src/calibre/gui2/actions/delete.py": [
+80
+],
+"calibre:src/calibre/gui2/actions/edit_metadata.py": [
+754,
+794,
+795
+],
+"calibre:src/calibre/gui2/actions/tweak_epub.py": [
+125,
+148
+],
+"calibre:src/calibre/gui2/actions/view.py": [
+199,
+279
+],
+"calibre:src/calibre/gui2/add.py": [
+312,
+323
+],
+"calibre:src/calibre/gui2/bars.py": [
+224,
+344,
+513,
+516
+],
+"calibre:src/calibre/gui2/catalog/catalog_bibtex.py": [
+34
+],
+"calibre:src/calibre/gui2/comments_editor.py": [
+1161,
+1165
+],
+"calibre:src/calibre/gui2/convert/font_key.py": [
+23
+],
+"calibre:src/calibre/gui2/convert/heuristics.py": [
+38
+],
+"calibre:src/calibre/gui2/convert/metadata.py": [
+247
+],
+"calibre:src/calibre/gui2/convert/pdf_output.py": [
+31
+],
+"calibre:src/calibre/gui2/convert/search_and_replace.py": [
+70
+],
+"calibre:src/calibre/gui2/convert/toc.py": [
+34
+],
+"calibre:src/calibre/gui2/cover_flow.py": [
+447,
+458
+],
+"calibre:src/calibre/gui2/custom_column_widgets.py": [
+100,
+820,
+1257
+],
+"calibre:src/calibre/gui2/device.py": [
+152
+],
+"calibre:src/calibre/gui2/dialogs/choose_library.py": [
+191
+],
+"calibre:src/calibre/gui2/dialogs/edit_authors_dialog.py": [
+493
+],
+"calibre:src/calibre/gui2/dialogs/message_box.py": [
+189,
+449
+],
+"calibre:src/calibre/gui2/dialogs/metadata_bulk.py": [
+1398
+],
+"calibre:src/calibre/gui2/dialogs/plugin_updater.py": [
+212,
+325,
+385,
+625,
+634
+],
+"calibre:src/calibre/gui2/dialogs/progress.py": [
+166
+],
+"calibre:src/calibre/gui2/dialogs/quickview.py": [
+188,
+189,
+190
+],
+"calibre:src/calibre/gui2/dialogs/tag_editor.py": [
+238
+],
+"calibre:src/calibre/gui2/gestures.py": [
+17,
+23,
+158
+],
+"calibre:src/calibre/gui2/icon_theme.py": [
+254
+],
+"calibre:src/calibre/gui2/init.py": [
+462,
+566,
+579
+],
+"calibre:src/calibre/gui2/jobs.py": [
+260
+],
+"calibre:src/calibre/gui2/layout.py": [
+355
+],
+"calibre:src/calibre/gui2/library/alternate_views.py": [
+511,
+582,
+926,
+976
+],
+"calibre:src/calibre/gui2/library/annotations.py": [
+88
+],
+"calibre:src/calibre/gui2/library/caches.py": [
+54,
+66
+],
+"calibre:src/calibre/gui2/library/delegates.py": [
+41
+],
+"calibre:src/calibre/gui2/library/models.py": [
+221,
+745,
+1024,
+1030,
+1054,
+1147,
+1264,
+1295,
+1313
+],
+"calibre:src/calibre/gui2/linux_file_dialogs.py": [
+317
+],
+"calibre:src/calibre/gui2/lrf_renderer/document.py": [
+109,
+115,
+127
+],
+"calibre:src/calibre/gui2/lrf_renderer/main.py": [
+259
+],
+"calibre:src/calibre/gui2/lrf_renderer/text.py": [
+71,
+428
+],
+"calibre:src/calibre/gui2/main.py": [
+168,
+257
+],
+"calibre:src/calibre/gui2/metadata/basic_widgets.py": [
+1406
+],
+"calibre:src/calibre/gui2/metadata/diff.py": [
+456
+],
+"calibre:src/calibre/gui2/metadata/single.py": [
+354,
+445,
+611,
+722
+],
+"calibre:src/calibre/gui2/notify.py": [
+97
+],
+"calibre:src/calibre/gui2/pin_columns.py": [
+51
+],
+"calibre:src/calibre/gui2/preferences/coloring.py": [
+866,
+1195
+],
+"calibre:src/calibre/gui2/preferences/columns.py": [
+268,
+352
+],
+"calibre:src/calibre/gui2/preferences/ignored_devices.py": [
+114
+],
+"calibre:src/calibre/gui2/preferences/metadata_sources.py": [
+171
+],
+"calibre:src/calibre/gui2/preferences/plugins.py": [
+457
+],
+"calibre:src/calibre/gui2/save.py": [
+306
+],
+"calibre:src/calibre/gui2/search_box.py": [
+108,
+602
+],
+"calibre:src/calibre/gui2/search_restriction_mixin.py": [
+192,
+194,
+195,
+197,
+206,
+661
+],
+"calibre:src/calibre/gui2/store/config/chooser/adv_search_builder.py": [
+23
+],
+"calibre:src/calibre/gui2/store/config/chooser/models.py": [
+249,
+304
+],
+"calibre:src/calibre/gui2/store/search/adv_search_builder.py": [
+23
+],
+"calibre:src/calibre/gui2/store/search/models.py": [
+347,
+385,
+468
+],
+"calibre:src/calibre/gui2/store/search/search.py": [
+214
+],
+"calibre:src/calibre/gui2/store/stores/amazon_au_plugin.py": [
+6
+],
+"calibre:src/calibre/gui2/store/stores/amazon_ca_plugin.py": [
+6
+],
+"calibre:src/calibre/gui2/store/stores/amazon_de_plugin.py": [
+6
+],
+"calibre:src/calibre/gui2/store/stores/amazon_es_plugin.py": [
+6
+],
+"calibre:src/calibre/gui2/store/stores/amazon_fr_plugin.py": [
+6
+],
+"calibre:src/calibre/gui2/store/stores/amazon_in_plugin.py": [
+6
+],
+"calibre:src/calibre/gui2/store/stores/amazon_it_plugin.py": [
+6
+],
+"calibre:src/calibre/gui2/store/stores/amazon_plugin.py": [
+6
+],
+"calibre:src/calibre/gui2/store/stores/amazon_uk_plugin.py": [
+6
+],
+"calibre:src/calibre/gui2/store/stores/archive_org_plugin.py": [
+4
+],
+"calibre:src/calibre/gui2/store/stores/baen_webscription_plugin.py": [
+4
+],
+"calibre:src/calibre/gui2/store/stores/beam_ebooks_de_plugin.py": [
+4
+],
+"calibre:src/calibre/gui2/store/stores/biblio_plugin.py": [
+4
+],
+"calibre:src/calibre/gui2/store/stores/bn_plugin.py": [
+4
+],
+"calibre:src/calibre/gui2/store/stores/bubok_portugal_plugin.py": [
+4
+],
+"calibre:src/calibre/gui2/store/stores/bubok_publishing_plugin.py": [
+4
+],
+"calibre:src/calibre/gui2/store/stores/chitanka_plugin.py": [
+4
+],
+"calibre:src/calibre/gui2/store/stores/ebook_nl_plugin.py": [
+4
+],
+"calibre:src/calibre/gui2/store/stores/ebookpoint_plugin.py": [
+4
+],
+"calibre:src/calibre/gui2/store/stores/ebooks_com_plugin.py": [
+4
+],
+"calibre:src/calibre/gui2/store/stores/ebooksgratuits_plugin.py": [
+4
+],
+"calibre:src/calibre/gui2/store/stores/ebookshoppe_uk_plugin.py": [
+4
+],
+"calibre:src/calibre/gui2/store/stores/empik_plugin.py": [
+4
+],
+"calibre:src/calibre/gui2/store/stores/feedbooks_plugin.py": [
+4
+],
+"calibre:src/calibre/gui2/store/stores/google_books_plugin.py": [
+4
+],
+"calibre:src/calibre/gui2/store/stores/gutenberg_plugin.py": [
+5
+],
+"calibre:src/calibre/gui2/store/stores/kobo_plugin.py": [
+4
+],
+"calibre:src/calibre/gui2/store/stores/legimi_plugin.py": [
+4
+],
+"calibre:src/calibre/gui2/store/stores/libri_de_plugin.py": [
+4
+],
+"calibre:src/calibre/gui2/store/stores/litres_plugin.py": [
+4,
+114
+],
+"calibre:src/calibre/gui2/store/stores/manybooks_plugin.py": [
+4
+],
+"calibre:src/calibre/gui2/store/stores/mills_boon_uk_plugin.py": [
+4
+],
+"calibre:src/calibre/gui2/store/stores/mobileread/models.py": [
+149,
+189
+],
+"calibre:src/calibre/gui2/store/stores/nexto_plugin.py": [
+4
+],
+"calibre:src/calibre/gui2/store/stores/ozon_ru_plugin.py": [
+4
+],
+"calibre:src/calibre/gui2/store/stores/pragmatic_bookshelf_plugin.py": [
+4
+],
+"calibre:src/calibre/gui2/store/stores/publio_plugin.py": [
+4
+],
+"calibre:src/calibre/gui2/store/stores/rw2010_plugin.py": [
+4
+],
+"calibre:src/calibre/gui2/store/stores/smashwords_plugin.py": [
+4,
+37
+],
+"calibre:src/calibre/gui2/store/stores/swiatebookow_plugin.py": [
+4
+],
+"calibre:src/calibre/gui2/store/stores/virtualo_plugin.py": [
+4
+],
+"calibre:src/calibre/gui2/store/stores/weightless_books_plugin.py": [
+4
+],
+"calibre:src/calibre/gui2/store/stores/woblink_plugin.py": [
+4
+],
+"calibre:src/calibre/gui2/store/stores/wolnelektury_plugin.py": [
+4
+],
+"calibre:src/calibre/gui2/store/stores/xinxii_plugin.py": [
+4
+],
+"calibre:src/calibre/gui2/tag_browser/model.py": [
+152,
+421,
+680,
+683,
+770,
+1084,
+1157,
+1287,
+1309,
+1671
+],
+"calibre:src/calibre/gui2/tag_browser/ui.py": [
+273,
+274,
+275
+],
+"calibre:src/calibre/gui2/tag_browser/view.py": [
+312
+],
+"calibre:src/calibre/gui2/tweak_book/__init__.py": [
+151
+],
+"calibre:src/calibre/gui2/tweak_book/boss.py": [
+194,
+478,
+1936
+],
+"calibre:src/calibre/gui2/tweak_book/diff/main.py": [
+452
+],
+"calibre:src/calibre/gui2/tweak_book/diff/view.py": [
+418,
+804
+],
+"calibre:src/calibre/gui2/tweak_book/editor/image.py": [
+163,
+253
+],
+"calibre:src/calibre/gui2/tweak_book/editor/insert_resource.py": [
+111
+],
+"calibre:src/calibre/gui2/tweak_book/editor/smarts/html.py": [
+108,
+110,
+111,
+112,
+123,
+144,
+489,
+493,
+581,
+598,
+633,
+647,
+689
+],
+"calibre:src/calibre/gui2/tweak_book/editor/smarts/python.py": [
+18
+],
+"calibre:src/calibre/gui2/tweak_book/editor/snippets.py": [
+29
+],
+"calibre:src/calibre/gui2/tweak_book/editor/syntax/base.py": [
+215
+],
+"calibre:src/calibre/gui2/tweak_book/editor/syntax/html.py": [
+37,
+115
+],
+"calibre:src/calibre/gui2/tweak_book/editor/syntax/javascript.py": [
+57
+],
+"calibre:src/calibre/gui2/tweak_book/editor/text.py": [
+289,
+551
+],
+"calibre:src/calibre/gui2/tweak_book/editor/widget.py": [
+351,
+438
+],
+"calibre:src/calibre/gui2/tweak_book/file_list.py": [
+305
+],
+"calibre:src/calibre/gui2/tweak_book/live_css.py": [
+234,
+236,
+491
+],
+"calibre:src/calibre/gui2/tweak_book/plugin.py": [
+163
+],
+"calibre:src/calibre/gui2/tweak_book/reports.py": [
+342,
+1108,
+1147
+],
+"calibre:src/calibre/gui2/tweak_book/search.py": [
+1199
+],
+"calibre:src/calibre/gui2/tweak_book/spell.py": [
+617,
+618,
+620,
+1213
+],
+"calibre:src/calibre/gui2/tweak_book/text_search.py": [
+213,
+223
+],
+"calibre:src/calibre/gui2/tweak_book/toc.py": [
+173
+],
+"calibre:src/calibre/gui2/tweak_book/ui.py": [
+193,
+748,
+793,
+821,
+829,
+838,
+847,
+855,
+864,
+872
+],
+"calibre:src/calibre/gui2/tweak_book/undo.py": [
+223
+],
+"calibre:src/calibre/gui2/tweak_book/widgets.py": [
+1276
+],
+"calibre:src/calibre/gui2/ui.py": [
+111,
+112,
+339,
+890,
+891,
+1055
+],
+"calibre:src/calibre/gui2/viewer/convert_book.py": [
+55,
+69
+],
+"calibre:src/calibre/gui2/viewer/search.py": [
+265
+],
+"calibre:src/calibre/gui2/widgets.py": [
+76
+],
+"calibre:src/calibre/gui2/win_file_dialogs.py": [
+163,
+339
+],
+"calibre:src/calibre/gui2/wizard/__init__.py": [
+579,
+885
+],
+"calibre:src/calibre/library/caches.py": [
+55,
+99,
+470,
+619,
+622,
+629,
+632,
+747,
+774,
+798,
+810,
+815,
+830,
+834,
+952,
+956,
+1026
+],
+"calibre:src/calibre/library/check_library.py": [
+195,
+202,
+229,
+236
+],
+"calibre:src/calibre/library/database.py": [
+811,
+1198,
+1423
+],
+"calibre:src/calibre/library/database2.py": [
+220,
+480,
+673,
+721,
+1128,
+1360,
+1403,
+1419,
+1888,
+1910,
+2060,
+2089,
+2137,
+2361,
+2484,
+3379,
+3417,
+3522,
+3572
+],
+"calibre:src/calibre/library/field_metadata.py": [
+652
+],
+"calibre:src/calibre/linux.py": [
+1029,
+1139
+],
+"calibre:src/calibre/ptempfile.py": [
+72
+],
+"calibre:src/calibre/spell/dictionary.py": [
+289
+],
+"calibre:src/calibre/srv/auto_reload.py": [
+128,
+140,
+311
+],
+"calibre:src/calibre/srv/code.py": [
+380
+],
+"calibre:src/calibre/srv/content.py": [
+68,
+304
+],
+"calibre:src/calibre/srv/embedded.py": [
+132
+],
+"calibre:src/calibre/srv/http_response.py": [
+166,
+167,
+168,
+171,
+172
+],
+"calibre:src/calibre/srv/legacy.py": [
+47,
+215,
+217
+],
+"calibre:src/calibre/srv/loop.py": [
+327,
+598,
+612,
+721
+],
+"calibre:src/calibre/srv/metadata.py": [
+341,
+409,
+421,
+447
+],
+"calibre:src/calibre/srv/opds.py": [
+38,
+283
+],
+"calibre:src/calibre/srv/pool.py": [
+35
+],
+"calibre:src/calibre/srv/pre_activated.py": [
+45,
+50
+],
+"calibre:src/calibre/srv/render_book.py": [
+700
+],
+"calibre:src/calibre/srv/routes.py": [
+23,
+32,
+323
+],
+"calibre:src/calibre/srv/tests/content.py": [
+157
+],
+"calibre:src/calibre/srv/tests/http.py": [
+283
+],
+"calibre:src/calibre/srv/tests/loop.py": [
+214
+],
+"calibre:src/calibre/srv/tests/routes.py": [
+115
+],
+"calibre:src/calibre/srv/users.py": [
+213
+],
+"calibre:src/calibre/srv/utils.py": [
+27,
+119,
+308,
+361
+],
+"calibre:src/calibre/startup.py": [
+55,
+114,
+123,
+168
+],
+"calibre:src/calibre/utils/bibtex.py": [
+81,
+82,
+83,
+84,
+85,
+87,
+88,
+89,
+90,
+91,
+92,
+93,
+94,
+95,
+96,
+97,
+99,
+100,
+101,
+102,
+103,
+104,
+105,
+106,
+107
+],
+"calibre:src/calibre/utils/cleantext.py": [
+95,
+96
+],
+"calibre:src/calibre/utils/config.py": [
+65,
+389
+],
+"calibre:src/calibre/utils/date.py": [
+71
+],
+"calibre:src/calibre/utils/exim.py": [
+71
+],
+"calibre:src/calibre/utils/filenames.py": [
+513
+],
+"calibre:src/calibre/utils/fonts/sfnt/cff/writer.py": [
+129,
+151,
+157
+],
+"calibre:src/calibre/utils/fonts/sfnt/cmap.py": [
+59,
+61,
+63,
+255,
+266
+],
+"calibre:src/calibre/utils/fonts/sfnt/glyf.py": [
+14,
+15,
+16,
+17,
+18,
+19,
+20,
+21,
+22,
+23,
+24,
+25,
+26
+],
+"calibre:src/calibre/utils/fonts/sfnt/gsub.py": [
+125
+],
+"calibre:src/calibre/utils/fonts/sfnt/kern.py": [
+63
+],
+"calibre:src/calibre/utils/fonts/sfnt/subset.py": [
+23
+],
+"calibre:src/calibre/utils/fonts/utils.py": [
+32
+],
+"calibre:src/calibre/utils/formatter.py": [
+920,
+1461
+],
+"calibre:src/calibre/utils/formatter_functions.py": [
+531,
+1034,
+1038
+],
+"calibre:src/calibre/utils/https.py": [
+166,
+194
+],
+"calibre:src/calibre/utils/hyphenation/hyphenate.py": [
+35
+],
+"calibre:src/calibre/utils/icu.py": [
+183,
+222
+],
+"calibre:src/calibre/utils/img.py": [
+585
+],
+"calibre:src/calibre/utils/imghdr.py": [
+154,
+156
+],
+"calibre:src/calibre/utils/inotify.py": [
+78,
+79,
+80,
+81,
+82,
+83,
+84,
+85,
+86,
+87,
+88,
+89,
+92,
+93,
+94,
+101,
+102,
+103,
+104,
+105,
+106,
+180,
+182
+],
+"calibre:src/calibre/utils/ip_routing.py": [
+20
+],
+"calibre:src/calibre/utils/ipc/job.py": [
+152
+],
+"calibre:src/calibre/utils/ipc/pool.py": [
+27,
+297,
+363
+],
+"calibre:src/calibre/utils/ipc/simple_worker.py": [
+293,
+300,
+333
+],
+"calibre:src/calibre/utils/ipc/worker.py": [
+226,
+230
+],
+"calibre:src/calibre/utils/iso8601.py": [
+45
+],
+"calibre:src/calibre/utils/linux_trash.py": [
+47,
+102
+],
+"calibre:src/calibre/utils/localization.py": [
+41,
+63,
+64,
+233,
+239
+],
+"calibre:src/calibre/utils/lock.py": [
+56,
+57,
+58,
+59
+],
+"calibre:src/calibre/utils/network.py": [
+15,
+16,
+17,
+18,
+19
+],
+"calibre:src/calibre/utils/recycle_bin.py": [
+50,
+52,
+84
+],
+"calibre:src/calibre/utils/search_query_parser.py": [
+438
+],
+"calibre:src/calibre/utils/smartypants.py": [
+492,
+693,
+694,
+707,
+708,
+760,
+761,
+763,
+764,
+850,
+873,
+874
+],
+"calibre:src/calibre/utils/smtp.py": [
+121,
+163,
+191
+],
+"calibre:src/calibre/utils/smtplib.py": [
+65,
+156,
+593
+],
+"calibre:src/calibre/utils/test_lock.py": [
+54
+],
+"calibre:src/calibre/utils/threadpool.py": [
+96
+],
+"calibre:src/calibre/utils/winreg/dde.py": [
+13,
+14,
+15,
+135
+],
+"calibre:src/calibre/utils/winreg/lib.py": [
+46,
+364
+],
+"calibre:src/calibre/utils/wmf/parse.py": [
+146
+],
+"calibre:src/calibre/utils/zipfile.py": [
+23,
+50,
+182,
+331,
+348,
+349,
+351,
+352,
+353,
+355,
+358,
+359,
+360,
+361,
+362,
+363,
+364,
+365,
+729,
+747,
+748,
+749,
+750,
+827,
+828,
+829,
+985,
+1126,
+1147,
+1158,
+1189,
+1231,
+1241,
+1286,
+1318,
+1319,
+1323,
+1328,
+1331,
+1350,
+1369,
+1372,
+1509,
+1567,
+1608
+],
+"calibre:src/calibre/web/feeds/news.py": [
+1122,
+1730
+],
+"calibre:src/calibre/web/feeds/recipes/collection.py": [
+227
+],
+"calibre:src/calibre/web/fetch/simple.py": [
+136,
+216,
+265,
+288
+],
+"calibre:src/calibre/web/fetch/utils.py": [
+9,
+17,
+23,
+26,
+32,
+35
+],
+"calibre:src/css_selectors/tests.py": [
+667,
+671,
+795,
+796
+],
+"calibre:src/odf/easyliststyle.py": [
+80
+],
+"calibre:src/odf/element.py": [
+289,
+327
+],
+"calibre:src/odf/odf2moinmoin.py": [
+325,
+364
+],
+"calibre:src/odf/odf2xhtml.py": [
+35,
+82,
+83,
+152,
+237,
+240,
+247,
+250,
+257,
+444,
+446,
+516,
+775,
+792,
+794,
+998,
+1222,
+1254,
+1276,
+1287,
+1494,
+1584,
+1637
+],
+"calibre:src/odf/odfmanifest.py": [
+100
+],
+"calibre:src/odf/opendocument.py": [
+101,
+147,
+162,
+460,
+627,
+641,
+662
+],
+"calibre:src/tinycss/css21.py": [
+778,
+786
+],
+"calibre:src/tinycss/decoding.py": [
+20
+],
+"calibre:src/tinycss/media3.py": [
+57
+],
+"calibre:src/tinycss/parsing.py": [
+56
+],
+"calibre:src/tinycss/tests/color3.py": [
+60,
+69
+],
+"calibre:src/tinycss/tests/css21.py": [
+50,
+52,
+293
+],
+"calibre:src/tinycss/tests/decoding.py": [
+19,
+21,
+37
+],
+"calibre:src/tinycss/tests/tokenizing.py": [
+112,
+195,
+215
+],
+"calibre:src/tinycss/token_data.py": [
+115,
+116
+],
+"calibre:src/tinycss/tokenizer.py": [
+101,
+106,
+120,
+171,
+177,
+187
+]
+}

@@ -1,0 +1,886 @@
+{
+"timesketch:timesketch/__init__.py": [
+18
+],
+"timesketch:timesketch/api/v1/export.py": [
+31,
+66,
+85,
+116,
+196,
+233
+],
+"timesketch:timesketch/api/v1/resources/__init__.py": [
+250,
+260
+],
+"timesketch:timesketch/api/v1/resources/aggregation.py": [
+49,
+94,
+161,
+207,
+228,
+242,
+268,
+318,
+381,
+427,
+569,
+596,
+640,
+679,
+724
+],
+"timesketch:timesketch/api/v1/resources/analysis.py": [
+57,
+87,
+128,
+154,
+184
+],
+"timesketch:timesketch/api/v1/resources/archive.py": [
+61,
+67,
+81,
+120,
+174,
+214,
+246,
+256,
+294,
+343,
+438,
+471
+],
+"timesketch:timesketch/api/v1/resources/attribute.py": [
+45,
+68,
+87,
+194
+],
+"timesketch:timesketch/api/v1/resources/datafinder.py": [
+38
+],
+"timesketch:timesketch/api/v1/resources/datasource.py": [
+43,
+80,
+151,
+181,
+196
+],
+"timesketch:timesketch/api/v1/resources/event.py": [
+56,
+99,
+252,
+260,
+351,
+554,
+567,
+585,
+615,
+728,
+820,
+907,
+937
+],
+"timesketch:timesketch/api/v1/resources/explore.py": [
+62,
+403,
+438,
+444,
+493
+],
+"timesketch:timesketch/api/v1/resources/graph.py": [
+48,
+61,
+108,
+114,
+169,
+227,
+270,
+293
+],
+"timesketch:timesketch/api/v1/resources/information.py": [
+29
+],
+"timesketch:timesketch/api/v1/resources/searchindex.py": [
+43,
+54,
+110,
+139,
+190
+],
+"timesketch:timesketch/api/v1/resources/searchtemplate.py": [
+40,
+62,
+89,
+113
+],
+"timesketch:timesketch/api/v1/resources/session.py": [
+31
+],
+"timesketch:timesketch/api/v1/resources/sigma.py": [
+41,
+68,
+105
+],
+"timesketch:timesketch/api/v1/resources/sketch.py": [
+56,
+73,
+181,
+210,
+221,
+232,
+284,
+466,
+489
+],
+"timesketch:timesketch/api/v1/resources/story.py": [
+43,
+67,
+106,
+139,
+181,
+232
+],
+"timesketch:timesketch/api/v1/resources/task.py": [
+33,
+39,
+53
+],
+"timesketch:timesketch/api/v1/resources/timeline.py": [
+51,
+67,
+161,
+171,
+182,
+220,
+315,
+420
+],
+"timesketch:timesketch/api/v1/resources/upload.py": [
+47,
+115,
+250,
+277,
+395
+],
+"timesketch:timesketch/api/v1/resources/user.py": [
+41,
+54,
+67,
+76,
+108
+],
+"timesketch:timesketch/api/v1/resources/view.py": [
+43,
+123,
+142,
+178,
+228,
+268
+],
+"timesketch:timesketch/api/v1/utils.py": [
+35,
+49,
+84,
+95,
+105,
+157
+],
+"timesketch:timesketch/app.py": [
+41,
+138,
+154,
+173,
+177,
+191,
+203
+],
+"timesketch:timesketch/lib/aggregators/bucket.py": [
+75,
+82
+],
+"timesketch:timesketch/lib/aggregators/feed.py": [
+45,
+61,
+68
+],
+"timesketch:timesketch/lib/aggregators/interface.py": [
+41,
+63,
+77,
+85,
+150,
+185,
+190,
+197,
+291,
+342,
+362
+],
+"timesketch:timesketch/lib/aggregators/manager.py": [
+26,
+40,
+60,
+83
+],
+"timesketch:timesketch/lib/aggregators/term.py": [
+22,
+144,
+151
+],
+"timesketch:timesketch/lib/aggregators/vega.py": [
+40,
+51,
+70,
+79,
+129,
+145,
+152
+],
+"timesketch:timesketch/lib/analyzers/account_finder.py": [
+17
+],
+"timesketch:timesketch/lib/analyzers/browser_search.py": [
+61,
+86,
+110,
+139,
+162
+],
+"timesketch:timesketch/lib/analyzers/browser_timeframe.py": [
+13,
+51,
+93,
+163
+],
+"timesketch:timesketch/lib/analyzers/chain.py": [
+39,
+52
+],
+"timesketch:timesketch/lib/analyzers/chain_plugins/chrome_download_file.py": [
+19
+],
+"timesketch:timesketch/lib/analyzers/chain_plugins/interface.py": [
+32,
+37,
+51,
+77
+],
+"timesketch:timesketch/lib/analyzers/chain_plugins/manager.py": [
+10,
+29,
+42,
+62
+],
+"timesketch:timesketch/lib/analyzers/chain_plugins/win_prefetch.py": [
+19,
+32
+],
+"timesketch:timesketch/lib/analyzers/domain.py": [
+26
+],
+"timesketch:timesketch/lib/analyzers/evtx_sessionizers.py": [
+20,
+44,
+107,
+136,
+142,
+165,
+171
+],
+"timesketch:timesketch/lib/analyzers/feature_extraction.py": [
+148,
+161,
+170,
+215,
+336
+],
+"timesketch:timesketch/lib/analyzers/gcp_logging.py": [
+16,
+26
+],
+"timesketch:timesketch/lib/analyzers/gcp_servicekey.py": [
+15
+],
+"timesketch:timesketch/lib/analyzers/geoip.py": [
+46,
+52,
+80,
+88,
+95,
+138,
+150,
+157,
+219,
+231,
+246
+],
+"timesketch:timesketch/lib/analyzers/interface.py": [
+50,
+53,
+74,
+96,
+134,
+161,
+169,
+189,
+197,
+215,
+240,
+270,
+274,
+297,
+333,
+345,
+385,
+413,
+456,
+492,
+516,
+533,
+544,
+549,
+553,
+565,
+572,
+590,
+595,
+600,
+605,
+631,
+640,
+645,
+661,
+673,
+697,
+732,
+749,
+791,
+815,
+888,
+983,
+1039,
+1056
+],
+"timesketch:timesketch/lib/analyzers/login.py": [
+28,
+52,
+127
+],
+"timesketch:timesketch/lib/analyzers/manager.py": [
+25,
+75,
+81,
+106,
+118
+],
+"timesketch:timesketch/lib/analyzers/ntfs_timestomp.py": [
+12,
+31,
+44,
+79
+],
+"timesketch:timesketch/lib/analyzers/phishy_domains.py": [
+41,
+68,
+93,
+178
+],
+"timesketch:timesketch/lib/analyzers/safebrowsing.py": [
+48,
+71,
+87,
+156,
+172
+],
+"timesketch:timesketch/lib/analyzers/sequence_sessionizer.py": [
+29,
+70,
+93,
+110,
+128
+],
+"timesketch:timesketch/lib/analyzers/sessionizer.py": [
+36,
+69
+],
+"timesketch:timesketch/lib/analyzers/sigma_tagger.py": [
+23,
+35,
+73,
+114,
+152
+],
+"timesketch:timesketch/lib/analyzers/similarity_scorer.py": [
+51,
+63,
+92,
+106
+],
+"timesketch:timesketch/lib/analyzers/ssh_sessionizer.py": [
+51
+],
+"timesketch:timesketch/lib/analyzers/tagger.py": [
+28,
+41,
+50,
+66
+],
+"timesketch:timesketch/lib/analyzers/utils.py": [
+182,
+198,
+211,
+225,
+240,
+262,
+299
+],
+"timesketch:timesketch/lib/analyzers/win_crash.py": [
+86,
+100,
+117,
+128
+],
+"timesketch:timesketch/lib/analyzers/win_evtxgap.py": [
+17,
+61
+],
+"timesketch:timesketch/lib/analyzers/yetiindicators.py": [
+23,
+36,
+58,
+72,
+93
+],
+"timesketch:timesketch/lib/charts/barchart.py": [
+29,
+52
+],
+"timesketch:timesketch/lib/charts/circle.py": [
+29
+],
+"timesketch:timesketch/lib/charts/interface.py": [
+28,
+66,
+90,
+102,
+106
+],
+"timesketch:timesketch/lib/charts/line.py": [
+29
+],
+"timesketch:timesketch/lib/charts/manager.py": [
+25,
+37,
+54,
+72
+],
+"timesketch:timesketch/lib/charts/table.py": [
+26
+],
+"timesketch:timesketch/lib/datafinder.py": [
+30,
+43,
+76,
+81,
+85,
+94,
+103,
+113,
+118,
+122
+],
+"timesketch:timesketch/lib/datastores/opensearch.py": [
+111,
+141,
+182,
+196,
+260,
+303,
+482,
+596,
+662,
+735,
+769,
+806,
+871,
+918,
+932,
+1000,
+1098
+],
+"timesketch:timesketch/lib/emojis.py": [
+308,
+324,
+340
+],
+"timesketch:timesketch/lib/errors.py": [
+28,
+39
+],
+"timesketch:timesketch/lib/forms.py": [
+39,
+53,
+69
+],
+"timesketch:timesketch/lib/google_auth.py": [
+61,
+83,
+105,
+114,
+154,
+197,
+229,
+284,
+327
+],
+"timesketch:timesketch/lib/graphs/chrome_downloads.py": [
+30
+],
+"timesketch:timesketch/lib/graphs/interface.py": [
+40,
+51,
+70,
+99,
+111,
+128,
+139,
+149,
+172,
+209,
+228,
+245,
+293
+],
+"timesketch:timesketch/lib/graphs/manager.py": [
+23,
+35,
+54,
+71
+],
+"timesketch:timesketch/lib/graphs/win_logins.py": [
+26
+],
+"timesketch:timesketch/lib/graphs/win_services.py": [
+26
+],
+"timesketch:timesketch/lib/ontology.py": [
+20,
+33,
+43,
+54,
+65,
+76,
+88,
+99,
+111,
+122,
+129,
+140,
+152,
+167,
+173,
+181
+],
+"timesketch:timesketch/lib/sigma_util.py": [
+38,
+85,
+120,
+159,
+179,
+334,
+353,
+393,
+428
+],
+"timesketch:timesketch/lib/similarity.py": [
+32,
+48,
+67,
+108
+],
+"timesketch:timesketch/lib/stories/api_fetcher.py": [
+37,
+44,
+95,
+164
+],
+"timesketch:timesketch/lib/stories/html.py": [
+46,
+65
+],
+"timesketch:timesketch/lib/stories/interface.py": [
+27,
+38,
+46,
+50,
+63,
+93,
+101,
+110,
+118,
+129,
+139,
+144,
+150,
+158,
+162,
+176,
+190,
+202
+],
+"timesketch:timesketch/lib/stories/manager.py": [
+25,
+30,
+47,
+52,
+64
+],
+"timesketch:timesketch/lib/stories/markdown.py": [
+37,
+57
+],
+"timesketch:timesketch/lib/tasks.py": [
+71,
+76,
+127,
+135,
+142,
+167,
+204,
+225,
+287,
+391,
+410,
+472,
+498,
+647,
+767,
+838
+],
+"timesketch:timesketch/lib/testlib.py": [
+62,
+66,
+90,
+94,
+97,
+100,
+170,
+183,
+196,
+209,
+221,
+229,
+242,
+246,
+272,
+281,
+291,
+332,
+338,
+344,
+360,
+368,
+376,
+390,
+403,
+423,
+441,
+458,
+471,
+493,
+511,
+527,
+570,
+575,
+582,
+604
+],
+"timesketch:timesketch/lib/utils.py": [
+53,
+67,
+87,
+94,
+114,
+131,
+207,
+246,
+299,
+353
+],
+"timesketch:timesketch/migrations/env.py": [
+35,
+54,
+65
+],
+"timesketch:timesketch/migrations/versions/36e85b266dba_.py": [
+19,
+25
+],
+"timesketch:timesketch/migrations/versions/41cae2c10cd7_.py": [
+18,
+22
+],
+"timesketch:timesketch/migrations/versions/58754b577173_.py": [
+17,
+28
+],
+"timesketch:timesketch/migrations/versions/64c00337b9d1_.py": [
+19,
+25
+],
+"timesketch:timesketch/migrations/versions/654121a84a33_.py": [
+17,
+74
+],
+"timesketch:timesketch/migrations/versions/6e69f2cfcac1_.py": [
+19,
+25
+],
+"timesketch:timesketch/migrations/versions/75af34d75b1e_extending_the_data_source_schema.py": [
+20,
+28
+],
+"timesketch:timesketch/migrations/versions/7d48bf36b244_.py": [
+19,
+25
+],
+"timesketch:timesketch/migrations/versions/be32626451fb_.py": [
+20,
+31
+],
+"timesketch:timesketch/migrations/versions/c380f6dff0bd_.py": [
+19,
+25
+],
+"timesketch:timesketch/migrations/versions/ecf00882f546_.py": [
+20,
+28
+],
+"timesketch:timesketch/migrations/versions/fc7bc5c66c63_.py": [
+17,
+45
+],
+"timesketch:timesketch/models/__init__.py": [
+39,
+51,
+60,
+71,
+103,
+110,
+115
+],
+"timesketch:timesketch/models/acl.py": [
+50,
+59,
+68,
+77,
+97,
+117,
+143,
+177,
+192,
+197,
+210,
+220,
+234,
+266,
+298,
+317,
+338
+],
+"timesketch:timesketch/models/annotations.py": [
+39,
+48,
+61,
+77,
+93,
+113,
+139,
+153,
+165,
+181,
+193,
+213,
+238,
+252,
+266,
+290,
+315,
+329
+],
+"timesketch:timesketch/models/sketch.py": [
+69,
+83,
+95,
+108,
+121,
+139,
+155,
+172,
+176,
+202,
+244,
+275,
+306,
+362,
+403,
+426,
+455,
+496,
+537,
+572,
+593,
+616,
+645,
+682,
+715,
+772,
+795,
+809
+],
+"timesketch:timesketch/models/user.py": [
+74,
+87,
+100,
+121
+],
+"timesketch:timesketch/tsctl.py": [
+52,
+62,
+78,
+104,
+114,
+139,
+164,
+185,
+203,
+218,
+232,
+259,
+307,
+337,
+385,
+454,
+498,
+507
+],
+"timesketch:timesketch/version.py": [
+19
+],
+"timesketch:timesketch/views/auth.py": [
+65,
+162,
+173,
+307
+],
+"timesketch:timesketch/views/spa.py": [
+31,
+45
+],
+"timesketch:timesketch/wsgi.py": [
+55
+]
+}
