@@ -41,7 +41,7 @@ class PythonRulingTest {
   private static final String PROFILE_NAME = "rules";
 
   @BeforeAll
-  static void prepare_quality_profile() throws IOException {
+  static void prepare_quality_profile() {
     ProfileGenerator.RulesConfiguration parameters = new ProfileGenerator.RulesConfiguration()
       .add("CommentRegularExpression", "message", "The regular expression matches this comment")
       .add("S1451", "headerFormat", "# Copyright 2004 by Harry Zuzan. All rights reserved.");
@@ -71,11 +71,32 @@ class PythonRulingTest {
   }
 
   @Test
+  void test_biopython() throws IOException {
+    executeBuild(buildWithCommonProperties("biopython"));
+  }
+
+  @Test
   void test_black() throws IOException {
     SonarScanner build = buildWithCommonProperties("black");
     build.setProperty("sonar.sources", "src");
     build.setProperty("sonar.tests", "tests");
     build.setProperty("sonar.test.exclusions", "tests/data/async_as_identifier.py");
+    executeBuild(build);
+  }
+
+  @Test
+  void test_buildbot() throws IOException {
+    SonarScanner build = buildWithCommonProperties("buildbot","buildbot-0.8.6p1");
+    build.setProperty("sonar.sources", "buildbot");
+    build.setProperty("sonar.tests", "contrib");
+    executeBuild(build);
+  }
+
+  @Test
+  void test_buildbot_slave() throws IOException {
+    SonarScanner build = buildWithCommonProperties("buildbot-slave", "buildbot-slave-0.8.6p1");
+    build.setProperty("sonar.sources", "buildslave");
+    build.setProperty("sonar.tests", "contrib");
     executeBuild(build);
   }
 
@@ -103,9 +124,32 @@ class PythonRulingTest {
   }
 
   @Test
+  void test_django() throws IOException {
+    SonarScanner build = buildWithCommonProperties("django", "django-2.2.3");
+    build.setProperty("sonar.sources", "django");
+    executeBuild(build);
+  }
+
+  @Test
+  void test_django_cms() throws IOException {
+    SonarScanner build = buildWithCommonProperties("django-cms", "django-cms-3.7.1");
+    build.setProperty("sonar.sources", "cms");
+    build.setProperty("sonar.test", "cms/tests");
+    executeBuild(build);
+  }
+
+  @Test
   void test_django_shop() throws IOException {
     SonarScanner build = buildWithCommonProperties("django-shop");
     build.setProperty("sonar.sources", "shop");
+    build.setProperty("sonar.tests", "tests");
+    executeBuild(build);
+  }
+
+  @Test
+  void test_docker_compose() throws IOException {
+    SonarScanner build = buildWithCommonProperties("docker-compose", "docker-compose-1.24.1");
+    build.setProperty("sonar.sources", "compose");
     build.setProperty("sonar.tests", "tests");
     executeBuild(build);
   }
@@ -118,6 +162,11 @@ class PythonRulingTest {
   }
 
   @Test
+  void test_keras_tutorials() throws IOException {
+    executeBuild(buildWithCommonProperties("keras-tutorials"));
+  }
+
+  @Test
   void test_LibCST() throws IOException {
     SonarScanner build = buildWithCommonProperties("LibCST");
     build.setProperty("sonar.sources", "libcst");
@@ -127,10 +176,36 @@ class PythonRulingTest {
   }
 
   @Test
+  void test_mypy() throws IOException {
+    SonarScanner build = buildWithCommonProperties("mypy", "mypy-0.782");
+    build.setProperty("sonar.sources", "mypy,mypyc");
+    build.setProperty("sonar.exclusions", "**/test/**/*");
+    build.setProperty("sonar.tests", "mypy/test,mypyc/test");
+    executeBuild(build);
+  }
+
+  @Test
   void test_nltk() throws IOException {
     SonarScanner build = buildWithCommonProperties("nltk");
     build.setProperty("sonar.sources", ".");
     build.setProperty("sonar.exclusions", "**/test/**/*");
+    executeBuild(build);
+  }
+
+  @Test
+  void test_numpy() throws IOException {
+    SonarScanner build = buildWithCommonProperties("numpy", "numpy-1.16.4");
+    build.setProperty("sonar.sources", "numpy");
+    build.setProperty("sonar.exclusions", "**/tests/**/*");
+    build.setProperty("sonar.tests", "numpy/tests");
+    executeBuild(build);
+  }
+
+  @Test
+  void test_pecos() throws IOException {
+    SonarScanner build = buildWithCommonProperties("pecos");
+    build.setProperty("sonar.sources", "pecos");
+    build.setProperty("sonar.tests", "test");
     executeBuild(build);
   }
 
@@ -159,6 +234,19 @@ class PythonRulingTest {
   }
 
   @Test
+  void test_specific_rules() throws IOException {
+    // this tests is a hodgepodge of tests which are designed for specific rules
+    executeBuild(buildWithCommonProperties("specific-rules"));
+  }
+
+  @Test
+  void test_tensorflow() throws IOException {
+    SonarScanner build = buildWithCommonProperties("tensorflow");
+    build.setProperty("sonar.sources", "python");
+    executeBuild(build);
+  }
+
+  @Test
   void test_timesketch() throws IOException {
     SonarScanner build = buildWithCommonProperties("timesketch");
     build.setProperty("sonar.sources", "timesketch");
@@ -167,11 +255,23 @@ class PythonRulingTest {
   }
 
   @Test
-  void test_ruling() throws IOException {
-    SonarScanner build = buildWithCommonProperties("project");
-    build.setProperty("sonar.sources", ".");
+  void test_tornado() throws IOException {
+    SonarScanner build = buildWithCommonProperties("tornado", "tornado-2.3");
+    build.setProperty("sonar.sources", "tornado");
+    build.setProperty("sonar.exclusions", "**/test/**/*");
+    build.setProperty("sonar.tests", "tornado/test");
     executeBuild(build);
   }
+
+  @Test
+  void test_twisted() throws IOException {
+    SonarScanner build = buildWithCommonProperties("twisted", "twisted-12.1.0");
+    build.setProperty("sonar.sources", "twisted");
+    build.setProperty("sonar.exclusions", "**/test/**/*");
+    build.setProperty("sonar.tests", "twisted/test");
+    executeBuild(build);
+  }
+
 
   public SonarScanner buildWithCommonProperties(String projectKey) {
     return buildWithCommonProperties(projectKey, projectKey);
