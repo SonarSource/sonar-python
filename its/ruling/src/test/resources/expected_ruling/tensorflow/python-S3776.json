@@ -1,0 +1,1479 @@
+{
+"tensorflow:python/autograph/impl/api.py": [
+417
+],
+"tensorflow:python/autograph/impl/conversion.py": [
+129
+],
+"tensorflow:python/autograph/operators/control_flow.py": [
+133
+],
+"tensorflow:python/autograph/operators/control_flow_deprecated_py2.py": [
+137
+],
+"tensorflow:python/autograph/operators/data_structures.py": [
+57,
+107
+],
+"tensorflow:python/autograph/pyct/ast_util.py": [
+178,
+284
+],
+"tensorflow:python/autograph/pyct/cfg.py": [
+599
+],
+"tensorflow:python/autograph/pyct/cfg_test.py": [
+864
+],
+"tensorflow:python/autograph/pyct/inspect_utils.py": [
+177,
+265
+],
+"tensorflow:python/autograph/pyct/inspect_utils_test.py": [
+322
+],
+"tensorflow:python/autograph/pyct/origin_info.py": [
+89
+],
+"tensorflow:python/autograph/pyct/parser.py": [
+51
+],
+"tensorflow:python/autograph/pyct/pretty_printer.py": [
+59
+],
+"tensorflow:python/autograph/pyct/static_analysis/activity.py": [
+267
+],
+"tensorflow:python/autograph/pyct/transformer.py": [
+282,
+421
+],
+"tensorflow:python/autograph/pyct/transformer_test.py": [
+47
+],
+"tensorflow:python/autograph/utils/py_func.py": [
+38
+],
+"tensorflow:python/client/session.py": [
+634,
+1092,
+1186
+],
+"tensorflow:python/client/timeline.py": [
+527,
+622
+],
+"tensorflow:python/compiler/tensorrt/test/tf_trt_integration_test_base.py": [
+544,
+652
+],
+"tensorflow:python/compiler/tensorrt/trt_convert.py": [
+188,
+656,
+749
+],
+"tensorflow:python/compiler/tensorrt/trt_convert_test.py": [
+454
+],
+"tensorflow:python/compiler/xla/xla.py": [
+195
+],
+"tensorflow:python/data/experimental/kernel_tests/bucket_by_sequence_length_test.py": [
+82,
+205,
+384
+],
+"tensorflow:python/data/experimental/kernel_tests/parallel_interleave_test.py": [
+86
+],
+"tensorflow:python/data/experimental/kernel_tests/reader_dataset_ops_test_base.py": [
+170,
+277,
+314,
+336
+],
+"tensorflow:python/data/experimental/kernel_tests/serialization/dataset_serialization_test_base.py": [
+314
+],
+"tensorflow:python/data/experimental/ops/grouping.py": [
+288
+],
+"tensorflow:python/data/experimental/ops/readers.py": [
+321
+],
+"tensorflow:python/data/experimental/ops/scan_ops.py": [
+32
+],
+"tensorflow:python/data/kernel_tests/interleave_test.py": [
+38
+],
+"tensorflow:python/data/kernel_tests/padded_batch_test.py": [
+49
+],
+"tensorflow:python/data/kernel_tests/text_line_dataset_test.py": [
+46
+],
+"tensorflow:python/data/kernel_tests/window_test.py": [
+52
+],
+"tensorflow:python/data/ops/dataset_ops.py": [
+721,
+1975,
+3186,
+4573
+],
+"tensorflow:python/data/ops/multi_device_iterator_ops.py": [
+466
+],
+"tensorflow:python/data/util/nest.py": [
+259
+],
+"tensorflow:python/data/util/structure.py": [
+407
+],
+"tensorflow:python/debug/cli/analyzer_cli.py": [
+481,
+910,
+1111,
+1364
+],
+"tensorflow:python/debug/cli/analyzer_cli_test.py": [
+116,
+261
+],
+"tensorflow:python/debug/cli/cli_shared.py": [
+386
+],
+"tensorflow:python/debug/cli/command_parser.py": [
+104,
+343
+],
+"tensorflow:python/debug/cli/curses_ui.py": [
+557,
+661,
+777,
+1060,
+1229,
+1316
+],
+"tensorflow:python/debug/cli/debugger_cli_common.py": [
+434
+],
+"tensorflow:python/debug/cli/profile_analyzer_cli.py": [
+146,
+601
+],
+"tensorflow:python/debug/cli/tensor_format.py": [
+72,
+202,
+282,
+488
+],
+"tensorflow:python/debug/lib/check_numerics_callback.py": [
+127,
+239
+],
+"tensorflow:python/debug/lib/debug_data.py": [
+819,
+1417
+],
+"tensorflow:python/debug/lib/debug_gradients.py": [
+224
+],
+"tensorflow:python/debug/lib/debug_graph_reconstruction_test.py": [
+63
+],
+"tensorflow:python/debug/lib/debug_graphs.py": [
+367
+],
+"tensorflow:python/debug/lib/debug_utils.py": [
+82,
+200
+],
+"tensorflow:python/debug/lib/dumping_callback.py": [
+328,
+448,
+541
+],
+"tensorflow:python/debug/lib/dumping_callback_test.py": [
+126,
+273,
+1258
+],
+"tensorflow:python/debug/lib/grpc_debug_server.py": [
+127
+],
+"tensorflow:python/debug/lib/grpc_tensorflow_server.py": [
+45
+],
+"tensorflow:python/debug/lib/source_utils.py": [
+156,
+223,
+323
+],
+"tensorflow:python/debug/wrappers/framework.py": [
+397,
+519
+],
+"tensorflow:python/debug/wrappers/local_cli_wrapper.py": [
+306
+],
+"tensorflow:python/distribute/cluster_resolver/cluster_resolver.py": [
+388
+],
+"tensorflow:python/distribute/cluster_resolver/slurm_cluster_resolver.py": [
+31
+],
+"tensorflow:python/distribute/combinations.py": [
+159
+],
+"tensorflow:python/distribute/cross_device_ops.py": [
+869,
+1048
+],
+"tensorflow:python/distribute/ctl_correctness_test.py": [
+96,
+160
+],
+"tensorflow:python/distribute/distribute_coordinator.py": [
+631
+],
+"tensorflow:python/distribute/distribute_coordinator_test.py": [
+108
+],
+"tensorflow:python/distribute/distribute_lib.py": [
+1113
+],
+"tensorflow:python/distribute/distribute_utils.py": [
+32,
+244
+],
+"tensorflow:python/distribute/input_lib.py": [
+979
+],
+"tensorflow:python/distribute/input_lib_test.py": [
+129,
+668
+],
+"tensorflow:python/distribute/mirrored_run.py": [
+128
+],
+"tensorflow:python/distribute/mirrored_strategy.py": [
+131
+],
+"tensorflow:python/distribute/parameter_server_strategy.py": [
+425
+],
+"tensorflow:python/distribute/tpu_strategy.py": [
+606,
+654,
+859
+],
+"tensorflow:python/eager/backprop.py": [
+975
+],
+"tensorflow:python/eager/benchmarks/resnet50/resnet50.py": [
+297
+],
+"tensorflow:python/eager/context.py": [
+903,
+1008,
+1432
+],
+"tensorflow:python/eager/execute.py": [
+236,
+287
+],
+"tensorflow:python/eager/function.py": [
+271,
+509,
+1070,
+1192,
+1844,
+2501,
+2856,
+2963
+],
+"tensorflow:python/eager/gradient_input_output_exclusions.py": [
+183,
+293
+],
+"tensorflow:python/eager/lift_to_graph.py": [
+205
+],
+"tensorflow:python/eager/remote.py": [
+81
+],
+"tensorflow:python/eager/wrap_function.py": [
+146,
+249
+],
+"tensorflow:python/feature_column/feature_column.py": [
+171
+],
+"tensorflow:python/feature_column/feature_column_v2.py": [
+605,
+789
+],
+"tensorflow:python/feature_column/serialization.py": [
+238
+],
+"tensorflow:python/framework/auto_control_deps.py": [
+301
+],
+"tensorflow:python/framework/auto_control_deps_utils.py": [
+36
+],
+"tensorflow:python/framework/convert_to_constants.py": [
+805
+],
+"tensorflow:python/framework/device_spec.py": [
+301
+],
+"tensorflow:python/framework/dtypes_test.py": [
+244
+],
+"tensorflow:python/framework/error_interpolation.py": [
+487
+],
+"tensorflow:python/framework/errors_impl.py": [
+117
+],
+"tensorflow:python/framework/func_graph.py": [
+69,
+165,
+794,
+1141
+],
+"tensorflow:python/framework/function.py": [
+378
+],
+"tensorflow:python/framework/function_def_to_graph.py": [
+122
+],
+"tensorflow:python/framework/function_test.py": [
+57,
+1628
+],
+"tensorflow:python/framework/graph_to_function_def.py": [
+33,
+68
+],
+"tensorflow:python/framework/graph_util_impl.py": [
+291
+],
+"tensorflow:python/framework/importer.py": [
+145,
+237
+],
+"tensorflow:python/framework/meta_graph.py": [
+58,
+369,
+457,
+504,
+696,
+903
+],
+"tensorflow:python/framework/meta_graph_test.py": [
+984
+],
+"tensorflow:python/framework/op_callbacks_test.py": [
+83
+],
+"tensorflow:python/framework/op_def_library.py": [
+299
+],
+"tensorflow:python/framework/ops.py": [
+1448,
+1839,
+3178,
+3521,
+3672,
+4092,
+5641,
+6051
+],
+"tensorflow:python/framework/random_seed.py": [
+43
+],
+"tensorflow:python/framework/tensor_shape.py": [
+742,
+860
+],
+"tensorflow:python/framework/tensor_util.py": [
+361,
+570,
+674,
+842
+],
+"tensorflow:python/framework/test_combinations.py": [
+182,
+246
+],
+"tensorflow:python/framework/test_util.py": [
+629,
+774,
+877,
+1273,
+1338,
+1494,
+2501,
+2674
+],
+"tensorflow:python/framework/type_spec.py": [
+396,
+555
+],
+"tensorflow:python/grappler/auto_mixed_precision_test.py": [
+343
+],
+"tensorflow:python/grappler/cost_analyzer_tool.py": [
+40
+],
+"tensorflow:python/keras/applications/densenet.py": [
+129
+],
+"tensorflow:python/keras/applications/efficientnet.py": [
+194
+],
+"tensorflow:python/keras/applications/imagenet_utils.py": [
+169,
+296
+],
+"tensorflow:python/keras/applications/inception_resnet_v2.py": [
+45
+],
+"tensorflow:python/keras/applications/inception_v3.py": [
+48
+],
+"tensorflow:python/keras/applications/mobilenet.py": [
+84
+],
+"tensorflow:python/keras/applications/mobilenet_v2.py": [
+97
+],
+"tensorflow:python/keras/applications/nasnet.py": [
+65
+],
+"tensorflow:python/keras/applications/resnet.py": [
+60
+],
+"tensorflow:python/keras/applications/vgg16.py": [
+46
+],
+"tensorflow:python/keras/applications/vgg19.py": [
+46
+],
+"tensorflow:python/keras/applications/xception.py": [
+52
+],
+"tensorflow:python/keras/backend.py": [
+1142,
+1776,
+1837,
+2785,
+3911,
+3996,
+4391,
+4455,
+4720
+],
+"tensorflow:python/keras/backend_test.py": [
+1187,
+1276
+],
+"tensorflow:python/keras/callbacks.py": [
+1242,
+1325,
+1992,
+2330,
+2413
+],
+"tensorflow:python/keras/callbacks_test.py": [
+1695
+],
+"tensorflow:python/keras/callbacks_v1.py": [
+179,
+234,
+401
+],
+"tensorflow:python/keras/distribute/distributed_training_utils.py": [
+240,
+472
+],
+"tensorflow:python/keras/distribute/keras_correctness_test_base.py": [
+289
+],
+"tensorflow:python/keras/engine/base_layer.py": [
+479,
+993,
+1158,
+1432,
+1586,
+1714,
+2647,
+2789,
+2880
+],
+"tensorflow:python/keras/engine/base_layer_utils.py": [
+195
+],
+"tensorflow:python/keras/engine/base_layer_v1.py": [
+309,
+629,
+952,
+1928,
+2188
+],
+"tensorflow:python/keras/engine/compile_utils.py": [
+164,
+334,
+382,
+421
+],
+"tensorflow:python/keras/engine/data_adapter.py": [
+256
+],
+"tensorflow:python/keras/engine/functional.py": [
+387,
+463,
+538,
+605,
+661,
+807,
+1052,
+1224
+],
+"tensorflow:python/keras/engine/input_layer.py": [
+91
+],
+"tensorflow:python/keras/engine/input_spec.py": [
+132
+],
+"tensorflow:python/keras/engine/node.py": [
+54
+],
+"tensorflow:python/keras/engine/sequential.py": [
+157,
+262,
+352
+],
+"tensorflow:python/keras/engine/training.py": [
+343,
+826,
+1982,
+2104,
+2461
+],
+"tensorflow:python/keras/engine/training_arrays.py": [
+46
+],
+"tensorflow:python/keras/engine/training_distributed.py": [
+123,
+293,
+423
+],
+"tensorflow:python/keras/engine/training_eager.py": [
+85
+],
+"tensorflow:python/keras/engine/training_generator.py": [
+41,
+422
+],
+"tensorflow:python/keras/engine/training_test.py": [
+537
+],
+"tensorflow:python/keras/engine/training_utils.py": [
+461,
+587,
+643,
+757,
+816,
+919,
+1070,
+1435,
+1863
+],
+"tensorflow:python/keras/engine/training_v1.py": [
+241,
+1407,
+1556,
+1674,
+1906,
+2081,
+2332,
+2522
+],
+"tensorflow:python/keras/layers/convolutional.py": [
+2941,
+3256,
+3291
+],
+"tensorflow:python/keras/layers/convolutional_recurrent.py": [
+225,
+353
+],
+"tensorflow:python/keras/layers/convolutional_test.py": [
+648,
+774,
+823,
+858,
+936,
+1002
+],
+"tensorflow:python/keras/layers/einsum_dense.py": [
+240
+],
+"tensorflow:python/keras/layers/embeddings.py": [
+160
+],
+"tensorflow:python/keras/layers/legacy_rnn/rnn_cell_impl.py": [
+105,
+281
+],
+"tensorflow:python/keras/layers/legacy_rnn/rnn_cell_wrapper_impl.py": [
+41
+],
+"tensorflow:python/keras/layers/local_test.py": [
+529
+],
+"tensorflow:python/keras/layers/merge.py": [
+120
+],
+"tensorflow:python/keras/layers/normalization.py": [
+284,
+497,
+697,
+1179
+],
+"tensorflow:python/keras/layers/preprocessing/category_encoding.py": [
+356
+],
+"tensorflow:python/keras/layers/preprocessing/index_lookup.py": [
+83,
+229
+],
+"tensorflow:python/keras/layers/preprocessing/preprocessing_stage.py": [
+43
+],
+"tensorflow:python/keras/layers/preprocessing/text_vectorization.py": [
+202,
+349,
+425
+],
+"tensorflow:python/keras/layers/recurrent.py": [
+461,
+526,
+653,
+719,
+886,
+1819
+],
+"tensorflow:python/keras/layers/recurrent_v2.py": [
+589,
+1100,
+1320
+],
+"tensorflow:python/keras/layers/wrappers.py": [
+192,
+247,
+593
+],
+"tensorflow:python/keras/legacy_tf_layers/base.py": [
+316
+],
+"tensorflow:python/keras/metrics.py": [
+1907
+],
+"tensorflow:python/keras/mixed_precision/experimental/device_compatibility_check.py": [
+61
+],
+"tensorflow:python/keras/mixed_precision/experimental/loss_scale_benchmark.py": [
+49
+],
+"tensorflow:python/keras/mixed_precision/experimental/loss_scale_optimizer_test.py": [
+438
+],
+"tensorflow:python/keras/models.py": [
+77,
+281,
+433,
+589
+],
+"tensorflow:python/keras/optimizer_v2/adadelta_test.py": [
+45
+],
+"tensorflow:python/keras/optimizer_v2/optimizer_v2.py": [
+588
+],
+"tensorflow:python/keras/preprocessing/dataset_utils.py": [
+31
+],
+"tensorflow:python/keras/preprocessing/timeseries.py": [
+30
+],
+"tensorflow:python/keras/saving/hdf5_format.py": [
+56,
+133,
+220,
+410,
+710
+],
+"tensorflow:python/keras/saving/saved_model/load.py": [
+241
+],
+"tensorflow:python/keras/testing_utils.py": [
+87,
+710
+],
+"tensorflow:python/keras/tests/op_callbacks_test.py": [
+56
+],
+"tensorflow:python/keras/utils/composite_tensor_support_test.py": [
+125
+],
+"tensorflow:python/keras/utils/conv_utils.py": [
+312
+],
+"tensorflow:python/keras/utils/data_utils.py": [
+119,
+169,
+559,
+997
+],
+"tensorflow:python/keras/utils/generic_utils.py": [
+236,
+335,
+528,
+682
+],
+"tensorflow:python/keras/utils/io_utils.py": [
+148
+],
+"tensorflow:python/keras/utils/layer_utils.py": [
+34,
+112
+],
+"tensorflow:python/keras/utils/metrics_utils.py": [
+237
+],
+"tensorflow:python/keras/utils/multi_gpu_utils.py": [
+42
+],
+"tensorflow:python/keras/utils/tf_utils.py": [
+102,
+261
+],
+"tensorflow:python/keras/utils/vis_utils.py": [
+70
+],
+"tensorflow:python/kernel_tests/atrous_conv2d_test.py": [
+88,
+170
+],
+"tensorflow:python/kernel_tests/atrous_convolution_test.py": [
+203
+],
+"tensorflow:python/kernel_tests/barrier_ops_test.py": [
+593
+],
+"tensorflow:python/kernel_tests/conv1d_transpose_test.py": [
+153,
+184,
+216
+],
+"tensorflow:python/kernel_tests/conv2d_transpose_test.py": [
+39,
+80,
+116,
+186,
+221,
+257
+],
+"tensorflow:python/kernel_tests/conv3d_transpose_test.py": [
+35,
+85,
+153
+],
+"tensorflow:python/kernel_tests/conv_ops_3d_test.py": [
+459
+],
+"tensorflow:python/kernel_tests/conv_ops_test.py": [
+322,
+1849
+],
+"tensorflow:python/kernel_tests/depthwise_conv_op_test.py": [
+74,
+270
+],
+"tensorflow:python/kernel_tests/diag_op_test.py": [
+443
+],
+"tensorflow:python/kernel_tests/division_future_test.py": [
+34
+],
+"tensorflow:python/kernel_tests/division_past_test.py": [
+34
+],
+"tensorflow:python/kernel_tests/embedding_ops_test.py": [
+188
+],
+"tensorflow:python/kernel_tests/gather_op_test.py": [
+111
+],
+"tensorflow:python/kernel_tests/linalg/sparse/csr_sparse_matrix_ops_test.py": [
+541,
+593,
+745
+],
+"tensorflow:python/kernel_tests/matrix_solve_ls_op_test.py": [
+82
+],
+"tensorflow:python/kernel_tests/matrix_solve_op_test.py": [
+41
+],
+"tensorflow:python/kernel_tests/norm_op_test.py": [
+67
+],
+"tensorflow:python/kernel_tests/parsing_ops_test.py": [
+1441,
+1502
+],
+"tensorflow:python/kernel_tests/pool_test.py": [
+169,
+195,
+221,
+311,
+338,
+365
+],
+"tensorflow:python/kernel_tests/pooling_ops_test.py": [
+109
+],
+"tensorflow:python/kernel_tests/proto/decode_proto_op_test_base.py": [
+74,
+315
+],
+"tensorflow:python/kernel_tests/qr_op_test.py": [
+82
+],
+"tensorflow:python/kernel_tests/rnn_cell_test.py": [
+1118
+],
+"tensorflow:python/kernel_tests/scatter_ops_test.py": [
+130
+],
+"tensorflow:python/kernel_tests/segment_reduction_ops_test.py": [
+289,
+513
+],
+"tensorflow:python/kernel_tests/sparse_matmul_op_test.py": [
+114,
+169
+],
+"tensorflow:python/kernel_tests/sparse_ops_test.py": [
+614
+],
+"tensorflow:python/kernel_tests/sparse_tensor_dense_matmul_op_test.py": [
+239
+],
+"tensorflow:python/kernel_tests/svd_op_test.py": [
+90
+],
+"tensorflow:python/kernel_tests/tensordot_op_test.py": [
+143
+],
+"tensorflow:python/kernel_tests/topk_op_test.py": [
+42
+],
+"tensorflow:python/module/module.py": [
+317
+],
+"tensorflow:python/ops/array_grad.py": [
+53
+],
+"tensorflow:python/ops/array_ops.py": [
+874,
+1393,
+3121,
+3281,
+3483,
+3965,
+4717
+],
+"tensorflow:python/ops/batch_norm_benchmark.py": [
+68
+],
+"tensorflow:python/ops/bincount_ops.py": [
+36,
+255
+],
+"tensorflow:python/ops/check_ops.py": [
+301,
+1692,
+2060
+],
+"tensorflow:python/ops/collective_ops_benchmark.py": [
+36
+],
+"tensorflow:python/ops/cond_v2.py": [
+387,
+570,
+620,
+761,
+873
+],
+"tensorflow:python/ops/control_flow_ops.py": [
+979,
+1105,
+1644,
+1725,
+1914,
+1996,
+2108,
+2275,
+2504,
+2988,
+3111,
+3226
+],
+"tensorflow:python/ops/control_flow_ops_test.py": [
+1113
+],
+"tensorflow:python/ops/control_flow_state.py": [
+437,
+513,
+718
+],
+"tensorflow:python/ops/control_flow_util.py": [
+266
+],
+"tensorflow:python/ops/ctc_ops.py": [
+1316
+],
+"tensorflow:python/ops/custom_gradient.py": [
+307
+],
+"tensorflow:python/ops/data_flow_ops.py": [
+59,
+1679
+],
+"tensorflow:python/ops/distributions/bijector_impl.py": [
+921
+],
+"tensorflow:python/ops/distributions/distribution.py": [
+1268
+],
+"tensorflow:python/ops/distributions/transformed_distribution.py": [
+575
+],
+"tensorflow:python/ops/distributions/util.py": [
+1283
+],
+"tensorflow:python/ops/embedding_ops.py": [
+86,
+399
+],
+"tensorflow:python/ops/functional_ops.py": [
+441,
+1112
+],
+"tensorflow:python/ops/gradients_test.py": [
+352
+],
+"tensorflow:python/ops/gradients_util.py": [
+140,
+479,
+731,
+911
+],
+"tensorflow:python/ops/image_grad_test.py": [
+390
+],
+"tensorflow:python/ops/image_ops_impl.py": [
+736,
+1066,
+2007
+],
+"tensorflow:python/ops/init_ops.py": [
+815,
+1095
+],
+"tensorflow:python/ops/linalg/linalg_impl.py": [
+345,
+497
+],
+"tensorflow:python/ops/linalg/linear_operator_block_diag.py": [
+134,
+281,
+436
+],
+"tensorflow:python/ops/linalg/linear_operator_block_lower_triangular.py": [
+269,
+384,
+448,
+577
+],
+"tensorflow:python/ops/linalg/linear_operator_kronecker.py": [
+137
+],
+"tensorflow:python/ops/linalg/linear_operator_low_rank_update.py": [
+132
+],
+"tensorflow:python/ops/linalg/linear_operator_test_util.py": [
+699
+],
+"tensorflow:python/ops/linalg/linear_operator_util.py": [
+385,
+519
+],
+"tensorflow:python/ops/linalg/sparse/sparse_csr_matrix_grad.py": [
+86,
+173
+],
+"tensorflow:python/ops/linalg/sparse/sparse_csr_matrix_ops.py": [
+147
+],
+"tensorflow:python/ops/linalg_grad.py": [
+59
+],
+"tensorflow:python/ops/linalg_ops.py": [
+243,
+632
+],
+"tensorflow:python/ops/linalg_ops_impl.py": [
+33
+],
+"tensorflow:python/ops/logging_ops.py": [
+142
+],
+"tensorflow:python/ops/lookup_ops.py": [
+932,
+1143
+],
+"tensorflow:python/ops/losses/util.py": [
+34
+],
+"tensorflow:python/ops/map_fn.py": [
+47
+],
+"tensorflow:python/ops/math_grad.py": [
+147,
+1328
+],
+"tensorflow:python/ops/math_ops.py": [
+1110,
+3065,
+4352
+],
+"tensorflow:python/ops/metrics_impl.py": [
+461,
+633
+],
+"tensorflow:python/ops/nccl_ops_test.py": [
+61
+],
+"tensorflow:python/ops/nn_fused_batchnorm_test.py": [
+378
+],
+"tensorflow:python/ops/nn_ops.py": [
+187,
+594,
+1027,
+1203,
+1330,
+4002
+],
+"tensorflow:python/ops/numpy_ops/np_array_ops.py": [
+242,
+465,
+593,
+671
+],
+"tensorflow:python/ops/numpy_ops/np_array_ops_test.py": [
+179,
+350
+],
+"tensorflow:python/ops/numpy_ops/np_arrays.py": [
+66
+],
+"tensorflow:python/ops/numpy_ops/np_math_ops.py": [
+1216
+],
+"tensorflow:python/ops/numpy_ops/np_math_ops_test.py": [
+50
+],
+"tensorflow:python/ops/op_selector.py": [
+237,
+328,
+368
+],
+"tensorflow:python/ops/parallel_for/control_flow_ops.py": [
+227
+],
+"tensorflow:python/ops/parallel_for/control_flow_ops_test.py": [
+513
+],
+"tensorflow:python/ops/parallel_for/math_test.py": [
+43,
+264,
+289,
+314,
+435,
+694,
+714
+],
+"tensorflow:python/ops/parallel_for/pfor.py": [
+147,
+1376,
+2250,
+3337,
+4160,
+4222
+],
+"tensorflow:python/ops/parsing_config.py": [
+661
+],
+"tensorflow:python/ops/ragged/ragged_array_ops.py": [
+45,
+771
+],
+"tensorflow:python/ops/ragged/ragged_concat_ops.py": [
+123
+],
+"tensorflow:python/ops/ragged/ragged_constant_value_op_test.py": [
+182
+],
+"tensorflow:python/ops/ragged/ragged_dispatch.py": [
+119,
+179,
+262
+],
+"tensorflow:python/ops/ragged/ragged_factory_ops.py": [
+150,
+277
+],
+"tensorflow:python/ops/ragged/ragged_gather_ops.py": [
+176,
+330
+],
+"tensorflow:python/ops/ragged/ragged_getitem.py": [
+106,
+230
+],
+"tensorflow:python/ops/ragged/ragged_math_ops.py": [
+426
+],
+"tensorflow:python/ops/ragged/ragged_squeeze_op.py": [
+31
+],
+"tensorflow:python/ops/ragged/ragged_string_ops.py": [
+404,
+665
+],
+"tensorflow:python/ops/ragged/ragged_tensor.py": [
+1379,
+1438,
+2066,
+2495
+],
+"tensorflow:python/ops/ragged/ragged_tensor_shape.py": [
+85,
+294,
+516
+],
+"tensorflow:python/ops/ragged/ragged_to_tensor_op_test.py": [
+324
+],
+"tensorflow:python/ops/ragged/row_partition.py": [
+188,
+483,
+1036
+],
+"tensorflow:python/ops/ragged/row_partition_test.py": [
+556
+],
+"tensorflow:python/ops/resource_variable_ops.py": [
+146,
+1513
+],
+"tensorflow:python/ops/rnn.py": [
+505,
+703,
+919,
+1246
+],
+"tensorflow:python/ops/script_ops.py": [
+274
+],
+"tensorflow:python/ops/signal/dct_ops.py": [
+55
+],
+"tensorflow:python/ops/sparse_ops.py": [
+838,
+1774
+],
+"tensorflow:python/ops/special_math_ops.py": [
+417,
+481,
+564,
+739,
+889
+],
+"tensorflow:python/ops/structured/structured_tensor.py": [
+122,
+412
+],
+"tensorflow:python/ops/structured/structured_tensor_slice_test.py": [
+129
+],
+"tensorflow:python/ops/tensor_array_ops.py": [
+56
+],
+"tensorflow:python/ops/transpose_benchmark.py": [
+110
+],
+"tensorflow:python/ops/variable_scope.py": [
+288,
+571,
+798,
+1245,
+1851,
+1940,
+2323
+],
+"tensorflow:python/ops/variables.py": [
+1679
+],
+"tensorflow:python/ops/weights_broadcast_ops.py": [
+63
+],
+"tensorflow:python/ops/while_v2.py": [
+58,
+778
+],
+"tensorflow:python/platform/benchmark.py": [
+80,
+303
+],
+"tensorflow:python/platform/googletest.py": [
+157
+],
+"tensorflow:python/profiler/model_analyzer_test.py": [
+78,
+470
+],
+"tensorflow:python/profiler/profile_context.py": [
+45
+],
+"tensorflow:python/profiler/tfprof_logger.py": [
+39,
+77,
+145
+],
+"tensorflow:python/saved_model/function_deserialization.py": [
+91,
+393,
+464
+],
+"tensorflow:python/saved_model/load.py": [
+188
+],
+"tensorflow:python/saved_model/load_v1_in_v2.py": [
+131
+],
+"tensorflow:python/saved_model/model_utils/export_utils.py": [
+63
+],
+"tensorflow:python/saved_model/save.py": [
+164,
+237
+],
+"tensorflow:python/summary/writer/fake_summary_writer.py": [
+61
+],
+"tensorflow:python/tools/api/generator/create_python_api.py": [
+182,
+219,
+316,
+450,
+586
+],
+"tensorflow:python/tools/api/generator/output_init_files_test.py": [
+39
+],
+"tensorflow:python/tools/freeze_graph.py": [
+77
+],
+"tensorflow:python/tools/inspect_checkpoint.py": [
+57
+],
+"tensorflow:python/tools/optimize_for_inference_lib.py": [
+208,
+419
+],
+"tensorflow:python/tools/saved_model_aot_compile.py": [
+147
+],
+"tensorflow:python/tools/saved_model_cli.py": [
+173,
+219,
+604
+],
+"tensorflow:python/tools/strip_unused_lib.py": [
+32
+],
+"tensorflow:python/tpu/client/client.py": [
+119
+],
+"tensorflow:python/tpu/datasets.py": [
+50
+],
+"tensorflow:python/tpu/device_assignment.py": [
+215,
+316
+],
+"tensorflow:python/tpu/feature_column.py": [
+161
+],
+"tensorflow:python/tpu/feature_column_v2.py": [
+55,
+211
+],
+"tensorflow:python/tpu/profiler/capture_tpu_profile.py": [
+139
+],
+"tensorflow:python/tpu/tensor_tracer.py": [
+643,
+819,
+967,
+1157,
+1231,
+1400,
+1730
+],
+"tensorflow:python/tpu/tensor_tracer_report.py": [
+70
+],
+"tensorflow:python/tpu/tpu.py": [
+523,
+919,
+1091,
+1555,
+2063
+],
+"tensorflow:python/tpu/tpu_embedding.py": [
+873,
+1078,
+1141,
+1282
+],
+"tensorflow:python/tpu/tpu_embedding_gradient.py": [
+129
+],
+"tensorflow:python/tpu/tpu_embedding_v2.py": [
+450
+],
+"tensorflow:python/tpu/tpu_embedding_v2_test.py": [
+1511
+],
+"tensorflow:python/tpu/tpu_system_metadata.py": [
+72
+],
+"tensorflow:python/tpu/training_loop.py": [
+30
+],
+"tensorflow:python/training/adadelta_test.py": [
+37
+],
+"tensorflow:python/training/adam_test.py": [
+158
+],
+"tensorflow:python/training/checkpoint_management.py": [
+534,
+750
+],
+"tensorflow:python/training/checkpoint_ops.py": [
+206
+],
+"tensorflow:python/training/checkpoint_utils.py": [
+295
+],
+"tensorflow:python/training/coordinator.py": [
+187
+],
+"tensorflow:python/training/evaluation.py": [
+172
+],
+"tensorflow:python/training/input.py": [
+478
+],
+"tensorflow:python/training/input_test.py": [
+1313
+],
+"tensorflow:python/training/monitored_session.py": [
+321,
+434
+],
+"tensorflow:python/training/moving_averages.py": [
+403
+],
+"tensorflow:python/training/optimizer.py": [
+531,
+642
+],
+"tensorflow:python/training/queue_runner_impl.py": [
+239
+],
+"tensorflow:python/training/saver.py": [
+472,
+854,
+1082
+],
+"tensorflow:python/training/saver_test.py": [
+997
+],
+"tensorflow:python/training/saving/saveable_object_util.py": [
+123,
+213
+],
+"tensorflow:python/training/server_lib.py": [
+31
+],
+"tensorflow:python/training/tracking/base.py": [
+309
+],
+"tensorflow:python/training/tracking/data_structures.py": [
+534,
+912
+],
+"tensorflow:python/training/tracking/graph_view.py": [
+89,
+209
+],
+"tensorflow:python/training/tracking/util.py": [
+318
+],
+"tensorflow:python/training/warm_starting_util.py": [
+413
+],
+"tensorflow:python/util/deprecation.py": [
+134,
+274,
+336,
+516
+],
+"tensorflow:python/util/nest.py": [
+129,
+203,
+405,
+750,
+1240
+],
+"tensorflow:python/util/protobuf/compare.py": [
+121
+],
+"tensorflow:python/util/tf_inspect.py": [
+260
+]
+}
